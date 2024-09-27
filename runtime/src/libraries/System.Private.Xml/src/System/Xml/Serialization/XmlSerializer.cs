@@ -93,9 +93,12 @@ namespace System.Xml.Serialization
         }
     }
 
-    // This enum is intentionally kept outside of the XmlSerializer class since if it would be a subclass
-    // of XmlSerializer, then any access to this enum would be treated by AOT compilers as access to the XmlSerializer
-    // as well, which has a large static ctor which brings in a lot of code. So keeping the enum separate
+    // This enum is intentionally kept outside of the XmlSerializer class since if it would be a
+    // subclass
+    // of XmlSerializer, then any access to this enum would be treated by AOT compilers as access to the
+    // XmlSerializer
+    // as well, which has a large static ctor which brings in a lot of code. So keeping the enum
+    // separate
     // makes sure that using just the enum itself doesn't bring in the whole of serialization code base.
     internal enum SerializationMode
     {
@@ -642,8 +645,10 @@ namespace System.Xml.Serialization
                 ShouldUseReflectionBasedSerialization(_mapping) || _isReflectionBasedSerializer
             )
             {
-                // If we should use reflection, we will try to do reflection-based deserialization, without fallback.
-                // Don't check xmlReader.IsStartElement to avoid having to duplicate SOAP deserialization logic here.
+                // If we should use reflection, we will try to do reflection-based deserialization, without
+                // fallback.
+                // Don't check xmlReader.IsStartElement to avoid having to duplicate SOAP deserialization logic
+                // here.
                 // It is better to return an incorrect 'true', which will throw during Deserialize than to return an
                 // incorrect 'false', and the caller won't even try to Deserialize when it would succeed.
                 return true;

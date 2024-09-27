@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 }
 
                 // another interesting case (bug # 10875)
-                // basically, it can happen in malformed code where a variable is not properly assigned but used outside of the selection + unreachable code region
+                // basically, it can happen in malformed code where a variable is not properly assigned but used
+                // outside of the selection + unreachable code region
                 // for such cases, treat it like "MoveOut"
                 if (
                     !dataFlowOut
@@ -141,7 +142,8 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
         private static void BuildMatrix()
         {
             // meaning of each boolean values (total of 69 different cases)
-            // data flowin/data flow out/always assigned/variable declared/ read inside/written inside/read outside/written outside
+            // data flowin/data flow out/always assigned/variable declared/ read inside/written inside/read
+            // outside/written outside
             s_matrix.Add(
                 new Key(
                     dataFlowIn: false,

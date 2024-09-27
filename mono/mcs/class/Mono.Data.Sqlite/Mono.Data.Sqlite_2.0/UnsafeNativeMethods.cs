@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -59,7 +59,8 @@ namespace Mono.Data.Sqlite
 #endif
 
         // This section uses interop calls that also fetch text length to optimize conversion.
-        // When using the standard dll, we can replace these calls with normal sqlite calls and do unoptimized conversions instead afterwards
+        // When using the standard dll, we can replace these calls with normal sqlite calls and do
+        // unoptimized conversions instead afterwards
         #region interop added textlength calls
 
 #if !SQLITE_STANDARD

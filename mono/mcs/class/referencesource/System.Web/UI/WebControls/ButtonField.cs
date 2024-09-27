@@ -22,12 +22,14 @@ namespace System.Web.UI.WebControls
         private PropertyDescriptor textFieldDesc;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ButtonField'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ButtonField'/>
+        // class.</para>
         /// </devdoc>
         public ButtonField() { }
 
         /// <devdoc>
-        /// <para>Gets or sets the command to perform when this <see cref='System.Web.UI.WebControls.Button'/>
+        /// <para>Gets or sets the command to perform when this <see
+        // cref='System.Web.UI.WebControls.Button'/>
         /// is clicked.</para>
         /// </devdoc>
         [
@@ -56,7 +58,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Gets or sets the field name from the data model that is
-        ///       bound to the <see cref='System.Web.UI.WebControls.ButtonField.Text'/> property of the button in this field.</para>
+        ///       bound to the <see cref='System.Web.UI.WebControls.ButtonField.Text'/> property of the
+        // button in this field.</para>
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -87,7 +90,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Gets or sets the string used to format the data bound to
-        ///       the <see cref='System.Web.UI.WebControls.ButtonField.Text'/> property of the button.</para>
+        ///       the <see cref='System.Web.UI.WebControls.ButtonField.Text'/> property of the
+        // button.</para>
         /// </devdoc>
         [
             WebCategory("Data"),
@@ -145,7 +149,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the caption text displayed on the <see cref='System.Web.UI.WebControls.Button'/>
+        /// <para>Gets or sets the caption text displayed on the <see
+        // cref='System.Web.UI.WebControls.Button'/>
         /// in this field.</para>
         /// </devdoc>
         [
@@ -367,7 +372,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>Override with an empty body if the field's controls all support callback.
-        ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
+        ///  Otherwise, override and throw a useful error message about why the field can't support
+        // callbacks.</para>
         /// </devdoc>
         public override void ValidateSupportsCallback() { }
     }

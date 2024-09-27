@@ -63,7 +63,7 @@ namespace Microsoft.Build.Tasks
                     if (String.Compare(tok, "namespace", true) == 0)
                     {
                         string t = GetNextToken(rdr);
-                        /* 'namespace' can be a attribute param also, */
+/* 'namespace' can be a attribute param also, */
                         if (t == ":" && GetNextToken(rdr) == "=")
                             continue;
                         ns = t;
@@ -72,7 +72,7 @@ namespace Microsoft.Build.Tasks
                     if (String.Compare(tok, "class", true) == 0)
                     {
                         string t = GetNextToken(rdr);
-                        /* 'class' can be a attribute param also, */
+/* 'class' can be a attribute param also, */
                         if (t == ":" && GetNextToken(rdr) == "=")
                             continue;
                         classname = t;
@@ -120,11 +120,11 @@ namespace Microsoft.Build.Tasks
             );
         }
 
-        /* Special parser for VB.NET files
-         * Assumes that the file is compilable
-         * skips comments,
-         * skips strings "foo"
-         */
+/* Special parser for VB.NET files
+* Assumes that the file is compilable
+* skips comments,
+* skips strings "foo"
+*/
         string GetNextToken(StreamReader sr)
         {
             StringBuilder sb = new StringBuilder();
@@ -146,7 +146,7 @@ namespace Microsoft.Build.Tasks
 
                 if (c == '\'')
                 {
-                    /* comment */
+/* comment */
                     sr.ReadLine();
                     if (sb.Length > 0)
                         return sb.ToString();
@@ -156,7 +156,7 @@ namespace Microsoft.Build.Tasks
 
                 if (c == '"')
                 {
-                    /* String */
+/* String */
                     sr.Read();
                     while (true)
                     {

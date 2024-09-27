@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 {
     /// <summary>
-    /// This queue hold onto raw performance data. this type itself is not thread safe. the one who uses this type
+    /// This queue hold onto raw performance data. this type itself is not thread safe. the one who uses
+    // this type
     /// should take care of that.
     /// </summary>
     /// <threadsafety static="false" instance="false"/>
@@ -230,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
             public int GetUniqueNumber(string analyzerName)
             {
-                // AnalyzerNumberAssigner.Instance can be accessed concurrently from different PerformanceQueue instances,
+                // AnalyzerNumberAssigner.Instance can be accessed concurrently from different PerformanceQueue
+                // instances,
                 // so we need to take a lock on '_idMap' for all read/write operations.
                 lock (_idMap)
                 {
@@ -248,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             {
                 reverseMap.Clear();
 
-                // AnalyzerNumberAssigner.Instance can be accessed concurrently from different PerformanceQueue instances,
+                // AnalyzerNumberAssigner.Instance can be accessed concurrently from different PerformanceQueue
+                // instances,
                 // so we need to take a lock on '_idMap' for all read/write operations.
                 lock (_idMap)
                 {

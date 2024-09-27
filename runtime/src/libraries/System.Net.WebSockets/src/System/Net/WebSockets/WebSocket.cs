@@ -123,7 +123,8 @@ namespace System.Net.WebSockets
 
         public static TimeSpan DefaultKeepAliveInterval
         {
-            // In the .NET Framework, this pulls the value from a P/Invoke.  Here we just hardcode it to a reasonable default.
+            // In the .NET Framework, this pulls the value from a P/Invoke.  Here we just hardcode it to a
+            // reasonable default.
             get { return TimeSpan.FromSeconds(30); }
         }
 
@@ -172,11 +173,15 @@ namespace System.Net.WebSockets
             return new ArraySegment<byte>(new byte[receiveBufferSize]);
         }
 
-        /// <summary>Creates a <see cref="WebSocket"/> that operates on a <see cref="Stream"/> representing a web socket connection.</summary>
+        /// <summary>Creates a <see cref="WebSocket"/> that operates on a <see cref="Stream"/> representing
+        // a web socket connection.</summary>
         /// <param name="stream">The <see cref="Stream"/> for the connection.</param>
-        /// <param name="isServer"><code>true</code> if this is the server-side of the connection; <code>false</code> if it's the client side.</param>
-        /// <param name="subProtocol">The agreed upon sub-protocol that was used when creating the connection.</param>
-        /// <param name="keepAliveInterval">The keep-alive interval to use, or <see cref="Timeout.InfiniteTimeSpan"/> to disable keep-alives.</param>
+        /// <param name="isServer"><code>true</code> if this is the server-side of the connection;
+        // <code>false</code> if it's the client side.</param>
+        /// <param name="subProtocol">The agreed upon sub-protocol that was used when creating the
+        // connection.</param>
+        /// <param name="keepAliveInterval">The keep-alive interval to use, or <see
+        // cref="Timeout.InfiniteTimeSpan"/> to disable keep-alives.</param>
         /// <returns>The created <see cref="WebSocket"/>.</returns>
         public static WebSocket CreateFromStream(
             Stream stream,
@@ -212,7 +217,8 @@ namespace System.Net.WebSockets
             return new ManagedWebSocket(stream, isServer, subProtocol, keepAliveInterval);
         }
 
-        /// <summary>Creates a <see cref="WebSocket"/> that operates on a <see cref="Stream"/> representing a web socket connection.</summary>
+        /// <summary>Creates a <see cref="WebSocket"/> that operates on a <see cref="Stream"/> representing
+        // a web socket connection.</summary>
         /// <param name="stream">The <see cref="Stream"/> for the connection.</param>
         /// <param name="options">The options with which the websocket must be created.</param>
         public static WebSocket CreateFromStream(Stream stream, WebSocketCreationOptions options)

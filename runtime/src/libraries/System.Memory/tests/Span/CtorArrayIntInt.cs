@@ -6,7 +6,8 @@ using Xunit;
 namespace System.SpanTests
 {
     //
-    // Tests for Span<T>.ctor(T[], int, int). If the test is not specific to this overload, consider putting it in CtorArray.cs instread.
+    // Tests for Span<T>.ctor(T[], int, int). If the test is not specific to this overload, consider
+    // putting it in CtorArray.cs instread.
     //
     public static partial class SpanTests
     {
@@ -71,7 +72,8 @@ namespace System.SpanTests
         [Fact]
         public static void CtorArrayIntIntStartEqualsLength()
         {
-            // Valid for start to equal the array length. This returns an empty span that starts "just past the array."
+            // Valid for start to equal the array length. This returns an empty span that starts "just past the
+            // array."
             int[] a = { 91, 92, 93 };
             Span<int> span = new Span<int>(a, 3, 0);
             span.ValidateNonNullEmpty();

@@ -29,7 +29,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> based on another <see cref='System.CodeDom.CodeTypeDeclarationCollection'/>.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDeclarationCollection'/>
+        // based on another <see cref='System.CodeDom.CodeTypeDeclarationCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeTypeDeclarationCollection(CodeTypeDeclarationCollection value)
@@ -39,7 +40,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> containing any array of <see cref='System.CodeDom.CodeTypeDeclaration'/> objects.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeDeclarationCollection'/>
+        // containing any array of <see cref='System.CodeDom.CodeTypeDeclaration'/> objects.
         ///    </para>
         /// </devdoc>
         public CodeTypeDeclarationCollection(CodeTypeDeclaration[] value)
@@ -48,7 +50,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.CodeTypeDeclaration'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.CodeTypeDeclaration'/>.</para>
         /// </devdoc>
         public CodeTypeDeclaration this[int index]
         {
@@ -66,7 +69,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.CodeTypeDeclarationCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.CodeTypeDeclarationCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CodeTypeDeclaration[] value)
         {
@@ -82,7 +86,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> to
+        // the end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CodeTypeDeclarationCollection value)
@@ -100,7 +105,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> contains the specified <see cref='System.CodeDom.CodeTypeDeclaration'/>.</para>
+        ///    <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> contains the specified <see
+        // cref='System.CodeDom.CodeTypeDeclaration'/>.</para>
         /// </devdoc>
         public bool Contains(CodeTypeDeclaration value)
         {
@@ -108,7 +114,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CodeTypeDeclaration[] array, int index)
@@ -126,7 +133,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.CodeTypeDeclaration'/> into the <see cref='System.CodeDom.CodeTypeDeclarationCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.CodeTypeDeclaration'/> into the <see
+        // cref='System.CodeDom.CodeTypeDeclarationCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CodeTypeDeclaration value)
         {

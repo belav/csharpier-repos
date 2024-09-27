@@ -21,7 +21,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   The slice of the buffer containing the bytes of the Integer value, in signed big-endian form.
@@ -73,7 +74,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   The decoded numeric value.
@@ -155,7 +157,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="true"/> if the Integer represents value is between
@@ -225,7 +228,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="true"/> if the Integer represents value is between
@@ -296,7 +300,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="true"/> if the Integer represents value is between
@@ -357,7 +362,8 @@ namespace System.Formats.Asn1
         ///   This parameter is treated as uninitialized.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="true"/> if the Integer represents value is between
@@ -548,7 +554,8 @@ namespace System.Formats.Asn1
         ///   as a <see cref="ReadOnlyMemory{T}"/> over the original data.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   The bytes of the Integer value, in signed big-endian form.
@@ -589,7 +596,8 @@ namespace System.Formats.Asn1
         ///   Reads the next value as an Integer with a specified tag.
         /// </summary>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   The decoded value.
@@ -631,7 +639,8 @@ namespace System.Formats.Asn1
         ///   On success, receives the decoded value.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="false"/> and does not advance the reader if the value is not between
@@ -676,7 +685,8 @@ namespace System.Formats.Asn1
         ///   On success, receives the decoded value.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="false"/> and does not advance the reader if the value is not between
@@ -722,7 +732,8 @@ namespace System.Formats.Asn1
         ///   On success, receives the decoded value.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="false"/> and does not advance the reader if the value is not between
@@ -767,7 +778,8 @@ namespace System.Formats.Asn1
         ///   On success, receives the decoded value.
         /// </param>
         /// <param name="expectedTag">
-        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal 2).
+        ///   The tag to check for before reading, or <see langword="null"/> for the default tag (Universal
+        // 2).
         /// </param>
         /// <returns>
         ///   <see langword="false"/> and does not advance the reader if the value is not between

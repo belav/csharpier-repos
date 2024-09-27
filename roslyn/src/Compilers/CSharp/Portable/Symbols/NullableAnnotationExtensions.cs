@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Join nullable annotations from the set of lower bounds for fixing a type parameter.
-        /// This uses the covariant merging rules. (Annotated wins over Oblivious which wins over NotAnnotated)
+        /// This uses the covariant merging rules. (Annotated wins over Oblivious which wins over
+        // NotAnnotated)
         /// </summary>
         public static NullableAnnotation Join(this NullableAnnotation a, NullableAnnotation b)
         {
@@ -34,8 +35,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Meet two nullable annotations for computing the nullable annotation of a type parameter from upper bounds.
-        /// This uses the contravariant merging rules. (NotAnnotated wins over Oblivious which wins over Annotated)
+        /// Meet two nullable annotations for computing the nullable annotation of a type parameter from
+        // upper bounds.
+        /// This uses the contravariant merging rules. (NotAnnotated wins over Oblivious which wins over
+        // Annotated)
         /// </summary>
         public static NullableAnnotation Meet(this NullableAnnotation a, NullableAnnotation b)
         {
@@ -45,8 +48,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Return the nullable annotation to use when two annotations are expected to be "compatible", which means
-        /// they could be the same. These are the "invariant" merging rules. (NotAnnotated wins over Annotated which wins over Oblivious)
+        /// Return the nullable annotation to use when two annotations are expected to be "compatible",
+        // which means
+        /// they could be the same. These are the "invariant" merging rules. (NotAnnotated wins over
+        // Annotated which wins over Oblivious)
         /// </summary>
         public static NullableAnnotation EnsureCompatible(
             this NullableAnnotation a,

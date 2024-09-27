@@ -30,7 +30,8 @@ namespace System.Text.Json
         /// The converter for the given type.
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// The configured <see cref="JsonConverter"/> for <paramref name="typeToConvert"/> returned an invalid converter.
+        /// The configured <see cref="JsonConverter"/> for <paramref name="typeToConvert"/> returned an
+        // invalid converter.
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
@@ -110,7 +111,8 @@ namespace System.Text.Json
             // User has indicated that either:
             //   a) a non-nullable-struct handling converter should handle a nullable struct type or
             //   b) a nullable-struct handling converter should handle a non-nullable struct type.
-            // User should implement a custom converter for the underlying struct and remove the unnecessary CanConvert method override.
+            // User should implement a custom converter for the underlying struct and remove the unnecessary
+            // CanConvert method override.
             // The serializer will automatically wrap the custom converter with NullableConverter<T>.
             //
             // We also throw to avoid passing an invalid argument to setters for nullable struct properties,

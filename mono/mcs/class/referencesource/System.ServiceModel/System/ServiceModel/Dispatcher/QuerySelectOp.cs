@@ -9,12 +9,15 @@ namespace System.ServiceModel.Dispatcher
     /// <summary>
     /// This structure contains the criteria used to select a set of nodes from a context node
     ///
-    /// Selectors select nodes with particular a relationship to a context node. Candidate nodes are first identified by
-    /// traversing away from the context node along an axis of traversal. The attribute axis, for example, identifies all
+    /// Selectors select nodes with particular a relationship to a context node. Candidate nodes are
+    // first identified by
+    /// traversing away from the context node along an axis of traversal. The attribute axis, for
+    // example, identifies all
     /// attributes of a given context node as candidates for selection.
     ///
     /// The candidate nodeset identified by axis traversal is then refined by applying node tests.
-    /// A nodeType test constructs a new nodeset by selecting only those nodes of a given type from source candidate set
+    /// A nodeType test constructs a new nodeset by selecting only those nodes of a given type from
+    // source candidate set
     /// A qname test further refines this nodeset by selecting only those that match a given qname
     /// </summary>
     class NodeSelectCriteria
@@ -44,7 +47,9 @@ namespace System.ServiceModel.Dispatcher
                 // PERF, Microsoft, weaken guard?
                 return QueryAxisType.Self == this.axis.Type
                     || QueryAxisType.Child == this.axis.Type;
-                //return ((QueryAxisType.Self == this.axis.Type) || ((this.axis.Type != QueryAxisType.DescendantOrSelf || this.axis.Type != QueryAxisType.Descendant)&& 0 != ((QueryNodeType.Element | QueryNodeType.Root) & this.type)));
+                //return ((QueryAxisType.Self == this.axis.Type) || ((this.axis.Type !=
+                // QueryAxisType.DescendantOrSelf || this.axis.Type != QueryAxisType.Descendant)&& 0 !=
+                // ((QueryNodeType.Element | QueryNodeType.Root) & this.type)));
             }
         }
 
@@ -546,7 +551,8 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.next == null || 0 == (this.next.Flags & OpcodeFlags.CompressableSelect))
             {
-                // The next opcode is not a compressible select. Complete the select operation and return the next opcode
+                // The next opcode is not a compressible select. Complete the select operation and return the next
+                // opcode
                 sequence.StartNodeset();
                 this.criteria.Select(node, sequence);
                 sequence.StopNodeset();

@@ -13,15 +13,18 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Gets a snapshot of the <see cref="RateLimiter"/> statistics if available.
         /// </summary>
-        /// <returns>An instance of <see cref="RateLimiterStatistics"/> containing a snapshot of the <see cref="RateLimiter"/> statistics.</returns>
+        /// <returns>An instance of <see cref="RateLimiterStatistics"/> containing a snapshot of the <see
+        // cref="RateLimiter"/> statistics.</returns>
         public abstract RateLimiterStatistics? GetStatistics();
 
         /// <summary>
-        /// Specifies how long the <see cref="RateLimiter"/> has had all permits available. Used by RateLimiter managers that may want to
+        /// Specifies how long the <see cref="RateLimiter"/> has had all permits available. Used by
+        // RateLimiter managers that may want to
         /// clean up unused RateLimiters.
         /// </summary>
         /// <remarks>
-        /// Returns <see langword="null"/> when the <see cref="RateLimiter"/> is in use or is not ready to be idle.
+        /// Returns <see langword="null"/> when the <see cref="RateLimiter"/> is in use or is not ready to
+        // be idle.
         /// </remarks>
         public abstract TimeSpan? IdleDuration { get; }
 
@@ -45,7 +48,8 @@ namespace System.Threading.RateLimiting
         }
 
         /// <summary>
-        /// Method that <see cref="RateLimiter"/> implementations implement for <see cref="AttemptAcquire"/>.
+        /// Method that <see cref="RateLimiter"/> implementations implement for <see
+        // cref="AttemptAcquire"/>.
         /// </summary>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
         /// <returns></returns>
@@ -58,8 +62,10 @@ namespace System.Threading.RateLimiting
         /// Set <paramref name="permitCount"/> to 0 to wait until permits are replenished.
         /// </remarks>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
-        /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
-        /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
+        /// <param name="cancellationToken">Optional token to allow canceling a queued request for
+        // permits.</param>
+        /// <returns>A task that completes when the requested permits are acquired or when the requested
+        // permits are denied.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public ValueTask<RateLimitLease> AcquireAsync(
             int permitCount = 1,
@@ -85,8 +91,10 @@ namespace System.Threading.RateLimiting
         /// Method that <see cref="RateLimiter"/> implementations implement for <see cref="AcquireAsync"/>.
         /// </summary>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
-        /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
-        /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
+        /// <param name="cancellationToken">Optional token to allow canceling a queued request for
+        // permits.</param>
+        /// <returns>A task that completes when the requested permits are acquired or when the requested
+        // permits are denied.</returns>
         protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(
             int permitCount,
             CancellationToken cancellationToken

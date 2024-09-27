@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// The lexer is for the contents of an interpolation that is followed by a colon that signals the start of the format string.
+        /// The lexer is for the contents of an interpolation that is followed by a colon that signals the
+        // start of the format string.
         /// </summary>
         public bool InterpolationFollowedByColon
         {
@@ -462,7 +463,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                         break;
                     case SyntaxKind.InterpolatedStringToken:
-                        // we do not record a separate "value" for an interpolated string token, as it must be rescanned during parsing.
+                        // we do not record a separate "value" for an interpolated string token, as it must be rescanned
+                        // during parsing.
                         token = SyntaxFactory.Literal(
                             leadingNode,
                             info.Text,
@@ -905,7 +907,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // $$ - definitely starts a raw interpolated string.
                 // $@ - definitely starts an interplated string.
                 //
-                // This will also match for $@@.  This is an error case when the user thinks they can mix verbatim and raw
+                // This will also match for $@@.  This is an error case when the user thinks they can mix verbatim
+                // and raw
                 // interpolations together.  This will be properly handled in ScanInterpolatedStringLiteral
                 this.ScanInterpolatedStringLiteral(ref info);
                 return true;
@@ -1239,7 +1242,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     // ...
                     // The type of an integer literal is determined as follows:
 
-                    // * If the literal has no suffix, it has the first of these types in which its value can be represented: int, uint, long, ulong.
+                    // * If the literal has no suffix, it has the first of these types in which its value can be
+                    // represented: int, uint, long, ulong.
                     if (!hasUSuffix && !hasLSuffix)
                     {
                         if (val <= Int32.MaxValue)
@@ -1271,7 +1275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                     else if (hasUSuffix && !hasLSuffix)
                     {
-                        // * If the literal is suffixed by U or u, it has the first of these types in which its value can be represented: uint, ulong.
+                        // * If the literal is suffixed by U or u, it has the first of these types in which its value can be
+                        // represented: uint, ulong.
                         if (val <= UInt32.MaxValue)
                         {
                             info.ValueKind = SpecialType.System_UInt32;
@@ -1283,7 +1288,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.UlongValue = val;
                         }
                     }
-                    // * If the literal is suffixed by L or l, it has the first of these types in which its value can be represented: long, ulong.
+                    // * If the literal is suffixed by L or l, it has the first of these types in which its value can be
+                    // represented: long, ulong.
                     else if (!hasUSuffix & hasLSuffix)
                     {
                         if (val <= Int64.MaxValue)
@@ -1313,20 +1319,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // Note, the following portion of the spec is not implemented here. It is implemented
                 // in the unary minus analysis.
 
-                // * When a decimal-integer-literal with the value 2147483648 (231) and no integer-type-suffix appears
-                //   as the token immediately following a unary minus operator token (§7.7.2), the result is a constant
+                // * When a decimal-integer-literal with the value 2147483648 (231) and no integer-type-suffix
+                // appears
+                //   as the token immediately following a unary minus operator token (§7.7.2), the result is a
+                // constant
                 //   of type int with the value −2147483648 (−231). In all other situations, such a decimal-integer-
                 //   literal is of type uint.
-                // * When a decimal-integer-literal with the value 9223372036854775808 (263) and no integer-type-suffix
-                //   or the integer-type-suffix L or l appears as the token immediately following a unary minus operator
-                //   token (§7.7.2), the result is a constant of type long with the value −9223372036854775808 (−263).
+                // * When a decimal-integer-literal with the value 9223372036854775808 (263) and no
+                // integer-type-suffix
+                //   or the integer-type-suffix L or l appears as the token immediately following a unary minus
+                // operator
+                //   token (§7.7.2), the result is a constant of type long with the value −9223372036854775808
+                // (−263).
                 //   In all other situations, such a decimal-integer-literal is of type ulong.
             }
 
             return true;
         }
 
-        // TODO: Change to Int64.TryParse when it supports NumberStyles.AllowBinarySpecifier (inline this method into GetValueUInt32/64)
+        // TODO: Change to Int64.TryParse when it supports NumberStyles.AllowBinarySpecifier (inline this
+        // method into GetValueUInt32/64)
         private static bool TryParseBinaryUInt64(string text, out ulong value)
         {
             value = 0;
@@ -2759,7 +2771,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         {
             PooledStringBuilder? builder = null;
 
-            // Skip the rest of the line until we hit a EOL or EOF.  This follows the PP_Message portion of the specification.
+            // Skip the rest of the line until we hit a EOL or EOF.  This follows the PP_Message portion of the
+            // specification.
             while (true)
             {
                 var ch = this.TextWindow.PeekChar();
@@ -3373,7 +3386,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private static bool MatchesProductionForXmlChar(uint charValue)
         {
-            // Char ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF] /* any Unicode character, excluding the surrogate blocks, FFFE, and FFFF. */
+            // Char ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF] /* any Unicode
+            // character, excluding the surrogate blocks, FFFE, and FFFF. */
 
             return charValue == 0x9
                 || charValue == 0xA
@@ -4080,7 +4094,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case '>':
                     if (AdvanceIfMatches('='))
                         info.Kind = SyntaxKind.GreaterThanEqualsToken;
-                    // GreaterThanGreaterThanToken/GreaterThanGreaterThanGreaterThanToken is synthesized in the parser since it is ambiguous (with closing nested type parameter lists)
+                    // GreaterThanGreaterThanToken/GreaterThanGreaterThanGreaterThanToken is synthesized in the parser
+                    // since it is ambiguous (with closing nested type parameter lists)
                     else
                         info.Kind = SyntaxKind.GreaterThanToken;
                     break;
@@ -4689,7 +4704,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Collects XML doc comment exterior trivia, and therefore is a no op unless we are in the Start or Exterior of an XML doc comment.
+        /// Collects XML doc comment exterior trivia, and therefore is a no op unless we are in the Start or
+        // Exterior of an XML doc comment.
         /// </summary>
         /// <param name="trivia">List in which to collect the trivia</param>
         private void LexXmlDocCommentLeadingTrivia(ref SyntaxListBuilder? trivia)
@@ -4880,7 +4896,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Collects whitespace and new line trivia for XML doc comments. Does not see XML doc comment exterior trivia, and is a no op unless we are in the interior.
+        /// Collects whitespace and new line trivia for XML doc comments. Does not see XML doc comment
+        // exterior trivia, and is a no op unless we are in the interior.
         /// </summary>
         /// <param name="trivia">List in which to collect the trivia</param>
         private void LexXmlWhitespaceAndNewLineTrivia(ref SyntaxListBuilder? trivia)

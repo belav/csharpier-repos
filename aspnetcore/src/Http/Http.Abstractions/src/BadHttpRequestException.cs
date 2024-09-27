@@ -20,7 +20,8 @@ public class BadHttpRequestException : IOException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see cref="StatusCode"/> set to 400 Bad Request.
+    /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see
+    // cref="StatusCode"/> set to 400 Bad Request.
     /// </summary>
     /// <param name="message">The message to associate with this exception</param>
     public BadHttpRequestException(string message)
@@ -42,7 +43,8 @@ public class BadHttpRequestException : IOException
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see cref="StatusCode"/> set to 400 Bad Request.
+    /// Initializes a new instance of the <see cref="BadHttpRequestException"/> class with the <see
+    // cref="StatusCode"/> set to 400 Bad Request.
     /// </summary>
     /// <param name="message">The message to associate with this exception</param>
     /// <param name="innerException">The inner exception to associate with this exception</param>

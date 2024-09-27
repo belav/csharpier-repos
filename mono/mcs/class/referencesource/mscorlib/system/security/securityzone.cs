@@ -15,7 +15,8 @@ namespace System.Security
     using System;
     using System.Runtime.InteropServices;
 
-    // The quick cache code depends on the values in this enumeration. Any change to this enumeration should
+    // The quick cache code depends on the values in this enumeration. Any change to this enumeration
+    // should
     // be reflected in PolicyManager.GenerateQuickCache as well.
     [ComVisible(true)]
     [Serializable]

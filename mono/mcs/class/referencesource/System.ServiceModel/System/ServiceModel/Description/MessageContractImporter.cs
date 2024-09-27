@@ -267,8 +267,10 @@ namespace System.ServiceModel.Description
 
         bool CanImportFaults(WsdlNS.Operation operation, OperationDescription description)
         {
-            // When this.faultImportOptions.UseMessageFormat is false, we fall back to the V1 behavior of using DataContractSerializer to import all faults.
-            // We can, therefore, return true in those cases without actually doing the checks involved in CanImportFaults.
+            // When this.faultImportOptions.UseMessageFormat is false, we fall back to the V1 behavior of using
+            // DataContractSerializer to import all faults.
+            // We can, therefore, return true in those cases without actually doing the checks involved in
+            // CanImportFaults.
             if (!this.faultImportOptions.UseMessageFormat)
                 return true;
 
@@ -3040,7 +3042,8 @@ namespace System.ServiceModel.Description
 
             internal override bool CanImportStyleAndUse(OperationFormatStyle style, bool isEncoded)
             {
-                // Intentionally return true in all cases. Warning will be generated later if there are multiple bindings and one is doc-encoded.
+                // Intentionally return true in all cases. Warning will be generated later if there are multiple
+                // bindings and one is doc-encoded.
                 return true;
             }
 

@@ -17,7 +17,8 @@ namespace Microsoft.Extensions.Logging.EventSource
     /// A logger that writes messages to EventSource instance.
     /// </summary>
     /// <remarks>
-    /// On Windows platforms EventSource will deliver messages using Event Tracing for Windows (ETW) events.
+    /// On Windows platforms EventSource will deliver messages using Event Tracing for Windows (ETW)
+    // events.
     /// On Linux EventSource will use LTTng (http://lttng.org) to deliver messages.
     /// </remarks>
     internal sealed class EventSourceLogger : ILogger
@@ -226,14 +227,16 @@ namespace Microsoft.Extensions.Logging.EventSource
         /// </summary>
         /// <param name="exception">The exception to get information for.</param>
         /// <returns>ExceptionInfo object represending a .NET Exception</returns>
-        /// <remarks>ETW does not support a concept of a null value. So we use an un-initialized object if there is no exception in the event data.</remarks>
+        /// <remarks>ETW does not support a concept of a null value. So we use an un-initialized object if
+        // there is no exception in the event data.</remarks>
         private static ExceptionInfo GetExceptionInfo(Exception? exception)
         {
             return exception != null ? new ExceptionInfo(exception) : ExceptionInfo.Empty;
         }
 
         /// <summary>
-        /// Converts an ILogger state object into a set of key-value pairs (That can be send to a EventSource)
+        /// Converts an ILogger state object into a set of key-value pairs (That can be send to a
+        // EventSource)
         /// </summary>
         private static KeyValuePair<string, string?>[] GetProperties(object? state)
         {

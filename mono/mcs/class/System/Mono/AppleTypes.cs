@@ -493,9 +493,9 @@ namespace Mono
             IntPtr theData
         );
 
-        /*
-         * Exposes a read-only pointer to the underlying storage.
-         */
+/*
+* Exposes a read-only pointer to the underlying storage.
+*/
         public IntPtr Bytes
         {
             get { return CFDataGetBytePtr(Handle); }

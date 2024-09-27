@@ -21,11 +21,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         }
 
         /// <summary>
-        /// Returns the unqualified (right-most) part of a qualified or alias-qualified name, or the name itself if already unqualified.
+        /// Returns the unqualified (right-most) part of a qualified or alias-qualified name, or the name
+        // itself if already unqualified.
         /// </summary>
-        /// <returns>The unqualified (right-most) part of a qualified or alias-qualified name, or the name itself if already unqualified.
-        /// If called on an instance of <see cref="AliasQualifiedNameSyntax"/> returns the value of the <see cref="AliasQualifiedNameSyntax.Name"/> property.
-        /// If called on an instance of <see cref="QualifiedNameSyntax"/> returns the value of the <see cref="QualifiedNameSyntax.Right"/> property.
+        /// <returns>The unqualified (right-most) part of a qualified or alias-qualified name, or the name
+        // itself if already unqualified.
+        /// If called on an instance of <see cref="AliasQualifiedNameSyntax"/> returns the value of the <see
+        // cref="AliasQualifiedNameSyntax.Name"/> property.
+        /// If called on an instance of <see cref="QualifiedNameSyntax"/> returns the value of the <see
+        // cref="QualifiedNameSyntax.Right"/> property.
         /// If called on an instance of <see cref="SimpleNameSyntax"/> returns the instance itself.
         /// </returns>
         internal abstract SimpleNameSyntax GetUnqualifiedName();
@@ -36,9 +40,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
         internal abstract string ErrorDisplayName();
 
         /// <remarks>
-        /// This inspection is entirely syntactic.  We are not trying to find the alias corresponding to the assembly symbol
-        /// containing the explicitly implemented interface symbol - there may be more than one.  We just want to know
-        /// how the name was qualified in source so that we can make a similar qualification (for uniqueness purposes).
+        /// This inspection is entirely syntactic.  We are not trying to find the alias corresponding to the
+        // assembly symbol
+        /// containing the explicitly implemented interface symbol - there may be more than one.  We just
+        // want to know
+        /// how the name was qualified in source so that we can make a similar qualification (for uniqueness
+        // purposes).
         /// </remarks>
         internal string? GetAliasQualifierOpt()
         {

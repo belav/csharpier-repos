@@ -168,36 +168,36 @@ namespace System.Activities.Core.Presentation
         {
             if (isRightToLeft)
             {
-                /* We hope to mirror the Text using yAxis as axis, like from (a) to (b)
-                 * |                                 |
-                 * |    ==>= =>==>                   |     <==<= =<==
-                 * |--------|------> x               |----------|--------> x
-                 * y       axis    (a)              y           axis      (b)
-                 *
-                 * So we do it in three steps:
-                 * 1) move text so that axis and y are coincident
-                 * |                                            |
-                 * |    ==>= =>==>                          ==>=|=>==>
-                 * |--------|------> x                ----------|---------> x
-                 * y       axis                                y(axis)
-                 *
-                 * 2) mirror
-                 *         |                                   |
-                 *     ==>=|=>==>                          <=<=|=<==
-                 * --------|------> x                ----------|---------> x
-                 *       y(axis)                              y(axis)
-                 *
-                 * 3) move back
-                 *         |                         |
-                 *     <=<=|=<==                     |     <=<= =<==
-                 * --------|------> x                |---------|----------> x
-                 *         y                         y        axis
-                 *
-                 *
-                 *              |  1   0   0 |   | -1 0 0 |   |   1    0   0 |   |  -1     0    0 |
-                 *  transform = |  0   1   0 | x |  0 1 0 | x |   0    1   0 | = |   0     1    0 |
-                 *              | axis 0   1 |   |  0 0 1 |   | -axis  0   0 |   | 2*axis  0    1 |
-                 */
+/* We hope to mirror the Text using yAxis as axis, like from (a) to (b)
+* |                                 |
+* |    ==>= =>==>                   |     <==<= =<==
+* |--------|------> x               |----------|--------> x
+* y       axis    (a)              y           axis      (b)
+*
+* So we do it in three steps:
+* 1) move text so that axis and y are coincident
+* |                                            |
+* |    ==>= =>==>                          ==>=|=>==>
+* |--------|------> x                ----------|---------> x
+* y       axis                                y(axis)
+*
+* 2) mirror
+*         |                                   |
+*     ==>=|=>==>                          <=<=|=<==
+* --------|------> x                ----------|---------> x
+*       y(axis)                              y(axis)
+*
+* 3) move back
+*         |                         |
+*     <=<=|=<==                     |     <=<= =<==
+* --------|------> x                |---------|----------> x
+*         y                         y        axis
+*
+*
+*              |  1   0   0 |   | -1 0 0 |   |   1    0   0 |   |  -1     0    0 |
+*  transform = |  0   1   0 | x |  0 1 0 | x |   0    1   0 | = |   0     1    0 |
+*              | axis 0   1 |   |  0 0 1 |   | -axis  0   0 |   | 2*axis  0    1 |
+*/
 
                 MatrixTransform transform = new MatrixTransform(-1, 0, 0, 1, 2 * axis, 0);
                 drawingContext.PushTransform(transform);

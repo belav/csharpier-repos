@@ -42,7 +42,8 @@ namespace System.Threading
         /// </summary>
         public static CdsSyncEtwBCLProvider Log = new CdsSyncEtwBCLProvider();
 
-        /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
+        /// <summary>Prevent external instantiation.  All logging should go through the Log
+        // instance.</summary>
         private CdsSyncEtwBCLProvider() { }
 
         /// <summary>Enabled for all keywords.</summary>

@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
 {
     /// <summary>
-    /// Configures <see cref="IMvcCoreBuilder" /> to support runtime compilation of Razor views and Razor Pages.
+    /// Configures <see cref="IMvcCoreBuilder" /> to support runtime compilation of Razor views and
+    // Razor Pages.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder" />.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
@@ -36,10 +37,12 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
     }
 
     /// <summary>
-    /// Configures <see cref="IMvcCoreBuilder" /> to support runtime compilation of Razor views and Razor Pages.
+    /// Configures <see cref="IMvcCoreBuilder" /> to support runtime compilation of Razor views and
+    // Razor Pages.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcCoreBuilder" />.</param>
-    /// <param name="setupAction">An action to configure the <see cref="MvcRazorRuntimeCompilationOptions"/>.</param>
+    /// <param name="setupAction">An action to configure the <see
+    // cref="MvcRazorRuntimeCompilationOptions"/>.</param>
     /// <returns>The <see cref="IMvcCoreBuilder"/>.</returns>
     public static IMvcCoreBuilder AddRazorRuntimeCompilation(
         this IMvcCoreBuilder builder,
@@ -86,9 +89,12 @@ public static class RazorRuntimeCompilationMvcCoreBuilderExtensions
 
         if (actionDescriptorProvider != null)
         {
-            // RuntimeCompilation registers an instance of PageActionDescriptorProvider(PageADP). CompiledPageADP and runtime compilation
-            // cannot co-exist since CompiledPageADP will attempt to resolve action descriptors for lazily compiled views (such as for
-            // ones from non-physical file providers). We'll instead remove CompiledPageActionDescriptors from the DI container if present.
+            // RuntimeCompilation registers an instance of PageActionDescriptorProvider(PageADP).
+            // CompiledPageADP and runtime compilation
+            // cannot co-exist since CompiledPageADP will attempt to resolve action descriptors for lazily
+            // compiled views (such as for
+            // ones from non-physical file providers). We'll instead remove CompiledPageActionDescriptors from
+            // the DI container if present.
             services.Remove(actionDescriptorProvider);
         }
 

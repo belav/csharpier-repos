@@ -11,7 +11,8 @@ using System.Text;
 using TestLibrary;
 using Xunit;
 
-// This test shares its logic with the managed type system test suite, and seeks to ensure the runtime agrees with it
+// This test shares its logic with the managed type system test suite, and seeks to ensure the
+// runtime agrees with it
 namespace istypeequivalent
 {
     public class Test

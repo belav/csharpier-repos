@@ -20,7 +20,8 @@ internal sealed partial class RequestDecompressionMiddleware
     /// <summary>
     /// Initialize the request decompression middleware.
     /// </summary>
-    /// <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
+    /// <param name="next">The delegate representing the remaining middleware in the request
+    // pipeline.</param>
     /// <param name="logger">The logger.</param>
     /// <param name="provider">The <see cref="IRequestDecompressionProvider"/>.</param>
     public RequestDecompressionMiddleware(

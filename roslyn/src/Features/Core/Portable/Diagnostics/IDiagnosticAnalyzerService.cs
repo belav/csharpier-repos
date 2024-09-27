@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         DiagnosticAnalyzerInfoCache AnalyzerInfoCache { get; }
 
         /// <summary>
-        /// Re-analyze given projects and documents. If both <paramref name="projectIds"/> and <paramref name="documentIds"/> are null,
-        /// then re-analyzes the entire <see cref="Workspace.CurrentSolution"/> for the given <paramref name="workspace"/>.
+        /// Re-analyze given projects and documents. If both <paramref name="projectIds"/> and <paramref
+        // name="documentIds"/> are null,
+        /// then re-analyzes the entire <see cref="Workspace.CurrentSolution"/> for the given <paramref
+        // name="workspace"/>.
         /// </summary>
         void Reanalyze(
             Workspace workspace,
@@ -36,14 +38,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         );
 
         /// <summary>
-        /// Get specific diagnostics currently stored in the source. returned diagnostic might be out-of-date if solution has changed but analyzer hasn't run for the new solution.
+        /// Get specific diagnostics currently stored in the source. returned diagnostic might be
+        // out-of-date if solution has changed but analyzer hasn't run for the new solution.
         /// </summary>
         /// <param name="workspace">Workspace to fetch the diagnostics for.</param>
         /// <param name="id">
         /// Specific id to scope the returned diagnostics. This id must correspond to the
-        /// <see cref="Common.UpdatedEventArgs.Id"/> associated with <see cref="DiagnosticsUpdatedArgs"/> event.
+        /// <see cref="Common.UpdatedEventArgs.Id"/> associated with <see cref="DiagnosticsUpdatedArgs"/>
+        // event.
         /// </param>
-        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via pragmas and SuppressMessageAttributes should be returned.</param>
+        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via
+        // pragmas and SuppressMessageAttributes should be returned.</param>
         /// <param name="includeNonLocalDocumentDiagnostics">
         /// Indicates if non-local document diagnostics must be returned.
         /// Non-local diagnostics are the ones reported by analyzers either at compilation end callback OR
@@ -60,15 +65,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         );
 
         /// <summary>
-        /// Get diagnostics currently stored in the source. returned diagnostic might be out-of-date if solution has changed but analyzer hasn't run for the new solution.
+        /// Get diagnostics currently stored in the source. returned diagnostic might be out-of-date if
+        // solution has changed but analyzer hasn't run for the new solution.
         /// </summary>
-        /// <param name="workspace">Workspace for the document/project/solution to compute diagnostics for.</param>
+        /// <param name="workspace">Workspace for the document/project/solution to compute diagnostics
+        // for.</param>
         /// <param name="projectId">Optional project to scope the returned diagnostics.</param>
         /// <param name="documentId">Optional document to scope the returned diagnostics.</param>
-        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via pragmas and SuppressMessageAttributes should be returned.</param>
+        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via
+        // pragmas and SuppressMessageAttributes should be returned.</param>
         /// <param name="includeLocalDocumentDiagnostics">
         /// Indicates if local document diagnostics must be returned.
-        /// Local diagnostics are the ones that are reported by analyzers on the same file for which the callback was received
+        /// Local diagnostics are the ones that are reported by analyzers on the same file for which the
+        // callback was received
         /// and hence can be computed by analyzing a single file in isolation.
         /// </param>
         /// <param name="includeNonLocalDocumentDiagnostics">
@@ -89,12 +98,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         );
 
         /// <summary>
-        /// Get diagnostics for the given solution. all diagnostics returned should be up-to-date with respect to the given solution.
+        /// Get diagnostics for the given solution. all diagnostics returned should be up-to-date with
+        // respect to the given solution.
         /// </summary>
         /// <param name="solution">Solution to fetch diagnostics for.</param>
         /// <param name="projectId">Optional project to scope the returned diagnostics.</param>
         /// <param name="documentId">Optional document to scope the returned diagnostics.</param>
-        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via pragmas and SuppressMessageAttributes should be returned.</param>
+        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via
+        // pragmas and SuppressMessageAttributes should be returned.</param>
         /// <param name="includeNonLocalDocumentDiagnostics">
         /// Indicates if non-local document diagnostics must be returned.
         /// Non-local diagnostics are the ones reported by analyzers either at compilation end callback OR
@@ -112,24 +123,32 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         );
 
         /// <summary>
-        /// Force analyzes the given project by running all applicable analyzers on the project and caching the reported analyzer diagnostics.
+        /// Force analyzes the given project by running all applicable analyzers on the project and caching
+        // the reported analyzer diagnostics.
         /// </summary>
         Task ForceAnalyzeProjectAsync(Project project, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Get diagnostics of the given diagnostic ids and/or analyzers from the given solution. all diagnostics returned should be up-to-date with respect to the given solution.
-        /// Note that for project case, this method returns diagnostics from all project documents as well. Use <see cref="GetProjectDiagnosticsForIdsAsync(Solution, ProjectId?, ImmutableHashSet{string}?, Func{DiagnosticAnalyzer, bool}?, bool, bool, CancellationToken)"/>
+        /// Get diagnostics of the given diagnostic ids and/or analyzers from the given solution. all
+        // diagnostics returned should be up-to-date with respect to the given solution.
+        /// Note that for project case, this method returns diagnostics from all project documents as well.
+        // Use <see cref="GetProjectDiagnosticsForIdsAsync(Solution, ProjectId?, ImmutableHashSet{string}?,
+        // Func{DiagnosticAnalyzer, bool}?, bool, bool, CancellationToken)"/>
         /// if you want to fetch only project diagnostics without source locations.
         /// </summary>
         /// <param name="solution">Solution to fetch the diagnostics for.</param>
         /// <param name="projectId">Optional project to scope the returned diagnostics.</param>
         /// <param name="documentId">Optional document to scope the returned diagnostics.</param>
-        /// <param name="diagnosticIds">Optional set of diagnostic IDs to scope the returned diagnostics.</param>
-        /// <param name="shouldIncludeAnalyzer">Option callback to filter out analyzers to execute for computing diagnostics.</param>
-        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via pragmas and SuppressMessageAttributes should be returned.</param>
+        /// <param name="diagnosticIds">Optional set of diagnostic IDs to scope the returned
+        // diagnostics.</param>
+        /// <param name="shouldIncludeAnalyzer">Option callback to filter out analyzers to execute for
+        // computing diagnostics.</param>
+        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via
+        // pragmas and SuppressMessageAttributes should be returned.</param>
         /// <param name="includeLocalDocumentDiagnostics">
         /// Indicates if local document diagnostics must be returned.
-        /// Local diagnostics are the ones that are reported by analyzers on the same file for which the callback was received
+        /// Local diagnostics are the ones that are reported by analyzers on the same file for which the
+        // callback was received
         /// and hence can be computed by analyzing a single file in isolation.
         /// </param>
         /// <param name="includeNonLocalDocumentDiagnostics">
@@ -152,14 +171,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         );
 
         /// <summary>
-        /// Get project diagnostics (diagnostics with no source location) of the given diagnostic ids and/or analyzers from the given solution. all diagnostics returned should be up-to-date with respect to the given solution.
-        /// Note that this method doesn't return any document diagnostics. Use <see cref="GetDiagnosticsForIdsAsync(Solution, ProjectId, DocumentId, ImmutableHashSet{string}, Func{DiagnosticAnalyzer, bool}?, bool, bool, bool, CancellationToken)"/> to also fetch those.
+        /// Get project diagnostics (diagnostics with no source location) of the given diagnostic ids and/or
+        // analyzers from the given solution. all diagnostics returned should be up-to-date with respect to the
+        // given solution.
+        /// Note that this method doesn't return any document diagnostics. Use <see
+        // cref="GetDiagnosticsForIdsAsync(Solution, ProjectId, DocumentId, ImmutableHashSet{string},
+        // Func{DiagnosticAnalyzer, bool}?, bool, bool, bool, CancellationToken)"/> to also fetch those.
         /// </summary>
         /// <param name="solution">Solution to fetch the diagnostics for.</param>
         /// <param name="projectId">Optional project to scope the returned diagnostics.</param>
-        /// <param name="diagnosticIds">Optional set of diagnostic IDs to scope the returned diagnostics.</param>
-        /// <param name="shouldIncludeAnalyzer">Option callback to filter out analyzers to execute for computing diagnostics.</param>
-        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via SuppressMessageAttributes should be returned.</param>
+        /// <param name="diagnosticIds">Optional set of diagnostic IDs to scope the returned
+        // diagnostics.</param>
+        /// <param name="shouldIncludeAnalyzer">Option callback to filter out analyzers to execute for
+        // computing diagnostics.</param>
+        /// <param name="includeSuppressedDiagnostics">Indicates if diagnostics suppressed in source via
+        // SuppressMessageAttributes should be returned.</param>
         /// <param name="includeNonLocalDocumentDiagnostics">
         /// Indicates if non-local document diagnostics must be returned.
         /// Non-local diagnostics are the ones reported by analyzers either at compilation end callback.
@@ -182,11 +208,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// It will return true if it was able to return all up-to-date diagnostics.
         ///  otherwise, false indicating there are some missing diagnostics in the diagnostic list
         ///
-        /// This API will only force complete analyzers that support span based analysis, i.e. compiler analyzer and
-        /// <see cref="IBuiltInAnalyzer"/>s that support <see cref="DiagnosticAnalyzerCategory.SemanticSpanAnalysis"/>.
-        /// For the rest of the analyzers, it will only return diagnostics if the analyzer has already been executed.
-        /// Use <see cref="GetDiagnosticsForSpanAsync(TextDocument, TextSpan?, Func{string, bool}?, bool, bool, ICodeActionRequestPriorityProvider, Func{string, IDisposable?}?, DiagnosticKind, bool, CancellationToken)"/>
-        /// if you want to force complete all analyzers and get up-to-date diagnostics for all analyzers for the given span.
+        /// This API will only force complete analyzers that support span based analysis, i.e. compiler
+        // analyzer and
+        /// <see cref="IBuiltInAnalyzer"/>s that support <see
+        // cref="DiagnosticAnalyzerCategory.SemanticSpanAnalysis"/>.
+        /// For the rest of the analyzers, it will only return diagnostics if the analyzer has already been
+        // executed.
+        /// Use <see cref="GetDiagnosticsForSpanAsync(TextDocument, TextSpan?, Func{string, bool}?, bool,
+        // bool, ICodeActionRequestPriorityProvider, Func{string, IDisposable?}?, DiagnosticKind, bool,
+        // CancellationToken)"/>
+        /// if you want to force complete all analyzers and get up-to-date diagnostics for all analyzers for
+        // the given span.
         /// </summary>
         Task<(
             ImmutableArray<DiagnosticData> diagnostics,
@@ -205,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Return up to date diagnostics for the given span for the document
         /// <para>
-        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
+        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one
+        // yet.
         /// Predicate <paramref name="shouldIncludeDiagnostic"/> filters out analyzers from execution if
         /// none of its reported diagnostics should be included in the result.
         /// </para>
@@ -227,9 +260,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal static class IDiagnosticAnalyzerServiceExtensions
     {
         /// <summary>
-        /// Return up to date diagnostics for the given <paramref name="range"/> for the given <paramref name="document"/>.
+        /// Return up to date diagnostics for the given <paramref name="range"/> for the given <paramref
+        // name="document"/>.
         /// <para>
-        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
+        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one
+        // yet.
         /// </para>
         /// </summary>
         public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
@@ -247,10 +282,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
         /// <summary>
-        /// Return up to date diagnostics of the given <paramref name="diagnosticKind"/> for the given <paramref name="range"/>
+        /// Return up to date diagnostics of the given <paramref name="diagnosticKind"/> for the given
+        // <paramref name="range"/>
         /// for the given <paramref name="document"/>.
         /// <para>
-        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet.
+        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one
+        // yet.
         /// </para>
         /// </summary>
         public static Task<ImmutableArray<DiagnosticData>> GetDiagnosticsForSpanAsync(
@@ -274,9 +311,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
         /// <summary>
-        /// Return up to date diagnostics for the given <paramref name="range"/> and parameters for the given <paramref name="document"/>.
+        /// Return up to date diagnostics for the given <paramref name="range"/> and parameters for the
+        // given <paramref name="document"/>.
         /// <para>
-        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one yet. If
+        /// This can be expensive since it is force analyzing diagnostics if it doesn't have up-to-date one
+        // yet. If
         /// <paramref name="diagnosticId"/> is not null, it gets diagnostics only for this given <paramref
         /// name="diagnosticId"/> value.
         /// </para>

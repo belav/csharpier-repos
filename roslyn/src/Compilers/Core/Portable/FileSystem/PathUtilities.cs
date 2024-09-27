@@ -30,7 +30,8 @@ namespace Roslyn.Utilities
         internal static bool IsUnixLikePlatform => PlatformInformation.IsUnix;
 
         /// <summary>
-        /// True if the character is the platform directory separator character or the alternate directory separator.
+        /// True if the character is the platform directory separator character or the alternate directory
+        // separator.
         /// </summary>
         public static bool IsDirectorySeparator(char c) =>
             c == DirectorySeparatorChar || c == AltDirectorySeparatorChar;
@@ -121,7 +122,8 @@ namespace Roslyn.Utilities
         /// Get directory name from path.
         /// </summary>
         /// <remarks>
-        /// Unlike <see cref="System.IO.Path.GetDirectoryName(string)"/> it doesn't check for invalid path characters
+        /// Unlike <see cref="System.IO.Path.GetDirectoryName(string)"/> it doesn't check for invalid path
+        // characters
         /// </remarks>
         /// <returns>Prefix of path that represents a directory</returns>
         [return: NotNullIfNotNull(nameof(path))]
@@ -460,7 +462,8 @@ namespace Roslyn.Utilities
         /// <param name="root">First path: absolute, relative, or null.</param>
         /// <param name="path">Second path: absolute, relative, or null.</param>
         /// <returns>
-        /// The combined paths. If <paramref name="path"/> contains an absolute path, returns <paramref name="path"/>.
+        /// The combined paths. If <paramref name="path"/> contains an absolute path, returns <paramref
+        // name="path"/>.
         /// </returns>
         /// <remarks>
         /// Relative and absolute paths treated the same as <see cref="Path.Combine(string, string)"/>.
@@ -494,7 +497,8 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// Determines whether an assembly reference is considered an assembly file path or an assembly name.
+        /// Determines whether an assembly reference is considered an assembly file path or an assembly
+        // name.
         /// used, for example, on values of /r and #r.
         /// </summary>
         public static bool IsFilePath(string assemblyDisplayNameOrPath)
@@ -726,14 +730,16 @@ namespace Roslyn.Utilities
             }
 
             // find the first key in the path map that matches a prefix of the normalized path.
-            // Note that we expect the client to use consistent capitalization; we use ordinal (case-sensitive) comparisons.
+            // Note that we expect the client to use consistent capitalization; we use ordinal (case-sensitive)
+            // comparisons.
             foreach (var kv in pathMap)
             {
                 var oldPrefix = kv.Key;
                 if (!(oldPrefix?.Length > 0))
                     continue;
 
-                // oldPrefix always ends with a path separator, so there's no need to check if it was a partial match
+                // oldPrefix always ends with a path separator, so there's no need to check if it was a partial
+                // match
                 // e.g. for the map /goo=/bar and filename /goooo
                 if (filePath.StartsWith(oldPrefix, StringComparison.Ordinal))
                 {
@@ -756,11 +762,14 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Unfortunately, we cannot depend on Path.GetInvalidPathChars() or Path.GetInvalidFileNameChars()
-        /// From MSDN: The array returned from this method is not guaranteed to contain the complete set of characters
-        /// that are invalid in file and directory names. The full set of invalid characters can vary by file system.
+        /// From MSDN: The array returned from this method is not guaranteed to contain the complete set of
+        // characters
+        /// that are invalid in file and directory names. The full set of invalid characters can vary by
+        // file system.
         /// https://msdn.microsoft.com/en-us/library/system.io.path.getinvalidfilenamechars.aspx
         ///
-        /// Additionally, Path.GetInvalidPathChars() doesn't include "?" or "*" which are invalid characters,
+        /// Additionally, Path.GetInvalidPathChars() doesn't include "?" or "*" which are invalid
+        // characters,
         /// and Path.GetInvalidFileNameChars() includes ":" and "\" which are valid characters.
         ///
         /// The more accurate way is to let the framework parse the path and throw on any errors.
@@ -797,19 +806,24 @@ namespace Roslyn.Utilities
         /// in the given string with '/'. Otherwise, returns the string.
         /// </summary>
         /// <remarks>
-        /// This method is equivalent to Microsoft.CodeAnalysis.BuildTasks.GenerateMSBuildEditorConfig.NormalizeWithForwardSlash
+        /// This method is equivalent to
+        // Microsoft.CodeAnalysis.BuildTasks.GenerateMSBuildEditorConfig.NormalizeWithForwardSlash
         /// Both methods should be kept in sync.
         /// </remarks>
         public static string NormalizeWithForwardSlash(string p) =>
             DirectorySeparatorChar == '/' ? p : p.Replace(DirectorySeparatorChar, '/');
 
         /// <summary>
-        /// Takes an absolute path and attempts to expand any '..' or '.' into their equivalent representation.
+        /// Takes an absolute path and attempts to expand any '..' or '.' into their equivalent
+        // representation.
         /// </summary>
-        /// <returns>An equivalent path that does not contain any '..' or '.' path parts, or the original path.</returns>
+        /// <returns>An equivalent path that does not contain any '..' or '.' path parts, or the original
+        // path.</returns>
         /// <remarks>
-        /// This method handles unix and windows drive rooted absolute paths only (i.e /a/b or x:\a\b). Passing any other kind of path
-        /// including relative, drive relative, unc, or windows device paths will simply return the original input.
+        /// This method handles unix and windows drive rooted absolute paths only (i.e /a/b or x:\a\b).
+        // Passing any other kind of path
+        /// including relative, drive relative, unc, or windows device paths will simply return the original
+        // input.
         /// </remarks>
         public static string ExpandAbsolutePathWithRelativeParts(string p)
         {
@@ -837,7 +851,8 @@ namespace Roslyn.Utilities
                 {
                     resolvedParts.Push(part);
                 }
-                // /../../file is considered equal to /file, so we only process the parent relative directory info if there is actually a parent
+                // /../../file is considered equal to /file, so we only process the parent relative directory info
+                // if there is actually a parent
                 else if (resolvedParts.Count > 0)
                 {
                     resolvedParts.Pop();

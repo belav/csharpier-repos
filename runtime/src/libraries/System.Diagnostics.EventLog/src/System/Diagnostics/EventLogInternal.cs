@@ -477,7 +477,8 @@ namespace System.Diagnostics
             bool success = Interop.Advapi32.ClearEventLog(readHandle, null);
             if (!success)
             {
-                // Ignore file not found errors.  ClearEventLog seems to try to delete the file where the event log is
+                // Ignore file not found errors.  ClearEventLog seems to try to delete the file where the event log
+                // is
                 // stored.  If it can't find it, it gives an error.
                 int error = Marshal.GetLastWin32Error();
                 if (error != Interop.Errors.ERROR_FILE_NOT_FOUND)
@@ -561,7 +562,8 @@ namespace System.Diagnostics
             {
                 int oldest = OldestEntryNumber;
                 int count = EntryCount + oldest;
-                // Ensure lastSeenCount is within bounds.  This deals with the case where the event log has been cleared between
+                // Ensure lastSeenCount is within bounds.  This deals with the case where the event log has been
+                // cleared between
                 // notifications.
                 if (lastSeenCount < oldest || lastSeenCount > count)
                 {
@@ -595,8 +597,10 @@ namespace System.Diagnostics
 
             try
             {
-                // if the user cleared the log while we were receiving events, the call to GetEntryWithOldest above could have
-                // thrown an exception and i could be too large.  Make sure we don't set lastSeenCount to something bogus.
+                // if the user cleared the log while we were receiving events, the call to GetEntryWithOldest above
+                // could have
+                // thrown an exception and i could be too large.  Make sure we don't set lastSeenCount to something
+                // bogus.
                 int newCount = EntryCount + OldestEntryNumber;
                 if (i > newCount)
                     lastSeenCount = newCount;
@@ -1165,7 +1169,8 @@ namespace System.Diagnostics
 
         private void OpenForWrite(string currentMachineName)
         {
-            //Cannot allocate the writeHandle if the object has been disposed, since finalization has been suppressed.
+            //Cannot allocate the writeHandle if the object has been disposed, since finalization has been
+            // suppressed.
             if (this.boolFlags[Flag_disposed])
                 throw new ObjectDisposedException(GetType().Name);
 
@@ -1533,7 +1538,8 @@ namespace System.Diagnostics
             {
                 strings[i] ??= string.Empty;
 
-                // make sure the strings aren't too long.  MSDN says each string has a limit of 32k (32768) characters, but
+                // make sure the strings aren't too long.  MSDN says each string has a limit of 32k (32768)
+                // characters, but
                 // experimentation shows that it doesn't like anything larger than 32766
                 if (strings[i].Length > 32766)
                     throw new ArgumentException(SR.LogEntryTooLong);

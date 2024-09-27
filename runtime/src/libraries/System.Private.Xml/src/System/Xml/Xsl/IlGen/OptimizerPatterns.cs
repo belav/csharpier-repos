@@ -78,7 +78,8 @@ namespace System.Xml.Xsl.IlGen
             {
                 if (!nd.XmlType!.MaybeMany)
                 {
-                    // Expressions with ZeroOrOne cardinality should always report IsDocOrderDistinct and NoContainedNodes
+                    // Expressions with ZeroOrOne cardinality should always report IsDocOrderDistinct and
+                    // NoContainedNodes
                     if (s_zeroOrOneDefault == null)
                     {
                         optPatt = new OptimizerPatterns();

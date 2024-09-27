@@ -43,7 +43,7 @@ namespace System.Transactions
         public void ForceRollback(Exception e)
         {
             tx.Rollback(e, enlisted);
-            /* See test RMFail2 */
+/* See test RMFail2 */
             ((ManualResetEvent)waitHandle).Set();
         }
 
@@ -51,7 +51,7 @@ namespace System.Transactions
         public void Prepared()
         {
             prepared = true;
-            /* See test RMFail2 */
+/* See test RMFail2 */
             ((ManualResetEvent)waitHandle).Set();
         }
 

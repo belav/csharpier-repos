@@ -783,8 +783,10 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        ///     Reads all the counter and instance data of this performance category.  Note that reading the entire category
-        ///     at once can be as efficient as reading a single counter because of the way the system provides the data.
+        ///     Reads all the counter and instance data of this performance category.  Note that reading the
+        // entire category
+        ///     at once can be as efficient as reading a single counter because of the way the system
+        // provides the data.
         /// </devdoc>
         public InstanceDataCollectionCollection ReadCategory()
         {

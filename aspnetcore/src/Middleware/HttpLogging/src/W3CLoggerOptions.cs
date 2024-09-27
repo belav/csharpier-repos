@@ -20,7 +20,8 @@ public sealed class W3CLoggerOptions
     internal const int MaxFileCount = 10000;
 
     /// <summary>
-    /// Gets or sets a strictly positive value representing the maximum log size in bytes or null for no limit.
+    /// Gets or sets a strictly positive value representing the maximum log size in bytes or null for no
+    // limit.
     /// Once the log is full, no more messages will be appended.
     /// Defaults to <c>10MiB</c>.
     /// </summary>
@@ -62,8 +63,10 @@ public sealed class W3CLoggerOptions
     }
 
     /// <summary>
-    /// Gets or sets a string representing the prefix of the file name used to store the logging information.
-    /// The current date plus a file number (in the format {YYYYMMDD.X} will be appended to the given value.
+    /// Gets or sets a string representing the prefix of the file name used to store the logging
+    // information.
+    /// The current date plus a file number (in the format {YYYYMMDD.X} will be appended to the given
+    // value.
     /// Defaults to <c>w3clog-</c>.
     /// </summary>
     public string FileName

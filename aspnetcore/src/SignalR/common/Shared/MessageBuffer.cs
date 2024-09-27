@@ -173,14 +173,18 @@ internal sealed class MessageBuffer : IDisposable
         }
 
         // Avoid condition where last Ack position is the position we're currently writing into the buffer
-        // If we wrote messages around the entire buffer before another Ack arrived we would end up reading the Ack position and writing over a buffered message
+        // If we wrote messages around the entire buffer before another Ack arrived we would end up reading
+        // the Ack position and writing over a buffered message
         _waitForAck.Reader.TryRead(out _);
 
-        // TODO: We could consider buffering messages until they hit backpressure in the case when the connection is down
+        // TODO: We could consider buffering messages until they hit backpressure in the case when the
+        // connection is down
         await _resend.Task.ConfigureAwait(false);
 
-        // Await the flush outside of the _writeLock so AckAsync can make forward progress if there is backpressure.
-        // Multiple flush calls is fine, it's multiple GetMemory calls that are problematic, which is fine since we lock around the actual write
+        // Await the flush outside of the _writeLock so AckAsync can make forward progress if there is
+        // backpressure.
+        // Multiple flush calls is fine, it's multiple GetMemory calls that are problematic, which is fine
+        // since we lock around the actual write
         ValueTask<FlushResult> writeTask;
 
         await _writeLock.WaitAsync(cancellationToken: default).ConfigureAwait(false);
@@ -250,12 +254,14 @@ internal sealed class MessageBuffer : IDisposable
 
             _currentReceivingSequenceId = sequenceMessage.SequenceId;
 
-            // Technically handled by the 'is not HubInvocationMessage' check, but this is future proofing in case that check changes
+            // Technically handled by the 'is not HubInvocationMessage' check, but this is future proofing in
+            // case that check changes
             // SequenceMessage should not be counted towards ackable messages
             return true;
         }
 
-        // Only care about messages implementing HubInvocationMessage currently (e.g. ignore ping, close, ack, sequence)
+        // Only care about messages implementing HubInvocationMessage currently (e.g. ignore ping, close,
+        // ack, sequence)
         // Could expand in the future, but should probably rev the ack version if changes are made
         if (message is not HubInvocationMessage)
         {
@@ -263,7 +269,8 @@ internal sealed class MessageBuffer : IDisposable
         }
 
         var currentId = _currentReceivingSequenceId;
-        // ShouldProcessMessage is never called in parallel and is the only method referencing _currentReceivingSequenceId
+        // ShouldProcessMessage is never called in parallel and is the only method referencing
+        // _currentReceivingSequenceId
         _currentReceivingSequenceId++;
         if (currentId <= _latestReceivedSequenceId)
         {
@@ -299,7 +306,8 @@ internal sealed class MessageBuffer : IDisposable
             {
                 if (item.SequenceId > 0)
                 {
-                    // The first message we send is a SequenceMessage with the ID of the first unacked message we're sending
+                    // The first message we send is a SequenceMessage with the ID of the first unacked message we're
+                    // sending
                     if (isFirst)
                     {
                         _sequenceMessage.SequenceId = item.SequenceId;
@@ -312,7 +320,8 @@ internal sealed class MessageBuffer : IDisposable
                 }
             }
 
-            // There were no buffered messages, we still need to send the SequenceMessage to let the client know what ID messages will start at
+            // There were no buffered messages, we still need to send the SequenceMessage to let the client know
+            // what ID messages will start at
             if (isFirst)
             {
                 _protocol.WriteMessage(_sequenceMessage, _writer);

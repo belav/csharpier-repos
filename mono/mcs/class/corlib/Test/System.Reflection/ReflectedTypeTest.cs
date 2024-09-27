@@ -29,7 +29,8 @@ using System;
 using System.Reflection;
 using NUnit.Framework;
 
-// Various fields in this class are not used directly by the C# code, they are only here to be reflected upon
+// Various fields in this class are not used directly by the C# code, they are only here to be
+// reflected upon
 #pragma warning disable 649
 namespace MonoTests.System.Reflection
 {

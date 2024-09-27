@@ -1183,11 +1183,11 @@ namespace Mono.Tools.LocaleBuilder
             for (int i = 0; i < regions.Count; ++i)
                 regions[i].Index = i;
 
-            /**
-             * Dump each table individually. Using StringBuilders
-             * because it is easier to debug, should switch to just
-             * writing to streams eventually.
-             */
+/**
+* Dump each table individually. Using StringBuilders
+* because it is easier to debug, should switch to just
+* writing to streams eventually.
+*/
             using (
                 StreamWriter writer = new StreamWriter(
                     HeaderFileName,
@@ -1421,15 +1421,15 @@ namespace Mono.Tools.LocaleBuilder
             {
                 XmlDocument doc = null;
 
-                /*
-                 * Locale generation is done in several steps, first we
-                 * read the root file which is the base invariant data
-                 * then the supplemental root data,
-                 * then the language file, the supplemental languages
-                 * file then the locale file, then the supplemental
-                 * locale file. Values in each descending file can
-                 * overwrite previous values.
-                 */
+/*
+* Locale generation is done in several steps, first we
+* read the root file which is the base invariant data
+* then the supplemental root data,
+* then the language file, the supplemental languages
+* file then the locale file, then the supplemental
+* locale file. Values in each descending file can
+* overwrite previous values.
+*/
                 foreach (var part in sep)
                 {
                     if (fname != null)
@@ -1456,7 +1456,8 @@ namespace Mono.Tools.LocaleBuilder
                 }
 
                 //
-                // Extract localized locale name from language xml file. Have to do it after both language and territory are read
+                // Extract localized locale name from language xml file. Have to do it after both language and
+                // territory are read
                 //
                 var el = doc.SelectSingleNode(
                     string.Format(
@@ -1609,7 +1610,8 @@ namespace Mono.Tools.LocaleBuilder
                 if (el != null)
                     df.NativeCalendarName = el.InnerText;
 
-                // Apply global rule first <alias source="locale" path="../../monthContext[@type='format']/monthWidth[@type='wide']"/>
+                // Apply global rule first <alias source="locale"
+                // path="../../monthContext[@type='format']/monthWidth[@type='wide']"/>
                 nodes = node.SelectNodes(
                     "months/monthContext[@type='format']/monthWidth[@type='wide']/month"
                 );
@@ -1627,7 +1629,8 @@ namespace Mono.Tools.LocaleBuilder
                     }
                 }
 
-                // Apply global rule first <alias source="locale" path="../../monthContext[@type='format']/monthWidth[@type='abbreviated']"/>
+                // Apply global rule first <alias source="locale"
+                // path="../../monthContext[@type='format']/monthWidth[@type='abbreviated']"/>
                 if (ci.Name == "ja" || ci.Name == "ja-JP")
                 {
                     // Use common number style
@@ -1672,7 +1675,8 @@ namespace Mono.Tools.LocaleBuilder
                 );
                 ProcessAllNodes(nodes, df.DayNames, AddOrReplaceDayValue);
 
-                // Apply global rule first <alias source="locale" path="../../dayContext[@type='format']/dayWidth[@type='abbreviated']"/>
+                // Apply global rule first <alias source="locale"
+                // path="../../dayContext[@type='format']/dayWidth[@type='abbreviated']"/>
                 nodes = node.SelectNodes(
                     "days/dayContext[@type='format']/dayWidth[@type='abbreviated']/day"
                 );
@@ -1691,7 +1695,8 @@ namespace Mono.Tools.LocaleBuilder
                 }
 
                 // TODO: This is not really ShortestDayNames as .NET uses it
-                // Apply global rules first <alias source="locale" path="../../dayContext[@type='stand-alone']/dayWidth[@type='narrow']"/>
+                // Apply global rules first <alias source="locale"
+                // path="../../dayContext[@type='stand-alone']/dayWidth[@type='narrow']"/>
                 nodes = node.SelectNodes(
                     "days/dayContext[@type='format']/dayWidth[@type='narrow']/day"
                 );
@@ -1700,35 +1705,35 @@ namespace Mono.Tools.LocaleBuilder
                     "days/dayContext[@type='stand-alone']/dayWidth[@type='narrow']/day"
                 );
                 ProcessAllNodes(nodes, df.ShortestDayNames, AddOrReplaceDayValue);
-                /*
-                                Cannot really be used it's too different to .NET and most app rely on it
-                 
-                                el = node.SelectSingleNode ("dateFormats/dateFormatLength[@type='full']/dateFormat/pattern");
-                                if (el != null)
-                                    df.LongDatePattern = ConvertDatePatternFormat (el.InnerText);
-                
-                                // Medium is our short
-                                el = node.SelectSingleNode ("dateFormats/dateFormatLength[@type='medium']/dateFormat/pattern");
-                                if (el != null)
-                                    df.ShortDatePattern = ConvertDatePatternFormat (el.InnerText);
-                
-                                // Medium is our Long
-                                el = node.SelectSingleNode ("timeFormats/timeFormatLength[@type='medium']/timeFormat/pattern");
-                                if (el != null)
-                                    df.LongTimePattern = ConvertTimePatternFormat (el.InnerText);
-                
-                                el = node.SelectSingleNode ("timeFormats/timeFormatLength[@type='short']/timeFormat/pattern");
-                                if (el != null)
-                                    df.ShortTimePattern = ConvertTimePatternFormat (el.InnerText);
-                
-                                el = node.SelectSingleNode ("dateTimeFormats/availableFormats/dateFormatItem[@id='yyyyMMMM']");
-                                if (el != null)
-                                    df.YearMonthPattern = ConvertDatePatternFormat (el.InnerText);
-                
-                                el = node.SelectSingleNode ("dateTimeFormats/availableFormats/dateFormatItem[@id='MMMMdd']");
-                                if (el != null)
-                                    df.MonthDayPattern = ConvertDatePatternFormat (el.InnerText);
-                */
+/*
+Cannot really be used it's too different to .NET and most app rely on it
+
+el = node.SelectSingleNode ("dateFormats/dateFormatLength[@type='full']/dateFormat/pattern");
+if (el != null)
+df.LongDatePattern = ConvertDatePatternFormat (el.InnerText);
+
+// Medium is our short
+el = node.SelectSingleNode ("dateFormats/dateFormatLength[@type='medium']/dateFormat/pattern");
+if (el != null)
+df.ShortDatePattern = ConvertDatePatternFormat (el.InnerText);
+
+// Medium is our Long
+el = node.SelectSingleNode ("timeFormats/timeFormatLength[@type='medium']/timeFormat/pattern");
+if (el != null)
+df.LongTimePattern = ConvertTimePatternFormat (el.InnerText);
+
+el = node.SelectSingleNode ("timeFormats/timeFormatLength[@type='short']/timeFormat/pattern");
+if (el != null)
+df.ShortTimePattern = ConvertTimePatternFormat (el.InnerText);
+
+el = node.SelectSingleNode ("dateTimeFormats/availableFormats/dateFormatItem[@id='yyyyMMMM']");
+if (el != null)
+df.YearMonthPattern = ConvertDatePatternFormat (el.InnerText);
+
+el = node.SelectSingleNode ("dateTimeFormats/availableFormats/dateFormatItem[@id='MMMMdd']");
+if (el != null)
+df.MonthDayPattern = ConvertDatePatternFormat (el.InnerText);
+*/
                 el = node.SelectSingleNode(
                     "dayPeriods/dayPeriodContext/dayPeriodWidth[@type='abbreviated']/dayPeriod[@type='am']"
                 );
@@ -1796,27 +1801,28 @@ namespace Mono.Tools.LocaleBuilder
                 if (el != null)
                     ni.PositiveSign = el.InnerText;
 
-                // CLDR uses unicode negative sign for some culture (e.g sv, is, lt, don't kwnow why) but .NET always
+                // CLDR uses unicode negative sign for some culture (e.g sv, is, lt, don't kwnow why) but .NET
+                // always
                 // uses simple "-" sign and what is worse the parsing code cannot deal with non-ASCII values
                 ni.NegativeSign = "-";
 
-                /*
-                el = node.SelectSingleNode ("minusSign");
-                if (el != null) {
-                    switch (el.InnerText) {
-                    case "\u2212":
-                    case "\u200F\u002D": // Remove any right-to-left mark characters
-                    case "\u200E\u002D":
-                    case "\u061C\u2212":
-                    case "\u200F\u2212":
-                        ni.NegativeSign = "-";
-                        break;
-                    default:
-                        ni.NegativeSign = el.InnerText;
-                        break;
-                    }
-                }
-                */
+/*
+el = node.SelectSingleNode ("minusSign");
+if (el != null) {
+switch (el.InnerText) {
+case "\u2212":
+case "\u200F\u002D": // Remove any right-to-left mark characters
+case "\u200E\u002D":
+case "\u061C\u2212":
+case "\u200F\u2212":
+ni.NegativeSign = "-";
+break;
+default:
+ni.NegativeSign = el.InnerText;
+break;
+}
+}
+*/
                 el = node.SelectSingleNode("infinity");
 
                 // We cannot use the value from CLDR because many broken

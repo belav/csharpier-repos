@@ -58,7 +58,8 @@ namespace System.Threading.Tests
                         waitForThread();
                     }
 
-                    // To leave some room for unknown timers to be scheduled and removed, remove a large number of timers at a time and
+                    // To leave some room for unknown timers to be scheduled and removed, remove a large number of
+                    // timers at a time and
                     // verify that the timer count has decreased
                     while (timers.Count > 0)
                     {

@@ -27,7 +27,8 @@ namespace System.Xml.Schema
         private XmlSchemaObject? _sourceSchemaObject;
 
         // message != null for V1 exceptions deserialized in Whidbey
-        // message == null for V2 or higher exceptions; the exception message is stored on the base class (Exception._message)
+        // message == null for V2 or higher exceptions; the exception message is stored on the base class
+        // (Exception._message)
         private readonly string? _message;
 
         [Obsolete(
@@ -62,7 +63,8 @@ namespace System.Xml.Schema
             }
             else
             {
-                // deserializing V2 or higher exception -> exception message is serialized by the base class (Exception._message)
+                // deserializing V2 or higher exception -> exception message is serialized by the base class
+                // (Exception._message)
                 _message = null;
             }
         }
@@ -233,8 +235,9 @@ namespace System.Xml.Schema
             get { return _sourceSchemaObject; }
         }
 
-        /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string will clash with public constructor that takes in a message
-            return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
+        /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string
+        will clash with public constructor that takes in a message
+        return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
         }*/
 
         internal void SetSource(string? sourceUri, int lineNumber, int linePosition)

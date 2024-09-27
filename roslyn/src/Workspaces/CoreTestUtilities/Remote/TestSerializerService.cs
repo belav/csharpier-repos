@@ -159,9 +159,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
             private readonly object _gate = new object();
 
             /// <summary>
-            /// In unit tests that are testing OOP, we want to be able to share test generator references directly
-            /// from one side to another. We'll create multiple instances of the TestSerializerService -- one for each
-            /// workspace and in different MEF compositions, but we'll share the generator references across them. This
+            /// In unit tests that are testing OOP, we want to be able to share test generator references
+            // directly
+            /// from one side to another. We'll create multiple instances of the TestSerializerService -- one
+            // for each
+            /// workspace and in different MEF compositions, but we'll share the generator references across
+            // them. This
             /// property allows the shared dictionary to be read/set.
             /// </summary>
             public ConcurrentDictionary<Guid, TestGeneratorReference> SharedTestGeneratorReferences
@@ -180,10 +183,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Remote
                 {
                     lock (_gate)
                     {
-                        // If we're already being assigned the same set of references as before, we're fine as that won't change anything.
-                        // Ideally, every time we created a new RemoteWorkspace we'd have a new MEF container; this would ensure that
-                        // the assignment earlier before we create the RemoteWorkspace was always the first assignment. However the
-                        // ExportProviderCache.cs in our unit tests hands out the same MEF container multpile times instead of implementing the expected
+                        // If we're already being assigned the same set of references as before, we're fine as that won't
+                        // change anything.
+                        // Ideally, every time we created a new RemoteWorkspace we'd have a new MEF container; this would
+                        // ensure that
+                        // the assignment earlier before we create the RemoteWorkspace was always the first assignment.
+                        // However the
+                        // ExportProviderCache.cs in our unit tests hands out the same MEF container multpile times instead
+                        // of implementing the expected
                         // contract. See https://github.com/dotnet/roslyn/issues/25863 for further details.
                         Contract.ThrowIfFalse(
                             _sharedTestGeneratorReferences == null

@@ -220,7 +220,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// grid lines etc.) has to follow same order. Translation and rotation
         /// form composite matrix mainMatrix. Scale has to be allied separately.
         /// </summary>
-        /// <param name="innerPlotRectangle">Inner Plotting Area position. Chart area cube has to be inside this rectangle</param>
+        /// <param name="innerPlotRectangle">Inner Plotting Area position. Chart area cube has to be inside
+        // this rectangle</param>
         /// <param name="depth">Depth of chart area cube</param>
         /// <param name="angleX">Angle of rotation by X axis.</param>
         /// <param name="angleY">Angle of rotation by Y axis.</param>
@@ -577,7 +578,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// This method initialize and set default values for mainMatrix ( there is no rotation and translation )
+        /// This method initialize and set default values for mainMatrix ( there is no rotation and
+        // translation )
         /// </summary>
         private void Reset()
         {
@@ -613,8 +615,12 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Multiplies this Matrix object by the matrix specified in the
         /// matrix parameter, and in the order specified in the order parameter.
         /// </summary>
-        /// <param name="mulMatrix">The Matrix object by which this Matrix object is to be multiplied.</param>
-        /// <param name="order">The MatrixOrder enumeration that represents the order of the multiplication. If the specified order is MatrixOrder.Prepend, this Matrix object is multiplied by the specified matrix in a prepended order. If the specified order is MatrixOrder.Append, this Matrix object is multiplied by the specified matrix in an appended order.</param>
+        /// <param name="mulMatrix">The Matrix object by which this Matrix object is to be
+        // multiplied.</param>
+        /// <param name="order">The MatrixOrder enumeration that represents the order of the multiplication.
+        // If the specified order is MatrixOrder.Prepend, this Matrix object is multiplied by the specified
+        // matrix in a prepended order. If the specified order is MatrixOrder.Append, this Matrix object is
+        // multiplied by the specified matrix in an appended order.</param>
         /// <param name="setMainMatrix">Set main matrix to be result of multiplication</param>
         /// <returns>Matrix multiplication result.</returns>
         private float[][] Multiply(float[][] mulMatrix, MatrixOrder order, bool setMainMatrix)
@@ -667,7 +673,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Multiplies this Matrix object by the Vector specified in the
         /// vector parameter.
         /// </summary>
-        /// <param name="mulVector">The vector object by which this Matrix object is to be multiplied.</param>
+        /// <param name="mulVector">The vector object by which this Matrix object is to be
+        // multiplied.</param>
         /// <param name="resultVector">Vector which is result of matrix and vector multiplication.</param>
         private void MultiplyVector(float[] mulVector, ref float[] resultVector)
         {
@@ -899,12 +906,18 @@ namespace System.Web.UI.DataVisualization.Charting
         /// source and intensity of lightStyle is change when scene is rotated.
         /// </summary>
         /// <param name="surfaceColor">Color used for polygons without lighting</param>
-        /// <param name="front">Color corrected with intensity of lightStyle for Front side of the 3D Rectangle</param>
-        /// <param name="back">Color corrected with intensity of lightStyle for Back side of the 3D Rectangle</param>
-        /// <param name="left">Color corrected with intensity of lightStyle for Left side of the 3D Rectangle</param>
-        /// <param name="right">Color corrected with intensity of lightStyle for Right side of the 3D Rectangle</param>
-        /// <param name="top">Color corrected with intensity of lightStyle for Top side of the 3D Rectangle</param>
-        /// <param name="bottom">Color corrected with intensity of lightStyle for Bottom side of the 3D Rectangle</param>
+        /// <param name="front">Color corrected with intensity of lightStyle for Front side of the 3D
+        // Rectangle</param>
+        /// <param name="back">Color corrected with intensity of lightStyle for Back side of the 3D
+        // Rectangle</param>
+        /// <param name="left">Color corrected with intensity of lightStyle for Left side of the 3D
+        // Rectangle</param>
+        /// <param name="right">Color corrected with intensity of lightStyle for Right side of the 3D
+        // Rectangle</param>
+        /// <param name="top">Color corrected with intensity of lightStyle for Top side of the 3D
+        // Rectangle</param>
+        /// <param name="bottom">Color corrected with intensity of lightStyle for Bottom side of the 3D
+        // Rectangle</param>
         internal void GetLight(
             Color surfaceColor,
             out Color front,
@@ -1060,7 +1073,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="points">Points of the polygon</param>
         /// <param name="surfaceColor">Color used for polygons without lighting</param>
         /// <param name="visiblePolygon">This flag gets information if  polygon is visible or not.</param>
-        /// <param name="rotation">Y angle ( from -90 to 90 ) Should be used width switchSeriesOrder to get from -180 to 180</param>
+        /// <param name="rotation">Y angle ( from -90 to 90 ) Should be used width switchSeriesOrder to get
+        // from -180 to 180</param>
         /// <param name="surfaceName">Used for lighting of front - back and left - right sides</param>
         /// <param name="switchSeriesOrder">Used to calculate real y angle</param>
         /// <returns>Color corrected with intensity of lightStyle</returns>

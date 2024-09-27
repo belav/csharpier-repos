@@ -27,7 +27,8 @@ public abstract class JsonHubProtocolTestsBase
         { "ValueWithNewLines", "Also\nWorks\r\nFine" },
     };
 
-    // It's cleaner to do this as a prefix and use concatenation rather than string interpolation because JSON is already filled with '{'s.
+    // It's cleaner to do this as a prefix and use concatenation rather than string interpolation
+    // because JSON is already filled with '{'s.
     public static readonly string SerializedHeaders =
         "\"headers\":{\"Foo\":\"Bar\",\"KeyWith\\nNew\\r\\nLines\":\"Still Works\",\"ValueWithNewLines\":\"Also\\nWorks\\r\\nFine\"}";
 
@@ -946,7 +947,8 @@ public abstract class JsonHubProtocolTestsBase
 
     [Theory]
     [MemberData(nameof(MessageSizeDataNames))]
-    // These tests check that the message size doesn't change without us being aware of it and making a conscious decision to increase the size
+    // These tests check that the message size doesn't change without us being aware of it and making a
+    // conscious decision to increase the size
     public void VerifyMessageSize(string testDataName)
     {
         var testData = MessageSizeData[testDataName];

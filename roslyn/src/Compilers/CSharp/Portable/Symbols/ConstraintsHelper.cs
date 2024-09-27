@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
     /// <summary>
     /// Helper methods for generic type parameter constraints. There are two sets of methods: one
-    /// set for resolving constraint "bounds" (that is, determining the effective base type, interface set,
+    /// set for resolving constraint "bounds" (that is, determining the effective base type, interface
+    // set,
     /// etc.), and another set for checking for constraint violations in type and method references.
     ///
     /// Bounds are resolved by calling one of the ResolveBounds overloads. Typically bounds are
@@ -57,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// by the Binder. In those case, it is sufficient to call one of the CheckConstraints overloads
     /// since compound types (such as A&lt;T&gt;.B&lt;U&gt; or A&lt;B&lt;T&gt;&gt;) are checked
     /// incrementally as each part is bound. In other cases however, constraint checking needs to be
-    /// delayed to prevent cycles where checking constraints requires binding the syntax that is currently
+    /// delayed to prevent cycles where checking constraints requires binding the syntax that is
+    // currently
     /// being bound (such as the constraint in class C&lt;T&gt; where T : C&lt;T&gt;). In those cases,
     /// the caller must lazily check constraints, and since the types may be compound types, it is
     /// necessary to call CheckAllConstraints.
@@ -510,7 +512,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             else
             {
                 // Wrap binder from factory in a generic constraints specific binder
-                // Also, suppress type argument binding in constraint types, this helps to avoid cycles while we figure out constraint kinds.
+                // Also, suppress type argument binding in constraint types, this helps to avoid cycles while we
+                // figure out constraint kinds.
                 // to avoid checking constraints when binding type names.
                 Debug.Assert(
                     !withTypeParametersBinder.Flags.Includes(BinderFlags.GenericConstraintsClause)
@@ -521,7 +524,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         | BinderFlags.SuppressTypeArgumentBinding
                 );
 
-                // We will recompute this diagnostics more accurately later, when binding without BinderFlags.SuppressTypeArgumentBinding
+                // We will recompute this diagnostics more accurately later, when binding without
+                // BinderFlags.SuppressTypeArgumentBinding
                 clauses = withTypeParametersBinder.BindTypeParameterConstraintClauses(
                     containingSymbol,
                     typeParameters,
@@ -1063,7 +1067,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         )
         {
             // PERF: avoid instantiating all interfaces here
-            //       Ex: if class implements just IEnumerable<> and IComparable<> it cannot have conflicting implementations
+            //       Ex: if class implements just IEnumerable<> and IComparable<> it cannot have conflicting
+            // implementations
             var array = type.OriginalDefinition.InterfacesNoUseSiteDiagnostics(basesBeingResolved);
 
             switch (array.Length)
@@ -1196,7 +1201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="nullabilityDiagnosticsBuilderOpt">Nullability warnings.</param>
         /// <param name="skipParameters">Parameters to skip.</param>
         /// <param name="useSiteDiagnosticsBuilder"/>
-        /// <param name="ignoreTypeConstraintsDependentOnTypeParametersOpt">If an original form of a type constraint
+        /// <param name="ignoreTypeConstraintsDependentOnTypeParametersOpt">If an original form of a type
+        // constraint
         /// depends on a type parameter from this set, do not verify this type constraint.</param>
         /// <returns>True if the constraints were satisfied, false otherwise.</returns>
         public static bool CheckConstraints(
@@ -1299,7 +1305,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (!typeArgument.Type.IsReferenceType)
                 {
-                    // "The type '{2}' must be a reference type in order to use it as parameter '{1}' in the generic type or method '{0}'"
+                    // "The type '{2}' must be a reference type in order to use it as parameter '{1}' in the generic
+                    // type or method '{0}'"
                     diagnosticsBuilder.Add(
                         new TypeParameterDiagnosticInfo(
                             typeParameter,
@@ -1335,7 +1342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     || !typeArgument.Type.IsNonNullableValueType()
                 )
                 {
-                    // "The type '{2}' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter '{1}' in the generic type or method '{0}'"
+                    // "The type '{2}' must be a non-nullable value type, along with all fields at any level of nesting,
+                    // in order to use it as parameter '{1}' in the generic type or method '{0}'"
                     diagnosticsBuilder.Add(
                         new TypeParameterDiagnosticInfo(
                             typeParameter,
@@ -1353,10 +1361,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else if (managedKind == ManagedKind.UnmanagedWithGenerics)
                 {
-                    // When there is no compilation, we are being invoked through the API IMethodSymbol.ReduceExtensionMethod(...).
-                    // In that case we consider the unmanaged constraint to be satisfied as if we were compiling with the latest
-                    // language version.  The net effect of this is that in some IDE scenarios completion might consider an
-                    // extension method to be applicable, but then when you try to use it the IDE tells you to upgrade your language version.
+                    // When there is no compilation, we are being invoked through the API
+                    // IMethodSymbol.ReduceExtensionMethod(...).
+                    // In that case we consider the unmanaged constraint to be satisfied as if we were compiling with
+                    // the latest
+                    // language version.  The net effect of this is that in some IDE scenarios completion might consider
+                    // an
+                    // extension method to be applicable, but then when you try to use it the IDE tells you to upgrade
+                    // your language version.
                     if (!(args.CurrentCompilation is null))
                     {
                         var csDiagnosticInfo =
@@ -1379,7 +1391,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (typeParameter.HasValueTypeConstraint && !typeArgument.Type.IsNonNullableValueType())
             {
-                // "The type '{2}' must be a non-nullable value type in order to use it as parameter '{1}' in the generic type or method '{0}'"
+                // "The type '{2}' must be a non-nullable value type in order to use it as parameter '{1}' in the
+                // generic type or method '{0}'"
                 diagnosticsBuilder.Add(
                     new TypeParameterDiagnosticInfo(
                         typeParameter,
@@ -1400,7 +1413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // See TypeBind::CheckSingleConstraint.
-        // Any new locals added to this method are likely going to cause EndToEndTests.Constraints to overflow. Break new locals out into
+        // Any new locals added to this method are likely going to cause EndToEndTests.Constraints to
+        // overflow. Break new locals out into
         // another function.
         private static bool CheckConstraints(
             Symbol containingSymbol,
@@ -1530,7 +1544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case ConstructorConstraintError.None:
                         return false;
                     case ConstructorConstraintError.NoPublicParameterlessConstructorOrAbstractType:
-                        // "'{2}' must be a non-abstract type with a public parameterless constructor in order to use it as parameter '{1}' in the generic type or method '{0}'"
+                        // "'{2}' must be a non-abstract type with a public parameterless constructor in order to use it as
+                        // parameter '{1}' in the generic type or method '{0}'"
                         diagnosticsBuilder.Add(
                             new TypeParameterDiagnosticInfo(
                                 typeParameter,
@@ -1546,7 +1561,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
                         return true;
                     case ConstructorConstraintError.HasRequiredMembers:
-                        // '{2}' cannot satisfy the 'new()' constraint on parameter '{1}' in the generic type or or method '{0}' because '{2}' has required members.
+                        // '{2}' cannot satisfy the 'new()' constraint on parameter '{1}' in the generic type or or method
+                        // '{0}' because '{2}' has required members.
                         diagnosticsBuilder.Add(
                             new TypeParameterDiagnosticInfo(
                                 typeParameter,
@@ -2171,7 +2187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Debug.Assert(IsValidEncompassedByArgument(a));
             Debug.Assert(IsValidEncompassedByArgument(b));
 
-            // IncludeNullability should not be used when calculating EffectiveBaseType or EffectiveInterfaceSet.
+            // IncludeNullability should not be used when calculating EffectiveBaseType or
+            // EffectiveInterfaceSet.
             Debug.Assert(!conversions.IncludeNullability);
 
             return conversions.HasIdentityOrImplicitReferenceConversion(a, b, ref useSiteInfo)

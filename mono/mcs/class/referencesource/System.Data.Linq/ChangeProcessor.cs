@@ -137,9 +137,11 @@ namespace System.Data.Linq
             // if we have accumulated any failed updates, throw the exception now
             if (conflicts.Count > 0)
             {
-                // First we need to rollback any value that have already been auto-sync'd, since the values are no longer valid on the server
+                // First we need to rollback any value that have already been auto-sync'd, since the values are no
+                // longer valid on the server
                 changeDirector.RollbackAutoSync();
-                // Also rollback any dependent items that were sync'd, since their parent values may have been rolled back
+                // Also rollback any dependent items that were sync'd, since their parent values may have been
+                // rolled back
                 foreach (TrackedObject syncDependentItem in syncDependentItems)
                 {
                     Debug.Assert(
@@ -194,7 +196,8 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Clears out the foreign key values and parent object references for deleted objects on the child side of a relationship.
+        /// Clears out the foreign key values and parent object references for deleted objects on the child
+        // side of a relationship.
         /// For bi-directional relationships, also performs the following fixup:
         ///   - for 1:N we remove the deleted entity from the opposite EntitySet or collection
         ///   - for 1:1 we null out the back reference
@@ -209,9 +212,12 @@ namespace System.Data.Linq
             {
                 if (assoc.IsForeignKey)
                 {
-                    // If there is a member on the other side referring back to us (i.e. this is a bi-directional relationship),
-                    // we want to do a cache lookup to find the other side, then will remove ourselves from that collection.
-                    // This cache lookup is only possible if the other key is the primary key, since that is the only way items can be found in the cache.
+                    // If there is a member on the other side referring back to us (i.e. this is a bi-directional
+                    // relationship),
+                    // we want to do a cache lookup to find the other side, then will remove ourselves from that
+                    // collection.
+                    // This cache lookup is only possible if the other key is the primary key, since that is the only
+                    // way items can be found in the cache.
                     if (assoc.OtherMember != null && assoc.OtherKeyIsPrimaryKey)
                     {
                         Debug.Assert(
@@ -258,11 +264,13 @@ namespace System.Data.Linq
                             }
                         }
                         // else the item was not found in the cache, so there is no fixup that has to be done
-                        // We are explicitly not calling ClearForeignKeysHelper because it breaks existing shipped behavior and we want to maintain backward compatibility
+                        // We are explicitly not calling ClearForeignKeysHelper because it breaks existing shipped behavior
+                        // and we want to maintain backward compatibility
                     }
                     else
                     {
-                        // This is a unidirectional relationship or we have no way to look up the other side in the cache, so just clear our own side
+                        // This is a unidirectional relationship or we have no way to look up the other side in the cache,
+                        // so just clear our own side
                         ClearForeignKeysHelper(assoc, to.Current);
                     }
                 }
@@ -271,8 +279,10 @@ namespace System.Data.Linq
         }
 
         // Ensure the the member and foreign keys are nulled so that after trackedInstance is deleted,
-        // the object does not appear to be associated with the other side anymore. This prevents the deleted object
-        // from referencing objects still in the cache, but also will prevent the related object from being implicitly loaded
+        // the object does not appear to be associated with the other side anymore. This prevents the
+        // deleted object
+        // from referencing objects still in the cache, but also will prevent the related object from being
+        // implicitly loaded
         private static void ClearForeignKeysHelper(MetaAssociation assoc, object trackedInstance)
         {
             Debug.Assert(
@@ -284,9 +294,12 @@ namespace System.Data.Linq
                 "Expected ThisMember of an association to always be an association."
             );
 
-            // If this member is one of our deferred loaders, and it does not already have a value, explicitly set the deferred source to
-            // null so that when we set the association member itself to null later, it doesn't trigger an implicit load.
-            // This is only necessary if the value has not already been assigned or set, because otherwise we won't implicitly load anyway when the member is accessed.
+            // If this member is one of our deferred loaders, and it does not already have a value, explicitly
+            // set the deferred source to
+            // null so that when we set the association member itself to null later, it doesn't trigger an
+            // implicit load.
+            // This is only necessary if the value has not already been assigned or set, because otherwise we
+            // won't implicitly load anyway when the member is accessed.
             MetaDataMember thisMember = assoc.ThisMember;
 
             if (

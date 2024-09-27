@@ -188,7 +188,8 @@ class A
                     )
             );
 
-            // Assert that the server did not shutdown and that we can resolve the latest inlay hint request we made.
+            // Assert that the server did not shutdown and that we can resolve the latest inlay hint request we
+            // made.
             var lastInlayHint = await testLspServer.ExecuteRequestAsync<
                 LSP.InlayHint,
                 LSP.InlayHint

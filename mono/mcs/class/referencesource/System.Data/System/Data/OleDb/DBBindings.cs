@@ -148,15 +148,15 @@ namespace System.Data.OleDb
             set { _dbbindings[_index].iOrdinal = value; }
         }
 #if DEBUG
-        /*internal int ValueOffset { // obValue
-            get { return _dbbindings[_index].obValue.ToInt32(); }
-        }
-        internal int LengthOffset { // obLength
-            get { return _dbbindings[_index].obLength.ToInt32(); }
-        }
-        internal int StatusOffset { // obStatus
-            get { return _dbbindings[_index].obStatus.ToInt32(); }
-        }*/
+/*internal int ValueOffset { // obValue
+get { return _dbbindings[_index].obValue.ToInt32(); }
+}
+internal int LengthOffset { // obLength
+get { return _dbbindings[_index].obLength.ToInt32(); }
+}
+internal int StatusOffset { // obStatus
+get { return _dbbindings[_index].obStatus.ToInt32(); }
+}*/
 #endif
         internal int Part
         { // dwPart

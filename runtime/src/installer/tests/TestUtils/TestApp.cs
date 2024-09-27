@@ -51,9 +51,11 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// Create a test app from pre-built output of <paramref name="appName"/>.
         /// </summary>
         /// <param name="appName">Name of pre-built app</param>
-        /// <param name="assetRelativePath">Path to asset - relative to the directory containing all pre-built assets</param>
+        /// <param name="assetRelativePath">Path to asset - relative to the directory containing all
+        // pre-built assets</param>
         /// <returns>
-        /// If <paramref name="assetRelativePath"/> is <c>null</c>, <paramref name="appName"/> is used as the relative path.
+        /// If <paramref name="assetRelativePath"/> is <c>null</c>, <paramref name="appName"/> is used as
+        // the relative path.
         /// </returns>
         public static TestApp CreateFromBuiltAssets(string appName, string assetRelativePath = null)
         {
@@ -122,7 +124,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         {
             var builder = NetCoreAppBuilder.ForNETCoreApp(Name, TestContext.TargetRID);
 
-            // Update the .runtimeconfig.json - add included framework and remove any existing NETCoreApp framework
+            // Update the .runtimeconfig.json - add included framework and remove any existing NETCoreApp
+            // framework
             builder.WithRuntimeConfig(c =>
                 c.WithIncludedFramework(
                         Constants.MicrosoftNETCoreApp,

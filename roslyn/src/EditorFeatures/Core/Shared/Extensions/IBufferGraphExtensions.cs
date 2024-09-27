@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         when (bufferGraph.TopBuffer.ContentType.TypeName == "Interactive Content")
                     {
                         // Suppress this to work around DevDiv #144964.
-                        // Note: Other callers might be affected, but this is the narrowest workaround for the observed problems.
+                        // Note: Other callers might be affected, but this is the narrowest workaround for the observed
+                        // problems.
                         // A fix is already being reviewed, so a broader change is not required.
                         return null;
                     }

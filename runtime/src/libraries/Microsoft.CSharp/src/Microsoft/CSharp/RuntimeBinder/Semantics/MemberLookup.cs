@@ -61,10 +61,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         private readonly SymWithType _swtBadArity; // An symbol with the wrong arity.
         private bool _fMulti; // Whether symFirst is of a kind for which we collect multiples (methods and indexers).
 
-        /***************************************************************************************************
-            Another match was found. Increment the count of syms and add the type to our list if it's not
-            already there.
-        ***************************************************************************************************/
+/***************************************************************************************************
+Another match was found. Increment the count of syms and add the type to our list if it's not
+already there.
+***************************************************************************************************/
         private void RecordType(AggregateType type, Symbol sym)
         {
             Debug.Assert(type != null && sym != null);
@@ -88,13 +88,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             }
         }
 
-        /******************************************************************************
-            Search just the given type (not any bases). Returns true iff it finds
-            something (which will have been recorded by RecordType).
+/******************************************************************************
+Search just the given type (not any bases). Returns true iff it finds
+something (which will have been recorded by RecordType).
 
-            pfHideByName is set to true iff something was found that hides all
-            members of base types (eg, a hidebyname method).
-        ******************************************************************************/
+pfHideByName is set to true iff something was found that hides all
+members of base types (eg, a hidebyname method).
+******************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool SearchSingleType(AggregateType typeCur, out bool pfHideByName)
         {
@@ -396,15 +396,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             );
         }
 
-        /******************************************************************************
-            Lookup in a class and its bases (until *ptypeEnd is hit).
+/******************************************************************************
+Lookup in a class and its bases (until *ptypeEnd is hit).
 
-            ptypeEnd [in/out] - *ptypeEnd should be either null or object. If we find
-                something here that would hide members of object, this sets *ptypeEnd
-                to null.
+ptypeEnd [in/out] - *ptypeEnd should be either null or object. If we find
+something here that would hide members of object, this sets *ptypeEnd
+to null.
 
-            Returns true when searching should continue to the interfaces.
-        ******************************************************************************/
+Returns true when searching should continue to the interfaces.
+******************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool LookupInClass(AggregateType typeStart, ref AggregateType ptypeEnd)
         {
@@ -455,9 +455,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return true;
         }
 
-        /******************************************************************************
-            Returns true if searching should continue to object.
-        ******************************************************************************/
+/******************************************************************************
+Returns true if searching should continue to object.
+******************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         private bool LookupInInterfaces(AggregateType typeStart, TypeArray types)
         {
@@ -566,23 +566,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             _swtBadArity = new SymWithType();
         }
 
-        /***************************************************************************************************
-            Lookup must be called before anything else can be called.
+/***************************************************************************************************
+Lookup must be called before anything else can be called.
 
-            typeSrc - Must be an AggregateType or TypeParameterType.
-            obj - the expression through which the member is being accessed. This is used for accessibility
-                of protected members and for constructing a MEMGRP from the results of the lookup.
-                It is legal for obj to be an EK_CLASS, in which case it may be used for accessibility, but
-                will not be used for MEMGRP construction.
-            symWhere - the symbol from with the name is being accessed (for checking accessibility).
-            name - the name to look for.
-            arity - the number of type args specified. Only members that support this arity are found.
-                Note that when arity is zero, all methods are considered since we do type argument
-                inferencing.
+typeSrc - Must be an AggregateType or TypeParameterType.
+obj - the expression through which the member is being accessed. This is used for accessibility
+of protected members and for constructing a MEMGRP from the results of the lookup.
+It is legal for obj to be an EK_CLASS, in which case it may be used for accessibility, but
+will not be used for MEMGRP construction.
+symWhere - the symbol from with the name is being accessed (for checking accessibility).
+name - the name to look for.
+arity - the number of type args specified. Only members that support this arity are found.
+Note that when arity is zero, all methods are considered since we do type argument
+inferencing.
 
-            flags - See MemLookFlags.
-                TypeVarsAllowed only applies to the most derived type (not base types).
-        ***************************************************************************************************/
+flags - See MemLookFlags.
+TypeVarsAllowed only applies to the most derived type (not base types).
+***************************************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public bool Lookup(
             CType typeSrc,
@@ -677,9 +677,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             return _swtFirst;
         }
 
-        /******************************************************************************
-            Reports errors. Only call this if FError() is true.
-        ******************************************************************************/
+/******************************************************************************
+Reports errors. Only call this if FError() is true.
+******************************************************************************/
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public Exception ReportErrors()
         {

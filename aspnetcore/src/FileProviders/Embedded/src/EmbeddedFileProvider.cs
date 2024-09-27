@@ -74,7 +74,8 @@ public class EmbeddedFileProvider : IFileProvider
     /// </summary>
     /// <param name="subpath">The path that identifies the file. </param>
     /// <returns>
-    /// The file information. Caller must check Exists property. A <see cref="NotFoundFileInfo" /> if the file could
+    /// The file information. Caller must check Exists property. A <see cref="NotFoundFileInfo" /> if
+    // the file could
     /// not be found.
     /// </returns>
     public IFileInfo GetFileInfo(string subpath)
@@ -124,12 +125,14 @@ public class EmbeddedFileProvider : IFileProvider
 
     /// <summary>
     /// Enumerate a directory at the given path, if any.
-    /// This file provider uses a flat directory structure. Everything under the base namespace is considered to be one
+    /// This file provider uses a flat directory structure. Everything under the base namespace is
+    // considered to be one
     /// directory.
     /// </summary>
     /// <param name="subpath">The path that identifies the directory</param>
     /// <returns>
-    /// Contents of the directory. Caller must check Exists property. A <see cref="NotFoundDirectoryContents" /> if no
+    /// Contents of the directory. Caller must check Exists property. A <see
+    // cref="NotFoundDirectoryContents" /> if no
     /// resources were found that match <paramref name="subpath" />
     /// </returns>
     public IDirectoryContents GetDirectoryContents(string subpath)
@@ -281,7 +284,8 @@ public class EmbeddedFileProvider : IFileProvider
     }
 
     /// <summary>
-    /// This method is provided for compatibility with Everett which used to convert parts of resource names into
+    /// This method is provided for compatibility with Everett which used to convert parts of resource
+    // names into
     /// valid identifiers
     /// </summary>
     private static string? MakeValidEverettIdentifier(string? name)

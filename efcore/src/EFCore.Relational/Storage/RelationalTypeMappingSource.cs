@@ -10,21 +10,27 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 /// <summary>
 ///     <para>
 ///         The base class for relational type mapping source. Relational providers
-///         should derive from this class and override <see cref="FindMapping(in RelationalTypeMappingInfo)" />
+///         should derive from this class and override <see cref="FindMapping(in
+// RelationalTypeMappingInfo)" />
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -41,7 +47,8 @@ public abstract class RelationalTypeMappingSource
     ///     Initializes a new instance of this class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational-specific dependencies for this service.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational-specific
+    // dependencies for this service.</param>
     protected RelationalTypeMappingSource(
         TypeMappingSourceDependencies dependencies,
         RelationalTypeMappingSourceDependencies relationalDependencies
@@ -56,7 +63,8 @@ public abstract class RelationalTypeMappingSource
     /// </summary>
     /// <remarks>
     ///     The mapping info is populated with as much information about the required type mapping as
-    ///     is available. Use all the information necessary to create the best mapping. Return <see langword="null" />
+    ///     is available. Use all the information necessary to create the best mapping. Return <see
+    // langword="null" />
     ///     if no mapping is available.
     /// </remarks>
     /// <param name="mappingInfo">The mapping info to use to create the mapping.</param>
@@ -249,10 +257,14 @@ public abstract class RelationalTypeMappingSource
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual RelationalTypeMapping? FindCollectionMapping(
@@ -413,7 +425,8 @@ public abstract class RelationalTypeMappingSource
         FindMappingWithConversion(new RelationalTypeMappingInfo(type), null);
 
     /// <summary>
-    ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration into the account.
+    ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration
+    // into the account.
     /// </summary>
     /// <remarks>
     ///     Note: Only call this method if there is no <see cref="IProperty" />,
@@ -610,13 +623,20 @@ public abstract class RelationalTypeMappingSource
     /// </remarks>
     /// <param name="type">The CLR type.</param>
     /// <param name="storeTypeName">The database type name.</param>
-    /// <param name="keyOrIndex">If <see langword="true" />, then a special mapping for a key or index may be returned.</param>
-    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for default.</param>
-    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="rowVersion">Specifies a row-version, or <see langword="null" /> for default.</param>
-    /// <param name="fixedLength">Specifies a fixed length mapping, or <see langword="null" /> for default.</param>
-    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for default.</param>
+    /// <param name="keyOrIndex">If <see langword="true" />, then a special mapping for a key or index
+    // may be returned.</param>
+    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="rowVersion">Specifies a row-version, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="fixedLength">Specifies a fixed length mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for
+    // default.</param>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
     public virtual RelationalTypeMapping? FindMapping(
         Type type,
@@ -675,10 +695,14 @@ public abstract class RelationalTypeMappingSource
     ///     logic.
     /// </remarks>
     /// <param name="storeTypeName">A provider-specific relational type name, including facets.</param>
-    /// <param name="unicode">The Unicode or ANSI setting parsed from the type name, or <see langword="null" /> if none was specified.</param>
-    /// <param name="size">The size parsed from the type name, or <see langword="null" /> if none was specified.</param>
-    /// <param name="precision">The precision parsed from the type name, or <see langword="null" /> if none was specified.</param>
-    /// <param name="scale">The scale parsed from the type name, or <see langword="null" /> if none was specified.</param>
+    /// <param name="unicode">The Unicode or ANSI setting parsed from the type name, or <see
+    // langword="null" /> if none was specified.</param>
+    /// <param name="size">The size parsed from the type name, or <see langword="null" /> if none was
+    // specified.</param>
+    /// <param name="precision">The precision parsed from the type name, or <see langword="null" /> if
+    // none was specified.</param>
+    /// <param name="scale">The scale parsed from the type name, or <see langword="null" /> if none was
+    // specified.</param>
     /// <returns>The provider-specific relational type name, with any facets removed.</returns>
     [return: NotNullIfNotNull("storeTypeName")]
     protected virtual string? ParseStoreTypeName(

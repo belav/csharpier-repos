@@ -182,7 +182,8 @@ yZWUxoxAdjfrBGsx+U6BHM0Myqqe7fY7hjWzj4aBCw==",
         [OuterLoop("RSA 16384 takes considerable time.")]
         public static void ReadWritePublicPkcs1()
         {
-            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is supported
+            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is
+            // supported
             // during test discovery for innerloop, and the check itself is expensive.
             if (!ImportExport.Supports16384)
             {
@@ -269,7 +270,8 @@ m5NTLEHDwUd7idstLzPXuah0WEjgao5oO1BEUR4byjYlJ+F89Cs4BhUCAwEAAQ==",
         [OuterLoop("RSA 16384 takes considerable time.")]
         public static void ReadWriteRsa16384SubjectPublicKeyInfo()
         {
-            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is supported
+            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is
+            // supported
             // during test discovery for innerloop, and the check itself is expensive.
             if (!ImportExport.Supports16384)
             {
@@ -330,7 +332,8 @@ rAigcwt6noH/hX5ZO5X869SV1WvLOvhCt4Ru7LOzqUULk+Y3+gSNHX34/+Jw+VCq
         [OuterLoop("RSA 16384 takes considerable time.")]
         public static void ReadWrite16384Pkcs8()
         {
-            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is supported
+            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is
+            // supported
             // during test discovery for innerloop, and the check itself is expensive.
             if (!ImportExport.Supports16384)
             {
@@ -617,7 +620,8 @@ rBZc";
         [OuterLoop("RSA 16384 takes considerable time.")]
         public static void ReadEncryptedRsa16384()
         {
-            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is supported
+            // Do not move this to the [ConditionalFact], otherwise the platform will check if RSA 16384 is
+            // supported
             // during test discovery for innerloop, and the check itself is expensive.
             if (!ImportExport.Supports16384)
             {
@@ -864,7 +868,8 @@ RdMKfFP3he4C+CFyGGslffbxCaJhKebeuOil5xxlvP8aBPVNDtQfSS1HXHd1/Ikq
         public static void ReadPbes2Rc2EncryptedDiminishedDP_PasswordBytes()
         {
             // PBES2: PBKDF2 + RC2-128
-            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test key.")]
+            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+            // approved. Unit test key.")]
             const string base64 =
                 @"
 MIIBrjBIBgkqhkiG9w0BBQ0wOzAeBgkqhkiG9w0BBQwwEQQIKZEFT76zCFECAggA
@@ -890,7 +895,8 @@ RdMKfFP3he4C+CFyGGslffbxCaJhKebeuOil5xxlvP8aBPVNDtQfSS1HXHd1/Ikq
         [ActiveIssue("https://github.com/dotnet/runtime/issues/62547", TestPlatforms.Android)]
         public static void ReadEncryptedDiminishedDP_EmptyPassword()
         {
-            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test key.")]
+            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+            // approved. Unit test key.")]
             const string base64 =
                 @"
 MIIBgTAbBgkqhkiG9w0BBQMwDgQIJtjMez/9Gg4CAggABIIBYElq9UOOphEPU3b7
@@ -914,7 +920,8 @@ Dmw2pL/LzHORugcg9BxRkur91lenPNcLAvnke76tMGvSGkA82I9NpBDcGRK4cPie
         [Fact]
         public static void ReadEncryptedDiminishedDP_EmptyPasswordBytes()
         {
-            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test key.")]
+            // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+            // approved. Unit test key.")]
             const string base64 =
                 @"
 MIIBgTAbBgkqhkiG9w0BBQMwDgQIJtjMez/9Gg4CAggABIIBYElq9UOOphEPU3b7

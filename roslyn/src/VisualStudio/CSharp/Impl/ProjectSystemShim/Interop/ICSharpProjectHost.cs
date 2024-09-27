@@ -10,7 +10,8 @@ using Microsoft.VisualStudio.Shell.Interop;
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Interop
 {
     /// <summary>
-    /// ICSharpProjectHost is exposed by the language service, and receives notification of project creation or opening.
+    /// ICSharpProjectHost is exposed by the language service, and receives notification of project
+    // creation or opening.
     /// </summary>
     [ComImport]
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
@@ -18,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
     internal interface ICSharpProjectHost
     {
         /// <summary>
-        /// This function is called when a project is opened/created. The language service must site the project object,
+        /// This function is called when a project is opened/created. The language service must site the
+        // project object,
         /// and can keep a pointer to it for its own tracking purposes, etc.
         /// </summary>
         void BindToProject(ICSharpProjectRoot project, IVsHierarchy hierarchy);

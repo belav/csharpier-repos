@@ -7,12 +7,12 @@ using System.Runtime.Serialization;
 
 namespace System.IO
 {
-    /*
-     * Thrown when trying to access a directory that doesn't exist on disk.
-     * From COM Interop, this exception is thrown for 2 HRESULTS:
-     * the Win32 errorcode-as-HRESULT ERROR_PATH_NOT_FOUND (0x80070003)
-     * and STG_E_PATHNOTFOUND (0x80030003).
-     */
+/*
+* Thrown when trying to access a directory that doesn't exist on disk.
+* From COM Interop, this exception is thrown for 2 HRESULTS:
+* the Win32 errorcode-as-HRESULT ERROR_PATH_NOT_FOUND (0x80070003)
+* and STG_E_PATHNOTFOUND (0x80030003).
+*/
     [Serializable]
     [TypeForwardedFrom(
         "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"

@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 
 /// <summary>
-///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+// be used
 ///     directly from your code. This API may change or be removed in future releases.
 /// </summary>
 [AllowAnonymous]
@@ -19,32 +20,37 @@ namespace Microsoft.AspNetCore.Identity.UI.V5.Pages.Account.Internal;
 public abstract class LoginWith2faModel : PageModel
 {
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     [BindProperty]
     public InputModel Input { get; set; } = default!;
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public bool RememberMe { get; set; }
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public string? ReturnUrl { get; set; }
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public class InputModel
     {
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
@@ -58,7 +64,8 @@ public abstract class LoginWith2faModel : PageModel
         public string TwoFactorCode { get; set; } = default!;
 
         /// <summary>
-        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+        ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+        // be used
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Display(Name = "Remember this machine")]
@@ -66,7 +73,8 @@ public abstract class LoginWith2faModel : PageModel
     }
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public virtual Task<IActionResult> OnGetAsync(
@@ -75,7 +83,8 @@ public abstract class LoginWith2faModel : PageModel
     ) => throw new NotImplementedException();
 
     /// <summary>
-    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
+    ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to
+    // be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
     public virtual Task<IActionResult> OnPostAsync(

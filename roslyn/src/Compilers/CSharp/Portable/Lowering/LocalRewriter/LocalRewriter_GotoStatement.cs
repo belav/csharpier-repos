@@ -12,13 +12,17 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public override BoundNode VisitGotoStatement(BoundGotoStatement node)
         {
-            // we are removing the label expressions from the bound tree because this expression is no longer needed
-            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this expression
+            // we are removing the label expressions from the bound tree because this expression is no longer
+            // needed
+            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this
+            // expression
             // would not need to be pushed to the stack.
             BoundExpression? caseExpressionOpt = null;
 
-            // we are removing the label expressions from the bound tree because this expression is no longer needed
-            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this expression
+            // we are removing the label expressions from the bound tree because this expression is no longer
+            // needed
+            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this
+            // expression
             // would not need to be pushed to the stack.
             BoundLabel? labelExpressionOpt = null;
             BoundStatement result = node.Update(node.Label, caseExpressionOpt, labelExpressionOpt);
@@ -32,8 +36,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override BoundNode? VisitLabel(BoundLabel node)
         {
-            // we are removing the label expressions from the bound tree because this expression is no longer needed
-            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this expression
+            // we are removing the label expressions from the bound tree because this expression is no longer
+            // needed
+            // for the emit phase. It is even doing harm to e.g. the stack depth calculation because this
+            // expression
             // would not need to be pushed to the stack.
             return null;
         }

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,12 @@ namespace Mono.Linker
 {
     internal static class DynamicallyAccessedMembersBinder
     {
-        // Returns the members of the type bound by memberTypes. For DynamicallyAccessedMemberTypes.All, this returns all members of the type and its
-        // nested types, including interface implementations, plus the same or any base types or implemented interfaces.
-        // DynamicallyAccessedMemberTypes.PublicNestedTypes and NonPublicNestedTypes do the same for members of the selected nested types.
+        // Returns the members of the type bound by memberTypes. For DynamicallyAccessedMemberTypes.All,
+        // this returns all members of the type and its
+        // nested types, including interface implementations, plus the same or any base types or implemented
+        // interfaces.
+        // DynamicallyAccessedMemberTypes.PublicNestedTypes and NonPublicNestedTypes do the same for members
+        // of the selected nested types.
         public static IEnumerable<IMetadataTokenProvider> GetDynamicallyAccessedMembers(
             this TypeDefinition typeDefinition,
             LinkContext context,
@@ -275,7 +279,8 @@ namespace Mono.Linker
                     if (onBaseType && method.IsPrivate)
                         continue;
 
-                    // Note that special methods like property getter/setter, event adder/remover will still get through and will be marked.
+                    // Note that special methods like property getter/setter, event adder/remover will still get through
+                    // and will be marked.
                     // This is intentional as reflection treats these as methods as well.
 
                     if (filter != null && !filter(method))
@@ -580,7 +585,8 @@ namespace Mono.Linker
             }
         }
 
-        // declaredOnly will cause this to retrieve interfaces recursively required by the type, but doesn't necessarily
+        // declaredOnly will cause this to retrieve interfaces recursively required by the type, but doesn't
+        // necessarily
         // include interfaces required by any base types.
         public static IEnumerable<InterfaceImplementation> GetAllInterfaceImplementations(
             this TypeDefinition thisType,
@@ -616,8 +622,10 @@ namespace Mono.Linker
             }
         }
 
-        // declaredOnly will cause this to retrieve only members of the type, not of its base types. This includes interfaces recursively
-        // required by this type (but not members of these interfaces, or interfaces required only by base types).
+        // declaredOnly will cause this to retrieve only members of the type, not of its base types. This
+        // includes interfaces recursively
+        // required by this type (but not members of these interfaces, or interfaces required only by base
+        // types).
         public static void GetAllOnType(
             this TypeDefinition type,
             LinkContext context,

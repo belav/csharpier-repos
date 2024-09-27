@@ -40,32 +40,32 @@ using System.Security.AccessControl;
 #endif
 
 /*
- * FileStream supports different modes of accessing the disk - async mode
- * and sync mode.  They are two completely different codepaths in the
- * sync & async methods (ie, Read/Write vs. BeginRead/BeginWrite).  File
- * handles in NT can be opened in only sync or overlapped (async) mode,
- * and we have to deal with this pain.  Stream has implementations of
- * the sync methods in terms of the async ones, so we'll
- * call through to our base class to get those methods when necessary.
- *
- * Also buffering is added into FileStream as well. Folded in the
- * code from BufferedStream, so all the comments about it being mostly
- * aggressive (and the possible perf improvement) apply to FileStream as
- * well.  Also added some buffering to the async code paths.
- *
- * Class Invariants:
- * The class has one buffer, shared for reading & writing.  It can only be
- * used for one or the other at any point in time - not both.  The following
- * should be true:
- *   0 <= _readPos <= _readLen < _bufferSize
- *   0 <= _writePos < _bufferSize
- *   _readPos == _readLen && _readPos > 0 implies the read buffer is valid,
- *     but we're at the end of the buffer.
- *   _readPos == _readLen == 0 means the read buffer contains garbage.
- *   Either _writePos can be greater than 0, or _readLen & _readPos can be
- *     greater than zero, but neither can be greater than zero at the same time.
- *
- */
+* FileStream supports different modes of accessing the disk - async mode
+* and sync mode.  They are two completely different codepaths in the
+* sync & async methods (ie, Read/Write vs. BeginRead/BeginWrite).  File
+* handles in NT can be opened in only sync or overlapped (async) mode,
+* and we have to deal with this pain.  Stream has implementations of
+* the sync methods in terms of the async ones, so we'll
+* call through to our base class to get those methods when necessary.
+*
+* Also buffering is added into FileStream as well. Folded in the
+* code from BufferedStream, so all the comments about it being mostly
+* aggressive (and the possible perf improvement) apply to FileStream as
+* well.  Also added some buffering to the async code paths.
+*
+* Class Invariants:
+* The class has one buffer, shared for reading & writing.  It can only be
+* used for one or the other at any point in time - not both.  The following
+* should be true:
+*   0 <= _readPos <= _readLen < _bufferSize
+*   0 <= _writePos < _bufferSize
+*   _readPos == _readLen && _readPos > 0 implies the read buffer is valid,
+*     but we're at the end of the buffer.
+*   _readPos == _readLen == 0 means the read buffer contains garbage.
+*   Either _writePos can be greater than 0, or _readLen & _readPos can be
+*     greater than zero, but neither can be greater than zero at the same time.
+*
+*/
 
 namespace System.IO
 {
@@ -211,7 +211,8 @@ namespace System.IO
             return asyncResult;
         }
 
-        // This creates a synchronous Async Result. We should consider making this a separate class and maybe merge it with
+        // This creates a synchronous Async Result. We should consider making this a separate class and
+        // maybe merge it with
         // System.IO.Stream.SynchronousAsyncResult
         private FileStreamAsyncResult(
             int numBufferedBytes,
@@ -1133,7 +1134,8 @@ namespace System.IO
 
             // Prevent access to your disk drives as raw block devices.
             //
-            // We'll allow if in full trust and not in legacy mode. You can also get device access via \\?\ and \??\ so there isn't
+            // We'll allow if in full trust and not in legacy mode. You can also get device access via \\?\ and
+            // \??\ so there isn't
             // much point in making users jump through these hoops. Blocking is pointless in full trust as well.
             if (
 #if FEATURE_CAS_POLICY
@@ -2322,7 +2324,8 @@ namespace System.IO
                 {
                     if (_readPos > 0)
                     {
-                        //Console.WriteLine("Seek: seeked for 0, adjusting buffer back by: "+_readPos+"  _readLen: "+_readLen);
+                        //Console.WriteLine("Seek: seeked for 0, adjusting buffer back by: "+_readPos+"  _readLen:
+                        // "+_readLen);
                         Buffer.InternalBlockCopy(
                             _buffer,
                             _readPos,
@@ -2341,7 +2344,8 @@ namespace System.IO
                 else if (oldPos - _readPos < pos && pos < oldPos + _readLen - _readPos)
                 {
                     int diff = (int)(pos - oldPos);
-                    //Console.WriteLine("Seek: diff was "+diff+", readpos was "+_readPos+"  adjusting buffer - shrinking by "+ (_readPos + diff));
+                    //Console.WriteLine("Seek: diff was "+diff+", readpos was "+_readPos+"  adjusting buffer - shrinking
+                    // by "+ (_readPos + diff));
                     Buffer.InternalBlockCopy(
                         _buffer,
                         _readPos + diff,
@@ -2919,7 +2923,8 @@ namespace System.IO
                 // synchronously or asynchronously.  We absolutely must not
                 // set asyncResult._numBytes here, since will never have correct
                 // results.
-                //Console.WriteLine("ReadFile returned: "+r+" (0x"+Int32.Format(r, "x")+")  The IO completed synchronously, but the user callback was called on a separate thread");
+                //Console.WriteLine("ReadFile returned: "+r+" (0x"+Int32.Format(r, "x")+")  The IO completed
+                // synchronously, but the user callback was called on a separate thread");
             }
 
             return asyncResult;
@@ -3157,7 +3162,8 @@ namespace System.IO
             {
                 // Make sure we set the length of the file appropriately.
                 long len = Length;
-                //Console.WriteLine("BeginWrite - Calculating end pos.  pos: "+pos+"  len: "+len+"  numBytes: "+numBytes);
+                //Console.WriteLine("BeginWrite - Calculating end pos.  pos: "+pos+"  len: "+len+"  numBytes:
+                // "+numBytes);
 
                 // Make sure we are writing to the position that we think we are
                 if (_exposedHandle)
@@ -3189,7 +3195,8 @@ namespace System.IO
                 SeekCore(numBytes, SeekOrigin.Current);
             }
 
-            //Console.WriteLine("BeginWrite finishing.  pos: "+pos+"  numBytes: "+numBytes+"  _pos: "+_pos+"  Position: "+Position);
+            //Console.WriteLine("BeginWrite finishing.  pos: "+pos+"  numBytes: "+numBytes+"  _pos: "+_pos+"
+            // Position: "+Position);
 
             if (
                 FrameworkEventSource.IsInitialized
@@ -3221,7 +3228,8 @@ namespace System.IO
             // overlapped structures!  This is ByDesign NT behavior.
             if (r == -1 && numBytes != -1)
             {
-                //Console.WriteLine("WriteFile returned 0;  Write will complete asynchronously (if hr==3e5)  hr: 0x{0:x}", hr);
+                //Console.WriteLine("WriteFile returned 0;  Write will complete asynchronously (if hr==3e5)  hr:
+                // 0x{0:x}", hr);
 
                 // For pipes, when they are closed on the other side, they will come here.
                 if (hr == ERROR_NO_DATA)
@@ -3251,7 +3259,8 @@ namespace System.IO
                 // synchronously or asynchronously.  We absolutely must not
                 // set asyncResult._numBytes here, since will never have correct
                 // results.
-                //Console.WriteLine("WriteFile returned: "+r+" (0x"+Int32.Format(r, "x")+")  The IO completed synchronously, but the user callback was called on another thread.");
+                //Console.WriteLine("WriteFile returned: "+r+" (0x"+Int32.Format(r, "x")+")  The IO completed
+                // synchronously, but the user callback was called on another thread.");
             }
 
             return asyncResult;
@@ -3686,7 +3695,8 @@ namespace System.IO
         }
 
         // The task instance returned from ReadAsync and WriteAsync.
-        // Also stores all of the state necessary for those calls to avoid closures and extraneous delegate allocations.
+        // Also stores all of the state necessary for those calls to avoid closures and extraneous delegate
+        // allocations.
         private sealed class FileStreamReadWriteTask<T> : Task<T>
         {
             internal CancellationToken _cancellationToken;

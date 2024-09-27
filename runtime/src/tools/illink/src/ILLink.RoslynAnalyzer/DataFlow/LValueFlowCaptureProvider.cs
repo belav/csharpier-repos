@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 #nullable enable
 
@@ -14,7 +15,9 @@ using System.Diagnostics;
 
 namespace ILLink.RoslynAnalyzer.DataFlow
 {
-    // Adapted from https://github.com/dotnet/roslyn/blob/c8ebc8682889b395fcb84c85bf4ff54577377d26/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/FlowAnalysis/LValueFlowCaptureProvider.cs
+    // Adapted from
+    //
+    // https://github.com/dotnet/roslyn/blob/c8ebc8682889b395fcb84c85bf4ff54577377d26/src/Workspaces/SharedUtilitiesAndExtensions/Compiler/Core/FlowAnalysis/LValueFlowCaptureProvider.cs
     /// <summary>
     /// Helper class to detect <see cref="IFlowCaptureOperation"/>s that are l-value captures.
     /// L-value captures are essentially captures of a symbol's location/address.

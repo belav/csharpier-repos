@@ -32,22 +32,28 @@ namespace Microsoft.CodeAnalysis
         ///    2) Choose suitable AssemblySymbol instance for each AssemblyData object.
         ///
         /// The first element (index==0) of the assemblies array represents the assembly being built.
-        /// One can think about the rest of the items in assemblies array as assembly references given to the compiler to
+        /// One can think about the rest of the items in assemblies array as assembly references given to
+        // the compiler to
         /// build executable for the assembly being built.
         /// </summary>
         /// <param name="explicitAssemblies">
-        /// An array of <see cref="AssemblyData"/> objects describing assemblies, for which this method should
-        /// resolve references and find suitable AssemblySymbols. The first slot contains the assembly being built.
+        /// An array of <see cref="AssemblyData"/> objects describing assemblies, for which this method
+        // should
+        /// resolve references and find suitable AssemblySymbols. The first slot contains the assembly being
+        // built.
         /// </param>
         /// <param name="explicitModules">
-        /// An array of <see cref="PEModule"/> objects describing standalone modules referenced by the compilation.
+        /// An array of <see cref="PEModule"/> objects describing standalone modules referenced by the
+        // compilation.
         /// </param>
         /// <param name="explicitReferences">
         /// An array of references passed to the compilation and resolved from #r directives.
-        /// May contain references that were skipped during resolution (they don't have a corresponding explicit assembly).
+        /// May contain references that were skipped during resolution (they don't have a corresponding
+        // explicit assembly).
         /// </param>
         /// <param name="explicitReferenceMap">
-        /// Maps index to <paramref name="explicitReferences"/> to an index of a resolved assembly or module in <paramref name="explicitAssemblies"/> or modules.
+        /// Maps index to <paramref name="explicitReferences"/> to an index of a resolved assembly or module
+        // in <paramref name="explicitAssemblies"/> or modules.
         /// </param>
         /// <param name="resolverOpt">
         /// Reference resolver used to look up missing assemblies.
@@ -63,17 +69,20 @@ namespace Microsoft.CodeAnalysis
         /// Import options applied to implicitly resolved references.
         /// </param>
         /// <param name="allAssemblies">
-        /// Updated array <paramref name="explicitAssemblies"/> with resolved implicitly referenced assemblies appended.
+        /// Updated array <paramref name="explicitAssemblies"/> with resolved implicitly referenced
+        // assemblies appended.
         /// </param>
         /// <param name="implicitlyResolvedReferences">
         /// Implicitly resolved references.
         /// </param>
         /// <param name="implicitlyResolvedReferenceMap">
-        /// Maps indices of implicitly resolved references to the corresponding indices of resolved assemblies in <paramref name="allAssemblies"/> (explicit + implicit).
+        /// Maps indices of implicitly resolved references to the corresponding indices of resolved
+        // assemblies in <paramref name="allAssemblies"/> (explicit + implicit).
         /// </param>
         /// <param name="implicitReferenceResolutions">
         /// Map of implicit reference resolutions performed in the preceding script compilation.
-        /// Output contains additional implicit resolutions performed during binding of this script compilation references.
+        /// Output contains additional implicit resolutions performed during binding of this script
+        // compilation references.
         /// </param>
         /// <param name="resolutionDiagnostics">
         /// Any diagnostics reported while resolving missing assemblies.
@@ -85,14 +94,17 @@ namespace Microsoft.CodeAnalysis
         /// The definition index of the COR library.
         /// </param>
         /// <return>
-        /// An array of <see cref="BoundInputAssembly"/> structures describing the result. It has the same amount of items as
-        /// the input assemblies array, <see cref="BoundInputAssembly"/> for each input AssemblyData object resides
+        /// An array of <see cref="BoundInputAssembly"/> structures describing the result. It has the same
+        // amount of items as
+        /// the input assemblies array, <see cref="BoundInputAssembly"/> for each input AssemblyData object
+        // resides
         /// at the same position.
         ///
         /// Each <see cref="BoundInputAssembly"/> contains the following data:
         ///
         /// -    Suitable AssemblySymbol instance for the corresponding assembly,
-        ///     null reference if none is available/found. Always null for the first element, which corresponds to the assembly being built.
+        ///     null reference if none is available/found. Always null for the first element, which
+        // corresponds to the assembly being built.
         ///
         /// -    Result of resolving assembly references of the corresponding assembly
         ///     against provided set of assembly definitions. Essentially, this is an array returned by
@@ -281,13 +293,15 @@ namespace Microsoft.CodeAnalysis
 
             Dictionary<MetadataReference, MergedAliases>? lazyAliasMap = null;
 
-            // metadata references and corresponding bindings of their references, used to calculate a fixed point:
+            // metadata references and corresponding bindings of their references, used to calculate a fixed
+            // point:
             var referenceBindingsToProcess = ArrayBuilder<(
                 MetadataReference,
                 ArraySegment<AssemblyReferenceBinding>
             )>.GetInstance();
 
-            // collect all missing identities, resolve the assemblies and bind their references against explicit definitions:
+            // collect all missing identities, resolve the assemblies and bind their references against explicit
+            // definitions:
             GetInitialReferenceBindingsToProcess(
                 explicitModules,
                 explicitReferences,
@@ -338,19 +352,24 @@ namespace Microsoft.CodeAnalysis
                             )
                         )
                         {
-                            // Note the failure, but do not commit it to implicitReferenceResolutions until we are done with resolving all missing references.
+                            // Note the failure, but do not commit it to implicitReferenceResolutions until we are done with
+                            // resolving all missing references.
                             resolutionFailures.Add(binding.ReferenceIdentity);
                             continue;
                         }
 
-                        // One attempt for resolution succeeded. The attempt is cached in implicitReferenceResolutions, so further attempts won't fail and add it back.
-                        // Since the failures tracked in resolutionFailures do not affect binding there is no need to revert any decisions made so far.
+                        // One attempt for resolution succeeded. The attempt is cached in implicitReferenceResolutions, so
+                        // further attempts won't fail and add it back.
+                        // Since the failures tracked in resolutionFailures do not affect binding there is no need to revert
+                        // any decisions made so far.
                         resolutionFailures.Remove(binding.ReferenceIdentity);
 
                         // The resolver may return different version than we asked for, so it may happen that
                         // it returns the same identity for two different input identities (e.g. if a higher version
-                        // of an assembly is available than what the assemblies reference: "A, v1" -> "A, v3" and "A, v2" -> "A, v3").
-                        // If such case occurs merge the properties (aliases) of the resulting references in the same way we do
+                        // of an assembly is available than what the assemblies reference: "A, v1" -> "A, v3" and "A, v2" ->
+                        // "A, v3").
+                        // If such case occurs merge the properties (aliases) of the resulting references in the same way we
+                        // do
                         // during initial explicit references resolution.
 
                         // -1 for assembly being built:
@@ -661,11 +680,15 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Resolve <paramref name="referenceIdentity"/> using a given <paramref name="resolver"/>.
         ///
-        /// We make sure not to query the resolver for the same identity multiple times (across submissions).
-        /// Doing so ensures that we don't create multiple assembly symbols within the same chain of script compilations
-        /// for the same implicitly resolved identity. Failure to do so results in cast errors like "can't convert T to T".
+        /// We make sure not to query the resolver for the same identity multiple times (across
+        // submissions).
+        /// Doing so ensures that we don't create multiple assembly symbols within the same chain of script
+        // compilations
+        /// for the same implicitly resolved identity. Failure to do so results in cast errors like "can't
+        // convert T to T".
         ///
-        /// The method only records successful resolution results by updating <paramref name="implicitReferenceResolutions"/>.
+        /// The method only records successful resolution results by updating <paramref
+        // name="implicitReferenceResolutions"/>.
         /// Failures are only recorded after all resolution attempts have been completed.
         ///
         /// This approach addresses the following scenario. Consider a script:
@@ -673,16 +696,25 @@ namespace Microsoft.CodeAnalysis
         ///   #r "dir1\a.dll"
         ///   #r "dir2\b.dll"
         /// </code>
-        /// where both a.dll and b.dll reference x.dll, which is present only in dir2. Let's assume the resolver first
-        /// attempts to resolve "x" referenced from "dir1\a.dll". The resolver may fail to find the dependency if it only
-        /// looks up the directory containing the referencing assembly (dir1). If we recorded and this failure immediately
-        /// we would not call the resolver to resolve "x" within the context of "dir2\b.dll" (or any other referencing assembly).
+        /// where both a.dll and b.dll reference x.dll, which is present only in dir2. Let's assume the
+        // resolver first
+        /// attempts to resolve "x" referenced from "dir1\a.dll". The resolver may fail to find the
+        // dependency if it only
+        /// looks up the directory containing the referencing assembly (dir1). If we recorded and this
+        // failure immediately
+        /// we would not call the resolver to resolve "x" within the context of "dir2\b.dll" (or any other
+        // referencing assembly).
         ///
-        /// This behavior would ensure consistency and if the types from x.dll do leak thru to the script compilation, but it
-        /// would result in a missing assembly error. By recording the failure after all resolution attempts are complete
-        /// we also achieve a consistent behavior but are able to bind the reference to "x.dll". Besides, this approach
-        /// also avoids dependency on the order in which we evaluate the assembly references in the scenario above.
-        /// In general, the result of the resolution may still depend on the order of #r - if there are different assemblies
+        /// This behavior would ensure consistency and if the types from x.dll do leak thru to the script
+        // compilation, but it
+        /// would result in a missing assembly error. By recording the failure after all resolution attempts
+        // are complete
+        /// we also achieve a consistent behavior but are able to bind the reference to "x.dll". Besides,
+        // this approach
+        /// also avoids dependency on the order in which we evaluate the assembly references in the scenario
+        // above.
+        /// In general, the result of the resolution may still depend on the order of #r - if there are
+        // different assemblies
         /// of the same identity in different directories.
         /// </summary>
         private bool TryResolveMissingReference(
@@ -703,9 +735,11 @@ namespace Microsoft.CodeAnalysis
             resolvedAssemblyMetadata = null;
             bool isNewlyResolvedReference = false;
 
-            // Check if we have previously resolved an identity and reuse the previously resolved reference if so.
+            // Check if we have previously resolved an identity and reuse the previously resolved reference if
+            // so.
             // Use the resolver to find the missing reference.
-            // Note that the resolver may return an assembly of a different identity than requested, e.g. a higher version.
+            // Note that the resolver may return an assembly of a different identity than requested, e.g. a
+            // higher version.
             if (!implicitReferenceResolutions.TryGetValue(referenceIdentity, out resolvedReference))
             {
                 resolvedReference = resolver.ResolveMissingAssembly(
@@ -1147,7 +1181,8 @@ namespace Microsoft.CodeAnalysis
                                 );
                             }
 
-                            // Check that the COR library used by the candidate assembly symbol is the same as the one use by this compilation.
+                            // Check that the COR library used by the candidate assembly symbol is the same as the one use by
+                            // this compilation.
                             if (match)
                             {
                                 TAssemblySymbol? candidateCorLibrary = GetCorLibrary(
@@ -1361,9 +1396,11 @@ namespace Microsoft.CodeAnalysis
             return !assembly.GetInternalsVisibleToPublicKeys(compilationName).IsEmpty();
         }
 
-        // https://github.com/dotnet/roslyn/issues/40751 It should not be necessary to annotate this method to annotate overrides
+        // https://github.com/dotnet/roslyn/issues/40751 It should not be necessary to annotate this method
+        // to annotate overrides
         /// <summary>
-        /// Compute AssemblySymbols referenced by the input AssemblySymbol and fill in <paramref name="referencedAssemblySymbols"/> with the result.
+        /// Compute AssemblySymbols referenced by the input AssemblySymbol and fill in <paramref
+        // name="referencedAssemblySymbols"/> with the result.
         /// The AssemblySymbols must correspond
         /// to the AssemblyNames returned by AssemblyData.AssemblyReferences property. If reference is not
         /// resolved, null reference should be returned in the corresponding item.

@@ -392,7 +392,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                 this.handle.Free();
             }
 
-            // PersistenceProviderDirectory is assigned on opened.  Abort could happen before (eg. after created)
+            // PersistenceProviderDirectory is assigned on opened.  Abort could happen before (eg. after
+            // created)
             if (PersistenceProviderDirectory != null)
             {
                 PersistenceProviderDirectory.Abort();
@@ -484,7 +485,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     ? this.Host.Description.Name
                     : virtualPathExtension.SiteName;
 
-                // The remaining properties will get overritten if the user set them manually.  To control activation, the user should also set ActivationType, even if just to WAS.
+                // The remaining properties will get overritten if the user set them manually.  To control
+                // activation, the user should also set ActivationType, even if just to WAS.
                 this.instanceMetadataChanges[WorkflowServiceNamespace.SiteName] = new InstanceValue(
                     siteName,
                     InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
@@ -596,8 +598,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             // We normally would have a purely synchronous path for our synchronous
             // overload, but PersistenceIOParticipant.OnBeginSave() doesn't have a synchronous counterpart.
-            // Given that, at the very least we'd have to do PersistencePipeline.EndSave(PersistencePipeline.BeginSave).
-            // Therefore we resign ourselves to End(Begin) and take comfort in the unification of logic by not having two codepaths
+            // Given that, at the very least we'd have to do
+            // PersistencePipeline.EndSave(PersistencePipeline.BeginSave).
+            // Therefore we resign ourselves to End(Begin) and take comfort in the unification of logic by not
+            // having two codepaths
             CloseAsyncResult.End(new CloseAsyncResult(this, timeout, null, null));
         }
 
@@ -976,7 +980,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         try
                         {
-                            // Our own wrapper callback will invoke the inner callback even when result is completed synchronously
+                            // Our own wrapper callback will invoke the inner callback even when result is completed
+                            // synchronously
                             IAsyncResult result = currentInstance.BeginReleaseInstance(
                                 false,
                                 this.timeoutHelper.RemainingTime(),
@@ -1099,7 +1104,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     if (thisPtr.PostProcess())
                     {
                         // If PostProcess completed synchronously, then the entire CloseAsyncResult is complete.
-                        // Whether or not we completed syncrhonously depends on if all the ReleaseInstance invocations completed
+                        // Whether or not we completed syncrhonously depends on if all the ReleaseInstance invocations
+                        // completed
                         // synchronously.
                         thisPtr.Complete(thisPtr.allReleaseInstancesCompletedSynchronously);
                     }
@@ -1177,7 +1183,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     completionException = e;
                 }
 
-                // Exceptions thrown from Process and process callback should be handled in those methods respectively.
+                // Exceptions thrown from Process and process callback should be handled in those methods
+                // respectively.
                 // The only exception that can get here should be exception thrown from PostProcess.
                 // PostProcess is guaranteed to be called only once.
                 if (completionException != null)
@@ -1187,13 +1194,15 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        // Need to ensure that any failure in the methods of GetInstanceAsyncResult after a WorkflowServiceInstance has been acquired
+        // Need to ensure that any failure in the methods of GetInstanceAsyncResult after a
+        // WorkflowServiceInstance has been acquired
         // results in one of three outcomes, namely :
         // - the WorkflowServiceInstance is set to null
         // - the WorkflowServiceInstance is aborted
         // - ReleaseReference is called on the WorkflowServiceInstance to ensure that unload happens
         //   (ultimately resulting in the WorkflowServiceInstance being aborted)
-        // This is to prevent leaking WorkflowServiceInstances since nothing else has a handle to the WorkflowServiceInstance in those
+        // This is to prevent leaking WorkflowServiceInstances since nothing else has a handle to the
+        // WorkflowServiceInstance in those
         // scenarios.
 
         class GetInstanceAsyncResult : TransactedAsyncResult
@@ -1348,7 +1357,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool tryAgain = false;
 
                 // We need to enlist for the transaction. This call will wait until
-                // we obtain the transaction lock on the PersistenceContext, too. If there is no current transaction, this call
+                // we obtain the transaction lock on the PersistenceContext, too. If there is no current
+                // transaction, this call
                 // will still wait to get the transaction lock, but we not create an enlistment.
                 using (PrepareTransactionalCall(this.transaction))
                 {
@@ -1630,13 +1640,15 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        // This async result waits for store events and handle them (currently only support HasRunnableWorkflowEvent).
+        // This async result waits for store events and handle them (currently only support
+        // HasRunnableWorkflowEvent).
         // It is intended to always complete async to simplify caller usage.
         // 1) no code to handle sync completion.
         // 2) recursive call will be safe from StackOverflow.
         // For simplicity, we handle (load/run) each event one-by-one.
         // We ---- certain set of exception (see HandleException).  Other will crash the process.
-        // InvalidOperation is also handled due to TryLoadRunnableWorkflowCommand could fail if ---- with other hosts.
+        // InvalidOperation is also handled due to TryLoadRunnableWorkflowCommand could fail if ---- with
+        // other hosts.
         class WaitAndHandleStoreEventsAsyncResult : AsyncResult
         {
             static Action<object> waitAndHandleStoreEvents = new Action<object>(

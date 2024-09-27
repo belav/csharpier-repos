@@ -33,9 +33,9 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLAllocHandle(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHANDLE*/IntPtr InputHandle,
-            /*SQLHANDLE* */out IntPtr OutputHandle
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHANDLE*/IntPtr InputHandle,
+/*SQLHANDLE* */out IntPtr OutputHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
@@ -43,76 +43,76 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLAllocHandle(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHANDLE*/OdbcHandle InputHandle,
-            /*SQLHANDLE* */out IntPtr OutputHandle
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHANDLE*/OdbcHandle InputHandle,
+/*SQLHANDLE* */out IntPtr OutputHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLBindCol(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/UInt16 ColumnNumber,
-            /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
-            /*SQLPOINTER*/HandleRef TargetValue,
-            /*SQLLEN*/IntPtr BufferLength,
-            /*SQLLEN* */IntPtr StrLen_or_Ind
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/UInt16 ColumnNumber,
+/*SQLSMALLINT*/ODBC32.SQL_C TargetType,
+/*SQLPOINTER*/HandleRef TargetValue,
+/*SQLLEN*/IntPtr BufferLength,
+/*SQLLEN* */IntPtr StrLen_or_Ind
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLBindCol(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/UInt16 ColumnNumber,
-            /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
-            /*SQLPOINTER*/IntPtr TargetValue,
-            /*SQLLEN*/IntPtr BufferLength,
-            /*SQLLEN* */IntPtr StrLen_or_Ind
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/UInt16 ColumnNumber,
+/*SQLSMALLINT*/ODBC32.SQL_C TargetType,
+/*SQLPOINTER*/IntPtr TargetValue,
+/*SQLLEN*/IntPtr BufferLength,
+/*SQLLEN* */IntPtr StrLen_or_Ind
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLBindParameter(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/UInt16 ParameterNumber,
-            /*SQLSMALLINT*/Int16 ParamDirection,
-            /*SQLSMALLINT*/ODBC32.SQL_C SQLCType,
-            /*SQLSMALLINT*/Int16 SQLType,
-            /*SQLULEN*/IntPtr cbColDef,
-            /*SQLSMALLINT*/IntPtr ibScale,
-            /*SQLPOINTER*/HandleRef rgbValue,
-            /*SQLLEN*/IntPtr BufferLength,
-            /*SQLLEN* */HandleRef StrLen_or_Ind
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/UInt16 ParameterNumber,
+/*SQLSMALLINT*/Int16 ParamDirection,
+/*SQLSMALLINT*/ODBC32.SQL_C SQLCType,
+/*SQLSMALLINT*/Int16 SQLType,
+/*SQLULEN*/IntPtr cbColDef,
+/*SQLSMALLINT*/IntPtr ibScale,
+/*SQLPOINTER*/HandleRef rgbValue,
+/*SQLLEN*/IntPtr BufferLength,
+/*SQLLEN* */HandleRef StrLen_or_Ind
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLCancel(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLCloseCursor(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLColAttributeW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/Int16 ColumnNumber,
-            /*SQLUSMALLINT*/Int16 FieldIdentifier,
-            /*SQLPOINTER*/CNativeBuffer CharacterAttribute,
-            /*SQLSMALLINT*/Int16 BufferLength,
-            /*SQLSMALLINT* */out Int16 StringLength,
-            /*SQLPOINTER*/out IntPtr NumericAttribute
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/Int16 ColumnNumber,
+/*SQLUSMALLINT*/Int16 FieldIdentifier,
+/*SQLPOINTER*/CNativeBuffer CharacterAttribute,
+/*SQLSMALLINT*/Int16 BufferLength,
+/*SQLSMALLINT* */out Int16 StringLength,
+/*SQLPOINTER*/out IntPtr NumericAttribute
         );
 
         // note: in sql.h this is defined differently for the 64Bit platform.
@@ -135,19 +135,19 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLColumnsW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLCHAR* */string CatalogName,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLCHAR* */string SchemaName,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableName,
-            /*SQLSMALLINT*/Int16 NameLen3,
+/*SQLCHAR* */string TableName,
+/*SQLSMALLINT*/Int16 NameLen3,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string ColumnName,
-            /*SQLSMALLINT*/Int16 NameLen4
+/*SQLCHAR* */string ColumnName,
+/*SQLSMALLINT*/Int16 NameLen4
         );
 
         [DllImport(ExternDll.Odbc32)]
@@ -155,7 +155,7 @@ namespace System.Data.Common
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLDisconnect(
-            /*SQLHDBC*/IntPtr ConnectionHandle
+/*SQLHDBC*/IntPtr ConnectionHandle
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
@@ -163,15 +163,15 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLDriverConnectW(
-            /*SQLHDBC*/OdbcConnectionHandle hdbc,
-            /*SQLHWND*/IntPtr hwnd,
+/*SQLHDBC*/OdbcConnectionHandle hdbc,
+/*SQLHWND*/IntPtr hwnd,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string connectionstring,
-            /*SQLSMALLINT*/Int16 cbConnectionstring,
-            /*SQLCHAR* */IntPtr connectionstringout,
-            /*SQLSMALLINT*/Int16 cbConnectionstringoutMax,
-            /*SQLSMALLINT* */out Int16 cbConnectionstringout,
-            /*SQLUSMALLINT*/Int16 fDriverCompletion
+/*SQLCHAR* */string connectionstring,
+/*SQLSMALLINT*/Int16 cbConnectionstring,
+/*SQLCHAR* */IntPtr connectionstringout,
+/*SQLSMALLINT*/Int16 cbConnectionstringoutMax,
+/*SQLSMALLINT* */out Int16 cbConnectionstringout,
+/*SQLUSMALLINT*/Int16 fDriverCompletion
         );
 
         [DllImport(ExternDll.Odbc32)]
@@ -179,33 +179,33 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLEndTran(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHANDLE*/IntPtr Handle,
-            /*SQLSMALLINT*/Int16 CompletionType
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHANDLE*/IntPtr Handle,
+/*SQLSMALLINT*/Int16 CompletionType
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLExecDirectW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string StatementText,
-            /*SQLINTEGER*/Int32 TextLength
+/*SQLCHAR* */string StatementText,
+/*SQLINTEGER*/Int32 TextLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLExecute(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLFetch(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
@@ -213,243 +213,243 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLFreeHandle(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHSTMT*/IntPtr StatementHandle
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHSTMT*/IntPtr StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLFreeStmt(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/ODBC32.STMT Option
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/ODBC32.STMT Option
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetConnectAttrW(
-            /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/byte[] Value,
-            /*SQLINTEGER*/Int32 BufferLength,
-            /*SQLINTEGER* */out Int32 StringLength
+/*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/byte[] Value,
+/*SQLINTEGER*/Int32 BufferLength,
+/*SQLINTEGER* */out Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetData(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/UInt16 ColumnNumber,
-            /*SQLSMALLINT*/ODBC32.SQL_C TargetType,
-            /*SQLPOINTER*/CNativeBuffer TargetValue,
-            /*SQLLEN*/IntPtr BufferLength, // sql.h differs from MSDN
-            /*SQLLEN* */out IntPtr StrLen_or_Ind
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/UInt16 ColumnNumber,
+/*SQLSMALLINT*/ODBC32.SQL_C TargetType,
+/*SQLPOINTER*/CNativeBuffer TargetValue,
+/*SQLLEN*/IntPtr BufferLength, // sql.h differs from MSDN
+/*SQLLEN* */out IntPtr StrLen_or_Ind
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetDescFieldW(
-            /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
-            /*SQLUSMALLINT*/Int16 RecNumber,
-            /*SQLUSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
-            /*SQLPOINTER*/CNativeBuffer ValuePointer,
-            /*SQLINTEGER*/Int32 BufferLength,
-            /*SQLINTEGER* */out Int32 StringLength
+/*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
+/*SQLUSMALLINT*/Int16 RecNumber,
+/*SQLUSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
+/*SQLPOINTER*/CNativeBuffer ValuePointer,
+/*SQLINTEGER*/Int32 BufferLength,
+/*SQLINTEGER* */out Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetDiagRecW(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHANDLE*/OdbcHandle Handle,
-            /*SQLSMALLINT*/Int16 RecNumber,
-            /*SQLCHAR* */StringBuilder rchState,
-            /*SQLINTEGER* */out Int32 NativeError,
-            /*SQLCHAR* */StringBuilder MessageText,
-            /*SQLSMALLINT*/Int16 BufferLength,
-            /*SQLSMALLINT* */out Int16 TextLength
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHANDLE*/OdbcHandle Handle,
+/*SQLSMALLINT*/Int16 RecNumber,
+/*SQLCHAR* */StringBuilder rchState,
+/*SQLINTEGER* */out Int32 NativeError,
+/*SQLCHAR* */StringBuilder MessageText,
+/*SQLSMALLINT*/Int16 BufferLength,
+/*SQLSMALLINT* */out Int16 TextLength
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetDiagFieldW(
-            /*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
-            /*SQLHANDLE*/OdbcHandle Handle,
-            /*SQLSMALLINT*/Int16 RecNumber,
-            /*SQLSMALLINT*/Int16 DiagIdentifier,
+/*SQLSMALLINT*/ODBC32.SQL_HANDLE HandleType,
+/*SQLHANDLE*/OdbcHandle Handle,
+/*SQLSMALLINT*/Int16 RecNumber,
+/*SQLSMALLINT*/Int16 DiagIdentifier,
             [MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLPOINTER*/StringBuilder rchState,
-            /*SQLSMALLINT*/Int16 BufferLength,
-            /*SQLSMALLINT* */out Int16 StringLength
+/*SQLPOINTER*/StringBuilder rchState,
+/*SQLSMALLINT*/Int16 BufferLength,
+/*SQLSMALLINT* */out Int16 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetFunctions(
-            /*SQLHBDC*/OdbcConnectionHandle hdbc,
-            /*SQLUSMALLINT*/ODBC32.SQL_API fFunction,
-            /*SQLUSMALLINT* */out Int16 pfExists
+/*SQLHBDC*/OdbcConnectionHandle hdbc,
+/*SQLUSMALLINT*/ODBC32.SQL_API fFunction,
+/*SQLUSMALLINT* */out Int16 pfExists
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetInfoW(
-            /*SQLHBDC*/OdbcConnectionHandle hdbc,
-            /*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
-            /*SQLPOINTER*/byte[] rgbInfoValue,
-            /*SQLSMALLINT*/Int16 cbInfoValueMax,
-            /*SQLSMALLINT* */out Int16 pcbInfoValue
+/*SQLHBDC*/OdbcConnectionHandle hdbc,
+/*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
+/*SQLPOINTER*/byte[] rgbInfoValue,
+/*SQLSMALLINT*/Int16 cbInfoValueMax,
+/*SQLSMALLINT* */out Int16 pcbInfoValue
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetInfoW(
-            /*SQLHBDC*/OdbcConnectionHandle hdbc,
-            /*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
-            /*SQLPOINTER*/byte[] rgbInfoValue,
-            /*SQLSMALLINT*/Int16 cbInfoValueMax,
-            /*SQLSMALLINT* */IntPtr pcbInfoValue
+/*SQLHBDC*/OdbcConnectionHandle hdbc,
+/*SQLUSMALLINT*/ODBC32.SQL_INFO fInfoType,
+/*SQLPOINTER*/byte[] rgbInfoValue,
+/*SQLSMALLINT*/Int16 cbInfoValueMax,
+/*SQLSMALLINT* */IntPtr pcbInfoValue
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetStmtAttrW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/out IntPtr Value,
-            /*SQLINTEGER*/Int32 BufferLength,
-            /*SQLINTEGER*/out Int32 StringLength
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/out IntPtr Value,
+/*SQLINTEGER*/Int32 BufferLength,
+/*SQLINTEGER*/out Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLGetTypeInfo(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLSMALLINT*/Int16 fSqlType
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLSMALLINT*/Int16 fSqlType
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLMoreResults(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLNumResultCols(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLSMALLINT* */out Int16 ColumnCount
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLSMALLINT* */out Int16 ColumnCount
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLPrepareW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string StatementText,
-            /*SQLINTEGER*/Int32 TextLength
+/*SQLCHAR* */string StatementText,
+/*SQLINTEGER*/Int32 TextLength
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLPrimaryKeysW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLCHAR* */string CatalogName,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLCHAR* */string SchemaName,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableName,
-            /*SQLSMALLINT*/Int16 NameLen3
+/*SQLCHAR* */string TableName,
+/*SQLSMALLINT*/Int16 NameLen3
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLProcedureColumnsW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string ProcName,
-            /*SQLSMALLINT*/Int16 NameLen3,
+/*SQLSMALLINT*/Int16 NameLen3,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string ColumnName,
-            /*SQLSMALLINT*/Int16 NameLen4
+/*SQLSMALLINT*/Int16 NameLen4
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLProceduresW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)] /*SQLCHAR* */
             string ProcName,
-            /*SQLSMALLINT*/Int16 NameLen3
+/*SQLSMALLINT*/Int16 NameLen3
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLRowCount(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLLEN* */out IntPtr RowCount
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLLEN* */out IntPtr RowCount
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetConnectAttrW(
-            /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/System.Transactions.IDtcTransaction Value,
-            /*SQLINTEGER*/Int32 StringLength
+/*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/System.Transactions.IDtcTransaction Value,
+/*SQLINTEGER*/Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetConnectAttrW(
-            /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/string Value,
-            /*SQLINTEGER*/Int32 StringLength
+/*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/string Value,
+/*SQLINTEGER*/Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetConnectAttrW(
-            /*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/IntPtr Value,
-            /*SQLINTEGER*/Int32 StringLength
+/*SQLHBDC*/OdbcConnectionHandle ConnectionHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/IntPtr Value,
+/*SQLINTEGER*/Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
@@ -457,109 +457,110 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetConnectAttrW( // used only for AutoCommitOn
-            /*SQLHBDC*/IntPtr ConnectionHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/IntPtr Value,
-            /*SQLINTEGER*/Int32 StringLength
+/*SQLHBDC*/IntPtr ConnectionHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/IntPtr Value,
+/*SQLINTEGER*/Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetDescFieldW(
-            /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
-            /*SQLSMALLINT*/Int16 ColumnNumber,
-            /*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
-            /*SQLPOINTER*/HandleRef CharacterAttribute,
-            /*SQLINTEGER*/Int32 BufferLength
+/*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
+/*SQLSMALLINT*/Int16 ColumnNumber,
+/*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
+/*SQLPOINTER*/HandleRef CharacterAttribute,
+/*SQLINTEGER*/Int32 BufferLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetDescFieldW(
-            /*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
-            /*SQLSMALLINT*/Int16 ColumnNumber,
-            /*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
-            /*SQLPOINTER*/IntPtr CharacterAttribute,
-            /*SQLINTEGER*/Int32 BufferLength
+/*SQLHSTMT*/OdbcDescriptorHandle StatementHandle,
+/*SQLSMALLINT*/Int16 ColumnNumber,
+/*SQLSMALLINT*/ODBC32.SQL_DESC FieldIdentifier,
+/*SQLPOINTER*/IntPtr CharacterAttribute,
+/*SQLINTEGER*/Int32 BufferLength
         );
 
         [DllImport(ExternDll.Odbc32)]
-        // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is process-level attribute
+        // user can set SQL_ATTR_CONNECTION_POOLING attribute with envHandle = null, this attribute is
+        // process-level attribute
         [ResourceExposure(ResourceScope.Process)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetEnvAttr(
-            /*SQLHENV*/OdbcEnvironmentHandle EnvironmentHandle,
-            /*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
-            /*SQLPOINTER*/IntPtr Value,
-            /*SQLINTEGER*/ODBC32.SQL_IS StringLength
+/*SQLHENV*/OdbcEnvironmentHandle EnvironmentHandle,
+/*SQLINTEGER*/ODBC32.SQL_ATTR Attribute,
+/*SQLPOINTER*/IntPtr Value,
+/*SQLINTEGER*/ODBC32.SQL_IS StringLength
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSetStmtAttrW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLINTEGER*/Int32 Attribute,
-            /*SQLPOINTER*/IntPtr Value,
-            /*SQLINTEGER*/Int32 StringLength
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLINTEGER*/Int32 Attribute,
+/*SQLPOINTER*/IntPtr Value,
+/*SQLINTEGER*/Int32 StringLength
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLSpecialColumnsW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
-            /*SQLUSMALLINT*/ODBC32.SQL_SPECIALCOLS IdentifierType,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLUSMALLINT*/ODBC32.SQL_SPECIALCOLS IdentifierType,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLCHAR* */string CatalogName,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLCHAR* */string SchemaName,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableName,
-            /*SQLSMALLINT*/Int16 NameLen3,
-            /*SQLUSMALLINT*/ODBC32.SQL_SCOPE Scope,
-            /*SQLUSMALLINT*/ODBC32.SQL_NULLABILITY Nullable
+/*SQLCHAR* */string TableName,
+/*SQLSMALLINT*/Int16 NameLen3,
+/*SQLUSMALLINT*/ODBC32.SQL_SCOPE Scope,
+/*SQLUSMALLINT*/ODBC32.SQL_NULLABILITY Nullable
         );
 
         [DllImport(ExternDll.Odbc32, CharSet = CharSet.Unicode)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLStatisticsW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLCHAR* */string CatalogName,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLCHAR* */string SchemaName,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableName,
-            /*SQLSMALLINT*/Int16 NameLen3,
-            /*SQLUSMALLINT*/Int16 Unique,
-            /*SQLUSMALLINT*/Int16 Reserved
+/*SQLCHAR* */string TableName,
+/*SQLSMALLINT*/Int16 NameLen3,
+/*SQLUSMALLINT*/Int16 Unique,
+/*SQLUSMALLINT*/Int16 Reserved
         );
 
         [DllImport(ExternDll.Odbc32)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern /*SQLRETURN*/
         ODBC32.RetCode SQLTablesW(
-            /*SQLHSTMT*/OdbcStatementHandle StatementHandle,
+/*SQLHSTMT*/OdbcStatementHandle StatementHandle,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string CatalogName,
-            /*SQLSMALLINT*/Int16 NameLen1,
+/*SQLCHAR* */string CatalogName,
+/*SQLSMALLINT*/Int16 NameLen1,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string SchemaName,
-            /*SQLSMALLINT*/Int16 NameLen2,
+/*SQLCHAR* */string SchemaName,
+/*SQLSMALLINT*/Int16 NameLen2,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableName,
-            /*SQLSMALLINT*/Int16 NameLen3,
+/*SQLCHAR* */string TableName,
+/*SQLSMALLINT*/Int16 NameLen3,
             [In, MarshalAs(UnmanagedType.LPWStr)]
-            /*SQLCHAR* */string TableType,
-            /*SQLSMALLINT*/Int16 NameLen4
+/*SQLCHAR* */string TableType,
+/*SQLSMALLINT*/Int16 NameLen4
         );
 #endif
 
@@ -608,7 +609,7 @@ namespace System.Data.Common
             void put_Rowset( /*deleted parameters signature*/
             );
 
-            /*[return:MarshalAs(UnmanagedType.SysInt)]*/IntPtr get_Chapter();
+/*[return:MarshalAs(UnmanagedType.SysInt)]*/IntPtr get_Chapter();
 
             //[[PreserveSig]
             //iint put_Chapter (
@@ -654,7 +655,7 @@ namespace System.Data.Common
             void put_ActiveConnection( /*deleted parameters signature*/
             );
 
-            /*[return:MarshalAs(UnmanagedType.Variant)]*/object get_ActiveConnection();
+/*[return:MarshalAs(UnmanagedType.Variant)]*/object get_ActiveConnection();
 
             [Obsolete("not used", true)]
             void get_BOF( /*deleted parameters signature*/
@@ -869,7 +870,7 @@ namespace System.Data.Common
             void get_Properties( /*deleted parameters signature*/
             );
 
-            /*[return:MarshalAs(UnmanagedType.Variant)]*/object get_ActiveConnection();
+/*[return:MarshalAs(UnmanagedType.Variant)]*/object get_ActiveConnection();
 
             [Obsolete("not used", true)]
             void put_ActiveConnection( /*deleted parameters signature*/
@@ -932,46 +933,46 @@ namespace System.Data.Common
             //[ Obsolete("not used", true)] void Cancel();
         }
 
-        /*
-                typedef ULONGLONG           DBLENGTH;
-        
-                // Offset within a rowset
-                typedef LONGLONG                DBROWOFFSET;
-        
-                // Number of rows
-                typedef LONGLONG                DBROWCOUNT;
-        
-                typedef ULONGLONG           DBCOUNTITEM;
-        
-                // Ordinal (column number, etc.)
-                typedef ULONGLONG           DBORDINAL;
-        
-                typedef LONGLONG                DB_LORDINAL;
-        
-                // Bookmarks
-                typedef ULONGLONG           DBBKMARK;
-                // Offset in the buffer
-        
-                typedef ULONGLONG           DBBYTEOFFSET;
-                // Reference count of each row/accessor  handle
-        
-                typedef ULONG               DBREFCOUNT;
-        
-                // Parameters
-                typedef ULONGLONG           DB_UPARAMS;
-        
-                typedef LONGLONG                DB_LPARAMS;
-        
-                // hash values corresponding to the elements (bookmarks)
-                typedef DWORDLONG           DBHASHVALUE;
-        
-                // For reserve
-                typedef DWORDLONG           DB_DWRESERVE;
-        
-                typedef LONGLONG                DB_LRESERVE;
-        
-                typedef ULONGLONG           DB_URESERVE;
-        */
+/*
+typedef ULONGLONG           DBLENGTH;
+
+// Offset within a rowset
+typedef LONGLONG                DBROWOFFSET;
+
+// Number of rows
+typedef LONGLONG                DBROWCOUNT;
+
+typedef ULONGLONG           DBCOUNTITEM;
+
+// Ordinal (column number, etc.)
+typedef ULONGLONG           DBORDINAL;
+
+typedef LONGLONG                DB_LORDINAL;
+
+// Bookmarks
+typedef ULONGLONG           DBBKMARK;
+// Offset in the buffer
+
+typedef ULONGLONG           DBBYTEOFFSET;
+// Reference count of each row/accessor  handle
+
+typedef ULONG               DBREFCOUNT;
+
+// Parameters
+typedef ULONGLONG           DB_UPARAMS;
+
+typedef LONGLONG                DB_LPARAMS;
+
+// hash values corresponding to the elements (bookmarks)
+typedef DWORDLONG           DBHASHVALUE;
+
+// For reserve
+typedef DWORDLONG           DB_DWRESERVE;
+
+typedef LONGLONG                DB_LRESERVE;
+
+typedef ULONGLONG           DB_URESERVE;
+*/
 
 
 
@@ -987,15 +988,15 @@ namespace System.Data.Common
             void AddRefAccessor( /*deleted parameters signature*/
             );
 
-            /*[local]
-            HRESULT CreateAccessor(
-                [in] DBACCESSORFLAGS dwAccessorFlags,
-                [in] DBCOUNTITEM cBindings,
-                [in, size_is(cBindings)] const DBBINDING rgBindings[],
-                [in] DBLENGTH cbRowSize,
-                [out] HACCESSOR * phAccessor,
-                [out, size_is(cBindings)] DBBINDSTATUS rgStatus[]
-            );*/
+/*[local]
+HRESULT CreateAccessor(
+[in] DBACCESSORFLAGS dwAccessorFlags,
+[in] DBCOUNTITEM cBindings,
+[in, size_is(cBindings)] const DBBINDING rgBindings[],
+[in] DBLENGTH cbRowSize,
+[out] HACCESSOR * phAccessor,
+[out, size_is(cBindings)] DBBINDSTATUS rgStatus[]
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult CreateAccessor(
                 [In] int dwAccessorFlags,
@@ -1012,11 +1013,11 @@ namespace System.Data.Common
             void GetBindings( /*deleted parameters signature*/
             );
 
-            /*[local]
-            HRESULT ReleaseAccessor(
-                [in] HACCESSOR hAccessor,
-                [in, out, unique] DBREFCOUNT * pcRefCount
-            );*/
+/*[local]
+HRESULT ReleaseAccessor(
+[in] HACCESSOR hAccessor,
+[in, out, unique] DBREFCOUNT * pcRefCount
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseAccessor(
                 [In] IntPtr hAccessor,
@@ -1036,11 +1037,11 @@ namespace System.Data.Common
             void AddRefChapter( /*deleted parameters signature*/
             );
 
-            /*[local]
-            HRESULT ReleaseChapter(
-                [in] HCHAPTER hChapter,
-                [out] DBREFCOUNT * pcRefCount
-            );*/
+/*[local]
+HRESULT ReleaseChapter(
+[in] HCHAPTER hChapter,
+[out] DBREFCOUNT * pcRefCount
+);*/
             [PreserveSig, ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             System.Data.OleDb.OleDbHResult ReleaseChapter(
                 [In] IntPtr hChapter,
@@ -1056,12 +1057,12 @@ namespace System.Data.Common
         ]
         internal interface IColumnsInfo
         {
-            /*[local]
-            HRESULT GetColumnInfo(
-                [in, out] DBORDINAL * pcColumns,
-                [out, size_is(,(ULONG)*pcColumns)] DBCOLUMNINFO ** prgInfo,
-                [out] OLECHAR ** ppStringsBuffer
-            );*/
+/*[local]
+HRESULT GetColumnInfo(
+[in, out] DBORDINAL * pcColumns,
+[out, size_is(,(ULONG)*pcColumns)] DBCOLUMNINFO ** prgInfo,
+[out] OLECHAR ** ppStringsBuffer
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetColumnInfo(
                 [Out] out IntPtr pcColumns,
@@ -1081,27 +1082,27 @@ namespace System.Data.Common
         ]
         internal interface IColumnsRowset
         {
-            /*[local]
-            HRESULT GetAvailableColumns(
-                [in, out] DBORDINAL * pcOptColumns,
-                [out, size_is(,(ULONG)*pcOptColumns)] DBID ** prgOptColumns
-            );*/
+/*[local]
+HRESULT GetAvailableColumns(
+[in, out] DBORDINAL * pcOptColumns,
+[out, size_is(,(ULONG)*pcOptColumns)] DBID ** prgOptColumns
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetAvailableColumns(
                 [Out] out IntPtr pcOptColumns,
                 [Out] out IntPtr prgOptColumns
             );
 
-            /*[local]
-            HRESULT GetColumnsRowset(
-                [in] IUnknown * pUnkOuter,
-                [in] DBORDINAL cOptColumns,
-                [in, size_is((ULONG)cOptColumns)] const DBID rgOptColumns[],
-                [in] REFIID riid,
-                [in] ULONG cPropertySets,
-                [in, out, size_is((ULONG)cPropertySets)] DBPROPSET rgPropertySets[],
-                [out, iid_is(riid)] IUnknown ** ppColRowset
-            );*/
+/*[local]
+HRESULT GetColumnsRowset(
+[in] IUnknown * pUnkOuter,
+[in] DBORDINAL cOptColumns,
+[in, size_is((ULONG)cOptColumns)] const DBID rgOptColumns[],
+[in] REFIID riid,
+[in] ULONG cPropertySets,
+[in, out, size_is((ULONG)cPropertySets)] DBPROPSET rgPropertySets[],
+[out, iid_is(riid)] IUnknown ** ppColRowset
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetColumnsRowset(
                 [In] IntPtr pUnkOuter,
@@ -1122,10 +1123,10 @@ namespace System.Data.Common
         ]
         internal interface ICommandPrepare
         {
-            /*[local]
-            HRESULT Prepare(
-                [in] ULONG cExpectedRuns
-            );*/
+/*[local]
+HRESULT Prepare(
+[in] ULONG cExpectedRuns
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult Prepare([In] int cExpectedRuns);
 
@@ -1141,13 +1142,13 @@ namespace System.Data.Common
         ]
         internal interface ICommandProperties
         {
-            /*[local]
-            HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
-            );*/
+/*[local]
+HRESULT GetProperties(
+[in] const ULONG cPropertyIDSets,
+[in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+[in, out] ULONG * pcPropertySets,
+[out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(
                 [In] int cPropertyIDSets,
@@ -1156,11 +1157,11 @@ namespace System.Data.Common
                 [Out] out IntPtr prgPropertySets
             );
 
-            /*[local]
-            HRESULT SetProperties(
-                [in] ULONG cPropertySets,
-                [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[]
-            );*/
+/*[local]
+HRESULT SetProperties(
+[in] ULONG cPropertySets,
+[in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[]
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetProperties(
                 [In] int cPropertySets,
@@ -1176,20 +1177,20 @@ namespace System.Data.Common
         ]
         internal interface ICommandText
         {
-            /*[local]
-            HRESULT Cancel(
-            );*/
+/*[local]
+HRESULT Cancel(
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult Cancel();
 
-            /*[local]
-            HRESULT Execute(
-                [in] IUnknown * pUnkOuter,
-                [in] REFIID riid,
-                [in, out] DBPARAMS * pParams,
-                [out] DBROWCOUNT * pcRowsAffected,
-                [out, iid_is(riid)] IUnknown ** ppRowset
-            );*/
+/*[local]
+HRESULT Execute(
+[in] IUnknown * pUnkOuter,
+[in] REFIID riid,
+[in, out] DBPARAMS * pParams,
+[out] DBROWCOUNT * pcRowsAffected,
+[out, iid_is(riid)] IUnknown ** ppRowset
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult Execute(
                 [In] IntPtr pUnkOuter,
@@ -1207,11 +1208,11 @@ namespace System.Data.Common
             void GetCommandText( /*deleted parameter signature*/
             );
 
-            /*[local]
-            HRESULT SetCommandText(
-                [in] REFGUID rguidDialect,
-                [in, unique] LPCOLESTR pwszCommand
-            );*/
+/*[local]
+HRESULT SetCommandText(
+[in] REFGUID rguidDialect,
+[in, unique] LPCOLESTR pwszCommand
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetCommandText(
                 [In] ref Guid rguidDialect,
@@ -1235,12 +1236,12 @@ namespace System.Data.Common
             void MapParameterNames( /*deleted parameter signature*/
             );
 
-            /*[local]
-            HRESULT SetParameterInfo(
-                [in] DB_UPARAMS cParams,
-                [in, unique, size_is((ULONG)cParams)] const DB_UPARAMS rgParamOrdinals[],
-                [in, unique, size_is((ULONG)cParams)] const DBPARAMBINDINFO rgParamBindInfo[]
-            );*/
+/*[local]
+HRESULT SetParameterInfo(
+[in] DB_UPARAMS cParams,
+[in, unique, size_is((ULONG)cParams)] const DB_UPARAMS rgParamOrdinals[],
+[in, unique, size_is((ULONG)cParams)] const DBPARAMBINDINFO rgParamBindInfo[]
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult SetParameterInfo(
                 [In] IntPtr cParams,
@@ -1266,23 +1267,23 @@ namespace System.Data.Common
         ]
         internal interface IDBInfo
         {
-            /*[local]
-            HRESULT	GetKeywords(
-                [out] LPOLESTR * ppwszKeywords
-            );*/
+/*[local]
+HRESULT	GetKeywords(
+[out] LPOLESTR * ppwszKeywords
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetKeywords(
                 [Out, MarshalAs(UnmanagedType.LPWStr)] out string ppwszKeywords
             );
 
-            /*[local]
-            HRESULT GetLiteralInfo(
-                [in] ULONG cLiterals,
-                [in, size_is(cLiterals)] const DBLITERAL rgLiterals[],
-                [in, out] ULONG * pcLiteralInfo,
-                [out, size_is(,*pcLiteralInfo)] DBLITERALINFO ** prgLiteralInfo,
-                [out] OLECHAR ** ppCharBuffer
-            );*/
+/*[local]
+HRESULT GetLiteralInfo(
+[in] ULONG cLiterals,
+[in, size_is(cLiterals)] const DBLITERAL rgLiterals[],
+[in, out] ULONG * pcLiteralInfo,
+[out, size_is(,*pcLiteralInfo)] DBLITERALINFO ** prgLiteralInfo,
+[out] OLECHAR ** ppCharBuffer
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetLiteralInfo(
                 [In] int cLiterals,
@@ -1301,13 +1302,13 @@ namespace System.Data.Common
         ]
         internal interface IDBProperties
         {
-            /*[local]
-            HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
-            );*/
+/*[local]
+HRESULT GetProperties(
+[in] const ULONG cPropertyIDSets,
+[in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+[in, out] ULONG * pcPropertySets,
+[out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(
                 [In] int cPropertyIDSets,
@@ -1340,17 +1341,17 @@ namespace System.Data.Common
         ]
         internal interface IDBSchemaRowset
         {
-            /*[local]
-            HRESULT GetRowset(
-                [in] IUnknown * pUnkOuter,
-                [in] REFGUID rguidSchema,
-                [in] ULONG cRestrictions,
-                [in, size_is(cRestrictions)] const VARIANT rgRestrictions[],
-                [in] REFIID riid,
-                [in] ULONG cPropertySets,
-                [in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[],
-                [out, iid_is(riid)] IUnknown ** ppRowset
-            );*/
+/*[local]
+HRESULT GetRowset(
+[in] IUnknown * pUnkOuter,
+[in] REFGUID rguidSchema,
+[in] ULONG cRestrictions,
+[in, size_is(cRestrictions)] const VARIANT rgRestrictions[],
+[in] REFIID riid,
+[in] ULONG cPropertySets,
+[in, out, unique, size_is(cPropertySets)] DBPROPSET rgPropertySets[],
+[out, iid_is(riid)] IUnknown ** ppRowset
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetRowset(
                 [In] IntPtr pUnkOuter,
@@ -1363,12 +1364,12 @@ namespace System.Data.Common
                 [Out, MarshalAs(UnmanagedType.Interface)] out IRowset ppRowset
             );
 
-            /*[local]
-            HRESULT GetSchemas(
-                [in, out] ULONG * pcSchemas,
-                [out, size_is(,*pcSchemas)] GUID ** prgSchemas,
-                [out, size_is(,*pcSchemas)] ULONG ** prgRestrictionSupport
-            );*/
+/*[local]
+HRESULT GetSchemas(
+[in, out] ULONG * pcSchemas,
+[out, size_is(,*pcSchemas)] GUID ** prgSchemas,
+[out, size_is(,*pcSchemas)] ULONG ** prgRestrictionSupport
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetSchemas(
                 [Out] out int pcSchemas,
@@ -1485,14 +1486,14 @@ namespace System.Data.Common
         ]
         internal interface IMultipleResults
         {
-            /*[local]
-            HRESULT GetResult(
-                [in] IUnknown * pUnkOuter,
-                [in] DBRESULTFLAG lResultFlag,
-                [in] REFIID riid,
-                [out] DBROWCOUNT * pcRowsAffected,
-                [out, iid_is(riid)] IUnknown ** ppRowset
-            );*/
+/*[local]
+HRESULT GetResult(
+[in] IUnknown * pUnkOuter,
+[in] DBRESULTFLAG lResultFlag,
+[in] REFIID riid,
+[out] DBROWCOUNT * pcRowsAffected,
+[out, iid_is(riid)] IUnknown ** ppRowset
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetResult(
                 [In] IntPtr pUnkOuter,
@@ -1569,11 +1570,11 @@ namespace System.Data.Common
             void AddRefRows( /*deleted parameter signature*/
             );
 
-            /*HRESULT GetData(
-                [in] HROW hRow,
-                [in] HACCESSOR hAccessor,
-                [out] void * pData
-            );*/
+/*HRESULT GetData(
+[in] HROW hRow,
+[in] HACCESSOR hAccessor,
+[out] void * pData
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetData(
                 [In] IntPtr hRow,
@@ -1581,13 +1582,13 @@ namespace System.Data.Common
                 [In] IntPtr pData
             );
 
-            /*HRESULT GetNextRows(
-                [in] HCHAPTER hReserved,
-                [in] DBROWOFFSET lRowsOffset,
-                [in] DBROWCOUNT cRows,
-                [out] DBCOUNTITEM * pcRowsObtained,
-                [out, size_is(,cRows)] HROW ** prghRows
-            );*/
+/*HRESULT GetNextRows(
+[in] HCHAPTER hReserved,
+[in] DBROWOFFSET lRowsOffset,
+[in] DBROWCOUNT cRows,
+[out] DBCOUNTITEM * pcRowsObtained,
+[out, size_is(,cRows)] HROW ** prghRows
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetNextRows(
                 [In] IntPtr hChapter,
@@ -1597,13 +1598,13 @@ namespace System.Data.Common
                 [In] ref IntPtr pprghRows
             );
 
-            /*HRESULT ReleaseRows(
-                [in] DBCOUNTITEM cRows,
-                [in, size_is(cRows)] const HROW rghRows[],
-                [in, size_is(cRows)] DBROWOPTIONS rgRowOptions[],
-                [out, size_is(cRows)] DBREFCOUNT rgRefCounts[],
-                [out, size_is(cRows)] DBROWSTATUS rgRowStatus[]
-            );*/
+/*HRESULT ReleaseRows(
+[in] DBCOUNTITEM cRows,
+[in, size_is(cRows)] const HROW rghRows[],
+[in, size_is(cRows)] DBROWOPTIONS rgRowOptions[],
+[out, size_is(cRows)] DBREFCOUNT rgRefCounts[],
+[out, size_is(cRows)] DBROWSTATUS rgRowStatus[]
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult ReleaseRows(
                 [In] IntPtr cRows,
@@ -1635,13 +1636,13 @@ namespace System.Data.Common
         ]
         internal interface IRowsetInfo
         {
-            /*[local]
-            HRESULT GetProperties(
-                [in] const ULONG cPropertyIDSets,
-                [in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
-                [in, out] ULONG * pcPropertySets,
-                [out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
-            );*/
+/*[local]
+HRESULT GetProperties(
+[in] const ULONG cPropertyIDSets,
+[in, size_is(cPropertyIDSets)] const DBPROPIDSET rgPropertyIDSets[],
+[in, out] ULONG * pcPropertySets,
+[out, size_is(,*pcPropertySets)] DBPROPSET ** prgPropertySets
+);*/
             [PreserveSig]
             System.Data.OleDb.OleDbHResult GetProperties(
                 [In] int cPropertyIDSets,
@@ -1710,7 +1711,8 @@ namespace System.Data.Common
         // we wrap the vtable entry which is just a function pointer as a delegate
         // since code (unlike data) doesn't move around within the process, it is safe to cache the delegate
 
-        // we do not expect native to change its vtable entry at run-time (especially since these are free-threaded objects)
+        // we do not expect native to change its vtable entry at run-time (especially since these are
+        // free-threaded objects)
         // however to be extra safe double check the function pointer is the same as the cached delegate
         // whenever we encounter a new instance of the data
 
@@ -1833,10 +1835,10 @@ namespace System.Data.Common
         [ResourceExposure(ResourceScope.None)]
         internal static extern int lstrlenW(IntPtr ptr);
 
-        /* For debugging purposes...
-        [DllImport(ExternDll.Advapi32)]
-        [return:MarshalAs(UnmanagedType.I4)]
-        static internal extern int GetLengthSid(IntPtr sid1);
-        */
+/* For debugging purposes...
+[DllImport(ExternDll.Advapi32)]
+[return:MarshalAs(UnmanagedType.I4)]
+static internal extern int GetLengthSid(IntPtr sid1);
+*/
     }
 }

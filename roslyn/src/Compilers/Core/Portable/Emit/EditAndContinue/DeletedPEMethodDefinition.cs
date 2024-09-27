@@ -149,10 +149,12 @@ namespace Microsoft.CodeAnalysis.Emit.EditAndContinue
         public Cci.ITypeReference GetType(EmitContext context) =>
             throw ExceptionUtilities.Unreachable();
 
-        // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+        // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+        // and hash them should be used.
         public sealed override bool Equals(object? obj) => throw ExceptionUtilities.Unreachable();
 
-        // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+        // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+        // and hash them should be used.
         public sealed override int GetHashCode() => throw ExceptionUtilities.Unreachable();
     }
 }

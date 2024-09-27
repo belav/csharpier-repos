@@ -61,7 +61,8 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Gets a map from column ordinal to property descriptions for columns that are components of the table's
+        /// Gets a map from column ordinal to property descriptions for columns that are components of the
+        // table's
         /// primary key.
         /// </summary>
         internal int[] KeyOrdinals
@@ -319,8 +320,10 @@ namespace System.Data.Mapping.Update.Internal
                     }
                 }
 
-                // to ensure the exception shape is consistent with constraint violations discovered while processing
-                // commands (a more conventional scenario in which different tables are contributing principal values)
+                // to ensure the exception shape is consistent with constraint violations discovered while
+                // processing
+                // commands (a more conventional scenario in which different tables are contributing principal
+                // values)
                 // wrap a DataConstraintException in an UpdateException
                 throw EntityUtil.Update(
                     Strings.Update_GeneralExecutionException,

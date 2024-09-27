@@ -102,8 +102,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         switch (targetScope)
                         {
                             case TargetScope.Namespace:
-                                // Special case: Only suppress syntax diagnostics in namespace declarations if the namespace is the closest containing symbol.
-                                // In other words, only apply suppression to the immediately containing namespace declaration and not to its children or parents.
+                                // Special case: Only suppress syntax diagnostics in namespace declarations if the namespace is the
+                                // closest containing symbol.
+                                // In other words, only apply suppression to the immediately containing namespace declaration and
+                                // not to its children or parents.
                                 return isImmediatelyContainingSymbol;
 
                             case TargetScope.NamespaceAndDescendants:
@@ -394,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IDictionary<string, SuppressMessageInfo> builder
         )
         {
-            // TODO: How should we deal with multiple SuppressMessage attributes, with different suppression info/states?
+            // TODO: How should we deal with multiple SuppressMessage attributes, with different suppression
+            // info/states?
             // For now, we just pick the last attribute, if not suppressed.
             SuppressMessageInfo currentInfo;
             if (!builder.TryGetValue(info.Id, out currentInfo))

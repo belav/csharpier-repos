@@ -21,10 +21,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlPhoneCallAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlPhoneCallAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -39,13 +39,15 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class HtmlPhoneCallAdapter : HtmlControlAdapter
     {
-        /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter.Control"]/*' />
+        /// <include file='doc\HtmlPhoneCallAdapter.uex'
+        // path='docs/doc[@for="HtmlPhoneCallAdapter.Control"]/*' />
         protected new PhoneCall Control
         {
             get { return (PhoneCall)base.Control; }
         }
 
-        /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter.Render"]/*' />
+        /// <include file='doc\HtmlPhoneCallAdapter.uex'
+        // path='docs/doc[@for="HtmlPhoneCallAdapter.Render"]/*' />
         public override void Render(HtmlMobileTextWriter writer)
         {
             writer.EnterStyle(Style);

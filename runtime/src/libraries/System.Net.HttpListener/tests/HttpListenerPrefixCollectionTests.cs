@@ -327,13 +327,15 @@ namespace System.Net.Tests
                 Assert.Equal(2, listener1.Prefixes.Count);
                 Assert.Equal(2, listener2.Prefixes.Count);
 
-                // Conflicts with existing registration: listener2 has registered to listen to http://127.0.0.1:{freePort1}/...
+                // Conflicts with existing registration: listener2 has registered to listen to
+                // http://127.0.0.1:{freePort1}/...
                 Assert.Throws<HttpListenerException>(() => listener1.Prefixes.Add(prefix1));
                 Assert.Throws<HttpListenerException>(
                     () => listener1.Prefixes.Add($"{prefix1}hola/")
                 );
 
-                // Conflicts with existing registration: listener1 has registered to listen to http://127.0.0.1:{freePort2}/...
+                // Conflicts with existing registration: listener1 has registered to listen to
+                // http://127.0.0.1:{freePort2}/...
                 Assert.Throws<HttpListenerException>(() => listener2.Prefixes.Add(prefix2));
                 Assert.Throws<HttpListenerException>(
                     () => listener2.Prefixes.Add($"{prefix2}hola/")

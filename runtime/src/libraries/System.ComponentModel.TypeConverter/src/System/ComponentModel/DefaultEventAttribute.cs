@@ -12,7 +12,8 @@ namespace System.ComponentModel
     public sealed class DefaultEventAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultEventAttribute'/> class.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.DefaultEventAttribute'/>
+        // class.
         /// </summary>
         public DefaultEventAttribute(string? name)
         {
@@ -25,7 +26,8 @@ namespace System.ComponentModel
         public string? Name { get; }
 
         /// <summary>
-        /// Specifies the default value for the <see cref='System.ComponentModel.DefaultEventAttribute'/>, which is
+        /// Specifies the default value for the <see cref='System.ComponentModel.DefaultEventAttribute'/>,
+        // which is
         /// <see langword='null'/>.
         /// This <see langword='static '/>field is read-only.
         /// </summary>

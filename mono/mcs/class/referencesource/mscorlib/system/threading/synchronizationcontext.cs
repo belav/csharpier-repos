@@ -45,8 +45,10 @@ namespace System.Threading
 
 #if FEATURE_COMINTEROP && FEATURE_APPX
     //
-    // This is implemented in System.Runtime.WindowsRuntime, allowing us to ask that assembly for a WinRT-specific SyncCtx.
-    // I'd like this to be an interface, or at least an abstract class - but neither seems to play nice with FriendAccessAllowed.
+    // This is implemented in System.Runtime.WindowsRuntime, allowing us to ask that assembly for a
+    // WinRT-specific SyncCtx.
+    // I'd like this to be an interface, or at least an abstract class - but neither seems to play nice
+    // with FriendAccessAllowed.
     //
     [FriendAccessAllowed]
     [SecurityCritical]
@@ -100,12 +102,17 @@ namespace System.Threading
         {
             //
             // Prepare the method so that it can be called in a reliable fashion when a wait is needed.
-            // This will obviously only make the Wait reliable if the Wait method is itself reliable. The only thing
-            // preparing the method here does is to ensure there is no failure point before the method execution begins.
+            // This will obviously only make the Wait reliable if the Wait method is itself reliable. The only
+            // thing
+            // preparing the method here does is to ensure there is no failure point before the method execution
+            // begins.
             //
-            // Preparing the method in this way is quite expensive, but only needs to be done once per type, per AppDomain.
-            // So we keep track of a few types we've already prepared in this AD.  It is uncommon to have more than
-            // a few SynchronizationContext implementations, so we only cache the first five we encounter; this lets
+            // Preparing the method in this way is quite expensive, but only needs to be done once per type, per
+            // AppDomain.
+            // So we keep track of a few types we've already prepared in this AD.  It is uncommon to have more
+            // than
+            // a few SynchronizationContext implementations, so we only cache the first five we encounter; this
+            // lets
             // our cache be much faster than a more general cache might be.  This is important, because this
             // is a *very* hot code path for many WPF and Microsoft apps.
             //
@@ -157,7 +164,8 @@ namespace System.Threading
         public virtual void OperationStarted() { }
 
         /// <summary>
-        ///     Optional override for subclasses, for responding to notification that operation has completed.
+        ///     Optional override for subclasses, for responding to notification that operation has
+        // completed.
         /// </summary>
         public virtual void OperationCompleted() { }
 
@@ -214,9 +222,12 @@ namespace System.Threading
         private static SynchronizationContext s_threadStaticContext;
 
         //
-        // NetCF had a bug where SynchronizationContext.SetThreadStaticContext would set the SyncContext for every thread in the process.
-        // This was because they stored the value in a regular static field (NetCF has no support for ThreadStatic fields).  This was fixed in
-        // Mango, but some apps built against pre-Mango WP7 do depend on the broken behavior.  So for those apps we need an AppDomain-wide static
+        // NetCF had a bug where SynchronizationContext.SetThreadStaticContext would set the SyncContext for
+        // every thread in the process.
+        // This was because they stored the value in a regular static field (NetCF has no support for
+        // ThreadStatic fields).  This was fixed in
+        // Mango, but some apps built against pre-Mango WP7 do depend on the broken behavior.  So for those
+        // apps we need an AppDomain-wide static
         // to hold whatever context was last set on any thread.
         //
         private static SynchronizationContext s_appDomainStaticContext;
@@ -231,7 +242,8 @@ namespace System.Threading
         public static void SetThreadStaticContext(SynchronizationContext syncContext)
         {
             //
-            // If this is a pre-Mango Windows Phone app, we need to set the SC for *all* threads to match the old NetCF behavior.
+            // If this is a pre-Mango Windows Phone app, we need to set the SC for *all* threads to match the
+            // old NetCF behavior.
             //
             if (CompatibilitySwitches.IsAppEarlierThanWindowsPhoneMango)
                 s_appDomainStaticContext = syncContext;
@@ -259,7 +271,8 @@ namespace System.Threading
             }
         }
 
-        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)
+        // Get the last SynchronizationContext that was set explicitly (not flowed via
+        // ExecutionContext.Capture/Run)
         internal static SynchronizationContext CurrentNoFlow
         {
             [FriendAccessAllowed]
@@ -298,7 +311,8 @@ namespace System.Threading
             }
         }
 
-        // Get the last SynchronizationContext that was set explicitly (not flowed via ExecutionContext.Capture/Run)
+        // Get the last SynchronizationContext that was set explicitly (not flowed via
+        // ExecutionContext.Capture/Run)
         internal static SynchronizationContext CurrentNoFlow
         {
             [FriendAccessAllowed]
@@ -343,11 +357,14 @@ namespace System.Threading
             //
             // We call into the VM to get the dispatcher.  This is because:
             //
-            //  a) We cannot call the WinRT APIs directly from mscorlib, because we don't have the fancy projections here.
-            //  b) We cannot call into System.Runtime.WindowsRuntime here, because we don't want to load that assembly
+            //  a) We cannot call the WinRT APIs directly from mscorlib, because we don't have the fancy
+            // projections here.
+            //  b) We cannot call into System.Runtime.WindowsRuntime here, because we don't want to load that
+            // assembly
             //     into processes that don't need it (for performance reasons).
             //
-            // So, we check the VM to see if the current thread has a dispatcher; if it does, we pass that along to
+            // So, we check the VM to see if the current thread has a dispatcher; if it does, we pass that along
+            // to
             // System.Runtime.WindowsRuntime to get a corresponding SynchronizationContext.
             //
             object dispatcher = GetWinRTDispatcherForCurrentThread();
@@ -364,8 +381,10 @@ namespace System.Threading
         private static WinRTSynchronizationContextFactoryBase GetWinRTSynchronizationContextFactory()
         {
             //
-            // Since we can't directly reference System.Runtime.WindowsRuntime from mscorlib, we have to get the factory via reflection.
-            // It would be better if we could just implement WinRTSynchronizationContextFactory in mscorlib, but we can't, because
+            // Since we can't directly reference System.Runtime.WindowsRuntime from mscorlib, we have to get the
+            // factory via reflection.
+            // It would be better if we could just implement WinRTSynchronizationContextFactory in mscorlib, but
+            // we can't, because
             // we can do very little with WinRT stuff in mscorlib.
             //
             WinRTSynchronizationContextFactoryBase factory = s_winRTContextFactory;

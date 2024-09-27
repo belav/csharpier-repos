@@ -24,7 +24,8 @@ namespace GenerateRegexCasingTable
 
             string unicodeTxtFilePath = args[0];
 
-            // Flip this boolean to true if you want to test the generated table against invariantCulture.ToLower()/invariantCulture.ToUpper()
+            // Flip this boolean to true if you want to test the generated table against
+            // invariantCulture.ToLower()/invariantCulture.ToUpper()
             bool testCompat = false;
             bool generateTable = true;
 
@@ -45,7 +46,8 @@ namespace GenerateRegexCasingTable
             if (testCompat)
             {
                 var textInfo = CultureInfo.InvariantCulture.TextInfo;
-                // Ensure that all of the calculated equivalences are not introducing new changes to existing Regex behavior.
+                // Ensure that all of the calculated equivalences are not introducing new changes to existing Regex
+                // behavior.
                 foreach (KeyValuePair<char, int> equivalenceMapEntry in equivalenceMap)
                 {
                     foreach (char equivalence in equivalenceValues[equivalenceMapEntry.Value])
@@ -84,12 +86,16 @@ namespace GenerateRegexCasingTable
         }
 
         /// <summary>
-        /// Takes a <paramref name="lowerCasingTable"/>, and generates a character map and values to be used for finding equivalence classes
+        /// Takes a <paramref name="lowerCasingTable"/>, and generates a character map and values to be used
+        // for finding equivalence classes
         /// for each unicode character.
         /// </summary>
-        /// <param name="lowerCasingTable">The lower casing table to use to generate the equivalence classes.</param>
-        /// <param name="upperCasingTable">The upper casing table to use to generate the equivalence classes.</param>
-        /// <returns>A pair containing the map and value dictionaries with the equivalence classes.</returns>
+        /// <param name="lowerCasingTable">The lower casing table to use to generate the equivalence
+        // classes.</param>
+        /// <param name="upperCasingTable">The upper casing table to use to generate the equivalence
+        // classes.</param>
+        /// <returns>A pair containing the map and value dictionaries with the equivalence
+        // classes.</returns>
         public static (
             Dictionary<char, int>,
             Dictionary<int, SortedSet<char>>

@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         Performs database/schema creation, and other related operations.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -23,7 +24,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -44,7 +46,8 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     protected virtual RelationalDatabaseCreatorDependencies Dependencies { get; }
 
     /// <summary>
-    ///     Determines whether the physical database exists. No attempt is made to determine if the database
+    ///     Determines whether the physical database exists. No attempt is made to determine if the
+    // database
     ///     contains the schema for the current model.
     /// </summary>
     /// <returns>
@@ -53,15 +56,18 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     public abstract bool Exists();
 
     /// <summary>
-    ///     Asynchronously determines whether the physical database exists. No attempt is made to determine if
+    ///     Asynchronously determines whether the physical database exists. No attempt is made to
+    // determine if
     ///     the database contains the schema for the current model.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains
     ///     <see langword="true" /> if the database exists; otherwise <see langword="false" />.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual Task<bool> ExistsAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -75,13 +81,16 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     public abstract void Create();
 
     /// <summary>
-    ///     Asynchronously creates the physical database. Does not attempt to populate it with any schema.
+    ///     Asynchronously creates the physical database. Does not attempt to populate it with any
+    // schema.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual Task CreateAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -99,11 +108,13 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// <summary>
     ///     Asynchronously deletes the physical database.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual Task DeleteAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -115,7 +126,8 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
 
     /// <summary>
     ///     Creates all tables for the current model in the database. No attempt is made
-    ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
+    ///     to incrementally update the schema. It is assumed that none of the tables exist in the
+    // database.
     /// </summary>
     public virtual void CreateTables() =>
         Dependencies.MigrationCommandExecutor.ExecuteNonQuery(
@@ -125,13 +137,16 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
 
     /// <summary>
     ///     Asynchronously creates all tables for the current model in the database. No attempt is made
-    ///     to incrementally update the schema. It is assumed that none of the tables exist in the database.
+    ///     to incrementally update the schema. It is assumed that none of the tables exist in the
+    // database.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual Task CreateTablesAsync(CancellationToken cancellationToken = default) =>
         Dependencies.MigrationCommandExecutor.ExecuteNonQueryAsync(
             GetCreateTablesCommands(),
@@ -164,15 +179,18 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     public abstract bool HasTables();
 
     /// <summary>
-    ///     Asynchronously determines whether the database contains any tables. No attempt is made to determine if
+    ///     Asynchronously determines whether the database contains any tables. No attempt is made to
+    // determine if
     ///     tables belong to the current model or not.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
     ///     A task that represents the asynchronous operation. The task result contains
     ///     a value indicating whether any tables are present in the database.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual Task<bool> HasTablesAsync(CancellationToken cancellationToken = default)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -182,16 +200,19 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
 
     /// <summary>
     ///     <para>
-    ///         Ensures that the database for the context does not exist. If it does not exist, no action is taken. If it does
+    ///         Ensures that the database for the context does not exist. If it does not exist, no
+    // action is taken. If it does
     ///         exist then the database is deleted.
     ///     </para>
     ///     <para>
-    ///         Warning: The entire database is deleted and no effort is made to remove just the database objects that are used by
+    ///         Warning: The entire database is deleted and no effort is made to remove just the
+    // database objects that are used by
     ///         the model for this context.
     ///     </para>
     /// </summary>
     /// <returns>
-    ///     <see langword="true" /> if the database is deleted, <see langword="false" /> if it did not exist.
+    ///     <see langword="true" /> if the database is deleted, <see langword="false" /> if it did not
+    // exist.
     /// </returns>
     public virtual bool EnsureDeleted()
     {
@@ -206,20 +227,25 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
 
     /// <summary>
     ///     <para>
-    ///         Asynchronously ensures that the database for the context does not exist. If it does not exist, no action is taken. If it does
+    ///         Asynchronously ensures that the database for the context does not exist. If it does not
+    // exist, no action is taken. If it does
     ///         exist then the database is deleted.
     ///     </para>
     ///     <para>
-    ///         Warning: The entire database is deleted and no effort is made to remove just the database objects that are used by
+    ///         Warning: The entire database is deleted and no effort is made to remove just the
+    // database objects that are used by
     ///         the model for this context.
     ///     </para>
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous save operation. The task result contains <see langword="true" />
+    ///     A task that represents the asynchronous save operation. The task result contains <see
+    // langword="true" />
     ///     if the database is deleted, <see langword="false" /> if it did not exist.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual async Task<bool> EnsureDeletedAsync(
         CancellationToken cancellationToken = default
     )
@@ -235,12 +261,15 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     }
 
     /// <summary>
-    ///     Ensures that the database for the context exists. If it exists, no action is taken. If it does not
-    ///     exist then the database and all its schema are created. If the database exists, then no effort is made
+    ///     Ensures that the database for the context exists. If it exists, no action is taken. If it
+    // does not
+    ///     exist then the database and all its schema are created. If the database exists, then no
+    // effort is made
     ///     to ensure it is compatible with the model for this context.
     /// </summary>
     /// <returns>
-    ///     <see langword="true" /> if the database is created, <see langword="false" /> if it already existed.
+    ///     <see langword="true" /> if the database is created, <see langword="false" /> if it already
+    // existed.
     /// </returns>
     public virtual bool EnsureCreated()
     {
@@ -269,16 +298,21 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     }
 
     /// <summary>
-    ///     Asynchronously ensures that the database for the context exists. If it exists, no action is taken. If it does not
-    ///     exist then the database and all its schema are created. If the database exists, then no effort is made
+    ///     Asynchronously ensures that the database for the context exists. If it exists, no action is
+    // taken. If it does not
+    ///     exist then the database and all its schema are created. If the database exists, then no
+    // effort is made
     ///     to ensure it is compatible with the model for this context.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>
-    ///     A task that represents the asynchronous save operation. The task result contains <see langword="true" />
+    ///     A task that represents the asynchronous save operation. The task result contains <see
+    // langword="true" />
     ///     if the database is created, <see langword="false" /> if it already existed.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual async Task<bool> EnsureCreatedAsync(
         CancellationToken cancellationToken = default
     )
@@ -337,10 +371,12 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Any exceptions thrown when attempting to connect are caught and not propagated to the application.
+    ///         Any exceptions thrown when attempting to connect are caught and not propagated to the
+    // application.
     ///     </para>
     ///     <para>
-    ///         The configured connection string is used to create the connection in the normal way, so all
+    ///         The configured connection string is used to create the connection in the normal way, so
+    // all
     ///         configured options such as timeouts are honored.
     ///     </para>
     ///     <para>
@@ -348,7 +384,8 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///         up-to-date with regard to schema creation, etc.
     ///     </para>
     /// </remarks>
-    /// <returns><see langword="true" /> if the database is available; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if the database is available; <see langword="false" />
+    // otherwise.</returns>
     public virtual bool CanConnect()
     {
         try
@@ -366,10 +403,12 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Any exceptions thrown when attempting to connect are caught and not propagated to the application.
+    ///         Any exceptions thrown when attempting to connect are caught and not propagated to the
+    // application.
     ///     </para>
     ///     <para>
-    ///         The configured connection string is used to create the connection in the normal way, so all
+    ///         The configured connection string is used to create the connection in the normal way, so
+    // all
     ///         configured options such as timeouts are honored.
     ///     </para>
     ///     <para>
@@ -377,9 +416,12 @@ public abstract class RelationalDatabaseCreator : IRelationalDatabaseCreator
     ///         up-to-date with regard to schema creation, etc.
     ///     </para>
     /// </remarks>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
-    /// <returns><see langword="true" /> if the database is available; <see langword="false" /> otherwise.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
+    /// <returns><see langword="true" /> if the database is available; <see langword="false" />
+    // otherwise.</returns>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public virtual async Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
     {
         try

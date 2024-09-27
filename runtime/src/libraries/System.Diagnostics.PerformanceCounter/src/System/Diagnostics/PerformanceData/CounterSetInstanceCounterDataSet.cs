@@ -96,7 +96,8 @@ namespace System.Diagnostics.PerformanceData
     }
 
     /// <summary>
-    /// CounterSetInstanceCounterDataSet is part of CounterSetInstance class, and is used to store raw counter data
+    /// CounterSetInstanceCounterDataSet is part of CounterSetInstance class, and is used to store raw
+    // counter data
     /// for all counters added in CounterSet.
     /// </summary>
     public sealed class CounterSetInstanceCounterDataSet : IDisposable

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Connections.Features;
 public interface IConnectionLifetimeNotificationFeature
 {
     /// <summary>
-    /// Gets or set an <see cref="CancellationToken"/> that will be triggered when closing the connection has been requested.
+    /// Gets or set an <see cref="CancellationToken"/> that will be triggered when closing the
+    // connection has been requested.
     /// </summary>
     CancellationToken ConnectionClosedRequested { get; set; }
 

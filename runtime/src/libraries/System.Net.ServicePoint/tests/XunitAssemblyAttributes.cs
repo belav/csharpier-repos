@@ -3,7 +3,8 @@
 
 using Xunit;
 
-// Most tests read or write global state. By running all tests serially, as long as those tests reset the state,
+// Most tests read or write global state. By running all tests serially, as long as those tests
+// reset the state,
 // we can avoid forcing the tests to run in an isolated process.
 [assembly: CollectionBehavior(
     CollectionBehavior.CollectionPerAssembly,

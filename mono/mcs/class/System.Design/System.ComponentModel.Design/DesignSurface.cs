@@ -42,11 +42,14 @@ namespace System.ComponentModel.Design
 
         internal class DefaultDesignerLoader : DesignerLoader
         {
-            //  When DesignSurface.BeginLoad is invoked, the designer loader loads the design document, displays the designer
+            //  When DesignSurface.BeginLoad is invoked, the designer loader loads the design document, displays
+            // the designer
             //  surface using the IDesignerHost interface, and calls IDesignerLoaderHost.EndLoad
-            //  when done. The IDesignerLoaderHost implementation is usually the same class that implements IDesignerHost.
+            //  when done. The IDesignerLoaderHost implementation is usually the same class that implements
+            // IDesignerHost.
 
-            // The designer loader informs the designer host that it needs to invoke a load or reload so that the designer
+            // The designer loader informs the designer host that it needs to invoke a load or reload so that
+            // the designer
             // host can perform additional tasks at these times.
 
             private Type _componentType;

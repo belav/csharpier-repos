@@ -46,11 +46,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// The current baseline for given project id.
         /// The baseline is updated when changes are committed at the end of edit session.
         /// The backing module readers of initial baselines need to be kept alive -- store them in
-        /// <see cref="_initialBaselineModuleReaders"/> and dispose them at the end of the debugging session.
+        /// <see cref="_initialBaselineModuleReaders"/> and dispose them at the end of the debugging
+        // session.
         /// </summary>
         /// <remarks>
-        /// The baseline of each updated project is linked to its initial baseline that reads from the on-disk metadata and PDB.
-        /// Therefore once an initial baseline is created it needs to be kept alive till the end of the debugging session,
+        /// The baseline of each updated project is linked to its initial baseline that reads from the
+        // on-disk metadata and PDB.
+        /// Therefore once an initial baseline is created it needs to be kept alive till the end of the
+        // debugging session,
         /// even when it's replaced in <see cref="_projectBaselines"/> by a newer baseline.
         /// </remarks>
         private readonly Dictionary<ProjectId, ProjectBaseline> _projectBaselines = new();
@@ -78,8 +81,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         private int _updateOrdinal;
 
         /// <summary>
-        /// The solution captured when the debugging session entered run mode (application debugging started),
-        /// or the solution which the last changes committed to the debuggee at the end of edit session were calculated from.
+        /// The solution captured when the debugging session entered run mode (application debugging
+        // started),
+        /// or the solution which the last changes committed to the debuggee at the end of edit session were
+        // calculated from.
         /// The solution reflecting the current state of the modules loaded in the debugee.
         /// </summary>
         internal readonly CommittedSolution LastCommittedSolution;
@@ -269,8 +274,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// Reads the MVID of a compiled project.
         /// </summary>
         /// <returns>
-        /// An MVID and an error message to report, in case an IO exception occurred while reading the binary.
-        /// The MVID is <see cref="Guid.Empty"/> if either the project is not built, or the MVID can't be read from the module binary.
+        /// An MVID and an error message to report, in case an IO exception occurred while reading the
+        // binary.
+        /// The MVID is <see cref="Guid.Empty"/> if either the project is not built, or the MVID can't be
+        // read from the module binary.
         /// </returns>
         internal async Task<(Guid Mvid, Diagnostic? Error)> GetProjectModuleIdAsync(
             Project project,
@@ -324,7 +331,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return id;
                 }
 
-                // Do not cache failures. The error might be intermittent and might be corrected next time we attempt to read the MVID.
+                // Do not cache failures. The error might be intermittent and might be corrected next time we
+                // attempt to read the MVID.
                 if (newId.Mvid != Guid.Empty)
                 {
                     _moduleIds[newId.Mvid] = project.Id;
@@ -346,8 +354,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// <summary>
         /// Get <see cref="EmitBaseline"/> for given project.
         /// </summary>
-        /// <param name="baselineProject">Project used to create the initial baseline, if the baseline does not exist yet.</param>
-        /// <param name="baselineCompilation">Compilation used to create the initial baseline, if the baseline does not exist yet.</param>
+        /// <param name="baselineProject">Project used to create the initial baseline, if the baseline does
+        // not exist yet.</param>
+        /// <param name="baselineCompilation">Compilation used to create the initial baseline, if the
+        // baseline does not exist yet.</param>
         /// <returns>True unless the project outputs can't be read.</returns>
         internal bool TryGetOrCreateEmitBaseline(
             Project baselineProject,
@@ -416,10 +426,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             [NotNullWhen(true)] out MetadataReaderProvider? metadataReaderProvider
         )
         {
-            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the delta to minimize
-            // the time when they are being locked. Since we need to use the baseline that is produced by delta emit for the subsequent
-            // delta emit we need to keep the module metadata and symbol info backing the symbols of the baseline alive in memory.
-            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the baseline again
+            // Read the metadata and symbols from the disk. Close the files as soon as we are done emitting the
+            // delta to minimize
+            // the time when they are being locked. Since we need to use the baseline that is produced by delta
+            // emit for the subsequent
+            // delta emit we need to keep the module metadata and symbol info backing the symbols of the
+            // baseline alive in memory.
+            // Alternatively, we could drop the data once we are done with emitting the delta and re-emit the
+            // baseline again
             // when we need it next time and the module is loaded.
 
             diagnostics = default;
@@ -527,15 +541,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
-                // Document does not compile to the assembly (e.g. cshtml files, .g.cs files generated for completion only)
+                // Document does not compile to the assembly (e.g. cshtml files, .g.cs files generated for
+                // completion only)
                 if (!document.DocumentState.SupportsEditAndContinue())
                 {
                     return ImmutableArray<Diagnostic>.Empty;
                 }
 
                 // Do not analyze documents (and report diagnostics) of projects that have not been built.
-                // Allow user to make any changes in these documents, they won't be applied within the current debugging session.
-                // Do not report the file read error - it might be an intermittent issue. The error will be reported when the
+                // Allow user to make any changes in these documents, they won't be applied within the current
+                // debugging session.
+                // Do not report the file read error - it might be an intermittent issue. The error will be reported
+                // when the
                 // change is attempted to be applied.
                 var (mvid, _) = await GetProjectModuleIdAsync(project, cancellationToken)
                     .ConfigureAwait(false);
@@ -569,8 +586,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                     .ConfigureAwait(false);
                 if (analysis.HasChanges)
                 {
-                    // Once we detected a change in a document let the debugger know that the corresponding loaded module
-                    // is about to be updated, so that it can start initializing it for EnC update, reducing the amount of time applying
+                    // Once we detected a change in a document let the debugger know that the corresponding loaded
+                    // module
+                    // is about to be updated, so that it can start initializing it for EnC update, reducing the amount
+                    // of time applying
                     // the change blocks the UI when the user "continues".
                     if (AddModulePreparedForUpdate(mvid))
                     {
@@ -814,7 +833,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             .ConfigureAwait(false);
                         if (oldDocument == null)
                         {
-                            // Document is out-of-sync, can't reason about its content with respect to the binaries loaded in the debuggee.
+                            // Document is out-of-sync, can't reason about its content with respect to the binaries loaded in
+                            // the debuggee.
                             continue;
                         }
 
@@ -833,12 +853,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             )
                             .ConfigureAwait(false);
 
-                        // Document content did not change or unable to determine active statement spans in a document with syntax errors:
+                        // Document content did not change or unable to determine active statement spans in a document with
+                        // syntax errors:
                         if (!analysis.ActiveStatements.IsDefault)
                         {
                             for (var i = 0; i < oldDocumentActiveStatements.Length; i++)
                             {
-                                // Note: It is possible that one active statement appears in multiple documents if the documents represent a linked file.
+                                // Note: It is possible that one active statement appears in multiple documents if the documents
+                                // represent a linked file.
                                 // Example (old and new contents):
                                 //   #if Condition       #if Condition
                                 //     #line 1 a.txt       #line 1 a.txt
@@ -848,7 +870,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                 //     [|F(2);|]           [|F(2);|]
                                 //   #endif              #endif
                                 //
-                                // In the new solution the AS spans are different depending on which document view of the same file we are looking at.
+                                // In the new solution the AS spans are different depending on which document view of the same file
+                                // we are looking at.
                                 // Different views correspond to different projects.
                                 activeStatementsInChangedDocuments.MultiAdd(
                                     oldDocumentActiveStatements[i].Statement,
@@ -873,7 +896,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     if (documentIndicesByMappedPath.TryGetValue(mappedPath, out var indices))
                     {
-                        // translate active statements from base solution to the new solution, if the documents they are contained in changed:
+                        // translate active statements from base solution to the new solution, if the documents they are
+                        // contained in changed:
                         foreach (var (projectId, index) in indices)
                         {
                             spans[index] = documentBaseActiveStatements.SelectAsArray(
@@ -989,7 +1013,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 // Start with the current locations of the tracking spans.
                 adjustedMappedSpans.AddRange(newDocumentActiveStatementSpans);
 
-                // Update tracking spans to the latest known locations of the active statements contained in changed documents based on their analysis.
+                // Update tracking spans to the latest known locations of the active statements contained in changed
+                // documents based on their analysis.
                 await foreach (
                     var unmappedDocumentId in EditSession
                         .GetChangedDocumentsAsync(oldProject, newProject, cancellationToken)
@@ -1027,7 +1052,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         )
                         .ConfigureAwait(false);
 
-                    // Document content did not change or unable to determine active statement spans in a document with syntax errors:
+                    // Document content did not change or unable to determine active statement spans in a document with
+                    // syntax errors:
                     if (!analysis.ActiveStatements.IsDefault)
                     {
                         foreach (var activeStatement in analysis.ActiveStatements)

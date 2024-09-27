@@ -191,8 +191,10 @@ namespace System.DirectoryServices.Protocols.Tests
         )
         {
             var connection = new LdapConnection(identifier, credential, AuthType.Anonymous);
-            // When calling Bind we make sure that the exception thrown is not that there was a NullReferenceException
-            // trying to retrieve a null password's length, but instead an LdapException given the server cannot be reached.
+            // When calling Bind we make sure that the exception thrown is not that there was a
+            // NullReferenceException
+            // trying to retrieve a null password's length, but instead an LdapException given the server cannot
+            // be reached.
             Assert.Throws<LdapException>(() => connection.Bind());
         }
 

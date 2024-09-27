@@ -48,7 +48,8 @@
         public MethodExpression()
         {
             // 1. If a TypeName is specified find the method on that type.
-            // 2. Otherwise, if the DataSource is an IDynamicDataSource, then use context type and search for the method.
+            // 2. Otherwise, if the DataSource is an IDynamicDataSource, then use context type and search for
+            // the method.
             // 3. Otherwise look for the method on the current TemplateControl (Page/UserControl) etc.
             typeGetters = new Func<Type>[]
             {

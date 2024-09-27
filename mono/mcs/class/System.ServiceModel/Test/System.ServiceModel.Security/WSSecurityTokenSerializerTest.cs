@@ -534,29 +534,33 @@ namespace MonoTests.System.ServiceModel.Security
             }
         }
 
-        /* FIXME: something should output key identifier clause xml like this ...
-                [Test]
-                public void WriteInternalWrappedKeyIdentifierClause ()
-                {
-                    StringWriter sw = new StringWriter ();
-                    byte [] bytes = new byte [32];
-                    EncryptedKeyIdentifierClause eic =
-                        new EncryptedKeyIdentifierClause (bytes, SecurityAlgorithms.Sha1Digest);
-                    SecurityKeyIdentifier ski = new SecurityKeyIdentifier (eic);
-                    WrappedKeySecurityToken token = new WrappedKeySecurityToken ("urn:foo", bytes, SecurityAlgorithms.RsaOaepKeyWrap, new X509SecurityToken (cert), ski);
-        
-                    MySecurityTokenParameters p = new MySecurityTokenParameters ();
-                    SecurityKeyIdentifierClause ic =
-                        p.CallCreateKeyIdentifierClause (token, SecurityTokenReferenceStyle.External);
-        
-                    using (XmlWriter w = XmlWriter.Create (sw, GetWriterSettings ())) {
-                        WSSecurityTokenSerializer.DefaultInstance.WriteKeyIdentifierClause (w, ic);
-                    }
-                    string expected = String.Format ("<o:SecurityTokenReference xmlns:o=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"><o:KeyIdentifier ValueType=\"{0}\" Value=\"{1}\" /></o:SecurityTokenReference>",
-                        "http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#EncryptedKeySHA1", Convert.ToBase64String (bytes));
-                    Assert.AreEqual (expected, sw.ToString (), "#1");
-                }
-        */
+/* FIXME: something should output key identifier clause xml like this ...
+[Test]
+public void WriteInternalWrappedKeyIdentifierClause ()
+{
+StringWriter sw = new StringWriter ();
+byte [] bytes = new byte [32];
+EncryptedKeyIdentifierClause eic =
+new EncryptedKeyIdentifierClause (bytes, SecurityAlgorithms.Sha1Digest);
+SecurityKeyIdentifier ski = new SecurityKeyIdentifier (eic);
+WrappedKeySecurityToken token = new WrappedKeySecurityToken ("urn:foo", bytes,
+SecurityAlgorithms.RsaOaepKeyWrap, new X509SecurityToken (cert), ski);
+
+MySecurityTokenParameters p = new MySecurityTokenParameters ();
+SecurityKeyIdentifierClause ic =
+p.CallCreateKeyIdentifierClause (token, SecurityTokenReferenceStyle.External);
+
+using (XmlWriter w = XmlWriter.Create (sw, GetWriterSettings ())) {
+WSSecurityTokenSerializer.DefaultInstance.WriteKeyIdentifierClause (w, ic);
+}
+string expected = String.Format ("<o:SecurityTokenReference
+xmlns:o=\"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd\"><o:KeyIdentifier
+ValueType=\"{0}\" Value=\"{1}\" /></o:SecurityTokenReference>",
+"http://docs.oasis-open.org/wss/oasis-wss-soap-message-security-1.1#EncryptedKeySHA1",
+Convert.ToBase64String (bytes));
+Assert.AreEqual (expected, sw.ToString (), "#1");
+}
+*/
 
         [Test]
         public void WriteLocalIdKeyIdentifierClause1()

@@ -58,7 +58,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets an <see cref="DbExpression"/> that specifies a projection of results to be returned based on the modified rows.
+        /// Gets an <see cref="DbExpression"/> that specifies a projection of results to be returned based
+        // on the modified rows.
         /// If null, indicates no results should be returned from this command.
         /// </summary>
         /// <remarks>

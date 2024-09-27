@@ -12,7 +12,8 @@ using MethodAttributes = System.Reflection.MethodAttributes;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Computes the list of dependencies that are necessary to generate metadata for a custom attribute, but also the dependencies to
+    /// Computes the list of dependencies that are necessary to generate metadata for a custom
+    // attribute, but also the dependencies to
     /// make the custom attributes usable by the reflection stack at runtime.
     /// </summary>
     internal static class CustomAttributeBasedDependencyAlgorithm
@@ -359,7 +360,8 @@ namespace ILCompiler.DependencyAnalysis
             if (baseType != null)
                 return AddDependenciesFromField(dependencies, factory, baseType, fieldName);
 
-            // Not found. This is bad metadata that will result in a runtime failure, but we shouldn't fail the compilation.
+            // Not found. This is bad metadata that will result in a runtime failure, but we shouldn't fail the
+            // compilation.
             return true;
         }
 
@@ -421,7 +423,8 @@ namespace ILCompiler.DependencyAnalysis
                     propertyName
                 );
 
-            // Not found. This is bad metadata that will result in a runtime failure, but we shouldn't fail the compilation.
+            // Not found. This is bad metadata that will result in a runtime failure, but we shouldn't fail the
+            // compilation.
             return true;
         }
 

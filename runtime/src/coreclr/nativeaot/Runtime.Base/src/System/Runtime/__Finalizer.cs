@@ -6,8 +6,10 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 //
-// Implements the single finalizer thread for a Redhawk instance. Essentially waits for an event to fire
-// indicating finalization is necessary then drains the queue of pending finalizable objects, calling the
+// Implements the single finalizer thread for a Redhawk instance. Essentially waits for an event to
+// fire
+// indicating finalization is necessary then drains the queue of pending finalizable objects,
+// calling the
 // finalize method for each one.
 //
 
@@ -34,7 +36,8 @@ namespace System.Runtime
                 {
                     uint finalizerCount = DrainQueue();
 
-                    // Tell anybody that's interested that the finalization pass is complete (there is a race condition here
+                    // Tell anybody that's interested that the finalization pass is complete (there is a race condition
+                    // here
                     // where we might immediately signal a new request as complete, but this is acceptable).
                     InternalCalls.RhpSignalFinalizationComplete(finalizerCount);
                 }
@@ -47,8 +50,10 @@ namespace System.Runtime
             }
         }
 
-        // Do not inline this method -- we do not want to accidentally have any temps in ProcessFinalizers which contain
-        // objects that came off of the finalizer queue.  If such temps were reported across the duration of the
+        // Do not inline this method -- we do not want to accidentally have any temps in ProcessFinalizers
+        // which contain
+        // objects that came off of the finalizer queue.  If such temps were reported across the duration of
+        // the
         // finalizer thread wait operation, it could cause unpredictable behavior with weak handles.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static unsafe uint DrainQueue()

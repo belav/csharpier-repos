@@ -178,7 +178,8 @@ namespace System.Runtime.Serialization.Schema.Tests
                 typeof(InvalidOperationException),
                 @"List of referenced types contains more than one type with data contract name 'AnotherValidType' in namespace 'http://schemas.datacontract.org/2004/07/barNs'. Need to exclude all but one of the following types. Only matching types can be valid references:",
             };
-            // These last two are described as "negative" in the original NetFx XsdDCImporterApi test code... but they don't fail here or there.
+            // These last two are described as "negative" in the original NetFx XsdDCImporterApi test code...
+            // but they don't fail here or there.
             yield return new object[]
             {
                 SchemaUtils.IsReferenceSchemas,

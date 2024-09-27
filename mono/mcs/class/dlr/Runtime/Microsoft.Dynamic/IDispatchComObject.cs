@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 using System;
 using Microsoft;
 #if !SILVERLIGHT // ComObject
@@ -44,7 +44,8 @@ namespace Microsoft.Scripting
     ///
     /// This currently has the following issues:
     /// 1. If we prefer ComObjectWithTypeInfo over IDispatchComObject, then we will often not
-    ///    IDispatchComObject since implementations of IDispatch often rely on a registered type library.
+    ///    IDispatchComObject since implementations of IDispatch often rely on a registered type
+    // library.
     ///    If we prefer IDispatchComObject over ComObjectWithTypeInfo, users get a non-ideal experience.
     /// 2. IDispatch cannot distinguish between properties and methods with 0 arguments (and non-0
     ///    default arguments?). So obj.foo() is ambiguous as it could mean invoking method foo,

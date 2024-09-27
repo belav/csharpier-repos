@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a CROSS APPLY in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -29,11 +30,13 @@ public class CrossApplyExpression : JoinExpressionBase
         Update((TableExpressionBase)visitor.Visit(Table));
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="table">The <see cref="JoinExpressionBase.Table" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public override CrossApplyExpression Update(TableExpressionBase table) =>
         table != Table ? new CrossApplyExpression(table, GetAnnotations()) : this;
 

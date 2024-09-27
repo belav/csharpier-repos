@@ -69,7 +69,8 @@ namespace System.Net.Http
             // RFC 2046 Section 5.1.1
             // boundary := 0*69<bchars> bcharsnospace
             // bchars := bcharsnospace / " "
-            // bcharsnospace := DIGIT / ALPHA / "'" / "(" / ")" / "+" / "_" / "," / "-" / "." / "/" / ":" / "=" / "?"
+            // bcharsnospace := DIGIT / ALPHA / "'" / "(" / ")" / "+" / "_" / "," / "-" / "." / "/" / ":" / "="
+            // / "?"
             if (boundary.Length > 70)
             {
                 throw new ArgumentOutOfRangeException(
@@ -160,7 +161,8 @@ namespace System.Net.Http
         #region Serialization
 
         /// <summary>
-        /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the specified response header name,
+        /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the
+        // specified response header name,
         /// or <see langword="null"/> to use the default behavior.
         /// </summary>
         public HeaderEncodingSelector<HttpContent>? HeaderEncodingSelector { get; set; }
@@ -343,7 +345,8 @@ namespace System.Net.Http
                         // as we don't necessarily own them yet.
 
 #pragma warning disable CA2016
-                        // Do not pass a cancellationToken to base.CreateContentReadStreamAsync() as it would trigger an infinite loop => StackOverflow
+                        // Do not pass a cancellationToken to base.CreateContentReadStreamAsync() as it would trigger an
+                        // infinite loop => StackOverflow
                         return async
                             ? await base.CreateContentReadStreamAsync().ConfigureAwait(false)
                             : base.CreateContentReadStream(cancellationToken);

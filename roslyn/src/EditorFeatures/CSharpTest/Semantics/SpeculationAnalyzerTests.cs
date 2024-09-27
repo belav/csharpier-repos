@@ -44,9 +44,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/672396")]
         public void SpeculationAnalyzerExtensionMethodExplicitInvocation()
         {
-            // We consider a change here to be a change in semantics as an instance call became a static call. In
-            // practice this is fine as the only thing that makes this change is complexification, and we don't test for
-            // semantics changed after that as the purpose of complexification is to put us in a safe place to make
+            // We consider a change here to be a change in semantics as an instance call became a static call.
+            // In
+            // practice this is fine as the only thing that makes this change is complexification, and we don't
+            // test for
+            // semantics changed after that as the purpose of complexification is to put us in a safe place to
+            // make
             // changes that won't break semantics.
             Test(
                 """
@@ -372,7 +375,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Semantics
             );
 
             // Note: the answer should have been that the replacement does change semantics (true),
-            // however to have enough context one must analyze AttributeSyntax instead of separate ExpressionSyntaxes it contains,
+            // however to have enough context one must analyze AttributeSyntax instead of separate
+            // ExpressionSyntaxes it contains,
             // which is not supported in SpeculationAnalyzer, but possible with GetSpeculativeSemanticModel API
         }
 

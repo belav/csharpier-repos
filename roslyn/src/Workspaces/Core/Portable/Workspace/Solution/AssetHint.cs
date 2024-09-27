@@ -7,7 +7,8 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.Serialization;
 
 /// <summary>
-/// Optional information passed with an asset synchronization request to allow the request to be scoped down to a
+/// Optional information passed with an asset synchronization request to allow the request to be
+// scoped down to a
 /// particular <see cref="Project"/> or <see cref="Document"/>.
 /// </summary>
 [DataContract]

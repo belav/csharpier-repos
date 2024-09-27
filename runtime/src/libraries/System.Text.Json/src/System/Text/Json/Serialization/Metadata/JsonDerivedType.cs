@@ -13,7 +13,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Specifies a supported derived type without a type discriminator.
         /// </summary>
-        /// <param name="derivedType">The derived type to be supported by the polymorphic type metadata.</param>
+        /// <param name="derivedType">The derived type to be supported by the polymorphic type
+        // metadata.</param>
         public JsonDerivedType(Type derivedType)
         {
             DerivedType = derivedType;
@@ -23,8 +24,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Specifies a supported derived type with an integer type discriminator.
         /// </summary>
-        /// <param name="derivedType">The derived type to be supported by the polymorphic type metadata.</param>
-        /// <param name="typeDiscriminator">The type discriminator to be associated with the derived type.</param>
+        /// <param name="derivedType">The derived type to be supported by the polymorphic type
+        // metadata.</param>
+        /// <param name="typeDiscriminator">The type discriminator to be associated with the derived
+        // type.</param>
         public JsonDerivedType(Type derivedType, int typeDiscriminator)
         {
             DerivedType = derivedType;
@@ -34,8 +37,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Specifies a supported derived type with a string type discriminator.
         /// </summary>
-        /// <param name="derivedType">The derived type to be supported by the polymorphic type metadata.</param>
-        /// <param name="typeDiscriminator">The type discriminator to be associated with the derived type.</param>
+        /// <param name="derivedType">The derived type to be supported by the polymorphic type
+        // metadata.</param>
+        /// <param name="typeDiscriminator">The type discriminator to be associated with the derived
+        // type.</param>
         public JsonDerivedType(Type derivedType, string typeDiscriminator)
         {
             DerivedType = derivedType;

@@ -13,7 +13,8 @@ using static Interop.Advapi32;
 namespace System.ServiceProcess
 {
     /// <summary>
-    /// <para>Provides a base class for a service that will exist as part of a service application. <see cref='System.ServiceProcess.ServiceBase'/>
+    /// <para>Provides a base class for a service that will exist as part of a service application. <see
+    // cref='System.ServiceProcess.ServiceBase'/>
     /// must be derived when creating a new service class.</para>
     /// </summary>
     public class ServiceBase : Component
@@ -228,9 +229,13 @@ namespace System.ServiceProcess
         }
 
         /// <summary>
-        /// can be used to write notification of service command calls, such as Start and Stop, to the Application event log. This property is read-only.
+        /// can be used to write notification of service command calls, such as Start and Stop, to the
+        // Application event log. This property is read-only.
         /// </summary>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+        ]
         public virtual EventLog EventLog =>
             _eventLog ??= new EventLog("Application") { Source = ServiceName };
 
@@ -535,7 +540,8 @@ namespace System.ServiceProcess
         }
 
         /// <summary>
-        /// <para>When implemented in a derived class, <see cref='System.ServiceProcess.ServiceBase.OnCustomCommand'/>
+        /// <para>When implemented in a derived class, <see
+        // cref='System.ServiceProcess.ServiceBase.OnCustomCommand'/>
         /// executes when a custom command is passed to the service. Specifies the actions to take when
         /// a command with the specified parameter value occurs.</para>
         /// </summary>
@@ -543,7 +549,8 @@ namespace System.ServiceProcess
 
         /// <summary>
         ///    <para>Provides the main entry point for an executable that
-        ///       contains multiple associated services. Loads the specified services into memory so they can be
+        ///       contains multiple associated services. Loads the specified services into memory so they
+        // can be
         ///       started.</para>
         /// </summary>
         public static unsafe void Run(ServiceBase[] services)
@@ -563,7 +570,8 @@ namespace System.ServiceProcess
             {
                 bool multipleServices = services.Length > 1;
 
-                // The members of the last entry in the table must have NULL values to designate the end of the table.
+                // The members of the last entry in the table must have NULL values to designate the end of the
+                // table.
                 // Leave the last element in the entries span to be zeroed out.
                 for (int index = 0; index < services.Length; ++index)
                 {
@@ -643,7 +651,8 @@ namespace System.ServiceProcess
         {
             if (!_initialized)
             {
-                //Cannot register the service with NT service manager if the object has been disposed, since finalization has been suppressed.
+                //Cannot register the service with NT service manager if the object has been disposed, since
+                // finalization has been suppressed.
                 if (_disposed)
                     throw new ObjectDisposedException(GetType().Name);
 
@@ -670,7 +679,8 @@ namespace System.ServiceProcess
             }
         }
 
-        // Make sure that the name field is freed after use. We allocate a new string to avoid holding one central handle,
+        // Make sure that the name field is freed after use. We allocate a new string to avoid holding one
+        // central handle,
         // which may lead to dangling pointer if Dispose is called in other thread.
         private SERVICE_TABLE_ENTRY GetEntry()
         {
@@ -767,8 +777,10 @@ namespace System.ServiceProcess
                             int previousState = _status.currentState;
                             //
                             // Can't perform all of the service shutdown logic from within the command callback.
-                            // This is because there is a single ScDispatcherLoop for the entire process.  Instead, we queue up an
-                            // asynchronous call to "DeferredStop", and return immediately.  This is crucial for the multiple service
+                            // This is because there is a single ScDispatcherLoop for the entire process.  Instead, we queue up
+                            // an
+                            // asynchronous call to "DeferredStop", and return immediately.  This is crucial for the multiple
+                            // service
                             // per process scenario, such as the new managed service host model.
                             //
                             if (
@@ -789,7 +801,8 @@ namespace System.ServiceProcess
 
                         case ControlOptions.CONTROL_SHUTDOWN:
                             //
-                            // Same goes for shutdown -- this needs to be very responsive, so we can't have one service tying up the
+                            // Same goes for shutdown -- this needs to be very responsive, so we can't have one service tying up
+                            // the
                             // dispatcher loop.
                             //
                             ThreadPool.QueueUserWorkItem(_ => DeferredShutdown());
@@ -867,7 +880,8 @@ namespace System.ServiceProcess
                     }
                 }
 
-                // If we are being hosted, then Run will not have been called, since the EXE's Main entrypoint is not called.
+                // If we are being hosted, then Run will not have been called, since the EXE's Main entrypoint is
+                // not called.
                 if (!_initialized)
                 {
                     Initialize(true);

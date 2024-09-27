@@ -61,9 +61,12 @@ namespace System.Net.Http
         }
 
         // The current locking mechanism doesn't allow any two WinHttp functions executing at
-        // the same time for the same handle. Enhance locking to prevent only WinHttpCloseHandle being called
-        // during other API execution. E.g. using a Reader/Writer model or, even better, Interlocked functions.
-        // The lock object must be used during the execution of any WinHttp function to ensure no race conditions with
+        // the same time for the same handle. Enhance locking to prevent only WinHttpCloseHandle being
+        // called
+        // during other API execution. E.g. using a Reader/Writer model or, even better, Interlocked
+        // functions.
+        // The lock object must be used during the execution of any WinHttp function to ensure no race
+        // conditions with
         // calling WinHttpCloseHandle.
         public object Lock => this;
 

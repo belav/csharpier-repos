@@ -82,46 +82,57 @@ namespace System.CodeDom.Compiler
         AssemblyAttributes = 0x1000,
 
         /// <devdoc>
-        ///    <para>Supports custom metadata attributes declared on parameters for methods and constructors. Allows
+        ///    <para>Supports custom metadata attributes declared on parameters for methods and
+        // constructors. Allows
         ///          use of CodeParameterDeclarationExpress.CustomAttributes.</para>
         /// </devdoc>
         ParameterAttributes = 0x2000,
 
         /// <devdoc>
-        ///    <para>Supports declaring and calling parameters with a FieldDirection of Out or Ref, meaning that
+        ///    <para>Supports declaring and calling parameters with a FieldDirection of Out or Ref, meaning
+        // that
         ///          the value is a type of reference parameter.</para>
         /// </devdoc>
         ReferenceParameters = 0x4000,
 
         /// <devdoc>
-        ///    <para>Supports contructors that call other constructors within the same class. Allows use of the
+        ///    <para>Supports contructors that call other constructors within the same class. Allows use of
+        // the
         ///          CodeConstructor.ChainedConstructorArgs collection.</para>
         /// </devdoc>
         ChainedConstructorArguments = 0x8000,
 
         /// <devdoc>
-        ///    <para>Supports declaring types that are nested within other types. This allows the insertion of a
+        ///    <para>Supports declaring types that are nested within other types. This allows the insertion
+        // of a
         ///          CodeTypeReference into the Members collection of another CodeTypeReference.</para>
         /// </devdoc>
         NestedTypes = 0x00010000,
 
         /// <devdoc>
-        ///    <para>Supports declaring methods, properties or events that simultaneously implement more than one interface of
-        ///          a type that have a matching name. This allows insertion of more than one entry into the ImplementationTypes
+        ///    <para>Supports declaring methods, properties or events that simultaneously implement more
+        // than one interface of
+        ///          a type that have a matching name. This allows insertion of more than one entry into the
+        // ImplementationTypes
         ///          collection or CodeMemberProperty, CodeMemberMethod and CodeMemberEvent.</para>
         /// </devdoc>
         MultipleInterfaceMembers = 0x00020000,
 
         /// <devdoc>
-        ///    <para>Supports the declaration of public static fields, properties, methods and events. This allows use of
-        ///          MemberAttributes.Static in combination with access values other than MemberAttributes.Private.</para>
+        ///    <para>Supports the declaration of public static fields, properties, methods and events. This
+        // allows use of
+        ///          MemberAttributes.Static in combination with access values other than
+        // MemberAttributes.Private.</para>
         /// </devdoc>
         PublicStaticMembers = 0x00040000,
 
         /// <devdoc>
-        ///    <para>Supports the generation arbitarily nested expressions. Not all generators may be able to deal with
-        ///          multiple function calls or binary operations in the same expression. Without this, CodeMethodInvokeExpression and
-        ///          CodeBinaryOperatorExpression should only be used (a) as the Right value of a CodeAssignStatement or (b) in a
+        ///    <para>Supports the generation arbitarily nested expressions. Not all generators may be able
+        // to deal with
+        ///          multiple function calls or binary operations in the same expression. Without this,
+        // CodeMethodInvokeExpression and
+        ///          CodeBinaryOperatorExpression should only be used (a) as the Right value of a
+        // CodeAssignStatement or (b) in a
         ///          CodeExpressionStatement.</para>
         /// </devdoc>
         ComplexExpressions = 0x00080000,

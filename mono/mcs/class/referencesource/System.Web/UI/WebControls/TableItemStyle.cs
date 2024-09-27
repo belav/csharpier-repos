@@ -39,14 +39,16 @@ namespace System.Web.UI.WebControls
         internal const int PROP_WRAP = 0x00040000;
 
         /// <devdoc>
-        /// <para>Creates a new instance of the <see cref='System.Web.UI.WebControls.TableItemStyle'/> class.</para>
+        /// <para>Creates a new instance of the <see cref='System.Web.UI.WebControls.TableItemStyle'/>
+        // class.</para>
         /// </devdoc>
         public TableItemStyle()
             : base() { }
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Web.UI.WebControls.TableItemStyle'/> class with the
+        ///       Creates a new instance of the <see cref='System.Web.UI.WebControls.TableItemStyle'/> class
+        // with the
         ///       specified state bag.
         ///    </para>
         /// </devdoc>
@@ -151,7 +153,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Adds information about horizontal alignment, vertical alignment, and wrap to the list of attributes to render.</para>
+        ///    <para>Adds information about horizontal alignment, vertical alignment, and wrap to the list
+        // of attributes to render.</para>
         /// </devdoc>
         public override void AddAttributesToRender(HtmlTextWriter writer, WebControl owner)
         {

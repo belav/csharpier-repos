@@ -11,7 +11,8 @@ using DependencyList = ILCompiler.DependencyAnalysisFramework.DependencyNodeCore
 namespace ILCompiler
 {
     /// <summary>
-    /// Represents an interop stub manager whose list of stubs is determined by statical usage seen in the compiled program.
+    /// Represents an interop stub manager whose list of stubs is determined by statical usage seen in
+    // the compiled program.
     /// </summary>
     public class UsageBasedInteropStubManager : CompilerGeneratedInteropStubManager
     {

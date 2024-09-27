@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace System.Threading.RateLimiting
 {
     /// <summary>
-    /// <see cref="RateLimiter"/> implementation that replenishes tokens periodically instead of via a release mechanism.
+    /// <see cref="RateLimiter"/> implementation that replenishes tokens periodically instead of via a
+    // release mechanism.
     /// </summary>
     public sealed class TokenBucketRateLimiter : ReplenishingRateLimiter
     {
@@ -27,7 +28,8 @@ namespace System.Threading.RateLimiting
         private readonly TokenBucketRateLimiterOptions _options;
         private readonly Deque<RequestRegistration> _queue = new Deque<RequestRegistration>();
 
-        // Use the queue as the lock field so we don't need to allocate another object for a lock and have another field in the object
+        // Use the queue as the lock field so we don't need to allocate another object for a lock and have
+        // another field in the object
         private object Lock => _queue;
 
         private static readonly RateLimitLease SuccessfulLease = new TokenBucketLease(true, null);
@@ -50,7 +52,8 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Initializes the <see cref="TokenBucketRateLimiter"/>.
         /// </summary>
-        /// <param name="options">Options to specify the behavior of the <see cref="TokenBucketRateLimiter"/>.</param>
+        /// <param name="options">Options to specify the behavior of the <see
+        // cref="TokenBucketRateLimiter"/>.</param>
         public TokenBucketRateLimiter(TokenBucketRateLimiterOptions options)
         {
             if (options is null)
@@ -267,13 +270,15 @@ namespace System.Threading.RateLimiting
                 if (tokenCount == 0)
                 {
                     Interlocked.Increment(ref _successfulLeasesCount);
-                    // Edge case where the check before the lock showed 0 available permits but when we got the lock some permits were now available
+                    // Edge case where the check before the lock showed 0 available permits but when we got the lock
+                    // some permits were now available
                     lease = SuccessfulLease;
                     return true;
                 }
 
                 // a. if there are no items queued we can lease
-                // b. if there are items queued but the processing order is newest first, then we can lease the incoming request since it is the newest
+                // b. if there are items queued but the processing order is newest first, then we can lease the
+                // incoming request since it is the newest
                 if (
                     _queueCount == 0
                     || (
@@ -299,7 +304,8 @@ namespace System.Threading.RateLimiting
         /// Attempts to replenish the bucket.
         /// </summary>
         /// <returns>
-        /// <see langword="false"/> if <see cref="TokenBucketRateLimiterOptions.AutoReplenishment"/> is enabled, otherwise <see langword="true"/>.
+        /// <see langword="false"/> if <see cref="TokenBucketRateLimiterOptions.AutoReplenishment"/> is
+        // enabled, otherwise <see langword="true"/>.
         /// Does not reflect if tokens were replenished.
         /// </returns>
         public override bool TryReplenish()
@@ -342,7 +348,8 @@ namespace System.Threading.RateLimiting
 
                 double add;
 
-                // Trust the timer to be close enough to when we want to replenish, this avoids issues with Timer jitter where it might be .99 seconds instead of 1, and 1.1 seconds the next time etc.
+                // Trust the timer to be close enough to when we want to replenish, this avoids issues with Timer
+                // jitter where it might be .99 seconds instead of 1, and 1.1 seconds the next time etc.
                 if (_options.AutoReplenishment)
                 {
                     add = _options.TokensPerPeriod;
@@ -367,7 +374,8 @@ namespace System.Threading.RateLimiting
                             ? queue.PeekHead()
                             : queue.PeekTail();
 
-                    // Request was handled already, either via cancellation or being kicked from the queue due to a newer request being queued.
+                    // Request was handled already, either via cancellation or being kicked from the queue due to a
+                    // newer request being queued.
                     // We just need to remove the item and let the next queued item be considered for completion.
                     if (nextPendingRequest.Task.IsCompleted)
                     {

@@ -45,7 +45,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private SerStack ValueFixupStack =>
             _valueFixupStack ??= new SerStack("ValueType Fixup Stack");
 
-        // Older formatters generate ids for valuetypes using a different counter than ref types. Newer ones use
+        // Older formatters generate ids for valuetypes using a different counter than ref types. Newer ones
+        // use
         // a single counter, only value types have a negative value. Need a way to handle older formats.
         private const int ThresholdForValueTypeIds = int.MaxValue;
         private bool _oldFormatDetected;
@@ -572,7 +573,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        // Builds a map for each item in an incoming rectangle array. The map specifies where the item is placed in the output Array Object
+        // Builds a map for each item in an incoming rectangle array. The map specifies where the item is
+        // placed in the output Array Object
         private void NextRectangleMap(ParseRecord pr)
         {
             Debug.Assert(pr._rectangularMap != null && pr._lengthA != null && pr._indexMap != null);
@@ -998,7 +1000,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
         }
 
-        // Processes a string object by getting an internal ID for it and registering it with the objectManager
+        // Processes a string object by getting an internal ID for it and registering it with the
+        // objectManager
         [RequiresUnreferencedCode(ObjectReaderUnreferencedCodeMessage)]
         private void ParseString(ParseRecord pr, ParseRecord parentPr)
         {
@@ -1227,7 +1230,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         )
         {
             // Catching any exceptions that could be thrown from a failure on assembly load
-            // This is necessary, for example, if there are generic parameters that are qualified with a version of the assembly that predates the one available
+            // This is necessary, for example, if there are generic parameters that are qualified with a version
+            // of the assembly that predates the one available
             try
             {
                 type = FormatterServices.GetTypeFromAssembly(assm, typeName);

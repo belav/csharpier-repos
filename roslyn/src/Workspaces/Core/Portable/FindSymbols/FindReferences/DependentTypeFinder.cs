@@ -20,17 +20,26 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     using SymbolSet = HashSet<INamedTypeSymbol>;
 
     /// <summary>
-    /// Provides helper methods for finding dependent types (derivations, implementations, etc.) across a solution. This
-    /// is effectively a graph walk between INamedTypeSymbols walking down the inheritance hierarchy to find related
-    /// types based either on <see cref="ITypeSymbol.BaseType"/> or <see cref="ITypeSymbol.Interfaces"/>.
+    /// Provides helper methods for finding dependent types (derivations, implementations, etc.) across
+    // a solution. This
+    /// is effectively a graph walk between INamedTypeSymbols walking down the inheritance hierarchy to
+    // find related
+    /// types based either on <see cref="ITypeSymbol.BaseType"/> or <see
+    // cref="ITypeSymbol.Interfaces"/>.
     /// </summary>
     /// <remarks>
-    /// While walking up the inheritance hierarchy is trivial (as the information is directly contained on the <see
-    /// cref="ITypeSymbol"/>'s themselves), walking down is complicated.  The general way this works is by using
-    /// out-of-band indices that are built that store this type information in a weak manner.  Specifically, for both
-    /// source and metadata types we have indices that map between the base type name and the inherited type name. i.e.
-    /// for the case <c>class A { } class B : A { }</c> the index stores a link saying "There is a type 'A' somewhere
-    /// which has derived type called 'B' somewhere".  So when the index is examined for the name 'A', it will say
+    /// While walking up the inheritance hierarchy is trivial (as the information is directly contained
+    // on the <see
+    /// cref="ITypeSymbol"/>'s themselves), walking down is complicated.  The general way this works is
+    // by using
+    /// out-of-band indices that are built that store this type information in a weak manner.
+    // Specifically, for both
+    /// source and metadata types we have indices that map between the base type name and the inherited
+    // type name. i.e.
+    /// for the case <c>class A { } class B : A { }</c> the index stores a link saying "There is a type
+    // 'A' somewhere
+    /// which has derived type called 'B' somewhere".  So when the index is examined for the name 'A',
+    // it will say
     /// 'examine types called 'B' to see if they're an actual match'.
     /// <para/>
     /// These links are then continually traversed to get the full set of results.
@@ -54,14 +63,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             PooledHashSet<INamedTypeSymbol>.CreatePool(SymbolEquivalenceComparer.Instance);
 
         /// <summary>
-        /// Walks down a <paramref name="type"/>'s inheritance tree looking for more <see cref="INamedTypeSymbol"/>'s
+        /// Walks down a <paramref name="type"/>'s inheritance tree looking for more <see
+        // cref="INamedTypeSymbol"/>'s
         /// that match the provided <paramref name="typeMatches"/> predicate.
         /// </summary>
-        /// <param name="shouldContinueSearching">Called when a new match is found to check if that type's inheritance
-        /// tree should also be walked down.  Can be used to stop the search early if a type could have no types that
+        /// <param name="shouldContinueSearching">Called when a new match is found to check if that type's
+        // inheritance
+        /// tree should also be walked down.  Can be used to stop the search early if a type could have no
+        // types that
         /// inherit from it that would match this search.</param>
-        /// <param name="transitive">If this search after finding the direct inherited types that match the provided
-        /// predicate, or if the search should continue recursively using those types as the starting point.</param>
+        /// <param name="transitive">If this search after finding the direct inherited types that match the
+        // provided
+        /// predicate, or if the search should continue recursively using those types as the starting
+        // point.</param>
         private static async Task<ImmutableArray<INamedTypeSymbol>> DescendInheritanceTreeAsync(
             INamedTypeSymbol type,
             Solution solution,
@@ -119,15 +133,19 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // The final set of results we'll be returning.
             using var _1 = GetSymbolSet(out var result);
 
-            // The current total set of matching metadata types in the descendant tree (including the initial type if it
-            // is from metadata).  Will be used when examining new types to see if they inherit from any of these.
+            // The current total set of matching metadata types in the descendant tree (including the initial
+            // type if it
+            // is from metadata).  Will be used when examining new types to see if they inherit from any of
+            // these.
             using var _2 = GetSymbolSet(out var currentMetadataTypes);
 
             // Same as above, but contains source types as well.
             using var _3 = GetSymbolSet(out var currentSourceAndMetadataTypes);
 
-            // The set of PEReferences we've examined.  We only need to examine a reference once when we encounter it
-            // while walking projects.  PEReferences cannot reference source symbols, so the results from them cannot
+            // The set of PEReferences we've examined.  We only need to examine a reference once when we
+            // encounter it
+            // while walking projects.  PEReferences cannot reference source symbols, so the results from them
+            // cannot
             // change as we examine further projects.
             using var _4 = PooledHashSet<PortableExecutableReference>.GetInstance(
                 out var seenPEReferences
@@ -161,7 +179,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 Debug.Assert(project.SupportsCompilation);
 
                 // First see what derived metadata types we might find in this project. This is only necessary if we
-                // started with a metadata type (i.e. a source type could not have a descendant type found in metadata,
+                // started with a metadata type (i.e. a source type could not have a descendant type found in
+                // metadata,
                 // but a metadata type could have descendant types in source and metadata).
                 if (searchInMetadata)
                 {
@@ -427,9 +446,12 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                // We store an index in SymbolTreeInfo of the *simple* metadata type name to the names of the all the types
-                // that either immediately derive or implement that type.  Because the mapping is from the simple name we
-                // might get false positives.  But that's fine as we still use 'tpeMatches' to make sure the match is
+                // We store an index in SymbolTreeInfo of the *simple* metadata type name to the names of the all
+                // the types
+                // that either immediately derive or implement that type.  Because the mapping is from the simple
+                // name we
+                // might get false positives.  But that's fine as we still use 'tpeMatches' to make sure the match
+                // is
                 // correct.
                 var symbolTreeInfo = await SymbolTreeInfo
                     .GetInfoForMetadataReferenceAsync(
@@ -665,8 +687,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         /// <summary>
-        /// Moves all the types in <paramref name="tempBuffer"/> to <paramref name="result"/>.  If these are types we
-        /// haven't seen before, and the caller says we <paramref name="shouldContinueSearching"/> on them, then add
+        /// Moves all the types in <paramref name="tempBuffer"/> to <paramref name="result"/>.  If these are
+        // types we
+        /// haven't seen before, and the caller says we <paramref name="shouldContinueSearching"/> on them,
+        // then add
         /// them to <paramref name="typesToSearchFor"/> for the next round of searching.
         /// </summary>
         private static void PropagateTemporaryResults(

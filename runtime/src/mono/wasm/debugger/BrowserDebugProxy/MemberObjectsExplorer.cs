@@ -559,27 +559,27 @@ namespace BrowserDebugProxy
                         && child[InternalUseFieldName.IsNewSlot.Name]?.Value<bool>() != true;
                     if (wasOverriddenByDerivedType)
                     {
-                        /*
-                         * property was overridden by a derived type member. We want to show
-                         * only the overridden members. So, remove the backing field
-                         * for this auto-property that was added, with the type name suffix
-                         *
-                         * Two cases:
-                         * 1. auto-prop in base, overridden by auto-prop in derived
-                         * 2. auto-prop in base, overridden by prop in derived
-                         *
-                         *    And in both cases we want to remove the backing field for the auto-prop for
-                         *      *this* base type
-                         */
+/*
+* property was overridden by a derived type member. We want to show
+* only the overridden members. So, remove the backing field
+* for this auto-property that was added, with the type name suffix
+*
+* Two cases:
+* 1. auto-prop in base, overridden by auto-prop in derived
+* 2. auto-prop in base, overridden by prop in derived
+*
+*    And in both cases we want to remove the backing field for the auto-prop for
+*      *this* base type
+*/
                         allMembers.Remove(overriddenOrHiddenPropName);
                         continue;
                     }
                 }
 
-                /*
-                 * property was *hidden* by a derived type member. In this case, we
-                 * want to show *both* the members
-                 */
+/*
+* property was *hidden* by a derived type member. In this case, we
+* want to show *both* the members
+*/
 
                 JObject backingFieldForHiddenProp = allMembers.GetValueOrDefault(
                     overriddenOrHiddenPropName
@@ -885,8 +885,8 @@ namespace BrowserDebugProxy
                 // seem to ask for inherited fields at all.
                 //if (ownProperties)
                 //break;
-                /*if (accessorPropertiesOnly)
-                    break;*/
+/*if (accessorPropertiesOnly)
+break;*/
             }
 
             return GetMembersResult.FromValues(allMembers.Values, sortByAccessLevel);

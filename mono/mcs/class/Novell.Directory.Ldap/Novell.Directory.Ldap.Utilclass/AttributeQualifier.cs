@@ -40,13 +40,13 @@ namespace Novell.Directory.Ldap.Utilclass
     {
         public virtual System.String Name
         {
-            /*
-            public void addValue( String value )
-            {
-            values.add( value );
-            return;
-            }
-            */
+/*
+public void addValue( String value )
+{
+values.add( value );
+return;
+}
+*/
 
             get { return name; }
         }

@@ -24,13 +24,15 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.DateAndTime
             private readonly TextSpan _replacementSpan;
 
             /// <summary>
-            /// The portion of the user string token prior to the section we're replacing.  Used for building the
+            /// The portion of the user string token prior to the section we're replacing.  Used for building
+            // the
             /// example format to present.
             /// </summary>
             private readonly string _userFormatPrefix;
 
             /// <summary>
-            /// The portion of the user string token after to the section we're replacing.  Used for building the
+            /// The portion of the user string token after to the section we're replacing.  Used for building
+            // the
             /// example format to present.
             /// </summary>
             private readonly string _userFormatSuffix;

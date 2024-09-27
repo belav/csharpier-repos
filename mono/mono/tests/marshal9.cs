@@ -43,7 +43,7 @@ public class Marshal1 : ICustomMarshaler
     public void CleanUpNativeData(IntPtr pNativeData)
     {
         //Console.WriteLine("CleanUpNativeData:" + pNativeData);
-        /* Might be allocated in libtest.c using g_new0 so dont free it */
+/* Might be allocated in libtest.c using g_new0 so dont free it */
         int alloc_type = Marshal.ReadInt32(pNativeData);
         if (alloc_type == 1)
             Marshal.FreeHGlobal(pNativeData);
@@ -148,7 +148,7 @@ public class Tests
         object o = 0;
         int res = mono_test_marshal_pass_out_custom(5, out o, 5);
 
-        /* 10 + 5 + 5 + 5 */
+/* 10 + 5 + 5 + 5 */
         if ((int)o != 25)
             return 1;
 
@@ -254,7 +254,7 @@ public class Tests
         object o = 10;
         int res = mono_test_marshal_pass_byref_custom(5, ref o, 5);
 
-        /* 10 + 5 + 5 + 5 */
+/* 10 + 5 + 5 + 5 */
         if ((int)o != 25)
             return 1;
 
@@ -368,9 +368,9 @@ public class Tests
         return res == 15 ? 0 : 3;
     }
 
-    /*
-     * Test custom marshaller class not implementing ICustomMarshaler
-     */
+/*
+* Test custom marshaller class not implementing ICustomMarshaler
+*/
 
     public class Marshal2 { }
 
@@ -399,9 +399,9 @@ public class Tests
         return 1;
     }
 
-    /*
-     * Test custom marshaller class missing GetInstance method
-     */
+/*
+* Test custom marshaller class missing GetInstance method
+*/
 
     public class Marshal3 : ICustomMarshaler
     {

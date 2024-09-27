@@ -158,12 +158,14 @@ namespace System
         //      Local               Universal       UTC Offset
         //      -----               ---------       ----------
         //      01:00AM             09:00           -8:00
-        //      02:00 (=> 03:00)    10:00           -8:00   [This time doesn't actually exist, but it can be created from DateTime]
+        //      02:00 (=> 03:00)    10:00           -8:00   [This time doesn't actually exist, but it can be
+        // created from DateTime]
         //      03:00               10:00           -7:00
         //      04:00               11:00           -7:00
         //      05:00               12:00           -7:00
         //
-        //      So from 02:00 - 02:59:59, we should return the standard offset, instead of the daylight saving offset.
+        //      So from 02:00 - 02:59:59, we should return the standard offset, instead of the daylight
+        // saving offset.
         //
         // In the transition from daylight saving time to standard time,
         // if we convert local time to Universal time, we can have the
@@ -176,7 +178,8 @@ namespace System
         //      03:00               11:00           -8:00
         //      04:00               12:00           -8:00
         //
-        //      So in this case, the 02:00 does exist after the first 2:00 rolls back to 01:00. We don't need to special case this.
+        //      So in this case, the 02:00 does exist after the first 2:00 rolls back to 01:00. We don't
+        // need to special case this.
         //      But note that there are two 01:00 in the local time.
 
         //
@@ -193,7 +196,8 @@ namespace System
         //      04:00               13:00           -9:00
         //      05:00               14:00           -9:00
         //
-        //      So in this case, the 02:00 does exist after the first 2:00 rolls back to 01:00. We don't need to special case this.
+        //      So in this case, the 02:00 does exist after the first 2:00 rolls back to 01:00. We don't
+        // need to special case this.
         //
         // In the transition from daylight saving time to standard time,
         // if we convert local time to Universal time, we can have the
@@ -208,7 +212,8 @@ namespace System
         //      05:00               13:00           -8:00
         //      06:00               14:00           -8:00
         //
-        //      So from 02:00 - 02:59:59, we should return the daylight saving offset, instead of the standard offset.
+        //      So from 02:00 - 02:59:59, we should return the daylight saving offset, instead of the
+        // standard offset.
         //
         internal static TimeSpan CalculateUtcOffset(DateTime time, DaylightTime daylightTimes)
         {
@@ -225,13 +230,15 @@ namespace System
             DateTime startTime;
             DateTime endTime;
 
-            // startTime and endTime represent the period from either the start of DST to the end and includes the
+            // startTime and endTime represent the period from either the start of DST to the end and includes
+            // the
             // potentially overlapped times
             startTime = daylightTimes.Start + daylightTimes.Delta;
             endTime = daylightTimes.End;
 
             // For normal time zones, the ambiguous hour is the last hour of daylight saving when you wind the
-            // clock back. It is theoretically possible to have a positive delta, (which would really be daylight
+            // clock back. It is theoretically possible to have a positive delta, (which would really be
+            // daylight
             // reduction time), where you would have to wind the clock back in the begnning.
             DateTime ambiguousStart;
             DateTime ambiguousEnd;
@@ -249,7 +256,8 @@ namespace System
             Boolean isDst = false;
             if (startTime > endTime)
             {
-                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the beginning of next year.
+                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the
+                // beginning of next year.
                 // Note, the summer in the southern hemisphere begins late in the year.
                 if (time >= startTime || time < endTime)
                 {

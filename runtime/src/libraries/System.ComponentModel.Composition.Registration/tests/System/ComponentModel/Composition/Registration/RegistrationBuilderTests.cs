@@ -58,7 +58,9 @@ namespace System.ComponentModel.Composition.Registration.Tests
             var container = new CompositionContainer(cat);
 
             // Throws:
-            // Can not determine which constructor to use for the type 'System.ComponentModel.Composition.Hosting.AssemblyCatalog, System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+            // Can not determine which constructor to use for the type
+            // 'System.ComponentModel.Composition.Hosting.AssemblyCatalog, System.ComponentModel.Composition,
+            // Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
             RealPart rp = container.GetExport<RealPart>().Value;
         }
 
@@ -99,7 +101,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
                 typeof(FooImplWithConstructors).GetTypeInfo()
             );
 
-            // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
+            // necessary as BuildConventionConstructorAttributes is only called for type level query for
+            // attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
 
             ConstructorInfo constructor1 = projectedType2
@@ -151,7 +154,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
                 .Where(c => c.GetParameters().Length == 2)
                 .Single();
 
-            // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
+            // necessary as BuildConventionConstructorAttributes is only called for type level query for
+            // attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
 
             Assert.Equal(0, constructor1.GetCustomAttributes(false).Length);
@@ -194,7 +198,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
                 .Where(c => c.GetParameters().Length == 2)
                 .Single();
 
-            // necessary as BuildConventionConstructorAttributes is only called for type level query for attributes
+            // necessary as BuildConventionConstructorAttributes is only called for type level query for
+            // attributes
             var typeLevelAttrs = projectedType2.GetCustomAttributes(false);
 
             Assert.Equal(0, constructor1.GetCustomAttributes(false).Length);

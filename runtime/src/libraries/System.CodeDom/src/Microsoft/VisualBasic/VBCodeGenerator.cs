@@ -522,7 +522,8 @@ namespace Microsoft.VisualBasic
 
         protected override void GenerateDirectionExpression(CodeDirectionExpression e)
         {
-            // Visual Basic does not need to adorn the calling point with a direction, so just output the expression.
+            // Visual Basic does not need to adorn the calling point with a direction, so just output the
+            // expression.
             GenerateExpression(e.Expression);
         }
 
@@ -1042,7 +1043,8 @@ namespace Microsoft.VisualBasic
             else
             {
                 Output.Write(d.ToString("R", CultureInfo.InvariantCulture));
-                // always mark a double as being a double in case we have no decimal portion (e.g write 1D instead of 1 which is an int)
+                // always mark a double as being a double in case we have no decimal portion (e.g write 1D instead
+                // of 1 which is an int)
                 Output.Write('R');
             }
         }
@@ -2133,7 +2135,8 @@ namespace Microsoft.VisualBasic
                 Indent++;
                 foreach (CodeTypeReference typeRef in e.BaseTypes)
                 {
-                    // if we're generating an interface, we always want to use Inherits because interfaces can't Implement anything.
+                    // if we're generating an interface, we always want to use Inherits because interfaces can't
+                    // Implement anything.
                     if (!writtenInherits && (e.IsInterface || !typeRef.IsInterface))
                     {
                         Output.WriteLine();
@@ -2700,7 +2703,8 @@ namespace Microsoft.VisualBasic
                     sb.Append(", ");
                 }
 
-                // it's possible that we call GetTypeArgumentsOutput with an empty typeArguments collection.  This is the case
+                // it's possible that we call GetTypeArgumentsOutput with an empty typeArguments collection.  This
+                // is the case
                 // for open types, so we want to just output the brackets and commas.
                 if (i < typeArguments.Count)
                     sb.Append(GetTypeOutput(typeArguments[i]));

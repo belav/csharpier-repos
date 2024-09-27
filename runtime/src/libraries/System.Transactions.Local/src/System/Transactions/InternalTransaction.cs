@@ -211,17 +211,22 @@ namespace System.Transactions
 
         internal ITransactionPromoter? _promoter;
 
-        // This member is used to allow a PSPE enlistment to call Transaction.PSPEPromoteAndConvertToEnlistDurable when it is
-        // asked to promote a transaction. The value is set to true in TransactionStatePSPEOperation.PSPEPromote before the
-        // Promote call is made and set back to false after the call returns (or an exception is thrown). The value is
-        // checked for true in TransactionStatePSPEOperation.PSPEPromoteAndConvertToEnlistDurable to make sure the transaction
+        // This member is used to allow a PSPE enlistment to call
+        // Transaction.PSPEPromoteAndConvertToEnlistDurable when it is
+        // asked to promote a transaction. The value is set to true in
+        // TransactionStatePSPEOperation.PSPEPromote before the
+        // Promote call is made and set back to false after the call returns (or an exception is thrown).
+        // The value is
+        // checked for true in TransactionStatePSPEOperation.PSPEPromoteAndConvertToEnlistDurable to make
+        // sure the transaction
         // is in the process of promoting via a PSPE enlistment.
         internal bool _attemptingPSPEPromote;
 
         // This is called from TransactionStatePromoted.EnterState. We assume we are promoting to MSDTC.
         internal void SetPromoterTypeToMSDTC()
         {
-            // The promoter type should either not yet be set or should already be TransactionInterop.PromoterTypeDtc in this case.
+            // The promoter type should either not yet be set or should already be
+            // TransactionInterop.PromoterTypeDtc in this case.
             if (
                 (_promoterType != Guid.Empty)
                 && (_promoterType != TransactionInterop.PromoterTypeDtc)

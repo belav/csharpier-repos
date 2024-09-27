@@ -7,7 +7,8 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Extension methods for setting up cross-origin resource sharing services in an <see cref="IServiceCollection" />.
+/// Extension methods for setting up cross-origin resource sharing services in an <see
+// cref="IServiceCollection" />.
 /// </summary>
 public static class CorsServiceCollectionExtensions
 {
@@ -34,7 +35,8 @@ public static class CorsServiceCollectionExtensions
     /// Adds cross-origin resource sharing services to the specified <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="setupAction">An <see cref="Action{CorsOptions}"/> to configure the provided <see cref="CorsOptions"/>.</param>
+    /// <param name="setupAction">An <see cref="Action{CorsOptions}"/> to configure the provided <see
+    // cref="CorsOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
     public static IServiceCollection AddCors(
         this IServiceCollection services,

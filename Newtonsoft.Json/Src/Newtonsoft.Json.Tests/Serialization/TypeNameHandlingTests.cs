@@ -1809,7 +1809,8 @@ namespace Newtonsoft.Json.Tests.Serialization
             //this.TestBinarySerializationRoundTrip(e);
 
             //Test Json Serialization
-            //This fails because the JsonSerializer doesn't serialize type names correctly for ISerializable objects
+            //This fails because the JsonSerializer doesn't serialize type names correctly for ISerializable
+            // objects
             //Type Names should be serialized for All, Auto and Object modes
             TestJsonSerializationRoundTrip(w, TypeNameHandling.All);
             TestJsonSerializationRoundTrip(w, TypeNameHandling.Auto);

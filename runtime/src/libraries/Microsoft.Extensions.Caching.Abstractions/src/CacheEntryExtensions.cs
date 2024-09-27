@@ -13,7 +13,8 @@ namespace Microsoft.Extensions.Caching.Memory
     public static class CacheEntryExtensions
     {
         /// <summary>
-        /// Sets the priority for keeping the cache entry in the cache during a memory pressure tokened cleanup.
+        /// Sets the priority for keeping the cache entry in the cache during a memory pressure tokened
+        // cleanup.
         /// </summary>
         /// <param name="entry">The entry to set the priority for.</param>
         /// <param name="priority">The <see cref="CacheItemPriority"/> to set on the entry.</param>
@@ -28,7 +29,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// Expire the cache entry if the given <see cref="IChangeToken"/> expires.
         /// </summary>
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
-        /// <param name="expirationToken">The <see cref="IChangeToken"/> that causes the cache entry to expire.</param>
+        /// <param name="expirationToken">The <see cref="IChangeToken"/> that causes the cache entry to
+        // expire.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry AddExpirationToken(
             this ICacheEntry entry,
@@ -45,7 +47,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// Sets an absolute expiration time, relative to now.
         /// </summary>
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
-        /// <param name="relative">The <see cref="TimeSpan"/> representing the expiration time relative to now.</param>
+        /// <param name="relative">The <see cref="TimeSpan"/> representing the expiration time relative to
+        // now.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry SetAbsoluteExpiration(this ICacheEntry entry, TimeSpan relative)
         {
@@ -57,7 +60,8 @@ namespace Microsoft.Extensions.Caching.Memory
         /// Sets an absolute expiration date for the cache entry.
         /// </summary>
         /// <param name="entry">The <see cref="ICacheEntry"/>.</param>
-        /// <param name="absolute">A <see cref="DateTimeOffset"/> representing the expiration time in absolute terms.</param>
+        /// <param name="absolute">A <see cref="DateTimeOffset"/> representing the expiration time in
+        // absolute terms.</param>
         /// <returns>The <see cref="ICacheEntry"/> for chaining.</returns>
         public static ICacheEntry SetAbsoluteExpiration(
             this ICacheEntry entry,

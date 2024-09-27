@@ -11,10 +11,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public sealed partial class InternalEntityEntry : IUpdateEntry
 {
@@ -26,10 +30,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     private readonly ISnapshot _shadowValues;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public InternalEntityEntry(IStateManager stateManager, IEntityType entityType, object entity)
     {
@@ -49,10 +57,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public InternalEntityEntry(
         IStateManager stateManager,
@@ -69,10 +81,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public InternalEntityEntry(
         IStateManager stateManager,
@@ -107,51 +123,75 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public DbContext Context => StateManager.Context;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object Entity { get; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     void IUpdateEntry.SetOriginalValue(IProperty property, object? value) =>
         SetOriginalValue(property, value);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     void IUpdateEntry.SetPropertyModified(IProperty property) => SetPropertyModified(property);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public IRuntimeEntityType EntityType { get; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     EntityState IUpdateEntry.EntityState
     {
@@ -160,10 +200,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public IStateManager StateManager
     {
@@ -172,18 +216,26 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public InternalEntityEntry? SharedIdentityEntry { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetEntityState(
         EntityState entityState,
@@ -222,10 +274,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public async Task SetEntityStateAsync(
         EntityState entityState,
@@ -357,7 +413,8 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             );
         }
 
-        // Temporarily change the internal state to unknown so that key generation, including setting key values
+        // Temporarily change the internal state to unknown so that key generation, including setting key
+        // values
         // can happen without constraints on changing read-only values kicking in
         _stateData.EntityState = EntityState.Detached;
 
@@ -630,10 +687,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void MarkUnchangedFromQuery()
     {
@@ -655,18 +716,26 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public EntityState EntityState => _stateData.EntityState;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsModified(IProperty property)
     {
@@ -678,19 +747,27 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsUnknown(IProperty property) =>
         _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.Unknown);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetPropertyModified(
         IProperty property,
@@ -808,10 +885,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void OnComplexPropertyModified(IComplexProperty property, bool isModified = true)
     {
@@ -836,36 +917,52 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool HasConceptualNull => _stateData.AnyPropertiesFlagged(PropertyFlag.Null);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsConceptualNull(IProperty property) =>
         _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.Null);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool HasTemporaryValue(IProperty property) =>
         GetValueType(property) == CurrentValueType.Temporary;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void PropagateValue(
         InternalEntityEntry principalEntry,
@@ -898,10 +995,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         : CurrentValueType.Normal;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetTemporaryValue(IProperty property, object? value, bool setModified = true)
     {
@@ -924,37 +1025,53 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void MarkAsTemporary(IProperty property, bool temporary) =>
         _stateData.FlagProperty(property.GetIndex(), PropertyFlag.IsTemporary, temporary);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public static readonly MethodInfo FlaggedAsTemporaryMethod =
         typeof(InternalEntityEntry).GetMethod(nameof(FlaggedAsTemporary))!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public static readonly MethodInfo FlaggedAsStoreGeneratedMethod =
         typeof(InternalEntityEntry).GetMethod(nameof(FlaggedAsStoreGenerated))!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetStoreGeneratedValue(IProperty property, object? value, bool setModified = true)
     {
@@ -976,10 +1093,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void MarkUnknown(IProperty property) =>
         _stateData.FlagProperty(property.GetIndex(), PropertyFlag.Unknown, true);
@@ -991,10 +1112,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             .MakeGenericMethod(type);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public T ReadShadowValue<T>(int shadowIndex) => _shadowValues.GetValue<T>(shadowIndex);
 
@@ -1011,10 +1136,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         ReadOriginalValueMethod.MakeGenericMethod(type);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public T ReadOriginalValue<T>(IProperty property, int originalValueIndex) =>
         _originalValues.GetValue<T>(this, property, originalValueIndex);
@@ -1033,10 +1162,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         ReadRelationshipSnapshotValueMethod.MakeGenericMethod(type);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public T ReadRelationshipSnapshotValue<T>(
         IPropertyBase propertyBase,
@@ -1056,10 +1189,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         .GetDeclaredMethod(nameof(ReadStoreGeneratedValue))!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public T ReadStoreGeneratedValue<T>(int storeGeneratedIndex) =>
         _storeGeneratedValues.GetValue<T>(storeGeneratedIndex);
@@ -1076,10 +1213,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         ReadTemporaryValueMethod.MakeGenericMethod(type);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public T ReadTemporaryValue<T>(int storeGeneratedIndex) =>
         _temporaryValues.GetValue<T>(storeGeneratedIndex);
@@ -1098,10 +1239,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         GetCurrentValueMethod.MakeGenericMethod(type);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public TProperty GetCurrentValue<TProperty>(IPropertyBase propertyBase) =>
         (
@@ -1110,10 +1255,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         )(this);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public TProperty GetOriginalValue<TProperty>(IProperty property) =>
         (
@@ -1122,10 +1271,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         )(this);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public TProperty GetRelationshipSnapshotValue<TProperty>(IPropertyBase propertyBase) =>
         (
@@ -1134,10 +1287,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         )(this);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? ReadPropertyValue(IPropertyBase propertyBase) =>
         propertyBase.IsShadowProperty()
@@ -1145,10 +1302,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             : propertyBase.GetGetter().GetClrValueUsingContainingEntity(Entity);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     private void WritePropertyValue(
         IPropertyBase propertyBase,
@@ -1173,10 +1334,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object GetOrCreateCollection(INavigationBase navigationBase, bool forMaterialization) =>
         navigationBase.IsShadowProperty()
@@ -1196,10 +1361,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool CollectionContains(INavigationBase navigationBase, object value)
     {
@@ -1213,10 +1382,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool AddToCollection(
         INavigationBase navigationBase,
@@ -1235,10 +1408,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool RemoveFromCollection(INavigationBase navigationBase, object value)
     {
@@ -1252,10 +1429,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? GetCurrentValue(IPropertyBase propertyBase) =>
         propertyBase is not IProperty property || !IsConceptualNull(property)
@@ -1263,10 +1444,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             : null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? GetPreStoreGeneratedCurrentValue(IPropertyBase propertyBase) =>
         propertyBase is not IProperty property || !IsConceptualNull(property)
@@ -1274,28 +1459,40 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             : null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? GetOriginalValue(IPropertyBase propertyBase) =>
         _originalValues.GetValue(this, (IProperty)propertyBase);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? GetRelationshipSnapshotValue(IPropertyBase propertyBase) =>
         _relationshipsSnapshot.GetValue(this, propertyBase);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetOriginalValue(IPropertyBase propertyBase, object? value, int index = -1)
     {
@@ -1322,10 +1519,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetRelationshipSnapshotValue(IPropertyBase propertyBase, object? value)
     {
@@ -1335,10 +1536,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void EnsureOriginalValues()
     {
@@ -1349,10 +1554,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void EnsureTemporaryValues()
     {
@@ -1363,10 +1572,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void EnsureStoreGeneratedValues()
     {
@@ -1377,10 +1590,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void EnsureRelationshipSnapshot()
     {
@@ -1391,26 +1608,38 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool HasOriginalValuesSnapshot => !_originalValues.IsEmpty;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool HasRelationshipSnapshot => !_relationshipsSnapshot.IsEmpty;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void RemoveFromCollectionSnapshot(INavigationBase navigation, object removedEntity)
     {
@@ -1419,10 +1648,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void AddToCollectionSnapshot(INavigationBase navigation, object addedEntity)
     {
@@ -1431,10 +1664,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void AddRangeToCollectionSnapshot(
         INavigationBase navigation,
@@ -1446,10 +1683,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public object? this[IPropertyBase propertyBase]
     {
@@ -1478,30 +1719,42 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool FlaggedAsStoreGenerated(int propertyIndex) =>
         !_storeGeneratedValues.IsEmpty
         && _stateData.IsPropertyFlagged(propertyIndex, PropertyFlag.IsStoreGenerated);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool FlaggedAsTemporary(int propertyIndex) =>
         !_temporaryValues.IsEmpty
         && _stateData.IsPropertyFlagged(propertyIndex, PropertyFlag.IsTemporary);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetProperty(
         IPropertyBase propertyBase,
@@ -1686,10 +1939,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void HandleNullForeignKey(
         IProperty property,
@@ -1726,10 +1983,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         property.GetValueComparer().Equals(value, otherValue);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void AcceptChanges()
     {
@@ -1783,10 +2044,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public InternalEntityEntry PrepareToSave()
     {
@@ -1917,10 +2182,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void HandleConceptualNulls(
         bool sensitiveLoggingEnabled,
@@ -2054,10 +2323,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void DiscardStoreGeneratedValues()
     {
@@ -2073,10 +2346,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsStoreGenerated(IProperty property) =>
         (
@@ -2101,19 +2378,27 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool HasStoreGeneratedValue(IProperty property) =>
         GetValueType(property) == CurrentValueType.StoreGenerated;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public bool HasExplicitValue(IProperty property) =>
@@ -2127,10 +2412,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
             : property.GetGetter().HasSentinelUsingContainingEntity(Entity);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public (bool IsGenerated, bool IsSet) IsKeySet
     {
@@ -2165,10 +2454,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsKeyUnknown
     {
@@ -2191,18 +2484,26 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public EntityEntry ToEntityEntry() => new(this);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void HandleINotifyPropertyChanging(object? sender, PropertyChangingEventArgs eventArgs)
     {
@@ -2224,10 +2525,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void HandleINotifyPropertyChanged(object? sender, PropertyChangedEventArgs eventArgs)
     {
@@ -2294,10 +2599,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void HandleINotifyCollectionChanged(
         object? sender,
@@ -2345,10 +2654,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public void SetIsLoaded(INavigationBase navigation, bool loaded = true)
     {
@@ -2378,10 +2691,14 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public bool IsLoaded(INavigationBase navigation) =>
         GetLazyLoader()?.IsLoaded(Entity, navigation.Name)
@@ -2401,19 +2718,27 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override string ToString() =>
         this.ToDebugString(ChangeTrackerDebugStringOptions.ShortDefault);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public DebugView DebugView =>
         new(

@@ -55,9 +55,12 @@ internal sealed class ProcessEx : IDisposable
             OnProcessExited();
         }
 
-        // We greedily create a timeout exception message even though a timeout is unlikely to happen for two reasons:
-        // 1. To make it less likely for Process getters to throw exceptions like "System.InvalidOperationException: Process has exited, ..."
-        // 2. To ensure if/when exceptions are thrown from Process getters, these exceptions can easily be observed.
+        // We greedily create a timeout exception message even though a timeout is unlikely to happen for
+        // two reasons:
+        // 1. To make it less likely for Process getters to throw exceptions like
+        // "System.InvalidOperationException: Process has exited, ..."
+        // 2. To ensure if/when exceptions are thrown from Process getters, these exceptions can easily be
+        // observed.
         var timeoutExMessage =
             $"Process proc {proc.ProcessName} {proc.StartInfo.Arguments} timed out after {timeout}.";
 
@@ -198,7 +201,8 @@ internal sealed class ProcessEx : IDisposable
                 _output.WriteLine("Process exited.");
             }
         }
-        // Don't remove this line - There is a race condition where the process exits and we grab the output before the stdout/stderr completed writing.
+        // Don't remove this line - There is a race condition where the process exits and we grab the output
+        // before the stdout/stderr completed writing.
         _process.WaitForExit();
         _stdoutLines?.CompleteAdding();
         _stdoutLines = null;

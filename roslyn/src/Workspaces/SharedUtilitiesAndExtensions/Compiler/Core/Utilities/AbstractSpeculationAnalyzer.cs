@@ -18,11 +18,14 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     /// <summary>
-    /// Helper class to analyze the semantic effects of a speculated syntax node replacement on the parenting nodes.
+    /// Helper class to analyze the semantic effects of a speculated syntax node replacement on the
+    // parenting nodes.
     /// Given an expression node from a syntax tree and a new expression from a different syntax tree,
     /// it replaces the expression with the new expression to create a speculated syntax tree.
-    /// It uses the original tree's semantic model to create a speculative semantic model and verifies that
-    /// the syntax replacement doesn't break the semantics of any parenting nodes of the original expression.
+    /// It uses the original tree's semantic model to create a speculative semantic model and verifies
+    // that
+    /// the syntax replacement doesn't break the semantics of any parenting nodes of the original
+    // expression.
     /// </summary>
     internal abstract class AbstractSpeculationAnalyzer<
         TExpressionSyntax,
@@ -61,15 +64,18 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// </summary>
         /// <param name="expression">Original expression to be replaced.</param>
         /// <param name="newExpression">New expression to replace the original expression.</param>
-        /// <param name="semanticModel">Semantic model of <paramref name="expression"/> node's syntax tree.</param>
+        /// <param name="semanticModel">Semantic model of <paramref name="expression"/> node's syntax
+        // tree.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <param name="skipVerificationForReplacedNode">
-        /// True if semantic analysis should be skipped for the replaced node and performed starting from parent of the original and replaced nodes.
+        /// True if semantic analysis should be skipped for the replaced node and performed starting from
+        // parent of the original and replaced nodes.
         /// This could be the case when custom verifications are required to be done by the caller or
         /// semantics of the replaced expression are different from the original expression.
         /// </param>
         /// <param name="failOnOverloadResolutionFailuresInOriginalCode">
-        /// True if semantic analysis should fail when any of the invocation expression ancestors of <paramref name="expression"/> in original code has overload resolution failures.
+        /// True if semantic analysis should fail when any of the invocation expression ancestors of
+        // <paramref name="expression"/> in original code has overload resolution failures.
         /// </param>
         public AbstractSpeculationAnalyzer(
             TExpressionSyntax expression,
@@ -105,7 +111,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         SyntaxNode ISpeculationAnalyzer.OriginalExpression => OriginalExpression;
 
         /// <summary>
-        /// First ancestor of <see cref="OriginalExpression"/> which is either a statement, attribute, constructor initializer,
+        /// First ancestor of <see cref="OriginalExpression"/> which is either a statement, attribute,
+        // constructor initializer,
         /// field initializer, default parameter initializer or type syntax node.
         /// It serves as the root node for all semantic analysis for this syntax replacement.
         /// </summary>
@@ -132,7 +139,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         /// <summary>
         /// Node which replaces the <see cref="OriginalExpression"/>.
-        /// Note that this node is a cloned version of <see cref="_newExpressionForReplace"/> node, which has been re-parented
+        /// Note that this node is a cloned version of <see cref="_newExpressionForReplace"/> node, which
+        // has been re-parented
         /// under the node to be speculated, i.e. <see cref="SemanticRootOfReplacedExpression"/>.
         /// </summary>
         public TExpressionSyntax ReplacedExpression
@@ -147,8 +155,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         SyntaxNode ISpeculationAnalyzer.ReplacedExpression => ReplacedExpression;
 
         /// <summary>
-        /// Node created by replacing <see cref="OriginalExpression"/> under <see cref="SemanticRootOfOriginalExpression"/> node.
-        /// This node is used as the argument to the GetSpeculativeSemanticModel API and serves as the root node for all
+        /// Node created by replacing <see cref="OriginalExpression"/> under <see
+        // cref="SemanticRootOfOriginalExpression"/> node.
+        /// This node is used as the argument to the GetSpeculativeSemanticModel API and serves as the root
+        // node for all
         /// semantic analysis of the speculated tree.
         /// </summary>
         public SyntaxNode SemanticRootOfReplacedExpression
@@ -256,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (originalTypeInfo.Type == null)
                 return false;
 
-            // If the original had a type, but the new expression doesn't, this is *normally* bad.  However, there are
+            // If the original had a type, but the new expression doesn't, this is *normally* bad.  However,
+            // there are
             // some cases where it is ok (untyped language expressions that have natural conversions to typed
             // expressions).  Subclasses can override this for those cases.
             if (newTypeInfo.Type == null)
@@ -287,8 +298,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (SymbolsAreCompatible(originalTypeInfo.Type, newTypeInfo.Type))
                 return true;
 
-            // types changed between the old and new expression (specifically, the new type became null, while the
-            // original type was not).  That's ok in some circumstance.  Check for those and allow in that specific
+            // types changed between the old and new expression (specifically, the new type became null, while
+            // the
+            // original type was not).  That's ok in some circumstance.  Check for those and allow in that
+            // specific
             // case.
             if (
                 originalTypeInfo.Type != null
@@ -517,7 +530,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 newSymbol = ((IMethodSymbol)newSymbol).GetConstructedReducedFrom()!;
             }
 
-            // TODO: Lambda function comparison performs syntax equality, hence is non-trivial to compare lambda methods across different compilations.
+            // TODO: Lambda function comparison performs syntax equality, hence is non-trivial to compare lambda
+            // methods across different compilations.
             // For now, just assume they are equal.
             if (symbol.IsAnonymousFunction())
             {
@@ -526,7 +540,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             if (performEquivalenceCheck)
             {
-                // We are comparing symbols across two semantic models (where neither is the speculative model of other one).
+                // We are comparing symbols across two semantic models (where neither is the speculative model of
+                // other one).
                 // We will use the SymbolEquivalenceComparer to check if symbols are equivalent.
                 return CompareAcrossSemanticModels(symbol, newSymbol);
             }
@@ -538,7 +553,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             if (symbol is IMethodSymbol methodSymbol && newSymbol is IMethodSymbol newMethodSymbol)
             {
-                // If we have local functions, we can't use normal symbol equality for them (since that checks locations).
+                // If we have local functions, we can't use normal symbol equality for them (since that checks
+                // locations).
                 // Have to defer to SymbolEquivalence instead.
                 if (
                     methodSymbol.MethodKind == MethodKind.LocalFunction
@@ -574,8 +590,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private static bool CompareAcrossSemanticModels(ISymbol symbol, ISymbol newSymbol)
         {
-            // SymbolEquivalenceComparer performs Location equality checks for locals, labels, range-variables and local
-            // functions. As we are comparing symbols from different semantic models, locations will differ. Hence
+            // SymbolEquivalenceComparer performs Location equality checks for locals, labels, range-variables
+            // and local
+            // functions. As we are comparing symbols from different semantic models, locations will differ.
+            // Hence
             // perform minimal checks for these symbol kinds.
 
             if (symbol.Kind != newSymbol.Kind)
@@ -635,9 +653,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         #endregion
 
         /// <summary>
-        /// Determines whether performing the given syntax replacement will change the semantics of any parenting expressions
-        /// by performing a bottom up walk from the <see cref="OriginalExpression"/> up to <see cref="SemanticRootOfOriginalExpression"/>
-        /// in the original tree and simultaneously walking bottom up from <see cref="ReplacedExpression"/> up to <see cref="SemanticRootOfReplacedExpression"/>
+        /// Determines whether performing the given syntax replacement will change the semantics of any
+        // parenting expressions
+        /// by performing a bottom up walk from the <see cref="OriginalExpression"/> up to <see
+        // cref="SemanticRootOfOriginalExpression"/>
+        /// in the original tree and simultaneously walking bottom up from <see cref="ReplacedExpression"/>
+        // up to <see cref="SemanticRootOfReplacedExpression"/>
         /// in the speculated syntax tree and performing appropriate semantic comparisons.
         /// </summary>
         public bool ReplacementChangesSemantics()
@@ -715,7 +736,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         /// <summary>
-        /// Checks whether the semantic symbols for the <see cref="OriginalExpression"/> and <see cref="ReplacedExpression"/> are non-null and compatible.
+        /// Checks whether the semantic symbols for the <see cref="OriginalExpression"/> and <see
+        // cref="ReplacedExpression"/> are non-null and compatible.
         /// </summary>
         /// <returns></returns>
         public bool SymbolsForOriginalAndReplacedNodesAreCompatible()
@@ -841,7 +863,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 var originalTypeInfo = this.OriginalSemanticModel.GetTypeInfo(originalExpression);
                 var newTypeInfo = this.SpeculativeSemanticModel.GetTypeInfo(newExpression);
 
-                // If we didn't have an error before, but now we got one, that's bad and should block conversion in all cases.
+                // If we didn't have an error before, but now we got one, that's bad and should block conversion in
+                // all cases.
                 if (newTypeInfo.Type.IsErrorType() && !originalTypeInfo.Type.IsErrorType())
                     return true;
 
@@ -871,10 +894,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var syntaxFacts = this.SyntaxFactsService;
 
             // it is legal to go from expr.X to X if expr is either used for static-lookup (e.g.
-            // `MyNs.MyType.MyStaticMember` -> `MyStaticMember`), or if it's used for instance lookup, but only if expr
-            // is `this` or `base`.  We will ensure that the 'X' binds to the same symbol.  If so, the static case is
-            // fine, as as long as the member is available without issue (e.g. accessibility etc.) then it doesn't
-            // change meaning when switching.  The same holds true for an instance method with this/base as that is
+            // `MyNs.MyType.MyStaticMember` -> `MyStaticMember`), or if it's used for instance lookup, but only
+            // if expr
+            // is `this` or `base`.  We will ensure that the 'X' binds to the same symbol.  If so, the static
+            // case is
+            // fine, as as long as the member is available without issue (e.g. accessibility etc.) then it
+            // doesn't
+            // change meaning when switching.  The same holds true for an instance method with this/base as that
+            // is
             // allowed to be implicit if it binds to the same exact member.
 
             if (
@@ -891,9 +918,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 if (!SymbolsAreCompatible(originalExpression, newExpression))
                     return false;
 
-                // If static became instance or instance became static, consider that a change in semantics.  Note: this
+                // If static became instance or instance became static, consider that a change in semantics.  Note:
+                // this
                 // does mean a change from extension->instance call (or vice versa) will be seen as a change in
-                // semantics.  We could potentially support this, but we'd have to do the analysis the instance invoked
+                // semantics.  We could potentially support this, but we'd have to do the analysis the instance
+                // invoked
                 // on and the instance passed as the first parameter are identical.
 
                 var originalIsStaticAccess = IsStaticAccess(
@@ -967,7 +996,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         /// <summary>
         /// Determine if removing the cast could cause the semantics of System.Object method call to change.
-        /// E.g. Dim b = CStr(1).GetType() is necessary, but the GetType method symbol info resolves to the same with or without the cast.
+        /// E.g. Dim b = CStr(1).GetType() is necessary, but the GetType method symbol info resolves to the
+        // same with or without the cast.
         /// </summary>
         private bool ReplacementBreaksSystemObjectMethodResolution(
             SyntaxNode currentOriginalNode,
@@ -1189,7 +1219,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 .SpeculativeSemanticModel.GetTypeInfo(newThrowExpression)
                 .Type;
 
-            // C# language specification requires that type of the expression passed to ThrowStatement is or derives from System.Exception.
+            // C# language specification requires that type of the expression passed to ThrowStatement is or
+            // derives from System.Exception.
             return originalThrowExpressionType.IsOrDerivesFromExceptionType(
                     this.OriginalSemanticModel.Compilation
                 )
@@ -1270,8 +1301,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             if (SymbolInfosAreCompatible(originalSymbolInfo, newSymbolInfo))
             {
                 // Original and new symbols for the invocation expression are compatible.
-                // However, if the symbols are interface members and if the receiver symbol for one of the expressions is a possible ValueType type parameter,
-                // and the other one is not, then there might be a boxing conversion at runtime which causes different runtime behavior.
+                // However, if the symbols are interface members and if the receiver symbol for one of the
+                // expressions is a possible ValueType type parameter,
+                // and the other one is not, then there might be a boxing conversion at runtime which causes
+                // different runtime behavior.
                 if (symbol.IsImplementableMember())
                 {
                     if (
@@ -1328,7 +1361,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return false;
             }
 
-            // Allow speculated invocation expression to bind to a different method symbol if the method's containing type is a delegate type
+            // Allow speculated invocation expression to bind to a different method symbol if the method's
+            // containing type is a delegate type
             // which has a delegate variance conversion to/from the original method's containing delegate type.
             if (
                 newSymbol.ContainingType.IsDelegateType()
@@ -1391,16 +1425,20 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         )
         {
             // In general, we don't want to remove casts to interfaces.  It may have subtle changes in behavior,
-            // especially if the types in question change in the future.  For example, if a type becomes non-sealed or a
+            // especially if the types in question change in the future.  For example, if a type becomes
+            // non-sealed or a
             // new interface impl is introduced, we may subtly break things.
             //
             // The only cases where we feel confident enough to elide the cast are:
             //
-            // 1. When we have an Array/Delegate/Enum. These are such core types, and cannot be changed by teh user,
+            // 1. When we have an Array/Delegate/Enum. These are such core types, and cannot be changed by teh
+            // user,
             //    that we can trust their impls to not change.
-            // 2. We have one of the builtin structs (like int). These are such core types, and cannot be changed by teh
+            // 2. We have one of the builtin structs (like int). These are such core types, and cannot be
+            // changed by teh
             //    user, that we can trust their impls to not change.
-            // 3. if we have a struct and we know we have a fresh copy of it.  In that case, boxing the struct to the
+            // 3. if we have a struct and we know we have a fresh copy of it.  In that case, boxing the struct
+            // to the
             //    interface doesn't serve any purpose.
 
             var newSymbolContainingType = newSymbol.ContainingType;
@@ -1436,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
             if (newReceiverType.IsValueType)
             {
-                // Presume builtin value types are all immutable, and thus will have the same semantics when you call
+                // Presume builtin value types are all immutable, and thus will have the same semantics when you
+                // call
                 // interface members on them directly instead of through a boxed copy.
                 if (newReceiverType.SpecialType != SpecialType.None)
                     return true;
@@ -1471,8 +1510,10 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return false;
         }
 
-        // Returns true if the given receiver expression for an invocation represents a unique copy of the underlying
-        // object that is not referenced by any other variable. For example, if the receiver expression is produced by a
+        // Returns true if the given receiver expression for an invocation represents a unique copy of the
+        // underlying
+        // object that is not referenced by any other variable. For example, if the receiver expression is
+        // produced by a
         // method call, property, or indexer, then it will be a fresh receiver in the case of value types.
         private static bool IsReceiverUniqueInstance(
             TExpressionSyntax receiver,

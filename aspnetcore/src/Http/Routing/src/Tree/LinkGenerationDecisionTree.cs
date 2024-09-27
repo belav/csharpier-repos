@@ -106,14 +106,17 @@ internal sealed class LinkGenerationDecisionTree
     //  context.Values = { controller = Store, action = Buy }
     //  context.AmbientValues = { area = Help, controller = AboutStore, action = HowToBuyThings }
     //
-    //  In this case the entry is a match. The 'controller' and 'action' are both supplied by context.Values,
-    //  and the 'area' is satisfied because there's NOT a value in context.Values. It's OK to ignore ambient
+    //  In this case the entry is a match. The 'controller' and 'action' are both supplied by
+    // context.Values,
+    //  and the 'area' is satisfied because there's NOT a value in context.Values. It's OK to ignore
+    // ambient
     //  values in link generation.
     //
     //  If another entry existed like { area = Help, controller = Store, action = Buy }, this would also
     //  match.
     //
-    // The decision tree uses a tree data structure to execute these rules across all candidates at once.
+    // The decision tree uses a tree data structure to execute these rules across all candidates at
+    // once.
     private static void Walk(
         List<OutboundMatchResult> results,
         RouteValueDictionary values,

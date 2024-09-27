@@ -14,7 +14,8 @@ namespace System.Data
     using System.Runtime.Serialization;
 
     /// <devdoc>
-    /// <para>Represents a collection of properties that can be added to <see cref='System.Data.DataColumn'/>,
+    /// <para>Represents a collection of properties that can be added to <see
+    // cref='System.Data.DataColumn'/>,
     /// <see cref='System.Data.DataSet'/>,
     ///    or <see cref='System.Data.DataTable'/>.</para>
     /// </devdoc>
@@ -39,5 +40,6 @@ namespace System.Data
             return clone;
         }
     }
-    //3 NOTE: This should have been named PropertyDictionary, to avoid fxcop warnings about not having strongly typed IList and ICollection implementations, but it's too late now...
+    //3 NOTE: This should have been named PropertyDictionary, to avoid fxcop warnings about not having
+    // strongly typed IList and ICollection implementations, but it's too late now...
 }

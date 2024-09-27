@@ -117,7 +117,8 @@ namespace Microsoft.Build.Internal
         void StartOneBuild(BuildSubmission build)
         {
             var node = TakeNode(build);
-            // FIXME: Task (non-generic) here causes NotImplementedException in somewhere in Interlocked. It does not make sense.
+            // FIXME: Task (non-generic) here causes NotImplementedException in somewhere in Interlocked. It
+            // does not make sense.
             ongoing_builds[build] = task_factory.StartNew(node.ExecuteBuild);
             //new Thread (() => { node.ExecuteBuild (); }).Start ();
         }

@@ -162,6 +162,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal(2, results.Count);
         }
 
+        //
         // TryValidateObject_returns_true_if_validateAllProperties_is_false_and_Required_test_passes_even_if_there_are_other_errors()
         [Fact]
         public static void TestTryValidateObjectSuccessEvenWithOtherErrors()
@@ -654,6 +655,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal("Invalid Value", exception.Value);
         }
 
+        //
         // ValidateObject_returns_true_if_validateAllProperties_is_false_and_Required_test_passes_even_if_there_are_other_errors
         [Fact]
         public static void TestValidateObjectNotThrowIfvalidateAllPropertiesFalse()
@@ -666,6 +668,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Validator.ValidateObject(objectToBeValidated, validationContext, false);
         }
 
+        //
         // ValidateObject_throws_ValidationException_if_validateAllProperties_is_true_and_Required_test_fails
         [Fact]
         public static void TestValidateObjectThrowsIfRequiredTestFails()
@@ -1961,6 +1964,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Validator.ValidateValue("Valid Value", validationContext, attributesToValidate);
         }
 
+        //
         // ValidateValue_throws_ValidationException_if_Property_has_no_RequiredAttribute_and_value_is_invalid()
         [Fact]
         public static void TestValidateValueThrowsIfNoRequiredAttribute()

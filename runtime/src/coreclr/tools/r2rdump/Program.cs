@@ -85,12 +85,15 @@ namespace R2RDump
         }
 
         // <summary>
-        /// For each query in the list of queries, dump all methods matching the query by name, signature or id
+        /// For each query in the list of queries, dump all methods matching the query by name, signature or
+        // id
         /// </summary>
         /// <param name="r2r">Contains all the extracted info about the ReadyToRun image</param>
-        /// <param name="title">The title to print, "R2R Methods by Query" or "R2R Methods by Keyword"</param>
+        /// <param name="title">The title to print, "R2R Methods by Query" or "R2R Methods by
+        // Keyword"</param>
         /// <param name="queries">The keywords/ids to search for</param>
-        /// <param name="exact">Specifies whether to look for methods with names/signatures/ids matching the method exactly or partially</param>
+        /// <param name="exact">Specifies whether to look for methods with names/signatures/ids matching the
+        // method exactly or partially</param>
         private void QueryMethod(
             ReadyToRunReader r2r,
             string title,
@@ -114,7 +117,8 @@ namespace R2RDump
         }
 
         // <summary>
-        /// For each query in the list of queries, dump all sections by the name or value of the ReadyToRunSectionType enum
+        /// For each query in the list of queries, dump all sections by the name or value of the
+        // ReadyToRunSectionType enum
         /// </summary>
         /// <param name="r2r">Contains all the extracted info about the ReadyToRun image</param>
         /// <param name="queries">The names/values to search for</param>
@@ -137,7 +141,8 @@ namespace R2RDump
 
         // <summary>
         /// For each query in the list of queries, dump a runtime function by id.
-        /// The method containing the runtime function gets outputted, along with the single runtime function that was searched
+        /// The method containing the runtime function gets outputted, along with the single runtime
+        // function that was searched
         /// </summary>
         /// <param name="r2r">Contains all the extracted info about the ReadyToRun image</param>
         /// <param name="queries">The ids to search for</param>
@@ -372,7 +377,8 @@ namespace R2RDump
         }
 
         /// <summary>
-        /// Returns true if the name or value of the ReadyToRunSectionType of <param>section</param> matches <param>query</param>
+        /// Returns true if the name or value of the ReadyToRunSectionType of <param>section</param> matches
+        // <param>query</param>
         /// </summary>
         /// <remarks>Case-insensitive</remarks>
         private bool Match(ReadyToRunSection section, string query)
@@ -407,7 +413,8 @@ namespace R2RDump
         }
 
         /// <summary>
-        /// Finds all R2RSections by name or value of the ReadyToRunSectionType matching <param>query</param>
+        /// Finds all R2RSections by name or value of the ReadyToRunSectionType matching
+        // <param>query</param>
         /// </summary>
         /// <param name="r2r">Contains all extracted info about the ReadyToRun image</param>
         /// <param name="query">The name or value to search for</param>

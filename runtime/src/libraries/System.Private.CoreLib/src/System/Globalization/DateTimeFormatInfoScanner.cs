@@ -43,7 +43,7 @@ namespace System.Globalization
         GREGORIAN_US = 2, // Gregorian (U.S.) calendar
         JAPAN = 3, // Japanese Emperor Era calendar
 
-        /* SSS_WARNINGS_OFF */
+/* SSS_WARNINGS_OFF */
         TAIWAN = 4, // Taiwan Era calendar /* SSS_WARNINGS_ON */
         KOREA = 5, // Korean Tangun Era calendar
         HIJRI = 6, // Hijri (Arabic Lunar) calendar

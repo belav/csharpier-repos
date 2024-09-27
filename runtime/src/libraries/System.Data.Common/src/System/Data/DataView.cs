@@ -40,11 +40,13 @@ namespace System.Data
         private string _sort = string.Empty;
 
         /// <summary>Allow a user implemented comparison of two DataRow</summary>
-        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will happen</remarks>
+        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will
+        // happen</remarks>
         private System.Comparison<DataRow>? _comparison;
 
         /// <summary>
-        /// IFilter will allow LinqDataView to wrap <see cref='System.Predicate&lt;DataRow&gt;'/> instead of using a DataExpression
+        /// IFilter will allow LinqDataView to wrap <see cref='System.Predicate&lt;DataRow&gt;'/> instead of
+        // using a DataExpression
         /// </summary>
         private IFilter? _rowFilter;
 
@@ -78,8 +80,10 @@ namespace System.Data
         /// and each thread must obtain the same DataRowView instance and we want to avoid (inter)locking.
         /// </summary>
         /// <remarks>
-        /// In V1.1, the DataRowView[] was recreated after every change.  Each DataRowView was bound to a DataRow.
-        /// In V2.0 Whidbey, the DataRowView retained but bound to an index instead of DataRow, allowing the DataRow to vary.
+        /// In V1.1, the DataRowView[] was recreated after every change.  Each DataRowView was bound to a
+        // DataRow.
+        /// In V2.0 Whidbey, the DataRowView retained but bound to an index instead of DataRow, allowing the
+        // DataRow to vary.
         /// In V2.0 Orcas, the DataRowView retained and bound to a DataRow, allowing the index to vary.
         /// </remarks>
         private Dictionary<DataRow, DataRowView> _rowViewCache = new Dictionary<
@@ -88,7 +92,8 @@ namespace System.Data
         >(DataRowReferenceComparer.s_default);
 
         /// <summary>
-        /// This collection allows expression maintenance to (add / remove) from the index when it really should be a (change / move).
+        /// This collection allows expression maintenance to (add / remove) from the index when it really
+        // should be a (change / move).
         /// </summary>
         private readonly Dictionary<DataRow, DataRowView> _rowViewBuffer = new Dictionary<
             DataRow,
@@ -346,7 +351,8 @@ namespace System.Data
             ((null != _index) ? _index.RecordCount : 0) + ((null != _addNewRow) ? 1 : 0);
 
         /// <summary>
-        /// Gets the <see cref='System.Data.DataViewManager'/> associated with this <see cref='System.Data.DataView'/> .
+        /// Gets the <see cref='System.Data.DataViewManager'/> associated with this <see
+        // cref='System.Data.DataView'/> .
         /// </summary>
         [Browsable(false)]
         public DataViewManager? DataViewManager => _dataViewManager;
@@ -364,7 +370,8 @@ namespace System.Data
         bool ICollection.IsSynchronized => false;
 
         /// <summary>
-        /// Gets or sets the expression used to filter which rows are viewed in the <see cref='System.Data.DataView'/>.
+        /// Gets or sets the expression used to filter which rows are viewed in the <see
+        // cref='System.Data.DataView'/>.
         /// </summary>
         [DefaultValue("")]
         public virtual string? RowFilter
@@ -538,7 +545,8 @@ namespace System.Data
         }
 
         /// <summary>Allow a user implemented comparison of two DataRow</summary>
-        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will happen</remarks>
+        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will
+        // happen</remarks>
         internal System.Comparison<DataRow>? SortComparison
         {
             get { return _comparison; }
@@ -834,7 +842,8 @@ namespace System.Data
         /// </summary>
         public int Find(object? key) => FindByKey(key);
 
-        /// <summary>Find index of a DataRowView instance that matches the specified primary key value.</summary>
+        /// <summary>Find index of a DataRowView instance that matches the specified primary key
+        // value.</summary>
         // TODO: This will throw NRE if _index isn't set (e.g. default ctor)
         internal virtual int FindByKey(object? key) => _index!.FindRecordByKey(key);
 
@@ -843,7 +852,8 @@ namespace System.Data
         /// </summary>
         public int Find(object?[] key) => FindByKey(key);
 
-        /// <summary>Find index of a DataRowView instance that matches the specified primary key values.</summary>
+        /// <summary>Find index of a DataRowView instance that matches the specified primary key
+        // values.</summary>
         // TODO: This will throw NRE if _index isn't set (e.g. default ctor)
         internal virtual int FindByKey(object?[] key) => _index!.FindRecordByKey(key);
 
@@ -876,7 +886,8 @@ namespace System.Data
             }
         }
 
-        /// <summary>This method exists for LinqDataView to keep a level of abstraction away from the RBTree</summary>
+        /// <summary>This method exists for LinqDataView to keep a level of abstraction away from the
+        // RBTree</summary>
         internal Range FindRecords<TKey, TRow>(
             Index.ComparisonBySelector<TKey, TRow> comparison,
             TKey key
@@ -1685,7 +1696,8 @@ namespace System.Data
                     DataViewSetting dataViewSetting = dataViewManager.DataViewSettings[_table];
                     try
                     {
-                        // sdub: check that we will not do unnesasary operation here if dataViewSetting.Sort == this.Sort ...
+                        // sdub: check that we will not do unnesasary operation here if dataViewSetting.Sort == this.Sort
+                        // ...
                         _applyDefaultSort = dataViewSetting.ApplyDefaultSort;
                         DataExpression newFilter = CreateDataExpressionFromDataViewSettings(
                             dataViewSetting
@@ -1876,7 +1888,7 @@ namespace System.Data
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
                 :
-                /*default*/null! // TODO: This will cause an NRE
+/*default*/null! // TODO: This will cause an NRE
             );
         }
 
@@ -1897,7 +1909,7 @@ namespace System.Data
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
                 :
-                /*default*/null! // TODO: This will cause an NRE
+/*default*/null! // TODO: This will cause an NRE
             );
         }
 
@@ -1918,7 +1930,7 @@ namespace System.Data
                         new DataColumnPropertyDescriptor((System.Data.DataColumn)e.Element!)
                     )
                 :
-                /*default*/null! // TODO: This will cause an NRE
+/*default*/null! // TODO: This will cause an NRE
             );
         }
 
@@ -2021,7 +2033,8 @@ namespace System.Data
 
         /// <summary>
         /// If <paramref name="view"/> is equivalent to the current view with regards to all properties.
-        /// <see cref="RowFilter"/> and <see cref="Sort"/> may differ by <see cref="StringComparison.OrdinalIgnoreCase"/>.
+        /// <see cref="RowFilter"/> and <see cref="Sort"/> may differ by <see
+        // cref="StringComparison.OrdinalIgnoreCase"/>.
         /// </summary>
         public virtual bool Equals(DataView? view)
         {

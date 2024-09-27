@@ -265,8 +265,10 @@ namespace System.Security.Cryptography
             int outputOffset
         )
         {
-            // Note: special handling required if decrypting & using padding because the padding adds to the end of the last
-            // block, we have to buffer an entire block's worth of bytes in case what I just transformed turns out to be
+            // Note: special handling required if decrypting & using padding because the padding adds to the end
+            // of the last
+            // block, we have to buffer an entire block's worth of bytes in case what I just transformed turns
+            // out to be
             // the last block Then in TransformFinalBlock we strip off the padding.
 
             if (inputBuffer == null)
@@ -510,7 +512,8 @@ namespace System.Security.Cryptography
             int padSize = 0;
             int lonelyBytes = inputCount % m_inputBlockSize;
 
-            // Check the padding mode and make sure we have enough outputBuffer to handle any padding we have to do.
+            // Check the padding mode and make sure we have enough outputBuffer to handle any padding we have to
+            // do.
             byte[] padBytes = null;
             int workBaseIndex = inputOffset,
                 index = 0;

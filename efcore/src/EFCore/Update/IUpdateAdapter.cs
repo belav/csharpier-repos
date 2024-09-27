@@ -9,12 +9,14 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         <see cref="EntityTypeBuilder.HasData(object[])" />.
 ///     </para>
 ///     <para>
-///         This interface is typically used by database providers (and other extensions). It is generally
+///         This interface is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface IUpdateAdapter
@@ -35,7 +37,8 @@ public interface IUpdateAdapter
     /// <summary>
     ///     Gets or sets a value indicating when a dependent/child entity will have its state
     ///     set to <see cref="EntityState.Deleted" /> once its parent/principal entity has been marked
-    ///     as <see cref="EntityState.Deleted" />. The default value is<see cref="CascadeTiming.Immediate" />.
+    ///     as <see cref="EntityState.Deleted" />. The default value is<see
+    // cref="CascadeTiming.Immediate" />.
     /// </summary>
     /// <remarks>
     ///     Dependent/child entities are only deleted automatically when the relationship
@@ -65,7 +68,8 @@ public interface IUpdateAdapter
     /// </summary>
     /// <param name="key">The primary or alternate key to use.</param>
     /// <param name="keyValues">The key values.</param>
-    /// <returns>The entry for the found entity, or null if no entity with these key values is being tracked.</returns>
+    /// <returns>The entry for the found entity, or null if no entity with these key values is being
+    // tracked.</returns>
     IUpdateEntry? TryGetEntry(IKey key, object?[] keyValues);
 
     /// <summary>
@@ -86,11 +90,13 @@ public interface IUpdateAdapter
     /// <remarks>
     ///     <para>
     ///         This method is usually used when <see cref="ChangeTracker.CascadeDeleteTiming" /> and/or
-    ///         <see cref="ChangeTracker.DeleteOrphansTiming" /> have been set to <see cref="CascadeTiming.Never" />
+    ///         <see cref="ChangeTracker.DeleteOrphansTiming" /> have been set to <see
+    // cref="CascadeTiming.Never" />
     ///         to manually force the deletes to have at a time controlled by the application.
     ///     </para>
     ///     <para>
-    ///         If <see cref="ChangeTracker.AutoDetectChangesEnabled" /> is <see langword="null" /> then this method
+    ///         If <see cref="ChangeTracker.AutoDetectChangesEnabled" /> is <see langword="null" /> then
+    // this method
     ///         will call <see cref="DetectChanges" />.
     ///     </para>
     /// </remarks>

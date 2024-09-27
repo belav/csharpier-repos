@@ -10,7 +10,8 @@ using System.Composition;
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     /// <summary>
-    /// Use this attribute to declare a <see cref="ILanguageService"/> implementation for inclusion in a MEF-based workspace.
+    /// Use this attribute to declare a <see cref="ILanguageService"/> implementation for inclusion in a
+    // MEF-based workspace.
     /// </summary>
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
@@ -34,9 +35,12 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         /// <summary>
         /// Declares a <see cref="ILanguageService"/> implementation for inclusion in a MEF-based workspace.
         /// </summary>
-        /// <param name="type">The type that will be used to retrieve the service from a <see cref="HostLanguageServices"/>.</param>
-        /// <param name="language">The language that the service is target for; LanguageNames.CSharp, etc.</param>
-        /// <param name="layer">The layer that the service is specified for; ServiceLayer.Default, etc.</param>
+        /// <param name="type">The type that will be used to retrieve the service from a <see
+        // cref="HostLanguageServices"/>.</param>
+        /// <param name="language">The language that the service is target for; LanguageNames.CSharp,
+        // etc.</param>
+        /// <param name="layer">The layer that the service is specified for; ServiceLayer.Default,
+        // etc.</param>
         public ExportLanguageServiceAttribute(
             Type type,
             string language,

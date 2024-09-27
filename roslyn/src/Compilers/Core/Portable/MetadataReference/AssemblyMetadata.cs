@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Factory that provides the <see cref="ModuleMetadata"/> for additional modules (other than <see cref="_initialModules"/>) of the assembly.
+        /// Factory that provides the <see cref="ModuleMetadata"/> for additional modules (other than <see
+        // cref="_initialModules"/>) of the assembly.
         /// Shall only throw <see cref="BadImageFormatException"/> or <see cref="IOException"/>.
         /// Null of all modules were specified at construction time.
         /// </summary>
@@ -154,13 +155,16 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Finds all modules of an assembly on a specified path and builds an instance of <see cref="AssemblyMetadata"/> that represents them.
+        /// Finds all modules of an assembly on a specified path and builds an instance of <see
+        // cref="AssemblyMetadata"/> that represents them.
         /// </summary>
         /// <param name="path">The full path to the assembly on disk.</param>
         /// <exception cref="ArgumentNullException"><paramref name="path"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="path"/> is invalid.</exception>
-        /// <exception cref="IOException">Error reading file <paramref name="path"/>. See <see cref="Exception.InnerException"/> for details.</exception>
-        /// <exception cref="NotSupportedException">Reading from a file path is not supported by the platform.</exception>
+        /// <exception cref="IOException">Error reading file <paramref name="path"/>. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="NotSupportedException">Reading from a file path is not supported by the
+        // platform.</exception>
         public static AssemblyMetadata CreateFromFile(string path)
         {
             return CreateFromFile(ModuleMetadata.CreateFromFile(path), path);
@@ -198,11 +202,15 @@ namespace Microsoft.CodeAnalysis
         /// Creates a multi-module assembly.
         /// </summary>
         /// <param name="modules">
-        /// Modules comprising the assembly. The first module is the manifest module of the assembly.</param>
-        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself <see cref="Dispose"/>.</remarks>
+        /// Modules comprising the assembly. The first module is the manifest module of the
+        // assembly.</param>
+        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself
+        // <see cref="Dispose"/>.</remarks>
         /// <exception cref="ArgumentException"><paramref name="modules"/> is default value.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null elements.</exception>
-        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null
+        // elements.</exception>
+        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module
+        // that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
         public static AssemblyMetadata Create(ImmutableArray<ModuleMetadata> modules)
         {
             if (modules.IsDefaultOrEmpty)
@@ -236,11 +244,15 @@ namespace Microsoft.CodeAnalysis
         /// Creates a multi-module assembly.
         /// </summary>
         /// <param name="modules">
-        /// Modules comprising the assembly. The first module is the manifest module of the assembly.</param>
-        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself <see cref="Dispose"/>.</remarks>
+        /// Modules comprising the assembly. The first module is the manifest module of the
+        // assembly.</param>
+        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself
+        // <see cref="Dispose"/>.</remarks>
         /// <exception cref="ArgumentException"><paramref name="modules"/> is default value.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null elements.</exception>
-        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null
+        // elements.</exception>
+        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module
+        // that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
         public static AssemblyMetadata Create(IEnumerable<ModuleMetadata> modules)
         {
             return Create(modules.AsImmutableOrNull());
@@ -249,24 +261,31 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a multi-module assembly.
         /// </summary>
-        /// <param name="modules">Modules comprising the assembly. The first module is the manifest module of the assembly.</param>
-        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself <see cref="Dispose"/>.</remarks>
+        /// <param name="modules">Modules comprising the assembly. The first module is the manifest module
+        // of the assembly.</param>
+        /// <remarks>This object disposes the elements of <paramref name="modules"/> it when it is itself
+        // <see cref="Dispose"/>.</remarks>
         /// <exception cref="ArgumentException"><paramref name="modules"/> is default value.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null elements.</exception>
-        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="modules"/> contains null
+        // elements.</exception>
+        /// <exception cref="ArgumentException"><paramref name="modules"/> is empty or contains a module
+        // that doesn't own its image (was created via <see cref="Metadata.Copy"/>).</exception>
         public static AssemblyMetadata Create(params ModuleMetadata[] modules)
         {
             return Create(ImmutableArray.CreateRange(modules));
         }
 
         /// <summary>
-        /// Creates a shallow copy of contained modules and wraps them into a new instance of <see cref="AssemblyMetadata"/>.
+        /// Creates a shallow copy of contained modules and wraps them into a new instance of <see
+        // cref="AssemblyMetadata"/>.
         /// </summary>
         /// <remarks>
-        /// The resulting copy shares the metadata images and metadata information read from them with the original.
+        /// The resulting copy shares the metadata images and metadata information read from them with the
+        // original.
         /// It doesn't own the underlying metadata images and is not responsible for its disposal.
         ///
-        /// This is used, for example, when a metadata cache needs to return the cached metadata to its users
+        /// This is used, for example, when a metadata cache needs to return the cached metadata to its
+        // users
         /// while keeping the ownership of the cached metadata object.
         /// </remarks>
         internal new AssemblyMetadata Copy()
@@ -288,7 +307,8 @@ namespace Microsoft.CodeAnalysis
         /// Modules comprising this assembly. The first module is the manifest module.
         /// </summary>
         /// <exception cref="BadImageFormatException">The PE image format is invalid.</exception>
-        /// <exception cref="IOException">IO error reading the metadata. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">IO error reading the metadata. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         public ImmutableArray<ModuleMetadata> GetModules()
         {
@@ -314,7 +334,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <exception cref="BadImageFormatException">The PE image format is invalid.</exception>
-        /// <exception cref="IOException">IO error while reading the metadata. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">IO error while reading the metadata. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         internal PEAssembly? GetAssembly()
         {
@@ -322,7 +343,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <exception cref="BadImageFormatException">The PE image format is invalid.</exception>
-        /// <exception cref="IOException">IO error while reading the metadata. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">IO error while reading the metadata. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         private Data GetOrCreateData()
         {
@@ -419,10 +441,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Checks if the first module has a single row in Assembly table and that all other modules have none.
+        /// Checks if the first module has a single row in Assembly table and that all other modules have
+        // none.
         /// </summary>
         /// <exception cref="BadImageFormatException">The PE image format is invalid.</exception>
-        /// <exception cref="IOException">IO error reading the metadata. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">IO error reading the metadata. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
         internal bool IsValidAssembly()
         {
@@ -460,10 +484,14 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a reference to the assembly metadata.
         /// </summary>
-        /// <param name="documentation">Provider of XML documentation comments for the metadata symbols contained in the module.</param>
-        /// <param name="aliases">Aliases that can be used to refer to the assembly from source code (see "extern alias" directive in C#).</param>
-        /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the referencing compilation. Must be false for a module.</param>
-        /// <param name="filePath">Path describing the location of the metadata, or null if the metadata have no location.</param>
+        /// <param name="documentation">Provider of XML documentation comments for the metadata symbols
+        // contained in the module.</param>
+        /// <param name="aliases">Aliases that can be used to refer to the assembly from source code (see
+        // "extern alias" directive in C#).</param>
+        /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the
+        // referencing compilation. Must be false for a module.</param>
+        /// <param name="filePath">Path describing the location of the metadata, or null if the metadata
+        // have no location.</param>
         /// <param name="display">Display string used in error messages to identity the reference.</param>
         /// <returns>A reference to the assembly metadata.</returns>
         public PortableExecutableReference GetReference(

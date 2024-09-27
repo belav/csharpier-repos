@@ -54,22 +54,26 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Determines whether a specified object is valid. (Overrides <see cref = "ValidationAttribute.IsValid(object)" />)
+        /// Determines whether a specified object is valid. (Overrides <see cref =
+        // "ValidationAttribute.IsValid(object)" />)
         /// </summary>
         /// <remarks>
         /// This method returns <c>true</c> if the <paramref name = "value" /> is null.
         /// It is assumed the <see cref = "RequiredAttribute" /> is used if the value may not be null.
         /// </remarks>
         /// <param name = "value">The object to validate.</param>
-        /// <returns><c>true</c> if the value is null or less than or equal to the specified maximum length, otherwise <c>false</c></returns>
-        /// <exception cref = "InvalidOperationException">Length is zero or less than negative one.</exception>
+        /// <returns><c>true</c> if the value is null or less than or equal to the specified maximum length,
+        // otherwise <c>false</c></returns>
+        /// <exception cref = "InvalidOperationException">Length is zero or less than negative
+        // one.</exception>
         public override bool IsValid(object value)
         {
             // Check the lengths for legality
             EnsureLegalLengths();
 
             var length = 0;
-            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not null.
+            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not
+            // null.
             if (value == null)
             {
                 return true;
@@ -97,7 +101,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Applies formatting to a specified error message. (Overrides <see cref = "ValidationAttribute.FormatErrorMessage" />)
+        /// Applies formatting to a specified error message. (Overrides <see cref =
+        // "ValidationAttribute.FormatErrorMessage" />)
         /// </summary>
         /// <param name = "name">The name to include in the formatted string.</param>
         /// <returns>A localized string to describe the maximum acceptable length.</returns>
@@ -110,7 +115,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Checks that Length has a legal value.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Length is zero or less than negative one.</exception>
+        /// <exception cref="InvalidOperationException">Length is zero or less than negative
+        // one.</exception>
         private void EnsureLegalLengths()
         {
             if (Length == 0 || Length < -1)

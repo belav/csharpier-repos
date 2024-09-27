@@ -33,7 +33,8 @@ namespace System.Globalization
     {
         private bool IcuLoadCalendarDataFromSystem(string localeName, CalendarId calendarId)
         {
-            // ToDo: think if not to convert this function with multiple calls to JS into one call with multiple data requested at once
+            // ToDo: think if not to convert this function with multiple calls to JS into one call with multiple
+            // data requested at once
             Debug.Assert(!GlobalizationMode.UseNls);
 
             bool result = true;
@@ -112,7 +113,8 @@ namespace System.Globalization
                 saLeapYearMonthNames[6] = leapHebrewMonthName;
 
                 // The returned data from ICU has 6th month name as 'Adar I' and 7th month name as 'Adar'
-                // We need to adjust that in the list used with non-leap year to have 6th month as 'Adar' and 7th month as 'Adar II'
+                // We need to adjust that in the list used with non-leap year to have 6th month as 'Adar' and 7th
+                // month as 'Adar II'
                 // note that when formatting non-leap year dates, 7th month shouldn't get used at all.
                 saMonthNames[5] = saMonthNames[6];
                 saMonthNames[6] = leapHebrewMonthName;
@@ -255,10 +257,13 @@ namespace System.Globalization
             return result;
         }
 
-        // FixDefaultShortDatePattern will convert the default short date pattern from using 'yy' to using 'yyyy'
+        // FixDefaultShortDatePattern will convert the default short date pattern from using 'yy' to using
+        // 'yyyy'
         // And will ensure the original pattern still exist in the list.
-        // doing that will have the short date pattern format the year as 4-digit number and not just 2-digit number.
-        // Example: June 5, 2018 will be formatted to something like 6/5/2018 instead of 6/5/18 fro en-US culture.
+        // doing that will have the short date pattern format the year as 4-digit number and not just
+        // 2-digit number.
+        // Example: June 5, 2018 will be formatted to something like 6/5/2018 instead of 6/5/18 fro en-US
+        // culture.
         private static void FixDefaultShortDatePattern(List<string> shortDatePatterns)
         {
             if (shortDatePatterns.Count == 0)
@@ -332,19 +337,22 @@ namespace System.Globalization
             {
                 if (shortDatePatterns[i] == shortDatePatterns[0])
                 {
-                    // Found match in the list to the new constructed pattern, then replace it with the original modified pattern
+                    // Found match in the list to the new constructed pattern, then replace it with the original
+                    // modified pattern
                     shortDatePatterns[i] = s;
                     return;
                 }
             }
 
-            // if we come here means the newly constructed pattern not found on the list, then add the original pattern
+            // if we come here means the newly constructed pattern not found on the list, then add the original
+            // pattern
             shortDatePatterns.Add(s);
         }
 
         /// <summary>
         /// The ICU date format characters are not exactly the same as the .NET date format characters.
-        /// NormalizeDatePattern will take in an ICU date pattern and return the equivalent .NET date pattern.
+        /// NormalizeDatePattern will take in an ICU date pattern and return the equivalent .NET date
+        // pattern.
         /// </summary>
         /// <remarks>
         /// see Date Field Symbol Table in http://userguide.icu-project.org/formatparse/datetime
@@ -592,7 +600,8 @@ namespace System.Globalization
             catch (Exception e)
             {
                 Debug.Fail(e.ToString());
-                // we ignore the managed exceptions here because EnumCalendarInfoCallback will get called from the native code.
+                // we ignore the managed exceptions here because EnumCalendarInfoCallback will get called from the
+                // native code.
                 // If we don't ignore the exception here that can cause the runtime to fail fast.
             }
         }

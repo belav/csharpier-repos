@@ -13,15 +13,18 @@ namespace ILCompiler
         private sealed partial class GraphBuilder
         {
             /// <summary>
-            /// Walk through the type expression and find any embedded generic parameter references. For each one found,
+            /// Walk through the type expression and find any embedded generic parameter references. For each
+            // one found,
             /// invoke the collector delegate with that generic parameter and a boolean indicate whether this is
             /// a proper embedding (i.e. there is something actually nesting this.)
             ///
-            /// Typically, the type expression is something that a generic type formal is being bound to, and we're
+            /// Typically, the type expression is something that a generic type formal is being bound to, and
+            // we're
             /// looking to see if another other generic type formals are referenced within that type expression.
             ///
             /// This method also records bindings for any generic instances it finds inside the tree expression.
-            /// Sometimes, this side-effect is all that's wanted - in such cases, invoke this method with a default collector.
+            /// Sometimes, this side-effect is all that's wanted - in such cases, invoke this method with a
+            // default collector.
             /// </summary>
             private static void ForEachEmbeddedGenericFormal(
                 TypeDesc typeExpression,

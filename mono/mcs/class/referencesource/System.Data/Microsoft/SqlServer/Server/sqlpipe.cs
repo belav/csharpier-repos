@@ -278,8 +278,10 @@ namespace Microsoft.SqlServer.Server
             }
             catch
             {
-                // VSDD 479525: if exception happens (e.g. SendResultsStartToPipe throw OutOfMemory), _eventSink may not be empty,
-                // which will affect server's behavior if the next call successes (previous exception is still in the eventSink,
+                // VSDD 479525: if exception happens (e.g. SendResultsStartToPipe throw OutOfMemory), _eventSink may
+                // not be empty,
+                // which will affect server's behavior if the next call successes (previous exception is still in
+                // the eventSink,
                 // will be throwed). So we need to clean _eventSink.
                 _eventSink.CleanMessages();
                 throw;

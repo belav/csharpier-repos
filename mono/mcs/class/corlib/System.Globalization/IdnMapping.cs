@@ -30,24 +30,24 @@
 
 ** related RFCs
 
-    RFC 3490: IDNA
-    RFC 3491: Nameprep
-    RFC 3492: Punycode
-    RFC 3454: STRINGPREP
+RFC 3490: IDNA
+RFC 3491: Nameprep
+RFC 3492: Punycode
+RFC 3454: STRINGPREP
 
 Prohibited in [Nameprep]: C.1.2, C.2.2, C.3 - C.9 in [STRINGPREP]
 
-    C.1.2 non-ascii spaces (00A0, 1680, 2000-200B, 202F, 205F, 3000)
-    C.2.2 non-ascii controls (0080-009F, 06DD, 070F, 180E, 200C, 200D,
-          2028, 2029, 2060-2063, 206A-206F, FEFF, FFF9-FFFC, 1D173-1D17A)
-    C.3 private use (E000-F8FF, F0000-FFFFD, 100000-10FFFD)
-    C.4 non-characters (FDD0-FDEF, FFFE-FFFF, nFFFE-nFFFF)
-    C.5 surrogate code (D800-DFFF)
-    C.6 inappropriate for plain text (FFF9-FFFD)
-    C.7 inappropriate for canonical representation (2FF0-2FFB)
-    C.8 change display properties or are deprecated (0340, 0341,
-        200E, 200F, 202A-202E, 206A-206F)
-    C.9 tagging characters (E0001, E0020-E007F)
+C.1.2 non-ascii spaces (00A0, 1680, 2000-200B, 202F, 205F, 3000)
+C.2.2 non-ascii controls (0080-009F, 06DD, 070F, 180E, 200C, 200D,
+2028, 2029, 2060-2063, 206A-206F, FEFF, FFF9-FFFC, 1D173-1D17A)
+C.3 private use (E000-F8FF, F0000-FFFFD, 100000-10FFFD)
+C.4 non-characters (FDD0-FDEF, FFFE-FFFF, nFFFE-nFFFF)
+C.5 surrogate code (D800-DFFF)
+C.6 inappropriate for plain text (FFF9-FFFD)
+C.7 inappropriate for canonical representation (2FF0-2FFB)
+C.8 change display properties or are deprecated (0340, 0341,
+200E, 200F, 202A-202E, 206A-206F)
+C.9 tagging characters (E0001, E0020-E007F)
 
 */
 

@@ -13,11 +13,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Item pager, a class that provides state as items of a control are paginated.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Item pager, a class that provides state as items of a control are paginated.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\ItemPager.uex' path='docs/doc[@for="ItemPager"]/*' />
     [AspNetHostingPermission(

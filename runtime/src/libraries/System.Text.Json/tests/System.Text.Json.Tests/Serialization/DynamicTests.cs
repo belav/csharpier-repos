@@ -54,7 +54,8 @@ namespace System.Text.Json.Serialization.Tests
 
             try
             {
-                // We will get an exception here if we try to access a dynamic property since 'object' is deserialized
+                // We will get an exception here if we try to access a dynamic property since 'object' is
+                // deserialized
                 // as a JsonElement and not an ExpandoObject.
                 int c = d.MyInt;
                 Assert.Fail("Should have thrown Exception!");

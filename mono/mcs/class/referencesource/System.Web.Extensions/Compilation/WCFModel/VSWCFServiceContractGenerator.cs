@@ -361,7 +361,8 @@ namespace Microsoft.VSDesigner.WCFModel
         /// data contract types.
         /// </param>
         /// <param name="targetFrameworkVersion">
-        /// The target framework version number. The higher 16 bits contains the major version number, and low 16 bits contains minor version number.
+        /// The target framework version number. The higher 16 bits contains the major version number, and
+        // low 16 bits contains minor version number.
         /// </param>
         /// <param name="typedDataSetSchemaImporterExtension">
         /// Schema importer extension to be used for typed datasets.
@@ -524,7 +525,8 @@ namespace Microsoft.VSDesigner.WCFModel
         /// data contract types.
         /// </param>
         /// <param name="targetFrameworkVersion">
-        /// The target framework version number. The higher 16 bits contains the major version number, and low 16 bits contains minor version number.
+        /// The target framework version number. The higher 16 bits contains the major version number, and
+        // low 16 bits contains minor version number.
         /// </param>
         /// <param name="importErrors">
         /// The list into which we will add any errors while importing the metadata.
@@ -560,7 +562,8 @@ namespace Microsoft.VSDesigner.WCFModel
                 contractGenerator.Options &= ~ServiceContractGenerationOptions.InternalTypes;
             }
 
-            // Make sure at most one of the async options will be set: AsynchronousMethods | TaskBasedAsynchronousMethod.
+            // Make sure at most one of the async options will be set: AsynchronousMethods |
+            // TaskBasedAsynchronousMethod.
             contractGenerator.Options &=
                 ~ServiceContractGenerationOptions.AsynchronousMethods
                 & ~ServiceContractGenerationOptions.EventBasedAsynchronousMethods
@@ -686,14 +689,18 @@ namespace Microsoft.VSDesigner.WCFModel
         /// Generate Proxy Code and (if available) configuration
         /// </summary>
         /// <param name="contractGenerator">The contract generator to use</param>
-        /// <param name="targetCompileUnit">Compile unit into which we should generate the client code</param>
+        /// <param name="targetCompileUnit">Compile unit into which we should generate the client
+        // code</param>
         /// <param name="proxyNamespace">CLR namespace into which we should generate the client code</param>
         /// <param name="configurationNamespace">Namespace to use in configuration</param>
-        /// <param name="contractCollection">The contracts for which we should generate code and optionally config</param>
+        /// <param name="contractCollection">The contracts for which we should generate code and optionally
+        // config</param>
         /// <param name="bindingCollection">The bindings we should generate config for</param>
         /// <param name="serviceEndpointList">The endpoints we should generate config for</param>
-        /// <param name="proxyGenerationErrors">A list of errors encountered while generating the client</param>
-        /// <param name="serviceEndpointToChannelEndpointElementMap">Map from service endpoint to the configuration element for the endpoint</param>
+        /// <param name="proxyGenerationErrors">A list of errors encountered while generating the
+        // client</param>
+        /// <param name="serviceEndpointToChannelEndpointElementMap">Map from service endpoint to the
+        // configuration element for the endpoint</param>
         /// <param name="proxyGeneratedContractTypes">The generated contract types</param>
         protected static void GenerateProxy(
             WsdlImporter importer,
@@ -842,24 +849,24 @@ namespace Microsoft.VSDesigner.WCFModel
             );
 
             /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            */
 
             xmlSerializerOptions.WebReferenceOptions = webReferenceOptions;
             xmlSerializerOptions.CodeProvider = codeDomProvider;
@@ -873,12 +880,16 @@ namespace Microsoft.VSDesigner.WCFModel
         /// Create an appropriate XsdDataContractImporter for the generator
         /// </summary>
         /// <param name="proxyOptions">Code/config generation options to use</param>
-        /// <param name="targetCompileUnit">CodeCompileUnit into which we will generate the client code</param>
-        /// <param name="codeDomProvider">CodeDomProvider for the language we will use to generate the client</param>
+        /// <param name="targetCompileUnit">CodeCompileUnit into which we will generate the client
+        // code</param>
+        /// <param name="codeDomProvider">CodeDomProvider for the language we will use to generate the
+        // client</param>
         /// <param name="proxyNamespace">CLR namespace in which the client code will be generated</param>
-        /// <param name="typeLoader">Service used to resolve type/assembly names (strings) to actual Types and Assemblies</param>
+        /// <param name="typeLoader">Service used to resolve type/assembly names (strings) to actual Types
+        // and Assemblies</param>
         /// <param name="targetFrameworkVersion">Targetted Framework version number</param>
-        /// <param name="importErrors">List of errors encountered. New errors will be added to this list</param>
+        /// <param name="importErrors">List of errors encountered. New errors will be added to this
+        // list</param>
         /// <returns></returns>
         protected static XsdDataContractImporter CreateDataContractImporter(
             ClientOptions proxyOptions,
@@ -976,8 +987,10 @@ namespace Microsoft.VSDesigner.WCFModel
                 throw new ArgumentNullException("typeLoader");
 
             // the value in sharedTypeTable is why we add this type in the shared type list.
-            // if it is only added because it is in the referenced assembly, the value will be null, otherwise it contains the entry in the type inclusion list
-            // if the type is also in the exclusion list, we will report an error if the type is comming from the inclusion list, but no error if it comes from a referenced assembly only.
+            // if it is only added because it is in the referenced assembly, the value will be null, otherwise
+            // it contains the entry in the type inclusion list
+            // if the type is also in the exclusion list, we will report an error if the type is comming from
+            // the inclusion list, but no error if it comes from a referenced assembly only.
             Dictionary<Type, ReferencedType> sharedTypeTable =
                 new Dictionary<Type, ReferencedType>();
 
@@ -1016,7 +1029,8 @@ namespace Microsoft.VSDesigner.WCFModel
                             }
                             catch (NotSupportedException)
                             {
-                                // NotSupportedException is thrown by multi-targeting check. It's normal if some types not existing in the current FX.
+                                // NotSupportedException is thrown by multi-targeting check. It's normal if some types not existing
+                                // in the current FX.
                                 // So we can safely ---- it.
                             }
                             catch (Exception ex)
@@ -1146,14 +1160,18 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// Ensure that the ConfigurationName attribute on service contracts and the channel endpoint elements all agree on the
+        /// Ensure that the ConfigurationName attribute on service contracts and the channel endpoint
+        // elements all agree on the
         /// name of the service contract.
-        /// We want to avoid having root/default namespace values persisted in config, since that would require us
+        /// We want to avoid having root/default namespace values persisted in config, since that would
+        // require us
         /// to update config whenever the default/root namespace changes, so we make sure that we exclude it
         /// from the ConfigurationName attribute and the channel endpoint element we generate.
         ///
-        /// For VB, the root namespace is not actually present in the generated code, so we typically don't have to
-        /// do anything (the configuration and proxy namespaces are equal) but for C#, we need to strip out the
+        /// For VB, the root namespace is not actually present in the generated code, so we typically don't
+        // have to
+        /// do anything (the configuration and proxy namespaces are equal) but for C#, we need to strip out
+        // the
         /// default namespace.
         /// </summary>
         /// <param name="proxyNamespace">
@@ -1210,7 +1228,8 @@ namespace Microsoft.VSDesigner.WCFModel
                     );
                 }
 
-                // ...and all ConfigurationName values in service contract attributes in the generated code as well...
+                // ...and all ConfigurationName values in service contract attributes in the generated code as
+                // well...
                 PatchConfigurationNameInServiceContractAttribute(
                     targetCompileUnit,
                     proxyNamespace,
@@ -1483,7 +1502,8 @@ namespace Microsoft.VSDesigner.WCFModel
                 && ContainsHttpBindings(metadataSections)
             )
             {
-                // NOTE: HTTP Get/Post binding indicates an old web service. We use XmlSerializer to prevent generating dup classes.
+                // NOTE: HTTP Get/Post binding indicates an old web service. We use XmlSerializer to prevent
+                // generating dup classes.
                 // Please check devdiv bug 94078
                 serializerType = ClientOptions.ProxySerializerType.XmlSerializer;
             }
@@ -1575,7 +1595,8 @@ namespace Microsoft.VSDesigner.WCFModel
                 );
             }
 
-            // Read the UseSerializerForFaults from Reference.svcmap, create a FaultImportOptions using this information
+            // Read the UseSerializerForFaults from Reference.svcmap, create a FaultImportOptions using this
+            // information
             // and pass it to WSDL Importer.
             FaultImportOptions faultOptions = new FaultImportOptions();
             faultOptions.UseMessageFormat = svcMapFile.ClientOptions.UseSerializerForFaults;
@@ -1875,7 +1896,8 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// check all wsdl files, and generate error messages if one contract have multiple different specifications
+        /// check all wsdl files, and generate error messages if one contract have multiple different
+        // specifications
         /// </summary>
         /// <remarks></remarks>
         private static void CheckDuplicatedWsdlItems(
@@ -1927,13 +1949,16 @@ namespace Microsoft.VSDesigner.WCFModel
             IWsdlImportExtension asmxFixerUpper = new AsmxEndpointPickerExtension();
             asmxFixerUpper.BeforeImport(importer.WsdlDocuments, null, null);
 
-            // NOTE: we should import Endpoint before Contracts, otherwise some information (related to binding) will be lost in the model (devdiv: 22396)
+            // NOTE: we should import Endpoint before Contracts, otherwise some information (related to binding)
+            // will be lost in the model (devdiv: 22396)
             serviceEndpointList = new List<ServiceEndpoint>();
 
             //
-            // First we import all the endpoints (ports). This is required so that any WsdlImportExtension's BeforeImport
+            // First we import all the endpoints (ports). This is required so that any WsdlImportExtension's
+            // BeforeImport
             // gets called before we actually try to import anything from the WSDL object model.
-            // If we don't do this, we run into problems if any wsdl import extensions want to delete a specific port
+            // If we don't do this, we run into problems if any wsdl import extensions want to delete a specific
+            // port
             // and this port happens to be the first port we try to import (you can't interrupt the import)
             importer.ImportAllEndpoints();
 
@@ -1960,8 +1985,10 @@ namespace Microsoft.VSDesigner.WCFModel
                         }
                         catch (InvalidOperationException)
                         {
-                            // Invalid operation exceptions should already be in the errors collection for the importer, so we don't
-                            // need to add another generationError. The most probable cause for this is that the we failed to import
+                            // Invalid operation exceptions should already be in the errors collection for the importer, so we
+                            // don't
+                            // need to add another generationError. The most probable cause for this is that the we failed to
+                            // import
                             // the endpoint...
                         }
                         catch (Exception ex)
@@ -1997,7 +2024,8 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// This function patches ServiceContractAttribute in the generated proxy code. It replaces all proxyNamespace in the attribute
+        /// This function patches ServiceContractAttribute in the generated proxy code. It replaces all
+        // proxyNamespace in the attribute
         ///   to configNamespace.  The configNamespace does not depend on defaultNamespace of the project.
         /// </summary>
         /// <param name="proxyNamespace"></param>

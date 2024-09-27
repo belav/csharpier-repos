@@ -52,9 +52,9 @@ namespace Mono.AppleTls
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
         static extern SecStatusCode SecTrustCreateWithCertificates(
-            /* CFTypeRef */IntPtr certOrCertArray,
-            /* CFTypeRef __nullable */IntPtr policies,
-            /* SecTrustRef *__nonull */out IntPtr sectrustref
+/* CFTypeRef */IntPtr certOrCertArray,
+/* CFTypeRef __nullable */IntPtr policies,
+/* SecTrustRef *__nonull */out IntPtr sectrustref
         );
 
         public SecTrust(X509CertificateCollection certificates, SecPolicy policy)

@@ -1384,9 +1384,12 @@ namespace System.Linq.Tests
 
             Assert.False(iterator0.MoveNext());
 
-            // Unlike Skip, Take can tell straightaway that it can return a sequence with no elements if count <= 0.
-            // The enumerable it returns is a specialized empty iterator that has no connections to the source. Hence,
-            // after MoveNext returns false under those circumstances, it won't invoke Dispose on our enumerator.
+            // Unlike Skip, Take can tell straightaway that it can return a sequence with no elements if count
+            // <= 0.
+            // The enumerable it returns is a specialized empty iterator that has no connections to the source.
+            // Hence,
+            // after MoveNext returns false under those circumstances, it won't invoke Dispose on our
+            // enumerator.
             bool isItertorNotEmpty0 = count > 0;
             Assert.Equal(isItertorNotEmpty0, isIteratorDisposed[0]);
 
@@ -1397,7 +1400,8 @@ namespace System.Linq.Tests
                 _ => Assert.True(iterator1.MoveNext())
             );
             Assert.False(iterator1.MoveNext());
-            // When startIndex end and endIndex are both not from end and startIndex >= endIndex, Take(Range) returns an empty array.
+            // When startIndex end and endIndex are both not from end and startIndex >= endIndex, Take(Range)
+            // returns an empty array.
             bool isItertorNotEmpty1 = end != 0;
             Assert.Equal(isItertorNotEmpty1, isIteratorDisposed[1]);
 
@@ -1431,7 +1435,8 @@ namespace System.Linq.Tests
             );
             Assert.False(iterator4.MoveNext());
             // When startIndex is ^0,
-            // or when startIndex and endIndex are both from end and startIndex <= endIndexFromEnd, Take(Range) returns an empty array.
+            // or when startIndex and endIndex are both from end and startIndex <= endIndexFromEnd, Take(Range)
+            // returns an empty array.
             bool isIteratorNotEmpty4 =
                 startIndexFromEnd != 0 && startIndexFromEnd > endIndexFromEnd;
             Assert.Equal(isIteratorNotEmpty4, isIteratorDisposed[4]);

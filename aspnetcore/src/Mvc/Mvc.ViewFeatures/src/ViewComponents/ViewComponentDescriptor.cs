@@ -85,7 +85,8 @@ public class ViewComponentDescriptor
     /// </summary>
     /// <remarks>
     /// <para>
-    /// The short name is defaulted to the name of the view component class. If the view component class uses
+    /// The short name is defaulted to the name of the view component class. If the view component class
+    // uses
     /// <c>ViewComponent</c> as a suffix, the suffix will be omitted from the <see cref="ShortName"/>.
     /// </para>
     /// <example>

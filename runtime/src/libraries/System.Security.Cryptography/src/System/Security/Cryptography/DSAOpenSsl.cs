@@ -30,7 +30,8 @@ namespace System.Security.Cryptography
         /// <exception cref="ArgumentException">
         ///   <paramref name="pkeyHandle"/> <see cref="Runtime.InteropServices.SafeHandle.IsInvalid" />
         /// </exception>
-        /// <exception cref="CryptographicException"><paramref name="pkeyHandle"/> is not a valid enveloped <c>DSA*</c></exception>
+        /// <exception cref="CryptographicException"><paramref name="pkeyHandle"/> is not a valid enveloped
+        // <c>DSA*</c></exception>
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]

@@ -13,8 +13,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
 {
     /// <summary>
     /// A <see cref="CodeAction"/> that can vary with user specified options.  Override one of <see
-    /// cref="ComputeOperationsAsync(object, CancellationToken)"/> or <see cref="ComputeOperationsAsync(object,
-    /// IProgress{CodeAnalysisProgress}, CancellationToken)"/> to actually compute the operations for this action.
+    /// cref="ComputeOperationsAsync(object, CancellationToken)"/> or <see
+    // cref="ComputeOperationsAsync(object,
+    /// IProgress{CodeAnalysisProgress}, CancellationToken)"/> to actually compute the operations for
+    // this action.
     /// </summary>
     public abstract class CodeActionWithOptions : CodeAction
     {
@@ -23,13 +25,16 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// This method is guaranteed to be called on the UI thread.
         /// </summary>
         /// <param name="cancellationToken">A cancellation token.</param>
-        /// <returns>An implementation specific object instance that holds options for applying the code action.</returns>
+        /// <returns>An implementation specific object instance that holds options for applying the code
+        // action.</returns>
         public abstract object? GetOptions(CancellationToken cancellationToken);
 
         /// <summary>
-        /// Gets the <see cref="CodeActionOperation"/>'s for this <see cref="CodeAction"/> given the specified options.
+        /// Gets the <see cref="CodeActionOperation"/>'s for this <see cref="CodeAction"/> given the
+        // specified options.
         /// </summary>
-        /// <param name="options">An object instance returned from a prior call to <see cref="GetOptions(CancellationToken)"/>.</param>
+        /// <param name="options">An object instance returned from a prior call to <see
+        // cref="GetOptions(CancellationToken)"/>.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         public Task<IEnumerable<CodeActionOperation>?> GetOperationsAsync(
             object? options,
@@ -92,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         /// <summary>
         /// Override this method to compute the operations that implement this <see cref="CodeAction"/>.
         /// </summary>
-        /// <param name="options">An object instance returned from a call to <see cref="GetOptions(CancellationToken)"/>.</param>
+        /// <param name="options">An object instance returned from a call to <see
+        // cref="GetOptions(CancellationToken)"/>.</param>
         /// <param name="cancellationToken">A cancellation token.</param>
         protected virtual Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(
             object options,
@@ -100,8 +106,10 @@ namespace Microsoft.CodeAnalysis.CodeActions
         ) => SpecializedTasks.EmptyEnumerable<CodeActionOperation>();
 
         /// <summary>
-        /// Override this method to compute the operations that implement this <see cref="CodeAction"/>. Prefer
-        /// overriding this method over <see cref="ComputeOperationsAsync(object, CancellationToken)"/> when computation
+        /// Override this method to compute the operations that implement this <see cref="CodeAction"/>.
+        // Prefer
+        /// overriding this method over <see cref="ComputeOperationsAsync(object, CancellationToken)"/> when
+        // computation
         /// is long running and progress should be shown to the user.
         /// </summary>
         protected virtual Task<IEnumerable<CodeActionOperation>> ComputeOperationsAsync(

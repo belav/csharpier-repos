@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -50,7 +51,8 @@ namespace Microsoft.AspNet.Facebook
         /// <summary>
         /// Queries the <see cref="Status"/> member for the provided permission name.
         /// </summary>
-        /// <param name="permission">The name of the permission to query the <see cref="Status"/> for.</param>
+        /// <param name="permission">The name of the permission to query the <see cref="Status"/>
+        // for.</param>
         /// <returns>The permission's status.</returns>
         public PermissionStatus this[string permission]
         {

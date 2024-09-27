@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// This class suppports parsing a System.Runtime.InteropServices.MarshalAsAttribute into either a <see cref="MarshalAsInfo"/> or a <see cref="NativeMarshallingAttributeInfo"/>
+    /// This class suppports parsing a System.Runtime.InteropServices.MarshalAsAttribute into either a
+    // <see cref="MarshalAsInfo"/> or a <see cref="NativeMarshallingAttributeInfo"/>
     /// if the marshalling is implemented with a custom marshaller in the framework.
     /// </summary>
     public sealed class MarshalAsWithCustomMarshallersParser : IMarshallingInfoAttributeParser
@@ -24,7 +25,8 @@ namespace Microsoft.Interop
         /// </summary>
         /// <param name="compilation">The compilation that the attributes are defined within.</param>
         /// <param name="diagnostics">The diagnostics bag to which to report diagnostics.</param>
-        /// <param name="marshalAsAttributeParser">The parser that will do basic parsing of a MarshalAsAttribute into a <see cref="MarshalAsInfo"/> element.</param>
+        /// <param name="marshalAsAttributeParser">The parser that will do basic parsing of a
+        // MarshalAsAttribute into a <see cref="MarshalAsInfo"/> element.</param>
         public MarshalAsWithCustomMarshallersParser(
             Compilation compilation,
             GeneratorDiagnosticsBag diagnostics,

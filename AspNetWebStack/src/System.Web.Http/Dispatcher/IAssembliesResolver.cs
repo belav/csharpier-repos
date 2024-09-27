@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -9,7 +10,8 @@ namespace System.Web.Http.Dispatcher
 {
     /// <summary>
     /// Provides an abstraction for managing the assemblies of an application. A different
-    /// implementation can be registered via the <see cref="T:System.Web.Http.Services.DependencyResolver"/>.
+    /// implementation can be registered via the <see
+    // cref="T:System.Web.Http.Services.DependencyResolver"/>.
     /// </summary>
     public interface IAssembliesResolver
     {

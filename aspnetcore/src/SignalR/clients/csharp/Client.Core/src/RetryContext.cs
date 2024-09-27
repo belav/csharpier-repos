@@ -6,7 +6,8 @@ using System;
 namespace Microsoft.AspNetCore.SignalR.Client;
 
 /// <summary>
-/// The context passed to <see cref="IRetryPolicy.NextRetryDelay(RetryContext)"/> to help the policy determine
+/// The context passed to <see cref="IRetryPolicy.NextRetryDelay(RetryContext)"/> to help the policy
+// determine
 /// how long to wait before the next retry and whether there should be another retry at all.
 /// </summary>
 public sealed class RetryContext

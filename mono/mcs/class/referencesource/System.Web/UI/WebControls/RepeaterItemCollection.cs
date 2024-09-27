@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -13,7 +13,8 @@ namespace System.Web.UI.WebControls
     using System.Collections;
 
     /// <devdoc>
-    /// <para>Encapsulates the collection of <see cref='System.Web.UI.WebControls.RepeaterItem'/> objects within a <see cref='System.Web.UI.WebControls.Repeater'/> control.</para>
+    /// <para>Encapsulates the collection of <see cref='System.Web.UI.WebControls.RepeaterItem'/>
+    // objects within a <see cref='System.Web.UI.WebControls.Repeater'/> control.</para>
     /// </devdoc>
     public sealed class RepeaterItemCollection : ICollection
     {
@@ -21,7 +22,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    Initializes a new instance of
-        ///    the <see cref='System.Web.UI.WebControls.RepeaterItemCollection'/> class with the specified items.
+        ///    the <see cref='System.Web.UI.WebControls.RepeaterItemCollection'/> class with the specified
+        // items.
         /// </devdoc>
         public RepeaterItemCollection(ArrayList items)
         {
@@ -63,7 +65,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a <see cref='System.Web.UI.WebControls.RepeaterItem'/> referenced by the specified ordinal index value in
+        /// <para>Gets a <see cref='System.Web.UI.WebControls.RepeaterItem'/> referenced by the specified
+        // ordinal index value in
         ///    the collection.</para>
         /// </devdoc>
         public RepeaterItem this[int index]
@@ -72,7 +75,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies contents from the collection to a specified <see cref='System.Array' qualify='true'/> with a
+        /// <para>Copies contents from the collection to a specified <see cref='System.Array'
+        // qualify='true'/> with a
         ///    specified starting index.</para>
         /// </devdoc>
         public void CopyTo(Array array, int index)
@@ -82,7 +86,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Returns an enumerator of all <see cref='System.Web.UI.WebControls.RepeaterItem'/> controls within the
+        /// <para>Returns an enumerator of all <see cref='System.Web.UI.WebControls.RepeaterItem'/> controls
+        // within the
         ///    collection.</para>
         /// </devdoc>
         public IEnumerator GetEnumerator()

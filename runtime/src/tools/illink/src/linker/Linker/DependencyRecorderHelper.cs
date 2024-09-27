@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using Mono.Cecil;
 
@@ -76,7 +77,8 @@ namespace Mono.Linker
             if (source is CustomAttribute || target is CustomAttribute)
                 return false;
 
-            // Prevent useless logging of interface implementations like `e="InterfaceImpl:Mono.Cecil.InterfaceImplementation"`.
+            // Prevent useless logging of interface implementations like
+            // `e="InterfaceImpl:Mono.Cecil.InterfaceImplementation"`.
             if (source is InterfaceImplementation || target is InterfaceImplementation)
                 return false;
 

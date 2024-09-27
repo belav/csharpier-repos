@@ -28,9 +28,12 @@ namespace System.IO.Compression
 
         protected override bool FlushGuaranteesAllDataWritten => false;
 
-        // The tests are relying on an implementation detail of BrotliStream, using knowledge of its internal buffer size
-        // in various test calculations.  Currently the implementation is using the ArrayPool, which will round up to a
-        // power-of-2. If the buffer size employed changes (which could also mean that ArrayPool<byte>.Shared starts giving
+        // The tests are relying on an implementation detail of BrotliStream, using knowledge of its
+        // internal buffer size
+        // in various test calculations.  Currently the implementation is using the ArrayPool, which will
+        // round up to a
+        // power-of-2. If the buffer size employed changes (which could also mean that
+        // ArrayPool<byte>.Shared starts giving
         // out different array sizes), the tests will need to be tweaked.
         public override int BufferSize => 1 << 16;
 
@@ -157,7 +160,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>
-        /// Test to ensure that when given an empty Destination span, the decoder will consume no input and write no output.
+        /// Test to ensure that when given an empty Destination span, the decoder will consume no input and
+        // write no output.
         /// </summary>
         [Fact]
         public void Decompress_WithEmptyDestination()
@@ -187,7 +191,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>
-        /// Test to ensure that when given an empty source span, the decoder will consume no input and write no output
+        /// Test to ensure that when given an empty source span, the decoder will consume no input and write
+        // no output
         /// </summary>
         [Fact]
         public void Decompress_WithEmptySource()
@@ -216,7 +221,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>
-        /// Test to ensure that when given an empty Destination span, the encoder consume no input and write no output
+        /// Test to ensure that when given an empty Destination span, the encoder consume no input and write
+        // no output
         /// </summary>
         [Fact]
         public void Compress_WithEmptyDestination()
@@ -258,7 +264,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>
-        /// Test to ensure that when given an empty source span, the decoder will consume no input and write no output (until the finishing block)
+        /// Test to ensure that when given an empty source span, the decoder will consume no input and write
+        // no output (until the finishing block)
         /// </summary>
         [Fact]
         public void Compress_WithEmptySource()
@@ -269,7 +276,8 @@ namespace System.IO.Compression
             Span<byte> destination = new Span<byte>(destinationBytes);
 
             Assert.True(BrotliEncoder.TryCompress(source, destination, out int bytesWritten));
-            // The only byte written should be the Brotli end of stream byte which varies based on the window/quality
+            // The only byte written should be the Brotli end of stream byte which varies based on the
+            // window/quality
             Assert.Equal(1, bytesWritten);
 
             BrotliEncoder encoder = default;
@@ -297,7 +305,8 @@ namespace System.IO.Compression
         }
 
         /// <summary>
-        /// Test that the decoder can handle partial chunks of flushed encoded data sent from the BrotliEncoder
+        /// Test that the decoder can handle partial chunks of flushed encoded data sent from the
+        // BrotliEncoder
         /// </summary>
         [Fact]
         public void RoundTrip_Chunks()

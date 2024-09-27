@@ -19,7 +19,8 @@
 * returns 100
 *
 * Failure indicated by:
-* App.exe prints "In the DLL." and then hits an AV during the RunGenericMethod call made in the Main method.
+* App.exe prints "In the DLL." and then hits an AV during the RunGenericMethod call made in the Main
+method.
 */
 
 using System;

@@ -2,7 +2,7 @@
 array-coop-*.cs
 
 Author:
-    Jay Krell (jaykrell@microsoft.com)
+Jay Krell (jaykrell@microsoft.com)
 
 Copyright 2018 Microsoft
 Licensed under the MIT license. See LICENSE file in the project root for full license information.
@@ -22,6 +22,7 @@ System.Array.SetGenericValueImpl<T> => ves_icall_System_Array_SetGenericValueImp
 System.Array.GetGenericValueImpl<T> => ves_icall_System_Array_GetGenericValueImpl
 
 See
+
 https://docs.microsoft.com/en-us/dotnet/api/system.reflection.methodinfo.makegenericmethod?view=netframework-4.7.1.
 https://msdn.microsoft.com/en-us/library/system.array.rank(v=vs.110).aspx
 https://stackoverflow.com/questions/1067312/how-to-use-methodinfo-invoke-to-set-property-value

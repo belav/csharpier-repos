@@ -18,7 +18,8 @@ namespace System.Text
     //   {
     //       WORD[16]    filename;       // 32 bytes
     //       WORD[4]     version;        // 8 bytes = 40     // e.g.: 3, 2, 0, 0
-    //       WORD        count;          // 2 bytes = 42     // Number of code page indexes that will follow
+    //       WORD        count;          // 2 bytes = 42     // Number of code page indexes that will
+    // follow
     //   }
     //
     // Each code page section looks like:
@@ -477,7 +478,8 @@ namespace System.Text
             return arrayBytesBestFit!;
         }
 
-        // During the AppDomain shutdown the Encoding class may have already finalized, making the memory section
+        // During the AppDomain shutdown the Encoding class may have already finalized, making the memory
+        // section
         // invalid. We detect that by validating the memory section handle then re-initializing the memory
         // section by calling LoadManagedCodePage() method and eventually the mapped file handle and
         // the memory section pointer will get finalized one more time.

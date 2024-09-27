@@ -55,17 +55,21 @@ internal sealed partial class AsyncIOEngine : IAsyncIOEngine, IDisposable
     }
 
     // In case the number of chunks is bigger than responseMaxChunks we need to make multiple calls
-    // to the native api https://learn.microsoft.com/en-us/iis/web-development-reference/native-code-api-reference/ihttpresponse-writeentitychunks-method
-    // Despite the documentation states that feeding the function with more than 65535 chunks will cause the function to throw an exception,
+    // to the native api
+    // https://learn.microsoft.com/en-us/iis/web-development-reference/native-code-api-reference/ihttpresponse-writeentitychunks-method
+    // Despite the documentation states that feeding the function with more than 65535 chunks will cause
+    // the function to throw an exception,
     // it actually seems that 65534 is the maximum number of chunks allowed.
-    // Also, there seems to be a problem when slicing a ReadOnlySequence on segment borders tracked here https://github.com/dotnet/runtime/issues/67607
+    // Also, there seems to be a problem when slicing a ReadOnlySequence on segment borders tracked here
+    // https://github.com/dotnet/runtime/issues/67607
     // That's why we only allow 65533 chunks.
     private async ValueTask<int> WriteDataOverChunksLimit(ReadOnlySequence<byte> data)
     {
         ushort segmentsCount = 0;
         var length = 0;
 
-        // Since the result is discarded in the only place it's used (IISHttpContext.WriteBody), we return the last result.
+        // Since the result is discarded in the only place it's used (IISHttpContext.WriteBody), we return
+        // the last result.
         // If we start using the result there, we should make sure we handle the value correctly here.
         var result = 0;
 

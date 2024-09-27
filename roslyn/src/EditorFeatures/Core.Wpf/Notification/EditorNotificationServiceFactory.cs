@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
         private class EditorDialogService : INotificationService, INotificationServiceCallback
         {
             /// <summary>
-            /// For testing purposes only.  If non-null, this callback will be invoked instead of showing a dialog.
+            /// For testing purposes only.  If non-null, this callback will be invoked instead of showing a
+            // dialog.
             /// </summary>
             public Action<string, string, NotificationSeverity> NotificationCallback { get; set; }
 
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Notification
                 var callback = NotificationCallback;
                 if (callback != null)
                 {
-                    // invoke the callback and assume 'Yes' was clicked.  Since this is a test-only scenario, assuming yes should be fine.
+                    // invoke the callback and assume 'Yes' was clicked.  Since this is a test-only scenario, assuming
+                    // yes should be fine.
                     callback(message, title, severity);
                     return true;
                 }

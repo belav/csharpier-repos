@@ -10,7 +10,8 @@
 //
 // Bill Seurer (seurer@linux.vnet.ibm.com)
 //
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;

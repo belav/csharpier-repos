@@ -8,11 +8,11 @@
 
 namespace System.Data
 {
-    /* enumeration used to identify data types specific to SQL Server
-     *
-     * note that these are a subset of the types exposed by OLEDB so keep the enum values in ssync with
-     * OleDbType values
-     */
+/* enumeration used to identify data types specific to SQL Server
+*
+* note that these are a subset of the types exposed by OLEDB so keep the enum values in ssync with
+* OleDbType values
+*/
 
     using System;
 

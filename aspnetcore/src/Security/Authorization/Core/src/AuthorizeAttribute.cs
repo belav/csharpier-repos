@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Shared;
 namespace Microsoft.AspNetCore.Authorization;
 
 /// <summary>
-/// Specifies that the class or method that this attribute is applied to requires the specified authorization.
+/// Specifies that the class or method that this attribute is applied to requires the specified
+// authorization.
 /// </summary>
 [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Method,
@@ -24,7 +25,8 @@ public class AuthorizeAttribute : Attribute, IAuthorizeData
     public AuthorizeAttribute() { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AuthorizeAttribute"/> class with the specified policy.
+    /// Initializes a new instance of the <see cref="AuthorizeAttribute"/> class with the specified
+    // policy.
     /// </summary>
     /// <param name="policy">The name of the policy to require for authorization.</param>
     public AuthorizeAttribute(string policy)

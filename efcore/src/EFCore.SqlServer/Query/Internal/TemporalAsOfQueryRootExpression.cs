@@ -4,18 +4,26 @@
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public TemporalAsOfQueryRootExpression(IEntityType entityType, DateTime pointInTime)
         : base(entityType)
@@ -24,10 +32,14 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public TemporalAsOfQueryRootExpression(
         IAsyncQueryProvider queryProvider,
@@ -40,27 +52,39 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual DateTime PointInTime { get; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override Expression DetachQueryProvider() =>
         new TemporalAsOfQueryRootExpression(EntityType, PointInTime);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override EntityQueryRootExpression UpdateEntityType(IEntityType entityType) =>
         entityType.ClrType != EntityType.ClrType || entityType.Name != EntityType.Name
@@ -70,10 +94,14 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
             : new TemporalAsOfQueryRootExpression(entityType, PointInTime);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override void Print(ExpressionPrinter expressionPrinter)
     {
@@ -82,10 +110,14 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override bool Equals(object? obj) =>
         obj != null
@@ -99,10 +131,14 @@ public class TemporalAsOfQueryRootExpression : TemporalQueryRootExpression
         base.Equals(queryRootExpression) && Equals(PointInTime, queryRootExpression.PointInTime);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override int GetHashCode()
     {

@@ -5,12 +5,14 @@ namespace System.Configuration
 {
     /// <summary>
     /// This interface is an extension to SettingsProvider that a provider can implement
-    /// to support additional functionality for settings classes that derive from ApplicationSettingsBase.
+    /// to support additional functionality for settings classes that derive from
+    // ApplicationSettingsBase.
     /// </summary>
     public interface IApplicationSettingsProvider
     {
         /// <summary>
-        /// Retrieves the previous value of a given SettingsProperty. This is used in conjunction with Upgrade.
+        /// Retrieves the previous value of a given SettingsProperty. This is used in conjunction with
+        // Upgrade.
         /// </summary>
         SettingsPropertyValue GetPreviousVersion(
             SettingsContext context,
@@ -23,7 +25,8 @@ namespace System.Configuration
         void Reset(SettingsContext context);
 
         /// <summary>
-        /// Indicates to the provider that the app has been upgraded. This is a chance for the provider to upgrade
+        /// Indicates to the provider that the app has been upgraded. This is a chance for the provider to
+        // upgrade
         /// its stored settings as appropriate.
         /// </summary>
         void Upgrade(SettingsContext context, SettingsPropertyCollection properties);

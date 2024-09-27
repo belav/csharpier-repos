@@ -25,10 +25,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             new(factory: () => new List<CompletionItem>(), size: 5);
 
         /// <summary>
-        /// The threshold for us to consider exclude (potentially large amount of) expanded items from completion list.
-        /// Showing a large amount of expanded items to user would introduce noise and render the list too long to browse.
-        /// Not processing those expanded items also has perf benefit (e.g. matching and highlighting could be expensive.)
-        /// We set it to 2 because it's common to use filter of length 2 for camel case match, e.g. `AB` for `ArrayBuilder`.
+        /// The threshold for us to consider exclude (potentially large amount of) expanded items from
+        // completion list.
+        /// Showing a large amount of expanded items to user would introduce noise and render the list too
+        // long to browse.
+        /// Not processing those expanded items also has perf benefit (e.g. matching and highlighting could
+        // be expensive.)
+        /// We set it to 2 because it's common to use filter of length 2 for camel case match, e.g. `AB` for
+        // `ArrayBuilder`.
         /// </summary>
         public const int FilterTextLengthToExcludeExpandedItemsExclusive = 2;
 
@@ -109,15 +113,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             {
                 var sessionData = CompletionSessionData.GetOrCreateSessionData(session);
 
-                // As explained in more details in the comments for `CompletionSource.GetCompletionContextAsync`, expanded items might
-                // not be provided upon initial trigger of completion to reduce typing delays, even if they are supposed to be included by default.
-                // While we do not expect to run in to this scenario very often, we'd still want to minimize the impact on user experience of this feature
-                // as best as we could when it does occur. So the solution we came up with is this: if we decided to not include expanded items (because the
-                // computation is running too long,) we will let it run in the background as long as the completion session is still active. Then whenever
-                // any user input that would cause the completion list to refresh, we will check the state of this background task and add expanded items as part
+                // As explained in more details in the comments for `CompletionSource.GetCompletionContextAsync`,
+                // expanded items might
+                // not be provided upon initial trigger of completion to reduce typing delays, even if they are
+                // supposed to be included by default.
+                // While we do not expect to run in to this scenario very often, we'd still want to minimize the
+                // impact on user experience of this feature
+                // as best as we could when it does occur. So the solution we came up with is this: if we decided to
+                // not include expanded items (because the
+                // computation is running too long,) we will let it run in the background as long as the completion
+                // session is still active. Then whenever
+                // any user input that would cause the completion list to refresh, we will check the state of this
+                // background task and add expanded items as part
                 // of the update if they are available.
-                // There is a `CompletionContext.IsIncomplete` flag, which is only supported in LSP mode at the moment. Therefore we opt to handle the checking
-                // and combining the items in Roslyn until the `IsIncomplete` flag is fully supported in classic mode.
+                // There is a `CompletionContext.IsIncomplete` flag, which is only supported in LSP mode at the
+                // moment. Therefore we opt to handle the checking
+                // and combining the items in Roslyn until the `IsIncomplete` flag is fully supported in classic
+                // mode.
 
                 if (sessionData.CombinedSortedList is not null)
                 {
@@ -151,12 +163,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         var (expandedContext, _) = await task.ConfigureAwait(false);
                         if (expandedContext.ItemList.Count > 0)
                         {
-                            // Here we rely on the implementation detail of `CompletionItem.CompareTo`, which always put expand items after regular ones.
+                            // Here we rely on the implementation detail of `CompletionItem.CompareTo`, which always put expand
+                            // items after regular ones.
                             var combinedItemList = session.CreateCompletionList(
                                 data.InitialSortedItemList.Concat(expandedContext.ItemList)
                             );
 
-                            // Add expanded items into a combined list, and save it to be used for future updates during the same session.
+                            // Add expanded items into a combined list, and save it to be used for future updates during the
+                            // same session.
                             sessionData.CombinedSortedList = combinedItemList;
                             var combinedFilterStates = FilterSet.CombineFilterStates(
                                 expandedContext.Filters,
@@ -199,9 +213,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             }
 
             // Show expanded items if any of these conditions is true:
-            // 1. filter text length >= 2 (it's common to use filter of length 2 for camel case match, e.g. `AB` for `ArrayBuilder`)
-            // 2. the completion is triggered in the context of listing members (it usually has much fewer items and more often used for browsing purpose)
-            // 3. defaults is not empty, since they might suggest expanded items (Defaults are the mechanism whole-line-completion uses to communicate with
+            // 1. filter text length >= 2 (it's common to use filter of length 2 for camel case match, e.g. `AB`
+            // for `ArrayBuilder`)
+            // 2. the completion is triggered in the context of listing members (it usually has much fewer items
+            // and more often used for browsing purpose)
+            // 3. defaults is not empty, since they might suggest expanded items (Defaults are the mechanism
+            // whole-line-completion uses to communicate with
             //    completion and make our selection consistent with their suggestion)
             bool ShouldShowExpandedItems() =>
                 session.ApplicableToSpan.GetText(data.Snapshot).Length

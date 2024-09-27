@@ -76,7 +76,8 @@ namespace Newtonsoft.Json.Serialization
         /// <summary>
         /// Gets or sets a value indicating whether the collection items preserve object references.
         /// </summary>
-        /// <value><c>true</c> if collection items preserve object references; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if collection items preserve object references; otherwise,
+        // <c>false</c>.</value>
         public bool? ItemIsReference { get; set; }
 
         /// <summary>

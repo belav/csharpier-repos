@@ -14,19 +14,22 @@ namespace System.Web.Services.Protocols
     using System.Web.Services;
     using System.Xml.Serialization;
 
-    /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute"]/*' />
+    /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public abstract class SoapExtensionAttribute : System.Attribute
     {
-        /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute.ExtensionType"]/*' />
+        /// <include file='doc\SoapExtensionAttribute.uex'
+        // path='docs/doc[@for="SoapExtensionAttribute.ExtensionType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract Type ExtensionType { get; }
 
-        /// <include file='doc\SoapExtensionAttribute.uex' path='docs/doc[@for="SoapExtensionAttribute.Priority"]/*' />
+        /// <include file='doc\SoapExtensionAttribute.uex'
+        // path='docs/doc[@for="SoapExtensionAttribute.Priority"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

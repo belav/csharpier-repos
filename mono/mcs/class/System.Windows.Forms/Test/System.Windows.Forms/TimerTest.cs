@@ -96,33 +96,33 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual("a", timer.Tag, "1");
         }
 
-        /* Application.DoEvents and Sleep are not guarenteed on Linux
-        [Test]
-        public void EnabledTest ()
-        {
-            Ticked = false;
-            using (Timer timer = new Timer ()) {
-                timer.Tick += new EventHandler (TickHandler);
-                timer.Enabled = true;
-                Sys_Threading.Thread.Sleep (150);
-                Application.DoEvents ();
-                Assert.AreEqual (true, timer.Enabled, "1");
-                Assert.AreEqual (true, Ticked, "2");
-            }
-            
-            Ticked = false;
-            using (Timer timer = new Timer ()) {
-                timer.Tick += new EventHandler (TickHandler);
-                timer.Interval = 1000;
-                timer.Enabled = true;
-                Assert.AreEqual (true, timer.Enabled, "3");
-                Assert.AreEqual (false, Ticked, "4");
-                timer.Enabled = false;
-                Assert.AreEqual (false, Ticked, "5"); // This may fail if we are running on a very slow machine...
-                Assert.AreEqual (false, timer.Enabled, "6");
-            }
-        }
-        */
+/* Application.DoEvents and Sleep are not guarenteed on Linux
+[Test]
+public void EnabledTest ()
+{
+Ticked = false;
+using (Timer timer = new Timer ()) {
+timer.Tick += new EventHandler (TickHandler);
+timer.Enabled = true;
+Sys_Threading.Thread.Sleep (150);
+Application.DoEvents ();
+Assert.AreEqual (true, timer.Enabled, "1");
+Assert.AreEqual (true, Ticked, "2");
+}
+
+Ticked = false;
+using (Timer timer = new Timer ()) {
+timer.Tick += new EventHandler (TickHandler);
+timer.Interval = 1000;
+timer.Enabled = true;
+Assert.AreEqual (true, timer.Enabled, "3");
+Assert.AreEqual (false, Ticked, "4");
+timer.Enabled = false;
+Assert.AreEqual (false, Ticked, "5"); // This may fail if we are running on a very slow machine...
+Assert.AreEqual (false, timer.Enabled, "6");
+}
+}
+*/
 
         void TickHandler(object sender, EventArgs e)
         {

@@ -245,8 +245,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Lower "using [await] (ResourceType resource = expression) statement" to a try-finally block.
         /// </summary>
         /// <remarks>
-        /// Assumes that the local symbol will be declared (i.e. in the LocalsOpt array) of an enclosing block.
-        /// Assumes that using statements with multiple locals have already been split up into multiple using statements.
+        /// Assumes that the local symbol will be declared (i.e. in the LocalsOpt array) of an enclosing
+        // block.
+        /// Assumes that using statements with multiple locals have already been split up into multiple
+        // using statements.
         /// </remarks>
         private BoundBlock RewriteDeclarationUsingStatement(
             SyntaxNode usingSyntax,
@@ -275,8 +277,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rewrittenDeclaration is { });
 
             // If we know that the expression is null, then we know that the null check in the finally block
-            // will fail, and the Dispose call will never happen.  That is, the finally block will have no effect.
-            // Consequently, we can simply skip the whole try-finally construct and just create a block containing
+            // will fail, and the Dispose call will never happen.  That is, the finally block will have no
+            // effect.
+            // Consequently, we can simply skip the whole try-finally construct and just create a block
+            // containing
             // the new declaration.
             if (boundLocal.ConstantValueOpt == ConstantValue.Null)
             {
@@ -353,10 +357,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <param name="resourceTypeSyntax">
-        /// The node that declares the type of the resource (might be shared by multiple resource declarations, e.g. <code>using T x = expr, y = expr;</code>)
+        /// The node that declares the type of the resource (might be shared by multiple resource
+        // declarations, e.g. <code>using T x = expr, y = expr;</code>)
         /// </param>
         /// <param name="resourceSyntax">
-        /// The node that declares the resource storage, e.g. <code>x = expr</code> in <code>using T x = expr, y = expr;</code>.
+        /// The node that declares the resource storage, e.g. <code>x = expr</code> in <code>using T x =
+        // expr, y = expr;</code>.
         /// </param>
         private BoundStatement RewriteUsingStatementTryFinally(
             SyntaxNode resourceTypeSyntax,
@@ -397,7 +403,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC: differently -- for example, for performance reasons -- as long as the
             // SPEC: behavior is consistent with the above expansion.
             //
-            // In the case of using-await statement, we'll use "IAsyncDisposable" instead of "IDisposable", "await DisposeAsync()" instead of "Dispose()"
+            // In the case of using-await statement, we'll use "IAsyncDisposable" instead of "IDisposable",
+            // "await DisposeAsync()" instead of "Dispose()"
             //
             // And we do in fact generate the code slightly differently than precisely how it is
             // described above.
@@ -535,10 +542,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <param name="resourceTypeSyntax">
-        /// The node that declares the type of the resource (might be shared by multiple resource declarations, e.g. <code>using T x = expr, y = expr;</code>)
+        /// The node that declares the type of the resource (might be shared by multiple resource
+        // declarations, e.g. <code>using T x = expr, y = expr;</code>)
         /// </param>
         /// <param name="resourceSyntax">
-        /// The node that declares the resource storage, e.g. <code>x = expr</code> in <code>using T x = expr, y = expr;</code>.
+        /// The node that declares the resource storage, e.g. <code>x = expr</code> in <code>using T x =
+        // expr, y = expr;</code>.
         /// </param>
         private BoundExpression GenerateDisposeCall(
             SyntaxNode resourceTypeSyntax,
@@ -551,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Debug.Assert(awaitOpt is null || awaitKeyword != default);
 
-            // If we don't have an explicit dispose method, try and get the special member for IDisposable/IAsyncDisposable
+            // If we don't have an explicit dispose method, try and get the special member for
+            // IDisposable/IAsyncDisposable
             MethodSymbol? disposeMethod = disposeInfo?.Method;
             if (disposeMethod is null)
             {
@@ -625,7 +635,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Synthesize a call `expression.Method()`, but with some extra smarts to handle extension methods, and to fill-in optional and params parameters. This call expects that the
+        /// Synthesize a call `expression.Method()`, but with some extra smarts to handle extension methods,
+        // and to fill-in optional and params parameters. This call expects that the
         /// receiver parameter has already been visited.
         /// </summary>
         private BoundExpression MakeCallWithNoExplicitArgument(

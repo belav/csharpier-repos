@@ -13,11 +13,11 @@ namespace Testing
     /// </incorrect>
     public interface InterfaceTest2 { }
 
-    /**
-        <summary>
-        Java style comment for interface
-        </summary>
-    */
+/**
+<summary>
+Java style comment for interface
+</summary>
+*/
     public interface InterfaceTest3 { }
 
     public class Test

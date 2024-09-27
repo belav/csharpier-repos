@@ -36,8 +36,13 @@ namespace System.Data.SqlClient
 
     public sealed class SqlDependency
     {
+        //
+        //
         // ---------------------------------------------------------------------------------------------------------
-        // Private class encapsulating the user/identity information - either SQL Auth username or Windows identity.
+        // Private class encapsulating the user/identity information - either SQL Auth username or Windows
+        // identity.
+        //
+        //
         // ---------------------------------------------------------------------------------------------------------
 
         internal class IdentityUserNamePair
@@ -261,7 +266,8 @@ namespace System.Data.SqlClient
         // Various SqlDependency required members
         private bool _dependencyFired = false;
 
-        // SQL BU DT 382314 - we are required to implement our own event collection to preserve ExecutionContext on callback.
+        // SQL BU DT 382314 - we are required to implement our own event collection to preserve
+        // ExecutionContext on callback.
         private List<EventContextPair> _eventList = new List<EventContextPair>();
         private object _eventHandlerLock = new object(); // Lock for event serialization.
 
@@ -281,8 +287,10 @@ namespace System.Data.SqlClient
         private static object _startStopLock = new object();
         private static readonly string _appDomainKey = Guid.NewGuid().ToString();
 
-        // Hashtable containing all information to match from a server, user, database triple to the service started for that
-        // triple.  For each server, there can be N users.  For each user, there can be N databases.  For each server, user,
+        // Hashtable containing all information to match from a server, user, database triple to the service
+        // started for that
+        // triple.  For each server, there can be N users.  For each user, there can be N databases.  For
+        // each server, user,
         // database, there can only be one service.
         private static Dictionary<
             string,
@@ -529,7 +537,8 @@ namespace System.Data.SqlClient
         ]
         public void AddCommandDependency(SqlCommand command)
         {
-            // Adds command to dependency collection so we automatically create the SqlNotificationsRequest object
+            // Adds command to dependency collection so we automatically create the SqlNotificationsRequest
+            // object
             // and listen for a notification for the added commands.
             IntPtr hscp;
             Bid.NotificationsScopeEnter(
@@ -565,9 +574,11 @@ namespace System.Data.SqlClient
         // Static Methods - public & internal
         // ----------------------------------
 
-        // Method to obtain AppDomain reference and then obtain the reference to the process wide dispatcher for
+        // Method to obtain AppDomain reference and then obtain the reference to the process wide dispatcher
+        // for
         // Start() and Stop() method calls on the individual SqlDependency instances.
-        // SxS: this method retrieves the primary AppDomain stored in native library. Since each System.Data.dll has its own copy of native
+        // SxS: this method retrieves the primary AppDomain stored in native library. Since each
+        // System.Data.dll has its own copy of native
         // library, this call is safe in SxS
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
@@ -729,7 +740,8 @@ namespace System.Data.SqlClient
             );
             try
             {
-                // The following code exists in Stop as well.  It exists here to demand permissions as high in the stack
+                // The following code exists in Stop as well.  It exists here to demand permissions as high in the
+                // stack
                 // as possible.
                 if (InOutOfProcHelper.InProc)
                 {
@@ -754,7 +766,8 @@ namespace System.Data.SqlClient
                     queue = null; // Force to null - for proper hashtable comparison for default case.
                 }
 
-                // Create new connection options for demand on their connection string.  We modify the connection string
+                // Create new connection options for demand on their connection string.  We modify the connection
+                // string
                 // and assert on our modified string when we create the container.
                 SqlConnectionString connectionStringObject = new SqlConnectionString(
                     connectionString
@@ -914,7 +927,8 @@ namespace System.Data.SqlClient
             );
             try
             {
-                // The following code exists in Stop as well.  It exists here to demand permissions as high in the stack
+                // The following code exists in Stop as well.  It exists here to demand permissions as high in the
+                // stack
                 // as possible.
                 if (InOutOfProcHelper.InProc)
                 {
@@ -939,7 +953,8 @@ namespace System.Data.SqlClient
                     queue = null; // Force to null - for proper hashtable comparison for default case.
                 }
 
-                // Create new connection options for demand on their connection string.  We modify the connection string
+                // Create new connection options for demand on their connection string.  We modify the connection
+                // string
                 // and assert on our modified string when we create the container.
                 SqlConnectionString connectionStringObject = new SqlConnectionString(
                     connectionString
@@ -1220,7 +1235,8 @@ namespace System.Data.SqlClient
             string database
         )
         {
-            // Server must be an exact match, but user and database only needs to match exactly if there is more than one
+            // Server must be an exact match, but user and database only needs to match exactly if there is more
+            // than one
             // for the given user or database passed.  That is ambiguious and we must fail.
             IntPtr hscp;
             Bid.NotificationsScopeEnter(
@@ -1364,7 +1380,8 @@ namespace System.Data.SqlClient
         // Internal Methods
         // ----------------
 
-        // Called by SqlCommand upon execution of a SqlNotificationRequest class created by this dependency.  We
+        // Called by SqlCommand upon execution of a SqlNotificationRequest class created by this dependency.
+        // We
         // use this list for a reverse lookup based on server.
         internal void AddToServerList(string server)
         {
@@ -1416,12 +1433,16 @@ namespace System.Data.SqlClient
             );
             try
             {
-                // Create a string representing the concatenation of the connection string, command text and .ToString on all parameter values.
-                // This string will then be mapped to unique notification ID (new GUID).  We add the guid and the hash to the app domain
-                // dispatcher to be able to map back to the dependency that needs to be fired for a notification of this
+                // Create a string representing the concatenation of the connection string, command text and
+                // .ToString on all parameter values.
+                // This string will then be mapped to unique notification ID (new GUID).  We add the guid and the
+                // hash to the app domain
+                // dispatcher to be able to map back to the dependency that needs to be fired for a notification of
+                // this
                 // command.
 
-                // VSTS 59821: add Connection string to prevent redundant notifications when same command is running against different databases or SQL servers
+                // VSTS 59821: add Connection string to prevent redundant notifications when same command is running
+                // against different databases or SQL servers
                 //
 
 
@@ -1474,7 +1495,8 @@ namespace System.Data.SqlClient
                         if (ExpirationTime < DateTime.UtcNow)
                         {
                             // There is a small window in which SqlDependencyPerAppDomainDispatcher.TimeoutTimerCallback
-                            // raises Timeout event but before removing this event from the list. If notification is received from
+                            // raises Timeout event but before removing this event from the list. If notification is received
+                            // from
                             // server in this case, we will hit this code path.
                             // It is safe to ignore this race condition because no event is sent to user and no leak happens.
                             Bid.NotificationsTrace(
@@ -1654,7 +1676,8 @@ namespace System.Data.SqlClient
             );
             try
             {
-                // Create a string representing the concatenation of the connection string, the command text and .ToString on all its parameter values.
+                // Create a string representing the concatenation of the connection string, the command text and
+                // .ToString on all its parameter values.
                 // This string will then be mapped to the notification ID.
 
                 // All types should properly support a .ToString for the values except
@@ -1723,8 +1746,10 @@ namespace System.Data.SqlClient
             }
         }
 
-        // Basic copy of function in SqlConnection.cs for ChangeDatabase and similar functionality.  Since this will
-        // only be used for default service and database provided by server, we do not need to worry about an already
+        // Basic copy of function in SqlConnection.cs for ChangeDatabase and similar functionality.  Since
+        // this will
+        // only be used for default service and database provided by server, we do not need to worry about
+        // an already
         // quoted value.
         static internal string FixupServiceOrDatabaseName(string name)
         {

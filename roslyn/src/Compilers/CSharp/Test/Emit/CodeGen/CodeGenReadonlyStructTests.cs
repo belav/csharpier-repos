@@ -629,7 +629,8 @@ class Program
                 expectedOutput: @"Program+S1Program+S1"
             );
 
-            // We may be able to optimize this case (ie. avoid defensive copy) since the struct and the caller are in the same module
+            // We may be able to optimize this case (ie. avoid defensive copy) since the struct and the caller
+            // are in the same module
             // Tracked by https://github.com/dotnet/roslyn/issues/66365
             comp.VerifyIL(
                 "Program.S1.Test()",
@@ -780,7 +781,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_RefReadonlyLocal, "this")
                     .WithArguments("this")
                     .WithLocation(32, 26),
-                // (37,26): error CS0192: A readonly field cannot be used as a ref or out value (except in a constructor)
+                // (37,26): error CS0192: A readonly field cannot be used as a ref or out value (except in a
+                // constructor)
                 //             TakesRef(ref this.x); // error
                 Diagnostic(ErrorCode.ERR_RefReadonly, "this.x").WithLocation(37, 26)
             );
@@ -846,34 +848,64 @@ class Program
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (19,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (19,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             void F() { x = i;} // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "x").WithLocation(19, 24),
-                // (20,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (20,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             Action a = () => { x = i;}; // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "x").WithLocation(20, 32),
-                // (26,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (26,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             void F() { this = arg;} // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(26, 24),
-                // (27,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (27,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             Action a = () => { this = arg;}; // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(27, 32),
-                // (33,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (33,24): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             void F() { this = default;} // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(33, 24),
-                // (34,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (34,32): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             Action a = () => { this = default;}; // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(34, 32),
-                // (40,37): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (40,37): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             void F() { TakesRef(ref this);} // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(40, 37),
-                // (41,45): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (41,45): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             Action a = () => { TakesRef(ref this);}; // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(41, 45),
-                // (47,37): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (47,37): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             void F() { TakesRef(ref this.x);} // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(47, 37),
-                // (48,45): error CS1673: Anonymous methods, lambda expressions, query expressions, and local functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a local variable outside the anonymous method, lambda expression, query expression, or local function and using the local instead.
+                // (48,45): error CS1673: Anonymous methods, lambda expressions, query expressions, and local
+                // functions inside structs cannot access instance members of 'this'. Consider copying 'this' to a
+                // local variable outside the anonymous method, lambda expression, query expression, or local function
+                // and using the local instead.
                 //             Action a = () => { TakesRef(ref this.x);}; // Error
                 Diagnostic(ErrorCode.ERR_ThisStructNotInAnonMeth, "this").WithLocation(48, 45)
             );
@@ -2108,7 +2140,8 @@ public struct S
             var verifier = CompileAndVerify(csharp, expectedOutput: "123");
 
             verifier.VerifyDiagnostics(
-                // (9,9): warning CS8655: Call to non-readonly member 'S.M2()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (9,9): warning CS8655: Call to non-readonly member 'S.M2()' from a 'readonly' member results in
+                // an implicit copy of 'this'.
                 //         M2();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "M2")
                     .WithArguments("S.M2()", "this")
@@ -2179,7 +2212,8 @@ public struct S
 ";
 
             var verifier = CompileAndVerify(csharp, expectedOutput: "123");
-            // should warn about calling s.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             verifier.VerifyDiagnostics();
             verifier.VerifyIL(
                 "S.M1",
@@ -2262,7 +2296,8 @@ public static class C
                 references: new[] { image },
                 expectedOutput: "1123"
             );
-            // should warn about calling s.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             verifier.VerifyDiagnostics();
             verifier.VerifyIL(
                 "C.M1",
@@ -2347,7 +2382,8 @@ public static class C
                 references: new[] { image },
                 expectedOutput: "1123"
             );
-            // should warn about calling s.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             verifier.VerifyDiagnostics();
             verifier.VerifyIL(
                 "C.M1",
@@ -2587,7 +2623,8 @@ public struct S2
 }"
             );
 
-            // should warn about calling s2.M2 in warning wave (see https://github.com/dotnet/roslyn/issues/33968)
+            // should warn about calling s2.M2 in warning wave (see
+            // https://github.com/dotnet/roslyn/issues/33968)
             comp.VerifyDiagnostics();
         }
 
@@ -2680,17 +2717,20 @@ public struct S
             var verifier = CompileAndVerify(csharp);
 
             verifier.VerifyDiagnostics(
-                // (12,9): warning CS8655: Call to non-readonly member 'S.ToString()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (12,9): warning CS8655: Call to non-readonly member 'S.ToString()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         ToString();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "ToString")
                     .WithArguments("S.ToString()", "this")
                     .WithLocation(12, 9),
-                // (13,9): warning CS8655: Call to non-readonly member 'S.GetHashCode()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (13,9): warning CS8655: Call to non-readonly member 'S.GetHashCode()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         GetHashCode();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "GetHashCode")
                     .WithArguments("S.GetHashCode()", "this")
                     .WithLocation(13, 9),
-                // (14,9): warning CS8655: Call to non-readonly member 'S.Equals(object)' from a 'readonly' member results in an implicit copy of 'this'.
+                // (14,9): warning CS8655: Call to non-readonly member 'S.Equals(object)' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         Equals(null);
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "Equals")
                     .WithArguments("S.Equals(object)", "this")
@@ -2848,29 +2888,34 @@ public struct S
             var verifier = CompileAndVerify(csharp);
 
             verifier.VerifyDiagnostics(
-                // (12,9): warning CS8655: Call to non-readonly member 'S.GetType()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (12,9): warning CS8655: Call to non-readonly member 'S.GetType()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         GetType();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "GetType")
                     .WithArguments("S.GetType()", "this")
                     .WithLocation(12, 9),
-                // (13,9): warning CS8655: Call to non-readonly member 'S.ToString()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (13,9): warning CS8655: Call to non-readonly member 'S.ToString()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         ToString();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "ToString")
                     .WithArguments("S.ToString()", "this")
                     .WithLocation(13, 9),
-                // (14,9): warning CS8655: Call to non-readonly member 'S.GetHashCode()' from a 'readonly' member results in an implicit copy of 'this'.
+                // (14,9): warning CS8655: Call to non-readonly member 'S.GetHashCode()' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         GetHashCode();
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "GetHashCode")
                     .WithArguments("S.GetHashCode()", "this")
                     .WithLocation(14, 9),
-                // (15,9): warning CS8655: Call to non-readonly member 'S.Equals(object)' from a 'readonly' member results in an implicit copy of 'this'.
+                // (15,9): warning CS8655: Call to non-readonly member 'S.Equals(object)' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         Equals(null);
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "Equals")
                     .WithArguments("S.Equals(object)", "this")
                     .WithLocation(15, 9)
             );
 
-            // Verify that calls to new non-readonly members pass an address to a temp and that calls to base members use a box.
+            // Verify that calls to new non-readonly members pass an address to a temp and that calls to base
+            // members use a box.
             verifier.VerifyIL(
                 "S.M",
                 @"
@@ -2959,7 +3004,8 @@ public struct S
             var verifier = CompileAndVerify(csharp);
             verifier.VerifyDiagnostics();
 
-            // Verify that calls to readonly new members pass the address of 'this' (not a temp) and that calls to base members use a box.
+            // Verify that calls to readonly new members pass the address of 'this' (not a temp) and that calls
+            // to base members use a box.
             verifier.VerifyIL(
                 "S.M",
                 @"

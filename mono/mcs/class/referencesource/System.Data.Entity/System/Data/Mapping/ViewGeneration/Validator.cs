@@ -286,9 +286,11 @@ namespace System.Data.Mapping.ViewGeneration
 
 
         /// <summary>
-        /// Checks that if a DISTINCT operator exists between some C-Extent and S-Extent, there are no additional
+        /// Checks that if a DISTINCT operator exists between some C-Extent and S-Extent, there are no
+        // additional
         /// mapping fragments between that C-Extent and S-Extent.
-        /// We need to enforce this because DISTINCT is not understood by viewgen machinery, and two fragments may be merged
+        /// We need to enforce this because DISTINCT is not understood by viewgen machinery, and two
+        // fragments may be merged
         /// despite one of them having DISTINCT.
         /// </summary>
         private bool CheckCellsWithDistinctFlag()
@@ -401,7 +403,8 @@ namespace System.Data.Mapping.ViewGeneration
             return m_errorLog.Count == errorLogSize;
         }
 
-        // effects: Checks for some sanity issues between the basic and view constraints. Adds to m_errorLog if needed
+        // effects: Checks for some sanity issues between the basic and view constraints. Adds to m_errorLog
+        // if needed
         [Conditional("DEBUG")]
         private static void CheckConstraintSanity(
             BasicSchemaConstraints cConstraints,

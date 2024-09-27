@@ -228,9 +228,9 @@ namespace Moq.Tests
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                    private int GetValue(int value)
+            private int GetValue(int value)
             After:
-                    int GetValue(int value)
+            int GetValue(int value)
             */
         }
 
@@ -777,9 +777,9 @@ namespace Moq.Tests
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                    private int IsMultipleOf(int value)
+            private int IsMultipleOf(int value)
             After:
-                    int IsMultipleOf(int value)
+            int IsMultipleOf(int value)
             */
         }
 
@@ -1061,9 +1061,9 @@ namespace Moq.Tests
 
             /* Unmerged change from project 'Moq.Tests(net6.0)'
             Before:
-                    private static Foo MakeFoo(IMock<IBar> barMock)
+            private static Foo MakeFoo(IMock<IBar> barMock)
             After:
-                    static Foo MakeFoo(IMock<IBar> barMock)
+            static Foo MakeFoo(IMock<IBar> barMock)
             */
         }
 
@@ -1243,7 +1243,8 @@ namespace Moq.Tests
 
         public interface INewBar : IBar { }
 
-        // Note that this test requires that there be no [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
+        // Note that this test requires that there be no [assembly:
+        // InternalsVisibleTo("DynamicProxyGenAssembly2")]
         // or similar defined in this test assembly. If some other test requires that internals be made
         // visible to DynamicProxy, then this test must be disabled.
         [Fact]

@@ -28,7 +28,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Tagger for active statements. Active statements are only tracked for langauges that support EnC (C#, VB).
+    /// Tagger for active statements. Active statements are only tracked for langauges that support EnC
+    // (C#, VB).
     /// </summary>
     [Export(typeof(ITaggerProvider))]
     [TagType(typeof(ActiveStatementTag))]

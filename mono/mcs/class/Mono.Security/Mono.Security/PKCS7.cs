@@ -93,11 +93,11 @@ namespace Mono.Security
         }
 
         /*
-         * IssuerAndSerialNumber ::= SEQUENCE {
-         *	issuer Name,
-         *	serialNumber CertificateSerialNumber
-         * }
-         */
+        * IssuerAndSerialNumber ::= SEQUENCE {
+        *	issuer Name,
+        *	serialNumber CertificateSerialNumber
+        * }
+        */
         static public ASN1 IssuerAndSerialNumber(X509Certificate x509)
         {
             ASN1 issuer = null;
@@ -127,12 +127,12 @@ namespace Mono.Security
         }
 
         /*
-         * ContentInfo ::= SEQUENCE {
-         *	contentType ContentType,
-         *	content [0] EXPLICIT ANY DEFINED BY contentType OPTIONAL
-         * }
-         * ContentType ::= OBJECT IDENTIFIER
-         */
+        * ContentInfo ::= SEQUENCE {
+        *	contentType ContentType,
+        *	content [0] EXPLICIT ANY DEFINED BY contentType OPTIONAL
+        * }
+        * ContentType ::= OBJECT IDENTIFIER
+        */
         public class ContentInfo
         {
             private string contentType;
@@ -204,11 +204,11 @@ namespace Mono.Security
         }
 
         /*
-         * EncryptedData ::= SEQUENCE {
-         *	version		INTEGER {edVer0(0)} (edVer0),
-         *	 encryptedContentInfo  EncryptedContentInfo
-         * }
-         */
+        * EncryptedData ::= SEQUENCE {
+        *	version		INTEGER {edVer0(0)} (edVer0),
+        *	 encryptedContentInfo  EncryptedContentInfo
+        * }
+        */
         public class EncryptedData
         {
             private byte _version;
@@ -304,23 +304,23 @@ namespace Mono.Security
         }
 
         /*
-         * EnvelopedData ::= SEQUENCE {
-         *	version Version,
-         *	recipientInfos RecipientInfos,
-         *	encryptedContentInfo EncryptedContentInfo
-         * }
-         *
-         * RecipientInfos ::= SET OF RecipientInfo
-         *
-         * EncryptedContentInfo ::= SEQUENCE {
-         *	contentType ContentType,
-         *	contentEncryptionAlgorithm ContentEncryptionAlgorithmIdentifier,
-         *	encryptedContent [0] IMPLICIT EncryptedContent OPTIONAL
-         * }
-         *
-         * EncryptedContent ::= OCTET STRING
-         *
-         */
+        * EnvelopedData ::= SEQUENCE {
+        *	version Version,
+        *	recipientInfos RecipientInfos,
+        *	encryptedContentInfo EncryptedContentInfo
+        * }
+        *
+        * RecipientInfos ::= SET OF RecipientInfo
+        *
+        * EncryptedContentInfo ::= SEQUENCE {
+        *	contentType ContentType,
+        *	contentEncryptionAlgorithm ContentEncryptionAlgorithmIdentifier,
+        *	encryptedContent [0] IMPLICIT EncryptedContent OPTIONAL
+        * }
+        *
+        * EncryptedContent ::= OCTET STRING
+        *
+        */
         public class EnvelopedData
         {
             private byte _version;
@@ -428,42 +428,43 @@ namespace Mono.Security
                 ASN1 signedData = new ASN1(0x30);
                 // version Version -> Version ::= INTEGER
                 /*				byte[] ver = { _version };
-                                signedData.Add (new ASN1 (0x02, ver));
-                                // digestAlgorithms DigestAlgorithmIdentifiers -> DigestAlgorithmIdentifiers ::= SET OF DigestAlgorithmIdentifier
-                                ASN1 digestAlgorithms = signedData.Add (new ASN1 (0x31));
-                                if (hashAlgorithm != null) {
-                                    string hashOid = CryptoConfig.MapNameToOid (hashAlgorithm);
-                                    digestAlgorithms.Add (AlgorithmIdentifier (hashOid));
-                                }
+                signedData.Add (new ASN1 (0x02, ver));
+                // digestAlgorithms DigestAlgorithmIdentifiers -> DigestAlgorithmIdentifiers ::= SET OF
+                DigestAlgorithmIdentifier
+                ASN1 digestAlgorithms = signedData.Add (new ASN1 (0x31));
+                if (hashAlgorithm != null) {
+                string hashOid = CryptoConfig.MapNameToOid (hashAlgorithm);
+                digestAlgorithms.Add (AlgorithmIdentifier (hashOid));
+                }
                 
-                                // contentInfo ContentInfo,
-                                ASN1 ci = contentInfo.ASN1;
-                                signedData.Add (ci);
-                                if ((mda == null) && (hashAlgorithm != null)) {
-                                    // automatically add the messageDigest authenticated attribute
-                                    HashAlgorithm ha = HashAlgorithm.Create (hashAlgorithm);
-                                    byte[] idcHash = ha.ComputeHash (ci[1][0].Value);
-                                    ASN1 md = new ASN1 (0x30);
-                                    mda = Attribute (messageDigest, md.Add (new ASN1 (0x04, idcHash)));
-                                    signerInfo.AuthenticatedAttributes.Add (mda);
-                                }
+                // contentInfo ContentInfo,
+                ASN1 ci = contentInfo.ASN1;
+                signedData.Add (ci);
+                if ((mda == null) && (hashAlgorithm != null)) {
+                // automatically add the messageDigest authenticated attribute
+                HashAlgorithm ha = HashAlgorithm.Create (hashAlgorithm);
+                byte[] idcHash = ha.ComputeHash (ci[1][0].Value);
+                ASN1 md = new ASN1 (0x30);
+                mda = Attribute (messageDigest, md.Add (new ASN1 (0x04, idcHash)));
+                signerInfo.AuthenticatedAttributes.Add (mda);
+                }
                 
-                                // certificates [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL,
-                                if (certs.Count > 0) {
-                                    ASN1 a0 = signedData.Add (new ASN1 (0xA0));
-                                    foreach (X509Certificate x in certs)
-                                        a0.Add (new ASN1 (x.RawData));
-                                }
-                                // crls [1] IMPLICIT CertificateRevocationLists OPTIONAL,
-                                if (crls.Count > 0) {
-                                    ASN1 a1 = signedData.Add (new ASN1 (0xA1));
-                                    foreach (byte[] crl in crls)
-                                        a1.Add (new ASN1 (crl));
-                                }
-                                // signerInfos SignerInfos -> SignerInfos ::= SET OF SignerInfo
-                                ASN1 signerInfos = signedData.Add (new ASN1 (0x31));
-                                if (signerInfo.Key != null)
-                                    signerInfos.Add (signerInfo.ASN1);*/
+                // certificates [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL,
+                if (certs.Count > 0) {
+                ASN1 a0 = signedData.Add (new ASN1 (0xA0));
+                foreach (X509Certificate x in certs)
+                a0.Add (new ASN1 (x.RawData));
+                }
+                // crls [1] IMPLICIT CertificateRevocationLists OPTIONAL,
+                if (crls.Count > 0) {
+                ASN1 a1 = signedData.Add (new ASN1 (0xA1));
+                foreach (byte[] crl in crls)
+                a1.Add (new ASN1 (crl));
+                }
+                // signerInfos SignerInfos -> SignerInfos ::= SET OF SignerInfo
+                ASN1 signerInfos = signedData.Add (new ASN1 (0x31));
+                if (signerInfo.Key != null)
+                signerInfos.Add (signerInfo.ASN1);*/
                 return signedData;
             }
 
@@ -474,16 +475,16 @@ namespace Mono.Security
         }
 
         /* RecipientInfo ::= SEQUENCE {
-         *	version Version,
-         *	issuerAndSerialNumber IssuerAndSerialNumber,
-         *	keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
-         *	encryptedKey EncryptedKey
-         * }
-         *
-         * KeyEncryptionAlgorithmIdentifier ::= AlgorithmIdentifier
-         *
-         * EncryptedKey ::= OCTET STRING
-         */
+        *	version Version,
+        *	issuerAndSerialNumber IssuerAndSerialNumber,
+        *	keyEncryptionAlgorithm KeyEncryptionAlgorithmIdentifier,
+        *	encryptedKey EncryptedKey
+        * }
+        *
+        * KeyEncryptionAlgorithmIdentifier ::= AlgorithmIdentifier
+        *
+        * EncryptedKey ::= OCTET STRING
+        */
         public class RecipientInfo
         {
             private int _version;
@@ -571,15 +572,15 @@ namespace Mono.Security
         }
 
         /*
-         * SignedData ::= SEQUENCE {
-         *	version Version,
-         *	digestAlgorithms DigestAlgorithmIdentifiers,
-         *	contentInfo ContentInfo,
-         *	certificates [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL,
-         *	crls [1] IMPLICIT CertificateRevocationLists OPTIONAL,
-         *	signerInfos SignerInfos
-         * }
-         */
+        * SignedData ::= SEQUENCE {
+        *	version Version,
+        *	digestAlgorithms DigestAlgorithmIdentifiers,
+        *	contentInfo ContentInfo,
+        *	certificates [0] IMPLICIT ExtendedCertificatesAndCertificates OPTIONAL,
+        *	crls [1] IMPLICIT CertificateRevocationLists OPTIONAL,
+        *	signerInfos SignerInfos
+        * }
+        */
         public class SignedData
         {
             private byte version;
@@ -760,7 +761,8 @@ namespace Mono.Security
                 // version Version -> Version ::= INTEGER
                 byte[] ver = { version };
                 signedData.Add(new ASN1(0x02, ver));
-                // digestAlgorithms DigestAlgorithmIdentifiers -> DigestAlgorithmIdentifiers ::= SET OF DigestAlgorithmIdentifier
+                // digestAlgorithms DigestAlgorithmIdentifiers -> DigestAlgorithmIdentifiers ::= SET OF
+                // DigestAlgorithmIdentifier
                 ASN1 digestAlgorithms = signedData.Add(new ASN1(0x31));
                 if (hashAlgorithm != null)
                 {
@@ -830,18 +832,18 @@ namespace Mono.Security
         }
 
         /*
-         * SignerInfo ::= SEQUENCE {
-         *	version Version,
-         * 	issuerAndSerialNumber IssuerAndSerialNumber,
-         * 	digestAlgorithm DigestAlgorithmIdentifier,
-         * 	authenticatedAttributes [0] IMPLICIT Attributes OPTIONAL,
-         * 	digestEncryptionAlgorithm DigestEncryptionAlgorithmIdentifier,
-         * 	encryptedDigest EncryptedDigest,
-         * 	unauthenticatedAttributes [1] IMPLICIT Attributes OPTIONAL
-         * }
-         *
-         * For version == 3 issuerAndSerialNumber may be replaced by ...
-         */
+        * SignerInfo ::= SEQUENCE {
+        *	version Version,
+        * 	issuerAndSerialNumber IssuerAndSerialNumber,
+        * 	digestAlgorithm DigestAlgorithmIdentifier,
+        * 	authenticatedAttributes [0] IMPLICIT Attributes OPTIONAL,
+        * 	digestEncryptionAlgorithm DigestEncryptionAlgorithmIdentifier,
+        * 	encryptedDigest EncryptedDigest,
+        * 	unauthenticatedAttributes [1] IMPLICIT Attributes OPTIONAL
+        * }
+        *
+        * For version == 3 issuerAndSerialNumber may be replaced by ...
+        */
         public class SignerInfo
         {
             private byte version;

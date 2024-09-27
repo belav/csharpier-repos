@@ -11,7 +11,8 @@ public readonly struct ModelBindingResult : IEquatable<ModelBindingResult>
     /// <summary>
     /// Creates a <see cref="ModelBindingResult"/> representing a failed model binding operation.
     /// </summary>
-    /// <returns>A <see cref="ModelBindingResult"/> representing a failed model binding operation.</returns>
+    /// <returns>A <see cref="ModelBindingResult"/> representing a failed model binding
+    // operation.</returns>
     public static ModelBindingResult Failed()
     {
         return new ModelBindingResult(model: null, isModelSet: false);

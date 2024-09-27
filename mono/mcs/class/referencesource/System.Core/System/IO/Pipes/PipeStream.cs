@@ -37,9 +37,11 @@ namespace System.IO.Pipes
     [Serializable]
     internal enum PipeState
     {
-        // Waiting to connect is the state before a live connection has been established. For named pipes, the
+        // Waiting to connect is the state before a live connection has been established. For named pipes,
+        // the
         // transition from Waiting to Connect to Connected occurs after an explicit request to connect. For
-        // anonymous pipes this occurs as soon as both pipe handles are created (as soon as the anonymous pipe
+        // anonymous pipes this occurs as soon as both pipe handles are created (as soon as the anonymous
+        // pipe
         // server ctor has completed).
         WaitingToConnect = 0,
 
@@ -47,7 +49,8 @@ namespace System.IO.Pipes
         // both handles are created.
         Connected = 1,
 
-        // It�s detected that the other side has broken the connection. Note that this effect isn�t immediate; we
+        // It�s detected that the other side has broken the connection. Note that this effect isn�t
+        // immediate; we
         // only detect this on the subsequent Win32 call, as indicated by the following error codes:
         // ERROR_BROKEN_PIPE, ERROR_PIPE_NOT_CONNECTED.
         // A side can cause the connection to break in the following ways:
@@ -56,10 +59,12 @@ namespace System.IO.Pipes
         //    - One side closes the handle
         Broken = 2,
 
-        // Valid only for named servers. The server transitions to this state immediately after Disconnect is called.
+        // Valid only for named servers. The server transitions to this state immediately after Disconnect
+        // is called.
         Disconnected = 3,
 
-        // Close/Disposed are the same state. The Close method calls Dispose; both of these close the pipe handle
+        // Close/Disposed are the same state. The Close method calls Dispose; both of these close the pipe
+        // handle
         // and perform other cleanup. The pipe object is no longer usable after this has been called.
         Closed = 4,
     }
@@ -188,7 +193,8 @@ namespace System.IO.Pipes
         }
 
         // Once a PipeStream has a handle ready, it should call this method to set up the PipeStream.  If
-        // the pipe is in a connected state already, it should also set the IsConnected (protected) property.
+        // the pipe is in a connected state already, it should also set the IsConnected (protected)
+        // property.
         [System.Security.SecurityCritical]
         protected void InitializeHandle(SafePipeHandle handle, bool isExposed, bool isAsync)
         {
@@ -974,7 +980,8 @@ namespace System.IO.Pipes
             WriteCore(buffer, 0, 1);
         }
 
-        // Does nothing on PipeStreams.  We cannot call UnsafeNativeMethods.FlushFileBuffers here because we can deadlock
+        // Does nothing on PipeStreams.  We cannot call UnsafeNativeMethods.FlushFileBuffers here because we
+        // can deadlock
         // if the other end of the pipe is no longer interested in reading from the pipe.
         [System.Security.SecurityCritical]
         public override void Flush()
@@ -1238,7 +1245,8 @@ namespace System.IO.Pipes
             )]
             set
             {
-                // Nothing fancy here.  This is just a wrapper around the Win32 API.  Note, that NamedPipeServerStream
+                // Nothing fancy here.  This is just a wrapper around the Win32 API.  Note, that
+                // NamedPipeServerStream
                 // and the AnonymousPipeStreams override this.
 
                 CheckPipePropertyOperations();

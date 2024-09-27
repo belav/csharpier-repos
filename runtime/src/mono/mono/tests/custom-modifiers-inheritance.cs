@@ -6,9 +6,12 @@ public class Tests
 {
     // This set of tests are for checking the impact of custom modifiers on vtable layout and
     // method overrides. CustomModifiers are used for one thing and one thing alone, and that's making
-    // two method signatures that would otherwise be equal into unequal signatures. This is used by C++/CLI
-    // to tag primitive types with the C++-side type. For instance, this allows a single primitive type for
-    // various integer types, but prevents a function taking an int from overriding a function taking a long.
+    // two method signatures that would otherwise be equal into unequal signatures. This is used by
+    // C++/CLI
+    // to tag primitive types with the C++-side type. For instance, this allows a single primitive type
+    // for
+    // various integer types, but prevents a function taking an int from overriding a function taking a
+    // long.
     //
     // We have to use SRE or il to interact with it, as C# compilers don't do much with modifiers beyond
     // reflection. There's no way to generate the below hierarchy and methods by compiling C#.
@@ -33,7 +36,8 @@ public class Tests
         //
         //    // method line 4
         // .method public virtual hidebysig
-        //        instance default string M (int32* modreq ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute)  A_1)  cil managed
+        //        instance default string M (int32* modreq
+        // ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute)  A_1)  cil managed
         // {
         //     // Method begins at RVA 0x2104
         // Code size 6 (0x6)
@@ -87,7 +91,8 @@ public class Tests
         //	IL_0005:  nop
         //	IL_0006:  nop
         //	IL_0007:  nop
-        //	IL_0008:  callvirt instance string class Parent::M(int32* modreq ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute) )
+        //	IL_0008:  callvirt instance string class Parent::M(int32* modreq
+        // ([mscorlib]System.Runtime.CompilerServices.IsReadOnlyAttribute) )
         //	IL_000d:  ret
         //} // end of method Invoker::InvokeParentSig
         //
@@ -192,7 +197,8 @@ public class Tests
 
         var invoker = mb.DefineType("Invoker", TypeAttributes.Public);
         // Since we want to generate callvirt calls which contain references to the custom modifiers
-        // for the parent types, to actually probe overloading or not, we need to generate the classes the make those
+        // for the parent types, to actually probe overloading or not, we need to generate the classes the
+        // make those
         // calls
 
         var methodBaseReference = parentType.GetMethod("M");

@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
 
                         // If we are processing the first from and
                         // there were joins and some evaluations were moved into declarations above the foreach
-                        // Check if the declaration on the first fromclause should be moved for the evaluation above declarations already moved upfront.
+                        // Check if the declaration on the first fromclause should be moved for the evaluation above
+                        // declarations already moved upfront.
                         ExpressionSyntax expression1;
                         if (
                             isLastClause
@@ -364,8 +365,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
             }
 
             /// <summary>
-            /// Checks if the location of the query expression allows to convert it at least to a local function.
-            /// It still does not guarantees that the conversion can be performed. There can be bail outs of later stages.
+            /// Checks if the location of the query expression allows to convert it at least to a local
+            // function.
+            /// It still does not guarantees that the conversion can be performed. There can be bail outs of
+            // later stages.
             /// </summary>
             /// <returns></returns>
             private bool CanTryConvertToLocalFunction()
@@ -940,8 +943,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     // The last select expression in the query returns this identifier:
                     // foreach(var thisIdentifier in from ....... select thisIdentifier)
                     // if thisIdentifier in foreach is var, it is OK
-                    // if a type is specified for thisIdentifier in forEach, check that the type is the same as in the select expression
-                    // foreach(MyType thisIdentifier in from ....... from MyType thisIdentifier ... select thisIdentifier)
+                    // if a type is specified for thisIdentifier in forEach, check that the type is the same as in the
+                    // select expression
+                    // foreach(MyType thisIdentifier in from ....... from MyType thisIdentifier ... select
+                    // thisIdentifier)
 
                     // The last clause in query stack must be SelectClauseSyntax.
                     var lastSelectExpression = (
@@ -1057,7 +1062,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 out DocumentUpdateInfo documentUpdateInfo
             )
             {
-                // The conversion requires yield return which cannot be added to lambdas and anonymous method declarations.
+                // The conversion requires yield return which cannot be added to lambdas and anonymous method
+                // declarations.
                 if (IsWithinImmediateLambdaOrAnonymousMethod(returnStatement))
                 {
                     documentUpdateInfo = null;
@@ -1121,7 +1127,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 return false;
             }
 
-            // We may assume that the query is defined within a method, field, property and so on and it is declare just once.
+            // We may assume that the query is defined within a method, field, property and so on and it is
+            // declare just once.
             private SyntaxNode FindParentMemberDeclarationNode(
                 SyntaxNode node,
                 out ISymbol declaredSymbol
@@ -1185,7 +1192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                     }
                 }
 
-                // The stack was processed in the reverse order, but the extra statements should be provided in the direct order.
+                // The stack was processed in the reverse order, but the extra statements should be provided in the
+                // direct order.
                 statements.Reverse();
                 statements.Add(statement.WithAdditionalAnnotations(Simplifier.Annotation));
                 return statements.ToArray();
@@ -1356,7 +1364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                 public bool TryAdd(CSharpSyntaxNode node, SyntaxToken identifier)
                 {
                     // Duplicate identifiers are not allowed.
-                    // var q = from x in new[] { 1 } select x + 2 into x where x > 0 select 7 into y let x = ""aaa"" select x;
+                    // var q = from x in new[] { 1 } select x + 2 into x where x > 0 select 7 into y let x = ""aaa""
+                    // select x;
                     if (!IdentifierNames.Add(identifier.ValueText))
                     {
                         return false;

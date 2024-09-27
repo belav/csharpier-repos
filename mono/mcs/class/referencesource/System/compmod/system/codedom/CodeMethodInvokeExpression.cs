@@ -35,7 +35,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeMethodInvokeExpression'/> using the specified target object, method name
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeMethodInvokeExpression'/>
+        // using the specified target object, method name
         ///       and parameters.
         ///    </para>
         /// </devdoc>

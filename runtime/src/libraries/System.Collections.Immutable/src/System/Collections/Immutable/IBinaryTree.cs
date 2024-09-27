@@ -21,7 +21,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// Gets the number of non-empty nodes at this node and below.
         /// </summary>
-        /// <exception cref="NotSupportedException">Thrown if the implementation does not store this value at the node.</exception>
+        /// <exception cref="NotSupportedException">Thrown if the implementation does not store this value
+        // at the node.</exception>
         int Count { get; }
 
         /// <summary>

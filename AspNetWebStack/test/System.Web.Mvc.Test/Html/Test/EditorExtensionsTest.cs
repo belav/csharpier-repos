@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using Microsoft.TestCommon;
@@ -86,8 +87,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            // Developers might need to do something similar (including MetadataOverrideScope or another approach
-            // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
+            // Developers might need to do something similar (including MetadataOverrideScope or another
+            // approach
+            // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to
+            // a class.
             var metadata = ModelMetadataProviders.Current.GetMetadataForType(
                 () => null,
                 typeof(ObjectTemplateModel)
@@ -136,8 +139,10 @@ namespace System.Web.Mvc.Html.Test
             viewContext.Setup(c => c.View).Returns(new DummyView());
             viewContext.Setup(c => c.Writer).Returns(TextWriter.Null);
 
-            // Developers might need to do something similar (including MetadataOverrideScope or another approach
-            // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to a class.
+            // Developers might need to do something similar (including MetadataOverrideScope or another
+            // approach
+            // replacing ModelMetadataProviders.Current) since for example [DisplayFormat] cannot be applied to
+            // a class.
             var metadata = ModelMetadataProviders.Current.GetMetadataForType(
                 () => null,
                 typeof(ObjectTemplateModel)

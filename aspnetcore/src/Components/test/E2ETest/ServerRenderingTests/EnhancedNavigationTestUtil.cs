@@ -24,7 +24,8 @@ public static class EnhancedNavigationTestUtil
 
             if (!skipNavigation)
             {
-                // Normally we need to navigate here first otherwise the browser isn't on the correct origin to access
+                // Normally we need to navigate here first otherwise the browser isn't on the correct origin to
+                // access
                 // localStorage. But some tests are already in the right place and need to avoid extra navigation.
                 fixture.Navigate($"{fixture.ServerPathBase}/");
                 browser.Equal("Hello", () => browser.Exists(By.TagName("h1")).Text);

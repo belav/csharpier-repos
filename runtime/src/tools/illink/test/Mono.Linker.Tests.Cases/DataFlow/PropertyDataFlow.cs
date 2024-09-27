@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -238,7 +239,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             static Type ImplicitProperty { get; set; }
 
-            // Simple getter is not enough - we do detect the field, but we require the field to be compiler generated for this to work
+            // Simple getter is not enough - we do detect the field, but we require the field to be compiler
+            // generated for this to work
             [ExpectedWarning(
                 "IL2077",
                 nameof(DataFlowTypeExtensions)
@@ -270,14 +272,21 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 get { return PropertyWithSimpleGetter_Field; }
             }
 
-            // This test creates a property and field which trimming tools will recognize as a compiler generated backing field for the property
-            // The purpose of the test is to verify, that trimming tools flow the annotation to the backing field and since there's
-            // no good way to reference actual compiler generated backing field, we "Fake" it here as compiler generated.
-            // But this doesn't fool the analyzer - since it's seen as yet another user declared field, so it doesn't propagate the
+            // This test creates a property and field which trimming tools will recognize as a compiler
+            // generated backing field for the property
+            // The purpose of the test is to verify, that trimming tools flow the annotation to the backing
+            // field and since there's
+            // no good way to reference actual compiler generated backing field, we "Fake" it here as compiler
+            // generated.
+            // But this doesn't fool the analyzer - since it's seen as yet another user declared field, so it
+            // doesn't propagate the
             // annotation.
-            // This discrepancy is currently by design and not worth the trouble to implement logic for it in the analyzer.
-            // Producing fields which are annotated with CompilerGeneratedAttribute and making them look like backing fields
-            // is highly unlikely to be done by anybody. If it happens, the analyzer will produce warnings which the trimming tools will not
+            // This discrepancy is currently by design and not worth the trouble to implement logic for it in
+            // the analyzer.
+            // Producing fields which are annotated with CompilerGeneratedAttribute and making them look like
+            // backing fields
+            // is highly unlikely to be done by anybody. If it happens, the analyzer will produce warnings which
+            // the trimming tools will not
             // but those warnings are not really wrong, so it's better if the developer fixes them anyway.
             [ExpectedWarning(
                 "IL2077",
@@ -292,7 +301,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )]
             public void TestPropertyWhichLooksLikeCompilerGenerated()
             {
-                // If the property was correctly recognized both the property getter and the backing field should get the annotation.
+                // If the property was correctly recognized both the property getter and the backing field should
+                // get the annotation.
                 PropertyWhichLooksLikeCompilerGenerated.RequiresPublicConstructors();
                 PropertyWhichLooksLikeCompilerGenerated_Field.RequiresPublicConstructors();
             }
@@ -303,7 +313,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             static Type PropertyWhichLooksLikeCompilerGenerated
             {
-                // See above comment about fake compiler generated backing fields - this warning is expected from the analyzer
+                // See above comment about fake compiler generated backing fields - this warning is expected from
+                // the analyzer
                 [ExpectedWarning(
                     "IL2078",
                     nameof(TestAutomaticPropagationType)
@@ -356,7 +367,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [CompilerGenerated]
             private Type PropertyWithDifferentBackingFields_SetterField;
 
-            // Analyzer doesn't try to detect backing fields of properties: https://github.com/dotnet/linker/issues/2273
+            // Analyzer doesn't try to detect backing fields of properties:
+            // https://github.com/dotnet/linker/issues/2273
             [ExpectedWarning(
                 "IL2042",
                 "Mono.Linker.Tests.Cases.DataFlow.PropertyDataFlow.TestAutomaticPropagationType.PropertyWithDifferentBackingFields",
@@ -392,7 +404,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 PropertyWithExistingAttributes = null;
             }
 
-            // Analyzer doesn't try to detect backing fields of properties: https://github.com/dotnet/linker/issues/2273
+            // Analyzer doesn't try to detect backing fields of properties:
+            // https://github.com/dotnet/linker/issues/2273
             [ExpectedWarning(
                 "IL2056",
                 "PropertyWithExistingAttributes",
@@ -418,7 +431,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             Type PropertyWithExistingAttributes
             {
-                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property https://github.com/dotnet/linker/issues/2654
+                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property
+                // https://github.com/dotnet/linker/issues/2654
                 [ExpectedWarning(
                     "IL2043",
                     "PropertyWithExistingAttributes",
@@ -429,7 +443,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     DynamicallyAccessedMemberTypes.PublicConstructors
                 )]
                 get { return PropertyWithExistingAttributes_Field; }
-                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property https://github.com/dotnet/linker/issues/2654
+                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property
+                // https://github.com/dotnet/linker/issues/2654
                 [ExpectedWarning(
                     "IL2043",
                     "PropertyWithExistingAttributes",
@@ -471,7 +486,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 PropertyWithConflictingAttributes = GetTypeWithNonPublicConstructors();
             }
 
-            // Analyzer doesn't try to detect backing fields of properties: https://github.com/dotnet/linker/issues/2273
+            // Analyzer doesn't try to detect backing fields of properties:
+            // https://github.com/dotnet/linker/issues/2273
             [ExpectedWarning(
                 "IL2056",
                 "PropertyWithConflictingAttributes",
@@ -497,7 +513,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             Type PropertyWithConflictingAttributes
             {
-                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property https://github.com/dotnet/linker/issues/2654
+                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property
+                // https://github.com/dotnet/linker/issues/2654
                 [ExpectedWarning(
                     "IL2043",
                     "PropertyWithConflictingAttributes",
@@ -508,7 +525,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     DynamicallyAccessedMemberTypes.NonPublicConstructors
                 )]
                 get { return PropertyWithConflictingAttributes_Field; }
-                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property https://github.com/dotnet/linker/issues/2654
+                // On property/accessor mismatch, ILLink warns on accessor and analyzer warns on property
+                // https://github.com/dotnet/linker/issues/2654
                 [ExpectedWarning(
                     "IL2043",
                     "PropertyWithConflictingAttributes",
@@ -557,7 +575,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
             Type PropertyWithConflictingNoneAttributes
             {
-                // See above comment about fake compiler generated backing fields - this warning is expected from analyzer
+                // See above comment about fake compiler generated backing fields - this warning is expected from
+                // analyzer
                 [ExpectedWarning(
                     "IL2078",
                     nameof(TestAutomaticPropagationType)
@@ -702,7 +721,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
             public Type GetOnlyProperty { get; }
 
-            // Analyzer doesn't warn about compiler-generated backing field of property: https://github.com/dotnet/runtime/issues/93277
+            // Analyzer doesn't warn about compiler-generated backing field of property:
+            // https://github.com/dotnet/runtime/issues/93277
             [ExpectedWarning(
                 "IL2074",
                 nameof(WriteToGetOnlyProperty),
@@ -786,7 +806,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
             Type GetOnlyProperty { get; }
 
-            // Analyzer doesn't warn about compiler-generated backing field of property: https://github.com/dotnet/runtime/issues/93277
+            // Analyzer doesn't warn about compiler-generated backing field of property:
+            // https://github.com/dotnet/runtime/issues/93277
             [ExpectedWarning(
                 "IL2074",
                 nameof(WriteCapturedGetOnlyProperty),

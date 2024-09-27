@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -110,27 +111,34 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// The return type of the method or <c>null</c> if the method does not return a value (e.g. a method returning
+        /// The return type of the method or <c>null</c> if the method does not return a value (e.g. a
+        // method returning
         /// <c>void</c>).
         /// </summary>
         /// <remarks>
-        /// This property should describe the type of the value contained by the result of executing the action
-        /// via the <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object}, CancellationToken)"/>.
+        /// This property should describe the type of the value contained by the result of executing the
+        // action
+        /// via the <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object},
+        // CancellationToken)"/>.
         /// </remarks>
         public abstract Type ReturnType { get; }
 
         /// <summary>
         /// Gets the converter for correctly transforming the result of calling
-        /// <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object}, CancellationToken)"/> into an instance of
+        /// <see cref="ExecuteAsync(HttpControllerContext, IDictionary{string, object},
+        // CancellationToken)"/> into an instance of
         /// <see cref="HttpResponseMessage"/>.
         /// </summary>
         /// <remarks>
-        /// <para>This converter is not used when the runtime return value of an action is an <see cref="IHttpActionResult"/>.</para>
+        /// <para>This converter is not used when the runtime return value of an action is an <see
+        // cref="IHttpActionResult"/>.</para>
         /// <para>
-        /// This value is <see langword="null" /> when the declared <see cref="ReturnType"/> is an <see cref="IHttpActionResult"/>.
+        /// This value is <see langword="null" /> when the declared <see cref="ReturnType"/> is an <see
+        // cref="IHttpActionResult"/>.
         /// </para>
         /// <para>
-        /// The behavior of the returned converter should align with the action's declared <see cref="ReturnType"/>.
+        /// The behavior of the returned converter should align with the action's declared <see
+        // cref="ReturnType"/>.
         /// </para>
         /// </remarks>
         public virtual IActionResultConverter ResultConverter
@@ -176,7 +184,8 @@ namespace System.Web.Http.Controllers
         /// Gets the custom attributes for the action.
         /// </summary>
         /// <typeparam name="T">The type of attribute to search for.</typeparam>
-        /// <param name="inherit"><c>true</c> to search this action's inheritance chain to find the attributes; otherwise, <c>false</c>.</param>
+        /// <param name="inherit"><c>true</c> to search this action's inheritance chain to find the
+        // attributes; otherwise, <c>false</c>.</param>
         /// <returns>The collection of custom attributes applied to this action.</returns>
         public virtual Collection<T> GetCustomAttributes<T>(bool inherit)
             where T : class
@@ -239,7 +248,8 @@ namespace System.Web.Http.Controllers
         /// <param name="controllerContext">The context.</param>
         /// <param name="arguments">The arguments.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A <see cref="Task{T}"/> that once completed will contain the return value of the action.</returns>
+        /// <returns>A <see cref="Task{T}"/> that once completed will contain the return value of the
+        // action.</returns>
         public abstract Task<object> ExecuteAsync(
             HttpControllerContext controllerContext,
             IDictionary<string, object> arguments,
@@ -248,14 +258,19 @@ namespace System.Web.Http.Controllers
 
         /// <summary>
         /// Returns the filters for the given configuration and action. The filter collection is ordered
-        /// according to the FilterScope (in order from least specific to most specific: First, Global, Controller, Action).
+        /// according to the FilterScope (in order from least specific to most specific: First, Global,
+        // Controller, Action).
         ///
-        /// If a given filter disallows duplicates (AllowMultiple=False) then the most specific filter is maintained
-        /// and less specific filters get removed (e.g. if there is a Authorize filter with a Controller scope and another
-        /// one with an Action scope then the one with the Action scope will be maintained and the one with the Controller
+        /// If a given filter disallows duplicates (AllowMultiple=False) then the most specific filter is
+        // maintained
+        /// and less specific filters get removed (e.g. if there is a Authorize filter with a Controller
+        // scope and another
+        /// one with an Action scope then the one with the Action scope will be maintained and the one with
+        // the Controller
         /// scope will be discarded).
         /// </summary>
-        /// <returns>A <see cref="Collection{T}"/> of all filters associated with this <see cref="HttpActionDescriptor"/>.</returns>
+        /// <returns>A <see cref="Collection{T}"/> of all filters associated with this <see
+        // cref="HttpActionDescriptor"/>.</returns>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1024:UsePropertiesWhereAppropriate",
@@ -289,7 +304,8 @@ namespace System.Web.Http.Controllers
                 .SelectMany(fp => fp.GetFilters(_configuration, this))
                 .OrderBy(f => f, FilterInfoComparer.Instance);
 
-            // Need to discard duplicate filters from the end, so that most specific ones get kept (Action scope) and
+            // Need to discard duplicate filters from the end, so that most specific ones get kept (Action
+            // scope) and
             // less specific ones get removed (Global)
             filters = RemoveDuplicates(filters.Reverse()).Reverse();
 

@@ -134,8 +134,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
                 ),
             };
 
-            // <path>\xunit.console.exe "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
-            // <path>\xunit.console.x86.exe "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
+            // <path>\xunit.console.exe
+            // "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose
+            // -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
+            // <path>\xunit.console.x86.exe
+            // "<path>\CSharpCompilerEmitTest\Roslyn.Compilers.CSharp.Emit.UnitTests.dll"  -noshadow -verbose
+            // -class "Microsoft.CodeAnalysis.CSharp.UnitTests.Emit.EndToEndTests"
             // Un-comment loop below and use above commands to figure out the new limits
             //for (int i = 0; i < numberFluentCalls; i = i + 10)
             //{
@@ -288,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EndToEnd
             };
 
             // Un-comment loop below and use above commands to figure out the new limits
-            //Console.WriteLine($"Using architecture: {ExecutionConditionUtil.Architecture}, configuration: {ExecutionConditionUtil.Configuration}");
+            //Console.WriteLine($"Using architecture: {ExecutionConditionUtil.Architecture}, configuration:
+            // {ExecutionConditionUtil.Configuration}");
             //for (int i = nestingLevel; i < int.MaxValue; i = i + 10)
             //{
             //    var start = DateTime.UtcNow;
@@ -365,12 +370,12 @@ public class Test
         {
             const int number = 17;
 
-            /*
-                class C0<T>;
-                class C1<T> : C0<T>;
-                class C2<T> : C1<T>;
-                ...
-            */
+/*
+class C0<T>;
+class C1<T> : C0<T>;
+class C2<T> : C1<T>;
+...
+*/
             var declarations = new string[number];
             declarations[0] = "class C0<T0> { }";
             for (int i = 1; i < number; i++)
@@ -400,17 +405,17 @@ public class Test
         {
             const int number = 17;
 
-            /*
-                Class C0(Of T)
-                End Class
-                Class C1(Of T)
-                    Inherits C0(Of T)
-                End Class
-                Class C2(Of T)
-                    Inherits C1(Of T)
-                End Class
-                ...
-            */
+/*
+Class C0(Of T)
+End Class
+Class C1(Of T)
+Inherits C0(Of T)
+End Class
+Class C2(Of T)
+Inherits C1(Of T)
+End Class
+...
+*/
             var declarations = new string[number];
             declarations[0] = """
                 Class C0(Of T0)
@@ -687,11 +692,11 @@ public class Test
             const int overloads1Number = 20;
             const int overloads2Number = 10;
 
-            /*
-                interface I0 { }
-                // ...
-                interface I9 { }
-            */
+/*
+interface I0 { }
+// ...
+interface I9 { }
+*/
             var builder1 = new StringBuilder();
             var interfacesNumber = Math.Max(overloads1Number, overloads2Number);
             for (int i = 0; i < interfacesNumber; i++)
@@ -699,22 +704,22 @@ public class Test
                 builder1.AppendLine($$"""interface I{{i}} { }""");
             }
 
-            /*
-                void M1(System.Action<I0> a) { }
-                // ...
-                void M1(System.Action<I9> a) { }
-            */
+/*
+void M1(System.Action<I0> a) { }
+// ...
+void M1(System.Action<I9> a) { }
+*/
             var builder2 = new StringBuilder();
             for (int i = 0; i < overloads1Number; i++)
             {
                 builder2.AppendLine($$"""void M1(System.Action<I{{i}}> a) { }""");
             }
 
-            /*
-                void M2(I0 x, System.Func<string, I0> f) { }
-                // ...
-                void M2(I9 x, System.Func<string, I9> f) { }
-            */
+/*
+void M2(I0 x, System.Func<string, I0> f) { }
+// ...
+void M2(I9 x, System.Func<string, I9> f) { }
+*/
             for (int i = 0; i < overloads2Number; i++)
             {
                 builder2.AppendLine($$"""void M2(I{{i}} x, System.Func<string, I{{i}}> f) { }""");

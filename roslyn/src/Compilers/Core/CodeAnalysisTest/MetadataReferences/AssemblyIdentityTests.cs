@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             name.ContentType = AssemblyContentType.Default;
             name.Version = new Version(1, 2, 3, 4);
 #pragma warning disable SYSLIB0037
-            // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
+            // warning SYSLIB0037: 'AssemblyName.ProcessorArchitecture' is obsolete: 'AssemblyName members
+            // HashAlgorithm, ProcessorArchitecture, and VersionCompatibility are obsolete and not supported.'
             name.ProcessorArchitecture = ProcessorArchitecture.X86;
 #pragma warning restore SYSLIB0037
 
@@ -576,7 +577,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             AssertEx.Equal(null, an.GetPublicKey());
             Assert.Equal(AssemblyNameFlags.None, an.Flags);
 #pragma warning disable SYSLIB0044
-            // warning SYSLIB0044: 'AssemblyName.CodeBase' is obsolete: 'AssemblyName.CodeBase and AssemblyName.EscapedCodeBase are obsolete. Using them for loading an assembly is not supported.'
+            // warning SYSLIB0044: 'AssemblyName.CodeBase' is obsolete: 'AssemblyName.CodeBase and
+            // AssemblyName.EscapedCodeBase are obsolete. Using them for loading an assembly is not supported.'
             Assert.Null(an.CodeBase);
 #pragma warning restore SYSLIB0044
 

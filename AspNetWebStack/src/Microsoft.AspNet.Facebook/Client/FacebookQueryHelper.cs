@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,8 @@ namespace Microsoft.AspNet.Facebook.Client
     public static class FacebookQueryHelper
     {
         /// <summary>
-        /// Gets the appropriate "fields" query parameter for the Facebook Graph API based on the public properties of the model type.
+        /// Gets the appropriate "fields" query parameter for the Facebook Graph API based on the public
+        // properties of the model type.
         /// </summary>
         /// <param name="modelType">Type of the model.</param>
         /// <returns>The "fields" query parameter.</returns>

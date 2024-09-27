@@ -96,8 +96,10 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     else
                     {
-                        // It is an error if the number is NaN, infinite or less than 0.5; an XSLT processor may signal the error;
-                        // if it does not signal the error, it must recover by converting the number to a string as if by a call
+                        // It is an error if the number is NaN, infinite or less than 0.5; an XSLT processor may signal the
+                        // error;
+                        // if it does not signal the error, it must recover by converting the number to a string as if by a
+                        // call
                         // to the string function and inserting the resulting string into the result tree.
                         return XmlConvert.ToXPathString(value);
                     }
@@ -511,7 +513,7 @@ namespace System.Xml.Xsl.XsltOld
                         }
                     }
 
-                    /*CalculatingFormat:*/
+/*CalculatingFormat:*/
                     frame.StoredOutput = Format(
                         list,
                         this.formatAvt == null
@@ -680,18 +682,18 @@ namespace System.Xml.Xsl.XsltOld
             return result.ToString();
         }
 
-        /*
-        ----------------------------------------------------------------------------
-            mapFormatToken()
+/*
+----------------------------------------------------------------------------
+mapFormatToken()
 
-            Maps a token of alphanumeric characters to a numbering format ID and a
-            minimum length bound.  Tokens specify the character(s) that begins a
-            Unicode
-            numbering sequence.  For example, "i" specifies lower case roman numeral
-            numbering.  Leading "zeros" specify a minimum length to be maintained by
-            padding, if necessary.
-        ----------------------------------------------------------------------------
-        */
+Maps a token of alphanumeric characters to a numbering format ID and a
+minimum length bound.  Tokens specify the character(s) that begins a
+Unicode
+numbering sequence.  For example, "i" specifies lower case roman numeral
+numbering.  Leading "zeros" specify a minimum length to be maintained by
+padding, if necessary.
+----------------------------------------------------------------------------
+*/
         private static void mapFormatToken(
             String wsToken,
             int startLen,
@@ -843,14 +845,14 @@ namespace System.Xml.Xsl.XsltOld
             }
         }
 
-        /*
-        ----------------------------------------------------------------------------
-            parseFormat()
+/*
+----------------------------------------------------------------------------
+parseFormat()
 
-            Parse format string into format tokens (alphanumeric) and separators
-            (non-alphanumeric).
+Parse format string into format tokens (alphanumeric) and separators
+(non-alphanumeric).
 
-        */
+*/
         private static List<FormatInfo> ParseFormat(string formatString)
         {
             if (formatString == null || formatString.Length == 0)

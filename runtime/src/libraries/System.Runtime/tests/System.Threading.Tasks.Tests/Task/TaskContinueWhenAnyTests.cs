@@ -52,7 +52,8 @@ namespace System.Threading.Tasks.Tests
                                     if (useFutureFactory && !continuationIsFuture)
                                         continue;
 
-                                    //Assert.Fail(string.Format(" - Test Task{5}.Factory.ContinueWhenAny(Task{0}[]({1} completed), {2}, ct({3}), {4}, ts.Default)",
+                                    //Assert.Fail(string.Format(" - Test Task{5}.Factory.ContinueWhenAny(Task{0}[]({1} completed), {2},
+                                    // ct({3}), {4}, ts.Default)",
                                     //    antecedentsAreFutures ? "<int>" : "",
                                     //    preCompletedTask ? 1 : 0,
                                     //    continuationIsFuture ? "func" : "action",
@@ -220,7 +221,8 @@ namespace System.Threading.Tasks.Tests
                                     startTaskArray(antecedents);
                                     //Thread.Sleep(50);
 
-                                    // re-assert that the only way that the continuation should have completed by now is preCompletedTask or preCanceledToken
+                                    // re-assert that the only way that the continuation should have completed by now is
+                                    // preCompletedTask or preCanceledToken
                                     Assert.True(
                                         !continuation.IsCompleted
                                             || preCompletedTask

@@ -398,7 +398,8 @@ namespace System.Workflow.Activities
         /// </summary>
         /// <param name="cag"></param>
         /// <param name="context"></param>
-        /// <returns>True if CAG is complete (UNTIL == true, or no UNTIL and no children execute), false otherwise</returns>
+        /// <returns>True if CAG is complete (UNTIL == true, or no UNTIL and no children execute), false
+        // otherwise</returns>
         internal bool EvaluateConditions(
             ConditionedActivityGroup cag,
             ActivityExecutionContext context

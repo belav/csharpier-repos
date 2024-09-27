@@ -40,7 +40,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a HasConstant coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="ParameterHandle"/>, <see cref="FieldDefinitionHandle"/>, or <see cref="PropertyDefinitionHandle"/></param>
+        /// <param name="handle"><see cref="ParameterHandle"/>, <see cref="FieldDefinitionHandle"/>, or <see
+        // cref="PropertyDefinitionHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int HasConstant(EntityHandle handle) =>
             (handle.RowId << (int)HasConstantTag.BitCount) | (int)ToHasConstantTag(handle.Kind);
@@ -48,7 +49,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a CustomAttributeType coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="MethodDefinitionHandle"/> or <see cref="MemberReferenceHandle"/></param>
+        /// <param name="handle"><see cref="MethodDefinitionHandle"/> or <see
+        // cref="MemberReferenceHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int CustomAttributeType(EntityHandle handle) =>
             (handle.RowId << (int)CustomAttributeTypeTag.BitCount)
@@ -57,7 +59,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a HasDeclSecurity coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="TypeDefinitionHandle"/>, <see cref="MethodDefinitionHandle"/>, or <see cref="AssemblyDefinitionHandle"/></param>
+        /// <param name="handle"><see cref="TypeDefinitionHandle"/>, <see cref="MethodDefinitionHandle"/>,
+        // or <see cref="AssemblyDefinitionHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int HasDeclSecurity(EntityHandle handle) =>
             (handle.RowId << (int)HasDeclSecurityTag.BitCount)
@@ -66,7 +69,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a HasFieldMarshal coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref = "ParameterHandle" /> or <see cref="FieldDefinitionHandle"/></param>
+        /// <param name="handle"><see cref = "ParameterHandle" /> or <see
+        // cref="FieldDefinitionHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int HasFieldMarshal(EntityHandle handle) =>
             (handle.RowId << (int)HasFieldMarshalTag.BitCount)
@@ -75,7 +79,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a HasSemantics coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="EventDefinitionHandle"/> or <see cref="PropertyDefinitionHandle"/></param>
+        /// <param name="handle"><see cref="EventDefinitionHandle"/> or <see
+        // cref="PropertyDefinitionHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int HasSemantics(EntityHandle handle) =>
             (handle.RowId << (int)HasSemanticsTag.BitCount) | (int)ToHasSemanticsTag(handle.Kind);
@@ -83,7 +88,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a Implementation coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="AssemblyFileHandle"/>, <see cref="ExportedTypeHandle"/> or <see cref="AssemblyReferenceHandle"/></param>
+        /// <param name="handle"><see cref="AssemblyFileHandle"/>, <see cref="ExportedTypeHandle"/> or <see
+        // cref="AssemblyReferenceHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int Implementation(EntityHandle handle) =>
             (handle.RowId << (int)ImplementationTag.BitCount)
@@ -116,7 +122,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a MethodDefOrRef coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="MethodDefinitionHandle"/> or <see cref="MemberReferenceHandle"/></param>
+        /// <param name="handle"><see cref="MethodDefinitionHandle"/> or <see
+        // cref="MemberReferenceHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int MethodDefOrRef(EntityHandle handle) =>
             (handle.RowId << (int)MethodDefOrRefTag.BitCount)
@@ -125,7 +132,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a ResolutionScope coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="ModuleDefinitionHandle"/>, <see cref="ModuleReferenceHandle"/>, <see cref="AssemblyReferenceHandle"/> or <see cref="TypeReferenceHandle"/></param>
+        /// <param name="handle"><see cref="ModuleDefinitionHandle"/>, <see cref="ModuleReferenceHandle"/>,
+        // <see cref="AssemblyReferenceHandle"/> or <see cref="TypeReferenceHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int ResolutionScope(EntityHandle handle) =>
             (handle.RowId << (int)ResolutionScopeTag.BitCount)
@@ -134,7 +142,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a TypeDefOrRef coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="TypeDefinitionHandle"/> or <see cref="TypeReferenceHandle"/></param>
+        /// <param name="handle"><see cref="TypeDefinitionHandle"/> or <see
+        // cref="TypeReferenceHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int TypeDefOrRef(EntityHandle handle) =>
             (handle.RowId << (int)TypeDefOrRefTag.BitCount) | (int)ToTypeDefOrRefTag(handle.Kind);
@@ -142,7 +151,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a TypeDefOrRefOrSpec coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or <see cref="TypeSpecificationHandle"/></param>
+        /// <param name="handle"><see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/> or
+        // <see cref="TypeSpecificationHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int TypeDefOrRefOrSpec(EntityHandle handle) =>
             (handle.RowId << (int)TypeDefOrRefOrSpecTag.BitCount)
@@ -151,7 +161,8 @@ namespace System.Reflection.Metadata.Ecma335
         /// <summary>
         /// Calculates a TypeOrMethodDef coded index for the specified handle.
         /// </summary>
-        /// <param name="handle"><see cref="TypeDefinitionHandle"/> or <see cref="MethodDefinitionHandle"/></param>
+        /// <param name="handle"><see cref="TypeDefinitionHandle"/> or <see
+        // cref="MethodDefinitionHandle"/></param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
         public static int TypeOrMethodDef(EntityHandle handle) =>
             (handle.RowId << (int)TypeOrMethodDefTag.BitCount)

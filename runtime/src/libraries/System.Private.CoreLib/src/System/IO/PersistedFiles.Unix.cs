@@ -17,7 +17,8 @@ namespace System.IO
         /// </summary>
         /// <param name="featureName">The directory name for the feature</param>
         /// <param name="subFeatureName">The directory name for the sub-feature</param>
-        /// <returns>A path within the user's home directory for persisting data for the sub-feature</returns>
+        /// <returns>A path within the user's home directory for persisting data for the
+        // sub-feature</returns>
         internal static string GetUserFeatureDirectory(string featureName, string subFeatureName)
         {
             if (s_userProductDirectory == null)
@@ -95,7 +96,8 @@ namespace System.IO
         /// <param name="buf">The scratch buffer to pass into getpwuid_r.</param>
         /// <param name="bufLen">The length of <paramref name="buf"/>.</param>
         /// <param name="path">The resulting path; null if the user didn't have an entry.</param>
-        /// <returns>true if the call was successful (path may still be null); false is a larger buffer is needed.</returns>
+        /// <returns>true if the call was successful (path may still be null); false is a larger buffer is
+        // needed.</returns>
         private static unsafe bool TryGetHomeDirectoryFromPasswd(
             byte* buf,
             int bufLen,

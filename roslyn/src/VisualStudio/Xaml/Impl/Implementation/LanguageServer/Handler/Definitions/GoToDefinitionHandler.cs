@@ -183,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 }
                 else
                 {
-                    // Cannot find the file in solution. This is probably a file lives outside of the solution like generic.xaml
+                    // Cannot find the file in solution. This is probably a file lives outside of the solution like
+                    // generic.xaml
                     // which lives in the Windows SDK folder. Try getting the SourceText from the file path.
                     using var fileStream = new FileStream(
                         sourceDefinition.FilePath,

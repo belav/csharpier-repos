@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
     /// A class that provides access to the currently open list of files in Visual Studio.
     /// </summary>
     /// <remarks>
-    /// You are able to ask for the text buffer for a document on any thread; events are raised on the UI thread, and any method that provides a <see cref="IVsHierarchy"/> must be used on the UI thread.
+    /// You are able to ask for the text buffer for a document on any thread; events are raised on the
+    // UI thread, and any method that provides a <see cref="IVsHierarchy"/> must be used on the UI thread.
     /// Individual methods are documented for which threading contracts they expect.
     /// </remarks>
     [Export(typeof(OpenTextBufferProvider))]
@@ -45,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             ImmutableArray<IOpenTextBufferEventListener>.Empty;
 
         /// <summary>
-        /// The map from monikers to open text buffers; because we can only fetch the text buffer on the UI thread, all updates to this must be done from the UI thread.
+        /// The map from monikers to open text buffers; because we can only fetch the text buffer on the UI
+        // thread, all updates to this must be done from the UI thread.
         /// </summary>
         private ImmutableDictionary<string, ITextBuffer> _monikerToTextBufferMap =
             ImmutableDictionary<string, ITextBuffer>.Empty.WithComparers(
@@ -70,8 +72,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
 
-            // The running document table since 16.0 has limited operations that can be done in a free threaded manner, specifically fetching the service and advising events.
-            // This is specifically guaranteed by the shell that those limited operations are safe and do not cause RPCs, and it's important we don't try to fetch the service
+            // The running document table since 16.0 has limited operations that can be done in a free threaded
+            // manner, specifically fetching the service and advising events.
+            // This is specifically guaranteed by the shell that those limited operations are safe and do not
+            // cause RPCs, and it's important we don't try to fetch the service
             // via a helper that will "helpfully" try to jump to the UI thread.
             var runningDocumentTable = (IVsRunningDocumentTable)
                 serviceProvider.GetService(typeof(SVsRunningDocumentTable));
@@ -81,7 +85,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 out _runningDocumentTableEventsCookie
             );
 
-            // We also need to check for any documents that might have been open before we subscribed. That we do have to do on the UI thread.
+            // We also need to check for any documents that might have been open before we subscribed. That we
+            // do have to do on the UI thread.
             var listener = listenerProvider.GetListener(FeatureAttribute.Workspace);
             var asyncToken = listener.BeginAsyncOperation(
                 nameof(CheckForExistingOpenDocumentsAsync)
@@ -102,7 +107,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
                 catch (Exception e) when (FatalError.ReportAndCatch(e, ErrorSeverity.Critical))
                 {
-                    // We'll catch the exception; this way if one listener is broken, we don't end up breaking other features that might no longer get events. Any exceptions would get caught by the
+                    // We'll catch the exception; this way if one listener is broken, we don't end up breaking other
+                    // features that might no longer get events. Any exceptions would get caught by the
                     // RunningDocumentTable itself which wouldn't report them in a useful way regardless.
                 }
             }
@@ -114,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             foreach (var (filePath, textBuffer, hierarchy) in EnumerateDocumentSet())
             {
-                // We might or might not have seen this file be opened if it was opened between when we subscribed to the running document table and when
+                // We might or might not have seen this file be opened if it was opened between when we subscribed
+                // to the running document table and when
                 // we got scheduled to the UI thread.
                 if (!_monikerToTextBufferMap.ContainsKey(filePath))
                 {
@@ -209,7 +216,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         }
                     }
 
-                    // Only raise an event if we had a text buffer; otherwise this is a rename of something else and we don't need to report it
+                    // Only raise an event if we had a text buffer; otherwise this is a rename of something else and we
+                    // don't need to report it
                     if (textBuffer != null)
                     {
                         RaiseEventForEachListener(l =>
@@ -223,9 +231,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                 }
             }
 
-            // Either RDTA_DocDataReloaded or RDTA_DocumentInitialized will be triggered if there's a lazy load and the document is now available.
-            // See https://devdiv.visualstudio.com/DevDiv/_workitems/edit/937712 for a scenario where we do need the RDTA_DocumentInitialized check.
-            // We still check for RDTA_DocDataReloaded because the RDT will mark something as initialized as soon as there is something in the doc data,
+            // Either RDTA_DocDataReloaded or RDTA_DocumentInitialized will be triggered if there's a lazy load
+            // and the document is now available.
+            // See https://devdiv.visualstudio.com/DevDiv/_workitems/edit/937712 for a scenario where we do need
+            // the RDTA_DocumentInitialized check.
+            // We still check for RDTA_DocDataReloaded because the RDT will mark something as initialized as
+            // soon as there is something in the doc data,
             // but that might still not be associated with an ITextBuffer.
             if (
                 (
@@ -278,7 +289,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
         public int OnBeforeDocumentWindowShow(uint docCookie, int fFirstShow, IVsWindowFrame pFrame)
         {
-            // Doc data reloaded is not triggered for the underlying aspx.cs file when changes are made to the aspx file, so catch it here.
+            // Doc data reloaded is not triggered for the underlying aspx.cs file when changes are made to the
+            // aspx file, so catch it here.
             if (
                 fFirstShow != 0
                 && _runningDocumentTable.IsDocumentInitialized(docCookie)
@@ -352,7 +364,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
         }
 
         /// <summary>
-        /// Enumerates the running document table to retrieve all initialized files. Must be called on the UI thread, since this returns <see cref="IVsHierarchy"/> objects.
+        /// Enumerates the running document table to retrieve all initialized files. Must be called on the
+        // UI thread, since this returns <see cref="IVsHierarchy"/> objects.
         /// </summary>
         public IEnumerable<(
             string filePath,

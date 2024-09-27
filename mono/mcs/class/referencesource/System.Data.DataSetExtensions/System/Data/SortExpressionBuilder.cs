@@ -22,26 +22,26 @@ namespace System.Data
     /// <typeparam name="T"></typeparam>
     internal class SortExpressionBuilder<T> : IComparer<List<object>>
     {
-        /**
-         *  This class ensures multiple orderby/thenbys are handled correctly. Its semantics is as follows:
-         *
-         * Query 1:
-         * orderby a
-         * thenby  b
-         * orderby c
-         * orderby d
-         * thenby  e
-         *
-         * is equivalent to:
-         *
-         * Query 2:
-         * orderby d
-         * thenby  e
-         * thenby  c
-         * thenby  a
-         * thenby  b
-         *
-         **/
+/**
+*  This class ensures multiple orderby/thenbys are handled correctly. Its semantics is as follows:
+*
+* Query 1:
+* orderby a
+* thenby  b
+* orderby c
+* orderby d
+* thenby  e
+*
+* is equivalent to:
+*
+* Query 2:
+* orderby d
+* thenby  e
+* thenby  c
+* thenby  a
+* thenby  b
+*
+**/
 
         //Selectors and comparers are mapped using the index in the list.
         //E.g: _comparers[i] is used with _selectors[i]
@@ -80,7 +80,8 @@ namespace System.Data
         /// <summary>
         /// Represents a Combined selector of all selectors added thusfar.
         /// </summary>
-        /// <returns>List of 'objects returned by each selector'. This list is the combined-selector</returns>
+        /// <returns>List of 'objects returned by each selector'. This list is the
+        // combined-selector</returns>
         public List<object> Select(T row)
         {
             List<object> result = new List<object>();

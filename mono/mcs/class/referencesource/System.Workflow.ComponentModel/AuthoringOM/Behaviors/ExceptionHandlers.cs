@@ -225,9 +225,12 @@ namespace System.Workflow.ComponentModel
                         }
                         else if ((int)exceptionTypes[catchType] == 1)
                         {
-                            /*if (catchType == typeof(System.Exception))
-                                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ScopeDuplicateFaultHandlerActivityForAll, exceptionHandlers.EnclosingDataContextActivity.GetType().Name), ErrorNumbers.Error_ScopeDuplicateFaultHandlerActivityForAll));
-                            else*/
+/*if (catchType == typeof(System.Exception))
+validationErrors.Add(new
+ValidationError(SR.GetString(SR.Error_ScopeDuplicateFaultHandlerActivityForAll,
+exceptionHandlers.EnclosingDataContextActivity.GetType().Name),
+ErrorNumbers.Error_ScopeDuplicateFaultHandlerActivityForAll));
+else*/
                             validationErrors.Add(
                                 new ValidationError(
                                     string.Format(

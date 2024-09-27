@@ -9,11 +9,13 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         support batching by limiting the number of commands in the batch to one.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class SingularModificationCommandBatch : AffectedCountModificationCommandBatch

@@ -89,7 +89,7 @@ Abort   Retry   Ignore
 Ignoring the asserts generates the AV from the bug report:
 
 
- # ChildEBP RetAddr
+# ChildEBP RetAddr
 00 0012d250 5e24645f mscorwks!DbgAssertDialog+0x394
 01 0012d618 5dcedf7c mscorwks!CHECK::Trigger+0x2df
 02 0012d800 5dcedb2d mscorwks!CLRVectoredExceptionHandlerPhase2+0x33c
@@ -113,18 +113,28 @@ WARNING: Stack unwind information not available. Following frames may be wrong.
 13 0012e184 5de64ff6 mscorwks!WKS::GCHeap::Alloc+0x1f8
 14 0012e290 5de65ab8 mscorwks!Alloc+0x256
 15 0012e388 5de39ead mscorwks!FastAllocatePrimitiveArray+0x3f8
-*** WARNING: Unable to verify checksum for D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\mscorlib\ab6a82069375373ebc7e85bf2de124cb\mscorlib.ni.dll
-*** ERROR: Module load completed but symbols could not be loaded for D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\mscorlib\ab6a82069375373ebc7e85bf2de124cb\mscorlib.ni.dll
+*** WARNING: Unable to verify checksum for
+D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\mscorlib\ab6a82069375373ebc7e85bf2de124cb\mscorlib.ni.dll
+*** ERROR: Module load completed but symbols could not be loaded for
+D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\mscorlib\ab6a82069375373ebc7e85bf2de124cb\mscorlib.ni.dll
 16 0012e54c 5b69d907 mscorwks!JIT_NewArr1+0x4dd
-17 0012e610 5b69d716 mscorlib_ni!Microsoft.Win32.RegistryKey.InternalGetValue(System.String, System.Object, Boolean, Boolean)+0x147
-18 0012e610 5b69d716 mscorlib_ni!Microsoft.Win32.RegistryKey.InternalGetValue(System.String, System.Object, Boolean, Boolean)+0x147
+17 0012e610 5b69d716 mscorlib_ni!Microsoft.Win32.RegistryKey.InternalGetValue(System.String,
+System.Object, Boolean, Boolean)+0x147
+18 0012e610 5b69d716 mscorlib_ni!Microsoft.Win32.RegistryKey.InternalGetValue(System.String,
+System.Object, Boolean, Boolean)+0x147
 19 00000000 7a7e6865 mscorlib_ni!Microsoft.Win32.RegistryKey.GetValue(System.String)+0x36
-*** WARNING: Unable to verify checksum for D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\System\08fb29f559b89437a7fc3f4a7dbde9c1\System.ni.dll
-*** ERROR: Module load completed but symbols could not be loaded for D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\System\08fb29f559b89437a7fc3f4a7dbde9c1\System.ni.dll
+*** WARNING: Unable to verify checksum for
+D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\System\08fb29f559b89437a7fc3f4a7dbde9c1\System.ni.dll
+*** ERROR: Module load completed but symbols could not be loaded for
+D:\WINDOWS\Microsoft.NET\Framework\v2.0.x86dbg\assembly\NativeImages_v2.0.x86dbg_32\System\08fb29f559b89437a7fc3f4a7dbde9c1\System.ni.dll
 1a 0012e66c 7a7e617f System_ni!System.Diagnostics.PerformanceMonitor.GetData(System.String)+0x55
-1b 0012e6a0 7a7e57fe System_ni!System.Diagnostics.PerformanceCounterLib.GetPerformanceData(System.String)+0x97
-1c 00a855a4 7a7e5742 System_ni!System.Diagnostics.PerformanceCounterLib.GetCategorySample(System.String)+0x62
-1d 0012e738 7a7e24e0 System_ni!System.Diagnostics.PerformanceCounterLib.GetCategorySample(System.String, System.String)+0x36
+1b 0012e6a0 7a7e57fe
+System_ni!System.Diagnostics.PerformanceCounterLib.GetPerformanceData(System.String)+0x97
+1c 00a855a4 7a7e5742
+System_ni!System.Diagnostics.PerformanceCounterLib.GetCategorySample(System.String)+0x62
+1d 0012e738 7a7e24e0
+System_ni!System.Diagnostics.PerformanceCounterLib.GetCategorySample(System.String,
+System.String)+0x36
 1e 0012e738 7a7e2651 System_ni!System.Diagnostics.PerformanceCounter.NextSample()+0x64
 1f 04ffb000 02c800f0 System_ni!System.Diagnostics.PerformanceCounter.NextValue()+0x21
 20 04ffb000 00000000 445488!Test_445488.Main()+0x80

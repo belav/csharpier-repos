@@ -27,7 +27,8 @@ namespace System.Web.UI.WebControls
         private bool _urlResolved;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Image'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.Image'/>
+        // class.</para>
         /// </devdoc>
         public Image()
             : base(HtmlTextWriterTag.Img) { }
@@ -177,7 +178,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Adds the attributes of an <see cref='System.Web.UI.WebControls.Image'/> to the output stream for rendering on
+        /// <para>Adds the attributes of an <see cref='System.Web.UI.WebControls.Image'/> to the output
+        // stream for rendering on
         ///    the client.</para>
         /// </devdoc>
         protected override void AddAttributesToRender(HtmlTextWriter writer)

@@ -259,7 +259,8 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             catch (ActiveDirectoryObjectNotFoundException)
             {
-                // this is the case where  we could not find an ADAM instance in that config set (return empty collection)
+                // this is the case where  we could not find an ADAM instance in that config set (return empty
+                // collection)
                 adamInstanceCollection = new AdamInstanceCollection(new ArrayList());
             }
 

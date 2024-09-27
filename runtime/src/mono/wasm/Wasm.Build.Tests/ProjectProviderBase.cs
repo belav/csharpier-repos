@@ -131,7 +131,9 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
                         return false;
 
                     string actualFilename = Path.GetFileName(actualFile);
-                    // _testOutput.WriteLine($"Comparing {expectedFilename} with {actualFile}, expectFingerprintOnDotnetJs: {expectFingerprintOnDotnetJs}, expectFingerprint: {expectFingerprint}");
+                    // _testOutput.WriteLine($"Comparing {expectedFilename} with {actualFile},
+                    // expectFingerprintOnDotnetJs: {expectFingerprintOnDotnetJs}, expectFingerprint:
+                    // {expectFingerprint}");
                     if (
                         ShouldCheckFingerprint(
                             expectedFilename: expectedFilename,
@@ -523,7 +525,8 @@ public abstract class ProjectProviderBase(ITestOutputHelper _testOutput, string?
     public void AssertBootJson(AssertBundleOptionsBase options)
     {
         EnsureProjectDirIsSet();
-        // string binFrameworkDir = FindBinFrameworkDir(options.Config, options.IsPublish, options.TargetFramework);
+        // string binFrameworkDir = FindBinFrameworkDir(options.Config, options.IsPublish,
+        // options.TargetFramework);
         string binFrameworkDir = options.BinFrameworkDir;
         string bootJsonPath = Path.Combine(binFrameworkDir, options.BootJsonFileName);
         Assert.True(File.Exists(bootJsonPath), $"Expected to find {bootJsonPath}");

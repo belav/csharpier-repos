@@ -1374,7 +1374,8 @@ namespace System.Data.Common
             return Path.GetFullPath(filename);
         }
 
-        // SxS: the file is opened in FileShare.Read mode allowing several threads/apps to read it simultaneously
+        // SxS: the file is opened in FileShare.Read mode allowing several threads/apps to read it
+        // simultaneously
         internal static Stream GetFileStream(string filename)
         {
             return new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
@@ -1395,7 +1396,8 @@ namespace System.Data.Common
         }
 
         // metadata files are opened from <.NetRuntimeFolder>\CONFIG\<metadatafilename.xml>
-        // this operation is safe in SxS because the file is opened in read-only mode and each NDP runtime accesses its own copy of the metadata
+        // this operation is safe in SxS because the file is opened in read-only mode and each NDP runtime
+        // accesses its own copy of the metadata
         // under the runtime folder.
         internal static Stream GetXmlStream(string value, string errorString)
         {
@@ -1541,7 +1543,8 @@ namespace System.Data.Common
         }
 
         // the return value is true if the string was quoted and false if it was not
-        // this allows the caller to determine if it is an error or not for the quotedString to not be quoted
+        // this allows the caller to determine if it is an error or not for the quotedString to not be
+        // quoted
         internal static bool RemoveStringQuotes(
             string? quotePrefix,
             string? quoteSuffix,

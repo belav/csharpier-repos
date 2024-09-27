@@ -1,4 +1,5 @@
-// This test is meant to make sure Mono doesn't fail when invalid COM invocations are present but never reached.
+// This test is meant to make sure Mono doesn't fail when invalid COM invocations are present but
+// never reached.
 // See https://bugzilla.xamarin.com/show_bug.cgi?id=8477 for details.
 
 using System;
@@ -25,7 +26,8 @@ class Test
 
     static int Main()
     {
-        // Check #1: An invocation of a ComImport class method w/o a corresponding interface method must lead to an exception.
+        // Check #1: An invocation of a ComImport class method w/o a corresponding interface method must
+        // lead to an exception.
         try
         {
             COMponent.InCOMplete1();
@@ -37,7 +39,8 @@ class Test
             // An exception has been thrown and caught correctly.
         }
 
-        // Check #2: Same as #1, but the method is not executed (i.e. it's located in a "cold" basic block). No exception should be thrown.
+        // Check #2: Same as #1, but the method is not executed (i.e. it's located in a "cold" basic block).
+        // No exception should be thrown.
         COMmunicate(null);
 
         return 0;

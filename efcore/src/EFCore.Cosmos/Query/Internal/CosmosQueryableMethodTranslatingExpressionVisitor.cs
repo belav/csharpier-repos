@@ -8,10 +8,14 @@ using Microsoft.EntityFrameworkCore.Cosmos.Internal;
 namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class CosmosQueryableMethodTranslatingExpressionVisitor
     : QueryableMethodTranslatingExpressionVisitor
@@ -24,10 +28,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     private readonly CosmosProjectionBindingExpressionVisitor _projectionBindingExpressionVisitor;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public CosmosQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
@@ -55,10 +63,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected CosmosQueryableMethodTranslatingExpressionVisitor(
         CosmosQueryableMethodTranslatingExpressionVisitor parentVisitor
@@ -80,10 +92,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override Expression Visit(Expression expression)
     {
@@ -289,28 +305,40 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
         new CosmosQueryableMethodTranslatingExpressionVisitor(this);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override ShapedQueryExpression TranslateSubquery(Expression expression) =>
         throw new InvalidOperationException(CoreStrings.TranslationFailed(expression.Print()));
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression CreateShapedQueryExpression(IEntityType entityType)
     {
@@ -337,10 +365,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateAll(
         ShapedQueryExpression source,
@@ -348,10 +380,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateAny(
         ShapedQueryExpression source,
@@ -359,10 +395,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateAverage(
         ShapedQueryExpression source,
@@ -398,10 +438,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateCast(
         ShapedQueryExpression source,
@@ -412,10 +456,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
             : source;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateConcat(
         ShapedQueryExpression source1,
@@ -423,10 +471,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateContains(
         ShapedQueryExpression source,
@@ -434,10 +486,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateCount(
         ShapedQueryExpression source,
@@ -491,10 +547,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateDefaultIfEmpty(
         ShapedQueryExpression source,
@@ -502,10 +562,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateDistinct(ShapedQueryExpression source)
     {
@@ -515,10 +579,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateElementAtOrDefault(
         ShapedQueryExpression source,
@@ -527,10 +595,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateExcept(
         ShapedQueryExpression source1,
@@ -538,10 +610,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateFirstOrDefault(
         ShapedQueryExpression source,
@@ -573,10 +649,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateGroupBy(
         ShapedQueryExpression source,
@@ -586,10 +666,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateGroupJoin(
         ShapedQueryExpression outer,
@@ -600,10 +684,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateIntersect(
         ShapedQueryExpression source1,
@@ -611,10 +699,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateJoin(
         ShapedQueryExpression outer,
@@ -625,10 +717,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateLastOrDefault(
         ShapedQueryExpression source,
@@ -656,10 +752,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateLeftJoin(
         ShapedQueryExpression outer,
@@ -670,10 +770,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateLongCount(
         ShapedQueryExpression source,
@@ -726,10 +830,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateMax(
         ShapedQueryExpression source,
@@ -766,10 +874,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateMin(
         ShapedQueryExpression source,
@@ -806,10 +918,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateOfType(
         ShapedQueryExpression source,
@@ -880,10 +996,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateOrderBy(
         ShapedQueryExpression source,
@@ -905,10 +1025,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateReverse(ShapedQueryExpression source)
     {
@@ -925,10 +1049,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSelect(
         ShapedQueryExpression source,
@@ -958,10 +1086,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSelectMany(
         ShapedQueryExpression source,
@@ -970,10 +1102,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSelectMany(
         ShapedQueryExpression source,
@@ -981,10 +1117,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSingleOrDefault(
         ShapedQueryExpression source,
@@ -1011,10 +1151,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSkip(
         ShapedQueryExpression source,
@@ -1040,10 +1184,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSkipWhile(
         ShapedQueryExpression source,
@@ -1051,10 +1199,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateSum(
         ShapedQueryExpression source,
@@ -1092,10 +1244,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateTake(
         ShapedQueryExpression source,
@@ -1121,10 +1277,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateTakeWhile(
         ShapedQueryExpression source,
@@ -1132,10 +1292,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateThenBy(
         ShapedQueryExpression source,
@@ -1157,10 +1321,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateUnion(
         ShapedQueryExpression source1,
@@ -1168,10 +1336,14 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
     ) => null;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override ShapedQueryExpression TranslateWhere(
         ShapedQueryExpression source,

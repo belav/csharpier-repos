@@ -675,8 +675,10 @@ namespace System.Text.Json.Tests
         }
 
         // NOTE: LookupOverflow test is constrained to run on Windows and MacOSX because it causes
-        //       problems on Linux due to the way deferred memory allocation works. On Linux, the allocation can
-        //       succeed even if there is not enough memory but then the test may get killed by the OOM killer at the
+        //       problems on Linux due to the way deferred memory allocation works. On Linux, the allocation
+        // can
+        //       succeed even if there is not enough memory but then the test may get killed by the OOM
+        // killer at the
         //       time the memory is accessed which triggers the full memory allocation.
         [PlatformSpecific(TestPlatforms.Windows | TestPlatforms.OSX)]
         [ConditionalFact(typeof(Environment), nameof(Environment.Is64BitProcess))]

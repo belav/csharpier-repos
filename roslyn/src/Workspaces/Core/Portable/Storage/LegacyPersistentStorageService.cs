@@ -12,8 +12,10 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Storage
 {
     /// <summary>
-    /// Obsolete.  Roslyn no longer supports a mechanism to perform arbitrary persistence of data.  If such functionality
-    /// is needed, consumers are responsible for providing it themselves with whatever semantics are needed.
+    /// Obsolete.  Roslyn no longer supports a mechanism to perform arbitrary persistence of data.  If
+    // such functionality
+    /// is needed, consumers are responsible for providing it themselves with whatever semantics are
+    // needed.
     /// </summary>
     [Obsolete("Roslyn no longer exports a mechanism to perform persistence.", error: true)]
     internal sealed class LegacyPersistentStorageService : IPersistentStorageService

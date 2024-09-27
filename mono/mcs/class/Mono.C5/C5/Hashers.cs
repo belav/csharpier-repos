@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 using System;
@@ -54,7 +54,8 @@ namespace C5
         /// <summary>
         /// A default generic equality comparer for type T. The procedure is as follows:
         /// <list>
-        /// <item>If T is a primitive type (char, sbyte, byte, short, ushort, int, uint, float, double, decimal),
+        /// <item>If T is a primitive type (char, sbyte, byte, short, ushort, int, uint, float, double,
+        // decimal),
         /// the equalityComparer will be a standard equalityComparer for that type</item>
         /// <item>If the actual generic argument T implements the generic interface
         /// <see cref="T:C5.ISequenced`1"/> for some value W of its generic parameter T,
@@ -67,7 +68,8 @@ namespace C5
         /// <item>If T is a type not implementing <see cref="T:C5.IEquatable`1"/>, the equalityComparer
         /// will be <see cref="T:C5.NaturalEqualityComparer`1"/> </item>
         /// </list>
-        /// The <see cref="T:C5.IEqualityComparer`1"/> object is constructed when this class is initialised, i.e.
+        /// The <see cref="T:C5.IEqualityComparer`1"/> object is constructed when this class is initialised,
+        // i.e.
         /// its static constructors called. Thus, the property will be the same object
         /// for the duration of an invocation of the runtime, but a value serialized in
         /// another invocation and deserialized here will not be the same object.
@@ -243,7 +245,8 @@ namespace C5
     }
 
     /// <summary>
-    /// A default equality comparer for a type T that implements System.IEquatable<typeparamref name="T"/>.
+    /// A default equality comparer for a type T that implements System.IEquatable<typeparamref
+    // name="T"/>.
     ///
     /// The equality comparer forwards calls to GetHashCode and Equals to the IEquatable methods
     /// on T, so Equals(T) is called, not Equals(object).
@@ -291,7 +294,8 @@ namespace C5
     }
 
     /// <summary>
-    /// A equalityComparer for a reference type that uses reference equality for equality and the hash code from object as hash code.
+    /// A equalityComparer for a reference type that uses reference equality for equality and the hash
+    // code from object as hash code.
     /// </summary>
     /// <typeparam name="T">The item type. Must be a reference type.</typeparam>
     [Serializable]

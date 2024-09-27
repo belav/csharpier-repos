@@ -32,7 +32,8 @@ namespace System.Collections.ObjectModel
         private int _blockReentrancyCount;
 
         /// <summary>
-        /// Initializes a new instance of ObservableCollection that is empty and has default initial capacity.
+        /// Initializes a new instance of ObservableCollection that is empty and has default initial
+        // capacity.
         /// </summary>
         public ObservableCollection() { }
 

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The original definition of this symbol. If this symbol is constructed from another
-        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined in
+        /// symbol by type substitution then OriginalDefinition gets the original symbol as it was defined
+        // in
         /// source or metadata.
         /// </summary>
         public new virtual MethodSymbol OriginalDefinition
@@ -72,13 +73,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is false if the symbol is static, or a <see cref="LocalFunctionSymbol"/>
+        /// Returns true if this symbol requires an instance reference as the implicit receiver. This is
+        // false if the symbol is static, or a <see cref="LocalFunctionSymbol"/>
         /// </summary>
         public virtual bool RequiresInstanceReceiver => !IsStatic;
 
         /// <summary>
         /// True if the method itself is excluded from code coverage instrumentation.
-        /// True for source methods marked with <see cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
+        /// True for source methods marked with <see
+        // cref="AttributeDescription.ExcludeFromCodeCoverageAttribute"/>.
         /// </summary>
         internal virtual bool IsDirectlyExcludedFromCodeCoverage
         {
@@ -100,11 +103,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         /// <summary>
-        /// Returns the <see cref="UnmanagedCallersOnlyAttributeData"/> data for this method, if there is any. If forceComplete
-        /// is false and the data has not yet been loaded or only early attribute binding has occurred, then either
+        /// Returns the <see cref="UnmanagedCallersOnlyAttributeData"/> data for this method, if there is
+        // any. If forceComplete
+        /// is false and the data has not yet been loaded or only early attribute binding has occurred, then
+        // either
         /// <see cref="UnmanagedCallersOnlyAttributeData.Uninitialized"/> or
-        /// <see cref="UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound"/> will be returned, respectively.
-        /// If passing true for forceComplete, ensure that cycles will not occur by not calling in the process of binding
+        /// <see cref="UnmanagedCallersOnlyAttributeData.AttributePresentDataNotBound"/> will be returned,
+        // respectively.
+        /// If passing true for forceComplete, ensure that cycles will not occur by not calling in the
+        // process of binding
         /// an attribute argument.
         /// </summary>
         internal abstract UnmanagedCallersOnlyAttributeData? GetUnmanagedCallersOnlyAttributeData(
@@ -154,11 +161,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract MarshalPseudoCustomAttributeData ReturnValueMarshallingInformation { get; }
 
         /// <summary>
-        /// True if the method calls another method containing security code (metadata flag RequiresSecurityObject is set).
+        /// True if the method calls another method containing security code (metadata flag
+        // RequiresSecurityObject is set).
         /// </summary>
         /// <remarks>
-        /// A method can me marked as RequiresSecurityObject by applying the DynamicSecurityMethodAttribute in source.
-        /// DynamicSecurityMethodAttribute is a pseudo custom attribute defined as an internal class in System.Security namespace.
+        /// A method can me marked as RequiresSecurityObject by applying the DynamicSecurityMethodAttribute
+        // in source.
+        /// DynamicSecurityMethodAttribute is a pseudo custom attribute defined as an internal class in
+        // System.Security namespace.
         /// This attribute is set on certain security methods defined within mscorlib.
         /// </remarks>
         internal abstract bool RequiresSecurityObject { get; }
@@ -173,10 +183,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         public abstract bool HidesBaseMethodsByName { get; }
 
         /// <summary>
-        /// Returns whether this method is using CLI VARARG calling convention. This is used for C-style variable
-        /// argument lists. This is used extremely rarely in C# code and is represented using the undocumented "__arglist" keyword.
+        /// Returns whether this method is using CLI VARARG calling convention. This is used for C-style
+        // variable
+        /// argument lists. This is used extremely rarely in C# code and is represented using the
+        // undocumented "__arglist" keyword.
         ///
-        /// Note that methods with "params" on the last parameter are indicated with the "IsParams" property on ParameterSymbol, and
+        /// Note that methods with "params" on the last parameter are indicated with the "IsParams" property
+        // on ParameterSymbol, and
         /// are not represented with this property.
         /// </summary>
         public abstract bool IsVararg { get; }
@@ -438,7 +451,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //      public class C : B { ... new B().M ... }       // A.M is not accessible from here
                 //   }
                 //
-                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2, IvtVirtual_ParamsAndDynamic.
+                // See InternalsVisibleToAndStrongNameTests: IvtVirtualCall1, IvtVirtualCall2,
+                // IvtVirtual_ParamsAndDynamic.
                 MethodSymbol overridden = m.OverriddenMethod;
                 var discardedUseSiteInfo = CompoundUseSiteInfo<AssemblySymbol>.Discarded;
                 if (
@@ -472,7 +486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Returns the original virtual or abstract method which a given method symbol overrides,
         /// ignoring any other overriding methods in base classes.
-        /// Also, if the given method symbol is generic then the resulting virtual or abstract method is constructed with the
+        /// Also, if the given method symbol is generic then the resulting virtual or abstract method is
+        // constructed with the
         /// same type arguments as the given method.
         /// </summary>
         /// <param name="requireSameReturnType">The returned method must have the same return type.</param>
@@ -532,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Calls are conditionally omitted if both the following requirements are true:
         ///  (a) IsConditional == true, i.e. it has at least one applied/inherited conditional attribute AND
-        ///  (b) None of conditional symbols corresponding to these conditional attributes are defined in the given syntaxTree.
+        ///  (b) None of conditional symbols corresponding to these conditional attributes are defined in
+        // the given syntaxTree.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -566,12 +582,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a sequence of preprocessor symbols specified in <see cref="ConditionalAttribute"/> applied on this symbol, or null if there are none.
+        /// Returns a sequence of preprocessor symbols specified in <see cref="ConditionalAttribute"/>
+        // applied on this symbol, or null if there are none.
         /// </summary>
         internal abstract ImmutableArray<string> GetAppliedConditionalSymbols();
 
         /// <summary>
-        /// Returns a flag indicating whether this symbol has at least one applied/inherited conditional attribute.
+        /// Returns a flag indicating whether this symbol has at least one applied/inherited conditional
+        // attribute.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -848,13 +866,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If this method is a reduced extension method, returns a type inferred during reduction process for the type parameter.
+        /// If this method is a reduced extension method, returns a type inferred during reduction process
+        // for the type parameter.
         /// </summary>
-        /// <param name="reducedFromTypeParameter">Type parameter of the corresponding <see cref="ReducedFrom"/> method.</param>
+        /// <param name="reducedFromTypeParameter">Type parameter of the corresponding <see
+        // cref="ReducedFrom"/> method.</param>
         /// <returns>Inferred type or Nothing if nothing was inferred.</returns>
-        /// <exception cref="System.InvalidOperationException">If this is not a reduced extension method.</exception>
-        /// <exception cref="System.ArgumentNullException">If <paramref name="reducedFromTypeParameter"/> is null.</exception>
-        /// <exception cref="System.ArgumentException">If <paramref name="reducedFromTypeParameter"/> doesn't belong to the corresponding <see cref="ReducedFrom"/> method.</exception>
+        /// <exception cref="System.InvalidOperationException">If this is not a reduced extension
+        // method.</exception>
+        /// <exception cref="System.ArgumentNullException">If <paramref name="reducedFromTypeParameter"/> is
+        // null.</exception>
+        /// <exception cref="System.ArgumentException">If <paramref name="reducedFromTypeParameter"/>
+        // doesn't belong to the corresponding <see cref="ReducedFrom"/> method.</exception>
         public virtual TypeSymbol GetTypeInferredDuringReduction(
             TypeParameterSymbol reducedFromTypeParameter
         )
@@ -863,7 +886,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Apply type substitution to a generic method to create a method symbol with the given type parameters supplied.
+        /// Apply type substitution to a generic method to create a method symbol with the given type
+        // parameters supplied.
         /// </summary>
         /// <param name="typeArguments"></param>
         /// <returns></returns>
@@ -872,9 +896,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return this.Construct(ImmutableArray.Create(typeArguments));
         }
 
-        // https://github.com/dotnet/roslyn/issues/30071: Replace with Construct(ImmutableArray<TypeWithAnnotations>).
+        // https://github.com/dotnet/roslyn/issues/30071: Replace with
+        // Construct(ImmutableArray<TypeWithAnnotations>).
         /// <summary>
-        /// Apply type substitution to a generic method to create a method symbol with the given type parameters supplied.
+        /// Apply type substitution to a generic method to create a method symbol with the given type
+        // parameters supplied.
         /// </summary>
         /// <param name="typeArguments"></param>
         /// <returns></returns>
@@ -937,7 +963,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// As a performance optimization, cache parameter types and refkinds - overload resolution uses them a lot.
+        /// As a performance optimization, cache parameter types and refkinds - overload resolution uses
+        // them a lot.
         /// </summary>
         private ParameterSignature _lazyParameterSignature;
         internal ImmutableArray<TypeWithAnnotations> ParameterTypesWithAnnotations
@@ -1119,9 +1146,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Determines if this method is a valid target for UnmanagedCallersOnly, reporting an error in the given diagnostic
-        /// bag if it is not null. <paramref name="node"/> and <paramref name="diagnostics"/> should both be null, or
-        /// neither should be null. If an error would be reported (whether or not diagnostics is null), true is returned.
+        /// Determines if this method is a valid target for UnmanagedCallersOnly, reporting an error in the
+        // given diagnostic
+        /// bag if it is not null. <paramref name="node"/> and <paramref name="diagnostics"/> should both be
+        // null, or
+        /// neither should be null. If an error would be reported (whether or not diagnostics is null), true
+        // is returned.
         /// </summary>
         internal bool CheckAndReportValidUnmanagedCallersOnlyTarget(
             SyntaxNode? node,
@@ -1172,7 +1202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #nullable disable
 
         /// <summary>
-        /// Returns true if the error code is highest priority while calculating use site error for this symbol.
+        /// Returns true if the error code is highest priority while calculating use site error for this
+        // symbol.
         /// </summary>
         protected sealed override bool IsHighestPriorityUseSiteErrorCode(int code) =>
             code is (int)ErrorCode.ERR_UnsupportedCompilerFeature or (int)ErrorCode.ERR_BindToBogus;
@@ -1197,7 +1228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If the method was written as an iterator method (i.e. with yield statements in its body) returns the
+        /// If the method was written as an iterator method (i.e. with yield statements in its body) returns
+        // the
         /// element type of the iterator.  Otherwise returns default(TypeWithAnnotations).
         /// </summary>
         internal virtual TypeWithAnnotations IteratorElementTypeWithAnnotations
@@ -1232,14 +1264,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal abstract bool GenerateDebugInfo { get; }
 
         /// <summary>
-        /// Calculates a syntax offset for a local (user-defined or long-lived synthesized) declared at <paramref name="localPosition"/>.
+        /// Calculates a syntax offset for a local (user-defined or long-lived synthesized) declared at
+        // <paramref name="localPosition"/>.
         /// Must be implemented by all methods that may contain user code.
         /// </summary>
         /// <remarks>
         /// Syntax offset is a unique identifier for the local within the emitted method body.
-        /// It's based on position of the local declarator. In single-part method bodies it's simply the distance
-        /// from the start of the method body syntax span. If a method body has multiple parts (such as a constructor
-        /// comprising of code for member initializers and constructor initializer calls) the offset is calculated
+        /// It's based on position of the local declarator. In single-part method bodies it's simply the
+        // distance
+        /// from the start of the method body syntax span. If a method body has multiple parts (such as a
+        // constructor
+        /// comprising of code for member initializers and constructor initializer calls) the offset is
+        // calculated
         /// as if all source these parts were concatenated together and prepended to the constructor body.
         /// The resulting syntax offset is then negative for locals defined outside of the constructor body.
         /// </remarks>

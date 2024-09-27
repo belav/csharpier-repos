@@ -174,7 +174,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             CancellationToken cancellationToken
         )
         {
-            // If the user is typing a punctuation portion of the signature, then just emit the name.  i.e. if the
+            // If the user is typing a punctuation portion of the signature, then just emit the name.  i.e. if
+            // the
             // member is `Contains<T>(string key)`, then typing `<` should just emit `Contains` and not
             // `Contains<T>(string key)<`
             return Task.FromResult<TextChange?>(

@@ -4,7 +4,8 @@
 //
 // Exposes features of the Garbage Collector to managed code.
 //
-// This is an extremely simple initial version that only exposes a small fraction of the API that the CLR
+// This is an extremely simple initial version that only exposes a small fraction of the API that
+// the CLR
 // version does.
 //
 

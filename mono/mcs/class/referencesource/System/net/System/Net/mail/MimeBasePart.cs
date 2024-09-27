@@ -90,7 +90,8 @@ namespace System.Net.Mime
                 //an encoded string has as specific format in that it must start and end with an
                 //'=' char and contains five parts, separated by '?' chars.
                 //the first and last part are therefore '=', the second part is the byte encoding (B or Q)
-                //the third is the unicode encoding type, and the fourth is encoded message itself.  '?' is not valid inside of
+                //the third is the unicode encoding type, and the fourth is encoded message itself.  '?' is not
+                // valid inside of
                 //an encoded string other than as a separator for these five parts.
                 //If this check fails, the string is either not encoded or cannot be decoded by this method
                 string[] subStrings = foldedSubString.Split('?');
@@ -121,7 +122,8 @@ namespace System.Net.Mime
 
         // Detect the encoding: "=?encoding?BorQ?content?="
         // "=?utf-8?B?RmlsZU5hbWVf55CG0Y3Qq9C60I5jw4TRicKq0YIM0Y1hSsSeTNCy0Klh?="; // 3.5
-        // With the addition of folding in 4.0, there may be multiple lines with encoding, only detect the first:
+        // With the addition of folding in 4.0, there may be multiple lines with encoding, only detect the
+        // first:
         // "=?utf-8?B?RmlsZU5hbWVf55CG0Y3Qq9C60I5jw4TRicKq0YIM0Y1hSsSeTNCy0Klh?=\r\n =?utf-8?B??=";
         internal static Encoding DecodeEncoding(string value)
         {

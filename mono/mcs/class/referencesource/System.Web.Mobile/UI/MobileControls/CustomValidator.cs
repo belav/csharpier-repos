@@ -12,14 +12,14 @@ using WebCntrls = System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile CustomValidator class.
-     * The CustomValidator provides the ability to easily write custom server
-     * validation logic.  A user-defined function is called via a single-cast
-     * delegate to provide server-side custom validation.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile CustomValidator class.
+* The CustomValidator provides the ability to easily write custom server
+* validation logic.  A user-defined function is called via a single-cast
+* delegate to provide server-side custom validation.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator"]/*' />
     [
         DefaultEvent("ServerValidate"),
@@ -47,7 +47,8 @@ namespace System.Web.UI.MobileControls
         // property.
         private static readonly Object EventServerValidate = new Object();
 
-        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.CreateWebValidator"]/*' />
+        /// <include file='doc\CustomValidator.uex'
+        // path='docs/doc[@for="CustomValidator.CreateWebValidator"]/*' />
         protected override WebCntrls.BaseValidator CreateWebValidator()
         {
             _webCustomValidator = new WebCntrls.CustomValidator();
@@ -69,7 +70,8 @@ namespace System.Web.UI.MobileControls
         // Mimic the properties exposed in the original CustomValidator.
         ////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.ServerValidate"]/*' />
+        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.ServerValidate"]/*'
+        // />
         [
             Bindable(false),
             DefaultValue(null),
@@ -83,7 +85,8 @@ namespace System.Web.UI.MobileControls
 
         // protected method (which can be overridden by subclasses) for
         // raising user events
-        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.OnServerValidate"]/*' />
+        /// <include file='doc\CustomValidator.uex'
+        // path='docs/doc[@for="CustomValidator.OnServerValidate"]/*' />
         protected virtual bool OnServerValidate(String value)
         {
             ServerValidateEventHandler handler = (ServerValidateEventHandler)
@@ -107,7 +110,8 @@ namespace System.Web.UI.MobileControls
             e.IsValid = OnServerValidate(e.Value);
         }
 
-        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.EvaluateIsValid"]/*' />
+        /// <include file='doc\CustomValidator.uex'
+        // path='docs/doc[@for="CustomValidator.EvaluateIsValid"]/*' />
         protected override bool EvaluateIsValid()
         {
             return EvaluateIsValidInternal();
@@ -117,7 +121,8 @@ namespace System.Web.UI.MobileControls
         // Helper function adopted from WebForms CustomValidator
         /////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\CustomValidator.uex' path='docs/doc[@for="CustomValidator.ControlPropertiesValid"]/*' />
+        /// <include file='doc\CustomValidator.uex'
+        // path='docs/doc[@for="CustomValidator.ControlPropertiesValid"]/*' />
         protected override bool ControlPropertiesValid()
         {
             // Need to override the BaseValidator implementation, because for

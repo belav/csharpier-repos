@@ -3,9 +3,11 @@
 //
 
 //A constrained virtual call to an intrinsic returns incorrect value.
-//On x86 the returned value is off by one level of indirection so the address of the string length is
+//On x86 the returned value is off by one level of indirection so the address of the string length
+// is
 //returned instead of the actual length.  On x64 the intrinsic returns 0 instead of string length.
-//Only the String intrinsics seem to be affected by this bug as the array intrinsics aren't used with
+//Only the String intrinsics seem to be affected by this bug as the array intrinsics aren't used
+// with
 //generics.
 //Test returns 100 on success and 1 on failure.
 

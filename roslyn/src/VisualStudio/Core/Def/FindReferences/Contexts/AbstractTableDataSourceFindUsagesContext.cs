@@ -77,7 +77,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private bool _cleared;
 
             /// <summary>
-            /// Message we show if we find no definitions.  Consumers of the streaming presenter can set their own title.
+            /// Message we show if we find no definitions.  Consumers of the streaming presenter can set their
+            // own title.
             /// </summary>
             protected string NoDefinitionsFoundMessage =
                 ServicesVSResources.Search_found_no_results;

@@ -14,8 +14,10 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     internal static class DynamicVariantExtensions
     {
         /// <summary>
-        /// Primitive types are the basic COM types. It includes valuetypes like ints, but also reference types
-        /// like BStrs. It does not include composite types like arrays and user-defined COM types (IUnknown/IDispatch).
+        /// Primitive types are the basic COM types. It includes valuetypes like ints, but also reference
+        // types
+        /// like BStrs. It does not include composite types like arrays and user-defined COM types
+        // (IUnknown/IDispatch).
         /// </summary>
         public static bool IsPrimitiveType(this VarEnum varEnum)
         {

@@ -10,7 +10,8 @@ namespace System.ComponentModel
     using System.Security.Permissions;
 
     /// <devdoc>
-    ///     If this attribute is placed on a property or a type, its text representation in a property window
+    ///     If this attribute is placed on a property or a type, its text representation in a property
+    // window
     ///     will appear as dots or astrisks to indicate a password field.  This indidation in no way
     ///     represents any type of encryption or security.
     /// </devdoc>
@@ -55,7 +56,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     Gets a value indicating if the property this attribute is defined for should be shown as password text.
+        ///     Gets a value indicating if the property this attribute is defined for should be shown as
+        // password text.
         /// </devdoc>
         public bool Password
         {

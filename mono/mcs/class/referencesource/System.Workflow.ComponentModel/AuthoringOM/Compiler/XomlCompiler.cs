@@ -648,10 +648,13 @@ namespace System.Workflow.ComponentModel.Compiler
                 }
             }
             // a note about references to mscorlib:
-            //  If we found mscorlib in the list of reference assemblies, we should remove it prior to sending it to the CodeDOM compiler.
-            //  The CodeDOM compiler would add the right mscorlib [based on the version of the provider we use] and the duplication would
+            //  If we found mscorlib in the list of reference assemblies, we should remove it prior to sending
+            // it to the CodeDOM compiler.
+            //  The CodeDOM compiler would add the right mscorlib [based on the version of the provider we use]
+            // and the duplication would
             //  cause a compilation error.
-            //  If we didn't found a reference to mscorlib we need to add it to the type-provider, though, so we will support exposing
+            //  If we didn't found a reference to mscorlib we need to add it to the type-provider, though, so we
+            // will support exposing
             //  those known types.
             if (mscorlibIndex != -1)
             {
@@ -738,7 +741,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     try
                     {
                         // GenerateLocalAssembly may have created a directory, so let's try to delete it
-                        // We can't just delete Path.GetDirectoryName(localAssemblyPath) because it might be the Temp directory.
+                        // We can't just delete Path.GetDirectoryName(localAssemblyPath) because it might be the Temp
+                        // directory.
                         if (createdDirectoryName != null)
                         {
                             Directory.Delete(createdDirectoryName, true);
@@ -898,7 +902,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 // does a clonedParams.TempFiles.BasePath.AddExtension("pdb"), which is a file
                 // that doesn't actually get created.
                 // We need to add the pdb file to the clonedParameters.TempFiles collection so that
-                // it gets deleted, even in the case where we didn't end up creating the tempAssemblyDirectory above.
+                // it gets deleted, even in the case where we didn't end up creating the tempAssemblyDirectory
+                // above.
                 string pdbFilename = Path.GetFileNameWithoutExtension(localAssemblyPath) + ".pdb";
                 clonedParams.TempFiles.AddFile(
                     Path.GetDirectoryName(localAssemblyPath) + "\\" + pdbFilename,
@@ -1132,7 +1137,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     continue;
                 }
 
-                //NOTE: CompileWithNoCode is meaningless now. It means no x:Code in a XOML file. It exists until the FP migration is done
+                //NOTE: CompileWithNoCode is meaningless now. It means no x:Code in a XOML file. It exists until the
+                // FP migration is done
                 //Ideally FP should just use XOML files w/o X:Class and run them w/o ever compiling them
                 if (
                     (parameters.CompileWithNoCode) && XomlCompilerHelper.HasCodeWithin(rootActivity)

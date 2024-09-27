@@ -210,7 +210,8 @@ internal static partial class Interop
             internal const string ProgramFilesCommon = "{F7F1ED05-9F6D-47A2-AAAE-29D317C6F066}";
 
             /// <summary>
-            /// (CSIDL_PROGRAM_FILES_COMMONX86) Common 32 bit Program Files folder (available to both 32/64 bit processes)
+            /// (CSIDL_PROGRAM_FILES_COMMONX86) Common 32 bit Program Files folder (available to both 32/64 bit
+            // processes)
             /// </summary>
             internal const string ProgramFilesCommonX86 = "{DE974D24-D9C6-4D3E-BF91-F4455120B917}";
 

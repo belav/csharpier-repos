@@ -50,7 +50,8 @@ namespace System.Data.Odbc
             string[] validKeywords = new string[2];
             validKeywords[(int)Keywords.Driver] = DbConnectionStringKeywords.Driver;
             validKeywords[(int)Keywords.Dsn] = DbConnectionStringKeywords.Dsn;
-            //            validKeywords[(int)Keywords.NamedConnection] = DbConnectionStringKeywords.NamedConnection;
+            //            validKeywords[(int)Keywords.NamedConnection] =
+            // DbConnectionStringKeywords.NamedConnection;
             _validKeywords = validKeywords;
 
             Dictionary<string, Keywords> hash = new Dictionary<string, Keywords>(
@@ -107,7 +108,8 @@ namespace System.Data.Odbc
                             case Keywords.Dsn:
                                 Dsn = ConvertToString(value);
                                 break;
-                            //                      case Keywords.NamedConnection: NamedConnection = ConvertToString(value); break;
+                            //                      case Keywords.NamedConnection: NamedConnection = ConvertToString(value);
+                            // break;
                             default:
                                 Debug.Assert(false, "unexpected keyword");
                                 throw ADP.KeywordNotSupported(keyword);
@@ -155,20 +157,20 @@ namespace System.Data.Odbc
             }
         }
 
-        /*
-                [DisplayName(DbConnectionStringKeywords.NamedConnection)]
-                [ResCategoryAttribute(Res.DataCategory_NamedConnectionString)]
-                [ResDescriptionAttribute(Res.DbConnectionString_NamedConnection)]
-                [RefreshPropertiesAttribute(RefreshProperties.All)]
-                [TypeConverter(typeof(NamedConnectionStringConverter))]
-                public string NamedConnection {
-                    get { return _namedConnection; }
-                    set {
-                        SetValue(DbConnectionStringKeywords.NamedConnection, value);
-                        _namedConnection = value;
-                    }
-                }
-        */
+/*
+[DisplayName(DbConnectionStringKeywords.NamedConnection)]
+[ResCategoryAttribute(Res.DataCategory_NamedConnectionString)]
+[ResDescriptionAttribute(Res.DbConnectionString_NamedConnection)]
+[RefreshPropertiesAttribute(RefreshProperties.All)]
+[TypeConverter(typeof(NamedConnectionStringConverter))]
+public string NamedConnection {
+get { return _namedConnection; }
+set {
+SetValue(DbConnectionStringKeywords.NamedConnection, value);
+_namedConnection = value;
+}
+}
+*/
         public override ICollection Keys
         {
             get
@@ -261,44 +263,44 @@ namespace System.Data.Odbc
             }
         }
 
-        /*
-        protected override void GetProperties(Hashtable propertyDescriptors) {
-            object value;
-            if (TryGetValue(DbConnectionStringSynonyms.TRUSTEDCONNECTION, out value)) {
-                bool trusted = false;
-                if (value is bool) {
-                    trusted = (bool)value;
-                }
-                else if ((value is string) && !Boolean.TryParse((string)value, out trusted)) {
-                    trusted = false;
-                }
+/*
+protected override void GetProperties(Hashtable propertyDescriptors) {
+object value;
+if (TryGetValue(DbConnectionStringSynonyms.TRUSTEDCONNECTION, out value)) {
+bool trusted = false;
+if (value is bool) {
+trusted = (bool)value;
+}
+else if ((value is string) && !Boolean.TryParse((string)value, out trusted)) {
+trusted = false;
+}
 
-                if (trusted) {
-                   Attribute[] attributes = new Attribute[] {
-                        BrowsableAttribute.Yes,
-                        RefreshPropertiesAttribute.All,
-                    };
-                    DbConnectionStringBuilderDescriptor descriptor;
-                    descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.TRUSTEDCONNECTION,
-                                        this.GetType(), typeof(bool), false, attributes);
-                    descriptor.RefreshOnChange = true;
-                    propertyDescriptors[DbConnectionStringSynonyms.TRUSTEDCONNECTION] = descriptor;
+if (trusted) {
+Attribute[] attributes = new Attribute[] {
+BrowsableAttribute.Yes,
+RefreshPropertiesAttribute.All,
+};
+DbConnectionStringBuilderDescriptor descriptor;
+descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.TRUSTEDCONNECTION,
+this.GetType(), typeof(bool), false, attributes);
+descriptor.RefreshOnChange = true;
+propertyDescriptors[DbConnectionStringSynonyms.TRUSTEDCONNECTION] = descriptor;
 
-                    if (ContainsKey(DbConnectionStringSynonyms.Pwd)) {
-                        descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.Pwd,
-                                            this.GetType(), typeof(string), true, attributes);
-                        propertyDescriptors[DbConnectionStringSynonyms.Pwd] = descriptor;
-                    }
-                    if (ContainsKey(DbConnectionStringSynonyms.UID)) {
-                        descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.UID,
-                                            this.GetType(), typeof(string), true, attributes);
-                        propertyDescriptors[DbConnectionStringSynonyms.UID] = descriptor;
-                    }
-                }
-            }
-            base.GetProperties(propertyDescriptors);
-        }
-        */
+if (ContainsKey(DbConnectionStringSynonyms.Pwd)) {
+descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.Pwd,
+this.GetType(), typeof(string), true, attributes);
+propertyDescriptors[DbConnectionStringSynonyms.Pwd] = descriptor;
+}
+if (ContainsKey(DbConnectionStringSynonyms.UID)) {
+descriptor = new DbConnectionStringBuilderDescriptor(DbConnectionStringSynonyms.UID,
+this.GetType(), typeof(string), true, attributes);
+propertyDescriptors[DbConnectionStringSynonyms.UID] = descriptor;
+}
+}
+}
+base.GetProperties(propertyDescriptors);
+}
+*/
 
         public override bool Remove(string keyword)
         {

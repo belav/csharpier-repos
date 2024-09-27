@@ -9,8 +9,10 @@ namespace Microsoft.AspNetCore.Routing;
 
 #if !COMPONENTS
 /// <summary>
-/// The default implementation of <see cref="IInlineConstraintResolver"/>. Resolves constraints by parsing
-/// a constraint key and constraint arguments, using a map to resolve the constraint type, and calling an
+/// The default implementation of <see cref="IInlineConstraintResolver"/>. Resolves constraints by
+// parsing
+/// a constraint key and constraint arguments, using a map to resolve the constraint type, and
+// calling an
 /// appropriate constructor for the constraint type.
 /// </summary>
 public class DefaultInlineConstraintResolver : IInlineConstraintResolver
@@ -25,8 +27,10 @@ internal class DefaultInlineConstraintResolver : IInlineConstraintResolver
     /// <summary>
     /// Initializes a new instance of the <see cref="DefaultInlineConstraintResolver"/> class.
     /// </summary>
-    /// <param name="routeOptions">Accessor for <see cref="RouteOptions"/> containing the constraints of interest.</param>
-    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to get service arguments from.</param>
+    /// <param name="routeOptions">Accessor for <see cref="RouteOptions"/> containing the constraints of
+    // interest.</param>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to get service arguments
+    // from.</param>
 #endif
     public DefaultInlineConstraintResolver(
         IOptions<RouteOptions> routeOptions,

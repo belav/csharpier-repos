@@ -10,13 +10,13 @@ namespace System.Configuration
     /// </devdoc>
     public class IgnoreSectionHandler : IConfigurationSectionHandler
     {
-        /**
-         * Create
-         *
-         * Given a partially composed config object (possibly null)
-         * and some input from the config system, return a
-         * further partially composed config object
-         */
+/**
+* Create
+*
+* Given a partially composed config object (possibly null)
+* and some input from the config system, return a
+* further partially composed config object
+*/
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

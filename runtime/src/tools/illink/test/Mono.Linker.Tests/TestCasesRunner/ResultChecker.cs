@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -385,7 +386,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             catch (AssemblyResolutionException)
             {
                 // If we failed to resolve, then the entire assembly may be gone.
-                // The assembly being gone confirms that embedded pdbs were removed, but technically, for the other symbol types, the symbol file could still exist on disk
+                // The assembly being gone confirms that embedded pdbs were removed, but technically, for the other
+                // symbol types, the symbol file could still exist on disk
                 // let's check to make sure that it does not.
                 var possibleSymbolFilePath = outputDirectory
                     .Combine($"{assemblyName}")
@@ -1498,7 +1500,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
                         case nameof(ExpectedNoWarningsAttribute):
                         {
-                            // Postpone processing of negative checks, to make it possible to mark some warnings as expected (will be removed from the list above)
+                            // Postpone processing of negative checks, to make it possible to mark some warnings as expected
+                            // (will be removed from the list above)
                             // and then do the negative check on the rest.
                             expectedNoWarningsAttributes.Add((attrProvider, attr));
                             break;

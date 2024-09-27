@@ -62,7 +62,8 @@ public static class MvcViewFeaturesMvcBuilderExtensions
     }
 
     /// <summary>
-    /// Registers <see cref="SessionStateTempDataProvider"/> as the default <see cref="ITempDataProvider"/>
+    /// Registers <see cref="SessionStateTempDataProvider"/> as the default <see
+    // cref="ITempDataProvider"/>
     /// in the <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
@@ -84,7 +85,8 @@ public static class MvcViewFeaturesMvcBuilderExtensions
     }
 
     /// <summary>
-    /// Registers <see cref="CookieTempDataProvider"/> as the default <see cref="ITempDataProvider"/> in the
+    /// Registers <see cref="CookieTempDataProvider"/> as the default <see cref="ITempDataProvider"/> in
+    // the
     /// <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
@@ -106,7 +108,8 @@ public static class MvcViewFeaturesMvcBuilderExtensions
     }
 
     /// <summary>
-    /// Registers <see cref="CookieTempDataProvider"/> as the default <see cref="ITempDataProvider"/> in the
+    /// Registers <see cref="CookieTempDataProvider"/> as the default <see cref="ITempDataProvider"/> in
+    // the
     /// <see cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>

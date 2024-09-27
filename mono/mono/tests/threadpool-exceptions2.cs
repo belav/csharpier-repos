@@ -22,7 +22,7 @@ class Test
         GC.Collect();
         GC.WaitForPendingFinalizers();
 
-        /* expected exit code: 255 */
+/* expected exit code: 255 */
         Thread.Sleep(10000);
         return 0;
     }

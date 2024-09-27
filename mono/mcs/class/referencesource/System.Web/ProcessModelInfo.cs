@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * ProcessInfo class
- */
+* ProcessInfo class
+*/
 namespace System.Web
 {
     using System.Runtime.Serialization.Formatters;

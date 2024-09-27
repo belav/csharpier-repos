@@ -86,7 +86,8 @@ namespace Roslyn.Test.Utilities
                             // Reset our flag ensuring that part of this test actually needs WpfFact
                             s_wpfFactRequirementReason = null;
 
-                            // Just call back into the normal xUnit dispatch process now that we are on an STA Thread with no synchronization context.
+                            // Just call back into the normal xUnit dispatch process now that we are on an STA Thread with no
+                            // synchronization context.
                             var invoker = new XunitTestInvoker(
                                 Test,
                                 MessageBus,
@@ -118,7 +119,8 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Asserts that the test is running on a <see cref="WpfFactAttribute"/> or <see cref="WpfTheoryAttribute"/>
+        /// Asserts that the test is running on a <see cref="WpfFactAttribute"/> or <see
+        // cref="WpfTheoryAttribute"/>
         /// test method, and records the reason for requiring the use of an STA thread.
         /// </summary>
         internal static void RequireWpfFact(string reason)

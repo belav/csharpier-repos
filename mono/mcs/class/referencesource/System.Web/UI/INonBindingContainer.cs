@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Marker interface implemented by all controls that wish to introduce a new
- * logical namespace into the control hierarchy tree.
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* Marker interface implemented by all controls that wish to introduce a new
+* logical namespace into the control hierarchy tree.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 namespace System.Web.UI
 {
     using System;

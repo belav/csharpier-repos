@@ -32,7 +32,8 @@ namespace System.Xml.Schema
     }
 
     /// <summary>
-    /// This structure extends System.DateTime to support timeInTicks zone and Gregorian types components of an Xsd Duration.  It is used internally to support Xsd durations without loss
+    /// This structure extends System.DateTime to support timeInTicks zone and Gregorian types
+    // components of an Xsd Duration.  It is used internally to support Xsd durations without loss
     /// of fidelity.  XsdDuration structures are immutable once they've been created.
     /// </summary>
     internal struct XsdDateTime
@@ -429,14 +430,21 @@ namespace System.Xml.Schema
         /// Year    Month   Day =>  ResultYear  ResultMonth     ResultDay       Note
         ///
         /// X       X       X       Parsed year Parsed month    Parsed day
-        /// X       X       --      Parsed Year Parsed month    First day       If we have year and month, assume the first day of that month.
-        /// X       --      X       Parsed year First month     Parsed day      If the month is missing, assume first month of that year.
-        /// X       --      --      Parsed year First month     First day       If we have only the year, assume the first day of that year.
+        /// X       X       --      Parsed Year Parsed month    First day       If we have year and month,
+        // assume the first day of that month.
+        /// X       --      X       Parsed year First month     Parsed day      If the month is missing,
+        // assume first month of that year.
+        /// X       --      --      Parsed year First month     First day       If we have only the year,
+        // assume the first day of that year.
         ///
-        /// --      X       X       CurrentYear Parsed month    Parsed day      If the year is missing, assume the current year.
-        /// --      X       --      CurrentYear Parsed month    First day       If we have only a month value, assume the current year and current day.
-        /// --      --      X       CurrentYear First month     Parsed day      If we have only a day value, assume current year and first month.
-        /// --      --      --      CurrentYear Current month   Current day     So this means that if the date string only contains time, you will get current date.
+        /// --      X       X       CurrentYear Parsed month    Parsed day      If the year is missing,
+        // assume the current year.
+        /// --      X       --      CurrentYear Parsed month    First day       If we have only a month
+        // value, assume the current year and current day.
+        /// --      --      X       CurrentYear First month     Parsed day      If we have only a day value,
+        // assume current year and first month.
+        /// --      --      --      CurrentYear Current month   Current day     So this means that if the
+        // date string only contains time, you will get current date.
         /// </summary>
         public static implicit operator DateTime(XsdDateTime xdt)
         {
@@ -796,7 +804,8 @@ namespace System.Xml.Schema
                 {
                     start++;
                 }
-                // Choose format starting from the most common and trying not to reparse the same thing too many times
+                // Choose format starting from the most common and trying not to reparse the same thing too many
+                // times
                 if (
                     Test(
                         kinds,

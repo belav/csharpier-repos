@@ -80,7 +80,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
         }
 
         // Testing the standalone version (apphost) would require to make a copy of the entire SDK
-        // and overwrite the apphost.exe in it. Currently this is just too expensive for one test (160MB of data).
+        // and overwrite the apphost.exe in it. Currently this is just too expensive for one test (160MB of
+        // data).
 
         public class SharedTestState : IDisposable
         {

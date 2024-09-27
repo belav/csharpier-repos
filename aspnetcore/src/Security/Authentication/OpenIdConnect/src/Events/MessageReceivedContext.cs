@@ -29,7 +29,8 @@ public class MessageReceivedContext : RemoteAuthenticationContext<OpenIdConnectO
     public OpenIdConnectMessage ProtocolMessage { get; set; } = default!;
 
     /// <summary>
-    /// Bearer Token. This will give the application an opportunity to retrieve a token from an alternative location.
+    /// Bearer Token. This will give the application an opportunity to retrieve a token from an
+    // alternative location.
     /// </summary>
     public string? Token { get; set; }
 }

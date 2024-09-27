@@ -126,14 +126,16 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                         return null;
                 }
 
-                // If there was any intersecting derived type among the constraint types then pick the first of the lot.
+                // If there was any intersecting derived type among the constraint types then pick the first of the
+                // lot.
                 if (commonTypes.Count == 0)
                     return null;
 
                 var commonType = commonTypes.First();
 
                 // If the resultant intersecting type contains any Type arguments that could be replaced
-                // using the type constraints then recursively update the type until all constraints are appropriately handled
+                // using the type constraints then recursively update the type until all constraints are
+                // appropriately handled
                 var substitutedType = await ReplaceTypeParametersBasedOnTypeConstraintsAsync(
                         _project,
                         commonType,

@@ -11,9 +11,11 @@ namespace System.Security.Cryptography
     //
     // The common base class for the cross-platform CreateEncryptor()/CreateDecryptor() implementations.
     //
-    //  - Implements the various padding algorithms (as we support padding algorithms that the underlying native apis don't.)
+    //  - Implements the various padding algorithms (as we support padding algorithms that the
+    // underlying native apis don't.)
     //
-    //  - Parameterized by a BasicSymmetricCipher which encapsulates the algorithm, key, IV, chaining mode, direction of encryption
+    //  - Parameterized by a BasicSymmetricCipher which encapsulates the algorithm, key, IV, chaining
+    // mode, direction of encryption
     //    and the underlying native apis implementing the encryption.
     //
     internal abstract class UniversalCryptoTransform : ICryptoTransform
@@ -156,7 +158,8 @@ namespace System.Security.Cryptography
             Span<byte> outputBuffer
         );
 
-        // For final block, encryption and decryption can give better context for the returning byte size, so we
+        // For final block, encryption and decryption can give better context for the returning byte size,
+        // so we
         // don't provide an implementation here.
         protected abstract byte[] UncheckedTransformFinalBlock(
             byte[] inputBuffer,

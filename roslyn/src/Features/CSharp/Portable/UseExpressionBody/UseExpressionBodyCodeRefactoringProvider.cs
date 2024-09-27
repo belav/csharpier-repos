@@ -387,7 +387,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                 CancellationToken cancellationToken
             )
             {
-                // Track all the declaration nodes to be fixed so we can get the latest declaration node in the current root during updates.
+                // Track all the declaration nodes to be fixed so we can get the latest declaration node in the
+                // current root during updates.
                 var currentRoot = root.TrackNodes(declarationsToFix);
 
                 // Process all declaration nodes in reverse to handle nested declaration updates properly.

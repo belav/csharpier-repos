@@ -268,7 +268,8 @@ namespace System.Net
             }
 
             //
-            // the whole point here is to to close the Security Context (this will complete the authentication handshake
+            // the whole point here is to to close the Security Context (this will complete the authentication
+            // handshake
             // with server authentication for schemese that support it such as Kerberos)
             //
             int index =

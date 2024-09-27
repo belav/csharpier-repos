@@ -4,18 +4,26 @@
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public readonly struct QueryableJsonProjectionInfo
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public QueryableJsonProjectionInfo(
         Dictionary<IProperty, int> propertyIndexMap,
@@ -30,10 +38,14 @@ public readonly struct QueryableJsonProjectionInfo
     ///     Map between entity properties and corresponding column indexes.
     /// </summary>
     /// <remarks>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </remarks>
     public IDictionary<IProperty, int> PropertyIndexMap { get; }
 
@@ -43,10 +55,14 @@ public readonly struct QueryableJsonProjectionInfo
     ///     - navigation between parent and the child JSON entity.
     /// </summary>
     /// <remarks>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </remarks>
     public IList<(
         JsonProjectionInfo JsonProjectionInfo,

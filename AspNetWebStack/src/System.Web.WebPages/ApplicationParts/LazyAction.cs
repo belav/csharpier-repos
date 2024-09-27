@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics;
 
@@ -25,7 +26,8 @@ namespace System.Web.WebPages.ApplicationParts
         {
             // REVIEW: This isn't used we're just exploiting the use of Lazy<T> to execute
             // our action once in a thread safe way
-            // It would be nice if the framework had Unit (i.e a better void type so we could type Func<Unit> -> Action)
+            // It would be nice if the framework had Unit (i.e a better void type so we could type Func<Unit> ->
+            // Action)
             return _lazyAction.Value;
         }
     }

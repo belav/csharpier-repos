@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationModelWebSite;
 
-// This controller uses an reflected model attribute to add arbitrary data to controller and action model.
+// This controller uses an reflected model attribute to add arbitrary data to controller and action
+// model.
 [ControllerDescription("Common Controller Description")]
 public class ApplicationModelController : Controller
 {

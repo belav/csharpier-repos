@@ -3,7 +3,8 @@
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
-    // BinaryHeaderEnum is the first byte on binary records (except for primitive types which do not have a header)
+    // BinaryHeaderEnum is the first byte on binary records (except for primitive types which do not
+    // have a header)
     internal enum BinaryHeaderEnum
     {
         SerializedStreamHeader = 0,
@@ -31,7 +32,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         MethodReturn = 22,
     }
 
-    // BinaryTypeEnum is used specify the type on the wire. Additional information is transmitted with Primitive and Object types
+    // BinaryTypeEnum is used specify the type on the wire. Additional information is transmitted with
+    // Primitive and Object types
     internal enum BinaryTypeEnum
     {
         Primitive = 0,

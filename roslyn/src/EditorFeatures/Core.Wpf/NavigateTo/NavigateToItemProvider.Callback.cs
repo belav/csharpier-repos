@@ -87,9 +87,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 catch (InvalidOperationException ex)
                     when (FatalError.ReportAndCatch(ex, ErrorSeverity.Critical))
                 {
-                    // Mitigation for race condition in platform https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1534364
+                    // Mitigation for race condition in platform
+                    // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1534364
                     //
-                    // Catch this so that don't tear down OOP, but still report the exception so that we ensure this issue
+                    // Catch this so that don't tear down OOP, but still report the exception so that we ensure this
+                    // issue
                     // gets attention and is fixed.
                 }
             }

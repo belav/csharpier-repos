@@ -18,7 +18,8 @@ using System.Globalization;
 namespace System.Data.Common.CommandTrees
 {
     /// <summary>
-    /// Represents an apply operation, which is the invocation of the specified functor for each element in the specified input set.
+    /// Represents an apply operation, which is the invocation of the specified functor for each element
+    // in the specified input set.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -51,7 +52,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets the <see cref="DbExpressionBinding"/> that specifies the functor that is invoked for each element in the input set.
+        /// Gets the <see cref="DbExpressionBinding"/> that specifies the functor that is invoked for each
+        // element in the input set.
         /// </summary>
         public DbExpressionBinding Apply
         {
@@ -84,10 +86,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -144,10 +149,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -165,7 +173,8 @@ namespace System.Data.Common.CommandTrees
 
     /// <summary>
     /// Represents the conversion of the specified set operand to a singleton.
-    /// If the set is empty the conversion will return null, otherwise the conversion will return one of the elements in the set.
+    /// If the set is empty the conversion will return null, otherwise the conversion will return one of
+    // the elements in the set.
     /// </summary>
     /// <remarks>
     /// DbElementExpression requires that its argument has a collection result type
@@ -222,10 +231,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -281,10 +293,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -301,7 +316,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents a predicate applied to an input set to produce the set of elements that satisfy the predicate.
+    /// Represents a predicate applied to an input set to produce the set of elements that satisfy the
+    // predicate.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -365,10 +381,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -385,7 +404,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents a group by operation, which is a grouping of the elements in the input set based on the specified key expressions followed by the application of the specified aggregates.
+    /// Represents a group by operation, which is a grouping of the elements in the input set based on
+    // the specified key expressions followed by the application of the specified aggregates.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -420,7 +440,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets the <see cref="DbGroupExpressionBinding"/> that specifies the input set and provides access to the set element and group element variables.
+        /// Gets the <see cref="DbGroupExpressionBinding"/> that specifies the input set and provides access
+        // to the set element and group element variables.
         /// </summary>
         public DbGroupExpressionBinding Input
         {
@@ -461,10 +482,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -514,10 +538,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -583,10 +610,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -603,7 +633,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents an inner, left outer or full outer join operation between the given collection arguments on the specified join condition.
+    /// Represents an inner, left outer or full outer join operation between the given collection
+    // arguments on the specified join condition.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -682,10 +713,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -702,7 +736,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents the restriction of the number of elements in the Argument collection to the specified Limit value.
+    /// Represents the restriction of the number of elements in the Argument collection to the specified
+    // Limit value.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -744,7 +779,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets the expression that specifies the limit on the number of elements returned from the input collection.
+        /// Gets the expression that specifies the limit on the number of elements returned from the input
+        // collection.
         /// </summary>
         public DbExpression Limit
         {
@@ -752,7 +788,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets whether the limit operation will include tied results, which could produce more results than specifed by the Limit value if ties are present.
+        /// Gets whether the limit operation will include tied results, which could produce more results
+        // than specifed by the Limit value if ties are present.
         /// </summary>
         public bool WithTies
         {
@@ -777,10 +814,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -857,10 +897,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -877,7 +920,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents a quantifier operation of the specified kind (Any, All) over the elements of the specified input set.
+    /// Represents a quantifier operation of the specified kind (Any, All) over the elements of the
+    // specified input set.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -946,10 +990,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -1014,7 +1061,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents a skip operation of the specified number of elements of the input set after the ordering described in the given sort keys is applied.
+    /// Represents a skip operation of the specified number of elements of the input set after the
+    // ordering described in the given sort keys is applied.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -1090,10 +1138,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -1110,7 +1161,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents a sort operation applied to the elements of the specified input set based on the given sort keys.
+    /// Represents a sort operation applied to the elements of the specified input set based on the
+    // given sort keys.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Naming",
@@ -1174,10 +1226,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)
@@ -1194,7 +1249,8 @@ namespace System.Data.Common.CommandTrees
     }
 
     /// <summary>
-    /// Represents the set union (without duplicate removal) operation between the left and right operands.
+    /// Represents the set union (without duplicate removal) operation between the left and right
+    // operands.
     /// </summary>
     /// <remarks>
     /// DbUnionAllExpression requires that its arguments have a common collection result type
@@ -1227,10 +1283,13 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// The visitor pattern method for expression visitors that produce a result value of a specific type.
+        /// The visitor pattern method for expression visitors that produce a result value of a specific
+        // type.
         /// </summary>
-        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of type TResultType.</param>
-        /// <typeparam name="TResultType">The type of the result produced by <paramref name="visitor"/></typeparam>
+        /// <param name="visitor">An instance of a typed DbExpressionVisitor that produces a result value of
+        // type TResultType.</param>
+        /// <typeparam name="TResultType">The type of the result produced by <paramref
+        // name="visitor"/></typeparam>
         /// <exception cref="ArgumentNullException"><paramref name="visitor"/> is null</exception>
         /// <returns>An instance of <typeparamref name="TResultType"/>.</returns>
         public override TResultType Accept<TResultType>(DbExpressionVisitor<TResultType> visitor)

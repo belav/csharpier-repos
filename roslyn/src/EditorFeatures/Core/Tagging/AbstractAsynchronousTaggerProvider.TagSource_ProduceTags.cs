@@ -189,10 +189,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 this.CachedTagTrees = this.CachedTagTrees.SetItem(snapshot.TextBuffer, newTagTree);
 
-                // Not sure why we are diffing when we already have tagsToRemove. is it due to _tagSpanComparer might return
+                // Not sure why we are diffing when we already have tagsToRemove. is it due to _tagSpanComparer
+                // might return
                 // different result than GetIntersectingSpans?
                 //
-                // treeForBuffer basically points to oldTagTrees. case where oldTagTrees not exist is already taken cared by
+                // treeForBuffer basically points to oldTagTrees. case where oldTagTrees not exist is already taken
+                // cared by
                 // CachedTagTrees.TryGetValue.
                 var difference = ComputeDifference(snapshot, newTagTree, treeForBuffer);
 
@@ -234,15 +236,19 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             /// Passed a boolean to say if we're computing the
             /// initial set of tags or not.  If we're computing the initial set of tags, we lower
             /// all our delays so that we can get results to the screen as quickly as possible.
-            /// <para>This gives a good experience when a document is opened as the document appears complete almost
-            /// immediately.  Once open though, our normal delays come into play so as to not cause a flashy experience.</para>
+            /// <para>This gives a good experience when a document is opened as the document appears complete
+            // almost
+            /// immediately.  Once open though, our normal delays come into play so as to not cause a flashy
+            // experience.</para>
             /// </summary>
             /// <remarks>
-            /// In the event of a cancellation request, this method may <em>either</em> return at the next availability
+            /// In the event of a cancellation request, this method may <em>either</em> return at the next
+            // availability
             /// or throw a cancellation exception.
             /// </remarks>
             /// <param name="highPriority">
-            /// If this tagging request should be processed as quickly as possible with no extra delays added for it.
+            /// If this tagging request should be processed as quickly as possible with no extra delays added
+            // for it.
             /// </param>
             private async Task<VoidResult> RecomputeTagsAsync(
                 bool highPriority,
@@ -256,14 +262,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                     return default;
 
                 // if we're tagging documents that are not visible, then introduce a long delay so that we avoid
-                // consuming machine resources on work the user isn't likely to see.  ConfigureAwait(true) so that if
+                // consuming machine resources on work the user isn't likely to see.  ConfigureAwait(true) so that
+                // if
                 // we're on the UI thread that we stay on it.
                 //
-                // Don't do this for explicit high priority requests as the caller wants the UI updated as quickly as
+                // Don't do this for explicit high priority requests as the caller wants the UI updated as quickly
+                // as
                 // possible.
                 if (!highPriority)
                 {
-                    // Use NoThrow as this is a high source of cancellation exceptions.  This avoids the exception and instead
+                    // Use NoThrow as this is a high source of cancellation exceptions.  This avoids the exception and
+                    // instead
                     // bails gracefully by checking below.
                     await _visibilityTracker
                         .DelayWhileNonVisibleAsync(
@@ -356,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                     OnTagsChangedForBuffer(bufferToChanges, highPriority);
 
-                    // Once we've computed tags, pause ourselves if we're no longer visible.  That way we don't consume any
+                    // Once we've computed tags, pause ourselves if we're no longer visible.  That way we don't consume
+                    // any
                     // machine resources that the user won't even notice.
                     PauseIfNotVisible();
                 }
@@ -505,7 +515,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 var firstSpanToInvalidate = spansToInvalidate.First();
                 var snapshot = firstSpanToInvalidate.Snapshot;
 
-                // Performance: No need to fully realize spansToInvalidate or do any of the calculations below if the
+                // Performance: No need to fully realize spansToInvalidate or do any of the calculations below if
+                // the
                 //   full snapshot is being invalidated.
                 if (firstSpanToInvalidate.Length == snapshot.Length)
                     return Array.Empty<ITagSpan<TTag>>();
@@ -606,7 +617,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             }
 
             /// <summary>
-            /// Return all the spans that appear in only one of <paramref name="latestTree"/> or <paramref name="previousTree"/>.
+            /// Return all the spans that appear in only one of <paramref name="latestTree"/> or <paramref
+            // name="previousTree"/>.
             /// </summary>
             private DiffResult ComputeDifference(
                 ITextSnapshot snapshot,
@@ -695,9 +707,12 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 if (_disposalTokenSource.Token.IsCancellationRequested)
                     return null;
 
-                // If this is the first time we're being asked for tags, and we're a tagger that requires the initial
-                // tags be available synchronously on this call, and the computation of tags hasn't completed yet, then
-                // force the tags to be computed now on this thread.  The singular use case for this is Outlining which
+                // If this is the first time we're being asked for tags, and we're a tagger that requires the
+                // initial
+                // tags be available synchronously on this call, and the computation of tags hasn't completed yet,
+                // then
+                // force the tags to be computed now on this thread.  The singular use case for this is Outlining
+                // which
                 // needs those tags synchronously computed for things like Metadata-as-Source collapsing.
                 if (
                     _firstTagsRequest
@@ -726,7 +741,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             {
                 _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
 
-                // Some client is asking for tags.  Possible that we're becoming visible.  Preemptively start tagging
+                // Some client is asking for tags.  Possible that we're becoming visible.  Preemptively start
+                // tagging
                 // again so we don't have to wait for the visibility notification to come in.
                 ResumeIfVisible();
 

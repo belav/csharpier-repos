@@ -121,14 +121,18 @@ internal static class HttpRuleParser
         var current = startIndex;
         char c;
 
-        // If decimal values are not allowed, we pretend to have read the '.' character already. I.e. if a dot is
+        // If decimal values are not allowed, we pretend to have read the '.' character already. I.e. if a
+        // dot is
         // found in the string, parsing will be aborted.
         var haveDot = !allowDecimal;
 
-        // The RFC doesn't allow decimal values starting with dot. I.e. value ".123" is invalid. It must be in the
-        // form "0.123". Also, there are no negative values defined in the RFC. So we'll just parse non-negative
+        // The RFC doesn't allow decimal values starting with dot. I.e. value ".123" is invalid. It must be
+        // in the
+        // form "0.123". Also, there are no negative values defined in the RFC. So we'll just parse
+        // non-negative
         // values.
-        // The RFC only allows decimal dots not ',' characters as decimal separators. Therefore value "1,23" is
+        // The RFC only allows decimal dots not ',' characters as decimal separators. Therefore value "1,23"
+        // is
         // considered invalid and must be represented as "1.23".
         if (input[current] == '.')
         {
@@ -224,12 +228,17 @@ internal static class HttpRuleParser
     // LWS = [CRLF] 1*( SP | HT )
     // CTL = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
     //
-    // Since we don't really care about the content of a quoted string or comment, we're more tolerant and
-    // allow these characters. We only want to find the delimiters ('"' for quoted string and '(', ')' for comment).
+    // Since we don't really care about the content of a quoted string or comment, we're more tolerant
+    // and
+    // allow these characters. We only want to find the delimiters ('"' for quoted string and '(', ')'
+    // for comment).
     //
-    // 'nestedCount': Comments can be nested. We allow a depth of up to 5 nested comments, i.e. something like
-    // "(((((comment)))))". If we wouldn't define a limit an attacker could send a comment with hundreds of nested
-    // comments, resulting in a stack overflow exception. In addition having more than 1 nested comment (if any)
+    // 'nestedCount': Comments can be nested. We allow a depth of up to 5 nested comments, i.e.
+    // something like
+    // "(((((comment)))))". If we wouldn't define a limit an attacker could send a comment with hundreds
+    // of nested
+    // comments, resulting in a stack overflow exception. In addition having more than 1 nested comment
+    // (if any)
     // is unusual.
     private static HttpParseResult GetExpressionLength(
         StringSegment input,
@@ -255,7 +264,8 @@ internal static class HttpRuleParser
         while (current < input.Length)
         {
             // Only check whether we have a quoted char, if we have at least 3 characters left to read (i.e.
-            // quoted char + closing char). Otherwise the closing char may be considered part of the quoted char.
+            // quoted char + closing char). Otherwise the closing char may be considered part of the quoted
+            // char.
             if (
                 (current + 2 < input.Length)
                 && (

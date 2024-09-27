@@ -6,18 +6,26 @@ using System.Text.Json;
 namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class JsonColumnBase : ColumnBase<ColumnMappingBase>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public JsonColumnBase(
         string name,
@@ -29,10 +37,14 @@ public class JsonColumnBase : ColumnBase<ColumnMappingBase>
         : base(name, type, table, storeTypeMapping, providerValueComparer) { }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
         (RelationalTypeMapping)

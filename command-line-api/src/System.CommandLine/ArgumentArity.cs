@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections;
 using System.CommandLine.Binding;
@@ -24,10 +25,14 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the ArgumentArity class.
         /// </summary>
-        /// <param name="minimumNumberOfValues">The minimum number of values required for the argument.</param>
-        /// <param name="maximumNumberOfValues">The maximum number of values allowed for the argument.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref name="minimumNumberOfValues"/> is negative.</exception>
-        /// <exception cref="ArgumentException">Thrown when the maximum number is less than the minimum number or the maximum number is greater than MaximumArity.</exception>
+        /// <param name="minimumNumberOfValues">The minimum number of values required for the
+        // argument.</param>
+        /// <param name="maximumNumberOfValues">The maximum number of values allowed for the
+        // argument.</param>
+        /// <exception cref="ArgumentOutOfRangeException">Thrown when <paramref
+        // name="minimumNumberOfValues"/> is negative.</exception>
+        /// <exception cref="ArgumentException">Thrown when the maximum number is less than the minimum
+        // number or the maximum number is greater than MaximumArity.</exception>
         public ArgumentArity(int minimumNumberOfValues, int maximumNumberOfValues)
         {
             if (minimumNumberOfValues < 0)

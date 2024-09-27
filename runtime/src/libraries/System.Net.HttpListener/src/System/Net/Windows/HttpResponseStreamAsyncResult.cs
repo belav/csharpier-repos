@@ -255,7 +255,8 @@ namespace System.Net
                 }
                 else
                 {
-                    // if we sent headers and body together, numBytes will be the total, but we need to only account for the data
+                    // if we sent headers and body together, numBytes will be the total, but we need to only account for
+                    // the data
                     if (asyncResult._dataChunks == null)
                     {
                         result = (uint)0;

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.Contracts;
@@ -23,7 +24,8 @@ namespace System.IO
         internal const int MaxShortPath = 260;
         internal const int MaxShortDirectoryPath = 248;
 
-        // Windows is limited in long paths by the max size of its internal representation of a unicode string.
+        // Windows is limited in long paths by the max size of its internal representation of a unicode
+        // string.
         // UNICODE_STRING has a max length of USHORT in _bytes_ without a trailing null.
         // https://msdn.microsoft.com/en-us/library/windows/hardware/ff564879.aspx
         internal const int MaxLongPath = short.MaxValue;
@@ -70,7 +72,8 @@ namespace System.IO
         };
 
         /// <summary>
-        /// Validates volume separator only occurs as C: or \\?\C:. This logic is meant to filter out Alternate Data Streams.
+        /// Validates volume separator only occurs as C: or \\?\C:. This logic is meant to filter out
+        // Alternate Data Streams.
         /// </summary>
         /// <returns>True if the path has an invalid volume separator.</returns>
         internal static bool HasInvalidVolumeSeparator(string path)
@@ -79,7 +82,8 @@ namespace System.IO
             // Cannot start with a colon and can only be of the form "C:" or "\\?\C:".
             // (Note that we used to explicitly check "http:" and "file:"- these are caught by this check now.)
 
-            // We don't care about skipping starting space for extended paths. Assume no knowledge of extended paths if we're forcing old path behavior.
+            // We don't care about skipping starting space for extended paths. Assume no knowledge of extended
+            // paths if we're forcing old path behavior.
             bool isExtended = !AppContextSwitches.UseLegacyPathHandling && IsExtended(path);
             int startIndex = isExtended ? ExtendedPathPrefix.Length : PathStartSkip(path);
 
@@ -203,15 +207,21 @@ namespace System.IO
         /// </summary>
         internal static string EnsureExtendedPrefix(string path)
         {
-            // Putting the extended prefix on the path changes the processing of the path. It won't get normalized, which
-            // means adding to relative paths will prevent them from getting the appropriate current directory inserted.
+            // Putting the extended prefix on the path changes the processing of the path. It won't get
+            // normalized, which
+            // means adding to relative paths will prevent them from getting the appropriate current directory
+            // inserted.
 
-            // If it already has some variant of a device path (\??\, \\?\, \\.\, //./, etc.) we don't need to change it
-            // as it is either correct or we will be changing the behavior. When/if Windows supports long paths implicitly
+            // If it already has some variant of a device path (\??\, \\?\, \\.\, //./, etc.) we don't need to
+            // change it
+            // as it is either correct or we will be changing the behavior. When/if Windows supports long paths
+            // implicitly
             // in the future we wouldn't want normalization to come back and break existing code.
 
-            // In any case, all internal usages should be hitting normalize path (Path.GetFullPath) before they hit this
-            // shimming method. (Or making a change that doesn't impact normalization, such as adding a filename to a
+            // In any case, all internal usages should be hitting normalize path (Path.GetFullPath) before they
+            // hit this
+            // shimming method. (Or making a change that doesn't impact normalization, such as adding a filename
+            // to a
             // normalized base path.)
             if (IsPartiallyQualified(path) || IsDevice(path))
                 return path;
@@ -380,7 +390,8 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Version of HasIllegalCharacters that checks no AppContextSwitches. Only use if you know you need to skip switches and don't care
+        /// Version of HasIllegalCharacters that checks no AppContextSwitches. Only use if you know you need
+        // to skip switches and don't care
         /// about proper device path handling.
         /// </summary>
         internal static bool AnyPathHasIllegalCharacters(string path, bool checkAdditional = false)
@@ -403,7 +414,8 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Version of HasWildCardCharacters that checks no AppContextSwitches. Only use if you know you need to skip switches and don't care
+        /// Version of HasWildCardCharacters that checks no AppContextSwitches. Only use if you know you
+        // need to skip switches and don't care
         /// about proper device path handling.
         /// </summary>
         internal static bool AnyPathHasWildCardCharacters(string path, int startIndex = 0)
@@ -595,7 +607,8 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Returns the characters to skip at the start of the path if it starts with space(s) and a drive or directory separator.
+        /// Returns the characters to skip at the start of the path if it starts with space(s) and a drive
+        // or directory separator.
         /// (examples are " C:", " \")
         /// This is a legacy behavior of Path.GetFullPath().
         /// </summary>
@@ -635,28 +648,38 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Normalize separators in the given path. Converts forward slashes into back slashes and compresses slash runs, keeping initial 2 if present.
+        /// Normalize separators in the given path. Converts forward slashes into back slashes and
+        // compresses slash runs, keeping initial 2 if present.
         /// Also trims initial whitespace in front of "rooted" paths (see PathStartSkip).
         ///
-        /// This effectively replicates the behavior of the legacy NormalizePath when it was called with fullCheck=false and expandShortpaths=false.
-        /// The current NormalizePath gets directory separator normalization from Win32's GetFullPathName(), which will resolve relative paths and as
+        /// This effectively replicates the behavior of the legacy NormalizePath when it was called with
+        // fullCheck=false and expandShortpaths=false.
+        /// The current NormalizePath gets directory separator normalization from Win32's GetFullPathName(),
+        // which will resolve relative paths and as
         /// such can't be used here (and is overkill for our uses).
         ///
-        /// Like the current NormalizePath this will not try and analyze periods/spaces within directory segments.
+        /// Like the current NormalizePath this will not try and analyze periods/spaces within directory
+        // segments.
         /// </summary>
         /// <remarks>
-        /// The only callers that used to use Path.Normalize(fullCheck=false) were Path.GetDirectoryName() and Path.GetPathRoot(). Both usages do
+        /// The only callers that used to use Path.Normalize(fullCheck=false) were Path.GetDirectoryName()
+        // and Path.GetPathRoot(). Both usages do
         /// not need trimming of trailing whitespace here.
         ///
-        /// GetPathRoot() could technically skip normalizing separators after the second segment- consider as a future optimization.
+        /// GetPathRoot() could technically skip normalizing separators after the second segment- consider
+        // as a future optimization.
         ///
         /// For legacy desktop behavior with ExpandShortPaths:
         ///  - It has no impact on GetPathRoot() so doesn't need consideration.
-        ///  - It could impact GetDirectoryName(), but only if the path isn't relative (C:\ or \\Server\Share).
+        ///  - It could impact GetDirectoryName(), but only if the path isn't relative (C:\ or
+        // \\Server\Share).
         ///
-        /// In the case of GetDirectoryName() the ExpandShortPaths behavior was undocumented and provided inconsistent results if the path was
-        /// fixed/relative. For example: "C:\PROGRA~1\A.TXT" would return "C:\Program Files" while ".\PROGRA~1\A.TXT" would return ".\PROGRA~1". If you
-        /// ultimately call GetFullPath() this doesn't matter, but if you don't or have any intermediate string handling could easily be tripped up by
+        /// In the case of GetDirectoryName() the ExpandShortPaths behavior was undocumented and provided
+        // inconsistent results if the path was
+        /// fixed/relative. For example: "C:\PROGRA~1\A.TXT" would return "C:\Program Files" while
+        // ".\PROGRA~1\A.TXT" would return ".\PROGRA~1". If you
+        /// ultimately call GetFullPath() this doesn't matter, but if you don't or have any intermediate
+        // string handling could easily be tripped up by
         /// this undocumented behavior.
         /// </remarks>
         internal static string NormalizeDirectorySeparators(string path)
@@ -679,7 +702,8 @@ namespace System.IO
                         IsDirectorySeparator(current)
                         && (
                             current != Path.DirectorySeparatorChar
-                            // Check for sequential separators past the first position (we need to keep initial two for UNC/extended)
+                            // Check for sequential separators past the first position (we need to keep initial two for
+                            // UNC/extended)
                             || (i > 0 && i + 1 < path.Length && IsDirectorySeparator(path[i + 1]))
                         )
                     )

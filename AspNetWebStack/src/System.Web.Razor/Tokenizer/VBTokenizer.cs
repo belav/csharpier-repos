@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -95,7 +96,8 @@ namespace System.Web.Razor.Tokenizer
 
         private StateResult Data()
         {
-            // We are accepting more characters and whitespace/newlines then the VB Spec defines, to simplify things
+            // We are accepting more characters and whitespace/newlines then the VB Spec defines, to simplify
+            // things
             // Since the code must still be compiled by a VB compiler, this will not cause adverse effects.
             if (ParserHelpers.IsNewLine(CurrentCharacter))
             {
@@ -389,7 +391,8 @@ namespace System.Web.Razor.Tokenizer
             if (CurrentCharacter == '_')
             {
                 // VB Spec §2.2:
-                //  If an identifier begins with an underscore, it must contain at least one other valid identifier character to disambiguate it from a line continuation.
+                //  If an identifier begins with an underscore, it must contain at least one other valid identifier
+                // character to disambiguate it from a line continuation.
                 return ParserHelpers.IsIdentifierPart(Peek());
             }
             if (CurrentCharacter == '[')

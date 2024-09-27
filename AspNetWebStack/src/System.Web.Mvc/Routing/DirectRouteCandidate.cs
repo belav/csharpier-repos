@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -53,7 +54,8 @@ namespace System.Web.Mvc.Routing
             Debug.Assert(controllerContext != null);
             Debug.Assert(candidates != null);
 
-            // These filters will allow actions to opt-out of execution via the provided public extensibility points.
+            // These filters will allow actions to opt-out of execution via the provided public extensibility
+            // points.
             List<DirectRouteCandidate> filteredByActionName = ApplyActionNameFilters(
                 candidates,
                 controllerContext

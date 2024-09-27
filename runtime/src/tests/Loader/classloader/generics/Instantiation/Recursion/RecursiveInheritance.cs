@@ -1,9 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This test contains a large number of various types that are loaded recursively through inheritance
+// This test contains a large number of various types that are loaded recursively through
+// inheritance
 // either by extending a class or implementing an interface.
-// The test was generated using a grammar and Geno-based grammar parser (testTeams\LTS\MWILK\loadertools\GenerateTypes\Generator.exe)
+// The test was generated using a grammar and Geno-based grammar parser
+// (testTeams\LTS\MWILK\loadertools\GenerateTypes\Generator.exe)
 // see REAMDE2.txt for more info.
 
 using System;

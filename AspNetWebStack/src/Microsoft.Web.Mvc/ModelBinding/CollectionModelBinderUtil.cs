@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -60,9 +61,12 @@ namespace Microsoft.Web.Mvc.ModelBinding
         // openBinderType: model binder type
         // modelMetadata: metadata for the model to bind
         //
-        // example: GetGenericBinder(typeof(IList<>), typeof(List<>), typeof(ListBinder<>), ...) means that the ListBinder<T>
-        // type can update models that implement IList<T>, and if for some reason the existing model instance is not
-        // updatable the binder will create a List<T> object and bind to that instead. This method will return a ListBinder<T>
+        // example: GetGenericBinder(typeof(IList<>), typeof(List<>), typeof(ListBinder<>), ...) means that
+        // the ListBinder<T>
+        // type can update models that implement IList<T>, and if for some reason the existing model
+        // instance is not
+        // updatable the binder will create a List<T> object and bind to that instead. This method will
+        // return a ListBinder<T>
         // or null, depending on whether the type and updatability checks succeed.
         public static IExtensibleModelBinder GetGenericBinder(
             Type supportedInterfaceType,
@@ -115,17 +119,19 @@ namespace Microsoft.Web.Mvc.ModelBinding
         }
 
         // Returns the generic type arguments for the model type if updatable, else null.
-        // supportedInterfaceType: open type (like IList<>) of supported interface, must implement ICollection<>
-        // newInstanceType: open type (like List<>) of object that will be created, must implement supportedInterfaceType
+        // supportedInterfaceType: open type (like IList<>) of supported interface, must implement
+        // ICollection<>
+        // newInstanceType: open type (like List<>) of object that will be created, must implement
+        // supportedInterfaceType
         public static Type[] GetTypeArgumentsForUpdatableGenericCollection(
             Type supportedInterfaceType,
             Type newInstanceType,
             ModelMetadata modelMetadata
         )
         {
-            /*
-             * Check that we can extract proper type arguments from the model.
-             */
+/*
+* Check that we can extract proper type arguments from the model.
+*/
 
             if (
                 !modelMetadata.ModelType.IsGenericType
@@ -143,9 +149,9 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 return null;
             }
 
-            /*
-             * Is it possible just to change the reference rather than update the collection in-place?
-             */
+/*
+* Is it possible just to change the reference rather than update the collection in-place?
+*/
 
             if (!modelMetadata.IsReadOnly)
             {
@@ -156,10 +162,10 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 }
             }
 
-            /*
-             * At this point, we know we can't change the reference, so we need to verify that
-             * the model instance can be updated in-place.
-             */
+/*
+* At this point, we know we can't change the reference, so we need to verify that
+* the model instance can be updated in-place.
+*/
 
             Type closedSupportedInterfaceType = supportedInterfaceType.MakeGenericType(
                 modelTypeArguments

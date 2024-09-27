@@ -510,7 +510,8 @@ namespace System.ServiceModel.Channels
                     throw;
                 }
 
-                //should never actually hit this code - the async result will handle all exceptions, trace them, then abort the reader
+                //should never actually hit this code - the async result will handle all exceptions, trace them,
+                // then abort the reader
                 DiagnosticUtility.TraceHandledException(ex, TraceEventType.Warning);
             }
         }
@@ -675,7 +676,8 @@ namespace System.ServiceModel.Channels
                         throw;
                     }
 
-                    //Don't complete this AsyncResult with this non-fatal exception.  The calling code can't really do anything with it,
+                    //Don't complete this AsyncResult with this non-fatal exception.  The calling code can't really do
+                    // anything with it,
                     //so just trace it (inside of AbortConnection), then ---- it.
                     completeSelf = true;
                     thisPtr.AbortConnection(ex);
@@ -698,7 +700,8 @@ namespace System.ServiceModel.Channels
                         this.demuxer
                     );
 
-                //singletonReader doesn't have async version of ReceiveRequest, so just call the sync method for now.
+                //singletonReader doesn't have async version of ReceiveRequest, so just call the sync method for
+                // now.
                 RequestContext requestContext = singletonReader.ReceiveRequest(
                     this.timeoutHelper.RemainingTime()
                 );

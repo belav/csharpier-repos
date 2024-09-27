@@ -154,10 +154,13 @@ public static class WaitAssert
         }
         catch (WebDriverTimeoutException)
         {
-            // At this point at least one test failed, so we mark the test as failed. Any assertions after this one
-            // will fail faster. There's a small race condition here between checking the value for TestRunFailed
+            // At this point at least one test failed, so we mark the test as failed. Any assertions after this
+            // one
+            // will fail faster. There's a small race condition here between checking the value for
+            // TestRunFailed
             // above and setting it here, but nothing bad can come out of it. Worst case scenario, one or more
-            // tests running concurrently might use the DefaultTimeout in their current assertion, which is fine.
+            // tests running concurrently might use the DefaultTimeout in their current assertion, which is
+            // fine.
             TestRunFailed = true;
 
             var innerHtml = driver

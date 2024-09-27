@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         private readonly IGlobalOptionService _globalOptions;
 
         /// <summary>
-        /// Methods in FindUsagesLSPContext can be called by multiple threads concurrently. We need this semaphore to
+        /// Methods in FindUsagesLSPContext can be called by multiple threads concurrently. We need this
+        // semaphore to
         /// ensure that we aren't making concurrent modifications to data such as _id and _definitionToId.
         /// </summary>
         private readonly SemaphoreSlim _semaphore = new(1);
@@ -223,7 +224,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             CancellationToken cancellationToken
         )
         {
-            // Getting the text for the Text property. If we somehow can't compute the text, that means we're probably dealing with a metadata
+            // Getting the text for the Text property. If we somehow can't compute the text, that means we're
+            // probably dealing with a metadata
             // reference, and those don't show up in the results list in Roslyn FAR anyway.
             var text = await ComputeTextAsync(
                     definitionId,
@@ -239,7 +241,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var location = await ComputeLocationAsync(documentSpan, cancellationToken)
                 .ConfigureAwait(false);
 
-            // Defer to the host we're in to determine the sort of result to return.  In simple hosts this will just be
+            // Defer to the host we're in to determine the sort of result to return.  In simple hosts this will
+            // just be
             // a Location.  In richer hosts this can include far more data to enhance the user experience.
             var service =
                 _workspace.Services.GetRequiredService<ILspReferencesResultCreationService>();
@@ -376,7 +379,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             using var _ = ArrayBuilder<ClassifiedTextRun>.GetInstance(out var classifiedTextRuns);
             foreach (var span in classifiedSpans)
             {
-                // Default case: Don't highlight. For example, if the user invokes FAR on 'x' in 'var x = 1', then 'var',
+                // Default case: Don't highlight. For example, if the user invokes FAR on 'x' in 'var x = 1', then
+                // 'var',
                 // '=', and '1' should not be highlighted.
                 string? markerTagType = null;
 

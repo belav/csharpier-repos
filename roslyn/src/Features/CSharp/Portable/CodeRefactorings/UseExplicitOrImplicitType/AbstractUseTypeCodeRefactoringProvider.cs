@@ -109,16 +109,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.UseType
 
         private static async Task<SyntaxNode> GetDeclarationAsync(CodeRefactoringContext context)
         {
-            // We want to provide refactoring for changing the Type of newly introduced variables in following cases:
+            // We want to provide refactoring for changing the Type of newly introduced variables in following
+            // cases:
             // - DeclarationExpressionSyntax: `"42".TryParseInt32(out var number)`
             // - VariableDeclarationSyntax: General field / variable declaration statement `var number = 42`
-            // - ForEachStatementSyntax: The variable that gets introduced by foreach `foreach(var number in numbers)`
+            // - ForEachStatementSyntax: The variable that gets introduced by foreach `foreach(var number in
+            // numbers)`
             //
-            // In addition to providing the refactoring when the whole node (i.e. the node that introduces the new variable) in question is selected
-            // we also want to enable it when only the type node is selected because this refactoring changes the type. We still have to make sure
+            // In addition to providing the refactoring when the whole node (i.e. the node that introduces the
+            // new variable) in question is selected
+            // we also want to enable it when only the type node is selected because this refactoring changes
+            // the type. We still have to make sure
             // we're only working on TypeNodes for in above-mentioned situations.
             //
-            // For foreach we need to guard against selecting just the expression because it is also of type `TypeSyntax`.
+            // For foreach we need to guard against selecting just the expression because it is also of type
+            // `TypeSyntax`.
 
             var declNode = await context
                 .TryGetRelevantNodeAsync<DeclarationExpressionSyntax>()

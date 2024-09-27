@@ -31,7 +31,8 @@ internal sealed class AuthorizationPageApplicationModelProvider : IPageApplicati
 
         if (_mvcOptions.EnableEndpointRouting)
         {
-            // When using endpoint routing, the AuthorizationMiddleware does the work that Auth filters would otherwise perform.
+            // When using endpoint routing, the AuthorizationMiddleware does the work that Auth filters would
+            // otherwise perform.
             // Consequently we do not need to convert authorization attributes to filters.
             return;
         }

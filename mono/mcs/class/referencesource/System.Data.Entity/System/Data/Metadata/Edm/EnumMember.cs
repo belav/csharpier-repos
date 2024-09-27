@@ -37,9 +37,11 @@ namespace System.Data.Metadata.Edm
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EnumMember"/> type by using the specified name and value.
+        /// Initializes a new instance of the <see cref="EnumMember"/> type by using the specified name and
+        // value.
         /// </summary>
-        /// <param name="name">The name of this enumeration member. Must not be null or the empty string.</param>
+        /// <param name="name">The name of this enumeration member. Must not be null or the empty
+        // string.</param>
         /// <param name="value">The value of this enumeration member. </param>
         /// <exception cref="System.ArgumentNullException">Thrown if name argument is null</exception>
         /// <exception cref="System.ArgumentException">Thrown if name argument is empty string</exception>

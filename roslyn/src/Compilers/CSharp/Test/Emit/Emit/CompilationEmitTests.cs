@@ -68,7 +68,8 @@ class X
         public void CompilationEmitWithQuotedMainType()
         {
             // Check that compilation with quoted main switch argument produce diagnostic.
-            // MSBuild can return quoted main argument value which is removed from the command line arguments or by parsing
+            // MSBuild can return quoted main argument value which is removed from the command line arguments or
+            // by parsing
             // command line arguments, but we DO NOT unquote arguments which are provided by
             // the WithMainTypeName function - (was originally exposed through using
             // a Cyrillic Namespace And building Using MSBuild.)
@@ -146,7 +147,8 @@ class X
 
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (4,13): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,13): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     private Blah q;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Blah").WithArguments("Blah"),
                 // (8,9): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
@@ -200,15 +202,18 @@ namespace N.;
                 // namespace N.;
                 Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "N.")
                     .WithLocation(13, 11),
-                // (4,16): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,16): error CS0246: The type or namespace name 'Blah' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //         public Blah field;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Blah")
                     .WithArguments("Blah")
                     .WithLocation(4, 16),
-                // (8,13): error CS0198: A static readonly field cannot be assigned to (except in a static constructor or a variable initializer)
+                // (8,13): error CS0198: A static readonly field cannot be assigned to (except in a static
+                // constructor or a variable initializer)
                 //             ro = 4;
                 Diagnostic(ErrorCode.ERR_AssgReadonlyStatic, "ro").WithLocation(8, 13),
-                // (4,21): warning CS0649: Field 'X.field' is never assigned to, and will always have its default value null
+                // (4,21): warning CS0649: Field 'X.field' is never assigned to, and will always have its default
+                // value null
                 //         public Blah field;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                     .WithArguments("N.X.field", "null")
@@ -444,12 +449,14 @@ namespace Goo.Bar
             // This should not fail the emit (as it's a warning).
             Assert.True(emitResult.Success);
             emitResult.Diagnostics.Verify(
-                // (5,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element 'summary'.'
+                // (5,1): warning CS1570: XML comment has badly formed XML -- 'Expected an end tag for element
+                // 'summary'.'
                 //     public class Test1
                 Diagnostic(ErrorCode.WRN_XMLParseError, "")
                     .WithArguments("summary")
                     .WithLocation(5, 1),
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member
+                // 'Test1.SayHello()'
                 //         public static void SayHello()
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
                     .WithArguments("Goo.Bar.Test1.SayHello()")
@@ -517,7 +524,8 @@ namespace Goo.Bar
                 // (4,29): warning CS1574: XML comment has cref attribute 'T' that could not be resolved
                 //     /// <summary><see cref="T"/></summary>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "T").WithArguments("T").WithLocation(4, 29),
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member
+                // 'Test1.SayHello()'
                 //         public static void SayHello()
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
                     .WithArguments("Goo.Bar.Test1.SayHello()")
@@ -584,7 +592,8 @@ namespace Goo.Bar
             // This should not fail the emit (as it's a warning).
             Assert.True(emitResult.Success);
             emitResult.Diagnostics.Verify(
-                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member 'Test1.SayHello()'
+                // (7,28): warning CS1591: Missing XML comment for publicly visible type or member
+                // 'Test1.SayHello()'
                 //         public static void SayHello()
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "SayHello")
                     .WithArguments("Goo.Bar.Test1.SayHello()")
@@ -1012,7 +1021,8 @@ public class C : Base
                         "System.Int32 C.Property { internal get; set; }",
                     }
                 );
-                // A getter is synthesized on C.Property so that it can be marked as sealed. It is emitted despite being internal because it is virtual.
+                // A getter is synthesized on C.Property so that it can be marked as sealed. It is emitted despite
+                // being internal because it is virtual.
                 VerifyMethods(
                     metadataOutput,
                     "C",
@@ -1506,7 +1516,8 @@ public class D
 
             // The ref assembly produced by refout has more types than that produced by refonly,
             // because refout will bind the method bodies (and therefore populate more referenced types).
-            // This will be refined in the future. Follow-up issue: https://github.com/dotnet/roslyn/issues/19403
+            // This will be refined in the future. Follow-up issue:
+            // https://github.com/dotnet/roslyn/issues/19403
             void verifyNoPia(ImmutableArray<byte> image, bool expectMissing)
             {
                 var reference = CompilationVerifier.LoadTestEmittedExecutableForSymbolValidation(
@@ -1896,7 +1907,8 @@ public static class Extensions
 }",
                 comp =>
                     comp.VerifyDiagnostics(
-                        // (12,9): error CS8329: Cannot use variable 'y' as a ref or out value because it is a readonly variable
+                        // (12,9): error CS8329: Cannot use variable 'y' as a ref or out value because it is a readonly
+                        // variable
                         //         y.R_extension(); // error 1
                         Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "y")
                             .WithArguments("variable", "y")
@@ -1931,7 +1943,8 @@ public struct S
 }",
                 comp =>
                     comp.VerifyDiagnostics(
-                        // (7,45): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                        // (7,45): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                        // managed type ('S')
                         //             System.Console.WriteLine(sizeof(S*));
                         Diagnostic(ErrorCode.WRN_ManagedAddr, "S*")
                             .WithArguments("S")
@@ -2062,7 +2075,8 @@ class Derived : Base
 }",
                 comp =>
                     comp.VerifyDiagnostics(
-                        // (7,16): error CS0266: Cannot implicitly convert type 'I<Base>' to 'I<Derived>'. An explicit conversion exists (are you missing a cast?)
+                        // (7,16): error CS0266: Cannot implicitly convert type 'I<Base>' to 'I<Derived>'. An explicit
+                        // conversion exists (are you missing a cast?)
                         //         return x;
                         Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                             .WithArguments("I<Base>", "I<Derived>")
@@ -2132,7 +2146,8 @@ class Derived : Base
 }",
                 comp =>
                     comp.VerifyDiagnostics(
-                        // (7,16): error CS0266: Cannot implicitly convert type 'I<Derived>' to 'I<Base>'. An explicit conversion exists (are you missing a cast?)
+                        // (7,16): error CS0266: Cannot implicitly convert type 'I<Derived>' to 'I<Base>'. An explicit
+                        // conversion exists (are you missing a cast?)
                         //         return x;
                         Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                             .WithArguments("I<Derived>", "I<Base>")
@@ -2363,7 +2378,8 @@ public struct Container<T>
 }",
                 comp =>
                     comp.VerifyDiagnostics(
-                        // (3,29): error CS0523: Struct member 'Usage.x' of type 'Container<Usage>' causes a cycle in the struct layout
+                        // (3,29): error CS0523: Struct member 'Usage.x' of type 'Container<Usage>' causes a cycle in the
+                        // struct layout
                         //     public Container<Usage> x;
                         Diagnostic(ErrorCode.ERR_StructLayoutCycle, "x")
                             .WithArguments("Usage.x", "Container<Usage>")
@@ -2400,7 +2416,8 @@ public abstract class C1
                 EmitOptions.Default.WithEmitMetadataOnly(true).WithIncludePrivateMembers(false)
             );
 
-            // If internal virtual methods were not included in ref assemblies, then C3 could not be concrete and would report
+            // If internal virtual methods were not included in ref assemblies, then C3 could not be concrete
+            // and would report
             // error CS0534: 'C3' does not implement inherited abstract member 'C1.M()'
 
             var comp3 = CreateCSharpCompilation(
@@ -2456,7 +2473,8 @@ public struct S
             int debugFlag = -1
         )
         {
-            // Whether the library is compiled in full, as metadata-only, or as a ref assembly should be transparent
+            // Whether the library is compiled in full, as metadata-only, or as a ref assembly should be
+            // transparent
             // to the client and the validator should be able to verify the same expectations.
 
             if (debugFlag == -1 || debugFlag == 0)
@@ -2530,7 +2548,8 @@ public struct S
             VerifyIdentitiesMatch(out1, refOnly1);
             AssertEx.Equal(refOut1, refOut1);
 
-            // The resolution of the PE header time date stamp is seconds (divided by two), and we want to make sure that has an opportunity to change
+            // The resolution of the PE header time date stamp is seconds (divided by two), and we want to make
+            // sure that has an opportunity to change
             // between calls to Emit.
             Thread.Sleep(TimeSpan.FromSeconds(3));
 
@@ -2830,8 +2849,10 @@ public class PublicClass
                     .Select(a => a.AttributeClass.ToTestDisplayString())
             );
 
-            // Verify metadata (types, members, attributes) of the regular assembly with IncludePrivateMembers accidentally set to false.
-            // Note this can happen because of binary clients compiled against old EmitOptions ctor which had IncludePrivateMembers=false by default.
+            // Verify metadata (types, members, attributes) of the regular assembly with IncludePrivateMembers
+            // accidentally set to false.
+            // Note this can happen because of binary clients compiled against old EmitOptions ctor which had
+            // IncludePrivateMembers=false by default.
             // In this case, IncludePrivateMembers is silently set to true when emitting
             // See https://github.com/dotnet/roslyn/issues/20873
             var emitRegularWithoutPrivateMembers = EmitOptions.Default.WithIncludePrivateMembers(
@@ -4552,7 +4573,8 @@ class C
                 new[] { Net20.mscorlib }
             );
 
-            //EDMAURER this is built with a 2.0 mscorlib. The runtimeMetadataVersion should be the same as the runtimeMetadataVersion stored in the assembly
+            //EDMAURER this is built with a 2.0 mscorlib. The runtimeMetadataVersion should be the same as the
+            // runtimeMetadataVersion stored in the assembly
             //that contains System.Object.
             var metadataReader = ModuleMetadata
                 .CreateFromStream(compilation.EmitToStream())
@@ -4703,7 +4725,8 @@ class C
             Assert.Equal(4, peHeaders.PEHeader.MajorSubsystemVersion);
             Assert.Equal(0, peHeaders.PEHeader.MinorSubsystemVersion);
 
-            //The following ensure that the runtime startup stub was not emitted. It is not needed on modern operating systems.
+            //The following ensure that the runtime startup stub was not emitted. It is not needed on modern
+            // operating systems.
             Assert.Equal(0, peHeaders.PEHeader.ImportAddressTableDirectory.RelativeVirtualAddress);
             Assert.Equal(0, peHeaders.PEHeader.ImportAddressTableDirectory.Size);
             Assert.Equal(0, peHeaders.PEHeader.ImportTableDirectory.RelativeVirtualAddress);
@@ -4748,7 +4771,8 @@ class C
             Assert.Equal(0x01c4, (ushort)peHeaders.CoffHeader.Machine);
             Assert.Equal(6, peHeaders.PEHeader.MajorSubsystemVersion); //Arm targets only run on 6.2 and above
             Assert.Equal(2, peHeaders.PEHeader.MinorSubsystemVersion);
-            //The following ensure that the runtime startup stub was not emitted. It is not needed on modern operating systems.
+            //The following ensure that the runtime startup stub was not emitted. It is not needed on modern
+            // operating systems.
             Assert.Equal(0, peHeaders.PEHeader.ImportAddressTableDirectory.RelativeVirtualAddress);
             Assert.Equal(0, peHeaders.PEHeader.ImportAddressTableDirectory.Size);
             Assert.Equal(0, peHeaders.PEHeader.ImportTableDirectory.RelativeVirtualAddress);
@@ -4795,7 +4819,8 @@ class C
             Assert.Equal(0x00100000u, peHeaders.PEHeader.SizeOfHeapReserve);
             Assert.Equal(0x1000u, peHeaders.PEHeader.SizeOfHeapCommit);
 
-            //The following ensure that the runtime startup stub was emitted. It is not needed on modern operating systems.
+            //The following ensure that the runtime startup stub was emitted. It is not needed on modern
+            // operating systems.
             Assert.NotEqual(
                 0,
                 peHeaders.PEHeader.ImportAddressTableDirectory.RelativeVirtualAddress
@@ -5613,7 +5638,8 @@ class C
     {
     }
 }";
-            // Setting the CompilationOption.AllowUnsafe causes an entry to be inserted into the DeclSecurity table
+            // Setting the CompilationOption.AllowUnsafe causes an entry to be inserted into the DeclSecurity
+            // table
             var compilation = CreateCompilation(source, options: TestOptions.UnsafeReleaseDll);
             CompileAndVerify(
                 compilation,
@@ -5669,7 +5695,8 @@ class C
     {
     }
 }";
-            // Setting the CompilationOption.AllowUnsafe causes an entry to be inserted into the DeclSecurity table
+            // Setting the CompilationOption.AllowUnsafe causes an entry to be inserted into the DeclSecurity
+            // table
             var compilation = CreateCompilation(
                 source,
                 options: TestOptions.ReleaseDll.WithOutputKind(OutputKind.NetModule)
@@ -5712,7 +5739,9 @@ class C
 
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics(
-                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
                     .WithArguments(
@@ -5784,14 +5813,18 @@ class C
             // The attributes have the SecurityAction, so they should be merged into a single permission set.
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics(
-                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestMinimum, RemotingConfiguration = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
                     .WithArguments(
                         "System.Security.Permissions.SecurityAction.RequestMinimum",
                         "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
                     ),
-                // (6,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (6,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestMinimum, UnmanagedCode = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
                     .WithArguments(
@@ -5878,17 +5911,22 @@ class C
     {
     }
 }";
-            // The attributes have different SecurityActions, so they should not be merged into a single permission set.
+            // The attributes have different SecurityActions, so they should not be merged into a single
+            // permission set.
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseDll);
             compilation.VerifyDiagnostics(
-                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestOptional, RemotingConfiguration = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
                     .WithArguments(
                         "System.Security.Permissions.SecurityAction.RequestOptional",
                         "Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information."
                     ),
-                // (6,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (6,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestMinimum, UnmanagedCode = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
                     .WithArguments(
@@ -5986,7 +6024,9 @@ class C
             // The attributes have the SecurityAction, so they should be merged into a single permission set.
             var compilation = CreateCompilation(source, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestMinimum' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestMinimum, RemotingConfiguration = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestMinimum")
                     .WithArguments(
@@ -6073,10 +6113,13 @@ class C
     {
     }
 }";
-            // The attributes have different SecurityActions, so they should not be merged into a single permission set.
+            // The attributes have different SecurityActions, so they should not be merged into a single
+            // permission set.
             var compilation = CreateCompilation(source, options: TestOptions.UnsafeReleaseDll);
             compilation.VerifyDiagnostics(
-                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete: 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default. See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
+                // (5,31): warning CS0618: 'System.Security.Permissions.SecurityAction.RequestOptional' is obsolete:
+                // 'Assembly level declarative security is obsolete and is no longer enforced by the CLR by default.
+                // See http://go.microsoft.com/fwlink/?LinkID=155570 for more information.'
                 // [assembly: SecurityPermission(SecurityAction.RequestOptional, RemotingConfiguration = true)]
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "SecurityAction.RequestOptional")
                     .WithArguments(
@@ -6241,7 +6284,8 @@ class Program
 ";
             var comp = CreateCompilation(text, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (7,18): warning CS0665: Assignment in conditional expression is always constant; did you mean to use == instead of = ?
+                    // (7,18): warning CS0665: Assignment in conditional expression is always constant; did you mean to
+                    // use == instead of = ?
                     //         int s = (b = false) ? 5 : 100; 		// Warning
                     Diagnostic(ErrorCode.WRN_IncorrectBooleanAssg, "b = false"),
                     // (6,14): warning CS0219: The variable 'b' is assigned but its value is never used
@@ -6327,7 +6371,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6343,7 +6388,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6359,7 +6405,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6375,7 +6422,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6434,7 +6482,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // error CS8010: Agnostic assembly cannot have a processor specific module 'PlatformMismatch.netmodule'.
+                // error CS8010: Agnostic assembly cannot have a processor specific module
+                // 'PlatformMismatch.netmodule'.
                 Diagnostic(ErrorCode.ERR_AgnosticToMachineModule)
                     .WithArguments("PlatformMismatch.netmodule")
             );
@@ -6448,7 +6497,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // error CS8011: Assembly and module 'PlatformMismatch.netmodule' cannot target different processors.
+                // error CS8011: Assembly and module 'PlatformMismatch.netmodule' cannot target different
+                // processors.
                 Diagnostic(ErrorCode.ERR_ConflictingMachineModule)
                     .WithArguments("PlatformMismatch.netmodule")
             );
@@ -6506,7 +6556,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6522,7 +6573,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6538,7 +6590,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6554,7 +6607,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' targets a different processor.
+                // warning CS8012: Referenced assembly 'PlatformMismatch, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null' targets a different processor.
                 Diagnostic(ErrorCode.WRN_ConflictingMachineAssembly)
                     .WithArguments(
                         "PlatformMismatch, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -6603,7 +6657,8 @@ public interface IUsePlatform
 
             useCompilation.VerifyEmitDiagnostics(
                 emitOptions,
-                // error CS8011: Assembly and module 'PlatformMismatch.netmodule' cannot target different processors.
+                // error CS8011: Assembly and module 'PlatformMismatch.netmodule' cannot target different
+                // processors.
                 Diagnostic(ErrorCode.ERR_ConflictingMachineModule)
                     .WithArguments("PlatformMismatch.netmodule")
             );
@@ -7108,10 +7163,13 @@ public class Program
                 options: TestOptions.ReleaseExe,
                 references: new[] { ref1, ref2 }
             );
-            // Before the bug was fixed, the PrivateImplementationDetails classes clashed, resulting in the commented-out error below.
+            // Before the bug was fixed, the PrivateImplementationDetails classes clashed, resulting in the
+            // commented-out error below.
             comp3.VerifyDiagnostics(
-            ////// error CS0101: The namespace '<global namespace>' already contains a definition for '<PrivateImplementationDetails>'
-            ////Diagnostic(ErrorCode.ERR_DuplicateNameInNS).WithArguments("<PrivateImplementationDetails>", "<global namespace>").WithLocation(1, 1)
+            ////// error CS0101: The namespace '<global namespace>' already contains a definition for
+            // '<PrivateImplementationDetails>'
+            ////Diagnostic(ErrorCode.ERR_DuplicateNameInNS).WithArguments("<PrivateImplementationDetails>",
+            // "<global namespace>").WithLocation(1, 1)
             );
             CompileAndVerify(comp3, expectedOutput: "Hello, world!");
         }
@@ -7406,12 +7464,14 @@ public class DerivingClass<T> : BaseClass<T>
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (11,26): warning CS0809: Obsolete member 'DerivingClass<T>.Method(T)' overrides non-obsolete member 'BaseClass<T>.Method(T)'
+                // (11,26): warning CS0809: Obsolete member 'DerivingClass<T>.Method(T)' overrides non-obsolete
+                // member 'BaseClass<T>.Method(T)'
                 //     public override void Method(T input)
                 Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "Method")
                     .WithArguments("DerivingClass<T>.Method(T)", "BaseClass<T>.Method(T)")
                     .WithLocation(11, 26),
-                // (11,26): error CS0508: 'DerivingClass<T>.Method(T)': return type must be 'int' to match overridden member 'BaseClass<T>.Method(T)'
+                // (11,26): error CS0508: 'DerivingClass<T>.Method(T)': return type must be 'int' to match
+                // overridden member 'BaseClass<T>.Method(T)'
                 //     public override void Method(T input)
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "Method")
                     .WithArguments("DerivingClass<T>.Method(T)", "BaseClass<T>.Method(T)", "int")

@@ -9,9 +9,9 @@ namespace T
     {
         public static int Main()
         {
-            /*
-            Console.WriteLine ("address is " + IPAddress.NetworkToHostOrder (0x0100007f).ToString("X"));
-            */
+/*
+Console.WriteLine ("address is " + IPAddress.NetworkToHostOrder (0x0100007f).ToString("X"));
+*/
 
             IPAddress testadd = IPAddress.Parse("127.0.0.1");
             Console.WriteLine("address is " + testadd.Address.ToString("X"));

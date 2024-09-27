@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for
+// license information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -29,11 +30,13 @@ namespace System.Json
         /// objects of type <see cref="System.Json.JsonValue"/>.
         /// </summary>
         /// <param name="items">The <see cref="System.Collections.Generic.IEnumerable{T}"/> enumeration
-        /// of objects of type <see cref="System.Json.JsonValue"/> used to initialize the JavaScript Object Notation (JSON)
+        /// of objects of type <see cref="System.Json.JsonValue"/> used to initialize the JavaScript Object
+        // Notation (JSON)
         /// array.</param>
         /// <exception cref="System.ArgumentNullException">If items is null.</exception>
         /// <exception cref="System.ArgumentException">If any of the items in the collection
-        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
+        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/>
+        // property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
         public JsonArray(IEnumerable<JsonValue> items)
         {
@@ -41,12 +44,14 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Creates an instance of the <see cref="System.Json.JsonArray"/> class, initialized by an array of type <see cref="System.Json.JsonValue"/>.
+        /// Creates an instance of the <see cref="System.Json.JsonArray"/> class, initialized by an array of
+        // type <see cref="System.Json.JsonValue"/>.
         /// </summary>
         /// <param name="items">The array of type <see cref="System.Json.JsonValue"/> used to initialize the
         /// JavaScript Object Notation (JSON) array.</param>
         /// <exception cref="System.ArgumentException">If any of the items in the collection
-        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
+        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/>
+        // property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
         public JsonArray(params JsonValue[] items)
         {
@@ -86,7 +91,8 @@ namespace System.Json
         /// </summary>
         /// <param name="index">The zero-based index of the element to get or set.</param>
         /// <returns>The <see cref="System.Json.JsonValue"/> element at the specified index.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException">If index is not a valid index for this array.</exception>
+        /// <exception cref="System.ArgumentOutOfRangeException">If index is not a valid index for this
+        // array.</exception>
         /// <exception cref="System.ArgumentException">The property is set and the value is a
         /// <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/>
         /// property of value <see cref="F:System.Json.JsonType.Default"/>.</exception>
@@ -111,12 +117,14 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Adds the elements from a collection of type <see cref="System.Json.JsonValue"/> to this instance.
+        /// Adds the elements from a collection of type <see cref="System.Json.JsonValue"/> to this
+        // instance.
         /// </summary>
         /// <param name="items">Collection of items to add.</param>
         /// <exception cref="System.ArgumentNullException">If items is null.</exception>
         /// <exception cref="System.ArgumentException">If any of the items in the collection
-        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
+        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/>
+        // property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
         public void AddRange(IEnumerable<JsonValue> items)
         {
@@ -155,7 +163,8 @@ namespace System.Json
         /// <param name="items">The array of type JsonValue to be added to this instance.</param>
         /// <exception cref="System.ArgumentNullException">If items is null.</exception>
         /// <exception cref="System.ArgumentException">If any of the items in the array
-        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/> property of
+        /// is a <see cref="System.Json.JsonValue"/> with <see cref="System.Json.JsonValue.JsonType"/>
+        // property of
         /// value <see cref="F:System.Json.JsonType.Default"/>.</exception>
         public void AddRange(params JsonValue[] items)
         {
@@ -202,7 +211,8 @@ namespace System.Json
         /// <summary>
         /// Remove the JSON value at a specified index of <see cref="System.Json.JsonArray"/>.
         /// </summary>
-        /// <param name="index">The zero-based index at which to remove the <see cref="System.Json.JsonValue"/>.</param>
+        /// <param name="index">The zero-based index at which to remove the <see
+        // cref="System.Json.JsonValue"/>.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">If index is less than zero or index
         /// is equal or larger than the size of the array.</exception>
         public void RemoveAt(int index)
@@ -250,7 +260,8 @@ namespace System.Json
         /// Checks whether a specified JSON CLR type is in the <see cref="System.Json.JsonArray"/>.
         /// </summary>
         /// <param name="item">The <see cref="System.Json.JsonValue"/> to check for in the array.</param>
-        /// <returns>true if item is found in the <see cref="System.Json.JsonArray"/>; otherwise, false.</returns>
+        /// <returns>true if item is found in the <see cref="System.Json.JsonArray"/>; otherwise,
+        // false.</returns>
         public bool Contains(JsonValue item)
         {
             return values.Contains(item);
@@ -272,7 +283,8 @@ namespace System.Json
         /// <summary>
         /// Removes the first occurrence of the specified JSON value from the array.
         /// </summary>
-        /// <param name="item">The <see cref="System.Json.JsonValue"/> to remove from the <see cref="System.Json.JsonArray"/>.</param>
+        /// <param name="item">The <see cref="System.Json.JsonValue"/> to remove from the <see
+        // cref="System.Json.JsonArray"/>.</param>
         /// <returns>true if item is successfully removed; otherwise, false. This method
         /// also returns false if item was not found in the <see cref="System.Json.JsonArray"/>.</returns>
         public bool Remove(JsonValue item)
@@ -298,10 +310,12 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the <see cref="System.Json.JsonValue"/> objects in the array.
+        /// Returns an enumerator that iterates through the <see cref="System.Json.JsonValue"/> objects in
+        // the array.
         /// </summary>
         /// <returns>Returns an <see cref="System.Collections.IEnumerator"/> object that
-        /// iterates through the <see cref="System.Json.JsonValue"/> elements in this <see cref="System.Json.JsonArray"/>.</returns>
+        /// iterates through the <see cref="System.Json.JsonValue"/> elements in this <see
+        // cref="System.Json.JsonArray"/>.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return values.GetEnumerator();
@@ -326,10 +340,12 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Returns an enumerator that iterates through the <see cref="System.Json.JsonValue"/> objects in the array.
+        /// Returns an enumerator that iterates through the <see cref="System.Json.JsonValue"/> objects in
+        // the array.
         /// </summary>
         /// <returns>Returns an <see cref="System.Collections.Generic.IEnumerator{T}"/> object that
-        /// iterates through the <see cref="System.Json.JsonValue"/> elements in this <see cref="System.Json.JsonArray"/>.</returns>
+        /// iterates through the <see cref="System.Json.JsonValue"/> elements in this <see
+        // cref="System.Json.JsonArray"/>.</returns>
         public new IEnumerator<JsonValue> GetEnumerator()
         {
             return values.GetEnumerator();
@@ -338,7 +354,8 @@ namespace System.Json
         /// <summary>
         /// Returns an enumerator which iterates through the values in this object.
         /// </summary>
-        /// <returns>An <see cref="System.Collections.Generic.IEnumerator{T}"/> which iterates through the values in this object.</returns>
+        /// <returns>An <see cref="System.Collections.Generic.IEnumerator{T}"/> which iterates through the
+        // values in this object.</returns>
         /// <remarks>The enumerator returned by this class contains one pair for each element
         /// in this array, whose key is the element index (as a string), and the value is the
         /// element itself.</remarks>

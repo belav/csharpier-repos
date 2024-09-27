@@ -104,8 +104,10 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_PASS;
         }
 
-        //[Variation(Pri = 2, Desc = "MaxCharactersFromEntities: set negative values, get default", Param = 1)]
-        //[Variation(Pri = 2, Desc = "MaxCharactersFromEntities: set max negative values, get default", Param = 2)]
+        //[Variation(Pri = 2, Desc = "MaxCharactersFromEntities: set negative values, get default", Param =
+        // 1)]
+        //[Variation(Pri = 2, Desc = "MaxCharactersFromEntities: set max negative values, get default",
+        // Param = 2)]
         public int v9()
         {
             long param = -1;
@@ -135,8 +137,10 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_FAIL;
         }
 
-        //[Variation(Pri = 2, Desc = "MaxCharactersInDocument: set negative values, get default", Param = 1)]
-        //[Variation(Pri = 2, Desc = "MaxCharactersInDocument: set huge negative values, get default", Param = 2)]
+        //[Variation(Pri = 2, Desc = "MaxCharactersInDocument: set negative values, get default", Param =
+        // 1)]
+        //[Variation(Pri = 2, Desc = "MaxCharactersInDocument: set huge negative values, get default", Param
+        // = 2)]
         public int v10()
         {
             long param = -1;
@@ -167,26 +171,47 @@ namespace System.Xml.ReaderSettingsTests
         }
 
         //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A />"})]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root><!--\uD812\uDD12--></Root>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<a:A xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book 'a&a'>]><doc>&book;</doc>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE doc [  <!ELEMENT doc ANY>  <!ENTITY book 'a%a'>]><doc>&book;</doc>  " })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE root [<!ELEMENT root ANY><!ENTITY e '\uD812\uDD12'>]><root>&e;</root>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<root>va&lt;/root&gt;lue</root>" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root a='b&quot;c' />" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root a='                                      &#x9;&#xD;&#xA;' />" })]
-        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] {
+        // "<A>truck</A>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] {
+        // "<Root><!--\uD812\uDD12--></Root>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] {
+        // "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] {
+        // "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<a:A
+        // xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A
+        // xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[tralala]]></A>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<A attr='1'
+        // a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE
+        // doc [  <!ELEMENT doc ANY>  <!ENTITY book 'a&a'>]><doc>&book;</doc>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE
+        // doc [  <!ELEMENT doc ANY>  <!ENTITY book 'a%a'>]><doc>&book;</doc>  " })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<?xml
+        // version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c
+        // ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE
+        // ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE
+        // root [<!ELEMENT root ANY><!ENTITY e '\uD812\uDD12'>]><root>&e;</root>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<!DOCTYPE
+        // root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] {
+        // "<root>va&lt;/root&gt;lue</root>" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root
+        // a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root
+        // a='b&quot;c' />" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root a='
+        // &#x9;&#xD;&#xA;' />" })]
+        //[Variation(Pri = 2, Desc = "MaxEnt = 1, MaxDoc = length - 1", Params = new object[] { "<Root
+        // foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
         public int v20()
         {
             string xml = CurVariation.Params[0] as string;
@@ -211,21 +236,36 @@ namespace System.Xml.ReaderSettingsTests
         }
 
         //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root><!--\uD812\uDD12--></Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<a:A xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<!DOCTYPE root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<root>va&lt;/root&gt;lue</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root a='b&quot;c' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root a='                                      &#x9;&#xD;&#xA;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] {
+        // "<A>truck</A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] {
+        // "<Root><!--\uD812\uDD12--></Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] {
+        // "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] {
+        // "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<a:A
+        // xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A
+        // xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[tralala]]></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<A attr='1'
+        // a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<!DOCTYPE
+        // root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] {
+        // "<root>va&lt;/root&gt;lue</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root
+        // a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root
+        // a='b&quot;c' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root a='
+        // &#x9;&#xD;&#xA;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc = length", Params = new object[] { "<Root
+        // foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
         public int v30()
         {
             string xml = CurVariation.Params[0] as string;
@@ -249,21 +289,36 @@ namespace System.Xml.ReaderSettingsTests
         }
 
         //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root><!--\uD812\uDD12--></Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<a:A xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<!DOCTYPE root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<root>va&lt;/root&gt;lue</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root a='b&quot;c' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root a='                                      &#x9;&#xD;&#xA;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A>truck</A>"
+        // })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] {
+        // "<Root><!--\uD812\uDD12--></Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] {
+        // "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] {
+        // "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<a:A
+        // xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A
+        // xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[tralala]]></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<A attr='1'
+        // a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<!DOCTYPE
+        // root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] {
+        // "<root>va&lt;/root&gt;lue</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root a='&amp;'
+        // b='&amp;#65;' c='&amp;#x43;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root
+        // a='b&quot;c' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root a='
+        // &#x9;&#xD;&#xA;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 1, MaxDoc = length", Params = new object[] { "<Root
+        // foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
         public int v40()
         {
             string xml = CurVariation.Params[0] as string;
@@ -286,20 +341,34 @@ namespace System.Xml.ReaderSettingsTests
 
         //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A />" })]
         //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root><!--\uD812\uDD12--></Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<a:A xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<!DOCTYPE root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<root>va&lt;/root&gt;lue</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='b&quot;c' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='                                      &#x9;&#xD;&#xA;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] {
+        // "<Root><!--\uD812\uDD12--></Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] {
+        // "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] {
+        // "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<a:A xmlns:a='a'><C
+        // xmlns:p='nsc' /><B /></a:A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A
+        // xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[tralala]]></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<A attr='1' a2='a2'
+        // a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<!DOCTYPE
+        // root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] {
+        // "<root>va&lt;/root&gt;lue</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='&amp;'
+        // b='&amp;#65;' c='&amp;#x43;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='b&quot;c'
+        // />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root a='
+        // &#x9;&#xD;&#xA;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt = 0, MaxDoc = 0", Params = new object[] { "<Root foo='&amp;
+        // &lt; &gt; &quot; &apos; &#65;'/>" })]
         public int v50()
         {
             string xml = CurVariation.Params[0] as string;
@@ -320,21 +389,36 @@ namespace System.Xml.ReaderSettingsTests
         }
 
         //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A>truck</A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root><!--\uD812\uDD12--></Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<a:A xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A xmlns='ns0'><![CDATA[tralala]]></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A attr='1' a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<!DOCTYPE root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<root>va&lt;/root&gt;lue</root>" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root a='b&quot;c' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root a='                                      &#x9;&#xD;&#xA;' />" })]
-        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] {
+        // "<A>truck</A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] {
+        // "<Root><!--\uD812\uDD12--></Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] {
+        // "<Root>&#x58341;<Elem>&#xCFE44;</Elem>&#x18022;</Root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] {
+        // "<X>t0<A>truck</A>t00</X>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<a:A
+        // xmlns:a='a'><C xmlns:p='nsc' /><B /></a:A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A
+        // xmlns:p='nsc'><p:C xmlns:a='a'><a:S /></p:C><B /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[tralala]]></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A
+        // xmlns='ns0'><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<A attr='1'
+        // a2='a2' a3='a3' xmlns='def' xmlns:p='ns' p:a3='pa3' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<!DOCTYPE
+        // root[<!ENTITY x 'somevalue'><!ELEMENT root ANY>]><root>value&amp;x;</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] {
+        // "<root>va&lt;/root&gt;lue</root>" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root
+        // a='&amp;' b='&amp;#65;' c='&amp;#x43;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root
+        // a='b&quot;c' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root a='
+        // &#x9;&#xD;&#xA;' />" })]
+        //[Variation(Pri = 0, Desc = "MaxEnt not set, MaxDoc not set", Params = new object[] { "<Root
+        // foo='&amp; &lt; &gt; &quot; &apos; &#65;'/>" })]
         public int v60()
         {
             string xml = CurVariation.Params[0] as string;
@@ -359,13 +443,24 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_PASS;
         }
 
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>" })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>" })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "" })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c ANY> <!ENTITY a '<a>&amp;</a>'>]><test>&a;<test>" })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "<q = 'a'/>" })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { string.Format("<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>", Environment.NewLine) })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { "<root><!--comment \uD812><!--comment \uD812>-->--></root>" })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>" })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY>
+        // <!ELEMENT c ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>" })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] { ""
+        // })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY>
+        // <!ELEMENT c ANY> <!ENTITY a '<a>&amp;</a>'>]><test>&a;<test>" })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // "<q = 'a'/>" })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // string.Format("<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x
+        // xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"
+        // n2:a=\"2\" /></x>", Environment.NewLine) })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = bigVal, MaxDoc = bigVal", Params = new object[] {
+        // "<root><!--comment \uD812><!--comment \uD812>-->--></root>" })]
         public int v260()
         {
             string xml = CurVariation.Params[0] as string;
@@ -391,12 +486,22 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_FAIL;
         }
 
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<!DOCTYPE ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>", 10 })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>", 25 })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<?xml version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c ANY> <!ENTITY a '<a>&amp;</a>'>]><test>&a;<test>", 26 })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<q = 'a'/>", 5 })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { string.Format("<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"  n2:a=\"2\" /></x>", Environment.NewLine), 35 })]
-        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<root><!--comment \uD812><!--comment \uD812>-->--></root>", 18 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<!DOCTYPE
+        // ROOT [<!ENTITY a '&a;'>]><ROOT att='&a;'/>", 10 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<?xml
+        // version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c
+        // ANY> <!ENTITY a '<a>&a;</a>'>]><test>&a;</test>", 25 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<?xml
+        // version='1.0'?><!DOCTYPE test [ <!ELEMENT test ANY> <!ELEMENT a ANY> <!ELEMENT b ANY> <!ELEMENT c
+        // ANY> <!ENTITY a '<a>&amp;</a>'>]><test>&a;<test>", 26 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] { "<q =
+        // 'a'/>", 5 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] {
+        // string.Format("<!-- http://www.w3.org is bound to n1 and n2 -->{0}<x
+        // xmlns:n1=\"http://www.w3.org\"{0}   xmlns:n2=\"http://www.w3.org\" >{0}   <bad n1:a=\"1\"
+        // n2:a=\"2\" /></x>", Environment.NewLine), 35 })]
+        //[Variation(Pri = 2, Desc = "nwf xml: MaxEnt = 1, MaxDoc = val", Params = new object[] {
+        // "<root><!--comment \uD812><!--comment \uD812>-->--></root>", 18 })]
         public int v270()
         {
             string xml = CurVariation.Params[0] as string;

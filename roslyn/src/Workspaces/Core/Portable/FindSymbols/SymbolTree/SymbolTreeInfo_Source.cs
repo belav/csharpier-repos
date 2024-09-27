@@ -53,8 +53,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         /// <summary>
-        /// Loads any info we have for this project from our persistence store.  Will succeed regardless of the
-        /// checksum of the <paramref name="project"/>.  Should only be used by clients that are ok with potentially
+        /// Loads any info we have for this project from our persistence store.  Will succeed regardless of
+        // the
+        /// checksum of the <paramref name="project"/>.  Should only be used by clients that are ok with
+        // potentially
         /// stale data.
         /// </summary>
         public static async Task<SymbolTreeInfo?> LoadAnyInfoForSourceAssemblyAsync(
@@ -194,7 +196,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ArrayBuilder<BuilderNode> list
         )
         {
-            // Add the node for this name, and record which parent it points at.  And keep track of the index of the
+            // Add the node for this name, and record which parent it points at.  And keep track of the index of
+            // the
             // node we just added.
             var node = new BuilderNode(name, parentIndex);
             var nodeIndex = list.Count;
@@ -204,12 +207,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             using var _ = PooledHashSet<string>.GetInstance(out var seenNames);
             try
             {
-                // Walk the symbols with this name, and add all their child namespaces and types, grouping them together
+                // Walk the symbols with this name, and add all their child namespaces and types, grouping them
+                // together
                 // based on their name.  There may be multiple (for example, Action<T1>, Action<T1, T2>, etc.)
                 foreach (var symbol in symbolsWithSameName)
                     AddChildNamespacesAndTypes(symbol, symbolMap);
 
-                // Now, go through all those groups and make the single mapping from their name to the builder-node we
+                // Now, go through all those groups and make the single mapping from their name to the builder-node
+                // we
                 // just created above, and recurse into their children as well.
                 foreach (var (childName, childSymbols) in symbolMap)
                 {
@@ -217,11 +222,14 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                     GenerateSourceNodes(childName, nodeIndex, childSymbols, list);
                 }
 
-                // The above loops only create nodes for namespaces and types.  we also want nodes for members as well.
-                // However, we do not want to force the symbols for those members to be created just to get the names.
+                // The above loops only create nodes for namespaces and types.  we also want nodes for members as
+                // well.
+                // However, we do not want to force the symbols for those members to be created just to get the
+                // names.
                 //
                 // So walk through the symbols again, and for the named-types grab all the member-names contained
-                // therein.  If we didn't already see that child name when recursing above, then make a builder-node for
+                // therein.  If we didn't already see that child name when recursing above, then make a builder-node
+                // for
                 // it that points to the builder-node we just created above.
 
                 foreach (var symbol in symbolsWithSameName)
@@ -254,7 +262,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             }
             else if (symbol is INamedTypeSymbol namedTypeSymbol)
             {
-                // for named-types, we only need to recurse into child types.  Call GetTypeMembers instead of GetMembers
+                // for named-types, we only need to recurse into child types.  Call GetTypeMembers instead of
+                // GetMembers
                 // so we do not cause all child symbols to be created.
                 foreach (var childType in namedTypeSymbol.GetTypeMembers())
                     symbolMap.Add(childType.Name, childType);

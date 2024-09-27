@@ -69,7 +69,8 @@ namespace System
             bool isDst;
             if (startTime > endTime)
             {
-                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the beginning of next year.
+                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the
+                // beginning of next year.
                 // Note, the summer in the southern hemisphere begins late in the year.
                 isDst = (time < endTime || time >= startTime);
             }

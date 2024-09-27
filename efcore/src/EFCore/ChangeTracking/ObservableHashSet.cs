@@ -8,11 +8,13 @@ using System.ComponentModel;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
-///     A hash set that implements the interfaces required for Entity Framework to use notification based change tracking
+///     A hash set that implements the interfaces required for Entity Framework to use notification
+// based change tracking
 ///     for a collection navigation property.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information and
+///     See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF
+// Core</see> for more information and
 ///     examples.
 /// </remarks>
 /// <typeparam name="T">The type of elements in the hash set.</typeparam>
@@ -117,7 +119,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="item">The element to locate in the hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set contains the specified element; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set contains the specified element; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool Contains(T item) => _set.Contains(item);
 
@@ -136,7 +139,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="item">The element to remove.</param>
     /// <returns>
-    ///     <see langword="true" /> if the element is successfully found and removed; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the element is successfully found and removed; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool Remove(T item)
     {
@@ -185,7 +189,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="item">The element to add to the set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the element is added to the hash set; <see langword="false" /> if the element is already present.
+    ///     <see langword="true" /> if the element is added to the hash set; <see langword="false" /> if
+    // the element is already present.
     /// </returns>
     public virtual bool Add(T item)
     {
@@ -206,7 +211,8 @@ public class ObservableHashSet<T>
     }
 
     /// <summary>
-    ///     Modifies the hash set to contain all elements that are present in itself, the specified collection, or both.
+    ///     Modifies the hash set to contain all elements that are present in itself, the specified
+    // collection, or both.
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     public virtual void UnionWith(IEnumerable<T> other)
@@ -317,7 +323,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set is a subset of other; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set is a subset of other; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool IsSubsetOf(IEnumerable<T> other) => _set.IsSubsetOf(other);
 
@@ -326,7 +333,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set is a proper subset of other; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set is a proper subset of other; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool IsProperSubsetOf(IEnumerable<T> other) => _set.IsProperSubsetOf(other);
 
@@ -335,7 +343,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set is a superset of other; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set is a superset of other; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool IsSupersetOf(IEnumerable<T> other) => _set.IsSupersetOf(other);
 
@@ -344,16 +353,19 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set is a proper superset of other; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set is a proper superset of other; otherwise, <see
+    // langword="false" />.
     /// </returns>
     public virtual bool IsProperSupersetOf(IEnumerable<T> other) => _set.IsProperSupersetOf(other);
 
     /// <summary>
-    ///     Determines whether the current System.Collections.Generic.HashSet`1 object and a specified collection share common elements.
+    ///     Determines whether the current System.Collections.Generic.HashSet`1 object and a specified
+    // collection share common elements.
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set and other share at least one common element; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set and other share at least one common element;
+    // otherwise, <see langword="false" />.
     /// </returns>
     public virtual bool Overlaps(IEnumerable<T> other) => _set.Overlaps(other);
 
@@ -362,7 +374,8 @@ public class ObservableHashSet<T>
     /// </summary>
     /// <param name="other">The collection to compare to the current hash set.</param>
     /// <returns>
-    ///     <see langword="true" /> if the hash set is equal to other; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the hash set is equal to other; otherwise, <see langword="false"
+    // />.
     /// </returns>
     public virtual bool SetEquals(IEnumerable<T> other) => _set.SetEquals(other);
 
@@ -376,7 +389,8 @@ public class ObservableHashSet<T>
     public virtual void CopyTo(T[] array) => _set.CopyTo(array);
 
     /// <summary>
-    ///     Copies the specified number of elements of the hash set to an array, starting at the specified array index.
+    ///     Copies the specified number of elements of the hash set to an array, starting at the
+    // specified array index.
     /// </summary>
     /// <param name="array">
     ///     The one-dimensional array that is the destination of the elements copied from
@@ -392,7 +406,8 @@ public class ObservableHashSet<T>
     ///     from the hash set.
     /// </summary>
     /// <param name="match">
-    ///     The <see cref="Predicate{T}" /> delegate that defines the conditions of the elements to remove.
+    ///     The <see cref="Predicate{T}" /> delegate that defines the conditions of the elements to
+    // remove.
     /// </param>
     /// <returns>The number of elements that were removed from the hash set.</returns>
     public virtual int RemoveWhere(Predicate<T> match)
@@ -420,12 +435,14 @@ public class ObservableHashSet<T>
     }
 
     /// <summary>
-    ///     Gets the <see cref="IEqualityComparer{T}" /> object that is used to determine equality for the values in the set.
+    ///     Gets the <see cref="IEqualityComparer{T}" /> object that is used to determine equality for
+    // the values in the set.
     /// </summary>
     public virtual IEqualityComparer<T> Comparer => _set.Comparer;
 
     /// <summary>
-    ///     Sets the capacity of the hash set to the actual number of elements it contains, rounded up to a nearby,
+    ///     Sets the capacity of the hash set to the actual number of elements it contains, rounded up
+    // to a nearby,
     ///     implementation-specific value.
     /// </summary>
     public virtual void TrimExcess() => _set.TrimExcess();

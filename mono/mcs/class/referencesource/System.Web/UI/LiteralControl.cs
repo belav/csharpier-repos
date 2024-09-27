@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Control that holds a literal string
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Control that holds a literal string
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -128,11 +128,11 @@ namespace System.Web.UI
         }
     }
 
-    /*
-     * Class used to access literal strings stored in a resource (perf optimization).
-     * This class is only public because it needs to be used by the generated classes.
-     * Users should not use directly.
-     */
+/*
+* Class used to access literal strings stored in a resource (perf optimization).
+* This class is only public because it needs to be used by the generated classes.
+* Users should not use directly.
+*/
     internal sealed class ResourceBasedLiteralControl : LiteralControl
     {
         private TemplateControl _tplControl;

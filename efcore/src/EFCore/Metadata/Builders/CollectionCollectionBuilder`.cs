@@ -10,11 +10,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///         Instances of this class are returned from methods when using the <see
+// cref="ModelBuilder" /> API
 ///         and it is not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
@@ -28,10 +30,14 @@ public class CollectionCollectionBuilder<
     where TRightEntity : class
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public CollectionCollectionBuilder(
@@ -73,7 +79,8 @@ public class CollectionCollectionBuilder<
     ///     Configures the join entity type implementing the many-to-many relationship.
     /// </summary>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         Action<EntityTypeBuilder> configureJoinEntityType
     )
@@ -102,7 +109,8 @@ public class CollectionCollectionBuilder<
     /// </summary>
     /// <param name="joinEntityType">The CLR type of the join entity.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         Type joinEntityType,
         Action<EntityTypeBuilder> configureJoinEntityType
@@ -120,7 +128,8 @@ public class CollectionCollectionBuilder<
     /// </summary>
     /// <param name="joinEntityName">The name of the join entity.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
         Action<EntityTypeBuilder> configureJoinEntityType
@@ -139,7 +148,8 @@ public class CollectionCollectionBuilder<
     /// <param name="joinEntityName">The name of the join entity.</param>
     /// <param name="joinEntityType">The CLR type of the join entity.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
@@ -159,7 +169,8 @@ public class CollectionCollectionBuilder<
     /// </summary>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
     >(Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
@@ -179,7 +190,8 @@ public class CollectionCollectionBuilder<
     /// <param name="joinEntityName">The name of the join entity.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
     >(string joinEntityName, Action<EntityTypeBuilder<TJoinEntity>> configureJoinEntityType)
@@ -194,10 +206,13 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join type.</returns>
     public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
@@ -221,11 +236,14 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
     /// <param name="joinEntityName">The name of the join entity.</param>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
     /// <returns>The builder for the join entity type.</returns>
     public virtual EntityTypeBuilder<TJoinEntity> UsingEntity<
@@ -251,12 +269,16 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureLeft,
@@ -271,13 +293,17 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
     /// <param name="joinEntityType">The CLR type of the join entity.</param>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
             Type joinEntityType,
@@ -294,13 +320,17 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
     /// <param name="joinEntityName">The name of the join entity.</param>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
         Func<EntityTypeBuilder, ReferenceCollectionBuilder> configureRight,
@@ -316,14 +346,18 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
     /// <param name="joinEntityName">The name of the join entity.</param>
     /// <param name="joinEntityType">The CLR type of the join entity.</param>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public new virtual EntityTypeBuilder<TRightEntity> UsingEntity(
         string joinEntityName,
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)]
@@ -343,13 +377,17 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
     >(
@@ -374,14 +412,18 @@ public class CollectionCollectionBuilder<
     }
 
     /// <summary>
-    ///     Configures the relationships to the entity types participating in the many-to-many relationship.
+    ///     Configures the relationships to the entity types participating in the many-to-many
+    // relationship.
     /// </summary>
     /// <param name="joinEntityName">The name of the join entity.</param>
-    /// <param name="configureRight">The configuration for the relationship to the right entity type.</param>
-    /// <param name="configureLeft">The configuration for the relationship to the left entity type.</param>
+    /// <param name="configureRight">The configuration for the relationship to the right entity
+    // type.</param>
+    /// <param name="configureLeft">The configuration for the relationship to the left entity
+    // type.</param>
     /// <param name="configureJoinEntityType">The configuration of the join entity type.</param>
     /// <typeparam name="TJoinEntity">The CLR type of the join entity.</typeparam>
-    /// <returns>The builder for the originating entity type so that multiple configuration calls can be chained.</returns>
+    /// <returns>The builder for the originating entity type so that multiple configuration calls can be
+    // chained.</returns>
     public virtual EntityTypeBuilder<TRightEntity> UsingEntity<
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] TJoinEntity
     >(

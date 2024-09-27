@@ -247,7 +247,8 @@ namespace System.Xml.Xsl.IlGen
     }
 
     /// <summary>
-    /// Iterators are joined together, are nested within each other, and reference each other.  This internal class
+    /// Iterators are joined together, are nested within each other, and reference each other.  This
+    // internal class
     /// contains detailed information about iteration next labels, caching, iterator item location, etc.
     /// </summary>
     internal class IteratorDescriptor
@@ -333,7 +334,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Set this iterator's next label and storage.  This iterator will range over a set of values located in
+        /// Set this iterator's next label and storage.  This iterator will range over a set of values
+        // located in
         /// "storage".  To get the next value, jump to "lblNext".
         /// </summary>
         public void SetIterator(Label lblNext, StorageDescriptor storage)
@@ -586,7 +588,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If current item is not already in a local variable, then move it to a local variable of the specified name.
+        /// If current item is not already in a local variable, then move it to a local variable of the
+        // specified name.
         /// </summary>
         public void EnsureLocal(string locName)
         {
@@ -631,7 +634,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Ensure that the iterator's items are not cached, and that the current item is pushed onto the stack.
+        /// Ensure that the iterator's items are not cached, and that the current item is pushed onto the
+        // stack.
         /// </summary>
         public void EnsureStackNoCache()
         {
@@ -640,7 +644,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Ensure that the iterator's items are not cached, and that if the current item is pushed onto the stack,
+        /// Ensure that the iterator's items are not cached, and that if the current item is pushed onto the
+        // stack,
         /// that it is moved to a local variable.
         /// </summary>
         public void EnsureNoStackNoCache(string locName)
@@ -650,7 +655,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Ensure that the iterator's items are not cached, and that if the current item is not already in a local,
+        /// Ensure that the iterator's items are not cached, and that if the current item is not already in
+        // a local,
         /// variable, that it is moved to a local variable of the specified name.
         /// </summary>
         public void EnsureLocalNoCache(string locName)
@@ -660,7 +666,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Ensure that the iterator's items are not cached and that the current item is saved to the specified local variable.
+        /// Ensure that the iterator's items are not cached and that the current item is saved to the
+        // specified local variable.
         /// </summary>
         public void EnsureLocalNoCache(LocalBuilder bldr)
         {
@@ -669,7 +676,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Each XmlQueryType has multiple legal CLR representations.  Ensure that all items returned by this iterator are in
+        /// Each XmlQueryType has multiple legal CLR representations.  Ensure that all items returned by
+        // this iterator are in
         /// the Clr representation specified by "storageTypeDest".
         /// </summary>
         public void EnsureItemStorageType(XmlQueryType xmlType, Type storageTypeDest)

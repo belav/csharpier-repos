@@ -25,7 +25,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">name of the relationship end member</param>
         /// <param name="endRefType">Ref type that this end refers to </param>
         /// <param name="multiplicity">The multiplicity of this relationship end</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if name or endRefType arguments is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if name or endRefType arguments is
+        // null</exception>
         /// <exception cref="System.ArgumentException">Thrown if name argument is empty string</exception>
         internal RelationshipEndMember(
             string name,

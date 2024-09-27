@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the parser for simple web handler files
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* Implements the parser for simple web handler files
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -107,9 +107,9 @@ namespace System.Web.UI
             _virtualPath = VirtualPath.Create(virtualPath);
         }
 
-        /*
-         * Compile a web handler file into a Type.  Result is cached.
-         */
+/*
+* Compile a web handler file into a Type.  Result is cached.
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -227,9 +227,9 @@ namespace System.Web.UI
             // No restriction on the base type by default
         }
 
-        /*
-         * Parse the contents of the TextReader
-         */
+/*
+* Parse the contents of the TextReader
+*/
         private void ParseReader()
         {
             string s = _reader.ReadToEnd();
@@ -244,9 +244,9 @@ namespace System.Web.UI
             }
         }
 
-        /*
-         * Parse the contents of the string
-         */
+/*
+* Parse the contents of the string
+*/
         private void ParseString(string text)
         {
             int textPos = 0;
@@ -391,9 +391,9 @@ namespace System.Web.UI
             }
         }
 
-        /*
-         * Process a <%@ %> block
-         */
+/*
+* Process a <%@ %> block
+*/
         internal virtual void ProcessDirective(string directiveName, IDictionary directive)
         {
             // Empty means default
@@ -488,9 +488,9 @@ namespace System.Web.UI
             );
         }
 
-        /*
-         * Compile a source file into an assembly, and import it
-         */
+/*
+* Compile a source file into an assembly, and import it
+*/
         private void ImportSourceFile(VirtualPath virtualPath)
         {
             // Get a full path to the source file
@@ -514,9 +514,9 @@ namespace System.Web.UI
             AddAssemblyDependency(a);
         }
 
-        /*
-         * Add a file as a dependency for the DLL we're building
-         */
+/*
+* Add a file as a dependency for the DLL we're building
+*/
         internal void AddSourceDependency(VirtualPath fileName)
         {
             if (_sourceDependencies == null)
@@ -540,9 +540,9 @@ namespace System.Web.UI
             _linkedAssemblies.Add(assembly);
         }
 
-        /*
-         * Look for a type by name in the assemblies available to this page
-         */
+/*
+* Look for a type by name in the assemblies available to this page
+*/
         private Type GetType(string typeName)
         {
             Type t;

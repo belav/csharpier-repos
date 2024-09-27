@@ -10,9 +10,12 @@ namespace System.Security.Cryptography
     ///     Safe handle representing a HCRYPTKEY
     /// </summary>
     /// <summary>
-    ///     Since we need to delete the key handle before the provider is released we need to actually hold a
-    ///     pointer to a CRYPT_KEY_CTX unmanaged structure whose destructor decrements a refCount. Only when
-    ///     the provider refCount is 0 it is deleted. This way, we loose a race in the critical finalization
+    ///     Since we need to delete the key handle before the provider is released we need to actually
+    // hold a
+    ///     pointer to a CRYPT_KEY_CTX unmanaged structure whose destructor decrements a refCount. Only
+    // when
+    ///     the provider refCount is 0 it is deleted. This way, we loose a race in the critical
+    // finalization
     ///     of the key handle and provider handle. This also applies to hash handles, which point to a
     ///     CRYPT_HASH_CTX. Those structures are defined in COMCryptography.h
     /// </summary>

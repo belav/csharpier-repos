@@ -12,10 +12,12 @@ namespace ILCompiler
     public static class R2RTypeExtensions
     {
         /// <summary>
-        /// Return true when the type in question is marked with the NonVersionable attribute. Primitive types are implicitly NonVersionable
+        /// Return true when the type in question is marked with the NonVersionable attribute. Primitive
+        // types are implicitly NonVersionable
         /// </summary>
         /// <param name="type">Type to check</param>
-        /// <returns>True when the type is marked with the non-versionable custom attribute and meets the criteria
+        /// <returns>True when the type is marked with the non-versionable custom attribute and meets the
+        // criteria
         /// for a non-versionable type, false otherwise.</returns>
         public static bool IsNonVersionable(this MetadataType type)
         {
@@ -29,7 +31,8 @@ namespace ILCompiler
                 if (type.BaseType != type.Context.GetWellKnownType(WellKnownType.Object)) // Only types that derive directly from Object can be non-versionable
                     result = false;
 
-                // Only reference types defined in System.Private.CoreLib are eligible for the non-versionable processing
+                // Only reference types defined in System.Private.CoreLib are eligible for the non-versionable
+                // processing
                 // This allows for extremely careful vetting of said types
                 if (type.Module != type.Context.SystemModule)
                     result = false;

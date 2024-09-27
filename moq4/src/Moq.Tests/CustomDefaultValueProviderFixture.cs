@@ -104,21 +104,21 @@ namespace Moq.Tests
             int[] GetValues();
             IFoo Inner { get; }
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private sealed class ConstantDefaultValueProvider : DefaultValueProvider
-            After:
-                    sealed class ConstantDefaultValueProvider : DefaultValueProvider
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private sealed class ConstantDefaultValueProvider : DefaultValueProvider
+After:
+sealed class ConstantDefaultValueProvider : DefaultValueProvider
+*/
         }
 
         sealed class ConstantDefaultValueProvider : DefaultValueProvider
-        /* Unmerged change from project 'Moq.Tests(net6.0)'
-        Before:
-                    private object value;
-        After:
-                    object value;
-        */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private object value;
+After:
+object value;
+*/
         {
             object value;
 

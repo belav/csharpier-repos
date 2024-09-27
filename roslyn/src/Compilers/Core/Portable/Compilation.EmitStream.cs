@@ -22,13 +22,15 @@ namespace Microsoft.CodeAnalysis
             None,
 
             /// <summary>
-            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the default
+            /// This form of signing occurs in memory using the <see cref="PEBuilder"/> APIs. This is the
+            // default
             /// form of signing and will be used when a strong name key is provided in a file on disk.
             /// </summary>
             SignedWithBuilder,
 
             /// <summary>
-            /// This form of signing occurs using the <see cref="IClrStrongName"/> COM APIs. This form of signing
+            /// This form of signing occurs using the <see cref="IClrStrongName"/> COM APIs. This form of
+            // signing
             /// requires the unsigned PE to be written to disk before it can be signed (typically by writing it
             /// out to the %TEMP% folder). This signing is used when the key in a key container, the signing
             /// requires a counter signature or customers opted in via the UseLegacyStrongNameProvider feature
@@ -38,9 +40,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// This type abstracts away the legacy COM based signing implementation for PE streams. Under the hood
-        /// a temporary file must be created on disk (at the last possible moment), emitted to, signed on disk
-        /// and then copied back to the original <see cref="Stream"/>. Only when legacy signing is enabled though.
+        /// This type abstracts away the legacy COM based signing implementation for PE streams. Under the
+        // hood
+        /// a temporary file must be created on disk (at the last possible moment), emitted to, signed on
+        // disk
+        /// and then copied back to the original <see cref="Stream"/>. Only when legacy signing is enabled
+        // though.
         /// </summary>
         internal sealed class EmitStream
         {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc.Routing;
@@ -18,7 +19,8 @@ namespace System.Web.Mvc
     public class RoutePrefixAttribute : Attribute, IRoutePrefix
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class without specifying any parameters.
+        /// Initializes a new instance of the <see cref="RoutePrefixAttribute" /> class without specifying
+        // any parameters.
         /// </summary>
         protected RoutePrefixAttribute() { }
 

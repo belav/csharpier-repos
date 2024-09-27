@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -13,8 +13,10 @@ namespace Mono.Data.Sqlite
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// This internal class provides the foundation of SQLite support.  It defines all the abstract members needed to implement
-    /// a SQLite data provider, and inherits from SqliteConvert which allows for simple translations of string to and from SQLite.
+    /// This internal class provides the foundation of SQLite support.  It defines all the abstract
+    // members needed to implement
+    /// a SQLite data provider, and inherits from SqliteConvert which allows for simple translations of
+    // string to and from SQLite.
     /// </summary>
     internal abstract class SQLiteBase : SqliteConvert, IDisposable
     {
@@ -37,10 +39,12 @@ namespace Mono.Data.Sqlite
         /// Opens a database.
         /// </summary>
         /// <remarks>
-        /// Implementers should call SqliteFunction.BindFunctions() and save the array after opening a connection
+        /// Implementers should call SqliteFunction.BindFunctions() and save the array after opening a
+        // connection
         /// to bind all attributed user-defined functions and collating sequences to the new connection.
         /// </remarks>
-        /// <param name="strFilename">The filename of the database to open.  SQLite automatically creates it if it doesn't exist.</param>
+        /// <param name="strFilename">The filename of the database to open.  SQLite automatically creates it
+        // if it doesn't exist.</param>
         /// <param name="flags">The open flags to use when creating the connection</param>
         /// <param name="maxPoolSize">The maximum size of the pool for the given filename</param>
         /// <param name="usePool">If true, the connection can be pulled from the connection pool</param>
@@ -55,13 +59,16 @@ namespace Mono.Data.Sqlite
         /// Closes the currently-open database.
         /// </summary>
         /// <remarks>
-        /// After the database has been closed implemeters should call SqliteFunction.UnbindFunctions() to deallocate all interop allocated
-        /// memory associated with the user-defined functions and collating sequences tied to the closed connection.
+        /// After the database has been closed implemeters should call SqliteFunction.UnbindFunctions() to
+        // deallocate all interop allocated
+        /// memory associated with the user-defined functions and collating sequences tied to the closed
+        // connection.
         /// </remarks>
         internal abstract void Close();
 
         /// <summary>
-        /// Sets the busy timeout on the connection.  SqliteCommand will call this before executing any command.
+        /// Sets the busy timeout on the connection.  SqliteCommand will call this before executing any
+        // command.
         /// </summary>
         /// <param name="nTimeoutMS">The number of milliseconds to wait before returning SQLITE_BUSY</param>
         internal abstract void SetTimeout(int nTimeoutMS);
@@ -80,12 +87,16 @@ namespace Mono.Data.Sqlite
         /// <summary>
         /// Prepares a SQL statement for execution.
         /// </summary>
-        /// <param name="cnn">The source connection preparing the command.  Can be null for any caller except LINQ</param>
+        /// <param name="cnn">The source connection preparing the command.  Can be null for any caller
+        // except LINQ</param>
         /// <param name="strSql">The SQL command text to prepare</param>
-        /// <param name="previous">The previous statement in a multi-statement command, or null if no previous statement exists</param>
+        /// <param name="previous">The previous statement in a multi-statement command, or null if no
+        // previous statement exists</param>
         /// <param name="timeoutMS">The timeout to wait before aborting the prepare</param>
-        /// <param name="strRemain">The remainder of the statement that was not processed.  Each call to prepare parses the
-        /// SQL up to to either the end of the text or to the first semi-colon delimiter.  The remaining text is returned
+        /// <param name="strRemain">The remainder of the statement that was not processed.  Each call to
+        // prepare parses the
+        /// SQL up to to either the end of the text or to the first semi-colon delimiter.  The remaining
+        // text is returned
         /// here for a subsequent call to Prepare() until all the text has been processed.</param>
         /// <returns>Returns an initialized SqliteStatement.</returns>
         internal abstract SqliteStatement Prepare(
@@ -104,11 +115,13 @@ namespace Mono.Data.Sqlite
         internal abstract bool Step(SqliteStatement stmt);
 
         /// <summary>
-        /// Resets a prepared statement so it can be executed again.  If the error returned is SQLITE_SCHEMA,
+        /// Resets a prepared statement so it can be executed again.  If the error returned is
+        // SQLITE_SCHEMA,
         /// transparently attempt to rebuild the SQL statement and throw an error if that was not possible.
         /// </summary>
         /// <param name="stmt">The statement to reset</param>
-        /// <returns>Returns -1 if the schema changed while resetting, 0 if the reset was sucessful or 6 (SQLITE_LOCKED) if the reset failed due to a lock</returns>
+        /// <returns>Returns -1 if the schema changed while resetting, 0 if the reset was sucessful or 6
+        // (SQLITE_LOCKED) if the reset failed due to a lock</returns>
         internal abstract int Reset(SqliteStatement stmt);
         internal abstract void Cancel();
 

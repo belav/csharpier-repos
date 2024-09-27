@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<TInput> computeCurrentTableValues(int entryCount)
             {
                 // Important: we initialize with the exact capacity we need here so that we don't make a pointless
-                // scratch array that may be very large and may cause GC churn when it cannot be returned to the pool.
+                // scratch array that may be very large and may cause GC churn when it cannot be returned to the
+                // pool.
                 var builder = ArrayBuilder<TInput>.GetInstance(entryCount);
                 foreach (var entry in sourceTable)
                 {
@@ -148,7 +149,8 @@ namespace Microsoft.CodeAnalysis
             // update the table
             var tableBuilder = builder.CreateTableBuilder(previousTable, _name, _comparer);
 
-            // If this execution is tracking steps, then the source table should have also tracked steps or be the empty table.
+            // If this execution is tracking steps, then the source table should have also tracked steps or be
+            // the empty table.
             Debug.Assert(
                 !tableBuilder.TrackIncrementalSteps
                     || (sourceTable.HasTrackedSteps || sourceTable.IsEmpty)

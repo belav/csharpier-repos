@@ -36,7 +36,8 @@ namespace System.Collections.Immutable
             private int _enumeratingBuilderVersion;
 
             /// <summary>
-            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.Enumerator"/> struct.
+            /// Initializes a new instance of the <see cref="ImmutableDictionary{TKey, TValue}.Enumerator"/>
+            // struct.
             /// </summary>
             /// <param name="root">The root.</param>
             /// <param name="builder">The builder, if applicable.</param>
@@ -72,9 +73,11 @@ namespace System.Collections.Immutable
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
             /// <returns>
-            /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            /// true if the enumerator was successfully advanced to the next element; false if the enumerator
+            // has passed the end of the collection.
             /// </returns>
-            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was
+            // created. </exception>
             public bool MoveNext()
             {
                 this.ThrowIfChanged();
@@ -94,9 +97,11 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Sets the enumerator to its initial position, which is before the first element in the collection.
+            /// Sets the enumerator to its initial position, which is before the first element in the
+            // collection.
             /// </summary>
-            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was
+            // created. </exception>
             public void Reset()
             {
                 _enumeratingBuilderVersion = _builder != null ? _builder.Version : -1;
@@ -108,7 +113,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+            // resources.
             /// </summary>
             public void Dispose()
             {
@@ -117,9 +123,11 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Throws an exception if the underlying builder's contents have been changed since enumeration started.
+            /// Throws an exception if the underlying builder's contents have been changed since enumeration
+            // started.
             /// </summary>
-            /// <exception cref="System.InvalidOperationException">Thrown if the collection has changed.</exception>
+            /// <exception cref="System.InvalidOperationException">Thrown if the collection has
+            // changed.</exception>
             private void ThrowIfChanged()
             {
                 if (_builder != null && _builder.Version != _enumeratingBuilderVersion)

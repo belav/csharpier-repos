@@ -122,7 +122,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 // instead of
                 // { [key.ToString(), value.ToString()], ... }
                 //
-                // This is more general than overriding Dictionary<,> debugger proxy attribute since it applies on all
+                // This is more general than overriding Dictionary<,> debugger proxy attribute since it applies on
+                // all
                 // types that return an array of KeyValuePair in their DebuggerDisplay to display items.
                 //
                 if (
@@ -337,7 +338,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 var members = new List<FormattedMember>();
 
-                // Limits the number of members added into the result. Some more members may be added than it will fit into the result
+                // Limits the number of members added into the result. Some more members may be added than it will
+                // fit into the result
                 // and will be thrown away later but not many more.
                 FormatObjectMembersRecursive(members, obj, includeNonPublic, ref lengthLimit);
                 bool useCollectionFormat = UseCollectionFormat(members, preProxyTypeInfo);
@@ -969,15 +971,23 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             /// E.g. "goo = {GetGooString(),nq}, bar = {Bar}".
             /// </summary>
             /// <remarks>
-            /// Although in theory any expression is allowed to be embedded in the string such behavior is in practice fundamentally broken.
-            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these expressions. Even if it did all languages
-            /// would need to be able to evaluate each other language's expressions, which is not viable and the Expression Evaluator doesn't
-            /// work that way today. Instead it evaluates the embedded expressions in the language of the current method frame. When consuming
-            /// VB objects from C#, for example, the evaluation might fail due to language mismatch (evaluating VB expression using C# parser).
+            /// Although in theory any expression is allowed to be embedded in the string such behavior is in
+            // practice fundamentally broken.
+            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these
+            // expressions. Even if it did all languages
+            /// would need to be able to evaluate each other language's expressions, which is not viable and the
+            // Expression Evaluator doesn't
+            /// work that way today. Instead it evaluates the embedded expressions in the language of the
+            // current method frame. When consuming
+            /// VB objects from C#, for example, the evaluation might fail due to language mismatch (evaluating
+            // VB expression using C# parser).
             ///
-            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name} '(' ')' ',nq',
-            /// where parentheses and ,nq suffix (no-quotes) are optional and the name is an arbitrary CLR field, property, or method name.
-            /// We then resolve the member by name using case-sensitive lookup first with fallback to case insensitive and evaluate it.
+            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name}
+            // '(' ')' ',nq',
+            /// where parentheses and ,nq suffix (no-quotes) are optional and the name is an arbitrary CLR
+            // field, property, or method name.
+            /// We then resolve the member by name using case-sensitive lookup first with fallback to case
+            // insensitive and evaluate it.
             /// If parentheses are present we only look for methods.
             /// Only parameterless members are considered.
             /// </remarks>

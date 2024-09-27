@@ -20,8 +20,10 @@ namespace Microsoft.CodeAnalysis
     /// Responsible for orchestrating a source generation pass
     /// </summary>
     /// <remarks>
-    /// GeneratorDriver is an immutable class that can be manipulated by returning a mutated copy of itself.
-    /// In the compiler we only ever create a single instance and ignore the mutated copy. The IDE may perform
+    /// GeneratorDriver is an immutable class that can be manipulated by returning a mutated copy of
+    // itself.
+    /// In the compiler we only ever create a single instance and ignore the mutated copy. The IDE may
+    // perform
     /// multiple edits, or generation passes of the same driver, re-using the state as needed.
     /// </remarks>
     public abstract class GeneratorDriver
@@ -362,7 +364,8 @@ namespace Microsoft.CodeAnalysis
                 }
                 else if (state.ParseOptionsChanged && generatorState.PostInitTrees.Length > 0)
                 {
-                    // the generator is initialized, but we need to reparse the post-init trees as the parse options have changed
+                    // the generator is initialized, but we need to reparse the post-init trees as the parse options
+                    // have changed
                     var reparsedInitSources = ParseAdditionalSources(
                         sourceGenerator,
                         generatorState.PostInitTrees.SelectAsArray(t => new GeneratedSourceText(
@@ -433,7 +436,8 @@ namespace Microsoft.CodeAnalysis
                     );
                 try
                 {
-                    // We do not support incremental step tracking for v1 generators, as the pipeline is implicitly defined.
+                    // We do not support incremental step tracking for v1 generators, as the pipeline is implicitly
+                    // defined.
                     var context = UpdateOutputs(
                         generatorState.OutputNodes,
                         IncrementalGeneratorOutputKind.Source
@@ -615,7 +619,8 @@ namespace Microsoft.CodeAnalysis
                 ? provider.WRN_GeneratorFailedDuringInitialization
                 : provider.WRN_GeneratorFailedDuringGeneration;
 
-            // ISSUE: We should not call `e.CreateDiagnosticDescription()`, and instead pass formattable parts like `StackTrace`.
+            // ISSUE: We should not call `e.CreateDiagnosticDescription()`, and instead pass formattable parts
+            // like `StackTrace`.
             // ISSUE: Exceptions also don't support IFormattable, so will always be in the current UI Culture.
             // ISSUE: See https://github.com/dotnet/roslyn/issues/46939
 

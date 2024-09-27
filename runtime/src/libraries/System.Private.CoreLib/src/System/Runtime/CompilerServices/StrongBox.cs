@@ -8,12 +8,14 @@ namespace System.Runtime.CompilerServices
     /// <summary>
     /// Holds a reference to a value.
     /// </summary>
-    /// <typeparam name="T">The type of the value that the <see cref = "StrongBox{T}"></see> references.</typeparam>
+    /// <typeparam name="T">The type of the value that the <see cref = "StrongBox{T}"></see>
+    // references.</typeparam>
     public class StrongBox<T> : IStrongBox
     {
         /// <summary>
         /// Gets the strongly typed value associated with the <see cref = "StrongBox{T}"></see>
-        /// <remarks>This is explicitly exposed as a field instead of a property to enable loading the address of the field.</remarks>
+        /// <remarks>This is explicitly exposed as a field instead of a property to enable loading the
+        // address of the field.</remarks>
         /// </summary>
         [MaybeNull]
         public T Value = default!;

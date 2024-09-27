@@ -18,7 +18,8 @@ using Resources = Microsoft.AspNetCore.Mvc.ViewFeatures.Resources;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// A <see cref="ValidationAttribute"/> which configures Unobtrusive validation to send an Ajax request to the
+/// A <see cref="ValidationAttribute"/> which configures Unobtrusive validation to send an Ajax
+// request to the
 /// web site. The invoked endpoint should return JSON indicating whether the value is valid.
 /// </summary>
 /// <remarks>Does no server-side validation of the final form submission.</remarks>
@@ -40,19 +41,22 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
     }
 
     /// <summary>
-    /// Gets the <see cref="RouteValueDictionary"/> used when generating the URL where client should send a
+    /// Gets the <see cref="RouteValueDictionary"/> used when generating the URL where client should
+    // send a
     /// validation request.
     /// </summary>
     protected RouteValueDictionary RouteData { get; }
 
     /// <summary>
-    /// Gets or sets the HTTP method (<c>"Get"</c> or <c>"Post"</c>) client should use when sending a validation
+    /// Gets or sets the HTTP method (<c>"Get"</c> or <c>"Post"</c>) client should use when sending a
+    // validation
     /// request.
     /// </summary>
     public string? HttpMethod { get; set; }
 
     /// <summary>
-    /// Gets or sets the comma-separated names of fields the client should include in a validation request.
+    /// Gets or sets the comma-separated names of fields the client should include in a validation
+    // request.
     /// </summary>
     [AllowNull]
     public string AdditionalFields
@@ -68,12 +72,14 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
     }
 
     /// <summary>
-    /// Formats <paramref name="property"/> and <see cref="AdditionalFields"/> for use in generated HTML.
+    /// Formats <paramref name="property"/> and <see cref="AdditionalFields"/> for use in generated
+    // HTML.
     /// </summary>
     /// <param name="property">
     /// Name of the property associated with this <see cref="RemoteAttribute"/> instance.
     /// </param>
-    /// <returns>Comma-separated names of fields the client should include in a validation request.</returns>
+    /// <returns>Comma-separated names of fields the client should include in a validation
+    // request.</returns>
     /// <remarks>
     /// Excludes any whitespace from <see cref="AdditionalFields"/> in the return value.
     /// Prefixes each field name in the return value with <c>"*."</c>.
@@ -116,7 +122,8 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
     /// <summary>
     /// Returns the URL where the client should send a validation request.
     /// </summary>
-    /// <param name="context">The <see cref="ClientModelValidationContext"/> used to generate the URL.</param>
+    /// <param name="context">The <see cref="ClientModelValidationContext"/> used to generate the
+    // URL.</param>
     /// <returns>The URL where the client should send a validation request.</returns>
     protected abstract string GetUrl(ClientModelValidationContext context);
 
@@ -128,7 +135,8 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
 
     /// <inheritdoc />
     /// <remarks>
-    /// Always returns <c>true</c> since this <see cref="ValidationAttribute"/> does no validation itself.
+    /// Always returns <c>true</c> since this <see cref="ValidationAttribute"/> does no validation
+    // itself.
     /// Related validations occur only when the client sends a validation request.
     /// </remarks>
     public override bool IsValid(object? value)
@@ -143,7 +151,8 @@ public abstract class RemoteAttributeBase : ValidationAttribute, IClientModelVal
     /// <see cref="ClientModelValidationContext"/> to add Unobtrusive validation HTML attributes to.
     /// </param>
     /// <remarks>
-    /// Calls derived <see cref="ValidationAttribute"/> implementation of <see cref="GetUrl(ClientModelValidationContext)"/>.
+    /// Calls derived <see cref="ValidationAttribute"/> implementation of <see
+    // cref="GetUrl(ClientModelValidationContext)"/>.
     /// </remarks>
     public virtual void AddValidation(ClientModelValidationContext context)
     {

@@ -1,9 +1,9 @@
 /* Bug #76671
-   Note: gmcs currently emits duplicate TypeSpecs, so this
-     case doesn't get exposed, so use csc compiled
-     assemblies till gmcs is fixed.
+Note: gmcs currently emits duplicate TypeSpecs, so this
+case doesn't get exposed, so use csc compiled
+assemblies till gmcs is fixed.
 
-   Array of type params
+Array of type params
 */
 using System;
 

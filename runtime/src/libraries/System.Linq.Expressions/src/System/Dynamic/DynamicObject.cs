@@ -44,7 +44,8 @@ namespace System.Dynamic
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="result">The result of the get operation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryGetMember(GetMemberBinder binder, out object? result)
         {
             result = null;
@@ -58,7 +59,8 @@ namespace System.Dynamic
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="value">The value to set.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TrySetMember(SetMemberBinder binder, object? value) => false;
 
         /// <summary>
@@ -67,7 +69,8 @@ namespace System.Dynamic
         /// binder determines the behavior.
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryDeleteMember(DeleteMemberBinder binder) => false;
 
         /// <summary>
@@ -78,7 +81,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="args">The arguments to be used for the invocation.</param>
         /// <param name="result">The result of the invocation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryInvokeMember(
             InvokeMemberBinder binder,
             object?[]? args,
@@ -96,7 +100,8 @@ namespace System.Dynamic
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="result">The result of the conversion.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryConvert(ConvertBinder binder, out object? result)
         {
             result = null;
@@ -111,7 +116,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="args">The arguments used for creation.</param>
         /// <param name="result">The created instance.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryCreateInstance(
             CreateInstanceBinder binder,
             object?[]? args,
@@ -130,7 +136,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="args">The arguments to be used for the invocation.</param>
         /// <param name="result">The result of the invocation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryInvoke(InvokeBinder binder, object?[]? args, out object? result)
         {
             result = null;
@@ -145,7 +152,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="arg">The right operand for the operation.</param>
         /// <param name="result">The result of the operation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryBinaryOperation(
             BinaryOperationBinder binder,
             object arg,
@@ -163,7 +171,8 @@ namespace System.Dynamic
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="result">The result of the operation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryUnaryOperation(UnaryOperationBinder binder, out object? result)
         {
             result = null;
@@ -178,7 +187,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="indexes">The indexes to be used.</param>
         /// <param name="result">The result of the operation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryGetIndex(GetIndexBinder binder, object[] indexes, out object? result)
         {
             result = null;
@@ -193,7 +203,8 @@ namespace System.Dynamic
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="indexes">The indexes to be used.</param>
         /// <param name="value">The value to set.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TrySetIndex(SetIndexBinder binder, object[] indexes, object? value) =>
             false;
 
@@ -204,7 +215,8 @@ namespace System.Dynamic
         /// </summary>
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="indexes">The indexes to be deleted.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public virtual bool TryDeleteIndex(DeleteIndexBinder binder, object[] indexes) => false;
 
         /// <summary>
@@ -678,7 +690,8 @@ namespace System.Dynamic
                         );
 
                     Expression condition;
-                    // If the return type can not be assigned null then just check for type assignability otherwise allow null.
+                    // If the return type can not be assigned null then just check for type assignability otherwise
+                    // allow null.
                     if (
                         binder.ReturnType.IsValueType
                         && Nullable.GetUnderlyingType(binder.ReturnType) == null
@@ -1003,12 +1016,14 @@ namespace System.Dynamic
         #region IDynamicMetaObjectProvider Members
 
         /// <summary>
-        /// Returns the <see cref="DynamicMetaObject" /> responsible for binding operations performed on this object,
+        /// Returns the <see cref="DynamicMetaObject" /> responsible for binding operations performed on
+        // this object,
         /// using the virtual methods provided by this class.
         /// </summary>
         /// <param name="parameter">The expression tree representation of the runtime value.</param>
         /// <returns>
-        /// The <see cref="DynamicMetaObject" /> to bind this object.  The object can be encapsulated inside of another
+        /// The <see cref="DynamicMetaObject" /> to bind this object.  The object can be encapsulated inside
+        // of another
         /// <see cref="DynamicMetaObject"/> to provide custom behavior for individual actions.
         /// </returns>
         public virtual DynamicMetaObject GetMetaObject(Expression parameter) =>

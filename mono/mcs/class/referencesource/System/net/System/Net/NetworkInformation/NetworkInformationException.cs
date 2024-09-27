@@ -22,7 +22,9 @@ namespace System.Net.NetworkInformation
     {
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.NetworkInformation.NetworkInformationException'/> class with the default error code.
+        ///       Creates a new instance of the <see
+        // cref='System.Net.NetworkInformation.NetworkInformationException'/> class with the default error
+        // code.
         ///    </para>
         /// </devdoc>
         public NetworkInformationException()
@@ -30,7 +32,9 @@ namespace System.Net.NetworkInformation
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.NetworkInformation.NetworkInformationException'/> class with the specified error code.
+        ///       Creates a new instance of the <see
+        // cref='System.Net.NetworkInformation.NetworkInformationException'/> class with the specified error
+        // code.
         ///    </para>
         /// </devdoc>
         public NetworkInformationException(int errorCode)

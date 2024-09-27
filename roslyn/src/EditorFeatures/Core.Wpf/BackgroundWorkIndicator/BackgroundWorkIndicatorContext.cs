@@ -27,7 +27,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
     private sealed class BackgroundWorkIndicatorContext : IBackgroundWorkIndicatorContext
     {
         /// <summary>
-        /// What sort of UI update request we've enqueued to <see cref="_uiUpdateQueue"/>.  This effectively is just a
+        /// What sort of UI update request we've enqueued to <see cref="_uiUpdateQueue"/>.  This effectively
+        // is just a
         /// boolean, but with clearer names to make it obvious what is going on.
         /// </summary>
         private enum UIUpdateRequest
@@ -42,7 +43,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         private readonly CancellationTokenSource _cancellationTokenSource = new();
 
         /// <summary>
-        /// Lock controlling mutation of all data (except <see cref="_dismissed"/>) in this indicator, or in any
+        /// Lock controlling mutation of all data (except <see cref="_dismissed"/>) in this indicator, or in
+        // any
         /// sub-scopes. Any read/write of mutable data must be protected by this.
         /// </summary>
         public readonly object Gate = new();
@@ -55,20 +57,24 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         private readonly string _firstDescription;
 
         /// <summary>
-        /// Work queue used to batch up UI update and Dispose requests.  A value of <see langword="true"/> means
-        /// just update the tool-tip. A value of <see langword="false"/> means we want to dismiss the tool-tip.
+        /// Work queue used to batch up UI update and Dispose requests.  A value of <see langword="true"/>
+        // means
+        /// just update the tool-tip. A value of <see langword="false"/> means we want to dismiss the
+        // tool-tip.
         /// </summary>
         private readonly AsyncBatchingWorkQueue<UIUpdateRequest> _uiUpdateQueue;
 
         /// <summary>
-        /// Set of scopes we have.  We always start with one (the one created by the initial call to create the work
+        /// Set of scopes we have.  We always start with one (the one created by the initial call to create
+        // the work
         /// indicator). However, the client of the background indicator can add more.
         /// </summary>
         private ImmutableArray<BackgroundWorkIndicatorScope> _scopes =
             ImmutableArray<BackgroundWorkIndicatorScope>.Empty;
 
         /// <summary>
-        /// If we've been dismissed or not.  Once dismissed, we will close the tool-tip showing information.  This
+        /// If we've been dismissed or not.  Once dismissed, we will close the tool-tip showing information.
+        // This
         /// field must only be accessed on the UI thread.
         /// </summary>
         private bool _dismissed = false;
@@ -136,7 +142,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         internal void EnqueueUIUpdate() => _uiUpdateQueue.AddWork(UIUpdateRequest.UpdateTooltip);
 
         /// <summary>
-        /// The same as Dispose.  Anyone taking ownership of this context wants to show their own UI, so we can just
+        /// The same as Dispose.  Anyone taking ownership of this context wants to show their own UI, so we
+        // can just
         /// close ours.
         /// </summary>
         public void TakeOwnership() => this.Dispose();
@@ -226,7 +233,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
                 // Unhook any event handlers we've setup.
                 //
-                // note we have to disconnect from dismissal notifications so our own dismiss below doesn't cause us to
+                // note we have to disconnect from dismissal notifications so our own dismiss below doesn't cause us
+                // to
                 // re-enter and cancel ourselves.
                 _toolTipPresenter.Dismissed -= OnToolTipPresenterDismissed;
                 _subjectBuffer.Changed -= OnTextBufferChanged;
@@ -241,7 +249,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
 
             async ValueTask UpdateUIAsync()
             {
-                // Build the current description in the background, then switch to the UI thread to actually update the
+                // Build the current description in the background, then switch to the UI thread to actually update
+                // the
                 // tool-tip with it.
                 var data = this.BuildData();
 
@@ -253,7 +262,8 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                 if (_dismissed)
                     return;
 
-                // Todo: build a richer tool-tip that makes use of things like the progress reported, and perhaps has a
+                // Todo: build a richer tool-tip that makes use of things like the progress reported, and perhaps
+                // has a
                 // close button.
                 _toolTipPresenter.StartOrUpdate(
                     _trackingSpan,

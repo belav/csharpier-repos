@@ -15,26 +15,26 @@ using WebCntrls = System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile AdRotator class.
-     * The AdRotator control is for rotating advertisement links every time the
-     * same page is revisited.
-     *
-     * This class aggregates the corresponding ASP.NET AdRotator for delegating
-     * the random selection task of advertisement info to the aggregated
-     * class.  The ad info is selected during the PreRender phase of the
-     * aggregated control (So the aggregated control needs to have the
-     * property Visible set to true when entering the PreRender process).
-     * For markup adapters that collect the selected ad info for rendering,
-     * they should subscribe to AdCreated event property and collect the ad
-     * info through the event argument.
-     *
-     * This class also contains a mobile Image control for delegating the
-     * rendering since AdRotator's rendering is the same as Image's rendering
-     * by setting the corresponding properties on the control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile AdRotator class.
+* The AdRotator control is for rotating advertisement links every time the
+* same page is revisited.
+*
+* This class aggregates the corresponding ASP.NET AdRotator for delegating
+* the random selection task of advertisement info to the aggregated
+* class.  The ad info is selected during the PreRender phase of the
+* aggregated control (So the aggregated control needs to have the
+* property Visible set to true when entering the PreRender process).
+* For markup adapters that collect the selected ad info for rendering,
+* they should subscribe to AdCreated event property and collect the ad
+* info through the event argument.
+*
+* This class also contains a mobile Image control for delegating the
+* rendering since AdRotator's rendering is the same as Image's rendering
+* by setting the corresponding properties on the control.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator"]/*' />
     [
         DefaultEvent("AdCreated"),

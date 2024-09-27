@@ -94,10 +94,10 @@ namespace System.Security.Cryptography
             int partInLen = cbSize;
             int partInBase = ibStart;
 
-            /* Compute length of buffer */
+/* Compute length of buffer */
             bufferLen = (int)(_count & 0x3f);
 
-            /* Update number of bytes */
+/* Update number of bytes */
             _count += partInLen;
 
             fixed (uint* stateMD160 = _stateMD160)
@@ -121,7 +121,7 @@ namespace System.Security.Cryptography
                             bufferLen = 0;
                         }
 
-                        /* Copy input to temporary buffer and hash */
+/* Copy input to temporary buffer and hash */
                         while (partInLen >= 64)
                         {
                             Buffer.InternalBlockCopy(partIn, partInBase, _buffer, 0, 64);
@@ -153,8 +153,8 @@ namespace System.Security.Cryptography
             long bitCount;
             byte[] hash = new byte[20];
 
-            /* Compute padding: 80 00 00 ... 00 00 <bit count>
-             */
+/* Compute padding: 80 00 00 ... 00 00 <bit count>
+*/
 
             padLen = 64 - (int)(_count & 0x3f);
             if (padLen <= 8)
@@ -176,10 +176,10 @@ namespace System.Security.Cryptography
             pad[padLen - 7] = (byte)((bitCount >> 8) & 0xff);
             pad[padLen - 8] = (byte)((bitCount >> 0) & 0xff);
 
-            /* Digest padding */
+/* Digest padding */
             _HashData(pad, 0, pad.Length);
 
-            /* Store digest */
+/* Store digest */
             Utils.DWORDToLittleEndian(hash, _stateMD160, 5);
 
             HashValue = hash;
@@ -203,12 +203,12 @@ namespace System.Security.Cryptography
 
             Utils.DWORDFromLittleEndian(blockDWords, 16, block);
 
-            /*
-                As we don't have macros in C# and we don't want to pay the cost of a function call
-                (which BTW is quite important here as we would have to pass 5 args by ref in
-                16 * 10 = 160 function calls)
-                we'll prefer a less compact code to a less performant code
-            */
+/*
+As we don't have macros in C# and we don't want to pay the cost of a function call
+(which BTW is quite important here as we would have to pass 5 args by ref in
+16 * 10 = 160 function calls)
+we'll prefer a less compact code to a less performant code
+*/
 
             // Left Round 1
             // FF(ref aa, ref bb, ref cc, ref dd, ref ee, blockDWords[0], 11);

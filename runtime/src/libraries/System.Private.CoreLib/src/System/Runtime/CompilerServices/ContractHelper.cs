@@ -24,7 +24,8 @@ namespace System.Runtime.CompilerServices
         /// The method should not perform any failure (assert/throw) itself.
         /// This method has 3 functions:
         /// 1. Call any contract hooks (such as listeners to Contract failed events)
-        /// 2. Determine if the listeners deem the failure as handled (then resultFailureMessage should be set to null)
+        /// 2. Determine if the listeners deem the failure as handled (then resultFailureMessage should be
+        // set to null)
         /// 3. Produce a localized resultFailureMessage used in advertising the failure subsequently.
         /// On exit: null if the event was handled and should not trigger a failure.
         ///          Otherwise, returns the localized failure message.

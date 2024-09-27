@@ -49,7 +49,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified parent and
+        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class
+        // with the specified parent and
         ///       child <see cref='System.Data.DataColumn'/> objects.
         ///    </para>
         /// </devdoc>
@@ -58,7 +59,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
+        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class
+        // with the specified name,
         ///       parent and child <see cref='System.Data.DataColumn'/> objects.
         ///    </para>
         /// </devdoc>
@@ -75,7 +77,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified arrays
+        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class
+        // with the specified arrays
         ///       of parent and child <see cref='System.Data.DataColumn'/> objects.
         ///    </para>
         /// </devdoc>
@@ -84,7 +87,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class with the specified name,
+        ///       Initializes a new instance of the <see cref='System.Data.ForeignKeyConstraint'/> class
+        // with the specified name,
         ///       and arrays of parent and child <see cref='System.Data.DataColumn'/> objects.
         ///    </para>
         /// </devdoc>
@@ -119,7 +123,8 @@ namespace System.Data
             this.acceptRejectRule = acceptRejectRule;
             this.deleteRule = deleteRule;
             this.updateRule = updateRule;
-            //            ForeignKeyConstraint(constraintName, parentTableName, null, parentColumnNames, childColumnNames,acceptRejectRule, deleteRule, updateRule)
+            //            ForeignKeyConstraint(constraintName, parentTableName, null, parentColumnNames,
+            // childColumnNames,acceptRejectRule, deleteRule, updateRule)
         }
 
         // construct design time object
@@ -348,7 +353,8 @@ namespace System.Data
                 {
                     if (row.Table.DataSet.EnforceConstraints)
                     {
-                        // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
+                        // if we're not cascading deletes, we should throw if we're going to strand a child row under
+                        // enforceConstraints.
                         Range range = childIndex.FindRecords(currentKey);
                         if (!range.IsNull)
                         {
@@ -497,7 +503,8 @@ namespace System.Data
                 {
                     if (row.Table.DataSet.EnforceConstraints)
                     {
-                        // if we're not cascading deletes, we should throw if we're going to strand a child row under enforceConstraints.
+                        // if we're not cascading deletes, we should throw if we're going to strand a child row under
+                        // enforceConstraints.
                         Range range = childIndex.FindRecords(currentKey);
                         if (!range.IsNull)
                         {
@@ -698,7 +705,8 @@ namespace System.Data
                     }
                 }
 
-                // now check to see if someone exists... it will have to be in a parent row's current, not a proposed.
+                // now check to see if someone exists... it will have to be in a parent row's current, not a
+                // proposed.
                 object[] childValues = childRow.GetKeyValues(childKey);
                 if (!IsKeyNull(childValues))
                 {
@@ -771,7 +779,8 @@ namespace System.Data
             }
         }
 
-        // If we're not in a DataSet relations collection, we need to verify on every property get that we're
+        // If we're not in a DataSet relations collection, we need to verify on every property get that
+        // we're
         // still a good relation object.
         internal override void CheckState()
         {
@@ -998,7 +1007,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Gets a value indicating whether the current <see cref='System.Data.ForeignKeyConstraint'/> is identical to the specified object.</para>
+        /// <para>Gets a value indicating whether the current <see cref='System.Data.ForeignKeyConstraint'/>
+        // is identical to the specified object.</para>
         /// </devdoc>
         public override bool Equals(object key)
         {

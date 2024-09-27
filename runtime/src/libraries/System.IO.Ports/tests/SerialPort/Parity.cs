@@ -16,7 +16,8 @@ namespace System.IO.Ports.Tests
         private const int DEFAULT_BYTE_SIZE = 512;
 
         //If the percentage difference between the expected time to transfer with the specified parity
-        //and the actual time found through Stopwatch is greater then 10% then the Parity value was not correctly
+        //and the actual time found through Stopwatch is greater then 10% then the Parity value was not
+        // correctly
         //set and the testcase fails.
         private const double MAX_ACCEPTABEL_PERCENTAGE_DIFFERENCE = .10;
 
@@ -526,17 +527,17 @@ namespace System.IO.Ports.Tests
 
                 Debug.WriteLine("parityIndex={0}", parityIndex);
 
-                /*
-                for (int i=0; i<xmitBytes.Length; i++) {
-                  do {
-                    xmitBytes[i] = (byte)rndGen.Next(0, 256);
-                    isParityError = !VerifyParityByte(xmitBytes[i], com1.DataBits, (Parity)parity);
-                  }while(parityErrorOnLastByte && isParityError); //Prevent adacent parity errors see VSWhidbey 103979
+/*
+for (int i=0; i<xmitBytes.Length; i++) {
+do {
+xmitBytes[i] = (byte)rndGen.Next(0, 256);
+isParityError = !VerifyParityByte(xmitBytes[i], com1.DataBits, (Parity)parity);
+}while(parityErrorOnLastByte && isParityError); //Prevent adacent parity errors see VSWhidbey 103979
 
-                  expectedBytes[i] =  isParityError ? com2.ParityReplace :(byte)(xmitBytes[i] & shiftMask);
-                  parityErrorOnLastByte = isParityError;
-                }
-            */
+expectedBytes[i] =  isParityError ? com2.ParityReplace :(byte)(xmitBytes[i] & shiftMask);
+parityErrorOnLastByte = isParityError;
+}
+*/
                 com1.Open();
                 com2.Open();
                 PerformWriteRead(com1, com2, xmitBytes, expectedBytes);

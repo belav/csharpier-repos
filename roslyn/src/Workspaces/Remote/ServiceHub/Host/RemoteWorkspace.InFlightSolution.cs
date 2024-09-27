@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Remote
     internal sealed partial class RemoteWorkspace
     {
         /// <summary>
-        /// Wrapper around asynchronously produced solution for a particular <see cref="SolutionChecksum"/>.  The
-        /// computation for producing the solution will be canceled when the number of in-flight operations using it
+        /// Wrapper around asynchronously produced solution for a particular <see cref="SolutionChecksum"/>.
+        // The
+        /// computation for producing the solution will be canceled when the number of in-flight operations
+        // using it
         /// goes down to 0.
         /// </summary>
         public sealed class InFlightSolution
@@ -27,27 +29,33 @@ namespace Microsoft.CodeAnalysis.Remote
             public readonly Checksum SolutionChecksum;
 
             /// <summary>
-            /// CancellationTokenSource controlling the execution of <see cref="_disconnectedSolutionTask"/> and <see
+            /// CancellationTokenSource controlling the execution of <see cref="_disconnectedSolutionTask"/> and
+            // <see
             /// cref="_primaryBranchTask"/>.
             /// </summary>
             private readonly CancellationTokenSource _cancellationTokenSource_doNotAccessDirectly =
                 new();
 
             /// <summary>
-            /// Background work to just compute the disconnected solution associated with this <see cref="SolutionChecksum"/>
+            /// Background work to just compute the disconnected solution associated with this <see
+            // cref="SolutionChecksum"/>
             /// </summary>
             private readonly Task<Solution> _disconnectedSolutionTask;
 
             /// <summary>
-            /// Optional work to try to elevate the solution computed by <see cref="_disconnectedSolutionTask"/> to be
-            /// the primary solution of this <see cref="RemoteWorkspace"/>.  Must only be read/written while holding
+            /// Optional work to try to elevate the solution computed by <see cref="_disconnectedSolutionTask"/>
+            // to be
+            /// the primary solution of this <see cref="RemoteWorkspace"/>.  Must only be read/written while
+            // holding
             /// <see cref="RemoteWorkspace._gate"/>.
             /// </summary>
             private Task<Solution>? _primaryBranchTask;
 
             /// <summary>
-            /// Initially set to 1 to represent the operation that requested and is using this solution.  This also
-            /// allows us to use 0 to represent a point that this solution computation is canceled and can not be
+            /// Initially set to 1 to represent the operation that requested and is using this solution.  This
+            // also
+            /// allows us to use 0 to represent a point that this solution computation is canceled and can not
+            // be
             /// used again.
             /// </summary>
             public int InFlightCount { get; private set; } = 1;
@@ -63,13 +71,17 @@ namespace Microsoft.CodeAnalysis.Remote
                 _workspace = workspace;
                 SolutionChecksum = solutionChecksum;
 
-                // Grab the cancellation token up front while we know we are holding the lock and mutating state.  We
-                // don't want to potentially grab it at some undefined point at the future when this type has already
+                // Grab the cancellation token up front while we know we are holding the lock and mutating state.
+                // We
+                // don't want to potentially grab it at some undefined point at the future when this type has
+                // already
                 // had its in-flight-count reduced to 0 and thus had our CTS be disposed.
                 //
-                // Also kick this off in a dedicated task.  The state mutation updating of this InFlightSolution and the
+                // Also kick this off in a dedicated task.  The state mutation updating of this InFlightSolution and
+                // the
                 // cache state in RemoteWorkspace must always run fully to completion without issue.  We don't want
-                // anything we call in the constructor to possibly prevent the constructor from running to completion.
+                // anything we call in the constructor to possibly prevent the constructor from running to
+                // completion.
                 var cancellationToken = this.CancellationToken;
                 _disconnectedSolutionTask = Task.Run(
                     () => computeDisconnectedSolutionAsync(cancellationToken),
@@ -101,9 +113,12 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             /// <summary>
-            /// Allow the RemoteWorkspace to try to elevate this solution to be the primary solution for itself.  This
-            /// commonly happens because when a change happens to the host, features may kick off immediately, creating
-            /// the disconnected solution, followed shortly afterwards by a request from the host to make that same
+            /// Allow the RemoteWorkspace to try to elevate this solution to be the primary solution for itself.
+            // This
+            /// commonly happens because when a change happens to the host, features may kick off immediately,
+            // creating
+            /// the disconnected solution, followed shortly afterwards by a request from the host to make that
+            // same
             /// checksum be the primary solution of this workspace.
             /// </summary>
             /// <param name="updatePrimaryBranchAsync"></param>
@@ -123,11 +138,14 @@ namespace Microsoft.CodeAnalysis.Remote
                     if (_primaryBranchTask != null)
                         return;
 
-                    // Grab the cancellation token up front while we know we are holding the lock and mutating state.  We
-                    // don't want to potentially grab it at some undefined point at the future when this type has already
+                    // Grab the cancellation token up front while we know we are holding the lock and mutating state.
+                    // We
+                    // don't want to potentially grab it at some undefined point at the future when this type has
+                    // already
                     // had its in-flight-count reduced to 0 and thus had our CTS be disposed.
                     //
-                    // Also kick this off in a dedicated task.  The state mutation updating of this InFlightSolution and the
+                    // Also kick this off in a dedicated task.  The state mutation updating of this InFlightSolution and
+                    // the
                     // cache state in RemoteWorkspace must always run fully to completion without issue. We don't want
                     // anything we call in this method to possibly prevent the method from running to completion.
                     var cancellationToken = this.CancellationToken;
@@ -162,10 +180,14 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             /// <summary>
-            /// Returns the in-flight solution computations <em>when</em> the in-flight-count is decremented to 0. This
-            /// allows the caller to wait for those computations to complete (which will hopefully be quickly as they
-            /// will have just been canceled).  This ensures the caller doesn't return back to the host (potentially
-            /// unpinning the solution on the host) while the solution-computation tasks are still running and may still
+            /// Returns the in-flight solution computations <em>when</em> the in-flight-count is decremented to
+            // 0. This
+            /// allows the caller to wait for those computations to complete (which will hopefully be quickly as
+            // they
+            /// will have just been canceled).  This ensures the caller doesn't return back to the host
+            // (potentially
+            /// unpinning the solution on the host) while the solution-computation tasks are still running and
+            // may still
             /// attempt to call into the host.
             /// </summary>
             public ImmutableArray<Task> DecrementInFlightCount_NoLock()
@@ -195,9 +217,11 @@ namespace Microsoft.CodeAnalysis.Remote
 
                 _workspace.CheckCacheInvariants_NoLock();
 
-                // Return the solutions we were in the process of computing.  Note, returning the _primaryBranchTask is
+                // Return the solutions we were in the process of computing.  Note, returning the _primaryBranchTask
+                // is
                 // likely not necessary as all that task does is take the _disconnectedSolutionTask and make it the
-                // primary branch of hte workspace (which doesn't involve a call back from OOP to the host).  However,
+                // primary branch of hte workspace (which doesn't involve a call back from OOP to the host).
+                // However,
                 // this is just safer to return both, esp. if that might ever change in the future.
                 using var solutions = TemporaryArray<Task>.Empty;
 

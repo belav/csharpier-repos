@@ -14,14 +14,15 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Object List Item collection class. Does not derive from MobileListItemCollection,
-     * because much of the functionality there is disallowed here.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Object List Item collection class. Does not derive from MobileListItemCollection,
+* because much of the functionality there is disallowed here.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection"]/*' />
+    /// <include file='doc\ObjectListItemCollection.uex'
+    // path='docs/doc[@for="ObjectListItemCollection"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -51,7 +52,8 @@ namespace System.Web.UI.MobileControls
             set { _baseIndex = value; }
         }
 
-        /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.GetAll"]/*' />
+        /// <include file='doc\ObjectListItemCollection.uex'
+        // path='docs/doc[@for="ObjectListItemCollection.GetAll"]/*' />
         public ObjectListItem[] GetAll()
         {
             int n = Count;
@@ -63,7 +65,8 @@ namespace System.Web.UI.MobileControls
             return result;
         }
 
-        /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.this"]/*' />
+        /// <include file='doc\ObjectListItemCollection.uex'
+        // path='docs/doc[@for="ObjectListItemCollection.this"]/*' />
         public ObjectListItem this[int index]
         {
             get { return (ObjectListItem)Items[index]; }
@@ -79,7 +82,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.Clear"]/*' />
+        /// <include file='doc\ObjectListItemCollection.uex'
+        // path='docs/doc[@for="ObjectListItemCollection.Clear"]/*' />
         public void Clear()
         {
             Items.Clear();
@@ -89,13 +93,15 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.Contains"]/*' />
+        /// <include file='doc\ObjectListItemCollection.uex'
+        // path='docs/doc[@for="ObjectListItemCollection.Contains"]/*' />
         public bool Contains(ObjectListItem item)
         {
             return Items.Contains(item);
         }
 
-        /// <include file='doc\ObjectListItemCollection.uex' path='docs/doc[@for="ObjectListItemCollection.IndexOf"]/*' />
+        /// <include file='doc\ObjectListItemCollection.uex'
+        // path='docs/doc[@for="ObjectListItemCollection.IndexOf"]/*' />
         public int IndexOf(ObjectListItem item)
         {
             return Items.IndexOf(item);

@@ -44,11 +44,13 @@ namespace System.Data.Mapping.Update.Internal
         /// differences from SQL comparisons:
         ///
         ///     - String comparisons are not collation sensitive
-        ///     - The constants we compare come from a fixed repertoire of scalar types implementing IComparable
+        ///     - The constants we compare come from a fixed repertoire of scalar types implementing
+        // IComparable
         ///
         ///
         /// For the purposes of update mapping view evaluation, these assumptions are safe because we
-        /// only support mapping of non-null constants to fields (these constants are non-null discriminators)
+        /// only support mapping of non-null constants to fields (these constants are non-null
+        // discriminators)
         /// and key comparisons (where the key values are replicated across a reference).
         /// </remarks>
         private class Evaluator : UpdateExpressionVisitor<PropagatorResult>
@@ -163,7 +165,8 @@ namespace System.Data.Mapping.Update.Internal
                 }
                 else
                 {
-                    // rely on cast exception to identify invalid cases (CQT validation should already take care of this)
+                    // rely on cast exception to identify invalid cases (CQT validation should already take care of
+                    // this)
                     return (bool)result.GetSimpleValue();
                 }
             }
@@ -195,7 +198,8 @@ namespace System.Data.Mapping.Update.Internal
 
             #region DbExpressionVisitor implementation
             /// <summary>
-            /// Determines whether the argument being evaluated has a given type (declared in the IsOfOnly predicate).
+            /// Determines whether the argument being evaluated has a given type (declared in the IsOfOnly
+            // predicate).
             /// </summary>
             /// <param name="predicate">IsOfOnly predicate.</param>
             /// <returns>True if the row being evaluated is of the requested type; false otherwise.</returns>
@@ -342,7 +346,8 @@ namespace System.Data.Mapping.Update.Internal
             /// Evalutes a 'not' expression given results
             /// </summary>
             /// <param name="predicate">'Not' predicate</param>
-            /// <returns>True of the argument to the 'not' predicate evaluator to false; false otherwise</returns>
+            /// <returns>True of the argument to the 'not' predicate evaluator to false; false
+            // otherwise</returns>
             public override PropagatorResult Visit(DbNotExpression predicate)
             {
                 EntityUtil.CheckArgumentNull(predicate, "predicate");
@@ -607,7 +612,8 @@ namespace System.Data.Mapping.Update.Internal
             /// Evaluate a null expression.
             /// </summary>
             /// <param name="node">Is null expression</param>
-            /// <returns>A boolean expression describing the result of evaluating the Is Null predicate</returns>
+            /// <returns>A boolean expression describing the result of evaluating the Is Null
+            // predicate</returns>
             public override PropagatorResult Visit(DbIsNullExpression node)
             {
                 Debug.Assert(null != node, "node is not visited when null");

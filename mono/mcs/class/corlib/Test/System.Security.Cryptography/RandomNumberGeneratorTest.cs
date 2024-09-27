@@ -19,7 +19,8 @@ namespace MonoTests.System.Security.Cryptography
     // References:
     // a.	NIST FIPS PUB 140-2: Security requirements for Cryptographic Modules
     //	http://csrc.nist.gov/publications/fips/fips140-2/fips1402.pdf
-    // b.	NIST SP 800-22: A Statistical Test Suite for Random and Pseudorandom Number Generators for Cryptographic Applications
+    // b.	NIST SP 800-22: A Statistical Test Suite for Random and Pseudorandom Number Generators for
+    // Cryptographic Applications
     //	not implemented
     //	http://csrc.nist.gov/publications/nistpubs/800-22/sp-800-22-051501.pdf
     // c.	IETF RFC1750: Randomness Recommendations for Security

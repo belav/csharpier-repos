@@ -243,7 +243,8 @@ namespace System.ServiceModel.Channels
                 credentialsManager = ClientCredentials.CreateDefaultCredentials();
             }
 
-            // This adds the demuxer element to the context. We add a demuxer element only if the binding is configured to do
+            // This adds the demuxer element to the context. We add a demuxer element only if the binding is
+            // configured to do
             // secure conversation or negotiation
             bool requireDemuxer = RequiresChannelDemuxer();
             ChannelBuilder channelBuilder = new ChannelBuilder(context, requireDemuxer);
@@ -405,7 +406,8 @@ namespace System.ServiceModel.Channels
             if (credentialsManager == null)
                 credentialsManager = ServiceCredentials.CreateDefaultCredentials();
 
-            // This adds the demuxer element to the context. We add a demuxer element only if the binding is configured to do
+            // This adds the demuxer element to the context. We add a demuxer element only if the binding is
+            // configured to do
             // secure conversation or negotiation
 
             bool requireDemuxer = RequiresChannelDemuxer();
@@ -502,7 +504,8 @@ namespace System.ServiceModel.Channels
                         .SessionProtocolFactory
                         .EndpointFilterTable = endpointFilterTable;
 
-                    // pass in the error handler for handling unknown security sessions - dont do this if the underlying channel is duplex since sending
+                    // pass in the error handler for handling unknown security sessions - dont do this if the underlying
+                    // channel is duplex since sending
                     // back faults in response to badly secured requests over duplex can result in DoS.
                     if (
                         context.BindingParameters != null

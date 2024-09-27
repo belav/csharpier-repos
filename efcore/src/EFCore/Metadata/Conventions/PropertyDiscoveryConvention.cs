@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that adds properties to entity types corresponding to scalar public properties on the CLR type.
+///     A convention that adds properties to entity types corresponding to scalar public properties
+// on the CLR type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class PropertyDiscoveryConvention
     : IEntityTypeAddedConvention,
@@ -20,7 +22,8 @@ public class PropertyDiscoveryConvention
     ///     Creates a new instance of <see cref="PropertyDiscoveryConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="useAttributes">Whether the convention will use attributes found on the members.</param>
+    /// <param name="useAttributes">Whether the convention will use attributes found on the
+    // members.</param>
     public PropertyDiscoveryConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         bool useAttributes = true
@@ -72,7 +75,8 @@ public class PropertyDiscoveryConvention
     /// <summary>
     ///    Discovers properties on the given structural type.
     /// </summary>
-    /// <param name="structuralTypeBuilder">The type for which the properties will be discovered.</param>
+    /// <param name="structuralTypeBuilder">The type for which the properties will be
+    // discovered.</param>
     /// <param name="context">Additional information associated with convention execution.</param>
     protected virtual void DiscoverPrimitiveProperties(
         IConventionTypeBaseBuilder structuralTypeBuilder,
@@ -102,7 +106,8 @@ public class PropertyDiscoveryConvention
     }
 
     /// <summary>
-    ///     Returns the CLR members from the given type that should be considered when discovering properties.
+    ///     Returns the CLR members from the given type that should be considered when discovering
+    // properties.
     /// </summary>
     /// <param name="structuralType">The type for which the properties will be discovered.</param>
     /// <returns>The CLR members to be considered.</returns>

@@ -83,8 +83,10 @@ public class ActionEndpointFactoryTest
         Assert.Empty(endpoints);
     }
 
-    // area, controller, action and page are special, but not hardcoded. Actions can define custom required
-    // route values. This has been used successfully for localization, versioning and similar schemes. We should
+    // area, controller, action and page are special, but not hardcoded. Actions can define custom
+    // required
+    // route values. This has been used successfully for localization, versioning and similar schemes.
+    // We should
     // be able to replace custom route values too.
     [Fact]
     public void AddEndpoints_ConventionalRouted_NonReservedRequiredValue_WithNoCorresponding_TemplateParameter_DoesNotProduceEndpoint()

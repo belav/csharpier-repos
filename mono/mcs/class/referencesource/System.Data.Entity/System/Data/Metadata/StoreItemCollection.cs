@@ -35,12 +35,17 @@ namespace System.Data.Metadata.Edm
         private readonly string _providerManifestToken;
         private readonly DbProviderFactory _providerFactory;
 
-        // Storing the query cache manager in the store item collection since all queries are currently bound to the
-        // store. So storing it in StoreItemCollection makes sense. Also, since query cache requires version and other
-        // stuff of the provider, we can assume that the connection is always open and we have the store metadata.
-        // Also we can use the same cache manager both for Entity Client and Object Query, since query cache has
+        // Storing the query cache manager in the store item collection since all queries are currently
+        // bound to the
+        // store. So storing it in StoreItemCollection makes sense. Also, since query cache requires version
+        // and other
+        // stuff of the provider, we can assume that the connection is always open and we have the store
+        // metadata.
+        // Also we can use the same cache manager both for Entity Client and Object Query, since query cache
+        // has
         // no reference to any metadata in OSpace. Also we assume that ObjectMaterializer loads the assembly
-        // before it tries to do object materialization, since we might not have loaded an assembly in another workspace
+        // before it tries to do object materialization, since we might not have loaded an assembly in
+        // another workspace
         // where this store item collection is getting reused
         private readonly System.Data.Common.QueryCache.QueryCacheManager _queryCacheManager =
             System.Data.Common.QueryCache.QueryCacheManager.Create();
@@ -48,7 +53,8 @@ namespace System.Data.Metadata.Edm
 
         #region Constructors
 
-        // used by EntityStoreSchemaGenerator to start with an empty (primitive types only) StoreItemCollection and
+        // used by EntityStoreSchemaGenerator to start with an empty (primitive types only)
+        // StoreItemCollection and
         // add types discovered from the database
         internal StoreItemCollection(
             DbProviderFactory factory,
@@ -74,14 +80,17 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// constructor that loads the metadata files from the specified xmlReaders, and returns the list of errors
+        /// constructor that loads the metadata files from the specified xmlReaders, and returns the list of
+        // errors
         /// encountered during load as the out parameter errors.
         ///
         /// Publicly available from System.Data.Entity.Desgin.dll
         /// </summary>
         /// <param name="xmlReaders">xmlReaders where the CDM schemas are loaded</param>
-        /// <param name="filePaths">the paths where the files can be found that match the xml readers collection</param>
-        /// <param name="errors">An out parameter to return the collection of errors encountered while loading</param>
+        /// <param name="filePaths">the paths where the files can be found that match the xml readers
+        // collection</param>
+        /// <param name="errors">An out parameter to return the collection of errors encountered while
+        // loading</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Performance",
             "CA1811:AvoidUncalledPrivateCode"
@@ -117,13 +126,15 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// constructor that loads the metadata files from the specified xmlReaders, and returns the list of errors
+        /// constructor that loads the metadata files from the specified xmlReaders, and returns the list of
+        // errors
         /// encountered during load as the out parameter errors.
         ///
         /// Publicly available from System.Data.Entity.Desgin.dll
         /// </summary>
         /// <param name="xmlReaders">xmlReaders where the CDM schemas are loaded</param>
-        /// <param name="filePaths">the paths where the files can be found that match the xml readers collection</param>
+        /// <param name="filePaths">the paths where the files can be found that match the xml readers
+        // collection</param>
         internal StoreItemCollection(
             IEnumerable<XmlReader> xmlReaders,
             IEnumerable<string> filePaths
@@ -184,7 +195,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="filePaths">paths where the CDM schemas are loaded</param>
         /// <exception cref="ArgumentException"> Thrown if path name is not valid</exception>
         /// <exception cref="System.ArgumentNullException">thrown if paths argument is null</exception>
-        /// <exception cref="System.Data.MetadataException">For errors related to invalid schemas.</exception>
+        /// <exception cref="System.Data.MetadataException">For errors related to invalid
+        // schemas.</exception>
         [ResourceExposure(ResourceScope.Machine)] //Exposes the file path names which are a Machine resource
         [ResourceConsumption(ResourceScope.Machine)] //For MetadataArtifactLoader.CreateCompositeFromFilePaths method call but we do not create the file paths in this method
         public StoreItemCollection(params string[] filePaths)
@@ -370,12 +382,14 @@ namespace System.Data.Metadata.Edm
         #endregion
 
         /// <summary>
-        /// Get all the overloads of the function with the given name, this method is used for internal perspective
+        /// Get all the overloads of the function with the given name, this method is used for internal
+        // perspective
         /// </summary>
         /// <param name="functionName">The full name of the function</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <returns>A collection of all the functions with the given name in the given data space</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown if functionaName argument passed in is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if functionaName argument passed in is
+        // null</exception>
         internal System.Collections.ObjectModel.ReadOnlyCollection<EdmFunction> GetCTypeFunctions(
             string functionName,
             bool ignoreCase

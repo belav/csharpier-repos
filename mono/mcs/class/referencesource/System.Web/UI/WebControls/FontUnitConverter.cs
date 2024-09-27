@@ -15,14 +15,16 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Converts a <see cref='System.Web.UI.WebControls.FontUnit'/> to and from a specified data type.</para>
+    /// <para>Converts a <see cref='System.Web.UI.WebControls.FontUnit'/> to and from a specified data
+    // type.</para>
     /// </devdoc>
     public class FontUnitConverter : TypeConverter
     {
         private StandardValuesCollection values;
 
         /// <devdoc>
-        /// <para>Determines if the specified data type can be converted to a <see cref='System.Web.UI.WebControls.FontUnit'/>.</para>
+        /// <para>Determines if the specified data type can be converted to a <see
+        // cref='System.Web.UI.WebControls.FontUnit'/>.</para>
         /// </devdoc>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -37,7 +39,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Converts the specified <see cref='System.Object' qualify='true'/> into a <see cref='System.Web.UI.WebControls.FontUnit'/>.</para>
+        /// <para>Converts the specified <see cref='System.Object' qualify='true'/> into a <see
+        // cref='System.Web.UI.WebControls.FontUnit'/>.</para>
         /// </devdoc>
         public override object ConvertFrom(
             ITypeDescriptorContext context,
@@ -85,7 +88,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Converts the specified <see cref='System.Web.UI.WebControls.FontUnit'/> into the specified <see cref='System.Type' qualify='true'/>. </para>
+        /// <para>Converts the specified <see cref='System.Web.UI.WebControls.FontUnit'/> into the specified
+        // <see cref='System.Type' qualify='true'/>. </para>
         /// </devdoc>
         public override object ConvertTo(
             ITypeDescriptorContext context,
@@ -176,7 +180,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Returns a <see cref='System.ComponentModel.TypeConverter.StandardValuesCollection' qualify='true'/>
+        /// <para>Returns a <see cref='System.ComponentModel.TypeConverter.StandardValuesCollection'
+        // qualify='true'/>
         /// containing standard <see cref='System.Web.UI.WebControls.FontUnit'/> values.</para>
         /// </devdoc>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)

@@ -6,7 +6,8 @@ using System.ComponentModel;
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 /// <summary>
-///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" />
+// API
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 public class OwnedNavigationTemporalTableBuilder
@@ -14,10 +15,14 @@ public class OwnedNavigationTemporalTableBuilder
     private readonly OwnedNavigationBuilder _referenceOwnershipBuilder;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public OwnedNavigationTemporalTableBuilder(OwnedNavigationBuilder referenceOwnershipBuilder)
@@ -29,7 +34,8 @@ public class OwnedNavigationTemporalTableBuilder
     ///     Configures a history table for the entity mapped to a temporal table.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
@@ -41,7 +47,8 @@ public class OwnedNavigationTemporalTableBuilder
     ///     Configures a history table for the entity mapped to a temporal table.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="name">The name of the history table.</param>
@@ -56,10 +63,12 @@ public class OwnedNavigationTemporalTableBuilder
     }
 
     /// <summary>
-    ///     Returns an object that can be used to configure a period start property of the entity type mapped to a temporal table.
+    ///     Returns an object that can be used to configure a period start property of the entity type
+    // mapped to a temporal table.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="propertyName">The name of the period start property.</param>
@@ -75,10 +84,12 @@ public class OwnedNavigationTemporalTableBuilder
     }
 
     /// <summary>
-    ///     Returns an object that can be used to configure a period end property of the entity type mapped to a temporal table.
+    ///     Returns an object that can be used to configure a period end property of the entity type
+    // mapped to a temporal table.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF Core</see>
+    ///     See <see href="https://aka.ms/efcore-docs-temporal">Using SQL Server temporal tables with EF
+    // Core</see>
     ///     for more information.
     /// </remarks>
     /// <param name="propertyName">The name of the period end property.</param>
@@ -100,7 +111,8 @@ public class OwnedNavigationTemporalTableBuilder
             .GetInfrastructure()
             .Property(typeof(DateTime), propertyName, setTypeConfigurationSource: false);
 
-        // if convention builder is null, it means the property with this name exists, but it has incorrect type
+        // if convention builder is null, it means the property with this name exists, but it has incorrect
+        // type
         // we will throw in the model validation
         if (conventionPropertyBuilder != null)
         {
@@ -123,7 +135,8 @@ public class OwnedNavigationTemporalTableBuilder
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override bool Equals(object? obj) => base.Equals(obj);
 

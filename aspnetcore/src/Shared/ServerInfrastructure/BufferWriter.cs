@@ -18,13 +18,15 @@ internal ref struct BufferWriter<T>
     private readonly T _output;
 
     /// <summary>
-    /// The result of the last call to <see cref="IBufferWriter{T}.GetSpan(int)"/>, less any bytes already "consumed" with <see cref="Advance(int)"/>.
+    /// The result of the last call to <see cref="IBufferWriter{T}.GetSpan(int)"/>, less any bytes
+    // already "consumed" with <see cref="Advance(int)"/>.
     /// Backing field for the <see cref="Span"/> property.
     /// </summary>
     private Span<byte> _span;
 
     /// <summary>
-    /// The number of uncommitted bytes (all the calls to <see cref="Advance(int)"/> since the last call to <see cref="Commit"/>).
+    /// The number of uncommitted bytes (all the calls to <see cref="Advance(int)"/> since the last call
+    // to <see cref="Commit"/>).
     /// </summary>
     private int _buffered;
 
@@ -85,7 +87,8 @@ internal ref struct BufferWriter<T>
     }
 
     /// <summary>
-    /// Copies the caller's buffer into this writer and calls <see cref="Advance(int)"/> with the length of the source buffer.
+    /// Copies the caller's buffer into this writer and calls <see cref="Advance(int)"/> with the length
+    // of the source buffer.
     /// </summary>
     /// <param name="source">The buffer to copy in.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -103,7 +106,8 @@ internal ref struct BufferWriter<T>
     }
 
     /// <summary>
-    /// Acquires a new buffer if necessary to ensure that some given number of bytes can be written to a single buffer.
+    /// Acquires a new buffer if necessary to ensure that some given number of bytes can be written to a
+    // single buffer.
     /// </summary>
     /// <param name="count">The number of bytes that must be allocated in a single buffer.</param>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -131,7 +135,8 @@ internal ref struct BufferWriter<T>
     }
 
     /// <summary>
-    /// Copies the caller's buffer into this writer, potentially across multiple buffers from the underlying writer.
+    /// Copies the caller's buffer into this writer, potentially across multiple buffers from the
+    // underlying writer.
     /// </summary>
     /// <param name="source">The buffer to copy into this writer.</param>
     private void WriteMultiBuffer(ReadOnlySpan<byte> source)

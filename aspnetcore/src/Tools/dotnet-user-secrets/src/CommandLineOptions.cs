@@ -47,7 +47,8 @@ public class CommandLineOptions
             inherited: true
         );
 
-        // the escape hatch if project evaluation fails, or if users want to alter a secret store other than the one
+        // the escape hatch if project evaluation fails, or if users want to alter a secret store other than
+        // the one
         // in the current project
         var optionId = app.Option(
             "--id",

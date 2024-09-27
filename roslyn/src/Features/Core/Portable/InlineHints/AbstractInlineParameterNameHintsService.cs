@@ -294,10 +294,12 @@ namespace Microsoft.CodeAnalysis.InlineHints
 
         protected static bool MatchesMethodIntent(IParameterSymbol? parameter)
         {
-            // Methods like `SetColor(color: "y")` `FromResult(result: "x")` `Enable/DisablePolling(bool)` don't need
+            // Methods like `SetColor(color: "y")` `FromResult(result: "x")` `Enable/DisablePolling(bool)` don't
+            // need
             // parameter names to improve clarity.  The parameter is clear from the context of the method name.
 
-            // First, this only applies to methods/local functions (as we're looking at the method name itself) so filter down to those.
+            // First, this only applies to methods/local functions (as we're looking at the method name itself)
+            // so filter down to those.
             if (
                 parameter
                 is not {
@@ -309,7 +311,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
             )
                 return false;
 
-            // We only care when dealing with the first parameter.  Note: we don't have to worry parameter reordering
+            // We only care when dealing with the first parameter.  Note: we don't have to worry parameter
+            // reordering
             // due to named-parameter use.  That's because this entire feature only works when we don't use
             // named-parameters.  So, by definition, the parameter/arg must be in the right location.
             if (method.Parameters[0] != parameter)

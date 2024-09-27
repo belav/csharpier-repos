@@ -660,7 +660,8 @@ public class Http3StreamTests : Http3TestBase
     public async Task MaxRequestLineSize_Reset()
     {
         // Default 8kb limit
-        // This test has to work around the HPack parser limit for incoming field sizes over 4kb. That's going to be a problem for people with long urls.
+        // This test has to work around the HPack parser limit for incoming field sizes over 4kb. That's
+        // going to be a problem for people with long urls.
         // https://github.com/aspnet/KestrelHttpServer/issues/2872
         var headers = new[]
         {
@@ -1434,7 +1435,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1497,7 +1499,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1626,7 +1629,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1694,7 +1698,8 @@ public class Http3StreamTests : Http3TestBase
                     );
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1762,7 +1767,8 @@ public class Http3StreamTests : Http3TestBase
                     );
                     Assert.Equal("Writing is not allowed after writer was completed.", ex.Message);
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1877,7 +1883,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -1946,7 +1953,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2019,7 +2027,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2095,7 +2104,8 @@ public class Http3StreamTests : Http3TestBase
                         context.Features.Get<IHttpResponseTrailersFeature>().Trailers.IsReadOnly
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2170,7 +2180,8 @@ public class Http3StreamTests : Http3TestBase
                     Assert.False(context.RequestAborted.CanBeCanceled);
                     context.Abort();
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2255,7 +2266,8 @@ public class Http3StreamTests : Http3TestBase
                         async () => await context.Request.BodyReader.ReadAsync()
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2333,7 +2345,8 @@ public class Http3StreamTests : Http3TestBase
                     Assert.NotNull(resetFeature);
                     resetFeature.Reset((int)Http3ErrorCode.NoError);
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }
@@ -2420,7 +2433,8 @@ public class Http3StreamTests : Http3TestBase
                         async () => await context.Request.BodyReader.ReadAsync()
                     );
 
-                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate exiting.
+                    // Make sure the client gets our results from CompleteAsync instead of from the request delegate
+                    // exiting.
                     await clientTcs.Task.DefaultTimeout();
                     appTcs.SetResult();
                 }

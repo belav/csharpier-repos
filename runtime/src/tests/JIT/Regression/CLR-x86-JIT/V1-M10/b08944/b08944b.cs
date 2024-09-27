@@ -15,19 +15,19 @@ namespace X
         //extern("msvcrt.dll:printf") int printf(const char *fmt, ...);
         //UInt32 int _exception_code();
 
-        /*
-        public static int     filt(UInt32 a)
-        {
-            Console.WriteLine("Exception code = " + a);
-            return  1;
-        }
-        
-        public static int     filt0(UInt32 a)
-        {
-            Console.WriteLine("Exception code = " + a);
-            return  0;
-        }
-        */
+/*
+public static int     filt(UInt32 a)
+{
+Console.WriteLine("Exception code = " + a);
+return  1;
+}
+
+public static int     filt0(UInt32 a)
+{
+Console.WriteLine("Exception code = " + a);
+return  0;
+}
+*/
 
         internal static void bomb()
         {

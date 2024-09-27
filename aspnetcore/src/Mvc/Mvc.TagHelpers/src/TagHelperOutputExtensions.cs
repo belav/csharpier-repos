@@ -39,8 +39,10 @@ public static class TagHelperOutputExtensions
     /// <paramref name="attributeName"/>.
     /// </para>
     /// <para>
-    /// Duplicate attributes same name in <paramref name="context"/>'s <see cref="TagHelperContext.AllAttributes"/>
-    /// or <paramref name="tagHelperOutput"/>'s <see cref="TagHelperOutput.Attributes"/> may result in copied
+    /// Duplicate attributes same name in <paramref name="context"/>'s <see
+    // cref="TagHelperContext.AllAttributes"/>
+    /// or <paramref name="tagHelperOutput"/>'s <see cref="TagHelperOutput.Attributes"/> may result in
+    // copied
     /// attribute order not being maintained.
     /// </para></remarks>
     public static void CopyHtmlAttribute(
@@ -95,7 +97,8 @@ public static class TagHelperOutputExtensions
     /// </summary>
     /// <param name="tagHelperOutput">The <see cref="TagHelperOutput"/> this method extends.</param>
     /// <param name="tagBuilder">The <see cref="TagBuilder"/> to merge attributes from.</param>
-    /// <remarks>Existing <see cref="TagHelperOutput.Attributes"/> on the given <paramref name="tagHelperOutput"/>
+    /// <remarks>Existing <see cref="TagHelperOutput.Attributes"/> on the given <paramref
+    // name="tagHelperOutput"/>
     /// are not overridden; "class" attributes are merged with spaces.</remarks>
     public static void MergeAttributes(this TagHelperOutput tagHelperOutput, TagBuilder tagBuilder)
     {
@@ -349,7 +352,8 @@ public static class TagHelperOutputExtensions
         var allAttributes = context.AllAttributes;
         var existingAttribute = allAttributes[allAttributeIndex];
 
-        // Move backwards through context.AllAttributes from the provided index until we find a familiar attribute
+        // Move backwards through context.AllAttributes from the provided index until we find a familiar
+        // attribute
         // in tagHelperOutput where we can insert the copied value after the familiar one.
         for (var i = allAttributeIndex - 1; i >= 0; i--)
         {
@@ -364,7 +368,8 @@ public static class TagHelperOutputExtensions
 
         // Read interface .Count once rather than per iteration
         var allAttributesCount = allAttributes.Count;
-        // Move forward through context.AllAttributes from the provided index until we find a familiar attribute in
+        // Move forward through context.AllAttributes from the provided index until we find a familiar
+        // attribute in
         // tagHelperOutput where we can insert the copied value.
         for (var i = allAttributeIndex + 1; i < allAttributesCount; i++)
         {

@@ -86,7 +86,7 @@ namespace TestApp
 
             TypeBuilder tb = DefineDelegate();
             TypeBuilder main = module.DefineType("Main", TypeAttributes.Public);
-            /* >>>move this to after the SetParent call and things will work<<< */
+/* >>>move this to after the SetParent call and things will work<<< */
             Type inst = tb.MakeGenericType(new Type[] { typeof(double), typeof(int) });
 
             tb.SetParent(typeof(System.MulticastDelegate));

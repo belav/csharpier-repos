@@ -36,8 +36,10 @@ namespace Microsoft.Extensions.DependencyInjection
 
             if (_isDefault)
             {
-                // Insert IConfigureOptions<HttpClientFactoryOptions> services into the collection before named config descriptors.
-                // This ensures they run and apply configuration first. Configuration for named clients run afterwards.
+                // Insert IConfigureOptions<HttpClientFactoryOptions> services into the collection before named
+                // config descriptors.
+                // This ensures they run and apply configuration first. Configuration for named clients run
+                // afterwards.
                 if (
                     _tracker.InsertDefaultsAfterDescriptor != null
                     && _services.IndexOf(_tracker.InsertDefaultsAfterDescriptor) is var index

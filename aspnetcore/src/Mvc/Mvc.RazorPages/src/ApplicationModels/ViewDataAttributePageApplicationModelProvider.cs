@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 internal sealed class ViewDataAttributePageApplicationModelProvider : IPageApplicationModelProvider
 {
     /// <inheritdoc />
-    /// <remarks>This order ensures that <see cref="ViewDataAttributePageApplicationModelProvider"/> runs after the <see cref="DefaultPageApplicationModelProvider"/>.</remarks>
+    /// <remarks>This order ensures that <see cref="ViewDataAttributePageApplicationModelProvider"/>
+    // runs after the <see cref="DefaultPageApplicationModelProvider"/>.</remarks>
     public int Order => -1000 + 10;
 
     /// <inheritdoc />

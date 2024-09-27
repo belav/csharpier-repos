@@ -86,7 +86,8 @@ namespace System.Data
 
         /// <summary>
         /// Executes a Select (Projection) on EnumerableDataTable. If the selector returns a different
-        /// type than the type of rows, then AsLinqDataView is disabled, and the returning EnumerableDataTable
+        /// type than the type of rows, then AsLinqDataView is disabled, and the returning
+        // EnumerableDataTable
         /// represents an enumerable over the LINQ Query.
         /// </summary>
         public static EnumerableRowCollection<S> Select<TRow, S>(

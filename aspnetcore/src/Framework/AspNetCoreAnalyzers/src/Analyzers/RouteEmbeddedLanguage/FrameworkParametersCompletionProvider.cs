@@ -143,7 +143,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
 
         var token = root.FindTokenOnLeftOfPosition(position);
 
-        // If space is after ? or > then it's likely a nullable or generic type. Move to previous type token.
+        // If space is after ? or > then it's likely a nullable or generic type. Move to previous type
+        // token.
         if (token.IsKind(SyntaxKind.QuestionToken) || token.IsKind(SyntaxKind.GreaterThanToken))
         {
             token = token.GetPreviousToken();
@@ -173,7 +174,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
         var wellKnownTypes = WellKnownTypes.GetOrCreate(semanticModel.Compilation);
 
         // Don't offer route parameter names when the parameter type can't be bound to route parameters.
-        // e.g. special types like HttpContext, non-primitive types that don't have a static TryParse method.
+        // e.g. special types like HttpContext, non-primitive types that don't have a static TryParse
+        // method.
         if (
             !IsCurrentParameterBindable(
                 token,
@@ -186,7 +188,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             return;
         }
 
-        // Don't offer route parameter names when the parameter has an attribute that can't be bound to route parameters.
+        // Don't offer route parameter names when the parameter has an attribute that can't be bound to
+        // route parameters.
         // e.g [AsParameters] or [IFromBodyMetadata].
         var hasNonRouteAttribute = HasNonRouteAttribute(
             token,
@@ -530,7 +533,8 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
             return false;
         }
 
-        // The cursor is on an identifier (parameter name) and completion is explicitly triggered (e.g. CTRL+SPACE)
+        // The cursor is on an identifier (parameter name) and completion is explicitly triggered (e.g.
+        // CTRL+SPACE)
         return true;
     }
 

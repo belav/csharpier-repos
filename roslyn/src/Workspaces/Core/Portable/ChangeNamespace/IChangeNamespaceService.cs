@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
     internal interface IChangeNamespaceService : ILanguageService
     {
         /// <summary>
-        /// Determine whether we can change the namespace for given <paramref name="container"/> in the document.
+        /// Determine whether we can change the namespace for given <paramref name="container"/> in the
+        // document.
         /// Linked documents are not supported, except for a regular document in a multi-targeting project,
         /// where the container node must be consistent among all linked documents.
         /// Here's the additional requirements on <paramref name="container"/> to use this service:
@@ -34,8 +35,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         /// Returns <see langword="true"/> only when all the requirements above are met.
         /// </summary>
         /// <remarks>
-        /// While this service might be used by features that change namespace based on some property of the document
-        /// (e.g. Sync namespace refactoring), those logic is implemented by those individual features and isn't part
+        /// While this service might be used by features that change namespace based on some property of the
+        // document
+        /// (e.g. Sync namespace refactoring), those logic is implemented by those individual features and
+        // isn't part
         /// of the IChangeNamespaceService service.
         /// </remarks>
         Task<bool> CanChangeNamespaceAsync(
@@ -45,17 +48,21 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         );
 
         /// <summary>
-        /// Change namespace for given <paramref name="container"/> to the name specified by <paramref name="targetNamespace"/>.
+        /// Change namespace for given <paramref name="container"/> to the name specified by <paramref
+        // name="targetNamespace"/>.
         /// Everything declared in the <paramref name="container"/> will be moved to the new namespace.
-        /// Change will only be made if <see cref="CanChangeNamespaceAsync"/> returns <see langword="true"/> and <paramref name="targetNamespace"/>
-        /// is a valid name for namespace. Use "" for <paramref name="targetNamespace"/> to specify the global namespace.
+        /// Change will only be made if <see cref="CanChangeNamespaceAsync"/> returns <see langword="true"/>
+        // and <paramref name="targetNamespace"/>
+        /// is a valid name for namespace. Use "" for <paramref name="targetNamespace"/> to specify the
+        // global namespace.
         ///
         /// An <see cref="System.ArgumentException"/> will be thrown if:
         /// 1. <paramref name="container"/> is not a namespace declaration or a compilation unit node.
         /// 2. <paramref name="targetNamespace"/> is null or contains an invalid character.
         /// </summary>
         /// <remarks>
-        /// If the declared namespace for <paramref name="container"/> is already identical to <paramref name="targetNamespace"/>, then it will be
+        /// If the declared namespace for <paramref name="container"/> is already identical to <paramref
+        // name="targetNamespace"/>, then it will be
         /// a no-op and original solution will be returned.
         /// </remarks>
         Task<Solution> ChangeNamespaceAsync(
@@ -67,8 +74,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         );
 
         /// <summary>
-        /// Using only the top level namespace declarations of a document, change all of them to the target namespace. Will only
-        /// use namespace containers considered valid by <see cref="CanChangeNamespaceAsync(Document, SyntaxNode, CancellationToken)"/>
+        /// Using only the top level namespace declarations of a document, change all of them to the target
+        // namespace. Will only
+        /// use namespace containers considered valid by <see cref="CanChangeNamespaceAsync(Document,
+        // SyntaxNode, CancellationToken)"/>
         /// </summary>
         Task<Solution?> TryChangeTopLevelNamespacesAsync(
             Document document,

@@ -179,7 +179,8 @@ namespace MonoTests.System.ServiceModel.Channels
             ctx.BuildInnerChannelFactory<IRequestChannel>();
         }
 
-        // Disable this test anytime when HttpTransportBindingElement.BuildChannelFactory() doesn't return ChannelFactoryBase`1 anymore. It's not an API requirement.
+        // Disable this test anytime when HttpTransportBindingElement.BuildChannelFactory() doesn't return
+        // ChannelFactoryBase`1 anymore. It's not an API requirement.
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void BuildChannelFactory_CreateChannelNullVia()

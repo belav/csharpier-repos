@@ -106,7 +106,7 @@ namespace System.Windows
             return new Point(point.X - vector.X, point.Y - vector.Y);
         }
 
-        /* operators */
+/* operators */
 
         public static Vector operator -(Point point1, Point point2)
         {

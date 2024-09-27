@@ -11,7 +11,8 @@ namespace System.DirectoryServices.AccountManagement
     ///
     /// <summary>
     /// Retrieves all the values of the specified attribute using the supplied DirectoryEntry object.
-    /// This function would additionally dispose the supplied DirectoryEntry object in its Dispose() method
+    /// This function would additionally dispose the supplied DirectoryEntry object in its Dispose()
+    // method
     /// if disposeDirEntry parameter is set to true in its constructor.
     /// </summary>
     ///
@@ -22,7 +23,8 @@ namespace System.DirectoryServices.AccountManagement
         /// Creates a new RangeRetriever object.
         /// </summary>
         /// <param name="de">DirectoryEntry object whose attribute needs to be range retrieved</param>
-        /// <param name="propertyName">name of the attribute that needs to be range retrieved, ex: "memberOf"</param>
+        /// <param name="propertyName">name of the attribute that needs to be range retrieved, ex:
+        // "memberOf"</param>
         /// <param name="disposeDirEntry">
         /// If set to true, the supplied DirectoryEntry will be disposed,
         /// by this object's Dispose() method

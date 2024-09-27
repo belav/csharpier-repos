@@ -365,7 +365,8 @@ namespace System.Data.Mapping
 
         /// <summary>
         /// The visitor validates that the QueryView for an AssociationSet uses the same EntitySets when
-        /// creating the ends that were used in CSDL. Since the Query View is already validated, we can expect to
+        /// creating the ends that were used in CSDL. Since the Query View is already validated, we can
+        // expect to
         /// see only a very restricted set of expressions in the tree.
         /// </summary>
         private class AssociationSetViewValidator : DbExpressionVisitor<DbExpressionEntitySetInfo>
@@ -415,7 +416,8 @@ namespace System.Data.Mapping
                 this.variableScopes.Pop();
             }
 
-            //Verifies that the Sets we got from visiting the tree( under AssociationType constructor) match the ones
+            //Verifies that the Sets we got from visiting the tree( under AssociationType constructor) match the
+            // ones
             //defined in CSDL
             private void ValidateEntitySetsMappedForAssociationSetMapping(
                 DbExpressionStructuralTypeEntitySetInfo setInfos

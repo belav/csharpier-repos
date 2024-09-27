@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics;
 using System.Diagnostics.Contracts;
@@ -30,7 +31,8 @@ namespace System.Web.Http.Batch
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpBatchHandler"/> class.
         /// </summary>
-        /// <param name="httpServer">The <see cref="HttpServer"/> for handling the individual batch requests.</param>
+        /// <param name="httpServer">The <see cref="HttpServer"/> for handling the individual batch
+        // requests.</param>
         protected HttpBatchHandler(HttpServer httpServer)
         {
             if (httpServer == null)

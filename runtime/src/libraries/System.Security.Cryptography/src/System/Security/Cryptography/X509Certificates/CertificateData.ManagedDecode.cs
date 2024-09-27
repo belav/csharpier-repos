@@ -89,7 +89,8 @@ namespace System.Security.Cryptography.X509Certificates
                 CertificateAsn.Decode(ref reader, rawData, out certificate);
                 certificate.TbsCertificate.ValidateVersion();
 
-                // Use of == on Span is intentional. If the encodedValue is identical to the rawData, then we can use
+                // Use of == on Span is intentional. If the encodedValue is identical to the rawData, then we can
+                // use
                 // raw data as-is, meaning it had no trailing data. Otherwise, use the encodedValue.
                 RawData = encodedValue == rawData ? rawData : encodedValue.ToArray();
 
@@ -136,10 +137,12 @@ namespace System.Security.Cryptography.X509Certificates
             // Algorithm behaviors (pseudocode).  When forIssuer is true, replace "Subject" with "Issuer" and
             // SAN (Subject Alternative Names) with IAN (Issuer Alternative Names).
             //
-            // SimpleName: Subject[CN] ?? Subject[OU] ?? Subject[O] ?? Subject[E] ?? Subject.Rdns.FirstOrDefault() ??
+            // SimpleName: Subject[CN] ?? Subject[OU] ?? Subject[O] ?? Subject[E] ??
+            // Subject.Rdns.FirstOrDefault() ??
             // SAN.Entries.FirstOrDefault(type == GEN_EMAIL);
             // EmailName: SAN.Entries.FirstOrDefault(type == GEN_EMAIL) ?? Subject[E];
-            // UpnName: SAN.Entries.FirsOrDefaultt(type == GEN_OTHER && entry.AsOther().OID == szOidUpn).AsOther().Value;
+            // UpnName: SAN.Entries.FirsOrDefaultt(type == GEN_OTHER && entry.AsOther().OID ==
+            // szOidUpn).AsOther().Value;
             // DnsName: SAN.Entries.FirstOrDefault(type == GEN_DNS) ?? Subject[CN];
             // DnsFromAlternativeName: SAN.Entries.FirstOrDefault(type == GEN_DNS);
             // UrlName: SAN.Entries.FirstOrDefault(type == GEN_URI);

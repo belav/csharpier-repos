@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -38,15 +38,18 @@ namespace System.ComponentModel
         public static readonly BrowsableAttribute No = new BrowsableAttribute(false);
 
         /// <devdoc>
-        /// <para>Specifies the default value for the <see cref='System.ComponentModel.BrowsableAttribute'/>,
-        ///    which is <see cref='System.ComponentModel.BrowsableAttribute.Yes'/>. This <see langword='static '/>field is read-only.</para>
+        /// <para>Specifies the default value for the <see
+        // cref='System.ComponentModel.BrowsableAttribute'/>,
+        ///    which is <see cref='System.ComponentModel.BrowsableAttribute.Yes'/>. This <see
+        // langword='static '/>field is read-only.</para>
         /// </devdoc>
         public static readonly BrowsableAttribute Default = Yes;
 
         private bool browsable = true;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.BrowsableAttribute'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.BrowsableAttribute'/>
+        // class.</para>
         /// </devdoc>
         public BrowsableAttribute(bool browsable)
         {

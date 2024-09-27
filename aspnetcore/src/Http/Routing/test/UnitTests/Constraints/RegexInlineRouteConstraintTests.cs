@@ -67,7 +67,8 @@ public class RegexInlineRouteConstraintTests
     {
         if (TestPlatformHelper.IsMono)
         {
-            // The Regex in Mono returns true when matching the Turkish I for the a-z range which causes the test
+            // The Regex in Mono returns true when matching the Turkish I for the a-z range which causes the
+            // test
             // to fail. Tracked via #100.
             return;
         }

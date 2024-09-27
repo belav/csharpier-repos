@@ -30,7 +30,8 @@ namespace Moq.Language
         /// <summary>
         /// Specifies the type of exception to throw when the method is invoked.
         /// </summary>
-        /// <typeparam name="TException">Type of exception to instantiate and throw when the setup is matched.</typeparam>
+        /// <typeparam name="TException">Type of exception to instantiate and throw when the setup is
+        // matched.</typeparam>
         /// <example>
         /// This example shows how to throw an exception when the method is
         /// invoked with an empty string argument:
@@ -45,7 +46,8 @@ namespace Moq.Language
         /// <summary>
         /// Specifies a function that will calculate the exception to throw when the method is invoked.
         /// </summary>
-        /// <param name="exceptionFunction">The function that will calculate the exception to be thrown.</param>
+        /// <param name="exceptionFunction">The function that will calculate the exception to be
+        // thrown.</param>
         /// <example>
         /// Throw a calculated exception when the method is called:
         /// <code>
@@ -61,8 +63,10 @@ namespace Moq.Language
         /// <summary>
         /// Specifies a function that will calculate the exception to throw when the method is invoked.
         /// </summary>
-        /// <typeparam name="TException">Type of exception that will be calculated and thrown when the setup is matched.</typeparam>
-        /// <param name="exceptionFunction">The function that will calculate the exception to be thrown.</param>
+        /// <typeparam name="TException">Type of exception that will be calculated and thrown when the setup
+        // is matched.</typeparam>
+        /// <param name="exceptionFunction">The function that will calculate the exception to be
+        // thrown.</param>
         /// <example>
         /// Throw a calculated exception when the method is called:
         /// <code>
@@ -82,8 +86,10 @@ namespace Moq.Language
         /// retrieving the arguments for the invocation.
         /// </summary>
         /// <typeparam name="T">The type of the argument of the invoked method.</typeparam>
-        /// <typeparam name="TException">Type of exception that will be calculated and thrown when the setup is matched.</typeparam>
-        /// <param name="exceptionFunction">The function that will calculate the exception to be thrown.</param>
+        /// <typeparam name="TException">Type of exception that will be calculated and thrown when the setup
+        // is matched.</typeparam>
+        /// <param name="exceptionFunction">The function that will calculate the exception to be
+        // thrown.</param>
         /// <example>
         /// Throw a calculated exception which is evaluated lazily at the time of the invocation.
         /// <para>

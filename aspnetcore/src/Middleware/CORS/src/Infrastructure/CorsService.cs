@@ -34,7 +34,8 @@ public class CorsService : ICorsService
     }
 
     /// <summary>
-    /// Looks up a policy using the <paramref name="policyName"/> and then evaluates the policy using the passed in
+    /// Looks up a policy using the <paramref name="policyName"/> and then evaluates the policy using
+    // the passed in
     /// <paramref name="context"/>.
     /// </summary>
     /// <param name="context"></param>
@@ -134,7 +135,8 @@ public class CorsService : ICorsService
     }
 
     /// <summary>
-    /// Evaluate a request using the specified policy. The result is set on the specified <see cref="CorsResult"/> instance.
+    /// Evaluate a request using the specified policy. The result is set on the specified <see
+    // cref="CorsResult"/> instance.
     /// </summary>
     /// <param name="context">The current HTTP context.</param>
     /// <param name="policy">The <see cref="CorsPolicy"/> to evaluate.</param>
@@ -145,7 +147,8 @@ public class CorsService : ICorsService
     }
 
     /// <summary>
-    /// Evaluate a preflight request using the specified policy. The result is set on the specified <see cref="CorsResult"/> instance.
+    /// Evaluate a preflight request using the specified policy. The result is set on the specified <see
+    // cref="CorsResult"/> instance.
     /// </summary>
     /// <param name="context">The current HTTP context.</param>
     /// <param name="policy">The <see cref="CorsPolicy"/> to evaluate.</param>
@@ -211,7 +214,8 @@ public class CorsService : ICorsService
         }
         else
         {
-            // An HTTP response to a CORS request that is not a CORS-preflight request can also include the following header:
+            // An HTTP response to a CORS request that is not a CORS-preflight request can also include the
+            // following header:
             // `Access-Control-Expose-Headers`
             if (result.AllowedExposedHeaders.Count > 0)
             {

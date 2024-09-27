@@ -705,7 +705,8 @@ namespace System.Xml.Xsl.XsltOld
             object result = query.Evaluate(context);
             if (result is XPathNodeIterator)
             {
-                // ToDo: We create XPathSelectionIterator to count positions, but it's better create special query in this case at compile time.
+                // ToDo: We create XPathSelectionIterator to count positions, but it's better create special query
+                // in this case at compile time.
                 return new XPathSelectionIterator(context.Current, query);
             }
             throw XsltException.Create(Res.XPath_NodeSetExpected);

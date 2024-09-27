@@ -1,24 +1,25 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System.Dynamic.Utils;
 
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents the dynamic set member operation at the call site, providing the binding semantic and the details about the operation.
+    /// Represents the dynamic set member operation at the call site, providing the binding semantic and
+    // the details about the operation.
     /// </summary>
     public abstract class SetMemberBinder : DynamicMetaObjectBinder
     {
@@ -29,7 +30,8 @@ namespace System.Dynamic
         /// Initializes a new instance of the <see cref="SetMemberBinder" />.
         /// </summary>
         /// <param name="name">The name of the member to get.</param>
-        /// <param name="ignoreCase">true if the name should be matched ignoring case; false otherwise.</param>
+        /// <param name="ignoreCase">true if the name should be matched ignoring case; false
+        // otherwise.</param>
         protected SetMemberBinder(string name, bool ignoreCase)
         {
             ContractUtils.RequiresNotNull(name, "name");
@@ -90,7 +92,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// Performs the binding of the dynamic set member operation if the target dynamic object cannot bind.
+        /// Performs the binding of the dynamic set member operation if the target dynamic object cannot
+        // bind.
         /// </summary>
         /// <param name="target">The target of the dynamic set member operation.</param>
         /// <param name="value">The value to set to the member.</param>
@@ -104,7 +107,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// Performs the binding of the dynamic set member operation if the target dynamic object cannot bind.
+        /// Performs the binding of the dynamic set member operation if the target dynamic object cannot
+        // bind.
         /// </summary>
         /// <param name="target">The target of the dynamic set member operation.</param>
         /// <param name="value">The value to set to the member.</param>

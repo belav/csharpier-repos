@@ -152,7 +152,8 @@ namespace CSharpSyntaxGenerator
                     writeFunction(textWriter);
                 }
 
-                // And create a SourceText from the StringBuilder, once again avoiding allocating a single massive string
+                // And create a SourceText from the StringBuilder, once again avoiding allocating a single massive
+                // string
                 var sourceText = SourceText.From(
                     new StringBuilderReader(stringBuilder),
                     stringBuilder.Length,

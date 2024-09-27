@@ -9,8 +9,10 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Represents the thread static region of a given type. This is very similar to <see cref="GCStaticsNode"/>,
-    /// since the actual storage will be allocated on the GC heap at runtime and is allowed to contain GC pointers.
+    /// Represents the thread static region of a given type. This is very similar to <see
+    // cref="GCStaticsNode"/>,
+    /// since the actual storage will be allocated on the GC heap at runtime and is allowed to contain
+    // GC pointers.
     /// </summary>
     public class ThreadStaticsNode : EmbeddedObjectNode, ISymbolDefinitionNode
     {
@@ -108,7 +110,8 @@ namespace ILCompiler.DependencyAnalysis
                         );
                     }
 
-                    // inlined threadstatics do not need the index for execution, but may need it for debug visualization.
+                    // inlined threadstatics do not need the index for execution, but may need it for debug
+                    // visualization.
                     result.Add(
                         new DependencyListEntry(
                             factory.TypeThreadStaticIndex(type),

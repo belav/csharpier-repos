@@ -24,7 +24,8 @@
 // For additional rules see also:
 //  RFC 3490 - Internationalizing Domain Names in Applications (IDNA)
 //  RFC 3491 - Nameprep: A Stringprep Profile for Internationalized Domain Names (IDN)
-//  RFC 3492 - Punycode: A Bootstring encoding of Unicode for Internationalized Domain Names in Applications (IDNA)
+//  RFC 3492 - Punycode: A Bootstring encoding of Unicode for Internationalized Domain Names in
+// Applications (IDNA)
 //
 // ==--==
 namespace System.Globalization
@@ -271,8 +272,10 @@ namespace System.Globalization
                     Environment.GetResourceString("ArgumentOutOfRange_IndexCountBuffer")
                 );
 
-            // This is a case (i.e. explicitly null-terminated input) where behavior in .NET and Win32 intentionally differ.
-            // The .NET APIs should (and did in v4.0 and earlier) throw an ArgumentException on input that includes a terminating null.
+            // This is a case (i.e. explicitly null-terminated input) where behavior in .NET and Win32
+            // intentionally differ.
+            // The .NET APIs should (and did in v4.0 and earlier) throw an ArgumentException on input that
+            // includes a terminating null.
             // The Win32 APIs fail on an embedded null, but not on a terminating null.
             if (count > 0 && ascii[index + count - 1] == (char)0)
                 throw new ArgumentException(
@@ -406,7 +409,8 @@ namespace System.Globalization
             // Loop the whole string
             for (int i = 0; i < unicode.Length; i++)
             {
-                // Aren't allowing control chars (or 7f, but idn tables catch that, they don't catch \0 at end though)
+                // Aren't allowing control chars (or 7f, but idn tables catch that, they don't catch \0 at end
+                // though)
                 if (unicode[i] <= 0x1f)
                 {
                     throw new ArgumentException(
@@ -1307,34 +1311,34 @@ namespace System.Globalization
 
         /*
         The previous punycode implimentation is based on the sample code in RFC 3492
-
+        
         Full Copyright Statement
-
-           Copyright (C) The Internet Society (2003).  All Rights Reserved.
-
-           This document and translations of it may be copied and furnished to
-           others, and derivative works that comment on or otherwise explain it
-           or assist in its implementation may be prepared, copied, published
-           and distributed, in whole or in part, without restriction of any
-           kind, provided that the above copyright notice and this paragraph are
-           included on all such copies and derivative works.  However, this
-           document itself may not be modified in any way, such as by removing
-           the copyright notice or references to the Internet Society or other
-           Internet organizations, except as needed for the purpose of
-           developing Internet standards in which case the procedures for
-           copyrights defined in the Internet Standards process must be
-           followed, or as required to translate it into languages other than
-           English.
-
-           The limited permissions granted above are perpetual and will not be
-           revoked by the Internet Society or its successors or assigns.
-
-           This document and the information contained herein is provided on an
-           "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
-           TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
-           BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
-           HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
-           MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+        
+        Copyright (C) The Internet Society (2003).  All Rights Reserved.
+        
+        This document and translations of it may be copied and furnished to
+        others, and derivative works that comment on or otherwise explain it
+        or assist in its implementation may be prepared, copied, published
+        and distributed, in whole or in part, without restriction of any
+        kind, provided that the above copyright notice and this paragraph are
+        included on all such copies and derivative works.  However, this
+        document itself may not be modified in any way, such as by removing
+        the copyright notice or references to the Internet Society or other
+        Internet organizations, except as needed for the purpose of
+        developing Internet standards in which case the procedures for
+        copyrights defined in the Internet Standards process must be
+        followed, or as required to translate it into languages other than
+        English.
+        
+        The limited permissions granted above are perpetual and will not be
+        revoked by the Internet Society or its successors or assigns.
+        
+        This document and the information contained herein is provided on an
+        "AS IS" basis and THE INTERNET SOCIETY AND THE INTERNET ENGINEERING
+        TASK FORCE DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+        BUT NOT LIMITED TO ANY WARRANTY THAT THE USE OF THE INFORMATION
+        HEREIN WILL NOT INFRINGE ANY RIGHTS OR ANY IMPLIED WARRANTIES OF
+        MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
         */
 #if !MONO
         private const int IDN_ALLOW_UNASSIGNED = 0x1;

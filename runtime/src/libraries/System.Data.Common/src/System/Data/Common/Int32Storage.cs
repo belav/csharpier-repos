@@ -201,7 +201,8 @@ namespace System.Data.Common
                 return -1;
             }
             return valueNo1.CompareTo((int)value);
-            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to Int32.CompareTo(Int32)
+            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to
+            // Int32.CompareTo(Int32)
         }
 
         public override object ConvertValue(object? value)

@@ -25,7 +25,8 @@ public class DefaultHttpContextFactory : IHttpContextFactory
     /// <summary>
     /// Creates a factory for creating <see cref="HttpContext" /> instances.
     /// </summary>
-    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to be used when retrieving services.</param>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to be used when retrieving
+    // services.</param>
     public DefaultHttpContextFactory(IServiceProvider serviceProvider)
     {
         // May be null

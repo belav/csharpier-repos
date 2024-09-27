@@ -866,7 +866,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_rcp_ss (__m128 a, __m128 b)
         ///    RCPSS xmm1,       xmm2/m32
         ///   VRCPSS xmm1, xmm2, xmm3/m32
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> ReciprocalScalar(
             Vector128<float> upper,
@@ -900,7 +901,8 @@ namespace System.Runtime.Intrinsics.X86
         /// __m128 _mm_rsqrt_ss (__m128 a, __m128 b)
         ///    RSQRTSS xmm1,       xmm2/m32
         ///   VRSQRTSS xmm1, xmm2, xmm3/m32
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> ReciprocalSqrtScalar(
             Vector128<float> upper,
@@ -952,7 +954,8 @@ namespace System.Runtime.Intrinsics.X86
         ///    SQRTSS xmm1,               xmm2/m32
         ///   VSQRTSS xmm1,         xmm2, xmm3/m32
         ///   VSQRTSS xmm1 {k1}{z}, xmm2, xmm3/m32{er}
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> SqrtScalar(Vector128<float> upper, Vector128<float> value)
         {

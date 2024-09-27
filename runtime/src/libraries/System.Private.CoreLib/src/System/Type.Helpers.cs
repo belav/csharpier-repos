@@ -377,7 +377,8 @@ namespace System
             return false;
         }
 
-        // IL2085 is produced due to the "this" of the method not being annotated and used in effectively this.GetInterfaces()
+        // IL2085 is produced due to the "this" of the method not being annotated and used in effectively
+        // this.GetInterfaces()
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2085:UnrecognizedReflectionPattern",
@@ -390,7 +391,8 @@ namespace System
             Type? t = this;
             while (t != null)
             {
-                // IL2075 is produced due to the BaseType not returning annotated value and used in effectively this.BaseType.GetInterfaces()
+                // IL2075 is produced due to the BaseType not returning annotated value and used in effectively
+                // this.BaseType.GetInterfaces()
                 // The GetInterfaces technically requires all interfaces to be preserved
                 // But this method only compares the result against the passed in ifaceType.
                 // So if ifaceType exists, then trimming should have kept it implemented on any type.

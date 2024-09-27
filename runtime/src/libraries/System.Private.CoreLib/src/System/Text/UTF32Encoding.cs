@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be confused.
+// Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be
+// confused.
 //
 
 using System.Diagnostics;
@@ -21,16 +22,16 @@ namespace System.Text
 
     public sealed class UTF32Encoding : Encoding
     {
-        /*
-            words   bits    UTF-32 representation
-            -----   ----    -----------------------------------
-            1       16      00000000 00000000 xxxxxxxx xxxxxxxx
-            2       21      00000000 000xxxxx hhhhhhll llllllll
-            -----   ----    -----------------------------------
+/*
+words   bits    UTF-32 representation
+-----   ----    -----------------------------------
+1       16      00000000 00000000 xxxxxxxx xxxxxxxx
+2       21      00000000 000xxxxx hhhhhhll llllllll
+-----   ----    -----------------------------------
 
-            Surrogate:
-            Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
-        */
+Surrogate:
+Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
+*/
 
         // Used by Encoding.UTF32/BigEndianUTF32 for lazy initialization
         // The initialization code will not be run until a static member of the class is referenced
@@ -1208,7 +1209,8 @@ namespace System.Text
             ArgumentOutOfRangeException.ThrowIfNegative(byteCount);
 
             // A supplementary character becomes 2 surrogate characters, so 4 input bytes becomes 2 chars,
-            // plus we may have 1 surrogate char left over if the decoder has 3 bytes in it already for a non-bmp char.
+            // plus we may have 1 surrogate char left over if the decoder has 3 bytes in it already for a
+            // non-bmp char.
             // Have to add another one because 1/2 == 0, but 3 bytes left over could be 2 char surrogate pair
             int charCount = (byteCount / 2) + 2;
 

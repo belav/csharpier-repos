@@ -56,7 +56,8 @@ namespace System.Xml.XPath
         }
 
         /// <summary>
-        /// Implementation of a resetable enumerator that is linked to the XPathNodeIterator used to create it.
+        /// Implementation of a resetable enumerator that is linked to the XPathNodeIterator used to create
+        // it.
         /// </summary>
         private class Enumerator : IEnumerator
         {
@@ -129,7 +130,8 @@ namespace System.Xml.XPath
 
             public override string ToString()
             {
-                // Position={CurrentPosition}, Current={Current == null ? null : (object) new XPathNavigator.DebuggerDisplayProxy(Current)}
+                // Position={CurrentPosition}, Current={Current == null ? null : (object) new
+                // XPathNavigator.DebuggerDisplayProxy(Current)}
                 StringBuilder sb = new StringBuilder();
                 sb.Append("Position=");
                 sb.Append(nodeIterator.CurrentPosition);

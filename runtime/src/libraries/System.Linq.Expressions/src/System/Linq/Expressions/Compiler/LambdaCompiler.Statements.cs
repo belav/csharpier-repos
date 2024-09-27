@@ -53,14 +53,16 @@ namespace System.Linq.Expressions.Compiler
                         && ReferenceLabel(g.Target).CanReturn
                     )
                     {
-                        // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be emitted
+                        // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be
+                        // emitted
                         // as Ret. Therefore we can emit the current expression with tail call.
                         tailCallFlag = CompilationFlags.EmitAsTail;
                     }
                     else
                     {
                         // In the middle of the block.
-                        // We may do better here by marking it as Tail if the following expressions are not going to emit any IL.
+                        // We may do better here by marking it as Tail if the following expressions are not going to emit
+                        // any IL.
                         tailCallFlag = CompilationFlags.EmitAsMiddle;
                     }
                 }

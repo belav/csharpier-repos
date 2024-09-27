@@ -11,8 +11,10 @@ using System.Xml.XPath;
 namespace System.Xml.Xsl.Runtime
 {
     /// <summary>
-    /// IComparer implementation that orders navigators based on ComparePosition.  When ComparePosition returns
-    /// XmlNodeOrder.Unknown, a stable order between documents is maintained by an ordered list mapping each root node
+    /// IComparer implementation that orders navigators based on ComparePosition.  When ComparePosition
+    // returns
+    /// XmlNodeOrder.Unknown, a stable order between documents is maintained by an ordered list mapping
+    // each root node
     /// to an ordering index.
     /// </summary>
     internal sealed class DocumentOrderComparer : IComparer<XPathNavigator>
@@ -46,7 +48,8 @@ namespace System.Xml.Xsl.Runtime
 
         /// <summary>
         /// Map navigator's document to a unique index.
-        /// When consecutive calls are made to GetIndexOfNavigator for navThis and navThat, it is not possible
+        /// When consecutive calls are made to GetIndexOfNavigator for navThis and navThat, it is not
+        // possible
         /// for them to return the same index.  navThis compared to navThat is always XmlNodeOrder.Unknown.
         /// Therefore, no matter where navThis is inserted in the list, navThat will never be inserted just
         /// before navThis, and therefore will never have the same index.

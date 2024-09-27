@@ -15,9 +15,11 @@ namespace System.IdentityModel.Configuration
     public sealed partial class IdentityModelCachesElement : ConfigurationElement
     {
         /// <summary>
-        /// Gets or sets the <see cref="TokenReplayCache"/> type. This element is optional and the specified custom replay cache
+        /// Gets or sets the <see cref="TokenReplayCache"/> type. This element is optional and the specified
+        // custom replay cache
         /// must derive from <see cref="System.IdentityModel.Tokens.TokenReplayCache"/>.
-        /// To enable replay detection, configure the <see cref="System.IdentityModel.Configuration.TokenReplayDetectionElement"/>.
+        /// To enable replay detection, configure the <see
+        // cref="System.IdentityModel.Configuration.TokenReplayDetectionElement"/>.
         /// </summary>
         [ConfigurationProperty(ConfigurationStrings.TokenReplayCache, IsRequired = false)]
         public CustomTypeElement TokenReplayCache
@@ -27,7 +29,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SessionSecurityTokenCache"/> type. This element is optional and the specified custom cache
+        /// Gets or sets the <see cref="SessionSecurityTokenCache"/> type. This element is optional and the
+        // specified custom cache
         /// must derive from <see cref="System.IdentityModel.Tokens.SessionSecurityTokenCache"/>.
         /// This cache is used for caching <see cref="System.IdentityModel.Tokens.SessionSecurityToken" />.
         /// </summary>

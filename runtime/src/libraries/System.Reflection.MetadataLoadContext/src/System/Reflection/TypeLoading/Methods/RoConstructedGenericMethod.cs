@@ -8,7 +8,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Class for all RoMethod objects created by a MetadataLoadContext for which IsConstructedGenericMethod returns true.
+    /// Class for all RoMethod objects created by a MetadataLoadContext for which
+    // IsConstructedGenericMethod returns true.
     /// </summary>
     internal sealed partial class RoConstructedGenericMethod : RoMethod
     {

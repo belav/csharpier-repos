@@ -7,13 +7,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> for creating a new table.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("CREATE TABLE {Name}")]
 public class CreateTableOperation : TableOperation
 {
     /// <summary>
-    ///     The <see cref="AddPrimaryKeyOperation" /> representing the creation of the primary key for the table.
+    ///     The <see cref="AddPrimaryKeyOperation" /> representing the creation of the primary key for
+    // the table.
     /// </summary>
     public virtual AddPrimaryKeyOperation? PrimaryKey { get; set; }
 
@@ -23,17 +25,20 @@ public class CreateTableOperation : TableOperation
     public virtual List<AddColumnOperation> Columns { get; } = new();
 
     /// <summary>
-    ///     A list of <see cref="AddForeignKeyOperation" /> for creating foreign key constraints in the table.
+    ///     A list of <see cref="AddForeignKeyOperation" /> for creating foreign key constraints in the
+    // table.
     /// </summary>
     public virtual List<AddForeignKeyOperation> ForeignKeys { get; } = new();
 
     /// <summary>
-    ///     A list of <see cref="AddUniqueConstraintOperation" /> for creating unique constraints in the table.
+    ///     A list of <see cref="AddUniqueConstraintOperation" /> for creating unique constraints in the
+    // table.
     /// </summary>
     public virtual List<AddUniqueConstraintOperation> UniqueConstraints { get; } = new();
 
     /// <summary>
-    ///     A list of <see cref="AddCheckConstraintOperation" /> for creating check constraints in the table.
+    ///     A list of <see cref="AddCheckConstraintOperation" /> for creating check constraints in the
+    // table.
     /// </summary>
     public virtual List<AddCheckConstraintOperation> CheckConstraints { get; } = new();
 }

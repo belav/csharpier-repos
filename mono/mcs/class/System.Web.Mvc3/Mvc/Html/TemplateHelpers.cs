@@ -192,7 +192,8 @@
                 yield return templateHint;
             }
 
-            // We don't want to search for Nullable<T>, we want to search for T (which should handle both T and Nullable<T>)
+            // We don't want to search for Nullable<T>, we want to search for T (which should handle both T and
+            // Nullable<T>)
             Type fieldType =
                 Nullable.GetUnderlyingType(metadata.RealModelType) ?? metadata.RealModelType;
 
@@ -357,8 +358,10 @@
             ExecuteTemplateDelegate executeTemplate
         )
         {
-            // TODO: Convert Editor into Display if model.IsReadOnly is true? Need to be careful about this because
-            // the Model property on the ViewPage/ViewUserControl is get-only, so the type descriptor automatically
+            // TODO: Convert Editor into Display if model.IsReadOnly is true? Need to be careful about this
+            // because
+            // the Model property on the ViewPage/ViewUserControl is get-only, so the type descriptor
+            // automatically
             // decorates it with a [ReadOnly] attribute...
 
             if (metadata.ConvertEmptyStringToNull && String.Empty.Equals(metadata.Model))

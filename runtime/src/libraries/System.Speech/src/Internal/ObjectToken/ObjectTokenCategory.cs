@@ -57,7 +57,8 @@ namespace System.Speech.Internal.ObjectTokens
 
             try
             {
-                // Note - enumerated tokens should not be torn down/disposed by us (see SpInitTokenList in spuihelp.h)
+                // Note - enumerated tokens should not be torn down/disposed by us (see SpInitTokenList in
+                // spuihelp.h)
                 category = (ISpObjectTokenCategory)new SpObjectTokenCategory();
                 category.SetId(_sKeyId, false);
                 category.EnumTokens(requiredAttributes, optionalAttributes, out enumTokens);

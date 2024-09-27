@@ -20,12 +20,16 @@ namespace System
 {
     public static partial class Activator
     {
-        // The following methods and helper class implement the functionality of Activator.CreateInstance<T>()
-        // The implementation relies on several compiler intrinsics that expand to quick dictionary lookups in shared
+        // The following methods and helper class implement the functionality of
+        // Activator.CreateInstance<T>()
+        // The implementation relies on several compiler intrinsics that expand to quick dictionary lookups
+        // in shared
         // code, and direct constant references in unshared code.
         //
-        // This method is the public surface area. It wraps the CreateInstance intrinsic with the appropriate try/catch
-        // block so that the correct exceptions are generated. Also, it handles the cases where the T type doesn't have
+        // This method is the public surface area. It wraps the CreateInstance intrinsic with the
+        // appropriate try/catch
+        // block so that the correct exceptions are generated. Also, it handles the cases where the T type
+        // doesn't have
         // a default constructor.
         //
         // This method is intrinsic. The compiler might replace it with more efficient implementation.
@@ -86,15 +90,18 @@ namespace System
         {
             // Codegens must expand this intrinsic to the pointer to the default constructor of T
             // or to a marker that lets us detect there's no default constructor.
-            // We could implement a fallback with the type loader if we wanted to, but it will be slow and unreliable.
+            // We could implement a fallback with the type loader if we wanted to, but it will be slow and
+            // unreliable.
             throw new NotSupportedException();
         }
 
         [Intrinsic]
         private static IntPtr AllocatorOf<T>()
         {
-            // Codegens must expand this intrinsic to the pointer to the allocator suitable to allocate an instance of T.
-            // We could implement a fallback with the type loader if we wanted to, but it will be slow and unreliable.
+            // Codegens must expand this intrinsic to the pointer to the allocator suitable to allocate an
+            // instance of T.
+            // We could implement a fallback with the type loader if we wanted to, but it will be slow and
+            // unreliable.
             throw new NotSupportedException();
         }
 

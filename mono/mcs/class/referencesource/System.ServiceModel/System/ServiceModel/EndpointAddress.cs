@@ -17,57 +17,63 @@ namespace System.ServiceModel
         static Uri noneUri;
         static EndpointAddress anonymousAddress;
 
-        /*
-        Conceptually, the agnostic EndpointAddress class represents all of UNION(v200408,v10) data thusly:
-         - Address Uri (both versions - the Address)
-         - AddressHeaderCollection (both versions - RefProp&RefParam both project into here)
-         - PSP blob (200408 - this is PortType, ServiceName, Policy, it is not surfaced in OM)
-         - metadata (both versions, but weird semantics in 200408)
-         - identity (both versions, this is the one 'extension' that we know about)
-         - extensions (both versions, the "any*" stuff at the end)
+/*
+Conceptually, the agnostic EndpointAddress class represents all of UNION(v200408,v10) data thusly:
+- Address Uri (both versions - the Address)
+- AddressHeaderCollection (both versions - RefProp&RefParam both project into here)
+- PSP blob (200408 - this is PortType, ServiceName, Policy, it is not surfaced in OM)
+- metadata (both versions, but weird semantics in 200408)
+- identity (both versions, this is the one 'extension' that we know about)
+- extensions (both versions, the "any*" stuff at the end)
 
-        When reading from 200408:
-         - Address is projected into Uri
-         - both RefProps and RefParams are projected into AddressHeaderCollection,
-              they (internally) remember 'which kind' they are
-         - PortType, ServiceName, Policy are projected into the (internal) PSP blob
-         - if we see a wsx:metadata element next, we project that element and that element only into the metadata reader
-         - we read the rest, recognizing and fishing out identity if there, projecting rest to extensions reader
-        When reading from 10:
-         - Address is projected into Uri
-         - RefParams are projected into AddressHeaderCollection; they (internally) remember 'which kind' they are
-         - nothing is projected into the (internal) PSP blob (it's empty)
-         - if there's a wsa10:metadata element, everything inside it projects into metadatareader
-         - we read the rest, recognizing and fishing out identity if there, projecting rest to extensions reader
+When reading from 200408:
+- Address is projected into Uri
+- both RefProps and RefParams are projected into AddressHeaderCollection,
+they (internally) remember 'which kind' they are
+- PortType, ServiceName, Policy are projected into the (internal) PSP blob
+- if we see a wsx:metadata element next, we project that element and that element only into the
+metadata reader
+- we read the rest, recognizing and fishing out identity if there, projecting rest to extensions
+reader
+When reading from 10:
+- Address is projected into Uri
+- RefParams are projected into AddressHeaderCollection; they (internally) remember 'which kind' they
+are
+- nothing is projected into the (internal) PSP blob (it's empty)
+- if there's a wsa10:metadata element, everything inside it projects into metadatareader
+- we read the rest, recognizing and fishing out identity if there, projecting rest to extensions
+reader
 
-        When writing to 200408:
-         - Uri is written as Address
-         - AddressHeaderCollection is written as RefProps & RefParams, based on what they internally remember selves to be
-         - PSP blob is written out verbatim (will have: PortType?, ServiceName?, Policy?)
-         - metadata reader is written out verbatim
-         - identity is written out as extension
-         - extension reader is written out verbatim
-        When writing to 10:
-         - Uri is written as Address
-         - AddressHeaderCollection is all written as RefParams, regardless of what they internally remember selves to be
-         - PSP blob is ignored
-         - if metadata reader is non-empty, we write its value out verbatim inside a wsa10:metadata element
-         - identity is written out as extension
-         - extension reader is written out verbatim
+When writing to 200408:
+- Uri is written as Address
+- AddressHeaderCollection is written as RefProps & RefParams, based on what they internally remember
+selves to be
+- PSP blob is written out verbatim (will have: PortType?, ServiceName?, Policy?)
+- metadata reader is written out verbatim
+- identity is written out as extension
+- extension reader is written out verbatim
+When writing to 10:
+- Uri is written as Address
+- AddressHeaderCollection is all written as RefParams, regardless of what they internally remember
+selves to be
+- PSP blob is ignored
+- if metadata reader is non-empty, we write its value out verbatim inside a wsa10:metadata element
+- identity is written out as extension
+- extension reader is written out verbatim
 
-        EndpointAddressBuilder:
-         - you can set metadata to any value you like; we don't (cannot) validate because 10 allows anything
-         - you can set any extensions you like
+EndpointAddressBuilder:
+- you can set metadata to any value you like; we don't (cannot) validate because 10 allows anything
+- you can set any extensions you like
 
-        Known Weirdnesses:
-         - PSP blob does not surface in OM - it can only roundtrip 200408wire->OM->200408wire
-         - RefProperty distinction does not surface in OM - it can only roundtrip 200408wire->OM->200408wire
-         - regardless of what metadata in reader, when you roundtrip OM->200408wire->OM, only wsx:metadata
-               as first element after PSP will stay in metadata, anything else gets dumped in extensions
-         - PSP blob is lost when doing OM->10wire->OM
-         - RefProps turn into RefParams when doing OM->10wire->OM
-         - Identity is always shuffled to front of extensions when doing anyWire->OM->anyWire
-        */
+Known Weirdnesses:
+- PSP blob does not surface in OM - it can only roundtrip 200408wire->OM->200408wire
+- RefProperty distinction does not surface in OM - it can only roundtrip 200408wire->OM->200408wire
+- regardless of what metadata in reader, when you roundtrip OM->200408wire->OM, only wsx:metadata
+as first element after PSP will stay in metadata, anything else gets dumped in extensions
+- PSP blob is lost when doing OM->10wire->OM
+- RefProps turn into RefParams when doing OM->10wire->OM
+- Identity is always shuffled to front of extensions when doing anyWire->OM->anyWire
+*/
 
         AddressingVersion addressingVersion;
         AddressHeaderCollection headers;

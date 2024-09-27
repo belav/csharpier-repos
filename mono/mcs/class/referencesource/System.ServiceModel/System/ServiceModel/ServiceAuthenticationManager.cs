@@ -148,9 +148,12 @@ namespace System.ServiceModel
         }
 
         //
-        // We skip the authentication step if the client already has an SCT and there are no Transport level tokens.
-        // ServiceAuthenticationManager would have been called when the SCT was issued and there is no need to do
-        // Authentication again. If TransportToken was present then we would call ServiceAutenticationManager as
+        // We skip the authentication step if the client already has an SCT and there are no Transport level
+        // tokens.
+        // ServiceAuthenticationManager would have been called when the SCT was issued and there is no need
+        // to do
+        // Authentication again. If TransportToken was present then we would call
+        // ServiceAutenticationManager as
         // TransportTokens are not authenticated during SCT issuance.
         //
         bool CanSkipAuthentication(Message message)

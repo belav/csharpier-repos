@@ -68,17 +68,20 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         //                       Expression = "next value for \"linquser\".\"products_seq\"")]
         // INSERT INTO linquser.products (categoryid, discontinued, productid, productname, quantityperunit)
         //                  VALUES ($param_000001_param$, $param_000002_param$,
-        //                          next value for "linquser"."products_seq", $param_000004_param$, $param_000005_param$)
+        //                          next value for "linquser"."products_seq", $param_000004_param$,
+        // $param_000005_param$)
         //
         // Oracle:
         // IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = null
         // BEGIN
-        // INSERT INTO NORTHWIND."Products" ("CategoryID", "Discontinued", "ProductID", "ProductName", "QuantityPerUnit")
+        // INSERT INTO NORTHWIND."Products" ("CategoryID", "Discontinued", "ProductID", "ProductName",
+        // "QuantityPerUnit")
         //                  VALUES (:P1, :P2, NORTHWIND."Products_SEQ".NextVal, :P4, :P5)
         //               ;SELECT NORTHWIND."Products_SEQ".CurrVal INTO :P3 FROM DUAL; END;
         //
         // PostgreSQL:
-        // IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression = "nextval('\"Products_ProductID_seq\"')"
+        // IsPrimaryKey = true, IsDbGenerated = true, CanBeNull = false, Expression =
+        // "nextval('\"Products_ProductID_seq\"')"
         // INSERT INTO public."Products" ("CategoryID", "Discontinued", "ProductName", "QuantityPerUnit")
         //                  VALUES (:P1, :P2, :P3, :P4)
         //               ;SELECT currval('"Products_ProductID_seq"')

@@ -73,9 +73,11 @@ namespace System.ServiceModel.Activities.Activation
             // Samples of xamlVirtualPath under all scenarios
             //                          constructorString  XamlFileBaseLocation    xamlVirtualPath
             // 1. Xamlx direct          ~/sub/a.xamlx      ~/sub/                  ~/sub/a.xamlx
-            // 2. CBA with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no file will be found
+            // 2. CBA with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no
+            // file will be found
             // 3. CBA with xamlx        sub/a.xamlx        ~/                      ~/sub/a.xamlx
-            // 4. Svc with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no file will be found
+            // 4. Svc with precompiled  servicetypeinfo    ~/sub/servicetypeinfo   ~/sub/servicetypeinfo  * no
+            // file will be found
             // 5. Svc with Xamlx        ../a.xamlx         ~/sub/                  ~/a.xamlx
 
             string xamlVirtualPath = VirtualPathUtility.Combine(
@@ -267,10 +269,12 @@ namespace System.ServiceModel.Activities.Activation
             out Exception newException
         )
         {
-            // We replace the exception, rather than simply wrapping it, because the activation error page highlights
+            // We replace the exception, rather than simply wrapping it, because the activation error page
+            // highlights
             // the innermost exception, and we want that  exception to clearly show which file is the culprit.
             // Of course, if the exception has an inner exception, that will still get highlighted instead.
-            // Also, for Xaml and XmlException, we don't propagate the line info, because the exception message already contains it.
+            // Also, for Xaml and XmlException, we don't propagate the line info, because the exception message
+            // already contains it.
             if (e is XmlException)
             {
                 newException = new XmlException(
@@ -435,7 +439,8 @@ namespace System.ServiceModel.Activities.Activation
                     && !ServiceHostingEnvironment.IsConfigurationBased
                 )
                 {
-                    // We use ServiceHostingEnvironment.FullVirtualPath (instead of the constructor string) because we�re passing this path to BuildManager,
+                    // We use ServiceHostingEnvironment.FullVirtualPath (instead of the constructor string) because
+                    // we�re passing this path to BuildManager,
                     // which may not understand the file type referenced by the constructor string (e.g. .xaml).
                     ICompiledExpressionRoot expressionRoot =
                         XamlBuildProviderExtension.GetExpressionRoot(

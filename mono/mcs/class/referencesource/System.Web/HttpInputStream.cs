@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Input stream used in response and uploaded file objects
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Input stream used in response and uploaded file objects
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -18,17 +18,17 @@ namespace System.Web
     using System.Security.Permissions;
     using System.Web.Hosting;
 
-    /*
-     * Wrapper around temporary file or byte[] for input stream
-     *
-     * Pattern of use:
-     *      ctor
-     *      AddBytes
-     *      ...
-     *      DoneAddingBytes
-     *      access bytes: [] / CopyBytes / WriteBytes / GetAsByteArray
-     *      Dispose
-     */
+/*
+* Wrapper around temporary file or byte[] for input stream
+*
+* Pattern of use:
+*      ctor
+*      AddBytes
+*      ...
+*      DoneAddingBytes
+*      access bytes: [] / CopyBytes / WriteBytes / GetAsByteArray
+*      Dispose
+*/
     internal class HttpRawUploadedContent : IDisposable
     {
         private int _fileThreshold; // for sizes over this use file
@@ -331,10 +331,10 @@ namespace System.Web
         }
     }
 
-    /*
-     * Stream object over HttpRawUploadedContent
-     * Not a publc class - used internally, returned as Stream
-     */
+/*
+* Stream object over HttpRawUploadedContent
+* Not a publc class - used internally, returned as Stream
+*/
     internal class HttpInputStream : Stream
     {
         private HttpRawUploadedContent _data; // the buffer with the content
@@ -480,9 +480,9 @@ namespace System.Web
         }
     }
 
-    /*
-     * Stream used as the source for input filtering
-     */
+/*
+* Stream used as the source for input filtering
+*/
 
     internal class HttpInputStreamFilterSource : HttpInputStream
     {

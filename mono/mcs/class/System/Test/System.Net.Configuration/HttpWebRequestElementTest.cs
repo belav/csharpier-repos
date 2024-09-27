@@ -1,5 +1,6 @@
 //
-// HttpWebRequestElementTest.cs - NUnit Test Cases for System.Net.Configuration.HttpWebRequestElement
+// HttpWebRequestElementTest.cs - NUnit Test Cases for
+// System.Net.Configuration.HttpWebRequestElement
 //
 // Authors:
 //   Gert Driesen (drieseng@users.sourceforge.net)

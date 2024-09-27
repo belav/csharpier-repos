@@ -50,18 +50,18 @@ namespace System.Security.Cryptography.X509Certificates
             Reset();
         }
 
-        /*
-         * Lazy-init ExtraStore from X509CertificateCollection.
-         * This is called from Mono.Net.Security.SystemCertificateValidator.CreateX509Chain.
-         *
-         * AppleTLS supports a lazily-initialized X509Certificate, but not X509Certificate2 so
-         * we need to fall-back to using Mono.Security.X509 whenever we need an X509Certificate2.
-         * To avoid unnecessary fallbacks, the private Mono.Net.Security APIs use X509Certificate
-         * instead of X509Certificate2.
-         *
-         * Since 'ExtraStore' returns X509Certificate2Collection, we need to convert these to
-         * X509Certificate2.
-         */
+/*
+* Lazy-init ExtraStore from X509CertificateCollection.
+* This is called from Mono.Net.Security.SystemCertificateValidator.CreateX509Chain.
+*
+* AppleTLS supports a lazily-initialized X509Certificate, but not X509Certificate2 so
+* we need to fall-back to using Mono.Security.X509 whenever we need an X509Certificate2.
+* To avoid unnecessary fallbacks, the private Mono.Net.Security APIs use X509Certificate
+* instead of X509Certificate2.
+*
+* Since 'ExtraStore' returns X509Certificate2Collection, we need to convert these to
+* X509Certificate2.
+*/
         internal X509ChainPolicy(X509CertificateCollection store)
         {
             this.store = store;

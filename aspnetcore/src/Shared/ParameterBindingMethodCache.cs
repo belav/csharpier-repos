@@ -42,7 +42,8 @@ internal sealed class ParameterBindingMethodCache
         new[] { typeof(string), typeof(UriKind), typeof(Uri).MakeByRefType() }
     )!;
 
-    // work around https://github.com/dotnet/runtime/issues/81864 by splitting these into a separate class.
+    // work around https://github.com/dotnet/runtime/issues/81864 by splitting these into a separate
+    // class.
     internal static class SharedExpressions
     {
         internal static readonly ParameterExpression TempSourceStringExpr = Expression.Variable(
@@ -58,7 +59,8 @@ internal sealed class ParameterBindingMethodCache
     private readonly MethodInfo _enumTryParseMethod;
     private readonly bool _throwOnInvalidMethod;
 
-    // Since this is shared source, the cache won't be shared between RequestDelegateFactory and the ApiDescriptionProvider sadly :(
+    // Since this is shared source, the cache won't be shared between RequestDelegateFactory and the
+    // ApiDescriptionProvider sadly :(
     private readonly ConcurrentDictionary<
         Type,
         Func<ParameterExpression, Expression, Expression>?
@@ -72,7 +74,8 @@ internal sealed class ParameterBindingMethodCache
         (ConstructorInfo?, ConstructorParameter[])
     > _constructorCache = new();
 
-    // If IsDynamicCodeSupported is false, we can't use the static Enum.TryParse<T> since there's no easy way for
+    // If IsDynamicCodeSupported is false, we can't use the static Enum.TryParse<T> since there's no
+    // easy way for
     // this code to generate the specific instantiation for any enums used
     public ParameterBindingMethodCache(bool throwOnInvalidMethod = true)
         : this(
@@ -119,7 +122,8 @@ internal sealed class ParameterBindingMethodCache
     )]
     public Func<ParameterExpression, Expression, Expression>? FindTryParseMethod(Type type)
     {
-        // This method is used to find TryParse methods from .NET types using reflection. It's used at app runtime.
+        // This method is used to find TryParse methods from .NET types using reflection. It's used at app
+        // runtime.
         // Routing analyzers also detect TryParse methods when calculating what types are valid in routes.
         // Changes here to support new types should be reflected in analyzers.
         Func<ParameterExpression, Expression, Expression>? Finder(Type type)
@@ -319,7 +323,8 @@ internal sealed class ParameterBindingMethodCache
 
             if (methodInfo is null)
             {
-                // There should only be one BindAsync method with these parameters since C# does not allow overloading on return type.
+                // There should only be one BindAsync method with these parameters since C# does not allow
+                // overloading on return type.
                 methodInfo = GetStaticMethodFromHierarchy(
                     nonNullableParameterType,
                     "BindAsync",

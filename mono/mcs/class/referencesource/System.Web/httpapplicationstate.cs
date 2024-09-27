@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Application State Dictionary class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Application State Dictionary class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web
 {

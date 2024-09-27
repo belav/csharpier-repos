@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Key extension methods for relational database metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-keys">Keys</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-keys">Keys</see> for more information and
+// examples.
 /// </remarks>
 public static class RelationalKeyExtensions
 {
@@ -61,7 +62,8 @@ public static class RelationalKeyExtensions
     }
 
     /// <summary>
-    ///     Returns the default key constraint name that would be used for this key for a particular table.
+    ///     Returns the default key constraint name that would be used for this key for a particular
+    // table.
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="storeObject">The identifier of the containing store object.</param>
@@ -87,7 +89,8 @@ public static class RelationalKeyExtensions
     /// </summary>
     /// <param name="key">The key.</param>
     /// <param name="name">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured name.</returns>
     public static string? SetName(
         this IConventionKey key,
@@ -121,10 +124,12 @@ public static class RelationalKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IKey" /> that is mapped to the same constraint in a shared
+    // table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -174,10 +179,12 @@ public static class RelationalKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IMutableKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IMutableKey" /> that is mapped to the same constraint in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -191,10 +198,12 @@ public static class RelationalKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IConventionKey" /> that is mapped to the same constraint in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -208,10 +217,12 @@ public static class RelationalKeyExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionKey" /> that is mapped to the same constraint in a shared table-like object.
+    ///         Finds the first <see cref="IConventionKey" /> that is mapped to the same constraint in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

@@ -14,7 +14,8 @@ using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
-    // Helper for GetRuntimeParameters() - array mimic that supports an efficient "array.Skip(1).ToArray()" operation.
+    // Helper for GetRuntimeParameters() - array mimic that supports an efficient
+    // "array.Skip(1).ToArray()" operation.
     internal struct VirtualRuntimeParameterInfoArray
     {
         public VirtualRuntimeParameterInfoArray(int count)

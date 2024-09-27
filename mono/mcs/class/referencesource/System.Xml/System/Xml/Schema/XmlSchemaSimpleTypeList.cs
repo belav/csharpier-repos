@@ -9,7 +9,8 @@ namespace System.Xml.Schema
 {
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaSimpleTypeList.uex' path='docs/doc[@for="XmlSchemaSimpleTypeList"]/*' />
+    /// <include file='doc\XmlSchemaSimpleTypeList.uex'
+    // path='docs/doc[@for="XmlSchemaSimpleTypeList"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -19,7 +20,8 @@ namespace System.Xml.Schema
         XmlSchemaSimpleType itemType;
         XmlSchemaSimpleType baseItemType; //Compiled
 
-        /// <include file='doc\XmlSchemaSimpleTypeList.uex' path='docs/doc[@for="XmlSchemaSimpleTypeList.ItemTypeName"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeList.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeList.ItemTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -30,7 +32,8 @@ namespace System.Xml.Schema
             set { itemTypeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        /// <include file='doc\XmlSchemaSimpleTypeList.uex' path='docs/doc[@for="XmlSchemaSimpleTypeList.BaseType"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeList.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeList.BaseType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -42,7 +45,8 @@ namespace System.Xml.Schema
         }
 
         //Compiled
-        /// <include file='doc\XmlSchemaSimpleTypeList.uex' path='docs/doc[@for="XmlSchemaSimpleTypeList.BaseItemType"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeList.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeList.BaseItemType"]/*' />
         [XmlIgnore]
         public XmlSchemaSimpleType BaseItemType
         {

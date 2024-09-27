@@ -10,7 +10,8 @@ using System.Text.Unicode;
 namespace System.Net.Http.Headers
 {
     // This struct represents a particular named header --
-    // if the header is one of our known headers, then it contains a reference to the KnownHeader object;
+    // if the header is one of our known headers, then it contains a reference to the KnownHeader
+    // object;
     // otherwise, for custom headers, it just contains a string for the header name.
     // Use HeaderDescriptor.TryGet to resolve an arbitrary header name to a HeaderDescriptor.
     internal readonly struct HeaderDescriptor : IEquatable<HeaderDescriptor>
@@ -119,7 +120,8 @@ namespace System.Net.Http.Headers
         {
             Debug.Assert(index >= 0);
 
-            // Micro-opt: store field to variable to prevent Length re-read and use unsigned to avoid bounds check.
+            // Micro-opt: store field to variable to prevent Length re-read and use unsigned to avoid bounds
+            // check.
             (HeaderDescriptor descriptor, string value)[] qpackStaticTable =
                 QPackStaticTable.HeaderLookup;
             Debug.Assert(qpackStaticTable.Length == 99);

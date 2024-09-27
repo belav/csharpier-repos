@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics;
@@ -115,8 +116,10 @@ namespace ILLink.Shared.TrimAnalysis
 
 #pragma warning disable CA1822 // Mark members as static - the other partial implementations might need to be instance methods
 
-        // TODO: This is relatively expensive on the analyzer since it doesn't cache the annotation information
-        // For trimming tools this is an optimization to avoid the heavy lifting of analysis if there's no point
+        // TODO: This is relatively expensive on the analyzer since it doesn't cache the annotation
+        // information
+        // For trimming tools this is an optimization to avoid the heavy lifting of analysis if there's no
+        // point
         // it's unclear if the same optimization makes sense for the analyzer.
         internal partial bool MethodRequiresDataFlowAnalysis(MethodProxy method) =>
             RequiresDataFlowAnalysis(method.Method);
@@ -148,7 +151,8 @@ namespace ILLink.Shared.TrimAnalysis
             );
         }
 
-        // overrideIsThis is needed for backwards compatibility with MakeGenericType/Method https://github.com/dotnet/linker/issues/2428
+        // overrideIsThis is needed for backwards compatibility with MakeGenericType/Method
+        // https://github.com/dotnet/linker/issues/2428
         internal MethodParameterValue GetMethodThisParameterValue(
             MethodProxy method,
             DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,

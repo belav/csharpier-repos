@@ -34,9 +34,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal partial class SourceMemberContainerTypeSymbol
     {
         /// <summary>
-        /// In some circumstances (e.g. implicit implementation of an interface method by a non-virtual method in a
-        /// base type from another assembly) it is necessary for the compiler to generate explicit implementations for
-        /// some interface methods.  They don't go in the symbol table, but if we are emitting, then we should
+        /// In some circumstances (e.g. implicit implementation of an interface method by a non-virtual
+        // method in a
+        /// base type from another assembly) it is necessary for the compiler to generate explicit
+        // implementations for
+        /// some interface methods.  They don't go in the symbol table, but if we are emitting, then we
+        // should
         /// generate code for them.
         /// </summary>
         internal SynthesizedExplicitImplementations GetSynthesizedExplicitImplementations(
@@ -299,7 +302,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             != implementingEvent.IsWindowsRuntimeEvent
                         )
                         {
-                            // At this point (and not before), we know that maybeWinRTEvent is definitely a WinRT event and maybeRegularEvent is definitely a regular event.
+                            // At this point (and not before), we know that maybeWinRTEvent is definitely a WinRT event and
+                            // maybeRegularEvent is definitely a regular event.
                             var args = new object[]
                             {
                                 implementingEvent,
@@ -317,7 +321,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                     }
 
-                    // Dev10: If a whole property is missing, report the property.  If the property is present, but an accessor
+                    // Dev10: If a whole property is missing, report the property.  If the property is present, but an
+                    // accessor
                     // is missing, report just the accessor.
 
                     var associatedPropertyOrEvent =
@@ -332,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         //we're here because
                         //(a) the interface member is not an accessor, or
-                        //(b) the interface member is an accessor of an interesting (see ReportAccessorOfInterfacePropertyOrEvent) property or event, or
+                        //(b) the interface member is an accessor of an interesting (see
+                        // ReportAccessorOfInterfacePropertyOrEvent) property or event, or
                         //(c) the implementing member exists and is not an accessor.
                         bool reportedAnError = false;
                         if (implementingMemberAndDiagnostics.Diagnostics.Diagnostics.Any())
@@ -362,10 +368,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 )
                             )
                             {
-                                // NOTE: An alternative approach would be to keep track of this while searching for the implementing member.
-                                // In some cases, we might even be able to stop looking and just accept that a base type has things covered
-                                // (though we'd have to be careful about losing diagnostics and we might produce fewer bridge methods).
-                                // However, this approach has the advantage that there is no cost unless we encounter a base type that
+                                // NOTE: An alternative approach would be to keep track of this while searching for the implementing
+                                // member.
+                                // In some cases, we might even be able to stop looking and just accept that a base type has things
+                                // covered
+                                // (though we'd have to be careful about losing diagnostics and we might produce fewer bridge
+                                // methods).
+                                // However, this approach has the advantage that there is no cost unless we encounter a base type
+                                // that
                                 // claims to implement an interface, but we can't figure out how (i.e. free in nearly all cases).
                                 hasBaseClassDeclaringInterface =
                                     hasBaseClassDeclaringInterface
@@ -767,9 +777,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             MethodSymbol overridden =
                                 method.GetFirstRuntimeOverriddenMethodIgnoringNewSlot(out _);
 
-                            // NOTE: Dev11 doesn't expose symbols, so it can treat destructors as override and let them go through the normal
-                            // checks.  Roslyn can't, since the language says they are not virtual/override and that's what we need to expose
-                            // in the symbol model.  Having said that, Dev11 doesn't seem to produce override errors other than this one
+                            // NOTE: Dev11 doesn't expose symbols, so it can treat destructors as override and let them go
+                            // through the normal
+                            // checks.  Roslyn can't, since the language says they are not virtual/override and that's what we
+                            // need to expose
+                            // in the symbol model.  Having said that, Dev11 doesn't seem to produce override errors other than
+                            // this one
                             // (see SymbolPreparer::prepareOperator).
                             if ((object)overridden != null && overridden.IsMetadataFinal)
                             {
@@ -1211,12 +1224,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            // Both `ref` and `out` parameters (and `in` too) are implemented as references and are not distinguished by the runtime
-            // when resolving overrides. Similarly, distinctions between types that would map together because of generic substitution
-            // in the derived type where the override appears are the same from the runtime's point of view. In these cases we will
-            // need to produce a methodimpl to disambiguate. See the call to `RequiresExplicitOverride` below. It produces a boolean
+            // Both `ref` and `out` parameters (and `in` too) are implemented as references and are not
+            // distinguished by the runtime
+            // when resolving overrides. Similarly, distinctions between types that would map together because
+            // of generic substitution
+            // in the derived type where the override appears are the same from the runtime's point of view. In
+            // these cases we will
+            // need to produce a methodimpl to disambiguate. See the call to `RequiresExplicitOverride` below.
+            // It produces a boolean
             // `warnAmbiguous` if the methodimpl could be misinterpreted due to a bug in the runtime
-            // (https://github.com/dotnet/runtime/issues/38119) in which case we produce a warning regarding that ambiguity.
+            // (https://github.com/dotnet/runtime/issues/38119) in which case we produce a warning regarding
+            // that ambiguity.
             // See https://github.com/dotnet/roslyn/issues/45453 for details.
             if (
                 !this.ContainingAssembly.RuntimeSupportsCovariantReturnsOfClasses
@@ -1328,7 +1346,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     )
                 )
                 {
-                    // it is ok to override with no tuple names, for compatibility with C# 6, but otherwise names should match
+                    // it is ok to override with no tuple names, for compatibility with C# 6, but otherwise names should
+                    // match
                     diagnostics.Add(
                         ErrorCode.ERR_CantChangeTupleNamesOnOverride,
                         overridingMemberLocation,
@@ -1409,7 +1428,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                         )
                         {
-                            // if the type is or contains an error type, the type must be fixed before the override can be found, so suppress error
+                            // if the type is or contains an error type, the type must be fixed before the override can be
+                            // found, so suppress error
                             if (!IsOrContainsErrorType(overridingMemberType.Type))
                             {
                                 diagnostics.Add(
@@ -1454,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             );
                         }
 
-                        // Check for mismatched byref returns and return type. Ignore custom modifiers, because this diagnostic is based on the C# semantics.
+                        // Check for mismatched byref returns and return type. Ignore custom modifiers, because this
+                        // diagnostic is based on the C# semantics.
                         if (overridingMethod.RefKind != overriddenMethod.RefKind)
                         {
                             diagnostics.Add(
@@ -1473,7 +1494,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                         )
                         {
-                            // if the Return type is or contains an error type, the return type must be fixed before the override can be found, so suppress error
+                            // if the Return type is or contains an error type, the return type must be fixed before the
+                            // override can be found, so suppress error
                             if (!IsOrContainsErrorType(overridingMethod.ReturnType))
                             {
                                 // If the return type would be a valid covariant return, suggest using covariant return feature.
@@ -1579,7 +1601,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     TypeWithAnnotations overriddenMemberType =
                         overriddenProperty.TypeWithAnnotations;
 
-                    // Check for mismatched byref returns and return type. Ignore custom modifiers, because this diagnostic is based on the C# semantics.
+                    // Check for mismatched byref returns and return type. Ignore custom modifiers, because this
+                    // diagnostic is based on the C# semantics.
                     if (overridingProperty.RefKind != overriddenProperty.RefKind)
                     {
                         diagnostics.Add(
@@ -1604,7 +1627,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             )
                     )
                     {
-                        // if the type is or contains an error type, the type must be fixed before the override can be found, so suppress error
+                        // if the type is or contains an error type, the type must be fixed before the override can be
+                        // found, so suppress error
                         if (!IsOrContainsErrorType(overridingMemberType.Type))
                         {
                             // If the type would be a valid covariant return, suggest using covariant return feature.
@@ -1653,8 +1677,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     overriddenMember,
                                     overriddenMemberType.Type
                                 );
-                                // https://github.com/dotnet/roslyn/issues/44207 when overriddenMemberType.Type is an inheritable reference type and the covariant return
-                                // feature is enabled, and the platform supports it, and there is no setter, we can say it has to be 'object' **or a derived type**.
+                                // https://github.com/dotnet/roslyn/issues/44207 when overriddenMemberType.Type is an inheritable
+                                // reference type and the covariant return
+                                // feature is enabled, and the platform supports it, and there is no setter, we can say it has to be
+                                // 'object' **or a derived type**.
                                 // That would probably be a new error code.
                             }
                         }
@@ -1712,9 +1738,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                     }
 
-                    // If the overriding property is sealed, then the overridden accessors cannot be inaccessible, since we
+                    // If the overriding property is sealed, then the overridden accessors cannot be inaccessible, since
+                    // we
                     // have to override them to make them sealed in metadata.
-                    // CONSIDER: It might be nice if this had its own error code(s) since it's an implementation restriction,
+                    // CONSIDER: It might be nice if this had its own error code(s) since it's an implementation
+                    // restriction,
                     // rather than a language restriction as above.
                     if (overridingProperty.IsSealed)
                     {
@@ -1828,7 +1856,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         static (diagnostics, _, _, overridingParameter, _, arg) =>
                         {
                             var (overriddenParameter, location) = arg;
-                            // Reference kind modifier of parameter '{0}' doesn't match the corresponding parameter '{1}' in overridden or implemented member.
+                            // Reference kind modifier of parameter '{0}' doesn't match the corresponding parameter '{1}' in
+                            // overridden or implemented member.
                             diagnostics.Add(
                                 ErrorCode.WRN_OverridingDifferentRefness,
                                 location,
@@ -1853,7 +1882,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Return true if <paramref name="overridingReturnType"/> is valid for the return type of an override method when the overridden method's return type is <paramref name="overriddenReturnType"/>.
+        /// Return true if <paramref name="overridingReturnType"/> is valid for the return type of an
+        // override method when the overridden method's return type is <paramref
+        // name="overriddenReturnType"/>.
         /// </summary>
         private bool IsValidOverrideReturnType(
             Symbol overridingSymbol,
@@ -2155,9 +2186,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             var parameters = method.Parameters;
 
+            //
+            //
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md#scoped-mismatch
-            // The compiler will report a diagnostic for _unsafe scoped mismatches_ across overrides, interface implementations, and delegate conversions when:
-            // - The method returns a `ref struct` or returns a `ref` or `ref readonly`, or the method has a `ref` or `out` parameter of `ref struct` type, and
+            // The compiler will report a diagnostic for _unsafe scoped mismatches_ across overrides, interface
+            // implementations, and delegate conversions when:
+            // - The method returns a `ref struct` or returns a `ref` or `ref readonly`, or the method has a
+            // `ref` or `out` parameter of `ref struct` type, and
             // ...
             int nRefParametersRequired;
             if (
@@ -2181,7 +2216,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // ...
-            // - The method has at least one additional `ref`, `in`, `ref readonly`, or `out` parameter, or a parameter of `ref struct` type.
+            // - The method has at least one additional `ref`, `in`, `ref readonly`, or `out` parameter, or a
+            // parameter of `ref struct` type.
             int nRefParameters = parameters.Count(p =>
                 p.RefKind
                     is RefKind.Ref
@@ -2209,8 +2245,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             MethodSymbol overrideMethod
         )
         {
+            //
+            //
             // https://github.com/dotnet/csharplang/blob/main/proposals/csharp-11.0/low-level-struct-improvements.md#scoped-mismatch
-            // The diagnostic is reported as an error if the mismatched signatures are both using C#11 ref safety rules; otherwise, the diagnostic is a warning.
+            // The diagnostic is reported as an error if the mismatched signatures are both using C#11 ref
+            // safety rules; otherwise, the diagnostic is a warning.
             return baseMethod.UseUpdatedEscapeRules && overrideMethod.UseUpdatedEscapeRules;
         }
 
@@ -2409,7 +2448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var diagnosticAdded = false;
 
                 //for interfaces, we always report WRN_NewRequired
-                //if we went into the loop, the pseudo-abstract nature of interfaces would throw off the other checks
+                //if we went into the loop, the pseudo-abstract nature of interfaces would throw off the other
+                // checks
                 if (!hidingMember.ContainingType.IsInterface)
                 {
                     foreach (var hiddenMember in hiddenMembers)
@@ -2491,7 +2531,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         static (diagnostics, _, _, hidingParameter, _, arg) =>
                         {
                             var (hiddenParameter, location) = arg;
-                            // Reference kind modifier of parameter '{0}' doesn't match the corresponding parameter '{1}' in hidden member.
+                            // Reference kind modifier of parameter '{0}' doesn't match the corresponding parameter '{1}' in
+                            // hidden member.
                             diagnostics.Add(
                                 ErrorCode.WRN_HidingDifferentRefness,
                                 location,
@@ -2579,7 +2620,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             // NOTE: We used to let the accessors take care of this case, but then we weren't handling the case
                             // where a hiding and hidden properties did not have any accessors in common.
 
-                            // CONSIDER: Dev10 actually reports an error for each accessor of a hidden property/event, but that seems unnecessary.
+                            // CONSIDER: Dev10 actually reports an error for each accessor of a hidden property/event, but that
+                            // seems unnecessary.
                             suppressAccessors = true;
 
                             goto default;
@@ -2625,7 +2667,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// unify (i.e. are the same for some substitution of type parameters).
         /// </summary>
         /// <remarks>
-        /// CONSIDER: check this while building up InterfacesAndTheirBaseInterfaces (only in the SourceNamedTypeSymbol case).
+        /// CONSIDER: check this while building up InterfacesAndTheirBaseInterfaces (only in the
+        // SourceNamedTypeSymbol case).
         /// </remarks>
         private void CheckInterfaceUnification(BindingDiagnosticBag diagnostics)
         {
@@ -2695,16 +2738,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Though there is a method that C# considers to be an implementation of the interface method, that
-        /// method may not be considered an implementation by the CLR.  In particular, implicit implementation
+        /// method may not be considered an implementation by the CLR.  In particular, implicit
+        // implementation
         /// methods that are non-virtual or that have different (usually fewer) custom modifiers than the
         /// interface method, will not be considered CLR overrides.  To address this problem, we either make
         /// them virtual (in metadata, not in C#), or we introduce an explicit interface implementation that
         /// delegates to the implicit implementation.
         /// </summary>
-        /// <param name="implementingMemberAndDiagnostics">Returned from FindImplementationForInterfaceMemberWithDiagnostics.</param>
-        /// <param name="interfaceMember">The interface method or property that is being implemented.</param>
+        /// <param name="implementingMemberAndDiagnostics">Returned from
+        // FindImplementationForInterfaceMemberWithDiagnostics.</param>
+        /// <param name="interfaceMember">The interface method or property that is being
+        // implemented.</param>
         /// <returns>
-        /// A synthesized forwarding method for the implementation, or information about MethodImpl entry that should be emitted,
+        /// A synthesized forwarding method for the implementation, or information about MethodImpl entry
+        // that should be emitted,
         /// or default if neither needed.
         /// </returns>
         private (
@@ -2886,16 +2933,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If C# picks a different implementation than the CLR (see IsPossibleImplementationUnderClrRules), then we might
+        /// If C# picks a different implementation than the CLR (see IsPossibleImplementationUnderClrRules),
+        // then we might
         /// still be okay, but dynamic dispatch might result in C#'s choice getting called anyway.
         /// </summary>
         /// <remarks>
         /// This is based on SymbolPreparer::IsCLRMethodImplSame in the native compiler.
         ///
         /// ACASEY: What the native compiler actually does is compute the C# answer, compute the CLR answer,
-        /// and then confirm that they override the same method.  What I've done here is check for the situations
-        /// where the answers could disagree.  I believe the results will be equivalent.  If in doubt, a more conservative
-        /// check would be implementingMethod.ContainingType.InterfacesAndTheirBaseInterfaces.Contains(@interface).
+        /// and then confirm that they override the same method.  What I've done here is check for the
+        // situations
+        /// where the answers could disagree.  I believe the results will be equivalent.  If in doubt, a
+        // more conservative
+        /// check would be
+        // implementingMethod.ContainingType.InterfacesAndTheirBaseInterfaces.Contains(@interface).
         /// </remarks>
         private static bool IsOverrideOfPossibleImplementationUnderRuntimeRules(
             MethodSymbol implementingMethod,

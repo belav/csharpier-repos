@@ -4,7 +4,8 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 /// <summary>
-///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" />
+// API
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
@@ -16,10 +17,14 @@ public class OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
     where TDependentEntity : class
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public OwnedNavigationTableBuilder(
@@ -36,9 +41,11 @@ public class OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
     ///     Configures the table to be ignored by migrations.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information.
     /// </remarks>
-    /// <param name="excluded">A value indicating whether the table should be managed by migrations.</param>
+    /// <param name="excluded">A value indicating whether the table should be managed by
+    // migrations.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public new virtual OwnedNavigationTableBuilder<
         TOwnerEntity,
@@ -51,7 +58,8 @@ public class OwnedNavigationTableBuilder<TOwnerEntity, TDependentEntity>
     ///     Configures a comment to be applied to the table
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="comment">The comment for the table.</param>
     /// <returns>A builder to further configure the table.</returns>

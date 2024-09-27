@@ -27,7 +27,8 @@ namespace System.ComponentModel
             : this(string.Empty) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.DisplayNameAttribute'/> class.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.DisplayNameAttribute'/>
+        // class.
         /// </summary>
         public DisplayNameAttribute(string displayName)
         {

@@ -660,11 +660,14 @@ namespace System.Data.Common
         /// <summary>wrapper around Type.GetType</summary>
         /// <param name="value">assembly qualified type name or one of the special known types</param>
         /// <returns>Type or null if not found</returns>
-        /// <exception cref="InvalidOperationException">when type implements IDynamicMetaObjectProvider and not IXmlSerializable</exception>
+        /// <exception cref="InvalidOperationException">when type implements IDynamicMetaObjectProvider and
+        // not IXmlSerializable</exception>
         /// <remarks>
         /// Types like "System.Guid" will load regardless of AssemblyQualifiedName because they are special
-        /// Types like "System.Data.SqlTypes.SqlString" will load because they are in the same assembly as this code
-        /// Types like "System.Numerics.BigInteger" won't load because they are not special and not same assembly as this code
+        /// Types like "System.Data.SqlTypes.SqlString" will load because they are in the same assembly as
+        // this code
+        /// Types like "System.Numerics.BigInteger" won't load because they are not special and not same
+        // assembly as this code
         /// </remarks>
         [RequiresUnreferencedCode("Calls Type.GetType")]
         internal static Type GetType(string value)
@@ -678,8 +681,10 @@ namespace System.Data.Common
                 }
             }
 
-            // prevent reading type from schema which implements IDynamicMetaObjectProvider and not IXmlSerializable
-            // the check here prevents the type from being loaded in schema or as instance data (when DataType is object)
+            // prevent reading type from schema which implements IDynamicMetaObjectProvider and not
+            // IXmlSerializable
+            // the check here prevents the type from being loaded in schema or as instance data (when DataType
+            // is object)
             ObjectStorage.VerifyIDynamicMetaObjectProvider(dataType!);
             return dataType!;
         }
@@ -687,7 +692,8 @@ namespace System.Data.Common
         /// <summary>wrapper around Type.AssemblyQualifiedName</summary>
         /// <param name="type"></param>
         /// <returns>qualified name when writing in xml</returns>
-        /// <exception cref="InvalidOperationException">when type implements IDynamicMetaObjectProvider and not IXmlSerializable</exception>
+        /// <exception cref="InvalidOperationException">when type implements IDynamicMetaObjectProvider and
+        // not IXmlSerializable</exception>
         internal static string GetQualifiedName(Type type)
         {
             Debug.Assert(null != type, "null type");

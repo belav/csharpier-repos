@@ -1073,7 +1073,8 @@ namespace System.Security.Cryptography.Tests
         {
             get
             {
-                // new object[] { PaddingMode mode, int plaintextSize, int expectedCiphertextSize, int alignmentSizeInBits }
+                // new object[] { PaddingMode mode, int plaintextSize, int expectedCiphertextSize, int
+                // alignmentSizeInBits }
 
                 PaddingMode[] fullPaddings = new[]
                 {

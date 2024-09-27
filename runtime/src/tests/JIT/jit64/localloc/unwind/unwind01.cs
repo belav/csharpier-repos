@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * Test unwinding from simple function.
- */
+* Test unwinding from simple function.
+*/
 
 using System;
 using LocallocTesting;

@@ -59,11 +59,11 @@ namespace System.IO
         public static Exception GetException(MonoIOError error)
         {
             /* This overload is currently only called from
-             * File.MoveFile(), Directory.Move() and
-             * Directory.GetCurrentDirectory() -
-             * everywhere else supplies a path to format
-             * with the error text.
-             */
+            * File.MoveFile(), Directory.Move() and
+            * Directory.GetCurrentDirectory() -
+            * everywhere else supplies a path to format
+            * with the error text.
+            */
             switch (error)
             {
                 case MonoIOError.ERROR_ACCESS_DENIED:
@@ -73,11 +73,11 @@ namespace System.IO
                     return new IOException(message, FileAlreadyExistsHResult);
                 default:
                     /* Add more mappings here if other
-                     * errors trigger the named but empty
-                     * path bug (see bug 82141.) For
-                     * everything else, fall through to
-                     * the other overload
-                     */
+                    * errors trigger the named but empty
+                    * path bug (see bug 82141.) For
+                    * everything else, fall through to
+                    * the other overload
+                    */
                     return GetException(String.Empty, error);
             }
         }

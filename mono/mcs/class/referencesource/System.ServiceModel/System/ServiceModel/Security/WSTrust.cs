@@ -912,7 +912,8 @@ namespace System.ServiceModel.Security
             /// The algorithm for computing the key is:
             /// 1. If there is requestorEntropy:
             ///    a. If there is no <RequestedProofToken> use the requestorEntropy as the key
-            ///    b. If there is a <RequestedProofToken> with a ComputedKeyUri, combine the client and server entropies
+            ///    b. If there is a <RequestedProofToken> with a ComputedKeyUri, combine the client and server
+            // entropies
             ///    c. Anything else, throw
             /// 2. If there is no requestorEntropy:
             ///    a. THere has to be a <RequestedProofToken> that contains the proof key
@@ -1296,7 +1297,8 @@ namespace System.ServiceModel.Security
             }
 
             // Note in Apr2004, internal & external references aren't supported -
-            // our strategy is to see if there's a token reference (and use it for external ref) and backup is to scan the token xml to compute reference
+            // our strategy is to see if there's a token reference (and use it for external ref) and backup is
+            // to scan the token xml to compute reference
             protected virtual void ReadReferences(
                 XmlElement rstrXml,
                 out SecurityKeyIdentifierClause requestedAttachedReference,
@@ -1613,7 +1615,8 @@ namespace System.ServiceModel.Security
                 XmlDictionaryWriter writer
             ) { }
 
-            // Note in Apr2004, internal & external references aren't supported - our strategy is to generate the external ref as the TokenReference.
+            // Note in Apr2004, internal & external references aren't supported - our strategy is to generate
+            // the external ref as the TokenReference.
             protected virtual void WriteReferences(
                 RequestSecurityTokenResponse rstr,
                 XmlDictionaryWriter writer
@@ -2267,7 +2270,8 @@ namespace System.ServiceModel.Security
                     foreach (XmlNode node in element.ChildNodes)
                         if (node is XmlElement)
                         {
-                            // PreSharp Bug: Parameter 'requiredClaims' to this public method must be validated: A null-dereference can occur here.
+                            // PreSharp Bug: Parameter 'requiredClaims' to this public method must be validated: A
+                            // null-dereference can occur here.
 #pragma warning suppress 56506
                             requiredClaims.Add((XmlElement)node);
                         }

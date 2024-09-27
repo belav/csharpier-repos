@@ -23,8 +23,10 @@ public static class DynamicMethodJumpStubTests
             return;
         }
 
-        // Reserve memory around framework libraries. This is just a best attempt, it typically doesn't help since the
-        // precode allocator may have already committed pages it can allocate from, or it may commit reserved pages close to
+        // Reserve memory around framework libraries. This is just a best attempt, it typically doesn't help
+        // since the
+        // precode allocator may have already committed pages it can allocate from, or it may commit
+        // reserved pages close to
         // framework libraries.
         ReserveMemoryAround(new Action(ExecutionContext.RestoreFlow).Method.MethodHandle);
 
@@ -34,8 +36,10 @@ public static class DynamicMethodJumpStubTests
             DynamicMethod dynamicMethod = CreateDynamicMethod("DynMethod" + i);
             dynamicMethodDelegates[i] = (Action)dynamicMethod.CreateDelegate(typeof(Action));
 
-            // Before compiling the dynamic method, reserve memory around its current entry point, which should be its
-            // precode. Then, when compiling the method, there would be a good chance that the code will be located far from
+            // Before compiling the dynamic method, reserve memory around its current entry point, which should
+            // be its
+            // precode. Then, when compiling the method, there would be a good chance that the code will be
+            // located far from
             // the precode, forcing the use of a jump stub.
             ReserveMemoryAround(
                 (RuntimeMethodHandle)
@@ -72,7 +76,8 @@ public static class DynamicMethodJumpStubTests
         foreach (var t in threads)
             t.Join();
 
-        // This test does not release reserved pages because they may have been committed by other components on the system
+        // This test does not release reserved pages because they may have been committed by other
+        // components on the system
     }
 
     private static DynamicMethod CreateDynamicMethod(string name)

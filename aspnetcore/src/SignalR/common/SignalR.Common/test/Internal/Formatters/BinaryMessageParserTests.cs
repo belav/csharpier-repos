@@ -335,10 +335,10 @@ public class BinaryMessageParserTests
     {
         var encoded = new byte[]
         {
-            /* length: */0x00,
-            /* body: <empty> */
-            /* length: */0x0E,
-            /* body: */0x48,
+/* length: */0x00,
+/* body: <empty> */
+/* length: */0x0E,
+/* body: */0x48,
             0x65,
             0x6C,
             0x6C,

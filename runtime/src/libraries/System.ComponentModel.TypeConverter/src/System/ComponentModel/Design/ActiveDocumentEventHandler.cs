@@ -4,7 +4,8 @@
 namespace System.ComponentModel.Design
 {
     /// <summary>
-    /// Represents the method that will handle the <see cref='System.ComponentModel.Design.IDesignerEventService.ActiveDesignerChanged'/>
+    /// Represents the method that will handle the <see
+    // cref='System.ComponentModel.Design.IDesignerEventService.ActiveDesignerChanged'/>
     /// event raised on changes to the currently active document.
     /// </summary>
     public delegate void ActiveDesignerEventHandler(object? sender, ActiveDesignerEventArgs e);

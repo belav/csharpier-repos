@@ -18,7 +18,7 @@ public class Test
         {
             if (tie.InnerException is FileNotFoundException)
             {
-                /* reference assembly loading throws FNFE */
+/* reference assembly loading throws FNFE */
                 caught = true;
             }
             else

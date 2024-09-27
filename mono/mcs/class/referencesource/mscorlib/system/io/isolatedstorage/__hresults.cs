@@ -4,18 +4,18 @@
 //
 // ==--==
 /*============================================================
- *
- * Class:  __HResults
+*
+* Class:  __HResults
 //
 // <OWNER>kimhamil</OWNER>
- *
- * <EMAIL>Author: Shajan Dasan</EMAIL>
- *
- * Purpose: The HRESULTS used by IsolatedStorage
- *
- * Date:  Feb 15, 2000
- *
- ===========================================================*/
+*
+* <EMAIL>Author: Shajan Dasan</EMAIL>
+*
+* Purpose: The HRESULTS used by IsolatedStorage
+*
+* Date:  Feb 15, 2000
+*
+===========================================================*/
 namespace System.IO.IsolatedStorage
 {
     internal static class __HResults

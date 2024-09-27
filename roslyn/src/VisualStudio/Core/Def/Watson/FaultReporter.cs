@@ -231,11 +231,13 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         {
             const string CodeAnalysisNamespace = nameof(Microsoft) + "." + nameof(CodeAnalysis);
 
-            // Be resilient to failing here.  If we can't get a suitable name, just fall back to the standard name we
+            // Be resilient to failing here.  If we can't get a suitable name, just fall back to the standard
+            // name we
             // used to report.
             try
             {
-                // walk up the stack looking for the first call from a type that isn't in the ErrorReporting namespace.
+                // walk up the stack looking for the first call from a type that isn't in the ErrorReporting
+                // namespace.
                 var frames = new StackTrace(exception).GetFrames();
 
                 // On the .NET Framework, GetFrames() can return null even though it's not documented as such.

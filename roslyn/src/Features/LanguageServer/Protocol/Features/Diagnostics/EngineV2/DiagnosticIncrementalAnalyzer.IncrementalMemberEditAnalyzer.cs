@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
     internal partial class DiagnosticIncrementalAnalyzer
     {
         /// <summary>
-        /// This type performs incremental analysis in presence of edits to only a single member inside a document.
+        /// This type performs incremental analysis in presence of edits to only a single member inside a
+        // document.
         /// For typing scenarios where we are continuously editing a method body, we can optimize the full
         /// document diagnostic computation by doing the following:
         ///   1. Re-using all the old cached diagnostics outside the edited member node from a prior
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var analysisScope = executor.AnalysisScope;
 
-                // We should be asked to perform incremental analysis only for full document diagnostics computation.
+                // We should be asked to perform incremental analysis only for full document diagnostics
+                // computation.
                 Debug.Assert(!analysisScope.Span.HasValue);
 
                 // Ensure that only the analyzers that support incremental span-based analysis are provided.
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     foreach (var analyzerWithState in analyzersWithState)
                     {
                         // Check if we have existing cached diagnostics for this analyzer whose version matches the
-                        // old document version. If so, we can perform span based incremental analysis for the changed member.
+                        // old document version. If so, we can perform span based incremental analysis for the changed
+                        // member.
                         // Otherwise, we have to perform entire document analysis.
                         var state = analyzerWithState.State;
                         var existingData = analyzerWithState.ExistingData;
@@ -174,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         )
                         .ConfigureAwait(false);
 
-                    // Execute all the analyzers, starting with compiler analyzer first, followed by span-based analyzers
+                    // Execute all the analyzers, starting with compiler analyzer first, followed by span-based
+                    // analyzers
                     // and finally document-based analyzers.
                     using var _ = PooledDictionary<
                         DiagnosticAnalyzer,

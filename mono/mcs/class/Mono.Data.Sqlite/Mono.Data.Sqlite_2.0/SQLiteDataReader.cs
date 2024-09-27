@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -101,7 +101,8 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Closes the datareader, potentially closing the connection as well if CommandBehavior.CloseConnection was specified.
+        /// Closes the datareader, potentially closing the connection as well if
+        // CommandBehavior.CloseConnection was specified.
         /// </summary>
         public override void Close()
         {
@@ -249,15 +250,20 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// SQLite is inherently un-typed.  All datatypes in SQLite are natively strings.  The definition of the columns of a table
+        /// SQLite is inherently un-typed.  All datatypes in SQLite are natively strings.  The definition of
+        // the columns of a table
         /// and the affinity of returned types are all we have to go on to type-restrict data in the reader.
         ///
-        /// This function attempts to verify that the type of data being requested of a column matches the datatype of the column.  In
-        /// the case of columns that are not backed into a table definition, we attempt to match up the affinity of a column (int, double, string or blob)
-        /// to a set of known types that closely match that affinity.  It's not an exact science, but its the best we can do.
+        /// This function attempts to verify that the type of data being requested of a column matches the
+        // datatype of the column.  In
+        /// the case of columns that are not backed into a table definition, we attempt to match up the
+        // affinity of a column (int, double, string or blob)
+        /// to a set of known types that closely match that affinity.  It's not an exact science, but its
+        // the best we can do.
         /// </summary>
         /// <returns>
-        /// This function throws an InvalidTypeCast() exception if the requested type doesn't match the column's definition or affinity.
+        /// This function throws an InvalidTypeCast() exception if the requested type doesn't match the
+        // column's definition or affinity.
         /// </returns>
         /// <param name="i">The index of the column to type-check</param>
         /// <param name="typ">The type we want to get out of the column</param>
@@ -364,7 +370,8 @@ namespace Mono.Data.Sqlite
         /// <param name="length">The number of bytes to retrieve</param>
         /// <returns>The actual number of bytes written into the array</returns>
         /// <remarks>
-        /// To determine the number of bytes in the column, pass a null value for the buffer.  The total length will be returned.
+        /// To determine the number of bytes in the column, pass a null value for the buffer.  The total
+        // length will be returned.
         /// </remarks>
         public override long GetBytes(
             int i,
@@ -418,7 +425,8 @@ namespace Mono.Data.Sqlite
         /// <param name="length">The number of bytes to retrieve</param>
         /// <returns>The actual number of characters written into the array</returns>
         /// <remarks>
-        /// To determine the number of characters in the column, pass a null value for the buffer.  The total length will be returned.
+        /// To determine the number of characters in the column, pass a null value for the buffer.  The
+        // total length will be returned.
         /// </remarks>
         public override long GetChars(
             int i,
@@ -633,10 +641,12 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Schema information in SQLite is difficult to map into .NET conventions, so a lot of work must be done
+        /// Schema information in SQLite is difficult to map into .NET conventions, so a lot of work must be
+        // done
         /// to gather the necessary information so it can be represented in an ADO.NET manner.
         /// </summary>
-        /// <returns>Returns a DataTable containing the schema information for the active SELECT statement being processed.</returns>
+        /// <returns>Returns a DataTable containing the schema information for the active SELECT statement
+        // being processed.</returns>
         public override DataTable GetSchemaTable()
         {
             return GetSchemaTable(true, false);
@@ -825,7 +835,8 @@ namespace Mono.Data.Sqlite
 
                     if (wantDefaultValue)
                     {
-                        // Determine the default value for the column, which sucks because we have to query the schema for each column
+                        // Determine the default value for the column, which sucks because we have to query the schema for
+                        // each column
                         using (
                             SqliteCommand cmdTable = new SqliteCommand(
                                 String.Format(
@@ -913,10 +924,14 @@ namespace Mono.Data.Sqlite
                                     )
                                         row[SchemaTableColumn.IsUnique] = rowIndexes["UNIQUE"];
 
-                                    // If its an integer primary key and the only primary key in the table, then its a rowid alias and is autoincrement
-                                    // NOTE:  Currently commented out because this is not always the desired behavior.  For example, a 1:1 relationship with
-                                    //        another table, where the other table is autoincrement, but this one is not, and uses the rowid from the other.
-                                    //        It is safer to only set Autoincrement on tables where we're SURE the user specified AUTOINCREMENT, even if its a rowid column.
+                                    // If its an integer primary key and the only primary key in the table, then its a rowid alias and
+                                    // is autoincrement
+                                    // NOTE:  Currently commented out because this is not always the desired behavior.  For example, a
+                                    // 1:1 relationship with
+                                    //        another table, where the other table is autoincrement, but this one is not, and uses the
+                                    // rowid from the other.
+                                    //        It is safer to only set Autoincrement on tables where we're SURE the user specified
+                                    // AUTOINCREMENT, even if its a rowid column.
 
                                     if (
                                         tblIndexColumns.Rows.Count == 1
@@ -992,7 +1007,8 @@ namespace Mono.Data.Sqlite
         /// <summary>
         /// Retreives the values of multiple columns, up to the size of the supplied array
         /// </summary>
-        /// <param name="values">The array to fill with values from the columns in the current resultset</param>
+        /// <param name="values">The array to fill with values from the columns in the current
+        // resultset</param>
         /// <returns>The number of columns retrieved</returns>
         public override int GetValues(object[] values)
         {
@@ -1044,7 +1060,8 @@ namespace Mono.Data.Sqlite
         /// <summary>
         /// Moves to the next resultset in multiple row-returning SQL command.
         /// </summary>
-        /// <returns>True if the command was successful and a new resultset is available, False otherwise.</returns>
+        /// <returns>True if the command was successful and a new resultset is available, False
+        // otherwise.</returns>
         public override bool NextResult()
         {
             CheckClosed();
@@ -1059,7 +1076,8 @@ namespace Mono.Data.Sqlite
                     // Reset the previously-executed statement
                     _activeStatement._sql.Reset(_activeStatement);
 
-                    // If we're only supposed to return a single rowset, step through all remaining statements once until
+                    // If we're only supposed to return a single rowset, step through all remaining statements once
+                    // until
                     // they are all done and return false to indicate no more resultsets exist.
                     if ((_commandBehavior & CommandBehavior.SingleResult) != 0)
                     {
@@ -1098,7 +1116,8 @@ namespace Mono.Data.Sqlite
 
                 fieldCount = stmt._sql.ColumnCount(stmt);
 
-                // If the statement is not a select statement or we're not retrieving schema only, then perform the initial step
+                // If the statement is not a select statement or we're not retrieving schema only, then perform the
+                // initial step
                 if ((_commandBehavior & CommandBehavior.SchemaOnly) == 0 || fieldCount == 0)
                 {
                     if (stmt._sql.Step(stmt))
@@ -1177,7 +1196,8 @@ namespace Mono.Data.Sqlite
             }
             else if (_readingState == 0) // Actively reading rows
             {
-                // Don't read a new row if the command behavior dictates SingleRow.  We've already read the first row.
+                // Don't read a new row if the command behavior dictates SingleRow.  We've already read the first
+                // row.
                 if ((_commandBehavior & CommandBehavior.SingleRow) == 0)
                 {
                     if (_activeStatement._sql.Step(_activeStatement) == true)
@@ -1196,7 +1216,8 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Retrieve the count of records affected by an update/insert command.  Only valid once the data reader is closed!
+        /// Retrieve the count of records affected by an update/insert command.  Only valid once the data
+        // reader is closed!
         /// </summary>
         public override int RecordsAffected
         {

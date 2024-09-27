@@ -607,7 +607,7 @@ namespace PEAPI
         DefaultConstructorConstrait = 0x0010,
     }
 
-    /* Taken from Mono.Cecil */
+/* Taken from Mono.Cecil */
     public enum SecurityAction : short
     {
         Request = 1,
@@ -632,7 +632,7 @@ namespace PEAPI
 
     #endregion
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for all Meta Data table elements
     /// </summary>
@@ -745,7 +745,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Layout information for a class (.class [sequential | explicit])
     /// </summary>
@@ -776,7 +776,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Summary description for ConstantElem.
     /// </summary>
@@ -827,7 +827,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a Custom Attribute (.custom)
     /// </summary>
@@ -964,7 +964,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for security permissions for a class or a method
     /// </summary>
@@ -1164,7 +1164,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for layout information for a field
     /// </summary>
@@ -1193,7 +1193,7 @@ namespace PEAPI
         }
     }
 
-    /*****************************************************************************/
+/*****************************************************************************/
     /// <summary>
     /// Marshalling information for a field or param
     /// </summary>
@@ -1236,7 +1236,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for the address of a field's value in the PE file
     /// </summary>
@@ -1272,7 +1272,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a file referenced in THIS assembly/module (.file)
     /// </summary>
@@ -1337,7 +1337,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for pinvoke information for a method NOT YET IMPLEMENTED
     /// </summary>
@@ -1393,7 +1393,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
 
     public class GenericParameter : MetaDataElement
     {
@@ -1570,7 +1570,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for interface implemented by a class
     /// </summary>
@@ -1608,7 +1608,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for resources used in this PE file
     /// </summary>
@@ -1715,7 +1715,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for elements in the PropertyMap, EventMap and
     /// NestedClass MetaData tables
@@ -1745,7 +1745,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for an overriding method (.override)
     /// </summary>
@@ -1781,7 +1781,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for Property and Event methods
     /// </summary>
@@ -1818,7 +1818,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a parameter of a method defined in this assembly/module
     /// </summary>
@@ -1925,7 +1925,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     public abstract class Signature : MetaDataElement
     {
         protected uint sigIx;
@@ -1951,7 +1951,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     public class TypeSpec : MetaDataElement
     {
         uint sigIx = 0;
@@ -1990,7 +1990,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for all IL types
     /// </summary>
@@ -2055,7 +2055,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// The base descriptor for a class
     /// </summary>
@@ -2113,7 +2113,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     // This Class produces entries in the TypeDef table of the MetaData
     // in the PE meta data.
 
@@ -2496,7 +2496,8 @@ namespace PEAPI
             output.StringsIndex(nameIx);
             output.StringsIndex(nameSpaceIx);
             //if (superType != null)
-            // Console.WriteLine("getting coded index for superType of " + name + " = " + superType.GetCodedIx(CIx.TypeDefOrRef));
+            // Console.WriteLine("getting coded index for superType of " + name + " = " +
+            // superType.GetCodedIx(CIx.TypeDefOrRef));
             output.WriteCodedIndex(CIx.TypeDefOrRef, superType);
             output.WriteIndex(MDTable.Field, fieldIx);
             output.WriteIndex(MDTable.Method, methodIx);
@@ -2534,7 +2535,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a class/interface declared in another module of THIS
     /// assembly, or in another assembly.
@@ -2675,7 +2676,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     public class ExternClassRef : ClassRef
     {
         ExternClass externClass;
@@ -2705,7 +2706,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a class defined in another module of THIS assembly
     /// and exported (.class extern)
@@ -2943,7 +2944,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a FunctionPointer type
     /// </summary>
@@ -3036,7 +3037,7 @@ namespace PEAPI
     }
 
     #region Array Types
-    /* Classes for Arrays */
+/* Classes for Arrays */
 
     /// <summary>
     /// The IL Array type
@@ -3164,30 +3165,30 @@ namespace PEAPI
                 sign = 1;
             }
 
-            /* Map the signed number to an unsigned number in two ways.
+/* Map the signed number to an unsigned number in two ways.
 
-                 fval: left-rotated 2's complement representation
-                 sval: map the signed number to unsigned as follows: 0 -> 0, -1 -> 1, 1 -> 2, -2 -> 3, 2 -> 4, ....
-                       the mapping is: x -> 2*|x| - signbit(x)
-            */
+fval: left-rotated 2's complement representation
+sval: map the signed number to unsigned as follows: 0 -> 0, -1 -> 1, 1 -> 2, -2 -> 3, 2 -> 4, ....
+the mapping is: x -> 2*|x| - signbit(x)
+*/
             uint fval = (uval << 1) | sign;
             int sval = (val << 1) - sign;
 
-            /* An overly clever transformation:
+/* An overly clever transformation:
 
-               a. sval is used to determine the number of bytes in the compressed representation.
-               b. fval is truncated to the appropriate number of bits and output using the
-                  normal unsigned-int compressor.
+a. sval is used to determine the number of bytes in the compressed representation.
+b. fval is truncated to the appropriate number of bits and output using the
+normal unsigned-int compressor.
 
-               However, or certain values, the truncated fval doesn't carry enough information to round trip.
+However, or certain values, the truncated fval doesn't carry enough information to round trip.
 
-                (fval & 0x3FFF) <= 0x7F => compressor emits 1 byte, not 2 => there is aliasing of values
+(fval & 0x3FFF) <= 0x7F => compressor emits 1 byte, not 2 => there is aliasing of values
 
-               So, we use full 4 bytes to encode such values.
+So, we use full 4 bytes to encode such values.
 
-               LAMESPEC: The Microsoft implementation doesn't appear to handle this subtle case.
-                        e.g., it ends up encoding -8192 as the byte 0x01, which decodes to -64
-            */
+LAMESPEC: The Microsoft implementation doesn't appear to handle this subtle case.
+e.g., it ends up encoding -8192 as the byte 0x01, which decodes to -64
+*/
             if (sval <= 0x7F)
                 MetaData.CompressNum(fval & 0x7F, str);
             else if (sval <= 0x3FFF && (fval & 0x3FFF) > 0x7F)
@@ -3195,7 +3196,7 @@ namespace PEAPI
             else if (sval <= 0x1FFFFFFF && (fval & 0x1FFFFFFF) > 0x3FFF)
                 MetaData.CompressNum(fval & 0x1FFFFFFF, str);
             else
-                /* FIXME: number cannot be represented.  Report a warning.  */
+/* FIXME: number cannot be represented.  Report a warning.  */
                 // throw new Exception ("cannot represent signed value" + -val);
                 MetaData.CompressNum(fval, str);
         }
@@ -3204,11 +3205,11 @@ namespace PEAPI
     #endregion
 
 
-    /* Empty interface for grouping TypeRef's possible ResolutionScope
-       namely : Module, ModuleRef, AssemblyRef and TypeRef */
+/* Empty interface for grouping TypeRef's possible ResolutionScope
+namely : Module, ModuleRef, AssemblyRef and TypeRef */
     public interface IResolutionScope { }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for scopes (extended by Module, ModuleRef, Assembly, AssemblyRef)
     /// </summary>
@@ -3231,7 +3232,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for THIS assembly (.assembly)
     /// </summary>
@@ -3299,7 +3300,8 @@ namespace PEAPI
 
         internal sealed override void Write(FileImage output)
         {
-            //      Console.WriteLine("Writing assembly element with nameIx of " + nameIx + " at file offset " + output.Seek(0,SeekOrigin.Current));
+            //      Console.WriteLine("Writing assembly element with nameIx of " + nameIx + " at file offset " +
+            // output.Seek(0,SeekOrigin.Current));
             output.Write((uint)hashAlgId);
             output.Write(majorVer);
             output.Write(minorVer);
@@ -3329,7 +3331,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for THIS module
     /// </summary>
@@ -3393,7 +3395,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for another module in THIS assembly
     /// </summary>
@@ -4042,7 +4044,7 @@ namespace PEAPI
 
     #endregion
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a custom modifier of a type (modopt or modreq)
     /// </summary>
@@ -4090,7 +4092,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for Event and Property descriptors
     /// </summary>
@@ -4156,7 +4158,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for an event
     /// </summary>
@@ -4244,7 +4246,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for the Property of a class
     /// </summary>
@@ -4367,7 +4369,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for field/methods (member of a class)
     /// </summary>
@@ -4384,7 +4386,7 @@ namespace PEAPI
         }
     }
 
-    /*****************************************************************************/
+/*****************************************************************************/
     /// <summary>
     /// Descriptor for a field of a class
     /// </summary>
@@ -4402,7 +4404,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a field defined in a class of THIS assembly/module
     /// </summary>
@@ -4539,7 +4541,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a field of a class defined in another assembly/module
     /// </summary>
@@ -4585,7 +4587,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Base class for Method Descriptors
     /// </summary>
@@ -4600,7 +4602,7 @@ namespace PEAPI
         internal abstract uint GetSigIx(MetaData md);
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a method defined in THIS assembly/module
     /// IL     .method
@@ -4739,7 +4741,7 @@ namespace PEAPI
             this.initLocals = initLocals;
         }
 
-        /* Add Marshal info for return type */
+/* Add Marshal info for return type */
         public void AddRetTypeMarshallInfo(NativeType marshallType)
         {
             ret_param.AddMarshallInfo(marshallType);
@@ -4904,7 +4906,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a method defined in another assembly/module
     /// </summary>
@@ -5017,7 +5019,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptors for native types used for marshalling
     /// </summary>
@@ -5108,11 +5110,11 @@ namespace PEAPI
             this.elemType = elemType;
         }
 
-        /*    public NativeArray(NativeType elemType, int len) : base(0x2A) {
-              this.elemType = elemType;
-              this.len = len;
-              }
-         */
+/*    public NativeArray(NativeType elemType, int len) : base(0x2A) {
+this.elemType = elemType;
+this.len = len;
+}
+*/
 
         public NativeArray(NativeType elemType, int numElem, int parNumForLen, int elemMult)
             : base(0x2A)
@@ -5135,12 +5137,12 @@ namespace PEAPI
             else
                 str.WriteByte(elemType.GetTypeIndex());
 
-            /* see : mono/metadata/metadata.c:mono_metadata_parse_marshal_spec
-             * LAMESPEC: Older spec versions say elemMult comes before
-             * len. Newer spec versions don't talk about elemMult at
-             * all, but csc still emits it, and it is used to distinguish
-             * between parNum being 0, and parNum being omitted.
-             */
+/* see : mono/metadata/metadata.c:mono_metadata_parse_marshal_spec
+* LAMESPEC: Older spec versions say elemMult comes before
+* len. Newer spec versions don't talk about elemMult at
+* all, but csc still emits it, and it is used to distinguish
+* between parNum being 0, and parNum being omitted.
+*/
 
             if (parNum == -1)
                 // <native_type> []
@@ -5209,13 +5211,13 @@ namespace PEAPI
             MemoryStream str = new MemoryStream();
             str.WriteByte(GetTypeIndex());
             MetaData.CompressNum(numElem, str);
-            /* FIXME:
-               fixed array [5] lpstr [2]
-               This format is not supported by ilasm 1.1.4322.2032,
-               but is supported by 2.0.5125..
-               ilasm 1.1 only supports "fixed array [5]"
-               if (elemType == null) str.WriteByte(0x50);  // no info (MAX)
-               else str.WriteByte(elemType.GetTypeIndex());*/
+/* FIXME:
+fixed array [5] lpstr [2]
+This format is not supported by ilasm 1.1.4322.2032,
+but is supported by 2.0.5125..
+ilasm 1.1 only supports "fixed array [5]"
+if (elemType == null) str.WriteByte(0x50);  // no info (MAX)
+else str.WriteByte(elemType.GetTypeIndex());*/
 
             return str.ToArray();
         }
@@ -5270,7 +5272,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for the Primitive types defined in IL
     /// </summary>
@@ -5370,7 +5372,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for an pointer (type * or type &)
     /// </summary>
@@ -5392,7 +5394,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a managed pointer (type &  or byref)
     /// </summary>
@@ -5407,7 +5409,7 @@ namespace PEAPI
             : base(baseType, 0x10) { }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for an unmanaged pointer (type *)
     /// </summary>
@@ -5421,7 +5423,7 @@ namespace PEAPI
             : base(baseType, 0x0F) { }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
 
     public interface IExternRef
     {
@@ -5598,7 +5600,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Descriptor for a class defined in System (mscorlib)
     /// </summary>
@@ -5626,7 +5628,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// The assembly for mscorlib.
     /// </summary>
@@ -5694,8 +5696,8 @@ namespace PEAPI
         /// <returns></returns>
         public override ClassRef AddClass(string nsName, string name)
         {
-            /* This gets called by !mscorlib, for adding references INTO mscorlib, so
-               it should be returning ClassRef ..*/
+/* This gets called by !mscorlib, for adding references INTO mscorlib, so
+it should be returning ClassRef ..*/
             Class aClass = GetSpecialClass(nsName, name);
             if (aClass == null)
             {
@@ -5773,9 +5775,9 @@ namespace PEAPI
 
         private ClassRef GetValueClass(string name, int hash)
         {
-            /* Called by MSCorLib.AddValueClass, which is called by
-               !mscorlib, for adding ref to value class INTO mscorlib,
-               so this should be classref */
+/* Called by MSCorLib.AddValueClass, which is called by
+!mscorlib, for adding ref to value class INTO mscorlib,
+so this should be classref */
             int ix = valueTypeIx;
             if (hash != specialNames[valueTypeIx])
                 ix++;
@@ -5804,8 +5806,8 @@ namespace PEAPI
 
         internal Class EnumType()
         {
-            /* Called by both mscorlib & !mscorlib, so can be
-               either ClassRef or ClassDef */
+/* Called by both mscorlib & !mscorlib, so can be
+either ClassRef or ClassDef */
             //systemClasses [ valueTypeIx + 1] -> System.Enum
             if (systemClasses[valueTypeIx + 1] == null && !PEFile.IsMSCorlib)
             {
@@ -5842,7 +5844,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// MetaData
     ///   Root (20 bytes + UTF-8 Version String + quad align padding)
@@ -6409,7 +6411,8 @@ namespace PEAPI
             {
                 if (metaDataTables[i] != null)
                 {
-                    // Console.WriteLine("Starting metaData table " + i + " at " + (output.Seek(0,SeekOrigin.Current) - startTilde));
+                    // Console.WriteLine("Starting metaData table " + i + " at " + (output.Seek(0,SeekOrigin.Current) -
+                    // startTilde));
                     ArrayList table = metaDataTables[i];
                     for (int j = 0; j < table.Count; j++)
                     {
@@ -6466,15 +6469,15 @@ namespace PEAPI
                     decl_sec.BuildTables(this);
             }
 
-            /*      for (int i=0; i < metaDataTables.Length; i++) {
-                ArrayList table = metaDataTables[i];
-                if (table != null) {
-                for (int j=0; j < table.Count; j++) {
-                ((MetaDataElement)table[j]).BuildTables(this);
-                }
-                }
-                }
-             */
+/*      for (int i=0; i < metaDataTables.Length; i++) {
+ArrayList table = metaDataTables[i];
+if (table != null) {
+for (int j=0; j < table.Count; j++) {
+((MetaDataElement)table[j]).BuildTables(this);
+}
+}
+}
+*/
 
             SetIndexSizes();
             for (int i = 1; i < numStreams; i++)
@@ -6505,9 +6508,9 @@ namespace PEAPI
             {
                 SortTable(metaDataTables[(int)MDTable.GenericParam]);
                 // Now add GenericParamConstraints
-                /*for (int i=0; i < metaDataTables[(int)MDTable.GenericParam].Count; i++) {
-                  ((GenericParameter)metaDataTables[(int)MDTable.GenericParam][i]).AddConstraints(this);
-                  }*/
+/*for (int i=0; i < metaDataTables[(int)MDTable.GenericParam].Count; i++) {
+((GenericParameter)metaDataTables[(int)MDTable.GenericParam][i]).AddConstraints(this);
+}*/
             }
             SortTable(metaDataTables[(int)MDTable.GenericParamConstraint]);
             SortTable(metaDataTables[(int)MDTable.CustomAttribute]);
@@ -6556,7 +6559,8 @@ namespace PEAPI
             output.Write(tildeName);
             for (int i = 1; i < numStreams; i++)
                 streams[i].WriteHeader(output);
-            // Console.WriteLine("Writing tilde stream at " + output.Seek(0,SeekOrigin.Current) + " = " + tildeStart);
+            // Console.WriteLine("Writing tilde stream at " + output.Seek(0,SeekOrigin.Current) + " = " +
+            // tildeStart);
             WriteTildeStream(output);
             for (int i = 1; i < numStreams; i++)
                 streams[i].Write(output);
@@ -6612,7 +6616,7 @@ namespace PEAPI
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     /// <summary>
     /// Stream in the Meta Data  (#Strings, #US, #Blob and #GUID)
     /// </summary>
@@ -6924,13 +6928,14 @@ namespace PEAPI
 
         internal virtual void Write(BinaryWriter output)
         {
-            // Console.WriteLine("Writing " + name + " stream at " + output.Seek(0,SeekOrigin.Current) + " = " + start);
+            // Console.WriteLine("Writing " + name + " stream at " + output.Seek(0,SeekOrigin.Current) + " = " +
+            // start);
             MemoryStream str = (MemoryStream)BaseStream;
             output.Write(str.ToArray());
         }
     }
 
-    /**************************************************************************/
+/**************************************************************************/
     class ByteArrayComparer : IComparer
     {
         public int Compare(object x, object y)

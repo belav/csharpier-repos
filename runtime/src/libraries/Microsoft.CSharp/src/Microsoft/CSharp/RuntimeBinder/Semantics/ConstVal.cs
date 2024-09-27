@@ -6,11 +6,11 @@ using System.Globalization;
 
 namespace Microsoft.CSharp.RuntimeBinder.Semantics
 {
-    /*
-     * The kind of allocation used in a constant value.
-     * Since CONSTVALs don't store a discriminant for the union
-     * this must be managed by clients.
-     */
+/*
+* The kind of allocation used in a constant value.
+* Since CONSTVALs don't store a discriminant for the union
+* this must be managed by clients.
+*/
     internal enum ConstValKind
     {
         Int,

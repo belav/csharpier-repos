@@ -37,7 +37,8 @@ namespace Roslyn.Test.Utilities
         /// <param name="markedSource">The marked source</param>
         /// <param name="parser">Delegate to turn source code into a syntax tree</param>
         /// <param name="getSyntaxKind">Delegate to turn a marker into a syntax kind</param>
-        /// <param name="removeTags">Whether to remove tags from the source, as distinct from replacing them with whitespace. Note that if this
+        /// <param name="removeTags">Whether to remove tags from the source, as distinct from replacing them
+        // with whitespace. Note that if this
         /// value is true then any marked node other than the first, will have an incorrect offset.</param>
         public SourceWithMarkedNodes(
             string markedSource,

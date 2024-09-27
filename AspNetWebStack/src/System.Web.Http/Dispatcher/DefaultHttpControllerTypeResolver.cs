@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +12,8 @@ using System.Web.Http.Controllers;
 namespace System.Web.Http.Dispatcher
 {
     /// <summary>
-    /// Provides an implementation of <see cref="IHttpControllerTypeResolver"/> with no external dependencies.
+    /// Provides an implementation of <see cref="IHttpControllerTypeResolver"/> with no external
+    // dependencies.
     /// </summary>
     public class DefaultHttpControllerTypeResolver : IHttpControllerTypeResolver
     {
@@ -26,7 +28,8 @@ namespace System.Web.Http.Dispatcher
             : this(IsControllerType) { }
 
         /// <summary>
-        /// Creates a new <see cref="DefaultHttpControllerTypeResolver"/> instance using a predicate to filter controller types.
+        /// Creates a new <see cref="DefaultHttpControllerTypeResolver"/> instance using a predicate to
+        // filter controller types.
         /// </summary>
         /// <param name="predicate">The predicate.</param>
         public DefaultHttpControllerTypeResolver(Predicate<Type> predicate)

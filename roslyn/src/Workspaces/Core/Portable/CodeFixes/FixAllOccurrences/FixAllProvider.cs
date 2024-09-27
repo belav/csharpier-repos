@@ -13,8 +13,10 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CodeFixes
 {
     /// <summary>
-    /// Implement this abstract type to provide fix all/multiple occurrences code fixes for source code problems.
-    /// Alternatively, you can use any of the well known fix all providers from <see cref="WellKnownFixAllProviders"/>.
+    /// Implement this abstract type to provide fix all/multiple occurrences code fixes for source code
+    // problems.
+    /// Alternatively, you can use any of the well known fix all providers from <see
+    // cref="WellKnownFixAllProviders"/>.
     /// </summary>
     public abstract class FixAllProvider : IFixAllProvider
     {
@@ -33,9 +35,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Gets the diagnostic IDs for which fix all occurrences is supported.
-        /// By default, it returns <see cref="CodeFixProvider.FixableDiagnosticIds"/> for the given <paramref name="originalCodeFixProvider"/>.
+        /// By default, it returns <see cref="CodeFixProvider.FixableDiagnosticIds"/> for the given
+        // <paramref name="originalCodeFixProvider"/>.
         /// </summary>
-        /// <param name="originalCodeFixProvider">Original code fix provider that returned this fix all provider from <see cref="CodeFixProvider.GetFixAllProvider"/> method.</param>
+        /// <param name="originalCodeFixProvider">Original code fix provider that returned this fix all
+        // provider from <see cref="CodeFixProvider.GetFixAllProvider"/> method.</param>
         public virtual IEnumerable<string> GetSupportedFixAllDiagnosticIds(
             CodeFixProvider originalCodeFixProvider
         ) => originalCodeFixProvider.FixableDiagnosticIds;
@@ -46,14 +50,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public abstract Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext);
 
         /// <summary>
-        /// Create a <see cref="FixAllProvider"/> that fixes documents independently.  This should be used instead of
-        /// <see cref="WellKnownFixAllProviders.BatchFixer"/> in the case where fixes for a <see cref="Diagnostic"/>
+        /// Create a <see cref="FixAllProvider"/> that fixes documents independently.  This should be used
+        // instead of
+        /// <see cref="WellKnownFixAllProviders.BatchFixer"/> in the case where fixes for a <see
+        // cref="Diagnostic"/>
         /// only affect the <see cref="Document"/> the diagnostic was produced in.
         /// </summary>
         /// <param name="fixAllAsync">
-        /// Callback that will the fix diagnostics present in the provided document.  The document returned will only be
-        /// examined for its content (e.g. it's <see cref="SyntaxTree"/> or <see cref="SourceText"/>.  No other aspects
-        /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it points at
+        /// Callback that will the fix diagnostics present in the provided document.  The document returned
+        // will only be
+        /// examined for its content (e.g. it's <see cref="SyntaxTree"/> or <see cref="SourceText"/>.  No
+        // other aspects
+        /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it
+        // points at
         /// will be considered.
         /// </param>
         public static FixAllProvider Create(
@@ -61,19 +70,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         ) => Create(fixAllAsync, DefaultSupportedFixAllScopes);
 
         /// <summary>
-        /// Create a <see cref="FixAllProvider"/> that fixes documents independently for the given <paramref name="supportedFixAllScopes"/>.
-        /// This should be used instead of <see cref="WellKnownFixAllProviders.BatchFixer"/> in the case where
-        /// fixes for a <see cref="Diagnostic"/> only affect the <see cref="Document"/> the diagnostic was produced in.
+        /// Create a <see cref="FixAllProvider"/> that fixes documents independently for the given <paramref
+        // name="supportedFixAllScopes"/>.
+        /// This should be used instead of <see cref="WellKnownFixAllProviders.BatchFixer"/> in the case
+        // where
+        /// fixes for a <see cref="Diagnostic"/> only affect the <see cref="Document"/> the diagnostic was
+        // produced in.
         /// </summary>
         /// <param name="fixAllAsync">
-        /// Callback that will the fix diagnostics present in the provided document.  The document returned will only be
-        /// examined for its content (e.g. it's <see cref="SyntaxTree"/> or <see cref="SourceText"/>.  No other aspects
-        /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it points at
+        /// Callback that will the fix diagnostics present in the provided document.  The document returned
+        // will only be
+        /// examined for its content (e.g. it's <see cref="SyntaxTree"/> or <see cref="SourceText"/>.  No
+        // other aspects
+        /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it
+        // points at
         /// will be considered.
         /// </param>
         /// <param name="supportedFixAllScopes">
         /// Supported <see cref="FixAllScope"/>s for the fix all provider.
-        /// Note that <see cref="FixAllScope.Custom"/> is not supported by the <see cref="DocumentBasedFixAllProvider"/>
+        /// Note that <see cref="FixAllScope.Custom"/> is not supported by the <see
+        // cref="DocumentBasedFixAllProvider"/>
         /// and should not be part of the supported scopes.
         /// </param>
         public static FixAllProvider Create(

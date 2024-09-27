@@ -15,11 +15,16 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal partial class FindReferencesSearchEngine
     {
         /// <summary>
-        /// Symbol set used when <see cref="FindReferencesSearchOptions.UnidirectionalHierarchyCascade"/> is <see
-        /// langword="true"/>.  This symbol set will only cascade in a uniform direction once it walks either up or down
-        /// from the initial set of symbols. This is the symbol set used for features like 'Find Refs', where we only
-        /// want to return location results for members that could feasible actually end up calling into that member at
-        /// runtime.  See the docs of <see cref="FindReferencesSearchOptions.UnidirectionalHierarchyCascade"/> for more
+        /// Symbol set used when <see cref="FindReferencesSearchOptions.UnidirectionalHierarchyCascade"/> is
+        // <see
+        /// langword="true"/>.  This symbol set will only cascade in a uniform direction once it walks
+        // either up or down
+        /// from the initial set of symbols. This is the symbol set used for features like 'Find Refs',
+        // where we only
+        /// want to return location results for members that could feasible actually end up calling into
+        // that member at
+        /// runtime.  See the docs of <see
+        // cref="FindReferencesSearchOptions.UnidirectionalHierarchyCascade"/> for more
         /// information on this.
         /// </summary>
         private sealed class UnidirectionalSymbolSet(
@@ -29,8 +34,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         ) : SymbolSet(engine)
         {
             /// <summary>
-            /// When we're doing a unidirectional find-references, the initial set of up-symbols can never change.
-            /// That's because we have computed the up set entirely up front, and no down symbols can produce new
+            /// When we're doing a unidirectional find-references, the initial set of up-symbols can never
+            // change.
+            /// That's because we have computed the up set entirely up front, and no down symbols can produce
+            // new
             /// up-symbols (as going down then up would not be unidirectional).
             /// </summary>
             private readonly ImmutableHashSet<ISymbol> _upSymbols = upSymbols.ToImmutableHashSet(
@@ -50,7 +57,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 CancellationToken cancellationToken
             )
             {
-                // Start searching using the existing set of symbols found at the start (or anything found below that).
+                // Start searching using the existing set of symbols found at the start (or anything found below
+                // that).
                 var workQueue = new Stack<ISymbol>();
                 workQueue.Push(initialSymbols);
 

@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 #define HASHINDEXnot
@@ -84,7 +84,8 @@ namespace C5
         /// </summary>
         LinkedList<T> underlying;
 
-        //Note: all views will have the same views list since all view objects are created by MemberwiseClone()
+        //Note: all views will have the same views list since all view objects are created by
+        // MemberwiseClone()
         WeakViewList<LinkedList<T>> views;
         WeakViewList<LinkedList<T>>.Node myWeakReference;
 
@@ -193,8 +194,10 @@ namespace C5
         /// Search forwards from a node for a node with a particular item.
         /// </summary>
         /// <param name="item">The item to look for</param>
-        /// <param name="node">On input, the node to start at. If item was found, the node found on output.</param>
-        /// <param name="index">If node was found, the value will be the number of links followed higher than
+        /// <param name="node">On input, the node to start at. If item was found, the node found on
+        // output.</param>
+        /// <param name="index">If node was found, the value will be the number of links followed higher
+        // than
         /// the value on input. If item was not found, the value on output is undefined.</param>
         /// <returns>True if node was found.</returns>
         bool find(T item, ref Node node, ref int index)
@@ -1176,7 +1179,8 @@ namespace C5
             /// To be called with n pointing to the right of each node to be removed in a stretch.
             /// And at the endsentinel.
             ///
-            /// Update offset of a view whose left endpoint (has not already been handled and) is n or precedes n.
+            /// Update offset of a view whose left endpoint (has not already been handled and) is n or precedes
+            // n.
             /// I.e. startsentinel precedes n.
             /// Also update the size as a prelude to handling the right endpoint.
             ///
@@ -1212,14 +1216,17 @@ namespace C5
             }
 
             /// <summary>
-            /// To be called with n being the first not-to-be-removed node after a (stretch of) node(s) to be removed.
+            /// To be called with n being the first not-to-be-removed node after a (stretch of) node(s) to be
+            // removed.
             ///
             /// It will update the startsentinel of views (that have not been handled before and)
             /// whose startsentinel precedes n, i.e. is to be deleted.
             ///
-            /// It will update the endsentinel of views (...) whose endsentinel precedes n, i.e. is to be deleted.
+            /// It will update the endsentinel of views (...) whose endsentinel precedes n, i.e. is to be
+            // deleted.
             ///
-            /// PROBLEM: DOESNT WORK AS ORIGINALLY ADVERTISED. WE MUST DO THIS BEFORE WE ACTUALLY REMOVE THE NODES. WHEN THE
+            /// PROBLEM: DOESNT WORK AS ORIGINALLY ADVERTISED. WE MUST DO THIS BEFORE WE ACTUALLY REMOVE THE
+            // NODES. WHEN THE
             /// NODES HAVE BEEN REMOVED, THE precedes METHOD WILL NOT WORK!
             /// </summary>
             /// <param name="n"></param>
@@ -1252,7 +1259,8 @@ namespace C5
             }
 #else
             /// <summary>
-            /// This is to be called with realindex pointing to the first node to be removed after a (stretch of) node that was not removed
+            /// This is to be called with realindex pointing to the first node to be removed after a (stretch
+            // of) node that was not removed
             /// </summary>
             /// <param name="removed"></param>
             /// <param name="realindex"></param>
@@ -1553,7 +1561,8 @@ namespace C5
         /// this describes if list has FIFO or LIFO semantics.
         /// </summary>
         /// <value>True if the <code>Remove()</code> operation removes from the
-        /// start of the list, false if it removes from the end. THe default for a new linked list is true.</value>
+        /// start of the list, false if it removes from the end. THe default for a new linked list is
+        // true.</value>
         [Tested]
         public virtual bool FIFO
         {
@@ -2192,7 +2201,8 @@ namespace C5
         /// <para>Returns null if <code>otherView</code> is strictly to the left of this view</para>
         /// </summary>
         /// <param name="otherView"></param>
-        /// <exception cref="IncompatibleViewException">If otherView does not have the same underlying list as this</exception>
+        /// <exception cref="IncompatibleViewException">If otherView does not have the same underlying list
+        // as this</exception>
         /// <returns></returns>
         public virtual IList<T> Span(IList<T> otherView)
         {
@@ -3298,29 +3308,29 @@ namespace C5
             );
             bool mustFire = raiseHandler.MustFire;
 #if HASHINDEX
-            /*if (underlying == null)
-            {
-              HashDictionary<T, Node> newdict = new HashDictionary<T, Node>(itemequalityComparer);
-              foreach (T item in items)
-              {
-                Node node;
-      
-                if (dict.Remove(item, out node))
-                  newdict.Add(item, node);
-              }
-              foreach (KeyValuePair<T, Node> pair in dict)
-              {
-                Node n = pair.Value;
-                fixViewsBeforeSingleRemove(n, 117);
-                Node p = n.prev, s = n.next; s.prev = p; p.next = s;
-                removefromtaggroup(n);
-              }
-              dict = newdict;
-              size = dict.Count;
-              //For a small number of items to retain it might be faster to
-              //iterate through the list and splice out the chunks not needed
-            }
-            else*/
+/*if (underlying == null)
+{
+HashDictionary<T, Node> newdict = new HashDictionary<T, Node>(itemequalityComparer);
+foreach (T item in items)
+{
+Node node;
+
+if (dict.Remove(item, out node))
+newdict.Add(item, node);
+}
+foreach (KeyValuePair<T, Node> pair in dict)
+{
+Node n = pair.Value;
+fixViewsBeforeSingleRemove(n, 117);
+Node p = n.prev, s = n.next; s.prev = p; p.next = s;
+removefromtaggroup(n);
+}
+dict = newdict;
+size = dict.Count;
+//For a small number of items to retain it might be faster to
+//iterate through the list and splice out the chunks not needed
+}
+else*/
             {
                 HashSet<T> toremove = new HashSet<T>(itemequalityComparer);
 
@@ -3979,7 +3989,8 @@ namespace C5
                 }
                 if (view.stamp != stamp)
                 {
-                    //Console.WriteLine("Bad view(hash {0}, offset {1}, size {2}), wrong stamp view:{2} underlying: {3}", view.GetHashCode(),view.offset, view.size, view.stamp, stamp);
+                    //Console.WriteLine("Bad view(hash {0}, offset {1}, size {2}), wrong stamp view:{2} underlying:
+                    // {3}", view.GetHashCode(),view.offset, view.size, view.stamp, stamp);
                     //retval = false;
                 }
             }
@@ -4002,8 +4013,9 @@ namespace C5
 
             /*if (underlying != null && underlying.stamp != stamp)
             {
-              Console.WriteLine("underlying != null && underlying.stamp({0}) != stamp({1})", underlying.stamp, stamp);
-              retval = false;
+            Console.WriteLine("underlying != null && underlying.stamp({0}) != stamp({1})", underlying.stamp,
+            stamp);
+            retval = false;
             }*/
 
             if (underlying != null)

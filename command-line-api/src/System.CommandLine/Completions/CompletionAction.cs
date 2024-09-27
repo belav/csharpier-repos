@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
@@ -8,7 +9,9 @@ using System.Linq;
 namespace System.CommandLine.Completions;
 
 /// <summary>
-/// Implements the action for the <c>[suggest]</c> directive, which when specified on the command line will short circuit normal command handling and display a diagram explaining the parse result for the command line input.
+/// Implements the action for the <c>[suggest]</c> directive, which when specified on the command
+// line will short circuit normal command handling and display a diagram explaining the parse result
+// for the command line input.
 /// </summary>
 internal sealed class CompletionAction : SynchronousCliAction
 {

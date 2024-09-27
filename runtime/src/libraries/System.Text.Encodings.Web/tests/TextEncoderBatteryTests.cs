@@ -209,15 +209,15 @@ namespace System.Text.Encodings.Web.Tests
             Assert.Equal(expectedOutput, writer.ToString());
         }
 
-        /*
-         * ESCAPING & UNESCAPING
-         * =====================
-         *
-         * The xunit runner doesn't like strings that contain malformed UTF-16 data.
-         * To smuggle malformed UTF-16 data across the test runner, we'll encode all surrogate
-         * chars (not supplementary chars) as @XXXX. A supplementary char is thus represented
-         * as @XXXX@YYYY (10 chars total) in the stream.
-         */
+/*
+* ESCAPING & UNESCAPING
+* =====================
+*
+* The xunit runner doesn't like strings that contain malformed UTF-16 data.
+* To smuggle malformed UTF-16 data across the test runner, we'll encode all surrogate
+* chars (not supplementary chars) as @XXXX. A supplementary char is thus represented
+* as @XXXX@YYYY (10 chars total) in the stream.
+*/
 
         private static string Escape(string value)
         {

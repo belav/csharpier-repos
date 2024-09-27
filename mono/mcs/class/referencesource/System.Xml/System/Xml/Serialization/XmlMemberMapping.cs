@@ -39,7 +39,8 @@ namespace System.Xml.Serialization
             get { return Accessor.Any; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.ElementName"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.ElementName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -48,7 +49,8 @@ namespace System.Xml.Serialization
             get { return Accessor.UnescapeName(Accessor.Name); }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.XsdElementName"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex'
+        // path='docs/doc[@for="XmlMemberMapping.XsdElementName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -66,7 +68,8 @@ namespace System.Xml.Serialization
             get { return Accessor.Namespace; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.MemberName"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.MemberName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -84,7 +87,8 @@ namespace System.Xml.Serialization
             get { return Accessor.Mapping != null ? Accessor.Mapping.TypeName : String.Empty; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.TypeNamespace"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex'
+        // path='docs/doc[@for="XmlMemberMapping.TypeNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -93,7 +97,8 @@ namespace System.Xml.Serialization
             get { return Accessor.Mapping != null ? Accessor.Mapping.Namespace : null; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.TypeFullName"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.TypeFullName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -102,7 +107,8 @@ namespace System.Xml.Serialization
             get { return mapping.TypeDesc.FullName; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.CheckSpecified"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex'
+        // path='docs/doc[@for="XmlMemberMapping.CheckSpecified"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -116,7 +122,8 @@ namespace System.Xml.Serialization
             get { return mapping.IsNeedNullable; }
         }
 
-        /// <include file='doc\XmlMemberMapping.uex' path='docs/doc[@for="XmlMemberMapping.GenerateTypeName"]/*' />
+        /// <include file='doc\XmlMemberMapping.uex'
+        // path='docs/doc[@for="XmlMemberMapping.GenerateTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

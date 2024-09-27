@@ -11,7 +11,8 @@ namespace System
     public sealed partial class TimeZoneInfo
     {
         /// <summary>
-        /// Used to serialize and deserialize TimeZoneInfo objects based on the custom string serialization format.
+        /// Used to serialize and deserialize TimeZoneInfo objects based on the custom string serialization
+        // format.
         /// </summary>
         private struct StringSerializer
         {
@@ -92,7 +93,8 @@ namespace System
                     serializedText.Append(Sep);
                     if (rule.BaseUtcOffsetDelta != TimeSpan.Zero)
                     {
-                        // Serialize it only when BaseUtcOffsetDelta has a value to reduce the impact of adding rule.BaseUtcOffsetDelta
+                        // Serialize it only when BaseUtcOffsetDelta has a value to reduce the impact of adding
+                        // rule.BaseUtcOffsetDelta
                         serializedText.AppendSpanFormattable(
                             rule.BaseUtcOffsetDelta.TotalMinutes,
                             format: default,
@@ -102,7 +104,8 @@ namespace System
                     }
                     if (rule.NoDaylightTransitions)
                     {
-                        // Serialize it only when NoDaylightTransitions is true to reduce the impact of adding rule.NoDaylightTransitions
+                        // Serialize it only when NoDaylightTransitions is true to reduce the impact of adding
+                        // rule.NoDaylightTransitions
                         serializedText.Append('1');
                         serializedText.Append(Sep);
                     }
@@ -230,7 +233,8 @@ namespace System
             }
 
             /// <summary>
-            /// Helper function to determine if the passed in string token is allowed to be preceded by an escape sequence token.
+            /// Helper function to determine if the passed in string token is allowed to be preceded by an
+            // escape sequence token.
             /// </summary>
             private static void VerifyIsEscapableCharacter(char c)
             {
@@ -243,7 +247,8 @@ namespace System
             }
 
             /// <summary>
-            /// Helper function that reads past "v.Next" data fields. Receives a "depth" parameter indicating the
+            /// Helper function that reads past "v.Next" data fields. Receives a "depth" parameter indicating
+            // the
             /// current relative nested bracket depth that _currentTokenStartIndex is at. The function ends
             /// successfully when "depth" returns to zero (0).
             /// </summary>

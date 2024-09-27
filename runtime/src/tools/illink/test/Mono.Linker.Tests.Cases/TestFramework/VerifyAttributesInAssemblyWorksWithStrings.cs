@@ -5,7 +5,8 @@ using Mono.Linker.Tests.Cases.TestFramework.Dependencies;
 namespace Mono.Linker.Tests.Cases.TestFramework
 {
     [SetupLinkerArgument("--used-attrs-only", "true")]
-    // Put the attribute types in a different assembly than where we will assert since that is a more complex use case
+    // Put the attribute types in a different assembly than where we will assert since that is a more
+    // complex use case
     [SetupCompileBefore(
         "base.dll",
         new[] { "Dependencies/VerifyAttributesInAssemblyWorks_Base.cs" }

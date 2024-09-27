@@ -53,7 +53,8 @@ app.MapPost(
     }
 );
 
-// Cached entries will vary by culture, but any other additional query is ignored and returns the same cached content
+// Cached entries will vary by culture, but any other additional query is ignored and returns the
+// same cached content
 app.MapGet("/query", Gravatar.WriteGravatar).CacheOutput(p => p.SetVaryByQuery("culture"));
 
 app.MapGet("/vary", Gravatar.WriteGravatar)

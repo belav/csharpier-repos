@@ -76,11 +76,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// A collection of variables associated with a method scope. For a particular method, the variables
-        /// may contain parameters and locals and any fields from other variables in the collection. If the method
-        /// is a nested function (a lambda or a local function), there is a reference to the variables collection at
+        /// may contain parameters and locals and any fields from other variables in the collection. If the
+        // method
+        /// is a nested function (a lambda or a local function), there is a reference to the variables
+        // collection at
         /// the containing method scope. The outermost scope may also contain variables for static fields.
-        /// Each variable (parameter, local, or field of other variable) must be associated with the variables collection
-        /// for that method where the parameter or local are declared, even if the variable is used in a nested scope.
+        /// Each variable (parameter, local, or field of other variable) must be associated with the
+        // variables collection
+        /// for that method where the parameter or local are declared, even if the variable is used in a
+        // nested scope.
         /// </summary>
         [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
         internal sealed class Variables
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// A mapping from the local variable slot to the symbol for the local variable itself.
             ///
-            /// The first slot, slot 0, is reserved for indicating reachability, so the first tracked variable will
+            /// The first slot, slot 0, is reserved for indicating reachability, so the first tracked variable
+            // will
             /// be given slot 1. When referring to VariableIdentifier.ContainingSlot, slot 0 indicates
             /// that the variable in VariableIdentifier.Symbol is a root, i.e. not nested within another
             /// tracked variable. Slots less than 0 are illegal.

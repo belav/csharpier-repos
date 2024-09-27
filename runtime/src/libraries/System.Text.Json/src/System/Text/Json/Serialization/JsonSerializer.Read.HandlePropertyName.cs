@@ -47,7 +47,8 @@ namespace System.Text.Json
             // Increment PropertyIndex so GetProperty() checks the next property first when called again.
             state.Current.PropertyIndex++;
 
-            // For case insensitive and missing property support of JsonPath, remember the value on the temporary stack.
+            // For case insensitive and missing property support of JsonPath, remember the value on the
+            // temporary stack.
             state.Current.JsonPropertyName = utf8PropertyName;
 
             // Handle missing properties
@@ -189,7 +190,8 @@ namespace System.Text.Json
                 jsonPropertyInfo.Set(obj, extensionData);
             }
 
-            // We don't add the value to the dictionary here because we need to support the read-ahead functionality for Streams.
+            // We don't add the value to the dictionary here because we need to support the read-ahead
+            // functionality for Streams.
         }
     }
 }

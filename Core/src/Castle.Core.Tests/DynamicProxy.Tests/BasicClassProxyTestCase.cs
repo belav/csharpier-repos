@@ -76,7 +76,8 @@ namespace Castle.DynamicProxy.Tests
         [Test]
         public void ProxyForNonPublicClass()
         {
-            // We need to use a type that is not from our assembly, because we are marked as internals visible to DynamicProxy2
+            // We need to use a type that is not from our assembly, because we are marked as internals visible
+            // to DynamicProxy2
             var type = Type.GetType("System.Text.Latin1Encoding");
             Assert.True(type.IsNotPublic); // Just ensure it is internal as a good use case for this test
 

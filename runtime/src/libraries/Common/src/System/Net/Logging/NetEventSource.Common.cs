@@ -13,21 +13,32 @@ using System.Runtime.InteropServices;
 namespace System.Net
 {
     // Implementation:
-    // This partial file is meant to be consumed into each System.Net.* assembly that needs to log.  Each such assembly also provides
-    // its own NetEventSource partial class that adds an appropriate [EventSource] attribute, giving it a unique name for that assembly.
-    // Those partials can then also add additional events if needed, starting numbering from the NextAvailableEventId defined by this partial.
+    // This partial file is meant to be consumed into each System.Net.* assembly that needs to log.
+    // Each such assembly also provides
+    // its own NetEventSource partial class that adds an appropriate [EventSource] attribute, giving it
+    // a unique name for that assembly.
+    // Those partials can then also add additional events if needed, starting numbering from the
+    // NextAvailableEventId defined by this partial.
 
     // Usage:
-    // - Operations that may allocate (e.g. boxing a value type, using string interpolation, etc.) or that may have computations
+    // - Operations that may allocate (e.g. boxing a value type, using string interpolation, etc.) or
+    // that may have computations
     //   at call sites should guard access like:
-    //       if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Found certificate: {cert}"); // info logging with a formattable string
-    // - Operations that have zero allocations / measurable computations at call sites can use a simpler pattern, calling methods like:
+    //       if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(null, $"Found certificate:
+    // {cert}"); // info logging with a formattable string
+    // - Operations that have zero allocations / measurable computations at call sites can use a simpler
+    // pattern, calling methods like:
     //       NetEventSource.Info(this, "literal string");  // arbitrary message with a literal string
-    //   Debug.Asserts inside the logging methods will help to flag some misuse if the DEBUG_NETEVENTSOURCE_MISUSE compilation constant is defined.
-    //   However, because it can be difficult by observation to understand all of the costs involved, guarding can be done everywhere.
-    // - Messages can be strings, formattable strings, or any other object.  Objects (including those used in formattable strings) have special
-    //   formatting applied, controlled by the Format method.  Partial specializations can also override this formatting by implementing a partial
-    //   method that takes an object and optionally provides a string representation of it, in case a particular library wants to customize further.
+    //   Debug.Asserts inside the logging methods will help to flag some misuse if the
+    // DEBUG_NETEVENTSOURCE_MISUSE compilation constant is defined.
+    //   However, because it can be difficult by observation to understand all of the costs involved,
+    // guarding can be done everywhere.
+    // - Messages can be strings, formattable strings, or any other object.  Objects (including those
+    // used in formattable strings) have special
+    //   formatting applied, controlled by the Format method.  Partial specializations can also override
+    // this formatting by implementing a partial
+    //   method that takes an object and optionally provides a string representation of it, in case a
+    // particular library wants to customize further.
 
     /// <summary>Provides logging facilities for System.Net libraries.</summary>
     internal sealed partial class NetEventSource : EventSource
@@ -61,7 +72,8 @@ namespace System.Net
 
         #region Info
         /// <summary>Logs an information message.</summary>
-        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
+        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for
+        // the operation.</param>
         /// <param name="formattableString">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
@@ -77,7 +89,8 @@ namespace System.Net
             );
 
         /// <summary>Logs an information message.</summary>
-        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
+        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for
+        // the operation.</param>
         /// <param name="message">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
@@ -97,7 +110,8 @@ namespace System.Net
 
         #region Error
         /// <summary>Logs an error message.</summary>
-        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
+        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for
+        // the operation.</param>
         /// <param name="formattableString">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]
@@ -108,7 +122,8 @@ namespace System.Net
         ) => Log.ErrorMessage(IdOf(thisOrContextObject), memberName, Format(formattableString));
 
         /// <summary>Logs an error message.</summary>
-        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for the operation.</param>
+        /// <param name="thisOrContextObject">`this`, or another object that serves to provide context for
+        // the operation.</param>
         /// <param name="message">The message to be logged.</param>
         /// <param name="memberName">The calling member.</param>
         [NonEvent]

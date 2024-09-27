@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -52,7 +53,8 @@ namespace Microsoft.Web.Mvc
         /// <param name="helper">The helper which we extend.</param>
         /// <param name="name">Name of the button</param>
         /// <param name="buttonText">The text for the button face</param>
-        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
+        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type
+        // declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
         public static MvcHtmlString SubmitButton(
             this HtmlHelper helper,
@@ -118,7 +120,8 @@ namespace Microsoft.Web.Mvc
         /// <param name="helper">The helper which we extend.</param>
         /// <param name="name">Name of the button</param>
         /// <param name="imageSrc">The URL for the image</param>
-        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
+        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type
+        // declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
         public static MvcHtmlString SubmitImage(
             this HtmlHelper helper,
@@ -196,7 +199,8 @@ namespace Microsoft.Web.Mvc
         /// <param name="name">Name of the button</param>
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="buttonType">The button type (Button, Submit, or Reset)</param>
-        /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
+        /// <param name="onClickMethod">The method or script routine to call when the button is
+        // clicked.</param>
         /// <returns></returns>
         public static MvcHtmlString Button(
             this HtmlHelper helper,
@@ -222,8 +226,10 @@ namespace Microsoft.Web.Mvc
         /// <param name="name">Name of the button</param>
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="buttonType">The button type (Button, Submit, or Reset)</param>
-        /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
-        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
+        /// <param name="onClickMethod">The method or script routine to call when the button is
+        // clicked.</param>
+        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type
+        // declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
         public static MvcHtmlString Button(
             this HtmlHelper helper,
@@ -250,8 +256,10 @@ namespace Microsoft.Web.Mvc
         /// <param name="name">Name of the button</param>
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="buttonType">The button type (Button, Submit, or Reset)</param>
-        /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
-        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
+        /// <param name="onClickMethod">The method or script routine to call when the button is
+        // clicked.</param>
+        /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type
+        // declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
         [SuppressMessage(
             "Microsoft.Usage",

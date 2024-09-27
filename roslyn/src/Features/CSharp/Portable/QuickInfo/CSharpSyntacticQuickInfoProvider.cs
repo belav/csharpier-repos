@@ -91,11 +91,13 @@ namespace Microsoft.CodeAnalysis.CSharp.QuickInfo
             {
                 MarkInterestedSpanNearbyScopeBlock(parent, openBrace, ref spanStart, ref spanEnd);
             }
-            // If the parent is a child of a property/method declaration, object/array creation, or control flow node,
+            // If the parent is a child of a property/method declaration, object/array creation, or control flow
+            // node,
             // then walk up one higher so we can show more useful context
             else if (parent.GetFirstToken() == openBrace)
             {
-                // parent.Parent must be non-null, because for GetFirstToken() to have returned something it would have had to walk up to its parent
+                // parent.Parent must be non-null, because for GetFirstToken() to have returned something it would
+                // have had to walk up to its parent
                 spanStart = parent.Parent!.SpanStart;
             }
 

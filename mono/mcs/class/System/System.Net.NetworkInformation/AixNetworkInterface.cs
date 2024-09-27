@@ -43,7 +43,9 @@ namespace System.Net.NetworkInformation
     {
         const int SOCK_DGRAM = 2;
 
-        // AIX doesn't have getifaddrs, (i does though) so we instead query the painful way via ioctl. For IBM's docs on this, see:
+        // AIX doesn't have getifaddrs, (i does though) so we instead query the painful way via ioctl. For
+        // IBM's docs on this, see:
+        //
         // https://www.ibm.com/support/knowledgecenter/en/ssw_aix_71/com.ibm.aix.commtrf2/ioctl_socket_control_operations.htm
         [DllImport("libc", SetLastError = true)]
         public static extern int socket(AixAddressFamily family, int type, int protocol);
@@ -114,7 +116,8 @@ namespace System.Net.NetworkInformation
                 if (ioctl(sockfd, AixIoctlRequest.SIOCGIFCONF, ref ifc) < 0)
                     throw new SystemException("ioctl for SIOCGIFCONF failed");
 
-                // this is required because the buffer is an array of VARIABLE LENGTH structures, so sane marshalling is impossible
+                // this is required because the buffer is an array of VARIABLE LENGTH structures, so sane
+                // marshalling is impossible
                 AixStructs.ifreq ifr;
                 var curPos = ifc.ifc_buf;
                 var endPos = ifc.ifc_buf.ToInt64() + ifc.ifc_len;
@@ -165,13 +168,15 @@ namespace System.Net.NetworkInformation
                                     sockaddr6.sin6_scope_id
                                 );
                                 break;
-                            // XXX: i never returns AF_LINK and SIOCGIFCONF under i doesn't return nameindex values; adapt MacOsNetworkInterface for Qp2getifaddrs instead
+                            // XXX: i never returns AF_LINK and SIOCGIFCONF under i doesn't return nameindex values; adapt
+                            // MacOsNetworkInterface for Qp2getifaddrs instead
                             case AixAddressFamily.AF_LINK:
                                 AixStructs.sockaddr_dl sockaddrdl = new AixStructs.sockaddr_dl();
                                 sockaddrdl.Read(curPos + 16);
 
                                 macAddress = new byte[(int)sockaddrdl.sdl_alen];
-                                // copy mac address from sdl_data field starting at last index pos of interface name into array macaddress, starting
+                                // copy mac address from sdl_data field starting at last index pos of interface name into array
+                                // macaddress, starting
                                 // at index 0
                                 Array.Copy(
                                     sockaddrdl.sdl_data,
@@ -310,7 +315,8 @@ namespace System.Net.NetworkInformation
                 if (ioctl(sockfd, AixIoctlRequest.SIOCGIFCONF, ref ifc) < 0)
                     throw new SystemException("ioctl for SIOCGIFCONF failed");
 
-                // this is required because the buffer is an array of VARIABLE LENGTH structures, so sane marshalling is impossible
+                // this is required because the buffer is an array of VARIABLE LENGTH structures, so sane
+                // marshalling is impossible
                 AixStructs.ifreq ifr;
                 var curPos = ifc.ifc_buf;
                 var endPos = ifc.ifc_buf.ToInt64() + ifc.ifc_len;

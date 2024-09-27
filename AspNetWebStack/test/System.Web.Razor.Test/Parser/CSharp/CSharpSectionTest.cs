@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Web.Razor.Generator;
 using System.Web.Razor.Parser;
@@ -214,7 +215,8 @@ namespace System.Web.Razor.Test.Parser.CSharp
                         Factory.CodeTransition(),
                         Factory.MetaCode("section foo {").AutoCompleteWith("}", atEndOfSpan: true),
                         new MarkupBlock(
-                            // Need to provide the markup span as fragments, since the parser will split the {} into separate symbols.
+                            // Need to provide the markup span as fragments, since the parser will split the {} into separate
+                            // symbols.
                             Factory.Markup(" <p>Foo", "{", "}", "</p>")
                         )
                     )

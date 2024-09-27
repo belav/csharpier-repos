@@ -61,7 +61,8 @@ record Point(int x, int y);
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyDiagnostics(
-                // (2,12): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                // (2,12): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                // language version 12.0 or greater.
                 // class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y)")
                     .WithArguments("primary constructors", "12.0")
@@ -83,7 +84,8 @@ record Point(int x, int y);
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyDiagnostics(
-                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record Point { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -91,7 +93,8 @@ record Point(int x, int y);
                 // (2,8): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // record Point { }
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "Point").WithLocation(2, 8),
-                // (2,8): error CS0548: '<invalid-global-code>.Point': property or indexer must have at least one accessor
+                // (2,8): error CS0548: '<invalid-global-code>.Point': property or indexer must have at least one
+                // accessor
                 // record Point { }
                 Diagnostic(ErrorCode.ERR_PropertyWithNoAccessors, "Point")
                     .WithArguments("<invalid-global-code>.Point")
@@ -110,7 +113,8 @@ record Point(int x, int y);
                         "record Point(int x, int y);"
                     )
                     .WithLocation(2, 1),
-                // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                // language version 9.0 or greater.
                 // record Point(int x, int y);
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion8,
@@ -118,12 +122,14 @@ record Point(int x, int y);
                     )
                     .WithArguments("top-level statements", "9.0")
                     .WithLocation(2, 1),
-                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
                     .WithLocation(2, 1),
-                // (2,8): error CS8112: Local function 'Point(int, int)' must declare a body because it is not marked 'static extern'.
+                // (2,8): error CS8112: Local function 'Point(int, int)' must declare a body because it is not
+                // marked 'static extern'.
                 // record Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "Point")
                     .WithArguments("Point(int, int)")
@@ -197,7 +203,8 @@ class E
 ";
             var comp = CreateCompilation(src1, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics(
-                // (4,16): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                // (4,16): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                // language version 12.0 or greater.
                 //     class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y)")
                     .WithArguments("primary constructors", "12.0")
@@ -216,7 +223,8 @@ class E
 
             comp = CreateCompilation(src2, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics(
-                // (4,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     record Point { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -230,12 +238,14 @@ class E
 
             comp = CreateCompilation(src3, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics(
-                // (4,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     record Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
                     .WithLocation(4, 5),
-                // (4,12): error CS0501: 'E.Point(int, int)' must declare a body because it is not marked abstract, extern, or partial
+                // (4,12): error CS0501: 'E.Point(int, int)' must declare a body because it is not marked abstract,
+                // extern, or partial
                 //     record Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "Point")
                     .WithArguments("E.Point(int, int)")
@@ -280,12 +290,14 @@ record class Point(int x, int y);
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_SimpleProgramNotAnExecutable, "record ")
                     .WithLocation(2, 1),
-                // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // (2,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                // language version 9.0 or greater.
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record ")
                     .WithArguments("top-level statements", "9.0")
                     .WithLocation(2, 1),
-                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                     .WithArguments("record")
@@ -296,7 +308,8 @@ record class Point(int x, int y);
                 // (2,8): error CS1002: ; expected
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "class").WithLocation(2, 8),
-                // (2,19): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                // (2,19): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                // language version 12.0 or greater.
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int x, int y)")
                     .WithArguments("primary constructors", "12.0")
@@ -319,7 +332,8 @@ record class Point(int x, int y);
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyDiagnostics(
-                // (2,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (2,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
                 // record class Point(int x, int y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "class")
                     .WithArguments("record structs", "10.0")
@@ -515,22 +529,26 @@ record R3(R3 x) : Base
                 // (4,8): error CS8909: The primary constructor conflicts with the synthesized copy constructor.
                 // record R(R x) : Base; // 1
                 Diagnostic(ErrorCode.ERR_RecordAmbigCtor, "R").WithLocation(4, 8),
-                // (6,30): error CS0121: The call is ambiguous between the following methods or properties: 'R.R(R)' and 'R.R(R)'
+                // (6,30): error CS0121: The call is ambiguous between the following methods or properties: 'R.R(R)'
+                // and 'R.R(R)'
                 // record Derived(Derived y) : R(y) // 2
                 Diagnostic(ErrorCode.ERR_AmbigCall, "(y)")
                     .WithArguments("R.R(R)", "R.R(R)")
                     .WithLocation(6, 30),
-                // (8,12): error CS0111: Type 'Derived' already defines a member called 'Derived' with the same parameter types
+                // (8,12): error CS0111: Type 'Derived' already defines a member called 'Derived' with the same
+                // parameter types
                 //     public Derived(Derived y) : base(y) => throw null; // 3, 4, 5
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Derived")
                     .WithArguments("Derived", "Derived")
                     .WithLocation(8, 12),
-                // (8,33): error CS0121: The call is ambiguous between the following methods or properties: 'R.R(R)' and 'R.R(R)'
+                // (8,33): error CS0121: The call is ambiguous between the following methods or properties: 'R.R(R)'
+                // and 'R.R(R)'
                 //     public Derived(Derived y) : base(y) => throw null; // 3, 4, 5
                 Diagnostic(ErrorCode.ERR_AmbigCall, "base")
                     .WithArguments("R.R(R)", "R.R(R)")
                     .WithLocation(8, 33),
-                // (8,33): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (8,33): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public Derived(Derived y) : base(y) => throw null; // 3, 4, 5
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "base")
                     .WithLocation(8, 33),
@@ -542,21 +560,25 @@ record R3(R3 x) : Base
                 Diagnostic(ErrorCode.ERR_NoCopyConstructorInBaseType, "Derived2")
                     .WithArguments("R")
                     .WithLocation(11, 8),
-                // (11,32): error CS0121: The call is ambiguous between the following methods or properties: 'R.R(R)' and 'R.R(R)'
+                // (11,32): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'R.R(R)' and 'R.R(R)'
                 // record Derived2(Derived2 y) : R(y); // 6, 7, 8
                 Diagnostic(ErrorCode.ERR_AmbigCall, "(y)")
                     .WithArguments("R.R(R)", "R.R(R)")
                     .WithLocation(11, 32),
-                // (15,12): error CS0111: Type 'R2' already defines a member called 'R2' with the same parameter types
+                // (15,12): error CS0111: Type 'R2' already defines a member called 'R2' with the same parameter
+                // types
                 //     public R2(R2 x) => throw null; // 9, 10
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "R2")
                     .WithArguments("R2", "R2")
                     .WithLocation(15, 12),
-                // (15,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (15,12): error CS8868: A copy constructor in a record must call a copy constructor of the base,
+                // or a parameterless object constructor if the record inherits from object.
                 //     public R2(R2 x) => throw null; // 9, 10
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "R2")
                     .WithLocation(15, 12),
-                // (20,12): error CS0111: Type 'R3' already defines a member called 'R3' with the same parameter types
+                // (20,12): error CS0111: Type 'R3' already defines a member called 'R3' with the same parameter
+                // types
                 //     public R3(R3 x) : base(x) => throw null; // 11
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "R3")
                     .WithArguments("R3", "R3")
@@ -615,7 +637,8 @@ record R(int I)
 ";
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (2,14): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record R(int I)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
                     .WithArguments("I")
@@ -929,7 +952,8 @@ record A(x)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,10): error CS0246: The type or namespace name 'x' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,10): error CS0246: The type or namespace name 'x' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 // record A(x)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "x")
                     .WithArguments("x")
@@ -983,7 +1007,8 @@ partial class C
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (5,15): error CS0261: Partial declarations of 'C' must be all classes, all record classes, all structs, all record structs, or all interfaces
+                // (5,15): error CS0261: Partial declarations of 'C' must be all classes, all record classes, all
+                // structs, all record structs, or all interfaces
                 // partial class C
                 Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "C")
                     .WithArguments("C")
@@ -1210,11 +1235,13 @@ record C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "C")
                     .WithArguments("C", "C")
                     .WithLocation(5, 12),
-                // (5,12): error CS8862: A constructor declared in a type with parameter list must have 'this' constructor initializer.
+                // (5,12): error CS8862: A constructor declared in a type with parameter list must have 'this'
+                // constructor initializer.
                 //     public C(int a, int b)
                 Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "C")
                     .WithLocation(5, 12),
-                // (11,21): error CS0121: The call is ambiguous between the following methods or properties: 'C.C(int, int)' and 'C.C(int, int)'
+                // (11,21): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'C.C(int, int)' and 'C.C(int, int)'
                 //         var c = new C(1, 2);
                 Diagnostic(ErrorCode.ERR_AmbigCall, "C")
                     .WithArguments("C.C(int, int)", "C.C(int, int)")
@@ -1246,7 +1273,8 @@ record C(int X, int Y)
 2"
                 )
                 .VerifyDiagnostics(
-                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
@@ -1278,7 +1306,8 @@ record C(int X, int Y)
 2"
                 )
                 .VerifyDiagnostics(
-                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
@@ -1435,12 +1464,14 @@ record C(int X, int Y)
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (2,14): error CS0082: Type 'C' already reserves a member called 'get_X' with the same parameter types
+                // (2,14): error CS0082: Type 'C' already reserves a member called 'get_X' with the same parameter
+                // types
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_MemberReserved, "X")
                     .WithArguments("get_X", "C")
                     .WithLocation(2, 14),
-                // (2,21): error CS0082: Type 'C' already reserves a member called 'set_Y' with the same parameter types
+                // (2,21): error CS0082: Type 'C' already reserves a member called 'set_Y' with the same parameter
+                // types
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_MemberReserved, "Y")
                     .WithArguments("set_Y", "C")
@@ -1540,12 +1571,14 @@ record C1(object O1)
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P1")
                     .WithArguments("C", "P1")
                     .WithLocation(1, 17),
-                // (1,21): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (1,21): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // record C(object P1, object P2, object P3, object P4)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "object P2")
                     .WithArguments("positional fields in records", "10.0")
                     .WithLocation(1, 21),
-                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -1572,7 +1605,8 @@ record C1(object O1)
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "P1")
                     .WithArguments("C", "P1")
                     .WithLocation(1, 17),
-                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -1627,7 +1661,8 @@ unsafe record C(
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P1")
                     .WithArguments("int*")
                     .WithLocation(7, 10),
-                // 0.cs(10,25): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
+                // 0.cs(10,25): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a
+                // record.
                 //     delegate*<int, int> P4, // 2
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "P4")
                     .WithArguments("delegate*<int, int>")
@@ -1655,7 +1690,8 @@ unsafe record C(
                 Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
                     .WithArguments("System.TypedReference")
                     .WithLocation(14, 5),
-                // 0.cs(15,5): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
+                // 0.cs(15,5): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless
+                // it is an instance member of a ref struct.
                 //     RefLike P9, // 8
                 Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
                     .WithArguments("RefLike")
@@ -1701,7 +1737,8 @@ public unsafe record C
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1")
                     .WithArguments("int*")
                     .WithLocation(8, 17),
-                // 0.cs(11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
+                // 0.cs(11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a
+                // record.
                 //     public delegate*<int, int> f4; // 3
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4")
                     .WithArguments("delegate*<int, int>")
@@ -1724,7 +1761,8 @@ public unsafe record C
                 Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
                     .WithArguments("System.TypedReference")
                     .WithLocation(15, 12),
-                // 0.cs(16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
+                // 0.cs(16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless
+                // it is an instance member of a ref struct.
                 //     public RefLike f9; // 8
                 Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
                     .WithArguments("RefLike")
@@ -1770,7 +1808,8 @@ public unsafe record C
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f1")
                     .WithArguments("int*")
                     .WithLocation(8, 17),
-                // 0.cs(11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a record.
+                // 0.cs(11,32): error CS8908: The type 'delegate*<int, int>' may not be used for a field of a
+                // record.
                 //     public delegate*<int, int> f4 { get; set; } // 2
                 Diagnostic(ErrorCode.ERR_BadFieldTypeInRecord, "f4")
                     .WithArguments("delegate*<int, int>")
@@ -1795,7 +1834,8 @@ public unsafe record C
                 Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
                     .WithArguments("System.TypedReference")
                     .WithLocation(15, 12),
-                // 0.cs(16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
+                // 0.cs(16,12): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless
+                // it is an instance member of a ref struct.
                 //     public RefLike f9 { get; set; } // 8
                 Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
                     .WithArguments("RefLike")
@@ -1842,17 +1882,20 @@ unsafe record C(int* P1, int*[] P2, C<int*[]> P3)
                 options: TestOptions.UnsafeDebugExe
             );
             comp.VerifyEmitDiagnostics(
-                // (4,22): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,22): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // unsafe record C(int* P1, int*[] P2, C<int*[]> P3)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(4, 22),
-                // (4,33): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,33): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // unsafe record C(int* P1, int*[] P2, C<int*[]> P3)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(4, 33),
-                // (4,47): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,47): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // unsafe record C(int* P1, int*[] P2, C<int*[]> P3)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
@@ -1911,7 +1954,8 @@ public unsafe record C
                 Diagnostic(ErrorCode.ERR_FieldCantBeRefAny, "System.TypedReference")
                     .WithArguments("System.TypedReference")
                     .WithLocation(14, 19),
-                // (15,19): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it is an instance member of a ref struct.
+                // (15,19): error CS8345: Field or auto-implemented property cannot be of type 'RefLike' unless it
+                // is an instance member of a ref struct.
                 //     public static RefLike f9; // 4
                 Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "RefLike")
                     .WithArguments("RefLike")
@@ -1955,22 +1999,26 @@ record C5(object O7) : Base((System.Func<object, object>)(_ => (O7 = 42) )) // 4
 "
             );
             comp.VerifyDiagnostics(
-                // (2,18): warning CS8907: Parameter 'O1' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,18): warning CS8907: Parameter 'O1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C1(object O1, object O2, object O3) // 1, 2
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O1")
                     .WithArguments("O1")
                     .WithLocation(2, 18),
-                // (2,40): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,40): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C1(object O1, object O2, object O3) // 1, 2
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3")
                     .WithArguments("O3")
                     .WithLocation(2, 40),
-                // (16,18): warning CS8907: Parameter 'O5' is unread. Did you forget to use it to initialize the property with that name?
+                // (16,18): warning CS8907: Parameter 'O5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C3(object O5) : Base((System.Func<object, object>)(x => x)) // 3
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O5")
                     .WithArguments("O5")
                     .WithLocation(16, 18),
-                // (26,18): warning CS8907: Parameter 'O7' is unread. Did you forget to use it to initialize the property with that name?
+                // (26,18): warning CS8907: Parameter 'O7' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C5(object O7) : Base((System.Func<object, object>)(_ => (O7 = 42) )) // 4
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O7")
                     .WithArguments("O7")
@@ -1996,7 +2044,8 @@ record C1(object O1, object O2, object O3) // 1
 "
             );
             comp.VerifyDiagnostics(
-                // (2,40): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,40): warning CS8907: Parameter 'O3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C1(object O1, object O2, object O3) // 1
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "O3")
                     .WithArguments("O3")
@@ -2140,7 +2189,8 @@ record C()
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,5): error CS8862: A constructor declared in a type with parameter list must have 'this' constructor initializer.
+                // (4,5): error CS8862: A constructor declared in a type with parameter list must have 'this'
+                // constructor initializer.
                 //     C(int x)
                 Diagnostic(
                         ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord,
@@ -2749,7 +2799,8 @@ record C(int X) : B
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (12,13): error CS8803: The 'with' expression requires the receiver type 'B' to have a single accessible non-inherited instance method named "Clone".
+                // (12,13): error CS8803: The 'with' expression requires the receiver type 'B' to have a single
+                // accessible non-inherited instance method named "Clone".
                 //         b = b with { };
                 Diagnostic(ErrorCode.ERR_CannotClone, "b").WithArguments("B").WithLocation(12, 13)
             );
@@ -2776,7 +2827,8 @@ record C(int X) : B
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (12,13): error CS8803: The receiver type 'B' does not have an accessible parameterless instance method named "Clone".
+                // (12,13): error CS8803: The receiver type 'B' does not have an accessible parameterless instance
+                // method named "Clone".
                 //         b = b with { };
                 Diagnostic(ErrorCode.ERR_CannotClone, "b").WithArguments("B").WithLocation(12, 13)
             );
@@ -2802,7 +2854,8 @@ record C(int X)
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (12,13): error CS8803: The 'with' expression requires the receiver type 'B' to have a single accessible non-inherited instance method named "Clone".
+                // (12,13): error CS8803: The 'with' expression requires the receiver type 'B' to have a single
+                // accessible non-inherited instance method named "Clone".
                 //         b = b with { };
                 Diagnostic(ErrorCode.ERR_CannotClone, "b").WithArguments("B").WithLocation(12, 13)
             );
@@ -3153,7 +3206,8 @@ record R(int X)
                 // (7,16): error CS1002: ; expected
                 //         r with { X = 2 };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(7, 16),
-                // (7,18): error CS8852: Init-only property or indexer 'R.X' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor.
+                // (7,18): error CS8852: Init-only property or indexer 'R.X' can only be assigned in an object
+                // initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor.
                 //         r with { X = 2 };
                 Diagnostic(ErrorCode.ERR_AssignmentInitOnly, "X")
                     .WithArguments("R.X")
@@ -3364,7 +3418,8 @@ class C : Base<S>
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyDiagnostics(
-                // (11,13): error CS8773: Feature 'with on structs' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (11,13): error CS8773: Feature 'with on structs' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
                 //         _ = t with { X = 2, Property = 3 };
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
@@ -3487,7 +3542,8 @@ class C
                 // (6,24): error CS1513: } expected
                 //     record M(record r) => r;
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(6, 24),
-                // (6,24): error CS1519: Invalid token '=>' in class, record, struct, or interface member declaration
+                // (6,24): error CS1519: Invalid token '=>' in class, record, struct, or interface member
+                // declaration
                 //     record M(record r) => r;
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=>")
                     .WithArguments("=>")
@@ -3506,7 +3562,8 @@ class C
 
             comp = CreateCompilation(src, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics(
-                // (2,7): warning CS8981: The type name 'record' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 'record' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // class record { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "record")
                     .WithArguments("record")
@@ -3943,7 +4000,8 @@ record C9 : System.ICloneable
                 // (9,12): error CS8859: Members named 'Clone' are disallowed in records.
                 //     string Clone { get; set; } // 3
                 Diagnostic(ErrorCode.ERR_CloneDisallowedInRecord, "Clone").WithLocation(9, 12),
-                // (13,10): error CS1519: Invalid token 'string' in class, record, struct, or interface member declaration
+                // (13,10): error CS1519: Invalid token 'string' in class, record, struct, or interface member
+                // declaration
                 //     data string Clone; // 4 not yet supported
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "string")
                     .WithArguments("string")
@@ -5180,7 +5238,8 @@ class Program
                 parseOptions: TestOptions.Regular9
             );
             comp3.VerifyEmitDiagnostics(
-                // (7,18): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_12, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,18): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_12, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
                     .WithArguments(
@@ -5252,7 +5311,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_CannotClone, "c1")
                     .WithArguments("C")
                     .WithLocation(7, 18),
-                // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
                     .WithArguments(
@@ -5260,7 +5320,8 @@ class Program
                         "Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 18),
-                // (7,28): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,28): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "X")
                     .WithArguments(
@@ -5286,7 +5347,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_CannotClone, "c1")
                     .WithArguments("C")
                     .WithLocation(7, 18),
-                // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,18): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
                     .WithArguments(
@@ -5294,7 +5356,8 @@ class Program
                         "Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 18),
-                // (7,28): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,28): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_13, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "X")
                     .WithArguments(
@@ -5415,7 +5478,8 @@ record C(int X) : B(X)
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "C")
                     .WithArguments("C.ToString()")
                     .WithLocation(2, 8),
-                // (2,8): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,8): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record C(int X) : B(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5423,7 +5487,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(2, 8),
-                // (2,19): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record C(int X) : B(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments(
@@ -5431,7 +5496,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(2, 19),
-                // (2,19): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record C(int X) : B(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments(
@@ -5439,7 +5505,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(2, 19),
-                // (6,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,22): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c1 = new C(1);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5447,7 +5514,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(6, 22),
-                // (7,18): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,18): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c2 = c1 with { X = 11 };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "c1")
                     .WithArguments(
@@ -5455,7 +5523,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 18),
-                // (8,9): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (8,9): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         System.Console.WriteLine(c1.X);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "System")
                     .WithArguments(
@@ -5463,7 +5532,8 @@ record C(int X) : B(X)
                         "Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(8, 9),
-                // (9,9): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (9,9): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_15, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         System.Console.WriteLine(c2.X);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "System")
                     .WithArguments(
@@ -5545,7 +5615,8 @@ record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "D")
                     .WithArguments("D.ToString()")
                     .WithLocation(2, 8),
-                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5556,7 +5627,8 @@ record D(int X) : C(X)
                 // (2,19): error CS8864: Records may only inherit from object or another record
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_BadRecordBase, "C").WithLocation(2, 19),
-                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5564,7 +5636,8 @@ record D(int X) : C(X)
                         "Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(2, 19),
-                // (6,22): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,22): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c1 = new D(1);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
@@ -5595,7 +5668,8 @@ record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "D")
                     .WithArguments("D.ToString()")
                     .WithLocation(2, 8),
-                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5606,7 +5680,8 @@ record D(int X) : C(X)
                 // (2,19): error CS8864: Records may only inherit from object or another record
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_BadRecordBase, "C").WithLocation(2, 19),
-                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,19): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // record D(int X) : C(X)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                     .WithArguments(
@@ -5614,7 +5689,8 @@ record D(int X) : C(X)
                         "Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(2, 19),
-                // (6,22): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,22): error CS0012: The type 'B' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'Clone_16, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var c1 = new D(1);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
@@ -6074,7 +6150,8 @@ public record C : B {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0239: 'C.<Clone>$()': cannot override inherited member 'B.<Clone>$()' because it is sealed
+                // (2,15): error CS0239: 'C.<Clone>$()': cannot override inherited member 'B.<Clone>$()' because it
+                // is sealed
                 // public record C : B {
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "C")
                     .WithArguments("C.<Clone>$()", "B.<Clone>$()")
@@ -6676,7 +6753,8 @@ record C2: Error;
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (2,12): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,12): error CS0246: The type or namespace name 'Error' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record C2: Error;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
                     .WithArguments("Error")
@@ -6966,12 +7044,14 @@ record C1
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,12): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,12): error CS0246: The type or namespace name 'Error' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     public Error field;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
                     .WithArguments("Error")
                     .WithLocation(4, 12),
-                // (4,18): warning CS0649: Field 'C1.field' is never assigned to, and will always have its default value null
+                // (4,18): warning CS0649: Field 'C1.field' is never assigned to, and will always have its default
+                // value null
                 //     public Error field;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                     .WithArguments("C1.field", "null")
@@ -7011,22 +7091,26 @@ record C1
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "field3")
                     .WithArguments("C1.field3")
                     .WithLocation(10, 20),
-                // (11,21): warning CS0649: Field 'C1.field4' is never assigned to, and will always have its default value null
+                // (11,21): warning CS0649: Field 'C1.field4' is never assigned to, and will always have its default
+                // value null
                 //     internal string field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field4")
                     .WithArguments("C1.field4", "null")
                     .WithLocation(11, 21),
-                // (12,22): warning CS0649: Field 'C1.field5' is never assigned to, and will always have its default value null
+                // (12,22): warning CS0649: Field 'C1.field5' is never assigned to, and will always have its default
+                // value null
                 //     protected string field5;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field5")
                     .WithArguments("C1.field5", "null")
                     .WithLocation(12, 22),
-                // (13,31): warning CS0649: Field 'C1.field6' is never assigned to, and will always have its default value null
+                // (13,31): warning CS0649: Field 'C1.field6' is never assigned to, and will always have its default
+                // value null
                 //     protected internal string field6;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field6")
                     .WithArguments("C1.field6", "null")
                     .WithLocation(13, 31),
-                // (14,30): warning CS0649: Field 'C1.field7' is never assigned to, and will always have its default value null
+                // (14,30): warning CS0649: Field 'C1.field7' is never assigned to, and will always have its default
+                // value null
                 //     private protected string field7;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field7")
                     .WithArguments("C1.field7", "null")
@@ -7092,7 +7176,8 @@ record C1(int Property)
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "Property2")
                     .WithArguments("C1.Property2")
                     .WithLocation(7, 17),
-                // (8,18): warning CS0649: Field 'C1.Property3' is never assigned to, and will always have its default value 0
+                // (8,18): warning CS0649: Field 'C1.Property3' is never assigned to, and will always have its
+                // default value 0
                 //     internal int Property3;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Property3")
                     .WithArguments("C1.Property3", "0")
@@ -7304,7 +7389,8 @@ record C2 : C1;
             else
             {
                 comp.VerifyEmitDiagnostics(
-                    // (7,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (7,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use
+                    // language version 10.0 or greater.
                     //     public sealed override string ToString() => "C1";
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "ToString")
                         .WithArguments("sealed ToString in record", "10.0")
@@ -7363,7 +7449,8 @@ record C3 : C2;
                 options: TestOptions.DebugExe
             );
             comp.VerifyEmitDiagnostics(
-                // (11,28): error CS0239: 'C2.ToString()': cannot override inherited member 'C1.ToString()' because it is sealed
+                // (11,28): error CS0239: 'C2.ToString()': cannot override inherited member 'C1.ToString()' because
+                // it is sealed
                 //     public override string ToString() => "C2";
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "ToString")
                     .WithArguments("C2.ToString()", "C1.ToString()")
@@ -7923,7 +8010,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.PrintMembers(StringBuilder)': cannot override inherited member 'A.PrintMembers(StringBuilder)' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.PrintMembers(StringBuilder)': cannot override inherited member
+                // 'A.PrintMembers(StringBuilder)' because it is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments(
@@ -8094,7 +8182,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'B.PrintMembers(StringBuilder)': return type must be 'int' to match overridden member 'A.PrintMembers(StringBuilder)'
+                // (2,15): error CS0508: 'B.PrintMembers(StringBuilder)': return type must be 'int' to match
+                // overridden member 'A.PrintMembers(StringBuilder)'
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "B")
                     .WithArguments(
@@ -8182,7 +8271,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS1715: 'B.EqualityContract': type must be 'int' to match overridden member 'A.EqualityContract'
+                // (2,15): error CS1715: 'B.EqualityContract': type must be 'int' to match overridden member
+                // 'A.EqualityContract'
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract", "int")
@@ -8934,7 +9024,8 @@ public record B : A {
             else
             {
                 comp.VerifyEmitDiagnostics(
-                    // (5,15): error CS8912: Inheriting from a record with a sealed 'Object.ToString' is not supported in C# 9.0. Please use language version '10.0' or greater.
+                    // (5,15): error CS8912: Inheriting from a record with a sealed 'Object.ToString' is not supported
+                    // in C# 9.0. Please use language version '10.0' or greater.
                     // public record B : A {
                     Diagnostic(ErrorCode.ERR_InheritingFromRecordWithSealedToString, "B")
                         .WithArguments("9.0", "10.0")
@@ -9000,7 +9091,8 @@ record C1
             else
             {
                 comp.VerifyEmitDiagnostics(
-                    // (4,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (4,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use
+                    // language version 10.0 or greater.
                     //     public sealed override string ToString() => throw null;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "ToString")
                         .WithArguments("sealed ToString in record", "10.0")
@@ -9053,7 +9145,8 @@ record C1
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,23): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,23): error CS0246: The type or namespace name 'Error' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     protected virtual Error PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
                     .WithArguments("Error")
@@ -9096,7 +9189,8 @@ record C2(int I1, int I2) : C1(I1)
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (5,36): error CS8872: 'C2.PrintMembers(StringBuilder)' must allow overriding because the containing record is not sealed.
+                // (5,36): error CS8872: 'C2.PrintMembers(StringBuilder)' must allow overriding because the
+                // containing record is not sealed.
                 //     protected sealed override bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "PrintMembers")
                     .WithArguments("C2.PrintMembers(System.Text.StringBuilder)")
@@ -9117,7 +9211,8 @@ record C1
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,20): error CS8872: 'C1.PrintMembers(StringBuilder)' must allow overriding because the containing record is not sealed.
+                // (4,20): error CS8872: 'C1.PrintMembers(StringBuilder)' must allow overriding because the
+                // containing record is not sealed.
                 //     protected bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
@@ -9223,7 +9318,8 @@ sealed record C1
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,20): warning CS0628: 'C1.PrintMembers(StringBuilder)': new protected member declared in sealed type
+                // (4,20): warning CS0628: 'C1.PrintMembers(StringBuilder)': new protected member declared in sealed
+                // type
                 //     protected bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.WRN_ProtectedInSealed, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
@@ -9255,17 +9351,21 @@ record C1 : B
                 Diagnostic(ErrorCode.ERR_NonProtectedAPIInRecord, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
                     .WithLocation(5, 17),
-                // (5,17): error CS8860: 'C1.PrintMembers(StringBuilder)' does not override expected method from 'B'.
+                // (5,17): error CS8860: 'C1.PrintMembers(StringBuilder)' does not override expected method from
+                // 'B'.
                 //     public bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseMethod, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)", "B")
                     .WithLocation(5, 17),
-                // (5,17): error CS8872: 'C1.PrintMembers(StringBuilder)' must allow overriding because the containing record is not sealed.
+                // (5,17): error CS8872: 'C1.PrintMembers(StringBuilder)' must allow overriding because the
+                // containing record is not sealed.
                 //     public bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)")
                     .WithLocation(5, 17),
-                // (5,17): warning CS0114: 'C1.PrintMembers(StringBuilder)' hides inherited member 'B.PrintMembers(StringBuilder)'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (5,17): warning CS0114: 'C1.PrintMembers(StringBuilder)' hides inherited member
+                // 'B.PrintMembers(StringBuilder)'. To make the current member override that implementation, add the
+                // override keyword. Otherwise add the new keyword.
                 //     public bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "PrintMembers")
                     .WithArguments(
@@ -9289,7 +9389,8 @@ record C1 : B
 ";
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (5,32): error CS8860: 'C1.PrintMembers(StringBuilder)' does not override expected method from 'B'.
+                // (5,32): error CS8860: 'C1.PrintMembers(StringBuilder)' does not override expected method from
+                // 'B'.
                 //     protected new virtual bool PrintMembers(System.Text.StringBuilder builder) => throw null;
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseMethod, "PrintMembers")
                     .WithArguments("C1.PrintMembers(System.Text.StringBuilder)", "B")
@@ -9782,7 +9883,8 @@ class C
 ";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (8,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance method named "Clone".
+                // (8,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance
+                // method named "Clone".
                 //         c = c with { X = ""-3 };
                 Diagnostic(ErrorCode.ERR_CannotClone, "c").WithArguments("C").WithLocation(8, 13),
                 // (8,26): error CS0019: Operator '-' cannot be applied to operands of type 'string' and 'int'
@@ -9837,7 +9939,8 @@ class D
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (11,22): error CS0272: The property or indexer 'C.X' cannot be used in this context because the set accessor is inaccessible
+                // (11,22): error CS0272: The property or indexer 'C.X' cannot be used in this context because the
+                // set accessor is inaccessible
                 //         c = c with { X = 0 };
                 Diagnostic(ErrorCode.ERR_InaccessibleSetter, "X")
                     .WithArguments("C.X")
@@ -10215,7 +10318,8 @@ record C(long X)
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (19,41): error CS0266: Cannot implicitly convert type 'S' to 'long'. An explicit conversion exists (are you missing a cast?)
+                // (19,41): error CS0266: Cannot implicitly convert type 'S' to 'long'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         Console.WriteLine((c with { X = s }).X);
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "s")
                     .WithArguments("S", "long")
@@ -10321,7 +10425,8 @@ record C
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (9,22): error CS0176: Member 'C.X' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (9,22): error CS0176: Member 'C.X' cannot be accessed with an instance reference; qualify it with
+                // a type name instead
                 //         c = c with { X = 11 };
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "X")
                     .WithArguments("C.X")
@@ -10372,10 +10477,12 @@ class C
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (9,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance method named "Clone".
+                // (9,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance
+                // method named "Clone".
                 //         c = c with { };
                 Diagnostic(ErrorCode.ERR_CannotClone, "c").WithArguments("C").WithLocation(9, 13),
-                // (10,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance method named "Clone".
+                // (10,13): error CS8808: The receiver type 'C' does not have an accessible parameterless instance
+                // method named "Clone".
                 //         c = c with { X = 11 };
                 Diagnostic(ErrorCode.ERR_CannotClone, "c").WithArguments("C").WithLocation(10, 13)
             );
@@ -10404,7 +10511,8 @@ class C : B
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (13,13): error CS0266: Cannot implicitly convert type 'B' to 'C'. An explicit conversion exists (are you missing a cast?)
+                // (13,13): error CS0266: Cannot implicitly convert type 'B' to 'C'. An explicit conversion exists
+                // (are you missing a cast?)
                 //         c = c with { };
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c with { }")
                     .WithArguments("B", "C")
@@ -10746,7 +10854,8 @@ record C(int X, int Y)
                 // (9,22): error CS1002: ; expected
                 //         c = c with { { X = 2 } };
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(9, 22),
-                // (9,24): error CS0120: An object reference is required for the non-static field, method, or property 'C.X'
+                // (9,24): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'C.X'
                 //         c = c with { { X = 2 } };
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "X")
                     .WithArguments("C.X")
@@ -11717,27 +11826,32 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(11, 17),
-                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(11, 28),
-                // (11,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(11, 39),
-                // (11,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(11, 50),
-                // (11,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
@@ -11768,12 +11882,14 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,29): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,29): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 //     private record B(object P1, object P2) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(6, 29),
-                // (6,40): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,40): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 //     private record B(object P1, object P2) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -11821,7 +11937,8 @@ record C1(object P, object Q) : B
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyDiagnostics(
-                // (1,28): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,28): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C2(object P, object Q) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Q")
                     .WithArguments("Q")
@@ -11858,47 +11975,56 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6, objec
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(12, 17),
-                // (12,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(12, 28),
-                // (12,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(12, 39),
-                // (12,50): error CS8866: Record member 'A.P4' must be a readable instance property or field of type 'object' to match positional parameter 'P4'.
+                // (12,50): error CS8866: Record member 'A.P4' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P4'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P4")
                     .WithArguments("A.P4", "object", "P4")
                     .WithLocation(12, 50),
-                // (12,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(12, 50),
-                // (12,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
                     .WithLocation(12, 61),
-                // (12,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type 'object' to match positional parameter 'P6'.
+                // (12,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P6'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P6")
                     .WithArguments("A.P6", "object", "P6")
                     .WithLocation(12, 72),
-                // (12,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P6")
                     .WithArguments("P6")
                     .WithLocation(12, 72),
-                // (12,83): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,83): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P7")
                     .WithArguments("P7")
@@ -11923,22 +12049,26 @@ record B(int P1, object P2) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (7,14): error CS8866: Record member 'A.P1' must be a readable instance property or field of type 'int' to match positional parameter 'P1'.
+                // (7,14): error CS8866: Record member 'A.P1' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P1'.
                 // record B(int P1, object P2) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("A.P1", "int", "P1")
                     .WithLocation(7, 14),
-                // (7,14): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,14): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int P1, object P2) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(7, 14),
-                // (7,25): error CS8866: Record member 'A.P2' must be a readable instance property or field of type 'object' to match positional parameter 'P2'.
+                // (7,25): error CS8866: Record member 'A.P2' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P2'.
                 // record B(int P1, object P2) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P2")
                     .WithArguments("A.P2", "object", "P2")
                     .WithLocation(7, 25),
-                // (7,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int P1, object P2) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -11976,27 +12106,32 @@ class Program
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X, int Y, int Z) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(7, 14),
-                // (7,21): error CS8866: Record member 'A.Y' must be a readable instance property or field of type 'int' to match positional parameter 'Y'.
+                // (7,21): error CS8866: Record member 'A.Y' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'Y'.
                 // record B(int X, int Y, int Z) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Y")
                     .WithArguments("A.Y", "int", "Y")
                     .WithLocation(7, 21),
-                // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X, int Y, int Z) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
                     .WithLocation(7, 21),
-                // (7,24): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (7,24): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // record B(int X, int Y, int Z) : A
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "int Z")
                     .WithArguments("positional fields in records", "10.0")
                     .WithLocation(7, 24),
-                // (7,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X, int Y, int Z) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
                     .WithArguments("Z")
@@ -12024,22 +12159,26 @@ record B2(int X, int Y) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,24): error CS0546: 'B1.X.init': cannot override because 'A.X' does not have an overridable set accessor
+                // (6,24): error CS0546: 'B1.X.init': cannot override because 'A.X' does not have an overridable set
+                // accessor
                 // abstract record B1(int X, int Y) : A
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "X")
                     .WithArguments("B1.X.init", "A.X")
                     .WithLocation(6, 24),
-                // (6,31): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,31): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // abstract record B1(int X, int Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
                     .WithLocation(6, 31),
-                // (9,15): error CS0546: 'B2.X.init': cannot override because 'A.X' does not have an overridable set accessor
+                // (9,15): error CS0546: 'B2.X.init': cannot override because 'A.X' does not have an overridable set
+                // accessor
                 // record B2(int X, int Y) : A
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "X")
                     .WithArguments("B2.X.init", "A.X")
                     .WithLocation(9, 15),
-                // (9,22): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (9,22): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B2(int X, int Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -12091,17 +12230,20 @@ record C(int X, int Y, int Z) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,14): error CS0546: 'C.X.init': cannot override because 'A.X' does not have an overridable set accessor
+                // (11,14): error CS0546: 'C.X.init': cannot override because 'A.X' does not have an overridable set
+                // accessor
                 // record C(int X, int Y, int Z) : B
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "X")
                     .WithArguments("C.X.init", "A.X")
                     .WithLocation(11, 14),
-                // (11,21): error CS0546: 'C.Y.init': cannot override because 'B.Y' does not have an overridable set accessor
+                // (11,21): error CS0546: 'C.Y.init': cannot override because 'B.Y' does not have an overridable set
+                // accessor
                 // record C(int X, int Y, int Z) : B
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "Y")
                     .WithArguments("C.Y.init", "B.Y")
                     .WithLocation(11, 21),
-                // (11,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y, int Z) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
                     .WithArguments("Z")
@@ -12131,12 +12273,14 @@ record C(int X, int Y, int Z) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (1,23): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,23): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // abstract record C(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(1, 23),
-                // (1,30): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,30): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // abstract record C(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -12251,12 +12395,14 @@ record C(object X, object Y) : IA, IB
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,32): error CS0738: 'C' does not implement interface member 'IA.X'. 'C.X' cannot implement 'IA.X' because it does not have the matching return type of 'int'.
+                // (9,32): error CS0738: 'C' does not implement interface member 'IA.X'. 'C.X' cannot implement
+                // 'IA.X' because it does not have the matching return type of 'int'.
                 // record C(object X, object Y) : IA, IB
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "IA")
                     .WithArguments("C", "IA.X", "C.X", "int")
                     .WithLocation(9, 32),
-                // (9,36): error CS8854: 'C' does not implement interface member 'IB.Y.set'. 'C.Y.init' cannot implement 'IB.Y.set'.
+                // (9,36): error CS8854: 'C' does not implement interface member 'IB.Y.set'. 'C.Y.init' cannot
+                // implement 'IB.Y.set'.
                 // record C(object X, object Y) : IA, IB
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongInitOnly, "IB")
                     .WithArguments("C", "IB.Y.set", "C.Y.init")
@@ -12280,22 +12426,26 @@ record B(object X, object Y) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object X, object Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(6, 17),
-                // (6,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object X, object Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
                     .WithLocation(6, 27),
-                // (8,19): warning CS0108: 'B.X' hides inherited member 'A.X'. Use the new keyword if hiding was intended.
+                // (8,19): warning CS0108: 'B.X' hides inherited member 'A.X'. Use the new keyword if hiding was
+                // intended.
                 //     public object X { get; }
                 Diagnostic(ErrorCode.WRN_NewRequired, "X")
                     .WithArguments("B.X", "A.X")
                     .WithLocation(8, 19),
-                // (9,19): warning CS0108: 'B.Y' hides inherited member 'A.Y'. Use the new keyword if hiding was intended.
+                // (9,19): warning CS0108: 'B.Y' hides inherited member 'A.Y'. Use the new keyword if hiding was
+                // intended.
                 //     public object Y { get; }
                 Diagnostic(ErrorCode.WRN_NewRequired, "Y")
                     .WithArguments("B.Y", "A.Y")
@@ -12326,22 +12476,26 @@ record B(object X, object Y) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (5,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (5,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object X, object Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(5, 17),
-                // (5,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (5,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object X, object Y) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
                     .WithLocation(5, 27),
-                // (7,19): warning CS0108: 'B.X' hides inherited member 'A.X'. Use the new keyword if hiding was intended.
+                // (7,19): warning CS0108: 'B.X' hides inherited member 'A.X'. Use the new keyword if hiding was
+                // intended.
                 //     public object X { get; }
                 Diagnostic(ErrorCode.WRN_NewRequired, "X")
                     .WithArguments("B.X", "A.X")
                     .WithLocation(7, 19),
-                // (8,19): warning CS0108: 'B.Y' hides inherited member 'A.Y'. Use the new keyword if hiding was intended.
+                // (8,19): warning CS0108: 'B.Y' hides inherited member 'A.Y'. Use the new keyword if hiding was
+                // intended.
                 //     public object Y { get; }
                 Diagnostic(ErrorCode.WRN_NewRequired, "Y")
                     .WithArguments("B.Y", "A.Y")
@@ -12378,32 +12532,38 @@ record C(object P1, int P2, object P3, int P4) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (13,17): error CS8866: Record member 'B.P1' must be a readable instance property or field of type 'object' to match positional parameter 'P1'.
+                // (13,17): error CS8866: Record member 'B.P1' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P1'.
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("B.P1", "object", "P1")
                     .WithLocation(13, 17),
-                // (13,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (13,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(13, 17),
-                // (13,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (13,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(13, 25),
-                // (13,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (13,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(13, 36),
-                // (13,44): error CS8866: Record member 'A.P4' must be a readable instance property or field of type 'int' to match positional parameter 'P4'.
+                // (13,44): error CS8866: Record member 'A.P4' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P4'.
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P4")
                     .WithArguments("A.P4", "int", "P4")
                     .WithLocation(13, 44),
-                // (13,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (13,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, int P2, object P3, int P4) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
@@ -12424,22 +12584,26 @@ record C(object P1, int P2, object P3, int P4) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (1,14): error CS8866: Record member 'C.P1' must be a readable instance property or field of type 'int' to match positional parameter 'P1'.
+                // (1,14): error CS8866: Record member 'C.P1' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P1'.
                 // record C(int P1, object P2)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("C.P1", "int", "P1")
                     .WithLocation(1, 14),
-                // (1,14): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,14): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int P1, object P2)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(1, 14),
-                // (1,25): error CS8866: Record member 'C.P2' must be a readable instance property or field of type 'object' to match positional parameter 'P2'.
+                // (1,25): error CS8866: Record member 'C.P2' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P2'.
                 // record C(int P1, object P2)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P2")
                     .WithArguments("C.P2", "object", "P2")
                     .WithLocation(1, 25),
-                // (1,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int P1, object P2)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -12473,32 +12637,38 @@ record B(object P1, int P2, object P3, int P4) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(8, 17),
-                // (8,25): error CS8866: Record member 'B.P2' must be a readable instance property or field of type 'int' to match positional parameter 'P2'.
+                // (8,25): error CS8866: Record member 'B.P2' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P2'.
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P2")
                     .WithArguments("B.P2", "int", "P2")
                     .WithLocation(8, 25),
-                // (8,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(8, 25),
-                // (8,36): error CS8866: Record member 'A.P3' must be a readable instance property or field of type 'object' to match positional parameter 'P3'.
+                // (8,36): error CS8866: Record member 'A.P3' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P3'.
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P3")
                     .WithArguments("A.P3", "object", "P3")
                     .WithLocation(8, 36),
-                // (8,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(8, 36),
-                // (8,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
@@ -12532,32 +12702,38 @@ record B(object P1, int P2, object P3, int P4) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,17): error CS8866: Record member 'B.P1' must be a readable instance property or field of type 'object' to match positional parameter 'P1'.
+                // (8,17): error CS8866: Record member 'B.P1' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P1'.
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("B.P1", "object", "P1")
                     .WithLocation(8, 17),
-                // (8,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(8, 17),
-                // (8,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,25): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(8, 25),
-                // (8,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,36): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(8, 36),
-                // (8,44): error CS8866: Record member 'A.P4' must be a readable instance property or field of type 'int' to match positional parameter 'P4'.
+                // (8,44): error CS8866: Record member 'A.P4' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P4'.
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P4")
                     .WithArguments("A.P4", "int", "P4")
                     .WithLocation(8, 44),
-                // (8,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,44): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, int P2, object P3, int P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
@@ -12588,37 +12764,44 @@ record B(object P1, int P2, object P3, int P4) : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(1, 17),
-                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(1, 28),
-                // (1,39): error CS8866: Record member 'C.P3' must be a readable instance property or field of type 'object' to match positional parameter 'P3'.
+                // (1,39): error CS8866: Record member 'C.P3' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P3'.
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P3")
                     .WithArguments("C.P3", "object", "P3")
                     .WithLocation(1, 39),
-                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(1, 39),
-                // (1,50): error CS8866: Record member 'C.P4' must be a readable instance property or field of type 'object' to match positional parameter 'P4'.
+                // (1,50): error CS8866: Record member 'C.P4' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P4'.
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P4")
                     .WithArguments("C.P4", "object", "P4")
                     .WithLocation(1, 50),
-                // (1,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(1, 50),
-                // (1,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2, object P3, object P4, object P5)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
@@ -12661,43 +12844,59 @@ record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (15,18): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,18): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(15, 18),
-                // (15,31): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,31): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(15, 31),
-                // (15,42): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,42): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(15, 42),
-                // (15,56): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,56): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(15, 56),
-                // (15,71): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,71): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
                     .WithLocation(15, 71),
-                // (15,92): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,92): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P6")
                     .WithArguments("P6")
                     .WithLocation(15, 92),
-                // (15,110): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,110): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P7")
                     .WithArguments("P7")
                     .WithLocation(15, 110),
-                // (15,122): warning CS8907: Parameter 'P8' is unread. Did you forget to use it to initialize the property with that name?
-                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8) : A
+                // (15,122): warning CS8907: Parameter 'P8' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record B(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P8")
                     .WithArguments("P8")
                     .WithLocation(15, 122)
@@ -12725,43 +12924,59 @@ record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,18): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,18): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(3, 18),
-                // (3,31): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,31): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(3, 31),
-                // (3,42): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,42): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(3, 42),
-                // (3,56): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,56): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(3, 56),
-                // (3,71): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,71): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
                     .WithLocation(3, 71),
-                // (3,92): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,92): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P6")
                     .WithArguments("P6")
                     .WithLocation(3, 92),
-                // (3,110): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,110): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P7")
                     .WithArguments("P7")
                     .WithLocation(3, 110),
-                // (3,122): warning CS8907: Parameter 'P8' is unread. Did you forget to use it to initialize the property with that name?
-                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6, System.IntPtr P7, nuint[] P8)
+                // (3,122): warning CS8907: Parameter 'P8' is unread. Did you forget to use it to initialize the
+                // property with that name?
+                // record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X, int Y)[] P6,
+                // System.IntPtr P7, nuint[] P8)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P8")
                     .WithArguments("P8")
                     .WithLocation(3, 122)
@@ -12827,12 +13042,14 @@ class Program
 
             var verifier = CompileAndVerify(comp, expectedOutput: "(, )")
                 .VerifyDiagnostics(
-                    // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                    // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(object P1, object P2) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                         .WithArguments("P1")
                         .WithLocation(1, 17),
-                    // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                    // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(object P1, object P2) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                         .WithArguments("P2")
@@ -12903,12 +13120,14 @@ record C(object P1, object P2) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(11, 17),
-                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -12937,17 +13156,20 @@ record C(object P1, object P2) : B
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(11, 17),
-                // (11,28): error CS8866: Record member 'B.P2' must be a readable instance property or field of type 'object' to match positional parameter 'P2'.
+                // (11,28): error CS8866: Record member 'B.P2' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P2'.
                 // record C(object P1, object P2) : B
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P2")
                     .WithArguments("B.P2", "object", "P2")
                     .WithLocation(11, 28),
-                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P1, object P2) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -12981,7 +13203,8 @@ record C(object P)
                 targetFramework: TargetFramework.NetLatest
             );
             comp.VerifyDiagnostics(
-                // (9,17): error CS0082: Type 'C' already reserves a member called 'get_P' with the same parameter types
+                // (9,17): error CS0082: Type 'C' already reserves a member called 'get_P' with the same parameter
+                // types
                 // record C(object P)
                 Diagnostic(ErrorCode.ERR_MemberReserved, "P")
                     .WithArguments("get_P", "C")
@@ -13083,32 +13306,38 @@ record C(object P)
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyDiagnostics(
-                // (1,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type 'object' to match positional parameter 'P1'.
+                // (1,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P1'.
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("A.P1", "object", "P1")
                     .WithLocation(1, 17),
-                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(1, 17),
-                // (1,21): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (1,21): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "object P2")
                     .WithArguments("positional fields in records", "10.0")
                     .WithLocation(1, 21),
-                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(1, 28),
-                // (1,39): error CS8866: Record member 'A.P3' must be a readable instance property or field of type 'object' to match positional parameter 'P3'.
+                // (1,39): error CS8866: Record member 'A.P3' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P3'.
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P3")
                     .WithArguments("A.P3", "object", "P3")
                     .WithLocation(1, 39),
-                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
@@ -13130,22 +13359,26 @@ record C(object P)
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyDiagnostics(
-                // (1,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type 'object' to match positional parameter 'P1'.
+                // (1,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P1'.
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("A.P1", "object", "P1")
                     .WithLocation(1, 17),
-                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(1, 17),
-                // (1,39): error CS8866: Record member 'A.P3' must be a readable instance property or field of type 'object' to match positional parameter 'P3'.
+                // (1,39): error CS8866: Record member 'A.P3' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P3'.
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P3")
                     .WithArguments("A.P3", "object", "P3")
                     .WithLocation(1, 39),
-                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
@@ -13175,12 +13408,14 @@ record C(object P)
 }";
             var comp = CreateCompilation(new[] { sourceA, sourceB });
             comp.VerifyDiagnostics(
-                // (1,17): error CS8866: Record member 'A.P' must be a readable instance property or field of type 'object' to match positional parameter 'P'.
+                // (1,17): error CS8866: Record member 'A.P' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P'.
                 // record B(object P) : A
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
                     .WithArguments("A.P", "object", "P")
                     .WithLocation(1, 17),
-                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -13329,7 +13564,8 @@ End Class
                 Diagnostic(ErrorCode.ERR_NoCopyConstructorInBaseType, "B")
                     .WithArguments("A")
                     .WithLocation(1, 8),
-                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P, object Q) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -13414,12 +13650,14 @@ End Class
                 Diagnostic(ErrorCode.ERR_NoCopyConstructorInBaseType, "B")
                     .WithArguments("A")
                     .WithLocation(1, 8),
-                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P, object Q) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
                     .WithLocation(1, 17),
-                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P, object Q) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Q")
                     .WithArguments("Q")
@@ -13515,17 +13753,20 @@ End Class
                 Diagnostic(ErrorCode.ERR_OverrideNotExpected, "C")
                     .WithArguments("C.PrintMembers(System.Text.StringBuilder)")
                     .WithLocation(1, 8),
-                // (1,8): error CS7036: There is no argument given that corresponds to the required parameter 'b' of 'B.B(B)'
+                // (1,8): error CS7036: There is no argument given that corresponds to the required parameter 'b' of
+                // 'B.B(B)'
                 // record C(object P, object Q, object R) : B
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
                     .WithArguments("b", "B.B(B)")
                     .WithLocation(1, 8),
-                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P, object Q, object R) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
                     .WithLocation(1, 17),
-                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P, object Q, object R) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Q")
                     .WithArguments("Q")
@@ -13562,52 +13803,62 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6, objec
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(11, 17),
-                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
                     .WithLocation(11, 28),
-                // (11,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,39): warning CS8907: Parameter 'P3' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P3")
                     .WithArguments("P3")
                     .WithLocation(11, 39),
-                // (11,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,50): warning CS8907: Parameter 'P4' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P4")
                     .WithArguments("P4")
                     .WithLocation(11, 50),
-                // (11,61): error CS8866: Record member 'A.P5' must be a readable instance property or field of type 'object' to match positional parameter 'P5'.
+                // (11,61): error CS8866: Record member 'A.P5' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P5'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P5")
                     .WithArguments("A.P5", "object", "P5")
                     .WithLocation(11, 61),
-                // (11,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
                     .WithLocation(11, 61),
-                // (11,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type 'object' to match positional parameter 'P6'.
+                // (11,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P6'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P6")
                     .WithArguments("A.P6", "object", "P6")
                     .WithLocation(11, 72),
-                // (11,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P6")
                     .WithArguments("P6")
                     .WithLocation(11, 72),
-                // (11,83): error CS8866: Record member 'A.P7' must be a readable instance property or field of type 'object' to match positional parameter 'P7'.
+                // (11,83): error CS8866: Record member 'A.P7' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P7'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P7")
                     .WithArguments("A.P7", "object", "P7")
                     .WithLocation(11, 83),
-                // (11,83): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the property with that name?
+                // (11,83): warning CS8907: Parameter 'P7' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6, object P7) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P7")
                     .WithArguments("P7")
@@ -13648,7 +13899,8 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
                     .WithArguments("B", "A.P5.init")
                     .WithLocation(10, 8),
-                // (10,17): error CS0546: 'B.P1.init': cannot override because 'A.P1' does not have an overridable set accessor
+                // (10,17): error CS0546: 'B.P1.init': cannot override because 'A.P1' does not have an overridable
+                // set accessor
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "P1")
                     .WithArguments("B.P1.init", "A.P1")
@@ -13658,32 +13910,38 @@ record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_CantChangeInitOnlyOnOverride, "P2")
                     .WithArguments("B.P2", "A.P2")
                     .WithLocation(10, 28),
-                // (10,39): error CS0507: 'B.P3.init': cannot change access modifiers when overriding 'protected' inherited member 'A.P3.init'
+                // (10,39): error CS0507: 'B.P3.init': cannot change access modifiers when overriding 'protected'
+                // inherited member 'A.P3.init'
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_CantChangeAccessOnOverride, "P3")
                     .WithArguments("B.P3.init", "protected", "A.P3.init")
                     .WithLocation(10, 39),
-                // (10,50): error CS0507: 'B.P4.get': cannot change access modifiers when overriding 'protected' inherited member 'A.P4.get'
+                // (10,50): error CS0507: 'B.P4.get': cannot change access modifiers when overriding 'protected'
+                // inherited member 'A.P4.get'
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_CantChangeAccessOnOverride, "P4")
                     .WithArguments("B.P4.get", "protected", "A.P4.get")
                     .WithLocation(10, 50),
-                // (10,61): error CS8866: Record member 'A.P5' must be a readable instance property or field of type 'object' to match positional parameter 'P5'.
+                // (10,61): error CS8866: Record member 'A.P5' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P5'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P5")
                     .WithArguments("A.P5", "object", "P5")
                     .WithLocation(10, 61),
-                // (10,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the property with that name?
+                // (10,61): warning CS8907: Parameter 'P5' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P5")
                     .WithArguments("P5")
                     .WithLocation(10, 61),
-                // (10,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type 'object' to match positional parameter 'P6'.
+                // (10,72): error CS8866: Record member 'A.P6' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P6'.
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P6")
                     .WithArguments("A.P6", "object", "P6")
                     .WithLocation(10, 72),
-                // (10,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the property with that name?
+                // (10,72): warning CS8907: Parameter 'P6' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object P1, object P2, object P3, object P4, object P5, object P6) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P6")
                     .WithArguments("P6")
@@ -13726,22 +13984,26 @@ record B(string P1, string P2) : A;
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "B")
                     .WithArguments("B", "A.P1.get")
                     .WithLocation(6, 8),
-                // (6,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type 'string' to match positional parameter 'P1'.
+                // (6,17): error CS8866: Record member 'A.P1' must be a readable instance property or field of type
+                // 'string' to match positional parameter 'P1'.
                 // record B(string P1, string P2) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P1")
                     .WithArguments("A.P1", "string", "P1")
                     .WithLocation(6, 17),
-                // (6,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,17): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(string P1, string P2) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
                     .WithLocation(6, 17),
-                // (6,28): error CS8866: Record member 'A.P2' must be a readable instance property or field of type 'string' to match positional parameter 'P2'.
+                // (6,28): error CS8866: Record member 'A.P2' must be a readable instance property or field of type
+                // 'string' to match positional parameter 'P2'.
                 // record B(string P1, string P2) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P2")
                     .WithArguments("A.P2", "string", "P2")
                     .WithLocation(6, 28),
-                // (6,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,28): warning CS8907: Parameter 'P2' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(string P1, string P2) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P2")
                     .WithArguments("P2")
@@ -13807,12 +14069,14 @@ class Program
 (1, 2)"
                 )
                 .VerifyDiagnostics(
-                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // abstract record A(object X, object Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(2, 26),
-                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // abstract record A(object X, object Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                         .WithArguments("Y")
@@ -14325,12 +14589,14 @@ class Program
 (1, 2)"
                 )
                 .VerifyDiagnostics(
-                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,26): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // abstract record A(object X, object Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(2, 26),
-                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,36): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // abstract record A(object X, object Y)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                         .WithArguments("Y")
@@ -14666,22 +14932,26 @@ class Program
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "C")
                     .WithArguments("C", "A.Y.init")
                     .WithLocation(12, 8),
-                // (12,17): error CS8866: Record member 'B.X' must be a readable instance property or field of type 'object' to match positional parameter 'X'.
+                // (12,17): error CS8866: Record member 'B.X' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'X'.
                 // record C(object X, object Y) : B;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("B.X", "object", "X")
                     .WithLocation(12, 17),
-                // (12,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,17): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object X, object Y) : B;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(12, 17),
-                // (12,27): error CS8866: Record member 'B.Y' must be a readable instance property or field of type 'object' to match positional parameter 'Y'.
+                // (12,27): error CS8866: Record member 'B.Y' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'Y'.
                 // record C(object X, object Y) : B;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Y")
                     .WithArguments("B.Y", "object", "Y")
                     .WithLocation(12, 27),
-                // (12,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (12,27): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object X, object Y) : B;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -14808,12 +15078,14 @@ record CB(object P) : B;
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "CB")
                     .WithArguments("CB", "A.P.init")
                     .WithLocation(2, 8),
-                // (2,18): error CS8866: Record member 'B.P' must be a readable instance property or field of type 'object' to match positional parameter 'P'.
+                // (2,18): error CS8866: Record member 'B.P' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'P'.
                 // record CB(object P) : B;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
                     .WithArguments("B.P", "object", "P")
                     .WithLocation(2, 18),
-                // (2,18): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,18): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record CB(object P) : B;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -15703,7 +15975,8 @@ public record C(object P1, object P2) : B(0, 1)
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C")
                     .WithArguments("B", "0")
                     .WithLocation(6, 12),
-                // (6,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (6,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) // 1, 2
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "C")
                     .WithLocation(6, 12)
@@ -15736,7 +16009,8 @@ public record C(object P1, object P2) : B(0, 1)
             );
             var verifier = CompileAndVerify(comp, expectedOutput: "(2, 0)")
                 .VerifyDiagnostics(
-                    // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
+                    // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // public record C(int I)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
                         .WithArguments("I")
@@ -15789,7 +16063,8 @@ public record C(object P1, object P2) : B(0, 1)
             );
             var verifier = CompileAndVerify(comp, expectedOutput: "(2, 100) RAN (0, 0)")
                 .VerifyDiagnostics(
-                    // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the property with that name?
+                    // (1,21): warning CS8907: Parameter 'I' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // public record C(int I)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "I")
                         .WithArguments("I")
@@ -15831,7 +16106,8 @@ public record C(object I)
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "base")
                     .WithArguments("object", "1")
                     .WithLocation(4, 21),
-                // (4,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (4,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) : base(1) { }
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "base")
                     .WithLocation(4, 21)
@@ -15898,7 +16174,8 @@ public record C(object I)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (3,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) : this(c.I)
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "this")
                     .WithLocation(3, 21)
@@ -15978,7 +16255,8 @@ public record C(object P1) : B(0, 1)
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C")
                     .WithArguments("B", "0")
                     .WithLocation(6, 12),
-                // (6,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (6,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) // 1, 2
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "C")
                     .WithLocation(6, 12)
@@ -16001,7 +16279,8 @@ public record C(object P1, object P2) : B(0, 1)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (6,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) : this(1, 2) // 1
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "this")
                     .WithLocation(6, 21)
@@ -16031,11 +16310,13 @@ public record D(int j) : B(0)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (6,21): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) : base(1) // 1
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "base")
                     .WithLocation(6, 21),
-                // (13,22): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (13,22): error CS8868: A copy constructor in a record must call a copy constructor of the base,
+                // or a parameterless object constructor if the record inherits from object.
                 //     public D(D? d) : base(1) // 2
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "base")
                     .WithLocation(13, 22)
@@ -16181,21 +16462,25 @@ public record E(object P1, object P2) : B(0, 1); // 3
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,13): error CS8878: A copy constructor 'B.B(B)' must be public or protected because the record is not sealed.
+                // (3,13): error CS8878: A copy constructor 'B.B(B)' must be public or protected because the record
+                // is not sealed.
                 //     private B(B b) { }
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "B")
                     .WithArguments("B.B(B)")
                     .WithLocation(3, 13),
-                // (7,13): error CS8878: A copy constructor 'C.C(C)' must be public or protected because the record is not sealed.
+                // (7,13): error CS8878: A copy constructor 'C.C(C)' must be public or protected because the record
+                // is not sealed.
                 //     private C(C c) : base(2, 3) { } // 1
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "C")
                     .WithArguments("C.C(C)")
                     .WithLocation(7, 13),
-                // (7,22): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (7,22): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     private C(C c) : base(2, 3) { } // 1
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "base")
                     .WithLocation(7, 22),
-                // (11,13): error CS8878: A copy constructor 'D.D(D)' must be public or protected because the record is not sealed.
+                // (11,13): error CS8878: A copy constructor 'D.D(D)' must be public or protected because the record
+                // is not sealed.
                 //     private D(D d) : base(d) { } // 2
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "D")
                     .WithArguments("D.D(D)")
@@ -16223,7 +16508,8 @@ public record E(object P1, object P2) : B(0, 1); // 3
 }";
             var compA = CreateCompilation(sourceA);
             compA.VerifyDiagnostics(
-                // (3,14): error CS8878: A copy constructor 'B.B(B)' must be public or protected because the record is not sealed.
+                // (3,14): error CS8878: A copy constructor 'B.B(B)' must be public or protected because the record
+                // is not sealed.
                 //     internal B(B b) { }
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "B")
                     .WithArguments("B.B(B)")
@@ -16379,7 +16665,8 @@ public record Unsealed(object P1, object P2) : B(0, 1)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,14): error CS8878: A copy constructor 'Unsealed.Unsealed(Unsealed)' must be public or protected because the record is not sealed.
+                // (12,14): error CS8878: A copy constructor 'Unsealed.Unsealed(Unsealed)' must be public or
+                // protected because the record is not sealed.
                 //     internal Unsealed(Unsealed s) : base(s)
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "Unsealed")
                     .WithArguments("Unsealed.Unsealed(Unsealed)")
@@ -16412,7 +16699,8 @@ public record C(int j) : B(1)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,12): error CS8862: A constructor declared in a type with parameter list must have 'this' constructor initializer.
+                // (3,12): error CS8862: A constructor declared in a type with parameter list must have 'this'
+                // constructor initializer.
                 //     public B(ref B b) => throw null; // 1, not recognized as copy constructor
                 Diagnostic(ErrorCode.ERR_UnexpectedOrMissingConstructorInitializerInRecord, "B")
                     .WithLocation(3, 12)
@@ -16603,7 +16891,8 @@ public record C : B
                 parseOptions: TestOptions.Regular9
             );
             comp2.VerifyDiagnostics(
-                // (4,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or a parameterless object constructor if the record inherits from object.
+                // (4,12): error CS8868: A copy constructor in a record must call a copy constructor of the base, or
+                // a parameterless object constructor if the record inherits from object.
                 //     public C(C c) { }
                 Diagnostic(ErrorCode.ERR_CopyConstructorMustInvokeBaseCopyConstructor, "C")
                     .WithLocation(4, 12)
@@ -16760,9 +17049,11 @@ public record C : B
     }
 }";
 
-            // We're going to inject various copy constructors into record B (at INJECT marker), and check which one is used
+            // We're going to inject various copy constructors into record B (at INJECT marker), and check which
+            // one is used
             // by derived record C
-            // The RAN and THROW markers are shorthands for method bodies that print "RAN" and throw, respectively.
+            // The RAN and THROW markers are shorthands for method bodies that print "RAN" and throw,
+            // respectively.
 
             // .ctor(B) vs. .ctor(modopt B)
             verifyBoth(
@@ -17015,7 +17306,8 @@ record A(int X)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,6): error CS8878: A copy constructor 'A.A(A)' must be public or protected because the record is not sealed.
+                // (4,6): error CS8878: A copy constructor 'A.A(A)' must be public or protected because the record
+                // is not sealed.
                 //      A(A a)
                 Diagnostic(ErrorCode.ERR_CopyConstructorWrongAccessibility, "A")
                     .WithArguments("A.A(A)")
@@ -17357,7 +17649,8 @@ record B(int X, int Y)
 ";
             var verifier = CompileAndVerify(source, expectedOutput: "32");
             verifier.VerifyDiagnostics(
-                // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (3,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17440,12 +17733,14 @@ record C(int X, int Y) : B
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (7,14): error CS8866: Record member 'B.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (7,14): error CS8866: Record member 'B.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record C(int X, int Y) : B
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("B.X", "int", "X")
                     .WithLocation(7, 14),
-                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17493,7 +17788,8 @@ record C(int X, int Y) : B
 ";
             var verifier = CompileAndVerify(source, expectedOutput: "02");
             verifier.VerifyDiagnostics(
-                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17576,12 +17872,14 @@ record C(int X)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyEmitDiagnostics(
-                // (4,10): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (4,10): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // record C(int X)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "int X")
                     .WithArguments("positional fields in records", "10.0")
                     .WithLocation(4, 10),
-                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17595,7 +17893,8 @@ record C(int X)
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(
-                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17692,12 +17991,14 @@ record C(int X) : B
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,14): error CS8866: Record member 'B.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (9,14): error CS8866: Record member 'B.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record C(int X) : B
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("B.X", "int", "X")
                     .WithLocation(9, 14),
-                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -17775,12 +18076,15 @@ record C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
+                // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible
+                // extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //             case C():
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()")
                     .WithArguments("C", "Deconstruct")
                     .WithLocation(8, 19),
-                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
+                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'C', with 0 out parameters and a void return type.
                 //             case C():
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
                     .WithArguments("C", "0")
@@ -17933,12 +18237,14 @@ record C(int X, int Y) : B
 ";
             var verifier = CompileAndVerify(source, expectedOutput: "0101");
             verifier.VerifyDiagnostics(
-                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (9,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(9, 14),
-                // (9,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (9,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y) : B
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -18075,22 +18381,26 @@ record C(int X, int Y)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,14): error CS8866: Record member 'C.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (4,14): error CS8866: Record member 'C.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("C.X", "int", "X")
                     .WithLocation(4, 14),
-                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(4, 14),
-                // (4,21): error CS8866: Record member 'C.Y' must be a readable instance property or field of type 'int' to match positional parameter 'Y'.
+                // (4,21): error CS8866: Record member 'C.Y' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'Y'.
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Y")
                     .WithArguments("C.Y", "int", "Y")
                     .WithLocation(4, 21),
-                // (4,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -18135,12 +18445,14 @@ record C(string? X, string Y)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (5,18): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (5,18): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(string? X, string Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(5, 18),
-                // (5,28): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (5,28): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(string? X, string Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -18187,22 +18499,26 @@ record C(Derived X, Base Y)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (7,18): error CS8866: Record member 'C.X' must be a readable instance property or field of type 'Derived' to match positional parameter 'X'.
+                // (7,18): error CS8866: Record member 'C.X' must be a readable instance property or field of type
+                // 'Derived' to match positional parameter 'X'.
                 // record C(Derived X, Base Y)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("C.X", "Derived", "X")
                     .WithLocation(7, 18),
-                // (7,18): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,18): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(Derived X, Base Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(7, 18),
-                // (7,26): error CS8866: Record member 'C.Y' must be a readable instance property or field of type 'Base' to match positional parameter 'Y'.
+                // (7,26): error CS8866: Record member 'C.Y' must be a readable instance property or field of type
+                // 'Base' to match positional parameter 'Y'.
                 // record C(Derived X, Base Y)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Y")
                     .WithArguments("C.Y", "Base", "Y")
                     .WithLocation(7, 26),
-                // (7,26): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,26): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(Derived X, Base Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -18239,12 +18555,15 @@ record C()
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you missing a using directive or an assembly reference?)
+                // (8,19): error CS1061: 'C' does not contain a definition for 'Deconstruct' and no accessible
+                // extension method 'Deconstruct' accepting a first argument of type 'C' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //             case C():
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "()")
                     .WithArguments("C", "Deconstruct")
                     .WithLocation(8, 19),
-                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
+                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'C', with 0 out parameters and a void return type.
                 //             case C():
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
                     .WithArguments("C", "0")
@@ -18381,12 +18700,14 @@ record C()
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,19): error CS0176: Member 'C.Deconstruct()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (8,19): error CS0176: Member 'C.Deconstruct()' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //             case C():
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "()", isSuppressed: false)
                     .WithArguments("C.Deconstruct()")
                     .WithLocation(8, 19),
-                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
+                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'C', with 0 out parameters and a void return type.
                 //             case C():
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
                     .WithArguments("C", "0")
@@ -18423,7 +18744,8 @@ record C()
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'C', with 0 out parameters and a void return type.
+                // (8,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'C', with 0 out parameters and a void return type.
                 //             case C():
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "()")
                     .WithArguments("C", "0")
@@ -18551,7 +18873,8 @@ record B(int X)
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "Deconstruct")
                     .WithArguments("B.Deconstruct(out int)", "void")
                     .WithLocation(5, 16),
-                // (11,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'B', with 1 out parameters and a void return type.
+                // (11,19): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'B', with 1 out parameters and a void return type.
                 //             case B(int x):
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(int x)")
                     .WithArguments("B", "1")
@@ -18638,7 +18961,8 @@ record B(int X)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (5,17): error CS0663: 'B' cannot define an overloaded method that differs only on parameter modifiers 'ref' and 'out'
+                // (5,17): error CS0663: 'B' cannot define an overloaded method that differs only on parameter
+                // modifiers 'ref' and 'out'
                 //     public void Deconstruct(ref int X)
                 Diagnostic(ErrorCode.ERR_OverloadRefKind, "Deconstruct")
                     .WithArguments("B", "method", "ref", "out")
@@ -18796,7 +19120,8 @@ abstract record B(int X, int Y) : A(X)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (6,17): error CS0533: 'B.Deconstruct(out int, out int)' hides inherited abstract member 'A.Deconstruct(out int, out int)'
+                // (6,17): error CS0533: 'B.Deconstruct(out int, out int)' hides inherited abstract member
+                // 'A.Deconstruct(out int, out int)'
                 // abstract record B(int X, int Y) : A(X)
                 Diagnostic(ErrorCode.ERR_HidingAbstractMethod, "B")
                     .WithArguments(
@@ -18819,12 +19144,14 @@ record A(int X)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (2,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record A(int X)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("A.X", "int", "X")
                     .WithLocation(2, 14),
-                // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record A(int X)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -18846,12 +19173,14 @@ record B(int X) : A;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (7,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (7,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record B(int X) : A;
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("A.X", "int", "X")
                     .WithLocation(7, 14),
-                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X) : A;
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
@@ -18971,12 +19300,14 @@ record B(int X, int Y)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,21): error CS8866: Record member 'B.Y' must be a readable instance property or field of type 'int' to match positional parameter 'Y'.
+                // (4,21): error CS8866: Record member 'B.Y' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'Y'.
                 // record B(int X, int Y)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Y")
                     .WithArguments("B.Y", "int", "Y")
                     .WithLocation(4, 21),
-                // (4,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                // (4,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(int X, int Y)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                     .WithArguments("Y")
@@ -19011,7 +19342,8 @@ record B(int X, int Y) : A
             if (usePreview)
             {
                 comp.VerifyDiagnostics(
-                    // (3,33): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
+                    // (3,33): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter
+                    // types
                     //     public sealed override bool Equals(object other) => false;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
                         .WithArguments("Equals", "A")
@@ -19021,7 +19353,8 @@ record B(int X, int Y) : A
                     Diagnostic(ErrorCode.ERR_SealedAPIInRecord, "GetHashCode")
                         .WithArguments("A.GetHashCode()")
                         .WithLocation(4, 32),
-                    // (7,8): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is sealed
+                    // (7,8): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                    // because it is sealed
                     // record B(int X, int Y) : A
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "B")
                         .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -19036,17 +19369,20 @@ record B(int X, int Y) : A
                     Diagnostic(ErrorCode.ERR_SealedAPIInRecord, "GetHashCode")
                         .WithArguments("A.GetHashCode()")
                         .WithLocation(4, 32),
-                    // (5,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (5,35): error CS8773: Feature 'sealed ToString in record' is not available in C# 9.0. Please use
+                    // language version 10.0 or greater.
                     //     public sealed override string ToString() => null;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "ToString")
                         .WithArguments("sealed ToString in record", "10.0")
                         .WithLocation(5, 35),
-                    // (3,33): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
+                    // (3,33): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter
+                    // types
                     //     public sealed override bool Equals(object other) => false;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
                         .WithArguments("Equals", "A")
                         .WithLocation(3, 33),
-                    // (7,8): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is sealed
+                    // (7,8): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                    // because it is sealed
                     // record B(int X, int Y) : A
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "B")
                         .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -19106,7 +19442,8 @@ record B(int X, int Y) : A
                 targetFramework: TargetFramework.NetLatest
             );
             comp.VerifyDiagnostics(
-                // (3,35): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
+                // (3,35): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter
+                // types
                 //     public abstract override bool Equals(object other);
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
                     .WithArguments("Equals", "A")
@@ -19270,7 +19607,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0239: 'B.Equals(object?)': cannot override inherited member 'A.Equals(object)' because it is sealed
+                // (2,15): error CS0239: 'B.Equals(object?)': cannot override inherited member 'A.Equals(object)'
+                // because it is sealed
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "B")
                     .WithArguments("B.Equals(object?)", "A.Equals(object)")
@@ -19504,7 +19842,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.Equals(object?)': cannot override inherited member 'A.Equals(object)' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.Equals(object?)': cannot override inherited member 'A.Equals(object)'
+                // because it is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.Equals(object?)", "A.Equals(object)")
@@ -19618,7 +19957,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'B.Equals(object?)': return type must be 'int' to match overridden member 'A.Equals(object)'
+                // (2,15): error CS0508: 'B.Equals(object?)': return type must be 'int' to match overridden member
+                // 'A.Equals(object)'
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "B")
                     .WithArguments("B.Equals(object?)", "A.Equals(object)", "int")
@@ -19677,7 +20017,8 @@ public record A {
                 parseOptions: TestOptions.Regular9.WithNoRefSafetyRulesAttribute()
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'A.Equals(object?)': return type must be 'int' to match overridden member 'object.Equals(object)'
+                // (2,15): error CS0508: 'A.Equals(object?)': return type must be 'int' to match overridden member
+                // 'object.Equals(object)'
                 // public record A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "A")
                     .WithArguments("A.Equals(object?)", "object.Equals(object)", "int")
@@ -19767,7 +20108,8 @@ public record A {
                     )
                     .WithArguments("System.Type", "GetTypeFromHandle")
                     .WithLocation(2, 1),
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // public record A {
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -19801,7 +20143,8 @@ record B : A;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (3,28): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter types
+                // (3,28): error CS0111: Type 'A' already defines a member called 'Equals' with the same parameter
+                // types
                 //     public static new bool Equals(object obj) => throw null;
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
                     .WithArguments("Equals", "A")
@@ -20110,7 +20453,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                // because it is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -20128,7 +20472,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (3,25): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is not marked virtual, abstract, or override
+                // (3,25): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                // because it is not marked virtual, abstract, or override
                 //     public override int GetHashCode() => throw null;
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "GetHashCode")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -20242,7 +20587,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'B.GetHashCode()': return type must be 'bool' to match overridden member 'A.GetHashCode()'
+                // (2,15): error CS0508: 'B.GetHashCode()': return type must be 'bool' to match overridden member
+                // 'A.GetHashCode()'
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "B")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()", "bool")
@@ -20260,7 +20606,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (3,25): error CS0508: 'B.GetHashCode()': return type must be 'bool' to match overridden member 'A.GetHashCode()'
+                // (3,25): error CS0508: 'B.GetHashCode()': return type must be 'bool' to match overridden member
+                // 'A.GetHashCode()'
                 //     public override int GetHashCode() => throw null;
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "GetHashCode")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()", "bool")
@@ -20279,7 +20626,8 @@ public record B : A {
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (3,26): error CS0508: 'A.GetHashCode()': return type must be 'int' to match overridden member 'object.GetHashCode()'
+                // (3,26): error CS0508: 'A.GetHashCode()': return type must be 'int' to match overridden member
+                // 'object.GetHashCode()'
                 //     public override bool GetHashCode() => throw null;
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "GetHashCode")
                     .WithArguments("A.GetHashCode()", "object.GetHashCode()", "int")
@@ -20324,7 +20672,8 @@ record B : A;
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideMethodFromObject, "GetHashCode")
                     .WithArguments("A.GetHashCode()")
                     .WithLocation(3, 27),
-                // (6,8): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is not marked virtual, abstract, or override
+                // (6,8): error CS0506: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                // because it is not marked virtual, abstract, or override
                 // record B : A;
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -20528,7 +20877,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is sealed
+                // (2,15): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                // because it is sealed
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "B")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -20546,7 +20896,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (3,25): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()' because it is sealed
+                // (3,25): error CS0239: 'B.GetHashCode()': cannot override inherited member 'A.GetHashCode()'
+                // because it is sealed
                 //     public override int GetHashCode() => throw null;
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "GetHashCode")
                     .WithArguments("B.GetHashCode()", "A.GetHashCode()")
@@ -20782,7 +21133,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (3,23): error CS8830: 'B.GetHashCode()': Target runtime doesn't support covariant return types in overrides. Return type must be 'A' to match overridden member 'A.GetHashCode()'
+                // (3,23): error CS8830: 'B.GetHashCode()': Target runtime doesn't support covariant return types in
+                // overrides. Return type must be 'A' to match overridden member 'A.GetHashCode()'
                 //     public override B GetHashCode() => default;
                 Diagnostic(
                         ErrorCode.ERR_RuntimeDoesNotSupportCovariantReturnsOfClasses,
@@ -21146,7 +21498,8 @@ public record A {
                 parseOptions: TestOptions.Regular9.WithNoRefSafetyRulesAttribute()
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'A.GetHashCode()': return type must be 'bool' to match overridden member 'object.GetHashCode()'
+                // (2,15): error CS0508: 'A.GetHashCode()': return type must be 'bool' to match overridden member
+                // 'object.GetHashCode()'
                 // public record A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "A")
                     .WithArguments("A.GetHashCode()", "object.GetHashCode()", "bool")
@@ -21236,7 +21589,8 @@ public record A {
                     )
                     .WithArguments("System.Type", "GetTypeFromHandle")
                     .WithLocation(2, 1),
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // public record A {
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -21363,7 +21717,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it
+                // is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.Equals(A?)", "A.Equals(A)")
@@ -21477,7 +21832,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it
+                // is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.Equals(A?)", "A.Equals(A)")
@@ -21597,7 +21953,8 @@ public record B : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0508: 'B.Equals(A?)': return type must be 'int' to match overridden member 'A.Equals(A)'
+                // (2,15): error CS0508: 'B.Equals(A?)': return type must be 'int' to match overridden member
+                // 'A.Equals(A)'
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantChangeReturnTypeOnOverride, "B")
                     .WithArguments("B.Equals(A?)", "A.Equals(A)", "int")
@@ -21838,7 +22195,8 @@ record B : A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (8,26): error CS0111: Type 'B' already defines a member called 'Equals' with the same parameter types
+                // (8,26): error CS0111: Type 'B' already defines a member called 'Equals' with the same parameter
+                // types
                 //     public override bool Equals(A x) => throw null;
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "Equals")
                     .WithArguments("Equals", "B")
@@ -21972,7 +22330,8 @@ record B : A
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyEmitDiagnostics(
-                // (9,33): error CS8872: 'B.Equals(B)' must allow overriding because the containing record is not sealed.
+                // (9,33): error CS8872: 'B.Equals(B)' must allow overriding because the containing record is not
+                // sealed.
                 //     public sealed override bool Equals(B other) => Report("B.Equals(B)");
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "Equals")
                     .WithArguments("B.Equals(B)")
@@ -22575,7 +22934,8 @@ record A
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyEmitDiagnostics(
-                // (4,20): error CS0246: The type or namespace name 'Boolean' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,20): error CS0246: The type or namespace name 'Boolean' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     public virtual Boolean Equals(A other)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Boolean")
                     .WithArguments("Boolean")
@@ -22743,12 +23103,14 @@ record B : A;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,8): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement the interface member because it is static.
+                // (2,8): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'.
+                // 'A.Equals(A)' cannot implement the interface member because it is static.
                 // record A
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A")
                     .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
                     .WithLocation(2, 8),
-                // (4,24): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not sealed.
+                // (4,24): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not
+                // sealed.
                 //     public static bool Equals(A x) => throw null;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "Equals")
                     .WithArguments("A.Equals(A)")
@@ -22758,7 +23120,8 @@ record B : A;
                 Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
                     .WithArguments("A")
                     .WithLocation(4, 24),
-                // (7,8): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is not marked virtual, abstract, or override
+                // (7,8): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is
+                // not marked virtual, abstract, or override
                 // record B : A;
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.Equals(A?)", "A.Equals(A)")
@@ -22778,7 +23141,8 @@ sealed record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement the interface member because it is static.
+                // (2,15): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'.
+                // 'A.Equals(A)' cannot implement the interface member because it is static.
                 // sealed record A
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A")
                     .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
@@ -22872,7 +23236,8 @@ record B : A
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyEmitDiagnostics(
-                // (9,43): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (9,43): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected sealed override System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("B.EqualityContract")
@@ -23357,7 +23722,8 @@ record A
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyEmitDiagnostics(
-                // (4,23): error CS0246: The type or namespace name 'Type' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,23): error CS0246: The type or namespace name 'Type' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     protected virtual Type EqualityContract
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Type")
                     .WithArguments("Type")
@@ -23400,7 +23766,8 @@ record D
                 options: TestOptions.ReleaseDll
             );
             comp.VerifyEmitDiagnostics(
-                // (4,27): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (4,27): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("A.EqualityContract")
@@ -23499,12 +23866,15 @@ sealed record H : A
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseEqualityContract, "EqualityContract")
                     .WithArguments("B.EqualityContract", "A")
                     .WithLocation(7, 27),
-                // (7,27): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (7,27): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("B.EqualityContract")
                     .WithLocation(7, 27),
-                // (7,27): warning CS0114: 'B.EqualityContract' hides inherited member 'A.EqualityContract'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (7,27): warning CS0114: 'B.EqualityContract' hides inherited member 'A.EqualityContract'. To make
+                // the current member override that implementation, add the override keyword. Otherwise add the new
+                // keyword.
                 //     protected System.Type EqualityContract
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "EqualityContract")
                     .WithArguments("B.EqualityContract", "A.EqualityContract")
@@ -23519,7 +23889,9 @@ sealed record H : A
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseEqualityContract, "EqualityContract")
                     .WithArguments("C.EqualityContract", "A")
                     .WithLocation(13, 27),
-                // (13,27): warning CS0114: 'C.EqualityContract' hides inherited member 'A.EqualityContract'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (13,27): warning CS0114: 'C.EqualityContract' hides inherited member 'A.EqualityContract'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 //     protected System.Type EqualityContract
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "EqualityContract")
                     .WithArguments("C.EqualityContract", "A.EqualityContract")
@@ -23539,7 +23911,9 @@ sealed record H : A
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseEqualityContract, "EqualityContract")
                     .WithArguments("D.EqualityContract", "A")
                     .WithLocation(19, 35),
-                // (19,35): warning CS0114: 'D.EqualityContract' hides inherited member 'A.EqualityContract'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (19,35): warning CS0114: 'D.EqualityContract' hides inherited member 'A.EqualityContract'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 //     protected virtual System.Type EqualityContract
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "EqualityContract")
                     .WithArguments("D.EqualityContract", "A.EqualityContract")
@@ -23554,12 +23928,15 @@ sealed record H : A
                 Diagnostic(ErrorCode.ERR_DoesNotOverrideBaseEqualityContract, "EqualityContract")
                     .WithArguments("E.EqualityContract", "A")
                     .WithLocation(25, 35),
-                // (25,35): warning CS0114: 'E.EqualityContract' hides inherited member 'A.EqualityContract'. To make the current member override that implementation, add the override keyword. Otherwise add the new keyword.
+                // (25,35): warning CS0114: 'E.EqualityContract' hides inherited member 'A.EqualityContract'. To
+                // make the current member override that implementation, add the override keyword. Otherwise add the
+                // new keyword.
                 //     protected virtual System.Type EqualityContract
                 Diagnostic(ErrorCode.WRN_NewOrOverrideExpected, "EqualityContract")
                     .WithArguments("E.EqualityContract", "A.EqualityContract")
                     .WithLocation(25, 35),
-                // (37,43): error CS8872: 'G.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (37,43): error CS8872: 'G.EqualityContract' must allow overriding because the containing record
+                // is not sealed.
                 //     protected sealed override System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("G.EqualityContract")
@@ -23694,7 +24071,8 @@ public record F : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract'
+                // because it is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract")
@@ -23709,12 +24087,14 @@ public record F : A {
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "EqualityContract")
                     .WithArguments("D.EqualityContract", "System.Type")
                     .WithLocation(11, 31),
-                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a using directive or an assembly reference?)
+                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     new protected virtual Type EqualityContract
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Type")
                     .WithArguments("Type")
                     .WithLocation(16, 27),
-                // (21,36): error CS0506: 'F.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (21,36): error CS0506: 'F.EqualityContract': cannot override inherited member
+                // 'A.EqualityContract' because it is not marked virtual, abstract, or override
                 //     protected override System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "EqualityContract")
                     .WithArguments("F.EqualityContract", "A.EqualityContract")
@@ -23754,12 +24134,14 @@ record C : A
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "EqualityContract")
                     .WithArguments("A.EqualityContract", "System.Type")
                     .WithLocation(4, 27),
-                // (8,8): error CS1715: 'B.EqualityContract': type must be 'int' to match overridden member 'A.EqualityContract'
+                // (8,8): error CS1715: 'B.EqualityContract': type must be 'int' to match overridden member
+                // 'A.EqualityContract'
                 // record B : A
                 Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract", "int")
                     .WithLocation(8, 8),
-                // (14,36): error CS1715: 'C.EqualityContract': type must be 'int' to match overridden member 'A.EqualityContract'
+                // (14,36): error CS1715: 'C.EqualityContract': type must be 'int' to match overridden member
+                // 'A.EqualityContract'
                 //     protected override System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "EqualityContract")
                     .WithArguments("C.EqualityContract", "A.EqualityContract", "int")
@@ -23894,7 +24276,8 @@ public record F : A {
                 parseOptions: TestOptions.Regular9
             );
             comp.VerifyEmitDiagnostics(
-                // (2,15): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (2,15): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract'
+                // because it is not marked virtual, abstract, or override
                 // public record B : A {
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract")
@@ -23909,12 +24292,14 @@ public record F : A {
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "EqualityContract")
                     .WithArguments("D.EqualityContract", "System.Type")
                     .WithLocation(11, 31),
-                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a using directive or an assembly reference?)
+                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     new protected virtual Type EqualityContract
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Type")
                     .WithArguments("Type")
                     .WithLocation(16, 27),
-                // (21,36): error CS0506: 'F.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (21,36): error CS0506: 'F.EqualityContract': cannot override inherited member
+                // 'A.EqualityContract' because it is not marked virtual, abstract, or override
                 //     protected override System.Type EqualityContract
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "EqualityContract")
                     .WithArguments("F.EqualityContract", "A.EqualityContract")
@@ -24050,7 +24435,8 @@ public record F : A {
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "EqualityContract")
                     .WithArguments("D.EqualityContract", "System.Type")
                     .WithLocation(11, 27),
-                // (16,23): error CS0246: The type or namespace name 'Type' could not be found (are you missing a using directive or an assembly reference?)
+                // (16,23): error CS0246: The type or namespace name 'Type' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     protected virtual Type EqualityContract
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Type")
                     .WithArguments("Type")
@@ -24286,7 +24672,8 @@ public record G : B {
                 Diagnostic(ErrorCode.ERR_SignatureMismatchInRecord, "EqualityContract")
                     .WithArguments("E.EqualityContract", "System.Type")
                     .WithLocation(11, 31),
-                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a using directive or an assembly reference?)
+                // (16,27): error CS0246: The type or namespace name 'Type' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     new protected virtual Type EqualityContract
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Type")
                     .WithArguments("Type")
@@ -24445,12 +24832,14 @@ record B : A;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,34): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (4,34): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected static System.Type EqualityContract => throw null;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("A.EqualityContract")
                     .WithLocation(4, 34),
-                // (7,8): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (7,8): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract'
+                // because it is not marked virtual, abstract, or override
                 // record B : A;
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract")
@@ -24472,7 +24861,8 @@ record R
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (4,35): error CS8906: Record equality contract property 'R.EqualityContract' must have a get accessor.
+                // (4,35): error CS8906: Record equality contract property 'R.EqualityContract' must have a get
+                // accessor.
                 //     protected virtual System.Type EqualityContract { set { } }
                 Diagnostic(ErrorCode.ERR_EqualityContractRequiresGetter, "EqualityContract")
                     .WithArguments("R.EqualityContract")
@@ -24514,12 +24904,14 @@ record R : Base
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (5,36): error CS8906: Record equality contract property 'R.EqualityContract' must have a get accessor.
+                // (5,36): error CS8906: Record equality contract property 'R.EqualityContract' must have a get
+                // accessor.
                 //     protected override System.Type EqualityContract { set { } }
                 Diagnostic(ErrorCode.ERR_EqualityContractRequiresGetter, "EqualityContract")
                     .WithArguments("R.EqualityContract")
                     .WithLocation(5, 36),
-                // (5,55): error CS0546: 'R.EqualityContract.set': cannot override because 'Base.EqualityContract' does not have an overridable set accessor
+                // (5,55): error CS0546: 'R.EqualityContract.set': cannot override because 'Base.EqualityContract'
+                // does not have an overridable set accessor
                 //     protected override System.Type EqualityContract { set { } }
                 Diagnostic(ErrorCode.ERR_NoSetToOverride, "set")
                     .WithArguments("R.EqualityContract.set", "Base.EqualityContract")
@@ -24531,7 +24923,8 @@ record R : Base
         [WorkItem(48723, "https://github.com/dotnet/roslyn/issues/48723")]
         public void EqualityContract_26_SetterOnlyProperty_InMetadata()
         {
-            // `record Base;` with modified EqualityContract property, method bodies simplified and nullability removed
+            // `record Base;` with modified EqualityContract property, method bodies simplified and nullability
+            // removed
             var il =
                 @"
 .class public auto ansi beforefieldinit Base
@@ -24618,7 +25011,8 @@ record R : Base;
 ";
             var comp = CreateCompilationWithIL(src, il);
             comp.VerifyEmitDiagnostics(
-                // (2,8): error CS0545: 'R.EqualityContract.get': cannot override because 'Base.EqualityContract' does not have an overridable get accessor
+                // (2,8): error CS0545: 'R.EqualityContract.get': cannot override because 'Base.EqualityContract'
+                // does not have an overridable get accessor
                 // record R : Base;
                 Diagnostic(ErrorCode.ERR_NoGetToOverride, "R")
                     .WithArguments("R.EqualityContract.get", "Base.EqualityContract")
@@ -24634,7 +25028,8 @@ record R : Base
 ";
             var comp2 = CreateCompilationWithIL(src2, il);
             comp2.VerifyEmitDiagnostics(
-                // (4,56): error CS0545: 'R.EqualityContract.get': cannot override because 'Base.EqualityContract' does not have an overridable get accessor
+                // (4,56): error CS0545: 'R.EqualityContract.get': cannot override because 'Base.EqualityContract'
+                // does not have an overridable get accessor
                 //     protected override System.Type EqualityContract => typeof(R);
                 Diagnostic(ErrorCode.ERR_NoGetToOverride, "typeof(R)")
                     .WithArguments("R.EqualityContract.get", "Base.EqualityContract")
@@ -24939,7 +25334,8 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,32): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same parameter types
+                // (4,32): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same
+                // parameter types
                 //     public static bool operator==(A r1, A r2)
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "==")
                     .WithArguments("op_Equality", "A")
@@ -24964,7 +25360,8 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,32): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same parameter types
+                // (4,32): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same
+                // parameter types
                 //     public static bool operator!=(A r1, A r2)
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "!=")
                     .WithArguments("op_Inequality", "A")
@@ -24987,7 +25384,8 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,24): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same parameter types
+                // (4,24): error CS0111: Type 'A' already defines a member called 'op_Equality' with the same
+                // parameter types
                 //     public static bool op_Equality(A r1, A r2)
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Equality")
                     .WithArguments("op_Equality", "A")
@@ -25010,7 +25408,8 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (4,24): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same parameter types
+                // (4,24): error CS0111: Type 'A' already defines a member called 'op_Inequality' with the same
+                // parameter types
                 //     public static bool op_Inequality(A r1, A r2)
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_Inequality")
                     .WithArguments("op_Inequality", "A")
@@ -25031,12 +25430,14 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,8): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement the interface member because it is static.
+                // (2,8): error CS0736: 'A' does not implement instance interface member 'IEquatable<A>.Equals(A)'.
+                // 'A.Equals(A)' cannot implement the interface member because it is static.
                 // record A
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "A")
                     .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
                     .WithLocation(2, 8),
-                // (4,24): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not sealed.
+                // (4,24): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not
+                // sealed.
                 //     public static bool Equals(A other)
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "Equals")
                     .WithArguments("A.Equals(A)")
@@ -25062,7 +25463,9 @@ record A
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,8): error CS0738: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement 'IEquatable<A>.Equals(A)' because it does not have the matching return type of 'bool'.
+                // (2,8): error CS0738: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'.
+                // 'A.Equals(A)' cannot implement 'IEquatable<A>.Equals(A)' because it does not have the matching
+                // return type of 'bool'.
                 // record A
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "A")
                     .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)", "bool")
@@ -25172,17 +25575,20 @@ False False True True
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,17): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P, object Q)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
                     .WithLocation(1, 17),
-                // (1,27): error CS8866: Record member 'C.Q' must be a readable instance property or field of type 'object' to match positional parameter 'Q'.
+                // (1,27): error CS8866: Record member 'C.Q' must be a readable instance property or field of type
+                // 'object' to match positional parameter 'Q'.
                 // record C(object P, object Q)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "Q")
                     .WithArguments("C.Q", "object", "Q")
                     .WithLocation(1, 27),
-                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the property with that name?
+                // (1,27): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(object P, object Q)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Q")
                     .WithArguments("Q")
@@ -25237,7 +25643,8 @@ record B(object Q) : A
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "Q")
                     .WithArguments("A", "Q")
                     .WithLocation(6, 16),
-                // (8,17): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the property with that name?
+                // (8,17): warning CS8907: Parameter 'Q' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record B(object Q) : A
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Q")
                     .WithArguments("Q")
@@ -26459,7 +26866,8 @@ record C(int X) : Base(Y)
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (11,24): error CS0120: An object reference is required for the non-static field, method, or property 'C.Y'
+                // (11,24): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'C.Y'
                 // record C(int X) : Base(Y)
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Y")
                     .WithArguments("C.Y")
@@ -26516,7 +26924,8 @@ record C(dynamic X) : Base(X)
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (11,27): error CS1975: The constructor call needs to be dynamically dispatched, but cannot be because it is part of a constructor initializer. Consider casting the dynamic arguments.
+                // (11,27): error CS1975: The constructor call needs to be dynamically dispatched, but cannot be
+                // because it is part of a constructor initializer. Consider casting the dynamic arguments.
                 // record C(dynamic X) : Base(X)
                 Diagnostic(ErrorCode.ERR_NoDynamicPhantomOnBaseCtor, "(X)").WithLocation(11, 27)
             );
@@ -26906,7 +27315,8 @@ record C(int X, int y)
 }";
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (12,28): error CS0136: A local or parameter named 'y' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (12,28): error CS0136: A local or parameter named 'y' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //     : Base(Test(X, out var y),
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y")
                     .WithArguments("y")
@@ -27889,12 +28299,14 @@ True
 True"
                 )
                 .VerifyDiagnostics(
-                    // (3,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                    // (3,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B1(int P) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                         .WithArguments("P")
                         .WithLocation(3, 15),
-                    // (8,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                    // (8,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B2(int P) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                         .WithArguments("P")
@@ -28021,17 +28433,20 @@ True
 True"
                 )
                 .VerifyDiagnostics(
-                    // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record A(int P)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                         .WithArguments("P")
                         .WithLocation(2, 14),
-                    // (7,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                    // (7,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B1(int P) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                         .WithArguments("P")
                         .WithLocation(7, 15),
-                    // (11,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                    // (11,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B2(int P) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                         .WithArguments("P")
@@ -28515,7 +28930,8 @@ True
 True"
                 )
                 .VerifyDiagnostics(
-                    // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (4,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record A(int X)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
@@ -28525,17 +28941,20 @@ True"
                     Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
                         .WithArguments("B")
                         .WithLocation(15, 25),
-                    // (17,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (17,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(17, 14),
-                    // (17,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                    // (17,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                         .WithArguments("Y")
                         .WithLocation(17, 21),
-                    // (17,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                    // (17,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
                         .WithArguments("Z")
@@ -28709,32 +29128,38 @@ True
 True"
                 )
                 .VerifyDiagnostics(
-                    // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record A(int X)
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(2, 14),
-                    // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (7,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B(int X, int Y) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(7, 14),
-                    // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                    // (7,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record B(int X, int Y) : A
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                         .WithArguments("Y")
                         .WithLocation(7, 21),
-                    // (12,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                    // (12,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                         .WithArguments("X")
                         .WithLocation(12, 14),
-                    // (12,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the property with that name?
+                    // (12,21): warning CS8907: Parameter 'Y' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Y")
                         .WithArguments("Y")
                         .WithLocation(12, 21),
-                    // (12,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the property with that name?
+                    // (12,28): warning CS8907: Parameter 'Z' is unread. Did you forget to use it to initialize the
+                    // property with that name?
                     // record C(int X, int Y, int Z) : B
                     Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "Z")
                         .WithArguments("Z")
@@ -28937,12 +29362,14 @@ record B : A;
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,27): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (3,27): error CS8872: 'A.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected System.Type EqualityContract => typeof(A);
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("A.EqualityContract")
                     .WithLocation(3, 27),
-                // (5,8): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract' because it is not marked virtual, abstract, or override
+                // (5,8): error CS0506: 'B.EqualityContract': cannot override inherited member 'A.EqualityContract'
+                // because it is not marked virtual, abstract, or override
                 // record B : A;
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.EqualityContract", "A.EqualityContract")
@@ -28963,12 +29390,14 @@ record C : B;
 ";
             var comp = CreateCompilation(source, targetFramework: TargetFramework.NetLatest);
             comp.VerifyDiagnostics(
-                // (4,43): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is not sealed.
+                // (4,43): error CS8872: 'B.EqualityContract' must allow overriding because the containing record is
+                // not sealed.
                 //     protected sealed override System.Type EqualityContract => typeof(B);
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "EqualityContract")
                     .WithArguments("B.EqualityContract")
                     .WithLocation(4, 43),
-                // (6,8): error CS0239: 'C.EqualityContract': cannot override inherited member 'B.EqualityContract' because it is sealed
+                // (6,8): error CS0239: 'C.EqualityContract': cannot override inherited member 'B.EqualityContract'
+                // because it is sealed
                 // record C : B;
                 Diagnostic(ErrorCode.ERR_CantOverrideSealed, "C")
                     .WithArguments("C.EqualityContract", "B.EqualityContract")
@@ -29335,7 +29764,8 @@ record C;
                 WellKnownMember.System_Collections_Generic_EqualityComparer_T__GetHashCode
             );
             comp.VerifyEmitDiagnostics(
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.GetHashCode'
                 // record C;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record C;")
                     .WithArguments("System.Collections.Generic.EqualityComparer`1", "GetHashCode")
@@ -29359,7 +29789,8 @@ record C;
                 WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
             );
             comp.VerifyEmitDiagnostics(
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // record C;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "record C;")
                     .WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default")
@@ -29387,7 +29818,8 @@ record C
                 WellKnownMember.System_Collections_Generic_EqualityComparer_T__get_Default
             );
             comp.VerifyEmitDiagnostics(
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // record C
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -29398,7 +29830,8 @@ record C
                     )
                     .WithArguments("System.Collections.Generic.EqualityComparer`1", "get_Default")
                     .WithLocation(2, 1),
-                // (2,1): error CS0656: Missing compiler required member 'System.Collections.Generic.EqualityComparer`1.get_Default'
+                // (2,1): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.EqualityComparer`1.get_Default'
                 // record C
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -29438,7 +29871,8 @@ class Program
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,9): error CS0411: The type arguments for method 'Program.F<T>(IEquatable<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (11,9): error CS0411: The type arguments for method 'Program.F<T>(IEquatable<T>)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //         F(new B());
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
                     .WithArguments("Program.F<T>(System.IEquatable<T>)")
@@ -30028,7 +30462,8 @@ record B : A<int>, System.IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
                     .WithArguments("System.Type")
                     .WithLocation(1, 8),
-                // (1,22): error CS0234: The type or namespace name 'IEquatable<>' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                // (1,22): error CS0234: The type or namespace name 'IEquatable<>' does not exist in the namespace
+                // 'System' (are you missing an assembly reference?)
                 // record A<T> : System.IEquatable<A<T>>;
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "IEquatable<A<T>>")
                     .WithArguments("IEquatable<>", "System")
@@ -30048,7 +30483,8 @@ record B : A<int>, System.IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "B")
                     .WithArguments("System.Type")
                     .WithLocation(2, 8),
-                // (2,27): error CS0234: The type or namespace name 'IEquatable<>' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                // (2,27): error CS0234: The type or namespace name 'IEquatable<>' does not exist in the namespace
+                // 'System' (are you missing an assembly reference?)
                 // record B : A<int>, System.IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "IEquatable<B>")
                     .WithArguments("IEquatable<>", "System")
@@ -30144,7 +30580,8 @@ record B : A<int>, IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "A")
                     .WithArguments("System.Type")
                     .WithLocation(2, 8),
-                // (2,15): error CS0246: The type or namespace name 'IEquatable<>' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,15): error CS0246: The type or namespace name 'IEquatable<>' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 // record A<T> : IEquatable<A<T>>;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IEquatable<A<T>>")
                     .WithArguments("IEquatable<>")
@@ -30164,7 +30601,8 @@ record B : A<int>, IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "B")
                     .WithArguments("System.Type")
                     .WithLocation(3, 8),
-                // (3,20): error CS0246: The type or namespace name 'IEquatable<>' could not be found (are you missing a using directive or an assembly reference?)
+                // (3,20): error CS0246: The type or namespace name 'IEquatable<>' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 // record B : A<int>, IEquatable<B>;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "IEquatable<B>")
                     .WithArguments("IEquatable<>")
@@ -30274,7 +30712,8 @@ class Program
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (1,8): error CS0737: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'. 'A.Equals(A)' cannot implement an interface member because it is not public.
+                // (1,8): error CS0737: 'A' does not implement interface member 'IEquatable<A>.Equals(A)'.
+                // 'A.Equals(A)' cannot implement an interface member because it is not public.
                 // record A
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic, "A")
                     .WithArguments("A", "System.IEquatable<A>.Equals(A)", "A.Equals(A)")
@@ -30305,7 +30744,8 @@ record B : A
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (3,17): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not sealed.
+                // (3,17): error CS8872: 'A.Equals(A)' must allow overriding because the containing record is not
+                // sealed.
                 //     public bool Equals(A other) => false;
                 Diagnostic(ErrorCode.ERR_NotOverridableAPIInRecord, "Equals")
                     .WithArguments("A.Equals(A)")
@@ -30315,7 +30755,8 @@ record B : A
                 Diagnostic(ErrorCode.WRN_RecordEqualsWithoutGetHashCode, "Equals")
                     .WithArguments("A")
                     .WithLocation(3, 17),
-                // (5,8): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is not marked virtual, abstract, or override
+                // (5,8): error CS0506: 'B.Equals(A?)': cannot override inherited member 'A.Equals(A)' because it is
+                // not marked virtual, abstract, or override
                 // record B : A
                 Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "B")
                     .WithArguments("B.Equals(A?)", "A.Equals(A)")
@@ -30352,7 +30793,8 @@ class A<T>
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,12): error CS0695: 'A<T>.B<U>' cannot implement both 'IEquatable<A<T>.B<T>>' and 'IEquatable<A<T>.B<U>>' because they may unify for some type parameter substitutions
+                // (4,12): error CS0695: 'A<T>.B<U>' cannot implement both 'IEquatable<A<T>.B<T>>' and
+                // 'IEquatable<A<T>.B<U>>' because they may unify for some type parameter substitutions
                 //     record B<U> : IEquatable<B<T>>
                 Diagnostic(ErrorCode.ERR_UnifyingInterfaceInstantiations, "B")
                     .WithArguments(
@@ -30651,7 +31093,8 @@ record R(ref int P1, out int P2);
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (2,8): error CS0177: The out parameter 'P2' must be assigned to before control leaves the current method
+                // (2,8): error CS0177: The out parameter 'P2' must be assigned to before control leaves the current
+                // method
                 // record R(ref int P1, out int P2);
                 Diagnostic(ErrorCode.ERR_ParamUnassigned, "R")
                     .WithArguments("P2")
@@ -30828,7 +31271,8 @@ record R(int P = 1)
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record R(int P = 1)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -30879,7 +31323,8 @@ record R(int P = 42)
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record R(int P = 42)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -31249,7 +31694,9 @@ public record Test(
             );
 
             comp.VerifyDiagnostics(
-                // (8,6): warning CS0657: 'method' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'field, property, param'. All attributes in this block will be ignored.
+                // (8,6): warning CS0657: 'method' is not a valid attribute location for this declaration. Valid
+                // attribute locations for this declaration are 'field, property, param'. All attributes in this block
+                // will be ignored.
                 //     [method: A]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "method")
                     .WithArguments("method", "field, property, param")
@@ -31340,17 +31787,20 @@ public record Test(
             );
 
             comp.VerifyDiagnostics(
-                // (27,6): warning CS0657: 'field' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
+                // (27,6): warning CS0657: 'field' is not a valid attribute location for this declaration. Valid
+                // attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
                 //     [field: A]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "field")
                     .WithArguments("field", "param")
                     .WithLocation(27, 6),
-                // (28,6): warning CS0657: 'property' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
+                // (28,6): warning CS0657: 'property' is not a valid attribute location for this declaration. Valid
+                // attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
                 //     [property: B]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "property")
                     .WithArguments("property", "param")
                     .WithLocation(28, 6),
-                // (31,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (31,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 //     int P1) : Base
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
@@ -31444,17 +31894,20 @@ public record Test(
             );
 
             comp.VerifyDiagnostics(
-                // (27,6): warning CS0657: 'field' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
+                // (27,6): warning CS0657: 'field' is not a valid attribute location for this declaration. Valid
+                // attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
                 //     [field: A]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "field")
                     .WithArguments("field", "param")
                     .WithLocation(27, 6),
-                // (28,6): warning CS0657: 'property' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
+                // (28,6): warning CS0657: 'property' is not a valid attribute location for this declaration. Valid
+                // attribute locations for this declaration are 'param'. All attributes in this block will be ignored.
                 //     [property: B]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "property")
                     .WithArguments("property", "param")
                     .WithLocation(28, 6),
-                // (31,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (31,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 //     int P1) : Base
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
@@ -31534,7 +31987,8 @@ public record Test(
             );
 
             comp.VerifyDiagnostics(
-                // (20,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the property with that name?
+                // (20,9): warning CS8907: Parameter 'P1' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 //     int P1) : Base
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P1")
                     .WithArguments("P1")
@@ -31643,7 +32097,8 @@ public class C
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (10,23): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
+                // (10,23): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic
+                // type or method 'R<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 //         var r = new R<string?>("R");
                 Diagnostic(
                         ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
@@ -31651,7 +32106,8 @@ public class C
                     )
                     .WithArguments("R<T>", "T", "string?")
                     .WithLocation(10, 23),
-                // (11,25): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'R2<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
+                // (11,25): warning CS8634: The type 'string?' cannot be used as type parameter 'T' in the generic
+                // type or method 'R2<T>'. Nullability of type argument 'string?' doesn't match 'class' constraint.
                 //         var r2 = new R2<string?>("R2");
                 Diagnostic(
                         ErrorCode.WRN_NullabilityMismatchInTypeParameterReferenceTypeConstraint,
@@ -31686,12 +32142,14 @@ public class C
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (9,19): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'R<T>'
+                // (9,19): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                // in the generic type or method 'R<T>'
                 //         _ = new R<int>(1);
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
                     .WithArguments("R<T>", "T", "int")
                     .WithLocation(9, 19),
-                // (10,20): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'R2<T>'
+                // (10,20): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T' in the generic type or method 'R2<T>'
                 //         _ = new R2<int>(2);
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "int")
                     .WithArguments("R2<T>", "T", "int")
@@ -31733,12 +32191,14 @@ record B
             if (c.Assembly.RuntimeSupportsCovariantReturnsOfClasses)
             {
                 c.VerifyDiagnostics(
-                    // (8,12): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than class 'B.C'
+                    // (8,12): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than
+                    // class 'B.C'
                     //     record C : X<C.D.E>
                     Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C")
                         .WithArguments("B.C", "X<B.C.D.E>")
                         .WithLocation(8, 12),
-                    // (8,12): error CS0051: Inconsistent accessibility: parameter type 'X<B.C.D.E>' is less accessible than method 'B.C.Equals(X<B.C.D.E>?)'
+                    // (8,12): error CS0051: Inconsistent accessibility: parameter type 'X<B.C.D.E>' is less accessible
+                    // than method 'B.C.Equals(X<B.C.D.E>?)'
                     //     record C : X<C.D.E>
                     Diagnostic(ErrorCode.ERR_BadVisParamType, "C")
                         .WithArguments("B.C.Equals(X<B.C.D.E>?)", "X<B.C.D.E>")
@@ -31748,17 +32208,20 @@ record B
             else
             {
                 c.VerifyDiagnostics(
-                    // (8,12): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than class 'B.C'
+                    // (8,12): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than
+                    // class 'B.C'
                     //     record C : X<C.D.E>
                     Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C")
                         .WithArguments("B.C", "X<B.C.D.E>")
                         .WithLocation(8, 12),
-                    // (8,12): error CS0050: Inconsistent accessibility: return type 'X<B.C.D.E>' is less accessible than method 'B.C.<Clone>$()'
+                    // (8,12): error CS0050: Inconsistent accessibility: return type 'X<B.C.D.E>' is less accessible
+                    // than method 'B.C.<Clone>$()'
                     //     record C : X<C.D.E>
                     Diagnostic(ErrorCode.ERR_BadVisReturnType, "C")
                         .WithArguments("B.C.<Clone>$()", "X<B.C.D.E>")
                         .WithLocation(8, 12),
-                    // (8,12): error CS0051: Inconsistent accessibility: parameter type 'X<B.C.D.E>' is less accessible than method 'B.C.Equals(X<B.C.D.E>?)'
+                    // (8,12): error CS0051: Inconsistent accessibility: parameter type 'X<B.C.D.E>' is less accessible
+                    // than method 'B.C.Equals(X<B.C.D.E>?)'
                     //     record C : X<C.D.E>
                     Diagnostic(ErrorCode.ERR_BadVisParamType, "C")
                         .WithArguments("B.C.Equals(X<B.C.D.E>?)", "X<B.C.D.E>")
@@ -31845,7 +32308,8 @@ record C : B
 ";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (10,7): error CS0250: Do not directly call your base type Finalize method. It is called automatically from your destructor.
+                    // (10,7): error CS0250: Do not directly call your base type Finalize method. It is called
+                    // automatically from your destructor.
                     Diagnostic(ErrorCode.ERR_CallingBaseFinalizeDeprecated, "base.Finalize()")
                 );
         }
@@ -31890,7 +32354,8 @@ partial public record C  // CS0267
 
             CreateCompilation(test)
                 .VerifyDiagnostics(
-                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // (2,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                    // 'struct', 'interface', or a method return type.
                     // partial public class C  // CS0267
                     Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(2, 1)
                 );
@@ -32019,12 +32484,14 @@ public record Derived : Base<(int a, int b)>
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,37): error CS0553: 'Derived.explicit operator Derived(Base<(int, int)>)': user-defined conversions to or from a base type are not allowed
+                // (9,37): error CS0553: 'Derived.explicit operator Derived(Base<(int, int)>)': user-defined
+                // conversions to or from a base type are not allowed
                 //     public static explicit operator Derived(Base<(int, int)> x)
                 Diagnostic(ErrorCode.ERR_ConversionWithBase, "Derived")
                     .WithArguments("Derived.explicit operator Derived(Base<(int, int)>)")
                     .WithLocation(9, 37),
-                // (5,37): error CS0553: 'Derived.explicit operator Base<(int, int)>(Derived)': user-defined conversions to or from a base type are not allowed
+                // (5,37): error CS0553: 'Derived.explicit operator Base<(int, int)>(Derived)': user-defined
+                // conversions to or from a base type are not allowed
                 //     public static explicit operator Base<(int, int)>(Derived x)
                 Diagnostic(ErrorCode.ERR_ConversionWithBase, "Base<(int, int)>")
                     .WithArguments("Derived.explicit operator Base<(int, int)>(Derived)")
@@ -32048,7 +32515,8 @@ public record D : B {}
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (4,37): error CS0554: 'B.implicit operator B(D)': user-defined conversions to or from a derived type are not allowed
+                // (4,37): error CS0554: 'B.implicit operator B(D)': user-defined conversions to or from a derived
+                // type are not allowed
                 //     public static implicit operator B(D d) // CS0554
                 Diagnostic(ErrorCode.ERR_ConversionWithDerived, "B")
                     .WithArguments("B.implicit operator B(D)")
@@ -32119,12 +32587,14 @@ public partial record C1
                     Diagnostic(ErrorCode.ERR_BadMemberFlag, "NV")
                         .WithArguments("static")
                         .WithLocation(2, 15),
-                    // (6,23): error CS0051: Inconsistent accessibility: parameter type 'NV' is less accessible than method 'C1.Equals(NV?)'
+                    // (6,23): error CS0051: Inconsistent accessibility: parameter type 'NV' is less accessible than
+                    // method 'C1.Equals(NV?)'
                     // public partial record C1
                     Diagnostic(ErrorCode.ERR_BadVisParamType, "C1")
                         .WithArguments("C1.Equals(NV?)", "NV")
                         .WithLocation(6, 23),
-                    // (10,16): error CS0060: Inconsistent accessibility: base class 'NV' is less accessible than class 'C1'
+                    // (10,16): error CS0060: Inconsistent accessibility: base class 'NV' is less accessible than class
+                    // 'C1'
                     // partial record C1 : NV
                     Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C1")
                         .WithArguments("C1", "NV")
@@ -32139,17 +32609,20 @@ public partial record C1
                     Diagnostic(ErrorCode.ERR_BadMemberFlag, "NV")
                         .WithArguments("static")
                         .WithLocation(2, 15),
-                    // (6,23): error CS0050: Inconsistent accessibility: return type 'NV' is less accessible than method 'C1.<Clone>$()'
+                    // (6,23): error CS0050: Inconsistent accessibility: return type 'NV' is less accessible than method
+                    // 'C1.<Clone>$()'
                     // public partial record C1
                     Diagnostic(ErrorCode.ERR_BadVisReturnType, "C1")
                         .WithArguments("C1.<Clone>$()", "NV")
                         .WithLocation(6, 23),
-                    // (6,23): error CS0051: Inconsistent accessibility: parameter type 'NV' is less accessible than method 'C1.Equals(NV?)'
+                    // (6,23): error CS0051: Inconsistent accessibility: parameter type 'NV' is less accessible than
+                    // method 'C1.Equals(NV?)'
                     // public partial record C1
                     Diagnostic(ErrorCode.ERR_BadVisParamType, "C1")
                         .WithArguments("C1.Equals(NV?)", "NV")
                         .WithLocation(6, 23),
-                    // (10,16): error CS0060: Inconsistent accessibility: base class 'NV' is less accessible than class 'C1'
+                    // (10,16): error CS0060: Inconsistent accessibility: base class 'NV' is less accessible than class
+                    // 'C1'
                     // partial record C1 : NV
                     Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C1")
                         .WithArguments("C1", "NV")
@@ -34241,7 +34714,8 @@ class Program
 
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (8,17): error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'C.C(int)'
+                // (8,17): error CS7036: There is no argument given that corresponds to the required parameter 'x'
+                // of 'C.C(int)'
                 //         _ = new C();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C")
                     .WithArguments("x", "C.C(int)")
@@ -34856,12 +35330,14 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (3,18): warning CS1572: XML comment has a param tag for 'Error', but there is no parameter by that name
+                // (3,18): warning CS1572: XML comment has a param tag for 'Error', but there is no parameter by
+                // that name
                 // /// <param name="Error"></param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "Error")
                     .WithArguments("Error")
                     .WithLocation(3, 18),
-                // (3,18): warning CS1572: XML comment has a param tag for 'Error', but there is no parameter by that name
+                // (3,18): warning CS1572: XML comment has a param tag for 'Error', but there is no parameter by
+                // that name
                 // /// <param name="Error"></param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "Error")
                     .WithArguments("Error")
@@ -34971,12 +35447,14 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (2,38): warning CS1734: XML comment on 'C' has a paramref tag for 'Error', but there is no parameter by that name
+                // (2,38): warning CS1734: XML comment on 'C' has a paramref tag for 'Error', but there is no
+                // parameter by that name
                 // /// <summary>Summary <paramref name="Error"/></summary>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "Error")
                     .WithArguments("Error", "C")
                     .WithLocation(2, 38),
-                // (2,38): warning CS1734: XML comment on 'C.C(int)' has a paramref tag for 'Error', but there is no parameter by that name
+                // (2,38): warning CS1734: XML comment on 'C.C(int)' has a paramref tag for 'Error', but there is no
+                // parameter by that name
                 // /// <summary>Summary <paramref name="Error"/></summary>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamRefTag, "Error")
                     .WithArguments("Error", "C.C(int)")
@@ -35244,7 +35722,8 @@ namespace System.Runtime.CompilerServices
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "E")
                     .WithArguments("E.E(int)")
                     .WithLocation(2, 23),
-                // (5,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
+                // (5,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that
+                // name
                 // /// <param name="I1">Description for I1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "I1")
                     .WithArguments("I1")
@@ -35301,7 +35780,8 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (3,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
+                // (3,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that
+                // name
                 // /// <param name="I1">Description for I1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "I1")
                     .WithArguments("I1")
@@ -35368,7 +35848,8 @@ namespace System.Runtime.CompilerServices
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "C")
                     .WithArguments("C.C(int)")
                     .WithLocation(2, 23),
-                // (5,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
+                // (5,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that
+                // name
                 // /// <param name="I1">Description for I1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "I1")
                     .WithArguments("I1")
@@ -35496,7 +35977,8 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (7,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that name
+                // (7,18): warning CS1572: XML comment has a param tag for 'I1', but there is no parameter by that
+                // name
                 // /// <param name="I1">Description2 for I1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "I1")
                     .WithArguments("I1")
@@ -35573,7 +36055,8 @@ namespace System.Runtime.CompilerServices
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "E")
                     .WithArguments("E.E(int)")
                     .WithLocation(2, 23),
-                // (5,18): warning CS1572: XML comment has a param tag for 'S1', but there is no parameter by that name
+                // (5,18): warning CS1572: XML comment has a param tag for 'S1', but there is no parameter by that
+                // name
                 // /// <param name="S1">Description2 for S1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "S1")
                     .WithArguments("S1")
@@ -35631,7 +36114,8 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (7,18): warning CS1572: XML comment has a param tag for 'S1', but there is no parameter by that name
+                // (7,18): warning CS1572: XML comment has a param tag for 'S1', but there is no parameter by that
+                // name
                 // /// <param name="S1">Description2 for S1</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "S1")
                     .WithArguments("S1")
@@ -35774,32 +36258,38 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularWithDocumentationComments
             );
             comp.VerifyDiagnostics(
-                // (11,22): warning CS1572: XML comment has a param tag for 'O1', but there is no parameter by that name
+                // (11,22): warning CS1572: XML comment has a param tag for 'O1', but there is no parameter by that
+                // name
                 //     /// <param name="O1">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "O1")
                     .WithArguments("O1")
                     .WithLocation(11, 22),
-                // (11,22): warning CS1572: XML comment has a param tag for 'O1', but there is no parameter by that name
+                // (11,22): warning CS1572: XML comment has a param tag for 'O1', but there is no parameter by that
+                // name
                 //     /// <param name="O1">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "O1")
                     .WithArguments("O1")
                     .WithLocation(11, 22),
-                // (12,22): warning CS1572: XML comment has a param tag for 'P1', but there is no parameter by that name
+                // (12,22): warning CS1572: XML comment has a param tag for 'P1', but there is no parameter by that
+                // name
                 //     /// <param name="P1">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "P1")
                     .WithArguments("P1")
                     .WithLocation(12, 22),
-                // (12,22): warning CS1572: XML comment has a param tag for 'P1', but there is no parameter by that name
+                // (12,22): warning CS1572: XML comment has a param tag for 'P1', but there is no parameter by that
+                // name
                 //     /// <param name="P1">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "P1")
                     .WithArguments("P1")
                     .WithLocation(12, 22),
-                // (13,22): warning CS1572: XML comment has a param tag for 'C', but there is no parameter by that name
+                // (13,22): warning CS1572: XML comment has a param tag for 'C', but there is no parameter by that
+                // name
                 //     /// <param name="C">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "C")
                     .WithArguments("C")
                     .WithLocation(13, 22),
-                // (13,22): warning CS1572: XML comment has a param tag for 'C', but there is no parameter by that name
+                // (13,22): warning CS1572: XML comment has a param tag for 'C', but there is no parameter by that
+                // name
                 //     /// <param name="C">Error</param>
                 Diagnostic(ErrorCode.WRN_UnmatchedParamTag, "C")
                     .WithArguments("C")
@@ -35864,12 +36354,14 @@ public record C(int I) : Base(I)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding
+                // was intended.
                 //     public void I() { } // hiding
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
@@ -35894,12 +36386,14 @@ public record C(int I) : Base(I)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding
+                // was intended.
                 //     public void I() { } // hiding
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
@@ -35924,12 +36418,14 @@ public record C(int I) : Base(I)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type 'int' to match positional parameter 'I'.
+                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'I'.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "I")
                     .WithArguments("C.I", "int", "I")
                     .WithLocation(7, 21),
-                // (9,22): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,22): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public const int I = 0;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -35955,7 +36451,8 @@ record A(int X)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyEmitDiagnostics(
-                // (8,10): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (8,10): error CS8773: Feature 'positional fields in records' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // record A(int X)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "int X")
                     .WithArguments("positional fields in records", "10.0")
@@ -36072,12 +36569,14 @@ record A(int X)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'X' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record A(int X)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "X")
                     .WithArguments("X")
                     .WithLocation(2, 14),
-                // (4,16): warning CS0649: Field 'A.X' is never assigned to, and will always have its default value 0
+                // (4,16): warning CS0649: Field 'A.X' is never assigned to, and will always have its default value
+                // 0
                 //     public int X;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "X")
                     .WithArguments("A.X", "0")
@@ -36105,7 +36604,8 @@ public record C(int I) : Base
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
-                // (12,16): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (12,16): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public int I = I;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36149,7 +36649,8 @@ public record C(int I) : Base
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
-                // (12,16): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (12,16): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public int I { get; set; } = I;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36228,12 +36729,14 @@ public record C(int I) : Base(I)
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type 'int' to match positional parameter 'I'.
+                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'I'.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "I")
                     .WithArguments("C.I", "int", "I")
                     .WithLocation(7, 21),
-                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public static int I = 42;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36242,12 +36745,14 @@ public record C(int I) : Base(I)
 
             comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
-                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type 'int' to match positional parameter 'I'.
+                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'I'.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "I")
                     .WithArguments("C.I", "int", "I")
                     .WithLocation(7, 21),
-                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public static int I = 42;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36268,12 +36773,14 @@ public record C(int I) : Base(I)
 ";
             comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type 'int' to match positional parameter 'I'.
+                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'I'.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "I")
                     .WithArguments("C.I", "int", "I")
                     .WithLocation(7, 21),
-                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,23): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public static int I { get; set; } = 42;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36294,7 +36801,8 @@ record A(int X)
 ";
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics(
-                // (2,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type 'int' to match positional parameter 'X'.
+                // (2,14): error CS8866: Record member 'A.X' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'X'.
                 // record A(int X)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "X")
                     .WithArguments("A.X", "int", "X")
@@ -36318,22 +36826,26 @@ record C2(int P)
 ";
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
-                // (2,14): error CS8866: Record member 'C.P' must be a readable instance property or field of type 'int' to match positional parameter 'P'.
+                // (2,14): error CS8866: Record member 'C.P' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P'.
                 // record C(int P)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
                     .WithArguments("C.P", "int", "P")
                     .WithLocation(2, 14),
-                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (2,14): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C(int P)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
                     .WithLocation(2, 14),
-                // (6,15): error CS8866: Record member 'C2.P' must be a readable instance property or field of type 'int' to match positional parameter 'P'.
+                // (6,15): error CS8866: Record member 'C2.P' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P'.
                 // record C2(int P)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
                     .WithArguments("C2.P", "int", "P")
                     .WithLocation(6, 15),
-                // (6,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the property with that name?
+                // (6,15): warning CS8907: Parameter 'P' is unread. Did you forget to use it to initialize the
+                // property with that name?
                 // record C2(int P)
                 Diagnostic(ErrorCode.WRN_UnreadRecordParameter, "P")
                     .WithArguments("P")
@@ -36398,7 +36910,8 @@ record C(int P)
 }";
             var comp = CreateCompilation(src, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (2,14): error CS8866: Record member 'C.P' must be a readable instance property or field of type 'int' to match positional parameter 'P'.
+                // (2,14): error CS8866: Record member 'C.P' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'P'.
                 // record C(int P)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "P")
                     .WithArguments("C.P", "int", "P")
@@ -36423,12 +36936,14 @@ public record C(int I) : Base(I)
 ";
             var expected = new[]
             {
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding
+                // was intended.
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
@@ -36460,12 +36975,14 @@ public record C(int I) : Base(I)
 ";
             var expected = new[]
             {
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,17): warning CS0108: 'C.I()' hides inherited member 'Base.I'. Use the new keyword if hiding
+                // was intended.
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
@@ -36496,7 +37013,8 @@ public record C(int I) : Base(I) // 1
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I) // 1
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
@@ -36526,12 +37044,14 @@ public record C(int I) : Base(I)
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (11,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (11,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(11, 21),
-                // (13,17): warning CS0108: 'C.I<T>()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (13,17): warning CS0108: 'C.I<T>()' hides inherited member 'Base.I'. Use the new keyword if
+                // hiding was intended.
                 //     public void I<T>() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I<T>()", "Base.I")
@@ -36559,12 +37079,14 @@ public record C(int I) : Base(I)
 ";
             var expected = new[]
             {
-                // (10,21): error CS8913: The positional member 'GrandBase.I' found corresponding to this parameter is hidden.
+                // (10,21): error CS8913: The positional member 'GrandBase.I' found corresponding to this parameter
+                // is hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("GrandBase.I")
                     .WithLocation(10, 21),
-                // (12,17): warning CS0108: 'C.I()' hides inherited member 'GrandBase.I'. Use the new keyword if hiding was intended.
+                // (12,17): warning CS0108: 'C.I()' hides inherited member 'GrandBase.I'. Use the new keyword if
+                // hiding was intended.
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "GrandBase.I")
@@ -36674,12 +37196,14 @@ public record C(int I) : Base(I)
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,18): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,18): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public class I { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36705,12 +37229,14 @@ public record C(int I) : Base(I)
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is hidden.
+                // (7,21): error CS8913: The positional member 'Base.I' found corresponding to this parameter is
+                // hidden.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_HiddenPositionalMember, "I")
                     .WithArguments("Base.I")
                     .WithLocation(7, 21),
-                // (9,32): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,32): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public event System.Action I;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36741,12 +37267,14 @@ public record C(int I) : Base(I)
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyEmitDiagnostics(
-                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type 'int' to match positional parameter 'I'.
+                // (7,21): error CS8866: Record member 'C.I' must be a readable instance property or field of type
+                // 'int' to match positional parameter 'I'.
                 // public record C(int I) : Base(I)
                 Diagnostic(ErrorCode.ERR_BadRecordMemberForPositionalParameter, "I")
                     .WithArguments("C.I", "int", "I")
                     .WithLocation(7, 21),
-                // (9,25): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (9,25): warning CS0108: 'C.I' hides inherited member 'Base.I'. Use the new keyword if hiding was
+                // intended.
                 //     public const string I = null;
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I", "Base.I")
@@ -36773,7 +37301,8 @@ record Derived(int I) : Base
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyEmitDiagnostics(
-                // (8,16): warning CS0108: 'Derived.I()' hides inherited member 'Base.I'. Use the new keyword if hiding was intended.
+                // (8,16): warning CS0108: 'Derived.I()' hides inherited member 'Base.I'. Use the new keyword if
+                // hiding was intended.
                 //     public int I() { return 0; }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("Derived.I()", "Base.I")
@@ -36895,7 +37424,8 @@ record R2(int X) : Error(X)
 ";
             var comp = CreateCompilation(src);
             comp.VerifyEmitDiagnostics(
-                // (2,20): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,20): error CS0246: The type or namespace name 'Error' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record R2(int X) : Error(X)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
                     .WithArguments("Error")
@@ -37085,7 +37615,8 @@ public record C(int I) : B(I);";
 
             var sourceB = "record D(int I) : C(I);";
 
-            // CS1701: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may need to supply runtime policy
+            // CS1701: Assuming assembly reference '{0}' used by '{1}' matches identity '{2}' of '{3}', you may
+            // need to supply runtime policy
             var compB = CreateCompilation(
                 sourceB,
                 references: new[] { refA },
@@ -37202,7 +37733,8 @@ public class C : // 3
                 // (2,11): error CS1031: Type expected
                 // record R : // 1
                 Diagnostic(ErrorCode.ERR_TypeExpected, "").WithLocation(2, 11),
-                // (6,13): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a using directive or an assembly reference?)
+                // (6,13): error CS0246: The type or namespace name 'Missing' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // record R2 : Missing // 2
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Missing")
                     .WithArguments("Missing")
@@ -37230,52 +37762,62 @@ record R1(int x);
             );
 
             compilation1.VerifyDiagnostics(
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Equals(R1?)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Equals(R1?)' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.Equals(R1?)", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.ToString()' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.ToString()' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.ToString()", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Deconstruct(out int)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Deconstruct(out int)' must be
+                // extern or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.Deconstruct(out int)", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.<Clone>$()' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.<Clone>$()' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.<Clone>$()", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.EqualityContract.get' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.EqualityContract.get' must be
+                // extern or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.EqualityContract.get", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Equals(object?)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.Equals(object?)' must be extern
+                // or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.Equals(object?)", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.GetHashCode()' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.GetHashCode()' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.GetHashCode()", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.operator ==(R1?, R1?)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.operator ==(R1?, R1?)' must be
+                // extern or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.operator ==(R1?, R1?)", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.operator !=(R1?, R1?)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.operator !=(R1?, R1?)' must be
+                // extern or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.operator !=(R1?, R1?)", "R1")
                     .WithLocation(4, 8),
-                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.PrintMembers(StringBuilder)' must be extern or abstract
+                // (4,8): error CS0423: Since 'R1' has the ComImport attribute, 'R1.PrintMembers(StringBuilder)'
+                // must be extern or abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "R1")
                     .WithArguments("R1.PrintMembers(System.Text.StringBuilder)", "R1")
@@ -37283,17 +37825,20 @@ record R1(int x);
                 // (4,8): error CS0669: A class with the ComImport attribute cannot have a user-defined constructor
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithUserCtor, "R1").WithLocation(4, 8),
-                // (4,11): error CS8028: 'R1': a class with the ComImport attribute cannot specify field initializers.
+                // (4,11): error CS8028: 'R1': a class with the ComImport attribute cannot specify field
+                // initializers.
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithInitializers, "int x")
                     .WithArguments("R1")
                     .WithLocation(4, 11),
-                // (4,15): error CS0423: Since 'R1' has the ComImport attribute, 'R1.x.get' must be extern or abstract
+                // (4,15): error CS0423: Since 'R1' has the ComImport attribute, 'R1.x.get' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "x")
                     .WithArguments("R1.x.get", "R1")
                     .WithLocation(4, 15),
-                // (4,15): error CS0423: Since 'R1' has the ComImport attribute, 'R1.x.init' must be extern or abstract
+                // (4,15): error CS0423: Since 'R1' has the ComImport attribute, 'R1.x.init' must be extern or
+                // abstract
                 // record R1(int x);
                 Diagnostic(ErrorCode.ERR_ComImportWithImpl, "x")
                     .WithArguments("R1.x.init", "R1")

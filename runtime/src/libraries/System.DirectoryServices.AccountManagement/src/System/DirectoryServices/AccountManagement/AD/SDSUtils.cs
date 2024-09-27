@@ -29,7 +29,8 @@ namespace System.DirectoryServices.AccountManagement
             // Since there should be no more multistore contexts, the owning context IS
             // the specific context
 
-            // If we know the type we should just construct it ourselves so that we don't need to incur the costs of reflection.
+            // If we know the type we should just construct it ourselves so that we don't need to incur the
+            // costs of reflection.
             // If this is an extension type then we must reflect teh constructor to create the object.
 
             if (typeof(UserPrincipal) == principalType)
@@ -387,7 +388,8 @@ namespace System.DirectoryServices.AccountManagement
                         == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
                     )
                     {
-                        // We have a special case of constraint violation here.  We know this is a password failure to convert to this
+                        // We have a special case of constraint violation here.  We know this is a password failure to
+                        // convert to this
                         // specialized type instead of the generic InvalidOperationException
                         throw (
                             new PasswordException(
@@ -443,7 +445,8 @@ namespace System.DirectoryServices.AccountManagement
                         == unchecked((int)ExceptionHelper.ERROR_HRESULT_CONSTRAINT_VIOLATION)
                     )
                     {
-                        // We have a special case of constraint violation here.  We know this is a password failure to convert to this
+                        // We have a special case of constraint violation here.  We know this is a password failure to
+                        // convert to this
                         // specialized type instead of the generic InvalidOperationException
                         throw (
                             new PasswordException(
@@ -856,15 +859,18 @@ namespace System.DirectoryServices.AccountManagement
 
             int uacValue = 0;
 
-            // We want to get the current value, so we can flip the appropriate bit while leaving the other bits as-is.
-            // If this is a to-be-inserted Principal, we should have already initialized the userAccountControl property
+            // We want to get the current value, so we can flip the appropriate bit while leaving the other bits
+            // as-is.
+            // If this is a to-be-inserted Principal, we should have already initialized the userAccountControl
+            // property
             if (de.Properties[suggestedProperty].Count > 0)
             {
                 Debug.Assert(de.Properties[suggestedProperty].Count == 1);
 
                 uacValue = (int)de.Properties[suggestedProperty][0];
 
-                // When we write to userAccountControl, we must OR the new value with the value of msDS-User-Account-Control-Computed.
+                // When we write to userAccountControl, we must OR the new value with the value of
+                // msDS-User-Account-Control-Computed.
                 // Otherwise we might mistakenly clear computed bits like UF_LOCKOUT.
                 if (!isSAM && de.Properties["msDS-User-Account-Control-Computed"].Count > 0)
                 {
@@ -874,7 +880,8 @@ namespace System.DirectoryServices.AccountManagement
             }
             else
             {
-                // We don't have the userAccountControl property, this must be a persisted principal.  Perhaps we don't have access
+                // We don't have the userAccountControl property, this must be a persisted principal.  Perhaps we
+                // don't have access
                 // to it.  In that case, we don't want to blindly overwrite whatever other bits might be there.
                 Debug.Assert(p.unpersisted == false);
                 throw new PrincipalOperationException(

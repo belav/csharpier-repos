@@ -43,7 +43,8 @@ namespace System.Diagnostics.PerformanceData
 
     internal static class PerfProviderCollection
     {
-        // Internal global PERFLIB V2 provider collection that contains a collection of PerfProvider objects.
+        // Internal global PERFLIB V2 provider collection that contains a collection of PerfProvider
+        // objects.
         // Use mutex to serialize collection initialization/update.
         //
         private static Object s_hiddenInternalSyncObject;
@@ -70,7 +71,8 @@ namespace System.Diagnostics.PerformanceData
         [System.Security.SecurityCritical]
         internal static PerfProvider QueryProvider(Guid providerGuid)
         {
-            // Most of the cases should be that the application contains 1 provider that supports several CounterSets;
+            // Most of the cases should be that the application contains 1 provider that supports several
+            // CounterSets;
             // that is, ContainsKey should succeed except for the first time.
             //
             lock (s_lockObject)
@@ -114,7 +116,8 @@ namespace System.Diagnostics.PerformanceData
         [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly")]
         internal static void RegisterCounterSet(Guid counterSetGuid)
         {
-            // Input counterSetGuid should not be registered yet. That is, ContainsKey() should fail most of times.
+            // Input counterSetGuid should not be registered yet. That is, ContainsKey() should fail most of
+            // times.
             //
             lock (s_lockObject)
             {

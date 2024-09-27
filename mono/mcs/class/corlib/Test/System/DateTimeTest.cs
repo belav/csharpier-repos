@@ -1435,7 +1435,8 @@ namespace MonoTests.System
                 {
                     DateTime.Parse("01-Sep-05", ci);
 
-                    // FIXME: Our UmAlQuraCalendar/HijriCalendar calendars support month days - 1 only (fail on last day in month)
+                    // FIXME: Our UmAlQuraCalendar/HijriCalendar calendars support month days - 1 only (fail on last day
+                    // in month)
                     if (ci.Calendar is UmAlQuraCalendar || ci.Calendar is HijriCalendar)
                         continue;
 

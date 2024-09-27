@@ -13,12 +13,12 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile TextControl class.
-     * All controls which contain embedded text extend from this control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile TextControl class.
+* All controls which contain embedded text extend from this control.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\TextControl.uex' path='docs/doc[@for="TextControl"]/*' />
     [ToolboxItem(false)]
     [AspNetHostingPermission(

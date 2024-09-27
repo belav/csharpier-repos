@@ -25,27 +25,27 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
     public class MemberClass
     {
-        /*
-        Example of calling it:
-        MemberClass staticMC =new MemberClass();
-        dynamic mc = staticMC;
-        bool myBool;
+/*
+Example of calling it:
+MemberClass staticMC =new MemberClass();
+dynamic mc = staticMC;
+bool myBool;
 
-        //This test the getter for the property
-        myBool = true;
-        staticMC.myBool = myBool; //We set the inner field
-        myBool = mc.Property_bool; //We use the property to get the field
-        if (myBool != true)
-        return 1;
+//This test the getter for the property
+myBool = true;
+staticMC.myBool = myBool; //We set the inner field
+myBool = mc.Property_bool; //We use the property to get the field
+if (myBool != true)
+return 1;
 
-        //This tests the setter for the property
-        myBool = true;
-        mc.Property_bool = myBool; //We set the property
-        myBool = statMc.myBool; // We get the inner field
-        if (myBool != true)
-        return 1;
+//This tests the setter for the property
+myBool = true;
+mc.Property_bool = myBool; //We set the property
+myBool = statMc.myBool; // We get the inner field
+if (myBool != true)
+return 1;
 
-        */
+*/
         public bool myBool = true;
         public bool? myBoolNull = true;
         public bool?[] myBoolNullArr = new bool?[2];
@@ -440,7 +440,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.regclass.regclass004.regclass004
 {
-    // <Title> Tests regular class regular property used in short-circuit boolean expression and ternary operator expression.</Title>
+    // <Title> Tests regular class regular property used in short-circuit boolean expression and ternary
+    // operator expression.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>
@@ -1017,7 +1018,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.regclass.regclass020.regclass020
 {
-    // <Title> Tests regular class regular property used in iterator that calls to a lambda expression.</Title>
+    // <Title> Tests regular class regular property used in iterator that calls to a lambda
+    // expression.</Title>
     // <Description>
     // foreach inside a using statement that uses the dynamic introduced by the using statement.
     // </Description>
@@ -1075,7 +1077,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regproperty.regclass.regclass021.regclass021
 {
-    // <Title> Tests regular class regular property used in object initializer inside a collection initializer.</Title>
+    // <Title> Tests regular class regular property used in object initializer inside a collection
+    // initializer.</Title>
     // <Description>
     // </Description>
     // <RelatedBugs></RelatedBugs>

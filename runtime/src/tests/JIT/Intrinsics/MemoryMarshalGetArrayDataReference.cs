@@ -580,7 +580,8 @@ namespace MemoryMarshalGetArrayDataReferenceTest
 
                 static void Create(out Vector<int> result, int[] values, int index)
                 {
-                    // We explicitly don't check for `null` because historically this has thrown `NullReferenceException` for perf reasons
+                    // We explicitly don't check for `null` because historically this has thrown
+                    // `NullReferenceException` for perf reasons
 
                     if ((index < 0) || ((values.Length - index) < Vector<int>.Count))
                     {

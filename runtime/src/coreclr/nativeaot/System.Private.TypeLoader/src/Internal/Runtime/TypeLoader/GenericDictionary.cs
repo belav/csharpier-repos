@@ -63,7 +63,8 @@ namespace Internal.Runtime.TypeLoader
         {
             Debug.Assert(_addressOfFirstCellSlot == IntPtr.Zero);
 
-            // Method dictionaries start with a header containing the hash code, which is not part of the native layout.
+            // Method dictionaries start with a header containing the hash code, which is not part of the native
+            // layout.
             // The real first slot is located after the header.
             // Use checked typecast to int to ensure there aren't any overflows/truncations
             IntPtr dictionaryWithHeader = MemoryHelpers.AllocateMemory(

@@ -5,7 +5,8 @@ using System.Runtime.CompilerServices;
 
 namespace System
 {
-    // Helper method for local caching of compatibility quirks. Keep this lean and simple - this file is included into
+    // Helper method for local caching of compatibility quirks. Keep this lean and simple - this file is
+    // included into
     // every framework assembly that implements any compatibility quirks.
     internal static partial class LocalAppContextSwitches
     {

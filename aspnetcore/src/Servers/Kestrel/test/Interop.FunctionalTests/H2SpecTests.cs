@@ -96,7 +96,8 @@ public class H2SpecTests : LoggedTest
                     }
                 );
 
-                // https://github.com/dotnet/aspnetcore/issues/11301 We should use Skip but it's broken at the moment.
+                // https://github.com/dotnet/aspnetcore/issues/11301 We should use Skip but it's broken at the
+                // moment.
                 if (supportsAlpn)
                 {
                     dataset.Add(

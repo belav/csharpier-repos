@@ -60,7 +60,8 @@ namespace GHTUtils.Data
         /// <summary>
         /// Constructor, Initializes the DbTypeParameter's properties according to specified values.
         /// </summary>
-        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the DbTypeParameter.</param>
+        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the
+        // DbTypeParameter.</param>
         /// <param name="a_oValue">Specifies the initial value for the DbTypeParameter.</param>
         public DbTypeParameter(string a_sTypeName, object a_oValue)
         {
@@ -71,7 +72,8 @@ namespace GHTUtils.Data
         /// <summary>
         /// Constructor, Initializes the DbTypeParameter's properties according to specified values.
         /// </summary>
-        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the DbTypeParameter.</param>
+        /// <param name="a_sTypeName">Specifies the initial parameter type Name for the
+        // DbTypeParameter.</param>
         /// <param name="a_oValue">Specifies the initial value for the DbTypeParameter.</param>
         /// <param name="a_iSize">Specifies the initial size for the DbTypeParameter.</param>
         public DbTypeParameter(string a_sTypeName, object a_oValue, int a_iSize)

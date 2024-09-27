@@ -211,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             Assert.Equal(0, tags.Count());
         }
 
-        /// <param name="textSpan">If <see langword="null"/> the current caret position will be used.</param>
+        /// <param name="textSpan">If <see langword="null"/> the current caret position will be
+        // used.</param>
         public async Task<CodeAction> TryGetCodeActionAsync(TextSpan? textSpan = null)
         {
             var span = textSpan ?? new TextSpan(_view.Caret.Position.BufferPosition, 0);

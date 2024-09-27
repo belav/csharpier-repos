@@ -9,7 +9,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-//#define XMLCHARTYPE_USE_RESOURCE    // load the character properties from resources (XmlCharType.bin must be linked to System.Xml.dll)
+//#define XMLCHARTYPE_USE_RESOURCE    // load the character properties from resources
+// (XmlCharType.bin must be linked to System.Xml.dll)
 //#define XMLCHARTYPE_GEN_RESOURCE    // generate the character properties into XmlCharType.bin
 
 #if XMLCHARTYPE_GEN_RESOURCE || XMLCHARTYPE_USE_RESOURCE
@@ -54,10 +55,13 @@ namespace System.Xml
         // Public ID characters       -- Section 2.3 [13]
 
         // Characters defined in the XML 1.0 Fourth Edition
-        // NCNameCharacters           -- Appending B: Characters Classes in XML 1.0 4th edition and earlier - minus the ':' char per the Namespaces in XML spec
+        // NCNameCharacters           -- Appending B: Characters Classes in XML 1.0 4th edition and earlier
+        // - minus the ':' char per the Namespaces in XML spec
         // Letter characters          -- Appending B: Characters Classes in XML 1.0 4th edition and earlier
-        //                               This appendix has been deprecated in XML 1.0 5th edition, but we still need to use
-        //                               the Letter and NCName definitions from the 4th edition in some places because of backwards compatibility
+        //                               This appendix has been deprecated in XML 1.0 5th edition, but we
+        // still need to use
+        //                               the Letter and NCName definitions from the 4th edition in some
+        // places because of backwards compatibility
         internal const int fWhitespace = 1;
         internal const int fLetter = 2;
         internal const int fNCStartNameSC = 4; // SC = Single Char
@@ -96,7 +100,8 @@ namespace System.Xml
         internal const int fAttrValue = 128;
 #endif
 
-        // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC ID char
+        // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC
+        // ID char
         private const string s_PublicIdBitmap = "\u2400\u0000\uffbb\uafff\uffff\u87ff\ufffe\u07ff";
 
         // size of XmlCharType table
@@ -828,7 +833,8 @@ namespace System.Xml
             return -1;
         }
 
-        // This method tests whether a value is in a given range with just one test; start and end should be constants
+        // This method tests whether a value is in a given range with just one test; start and end should be
+        // constants
         private static bool InRange(int value, int start, int end)
         {
             Debug.Assert(start <= end);

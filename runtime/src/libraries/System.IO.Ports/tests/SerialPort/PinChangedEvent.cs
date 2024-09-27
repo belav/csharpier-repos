@@ -83,7 +83,8 @@ namespace System.IO.Ports.Tests
             {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
-                // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events
+                // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged
+                // events
                 eventHandler.EventFilter = eventType => eventType != SerialPinChange.CDChanged;
 
                 Debug.WriteLine("Verifying DsrChanged event");
@@ -176,7 +177,8 @@ namespace System.IO.Ports.Tests
             {
                 PinChangedEventHandler eventHandler = new PinChangedEventHandler(com1);
 
-                // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged events
+                // Some null-modem cables have a connection between CD and CSR/CTR, so we need to discard CDChanged
+                // events
                 eventHandler.EventFilter = eventType => eventType != SerialPinChange.CDChanged;
 
                 SerialPinChangedEventHandler pinchangedEventHandler = eventHandler.HandleEvent;

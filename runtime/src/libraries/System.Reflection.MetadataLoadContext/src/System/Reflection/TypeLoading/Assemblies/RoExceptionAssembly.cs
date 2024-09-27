@@ -4,7 +4,8 @@
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// This "assembly" holds an exception resulting from a failure to bind an assembly name. It can be stored in bind caches and assembly ref
+    /// This "assembly" holds an exception resulting from a failure to bind an assembly name. It can be
+    // stored in bind caches and assembly ref
     /// memoization tables.
     /// </summary>
     internal sealed class RoExceptionAssembly : RoStubAssembly

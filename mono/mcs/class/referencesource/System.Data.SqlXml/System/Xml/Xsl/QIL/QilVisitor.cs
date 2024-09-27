@@ -11,8 +11,10 @@ namespace System.Xml.Xsl.Qil
 {
     /// <summary>A base internal class for QIL visitors.</summary>
     /// <remarks>
-    /// <p>QilVisitor is a base internal class for traversing QIL graphs.  Override individual Visit methods to change
-    /// behavior for only certain node types; override Visit() to change behavior for all node types at once; override
+    /// <p>QilVisitor is a base internal class for traversing QIL graphs.  Override individual Visit
+    // methods to change
+    /// behavior for only certain node types; override Visit() to change behavior for all node types at
+    // once; override
     /// VisitChildren() to change the algorithm for iterating and visiting children.</p>
     /// <p>Subclasses may also find it useful to annotate the tree during visitation.</p>
     /// </remarks>
@@ -44,7 +46,8 @@ namespace System.Xml.Xsl.Qil
         {
             for (int i = 0; i < parent.Count; i++)
             {
-                // If child is a reference, then call VisitReference instead of Visit in order to avoid circular visits.
+                // If child is a reference, then call VisitReference instead of Visit in order to avoid circular
+                // visits.
                 if (IsReference(parent, i))
                     VisitReference(parent[i]);
                 else
@@ -993,7 +996,8 @@ namespace System.Xml.Xsl.Qil
             {
                 throw XsltException.Create(System.Xml.Utils.Res.Xslt_InputTooComplex);
             }
-            //QilReference node may duplicate, the first one is definition and should expand, others are reference.
+            //QilReference node may duplicate, the first one is definition and should expand, others are
+            // reference.
             if (input is QilReference)
             {
                 if (visitedRef.ContainsKey(input))

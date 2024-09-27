@@ -1,4 +1,5 @@
-// Distilled from report in http://lists.ximian.com/archives/public/mono-devel-list/2004-September/007777.html
+// Distilled from report in
+// http://lists.ximian.com/archives/public/mono-devel-list/2004-September/007777.html
 
 using System;
 

@@ -334,7 +334,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v9 - Reprocess: Change an import statement added to import another schema", Priority = 1)]
+        //[Variation(Desc = "v9 - Reprocess: Change an import statement added to import another schema",
+        // Priority = 1)]
         [Fact]
         public void v9()
         {
@@ -492,7 +493,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "Regression bug 346902 - Types should be removed of a schema when SchemaSet.Reprocess is called", Priority = 1)]
+        //[Variation(Desc = "Regression bug 346902 - Types should be removed of a schema when
+        // SchemaSet.Reprocess is called", Priority = 1)]
         [Fact]
         public void v50()
         {
@@ -549,11 +551,17 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v53 Regression bug 382119 - XmlEditor:  Changes within an include is not getting picked up as expected - include", Priority = 1, Params = new object[] { "bug382119_a.xsd", "bug382119_inc.xsd", "bug382119_inc1.xsd", false })]
+        //[Variation(Desc = "v53 Regression bug 382119 - XmlEditor:  Changes within an include is not
+        // getting picked up as expected - include", Priority = 1, Params = new object[] { "bug382119_a.xsd",
+        // "bug382119_inc.xsd", "bug382119_inc1.xsd", false })]
         [InlineData("bug382119_a.xsd", "bug382119_inc.xsd", "bug382119_inc1.xsd", false)]
-        //[Variation(Desc = "v52 Regression bug 382119 - XmlEditor:  Changes within an include is not getting picked up as expected - import", Priority = 1, Params = new object[] { "bug382119_b.xsd", "bug382119_imp.xsd", "bug382119_imp1.xsd", true })]
+        //[Variation(Desc = "v52 Regression bug 382119 - XmlEditor:  Changes within an include is not
+        // getting picked up as expected - import", Priority = 1, Params = new object[] { "bug382119_b.xsd",
+        // "bug382119_imp.xsd", "bug382119_imp1.xsd", true })]
         [InlineData("bug382119_b.xsd", "bug382119_imp.xsd", "bug382119_imp1.xsd", true)]
-        //[Variation(Desc = "v51 Regression bug 382119 - XmlEditor:  Changes within an include is not getting picked up as expected - redefine", Priority = 1, Params = new object[] { "bug382119_c.xsd", "bug382119_red.xsd", "bug382119_red1.xsd", false })]
+        //[Variation(Desc = "v51 Regression bug 382119 - XmlEditor:  Changes within an include is not
+        // getting picked up as expected - redefine", Priority = 1, Params = new object[] { "bug382119_c.xsd",
+        // "bug382119_red.xsd", "bug382119_red1.xsd", false })]
         [InlineData("bug382119_c.xsd", "bug382119_red.xsd", "bug382119_red1.xsd", false)]
         [Theory]
         public void v51(object param0, object param1, object param2, object param3)

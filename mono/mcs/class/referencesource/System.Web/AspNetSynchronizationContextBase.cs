@@ -73,7 +73,8 @@ namespace System.Web
             return tcs.Task;
         }
 
-        // These methods are used in the synchronous handler execution step so that a synchronous IHttpHandler
+        // These methods are used in the synchronous handler execution step so that a synchronous
+        // IHttpHandler
         // can call asynchronous methods without locking on the HttpApplication instance (possibly causing
         // deadlocks).
 
@@ -86,7 +87,8 @@ namespace System.Web
         internal abstract void AssociateWithCurrentThread();
         internal abstract void DisassociateFromCurrentThread();
 
-        // These methods are used for telling the synchronization context when it is legal for an application
+        // These methods are used for telling the synchronization context when it is legal for an
+        // application
         // to kick off async void methods. They are used by the "AllowAsyncDuringSyncStages" setting to
         // determine whether kicking off an operation should throw.
 
@@ -96,7 +98,8 @@ namespace System.Web
         internal virtual void ProhibitVoidAsyncOperations() { /* no-op by default */
         }
 
-        // helper method for wrapping AllowVoidAsyncOperations / ProhibitVoidAsyncOperations in a using block
+        // helper method for wrapping AllowVoidAsyncOperations / ProhibitVoidAsyncOperations in a using
+        // block
         internal IDisposable AllowVoidAsyncOperationsBlock()
         {
             if (_allowAsyncOperationsBlockDisposable == null)

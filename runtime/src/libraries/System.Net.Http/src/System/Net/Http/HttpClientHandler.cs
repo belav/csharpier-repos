@@ -83,10 +83,12 @@ namespace System.Net.Http
             HttpHandlerType.SupportsRedirectConfiguration;
 
         /// <summary>
-        /// Gets or sets the <see cref="IMeterFactory"/> to create a custom <see cref="Meter"/> for the <see cref="HttpClientHandler"/> instance.
+        /// Gets or sets the <see cref="IMeterFactory"/> to create a custom <see cref="Meter"/> for the <see
+        // cref="HttpClientHandler"/> instance.
         /// </summary>
         /// <remarks>
-        /// When <see cref="MeterFactory"/> is set to a non-<see langword="null"/> value, all metrics emitted by the <see cref="HttpClientHandler"/> instance
+        /// When <see cref="MeterFactory"/> is set to a non-<see langword="null"/> value, all metrics
+        // emitted by the <see cref="HttpClientHandler"/> instance
         /// will be recorded using the <see cref="Meter"/> provided by the <see cref="IMeterFactory"/>.
         /// </remarks>
         [CLSCompliant(false)]
@@ -219,8 +221,10 @@ namespace System.Net.Http
         {
             // This property is not supported. In the .NET Framework it was only used when the handler needed to
             // automatically buffer the request content. That only happened if neither 'Content-Length' nor
-            // 'Transfer-Encoding: chunked' request headers were specified. So, the handler thus needed to buffer
-            // in the request content to determine its length and then would choose 'Content-Length' semantics when
+            // 'Transfer-Encoding: chunked' request headers were specified. So, the handler thus needed to
+            // buffer
+            // in the request content to determine its length and then would choose 'Content-Length' semantics
+            // when
             // POST'ing. In .NET Core, the handler will resolve the ambiguity by always choosing
             // 'Transfer-Encoding: chunked'. The handler will never automatically buffer in the request content.
             get

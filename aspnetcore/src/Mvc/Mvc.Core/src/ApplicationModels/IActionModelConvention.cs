@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 /// Allows customization of the <see cref="ActionModel"/>.
 /// </summary>
 /// <remarks>
-/// To use this interface, create an <see cref="System.Attribute"/> class which implements the interface and
+/// To use this interface, create an <see cref="System.Attribute"/> class which implements the
+// interface and
 /// place it on an action method.
 ///
 /// <see cref="IActionModelConvention"/> customizations run after

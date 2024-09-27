@@ -38,9 +38,12 @@ namespace ILCompiler
                 return;
 
             // Use a scheme where we push a stack of types in the process of loading
-            // When the stack pops, without throwing an exception, the type will be marked as being detected as successfully loadable.
-            // We need this complex scheme, as types can have circular dependencies. In addition, due to circular references, we can
-            // be forced to move when a type is successfully marked as loaded up the stack to an earlier call to EnsureLoadableType
+            // When the stack pops, without throwing an exception, the type will be marked as being detected as
+            // successfully loadable.
+            // We need this complex scheme, as types can have circular dependencies. In addition, due to
+            // circular references, we can
+            // be forced to move when a type is successfully marked as loaded up the stack to an earlier call to
+            // EnsureLoadableType
             //
             // For example, consider the following case:
             // interface IInterface<T> {}
@@ -54,22 +57,29 @@ namespace ILCompiler
             // This will generate the following interesting stacks of calls to EnsureLoadableType
             //
             // B -> A<B> -> B
-            //  This stack indicates that A<B> can only be considered loadable if B is considered loadable, so we must defer marking
+            //  This stack indicates that A<B> can only be considered loadable if B is considered loadable, so
+            // we must defer marking
             //  A<B> as loadable until we finish processing B.
             //
             // B -> A<B> -> ISimpleInterface
-            //  Since examining ISimpleInterface does not have any dependency on B or A<B>, it can be marked as loadable as soon
+            //  Since examining ISimpleInterface does not have any dependency on B or A<B>, it can be marked as
+            // loadable as soon
             //  as we finish processing it.
             //
             // B -> A<B> -> IInterface<A<B>> -> A<B>
-            //  This stack indicates that IInterface<A<B>> can be considered loadable if A<B> is considered loadable. We must defer
-            //  marking IInterface<A<B>> as loadable until we are able to mark A<B> as loadable. Based on the stack above, that can
+            //  This stack indicates that IInterface<A<B>> can be considered loadable if A<B> is considered
+            // loadable. We must defer
+            //  marking IInterface<A<B>> as loadable until we are able to mark A<B> as loadable. Based on the
+            // stack above, that can
             //  only happen once B is considered loadable.
             //
             // B -> A<B> -> IPassthruInterface<A<B>> -> IInterface<A<B>>
-            //  This stack indicates that IPassthruInterface<A<B>> can be considered loadable if IInterface<A<B>> is considered
-            //  loadable. If this happens after the IInterface<A<B>> is marked as being loadable once B is considered loadable
-            //  then we will push the loadibility marking to the B level at this point. OR we will continue to recurse and the logic
+            //  This stack indicates that IPassthruInterface<A<B>> can be considered loadable if
+            // IInterface<A<B>> is considered
+            //  loadable. If this happens after the IInterface<A<B>> is marked as being loadable once B is
+            // considered loadable
+            //  then we will push the loadibility marking to the B level at this point. OR we will continue to
+            // recurse and the logic
             //  will note that IInterface<A<B>> needs A<B> needs B which will move the marking up at that point.
 
             if (PushTypeLoadInProgress(type))
@@ -105,7 +115,8 @@ namespace ILCompiler
             }
         }
 
-        // Returns true to indicate the type should be considered to be loadable (although it might not be, actually safety may require more code to execute)
+        // Returns true to indicate the type should be considered to be loadable (although it might not be,
+        // actually safety may require more code to execute)
         private static bool PushTypeLoadInProgress(TypeDesc type)
         {
             t_typeLoadCheckInProgressStack ??= new List<TypeLoadabilityCheckInProgress>();
@@ -158,7 +169,8 @@ namespace ILCompiler
 
             if (typeLoadCheckInProgressStackOffset == -1)
             {
-                // The type is not already in the process of being checked for loadability, so return false to indicate that normal load checking should begin
+                // The type is not already in the process of being checked for loadability, so return false to
+                // indicate that normal load checking should begin
                 TypeLoadabilityCheckInProgress typeCheckInProgress =
                     new TypeLoadabilityCheckInProgress();
                 typeCheckInProgress.TypeInLoadabilityCheck = type;
@@ -168,7 +180,8 @@ namespace ILCompiler
                 return false;
             }
 
-            // Move timing of when types are considered loaded back to the point at which we mark this type as loaded
+            // Move timing of when types are considered loaded back to the point at which we mark this type as
+            // loaded
             var typeLoadCheckToAddTo = t_typeLoadCheckInProgressStack[
                 typeLoadCheckInProgressStackOffset
             ];
@@ -292,8 +305,10 @@ namespace ILCompiler
                 // Validate we're not constructing a type over a ByRef
                 if (parameterType.IsByRef)
                 {
-                    // CLR compat note: "ldtoken int32&&" will actually fail with a message about int32&; "ldtoken int32&[]"
-                    // will fail with a message about being unable to create an array of int32&. This is a middle ground.
+                    // CLR compat note: "ldtoken int32&&" will actually fail with a message about int32&; "ldtoken
+                    // int32&[]"
+                    // will fail with a message about being unable to create an array of int32&. This is a middle
+                    // ground.
                     ThrowHelper.ThrowTypeLoadException(ExceptionStringID.ClassLoadGeneral, type);
                 }
 

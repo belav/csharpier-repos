@@ -447,7 +447,8 @@ namespace Mono.CSharp
                         throw new NotImplementedException("Resolved to wrong meta token");
 
                     // What a stupid API, does not work because field handle is imported
-                    // metaInfo = FieldInfo.GetFieldFromHandle (metaInfo.FieldHandle, DeclaringType.MetaInfo.TypeHandle);
+                    // metaInfo = FieldInfo.GetFieldFromHandle (metaInfo.FieldHandle,
+                    // DeclaringType.MetaInfo.TypeHandle);
                 }
 
                 state &= ~StateFlags.PendingMetaInflate;

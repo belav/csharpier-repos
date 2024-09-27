@@ -65,35 +65,35 @@ namespace Mono.Security.Interface
             set { callbackNeedsChain = value; }
         }
 
-        /*
-         * Use custom time for certificate expiration checks
-         */
+/*
+* Use custom time for certificate expiration checks
+*/
         public DateTime? CertificateValidationTime { get; set; }
 
-        /*
-         * This is only supported if CertificateValidationHelper.SupportsTrustAnchors is true.
-         */
+/*
+* This is only supported if CertificateValidationHelper.SupportsTrustAnchors is true.
+*/
         public X509CertificateCollection TrustAnchors { get; set; }
 
         public object UserSettings { get; set; }
 
         internal string[] CertificateSearchPaths { get; set; }
 
-        /*
-         * This is only supported if MonoTlsProvider.SupportsCleanShutdown is true.
-         */
+/*
+* This is only supported if MonoTlsProvider.SupportsCleanShutdown is true.
+*/
         internal bool SendCloseNotify { get; set; }
 
-        /*
-         * Client Certificate Support.
-         */
+/*
+* Client Certificate Support.
+*/
         public string[] ClientCertificateIssuers { get; set; }
 
         public bool DisallowUnauthenticatedCertificateRequest { get; set; }
 
-        /*
-         * If you set this here, then it will override 'ServicePointManager.SecurityProtocol'.
-         */
+/*
+* If you set this here, then it will override 'ServicePointManager.SecurityProtocol'.
+*/
         public TlsProtocols? EnabledProtocols { get; set; }
 
         [CLSCompliant(false)]
@@ -129,12 +129,12 @@ namespace Mono.Security.Interface
 
         #region Private APIs
 
-        /*
-         * Private APIs - do not use!
-         *
-         * This is only public to avoid making our internals visible to System.dll.
-         *
-         */
+/*
+* Private APIs - do not use!
+*
+* This is only public to avoid making our internals visible to System.dll.
+*
+*/
 
         [Obsolete("Do not use outside System.dll!")]
         public ICertificateValidator CertificateValidator

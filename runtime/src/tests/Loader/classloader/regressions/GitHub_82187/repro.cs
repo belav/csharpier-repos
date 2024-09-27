@@ -2,10 +2,10 @@ using System;
 using Xunit;
 
 /* Regression test for https://github.com/dotnet/runtime/issues/78638
- * and https://github.com/dotnet/runtime/issues/82187 ensure AOT
- * cross-compiler and AOT runtime use the same name hashing for names
- * that include UTF-8 continuation bytes.
- */
+* and https://github.com/dotnet/runtime/issues/82187 ensure AOT
+* cross-compiler and AOT runtime use the same name hashing for names
+* that include UTF-8 continuation bytes.
+*/
 
 [MySpecial(typeof(MeineTüre))]
 public class Program

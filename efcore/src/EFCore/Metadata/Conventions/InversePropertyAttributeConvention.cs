@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the inverse navigation property based on the <see cref="InversePropertyAttribute" />
+///     A convention that configures the inverse navigation property based on the <see
+// cref="InversePropertyAttribute" />
 ///     specified on the other navigation property.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class InversePropertyAttributeConvention
     : NavigationAttributeConventionBase<InversePropertyAttribute>,
@@ -30,7 +32,8 @@ public class InversePropertyAttributeConvention
         : base(dependencies) { }
 
     /// <summary>
-    ///     Called for every navigation property that has an attribute after an entity type is added to the model.
+    ///     Called for every navigation property that has an attribute after an entity type is added to
+    // the model.
     /// </summary>
     /// <param name="entityTypeBuilder">The builder for the entity type.</param>
     /// <param name="navigationMemberInfo">The navigation member info.</param>
@@ -781,14 +784,16 @@ public class InversePropertyAttributeConvention
     }
 
     /// <summary>
-    ///     Returns a value indication whether the given navigation has ambiguous inverse navigations with
+    ///     Returns a value indication whether the given navigation has ambiguous inverse navigations
+    // with
     ///     <see cref="InversePropertyAttribute" />.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="navigation">The navigation.</param>
     /// <param name="targetEntityType">Target entity type.</param>
     /// <returns>
-    ///     <see langword="true" /> if the given navigation has ambiguous inverse navigations with <see cref="InversePropertyAttribute" />.
+    ///     <see langword="true" /> if the given navigation has ambiguous inverse navigations with <see
+    // cref="InversePropertyAttribute" />.
     /// </returns>
     public static bool IsAmbiguous(
         IConventionEntityType entityType,
@@ -1036,8 +1041,10 @@ public class InversePropertyAttributeConvention
     /// <param name="entityTypeBuilder">The builder for the referencing entity type.</param>
     /// <param name="targetClrType">The CLR type of the target entity type.</param>
     /// <param name="navigationMemberInfo">The navigation member.</param>
-    /// <param name="shouldCreate">Whether an entity type should be created if one doesn't currently exist.</param>
-    /// <returns>The builder for the target entity type or <see langword="null" /> if it can't be created.</returns>
+    /// <param name="shouldCreate">Whether an entity type should be created if one doesn't currently
+    // exist.</param>
+    /// <returns>The builder for the target entity type or <see langword="null" /> if it can't be
+    // created.</returns>
     protected virtual IConventionEntityTypeBuilder? TryGetTargetEntityTypeBuilder(
         IConventionEntityTypeBuilder entityTypeBuilder,
         Type targetClrType,

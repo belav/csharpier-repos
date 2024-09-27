@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     public class MemberTypes
     {
         // This is an easy way to suppress all trim related warnings in the Main method
-        // This test is about marking, not diagnostics and this Main will produce several warnings due to it accssing
+        // This test is about marking, not diagnostics and this Main will produce several warnings due to it
+        // accssing
         // some problematic APIs (Delegate.Create for example) via reflection.
         [RequiresUnreferencedCode("test")]
         [KeptAttributeAttribute(typeof(RequiresUnreferencedCodeAttribute))]
@@ -2438,7 +2440,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class AllBaseType : IAllDerivedInterface
         {
             // This is different from all of the above cases.
-            // All means really everything - so we include everything on base class as well - including private stuff
+            // All means really everything - so we include everything on base class as well - including private
+            // stuff
 
             [Kept]
             protected AllBaseType() { }

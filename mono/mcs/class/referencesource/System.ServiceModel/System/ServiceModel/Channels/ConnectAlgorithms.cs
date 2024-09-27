@@ -62,7 +62,8 @@ namespace System.ServiceModel.Channels
             List<IAsyncResult> results = new List<IAsyncResult>();
             List<WaitHandle> handles = new List<WaitHandle>();
 
-            // While we have more to endpoints try and we have connections pending and we are not connected upto ideal yet, and the maintainer is still open
+            // While we have more to endpoints try and we have connections pending and we are not connected upto
+            // ideal yet, and the maintainer is still open
             while (
                 results.Count != 0
                 || (
@@ -266,7 +267,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (CommunicationException e)
                 {
-                    // mostly likely the endpoint could not be reached, but any channel exception means we should try another node
+                    // mostly likely the endpoint could not be reached, but any channel exception means we should try
+                    // another node
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                     addNeighbor.Set();
                 }
@@ -304,7 +306,8 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // This method exists to minimize code churn if PeerNodeAddress is refactored later to derive from EndpointAddress
+        // This method exists to minimize code churn if PeerNodeAddress is refactored later to derive from
+        // EndpointAddress
         static Uri GetEndpointUri(PeerNodeAddress address)
         {
             return address.EndpointAddress.Uri;

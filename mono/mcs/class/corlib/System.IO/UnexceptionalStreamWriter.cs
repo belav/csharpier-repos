@@ -45,46 +45,46 @@ namespace System.IO
 {
     internal class UnexceptionalStreamWriter : StreamWriter
     {
-        /*
-                public UnexceptionalStreamWriter (Stream stream)
-                    : base (stream)
-                {
-                }
-        */
+/*
+public UnexceptionalStreamWriter (Stream stream)
+: base (stream)
+{
+}
+*/
         public UnexceptionalStreamWriter(Stream stream, Encoding encoding)
             : base(stream, encoding, DefaultBufferSize, true) { }
 
-        /*
-                public UnexceptionalStreamWriter (Stream stream,
-                                  Encoding encoding,
-                                  int bufferSize)
-                    : base (stream, encoding, bufferSize)
-                {
-                }
-        
-                public UnexceptionalStreamWriter (string path)
-                    : base (path)
-                {
-                }
-        
-                public UnexceptionalStreamWriter (string path, bool append)
-                    : base (path, append)
-                {
-                }
-        
-                public UnexceptionalStreamWriter (string path, bool append,
-                                  Encoding encoding)
-                    : base (path, append, encoding)
-                {
-                }
-        
-                public UnexceptionalStreamWriter (string path, bool append,
-                                  Encoding encoding,
-                                  int bufferSize)
-                    : base (path, append, encoding, bufferSize)
-                {
-                }
-        */
+/*
+public UnexceptionalStreamWriter (Stream stream,
+Encoding encoding,
+int bufferSize)
+: base (stream, encoding, bufferSize)
+{
+}
+
+public UnexceptionalStreamWriter (string path)
+: base (path)
+{
+}
+
+public UnexceptionalStreamWriter (string path, bool append)
+: base (path, append)
+{
+}
+
+public UnexceptionalStreamWriter (string path, bool append,
+Encoding encoding)
+: base (path, append, encoding)
+{
+}
+
+public UnexceptionalStreamWriter (string path, bool append,
+Encoding encoding,
+int bufferSize)
+: base (path, append, encoding, bufferSize)
+{
+}
+*/
         public override void Flush()
         {
             try

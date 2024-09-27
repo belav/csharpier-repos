@@ -10,8 +10,10 @@ public interface IClientModelValidatorProvider
 {
     /// <summary>
     /// Creates set of <see cref="IClientModelValidator"/>s by updating
-    /// <see cref="ClientValidatorItem.Validator"/> in <see cref="ClientValidatorProviderContext.Results"/>.
+    /// <see cref="ClientValidatorItem.Validator"/> in <see
+    // cref="ClientValidatorProviderContext.Results"/>.
     /// </summary>
-    /// <param name="context">The <see cref="ClientModelValidationContext"/> associated with this call.</param>
+    /// <param name="context">The <see cref="ClientModelValidationContext"/> associated with this
+    // call.</param>
     void CreateValidators(ClientValidatorProviderContext context);
 }

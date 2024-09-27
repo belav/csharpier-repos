@@ -62,7 +62,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the current node is rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // current node is rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -103,7 +104,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the parent node is rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // parent node is rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -220,7 +222,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the path Separator is rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // path Separator is rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -323,7 +326,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the root node is rendered. </para>
+        /// <para>Gets or sets the <see cref='System.Web.UI.ITemplate' qualify='true'/> that defines how the
+        // root node is rendered. </para>
         /// </devdoc>
         [
             Browsable(false),
@@ -403,7 +407,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when an item is databound within a <see cref='System.Web.UI.WebControls.SiteMapPath'/> control tree.</para>
+        /// <para>Occurs when an item is databound within a <see
+        // cref='System.Web.UI.WebControls.SiteMapPath'/> control tree.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.SiteMapPath_OnItemDataBound)]
         public event SiteMapNodeItemEventHandler ItemDataBound
@@ -545,7 +550,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>A protected method. Populates iteratively the specified <see cref='System.Web.UI.WebControls.SiteMapNodeItem'/> with a
+        /// <para>A protected method. Populates iteratively the specified <see
+        // cref='System.Web.UI.WebControls.SiteMapNodeItem'/> with a
         ///    sub-hierarchy of child controls.</para>
         /// </devdoc>
         protected virtual void InitializeItem(SiteMapNodeItem item)

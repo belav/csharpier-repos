@@ -718,7 +718,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                     var same = true;
 
-                    // If the type name is different, it might mean that the whole type has been removed and a new one added.
+                    // If the type name is different, it might mean that the whole type has been removed and a new one
+                    // added.
                     // In that case, we shouldn't do any other checks and instead return immediately.
                     if (
                         !StringComparer.Ordinal.Equals(
@@ -799,7 +800,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 
                     var same = true;
 
-                    // If the delegate name is different, it might mean that the whole delegate has been removed and a new one added.
+                    // If the delegate name is different, it might mean that the whole delegate has been removed and a
+                    // new one added.
                     // In that case, we shouldn't do any other checks and instead return immediately.
                     if (
                         !StringComparer.Ordinal.Equals(

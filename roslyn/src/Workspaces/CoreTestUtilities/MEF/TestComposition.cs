@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         /// <summary>
         /// Types to exclude from the composition.
-        /// All subtypes of types specified in <see cref="ExcludedPartTypes"/> and defined in <see cref="Assemblies"/> are excluded before <see cref="Parts"/> are added.
+        /// All subtypes of types specified in <see cref="ExcludedPartTypes"/> and defined in <see
+        // cref="Assemblies"/> are excluded before <see cref="Parts"/> are added.
         /// </summary>
         public readonly ImmutableHashSet<Type> ExcludedPartTypes;
 
@@ -103,8 +104,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         }
 
         /// <summary>
-        /// Returns a new instance of <see cref="HostServices"/> for the composition. This will either be a MEF composition or VS MEF composition host,
-        /// depending on what layer the composition is for. Editor Features and VS layers use VS MEF composition while anything else uses System.Composition.
+        /// Returns a new instance of <see cref="HostServices"/> for the composition. This will either be a
+        // MEF composition or VS MEF composition host,
+        /// depending on what layer the composition is for. Editor Features and VS layers use VS MEF
+        // composition while anything else uses System.Composition.
         /// </summary>
         public HostServices GetHostServices() =>
             VisualStudioMefHostServices.Create(ExportProviderFactory.CreateExportProvider());
@@ -148,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private ComposableCatalog GetCatalog()
         {
-            // Compositions should not be realized if they contain the same part in both the explicit include list and
+            // Compositions should not be realized if they contain the same part in both the explicit include
+            // list and
             // the explicit exclude list.
             var configurationOverlap = Parts.Intersect(ExcludedPartTypes);
             Assert.Empty(configurationOverlap);

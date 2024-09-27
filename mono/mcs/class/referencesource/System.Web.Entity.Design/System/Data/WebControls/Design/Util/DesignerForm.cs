@@ -99,7 +99,8 @@ namespace System.Web.UI.Design.WebControls.Util
         }
 
         /// <devdoc>
-        /// Gets a service of the desired entitySetNameItem. Returns null if the service does not exist or there is no service provider.
+        /// Gets a service of the desired entitySetNameItem. Returns null if the service does not exist or
+        // there is no service provider.
         /// </devdoc>
         protected override object GetService(Type serviceType)
         {

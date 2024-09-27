@@ -58,20 +58,20 @@ namespace Mono.Globalization.Unicode
                 Console.Error.WriteLine("Internal error at line " + lineCount);
                 throw;
             }
-            /*
-            int lastQ = -1;
-            for (int x = 1; x < CollationElementTableUtil.Indexer.TotalCount; x++) {
-                int i = CollationElementTableUtil.Indexer.GetIndexForCodePoint (x);
-                int q = keyValues [collElem [i]].Quarternary;
+/*
+int lastQ = -1;
+for (int x = 1; x < CollationElementTableUtil.Indexer.TotalCount; x++) {
+int i = CollationElementTableUtil.Indexer.GetIndexForCodePoint (x);
+int q = keyValues [collElem [i]].Quarternary;
 //				if (i != q && q != 0)
 //					Console.Error.WriteLine ("differs : {0} -> {1}", i, q);
-                if (q != 0) {
-                    if (lastQ >= q)
-                        Console.Error.WriteLine ("latter was smaller at {2} : {0} / {1}", lastQ, q, i);
-                    lastQ = q;
-                }
-            }
-            */
+if (q != 0) {
+if (lastQ >= q)
+Console.Error.WriteLine ("latter was smaller at {2} : {0} / {1}", lastQ, q, i);
+lastQ = q;
+}
+}
+*/
         }
 
         private void Serialize()

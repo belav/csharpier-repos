@@ -10,7 +10,8 @@ internal static partial class Interop
     {
         // only using this to clear existing error info with null
         [LibraryImport(Interop.Libraries.OleAut32)]
-        // TLS values are preserved between threads, need to check that we use this API to clear the error state only.
+        // TLS values are preserved between threads, need to check that we use this API to clear the error
+        // state only.
         internal static partial void SetErrorInfo(int dwReserved, IntPtr pIErrorInfo);
     }
 }

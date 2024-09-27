@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.TaskList
 {
     /// <summary>
-    /// Determines locations of 'todo' comments within a particular file.  The specific 'todo' comment forms (e.g.
+    /// Determines locations of 'todo' comments within a particular file.  The specific 'todo' comment
+    // forms (e.g.
     /// '<c>TODO</c>', '<c>UNDONE</c>', etc.) are provided through <see cref="TaskListItemDescriptor"/>.
     /// </summary>
     internal interface ITaskListService : ILanguageService

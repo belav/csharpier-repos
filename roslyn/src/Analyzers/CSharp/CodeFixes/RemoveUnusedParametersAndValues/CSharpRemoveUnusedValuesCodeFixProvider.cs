@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                         && variableDeclarator.Parent is VariableDeclarationSyntax parent
                     )
                     {
-                        // If we are generating a discard on the left of an initialization with an implicit object creation on the right,
+                        // If we are generating a discard on the left of an initialization with an implicit object creation
+                        // on the right,
                         // then we need to replace the implicit object creation with an explicit one.
                         // For example: 'TypeName v = new();' must be changed to '_ = new TypeName();'
                         var objectCreationNode = SyntaxFactory.ObjectCreationExpression(
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 && semanticModel.GetTypeInfo(implicitObjectCreation).Type is { } type
             )
             {
-                // If we are generating a discard on the left of an assignment with an implicit object creation on the right,
+                // If we are generating a discard on the left of an assignment with an implicit object creation on
+                // the right,
                 // then we need to replace the implicit object creation with an explicit one.
                 // For example: 'v = new();' must be changed to '_ = new TypeOfV();'
                 var objectCreationNode = SyntaxFactory.ObjectCreationExpression(
@@ -314,7 +316,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedParametersAndValues
                 else
                 {
                     // Case 2. Null coalescing compound assignment parented by an expression statement.
-                    // Remove leading trivia from 'leftOfAssignment' as it should have been moved to 'newAssignmentTarget'.
+                    // Remove leading trivia from 'leftOfAssignment' as it should have been moved to
+                    // 'newAssignmentTarget'.
                     leftOfAssignment = leftOfAssignment.WithoutLeadingTrivia();
                     return editor.Generator.AssignmentStatement(
                         newAssignmentTarget,

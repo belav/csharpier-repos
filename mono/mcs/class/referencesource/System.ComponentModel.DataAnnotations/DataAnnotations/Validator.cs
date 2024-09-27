@@ -8,7 +8,8 @@ using System.Reflection;
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
-    /// Helper class to validate objects, properties and other values using their associated <see cref="ValidationAttribute"/>
+    /// Helper class to validate objects, properties and other values using their associated <see
+    // cref="ValidationAttribute"/>
     /// custom attributes.
     /// </summary>
     public static class Validator
@@ -20,24 +21,33 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <remarks>
         /// This method will test each <see cref="ValidationAttribute"/> associated with the property
-        /// identified by <paramref name="validationContext"/>.  If <paramref name="validationResults"/> is non-null,
+        /// identified by <paramref name="validationContext"/>.  If <paramref name="validationResults"/> is
+        // non-null,
         /// this method will add a <see cref="ValidationResult"/> to it for each validation failure.
         /// <para>
-        /// If there is a <see cref="RequiredAttribute"/> found on the property, it will be evaluated before all other
-        /// validation attributes.  If the required validator fails then validation will abort, adding that single
-        /// failure into the <paramref name="validationResults"/> when applicable, returning a value of <c>false</c>.
+        /// If there is a <see cref="RequiredAttribute"/> found on the property, it will be evaluated before
+        // all other
+        /// validation attributes.  If the required validator fails then validation will abort, adding that
+        // single
+        /// failure into the <paramref name="validationResults"/> when applicable, returning a value of
+        // <c>false</c>.
         /// </para>
         /// <para>
-        /// If <paramref name="validationResults"/> is null and there isn't a <see cref="RequiredAttribute"/> failure,
+        /// If <paramref name="validationResults"/> is null and there isn't a <see
+        // cref="RequiredAttribute"/> failure,
         /// then all validators will be evaluated.
         /// </para>
         /// </remarks>
         /// <param name="value">The value to test.</param>
-        /// <param name="validationContext">Describes the property member to validate and provides services and context for the validators.</param>
-        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s for the failures.</param>
-        /// <returns><c>true</c> if the value is valid, <c>false</c> if any validation errors are encountered.</returns>
+        /// <param name="validationContext">Describes the property member to validate and provides services
+        // and context for the validators.</param>
+        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s
+        // for the failures.</param>
+        /// <returns><c>true</c> if the value is valid, <c>false</c> if any validation errors are
+        // encountered.</returns>
         /// <exception cref="ArgumentException">
-        /// When the <see cref="ValidationContext.MemberName"/> of <paramref name="validationContext"/> is not a valid property.
+        /// When the <see cref="ValidationContext.MemberName"/> of <paramref name="validationContext"/> is
+        // not a valid property.
         /// </exception>
         public static bool TryValidateProperty(
             object value,
@@ -81,22 +91,30 @@ namespace System.ComponentModel.DataAnnotations
         /// Tests whether the given object instance is valid.
         /// </summary>
         /// <remarks>
-        /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object instance's type.  It also
-        /// checks to ensure all properties marked with <see cref="RequiredAttribute"/> are set.  It does not validate the
+        /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object instance's
+        // type.  It also
+        /// checks to ensure all properties marked with <see cref="RequiredAttribute"/> are set.  It does
+        // not validate the
         /// property values of the object.
         /// <para>
-        /// If <paramref name="validationResults"/> is null, then execution will abort upon the first validation
-        /// failure.  If <paramref name="validationResults"/> is non-null, then all validation attributes will be
+        /// If <paramref name="validationResults"/> is null, then execution will abort upon the first
+        // validation
+        /// failure.  If <paramref name="validationResults"/> is non-null, then all validation attributes
+        // will be
         /// evaluated.
         /// </para>
         /// </remarks>
         /// <param name="instance">The object instance to test.  It cannot be <c>null</c>.</param>
-        /// <param name="validationContext">Describes the object to validate and provides services and context for the validators.</param>
-        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s for the failures.</param>
-        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are encountered.</returns>
+        /// <param name="validationContext">Describes the object to validate and provides services and
+        // context for the validators.</param>
+        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s
+        // for the failures.</param>
+        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are
+        // encountered.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="instance"/> doesn't match the
-        /// <see cref="ValidationContext.ObjectInstance"/>on <paramref name="validationContext"/>.</exception>
+        /// <see cref="ValidationContext.ObjectInstance"/>on <paramref
+        // name="validationContext"/>.</exception>
         public static bool TryValidateObject(
             object instance,
             ValidationContext validationContext,
@@ -115,29 +133,40 @@ namespace System.ComponentModel.DataAnnotations
         /// Tests whether the given object instance is valid.
         /// </summary>
         /// <remarks>
-        /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object instance's type.  It also
-        /// checks to ensure all properties marked with <see cref="RequiredAttribute"/> are set.  If <paramref name="validateAllProperties"/>
-        /// is <c>true</c>, this method will also evaluate the <see cref="ValidationAttribute"/>s for all the immediate properties
+        /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object instance's
+        // type.  It also
+        /// checks to ensure all properties marked with <see cref="RequiredAttribute"/> are set.  If
+        // <paramref name="validateAllProperties"/>
+        /// is <c>true</c>, this method will also evaluate the <see cref="ValidationAttribute"/>s for all
+        // the immediate properties
         /// of this object.  This process is not recursive.
         /// <para>
-        /// If <paramref name="validationResults"/> is null, then execution will abort upon the first validation
-        /// failure.  If <paramref name="validationResults"/> is non-null, then all validation attributes will be
+        /// If <paramref name="validationResults"/> is null, then execution will abort upon the first
+        // validation
+        /// failure.  If <paramref name="validationResults"/> is non-null, then all validation attributes
+        // will be
         /// evaluated.
         /// </para>
         /// <para>
-        /// For any given property, if it has a <see cref="RequiredAttribute"/> that fails validation, no other validators
+        /// For any given property, if it has a <see cref="RequiredAttribute"/> that fails validation, no
+        // other validators
         /// will be evaluated for that property.
         /// </para>
         /// </remarks>
         /// <param name="instance">The object instance to test.  It cannot be null.</param>
-        /// <param name="validationContext">Describes the object to validate and provides services and context for the validators.</param>
-        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s for the failures.</param>
-        /// <param name="validateAllProperties">If <c>true</c>, also evaluates all properties of the object (this process is not
+        /// <param name="validationContext">Describes the object to validate and provides services and
+        // context for the validators.</param>
+        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s
+        // for the failures.</param>
+        /// <param name="validateAllProperties">If <c>true</c>, also evaluates all properties of the object
+        // (this process is not
         /// recursive over properties of the properties).</param>
-        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are encountered.</returns>
+        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are
+        // encountered.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="instance"/> doesn't match the
-        /// <see cref="ValidationContext.ObjectInstance"/>on <paramref name="validationContext"/>.</exception>
+        /// <see cref="ValidationContext.ObjectInstance"/>on <paramref
+        // name="validationContext"/>.</exception>
         public static bool TryValidateObject(
             object instance,
             ValidationContext validationContext,
@@ -184,28 +213,38 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Tests whether the given value is valid against a specified list of <see cref="ValidationAttribute"/>s.
+        /// Tests whether the given value is valid against a specified list of <see
+        // cref="ValidationAttribute"/>s.
         /// </summary>
         /// <remarks>
         /// This method will test each <see cref="ValidationAttribute"/>s specified .  If
-        /// <paramref name="validationResults"/> is non-null, this method will add a <see cref="ValidationResult"/>
+        /// <paramref name="validationResults"/> is non-null, this method will add a <see
+        // cref="ValidationResult"/>
         /// to it for each validation failure.
         /// <para>
-        /// If there is a <see cref="RequiredAttribute"/> within the <paramref name="validationAttributes"/>, it will
-        /// be evaluated before all other validation attributes.  If the required validator fails then validation will
-        /// abort, adding that single failure into the <paramref name="validationResults"/> when applicable, returning a
+        /// If there is a <see cref="RequiredAttribute"/> within the <paramref
+        // name="validationAttributes"/>, it will
+        /// be evaluated before all other validation attributes.  If the required validator fails then
+        // validation will
+        /// abort, adding that single failure into the <paramref name="validationResults"/> when applicable,
+        // returning a
         /// value of <c>false</c>.
         /// </para>
         /// <para>
-        /// If <paramref name="validationResults"/> is null and there isn't a <see cref="RequiredAttribute"/> failure,
+        /// If <paramref name="validationResults"/> is null and there isn't a <see
+        // cref="RequiredAttribute"/> failure,
         /// then all validators will be evaluated.
         /// </para>
         /// </remarks>
         /// <param name="value">The value to test.  It cannot be null.</param>
-        /// <param name="validationContext">Describes the object being validated and provides services and context for the validators.</param>
-        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s for the failures.</param>
-        /// <param name="validationAttributes">The list of <see cref="ValidationAttribute"/>s to validate this <paramref name="value"/> against.</param>
-        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are encountered.</returns>
+        /// <param name="validationContext">Describes the object being validated and provides services and
+        // context for the validators.</param>
+        /// <param name="validationResults">Optional collection to receive <see cref="ValidationResult"/>s
+        // for the failures.</param>
+        /// <param name="validationAttributes">The list of <see cref="ValidationAttribute"/>s to validate
+        // this <paramref name="value"/> against.</param>
+        /// <returns><c>true</c> if the object is valid, <c>false</c> if any validation errors are
+        // encountered.</returns>
         public static bool TryValidateValue(
             object value,
             ValidationContext validationContext,
@@ -237,12 +276,16 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Throws a <see cref="ValidationException"/> if the given property <paramref name="value"/> is not valid.
+        /// Throws a <see cref="ValidationException"/> if the given property <paramref name="value"/> is not
+        // valid.
         /// </summary>
         /// <param name="value">The value to test.</param>
-        /// <param name="validationContext">Describes the object being validated and provides services and context for the validators.  It cannot be <c>null</c>.</param>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
-        /// <exception cref="ValidationException">When <paramref name="value"/> is invalid for this property.</exception>
+        /// <param name="validationContext">Describes the object being validated and provides services and
+        // context for the validators.  It cannot be <c>null</c>.</param>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
+        /// <exception cref="ValidationException">When <paramref name="value"/> is invalid for this
+        // property.</exception>
         public static void ValidateProperty(object value, ValidationContext validationContext)
         {
             // Throw if value cannot be assigned to this property.  That is not a validation exception.
@@ -262,18 +305,23 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Throws a <see cref="ValidationException"/> if the given <paramref name="instance"/> is not valid.
+        /// Throws a <see cref="ValidationException"/> if the given <paramref name="instance"/> is not
+        // valid.
         /// </summary>
         /// <remarks>
         /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object's type.
         /// </remarks>
         /// <param name="instance">The object instance to test.  It cannot be null.</param>
-        /// <param name="validationContext">Describes the object being validated and provides services and context for the validators.  It cannot be <c>null</c>.</param>
+        /// <param name="validationContext">Describes the object being validated and provides services and
+        // context for the validators.  It cannot be <c>null</c>.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is null.</exception>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="instance"/> doesn't match the
-        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref name="validationContext"/>.</exception>
-        /// <exception cref="ValidationException">When <paramref name="instance"/> is found to be invalid.</exception>
+        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref
+        // name="validationContext"/>.</exception>
+        /// <exception cref="ValidationException">When <paramref name="instance"/> is found to be
+        // invalid.</exception>
         public static void ValidateObject(object instance, ValidationContext validationContext)
         {
             ValidateObject(
@@ -288,16 +336,22 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <remarks>
         /// This method evaluates all <see cref="ValidationAttribute"/>s attached to the object's type.
-        /// If <paramref name="validateAllProperties"/> is <c>true</c> it also validates all the object's properties.
+        /// If <paramref name="validateAllProperties"/> is <c>true</c> it also validates all the object's
+        // properties.
         /// </remarks>
         /// <param name="instance">The object instance to test.  It cannot be null.</param>
-        /// <param name="validationContext">Describes the object being validated and provides services and context for the validators.  It cannot be <c>null</c>.</param>
-        /// <param name="validateAllProperties">If <c>true</c>, also validates all the <paramref name="instance"/>'s properties.</param>
+        /// <param name="validationContext">Describes the object being validated and provides services and
+        // context for the validators.  It cannot be <c>null</c>.</param>
+        /// <param name="validateAllProperties">If <c>true</c>, also validates all the <paramref
+        // name="instance"/>'s properties.</param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is null.</exception>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="instance"/> doesn't match the
-        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref name="validationContext"/>.</exception>
-        /// <exception cref="ValidationException">When <paramref name="instance"/> is found to be invalid.</exception>
+        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref
+        // name="validationContext"/>.</exception>
+        /// <exception cref="ValidationException">When <paramref name="instance"/> is found to be
+        // invalid.</exception>
         public static void ValidateObject(
             object instance,
             ValidationContext validationContext,
@@ -336,20 +390,26 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Throw a <see cref="ValidationException"/> if the given value is not valid for the <see cref="ValidationAttribute"/>s.
+        /// Throw a <see cref="ValidationException"/> if the given value is not valid for the <see
+        // cref="ValidationAttribute"/>s.
         /// </summary>
         /// <remarks>
-        /// This method evaluates the <see cref="ValidationAttribute"/>s supplied until a validation error occurs,
+        /// This method evaluates the <see cref="ValidationAttribute"/>s supplied until a validation error
+        // occurs,
         /// at which time a <see cref="ValidationException"/> is thrown.
         /// <para>
-        /// A <see cref="RequiredAttribute"/> within the <paramref name="validationAttributes"/> will always be evaluated first.
+        /// A <see cref="RequiredAttribute"/> within the <paramref name="validationAttributes"/> will always
+        // be evaluated first.
         /// </para>
         /// </remarks>
         /// <param name="value">The value to test.  It cannot be null.</param>
         /// <param name="validationContext">Describes the object being tested.</param>
-        /// <param name="validationAttributes">The list of <see cref="ValidationAttribute"/>s to validate against this instance.</param>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
-        /// <exception cref="ValidationException">When <paramref name="value"/> is found to be invalid.</exception>
+        /// <param name="validationAttributes">The list of <see cref="ValidationAttribute"/>s to validate
+        // against this instance.</param>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
+        /// <exception cref="ValidationException">When <paramref name="value"/> is found to be
+        // invalid.</exception>
         public static void ValidateValue(
             object value,
             ValidationContext validationContext,
@@ -379,10 +439,13 @@ namespace System.ComponentModel.DataAnnotations
         /// the given object instance.
         /// </summary>
         /// <param name="instance">The object instance to use for the context.</param>
-        /// <param name="validationContext">An parent validation context that supplies an <see cref="IServiceProvider"/>
+        /// <param name="validationContext">An parent validation context that supplies an <see
+        // cref="IServiceProvider"/>
         /// and <see cref="ValidationContext.Items"/>.</param>
-        /// <returns>A new <see cref="ValidationContext"/> for the <paramref name="instance"/> provided.</returns>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <returns>A new <see cref="ValidationContext"/> for the <paramref name="instance"/>
+        // provided.</returns>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         internal static ValidationContext CreateValidationContext(
             object instance,
             ValidationContext validationContext
@@ -393,7 +456,8 @@ namespace System.ComponentModel.DataAnnotations
                 throw new ArgumentNullException("validationContext");
             }
 
-            // Create a new context using the existing ValidationContext that acts as an IServiceProvider and contains our existing items.
+            // Create a new context using the existing ValidationContext that acts as an IServiceProvider and
+            // contains our existing items.
             ValidationContext context = new ValidationContext(
                 instance,
                 validationContext,
@@ -406,9 +470,11 @@ namespace System.ComponentModel.DataAnnotations
         /// Determine whether the given value can legally be assigned into the specified type.
         /// </summary>
         /// <param name="destinationType">The destination <see cref="Type"/> for the value.</param>
-        /// <param name="value">The value to test to see if it can be assigned as the Type indicated by <paramref name="destinationType"/>.</param>
+        /// <param name="value">The value to test to see if it can be assigned as the Type indicated by
+        // <paramref name="destinationType"/>.</param>
         /// <returns><c>true</c> if the assignment is legal.</returns>
-        /// <exception cref="ArgumentNullException">When <paramref name="destinationType"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="destinationType"/> is
+        // null.</exception>
         private static bool CanBeAssigned(Type destinationType, object value)
         {
             if (destinationType == null)
@@ -436,7 +502,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="propertyName">The name of the property.</param>
         /// <param name="propertyType">The type of the property.</param>
         /// <param name="value">The value.  Null is permitted only if the property will accept it.</param>
-        /// <exception cref="ArgumentException"> is thrown if <paramref name="value"/> is the wrong type for this property.</exception>
+        /// <exception cref="ArgumentException"> is thrown if <paramref name="value"/> is the wrong type for
+        // this property.</exception>
         private static void EnsureValidPropertyType(
             string propertyName,
             Type propertyType,
@@ -463,13 +530,17 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="instance">Object instance to test.</param>
         /// <param name="validationContext">Describes the object type.</param>
         /// <param name="validateAllProperties">if <c>true</c> also validates all properties.</param>
-        /// <param name="breakOnFirstError">Whether to break on the first error or validate everything.</param>
-        /// <returns>A collection of validation errors that result from validating the <paramref name="instance"/> with
+        /// <param name="breakOnFirstError">Whether to break on the first error or validate
+        // everything.</param>
+        /// <returns>A collection of validation errors that result from validating the <paramref
+        // name="instance"/> with
         /// the given <paramref name="validationContext"/>.</returns>
         /// <exception cref="ArgumentNullException">When <paramref name="instance"/> is null.</exception>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         /// <exception cref="ArgumentException">When <paramref name="instance"/> doesn't match the
-        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref name="validationContext"/>.</exception>
+        /// <see cref="ValidationContext.ObjectInstance"/> on <paramref
+        // name="validationContext"/>.</exception>
         private static IEnumerable<ValidationError> GetObjectValidationErrors(
             object instance,
             ValidationContext validationContext,
@@ -538,13 +609,16 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Internal iterator to enumerate all the validation errors for all properties of the given object instance.
+        /// Internal iterator to enumerate all the validation errors for all properties of the given object
+        // instance.
         /// </summary>
         /// <param name="instance">Object instance to test.</param>
         /// <param name="validationContext">Describes the object type.</param>
-        /// <param name="validateAllProperties">If <c>true</c>, evaluates all the properties, otherwise just checks that
+        /// <param name="validateAllProperties">If <c>true</c>, evaluates all the properties, otherwise just
+        // checks that
         /// ones marked with <see cref="RequiredAttribute"/> are not null.</param>
-        /// <param name="breakOnFirstError">Whether to break on the first error or validate everything.</param>
+        /// <param name="breakOnFirstError">Whether to break on the first error or validate
+        // everything.</param>
         /// <returns>A list of <see cref="ValidationError"/> instances.</returns>
         private static IEnumerable<ValidationError> GetObjectPropertyValidationErrors(
             object instance,
@@ -613,7 +687,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="instance">Instance from which to fetch the properties.</param>
         /// <param name="validationContext">Describes the entity being validated.</param>
-        /// <returns>A set of key value pairs, where the key is a validation context for the property and the value is its current
+        /// <returns>A set of key value pairs, where the key is a validation context for the property and
+        // the value is its current
         /// value.</returns>
         /// <remarks>Ignores indexed properties.</remarks>
         private static ICollection<KeyValuePair<ValidationContext, object>> GetPropertyValues(
@@ -682,7 +757,8 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="breakOnFirstError">Whether or not to break on the first validation failure.  A
         /// <see cref="RequiredAttribute"/> failure will always abort with that sole failure.</param>
         /// <returns>The collection of validation errors.</returns>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         private static IEnumerable<ValidationError> GetValidationErrors(
             object value,
             ValidationContext validationContext,
@@ -731,14 +807,17 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Tests whether a value is valid against a single <see cref="ValidationAttribute"/> using the <see cref="ValidationContext"/>.
+        /// Tests whether a value is valid against a single <see cref="ValidationAttribute"/> using the <see
+        // cref="ValidationContext"/>.
         /// </summary>
         /// <param name="value">The value to be tested for validity.</param>
         /// <param name="validationContext">Describes the property member to validate.</param>
         /// <param name="attribute">The validation attribute to test.</param>
-        /// <param name="validationError">The validation error that occurs during validation.  Will be <c>null</c> when the return value is <c>true</c>.</param>
+        /// <param name="validationError">The validation error that occurs during validation.  Will be
+        // <c>null</c> when the return value is <c>true</c>.</param>
         /// <returns><c>true</c> if the value is valid.</returns>
-        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">When <paramref name="validationContext"/> is
+        // null.</exception>
         private static bool TryValidate(
             object value,
             ValidationContext validationContext,
@@ -766,7 +845,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        /// Private helper class to encapsulate a ValidationAttribute with the failed value and the user-visible
+        /// Private helper class to encapsulate a ValidationAttribute with the failed value and the
+        // user-visible
         /// target name against which it was validated.
         /// </summary>
         private class ValidationError

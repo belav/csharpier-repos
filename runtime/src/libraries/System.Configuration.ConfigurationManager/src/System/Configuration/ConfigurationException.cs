@@ -10,9 +10,11 @@ using System.Xml;
 namespace System.Configuration
 {
     /// <summary>
-    ///     A config exception can contain a filename (of a config file) and a line number (of the location in the file in
+    ///     A config exception can contain a filename (of a config file) and a line number (of the
+    // location in the file in
     ///     which a
-    ///     problem was encountered). Section handlers should throw this exception (or subclasses) together with filename and
+    ///     problem was encountered). Section handlers should throw this exception (or subclasses)
+    // together with filename and
     ///     line
     ///     number information where possible.
     /// </summary>

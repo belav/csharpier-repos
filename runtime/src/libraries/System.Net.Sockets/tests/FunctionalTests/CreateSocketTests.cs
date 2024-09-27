@@ -544,7 +544,8 @@ namespace System.Net.Sockets.Tests
             Assert.Equal(orig.SendTimeout, client.SendTimeout);
             Assert.Equal(orig.Ttl, client.Ttl);
 
-            // Validate setting various properties on the new instance and seeing them roundtrip back to the original.
+            // Validate setting various properties on the new instance and seeing them roundtrip back to the
+            // original.
             client.ReceiveTimeout = 42;
             Assert.Equal(client.ReceiveTimeout, orig.ReceiveTimeout);
 
@@ -829,10 +830,12 @@ namespace System.Net.Sockets.Tests
             close(ptr[1]);
         }
 
-        // On some Unix machines the second (manual) handle close succeeds despite Socket's/SafeSocketHandle's Dispose
+        // On some Unix machines the second (manual) handle close succeeds despite
+        // Socket's/SafeSocketHandle's Dispose
         // completing a succesful close of the same handle value previously.
         // We may investigate this, but it doesn't indicate incorrect behavior in Socket code,
-        // so making the test PlatformSpecific seems to be good enough. The SafeSocketHandle lifecycle logic is platform cross-platform.
+        // so making the test PlatformSpecific seems to be good enough. The SafeSocketHandle lifecycle logic
+        // is platform cross-platform.
         [PlatformSpecific(TestPlatforms.Windows)]
         [Theory]
         [InlineData(false)]

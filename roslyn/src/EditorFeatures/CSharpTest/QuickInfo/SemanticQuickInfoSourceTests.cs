@@ -484,7 +484,8 @@ class C { void M() { $$C obj; } }";
         [Fact]
         public async Task TestSingleLineDocComments()
         {
-            // Tests chosen to maximize code coverage in DocumentationCommentCompiler.WriteFormattedSingleLineComment
+            // Tests chosen to maximize code coverage in
+            // DocumentationCommentCompiler.WriteFormattedSingleLineComment
 
             // SingleLine doc comment with leading whitespace
             await TestAsync(
@@ -555,7 +556,8 @@ class C
         [Fact]
         public async Task TestMultiLineDocComments()
         {
-            // Tests chosen to maximize code coverage in DocumentationCommentCompiler.WriteFormattedMultiLineComment
+            // Tests chosen to maximize code coverage in
+            // DocumentationCommentCompiler.WriteFormattedMultiLineComment
 
             // Multiline doc comment with leading whitespace
             await TestAsync(
@@ -5499,7 +5501,8 @@ class B
     }
 }";
 
-            // Note that <COMImport> is required by compiler.  Bug 17013 tracks enabling indexed property for non-COM types.
+            // Note that <COMImport> is required by compiler.  Bug 17013 tracks enabling indexed property for
+            // non-COM types.
             var referencedCode =
                 @"Imports System.Runtime.InteropServices
 <ComImport()>

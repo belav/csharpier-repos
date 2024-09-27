@@ -4,20 +4,25 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     Represents a result from an <see cref="IInterceptor" /> such as an <see cref="ISaveChangesInterceptor" /> to allow
+///     Represents a result from an <see cref="IInterceptor" /> such as an <see
+// cref="ISaveChangesInterceptor" /> to allow
 ///     suppression of the normal operation being intercepted.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         A value of this type is passed to all interceptor methods that are called before the operation
+///         A value of this type is passed to all interceptor methods that are called before the
+// operation
 ///         being intercepted is executed.
 ///         Typically the interceptor should return the value passed in.
-///         However, creating a result with <see cref="SuppressWithResult" /> causes the operation being
+///         However, creating a result with <see cref="SuppressWithResult" /> causes the operation
+// being
 ///         intercepted to be suppressed; that is, the operation is not executed.
-///         The value in the result is then used as a substitute return value for the operation that was suppressed.
+///         The value in the result is then used as a substitute return value for the operation that
+// was suppressed.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-interceptors">EF Core interceptors</see> for
+// more information and examples.
 ///     </para>
 /// </remarks>
 /// <typeparam name="TResult">The new result to use.</typeparam>
@@ -45,7 +50,8 @@ public readonly struct InterceptionResult<TResult>
     ///     The property can only be accessed if <see cref="HasResult" /> is true. The concept here
     ///     is the same as <see cref="Nullable{T}.Value" /> and <see cref="Nullable{T}.HasValue" />
     /// </remarks>
-    /// <exception cref="InvalidOperationException">when <see cref="Result" /> is <see langword="false" />.</exception>
+    /// <exception cref="InvalidOperationException">when <see cref="Result" /> is <see langword="false"
+    // />.</exception>
     public TResult Result
     {
         get
@@ -60,7 +66,8 @@ public readonly struct InterceptionResult<TResult>
     }
 
     /// <summary>
-    ///     If true, then interception is suppressed, and <see cref="Result" /> contains the result to use.
+    ///     If true, then interception is suppressed, and <see cref="Result" /> contains the result to
+    // use.
     /// </summary>
     public bool HasResult { get; }
 }

@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     }
 
     /// <summary>
-    /// Represents a chunk of text that we did not understand as anything special.  i.e. it wasn't a keyword, number, or
+    /// Represents a chunk of text that we did not understand as anything special.  i.e. it wasn't a
+    // keyword, number, or
     /// literal.  One common case of this is an unquoted property name (which json.net accepts).
     /// </summary>
     internal sealed class JsonTextNode : JsonValueNode
@@ -228,7 +229,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         public JsonPropertyNode(JsonToken nameToken, JsonToken colonToken, JsonValueNode value)
             : base(JsonKind.Property)
         {
-            // Note: the name is allowed by json.net to just be a text token, not a string.  e.g. `goo: 0` as opposed to
+            // Note: the name is allowed by json.net to just be a text token, not a string.  e.g. `goo: 0` as
+            // opposed to
             // `"goo": 0`.  Strict json does not allow this.
             Debug.Assert(
                 nameToken.Kind == JsonKind.StringToken || nameToken.Kind == JsonKind.TextToken
@@ -259,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
     }
 
     /// <summary>
-    /// Json.net construction.  It allows things like <c>new Date(1, 2, 3)</c>.  This is not allowed in strict mode.
+    /// Json.net construction.  It allows things like <c>new Date(1, 2, 3)</c>.  This is not allowed in
+    // strict mode.
     /// </summary>
     internal sealed class JsonConstructorNode : JsonValueNode
     {

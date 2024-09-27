@@ -92,7 +92,8 @@ namespace System.Xml.Serialization
         {
             // Unlike other "From" functions that one is just a place holder for automatic code generation.
             // The reason is performance and memory consumption for (potentially) big 64base-encoded chunks
-            // And it is assumed that the caller generates the code that will distinguish between byte[] and string return types
+            // And it is assumed that the caller generates the code that will distinguish between byte[] and
+            // string return types
             //
             return value;
         }
@@ -667,7 +668,8 @@ namespace System.Xml.Serialization
                     {
                         if (_w.LookupPrefix(aliasNs) == null)
                         {
-                            // write the default namespace declaration only if we have not written it already, over wise we just ignore one provided by the user
+                            // write the default namespace declaration only if we have not written it already, over wise we just
+                            // ignore one provided by the user
                             if (prefix == null && alias.Length == 0)
                                 break;
                             WriteAttribute(nameof(xmlns), alias, null, aliasNs);
@@ -779,7 +781,8 @@ namespace System.Xml.Serialization
             if (o != null && _objectsInUse != null)
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (!_objectsInUse.ContainsKey(o))
                     throw new InvalidOperationException(
                         SR.Format(
@@ -1051,7 +1054,8 @@ namespace System.Xml.Serialization
             string ns
         )
         {
-            // XmlChoiceIdentifierMismatch=Value '{0}' of the choice identifier '{1}' does not match element '{2}' from namespace '{3}'.
+            // XmlChoiceIdentifierMismatch=Value '{0}' of the choice identifier '{1}' does not match element
+            // '{2}' from namespace '{3}'.
             return new InvalidOperationException(
                 SR.Format(SR.XmlChoiceIdentifierMismatch, value, identifier, name, ns)
             );
@@ -1157,7 +1161,8 @@ namespace System.Xml.Serialization
 
                     string? value = FromXmlQualifiedName(qname, true) + dims;
 
-                    //<xsd:attribute xmlns:q3="s0" wsdl:arrayType="q3:FoosBase[]" xmlns:q4="http://schemas.xmlsoap.org/soap/encoding/" ref="q4:arrayType" />
+                    //<xsd:attribute xmlns:q3="s0" wsdl:arrayType="q3:FoosBase[]"
+                    // xmlns:q4="http://schemas.xmlsoap.org/soap/encoding/" ref="q4:arrayType" />
                     WriteAttribute(Wsdl.ArrayType, Wsdl.Namespace, value);
                 }
                 else
@@ -1586,7 +1591,8 @@ namespace System.Xml.Serialization
             else
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (!typeof(IEnumerable).IsAssignableFrom(type))
                     throw new InvalidOperationException(
                         SR.Format(
@@ -2195,7 +2201,8 @@ namespace System.Xml.Serialization
                 string assemblyName =
                     (iComma > -1) ? assemblyFullName.Substring(0, iComma) : assemblyFullName;
                 assemblyVariable = GenerateVariableName("assembly", assemblyName);
-                //writer.WriteLine("static "+ typeof(Assembly).FullName+" "+assemblyVariable+" = "+typeof(Assembly).FullName+".Load(");
+                //writer.WriteLine("static "+ typeof(Assembly).FullName+" "+assemblyVariable+" =
+                // "+typeof(Assembly).FullName+".Load(");
                 _writer.Write(
                     $"static {typeof(Assembly).FullName} {assemblyVariable} = ResolveDynamicAssembly("
                 );
@@ -2435,17 +2442,17 @@ namespace System.Xml.Serialization
 
         /*
         Exception GetReflectionVariableException(string typeFullName, string memberName){
-            string key;
-            if (memberName == null)
-                key = typeFullName;
-            else
-                key = memberName+":"+typeFullName;
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            foreach (object varAvail in reflectionVariables.Keys){
-                sb.Append(varAvail.ToString());
-                sb.Append("\n");
-            }
-            return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
+        string key;
+        if (memberName == null)
+        key = typeFullName;
+        else
+        key = memberName+":"+typeFullName;
+        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+        foreach (object varAvail in reflectionVariables.Keys){
+        sb.Append(varAvail.ToString());
+        sb.Append("\n");
+        }
+        return new Exception("No reflection variable for " + key + "\nAvailable keys\n"+sb.ToString());
         }*/
 
         internal string GetStringForEnumMember(
@@ -2988,7 +2995,8 @@ namespace System.Xml.Serialization
             string? methodName = ReferenceMapping(mapping);
 
 #if DEBUG
-            // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+            // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+            // as aspnet_ewp.exe
             if (methodName == null)
                 throw new InvalidOperationException(
                     SR.Format(SR.XmlInternalErrorMethod, mapping.TypeDesc!.Name)
@@ -3053,7 +3061,8 @@ namespace System.Xml.Serialization
                 if (mapping is EnumMapping)
                 {
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (defaultValue!.GetType() != typeof(string))
                         throw new InvalidOperationException(
                             SR.Format(
@@ -3385,7 +3394,8 @@ namespace System.Xml.Serialization
                     }
 
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (enumSource == null)
                         throw new InvalidOperationException(
                             SR.Format(
@@ -3671,7 +3681,8 @@ namespace System.Xml.Serialization
                 string? methodName = ReferenceMapping(derived);
 
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         "derived from "
@@ -3718,7 +3729,8 @@ namespace System.Xml.Serialization
                         string? methodName = ReferenceMapping(mapping);
 
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (methodName == null)
                             throw new InvalidOperationException(
                                 SR.Format(SR.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -4109,7 +4121,8 @@ namespace System.Xml.Serialization
                     {
                         if (memberTypeDesc.UseReflection)
                         {
-                            // we use wildcard method name for generic GetEnumerator method, so we cannot use GetStringForMethodInvoke call here
+                            // we use wildcard method name for generic GetEnumerator method, so we cannot use
+                            // GetStringForMethodInvoke call here
                             Writer.Write("(");
                             Writer.Write(typeof(IEnumerator).FullName);
                             Writer.Write(")");
@@ -4397,7 +4410,8 @@ namespace System.Xml.Serialization
                 {
                     if (arrayTypeDesc.UseReflection)
                     {
-                        // we use wildcard method name for generic GetEnumerator method, so we cannot use GetStringForMethodInvoke call here
+                        // we use wildcard method name for generic GetEnumerator method, so we cannot use
+                        // GetStringForMethodInvoke call here
                         Writer.Write("(");
                         Writer.Write(typeof(IEnumerator).FullName);
                         Writer.Write(")");
@@ -5181,7 +5195,8 @@ namespace System.Xml.Serialization
                     string? methodName = ReferenceMapping(structMapping);
 
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (methodName == null)
                         throw new InvalidOperationException(
                             SR.Format(SR.XmlInternalErrorMethod, structMapping.TypeDesc!.Name)

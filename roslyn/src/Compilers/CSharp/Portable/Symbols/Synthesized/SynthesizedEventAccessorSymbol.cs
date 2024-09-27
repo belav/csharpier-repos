@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// or for an event re-abstraction in an interface.
     /// </summary>
     /// <remarks>
-    /// Associated with <see cref="SourceFieldLikeEventSymbol"/> and <see cref="SourceCustomEventSymbol"/>.
+    /// Associated with <see cref="SourceFieldLikeEventSymbol"/> and <see
+    // cref="SourceCustomEventSymbol"/>.
     /// </remarks>
     internal sealed class SynthesizedEventAccessorSymbol : SourceEventAccessorSymbol
     {

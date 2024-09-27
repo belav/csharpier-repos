@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             );
             public abstract void OnLValueDereferenceFound(CaptureId captureId);
 
-            // Methods specific to delegate analysis to track potential delegate invocation targets for CFG based dataflow analysis.
+            // Methods specific to delegate analysis to track potential delegate invocation targets for CFG
+            // based dataflow analysis.
             public abstract bool IsTrackingDelegateCreationTargets { get; }
             public abstract void SetTargetsFromSymbolForDelegate(IOperation write, ISymbol symbol);
             public abstract void SetLambdaTargetForDelegate(
@@ -195,7 +196,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
             )
             {
                 // Mark parameters as being written from the value provided at the call site.
-                // Note that the write operation is "null" as there is no corresponding IOperation for parameter definition.
+                // Note that the write operation is "null" as there is no corresponding IOperation for parameter
+                // definition.
                 foreach (var parameter in parameters)
                 {
                     (ISymbol, IOperation) key = (parameter, null);
@@ -258,7 +260,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
 
                 if (_referenceTakenSymbolsBuilder.Contains(symbol))
                 {
-                    // Skip tracking writes for reference taken symbols as the written value may be read from a different variable.
+                    // Skip tracking writes for reference taken symbols as the written value may be read from a
+                    // different variable.
                     return;
                 }
 
@@ -270,7 +273,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     _referenceTakenSymbolsBuilder.Add(symbol);
                 }
 
-                // Only mark as unused write if we are processing it for the first time (not from back edge for loops)
+                // Only mark as unused write if we are processing it for the first time (not from back edge for
+                // loops)
                 if (!SymbolsWriteBuilder.ContainsKey(symbolAndWrite) && !maybeWritten)
                 {
                     SymbolsWriteBuilder.Add((symbol, operation), false);

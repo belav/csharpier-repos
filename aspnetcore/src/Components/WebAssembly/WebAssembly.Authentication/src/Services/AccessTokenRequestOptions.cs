@@ -14,7 +14,8 @@ public class AccessTokenRequestOptions
     public IEnumerable<string>? Scopes { get; set; }
 
     /// <summary>
-    /// Gets or sets a specific return url to use for returning the user back to the application if it needs to be
+    /// Gets or sets a specific return url to use for returning the user back to the application if it
+    // needs to be
     /// redirected elsewhere in order to provision the token.
     /// </summary>
     public string? ReturnUrl { get; set; }

@@ -168,7 +168,8 @@ namespace System.Workflow.ComponentModel.Serialization
             return service;
         }
 
-        // work around : PD7's PrimitiveCodeDomSerializer does not handle well strings bigger than 200 characters,
+        // work around : PD7's PrimitiveCodeDomSerializer does not handle well strings bigger than 200
+        // characters,
         //       we push our own version to fix it.
         public object GetSerializer(Type objectType, Type serializerType)
         {
@@ -226,7 +227,8 @@ namespace System.Workflow.ComponentModel.Serialization
             if (objectType == null || serializerType == null)
                 return true;
 
-            //If objectType is not serializable or we are not looking for codedomserializer then use user defined serializer
+            //If objectType is not serializable or we are not looking for codedomserializer then use user
+            // defined serializer
             if (!objectType.IsSerializable || serializerType != typeof(CodeDomSerializer))
                 return true;
 
@@ -239,7 +241,8 @@ namespace System.Workflow.ComponentModel.Serialization
             )
                 return true;
 
-            //If user has defined instance descriptor then we always serialize to a create expression so we honor
+            //If user has defined instance descriptor then we always serialize to a create expression so we
+            // honor
             //user defined serializer
             TypeConverter converter = TypeDescriptor.GetConverter(objectType);
             if (converter != null && converter.CanConvertTo(typeof(InstanceDescriptor)))
@@ -256,7 +259,8 @@ namespace System.Workflow.ComponentModel.Serialization
             )
                 return true;
 
-            //Special case for UI objects they need to always come from the resource only if we are not compiling
+            //Special case for UI objects they need to always come from the resource only if we are not
+            // compiling
             Activity activity = this.serializationManager.Context[typeof(Activity)] as Activity;
             if (
                 activity != null

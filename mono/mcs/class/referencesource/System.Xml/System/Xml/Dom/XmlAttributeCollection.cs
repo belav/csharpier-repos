@@ -298,7 +298,8 @@ namespace System.Xml
 
         internal override XmlNode AddNode(XmlNode node)
         {
-            //should be sure by now that the node doesn't have the same name with an existing node in the collection
+            //should be sure by now that the node doesn't have the same name with an existing node in the
+            // collection
             RemoveDuplicateAttribute((XmlAttribute)node);
             XmlNode retNode = base.AddNode(node);
             Debug.Assert(retNode is XmlAttribute);
@@ -319,7 +320,8 @@ namespace System.Xml
             XmlNode retNode = base.RemoveNodeAt(i);
             Debug.Assert(retNode is XmlAttribute);
             RemoveParentFromElementIdAttrMap((XmlAttribute)retNode);
-            // after remove the attribute, we need to check if a default attribute node should be created and inserted into the tree
+            // after remove the attribute, we need to check if a default attribute node should be created and
+            // inserted into the tree
             XmlAttribute defattr = parent.OwnerDocument.GetDefaultAttribute(
                 (XmlElement)parent,
                 retNode.Prefix,
@@ -377,7 +379,8 @@ namespace System.Xml
         }
 
         //the function checks if there is already node with the same name existing in the collection
-        // if so, remove it because the new one will be inserted to replace this one (could be in different position though )
+        // if so, remove it because the new one will be inserted to replace this one (could be in different
+        // position though )
         //  by the calling function later
         internal int RemoveDuplicateAttribute(XmlAttribute attr)
         {
@@ -398,7 +401,8 @@ namespace System.Xml
             XmlDocument doc = parent.OwnerDocument;
             Debug.Assert(doc != null);
             //The returned attrname if not null is the name with namespaceURI being set to string.Empty
-            //Because DTD doesn't support namespaceURI so all comparisons are based on no namespaceURI (string.Empty);
+            //Because DTD doesn't support namespaceURI so all comparisons are based on no namespaceURI
+            // (string.Empty);
             XmlName attrname = doc.GetIDInfoByElement(parentElem.XmlName);
             if (
                 attrname != null

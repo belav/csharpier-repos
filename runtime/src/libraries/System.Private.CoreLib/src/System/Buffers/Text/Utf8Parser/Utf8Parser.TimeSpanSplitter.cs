@@ -9,8 +9,10 @@ namespace System.Buffers.Text
     {
         private enum ComponentParseResult : byte
         {
-            // Do not change or add values in this enum unless you review every use of the TimeSpanSplitter.Separators field. That field is an "array of four
-            // ComponentParseResults" encoded as a 32-bit integer with each of its four bytes containing one of 0 (NoMoreData), 1 (Colon) or 2 (Period).
+            // Do not change or add values in this enum unless you review every use of the
+            // TimeSpanSplitter.Separators field. That field is an "array of four
+            // ComponentParseResults" encoded as a 32-bit integer with each of its four bytes containing one of
+            // 0 (NoMoreData), 1 (Colon) or 2 (Period).
             // (So a value of 0x01010200 means the string parsed as "nn:nn:nn.nnnnnnn")
             NoMoreData = 0,
             Colon = 1,
@@ -28,7 +30,8 @@ namespace System.Buffers.Text
 
             public bool IsNegative;
 
-            // Encodes an "array of four ComponentParseResults" as a 32-bit integer with each of its four bytes containing one of 0 (NoMoreData), 1 (Colon) or 2 (Period).
+            // Encodes an "array of four ComponentParseResults" as a 32-bit integer with each of its four bytes
+            // containing one of 0 (NoMoreData), 1 (Colon) or 2 (Period).
             // (So a value of 0x01010200 means the string parsed as "nn:nn:nn.nnnnnnn")
             public uint Separators;
 
@@ -68,8 +71,10 @@ namespace System.Buffers.Text
                     }
                 }
 
-                // From here, we terminate on anything that's not a digit, ':' or '.' The '.' is only allowed after at least three components have
-                // been specified. If we see it earlier, we'll assume that's an error and fail out rather than treating it as the end of data.
+                // From here, we terminate on anything that's not a digit, ':' or '.' The '.' is only allowed after
+                // at least three components have
+                // been specified. If we see it earlier, we'll assume that's an error and fail out rather than
+                // treating it as the end of data.
 
                 //
                 // Timespan has to start with a number - parse the first one.
@@ -82,8 +87,10 @@ namespace System.Buffers.Text
                 srcIndex += justConsumed;
 
                 //
-                // Split out the second number (if any) For the 'c' format, a period might validly appear here as it;s used both to separate the day and the fraction - however,
-                // the fraction is always the fourth component at earliest, so if we do see a period at this stage, always parse the integer as a regular integer, not as
+                // Split out the second number (if any) For the 'c' format, a period might validly appear here as
+                // it;s used both to separate the day and the fraction - however,
+                // the fraction is always the fourth component at earliest, so if we do see a period at this stage,
+                // always parse the integer as a regular integer, not as
                 // a fraction.
                 //
                 ComponentParseResult result = ParseComponent(
@@ -181,7 +188,8 @@ namespace System.Buffers.Text
                 }
 
                 //
-                // There cannot legally be a sixth number. If the next character is a period or colon, treat this as a error as it's likely
+                // There cannot legally be a sixth number. If the next character is a period or colon, treat this as
+                // a error as it's likely
                 // to indicate the start of a sixth number. Otherwise, treat as end of parse with data left over.
                 //
                 if (

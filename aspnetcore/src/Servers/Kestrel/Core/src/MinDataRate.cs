@@ -13,8 +13,10 @@ public class MinDataRate
     /// <summary>
     /// Creates a new instance of <see cref="MinDataRate"/>.
     /// </summary>
-    /// <param name="bytesPerSecond">The minimum rate in bytes/second at which data should be processed.</param>
-    /// <param name="gracePeriod">The amount of time to delay enforcement of <paramref name="bytesPerSecond"/>,
+    /// <param name="bytesPerSecond">The minimum rate in bytes/second at which data should be
+    // processed.</param>
+    /// <param name="gracePeriod">The amount of time to delay enforcement of <paramref
+    // name="bytesPerSecond"/>,
     /// starting at the time data is first read or written.</param>
     public MinDataRate(double bytesPerSecond, TimeSpan gracePeriod)
     {

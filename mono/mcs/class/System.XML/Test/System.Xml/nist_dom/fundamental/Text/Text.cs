@@ -24,16 +24,16 @@ namespace nist_dom.fundamental
     {
         public static int i = 2;
 
-        /*
-                public testResults[] RunTests()
-                {
-                    testResults[] tests = new testResults[] {core0001T(), core0002T(), core0003T(),core0004T(),
-                                                                core0005T(), core0006T(), core0007T(), core0008T(),
-                                                                core0009T()};
-          
-                    return tests;
-                }
-        */
+/*
+public testResults[] RunTests()
+{
+testResults[] tests = new testResults[] {core0001T(), core0002T(), core0003T(),core0004T(),
+core0005T(), core0006T(), core0007T(), core0008T(),
+core0009T()};
+
+return tests;
+}
+*/
         //------------------------ test case core-0001T ------------------------
         //
         // Testing feature -  If there is no markup inside an Element or Attr node

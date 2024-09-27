@@ -77,7 +77,8 @@ namespace System.Data.Objects
         private ClrPerspective _perspective;
 
         /// <summary>
-        /// A string that can be used to represent the current state of this parameter collection in an ObjectQuery cache key.
+        /// A string that can be used to represent the current state of this parameter collection in an
+        // ObjectQuery cache key.
         /// </summary>
         private string _cacheKey;
 
@@ -389,18 +390,23 @@ namespace System.Data.Objects
         // ---------------
 
         /// <summary>
-        /// Retrieves a string that may be used to represent this parameter collection in an ObjectQuery cache key.
-        /// If this collection has not changed since the last call to this method, the same string instance is returned.
-        /// Note that this string is used by various ObjectQueryImplementations to version the parameter collection.
+        /// Retrieves a string that may be used to represent this parameter collection in an ObjectQuery
+        // cache key.
+        /// If this collection has not changed since the last call to this method, the same string instance
+        // is returned.
+        /// Note that this string is used by various ObjectQueryImplementations to version the parameter
+        // collection.
         /// </summary>
-        /// <returns>A string that may be used to represent this parameter collection in an ObjectQuery cache key.</returns>
+        /// <returns>A string that may be used to represent this parameter collection in an ObjectQuery
+        // cache key.</returns>
         internal string GetCacheKey()
         {
             if (null == this._cacheKey)
             {
                 if (this._parameters.Count > 0)
                 {
-                    // Future Enhancement: If the separate branch for a single parameter does not have a measurable perf advantage, remove it.
+                    // Future Enhancement: If the separate branch for a single parameter does not have a measurable perf
+                    // advantage, remove it.
                     if (1 == this._parameters.Count)
                     {
                         // if its one parameter only, there is no need to use stringbuilder
@@ -410,7 +416,8 @@ namespace System.Data.Objects
                     }
                     else
                     {
-                        // Future Enhancement: Investigate whether precalculating the required size of the string builder is a better time/space tradeoff.
+                        // Future Enhancement: Investigate whether precalculating the required size of the string builder is
+                        // a better time/space tradeoff.
                         StringBuilder keyBuilder = new StringBuilder(this._parameters.Count * 20);
                         keyBuilder.Append("@@");
                         keyBuilder.Append(this._parameters.Count);
@@ -439,21 +446,26 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Locks or unlocks this parameter collection, allowing its contents to be added to, removed from, or cleared.
-        /// Calling this method consecutively with the same value has no effect but does not throw an exception.
+        /// Locks or unlocks this parameter collection, allowing its contents to be added to, removed from,
+        // or cleared.
+        /// Calling this method consecutively with the same value has no effect but does not throw an
+        // exception.
         /// </summary>
-        /// <param name="isReadOnly">If <c>true</c>, this parameter collection is now locked; otherwise it is unlocked</param>
+        /// <param name="isReadOnly">If <c>true</c>, this parameter collection is now locked; otherwise it
+        // is unlocked</param>
         internal void SetReadOnly(bool isReadOnly)
         {
             this._locked = isReadOnly;
         }
 
         /// <summary>
-        /// Creates a new copy of the specified parameter collection containing copies of its element <see cref="ObjectParameter"/>s.
+        /// Creates a new copy of the specified parameter collection containing copies of its element <see
+        // cref="ObjectParameter"/>s.
         /// If the specified argument is <c>null</c>, then <c>null</c> is returned.
         /// </summary>
         /// <param name="copyParams">The parameter collection to copy</param>
-        /// <returns>The new collection containing copies of <paramref name="copyParams"/> parameters, if <paramref name="copyParams"/> is non-null; otherwise <c>null</c>.</returns>
+        /// <returns>The new collection containing copies of <paramref name="copyParams"/> parameters, if
+        // <paramref name="copyParams"/> is non-null; otherwise <c>null</c>.</returns>
         internal static ObjectParameterCollection DeepCopy(ObjectParameterCollection copyParams)
         {
             if (null == copyParams)
@@ -503,7 +515,8 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        ///     This method successfully returns only if the parameter collection is not considered 'locked';
+        ///     This method successfully returns only if the parameter collection is not considered
+        // 'locked';
         ///     otherwise an <see cref="InvalidOperationException"/> is thrown.
         /// </summary>
         private void CheckUnlocked()

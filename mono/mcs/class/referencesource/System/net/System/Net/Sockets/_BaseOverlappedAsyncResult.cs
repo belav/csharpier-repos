@@ -264,8 +264,8 @@ namespace System.Net.Sockets
         // Consider removing.
         internal void SetUnmanagedStructures(object objectsToPin, ref OverlappedCache overlappedCache)
         {
-            SetupCache(ref overlappedCache);
-            SetUnmanagedStructures(objectsToPin);
+        SetupCache(ref overlappedCache);
+        SetUnmanagedStructures(objectsToPin);
         }
         */
 
@@ -328,7 +328,8 @@ namespace System.Net.Sockets
 #if !NO_OVERLAPPED_CACHE
             if (!m_UseOverlappedIO && !m_DisableOverlapped)
             {
-                // Have to be super careful.  Socket isn't synchronized, so if a user calls End() twice, we don't want to
+                // Have to be super careful.  Socket isn't synchronized, so if a user calls End() twice, we don't
+                // want to
                 // copy out this cache twice which could result in posting an IO with a deleted NativeOverlapped.
                 OverlappedCache cache =
                     m_Cache == null
@@ -389,9 +390,12 @@ namespace System.Net.Sockets
                         "Handle mismatch"
                     );
 
-                    // The AsyncResult must be cleared before the callback is called (i.e. before ExtractCache is called).
-                    // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
-                    // which points to the Socket (as well as user data), which points to the OverlappedCache, preventing the OverlappedCache
+                    // The AsyncResult must be cleared before the callback is called (i.e. before ExtractCache is
+                    // called).
+                    // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the
+                    // async result object,
+                    // which points to the Socket (as well as user data), which points to the OverlappedCache,
+                    // preventing the OverlappedCache
                     // finalizer from freeing the pinned OverlappedData.
                     callbackOverlapped.AsyncResult = null;
 
@@ -425,10 +429,13 @@ namespace System.Net.Sockets
                         && socketError != SocketError.OperationAborted
                     )
                     {
-                        // There are cases where passed errorCode does not reflect the details of the underlined socket error.
+                        // There are cases where passed errorCode does not reflect the details of the underlined socket
+                        // error.
                         // "So as of today, the key is the difference between WSAECONNRESET and ConnectionAborted,
-                        //  .e.g remote party or network causing the connection reset or something on the local host (e.g. closesocket
-                        // or receiving data after shutdown (SD_RECV)).  With Winsock/TCP stack rewrite in longhorn, there may
+                        //  .e.g remote party or network causing the connection reset or something on the local host (e.g.
+                        // closesocket
+                        // or receiving data after shutdown (SD_RECV)).  With Winsock/TCP stack rewrite in longhorn, there
+                        // may
                         // be other differences as well."
 
                         Socket socket = asyncResult.AsyncObject as Socket;
@@ -446,7 +453,8 @@ namespace System.Net.Sockets
                             {
                                 //
                                 // The Async IO completed with a failure.
-                                // here we need to call WSAGetOverlappedResult() just so Marshal.GetLastWin32Error() will return the correct error.
+                                // here we need to call WSAGetOverlappedResult() just so Marshal.GetLastWin32Error() will return the
+                                // correct error.
                                 //
                                 SocketFlags ignore;
                                 bool success = UnsafeNclNativeMethods.OSSOCK.WSAGetOverlappedResult(
@@ -515,7 +523,8 @@ namespace System.Net.Sockets
         private void OverlappedCallback(object stateObject, bool Signaled)
         {
 #if DEBUG
-            // GlobalLog.SetThreadSource(ThreadKinds.Worker);  Because of change 1077887, need logic to determine thread type here.
+            // GlobalLog.SetThreadSource(ThreadKinds.Worker);  Because of change 1077887, need logic to
+            // determine thread type here.
             using (GlobalLog.SetThreadKind(ThreadKinds.System))
             {
 #endif
@@ -672,8 +681,10 @@ namespace System.Net.Sockets
                         Result = -1;
 
                         // The AsyncResult must be cleared since the callback isn't going to be called.
-                        // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
-                        // which points to the Socket (as well as user data) and to the OverlappedCache, preventing the OverlappedCache
+                        // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the
+                        // async result object,
+                        // which points to the Socket (as well as user data) and to the OverlappedCache, preventing the
+                        // OverlappedCache
                         // finalizer from freeing the pinned OverlappedData.
                         if (m_Cache != null)
                         {

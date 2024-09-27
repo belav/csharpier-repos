@@ -82,7 +82,8 @@ namespace System.Data
         /// </summary>
         public void Add(Constraint constraint) => Add(constraint, true);
 
-        // To add foreign key constraint without adding any unique constraint for internal use. Main purpose : Binary Remoting
+        // To add foreign key constraint without adding any unique constraint for internal use. Main purpose
+        // : Binary Remoting
         internal void Add(Constraint constraint, bool addUniqueWhenAddingForeign)
         {
             if (constraint == null)
@@ -199,7 +200,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Constructs a new <see cref='System.Data.ForeignKeyConstraint'/> with the specified parent columns and
+        /// Constructs a new <see cref='System.Data.ForeignKeyConstraint'/> with the specified parent
+        // columns and
         ///    child columns and adds the constraint to the collection.
         /// </summary>
         public Constraint Add(
@@ -317,7 +319,8 @@ namespace System.Data
 
         /// <summary>
         /// Does verification on the constraint and it's name.
-        /// An ArgumentNullException is thrown if this constraint is null.  An ArgumentException is thrown if this constraint
+        /// An ArgumentNullException is thrown if this constraint is null.  An ArgumentException is thrown
+        // if this constraint
         /// already belongs to this collection, belongs to another collection.
         /// A DuplicateNameException is thrown if this collection already has a constraint with the same
         /// name (case insensitive).
@@ -385,7 +388,8 @@ namespace System.Data
         /// <summary>
         /// Does verification on the constraint and it's name.
         /// An ArgumentNullException is thrown if this constraint is null.  An ArgumentException is thrown
-        /// if this constraint doesn't belong to this collection or if this constraint is part of a relationship.
+        /// if this constraint doesn't belong to this collection or if this constraint is part of a
+        // relationship.
         /// </summary>
         private void BaseRemove(Constraint constraint)
         {
@@ -485,7 +489,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Indicates whether the <see cref='System.Data.Constraint'/>, specified by name, exists in the collection.
+        /// Indicates whether the <see cref='System.Data.Constraint'/>, specified by name, exists in the
+        // collection.
         /// </summary>
         public bool Contains(string? name)
         {
@@ -694,8 +699,10 @@ namespace System.Data
 
         /// <summary>
         /// Registers this name as being used in the collection.  Will throw an ArgumentException
-        /// if the name is already being used.  Called by Add, All property, and Constraint.ConstraintName property.
-        /// if the name is equivalent to the next default name to hand out, we increment our defaultNameIndex.
+        /// if the name is already being used.  Called by Add, All property, and Constraint.ConstraintName
+        // property.
+        /// if the name is equivalent to the next default name to hand out, we increment our
+        // defaultNameIndex.
         /// </summary>
         internal void RegisterName(string name)
         {
@@ -769,8 +776,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All property, and
-        /// Constraint.ConstraintName property.  If the name is equivalent to the last proposed default name, we walk backwards
+        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All
+        // property, and
+        /// Constraint.ConstraintName property.  If the name is equivalent to the last proposed default
+        // name, we walk backwards
         /// to find the next proper default name to use.
         /// </summary>
         internal void UnregisterName(string name)

@@ -51,7 +51,8 @@ namespace System.ServiceModel.Security
 
         protected bool RequiresIncomingSecurityProcessing(Message message)
         {
-            // if we are receiveing a response that has no security that we should accept this AND no security header exists
+            // if we are receiveing a response that has no security that we should accept this AND no security
+            // header exists
             // then it is OK to skip the header.
             if (
                 this.factory.ActAsInitiator
@@ -460,8 +461,10 @@ namespace System.ServiceModel.Security
             SendSecurityHeader securityHeader = CreateSendSecurityHeader(message, actor, factory);
             securityHeader.SignThenEncrypt =
                 factory.MessageProtectionOrder != MessageProtectionOrder.EncryptBeforeSign;
-            // If ProtectTokens is enabled then we make sure that both the client side and the service side sign the primary token
-            // ( if it is an issued token, the check exists in sendsecurityheader)in the primary signature while sending a message.
+            // If ProtectTokens is enabled then we make sure that both the client side and the service side sign
+            // the primary token
+            // ( if it is an issued token, the check exists in sendsecurityheader)in the primary signature while
+            // sending a message.
             securityHeader.ShouldProtectTokens = factory.SecurityBindingElement.ProtectTokens;
             securityHeader.EncryptPrimarySignature =
                 factory.MessageProtectionOrder
@@ -596,10 +599,14 @@ namespace System.ServiceModel.Security
             securityHeader.SetRequiredProtectionOrder(factory.MessageProtectionOrder);
 
             // On the receiving side if protectTokens is enabled
-            // 1. If we are service, we make sure that the client always signs the primary token( can be any token type)else we throw.
-            //    But currently the service can sign the primary token in reply only if the primary token is an issued token
-            // 2. If we are client, we do not care if the service signs the primary token or not. Otherwise it will be impossible to have a wcf client /service talk to each other unless we
-            // either use a symmetric binding with issued tokens or asymmetric bindings with both the intiator and recipient parameters being issued tokens( later one is rare).
+            // 1. If we are service, we make sure that the client always signs the primary token( can be any
+            // token type)else we throw.
+            //    But currently the service can sign the primary token in reply only if the primary token is an
+            // issued token
+            // 2. If we are client, we do not care if the service signs the primary token or not. Otherwise it
+            // will be impossible to have a wcf client /service talk to each other unless we
+            // either use a symmetric binding with issued tokens or asymmetric bindings with both the intiator
+            // and recipient parameters being issued tokens( later one is rare).
             securityHeader.RequireSignedPrimaryToken =
                 !factory.ActAsInitiator && factory.SecurityBindingElement.ProtectTokens;
 

@@ -921,7 +921,8 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             bool retVal = false;
 
-            // See comments for the CompileWorkflowCleanupTask class for reasons why we must keep the temp file for VB.
+            // See comments for the CompileWorkflowCleanupTask class for reasons why we must keep the temp file
+            // for VB.
             if (this.ProjectType == SupportedLanguages.VB)
                 retVal = true;
             else
@@ -1655,18 +1656,25 @@ namespace System.Workflow.ComponentModel.Compiler
     #region Class CompileWorkflowCleanupTask
     // This cleanup task is a work-around for VB compilation only.
 
-    // Due to a limitation for VB.Net, we can not delete the temp file.  VB does back-ground compilation for
-    // supporting intellisense.  It re-compiles when there is a file change event that happens to each source
-    // file.  The temp file must be added to the OutputFiles collection in order for the compiler to pick it up.
-    // This adds the temp file to the VB compiler project who would report an error if the file is deleted
+    // Due to a limitation for VB.Net, we can not delete the temp file.  VB does back-ground compilation
+    // for
+    // supporting intellisense.  It re-compiles when there is a file change event that happens to each
+    // source
+    // file.  The temp file must be added to the OutputFiles collection in order for the compiler to
+    // pick it up.
+    // This adds the temp file to the VB compiler project who would report an error if the file is
+    // deleted
     // when re-compilation happens in the back-ground.
 
-    // However, if we don't delete the temp file, we have another problem.  When we're in code-seperation mode,
+    // However, if we don't delete the temp file, we have another problem.  When we're in
+    // code-seperation mode,
     // we compile our xoml files on the fly and add the buffer that contains
-    // the code generated based on the xoml to the project.  This code conflicts with the code in the temp file,
+    // the code generated based on the xoml to the project.  This code conflicts with the code in the
+    // temp file,
     // thus causing all sorts of type conflicting errors.
 
-    // Because the two reasons above, we wrote this cleanup task to keep the temp file but clear out the content
+    // Because the two reasons above, we wrote this cleanup task to keep the temp file but clear out the
+    // content
     // of the file, thus make it work for both cases.
     [Obsolete(
         "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"

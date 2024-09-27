@@ -210,7 +210,8 @@ public class ProjectionBuilder : IProjectionBuilder
                         && !resolvedSource.Type.IsCollection()
                     )
                     {
-                        // Handles null source property so it will not create an object with possible non-nullable properties which would result in an exception.
+                        // Handles null source property so it will not create an object with possible non-nullable
+                        // properties which would result in an exception.
                         mappedExpression = resolvedSource.IfNullElse(
                             Default(mappedExpression.Type),
                             mappedExpression

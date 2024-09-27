@@ -27,7 +27,8 @@ namespace System.Runtime.DurableInstancing
             get { return false; }
         }
 
-        // For now, only support registering to bind once the owner is established.  (Can't create an owner and take a lock in one command.)
+        // For now, only support registering to bind once the owner is established.  (Can't create an owner
+        // and take a lock in one command.)
         protected internal virtual bool AutomaticallyAcquiringLock
         {
             get { return false; }

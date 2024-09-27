@@ -26,7 +26,8 @@ public class LayoutView : IComponent
 
     /// <summary>
     /// Gets or sets the type of the layout in which to display the content.
-    /// The type must implement <see cref="IComponent"/> and accept a parameter named <see cref="LayoutComponentBase.Body"/>.
+    /// The type must implement <see cref="IComponent"/> and accept a parameter named <see
+    // cref="LayoutComponentBase.Body"/>.
     /// </summary>
     [Parameter]
     [DynamicallyAccessedMembers(Component)]

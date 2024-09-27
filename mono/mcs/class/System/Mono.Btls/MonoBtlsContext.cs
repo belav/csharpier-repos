@@ -111,10 +111,10 @@ namespace Mono.Btls
         {
             Debug("SELECT CALLBACK!");
 
-            /*
-             * Make behavior consistent with AppleTls, which does not call the selection callback after a
-             * certificate has been set.  See the comment in AppleTlsContext for details.
-             */
+/*
+* Make behavior consistent with AppleTls, which does not call the selection callback after a
+* certificate has been set.  See the comment in AppleTlsContext for details.
+*/
             if (nativeClientCertificate != null)
                 return 1;
 
@@ -180,9 +180,10 @@ namespace Mono.Btls
 
             if (intermediate == null)
             {
-                /* Intermediate certificates are lost in the translation from X509Certificate(2) to X509CertificateImplBtls, so we need to restore them somehow. */
+/* Intermediate certificates are lost in the translation from X509Certificate(2) to
+X509CertificateImplBtls, so we need to restore them somehow. */
                 var chain = new System.Security.Cryptography.X509Certificates.X509Chain(false);
-                /* Let's try to recover as many as we can. */
+/* Let's try to recover as many as we can. */
                 chain.ChainPolicy.RevocationMode = System
                     .Security
                     .Cryptography
@@ -199,7 +200,7 @@ namespace Mono.Btls
                 for (int j = 1; j < elems.Count; j++)
                 {
                     var cert = elems[j].Certificate;
-                    /* If self-signed, it's a root and should not be sent. */
+/* If self-signed, it's a root and should not be sent. */
                     if (cert.SubjectName.RawData.SequenceEqual(cert.IssuerName.RawData))
                         break;
                     ssl.AddIntermediateCertificate(

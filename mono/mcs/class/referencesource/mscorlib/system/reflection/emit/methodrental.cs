@@ -72,7 +72,8 @@ namespace System.Reflection.Emit
                 internalMB = module as InternalModuleBuilder;
 
             // can only swap method body on dynamic module
-            // dynamic internal module type is always exactly InternalModuleBuilder, non-dynamic is always something different
+            // dynamic internal module type is always exactly InternalModuleBuilder, non-dynamic is always
+            // something different
             if (internalMB == null)
                 throw new NotSupportedException(
                     Environment.GetResourceString("NotSupported_NotDynamicModule")

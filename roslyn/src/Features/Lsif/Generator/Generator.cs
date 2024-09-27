@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 {
     internal sealed class Generator
     {
-        // LSIF generator capabilities. See https://github.com/microsoft/lsif-node/blob/main/protocol/src/protocol.ts#L925 for details.
+        // LSIF generator capabilities. See
+        // https://github.com/microsoft/lsif-node/blob/main/protocol/src/protocol.ts#L925 for details.
         private const bool HoverProvider = true;
         private const bool DeclarationProvider = false;
         private const bool DefinitionProvider = true;
@@ -72,13 +73,18 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         {
             var generator = new Generator(lsifJsonWriter, logger);
 
-            // Pass the set of supported SemanticTokenTypes. Order must match the order used for serialization of
+            // Pass the set of supported SemanticTokenTypes. Order must match the order used for serialization
+            // of
             // semantic tokens array. This array is analogous to the equivalent array in
+            //
             // https://microsoft.github.io/language-server-protocol/specifications/lsp/3.18/specification/#textDocument_semanticTokens.
             //
-            // Ideally semantic tokens support would use the well-known, common set of token types specified in LSP's
-            // SemanticTokenTypes to reduce the number of tokens a particular LSIF consumer must understand, but Roslyn
-            // currently employs a large number of custom token types that aren't yet standardized in LSP or LSIF's
+            // Ideally semantic tokens support would use the well-known, common set of token types specified in
+            // LSP's
+            // SemanticTokenTypes to reduce the number of tokens a particular LSIF consumer must understand, but
+            // Roslyn
+            // currently employs a large number of custom token types that aren't yet standardized in LSP or
+            // LSIF's
             // well-known set so we will pass both LSP and Roslyn custom token types for now.
             var capabilitiesVertex = new Capabilities(
                 generator._idFactory,
@@ -123,8 +129,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
             var documentIds = new ConcurrentBag<Id<Graph.LsifDocument>>();
 
-            // We create a ResultSetTracker to track all top-level symbols in the project. We don't want all writes to immediately go to
-            // the JSON file -- we support parallel processing, so we'll accumulate them and then apply at once to avoid a lot
+            // We create a ResultSetTracker to track all top-level symbols in the project. We don't want all
+            // writes to immediately go to
+            // the JSON file -- we support parallel processing, so we'll accumulate them and then apply at once
+            // to avoid a lot
             // of contention on shared locks.
             var topLevelSymbolsWriter = new BatchingLsifJsonWriter(_lsifJsonWriter);
             var topLevelSymbolsResultSetTracker = new SymbolHoldingResultSetTracker(
@@ -157,11 +165,16 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     Task.Run(
                         async () =>
                         {
-                            // We generate the document contents into an in-memory copy, and then write that out at once at the end. This
-                            // allows us to collect everything and avoid a lot of fine-grained contention on the write to the single
-                            // LSIF file. Because of the rule that vertices must be written before they're used by an edge, we'll flush any top-
-                            // level symbol result sets made first, since the document contents will point to that. Parallel calls to CopyAndEmpty
-                            // are allowed and might flush other unrelated stuff at the same time, but there's no harm -- the "causality" ordering
+                            // We generate the document contents into an in-memory copy, and then write that out at once at the
+                            // end. This
+                            // allows us to collect everything and avoid a lot of fine-grained contention on the write to the
+                            // single
+                            // LSIF file. Because of the rule that vertices must be written before they're used by an edge,
+                            // we'll flush any top-
+                            // level symbol result sets made first, since the document contents will point to that. Parallel
+                            // calls to CopyAndEmpty
+                            // are allowed and might flush other unrelated stuff at the same time, but there's no harm -- the
+                            // "causality" ordering
                             // is preserved.
                             var documentWriter = new BatchingLsifJsonWriter(_lsifJsonWriter);
                             var documentId = await GenerateForDocumentAsync(
@@ -188,7 +201,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             }
             catch
             {
-                // We ran into some exceptions while processing documents, let's log it along with the document that failed
+                // We ran into some exceptions while processing documents, let's log it along with the document that
+                // failed
                 var exceptions = new List<Exception>();
 
                 for (var i = 0; i < documents.Count; i++)
@@ -232,10 +246,14 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         /// </summary>
         /// <returns>The ID of the outputted Document vertex.</returns>
         /// <remarks>
-        /// The high level algorithm here is we are going to walk across each token, produce a <see cref="Graph.Range"/> for that token's span,
-        /// bind that token, and then link up the various features. So we'll link that range to the symbols it defines or references,
-        /// will link it to results like Quick Info, and more. This method has a <paramref name="topLevelSymbolsResultSetTracker"/> that
-        /// lets us link symbols across files, and will only talk about "top level" symbols that aren't things like locals that can't
+        /// The high level algorithm here is we are going to walk across each token, produce a <see
+        // cref="Graph.Range"/> for that token's span,
+        /// bind that token, and then link up the various features. So we'll link that range to the symbols
+        // it defines or references,
+        /// will link it to results like Quick Info, and more. This method has a <paramref
+        // name="topLevelSymbolsResultSetTracker"/> that
+        /// lets us link symbols across files, and will only talk about "top level" symbols that aren't
+        // things like locals that can't
         /// leak outside a file.
         /// </remarks>
         private static async Task<Id<Graph.LsifDocument>> GenerateForDocumentAsync(
@@ -247,7 +265,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             CancellationToken cancellationToken
         )
         {
-            // Create and keep the semantic model alive for this document.  That way all work/services we kick off that
+            // Create and keep the semantic model alive for this document.  That way all work/services we kick
+            // off that
             // use this document can benefit from that single shared model.
             var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken);
 
@@ -267,7 +286,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 new Event(Event.EventKind.Begin, documentVertex.GetId(), idFactory)
             );
 
-            // We will walk the file token-by-token, making a range for each one and then attaching information for it
+            // We will walk the file token-by-token, making a range for each one and then attaching information
+            // for it
             var rangeVertices = new List<Id<Graph.Range>>();
             var documentSymbols = new List<RangeBasedDocumentSymbol>();
             await GenerateDocumentRangesAndLinks(
@@ -350,9 +370,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             var syntaxFactsService = languageServices.GetRequiredService<ISyntaxFactsService>();
             var semanticFactsService = languageServices.GetRequiredService<ISemanticFactsService>();
 
-            // As we are processing this file, we are going to encounter symbols that have a shared resultSet with other documents like types
-            // or methods. We're also going to encounter locals that never leave this document. We don't want those locals being held by
-            // the topLevelSymbolsResultSetTracker, so we'll make another tracker for document local symbols, and then have a delegating
+            // As we are processing this file, we are going to encounter symbols that have a shared resultSet
+            // with other documents like types
+            // or methods. We're also going to encounter locals that never leave this document. We don't want
+            // those locals being held by
+            // the topLevelSymbolsResultSetTracker, so we'll make another tracker for document local symbols,
+            // and then have a delegating
             // one that picks the correct one of the two.
             var documentLocalSymbolsResultSetTracker = new SymbolHoldingResultSetTracker(
                 lsifJsonWriter,
@@ -393,7 +416,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     cancellationToken
                 );
 
-                // We'll only create the Range vertex once it's needed, but any number of bits of code might create it first,
+                // We'll only create the Range vertex once it's needed, but any number of bits of code might create
+                // it first,
                 // so we'll just make it Lazy.
                 var lazyRangeVertex = new Lazy<Graph.Range>(
                     () =>
@@ -459,10 +483,13 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
                 if (declaredSymbol != null || referencedSymbol != null)
                 {
-                    // For now, we will link the range to the original definition, preferring the definition, as this is the symbol
+                    // For now, we will link the range to the original definition, preferring the definition, as this is
+                    // the symbol
                     // that would be used if we invoke a feature on this range. This is analogous to the logic in
-                    // SymbolFinder.FindSymbolAtPositionAsync where if a token is both a reference and definition we'll prefer the
-                    // definition. Once we start supporting hover we'll have to remove the "original definition" part of this, since
+                    // SymbolFinder.FindSymbolAtPositionAsync where if a token is both a reference and definition we'll
+                    // prefer the
+                    // definition. Once we start supporting hover we'll have to remove the "original definition" part of
+                    // this, since
                     // since we show different contents for different constructed types there.
                     var symbolForLinkedResultSet = (
                         declaredSymbol ?? referencedSymbol
@@ -495,8 +522,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                             )
                         );
 
-                        // If this declared symbol also implements an interface member, we count this as a definition of the interface member as well.
-                        // Note in C# there are estoeric cases where a method can implement an interface member even though the containing type does not
+                        // If this declared symbol also implements an interface member, we count this as a definition of the
+                        // interface member as well.
+                        // Note in C# there are estoeric cases where a method can implement an interface member even though
+                        // the containing type does not
                         // implement the interface, for example in this case:
                         //
                         //     interface I { void M(); }
@@ -510,7 +539,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         foreach (var implementedMember in implementedMembers)
                             MarkImplementationOfSymbol(implementedMember);
 
-                        // If this overrides a method, we'll also mark it the same way. We want to chase to the base virtual method, skipping over intermediate
+                        // If this overrides a method, we'll also mark it the same way. We want to chase to the base virtual
+                        // method, skipping over intermediate
                         // methods so that way all overrides of the same method point to the same virtual method
                         if (declaredSymbol.IsOverride)
                         {
@@ -564,7 +594,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     {
                         // Create the link from the references back to this range. Note: this range can be reference to a
                         // symbol but the range can point a different symbol's resultSet. This can happen if the token is
-                        // both a definition of a symbol (where we will point to the definition) but also a reference to some
+                        // both a definition of a symbol (where we will point to the definition) but also a reference to
+                        // some
                         // other symbol.
                         var referenceResultsId = symbolResultsTracker.GetResultSetReferenceResultId(
                             referencedSymbol.GetOriginalUnreducedDefinition()
@@ -582,7 +613,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
 
                     // Write hover information for the symbol, if edge has not already been added.
                     // 'textDocument/hover' edge goes from the symbol ResultSet vertex to the hover result
-                    // See https://github.com/Microsoft/language-server-protocol/blob/main/indexFormat/specification.md#resultset for an example.
+                    // See
+                    // https://github.com/Microsoft/language-server-protocol/blob/main/indexFormat/specification.md#resultset
+                    // for an example.
                     if (
                         symbolResultsTracker.ResultSetNeedsInformationalEdgeAdded(
                             symbolForLinkedResultSet,
@@ -626,7 +659,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             CancellationToken cancellationToken
         )
         {
-            // Tuples fields and anonymous type are considered as declaring something, but we don't want to create document symbols for them
+            // Tuples fields and anonymous type are considered as declaring something, but we don't want to
+            // create document symbols for them
             if (declaredSymbol.IsTupleField() || declaredSymbol.IsAnonymousTypeProperty())
                 return null;
 
@@ -640,7 +674,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             if (syntaxNode is null)
                 return null;
 
-            // The containing range is supposed to be "the full range of the declaration not including leading/trailing whitespace, but everything else,
+            // The containing range is supposed to be "the full range of the declaration not including
+            // leading/trailing whitespace, but everything else,
             // e.g. comments and code", so produce our start/end points looking through trivia
             var firstNonWhitespaceTrivia = syntaxNode
                 .GetLeadingTrivia()
@@ -683,7 +718,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             {
                 var text = await document.GetValueTextAsync(cancellationToken);
 
-                // We always use UTF-8 encoding when writing out file contents, as that's expected by LSIF implementations.
+                // We always use UTF-8 encoding when writing out file contents, as that's expected by LSIF
+                // implementations.
                 // TODO: when we move to .NET Core, is there a way to reduce allocations here?
                 contentBase64Encoded = Convert.ToBase64String(
                     Encoding.UTF8.GetBytes(text.ToString())
@@ -710,9 +746,12 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         {
             // Compute colorization data.
             //
-            // Unlike the mainline LSP scenario, where we control both the syntactic colorizer (in-proc syntax tagger)
-            // and the semantic colorizer (LSP semantic tokens) LSIF is more likely to be consumed by clients which may
-            // have different syntactic classification behavior than us, resulting in missing colors. To avoid this, we
+            // Unlike the mainline LSP scenario, where we control both the syntactic colorizer (in-proc syntax
+            // tagger)
+            // and the semantic colorizer (LSP semantic tokens) LSIF is more likely to be consumed by clients
+            // which may
+            // have different syntactic classification behavior than us, resulting in missing colors. To avoid
+            // this, we
             // include syntax tokens in the generated data.
             var data = await SemanticTokensHelpers.ComputeSemanticTokensDataAsync(
                 // Just get the pure-lsp semantic tokens here.

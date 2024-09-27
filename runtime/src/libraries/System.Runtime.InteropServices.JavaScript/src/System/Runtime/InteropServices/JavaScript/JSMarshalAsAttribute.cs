@@ -7,9 +7,11 @@ namespace System.Runtime.InteropServices.JavaScript
 {
     /// <summary>
     /// Specifies the JavaScript type associated with a managed argument or return value.
-    /// The JSImport generator will use this information to marshal data between the JavaScript and managed environments.
+    /// The JSImport generator will use this information to marshal data between the JavaScript and
+    // managed environments.
     /// </summary>
-    /// <typeparam name="T">One of the types defined in <see cref="JSType" />, for example <see cref="JSType.MemoryView" />.</typeparam>
+    /// <typeparam name="T">One of the types defined in <see cref="JSType" />, for example <see
+    // cref="JSType.MemoryView" />.</typeparam>
     /// <example>
     /// <code>
     /// [JSImport("createFunction", "my-math-helper")]
@@ -27,7 +29,8 @@ namespace System.Runtime.InteropServices.JavaScript
         where T : JSType
     {
         /// <summary>
-        /// Initializes a new instance of <see cref="JSMarshalAsAttribute{T}" /> configured by generic parameters of <see cref="JSType" />.
+        /// Initializes a new instance of <see cref="JSMarshalAsAttribute{T}" /> configured by generic
+        // parameters of <see cref="JSType" />.
         /// </summary>
         public JSMarshalAsAttribute() { }
     }

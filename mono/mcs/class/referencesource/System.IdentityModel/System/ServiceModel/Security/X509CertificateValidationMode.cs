@@ -27,12 +27,14 @@ namespace System.ServiceModel.Security
         PeerTrust,
 
         /// <summary>
-        /// The certificate is valid if the chain builds to a certification authority in the trusted root store.
+        /// The certificate is valid if the chain builds to a certification authority in the trusted root
+        // store.
         /// </summary>
         ChainTrust,
 
         /// <summary>
-        /// The certificate is valid if it is in the trusted people store, or if the chain builds to a certification authority in the trusted root store.
+        /// The certificate is valid if it is in the trusted people store, or if the chain builds to a
+        // certification authority in the trusted root store.
         /// </summary>
         PeerOrChainTrust,
 

@@ -52,7 +52,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int newURI(
-            /*AUTF8String*/HandleRef aSpec,
+/*AUTF8String*/HandleRef aSpec,
             [MarshalAs(UnmanagedType.LPStr)] string aOriginCharset,
             [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
             [MarshalAs(UnmanagedType.Interface)] out nsIURI ret
@@ -75,7 +75,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int newChannel(
-            /*AUTF8String*/HandleRef aSpec,
+/*AUTF8String*/HandleRef aSpec,
             [MarshalAs(UnmanagedType.LPStr)] string aOriginCharset,
             [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
             [MarshalAs(UnmanagedType.Interface)] out nsIChannel ret
@@ -96,7 +96,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int extractScheme(
-            /*AUTF8String*/HandleRef urlString, /*ACString*/
+/*AUTF8String*/HandleRef urlString, /*ACString*/
             HandleRef ret
         );
 

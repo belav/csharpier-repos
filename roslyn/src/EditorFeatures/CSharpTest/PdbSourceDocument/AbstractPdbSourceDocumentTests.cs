@@ -292,7 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         protected static TestComposition GetTestComposition()
         {
-            // We construct our own composition here because we only want the decompilation metadata as source provider
+            // We construct our own composition here because we only want the decompilation metadata as source
+            // provider
             // to be available.
 
             return EditorTestCompositions

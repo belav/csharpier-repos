@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * AuthorizationConfigHandler class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* AuthorizationConfigHandler class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 
 namespace System.Web.Configuration
@@ -60,7 +60,8 @@ namespace System.Web.Configuration
             get
             {
                 return SR.GetString(SR.Assess_Denied_Description2);
-                //"An error occurred while accessing the resources required to serve this request. &nbsp; This typically happens when the web server is not configured to give you access to the requested URL.";
+                //"An error occurred while accessing the resources required to serve this request. &nbsp; This
+                // typically happens when the web server is not configured to give you access to the requested URL.";
             }
         }
 
@@ -83,7 +84,8 @@ namespace System.Web.Configuration
                 );
                 AdaptiveMiscContent.Add(miscContent);
                 return miscContent;
-                //return "Access denied due to the web server's configuration. Ask the web server's administrator for help.";
+                //return "Access denied due to the web server's configuration. Ask the web server's administrator
+                // for help.";
             }
         }
 

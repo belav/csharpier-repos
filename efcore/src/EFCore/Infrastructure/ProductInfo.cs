@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 public static class ProductInfo
 {
     /// <summary>
-    ///     Gets the value of the <see cref="AssemblyInformationalVersionAttribute.InformationalVersion" />
+    ///     Gets the value of the <see cref="AssemblyInformationalVersionAttribute.InformationalVersion"
+    // />
     ///     for the EntityFrameworkCore assembly.
     /// </summary>
     /// <returns>The EF Core version being used.</returns>

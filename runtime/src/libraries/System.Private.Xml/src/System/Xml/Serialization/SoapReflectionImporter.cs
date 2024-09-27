@@ -462,7 +462,8 @@ namespace System.Xml.Serialization
                         // if InitializeStructMembers returns true, then there were *no* changes to the DeferredWorkItems
                         //
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (index != limiter.DeferredWorkItems.Count - 1)
                             throw new InvalidOperationException(
                                 SR.Format(
@@ -511,7 +512,8 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    // the import of the baseMapping was deferred, make sure that the derived mappings is deferred as well
+                    // the import of the baseMapping was deferred, make sure that the derived mappings is deferred as
+                    // well
                     if (!limiter.DeferredWorkItems.Contains(mapping))
                     {
                         limiter.DeferredWorkItems.Add(new ImportStructWorkItem(model, mapping));

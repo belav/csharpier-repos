@@ -16,7 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting &lt;script&gt; elements that supports fallback src paths.
+/// <see cref="ITagHelper"/> implementation targeting &lt;script&gt; elements that supports fallback
+// src paths.
 /// </summary>
 /// <remarks>
 /// The tag helper won't process for cases with just the 'src' attribute.
@@ -138,7 +139,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     public string FallbackSrc { get; set; }
 
     /// <summary>
-    /// Boolean value that determines if an integrity hash will be compared with <see cref="FallbackSrc"/> value.
+    /// Boolean value that determines if an integrity hash will be compared with <see
+    // cref="FallbackSrc"/> value.
     /// </summary>
     [HtmlAttributeName(SuppressFallbackIntegrityAttributeName)]
     public bool SuppressFallbackIntegrity { get; set; }
@@ -153,7 +155,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     public bool? AppendVersion { get; set; }
 
     /// <summary>
-    /// A comma separated list of globbed file patterns of JavaScript scripts to fallback to in the case the
+    /// A comma separated list of globbed file patterns of JavaScript scripts to fallback to in the case
+    // the
     /// primary one fails.
     /// The glob patterns are assessed relative to the application's 'webroot' setting.
     /// </summary>
@@ -161,7 +164,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     public string FallbackSrcInclude { get; set; }
 
     /// <summary>
-    /// A comma separated list of globbed file patterns of JavaScript scripts to exclude from the fallback list, in
+    /// A comma separated list of globbed file patterns of JavaScript scripts to exclude from the
+    // fallback list, in
     /// the case the primary one fails.
     /// The glob patterns are assessed relative to the application's 'webroot' setting.
     /// Must be used in conjunction with <see cref="FallbackSrcInclude"/>.
@@ -188,7 +192,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     internal IFileVersionProvider FileVersionProvider { get; private set; }
 
     /// <summary>
-    /// Gets the <see cref="System.Text.Encodings.Web.JavaScriptEncoder"/> used to encode fallback information.
+    /// Gets the <see cref="System.Text.Encodings.Web.JavaScriptEncoder"/> used to encode fallback
+    // information.
     /// </summary>
     protected JavaScriptEncoder JavaScriptEncoder { get; }
 
@@ -494,12 +499,14 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         AppendVersion = 0,
 
         /// <summary>
-        /// Just performing file globbing search for the src, rendering a separate &lt;script&gt; for each match.
+        /// Just performing file globbing search for the src, rendering a separate &lt;script&gt; for each
+        // match.
         /// </summary>
         GlobbedSrc = 1,
 
         /// <summary>
-        /// Rendering a fallback block if primary javascript fails to load. Will also do globbing for both the
+        /// Rendering a fallback block if primary javascript fails to load. Will also do globbing for both
+        // the
         /// primary and fallback srcs if the appropriate properties are set.
         /// </summary>
         Fallback = 2,

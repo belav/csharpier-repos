@@ -34,13 +34,13 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {
-    /*
-     * Notes:
-     *
-     * [MS/XP] Everything looks to be RFC3280 compliant.
-     *
-     * See PkitsTest.cs for more details
-     */
+/*
+* Notes:
+*
+* [MS/XP] Everything looks to be RFC3280 compliant.
+*
+* See PkitsTest.cs for more details
+*/
 
     [TestFixture]
     [Category("PKITS")]

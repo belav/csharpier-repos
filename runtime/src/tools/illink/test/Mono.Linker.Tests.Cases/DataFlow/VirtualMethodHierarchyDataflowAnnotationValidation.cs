@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -14,15 +15,19 @@ namespace Mono.Linker.Tests.Cases.DataFlow
     [SandboxDependency("Dependencies/TestSystemTypeBase.cs")]
     [SetupCompileBefore("skiplibrary.dll", new[] { "Dependencies/Library.cs" })]
     [SetupLinkerAction("skip", "skiplibrary")]
-    // Suppress warnings about accessing methods with annotations via reflection - the test below does that a LOT
-    // (The test accessed these methods through DynamicallyAccessedMembers annotations which is effectively the same reflection access)
+    // Suppress warnings about accessing methods with annotations via reflection - the test below does
+    // that a LOT
+    // (The test accessed these methods through DynamicallyAccessedMembers annotations which is
+    // effectively the same reflection access)
     [UnconditionalSuppressMessage("test", "IL2111")]
     [ExpectedNoWarnings]
     class VirtualMethodHierarchyDataflowAnnotationValidation
     {
-        // The code below marks methods which have RUC on them, it's not the point of this test to validate these here
+        // The code below marks methods which have RUC on them, it's not the point of this test to validate
+        // these here
         [UnconditionalSuppressMessage("test", "IL2026")]
-        // The code below marks methods which have RDC on them, it's not the point of this test to validate these here
+        // The code below marks methods which have RDC on them, it's not the point of this test to validate
+        // these here
         [UnconditionalSuppressMessage("test", "IL3050")]
         public static void Main()
         {
@@ -61,7 +66,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class BaseClass
         {
             // === Return values ===
-            // Other than the basics, the return value also checks all of the inheritance cases - we omit those for the other tests
+            // Other than the basics, the return value also checks all of the inheritance cases - we omit those
+            // for the other tests
             public virtual Type ReturnValueBaseWithoutDerivedWithout() => null;
 
             public virtual Type ReturnValueBaseWithoutDerivedWith() => null;
@@ -82,7 +88,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public virtual Type ReturnValueBaseWithSuperDerivedWithout() => null;
 
             // === Method parameters ===
-            // This does not check complicated inheritance cases as that is already validated by the return values
+            // This does not check complicated inheritance cases as that is already validated by the return
+            // values
             public virtual void SingleParameterBaseWithDerivedWithout(
                 [DynamicallyAccessedMembers(
                     DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
@@ -341,7 +348,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             public override void GenericBaseWithoutDerivedWithout<T>() { }
 
             // === Properties ===
-            // The warning is reported on the getter (or setter), which is not ideal, but it's probably good enough for now (we don't internally track annotations
+            // The warning is reported on the getter (or setter), which is not ideal, but it's probably good
+            // enough for now (we don't internally track annotations
             // on properties themselves, only on methods).
             [LogContains(
                 "'DynamicallyAccessedMemberTypes' in 'DynamicallyAccessedMembersAttribute' on the return value of method 'Mono.Linker.Tests.Cases.DataFlow.VirtualMethodHierarchyDataflowAnnotationValidation.DerivedClass.PropertyBaseWithDerivedWithout.get' "
@@ -391,7 +399,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
         class InBetweenDerived : DerivedClass
         {
-            // This is intentionally left empty to validate that the logic can skip over to deeper base classes correctly
+            // This is intentionally left empty to validate that the logic can skip over to deeper base classes
+            // correctly
         }
 
         class SuperDerivedClass : InBetweenDerived
@@ -413,7 +422,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         abstract class BaseWithNoAnnotations
         {
             // This class must not have ANY annotations anywhere on it.
-            // It's here to test that the optimization works (as most classes won't have any annotations, so we shortcut that path).
+            // It's here to test that the optimization works (as most classes won't have any annotations, so we
+            // shortcut that path).
 
             // === Return values ===
             public abstract Type ReturnValueBaseWithoutDerivedWith();
@@ -525,7 +535,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         class DerivedWithNoAnnotations : BaseWithAnnotations
         {
             // This class must not have ANY annotations anywhere on it.
-            // It's here to test that the optimization works (as most classes won't have any annotations, so we shortcut that path).
+            // It's here to test that the optimization works (as most classes won't have any annotations, so we
+            // shortcut that path).
 
             // === Return values ===
             [LogContains("DerivedWithNoAnnotations.ReturnValueBaseWithDerivedWithout")]
@@ -786,7 +797,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class ImplIDamOnAllMissing : IDamOnAll
             {
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 // So it doesn't matter that the annotations are not in-sync since the access will validate
                 // the annotations on the implementation method - it doesn't even see the base method in this case.
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -794,7 +806,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 public static Type AbstractMethod<T>(Type type) => null;
 
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2093", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -803,7 +816,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class ImplIDamOnAllMismatch : IDamOnAll
             {
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2093", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -818,7 +832,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     return null;
                 }
 
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2093", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -883,7 +898,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class ImplIDamOnNoneMismatch : IDamOnNone
             {
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2093", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -898,7 +914,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                     return null;
                 }
 
-                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't validate overrides when accessed through reflection because it's a direct call
+                // (non-virtual)
                 [ExpectedWarning("IL2092", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2093", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
@@ -930,7 +947,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         {
             class ImplIAnnotatedMethodsMismatch : Library.IAnnotatedMethods
             {
-                // NativeAOT doesn't always validate static overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't always validate static overrides when accessed through reflection because it's
+                // a direct call (non-virtual)
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 public static void GenericWithMethodsStatic<T>() { }
 
@@ -952,7 +970,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
 
             class ImplIUnannotatedMethodsMismatch : Library.IUnannotatedMethods
             {
-                // NativeAOT doesn't always validate static overrides when accessed through reflection because it's a direct call (non-virtual)
+                // NativeAOT doesn't always validate static overrides when accessed through reflection because it's
+                // a direct call (non-virtual)
                 [ExpectedWarning("IL2095", ProducedBy = Tool.Trimmer | Tool.Analyzer)]
                 public static void GenericStatic<
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T

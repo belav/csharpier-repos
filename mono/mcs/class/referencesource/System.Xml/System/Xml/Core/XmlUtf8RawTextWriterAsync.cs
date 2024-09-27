@@ -255,7 +255,8 @@ namespace System.Xml
             CheckAsyncCall();
             Debug.Assert(prefix != null);
 
-            // VSTFDEVDIV bug #583965: Inconsistency between Silverlight 2 and Dev10 in the way a single xmlns attribute is serialized
+            // VSTFDEVDIV bug #583965: Inconsistency between Silverlight 2 and Dev10 in the way a single xmlns
+            // attribute is serialized
             // Resolved as: Won't fix (breaking change)
 
 #if SILVERLIGHT
@@ -394,7 +395,8 @@ namespace System.Xml
 
             if (checkCharacters && !xmlCharType.IsCharData(ch))
             {
-                // we just have a single char, not a surrogate, therefore we have to pass in '\0' for the second char
+                // we just have a single char, not a surrogate, therefore we have to pass in '\0' for the second
+                // char
                 throw XmlConvert.CreateInvalidCharException(ch, '\0');
             }
 
@@ -545,7 +547,8 @@ namespace System.Xml
             }
             finally
             {
-                // Move last buffer character to the beginning of the buffer (so that previous character can always be determined)
+                // Move last buffer character to the beginning of the buffer (so that previous character can always
+                // be determined)
                 bufBytes[0] = bufBytes[bufPos - 1];
 
                 if (IsSurrogateByte(bufBytes[0]))

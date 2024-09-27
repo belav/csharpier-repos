@@ -950,7 +950,8 @@ namespace LibraryImportGenerator.UnitTests
             await VerifyCodeFixAsync(source, fixedSource);
         }
 
-        // There's not a good way today to add a unit test for any changes to project settings from a code fix.
+        // There's not a good way today to add a unit test for any changes to project settings from a code
+        // fix.
         // Roslyn does special testing for their cases.
         [Fact]
         public async Task FixThatAddsUnsafeToProjectUpdatesLibraryImport()
@@ -1210,7 +1211,8 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            // Verify that we fix all cases when we do fix-all on a P/Invoke with a non-blittable user type which
+            // Verify that we fix all cases when we do fix-all on a P/Invoke with a non-blittable user type
+            // which
             // will require the user to write additional code.
             await VerifyCodeFixAsync(
                 source,

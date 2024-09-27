@@ -17,12 +17,15 @@ namespace Microsoft.SqlServer.Server
     //  without throwing or otherwise processing messages in the sink until later on.
     //
     //  Main example:
-    //      SqlCommand.ExecuteNonQuerySmi calls EventStream.ProcessEvent with it's command event sink (CES)
+    //      SqlCommand.ExecuteNonQuerySmi calls EventStream.ProcessEvent with it's command event sink
+    // (CES)
     //          ProcessEvent calls OnParametersAvailable on the CES
-    //              OnParametersAvailable sets up a deferedprocessing event sink (DPES) with the CES as its parent
+    //              OnParametersAvailable sets up a deferedprocessing event sink (DPES) with the CES as
+    // its parent
     //              OnParametersAvailable calls ValueUtils to extract param values passing the DPES
     //                  ValueUtils calls Smi passing DPES
-    //                      Smi may call MessagePosted, which will send a message up the sink parent chain and save it.
+    //                      Smi may call MessagePosted, which will send a message up the sink parent
+    // chain and save it.
     //                  ValueUtils calls ProcessMessagesAndThrow on DPES, which skips handling
     //      ... return up the stack ...
     //      SqlCommand.ExecuteNonQuerySmi calls CES.ProcessMessagesAndThrow, which handles the messages

@@ -31,8 +31,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
     private const string AsSpanName = "AsSpan";
 
     /// <summary>
-    /// Standard names to look at for the final <c>ToXXX</c> method.  For example "ToList", "ToArray", "ToImmutable",
-    /// etc.  Note: this will just be done for a syntactic check of the method being called.  Additional checks will
+    /// Standard names to look at for the final <c>ToXXX</c> method.  For example "ToList", "ToArray",
+    // "ToImmutable",
+    /// etc.  Note: this will just be done for a syntactic check of the method being called.  Additional
+    // checks will
     /// ensure that we are preserving semantics.
     /// </summary>
     private static readonly ImmutableArray<string> s_suffixes = ImmutableArray.Create(
@@ -139,7 +141,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
     }
 
     /// <summary>
-    /// Analyzes an expression looking for one of the form <c>CollectionCreation</c>, followed by some number of
+    /// Analyzes an expression looking for one of the form <c>CollectionCreation</c>, followed by some
+    // number of
     /// <c>.Add(...)/.AddRange(...)</c> or <c>.ToXXX()</c> calls
     /// </summary>
     public static AnalysisResult? AnalyzeInvocation(
@@ -150,7 +153,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
         CancellationToken cancellationToken
     )
     {
-        // Because we're recursing from top to bottom in the expression tree, we build up the matches in reverse.  Right
+        // Because we're recursing from top to bottom in the expression tree, we build up the matches in
+        // reverse.  Right
         // before returning them, we'll reverse them again to get the proper order.
         using var _ = ArrayBuilder<CollectionExpressionMatch<ArgumentSyntax>>.GetInstance(
             out var matchesInReverse
@@ -194,8 +198,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
         if (invocation.Expression is not MemberAccessExpressionSyntax memberAccess)
             return false;
 
-        // Topmost invocation must be a syntactic match for one of our collection manipulation forms.  At the top level
-        // we don't want to end with a linq method as that would be lazy, and a collection expression will eagerly
+        // Topmost invocation must be a syntactic match for one of our collection manipulation forms.  At
+        // the top level
+        // we don't want to end with a linq method as that would be lazy, and a collection expression will
+        // eagerly
         // realize the collection.
         if (
             !IsSyntacticMatch(
@@ -210,7 +216,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
         )
             return false;
 
-        // We don't want to offer this feature on top of some builder-type.  They will commonly end with something like
+        // We don't want to offer this feature on top of some builder-type.  They will commonly end with
+        // something like
         // `builder.ToImmutable()`.  We want that case to be handled by the 'ForBuilder' analyzer instead.
         var expressionType = state
             .SemanticModel.GetTypeInfo(memberAccess.Expression, cancellationToken)
@@ -234,8 +241,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
             cancellationToken.ThrowIfCancellationRequested();
             var current = stack.Pop();
 
-            // Methods of the form Add(...)/AddRange(...) or `ToXXX()` count as something to continue recursing down the
-            // left hand side of the expression.  In the inner expressions we can have things like `.Concat/.Append`
+            // Methods of the form Add(...)/AddRange(...) or `ToXXX()` count as something to continue recursing
+            // down the
+            // left hand side of the expression.  In the inner expressions we can have things like
+            // `.Concat/.Append`
             // calls as the outer expressions will realize the collection.
             if (
                 current
@@ -259,7 +268,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
                 continue;
             }
 
-            // `new int[] { ... }` or `new[] { ... }` is a fine base case to make a collection out of.  As arrays are
+            // `new int[] { ... }` or `new[] { ... }` is a fine base case to make a collection out of.  As
+            // arrays are
             // always list-like this is safe to move over.
             if (
                 current is ArrayCreationExpressionSyntax
@@ -341,17 +351,23 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
                 return true;
             }
 
-            // If we're bottomed out at some different type of expression, and we started with an AsSpan, and we did not
-            // perform a copy of the data, then do not convert this.  The above cases produce a fresh-collection (an
-            // rvalue), which is fine to get a span out of.  However, this may be wrapping a *non-fresh* (an lvalue)
+            // If we're bottomed out at some different type of expression, and we started with an AsSpan, and we
+            // did not
+            // perform a copy of the data, then do not convert this.  The above cases produce a fresh-collection
+            // (an
+            // rvalue), which is fine to get a span out of.  However, this may be wrapping a *non-fresh* (an
+            // lvalue)
             // collection.  That means the user could mutate the underlying data the span wraps.  Since we are
             // converting to a form that will create a fresh collection, that could be noticeable.
             if (memberAccess.Name.Identifier.ValueText == AsSpanName && !copiedData)
                 return false;
 
-            // Down to some final collection.  Like `x` in `x.Concat(y).ToArray()`.  If `x` is itself is something that
-            // can be iterated, we can convert this to `[.. x, .. y]`.  Note: we only want to do this if ending with one
-            // of the ToXXX Methods.  If we just have `x.AddRange(y)` it's preference to keep that, versus `[.. x, ..y]`
+            // Down to some final collection.  Like `x` in `x.Concat(y).ToArray()`.  If `x` is itself is
+            // something that
+            // can be iterated, we can convert this to `[.. x, .. y]`.  Note: we only want to do this if ending
+            // with one
+            // of the ToXXX Methods.  If we just have `x.AddRange(y)` it's preference to keep that, versus `[..
+            // x, ..y]`
             if (!isAdditionMatch && IsIterable(current))
             {
                 AddFinalMatch(current);
@@ -369,8 +385,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
             if (matchesInReverse is null)
                 return;
 
-            // We're only adding one item to the final collection.  So we're ending up with `[.. <expr>]`.  If this
-            // originally was wrapped over multiple lines in a fluent fashion, and we're down to just a single wrapped
+            // We're only adding one item to the final collection.  So we're ending up with `[.. <expr>]`.  If
+            // this
+            // originally was wrapped over multiple lines in a fluent fashion, and we're down to just a single
+            // wrapped
             // line, then unwrap.
             if (
                 matchesInReverse.Count == 0
@@ -388,7 +406,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
                     .All(static t => t.IsWhitespaceOrEndOfLine())
             )
             {
-                // Remove any whitespace around the `.`, making the singly-wrapped fluent expression into a single line.
+                // Remove any whitespace around the `.`, making the singly-wrapped fluent expression into a single
+                // line.
                 matchesInReverse.Add(
                     new CollectionExpressionMatch<ArgumentSyntax>(
                         SyntaxFactory.Argument(
@@ -414,8 +433,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
             );
         }
 
-        // We only want to offer this feature when the original collection was list-like (as opposed to being something
-        // like a hash-set).  For example: `new List<int> { x, y, z }.ToImmutableArray()` produces different results
+        // We only want to offer this feature when the original collection was list-like (as opposed to
+        // being something
+        // like a hash-set).  For example: `new List<int> { x, y, z }.ToImmutableArray()` produces different
+        // results
         // than `new HashSet<int> { x, y, z }.ToImmutableArray()` in the presence of duplicates.
         bool IsListLike(ExpressionSyntax expression)
         {
@@ -454,7 +475,8 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
 
         static bool IsLegalInitializer(InitializerExpressionSyntax? initializer)
         {
-            // We can't convert any initializer that contains an initializer in it.  For example `new SomeType() { { 1,
+            // We can't convert any initializer that contains an initializer in it.  For example `new SomeType()
+            // { { 1,
             // 2, 3 } }`.  These become `.Add(1, 2, 3)` calls that collection expressions do not support.
             if (initializer != null)
             {
@@ -482,8 +504,10 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
 
     /// <summary>
     /// Tests if this single `expr.SomeInvocation(...)` syntactically matches one of the allowed forms
-    /// (ToList/AsSpan/etc.).  That includes that the arguments present to the invocation are acceptable for that
-    /// particular method call.  If <paramref name="matchesInReverse"/> is provided, the arguments to the method will be
+    /// (ToList/AsSpan/etc.).  That includes that the arguments present to the invocation are acceptable
+    // for that
+    /// particular method call.  If <paramref name="matchesInReverse"/> is provided, the arguments to
+    // the method will be
     /// appropriately extracted so that they can be placed in the final collection expression.
     /// </summary>
     private static bool IsSyntacticMatch(
@@ -561,14 +585,18 @@ internal sealed partial class CSharpUseCollectionExpressionForFluentDiagnosticAn
     }
 
     /// <summary>
-    /// Result of analyzing a fluent chain of collection additions (<c>XXX.Create().Add(...).AddRange(...).ToYYY()</c>
+    /// Result of analyzing a fluent chain of collection additions
+    // (<c>XXX.Create().Add(...).AddRange(...).ToYYY()</c>
     /// expression to see if it can be replaced with a collection expression.
     /// </summary>
-    /// <param name="ExistingInitializer">Optional existing initializer (for example: <c>new[] { 1, 2, 3 }</c>). Used to
+    /// <param name="ExistingInitializer">Optional existing initializer (for example: <c>new[] { 1, 2, 3
+    // }</c>). Used to
     /// help determine the best collection expression final syntax.</param>
-    /// <param name="CreationExpression">The location of the code like <c>builder.ToImmutable()</c> that will actually be
+    /// <param name="CreationExpression">The location of the code like <c>builder.ToImmutable()</c> that
+    // will actually be
     /// replaced with the collection expression</param>
-    /// <param name="Matches">The arguments being added to the collection that will be converted into elements in the
+    /// <param name="Matches">The arguments being added to the collection that will be converted into
+    // elements in the
     /// final collection expression.</param>
     public readonly record struct AnalysisResult(
         // Location DiagnosticLocation,

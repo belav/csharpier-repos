@@ -292,14 +292,14 @@ namespace MonoTests.System.Security.Cryptography
             hash = SHA224.Create("MD5");
         }
 
-        /* Uncomment when (or if) the SHA224 classes are moved into corlib
-                [Test]
-                public void CreateInvalid ()
-                {
-                    // try to build invalid implementation
-                    hash = SHA224.Create ("InvalidHash");
-                    Assert.IsNull (hash, "SHA224.Create('InvalidHash')");
-                }*/
+/* Uncomment when (or if) the SHA224 classes are moved into corlib
+[Test]
+public void CreateInvalid ()
+{
+// try to build invalid implementation
+hash = SHA224.Create ("InvalidHash");
+Assert.IsNull (hash, "SHA224.Create('InvalidHash')");
+}*/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]

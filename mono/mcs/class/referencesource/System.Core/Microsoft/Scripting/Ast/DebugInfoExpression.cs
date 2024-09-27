@@ -1,17 +1,17 @@
 ﻿/* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Diagnostics;
@@ -46,7 +46,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Gets the static type of the expression that this <see cref="Expression" /> represents. (Inherited from <see cref="Expression"/>.)
+        /// Gets the static type of the expression that this <see cref="Expression" /> represents.
+        // (Inherited from <see cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="Type"/> that represents the static type of the expression.</returns>
         public sealed override Type Type
@@ -55,7 +56,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression" />.)
+        /// Returns the node type of this <see cref="Expression" />. (Inherited from <see cref="Expression"
+        // />.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType
@@ -104,7 +106,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Gets the value to indicate if the <see cref="DebugInfoExpression"/> is for clearing a sequence point.
+        /// Gets the value to indicate if the <see cref="DebugInfoExpression"/> is for clearing a sequence
+        // point.
         /// </summary>
         public virtual bool IsClear
         {
@@ -212,11 +215,18 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="DebugInfoExpression"/> with the specified span.
         /// </summary>
-        /// <param name="document">The <see cref="SymbolDocumentInfo"/> that represents the source file.</param>
-        /// <param name="startLine">The start line of this <see cref="DebugInfoExpression" />. Must be greater than 0.</param>
-        /// <param name="startColumn">The start column of this <see cref="DebugInfoExpression" />. Must be greater than 0.</param>
-        /// <param name="endLine">The end line of this <see cref="DebugInfoExpression" />. Must be greater or equal than the start line.</param>
-        /// <param name="endColumn">The end column of this <see cref="DebugInfoExpression" />. If the end line is the same as the start line, it must be greater or equal than the start column. In any case, must be greater than 0.</param>
+        /// <param name="document">The <see cref="SymbolDocumentInfo"/> that represents the source
+        // file.</param>
+        /// <param name="startLine">The start line of this <see cref="DebugInfoExpression" />. Must be
+        // greater than 0.</param>
+        /// <param name="startColumn">The start column of this <see cref="DebugInfoExpression" />. Must be
+        // greater than 0.</param>
+        /// <param name="endLine">The end line of this <see cref="DebugInfoExpression" />. Must be greater
+        // or equal than the start line.</param>
+        /// <param name="endColumn">The end column of this <see cref="DebugInfoExpression" />. If the end
+        // line is the same as the start line, it must be greater or equal than the start column. In any
+        // case,
+        // must be greater than 0.</param>
         /// <returns>An instance of <see cref="DebugInfoExpression"/>.</returns>
         public static DebugInfoExpression DebugInfo(
             SymbolDocumentInfo document,
@@ -245,8 +255,10 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="DebugInfoExpression"/> for clearing a sequence point.
         /// </summary>
-        /// <param name="document">The <see cref="SymbolDocumentInfo"/> that represents the source file.</param>
-        /// <returns>An instance of <see cref="DebugInfoExpression"/> for clearning a sequence point.</returns>
+        /// <param name="document">The <see cref="SymbolDocumentInfo"/> that represents the source
+        // file.</param>
+        /// <returns>An instance of <see cref="DebugInfoExpression"/> for clearning a sequence
+        // point.</returns>
         public static DebugInfoExpression ClearDebugInfo(SymbolDocumentInfo document)
         {
             ContractUtils.RequiresNotNull(document, "document");

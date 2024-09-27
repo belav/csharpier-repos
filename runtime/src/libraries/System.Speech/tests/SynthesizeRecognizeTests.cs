@@ -151,7 +151,8 @@ namespace SampleSynthesisTests
 
                             Assert.True(result.Confidence > 0.1); // strings we use are normally > 0.8
 
-                            // Use Contains as sometimes we get garbage on the end, eg., "recognize" can be "recognized" or "a recognize"
+                            // Use Contains as sometimes we get garbage on the end, eg., "recognize" can be "recognized" or "a
+                            // recognize"
                             Assert.Contains(
                                 output,
                                 result.Text,

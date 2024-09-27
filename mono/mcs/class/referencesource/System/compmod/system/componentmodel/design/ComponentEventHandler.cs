@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel.Design
 {
     using System;
@@ -14,7 +14,10 @@ namespace System.ComponentModel.Design
     using System.Security.Permissions;
 
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see cref='System.ComponentModel.Design.IComponentChangeService.ComponentAdding'/> , <see cref='System.ComponentModel.Design.IComponentChangeService.ComponentAdded'/>, <see cref='System.ComponentModel.Design.IComponentChangeService.ComponentRemoving'/>, and
+    /// <para>Represents the method that will handle the <see
+    // cref='System.ComponentModel.Design.IComponentChangeService.ComponentAdding'/> , <see
+    // cref='System.ComponentModel.Design.IComponentChangeService.ComponentAdded'/>, <see
+    // cref='System.ComponentModel.Design.IComponentChangeService.ComponentRemoving'/>, and
     /// <see cref='System.ComponentModel.Design.IComponentChangeService.ComponentRemoved'/> event raised
     ///    for component-level events.</para>
     /// </devdoc>

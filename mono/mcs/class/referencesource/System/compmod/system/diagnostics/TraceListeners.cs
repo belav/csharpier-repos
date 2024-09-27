@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Diagnostics
 {
     using System;
@@ -13,7 +13,8 @@ namespace System.Diagnostics
     using Microsoft.Win32;
 
     /// <devdoc>
-    /// <para>Provides a thread-safe list of <see cref='System.Diagnostics.TraceListenerCollection'/>. A thread-safe list is synchronized.</para>
+    /// <para>Provides a thread-safe list of <see cref='System.Diagnostics.TraceListenerCollection'/>. A
+    // thread-safe list is synchronized.</para>
     /// </devdoc>
     public class TraceListenerCollection : IList
     {
@@ -39,7 +40,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Gets the first <see cref='System.Diagnostics.TraceListener'/> in the list with the specified name.</para>
+        /// <para>Gets the first <see cref='System.Diagnostics.TraceListener'/> in the list with the
+        // specified name.</para>
         /// </devdoc>
         public TraceListener this[string name]
         {
@@ -129,7 +131,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Copies a section of the current <see cref='System.Diagnostics.TraceListenerCollection'/> list to the specified array at the specified
+        /// <para>Copies a section of the current <see cref='System.Diagnostics.TraceListenerCollection'/>
+        // list to the specified array at the specified
         ///    index.</para>
         /// </devdoc>
         public void CopyTo(TraceListener[] listeners, int index)
@@ -178,7 +181,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Removes the specified instance of the <see cref='System.Diagnostics.TraceListener'/> class from the list.
+        ///       Removes the specified instance of the <see cref='System.Diagnostics.TraceListener'/> class
+        // from the list.
         ///    </para>
         /// </devdoc>
         public void Remove(TraceListener listener)

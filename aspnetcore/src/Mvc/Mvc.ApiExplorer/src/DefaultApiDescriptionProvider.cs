@@ -32,7 +32,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
     /// Creates a new instance of <see cref="DefaultApiDescriptionProvider"/>.
     /// </summary>
     /// <param name="optionsAccessor">The accessor for <see cref="MvcOptions"/>.</param>
-    /// <param name="constraintResolver">The <see cref="IInlineConstraintResolver"/> used for resolving inline
+    /// <param name="constraintResolver">The <see cref="IInlineConstraintResolver"/> used for resolving
+    // inline
     /// constraints.</param>
     /// <param name="modelMetadataProvider">The <see cref="IModelMetadataProvider"/>.</param>
     /// <param name="mapper">The <see cref="IActionResultTypeMapper"/>.</param>
@@ -546,7 +547,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             return null;
         }
 
-        // This technique for enumerating filters will intentionally ignore any filter that is an IFilterFactory
+        // This technique for enumerating filters will intentionally ignore any filter that is an
+        // IFilterFactory
         // while searching for a filter that implements IApiRequestMetadataProvider.
         //
         // The workaround for that is to implement the metadata interface on the IFilterFactory.
@@ -649,7 +651,8 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
             //  1)  Collections - while it's possible to have binder attributes on the inside of a collection,
             //      it hardly seems useful, and would result in some very weird binding.
             //
-            //  2)  Simple Types - These are generally part of the .net framework - primitives, or types which have a
+            //  2)  Simple Types - These are generally part of the .net framework - primitives, or types which
+            // have a
             //      type converter from string.
             //
             //  3)  Types with no properties. Obviously nothing to explore there.

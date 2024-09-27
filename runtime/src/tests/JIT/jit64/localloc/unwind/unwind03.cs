@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * Test unwinding from finally block.
- */
+* Test unwinding from finally block.
+*/
 
 using System;
 using LocallocTesting;

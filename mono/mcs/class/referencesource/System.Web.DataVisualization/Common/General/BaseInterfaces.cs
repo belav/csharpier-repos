@@ -17,7 +17,8 @@ namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
     /// <summary>
-    /// IChartElement is implemented by both ChartElements and ChartElementCollection to provide a unified access to Parent/Common elements.
+    /// IChartElement is implemented by both ChartElements and ChartElementCollection to provide a
+    // unified access to Parent/Common elements.
     /// </summary>
     internal interface IChartElement
     {
@@ -72,13 +73,15 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Raises the <see cref="E:NameReferenceChanged"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="NameReferenceChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="NameReferenceChangedEventArgs"/> instance containing the event
+        // data.</param>
         void OnNameReferenceChanged(NameReferenceChangedEventArgs e);
 
         /// <summary>
         /// Raises the <see cref="E:NameReferenceChanging"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="NameReferenceChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="NameReferenceChangedEventArgs"/> instance containing the event
+        // data.</param>
         void OnNameReferenceChanging(NameReferenceChangedEventArgs e);
     }
 }

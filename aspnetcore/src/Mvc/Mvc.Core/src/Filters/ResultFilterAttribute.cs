@@ -6,7 +6,8 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// <summary>
 /// An abstract filter that asynchronously surrounds execution of the action result. Subclasses
 /// must override <see cref="OnResultExecuting"/>, <see cref="OnResultExecuted"/> or
-/// <see cref="OnResultExecutionAsync"/> but not <see cref="OnResultExecutionAsync"/> and either of the other two.
+/// <see cref="OnResultExecutionAsync"/> but not <see cref="OnResultExecutionAsync"/> and either of
+// the other two.
 /// </summary>
 [AttributeUsage(
     AttributeTargets.Class | AttributeTargets.Method,

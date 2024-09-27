@@ -65,8 +65,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// Base class for all name nodes
     /// </summary>
     /// <remarks>
-    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name that
-    /// is not a type then it should use <see cref="StackFrameToken"/> with <see cref="StackFrameKind.IdentifierToken"/>
+    /// All of these are <see cref="StackFrameTypeNode" />. If a node requires an identifier or name
+    // that
+    /// is not a type then it should use <see cref="StackFrameToken"/> with <see
+    // cref="StackFrameKind.IdentifierToken"/>
     /// directly.
     /// </remarks>
     internal abstract class StackFrameNameNode : StackFrameTypeNode
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     }
 
     /// <summary>
-    /// Base class for <see cref="StackFrameIdentifierNameNode"/> and <see cref="StackFrameGenericNameNode"/>
+    /// Base class for <see cref="StackFrameIdentifierNameNode"/> and <see
+    // cref="StackFrameGenericNameNode"/>
     /// </summary>
     internal abstract class StackFrameSimpleNameNode : StackFrameNameNode
     {
@@ -403,7 +406,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     /// <code>
     /// Ex: MyType.MyMethod[T, U, V](T t, U u, V v)
     ///                    ^-----------------------  "[" = Open Token
-    ///                     ^------^   ------------  "T, U, V" = SeparatedStackFrameNodeList&lt;StackFrameTypeArgumentNode&gt;
+    ///                     ^------^   ------------  "T, U, V" =
+    // SeparatedStackFrameNodeList&lt;StackFrameTypeArgumentNode&gt;
     ///                             ^--------------  "]" = Close Token
     /// </code>
     ///

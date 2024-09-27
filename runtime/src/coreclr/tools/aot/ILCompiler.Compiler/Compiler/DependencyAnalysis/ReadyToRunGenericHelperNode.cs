@@ -57,7 +57,8 @@ namespace ILCompiler.DependencyAnalysis
             object target
         )
         {
-            // Necessary type handle is not something you can put in a dictionary - someone should have normalized to TypeHandle
+            // Necessary type handle is not something you can put in a dictionary - someone should have
+            // normalized to TypeHandle
             Debug.Assert(id != ReadyToRunHelperId.NecessaryTypeHandle);
 
             switch (id)

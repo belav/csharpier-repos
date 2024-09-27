@@ -585,13 +585,19 @@ namespace System.Data.ProviderBase
                         //   ONLY touch obj after lock release if shouldDestroy is false!!!  Otherwise, it may be destroyed
                         //   by transaction-end thread!
 
-                        // Note that there is a minor race condition between this task and the transaction end event, if the latter runs
-                        //  between the lock above and the SetInStasis call below. The reslult is that the stasis counter may be
+                        // Note that there is a minor race condition between this task and the transaction end event, if the
+                        // latter runs
+                        //  between the lock above and the SetInStasis call below. The reslult is that the stasis counter
+                        // may be
                         //  incremented without a corresponding decrement (the transaction end task is normally expected
-                        //  to decrement, but will only do so if the stasis flag is set when it runs). I've minimized the size
-                        //  of the window, but we aren't totally eliminating it due to SetInStasis needing to do bid tracing, which
-                        //  we don't want to do under this lock, if possible. It should be possible to eliminate this race condition with
-                        //  more substantial re-architecture of the pool, but we don't have the time to do that work for the current release.
+                        //  to decrement, but will only do so if the stasis flag is set when it runs). I've minimized the
+                        // size
+                        //  of the window, but we aren't totally eliminating it due to SetInStasis needing to do bid
+                        // tracing, which
+                        //  we don't want to do under this lock, if possible. It should be possible to eliminate this race
+                        // condition with
+                        //  more substantial re-architecture of the pool, but we don't have the time to do that work for the
+                        // current release.
 
                         if (shouldDestroy)
                         {
@@ -775,8 +781,10 @@ namespace System.Data.ProviderBase
                     _errorOccurred = true;
 
                     // Enable the timer.
-                    // Note that the timer is created to allow periodic invocation. If ThreadAbort occurs in the middle of ErrorCallback,
-                    // the timer will restart. Otherwise, the timer callback (ErrorCallback) destroys the timer after resetting the error to avoid second callback.
+                    // Note that the timer is created to allow periodic invocation. If ThreadAbort occurs in the middle
+                    // of ErrorCallback,
+                    // the timer will restart. Otherwise, the timer callback (ErrorCallback) destroys the timer after
+                    // resetting the error to avoid second callback.
                     _errorTimer = t;
                     timerIsNotDisposed = t.Change(_errorWait, _errorWait);
                 }
@@ -1432,10 +1440,12 @@ namespace System.Data.ProviderBase
         /// <summary>
         /// Creates a new connection to replace an existing connection
         /// </summary>
-        /// <param name="owningObject">Outer connection that currently owns <paramref name="oldConnection"/></param>
+        /// <param name="owningObject">Outer connection that currently owns <paramref
+        // name="oldConnection"/></param>
         /// <param name="userOptions">Options used to create the new connection</param>
         /// <param name="oldConnection">Inner connection that will be replaced</param>
-        /// <returns>A new inner connection that is attached to the <paramref name="owningObject"/></returns>
+        /// <returns>A new inner connection that is attached to the <paramref
+        // name="owningObject"/></returns>
         internal DbConnectionInternal? ReplaceConnection(
             DbConnection owningObject,
             DbConnectionOptions? userOptions,
@@ -1595,7 +1605,8 @@ namespace System.Data.ProviderBase
                                 {
                                     while (NeedToReplenish)
                                     {
-                                        // Don't specify any user options because there is no outer connection associated with the new connection
+                                        // Don't specify any user options because there is no outer connection associated with the new
+                                        // connection
                                         newObj = CreateObject(
                                             owningObject: null,
                                             userOptions: null,
@@ -1698,7 +1709,8 @@ namespace System.Data.ProviderBase
                 // it won't get reclaimed if we drop the ball somewhere.
                 obj.PrePush(owningObject);
 
-                // TODO: Consider using a Cer to ensure that we mark the object for reclaimation in the event something bad happens?
+                // TODO: Consider using a Cer to ensure that we mark the object for reclaimation in the event
+                // something bad happens?
             }
 
             DeactivateObject(obj);
@@ -1843,7 +1855,8 @@ namespace System.Data.ProviderBase
                     // If we have an odd number of total objects, reclaim any dead objects.
                     // If we did not find any objects to reclaim, create a new one.
 
-                    // TODO: Consider implement a control knob here; why do we only check for dead objects ever other time?  why not every 10th time or every time?
+                    // TODO: Consider implement a control knob here; why do we only check for dead objects ever other
+                    // time?  why not every 10th time or every time?
                     if (
                         (oldConnection != null)
                         || (Count & 0x1) == 0x1

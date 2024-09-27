@@ -7,23 +7,28 @@ using Microsoft.AspNetCore.Html;
 namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 /// <summary>
-/// Validation-related extensions for <see cref="IHtmlHelper"/> and <see cref="IHtmlHelper{TModel}"/>.
+/// Validation-related extensions for <see cref="IHtmlHelper"/> and <see
+// cref="IHtmlHelper{TModel}"/>.
 /// </summary>
 public static class HtmlHelperValidationExtensions
 {
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     /// <remarks>
-    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object. Message
+    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object.
+    // Message
     /// will always be visible but client-side validation may update the associated CSS class.
     /// </remarks>
     public static IHtmlContent ValidationMessage(this IHtmlHelper htmlHelper, string expression)
@@ -39,19 +44,23 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationMessage(
@@ -66,7 +75,8 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
@@ -74,16 +84,20 @@ public static class HtmlHelperValidationExtensions
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the
     /// (<see cref="ViewContext.ValidationMessageElement"/>) element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     /// <remarks>
-    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object. Message
+    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object.
+    // Message
     /// will always be visible but client-side validation may update the associated CSS class.
     /// </remarks>
     public static IHtmlContent ValidationMessage(
@@ -103,14 +117,16 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <param name="tag">
@@ -119,7 +135,8 @@ public static class HtmlHelperValidationExtensions
     /// </param>
     /// <returns>
     /// A new <see cref="IHtmlContent"/> containing a <paramref name="tag"/> element. An empty
-    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side validation is
+    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    // validation is
     /// disabled.
     /// </returns>
     public static IHtmlContent ValidationMessage(
@@ -135,25 +152,30 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the
     /// (<see cref="ViewContext.ValidationMessageElement"/>) element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationMessage(
@@ -169,7 +191,8 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
@@ -177,12 +200,15 @@ public static class HtmlHelperValidationExtensions
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     /// <remarks>
-    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object. Message
+    /// Method extracts an error string from the <see cref="ModelBinding.ModelStateDictionary"/> object.
+    // Message
     /// will always be visible but client-side validation may update the associated CSS class.
     /// </remarks>
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
@@ -202,21 +228,25 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
@@ -237,27 +267,32 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the
     /// (<see cref="ViewContext.ValidationMessageElement"/>) element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <typeparam name="TModel">The type of the model.</typeparam>
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>
-    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/> element.
-    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    /// A new <see cref="IHtmlContent"/> containing a <see cref="ViewContext.ValidationMessageElement"/>
+    // element.
+    /// An empty <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and
+    // client-side
     /// validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
@@ -274,14 +309,16 @@ public static class HtmlHelperValidationExtensions
     }
 
     /// <summary>
-    /// Returns the validation message if an error exists in the <see cref="ModelBinding.ModelStateDictionary"/>
+    /// Returns the validation message if an error exists in the <see
+    // cref="ModelBinding.ModelStateDictionary"/>
     /// object for the specified <paramref name="expression"/>.
     /// </summary>
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="message">
     /// The message to be displayed. If <c>null</c> or empty, method extracts an error string from the
-    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but client-side
+    /// <see cref="ModelBinding.ModelStateDictionary"/> object. Message will always be visible but
+    // client-side
     /// validation may update the associated CSS class.
     /// </param>
     /// <param name="tag">
@@ -292,7 +329,8 @@ public static class HtmlHelperValidationExtensions
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>
     /// <returns>
     /// A new <see cref="IHtmlContent"/> containing the <paramref name="tag"/> element. An empty
-    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side validation is
+    /// <see cref="IHtmlContent"/> if the <paramref name="expression"/> is valid and client-side
+    // validation is
     /// disabled.
     /// </returns>
     public static IHtmlContent ValidationMessageFor<TModel, TResult>(
@@ -315,7 +353,8 @@ public static class HtmlHelperValidationExtensions
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the &lt;ul&gt; element.
-    /// An empty <see cref="IHtmlContent"/> if the current model is valid and client-side validation is disabled.
+    /// An empty <see cref="IHtmlContent"/> if the current model is valid and client-side validation is
+    // disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(this IHtmlHelper htmlHelper)
     {
@@ -339,7 +378,8 @@ public static class HtmlHelperValidationExtensions
     /// </param>
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the &lt;ul&gt; element.
-    /// An empty <see cref="IHtmlContent"/> if the current model is valid and client-side validation is disabled.
+    /// An empty <see cref="IHtmlContent"/> if the current model is valid and client-side validation is
+    // disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
         this IHtmlHelper htmlHelper,
@@ -365,7 +405,8 @@ public static class HtmlHelperValidationExtensions
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the
     /// <see cref="ViewContext.ValidationSummaryMessageElement" /> element (which wraps the
-    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current
+    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if
+    // the current
     /// model is valid and client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(this IHtmlHelper htmlHelper, string message)
@@ -391,8 +432,10 @@ public static class HtmlHelperValidationExtensions
     /// <see cref="ViewContext.ValidationSummaryMessageElement" />.
     /// </param>
     /// <returns>
-    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref name="tag"/> element
-    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid and
+    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref
+    // name="tag"/> element
+    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid
+    // and
     /// client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
@@ -423,7 +466,8 @@ public static class HtmlHelperValidationExtensions
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the
     /// <see cref="ViewContext.ValidationSummaryMessageElement" /> element (which, in turn, wraps the
-    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current
+    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if
+    // the current
     /// model is valid and client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
@@ -450,13 +494,15 @@ public static class HtmlHelperValidationExtensions
     /// <param name="message">The message to display with the validation summary.</param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the topmost (&lt;div&gt;) element.
-    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing
+    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance
+    // containing
     /// the HTML attributes.
     /// </param>
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the
     /// <see cref="ViewContext.ValidationSummaryMessageElement" /> element (which wraps the
-    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current
+    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if
+    // the current
     /// model is valid and client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
@@ -483,7 +529,8 @@ public static class HtmlHelperValidationExtensions
     /// <param name="message">The message to display with the validation summary.</param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the topmost (&lt;div&gt;) element.
-    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing
+    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance
+    // containing
     /// the HTML attributes.
     /// </param>
     /// <param name="tag">
@@ -491,8 +538,10 @@ public static class HtmlHelperValidationExtensions
     /// <see cref="ViewContext.ValidationSummaryMessageElement" />.
     /// </param>
     /// <returns>
-    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref name="tag"/> element
-    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid and
+    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref
+    // name="tag"/> element
+    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid
+    // and
     /// client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
@@ -526,8 +575,10 @@ public static class HtmlHelperValidationExtensions
     /// <see cref="ViewContext.ValidationSummaryMessageElement" />.
     /// </param>
     /// <returns>
-    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref name="tag"/> element
-    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid and
+    /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the <paramref
+    // name="tag"/> element
+    /// and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current model is valid
+    // and
     /// client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(
@@ -558,13 +609,15 @@ public static class HtmlHelperValidationExtensions
     /// <param name="message">The message to display with the validation summary.</param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the topmost (&lt;div&gt;) element.
-    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing
+    /// Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance
+    // containing
     /// the HTML attributes.
     /// </param>
     /// <returns>
     /// New <see cref="IHtmlContent"/> containing a &lt;div&gt; element wrapping the
     /// <see cref="ViewContext.ValidationSummaryMessageElement" /> element (which wraps the
-    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if the current
+    /// <paramref name="message"/>) and the &lt;ul&gt; element. An empty <see cref="IHtmlContent"/> if
+    // the current
     /// model is valid and client-side validation is disabled.
     /// </returns>
     public static IHtmlContent ValidationSummary(

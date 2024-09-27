@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 #if MONO
 namespace System.Data.Linq
@@ -35,8 +35,10 @@ namespace System.Windows.Forms
 
     /// <devdoc>
     ///     Useful methods to securely call 'dangerous' managed APIs (especially reflection).
-    ///     See http://wiki/default.aspx/Microsoft.Projects.DotNetClient.SecurityConcernsAroundReflection
-    ///     for more information specifically about why we need to be careful about reflection invocations.
+    ///     See
+    // http://wiki/default.aspx/Microsoft.Projects.DotNetClient.SecurityConcernsAroundReflection
+    ///     for more information specifically about why we need to be careful about reflection
+    // invocations.
     /// </devdoc>
     internal static class SecurityUtils
     {

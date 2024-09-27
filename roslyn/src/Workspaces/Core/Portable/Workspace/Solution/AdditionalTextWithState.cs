@@ -9,7 +9,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// An implementation of <see cref="AdditionalText"/> for the compiler that wraps a <see cref="AdditionalDocumentState"/>.
+    /// An implementation of <see cref="AdditionalText"/> for the compiler that wraps a <see
+    // cref="AdditionalDocumentState"/>.
     /// </summary>
     /// <remarks>
     /// Create a <see cref="SourceText"/> from a <see cref="AdditionalDocumentState"/>.

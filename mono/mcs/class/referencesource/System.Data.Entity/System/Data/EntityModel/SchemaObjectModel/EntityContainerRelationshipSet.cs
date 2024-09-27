@@ -140,15 +140,18 @@ namespace System.Data.EntityModel.SchemaObjectModel
             //    if (!setEnd.EntitySet.EntityType.IsOfType(constraint.DependentRole.End.Type))
             //    {
             //        AddError(ErrorCode.InvalidDependentRoleType, EdmSchemaErrorSeverity.Error,
-            //            System.Data.Entity.Strings.InvalidDependentRoleType(dependentEnd.Type.FQName, dependentEnd.Name,
-            //                                dependentEnd.Parent.FQName, setEnd.EntitySet.Name, setEnd.ParentElement.Name));
+            //            System.Data.Entity.Strings.InvalidDependentRoleType(dependentEnd.Type.FQName,
+            // dependentEnd.Name,
+            //                                dependentEnd.Parent.FQName, setEnd.EntitySet.Name,
+            // setEnd.ParentElement.Name));
             //    }
             //}
 
             // Validate Number of ends is correct
             //    What we know:
             //      No ends are missing, becuase we infered all missing ends
-            //      No extra ends are there because the names have been matched, and an extra name will have caused an error
+            //      No extra ends are there because the names have been matched, and an extra name will have
+            // caused an error
             //
             //    looks like no count validation needs to be done
         }
@@ -177,8 +180,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// <summary>
         /// For the given relationship end, find the EntityContainer Property that will work for the extent
         /// </summary>
-        /// <param name="relationshipEnd">The relationship end of the RelationshipSet that needs and extent</param>
-        /// <returns>Null is none could be found, or the EntityContainerProperty that is the valid extent</returns>
+        /// <param name="relationshipEnd">The relationship end of the RelationshipSet that needs and
+        // extent</param>
+        /// <returns>Null is none could be found, or the EntityContainerProperty that is the valid
+        // extent</returns>
         private EntityContainerEntitySet InferEntitySet(IRelationshipEnd relationshipEnd)
         {
             Debug.Assert(relationshipEnd != null, "relationshipEnd parameter is null");

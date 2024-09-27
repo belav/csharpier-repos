@@ -229,7 +229,8 @@ namespace System.Text.Json
         /// <summary>
         /// Writes the UTF-8 text value (as a JSON string) as an element of a JSON array.
         /// </summary>
-        /// <param name="utf8Value">The UTF-8 encoded value to be written as a JSON string element of a JSON array.</param>
+        /// <param name="utf8Value">The UTF-8 encoded value to be written as a JSON string element of a JSON
+        // array.</param>
         /// <exception cref="ArgumentException">
         /// Thrown when the specified value is too large.
         /// </exception>

@@ -558,7 +558,8 @@ namespace System.Net.Quic.Tests
             clientOptions.ClientAuthenticationOptions.TargetHost = "foobar3";
             Task clientTask = CreateQuicConnection(clientOptions).AsTask();
 
-            // TODO: the exception may change if we implement https://github.com/dotnet/runtime/issues/73152 to make server close
+            // TODO: the exception may change if we implement https://github.com/dotnet/runtime/issues/73152 to
+            // make server close
             // connections with CONNECTION_REFUSED in such cases
             var authEx = await Assert.ThrowsAsync<AuthenticationException>(() => clientTask);
             Assert.Contains(TlsAlertMessage.UserCanceled.ToString(), authEx.Message);
@@ -1246,7 +1247,8 @@ namespace System.Net.Quic.Tests
                     chars[dataOffset + j] = s[j];
                 }
 
-                // Create a segment that has offset relative to the OwnedMemory and OwnedMemory itself has offset relative to array
+                // Create a segment that has offset relative to the OwnedMemory and OwnedMemory itself has offset
+                // relative to array
                 var memory = new Memory<byte>(chars).Slice(length, length);
 
                 if (first == null)
@@ -1355,7 +1357,8 @@ namespace System.Net.Quic.Tests
                     await clientConnection.OpenOutboundStreamAsync(QuicStreamType.Bidirectional);
                 Assert.Equal(0, clientStream.Id);
 
-                // TODO: stream that is opened by client but left unaccepted by server may cause AccessViolationException in its Finalizer
+                // TODO: stream that is opened by client but left unaccepted by server may cause
+                // AccessViolationException in its Finalizer
                 await clientConnection.DisposeAsync();
                 await serverConnection.DisposeAsync();
             }

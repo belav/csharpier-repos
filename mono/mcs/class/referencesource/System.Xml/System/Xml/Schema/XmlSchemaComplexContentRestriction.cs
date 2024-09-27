@@ -10,7 +10,8 @@ namespace System.Xml.Schema
     using System.Collections;
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction"]/*' />
+    /// <include file='doc\XmlSchemaComplexContentRestriction.uex'
+    // path='docs/doc[@for="XmlSchemaComplexContentRestriction"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -21,7 +22,8 @@ namespace System.Xml.Schema
         XmlSchemaAnyAttribute anyAttribute;
         XmlQualifiedName baseTypeName = XmlQualifiedName.Empty;
 
-        /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction.BaseTypeName"]/*' />
+        /// <include file='doc\XmlSchemaComplexContentRestriction.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContentRestriction.BaseTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -32,7 +34,8 @@ namespace System.Xml.Schema
             set { baseTypeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
 
-        /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction.Particle"]/*' />
+        /// <include file='doc\XmlSchemaComplexContentRestriction.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContentRestriction.Particle"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -48,7 +51,8 @@ namespace System.Xml.Schema
             set { particle = value; }
         }
 
-        /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction.Attributes"]/*' />
+        /// <include file='doc\XmlSchemaComplexContentRestriction.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContentRestriction.Attributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -61,7 +65,8 @@ namespace System.Xml.Schema
             get { return attributes; }
         }
 
-        /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction.AnyAttribute"]/*' />
+        /// <include file='doc\XmlSchemaComplexContentRestriction.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContentRestriction.AnyAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

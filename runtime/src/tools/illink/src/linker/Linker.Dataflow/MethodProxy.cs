@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -29,18 +30,22 @@ namespace ILLink.Shared.TypeSystemProxy
         internal partial bool HasMetadataParameters() => Method.HasMetadataParameters();
 
         /// <summary>
-        /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the implicit 'this' from the count)
+        /// Gets the number of entries in the 'Parameters' section of a method's metadata (i.e. excludes the
+        // implicit 'this' from the count)
         /// </summary>
         internal partial int GetMetadataParametersCount() => Method.GetMetadataParametersCount();
 
         /// <summary>
-        /// Returns the number of parameters that are passed to the method in IL (including the implicit 'this' parameter).
-        /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount : MetadataParametersCount;</code>
+        /// Returns the number of parameters that are passed to the method in IL (including the implicit
+        // 'this' parameter).
+        /// In pseudocode: <code>method.HasImplicitThis() ? 1 + MetadataParametersCount :
+        // MetadataParametersCount;</code>
         /// </summary>
         internal partial int GetParametersCount() => Method.GetParametersCount();
 
         /// <summary>
-        /// Use only when iterating over all parameters. When wanting to index, use GetParameters(ParameterIndex)
+        /// Use only when iterating over all parameters. When wanting to index, use
+        // GetParameters(ParameterIndex)
         /// </summary>
         internal partial ParameterProxyEnumerable GetParameters() => Method.GetParameters();
 

@@ -666,10 +666,12 @@ namespace System.Reflection.Tests
         {
             // Regression test for https://github.com/dotnet/runtime/issues/22081
             //
-            // It's easy to forget that ParameterInfo's and runtime-implemented ParameterInfo's are different objects and just because the
+            // It's easy to forget that ParameterInfo's and runtime-implemented ParameterInfo's are different
+            // objects and just because the
             // latter doesn't support serialization doesn't mean other providers won't either.
             //
-            // For historical reasons, ParameterInfo contains some serialization support that subtypes can optionally hang off. This
+            // For historical reasons, ParameterInfo contains some serialization support that subtypes can
+            // optionally hang off. This
             // test ensures that support doesn't get vaporized.
 
             // Just pretend that we're BinaryFormatter and are deserializing a Parameter...
@@ -979,7 +981,8 @@ namespace System.Reflection.Tests
         {
             public PodPersonParameterInfo(MemberInfo pretendMember, int pretendPosition)
             {
-                // Serialization can recreate a ParameterInfo from just these two pieces of data. Of course, this is just a test and no one
+                // Serialization can recreate a ParameterInfo from just these two pieces of data. Of course, this is
+                // just a test and no one
                 // ever told this Member that it was adopting a counterfeit Parameter, but this is just a test...
                 MemberImpl = pretendMember;
                 PositionImpl = pretendPosition;

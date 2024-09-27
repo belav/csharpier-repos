@@ -33,7 +33,8 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             BitmapResourceID = 301;
             BitmapIndex = 1;
 
-            // This is the user control hosted by the tool window; Note that, even if this class implements IDisposable,
+            // This is the user control hosted by the tool window; Note that, even if this class implements
+            // IDisposable,
             // we are not calling Dispose on this object. This is because ToolWindowPane calls Dispose on
             // the object returned by the Content property.
             var perfMarginPanel = new TabItem()

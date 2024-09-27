@@ -164,7 +164,8 @@ namespace Microsoft.CodeAnalysis.AddFileBanner
         }
 
         /// <summary>
-        /// Looks at <paramref name="banner"/> to see if it contains the name of <paramref name="sourceDocument"/>
+        /// Looks at <paramref name="banner"/> to see if it contains the name of <paramref
+        // name="sourceDocument"/>
         /// in it.  If so, those names will be replaced with <paramref name="destinationDocument"/>'s name.
         /// </summary>
         private ImmutableArray<SyntaxTrivia> UpdateEmbeddedFileNames(

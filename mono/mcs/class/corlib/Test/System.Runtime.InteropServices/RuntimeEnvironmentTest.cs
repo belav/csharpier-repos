@@ -64,7 +64,8 @@ namespace MonoTests.System.Runtime.InteropServices
         public void FromGlobalAccessCache()
         {
             Assembly corlib = typeof(int).Assembly;
-            // FIXME: This doesn't work when doing make distcheck (probably because the corlib used isn't the GAC)
+            // FIXME: This doesn't work when doing make distcheck (probably because the corlib used isn't the
+            // GAC)
             //			Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
             Assembly corlib_test = Assembly.GetExecutingAssembly();
             Assert.IsFalse(RuntimeEnvironment.FromGlobalAccessCache(corlib_test), "corlib_test");

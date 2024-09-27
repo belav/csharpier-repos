@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public Exception? Exception { get; }
 
         /// <summary>
-        /// If <see cref="ErrorCode"/> is <see cref="FailureErrorCode.ReferencesNewerCompiler"/>, returns the compiler version referenced by the analyzer assembly. Otherwise, returns null.
+        /// If <see cref="ErrorCode"/> is <see cref="FailureErrorCode.ReferencesNewerCompiler"/>, returns
+        // the compiler version referenced by the analyzer assembly. Otherwise, returns null.
         /// </summary>
         public Version? ReferencedCompilerVersion { get; internal init; }
 

@@ -50,7 +50,8 @@ namespace System.Security.Cryptography.X509Certificates
             );
             AlgorithmIdentifierAsn signatureAlgorithmAsn;
 
-            // Deserialization also does validation of the value (except for Parameters, which have to be validated separately).
+            // Deserialization also does validation of the value (except for Parameters, which have to be
+            // validated separately).
             signatureAlgorithmAsn = AlgorithmIdentifierAsn.Decode(
                 signatureAlgorithm,
                 AsnEncodingRules.DER

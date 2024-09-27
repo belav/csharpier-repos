@@ -362,15 +362,15 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
         void VerifyInput(MessageBuffer buf)
         {
             Message input = buf.CreateMessage();
-            /*
-            XmlWriterSettings settings = new XmlWriterSettings ();
-            settings.Indent = true;
-            using (XmlWriter w = XmlWriter.Create (Console.Error, settings)) {
-            buf.CreateMessage ().WriteMessage (w);
-            }
-            Console.Error.WriteLine ("******************** DONE ********************");
-            Console.Error.Flush ();
-            */
+/*
+XmlWriterSettings settings = new XmlWriterSettings ();
+settings.Indent = true;
+using (XmlWriter w = XmlWriter.Create (Console.Error, settings)) {
+buf.CreateMessage ().WriteMessage (w);
+}
+Console.Error.WriteLine ("******************** DONE ********************");
+Console.Error.Flush ();
+*/
 
             Assert.AreEqual(
                 "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue",
@@ -378,7 +378,8 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
                 "GetToken.Request.Action"
             );
             Assert.IsNotNull(input.Headers.MessageId, "GetToken.Request.MessageID");
-            // in the raw Message it is "http://www.w3.org/2005/08/addressing/anonymous", but it is replaced by MessageHeaders implementation.
+            // in the raw Message it is "http://www.w3.org/2005/08/addressing/anonymous", but it is replaced by
+            // MessageHeaders implementation.
             Assert.AreEqual(
                 new EndpointAddress(
                     "http://schemas.microsoft.com/2005/12/ServiceModel/Addressing/Anonymous"
@@ -604,7 +605,8 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
             raw = n.InnerText;
             rawbytes = Convert.FromBase64String(raw);
             Rijndael aes = RijndaelManaged.Create();
-            //			aes.Key = keys [n.SelectSingleNode ("../../dsig:KeyInfo/o:SecurityTokenReference/o:Reference/@URI", nsmgr).InnerText.Substring (1)];
+            //			aes.Key = keys [n.SelectSingleNode
+            // ("../../dsig:KeyInfo/o:SecurityTokenReference/o:Reference/@URI", nsmgr).InnerText.Substring (1)];
             aes.Key = decryptedKey;
             aes.Mode = CipherMode.CBC;
             aes.Padding = mode;
@@ -635,7 +637,8 @@ namespace MonoTests.System.ServiceModel.Security.Tokens
             Assert.IsNotNull(n, "premise: encdata does not exist");
             raw = n.InnerText;
             rawbytes = Convert.FromBase64String(raw);
-            //			aes.Key = keys [n.SelectSingleNode ("../../dsig:KeyInfo/o:SecurityTokenReference/o:Reference/@URI", nsmgr).InnerText.Substring (1)];
+            //			aes.Key = keys [n.SelectSingleNode
+            // ("../../dsig:KeyInfo/o:SecurityTokenReference/o:Reference/@URI", nsmgr).InnerText.Substring (1)];
             aes.Key = decryptedKey;
             ms = new MemoryStream();
             cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Write);

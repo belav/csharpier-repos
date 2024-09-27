@@ -67,7 +67,8 @@ namespace System.Data.SqlClient
                     )
             );
 
-        // test to ensure that the SQL column has the expected SQL type.   Don't use the CLR type to avoid having to worry about differences in
+        // test to ensure that the SQL column has the expected SQL type.   Don't use the CLR type to avoid
+        // having to worry about differences in
         // type versions between the client and the database.
         private void EnsureGeographyColumn(int ordinal)
         {
@@ -96,9 +97,12 @@ namespace System.Data.SqlClient
         ///
         /// (BinaryReader r) => { var result = new SpatialType(); result.Read(r); return r; }
         ///
-        /// The construct/read pattern is preferred over casting the result of calling GetValue on the DataReader,
-        /// because constructing the value directly allows client code to specify the type, rather than SqlClient using
-        /// the server-specified assembly qualified type name from TDS to try to locate the correct type on the client.
+        /// The construct/read pattern is preferred over casting the result of calling GetValue on the
+        // DataReader,
+        /// because constructing the value directly allows client code to specify the type, rather than
+        // SqlClient using
+        /// the server-specified assembly qualified type name from TDS to try to locate the correct type on
+        // the client.
         /// </summary>
         /// <param name="spatialType"></param>
         /// <returns></returns>

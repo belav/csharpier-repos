@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private abstract partial class DecisionDagRewriter
         {
             /// <summary>
-            /// A node in a tree representing the form of a generated decision tree for classifying an input value.
+            /// A node in a tree representing the form of a generated decision tree for classifying an input
+            // value.
             /// </summary>
             private abstract class ValueDispatchNode
             {
@@ -71,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 /// Nodes of this kind are required to be height-balanced when constructed, so that when the full
                 /// decision tree is produced it generates a balanced tree of comparisons.  The shape of the tree
                 /// keeps tests for lower values on the left and tests for higher values on the right:
-                /// For <see cref="BinaryOperatorKind.LessThan"/> and <see cref="BinaryOperatorKind.LessThanOrEqual"/>,
+                /// For <see cref="BinaryOperatorKind.LessThan"/> and <see
+                // cref="BinaryOperatorKind.LessThanOrEqual"/>,
                 /// the <see cref="WhenTrue"/> branch is <see cref="Left"/> and the <see cref="WhenFalse"/> branch
                 /// is <see cref="Right"/>; for <see cref="BinaryOperatorKind.GreaterThan"/> and
                 /// <see cref="BinaryOperatorKind.GreaterThanOrEqual"/> it is reversed.
@@ -91,10 +93,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     public readonly ConstantValue Value;
                     public readonly BinaryOperatorKind Operator;
 
-                    /// <summary>The side of the test handling lower values. The true side for &lt; and &lt;=, the false side for > and >=.</summary>
+                    /// <summary>The side of the test handling lower values. The true side for &lt; and &lt;=, the false
+                    // side for > and >=.</summary>
                     private ValueDispatchNode Left { get; set; }
 
-                    /// <summary>The side of the test handling higher values. The false side for &lt; and &lt;=, the true side for > and >=.</summary>
+                    /// <summary>The side of the test handling higher values. The false side for &lt; and &lt;=, the
+                    // true side for > and >=.</summary>
                     private ValueDispatchNode Right { get; set; }
 
                     private RelationalDispatch(
@@ -193,7 +197,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Debug.Assert(op.OperandTypes() != 0);
 
-                        // Build a height-balanced tree node that is semantically equivalent to a node with the given parameters.
+                        // Build a height-balanced tree node that is semantically equivalent to a node with the given
+                        // parameters.
                         // See http://www.cs.ecu.edu/karl/3300/spr16/Notes/DataStructure/Tree/balance.html
 
                         // First, build an approximately balanced left and right bottom-up.

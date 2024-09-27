@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API surface for setting discriminator values from conventions.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public interface IConventionDiscriminatorBuilder
 {
@@ -22,23 +23,28 @@ public interface IConventionDiscriminatorBuilder
     ///     Configures if the discriminator mapping is complete.
     /// </summary>
     /// <param name="complete">The value indicating if this discriminator mapping is complete.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     IConventionDiscriminatorBuilder? IsComplete(bool complete, bool fromDataAnnotation = false);
 
     /// <summary>
-    ///     Returns a value indicating whether the discriminator mapping is complete can be set from this configuration source.
+    ///     Returns a value indicating whether the discriminator mapping is complete can be set from
+    // this configuration source.
     /// </summary>
     /// <param name="complete">The value indicating if this discriminator mapping is complete.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration source.</returns>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
+    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration
+    // source.</returns>
     bool CanSetIsComplete(bool complete, bool fromDataAnnotation = false);
 
     /// <summary>
     ///     Configures the discriminator value to use.
     /// </summary>
     /// <param name="value">The discriminator value.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     IConventionDiscriminatorBuilder? HasValue(object? value, bool fromDataAnnotation = false);
 
@@ -47,7 +53,8 @@ public interface IConventionDiscriminatorBuilder
     /// </summary>
     /// <param name="entityType">The entity type for which a discriminator value is being set.</param>
     /// <param name="value">The discriminator value.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The same builder so that multiple calls can be chained.</returns>
     IConventionDiscriminatorBuilder? HasValue(
         IConventionEntityType entityType,
@@ -56,20 +63,26 @@ public interface IConventionDiscriminatorBuilder
     );
 
     /// <summary>
-    ///     Returns a value indicating whether the discriminator value can be set from this configuration source.
+    ///     Returns a value indicating whether the discriminator value can be set from this
+    // configuration source.
     /// </summary>
     /// <param name="value">The discriminator value.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration source.</returns>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
+    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration
+    // source.</returns>
     bool CanSetValue(object? value, bool fromDataAnnotation = false);
 
     /// <summary>
-    ///     Returns a value indicating whether the discriminator value can be set from this configuration source.
+    ///     Returns a value indicating whether the discriminator value can be set from this
+    // configuration source.
     /// </summary>
     /// <param name="entityType">The entity type for which a discriminator value is being set.</param>
     /// <param name="value">The discriminator value.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration source.</returns>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
+    /// <returns><see langword="true" /> if the discriminator value can be set from this configuration
+    // source.</returns>
     bool CanSetValue(
         IConventionEntityType entityType,
         object? value,

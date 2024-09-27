@@ -223,9 +223,12 @@ namespace System.Security
             SecurityAction action
         )
         {
-            // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead of a CompressedStack object,
-            // we use a System.Object that should always be null. If we tried to change the signature of the function, there will need to be
-            // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in the arg array, etc.)
+            // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead
+            // of a CompressedStack object,
+            // we use a System.Object that should always be null. If we tried to change the signature of the
+            // function, there will need to be
+            // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in
+            // the arg array, etc.)
             Contract.Assert(
                 notUsed == null,
                 "Should not reach here with a non-null first arg which is the CompressedStack"
@@ -379,9 +382,12 @@ namespace System.Security
             SecurityAction action
         )
         {
-            // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead of a CompressedStack object,
-            // we use a System.Object that should always be null. If we tried to change the signature of the function, there will need to be
-            // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in the arg array, etc.)
+            // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead
+            // of a CompressedStack object,
+            // we use a System.Object that should always be null. If we tried to change the signature of the
+            // function, there will need to be
+            // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in
+            // the arg array, etc.)
             Contract.Assert(
                 notUsed == null,
                 "Should not reach here with a non-null first arg which is the CompressedStack"
@@ -571,7 +577,8 @@ namespace System.Security
         }
 
         /// <summary>
-        ///     Perform a security demand which succeeds if either a compatibilty permission is granted to the
+        ///     Perform a security demand which succeeds if either a compatibilty permission is granted to
+        // the
         ///     call stack, or restricted member access and the grant set of the target of the reflection
         ///     operation is granted.
         /// </summary>
@@ -587,7 +594,8 @@ namespace System.Security
         }
 
         /// <summary>
-        ///     Perform a security demand which succeeds if either a compatibilty permission is granted to the
+        ///     Perform a security demand which succeeds if either a compatibilty permission is granted to
+        // the
         ///     call stack, or restricted member access and the grant set of the target of the reflection
         ///     operation is granted.
         /// </summary>
@@ -974,7 +982,8 @@ namespace System.Security
         }
 
         // Consult the host and the current AppDomain if it is homogenous to determine what the grant set
-        // of an assembly is.  This API returns true if it was able to determine a grant set for the evidence,
+        // of an assembly is.  This API returns true if it was able to determine a grant set for the
+        // evidence,
         // false if it cannot and other policy needs to be applied.
         [SecuritySafeCritical]
         internal static bool TryResolveGrantSet(Evidence evidence, out PermissionSet grantSet)

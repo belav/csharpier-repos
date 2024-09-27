@@ -77,29 +77,29 @@ class D : B<D>
             var global = comp.GlobalNamespace;
 
             // Types
-            /* B<T> */
+/* B<T> */
             var BofT = global.GetMember<NamedTypeSymbol>("B");
-            /* D    */
+/* D    */
             var D = global.GetMember<NamedTypeSymbol>("D");
-            /* <D>  */
+/* <D>  */
             var ofD = ImmutableArray.Create<TypeSymbol>(D);
-            /* B<D> */
+/* B<D> */
             var BofD = BofT.Construct(ofD);
 
             // Methods
-            /* B<T>.M<U> */
+/* B<T>.M<U> */
             var BofT_MofU = BofT.GetMember<MethodSymbol>("M");
-            /* B<D>.M<U> */
+/* B<D>.M<U> */
             var BofD_MofU = BofD.GetMember<MethodSymbol>("M");
-            /* B<D>.M<D> */
+/* B<D>.M<D> */
             var BofD_MofD = BofD_MofU.Construct(ofD);
-            /* D.M<V>    */
+/* D.M<V>    */
             var D_MofV = D.GetMember<MethodSymbol>("M");
-            /* <V>       */
+/* <V>       */
             var ofV = ImmutableArray.Create<TypeSymbol>(D_MofV.TypeParameters[0]);
-            /* D.M<D>    */
+/* D.M<D>    */
             var D_MofD = D_MofV.Construct(ofD);
-            /* B<D>.M<V> */
+/* B<D>.M<V> */
             var BofD_MofV = BofD_MofU.Construct(ofV);
 
             // Nothing is hidden:
@@ -981,7 +981,8 @@ class OverridingClass : HidingClass
             Assert.False(overridingClassProperty1OverriddenOrHidden.OverriddenMembers.Any());
             Assert.Null(overridingClassProperty1.OverriddenProperty);
 
-            //counts as overriding even though the overridden property isn't virtual - we'll check for that later
+            //counts as overriding even though the overridden property isn't virtual - we'll check for that
+            // later
             var overridingClassProperty2OverriddenOrHidden =
                 overridingClassProperty2.OverriddenOrHiddenMembers;
             Assert.False(overridingClassProperty2OverriddenOrHidden.HiddenMembers.Any());
@@ -1037,7 +1038,8 @@ class Base4<U, V> : Base3<U, V>
         public void TestNonImplementedAbstractMembers2()
         {
             // Tests:
-            // Test error when not all abstract members from grandparent types have been overridden in derived type
+            // Test error when not all abstract members from grandparent types have been overridden in derived
+            // type
             // Use base class where abstract members are declared in different partial parts of the same type
 
             var text =
@@ -1094,11 +1096,16 @@ class Base4 : Base3
         /// A has 1 custom modifier for Method1, but not the same as C, and 0 custom modifiers for Method2
         /// </summary>
         /// <remarks>
-        /// ACASEY: When I initially wrote this test, I had the order of the tie-breakers wrong because I missed
-        /// an exit condition in CSemanticChecker::FindSymHiddenByMethPropAgg.  Preferring more-derived types is
-        /// a more important tie-breaker than preferring fewer custom modifiers.  Unfortunately, the correct rules
-        /// make this test less comprehensive - no tie breaking occurs in practice, since we stop searching after
-        /// finding candidates in D.  I updated the test, rather than deleting it, as a record of the correct
+        /// ACASEY: When I initially wrote this test, I had the order of the tie-breakers wrong because I
+        // missed
+        /// an exit condition in CSemanticChecker::FindSymHiddenByMethPropAgg.  Preferring more-derived
+        // types is
+        /// a more important tie-breaker than preferring fewer custom modifiers.  Unfortunately, the correct
+        // rules
+        /// make this test less comprehensive - no tie breaking occurs in practice, since we stop searching
+        // after
+        /// finding candidates in D.  I updated the test, rather than deleting it, as a record of the
+        // correct
         /// behavior in this apparently complicated scenario.
         /// </remarks>
         [Fact]
@@ -1511,11 +1518,13 @@ class CSHide : VBIMeth02Impl, IMeth02, IMeth03
             );
 
             comp.VerifyDiagnostics(
-                // (5,19): error CS0246: The type or namespace name 'INested' could not be found (are you missing a using directive or an assembly reference?)
+                // (5,19): error CS0246: The type or namespace name 'INested' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     public void M(INested nested)  // CS0246
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "INested")
                     .WithArguments("INested"),
-                // (4,5): error CS0246: The type or namespace name 'INested' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,5): error CS0246: The type or namespace name 'INested' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     INested n; // CS0246
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "INested")
                     .WithArguments("INested"),
@@ -1558,11 +1567,13 @@ class Derived : AccessorModifierMismatch
             var refs = new MetadataReference[] { TestReferences.SymbolsTests.Properties };
             CreateCompilation(text1, references: refs, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.NoneAbstract.set'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.NoneAbstract.set'
                     // class Derived : AccessorModifierMismatch
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.NoneAbstract.set"),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractNone.get'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.AbstractNone.get'
                     // class Derived : AccessorModifierMismatch
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.AbstractNone.get")
@@ -1611,124 +1622,143 @@ class Derived : AccessorModifierMismatch // CS0534 (didn't implement AbstractAbs
             var refs = new MetadataReference[] { TestReferences.SymbolsTests.Properties };
             CreateCompilation(text1, references: refs, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,25): error CS0506: 'Derived.NoneNone': cannot override inherited member 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
+                    // (4,25): error CS0506: 'Derived.NoneNone': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
                     //     public override int NoneNone { get { return 0; } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "NoneNone")
                         .WithArguments("Derived.NoneNone", "AccessorModifierMismatch.NoneNone"),
-                    // (5,40): error CS0506: 'Derived.NoneAbstract.get': cannot override inherited member 'AccessorModifierMismatch.NoneNone.get' because it is not marked virtual, abstract, or override
+                    // (5,40): error CS0506: 'Derived.NoneAbstract.get': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.get' because it is not marked virtual, abstract, or override
                     //     public override int NoneAbstract { get { return 0; } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "get")
                         .WithArguments(
                             "Derived.NoneAbstract.get",
                             "AccessorModifierMismatch.NoneNone.get"
                         ),
-                    // (6,39): error CS0506: 'Derived.NoneVirtual.get': cannot override inherited member 'AccessorModifierMismatch.NoneNone.get' because it is not marked virtual, abstract, or override
+                    // (6,39): error CS0506: 'Derived.NoneVirtual.get': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.get' because it is not marked virtual, abstract, or override
                     //     public override int NoneVirtual { get { return 0; } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "get")
                         .WithArguments(
                             "Derived.NoneVirtual.get",
                             "AccessorModifierMismatch.NoneNone.get"
                         ),
-                    // (7,25): error CS0569: 'Derived.NoneOverride': cannot override 'AccessorModifierMismatch.NoneOverride' because it is not supported by the language
+                    // (7,25): error CS0569: 'Derived.NoneOverride': cannot override
+                    // 'AccessorModifierMismatch.NoneOverride' because it is not supported by the language
                     //     public override int NoneOverride { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "NoneOverride")
                         .WithArguments(
                             "Derived.NoneOverride",
                             "AccessorModifierMismatch.NoneOverride"
                         ),
-                    // (8,25): error CS0569: 'Derived.NoneSealed': cannot override 'AccessorModifierMismatch.NoneSealed' because it is not supported by the language
+                    // (8,25): error CS0569: 'Derived.NoneSealed': cannot override 'AccessorModifierMismatch.NoneSealed'
+                    // because it is not supported by the language
                     //     public override int NoneSealed { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "NoneSealed")
                         .WithArguments("Derived.NoneSealed", "AccessorModifierMismatch.NoneSealed"),
-                    // (13,25): error CS0569: 'Derived.AbstractOverride': cannot override 'AccessorModifierMismatch.AbstractOverride' because it is not supported by the language
+                    // (13,25): error CS0569: 'Derived.AbstractOverride': cannot override
+                    // 'AccessorModifierMismatch.AbstractOverride' because it is not supported by the language
                     //     public override int AbstractOverride { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "AbstractOverride")
                         .WithArguments(
                             "Derived.AbstractOverride",
                             "AccessorModifierMismatch.AbstractOverride"
                         ),
-                    // (14,25): error CS0569: 'Derived.AbstractSealed': cannot override 'AccessorModifierMismatch.AbstractSealed' because it is not supported by the language
+                    // (14,25): error CS0569: 'Derived.AbstractSealed': cannot override
+                    // 'AccessorModifierMismatch.AbstractSealed' because it is not supported by the language
                     //     public override int AbstractSealed { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "AbstractSealed")
                         .WithArguments(
                             "Derived.AbstractSealed",
                             "AccessorModifierMismatch.AbstractSealed"
                         ),
-                    // (19,25): error CS0569: 'Derived.VirtualOverride': cannot override 'AccessorModifierMismatch.VirtualOverride' because it is not supported by the language
+                    // (19,25): error CS0569: 'Derived.VirtualOverride': cannot override
+                    // 'AccessorModifierMismatch.VirtualOverride' because it is not supported by the language
                     //     public override int VirtualOverride { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "VirtualOverride")
                         .WithArguments(
                             "Derived.VirtualOverride",
                             "AccessorModifierMismatch.VirtualOverride"
                         ),
-                    // (20,25): error CS0569: 'Derived.VirtualSealed': cannot override 'AccessorModifierMismatch.VirtualSealed' because it is not supported by the language
+                    // (20,25): error CS0569: 'Derived.VirtualSealed': cannot override
+                    // 'AccessorModifierMismatch.VirtualSealed' because it is not supported by the language
                     //     public override int VirtualSealed { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "VirtualSealed")
                         .WithArguments(
                             "Derived.VirtualSealed",
                             "AccessorModifierMismatch.VirtualSealed"
                         ),
-                    // (22,25): error CS0569: 'Derived.OverrideNone': cannot override 'AccessorModifierMismatch.OverrideNone' because it is not supported by the language
+                    // (22,25): error CS0569: 'Derived.OverrideNone': cannot override
+                    // 'AccessorModifierMismatch.OverrideNone' because it is not supported by the language
                     //     public override int OverrideNone { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideNone")
                         .WithArguments(
                             "Derived.OverrideNone",
                             "AccessorModifierMismatch.OverrideNone"
                         ),
-                    // (23,25): error CS0569: 'Derived.OverrideAbstract': cannot override 'AccessorModifierMismatch.OverrideAbstract' because it is not supported by the language
+                    // (23,25): error CS0569: 'Derived.OverrideAbstract': cannot override
+                    // 'AccessorModifierMismatch.OverrideAbstract' because it is not supported by the language
                     //     public override int OverrideAbstract { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideAbstract")
                         .WithArguments(
                             "Derived.OverrideAbstract",
                             "AccessorModifierMismatch.OverrideAbstract"
                         ),
-                    // (24,25): error CS0569: 'Derived.OverrideVirtual': cannot override 'AccessorModifierMismatch.OverrideVirtual' because it is not supported by the language
+                    // (24,25): error CS0569: 'Derived.OverrideVirtual': cannot override
+                    // 'AccessorModifierMismatch.OverrideVirtual' because it is not supported by the language
                     //     public override int OverrideVirtual { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideVirtual")
                         .WithArguments(
                             "Derived.OverrideVirtual",
                             "AccessorModifierMismatch.OverrideVirtual"
                         ),
-                    // (26,25): error CS0569: 'Derived.OverrideSealed': cannot override 'AccessorModifierMismatch.OverrideSealed' because it is not supported by the language
+                    // (26,25): error CS0569: 'Derived.OverrideSealed': cannot override
+                    // 'AccessorModifierMismatch.OverrideSealed' because it is not supported by the language
                     //     public override int OverrideSealed { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideSealed")
                         .WithArguments(
                             "Derived.OverrideSealed",
                             "AccessorModifierMismatch.OverrideSealed"
                         ),
-                    // (28,25): error CS0569: 'Derived.SealedNone': cannot override 'AccessorModifierMismatch.SealedNone' because it is not supported by the language
+                    // (28,25): error CS0569: 'Derived.SealedNone': cannot override
+                    // 'AccessorModifierMismatch.SealedNone' because it is not supported by the language
                     //     public override int SealedNone { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedNone")
                         .WithArguments("Derived.SealedNone", "AccessorModifierMismatch.SealedNone"),
-                    // (29,25): error CS0569: 'Derived.SealedAbstract': cannot override 'AccessorModifierMismatch.SealedAbstract' because it is not supported by the language
+                    // (29,25): error CS0569: 'Derived.SealedAbstract': cannot override
+                    // 'AccessorModifierMismatch.SealedAbstract' because it is not supported by the language
                     //     public override int SealedAbstract { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedAbstract")
                         .WithArguments(
                             "Derived.SealedAbstract",
                             "AccessorModifierMismatch.SealedAbstract"
                         ),
-                    // (30,25): error CS0569: 'Derived.SealedVirtual': cannot override 'AccessorModifierMismatch.SealedVirtual' because it is not supported by the language
+                    // (30,25): error CS0569: 'Derived.SealedVirtual': cannot override
+                    // 'AccessorModifierMismatch.SealedVirtual' because it is not supported by the language
                     //     public override int SealedVirtual { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedVirtual")
                         .WithArguments(
                             "Derived.SealedVirtual",
                             "AccessorModifierMismatch.SealedVirtual"
                         ),
-                    // (31,25): error CS0569: 'Derived.SealedOverride': cannot override 'AccessorModifierMismatch.SealedOverride' because it is not supported by the language
+                    // (31,25): error CS0569: 'Derived.SealedOverride': cannot override
+                    // 'AccessorModifierMismatch.SealedOverride' because it is not supported by the language
                     //     public override int SealedOverride { get { return 0; } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedOverride")
                         .WithArguments(
                             "Derived.SealedOverride",
                             "AccessorModifierMismatch.SealedOverride"
                         ),
-                    // (32,25): error CS0239: 'Derived.SealedSealed': cannot override inherited member 'AccessorModifierMismatch.SealedSealed' because it is sealed
+                    // (32,25): error CS0239: 'Derived.SealedSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedSealed' because it is sealed
                     //     public override int SealedSealed { get { return 0; } } // CS0239 (sealed)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedSealed")
                         .WithArguments(
                             "Derived.SealedSealed",
                             "AccessorModifierMismatch.SealedSealed"
                         ),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.NoneAbstract.set'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.NoneAbstract.set'
                     // class Derived : AccessorModifierMismatch // CS0534 (didn't implement AbstractAbstract.set)
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.NoneAbstract.set")
@@ -1777,124 +1807,143 @@ class Derived : AccessorModifierMismatch // CS0534 (didn't implement AbstractAbs
             var refs = new MetadataReference[] { TestReferences.SymbolsTests.Properties };
             CreateCompilation(text1, references: refs, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,25): error CS0506: 'Derived.NoneNone': cannot override inherited member 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
+                    // (4,25): error CS0506: 'Derived.NoneNone': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
                     //     public override int NoneNone { set { } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "NoneNone")
                         .WithArguments("Derived.NoneNone", "AccessorModifierMismatch.NoneNone"),
-                    // (7,25): error CS0569: 'Derived.NoneOverride': cannot override 'AccessorModifierMismatch.NoneOverride' because it is not supported by the language
+                    // (7,25): error CS0569: 'Derived.NoneOverride': cannot override
+                    // 'AccessorModifierMismatch.NoneOverride' because it is not supported by the language
                     //     public override int NoneOverride { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "NoneOverride")
                         .WithArguments(
                             "Derived.NoneOverride",
                             "AccessorModifierMismatch.NoneOverride"
                         ),
-                    // (8,25): error CS0569: 'Derived.NoneSealed': cannot override 'AccessorModifierMismatch.NoneSealed' because it is not supported by the language
+                    // (8,25): error CS0569: 'Derived.NoneSealed': cannot override 'AccessorModifierMismatch.NoneSealed'
+                    // because it is not supported by the language
                     //     public override int NoneSealed { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "NoneSealed")
                         .WithArguments("Derived.NoneSealed", "AccessorModifierMismatch.NoneSealed"),
-                    // (10,40): error CS0506: 'Derived.AbstractNone.set': cannot override inherited member 'AccessorModifierMismatch.NoneNone.set' because it is not marked virtual, abstract, or override
+                    // (10,40): error CS0506: 'Derived.AbstractNone.set': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.set' because it is not marked virtual, abstract, or override
                     //     public override int AbstractNone { set { } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "set")
                         .WithArguments(
                             "Derived.AbstractNone.set",
                             "AccessorModifierMismatch.NoneNone.set"
                         ),
-                    // (13,25): error CS0569: 'Derived.AbstractOverride': cannot override 'AccessorModifierMismatch.AbstractOverride' because it is not supported by the language
+                    // (13,25): error CS0569: 'Derived.AbstractOverride': cannot override
+                    // 'AccessorModifierMismatch.AbstractOverride' because it is not supported by the language
                     //     public override int AbstractOverride { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "AbstractOverride")
                         .WithArguments(
                             "Derived.AbstractOverride",
                             "AccessorModifierMismatch.AbstractOverride"
                         ),
-                    // (14,25): error CS0569: 'Derived.AbstractSealed': cannot override 'AccessorModifierMismatch.AbstractSealed' because it is not supported by the language
+                    // (14,25): error CS0569: 'Derived.AbstractSealed': cannot override
+                    // 'AccessorModifierMismatch.AbstractSealed' because it is not supported by the language
                     //     public override int AbstractSealed { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "AbstractSealed")
                         .WithArguments(
                             "Derived.AbstractSealed",
                             "AccessorModifierMismatch.AbstractSealed"
                         ),
-                    // (16,39): error CS0506: 'Derived.VirtualNone.set': cannot override inherited member 'AccessorModifierMismatch.NoneNone.set' because it is not marked virtual, abstract, or override
+                    // (16,39): error CS0506: 'Derived.VirtualNone.set': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.set' because it is not marked virtual, abstract, or override
                     //     public override int VirtualNone { set { } }
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "set")
                         .WithArguments(
                             "Derived.VirtualNone.set",
                             "AccessorModifierMismatch.NoneNone.set"
                         ),
-                    // (19,25): error CS0569: 'Derived.VirtualOverride': cannot override 'AccessorModifierMismatch.VirtualOverride' because it is not supported by the language
+                    // (19,25): error CS0569: 'Derived.VirtualOverride': cannot override
+                    // 'AccessorModifierMismatch.VirtualOverride' because it is not supported by the language
                     //     public override int VirtualOverride { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "VirtualOverride")
                         .WithArguments(
                             "Derived.VirtualOverride",
                             "AccessorModifierMismatch.VirtualOverride"
                         ),
-                    // (20,25): error CS0569: 'Derived.VirtualSealed': cannot override 'AccessorModifierMismatch.VirtualSealed' because it is not supported by the language
+                    // (20,25): error CS0569: 'Derived.VirtualSealed': cannot override
+                    // 'AccessorModifierMismatch.VirtualSealed' because it is not supported by the language
                     //     public override int VirtualSealed { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "VirtualSealed")
                         .WithArguments(
                             "Derived.VirtualSealed",
                             "AccessorModifierMismatch.VirtualSealed"
                         ),
-                    // (22,25): error CS0569: 'Derived.OverrideNone': cannot override 'AccessorModifierMismatch.OverrideNone' because it is not supported by the language
+                    // (22,25): error CS0569: 'Derived.OverrideNone': cannot override
+                    // 'AccessorModifierMismatch.OverrideNone' because it is not supported by the language
                     //     public override int OverrideNone { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideNone")
                         .WithArguments(
                             "Derived.OverrideNone",
                             "AccessorModifierMismatch.OverrideNone"
                         ),
-                    // (23,25): error CS0569: 'Derived.OverrideAbstract': cannot override 'AccessorModifierMismatch.OverrideAbstract' because it is not supported by the language
+                    // (23,25): error CS0569: 'Derived.OverrideAbstract': cannot override
+                    // 'AccessorModifierMismatch.OverrideAbstract' because it is not supported by the language
                     //     public override int OverrideAbstract { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideAbstract")
                         .WithArguments(
                             "Derived.OverrideAbstract",
                             "AccessorModifierMismatch.OverrideAbstract"
                         ),
-                    // (24,25): error CS0569: 'Derived.OverrideVirtual': cannot override 'AccessorModifierMismatch.OverrideVirtual' because it is not supported by the language
+                    // (24,25): error CS0569: 'Derived.OverrideVirtual': cannot override
+                    // 'AccessorModifierMismatch.OverrideVirtual' because it is not supported by the language
                     //     public override int OverrideVirtual { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideVirtual")
                         .WithArguments(
                             "Derived.OverrideVirtual",
                             "AccessorModifierMismatch.OverrideVirtual"
                         ),
-                    // (26,25): error CS0569: 'Derived.OverrideSealed': cannot override 'AccessorModifierMismatch.OverrideSealed' because it is not supported by the language
+                    // (26,25): error CS0569: 'Derived.OverrideSealed': cannot override
+                    // 'AccessorModifierMismatch.OverrideSealed' because it is not supported by the language
                     //     public override int OverrideSealed { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "OverrideSealed")
                         .WithArguments(
                             "Derived.OverrideSealed",
                             "AccessorModifierMismatch.OverrideSealed"
                         ),
-                    // (28,25): error CS0569: 'Derived.SealedNone': cannot override 'AccessorModifierMismatch.SealedNone' because it is not supported by the language
+                    // (28,25): error CS0569: 'Derived.SealedNone': cannot override
+                    // 'AccessorModifierMismatch.SealedNone' because it is not supported by the language
                     //     public override int SealedNone { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedNone")
                         .WithArguments("Derived.SealedNone", "AccessorModifierMismatch.SealedNone"),
-                    // (29,25): error CS0569: 'Derived.SealedAbstract': cannot override 'AccessorModifierMismatch.SealedAbstract' because it is not supported by the language
+                    // (29,25): error CS0569: 'Derived.SealedAbstract': cannot override
+                    // 'AccessorModifierMismatch.SealedAbstract' because it is not supported by the language
                     //     public override int SealedAbstract { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedAbstract")
                         .WithArguments(
                             "Derived.SealedAbstract",
                             "AccessorModifierMismatch.SealedAbstract"
                         ),
-                    // (30,25): error CS0569: 'Derived.SealedVirtual': cannot override 'AccessorModifierMismatch.SealedVirtual' because it is not supported by the language
+                    // (30,25): error CS0569: 'Derived.SealedVirtual': cannot override
+                    // 'AccessorModifierMismatch.SealedVirtual' because it is not supported by the language
                     //     public override int SealedVirtual { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedVirtual")
                         .WithArguments(
                             "Derived.SealedVirtual",
                             "AccessorModifierMismatch.SealedVirtual"
                         ),
-                    // (31,25): error CS0569: 'Derived.SealedOverride': cannot override 'AccessorModifierMismatch.SealedOverride' because it is not supported by the language
+                    // (31,25): error CS0569: 'Derived.SealedOverride': cannot override
+                    // 'AccessorModifierMismatch.SealedOverride' because it is not supported by the language
                     //     public override int SealedOverride { set { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "SealedOverride")
                         .WithArguments(
                             "Derived.SealedOverride",
                             "AccessorModifierMismatch.SealedOverride"
                         ),
-                    // (32,25): error CS0239: 'Derived.SealedSealed': cannot override inherited member 'AccessorModifierMismatch.SealedSealed' because it is sealed
+                    // (32,25): error CS0239: 'Derived.SealedSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedSealed' because it is sealed
                     //     public override int SealedSealed { set { } } // CS0239 (sealed)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedSealed")
                         .WithArguments(
                             "Derived.SealedSealed",
                             "AccessorModifierMismatch.SealedSealed"
                         ),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractNone.get'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.AbstractNone.get'
                     // class Derived : AccessorModifierMismatch // CS0534 (didn't implement AbstractAbstract.get)
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.AbstractNone.get")
@@ -1997,11 +2046,13 @@ class Derived : AccessorModifierMismatch
             var refs = new MetadataReference[] { TestReferences.SymbolsTests.Events };
             CreateCompilation(text1, references: refs, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.NoneAbstract.remove'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.NoneAbstract.remove'
                     // class Derived : AccessorModifierMismatch
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.NoneAbstract.remove"),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractNone.add'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.AbstractNone.add'
                     // class Derived : AccessorModifierMismatch
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.AbstractNone.add")
@@ -2052,103 +2103,125 @@ class Derived : AccessorModifierMismatch
             var refs = new MetadataReference[] { TestReferences.SymbolsTests.Events };
             CreateCompilation(text1, references: refs, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,41): error CS0506: 'Derived.NoneNone': cannot override inherited member 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
+                    // (4,41): error CS0506: 'Derived.NoneNone': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone' because it is not marked virtual, abstract, or override
                     //     public override event System.Action NoneNone { add { } remove { } } // CS0506 (not virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "NoneNone")
                         .WithArguments("Derived.NoneNone", "AccessorModifierMismatch.NoneNone"),
-                    // (5,56): error CS0506: 'Derived.NoneAbstract.add': cannot override inherited member 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action NoneAbstract { add { } remove { } } // CS0506 (add not virtual)
+                    // (5,56): error CS0506: 'Derived.NoneAbstract.add': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action NoneAbstract { add { } remove { } } // CS0506 (add not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "add")
                         .WithArguments(
                             "Derived.NoneAbstract.add",
                             "AccessorModifierMismatch.NoneNone.add"
                         ),
-                    // (6,55): error CS0506: 'Derived.NoneVirtual.add': cannot override inherited member 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action NoneVirtual { add { } remove { } } // CS0506 (add not virtual)
+                    // (6,55): error CS0506: 'Derived.NoneVirtual.add': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action NoneVirtual { add { } remove { } } // CS0506 (add not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "add")
                         .WithArguments(
                             "Derived.NoneVirtual.add",
                             "AccessorModifierMismatch.NoneNone.add"
                         ),
-                    // (7,56): error CS0506: 'Derived.NoneOverride.add': cannot override inherited member 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action NoneOverride { add { } remove { } } // CS0506 (add not virtual)
+                    // (7,56): error CS0506: 'Derived.NoneOverride.add': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.add' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action NoneOverride { add { } remove { } } // CS0506 (add not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "add")
                         .WithArguments(
                             "Derived.NoneOverride.add",
                             "AccessorModifierMismatch.NoneNone.add"
                         ),
-                    // (8,41): error CS0239: 'Derived.NoneSealed': cannot override inherited member 'AccessorModifierMismatch.NoneSealed' because it is sealed
+                    // (8,41): error CS0239: 'Derived.NoneSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneSealed' because it is sealed
                     //     public override event System.Action NoneSealed { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "NoneSealed")
                         .WithArguments("Derived.NoneSealed", "AccessorModifierMismatch.NoneSealed"),
-                    // (10,64): error CS0506: 'Derived.AbstractNone.remove': cannot override inherited member 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action AbstractNone { add { } remove { } } // CS0506 (remove not virtual)
+                    // (10,64): error CS0506: 'Derived.AbstractNone.remove': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action AbstractNone { add { } remove { } } // CS0506 (remove not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "remove")
                         .WithArguments(
                             "Derived.AbstractNone.remove",
                             "AccessorModifierMismatch.NoneNone.remove"
                         ),
-                    // (14,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
+                    // (14,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.AbstractSealed' because it is sealed
                     //     public override event System.Action AbstractSealed { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
                         .WithArguments(
                             "Derived.AbstractSealed",
                             "AccessorModifierMismatch.AbstractSealed"
                         ),
-                    // (16,63): error CS0506: 'Derived.VirtualNone.remove': cannot override inherited member 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action VirtualNone { add { } remove { } } // CS0506 (remove not virtual)
+                    // (16,63): error CS0506: 'Derived.VirtualNone.remove': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action VirtualNone { add { } remove { } } // CS0506 (remove not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "remove")
                         .WithArguments(
                             "Derived.VirtualNone.remove",
                             "AccessorModifierMismatch.NoneNone.remove"
                         ),
-                    // (20,41): error CS0239: 'Derived.VirtualSealed': cannot override inherited member 'AccessorModifierMismatch.VirtualSealed' because it is sealed
+                    // (20,41): error CS0239: 'Derived.VirtualSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.VirtualSealed' because it is sealed
                     //     public override event System.Action VirtualSealed { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "VirtualSealed")
                         .WithArguments(
                             "Derived.VirtualSealed",
                             "AccessorModifierMismatch.VirtualSealed"
                         ),
-                    // (22,64): error CS0506: 'Derived.OverrideNone.remove': cannot override inherited member 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
-                    //     public override event System.Action OverrideNone { add { } remove { } } // CS0506 (remove not virtual)
+                    // (22,64): error CS0506: 'Derived.OverrideNone.remove': cannot override inherited member
+                    // 'AccessorModifierMismatch.NoneNone.remove' because it is not marked virtual, abstract, or override
+                    //     public override event System.Action OverrideNone { add { } remove { } } // CS0506 (remove not
+                    // virtual)
                     Diagnostic(ErrorCode.ERR_CantOverrideNonVirtual, "remove")
                         .WithArguments(
                             "Derived.OverrideNone.remove",
                             "AccessorModifierMismatch.NoneNone.remove"
                         ),
-                    // (26,41): error CS0239: 'Derived.OverrideSealed': cannot override inherited member 'AccessorModifierMismatch.OverrideSealed' because it is sealed
+                    // (26,41): error CS0239: 'Derived.OverrideSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.OverrideSealed' because it is sealed
                     //     public override event System.Action OverrideSealed { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "OverrideSealed")
                         .WithArguments(
                             "Derived.OverrideSealed",
                             "AccessorModifierMismatch.OverrideSealed"
                         ),
-                    // (28,41): error CS0239: 'Derived.SealedNone': cannot override inherited member 'AccessorModifierMismatch.SealedNone' because it is sealed
+                    // (28,41): error CS0239: 'Derived.SealedNone': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedNone' because it is sealed
                     //     public override event System.Action SealedNone { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedNone")
                         .WithArguments("Derived.SealedNone", "AccessorModifierMismatch.SealedNone"),
-                    // (29,41): error CS0239: 'Derived.SealedAbstract': cannot override inherited member 'AccessorModifierMismatch.SealedAbstract' because it is sealed
+                    // (29,41): error CS0239: 'Derived.SealedAbstract': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedAbstract' because it is sealed
                     //     public override event System.Action SealedAbstract { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedAbstract")
                         .WithArguments(
                             "Derived.SealedAbstract",
                             "AccessorModifierMismatch.SealedAbstract"
                         ),
-                    // (30,41): error CS0239: 'Derived.SealedVirtual': cannot override inherited member 'AccessorModifierMismatch.SealedVirtual' because it is sealed
+                    // (30,41): error CS0239: 'Derived.SealedVirtual': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedVirtual' because it is sealed
                     //     public override event System.Action SealedVirtual { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedVirtual")
                         .WithArguments(
                             "Derived.SealedVirtual",
                             "AccessorModifierMismatch.SealedVirtual"
                         ),
-                    // (31,41): error CS0239: 'Derived.SealedOverride': cannot override inherited member 'AccessorModifierMismatch.SealedOverride' because it is sealed
+                    // (31,41): error CS0239: 'Derived.SealedOverride': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedOverride' because it is sealed
                     //     public override event System.Action SealedOverride { add { } remove { } } // CS1545 (bogus)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedOverride")
                         .WithArguments(
                             "Derived.SealedOverride",
                             "AccessorModifierMismatch.SealedOverride"
                         ),
-                    // (32,41): error CS0239: 'Derived.SealedSealed': cannot override inherited member 'AccessorModifierMismatch.SealedSealed' because it is sealed
+                    // (32,41): error CS0239: 'Derived.SealedSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.SealedSealed' because it is sealed
                     //     public override event System.Action SealedSealed { add { } remove { } } // CS0239 (sealed)
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "SealedSealed")
                         .WithArguments(
@@ -2221,7 +2294,8 @@ class Derived : AccessorModifierMismatch
 ";
             CreateCompilationWithILAndMscorlib40(csharp, il)
                 .VerifyDiagnostics(
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.AbstractSealed.add'
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
                 );
@@ -2239,7 +2313,8 @@ class Derived : AccessorModifierMismatch
                     // (5,26): error CS0115: 'Derived.AddAbstract(System.Action)': no suitable method found to override
                     Diagnostic(ErrorCode.ERR_OverrideNotExpected, "AddAbstract")
                         .WithArguments("Derived.AddAbstract(System.Action)"),
-                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member 'AccessorModifierMismatch.AbstractSealed.add'
+                    // (2,7): error CS0534: 'Derived' does not implement inherited abstract member
+                    // 'AccessorModifierMismatch.AbstractSealed.add'
                     Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Derived")
                         .WithArguments("Derived", "AccessorModifierMismatch.AbstractSealed.add")
                 );
@@ -2254,10 +2329,12 @@ class Derived : AccessorModifierMismatch
 ";
             CreateCompilationWithILAndMscorlib40(csharp, il)
                 .VerifyDiagnostics(
-                    // (5,41): error CS0065: 'Derived.AbstractSealed': event property must have both add and remove accessors
+                    // (5,41): error CS0065: 'Derived.AbstractSealed': event property must have both add and remove
+                    // accessors
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "AbstractSealed")
                         .WithArguments("Derived.AbstractSealed"),
-                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
+                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.AbstractSealed' because it is sealed
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
                         .WithArguments(
                             "Derived.AbstractSealed",
@@ -2275,7 +2352,8 @@ class Derived : AccessorModifierMismatch
 ";
             CreateCompilationWithILAndMscorlib40(csharp, il)
                 .VerifyDiagnostics(
-                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member 'AccessorModifierMismatch.AbstractSealed' because it is sealed
+                    // (5,41): error CS0239: 'Derived.AbstractSealed': cannot override inherited member
+                    // 'AccessorModifierMismatch.AbstractSealed' because it is sealed
                     Diagnostic(ErrorCode.ERR_CantOverrideSealed, "AbstractSealed")
                         .WithArguments(
                             "Derived.AbstractSealed",
@@ -2534,7 +2612,8 @@ class B2 : B1, I1
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (10,16): error CS0737: 'B2' does not implement interface member 'I1.Goo'. 'B2.Goo' cannot implement an interface member because it is not public.
+                // (10,16): error CS0737: 'B2' does not implement interface member 'I1.Goo'. 'B2.Goo' cannot
+                // implement an interface member because it is not public.
                 // class B2 : B1, I1
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic, "I1")
                     .WithArguments("B2", "I1.Goo", "B2.Goo")
@@ -2572,7 +2651,8 @@ class B2 : B1, I1
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (10,16): error CS0736: 'B2' does not implement instance interface member 'I1.Goo'. 'B2.Goo' cannot implement the interface member because it is static.
+                // (10,16): error CS0736: 'B2' does not implement instance interface member 'I1.Goo'. 'B2.Goo'
+                // cannot implement the interface member because it is static.
                 // class B2 : B1, I1
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I1")
                     .WithArguments("B2", "I1.Goo", "B2.Goo")
@@ -2620,12 +2700,14 @@ class B3 : I
 }";
             CreateCompilationWithILAndMscorlib40(csharpSource, ilSource)
                 .VerifyDiagnostics(
-                    // (5,15): error CS0736: 'B2' does not implement instance interface member 'I.M<T>()'. 'A.M<T>()' cannot implement the interface member because it is static.
+                    // (5,15): error CS0736: 'B2' does not implement instance interface member 'I.M<T>()'. 'A.M<T>()'
+                    // cannot implement the interface member because it is static.
                     // class B2 : A, I
                     Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
                         .WithArguments("B2", "I.M<T>()", "A.M<T>()")
                         .WithLocation(5, 15),
-                    // (8,12): error CS0736: 'B3' does not implement instance interface member 'I.M<T>()'. 'B3.M<T>()' cannot implement the interface member because it is static.
+                    // (8,12): error CS0736: 'B3' does not implement instance interface member 'I.M<T>()'. 'B3.M<T>()'
+                    // cannot implement the interface member because it is static.
                     // class B3 : I
                     Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic, "I")
                         .WithArguments("B3", "I.M<T>()", "B3.M<T>()")
@@ -2654,7 +2736,8 @@ class B2 : B1, I1
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (10,16): error CS0738: 'B2' does not implement interface member 'I1.Goo'. 'B2.Goo' cannot implement 'I1.Goo' because it does not have the matching return type of 'int'.
+                // (10,16): error CS0738: 'B2' does not implement interface member 'I1.Goo'. 'B2.Goo' cannot
+                // implement 'I1.Goo' because it does not have the matching return type of 'int'.
                 // class B2 : B1, I1
                 Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "I1")
                     .WithArguments("B2", "I1.Goo", "B2.Goo", "int")
@@ -2737,13 +2820,16 @@ class Sub : Base
 ";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (11,17): warning CS0108: 'Sub.A<T>()' hides inherited member 'Base.A'. Use the new keyword if hiding was intended.
+                    // (11,17): warning CS0108: 'Sub.A<T>()' hides inherited member 'Base.A'. Use the new keyword if
+                    // hiding was intended.
                     Diagnostic(ErrorCode.WRN_NewRequired, "A")
                         .WithArguments("Sub.A<T>()", "Base.A"),
-                    // (12,17): warning CS0108: 'Sub.B<T>()' hides inherited member 'Base.B'. Use the new keyword if hiding was intended.
+                    // (12,17): warning CS0108: 'Sub.B<T>()' hides inherited member 'Base.B'. Use the new keyword if
+                    // hiding was intended.
                     Diagnostic(ErrorCode.WRN_NewRequired, "B")
                         .WithArguments("Sub.B<T>()", "Base.B"),
-                    // (13,17): warning CS0108: 'Sub.C<T>()' hides inherited member 'Base.C'. Use the new keyword if hiding was intended.
+                    // (13,17): warning CS0108: 'Sub.C<T>()' hides inherited member 'Base.C'. Use the new keyword if
+                    // hiding was intended.
                     Diagnostic(ErrorCode.WRN_NewRequired, "C")
                         .WithArguments("Sub.C<T>()", "Base.C"),
                     // (6,38): warning CS0067: The event 'Base.C' is never used
@@ -3259,7 +3345,8 @@ class D : C
             Assert.Equal(0, ohmD.HiddenMembers.Length);
 
             comp.VerifyDiagnostics(
-                // (19,25): error CS1715: 'D.this[int]': type must be 'string' to match overridden member 'C.this[int]'
+                // (19,25): error CS1715: 'D.this[int]': type must be 'string' to match overridden member
+                // 'C.this[int]'
                 //     public override int this[int x]
                 Diagnostic(ErrorCode.ERR_CantChangeTypeOnOverride, "this")
                     .WithArguments("D.this[int]", "C.this[int]", "string"),
@@ -4118,27 +4205,33 @@ public class D8 : B
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (36,16): warning CS0108: 'D3.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                    // (36,16): warning CS0108: 'D3.op_Explicit' hides inherited member 'B.explicit operator int(B)'.
+                    // Use the new keyword if hiding was intended.
                     //     public int op_Explicit = 1;//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
                         .WithArguments("D3.op_Explicit", "B.explicit operator int(B)"),
-                    // (35,16): warning CS0108: 'D3.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                    // (35,16): warning CS0108: 'D3.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new
+                    // keyword if hiding was intended.
                     //     public int op_UnaryPlus = 1;//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
                         .WithArguments("D3.op_UnaryPlus", "B.operator +(B)"),
-                    // (43,32): warning CS0108: 'D4.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                    // (43,32): warning CS0108: 'D4.op_Explicit' hides inherited member 'B.explicit operator int(B)'.
+                    // Use the new keyword if hiding was intended.
                     //     public event System.Action op_Explicit;//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
                         .WithArguments("D4.op_Explicit", "B.explicit operator int(B)"),
-                    // (42,32): warning CS0108: 'D4.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                    // (42,32): warning CS0108: 'D4.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new
+                    // keyword if hiding was intended.
                     //     public event System.Action op_UnaryPlus;//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
                         .WithArguments("D4.op_UnaryPlus", "B.operator +(B)"),
-                    // (50,32): warning CS0108: 'D5.op_Explicit' hides inherited member 'B.explicit operator int(B)'. Use the new keyword if hiding was intended.
+                    // (50,32): warning CS0108: 'D5.op_Explicit' hides inherited member 'B.explicit operator int(B)'.
+                    // Use the new keyword if hiding was intended.
                     //     public event System.Action op_Explicit { add { } remove { } }//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_Explicit")
                         .WithArguments("D5.op_Explicit", "B.explicit operator int(B)"),
-                    // (49,32): warning CS0108: 'D5.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new keyword if hiding was intended.
+                    // (49,32): warning CS0108: 'D5.op_UnaryPlus' hides inherited member 'B.operator +(B)'. Use the new
+                    // keyword if hiding was intended.
                     //     public event System.Action op_UnaryPlus { add { } remove { } }//
                     Diagnostic(ErrorCode.WRN_NewRequired, "op_UnaryPlus")
                         .WithArguments("D5.op_UnaryPlus", "B.operator +(B)"),
@@ -4154,10 +4247,12 @@ public class D8 : B
                     //     public event System.Action Finalize;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Finalize")
                         .WithArguments("D4.Finalize"),
-                    // (72,24): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                    // (72,24): warning CS0465: Introducing a 'Finalize' method can interfere with destructor
+                    // invocation. Did you intend to declare a destructor?
                     //     public static void Finalize() { }
                     Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (65,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                    // (65,17): warning CS0465: Introducing a 'Finalize' method can interfere with destructor
+                    // invocation. Did you intend to declare a destructor?
                     //     public void Finalize() { }
                     Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
                 );
@@ -4244,75 +4339,93 @@ public class D8 : B
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,22): warning CS0109: The member 'D1.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (23,22): warning CS0109: The member 'D1.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public class Finalize { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D1.Finalize"),
-                    // (21,22): warning CS0109: The member 'D1.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                    // (21,22): warning CS0109: The member 'D1.op_UnaryPlus' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public class op_UnaryPlus { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
                         .WithArguments("D1.op_UnaryPlus"),
-                    // (22,22): warning CS0109: The member 'D1.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                    // (22,22): warning CS0109: The member 'D1.op_Explicit' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public class op_Explicit { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
                         .WithArguments("D1.op_Explicit"),
-                    // (58,30): warning CS0109: The member 'D6.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (58,30): warning CS0109: The member 'D6.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public delegate void Finalize(); //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D6.Finalize"),
-                    // (56,30): warning CS0109: The member 'D6.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                    // (56,30): warning CS0109: The member 'D6.op_UnaryPlus' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public delegate void op_UnaryPlus(); //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
                         .WithArguments("D6.op_UnaryPlus"),
-                    // (57,30): warning CS0109: The member 'D6.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                    // (57,30): warning CS0109: The member 'D6.op_Explicit' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public delegate void op_Explicit(); //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
                         .WithArguments("D6.op_Explicit"),
-                    // (37,20): warning CS0109: The member 'D3.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (37,20): warning CS0109: The member 'D3.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public int Finalize = 1; //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D3.Finalize"),
-                    // (51,36): warning CS0109: The member 'D5.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (51,36): warning CS0109: The member 'D5.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public event System.Action Finalize { add { } remove { } } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D5.Finalize"),
-                    // (71,27): warning CS0109: The member 'D8.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
+                    // (71,27): warning CS0109: The member 'D8.op_Explicit(B)' does not hide an accessible member. The
+                    // new keyword is not required.
                     //     new public static int op_Explicit(B b) { return 0; } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
                         .WithArguments("D8.op_Explicit(B)"),
-                    // (72,28): warning CS0109: The member 'D8.Finalize()' does not hide an accessible member. The new keyword is not required.
+                    // (72,28): warning CS0109: The member 'D8.Finalize()' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public static void Finalize() { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D8.Finalize()"),
-                    // (70,27): warning CS0109: The member 'D8.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
+                    // (70,27): warning CS0109: The member 'D8.op_UnaryPlus(B)' does not hide an accessible member. The
+                    // new keyword is not required.
                     //     new public static int op_UnaryPlus(B b) { return 0; } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
                         .WithArguments("D8.op_UnaryPlus(B)"),
-                    // (44,36): warning CS0109: The member 'D4.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (44,36): warning CS0109: The member 'D4.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public event System.Action Finalize; //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D4.Finalize"),
-                    // (64,21): warning CS0109: The member 'D7.op_Explicit(B)' does not hide an accessible member. The new keyword is not required.
+                    // (64,21): warning CS0109: The member 'D7.op_Explicit(B)' does not hide an accessible member. The
+                    // new keyword is not required.
                     //     new public void op_Explicit(B b) { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
                         .WithArguments("D7.op_Explicit(B)"),
-                    // (65,21): warning CS0109: The member 'D7.Finalize()' does not hide an accessible member. The new keyword is not required.
+                    // (65,21): warning CS0109: The member 'D7.Finalize()' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public void Finalize() { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D7.Finalize()"),
-                    // (63,21): warning CS0109: The member 'D7.op_UnaryPlus(B)' does not hide an accessible member. The new keyword is not required.
+                    // (63,21): warning CS0109: The member 'D7.op_UnaryPlus(B)' does not hide an accessible member. The
+                    // new keyword is not required.
                     //     new public void op_UnaryPlus(B b) { } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
                         .WithArguments("D7.op_UnaryPlus(B)"),
-                    // (29,20): warning CS0109: The member 'D2.op_Explicit' does not hide an accessible member. The new keyword is not required.
+                    // (29,20): warning CS0109: The member 'D2.op_Explicit' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public int op_Explicit { get; set; } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_Explicit")
                         .WithArguments("D2.op_Explicit"),
-                    // (30,20): warning CS0109: The member 'D2.Finalize' does not hide an accessible member. The new keyword is not required.
+                    // (30,20): warning CS0109: The member 'D2.Finalize' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public int Finalize { get; set; } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Finalize")
                         .WithArguments("D2.Finalize"),
-                    // (28,20): warning CS0109: The member 'D2.op_UnaryPlus' does not hide an accessible member. The new keyword is not required.
+                    // (28,20): warning CS0109: The member 'D2.op_UnaryPlus' does not hide an accessible member. The new
+                    // keyword is not required.
                     //     new public int op_UnaryPlus { get; set; } //CS0109
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "op_UnaryPlus")
                         .WithArguments("D2.op_UnaryPlus"),
@@ -4328,10 +4441,12 @@ public class D8 : B
                     //     new public event System.Action op_Explicit;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "op_Explicit")
                         .WithArguments("D4.op_Explicit"),
-                    // (72,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                    // (72,28): warning CS0465: Introducing a 'Finalize' method can interfere with destructor
+                    // invocation. Did you intend to declare a destructor?
                     //     new public static void Finalize() { } //CS0109
                     Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize"),
-                    // (65,21): warning CS0465: Introducing a 'Finalize' method can interfere with destructor invocation. Did you intend to declare a destructor?
+                    // (65,21): warning CS0465: Introducing a 'Finalize' method can interfere with destructor
+                    // invocation. Did you intend to declare a destructor?
                     //     new public void Finalize() { } //CS0109
                     Diagnostic(ErrorCode.WRN_FinalizeMethod, "Finalize")
                 );
@@ -4551,7 +4666,8 @@ public class Required : ValidatorBase<object>
             var compilation = CreateCompilation(text, options: TestOptions.ReleaseExe);
 
             compilation.VerifyDiagnostics(
-                // (46,14): error CS0534: 'Required' does not implement inherited abstract member 'Validator<object>.DoValidate(object)'
+                // (46,14): error CS0534: 'Required' does not implement inherited abstract member
+                // 'Validator<object>.DoValidate(object)'
                 // public class Required : ValidatorBase<object>
                 Diagnostic(ErrorCode.ERR_UnimplementedAbstractMethod, "Required")
                     .WithArguments("Required", "Validator<object>.DoValidate(object)")
@@ -4791,7 +4907,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (8,17): warning CS0108: 'B.M(in int)' hides inherited member 'A.M(in int)'. Use the new keyword if hiding was intended.
+                    // (8,17): warning CS0108: 'B.M(in int)' hides inherited member 'A.M(in int)'. Use the new keyword
+                    // if hiding was intended.
                     //     public void M(in int x) { }
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
                         .WithArguments("B.M(in int)", "A.M(in int)")
@@ -4826,7 +4943,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was
+                    // intended.
                     //     public ref readonly int M() { return ref x; }
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
                         .WithArguments("B.M()", "A.M()")
@@ -4861,7 +4979,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                    // (9,29): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was
+                    // intended.
                     //     public ref readonly int M() { return ref x; }
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
                         .WithArguments("B.M()", "A.M()")
@@ -4896,7 +5015,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,20): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was intended.
+                    // (9,20): warning CS0108: 'B.M()' hides inherited member 'A.M()'. Use the new keyword if hiding was
+                    // intended.
                     //     public ref int M() { return ref x; }
                     Diagnostic(ErrorCode.WRN_NewRequired, "M")
                         .WithArguments("B.M()", "A.M()")
@@ -4931,7 +5051,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if
+                    // hiding was intended.
                     //     public ref readonly int Property { get { return ref x; } }
                     Diagnostic(ErrorCode.WRN_NewRequired, "Property")
                         .WithArguments("B.Property", "A.Property")
@@ -4966,7 +5087,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,20): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                    // (9,20): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if
+                    // hiding was intended.
                     //     public ref int Property { get { return ref x; } }
                     Diagnostic(ErrorCode.WRN_NewRequired, "Property")
                         .WithArguments("B.Property", "A.Property")
@@ -5001,7 +5123,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if hiding was intended.
+                    // (9,29): warning CS0108: 'B.Property' hides inherited member 'A.Property'. Use the new keyword if
+                    // hiding was intended.
                     //     public ref readonly int Property { get { return ref x; } }
                     Diagnostic(ErrorCode.WRN_NewRequired, "Property")
                         .WithArguments("B.Property", "A.Property")
@@ -5324,12 +5447,14 @@ class ChildClass : BaseClass
 
             var comp = CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (11,29): error CS8148: 'ChildClass.Method2()' must match by reference return of overridden member 'BaseClass.Method2()'
+                    // (11,29): error CS8148: 'ChildClass.Method2()' must match by reference return of overridden member
+                    // 'BaseClass.Method2()'
                     //     public override ref int Method2() { return ref x; }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method2")
                         .WithArguments("ChildClass.Method2()", "BaseClass.Method2()")
                         .WithLocation(11, 29),
-                    // (10,38): error CS8148: 'ChildClass.Method1()' must match by reference return of overridden member 'BaseClass.Method1()'
+                    // (10,38): error CS8148: 'ChildClass.Method1()' must match by reference return of overridden member
+                    // 'BaseClass.Method1()'
                     //     public override in int Method1() { return ref x; }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Method1")
                         .WithArguments("ChildClass.Method1()", "BaseClass.Method1()")
@@ -5357,12 +5482,14 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (11,29): error CS8148: 'B.Property2' must match by reference return of overridden member 'A.Property2'
+                    // (11,29): error CS8148: 'B.Property2' must match by reference return of overridden member
+                    // 'A.Property2'
                     //     public override ref int Property2 { get { return ref x; } }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property2")
                         .WithArguments("B.Property2", "A.Property2")
                         .WithLocation(11, 29),
-                    // (10,38): error CS8148: 'B.Property1' must match by reference return of overridden member 'A.Property1'
+                    // (10,38): error CS8148: 'B.Property1' must match by reference return of overridden member
+                    // 'A.Property1'
                     //     public override ref readonly int Property1 { get { return ref x; } }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "Property1")
                         .WithArguments("B.Property1", "A.Property1")
@@ -5388,7 +5515,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,38): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
+                    // (9,38): error CS8148: 'B.this[int]' must match by reference return of overridden member
+                    // 'A.this[int]'
                     //     public override ref readonly int this[int p] { get { return ref x; } }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
                         .WithArguments("B.this[int]", "A.this[int]")
@@ -5414,7 +5542,8 @@ class B : A
 
             var comp = CreateCompilation(code)
                 .VerifyDiagnostics(
-                    // (9,29): error CS8148: 'B.this[int]' must match by reference return of overridden member 'A.this[int]'
+                    // (9,29): error CS8148: 'B.this[int]' must match by reference return of overridden member
+                    // 'A.this[int]'
                     //     public override ref int this[int p] { get { return ref x; } }
                     Diagnostic(ErrorCode.ERR_CantChangeRefReturnOnOverride, "this")
                         .WithArguments("B.this[int]", "A.this[int]")

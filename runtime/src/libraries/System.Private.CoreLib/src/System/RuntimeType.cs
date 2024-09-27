@@ -144,13 +144,17 @@ namespace System
         }
 
         /// <summary>
-        /// Retrieves an array of the values of the underlying type constants in a specified enumeration type.
+        /// Retrieves an array of the values of the underlying type constants in a specified enumeration
+        // type.
         /// </summary>
         /// <remarks>
-        /// This method can be used to get enumeration values when creating an array of the enumeration type is challenging.
-        /// For example, <see cref="T:System.Reflection.MetadataLoadContext" /> or on a platform where runtime codegen is not available.
+        /// This method can be used to get enumeration values when creating an array of the enumeration type
+        // is challenging.
+        /// For example, <see cref="T:System.Reflection.MetadataLoadContext" /> or on a platform where
+        // runtime codegen is not available.
         /// </remarks>
-        /// <returns>An array that contains the values of the underlying type constants in enumType.</returns>
+        /// <returns>An array that contains the values of the underlying type constants in
+        // enumType.</returns>
         /// <exception cref="ArgumentException">
         /// Thrown when the type is not Enum
         /// </exception>
@@ -482,7 +486,8 @@ namespace System
             ArgumentNullException.ThrowIfNull(name);
             if (name.Length == 0 || name.Equals("[DISPID=0]"))
             {
-                // in InvokeMember we always pretend there is a default member if none is provided and we make it ToString
+                // in InvokeMember we always pretend there is a default member if none is provided and we make it
+                // ToString
                 name = GetDefaultMemberName() ?? "ToString";
             }
 
@@ -936,7 +941,8 @@ namespace System
         /// <summary>
         /// Verify <paramref name="value"/> and optionally convert the value for special cases.
         /// </summary>
-        /// <returns>True if the value requires a copy-back to the original object[] or Span{object}.</returns>
+        /// <returns>True if the value requires a copy-back to the original object[] or
+        // Span{object}.</returns>
         internal bool CheckValue(
             ref object? value,
             Binder? binder,

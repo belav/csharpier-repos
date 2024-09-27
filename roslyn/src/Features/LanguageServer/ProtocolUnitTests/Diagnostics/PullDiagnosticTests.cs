@@ -1083,7 +1083,8 @@ class B {";
         {
             var markup = @"class A {";
 
-            // Turn off pull diagnostics by default, but send a request to the razor LSP server which is always pull.
+            // Turn off pull diagnostics by default, but send a request to the razor LSP server which is always
+            // pull.
             await using var testLspServer = await CreateTestLspServerAsync(
                 markup,
                 mutatingLspWorkspace,
@@ -1122,7 +1123,8 @@ class B {";
         {
             var markup = @"class A {";
 
-            // Turn off pull diagnostics by default, but send a request to the razor LSP server which is always pull.
+            // Turn off pull diagnostics by default, but send a request to the razor LSP server which is always
+            // pull.
             await using var testLspServer = await CreateTestLspServerAsync(
                 markup,
                 mutatingLspWorkspace,
@@ -1246,7 +1248,8 @@ class A
             }
             else
             {
-                // We should have just one diagnostic that fades since the public spec does not support fully hidden diagnostics.
+                // We should have just one diagnostic that fades since the public spec does not support fully hidden
+                // diagnostics.
                 Assert.True(
                     results.Single().Diagnostics![0].Tags!.Contains(DiagnosticTag.Unnecessary)
                 );
@@ -1607,7 +1610,8 @@ class C
             Assert.Empty(results[2].Diagnostics);
 
             // Now fix the compiler error, but don't re-execute code analysis.
-            // Verify that we still get the workspace diagnostics from the prior snapshot on which code analysis was executed.
+            // Verify that we still get the workspace diagnostics from the prior snapshot on which code analysis
+            // was executed.
             var buffer = testLspServer.TestWorkspace.Documents.First().GetTextBuffer();
             buffer.Insert(buffer.CurrentSnapshot.Length, "}");
 
@@ -1625,7 +1629,8 @@ class C
             Assert.Equal(results[1].Diagnostics, results2[1].Diagnostics);
             Assert.Equal(results[2].Diagnostics, results2[2].Diagnostics);
 
-            // Re-run code analysis and verify up-to-date diagnostics are returned now, i.e. there are no compiler errors.
+            // Re-run code analysis and verify up-to-date diagnostics are returned now, i.e. there are no
+            // compiler errors.
             await testLspServer.RunCodeAnalysisAsync(projectId);
 
             var results3 = await RunGetWorkspacePullDiagnosticsAsync(
@@ -1669,7 +1674,8 @@ class C
 
             Assert.Equal(3, results.Length);
             Assert.Equal("CS1513", results[0].Diagnostics.Single().Code);
-            // this should *not* be considered a build-error, since it was produced by the live workspace results.
+            // this should *not* be considered a build-error, since it was produced by the live workspace
+            // results.
             Assert.DoesNotContain(
                 VSDiagnosticTags.BuildError,
                 results[0].Diagnostics.Single().Tags
@@ -1678,7 +1684,8 @@ class C
             Assert.Empty(results[2].Diagnostics);
 
             // Now fix the compiler error, but don't rerun code analysis.
-            // Verify that we get up-to-date workspace diagnostics, i.e. no compiler errors, from the current snapshot because FSA is enabled.
+            // Verify that we get up-to-date workspace diagnostics, i.e. no compiler errors, from the current
+            // snapshot because FSA is enabled.
             var buffer = testLspServer.TestWorkspace.Documents.First().GetTextBuffer();
             buffer.Insert(buffer.CurrentSnapshot.Length, "}");
 
@@ -2128,8 +2135,10 @@ class A {
                 useVSDiagnostics
             );
 
-            // Project.GetSourceGeneratedDocumentsAsync may not return documents in a deterministic order, so we sort
-            // the results here to ensure subsequent assertions are not dependent on the order of items provided by the
+            // Project.GetSourceGeneratedDocumentsAsync may not return documents in a deterministic order, so we
+            // sort
+            // the results here to ensure subsequent assertions are not dependent on the order of items provided
+            // by the
             // project.
             results = results.Sort((x, y) => x.Uri.ToString().CompareTo(y.Uri.ToString()));
 
@@ -2313,7 +2322,8 @@ class A {
             var document = testLspServer.GetCurrentSolution().Projects.Single().Documents.First();
             var text = await document.GetTextAsync();
 
-            // Hacky, but we need to close the document manually since editing the text-buffer will open it in the
+            // Hacky, but we need to close the document manually since editing the text-buffer will open it in
+            // the
             // test-workspace.
             testLspServer.TestWorkspace.OnDocumentClosed(
                 document.Id,
@@ -2591,7 +2601,8 @@ class A {";
             AssertEx.NotNull(results);
             Assert.Equal(6, results.Length);
 
-            // Verify that new diagnostics are returned for all files (even though the diagnostics for the first two files are the same)
+            // Verify that new diagnostics are returned for all files (even though the diagnostics for the first
+            // two files are the same)
             // since we re-calculate when transitive project dependencies change.
             Assert.Empty(results[0].Diagnostics);
             Assert.NotEqual(previousResultIds[0].resultId, results[0].ResultId);
@@ -2856,7 +2867,8 @@ class A {";
             AssertEx.NotNull(results);
             Assert.Equal(4, results.Length);
 
-            // Diagnostics should be unchanged as the referenced project was only unloaded / reloaded, but did not actually change.
+            // Diagnostics should be unchanged as the referenced project was only unloaded / reloaded, but did
+            // not actually change.
             Assert.Null(results[0].Diagnostics);
             Assert.Equal(previousResultIds[0].resultId, results[0].ResultId);
             Assert.Null(results[2].Diagnostics);
@@ -2938,7 +2950,8 @@ class A {";
             AssertEx.NotNull(results);
             Assert.Equal(6, results.Length);
 
-            // Diagnostics should be unchanged as a referenced project was unloaded and reloaded.  Order should not matter.
+            // Diagnostics should be unchanged as a referenced project was unloaded and reloaded.  Order should
+            // not matter.
             Assert.Null(results[0].Diagnostics);
             Assert.All(results, result => Assert.Null(result.Diagnostics));
             Assert.All(results, result => Assert.True(previousResultIds.Contains(result.ResultId)));

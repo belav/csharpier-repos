@@ -32,7 +32,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="TResult">The return type the handler returns.</typeparam>
@@ -61,7 +62,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="TResult">The return type the handler returns.</typeparam>
@@ -81,7 +83,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="TResult">The return type the handler returns.</typeparam>
@@ -101,7 +104,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -122,7 +126,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -148,7 +153,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -175,7 +181,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -203,7 +210,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -232,7 +240,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -270,7 +279,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -319,7 +329,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -371,7 +382,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -392,7 +404,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -418,7 +431,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -445,7 +459,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -473,7 +488,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -502,7 +518,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -540,7 +557,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>
@@ -589,7 +607,8 @@ public static partial class HubConnectionExtensions
     }
 
     /// <summary>
-    /// Registers a handler that will be invoked when the hub method with the specified method name is invoked.
+    /// Registers a handler that will be invoked when the hub method with the specified method name is
+    // invoked.
     /// Returns value returned by handler to server if the server requests a result.
     /// </summary>
     /// <typeparam name="T1">The first argument type.</typeparam>

@@ -138,7 +138,8 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
     ///     Creates a new method chain with calls filtered based on a predicate.
     /// </summary>
     /// <param name="predicate">A function to test each method call for a condition.</param>
-    /// <returns>A new method chain that only contains calls from the original one that satisfy the condition.</returns>
+    /// <returns>A new method chain that only contains calls from the original one that satisfy the
+    // condition.</returns>
     public virtual FluentApiCodeFragment? FilterChain(Func<FluentApiCodeFragment, bool> predicate)
     {
         FluentApiCodeFragment? newRoot = null;

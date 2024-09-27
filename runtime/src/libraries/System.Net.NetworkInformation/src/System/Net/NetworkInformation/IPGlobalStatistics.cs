@@ -51,7 +51,8 @@ namespace System.Net.NetworkInformation
         public abstract long OutputPacketsDiscarded { get; }
 
         /// <summary>
-        /// Gets the number of Internet Protocol (IP) packets for which the local computer could not determine a route to the destination address.
+        /// Gets the number of Internet Protocol (IP) packets for which the local computer could not
+        // determine a route to the destination address.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract long OutputPacketsWithNoRoute { get; }
@@ -75,7 +76,8 @@ namespace System.Net.NetworkInformation
         public abstract long PacketReassemblyFailures { get; }
 
         /// <summary>
-        /// Gets the maximum amount of time within which all fragments of an Internet Protocol (IP) packet must arrive.
+        /// Gets the maximum amount of time within which all fragments of an Internet Protocol (IP) packet
+        // must arrive.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract long PacketReassemblyTimeout { get; }
@@ -129,7 +131,8 @@ namespace System.Net.NetworkInformation
         public abstract long ReceivedPacketsWithHeadersErrors { get; }
 
         /// <summary>
-        /// Gets the number of Internet Protocol (IP) packets received on the local machine with an unknown protocol in the header.
+        /// Gets the number of Internet Protocol (IP) packets received on the local machine with an unknown
+        // protocol in the header.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract long ReceivedPacketsWithUnknownProtocol { get; }

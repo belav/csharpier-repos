@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -53,7 +54,8 @@ namespace System.Web.Mvc
             }
         }
 
-        // This method must be thread-safe since it is called by the thread-safe OnCacheAuthorization() method.
+        // This method must be thread-safe since it is called by the thread-safe OnCacheAuthorization()
+        // method.
         protected virtual bool AuthorizeCore(HttpContextBase httpContext)
         {
             if (httpContext == null)

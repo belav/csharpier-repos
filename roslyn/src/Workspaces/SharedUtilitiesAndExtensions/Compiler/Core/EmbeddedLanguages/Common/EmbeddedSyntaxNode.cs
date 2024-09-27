@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         /// <summary>
         /// Returns the string representation of this node, not including its leading and trailing trivia.
         /// </summary>
-        /// <returns>The string representation of this node, not including its leading and trailing trivia.</returns>
+        /// <returns>The string representation of this node, not including its leading and trailing
+        // trivia.</returns>
         /// <remarks>The length of the returned string is always the same as Span.Length</remarks>
         public override string ToString()
         {
@@ -161,7 +162,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.Common
         /// <summary>
         /// Returns full string representation of this node including its leading and trailing trivia.
         /// </summary>
-        /// <returns>The full string representation of this node including its leading and trailing trivia.</returns>
+        /// <returns>The full string representation of this node including its leading and trailing
+        // trivia.</returns>
         /// <remarks>The length of the returned string is always the same as FullSpan.Length</remarks>
         public string ToFullString()
         {

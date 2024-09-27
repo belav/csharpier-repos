@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Interactive
     internal partial class InteractiveHost
     {
         /// <summary>
-        /// A remote singleton server-activated object that lives in the interactive host process and controls it.
+        /// A remote singleton server-activated object that lives in the interactive host process and
+        // controls it.
         /// </summary>
         internal sealed class Service : IDisposable
         {
@@ -295,7 +296,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             #region Remote Async Entry Points
 
-            // Used by ResetInteractive - consider improving (we should remember the parameters for auto-reset, e.g.)
+            // Used by ResetInteractive - consider improving (we should remember the parameters for auto-reset,
+            // e.g.)
 
             public async Task<RemoteExecutionResult.Data> SetPathsAsync(
                 string[] referenceSearchPaths,
@@ -351,7 +353,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             }
 
             /// <summary>
-            /// Reads given initialization file (.rsp) and loads and executes all assembly references and files, respectively specified in it.
+            /// Reads given initialization file (.rsp) and loads and executes all assembly references and files,
+            // respectively specified in it.
             /// Execution is performed on the UI thread.
             /// </summary>
             public async Task<RemoteExecutionResult.Data> InitializeContextAsync(
@@ -469,7 +472,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                         // successful if compiled
                         success = true;
 
-                        // remove references and imports from the options, they have been applied and will be inherited from now on:
+                        // remove references and imports from the options, they have been applied and will be inherited from
+                        // now on:
                         state = state.WithOptions(state.ScriptOptions.RemoveImportsAndReferences());
 
                         var newScriptState = await ExecuteOnUIThreadAsync(
@@ -662,7 +666,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                         );
                         var parser = serviceState.ReplServiceProvider.CommandLineParser;
 
-                        // Add the Framework runtime directory to reference search paths when running on .NET Framework (PlatformAssemblyPaths list is empty).
+                        // Add the Framework runtime directory to reference search paths when running on .NET Framework
+                        // (PlatformAssemblyPaths list is empty).
                         // Otherwise, platform assemblies are looked up in PlatformAssemblyPaths directly.
                         var sdkDirectory = s_currentPlatformInfo.PlatformAssemblyPaths.IsEmpty
                             ? RuntimeEnvironment.GetRuntimeDirectory()
@@ -764,7 +769,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                                     .ConfigureAwait(false);
                                 if (newScriptState != null)
                                 {
-                                    // remove references and imports from the options, they have been applied and will be inherited from now on:
+                                    // remove references and imports from the options, they have been applied and will be inherited from
+                                    // now on:
                                     rspState = rspState
                                         .WithScriptState(newScriptState)
                                         .WithOptions(

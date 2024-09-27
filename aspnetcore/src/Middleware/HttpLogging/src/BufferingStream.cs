@@ -229,7 +229,8 @@ internal abstract class BufferingStream : Stream, IBufferWriter<byte>
         _tailBytesBuffered = 0;
     }
 
-    // Copied from https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.Memory/src/System/ThrowHelper.cs
+    // Copied from
+    // https://github.com/dotnet/corefx/blob/de3902bb56f1254ec1af4bf7d092fc2c048734cc/src/System.Memory/src/System/ThrowHelper.cs
     private static void ThrowArgumentOutOfRangeException(string argumentName)
     {
         throw CreateArgumentOutOfRangeException(argumentName);

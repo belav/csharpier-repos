@@ -459,7 +459,8 @@ namespace System.Web.Services.Protocols
                 string responseElementName;
                 if (soapMethod.rpc && soapMethod.use != SoapBindingUse.Encoded)
                 {
-                    // NOTE: this rule should apply equally to rpc/lit and rpc/enc, but to reduce risk, i'm only applying it to rpc/lit
+                    // NOTE: this rule should apply equally to rpc/lit and rpc/enc, but to reduce risk, i'm only
+                    // applying it to rpc/lit
                     responseElementName = methodInfo.Name + "Response";
                 }
                 else
@@ -776,7 +777,8 @@ namespace System.Web.Services.Protocols
                         soapHeader.custom = true;
                     }
                     soapHeader.direction = direction;
-                    // Put generic header mappings at the end of the list so they are found last during header processing
+                    // Put generic header mappings at the end of the list so they are found last during header
+                    // processing
                     if (!soapHeader.custom)
                     {
                         soapMethod.headers[--back] = soapHeader;

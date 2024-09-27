@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 //
-// Note: In below test, when S2 struct is returned from Method1, incorrect "str" instruction was being
+// Note: In below test, when S2 struct is returned from Method1, incorrect "str" instruction was
+// being
 //       generated while storing the return result into s_s2_16.
 using System;
 using System.Collections.Generic;

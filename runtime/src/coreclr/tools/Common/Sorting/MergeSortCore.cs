@@ -34,7 +34,8 @@ namespace ILCompiler.Sorting.Implementation
             ParallelSort(arrayToSort, 0, accessor.GetLength(arrayToSort), comparer).Wait();
         }
 
-        // Parallelized merge sort algorithm. Uses Task infrastructure to spread sort across available resources
+        // Parallelized merge sort algorithm. Uses Task infrastructure to spread sort across available
+        // resources
         private static async Task ParallelSort(
             TDataStructure arrayToSort,
             int index,

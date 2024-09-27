@@ -58,7 +58,8 @@ namespace System.Threading.RateLimiting.Tests
 
             var limiter = partition.Factory(1);
 
-            // How do we test an internal implementation of a limiter that doesn't limit? Just try some stuff that normal limiters would probably block on and see if it works.
+            // How do we test an internal implementation of a limiter that doesn't limit? Just try some stuff
+            // that normal limiters would probably block on and see if it works.
             var available = limiter.GetStatistics().CurrentAvailablePermits;
             var lease = limiter.AttemptAcquire(int.MaxValue);
             Assert.True(lease.IsAcquired);

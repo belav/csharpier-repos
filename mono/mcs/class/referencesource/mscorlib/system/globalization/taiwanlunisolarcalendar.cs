@@ -13,13 +13,13 @@ namespace System.Globalization
     //  Notes about TaiwanLunisolarCalendar
     //
     ////////////////////////////////////////////////////////////////////////////
-    /*
-    **  Calendar support range:
-    **      Calendar               Minimum             Maximum
-    **      ==========     ==========  ==========
-    **      Gregorian              1912/02/18          2051/02/10
-    **      TaiwanLunisolar     1912/01/01          2050/13/29
-    */
+/*
+**  Calendar support range:
+**      Calendar               Minimum             Maximum
+**      ==========     ==========  ==========
+**      Gregorian              1912/02/18          2051/02/10
+**      TaiwanLunisolar     1912/01/01          2050/13/29
+*/
 
     [Serializable]
     public class TaiwanLunisolarCalendar : EastAsianLunisolarCalendar
@@ -29,7 +29,8 @@ namespace System.Globalization
         // When Gregorian Year 1912 is year 1, so that
         //    1912 = 1 + yearOffset
         //  So yearOffset = 1911
-        //m_EraInfo[0] = new EraInfo(1, new DateTime(1912, 1, 1).Ticks, 1911, 1, GregorianCalendar.MaxYear - 1911);
+        //m_EraInfo[0] = new EraInfo(1, new DateTime(1912, 1, 1).Ticks, 1911, 1, GregorianCalendar.MaxYear -
+        // 1911);
 
         // Initialize our era info.
         static internal EraInfo[] taiwanLunisolarEraInfo = new EraInfo[]
@@ -99,8 +100,9 @@ namespace System.Globalization
 
         static readonly int[,] yinfo =
         {
-            /*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7    D8    D9    D10    D11    D12    D13    #Days
-            1912    */{ 0, 2, 18, 42192 }, /*    30    29    30    29    29    30    29    29    30    30    29    30    0    354
+/*Y            LM        Lmon    Lday        DaysPerMonth    D1    D2    D3    D4    D5    D6    D7
+D8    D9    D10    D11    D12    D13    #Days
+1912    */{ 0, 2, 18, 42192 }, /*    30    29    30    29    29    30    29    29    30    30    29    30    0    354
 1913    */
             { 0, 2, 6, 53840 }, /*    30    30    29    30    29    29    30    29    29    30    29    30    0    354
 1914    */
@@ -434,22 +436,23 @@ namespace System.Globalization
             return helper.GetGregorianYear(year, era);
         }
 
-        /*=================================GetDefaultInstance==========================
-        **Action: Internal method to provide a default intance of TaiwanLunisolarCalendar.  Used by NLS+ implementation
-        **       and other calendars.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
-        /*
-        internal static Calendar GetDefaultInstance()
-        {
-            if (m_defaultInstance == null) {
-                m_defaultInstance = new TaiwanLunisolarCalendar();
-            }
-            return (m_defaultInstance);
-        }
-        */
+/*=================================GetDefaultInstance==========================
+**Action: Internal method to provide a default intance of TaiwanLunisolarCalendar.  Used by NLS+
+implementation
+**       and other calendars.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
+/*
+internal static Calendar GetDefaultInstance()
+{
+if (m_defaultInstance == null) {
+m_defaultInstance = new TaiwanLunisolarCalendar();
+}
+return (m_defaultInstance);
+}
+*/
 
         // Construct an instance of TaiwanLunisolar calendar.
 

@@ -19,11 +19,14 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v1.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
+        //[Variation(Desc = "v1.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new
+        // object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
-        //[Variation(Desc = "v1.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
+        //[Variation(Desc = "v1.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] {
+        // "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b")]
-        //[Variation(Desc = "v1.1 - Import: A with NS imports B with no NS", Priority = 0, Params = new object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
+        //[Variation(Desc = "v1.1 - Import: A with NS imports B with no NS", Priority = 0, Params = new
+        // object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
         [InlineData("import_v1_a.xsd", "include_v1_b.xsd", 2, null)]
         [Theory]
         public void v1(object param0, object param1, object param2, object param3)
@@ -51,9 +54,11 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v2.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no ns)", Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null })]
+        //[Variation(Desc = "v2.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no ns)",
+        // Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null })]
         [InlineData("import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null)]
-        //[Variation(Desc = "v2.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority = 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
+        //[Variation(Desc = "v2.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority =
+        // 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b")]
         [Theory]
         public void v3(object param0, object param1, object param2, object param3, object param4)
@@ -86,7 +91,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v3 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again", Priority = 1)]
+        //[Variation(Desc = "v3 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again",
+        // Priority = 1)]
         [Fact]
         public void v6()
         {
@@ -123,7 +129,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v4 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b", Priority = 1)]
+        //[Variation(Desc = "v4 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b", Priority
+        // = 1)]
         [Fact]
         public void v7()
         {
@@ -154,7 +161,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v5 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again", Priority = 1)]
+        //[Variation(Desc = "v5 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again",
+        // Priority = 1)]
         [Fact]
         public void v8()
         {
@@ -314,7 +322,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v10 - Import: A imports B and B and C, B imports C and D, C imports D and A", Priority = 1)]
+        //[Variation(Desc = "v10 - Import: A imports B and B and C, B imports C and D, C imports D and A",
+        // Priority = 1)]
         [Fact]
         public void v13()
         {
@@ -331,7 +340,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v11 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each other", Priority = 2)]
+        //[Variation(Desc = "v11 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each
+        // other", Priority = 2)]
         [Fact]
         public void v14()
         {
@@ -451,7 +461,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v17 - Import: A,B,C,D all import and reference each other for types", Priority = 2)]
+        //[Variation(Desc = "v17 - Import: A,B,C,D all import and reference each other for types", Priority
+        // = 2)]
         [Fact]
         public void v20()
         {
@@ -475,11 +486,17 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v21- Import: Bug 114549 , A imports only B but refers to C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd" })]
+        //[Variation(Desc = "v21- Import: Bug 114549 , A imports only B but refers to C and D both",
+        // Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd",
+        // "import_v21_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd")]
-        //[Variation(Desc = "v22- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v22- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D both",
+        // Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd",
+        // "import_v22_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v23- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v23- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v21(object param0, object param1, object param2, object param3)
@@ -498,9 +515,13 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v24- Import: Bug 114549 , A imports only B's NS, and B also refers to A's types (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v24- Import: Bug 114549 , A imports only B's NS, and B also refers to A's types
+        // (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v25- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v25- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] {
+        // "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v24(object param0, object param1, object param2, object param3)
@@ -558,13 +579,16 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        /********* reprocess compile import**************/
+/********* reprocess compile import**************/
 
-        //[Variation(Desc = "v101.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
+        //[Variation(Desc = "v101.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new
+        // object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
-        //[Variation(Desc = "v101.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
+        //[Variation(Desc = "v101.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[]
+        // { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b")]
-        //[Variation(Desc = "v101.1 - Improt: A with NS imports B with no NS", Priority = 0, Params = new object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
+        //[Variation(Desc = "v101.1 - Improt: A with NS imports B with no NS", Priority = 0, Params = new
+        // object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
         [InlineData("import_v1_a.xsd", "include_v1_b.xsd", 2, null)]
         [Theory]
         public void v101(object param0, object param1, object param2, object param3)
@@ -597,7 +621,8 @@ namespace System.Xml.XmlSchemaTests
 
         //-----------------------------------------------------------------------------------
 
-        //[Variation(Desc = "v102.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority = 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
+        //[Variation(Desc = "v102.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority =
+        // 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b")]
         [Theory]
         public void v102(object param0, object param1, object param2, object param3, object param4)
@@ -640,7 +665,9 @@ namespace System.Xml.XmlSchemaTests
             Assert.Fail();
         }
 
-        //[Variation(Desc = "v102.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no ns)", Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null })]
+        //[Variation(Desc = "v102.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no
+        // ns)", Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null
+        // })]
         [InlineData("import_v5_a.xsd", "import_v4_b.xsd", "ns-b")]
         [Theory]
         public void v102a(object param0, object param1, object param3)
@@ -681,7 +708,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v103 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again", Priority = 1)]
+        //[Variation(Desc = "v103 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again",
+        // Priority = 1)]
         [Fact]
         public void v103()
         {
@@ -729,7 +757,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v104 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b", Priority = 1)]
+        //[Variation(Desc = "v104 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b",
+        // Priority = 1)]
         [Fact]
         public void v104()
         {
@@ -771,7 +800,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v105 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again", Priority = 1)]
+        //[Variation(Desc = "v105 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again",
+        // Priority = 1)]
         [Fact]
         public void v105()
         {
@@ -982,7 +1012,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v110 - Import: A imports B and B and C, B imports C and D, C imports D and A", Priority = 1)]
+        //[Variation(Desc = "v110 - Import: A imports B and B and C, B imports C and D, C imports D and A",
+        // Priority = 1)]
         [Fact]
         public void v110()
         {
@@ -1003,7 +1034,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v111 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each other", Priority = 2)]
+        //[Variation(Desc = "v111 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each
+        // other", Priority = 2)]
         [Fact]
         public void v111()
         {
@@ -1147,7 +1179,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v117 - Import: A,B,C,D all import and reference each other for types", Priority = 2)]
+        //[Variation(Desc = "v117 - Import: A,B,C,D all import and reference each other for types", Priority
+        // = 2)]
         [Fact]
         public void v117()
         {
@@ -1188,11 +1221,17 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v121- Import: Bug 114549 , A imports only B but refers to C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd" })]
+        //[Variation(Desc = "v121- Import: Bug 114549 , A imports only B but refers to C and D both",
+        // Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd",
+        // "import_v21_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd")]
-        //[Variation(Desc = "v122- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v122- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D
+        // both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v123- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v123- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v118(object param0, object param1, object param2, object param3)
@@ -1221,9 +1260,13 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v124- Import: Bug 114549 , A imports only B's NS, and B also refers to A's types (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v124- Import: Bug 114549 , A imports only B's NS, and B also refers to A's
+        // types (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v125- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v125- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] {
+        // "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v119(object param0, object param1, object param2, object param3)
@@ -1297,13 +1340,16 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        /*********compile reprocess import**************/
+/*********compile reprocess import**************/
 
-        //[Variation(Desc = "v201.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
+        //[Variation(Desc = "v201.3 - Import: A(ns-a) which improts B (no ns)", Priority = 0, Params = new
+        // object[] { "import_v4_a.xsd", "import_v4_b.xsd", 2, null })]
         [InlineData("import_v4_a.xsd", "import_v4_b.xsd", 2, null)]
-        //[Variation(Desc = "v201.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
+        //[Variation(Desc = "v201.2 - Import: A(ns-a) improts B (ns-b)", Priority = 0, Params = new object[]
+        // { "import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, "ns-b")]
-        //[Variation(Desc = "v201.1 - Improt: A with NS imports B with no NS", Priority = 0, Params = new object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
+        //[Variation(Desc = "v201.1 - Improt: A with NS imports B with no NS", Priority = 0, Params = new
+        // object[] { "import_v1_a.xsd", "include_v1_b.xsd", 2, null })]
         [InlineData("import_v1_a.xsd", "include_v1_b.xsd", 2, null)]
         [Theory]
         public void v201(object param0, object param1, object param2, object param3)
@@ -1334,7 +1380,8 @@ namespace System.Xml.XmlSchemaTests
 
         //-----------------------------------------------------------------------------------
 
-        //[Variation(Desc = "v202.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority = 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
+        //[Variation(Desc = "v202.1 - Import: Add B(ns-b) , then A(ns-a) which improts B (ns-b)", Priority =
+        // 1, Params = new object[] { "import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b" })]
         [InlineData("import_v2_a.xsd", "import_v2_b.xsd", 2, null, "ns-b")]
         [Theory]
         public void v202(object param0, object param1, object param2, object param3, object param4)
@@ -1377,7 +1424,9 @@ namespace System.Xml.XmlSchemaTests
             Assert.Fail();
         }
 
-        //[Variation(Desc = "v202.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no ns)", Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null })]
+        //[Variation(Desc = "v202.2 - Import: Add B(no ns) with ns-b , then A(ns-a) which imports B (no
+        // ns)", Priority = 1, Params = new object[] { "import_v5_a.xsd", "import_v4_b.xsd", 3, "ns-b", null
+        // })]
         [InlineData("import_v5_a.xsd", "import_v4_b.xsd", "ns-b")]
         [Theory]
         public void v202a(object param0, object param1, object param3)
@@ -1421,7 +1470,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v203 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again", Priority = 1)]
+        //[Variation(Desc = "v203 - Import: Add A(ns-a) which imports B (no ns), then Add B(no ns) again",
+        // Priority = 1)]
         [Fact]
         public void v203()
         {
@@ -1469,7 +1519,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v204 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b", Priority = 1)]
+        //[Variation(Desc = "v204 - Import: Add A(ns-a) which improts B (no ns), then Add B to ns-b",
+        // Priority = 1)]
         [Fact]
         public void v204()
         {
@@ -1511,7 +1562,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v205 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again", Priority = 1)]
+        //[Variation(Desc = "v205 - Import: Add A(ns-a) which improts B (ns-b), then Add B(ns-b) again",
+        // Priority = 1)]
         [Fact]
         public void v205()
         {
@@ -1720,7 +1772,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v210 - Import: A imports B and B and C, B imports C and D, C imports D and A", Priority = 1)]
+        //[Variation(Desc = "v210 - Import: A imports B and B and C, B imports C and D, C imports D and A",
+        // Priority = 1)]
         [Fact]
         public void v210()
         {
@@ -1741,7 +1794,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v211 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each other", Priority = 2)]
+        //[Variation(Desc = "v211 - Import: A(ns-a) imports B(ns-b) and C (ns-b), B and C include each
+        // other", Priority = 2)]
         [Fact]
         public void v211()
         {
@@ -1882,7 +1936,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v217 - Import: A,B,C,D all import and reference each other for types", Priority = 2)]
+        //[Variation(Desc = "v217 - Import: A,B,C,D all import and reference each other for types", Priority
+        // = 2)]
         [Fact]
         public void v217()
         {
@@ -1923,11 +1978,17 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v221- Import: Bug 114549 , A imports only B but refers to C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd" })]
+        //[Variation(Desc = "v221- Import: Bug 114549 , A imports only B but refers to C and D both",
+        // Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd",
+        // "import_v21_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v21_a.xsd")]
-        //[Variation(Desc = "v222- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v222- Import: Bug 114549 , A imports only B's NS, but refers to B,C and D
+        // both", Priority = 1, Params = new object[] { "import_v21_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v21_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v223- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v223- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's types", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v218(object param0, object param1, object param2, object param3)
@@ -1956,9 +2017,13 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v224- Import: Bug 114549 , A imports only B's NS, and B also refers to A's types (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v224- Import: Bug 114549 , A imports only B's NS, and B also refers to A's
+        // types (WARNING)", Priority = 1, Params = new object[] { "import_v23_b.xsd", "import_v21_c.xsd",
+        // "import_v21_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v23_b.xsd", "import_v21_c.xsd", "import_v21_d.xsd", "import_v22_a.xsd")]
-        //[Variation(Desc = "v225- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] { "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
+        //[Variation(Desc = "v225- Import: Bug 114549 , A imports only B's NS, and B also improts A's NS AND
+        // refers to A's type, D refers to A's type (WARNING)", Priority = 1, Params = new object[] {
+        // "import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd" })]
         [InlineData("import_v24_b.xsd", "import_v21_c.xsd", "import_v25_d.xsd", "import_v22_a.xsd")]
         [Theory]
         public void v219(object param0, object param1, object param2, object param3)

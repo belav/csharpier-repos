@@ -645,7 +645,8 @@ public abstract class RelationalTypeMappingTest
         var same2 = new DateTimeOffset(2000, 1, 1, 12, 0, 0, TimeSpan.FromHours(0));
         var different = new DateTimeOffset(2000, 1, 1, 13, 0, 0, TimeSpan.FromHours(1));
 
-        // Note that a difference in offset results in inequality, unlike the .NET default comparison behavior
+        // Note that a difference in offset results in inequality, unlike the .NET default comparison
+        // behavior
         Assert.False(typeMapping.Comparer.Equals(same1, different));
         Assert.True(typeMapping.Comparer.Equals(same1, same2));
 

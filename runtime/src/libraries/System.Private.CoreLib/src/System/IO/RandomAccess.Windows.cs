@@ -74,6 +74,7 @@ namespace System.IO
                 );
                 return errorCode switch
                 {
+                    //
                     // https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfile#synchronization-and-file-position:
                     // "If lpOverlapped is not NULL, then when a synchronous read operation reaches the end of a file,
                     // ReadFile returns FALSE and GetLastError returns ERROR_HANDLE_EOF"
@@ -618,13 +619,15 @@ namespace System.IO
         }
 
         // From https://docs.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-readfilescatter:
-        // "The file handle must be created with [...] the FILE_FLAG_OVERLAPPED and FILE_FLAG_NO_BUFFERING flags."
+        // "The file handle must be created with [...] the FILE_FLAG_OVERLAPPED and FILE_FLAG_NO_BUFFERING
+        // flags."
         private static bool CanUseScatterGatherWindowsAPIs(SafeFileHandle handle) =>
             handle.IsAsync && ((handle.GetFileOptions() & SafeFileHandle.NoBuffering) != 0);
 
         // From the same source:
         // "Each buffer must be at least the size of a system memory page and must be aligned on a system
-        // memory page size boundary. The system reads/writes one system memory page of data into/from each buffer."
+        // memory page size boundary. The system reads/writes one system memory page of data into/from each
+        // buffer."
         // This method returns true if the buffers can be used by
         // the Windows scatter/gather API, which happens when they are:
         // 1. aligned at page size boundaries
@@ -1071,11 +1074,14 @@ namespace System.IO
             }
 
             // From https://docs.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresult:
-            // "If the hEvent member of the OVERLAPPED structure is NULL, the system uses the state of the hFile handle to signal when the operation has been completed.
+            // "If the hEvent member of the OVERLAPPED structure is NULL, the system uses the state of the hFile
+            // handle to signal when the operation has been completed.
             // Use of file, named pipe, or communications-device handles for this purpose is discouraged.
-            // It is safer to use an event object because of the confusion that can occur when multiple simultaneous overlapped operations
+            // It is safer to use an event object because of the confusion that can occur when multiple
+            // simultaneous overlapped operations
             // are performed on the same file, named pipe, or communications device.
-            // In this situation, there is no way to know which operation caused the object's state to be signaled."
+            // In this situation, there is no way to know which operation caused the object's state to be
+            // signaled."
             // Since we want RandomAccess APIs to be thread-safe, we provide a dedicated wait handle.
             result->EventHandle = resetEvent.SafeWaitHandle.DangerousGetHandle();
 
@@ -1131,11 +1137,13 @@ namespace System.IO
 
         // From https://docs.microsoft.com/en-us/windows/win32/fileio/file-buffering:
         // "File access sizes, including the optional file offset in the OVERLAPPED structure,
-        // if specified, must be for a number of bytes that is an integer multiple of the volume sector size."
+        // if specified, must be for a number of bytes that is an integer multiple of the volume sector
+        // size."
         // So if buffer and physical sector size is 4096 and the file size is 4097:
         // the read from offset=0 reads 4096 bytes
         // the read from offset=4096 reads 1 byte
-        // the read from offset=4097 fails with ERROR_INVALID_PARAMETER (the offset is not a multiple of sector size)
+        // the read from offset=4097 fails with ERROR_INVALID_PARAMETER (the offset is not a multiple of
+        // sector size)
         // Based on feedback received from customers (https://github.com/dotnet/runtime/issues/62851),
         // it was decided to not throw, but just return 0.
         private static bool IsEndOfFileForNoBuffering(SafeFileHandle fileHandle, long fileOffset) =>
@@ -1143,8 +1151,10 @@ namespace System.IO
             && fileHandle.CanSeek
             && fileOffset >= fileHandle.GetFileLength();
 
-        // We need to store the reference count (see the comment in ReleaseRefCount) and an EventHandle to signal the completion.
-        // We could keep these two things separate, but since ManualResetEvent is sealed and we want to avoid any extra allocations, this type has been created.
+        // We need to store the reference count (see the comment in ReleaseRefCount) and an EventHandle to
+        // signal the completion.
+        // We could keep these two things separate, but since ManualResetEvent is sealed and we want to
+        // avoid any extra allocations, this type has been created.
         // It's basically ManualResetEvent with reference count.
         private sealed class CallbackResetEvent : EventWaitHandle
         {
@@ -1160,9 +1170,12 @@ namespace System.IO
             internal unsafe void ReleaseRefCount(NativeOverlapped* pOverlapped)
             {
                 // Each SafeFileHandle opened for async IO is bound to ThreadPool.
-                // It requires us to provide a callback even if we want to use EventHandle and use GetOverlappedResult to obtain the result.
-                // There can be a race condition between the call to GetOverlappedResult and the callback invocation,
-                // so we need to track the number of references, and when it drops to zero, then free the native overlapped.
+                // It requires us to provide a callback even if we want to use EventHandle and use
+                // GetOverlappedResult to obtain the result.
+                // There can be a race condition between the call to GetOverlappedResult and the callback
+                // invocation,
+                // so we need to track the number of references, and when it drops to zero, then free the native
+                // overlapped.
                 if (Interlocked.Decrement(ref _freeWhenZero) == 0)
                 {
                     _threadPoolBoundHandle.FreeNativeOverlapped(pOverlapped);

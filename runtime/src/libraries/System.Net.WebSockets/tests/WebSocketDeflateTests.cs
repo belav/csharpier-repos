@@ -645,8 +645,10 @@ namespace System.Net.WebSockets.Tests
         [Fact]
         public async Task AutobahnTestCase13_3_1()
         {
-            // When running Autobahn Test Suite some tests failed with zlib error "invalid distance too far back".
-            // Further investigation lead to a bug fix in zlib intel's implementation - https://github.com/dotnet/runtime/issues/50235.
+            // When running Autobahn Test Suite some tests failed with zlib error "invalid distance too far
+            // back".
+            // Further investigation lead to a bug fix in zlib intel's implementation -
+            // https://github.com/dotnet/runtime/issues/50235.
             // This test replicates one of the Autobahn tests to make sure this issue doesn't appear again.
             byte[][] messages = new[]
             {

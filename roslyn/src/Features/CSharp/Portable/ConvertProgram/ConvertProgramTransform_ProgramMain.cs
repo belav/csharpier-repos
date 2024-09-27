@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             CancellationToken cancellationToken
         )
         {
-            // While the analyze and refactoring check ensure we're in a well formed state for their needs, the 'new
-            // template' code just calls directly into this if the user prefers Program.Main.  So check and make sure
+            // While the analyze and refactoring check ensure we're in a well formed state for their needs, the
+            // 'new
+            // template' code just calls directly into this if the user prefers Program.Main.  So check and make
+            // sure
             // this is actually something we can convert before proceeding.
             var root = (CompilationUnitSyntax)
                 await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
@@ -109,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                 await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var generator = document.GetRequiredLanguageService<SyntaxGenerator>();
 
-            // See if we have an existing part in another file.  If so, we'll have to generate our declaration as partial.
+            // See if we have an existing part in another file.  If so, we'll have to generate our declaration
+            // as partial.
             var hasExistingPart = programType.DeclaringSyntaxReferences.Any(
                 static (d, cancellationToken) =>
                     d.GetSyntax(cancellationToken) is TypeDeclarationSyntax,
@@ -133,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                         : Accessibility.NotApplicable
                 );
 
-            // Workaround for simplification not being ready when we generate a new file.  Substitute System.String[]
+            // Workaround for simplification not being ready when we generate a new file.  Substitute
+            // System.String[]
             // with string[].
             if (method.ParameterList.Parameters is [{ Type: ArrayTypeSyntax arrayType }])
                 method = method.ReplaceNode(
@@ -164,8 +168,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             {
                 // Otherwise just add new member and process leading trivia
 
-                // Old class declaration is below top-level statements and is probably separated from them with a blank line (or several ones).
-                // So we want to remove all leading line to make class declaration begin from the first line of the file after applying refactoring
+                // Old class declaration is below top-level statements and is probably separated from them with a
+                // blank line (or several ones).
+                // So we want to remove all leading line to make class declaration begin from the first line of the
+                // file after applying refactoring
                 var oldTriviaWithoutBlankLines = oldClassDeclaration
                     .GetLeadingTrivia()
                     .WithoutLeadingBlankLines();
@@ -186,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
             var first = true;
             foreach (var globalStatement in root.Members.OfType<GlobalStatementSyntax>())
             {
-                // Remove leading trivia from first statement.  We'll move it to the Program type. Any directly attached
+                // Remove leading trivia from first statement.  We'll move it to the Program type. Any directly
+                // attached
                 // comments though stay attached to the first statement.
                 var statement = globalStatement.Statement.WithAdditionalAnnotations(
                     Formatter.Annotation
@@ -225,7 +232,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
         private static TSyntaxNode FixupComments<TSyntaxNode>(TSyntaxNode node)
             where TSyntaxNode : SyntaxNode
         {
-            // Remove comment explaining top level statements as it isn't relevant if the user switches back to full
+            // Remove comment explaining top level statements as it isn't relevant if the user switches back to
+            // full
             // Program.Main form.
             var leadingTrivia = node.GetLeadingTrivia();
             var comment = leadingTrivia.FirstOrNull(c =>

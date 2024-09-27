@@ -540,7 +540,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[2, 3] a;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[2, 3]").WithLocation(6, 22),
                 // file.cs(6,29): warning CS0168: The variable 'a' is declared but never used
@@ -590,7 +591,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[2, 3] a, b;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[2, 3]").WithLocation(6, 22),
                 // file.cs(6,29): warning CS0168: The variable 'a' is declared but never used
@@ -666,10 +668,13 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the
+                // variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field
+                // type.
                 //         int /*<bind>*/x[10] = 1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(6, 24),
-                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new'
+                // expression)
                 //         int /*<bind>*/x[10] = 1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(6, 25),
                 // CS0219: The variable 'x' is assigned but its value is never used
@@ -710,10 +715,13 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the
+                // variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field
+                // type.
                 //         int /*<bind>*/x[10]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(6, 24),
-                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new'
+                // expression)
                 //         int /*<bind>*/x[10]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(6, 25),
                 // CS0168: The variable 'x' is declared but never used
@@ -866,7 +874,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[10] x = { 1 };/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22),
             };
@@ -906,7 +915,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22),
                 // file.cs(6,27): warning CS0168: The variable 'x' is declared but never used
@@ -952,7 +962,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,24): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,24): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[][10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 24),
                 // file.cs(7,29): warning CS0168: The variable 'x' is declared but never used
@@ -1000,7 +1011,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[,10] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[,10]").WithLocation(7, 22),
                 // file.cs(7,23): error CS0443: Syntax error; value expected
@@ -1095,7 +1107,8 @@ class C
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,12): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         int[/*<bind>*/10/*</bind>*/] x;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[/*<bind>*/10/*</bind>*/]")
                     .WithLocation(6, 12),
@@ -1201,7 +1214,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[M2(out var z)] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
                     .WithLocation(6, 22),
@@ -1263,7 +1277,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
                     .WithLocation(6, 22),
@@ -1272,7 +1287,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
                     .WithArguments("z")
                     .WithLocation(6, 34),
-                // file.cs(6,37): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
+                // file.cs(6,37): warning CS8632: The annotation for nullable reference types should only be used in
+                // code within a '#nullable' context.
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(6, 37),
@@ -1329,7 +1345,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
                     .WithLocation(6, 26),
@@ -1395,7 +1412,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(6,26): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(out var z)]")
                     .WithLocation(6, 26),
@@ -1404,7 +1422,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
                     .WithArguments("z")
                     .WithLocation(6, 38),
-                // file.cs(6,41): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' context.
+                // file.cs(6,41): warning CS8632: The annotation for nullable reference types should only be used in
+                // code within a '#nullable' context.
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(6, 41),
@@ -1456,10 +1475,12 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[10]?[20]? x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 22),
-                // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[10]?[20]? x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[20]").WithLocation(7, 27),
                 // file.cs(7,33): warning CS0168: The variable 'x' is declared but never used
@@ -1526,7 +1547,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,32): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,32): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/Col::List<int[10]> x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(7, 32),
                 // file.cs(7,38): warning CS0168: The variable 'x' is declared but never used
@@ -1572,7 +1594,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(2,47): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(2,47): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 // using List=System.Collections.Generic.List<int[10]>;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(2, 47),
                 // file.cs(8,24): warning CS0168: The variable 'x' is declared but never used
@@ -1631,7 +1654,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[y is int z] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y is int z]")
                     .WithLocation(7, 22),
@@ -1708,7 +1732,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,22): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         /*<bind>*/int[M(y switch { int z => 42 })] x;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M(y switch { int z => 42 })]")
                     .WithLocation(7, 22),
@@ -2227,11 +2252,13 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 // file.cs(7,9): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
                 Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(7, 9),
-                // file.cs(9,33): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(9,33): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //             fixed (/*<bind>*/int[M2(y switch { int z => 42 })] p1 = null/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[M2(y switch { int z => 42 })]")
                     .WithLocation(9, 33),
-                // file.cs(9,64): error CS0209: The type of a local declared in a fixed statement must be a pointer type
+                // file.cs(9,64): error CS0209: The type of a local declared in a fixed statement must be a pointer
+                // type
                 //             fixed (/*<bind>*/int[M2(y switch { int z => 42 })] p1 = null/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_BadFixedInitType, "p1 = null").WithLocation(9, 64),
             };
@@ -2843,7 +2870,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/){}
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -2851,7 +2879,8 @@ class C
                     )
                     .WithArguments("int[]")
                     .WithLocation(7, 25),
-                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/){}
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
                     .WithLocation(7, 28),
@@ -2930,7 +2959,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(7,25): error CS1674: 'int[]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -2938,7 +2968,8 @@ class C
                     )
                     .WithArguments("int[]")
                     .WithLocation(7, 25),
-                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
                     .WithLocation(7, 28),
@@ -3003,7 +3034,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,8): error CS1674: 'int[]': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // file.cs(7,8): error CS1674: 'int[]': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 //        using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;
                 Diagnostic(
                         ErrorCode.ERR_NoConvToIDisp,
@@ -3011,7 +3043,8 @@ class C
                     )
                     .WithArguments("int[]")
                     .WithLocation(7, 8),
-                // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //        using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
                     .WithLocation(7, 27),
@@ -3514,7 +3547,8 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y")
                     .WithArguments("y")
                     .WithLocation(6, 13),
-                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // file.cs(7,28): error CS0270: Array size cannot be specified in a variable declaration (try
+                // initializing with a 'new' expression)
                 //         for (/*<bind/>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;;);
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
                     .WithLocation(7, 28),
@@ -4480,10 +4514,13 @@ class C
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                // CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the
+                // variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field
+                // type.
                 //         int d[10] = 1;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(7, 14),
-                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new'
+                // expression)
                 //         int d[10] = 1;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(7, 15),
             };

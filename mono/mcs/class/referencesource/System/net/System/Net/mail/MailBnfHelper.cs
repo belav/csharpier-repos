@@ -66,7 +66,8 @@ namespace System.Net.Mime
             Whitespace.Add(CR);
             Whitespace.Add(LF);
 
-            // atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "/" / "=" / "?" / "^" / "_" / "`" / "{" / "|" / "}" / "~"
+            // atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "/" / "=" / "?" /
+            // "^" / "_" / "`" / "{" / "|" / "}" / "~"
             for (int i = '0'; i <= '9'; i++)
             {
                 Atext[i] = true;

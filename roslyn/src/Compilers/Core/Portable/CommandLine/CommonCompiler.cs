@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis
         internal const int Succeeded = 0;
 
         /// <summary>
-        /// Fallback encoding that is lazily retrieved if needed. If <see cref="EncodedStringText.CreateFallbackEncoding"/> is
+        /// Fallback encoding that is lazily retrieved if needed. If <see
+        // cref="EncodedStringText.CreateFallbackEncoding"/> is
         /// evaluated and stored, the value is used if a PDB is created for this compilation.
         /// </summary>
         private readonly Lazy<Encoding> _fallbackEncoding = new Lazy<Encoding>(
@@ -260,7 +261,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Resolves metadata references stored in command line arguments and reports errors for those that can't be resolved.
+        /// Resolves metadata references stored in command line arguments and reports errors for those that
+        // can't be resolved.
         /// </summary>
         internal List<MetadataReference> ResolveMetadataReferences(
             List<DiagnosticInfo> diagnostics,
@@ -286,7 +288,8 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                // when compiling into an assembly (csc/vbc) we only allow #r that match references given on command line:
+                // when compiling into an assembly (csc/vbc) we only allow #r that match references given on command
+                // line:
                 referenceDirectiveResolver = new ExistingReferencesResolver(
                     commandLineReferenceResolver,
                     resolved.ToImmutableArray()
@@ -315,7 +318,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="file">Source file information.</param>
         /// <param name="diagnostics">Storage for diagnostics.</param>
-        /// <param name="normalizedFilePath">If given <paramref name="file"/> opens successfully, set to normalized absolute path of the file, null otherwise.</param>
+        /// <param name="normalizedFilePath">If given <paramref name="file"/> opens successfully, set to
+        // normalized absolute path of the file, null otherwise.</param>
         /// <returns>File content or null on failure.</returns>
         internal SourceText? TryReadFileContent(
             CommandLineSourceFile file,
@@ -471,8 +475,10 @@ namespace Microsoft.CodeAnalysis
             string filePath,
             out string normalizedFilePath
         )
-            // PERF: Using a very small buffer size for the FileStream opens up an optimization within EncodedStringText/EmbeddedText where
-            // we read the entire FileStream into a byte array in one shot. For files that are actually smaller than the buffer
+            // PERF: Using a very small buffer size for the FileStream opens up an optimization within
+            // EncodedStringText/EmbeddedText where
+            // we read the entire FileStream into a byte array in one shot. For files that are actually smaller
+            // than the buffer
             // size, FileStream.Read still allocates the internal buffer.
             =>
             FileSystem.OpenFileEx(
@@ -548,7 +554,8 @@ namespace Microsoft.CodeAnalysis
                     continue;
                 }
 
-                // Skip trees with duplicated paths. (VB allows this and "first tree wins" is same as PDB emit policy.)
+                // Skip trees with duplicated paths. (VB allows this and "first tree wins" is same as PDB emit
+                // policy.)
                 if (embeddedTreeMap.ContainsKey(tree.FilePath))
                 {
                     continue;
@@ -683,7 +690,8 @@ namespace Microsoft.CodeAnalysis
                     // First we attempt to parse a member declaration starting at "x".  When we see the "=", we
                     // create an IncompleteMemberSyntax with return type "x" and an error at the location of the "x".
                     // Then we parse a member declaration starting at "=".  This is an invalid member declaration start
-                    // so we attach an error to the "=" and attach it (plus following tokens) to the IncompleteMemberSyntax
+                    // so we attach an error to the "=" and attach it (plus following tokens) to the
+                    // IncompleteMemberSyntax
                     // we previously created.
                     //this assert isn't valid if we change the design to not bail out after each phase.
                     //System.Diagnostics.Debug.Assert(diag.Severity != DiagnosticSeverity.Error);
@@ -699,7 +707,8 @@ namespace Microsoft.CodeAnalysis
                 // However, these diagnostics should not be reported on the console output.
                 errorLoggerOpt?.LogDiagnostic(diag, suppressionInfo);
 
-                // If the diagnostic was suppressed by one or more DiagnosticSuppressor(s), then we report info diagnostics for each suppression
+                // If the diagnostic was suppressed by one or more DiagnosticSuppressor(s), then we report info
+                // diagnostics for each suppression
                 // so that the suppression information is available in the binary logs and verbose build logs.
                 if (diag.ProgrammaticSuppressionInfo != null)
                 {
@@ -723,7 +732,8 @@ namespace Microsoft.CodeAnalysis
                     return;
                 }
 
-                // Diagnostics that aren't suppressed will be reported to the console output and, if they are errors,
+                // Diagnostics that aren't suppressed will be reported to the console output and, if they are
+                // errors,
                 // they should fail the run
                 if (diag.Severity == DiagnosticSeverity.Error)
                 {
@@ -760,7 +770,8 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// Reports all IVT information for the given compilation and references, to aid in troubleshooting otherwise inexplicable IVT failures.
+        /// Reports all IVT information for the given compilation and references, to aid in troubleshooting
+        // otherwise inexplicable IVT failures.
         /// </summary>
         private void ReportIVTInfos(
             TextWriter consoleOutput,
@@ -769,12 +780,14 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<Diagnostic> diagnostics
         )
         {
-            // Annotate any bad accesses with what assemblies they came from, if they are from a foreign assembly
+            // Annotate any bad accesses with what assemblies they came from, if they are from a foreign
+            // assembly
             DiagnoseBadAccesses(consoleOutput, errorLogger, compilation, diagnostics);
 
             consoleOutput.WriteLine();
 
-            // Printing 'InternalsVisibleToAttribute' information for the current compilation and all referenced assemblies.
+            // Printing 'InternalsVisibleToAttribute' information for the current compilation and all referenced
+            // assemblies.
             consoleOutput.WriteLine(CodeAnalysisResources.InternalsVisibleToHeaderSummary);
 
             var currentAssembly = compilation.Assembly;
@@ -865,8 +878,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns true if there are any error diagnostics in the bag which cannot be suppressed and
         /// are guaranteed to break the build.
-        /// Only diagnostics which have default severity error and are tagged as NotConfigurable fall in this bucket.
-        /// This includes all compiler error diagnostics and specific analyzer error diagnostics that are marked as not configurable by the analyzer author.
+        /// Only diagnostics which have default severity error and are tagged as NotConfigurable fall in
+        // this bucket.
+        /// This includes all compiler error diagnostics and specific analyzer error diagnostics that are
+        // marked as not configurable by the analyzer author.
         /// </summary>
         internal static bool HasUnsuppressableErrors(DiagnosticBag diagnostics)
         {
@@ -893,7 +908,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if the bag has any diagnostics with effective Severity=Error. Also returns true for warnings or informationals
+        /// Returns true if the bag has any diagnostics with effective Severity=Error. Also returns true for
+        // warnings or informationals
         /// or warnings promoted to error via /warnaserror which are not suppressed.
         /// </summary>
         internal static bool HasUnsuppressedErrors(DiagnosticBag diagnostics)
@@ -1029,12 +1045,16 @@ namespace Microsoft.CodeAnalysis
         /// Perform source generation, if the compiler supports it.
         /// </summary>
         /// <param name="input">The compilation before any source generation has occurred.</param>
-        /// <param name="parseOptions">The <see cref="ParseOptions"/> to use when parsing any generated sources.</param>
+        /// <param name="parseOptions">The <see cref="ParseOptions"/> to use when parsing any generated
+        // sources.</param>
         /// <param name="generators">The generators to run</param>
-        /// <param name="analyzerConfigOptionsProvider">A provider that returns analyzer config options.</param>
-        /// <param name="additionalTexts">Any additional texts that should be passed to the generators when run.</param>
+        /// <param name="analyzerConfigOptionsProvider">A provider that returns analyzer config
+        // options.</param>
+        /// <param name="additionalTexts">Any additional texts that should be passed to the generators when
+        // run.</param>
         /// <param name="generatorDiagnostics">Any diagnostics that were produced during generation.</param>
-        /// <returns>A compilation that represents the original compilation with any additional, generated texts added to it.</returns>
+        /// <returns>A compilation that represents the original compilation with any additional, generated
+        // texts added to it.</returns>
         private protected (
             Compilation Compilation,
             GeneratorDriverTimingInfo DriverTimingInfo
@@ -1086,18 +1106,24 @@ namespace Microsoft.CodeAnalysis
             {
                 Debug.Assert(!string.IsNullOrWhiteSpace(Arguments.OutputFileName));
 
-                // CONSIDER: The only piece of the cache key that is required for correctness is the generators that were used.
-                //           We set up the graph statically based on the generators, so as long as the generator inputs haven't
-                //           changed we can technically run any project against another's cache and still get the correct results.
-                //           Obviously that would remove the point of the cache, so we also key off of the output file name
-                //           and output path so that collisions are unlikely and we'll usually get the correct cache for any
+                // CONSIDER: The only piece of the cache key that is required for correctness is the generators that
+                // were used.
+                //           We set up the graph statically based on the generators, so as long as the generator
+                // inputs haven't
+                //           changed we can technically run any project against another's cache and still get the
+                // correct results.
+                //           Obviously that would remove the point of the cache, so we also key off of the output
+                // file name
+                //           and output path so that collisions are unlikely and we'll usually get the correct cache
+                // for any
                 //           given compilation.
 
                 PooledStringBuilder sb = PooledStringBuilder.GetInstance();
                 sb.Builder.Append(Arguments.GetOutputFilePath(Arguments.OutputFileName));
                 foreach (var generator in generators)
                 {
-                    // append the generator FQN and the MVID of the assembly it came from, so any changes will invalidate the cache
+                    // append the generator FQN and the MVID of the assembly it came from, so any changes will
+                    // invalidate the cache
                     var type = generator.GetGeneratorType();
                     sb.Builder.Append(type.AssemblyQualifiedName);
                     sb.Builder.Append(type.Assembly.ManifestModule.ModuleVersionId.ToString());
@@ -1418,7 +1444,8 @@ namespace Microsoft.CodeAnalysis
             analyzerDriver = null;
             generatorTimingInfo = null;
 
-            // Print the diagnostics produced during the parsing stage and exit if there are any unsuppressible errors.
+            // Print the diagnostics produced during the parsing stage and exit if there are any unsuppressible
+            // errors.
             compilation.GetDiagnostics(
                 CompilationStage.Parse,
                 includeEarlierStages: false,
@@ -1597,7 +1624,8 @@ namespace Microsoft.CodeAnalysis
             );
 
             // If there are unsuppressable declaration errors, we want to exit early from this method.
-            // But before we do so, we need to run diagnostic suppressors (if any) on all suppressable warnings/errors (if any).
+            // But before we do so, we need to run diagnostic suppressors (if any) on all suppressable
+            // warnings/errors (if any).
             if (HasUnsuppressableErrors(diagnostics))
             {
                 if (
@@ -1621,7 +1649,8 @@ namespace Microsoft.CodeAnalysis
 
             // Given a compilation and a destination directory, determine three names:
             //   1) The name with which the assembly should be output.
-            //   2) The path of the assembly/module file (default = destination directory + compilation output name).
+            //   2) The path of the assembly/module file (default = destination directory + compilation output
+            // name).
             //   3) The path of the pdb file (default = assembly/module path with ".pdb" extension).
             string outputName = GetOutputFileName(compilation, cancellationToken)!;
             var finalPeFilePath = Arguments.GetOutputFilePath(outputName);
@@ -1632,7 +1661,8 @@ namespace Microsoft.CodeAnalysis
 
             try
             {
-                // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to pass it to emit.
+                // NOTE: Unlike the PDB path, the XML doc path is not embedded in the assembly, so we don't need to
+                // pass it to emit.
                 var emitOptions = Arguments
                     .EmitOptions.WithOutputNameOverride(outputName)
                     .WithPdbFilePath(
@@ -1848,7 +1878,8 @@ namespace Microsoft.CodeAnalysis
 
                             if (!diagnostics.IsEmptyWithoutResolution)
                             {
-                                // Apply diagnostic suppressions for analyzer and/or compiler diagnostics from diagnostic suppressors.
+                                // Apply diagnostic suppressions for analyzer and/or compiler diagnostics from diagnostic
+                                // suppressors.
                                 analyzerDriver.ApplyProgrammaticSuppressions(
                                     diagnostics,
                                     compilation,
@@ -1988,7 +2019,8 @@ namespace Microsoft.CodeAnalysis
                 );
                 var analyzerExceptionDiagnostics = new DiagnosticBag();
 
-                // PERF: Avoid executing analyzers that report only Hidden and/or Info diagnostics, which don't appear in the build output.
+                // PERF: Avoid executing analyzers that report only Hidden and/or Info diagnostics, which don't
+                // appear in the build output.
                 //  1. Always filter out 'Hidden' analyzer diagnostics in build.
                 //  2. Filter out 'Info' analyzer diagnostics if they are not required to be logged in errorlog.
                 var severityFilter = SeverityFilter.Hidden;

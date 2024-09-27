@@ -194,7 +194,10 @@ namespace System.Runtime.Serialization.Tests
                 // For example-
 
                 // Desktop
-                //<GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2zbP0weY4 xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns="http://schemas.datacontract.org/2004/07/SerializationTypes">
+                //<GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2zbP0weY4
+                // xmlns:i="http://www.w3.org/2001/XMLSchema-instance" z:Id="i1"
+                // xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/"
+                // xmlns="http://schemas.datacontract.org/2004/07/SerializationTypes">
                 //  <genericData1 z:Id="i2">
                 //    <BaseData></BaseData>
                 //    <DerivedData></DerivedData>
@@ -206,7 +209,10 @@ namespace System.Runtime.Serialization.Tests
                 //</GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2zbP0weY4>
 
                 // vs CoreCLR.
-                //<GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2RkuXKXCQ z:Id="i1" xmlns="http://schemas.datacontract.org/2004/07/SerializationTypes" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/">
+                //<GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2RkuXKXCQ z:Id="i1"
+                // xmlns="http://schemas.datacontract.org/2004/07/SerializationTypes"
+                // xmlns:i="http://www.w3.org/2001/XMLSchema-instance"
+                // xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/">
                 //  <genericData1 z:Id="i2">
                 //    <BaseData />
                 //    <DerivedData />
@@ -217,8 +223,10 @@ namespace System.Runtime.Serialization.Tests
                 //  </genericData2>
                 //</GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2RkuXKXCQ>
 
-                // Note the incorrect padding in the end of GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2RkuXKXCQ
-                // The difference is MD5 hashcode applied to the Type.FullName and is because full typeName in .NET Framework and CoreCLR returns different value.
+                // Note the incorrect padding in the end of
+                // GenericBase2OfSimpleBaseDerivedSimpleBaseDerived2RkuXKXCQ
+                // The difference is MD5 hashcode applied to the Type.FullName and is because full typeName in .NET
+                // Framework and CoreCLR returns different value.
 
                 // Hack for the above reason.
                 int deskIdx,
@@ -372,7 +380,8 @@ namespace System.Runtime.Serialization.Tests
             if (!CompareValue(baselineXElement.Value, actualXElement.Value))
                 return false;
 
-            // Serialized values can only have XElement and XText and hence we do not traverse the complete node structures and only the descendants.
+            // Serialized values can only have XElement and XText and hence we do not traverse the complete node
+            // structures and only the descendants.
             XElement[] deskChildElems = baselineXElement
                 .Descendants()
                 .OrderBy(m => m.Name.NamespaceName)
@@ -403,11 +412,14 @@ namespace System.Runtime.Serialization.Tests
                 return true;
 
             // For text of the form
-            // <z:QName xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:a="def">a:abc</z:QName>
+            // <z:QName xmlns:z="http://schemas.microsoft.com/2003/10/Serialization/"
+            // xmlns:a="def">a:abc</z:QName>
 
-            // In the above XML text the XElement.Value is a:abc which in CoreCLR could be something like d1p1:abc
+            // In the above XML text the XElement.Value is a:abc which in CoreCLR could be something like
+            // d1p1:abc
             // and hence we value check will fail.
-            // To mitigate this we store the namespaces from the parent XElement and use it to check the actual value.
+            // To mitigate this we store the namespaces from the parent XElement and use it to check the actual
+            // value.
             string deskPrefix,
                 coreCLRPrefix;
 

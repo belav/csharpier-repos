@@ -49,10 +49,10 @@ namespace System.Configuration
             Type type
         )
         {
-            /* don't use "value is TimeSpan" here, since
-             * we want to generate both a NRE on null
-             * value, and ArgumentException on non-null,
-             * but non-TimeSpan. */
+/* don't use "value is TimeSpan" here, since
+* we want to generate both a NRE on null
+* value, and ArgumentException on non-null,
+* but non-TimeSpan. */
             if (value.GetType() != typeof(TimeSpan))
                 throw new ArgumentException();
 

@@ -15,9 +15,12 @@ namespace System.Transactions
     }
 
     //
-    //  The legacy TransactionScope uses TLS to store the ambient transaction. TLS data doesn't flow across thread continuations and hence legacy TransactionScope does not compose well with
-    //  new .NET async programming model constructs like Tasks and async/await. To enable TransactionScope to work with Task and async/await, a new TransactionScopeAsyncFlowOption
-    //  is introduced. When users opt-in the async flow option, ambient transaction will automatically flow across thread continuations and user can compose TransactionScope with Task and/or
+    //  The legacy TransactionScope uses TLS to store the ambient transaction. TLS data doesn't flow
+    // across thread continuations and hence legacy TransactionScope does not compose well with
+    //  new .NET async programming model constructs like Tasks and async/await. To enable
+    // TransactionScope to work with Task and async/await, a new TransactionScopeAsyncFlowOption
+    //  is introduced. When users opt-in the async flow option, ambient transaction will automatically
+    // flow across thread continuations and user can compose TransactionScope with Task and/or
     //  async/await constructs.
     //
     public enum TransactionScopeAsyncFlowOption
@@ -593,7 +596,8 @@ namespace System.Transactions
                             rollbackTransaction.DistributedTxId
                         );
                     }
-                    // Verify that expectedCurrent is the same as the "current" current if we the interopOption value is None.
+                    // Verify that expectedCurrent is the same as the "current" current if we the interopOption value is
+                    // None.
                     else if (
                         EnterpriseServicesInteropOption.None == actualCurrentScope._interopOption
                     )
@@ -709,7 +713,8 @@ namespace System.Transactions
                 }
                 else
                 {
-                    // Verify that expectedCurrent is the same as the "current" current if we the interopOption value is None.
+                    // Verify that expectedCurrent is the same as the "current" current if we the interopOption value is
+                    // None.
                     // If we got here, actualCurrentScope is the same as "this".
                     if (EnterpriseServicesInteropOption.None == _interopOption)
                     {
@@ -976,7 +981,8 @@ namespace System.Transactions
                 out _contextTransaction
             );
 
-            // Calling validate here as we need to make sure the existing parent ambient transaction scope is already looked up to see if we have ES interop enabled.
+            // Calling validate here as we need to make sure the existing parent ambient transaction scope is
+            // already looked up to see if we have ES interop enabled.
             ValidateAsyncFlowOptionAndESInteropOption();
         }
 
@@ -993,7 +999,8 @@ namespace System.Transactions
                 _interopOption = Transaction.InteropMode(_savedCurrentScope);
             }
 
-            // async function yield at await points and main thread can continue execution. We need to make sure the TLS data are restored appropriately.
+            // async function yield at await points and main thread can continue execution. We need to make sure
+            // the TLS data are restored appropriately.
             SaveTLSContextData();
 
             if (AsyncFlowEnabled)
@@ -1035,7 +1042,8 @@ namespace System.Transactions
 
             if (_scopeThread == Thread.CurrentThread)
             {
-                // async function yield at await points and main thread can continue execution. We need to make sure the TLS data are restored appropriately.
+                // async function yield at await points and main thread can continue execution. We need to make sure
+                // the TLS data are restored appropriately.
                 // Restore the TLS only if the thread Ids match.
                 RestoreSavedTLSContextData();
             }
@@ -1086,7 +1094,8 @@ namespace System.Transactions
                 }
             }
 
-            // prevent restoring the context in an unexpected thread due to thread switch during TransactionScope's Dispose
+            // prevent restoring the context in an unexpected thread due to thread switch during
+            // TransactionScope's Dispose
             if (shouldRestoreContextData)
             {
                 Debug.Assert(_threadContextData != null);
@@ -1216,7 +1225,8 @@ namespace System.Transactions
             }
         }
 
-        // The validate method assumes that the existing parent ambient transaction scope is already looked up.
+        // The validate method assumes that the existing parent ambient transaction scope is already looked
+        // up.
         private void ValidateAsyncFlowOptionAndESInteropOption()
         {
             if (AsyncFlowEnabled)

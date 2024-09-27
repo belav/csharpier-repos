@@ -35,8 +35,10 @@ namespace DbMetal.Configuration
     /// <summary>
     /// Handles the providers section.
     /// Each provider is defined as follows:
-    ///  &lt;provider name="MySQL"      dbLinqSchemaLoader="DbLinq.MySql.MySqlSchemaLoader, DbLinq.MySql"
-    ///                             databaseConnection="MySql.Data.MySqlClient.MySqlConnection, MySql.Data" />
+    ///  &lt;provider name="MySQL"      dbLinqSchemaLoader="DbLinq.MySql.MySqlSchemaLoader,
+    // DbLinq.MySql"
+    ///                             databaseConnection="MySql.Data.MySqlClient.MySqlConnection,
+    // MySql.Data" />
     /// </summary>
     public class ProvidersSection : ConfigurationSection
     {

@@ -51,8 +51,8 @@ namespace Novell.Directory.Ldap.Asn1
             TAG
         );
 
-        /* Constructors for Asn1OctetString
-        */
+/* Constructors for Asn1OctetString
+*/
 
         /// <summary> Call this constructor to construct an Asn1OctetString
         /// object from a byte array.
@@ -81,13 +81,13 @@ namespace Novell.Directory.Ldap.Asn1
         {
             try
             {
-                /*                System.Text.UTF8Encoding utf8 = new System.Text.UTF8Encoding();
-                                byte[] bytes = utf8.GetBytes (content);
-                                sbyte[] sbytes = new sbyte[bytes.Length+1]; //signed bytes
-                                sbytes[0] = 0; //set sign byte to zero.
-                                for(int i=1; i<sbytes.Length; i++)
-                                    sbytes[i] = (sbyte) bytes[i-1]; //cast byte-->sbyte
-                */
+/*                System.Text.UTF8Encoding utf8 = new System.Text.UTF8Encoding();
+byte[] bytes = utf8.GetBytes (content);
+sbyte[] sbytes = new sbyte[bytes.Length+1]; //signed bytes
+sbytes[0] = 0; //set sign byte to zero.
+for(int i=1; i<sbytes.Length; i++)
+sbytes[i] = (sbyte) bytes[i-1]; //cast byte-->sbyte
+*/
                 System.Text.Encoding encoder = System.Text.Encoding.GetEncoding("utf-8");
                 byte[] ibytes = encoder.GetBytes(content);
                 sbyte[] sbytes = SupportClass.ToSByteArray(ibytes);
@@ -122,8 +122,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1Object implementation
-        */
+/* Asn1Object implementation
+*/
 
         /// <summary> Call this method to encode the current instance into the
         /// specified output stream using the specified encoder object.
@@ -141,8 +141,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /*Asn1OctetString specific methods
-        */
+/*Asn1OctetString specific methods
+*/
 
         /// <summary> Returns the content of this Asn1OctetString as a byte array.</summary>
         [CLSCompliantAttribute(false)]

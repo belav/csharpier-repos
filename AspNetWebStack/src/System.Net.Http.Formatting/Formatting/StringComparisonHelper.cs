@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Web.Http;
@@ -12,7 +13,8 @@ namespace System.Net.Http.Formatting
     internal static class StringComparisonHelper
     {
         /// <summary>
-        /// Determines whether the specified <paramref name="value"/> is defined by the <see cref="StringComparison"/>
+        /// Determines whether the specified <paramref name="value"/> is defined by the <see
+        // cref="StringComparison"/>
         /// enumeration.
         /// </summary>
         /// <param name="value">The value to verify.</param>

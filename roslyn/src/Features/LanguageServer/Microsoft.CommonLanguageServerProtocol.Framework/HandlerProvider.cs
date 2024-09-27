@@ -87,7 +87,8 @@ internal class HandlerProvider : IHandlerProvider
                         requestResponseType.ResponseType
                     );
 
-                    // Using the lazy set of handlers, create a lazy instance that will resolve the set of handlers for the provider
+                    // Using the lazy set of handlers, create a lazy instance that will resolve the set of handlers for
+                    // the provider
                     // and then lookup the correct handler for the specified method.
 
                     CheckForDuplicates(method, methodHash);
@@ -270,7 +271,8 @@ internal class HandlerProvider : IHandlerProvider
     private record HandlerTypes(Type? RequestType, Type? ResponseType, Type RequestContext);
 
     /// <summary>
-    /// Retrieves the generic argument information from the request handler type without instantiating it.
+    /// Retrieves the generic argument information from the request handler type without instantiating
+    // it.
     /// </summary>
     private static List<HandlerTypes> ConvertHandlerTypeToRequestResponseTypes(Type handlerType)
     {

@@ -243,7 +243,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private static GraphNodeId GetPartialForDynamicType(GraphNodeIdName nodeName)
         {
-            // We always consider this to be the "Object" type since Progression takes a very metadata-ish view of the type
+            // We always consider this to be the "Object" type since Progression takes a very metadata-ish view
+            // of the type
             return GraphNodeId.GetPartial(nodeName, "Object");
         }
 
@@ -290,10 +291,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 }
 
                 // For the property "GenericArguments", we only populate them
-                // when type parameters are constructed using instance types (i.e., namedType.ConstructedFrom != namedType).
-                // However, there is a case where we need to populate "GenericArguments" even though arguments are not marked as "constructed"
-                // because a symbol is not marked as "constructed" when a type is constructed using its own type parameters.
-                // To distinguish this case, we use "isInGenericArguments" flag which we pass either to populate arguments recursively or to populate "ParentType".
+                // when type parameters are constructed using instance types (i.e., namedType.ConstructedFrom !=
+                // namedType).
+                // However, there is a case where we need to populate "GenericArguments" even though arguments are
+                // not marked as "constructed"
+                // because a symbol is not marked as "constructed" when a type is constructed using its own type
+                // parameters.
+                // To distinguish this case, we use "isInGenericArguments" flag which we pass either to populate
+                // arguments recursively or to populate "ParentType".
 
                 var hasGenericArguments =
                     (!Equals(namedType.ConstructedFrom, namedType) || isInGenericArguments)
@@ -538,7 +543,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     )
                     {
                         // For explicit/implicit conversion operators, we need to include the return type in the method Id,
-                        // because there can be several conversion operators with same parameters and only differ by return type.
+                        // because there can be several conversion operators with same parameters and only differ by return
+                        // type.
                         // For example,
                         //
                         //     public class Class1
@@ -593,7 +599,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         private static object MakeCollectionIfNecessary(GraphNodeId[] array)
         {
-            // Place the array of GraphNodeId's into the collection if necessary, so to make them appear in VS Properties Panel
+            // Place the array of GraphNodeId's into the collection if necessary, so to make them appear in VS
+            // Properties Panel
             if (array.Length > 1)
             {
                 return new GraphNodeIdCollection(false, array);
@@ -663,7 +670,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             else
             {
                 // This symbol is not present in the source code, we need to resolve it from the references!
-                // If a MetadataReference returned by Compilation.GetMetadataReference(AssemblySymbol) has a path, we could use it.
+                // If a MetadataReference returned by Compilation.GetMetadataReference(AssemblySymbol) has a path,
+                // we could use it.
                 foreach (var project in solution.Projects)
                 {
                     var compilation = await project
@@ -800,11 +808,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         }
 
         /// <summary>
-        /// Get the position of where a given local variable is defined considering there could be multiple variables with the same name in method body.
+        /// Get the position of where a given local variable is defined considering there could be multiple
+        // variables with the same name in method body.
         /// For example, in "int M() { { int goo = 0; ...} { int goo = 1; ...} }",
         /// the return value for the first "goo" would be 0 while the value for the second one would be 1.
         /// It will be used to create a node with LocalVariableIndex for a non-zero value.
-        /// In the above example, hence, a node id for the first "goo" would look like (... Member=M LocalVariable=bar)
+        /// In the above example, hence, a node id for the first "goo" would look like (... Member=M
+        // LocalVariable=bar)
         /// but an id for the second "goo" would be (... Member=M LocalVariable=bar LocalVariableIndex=1)
         /// </summary>
         private static async Task<int> GetLocalVariableIndexAsync(

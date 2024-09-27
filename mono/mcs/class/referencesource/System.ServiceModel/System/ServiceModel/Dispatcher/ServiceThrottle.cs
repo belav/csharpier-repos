@@ -250,7 +250,8 @@ namespace System.ServiceModel.Dispatcher
                 InitializeInstancePerfCounterSettings(this.instanceContexts);
             }
 
-            //this.calls and this.sessions throttles are created by the constructor. Set the perf counter callbacks
+            //this.calls and this.sessions throttles are created by the constructor. Set the perf counter
+            // callbacks
             InitializeCallsPerfCounterSettings();
             InitializeSessionsPerfCounterSettings();
         }

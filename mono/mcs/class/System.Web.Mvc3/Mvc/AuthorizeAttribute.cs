@@ -51,7 +51,8 @@
             }
         }
 
-        // This method must be thread-safe since it is called by the thread-safe OnCacheAuthorization() method.
+        // This method must be thread-safe since it is called by the thread-safe OnCacheAuthorization()
+        // method.
         protected virtual bool AuthorizeCore(HttpContextBase httpContext)
         {
             if (httpContext == null)

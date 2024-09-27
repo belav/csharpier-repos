@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
     public static partial class ServiceCollectionDescriptorExtensions
     {
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
         /// <param name="collection">The <see cref="IServiceCollection"/>.</param>
@@ -31,7 +32,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// with the <paramref name="implementationType"/> implementation
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -60,7 +62,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// using the factory specified in <paramref name="implementationFactory"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -88,7 +91,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
         /// <typeparam name="TService">The type of the service to add.</typeparam>
@@ -105,7 +109,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// implementation type specified in <typeparamref name="TImplementation"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -127,7 +132,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Transient"/>
+        // service
         /// using the factory specified in <paramref name="implementationFactory"/>
         /// to the <paramref name="services"/> if the service type hasn't already been registered.
         /// </summary>
@@ -220,7 +226,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/>
+        // service
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
         /// <typeparam name="TService">The type of the service to add.</typeparam>
@@ -237,7 +244,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/>
+        // service
         /// implementation type specified in <typeparamref name="TImplementation"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -259,7 +267,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Scoped"/>
+        // service
         /// using the factory specified in <paramref name="implementationFactory"/>
         /// to the <paramref name="services"/> if the service type hasn't already been registered.
         /// </summary>
@@ -278,7 +287,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
         /// <param name="collection">The <see cref="IServiceCollection"/>.</param>
@@ -299,7 +309,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// with the <paramref name="implementationType"/> implementation
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -328,7 +339,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <paramref name="service"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// using the factory specified in <paramref name="implementationFactory"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -356,7 +368,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
         /// <typeparam name="TService">The type of the service to add.</typeparam>
@@ -373,7 +386,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// implementation type specified in <typeparamref name="TImplementation"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -395,7 +409,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// with an instance specified in <paramref name="instance"/>
         /// to the <paramref name="collection"/> if the service type hasn't already been registered.
         /// </summary>
@@ -422,7 +437,8 @@ namespace Microsoft.Extensions.DependencyInjection.Extensions
         }
 
         /// <summary>
-        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/> service
+        /// Adds the specified <typeparamref name="TService"/> as a <see cref="ServiceLifetime.Singleton"/>
+        // service
         /// using the factory specified in <paramref name="implementationFactory"/>
         /// to the <paramref name="services"/> if the service type hasn't already been registered.
         /// </summary>

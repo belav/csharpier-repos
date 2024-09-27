@@ -108,7 +108,8 @@ namespace System.ServiceModel.Channels
             if (cmgr != null)
                 hwr.CookieContainer = cmgr.CookieContainer;
 
-            // client authentication (while SL3 has NetworkCredential class, it is not implemented yet. So, it is non-SL only.)
+            // client authentication (while SL3 has NetworkCredential class, it is not implemented yet. So, it
+            // is non-SL only.)
             var httpbe = (HttpTransportBindingElement)source.Transport;
             string authType = null;
             switch (httpbe.AuthenticationScheme)

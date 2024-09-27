@@ -54,9 +54,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
 
         /// <returns>
         /// <list type="bullet">
-        /// <item><description><see langword="true"/> if <paramref name="applyFix"/> is specified and the fix is successfully applied</description></item>
-        /// <item><description><see langword="false"/> if <paramref name="applyFix"/> is specified but the fix is not successfully applied</description></item>
-        /// <item><description><see langword="null"/> if <paramref name="applyFix"/> is false, so there is no fix to apply</description></item>
+        /// <item><description><see langword="true"/> if <paramref name="applyFix"/> is specified and the
+        // fix is successfully applied</description></item>
+        /// <item><description><see langword="false"/> if <paramref name="applyFix"/> is specified but the
+        // fix is not successfully applied</description></item>
+        /// <item><description><see langword="null"/> if <paramref name="applyFix"/> is false, so there is
+        // no fix to apply</description></item>
         /// </list>
         /// </returns>
         public static async Task<bool?> CodeActionsAsync(

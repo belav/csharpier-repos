@@ -3,11 +3,14 @@
 
 /*
 A --> B --> C --> D --> E --> A
-3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3 starts initialization at E.
+3 threads: Thread T1 starts initialization at A, thread T2 starts initialization at C, and thread T3
+starts initialization at E.
 A::.cctor sleeps for a few seconds so Thread T1 is blocked.
-T2 invokes C::.cctor ' D::.cctor ' E::.cctor ' A::.cctor at which point T2 becomes blocked waiting for T1.
+T2 invokes C::.cctor ' D::.cctor ' E::.cctor ' A::.cctor at which point T2 becomes blocked waiting
+for T1.
 T3 is blocked because T2 is in E::.cctor.
-T1 becomes unblocked, invokes B::.cctor, wants to invoke C::.cctor but, T2 is in C::.cctor so we get a 3 thread deadlock.
+T1 becomes unblocked, invokes B::.cctor, wants to invoke C::.cctor but, T2 is in C::.cctor so we get
+a 3 thread deadlock.
 We detect the deadlock and allow T1 to see C.i uninitialized state.
 
 In B.cctor: thread T1: C.i 0

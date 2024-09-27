@@ -25,7 +25,8 @@ public class SocketTransportOptions
     internal bool FinOnError { get; set; } = _finOnError;
 
     /// <summary>
-    /// The number of I/O queues used to process requests. Set to 0 to directly schedule I/O to the ThreadPool.
+    /// The number of I/O queues used to process requests. Set to 0 to directly schedule I/O to the
+    // ThreadPool.
     /// </summary>
     /// <remarks>
     /// Defaults to <see cref="Environment.ProcessorCount" /> rounded down and clamped between 1 and 16.
@@ -33,7 +34,8 @@ public class SocketTransportOptions
     public int IOQueueCount { get; set; } = Math.Min(Environment.ProcessorCount, 16);
 
     /// <summary>
-    /// Wait until there is data available to allocate a buffer. Setting this to false can increase throughput at the cost of increased memory usage.
+    /// Wait until there is data available to allocate a buffer. Setting this to false can increase
+    // throughput at the cost of increased memory usage.
     /// </summary>
     /// <remarks>
     /// Defaults to true.
@@ -59,7 +61,8 @@ public class SocketTransportOptions
     /// <summary>
     /// Gets or sets the maximum unconsumed incoming bytes the transport will buffer.
     /// <para>
-    /// A value of <see langword="null"/> or 0 disables backpressure entirely allowing unlimited buffering.
+    /// A value of <see langword="null"/> or 0 disables backpressure entirely allowing unlimited
+    // buffering.
     /// Unlimited server buffering is a security risk given untrusted clients.
     /// </para>
     /// </summary>
@@ -69,9 +72,11 @@ public class SocketTransportOptions
     public long? MaxReadBufferSize { get; set; } = 1024 * 1024;
 
     /// <summary>
-    /// Gets or sets the maximum outgoing bytes the transport will buffer before applying write backpressure.
+    /// Gets or sets the maximum outgoing bytes the transport will buffer before applying write
+    // backpressure.
     /// <para>
-    /// A value of <see langword="null"/> or 0 disables backpressure entirely allowing unlimited buffering.
+    /// A value of <see langword="null"/> or 0 disables backpressure entirely allowing unlimited
+    // buffering.
     /// Unlimited server buffering is a security risk given untrusted clients.
     /// </para>
     /// </summary>
@@ -85,9 +90,11 @@ public class SocketTransportOptions
     /// </summary>
     /// <remarks>
     /// This will run application code on the IO thread which is why this is unsafe.
-    /// It is recommended to set the DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS environment variable to '1' when using this setting to also inline the completions
+    /// It is recommended to set the DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS environment variable
+    // to '1' when using this setting to also inline the completions
     /// at the runtime layer as well.
-    /// This setting can make performance worse if there is expensive work that will end up holding onto the IO thread for longer than needed.
+    /// This setting can make performance worse if there is expensive work that will end up holding onto
+    // the IO thread for longer than needed.
     /// Test to make sure this setting helps performance.
     /// </remarks>
     /// <remarks>
@@ -113,7 +120,8 @@ public class SocketTransportOptions
 
     /// <summary>
     /// Creates a default instance of <see cref="Socket"/> for the given <see cref="EndPoint"/>
-    /// that can be used by a connection listener to listen for inbound requests. <see cref="Socket.Bind"/>
+    /// that can be used by a connection listener to listen for inbound requests. <see
+    // cref="Socket.Bind"/>
     /// is called by this method.
     /// </summary>
     /// <param name="endpoint">

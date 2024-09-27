@@ -175,7 +175,8 @@ namespace System.Workflow.ComponentModel.Design
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
-                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the viewport
+                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the
+                // viewport
                 //bitmap with visual depth consideration
                 transformationMatrix.Translate(
                     -logicalViewPortOrigin[0].X + viewPortData.ShadowDepth.Width,
@@ -262,7 +263,8 @@ namespace System.Workflow.ComponentModel.Design
                     rootDesignerSize.Height + DefaultWorkflowLayout.Separator.Height * 2
                 );
                 Size clientSize = this.parentView.ViewPortSize;
-                //since the activity designer doesnt take the full viewport area, we need to scale available viewport back by the zoom factor
+                //since the activity designer doesnt take the full viewport area, we need to scale available
+                // viewport back by the zoom factor
                 clientSize.Width = (int)(clientSize.Width / ((float)this.parentView.Zoom / 100.0f));
                 clientSize.Height = (int)(
                     clientSize.Height / ((float)this.parentView.Zoom / 100.0f)
@@ -306,7 +308,8 @@ namespace System.Workflow.ComponentModel.Design
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
-                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the viewport
+                //For performance improvement and to eliminate one extra DrawImage...we draw the designers on the
+                // viewport
                 //bitmap with visual depth consideration
                 transformationMatrix.Translate(
                     -logicalViewPortOrigin[0].X + viewPortData.ShadowDepth.Width,
@@ -603,7 +606,8 @@ namespace System.Workflow.ComponentModel.Design
 
         public override Point MapInCoOrdToLayout(Point logicalPoint)
         {
-            //Only for default layout we scale the coordinates outside the pageboundry for all other cases scaling fails
+            //Only for default layout we scale the coordinates outside the pageboundry for all other cases
+            // scaling fails
             foreach (PageLayoutData pageLayoutData in this.pageLayoutInfo)
             {
                 if (pageLayoutData.PageBounds.Contains(logicalPoint))
@@ -662,8 +666,10 @@ namespace System.Workflow.ComponentModel.Design
             if (ambientTheme.WorkflowWatermarkImage == null)
                 return;
 
-            //Create the transformation matrix and calculate the physical viewport without translation and scaling
-            //We need to get the physical view port due to the fact that there can be circustances when zoom percentage
+            //Create the transformation matrix and calculate the physical viewport without translation and
+            // scaling
+            //We need to get the physical view port due to the fact that there can be circustances when zoom
+            // percentage
             //is very high, logical view port can be empty in such cases
             GraphicsContainer graphicsState = graphics.BeginContainer();
             Matrix coOrdTxMatrix = new Matrix();
@@ -770,8 +776,10 @@ namespace System.Workflow.ComponentModel.Design
                 int currentPage = 0;
                 Matrix emptyMatrix = new Matrix();
 
-                //Create the transformation matrix and calculate the physical viewport without translation and scaling
-                //We need to get the physical view port due to the fact that there can be circustances when zoom percentage
+                //Create the transformation matrix and calculate the physical viewport without translation and
+                // scaling
+                //We need to get the physical view port due to the fact that there can be circustances when zoom
+                // percentage
                 //is very high, logical view port can be empty in such cases
                 Matrix coOrdTxMatrix = new Matrix();
                 coOrdTxMatrix.Scale(
@@ -945,7 +953,8 @@ namespace System.Workflow.ComponentModel.Design
             if (graphics == null)
                 throw new ArgumentException("graphics");
 
-            //Set the scaling, pageSize, margins, pageseparator by reserse scaling; so that when we actually scale
+            //Set the scaling, pageSize, margins, pageseparator by reserse scaling; so that when we actually
+            // scale
             //at the time of drawing things will be correctly calculated
             Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
             Size paperSize = GetPaperSize(graphics);
@@ -990,7 +999,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 //Take the minimum scaling as we do not want to unevenly scale the bitmap
                 this.scaling = Math.Min(scaleFactor.X, scaleFactor.Y);
-                //leave just 3 digital points (also, that will remove potential problems with ceiling e.g. when the number of pages would be 3.00000000001 we'll get 4)
+                //leave just 3 digital points (also, that will remove potential problems with ceiling e.g. when the
+                // number of pages would be 3.00000000001 we'll get 4)
                 this.scaling = (float)(Math.Floor((double)this.scaling * 1000.0d) / 1000.0d);
             }
 
@@ -1021,7 +1031,8 @@ namespace System.Workflow.ComponentModel.Design
                 Convert.ToInt32(Math.Ceiling(((float)PageSeparator.Height) / this.scaling))
             );
 
-            //STEP4: Calculate the margins after reverse scaling the margins, so that when we set the normal scalezoom we have correct margins
+            //STEP4: Calculate the margins after reverse scaling the margins, so that when we set the normal
+            // scalezoom we have correct margins
             PageMargins = margins;
             PageMargins.Left = Convert.ToInt32((float)PageMargins.Left / this.scaling);
             PageMargins.Right = Convert.ToInt32((float)PageMargins.Right / this.scaling);

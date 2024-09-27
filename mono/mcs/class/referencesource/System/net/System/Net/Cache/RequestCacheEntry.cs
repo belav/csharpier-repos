@@ -3,18 +3,18 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    RequestCacheEntry.cs
+RequestCacheEntry.cs
 
 Abstract:
-    Describes the attributes of a cache entry.
+Describes the attributes of a cache entry.
 
 
 Author:
 
-    Alexei Vopilov    21-Dec-2002
+Alexei Vopilov    21-Dec-2002
 
 Revision History:
-    Aug 25 2003 moved to a new class, accomodated Whidbey-M3 changes
+Aug 25 2003 moved to a new class, accomodated Whidbey-M3 changes
 
 --*/
 namespace System.Net.Cache

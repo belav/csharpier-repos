@@ -71,7 +71,8 @@ namespace System.Speech.Recognition.SrgsGrammar
 
         #region public Properties
 
-        // ISSUE: Do we need more constructors? Take a look at RuleElementCollection.AddOneOf methods. [Bug# 37115]
+        // ISSUE: Do we need more constructors? Take a look at RuleElementCollection.AddOneOf methods. [Bug#
+        // 37115]
         public Collection<SrgsItem> Items
         {
             get { return _items; }

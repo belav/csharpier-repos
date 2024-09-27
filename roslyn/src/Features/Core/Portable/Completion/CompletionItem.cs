@@ -45,22 +45,27 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// The text used to determine if the item matches the filter and is show in the list.
-        /// This is often the same as <see cref="DisplayText"/> but may be different in certain circumstances.
+        /// This is often the same as <see cref="DisplayText"/> but may be different in certain
+        // circumstances.
         /// </summary>
         public string FilterText => _filterText ?? DisplayText;
 
         /// <summary>
-        /// If provided, each additional string would be used in the same way as <see cref="FilterText"/> for item matching.
-        /// However, there's a key difference: matches of <see cref="AdditionalFilterTexts"/> is considered inferior than matches
+        /// If provided, each additional string would be used in the same way as <see cref="FilterText"/>
+        // for item matching.
+        /// However, there's a key difference: matches of <see cref="AdditionalFilterTexts"/> is considered
+        // inferior than matches
         /// of <see cref="FilterText"/> when they have identical pattern matching result.
         /// </summary>
         internal ImmutableArray<string> AdditionalFilterTexts { get; init; } =
             ImmutableArray<string>.Empty;
 
         /// <summary>
-        /// Returns <see langword="true"/> if <see cref="DisplayText"/> is identical to  <see cref="FilterText"/>.
+        /// Returns <see langword="true"/> if <see cref="DisplayText"/> is identical to  <see
+        // cref="FilterText"/>.
         /// Otherwise returns <see langword="false"/>.
-        /// Be aware that this value is independent from <see cref="HasAdditionalFilterTexts"/> and could return <see langword="false"/>
+        /// Be aware that this value is independent from <see cref="HasAdditionalFilterTexts"/> and could
+        // return <see langword="false"/>
         /// even if <see cref="HasAdditionalFilterTexts"/> is <see langword="true"/>.
         /// </summary>
         internal bool HasDifferentFilterText => _filterText != null;
@@ -69,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Completion
 
         /// <summary>
         /// The text used to determine the order that the item appears in the list.
-        /// This is often the same as the <see cref="DisplayText"/> but may be different in certain circumstances.
+        /// This is often the same as the <see cref="DisplayText"/> but may be different in certain
+        // circumstances.
         /// </summary>
         public string SortText { get; }
 
@@ -83,9 +89,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The span of the syntax element associated with this item.
         ///
-        /// The span identifies the text in the document that is used to filter the initial list presented to the user,
-        /// and typically represents the region of the document that will be changed if this item is committed.
-        /// The latter is not always true because individual provider is free to make more complex changes to the document.
+        /// The span identifies the text in the document that is used to filter the initial list presented
+        // to the user,
+        /// and typically represents the region of the document that will be changed if this item is
+        // committed.
+        /// The latter is not always true because individual provider is free to make more complex changes
+        // to the document.
         /// If this is the case, the provider should set <see cref="IsComplexTextEdit"/> to true.
         /// </summary>
         public TextSpan Span { get; internal set; }
@@ -350,9 +359,12 @@ namespace Microsoft.CodeAnalysis.Completion
         /// Creates a new <see cref="CompletionItem"/>
         /// </summary>
         /// <param name="displayText">The text that is displayed to the user.</param>
-        /// <param name="filterText">The text used to determine if the item matches the filter and is show in the list.</param>
-        /// <param name="sortText">The text used to determine the order that the item appears in the list.</param>
-        /// <param name="span">The span of the syntax element in the document associated with this item.</param>
+        /// <param name="filterText">The text used to determine if the item matches the filter and is show
+        // in the list.</param>
+        /// <param name="sortText">The text used to determine the order that the item appears in the
+        // list.</param>
+        /// <param name="span">The span of the syntax element in the document associated with this
+        // item.</param>
         /// <param name="properties">Additional information.</param>
         /// <param name="tags">Descriptive tags that may influence how the item is displayed.</param>
         /// <param name="rules">The rules that declare how this item should behave.</param>
@@ -466,7 +478,8 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Span"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Span"/> property
+        // changed.
         /// </summary>
         [Obsolete(
             "Not used anymore.  CompletionList.Span is used to control the span used for filtering.",
@@ -476,29 +489,34 @@ namespace Microsoft.CodeAnalysis.Completion
         public CompletionItem WithSpan(TextSpan span) => this;
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayText"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayText"/> property
+        // changed.
         /// </summary>
         public CompletionItem WithDisplayText(string text) => With(displayText: text);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayTextPrefix"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayTextPrefix"/>
+        // property changed.
         /// </summary>
         public CompletionItem WithDisplayTextPrefix(string displayTextPrefix) =>
             With(displayTextPrefix: displayTextPrefix);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayTextSuffix"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="DisplayTextSuffix"/>
+        // property changed.
         /// </summary>
         public CompletionItem WithDisplayTextSuffix(string displayTextSuffix) =>
             With(displayTextSuffix: displayTextSuffix);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="FilterText"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="FilterText"/> property
+        // changed.
         /// </summary>
         public CompletionItem WithFilterText(string text) => With(filterText: text);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="SortText"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="SortText"/> property
+        // changed.
         /// </summary>
         public CompletionItem WithSortText(string text) => With(sortText: text);
 
@@ -525,12 +543,14 @@ namespace Microsoft.CodeAnalysis.Completion
             With(properties: GetProperties().Add(new KeyValuePair<string, string>(name, value)));
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Tags"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Tags"/> property
+        // changed.
         /// </summary>
         public CompletionItem WithTags(ImmutableArray<string> tags) => With(tags: tags);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with a tag added to the <see cref="Tags"/> collection.
+        /// Creates a copy of this <see cref="CompletionItem"/> with a tag added to the <see cref="Tags"/>
+        // collection.
         /// </summary>
         public CompletionItem AddTag(string tag)
         {
@@ -550,18 +570,21 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Rules"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="Rules"/> property
+        // changed.
         /// </summary>
         public CompletionItem WithRules(CompletionItemRules rules) => With(rules: rules);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="IsComplexTextEdit"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="IsComplexTextEdit"/>
+        // property changed.
         /// </summary>
         public CompletionItem WithIsComplexTextEdit(bool isComplexTextEdit) =>
             With(isComplexTextEdit: isComplexTextEdit);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="AdditionalFilterTexts"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItem"/> with the <see cref="AdditionalFilterTexts"/>
+        // property changed.
         /// </summary>
         internal CompletionItem WithAdditionalFilterTexts(
             ImmutableArray<string> additionalFilterTexts

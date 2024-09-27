@@ -6,7 +6,8 @@ using System.Globalization;
 namespace System.ComponentModel.DataAnnotations
 {
     /// <summary>
-    ///     Validation attribute to assert a string property, field or parameter does not exceed a maximum length
+    ///     Validation attribute to assert a string property, field or parameter does not exceed a
+    // maximum length
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
@@ -42,14 +43,17 @@ namespace System.ComponentModel.DataAnnotations
         ///     It is assumed the <see cref="RequiredAttribute" /> is used if the value may not be null.
         /// </remarks>
         /// <param name="value">The value to test.</param>
-        /// <returns><c>true</c> if the value is null or less than or equal to the set maximum length</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
+        /// <returns><c>true</c> if the value is null or less than or equal to the set maximum
+        // length</returns>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
         public override bool IsValid(object? value)
         {
             // Check the lengths for legality
             EnsureLegalLengths();
 
-            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not null.
+            // Automatically pass if value is null. RequiredAttribute should be used to assert a value is not
+            // null.
             // We expect a cast exception if a non-string was passed in.
             if (value == null)
             {
@@ -65,7 +69,8 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="name">The name to include in the formatted string</param>
         /// <returns>A localized string to describe the maximum acceptable length</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
         public override string FormatErrorMessage(string name)
         {
             EnsureLegalLengths();
@@ -75,7 +80,8 @@ namespace System.ComponentModel.DataAnnotations
                 ? SR.StringLengthAttribute_ValidationErrorIncludingMinimum
                 : ErrorMessageString;
 
-            // it's ok to pass in the minLength even for the error message without a {2} param since string.Format will just
+            // it's ok to pass in the minLength even for the error message without a {2} param since
+            // string.Format will just
             // ignore extra arguments
             return string.Format(
                 CultureInfo.CurrentCulture,
@@ -87,7 +93,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         /// <summary>
-        ///     Checks that MinimumLength and MaximumLength have legal values.  Throws InvalidOperationException if not.
+        ///     Checks that MinimumLength and MaximumLength have legal values.  Throws
+        // InvalidOperationException if not.
         /// </summary>
         private void EnsureLegalLengths()
         {

@@ -772,7 +772,8 @@ public static class XmlDictionaryWriterTest
             }
         );
 
-        // Write more than 512 bytes in a single call to trigger different writing logic in XmlStreamNodeWriter.WriteBytes
+        // Write more than 512 bytes in a single call to trigger different writing logic in
+        // XmlStreamNodeWriter.WriteBytes
         long[] many_longs = Enumerable
             .Range(0x01020304, 127)
             .Select(i => (long)i | (long)(~i << 32))

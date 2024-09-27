@@ -2,18 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
-Test_Struct_ImplicitOverrideVirtualNewslotFinal the following matrix for structs with virtual newslot final methods (implicit override):
+Test_Struct_ImplicitOverrideVirtualNewslotFinal the following matrix for structs with virtual
+newslot final methods (implicit override):
 
 Non-Generic virtual methods:
-                        Non-generic Interface	Generic Interface
-        Non-generic type  			N/A				Test4
-        Generic type				Test2			Test6
+Non-generic Interface	Generic Interface
+Non-generic type  			N/A				Test4
+Generic type				Test2			Test6
 
 
 Generic virtual methods:
-                        Non-generic Interface	Generic Interface
-        Non-generic type			Test1 			Test5
-        Generic type				Test3			Test7
+Non-generic Interface	Generic Interface
+Non-generic type			Test1 			Test5
+Generic type				Test3			Test7
 
 */
 

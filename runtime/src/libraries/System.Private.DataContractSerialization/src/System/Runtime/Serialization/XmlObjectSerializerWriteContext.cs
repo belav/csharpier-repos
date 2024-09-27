@@ -798,8 +798,11 @@ namespace System.Runtime.Serialization
             // (!UnsafeTypeForwardingEnabled) is always false
             //if (!UnsafeTypeForwardingEnabled && serInfo.AssemblyName == Globals.MscorlibAssemblyName)
             //{
-            //    // Throw if a malicious type tries to set its assembly name to "0" to get deserialized in mscorlib
-            //    throw XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ISerializableAssemblyNameSetToZero, DataContract.GetClrTypeFullName(obj.GetType())));
+            //    // Throw if a malicious type tries to set its assembly name to "0" to get deserialized in
+            // mscorlib
+            //    throw
+            // XmlObjectSerializer.CreateSerializationException(SR.Format(SR.ISerializableAssemblyNameSetToZero,
+            // DataContract.GetClrTypeFullName(obj.GetType())));
             //}
 
             WriteSerializationInfo(xmlWriter, objType, serInfo);

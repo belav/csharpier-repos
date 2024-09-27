@@ -68,7 +68,7 @@ namespace Sample
                 count++;
             assembly_count[assm] = count;
 
-            /* FIXME WASM: Location is empty on wasm. Make up a name based on Name */
+/* FIXME WASM: Location is empty on wasm. Make up a name based on Name */
             string basename = assm.Location;
             if (basename == "")
                 basename = assm.GetName().Name + ".dll";

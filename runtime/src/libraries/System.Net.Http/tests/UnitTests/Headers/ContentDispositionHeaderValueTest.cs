@@ -38,7 +38,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Ctor_ContentDispositionInvalidFormat_ThrowFormatException()
         {
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             AssertFormatException(" inline ");
             AssertFormatException(" inline");
             AssertFormatException("inline ");
@@ -727,7 +728,8 @@ namespace System.Net.Http.Tests
             CheckValidParse(" inline  ", expected);
             CheckValidParse("inline", expected);
 
-            // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+            // We don't have to test all possible input strings, since most of the pieces are handled by other
+            // parsers.
             // The purpose of this test is to verify that these other parsers are combined correctly to build a
             // Content-Disposition parser.
             expected.Name = "myName";

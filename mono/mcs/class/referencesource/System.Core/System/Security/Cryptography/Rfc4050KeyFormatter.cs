@@ -19,7 +19,8 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Security.Cryptography
 {
     /// <summary>
-    ///     Utility class to convert ECC keys into XML and back using a format similar to the one described
+    ///     Utility class to convert ECC keys into XML and back using a format similar to the one
+    // described
     ///     in RFC 4050 (http://www.ietf.org/rfc/rfc4050.txt).
     ///
     ///     #RFC4050ECKeyFormat
@@ -249,8 +250,10 @@ namespace System.Security.Cryptography
                 yLen--;
             }
 
-            // Q.X and Q.Y have to be the same length.  They ultimately have to be the right length for the curve,
-            // but that requires more knowledge than we have. So we'll ask the system. If it doesn't know, just make
+            // Q.X and Q.Y have to be the same length.  They ultimately have to be the right length for the
+            // curve,
+            // but that requires more knowledge than we have. So we'll ask the system. If it doesn't know, just
+            // make
             // them match each other.
             int requiredLength = Math.Max(xLen, yLen);
 

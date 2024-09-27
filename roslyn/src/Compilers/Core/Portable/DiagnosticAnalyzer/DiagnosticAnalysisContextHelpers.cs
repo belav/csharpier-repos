@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (!UnicodeCharacterUtilities.IsValidIdentifier(diagnostic.Id))
             {
                 // Disallow invalid diagnostic IDs.
-                // Note that the parsing logic in Csc/Vbc MSBuild tasks to decode command line compiler output relies on diagnostics having a valid ID.
+                // Note that the parsing logic in Csc/Vbc MSBuild tasks to decode command line compiler output
+                // relies on diagnostics having a valid ID.
                 // See https://github.com/dotnet/roslyn/issues/4376 for details.
                 throw new ArgumentException(
                     string.Format(CodeAnalysisResources.InvalidDiagnosticIdReported, diagnostic.Id),

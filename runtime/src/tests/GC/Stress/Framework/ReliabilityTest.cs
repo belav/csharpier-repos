@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;
@@ -91,11 +92,15 @@ public class TestAssemblyLoadContext : AssemblyLoadContext
     public string FriendlyName { get; private set; }
 }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// <summary>
-/// The reliability class is the place where we keep track of information for each individual test.  ReliabilityConfiguration
-/// first builds a hashtable of ReliabilityTest's (index by their name attribute) available in the primary configuration file,
-/// and then uses this hashtable to pull out the actual tests which we want to run (from the test config file) by the ID attribute
+/// The reliability class is the place where we keep track of information for each individual test.
+// ReliabilityConfiguration
+/// first builds a hashtable of ReliabilityTest's (index by their name attribute) available in the
+// primary configuration file,
+/// and then uses this hashtable to pull out the actual tests which we want to run (from the test
+// config file) by the ID attribute
 /// on each test specified.
 /// </summary>
 public class ReliabilityTest
@@ -304,7 +309,8 @@ public class ReliabilityTest
     }
 
     /// <summary>
-    /// returns the debugger, with full path.  On assignment it should just be a simple filename (eg, "cdb", "windbg", or "ntsd")
+    /// returns the debugger, with full path.  On assignment it should just be a simple filename (eg,
+    // "cdb", "windbg", or "ntsd")
     /// </summary>
     public string Debugger
     {
@@ -375,7 +381,8 @@ public class ReliabilityTest
     }
 
     /// <summary>
-    /// This stores the filename used to get the result back from batch files on Win9x systems (exitcode.exe stores it in this file, we read it back)
+    /// This stores the filename used to get the result back from batch files on Win9x systems
+    // (exitcode.exe stores it in this file, we read it back)
     /// </summary>
     public string ResultFilename
     {

@@ -14,7 +14,8 @@ namespace Microsoft.AspNetCore.Mvc.Testing;
 /// <see cref="Key"/> is equal to <c>TEntryPoint</c> <see cref="Assembly.FullName"/>,
 /// order them by <see cref="Priority"/> in ascending order.
 /// <see cref="WebApplicationFactory{TEntryPoint}"/> will check for the existence of the marker
-/// in <c>Path.Combine(<see cref="ContentRootPath"/>, Path.GetFileName(<see cref="ContentRootTest"/>))"</c>
+/// in <c>Path.Combine(<see cref="ContentRootPath"/>, Path.GetFileName(<see
+// cref="ContentRootTest"/>))"</c>
 /// and if the file exists it will set the content root to <see cref="ContentRootPath"/>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = true)]
@@ -26,19 +27,23 @@ public sealed class WebApplicationFactoryContentRootAttribute : Attribute
     /// <param name="key">
     /// The key of this <see cref="WebApplicationFactoryContentRootAttribute"/>. This
     /// key is used by <see cref="WebApplicationFactory{TEntryPoint}"/> to determine what of the
-    /// <see cref="WebApplicationFactoryContentRootAttribute"/> instances on the test assembly should be used
+    /// <see cref="WebApplicationFactoryContentRootAttribute"/> instances on the test assembly should be
+    // used
     /// to match a given TEntryPoint class.
     /// </param>
-    /// <param name="contentRootPath">The path to the content root. This path can be either relative or absolute.
+    /// <param name="contentRootPath">The path to the content root. This path can be either relative or
+    // absolute.
     /// In case the path is relative, the path will be combined with
     /// <see cref="Directory.GetCurrentDirectory()"/></param>
     /// <param name="contentRootTest">
-    /// A file that will be use as a marker to determine that the content root path for the given context is correct.
+    /// A file that will be use as a marker to determine that the content root path for the given
+    // context is correct.
     /// </param>
     /// <param name="priority">
     /// The priority of this content root attribute compared to other attributes. When
     /// multiple <see cref="WebApplicationFactoryContentRootAttribute"/> instances are applied for the
-    /// same key, they are processed with <see cref="int.Parse(string)"/>, ordered in ascending order and applied
+    /// same key, they are processed with <see cref="int.Parse(string)"/>, ordered in ascending order
+    // and applied
     /// in priority until a match is found.
     /// </param>
     public WebApplicationFactoryContentRootAttribute(
@@ -65,12 +70,14 @@ public sealed class WebApplicationFactoryContentRootAttribute : Attribute
     }
 
     /// <summary>
-    /// Gets the key for the content root associated with this project. Typically <see cref="Assembly.FullName"/>.
+    /// Gets the key for the content root associated with this project. Typically <see
+    // cref="Assembly.FullName"/>.
     /// </summary>
     public string Key { get; }
 
     /// <summary>
-    /// Gets the content root path for a given project. This content root can be relative or absolute. If it is a
+    /// Gets the content root path for a given project. This content root can be relative or absolute.
+    // If it is a
     /// relative path, it will be combined with <see cref="AppContext.BaseDirectory"/>.
     /// </summary>
     public string ContentRootPath { get; }
@@ -81,7 +88,8 @@ public sealed class WebApplicationFactoryContentRootAttribute : Attribute
     public string ContentRootTest { get; }
 
     /// <summary>
-    /// Gets a number for determining the probing order when multiple <see cref="WebApplicationFactoryContentRootAttribute"/>
+    /// Gets a number for determining the probing order when multiple <see
+    // cref="WebApplicationFactoryContentRootAttribute"/>
     /// instances with the same key are present on the test <see cref="Assembly"/>.
     /// </summary>
     public int Priority { get; }

@@ -32,7 +32,8 @@ namespace System
         }
 
         /// <summary>
-        /// We have this separate method for getting the parsed elements out of the TargetFrameworkName so we can
+        /// We have this separate method for getting the parsed elements out of the TargetFrameworkName so
+        // we can
         /// more easily support this on other platforms.
         /// </summary>
         private static void ParseTargetFrameworkName(
@@ -59,7 +60,8 @@ namespace System
 #if FEATURE_CORECLR
                 if (CompatibilitySwitches.UseLatestBehaviorWhenTFMNotSpecified)
                 {
-                    // If we want to use the latest behavior it is enough to set the value of the switch to string.Empty.
+                    // If we want to use the latest behavior it is enough to set the value of the switch to
+                    // string.Empty.
                     // When the get to the caller of this method (PopulateDefaultValuesPartial) we are going to use the
                     // identifier we just set to decide which switches to turn on. By having an empty string as the
                     // identifier we are simply saying -- don't turn on any switches, and we are going to get the latest
@@ -80,7 +82,8 @@ namespace System
         // Parses strings in the following format: "<identifier>, Version=[v|V]<version>, Profile=<profile>"
         //  - The identifier and version is required, profile is optional
         //  - Only three components are allowed.
-        //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is allowed
+        //  - The version string must be in the System.Version format; an optional "v" or "V" prefix is
+        // allowed
         private static bool TryParseFrameworkName(
             String frameworkName,
             out String identifier,
@@ -186,8 +189,10 @@ namespace System
             return true;
         }
 
-        // This is a partial method. Platforms (such as Desktop) can provide an implementation of it that will read override value
-        // from whatever mechanism is available on that platform. If no implementation is provided, the compiler is going to remove the calls
+        // This is a partial method. Platforms (such as Desktop) can provide an implementation of it that
+        // will read override value
+        // from whatever mechanism is available on that platform. If no implementation is provided, the
+        // compiler is going to remove the calls
         // to it from the code
         static partial void TryGetSwitchOverridePartial(
             string switchName,
@@ -195,8 +200,10 @@ namespace System
             ref bool overrideValue
         );
 
-        /// This is a partial method. This method is responsible for populating the default values based on a TFM.
-        /// It is partial because each library should define this method in their code to contain their defaults.
+        /// This is a partial method. This method is responsible for populating the default values based on
+        // a TFM.
+        /// It is partial because each library should define this method in their code to contain their
+        // defaults.
         static partial void PopulateDefaultValuesPartial(
             string platformIdentifier,
             string profile,

@@ -15,7 +15,8 @@ namespace System.Web.Services.Protocols
     {
         MatchType matchType;
 
-        /// <include file='doc\PatternMatcher.uex' path='docs/doc[@for="PatternMatcher.PatternMatcher"]/*' />
+        /// <include file='doc\PatternMatcher.uex' path='docs/doc[@for="PatternMatcher.PatternMatcher"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

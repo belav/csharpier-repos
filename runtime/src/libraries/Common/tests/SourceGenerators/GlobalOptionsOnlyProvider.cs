@@ -14,7 +14,8 @@ using SourceGenerators.Tests;
 namespace SourceGenerators.Tests
 {
     /// <summary>
-    /// An implementation of <see cref="AnalyzerConfigOptionsProvider"/> that provides configuration in code
+    /// An implementation of <see cref="AnalyzerConfigOptionsProvider"/> that provides configuration in
+    // code
     /// of global options.
     /// </summary>
     internal class GlobalOptionsOnlyProvider : AnalyzerConfigOptionsProvider

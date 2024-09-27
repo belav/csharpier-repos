@@ -376,7 +376,8 @@ namespace System.Workflow.ComponentModel.Design
                         else
                         {
                             //Uncomment the following code for fluctuating transparency
-                            //1.0f - ((float)Convert.ToInt32(distance)) / Math.Max(ParentView.ViewPortSize.Width, ParentView.ViewPortSize.Height);
+                            //1.0f - ((float)Convert.ToInt32(distance)) / Math.Max(ParentView.ViewPortSize.Width,
+                            // ParentView.ViewPortSize.Height);
                             transparency = 1.0f;
                         }
                     }

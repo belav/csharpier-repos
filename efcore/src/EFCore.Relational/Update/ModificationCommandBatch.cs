@@ -5,30 +5,36 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 /// <summary>
 ///     <para>
-///         A base class for a collection of <see cref="ModificationCommand" />s that can be executed
+///         A base class for a collection of <see cref="ModificationCommand" />s that can be
+// executed
 ///         as a batch.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public abstract class ModificationCommandBatch
 {
     /// <summary>
-    ///     The list of conceptual insert/update/delete <see cref="ModificationCommands" />s in the batch.
+    ///     The list of conceptual insert/update/delete <see cref="ModificationCommands" />s in the
+    // batch.
     /// </summary>
     public abstract IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands { get; }
 
     /// <summary>
-    ///     Attempts to adds the given insert/update/delete <paramref name="modificationCommand" /> to the batch.
+    ///     Attempts to adds the given insert/update/delete <paramref name="modificationCommand" /> to
+    // the batch.
     /// </summary>
     /// <param name="modificationCommand">The command to add.</param>
     /// <returns>
-    ///     <see langword="true" /> if the command was successfully added; <see langword="false" /> if there was no
+    ///     <see langword="true" /> if the command was successfully added; <see langword="false" /> if
+    // there was no
     ///     room in the current batch to add the command and it must instead be added to a new batch.
     /// </returns>
     public abstract bool TryAddCommand(IReadOnlyModificationCommand modificationCommand);
@@ -58,9 +64,11 @@ public abstract class ModificationCommandBatch
     ///     Sends insert/update/delete commands to the database.
     /// </summary>
     /// <param name="connection">The database connection to use.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public abstract Task ExecuteAsync(
         IRelationalConnection connection,
         CancellationToken cancellationToken = default

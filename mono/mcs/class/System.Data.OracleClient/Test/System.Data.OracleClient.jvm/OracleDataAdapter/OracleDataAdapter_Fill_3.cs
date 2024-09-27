@@ -81,7 +81,8 @@ namespace MonoTests.System.Data.OracleClient
                 exp = null;
             }
 
-            //add for bug #2508 - OLEDBDataAdapter.Fill fills only the 1st result set, reported from an evaluation
+            //add for bug #2508 - OLEDBDataAdapter.Fill fills only the 1st result set, reported from an
+            // evaluation
             if (
                 ConnectedDataProvider.GetDbType(oleDBda.SelectCommand.Connection)
                 == DataBaseServer.SQLServer

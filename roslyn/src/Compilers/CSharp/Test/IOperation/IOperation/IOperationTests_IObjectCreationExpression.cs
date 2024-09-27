@@ -391,7 +391,8 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
                     .WithArguments("int", "B")
                     .WithLocation(21, 36),
-                // file.cs(22,22): error CS1922: Cannot initialize type 'F' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
+                // file.cs(22,22): error CS1922: Cannot initialize type 'F' with a collection initializer because it
+                // does not implement 'System.Collections.IEnumerable'
                 //         F e2 = new() { "" };
                 Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
                     .WithArguments("F")
@@ -716,7 +717,8 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.In
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(5,23): warning CS0649: Field 'C.field' is never assigned to, and will always have its default value 0
+                // file.cs(5,23): warning CS0649: Field 'C.field' is never assigned to, and will always have its
+                // default value 0
                 //     private readonly int field;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                     .WithArguments("C.field", "0")
@@ -2063,17 +2065,23 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(9,33): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // file.cs(9,33): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection
+                // initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out
+                // parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
                     .WithArguments("C.Add(ref int)")
                     .WithLocation(9, 33),
-                // file.cs(9,36): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // file.cs(9,36): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection
+                // initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out
+                // parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2")
                     .WithArguments("C.Add(ref int)")
                     .WithLocation(9, 36),
-                // file.cs(9,39): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // file.cs(9,39): error CS1954: The best overloaded method match 'C.Add(ref int)' for the collection
+                // initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out
+                // parameters.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
                     .WithArguments("C.Add(ref int)")
@@ -2362,17 +2370,20 @@ class C : IEnumerable<int>
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(9,33): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // file.cs(9,33): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong
+                // signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1")
                     .WithArguments("C.Add(int)")
                     .WithLocation(9, 33),
-                // file.cs(9,36): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // file.cs(9,36): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong
+                // signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2")
                     .WithArguments("C.Add(int)")
                     .WithLocation(9, 36),
-                // file.cs(9,39): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // file.cs(9,39): error CS1921: The best overloaded method match for 'C.Add(int)' has wrong
+                // signature for the initializer element. The initializable Add must be an accessible instance method.
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
                     .WithArguments("C.Add(int)")
@@ -2939,7 +2950,8 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
                     .WithArguments("int", "B")
                     .WithLocation(24, 40),
-                // CS1922: Cannot initialize type 'F' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
+                // CS1922: Cannot initialize type 'F' with a collection initializer because it does not implement
+                // 'System.Collections.IEnumerable'
                 //         var e2 = new F() { "" };
                 Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
                     .WithArguments("F")
@@ -3760,17 +3772,20 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element
+                // cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "1")
                     .WithArguments("C.Add(ref int)")
                     .WithLocation(10, 35),
-                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element
+                // cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "2")
                     .WithArguments("C.Add(ref int)")
                     .WithLocation(10, 38),
-                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
+                // CS1954: The best overloaded method match 'C.Add(ref int)' for the collection initializer element
+                // cannot be used. Collection initializer 'Add' methods cannot have ref or out parameters.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
                     .WithArguments("C.Add(ref int)")
@@ -4070,17 +4085,20 @@ class C : IEnumerable<int>
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer
+                // element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "1")
                     .WithArguments("C.Add(int)")
                     .WithLocation(10, 35),
-                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer
+                // element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "2")
                     .WithArguments("C.Add(int)")
                     .WithLocation(10, 38),
-                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer element. The initializable Add must be an accessible instance method.
+                // CS1921: The best overloaded method match for 'C.Add(int)' has wrong signature for the initializer
+                // element. The initializable Add must be an accessible instance method.
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
                     .WithArguments("C.Add(int)")
@@ -5679,61 +5697,78 @@ class C3
             var expectedDiagnostics = new DiagnosticDescription[]
             {
                 // (8,70): error CS1525: Invalid expression term '{'
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
                     .WithArguments("{")
                     .WithLocation(8, 70),
                 // (8,70): error CS1026: ) expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "{").WithLocation(8, 70),
                 // (8,70): error CS1003: Syntax error, ':' expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(":").WithLocation(8, 70),
                 // (8,70): error CS1525: Invalid expression term '{'
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
                     .WithArguments("{")
                     .WithLocation(8, 70),
                 // (8,70): error CS1003: Syntax error, ',' expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(8, 70),
                 // (8,88): error CS1003: Syntax error, ',' expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(",").WithLocation(8, 88),
                 // (8,90): error CS1513: } expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(8, 90),
                 // (8,90): error CS1513: } expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(8, 90),
                 // (8,90): error CS1002: ; expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(8, 90),
                 // (8,90): error CS1513: } expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(8, 90),
                 // (8,93): error CS1525: Invalid expression term '{'
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "{")
                     .WithArguments("{")
                     .WithLocation(8, 93),
                 // (8,93): error CS1026: ) expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "{").WithLocation(8, 93),
                 // (8,93): error CS1002: ; expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "{").WithLocation(8, 93),
                 // (8,101): error CS1002: ; expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ",").WithLocation(8, 101),
                 // (8,101): error CS1513: } expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ",").WithLocation(8, 101),
                 // (8,110): error CS1002: ; expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "}").WithLocation(8, 110),
                 // (8,111): error CS1513: } expected
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(8, 111),
                 // (10,5): error CS1022: Type or namespace definition, or end-of-file expected
                 //     }
@@ -5742,26 +5777,31 @@ class C3
                 // }
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(11, 1),
                 // (8,72): error CS0103: The name 'P1' does not exist in the current context
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "P1")
                     .WithArguments("P1")
                     .WithLocation(8, 72),
                 // (8,80): error CS0103: The name 'P2' does not exist in the current context
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "P2")
                     .WithArguments("P2")
                     .WithLocation(8, 80),
                 // (8,70): error CS0747: Invalid initializer member declarator
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "{ P1 = 3, P2 = 4 }")
                     .WithLocation(8, 70),
                 // (8,95): error CS0103: The name 'P1' does not exist in the current context
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "P1")
                     .WithArguments("P1")
                     .WithLocation(8, 95),
                 // (8,103): error CS0103: The name 'P2' does not exist in the current context
-                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
+                //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1
+                // = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "P2")
                     .WithArguments("P2")
                     .WithLocation(8, 103),
@@ -7489,7 +7529,8 @@ class C1
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1922: Cannot initialize type 'C1' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
+                // CS1922: Cannot initialize type 'C1' with a collection initializer because it does not implement
+                // 'System.Collections.IEnumerable'
                 //         var x = new C1 { O[b ? 1 : 2] = null };
                 Diagnostic(
                         ErrorCode.ERR_CollectionInitRequiresIEnumerable,
@@ -9585,7 +9626,8 @@ class C2
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0070: The event 'C2.ev' can only appear on the left hand side of += or -= (except when used from within the type 'C2')
+                // CS0070: The event 'C2.ev' can only appear on the left hand side of += or -= (except when used
+                // from within the type 'C2')
                 //         var x = new C1 { C2 = { ev = b ? (EventHandler<object>)o : null } };
                 Diagnostic(ErrorCode.ERR_BadEventUsage, "ev")
                     .WithArguments("C2.ev", "C2")
@@ -10159,7 +10201,8 @@ class C2
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1922: Cannot initialize type 'Class' with a collection initializer because it does not implement 'System.Collections.IEnumerable'
+                // CS1922: Cannot initialize type 'Class' with a collection initializer because it does not
+                // implement 'System.Collections.IEnumerable'
                 //         Class c = new Class { (C21 ?? C22).I1 = 1 };
                 Diagnostic(
                         ErrorCode.ERR_CollectionInitRequiresIEnumerable,
@@ -14714,7 +14757,8 @@ class C1 : IEnumerable<int>
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(11,17): error CS7036: There is no argument given that corresponds to the required parameter 'x' of 'C1.C1(int)'
+                // file.cs(11,17): error CS7036: There is no argument given that corresponds to the required
+                // parameter 'x' of 'C1.C1(int)'
                 //         c = new C1 { i1 };
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C1")
                     .WithArguments("x", "C1.C1(int)")
@@ -15153,7 +15197,8 @@ public class MemberInitializerTest
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,52): error CS0120: An object reference is required for the non-static field, method, or property 'MemberInitializerTest.y'
+                // file.cs(7,52): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'MemberInitializerTest.y'
                 //         var i = new MemberInitializerTest { x = 0, y++ };
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "y")
                     .WithArguments("MemberInitializerTest.y")
@@ -15731,7 +15776,8 @@ class C
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(7,25): error CS1914: Static field or property 'C.i1' cannot be assigned in an object initializer
+                // file.cs(7,25): error CS1914: Static field or property 'C.i1' cannot be assigned in an object
+                // initializer
                 //         var c = new C { i1 = 1 };
                 Diagnostic(ErrorCode.ERR_StaticMemberInObjectInitializer, "i1")
                     .WithArguments("C.i1")
@@ -15998,7 +16044,8 @@ class C
 
             var diagnostics = new DiagnosticDescription[]
             {
-                // (7,14): error CS0304: Cannot create an instance of the variable type 'T2' because it does not have the new() constraint
+                // (7,14): error CS0304: Cannot create an instance of the variable type 'T2' because it does not
+                // have the new() constraint
                 //         x2 = new T2 { };
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T2 { }")
                     .WithArguments("T2")

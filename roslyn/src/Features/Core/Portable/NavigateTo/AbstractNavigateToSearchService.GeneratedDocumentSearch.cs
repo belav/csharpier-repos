@@ -95,7 +95,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             // compilations are available for later projects when needed.
             foreach (var project in projects)
             {
-                // First generate all the source-gen docs.  Then handoff to the standard search routine to find matches in them.
+                // First generate all the source-gen docs.  Then handoff to the standard search routine to find
+                // matches in them.
                 var sourceGeneratedDocs = await project
                     .GetSourceGeneratedDocumentsAsync(cancellationToken)
                     .ConfigureAwait(false);

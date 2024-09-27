@@ -4,10 +4,14 @@
 namespace Microsoft.EntityFrameworkCore.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Type>
 {
@@ -19,11 +23,13 @@ public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Ty
     public static readonly TypeFullNameComparer Instance = new();
 
     /// <summary>
-    ///     Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
+    ///     Compares two objects and returns a value indicating whether one is less than, equal to, or
+    // greater than the other.
     /// </summary>
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
-    /// <returns>A negative number if 'x' is less than 'y'; a positive number if 'x' is greater than 'y'; zero otherwise.</returns>
+    /// <returns>A negative number if 'x' is less than 'y'; a positive number if 'x' is greater than
+    // 'y'; zero otherwise.</returns>
     public int Compare(Type? x, Type? y)
     {
         if (ReferenceEquals(x, y))
@@ -49,7 +55,8 @@ public sealed class TypeFullNameComparer : IComparer<Type>, IEqualityComparer<Ty
     /// </summary>
     /// <param name="x">The first object to compare.</param>
     /// <param name="y">The second object to compare.</param>
-    /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified objects are equal; otherwise, <see
+    // langword="false" />.</returns>
     public bool Equals(Type? x, Type? y) => Compare(x, y) == 0;
 
     /// <summary>

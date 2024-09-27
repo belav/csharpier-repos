@@ -232,7 +232,8 @@ namespace System.Runtime.Serialization.Json
                 ilg.Load(objectArg);
 
                 // Copy the data from the DataTimeOffset object passed in to the DateTimeOffsetAdapter.
-                // DateTimeOffsetAdapter is used here for serialization purposes to bypass the ISerializable implementation
+                // DateTimeOffsetAdapter is used here for serialization purposes to bypass the ISerializable
+                // implementation
                 // on DateTimeOffset; which does not work in partial trust.
 
                 if (objType == Globals.TypeOfDateTimeOffsetAdapter)

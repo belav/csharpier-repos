@@ -22,7 +22,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="AsnEncodedData"/> class from existing encoded data.
+        ///   Initializes a new instance of the <see cref="AsnEncodedData"/> class from existing encoded
+        // data.
         /// </summary>
         /// <param name="rawData">
         ///   The Abstract Syntax Notation One (ASN.1)-encoded data.

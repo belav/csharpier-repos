@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Structure
         public string BannerText { get; }
 
         /// <summary>
-        /// Whether or not this region should be automatically collapsed when the 'Collapse to Definitions' command is invoked.
+        /// Whether or not this region should be automatically collapsed when the 'Collapse to Definitions'
+        // command is invoked.
         /// </summary>
         public bool AutoCollapse { get; }
 

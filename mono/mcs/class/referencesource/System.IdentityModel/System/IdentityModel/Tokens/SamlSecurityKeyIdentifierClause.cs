@@ -5,8 +5,10 @@
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class is used when a SamlAssertion is received without a KeyInfo inside the signature element.
-    /// The KeyInfo describes the key required to check the signature.  When the key is needed this clause
+    /// This class is used when a SamlAssertion is received without a KeyInfo inside the signature
+    // element.
+    /// The KeyInfo describes the key required to check the signature.  When the key is needed this
+    // clause
     /// will be presented to the current SecurityTokenResolver. It will contain the
     /// SamlAssertion fully read which can be querried to determine the key required.
     /// </summary>

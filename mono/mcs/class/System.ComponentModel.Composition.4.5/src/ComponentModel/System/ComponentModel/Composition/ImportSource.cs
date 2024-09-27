@@ -13,7 +13,8 @@ namespace System.ComponentModel.Composition
     public enum ImportSource : int
     {
         /// <summary>
-        /// The import can be satisfied with values from the current or parent (or other ancestor) containers  (scopes)
+        /// The import can be satisfied with values from the current or parent (or other ancestor)
+        // containers  (scopes)
         /// </summary>
         Any = 0,
 
@@ -23,7 +24,8 @@ namespace System.ComponentModel.Composition
         Local = 1,
 
         /// <summary>
-        /// The import can only be satisfied with values from the parent container (or other ancestor containers) (scopes)
+        /// The import can only be satisfied with values from the parent container (or other ancestor
+        // containers) (scopes)
         /// </summary>
         NonLocal = 2,
     }

@@ -103,7 +103,8 @@ internal partial class SerializerService : ISerializerService
                     return Checksum.Create(((SourceText)value).GetContentHash());
 
                 default:
-                    // object that is not part of solution is not supported since we don't know what inputs are required to
+                    // object that is not part of solution is not supported since we don't know what inputs are required
+                    // to
                     // serialize it
                     throw ExceptionUtilities.UnexpectedValue(kind);
             }
@@ -210,7 +211,8 @@ internal partial class SerializerService : ISerializerService
                     return;
 
                 default:
-                    // object that is not part of solution is not supported since we don't know what inputs are required to
+                    // object that is not part of solution is not supported since we don't know what inputs are required
+                    // to
                     // serialize it
                     throw ExceptionUtilities.UnexpectedValue(kind);
             }

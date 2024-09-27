@@ -54,14 +54,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 CodeAnalysisProgress.Description(originalFixAllContext.GetDefaultFixAllTitle())
             );
 
-            // We have 2*P + 1 pieces of work.  Computing diagnostics and fixes/changes per context, and then one pass
+            // We have 2*P + 1 pieces of work.  Computing diagnostics and fixes/changes per context, and then
+            // one pass
             // applying fixes.
             progressTracker.AddItems(fixAllContexts.Length * 2 + 1);
 
             // Mapping from document to the cumulative text changes created for that document.
             var docIdToTextMerger = new Dictionary<DocumentId, TextChangeMerger>();
 
-            // Process each context one at a time, allowing us to dump most of the information we computed for each once
+            // Process each context one at a time, allowing us to dump most of the information we computed for
+            // each once
             // done with it.  The only information we need to preserve is the data we store in docIdToTextMerger
             foreach (var fixAllContext in fixAllContexts)
             {
@@ -76,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     .ConfigureAwait(false);
             }
 
-            // Finally, merge in all text changes into the solution.  We can't do this per-project as we have to have
+            // Finally, merge in all text changes into the solution.  We can't do this per-project as we have to
+            // have
             // process *all* diagnostics in the solution to find the changes made to all documents.
             using (progressTracker.ItemCompletedScope())
             {
@@ -109,7 +112,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 )
                 .ConfigureAwait(false);
 
-            // Second, process all those diagnostics, merging the cumulative set of text changes per document into docIdToTextMerger.
+            // Second, process all those diagnostics, merging the cumulative set of text changes per document
+            // into docIdToTextMerger.
             await AddDocumentChangesAsync(
                     fixAllContext,
                     progressTracker,
@@ -155,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             using var _ = progressTracker.ItemCompletedScope();
 
-            // First, order the diagnostics so we process them in a consistent manner and get the same results given the
+            // First, order the diagnostics so we process them in a consistent manner and get the same results
+            // given the
             // same input solution.
             var orderedDiagnostics = documentToDiagnostics
                 .SelectMany(kvp => kvp.Value)
@@ -172,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                     )
                     .ConfigureAwait(false);
 
-            // Finally, take all the changes made to each document and merge them together into docIdToTextMerger to
+            // Finally, take all the changes made to each document and merge them together into
+            // docIdToTextMerger to
             // keep track of the total set of changes to any particular document.
             await MergeTextChangesAsync(
                     fixAllContext,
@@ -184,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Returns all the changed documents produced by fixing the list of provided <paramref
-        /// name="orderedDiagnostics"/>.  The documents will be returned such that fixed documents for a later
+        /// name="orderedDiagnostics"/>.  The documents will be returned such that fixed documents for a
+        // later
         /// diagnostic will appear later than those for an earlier diagnostic.
         /// </summary>
         private static async Task<
@@ -197,7 +204,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             var solution = fixAllContext.Solution;
             var cancellationToken = fixAllContext.CancellationToken;
 
-            // Process each diagnostic, determine the code actions to fix it, then figure out the document changes
+            // Process each diagnostic, determine the code actions to fix it, then figure out the document
+            // changes
             // produced by that code action.
             using var _1 = ArrayBuilder<Task<ImmutableArray<Document>>>.GetInstance(out var tasks);
             foreach (var diagnostic in orderedDiagnostics)
@@ -272,7 +280,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             // Wait for all that work to finish.
             await Task.WhenAll(tasks).ConfigureAwait(false);
 
-            // Flatten the set of changed documents.  These will naturally still be ordered by the diagnostic that
+            // Flatten the set of changed documents.  These will naturally still be ordered by the diagnostic
+            // that
             // caused the change.
             using var _4 = ArrayBuilder<Document>.GetInstance(out var result);
             foreach (var task in tasks)
@@ -282,7 +291,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         }
 
         /// <summary>
-        /// Take all the changes made to a particular document and determine the text changes caused by each one.  Take
+        /// Take all the changes made to a particular document and determine the text changes caused by each
+        // one.  Take
         /// those individual text changes and attempt to merge them together in order into <paramref
         /// name="docIdToTextMerger"/>.
         /// </summary>
@@ -294,8 +304,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         {
             var cancellationToken = fixAllContext.CancellationToken;
 
-            // Now for each document that is changed, grab all the documents it was changed to (remember, many code
-            // actions might have touched that document).  Figure out the actual change, and then add that to the
+            // Now for each document that is changed, grab all the documents it was changed to (remember, many
+            // code
+            // actions might have touched that document).  Figure out the actual change, and then add that to
+            // the
             // interval tree of changes we're keeping track of for that document.
             using var _ = ArrayBuilder<Task>.GetInstance(out var tasks);
             foreach (var group in allChangedDocumentsInDiagnosticsOrder.GroupBy(d => d.Id))

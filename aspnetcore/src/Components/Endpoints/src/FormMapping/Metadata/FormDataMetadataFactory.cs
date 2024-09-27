@@ -338,11 +338,14 @@ internal partial class FormDataMetadataFactory(
         // if there is a base type for it on the resolution graph.
         // For example, given A and B : A. With A having a propertyHelper of type B.
         // when we inspect B, we can tell that A is recursive because you can have A -> B -> B -> B -> ...
-        // The opposite scenario is not something we need to worry about because we don't support polymorphism,
+        // The opposite scenario is not something we need to worry about because we don't support
+        // polymorphism,
         // meaning that we will never create an instance of B if the declared type is A.
         // In that scenario, A and B : A. With B having a propertyHelper of type A.
-        // The recursion stops at A, because A doesn't define the propertyHelper and we will never bind B to A.
-        // If in the future we support polymorphism, it's a matter or updating the logic below to account for it.
+        // The recursion stops at A, because A doesn't define the propertyHelper and we will never bind B to
+        // A.
+        // If in the future we support polymorphism, it's a matter or updating the logic below to account
+        // for it.
         for (var i = 0; i < _context.CurrentTypes.Count; i++)
         {
             if (_context.CurrentTypes[i] == type)
@@ -361,7 +364,8 @@ internal partial class FormDataMetadataFactory(
                 existingType.IsRecursive = true;
             }
 
-            // We don't need to check for interfaces here because we never map to an interface, so if we encounter one, we will fail,
+            // We don't need to check for interfaces here because we never map to an interface, so if we
+            // encounter one, we will fail,
             // as we can't construct the converter to map the interface to a concrete instance.
         }
 

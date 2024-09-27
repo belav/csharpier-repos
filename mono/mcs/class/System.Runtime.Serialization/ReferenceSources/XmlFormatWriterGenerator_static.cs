@@ -696,7 +696,8 @@ namespace System.Runtime.Serialization
                     );
                 else
                 {
-                    // InternalSerialize(XmlFormatGeneratorStatics.InternalSerializeMethod, () => memberValue, memberType, writeXsiType);
+                    // InternalSerialize(XmlFormatGeneratorStatics.InternalSerializeMethod, () => memberValue,
+                    // memberType, writeXsiType);
                     var typeHandleValue = Type.GetTypeHandle(memberValue);
                     var isDeclaredType = typeHandleValue.Equals(
                         CodeInterpreter.ConvertValue(memberValue, memberType, Globals.TypeOfObject)

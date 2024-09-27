@@ -15,7 +15,8 @@ namespace MonoTests.System.Diagnostics.Contracts
     public class ContractCollectionMethodsTest
     {
         /// <summary>
-        /// Contract.Exists() determines that at least one element in the collection satisfies the predicate.
+        /// Contract.Exists() determines that at least one element in the collection satisfies the
+        // predicate.
         /// </summary>
         [Test, RunAgainstReference]
         public void TestExistsInt()
@@ -55,7 +56,8 @@ namespace MonoTests.System.Diagnostics.Contracts
         }
 
         /// <summary>
-        /// Contract.Exists() determines that at least one element in the collection satisfies the predicate.
+        /// Contract.Exists() determines that at least one element in the collection satisfies the
+        // predicate.
         /// </summary>
         [Test, RunAgainstReference]
         public void TestExistsEnumeration()

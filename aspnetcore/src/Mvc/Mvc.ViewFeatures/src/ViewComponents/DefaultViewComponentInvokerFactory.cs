@@ -33,8 +33,10 @@ internal sealed class DefaultViewComponentInvokerFactory : IViewComponentInvoker
     }
 
     /// <inheritdoc />
-    // We don't currently make use of the descriptor or the arguments here (they are available on the context).
-    // We might do this some day to cache which method we select, so resist the urge to 'clean' this without
+    // We don't currently make use of the descriptor or the arguments here (they are available on the
+    // context).
+    // We might do this some day to cache which method we select, so resist the urge to 'clean' this
+    // without
     // considering that possibility.
     public IViewComponentInvoker CreateInstance(ViewComponentContext context)
     {

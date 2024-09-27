@@ -1805,8 +1805,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         }
     }
 
-    // NOTE: This test needs to be retained here because it tests a specific capability to create a delegate
-    //       from the request delegate factory without passing in an instance of a service provider which
+    // NOTE: This test needs to be retained here because it tests a specific capability to create a
+    // delegate
+    //       from the request delegate factory without passing in an instance of a service provider
+    // which
     //       is not something we can get at with the shared compiler/runtime test harness.
     [Theory]
     [MemberData(nameof(PolymorphicResult))]
@@ -1837,10 +1839,14 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Assert.Equal("With type hierarchies!", deserializedResponseBody!.Child);
     }
 
-    // NOTE: This test needs to be retained here because it tests a specific capability to create a delegate
-    //       from the request delegate factory without passing in an instance of a service provider which
-    //       is not something we can get at with the shared compiler/runtime test harness. There is a variant
-    //       of this test that has been added to the shared test harness to make sure that we do write the
+    // NOTE: This test needs to be retained here because it tests a specific capability to create a
+    // delegate
+    //       from the request delegate factory without passing in an instance of a service provider
+    // which
+    //       is not something we can get at with the shared compiler/runtime test harness. There is a
+    // variant
+    //       of this test that has been added to the shared test harness to make sure that we do write
+    // the
     //       type discriminator.
     [Theory]
     [MemberData(nameof(PolymorphicResult))]
@@ -3474,7 +3480,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate);
 
         // Assert
-        // RouteHandlerEndpointDataSource adds the MethodInfo as the first item in RouteHandlerOptions.EndointMetadata
+        // RouteHandlerEndpointDataSource adds the MethodInfo as the first item in
+        // RouteHandlerOptions.EndointMetadata
         Assert.Empty(result.EndpointMetadata);
     }
 
@@ -3521,7 +3528,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var result = RequestDelegateFactory.Create(@delegate, options);
 
         // Assert
-        // RouteHandlerEndpointDataSource adds things like the MethodInfo, HttpMethodMetadata and attributes to RouteHandlerOptions.EndointMetadata,
+        // RouteHandlerEndpointDataSource adds things like the MethodInfo, HttpMethodMetadata and attributes
+        // to RouteHandlerOptions.EndointMetadata,
         // but we just specified our CustomEndpointMetadata in this test.
         Assert.Collection(
             result.EndpointMetadata,
@@ -3672,7 +3680,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             result.EndpointMetadata,
             m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
+        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item
+        // is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
 
@@ -3696,7 +3705,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             result.EndpointMetadata,
             m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
+        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item
+        // is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
 
@@ -3720,7 +3730,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             result.EndpointMetadata,
             m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
+        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item
+        // is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
 
@@ -3747,7 +3758,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             result.EndpointMetadata,
             m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
         );
-        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item is added
+        // Expecting '1' because only initial metadata will be in the metadata list when this metadata item
+        // is added
         Assert.Contains(result.EndpointMetadata, m => m is MetadataCountMetadata { Count: 1 });
     }
 
@@ -3822,8 +3834,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         // Assert
         Assert.Collection(
             result.EndpointMetadata,
-            // Initial metadata from RequestDelegateFactoryOptions.EndpointBuilder. If the caller want to override inferred metadata,
-            // They need to call InferMetadata first, then add the overriding metadata, and then call Create with InferMetadata's result.
+            // Initial metadata from RequestDelegateFactoryOptions.EndpointBuilder. If the caller want to
+            // override inferred metadata,
+            // They need to call InferMetadata first, then add the overriding metadata, and then call Create
+            // with InferMetadata's result.
             // This is demonstrated in the following tests.
             m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }),
             // Inferred AcceptsMetadata from RDF for complex type
@@ -3891,7 +3905,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         };
         var httpContext = CreateHttpContext();
 
-        // An empty object should deserialize to AddsCustomParameterMetadata since it has no required properties.
+        // An empty object should deserialize to AddsCustomParameterMetadata since it has no required
+        // properties.
         var requestBodyBytes = JsonSerializer.SerializeToUtf8Bytes(new object());
         var stream = new MemoryStream(requestBodyBytes);
         httpContext.Request.Body = stream;
@@ -3911,7 +3926,8 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Assert.Empty(result.EndpointMetadata);
         Assert.Same(options.EndpointBuilder.Metadata, result.EndpointMetadata);
 
-        // Make extra sure things are running as expected, as this non-InferMetadata path is no longer exercised by RouteEndpointDataSource,
+        // Make extra sure things are running as expected, as this non-InferMetadata path is no longer
+        // exercised by RouteEndpointDataSource,
         // and most of the other unit tests don't pass in a metadataResult without a cached factory context.
         Assert.True(result.RequestDelegate(httpContext).IsCompletedSuccessfully);
         Assert.Equal(1, invokeCount);
@@ -4310,8 +4326,10 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 // Arrange
                 var @delegate = (string task) => new Todo();
 
-                // IsReflectionEnabledByDefault defaults to `false` when `PublishTrimmed=true`. For these scenarios, we
-                // expect users to configure JSON source generation as instructed in the `NotSupportedException` message.
+                // IsReflectionEnabledByDefault defaults to `false` when `PublishTrimmed=true`. For these scenarios,
+                // we
+                // expect users to configure JSON source generation as instructed in the `NotSupportedException`
+                // message.
                 var exception = Assert.Throws<NotSupportedException>(
                     () => RequestDelegateFactory.Create(@delegate)
                 );
@@ -4543,11 +4561,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     }
 
     // TODO: Binding breaks if we explicitly implement IParsable. :(
-    // We could special-case IParsable because we have a reference to it. The check for `!method.IsAbstract` in GetStaticMethodFromHierarchy
-    // stops us from finding it now. But even if we did find it, we haven't implemented the correct code gen to call it for unreferenced interfaces.
-    // We might have to use Type.GetInterfaceMap. See previous discussion: https://github.com/dotnet/aspnetcore/pull/40926#discussion_r837781209
+    // We could special-case IParsable because we have a reference to it. The check for
+    // `!method.IsAbstract` in GetStaticMethodFromHierarchy
+    // stops us from finding it now. But even if we did find it, we haven't implemented the correct code
+    // gen to call it for unreferenced interfaces.
+    // We might have to use Type.GetInterfaceMap. See previous discussion:
+    // https://github.com/dotnet/aspnetcore/pull/40926#discussion_r837781209
     //
-    // System.InvalidOperationException : TryParse method found on AddsCustomParameterMetadata with incorrect format. Must be a static method with format
+    // System.InvalidOperationException : TryParse method found on AddsCustomParameterMetadata with
+    // incorrect format. Must be a static method with format
     // bool TryParse(string, IFormatProvider, out AddsCustomParameterMetadata)
     // bool TryParse(string, out AddsCustomParameterMetadata)
     // but found
@@ -4568,13 +4590,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             builder.Metadata.Add(new CustomEndpointMetadata { Source = MetadataSource.Parameter });
         }
 
-        //static bool IParsable<AddsCustomParameterMetadata>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, [MaybeNullWhen(false)] out AddsCustomParameterMetadata result)
+        //static bool IParsable<AddsCustomParameterMetadata>.TryParse([NotNullWhen(true)] string? s,
+        // IFormatProvider? provider, [MaybeNullWhen(false)] out AddsCustomParameterMetadata result)
         //{
         //    result = new();
         //    return true;
         //}
 
-        //static AddsCustomParameterMetadata IParsable<AddsCustomParameterMetadata>.Parse(string s, IFormatProvider? provider) => throw new NotSupportedException();
+        //static AddsCustomParameterMetadata IParsable<AddsCustomParameterMetadata>.Parse(string s,
+        // IFormatProvider? provider) => throw new NotSupportedException();
     }
 
     private class AddsCustomParameterMetadataBindable

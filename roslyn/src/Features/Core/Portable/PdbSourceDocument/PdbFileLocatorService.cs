@@ -134,7 +134,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
             catch (BadImageFormatException ex)
             {
-                // If the PDB is corrupt in some way we can just ignore it, and let the system fall through to another provider
+                // If the PDB is corrupt in some way we can just ignore it, and let the system fall through to
+                // another provider
                 _logger?.Log(FeaturesResources.Error_reading_PDB_0, ex.Message);
                 result = null;
             }

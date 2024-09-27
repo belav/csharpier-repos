@@ -306,7 +306,8 @@ public class X
     }
 }
 ";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             new[] { source, TestSources.Index, TestSources.Range },
             parseOptions: TestOptions.RegularWithListPatterns,
@@ -503,12 +504,14 @@ class C
             parseOptions: TestOptions.Regular10
         );
         compilation.VerifyDiagnostics(
-            // (2,16): error CS8936: Feature 'list pattern' is not available in C# 10.0. Please use language version 11.0 or greater.
+            // (2,16): error CS8936: Feature 'list pattern' is not available in C# 10.0. Please use language
+            // version 11.0 or greater.
             // _ = new C() is [];
             Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "[]")
                 .WithArguments("list pattern", "11.0")
                 .WithLocation(2, 16),
-            // (3,16): error CS8936: Feature 'list pattern' is not available in C# 10.0. Please use language version 11.0 or greater.
+            // (3,16): error CS8936: Feature 'list pattern' is not available in C# 10.0. Please use language
+            // version 11.0 or greater.
             // _ = new C() is [.. var x];
             Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "[.. var x]")
                 .WithArguments("list pattern", "11.0")
@@ -1049,7 +1052,8 @@ class X
 ";
         var expectedDiagnostics = new[]
         {
-            // error CS8985: List patterns may not be used for a value of type 'object'. No suitable 'Length' or 'Count' property was found.
+            // error CS8985: List patterns may not be used for a value of type 'object'. No suitable 'Length' or
+            // 'Count' property was found.
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, listPattern)
                 .WithArguments("object"),
             // error CS0021: Cannot apply indexing with [] to an expression of type 'object'
@@ -1234,7 +1238,8 @@ class X
         compilation.MakeMemberMissing(WellKnownMember.System_Range__StartAt);
         compilation.MakeMemberMissing(WellKnownMember.System_Range__EndAt);
         // Note: slice patterns always use range expressions with start and end.
-        // But range syntax binds differently depending whether start/end are there and depending on what members are available.
+        // But range syntax binds differently depending whether start/end are there and depending on what
+        // members are available.
 
         compilation.VerifyEmitDiagnostics(
             // (12,22): error CS0656: Missing compiler required member 'System.Range..ctor'
@@ -1339,12 +1344,14 @@ class X
             parseOptions: TestOptions.RegularWithListPatterns
         );
         compilation.VerifyEmitDiagnostics(
-            // (6,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
+            // (6,19): error CS0656: Missing compiler required member
+            // 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
             //         _ = a is [.. var slice];
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, ".. var slice")
                 .WithArguments("System.Runtime.CompilerServices.RuntimeHelpers", "GetSubArray")
                 .WithLocation(6, 19),
-            // (7,15): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
+            // (7,15): error CS0656: Missing compiler required member
+            // 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
             //         _ = a[..];
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "..")
                 .WithArguments("System.Runtime.CompilerServices.RuntimeHelpers", "GetSubArray")
@@ -1371,12 +1378,14 @@ class X
             parseOptions: TestOptions.RegularWithListPatterns
         );
         compilation.VerifyEmitDiagnostics(
-            // (6,19): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
+            // (6,19): error CS0656: Missing compiler required member
+            // 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
             //         _ = a is [.. var slice];
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, ".. var slice")
                 .WithArguments("System.Runtime.CompilerServices.RuntimeHelpers", "GetSubArray")
                 .WithLocation(6, 19),
-            // (7,15): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
+            // (7,15): error CS0656: Missing compiler required member
+            // 'System.Runtime.CompilerServices.RuntimeHelpers.GetSubArray'
             //         _ = a[..];
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "..")
                 .WithArguments("System.Runtime.CompilerServices.RuntimeHelpers", "GetSubArray")
@@ -1952,7 +1961,8 @@ class X
             csSource,
             references: new[] { vbCompilation.EmitToImageReference() }
         );
-        // Note: the VB indexer's name is "Item" but C# looks for "this[]", but we can't put Default on Shared indexer declaration
+        // Note: the VB indexer's name is "Item" but C# looks for "this[]", but we can't put Default on
+        // Shared indexer declaration
         csCompilation.VerifyEmitDiagnostics(
             // (6,28): error CS0021: Cannot apply indexing with [] to an expression of type 'Test1'
             //         _ = new Test1() is [0];
@@ -2070,12 +2080,14 @@ System.Console.Write((new Test1() is [42], new Test1()[0]));
 ";
         var csCompilation = CreateCompilationWithIL(csSource, ilSource);
         csCompilation.VerifyEmitDiagnostics(
-            // (2,38): error CS0176: Member 'Test1.this[Index]' cannot be accessed with an instance reference; qualify it with a type name instead
+            // (2,38): error CS0176: Member 'Test1.this[Index]' cannot be accessed with an instance reference;
+            // qualify it with a type name instead
             // System.Console.Write((new Test1() is [42], new Test1()[0]));
             Diagnostic(ErrorCode.ERR_ObjectProhibited, "[42]")
                 .WithArguments("Test1.this[System.Index]")
                 .WithLocation(2, 38),
-            // (2,44): error CS0176: Member 'Test1.this[Index]' cannot be accessed with an instance reference; qualify it with a type name instead
+            // (2,44): error CS0176: Member 'Test1.this[Index]' cannot be accessed with an instance reference;
+            // qualify it with a type name instead
             // System.Console.Write((new Test1() is [42], new Test1()[0]));
             Diagnostic(ErrorCode.ERR_ObjectProhibited, "new Test1()[0]")
                 .WithArguments("Test1.this[System.Index]")
@@ -2182,12 +2194,14 @@ class Test1
 ";
         var compilation = CreateCompilationWithIndexAndRange(source);
         compilation.VerifyEmitDiagnostics(
-            // (4,20): error CS0154: The property or indexer 'Test1.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (4,20): error CS0154: The property or indexer 'Test1.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new Test1() is [0];
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "[0]")
                 .WithArguments("Test1.this[System.Index]")
                 .WithLocation(4, 20),
-            // (5,5): error CS0154: The property or indexer 'Test1.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (5,5): error CS0154: The property or indexer 'Test1.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new Test1()[^1];
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new Test1()[^1]")
                 .WithArguments("Test1.this[System.Index]")
@@ -2213,12 +2227,14 @@ class Test1
 ";
         var compilation = CreateCompilationWithIndexAndRange(source);
         compilation.VerifyEmitDiagnostics(
-            // (4,20): error CS0271: The property or indexer 'Test1.this[Index]' cannot be used in this context because the get accessor is inaccessible
+            // (4,20): error CS0271: The property or indexer 'Test1.this[Index]' cannot be used in this context
+            // because the get accessor is inaccessible
             // _ = new Test1() is [0];
             Diagnostic(ErrorCode.ERR_InaccessibleGetter, "[0]")
                 .WithArguments("Test1.this[System.Index]")
                 .WithLocation(4, 20),
-            // (5,5): error CS0271: The property or indexer 'Test1.this[Index]' cannot be used in this context because the get accessor is inaccessible
+            // (5,5): error CS0271: The property or indexer 'Test1.this[Index]' cannot be used in this context
+            // because the get accessor is inaccessible
             // _ = new Test1()[^1];
             Diagnostic(ErrorCode.ERR_InaccessibleGetter, "new Test1()[^1]")
                 .WithArguments("Test1.this[System.Index]")
@@ -2401,12 +2417,14 @@ class Test1
 ";
         var compilation = CreateCompilationWithIndexAndRange(source);
         compilation.VerifyEmitDiagnostics(
-            // (4,21): error CS0154: The property or indexer 'Test1.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (4,21): error CS0154: The property or indexer 'Test1.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new Test1() is [..var p];
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "..var p")
                 .WithArguments("Test1.this[System.Range]")
                 .WithLocation(4, 21),
-            // (6,5): error CS0154: The property or indexer 'Test1.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (6,5): error CS0154: The property or indexer 'Test1.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new Test1()[..];
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new Test1()[..]")
                 .WithArguments("Test1.this[System.Range]")
@@ -2434,12 +2452,14 @@ class Test1
 ";
         var compilation = CreateCompilationWithIndexAndRange(source);
         compilation.VerifyEmitDiagnostics(
-            // (4,21): error CS0271: The property or indexer 'Test1.this[Range]' cannot be used in this context because the get accessor is inaccessible
+            // (4,21): error CS0271: The property or indexer 'Test1.this[Range]' cannot be used in this context
+            // because the get accessor is inaccessible
             // _ = new Test1() is [..var p];
             Diagnostic(ErrorCode.ERR_InaccessibleGetter, "..var p")
                 .WithArguments("Test1.this[System.Range]")
                 .WithLocation(4, 21),
-            // (6,5): error CS0271: The property or indexer 'Test1.this[Range]' cannot be used in this context because the get accessor is inaccessible
+            // (6,5): error CS0271: The property or indexer 'Test1.this[Range]' cannot be used in this context
+            // because the get accessor is inaccessible
             // _ = new Test1()[..];
             Diagnostic(ErrorCode.ERR_InaccessibleGetter, "new Test1()[..]")
                 .WithArguments("Test1.this[System.Range]")
@@ -3059,7 +3079,8 @@ class X
     } 
 }
 ";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var compilation = CreateCompilation(
             new[] { source, TestSources.Index },
             options: TestOptions.ReleaseExe
@@ -3265,7 +3286,8 @@ class X
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "t is { Count: -1 }")
                 .WithArguments("T")
                 .WithLocation(30, 13),
-            // (31,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided pattern.
+            // (31,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided
+            // pattern.
             //         _ = new { t } is { t.Count: -1 }; // 4
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "new { t } is { t.Count: -1 }")
                 .WithArguments("<anonymous type: T t>")
@@ -3275,7 +3297,8 @@ class X
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "t is { Length: -1 }")
                 .WithArguments("T")
                 .WithLocation(36, 13),
-            // (37,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided pattern.
+            // (37,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided
+            // pattern.
             //         _ = new { t } is { t.Length: -1 }; // 6
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "new { t } is { t.Length: -1 }")
                 .WithArguments("<anonymous type: T t>")
@@ -3285,7 +3308,8 @@ class X
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "t is { Length: -1 }")
                 .WithArguments("T")
                 .WithLocation(42, 13),
-            // (44,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided pattern.
+            // (44,13): error CS8518: An expression of type '<anonymous type: T t>' can never match the provided
+            // pattern.
             //         _ = new { t } is { t.Length: -1 }; // 8
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "new { t } is { t.Length: -1 }")
                 .WithArguments("<anonymous type: T t>")
@@ -3385,22 +3409,26 @@ public class C
 }"
             )
             .VerifyDiagnostics(
-                // (15,35): error CS8352: Cannot use variable 'list' in this context because it may expose referenced variables outside of their declaration scope
+                // (15,35): error CS8352: Cannot use variable 'list' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //         if (outer is [] list) s = list; // error 1
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "list")
                     .WithArguments("list")
                     .WithLocation(15, 35),
-                // (22,17): error CS8352: Cannot use variable 'element' in this context because it may expose referenced variables outside of their declaration scope
+                // (22,17): error CS8352: Cannot use variable 'element' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //             r = element; // error 2
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "element")
                     .WithArguments("element")
                     .WithLocation(22, 17),
-                // (23,17): error CS8352: Cannot use variable 'slice' in this context because it may expose referenced variables outside of their declaration scope
+                // (23,17): error CS8352: Cannot use variable 'slice' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //             r = slice; // error 3
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "slice")
                     .WithArguments("slice")
                     .WithLocation(23, 17),
-                // (24,17): error CS8352: Cannot use variable 'list' in this context because it may expose referenced variables outside of their declaration scope
+                // (24,17): error CS8352: Cannot use variable 'list' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //             r = list; // error 4
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "list")
                     .WithArguments("list")
@@ -3587,7 +3615,8 @@ class X
             // (8,52): error CS0165: Use of unassigned local variable 'z'
             //             case not [{} y, .. {} z] x: _ = (x, y, z); break;
             Diagnostic(ErrorCode.ERR_UseDefViolation, "z").WithArguments("z").WithLocation(8, 52),
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [not {} y, .. not {} z] x: _ = (x, y, z); break;
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[not {} y, .. not {} z] x")
                 .WithLocation(9, 18),
@@ -3889,7 +3918,8 @@ class D
             parseOptions: TestOptions.RegularWithListPatterns
         );
         compilation.VerifyEmitDiagnostics(
-            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [var item];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var item]")
                 .WithArguments(
@@ -3897,7 +3927,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(6, 18),
-            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [var item];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var item]")
                 .WithArguments(
@@ -3905,7 +3936,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(6, 18),
-            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[..var rest]")
                 .WithArguments(
@@ -3913,7 +3945,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 18),
-            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[..var rest]")
                 .WithArguments(
@@ -3921,7 +3954,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 18),
-            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "..var rest")
                 .WithArguments(
@@ -3929,7 +3963,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 19),
-            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "..var rest")
                 .WithArguments(
@@ -3937,7 +3972,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 19),
-            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var index = c[^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[^1]")
                 .WithArguments(
@@ -3945,7 +3981,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(8, 21),
-            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var index = c[^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[^1]")
                 .WithArguments(
@@ -3953,7 +3990,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(8, 21),
-            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var range = c[1..^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[1..^1]")
                 .WithArguments(
@@ -3961,7 +3999,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(9, 21),
-            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var range = c[1..^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[1..^1]")
                 .WithArguments(
@@ -4043,7 +4082,8 @@ if (c is [var item] && c is [..var slice])
 ";
         var compilation = CreateCompilation(source, references: new[] { lib2Ref });
         compilation.VerifyEmitDiagnostics(
-            // (4,10): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (4,10): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // if (c is [var item] && c is [..var slice])
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var item]")
                 .WithArguments(
@@ -4051,7 +4091,8 @@ if (c is [var item] && c is [..var slice])
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(4, 10),
-            // (4,29): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (4,29): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // if (c is [var item] && c is [..var slice])
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[..var slice]")
                 .WithArguments(
@@ -4059,7 +4100,8 @@ if (c is [var item] && c is [..var slice])
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(4, 29),
-            // (4,30): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (4,30): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // if (c is [var item] && c is [..var slice])
             Diagnostic(ErrorCode.ERR_NoTypeDef, "..var slice")
                 .WithArguments(
@@ -4067,7 +4109,8 @@ if (c is [var item] && c is [..var slice])
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(4, 30),
-            // (6,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //     var item2 = c[^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[^1]")
                 .WithArguments(
@@ -4075,7 +4118,8 @@ if (c is [var item] && c is [..var slice])
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(6, 17),
-            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //     var slice2 = c[..];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[..]")
                 .WithArguments(
@@ -4296,7 +4340,8 @@ _ = new C()[..]; // 10, 11
             references: new[] { libComp.EmitToImageReference() }
         );
         comp.VerifyDiagnostics(
-            // (2,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (2,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [var x]; // 1, 2
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var x]")
                 .WithArguments(
@@ -4304,7 +4349,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(2, 16),
-            // (2,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (2,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [var x]; // 1, 2
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var x]")
                 .WithArguments(
@@ -4312,7 +4358,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(2, 16),
-            // (3,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (3,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [.. var y]; // 3, 4, 5, 6
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[.. var y]")
                 .WithArguments(
@@ -4320,7 +4367,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(3, 16),
-            // (3,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (3,16): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [.. var y]; // 3, 4, 5, 6
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[.. var y]")
                 .WithArguments(
@@ -4328,7 +4376,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(3, 16),
-            // (3,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (3,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [.. var y]; // 3, 4, 5, 6
             Diagnostic(ErrorCode.ERR_NoTypeDef, ".. var y")
                 .WithArguments(
@@ -4336,7 +4385,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(3, 17),
-            // (3,17): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (3,17): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C() is [.. var y]; // 3, 4, 5, 6
             Diagnostic(ErrorCode.ERR_NoTypeDef, ".. var y")
                 .WithArguments(
@@ -4344,7 +4394,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(3, 17),
-            // (4,1): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (4,1): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // new C().Slice(0, 0); // 7
             Diagnostic(ErrorCode.ERR_NoTypeDef, "new C().Slice")
                 .WithArguments(
@@ -4352,7 +4403,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(4, 1),
-            // (5,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (5,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C()[^1]; // 8, 9
             Diagnostic(ErrorCode.ERR_NoTypeDef, "new C()[^1]")
                 .WithArguments(
@@ -4360,7 +4412,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(5, 5),
-            // (5,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (5,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C()[^1]; // 8, 9
             Diagnostic(ErrorCode.ERR_NoTypeDef, "new C()[^1]")
                 .WithArguments(
@@ -4368,7 +4421,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(5, 5),
-            // (6,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,5): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C()[..]; // 10, 11
             Diagnostic(ErrorCode.ERR_NoTypeDef, "new C()[..]")
                 .WithArguments(
@@ -4376,7 +4430,8 @@ _ = new C()[..]; // 10, 11
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(6, 5),
-            // (6,5): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,5): error CS0012: The type 'Missing2' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             // _ = new C()[..]; // 10, 11
             Diagnostic(ErrorCode.ERR_NoTypeDef, "new C()[..]")
                 .WithArguments(
@@ -4583,22 +4638,26 @@ struct S
 }";
         var comp = CreateCompilationWithIndexAndRange(src);
         comp.VerifyDiagnostics(
-            // (11,13): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member results in an implicit copy of 'this'.
+            // (11,13): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member
+            // results in an implicit copy of 'this'.
             //         _ = this[i]; // 1, 2
             Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                 .WithArguments("S.Length.get", "this")
                 .WithLocation(11, 13),
-            // (11,13): warning CS8656: Call to non-readonly member 'S.this[int].get' from a 'readonly' member results in an implicit copy of 'this'.
+            // (11,13): warning CS8656: Call to non-readonly member 'S.this[int].get' from a 'readonly' member
+            // results in an implicit copy of 'this'.
             //         _ = this[i]; // 1, 2
             Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                 .WithArguments("S.this[int].get", "this")
                 .WithLocation(11, 13),
-            // (12,13): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member results in an implicit copy of 'this'.
+            // (12,13): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member
+            // results in an implicit copy of 'this'.
             //         _ = this[r]; // 3, 4
             Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                 .WithArguments("S.Length.get", "this")
                 .WithLocation(12, 13),
-            // (12,13): warning CS8656: Call to non-readonly member 'S.Slice(int, int)' from a 'readonly' member results in an implicit copy of 'this'.
+            // (12,13): warning CS8656: Call to non-readonly member 'S.Slice(int, int)' from a 'readonly' member
+            // results in an implicit copy of 'this'.
             //         _ = this[r]; // 3, 4
             Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                 .WithArguments("S.Slice(int, int)", "this")
@@ -4654,7 +4713,8 @@ class C
             Diagnostic(ErrorCode.ERR_PropertyCantHaveVoidType, "Length")
                 .WithArguments("C.Length")
                 .WithLocation(4, 17),
-            // (8,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (8,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //         _ = this is [1];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[1]")
                 .WithArguments("C")
@@ -4691,7 +4751,8 @@ class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index });
         compilation.VerifyEmitDiagnostics(
-            // (9,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (9,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //         _ = this is [1];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[1]")
                 .WithArguments("C")
@@ -4728,7 +4789,8 @@ class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index });
         compilation.VerifyEmitDiagnostics(
-            // (9,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (9,21): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //         _ = this is [1];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[1]")
                 .WithArguments("C")
@@ -4807,7 +4869,8 @@ public class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(
             compilation,
             expectedOutput: expectedOutput,
@@ -4858,7 +4921,9 @@ class C<T>
             Diagnostic(ErrorCode.ERR_BadArgType, "[var item2]")
                 .WithArguments("1", "System.Index", "int?")
                 .WithLocation(13, 30),
-            // (14,19): error CS1061: 'int' does not contain a definition for 'Value' and no accessible extension method 'Value' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+            // (14,19): error CS1061: 'int' does not contain a definition for 'Value' and no accessible
+            // extension method 'Value' accepting a first argument of type 'int' could be found (are you missing a
+            // using directive or an assembly reference?)
             //             item2.Value.ToString(); // 3
             Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Value")
                 .WithArguments("int", "Value")
@@ -4868,7 +4933,9 @@ class C<T>
             Diagnostic(ErrorCode.ERR_BadArgType, "^1")
                 .WithArguments("1", "System.Index", "int?")
                 .WithLocation(15, 36),
-            // (16,16): error CS1061: 'int' does not contain a definition for 'Value' and no accessible extension method 'Value' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+            // (16,16): error CS1061: 'int' does not contain a definition for 'Value' and no accessible
+            // extension method 'Value' accepting a first argument of type 'int' could be found (are you missing a
+            // using directive or an assembly reference?)
             //         item22.Value.ToString(); // 5
             Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Value")
                 .WithArguments("int", "Value")
@@ -5624,7 +5691,8 @@ class D
             il
         );
         compilation.VerifyEmitDiagnostics(
-            // (6,24): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (6,24): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //         _ = new C() is [var item, ..var rest];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[var item, ..var rest]")
                 .WithArguments("C")
@@ -5863,7 +5931,8 @@ class D
 ";
         var compilation = CreateCompilationWithIL(source, il);
         compilation.VerifyEmitDiagnostics(
-            // (6,24): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (6,24): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //         _ = new C() is [var item, ..var rest];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[var item, ..var rest]")
                 .WithArguments("C")
@@ -5981,47 +6050,56 @@ _ = o switch // 9, didn't test for [null]
             new[] { source, TestSources.Index, TestSources.Range, TestSources.GetSubArray }
         );
         compilation.VerifyEmitDiagnostics(
-            // (13,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+            // (13,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern 'null' is not covered.
             // _ = o switch // 1, didn't test for null
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("null")
                 .WithLocation(13, 7),
-            // (20,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[null]' is not covered.
+            // (20,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[null]' is not covered.
             // _ = o switch // 2, didn't test for [null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[null]")
                 .WithLocation(20, 7),
-            // (27,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[not null]' is not covered.
+            // (27,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[not null]' is not covered.
             // _ = o switch // 3, didn't test for [not null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[not null]")
                 .WithLocation(27, 7),
-            // (42,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[null]' is not covered.
+            // (42,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[null]' is not covered.
             // _ = o switch // 4, didn't test for [null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[null]")
                 .WithLocation(42, 7),
-            // (49,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[not null]' is not covered.
+            // (49,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[not null]' is not covered.
             // _ = o switch // 5, didn't test for [not null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[not null]")
                 .WithLocation(49, 7),
-            // (64,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[_, null]' is not covered.
+            // (64,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[_, null]' is not covered.
             // _ = o switch // 6, didn't test for [_, null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[_, null]")
                 .WithLocation(64, 7),
-            // (72,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[null, _]' is not covered.
+            // (72,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[null, _]' is not covered.
             // _ = o switch // 7, didn't test for [null, _]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[null, _]")
                 .WithLocation(72, 7),
-            // (80,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
+            // (80,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
             // _ = o switch // 8, didn't test for { Length: 0 }
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 0 }")
                 .WithLocation(80, 7),
-            // (86,7): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[null]' is not covered.
+            // (86,7): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[null]' is not covered.
             // _ = o switch // 9, didn't test for [null]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[null]")
@@ -6094,12 +6172,14 @@ class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyEmitDiagnostics(
-            // (20,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[.. null, _]' is not covered.
+            // (20,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[.. null, _]' is not covered.
             //         _ = this switch // no tests for [.. null, _]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[.. null, _]")
                 .WithLocation(20, 18),
-            // (27,18): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[.. not null, _]' is not covered.
+            // (27,18): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[.. not null, _]' is not covered.
             //         _ = this switch // no test for [.. not null, _]
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[.. not null, _]")
@@ -6140,7 +6220,8 @@ class D
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyEmitDiagnostics(
-            // (12,18): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (12,18): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
@@ -6235,40 +6316,50 @@ class C
     }
 }
 ";
-        // Note: we don't try to explain nested slice patterns right now so all these just produce a fallback example
+        // Note: we don't try to explain nested slice patterns right now so all these just produce a
+        // fallback example
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyEmitDiagnostics(
-            // (27,18): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (27,18): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch // didn't test for [.. [not null]] // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
                 .WithLocation(27, 18),
-            // (33,18): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (33,18): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch // didn't test for [.. [not null]] // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
                 .WithLocation(33, 18),
-            // (40,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '_' is not covered.
-            //         _ = this switch // didn't test for [.. null, _] // we're trying to construct an example with Length=1, the slice may not be null // 3
+            // (40,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '_' is not covered.
+            //         _ = this switch // didn't test for [.. null, _] // we're trying to construct an example
+            // with Length=1, the slice may not be null // 3
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("_")
                 .WithLocation(40, 18),
-            // (46,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '_' is not covered.
-            //         _ = this switch // didn't test for [_, .. null, _, _, _] // we're trying to construct an example with Length=4, the slice may not be null // 4
+            // (46,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '_' is not covered.
+            //         _ = this switch // didn't test for [_, .. null, _, _, _] // we're trying to construct an
+            // example with Length=4, the slice may not be null // 4
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("_")
                 .WithLocation(46, 18),
-            // (58,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (58,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch // didn't test for [_, .. [_, null], _] // 5
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("_")
                 .WithLocation(58, 18),
-            // (64,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (64,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch // didn't test for [_, .. [_, null], _, _] // 6
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("_")
                 .WithLocation(64, 18),
-            // (70,18): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (70,18): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '_' is not covered.
             //         _ = this switch // didn't test for [_, .. [_, null, _], _] // 7
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("_")
@@ -6381,7 +6472,8 @@ class D
 ";
         var compilation = CreateCompilation(source, references: new[] { lib2Ref });
         compilation.VerifyEmitDiagnostics(
-            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (6,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [var item];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[var item]")
                 .WithArguments(
@@ -6389,7 +6481,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(6, 18),
-            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "[..var rest]")
                 .WithArguments(
@@ -6397,7 +6490,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 18),
-            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (7,19): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         _ = c is [..var rest];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "..var rest")
                 .WithArguments(
@@ -6405,7 +6499,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(7, 19),
-            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (8,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var index = c[^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[^1]")
                 .WithArguments(
@@ -6413,7 +6508,8 @@ class D
                     "missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                 )
                 .WithLocation(8, 21),
-            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+            // (9,21): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+            // must add a reference to assembly 'missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
             //         var range = c[1..^1];
             Diagnostic(ErrorCode.ERR_NoTypeDef, "c[1..^1]")
                 .WithArguments(
@@ -6596,7 +6692,8 @@ public class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             compilation,
             expectedOutput: "(item value, rest value)",
@@ -6693,7 +6790,8 @@ public class C
 ";
         var compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         compilation.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             compilation,
             expectedOutput: "(item value, rest value)",
@@ -6793,7 +6891,8 @@ class C
             Console.Write((x, y));
     }
 }";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(
             new[] { src, TestSources.Index, TestSources.Range },
             expectedOutput: "Index Range (42, 43)",
@@ -6843,7 +6942,8 @@ if (""abc"" is [var first, ..var rest])
     System.Console.Write((first, rest).ToString());
 }
 ";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(
             new[] { src, TestSources.Index, TestSources.Range },
             expectedOutput: "(a, bc)",
@@ -6893,17 +6993,20 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 2 }' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 2 }' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 2 }")
                 .WithLocation(2, 13),
-            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
+            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
             // _ = new C() switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 1 }")
                 .WithLocation(9, 13),
-            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
+            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
             // _ = new C() switch // 3
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 1 }")
@@ -6912,7 +7015,8 @@ class C
 
         comp = CreateCompilation(src);
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 2 }' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 2 }' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 2 }")
@@ -6927,7 +7031,8 @@ class C
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[_]")
                 .WithArguments("System.Index", "GetOffset")
                 .WithLocation(5, 5),
-            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
+            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
             // _ = new C() switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 1 }")
@@ -6942,7 +7047,8 @@ class C
             Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "[ _, _, .. ]")
                 .WithArguments("System.Index", "GetOffset")
                 .WithLocation(13, 5),
-            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
+            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 1 }' is not covered.
             // _ = new C() switch // 3
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 1 }")
@@ -7013,12 +7119,14 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Count: 0 }' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Count: 0 }' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Count: 0 }")
                 .WithLocation(2, 13),
-            // (8,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[0]' is not covered.
+            // (8,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[0]' is not covered.
             // _ = new C() switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[0]")
@@ -7067,12 +7175,14 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (3,13): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '[null]' is not covered.
+            // (3,13): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern '[null]' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("[null]")
                 .WithLocation(3, 13),
-            // (18,13): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+            // (18,13): warning CS8655: The switch expression does not handle some null inputs (it is not
+            // exhaustive). For example, the pattern 'null' is not covered.
             // _ = new C() switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                 .WithArguments("null")
@@ -7099,7 +7209,8 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[_, 0]' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[_, 0]' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[_, 0]")
@@ -7126,7 +7237,8 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[0, _]' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[0, _]' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[0, _]")
@@ -7168,17 +7280,20 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[0]' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[0]' is not covered.
             // _ = new C() switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[0]")
                 .WithLocation(2, 13),
-            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[_, _, 0]' is not covered.
+            // (9,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[_, _, 0]' is not covered.
             // _ = new C() switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[_, _, 0]")
                 .WithLocation(9, 13),
-            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '[1, _, 0]' is not covered.
+            // (16,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '[1, _, 0]' is not covered.
             // _ = new C() switch // 3
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("[1, _, 0]")
@@ -7205,7 +7320,8 @@ class C
 ";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
             // _ = new C() switch
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 0 }")
@@ -7278,7 +7394,8 @@ class Derived : C { }
         // Note: we don't know how to explain `Derived and [1]`
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             // _ = new C() switch
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
@@ -7305,7 +7422,8 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (4,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (4,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //     [..] => 1,
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[..]")
                 .WithArguments("C")
@@ -7342,7 +7460,8 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (4,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (4,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             //     [..] => 1,
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[..]")
                 .WithArguments("C")
@@ -7382,7 +7501,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [42]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[42]").WithLocation(9, 18)
         );
@@ -7430,7 +7550,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case ([42], [43]):
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "([42], [43])").WithLocation(9, 18)
         );
@@ -7497,11 +7618,13 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case { Length: 1 } and [1, ..]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "{ Length: 1 } and [1, ..]")
                 .WithLocation(9, 18),
-            // (15,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (15,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case { Length: 1 } and [.., 1]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "{ Length: 1 } and [.., 1]")
                 .WithLocation(15, 18)
@@ -7530,7 +7653,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [1, 2, 3]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[1, 2, 3]").WithLocation(9, 18)
         );
@@ -7699,7 +7823,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [var unreachable]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]").WithLocation(10, 18)
         );
@@ -7735,11 +7860,13 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (10,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [var unreachable]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]")
                 .WithLocation(10, 18),
-            // (17,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (17,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [var unreachable]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[var unreachable]").WithLocation(17, 18)
         );
@@ -7849,10 +7976,12 @@ class C
             new[] { src, TestSources.Index, TestSources.Range, TestSources.GetSubArray }
         );
         comp.VerifyEmitDiagnostics(
-            // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (12,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [{Y:0, X:> 0}]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[{Y:0, X:> 0}]").WithLocation(12, 18),
-            // (18,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (18,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [..[{F.Y: 0, X:> 0}]]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[..[{F.Y: 0, X:> 0}]]")
                 .WithLocation(18, 18)
@@ -7893,7 +8022,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (20,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (20,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [(_, { X: 0 })]: // err
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[(_, { X: 0 })]").WithLocation(20, 18)
         );
@@ -7926,10 +8056,12 @@ class C
 }" + TestSources.GetSubArray;
         var comp = CreateCompilationWithIndexAndRange(src);
         comp.VerifyEmitDiagnostics(
-            // (11,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (11,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+            // of the switch expression or it is impossible to match.
             //             [_] => 2, // unreachable 1
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "[_]").WithLocation(11, 13),
-            // (18,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (18,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+            // of the switch expression or it is impossible to match.
             //             [_] => 2, // unreachable 2
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "[_]").WithLocation(18, 13)
         );
@@ -8007,7 +8139,8 @@ class C
 }" + TestSources.GetSubArray;
         var comp = CreateCompilationWithIndexAndRange(src);
         comp.VerifyEmitDiagnostics(
-            // (12,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (12,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+            // of the switch expression or it is impossible to match.
             //             [var unreachable] => 5,
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "[var unreachable]").WithLocation(12, 13)
         );
@@ -8064,7 +8197,8 @@ class C
 }";
         var comp = CreateCompilationWithIndexAndRange(src);
         comp.VerifyEmitDiagnostics(
-            // (14,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (14,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+            // of the switch expression or it is impossible to match.
             //             [var unreachable, var unreachable2] => 3,
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "[var unreachable, var unreachable2]")
                 .WithLocation(14, 13)
@@ -8091,7 +8225,8 @@ class C
 }";
         var comp = CreateCompilationWithIndexAndRange(src);
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [[42]]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[[42]]").WithLocation(9, 18)
         );
@@ -8352,56 +8487,71 @@ class Derived : Base, I2
             options: TestOptions.DebugExe
         );
         compilation.VerifyDiagnostics(
-            // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived s]: // 1
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived s]").WithLocation(11, 18),
-            // (19,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (19,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived s]: // 2
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived s]").WithLocation(19, 18),
-            // (27,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (27,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived s]: // 3
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived s]").WithLocation(27, 18),
-            // (34,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (34,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [int and 1]: // 4
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[int and 1]").WithLocation(34, 18),
-            // (41,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (41,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [ValueType and int and 1]: // 5
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[ValueType and int and 1]")
                 .WithLocation(41, 18),
-            // (49,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (49,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived s]: // 6
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived s]").WithLocation(49, 18),
-            // (61,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (61,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived { F1: 1 } s]: // 7
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived { F1: 1 } s]")
                 .WithLocation(61, 18),
-            // (73,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (73,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived { P1: 1 } s]: // 8
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived { P1: 1 } s]")
                 .WithLocation(73, 18),
-            // (85,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (85,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived(1, _) s]: // 9
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived(1, _) s]")
                 .WithLocation(85, 18),
-            // (95,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (95,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Derived { F3: (1, _) } s]: // 10
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Derived { F3: (1, _) } s]")
                 .WithLocation(95, 18),
-            // (103,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (103,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [Base and I2]: // 11
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[Base and I2]").WithLocation(103, 18),
-            // (111,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (111,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [I2 and Base]: // 12
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[I2 and Base]").WithLocation(111, 18),
-            // (120,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (120,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case Derived and [Derived s]: // 13
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived and [Derived s]")
                 .WithLocation(120, 18),
-            // (136,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (136,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case Derived and [Derived s]: // 14
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "Derived and [Derived s]")
                 .WithLocation(136, 18),
-            // (145,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (145,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [[Derived]]: // 15
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[[Derived]]").WithLocation(145, 18)
         );
@@ -8428,7 +8578,8 @@ class C
 }";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyEmitDiagnostics(
-            // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (11,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [_]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[_]").WithLocation(11, 18)
         );
@@ -8520,7 +8671,8 @@ class C
                 parseOptions: TestOptions.RegularWithListPatterns
             );
             comp.VerifyEmitDiagnostics(
-                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                // case or it is impossible to match.
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, case2).WithLocation(9, 18)
             );
         }
@@ -8547,7 +8699,8 @@ class C
             parseOptions: TestOptions.RegularWithListPatterns
         );
         comp.VerifyEmitDiagnostics(
-            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [..[var v]]: break;
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[..[var v]]").WithLocation(9, 18)
         );
@@ -8587,7 +8740,8 @@ interface IInner
             options: TestOptions.DebugExe
         );
         comp.VerifyEmitDiagnostics(
-            // (9,10): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (9,10): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //     case [..[10],20]: // 1
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[..[10],20]").WithLocation(9, 10)
         );
@@ -8622,7 +8776,8 @@ class C
             options: TestOptions.ReleaseExe
         );
         compilation.VerifyEmitDiagnostics(
-            // (15,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (15,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //             case [.. null]:
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[.. null]").WithLocation(15, 18)
         );
@@ -8807,30 +8962,36 @@ _ = a switch // 6
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "a is { Length: -1 }")
                 .WithArguments("int[]")
                 .WithLocation(3, 5),
-            // (7,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (7,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             // _ = a switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
                 .WithLocation(7, 7),
-            // (9,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (9,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: -1 } => 0, // 3
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: -1 }").WithLocation(9, 5),
-            // (12,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
+            // (12,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
             // _ = a switch // 4
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 0 }")
                 .WithLocation(12, 7),
-            // (17,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
+            // (17,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
             // _ = a switch // 5
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 0 }")
                 .WithLocation(17, 7),
-            // (22,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
+            // (22,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 0 }' is not covered.
             // _ = a switch // 6
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 0 }")
                 .WithLocation(22, 7),
-            // (24,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (24,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+            // of the switch expression or it is impossible to match.
             //     { Length: -1 } => 0, // 7
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: -1 }").WithLocation(24, 5)
         );
@@ -8852,12 +9013,14 @@ _ = a switch // 1
 ";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyDiagnostics(
-            // (5,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'not null' is not covered.
+            // (5,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern 'not null' is not covered.
             // _ = a switch // 1
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("not null")
                 .WithLocation(5, 7),
-            // (8,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (8,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: -1 } => 0, // 2
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: -1 }").WithLocation(8, 5)
         );
@@ -8885,10 +9048,12 @@ _ = a switch
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "a is { Length: -1 } or { Length: -1 }")
                 .WithArguments("int[]")
                 .WithLocation(3, 5),
-            // (7,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (7,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: -1 } => 1,
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: -1 }").WithLocation(7, 5),
-            // (8,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (8,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: -1 } => 2,
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: -1 }").WithLocation(8, 5)
         );
@@ -8914,12 +9079,14 @@ _ = a switch // 2
             Diagnostic(ErrorCode.ERR_IsPatternImpossible, "a is { Length: < 0 }")
                 .WithArguments("int[]")
                 .WithLocation(3, 5),
-            // (5,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+            // (5,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '_' is not covered.
             // _ = a switch // 2
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("_")
                 .WithLocation(5, 7),
-            // (7,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (7,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: < 0 } => 0, // 3
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: < 0 }").WithLocation(7, 5)
         );
@@ -8940,7 +9107,8 @@ _ = a switch
 ";
         var comp = CreateCompilation(new[] { src, TestSources.Index });
         comp.VerifyDiagnostics(
-            // (6,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+            // (6,5): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+            // the switch expression or it is impossible to match.
             //     { Length: <= 0 } => 2,
             Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "{ Length: <= 0 }").WithLocation(6, 5)
         );
@@ -8981,7 +9149,8 @@ class C : Base
     }
 }
 ";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             new[] { source, TestSources.Index },
             options: TestOptions.DebugDll,
@@ -9087,7 +9256,8 @@ class C : Base
     }
 }
 ";
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             new[] { source, TestSources.Index },
             verify: Verification.FailsILVerify
@@ -9163,7 +9333,8 @@ class C
 ";
         var compilation = CreateCompilationWithIndexAndRange(source);
         compilation.VerifyEmitDiagnostics(
-            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 2,  Count: 0 }' is not covered.
+            // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 2,  Count: 0 }' is not covered.
             // _ = new C() switch
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 2,  Count: 0 }")
@@ -9187,7 +9358,8 @@ class C
 ";
         var compilation = CreateCompilationWithIndex(source);
         compilation.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new C() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("C")
@@ -9273,7 +9445,8 @@ public class C
         );
 
         compilation = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             compilation,
             expectedOutput: "(2, 3)",
@@ -9373,27 +9546,32 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new C() is [var x, .. var y]; // 1, 2, 3
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[var x, .. var y]")
                 .WithArguments("C")
                 .WithLocation(2, 16),
-            // (2,16): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (2,16): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C() is [var x, .. var y]; // 1, 2, 3
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "[var x, .. var y]")
                 .WithArguments("C.this[System.Index]")
                 .WithLocation(2, 16),
-            // (2,24): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (2,24): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C() is [var x, .. var y]; // 1, 2, 3
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, ".. var y")
                 .WithArguments("C.this[System.Range]")
                 .WithLocation(2, 24),
-            // (3,5): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (3,5): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C()[^1]; // 4
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new C()[^1]")
                 .WithArguments("C.this[System.Index]")
                 .WithLocation(3, 5),
-            // (4,5): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (4,5): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C()[..]; // 5
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new C()[..]")
                 .WithArguments("C.this[System.Range]")
@@ -9419,22 +9597,26 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (2,16): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C() is [var x, .. var y]; // 1, 2
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "[var x, .. var y]")
                 .WithArguments("C.this[System.Index]")
                 .WithLocation(2, 16),
-            // (2,24): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (2,24): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C() is [var x, .. var y]; // 1, 2
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, ".. var y")
                 .WithArguments("C.this[System.Range]")
                 .WithLocation(2, 24),
-            // (3,5): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context because it lacks the get accessor
+            // (3,5): error CS0154: The property or indexer 'C.this[Index]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C()[^1]; // 3
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new C()[^1]")
                 .WithArguments("C.this[System.Index]")
                 .WithLocation(3, 5),
-            // (4,5): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context because it lacks the get accessor
+            // (4,5): error CS0154: The property or indexer 'C.this[Range]' cannot be used in this context
+            // because it lacks the get accessor
             // _ = new C()[..]; // 4
             Diagnostic(ErrorCode.ERR_PropertyLacksGet, "new C()[..]")
                 .WithArguments("C.this[System.Range]")
@@ -9604,7 +9786,8 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(42, 42)", verify: Verification.FailsILVerify);
     }
 
@@ -9657,7 +9840,8 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(42, 42)", verify: Verification.FailsILVerify);
     }
 
@@ -9673,7 +9857,8 @@ if (""42"" is [var x, var y])
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(4, 2)", verify: Verification.FailsILVerify);
     }
 
@@ -9690,7 +9875,8 @@ if (new[] { 4, 2 } is [var x, _])
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(4, 2)", verify: Verification.FailsILVerify);
     }
 
@@ -9713,7 +9899,8 @@ if (new[] {data} is {pattern})
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(4, 4)", verify: Verification.FailsILVerify);
     }
 
@@ -9736,7 +9923,8 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(42, 42)", verify: Verification.FailsILVerify);
     }
 
@@ -9759,7 +9947,8 @@ class C
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "(42, 42)", verify: Verification.FailsILVerify);
     }
 
@@ -9775,7 +9964,8 @@ if (""0420"" is [_, .. var x, _])
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(comp, expectedOutput: "42", verify: Verification.FailsILVerify);
     }
 
@@ -9801,7 +9991,8 @@ class C
             options: TestOptions.ReleaseExe
         );
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         var verifier = CompileAndVerify(
             comp,
             expectedOutput: "(4, 2, 4, 2)",
@@ -9908,7 +10099,8 @@ if (new[] {data} is {pattern})
             new[] { source, TestSources.Index, TestSources.Range, TestSources.GetSubArray }
         );
         comp.VerifyEmitDiagnostics();
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of 'System.Index', Expected = address of 'System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // 'System.Index', Expected = address of 'System.Index' }
         CompileAndVerify(
             comp,
             expectedOutput: "(4, 2, 2, 4, 2, 2)",
@@ -9938,7 +10130,8 @@ class C
             new[] { source, TestSources.Index, TestSources.Range, TestSources.GetSubArray },
             options: TestOptions.ReleaseDll
         );
-        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of '[...]System.Index', Expected = address of '[...]System.Index' }
+        // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of
+        // '[...]System.Index', Expected = address of '[...]System.Index' }
         var verifier = CompileAndVerify(comp, verify: Verification.FailsILVerify)
             .VerifyDiagnostics();
 
@@ -9988,7 +10181,8 @@ class C : INotCountable
 ";
         var comp = CreateCompilation(new[] { source, TestSources.Index, TestSources.Range });
         comp.VerifyEmitDiagnostics(
-            // (2,34): error CS8985: List patterns may not be used for a value of type 'INotCountable'. No suitable 'Length' or 'Count' property was found.
+            // (2,34): error CS8985: List patterns may not be used for a value of type 'INotCountable'. No
+            // suitable 'Length' or 'Count' property was found.
             // _ = new C() is INotCountable and [var x, .. var y];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[var x, .. var y]")
                 .WithArguments("INotCountable")
@@ -10060,7 +10254,8 @@ _ = ituple switch
             new[] { source, TestSources.Index, TestSources.Range, TestSources.ITuple }
         );
         comp.VerifyEmitDiagnostics(
-            // (2,15): error CS8985: List patterns may not be used for a value of type '(int, int)'. No suitable 'Length' or 'Count' property was found.
+            // (2,15): error CS8985: List patterns may not be used for a value of type '(int, int)'. No suitable
+            // 'Length' or 'Count' property was found.
             // _ = (1, 2) is [var x, .. var y];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[var x, .. var y]")
                 .WithArguments("(int, int)")
@@ -10109,10 +10304,12 @@ switch (a)
             new[] { source, TestSources.GetSubArray }
         );
         comp.VerifyEmitDiagnostics(
-            // (7,10): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (7,10): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //     case [1,2,3]: // error
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[1,2,3]").WithLocation(7, 10),
-            // (15,10): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+            // (15,10): error CS8120: The switch case is unreachable. It has already been handled by a previous
+            // case or it is impossible to match.
             //     case [1,2,3]: // error
             Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "[1,2,3]").WithLocation(15, 10)
         );
@@ -10135,17 +10332,20 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
                 .WithLocation(2, 16),
-            // (3,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (3,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [..];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[..]")
                 .WithArguments("S")
                 .WithLocation(3, 16),
-            // (4,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (4,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [0, .. var x, 1];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[0, .. var x, 1]")
                 .WithArguments("S")
@@ -10167,7 +10367,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10195,7 +10396,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10218,7 +10420,8 @@ class S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10241,7 +10444,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10264,7 +10468,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10287,7 +10492,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10310,7 +10516,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10333,7 +10540,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10356,7 +10564,8 @@ struct S
 ";
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length' or 'Count' property was found.
+            // (2,16): error CS8985: List patterns may not be used for a value of type 'S'. No suitable 'Length'
+            // or 'Count' property was found.
             // _ = new S() is [];
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                 .WithArguments("S")
@@ -10398,7 +10607,8 @@ if ((b is [var z] and z) is [true])
             Diagnostic(ErrorCode.ERR_NoImplicitConv, "x")
                 .WithArguments("int", "int[]")
                 .WithLocation(4, 22),
-            // (4,27): error CS8985: List patterns may not be used for a value of type 'bool'. No suitable 'Length' or 'Count' property was found.
+            // (4,27): error CS8985: List patterns may not be used for a value of type 'bool'. No suitable
+            // 'Length' or 'Count' property was found.
             // if (a is [var x] and x is [1])
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[1]")
                 .WithArguments("bool")
@@ -10423,7 +10633,8 @@ if ((b is [var z] and z) is [true])
             Diagnostic(ErrorCode.ERR_NoImplicitConv, "z")
                 .WithArguments("bool", "bool[]")
                 .WithLocation(13, 23),
-            // (13,29): error CS8985: List patterns may not be used for a value of type 'bool'. No suitable 'Length' or 'Count' property was found.
+            // (13,29): error CS8985: List patterns may not be used for a value of type 'bool'. No suitable
+            // 'Length' or 'Count' property was found.
             // if ((b is [var z] and z) is [true])
             Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[true]")
                 .WithArguments("bool")
@@ -10485,7 +10696,8 @@ public static class Extension
             """;
         var comp = CreateCompilationWithIndexAndRangeAndSpan(source);
         comp.VerifyEmitDiagnostics(
-            // (2,7): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 1000 }' is not covered.
+            // (2,7): warning CS8509: The switch expression does not handle all possible values of its input
+            // type (it is not exhaustive). For example, the pattern '{ Length: 1000 }' is not covered.
             // _ = a switch { { Length: < 1000 } => 0 };
             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                 .WithArguments("{ Length: 1000 }")

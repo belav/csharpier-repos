@@ -3700,7 +3700,8 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
     }
 
     // We can't client-evaluate Like (for the expected results).
-    // However, since the test data has no LIKE wildcards, it effectively functions like equality - except that 'null like null' returns
+    // However, since the test data has no LIKE wildcards, it effectively functions like equality -
+    // except that 'null like null' returns
     // false instead of true. So we have this "lite" implementation which doesn't support wildcards.
     private bool LikeLite(string s, string pattern) =>
         s == pattern && s is not null && pattern is not null;

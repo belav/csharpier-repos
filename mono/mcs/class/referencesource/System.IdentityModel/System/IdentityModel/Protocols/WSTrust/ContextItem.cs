@@ -37,7 +37,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="value">Context item value. Can be null.</param>
         /// <param name="scope">Context item scope. Can be null.</param>
         /// <exception cref="ArgumentNullException">Input argument 'name' is null.</exception>
-        /// <exception cref="ArgumentException">Input argument 'name' or 'scope' is not an absolute URI.</exception>
+        /// <exception cref="ArgumentException">Input argument 'name' or 'scope' is not an absolute
+        // URI.</exception>
         public ContextItem(Uri name, string value, Uri scope)
         {
             if (name == null)

@@ -173,7 +173,8 @@ namespace System.Runtime
             }
         }
 
-        // This never returns.  The Exception return type lets you write 'throw AssertAndFailFast()' which tells the compiler/tools that
+        // This never returns.  The Exception return type lets you write 'throw AssertAndFailFast()' which
+        // tells the compiler/tools that
         // execution stops.
         [Fx.Tag.SecurityNote(
             Critical = "Calls into critical method Environment.FailFast",
@@ -186,8 +187,10 @@ namespace System.Runtime
             Fx.Assert(description);
             string failFastMessage = InternalSR.FailFastMessage(description);
 
-            // The catch is here to force the finally to run, as finallys don't run until the stack walk gets to a catch.
-            // The catch makes sure that the finally will run before the stack-walk leaves the frame, but the code inside is impossible to reach.
+            // The catch is here to force the finally to run, as finallys don't run until the stack walk gets to
+            // a catch.
+            // The catch makes sure that the finally will run before the stack-walk leaves the frame, but the
+            // code inside is impossible to reach.
             try
             {
                 try
@@ -478,7 +481,8 @@ namespace System.Runtime
         {
             try
             {
-                // Safe to catch OOM from this as long as the ONLY thing it does is a simple allocation of a primitive type (no method calls).
+                // Safe to catch OOM from this as long as the ONLY thing it does is a simple allocation of a
+                // primitive type (no method calls).
                 return new byte[size];
             }
             catch (OutOfMemoryException exception)
@@ -497,7 +501,8 @@ namespace System.Runtime
         {
             try
             {
-                // Safe to catch OOM from this as long as the ONLY thing it does is a simple allocation of a primitive type (no method calls).
+                // Safe to catch OOM from this as long as the ONLY thing it does is a simple allocation of a
+                // primitive type (no method calls).
                 return new char[size];
             }
             catch (OutOfMemoryException exception)
@@ -612,11 +617,13 @@ namespace System.Runtime
                 ElementOnTimer,
 
                 // A finalizer/WeakReference based cache, where the elements are held by WeakReferences (or hold an
-                // inner object by a WeakReference), and the weakly-referenced object has a finalizer which cleans the
+                // inner object by a WeakReference), and the weakly-referenced object has a finalizer which cleans
+                // the
                 // item from the cache.
                 ElementOnGC,
 
-                // A cache that provides a per-element token, delegate, interface, or other piece of context that can
+                // A cache that provides a per-element token, delegate, interface, or other piece of context that
+                // can
                 // be used to remove the element (such as IDisposable).
                 ElementOnCallback,
 
@@ -922,9 +929,11 @@ namespace System.Runtime
 
             // Sometime a method will call a conditionally-blocking method in such a way that it is guaranteed
             // not to block (i.e. the condition can be Asserted false).  Such a method can be marked as
-            // GuaranteeNonBlocking as an assertion that the method doesn't block despite calling a blocking method.
+            // GuaranteeNonBlocking as an assertion that the method doesn't block despite calling a blocking
+            // method.
             //
-            // Methods that don't call blocking methods and aren't marked as Blocking are assumed not to block, so
+            // Methods that don't call blocking methods and aren't marked as Blocking are assumed not to block,
+            // so
             // they do not require this attribute.
             [AttributeUsage(
                 AttributeTargets.Method | AttributeTargets.Constructor,

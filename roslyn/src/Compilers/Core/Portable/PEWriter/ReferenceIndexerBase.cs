@@ -19,9 +19,12 @@ namespace Microsoft.Cci
         private readonly HashSet<IReferenceOrISignature> _alreadyHasToken = new();
 
         /// <summary>
-        /// Set true before a type reference is visited but only if a token needs to be created for the type reference.
-        /// E.g. not set before return type of a method is visited since the type reference is encoded in the signature blob of the method.
-        /// On the other hand, it is true before the type of an event definition is visited since Event table stores the type of the event as a coded token (TypeDef/Ref/Spec).
+        /// Set true before a type reference is visited but only if a token needs to be created for the type
+        // reference.
+        /// E.g. not set before return type of a method is visited since the type reference is encoded in
+        // the signature blob of the method.
+        /// On the other hand, it is true before the type of an event definition is visited since Event
+        // table stores the type of the event as a coded token (TypeDef/Ref/Spec).
         /// </summary>
         protected bool typeReferenceNeedsToken;
 
@@ -126,7 +129,8 @@ namespace Microsoft.Cci
 
         public override void Visit(IMarshallingInformation marshallingInformation)
         {
-            // The type references in the marshalling information do not end up in tables, but are serialized as strings.
+            // The type references in the marshalling information do not end up in tables, but are serialized as
+            // strings.
         }
 
         public override void Visit(IMethodDefinition method)
@@ -350,8 +354,10 @@ namespace Microsoft.Cci
         {
             RecordTypeMemberReference(typeMemberReference);
 
-            //This code was in CCI, but appears wrong to me. There is no need to visit attributes of members that are
-            //being referenced, only those being defined. This code causes additional spurious typerefs and memberrefs to be
+            //This code was in CCI, but appears wrong to me. There is no need to visit attributes of members
+            // that are
+            //being referenced, only those being defined. This code causes additional spurious typerefs and
+            // memberrefs to be
             //emitted. If the attributes can't be resolved, it causes a NullReference.
             //
             //if ((typeMemberReference.AsDefinition(Context) == null))
@@ -502,8 +508,10 @@ namespace Microsoft.Cci
                 }
             }
 
-            //This code was in CCI, but appears wrong to me. There is no need to visit attributes of types that are
-            //being referenced, only those being defined. This code causes additional spurious typerefs and memberrefs to be
+            //This code was in CCI, but appears wrong to me. There is no need to visit attributes of types that
+            // are
+            //being referenced, only those being defined. This code causes additional spurious typerefs and
+            // memberrefs to be
             //emitted. If the attributes can't be resolved, it causes a NullReference.
             //
             //if ((typeReference.AsTypeDefinition(Context) == null))

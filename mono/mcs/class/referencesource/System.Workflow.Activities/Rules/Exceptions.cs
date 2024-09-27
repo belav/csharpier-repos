@@ -41,7 +41,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
         /// </summary>
-        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
+        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleException(SerializationInfo serializeInfo, StreamingContext context)
             : base(serializeInfo, context) { }
@@ -79,7 +80,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
         /// </summary>
-        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
+        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleEvaluationException(SerializationInfo serializeInfo, StreamingContext context)
             : base(serializeInfo, context) { }
@@ -190,7 +192,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
         /// </summary>
-        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
+        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleEvaluationIncompatibleTypesException(
             SerializationInfo serializeInfo,
@@ -213,7 +216,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Implements the ISerializable interface
         /// </summary>
-        /// <param name="info">Reference to the object that holds the data needed to serialize/deserialize the exception</param>
+        /// <param name="info">Reference to the object that holds the data needed to serialize/deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for serialiing the exception data</param>
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -283,7 +287,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Constructor required by for Serialization - initialize a new instance from serialized data
         /// </summary>
-        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize the exception</param>
+        /// <param name="serializeInfo">Reference to the object that holds the data needed to deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for deserializing the exception data</param>
         protected RuleSetValidationException(
             SerializationInfo serializeInfo,
@@ -300,7 +305,8 @@ namespace System.Workflow.Activities.Rules
         /// <summary>
         /// Implements the ISerializable interface
         /// </summary>
-        /// <param name="info">Reference to the object that holds the data needed to serialize/deserialize the exception</param>
+        /// <param name="info">Reference to the object that holds the data needed to serialize/deserialize
+        // the exception</param>
         /// <param name="context">Provides the means for serialiing the exception data</param>
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

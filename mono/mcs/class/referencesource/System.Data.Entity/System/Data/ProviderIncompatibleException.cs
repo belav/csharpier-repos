@@ -15,7 +15,8 @@ namespace System.Data
     using System.Security.Permissions;
 
     /// <summary>
-    /// This exception is thrown when the store provider exhibits a behavior incompatible with the entity client provider
+    /// This exception is thrown when the store provider exhibits a behavior incompatible with the
+    // entity client provider
     /// </summary>
     [Serializable]
     public sealed class ProviderIncompatibleException : EntityException

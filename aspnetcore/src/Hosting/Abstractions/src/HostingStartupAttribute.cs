@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.AspNetCore.Hosting;
 
 /// <summary>
-/// Marker attribute indicating an implementation of <see cref="IHostingStartup"/> that will be loaded and executed when building an <see cref="IWebHost"/>.
+/// Marker attribute indicating an implementation of <see cref="IHostingStartup"/> that will be
+// loaded and executed when building an <see cref="IWebHost"/>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Assembly, Inherited = false, AllowMultiple = true)]
 public sealed class HostingStartupAttribute : Attribute

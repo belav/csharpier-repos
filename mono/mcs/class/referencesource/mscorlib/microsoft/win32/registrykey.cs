@@ -5,47 +5,48 @@
 // ==--==
 
 /*
-  Note on transaction support:
-  Eventually we will want to add support for NT's transactions to our
-  RegistryKey API's (possibly Whidbey M3?).  When we do this, here's
-  the list of API's we need to make transaction-aware:
+Note on transaction support:
+Eventually we will want to add support for NT's transactions to our
+RegistryKey API's (possibly Whidbey M3?).  When we do this, here's
+the list of API's we need to make transaction-aware:
 
-  RegCreateKeyEx
-  RegDeleteKey
-  RegDeleteValue
-  RegEnumKeyEx
-  RegEnumValue
-  RegOpenKeyEx
-  RegQueryInfoKey
-  RegQueryValueEx
-  RegSetValueEx
+RegCreateKeyEx
+RegDeleteKey
+RegDeleteValue
+RegEnumKeyEx
+RegEnumValue
+RegOpenKeyEx
+RegQueryInfoKey
+RegQueryValueEx
+RegSetValueEx
 
-  We can ignore RegConnectRegistry (remote registry access doesn't yet have
-  transaction support) and RegFlushKey.  RegCloseKey doesn't require any
-  additional work.  .
- */
+We can ignore RegConnectRegistry (remote registry access doesn't yet have
+transaction support) and RegFlushKey.  RegCloseKey doesn't require any
+additional work.  .
+*/
 
 /*
-  Note on ACL support:
-  The key thing to note about ACL's is you set them on a kernel object like a
-  registry key, then the ACL only gets checked when you construct handles to
-  them.  So if you set an ACL to deny read access to yourself, you'll still be
-  able to read with that handle, but not with new handles.
+Note on ACL support:
+The key thing to note about ACL's is you set them on a kernel object like a
+registry key, then the ACL only gets checked when you construct handles to
+them.  So if you set an ACL to deny read access to yourself, you'll still be
+able to read with that handle, but not with new handles.
 
-  Another peculiarity is a Terminal Server app compatibility hack.  The OS
-  will second guess your attempt to open a handle sometimes.  If a certain
-  combination of Terminal Server app compat registry keys are set, then the
-  OS will try to reopen your handle with lesser permissions if you couldn't
-  open it in the specified mode.  So on some machines, we will see handles that
-  may not be able to read or write to a registry key.  It's very strange.  But
-  the real test of these handles is attempting to read or set a value in an
-  affected registry key.
-  
-  For reference, at least two registry keys must be set to particular values
-  for this behavior:
-  HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\RegistryExtensionFlags, the least significant bit must be 1.
-  HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
-  There might possibly be an interaction with yet a third registry key as well.
+Another peculiarity is a Terminal Server app compatibility hack.  The OS
+will second guess your attempt to open a handle sometimes.  If a certain
+combination of Terminal Server app compat registry keys are set, then the
+OS will try to reopen your handle with lesser permissions if you couldn't
+open it in the specified mode.  So on some machines, we will see handles that
+may not be able to read or write to a registry key.  It's very strange.  But
+the real test of these handles is attempting to read or set a value in an
+affected registry key.
+
+For reference, at least two registry keys must be set to particular values
+for this behavior:
+HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Terminal Server\RegistryExtensionFlags, the least
+significant bit must be 1.
+HKLM\SYSTEM\CurrentControlSet\Control\TerminalServer\TSAppCompat must be 1
+There might possibly be an interaction with yet a third registry key as well.
 
 */
 
@@ -74,8 +75,8 @@ namespace Microsoft.Win32
 #if !FEATURE_PAL
 
     /**
-     * Registry hive values.  Useful only for GetRemoteBaseKey
-     */
+    * Registry hive values.  Useful only for GetRemoteBaseKey
+    */
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum RegistryHive
@@ -90,13 +91,13 @@ namespace Microsoft.Win32
     }
 
     /**
-     * Registry encapsulation. To get an instance of a RegistryKey use the
-     * Registry class's static members then call OpenSubKey.
-     *
-     * @see Registry
-     * @security(checkDllCalls=off)
-     * @security(checkClassLinking=on)
-     */
+    * Registry encapsulation. To get an instance of a RegistryKey use the
+    * Registry class's static members then call OpenSubKey.
+    *
+    * @see Registry
+    * @security(checkDllCalls=off)
+    * @security(checkClassLinking=on)
+    */
 #if FEATURE_REMOTING
     [ComVisible(true)]
     public sealed class RegistryKey : MarshalByRefObject, IDisposable
@@ -164,8 +165,8 @@ namespace Microsoft.Win32
         private volatile RegistryView regView = RegistryView.Default;
 
         /**
-         * RegistryInternalCheck values.  Useful only for CheckPermission
-         */
+        * RegistryInternalCheck values.  Useful only for CheckPermission
+        */
         private enum RegistryInternalCheck
         {
             CheckSubKeyWritePermission = 0,
@@ -184,24 +185,24 @@ namespace Microsoft.Win32
         };
 
         /**
-         * Creates a RegistryKey.
-         *
-         * This key is bound to hkey, if writable is <b>false</b> then no write operations
-         * will be allowed.
-         */
+        * Creates a RegistryKey.
+        *
+        * This key is bound to hkey, if writable is <b>false</b> then no write operations
+        * will be allowed.
+        */
         [System.Security.SecurityCritical] // auto-generated
         private RegistryKey(SafeRegistryHandle hkey, bool writable, RegistryView view)
             : this(hkey, writable, false, false, false, view) { }
 
         /**
-         * Creates a RegistryKey.
-         *
-         * This key is bound to hkey, if writable is <b>false</b> then no write operations
-         * will be allowed. If systemkey is set then the hkey won't be released
-         * when the object is GC'ed.
-         * The remoteKey flag when set to true indicates that we are dealing with registry entries
-         * on a remote machine and requires the program making these calls to have full trust.
-         */
+        * Creates a RegistryKey.
+        *
+        * This key is bound to hkey, if writable is <b>false</b> then no write operations
+        * will be allowed. If systemkey is set then the hkey won't be released
+        * when the object is GC'ed.
+        * The remoteKey flag when set to true indicates that we are dealing with registry entries
+        * on a remote machine and requires the program making these calls to have full trust.
+        */
         [System.Security.SecurityCritical] // auto-generated
         private RegistryKey(
             SafeRegistryHandle hkey,
@@ -230,8 +231,8 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Closes this key, flushes it to disk if the contents have been modified.
-         */
+        * Closes this key, flushes it to disk if the contents have been modified.
+        */
         public void Close()
         {
             Dispose(true);
@@ -297,12 +298,12 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Creates a new subkey, or opens an existing one.
-         *
-         * @param subkey Name or path to subkey to create or open.
-         *
-         * @return the subkey, or <b>null</b> if the operation failed.
-         */
+        * Creates a new subkey, or opens an existing one.
+        *
+        * @param subkey Name or path to subkey to create or open.
+        *
+        * @return the subkey, or <b>null</b> if the operation failed.
+        */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         [SuppressMessage(
@@ -510,13 +511,13 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Deletes the specified subkey. Will throw an exception if the subkey has
-         * subkeys. To delete a tree of subkeys use, DeleteSubKeyTree.
-         *
-         * @param subkey SubKey to delete.
-         *
-         * @exception InvalidOperationException thrown if the subkey has child subkeys.
-         */
+        * Deletes the specified subkey. Will throw an exception if the subkey has
+        * subkeys. To delete a tree of subkeys use, DeleteSubKeyTree.
+        *
+        * @param subkey SubKey to delete.
+        *
+        * @exception InvalidOperationException thrown if the subkey has child subkeys.
+        */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void DeleteSubKey(String subkey)
@@ -592,10 +593,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Recursively deletes a subkey and any child subkeys.
-         *
-         * @param subkey SubKey to delete.
-         */
+        * Recursively deletes a subkey and any child subkeys.
+        *
+        * @param subkey SubKey to delete.
+        */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public void DeleteSubKeyTree(String subkey)
@@ -718,10 +719,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Deletes the specified value from this key.
-         *
-         * @param name Name of value to delete.
-         */
+        * Deletes the specified value from this key.
+        *
+        * @param name Name of value to delete.
+        */
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         public void DeleteValue(String name)
@@ -744,7 +745,8 @@ namespace Microsoft.Win32
             int errorCode = Win32Native.RegDeleteValue(hkey, name);
 
             //
-            // From windows 2003 server, if the name is too long we will get error code ERROR_FILENAME_EXCED_RANGE
+            // From windows 2003 server, if the name is too long we will get error code
+            // ERROR_FILENAME_EXCED_RANGE
             // This still means the name doesn't exist. We need to be consistent with previous OS.
             //
             if (
@@ -768,21 +770,21 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves a new RegistryKey that represents the requested key. Valid
-         * values are:
-         *
-         * HKEY_CLASSES_ROOT,
-         * HKEY_CURRENT_USER,
-         * HKEY_LOCAL_MACHINE,
-         * HKEY_USERS,
-         * HKEY_PERFORMANCE_DATA,
-         * HKEY_CURRENT_CONFIG,
-         * HKEY_DYN_DATA.
-         *
-         * @param hKey HKEY_* to open.
-         *
-         * @return the RegistryKey requested.
-         */
+        * Retrieves a new RegistryKey that represents the requested key. Valid
+        * values are:
+        *
+        * HKEY_CLASSES_ROOT,
+        * HKEY_CURRENT_USER,
+        * HKEY_LOCAL_MACHINE,
+        * HKEY_USERS,
+        * HKEY_PERFORMANCE_DATA,
+        * HKEY_CURRENT_CONFIG,
+        * HKEY_DYN_DATA.
+        *
+        * @param hKey HKEY_* to open.
+        *
+        * @return the RegistryKey requested.
+        */
         [System.Security.SecurityCritical] // auto-generated
         internal static RegistryKey GetBaseKey(IntPtr hKey)
         {
@@ -818,23 +820,23 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves a new RegistryKey that represents the requested key on a foreign
-         * machine.  Valid values for hKey are members of the RegistryHive enum, or
-         * Win32 integers such as:
-         *
-         * HKEY_CLASSES_ROOT,
-         * HKEY_CURRENT_USER,
-         * HKEY_LOCAL_MACHINE,
-         * HKEY_USERS,
-         * HKEY_PERFORMANCE_DATA,
-         * HKEY_CURRENT_CONFIG,
-         * HKEY_DYN_DATA.
-         *
-         * @param hKey HKEY_* to open.
-         * @param machineName the machine to connect to
-         *
-         * @return the RegistryKey requested.
-         */
+        * Retrieves a new RegistryKey that represents the requested key on a foreign
+        * machine.  Valid values for hKey are members of the RegistryHive enum, or
+        * Win32 integers such as:
+        *
+        * HKEY_CLASSES_ROOT,
+        * HKEY_CURRENT_USER,
+        * HKEY_LOCAL_MACHINE,
+        * HKEY_USERS,
+        * HKEY_PERFORMANCE_DATA,
+        * HKEY_CURRENT_CONFIG,
+        * HKEY_DYN_DATA.
+        *
+        * @param hKey HKEY_* to open.
+        * @param machineName the machine to connect to
+        *
+        * @return the RegistryKey requested.
+        */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         public static RegistryKey OpenRemoteBaseKey(RegistryHive hKey, String machineName)
@@ -897,14 +899,14 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves a subkey. If readonly is <b>true</b>, then the subkey is opened with
-         * read-only access.
-         *
-         * @param name Name or path of subkey to open.
-         * @param readonly Set to <b>true</b> if you only need readonly access.
-         *
-         * @return the Subkey requested, or <b>null</b> if the operation failed.
-         */
+        * Retrieves a subkey. If readonly is <b>true</b>, then the subkey is opened with
+        * read-only access.
+        *
+        * @param name Name or path of subkey to open.
+        * @param readonly Set to <b>true</b> if you only need readonly access.
+        *
+        * @return the Subkey requested, or <b>null</b> if the operation failed.
+        */
 #if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
 #else
@@ -1056,7 +1058,8 @@ namespace Microsoft.Win32
 #endif
 
         // This required no security checks. This is to get around the Deleting SubKeys which only require
-        // write permission. They call OpenSubKey which required read. Now instead call this function w/o security checks
+        // write permission. They call OpenSubKey which required read. Now instead call this function w/o
+        // security checks
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -1091,12 +1094,12 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Returns a subkey with read only permissions.
-         *
-         * @param name Name or path of subkey to open.
-         *
-         * @return the Subkey requested, or <b>null</b> if the operation failed.
-         */
+        * Returns a subkey with read only permissions.
+        *
+        * @param name Name or path of subkey to open.
+        *
+        * @return the Subkey requested, or <b>null</b> if the operation failed.
+        */
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
 #if FEATURE_CORECLR
@@ -1108,10 +1111,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves the count of subkeys.
-         *
-         * @return a count of subkeys.
-         */
+        * Retrieves the count of subkeys.
+        *
+        * @return a count of subkeys.
+        */
         public int SubKeyCount
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1274,10 +1277,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves an array of strings containing all the subkey names.
-         *
-         * @return all subkey names.
-         */
+        * Retrieves an array of strings containing all the subkey names.
+        *
+        * @return all subkey names.
+        */
 #if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
 #else
@@ -1333,10 +1336,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves the count of values.
-         *
-         * @return a count of values.
-         */
+        * Retrieves the count of values.
+        *
+        * @return a count of values.
+        */
         public int ValueCount
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1378,10 +1381,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves an array of strings containing all the value names.
-         *
-         * @return all value names.
-         */
+        * Retrieves an array of strings containing all the value names.
+        *
+        * @return all value names.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public unsafe String[] GetValueNames()
         {
@@ -1434,16 +1437,16 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves the specified value. <b>null</b> is returned if the value
-         * doesn't exist.
-         *
-         * Note that <var>name</var> can be null or "", at which point the
-         * unnamed or default value of this Registry key is returned, if any.
-         *
-         * @param name Name of value to retrieve.
-         *
-         * @return the data associated with the value.
-         */
+        * Retrieves the specified value. <b>null</b> is returned if the value
+        * doesn't exist.
+        *
+        * Note that <var>name</var> can be null or "", at which point the
+        * unnamed or default value of this Registry key is returned, if any.
+        *
+        * @param name Name of value to retrieve.
+        *
+        * @return the data associated with the value.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public Object GetValue(String name)
         {
@@ -1457,20 +1460,20 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves the specified value. <i>defaultValue</i> is returned if the value doesn't exist.
-         *
-         * Note that <var>name</var> can be null or "", at which point the
-         * unnamed or default value of this Registry key is returned, if any.
-         * The default values for RegistryKeys are OS-dependent.  NT doesn't
-         * have them by default, but they can exist and be of any type.  On
-         * Win95, the default value is always an empty key of type REG_SZ.
-         * Win98 supports default values of any type, but defaults to REG_SZ.
-         *
-         * @param name Name of value to retrieve.
-         * @param defaultValue Value to return if <i>name</i> doesn't exist.
-         *
-         * @return the data associated with the value.
-         */
+        * Retrieves the specified value. <i>defaultValue</i> is returned if the value doesn't exist.
+        *
+        * Note that <var>name</var> can be null or "", at which point the
+        * unnamed or default value of this Registry key is returned, if any.
+        * The default values for RegistryKeys are OS-dependent.  NT doesn't
+        * have them by default, but they can exist and be of any type.  On
+        * Win95, the default value is always an empty key of type REG_SZ.
+        * Win98 supports default values of any type, but defaults to REG_SZ.
+        *
+        * @param name Name of value to retrieve.
+        * @param defaultValue Value to return if <i>name</i> doesn't exist.
+        *
+        * @return the data associated with the value.
+        */
 #if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
 #else
@@ -1885,13 +1888,13 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves the current state of the dirty property.
-         *
-         * A key is marked as dirty if any operation has occured that modifies the
-         * contents of the key.
-         *
-         * @return <b>true</b> if the key has been modified.
-         */
+        * Retrieves the current state of the dirty property.
+        *
+        * A key is marked as dirty if any operation has occured that modifies the
+        * contents of the key.
+        *
+        * @return <b>true</b> if the key has been modified.
+        */
         private bool IsDirty()
         {
             return (this.state & STATE_DIRTY) != 0;
@@ -1928,11 +1931,11 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Sets the specified value.
-         *
-         * @param name Name of value to store data in.
-         * @param value Data to store.
-         */
+        * Sets the specified value.
+        *
+        * @param name Name of value to store data in.
+        * @param value Data to store.
+        */
         public void SetValue(String name, Object value)
         {
             SetValue(name, value, RegistryValueKind.Unknown);
@@ -2145,8 +2148,10 @@ namespace Microsoft.Win32
 
         private RegistryValueKind CalculateValueKind(Object value)
         {
-            // This logic matches what used to be in SetValue(string name, object value) in the v1.0 and v1.1 days.
-            // Even though we could add detection for an int64 in here, we want to maintain compatibility with the
+            // This logic matches what used to be in SetValue(string name, object value) in the v1.0 and v1.1
+            // days.
+            // Even though we could add detection for an int64 in here, we want to maintain compatibility with
+            // the
             // old behavior.
             if (value is Int32)
                 return RegistryValueKind.DWord;
@@ -2166,10 +2171,10 @@ namespace Microsoft.Win32
         }
 
         /**
-         * Retrieves a string representation of this key.
-         *
-         * @return a string representing the key.
-         */
+        * Retrieves a string representation of this key.
+        *
+        * @return a string representing the key.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         public override String ToString()
         {
@@ -2206,12 +2211,12 @@ namespace Microsoft.Win32
 #endif
 
         /**
-         * After calling GetLastWin32Error(), it clears the last error field,
-         * so you must save the HResult and pass it to this method.  This method
-         * will determine the appropriate exception to throw dependent on your
-         * error, and depending on the error, insert a string into the message
-         * gotten from the ResourceManager.
-         */
+        * After calling GetLastWin32Error(), it clears the last error field,
+        * so you must save the HResult and pass it to this method.  This method
+        * will determine the appropriate exception to throw dependent on your
+        * error, and depending on the error, insert a string into the message
+        * gotten from the ResourceManager.
+        */
         [System.Security.SecuritySafeCritical] // auto-generated
         internal void Win32Error(int errorCode, String str)
         {
@@ -2230,20 +2235,24 @@ namespace Microsoft.Win32
 
                 case Win32Native.ERROR_INVALID_HANDLE:
                     /**
-                     * For normal RegistryKey instances we dispose the SafeRegHandle and throw IOException.
-                     * However, for HKEY_PERFORMANCE_DATA (on a local or remote machine) we avoid disposing the
-                     * SafeRegHandle and only throw the IOException.  This is to workaround reentrancy issues
-                     * in PerformanceCounter.NextValue() where the API could throw {NullReference, ObjectDisposed, ArgumentNull}Exception
-                     * on reentrant calls because of this error code path in RegistryKey
-                     *
-                     * Normally we'd make our caller synchronize access to a shared RegistryKey instead of doing something like this,
-                     * however we shipped PerformanceCounter.NextValue() un-synchronized in v2.0RTM and customers have taken a dependency on
-                     * this behavior (being able to simultaneously query multiple remote-machine counters on multiple threads, instead of
-                     * having serialized access).
-                     *
-                     *
-
-*/
+                    * For normal RegistryKey instances we dispose the SafeRegHandle and throw IOException.
+                    * However, for HKEY_PERFORMANCE_DATA (on a local or remote machine) we avoid disposing the
+                    * SafeRegHandle and only throw the IOException.  This is to workaround reentrancy issues
+                    * in PerformanceCounter.NextValue() where the API could throw {NullReference, ObjectDisposed,
+                    ArgumentNull}Exception
+                    * on reentrant calls because of this error code path in RegistryKey
+                    *
+                    * Normally we'd make our caller synchronize access to a shared RegistryKey instead of doing
+                    something like this,
+                    * however we shipped PerformanceCounter.NextValue() un-synchronized in v2.0RTM and customers have
+                    taken a dependency on
+                    * this behavior (being able to simultaneously query multiple remote-machine counters on multiple
+                    threads, instead of
+                    * having serialized access).
+                    *
+                    *
+                    
+                    */
                     if (!IsPerfDataKey())
                     {
                         this.hkey.SetHandleAsInvalid();

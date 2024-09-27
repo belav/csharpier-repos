@@ -857,13 +857,16 @@ namespace System.Tests
             Assert.False(type.IsTypeDefinition);
         }
 
-        // In the unlikely event we ever add new values to the CorElementType enumeration, CoreCLR will probably miss it because of the way IsTypeDefinition
-        // works. It's likely that such a type will live in the core assembly so to improve our chances of catching this situation, test IsTypeDefinition
+        // In the unlikely event we ever add new values to the CorElementType enumeration, CoreCLR will
+        // probably miss it because of the way IsTypeDefinition
+        // works. It's likely that such a type will live in the core assembly so to improve our chances of
+        // catching this situation, test IsTypeDefinition
         // on every type exposed out of that assembly.
         //
         // Skipping this on .NET Native because:
         //  - We really don't want to opt in all the metadata in System.Private.CoreLib
-        //  - The .NET Native implementation of IsTypeDefinition is not the one that works by enumerating selected values off CorElementType.
+        //  - The .NET Native implementation of IsTypeDefinition is not the one that works by enumerating
+        // selected values off CorElementType.
         //    It has much less need of a test like this.
         [Fact]
         public void IsTypeDefinition_AllDefinedTypesInCoreAssembly()
@@ -1391,10 +1394,12 @@ namespace System.Tests
 
             // Test all combinations of the following:
             // Static method
-            // Implementation by having the same name, explicit implementation, & default implementation (where applicable - only level 2)
+            // Implementation by having the same name, explicit implementation, & default implementation (where
+            // applicable - only level 2)
             // Non-generic interface, generic interface
             // Non-generic type, generic type
-            // 3 levels of inheritance (of the interfaces): 1 - static abstract method, 2 - add a default implementation, 3 - re-abstractify it
+            // 3 levels of inheritance (of the interfaces): 1 - static abstract method, 2 - add a default
+            // implementation, 3 - re-abstractify it
             // Checks that all the applicable interfaces are working properly
             (
                 Type Type,
@@ -1405,7 +1410,8 @@ namespace System.Tests
             )[] classTypes = new (Type, bool, bool, Type, int)[]
             {
                 // List of every type we are going to test
-                // (Type, whether it's implemented explicitly, whether it's not implemented in the level 2 interface, the generic parameter for Ix<T>, the level)
+                // (Type, whether it's implemented explicitly, whether it's not implemented in the level 2
+                // interface, the generic parameter for Ix<T>, the level)
                 (typeof(SIMs.C1), false, true, typeof(int), 1),
                 (typeof(SIMs.C1Explicit), true, true, typeof(int), 1),
                 (typeof(SIMs.C1<string>), false, true, typeof(string), 1),
@@ -1465,13 +1471,15 @@ namespace System.Tests
                 BindingFlags bindingFlags =
                     BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
-                // This is the member name of the explicit interface implementation method in the class for the generic interface
+                // This is the member name of the explicit interface implementation method in the class for the
+                // generic interface
                 string level1MethodNamePrefixTyped =
                     "System.Tests.TypeTestsExtended.SIMs.I1<"
                     + (classType.Type.GetGenericArguments().Length == 0 ? "System.Int32" : "S")
                     + ">.";
 
-                // Check we have the expected implementation for the level 1 interfaces (abstract definitions - M and G methods)
+                // Check we have the expected implementation for the level 1 interfaces (abstract definitions - M
+                // and G methods)
                 Type level1GenericInterface = typeof(SIMs.I1<>).MakeGenericType(
                     classType.InterfaceGenericParameter
                 );
@@ -1558,7 +1566,8 @@ namespace System.Tests
                     };
                 }
 
-                // Check we have the expected implementation for the level 2 interfaces (virtual explicit default implementations - none)
+                // Check we have the expected implementation for the level 2 interfaces (virtual explicit default
+                // implementations - none)
                 if (classType.Index >= 2)
                 {
                     // There should be no methods for these interfaces
@@ -1577,7 +1586,8 @@ namespace System.Tests
                     };
                 }
 
-                // Check we have the expected implementation for the level 3 interfaces (abstract explicit implementations - I1.M and I1.G methods)
+                // Check we have the expected implementation for the level 3 interfaces (abstract explicit
+                // implementations - I1.M and I1.G methods)
                 // Fails on mono: [ActiveIssue("https://github.com/dotnet/runtime/issues/91027")]
                 if (!PlatformDetection.IsMonoRuntime && classType.Index >= 3)
                 {

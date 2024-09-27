@@ -218,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         if ((object)method != null)
                         {
                             // Ctors cannot be generic
-                            //TODO: the error should be given in a different place, but should we ignore or consider the type args?
+                            //TODO: the error should be given in a different place, but should we ignore or consider the type
+                            // args?
                             Debug.Assert(method.Arity == 0, "Generic Ctor, What to do?");
 
                             resultBinder = new InMethodBinder(method, resultBinder);
@@ -467,7 +468,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Get the name of the method so that it can be looked up in the containing type.
             /// </summary>
             /// <param name="baseMethodDeclarationSyntax">Non-null declaration syntax.</param>
-            /// <param name="outerBinder">Binder for the scope around the method (may be null for operators, constructors, and destructors).</param>
+            /// <param name="outerBinder">Binder for the scope around the method (may be null for operators,
+            // constructors, and destructors).</param>
             private static string GetMethodName(
                 BaseMethodDeclarationSyntax baseMethodDeclarationSyntax,
                 Binder outerBinder
@@ -515,7 +517,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Get the name of the property, indexer, or event so that it can be looked up in the containing type.
+            /// Get the name of the property, indexer, or event so that it can be looked up in the containing
+            // type.
             /// </summary>
             /// <param name="basePropertyDeclarationSyntax">Non-null declaration syntax.</param>
             /// <param name="outerBinder">Non-null binder for the scope around the member.</param>
@@ -790,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ).GetSourceTypeMember(parent);
 
                     // NOTE: Members of the delegate type are in scope in the entire delegate declaration syntax.
-                    // NOTE: Hence we can assume that we are in body of the delegate type and explicitly insert the InContainerBinder in the binder chain.
+                    // NOTE: Hence we can assume that we are in body of the delegate type and explicitly insert the
+                    // InContainerBinder in the binder chain.
                     resultBinder = new InContainerBinder(container, outer);
 
                     if (parent.TypeParameterList != null)
@@ -808,7 +812,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             public override Binder VisitEnumDeclaration(EnumDeclarationSyntax parent)
             {
-                // This method has nothing to contribute unless the position is actually inside the enum (i.e. not in the declaration part)
+                // This method has nothing to contribute unless the position is actually inside the enum (i.e. not
+                // in the declaration part)
                 bool inBody =
                     LookupPosition.IsBetweenTokens(
                         _position,
@@ -1031,7 +1036,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (InScript && container.Kind() == SyntaxKind.CompilationUnit)
                     {
-                        // Although namespaces are not allowed in script code we still bind them so that we don't report useless errors.
+                        // Although namespaces are not allowed in script code we still bind them so that we don't report
+                        // useless errors.
                         // A namespace in script code is not bound within the scope of a Script class,
                         // but still within scope of compilation unit extern aliases and usings.
                         outer = VisitCompilationUnit(
@@ -1358,7 +1364,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 DocumentationCommentTriviaSyntax parent
             )
             {
-                // Need to step across the structured trivia boundary explicitly - can't just follow Parent references.
+                // Need to step across the structured trivia boundary explicitly - can't just follow Parent
+                // references.
                 return VisitCore(parent.ParentTrivia.Token.Parent);
             }
 
@@ -1692,7 +1699,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="memberSyntax">The member to which the documentation comment (logically) containing
         /// the cref syntax applies.</param>
         /// <param name="factory">Corresponding binder factory.</param>
-        /// <param name="inParameterOrReturnType">True to get a special binder for cref parameter and return types.</param>
+        /// <param name="inParameterOrReturnType">True to get a special binder for cref parameter and return
+        // types.</param>
         /// <remarks>
         /// The CrefSyntax does not actually have to be within the documentation comment on the member - it
         /// could be included from another file.
@@ -1734,7 +1742,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Internal version of MakeCrefBinder that allows the caller to explicitly set the underlying binder.
+        /// Internal version of MakeCrefBinder that allows the caller to explicitly set the underlying
+        // binder.
         /// </summary>
         private static Binder MakeCrefBinderInternal(
             CrefSyntax crefSyntax,
@@ -1789,7 +1798,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Walk up from an XML syntax node (attribute or tag) to the enclosing documentation comment trivia.
+        /// Walk up from an XML syntax node (attribute or tag) to the enclosing documentation comment
+        // trivia.
         /// </summary>
         private static DocumentationCommentTriviaSyntax GetEnclosingDocumentationComment(
             CSharpSyntaxNode xmlSyntax

@@ -14,10 +14,13 @@ namespace System.Xml.Xsl.Qil
     /// The CQR implementation of QilExpression.
     /// </summary>
     /// <remarks>
-    ///    <p>QilExpression is the XML Query Intermediate Language invented by Michael Brundage and Chris Suver.
-    ///    QilExpression is an intermediate representation (IR) for all XML query and view languages.  QilExpression is
+    ///    <p>QilExpression is the XML Query Intermediate Language invented by Michael Brundage and
+    // Chris Suver.
+    ///    QilExpression is an intermediate representation (IR) for all XML query and view languages.
+    // QilExpression is
     ///    designed for optimization, composition with virtual XML views, translation into other forms,
-    ///    and direct execution.  See also <a href="http://dynamo/qil/qil.xml">the QIL specification</a>.</p>
+    ///    and direct execution.  See also <a href="http://dynamo/qil/qil.xml">the QIL
+    // specification</a>.</p>
     /// </remarks>
     internal class QilExpression : QilNode
     {
@@ -154,7 +157,8 @@ namespace System.Xml.Xsl.Qil
         }
 
         /// <summary>
-        /// Default serialization options that will be used if the user does not supply a writer at execution time.
+        /// Default serialization options that will be used if the user does not supply a writer at
+        // execution time.
         /// </summary>
         public XmlWriterSettings DefaultWriterSettings
         {

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -40,8 +40,11 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default value, which is <see cref='System.ComponentModel.MergablePropertyAttribute.Yes'/>, that is a property can be combined with
-        ///       properties belonging to other objects in a properties window. This <see langword='static '/>field is read-only.
+        ///       Specifies the default value, which is <see
+        // cref='System.ComponentModel.MergablePropertyAttribute.Yes'/>, that is a property can be combined
+        // with
+        ///       properties belonging to other objects in a properties window. This <see langword='static
+        // '/>field is read-only.
         ///    </para>
         /// </devdoc>
         public static readonly MergablePropertyAttribute Default = Yes;
@@ -50,7 +53,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.MergablePropertyAttribute'/>
+        ///       Initializes a new instance of the <see
+        // cref='System.ComponentModel.MergablePropertyAttribute'/>
         ///       class.
         ///    </para>
         /// </devdoc>

@@ -31,7 +31,8 @@ namespace System.Net.Sockets
         private SafeSocketHandle _handle;
 
         // _rightEndPoint is null if the socket has not been bound.  Otherwise, it is an EndPoint of the
-        // correct type (IPEndPoint, etc). The Bind operation sets _rightEndPoint. Other operations must only set
+        // correct type (IPEndPoint, etc). The Bind operation sets _rightEndPoint. Other operations must
+        // only set
         // it when the value is still null.
         // This enables tracking the file created by UnixDomainSocketEndPoint when the Socket is bound,
         // and to delete that file when the Socket gets disposed.
@@ -112,16 +113,23 @@ namespace System.Net.Sockets
             _protocolType = protocolType;
         }
 
-        /// <summary>Initializes a new instance of the <see cref="Socket"/> class for the specified socket handle.</summary>
-        /// <param name="handle">The socket handle for the socket that the <see cref="Socket"/> object will encapsulate.</param>
+        /// <summary>Initializes a new instance of the <see cref="Socket"/> class for the specified socket
+        // handle.</summary>
+        /// <param name="handle">The socket handle for the socket that the <see cref="Socket"/> object will
+        // encapsulate.</param>
         /// <exception cref="ArgumentNullException"><paramref name="handle"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="handle"/> is invalid.</exception>
-        /// <exception cref="SocketException"><paramref name="handle"/> is not a socket or information about the socket could not be accessed.</exception>
+        /// <exception cref="SocketException"><paramref name="handle"/> is not a socket or information about
+        // the socket could not be accessed.</exception>
         /// <remarks>
-        /// This method populates the <see cref="Socket"/> instance with data gathered from the supplied <see cref="SafeSocketHandle"/>.
-        /// Different operating systems provide varying levels of support for querying a socket handle or file descriptor for its
-        /// properties and configuration, which means some of the public APIs on the resulting <see cref="Socket"/> instance may
-        /// differ based on operating system, such as <see cref="Socket.ProtocolType"/> and <see cref="Socket.Blocking"/>.
+        /// This method populates the <see cref="Socket"/> instance with data gathered from the supplied
+        // <see cref="SafeSocketHandle"/>.
+        /// Different operating systems provide varying levels of support for querying a socket handle or
+        // file descriptor for its
+        /// properties and configuration, which means some of the public APIs on the resulting <see
+        // cref="Socket"/> instance may
+        /// differ based on operating system, such as <see cref="Socket.ProtocolType"/> and <see
+        // cref="Socket.Blocking"/>.
         /// </remarks>
         public Socket(SafeSocketHandle handle)
             : this(ValidateHandle(handle), loadPropertiesFromHandle: true) { }
@@ -208,8 +216,10 @@ namespace System.Net.Sockets
                             break;
                     }
 
-                    // Try to determine if we're connected, based on querying for a peer, just as we would in RemoteEndPoint,
-                    // but ignoring any failures; this is best-effort (RemoteEndPoint also does a catch-all around the Create call).
+                    // Try to determine if we're connected, based on querying for a peer, just as we would in
+                    // RemoteEndPoint,
+                    // but ignoring any failures; this is best-effort (RemoteEndPoint also does a catch-all around the
+                    // Create call).
                     if (_rightEndPoint != null)
                     {
                         try
@@ -297,7 +307,8 @@ namespace System.Net.Sockets
         // Properties
         //
 
-        // The CLR allows configuration of these properties, separately from whether the OS supports IPv4/6.  We
+        // The CLR allows configuration of these properties, separately from whether the OS supports IPv4/6.
+        // We
         // do not provide these config options, so SupportsIPvX === OSSupportsIPvX.
         [Obsolete("SupportsIPv4 has been deprecated. Use OSSupportsIPv4 instead.")]
         public static bool SupportsIPv4 => OSSupportsIPv4;
@@ -492,11 +503,14 @@ namespace System.Net.Sockets
             }
         }
 
-        // On .NET Framework, this property functions as a socket-level switch between IOCP-based and Win32 event based async IO.
-        // On that platform, setting UseOnlyOverlappedIO = true prevents assigning a completion port to the socket,
+        // On .NET Framework, this property functions as a socket-level switch between IOCP-based and Win32
+        // event based async IO.
+        // On that platform, setting UseOnlyOverlappedIO = true prevents assigning a completion port to the
+        // socket,
         // allowing calls to DuplicateAndClose() even after performing asynchronous IO.
         // .NET (Core) Windows sockets are entirely IOCP-based, and the concept of "overlapped IO"
-        // does not exist on other platforms, therefore UseOnlyOverlappedIO is a dummy, compat-only property.
+        // does not exist on other platforms, therefore UseOnlyOverlappedIO is a dummy, compat-only
+        // property.
         [Obsolete("UseOnlyOverlappedIO has been deprecated and is not supported.")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool UseOnlyOverlappedIO
@@ -507,7 +521,8 @@ namespace System.Net.Sockets
 
         // Gets the connection state of the Socket. This property will return the latest
         // known state of the Socket. When it returns false, the Socket was either never connected
-        // or it is not connected anymore. When it returns true, though, there's no guarantee that the Socket
+        // or it is not connected anymore. When it returns true, though, there's no guarantee that the
+        // Socket
         // is still connected, but only that it was connected at the time of the last IO operation.
         public bool Connected
         {
@@ -1377,26 +1392,35 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// Sends the file <paramref name="fileName"/> and buffers of data to a connected <see cref="Socket"/> object
+        /// Sends the file <paramref name="fileName"/> and buffers of data to a connected <see
+        // cref="Socket"/> object
         /// using the specified <see cref="TransmitFileOptions"/> value.
         /// </summary>
         /// <param name="fileName">
-        /// A <see cref="string"/> that contains the path and name of the file to be sent. This parameter can be <see langword="null"/>.
+        /// A <see cref="string"/> that contains the path and name of the file to be sent. This parameter
+        // can be <see langword="null"/>.
         /// </param>
         /// <param name="preBuffer">
-        /// A <see cref="byte"/> array that contains data to be sent before the file is sent. This parameter can be <see langword="null"/>.
+        /// A <see cref="byte"/> array that contains data to be sent before the file is sent. This parameter
+        // can be <see langword="null"/>.
         /// </param>
         /// <param name="postBuffer">
-        /// A <see cref="byte"/> array that contains data to be sent after the file is sent. This parameter can be <see langword="null"/>.
+        /// A <see cref="byte"/> array that contains data to be sent after the file is sent. This parameter
+        // can be <see langword="null"/>.
         /// </param>
         /// <param name="flags">
         /// One or more of <see cref="TransmitFileOptions"/> values.
         /// </param>
-        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been closed.</exception>
-        /// <exception cref="NotSupportedException">The <see cref="Socket"/> object is not connected to a remote host.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Socket"/> object is not in blocking mode and cannot accept this synchronous call.</exception>
-        /// <exception cref="FileNotFoundException">The file <paramref name="fileName"/> was not found.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been
+        // closed.</exception>
+        /// <exception cref="NotSupportedException">The <see cref="Socket"/> object is not connected to a
+        // remote host.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Socket"/> object is not in blocking
+        // mode and cannot accept this synchronous call.</exception>
+        /// <exception cref="FileNotFoundException">The file <paramref name="fileName"/> was not
+        // found.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         public void SendFile(
             string? fileName,
             byte[]? preBuffer,
@@ -1408,26 +1432,35 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// Sends the file <paramref name="fileName"/> and buffers of data to a connected <see cref="Socket"/> object
+        /// Sends the file <paramref name="fileName"/> and buffers of data to a connected <see
+        // cref="Socket"/> object
         /// using the specified <see cref="TransmitFileOptions"/> value.
         /// </summary>
         /// <param name="fileName">
-        /// A <see cref="string"/> that contains the path and name of the file to be sent. This parameter can be <see langword="null"/>.
+        /// A <see cref="string"/> that contains the path and name of the file to be sent. This parameter
+        // can be <see langword="null"/>.
         /// </param>
         /// <param name="preBuffer">
-        /// A <see cref="ReadOnlySpan{T}"/> that contains data to be sent before the file is sent. This buffer can be empty.
+        /// A <see cref="ReadOnlySpan{T}"/> that contains data to be sent before the file is sent. This
+        // buffer can be empty.
         /// </param>
         /// <param name="postBuffer">
-        /// A <see cref="ReadOnlySpan{T}"/> that contains data to be sent after the file is sent. This buffer can be empty.
+        /// A <see cref="ReadOnlySpan{T}"/> that contains data to be sent after the file is sent. This
+        // buffer can be empty.
         /// </param>
         /// <param name="flags">
         /// One or more of <see cref="TransmitFileOptions"/> values.
         /// </param>
-        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been closed.</exception>
-        /// <exception cref="NotSupportedException">The <see cref="Socket"/> object is not connected to a remote host.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Socket"/> object is not in blocking mode and cannot accept this synchronous call.</exception>
-        /// <exception cref="FileNotFoundException">The file <paramref name="fileName"/> was not found.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been
+        // closed.</exception>
+        /// <exception cref="NotSupportedException">The <see cref="Socket"/> object is not connected to a
+        // remote host.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Socket"/> object is not in blocking
+        // mode and cannot accept this synchronous call.</exception>
+        /// <exception cref="FileNotFoundException">The file <paramref name="fileName"/> was not
+        // found.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         public void SendFile(
             string? fileName,
             ReadOnlySpan<byte> preBuffer,
@@ -1532,10 +1565,12 @@ namespace System.Net.Sockets
         /// Sends data to the specified endpoint.
         /// </summary>
         /// <param name="buffer">A span of bytes that contains the data to be sent.</param>
-        /// <param name="remoteEP">The <see cref="EndPoint"/> that represents the destination for the data.</param>
+        /// <param name="remoteEP">The <see cref="EndPoint"/> that represents the destination for the
+        // data.</param>
         /// <returns>The number of bytes sent.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int SendTo(ReadOnlySpan<byte> buffer, EndPoint remoteEP)
         {
@@ -1547,10 +1582,12 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="buffer">A span of bytes that contains the data to be sent.</param>
         /// <param name="socketFlags">A bitwise combination of the <see cref="SocketFlags"/> values.</param>
-        /// <param name="remoteEP">The <see cref="EndPoint"/> that represents the destination for the data.</param>
+        /// <param name="remoteEP">The <see cref="EndPoint"/> that represents the destination for the
+        // data.</param>
         /// <returns>The number of bytes sent.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int SendTo(ReadOnlySpan<byte> buffer, SocketFlags socketFlags, EndPoint remoteEP)
         {
@@ -1595,10 +1632,12 @@ namespace System.Net.Sockets
         /// </summary>
         /// <param name="buffer">A span of bytes that contains the data to be sent.</param>
         /// <param name="socketFlags">A bitwise combination of the <see cref="SocketFlags"/> values.</param>
-        /// <param name="socketAddress">The <see cref="SocketAddress"/> that represents the destination for the data.</param>
+        /// <param name="socketAddress">The <see cref="SocketAddress"/> that represents the destination for
+        // the data.</param>
         /// <returns>The number of bytes sent.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int SendTo(
             ReadOnlySpan<byte> buffer,
@@ -1881,10 +1920,12 @@ namespace System.Net.Sockets
 
         /// <summary>
         /// Receives the specified number of bytes of data into the specified location of the data buffer,
-        /// using the specified <paramref name="socketFlags"/>, and stores the endpoint and packet information.
+        /// using the specified <paramref name="socketFlags"/>, and stores the endpoint and packet
+        // information.
         /// </summary>
         /// <param name="buffer">
-        /// An <see cref="Span{T}"/> of type <see cref="byte"/> that is the storage location for received data.
+        /// An <see cref="Span{T}"/> of type <see cref="byte"/> that is the storage location for received
+        // data.
         /// </param>
         /// <param name="socketFlags">
         /// A bitwise combination of the <see cref="SocketFlags"/> values.
@@ -1898,13 +1939,18 @@ namespace System.Net.Sockets
         /// <returns>
         /// The number of bytes received.
         /// </returns>
-        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been closed.</exception>
+        /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> object has been
+        // closed.</exception>
         /// <exception cref="ArgumentNullException">The <see cref="EndPoint"/> remoteEP is null.</exception>
-        /// <exception cref="ArgumentException">The <see cref="AddressFamily"/> of the <see cref="EndPoint"/> used in
-        /// <see cref="Socket.ReceiveMessageFrom(Span{byte}, ref SocketFlags, ref EndPoint, out IPPacketInformation)"/>
-        /// needs to match the <see cref="AddressFamily"/> of the <see cref="EndPoint"/> used in SendTo.</exception>
+        /// <exception cref="ArgumentException">The <see cref="AddressFamily"/> of the <see
+        // cref="EndPoint"/> used in
+        /// <see cref="Socket.ReceiveMessageFrom(Span{byte}, ref SocketFlags, ref EndPoint, out
+        // IPPacketInformation)"/>
+        /// needs to match the <see cref="AddressFamily"/> of the <see cref="EndPoint"/> used in
+        // SendTo.</exception>
         /// <exception cref="InvalidOperationException">
-        /// <para>The <see cref="Socket"/> object is not in blocking mode and cannot accept this synchronous call.</para>
+        /// <para>The <see cref="Socket"/> object is not in blocking mode and cannot accept this synchronous
+        // call.</para>
         /// <para>You must call the Bind method before performing this operation.</para></exception>
         public int ReceiveMessageFrom(
             Span<byte> buffer,
@@ -2128,10 +2174,12 @@ namespace System.Net.Sockets
         /// Receives a datagram into the data buffer and stores the endpoint.
         /// </summary>
         /// <param name="buffer">A span of bytes that is the storage location for received data.</param>
-        /// <param name="remoteEP">An <see cref="EndPoint"/>, passed by reference, that represents the remote server.</param>
+        /// <param name="remoteEP">An <see cref="EndPoint"/>, passed by reference, that represents the
+        // remote server.</param>
         /// <returns>The number of bytes received.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int ReceiveFrom(Span<byte> buffer, ref EndPoint remoteEP)
         {
@@ -2139,14 +2187,17 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// Receives a datagram into the data buffer, using the specified <see cref="SocketFlags"/>, and stores the endpoint.
+        /// Receives a datagram into the data buffer, using the specified <see cref="SocketFlags"/>, and
+        // stores the endpoint.
         /// </summary>
         /// <param name="buffer">A span of bytes that is the storage location for received data.</param>
         /// <param name="socketFlags">A bitwise combination of the <see cref="SocketFlags"/> values.</param>
-        /// <param name="remoteEP">An <see cref="EndPoint"/>, passed by reference, that represents the remote server.</param>
+        /// <param name="remoteEP">An <see cref="EndPoint"/>, passed by reference, that represents the
+        // remote server.</param>
         /// <returns>The number of bytes received.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int ReceiveFrom(Span<byte> buffer, SocketFlags socketFlags, ref EndPoint remoteEP)
         {
@@ -2236,14 +2287,17 @@ namespace System.Net.Sockets
         }
 
         /// <summary>
-        /// Receives a datagram into the data buffer, using the specified <see cref="SocketFlags"/>, and stores the endpoint.
+        /// Receives a datagram into the data buffer, using the specified <see cref="SocketFlags"/>, and
+        // stores the endpoint.
         /// </summary>
         /// <param name="buffer">A span of bytes that is the storage location for received data.</param>
         /// <param name="socketFlags">A bitwise combination of the <see cref="SocketFlags"/> values.</param>
-        /// <param name="receivedAddress">An <see cref="SocketAddress"/>, that will be updated with value of the remote peer.</param>
+        /// <param name="receivedAddress">An <see cref="SocketAddress"/>, that will be updated with value of
+        // the remote peer.</param>
         /// <returns>The number of bytes received.</returns>
         /// <exception cref="ArgumentNullException"><c>remoteEP</c> is <see langword="null" />.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public int ReceiveFrom(
             Span<byte> buffer,
@@ -2302,9 +2356,12 @@ namespace System.Net.Sockets
 
             int realOptionLength;
 
-            // IOControl is used for Windows-specific IOCTL operations.  If we need to add support for IOCTLs specific
-            // to other platforms, we will likely need to add a new API, as the control codes may overlap with those
-            // from Windows.  Generally it would be preferable to add new methods/properties to abstract these across
+            // IOControl is used for Windows-specific IOCTL operations.  If we need to add support for IOCTLs
+            // specific
+            // to other platforms, we will likely need to add a new API, as the control codes may overlap with
+            // those
+            // from Windows.  Generally it would be preferable to add new methods/properties to abstract these
+            // across
             // platforms, however.
             SocketError errorCode = SocketPal.WindowsIoctl(
                 _handle,
@@ -2480,15 +2537,19 @@ namespace System.Net.Sockets
             }
         }
 
-        /// <summary>Sets a socket option value using platform-specific level and name identifiers.</summary>
+        /// <summary>Sets a socket option value using platform-specific level and name
+        // identifiers.</summary>
         /// <param name="optionLevel">The platform-defined option level.</param>
         /// <param name="optionName">The platform-defined option name.</param>
         /// <param name="optionValue">The value to which the option should be set.</param>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <remarks>
-        /// In general, the SetSocketOption method should be used whenever setting a <see cref="Socket"/> option.
-        /// The <see cref="SetRawSocketOption"/> should be used only when <see cref="SocketOptionLevel"/> and <see cref="SocketOptionName"/>
+        /// In general, the SetSocketOption method should be used whenever setting a <see cref="Socket"/>
+        // option.
+        /// The <see cref="SetRawSocketOption"/> should be used only when <see cref="SocketOptionLevel"/>
+        // and <see cref="SocketOptionName"/>
         /// do not expose the required option.
         /// </remarks>
         public void SetRawSocketOption(
@@ -2638,16 +2699,22 @@ namespace System.Net.Sockets
             return optionValue;
         }
 
-        /// <summary>Gets a socket option value using platform-specific level and name identifiers.</summary>
+        /// <summary>Gets a socket option value using platform-specific level and name
+        // identifiers.</summary>
         /// <param name="optionLevel">The platform-defined option level.</param>
         /// <param name="optionName">The platform-defined option name.</param>
-        /// <param name="optionValue">The span into which the retrieved option value should be stored.</param>
-        /// <returns>The number of bytes written into <paramref name="optionValue"/> for a successfully retrieved value.</returns>
+        /// <param name="optionValue">The span into which the retrieved option value should be
+        // stored.</param>
+        /// <returns>The number of bytes written into <paramref name="optionValue"/> for a successfully
+        // retrieved value.</returns>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <remarks>
-        /// In general, the GetSocketOption method should be used whenever getting a <see cref="Socket"/> option.
-        /// The <see cref="GetRawSocketOption"/> should be used only when <see cref="SocketOptionLevel"/> and <see cref="SocketOptionName"/>
+        /// In general, the GetSocketOption method should be used whenever getting a <see cref="Socket"/>
+        // option.
+        /// The <see cref="GetRawSocketOption"/> should be used only when <see cref="SocketOptionLevel"/>
+        // and <see cref="SocketOptionName"/>
         /// do not expose the required option.
         /// </remarks>
         public int GetRawSocketOption(int optionLevel, int optionName, Span<byte> optionValue)
@@ -2703,16 +2770,23 @@ namespace System.Net.Sockets
         /// <param name="microSeconds">The time to wait for a response, in microseconds.</param>
         /// <param name="mode">One of the <see cref="SelectMode"/> values.</param>
         /// <returns>
-        /// The status of the <see cref="Socket"/> based on the polling mode value passed in the <paramref name="mode"/> parameter.
-        /// For <see cref="SelectMode.SelectRead"/>, it returns <see langword="true"/> if <see cref="M:Listen"/> has been called and
-        /// a connection is pending, if data is available for reading, or if the connection has been closed, reset, or terminated.
-        /// For <see cref="SelectMode.SelectWrite"/>, it returns <see langword="true"/> if processing a <see cref="M:Connect"/> and
+        /// The status of the <see cref="Socket"/> based on the polling mode value passed in the <paramref
+        // name="mode"/> parameter.
+        /// For <see cref="SelectMode.SelectRead"/>, it returns <see langword="true"/> if <see
+        // cref="M:Listen"/> has been called and
+        /// a connection is pending, if data is available for reading, or if the connection has been closed,
+        // reset, or terminated.
+        /// For <see cref="SelectMode.SelectWrite"/>, it returns <see langword="true"/> if processing a <see
+        // cref="M:Connect"/> and
         /// the connection has succeeded or if data can be sent.
-        /// For <see cref="SelectMode.SelectError"/>, it returns <see langword="true"/> if processing a <see cref="M:Connect"/> that
-        /// does not block and the connection has failed, or if OutOfBandInline is not set and out-of-band data is available.
+        /// For <see cref="SelectMode.SelectError"/>, it returns <see langword="true"/> if processing a <see
+        // cref="M:Connect"/> that
+        /// does not block and the connection has failed, or if OutOfBandInline is not set and out-of-band
+        // data is available.
         /// Otherwise, it returns <see langword="false"/>.
         /// </returns>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public bool Poll(int microSeconds, SelectMode mode)
         {
@@ -2733,32 +2807,50 @@ namespace System.Net.Sockets
         }
 
         /// <summary>Determines the status of the <see cref="Socket"/>.</summary>
-        /// <param name="timeout">The time to wait for a response. <see cref="Timeout.InfiniteTimeSpan"/> indicates an infinite timeout.</param>
+        /// <param name="timeout">The time to wait for a response. <see cref="Timeout.InfiniteTimeSpan"/>
+        // indicates an infinite timeout.</param>
         /// <param name="mode">One of the <see cref="SelectMode"/> values.</param>
         /// <returns>
-        /// The status of the <see cref="Socket"/> based on the polling mode value passed in the <paramref name="mode"/> parameter.
-        /// For <see cref="SelectMode.SelectRead"/>, it returns <see langword="true"/> if <see cref="M:Listen"/> has been called and
-        /// a connection is pending, if data is available for reading, or if the connection has been closed, reset, or terminated.
-        /// For <see cref="SelectMode.SelectWrite"/>, it returns <see langword="true"/> if processing a <see cref="M:Connect"/> and
+        /// The status of the <see cref="Socket"/> based on the polling mode value passed in the <paramref
+        // name="mode"/> parameter.
+        /// For <see cref="SelectMode.SelectRead"/>, it returns <see langword="true"/> if <see
+        // cref="M:Listen"/> has been called and
+        /// a connection is pending, if data is available for reading, or if the connection has been closed,
+        // reset, or terminated.
+        /// For <see cref="SelectMode.SelectWrite"/>, it returns <see langword="true"/> if processing a <see
+        // cref="M:Connect"/> and
         /// the connection has succeeded or if data can be sent.
-        /// For <see cref="SelectMode.SelectError"/>, it returns <see langword="true"/> if processing a <see cref="M:Connect"/> that
-        /// does not block and the connection has failed, or if OutOfBandInline is not set and out-of-band data is available.
+        /// For <see cref="SelectMode.SelectError"/>, it returns <see langword="true"/> if processing a <see
+        // cref="M:Connect"/> that
+        /// does not block and the connection has failed, or if OutOfBandInline is not set and out-of-band
+        // data is available.
         /// Otherwise, it returns <see langword="false"/>.
         /// </returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> was negative or greater than TimeSpan.FromMicroseconds(int.MaxValue).</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> was negative or greater
+        // than TimeSpan.FromMicroseconds(int.MaxValue).</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">The <see cref="Socket"/> has been closed.</exception>
         public bool Poll(TimeSpan timeout, SelectMode mode) =>
             Poll(ToTimeoutMicroseconds(timeout), mode);
 
         /// <summary>Determines the status of one or more sockets.</summary>
-        /// <param name="checkRead">An <see cref="IList"/> of <see cref="Socket"/> instances to check for readability.</param>
-        /// <param name="checkWrite">An <see cref="IList"/> of <see cref="Socket"/> instances to check for writability.</param>
-        /// <param name="checkError">An <see cref="IList"/> of <see cref="Socket"/> instances to check for errors.</param>
-        /// <param name="microSeconds">The timeout value, in microseconds. A -1 value indicates an infinite timeout.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="checkRead"/>, <paramref name="checkWrite"/>, or <paramref name="checkError"/> parameter is <see langword="null"/> or empty.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="checkRead"/>, <paramref name="checkWrite"/>, or <paramref name="checkError"/> parameter contains too many sockets.</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <param name="checkRead">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // readability.</param>
+        /// <param name="checkWrite">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // writability.</param>
+        /// <param name="checkError">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // errors.</param>
+        /// <param name="microSeconds">The timeout value, in microseconds. A -1 value indicates an infinite
+        // timeout.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="checkRead"/>, <paramref
+        // name="checkWrite"/>, or <paramref name="checkError"/> parameter is <see langword="null"/> or
+        // empty.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="checkRead"/>, <paramref
+        // name="checkWrite"/>, or <paramref name="checkError"/> parameter contains too many
+        // sockets.</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">One or more sockets was disposed.</exception>
         public static void Select(
             IList? checkRead,
@@ -2825,14 +2917,24 @@ namespace System.Net.Sockets
         }
 
         /// <summary>Determines the status of one or more sockets.</summary>
-        /// <param name="checkRead">An <see cref="IList"/> of <see cref="Socket"/> instances to check for readability.</param>
-        /// <param name="checkWrite">An <see cref="IList"/> of <see cref="Socket"/> instances to check for writability.</param>
-        /// <param name="checkError">An <see cref="IList"/> of <see cref="Socket"/> instances to check for errors.</param>
-        /// <param name="timeout">The timeout value. A value equal to <see cref="Timeout.InfiniteTimeSpan"/> indicates an infinite timeout.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="checkRead"/>, <paramref name="checkWrite"/>, or <paramref name="checkError"/> parameter is <see langword="null"/> or empty.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="checkRead"/>, <paramref name="checkWrite"/>, or <paramref name="checkError"/> parameter contains too many sockets.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="timeout"/> was negative or greater than TimeSpan.FromMicroseconds(int.MaxValue).</exception>
-        /// <exception cref="SocketException">An error occurred when attempting to access the socket.</exception>
+        /// <param name="checkRead">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // readability.</param>
+        /// <param name="checkWrite">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // writability.</param>
+        /// <param name="checkError">An <see cref="IList"/> of <see cref="Socket"/> instances to check for
+        // errors.</param>
+        /// <param name="timeout">The timeout value. A value equal to <see cref="Timeout.InfiniteTimeSpan"/>
+        // indicates an infinite timeout.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="checkRead"/>, <paramref
+        // name="checkWrite"/>, or <paramref name="checkError"/> parameter is <see langword="null"/> or
+        // empty.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="checkRead"/>, <paramref
+        // name="checkWrite"/>, or <paramref name="checkError"/> parameter contains too many
+        // sockets.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="timeout"/> was negative or
+        // greater than TimeSpan.FromMicroseconds(int.MaxValue).</exception>
+        /// <exception cref="SocketException">An error occurred when attempting to access the
+        // socket.</exception>
         /// <exception cref="ObjectDisposedException">One or more sockets was disposed.</exception>
         public static void Select(
             IList? checkRead,
@@ -3206,7 +3308,8 @@ namespace System.Net.Sockets
                 )
                 .AsTask();
             // In case of synchronous completion, ReceiveMessageFromAsync() returns a completed task.
-            // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of BeginReceiveMessageFrom().
+            // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of
+            // BeginReceiveMessageFrom().
             if (t.IsCompletedSuccessfully)
             {
                 EndPoint resultEp = t.Result.RemoteEndPoint;
@@ -3271,7 +3374,8 @@ namespace System.Net.Sockets
                 )
                 .AsTask();
             // In case of synchronous completion, ReceiveFromAsync() returns a completed task.
-            // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of BeginReceiveFrom().
+            // When this happens, we need to update 'remoteEP' in order to conform to the historical behavior of
+            // BeginReceiveFrom().
             if (t.IsCompletedSuccessfully)
             {
                 EndPoint resultEp = t.Result.RemoteEndPoint;
@@ -3313,7 +3417,8 @@ namespace System.Net.Sockets
         public Socket EndAccept(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End<Socket>(asyncResult);
 
-        // This method provides support for legacy BeginAccept methods that take a "receiveSize" argument and
+        // This method provides support for legacy BeginAccept methods that take a "receiveSize" argument
+        // and
         // allow data to be received as part of the accept operation.
         // There's no direct equivalent of this in the Task APIs, so we mimic it here.
         private async Task<(
@@ -3557,7 +3662,8 @@ namespace System.Net.Sockets
                 // Make the native call.
                 try
                 {
-                    // ConnectEx supports connection-oriented sockets but not UDS. The socket must be bound before calling ConnectEx.
+                    // ConnectEx supports connection-oriented sockets but not UDS. The socket must be bound before
+                    // calling ConnectEx.
                     bool canUseConnectEx =
                         _socketType == SocketType.Stream
                         && endPointSnapshot.AddressFamily != AddressFamily.Unix;
@@ -3746,7 +3852,8 @@ namespace System.Net.Sockets
                 e._socketAddress ??= new SocketAddress(AddressFamily);
             }
 
-            // DualMode sockets may have updated the endPointSnapshot, and it has to have the same AddressFamily as
+            // DualMode sockets may have updated the endPointSnapshot, and it has to have the same AddressFamily
+            // as
             // e.m_SocketAddres for Create to work later.
             e.RemoteEndPoint = endPointSnapshot;
 
@@ -4188,7 +4295,8 @@ namespace System.Net.Sockets
                                         }
                                         else
                                         {
-                                            // We got a FIN.  It'd be nice to block for the remainder of the timeout for the handshake to finish.
+                                            // We got a FIN.  It'd be nice to block for the remainder of the timeout for the handshake to
+                                            // finish.
                                             // Since there's no real way to do that, close the socket with the user's preferences.  This lets
                                             // the user decide how best to handle this case via the linger options.
                                             handle.CloseAsIs(abortive: false);

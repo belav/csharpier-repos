@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -20,7 +20,8 @@ namespace System.Web.UI.WebControls
         private object _commandSource;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewCommandEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.DetailsViewCommandEventArgs'/>
         /// class.</para>
         /// </devdoc>
         [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers")]

@@ -30,14 +30,16 @@ namespace System.Net
     {
         /// <devdoc>
         ///    <para>
-        ///       The number of non-persistent connections allowed on a <see cref='System.Net.ServicePoint'/>.
+        ///       The number of non-persistent connections allowed on a <see
+        // cref='System.Net.ServicePoint'/>.
         ///    </para>
         /// </devdoc>
         public const int DefaultNonPersistentConnectionLimit = 4;
 
         /// <devdoc>
         ///    <para>
-        ///       The default number of persistent connections allowed on a <see cref='System.Net.ServicePoint'/>.
+        ///       The default number of persistent connections allowed on a <see
+        // cref='System.Net.ServicePoint'/>.
         ///    </para>
         /// </devdoc>
         public const int DefaultPersistentConnectionLimit = 2;
@@ -130,7 +132,8 @@ namespace System.Net
         //    2.    If ServicePoint has a specific config setting, then take that value
         //    3.    If ServicePoint.DefaultConnectionLimit is set, then take that value
         //    4.    If ServicePoint is localhost, then set to infinite (TO Should we change this value?)
-        //    5.    If ServicePointManager has a default config connection limit setting, then take that value
+        //    5.    If ServicePointManager has a default config connection limit setting, then take that
+        // value
         //    6.    If ServicePoint is running under ASP+, then set value to 10, else set it to 2
         //
         private static int PersistentConnectionLimit
@@ -150,17 +153,17 @@ namespace System.Net
             }
         }
 
-        /* Consider Removing
-        //
-        // InternalServicePointCount -
-        //  Gets the active number of ServicePoints being used
-        //
-        internal static int InternalServicePointCount {
-            get {
-                return s_ServicePointTable.Count;
-            }
-        }
-        */
+/* Consider Removing
+//
+// InternalServicePointCount -
+//  Gets the active number of ServicePoints being used
+//
+internal static int InternalServicePointCount {
+get {
+return s_ServicePointTable.Count;
+}
+}
+*/
 
         [System.Diagnostics.Conditional("DEBUG")]
         internal static void DebugMembers(int requestHash)
@@ -361,7 +364,8 @@ namespace System.Net
         //
 
         /// <devdoc>
-        /// <para>Gets or sets the maximum number of <see cref='System.Net.ServicePoint'/> instances that should be maintained at any
+        /// <para>Gets or sets the maximum number of <see cref='System.Net.ServicePoint'/> instances that
+        // should be maintained at any
         ///    time.</para>
         /// </devdoc>
         [SuppressMessage(
@@ -404,7 +408,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Gets or sets the maximum idle time in seconds of a <see cref='System.Net.ServicePoint'/>.</para>
+        /// <para>Gets or sets the maximum idle time in seconds of a <see
+        // cref='System.Net.ServicePoint'/>.</para>
         /// </devdoc>
         public static int MaxServicePointIdleTime
         {
@@ -426,7 +431,8 @@ namespace System.Net
         /// <devdoc>
         ///    <para>
         ///       Gets or sets indication whether use of the Nagling algorithm is desired.
-        ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/> instances but only to new ones that are created from that moment on.
+        ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/>
+        // instances but only to new ones that are created from that moment on.
         ///    </para>
         /// </devdoc>
         public static bool UseNagleAlgorithm
@@ -438,7 +444,8 @@ namespace System.Net
         /// <devdoc>
         ///    <para>
         ///       Gets or sets indication whether 100-continue behaviour is desired.
-        ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/> instances but only to new ones that are created from that moment on.
+        ///       Changing this value does not affect existing <see cref='System.Net.ServicePoint'/>
+        // instances but only to new ones that are created from that moment on.
         ///    </para>
         /// </devdoc>
         public static bool Expect100Continue
@@ -612,7 +619,8 @@ namespace System.Net
         //
 
         /// <devdoc>
-        /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the
+        /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see
+        // cref='System.Net.ServicePoint'/> to manage communications to the
         ///    specified Uniform Resource Identifier.</para>
         /// </devdoc>
         public static ServicePoint FindServicePoint(Uri address)
@@ -621,7 +629,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the
+        /// <para>Finds an existing <see cref='System.Net.ServicePoint'/> or creates a new <see
+        // cref='System.Net.ServicePoint'/> to manage communications to the
         ///    specified Uniform Resource Identifier.</para>
         /// </devdoc>
         public static ServicePoint FindServicePoint(string uriString, IWebProxy proxy)
@@ -635,7 +644,8 @@ namespace System.Net
         //
 
         /// <devdoc>
-        /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
+        /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see
+        // cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
         /// instance.</para>
         /// </devdoc>
         public static ServicePoint FindServicePoint(Uri address, IWebProxy proxy)
@@ -677,8 +687,10 @@ namespace System.Net
                 {
                     chain = autoProxy.GetProxies(address);
 
-                    // Set up our ability to abort this MoveNext call.  Note that the current implementations of ProxyChain will only
-                    // take time on the first call, so this is the only place we do this.  If a new ProxyChain takes time in later
+                    // Set up our ability to abort this MoveNext call.  Note that the current implementations of
+                    // ProxyChain will only
+                    // take time on the first call, so this is the only place we do this.  If a new ProxyChain takes
+                    // time in later
                     // calls, this logic should be copied to other places MoveNext is called.
                     GlobalLog.Assert(
                         abortDelegate == null,
@@ -706,11 +718,14 @@ namespace System.Net
                             GlobalLog.Assert(
                                 "ServicePointManager::FindServicePoint()|GetProxies() returned zero proxies."
                             );
-                            /*
-                                                        Exception exception = new WebException(NetRes.GetWebStatusString(WebExceptionStatus.RequestProhibitedByProxy), WebExceptionStatus.RequestProhibitedByProxy);
-                                                        GlobalLog.LeaveException("ServicePointManager::FindServicePoint() Proxy prevented request.", exception);
-                                                        throw exception;
-                            */
+/*
+Exception exception = new
+WebException(NetRes.GetWebStatusString(WebExceptionStatus.RequestProhibitedByProxy),
+WebExceptionStatus.RequestProhibitedByProxy);
+GlobalLog.LeaveException("ServicePointManager::FindServicePoint() Proxy prevented request.",
+exception);
+throw exception;
+*/
                         }
                         proxyAddress = chain.Enumerator.Current;
                     }
@@ -880,7 +895,8 @@ namespace System.Net
         //
 
         /// <devdoc>
-        /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
+        /// <para>Findes an existing <see cref='System.Net.ServicePoint'/> or creates a new <see
+        // cref='System.Net.ServicePoint'/> to manage communications to the specified <see cref='System.Uri'/>
         /// instance.</para>
         /// </devdoc>
         internal static ServicePoint FindServicePoint(string host, int port)
@@ -990,7 +1006,8 @@ namespace System.Net
         [FriendAccessAllowed]
         internal static void CloseConnectionGroups(string connectionGroupName)
         {
-            // This method iterates through all service points and closes connection groups with the provided name.
+            // This method iterates through all service points and closes connection groups with the provided
+            // name.
             ServicePoint servicePoint = null;
             lock (s_ServicePointTable)
             {

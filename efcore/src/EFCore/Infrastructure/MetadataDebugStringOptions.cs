@@ -7,8 +7,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     Options to print debug string differently for metadata objects.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
-///     <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> and
+///     <see href="https://aka.ms/efcore-docs-debug-views">EF Core debug views</see> for more
+// information and examples.
 /// </remarks>
 [Flags]
 public enum MetadataDebugStringOptions

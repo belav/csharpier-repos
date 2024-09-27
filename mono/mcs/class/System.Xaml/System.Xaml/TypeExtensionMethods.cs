@@ -93,7 +93,8 @@ namespace System.Xaml
         public static object GetExtensionWrapped(object o)
         {
             // FIXME: should this manually checked, or is there any way to automate it?
-            // Also XamlSchemaContext might be involved but this method signature does not take it consideration.
+            // Also XamlSchemaContext might be involved but this method signature does not take it
+            // consideration.
             if (o == null)
                 return null_value;
             if (o is Array)
@@ -235,7 +236,8 @@ namespace System.Xaml
             IValueSerializerContext vsctx
         )
         {
-            // FIXME: find out why only TypeExtension and StaticExtension yield this directive. Seealso XamlObjectReaderTest.Read_CustomMarkupExtension*()
+            // FIXME: find out why only TypeExtension and StaticExtension yield this directive. Seealso
+            // XamlObjectReaderTest.Read_CustomMarkupExtension*()
             return type == XamlLanguage.Type
                 || type == XamlLanguage.Static
                 || ExaminePositionalParametersApplicable(type, vsctx)

@@ -126,8 +126,10 @@ namespace System.Net.Configuration
             ConfigurationPropertyOptions.None
         );
 
-        // This allows us to prevent parent settings (machine.config) from propegating to higher config (app.config), unless
-        // the higher config doesn't contain the section at all.  That is, overriding defaultProxy is all-or-nothing.
+        // This allows us to prevent parent settings (machine.config) from propegating to higher config
+        // (app.config), unless
+        // the higher config doesn't contain the section at all.  That is, overriding defaultProxy is
+        // all-or-nothing.
         // Template from Microsoft.
         protected override void Reset(ConfigurationElement parentElement)
         {

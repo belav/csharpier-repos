@@ -10,12 +10,14 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// Specifies that the class or method that this attribute is applied validates the anti-forgery token.
+/// Specifies that the class or method that this attribute is applied validates the anti-forgery
+// token.
 /// If the anti-forgery token is not available, or if the token is invalid, the validation will fail
 /// and the action method will not execute.
 /// </summary>
 /// <remarks>
-/// This attribute helps defend against cross-site request forgery. It won't prevent other forgery or tampering
+/// This attribute helps defend against cross-site request forgery. It won't prevent other forgery
+// or tampering
 /// attacks.
 /// </remarks>
 [AttributeUsage(
@@ -31,11 +33,14 @@ public class ValidateAntiForgeryTokenAttribute : Attribute, IFilterFactory, IOrd
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Filters are executed in an ordering determined by an ascending sort of the <see cref="Order"/> property.
+    /// Filters are executed in an ordering determined by an ascending sort of the <see cref="Order"/>
+    // property.
     /// </para>
     /// <para>
-    /// The default Order for this attribute is 1000 because it must run after any filter which does authentication
-    /// or login in order to allow them to behave as expected (ie Unauthenticated or Redirect instead of 400).
+    /// The default Order for this attribute is 1000 because it must run after any filter which does
+    // authentication
+    /// or login in order to allow them to behave as expected (ie Unauthenticated or Redirect instead of
+    // 400).
     /// </para>
     /// <para>
     /// Look at <see cref="IOrderedFilter.Order"/> for more detailed info.

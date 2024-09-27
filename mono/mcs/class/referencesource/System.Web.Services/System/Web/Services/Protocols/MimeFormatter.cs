@@ -54,7 +54,8 @@ namespace System.Web.Services.Protocols
             return ((MimeFormatter)Activator.CreateInstance(type)).GetInitializer(methodInfo);
         }
 
-        /// <include file='doc\MimeFormatter.uex' path='docs/doc[@for="MimeFormatter.GetInitializers1"]/*' />
+        /// <include file='doc\MimeFormatter.uex' path='docs/doc[@for="MimeFormatter.GetInitializers1"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

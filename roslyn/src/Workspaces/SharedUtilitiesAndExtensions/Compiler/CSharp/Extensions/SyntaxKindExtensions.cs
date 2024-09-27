@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// </summary>
         /// <param name="kinds">Array to search</param>
         /// <param name="kind">Sought value</param>
-        /// <returns>True if <paramref name = "kinds"/> contains the value<paramref name= "kind"/>.</returns>
+        /// <returns>True if <paramref name = "kinds"/> contains the value<paramref name=
+        // "kind"/>.</returns>
         /// <remarks>PERF: Not using Array.IndexOf here because it results in a call to IndexOf on the
         /// default EqualityComparer for SyntaxKind.The default comparer for SyntaxKind is the
         /// ObjectEqualityComparer which results in boxing allocations.</remarks>

@@ -17,8 +17,10 @@ public class CultureReplacer : IDisposable
     private readonly CultureInfo _originalUICulture;
     private readonly long _threadId;
 
-    // Culture => Formatting of dates/times/money/etc, defaults to en-GB because en-US is the same as InvariantCulture
-    // We want to be able to find issues where the InvariantCulture is used, but a specific culture should be.
+    // Culture => Formatting of dates/times/money/etc, defaults to en-GB because en-US is the same as
+    // InvariantCulture
+    // We want to be able to find issues where the InvariantCulture is used, but a specific culture
+    // should be.
     //
     // UICulture => Language
     [SuppressMessage(
@@ -42,7 +44,8 @@ public class CultureReplacer : IDisposable
     }
 
     /// <summary>
-    /// The name of the culture that is used as the default value for CultureInfo.DefaultThreadCurrentCulture when CultureReplacer is used.
+    /// The name of the culture that is used as the default value for
+    // CultureInfo.DefaultThreadCurrentCulture when CultureReplacer is used.
     /// </summary>
     public static string DefaultCultureName
     {
@@ -50,7 +53,8 @@ public class CultureReplacer : IDisposable
     }
 
     /// <summary>
-    /// The name of the culture that is used as the default value for [Thread.CurrentThread(NET45)/CultureInfo(K10)].CurrentUICulture when CultureReplacer is used.
+    /// The name of the culture that is used as the default value for
+    // [Thread.CurrentThread(NET45)/CultureInfo(K10)].CurrentUICulture when CultureReplacer is used.
     /// </summary>
     public static string DefaultUICultureName
     {
@@ -58,7 +62,8 @@ public class CultureReplacer : IDisposable
     }
 
     /// <summary>
-    /// The culture that is used as the default value for [Thread.CurrentThread(NET45)/CultureInfo(K10)].CurrentCulture when CultureReplacer is used.
+    /// The culture that is used as the default value for
+    // [Thread.CurrentThread(NET45)/CultureInfo(K10)].CurrentCulture when CultureReplacer is used.
     /// </summary>
     public static CultureInfo DefaultCulture
     {

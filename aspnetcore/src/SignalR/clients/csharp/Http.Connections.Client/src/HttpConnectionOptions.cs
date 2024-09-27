@@ -84,7 +84,8 @@ public class HttpConnectionOptions
     }
 
     /// <summary>
-    /// Gets or sets the maximum buffer size for data read by the application before backpressure is applied.
+    /// Gets or sets the maximum buffer size for data read by the application before backpressure is
+    // applied.
     /// </summary>
     /// <remarks>
     /// The default value is 1MB.
@@ -104,7 +105,8 @@ public class HttpConnectionOptions
     }
 
     /// <summary>
-    /// Gets or sets the maximum buffer size for data written by the application before backpressure is applied.
+    /// Gets or sets the maximum buffer size for data written by the application before backpressure is
+    // applied.
     /// </summary>
     /// <remarks>
     /// The default value is 1MB.
@@ -184,7 +186,8 @@ public class HttpConnectionOptions
     public Uri? Url { get; set; }
 
     /// <summary>
-    /// Gets or sets a bitmask combining one or more <see cref="HttpTransportType"/> values that specify what transports the client should use to send HTTP requests.
+    /// Gets or sets a bitmask combining one or more <see cref="HttpTransportType"/> values that specify
+    // what transports the client should use to send HTTP requests.
     /// </summary>
     public HttpTransportType Transports { get; set; }
 
@@ -192,12 +195,14 @@ public class HttpConnectionOptions
     /// Gets or sets a value indicating whether negotiation is skipped when connecting to the server.
     /// </summary>
     /// <remarks>
-    /// Negotiation can only be skipped when using the <see cref="HttpTransportType.WebSockets"/> transport.
+    /// Negotiation can only be skipped when using the <see cref="HttpTransportType.WebSockets"/>
+    // transport.
     /// </remarks>
     public bool SkipNegotiation { get; set; }
 
     /// <summary>
-    /// Gets or sets an access token provider that will be called to return a token for each HTTP request.
+    /// Gets or sets an access token provider that will be called to return a token for each HTTP
+    // request.
     /// </summary>
     public Func<Task<string?>>? AccessTokenProvider { get; set; }
 
@@ -261,20 +266,25 @@ public class HttpConnectionOptions
     }
 
     /// <summary>
-    /// Gets or sets the default <see cref="TransferFormat" /> to use if <see cref="HttpConnection.StartAsync(CancellationToken)"/>
+    /// Gets or sets the default <see cref="TransferFormat" /> to use if <see
+    // cref="HttpConnection.StartAsync(CancellationToken)"/>
     /// is called instead of <see cref="HttpConnection.StartAsync(TransferFormat, CancellationToken)"/>.
     /// </summary>
     public TransferFormat DefaultTransferFormat { get; set; } = TransferFormat.Binary;
 
     /// <summary>
-    /// Gets or sets a delegate that will be invoked with the <see cref="ClientWebSocketOptions"/> object used
+    /// Gets or sets a delegate that will be invoked with the <see cref="ClientWebSocketOptions"/>
+    // object used
     /// to configure the WebSocket when using the WebSockets transport.
     /// </summary>
     /// <remarks>
-    /// This delegate is invoked after headers from <see cref="Headers"/> and the access token from <see cref="AccessTokenProvider"/>
+    /// This delegate is invoked after headers from <see cref="Headers"/> and the access token from <see
+    // cref="AccessTokenProvider"/>
     /// has been applied.
     /// <para />
-    /// If <c>ClientWebSocketOptions.HttpVersion</c> is set to <c>2.0</c> or higher, some options like <see cref="ClientWebSocketOptions.Cookies"/> will not be applied. Instead use <see cref="Cookies"/> or the corresponding option on <see cref="HttpConnectionOptions"/>.
+    /// If <c>ClientWebSocketOptions.HttpVersion</c> is set to <c>2.0</c> or higher, some options like
+    // <see cref="ClientWebSocketOptions.Cookies"/> will not be applied. Instead use <see cref="Cookies"/>
+    // or the corresponding option on <see cref="HttpConnectionOptions"/>.
     /// </remarks>
     [UnsupportedOSPlatform("browser")]
     public Action<ClientWebSocketOptions>? WebSocketConfiguration
@@ -292,7 +302,8 @@ public class HttpConnectionOptions
     }
 
     /// <summary>
-    /// Setting to enable Stateful Reconnect between client and server, this allows reconnecting that preserves messages sent while disconnected.
+    /// Setting to enable Stateful Reconnect between client and server, this allows reconnecting that
+    // preserves messages sent while disconnected.
     /// Also preserves the <see cref="HttpConnection.ConnectionId"/> when the reconnect is successful.
     /// </summary>
     /// <remarks>

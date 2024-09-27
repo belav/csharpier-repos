@@ -10,8 +10,10 @@ using Microsoft.AspNetCore.Components.Authorization;
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>
-/// A <see cref="DelegatingHandler"/> that attaches access tokens to outgoing <see cref="HttpResponseMessage"/> instances.
-/// Access tokens will only be added when the request URI is within one of the base addresses configured using
+/// A <see cref="DelegatingHandler"/> that attaches access tokens to outgoing <see
+// cref="HttpResponseMessage"/> instances.
+/// Access tokens will only be added when the request URI is within one of the base addresses
+// configured using
 /// <see cref="ConfigureHandler(IEnumerable{string}, IEnumerable{string}, string)"/>.
 /// </summary>
 public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
@@ -27,8 +29,10 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
     /// <summary>
     /// Initializes a new instance of <see cref="AuthorizationMessageHandler"/>.
     /// </summary>
-    /// <param name="provider">The <see cref="IAccessTokenProvider"/> to use for provisioning tokens.</param>
-    /// <param name="navigation">The <see cref="NavigationManager"/> to use for performing redirections.</param>
+    /// <param name="provider">The <see cref="IAccessTokenProvider"/> to use for provisioning
+    // tokens.</param>
+    /// <param name="navigation">The <see cref="NavigationManager"/> to use for performing
+    // redirections.</param>
     public AuthorizationMessageHandler(IAccessTokenProvider provider, NavigationManager navigation)
     {
         _provider = provider;
@@ -87,8 +91,10 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
                 }
             }
 
-            // We don't try to handle 401s and retry the request with a new token automatically since that would mean we need to copy the request
-            // headers and buffer the body and we expect that the user instead handles the 401s. (Also, we can't really handle all 401s as we might
+            // We don't try to handle 401s and retry the request with a new token automatically since that would
+            // mean we need to copy the request
+            // headers and buffer the body and we expect that the user instead handles the 401s. (Also, we can't
+            // really handle all 401s as we might
             // not be able to provision a token without user interaction).
             request.Headers.Authorization = _cachedHeader;
         }
@@ -97,12 +103,15 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
     }
 
     /// <summary>
-    /// Configures this handler to authorize outbound HTTP requests using an access token. The access token is only attached if at least one of
+    /// Configures this handler to authorize outbound HTTP requests using an access token. The access
+    // token is only attached if at least one of
     /// <paramref name="authorizedUrls" /> is a base of <see cref="HttpRequestMessage.RequestUri" />.
     /// </summary>
-    /// <param name="authorizedUrls">The base addresses of endpoint URLs to which the token will be attached.</param>
+    /// <param name="authorizedUrls">The base addresses of endpoint URLs to which the token will be
+    // attached.</param>
     /// <param name="scopes">The list of scopes to use when requesting an access token.</param>
-    /// <param name="returnUrl">The return URL to use in case there is an issue provisioning the token and a redirection to the
+    /// <param name="returnUrl">The return URL to use in case there is an issue provisioning the token
+    // and a redirection to the
     /// identity provider is necessary.
     /// </param>
     /// <returns>This <see cref="AuthorizationMessageHandler"/>.</returns>

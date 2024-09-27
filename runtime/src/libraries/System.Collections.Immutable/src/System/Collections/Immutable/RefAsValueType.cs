@@ -11,7 +11,8 @@ namespace System.Collections.Immutable
     /// bypass the CLR's covariant checks when writing to arrays.
     /// </summary>
     /// <remarks>
-    /// We use <see cref="RefAsValueType{T}"/> as a wrapper to avoid paying the cost of covariant checks whenever
+    /// We use <see cref="RefAsValueType{T}"/> as a wrapper to avoid paying the cost of covariant checks
+    // whenever
     /// the underlying array that the <see cref="Stack{T}"/> class uses is written to.
     /// We've recognized this as a perf win in ETL traces for these stack frames:
     /// clr!JIT_Stelem_Ref

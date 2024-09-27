@@ -16,16 +16,20 @@ namespace System.Net.Http.Json
     public static partial class HttpClientJsonExtensions
     {
         /// <summary>
-        /// Sends an <c>HTTP GET</c> request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c> request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="options"></param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
@@ -42,16 +46,20 @@ namespace System.Net.Http.Json
             );
 
         /// <summary>
-        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="options"></param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
@@ -62,16 +70,21 @@ namespace System.Net.Http.Json
         ) => FromJsonStreamAsyncCore<TValue>(client, requestUri, options, cancellationToken);
 
         /// <summary>
-        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
-        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the behavior during deserialization.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the behavior during
+        // deserialization.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
             this HttpClient client,
             [StringSyntax(StringSyntaxAttribute.Uri)] string? requestUri,
@@ -86,16 +99,21 @@ namespace System.Net.Http.Json
             );
 
         /// <summary>
-        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
-        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the behavior during deserialization.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the behavior during
+        // deserialization.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
             this HttpClient client,
             Uri? requestUri,
@@ -104,15 +122,19 @@ namespace System.Net.Http.Json
         ) => FromJsonStreamAsyncCore(client, requestUri, jsonTypeInfo, cancellationToken);
 
         /// <summary>
-        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(
@@ -128,15 +150,19 @@ namespace System.Net.Http.Json
             );
 
         /// <summary>
-        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the value that results
+        /// Sends an <c>HTTP GET</c>request to the specified <paramref name="requestUri"/> and returns the
+        // value that results
         /// from deserializing the response body as JSON in an async enumerable operation.
         /// </summary>
         /// <typeparam name="TValue">The target type to deserialize to.</typeparam>
         /// <param name="client">The client used to send the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response body.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or
+        // threads to receive notice of cancellation.</param>
+        /// <returns>An <see cref="IAsyncEnumerable{TValue}"/> that represents the deserialized response
+        // body.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="client"/> is <see
+        // langword="null"/>.</exception>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
         public static IAsyncEnumerable<TValue?> GetFromJsonAsAsyncEnumerable<TValue>(

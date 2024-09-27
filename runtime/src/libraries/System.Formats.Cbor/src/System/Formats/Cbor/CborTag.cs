@@ -25,13 +25,16 @@ namespace System.Formats.Cbor
         /// <summary>Tag value for big float encodings.</summary>
         BigFloat = 5,
 
-        /// <summary>Tag value for byte strings, meant for later encoding to a base64url string representation.</summary>
+        /// <summary>Tag value for byte strings, meant for later encoding to a base64url string
+        // representation.</summary>
         Base64UrlLaterEncoding = 21,
 
-        /// <summary>Tag value for byte strings, meant for later encoding to a base64 string representation.</summary>
+        /// <summary>Tag value for byte strings, meant for later encoding to a base64 string
+        // representation.</summary>
         Base64StringLaterEncoding = 22,
 
-        /// <summary>Tag value for byte strings, meant for later encoding to a base16 string representation.</summary>
+        /// <summary>Tag value for byte strings, meant for later encoding to a base16 string
+        // representation.</summary>
         Base16StringLaterEncoding = 23,
 
         /// <summary>Tag value for byte strings containing embedded CBOR data item encodings.</summary>
@@ -46,7 +49,8 @@ namespace System.Formats.Cbor
         /// <summary>Tag value for base64-encoded text strings, as defined in RFC4648.</summary>
         Base64 = 34,
 
-        /// <summary>Tag value for regular expressions in Perl Compatible Regular Expressions / Javascript syntax.</summary>
+        /// <summary>Tag value for regular expressions in Perl Compatible Regular Expressions / Javascript
+        // syntax.</summary>
         Regex = 35,
 
         /// <summary>Tag value for MIME messages (including all headers), as defined in RFC2045.</summary>
@@ -68,7 +72,8 @@ namespace System.Formats.Cbor
         /// <summary>Represents the value 'null'.</summary>
         Null = 22,
 
-        /// <summary>Represents an undefined value, to be used by an encoder as a substitute for a data item with an encoding problem.</summary>
+        /// <summary>Represents an undefined value, to be used by an encoder as a substitute for a data item
+        // with an encoding problem.</summary>
         Undefined = 23,
     }
 }

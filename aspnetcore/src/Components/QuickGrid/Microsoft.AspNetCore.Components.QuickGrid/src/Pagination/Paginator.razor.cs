@@ -29,7 +29,8 @@ public partial class Paginator : IDisposable
     /// </summary>
     public Paginator()
     {
-        // The "total item count" handler doesn't need to do anything except cause this component to re-render
+        // The "total item count" handler doesn't need to do anything except cause this component to
+        // re-render
         _totalItemCountChanged = new(new EventCallback<PaginationState>(this, null));
     }
 

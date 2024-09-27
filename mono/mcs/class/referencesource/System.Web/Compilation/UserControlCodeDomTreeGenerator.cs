@@ -24,9 +24,9 @@ namespace System.Web.Compilation
             _ucParser = ucParser;
         }
 
-        /*
-         * Add metadata attributes to the class
-         */
+/*
+* Add metadata attributes to the class
+*/
         protected override void GenerateClassAttributes()
         {
             base.GenerateClassAttributes();

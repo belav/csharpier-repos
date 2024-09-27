@@ -375,10 +375,12 @@ namespace System
         //  other type of solution that don't prefere the prefix over the suffix or vice versa. To better
         //  understanding lets considered the following example:
         //   In comparing 'foo{x}bar' and 'food{x}ar', unless we are preferring prefix or suffix, we have
-        //   to state that they have the same order. So is the case with 'foo{x}babar' and 'food{x}ar', which
+        //   to state that they have the same order. So is the case with 'foo{x}babar' and 'food{x}ar',
+        // which
         //   will lead us to claiming the 'foo{x}bar' and 'foo{x}babar' are from the same order, which they
         //   clearly are not.
-        //  Taking other approaches to this problem results in similar cases. The only solution is preferring
+        //  Taking other approaches to this problem results in similar cases. The only solution is
+        // preferring
         //  either the prefix or the suffix over the other; since we already preferred prefix over suffix
         //  implicitly (we preferred the prefix only class over the suffix only, we also prefared literal
         //  over variable, if in the same path segment) that still maintain consistency.

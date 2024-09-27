@@ -10,7 +10,8 @@ namespace System.Dynamic.Tests
 {
     public class BindingRestrictionsTests
     {
-        // Considers itself equal to all of its kind, hence distinguishing equality and reference equality in tests.
+        // Considers itself equal to all of its kind, hence distinguishing equality and reference equality
+        // in tests.
         private class Egalitarian : IEquatable<Egalitarian>
         {
             public bool Equals(Egalitarian other) => true;

@@ -12,7 +12,8 @@
 // In order to disable the warning for this type we are disabling this warning for this entire file.
 #pragma warning disable 436
 
-// NOTE: This file should not be included in mscorlib. This should only be included in FX libraries that need to provide switches
+// NOTE: This file should not be included in mscorlib. This should only be included in FX libraries
+// that need to provide switches
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -133,7 +134,8 @@ namespace System
 
         /// <summary>
         /// This method is going to be called from the AppContextDefaultValues class when setting up the
-        /// default values for the switches. !!!! This method is called during the static constructor so it does not
+        /// default values for the switches. !!!! This method is called during the static constructor so it
+        // does not
         /// take a lock !!!! If you are planning to use this outside of that, please ensure proper locking.
         /// </summary>
         internal static void DefineSwitchDefault(string switchName, bool initialValue)

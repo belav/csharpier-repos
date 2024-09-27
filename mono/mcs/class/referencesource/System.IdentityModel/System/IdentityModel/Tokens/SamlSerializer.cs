@@ -69,7 +69,8 @@ namespace System.IdentityModel.Tokens
                 );
 
             //if (assertion.Signature == null)
-            //    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature)));
+            //    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+            // SecurityTokenException(SR.GetString(SR.SamlTokenMissingSignature)));
 
             return new SamlSecurityToken(assertion);
         }

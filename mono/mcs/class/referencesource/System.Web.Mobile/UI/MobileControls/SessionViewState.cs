@@ -21,26 +21,26 @@ using System.Web.Util;
 namespace System.Web.UI.MobileControls
 {
     /*
-     * Session-based view state.
-     *
-     * When saving view state on the server as session data, some critical problems
-     * arise. The core issue behind most of these is how to handle the user
-     * clicking the Back button. When the user does this, there is no corresponding
-     * notification to the server, and the client and server session state are thrown
-     * out of sync.
-     *
-     * This class attempts to alleviate this by storing a small history of view states
-     * in session data.
-     *
-     * To save session view state, construct a new object, set the ViewState and ActiveForm
-     * properties, and call Save. You'll get back a reference that contains the
-     * state reference to write out.
-     *
-     * To load session view state, construct a new object, and call Load. The class will
-     * attempt to construct the view state from its history.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * Session-based view state.
+    *
+    * When saving view state on the server as session data, some critical problems
+    * arise. The core issue behind most of these is how to handle the user
+    * clicking the Back button. When the user does this, there is no corresponding
+    * notification to the server, and the client and server session state are thrown
+    * out of sync.
+    *
+    * This class attempts to alleviate this by storing a small history of view states
+    * in session data.
+    *
+    * To save session view state, construct a new object, set the ViewState and ActiveForm
+    * properties, and call Save. You'll get back a reference that contains the
+    * state reference to write out.
+    *
+    * To load session view state, construct a new object, and call Load. The class will
+    * attempt to construct the view state from its history.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
 
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."

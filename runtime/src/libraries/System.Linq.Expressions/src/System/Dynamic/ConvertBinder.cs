@@ -8,7 +8,8 @@ using System.Linq.Expressions;
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents the convert dynamic operation at the call site, providing the binding semantic and the details about the operation.
+    /// Represents the convert dynamic operation at the call site, providing the binding semantic and
+    // the details about the operation.
     /// </summary>
     [RequiresDynamicCode(Expression.CallSiteRequiresDynamicCode)]
     public abstract class ConvertBinder : DynamicMetaObjectBinder
@@ -17,7 +18,8 @@ namespace System.Dynamic
         /// Initializes a new instance of the <see cref="ConvertBinder" />.
         /// </summary>
         /// <param name="type">The type to convert to.</param>
-        /// <param name="explicit">true if the conversion should consider explicit conversions; otherwise, false.</param>
+        /// <param name="explicit">true if the conversion should consider explicit conversions; otherwise,
+        // false.</param>
         protected ConvertBinder(Type type, bool @explicit)
         {
             ArgumentNullException.ThrowIfNull(type);
@@ -47,7 +49,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// When overridden in the derived class, performs the binding of the dynamic convert operation if the target dynamic object cannot bind.
+        /// When overridden in the derived class, performs the binding of the dynamic convert operation if
+        // the target dynamic object cannot bind.
         /// </summary>
         /// <param name="target">The target of the dynamic convert operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>

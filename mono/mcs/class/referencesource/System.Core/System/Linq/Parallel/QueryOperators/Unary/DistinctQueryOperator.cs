@@ -308,7 +308,8 @@ namespace System.Linq.Parallel
 
                         Wrapper<TInputOutput> wrappedElem = new Wrapper<TInputOutput>(elem.First);
 
-                        // If this is the first occurence of this element, or the order key is lower than all keys we saw previously,
+                        // If this is the first occurence of this element, or the order key is lower than all keys we saw
+                        // previously,
                         // update the order key for this element.
                         if (
                             !m_hashLookup.TryGetValue(wrappedElem, out oldEntry)

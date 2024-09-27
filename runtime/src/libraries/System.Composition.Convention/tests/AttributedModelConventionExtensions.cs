@@ -7,7 +7,8 @@ using System.Reflection;
 namespace System.Composition.Convention.Tests
 {
     /// <summary>
-    /// Helper extension methods for retrieving attributes from objects implementing IAttributedModelConvention
+    /// Helper extension methods for retrieving attributes from objects implementing
+    // IAttributedModelConvention
     /// </summary>
     internal static class AttributedModelConventionExtensions
     {

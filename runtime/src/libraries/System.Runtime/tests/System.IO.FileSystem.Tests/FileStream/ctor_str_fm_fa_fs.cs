@@ -66,7 +66,8 @@ namespace System.IO.Tests
                 )
                 .Dispose();
 
-            // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
+            // just check that the inputs are accepted, actual sharing varies by platform so we separate the
+            // behavior testing
             foreach (
                 FileAccess access in new[]
                 {
@@ -135,7 +136,8 @@ namespace System.IO.Tests
         [Fact]
         public void FileShareCreate()
         {
-            // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
+            // just check that the inputs are accepted, actual sharing varies by platform so we separate the
+            // behavior testing
             int i = 0;
             foreach (FileAccess access in new[] { FileAccess.ReadWrite, FileAccess.Write })
             {
@@ -160,7 +162,8 @@ namespace System.IO.Tests
         [Fact]
         public void FileShareOpenOrCreate()
         {
-            // just check that the inputs are accepted, actual sharing varies by platform so we separate the behavior testing
+            // just check that the inputs are accepted, actual sharing varies by platform so we separate the
+            // behavior testing
             int i = 0;
             foreach (
                 FileAccess access in new[]

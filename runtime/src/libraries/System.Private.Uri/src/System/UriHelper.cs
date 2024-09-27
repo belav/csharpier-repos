@@ -26,7 +26,8 @@ namespace System
         }
 
         // http://host/Path/Path/File?Query is the base of
-        //      - http://host/Path/Path/File/ ...    (those "File" words may be different in semantic but anyway)
+        //      - http://host/Path/Path/File/ ...    (those "File" words may be different in semantic but
+        // anyway)
         //      - http://host/Path/Path/#Fragment
         //      - http://host/Path/Path/?Query
         //      - http://host/Path/Path/MoreDir/ ...
@@ -42,7 +43,8 @@ namespace System
         //      - http://host/Path/Path2/MoreDir
         //      - http://host/Path/File
         //
-        // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before going to this method.
+        // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before
+        // going to this method.
         // ASSUMES that back slashes already have been converted if applicable.
         //
         internal static unsafe bool TestForSubPath(
@@ -355,7 +357,8 @@ namespace System
         // - Any "bad" escape sequence will remain as is or '%' will be escaped.
         // - destPosition tells the starting index in dest for placing the result.
         //   On return destPosition tells the last character + 1 position in the "dest" array.
-        // - The control chars and chars passed in rsdvX parameters may be re-escaped depending on UnescapeLevel
+        // - The control chars and chars passed in rsdvX parameters may be re-escaped depending on
+        // UnescapeLevel
         // - It is a RARE case when Unescape actually needs escaping some characters mentioned above.
         //   For this reason it returns a char[] that is usually the same ref as the input "dest" value.
         //
@@ -649,12 +652,14 @@ namespace System
             return NotSafeForUnescape.Contains(ch);
         }
 
-        // true for all ASCII letters and digits, as well as the RFC3986 unreserved marks '-', '_', '.', and '~'
+        // true for all ASCII letters and digits, as well as the RFC3986 unreserved marks '-', '_', '.', and
+        // '~'
         public static readonly SearchValues<char> Unreserved = SearchValues.Create(
             "-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~"
         );
 
-        // true for all ASCII letters and digits, as well as the RFC3986 reserved characters, unreserved characters, and hash
+        // true for all ASCII letters and digits, as well as the RFC3986 reserved characters, unreserved
+        // characters, and hash
         public static readonly SearchValues<char> UnreservedReserved = SearchValues.Create(
             "!#$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~"
         );

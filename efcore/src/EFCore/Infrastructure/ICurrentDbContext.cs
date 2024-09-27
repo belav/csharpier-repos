@@ -5,11 +5,13 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
 ///     <para>
-///         Registered as a scoped service in Entity Framework's internal service provider to provide access
+///         Registered as a scoped service in Entity Framework's internal service provider to
+// provide access
 ///         to the current <see cref="DbContext" /> being used.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -21,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>

@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Globalization;
 
@@ -7,7 +8,8 @@ namespace System.Numerics
 {
     /// <summary>
     /// A structure encapsulating a four-dimensional vector (x,y,z,w),
-    /// which is used to efficiently rotate an object about the (x,y,z) vector by the angle theta, where w = cos(theta/2).
+    /// which is used to efficiently rotate an object about the (x,y,z) vector by the angle theta, where
+    // w = cos(theta/2).
     /// </summary>
     public struct Quaternion : IEquatable<Quaternion>
     {
@@ -294,7 +296,8 @@ namespace System.Numerics
         /// </summary>
         /// <param name="quaternion1">The first source Quaternion.</param>
         /// <param name="quaternion2">The second source Quaternion.</param>
-        /// <param name="amount">The relative weight of the second source Quaternion in the interpolation.</param>
+        /// <param name="amount">The relative weight of the second source Quaternion in the
+        // interpolation.</param>
         /// <returns>The interpolated Quaternion.</returns>
         public static Quaternion Slerp(Quaternion quaternion1, Quaternion quaternion2, float amount)
         {
@@ -352,7 +355,8 @@ namespace System.Numerics
         /// </summary>
         /// <param name="quaternion1">The first source Quaternion.</param>
         /// <param name="quaternion2">The second source Quaternion.</param>
-        /// <param name="amount">The relative weight of the second source Quaternion in the interpolation.</param>
+        /// <param name="amount">The relative weight of the second source Quaternion in the
+        // interpolation.</param>
         /// <returns>The interpolated Quaternion.</returns>
         public static Quaternion Lerp(Quaternion quaternion1, Quaternion quaternion2, float amount)
         {
@@ -395,11 +399,13 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Concatenates two Quaternions; the result represents the value1 rotation followed by the value2 rotation.
+        /// Concatenates two Quaternions; the result represents the value1 rotation followed by the value2
+        // rotation.
         /// </summary>
         /// <param name="value1">The first Quaternion rotation in the series.</param>
         /// <param name="value2">The second Quaternion rotation in the series.</param>
-        /// <returns>A new Quaternion representing the concatenation of the value1 rotation followed by the value2 rotation.</returns>
+        /// <returns>A new Quaternion representing the concatenation of the value1 rotation followed by the
+        // value2 rotation.</returns>
         public static Quaternion Concatenate(Quaternion value1, Quaternion value2)
         {
             Quaternion ans;

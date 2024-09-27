@@ -51,22 +51,26 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 
             var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugExe)
                 .VerifyDiagnostics(
-                    // (6,5): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    // (6,5): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('int[]')
                     //     int[]* xp = &x;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "int[]*")
                         .WithArguments("int[]")
                         .WithLocation(6, 5),
-                    // (6,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    // (6,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('int[]')
                     //     int[]* xp = &x;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&x")
                         .WithArguments("int[]")
                         .WithLocation(6, 17),
-                    // (13,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    // (13,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('int[]')
                     //     private int[]* _x;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "_x")
                         .WithArguments("int[]")
                         .WithLocation(13, 20),
-                    // (15,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    // (15,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('int[]')
                     //     public C(int[]* x)
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "x")
                         .WithArguments("int[]")

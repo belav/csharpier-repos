@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     // The general idea is to stratify cases by
     // first bucketing on Length
     // then bucketing on a character position selected by heuristic
-    // and finally switching to exact string (this is a simple string comparison when only one possibility remains).
+    // and finally switching to exact string (this is a simple string comparison when only one
+    // possibility remains).
     //
     // The benefit of this approach is that it much reduces the need for computing
     // the input string's hashcode.
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     //        // when a single character check narrows down to one possibility:
     //        case '1': if (key == "caseM1") { goto labelM1; } else { goto labelDefault; }
     //
-    //        // when a single character check leaves a few possibilities remaining (worst case scenario):
+    //        // when a single character check leaves a few possibilities remaining (worst case
+    // scenario):
     //        case '2':
     //          switch (key)
     //          {
@@ -284,8 +286,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return bestIndex;
             }
 
-            // Given a position and a set of string cases of matching lengths, inspect the buckets created by inspecting
-            // those strings at that position. Return the count how many buckets have a single entry and the size of the largest bucket.
+            // Given a position and a set of string cases of matching lengths, inspect the buckets created by
+            // inspecting
+            // those strings at that position. Return the count how many buckets have a single entry and the
+            // size of the largest bucket.
             static (int singleEntryCount, int largestBucket) positionScore(
                 int position,
                 ImmutableArray<(string value, LabelSymbol label)> caseLabels

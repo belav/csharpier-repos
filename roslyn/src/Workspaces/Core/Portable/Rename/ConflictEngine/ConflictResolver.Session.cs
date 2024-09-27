@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         /// </summary>
         private class Session
         {
-            // Set of All Locations that will be renamed (does not include non-reference locations that need to be checked for conflicts)
+            // Set of All Locations that will be renamed (does not include non-reference locations that need to
+            // be checked for conflicts)
             private readonly SymbolicRenameLocations _renameLocationSet;
 
             // Rename Symbol's Source Location
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                 }
             }
 
-            // The method which performs rename, resolves the conflict locations and returns the result of the rename operation
+            // The method which performs rename, resolves the conflict locations and returns the result of the
+            // rename operation
             public async Task<MutableConflictResolution> ResolveConflictsAsync()
             {
                 try
@@ -145,19 +147,25 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         // 1st phase - Does a simple token replacement
                         // If the 1st phase results in conflict then we perform then:
                         //      2nd phase is to expand and simplify only the reference locations with conflicts
-                        //      3rd phase is to expand and simplify all the conflict locations (both reference and non-reference)
+                        //      3rd phase is to expand and simplify all the conflict locations (both reference and
+                        // non-reference)
                         // If there are unresolved Conflicts after the 3rd phase then in 4th phase,
-                        //      We complexify and resolve locations that were resolvable and for the other locations we perform the normal token replacement like the first the phase.
+                        //      We complexify and resolve locations that were resolvable and for the other locations we
+                        // perform the normal token replacement like the first the phase.
                         // If the OptionSet has RenameFile to true, we rename files with the type declaration
                         for (var phase = 0; phase < 4; phase++)
                         {
                             // Step 1:
                             // The rename process and annotation for the bookkeeping is performed in one-step
                             // The Process in short is,
-                            // 1. If renaming a token which is no conflict then replace the token and make a map of the oldspan to the newspan
-                            // 2. If we encounter a node that has to be expanded( because there was a conflict in previous phase), we expand it.
-                            //    If the node happens to contain a token that needs to be renamed then we annotate it and rename it after expansion else just expand and proceed
-                            // 3. Through the whole process we maintain a map of the oldspan to newspan. In case of expansion & rename, we map the expanded node and the renamed token
+                            // 1. If renaming a token which is no conflict then replace the token and make a map of the oldspan
+                            // to the newspan
+                            // 2. If we encounter a node that has to be expanded( because there was a conflict in previous
+                            // phase), we expand it.
+                            //    If the node happens to contain a token that needs to be renamed then we annotate it and rename
+                            // it after expansion else just expand and proceed
+                            // 3. Through the whole process we maintain a map of the oldspan to newspan. In case of expansion &
+                            // rename, we map the expanded node and the renamed token
                             conflictResolution.UpdateCurrentSolution(
                                 await AnnotateAndRename_WorkerAsync(
                                         baseSolution,
@@ -206,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                     .Select(loc => new ConflictLocationInfo(loc))
                                     .ToImmutableHashSet();
 
-                                // If there were no conflicting locations in references, then the first conflict phase has to be skipped.
+                                // If there were no conflicting locations in references, then the first conflict phase has to be
+                                // skipped.
                                 if (conflictLocations.Count == 0)
                                 {
                                     phase++;
@@ -231,14 +240,16 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             }
 
                             // Set the documents with conflicts that need to be processed in the next phase.
-                            // Note that we need to get the conflictLocations here since we're going to remove some locations below if phase == 2
+                            // Note that we need to get the conflictLocations here since we're going to remove some locations
+                            // below if phase == 2
                             documentIdsThatGetsAnnotatedAndRenamed = new HashSet<DocumentId>(
                                 conflictLocations.Select(l => l.DocumentId)
                             );
 
                             if (phase == 2)
                             {
-                                // After phase 2, if there are still conflicts then remove the conflict locations from being expanded
+                                // After phase 2, if there are still conflicts then remove the conflict locations from being
+                                // expanded
                                 var unresolvedLocations = conflictResolution
                                     .RelatedLocations.Where(l =>
                                         (l.Type & RelatedLocationType.UnresolvedConflict) != 0
@@ -288,7 +299,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         conflictResolution.UpdateCurrentSolution(intermediateSolution);
                     }
 
-                    // This rename could break implicit references of this symbol (e.g. rename MoveNext on a collection like type in a
+                    // This rename could break implicit references of this symbol (e.g. rename MoveNext on a collection
+                    // like type in a
                     // foreach/for each statement
                     var renamedSymbolInNewSolution = await GetRenamedSymbolInCurrentSolutionAsync(
                             conflictResolution
@@ -371,7 +383,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             {
                 var documentIdErrorStateLookup = new Dictionary<DocumentId, bool>();
 
-                // we only check for the documentIds we add annotations to, which is a subset of the ones we're going
+                // we only check for the documentIds we add annotations to, which is a subset of the ones we're
+                // going
                 // to change the syntax in.
                 foreach (var documentId in documents)
                 {
@@ -598,7 +611,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                                 }
                                 else
                                 {
-                                    // if a complexified location was not a reference location, then it was a resolved conflict of a non reference location
+                                    // if a complexified location was not a reference location, then it was a resolved conflict of a non
+                                    // reference location
                                     if (
                                         !conflictAnnotation.IsOriginalTextLocation
                                         && complexifiedLocationSpanForThisDocument.Contains(
@@ -644,8 +658,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                         }
                     }
 
-                    // there are more conflicts that cannot be identified by checking if the tokens still reference the same
-                    // symbol. These conflicts are mostly language specific. A good example is a member with the same name
+                    // there are more conflicts that cannot be identified by checking if the tokens still reference the
+                    // same
+                    // symbol. These conflicts are mostly language specific. A good example is a member with the same
+                    // name
                     // as the parent (yes I know, this is a simplification).
                     if (_documentIdOfRenameSymbolDeclaration.ProjectId == projectId)
                     {
@@ -1057,7 +1073,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
 
             /// <summary>
-            /// The method determines the set of documents that need to be processed for Rename and also determines
+            /// The method determines the set of documents that need to be processed for Rename and also
+            // determines
             /// the possible set of names that need to be checked for conflicts.
             /// The list will contains Strings like Bar -> BarAttribute ; Property Bar -> Bar , get_Bar, set_Bar
             /// </summary>
@@ -1214,8 +1231,10 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
                             .Select(t => t.ComplexifiedSpan)
                             .ToImmutableHashSet();
 
-                        // Annotate all nodes with a RenameLocation annotations to record old locations & old referenced symbols.
-                        // Also annotate nodes that should get complexified (nodes for rename locations + conflict locations)
+                        // Annotate all nodes with a RenameLocation annotations to record old locations & old referenced
+                        // symbols.
+                        // Also annotate nodes that should get complexified (nodes for rename locations + conflict
+                        // locations)
                         var parameters = new RenameRewriterParameters(
                             _renamedSymbolDeclarationAnnotation,
                             document,
@@ -1243,7 +1262,8 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
 
                         if (newRoot == originalSyntaxRoot)
                         {
-                            // Update the list for the current phase, some files with strings containing the original or replacement
+                            // Update the list for the current phase, some files with strings containing the original or
+                            // replacement
                             // text may have been filtered out.
                             documentIdsToRename.Remove(documentId);
                         }
@@ -1289,11 +1309,14 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
             }
 
             /// <summary>
-            /// We try to compute the sub-spans to rename within the given <paramref name="containingLocationForStringOrComment"/>.
-            /// If we are renaming within a string, the locations to rename are always within this containing string location
+            /// We try to compute the sub-spans to rename within the given <paramref
+            // name="containingLocationForStringOrComment"/>.
+            /// If we are renaming within a string, the locations to rename are always within this containing
+            // string location
             /// and we can identify these sub-spans.
             /// However, if we are renaming within a comment, the rename locations can be anywhere in trivia,
-            /// so we return null and the rename rewriter will perform a complete regex match within comment trivia
+            /// so we return null and the rename rewriter will perform a complete regex match within comment
+            // trivia
             /// and rename all matches instead of specific matches.
             /// </summary>
             private static ImmutableSortedSet<TextSpan>? GetSubSpansToRenameInStringAndCommentTextSpans(

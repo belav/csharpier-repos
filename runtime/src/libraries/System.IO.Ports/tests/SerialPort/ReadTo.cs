@@ -105,12 +105,12 @@ namespace System.IO.Ports.Tests
             VerifyRead(new ASCIIEncoding(), GenRandomNewLine(true));
         }
 
-        /*
-        public void UTF7Encoding()
-        {
-            VerifyRead(new System.Text.UTF7Encoding(), GenRandomNewLine(false));
-        }
-    */
+/*
+public void UTF7Encoding()
+{
+VerifyRead(new System.Text.UTF7Encoding(), GenRandomNewLine(false));
+}
+*/
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void UTF8Encoding()
@@ -304,7 +304,8 @@ namespace System.IO.Ports.Tests
 
                 TCSupport.WaitForReadBufferToLoad(com1, byteXmitBuffer.Length);
 
-                //Read Every Byte except the last one. The last bye should be left in the last position of SerialPort's
+                //Read Every Byte except the last one. The last bye should be left in the last position of
+                // SerialPort's
                 //internal buffer. When we try to read this char as UTF32 the buffer should have to be resized so
                 //the other 3 bytes of the ut32 encoded char can be in the buffer
                 com1.Read(new char[1023], 0, 1023);
@@ -876,7 +877,8 @@ namespace System.IO.Ports.Tests
                     totalBytesRead += bytesRead + numNewLineBytes;
                 }
 
-                //            indexOfNewLine = strToWrite.IndexOf(newLine, lastIndexOfNewLine + newLineStringLength);
+                //            indexOfNewLine = strToWrite.IndexOf(newLine, lastIndexOfNewLine +
+                // newLineStringLength);
                 int indexOfNewLine = TCSupport.OrdinalIndexOf(
                     expectedString,
                     lastIndexOfNewLine + newLineStringLength,
@@ -957,16 +959,16 @@ namespace System.IO.Ports.Tests
                 );
             }
 
-            /*
-                    if (!retValue)
-                    {
-                        Debug.WriteLine("\nstrToWrite = ");
-                        TCSupport.PrintChars(strToWrite.ToCharArray());
+/*
+if (!retValue)
+{
+Debug.WriteLine("\nstrToWrite = ");
+TCSupport.PrintChars(strToWrite.ToCharArray());
 
-                        Debug.WriteLine("\nnewLine = ");
-                        TCSupport.PrintChars(newLine.ToCharArray());
-                    }
-            */
+Debug.WriteLine("\nnewLine = ");
+TCSupport.PrintChars(newLine.ToCharArray());
+}
+*/
         }
 
         private void VerifyReadToWithWriteLine(Encoding encoding, string newLine)

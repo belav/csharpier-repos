@@ -11,8 +11,10 @@ namespace System.Collections.Immutable
     /// </summary>
     /// <typeparam name="T">The type of element stored in the list.</typeparam>
     /// <remarks>
-    /// Mutations on this list generate new lists.  Incremental changes to a list share as much memory as possible with the prior versions of a list,
-    /// while allowing garbage collection to clean up any unique list data that is no longer being referenced.
+    /// Mutations on this list generate new lists.  Incremental changes to a list share as much memory
+    // as possible with the prior versions of a list,
+    /// while allowing garbage collection to clean up any unique list data that is no longer being
+    // referenced.
     /// </remarks>
     [CollectionBuilder(typeof(ImmutableList), nameof(ImmutableList.Create))]
     public interface IImmutableList<T> : IReadOnlyList<T>
@@ -59,14 +61,16 @@ namespace System.Collections.Immutable
         /// The object to locate in the <see cref="ImmutableList{T}"/>. The value
         /// can be null for reference types.
         /// </param>
-        /// <param name="index">The starting position of the search. The search proceeds from <paramref name="index"/> toward the beginning of this instance.</param>
+        /// <param name="index">The starting position of the search. The search proceeds from <paramref
+        // name="index"/> toward the beginning of this instance.</param>
         /// <param name="count">The number of elements in the section to search.</param>
         /// <param name="equalityComparer">
         /// The equality comparer to use in the search.
         /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
         /// </param>
         /// <returns>
-        /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of elements
+        /// The zero-based index of the last occurrence of <paramref name="item"/> within the range of
+        // elements
         /// in the <see cref="ImmutableList{T}"/> that contains <paramref name="count"/> number of elements
         /// and ends at <paramref name="index"/>, if found; otherwise, -1.
         /// </returns>
@@ -110,7 +114,8 @@ namespace System.Collections.Immutable
         /// The equality comparer to use in the search.
         /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
         /// </param>
-        /// <returns>A new list with the element removed, or this list if the element is not in this list.</returns>
+        /// <returns>A new list with the element removed, or this list if the element is not in this
+        // list.</returns>
         IImmutableList<T> Remove(T value, IEqualityComparer<T>? equalityComparer);
 
         /// <summary>
@@ -161,7 +166,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="index">The position in the list of the element to replace.</param>
         /// <param name="value">The element to replace the old element with.</param>
-        /// <returns>The new list -- even if the value being replaced is equal to the new value for that position.</returns>
+        /// <returns>The new list -- even if the value being replaced is equal to the new value for that
+        // position.</returns>
         IImmutableList<T> SetItem(int index, T value);
 
         /// <summary>
@@ -173,8 +179,10 @@ namespace System.Collections.Immutable
         /// The equality comparer to use in the search.
         /// If <c>null</c>, <see cref="EqualityComparer{T}.Default"/> is used.
         /// </param>
-        /// <returns>The new list -- even if the value being replaced is equal to the new value for that position.</returns>
-        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the list.</exception>
+        /// <returns>The new list -- even if the value being replaced is equal to the new value for that
+        // position.</returns>
+        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the
+        // list.</exception>
         IImmutableList<T> Replace(T oldValue, T newValue, IEqualityComparer<T>? equalityComparer);
     }
 }

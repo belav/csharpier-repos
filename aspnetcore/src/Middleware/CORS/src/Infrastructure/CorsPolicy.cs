@@ -72,7 +72,8 @@ public class CorsPolicy
     }
 
     /// <summary>
-    /// Gets a value indicating if <see cref="IsOriginAllowed"/> is the default function that is set in the CorsPolicy constructor.
+    /// Gets a value indicating if <see cref="IsOriginAllowed"/> is the default function that is set in
+    // the CorsPolicy constructor.
     /// </summary>
     internal bool IsDefaultIsOriginAllowed { get; private set; } = true;
 
@@ -110,7 +111,8 @@ public class CorsPolicy
     public IList<string> Origins { get; } = new List<string>();
 
     /// <summary>
-    /// Gets or sets the <see cref="TimeSpan"/> for which the results of a preflight request can be cached.
+    /// Gets or sets the <see cref="TimeSpan"/> for which the results of a preflight request can be
+    // cached.
     /// </summary>
     public TimeSpan? PreflightMaxAge
     {

@@ -128,7 +128,8 @@ namespace MonoTests.System.Net.WebSockets
                 {
                     resp.StatusCode = 101;
                     resp.Headers["Upgrade"] = "websocket";
-                    // Mono http request doesn't like the forcing, test still valid since the default connection header value is empty
+                    // Mono http request doesn't like the forcing, test still valid since the default connection header
+                    // value is empty
                     //ForceSetHeader (resp.Headers, "Connection", "Foo");
                 }
             );

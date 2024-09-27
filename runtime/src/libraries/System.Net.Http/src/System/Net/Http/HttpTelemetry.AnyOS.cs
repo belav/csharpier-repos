@@ -48,7 +48,8 @@ namespace System.Net.Http
         {
             if (command.Command == EventCommand.Enable)
             {
-                // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
+                // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first
+                // enable command).
                 // They aren't disabled afterwards...
 
                 // The cumulative number of HTTP requests started since the process started.
@@ -73,9 +74,12 @@ namespace System.Net.Http
                 };
 
                 // The cumulative number of HTTP requests failed since the process started.
-                // Failed means that an exception occurred during the handler's Send(Async) call as a result of a connection related error, timeout, or explicitly cancelled.
-                // In case of using HttpClient's SendAsync(and friends) with buffering, this includes exceptions that occurred while buffering the response content
-                // In case of using HttpClient's helper methods (GetString/ByteArray/Stream), this includes responses with non-success status codes
+                // Failed means that an exception occurred during the handler's Send(Async) call as a result of a
+                // connection related error, timeout, or explicitly cancelled.
+                // In case of using HttpClient's SendAsync(and friends) with buffering, this includes exceptions
+                // that occurred while buffering the response content
+                // In case of using HttpClient's helper methods (GetString/ByteArray/Stream), this includes
+                // responses with non-success status codes
                 _failedRequestsCounter ??= new PollingCounter(
                     "requests-failed",
                     this,
@@ -97,8 +101,10 @@ namespace System.Net.Http
                 };
 
                 // The current number of active HTTP requests that have started but not yet completed or failed.
-                // Use (-_stoppedRequests + _startedRequests) to avoid returning a negative value if _stoppedRequests is
-                // incremented after reading _startedRequests due to race conditions with completing the HTTP request.
+                // Use (-_stoppedRequests + _startedRequests) to avoid returning a negative value if
+                // _stoppedRequests is
+                // incremented after reading _startedRequests due to race conditions with completing the HTTP
+                // request.
                 _currentRequestsCounter ??= new PollingCounter(
                     "current-requests",
                     this,

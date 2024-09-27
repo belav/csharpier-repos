@@ -167,7 +167,8 @@ public class SetCookieHeaderValue
     /// deployed in strict mode, and when supported by the client.
     /// </para>
     /// </summary>
-    /// <remarks>See <see href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-05#section-8.8"/>.</remarks>
+    /// <remarks>See <see
+    // href="https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-05#section-8.8"/>.</remarks>
     public SameSiteMode SameSite { get; set; } = SameSiteMode.Unspecified;
 
     /// <summary>
@@ -189,7 +190,8 @@ public class SetCookieHeaderValue
         get => _extensions ??= new List<StringSegment>();
     }
 
-    // name="value"; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; samesite={strict|lax|none}; httponly
+    // name="value"; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1;
+    // secure; samesite={strict|lax|none}; httponly
     /// <inheritdoc />
     public override string ToString()
     {
@@ -451,11 +453,13 @@ public class SetCookieHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the specified <paramref name="input"/> as a <see cref="SetCookieHeaderValue"/>.
+    /// Attempts to parse the specified <paramref name="input"/> as a <see
+    // cref="SetCookieHeaderValue"/>.
     /// </summary>
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
-    /// <returns><see langword="true"/> if input is a valid <see cref="SetCookieHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if input is a valid <see cref="SetCookieHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParse(
         StringSegment input,
         [NotNullWhen(true)] out SetCookieHeaderValue? parsedValue
@@ -476,7 +480,8 @@ public class SetCookieHeaderValue
     }
 
     /// <summary>
-    /// Parses a sequence of inputs as a sequence of <see cref="SetCookieHeaderValue"/> values using string parsing rules.
+    /// Parses a sequence of inputs as a sequence of <see cref="SetCookieHeaderValue"/> values using
+    // string parsing rules.
     /// </summary>
     /// <param name="inputs">The values to parse.</param>
     /// <returns>The parsed values.</returns>
@@ -490,7 +495,8 @@ public class SetCookieHeaderValue
     /// </summary>
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
-    /// <returns><see langword="true"/> if all inputs are valid <see cref="SetCookieHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if all inputs are valid <see cref="SetCookieHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParseList(
         IList<string>? inputs,
         [NotNullWhen(true)] out IList<SetCookieHeaderValue>? parsedValues
@@ -500,11 +506,13 @@ public class SetCookieHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the sequence of values as a sequence of <see cref="SetCookieHeaderValue"/> using string parsing rules.
+    /// Attempts to parse the sequence of values as a sequence of <see cref="SetCookieHeaderValue"/>
+    // using string parsing rules.
     /// </summary>
     /// <param name="inputs">The values to parse.</param>
     /// <param name="parsedValues">The parsed values.</param>
-    /// <returns><see langword="true"/> if all inputs are valid <see cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if all inputs are valid <see
+    // cref="StringWithQualityHeaderValue"/>, otherwise <see langword="false"/>.</returns>
     public static bool TryParseStrictList(
         IList<string>? inputs,
         [NotNullWhen(true)] out IList<SetCookieHeaderValue>? parsedValues
@@ -513,7 +521,8 @@ public class SetCookieHeaderValue
         return MultipleValueParser.TryParseStrictValues(inputs, out parsedValues);
     }
 
-    // name=value; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; samesite={Strict|Lax|None}; httponly
+    // name=value; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1;
+    // secure; samesite={Strict|Lax|None}; httponly
     private static int GetSetCookieLength(
         StringSegment input,
         int startIndex,
@@ -572,7 +581,8 @@ public class SetCookieHeaderValue
 
             offset += HttpRuleParser.GetWhitespaceLength(input, offset);
 
-            //  cookie-av = expires-av / max-age-av / domain-av / path-av / secure-av / samesite-av / httponly-av / extension-av
+            //  cookie-av = expires-av / max-age-av / domain-av / path-av / secure-av / samesite-av /
+            // httponly-av / extension-av
             itemLength = HttpRuleParser.GetTokenLength(input, offset);
             if (itemLength == 0)
             {
@@ -600,7 +610,8 @@ public class SetCookieHeaderValue
                 }
                 result.Expires = expirationDate;
             }
-            // max-age-av = "Max-Age=" digit *DIGIT ; valid positive and negative values following the RFC6265, Section 5.2.2
+            // max-age-av = "Max-Age=" digit *DIGIT ; valid positive and negative values following the RFC6265,
+            // Section 5.2.2
             else if (StringSegment.Equals(token, MaxAgeToken, StringComparison.OrdinalIgnoreCase))
             {
                 // = (no spaces)
@@ -639,7 +650,8 @@ public class SetCookieHeaderValue
                 offset += itemLength;
             }
             // domain-av = "Domain=" domain-value
-            // domain-value = <subdomain> ; defined in [RFC1034], Section 3.5, as enhanced by [RFC1123], Section 2.1
+            // domain-value = <subdomain> ; defined in [RFC1034], Section 3.5, as enhanced by [RFC1123], Section
+            // 2.1
             else if (StringSegment.Equals(token, DomainToken, StringComparison.OrdinalIgnoreCase))
             {
                 // = (no spaces)

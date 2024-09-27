@@ -108,7 +108,8 @@ namespace System.Text.Unicode
                     pOutputBuffer += 4;
                     outputCharsRemaining -= 4;
 
-                    // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data is also ASCII.
+                    // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data
+                    // is also ASCII.
                     // Below is basically unrolled loops with poor man's vectorization.
 
                     uint remainingInputBytes =
@@ -550,11 +551,16 @@ namespace System.Text.Unicode
                                         ) >= 3
                             )
                             {
-                                // We're going to attempt to read a second 3-byte sequence and write them both out one after the other.
-                                // We need to check the continuation bit mask on the remaining two bytes (and we may as well check the leading
-                                // byte mask again since it's free), then perform overlong + surrogate checks. If the overlong or surrogate
-                                // checks fail, we'll fall through to the remainder of the logic which will transcode the original valid
-                                // 3-byte UTF-8 sequence we read; and on the next iteration of the loop the validation routine will run again,
+                                // We're going to attempt to read a second 3-byte sequence and write them both out one after the
+                                // other.
+                                // We need to check the continuation bit mask on the remaining two bytes (and we may as well check
+                                // the leading
+                                // byte mask again since it's free), then perform overlong + surrogate checks. If the overlong or
+                                // surrogate
+                                // checks fail, we'll fall through to the remainder of the logic which will transcode the original
+                                // valid
+                                // 3-byte UTF-8 sequence we read; and on the next iteration of the loop the validation routine will
+                                // run again,
                                 // fail, and redirect control flow to the error handling logic at the very end of this method.
 
                                 uint secondDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer + 3);
@@ -791,7 +797,8 @@ namespace System.Text.Unicode
                             goto Error; // 3-byte marker not followed by 2 continuation bytes
                         }
 
-                        // To speed up the validation logic below, we're not going to remove the UTF-8 markers from the partial char just yet.
+                        // To speed up the validation logic below, we're not going to remove the UTF-8 markers from the
+                        // partial char just yet.
                         // We account for this in the comparisons below.
 
                         uint partialChar = (firstByte << 12) + (secondByte << 6);
@@ -835,7 +842,8 @@ namespace System.Text.Unicode
                             goto Error; // 3-byte marker not followed by continuation byte
                         }
 
-                        // We can't build up the entire scalar value now, but we can check for overlong / surrogate representations
+                        // We can't build up the entire scalar value now, but we can check for overlong / surrogate
+                        // representations
                         // from just the first two bytes.
 
                         uint partialChar = (firstByte << 6) + secondByte; // don't worry about fixing up the UTF-8 markers; we'll account for it in the below comparison
@@ -1057,7 +1065,8 @@ namespace System.Text.Unicode
                     pOutputBuffer += 2;
                     outputBytesRemaining -= 2;
 
-                    // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data is also ASCII.
+                    // If we saw a sequence of all ASCII, there's a good chance a significant amount of following data
+                    // is also ASCII.
                     // Below is basically unrolled loops with poor man's vectorization.
 
                     uint inputCharsRemaining =
@@ -1330,13 +1339,15 @@ namespace System.Text.Unicode
                     }
                 }
 
-                // At this point, we know the first char in the buffer is non-ASCII, but we haven't yet validated it.
+                // At this point, we know the first char in the buffer is non-ASCII, but we haven't yet validated
+                // it.
 
                 if (!IsFirstCharAtLeastThreeUtf8Bytes(thisDWord))
                 {
                     TryConsumeMultipleTwoByteSequences:
 
-                    // For certain text (Greek, Cyrillic, ...), 2-byte sequences tend to be clustered. We'll try transcoding them in
+                    // For certain text (Greek, Cyrillic, ...), 2-byte sequences tend to be clustered. We'll try
+                    // transcoding them in
                     // a tight loop without falling back to the main loop.
 
                     if (IsSecondCharTwoUtf8Bytes(thisDWord))
@@ -1665,9 +1676,11 @@ namespace System.Text.Unicode
             // or we were running low on space in the destination buffer. If we're running low on
             // input data (label targets ProcessInputOfLessThanDWordSize and ProcessNextCharAndFinish),
             // then the inputLength value is guaranteed to be between 0 and 1, and we should return Done.
-            // If we're running low on destination buffer space (label target ProcessOneCharFromCurrentDWordAndFinish),
+            // If we're running low on destination buffer space (label target
+            // ProcessOneCharFromCurrentDWordAndFinish),
             // then we didn't modify inputLength since entering the main loop, which means it should
-            // still have a value of >= 2. So checking the value of inputLength is all we need to do to determine
+            // still have a value of >= 2. So checking the value of inputLength is all we need to do to
+            // determine
             // which of the two scenarios we're in.
 
             if (inputLength > 1)

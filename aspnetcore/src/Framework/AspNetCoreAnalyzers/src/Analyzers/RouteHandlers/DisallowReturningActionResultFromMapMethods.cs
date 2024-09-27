@@ -66,7 +66,8 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
             )
         )
         {
-            // if we don't have a method body, and the action is IResult or ActionResult<T> returning, produce diagnostics for the entire method.
+            // if we don't have a method body, and the action is IResult or ActionResult<T> returning, produce
+            // diagnostics for the entire method.
             context.ReportDiagnostic(
                 Diagnostic.Create(
                     DiagnosticDescriptors.DoNotReturnActionResultsFromRouteHandlers,

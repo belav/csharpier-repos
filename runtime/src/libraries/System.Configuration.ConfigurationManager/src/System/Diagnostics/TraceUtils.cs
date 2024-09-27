@@ -230,7 +230,8 @@ namespace System.Diagnostics
         }
 
         // Copy the StringDictionary to another StringDictionary.
-        // This is not as efficient as directly setting the property, but it avoids having to expose a public setter on the property.
+        // This is not as efficient as directly setting the property, but it avoids having to expose a
+        // public setter on the property.
         internal static void CopyStringDictionary(StringDictionary source, StringDictionary dest)
         {
             dest.Clear();

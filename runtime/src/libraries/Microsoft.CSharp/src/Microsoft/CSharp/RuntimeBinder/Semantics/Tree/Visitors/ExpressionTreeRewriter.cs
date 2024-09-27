@@ -34,7 +34,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Debug.Assert(assignment != null);
 
             // For assignments, we either have a member assignment or an indexed assignment.
-            //Debug.Assert(assignment.GetLHS().isPROP() || assignment.GetLHS().isFIELD() || assignment.GetLHS().isARRAYINDEX() || assignment.GetLHS().isLOCAL());
+            //Debug.Assert(assignment.GetLHS().isPROP() || assignment.GetLHS().isFIELD() ||
+            // assignment.GetLHS().isARRAYINDEX() || assignment.GetLHS().isLOCAL());
             Expr lhs;
             if (assignment.LHS is ExprProperty prop)
             {
@@ -822,7 +823,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             // If the methodinfo does not return the target CType AND this is not a lifted conversion
             // from one value CType to another, then we need to wrap the whole thing in another conversion,
-            // e.g. if we have a user-defined conversion from int to S? and we have (S)myint, then we need to generate
+            // e.g. if we have a user-defined conversion from int to S? and we have (S)myint, then we need to
+            // generate
             // Convert(Convert(myint, typeof(S?), op_implicit), typeof(S))
 
             CType pMethodReturnType = TypeManager.SubstType(
@@ -871,7 +873,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 && IsNullableValueAccess(pCastArgument, pArgument)
             )
             {
-                // We have an implicit conversion of nullable CType to the value CType, generate a convert node for it.
+                // We have an implicit conversion of nullable CType to the value CType, generate a convert node for
+                // it.
                 pConversionSource = GenerateValueAccessConversion(pArgument);
             }
             else

@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // For the ease of naming locals, we'll assume we're doing an &&.
 
             // TODO: We generate every one of these as "temp = x; T.false(temp) ? temp : T.&(temp, y)" even
-            // TODO: when x has no side effects. We can optimize away the temporary if there are no side effects.
+            // TODO: when x has no side effects. We can optimize away the temporary if there are no side
+            // effects.
 
             var syntax = node.Syntax;
             var operatorKind = node.OperatorKind;
@@ -161,7 +162,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return VisitUtf8Addition(node);
             }
 
-            // In machine-generated code we frequently end up with binary operator trees that are deep on the left,
+            // In machine-generated code we frequently end up with binary operator trees that are deep on the
+            // left,
             // such as a + b + c + d ...
             // To avoid blowing the call stack, we make an explicit stack of the binary operators to the left,
             // and then lower by traversing the explicit stack.
@@ -1002,7 +1004,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             //   left && right  ->  IsFalse(left) ? left : And(left, right)
             //   left || right  ->  IsTrue(left) ? left : Or(left, right)
             //
-            // Optimization: If the binary AND/OR is directly contained in IsFalse/IsTrue operator (parentUnaryOperator != null)
+            // Optimization: If the binary AND/OR is directly contained in IsFalse/IsTrue operator
+            // (parentUnaryOperator != null)
             // we can avoid calling IsFalse/IsTrue twice on the same object.
             //   IsFalse(left && right)  ->  IsFalse(left) || IsFalse(And(left, right))
             //   IsTrue(left || right)   ->  IsTrue(left) || IsTrue(Or(left, right))
@@ -1014,7 +1017,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ? UnaryOperatorKind.DynamicFalse
                 : UnaryOperatorKind.DynamicTrue;
 
-            // VisitUnaryOperator ensures we are never called with parentUnaryOperator != null when we can't perform the optimization.
+            // VisitUnaryOperator ensures we are never called with parentUnaryOperator != null when we can't
+            // perform the optimization.
             Debug.Assert(
                 applyParentUnaryOperator == null
                     || applyParentUnaryOperator.OperatorKind == testOperator
@@ -1330,7 +1334,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // Optimization #3: If one side is null and the other is definitely not, then we generate the side effects
+            // Optimization #3: If one side is null and the other is definitely not, then we generate the side
+            // effects
             // of the non-null side and result in true (for not-equals) or false (for everything else.)
 
             BinaryOperatorKind operatorKind = kind.Operator();
@@ -2514,7 +2519,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // x | y is realized as (x.GetValueOrDefault() || !(y.GetValueOrDefault() || x.HasValue)) ? x : y
 
             // CONSIDER: Consider realizing these using | instead of ||.
-            // CONSIDER: The operations are extremely low cost and the added bulk to the code might not be worthwhile.
+            // CONSIDER: The operations are extremely low cost and the added bulk to the code might not be
+            // worthwhile.
 
             BoundAssignmentOperator tempAssignmentX;
             BoundLocal boundTempX = _factory.StoreToTemp(loweredLeft, out tempAssignmentX);
@@ -2614,7 +2620,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
+        /// This function provides a false sense of security, it is likely going to surprise you when the
+        // requested member is missing.
         /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
@@ -2634,7 +2641,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
+        /// This function provides a false sense of security, it is likely going to surprise you when the
+        // requested member is missing.
         /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
@@ -2678,7 +2686,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol returnType
         )
         {
-            // This handles the case where we have a nullable user-defined struct type compared against null, eg:
+            // This handles the case where we have a nullable user-defined struct type compared against null,
+            // eg:
             //
             // struct S {} ... S? s = whatever; if (s != null)
             //
@@ -2695,7 +2704,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression nullable = loweredRight.IsLiteralNull() ? loweredLeft : loweredRight;
 
-            // If the other side is known to always be null then we can simply generate true or false, as appropriate.
+            // If the other side is known to always be null then we can simply generate true or false, as
+            // appropriate.
 
             if (NullableNeverHasValue(nullable))
             {
@@ -3133,12 +3143,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type
         )
         {
-            // For the predefined operators, the number of bits to shift in `x << count`, `x >> count` or `x >>> count` is computed as follows:
+            // For the predefined operators, the number of bits to shift in `x << count`, `x >> count` or `x >>>
+            // count` is computed as follows:
             // [...]
             // - When the type of `x` is `nint` or `nuint`, the shift count is given by
             //   the low-order five bits of `count` on a 32 bit platform, or
             //   the lower-order six bits of `count` on a 64 bit platform.
-            //   The shift count is computed as `count & (sizeof(nint) * 8 - 1)` or `count & (sizeof(nuint) * 8 - 1)`,
+            //   The shift count is computed as `count & (sizeof(nint) * 8 - 1)` or `count & (sizeof(nuint) * 8
+            // - 1)`,
             //   which is `count & 0x1F` on a 32 bit platform and `count & 0x3F` on a 64 bit platform.
 
             Debug.Assert(loweredLeft.Type is { });
@@ -3239,8 +3251,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 Debug.Assert(kind.Operator() == BinaryOperatorKind.Addition);
 
-                // NOTE: This is here to persist a bug in Dev10.  checked(p[n]) should be equivalent to checked(*(p + n)),
-                // but Dev10 omits the check on the addition (though it retains the check on the multiplication of n by
+                // NOTE: This is here to persist a bug in Dev10.  checked(p[n]) should be equivalent to checked(*(p
+                // + n)),
+                // but Dev10 omits the check on the addition (though it retains the check on the multiplication of n
+                // by
                 // the size).
                 kind = kind & ~BinaryOperatorKind.Checked;
             }
@@ -3259,14 +3273,20 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This rather confusing method tries to reproduce the functionality of ExpressionBinder::bindPtrAddMul and
-        /// ExpressionBinder::bindPtrMul.  The basic idea is that we have a numeric expression, x, and a pointer type,
-        /// T*, and we want to multiply x by sizeof(T).  Unfortunately, we need to stick in some conversions to make
+        /// This rather confusing method tries to reproduce the functionality of
+        // ExpressionBinder::bindPtrAddMul and
+        /// ExpressionBinder::bindPtrMul.  The basic idea is that we have a numeric expression, x, and a
+        // pointer type,
+        /// T*, and we want to multiply x by sizeof(T).  Unfortunately, we need to stick in some conversions
+        // to make
         /// everything work.
         ///
-        ///   1) If x is an int, then convert it to an IntPtr (i.e. a native int).  Dev10 offers no explanation (ExpressionBinder::bindPtrMul).
-        ///   2) Do overload resolution based on the (possibly converted) type of X and int (the type of sizeof(T)).
-        ///   3) If the result type of the chosen multiplication operator is signed, convert the product to IntPtr;
+        ///   1) If x is an int, then convert it to an IntPtr (i.e. a native int).  Dev10 offers no
+        // explanation (ExpressionBinder::bindPtrMul).
+        ///   2) Do overload resolution based on the (possibly converted) type of X and int (the type of
+        // sizeof(T)).
+        ///   3) If the result type of the chosen multiplication operator is signed, convert the product to
+        // IntPtr;
         ///      otherwise, convert the product to UIntPtr.
         /// </summary>
         private BoundExpression MakeSizeOfMultiplication(
@@ -3294,7 +3314,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // As in ExpressionBinder::bindPtrAddMul, we apply the following conversions:
                 //   int -> int (add allows int32 operands and will extend to native int if necessary)
-                //   uint -> native uint (add will sign-extend 32bit operand on 64bit, we do not want that happening)
+                //   uint -> native uint (add will sign-extend 32bit operand on 64bit, we do not want that
+                // happening)
                 //   long -> native int
                 //   ulong -> native uint
                 // Note that these are not the types we would see if we let the multiplication happen.
@@ -3305,8 +3326,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case SpecialType.System_Int32:
                         // add operator can take int32 and extend to 64bit if necessary
-                        // however in a case of checked operation, the operation is treated as unsigned with overflow ( add.ovf.un , sub.ovf.un )
-                        // the IL spec is a bit vague whether JIT should sign or zero extend the shorter operand in such case
+                        // however in a case of checked operation, the operation is treated as unsigned with overflow (
+                        // add.ovf.un , sub.ovf.un )
+                        // the IL spec is a bit vague whether JIT should sign or zero extend the shorter operand in such
+                        // case
                         // and there could be inconsistencies in implementation or bugs.
                         // As a result, in checked contexts, we will force sign-extending cast to be sure
                         if (isChecked)
@@ -3378,7 +3401,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeSymbol longType = _factory.SpecialType(SpecialType.System_Int64);
                     TypeSymbol nativeIntType = _factory.SpecialType(SpecialType.System_IntPtr);
 
-                    // We're multiplying a uint by an int, so promote both to long (same as normal operator overload resolution).
+                    // We're multiplying a uint by an int, so promote both to long (same as normal operator overload
+                    // resolution).
                     numericOperand = _factory.Convert(
                         longType,
                         numericOperand,
@@ -3401,7 +3425,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeSymbol longType = _factory.SpecialType(SpecialType.System_Int64);
                     TypeSymbol nativeIntType = _factory.SpecialType(SpecialType.System_IntPtr);
 
-                    // We're multiplying a long by an int, so promote the int to long (same as normal operator overload resolution).
+                    // We're multiplying a long by an int, so promote the int to long (same as normal operator overload
+                    // resolution).
                     sizeOfExpression = _factory.Convert(
                         longType,
                         sizeOfExpression,
@@ -3418,7 +3443,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeSymbol ulongType = _factory.SpecialType(SpecialType.System_UInt64);
                     TypeSymbol nativeUIntType = _factory.SpecialType(SpecialType.System_UIntPtr);
 
-                    // We're multiplying a ulong by an int, so promote the int to ulong (same as normal operator overload resolution).
+                    // We're multiplying a ulong by an int, so promote the int to ulong (same as normal operator
+                    // overload resolution).
                     sizeOfExpression = _factory.Convert(
                         ulongType,
                         sizeOfExpression,

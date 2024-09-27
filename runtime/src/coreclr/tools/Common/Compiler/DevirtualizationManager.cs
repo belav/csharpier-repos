@@ -174,7 +174,8 @@ namespace ILCompiler
                                     || (declMethod != defaultInterfaceDispatchDeclMethod)
                                 )
                                 {
-                                    // If we devirtualized into a default interface method on a generic type, we should actually return an
+                                    // If we devirtualized into a default interface method on a generic type, we should actually return
+                                    // an
                                     // instantiating stub but this is not happening.
                                     // Making this work is tracked by https://github.com/dotnet/runtime/issues/9588
 
@@ -195,7 +196,8 @@ namespace ILCompiler
             else
             {
                 // The derived class should be a subclass of the base class.
-                // this check is performed via typedef checking instead of casting, as we accept canon methods calling exact types
+                // this check is performed via typedef checking instead of casting, as we accept canon methods
+                // calling exact types
                 TypeDesc checkType;
                 for (
                     checkType = implType;
@@ -218,8 +220,10 @@ namespace ILCompiler
                 }
                 else
                 {
-                    // At this point, the decl method may be only canonically compatible, but not an exact match to a method in the type hierarchy
-                    // Convert it to an exact match. (Or if it is an exact match, the FindMethodOnTypeWithMatchingTypicalMethod will be a no-op)
+                    // At this point, the decl method may be only canonically compatible, but not an exact match to a
+                    // method in the type hierarchy
+                    // Convert it to an exact match. (Or if it is an exact match, the
+                    // FindMethodOnTypeWithMatchingTypicalMethod will be a no-op)
                     declMethod = checkType.FindMethodOnTypeWithMatchingTypicalMethod(declMethod);
                 }
 
@@ -254,7 +258,8 @@ namespace ILCompiler
 
 #if !READYTORUN
         /// <summary>
-        /// Gets a value indicating whether it might be possible to obtain a constructed type data structure for the given type.
+        /// Gets a value indicating whether it might be possible to obtain a constructed type data structure
+        // for the given type.
         /// </summary>
         /// <remarks>
         /// This is a bit of a hack, but devirtualization manager has a global view of all allocated types

@@ -11,17 +11,22 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         operations needed for <see cref="DbContext.SaveChanges()" />
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -31,17 +36,21 @@ public interface IUpdateSqlGenerator
     ///     Generates SQL that will query for the next value in the given sequence.
     /// </summary>
     /// <param name="name">The name of the sequence.</param>
-    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use
+    // the default schema.</param>
     /// <returns>The SQL.</returns>
     string GenerateNextSequenceValueOperation(string name, string? schema);
 
     /// <summary>
-    ///     Generates a SQL fragment that will query for the next value from the given sequence and appends it to
+    ///     Generates a SQL fragment that will query for the next value from the given sequence and
+    // appends it to
     ///     the full command being built by the given <see cref="StringBuilder" />.
     /// </summary>
-    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
+    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be
+    // appended.</param>
     /// <param name="name">The name of the sequence.</param>
-    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use
+    // the default schema.</param>
     void AppendNextSequenceValueOperation(
         StringBuilder commandStringBuilder,
         string name,
@@ -52,17 +61,21 @@ public interface IUpdateSqlGenerator
     ///     Generates SQL that will obtain the next value in the given sequence.
     /// </summary>
     /// <param name="name">The name of the sequence.</param>
-    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use
+    // the default schema.</param>
     /// <returns>The SQL.</returns>
     string GenerateObtainNextSequenceValueOperation(string name, string? schema);
 
     /// <summary>
-    ///     Generates a SQL fragment that will get the next value from the given sequence and appends it to
+    ///     Generates a SQL fragment that will get the next value from the given sequence and appends it
+    // to
     ///     the full command being built by the given <see cref="StringBuilder" />.
     /// </summary>
-    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
+    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be
+    // appended.</param>
     /// <param name="name">The name of the sequence.</param>
-    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use
+    // the default schema.</param>
     void AppendObtainNextSequenceValueOperation(
         StringBuilder commandStringBuilder,
         string name,
@@ -73,7 +86,8 @@ public interface IUpdateSqlGenerator
     ///     Appends a SQL fragment for the start of a batch to
     ///     the full command being built by the given <see cref="StringBuilder" />.
     /// </summary>
-    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
+    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be
+    // appended.</param>
     void AppendBatchHeader(StringBuilder commandStringBuilder);
 
     /// <summary>
@@ -88,7 +102,8 @@ public interface IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     ResultSetMapping AppendDeleteOperation(
         StringBuilder commandStringBuilder,
@@ -116,7 +131,8 @@ public interface IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     ResultSetMapping AppendInsertOperation(
         StringBuilder commandStringBuilder,
@@ -144,7 +160,8 @@ public interface IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     ResultSetMapping AppendUpdateOperation(
         StringBuilder commandStringBuilder,
@@ -172,7 +189,8 @@ public interface IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the stored procedure call.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     ResultSetMapping AppendStoredProcedureCall(
         StringBuilder commandStringBuilder,

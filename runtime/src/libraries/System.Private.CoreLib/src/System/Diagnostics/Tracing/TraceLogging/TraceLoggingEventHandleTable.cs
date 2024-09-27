@@ -7,7 +7,8 @@ namespace System.Diagnostics.Tracing
 {
 #if FEATURE_PERFTRACING
     /// <summary>
-    /// Per-EventSource data structure for caching EventPipe EventHandles associated with TraceLogging events.
+    /// Per-EventSource data structure for caching EventPipe EventHandles associated with TraceLogging
+    // events.
     /// </summary>
     internal sealed class TraceLoggingEventHandleTable
     {

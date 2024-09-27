@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.CommandLine.Binding;
 using System.Linq;
@@ -45,12 +46,17 @@ namespace System.CommandLine.Parsing
                 .GetValueOrDefault<T>();
 
         /// <summary>
-        /// Specifies the maximum number of tokens to consume for the argument. Remaining tokens are passed on and can be consumed by later arguments, or will otherwise be added to <see cref="ParseResult.UnmatchedTokens"/>
+        /// Specifies the maximum number of tokens to consume for the argument. Remaining tokens are passed
+        // on and can be consumed by later arguments, or will otherwise be added to <see
+        // cref="ParseResult.UnmatchedTokens"/>
         /// </summary>
         /// <param name="numberOfTokens">The number of tokens to take. The rest are passed on.</param>
-        /// <exception cref="ArgumentOutOfRangeException">numberOfTokens - Value must be at least 1.</exception>
-        /// <exception cref="InvalidOperationException">Thrown if this method is called more than once.</exception>
-        /// <exception cref="NotSupportedException">Thrown if this method is called by Option-owned ArgumentResult.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">numberOfTokens - Value must be at least
+        // 1.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if this method is called more than
+        // once.</exception>
+        /// <exception cref="NotSupportedException">Thrown if this method is called by Option-owned
+        // ArgumentResult.</exception>
         public void OnlyTake(int numberOfTokens)
         {
             if (numberOfTokens < 0)
@@ -226,7 +232,8 @@ namespace System.CommandLine.Parsing
         }
 
         /// <summary>
-        /// Since Option.Argument is an internal implementation detail, this ArgumentResult applies to the OptionResult in public API if the parent is an OptionResult.
+        /// Since Option.Argument is an internal implementation detail, this ArgumentResult applies to the
+        // OptionResult in public API if the parent is an OptionResult.
         /// </summary>
         private SymbolResult AppliesToPublicSymbolResult =>
             Parent is OptionResult optionResult ? optionResult : this;

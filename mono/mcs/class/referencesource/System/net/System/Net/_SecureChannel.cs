@@ -593,7 +593,8 @@ namespace System.Net.Security
                     store = isMachineStore ? s_MyMachineCertStoreEx : s_MyCertStoreEx;
                     if (store == null)
                     {
-                        // NOTE: that if this call fails we won't keep track and the next time we enter we will try to open the store again
+                        // NOTE: that if this call fails we won't keep track and the next time we enter we will try to open
+                        // the store again
                         StoreLocation storeLocation = isMachineStore
                             ? StoreLocation.LocalMachine
                             : StoreLocation.CurrentUser;
@@ -752,42 +753,42 @@ namespace System.Net.Security
             }
             return issuers;
         }
-        /*++
-            AcquireCredentials - Attempts to find Client Credential
-            Information, that can be sent to the server.  In our case,
-            this is only Client Certificates, that we have Credential Info.
+/*++
+AcquireCredentials - Attempts to find Client Credential
+Information, that can be sent to the server.  In our case,
+this is only Client Certificates, that we have Credential Info.
 
-            Here is how we work:
-                case 0: Cert Selection delegate is present
-                        Alwasys use its result as the client cert answer.
-                        Try to use cached credential handle whenever feasible.
-                        Do not use cached anonymous creds if the delegate has returned null
-                        and the collection is not empty (allow responding with the cert later).
+Here is how we work:
+case 0: Cert Selection delegate is present
+Alwasys use its result as the client cert answer.
+Try to use cached credential handle whenever feasible.
+Do not use cached anonymous creds if the delegate has returned null
+and the collection is not empty (allow responding with the cert later).
 
-                case 1: Certs collection is empty
-                        Always use the same statically acquired anonymous SSL Credential
+case 1: Certs collection is empty
+Always use the same statically acquired anonymous SSL Credential
 
-                case 2: Before our Connection with the Server
-                        If we have a cached credential handle keyed by first X509Certificate
-                        **content** in the passed collection, then we use that cached
-                        credential and hoping to restart a session.
+case 2: Before our Connection with the Server
+If we have a cached credential handle keyed by first X509Certificate
+**content** in the passed collection, then we use that cached
+credential and hoping to restart a session.
 
-                        Otherwise create a new anonymous (allow responding with the cert later).
+Otherwise create a new anonymous (allow responding with the cert later).
 
-                case 3: After our Connection with the Server (ie during handshake or re-handshake)
-                        The server has requested that we send it a Certificate then
-                        we Enumerate a list of server sent Issuers trying to match against
-                        our list of Certificates, the first match is sent to the server.
+case 3: After our Connection with the Server (ie during handshake or re-handshake)
+The server has requested that we send it a Certificate then
+we Enumerate a list of server sent Issuers trying to match against
+our list of Certificates, the first match is sent to the server.
 
-                        Once we got a cert we again try to match cached credential handle if possible.
-                        This will not restart a session but helps miminizing the number of handles we create.
+Once we got a cert we again try to match cached credential handle if possible.
+This will not restart a session but helps miminizing the number of handles we create.
 
-                In the case of an error getting a Certificate or checking its private Key we fall back
-                to the behavior of having no certs, case 1
+In the case of an error getting a Certificate or checking its private Key we fall back
+to the behavior of having no certs, case 1
 
-            Returns: True if cached creds were used, false otherwise
+Returns: True if cached creds were used, false otherwise
 
-        --*/
+--*/
         //
         //SECURITY: The permission assert is needed for Chain.Build and for certs enumeration.
         //          The user will see KeyContainerPermission demand in the case where the client
@@ -857,7 +858,8 @@ namespace System.Net.Security
                 }
                 else
                 {
-                    // If ClientCertificates.Count != 0, how come we don't try to go through them and add them to the filtered certs, just like when there is no delegate????
+                    // If ClientCertificates.Count != 0, how come we don't try to go through them and add them to the
+                    // filtered certs, just like when there is no delegate????
                     if (ClientCertificates.Count == 0)
                     {
                         if (Logging.On)
@@ -886,7 +888,8 @@ namespace System.Net.Security
             )
             {
                 // This is where we attempt to restart a session by picking the FIRST cert from the collection.
-                // Otheriwse (next elses) it is either server sending a client cert request or the session is renegotiated.
+                // Otheriwse (next elses) it is either server sending a client cert request or the session is
+                // renegotiated.
                 clientCertificate = ClientCertificates[0];
                 sessionRestartAttempt = true;
                 if (clientCertificate != null)
@@ -960,7 +963,8 @@ namespace System.Net.Security
 
                             //
                             // We ignore any errors happened with chain.
-                            // Consider: try to locate the "best" client cert that has no errors and the lognest validity internal
+                            // Consider: try to locate the "best" client cert that has no errors and the lognest validity
+                            // internal
                             //
                             if (chain.ChainElements.Count > 0)
                             {
@@ -1037,7 +1041,8 @@ namespace System.Net.Security
             }
 
             //
-            // ATTN: When the client cert was returned by the user callback OR it was guessed AND it has no private key.
+            // ATTN: When the client cert was returned by the user callback OR it was guessed AND it has no
+            // private key.
             //       THEN anonymous (no client cert) credential will be used
             //
             // SECURITY: Accessing X509 cert Credential is disabled for semitrust
@@ -1068,7 +1073,8 @@ namespace System.Net.Security
             {
                 // Try to locate cached creds first.
                 //
-                // SECURITY: selectedCert ref if not null is a safe object that does not depend on possible **user** inherited X509Certificate type.
+                // SECURITY: selectedCert ref if not null is a safe object that does not depend on possible **user**
+                // inherited X509Certificate type.
                 //
                 byte[] guessedThumbPrint = selectedCert == null ? null : selectedCert.GetCertHash();
                 SafeFreeCredentials cachedCredentialHandle = SslSessionsCache.TryCachedCredential(
@@ -1088,9 +1094,12 @@ namespace System.Net.Security
                             + "::AcquireClientCredentials() Reset to anonymous session."
                     );
 
-                    // (see VsWhidbey#363953) For some (probably good) reason IIS does not renegotiate a restarted session if client cert is needed.
-                    // So we don't want to reuse **anonymous** cached credential for a new SSL connection if the client has passed some certificate.
-                    // The following block happens if client did specify a certificate but no cached creds were found in the cache
+                    // (see VsWhidbey#363953) For some (probably good) reason IIS does not renegotiate a restarted
+                    // session if client cert is needed.
+                    // So we don't want to reuse **anonymous** cached credential for a new SSL connection if the client
+                    // has passed some certificate.
+                    // The following block happens if client did specify a certificate but no cached creds were found in
+                    // the cache
                     // Since we don't restart a session the server side can still challenge for a client cert.
                     if ((object)clientCertificate != (object)selectedCert)
                         selectedCert.Reset();
@@ -1353,22 +1362,22 @@ namespace System.Net.Security
             return token;
         }
 
-        /*++
-            GenerateToken - Called after each successive state
-            in the Client - Server handshake.  This function
-            generates a set of bytes that will be sent next to
-            the server.  The server responds, each response,
-            is pass then into this function, again, and the cycle
-            repeats until successful connection, or failure.
+/*++
+GenerateToken - Called after each successive state
+in the Client - Server handshake.  This function
+generates a set of bytes that will be sent next to
+the server.  The server responds, each response,
+is pass then into this function, again, and the cycle
+repeats until successful connection, or failure.
 
-            Input:
-                input  - bytes from the wire
-                output - ref to byte [], what we will send to the
-                    server in response
-            Return:
-                errorCode - an SSPI error code
+Input:
+input  - bytes from the wire
+output - ref to byte [], what we will send to the
+server in response
+Return:
+errorCode - an SSPI error code
 
-        --*/
+--*/
         private SecurityStatus GenerateToken(byte[] input, int offset, int count, ref byte[] output)
         {
 #if TRAVE
@@ -1525,7 +1534,8 @@ namespace System.Net.Security
                     //
                     // This call may bump up the credential reference count further
                     //
-                    // Note that thumbPrint is retrieved from a safe cert object that was possible cloned from the user passed cert
+                    // Note that thumbPrint is retrieved from a safe cert object that was possible cloned from the user
+                    // passed cert
                     //
                     if (
                         !cachedCreds
@@ -1555,15 +1565,15 @@ namespace System.Net.Security
             return (SecurityStatus)errorCode;
         }
 
-        /*++
+/*++
 
-            ProcessHandshakeSuccess -
-               Called on successful completion of Handshake -
-               used to set header/trailer sizes for encryption use
+ProcessHandshakeSuccess -
+Called on successful completion of Handshake -
+used to set header/trailer sizes for encryption use
 
-            Fills in the information about established protocol
+Fills in the information about established protocol
 
-        --*/
+--*/
         internal void ProcessHandshakeSuccess()
         {
             GlobalLog.Enter(
@@ -1616,19 +1626,19 @@ namespace System.Net.Security
             );
         }
 
-        /*++
-            Encrypt - Encrypts our bytes before we send them over the wire
+/*++
+Encrypt - Encrypts our bytes before we send them over the wire
 
-            PERF: make more efficient, this does an extra copy when the offset
-            is non-zero.
+PERF: make more efficient, this does an extra copy when the offset
+is non-zero.
 
-            Input:
-                buffer - bytes for sending
-                offset -
-                size   -
-                output - Encrypted bytes
+Input:
+buffer - bytes for sending
+offset -
+size   -
+output - Encrypted bytes
 
-        --*/
+--*/
 
 
         internal SecurityStatus Encrypt(
@@ -1839,14 +1849,14 @@ namespace System.Net.Security
             return errorCode;
         }
 
-        /*++
+/*++
 
-            VerifyRemoteCertificate - Validates the content of a Remote Certificate
+VerifyRemoteCertificate - Validates the content of a Remote Certificate
 
-            checkCRL if true, checks the certificate revocation list for validity.
-            checkCertName, if true checks the CN field of the certificate
+checkCRL if true, checks the certificate revocation list for validity.
+checkCertName, if true checks the CN field of the certificate
 
-        --*/
+--*/
 
         //This method validates a remote certificate.
         //SECURITY: The scenario is allowed in semi-trust StorePermission is asserted for Chain.Build
@@ -2251,66 +2261,70 @@ namespace System.Net.Security
             }
         }
 
-        /*
-            From wincrypt.h
+/*
+From wincrypt.h
 
-        typedef void *HCERTSTORE;
+typedef void *HCERTSTORE;
 
-        //+-------------------------------------------------------------------------
-        //  Certificate context.
-        //
-        //  A certificate context contains both the encoded and decoded representation
-        //  of a certificate. A certificate context returned by a cert store function
-        //  must be freed by calling the CertFreeCertificateContext function. The
-        //  CertDuplicateCertificateContext function can be called to make a duplicate
-        //  copy (which also must be freed by calling CertFreeCertificateContext).
-        //--------------------------------------------------------------------------
-        */
-        /*
-        // Consider removing.
-        unsafe class CertificateContext {
+//+-------------------------------------------------------------------------
+//  Certificate context.
+//
+//  A certificate context contains both the encoded and decoded representation
+//  of a certificate. A certificate context returned by a cert store function
+//  must be freed by calling the CertFreeCertificateContext function. The
+//  CertDuplicateCertificateContext function can be called to make a duplicate
+//  copy (which also must be freed by calling CertFreeCertificateContext).
+//--------------------------------------------------------------------------
+*/
+/*
+// Consider removing.
+unsafe class CertificateContext {
 
-            [StructLayout(LayoutKind.Sequential)]
-            private struct _CERT_CONTEXT {
-                internal Int32     dwCertEncodingType;
-                internal IntPtr    pbCertEncoded;
-                internal Int32     cbCertEncoded;
-                internal IntPtr    pCertInfo;
-                internal   IntPtr    hCertStore;
-            };
+[StructLayout(LayoutKind.Sequential)]
+private struct _CERT_CONTEXT {
+internal Int32     dwCertEncodingType;
+internal IntPtr    pbCertEncoded;
+internal Int32     cbCertEncoded;
+internal IntPtr    pCertInfo;
+internal   IntPtr    hCertStore;
+};
 
-            internal static SafeCloseStore GetShallowHStoreHandler(SafeFreeCertContext certContext) {
-                if (certContext.IsInvalid) {
-                    return SafeCloseStore.CreateShallowHandle(IntPtr.Zero);
-                }
-                _CERT_CONTEXT context = (_CERT_CONTEXT)Marshal.PtrToStructure(certContext.DangerousGetHandle(), typeof(_CERT_CONTEXT));
-                return SafeCloseStore.CreateShallowHandle(context.hCertStore);
-            }
+internal static SafeCloseStore GetShallowHStoreHandler(SafeFreeCertContext certContext) {
+if (certContext.IsInvalid) {
+return SafeCloseStore.CreateShallowHandle(IntPtr.Zero);
+}
+_CERT_CONTEXT context = (_CERT_CONTEXT)Marshal.PtrToStructure(certContext.DangerousGetHandle(),
+typeof(_CERT_CONTEXT));
+return SafeCloseStore.CreateShallowHandle(context.hCertStore);
+}
 
 
 #if DEBUG
-            _CERT_CONTEXT dbgTemplate;
+_CERT_CONTEXT dbgTemplate;
 
-            // ctors
-            internal CertificateContext(SafeFreeCertContext context) {
-                GlobalLog.Enter("CertificateContext#" + ValidationHelper.HashString(this) + "::CertificateContext", context.DangerousGetHandle().ToString("x"));
-                dbgTemplate = (_CERT_CONTEXT)Marshal.PtrToStructure(context.DangerousGetHandle(), typeof(_CERT_CONTEXT));
-                GlobalLog.Leave("CertificateContext#" + ValidationHelper.HashString(this) + "::CertificateContext");
-            }
+// ctors
+internal CertificateContext(SafeFreeCertContext context) {
+GlobalLog.Enter("CertificateContext#" + ValidationHelper.HashString(this) + "::CertificateContext",
+context.DangerousGetHandle().ToString("x"));
+dbgTemplate = (_CERT_CONTEXT)Marshal.PtrToStructure(context.DangerousGetHandle(),
+typeof(_CERT_CONTEXT));
+GlobalLog.Leave("CertificateContext#" + ValidationHelper.HashString(this) + "::CertificateContext");
+}
 
-            // methods
-            [Conditional("TRAVE")]
-            internal void DebugDump() {
-                GlobalLog.Print("CertificateContext#" + ValidationHelper.HashString(this) + "::CertificateContext()");
-                GlobalLog.PrintHex("    dwCertEncodingType = ", dbgTemplate.dwCertEncodingType);
-                GlobalLog.PrintHex("    pbCertEncoded      = ", dbgTemplate.pbCertEncoded);
-                GlobalLog.PrintHex("    cbCertEncoded      = ", dbgTemplate.cbCertEncoded);
-                GlobalLog.PrintHex("    pCertInfo          = ", dbgTemplate.pCertInfo);
-                GlobalLog.PrintHex("    hCertStore         = ", dbgTemplate.hCertStore);
-            }
+// methods
+[Conditional("TRAVE")]
+internal void DebugDump() {
+GlobalLog.Print("CertificateContext#" + ValidationHelper.HashString(this) +
+"::CertificateContext()");
+GlobalLog.PrintHex("    dwCertEncodingType = ", dbgTemplate.dwCertEncodingType);
+GlobalLog.PrintHex("    pbCertEncoded      = ", dbgTemplate.pbCertEncoded);
+GlobalLog.PrintHex("    cbCertEncoded      = ", dbgTemplate.cbCertEncoded);
+GlobalLog.PrintHex("    pCertInfo          = ", dbgTemplate.pCertInfo);
+GlobalLog.PrintHex("    hCertStore         = ", dbgTemplate.hCertStore);
+}
 #endif
-        }
-        */
+}
+*/
 
 #if TRAVE
         internal static string MapSecurityStatus(uint statusCode)
@@ -2983,38 +2997,38 @@ namespace System.Net.Security
             ,
         };
 
-        /*
-        // Consider removing.
-        internal static string MapInputContextAttributes(int attributes) {
-            return ContextAttributeMapper(attributes, InputContextAttributes);
-        }
+/*
+// Consider removing.
+internal static string MapInputContextAttributes(int attributes) {
+return ContextAttributeMapper(attributes, InputContextAttributes);
+}
 
-        internal static string MapOutputContextAttributes(int attributes) {
-            return ContextAttributeMapper(attributes, OutputContextAttributes);
-        }
+internal static string MapOutputContextAttributes(int attributes) {
+return ContextAttributeMapper(attributes, OutputContextAttributes);
+}
 
-        internal static string ContextAttributeMapper(int attributes, string[] attributeNames)        {
+internal static string ContextAttributeMapper(int attributes, string[] attributeNames)        {
 
-            int bit = 1;
-            int index = 0;
-            string result = "";
-            bool haveResult = false;
+int bit = 1;
+int index = 0;
+string result = "";
+bool haveResult = false;
 
-            while (attributes != 0) {
-                if ((attributes & bit) != 0) {
-                    if (haveResult) {
-                        result += " ";
-                    }
-                    haveResult = true;
-                    result += attributeNames[index];
-                }
-                attributes &= ~bit;
-                bit <<= 1;
-                ++index;
-            }
-            return result;
-        }
-        */
+while (attributes != 0) {
+if ((attributes & bit) != 0) {
+if (haveResult) {
+result += " ";
+}
+haveResult = true;
+result += attributeNames[index];
+}
+attributes &= ~bit;
+bit <<= 1;
+++index;
+}
+return result;
+}
+*/
 
         [System.Diagnostics.Conditional("DEBUG")]
         internal void DebugMembers()

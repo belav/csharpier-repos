@@ -197,7 +197,8 @@ namespace Internal.IL.Stubs
 
             for (int i = 0; i < _rank; i++)
             {
-                // The first two fields are MethodTable pointer and total length. Lengths for each dimension follows.
+                // The first two fields are MethodTable pointer and total length. Lengths for each dimension
+                // follows.
                 int lengthOffset = (2 * pointerSize + i * sizeof(int));
 
                 EmitLoadInteriorAddress(codeStream, lengthOffset);

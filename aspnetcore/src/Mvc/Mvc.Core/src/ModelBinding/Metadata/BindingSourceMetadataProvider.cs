@@ -14,7 +14,8 @@ public class BindingSourceMetadataProvider : IBindingMetadataProvider
     /// Creates a new <see cref="BindingSourceMetadataProvider"/> for the given <paramref name="type"/>.
     /// </summary>
     /// <param name="type">
-    /// The <see cref="Type"/>. The provider sets <see cref="BindingSource"/> of the given <see cref="Type"/> or
+    /// The <see cref="Type"/>. The provider sets <see cref="BindingSource"/> of the given <see
+    // cref="Type"/> or
     /// anything assignable to the given <see cref="Type"/>.
     /// </param>
     /// <param name="bindingSource">
@@ -29,7 +30,8 @@ public class BindingSourceMetadataProvider : IBindingMetadataProvider
     }
 
     /// <summary>
-    /// The <see cref="Type"/>. The provider sets <see cref="BindingSource"/> of the given <see cref="Type"/> or
+    /// The <see cref="Type"/>. The provider sets <see cref="BindingSource"/> of the given <see
+    // cref="Type"/> or
     /// anything assignable to the given <see cref="Type"/>.
     /// </summary>
     public Type Type { get; }

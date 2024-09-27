@@ -15,7 +15,8 @@ using EditorBrowsableState = System.ComponentModel.EditorBrowsableState;
 namespace System
 {
     /// <summary>
-    /// Span represents a contiguous region of arbitrary memory. Unlike arrays, it can point to either managed
+    /// Span represents a contiguous region of arbitrary memory. Unlike arrays, it can point to either
+    // managed
     /// or native memory, or to memory allocated on the stack. It is type- and memory-safe.
     /// </summary>
     [DebuggerTypeProxy(typeof(SpanDebugView<>))]
@@ -38,7 +39,8 @@ namespace System
         /// </summary>
         /// <param name="array">The target array.</param>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
-        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
+        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant
+        // and array's type is not exactly T[].</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Span(T[]? array)
         {
@@ -62,9 +64,11 @@ namespace System
         /// <param name="start">The index at which to begin the span.</param>
         /// <param name="length">The number of items in the span.</param>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
-        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
+        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant
+        // and array's type is not exactly T[].</exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or &gt;Length).
+        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or
+        // &gt;Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Span(T[]? array, int start, int length)
@@ -101,9 +105,11 @@ namespace System
         /// But if this creation is correct, then all subsequent uses are correct.
         /// </summary>
         /// <param name="pointer">An unmanaged pointer to memory.</param>
-        /// <param name="length">The number of <typeparamref name="T"/> elements the memory contains.</param>
+        /// <param name="length">The number of <typeparamref name="T"/> elements the memory
+        // contains.</param>
         /// <exception cref="ArgumentException">
-        /// Thrown when <typeparamref name="T"/> is reference type or contains pointers and hence cannot be stored in unmanaged memory.
+        /// Thrown when <typeparamref name="T"/> is reference type or contains pointers and hence cannot be
+        // stored in unmanaged memory.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when the specified <paramref name="length"/> is negative.
@@ -121,7 +127,8 @@ namespace System
             _length = length;
         }
 
-        /// <summary>Creates a new <see cref="Span{T}"/> of length 1 around the specified reference.</summary>
+        /// <summary>Creates a new <see cref="Span{T}"/> of length 1 around the specified
+        // reference.</summary>
         /// <param name="reference">A reference to data.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Span(ref T reference)
@@ -131,7 +138,8 @@ namespace System
         }
 
 #pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6228
-        // Constructor for internal use only. It is not safe to expose publicly, and is instead exposed via the unsafe MemoryMarshal.CreateSpan.
+        // Constructor for internal use only. It is not safe to expose publicly, and is instead exposed via
+        // the unsafe MemoryMarshal.CreateSpan.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal Span(ref T reference, int length)
         {
@@ -276,7 +284,8 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns null reference.
+        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns null
+        // reference.
         /// It can be used for pinning and is required to support the use of span within a fixed statement.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -396,7 +405,8 @@ namespace System
             new ReadOnlySpan<T>(ref span._reference, span._length);
 
         /// <summary>
-        /// For <see cref="Span{Char}"/>, returns a new instance of string that represents the characters pointed to by the span.
+        /// For <see cref="Span{Char}"/>, returns a new instance of string that represents the characters
+        // pointed to by the span.
         /// Otherwise, returns a <see cref="string"/> with the name of the type and the number of elements.
         /// </summary>
         public override string ToString()
@@ -438,7 +448,8 @@ namespace System
         /// <param name="start">The index at which to begin this slice.</param>
         /// <param name="length">The desired length for the slice (exclusive).</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in range (&lt;0 or &gt;Length).
+        /// Thrown when the specified <paramref name="start"/> or end index is not in range (&lt;0 or
+        // &gt;Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Span<T> Slice(int start, int length)

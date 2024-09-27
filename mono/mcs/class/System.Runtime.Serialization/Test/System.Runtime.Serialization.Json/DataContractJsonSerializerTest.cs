@@ -474,7 +474,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(DCWithName));
             StringWriter sw = new StringWriter();
 
-            /* DataContractAttribute.Name == "", not valid */
+/* DataContractAttribute.Name == "", not valid */
             DCWithEmptyName dc = new DCWithEmptyName();
             using (XmlWriter w = XmlWriter.Create(sw, settings))
             {
@@ -500,7 +500,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             {
                 try
                 {
-                    /* DataContractAttribute.Name == "", not valid */
+/* DataContractAttribute.Name == "", not valid */
                     ser.WriteObject(w, new DCWithNullName());
                 }
                 catch (InvalidDataContractException)
@@ -755,19 +755,19 @@ namespace MonoTests.System.Runtime.Serialization.Json
             }
         }
 
-        /*
-                [Test]
-                [ExpectedException (typeof (SerializationException))]
-                public void SerializeEnumWithDCInvalid ()
-                {
-                    DataContractJsonSerializer ser = new DataContractJsonSerializer (typeof (ColorsWithDC));
-                    StringWriter sw = new StringWriter ();
-                    ColorsWithDC cdc = ColorsWithDC.Blue;
-                    using (XmlWriter w = XmlWriter.Create (sw, settings)) {
-                        ser.WriteObject (w, cdc);
-                    }
-                }
-        */
+/*
+[Test]
+[ExpectedException (typeof (SerializationException))]
+public void SerializeEnumWithDCInvalid ()
+{
+DataContractJsonSerializer ser = new DataContractJsonSerializer (typeof (ColorsWithDC));
+StringWriter sw = new StringWriter ();
+ColorsWithDC cdc = ColorsWithDC.Blue;
+using (XmlWriter w = XmlWriter.Create (sw, settings)) {
+ser.WriteObject (w, cdc);
+}
+}
+*/
 
         [Test]
         public void SerializeDCWithEnumXml()

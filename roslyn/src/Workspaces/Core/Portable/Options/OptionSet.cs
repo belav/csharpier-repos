@@ -102,14 +102,16 @@ namespace Microsoft.CodeAnalysis.Options
         }
 
         /// <summary>
-        /// Checks if the value is an internal representation -- does not cover all cases, just code style options.
+        /// Checks if the value is an internal representation -- does not cover all cases, just code style
+        // options.
         /// </summary>
         internal static bool IsInternalOptionValue(object? value) =>
             value is not ICodeStyleOption codeStyle
             || ReferenceEquals(codeStyle, codeStyle.AsInternalCodeStyleOption());
 
         /// <summary>
-        /// Checks if the value is an public representation -- does not cover all cases, just code style options.
+        /// Checks if the value is an public representation -- does not cover all cases, just code style
+        // options.
         /// </summary>
         internal static bool IsPublicOptionValue(object? value) =>
             value is not ICodeStyleOption codeStyle

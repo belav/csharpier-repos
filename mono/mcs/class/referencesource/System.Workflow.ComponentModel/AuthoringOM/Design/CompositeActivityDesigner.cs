@@ -29,8 +29,10 @@ namespace System.Workflow.ComponentModel.Design
 
     #region CompositeActivityDesigner Class
     /// <summary>
-    /// CompositeActivityDesigner provides a designer which allows user to visually design composite activities in the design mode.
-    /// CompositeActivityDesigner enables the user to customize layouting, drawing associated with the CompositeActivity, it also allows
+    /// CompositeActivityDesigner provides a designer which allows user to visually design composite
+    // activities in the design mode.
+    /// CompositeActivityDesigner enables the user to customize layouting, drawing associated with the
+    // CompositeActivity, it also allows
     /// managing the layouting, drawing and eventing for the contained activity designers.
     /// </summary>
     [ActivityDesignerTheme(typeof(CompositeDesignerTheme))]
@@ -70,7 +72,8 @@ namespace System.Workflow.ComponentModel.Design
 
         #region Public Properties
         /// <summary>
-        /// Gets if the activity associated with designer is structurally locked that is no activities can be added to it.
+        /// Gets if the activity associated with designer is structurally locked that is no activities can
+        // be added to it.
         /// </summary>
         public bool IsEditable
         {
@@ -256,7 +259,8 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Gets the height for the title area of the designer, typically this can contain the heading, icon and expand/collapse button
+        /// Gets the height for the title area of the designer, typically this can contain the heading, icon
+        // and expand/collapse button
         /// </summary>
         protected virtual int TitleHeight
         {
@@ -437,7 +441,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <param name="compositeActivityDesigner">Designer in which to insert the activities</param>
         /// <param name="insertLocation">Insertion location</param>
         /// <param name="activitiesToInsert">Array of activities to insert</param>
-        /// <param name="undoTransactionDescription">Text for the designer transaction which will be created</param>
+        /// <param name="undoTransactionDescription">Text for the designer transaction which will be
+        // created</param>
         public static void InsertActivities(
             CompositeActivityDesigner compositeActivityDesigner,
             HitTestInfo insertLocation,
@@ -526,7 +531,8 @@ namespace System.Workflow.ComponentModel.Design
         /// </summary>
         /// <param name="serviceProvider">Service Provider associated to providing services</param>
         /// <param name="activitiesToRemove">Array of activities to remove</param>
-        /// <param name="transactionDescription">Transaction text used to name the designer transaction</param>
+        /// <param name="transactionDescription">Transaction text used to name the designer
+        // transaction</param>
         public static void RemoveActivities(
             IServiceProvider serviceProvider,
             ReadOnlyCollection<Activity> activitiesToRemove,
@@ -834,7 +840,8 @@ namespace System.Workflow.ComponentModel.Design
 
         #region Public Methods
         /// <summary>
-        /// Checks if the activities can be inserted into the composite activity associated with the designer
+        /// Checks if the activities can be inserted into the composite activity associated with the
+        // designer
         /// </summary>
         /// <param name="insertLocation">Location at which to insert activities</param>
         /// <param name="activitiesToInsert">Array of activities to be inserted</param>
@@ -895,7 +902,8 @@ namespace System.Workflow.ComponentModel.Design
                 else
                 {
                     //we dont want to create a designer instance every time, so we'll cache it
-                    //this is a fix for a perf issue - this function gets called in a loop when doing drag'n'drop operation
+                    //this is a fix for a perf issue - this function gets called in a loop when doing drag'n'drop
+                    // operation
                     //from a toolbox
                     if (activity.UserData.Contains(typeof(ActivityDesigner)))
                     {
@@ -1072,7 +1080,8 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                //In some cases we might get activities which are added newly, in such cases we check if the activity
+                //In some cases we might get activities which are added newly, in such cases we check if the
+                // activity
                 //is existing activity or new one based on this decision we add it to the designer host.
                 Debug.Assert(activity.Parent != null);
                 CompositeActivity parentActivity = activity.Parent;
@@ -1189,7 +1198,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 compositeActivity.Activities.Remove(activity);
 
-                //Before we destroy the activity make sure that the references it and its child activities store to its parent
+                //Before we destroy the activity make sure that the references it and its child activities store to
+                // its parent
                 //are set to null or else an undo unit will be created
                 //For details look at,
                 //\\cpvsbuild\drops\whidbey\pd6\raw\40903.19\sources\ndp\fx\src\Designer\Host\UndoEngine.cs
@@ -1309,7 +1319,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Notifies that number of activities contained within the designers are changing
         /// </summary>
-        /// <param name="listChangeArgs">ActivityCollectionChangeEventArgs containing information about what is about to change</param>
+        /// <param name="listChangeArgs">ActivityCollectionChangeEventArgs containing information about what
+        // is about to change</param>
         protected virtual void OnContainedActivitiesChanging(
             ActivityCollectionChangeEventArgs listChangeArgs
         )
@@ -1321,7 +1332,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Notifies that number of activities contained within the designers have changed
         /// </summary>
-        /// <param name="listChangeArgs">ItemListChangeEventArgs containing information about what has changed</param>
+        /// <param name="listChangeArgs">ItemListChangeEventArgs containing information about what has
+        // changed</param>
         protected virtual void OnContainedActivitiesChanged(
             ActivityCollectionChangeEventArgs listChangeArgs
         )

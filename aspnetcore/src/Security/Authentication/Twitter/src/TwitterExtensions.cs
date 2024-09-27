@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class TwitterExtensions
 {
     /// <summary>
-    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="TwitterDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Twitter authentication allows application users to sign in with their Twitter account.
@@ -26,7 +27,8 @@ public static class TwitterExtensions
         builder.AddTwitter(TwitterDefaults.AuthenticationScheme, _ => { });
 
     /// <summary>
-    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="TwitterDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Twitter authentication allows application users to sign in with their Twitter account.
@@ -41,7 +43,8 @@ public static class TwitterExtensions
     ) => builder.AddTwitter(TwitterDefaults.AuthenticationScheme, configureOptions);
 
     /// <summary>
-    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="TwitterDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Twitter authentication allows application users to sign in with their Twitter account.
@@ -58,7 +61,8 @@ public static class TwitterExtensions
     ) => builder.AddTwitter(authenticationScheme, TwitterDefaults.DisplayName, configureOptions);
 
     /// <summary>
-    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Twitter OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default
+    // scheme.
     /// The default scheme is specified by <see cref="TwitterDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Twitter authentication allows application users to sign in with their Twitter account.

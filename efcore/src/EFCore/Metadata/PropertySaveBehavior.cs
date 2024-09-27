@@ -4,14 +4,17 @@
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Indicates how changes to the value of a property will be handled by Entity Framework change tracking
+///     Indicates how changes to the value of a property will be handled by Entity Framework change
+// tracking
 ///     which in turn will determine whether the value set is sent to the database or not.
 ///     Used with <see cref="IReadOnlyProperty.GetBeforeSaveBehavior" /> and
 ///     <see cref="IReadOnlyProperty.GetAfterSaveBehavior" />
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> and
-///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data in EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> and
+///     <see href="https://aka.ms/efcore-docs-saving-data">Saving data in EF Core</see> for more
+// information and examples.
 /// </remarks>
 public enum PropertySaveBehavior
 {

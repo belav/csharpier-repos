@@ -19,9 +19,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     /// Some basic concepts:
     /// - Basic blocks are sequences of statements/operations with no branching. The only branching
     ///   allowed is at the end of the basic block.
-    /// - Regions group blocks together and represent the lifetime of locals and captures, loosely similar to scopes in C#.
+    /// - Regions group blocks together and represent the lifetime of locals and captures, loosely
+    // similar to scopes in C#.
     ///   There are different kinds of regions, <see cref="ControlFlowRegionKind"/>.
-    /// - <see cref="ControlFlowGraphBuilder.SpillEvalStack"/> converts values on the stack into captures.
+    /// - <see cref="ControlFlowGraphBuilder.SpillEvalStack"/> converts values on the stack into
+    // captures.
     /// - Error scenarios from initial binding need to be handled.
     /// </summary>
     internal sealed partial class ControlFlowGraphBuilder : OperationVisitor<int?, IOperation>
@@ -56,7 +58,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         /// <summary>
         /// Holds the current object being initialized if we're visiting an object initializer.
-        /// Or the current anonymous type object being initialized if we're visiting an anonymous type object initializer.
+        /// Or the current anonymous type object being initialized if we're visiting an anonymous type
+        // object initializer.
         /// Or the target of a VB With statement.
         /// </summary>
         private ImplicitInstanceInfo _currentImplicitInstance;
@@ -465,7 +468,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     // For simplicity, we do a complete walk of the finally/filter region in isolation
                     // to make sure that the resume dispatch point is reachable from its beginning.
-                    // It could also be reachable through invalid branches into the finally and we don't want to consider
+                    // It could also be reachable through invalid branches into the finally and we don't want to
+                    // consider
                     // these cases for regular finally handling.
                     BitVector isolated = MarkReachableBlocks(
                         blocks,
@@ -975,7 +979,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     // Do not merge StructuredExceptionHandling into the middle of the filter or finally,
                                     // Do not merge StructuredExceptionHandling into conditional branch
                                     // Do not merge StructuredExceptionHandling into a different region
-                                    // It is much easier to walk the graph when we can rely on the fact that a StructuredExceptionHandling
+                                    // It is much easier to walk the graph when we can rely on the fact that a
+                                    // StructuredExceptionHandling
                                     // branch is only in the last block in the region, if it is present.
                                     continue;
                                 }
@@ -1024,7 +1029,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                                     && next.Kind == ControlFlowBranchSemantics.Return
                                 )
                                 {
-                                    // Let's drop an unreachable compiler generated return that VB optimistically adds at the end of a method body
+                                    // Let's drop an unreachable compiler generated return that VB optimistically adds at the end of a
+                                    // method body
                                     Debug.Assert(next.Destination != null);
                                     if (
                                         next.Destination.Kind != BasicBlockKind.Exit
@@ -1331,7 +1337,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         collectAncestorsAndSelf(destinationRegionOpt, ref fromDestination);
                         collectAncestorsAndSelf(predecessorRegion, ref fromPredecessor);
 
-                        // On the way from predecessor directly to the destination, are we going leave the same regions as on the way
+                        // On the way from predecessor directly to the destination, are we going leave the same regions as
+                        // on the way
                         // from predecessor to the current block and then to the destination?
                         int lastLeftRegionOnTheWayFromCurrentToDestination =
                             getIndexOfLastLeftRegion(fromCurrent, fromDestination);
@@ -1340,7 +1347,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         int lastLeftRegionOnTheWayFromPredecessorToCurrentBlock =
                             getIndexOfLastLeftRegion(fromPredecessor, fromCurrent);
 
-                        // Since we are navigating up and down the tree and only movements up are significant, if we made the same number
+                        // Since we are navigating up and down the tree and only movements up are significant, if we made
+                        // the same number
                         // of movements up during direct and indirect transition, we must have made the same movements up.
                         if (
                             (
@@ -1681,15 +1689,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         }
 
         /// <summary>
-        /// Either visits a single operation, or a using <see cref="IVariableDeclarationGroupOperation"/> and all subsequent statements
+        /// Either visits a single operation, or a using <see cref="IVariableDeclarationGroupOperation"/>
+        // and all subsequent statements
         /// </summary>
         /// <param name="operation">The statement to visit</param>
         /// <param name="statements">All statements in the block containing this node</param>
-        /// <param name="startIndex">The current statement being visited in <paramref name="statements"/></param>
+        /// <param name="startIndex">The current statement being visited in <paramref
+        // name="statements"/></param>
         /// <returns>True if this visited all of the statements</returns>
         /// <remarks>
         /// The operation being visited is not necessarily equal to statements[startIndex].
-        /// When traversing down a set of labels, we set operation to the label.Operation and recurse, but statements[startIndex] still refers to the original parent label
+        /// When traversing down a set of labels, we set operation to the label.Operation and recurse, but
+        // statements[startIndex] still refers to the original parent label
         /// as we haven't actually moved down the original statement list
         /// </remarks>
         private bool VisitStatementsOneOrAll(
@@ -1890,7 +1901,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 var afterIf = new BasicBlockBuilder(BasicBlockKind.Block);
                 IOperation result;
 
-                // Specially handle cases with "throw" as operation.WhenTrue or operation.WhenFalse. We don't need to create an additional
+                // Specially handle cases with "throw" as operation.WhenTrue or operation.WhenFalse. We don't need
+                // to create an additional
                 // capture for the result because there won't be any result from the throwing branches.
                 if (
                     operation.WhenTrue is IConversionOperation whenTrueConversion
@@ -2146,12 +2158,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     && operationOpt.Kind != OperationKind.OmittedArgument
                 )
                 {
-                    // Here we need to decide what region should own the new capture. Due to the spilling operations occurred before,
-                    // we currently might be in a region that is not associated with the stack frame we are in, but it is one of its
-                    // directly or indirectly nested regions. The operation that we are about to spill is likely to remove references
-                    // to some captures from the stack. That means that, after the spilling, we should be able to leave the spill
-                    // regions that no longer own captures referenced on the stack. The new capture that we create, should belong to
-                    // the region that will become current after that. Here we are trying to compute what will be that region.
+                    // Here we need to decide what region should own the new capture. Due to the spilling operations
+                    // occurred before,
+                    // we currently might be in a region that is not associated with the stack frame we are in, but it
+                    // is one of its
+                    // directly or indirectly nested regions. The operation that we are about to spill is likely to
+                    // remove references
+                    // to some captures from the stack. That means that, after the spilling, we should be able to leave
+                    // the spill
+                    // regions that no longer own captures referenced on the stack. The new capture that we create,
+                    // should belong to
+                    // the region that will become current after that. Here we are trying to compute what will be that
+                    // region.
                     // Obviously, we shouldn’t be leaving the region associated with the frame.
                     EvalStackFrame? currentFrame = _evalStack[currentFrameIndex].frameOpt;
                     Debug.Assert(currentFrame != null);
@@ -2322,7 +2340,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             else
             {
                 var builder = ArrayBuilder<T>.GetInstance(numElements);
-                // Iterate in reverse order so the index corresponds to the original index when pushed onto the stack
+                // Iterate in reverse order so the index corresponds to the original index when pushed onto the
+                // stack
                 for (int i = numElements - 1; i >= 0; i--)
                 {
                     IOperation visitedElement = PopOperand();
@@ -2405,12 +2424,18 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             for (int i = 0; i < arguments.Length; i++)
             {
-                // If there are declaration expressions in the arguments before an interpolated string handler, and that declaration
-                // expression is referenced by the handler constructor, we need to spill it to ensure the declaration doesn't end
-                // up in the tree twice. However, we don't want to generally introduce spilling for these declarations: that could
-                // have unexpected affects on consumers. So we limit the spilling to those indexes before the last interpolated string
-                // handler. We _could_ limit this further by only spilling declaration expressions if the handler in question actually
-                // referenced a specific declaration expression in the argument list, but we think that the difficulty in implementing
+                // If there are declaration expressions in the arguments before an interpolated string handler, and
+                // that declaration
+                // expression is referenced by the handler constructor, we need to spill it to ensure the
+                // declaration doesn't end
+                // up in the tree twice. However, we don't want to generally introduce spilling for these
+                // declarations: that could
+                // have unexpected affects on consumers. So we limit the spilling to those indexes before the last
+                // interpolated string
+                // handler. We _could_ limit this further by only spilling declaration expressions if the handler in
+                // question actually
+                // referenced a specific declaration expression in the argument list, but we think that the
+                // difficulty in implementing
                 // this check is more complexity than this scenario needs.
                 var argument = arguments[i].Value switch
                 {
@@ -3766,7 +3791,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         /// <summary>
         /// Returns converted test expression.
-        /// Caller is responsible for spilling the stack and pushing a stack frame before calling this helper.
+        /// Caller is responsible for spilling the stack and pushing a stack frame before calling this
+        // helper.
         /// </summary>
         private IOperation NullCheckAndConvertCoalesceValue(
             ICoalesceOperation operation,
@@ -3921,7 +3947,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             SpillEvalStack();
 
             // If we're in a statement context, we elide the capture of the result of the assignment, as it will
-            // just be wrapped in an expression statement that isn't used anywhere and isn't observed by anything.
+            // just be wrapped in an expression statement that isn't used anywhere and isn't observed by
+            // anything.
             Debug.Assert(operation.Parent != null);
             bool isStatement =
                 _currentStatement == operation
@@ -3936,7 +3963,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             SpillEvalStack();
             IOperation locationCapture = PopOperand();
 
-            // Capture the value, as it will only be evaluated once. The location will be used separately later for
+            // Capture the value, as it will only be evaluated once. The location will be used separately later
+            // for
             // the null case
             EvalStackFrame valueFrame = PushStackFrame();
             SpillEvalStack();
@@ -4120,8 +4148,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 AppendNewBlock(whenNull);
 
-                // The return of Visit(operation.WhenNull) can be a flow capture that wasn't used in the non-null branch. We want to create a
-                // region around it to ensure that the scope of the flow capture is as narrow as possible. If there was no flow capture, region
+                // The return of Visit(operation.WhenNull) can be a flow capture that wasn't used in the non-null
+                // branch. We want to create a
+                // region around it to ensure that the scope of the flow capture is as narrow as possible. If there
+                // was no flow capture, region
                 // packing will take care of removing the empty region.
                 EvalStackFrame whenNullFrame = PushStackFrame();
 
@@ -4320,11 +4350,16 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     )
                 )
                 {
-                    // https://github.com/dotnet/roslyn/issues/27564: It looks like there is a bug in IOperation tree around XmlMemberAccessExpressionSyntax,
+                    // https://github.com/dotnet/roslyn/issues/27564: It looks like there is a bug in IOperation tree
+                    // around XmlMemberAccessExpressionSyntax,
                     //                      a None operation is created and all children are dropped.
-                    //                      See Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.UnitTests.ExpressionCompilerTests.ConditionalAccessExpressionType
-                    //                      Because of this, the recursion to visit the child operations will never occur if we visit the WhenNull of the current
-                    //                      conditional access, so we need to manually visit the Operation of the conditional access now.
+                    //                      See
+                    //
+                    // Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator.UnitTests.ExpressionCompilerTests.ConditionalAccessExpressionType
+                    //                      Because of this, the recursion to visit the child operations will never
+                    // occur if we visit the WhenNull of the current
+                    //                      conditional access, so we need to manually visit the Operation of the
+                    // conditional access now.
                     _ = VisitConditionalAccessTestExpression(testExpression);
                     break;
                 }
@@ -4444,7 +4479,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     return checkInvalidChildren(invalidOperation);
                 }
 
-                // The conditional access should always be first leaf node in the subtree when performing a depth-first search. Visit the first child recursively
+                // The conditional access should always be first leaf node in the subtree when performing a
+                // depth-first search. Visit the first child recursively
                 // until we either reach the bottom, or find the conditional access.
                 Operation currentOperation = (Operation)operation;
                 while (
@@ -4469,7 +4505,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             static bool checkInvalidChildren(InvalidOperation operation)
             {
-                // Invalid operations can have children ordering that doesn't put the conditional access instance first. For these cases,
+                // Invalid operations can have children ordering that doesn't put the conditional access instance
+                // first. For these cases,
                 // use a recursive check
                 foreach (var child in operation.ChildOperations)
                 {
@@ -5418,7 +5455,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             // If Monitor.Enter(object, ref bool) is not available:
             //
             // L $lock = `LockedValue`;
-            // Monitor.Enter($lock);           // NB: before try-finally so we don't Exit if an exception prevents us from acquiring the lock.
+            // Monitor.Enter($lock);           // NB: before try-finally so we don't Exit if an exception
+            // prevents us from acquiring the lock.
             // try
             // {
             //     `body`
@@ -5428,10 +5466,13 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             //     Monitor.Exit($lock);
             // }
 
-            // If original type of the LockedValue object is System.Object, VB calls runtime helper (if one is available)
-            // Microsoft.VisualBasic.CompilerServices.ObjectFlowControl.CheckForSyncLockOnValueType to ensure no value type is
+            // If original type of the LockedValue object is System.Object, VB calls runtime helper (if one is
+            // available)
+            // Microsoft.VisualBasic.CompilerServices.ObjectFlowControl.CheckForSyncLockOnValueType to ensure no
+            // value type is
             // used.
-            // For simplicity, we will not synthesize this call because its presence is unlikely to affect graph analysis.
+            // For simplicity, we will not synthesize this call because its presence is unlikely to affect graph
+            // analysis.
             var lockStatement = (LockOperation)operation;
 
             var lockRegion = new RegionBuilder(
@@ -6229,7 +6270,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     //   Dim loopObj        ' mysterious object that holds the loop state
                     //
                     //   ' helper does internal initialization and tells if we need to do any iterations
-                    //   if Not ObjectFlowControl.ForLoopControl.ForLoopInitObj(ctrl, init, limit, step, ref loopObj, ref ctrl)
+                    //   if Not ObjectFlowControl.ForLoopControl.ForLoopInitObj(ctrl, init, limit, step, ref loopObj,
+                    // ref ctrl)
                     //                               goto exit:
                     //   start:
                     //       body
@@ -6429,7 +6471,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     //   Dim loopObj        ' mysterious object that holds the loop state
                     //
                     //   ' helper does internal initialization and tells if we need to do any iterations
-                    //   if Not ObjectFlowControl.ForLoopControl.ForLoopInitObj(ctrl, init, limit, step, ref loopObj, ref ctrl)
+                    //   if Not ObjectFlowControl.ForLoopControl.ForLoopInitObj(ctrl, init, limit, step, ref loopObj,
+                    // ref ctrl)
                     //                               goto exit:
                     //   start:
                     //       body
@@ -7433,7 +7476,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             ILocalSymbol localSymbol = declarator.Symbol;
 
-            // If the local is a static (possible in VB), then we create a semaphore for conditional execution of the initializer.
+            // If the local is a static (possible in VB), then we create a semaphore for conditional execution
+            // of the initializer.
             BasicBlockBuilder? afterInitialization = null;
             if (localSymbol.IsStatic)
             {
@@ -7484,7 +7528,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             Debug.Assert(initializer != null && assignmentSyntax != null);
 
-            // If we have an afterInitialization, then we must have static local and an initializer to ensure we don't create empty regions that can't be cleaned up.
+            // If we have an afterInitialization, then we must have static local and an initializer to ensure we
+            // don't create empty regions that can't be cleaned up.
             Debug.Assert(
                 (afterInitialization, localSymbol.IsStatic) is (null, false) or (not null, true)
             );
@@ -7670,7 +7715,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         )
         {
             EvalStackFrame frame = PushStackFrame();
-            // Initializer is removed from the tree and turned into a series of statements that assign to the created instance
+            // Initializer is removed from the tree and turned into a series of statements that assign to the
+            // created instance
             IOperation initializedInstance = new NoPiaObjectCreationOperation(
                 initializer: null,
                 semanticModel: null,
@@ -7696,7 +7742,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 instancePushed: false
             );
             PopStackFrame(argumentsFrame);
-            // Initializer is removed from the tree and turned into a series of statements that assign to the created instance
+            // Initializer is removed from the tree and turned into a series of statements that assign to the
+            // created instance
             IOperation initializedInstance = new ObjectCreationOperation(
                 operation.Constructor,
                 initializer: null,
@@ -7772,7 +7819,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 return objectCreation;
             }
 
-            // Initializer wasn't null, so spill the stack and capture the initialized instance. Returns a reference to the captured instance.
+            // Initializer wasn't null, so spill the stack and capture the initialized instance. Returns a
+            // reference to the captured instance.
             PushOperand(objectCreation);
             SpillEvalStack();
             objectCreation = PopOperand();
@@ -7810,10 +7858,14 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         return;
 
                     default:
-                        // This assert is to document the list of things we know are possible to go through the default handler. It's possible there
-                        // are other nodes that will go through here, and if a new test triggers this assert, it will likely be fine to just add
-                        // the node type to the assert. It's here merely to ensure that we think about whether that node type actually does need
-                        // special handling in the context of a collection or object initializer before just assuming that it's fine.
+                        // This assert is to document the list of things we know are possible to go through the default
+                        // handler. It's possible there
+                        // are other nodes that will go through here, and if a new test triggers this assert, it will likely
+                        // be fine to just add
+                        // the node type to the assert. It's here merely to ensure that we think about whether that node
+                        // type actually does need
+                        // special handling in the context of a collection or object initializer before just assuming that
+                        // it's fine.
 #if DEBUG
                         var validKinds = ImmutableArray.Create(
                             OperationKind.Invocation,
@@ -7849,9 +7901,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 }
                 else
                 {
-                    // We push the target, which effectively pushes individual components of the target (ie the instance, and arguments if present).
-                    // After that has been pushed, we visit the value of the assignment, to ensure that the instance is captured if
-                    // needed. Finally, we reassemble the target, which will pull the potentially captured instance from the stack
+                    // We push the target, which effectively pushes individual components of the target (ie the
+                    // instance, and arguments if present).
+                    // After that has been pushed, we visit the value of the assignment, to ensure that the instance is
+                    // captured if
+                    // needed. Finally, we reassemble the target, which will pull the potentially captured instance from
+                    // the stack
                     // and reassemble the member reference from the parts.
                     IOperation right = VisitRequired(assignmentOperation.Value);
                     IOperation left = popTarget(assignmentOperation.Target);
@@ -7874,9 +7929,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
             void handleMemberInitializer(IMemberInitializerOperation memberInitializer)
             {
-                // We explicitly do not push the initialized member onto the stack here. We visit the initialized member to get the implicit receiver that will be substituted in when an
-                // IInstanceReferenceOperation with InstanceReferenceKind.ImplicitReceiver is encountered. If that receiver needs to be pushed onto the stack, its parent will handle it.
-                // In member initializers, the code generated will evaluate InitializedMember multiple times. For example, if you have the following:
+                // We explicitly do not push the initialized member onto the stack here. We visit the initialized
+                // member to get the implicit receiver that will be substituted in when an
+                // IInstanceReferenceOperation with InstanceReferenceKind.ImplicitReceiver is encountered. If that
+                // receiver needs to be pushed onto the stack, its parent will handle it.
+                // In member initializers, the code generated will evaluate InitializedMember multiple times. For
+                // example, if you have the following:
                 //
                 // class C1
                 // {
@@ -7908,7 +7966,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 //   IL_0020: stloc.0
                 //   IL_0021: ret
                 //
-                // We therefore visit the InitializedMember to get the implicit receiver for the contained initializer, and that implicit receiver will be cloned everywhere it encounters
+                // We therefore visit the InitializedMember to get the implicit receiver for the contained
+                // initializer, and that implicit receiver will be cloned everywhere it encounters
                 // an IInstanceReferenceOperation with ReferenceKind InstanceReferenceKind.ImplicitReceiver
 
                 EvalStackFrame frame = PushStackFrame();
@@ -7931,8 +7990,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                         if (memberReference.Kind == OperationKind.PropertyReference)
                         {
-                            // We assume all arguments have side effects and spill them. We only avoid recapturing things that have already been captured once.
-                            // We do not pass an instance here, as the instance is not yet available. For arguments that need the instance (such as interpolated
+                            // We assume all arguments have side effects and spill them. We only avoid recapturing things that
+                            // have already been captured once.
+                            // We do not pass an instance here, as the instance is not yet available. For arguments that need
+                            // the instance (such as interpolated
                             // string handlers), they will handle the missing instance by substituting an IInvalidOperation
 
                             VisitAndPushArguments(
@@ -7943,7 +8004,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         }
 
                         // If there is control flow in the value being assigned, we want to make sure that
-                        // the instance is captured appropriately, but the setter/field load in the reference will only be evaluated after
+                        // the instance is captured appropriately, but the setter/field load in the reference will only be
+                        // evaluated after
                         // the value has been evaluated. So we assemble the reference after visiting the value.
                         if (!memberReference.Member.IsStatic && memberReference.Instance != null)
                         {
@@ -7974,9 +8036,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                         return true;
 
                     default:
-                        // As in the assert in handleInitializer, this assert documents the operation kinds that we know go through this path,
-                        // and it is possible others go through here as well. If they are encountered, we simply need to ensure
-                        // that they don't have any interesting semantics in object or collection initialization contexts and add them to the
+                        // As in the assert in handleInitializer, this assert documents the operation kinds that we know go
+                        // through this path,
+                        // and it is possible others go through here as well. If they are encountered, we simply need to
+                        // ensure
+                        // that they don't have any interesting semantics in object or collection initialization contexts
+                        // and add them to the
                         // assert.
                         Debug.Assert(
                             instance.Kind == OperationKind.Invalid
@@ -8087,7 +8152,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                             IsImplicit(dynamicReference)
                         );
                     default:
-                        // Unlike in tryPushTarget, we assume that if this method is called, we were successful in pushing, so
+                        // Unlike in tryPushTarget, we assume that if this method is called, we were successful in pushing,
+                        // so
                         // this must be one of the explicitly handled kinds
                         throw ExceptionUtilities.UnexpectedValue(originalTarget.Kind);
                 }
@@ -8224,7 +8290,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                 // For VB, previously initialized properties can be referenced in subsequent initializers.
                 // We store the capture Id for the property for such property references.
-                // Note that for VB error cases with duplicate property names, all the property symbols are considered equal.
+                // Note that for VB error cases with duplicate property names, all the property symbols are
+                // considered equal.
                 // We use the last duplicate property's capture id and use it in subsequent property references.
                 _currentImplicitInstance.AnonymousTypePropertyValues[initializedProperty] =
                     captured;
@@ -8286,19 +8353,25 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         )
         {
             // We have couple of options on how to rewrite an array creation with an initializer:
-            //       1) Retain the original tree shape so the visited IArrayCreationOperation still has an IArrayInitializerOperation child node.
-            //       2) Lower the IArrayCreationOperation so it always has a null initializer, followed by explicit assignments
+            //       1) Retain the original tree shape so the visited IArrayCreationOperation still has an
+            // IArrayInitializerOperation child node.
+            //       2) Lower the IArrayCreationOperation so it always has a null initializer, followed by
+            // explicit assignments
             //          of the form "IArrayElementReference = value" for the array initializer values.
             //          There will be no IArrayInitializerOperation in the tree with approach.
             //
             //  We are going ahead with approach #1 for couple of reasons:
             //  1. Simplicity: The implementation is much simpler, and has a lot lower risk associated with it.
-            //  2. Lack of array instance access in the initializer: Unlike the object/collection initializer scenario,
-            //     where the initializer can access the instance being initialized, array initializer does not have access
-            //     to the array instance being initialized, and hence it does not matter if the array allocation is done
+            //  2. Lack of array instance access in the initializer: Unlike the object/collection initializer
+            // scenario,
+            //     where the initializer can access the instance being initialized, array initializer does not
+            // have access
+            //     to the array instance being initialized, and hence it does not matter if the array allocation
+            // is done
             //     before visiting the initializers or not.
             //
-            //  In future, based on the customer feedback, we can consider switching to approach #2 and lower the initializer into assignment(s).
+            //  In future, based on the customer feedback, we can consider switching to approach #2 and lower
+            // the initializer into assignment(s).
             EvalStackFrame frame = PushStackFrame();
             VisitAndPushArray(operation.DimensionSizes);
             var visitedInitializer = (IArrayInitializerOperation?)Visit(operation.Initializer);
@@ -8429,7 +8502,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             switch (operation.ReferenceKind)
             {
                 case InstanceReferenceKind.ImplicitReceiver:
-                    // When we're in an object or collection initializer, we need to replace the instance reference with a reference to the object being initialized
+                    // When we're in an object or collection initializer, we need to replace the instance reference with
+                    // a reference to the object being initialized
                     Debug.Assert(operation.IsImplicit);
 
                     if (_currentImplicitInstance.ImplicitInstance != null)
@@ -8665,9 +8739,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             Debug.Assert(left != null);
             Debug.Assert(right != null);
 
-            // If the left is a tuple, we want to decompose the tuple and push each element back onto the stack, so that if the right
-            // has control flow the individual elements are captured. Then we can recompose the tuple after the right has been visited.
-            // We do this to keep the graph sane, so that users don't have to track a tuple captured via flow control when it's not really
+            // If the left is a tuple, we want to decompose the tuple and push each element back onto the stack,
+            // so that if the right
+            // has control flow the individual elements are captured. Then we can recompose the tuple after the
+            // right has been visited.
+            // We do this to keep the graph sane, so that users don't have to track a tuple captured via flow
+            // control when it's not really
             // the tuple that's been captured, it's the operands to the tuple.
             EvalStackFrame frame = PushStackFrame();
             PushTargetAndUnwrapTupleIfNecessary(left);
@@ -8731,7 +8808,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int? captureIdForResult
         )
         {
-            // We turn the interpolated string into a call to create the handler type, a series of append calls (potentially with branches, depending on the
+            // We turn the interpolated string into a call to create the handler type, a series of append calls
+            // (potentially with branches, depending on the
             // handler semantics), and then evaluate to the handler flow capture temp.
 
             SpillEvalStack();
@@ -8772,7 +8850,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 resultBlock = new BasicBlockBuilder(BasicBlockKind.Block);
             }
 
-            // Any placeholders for arguments should have already been created, except for the out parameter if it exists.
+            // Any placeholders for arguments should have already been created, except for the out parameter if
+            // it exists.
             int outParameterFlowCapture = -1;
             IInterpolatedStringHandlerArgumentPlaceholderOperation? outParameterPlaceholder = null;
 
@@ -8862,7 +8941,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
                     if (i == appendCallsLength - 1)
                     {
-                        // No matter the result, we're going to the result block next. So just visit the statement, and if the current block can be
+                        // No matter the result, we're going to the result block next. So just visit the statement, and if
+                        // the current block can be
                         // combined with the result block, the compaction machinery will take care of it
                         AddStatement(visitedAppendCall);
                     }
@@ -9096,7 +9176,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         {
             // We visit and rewrite the interpolation parts in two phases:
             //  1. Visit all the non-literal parts of the interpolation and push them onto the eval stack.
-            //  2. Traverse the parts in reverse order, popping the non-literal values from the eval stack and visiting the literal values.
+            //  2. Traverse the parts in reverse order, popping the non-literal values from the eval stack and
+            // visiting the literal values.
             EvalStackFrame frame = PushStackFrame();
             foreach (IInterpolatedStringContentOperation element in operation.Parts)
             {
@@ -9319,7 +9400,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             int? captureIdForResult
         )
         {
-            // Check if this is an anonymous type property reference with an implicit receiver within an anonymous object initializer.
+            // Check if this is an anonymous type property reference with an implicit receiver within an
+            // anonymous object initializer.
             if (
                 operation.Instance is IInstanceReferenceOperation instanceReference
                 && instanceReference.ReferenceKind == InstanceReferenceKind.ImplicitReceiver
@@ -9904,7 +9986,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 && children.Last().Kind == OperationKind.ObjectOrCollectionInitializer
             )
             {
-                // We are dealing with erroneous object creation. All children, but the last one are arguments for the constructor,
+                // We are dealing with erroneous object creation. All children, but the last one are arguments for
+                // the constructor,
                 // but overload resolution failed.
                 SpillEvalStack();
 
@@ -9989,7 +10072,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         {
             StartVisitingStatement(operation);
 
-            // We split the ReDim clauses into separate ReDim operations to ensure that we preserve the evaluation order,
+            // We split the ReDim clauses into separate ReDim operations to ensure that we preserve the
+            // evaluation order,
             // i.e. each ReDim clause operand is re-allocated prior to evaluating the next clause.
 
             // Mark the split ReDim operations as implicit if we have more than one ReDim clause.
@@ -10382,8 +10466,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             _currentStatement = operation;
             StartVisitingStatement(operation);
 
-            // a using statement introduces a 'logical' block after declaration, we synthesize one here in order to analyze it like a regular using. Don't include
-            // local functions in this block: they still belong in the containing block. We'll visit any local functions in the list after we visit the statements
+            // a using statement introduces a 'logical' block after declaration, we synthesize one here in order
+            // to analyze it like a regular using. Don't include
+            // local functions in this block: they still belong in the containing block. We'll visit any local
+            // functions in the list after we visit the statements
             // in this block.
             ArrayBuilder<IOperation> statementsBuilder = ArrayBuilder<IOperation>.GetInstance(
                 statements.Length
@@ -10432,7 +10518,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
 
         public IOperation? Visit(IOperation? operation)
         {
-            // We should never be revisiting nodes we've already visited, and we don't set SemanticModel in this builder.
+            // We should never be revisiting nodes we've already visited, and we don't set SemanticModel in this
+            // builder.
             Debug.Assert(
                 operation == null
                     || ((Operation)operation).OwningSemanticModel!.Compilation == _compilation
@@ -10514,7 +10601,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             }
 
             EvalStackFrame frame = PushStackFrame();
-            // Initializer is removed from the tree and turned into a series of statements that assign to the cloned instance
+            // Initializer is removed from the tree and turned into a series of statements that assign to the
+            // cloned instance
             IOperation visitedInstance = VisitRequired(operation.Operand);
             IOperation cloned;
             if (operation.Type.IsValueType)
@@ -10543,7 +10631,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 HandleObjectOrCollectionInitializer(operation.Initializer, cloned)
             );
 
-            // For `old with { Property = ... }` we're going to do the same as `new { Property = ..., OtherProperty = old.OtherProperty }`
+            // For `old with { Property = ... }` we're going to do the same as `new { Property = ...,
+            // OtherProperty = old.OtherProperty }`
             IOperation handleAnonymousTypeWithExpression(
                 WithOperation operation,
                 int? captureIdForResult
@@ -10637,7 +10726,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     explicitProperties.Add(property, assignment);
                 }
 
-                // Make a sequence for all properties (in order), constructing assignments for the implicitly set properties
+                // Make a sequence for all properties (in order), constructing assignments for the implicitly set
+                // properties
                 var type = (INamedTypeSymbol)operation.Type;
                 foreach (IPropertySymbol property in properties)
                 {

@@ -9,20 +9,27 @@ using System.Diagnostics;
 using System.Reflection;
 using Internal.Reflection.Augments;
 
-//==================================================================================================================
+
+// //==================================================================================================================
 // Dependency note:
-//   This class must depend only on the CustomAttribute properties that return IEnumerable<CustomAttributeData>.
-//   All of the other custom attribute api route back here so calls to them will cause an infinite recursion.
-//==================================================================================================================
+//   This class must depend only on the CustomAttribute properties that return
+// IEnumerable<CustomAttributeData>.
+//   All of the other custom attribute api route back here so calls to them will cause an infinite
+// recursion.
+
+// //==================================================================================================================
 
 namespace Internal.Reflection.Extensions.NonPortable
 {
     public static class CustomAttributeInheritanceRules
     {
-        //==============================================================================================================================
-        // Api helpers: Computes the effective set of custom attributes for various Reflection elements and returns them
+        
+        // //==============================================================================================================================
+        // Api helpers: Computes the effective set of custom attributes for various Reflection elements and
+        // returns them
         //              as CustomAttributeData objects.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         public static IEnumerable<CustomAttributeData> GetMatchingCustomAttributes(
             this Assembly element,
             Type optionalAttributeTypeFilter,
@@ -139,9 +146,11 @@ namespace Internal.Reflection.Extensions.NonPortable
             throw new NotSupportedException(); // Shouldn't get here.
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for Assemblies.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class AssemblyCustomAttributeSearcher : CustomAttributeSearcher<Assembly>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -155,9 +164,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new AssemblyCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for Modules.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class ModuleCustomAttributeSearcher : CustomAttributeSearcher<Module>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -171,9 +182,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new ModuleCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for TypeInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class TypeCustomAttributeSearcher : CustomAttributeSearcher<Type>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -189,7 +202,8 @@ namespace Internal.Reflection.Extensions.NonPortable
                 if (baseType == null)
                     return null;
 
-                // Optimization: We shouldn't have any public inheritable attributes on Object or ValueType so don't bother scanning this one.
+                // Optimization: We shouldn't have any public inheritable attributes on Object or ValueType so don't
+                // bother scanning this one.
                 //  Since many types derive directly from Object, this should a lot of type.
                 if (baseType == typeof(object) || baseType == typeof(ValueType))
                     return null;
@@ -201,9 +215,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new TypeCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for FieldInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class FieldCustomAttributeSearcher : CustomAttributeSearcher<FieldInfo>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -217,9 +233,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new FieldCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for ConstructorInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class ConstructorCustomAttributeSearcher
             : CustomAttributeSearcher<ConstructorInfo>
         {
@@ -234,9 +252,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new ConstructorCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for MethodInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class MethodCustomAttributeSearcher : CustomAttributeSearcher<MethodInfo>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -257,9 +277,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new MethodCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for PropertyInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class PropertyCustomAttributeSearcher : CustomAttributeSearcher<PropertyInfo>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -280,9 +302,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new PropertyCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for EventInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class EventCustomAttributeSearcher : CustomAttributeSearcher<EventInfo>
         {
             protected sealed override IEnumerable<CustomAttributeData> GetDeclaredCustomAttributes(
@@ -303,9 +327,11 @@ namespace Internal.Reflection.Extensions.NonPortable
                 new EventCustomAttributeSearcher();
         }
 
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         // Searcher class for ParameterInfos.
-        //==============================================================================================================================
+        
+        // //==============================================================================================================================
         private sealed class ParameterCustomAttributeSearcher
             : CustomAttributeSearcher<ParameterInfo>
         {

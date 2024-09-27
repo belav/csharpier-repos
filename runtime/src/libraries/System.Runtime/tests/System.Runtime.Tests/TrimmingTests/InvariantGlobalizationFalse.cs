@@ -13,7 +13,8 @@ class Program
     static int Main(string[] args)
     {
         // since we are using Invariant GlobalizationMode = false, setting the culture matters.
-        // The app will always use the current culture, so in the Turkish culture, 'i' ToUpper will NOT be "I"
+        // The app will always use the current culture, so in the Turkish culture, 'i' ToUpper will NOT be
+        // "I"
         Thread.CurrentThread.CurrentCulture = new CultureInfo("tr-TR");
         if ("i".ToUpper() == "I")
         {

@@ -223,7 +223,8 @@ namespace System.Data.Metadata.Edm
         GeographyCollection = 30,
 
         //
-        //If you add anything below this, make sure you update the variable NumPrimitiveTypes in EdmConstants
+        //If you add anything below this, make sure you update the variable NumPrimitiveTypes in
+        // EdmConstants
         //
     }
 }

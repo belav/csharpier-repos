@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             if (LocalFunction)
             {
-                // If we are extracting a local function and are within a local function, then we want the new function to be created within the
+                // If we are extracting a local function and are within a local function, then we want the new
+                // function to be created within the
                 // existing local function instead of the overarching method.
                 var outermostCapturedVariable =
                     analyzerResult.GetOutermostVariableToMoveIntoMethodDefinition(
@@ -98,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         {
                             // If we encountered a function but the selection isn't within the body, it's likely the user
                             // is attempting to move the function (which is behavior that is supported). Stop looking up the
-                            // tree and assume the encapsulating member is the right place to put the local function. This is to help
+                            // tree and assume the encapsulating member is the right place to put the local function. This is to
+                            // help
                             // maintain the behavior introduced with https://github.com/dotnet/roslyn/pull/41377
                             break;
                         }
@@ -116,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         {
                             // If we encountered a function but the selection isn't within the body, it's likely the user
                             // is attempting to move the function (which is behavior that is supported). Stop looking up the
-                            // tree and assume the encapsulating member is the right place to put the local function. This is to help
+                            // tree and assume the encapsulating member is the right place to put the local function. This is to
+                            // help
                             // maintain the behavior introduced with https://github.com/dotnet/roslyn/pull/41377
                             break;
                         }

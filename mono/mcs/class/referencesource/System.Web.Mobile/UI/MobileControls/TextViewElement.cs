@@ -20,13 +20,13 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile TextView Element class.
-     * The TextView control stores its contents as a series of elements. This
-     * class encapsulates an element.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile TextView Element class.
+* The TextView control stores its contents as a series of elements. This
+* class encapsulates an element.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\TextViewElement.uex' path='docs/doc[@for="TextViewElement"]/*' />
     [AspNetHostingPermission(

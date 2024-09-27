@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
         );
 
         /// <summary>
-        /// special cases where we do not want to do line completion but just fall back to line break and formatting.
+        /// special cases where we do not want to do line completion but just fall back to line break and
+        // formatting.
         /// </summary>
         protected abstract bool TreatAsReturn(
             ParsedDocument document,
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
 
                 // Two possible operations
                 // 1. Add/remove the brace for the selected syntax node (only for C#)
-                // 2. Append an ending string to the line. (For C#, it is semicolon ';', For VB, it is underline '_')
+                // 2. Append an ending string to the line. (For C#, it is semicolon ';', For VB, it is underline
+                // '_')
 
                 // Check if the node could be used to add/remove brace.
                 var selectNodeAndOperationKind = GetValidNodeToModifyBraces(
@@ -261,7 +263,8 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
             )
                 return line.End;
 
-            // if token is on different line than caret but caret line is empty, we insert ending point at the end of the line
+            // if token is on different line than caret but caret line is empty, we insert ending point at the
+            // end of the line
             if (text.Lines.IndexOf(token.Span.End) != text.Lines.IndexOf(line.End))
                 return string.IsNullOrWhiteSpace(line.GetText()) ? line.End : null;
 

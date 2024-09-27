@@ -75,7 +75,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DeletedRowInaccessibleException'/> class.
+        ///       Initializes a new instance of the <see
+        // cref='System.Data.DeletedRowInaccessibleException'/> class.
         ///    </para>
         /// </devdoc>
         public DeletedRowInaccessibleException()
@@ -86,7 +87,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DeletedRowInaccessibleException'/> class with the specified string.
+        ///       Initializes a new instance of the <see
+        // cref='System.Data.DeletedRowInaccessibleException'/> class with the specified string.
         ///    </para>
         /// </devdoc>
         public DeletedRowInaccessibleException(string s)
@@ -516,8 +518,10 @@ namespace System.Data
             return e;
         }
 
-        // Consider: whether we need to keep our own texts from Data_ArgumentNull and Data_ArgumentOutOfRange?
-        // Unfortunately ours and the system ones are not consisten between each other. Try to raise this isue in "URT user comunity"
+        // Consider: whether we need to keep our own texts from Data_ArgumentNull and
+        // Data_ArgumentOutOfRange?
+        // Unfortunately ours and the system ones are not consisten between each other. Try to raise this
+        // isue in "URT user comunity"
         static public Exception ArgumentNull(string paramName)
         {
             return _ArgumentNull(paramName, Res.GetString(Res.Data_ArgumentNull, paramName));

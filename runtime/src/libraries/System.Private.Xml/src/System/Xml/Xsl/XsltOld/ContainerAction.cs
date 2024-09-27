@@ -156,9 +156,9 @@ namespace System.Xml.Xsl.XsltOld
             compiler.AddTemplate(compiler.CreateSingleTemplateAction());
         }
 
-        /*
-         * CompileTopLevelElements
-         */
+/*
+* CompileTopLevelElements
+*/
         protected void CompileDocument(Compiler compiler, bool inInclude)
         {
             NavigatorInput input = compiler.Input;

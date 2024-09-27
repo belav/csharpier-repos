@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedMembers
             ImmutableArray.Create(IDEDiagnosticIds.RemoveUnusedMembersDiagnosticId);
 
         /// <summary>
-        /// This method adjusts the <paramref name="declarators"/> to remove based on whether or not all variable declarators
+        /// This method adjusts the <paramref name="declarators"/> to remove based on whether or not all
+        // variable declarators
         /// within a field declaration should be removed,
         /// i.e. if all the fields declared within a field declaration are unused,
         /// we can remove the entire field declaration instead of individual variable declarators.

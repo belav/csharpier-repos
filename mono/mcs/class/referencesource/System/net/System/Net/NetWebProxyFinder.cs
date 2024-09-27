@@ -127,7 +127,8 @@ namespace System.Net
             }
         }
 
-        // Ensures that (if state is AutoWebProxyState.CompilationSuccess) there is an engine available to execute script.
+        // Ensures that (if state is AutoWebProxyState.CompilationSuccess) there is an engine available to
+        // execute script.
         // Figures out the script location (might discover if needed).
         // Calls DownloadAndCompile().
         private void EnsureEngineAvailable()
@@ -272,7 +273,8 @@ namespace System.Net
                 }
             }
 
-            // Everything failed.  Set this instance to mostly-dead.  It will wake up again if there's a reg/connectoid change.
+            // Everything failed.  Set this instance to mostly-dead.  It will wake up again if there's a
+            // reg/connectoid change.
             GlobalLog.Print(
                 "NetWebProxyFinder#"
                     + ValidationHelper.HashString(this)
@@ -312,7 +314,8 @@ namespace System.Net
             TimerThread.Timer timer = null;
             AutoWebProxyScriptWrapper newScriptInstance = null;
 
-            // Can't assert this in declarative form (DCR?). This Assert() is needed to be able to create the request to download the proxy script.
+            // Can't assert this in declarative form (DCR?). This Assert() is needed to be able to create the
+            // request to download the proxy script.
             ExceptionHelper.WebPermissionUnrestricted.Assert();
             try
             {
@@ -339,7 +342,8 @@ namespace System.Net
                 // We have an opportunity here, if caching is disabled AppDomain-wide, to override it with a
                 // custom, trivial cache-provider to get a similar semantic.
                 //
-                // We also want to have a backup caching key in the case when IE has locked an expired script response
+                // We also want to have a backup caching key in the case when IE has locked an expired script
+                // response
                 //
                 if (request.CacheProtocol != null)
                 {
@@ -742,7 +746,8 @@ namespace System.Net
             return autoProxy;
         }
 
-        // RequestTimeoutCallback - Called by the TimerThread to abort a request.  This just posts ThreadPool work item - Abort() does too
+        // RequestTimeoutCallback - Called by the TimerThread to abort a request.  This just posts
+        // ThreadPool work item - Abort() does too
         // much to be done on the timer thread (timer thread should never block or call user code).
         private static void RequestTimeoutCallback(
             TimerThread.Timer timer,

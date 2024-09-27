@@ -14,14 +14,16 @@ namespace System.Net.Test.Common
         public const int LargestStaticIndex = 61;
 
         /// <summary>
-        /// Dynamic table indexes are [62..], with 62 being the most recently added entry. Indexes smaller than this are static indexes.
+        /// Dynamic table indexes are [62..], with 62 being the most recently added entry. Indexes smaller
+        // than this are static indexes.
         /// </summary>
         public const int SmallestDynamicIndex = LargestStaticIndex + 1;
 
         /// <summary>
         /// Encodes a dynamic table size update.
         /// </summary>
-        /// <param name="newMaximumSize">The new maximum size of the dynamic table. This must be less than or equal to the connection's maximum table size setting, which defaults to 4096 bytes.</param>
+        /// <param name="newMaximumSize">The new maximum size of the dynamic table. This must be less than
+        // or equal to the connection's maximum table size setting, which defaults to 4096 bytes.</param>
         /// <param name="headerBlock">A span to write the encoded header to.</param>
         /// <returns>The number of bytes written to <paramref name="headerBlock"/>.</returns>
         public static int EncodeDynamicTableSizeUpdate(int newMaximumSize, Span<byte> headerBlock)
@@ -242,7 +244,8 @@ namespace System.Net.Test.Common
         HuffmanEncode = HuffmanEncodeName | HuffmanEncodeValue,
 
         /// <summary>
-        /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) are still allowed to index the value when forwarding the header.
+        /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) are
+        // still allowed to index the value when forwarding the header.
         /// </summary>
         WithoutIndexing = 0,
 
@@ -252,7 +255,8 @@ namespace System.Net.Test.Common
         NewIndexed = 4,
 
         /// <summary>
-        /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) must not index the value when forwarding the header.
+        /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) must
+        // not index the value when forwarding the header.
         /// </summary>
         NeverIndexed = 8,
     }

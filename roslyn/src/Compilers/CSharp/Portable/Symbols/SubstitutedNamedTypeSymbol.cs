@@ -18,7 +18,8 @@ using ReferenceEqualityComparer = Roslyn.Utilities.ReferenceEqualityComparer;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// Either a SubstitutedNestedTypeSymbol or a ConstructedNamedTypeSymbol, which share in common that they
+    /// Either a SubstitutedNestedTypeSymbol or a ConstructedNamedTypeSymbol, which share in common that
+    // they
     /// have type parameters substituted.
     /// </summary>
     internal abstract class SubstitutedNamedTypeSymbol : WrappedNamedTypeSymbol

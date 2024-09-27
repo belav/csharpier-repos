@@ -41,11 +41,11 @@ namespace System.Xml.Xsl.Xslt
         private int importPrecedence;
         private int orderNumber = 0;
 
-        /*
-            WhitespaceRules[0] - rules with default priority  0
-            WhitespaceRules[1] - rules with default priority -0.25
-            WhitespaceRules[2] - rules with default priority -0.5
-        */
+/*
+WhitespaceRules[0] - rules with default priority  0
+WhitespaceRules[1] - rules with default priority -0.25
+WhitespaceRules[2] - rules with default priority -0.5
+*/
         public List<WhitespaceRule>[] WhitespaceRules = new List<WhitespaceRule>[3];
 
         public List<Template> Templates = new List<Template>(); // Templates defined on this level. Empty for RootLevel.

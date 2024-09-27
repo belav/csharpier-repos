@@ -909,7 +909,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     // but the order isn't really a factor.
                     Assert.Equal(collection.Count, importedCollection.Count);
 
-                    // Compare just the subject names first, because it's the easiest thing to read out of the failure message.
+                    // Compare just the subject names first, because it's the easiest thing to read out of the failure
+                    // message.
                     string[] subjects = new string[collection.Count];
                     string[] importedSubjects = new string[collection.Count];
 

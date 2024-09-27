@@ -142,7 +142,8 @@ namespace System.ServiceModel.Activities
                                                         {
                                                             Child = child,
                                                         },
-                                                    //Message = new InArgument<string>(env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
+                                                    //Message = new InArgument<string>(env =>
+                                                    // SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
                                                     Message = new InArgument<string>
                                                     {
                                                         Expression =
@@ -239,7 +240,8 @@ namespace System.ServiceModel.Activities
             RuntimeTransactionHandle handleInstance = this.transactionHandle.Get(context);
             Fx.Assert(handleInstance != null, "RuntimeTransactionHandle is null");
 
-            //This is used by InternalReceiveMessage to update the InitiatingTransaction so that we can later call Commit/Complete on it
+            //This is used by InternalReceiveMessage to update the InitiatingTransaction so that we can later
+            // call Commit/Complete on it
             context.Properties.Add(
                 TransactedReceiveData.TransactedReceiveDataExecutionPropertyName,
                 new TransactedReceiveData()
@@ -309,8 +311,10 @@ namespace System.ServiceModel.Activities
                 System.Transactions.CommittableTransaction committableTransaction =
                     transactedReceiveData.InitiatingTransaction
                     as System.Transactions.CommittableTransaction;
-                //If the initiating transaction was a committable transaction => this is a server side only transaction. Commit it here instead of letting the dispatcher deal with it
-                //since we are Auto Complete = false and we want the completion of the TransactedReceiveScope to initiate the Commit.
+                //If the initiating transaction was a committable transaction => this is a server side only
+                // transaction. Commit it here instead of letting the dispatcher deal with it
+                //since we are Auto Complete = false and we want the completion of the TransactedReceiveScope to
+                // initiate the Commit.
                 if (committableTransaction != null)
                 {
                     committableTransaction.BeginCommit(
@@ -320,7 +324,8 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    //If the initiating transaction was a dependent transaction instead => this is a flowed in transaction, let's just complete the dependent clone
+                    //If the initiating transaction was a dependent transaction instead => this is a flowed in
+                    // transaction, let's just complete the dependent clone
                     System.Transactions.DependentTransaction dependentTransaction =
                         transactedReceiveData.InitiatingTransaction
                         as System.Transactions.DependentTransaction;
@@ -357,8 +362,10 @@ namespace System.ServiceModel.Activities
             }
             catch (System.Transactions.TransactionException ex)
             {
-                //At this point, the activity has completed. Since the runtime is enlisted in the transaction, it knows that the transaction aborted.
-                //The runtime will do the right thing based on the AbortInstanceOnTransactionFailure flag. We simply trace out that the call to EndCommit failed from this static callback
+                //At this point, the activity has completed. Since the runtime is enlisted in the transaction, it
+                // knows that the transaction aborted.
+                //The runtime will do the right thing based on the AbortInstanceOnTransactionFailure flag. We simply
+                // trace out that the call to EndCommit failed from this static callback
                 if (TD.TransactedReceiveScopeEndCommitFailedIsEnabled())
                 {
                     TD.TransactedReceiveScopeEndCommitFailed(
@@ -457,7 +464,8 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        // Message = new InArgument<string>(env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
+        // Message = new InArgument<string>(env =>
+        // SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
         class NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage
             : CodeActivity<string>
         {
@@ -512,7 +520,8 @@ namespace System.ServiceModel.Activities
 
             protected override string Execute(CodeActivityContext context)
             {
-                // env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)
+                // env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName,
+                // this.DisplayName)
                 return SR.AbortInstanceOnTransactionFailureDoesNotMatch(
                     this.Child.Get(context).DisplayName,
                     this.ParentDisplayName.Get(context)

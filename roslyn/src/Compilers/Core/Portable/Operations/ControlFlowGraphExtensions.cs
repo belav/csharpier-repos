@@ -49,7 +49,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         }
 
         /// <summary>
-        /// Gets or creates a control flow graph for the given <paramref name="anonymousFunction"/> defined in
+        /// Gets or creates a control flow graph for the given <paramref name="anonymousFunction"/> defined
+        // in
         /// the given <paramref name="controlFlowGraph"/> or any of it's parent control flow graphs.
         /// </summary>
 #pragma warning disable IDE0060 // Remove unused parameter

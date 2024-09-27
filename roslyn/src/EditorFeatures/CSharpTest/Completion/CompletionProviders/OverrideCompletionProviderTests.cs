@@ -4020,9 +4020,12 @@ namespace NS3
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47973")]
         public async Task NoCloneInOverriddenRecord()
         {
-            // Currently WellKnownMemberNames.CloneMethodName is not public, so we can't reference it directly.  We
-            // could hardcode in the value "<Clone>$", however if the compiler ever changed the name and we somehow
-            // started showing it in completion, this test would continue to pass.  So this allows us to at least go
+            // Currently WellKnownMemberNames.CloneMethodName is not public, so we can't reference it directly.
+            // We
+            // could hardcode in the value "<Clone>$", however if the compiler ever changed the name and we
+            // somehow
+            // started showing it in completion, this test would continue to pass.  So this allows us to at
+            // least go
             // back and explicitly validate this scenario even in that event.
             var cloneMemberName = (string)
                 typeof(WellKnownMemberNames)

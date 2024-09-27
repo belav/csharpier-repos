@@ -108,7 +108,8 @@ namespace System.Globalization
                 _sName = realNameBuffer;
 
                 // Specific locale name is whatever ResolveLocaleName (win7+) returns.
-                // (Buffer has our name in it, and we can recycle that because windows resolves it before writing to the buffer)
+                // (Buffer has our name in it, and we can recycle that because windows resolves it before writing to
+                // the buffer)
                 result = Interop.Kernel32.ResolveLocaleName(
                     realNameBuffer,
                     pBuffer,
@@ -122,7 +123,8 @@ namespace System.Globalization
                 }
 
                 // We found a locale name, so use it.
-                // In vista this should look like a sort name (de-DE_phoneb) or a specific culture (en-US) and be in the "pretty" form
+                // In vista this should look like a sort name (de-DE_phoneb) or a specific culture (en-US) and be in
+                // the "pretty" form
                 _sSpecificCulture = new string(pBuffer, 0, result - 1);
             }
             else
@@ -222,8 +224,10 @@ namespace System.Globalization
         {
             Debug.Assert(!GlobalizationMode.Invariant);
 
-            // LOCALE_CUSTOM_UNSPECIFIED ia an unspecified custom locale, used to identify all supplemental locales.
-            // Supplemental locales cannot be distinguished from one another by their locale identifiers, but can be distinguished by their locale names.
+            // LOCALE_CUSTOM_UNSPECIFIED ia an unspecified custom locale, used to identify all supplemental
+            // locales.
+            // Supplemental locales cannot be distinguished from one another by their locale identifiers, but
+            // can be distinguished by their locale names.
             if (culture == CultureInfo.LOCALE_CUSTOM_UNSPECIFIED)
             {
                 return null;

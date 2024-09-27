@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -25,19 +26,32 @@ namespace ILLink.RoslynAnalyzer.Tests
         // - The test class name, for ILLink tests
         // - The test fact method name, minus "Tests", for analyzer tests
         // For example:
-        // | Testcase                | Suite name           | Linker                                     | Analyzer                                |
+        // | Testcase                | Suite name           | Linker                                     |
+        // Analyzer                                |
+        //
         // |-------------------------+----------------------+--------------------------------------------+-----------------------------------------|
-        // | RequiresCapability      | RequiresCapability   | RequiresCapability class in namespcae      | RequiresCapability method in class      |
-        // |                         |                      | Mono.Linker.Tests.Cases.RequiresCapability | RequiresCapabilityTests in namespace    |
-        // |                         |                      |                                            | ILLink.RoslynAnalyzer.Tests             |
+        // | RequiresCapability      | RequiresCapability   | RequiresCapability class in namespcae      |
+        // RequiresCapability method in class      |
+        // |                         |                      | Mono.Linker.Tests.Cases.RequiresCapability |
+        // RequiresCapabilityTests in namespace    |
+        // |                         |                      |                                            |
+        // ILLink.RoslynAnalyzer.Tests             |
+        //
         // |-------------------------+----------------------+--------------------------------------------+-----------------------------------------|
-        // | RequiresOnAttributeCtor | RequiresCapability   | RequiresOnAttributeCtor class in namespace | RequiresOnAttributeCtor method in class |
-        // |                         |                      | Mono.Linker.Tests.Cases.RequiresCapability | RequiresCapabilityTests in namespace    |
-        // |                         |                      |                                            | ILlink.RoslynAnalyzer.Tests             |
+        // | RequiresOnAttributeCtor | RequiresCapability   | RequiresOnAttributeCtor class in namespace |
+        // RequiresOnAttributeCtor method in class |
+        // |                         |                      | Mono.Linker.Tests.Cases.RequiresCapability |
+        // RequiresCapabilityTests in namespace    |
+        // |                         |                      |                                            |
+        // ILlink.RoslynAnalyzer.Tests             |
+        //
         // |-------------------------+----------------------+--------------------------------------------+-----------------------------------------|
-        // | UnusedPInvoke           | Interop.PInvokeTests | UnusedPInvoke class in namespace           | UnusedPInvoke method in class           |
-        // |                         |                      | Mono.Linker.Tests.Cases.Interop.PInvoke    | PinvokeTests in namespace               |
-        // |                         |                      |                                            | ILLink.RoslynAnalyzer.Tests.Interop     |
+        // | UnusedPInvoke           | Interop.PInvokeTests | UnusedPInvoke class in namespace           |
+        // UnusedPInvoke method in class           |
+        // |                         |                      | Mono.Linker.Tests.Cases.Interop.PInvoke    |
+        // PinvokeTests in namespace               |
+        // |                         |                      |                                            |
+        // ILLink.RoslynAnalyzer.Tests.Interop     |
         public readonly Dictionary<string, HashSet<string>> Suites = new();
 
         public void Add(string suiteName, string name)

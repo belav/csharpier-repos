@@ -51,12 +51,13 @@ namespace System.IO.Ports.Tests
                     numReceivedEvents = 0;
                 int iterationWaitTime = 100;
 
-                /***************************************************************
-            Scenario Description: All of the event handlers should be called sequentially never
-            at the same time on multiple thread. Basically we will block each event handler caller thread and verify
-            that no other thread is in another event handler
+/***************************************************************
+Scenario Description: All of the event handlers should be called sequentially never
+at the same time on multiple thread. Basically we will block each event handler caller thread and
+verify
+that no other thread is in another event handler
 
-            ***************************************************************/
+***************************************************************/
 
                 Debug.WriteLine("Verifying that event handlers are called serially");
 
@@ -272,10 +273,13 @@ namespace System.IO.Ports.Tests
                 errorEventHandler.Validate(SerialError.RXParity, 0);
                 errorEventHandler.Validate(SerialError.Frame, 0);
 
-                // It's important that we close com1 BEFORE com2 (the using() block would do this the other way around normally)
-                // This is because we have our special blocking event handlers hooked onto com1, and closing com2 is likely to
+                // It's important that we close com1 BEFORE com2 (the using() block would do this the other way
+                // around normally)
+                // This is because we have our special blocking event handlers hooked onto com1, and closing com2 is
+                // likely to
                 // cause a pin-change event which then hangs and prevents com1 from closing.
-                // An alternative approach would be to unhook all the event-handlers before leaving the using() block.
+                // An alternative approach would be to unhook all the event-handlers before leaving the using()
+                // block.
                 com1.Close();
             }
         }

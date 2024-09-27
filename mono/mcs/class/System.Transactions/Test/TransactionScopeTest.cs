@@ -81,7 +81,7 @@ namespace MonoTests.System.Transactions
                 );
 
                 irm.Value = 2;
-                /* Not completing scope here */
+/* Not completing scope here */
             }
             irm.Check(0, 0, 1, 0, "irm");
             Assert.AreEqual(1, irm.Value);
@@ -95,7 +95,7 @@ namespace MonoTests.System.Transactions
             using (TransactionScope scope = new TransactionScope())
             {
                 scope.Complete();
-                /* Can't access ambient transaction after scope.Complete */
+/* Can't access ambient transaction after scope.Complete */
                 TransactionStatus status = Transaction.Current.TransactionInformation.Status;
             }
         }
@@ -133,12 +133,12 @@ namespace MonoTests.System.Transactions
             {
                 irm.Value = 2;
 
-                /* Complete this scope */
+/* Complete this scope */
                 scope.Complete();
             }
 
             Assert.IsNull(Transaction.Current, "Ambient transaction exists");
-            /* Value = 2, got committed */
+/* Value = 2, got committed */
             Assert.AreEqual(irm.Value, 2, "#1");
             irm.Check(1, 1, 0, 0, "irm");
         }
@@ -152,11 +152,11 @@ namespace MonoTests.System.Transactions
             {
                 irm.Value = 2;
 
-                /* Not-Completing this scope */
+/* Not-Completing this scope */
             }
 
             Assert.IsNull(Transaction.Current, "Ambient transaction exists");
-            /* Value = 2, got rolledback */
+/* Value = 2, got rolledback */
             Assert.AreEqual(irm.Value, 1, "#2");
             irm.Check(0, 0, 1, 0, "irm");
         }
@@ -183,7 +183,7 @@ namespace MonoTests.System.Transactions
             }
 
             Assert.IsNull(Transaction.Current, "Ambient transaction exists");
-            /* Both got committed */
+/* Both got committed */
             Assert.AreEqual(irm.Value, 2, "#3");
             Assert.AreEqual(irm2.Value, 20, "#4");
             irm.Check(1, 1, 0, 0, "irm");
@@ -205,10 +205,10 @@ namespace MonoTests.System.Transactions
                 {
                     irm2.Value = 20;
 
-                    /* Inner Tx not completed, Tx should get rolled back */
+/* Inner Tx not completed, Tx should get rolled back */
                     //scope2.Complete();
                 }
-                /* Both rolledback */
+/* Both rolledback */
                 irm.Check(0, 0, 1, 0, "irm");
                 irm2.Check(0, 0, 1, 0, "irm2");
                 Assert.AreEqual(
@@ -248,8 +248,8 @@ namespace MonoTests.System.Transactions
                     Transaction.Current.TransactionInformation.Status,
                     "#8"
                 );
-                /* Not completing outer scope
-                scope.Complete (); */
+/* Not completing outer scope
+scope.Complete (); */
             }
 
             Assert.IsNull(Transaction.Current, "Ambient transaction exists");
@@ -280,7 +280,7 @@ namespace MonoTests.System.Transactions
                     irm2.Value = 20;
                     scope2.Complete();
                 }
-                /* vr2, committed */
+/* vr2, committed */
                 irm2.Check(1, 1, 0, 0, "irm2");
                 Assert.AreEqual(irm2.Value, 20);
 
@@ -316,11 +316,11 @@ namespace MonoTests.System.Transactions
                 )
                 {
                     irm2.Value = 20;
-                    /* Not completing
-                     scope2.Complete();*/
+/* Not completing
+scope2.Complete();*/
                 }
 
-                /* irm2, rolled back*/
+/* irm2, rolled back*/
                 irm2.Check(0, 0, 1, 0, "irm2");
                 Assert.AreEqual(irm2.Value, 10, "#13");
 
@@ -334,7 +334,7 @@ namespace MonoTests.System.Transactions
             }
 
             Assert.IsNull(Transaction.Current, "Ambient transaction exists");
-            /* ..But irm got committed */
+/* ..But irm got committed */
             Assert.AreEqual(irm.Value, 2, "#15");
             irm.Check(1, 1, 0, 0, "irm");
         }
@@ -354,7 +354,7 @@ namespace MonoTests.System.Transactions
                     TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
                 )
                 {
-                    /* Not transactional, so this WONT get committed */
+/* Not transactional, so this WONT get committed */
                     irm2.Value = 20;
                     scope2.Complete();
                 }
@@ -416,7 +416,7 @@ namespace MonoTests.System.Transactions
                     TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress)
                 )
                 {
-                    /* Not transactional, so this WONT get committed */
+/* Not transactional, so this WONT get committed */
                     irm2.Value = 4;
                     scope2.Complete();
                 }
@@ -432,7 +432,7 @@ namespace MonoTests.System.Transactions
                     scope3.Complete();
                 }
 
-                /* vr's value has changed as the inner scope committed = 6 */
+/* vr's value has changed as the inner scope committed = 6 */
                 irm.Check(1, 1, 0, 0, "irm");
                 Assert.AreEqual(irm.Value, 6, "#19");
                 Assert.AreEqual(irm.Actual, 6, "#20");
@@ -465,16 +465,16 @@ namespace MonoTests.System.Transactions
                 using (TransactionScope scope2 = new TransactionScope())
                 {
                     irm.Value = 4;
-                    /* Not completing this, so the transaction will
-                     * get aborted
-                    scope2.Complete (); */
+/* Not completing this, so the transaction will
+* get aborted
+scope2.Complete (); */
                 }
 
                 using (TransactionScope scope3 = new TransactionScope())
                 {
-                    /* Aborted transaction cannot be used for another
-                     * TransactionScope
-                     */
+/* Aborted transaction cannot be used for another
+* TransactionScope
+*/
                     //Assert.Fail ("Should not reach here.");
                     failed = true;
                 }
@@ -495,9 +495,9 @@ namespace MonoTests.System.Transactions
                 using (TransactionScope scope2 = new TransactionScope())
                 {
                     irm.Value = 4;
-                    /* Not completing this, so the transaction will
-                     * get aborted
-                    scope2.Complete (); */
+/* Not completing this, so the transaction will
+* get aborted
+scope2.Complete (); */
                 }
 
                 using (
@@ -506,9 +506,9 @@ namespace MonoTests.System.Transactions
                     )
                 )
                 {
-                    /* Using RequiresNew here, so outer transaction
-                     * being aborted doesn't matter
-                     */
+/* Using RequiresNew here, so outer transaction
+* being aborted doesn't matter
+*/
                     scope3.Complete();
                 }
             }
@@ -528,9 +528,9 @@ namespace MonoTests.System.Transactions
                 using (TransactionScope scope2 = new TransactionScope())
                 {
                     irm.Value = 4;
-                    /* Not completing this, so the transaction will
-                     * get aborted
-                    scope2.Complete (); */
+/* Not completing this, so the transaction will
+* get aborted
+scope2.Complete (); */
                 }
 
                 scope.Complete();
@@ -538,7 +538,7 @@ namespace MonoTests.System.Transactions
         }
         #endregion
 
-        /* Tests using IntResourceManager */
+/* Tests using IntResourceManager */
 
         [Test]
         public void RMFail1()
@@ -556,9 +556,9 @@ namespace MonoTests.System.Transactions
                     irm2.Value = 20;
                     irm3.Value = 24;
 
-                    /* Make second RM fail to prepare, this should throw
-                     * TransactionAbortedException when the scope ends
-                     */
+/* Make second RM fail to prepare, this should throw
+* TransactionAbortedException when the scope ends
+*/
                     irm2.FailPrepare = true;
                     scope.Complete();
                 }
@@ -593,17 +593,17 @@ namespace MonoTests.System.Transactions
                     irm2.Value = 20;
                     irm3.Value = 24;
 
-                    /* irm2 wont call Prepared or ForceRollback in
-                     * its Prepare (), so TransactionManager will timeout
-                     * waiting for it
-                     */
+/* irm2 wont call Prepared or ForceRollback in
+* its Prepare (), so TransactionManager will timeout
+* waiting for it
+*/
                     irm2.IgnorePrepare = true;
                     scope.Complete();
                 }
             }
             catch (TransactionAbortedException e)
             {
-                /* FIXME: Not working right now.. no timeout exception thrown! */
+/* FIXME: Not working right now.. no timeout exception thrown! */
 
                 Assert.IsNotNull(e.InnerException, "innerexception is null");
                 Assert.AreEqual(typeof(TimeoutException), e.InnerException.GetType(), "#32");
@@ -708,8 +708,8 @@ namespace MonoTests.System.Transactions
             {
                 Assert.AreEqual(ct, Transaction.Current, "#44");
 
-                /* Not calling scope.Complete
-                scope.Complete ();*/
+/* Not calling scope.Complete
+scope.Complete ();*/
             }
 
             Assert.AreEqual(TransactionStatus.Aborted, ct.TransactionInformation.Status, "#45");
@@ -771,9 +771,9 @@ namespace MonoTests.System.Transactions
             CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
-            /* Not setting ambient transaction
-             Transaction.Current = ct;
-             */
+/* Not setting ambient transaction
+Transaction.Current = ct;
+*/
 
             IntResourceManager irm = new IntResourceManager(1);
 
@@ -803,9 +803,9 @@ namespace MonoTests.System.Transactions
             CommittableTransaction ct = new CommittableTransaction();
             Transaction oldTransaction = Transaction.Current;
 
-            /* Not setting ambient transaction
-             Transaction.Current = ct;
-             */
+/* Not setting ambient transaction
+Transaction.Current = ct;
+*/
 
             IntResourceManager irm = new IntResourceManager(1);
 
@@ -815,8 +815,8 @@ namespace MonoTests.System.Transactions
 
                 irm.Value = 2;
 
-                /* Not completing this scope
-                scope.Complete (); */
+/* Not completing this scope
+scope.Complete (); */
             }
 
             Assert.AreEqual(oldTransaction, Transaction.Current, "#60");
@@ -849,9 +849,9 @@ namespace MonoTests.System.Transactions
             irm.Value = 2;
             ct.Commit();
 
-            /* Using a already committed transaction in a new
-             * TransactionScope
-             */
+/* Using a already committed transaction in a new
+* TransactionScope
+*/
             TransactionScope scope = new TransactionScope(ct);
         }
 
@@ -865,7 +865,7 @@ namespace MonoTests.System.Transactions
             Transaction.Current = ct;
 
             TransactionScope scope1 = new TransactionScope();
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             scope1.Complete();
@@ -895,7 +895,7 @@ namespace MonoTests.System.Transactions
             Transaction.Current = ct;
 
             TransactionScope scope1 = new TransactionScope(TransactionScopeOption.RequiresNew);
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             TransactionScope scope2 = new TransactionScope();
@@ -905,7 +905,7 @@ namespace MonoTests.System.Transactions
             }
             catch (InvalidOperationException)
             {
-                /* Error: TransactionScope nested incorrectly */
+/* Error: TransactionScope nested incorrectly */
                 irm.Check(0, 0, 1, 0, "irm");
                 scope2.Dispose();
                 Transaction.Current = null;
@@ -925,7 +925,7 @@ namespace MonoTests.System.Transactions
             Transaction.Current = ct;
 
             TransactionScope scope1 = new TransactionScope();
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             TransactionScope scope2 = new TransactionScope(TransactionScopeOption.RequiresNew);
@@ -935,7 +935,7 @@ namespace MonoTests.System.Transactions
             }
             catch (InvalidOperationException)
             {
-                /* Error: TransactionScope nested incorrectly */
+/* Error: TransactionScope nested incorrectly */
                 scope2.Dispose();
                 Transaction.Current = null;
                 return;
@@ -954,7 +954,7 @@ namespace MonoTests.System.Transactions
             Transaction.Current = ct;
 
             TransactionScope scope1 = new TransactionScope();
-            /* Enlist */
+/* Enlist */
             irm.Value = 2;
 
             TransactionScope scope2 = new TransactionScope(TransactionScopeOption.Suppress);
@@ -964,7 +964,7 @@ namespace MonoTests.System.Transactions
             }
             catch (InvalidOperationException)
             {
-                /* Error: TransactionScope nested incorrectly */
+/* Error: TransactionScope nested incorrectly */
                 scope2.Dispose();
                 Transaction.Current = null;
                 return;
@@ -982,7 +982,7 @@ namespace MonoTests.System.Transactions
             IntResourceManager irm = new IntResourceManager(1);
             irm.Value = 2;
             ct.Commit();
-            /* Cannot accept any new work now, so TransactionException */
+/* Cannot accept any new work now, so TransactionException */
             ct.Rollback();
         }
 
@@ -995,7 +995,7 @@ namespace MonoTests.System.Transactions
             using (TransactionScope scope = new TransactionScope(ct))
             {
                 irm.Value = 2;
-                /* FIXME: Why TransactionAbortedException ?? */
+/* FIXME: Why TransactionAbortedException ?? */
                 try
                 {
                     ct.Commit();
@@ -1019,7 +1019,7 @@ namespace MonoTests.System.Transactions
             {
                 irm.Value = 2;
                 scope.Complete();
-                /* FIXME: Why TransactionAbortedException ?? */
+/* FIXME: Why TransactionAbortedException ?? */
                 try
                 {
                     ct.Commit();

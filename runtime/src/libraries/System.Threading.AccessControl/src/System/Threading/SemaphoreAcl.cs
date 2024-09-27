@@ -12,18 +12,33 @@ namespace System.Threading
 {
     public static class SemaphoreAcl
     {
-        /// <summary>Gets or creates an <see cref="Semaphore" /> instance, allowing a <see cref="SemaphoreSecurity " /> instance to be optionally specified to set it during the event creation.</summary>
-        /// <param name="initialCount">The initial number of requests for the semaphore that can be satisfied concurrently.</param>
-        /// <param name="maximumCount">The maximum number of requests for the semaphore that can be satisfied concurrently.</param>
-        /// <param name="name">Optional argument to create a system semaphore. Set to <see langword="null" /> or <see cref="string.Empty" /> to create a local semaphore.</param>
-        /// <param name="createdNew">When this method returns, this argument is always set to <see langword="true" /> if a local semaphore is created; that is, when <paramref name="name" /> is <see langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid, non-empty value, this argument is set to <see langword="true" /> when the system semaphore is created, or it is set to <see langword="false" /> if an existing system semaphore is found with that name. This parameter is passed uninitialized.</param>
+        /// <summary>Gets or creates an <see cref="Semaphore" /> instance, allowing a <see
+        // cref="SemaphoreSecurity " /> instance to be optionally specified to set it during the event
+        // creation.</summary>
+        /// <param name="initialCount">The initial number of requests for the semaphore that can be
+        // satisfied concurrently.</param>
+        /// <param name="maximumCount">The maximum number of requests for the semaphore that can be
+        // satisfied concurrently.</param>
+        /// <param name="name">Optional argument to create a system semaphore. Set to <see langword="null"
+        // /> or <see cref="string.Empty" /> to create a local semaphore.</param>
+        /// <param name="createdNew">When this method returns, this argument is always set to <see
+        // langword="true" /> if a local semaphore is created; that is, when <paramref name="name" /> is <see
+        // langword="null" /> or <see cref="string.Empty" />. If <paramref name="name" /> has a valid,
+        // non-empty value, this argument is set to <see langword="true" /> when the system semaphore is
+        // created, or it is set to <see langword="false" /> if an existing system semaphore is found with that
+        // name. This parameter is passed uninitialized.</param>
         /// <param name="semaphoreSecurity">The optional semaphore access control security to apply.</param>
-        /// <returns>An object that represents a system semaphore, if named, or a local semaphore, if nameless.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="initialCount" /> is a negative number.
+        /// <returns>An object that represents a system semaphore, if named, or a local semaphore, if
+        // nameless.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="initialCount" /> is a negative
+        // number.
         /// -or-
         /// <paramref name="maximumCount" /> is not a positive number.</exception>
-        /// <exception cref="ArgumentException"><paramref name="initialCount" /> is greater than <paramref name="maximumCount" />.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">A semaphore handle with the system-wide name '<paramref name="name" />' cannot be created. A semaphore handle of a different type might have the same name.</exception>
+        /// <exception cref="ArgumentException"><paramref name="initialCount" /> is greater than <paramref
+        // name="maximumCount" />.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">A semaphore handle with the system-wide name
+        // '<paramref name="name" />' cannot be created. A semaphore handle of a different type might have the
+        // same name.</exception>
         public static unsafe Semaphore Create(
             int initialCount,
             int maximumCount,
@@ -106,16 +121,21 @@ namespace System.Threading
         /// <summary>
         /// Opens a specified named semaphore, if it already exists, applying the desired access rights.
         /// </summary>
-        /// <param name="name">The name of the semaphore to be opened. If it's prefixed by "Global", it refers to a machine-wide semaphore. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide semaphore. Both prefix and name are case-sensitive.</param>
+        /// <param name="name">The name of the semaphore to be opened. If it's prefixed by "Global", it
+        // refers to a machine-wide semaphore. If it's prefixed by "Local", or doesn't have a prefix, it refers
+        // to a session-wide semaphore. Both prefix and name are case-sensitive.</param>
         /// <param name="rights">The desired access rights to apply to the returned semaphore.</param>
         /// <returns>An existing named semaphore.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // />.</exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
-        /// <exception cref="WaitHandleCannotBeOpenedException">The named semaphore does not exist or is invalid.</exception>
+        /// <exception cref="WaitHandleCannotBeOpenedException">The named semaphore does not exist or is
+        // invalid.</exception>
         /// <exception cref="IOException">The path was not found.
         /// -or-
         /// A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named semaphore exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named semaphore exists, but the user does not
+        // have the security access required to use it.</exception>
         public static Semaphore OpenExisting(string name, SemaphoreRights rights)
         {
             switch (OpenExistingWorker(name, rights, out Semaphore? result))
@@ -142,16 +162,24 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Tries to open a specified named semaphore, if it already exists, applying the desired access rights, and returns a value that indicates whether the operation succeeded.
+        /// Tries to open a specified named semaphore, if it already exists, applying the desired access
+        // rights, and returns a value that indicates whether the operation succeeded.
         /// </summary>
-        /// <param name="name">The name of the semaphore to be opened. If it's prefixed by "Global", it refers to a machine-wide semaphore. If it's prefixed by "Local", or doesn't have a prefix, it refers to a session-wide semaphore. Both prefix and name are case-sensitive.</param>
+        /// <param name="name">The name of the semaphore to be opened. If it's prefixed by "Global", it
+        // refers to a machine-wide semaphore. If it's prefixed by "Local", or doesn't have a prefix, it refers
+        // to a session-wide semaphore. Both prefix and name are case-sensitive.</param>
         /// <param name="rights">The desired access rights to apply to the returned semaphore.</param>
-        /// <param name="result">When this method returns <see langword="true" />, contains an object that represents the named semaphore if the call succeeded, or <see langword="null" /> otherwise. This parameter is treated as uninitialized.</param>
-        /// <returns><see langword="true" /> if the named semaphore was opened successfully; otherwise, <see langword="false" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null" /></exception>
+        /// <param name="result">When this method returns <see langword="true" />, contains an object that
+        // represents the named semaphore if the call succeeded, or <see langword="null" /> otherwise. This
+        // parameter is treated as uninitialized.</param>
+        /// <returns><see langword="true" /> if the named semaphore was opened successfully; otherwise, <see
+        // langword="false" />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"
+        // /></exception>
         /// <exception cref="ArgumentException"><paramref name="name"/> is an empty string.</exception>
         /// <exception cref="IOException">A Win32 error occurred.</exception>
-        /// <exception cref="UnauthorizedAccessException">The named semaphore exists, but the user does not have the security access required to use it.</exception>
+        /// <exception cref="UnauthorizedAccessException">The named semaphore exists, but the user does not
+        // have the security access required to use it.</exception>
         public static bool TryOpenExisting(
             string name,
             SemaphoreRights rights,

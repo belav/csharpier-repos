@@ -62,7 +62,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             //Assert.AreEqual ("Enhanced Key Usage", ex.Oid.FriendlyName, "Oid.FriendlyName");
             ex.RawData = new byte[] { 0x30, 0x05, 0x06, 0x03, 0x2A, 0x03, 0x04 };
             // FIXME: Don't expect that FriendlyName is English. This test fails under non-English Windows.
-            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, ex.Format (true), "Format(true)");
+            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, ex.Format (true),
+            // "Format(true)");
             //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)", ex.Format (false), "Format(false)");
         }
 
@@ -89,7 +90,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             Assert.AreEqual("2.5.29.37", ex.Oid.Value, "Oid.Value");
             // FIXME: Don't expect that FriendlyName is English. This test fails under non-English Windows.
             //Assert.AreEqual ("Enhanced Key Usage", ex.Oid.FriendlyName, "Oid.FriendlyName");
-            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, ex.Format (true), "Format(true)");
+            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, ex.Format (true),
+            // "Format(true)");
             //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)", ex.Format (false), "Format(false)");
         }
 
@@ -176,7 +178,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             );
             // this is recognized as an Enhanced Key Usages extension
             // FIXME: Don't expect that FriendlyName is English. This test fails under non-English Windows.
-            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, aed.Format (true), "aed.Format(true)");
+            //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)" + Environment.NewLine, aed.Format (true),
+            // "aed.Format(true)");
             //Assert.AreEqual ("Unknown Key Usage (1.2.3.4)", aed.Format (false), "aed.Format(false)");
             X509Ex ex = new X509Ex();
             // but won't be accepted by the CopyFrom method (no a X509Extension)
@@ -193,8 +196,10 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             );
             // strangely no NewLine is being appended to Format(true)
             // FIXME: Don't expect that FriendlyName is English. This test fails under non-English Windows.
-            //Assert.AreEqual ("SSL Client Authentication, SSL Server Authentication, SMIME, Signature, Unknown cert type, SSL CA, SMIME CA, Signature CA (ff)", ex.Format (true), "aed.Format(true)");
-            //Assert.AreEqual ("SSL Client Authentication, SSL Server Authentication, SMIME, Signature, Unknown cert type, SSL CA, SMIME CA, Signature CA (ff)", ex.Format (false), "aed.Format(false)");
+            //Assert.AreEqual ("SSL Client Authentication, SSL Server Authentication, SMIME, Signature, Unknown
+            // cert type, SSL CA, SMIME CA, Signature CA (ff)", ex.Format (true), "aed.Format(true)");
+            //Assert.AreEqual ("SSL Client Authentication, SSL Server Authentication, SMIME, Signature, Unknown
+            // cert type, SSL CA, SMIME CA, Signature CA (ff)", ex.Format (false), "aed.Format(false)");
         }
     }
 }

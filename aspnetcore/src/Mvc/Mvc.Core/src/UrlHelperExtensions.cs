@@ -98,7 +98,8 @@ public static class UrlHelperExtensions
 
     /// <summary>
     /// Generates a URL with a path for an action method, which contains the specified
-    /// <paramref name="action"/> name, <paramref name="controller"/> name, and route <paramref name="values"/>.
+    /// <paramref name="action"/> name, <paramref name="controller"/> name, and route <paramref
+    // name="values"/>.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
     /// <param name="action">The name of the action method.</param>
@@ -126,7 +127,8 @@ public static class UrlHelperExtensions
 
     /// <summary>
     /// Generates a URL with a path for an action method, which contains the specified
-    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref name="values"/>, and
+    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref
+    // name="values"/>, and
     /// <paramref name="protocol"/> to use. See the remarks section for important security information.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
@@ -137,9 +139,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the generated URI.
-    /// Relying on the value of the current request can allow untrusted input to influence the resulting URI unless
-    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on how to properly
+    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the
+    // generated URI.
+    /// Relying on the value of the current request can allow untrusted input to influence the resulting
+    // URI unless
+    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on
+    // how to properly
     /// validate the <c>Host</c> header in your deployment environment.
     /// </para>
     /// </remarks>
@@ -158,7 +163,8 @@ public static class UrlHelperExtensions
 
     /// <summary>
     /// Generates a URL with a path for an action method, which contains the specified
-    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref name="values"/>,
+    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref
+    // name="values"/>,
     /// <paramref name="protocol"/> to use, and <paramref name="host"/> name.
     /// Generates an absolute URL if the <paramref name="protocol"/> and <paramref name="host"/> are
     /// non-<c>null</c>. See the remarks section for important security information.
@@ -172,9 +178,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -194,8 +203,10 @@ public static class UrlHelperExtensions
 
     /// <summary>
     /// Generates a URL with a path for an action method, which contains the specified
-    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref name="values"/>,
-    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref name="fragment"/>.
+    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref
+    // name="values"/>,
+    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref
+    // name="fragment"/>.
     /// Generates an absolute URL if the <paramref name="protocol"/> and <paramref name="host"/> are
     /// non-<c>null</c>. See the remarks section for important security information.
     /// </summary>
@@ -209,9 +220,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -288,8 +302,10 @@ public static class UrlHelperExtensions
     }
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and route
-    /// <paramref name="values"/>, which contains the specified <paramref name="protocol"/> to use. See the
+    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and
+    // route
+    /// <paramref name="values"/>, which contains the specified <paramref name="protocol"/> to use. See
+    // the
     /// remarks section for important security information.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
@@ -299,9 +315,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the generated URI.
-    /// Relying on the value of the current request can allow untrusted input to influence the resulting URI unless
-    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on how to properly
+    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the
+    // generated URI.
+    /// Relying on the value of the current request can allow untrusted input to influence the resulting
+    // URI unless
+    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on
+    // how to properly
     /// validate the <c>Host</c> header in your deployment environment.
     /// </para>
     /// </remarks>
@@ -318,10 +337,12 @@ public static class UrlHelperExtensions
     }
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and route
+    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and
+    // route
     /// <paramref name="values"/>, which contains the specified <paramref name="protocol"/> to use and
     /// <paramref name="host"/> name. Generates an absolute URL if
-    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are non-<c>null</c>.
+    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are
+    // non-<c>null</c>.
     /// See the remarks section for important security information.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
@@ -332,9 +353,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -352,10 +376,12 @@ public static class UrlHelperExtensions
     }
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and route
+    /// Generates a URL with an absolute path for the specified route <paramref name="routeName"/> and
+    // route
     /// <paramref name="values"/>, which contains the specified <paramref name="protocol"/> to use,
     /// <paramref name="host"/> name and <paramref name="fragment"/>. Generates an absolute URL if
-    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are non-<c>null</c>.
+    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are
+    // non-<c>null</c>.
     /// See the remarks section for important security information.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
@@ -367,9 +393,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -441,7 +470,8 @@ public static class UrlHelperExtensions
     ) => Page(urlHelper, pageName, pageHandler, values, protocol: null);
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the remarks section
+    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the
+    // remarks section
     /// for important security information.
     /// </summary>
     /// <param name="urlHelper">The <see cref="IUrlHelper"/>.</param>
@@ -452,9 +482,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the generated URI.
-    /// Relying on the value of the current request can allow untrusted input to influence the resulting URI unless
-    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on how to properly
+    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the
+    // generated URI.
+    /// Relying on the value of the current request can allow untrusted input to influence the resulting
+    // URI unless
+    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on
+    // how to properly
     /// validate the <c>Host</c> header in your deployment environment.
     /// </para>
     /// </remarks>
@@ -467,7 +500,8 @@ public static class UrlHelperExtensions
     ) => Page(urlHelper, pageName, pageHandler, values, protocol, host: null, fragment: null);
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the remarks section for
+    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the
+    // remarks section for
     /// important security information.
     /// </summary>
     /// <param name="urlHelper">The <see cref="IUrlHelper"/>.</param>
@@ -479,9 +513,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -495,7 +532,8 @@ public static class UrlHelperExtensions
     ) => Page(urlHelper, pageName, pageHandler, values, protocol, host, fragment: null);
 
     /// <summary>
-    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the remarks section for
+    /// Generates a URL with an absolute path for the specified <paramref name="pageName"/>. See the
+    // remarks section for
     /// important security information.
     /// </summary>
     /// <param name="urlHelper">The <see cref="IUrlHelper"/>.</param>
@@ -508,9 +546,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -548,14 +589,18 @@ public static class UrlHelperExtensions
 
     /// <summary>
     /// Generates an absolute URL for an action method, which contains the specified
-    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref name="values"/>,
-    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref name="fragment"/>.
+    /// <paramref name="action"/> name, <paramref name="controller"/> name, route <paramref
+    // name="values"/>,
+    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref
+    // name="fragment"/>.
     /// Generates an absolute URL if the <paramref name="protocol"/> and <paramref name="host"/> are
     /// non-<c>null</c>. See the remarks section for important security information.
     /// </summary>
     /// <param name="helper">The <see cref="IUrlHelper"/>.</param>
-    /// <param name="action">The name of the action method. When <see langword="null" />, defaults to the current executing action.</param>
-    /// <param name="controller">The name of the controller. When <see langword="null" />, defaults to the current executing controller.</param>
+    /// <param name="action">The name of the action method. When <see langword="null" />, defaults to
+    // the current executing action.</param>
+    /// <param name="controller">The name of the controller. When <see langword="null" />, defaults to
+    // the current executing controller.</param>
     /// <param name="values">An object that contains route values.</param>
     /// <param name="protocol">The protocol for the URL, such as "http" or "https".</param>
     /// <param name="host">The host name for the URL.</param>
@@ -563,9 +608,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -599,13 +647,16 @@ public static class UrlHelperExtensions
     /// <summary>
     /// Generates an absolute URL for a page, which contains the specified
     /// <paramref name="pageName"/>, <paramref name="pageHandler"/>, route <paramref name="values"/>,
-    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref name="fragment"/>.
+    /// <paramref name="protocol"/> to use, <paramref name="host"/> name, and <paramref
+    // name="fragment"/>.
     /// Generates an absolute URL if the <paramref name="protocol"/> and <paramref name="host"/> are
     /// non-<c>null</c>. See the remarks section for important security information.
     /// </summary>
     /// <param name="urlHelper">The <see cref="IUrlHelper"/>.</param>
-    /// <param name="pageName">The page name to generate the url for. When <see langword="null"/>, defaults to the current executing page.</param>
-    /// <param name="pageHandler">The handler to generate the url for. When <see langword="null"/>, defaults to the current executing handler.</param>
+    /// <param name="pageName">The page name to generate the url for. When <see langword="null"/>,
+    // defaults to the current executing page.</param>
+    /// <param name="pageHandler">The handler to generate the url for. When <see langword="null"/>,
+    // defaults to the current executing handler.</param>
     /// <param name="values">An object that contains route values.</param>
     /// <param name="protocol">The protocol for the URL, such as "http" or "https".</param>
     /// <param name="host">The host name for the URL.</param>
@@ -613,9 +664,12 @@ public static class UrlHelperExtensions
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <paramref name="host"/> should be a trusted value. Relying on the value of the
+    // current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>

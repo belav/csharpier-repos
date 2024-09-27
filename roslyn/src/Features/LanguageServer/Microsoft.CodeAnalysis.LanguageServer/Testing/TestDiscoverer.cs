@@ -71,7 +71,8 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         var discoveryHandler = new DiscoveryHandler(progress);
         var stopwatch = SharedStopwatch.StartNew();
 
-        // The async APIs for vs test are broken (current impl ends up just hanging), so we must use the sync API instead.
+        // The async APIs for vs test are broken (current impl ends up just hanging), so we must use the
+        // sync API instead.
         var discoveryTask = Task.Run(
             () =>
                 vsTestConsoleWrapper.DiscoverTests(
@@ -98,7 +99,8 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         var testCases = discoveryHandler.GetTestCases();
         var elapsed = stopwatch.Elapsed;
 
-        // Match what we found from vs test to what we found in the document to figure out exactly which tests to run.
+        // Match what we found from vs test to what we found in the document to figure out exactly which
+        // tests to run.
         var matchedTests = await MatchDiscoveredTestsToTestsInRangeAsync(
             testCases,
             potentialTestMethods,
@@ -152,8 +154,10 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
         using var _ = ArrayBuilder<TestCase>.GetInstance(out var matchedTests);
 
         // While using semantics can be expensive, it is reasonable here for a couple reasons
-        //   1.  This only runs when the user explicitly asks to run tests.  Any delay here would be dominated by build, discovery, and test running time.
-        //   2.  We're only looking at semantic information (the FQN) for methods we've already determined have an appropriate test attribute.
+        //   1.  This only runs when the user explicitly asks to run tests.  Any delay here would be
+        // dominated by build, discovery, and test running time.
+        //   2.  We're only looking at semantic information (the FQN) for methods we've already determined
+        // have an appropriate test attribute.
         var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken);
         foreach (var discoveredTest in discoveredTests)
         {

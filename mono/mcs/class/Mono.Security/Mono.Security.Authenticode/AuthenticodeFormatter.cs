@@ -253,8 +253,10 @@ namespace Mono.Security.Authenticode
             else
                 opus = Attribute(spcSpOpusInfo, Opus(description, url.ToString()));
             pkcs7.SignerInfo.AuthenticatedAttributes.Add(opus);
-            // When using the MS Root Agency (test) we can't include this attribute in the signature or it won't validate!
-            // pkcs7.SignerInfo.AuthenticatedAttributes.Add (Attribute (spcStatementType, new ASN1 (0x30, ASN1Convert.FromOid (commercialCodeSigning).GetBytes ())));
+            // When using the MS Root Agency (test) we can't include this attribute in the signature or it won't
+            // validate!
+            // pkcs7.SignerInfo.AuthenticatedAttributes.Add (Attribute (spcStatementType, new ASN1 (0x30,
+            // ASN1Convert.FromOid (commercialCodeSigning).GetBytes ())));
             pkcs7.GetASN1(); // sign
             return pkcs7.SignerInfo.Signature;
         }
@@ -364,23 +366,27 @@ namespace Mono.Security.Authenticode
                 }
 
                 /*
+                
+                
                 https://download.microsoft.com/download/9/c/5/9c5b2167-8017-4bae-9fde-d599bac8184a/Authenticode_PE.docx
-                The Authenticode signature is in a WIN_CERTIFICATE structure, which is declared in Wintrust.h as follows:
+                The Authenticode signature is in a WIN_CERTIFICATE structure, which is declared in Wintrust.h as
+                follows:
                 typedef struct _WIN_CERTIFICATE
                 {
-                    DWORD       dwLength;
-                    WORD        wRevision;
-                    WORD        wCertificateType;
-                    BYTE        bCertificate[ANYSIZE_ARRAY];
+                DWORD       dwLength;
+                WORD        wRevision;
+                WORD        wCertificateType;
+                BYTE        bCertificate[ANYSIZE_ARRAY];
                 } WIN_CERTIFICATE, *LPWIN_CERTIFICATE;
                 
                 The fields in WIN_CERTIFICATE are set to the following values:
                 dwLength is set to the length of bCertificate.
                 wRevision is set to the WIN_CERTIFICATE version number.
-
+                
                 wCertificateType is set to 0x0002 for Authenticode signatures.
                 This value is defined in Wintrust.h as WIN_CERT_TYPE_PKCS_SIGNED_DATA.
-                bCertificate is set to a variable-length binary array that contains the Authenticode PKCS #7 signedData.
+                bCertificate is set to a variable-length binary array that contains the Authenticode PKCS #7
+                signedData.
                 The PKCS #7 integrity is verified as described in ”PKCS #7: Cryptographic Message Syntax Standard.”
                 */
                 // write WIN_CERTIFICATE.dwLength

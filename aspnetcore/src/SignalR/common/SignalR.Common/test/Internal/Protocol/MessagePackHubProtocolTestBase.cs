@@ -16,10 +16,14 @@ namespace Microsoft.AspNetCore.SignalR.Common.Tests.Internal.Protocol;
 using static HubMessageHelpers;
 
 /// <summary>
-/// Common MessagePack-based hub protocol tests that is shared by MessagePackHubProtocol and Blazor's internal messagepack based-hub protocol.
-/// Since the latter only supports simple data types such as ints, strings, bools, and bytes for serialization, only tests that
-/// require no serialization (or deserialization), or tests that serialize simple data types should go here.
-/// Tests that verify deserialization of complex data types should go in MessagePackHubProtocolTests.
+/// Common MessagePack-based hub protocol tests that is shared by MessagePackHubProtocol and
+// Blazor's internal messagepack based-hub protocol.
+/// Since the latter only supports simple data types such as ints, strings, bools, and bytes for
+// serialization, only tests that
+/// require no serialization (or deserialization), or tests that serialize simple data types should
+// go here.
+/// Tests that verify deserialization of complex data types should go in
+// MessagePackHubProtocolTests.
 /// </summary>
 public abstract class MessagePackHubProtocolTestBase
 {
@@ -42,12 +46,15 @@ public abstract class MessagePackHubProtocolTestBase
     }
 
     // Test Data for Parse/WriteMessages:
-    // * Name: A string name that is used when reporting the test (it's the ToString value for ProtocolTestData)
+    // * Name: A string name that is used when reporting the test (it's the ToString value for
+    // ProtocolTestData)
     // * Message: The HubMessage that is either expected (in Parse) or used as input (in Write)
     // * Binary: Base64-encoded binary "baseline" to sanity-check MessagePack-CSharp behavior
     //
-    // When changing the tests/message pack parsing if you get test failures look at the base64 encoding and
-    // use a tool like https://sugendran.github.io/msgpack-visualizer/ to verify that the MsgPack is correct and then just replace the Base64 value.
+    // When changing the tests/message pack parsing if you get test failures look at the base64 encoding
+    // and
+    // use a tool like https://sugendran.github.io/msgpack-visualizer/ to verify that the MsgPack is
+    // correct and then just replace the Base64 value.
 
     public static IEnumerable<object[]> BaseTestDataNames
     {
@@ -529,8 +536,10 @@ public abstract class MessagePackHubProtocolTestBase
                 "Reading 'invocationId' as String failed."
             ),
             // These now trigger StreamBindingInvocationFailureMessages
-            //new InvalidMessageData("StreamItemMissing", new byte[] { 0x93, 2, 0x80, 0xa3, (byte)'x', (byte)'y', (byte)'z' }, "Deserializing object of the `String` type for 'item' failed."),
-            //new InvalidMessageData("StreamItemTypeMismatch", new byte[] { 0x94, 2, 0x80, 0xa3, (byte)'x', (byte)'y', (byte)'z', 42 }, "Deserializing object of the `String` type for 'item' failed."),
+            //new InvalidMessageData("StreamItemMissing", new byte[] { 0x93, 2, 0x80, 0xa3, (byte)'x',
+            // (byte)'y', (byte)'z' }, "Deserializing object of the `String` type for 'item' failed."),
+            //new InvalidMessageData("StreamItemTypeMismatch", new byte[] { 0x94, 2, 0x80, 0xa3, (byte)'x',
+            // (byte)'y', (byte)'z', 42 }, "Deserializing object of the `String` type for 'item' failed."),
 
             // CompletionMessage
             new InvalidMessageData(
@@ -582,8 +591,11 @@ public abstract class MessagePackHubProtocolTestBase
                 "Reading 'error' as String failed."
             ),
             // These now result in CompletionMessages with the error field set
-            //new InvalidMessageData("CompletionResultMissing", new byte[] { 0x94, 3, 0x80, 0xa3, (byte)'x', (byte)'y', (byte)'z', 0x03 }, "Deserializing object of the `String` type for 'argument' failed."),
-            //new InvalidMessageData("CompletionResultTypeMismatch", new byte[] { 0x95, 3, 0x80, 0xa3, (byte)'x', (byte)'y', (byte)'z', 0x03, 42 }, "Deserializing object of the `String` type for 'argument' failed."),
+            //new InvalidMessageData("CompletionResultMissing", new byte[] { 0x94, 3, 0x80, 0xa3, (byte)'x',
+            // (byte)'y', (byte)'z', 0x03 }, "Deserializing object of the `String` type for 'argument' failed."),
+            //new InvalidMessageData("CompletionResultTypeMismatch", new byte[] { 0x95, 3, 0x80, 0xa3,
+            // (byte)'x', (byte)'y', (byte)'z', 0x03, 42 }, "Deserializing object of the `String` type for
+            // 'argument' failed."),
 
             // CancelInvocationMessage
             new InvalidMessageData(
@@ -932,7 +944,8 @@ public abstract class MessagePackHubProtocolTestBase
 
     [Theory]
     [MemberData(nameof(MessageSizeDataNames))]
-    // These tests check that the message size doesn't change without us being aware of it and making a conscious decision to increase the size
+    // These tests check that the message size doesn't change without us being aware of it and making a
+    // conscious decision to increase the size
     public void VerifyMessageSize(string testDataName)
     {
         var testData = MessageSizeData[testDataName];

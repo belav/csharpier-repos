@@ -188,7 +188,8 @@ namespace TaskCoverage
                         mre.Set();
                     }
                 );
-            // Task 2 calls CancellationTokenSource.Cancel. Thus, expect and not fail for System.OperationCanceledException being thrown.
+            // Task 2 calls CancellationTokenSource.Cancel. Thus, expect and not fail for
+            // System.OperationCanceledException being thrown.
             try
             {
                 t2.Wait(cts.Token);

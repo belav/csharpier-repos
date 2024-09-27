@@ -44,10 +44,13 @@ namespace System
         // (We don't care about the value of asterisked bits.)
         //
         // To turn a nibble in the range [ 0 .. 9 ] into hex, we calculate hex := nibble + 48 (ascii '0').
-        // To turn a nibble in the range [ 10 .. 15 ] into hex, we calculate hex := nibble - 10 + 65 (ascii 'A').
+        // To turn a nibble in the range [ 10 .. 15 ] into hex, we calculate hex := nibble - 10 + 65 (ascii
+        // 'A').
         //                                                                => hex := nibble + 55.
-        // The difference in the starting ASCII offset is (55 - 48) = 7, depending on whether the nibble is <= 9 or >= 10.
-        // Since 7 is 0b111, this conveniently matches the YYY or ZZZ value computed during the earlier subtraction.
+        // The difference in the starting ASCII offset is (55 - 48) = 7, depending on whether the nibble is
+        // <= 9 or >= 10.
+        // Since 7 is 0b111, this conveniently matches the YYY or ZZZ value computed during the earlier
+        // subtraction.
 
         // The commented out code below is code that directly implements the logic described above.
 
@@ -59,11 +62,14 @@ namespace System
         // The code below is equivalent to the commented out code above but has been tweaked
         // to allow codegen to make some extra optimizations.
 
-        // The low byte of the packed result contains the hex representation of the incoming byte's low nibble.
-        // The adjacent byte of the packed result contains the hex representation of the incoming byte's high nibble.
+        // The low byte of the packed result contains the hex representation of the incoming byte's low
+        // nibble.
+        // The adjacent byte of the packed result contains the hex representation of the incoming byte's
+        // high nibble.
 
         // Finally, write to the output buffer starting with the *highest* index so that codegen can
-        // elide all but the first bounds check. (This only works if 'startingIndex' is a compile-time constant.)
+        // elide all but the first bounds check. (This only works if 'startingIndex' is a compile-time
+        // constant.)
 
         // The JIT can elide bounds checks if 'startingIndex' is constant and if the caller is
         // writing to a span of known length (or the caller has already checked the bounds of the
@@ -336,7 +342,8 @@ namespace System
                 );
                 Vector128<byte> vec = Vector128.Narrow(vec1, vec2);
 
-                // Based on "Algorithm #3" https://github.com/WojciechMula/toys/blob/master/simd-parse-hex/geoff_algorithm.cpp
+                // Based on "Algorithm #3"
+                // https://github.com/WojciechMula/toys/blob/master/simd-parse-hex/geoff_algorithm.cpp
                 // by Geoff Langdale and Wojciech Mula
                 // Move digits '0'..'9' into range 0xf6..0xff.
                 Vector128<byte> t1 = vec + Vector128.Create((byte)(0xFF - '9'));
@@ -440,7 +447,8 @@ namespace System
                 byteLo = FromChar(chars[i + 1]);
                 byteHi = FromChar(chars[i]);
 
-                // byteHi hasn't been shifted to the high half yet, so the only way the bitwise or produces this pattern
+                // byteHi hasn't been shifted to the high half yet, so the only way the bitwise or produces this
+                // pattern
                 // is if either byteHi or byteLo was not a hex character.
                 if ((byteLo | byteHi) == 0xFF)
                     break;
@@ -523,7 +531,8 @@ namespace System
             return (uint)(c - '0') <= 9 || (uint)(c - 'a') <= ('f' - 'a');
         }
 
-        /// <summary>Map from an ASCII char to its hex value, e.g. arr['b'] == 11. 0xFF means it's not a hex digit.</summary>
+        /// <summary>Map from an ASCII char to its hex value, e.g. arr['b'] == 11. 0xFF means it's not a hex
+        // digit.</summary>
         public static ReadOnlySpan<byte> CharToHexLookup =>
             [
                 0xFF,

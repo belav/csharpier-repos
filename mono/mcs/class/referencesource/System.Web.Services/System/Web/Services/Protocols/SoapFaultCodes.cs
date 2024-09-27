@@ -17,53 +17,62 @@ namespace System.Web.Services.Protocols
     {
         private Soap12FaultCodes() { }
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.ReceiverFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.ReceiverFaultCode"]/*' />
         public static readonly XmlQualifiedName ReceiverFaultCode = new XmlQualifiedName(
             Soap12.Code.Receiver,
             Soap12.Namespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.SenderFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.SenderFaultCode"]/*' />
         public static readonly XmlQualifiedName SenderFaultCode = new XmlQualifiedName(
             Soap12.Code.Sender,
             Soap12.Namespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.VersionMismatchFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.VersionMismatchFaultCode"]/*' />
         public static readonly XmlQualifiedName VersionMismatchFaultCode = new XmlQualifiedName(
             Soap12.Code.VersionMismatch,
             Soap12.Namespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.MustUnderstandFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.MustUnderstandFaultCode"]/*' />
         public static readonly XmlQualifiedName MustUnderstandFaultCode = new XmlQualifiedName(
             Soap12.Code.MustUnderstand,
             Soap12.Namespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.DataEncodingUnknownFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.DataEncodingUnknownFaultCode"]/*' />
         public static readonly XmlQualifiedName DataEncodingUnknownFaultCode = new XmlQualifiedName(
             Soap12.Code.DataEncodingUnknown,
             Soap12.Namespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.RpcProcedureNotPresentFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.RpcProcedureNotPresentFaultCode"]/*' />
         public static readonly XmlQualifiedName RpcProcedureNotPresentFaultCode =
             new XmlQualifiedName(Soap12.Code.RpcProcedureNotPresentSubcode, Soap12.RpcNamespace);
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.RpcBadArgumentsFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.RpcBadArgumentsFaultCode"]/*' />
         public static readonly XmlQualifiedName RpcBadArgumentsFaultCode = new XmlQualifiedName(
             Soap12.Code.RpcBadArgumentsSubcode,
             Soap12.RpcNamespace
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.EncodingMissingIdFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.EncodingMissingIdFaultCode"]/*' />
         public static readonly XmlQualifiedName EncodingMissingIdFaultCode = new XmlQualifiedName(
             Soap12.Code.EncodingMissingIDFaultSubcode,
             Soap12.Encoding
         );
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="Soap12FaultCodes.EncodingUntypedValueFaultCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="Soap12FaultCodes.EncodingUntypedValueFaultCode"]/*' />
         public static readonly XmlQualifiedName EncodingUntypedValueFaultCode =
             new XmlQualifiedName(Soap12.Code.EncodingUntypedValueFaultSubcode, Soap12.Encoding);
 
@@ -82,11 +91,13 @@ namespace System.Web.Services.Protocols
         XmlQualifiedName code;
         SoapFaultSubCode subCode;
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="SoapFaultSubCode.SoapFaultSubCode"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="SoapFaultSubCode.SoapFaultSubCode"]/*' />
         public SoapFaultSubCode(XmlQualifiedName code)
             : this(code, null) { }
 
-        /// <include file='doc\SoapFaultCodes.uex' path='docs/doc[@for="SoapFaultSubCode.SoapFaultSubCode1"]/*' />
+        /// <include file='doc\SoapFaultCodes.uex'
+        // path='docs/doc[@for="SoapFaultSubCode.SoapFaultSubCode1"]/*' />
         public SoapFaultSubCode(XmlQualifiedName code, SoapFaultSubCode subCode)
         {
             this.code = code;

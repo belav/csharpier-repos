@@ -41,8 +41,10 @@ internal sealed class AnyConverter<TMessage> : SettingsConverterBase<TMessage>
             );
         }
 
-        // Ensure the payload descriptor is registered. It's possible the payload type isn't in a proto referenced by the service, and is only in the user-specified TypeRegistry.
-        // There isn't a way to enumerate the contents of the TypeRegistry so we have to ensure the descriptor is present every time.
+        // Ensure the payload descriptor is registered. It's possible the payload type isn't in a proto
+        // referenced by the service, and is only in the user-specified TypeRegistry.
+        // There isn't a way to enumerate the contents of the TypeRegistry so we have to ensure the
+        // descriptor is present every time.
         Context.DescriptorRegistry.RegisterFileDescriptor(descriptor.File);
 
         IMessage data;
@@ -87,8 +89,10 @@ internal sealed class AnyConverter<TMessage> : SettingsConverterBase<TMessage>
             );
         }
 
-        // Ensure the payload descriptor is registered. It's possible the payload type isn't in a proto referenced by the service, and is only in the user-specified TypeRegistry.
-        // There isn't a way to enumerate the contents of the TypeRegistry so we have to ensure the descriptor is present every time.
+        // Ensure the payload descriptor is registered. It's possible the payload type isn't in a proto
+        // referenced by the service, and is only in the user-specified TypeRegistry.
+        // There isn't a way to enumerate the contents of the TypeRegistry so we have to ensure the
+        // descriptor is present every time.
         Context.DescriptorRegistry.RegisterFileDescriptor(descriptor.File);
 
         var valueMessage = descriptor.Parser.ParseFrom(data);

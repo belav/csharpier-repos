@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace Mono.Linker
 {
     /// <summary>
     ///  Parses a signature for a member, in the format used for C# Documentation Comments:
-    ///  https://github.com/dotnet/csharplang/blob/master/spec/documentation-comments.md#id-string-format
+    ///
+    // https://github.com/dotnet/csharplang/blob/master/spec/documentation-comments.md#id-string-format
     ///  Adapted from Roslyn's DocumentationCommentId:
-    ///  https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/DocumentationCommentId.cs
+    ///
+    // https://github.com/dotnet/roslyn/blob/master/src/Compilers/Core/Portable/DocumentationCommentId.cs
     /// </summary>
     ///
     /// Roslyn's API works with ISymbol, which represents a symbol exposed by the compiler.
@@ -51,7 +54,8 @@ namespace Mono.Linker
             return results;
         }
 
-        // Takes a documentation signature (not including the documentation member type prefix) and resolves it to a type
+        // Takes a documentation signature (not including the documentation member type prefix) and resolves
+        // it to a type
         // in the assembly.
         public static TypeDefinition? GetTypeByDocumentationSignature(
             AssemblyDefinition assembly,
@@ -73,7 +77,8 @@ namespace Mono.Linker
             return results.Count == 0 ? null : (TypeDefinition)results[0];
         }
 
-        // Takes a member signature (not including the declaring type) and returns the matching members on the type.
+        // Takes a member signature (not including the declaring type) and returns the matching members on
+        // the type.
         public static IEnumerable<IMemberDefinition> GetMembersByDocumentationSignature(
             TypeDefinition type,
             string signature,
@@ -179,8 +184,10 @@ namespace Mono.Linker
             ParseSignaturePart(id, ref index, module, memberType, results, resolver);
         }
 
-        // Parses and resolves a fully-qualified (namespace and nested types but no assembly) member signature,
-        // without the member type prefix. The results include all members matching the specified member types.
+        // Parses and resolves a fully-qualified (namespace and nested types but no assembly) member
+        // signature,
+        // without the member type prefix. The results include all members matching the specified member
+        // types.
         public static void ParseSignaturePart(
             string id,
             ref int index,
@@ -743,7 +750,8 @@ namespace Mono.Linker
                 if (PeekNextChar(id, index) == '(')
                 {
                     isNameOnly = false;
-                    // if the parameters cannot be identified (some error), then the symbol cannot match, try next method symbol
+                    // if the parameters cannot be identified (some error), then the symbol cannot match, try next
+                    // method symbol
                     if (!ParseParameterList(id, ref index, method, parameters))
                         continue;
                 }

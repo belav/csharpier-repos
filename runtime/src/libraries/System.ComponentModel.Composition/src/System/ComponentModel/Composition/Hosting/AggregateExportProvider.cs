@@ -26,11 +26,13 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AggregateExportProvider"/> will consult the providers in the order they have been specified when
+        ///         The <see cref="AggregateExportProvider"/> will consult the providers in the order they
+        // have been specified when
         ///         executing <see cref="ExportProvider.GetExports(ImportDefinition,AtomicComposition)"/>.
         ///     </para>
         ///     <para>
-        ///         The <see cref="AggregateExportProvider"/> does not take ownership of the specified providers.
+        ///         The <see cref="AggregateExportProvider"/> does not take ownership of the specified
+        // providers.
         ///         That is, it will not try to dispose of any of them when it gets disposed.
         ///     </para>
         /// </remarks>
@@ -68,14 +70,17 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Initializes a new instance of the <see cref="AggregateExportProvider"/> class.
         /// </summary>
-        /// <param name="providers">The prioritized list of export providers. The providers are consulted in order in which they are supplied.</param>
+        /// <param name="providers">The prioritized list of export providers. The providers are consulted in
+        // order in which they are supplied.</param>
         /// <remarks>
         ///     <para>
-        ///         The <see cref="AggregateExportProvider"/> will consult the providers in the order they have been specified when
+        ///         The <see cref="AggregateExportProvider"/> will consult the providers in the order they
+        // have been specified when
         ///         executing <see cref="ExportProvider.GetExports(ImportDefinition,AtomicComposition)"/>.
         ///     </para>
         ///     <para>
-        ///         The <see cref="AggregateExportProvider"/> does not take ownership of the specified providers.
+        ///         The <see cref="AggregateExportProvider"/> does not take ownership of the specified
+        // providers.
         ///         That is, it will not try to dispose of any of them when it gets disposed.
         ///     </para>
         /// </remarks>
@@ -83,7 +88,8 @@ namespace System.ComponentModel.Composition.Hosting
             : this(providers?.AsArray()) { }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -94,7 +100,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -147,7 +154,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <note type="inheritinfo">
         /// The implementers should not treat the cardinality-related mismatches as errors, and are not
         /// expected to throw exceptions in those cases.
-        /// For instance, if the import requests exactly one export and the provider has no matching exports or more than one,
+        /// For instance, if the import requests exactly one export and the provider has no matching exports
+        // or more than one,
         /// it should return an empty <see cref="IEnumerable{T}"/> of <see cref="Export"/>.
         /// </note>
         /// </remarks>
@@ -174,7 +182,8 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 IEnumerable<Export>? allExports = null;
 
-                // if asked for "one or less", the prioriry is at play - the first provider that agrees to return the value
+                // if asked for "one or less", the prioriry is at play - the first provider that agrees to return
+                // the value
                 // which best complies with the request, wins.
                 foreach (ExportProvider provider in _providers)
                 {
@@ -195,8 +204,10 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                     else
                     {
-                        // This is a sneaky thing that we do - if in the end no provider returns the exports with the right cardinality
-                        // we simply return the aggregation of all exports they have returned. This way the end result is still not what we want
+                        // This is a sneaky thing that we do - if in the end no provider returns the exports with the right
+                        // cardinality
+                        // we simply return the aggregation of all exports they have returned. This way the end result is
+                        // still not what we want
                         // but no information is lost.
                         if (anyExports)
                         {

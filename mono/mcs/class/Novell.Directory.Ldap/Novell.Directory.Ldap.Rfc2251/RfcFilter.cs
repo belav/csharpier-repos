@@ -658,17 +658,18 @@ namespace Novell.Directory.Ldap.Rfc2251
             }
 
             sbyte[] toReturn = new sbyte[iOctets];
-            //			Array.Copy((System.Array)SupportClass.ToByteArray(octets), 0, (System.Array)SupportClass.ToByteArray(toReturn), 0, iOctets);
+            //			Array.Copy((System.Array)SupportClass.ToByteArray(octets), 0,
+            // (System.Array)SupportClass.ToByteArray(toReturn), 0, iOctets);
             Array.Copy((System.Array)octets, 0, (System.Array)toReturn, 0, iOctets);
 
             octets = null;
             return toReturn;
         }
 
-        /* **********************************************************************
-        *  The following methods aid in building filters sequentially,
-        *  and is used by DSMLHandler:
-        ***********************************************************************/
+/* **********************************************************************
+*  The following methods aid in building filters sequentially,
+*  and is used by DSMLHandler:
+***********************************************************************/
 
         /// <summary> Called by sequential filter building methods to add to a filter
         /// component.

@@ -158,13 +158,13 @@ namespace System.Xml
             {
                 n.WriteTo(w);
             } //still use the old code to generate the output
-            /*
-            foreach( XmlNode n in this ) {
-                if ( n.NodeType != XmlNodeType.EntityReference )
-                n.WriteTo( w );
-                else
-                    n.WriteContentTo( w );
-            }*/
+/*
+foreach( XmlNode n in this ) {
+if ( n.NodeType != XmlNodeType.EntityReference )
+n.WriteTo( w );
+else
+n.WriteContentTo( w );
+}*/
         }
 
         public override String BaseURI

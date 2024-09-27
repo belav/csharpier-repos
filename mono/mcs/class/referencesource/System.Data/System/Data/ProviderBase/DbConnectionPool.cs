@@ -363,7 +363,8 @@ namespace System.Data.ProviderBase
                     }
                     else
                     {
-                        //Debug.Assert ( false, "TransactionCompletedEvent fired before PutTransactedObject put the connection in the transacted pool." );
+                        //Debug.Assert ( false, "TransactionCompletedEvent fired before PutTransactedObject put the
+                        // connection in the transacted pool." );
                         Bid.PoolerTrace(
                             "<prov.DbConnectionPool.TransactedConnectionPool.TransactionEnded|RES|CPOOL> %d#, Transaction %d#, Connection %d#, Transacted pool not yet created prior to transaction completing. Connection may be leaked.\n",
                             ObjectID,
@@ -524,7 +525,8 @@ namespace System.Data.ProviderBase
         private DbConnectionPoolProviderInfo _connectionPoolProviderInfo;
 
         /// <summary>
-        /// The private member which carries the set of authenticationcontexts for this pool (based on the user's identity).
+        /// The private member which carries the set of authenticationcontexts for this pool (based on the
+        // user's identity).
         /// </summary>
         private readonly ConcurrentDictionary<
             DbConnectionPoolAuthenticationContextKey,
@@ -807,13 +809,19 @@ namespace System.Data.ProviderBase
                         //   ONLY touch obj after lock release if shouldDestroy is false!!!  Otherwise, it may be destroyed
                         //   by transaction-end thread!
 
-                        // Note that there is a minor race condition between this task and the transaction end event, if the latter runs
-                        //  between the lock above and the SetInStasis call below. The reslult is that the stasis counter may be
+                        // Note that there is a minor race condition between this task and the transaction end event, if the
+                        // latter runs
+                        //  between the lock above and the SetInStasis call below. The reslult is that the stasis counter
+                        // may be
                         //  incremented without a corresponding decrement (the transaction end task is normally expected
-                        //  to decrement, but will only do so if the stasis flag is set when it runs). I've minimized the size
-                        //  of the window, but we aren't totally eliminating it due to SetInStasis needing to do bid tracing, which
-                        //  we don't want to do under this lock, if possible. It should be possible to eliminate this race condition with
-                        //  more substantial re-architecture of the pool, but we don't have the time to do that work for the current release.
+                        //  to decrement, but will only do so if the stasis flag is set when it runs). I've minimized the
+                        // size
+                        //  of the window, but we aren't totally eliminating it due to SetInStasis needing to do bid
+                        // tracing, which
+                        //  we don't want to do under this lock, if possible. It should be possible to eliminate this race
+                        // condition with
+                        //  more substantial re-architecture of the pool, but we don't have the time to do that work for the
+                        // current release.
 
                         if (shouldDestroy)
                         {
@@ -1053,7 +1061,8 @@ namespace System.Data.ProviderBase
                 // Failed to create instance
                 _resError = e;
 
-                // VSTFDEVDIV 479561: Make sure the timer starts even if ThreadAbort occurs after setting the ErrorEvent.
+                // VSTFDEVDIV 479561: Make sure the timer starts even if ThreadAbort occurs after setting the
+                // ErrorEvent.
 
                 // timer allocation has to be done out of CER block
                 Timer t = new Timer(
@@ -1071,8 +1080,10 @@ namespace System.Data.ProviderBase
                     _errorOccurred = true;
 
                     // Enable the timer.
-                    // Note that the timer is created to allow periodic invocation. If ThreadAbort occurs in the middle of ErrorCallback,
-                    // the timer will restart. Otherwise, the timer callback (ErrorCallback) destroys the timer after resetting the error to avoid second callback.
+                    // Note that the timer is created to allow periodic invocation. If ThreadAbort occurs in the middle
+                    // of ErrorCallback,
+                    // the timer will restart. Otherwise, the timer callback (ErrorCallback) destroys the timer after
+                    // resetting the error to avoid second callback.
                     _errorTimer = t;
                     timerIsNotDisposed = t.Change(_errorWait, _errorWait);
                 }
@@ -1481,7 +1492,8 @@ namespace System.Data.ProviderBase
             {
                 waitForMultipleObjectsTimeout = (uint)CreationTimeout;
 
-                // VSTFDEVDIV 445531: set the wait timeout to INFINITE (-1) if the SQL connection timeout is 0 (== infinite)
+                // VSTFDEVDIV 445531: set the wait timeout to INFINITE (-1) if the SQL connection timeout is 0 (==
+                // infinite)
                 if (waitForMultipleObjectsTimeout == 0)
                     waitForMultipleObjectsTimeout = unchecked((uint)Timeout.Infinite);
 
@@ -1865,10 +1877,12 @@ namespace System.Data.ProviderBase
         /// <summary>
         /// Creates a new connection to replace an existing connection
         /// </summary>
-        /// <param name="owningObject">Outer connection that currently owns <paramref name="oldConnection"/></param>
+        /// <param name="owningObject">Outer connection that currently owns <paramref
+        // name="oldConnection"/></param>
         /// <param name="userOptions">Options used to create the new connection</param>
         /// <param name="oldConnection">Inner connection that will be replaced</param>
-        /// <returns>A new inner connection that is attached to the <paramref name="owningObject"/></returns>
+        /// <returns>A new inner connection that is attached to the <paramref
+        // name="owningObject"/></returns>
         internal DbConnectionInternal ReplaceConnection(
             DbConnection owningObject,
             DbConnectionOptions userOptions,
@@ -2071,7 +2085,8 @@ namespace System.Data.ProviderBase
                                     {
                                         while (NeedToReplenish)
                                         {
-                                            // Don't specify any user options because there is no outer connection associated with the new connection
+                                            // Don't specify any user options because there is no outer connection associated with the new
+                                            // connection
                                             newObj = CreateObject(
                                                 owningObject: null,
                                                 userOptions: null,
@@ -2351,9 +2366,12 @@ namespace System.Data.ProviderBase
             }
         }
 
-        // TransactionEnded merely provides the plumbing for DbConnectionInternal to access the transacted pool
-        //   that is implemented inside DbConnectionPool. This method's counterpart (PutTransactedObject) should
-        //   only be called from DbConnectionPool.DeactivateObject and thus the plumbing to provide access to
+        // TransactionEnded merely provides the plumbing for DbConnectionInternal to access the transacted
+        // pool
+        //   that is implemented inside DbConnectionPool. This method's counterpart (PutTransactedObject)
+        // should
+        //   only be called from DbConnectionPool.DeactivateObject and thus the plumbing to provide access
+        // to
         //   other objects is unnecessary (hence the asymmetry of Ended but no Begin)
         internal void TransactionEnded(
             SysTx.Transaction transaction,

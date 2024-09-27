@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 /// <summary>
-/// Static class that adds extension methods to <see cref="IAntiforgery"/>. This class cannot be inherited.
+/// Static class that adds extension methods to <see cref="IAntiforgery"/>. This class cannot be
+// inherited.
 /// </summary>
 public static class AntiforgeryExtensions
 {
@@ -19,9 +20,11 @@ public static class AntiforgeryExtensions
     /// Generates an &lt;input type="hidden"&gt; element for an antiforgery token.
     /// </summary>
     /// <param name="antiforgery">The <see cref="IAntiforgery"/> instance.</param>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <returns>
-    /// A <see cref="IHtmlContent"/> containing an &lt;input type="hidden"&gt; element. This element should be put
+    /// A <see cref="IHtmlContent"/> containing an &lt;input type="hidden"&gt; element. This element
+    // should be put
     /// inside a &lt;form&gt;.
     /// </returns>
     /// <remarks>
@@ -48,7 +51,8 @@ public static class AntiforgeryExtensions
             _requestToken = tokenSet.RequestToken!;
         }
 
-        // Though _requestToken normally contains only US-ASCII letters, numbers, '-', and '_', must assume the
+        // Though _requestToken normally contains only US-ASCII letters, numbers, '-', and '_', must assume
+        // the
         // IAntiforgeryTokenSerializer implementation has been overridden. Similarly, users may choose a
         // _fieldName containing almost any character.
         public void WriteTo(TextWriter writer, HtmlEncoder encoder)

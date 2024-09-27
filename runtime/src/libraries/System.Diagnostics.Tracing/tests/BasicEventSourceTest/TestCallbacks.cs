@@ -19,7 +19,8 @@ namespace BasicEventSourceTests
     public class TestsEventSourceCallbacks
     {
         /// <summary>
-        /// Validates that the EventProvider AppDomain.ProcessExit handler does not keep the EventProvider instance
+        /// Validates that the EventProvider AppDomain.ProcessExit handler does not keep the EventProvider
+        // instance
         /// alive.
         /// </summary>
         [Fact]

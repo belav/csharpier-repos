@@ -115,7 +115,8 @@ namespace System.Web.UI
                 _contentTemplate = value;
                 if (_contentTemplate != null)
                 {
-                    // DevDiv 79989: Instantiate the template immediately so that the controls are available as soon as possible
+                    // DevDiv 79989: Instantiate the template immediately so that the controls are available as soon as
+                    // possible
                     CreateContents();
                 }
             }

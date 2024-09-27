@@ -20,7 +20,8 @@ namespace Microsoft.DiaSymReader
         Default = 0,
 
         /// <summary>
-        /// Use environment variable MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH to locate Microsoft.DiaSymReader.Native.{platform}.dll.
+        /// Use environment variable MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH to locate
+        // Microsoft.DiaSymReader.Native.{platform}.dll.
         /// </summary>
         UseAlternativeLoadPath = 1 << 1,
 

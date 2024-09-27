@@ -24,7 +24,8 @@ namespace System.Web.UI.WebControls
         private static MethodInfo s_enableDynamicDataMethod;
 
         /// <devdoc>
-        /// Walks up the stack of NamingContainers starting at 'control' to find a control with the ID 'controlID'.
+        /// Walks up the stack of NamingContainers starting at 'control' to find a control with the ID
+        // 'controlID'.
         /// Important : Note that the search is never done on the 'control' itself by this method.
         /// </devdoc>
         public static Control FindControl(Control control, string controlID)
@@ -91,7 +92,8 @@ namespace System.Web.UI.WebControls
             return true;
         }
 
-        //The enableEnums parameter is introduced for backward comapatibility (false for compatible with older versions).
+        //The enableEnums parameter is introduced for backward comapatibility (false for compatible with
+        // older versions).
         internal static bool IsBindableType(Type type, bool enableEnums)
         {
             if (type == null)
@@ -131,7 +133,8 @@ namespace System.Web.UI.WebControls
                 }
                 else
                 {
-                    //We consider enums as Bindable types by default but provide an opt-out mechanism using BindableTypeAttribute. (Ex : EntityState)
+                    //We consider enums as Bindable types by default but provide an opt-out mechanism using
+                    // BindableTypeAttribute. (Ex : EntityState)
                     //So the order of above if-else block is important.
                     return (enableEnums && type.IsEnum);
                 }

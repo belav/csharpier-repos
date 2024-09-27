@@ -14,12 +14,17 @@
 // Char index   Use
 //      0       Flags - currently this only holds the "negate" flag
 //      1       length of the string representing the "set" portion, eg [a-z0-9] only has a "set"
-//      2       length of the string representing the "category" portion, eg [\p{Lu}] only has a "category"
-//      3...m   The set.  These are a series of ranges which define the characters included in the set.
-//              To determine if a given character is in the set, we binary search over this set of ranges
-//              and see where the character should go.  Based on whether the ending index is odd or even,
+//      2       length of the string representing the "category" portion, eg [\p{Lu}] only has a
+// "category"
+//      3...m   The set.  These are a series of ranges which define the characters included in the
+// set.
+//              To determine if a given character is in the set, we binary search over this set of
+// ranges
+//              and see where the character should go.  Based on whether the ending index is odd or
+// even,
 //              we know if the character is in the set.
-//      m+1...n The categories.  This is a list of UnicodeCategory enum values which describe categories
+//      m+1...n The categories.  This is a list of UnicodeCategory enum values which describe
+// categories
 //              included in this class.
 
 namespace System.Text.RegularExpressions
@@ -90,11 +95,13 @@ namespace System.Text.RegularExpressions
         static Dictionary<String, String> _definedCategories;
 
         /*
-         *   The property table contains all the block definitions defined in the
-         *   XML schema spec (http://www.w3.org/TR/2001/PR-xmlschema-2-20010316/#charcter-classes), Unicode 4.0 spec (www.unicode.org),
-         *   and Perl 5.6 (see Programming Perl, 3rd edition page 167).   Three blocks defined by Perl (and here) may
-         *   not be in the Unicode: IsHighPrivateUseSurrogates, IsHighSurrogates, and IsLowSurrogates.
-         *
+        *   The property table contains all the block definitions defined in the
+        *   XML schema spec (http://www.w3.org/TR/2001/PR-xmlschema-2-20010316/#charcter-classes), Unicode
+        4.0 spec (www.unicode.org),
+        *   and Perl 5.6 (see Programming Perl, 3rd edition page 167).   Three blocks defined by Perl (and
+        here) may
+        *   not be in the Unicode: IsHighPrivateUseSurrogates, IsHighSurrogates, and IsLowSurrogates.
+        *
         **/
         // Has to be sorted by the first column
         private static readonly String[,] _propTable =
@@ -235,31 +242,31 @@ namespace System.Text.RegularExpressions
         };
 
         /**************************************************************************
-            Let U be the set of Unicode character values and let L be the lowercase
-            function, mapping from U to U. To perform case insensitive matching of
-            character sets, we need to be able to map an interval I in U, say
-    
-                I = [chMin, chMax] = { ch : chMin <= ch <= chMax }
-    
-            to a set A such that A contains L(I) and A is contained in the union of
-            I and L(I).
-    
-            The table below partitions U into intervals on which L is non-decreasing.
-            Thus, for any interval J = [a, b] contained in one of these intervals,
-            L(J) is contained in [L(a), L(b)].
-    
-            It is also true that for any such J, [L(a), L(b)] is contained in the
-            union of J and L(J). This does not follow from L being non-decreasing on
-            these intervals. It follows from the nature of the L on each interval.
-            On each interval, L has one of the following forms:
-    
-                (1) L(ch) = constant            (LowercaseSet)
-                (2) L(ch) = ch + offset         (LowercaseAdd)
-                (3) L(ch) = ch | 1              (LowercaseBor)
-                (4) L(ch) = ch + (ch & 1)       (LowercaseBad)
-    
-            It is easy to verify that for any of these forms [L(a), L(b)] is
-            contained in the union of [a, b] and L([a, b]).
+        Let U be the set of Unicode character values and let L be the lowercase
+        function, mapping from U to U. To perform case insensitive matching of
+        character sets, we need to be able to map an interval I in U, say
+        
+        I = [chMin, chMax] = { ch : chMin <= ch <= chMax }
+        
+        to a set A such that A contains L(I) and A is contained in the union of
+        I and L(I).
+        
+        The table below partitions U into intervals on which L is non-decreasing.
+        Thus, for any interval J = [a, b] contained in one of these intervals,
+        L(J) is contained in [L(a), L(b)].
+        
+        It is also true that for any such J, [L(a), L(b)] is contained in the
+        union of J and L(J). This does not follow from L being non-decreasing on
+        these intervals. It follows from the nature of the L on each interval.
+        On each interval, L has one of the following forms:
+        
+        (1) L(ch) = constant            (LowercaseSet)
+        (2) L(ch) = ch + offset         (LowercaseAdd)
+        (3) L(ch) = ch | 1              (LowercaseBor)
+        (4) L(ch) = ch + (ch & 1)       (LowercaseBad)
+        
+        It is easy to verify that for any of these forms [L(a), L(b)] is
+        contained in the union of [a, b] and L([a, b]).
         ***************************************************************************/
 
         private const int LowercaseSet = 0; // Set to arg.
@@ -418,7 +425,8 @@ namespace System.Text.RegularExpressions
             word.Append(new String(groups, 1, 5));
 
             // InternalRegexIgnoreCase = {LowercaseLetter} OR {TitlecaseLetter} OR {UppercaseLetter}
-            // !!!This category should only ever be used in conjunction with RegexOptions.IgnoreCase code paths!!!
+            // !!!This category should only ever be used in conjunction with RegexOptions.IgnoreCase code
+            // paths!!!
             tempCategories[InternalRegexIgnoreCase] = String.Format(
                 CultureInfo.InvariantCulture,
                 "{0}{1}{2}{3}{4}",
@@ -530,10 +538,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * RegexCharClass()
-         *
-         * Creates an empty character class.
-         */
+        * RegexCharClass()
+        *
+        * Creates an empty character class.
+        */
         internal RegexCharClass()
         {
             _rangelist = new List<SingleRange>(6);
@@ -571,10 +579,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * AddCharClass()
-         *
-         * Adds a regex char class
-         */
+        * AddCharClass()
+        *
+        * Adds a regex char class
+        */
         internal void AddCharClass(RegexCharClass cc)
         {
             int i;
@@ -606,10 +614,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * AddSet()
-         *
-         * Adds a set (specified by its string represenation) to the class.
-         */
+        * AddSet()
+        *
+        * Adds a set (specified by its string represenation) to the class.
+        */
         private void AddSet(String set)
         {
             int i;
@@ -640,10 +648,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * AddRange()
-         *
-         * Adds a single range of characters to the class.
-         */
+        * AddRange()
+        *
+        * Adds a single range of characters to the class.
+        */
         internal void AddRange(char first, char last)
         {
             _rangelist.Add(new SingleRange(first, last));
@@ -696,11 +704,11 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * AddLowerCase()
-         *
-         * Adds to the class any lowercase versions of characters already
-         * in the class. Used for case-insensitivity.
-         */
+        * AddLowerCase()
+        *
+        * Adds to the class any lowercase versions of characters already
+        * in the class. Used for case-insensitivity.
+        */
         internal void AddLowercase(CultureInfo culture)
         {
             int i;
@@ -720,11 +728,11 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * AddLowercaseRange()
-         *
-         * For a single range that's in the set, adds any additional ranges
-         * necessary to ensure that lowercase equivalents are also included.
-         */
+        * AddLowercaseRange()
+        *
+        * For a single range that's in the set, adds any additional ranges
+        * necessary to ensure that lowercase equivalents are also included.
+        */
         private void AddLowercaseRange(char chMin, char chMax, CultureInfo culture)
         {
             int i,
@@ -852,10 +860,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * SingletonChar()
-         *
-         * Returns the char
-         */
+        * SingletonChar()
+        *
+        * Returns the char
+        */
         internal static char SingletonChar(String set)
         {
             Debug.Assert(
@@ -884,10 +892,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * IsSingleton()
-         *
-         * True if the set contains a single character only
-         */
+        * IsSingleton()
+        *
+        * True if the set contains a single character only
+        */
         internal static bool IsSingleton(String set)
         {
             if (
@@ -974,11 +982,11 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * CharInClass()
-         *
-         * Determines a character's membership in a character class (via the
-         * string representation of the class).
-         */
+        * CharInClass()
+        *
+        * Determines a character's membership in a character class (via the
+        * string representation of the class).
+        */
         private static bool CharInClassInternal(
             char ch,
             string set,
@@ -1201,20 +1209,20 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * RangeCount()
-         *
-         * The number of single ranges that have been accumulated so far.
-         */
+        * RangeCount()
+        *
+        * The number of single ranges that have been accumulated so far.
+        */
         private int RangeCount()
         {
             return _rangelist.Count;
         }
 
         /*
-         * ToString()
-         *
-         * Constructs the string representation of the class.
-         */
+        * ToString()
+        *
+        * Constructs the string representation of the class.
+        */
         internal String ToStringClass()
         {
             if (!_canonical)
@@ -1256,20 +1264,20 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * GetRangeAt(int i)
-         *
-         * The ith range.
-         */
+        * GetRangeAt(int i)
+        *
+        * The ith range.
+        */
         private SingleRange GetRangeAt(int i)
         {
             return _rangelist[i];
         }
 
         /*
-         * Canonicalize()
-         *
-         * Logic to reduce a character class to a unique, sorted form.
-         */
+        * Canonicalize()
+        *
+        * Logic to reduce a character class to a unique, sorted form.
+        */
         private void Canonicalize()
         {
             SingleRange CurrentRange;
@@ -1360,11 +1368,11 @@ namespace System.Text.RegularExpressions
 
 #if DBG
 
-        /*
-         * SetDescription()
-         *
-         * Produces a human-readable description for a set string.
-         */
+/*
+* SetDescription()
+*
+* Produces a human-readable description for a set string.
+*/
         internal static String SetDescription(String set)
         {
             int mySetLength = set[SETLENGTH];
@@ -1509,11 +1517,11 @@ namespace System.Text.RegularExpressions
             "Cn",
         };
 
-        /*
-        * CharDescription()
-        *
-        * Produces a human-readable description for a single character.
-        */
+/*
+* CharDescription()
+*
+* Produces a human-readable description for a single character.
+*/
         internal static String CharDescription(char ch)
         {
             StringBuilder sb = new StringBuilder();
@@ -1583,10 +1591,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * SingleRangeComparer
-         *
-         * For sorting ranges; compare based on the first char in the range.
-         */
+        * SingleRangeComparer
+        *
+        * For sorting ranges; compare based on the first char in the range.
+        */
         private sealed class SingleRangeComparer : IComparer<SingleRange>
         {
             public int Compare(SingleRange x, SingleRange y)
@@ -1596,10 +1604,10 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         * SingleRange
-         *
-         * A first/last pair representing a single range of characters.
-         */
+        * SingleRange
+        *
+        * A first/last pair representing a single range of characters.
+        */
         private sealed class SingleRange
         {
             internal SingleRange(char first, char last)

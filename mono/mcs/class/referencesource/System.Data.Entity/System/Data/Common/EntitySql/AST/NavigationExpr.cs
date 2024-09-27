@@ -15,8 +15,10 @@ namespace System.Data.Common.EntitySql.AST
     using System.Globalization;
 
     /// <summary>
-    /// Represents a relationship navigation operator NAVIGATE(sourceRefExpr, Relationship-Type-Name [,ToEndName [,FromEndName]]).
-    /// Also used in WITH RELATIONSHIP clause as RELATIONSHIP(targetRefExpr, Relationship-Type-Name [,FromEndName [,ToEndName]]).
+    /// Represents a relationship navigation operator NAVIGATE(sourceRefExpr, Relationship-Type-Name
+    // [,ToEndName [,FromEndName]]).
+    /// Also used in WITH RELATIONSHIP clause as RELATIONSHIP(targetRefExpr, Relationship-Type-Name
+    // [,FromEndName [,ToEndName]]).
     /// </summary>
     internal sealed class RelshipNavigationExpr : Node
     {

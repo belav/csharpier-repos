@@ -127,8 +127,10 @@ namespace System.ComponentModel.Composition
             if (type.IsGenericType)
             {
                 //
-                // Reflection format stores all the generic arguments (including the ones for parent types) on the leaf type.
-                // These arguments are placed in a queue and are written out based on generic arity (`X) of each type
+                // Reflection format stores all the generic arguments (including the ones for parent types) on the
+                // leaf type.
+                // These arguments are placed in a queue and are written out based on generic arity (`X) of each
+                // type
                 //
                 Queue<Type> genericTypeArguments = new Queue<Type>(type.GetGenericArguments());
                 WriteGenericType(

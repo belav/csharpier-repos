@@ -9,7 +9,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 
 /// <summary>
-/// An implementation of <see cref="IClientModelValidatorProvider"/> which provides client validators
+/// An implementation of <see cref="IClientModelValidatorProvider"/> which provides client
+// validators
 /// for attributes which derive from <see cref="ValidationAttribute"/>. It also provides
 /// a validator for types which implement <see cref="IClientModelValidator"/>.
 /// The logic to support <see cref="IClientModelValidator"/>
@@ -24,7 +25,8 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
     /// <summary>
     /// Create a new instance of <see cref="DataAnnotationsClientModelValidatorProvider"/>.
     /// </summary>
-    /// <param name="validationAttributeAdapterProvider">The <see cref="IValidationAttributeAdapterProvider"/>
+    /// <param name="validationAttributeAdapterProvider">The <see
+    // cref="IValidationAttributeAdapterProvider"/>
     /// that supplies <see cref="IAttributeAdapter"/>s.</param>
     /// <param name="options">The <see cref="IOptions{MvcDataAnnotationsLocalizationOptions}"/>.</param>
     /// <param name="stringLocalizerFactory">The <see cref="IStringLocalizerFactory"/>.</param>

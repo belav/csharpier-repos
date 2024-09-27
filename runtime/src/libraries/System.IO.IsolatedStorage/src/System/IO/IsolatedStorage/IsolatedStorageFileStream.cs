@@ -102,11 +102,14 @@ namespace System.IO.IsolatedStorage
                 InitializeFileStream(path, mode, access, share, bufferSize, isf)
             ) { }
 
-        // On .NET Framework FileStream has an internal no arg constructor that we utilize to provide the facade. We don't have access
-        // to internals in .NET Core so we'll do the next best thing and contort ourselves into the SafeFileHandle constructor.
+        // On .NET Framework FileStream has an internal no arg constructor that we utilize to provide the
+        // facade. We don't have access
+        // to internals in .NET Core so we'll do the next best thing and contort ourselves into the
+        // SafeFileHandle constructor.
         // (A path constructor would try and create the requested file and give us two open handles.)
         //
-        // We only expose our own nested FileStream so the base class having a handle doesn't matter. Passing a new SafeFileHandle
+        // We only expose our own nested FileStream so the base class having a handle doesn't matter.
+        // Passing a new SafeFileHandle
         // with ownsHandle: false avoids the parent class closing without our knowledge.
         private IsolatedStorageFileStream(
             string path,
@@ -136,7 +139,8 @@ namespace System.IO.IsolatedStorage
             public string FullPath;
         }
 
-        // If IsolatedStorageFile is null, then we default to using a file that is scoped by user, appdomain, and assembly.
+        // If IsolatedStorageFile is null, then we default to using a file that is scoped by user,
+        // appdomain, and assembly.
         private static InitializationData InitializeFileStream(
             string path,
             FileMode mode,
@@ -204,10 +208,13 @@ namespace System.IO.IsolatedStorage
                 }
                 catch { }
 
-                // Exception message might leak the IsolatedStorage path. The .NET Framework prevented this by calling an
-                // internal API which made sure that the exception message was scrubbed. However since the innerException
+                // Exception message might leak the IsolatedStorage path. The .NET Framework prevented this by
+                // calling an
+                // internal API which made sure that the exception message was scrubbed. However since the
+                // innerException
                 // is never returned to the user(GetIsolatedStorageException() does not populate the innerexception
-                // in retail bits we leak the path only under the debugger via IsolatedStorageException._underlyingException which
+                // in retail bits we leak the path only under the debugger via
+                // IsolatedStorageException._underlyingException which
                 // they can any way look at via IsolatedStorageFile instance as well.
                 throw IsolatedStorageFile.GetIsolatedStorageException(
                     SR.IsolatedStorage_Operation_ISFS,
@@ -326,8 +333,10 @@ namespace System.IO.IsolatedStorage
 
         public override long Seek(long offset, SeekOrigin origin)
         {
-            // Desktop implementation of IsolatedStorage ensures that in case the size is increased the new memory is zero'ed out.
-            // However in this implementation we simply call the FileStream.Seek APIs which have an undefined behavior.
+            // Desktop implementation of IsolatedStorage ensures that in case the size is increased the new
+            // memory is zero'ed out.
+            // However in this implementation we simply call the FileStream.Seek APIs which have an undefined
+            // behavior.
             return _fs.Seek(offset, origin);
         }
 

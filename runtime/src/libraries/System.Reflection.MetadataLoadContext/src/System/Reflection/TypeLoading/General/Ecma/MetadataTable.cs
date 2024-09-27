@@ -13,7 +13,8 @@ namespace System.Reflection.TypeLoading.Ecma
     ///
     /// The key type is hard-coded to EntityHandle.
     /// The "T" type is the value type (e.g. RoTypeDefinition objects)
-    /// The "C" type is an optional context value passed through the factory methods (so we don't to allocate a closure each time.)
+    /// The "C" type is an optional context value passed through the factory methods (so we don't to
+    // allocate a closure each time.)
     /// </summary>
     internal sealed class MetadataTable<T, C>
         where T : class

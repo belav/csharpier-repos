@@ -22,7 +22,8 @@ namespace Microsoft.Extensions.Logging.Console
         /// Parses a subset of display attributes
         /// Set Display Attributes
         /// Set Attribute Mode [{attr1};...;{attrn}m
-        /// Sets multiple display attribute settings. The following lists standard attributes that are getting parsed:
+        /// Sets multiple display attribute settings. The following lists standard attributes that are
+        // getting parsed:
         /// 1 Bright
         /// Foreground Colours
         /// 30 Black

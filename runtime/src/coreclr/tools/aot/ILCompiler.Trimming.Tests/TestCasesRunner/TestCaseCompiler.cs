@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -80,8 +81,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             );
             var testAssembly = CompileAssembly(options);
 
-            // The compile after step is used by tests to mess around with the input to the illink tool.  Generally speaking, it doesn't seem like we would ever want to mess with the
-            // expectations assemblies because this would undermine our ability to inspect them for expected results during ResultChecking.  The UnityLinker UnresolvedHandling tests depend on this
+            // The compile after step is used by tests to mess around with the input to the illink tool.
+            // Generally speaking, it doesn't seem like we would ever want to mess with the
+            // expectations assemblies because this would undermine our ability to inspect them for expected
+            // results during ResultChecking.  The UnityLinker UnresolvedHandling tests depend on this
             // behavior of skipping the after test compile
             if (outputDirectory != _sandbox.ExpectationsDirectory)
             {
@@ -258,7 +261,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
             string referenceFileName
         )
         {
-            // Not a good idea to use a full path in a test, but maybe someone is trying to quickly test something locally
+            // Not a good idea to use a full path in a test, but maybe someone is trying to quickly test
+            // something locally
             if (Path.IsPathRooted(referenceFileName))
                 return referenceFileName.ToNPath();
 

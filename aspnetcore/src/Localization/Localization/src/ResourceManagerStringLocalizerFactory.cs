@@ -13,12 +13,15 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.Extensions.Localization;
 
 /// <summary>
-/// An <see cref="IStringLocalizerFactory"/> that creates instances of <see cref="ResourceManagerStringLocalizer"/>.
+/// An <see cref="IStringLocalizerFactory"/> that creates instances of <see
+// cref="ResourceManagerStringLocalizer"/>.
 /// </summary>
 /// <remarks>
-/// <see cref="ResourceManagerStringLocalizerFactory"/> offers multiple ways to set the relative path of
+/// <see cref="ResourceManagerStringLocalizerFactory"/> offers multiple ways to set the relative
+// path of
 /// resources to be used. They are, in order of precedence:
-/// <see cref="ResourceLocationAttribute"/> -> <see cref="LocalizationOptions.ResourcesPath"/> -> the project root.
+/// <see cref="ResourceLocationAttribute"/> -> <see cref="LocalizationOptions.ResourcesPath"/> ->
+// the project root.
 /// </remarks>
 public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
 {
@@ -78,7 +81,8 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// <returns>The prefix for resource lookup.</returns>
     /// <remarks>
     /// For the type "Sample.Controllers.Home" if there's a resourceRelativePath return
-    /// "Sample.Resourcepath.Controllers.Home" if there isn't one then it would return "Sample.Controllers.Home".
+    /// "Sample.Resourcepath.Controllers.Home" if there isn't one then it would return
+    // "Sample.Controllers.Home".
     /// </remarks>
     protected virtual string GetResourcePrefix(
         TypeInfo typeInfo,
@@ -183,9 +187,11 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     }
 
     /// <summary>Creates a <see cref="ResourceManagerStringLocalizer"/> for the given input.</summary>
-    /// <param name="assembly">The assembly to create a <see cref="ResourceManagerStringLocalizer"/> for.</param>
+    /// <param name="assembly">The assembly to create a <see cref="ResourceManagerStringLocalizer"/>
+    // for.</param>
     /// <param name="baseName">The base name of the resource to search for.</param>
-    /// <returns>A <see cref="ResourceManagerStringLocalizer"/> for the given <paramref name="assembly"/> and <paramref name="baseName"/>.</returns>
+    /// <returns>A <see cref="ResourceManagerStringLocalizer"/> for the given <paramref
+    // name="assembly"/> and <paramref name="baseName"/>.</returns>
     /// <remarks>This method is virtual for testing purposes only.</remarks>
     protected virtual ResourceManagerStringLocalizer CreateResourceManagerStringLocalizer(
         Assembly assembly,
@@ -206,7 +212,8 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
     /// </summary>
     /// <param name="location">The general location of the resource.</param>
     /// <param name="baseName">The base name of the resource.</param>
-    /// <param name="resourceLocation">The location of the resource within <paramref name="location"/>.</param>
+    /// <param name="resourceLocation">The location of the resource within <paramref
+    // name="location"/>.</param>
     /// <returns>The resource prefix used to look up the resource.</returns>
     protected virtual string GetResourcePrefix(
         string location,
@@ -218,18 +225,23 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         return location + "." + resourceLocation + TrimPrefix(baseName, location + ".");
     }
 
-    /// <summary>Gets a <see cref="ResourceLocationAttribute"/> from the provided <see cref="Assembly"/>.</summary>
-    /// <param name="assembly">The assembly to get a <see cref="ResourceLocationAttribute"/> from.</param>
-    /// <returns>The <see cref="ResourceLocationAttribute"/> associated with the given <see cref="Assembly"/>.</returns>
+    /// <summary>Gets a <see cref="ResourceLocationAttribute"/> from the provided <see
+    // cref="Assembly"/>.</summary>
+    /// <param name="assembly">The assembly to get a <see cref="ResourceLocationAttribute"/>
+    // from.</param>
+    /// <returns>The <see cref="ResourceLocationAttribute"/> associated with the given <see
+    // cref="Assembly"/>.</returns>
     /// <remarks>This method is protected and virtual for testing purposes only.</remarks>
     protected virtual ResourceLocationAttribute? GetResourceLocationAttribute(Assembly assembly)
     {
         return assembly.GetCustomAttribute<ResourceLocationAttribute>();
     }
 
-    /// <summary>Gets a <see cref="RootNamespaceAttribute"/> from the provided <see cref="Assembly"/>.</summary>
+    /// <summary>Gets a <see cref="RootNamespaceAttribute"/> from the provided <see
+    // cref="Assembly"/>.</summary>
     /// <param name="assembly">The assembly to get a <see cref="RootNamespaceAttribute"/> from.</param>
-    /// <returns>The <see cref="RootNamespaceAttribute"/> associated with the given <see cref="Assembly"/>.</returns>
+    /// <returns>The <see cref="RootNamespaceAttribute"/> associated with the given <see
+    // cref="Assembly"/>.</returns>
     /// <remarks>This method is protected and virtual for testing purposes only.</remarks>
     protected virtual RootNamespaceAttribute? GetRootNamespaceAttribute(Assembly assembly)
     {

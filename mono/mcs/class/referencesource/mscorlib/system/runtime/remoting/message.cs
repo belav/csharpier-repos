@@ -3533,7 +3533,8 @@ namespace System.Runtime.Remoting.Messaging
             {
                 // This is the case where
                 // 1) there is no signature in the header,
-                // 2) there is an overloaded method which can not be resolved by a difference in the number of parameters.
+                // 2) there is an overloaded method which can not be resolved by a difference in the number of
+                // parameters.
                 //
                 // The methodbase can be found only if the parameters from soap have type information
                 ArrayList argValues = new ArrayList();
@@ -5169,7 +5170,8 @@ namespace System.Runtime.Remoting.Messaging
             _ID.RaceSetChannelSink(CrossContextChannel.MessageSink);
             _srvID.RaceSetServerObjectChain(this);
 
-            //DBG Console.WriteLine("### TransitionCall ctor: " + Int32.Format(_sourceCtxID,"x") + ":" + Int32.Format(_targetCtxID,"x"));
+            //DBG Console.WriteLine("### TransitionCall ctor: " + Int32.Format(_sourceCtxID,"x") + ":" +
+            // Int32.Format(_targetCtxID,"x"));
         } // TransitionCall
 
         // This constructor should be used for cross appdomain case.
@@ -5265,7 +5267,8 @@ namespace System.Runtime.Remoting.Messaging
                     );
                     lock (this)
                     {
-                        /*DBG Console.WriteLine("### Get SrvID: thrdCtxID== " + Int32.Format(Thread.CurrentContext.InternalContextID,"x"));
+                        /*DBG Console.WriteLine("### Get SrvID: thrdCtxID== " +
+                        Int32.Format(Thread.CurrentContext.InternalContextID,"x"));
                         Console.WriteLine("### Get SrvID: _targetCtxID" + Int32.Format(_targetCtxID,"x")); DBG*/
 
                         // NOTE: if we don't have a managed context object

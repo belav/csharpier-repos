@@ -23,7 +23,8 @@ public static class WebHostBuilderIISExtensions
     private const string IISWebSockets = "IIS_WEBSOCKETS_SUPPORTED";
 
     /// <summary>
-    /// Configures the port and base path the server should listen on when running behind AspNetCoreModule.
+    /// Configures the port and base path the server should listen on when running behind
+    // AspNetCoreModule.
     /// The app will also be configured to capture startup errors.
     /// </summary>
     /// <param name="hostBuilder"></param>
@@ -57,7 +58,8 @@ public static class WebHostBuilderIISExtensions
         bool isWebSocketsSupported;
         if (!bool.TryParse(websocketsSupported, out isWebSocketsSupported))
         {
-            // If the websocket support variable is not set, we will always fallback to assuming websockets are enabled.
+            // If the websocket support variable is not set, we will always fallback to assuming websockets are
+            // enabled.
             isWebSocketsSupported = (Environment.OSVersion.Version >= new Version(6, 2));
         }
 

@@ -190,7 +190,8 @@ namespace System.Collections.Tests
             return TestDebuggerAttributes_NonGenericDictionaries()
                 .Concat(TestDebuggerAttributes_GenericDictionaries());
 #else
-            // In .Net Framework only non-generic dictionaries are displayed in a dictionary format by the debugger.
+            // In .Net Framework only non-generic dictionaries are displayed in a dictionary format by the
+            // debugger.
             return TestDebuggerAttributes_NonGenericDictionaries();
 #endif
         }

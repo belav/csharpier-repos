@@ -107,7 +107,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         : field;
                 }
 
-                // Note: this may hit a containing local-function/lambda.  That's fine as that's still the scope we want
+                // Note: this may hit a containing local-function/lambda.  That's fine as that's still the scope we
+                // want
                 // to look for this local within.
                 if (current is IMethodSymbol)
                     return current;

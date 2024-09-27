@@ -411,7 +411,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (declaredPropertyType != runtimePropertyType && declaredPropertyType.IsValueType)
             {
-                // Not supported scenario: possible if e.g. declaredPropertyType == int? and runtimePropertyType == int
+                // Not supported scenario: possible if e.g. declaredPropertyType == int? and runtimePropertyType ==
+                // int
                 // We should catch that particular case earlier in converter generation.
                 Debug.Assert(!runtimePropertyType.IsValueType);
 

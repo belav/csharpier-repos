@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         [JsonProperty("outV")]
         public Id<Vertex> OutVertex { get; }
 
-        // LSIF edges can have either an inV for a one-to-one edge, or an inVs for a one-to-many edge. We'll represent
+        // LSIF edges can have either an inV for a one-to-one edge, or an inVs for a one-to-many edge. We'll
+        // represent
         // this by having two properties here, and exactly one of them will always be non-null.
 
         [JsonProperty("inV", NullValueHandling = NullValueHandling.Ignore)]
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         {
             var inVerticesArray = new Id<Vertex>[inVertices.Count];
 
-            // Note: this is ultimately just an array copy, but in a strongly-typed way. The JIT might see through this as a memory copy,
+            // Note: this is ultimately just an array copy, but in a strongly-typed way. The JIT might see
+            // through this as a memory copy,
             // but might require some more explicit code if not.
             for (var i = 0; i < inVertices.Count; i++)
             {

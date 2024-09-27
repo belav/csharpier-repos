@@ -6719,7 +6719,8 @@ class Program
         }
 
         /// <summary>
-        /// Note that this test verifies the current end of line sequence in using directives is preserved regardless of
+        /// Note that this test verifies the current end of line sequence in using directives is preserved
+        // regardless of
         /// whether this matches the end_of_line value in .editorconfig or not.
         /// </summary>
         [Theory]
@@ -6771,7 +6772,8 @@ class Program
         }
 
         /// <summary>
-        /// Note that this test verifies the current end of line sequence in using directives is preserved regardless of
+        /// Note that this test verifies the current end of line sequence in using directives is preserved
+        // regardless of
         /// whether this matches the end_of_line value in .editorconfig or not.
         /// </summary>
         [Theory]

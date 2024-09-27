@@ -123,11 +123,14 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     public IModelMetadataProvider MetadataProvider { get; }
 
     /// <summary>
-    /// Creates a dictionary from an object, by adding each public instance property as a key with its associated
-    /// value to the dictionary. It will expose public properties from derived types as well. This is typically
+    /// Creates a dictionary from an object, by adding each public instance property as a key with its
+    // associated
+    /// value to the dictionary. It will expose public properties from derived types as well. This is
+    // typically
     /// used with objects of an anonymous type.
     ///
-    /// If the <paramref name="value"/> is already an <see cref="IDictionary{String, Object}"/> instance, then it
+    /// If the <paramref name="value"/> is already an <see cref="IDictionary{String, Object}"/>
+    // instance, then it
     /// is returned as-is.
     /// <example>
     /// <c>new { data_name="value" }</c> will translate to the entry <c>{ "data_name", "value" }</c>
@@ -148,7 +151,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// <param name="htmlAttributes">Anonymous object describing HTML attributes.</param>
     /// <returns>A dictionary that represents HTML attributes.</returns>
     /// <remarks>
-    /// If the object is already an <see cref="IDictionary{String, Object}"/> instance, then a shallow copy is
+    /// If the object is already an <see cref="IDictionary{String, Object}"/> instance, then a shallow
+    // copy is
     /// returned.
     /// <example>
     /// <c>new { data_name="value" }</c> will translate to the entry <c>{ "data-name", "value" }</c>
@@ -524,7 +528,9 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// <param name="modelExplorer">The <see cref="ModelExplorer"/>.</param>
     /// <param name="htmlFieldName">The name of the html field.</param>
     /// <param name="templateName">The name of the template.</param>
-    /// <param name="additionalViewData">The additional view data, either an <see cref="IDictionary{String, Object}"/> or some other object whose public properties will be merged with the <see cref="T:ViewDataDictionary" />.</param>
+    /// <param name="additionalViewData">The additional view data, either an <see
+    // cref="IDictionary{String, Object}"/> or some other object whose public properties will be merged
+    // with the <see cref="T:ViewDataDictionary" />.</param>
     /// <returns><see cref="IHtmlContent"/>.</returns>
     protected virtual IHtmlContent GenerateDisplay(
         ModelExplorer modelExplorer,
@@ -849,7 +855,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
         )
         {
             // The checkbox and hidden elements should have the same name attribute value. Attributes will match
-            // if both are present because both have a generated value. Reach here in the special case where user
+            // if both are present because both have a generated value. Reach here in the special case where
+            // user
             // provided a non-empty fallback name.
             hiddenForCheckbox.MergeAttribute("name", name);
         }
@@ -978,21 +985,25 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <summary>
-    /// Renders a &lt;form&gt; start tag to the response. When the user submits the form, the action with name
+    /// Renders a &lt;form&gt; start tag to the response. When the user submits the form, the action
+    // with name
     /// <paramref name="actionName"/> will process the request.
     /// </summary>
     /// <param name="actionName">The name of the action method.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
     /// <param name="method">The HTTP method for processing the form, either GET or POST.</param>
     /// <param name="antiforgery">
     /// If <c>true</c>, &lt;form&gt; elements will include an antiforgery token.
-    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery token.
+    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery
+    // token.
     /// If <c>null</c>, &lt;form&gt; elements will include an antiforgery token only if
     /// <paramref name="method"/> is not <see cref="FormMethod.Get"/>.
     /// </param>
@@ -1004,7 +1015,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// An <see cref="MvcForm"/> instance which renders the &lt;/form&gt; end tag when disposed.
     /// </returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     protected virtual MvcForm GenerateForm(
         string actionName,
@@ -1041,20 +1053,24 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     }
 
     /// <summary>
-    /// Renders a &lt;form&gt; start tag to the response. The route with name <paramref name="routeName"/>
+    /// Renders a &lt;form&gt; start tag to the response. The route with name <paramref
+    // name="routeName"/>
     /// generates the &lt;form&gt;'s <c>action</c> attribute value.
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
     /// <see cref="IDictionary{String, Object}"/> instance containing the route parameters.
     /// </param>
     /// <param name="method">The HTTP method for processing the form, either GET or POST.</param>
     /// <param name="antiforgery">
     /// If <c>true</c>, &lt;form&gt; elements will include an antiforgery token.
-    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery token.
+    /// If <c>false</c>, suppresses the generation an &lt;input&gt; of type "hidden" with an antiforgery
+    // token.
     /// If <c>null</c>, &lt;form&gt; elements will include an antiforgery token only if
     /// <paramref name="method"/> is not <see cref="FormMethod.Get"/>.
     /// </param>
@@ -1066,7 +1082,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// An <see cref="MvcForm"/> instance which renders the &lt;/form&gt; end tag when disposed.
     /// </returns>
     /// <remarks>
-    /// In this context, "renders" means the method writes its output using <see cref="ViewContext.Writer"/>.
+    /// In this context, "renders" means the method writes its output using <see
+    // cref="ViewContext.Writer"/>.
     /// </remarks>
     protected virtual MvcForm GenerateRouteForm(
         string routeName,
@@ -1180,8 +1197,10 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
             return HtmlString.Empty;
         }
 
-        // Do not generate an empty <label> element unless user passed string.Empty for the label text. This is
-        // primarily done for back-compatibility. (Note HtmlContentBuilder ignores (no-ops) an attempt to add
+        // Do not generate an empty <label> element unless user passed string.Empty for the label text. This
+        // is
+        // primarily done for back-compatibility. (Note HtmlContentBuilder ignores (no-ops) an attempt to
+        // add
         // string.Empty. So tagBuilder.HasInnerHtml isn't sufficient here.)
         if (!tagBuilder.HasInnerHtml && labelText == null)
         {
@@ -1508,7 +1527,8 @@ public class HtmlHelper : IHtmlHelper, IViewContextAware
     /// <paramref name="metadata"/>.
     /// </returns>
     /// <exception cref="ArgumentException">
-    /// Thrown if <paramref name="metadata"/>'s <see cref="ModelMetadata.ModelType"/> is not an <see cref="Enum"/>
+    /// Thrown if <paramref name="metadata"/>'s <see cref="ModelMetadata.ModelType"/> is not an <see
+    // cref="Enum"/>
     /// or if it has a <see cref="FlagsAttribute"/>.
     /// </exception>
     protected virtual IEnumerable<SelectListItem> GetEnumSelectList(ModelMetadata metadata)

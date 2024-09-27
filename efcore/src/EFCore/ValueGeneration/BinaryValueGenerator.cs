@@ -8,12 +8,14 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 ///     The generated values are non-temporary, meaning they will be saved to the database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see>
+// for more information and examples.
 /// </remarks>
 public class BinaryValueGenerator : ValueGenerator<byte[]>
 {
     /// <summary>
-    ///     Gets a value indicating whether the values generated are temporary or permanent. This implementation
+    ///     Gets a value indicating whether the values generated are temporary or permanent. This
+    // implementation
     ///     always returns false, meaning the generated values will be saved to the database.
     /// </summary>
     public override bool GeneratesTemporaryValues => false;

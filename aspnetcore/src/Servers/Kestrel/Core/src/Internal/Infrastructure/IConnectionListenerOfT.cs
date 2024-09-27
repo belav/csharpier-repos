@@ -16,6 +16,7 @@ internal interface IConnectionListener<T> : IConnectionListenerBase
     /// Begins an asynchronous operation to accept an incoming connection.
     /// </summary>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A <see cref="ValueTask{T}"/> that completes when a connection is accepted, yielding the <see cref="BaseConnectionContext" /> representing the connection.</returns>
+    /// <returns>A <see cref="ValueTask{T}"/> that completes when a connection is accepted, yielding the
+    // <see cref="BaseConnectionContext" /> representing the connection.</returns>
     ValueTask<T?> AcceptAsync(CancellationToken cancellationToken = default);
 }

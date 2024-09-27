@@ -86,7 +86,8 @@ namespace System.Windows.Forms
             bool dataGridViewWantsInputKey
         )
         {
-            // true if the specified key is a regular key that should be handled by the editing control; otherwise, false
+            // true if the specified key is a regular key that should be handled by the editing control;
+            // otherwise, false
             return base.IsInputKey(keyData);
         }
 

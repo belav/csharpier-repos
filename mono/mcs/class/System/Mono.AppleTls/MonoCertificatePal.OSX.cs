@@ -64,14 +64,14 @@ namespace Mono.AppleTls
 
         [DllImport(AppleTlsContext.SecurityLibrary)]
         static extern SecStatusCode SecItemImport(
-            /* CFDataRef */IntPtr importedData,
-            /* CFStringRef */IntPtr fileNameOrExtension, // optional
-            /* SecExternalFormat* */ref SecExternalFormat inputFormat, // optional, IN/OUT
-            /* SecExternalItemType* */ref SecExternalItemType itemType, // optional, IN/OUT
-            /* SecItemImportExportFlags */SecItemImportExportFlags flags,
-            /* const SecItemImportExportKeyParameters* */IntPtr keyParams, // optional
-            /* SecKeychainRef */IntPtr importKeychain, // optional
-            /* CFArrayRef* */out IntPtr outItems
+/* CFDataRef */IntPtr importedData,
+/* CFStringRef */IntPtr fileNameOrExtension, // optional
+/* SecExternalFormat* */ref SecExternalFormat inputFormat, // optional, IN/OUT
+/* SecExternalItemType* */ref SecExternalItemType itemType, // optional, IN/OUT
+/* SecItemImportExportFlags */SecItemImportExportFlags flags,
+/* const SecItemImportExportKeyParameters* */IntPtr keyParams, // optional
+/* SecKeychainRef */IntPtr importKeychain, // optional
+/* CFArrayRef* */out IntPtr outItems
         );
 
         public static CFArray ItemImport(byte[] buffer, string password)
@@ -144,9 +144,9 @@ namespace Mono.AppleTls
         [DllImport(AppleTlsContext.SecurityLibrary)]
         static /* SecIdentityRef */
         extern IntPtr SecIdentityCreate(
-            /* CFAllocatorRef */IntPtr allocator,
-            /* SecCertificateRef */IntPtr certificate,
-            /* SecKeyRef */IntPtr privateKey
+/* CFAllocatorRef */IntPtr allocator,
+/* SecCertificateRef */IntPtr certificate,
+/* SecKeyRef */IntPtr privateKey
         );
 
         public static SafeSecIdentityHandle ItemImport(X509Certificate2 certificate)

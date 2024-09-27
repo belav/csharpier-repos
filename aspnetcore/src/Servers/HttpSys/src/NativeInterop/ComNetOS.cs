@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal static class ComNetOS
 {
-    // Windows is assumed based on HttpApi.Supported which is checked in the HttpSysListener constructor.
+    // Windows is assumed based on HttpApi.Supported which is checked in the HttpSysListener
+    // constructor.
     // Minimum support for Windows 7 is assumed.
     internal static readonly bool IsWin8orLater = OperatingSystem.IsWindowsVersionAtLeast(6, 2);
 }

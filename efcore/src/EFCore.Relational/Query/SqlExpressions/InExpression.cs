@@ -8,18 +8,21 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents an IN operation in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 public class InExpression : SqlExpression
 {
     /// <summary>
-    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL <c>IN</c> expression with a subquery.
+    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL
+    // <c>IN</c> expression with a subquery.
     /// </summary>
     /// <param name="item">An item to look into values.</param>
     /// <param name="subquery">A subquery in which the item is searched.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public InExpression(
         SqlExpression item,
         SelectExpression subquery,
@@ -28,12 +31,14 @@ public class InExpression : SqlExpression
         : this(item, subquery, values: null, valuesParameter: null, typeMapping) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL <c>IN</c> expression with a given list
+    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL
+    // <c>IN</c> expression with a given list
     ///     of values.
     /// </summary>
     /// <param name="item">An item to look into values.</param>
     /// <param name="values">A list of values in which the item is searched.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public InExpression(
         SqlExpression item,
         IReadOnlyList<SqlExpression> values,
@@ -42,12 +47,15 @@ public class InExpression : SqlExpression
         : this(item, subquery: null, values, valuesParameter: null, typeMapping) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL <c>IN</c> expression with a given
+    ///     Creates a new instance of the <see cref="InExpression" /> class, representing a SQL
+    // <c>IN</c> expression with a given
     ///     parameterized list of values.
     /// </summary>
     /// <param name="item">An item to look into values.</param>
-    /// <param name="valuesParameter">A parameterized list of values in which the item is searched.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="valuesParameter">A parameterized list of values in which the item is
+    // searched.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public InExpression(
         SqlExpression item,
         SqlParameterExpression valuesParameter,
@@ -92,7 +100,8 @@ public class InExpression : SqlExpression
     public virtual IReadOnlyList<SqlExpression>? Values { get; }
 
     /// <summary>
-    ///     A parameter containing the list of values to search the item in. The parameterized list get expanded to the actual value
+    ///     A parameter containing the list of values to search the item in. The parameterized list get
+    // expanded to the actual value
     ///     before the query SQL is generated.
     /// </summary>
     public virtual SqlParameterExpression? ValuesParameter { get; }
@@ -141,46 +150,54 @@ public class InExpression : SqlExpression
         new(Item, Subquery, Values, ValuesParameter, typeMapping);
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual InExpression Update(SqlExpression item, SelectExpression subquery) =>
         Update(item, subquery, values: null, valuesParameter: null);
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="values">The <see cref="Values" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual InExpression Update(SqlExpression item, IReadOnlyList<SqlExpression> values) =>
         Update(item, subquery: null, values, valuesParameter: null);
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="valuesParameter">The <see cref="ValuesParameter" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual InExpression Update(
         SqlExpression item,
         SqlParameterExpression valuesParameter
     ) => Update(item, subquery: null, values: null, valuesParameter);
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="item">The <see cref="Item" /> property of the result.</param>
     /// <param name="subquery">The <see cref="Subquery" /> property of the result.</param>
     /// <param name="values">The <see cref="Values" /> property of the result.</param>
     /// <param name="valuesParameter">The <see cref="ValuesParameter" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual InExpression Update(
         SqlExpression item,
         SelectExpression? subquery,

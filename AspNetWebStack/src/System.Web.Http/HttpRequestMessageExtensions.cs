@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -138,7 +139,8 @@ namespace System.Net.Http
 
         /// <summary>Gets an <see cref="HttpRequestContext"/> associated with this request.</summary>
         /// <param name="request">The HTTP request.</param>
-        /// <param name="context">The <see cref="HttpRequestContext"/> to associate with this request.</param>
+        /// <param name="context">The <see cref="HttpRequestContext"/> to associate with this
+        // request.</param>
         public static void SetRequestContext(
             this HttpRequestMessage request,
             HttpRequestContext context
@@ -158,7 +160,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Threading.SynchronizationContext"/> for the given request or null if not available.
+        /// Gets the <see cref="System.Threading.SynchronizationContext"/> for the given request or null if
+        // not available.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The <see cref="System.Threading.SynchronizationContext"/> or null.</returns>
@@ -190,10 +193,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/> or null if not available.
+        /// Gets the current <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/>
+        // or null if not available.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
-        /// <returns>The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/> or null.</returns>
+        /// <returns>The <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/> or
+        // null.</returns>
         public static X509Certificate2 GetClientCertificate(this HttpRequestMessage request)
         {
             if (request == null)
@@ -240,7 +245,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Web.Http.Routing.IHttpRouteData"/> for the given request or null if not available.
+        /// Gets the <see cref="System.Web.Http.Routing.IHttpRouteData"/> for the given request or null if
+        // not available.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The <see cref="System.Web.Http.Routing.IHttpRouteData"/> or null.</returns>
@@ -294,7 +300,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets the <see cref="System.Web.Http.Controllers.HttpActionDescriptor"/> selected for the given request or null if not available.
+        /// Gets the <see cref="System.Web.Http.Controllers.HttpActionDescriptor"/> selected for the given
+        // request or null if not available.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
         /// <returns>The <see cref="System.Web.Http.Controllers.HttpActionDescriptor"/> or null.</returns>
@@ -331,15 +338,20 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method for creating an <see cref="HttpResponseMessage"/> message with a "416 (Requested Range Not Satisfiable)" status code.
-        /// This response can be used in combination with the <see cref="ByteRangeStreamContent"/> to indicate that the requested range or
-        /// ranges do not overlap with the current resource. The response contains a "Content-Range" header indicating the valid upper and lower
+        /// Helper method for creating an <see cref="HttpResponseMessage"/> message with a "416 (Requested
+        // Range Not Satisfiable)" status code.
+        /// This response can be used in combination with the <see cref="ByteRangeStreamContent"/> to
+        // indicate that the requested range or
+        /// ranges do not overlap with the current resource. The response contains a "Content-Range" header
+        // indicating the valid upper and lower
         /// bounds for requested ranges.
         /// </summary>
         /// <param name="request">The request.</param>
-        /// <param name="invalidByteRangeException">An <see cref="InvalidByteRangeException"/> instance, typically thrown by a
+        /// <param name="invalidByteRangeException">An <see cref="InvalidByteRangeException"/> instance,
+        // typically thrown by a
         /// <see cref="ByteRangeStreamContent"/> instance.</param>
-        /// <returns>An 416 (Requested Range Not Satisfiable) error response with a Content-Range header indicating the valid range.</returns>
+        /// <returns>An 416 (Requested Range Not Satisfiable) error response with a Content-Range header
+        // indicating the valid range.</returns>
         [SuppressMessage(
             "Microsoft.Reliability",
             "CA2000:Dispose objects before losing scope",
@@ -365,8 +377,10 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with message <paramref name="message"/>.
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with
+        // message <paramref name="message"/>.
         /// If no formatter is found, this method returns a response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -376,7 +390,8 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="message">The error message.</param>
-        /// <returns>An error response with error message <paramref name="message"/> and status code <paramref name="statusCode"/>.</returns>
+        /// <returns>An error response with error message <paramref name="message"/> and status code
+        // <paramref name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -387,9 +402,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with message <paramref name="message"/>
-        /// and message detail <paramref name="messageDetail"/>.If no formatter is found, this method returns a response with
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with
+        // message <paramref name="message"/>
+        /// and message detail <paramref name="messageDetail"/>.If no formatter is found, this method
+        // returns a response with
         /// status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -399,8 +417,10 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="message">The error message. This message will always be seen by clients.</param>
-        /// <param name="messageDetail">The error message detail. This message will only be seen by clients if we should include error detail.</param>
-        /// <returns>An error response with error message <paramref name="message"/> and message detail <paramref name="messageDetail"/>
+        /// <param name="messageDetail">The error message detail. This message will only be seen by clients
+        // if we should include error detail.</param>
+        /// <returns>An error response with error message <paramref name="message"/> and message detail
+        // <paramref name="messageDetail"/>
         /// and status code <paramref name="statusCode"/>.</returns>
         internal static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
@@ -419,9 +439,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with error message <paramref name="message"/>
-        /// for exception <paramref name="exception"/>. If no formatter is found, this method returns a response with status 406 NotAcceptable.
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> with
+        // error message <paramref name="message"/>
+        /// for exception <paramref name="exception"/>. If no formatter is found, this method returns a
+        // response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
         /// This method requires that <paramref name="request"/> has been associated with an instance of
@@ -431,7 +454,8 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="message">The error message.</param>
         /// <param name="exception">The exception.</param>
-        /// <returns>An error response for <paramref name="exception"/> with error message <paramref name="message"/>
+        /// <returns>An error response for <paramref name="exception"/> with error message <paramref
+        // name="message"/>
         /// and status code <paramref name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
@@ -455,8 +479,10 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> for exception <paramref name="exception"/>.
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> for
+        // exception <paramref name="exception"/>.
         /// If no formatter is found, this method returns a response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -466,7 +492,8 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="exception">The exception.</param>
-        /// <returns>An error response for <paramref name="exception"/> with status code <paramref name="statusCode"/>.</returns>
+        /// <returns>An error response for <paramref name="exception"/> with status code <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -485,8 +512,10 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> for model state <paramref name="modelState"/>.
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping an <see cref="HttpError"/> for model
+        // state <paramref name="modelState"/>.
         /// If no formatter is found, this method returns a response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -496,7 +525,8 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="modelState">The model state.</param>
-        /// <returns>An error response for <paramref name="modelState"/> with status code <paramref name="statusCode"/>.</returns>
+        /// <returns>An error response for <paramref name="modelState"/> with status code <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -515,8 +545,10 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> representing an error
-        /// with an instance of <see cref="ObjectContent{T}"/> wrapping <paramref name="error"/> as the content. If no formatter
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // representing an error
+        /// with an instance of <see cref="ObjectContent{T}"/> wrapping <paramref name="error"/> as the
+        // content. If no formatter
         /// is found, this method returns a response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -526,7 +558,8 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="error">The error to wrap.</param>
-        /// <returns>An error response wrapping <paramref name="error"/> with status code <paramref name="statusCode"/>.</returns>
+        /// <returns>An error response wrapping <paramref name="error"/> with status code <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateErrorResponse(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -551,7 +584,8 @@ namespace System.Net.Http
 
             HttpError error = errorCreator(request.ShouldIncludeErrorDetail());
 
-            // CreateErrorResponse should never fail, even if there is no configuration associated with the request
+            // CreateErrorResponse should never fail, even if there is no configuration associated with the
+            // request
             // In that case, use the default HttpConfiguration to con-neg the response media type
             if (configuration == null)
             {
@@ -567,10 +601,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> with an instance
-        /// of <see cref="ObjectContent{T}"/> as the content and <see cref="System.Net.HttpStatusCode.OK"/> as the status code
-        /// if a formatter can be found. If no formatter is found, this method returns a response with status 406 NotAcceptable.
-        /// This forwards the call to <see cref="CreateResponse{T}(HttpRequestMessage, HttpStatusCode, T, HttpConfiguration)"/> with
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // with an instance
+        /// of <see cref="ObjectContent{T}"/> as the content and <see cref="System.Net.HttpStatusCode.OK"/>
+        // as the status code
+        /// if a formatter can be found. If no formatter is found, this method returns a response with
+        // status 406 NotAcceptable.
+        /// This forwards the call to <see cref="CreateResponse{T}(HttpRequestMessage, HttpStatusCode, T,
+        // HttpConfiguration)"/> with
         /// <see cref="System.Net.HttpStatusCode.OK"/> status code and a <c>null</c> configuration.
         /// </summary>
         /// <remarks>
@@ -580,7 +618,8 @@ namespace System.Net.Http
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="request">The request.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <see cref="System.Net.HttpStatusCode.OK"/> status code.</returns>
+        /// <returns>A response wrapping <paramref name="value"/> with <see
+        // cref="System.Net.HttpStatusCode.OK"/> status code.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             T value
@@ -590,10 +629,13 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> with an instance
-        /// of <see cref="ObjectContent{T}"/> as the content if a formatter can be found. If no formatter is found, this
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // with an instance
+        /// of <see cref="ObjectContent{T}"/> as the content if a formatter can be found. If no formatter is
+        // found, this
         /// method returns a response with status 406 NotAcceptable. This forwards the call to
-        /// <see cref="CreateResponse{T}(HttpRequestMessage, HttpStatusCode, T, HttpConfiguration)"/> with a <c>null</c>
+        /// <see cref="CreateResponse{T}(HttpRequestMessage, HttpStatusCode, T, HttpConfiguration)"/> with a
+        // <c>null</c>
         /// configuration.
         /// </summary>
         /// <remarks>
@@ -604,7 +646,8 @@ namespace System.Net.Http
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -615,8 +658,10 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/> with an instance
-        /// of <see cref="ObjectContent{T}"/> as the content if a formatter can be found. If no formatter is found, this
+        /// Helper method that performs content negotiation and creates a <see cref="HttpResponseMessage"/>
+        // with an instance
+        /// of <see cref="ObjectContent{T}"/> as the content if a formatter can be found. If no formatter is
+        // found, this
         /// method returns a response with status 406 NotAcceptable.
         /// </summary>
         /// <remarks>
@@ -628,7 +673,8 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="configuration">The configuration to use. Can be <c>null</c>.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -670,17 +716,23 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see cref="ObjectContent{T}"/> instance containing the provided
-        /// <paramref name="value"/>. The given <paramref name="mediaType"/> is used to find an instance of <see cref="MediaTypeFormatter"/>.
+        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see
+        // cref="ObjectContent{T}"/> instance containing the provided
+        /// <paramref name="value"/>. The given <paramref name="mediaType"/> is used to find an instance of
+        // <see cref="MediaTypeFormatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
-        /// <param name="mediaType">The media type used to look up an instance of <see cref="MediaTypeFormatter"/>.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not have an associated
-        /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter matching <paramref name="mediaType"/>.</exception>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <param name="mediaType">The media type used to look up an instance of <see
+        // cref="MediaTypeFormatter"/>.</param>
+        /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not
+        // have an associated
+        /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter
+        // matching <paramref name="mediaType"/>.</exception>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -692,17 +744,23 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see cref="ObjectContent{T}"/> instance containing the provided
-        /// <paramref name="value"/>. The given <paramref name="mediaType"/> is used to find an instance of <see cref="MediaTypeFormatter"/>.
+        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see
+        // cref="ObjectContent{T}"/> instance containing the provided
+        /// <paramref name="value"/>. The given <paramref name="mediaType"/> is used to find an instance of
+        // <see cref="MediaTypeFormatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="request">The request.</param>
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
-        /// <param name="mediaType">The media type used to look up an instance of <see cref="MediaTypeFormatter"/>.</param>
-        /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not have an associated
-        /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter matching <paramref name="mediaType"/>.</exception>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <param name="mediaType">The media type used to look up an instance of <see
+        // cref="MediaTypeFormatter"/>.</param>
+        /// <exception cref="InvalidOperationException">Thrown if the <paramref name="request"/> does not
+        // have an associated
+        /// <see cref="HttpConfiguration"/> instance or if the configuration does not have a formatter
+        // matching <paramref name="mediaType"/>.</exception>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -744,7 +802,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see cref="ObjectContent{T}"/> instance containing the provided
+        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see
+        // cref="ObjectContent{T}"/> instance containing the provided
         /// <paramref name="value"/> and the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
@@ -752,7 +811,8 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="formatter">The formatter to use.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -764,7 +824,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see cref="ObjectContent{T}"/> instance containing the provided
+        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see
+        // cref="ObjectContent{T}"/> instance containing the provided
         /// <paramref name="value"/> and the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
@@ -772,8 +833,10 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="formatter">The formatter to use.</param>
-        /// <param name="mediaType">The media type override to set on the response's content. Can be <c>null</c>.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <param name="mediaType">The media type override to set on the response's content. Can be
+        // <c>null</c>.</param>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -788,7 +851,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see cref="ObjectContent{T}"/> instance containing the provided
+        /// Helper method that creates a <see cref="HttpResponseMessage"/> with an <see
+        // cref="ObjectContent{T}"/> instance containing the provided
         /// <paramref name="value"/> and the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value.</typeparam>
@@ -796,8 +860,10 @@ namespace System.Net.Http
         /// <param name="statusCode">The status code of the created response.</param>
         /// <param name="value">The value to wrap. Can be <c>null</c>.</param>
         /// <param name="formatter">The formatter to use.</param>
-        /// <param name="mediaType">The media type override to set on the response's content. Can be <c>null</c>.</param>
-        /// <returns>A response wrapping <paramref name="value"/> with <paramref name="statusCode"/>.</returns>
+        /// <param name="mediaType">The media type override to set on the response's content. Can be
+        // <c>null</c>.</param>
+        /// <returns>A response wrapping <paramref name="value"/> with <paramref
+        // name="statusCode"/>.</returns>
         public static HttpResponseMessage CreateResponse<T>(
             this HttpRequestMessage request,
             HttpStatusCode statusCode,
@@ -825,11 +891,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Adds the given <paramref name="resource"/> to a list of resources that will be disposed by a host once
+        /// Adds the given <paramref name="resource"/> to a list of resources that will be disposed by a
+        // host once
         /// the <paramref name="request"/> is disposed.
         /// </summary>
-        /// <param name="request">The request controlling the lifecycle of <paramref name="resource"/>.</param>
-        /// <param name="resource">The resource to dispose when <paramref name="request"/> is being disposed. Can be <c>null</c>.</param>
+        /// <param name="request">The request controlling the lifecycle of <paramref
+        // name="resource"/>.</param>
+        /// <param name="resource">The resource to dispose when <paramref name="request"/> is being
+        // disposed. Can be <c>null</c>.</param>
         public static void RegisterForDispose(this HttpRequestMessage request, IDisposable resource)
         {
             if (request == null)
@@ -848,11 +917,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Adds the given <paramref name="resources"/> to a list of resources that will be disposed by a host once
+        /// Adds the given <paramref name="resources"/> to a list of resources that will be disposed by a
+        // host once
         /// the <paramref name="request"/> is disposed.
         /// </summary>
-        /// <param name="request">The request controlling the lifecycle of <paramref name="resources"/>.</param>
-        /// <param name="resources">The resources to dispose when <paramref name="request"/> is being disposed. Can be <c>null</c>.</param>
+        /// <param name="request">The request controlling the lifecycle of <paramref
+        // name="resources"/>.</param>
+        /// <param name="resources">The resources to dispose when <paramref name="request"/> is being
+        // disposed. Can be <c>null</c>.</param>
         public static void RegisterForDispose(
             this HttpRequestMessage request,
             IEnumerable<IDisposable> resources
@@ -880,7 +952,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Disposes of all tracked resources associated with the <paramref name="request"/> which were added via the
+        /// Disposes of all tracked resources associated with the <paramref name="request"/> which were
+        // added via the
         /// <see cref="RegisterForDispose(HttpRequestMessage, IDisposable)"/> method.
         /// </summary>
         /// <param name="request">The request.</param>
@@ -1041,7 +1114,8 @@ namespace System.Net.Http
         /// Gets a value indicating whether the request originates from a local address or not.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
-        /// <returns><see langword="true"/> if the request originates from a local address; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the request originates from a local address; otherwise, <see
+        // langword="false"/>.</returns>
         public static bool IsLocal(this HttpRequestMessage request)
         {
             if (request == null)
@@ -1070,7 +1144,8 @@ namespace System.Net.Http
         /// Gets a value indicating whether the request originates from a batch.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
-        /// <returns><see langword="true"/> if the request originates from a batch; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the request originates from a batch; otherwise, <see
+        // langword="false"/>.</returns>
         public static bool IsBatchRequest(this HttpRequestMessage request)
         {
             if (request == null)
@@ -1082,10 +1157,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets a value indicating whether error details, such as exception messages and stack traces, should be included for this HTTP request.
+        /// Gets a value indicating whether error details, such as exception messages and stack traces,
+        // should be included for this HTTP request.
         /// </summary>
         /// <param name="request">The HTTP request.</param>
-        /// <returns><see langword="true"/> if the error details are to be included; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the error details are to be included; otherwise, <see
+        // langword="false"/>.</returns>
         public static bool ShouldIncludeErrorDetail(this HttpRequestMessage request)
         {
             if (request == null)
@@ -1139,7 +1216,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets the collection of resources registered for dispose once the <paramref name="request"/> is disposed.
+        /// Gets the collection of resources registered for dispose once the <paramref name="request"/> is
+        // disposed.
         /// </summary>
         /// <param name="request">The request.</param>
         /// <returns>A collection of resources registered for dispose.</returns>

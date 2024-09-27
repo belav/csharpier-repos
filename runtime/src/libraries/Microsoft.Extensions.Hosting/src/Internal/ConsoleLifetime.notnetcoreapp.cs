@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Hosting.Internal
                 );
             }
 
-            // wait one more time after the above log message, but only for ShutdownTimeout, so it doesn't hang forever
+            // wait one more time after the above log message, but only for ShutdownTimeout, so it doesn't hang
+            // forever
             _shutdownBlock.WaitOne(HostOptions.ShutdownTimeout);
 
             // On Linux if the shutdown is triggered by SIGTERM then that's signaled with the 143 exit code.

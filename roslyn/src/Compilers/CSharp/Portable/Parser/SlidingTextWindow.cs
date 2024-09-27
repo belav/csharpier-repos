@@ -251,7 +251,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Advances the text window if it currently pointing at the <paramref name="c"/> character.  Returns <see
+        /// Advances the text window if it currently pointing at the <paramref name="c"/> character.
+        // Returns <see
         /// langword="true"/> if it did advance, <see langword="false"/> otherwise.
         /// </summary>
         public bool TryAdvance(char c)
@@ -273,8 +274,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Moves past the newline that the text window is currently pointing at.  The text window must be pointing at a
-        /// newline.  If the newline is <c>\r\n</c> then that entire sequence will be skipped.  Otherwise, the text
+        /// Moves past the newline that the text window is currently pointing at.  The text window must be
+        // pointing at a
+        /// newline.  If the newline is <c>\r\n</c> then that entire sequence will be skipped.  Otherwise,
+        // the text
         /// window will only advance past a single character.
         /// </summary>
         public void AdvancePastNewLine()
@@ -283,7 +286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Gets the length of the newline the text window must be pointing at here.  For <c>\r\n</c> this is <c>2</c>,
+        /// Gets the length of the newline the text window must be pointing at here.  For <c>\r\n</c> this
+        // is <c>2</c>,
         /// for everything else, this is <c>1</c>.
         /// </summary>
         public int GetNewLineWidth()

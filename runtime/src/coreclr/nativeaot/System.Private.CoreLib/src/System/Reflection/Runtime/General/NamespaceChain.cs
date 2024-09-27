@@ -11,7 +11,8 @@ using Internal.Metadata.NativeFormat;
 namespace System.Reflection.Runtime.General
 {
     //
-    // Since computation of the fullname and the declaring assembly both require walking up the namespace chain,
+    // Since computation of the fullname and the declaring assembly both require walking up the
+    // namespace chain,
     // cache both results the first time we walk the chain.
     //
     internal sealed class NamespaceChain

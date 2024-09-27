@@ -12,9 +12,12 @@ namespace ILCompiler.Dataflow
 {
     internal static class DynamicallyAccessedMembersBinder
     {
-        // Returns the members of the type bound by memberTypes. For DynamicallyAccessedMemberTypes.All, this returns all members of the type and its
-        // nested types, including interface implementations, plus the same or any base types or implemented interfaces.
-        // DynamicallyAccessedMemberTypes.PublicNestedTypes and NonPublicNestedTypes do the same for members of the selected nested types.
+        // Returns the members of the type bound by memberTypes. For DynamicallyAccessedMemberTypes.All,
+        // this returns all members of the type and its
+        // nested types, including interface implementations, plus the same or any base types or implemented
+        // interfaces.
+        // DynamicallyAccessedMemberTypes.PublicNestedTypes and NonPublicNestedTypes do the same for members
+        // of the selected nested types.
         public static IEnumerable<TypeSystemEntity> GetDynamicallyAccessedMembers(
             this TypeDesc typeDefinition,
             DynamicallyAccessedMemberTypes memberTypes,
@@ -198,7 +201,8 @@ namespace ILCompiler.Dataflow
         {
             if (type.IsArray)
             {
-                // Constructors on arrays are special magic that the reflection stack special cases at runtime anyway.
+                // Constructors on arrays are special magic that the reflection stack special cases at runtime
+                // anyway.
                 yield break;
             }
 
@@ -270,7 +274,8 @@ namespace ILCompiler.Dataflow
                     if (onBaseType && method.IsPrivate())
                         continue;
 
-                    // Note that special methods like property getter/setter, event adder/remover will still get through and will be marked.
+                    // Note that special methods like property getter/setter, event adder/remover will still get through
+                    // and will be marked.
                     // This is intentional as reflection treats these as methods as well.
 
                     if (filter != null && !filter(method))
@@ -610,7 +615,8 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        // declaredOnly will cause this to retrieve interfaces recursively required by the type, but doesn't necessarily
+        // declaredOnly will cause this to retrieve interfaces recursively required by the type, but doesn't
+        // necessarily
         // include interfaces required by any base types.
         public static IEnumerable<DefType> GetAllInterfaceImplementations(
             this TypeDesc type,
@@ -639,8 +645,10 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        // declaredOnly will cause this to retrieve only members of the type, not of its base types. This includes interfaces recursively
-        // required by this type (but not members of these interfaces, or interfaces required only by base types).
+        // declaredOnly will cause this to retrieve only members of the type, not of its base types. This
+        // includes interfaces recursively
+        // required by this type (but not members of these interfaces, or interfaces required only by base
+        // types).
         public static void GetAllOnType(
             this TypeDesc type,
             bool declaredOnly,

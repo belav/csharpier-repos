@@ -44,7 +44,8 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                // Since there can be row types that span across spaces and we can have collections to such row types, we need to exclude RowType and collection type in this assert check
+                // Since there can be row types that span across spaces and we can have collections to such row
+                // types, we need to exclude RowType and collection type in this assert check
                 Debug.Assert(
                     GetDataSpace() != (DataSpace)(-1)
                         || this.BuiltInTypeKind == BuiltInTypeKind.RowType
@@ -56,7 +57,8 @@ namespace System.Data.Metadata.Edm
             set
             {
                 // Whenever you assign the data space value, it must be unassigned or re-assigned to the same value.
-                // The only exception being we sometimes need to create row types that contains types from various spaces
+                // The only exception being we sometimes need to create row types that contains types from various
+                // spaces
                 Debug.Assert(
                     GetDataSpace() == (DataSpace)(-1)
                         || GetDataSpace() == value

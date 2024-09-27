@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Web
 {
     using System;
@@ -23,7 +23,8 @@ namespace System.Web
     {
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.CategoryAttribute'/>
+        // class.
         ///    </para>
         /// </devdoc>
         internal WebCategoryAttribute(string category)

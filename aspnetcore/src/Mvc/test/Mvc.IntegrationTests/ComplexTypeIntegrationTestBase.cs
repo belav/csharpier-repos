@@ -2087,7 +2087,8 @@ public abstract class ComplexTypeIntegrationTestBase
         public Address1 Address { get; set; }
     }
 
-    // If a nested POCO object has all properties bound from a greedy source, then it should be populated
+    // If a nested POCO object has all properties bound from a greedy source, then it should be
+    // populated
     // if the top-level object is created.
     [Fact]
     public async Task ComplexBinder_BindsNestedPOCO_WithAllGreedyBoundProperties()
@@ -2884,8 +2885,10 @@ public abstract class ComplexTypeIntegrationTestBase
         public string Street { get; set; }
     }
 
-    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with a class somewhere in the
-    // type hierarchy of an action parameter. This should behave identically to such an attribute on a property in
+    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with a class
+    // somewhere in the
+    // type hierarchy of an action parameter. This should behave identically to such an attribute on a
+    // property in
     // the type hierarchy.
     [Theory]
     [MemberData(
@@ -2937,7 +2940,8 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
     }
 
-    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action parameter's
+    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action
+    // parameter's
     // type. This should behave identically to such an attribute on an action parameter.
     [Theory]
     [MemberData(
@@ -3005,9 +3009,12 @@ public abstract class ComplexTypeIntegrationTestBase
         public string State { get; set; }
     }
 
-    // Make sure the metadata is honored when a [Bind] attribute is associated with a class somewhere in the type
-    // hierarchy of an action parameter. This should behave identically to such an attribute on a property in the
-    // type hierarchy. (Test is similar to ModelNameOnPropertyType_WithData_Succeeds() but covers implementing
+    // Make sure the metadata is honored when a [Bind] attribute is associated with a class somewhere in
+    // the type
+    // hierarchy of an action parameter. This should behave identically to such an attribute on a
+    // property in the
+    // type hierarchy. (Test is similar to ModelNameOnPropertyType_WithData_Succeeds() but covers
+    // implementing
     // IPropertyFilterProvider, not IModelNameProvider.)
     [Theory]
     [MemberData(
@@ -3064,9 +3071,11 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
     }
 
-    // Make sure the metadata is honored when a [Bind] attribute is associated with an action parameter's type.
+    // Make sure the metadata is honored when a [Bind] attribute is associated with an action
+    // parameter's type.
     // This should behave identically to such an attribute on an action parameter. (Test is similar
-    // to ModelNameOnParameterType_WithData_Succeeds() but covers implementing IPropertyFilterProvider, not
+    // to ModelNameOnParameterType_WithData_Succeeds() but covers implementing IPropertyFilterProvider,
+    // not
     // IModelNameProvider.)
     [Theory]
     [MemberData(
@@ -3725,7 +3734,8 @@ public abstract class ComplexTypeIntegrationTestBase
         public ThreeDeepModel Inner { get; set; }
     }
 
-    // Ensure model binding system disallows one more than MaxModelBindingRecursionDepth binders on the stack.
+    // Ensure model binding system disallows one more than MaxModelBindingRecursionDepth binders on the
+    // stack.
     [Fact]
     public async Task ModelBindingSystem_ThrowsOn4Binders()
     {

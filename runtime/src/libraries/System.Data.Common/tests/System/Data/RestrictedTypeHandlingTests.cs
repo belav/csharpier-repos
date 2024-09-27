@@ -28,7 +28,7 @@ namespace System.Data.Tests
 
         private static readonly Type[] _alwaysAllowedTypes = new Type[]
         {
-            /* primitives */
+/* primitives */
             typeof(bool),
             typeof(char),
             typeof(sbyte),
@@ -62,12 +62,12 @@ namespace System.Data.Tests
             typeof(SqlMoney),
             typeof(SqlSingle),
             typeof(SqlString),
-            /* non-primitives, but common */
+/* non-primitives, but common */
             typeof(object),
             typeof(Type),
             typeof(BigInteger),
             typeof(Uri),
-            /* frequently used System.Drawing types */
+/* frequently used System.Drawing types */
             typeof(Color),
             typeof(Point),
             typeof(PointF),
@@ -75,7 +75,7 @@ namespace System.Data.Tests
             typeof(RectangleF),
             typeof(Size),
             typeof(SizeF),
-            /* to test that enums are allowed */
+/* to test that enums are allowed */
             typeof(StringComparison),
         };
 

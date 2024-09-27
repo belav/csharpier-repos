@@ -14,7 +14,8 @@ namespace System.ServiceModel.Security
         int maxCachedNonces;
 
         /// <summary>
-        /// TThe max timespan after which a Nonce is deleted from the NonceCache. This value should be atleast twice the maxclock Skew added to the replayWindow size.
+        /// TThe max timespan after which a Nonce is deleted from the NonceCache. This value should be
+        // atleast twice the maxclock Skew added to the replayWindow size.
         /// </summary>
         public TimeSpan CachingTimeSpan
         {

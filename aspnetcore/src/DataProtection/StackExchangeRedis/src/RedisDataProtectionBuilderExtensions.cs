@@ -21,9 +21,11 @@ public static class StackExchangeRedisDataProtectionBuilderExtensions
     /// Configures the data protection system to persist keys to specified key in Redis database
     /// </summary>
     /// <param name="builder">The builder instance to modify.</param>
-    /// <param name="databaseFactory">The delegate used to create <see cref="IDatabase"/> instances.</param>
+    /// <param name="databaseFactory">The delegate used to create <see cref="IDatabase"/>
+    // instances.</param>
     /// <param name="key">The <see cref="RedisKey"/> used to store key list.</param>
-    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
+    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has
+    // completed.</returns>
     public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
         this IDataProtectionBuilder builder,
         Func<IDatabase> databaseFactory,
@@ -36,11 +38,14 @@ public static class StackExchangeRedisDataProtectionBuilderExtensions
     }
 
     /// <summary>
-    /// Configures the data protection system to persist keys to the default key ('DataProtection-Keys') in Redis database
+    /// Configures the data protection system to persist keys to the default key ('DataProtection-Keys')
+    // in Redis database
     /// </summary>
     /// <param name="builder">The builder instance to modify.</param>
-    /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database access.</param>
-    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
+    /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database
+    // access.</param>
+    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has
+    // completed.</returns>
     public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
         this IDataProtectionBuilder builder,
         IConnectionMultiplexer connectionMultiplexer
@@ -57,9 +62,11 @@ public static class StackExchangeRedisDataProtectionBuilderExtensions
     /// Configures the data protection system to persist keys to the specified key in Redis database
     /// </summary>
     /// <param name="builder">The builder instance to modify.</param>
-    /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database access.</param>
+    /// <param name="connectionMultiplexer">The <see cref="IConnectionMultiplexer"/> for database
+    // access.</param>
     /// <param name="key">The <see cref="RedisKey"/> used to store key list.</param>
-    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has completed.</returns>
+    /// <returns>A reference to the <see cref="IDataProtectionBuilder" /> after this operation has
+    // completed.</returns>
     public static IDataProtectionBuilder PersistKeysToStackExchangeRedis(
         this IDataProtectionBuilder builder,
         IConnectionMultiplexer connectionMultiplexer,

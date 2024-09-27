@@ -49,7 +49,8 @@ public class TestStructAccessThroughRef
 
         Debug.Assert(PromotedStruct.AsNotPromotedStruct(ref a).anotherField == 0x5);
 
-        // This access will ask LclVariable with type of `PromotedStruct` about the field with offset == 4, that doesn't exist there.
+        // This access will ask LclVariable with type of `PromotedStruct` about the field with offset == 4,
+        // that doesn't exist there.
         Debug.Assert(PromotedStruct.AsNotPromotedStruct(ref a).overlappingField == 0x600000000);
         a.smallField = 6;
         Debug.Assert(PromotedStruct.AsNotPromotedStruct(ref a).overlappingField == 0x600000000);

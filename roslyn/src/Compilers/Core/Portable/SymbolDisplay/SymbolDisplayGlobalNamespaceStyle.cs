@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis
         Omitted = 0,
 
         /// <summary>
-        /// Omits the global namespace if it is being displayed as a containing symbol (i.e. not on its own).
+        /// Omits the global namespace if it is being displayed as a containing symbol (i.e. not on its
+        // own).
         /// </summary>
         OmittedAsContaining = 1,
 

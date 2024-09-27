@@ -101,7 +101,8 @@ namespace System.ServiceModel.Channels.Http
 
         protected override TChannel OnAcceptChannel(TimeSpan timeout)
         {
-            // HTTP channel could be accepted while there is no incoming request yet. The reply channel waits for the actual request.
+            // HTTP channel could be accepted while there is no incoming request yet. The reply channel waits
+            // for the actual request.
             // HTTP channel listeners do not accept more than one channel at a time.
             DateTime start = DateTime.UtcNow;
             TimeSpan waitTimeout;

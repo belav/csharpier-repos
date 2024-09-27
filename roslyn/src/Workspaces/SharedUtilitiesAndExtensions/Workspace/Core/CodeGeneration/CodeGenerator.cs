@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
         ) => services.GetLanguageServices(language).GetRequiredService<ICodeGenerationService>();
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional event of the same signature as the specified event symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional event of
+        // the same signature as the specified event symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddEventDeclarationAsync(
@@ -39,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddEventAsync(context, destination, @event, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional field of the same signature as the specified field symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional field of
+        // the same signature as the specified field symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddFieldDeclarationAsync(
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddFieldAsync(context, destination, field, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional method of the same signature as the specified method symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional method
+        // of the same signature as the specified method symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddMethodDeclarationAsync(
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddMethodAsync(context, destination, method, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional property of the same signature as the specified property symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional property
+        // of the same signature as the specified property symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddPropertyDeclarationAsync(
@@ -78,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddPropertyAsync(context, destination, property, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional named type of the same signature as the specified named type symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional named
+        // type of the same signature as the specified named type symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddNamedTypeDeclarationAsync(
@@ -91,7 +96,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddNamedTypeAsync(context, destination, namedType, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional named type of the same signature as the specified named type symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional named
+        // type of the same signature as the specified named type symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddNamedTypeDeclarationAsync(
@@ -104,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddNamedTypeAsync(context, destination, namedType, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional namespace of the same signature as the specified namespace symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional
+        // namespace of the same signature as the specified namespace symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddNamespaceDeclarationAsync(
@@ -117,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddNamespaceAsync(context, destination, @namespace, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has an additional namespace or type of the same signature as the specified namespace or type symbol.
+        /// Create a new solution where the declaration of the destination symbol has an additional
+        // namespace or type of the same signature as the specified namespace or type symbol.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddNamespaceOrTypeDeclarationAsync(
@@ -130,7 +138,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddNamespaceOrTypeAsync(context, destination, namespaceOrType, cancellationToken);
 
         /// <summary>
-        /// Create a new solution where the declaration of the destination symbol has additional members of the same signature as the specified member symbols.
+        /// Create a new solution where the declaration of the destination symbol has additional members of
+        // the same signature as the specified member symbols.
         /// Returns the document in the new solution where the destination symbol is declared.
         /// </summary>
         public static Task<Document> AddMemberDeclarationsAsync(
@@ -143,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 .AddMembersAsync(context, destination, members, cancellationToken);
 
         /// <summary>
-        /// Returns <c>true</c> if additional declarations can be added to the destination symbol's declaration.
+        /// Returns <c>true</c> if additional declarations can be added to the destination symbol's
+        // declaration.
         /// </summary>
         public static bool CanAdd(
             Solution solution,

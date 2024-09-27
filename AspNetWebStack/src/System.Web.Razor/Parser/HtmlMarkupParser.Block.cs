@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -539,14 +540,16 @@ namespace System.Web.Razor.Parser
             else
             {
                 // Literal value
-                // 'quote' should be "Unknown" if not quoted and symbols coming from the tokenizer should never have "Unknown" type.
+                // 'quote' should be "Unknown" if not quoted and symbols coming from the tokenizer should never have
+                // "Unknown" type.
                 var value = ReadWhile(sym =>
                     // These three conditions find separators which break the attribute value into portions
                     sym.Type != HtmlSymbolType.WhiteSpace
                     && sym.Type != HtmlSymbolType.NewLine
                     && sym.Type != HtmlSymbolType.Transition
                     &&
-                    // This condition checks for the end of the attribute value (it repeats some of the checks above but for now that's ok)
+                    // This condition checks for the end of the attribute value (it repeats some of the checks above but
+                    // for now that's ok)
                     !IsEndOfAttributeValue(quote, sym)
                 );
                 Accept(value);
@@ -589,7 +592,8 @@ namespace System.Web.Razor.Parser
             Assert(HtmlSymbolType.Text);
             Debug.Assert(CurrentSymbol.Content.Length > 0 && CurrentSymbol.Content[0] == '~');
 
-            // Parse until a transition symbol, whitespace, newline or quote. We support only a fairly minimal subset of Virtual Paths
+            // Parse until a transition symbol, whitespace, newline or quote. We support only a fairly minimal
+            // subset of Virtual Paths
             AcceptUntil(
                 HtmlSymbolType.Transition,
                 HtmlSymbolType.WhiteSpace,
@@ -760,7 +764,8 @@ namespace System.Web.Razor.Parser
                     if (VoidElements.Contains(tagName))
                     {
                         // Technically, void elements like "meta" are not allowed to have end tags. Just in case they do,
-                        // we need to look ahead at the next set of tokens. If we see "<", "/", tag name, accept it and the ">" following it
+                        // we need to look ahead at the next set of tokens. If we see "<", "/", tag name, accept it and the
+                        // ">" following it
                         // Place a bookmark
                         int bookmark = CurrentLocation.AbsoluteIndex;
 

@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             FromClauseSyntax fromClause
         )
         {
-            // Only add the indent block operation if the 'in' keyword is present. Otherwise, we'll get the following:
+            // Only add the indent block operation if the 'in' keyword is present. Otherwise, we'll get the
+            // following:
             //
             //     from x
             //         in args
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             //     from x
             //     in args
             //
-            // However, we want to get the following result if the 'in' keyword is present to allow nested queries
+            // However, we want to get the following result if the 'in' keyword is present to allow nested
+            // queries
             // to be formatted properly.
             //
             //     from x in

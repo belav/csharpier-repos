@@ -133,7 +133,8 @@ namespace System.Web.Configuration
         string[] IServerConfig.GetVirtualSubdirs(VirtualPath path, bool inApp)
         {
             // WOS 1956227: PERF: inactive applications on the web server degrade Working Set by 10%
-            // It is very expensive to get a list of subdirs not in the application if there are a lot of applications,
+            // It is very expensive to get a list of subdirs not in the application if there are a lot of
+            // applications,
             // so instead, use ProcessHostServerConfig.IsWithinApp to check if a particular path is in the app.
             if (inApp == false)
             {

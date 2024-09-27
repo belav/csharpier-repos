@@ -10,7 +10,8 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Net.Security
 {
     //
-    // Used when working with SSPI APIs, like SafeSspiAuthDataHandle(). Holds the pointer to the auth data blob.
+    // Used when working with SSPI APIs, like SafeSspiAuthDataHandle(). Holds the pointer to the auth
+    // data blob.
     //
 #if DEBUG
     internal sealed class SafeSspiAuthDataHandle : DebugSafeHandle
@@ -70,10 +71,13 @@ namespace System.Net.Security
 
         //
         // After PInvoke call the method will fix the refHandle.handle with the returned value.
-        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no
+        // handle is returned.
         //
-        // This method switches between three non-interruptible helper methods.  (This method can't be both non-interruptible and
-        // reference imports from all three DLLs - doing so would cause all three DLLs to try to be bound to.)
+        // This method switches between three non-interruptible helper methods.  (This method can't be both
+        // non-interruptible and
+        // reference imports from all three DLLs - doing so would cause all three DLLs to try to be bound
+        // to.)
         //
         public static unsafe int QueryContextAttributes(
             SafeDeleteContext phContext,
@@ -663,7 +667,8 @@ namespace System.Net.Security
 
         //
         // After PInvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavor or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavor or null can be
+        // passed if no handle is returned.
         //
         private static unsafe int MustRunInitializeSecurityContext(
             ref SafeFreeCredentials inCredentials,
@@ -697,7 +702,8 @@ namespace System.Net.Security
                 void* inContextPtr = contextHandle.IsZero ? null : &contextHandle;
 
                 // The "isContextAbsent" supplied by the caller is generally correct but was computed without proper
-                // synchronization. Rewrite the indicator now that the final "inContext" is known, update if necessary.
+                // synchronization. Rewrite the indicator now that the final "inContext" is known, update if
+                // necessary.
                 isContextAbsent = (inContextPtr == null);
 
                 errorCode = Interop.SspiCli.InitializeSecurityContextW(
@@ -739,7 +745,8 @@ namespace System.Net.Security
                 outContext.DangerousRelease();
             }
 
-            // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+            // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+            // pointer.
             if (handleTemplate != null)
             {
                 //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes
@@ -1044,7 +1051,8 @@ namespace System.Net.Security
 
         //
         // After PInvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavor or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavor or null can be
+        // passed if no handle is returned.
         //
         private static unsafe int MustRunAcceptSecurityContext_SECURITY(
             ref SafeFreeCredentials inCredentials,
@@ -1078,7 +1086,8 @@ namespace System.Net.Security
                 void* inContextPtr = contextHandle.IsZero ? null : &contextHandle;
 
                 // The "isContextAbsent" supplied by the caller is generally correct but was computed without proper
-                // synchronization. Rewrite the indicator now that the final "inContext" is known, update if necessary.
+                // synchronization. Rewrite the indicator now that the final "inContext" is known, update if
+                // necessary.
                 isContextAbsent = (inContextPtr == null);
 
                 errorCode = Interop.SspiCli.AcceptSecurityContext(
@@ -1117,7 +1126,8 @@ namespace System.Net.Security
                 outContext.DangerousRelease();
             }
 
-            // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+            // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+            // pointer.
             if (handleTemplate != null)
             {
                 //ATTN: on 64 BIT that is still +8 cause of 2* c++ unsigned long == 8 bytes.

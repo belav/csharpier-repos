@@ -33,10 +33,10 @@ class CGen
 
         fbuilder = tbuilder.DefineField("int_field", typeof(int), FieldAttributes.Private);
         fbuilder = tbuilder.DefineField("string_field", typeof(string), FieldAttributes.Public);
-        /*pbuilder = tbuilder.DefineProperty ("FieldI", PropertyAttributes.None, typeof(int), null);
-        get_method = tbuilder.DefineMethod("get_FieldI", MethodAttributes.Public, result, null);
-        get_method.CreateMethodBody (body, body.Length);
-        pbuilder.SetGetMethod (get_method);*/
+/*pbuilder = tbuilder.DefineProperty ("FieldI", PropertyAttributes.None, typeof(int), null);
+get_method = tbuilder.DefineMethod("get_FieldI", MethodAttributes.Public, result, null);
+get_method.CreateMethodBody (body, body.Length);
+pbuilder.SetGetMethod (get_method);*/
 
         Type t = tbuilder.CreateType();
         abuilder.SetEntryPoint(method);

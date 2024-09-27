@@ -12,7 +12,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         new[] { "Dependencies/ReferenceImplementationLibrary.cs" },
         defines: new[] { "INCLUDE_REFERENCE_IMPL" }
     )]
-    // After compiling the test case we then replace the reference impl with implementation + type forwarder
+    // After compiling the test case we then replace the reference impl with implementation + type
+    // forwarder
     [SetupCompileAfter("Implementation.dll", new[] { "Dependencies/ImplementationLibrary.cs" })]
     [SetupCompileAfter(
         "Forwarder.dll",

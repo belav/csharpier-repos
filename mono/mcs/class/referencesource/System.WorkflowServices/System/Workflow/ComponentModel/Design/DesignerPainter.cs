@@ -59,7 +59,8 @@ namespace System.Workflow.ComponentModel.Design
             {
                 return;
             }
-            // special case designers contained inside activity preview designers ( only one of the contained designers is shown)
+            // special case designers contained inside activity preview designers ( only one of the contained
+            // designers is shown)
             bool visible = false;
             if (IsInsidePreviewDesignerBranch(activityDesigner, out visible))
             {
@@ -101,7 +102,8 @@ namespace System.Workflow.ComponentModel.Design
             "Microsoft.Performance",
             "CA1800:DoNotCastUnnecessarily"
         )]
-        // The above suppression is required because, the parentDesigner object is changeing inside the loop and it is
+        // The above suppression is required because, the parentDesigner object is changeing inside the loop
+        // and it is
         // not possible to cache the result of the cast as suggested by FxCop
         private static bool IsInsidePreviewDesignerBranch(
             ActivityDesigner activityDesigner,

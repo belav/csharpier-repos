@@ -35,10 +35,13 @@ public class IdentityResult
     public static IdentityResult Success => _success;
 
     /// <summary>
-    /// Creates an <see cref="IdentityResult"/> indicating a failed identity operation, with a list of <paramref name="errors"/> if applicable.
+    /// Creates an <see cref="IdentityResult"/> indicating a failed identity operation, with a list of
+    // <paramref name="errors"/> if applicable.
     /// </summary>
-    /// <param name="errors">An optional array of <see cref="IdentityError"/>s which caused the operation to fail.</param>
-    /// <returns>An <see cref="IdentityResult"/> indicating a failed identity operation, with a list of <paramref name="errors"/> if applicable.</returns>
+    /// <param name="errors">An optional array of <see cref="IdentityError"/>s which caused the
+    // operation to fail.</param>
+    /// <returns>An <see cref="IdentityResult"/> indicating a failed identity operation, with a list of
+    // <paramref name="errors"/> if applicable.</returns>
     public static IdentityResult Failed(params IdentityError[] errors)
     {
         var result = new IdentityResult { Succeeded = false };
@@ -60,12 +63,14 @@ public class IdentityResult
     }
 
     /// <summary>
-    /// Converts the value of the current <see cref="IdentityResult"/> object to its equivalent string representation.
+    /// Converts the value of the current <see cref="IdentityResult"/> object to its equivalent string
+    // representation.
     /// </summary>
     /// <returns>A string representation of the current <see cref="IdentityResult"/> object.</returns>
     /// <remarks>
     /// If the operation was successful the ToString() will return "Succeeded" otherwise it returned
-    /// "Failed : " followed by a comma delimited list of error codes from its <see cref="Errors"/> collection, if any.
+    /// "Failed : " followed by a comma delimited list of error codes from its <see cref="Errors"/>
+    // collection, if any.
     /// </remarks>
     public override string ToString()
     {

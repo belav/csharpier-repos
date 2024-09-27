@@ -431,8 +431,10 @@ namespace System.Xml
                         break;
                     }
                     bool callSkipToEndElem = true;
-                    //If union and unionValue has been parsed till EndElement, then validator.ValidateEndElement has been called
-                    //Hence should not call SkipToEndElement as the current context has already been popped in the validator
+                    //If union and unionValue has been parsed till EndElement, then validator.ValidateEndElement has
+                    // been called
+                    //Hence should not call SkipToEndElement as the current context has already been popped in the
+                    // validator
                     if (
                         (xmlSchemaInfo.IsUnionType || xmlSchemaInfo.IsDefault)
                         && coreReader is XsdCachingReader
@@ -475,7 +477,8 @@ namespace System.Xml
                 savedState = validationState;
             }
 
-            // restore original state in order to have a normal Read() behavior when called from readBinaryHelper
+            // restore original state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             validationState = savedState;
 
             // call to the helper
@@ -507,7 +510,8 @@ namespace System.Xml
                 savedState = validationState;
             }
 
-            // restore original state in order to have a normal Read() behavior when called from readBinaryHelper
+            // restore original state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             validationState = savedState;
 
             // call to the helper
@@ -539,7 +543,8 @@ namespace System.Xml
                 savedState = validationState;
             }
 
-            // restore original state in order to have a normal Read() behavior when called from readBinaryHelper
+            // restore original state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             validationState = savedState;
 
             // call to the helper
@@ -571,7 +576,8 @@ namespace System.Xml
                 savedState = validationState;
             }
 
-            // restore original state in order to have a normal Read() behavior when called from readBinaryHelper
+            // restore original state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             validationState = savedState;
 
             // call to the helper
@@ -589,7 +595,8 @@ namespace System.Xml
         {
             if (replayCache)
             { //if in replay mode, do nothing since nodes have been validated already
-                //If NodeType == XmlNodeType.EndElement && if manageNamespaces, may need to pop namespace scope, since scope is not popped in ReadAheadForMemberType
+                //If NodeType == XmlNodeType.EndElement && if manageNamespaces, may need to pop namespace scope,
+                // since scope is not popped in ReadAheadForMemberType
 
                 return AsyncHelper.DoneTask;
             }
@@ -631,8 +638,10 @@ namespace System.Xml
             return AsyncHelper.DoneTask;
         }
 
-        // SxS: This function calls ValidateElement on XmlSchemaValidator which is annotated with ResourceExposure attribute.
-        // Since the resource names (namespace location) are not provided directly by the user (they are read from the source
+        // SxS: This function calls ValidateElement on XmlSchemaValidator which is annotated with
+        // ResourceExposure attribute.
+        // Since the resource names (namespace location) are not provided directly by the user (they are
+        // read from the source
         // document) and the function does not expose any resources it is fine to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
@@ -983,7 +992,8 @@ namespace System.Xml
 
                 typedValue = tuple_14.Item2;
 
-                // ReadElementContentAsXXX cannot be called on mixed content, if positioned on node other than EndElement, Error
+                // ReadElementContentAsXXX cannot be called on mixed content, if positioned on node other than
+                // EndElement, Error
                 if (this.NodeType != XmlNodeType.EndElement)
                 {
                     throw new XmlException(

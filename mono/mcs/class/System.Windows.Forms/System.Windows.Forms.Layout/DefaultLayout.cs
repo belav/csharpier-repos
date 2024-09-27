@@ -381,8 +381,10 @@ namespace System.Windows.Forms.Layout
                     retsize.Height,
                     child_bounds.Bottom - parent.Padding.Top + child.Margin.Bottom
                 );
-                //retsize.Width = Math.Max (retsize.Width, child_bounds.Right - parent.DisplayRectangle.Left + child.Margin.Right);
-                //retsize.Height = Math.Max (retsize.Height, child_bounds.Bottom - parent.DisplayRectangle.Top + child.Margin.Bottom);
+                //retsize.Width = Math.Max (retsize.Width, child_bounds.Right - parent.DisplayRectangle.Left +
+                // child.Margin.Right);
+                //retsize.Height = Math.Max (retsize.Height, child_bounds.Bottom - parent.DisplayRectangle.Top +
+                // child.Margin.Bottom);
             }
 
             return retsize;

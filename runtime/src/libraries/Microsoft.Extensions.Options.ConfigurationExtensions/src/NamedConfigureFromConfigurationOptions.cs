@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.Extensions.Options
 {
     /// <summary>
-    /// Configures an option instance by using <see cref="ConfigurationBinder.Bind(IConfiguration, object)"/> against an <see cref="IConfiguration"/>.
+    /// Configures an option instance by using <see cref="ConfigurationBinder.Bind(IConfiguration,
+    // object)"/> against an <see cref="IConfiguration"/>.
     /// </summary>
     /// <typeparam name="TOptions">The type of options to bind.</typeparam>
     public class NamedConfigureFromConfigurationOptions<

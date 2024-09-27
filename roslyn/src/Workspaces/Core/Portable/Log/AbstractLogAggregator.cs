@@ -22,8 +22,10 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         where TValue : class // TValue being constrained to a class will ensure that the ConcurrentDictionaries won't be JITted with structs
     {
         /// <remarks>
-        /// The key here is an object even though we will often be putting enums into this map; the problem with the use of enums or other value
-        /// types is they prevent the runtime from sharing the same JITted code for each different generic instantiation. In this case,
+        /// The key here is an object even though we will often be putting enums into this map; the problem
+        // with the use of enums or other value
+        /// types is they prevent the runtime from sharing the same JITted code for each different generic
+        // instantiation. In this case,
         /// the cost of boxing is cheaper than the cost of the extra JIT.
         /// </remarks>
         private readonly ConcurrentDictionary<object, TValue> _map =

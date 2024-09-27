@@ -31,7 +31,8 @@ namespace System.Xml.Schema
             set { id = value; }
         }
 
-        /// <include file='doc\XmlSchemaAnnotation.uex' path='docs/doc[@for="XmlSchemaAnnotation.Items"]/*' />
+        /// <include file='doc\XmlSchemaAnnotation.uex' path='docs/doc[@for="XmlSchemaAnnotation.Items"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -44,7 +45,8 @@ namespace System.Xml.Schema
             get { return items; }
         }
 
-        /// <include file='doc\XmlSchemaAnnotation.uex' path='docs/doc[@for="XmlSchemaAnnotation.UnhandledAttributes"]/*' />
+        /// <include file='doc\XmlSchemaAnnotation.uex'
+        // path='docs/doc[@for="XmlSchemaAnnotation.UnhandledAttributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

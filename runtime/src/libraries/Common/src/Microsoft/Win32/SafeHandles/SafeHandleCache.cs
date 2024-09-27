@@ -18,7 +18,8 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>
         /// Gets a cached, invalid handle.  As the instance is cached, it should either never be Disposed
         /// or it should override <see cref="SafeHandle.Dispose(bool)"/> to prevent disposal when the
-        /// instance represents an invalid handle: <see cref="System.Runtime.InteropServices.SafeHandle.IsInvalid"/> returns <see language="true"/>.
+        /// instance represents an invalid handle: <see
+        // cref="System.Runtime.InteropServices.SafeHandle.IsInvalid"/> returns <see language="true"/>.
         /// </summary>
         internal static T GetInvalidHandle(Func<T> invalidHandleFactory)
         {

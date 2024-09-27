@@ -366,7 +366,8 @@ namespace DbLinq.Data.Linq
         /// <summary>
         /// Returns a Table for the type TEntity.
         /// </summary>
-        /// <exception cref="InvalidOperationException">If the type TEntity is not mappable as a Table.</exception>
+        /// <exception cref="InvalidOperationException">If the type TEntity is not mappable as a
+        // Table.</exception>
         /// <typeparam name="TEntity">The table type.</typeparam>
         public Table<TEntity> GetTable<TEntity>()
             where TEntity : class
@@ -591,9 +592,12 @@ namespace DbLinq.Data.Linq
             foreach (var assoc in metaType.Associations)
             {
                 var memberData = assoc.ThisMember;
-                //This is not correct - AutoSyncing applies to auto-updating columns, such as a TimeStamp, not to foreign key associations, which is always automatically synched
-                //Confirmed against default .NET l2sql - association columns are always set, even if AutoSync==AutoSync.Never
-                //if (memberData.Association.ThisKey.Any(m => (m.AutoSync != AutoSync.Always) && (m.AutoSync != sync)))
+                //This is not correct - AutoSyncing applies to auto-updating columns, such as a TimeStamp, not to
+                // foreign key associations, which is always automatically synched
+                //Confirmed against default .NET l2sql - association columns are always set, even if
+                // AutoSync==AutoSync.Never
+                //if (memberData.Association.ThisKey.Any(m => (m.AutoSync != AutoSync.Always) && (m.AutoSync !=
+                // sync)))
                 //    continue;
                 var oks = memberData.Association.OtherKey.Select(m => m.StorageMember).ToList();
                 if (oks.Count == 0)
@@ -842,7 +846,8 @@ namespace DbLinq.Data.Linq
         }
 
         /// <summary>
-        /// This method is executed when the entity is being registered. Each EntitySet property has a internal query that can be set using the EntitySet.SetSource method.
+        /// This method is executed when the entity is being registered. Each EntitySet property has a
+        // internal query that can be set using the EntitySet.SetSource method.
         /// Here we set the query source of each EntitySetProperty
         /// </summary>
         /// <param name="entity"></param>
@@ -930,7 +935,10 @@ namespace DbLinq.Data.Linq
 
                     var setSourceMethod = entitySetValue.GetType().GetMethod("SetSource");
                     setSourceMethod.Invoke(entitySetValue, new[] { query });
-                    //employee.EmployeeTerritories.SetSource(Table[EmployeesTerritories].Where(other=>other.employeeID="WARTH"))
+
+                    //
+                    //
+                    // //employee.EmployeeTerritories.SetSource(Table[EmployeesTerritories].Where(other=>other.employeeID="WARTH"))
                 }
             }
         }
@@ -1202,7 +1210,8 @@ namespace DbLinq.Data.Linq
             //connection closing should not be done here.
             //read: http://msdn2.microsoft.com/en-us/library/bb292288.aspx
 
-            //We own the instance of MemberModificationHandler - we must unregister listeners of entities we attached to
+            //We own the instance of MemberModificationHandler - we must unregister listeners of entities we
+            // attached to
             MemberModificationHandler.UnregisterAll();
         }
 

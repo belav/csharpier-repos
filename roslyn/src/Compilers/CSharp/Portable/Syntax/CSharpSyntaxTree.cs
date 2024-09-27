@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ImmutableArray<int> _preprocessorStateChangePositions;
 
         /// <summary>
-        /// Preprocessor states corresponding to positions in <see cref="_preprocessorStateChangePositions"/>.
+        /// Preprocessor states corresponding to positions in <see
+        // cref="_preprocessorStateChangePositions"/>.
         /// </summary>
         private ImmutableArray<InternalSyntax.DirectiveStack> _preprocessorStates;
 
@@ -66,14 +67,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         // at least limit its visibility to SyntaxTree extenders.
 
         /// <summary>
-        /// Produces a clone of a <see cref="CSharpSyntaxNode"/> which will have current syntax tree as its parent.
+        /// Produces a clone of a <see cref="CSharpSyntaxNode"/> which will have current syntax tree as its
+        // parent.
         ///
-        /// Caller must guarantee that if the same instance of <see cref="CSharpSyntaxNode"/> makes multiple calls
+        /// Caller must guarantee that if the same instance of <see cref="CSharpSyntaxNode"/> makes multiple
+        // calls
         /// to this function, only one result is observable.
         /// </summary>
         /// <typeparam name="T">Type of the syntax node.</typeparam>
         /// <param name="node">The original syntax node.</param>
-        /// <returns>A clone of the original syntax node that has current <see cref="CSharpSyntaxTree"/> as its parent.</returns>
+        /// <returns>A clone of the original syntax node that has current <see cref="CSharpSyntaxTree"/> as
+        // its parent.</returns>
         protected T CloneNodeAsRoot<T>(T node)
             where T : CSharpSyntaxNode
         {
@@ -94,8 +98,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets the root node of the syntax tree asynchronously.
         /// </summary>
         /// <remarks>
-        /// By default, the work associated with this method will be executed immediately on the current thread.
-        /// Implementations that wish to schedule this work differently should override <see cref="GetRootAsync(CancellationToken)"/>.
+        /// By default, the work associated with this method will be executed immediately on the current
+        // thread.
+        /// Implementations that wish to schedule this work differently should override <see
+        // cref="GetRootAsync(CancellationToken)"/>.
         /// </remarks>
         public new virtual Task<CSharpSyntaxNode> GetRootAsync(
             CancellationToken cancellationToken = default
@@ -110,9 +116,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets the root of the syntax tree statically typed as <see cref="CompilationUnitSyntax"/>.
         /// </summary>
         /// <remarks>
-        /// Ensure that <see cref="SyntaxTree.HasCompilationUnitRoot"/> is true for this tree prior to invoking this method.
+        /// Ensure that <see cref="SyntaxTree.HasCompilationUnitRoot"/> is true for this tree prior to
+        // invoking this method.
         /// </remarks>
-        /// <exception cref="InvalidCastException">Throws this exception if <see cref="SyntaxTree.HasCompilationUnitRoot"/> is false.</exception>
+        /// <exception cref="InvalidCastException">Throws this exception if <see
+        // cref="SyntaxTree.HasCompilationUnitRoot"/> is false.</exception>
         public CompilationUnitSyntax GetCompilationUnitRoot(
             CancellationToken cancellationToken = default
         )
@@ -125,8 +133,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="tree">The tree to compare against.</param>
         /// <param name="topLevel">
-        /// If true then the trees are equivalent if the contained nodes and tokens declaring metadata visible symbolic information are equivalent,
-        /// ignoring any differences of nodes inside method bodies or initializer expressions, otherwise all nodes and tokens must be equivalent.
+        /// If true then the trees are equivalent if the contained nodes and tokens declaring metadata
+        // visible symbolic information are equivalent,
+        /// ignoring any differences of nodes inside method bodies or initializer expressions, otherwise all
+        // nodes and tokens must be equivalent.
         /// </param>
         public override bool IsEquivalentTo(SyntaxTree tree, bool topLevel = false)
         {
@@ -352,7 +362,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Creates a new syntax tree from a syntax node.
         /// </summary>
-        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
+        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed
+        // with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
         /// <param name="isGeneratedCode">An obsolete parameter. It is unused.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
@@ -410,7 +421,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Creates a new syntax tree from a syntax node with text that should correspond to the syntax node.
+        /// Creates a new syntax tree from a syntax node with text that should correspond to the syntax
+        // node.
         /// </summary>
         /// <remarks>This is used by the ExpressionEvaluator.</remarks>
         internal static SyntaxTree CreateForDebugger(
@@ -426,11 +438,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// <para>
-        /// Internal helper for <see cref="CSharpSyntaxNode"/> class to create a new syntax tree rooted at the given root node.
-        /// This method does not create a clone of the given root, but instead preserves it's reference identity.
+        /// Internal helper for <see cref="CSharpSyntaxNode"/> class to create a new syntax tree rooted at
+        // the given root node.
+        /// This method does not create a clone of the given root, but instead preserves it's reference
+        // identity.
         /// </para>
-        /// <para>NOTE: This method is only intended to be used from <see cref="CSharpSyntaxNode.SyntaxTree"/> property.</para>
-        /// <para>NOTE: Do not use this method elsewhere, instead use <see cref="Create(CSharpSyntaxNode, CSharpParseOptions, string, Encoding)"/> method for creating a syntax tree.</para>
+        /// <para>NOTE: This method is only intended to be used from <see
+        // cref="CSharpSyntaxNode.SyntaxTree"/> property.</para>
+        /// <para>NOTE: Do not use this method elsewhere, instead use <see cref="Create(CSharpSyntaxNode,
+        // CSharpParseOptions, string, Encoding)"/> method for creating a syntax tree.</para>
         /// </summary>
         internal static SyntaxTree CreateWithoutClone(CSharpSyntaxNode root)
         {
@@ -499,7 +515,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Produces a syntax tree by parsing the source text.
         /// </summary>
-        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
+        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed
+        // with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
         /// <param name="isGeneratedCode">An obsolete parameter. It is unused.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
@@ -550,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Produces a syntax tree by parsing the source text.
         /// </summary>
-        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
+        /// <param name="diagnosticOptions">An obsolete parameter. Diagnostic options should now be passed
+        // with <see cref="CompilationOptions.SyntaxTreeOptionsProvider"/></param>
         /// <param name="isGeneratedCode">An obsolete parameter. It is unused.</param>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [Obsolete(
@@ -604,8 +622,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Creates a new syntax based off this tree using a new source text.
         /// </summary>
         /// <remarks>
-        /// If the new source text is a minor change from the current source text an incremental parse will occur
-        /// reusing most of the current syntax tree internal data.  Otherwise, a full parse will occur using the new
+        /// If the new source text is a minor change from the current source text an incremental parse will
+        // occur
+        /// reusing most of the current syntax tree internal data.  Otherwise, a full parse will occur using
+        // the new
         /// source text.
         /// </remarks>
         public override SyntaxTree WithChangedText(SourceText newText)
@@ -623,7 +643,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return this.WithChanges(newText, changes);
             }
 
-            // if we do not easily know the old text, then specify entire text as changed so we do a full reparse.
+            // if we do not easily know the old text, then specify entire text as changed so we do a full
+            // reparse.
             return this.WithChanges(
                 newText,
                 new[] { new TextChangeRange(new TextSpan(0, this.Length), newText.Length) }
@@ -682,7 +703,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// are changed from the text of the old tree.
         /// </summary>
         /// <param name="oldTree">The old tree. Cannot be <c>null</c>.</param>
-        /// <remarks>The list is pessimistic because it may claim more or larger regions than actually changed.</remarks>
+        /// <remarks>The list is pessimistic because it may claim more or larger regions than actually
+        // changed.</remarks>
         public override IList<TextSpan> GetChangedSpans(SyntaxTree oldTree)
         {
             if (oldTree == null)
@@ -697,7 +719,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets a list of text changes that when applied to the old tree produce this tree.
         /// </summary>
         /// <param name="oldTree">The old tree. Cannot be <c>null</c>.</param>
-        /// <remarks>The list of changes may be different than the original changes that produced this tree.</remarks>
+        /// <remarks>The list of changes may be different than the original changes that produced this
+        // tree.</remarks>
         public override IList<TextChange> GetChanges(SyntaxTree oldTree)
         {
             if (oldTree == null)
@@ -747,19 +770,24 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
 
         /// <summary>
-        /// Gets the location in terms of path, line and column after applying source line mapping directives (<c>#line</c>).
+        /// Gets the location in terms of path, line and column after applying source line mapping
+        // directives (<c>#line</c>).
         /// </summary>
         /// <param name="span">Span within the tree.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>
-        /// <para>A valid <see cref="FileLinePositionSpan"/> that contains path, line and column information.</para>
+        /// <para>A valid <see cref="FileLinePositionSpan"/> that contains path, line and column
+        // information.</para>
         /// <para>
-        /// If the location path is mapped the resulting path is the path specified in the corresponding <c>#line</c>,
+        /// If the location path is mapped the resulting path is the path specified in the corresponding
+        // <c>#line</c>,
         /// otherwise it's <see cref="SyntaxTree.FilePath"/>.
         /// </para>
         /// <para>
-        /// A location path is considered mapped if the first <c>#line</c> directive that precedes it and that
-        /// either specifies an explicit file path or is <c>#line default</c> exists and specifies an explicit path.
+        /// A location path is considered mapped if the first <c>#line</c> directive that precedes it and
+        // that
+        /// either specifies an explicit file path or is <c>#line default</c> exists and specifies an
+        // explicit path.
         /// </para>
         /// </returns>
         public override FileLinePositionSpan GetMappedLineSpan(
@@ -786,11 +814,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Gets a <see cref="FileLinePositionSpan"/> for a <see cref="TextSpan"/>. FileLinePositionSpans are used
+        /// Gets a <see cref="FileLinePositionSpan"/> for a <see cref="TextSpan"/>. FileLinePositionSpans
+        // are used
         /// primarily for diagnostics and source locations.
         /// </summary>
         /// <param name="span">The source <see cref="TextSpan" /> to convert.</param>
-        /// <param name="isHiddenPosition">When the method returns, contains a boolean value indicating whether this span is considered hidden or not.</param>
+        /// <param name="isHiddenPosition">When the method returns, contains a boolean value indicating
+        // whether this span is considered hidden or not.</param>
         /// <returns>A resulting <see cref="FileLinePositionSpan"/>.</returns>
         internal override FileLinePositionSpan GetMappedLineSpanAndVisibility(
             TextSpan span,
@@ -806,7 +836,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override bool HasHiddenRegions() => GetDirectiveMap().HasAnyHiddenRegions();
 
         /// <summary>
-        /// Given the error code and the source location, get the warning state based on <c>#pragma warning</c> directives.
+        /// Given the error code and the source location, get the warning state based on <c>#pragma
+        // warning</c> directives.
         /// </summary>
         /// <param name="id">Error code.</param>
         /// <param name="position">Source location.</param>
@@ -972,7 +1003,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Gets a list of all the diagnostics in either the sub tree that has the specified node as its root or
+        /// Gets a list of all the diagnostics in either the sub tree that has the specified node as its
+        // root or
         /// associated with the token and its related trivia.
         /// </summary>
         /// <remarks>

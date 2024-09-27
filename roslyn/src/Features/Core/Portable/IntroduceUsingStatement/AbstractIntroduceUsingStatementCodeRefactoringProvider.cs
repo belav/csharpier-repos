@@ -176,7 +176,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
             var surroundingStatements = GetSurroundingStatements(declarationStatement);
             var declarationStatementIndex = surroundingStatements.IndexOf(declarationStatement);
 
-            // See if the user had an explicit `try/finally` which was disposing this local already.  If so, just
+            // See if the user had an explicit `try/finally` which was disposing this local already.  If so,
+            // just
             // convert that to a `using` instead.
             var tryStatement =
                 declarationStatementIndex + 1 < surroundingStatements.Count
@@ -224,7 +225,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
                     cancellationToken
                 );
 
-                // If we're intending on surrounding all the statements that follow the declaration, and the language supports it.
+                // If we're intending on surrounding all the statements that follow the declaration, and the
+                // language supports it.
                 // then generate `using var x = ...;` instead of `using (var x = ...) { }`
                 if (
                     consumedLastSurroundingStatement
@@ -384,7 +386,8 @@ namespace Microsoft.CodeAnalysis.IntroduceUsingStatement
         {
             // We are going to step through the statements starting with the trigger variable's declaration.
             // We will track when new locals are declared and when they are used. To determine the last
-            // statement that we should surround, we will walk through the locals in the order they are declared.
+            // statement that we should surround, we will walk through the locals in the order they are
+            // declared.
             // If the local's declaration index falls within the last variable usage index, we will extend
             // the last variable usage index to include the local's last usage.
 

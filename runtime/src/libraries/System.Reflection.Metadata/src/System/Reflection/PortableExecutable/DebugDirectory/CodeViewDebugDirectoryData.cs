@@ -13,7 +13,8 @@ namespace System.Reflection.PortableExecutable
         public Guid Guid { get; }
 
         /// <summary>
-        /// Iteration of the PDB. The first iteration is 1. The iteration is incremented each time the PDB content is augmented.
+        /// Iteration of the PDB. The first iteration is 1. The iteration is incremented each time the PDB
+        // content is augmented.
         /// </summary>
         public int Age { get; }
 

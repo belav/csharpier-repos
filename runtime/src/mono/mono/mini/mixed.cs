@@ -6,9 +6,9 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 /*
- * Regression tests for the mixed-mode execution.
- * Run with --interp=jit=JitClass
- */
+* Regression tests for the mixed-mode execution.
+* Run with --interp=jit=JitClass
+*/
 
 struct AStruct
 {

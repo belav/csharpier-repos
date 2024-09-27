@@ -14,7 +14,8 @@ public readonly struct MediaTypeSegmentWithQuality
     /// Initializes an instance of <see cref="MediaTypeSegmentWithQuality"/>.
     /// </summary>
     /// <param name="mediaType">The <see cref="StringSegment"/> containing the media type.</param>
-    /// <param name="quality">The quality parameter of the media type or 1 in the case it does not exist.</param>
+    /// <param name="quality">The quality parameter of the media type or 1 in the case it does not
+    // exist.</param>
     public MediaTypeSegmentWithQuality(StringSegment mediaType, double quality)
     {
         MediaType = mediaType;

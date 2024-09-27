@@ -8,8 +8,10 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.InternalTesting.Tracing;
 
-// This collection attribute is what makes the "magic" happen. It forces xunit to run all tests that inherit from this
-// base class sequentially, preventing conflicts (since EventSource/EventListener is a process-global concept).
+// This collection attribute is what makes the "magic" happen. It forces xunit to run all tests that
+// inherit from this
+// base class sequentially, preventing conflicts (since EventSource/EventListener is a
+// process-global concept).
 [Collection(CollectionName)]
 public abstract class EventSourceTestBase : IDisposable
 {

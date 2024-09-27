@@ -83,7 +83,8 @@ namespace System.Threading
 
             Lock lck = SyncTable.GetLockObject(resultOrIndex);
 
-            // The one-shot fast path is not covered by the slow path below for a zero timeout when the thread ID is
+            // The one-shot fast path is not covered by the slow path below for a zero timeout when the thread
+            // ID is
             // initialized, so cover it here in case it wasn't already done
             if (currentThreadID != 0 && lck.TryEnterOneShot(currentThreadID))
                 return true;
@@ -116,7 +117,8 @@ namespace System.Threading
                     ? ObjectHeader.GetLockObject(obj)
                     : SyncTable.GetLockObject(resultOrIndex);
 
-            // The one-shot fast path is not covered by the slow path below for a zero timeout when the thread ID is
+            // The one-shot fast path is not covered by the slow path below for a zero timeout when the thread
+            // ID is
             // initialized, so cover it here in case it wasn't already done
             if (
                 millisecondsTimeout == 0
@@ -179,7 +181,8 @@ namespace System.Threading
         #region Metrics
 
         /// <summary>
-        /// Gets the number of times there was contention upon trying to take a <see cref="Monitor"/>'s lock so far.
+        /// Gets the number of times there was contention upon trying to take a <see cref="Monitor"/>'s lock
+        // so far.
         /// </summary>
         public static long LockContentionCount => Lock.ContentionCount;
 

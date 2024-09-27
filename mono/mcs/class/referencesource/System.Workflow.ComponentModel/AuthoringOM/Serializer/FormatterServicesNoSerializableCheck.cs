@@ -96,13 +96,13 @@ namespace System.Runtime.Serialization
         private static bool CheckSerializable(Type type)
         {
             return true;
-            /*
-            if (type.IsSerializable)
-            {
-                return true;
-            }
-            return false;
-            */
+/*
+if (type.IsSerializable)
+{
+return true;
+}
+return false;
+*/
         }
 
         private static MemberInfo[] InternalGetSerializableMembers(
@@ -205,9 +205,9 @@ namespace System.Runtime.Serialization
         {
             //Check if there are any dup class names. Then we need to include as part of
             //typeName to prefix the Field names in SerializationFieldInfo
-            /*out*/
+/*out*/
             parentTypes = null;
-            /*out*/
+/*out*/
             parentTypeCount = 0;
             bool unique = true;
             for (Type t1 = parentType; t1 != typeof(object); t1 = t1.BaseType)

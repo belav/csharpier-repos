@@ -33,7 +33,7 @@ namespace Mono.Btls
     {
         OK = 0,
 
-        /* illegal error (for uninitialized values, to avoid X509_V_OK): 1 */
+/* illegal error (for uninitialized values, to avoid X509_V_OK): 1 */
 
         UNABLE_TO_GET_ISSUER_CERT = 2,
         UNABLE_TO_GET_CRL = 3,
@@ -63,7 +63,7 @@ namespace Mono.Btls
         CERT_UNTRUSTED = 27,
         CERT_REJECTED = 28,
 
-        /* These are 'informational' when looking for issuer cert */
+/* These are 'informational' when looking for issuer cert */
         SUBJECT_ISSUER_MISMATCH = 29,
         AKID_SKID_MISMATCH = 30,
         AKID_ISSUER_SERIAL_MISMATCH = 31,
@@ -94,7 +94,7 @@ namespace Mono.Btls
         UNSUPPORTED_NAME_SYNTAX = 53,
         CRL_PATH_VALIDATION_ERROR = 54,
 
-        /* Suite B mode algorithm violation */
+/* Suite B mode algorithm violation */
         SUITE_B_INVALID_VERSION = 56,
         SUITE_B_INVALID_ALGORITHM = 57,
         SUITE_B_INVALID_CURVE = 58,
@@ -102,12 +102,12 @@ namespace Mono.Btls
         SUITE_B_LOS_NOT_ALLOWED = 60,
         SUITE_B_CANNOT_SIGN_P_384_WITH_P_256 = 61,
 
-        /* Host, email and IP check errors */
+/* Host, email and IP check errors */
         HOSTNAME_MISMATCH = 62,
         EMAIL_MISMATCH = 63,
         IP_ADDRESS_MISMATCH = 64,
 
-        /* The application is not happy */
+/* The application is not happy */
         APPLICATION_VERIFICATION = 50,
     }
 }

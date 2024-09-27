@@ -227,7 +227,7 @@ namespace System.Windows
             set { _y = value; }
         }
 
-        /* operators */
+/* operators */
         public static explicit operator Point(Vector vector)
         {
             return new Point(vector.X, vector.Y);

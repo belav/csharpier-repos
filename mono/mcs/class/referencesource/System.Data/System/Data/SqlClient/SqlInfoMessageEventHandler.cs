@@ -13,7 +13,9 @@ namespace System.Data.SqlClient
 
     /// <devdoc>
     ///    <para>
-    ///       Represents the method that will handle the <see cref='System.Data.SqlClient.SqlConnection.InfoMessage'/> event of a <see cref='System.Data.SqlClient.SqlConnection'/>.
+    ///       Represents the method that will handle the <see
+    // cref='System.Data.SqlClient.SqlConnection.InfoMessage'/> event of a <see
+    // cref='System.Data.SqlClient.SqlConnection'/>.
     ///    </para>
     /// </devdoc>
     public delegate void SqlInfoMessageEventHandler(object sender, SqlInfoMessageEventArgs e);

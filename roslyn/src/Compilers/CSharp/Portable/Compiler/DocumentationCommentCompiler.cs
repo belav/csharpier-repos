@@ -77,12 +77,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// a provided stream.
         /// </summary>
         /// <param name="compilation">Compilation that owns the symbol table.</param>
-        /// <param name="assemblyName">Assembly name override, if specified. Otherwise the <see cref="ISymbol.Name"/> of the source assembly is used.</param>
+        /// <param name="assemblyName">Assembly name override, if specified. Otherwise the <see
+        // cref="ISymbol.Name"/> of the source assembly is used.</param>
         /// <param name="xmlDocStream">Stream to which XML will be written, if specified.</param>
         /// <param name="diagnostics">Will be supplemented with documentation comment diagnostics.</param>
         /// <param name="cancellationToken">To stop traversing the symbol table early.</param>
         /// <param name="filterTree">Only report diagnostics from this syntax tree, if non-null.</param>
-        /// <param name="filterSpanWithinTree">If <paramref name="filterTree"/> and filterSpanWithinTree is non-null, report diagnostics within this span in the <paramref name="filterTree"/>.</param>
+        /// <param name="filterSpanWithinTree">If <paramref name="filterTree"/> and filterSpanWithinTree is
+        // non-null, report diagnostics within this span in the <paramref name="filterTree"/>.</param>
 #nullable enable
         public static void WriteDocumentationCommentXml(
             CSharpCompilation compilation,
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Gets the XML that would be written to the documentation comment file for this assembly.
         /// </summary>
         /// <param name="symbol">The symbol for which to retrieve documentation comments.</param>
-        /// <param name="processIncludes">True to treat includes as semantically meaningful (pull in contents from other files and bind crefs, etc).</param>
+        /// <param name="processIncludes">True to treat includes as semantically meaningful (pull in
+        // contents from other files and bind crefs, etc).</param>
         /// <param name="cancellationToken">To stop traversing the symbol table early.</param>
         internal static string GetDocumentationCommentXml(
             Symbol symbol,
@@ -337,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // synthesized record property: emit the matching param doc on containing type as the summary doc of the property.
+            // synthesized record property: emit the matching param doc on containing type as the summary doc of
+            // the property.
             var symbolForDocComments =
                 symbol is SynthesizedRecordPropertySymbol ? symbol.ContainingType : symbol;
             if (
@@ -348,7 +352,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             )
             {
-                // If the XML in any of the doc comments is invalid, skip all further processing (for this symbol) and
+                // If the XML in any of the doc comments is invalid, skip all further processing (for this symbol)
+                // and
                 // just write a comment saying that info was lost for this symbol.
                 string message = ErrorFacts.GetMessage(
                     MessageID.IDS_XMLIGNORED,
@@ -364,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return;
             }
 
-            // If there are no doc comments, then no further work is required (other than to report a diagnostic if one is required).
+            // If there are no doc comments, then no further work is required (other than to report a diagnostic
+            // if one is required).
             if (docCommentNodes.IsEmpty)
             {
                 if (
@@ -414,7 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (haveParseError)
             {
-                // If the XML in any of the doc comments is invalid, skip all further processing (for this symbol) and
+                // If the XML in any of the doc comments is invalid, skip all further processing (for this symbol)
+                // and
                 // just write a comment saying that info was lost for this symbol.
                 string message = ErrorFacts.GetMessage(
                     MessageID.IDS_XMLIGNORED,
@@ -435,8 +442,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 _cancellationToken.ThrowIfCancellationRequested();
 
-                // NOTE: we are expanding include elements AFTER formatting the comment, since the included text is pure
-                // XML, not XML mixed with documentation comment trivia (e.g. ///).  If we expanded them before formatting,
+                // NOTE: we are expanding include elements AFTER formatting the comment, since the included text is
+                // pure
+                // XML, not XML mixed with documentation comment trivia (e.g. ///).  If we expanded them before
+                // formatting,
                 // the formatting engine would have trouble determining what prefix to remove from each line.
                 TextWriter? expanderWriter = shouldSkipPartialDefinitionComments ? null : _writer; // Don't actually write partial method definition parts.
                 IncludeElementExpander.ProcessIncludes(
@@ -454,10 +463,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (_writer != null && !shouldSkipPartialDefinitionComments)
             {
-                // CONSIDER: The output would look a little different if we ran the XDocument through an XmlWriter.  In particular,
-                // formatting inside tags (e.g. <__tag___attr__=__"value"__>) would be normalized.  Whitespace in elements would
-                // (or should) not be affected.  If we decide that this difference matters, we can run the XDocument through an XmlWriter.
-                // Otherwise, just writing out the string saves a bunch of processing and does a better job of preserving whitespace.
+                // CONSIDER: The output would look a little different if we ran the XDocument through an XmlWriter.
+                // In particular,
+                // formatting inside tags (e.g. <__tag___attr__=__"value"__>) would be normalized.  Whitespace in
+                // elements would
+                // (or should) not be affected.  If we decide that this difference matters, we can run the XDocument
+                // through an XmlWriter.
+                // Otherwise, just writing out the string saves a bunch of processing and does a better job of
+                // preserving whitespace.
                 Write(withUnprocessedIncludes);
             }
 
@@ -660,7 +673,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (!processedDocComment)
                 {
-                    // Since we have to throw away all the parts if any part is bad, we need to write to an intermediate temp.
+                    // Since we have to throw away all the parts if any part is bad, we need to write to an intermediate
+                    // temp.
                     BeginTemporaryString();
 
                     if (_processIncludes)
@@ -692,7 +706,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 string formattedXml = FormatComment(substitutedText);
 
-                // It would be preferable to just parse the concatenated XML at the end of the loop (we wouldn't have
+                // It would be preferable to just parse the concatenated XML at the end of the loop (we wouldn't
+                // have
                 // to wrap it in a root element and we wouldn't have to reparse in the IncludeElementExpander), but
                 // then we wouldn't know whether or where to report a diagnostic.
                 XmlException e = XmlDocumentationCommentTextReader.ParseAndGetException(
@@ -711,10 +726,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                // For partial methods, all parts are validated, but only the implementation part is written to the XML stream.
+                // For partial methods, all parts are validated, but only the implementation part is written to the
+                // XML stream.
                 if (!shouldSkipPartialDefinitionComments || _processIncludes)
                 {
-                    // This string already has indentation and line breaks, so don't call WriteLine - just write the text directly.
+                    // This string already has indentation and line breaks, so don't call WriteLine - just write the
+                    // text directly.
                     Write(formattedXml);
                 }
             }
@@ -920,7 +937,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static readonly string[] s_newLineSequences = new[] { "\r\n", "\r", "\n" };
 
         /// <summary>
-        /// Given the full text of a documentation comment, strip off the comment punctuation (///, /**, etc)
+        /// Given the full text of a documentation comment, strip off the comment punctuation (///, /**,
+        // etc)
         /// and add appropriate indentations.
         /// </summary>
         private string FormatComment(string substitutedText)
@@ -950,7 +968,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 //     <param name="P">The parameter</param>
                 //     */
                 //     record Rec(int P);
-                // When formatting docs for property 'Rec.P' we may have just the line with '<param ...>' as input to this method.
+                // When formatting docs for property 'Rec.P' we may have just the line with '<param ...>' as input
+                // to this method.
                 WriteFormattedMultiLineComment(lines, numLines);
             }
 
@@ -973,7 +992,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="str">The string to search</param>
         /// <param name="start">The start index</param>
         /// <param name="end">The last index (non-inclusive)</param>
-        /// <returns>The index of the first non-whitespace char after index start in the string up to, but not including the end index</returns>
+        /// <returns>The index of the first non-whitespace char after index start in the string up to, but
+        // not including the end index</returns>
         private static int GetIndexOfFirstNonWhitespaceChar(string str, int start, int end)
         {
             Debug.Assert(start >= 0);
@@ -1027,8 +1047,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="str">The string to split.</param>
         /// <param name="start">The starting index within the string.</param>
-        /// <param name="newLineLength">The length of the newline sequence discovered. 0 if the end of the string was reached, otherwise either 1 or 2 chars</param>
-        /// <returns>The index of the start of the first newline sequence following the start index</returns>
+        /// <param name="newLineLength">The length of the newline sequence discovered. 0 if the end of the
+        // string was reached, otherwise either 1 or 2 chars</param>
+        /// <returns>The index of the start of the first newline sequence following the start
+        // index</returns>
         private static int IndexOfNewLine(string str, int start, out int newLineLength)
         {
             for (; start < str.Length; start++)
@@ -1545,17 +1567,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <remarks>
         /// WORKAROUND:
-        /// We're taking a dependency on the location and structure of a framework assembly resource.  This is not a robust solution.
+        /// We're taking a dependency on the location and structure of a framework assembly resource.  This
+        // is not a robust solution.
         ///
         /// Possible alternatives:
         /// 1) Polish our XML parser until it matches MSXML.  We don't want to reinvent the wheel.
         /// 2) Build a map that lets us go from XML string positions back to source positions.
-        /// This is what the native compiler did, and it was a lot of work.  We'd also still need to modify the message.
+        /// This is what the native compiler did, and it was a lot of work.  We'd also still need to modify
+        // the message.
         /// 3) Do not report a diagnostic.  This is very unhelpful.
-        /// 4) Report a vague diagnostic (i.e. there's a problem somewhere in this doc comment).  This is relatively unhelpful.
-        /// 5) Always report the message in English, so that we can pull it apart without needing to consume resource files.
+        /// 4) Report a vague diagnostic (i.e. there's a problem somewhere in this doc comment).  This is
+        // relatively unhelpful.
+        /// 5) Always report the message in English, so that we can pull it apart without needing to consume
+        // resource files.
         /// This engenders a lot of ill will.
-        /// 6) Report the exception message without modification and (optionally) include the text with respect to which the
+        /// 6) Report the exception message without modification and (optionally) include the text with
+        // respect to which the
         /// position is specified.  This would not look sufficiently polished.
         /// </remarks>
         private static string GetDescription(XmlException e)

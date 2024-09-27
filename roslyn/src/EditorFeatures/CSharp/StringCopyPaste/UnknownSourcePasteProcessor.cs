@@ -22,8 +22,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
     using static StringCopyPasteHelpers;
 
     /// <summary>
-    /// Paste processor responsible for determining how text should be treated if it came from a source outside of the
-    /// editor we're in.  In that case, we don't know what any particular piece of text means.  For example, <c>\t</c>
+    /// Paste processor responsible for determining how text should be treated if it came from a source
+    // outside of the
+    /// editor we're in.  In that case, we don't know what any particular piece of text means.  For
+    // example, <c>\t</c>
     /// might be a tab or it could be the literal two characters <c>\</c> and <c>t</c>.
     /// </summary>
     internal sealed class UnknownSourcePasteProcessor(
@@ -48,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
     {
         /// <summary>
         /// Whether or not the string expression remained successfully parseable after the paste.  <see
-        /// cref="StringCopyPasteCommandHandler.PasteWasSuccessful"/>.  If it can still be successfully parsed subclasses
+        /// cref="StringCopyPasteCommandHandler.PasteWasSuccessful"/>.  If it can still be successfully
+        // parsed subclasses
         /// can adjust their view on which pieces of content need to be escaped or not.
         /// </summary>
         private readonly bool _pasteWasSuccessful = pasteWasSuccessful;
@@ -71,11 +74,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             }
 
             // Ok, the user pasted text that couldn't cleanly be added to this token without issue. Repaste the
-            // contents, but this time properly escaped/manipulated so that it follows the rule of the particular token
+            // contents, but this time properly escaped/manipulated so that it follows the rule of the
+            // particular token
             // kind.
 
-            // For pastes into non-raw strings, we can just determine how the change should be escaped in-line at that
-            // same location the paste originally happened at.  For raw-strings things get more complex as we have to
+            // For pastes into non-raw strings, we can just determine how the change should be escaped in-line
+            // at that
+            // same location the paste originally happened at.  For raw-strings things get more complex as we
+            // have to
             // deal with things like indentation and potentially adding newlines to make things legal.
             return IsAnyRawStringExpression(StringExpressionBeforePaste)
                 ? GetEditsForRawString()
@@ -86,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             EscapeForNonRawStringLiteral_DoNotCallDirectly(
                 IsVerbatimStringExpression(StringExpressionBeforePaste),
                 StringExpressionBeforePaste is InterpolatedStringExpressionSyntax,
-                // We do not want to try skipping escapes in the 'value'.  We don't know where it came from, and if it
+                // We do not want to try skipping escapes in the 'value'.  We don't know where it came from, and if
+                // it
                 // had some escapes in it, it's probably a good idea to remove to keep the final pasted text clean.
                 trySkipExistingEscapes: true,
                 value
@@ -94,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
         private bool ShouldAlwaysEscapeTextForNonRawString()
         {
-            // Pasting a control character into a normal string literal is normally not desired.  So even if this
+            // Pasting a control character into a normal string literal is normally not desired.  So even if
+            // this
             // is legal, we still escape the contents to make the pasted code clear.
             return !IsVerbatimStringExpression(StringExpressionBeforePaste)
                 && ContainsControlCharacter(Changes);
@@ -106,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
             foreach (var change in Changes)
             {
-                // We're pasting from an unknown source.  If we see a viable escape in that source treat it as an escape
+                // We're pasting from an unknown source.  If we see a viable escape in that source treat it as an
+                // escape
                 // instead of escaping it one more time upon paste.
                 textChanges.Add(
                     new TextChange(
@@ -125,15 +134,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             if (NodeOrTokenContainsError(StringExpressionBeforePaste))
                 return default;
 
-            // If all we're going to do is insert whitespace, then don't make any adjustments to the text. We don't want
+            // If all we're going to do is insert whitespace, then don't make any adjustments to the text. We
+            // don't want
             // to end up inserting nothing and having the user very confused why their paste did nothing.
             if (AllWhitespace(SnapshotBeforePaste.Version.Changes))
                 return default;
 
-            // if the content we're going to add itself contains quotes, then figure out how many start/end quotes the
-            // final string literal will need (which also gives us the number of quotes to add to the start/end).
+            // if the content we're going to add itself contains quotes, then figure out how many start/end
+            // quotes the
+            // final string literal will need (which also gives us the number of quotes to add to the
+            // start/end).
             //
-            // note: we don't have to do this if the paste was successful.  Instead, we'll just process the contents,
+            // note: we don't have to do this if the paste was successful.  Instead, we'll just process the
+            // contents,
             // adjusting whitespace below.
             var quotesToAdd = _pasteWasSuccessful ? null : GetQuotesToAddToRawString();
             var dollarSignsToAdd = _pasteWasSuccessful ? null : GetDollarSignsToAddToRawString();
@@ -180,11 +193,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             return edits.ToImmutable();
         }
 
-        /// <inheritdoc cref="AbstractPasteProcessor.GetQuotesToAddToRawString(SourceText, ImmutableArray{TextSpan})" />
+        /// <inheritdoc cref="AbstractPasteProcessor.GetQuotesToAddToRawString(SourceText,
+        // ImmutableArray{TextSpan})" />
         private string? GetQuotesToAddToRawString() =>
             GetQuotesToAddToRawString(TextAfterPaste, TextContentsSpansAfterPaste);
 
-        /// <inheritdoc cref="AbstractPasteProcessor.GetDollarSignsToAddToRawString(SourceText, ImmutableArray{TextSpan})" />
+        /// <inheritdoc cref="AbstractPasteProcessor.GetDollarSignsToAddToRawString(SourceText,
+        // ImmutableArray{TextSpan})" />
         private string? GetDollarSignsToAddToRawString() =>
             GetDollarSignsToAddToRawString(TextAfterPaste, TextContentsSpansAfterPaste);
 
@@ -194,10 +209,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             ArrayBuilder<TextChange> edits
         )
         {
-            // When pasting into a single-line raw literal we will keep it a single line if we can.  If the content
-            // we're pasting starts/ends with a quote, or contains a newline, then we have to convert to a multiline.
+            // When pasting into a single-line raw literal we will keep it a single line if we can.  If the
+            // content
+            // we're pasting starts/ends with a quote, or contains a newline, then we have to convert to a
+            // multiline.
             //
-            // Pasting any other content into a single-line raw literal is always legal and needs no extra work on our
+            // Pasting any other content into a single-line raw literal is always legal and needs no extra work
+            // on our
             // part.
 
             var mustBeMultiLine = RawContentMustBeMultiLine(
@@ -262,7 +280,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                 edits.Add(new TextChange(change.OldSpan.ToTextSpan(), buffer.ToString()));
             }
 
-            // if the last change ended at the closing delimiter *and* ended with a newline, then we don't need to add a
+            // if the last change ended at the closing delimiter *and* ended with a newline, then we don't need
+            // to add a
             // final newline-space at the end because we will have already done that.
             if (mustBeMultiLine && !LastPastedLineAddedNewLine())
                 edits.Add(
@@ -333,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
                         fullChangeLineText
                     );
 
-                    // This entire if-chain is only concerned with inserting the necessary whitespace a line should have.
+                    // This entire if-chain is only concerned with inserting the necessary whitespace a line should
+                    // have.
 
                     if (firstChange)
                     {

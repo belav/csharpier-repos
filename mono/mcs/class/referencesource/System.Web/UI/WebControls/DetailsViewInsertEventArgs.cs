@@ -20,7 +20,8 @@ namespace System.Web.UI.WebControls
         private OrderedDictionary _values;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewInsertEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.DetailsViewInsertEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public DetailsViewInsertEventArgs(object commandArgument)
@@ -30,7 +31,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the argument to the command posted to the <see cref='System.Web.UI.WebControls.DetailsView'/>. This property is read-only.</para>
+        /// <para>Gets the argument to the command posted to the <see
+        // cref='System.Web.UI.WebControls.DetailsView'/>. This property is read-only.</para>
         /// </devdoc>
         public object CommandArgument
         {
@@ -38,7 +40,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with inserted row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with inserted row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary Values
         {

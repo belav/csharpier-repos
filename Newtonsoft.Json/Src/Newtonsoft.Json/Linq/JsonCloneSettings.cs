@@ -46,7 +46,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Gets or sets a flag that indicates whether to copy annotations when cloning a <see cref="JToken"/>.
+        /// Gets or sets a flag that indicates whether to copy annotations when cloning a <see
+        // cref="JToken"/>.
         /// The default value is <c>true</c>.
         /// </summary>
         /// <value>

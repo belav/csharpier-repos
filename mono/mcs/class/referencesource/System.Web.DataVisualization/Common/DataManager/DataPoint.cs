@@ -428,13 +428,16 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Data bind X, Y and other values (like Tooltip, LabelStyle,...) of the data points to the data source.
+        /// Data bind X, Y and other values (like Tooltip, LabelStyle,...) of the data points to the data
+        // source.
         /// Data source can be the Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
         /// </summary>
         /// <param name="dataSource">Data source.</param>
         /// <param name="xField">Name of the field for X values.</param>
         /// <param name="yFields">Comma separated names of the fields for Y values.</param>
-        /// <param name="otherFields">Other point properties binding rule in format: PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example: "Tooltip=Price{C1},Url=WebSiteName".</param>
+        /// <param name="otherFields">Other point properties binding rule in format:
+        // PointProperty=Field[{Format}] [,PointProperty=Field[{Format}]]. For example:
+        // "Tooltip=Price{C1},Url=WebSiteName".</param>
         [SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -638,7 +641,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Data bind Y values of the data points to the data source.
-        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
+        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or
+        // DataRow.
         /// </summary>
         /// <param name="yValue">One or more enumerable objects with Y values.</param>
         [SuppressMessage(
@@ -653,7 +657,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Data bind X and Y values of the data points to the data source.
-        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
+        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or
+        // DataRow.
         /// </summary>
         /// <param name="xValue">Enumerable objects with X values.</param>
         /// <param name="yValues">One or more enumerable objects with Y values.</param>
@@ -837,7 +842,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Data bind Y values of the data points to the data source.
-        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
+        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or
+        // DataRow.
         /// </summary>
         /// <param name="yValue">Enumerable objects with Y values.</param>
         /// <param name="yFields">Name of the fields for Y values.</param>
@@ -853,7 +859,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Data bind X and Y values of the data points to the data source.
-        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or DataRow.
+        /// Data source can be the Array, Collection, Ole(SQL)DataReader, DataView, DataSet, DataTable or
+        // DataRow.
         /// </summary>
         /// <param name="xValue">Enumerable object with X values.</param>
         /// <param name="xField">Name of the field for X values.</param>
@@ -2024,7 +2031,8 @@ namespace System.Web.UI.DataVisualization.Charting
         internal PointF positionRel = PointF.Empty;
 
         // VSTS:199794 - Accessibility needs the last rendered label content to be exposed.
-        // The current label content evaluation is scattered over different chart types and cannot be isolated without risk of regression.
+        // The current label content evaluation is scattered over different chart types and cannot be
+        // isolated without risk of regression.
         // This variable will cache the label content taken just before drawing.
         internal string _lastLabelText = String.Empty;
 
@@ -2980,7 +2988,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -3266,7 +3275,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Gets the data point custom property with the specified name.
         /// </summary>
         /// <param name="name">Name of the property to get.</param>
-        /// <returns>Returns the data point custom property with the specified name.  If the requested one is not set,
+        /// <returns>Returns the data point custom property with the specified name.  If the requested one
+        // is not set,
         /// the default custom property of the data series will be returned.</returns>
         virtual public string GetCustomProperty(string name)
         {
@@ -4206,10 +4216,12 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets a color which will be replaced with a transparent color while drawing the background image.
+        /// Gets or sets a color which will be replaced with a transparent color while drawing the
+        // background image.
         /// </summary>
         /// <value>
-        /// A <see cref="Color"/> value which will be replaced with a transparent color while drawing the image.
+        /// A <see cref="Color"/> value which will be replaced with a transparent color while drawing the
+        // image.
         /// </value>
         [
             SRCategory("CategoryAttributeAppearance"),
@@ -4862,7 +4874,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Gets or sets the color which will be replaced with a transparent color while drawing the marker image.
+        /// Gets or sets the color which will be replaced with a transparent color while drawing the marker
+        // image.
         /// </summary>
         [
             SRCategory("CategoryAttributeMarker"),

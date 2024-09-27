@@ -128,7 +128,7 @@ public class AuthenticationTests : LoggedTest
             Utilities.CreateHttpAuthServer(
                 AuthenticationSchemes.Negotiate
                     | AuthenticationSchemes.NTLM
-                    /* | AuthenticationSchemes.Digest TODO: Not implemented */
+/* | AuthenticationSchemes.Digest TODO: Not implemented */
                     | AuthenticationSchemes.Basic,
                 true,
                 out address,

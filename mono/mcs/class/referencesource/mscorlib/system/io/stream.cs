@@ -50,8 +50,10 @@ namespace System.IO
 
         public static readonly Stream Null = new NullStream();
 
-        //We pick a value that is the largest multiple of 4096 that is still smaller than the large object heap threshold (85K).
-        // The CopyTo/CopyToAsync buffer is short-lived and is likely to be collected at Gen0, and it offers a significant
+        //We pick a value that is the largest multiple of 4096 that is still smaller than the large object
+        // heap threshold (85K).
+        // The CopyTo/CopyToAsync buffer is short-lived and is likely to be collected at Gen0, and it offers
+        // a significant
         // improvement in Copy performance.
         private const int _DefaultCopyBufferSize = 81920;
 
@@ -735,7 +737,8 @@ namespace System.IO
             Contract.Requires(readWriteTask != null);
             Contract.Assert(_activeReadWriteTask == null, "Expected no other readers or writers");
 
-            // Schedule the task.  ScheduleAndStart must happen after the write to _activeReadWriteTask to avoid a race.
+            // Schedule the task.  ScheduleAndStart must happen after the write to _activeReadWriteTask to avoid
+            // a race.
             // Internally, we're able to directly call ScheduleAndStart rather than Start, avoiding
             // two interlocked operations.  However, if ReadWriteTask is ever changed to use
             // a cancellation token, this should be changed to use Start.
@@ -1267,7 +1270,8 @@ namespace System.IO
             public override void SetLength(long length) { }
         }
 
-        /// <summary>Used as the IAsyncResult object when using asynchronous IO methods on the base Stream class.</summary>
+        /// <summary>Used as the IAsyncResult object when using asynchronous IO methods on the base Stream
+        // class.</summary>
         internal sealed class SynchronousAsyncResult : IAsyncResult
         {
             private readonly Object _stateObject;

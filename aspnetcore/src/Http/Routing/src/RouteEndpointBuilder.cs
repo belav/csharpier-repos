@@ -116,7 +116,8 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
             }
         }
 
-        // No route diagnostics metadata provided so automatically add one based on the route pattern string.
+        // No route diagnostics metadata provided so automatically add one based on the route pattern
+        // string.
         if (!hasRouteDiagnosticsMetadata)
         {
             metadata.Add(new RouteDiagnosticsMetadata(routePattern.DebuggerToString()));

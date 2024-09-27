@@ -42,8 +42,10 @@ namespace System.Runtime.InteropServices.Marshalling
         [FieldOffset(0)]
         private TypeUnion _typeUnion;
 
-        // Decimal is the largest data type and it needs to use the space that is normally unused in TypeUnion._wReserved1, etc.
-        // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two bytes, and so
+        // Decimal is the largest data type and it needs to use the space that is normally unused in
+        // TypeUnion._wReserved1, etc.
+        // Hence, it is declared to completely overlap with TypeUnion. A Decimal does not use the first two
+        // bytes, and so
         // TypeUnion._vt can still be used to encode the type.
         [FieldOffset(0)]
         private decimal _decimal;
@@ -194,7 +196,8 @@ namespace System.Runtime.InteropServices.Marshalling
                 // We are using PropVariantClear instead of VariantClear
                 // as PropVariantClear covers more cases (like VT_BLOB, VT_STREAM, VT_CF, etc.)
                 // than VariantClear does. We intend for users to be able to use this ComVariant type for
-                // both VARIANT and PROPVARIANT scenarios, so we need to support all of the variant kinds that might be set.
+                // both VARIANT and PROPVARIANT scenarios, so we need to support all of the variant kinds that might
+                // be set.
                 Interop.Ole32.PropVariantClear((nint)pThis);
             }
 #else
@@ -328,7 +331,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <typeparam name="T">The type of the specified value.</typeparam>
         /// <param name="value">The value to wrap in an <see cref="ComVariant"/>.</param>
         /// <returns>An <see cref="ComVariant"/> that contains the provided value.</returns>
-        /// <exception cref="ArgumentException">When <typeparamref name="T"/> does not directly correspond to a <see cref="VarEnum"/> variant type.</exception>
+        /// <exception cref="ArgumentException">When <typeparamref name="T"/> does not directly correspond
+        // to a <see cref="VarEnum"/> variant type.</exception>
         public static ComVariant Create<T>([DisallowNull] T value)
         {
             Unsafe.SkipInit(out ComVariant variant);
@@ -452,8 +456,10 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="vt">The type of the variant</param>
         /// <param name="rawValue">The raw value to store in the variant without any processing</param>
         /// <returns>A variant that contains the provided value.</returns>
-        /// <exception cref="ArgumentException">When the provided <paramref name="vt"/> corresponds to a variant type that is not supported in VARIANTs or is <see cref="VarEnum.VT_DECIMAL"/></exception>
-        /// <exception cref="PlatformNotSupportedException">When the provided <paramref name="vt"/> specifies the <see cref="VarEnum.VT_ARRAY"/> flag for SAFEARRAYs.</exception>
+        /// <exception cref="ArgumentException">When the provided <paramref name="vt"/> corresponds to a
+        // variant type that is not supported in VARIANTs or is <see cref="VarEnum.VT_DECIMAL"/></exception>
+        /// <exception cref="PlatformNotSupportedException">When the provided <paramref name="vt"/>
+        // specifies the <see cref="VarEnum.VT_ARRAY"/> flag for SAFEARRAYs.</exception>
         public static unsafe ComVariant CreateRaw<T>(VarEnum vt, T rawValue)
             where T : unmanaged
         {
@@ -531,7 +537,8 @@ namespace System.Runtime.InteropServices.Marshalling
         }
 
         /// <summary>
-        /// A <see cref="ComVariant"/> instance that represents a null value with <see cref="VarEnum.VT_NULL"/> type.
+        /// A <see cref="ComVariant"/> instance that represents a null value with <see
+        // cref="VarEnum.VT_NULL"/> type.
         /// </summary>
         public static ComVariant Null { get; } = new() { VarType = VarEnum.VT_NULL };
 
@@ -555,7 +562,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <typeparam name="T">The managed type to create an instance of.</typeparam>
         /// <returns>The managed value contained in this variant.</returns>
-        /// <exception cref="ArgumentException">When <typeparamref name="T"/> does not match the <see cref="VarType"/> of the <see cref="ComVariant"/>.</exception>
+        /// <exception cref="ArgumentException">When <typeparamref name="T"/> does not match the <see
+        // cref="VarType"/> of the <see cref="ComVariant"/>.</exception>
         public readonly T? As<T>()
         {
             if (VarType == VarEnum.VT_EMPTY)
@@ -685,7 +693,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <typeparam name="T">The type of reference to return.</typeparam>
         /// <returns>A reference to the storage location within this <see cref="ComVariant"/>.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="T"/> is <see cref="decimal"/> or larger than the storage space in an <see cref="ComVariant"/>.</exception>
+        /// <exception cref="ArgumentException"><typeparamref name="T"/> is <see cref="decimal"/> or larger
+        // than the storage space in an <see cref="ComVariant"/>.</exception>
         [UnscopedRef]
         public unsafe ref T GetRawDataRef<T>()
             where T : unmanaged

@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft.  All Rights Reserved.  Licensed under the MIT license.  See License.txt
+// in the project root for license information.
 
 using System;
 using System.IO;
@@ -13,7 +14,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.CodeAnalysis.Tools.Formatters
 {
     /// <summary>
-    /// OrganizeImportsFormatter that uses the <see cref="Formatter"/> to format document import directives.
+    /// OrganizeImportsFormatter that uses the <see cref="Formatter"/> to format document import
+    // directives.
     /// </summary>
     internal sealed class OrganizeImportsFormatter : DocumentFormatter
     {
@@ -63,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                     return sourceText;
                 }
 
-                // Because the Formatter does not abide the `end_of_line` option we have to fix up the ends of the organized lines.
+                // Because the Formatter does not abide the `end_of_line` option we have to fix up the ends of the
+                // organized lines.
                 // See https://github.com/dotnet/roslyn/issues/44136
                 var organizedSourceText = await organizedDocument
                     .GetTextAsync(cancellationToken)

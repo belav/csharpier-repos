@@ -145,7 +145,8 @@ namespace System.Threading
 
             private static void CreateWorkerThread()
             {
-                // Thread pool threads must start in the default execution context without transferring the context, so
+                // Thread pool threads must start in the default execution context without transferring the context,
+                // so
                 // using captureContext: false.
                 Thread workerThread = new Thread(s_workerThreadStart);
                 workerThread.IsThreadPoolThread = true;

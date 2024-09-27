@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     Represents an operation that should be performed when an index is removed from the entity type.
+///     Represents an operation that should be performed when an index is removed from the entity
+// type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public interface IIndexRemovedConvention : IConvention
 {

@@ -37,7 +37,8 @@ public partial class VectorTest
     static Vector<T> GetVector<T>()
         where T : struct => new Vector<T>(GetPatternAs<T>());
 
-    // Cast a Vector<T> to specific vector type (we can cast from a generic value but the cast itself can't
+    // Cast a Vector<T> to specific vector type (we can cast from a generic value but the cast itself
+    // can't
     // be generic so we need one method for each possible vector element type).
     static Vector<Byte> To_Byte<T>(Vector<T> from)
         where T : struct => (Vector<Byte>)from;

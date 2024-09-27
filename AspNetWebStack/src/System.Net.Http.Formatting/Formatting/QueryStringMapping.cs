@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Specialized;
 using System.Net.Http.Headers;
@@ -17,9 +18,12 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryStringMapping"/> class.
         /// </summary>
-        /// <param name="queryStringParameterName">The name of the query string parameter to match, if present.</param>
-        /// <param name="queryStringParameterValue">The value of the query string parameter specified by <paramref name="queryStringParameterName"/>.</param>
-        /// <param name="mediaType">The media type to use if the query parameter specified by <paramref name="queryStringParameterName"/> is present
+        /// <param name="queryStringParameterName">The name of the query string parameter to match, if
+        // present.</param>
+        /// <param name="queryStringParameterValue">The value of the query string parameter specified by
+        // <paramref name="queryStringParameterName"/>.</param>
+        /// <param name="mediaType">The media type to use if the query parameter specified by <paramref
+        // name="queryStringParameterName"/> is present
         /// and assigned the value specified by <paramref name="queryStringParameterValue"/>.</param>
         public QueryStringMapping(
             string queryStringParameterName,
@@ -34,9 +38,12 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of the <see cref="QueryStringMapping"/> class.
         /// </summary>
-        /// <param name="queryStringParameterName">The name of the query string parameter to match, if present.</param>
-        /// <param name="queryStringParameterValue">The value of the query string parameter specified by <paramref name="queryStringParameterName"/>.</param>
-        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to use if the query parameter specified by <paramref name="queryStringParameterName"/> is present
+        /// <param name="queryStringParameterName">The name of the query string parameter to match, if
+        // present.</param>
+        /// <param name="queryStringParameterValue">The value of the query string parameter specified by
+        // <paramref name="queryStringParameterName"/>.</param>
+        /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to use if the query parameter
+        // specified by <paramref name="queryStringParameterName"/> is present
         /// and assigned the value specified by <paramref name="queryStringParameterValue"/>.</param>
         public QueryStringMapping(
             string queryStringParameterName,
@@ -63,7 +70,8 @@ namespace System.Net.Http.Formatting
         /// instance can return a <see cref="MediaTypeHeaderValue"/> from <paramref name="request"/>.
         /// </summary>
         /// <param name="request">The <see cref="HttpRequestMessage"/> to check.</param>
-        /// <returns>If this instance can produce a <see cref="MediaTypeHeaderValue"/> from <paramref name="request"/>
+        /// <returns>If this instance can produce a <see cref="MediaTypeHeaderValue"/> from <paramref
+        // name="request"/>
         /// it returns <c>1.0</c> otherwise <c>0.0</c>.</returns>
         public override double TryMatchMediaType(HttpRequestMessage request)
         {

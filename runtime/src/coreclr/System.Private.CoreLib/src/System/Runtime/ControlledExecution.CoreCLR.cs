@@ -20,23 +20,34 @@ namespace System.Runtime
         /// Runs code that may be aborted asynchronously.
         /// </summary>
         /// <param name="action">The delegate that represents the code to execute.</param>
-        /// <param name="cancellationToken">The cancellation token that may be used to abort execution.</param>
-        /// <exception cref="PlatformNotSupportedException">The method is not supported on this platform.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is null.</exception>
+        /// <param name="cancellationToken">The cancellation token that may be used to abort
+        // execution.</param>
+        /// <exception cref="PlatformNotSupportedException">The method is not supported on this
+        // platform.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="action"/> argument is
+        // null.</exception>
         /// <exception cref="InvalidOperationException">
         /// The current thread is already running the <see cref="Run"/> method.
         /// </exception>
         /// <exception cref="OperationCanceledException">The execution was aborted.</exception>
         /// <remarks>
-        /// <para>This method enables aborting arbitrary managed code in a non-cooperative manner by throwing an exception
-        /// in the thread executing that code.  While the exception may be caught by the code, it is re-thrown at the end
-        /// of `catch` blocks until the execution flow returns to the `ControlledExecution.Run` method.</para>
-        /// <para>Execution of the code is not guaranteed to abort immediately, or at all.  This situation can occur, for
-        /// example, if a thread is stuck executing unmanaged code or the `catch` and `finally` blocks that are called as
-        /// part of the abort procedure, thereby indefinitely delaying the abort.  Furthermore, execution may not be
+        /// <para>This method enables aborting arbitrary managed code in a non-cooperative manner by
+        // throwing an exception
+        /// in the thread executing that code.  While the exception may be caught by the code, it is
+        // re-thrown at the end
+        /// of `catch` blocks until the execution flow returns to the `ControlledExecution.Run`
+        // method.</para>
+        /// <para>Execution of the code is not guaranteed to abort immediately, or at all.  This situation
+        // can occur, for
+        /// example, if a thread is stuck executing unmanaged code or the `catch` and `finally` blocks that
+        // are called as
+        /// part of the abort procedure, thereby indefinitely delaying the abort.  Furthermore, execution
+        // may not be
         /// aborted immediately if the thread is currently executing a `catch` or `finally` block.</para>
-        /// <para>Aborting code at an unexpected location may corrupt the state of data structures in the process and lead
-        /// to unpredictable results.  For that reason, this method should not be used in production code and calling it
+        /// <para>Aborting code at an unexpected location may corrupt the state of data structures in the
+        // process and lead
+        /// to unpredictable results.  For that reason, this method should not be used in production code
+        // and calling it
         /// produces a compile-time warning.</para>
         /// </remarks>
         [Obsolete(
@@ -57,7 +68,8 @@ namespace System.Runtime
                 );
             }
 
-            // Store the current thread so that it may be referenced by the Canceler.Cancel callback if one occurs.
+            // Store the current thread so that it may be referenced by the Canceler.Cancel callback if one
+            // occurs.
             Canceler canceler = new(Thread.CurrentThread);
 
             try
@@ -65,8 +77,10 @@ namespace System.Runtime
                 // Mark this thread as now running a ControlledExecution.Run to prevent recursive usage.
                 t_executing = true;
 
-                // Register for aborting.  From this moment until ctr.Unregister is called, this thread is subject to being
-                // interrupted at any moment.  This could happen during the call to UnsafeRegister if cancellation has
+                // Register for aborting.  From this moment until ctr.Unregister is called, this thread is subject
+                // to being
+                // interrupted at any moment.  This could happen during the call to UnsafeRegister if cancellation
+                // has
                 // already been requested at the time of the registration.
                 CancellationTokenRegistration ctr = cancellationToken.UnsafeRegister(
                     e => ((Canceler)e!).Cancel(),
@@ -83,8 +97,10 @@ namespace System.Runtime
                     // below is not guarded against aborting.  That is OK as the outer try block will catch the
                     // ThreadAbortException and call ResetAbortThread.
 
-                    // Unregister the callback.  Unlike Dispose, Unregister will not block waiting for an callback in flight
-                    // to complete, and will instead return false if the callback has already been invoked or is currently
+                    // Unregister the callback.  Unlike Dispose, Unregister will not block waiting for an callback in
+                    // flight
+                    // to complete, and will instead return false if the callback has already been invoked or is
+                    // currently
                     // in flight.
                     if (!ctr.Unregister())
                     {

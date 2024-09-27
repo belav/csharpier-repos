@@ -576,7 +576,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "M1")
                     .WithArguments("readonly")
                     .WithLocation(13, 25),
-                // (15,20): error CS0120: An object reference is required for the non-static field, method, or property 'Program.M(int)'
+                // (15,20): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'Program.M(int)'
                 //         return ref M(x);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "M")
                     .WithArguments("Program.M(int)")
@@ -616,32 +617,38 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (6,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         M() = 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "M()")
                     .WithArguments("method", "M")
                     .WithLocation(6, 9),
-                // (7,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (7,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side of
+                // a ref assignment because it is a readonly variable
                 //         M1().Alice = 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "M1().Alice")
                     .WithArguments("method", "M1")
                     .WithLocation(7, 9),
-                // (9,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (9,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         M() ++;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "M()")
                     .WithArguments("method", "M")
                     .WithLocation(9, 9),
-                // (10,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (10,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side
+                // of a ref assignment because it is a readonly variable
                 //         M1().Alice --;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "M1().Alice")
                     .WithArguments("method", "M1")
                     .WithLocation(10, 9),
-                // (12,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (12,9): error CS8331: Cannot assign to method 'M' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         M() += 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "M()")
                     .WithArguments("method", "M")
                     .WithLocation(12, 9),
-                // (13,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (13,9): error CS8332: Cannot assign to a member of method 'M1' or use it as the right hand side
+                // of a ref assignment because it is a readonly variable
                 //         M1().Alice -= 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "M1().Alice")
                     .WithArguments("method", "M1")
@@ -678,32 +685,38 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (6,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         P = 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "P")
                     .WithArguments("property", "P")
                     .WithLocation(6, 9),
-                // (7,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (7,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side
+                // of a ref assignment because it is a readonly variable
                 //         P1.Alice = 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "P1.Alice")
                     .WithArguments("property", "P1")
                     .WithLocation(7, 9),
-                // (9,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (9,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         P ++;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "P")
                     .WithArguments("property", "P")
                     .WithLocation(9, 9),
-                // (10,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (10,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side
+                // of a ref assignment because it is a readonly variable
                 //         P1.Alice --;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "P1.Alice")
                     .WithArguments("property", "P1")
                     .WithLocation(10, 9),
-                // (12,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (12,9): error CS8331: Cannot assign to property 'P' or use it as the right hand side of a ref
+                // assignment because it is a readonly variable
                 //         P += 1;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField, "P")
                     .WithArguments("property", "P")
                     .WithLocation(12, 9),
-                // (13,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side of a ref assignment because it is a readonly variable
+                // (13,9): error CS8332: Cannot assign to a member of property 'P1' or use it as the right hand side
+                // of a ref assignment because it is a readonly variable
                 //         P1.Alice -= 2;
                 Diagnostic(ErrorCode.ERR_AssignReadonlyNotField2, "P1.Alice")
                     .WithArguments("property", "P1")
@@ -738,7 +751,8 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,25): error CS8329: Cannot use method 'M' as a ref or out value because it is a readonly variable
+                // (6,25): error CS8329: Cannot use method 'M' as a ref or out value because it is a readonly
+                // variable
                 //         ref var y = ref M();
                 Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "M()")
                     .WithArguments("method", "M")
@@ -748,12 +762,14 @@ class Program
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "M1")
                     .WithArguments("Program.M1()", "method")
                     .WithLocation(7, 25),
-                // (8,26): error CS8329: Cannot use property 'P' as a ref or out value because it is a readonly variable
+                // (8,26): error CS8329: Cannot use property 'P' as a ref or out value because it is a readonly
+                // variable
                 //         ref var y1 = ref P;
                 Diagnostic(ErrorCode.ERR_RefReadonlyNotField, "P")
                     .WithArguments("property", "P")
                     .WithLocation(8, 26),
-                // (9,26): error CS8330: Members of property 'P1' cannot be used as a ref or out value because it is a readonly variable
+                // (9,26): error CS8330: Members of property 'P1' cannot be used as a ref or out value because it is
+                // a readonly variable
                 //         ref int a1 = ref P1.Alice;
                 Diagnostic(ErrorCode.ERR_RefReadonlyNotField2, "P1.Alice")
                     .WithArguments("property", "P1")
@@ -807,16 +823,20 @@ class Program
                 options: TestOptions.UnsafeReleaseDll
             );
             comp.VerifyDiagnostics(
-                // (6,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (6,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* a = & M();
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& M()").WithLocation(6, 18),
-                // (7,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (7,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* b = & M1().Alice;
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& M1().Alice").WithLocation(7, 18),
-                // (9,19): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (9,19): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* a1 = & P;
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& P").WithLocation(9, 19),
-                // (10,19): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // (10,19): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                // statement initializer
                 //         int* b2 = & P1.Alice;
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "& P1.Alice").WithLocation(10, 19)
             );
@@ -869,22 +889,26 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (12,28): error CS8333: Cannot return method 'M' by writable reference because it is a readonly variable
+                // (12,28): error CS8333: Cannot return method 'M' by writable reference because it is a readonly
+                // variable
                 //                 return ref M();
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField, "M()")
                     .WithArguments("method", "M")
                     .WithLocation(12, 28),
-                // (16,28): error CS8334: Members of method 'M1' cannot be returned by writable reference because it is a readonly variable
+                // (16,28): error CS8334: Members of method 'M1' cannot be returned by writable reference because it
+                // is a readonly variable
                 //                 return ref M1().Alice;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField2, "M1().Alice")
                     .WithArguments("method", "M1")
                     .WithLocation(16, 28),
-                // (23,28): error CS8333: Cannot return property 'P' by writable reference because it is a readonly variable
+                // (23,28): error CS8333: Cannot return property 'P' by writable reference because it is a readonly
+                // variable
                 //                 return ref P;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField, "P")
                     .WithArguments("property", "P")
                     .WithLocation(23, 28),
-                // (27,28): error CS8334: Members of property 'P1' cannot be returned by writable reference because it is a readonly variable
+                // (27,28): error CS8334: Members of property 'P1' cannot be returned by writable reference because
+                // it is a readonly variable
                 //                 return ref P1.Alice;
                 Diagnostic(ErrorCode.ERR_RefReturnReadonlyNotField2, "P1.Alice")
                     .WithArguments("property", "P1")
@@ -1141,7 +1165,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_RefReturnLocal, "local")
                     .WithArguments("local")
                     .WithLocation(11, 30),
-                // (11,24): error CS8347: Cannot use a result of 'Program.M(ref int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (11,24): error CS8347: Cannot use a result of 'Program.M(ref int)' in this context because it may
+                // expose variables referenced by parameter 'x' outside of their declaration scope
                 //             return ref M(ref local);
                 Diagnostic(ErrorCode.ERR_EscapeCall, "M(ref local)")
                     .WithArguments("Program.M(ref int)", "x")
@@ -1151,7 +1176,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_RefReturnLocal, "local")
                     .WithArguments("local")
                     .WithLocation(15, 31),
-                // (15,24): error CS8348: Cannot use a member of result of 'Program.M1(out int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (15,24): error CS8348: Cannot use a member of result of 'Program.M1(out int)' in this context
+                // because it may expose variables referenced by parameter 'x' outside of their declaration scope
                 //             return ref M1(out local).Alice;
                 Diagnostic(ErrorCode.ERR_EscapeCall2, "M1(out local)")
                     .WithArguments("Program.M1(out int)", "x")
@@ -1168,7 +1194,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_RefReturnLocal, "local")
                     .WithArguments("local")
                     .WithLocation(11, 30),
-                // (11,24): error CS8347: Cannot use a result of 'Program.M(ref int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (11,24): error CS8347: Cannot use a result of 'Program.M(ref int)' in this context because it may
+                // expose variables referenced by parameter 'x' outside of their declaration scope
                 //             return ref M(ref local);
                 Diagnostic(ErrorCode.ERR_EscapeCall, "M(ref local)")
                     .WithArguments("Program.M(ref int)", "x")
@@ -1205,7 +1232,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_RefReturnLocal, "local")
                     .WithArguments("local")
                     .WithLocation(8, 25),
-                // (8,20): error CS8521: Cannot use a result of 'Program.this[in int]' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (8,20): error CS8521: Cannot use a result of 'Program.this[in int]' in this context because it
+                // may expose variables referenced by parameter 'x' outside of their declaration scope
                 //         return ref this[local];
                 Diagnostic(ErrorCode.ERR_EscapeCall, "this[local]")
                     .WithArguments("Program.this[in int]", "x")
@@ -1235,10 +1263,12 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,25): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                // (6,25): error CS8156: An expression cannot be used in this context because it may not be returned
+                // by reference
                 //         return ref this[42];
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "42").WithLocation(6, 25),
-                // (6,20): error CS8521: Cannot use a result of 'Program.this[in int]' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (6,20): error CS8521: Cannot use a result of 'Program.this[in int]' in this context because it
+                // may expose variables referenced by parameter 'x' outside of their declaration scope
                 //         return ref this[42];
                 Diagnostic(ErrorCode.ERR_EscapeCall, "this[42]")
                     .WithArguments("Program.this[in int]", "x")
@@ -1301,7 +1331,8 @@ struct S1
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,20): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                // (6,20): error CS8156: An expression cannot be used in this context because it may not be returned
+                // by reference
                 //         return ref 42;
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "42").WithLocation(6, 20)
             );
@@ -1329,10 +1360,12 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,22): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                // (6,22): error CS8156: An expression cannot be used in this context because it may not be returned
+                // by reference
                 //         return ref M(42);
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "42").WithLocation(6, 22),
-                // (6,20): error CS8521: Cannot use a result of 'Program.M(in int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (6,20): error CS8521: Cannot use a result of 'Program.M(in int)' in this context because it may
+                // expose variables referenced by parameter 'x' outside of their declaration scope
                 //         return ref M(42);
                 Diagnostic(ErrorCode.ERR_EscapeCall, "M(42)")
                     .WithArguments("Program.M(in int)", "x")
@@ -1362,10 +1395,12 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (6,20): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
+                // (6,20): error CS8156: An expression cannot be used in this context because it may not be passed
+                // or returned by reference
                 //         return ref M();
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "M()").WithLocation(6, 20),
-                // (6,20): error CS8347: Cannot use a result of 'Program.M(in int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (6,20): error CS8347: Cannot use a result of 'Program.M(in int)' in this context because it may
+                // expose variables referenced by parameter 'x' outside of their declaration scope
                 //         return ref M();
                 Diagnostic(ErrorCode.ERR_EscapeCall, "M()")
                     .WithArguments("Program.M(in int)", "x")
@@ -1396,10 +1431,12 @@ class Program
                 new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (7,22): error CS8156: An expression cannot be used in this context because it may not be returned by reference
+                // (7,22): error CS8156: An expression cannot be used in this context because it may not be returned
+                // by reference
                 //         return ref M(b);
                 Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "b").WithLocation(7, 22),
-                // (7,20): error CS8521: Cannot use a result of 'Program.M(in int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
+                // (7,20): error CS8521: Cannot use a result of 'Program.M(in int)' in this context because it may
+                // expose variables referenced by parameter 'x' outside of their declaration scope
                 //         return ref M(b);
                 Diagnostic(ErrorCode.ERR_EscapeCall, "M(b)")
                     .WithArguments("Program.M(in int)", "x")

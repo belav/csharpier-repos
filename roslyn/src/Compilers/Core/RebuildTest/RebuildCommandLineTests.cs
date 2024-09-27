@@ -549,7 +549,8 @@ End Namespace
                 PermutateRuntime
             );
 
-            // This uses a #ExternalSource directive with the same file name but in different source directories.
+            // This uses a #ExternalSource directive with the same file name but in different source
+            // directories.
             // Need to make sure that we map the same file name but different base paths correctly
             Permutate(
                 new CommandInfo(

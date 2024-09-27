@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 
 /// <summary>
 /// Options associated with the endpoints defined by the components in the
-/// given <see cref="RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents{TRootComponent}(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)"/>
+/// given <see
+// cref="RazorComponentsEndpointRouteBuilderExtensions.MapRazorComponents{TRootComponent}(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder)"/>
 /// invocation.
 /// </summary>
 internal class RazorComponentDataSourceOptions

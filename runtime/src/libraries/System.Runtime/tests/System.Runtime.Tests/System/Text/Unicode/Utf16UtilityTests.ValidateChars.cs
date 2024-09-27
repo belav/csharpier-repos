@@ -365,8 +365,10 @@ namespace System.Text.Unicode.Tests
                 actualRetVal = (ptrDiff == input.Length) ? -1 : (int)ptrDiff;
 
                 // The last two 'out' parameters are:
-                // a) The number to be added to the "chars processed" return value to come up with the total UTF-8 code unit count, and
-                // b) The number to be added to the "total UTF-16 code unit count" value to come up with the total scalar count.
+                // a) The number to be added to the "chars processed" return value to come up with the total UTF-8
+                // code unit count, and
+                // b) The number to be added to the "total UTF-16 code unit count" value to come up with the total
+                // scalar count.
 
                 actualUtf8CodeUnitCount = ptrDiff + utf8CodeUnitCountAdjustment;
                 actualRuneCount = (int)ptrDiff + scalarCountAdjustment;

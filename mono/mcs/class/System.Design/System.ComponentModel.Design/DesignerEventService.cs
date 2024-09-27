@@ -34,9 +34,11 @@ using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-    // IDesignerEventService provides a global eventing mechanism for designer events. With this mechanism,
+    // IDesignerEventService provides a global eventing mechanism for designer events. With this
+    // mechanism,
     // an application is informed when a designer becomes active. The service provides a collection of
-    // designers and a single place where global objects, such as the Properties window, can monitor selection
+    // designers and a single place where global objects, such as the Properties window, can monitor
+    // selection
     // change events.
     //
     // IDesignerEventService is practicly replaced by the DesignSurfaceManager and also the

@@ -48,7 +48,8 @@ namespace System.Runtime.CompilerServices.Tests
         [InlineData(100, true)]
         public static void Add(int numObjects, bool tryAdd)
         {
-            // Isolated to ensure we drop all references even in debug builds where lifetime is extended by the JIT to the end of the method
+            // Isolated to ensure we drop all references even in debug builds where lifetime is extended by the
+            // JIT to the end of the method
             Func<
                 int,
                 Tuple<ConditionalWeakTable<object, object>, WeakReference[], WeakReference[]>

@@ -218,7 +218,8 @@ namespace System.Configuration
 
                         CheckForLockAttributes(factoryRecord.ConfigKey, xmlNode);
 
-                        // In v1, our old section handler expects a context that contains the virtualPath from the configPath
+                        // In v1, our old section handler expects a context that contains the virtualPath from the
+                        // configPath
                         object configContext = configRecord.Host.CreateDeprecatedConfigContext(
                             configRecord.ConfigPath
                         );

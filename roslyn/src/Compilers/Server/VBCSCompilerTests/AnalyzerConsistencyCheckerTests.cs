@@ -87,8 +87,10 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         }
 
         /// <summary>
-        /// Must support loading a DLL without all of it's references being present. It is common for analyzer
-        /// assemblies to have missing references because customers often pair code fixers and analyzers into
+        /// Must support loading a DLL without all of it's references being present. It is common for
+        // analyzer
+        /// assemblies to have missing references because customers often pair code fixers and analyzers
+        // into
         /// the same assembly.Here Alpha depends on Gamma which is not included
         /// </summary>
         [Fact]

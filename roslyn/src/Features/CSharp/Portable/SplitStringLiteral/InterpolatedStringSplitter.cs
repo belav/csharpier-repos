@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.SplitStringLiteral
 
             protected override SyntaxNode GetNodeToReplace() => _interpolatedStringExpression;
 
-            // Don't offer on $@"" strings and raw string literals.  They support newlines directly in their content.
+            // Don't offer on $@"" strings and raw string literals.  They support newlines directly in their
+            // content.
             protected override bool CheckToken() =>
                 _interpolatedStringExpression.StringStartToken.Kind()
                 == SyntaxKind.InterpolatedStringStartToken;

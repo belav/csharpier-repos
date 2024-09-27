@@ -176,15 +176,15 @@ namespace MonoTests.System.Collections
         }
 
         // This doesn't fail on 64 bit systems
-        /*
-        [Test]
-        [ExpectedException (typeof (OutOfMemoryException))]
-        public void TestCapacity4 ()
-        {
-            SortedList list = new SortedList ();
-            list.Capacity = Int32.MaxValue;
-        }
-        */
+/*
+[Test]
+[ExpectedException (typeof (OutOfMemoryException))]
+public void TestCapacity4 ()
+{
+SortedList list = new SortedList ();
+list.Capacity = Int32.MaxValue;
+}
+*/
 
         [Test]
         public void TestCount()
@@ -238,14 +238,14 @@ namespace MonoTests.System.Collections
         {
             SortedList sl1 = new SortedList();
             Assert.IsNotNull(sl1.SyncRoot);
-            /*
-            lock( sl1.SyncRoot ) {
-                foreach ( Object item in sl1 ) {
-                    item="asdf";
-                    Assert ("sl.SyncRoot: item not read-only",item.IsReadOnly);
-                }
-            }
-            */
+/*
+lock( sl1.SyncRoot ) {
+foreach ( Object item in sl1 ) {
+item="asdf";
+Assert ("sl.SyncRoot: item not read-only",item.IsReadOnly);
+}
+}
+*/
         }
 
         [Test]
@@ -476,26 +476,27 @@ namespace MonoTests.System.Collections
             // CopyTo function does not work well with SortedList
             // even example at MSDN gave InvalidCastException
             // thus, it is NOT tested here
-            /*
-                    sl1.Clear();
-                    for (int i = 0; i <= 5; i++) {sl1.Add(i,""+i);}
-                Char[] copy = new Char[15];
-                Array.Clear(copy,0,copy.Length);
-                copy.SetValue( "The", 0 );
-                copy.SetValue( "quick", 1 );
-                copy.SetValue( "brown", 2 );
-                copy.SetValue( "fox", 3 );
-                copy.SetValue( "jumped", 4 );
-                copy.SetValue( "over", 5 );
-                copy.SetValue( "the", 6 );
-                copy.SetValue( "lazy", 7 );
-                copy.SetValue( "dog", 8 );
-                    sl1.CopyTo(copy,1);
-                    AssertEquals("sl.CopyTo: incorrect copy(1).","The", copy.GetValue(0));
-                    AssertEquals("sl.CopyTo: incorrect copy(1).","quick", copy.GetValue(1));
-                    for (int i=2; i<8; i++) AssertEquals("sl.CopyTo: incorrect copy(2).",sl1["kala "+(i-2)], copy.GetValue(i));
-                    AssertEquals("sl.CopyTo: incorrect copy(3).","dog", copy.GetValue(8));
-            */
+/*
+sl1.Clear();
+for (int i = 0; i <= 5; i++) {sl1.Add(i,""+i);}
+Char[] copy = new Char[15];
+Array.Clear(copy,0,copy.Length);
+copy.SetValue( "The", 0 );
+copy.SetValue( "quick", 1 );
+copy.SetValue( "brown", 2 );
+copy.SetValue( "fox", 3 );
+copy.SetValue( "jumped", 4 );
+copy.SetValue( "over", 5 );
+copy.SetValue( "the", 6 );
+copy.SetValue( "lazy", 7 );
+copy.SetValue( "dog", 8 );
+sl1.CopyTo(copy,1);
+AssertEquals("sl.CopyTo: incorrect copy(1).","The", copy.GetValue(0));
+AssertEquals("sl.CopyTo: incorrect copy(1).","quick", copy.GetValue(1));
+for (int i=2; i<8; i++) AssertEquals("sl.CopyTo: incorrect copy(2).",sl1["kala "+(i-2)],
+copy.GetValue(i));
+AssertEquals("sl.CopyTo: incorrect copy(3).","dog", copy.GetValue(8));
+*/
         }
 
         public SortedList DefaultSL()
@@ -620,15 +621,15 @@ namespace MonoTests.System.Collections
         }
 
         // TODO: IEnumerable.GetEnumerator [Explicit Interface Implementation]
-        /*
-        public void TestIEnumerable_GetEnumerator() {
-            SortedList sl1 = DefaultSL();
-            IEnumerator e = sl1.IEnumerable.GetEnumerator();
-            AssertNotNull("sl.GetEnumerator: does not return enumerator", e);
-            AssertEquals("sl.GetEnumerator: enumerator not working(1)",e.MoveNext(),true);
-            AssertNotNull("sl.GetEnumerator: enumerator not working(2)",e.Current);
-        }
-        */
+/*
+public void TestIEnumerable_GetEnumerator() {
+SortedList sl1 = DefaultSL();
+IEnumerator e = sl1.IEnumerable.GetEnumerator();
+AssertNotNull("sl.GetEnumerator: does not return enumerator", e);
+AssertEquals("sl.GetEnumerator: enumerator not working(1)",e.MoveNext(),true);
+AssertNotNull("sl.GetEnumerator: enumerator not working(2)",e.Current);
+}
+*/
 
         [Test]
         public void TestIndexOfKey()

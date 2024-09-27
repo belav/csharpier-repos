@@ -150,8 +150,10 @@ namespace System.Runtime.DurableInstancing
         )]
         public List<InstancePersistenceEvent> WaitForEvents(InstanceHandle handle, TimeSpan timeout)
         {
-            // This has to block on something... might as well be the async result, if the caller is already willing to waste a thread.
-            // (The TimeSpan.Zero case isn't fully optimized, but it is special-cased internally to not create timers / wait, it always
+            // This has to block on something... might as well be the async result, if the caller is already
+            // willing to waste a thread.
+            // (The TimeSpan.Zero case isn't fully optimized, but it is special-cased internally to not create
+            // timers / wait, it always
             // completes synchronously or throws TimeoutException from BeginWaitForEvents.)
             return EndWaitForEvents(BeginWaitForEvents(handle, timeout, null, null));
         }

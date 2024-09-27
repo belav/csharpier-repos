@@ -40,7 +40,8 @@ public class TemplateInfo
     /// </summary>
     /// <value>The formatted model value.</value>
     /// <remarks>
-    /// Will never return <c>null</c> to avoid problems when using HTML helpers within a template.  Otherwise the
+    /// Will never return <c>null</c> to avoid problems when using HTML helpers within a template.
+    // Otherwise the
     /// helpers could find elements in the `ViewDataDictionary`, not the intended Model properties.
     /// </remarks>
     public object FormattedModelValue

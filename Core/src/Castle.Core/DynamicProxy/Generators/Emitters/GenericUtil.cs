@@ -111,7 +111,8 @@ namespace Castle.DynamicProxy.Generators.Emitters
         {
             // HACK: the mono runtime has a strange bug where assigning to the constraints
             //       parameter and returning it throws, so we'll create a new array.
-            //       System.ArrayTypeMismatchException : Source array type cannot be assigned to destination array type.
+            //       System.ArrayTypeMismatchException : Source array type cannot be assigned to destination
+            // array type.
             Type[] adjustedConstraints = new Type[constraints.Length];
             for (var i = 0; i < constraints.Length; i++)
             {

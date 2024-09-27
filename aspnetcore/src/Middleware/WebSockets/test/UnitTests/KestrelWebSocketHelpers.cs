@@ -37,7 +37,8 @@ public class KestrelWebSocketHelpers
                     }
                     catch (Exception ex)
                     {
-                        // capture the exception from the app, we'll throw this at the end of the test when the server is disposed
+                        // capture the exception from the app, we'll throw this at the end of the test when the server is
+                        // disposed
                         exceptionFromApp = ex;
                         if (ct.Response.HasStarted)
                         {

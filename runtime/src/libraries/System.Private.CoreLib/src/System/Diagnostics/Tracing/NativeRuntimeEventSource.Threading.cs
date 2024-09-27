@@ -7,11 +7,14 @@ using System.Threading;
 
 namespace System.Diagnostics.Tracing
 {
-    // This is part of the NativeRuntimeEventsource, which is the managed version of the Microsoft-Windows-DotNETRuntime provider.
-    // Contains the implementation of threading events. This implementation is used by runtime not supporting NativeRuntimeEventSource.Threading.NativeSinks.cs.
+    // This is part of the NativeRuntimeEventsource, which is the managed version of the
+    // Microsoft-Windows-DotNETRuntime provider.
+    // Contains the implementation of threading events. This implementation is used by runtime not
+    // supporting NativeRuntimeEventSource.Threading.NativeSinks.cs.
     internal sealed partial class NativeRuntimeEventSource : EventSource
     {
-        // We don't have these keywords defined from the genRuntimeEventSources.py, so we need to manually define them here.
+        // We don't have these keywords defined from the genRuntimeEventSources.py, so we need to manually
+        // define them here.
         public static partial class Keywords
         {
             public const EventKeywords ContentionKeyword = (EventKeywords)0x4000;
@@ -508,7 +511,8 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        // TODO: This event is fired for minor compat with CoreCLR in this case. Consider removing this method and use
+        // TODO: This event is fired for minor compat with CoreCLR in this case. Consider removing this
+        // method and use
         // FrameworkEventSource's thread transfer send/receive events instead at callers.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -582,7 +586,8 @@ namespace System.Diagnostics.Tracing
             }
         }
 
-        // TODO: This event is fired for minor compat with CoreCLR in this case. Consider removing this method and use
+        // TODO: This event is fired for minor compat with CoreCLR in this case. Consider removing this
+        // method and use
         // FrameworkEventSource's thread transfer send/receive events instead at callers.
         [NonEvent]
         [MethodImpl(MethodImplOptions.NoInlining)]

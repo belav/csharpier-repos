@@ -3,18 +3,18 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _NegoState.cs
+_NegoState.cs
 
 Abstract:
-        The internal class is used by Negotiate Client&Server and by (internal) NegoStream.
-        It encapsulates security context and does the real work in authentication and
-        user data encryption with NEGO SSPI package.
+The internal class is used by Negotiate Client&Server and by (internal) NegoStream.
+It encapsulates security context and does the real work in authentication and
+user data encryption with NEGO SSPI package.
 
 Author:
-    Alexei Vopilov    12-Aug-2003
+Alexei Vopilov    12-Aug-2003
 
 Revision History:
-    12-Aug-2003 New design that has obsoleted Authenticator class
+12-Aug-2003 New design that has obsoleted Authenticator class
 
 --*/
 
@@ -255,7 +255,8 @@ namespace System.Net.Security
 
             //
             // Security: We used to rely on NetworkCredential class to demand permission
-            //           Switched over to explicit ControlPrincipalPermission demand (except for DefaultCredential case)
+            //           Switched over to explicit ControlPrincipalPermission demand (except for
+            // DefaultCredential case)
             //           The mitigated attack is brute-force pasword guessing through SSPI.
             if (!(credential is SystemNetworkCredential))
                 ExceptionHelper.ControlPrincipalPermission.Demand();

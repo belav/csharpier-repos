@@ -161,7 +161,8 @@ namespace System.Data.EntityClient
         }
 
         /// <summary>
-        /// Returns a hash table object containing all the valid keywords. This is really the same as the Keys
+        /// Returns a hash table object containing all the valid keywords. This is really the same as the
+        // Keys
         /// property, it's just that the returned object is a hash table.
         /// </summary>
         internal static Hashtable Synonyms
@@ -191,7 +192,8 @@ namespace System.Data.EntityClient
             {
                 EntityUtil.CheckArgumentNull(keyword, "keyword");
 
-                // Just access the properties to get the value since the fields, which the properties will be accessing, will
+                // Just access the properties to get the value since the fields, which the properties will be
+                // accessing, will
                 // have already been set when the connection string is set
                 if (
                     string.Compare(
@@ -254,7 +256,8 @@ namespace System.Data.EntityClient
                     );
                 }
 
-                // Just access the properties to get the value since the fields, which the properties will be accessing, will
+                // Just access the properties to get the value since the fields, which the properties will be
+                // accessing, will
                 // have already been set when the connection string is set
                 if (
                     string.Compare(

@@ -31,7 +31,8 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_2);
             comp.VerifyDiagnostics(
-                // (7,30): error CS8320: Feature 'tuple equality' is not available in C# 7.2. Please use language version 7.3 or greater.
+                // (7,30): error CS8320: Feature 'tuple equality' is not available in C# 7.2. Please use language
+                // version 7.3 or greater.
                 //         System.Console.Write(t == (1, 2));
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_2, "t == (1, 2)")
                     .WithArguments("tuple equality", "7.3")
@@ -86,7 +87,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,16): error CS8373: Tuple types used as operands of an == or != operator must have matching cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
+                // (6,16): error CS8373: Tuple types used as operands of an == or != operator must have matching
+                // cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
                 //         return (1, 1) == (2, 2, 2);
                 Diagnostic(ErrorCode.ERR_TupleSizesMismatchForBinOps, "(1, 1) == (2, 2, 2)")
                     .WithArguments("2", "3")
@@ -110,7 +112,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,16): error CS8355: Tuple types used as operands of a binary operator must have matching cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
+                // (8,16): error CS8355: Tuple types used as operands of a binary operator must have matching
+                // cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
                 //         return t1 == t2;
                 Diagnostic(ErrorCode.ERR_TupleSizesMismatchForBinOps, "t1 == t2")
                     .WithArguments("2", "3")
@@ -134,7 +137,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,16): error CS8355: Tuple types used as operands of a binary operator must have matching cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
+                // (8,16): error CS8355: Tuple types used as operands of a binary operator must have matching
+                // cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
                 //         return t1 == t2;
                 Diagnostic(ErrorCode.ERR_TupleSizesMismatchForBinOps, "t1 == t2")
                     .WithArguments("2", "3")
@@ -190,7 +194,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,16): error CS8373: Tuple types used as operands of a binary operator must have matching cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
+                // (9,16): error CS8373: Tuple types used as operands of a binary operator must have matching
+                // cardinalities. But this operator has tuple types of cardinality 2 on the left and 3 on the right.
                 //         return t1 == t2;
                 Diagnostic(ErrorCode.ERR_TupleSizesMismatchForBinOps, "t1 == t2")
                     .WithArguments("2", "3")
@@ -872,17 +877,20 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (7,13): error CS0019: Operator '+' cannot be applied to operands of type '(int, int)' and '(int, int)'
+                // (7,13): error CS0019: Operator '+' cannot be applied to operands of type '(int, int)' and '(int,
+                // int)'
                 //         _ = t1 + t1; // error 1
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "t1 + t1")
                     .WithArguments("+", "(int, int)", "(int, int)")
                     .WithLocation(7, 13),
-                // (8,13): error CS0019: Operator '>' cannot be applied to operands of type '(int, int)' and '(int, int)'
+                // (8,13): error CS0019: Operator '>' cannot be applied to operands of type '(int, int)' and '(int,
+                // int)'
                 //         _ = t1 > t1; // error 2
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "t1 > t1")
                     .WithArguments(">", "(int, int)", "(int, int)")
                     .WithLocation(8, 13),
-                // (9,13): error CS0019: Operator '>=' cannot be applied to operands of type '(int, int)' and '(int, int)'
+                // (9,13): error CS0019: Operator '>=' cannot be applied to operands of type '(int, int)' and '(int,
+                // int)'
                 //         _ = t1 >= t1; // error 3
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "t1 >= t1")
                     .WithArguments(">=", "(int, int)", "(int, int)")
@@ -1490,7 +1498,8 @@ class C
                     )
                     .WithArguments("==", "default", "default")
                     .WithLocation(6, 30),
-                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type 'default' and '(default, default)'
+                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type 'default' and '(default,
+                // default)'
                 //         System.Console.Write(default == (default, default));
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "default == (default, default)")
                     .WithArguments("==", "default", "(default, default)")
@@ -1622,12 +1631,14 @@ class C
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "(null, () => 1) == (default, default)")
                     .WithArguments("==", "<null>", "default")
                     .WithLocation(6, 30),
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type 'lambda expression' and 'default'
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type 'lambda expression' and
+                // 'default'
                 //         System.Console.Write((null, () => 1) == (default, default));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(null, () => 1) == (default, default)")
                     .WithArguments("==", "lambda expression", "default")
                     .WithLocation(6, 30),
-                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type '(<null>, lambda expression)' and 'default'
+                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type '(<null>, lambda
+                // expression)' and 'default'
                 //         System.Console.Write((null, () => 2) == default);
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "(null, () => 2) == default")
                     .WithArguments("==", "(<null>, lambda expression)", "default")
@@ -1641,7 +1652,8 @@ class C
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "(null, () => 1) == (default, default)")
                     .WithArguments("==", "<null>", "default")
                     .WithLocation(6, 30),
-                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type '(<null>, lambda expression)' and 'default'
+                // (7,30): error CS0034: Operator '==' is ambiguous on operands of type '(<null>, lambda
+                // expression)' and 'default'
                 //         System.Console.Write((null, () => 2) == default);
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "(null, () => 2) == default")
                     .WithArguments("==", "(<null>, lambda expression)", "default")
@@ -2007,24 +2019,30 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
-                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; }));
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda
+                // expression'
+                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j
+                // = 0; return i + j; }));
                 Diagnostic(
                         ErrorCode.ERR_BadBinaryOps,
                         "(null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; })"
                     )
                     .WithArguments("==", "<null>", "lambda expression")
                     .WithLocation(6, 30),
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'method group'
-                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; }));
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'method
+                // group'
+                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j
+                // = 0; return i + j; }));
                 Diagnostic(
                         ErrorCode.ERR_BadBinaryOps,
                         "(null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; })"
                     )
                     .WithArguments("==", "<null>", "method group")
                     .WithLocation(6, 30),
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
-                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; }));
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda
+                // expression'
+                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j
+                // = 0; return i + j; }));
                 Diagnostic(
                         ErrorCode.ERR_BadBinaryOps,
                         "(null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; })"
@@ -2036,8 +2054,10 @@ class C
 
             comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
             comp.VerifyDiagnostics(
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
-                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; }));
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda
+                // expression'
+                //         System.Console.Write((null, null, null, null) == (null, x => x, Main, (int i) => { int j
+                // = 0; return i + j; }));
                 Diagnostic(
                         ErrorCode.ERR_BadBinaryOps,
                         "(null, null, null, null) == (null, x => x, Main, (int i) => { int j = 0; return i + j; })"
@@ -2183,7 +2203,8 @@ class C
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(s, s) == (1, () => { })")
                     .WithArguments("==", "string", "int")
                     .WithLocation(6, 30),
-                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'lambda expression'
+                // (6,30): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'lambda
+                // expression'
                 //         System.Console.Write((s, s) == (1, () => { }));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(s, s) == (1, () => { })")
                     .WithArguments("==", "string", "lambda expression")
@@ -2283,7 +2304,8 @@ public class C
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (8,30): error CS0019: Operator '==' cannot be applied to operands of type 'dynamic' and 'lambda expression'
+                // (8,30): error CS0019: Operator '==' cannot be applied to operands of type 'dynamic' and 'lambda
+                // expression'
                 //         System.Console.Write((d1, 2) == (() => 1, d2));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(d1, 2) == (() => 1, d2)")
                     .WithArguments("==", "dynamic", "lambda expression")
@@ -2401,7 +2423,8 @@ public class C
         [Fact]
         public void TestBadConstraintOnTuple()
         {
-            // https://github.com/dotnet/roslyn/issues/37121 : This test appears to produce a duplicate diagnostic at (6, 35)
+            // https://github.com/dotnet/roslyn/issues/37121 : This test appears to produce a duplicate
+            // diagnostic at (6, 35)
             var source =
                 @"
 ref struct S
@@ -2487,7 +2510,8 @@ public class C
                     )
                     .WithArguments("(<null>, <null>)")
                     .WithLocation(6, 13),
-                // (7,13): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda expression'
+                // (7,13): error CS0019: Operator '==' cannot be applied to operands of type '<null>' and 'lambda
+                // expression'
                 //         if (null == (() => {}) ) {}
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "null == (() => {})")
                     .WithArguments("==", "<null>", "lambda expression")
@@ -3103,32 +3127,38 @@ namespace System
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T1' in the generic type or method '(T1, T2)'
+                // (6,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T1' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (0, 1); // constraint violated by tuple in source
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "0")
                     .WithArguments("(T1, T2)", "T1", "int")
                     .WithLocation(6, 30),
-                // (6,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T1' in the generic type or method '(T1, T2)'
+                // (6,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T1' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (0, 1); // constraint violated by tuple in source
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "0")
                     .WithArguments("(T1, T2)", "T1", "int")
                     .WithLocation(6, 30),
-                // (6,33): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T2' in the generic type or method '(T1, T2)'
+                // (6,33): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T2' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (0, 1); // constraint violated by tuple in source
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "1")
                     .WithArguments("(T1, T2)", "T2", "int")
                     .WithLocation(6, 33),
-                // (6,33): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T2' in the generic type or method '(T1, T2)'
+                // (6,33): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T2' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (0, 1); // constraint violated by tuple in source
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "1")
                     .WithArguments("(T1, T2)", "T2", "int")
                     .WithLocation(6, 33),
-                // (7,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T1' in the generic type or method '(T1, T2)'
+                // (7,30): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T1' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (this, this); // constraint violated by converted tuple
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "this")
                     .WithArguments("(T1, T2)", "T1", "int")
                     .WithLocation(7, 30),
-                // (7,36): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T2' in the generic type or method '(T1, T2)'
+                // (7,36): error CS0452: The type 'int' must be a reference type in order to use it as parameter
+                // 'T2' in the generic type or method '(T1, T2)'
                 //         _ = (this, this) == (this, this); // constraint violated by converted tuple
                 Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "this")
                     .WithArguments("(T1, T2)", "T2", "int")
@@ -3208,12 +3238,14 @@ namespace System
 
             var comp = CreateEmptyCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,24): error CS0315: The type '(int, int)' cannot be used as type parameter 'T' in the generic type or method 'Nullable<T>'. There is no boxing conversion from '(int, int)' to 'IInterface'.
+                // (4,24): error CS0315: The type '(int, int)' cannot be used as type parameter 'T' in the generic
+                // type or method 'Nullable<T>'. There is no boxing conversion from '(int, int)' to 'IInterface'.
                 //     void M((int, int)? t1, (long, long)? t2)
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "t1")
                     .WithArguments("System.Nullable<T>", "IInterface", "T", "(int, int)")
                     .WithLocation(4, 24),
-                // (4,42): error CS0315: The type '(long, long)' cannot be used as type parameter 'T' in the generic type or method 'Nullable<T>'. There is no boxing conversion from '(long, long)' to 'IInterface'.
+                // (4,42): error CS0315: The type '(long, long)' cannot be used as type parameter 'T' in the generic
+                // type or method 'Nullable<T>'. There is no boxing conversion from '(long, long)' to 'IInterface'.
                 //     void M((int, int)? t1, (long, long)? t2)
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "t2")
                     .WithArguments("System.Nullable<T>", "IInterface", "T", "(long, long)")
@@ -3702,7 +3734,8 @@ class C
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "s == 3")
                     .WithArguments("==", "string", "int")
                     .WithLocation(7, 30),
-                // (8,30): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'Exception'
+                // (8,30): error CS0019: Operator '==' cannot be applied to operands of type 'string' and
+                // 'Exception'
                 //         System.Console.Write((1, s) == (1, e));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(1, s) == (1, e)")
                     .WithArguments("==", "string", "System.Exception")
@@ -3730,7 +3763,8 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (10,18): warning CS0252: Possible unintended reference comparison; to get a value comparison, cast the left hand side to type 'string'
+                // (10,18): warning CS0252: Possible unintended reference comparison; to get a value comparison,
+                // cast the left hand side to type 'string'
                 //         bool b = o == s;
                 Diagnostic(ErrorCode.WRN_BadRefCompareLeft, "o == s")
                     .WithArguments("string")
@@ -5094,17 +5128,20 @@ class C
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (8,19): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and 'ValueTuple<int?>'
+                // (8,19): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and
+                // 'ValueTuple<int?>'
                 //         bool b1 = x1 == x1;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x1 == x1")
                     .WithArguments("==", "System.ValueTuple<int?>", "System.ValueTuple<int?>")
                     .WithLocation(8, 19),
-                // (9,19): error CS0019: Operator '!=' cannot be applied to operands of type 'ValueTuple<int?>' and 'ValueTuple<int?>'
+                // (9,19): error CS0019: Operator '!=' cannot be applied to operands of type 'ValueTuple<int?>' and
+                // 'ValueTuple<int?>'
                 //         bool b2 = x1 != x1;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x1 != x1")
                     .WithArguments("!=", "System.ValueTuple<int?>", "System.ValueTuple<int?>")
                     .WithLocation(9, 19),
-                // (18,16): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and 'ValueTuple<int?>'
+                // (18,16): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and
+                // 'ValueTuple<int?>'
                 //         return t.Rest == t.Rest;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "t.Rest == t.Rest")
                     .WithArguments("==", "System.ValueTuple<int?>", "System.ValueTuple<int?>")
@@ -5150,12 +5187,14 @@ class C
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,19): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and 'ValueTuple<int?>'
+                // (9,19): error CS0019: Operator '==' cannot be applied to operands of type 'ValueTuple<int?>' and
+                // 'ValueTuple<int?>'
                 //         bool b1 = x1 == x1;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x1 == x1")
                     .WithArguments("==", "System.ValueTuple<int?>", "System.ValueTuple<int?>")
                     .WithLocation(9, 19),
-                // (10,19): error CS0019: Operator '!=' cannot be applied to operands of type 'ValueTuple<int?>' and 'ValueTuple<int?>'
+                // (10,19): error CS0019: Operator '!=' cannot be applied to operands of type 'ValueTuple<int?>' and
+                // 'ValueTuple<int?>'
                 //         bool b2 = x1 != x1;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x1 != x1")
                     .WithArguments("!=", "System.ValueTuple<int?>", "System.ValueTuple<int?>")
@@ -5448,7 +5487,8 @@ public class NotBool : NotBoolBase
 }
 ";
 
-            // This tests the case where the custom operators false/true need an input conversion that's not just an identity conversion (in this case, it's an implicit reference conversion)
+            // This tests the case where the custom operators false/true need an input conversion that's not
+            // just an identity conversion (in this case, it's an implicit reference conversion)
             validate(
                 "(new A(1), new A(2)) == (new X(1), new Y(2))",
                 "A:1, A:2, X:1, Y:2, X -> Y:1, A == Y, NotBoolBase.false -> False, A == Y, NotBoolBase.false -> False, True"
@@ -5805,7 +5845,8 @@ public class A
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "(a, a) == (a, a)")
                     .WithArguments("bool?", "bool")
                     .WithLocation(6, 13),
-                // (7,13): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion exists (are you missing a cast?)
+                // (7,13): error CS0266: Cannot implicitly convert type 'bool?' to 'bool'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         if (a == a) { }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a == a")
                     .WithArguments("bool?", "bool")
@@ -5851,12 +5892,14 @@ public class C
 
             validate(
                 "t2 == (x: 1, y: 2)",
-                // (16,25): warning CS8375: The tuple element name 'x' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,25): warning CS8375: The tuple element name 'x' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{t2 == (x: 1, y: 2)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "x: 1")
                     .WithArguments("x")
                     .WithLocation(16, 25),
-                // (16,31): warning CS8375: The tuple element name 'y' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,31): warning CS8375: The tuple element name 'y' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{t2 == (x: 1, y: 2)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "y: 2")
                     .WithArguments("y")
@@ -5869,12 +5912,14 @@ public class C
 
             validate(
                 "((a, b), c: 3) == ((1, x: 2), 3)",
-                // (16,27): warning CS8375: The tuple element name 'c' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,27): warning CS8375: The tuple element name 'c' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{((a, b), c: 3) == ((1, x: 2), 3)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "c: 3")
                     .WithArguments("c")
                     .WithLocation(16, 27),
-                // (16,41): warning CS8375: The tuple element name 'x' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,41): warning CS8375: The tuple element name 'x' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{((a, b), c: 3) == ((1, x: 2), 3)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "x: 2")
                     .WithArguments("x")
@@ -5884,7 +5929,8 @@ public class C
             validate("(a, b) == (a: 1, b: 2)");
             validate(
                 "(a, b) == (c: 1, d)",
-                // (16,29): warning CS8375: The tuple element name 'c' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,29): warning CS8375: The tuple element name 'c' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{(a, b) == (c: 1, d)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "c: 1")
                     .WithArguments("c")
@@ -5893,12 +5939,14 @@ public class C
 
             validate(
                 "(a: 1, b: 2) == (c: 1, d)",
-                // (16,35): warning CS8375: The tuple element name 'c' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,35): warning CS8375: The tuple element name 'c' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{(a: 1, b: 2) == (c: 1, d)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "c: 1")
                     .WithArguments("c")
                     .WithLocation(16, 35),
-                // (16,25): warning CS8375: The tuple element name 'b' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,25): warning CS8375: The tuple element name 'b' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{(a: 1, b: 2) == (c: 1, d)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "b: 2")
                     .WithArguments("b")
@@ -5907,12 +5955,14 @@ public class C
 
             validate(
                 "(null, b) == (c: null, d: 2)",
-                // (16,32): warning CS8375: The tuple element name 'c' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,32): warning CS8375: The tuple element name 'c' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{(null, b) == (c: null, d: 2)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "c: null")
                     .WithArguments("c")
                     .WithLocation(16, 32),
-                // (16,41): warning CS8375: The tuple element name 'd' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (16,41): warning CS8375: The tuple element name 'd' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         Write($"{(null, b) == (c: null, d: 2)}");
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "d: 2")
                     .WithArguments("d")
@@ -6116,12 +6166,14 @@ public class C
 
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyDiagnostics(
-                // (7,55): warning CS8375: The tuple element name 'Bob' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (7,55): warning CS8375: The tuple element name 'Bob' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         System.Console.Write((Alice: 0, (Bob, 2)) == (Bob: 0, (1, Other: 2)));
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "Bob: 0")
                     .WithArguments("Bob")
                     .WithLocation(7, 55),
-                // (7,67): warning CS8375: The tuple element name 'Other' is ignored because a different name or no name is specified on the other side of the tuple == or != operator.
+                // (7,67): warning CS8375: The tuple element name 'Other' is ignored because a different name or no
+                // name is specified on the other side of the tuple == or != operator.
                 //         System.Console.Write((Alice: 0, (Bob, 2)) == (Bob: 0, (1, Other: 2)));
                 Diagnostic(ErrorCode.WRN_TupleBinopLiteralNameMismatch, "Other: 2")
                     .WithArguments("Other")
@@ -6384,12 +6436,14 @@ public class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,30): error CS0019: Operator '==' cannot be applied to operands of type '<anonymous type: int A>' and '<anonymous type: int B>'
+                // (9,30): error CS0019: Operator '==' cannot be applied to operands of type '<anonymous type: int
+                // A>' and '<anonymous type: int B>'
                 //         System.Console.Write((a, b) == (b, a));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(a, b) == (b, a)")
                     .WithArguments("==", "<anonymous type: int A>", "<anonymous type: int B>")
                     .WithLocation(9, 30),
-                // (9,30): error CS0019: Operator '==' cannot be applied to operands of type '<anonymous type: int B>' and '<anonymous type: int A>'
+                // (9,30): error CS0019: Operator '==' cannot be applied to operands of type '<anonymous type: int
+                // B>' and '<anonymous type: int A>'
                 //         System.Console.Write((a, b) == (b, a));
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "(a, b) == (b, a)")
                     .WithArguments("==", "<anonymous type: int B>", "<anonymous type: int A>")
@@ -6656,12 +6710,14 @@ struct B
 ";
             var comp = CreateCompilation(source, options: TestOptions.DebugExe);
             comp.VerifyDiagnostics(
-                // (22,8): warning CS0660: 'B' defines operator == or operator != but does not override Object.Equals(object o)
+                // (22,8): warning CS0660: 'B' defines operator == or operator != but does not override
+                // Object.Equals(object o)
                 // struct B
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutEquals, "B")
                     .WithArguments("B")
                     .WithLocation(22, 8),
-                // (22,8): warning CS0661: 'B' defines operator == or operator != but does not override Object.GetHashCode()
+                // (22,8): warning CS0661: 'B' defines operator == or operator != but does not override
+                // Object.GetHashCode()
                 // struct B
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "B")
                     .WithArguments("B")

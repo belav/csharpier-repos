@@ -59,7 +59,8 @@ namespace System.Net.Security.Tests
 
             if (GetSslProtocols() == SslProtocols.Tls13)
             {
-                // TLS 1.3 can generate some extra messages and we may get reset if test sends unidirectional traffic
+                // TLS 1.3 can generate some extra messages and we may get reset if test sends unidirectional
+                // traffic
                 // and extra packet stays in socket buffer.
 
                 // This ping-ping should flush leftovers from the handshake.

@@ -12,20 +12,26 @@ using System.Runtime.InteropServices;
 namespace System.Collections.Frozen
 {
     /// <summary>
-    /// Provides a set of initialization methods for instances of the <see cref="FrozenDictionary{TKey, TValue}"/> class.
+    /// Provides a set of initialization methods for instances of the <see cref="FrozenDictionary{TKey,
+    // TValue}"/> class.
     /// </summary>
     public static class FrozenDictionary
     {
-        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TValue}"/> with the specified key/value pairs.</summary>
+        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TValue}"/> with the specified key/value
+        // pairs.</summary>
         /// <param name="source">The key/value pairs to use to populate the dictionary.</param>
-        /// <param name="comparer">The comparer implementation to use to compare keys for equality. If null, <see cref="EqualityComparer{TKey}.Default"/> is used.</param>
+        /// <param name="comparer">The comparer implementation to use to compare keys for equality. If null,
+        // <see cref="EqualityComparer{TKey}.Default"/> is used.</param>
         /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
         /// <remarks>
-        /// If the same key appears multiple times in the input, the latter one in the sequence takes precedence. This differs from
-        /// <see cref="M:System.Linq.Enumerable.ToDictionary"/>, with which multiple duplicate keys will result in an exception.
+        /// If the same key appears multiple times in the input, the latter one in the sequence takes
+        // precedence. This differs from
+        /// <see cref="M:System.Linq.Enumerable.ToDictionary"/>, with which multiple duplicate keys will
+        // result in an exception.
         /// </remarks>
-        /// <returns>A <see cref="FrozenDictionary{TKey, TValue}"/> that contains the specified keys and values.</returns>
+        /// <returns>A <see cref="FrozenDictionary{TKey, TValue}"/> that contains the specified keys and
+        // values.</returns>
         public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(
             this IEnumerable<KeyValuePair<TKey, TValue>> source,
             IEqualityComparer<TKey>? comparer = null
@@ -37,13 +43,17 @@ namespace System.Collections.Frozen
                 out Dictionary<TKey, TValue>? uniqueValues
             ) ?? CreateFromDictionary(uniqueValues!);
 
-        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TSource}"/> from an <see cref="IEnumerable{TSource}"/> according to specified key selector function.</summary>
+        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TSource}"/> from an <see
+        // cref="IEnumerable{TSource}"/> according to specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-        /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <param name="source">An <see cref="IEnumerable{TSource}"/> from which to create a <see cref="FrozenDictionary{TKey, TSource}"/>.</param>
+        /// <typeparam name="TKey">The type of the key returned by <paramref
+        // name="keySelector"/>.</typeparam>
+        /// <param name="source">An <see cref="IEnumerable{TSource}"/> from which to create a <see
+        // cref="FrozenDictionary{TKey, TSource}"/>.</param>
         /// <param name="keySelector">A function to extract a key from each element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
-        /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
+        /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values
+        // selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TSource> ToFrozenDictionary<TSource, TKey>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -52,15 +62,22 @@ namespace System.Collections.Frozen
             where TKey : notnull =>
             source.ToDictionary(keySelector, comparer).ToFrozenDictionary(comparer);
 
-        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TElement}"/> from an <see cref="IEnumerable{TSource}"/> according to specified key selector and element selector functions.</summary>
+        /// <summary>Creates a <see cref="FrozenDictionary{TKey, TElement}"/> from an <see
+        // cref="IEnumerable{TSource}"/> according to specified key selector and element selector
+        // functions.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
-        /// <typeparam name="TKey">The type of the key returned by <paramref name="keySelector"/>.</typeparam>
-        /// <typeparam name="TElement">The type of the value returned by <paramref name="elementSelector"/>.</typeparam>
-        /// <param name="source">An <see cref="IEnumerable{TSource}"/> from which to create a <see cref="FrozenDictionary{TKey, TElement}"/>.</param>
+        /// <typeparam name="TKey">The type of the key returned by <paramref
+        // name="keySelector"/>.</typeparam>
+        /// <typeparam name="TElement">The type of the value returned by <paramref
+        // name="elementSelector"/>.</typeparam>
+        /// <param name="source">An <see cref="IEnumerable{TSource}"/> from which to create a <see
+        // cref="FrozenDictionary{TKey, TElement}"/>.</param>
         /// <param name="keySelector">A function to extract a key from each element.</param>
-        /// <param name="elementSelector">A transform function to produce a result element value from each element.</param>
+        /// <param name="elementSelector">A transform function to produce a result element value from each
+        // element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
-        /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
+        /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values
+        // selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TElement> ToFrozenDictionary<TSource, TKey, TElement>(
             this IEnumerable<TSource> source,
             Func<TSource, TKey> keySelector,
@@ -73,13 +90,17 @@ namespace System.Collections.Frozen
                 .ToFrozenDictionary(comparer);
 
         /// <summary>
-        /// Extracts from the source either an existing <see cref="FrozenDictionary{TKey,TValue}"/> instance or a <see cref="Dictionary{TKey,TValue}"/>
+        /// Extracts from the source either an existing <see cref="FrozenDictionary{TKey,TValue}"/> instance
+        // or a <see cref="Dictionary{TKey,TValue}"/>
         /// containing the values and the specified <paramref name="comparer"/>.
         /// </summary>
         /// <returns>
-        /// If <paramref name="source"/> is already a <see cref="FrozenDictionary{TKey,TValue}"/> with the same <paramref name="comparer"/>, returns that instance.
-        /// If <paramref name="source"/> is empty, returns an empty <see cref="FrozenDictionary{TKey,TValue}"/> with the specified <paramref name="comparer"/>.
-        /// Otherwise, returns null, and <paramref name="newDictionary"/> is set to a dictionary containing the keys/values from <paramref name="source"/> and
+        /// If <paramref name="source"/> is already a <see cref="FrozenDictionary{TKey,TValue}"/> with the
+        // same <paramref name="comparer"/>, returns that instance.
+        /// If <paramref name="source"/> is empty, returns an empty <see
+        // cref="FrozenDictionary{TKey,TValue}"/> with the specified <paramref name="comparer"/>.
+        /// Otherwise, returns null, and <paramref name="newDictionary"/> is set to a dictionary containing
+        // the keys/values from <paramref name="source"/> and
         /// specified <paramref name="comparer"/>.
         /// </returns>
         private static FrozenDictionary<TKey, TValue>? GetExistingFrozenOrNewDictionary<
@@ -132,7 +153,8 @@ namespace System.Collections.Frozen
             return null;
         }
 
-        /// <summary>Constructs a frozen dictionary, optimizing for the speed of reads on the created instance.</summary>
+        /// <summary>Constructs a frozen dictionary, optimizing for the speed of reads on the created
+        // instance.</summary>
         private static FrozenDictionary<TKey, TValue> CreateFromDictionary<TKey, TValue>(
             Dictionary<TKey, TValue> source
         )
@@ -142,8 +164,10 @@ namespace System.Collections.Frozen
 
             IEqualityComparer<TKey> comparer = source.Comparer;
 
-            // Optimize for value types when the default comparer is being used. In such a case, the implementation
-            // may use {Equality}Comparer<TKey>.Default.Compare/Equals/GetHashCode directly, with generic specialization enabling
+            // Optimize for value types when the default comparer is being used. In such a case, the
+            // implementation
+            // may use {Equality}Comparer<TKey>.Default.Compare/Equals/GetHashCode directly, with generic
+            // specialization enabling
             // the Equals/GetHashCode methods to be devirtualized and possibly inlined.
             if (
                 typeof(TKey).IsValueType
@@ -161,7 +185,8 @@ namespace System.Collections.Frozen
                                 new SmallValueTypeComparableFrozenDictionary<TKey, TValue>(source);
                     }
 
-                    // Otherwise, use an implementation optimized for a small number of value types using the default comparer.
+                    // Otherwise, use an implementation optimized for a small number of value types using the default
+                    // comparer.
                     return (FrozenDictionary<TKey, TValue>)
                         (object)
                             new SmallValueTypeDefaultComparerFrozenDictionary<TKey, TValue>(source);
@@ -169,7 +194,8 @@ namespace System.Collections.Frozen
 
                 // Use a hash-based implementation.
 
-                // For Int32 keys, we can reuse the key storage as the hash storage, saving on space and extra indirection.
+                // For Int32 keys, we can reuse the key storage as the hash storage, saving on space and extra
+                // indirection.
                 if (typeof(TKey) == typeof(int))
                 {
                     return (FrozenDictionary<TKey, TValue>)
@@ -184,8 +210,10 @@ namespace System.Collections.Frozen
             }
 
             // Optimize for string keys with the default, Ordinal, or OrdinalIgnoreCase comparers.
-            // If the key is a string and the comparer is known to provide ordinal (case-sensitive or case-insensitive) semantics,
-            // we can use an implementation that's able to examine and optimize based on lengths and/or subsequences within those strings.
+            // If the key is a string and the comparer is known to provide ordinal (case-sensitive or
+            // case-insensitive) semantics,
+            // we can use an implementation that's able to examine and optimize based on lengths and/or
+            // subsequences within those strings.
             if (
                 typeof(TKey) == typeof(string)
                 && (
@@ -202,7 +230,8 @@ namespace System.Collections.Frozen
                 string[] keys = (string[])(object)source.Keys.ToArray();
                 TValue[] values = source.Values.ToArray();
 
-                // Calculate the minimum and maximum lengths of the strings in the dictionary. Several of the analyses need this.
+                // Calculate the minimum and maximum lengths of the strings in the dictionary. Several of the
+                // analyses need this.
                 int minLength = int.MaxValue,
                     maxLength = 0;
                 foreach (string key in keys)
@@ -214,7 +243,8 @@ namespace System.Collections.Frozen
                 }
                 Debug.Assert(minLength >= 0 && maxLength >= minLength);
 
-                // Try to create an implementation that uses length buckets, where each bucket contains up to only a few strings of the same length.
+                // Try to create an implementation that uses length buckets, where each bucket contains up to only a
+                // few strings of the same length.
                 FrozenDictionary<string, TValue>? frozenDictionary =
                     LengthBucketsFrozenDictionary<TValue>.CreateLengthBucketsFrozenDictionaryIfAppropriate(
                         keys,
@@ -228,7 +258,8 @@ namespace System.Collections.Frozen
                     return (FrozenDictionary<TKey, TValue>)(object)frozenDictionary;
                 }
 
-                // Analyze the keys for unique substrings and create an implementation that minimizes the cost of hashing keys.
+                // Analyze the keys for unique substrings and create an implementation that minimizes the cost of
+                // hashing keys.
                 KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(
                     keys,
                     ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase),
@@ -367,7 +398,8 @@ namespace System.Collections.Frozen
                 return (FrozenDictionary<TKey, TValue>)(object)frozenDictionary;
             }
 
-            // Optimize for very small numbers of items by using a specialized implementation that just does a linear search.
+            // Optimize for very small numbers of items by using a specialized implementation that just does a
+            // linear search.
             if (source.Count <= Constants.MaxItemsInSmallFrozenCollection)
             {
                 // Use the specialized dictionary for low item counts.
@@ -379,15 +411,19 @@ namespace System.Collections.Frozen
         }
     }
 
-    /// <summary>Provides an immutable, read-only dictionary optimized for fast lookup and enumeration.</summary>
+    /// <summary>Provides an immutable, read-only dictionary optimized for fast lookup and
+    // enumeration.</summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary.</typeparam>
     /// <typeparam name="TValue">The type of the values in this dictionary.</typeparam>
     /// <remarks>
-    /// <see cref="FrozenDictionary{TKey, TValue}"/> is immutable and is optimized for situations where a dictionary
+    /// <see cref="FrozenDictionary{TKey, TValue}"/> is immutable and is optimized for situations where
+    // a dictionary
     /// is created very infrequently but is used very frequently at run-time. It has a relatively high
     /// cost to create but provides excellent lookup performance. Thus, it is ideal for cases
-    /// where a dictionary is created once, potentially at the startup of an application, and is used throughout
-    /// the remainder of the life of the application. <see cref="FrozenDictionary{TKey, TValue}"/> should only be
+    /// where a dictionary is created once, potentially at the startup of an application, and is used
+    // throughout
+    /// the remainder of the life of the application. <see cref="FrozenDictionary{TKey, TValue}"/>
+    // should only be
     /// initialized with trusted keys, as the details of the keys impacts construction time.
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
@@ -413,7 +449,8 @@ namespace System.Collections.Frozen
         /// Gets a collection containing the keys in the dictionary.
         /// </summary>
         /// <remarks>
-        /// The order of the keys in the dictionary is unspecified, but it is the same order as the associated values returned by the <see cref="Values"/> property.
+        /// The order of the keys in the dictionary is unspecified, but it is the same order as the
+        // associated values returned by the <see cref="Values"/> property.
         /// </remarks>
         public ImmutableArray<TKey> Keys => ImmutableCollectionsMarshal.AsImmutableArray(KeysCore);
 
@@ -435,7 +472,8 @@ namespace System.Collections.Frozen
         /// Gets a collection containing the values in the dictionary.
         /// </summary>
         /// <remarks>
-        /// The order of the values in the dictionary is unspecified, but it is the same order as the associated keys returned by the <see cref="Keys"/> property.
+        /// The order of the values in the dictionary is unspecified, but it is the same order as the
+        // associated keys returned by the <see cref="Keys"/> property.
         /// </remarks>
         public ImmutableArray<TValue> Values =>
             ImmutableCollectionsMarshal.AsImmutableArray(ValuesCore);
@@ -459,17 +497,22 @@ namespace System.Collections.Frozen
         /// <inheritdoc cref="Count" />
         private protected abstract int CountCore { get; }
 
-        /// <summary>Copies the elements of the dictionary to an array of type <see cref="KeyValuePair{TKey, TValue}"/>, starting at the specified <paramref name="destinationIndex"/>.</summary>
-        /// <param name="destination">The array that is the destination of the elements copied from the dictionary.</param>
-        /// <param name="destinationIndex">The zero-based index in <paramref name="destination"/> at which copying begins.</param>
+        /// <summary>Copies the elements of the dictionary to an array of type <see cref="KeyValuePair{TKey,
+        // TValue}"/>, starting at the specified <paramref name="destinationIndex"/>.</summary>
+        /// <param name="destination">The array that is the destination of the elements copied from the
+        // dictionary.</param>
+        /// <param name="destinationIndex">The zero-based index in <paramref name="destination"/> at which
+        // copying begins.</param>
         public void CopyTo(KeyValuePair<TKey, TValue>[] destination, int destinationIndex)
         {
             ThrowHelper.ThrowIfNull(destination);
             CopyTo(destination.AsSpan(destinationIndex));
         }
 
-        /// <summary>Copies the elements of the dictionary to a span of type <see cref="KeyValuePair{TKey, TValue}"/>.</summary>
-        /// <param name="destination">The span that is the destination of the elements copied from the dictionary.</param>
+        /// <summary>Copies the elements of the dictionary to a span of type <see cref="KeyValuePair{TKey,
+        // TValue}"/>.</summary>
+        /// <param name="destination">The span that is the destination of the elements copied from the
+        // dictionary.</param>
         public void CopyTo(Span<KeyValuePair<TKey, TValue>> destination)
         {
             if (destination.Length < Count)
@@ -578,9 +621,11 @@ namespace System.Collections.Frozen
             set => throw new NotSupportedException();
         }
 
-        /// <summary>Gets either a reference to a <typeparamref name="TValue"/> in the dictionary or a null reference if the key does not exist in the dictionary.</summary>
+        /// <summary>Gets either a reference to a <typeparamref name="TValue"/> in the dictionary or a null
+        // reference if the key does not exist in the dictionary.</summary>
         /// <param name="key">The key used for lookup.</param>
-        /// <returns>A reference to a <typeparamref name="TValue"/> in the dictionary or a null reference if the key does not exist in the dictionary.</returns>
+        /// <returns>A reference to a <typeparamref name="TValue"/> in the dictionary or a null reference if
+        // the key does not exist in the dictionary.</returns>
         /// <remarks>The null reference can be detected by calling <see cref="Unsafe.IsNullRef"/>.</remarks>
         public ref readonly TValue GetValueRefOrNullRef(TKey key)
         {
@@ -598,7 +643,8 @@ namespace System.Collections.Frozen
         /// <summary>Gets a reference to the value associated with the specified key.</summary>
         /// <param name="key">The key of the value to get.</param>
         /// <returns>A reference to the value associated with the specified key.</returns>
-        /// <exception cref="KeyNotFoundException"><paramref name="key"/> does not exist in the collection.</exception>
+        /// <exception cref="KeyNotFoundException"><paramref name="key"/> does not exist in the
+        // collection.</exception>
         public ref readonly TValue this[TKey key]
         {
             get
@@ -626,7 +672,8 @@ namespace System.Collections.Frozen
 
         /// <summary>Determines whether the dictionary contains the specified key.</summary>
         /// <param name="key">The key to locate in the dictionary.</param>
-        /// <returns><see langword="true"/> if the dictionary contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the dictionary contains an element with the specified key;
+        // otherwise, <see langword="false"/>.</returns>
         public bool ContainsKey(TKey key) =>
             !Unsafe.IsNullRef(ref Unsafe.AsRef(in GetValueRefOrNullRef(key)));
 
@@ -645,10 +692,12 @@ namespace System.Collections.Frozen
         /// <summary>Gets the value associated with the specified key.</summary>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">
-        /// When this method returns, contains the value associated with the specified key, if the key is found;
+        /// When this method returns, contains the value associated with the specified key, if the key is
+        // found;
         /// otherwise, the default value for the type of the value parameter.
         /// </param>
-        /// <returns><see langword="true"/> if the dictionary contains an element with the specified key; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the dictionary contains an element with the specified key;
+        // otherwise, <see langword="false"/>.</returns>
         public bool TryGetValue(TKey key, [MaybeNullWhen(false)] out TValue value)
         {
             ref readonly TValue valueRef = ref GetValueRefOrNullRef(key);

@@ -21,7 +21,8 @@ namespace System.Web
     using System.Web.Util;
     using Microsoft.Win32;
 
-    // Type of the callback to the subscriber of a file change event in FileChangesMonitor.StartMonitoringFile
+    // Type of the callback to the subscriber of a file change event in
+    // FileChangesMonitor.StartMonitoringFile
     delegate void FileChangeEventHandler(Object sender, FileChangeEvent e);
 
     // The type of file change that occurred.
@@ -568,13 +569,20 @@ namespace System.Web
                 // protected from ThreadAbortEx
                 lock (_ndirMonCompletionHandleLock)
                 {
-                    // Dev10 927846: The managed DirMonCompletion.ctor calls DirMonOpen to create and initialize the native DirMonCompletion.
-                    // If this succeeds, the managed DirMonCompletion.ctor creates a GCHandle to root itself so the target of the callback
-                    // stays alive.  When the native DirMonCompletion is freed it invokes the managed callback with ACTION_DISPOSE to
-                    // release the GCHandle.  In order for the native DirMonCOmpletion to be freed, either DirMonOpen must fail or
-                    // the managed DirMonCompletion.Dispose must be called and it must invoke DirMonClose.  Waiting until the native
-                    // DirMonCompletion.dtor is called to release the GCHandle ensures that the directory handle has been closed,
-                    // the i/o completions have finished and there are no other threads calling the managed callback.  This is because
+                    // Dev10 927846: The managed DirMonCompletion.ctor calls DirMonOpen to create and initialize the
+                    // native DirMonCompletion.
+                    // If this succeeds, the managed DirMonCompletion.ctor creates a GCHandle to root itself so the
+                    // target of the callback
+                    // stays alive.  When the native DirMonCompletion is freed it invokes the managed callback with
+                    // ACTION_DISPOSE to
+                    // release the GCHandle.  In order for the native DirMonCOmpletion to be freed, either DirMonOpen
+                    // must fail or
+                    // the managed DirMonCompletion.Dispose must be called and it must invoke DirMonClose.  Waiting
+                    // until the native
+                    // DirMonCompletion.dtor is called to release the GCHandle ensures that the directory handle has
+                    // been closed,
+                    // the i/o completions have finished and there are no other threads calling the managed callback.
+                    // This is because
                     // we AddRef when we initiate i/o and we Release when the i/o completion finishes.
 
                     // If I don't do this, myCallback will be collected by GC since its only reference is
@@ -755,7 +763,8 @@ namespace System.Web
         // FcnMode to pass to native code
         internal int FcnMode { get; set; }
 
-        // constructor for special dirmon that monitors all files and subdirectories beneath the vroot (enabled via FCNMode registry key)
+        // constructor for special dirmon that monitors all files and subdirectories beneath the vroot
+        // (enabled via FCNMode registry key)
         internal DirectoryMonitor(string appPathInternal, int fcnMode)
             : this(
                 appPathInternal,
@@ -1122,7 +1131,8 @@ namespace System.Web
         //     its previous value.
         //
         // LastAccessTime is the time a file was last accessed, such as opened or written to.
-        //     Note that if the attributes of a file are changed, its LastAccessTime is not necessarily updated.
+        //     Note that if the attributes of a file are changed, its LastAccessTime is not necessarily
+        // updated.
         //
         // If the FileSize, CreationTime, or LastWriteTime have changed, then we know that the
         //     file has changed in a significant way, and that the LastAccessTime will be greater than
@@ -1265,7 +1275,8 @@ namespace System.Web
                 }
             }
 
-            // if we did not find a match in s_dirsToMonitor, look for LocalResourcesDirectoryName anywhere within fileName
+            // if we did not find a match in s_dirsToMonitor, look for LocalResourcesDirectoryName anywhere
+            // within fileName
             int indexStart = fileName.IndexOf(
                 HttpRuntime.LocalResourcesDirectoryName,
                 StringComparison.OrdinalIgnoreCase
@@ -1274,7 +1285,8 @@ namespace System.Web
             {
                 int dirNameLength = indexStart + HttpRuntime.LocalResourcesDirectoryName.Length;
 
-                // fileName should either end with LocalResourcesDirectoryName or include a trailing slash and more characters
+                // fileName should either end with LocalResourcesDirectoryName or include a trailing slash and more
+                // characters
                 if (
                     fileName.Length == dirNameLength
                     || fileName[dirNameLength] == Path.DirectorySeparatorChar
@@ -1505,7 +1517,8 @@ namespace System.Web
                     }
                 }
 
-                // Dev10 440497: Don't unload AppDomain when a folder is deleted or renamed, unless we're monitoring files in it
+                // Dev10 440497: Don't unload AppDomain when a folder is deleted or renamed, unless we're monitoring
+                // files in it
                 if (
                     _ignoreSubdirChange
                     && (action == FileAction.Removed || action == FileAction.RenamedOldName)
@@ -1946,8 +1959,10 @@ namespace System.Web
         internal static bool s_enableRemoveTargetAssert;
 #endif
 
-        // Dev10 927283: We were appending to HttpRuntime._shutdownMessage in DirectoryMonitor.OnFileChange when
-        // we received overwhelming changes and errors, but not all overwhelming file change notifications result
+        // Dev10 927283: We were appending to HttpRuntime._shutdownMessage in DirectoryMonitor.OnFileChange
+        // when
+        // we received overwhelming changes and errors, but not all overwhelming file change notifications
+        // result
         // in a shutdown.  The fix is to only append to _shutdownMessage when the domain is being shutdown.
         internal static string GenerateErrorMessage(FileAction action, String fileName = null)
         {

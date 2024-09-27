@@ -7,7 +7,8 @@ namespace System.Net.WebSockets
     /// Options to enable per-message deflate compression for <seealso cref="WebSocket" />.
     /// </summary>
     /// <remarks>
-    /// Although the WebSocket spec allows window bits from 8 to 15, the current implementation doesn't support 8 bits.
+    /// Although the WebSocket spec allows window bits from 8 to 15, the current implementation doesn't
+    // support 8 bits.
     /// </remarks>
     public sealed class WebSocketDeflateOptions
     {
@@ -45,7 +46,8 @@ namespace System.Net.WebSockets
         }
 
         /// <summary>
-        /// When true the client-side of the connection indicates that it will persist the deflate context across messages.
+        /// When true the client-side of the connection indicates that it will persist the deflate context
+        // across messages.
         /// The default is true.
         /// </summary>
         /// <remarks>https://tools.ietf.org/html/rfc7692#section-7.1.1.2</remarks>
@@ -82,7 +84,8 @@ namespace System.Net.WebSockets
         }
 
         /// <summary>
-        /// When true the server-side of the connection indicates that it will persist the deflate context across messages.
+        /// When true the server-side of the connection indicates that it will persist the deflate context
+        // across messages.
         /// The default is true.
         /// </summary>
         /// <remarks>https://tools.ietf.org/html/rfc7692#section-7.1.1.1</remarks>

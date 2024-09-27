@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /**
- * Description:
- *      Mainly stresses the GC by creating n threads each manipulating its own local binary tree.
- *      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
- */
+* Description:
+*      Mainly stresses the GC by creating n threads each manipulating its own local binary tree.
+*      Differs from thdtree in a way that the nodes of the binary trees grow during the lifetime.
+*/
 
 
 

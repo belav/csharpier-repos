@@ -13,14 +13,16 @@ namespace Microsoft.AspNetCore.Connections;
 public abstract class ConnectionContext : BaseConnectionContext, IAsyncDisposable
 {
     /// <summary>
-    /// Gets or sets the <see cref="IDuplexPipe"/> that can be used to read or write data on this connection.
+    /// Gets or sets the <see cref="IDuplexPipe"/> that can be used to read or write data on this
+    // connection.
     /// </summary>
     public abstract IDuplexPipe Transport { get; set; }
 
     /// <summary>
     /// Aborts the underlying connection.
     /// </summary>
-    /// <param name="abortReason">A <see cref="ConnectionAbortedException"/> describing the reason the connection is being terminated.</param>
+    /// <param name="abortReason">A <see cref="ConnectionAbortedException"/> describing the reason the
+    // connection is being terminated.</param>
     public override void Abort(ConnectionAbortedException abortReason)
     {
         // We expect this to be overridden, but this helps maintain back compat

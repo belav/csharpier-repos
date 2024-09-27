@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Linq;
 using System.Net.Http.Headers;
@@ -8,8 +9,10 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// A <see cref="RequestHeaderMapping"/> that maps the X-Requested-With http header field set by AJAX XmlHttpRequest (XHR)
-    /// to the media type <c>application/json</c> if no explicit Accept header fields are present in the request.
+    /// A <see cref="RequestHeaderMapping"/> that maps the X-Requested-With http header field set by
+    // AJAX XmlHttpRequest (XHR)
+    /// to the media type <c>application/json</c> if no explicit Accept header fields are present in the
+    // request.
     /// </summary>
     public class XmlHttpRequestHeaderMapping : RequestHeaderMapping
     {
@@ -33,7 +36,8 @@ namespace System.Net.Http.Formatting
         /// <returns>
         /// The quality of the match.
         /// A value of <c>0.0</c> signifies no match.
-        /// A value of <c>1.0</c> signifies a complete match and that the request was made using XmlHttpRequest without an Accept header.
+        /// A value of <c>1.0</c> signifies a complete match and that the request was made using
+        // XmlHttpRequest without an Accept header.
         /// </returns>
         public override double TryMatchMediaType(HttpRequestMessage request)
         {

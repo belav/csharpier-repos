@@ -312,7 +312,8 @@ namespace GHTUtils.Base
         }
 
         /// <summary>
-        /// Marks this testcase as success, but logs the reason for skipping regardless of _logOnSuccess value.
+        /// Marks this testcase as success, but logs the reason for skipping regardless of _logOnSuccess
+        // value.
         /// </summary>
         /// <param name="message">The reason for skipping the test.</param>
         protected void Skip(string message)
@@ -378,7 +379,8 @@ namespace GHTUtils.Base
                     else
                     {
                         //if compare was not called, log error message
-                        //Log(string.Format("TestCase \"{0}\" Warning: [TestCase didn't invoke the Compare mehtod] ", _testCase.ToString()));
+                        //Log(string.Format("TestCase \"{0}\" Warning: [TestCase didn't invoke the Compare mehtod] ",
+                        // _testCase.ToString()));
                     }
                 }
                 //Terminate TestCase (set TestCase to null)

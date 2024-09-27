@@ -7,8 +7,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.integereg
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Types Rule : Interface Methods (Compiler)
-    //          CLS-compliant language compilers must have syntax for the situation where a single type implements
-    //          two interfaces and each of those interfaces requires the definition of a method with the same name and signature.
+    //          CLS-compliant language compilers must have syntax for the situation where a single type
+    // implements
+    //          two interfaces and each of those interfaces requires the definition of a method with the
+    // same name and signature.
     //          Such methods must be considered distinct and need not have the same implementation.
     // </Description>
     // <RelatedBugs></RelatedBugs>
@@ -89,10 +91,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.mixedmode
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Naming Rule : Characters and casing
-    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15 of
-    //          the Unicode Standard 3.0, which governs the set of characters that can start and be included in identifiers.
+    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15
+    // of
+    //          the Unicode Standard 3.0, which governs the set of characters that can start and be
+    // included in identifiers.
     //          This standard is available from the Web site of the Unicode Consortium.
-    //          For two identifiers to be considered distinct, they must differ by more than just their case.
+    //          For two identifiers to be considered distinct, they must differ by more than just their
+    // case.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=warning>\(79,55\).*CS3022</Expects>
@@ -199,10 +204,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Naming Rule : Characters and casing
-    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15 of
-    //          the Unicode Standard 3.0, which governs the set of characters that can start and be included in identifiers.
+    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15
+    // of
+    //          the Unicode Standard 3.0, which governs the set of characters that can start and be
+    // included in identifiers.
     //          This standard is available from the Web site of the Unicode Consortium.
-    //          For two identifiers to be considered distinct, they must differ by more than just their case.
+    //          For two identifiers to be considered distinct, they must differ by more than just their
+    // case.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=warning>\(30,14\).*CS3005.*outMethod01\<X\></Expects>
@@ -267,10 +275,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Naming Rule : Characters and casing
-    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15 of
-    //          the Unicode Standard 3.0, which governs the set of characters that can start and be included in identifiers.
+    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15
+    // of
+    //          the Unicode Standard 3.0, which governs the set of characters that can start and be
+    // included in identifiers.
     //          This standard is available from the Web site of the Unicode Consortium.
-    //          For two identifiers to be considered distinct, they must differ by more than just their case.
+    //          For two identifiers to be considered distinct, they must differ by more than just their
+    // case.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=warning>\(57,24\).*CS0108</Expects>
@@ -366,12 +377,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingchr04.namingchr04
 {
     // <Title> CLS Compliance for Dynamic </Title>
-    // <Description> Visibility - CLS rules apply only to those parts of a type that are exposed outside the defining assembly.
+    // <Description> Visibility - CLS rules apply only to those parts of a type that are exposed outside
+    // the defining assembly.
     //      Naming Rule : Characters and casing
-    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15 of
-    //          the Unicode Standard 3.0, which governs the set of characters that can start and be included in identifiers.
+    //          CLS-compliant language compilers must follow the rules of Annex 7 of Technical Report 15
+    // of
+    //          the Unicode Standard 3.0, which governs the set of characters that can start and be
+    // included in identifiers.
     //          This standard is available from the Web site of the Unicode Consortium.
-    //          For two identifiers to be considered distinct, they must differ by more than just their case.
+    //          For two identifiers to be considered distinct, they must differ by more than just their
+    // case.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=warning>\(31,17\).*CS0169</Expects>
@@ -462,8 +477,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.namingkey
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Naming Rule : Keywords (Compiler)
-    //          CLS-compliant language compilers supply a mechanism for referencing identifiers that coincide with keywords.
-    //          CLS-compliant language compilers provide a mechanism for defining and overriding virtual methods
+    //          CLS-compliant language compilers supply a mechanism for referencing identifiers that
+    // coincide with keywords.
+    //          CLS-compliant language compilers provide a mechanism for defining and overriding virtual
+    // methods
     //          with names that are keywords in the language.
     // </Description>
     // <RelatedBugs></RelatedBugs>
@@ -544,8 +561,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.ClsCompliance.typegener
 {
     // <Title> CLS Compliance for Dynamic </Title>
     // <Description> Types Rule : Interface Methods (Compiler)
-    //          CLS-compliant language compilers must have syntax for the situation where a single type implements
-    //          two interfaces and each of those interfaces requires the definition of a method with the same name and signature.
+    //          CLS-compliant language compilers must have syntax for the situation where a single type
+    // implements
+    //          two interfaces and each of those interfaces requires the definition of a method with the
+    // same name and signature.
     //          Such methods must be considered distinct and need not have the same implementation.
     // </Description>
     // <RelatedBugs></RelatedBugs>

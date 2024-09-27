@@ -14,8 +14,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * ChtmlCommandAdapter class.
-     */
+    * ChtmlCommandAdapter class.
+    */
     /// <include file='doc\ChtmlCommandAdapter.uex' path='docs/doc[@for="ChtmlCommandAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -30,13 +30,15 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class ChtmlCommandAdapter : HtmlCommandAdapter
     {
-        /// <include file='doc\ChtmlCommandAdapter.uex' path='docs/doc[@for="ChtmlCommandAdapter.RequiresFormTag"]/*' />
+        /// <include file='doc\ChtmlCommandAdapter.uex'
+        // path='docs/doc[@for="ChtmlCommandAdapter.RequiresFormTag"]/*' />
         public override bool RequiresFormTag
         {
             get { return true; }
         }
 
-        /// <include file='doc\ChtmlCommandAdapter.uex' path='docs/doc[@for="ChtmlCommandAdapter.AddAttributes"]/*' />
+        /// <include file='doc\ChtmlCommandAdapter.uex'
+        // path='docs/doc[@for="ChtmlCommandAdapter.AddAttributes"]/*' />
         protected override void AddAttributes(HtmlMobileTextWriter writer)
         {
             AddAccesskeyAttribute(writer);

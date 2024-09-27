@@ -80,7 +80,8 @@ public class ResponseCompressionProvider : IResponseCompressionProvider
         // e.g. Accept-Encoding: gzip, deflate, sdch
         var accept = context.Request.Headers.AcceptEncoding;
 
-        // Note this is already checked in CheckRequestAcceptsCompression which _should_ prevent any of these other methods from being called.
+        // Note this is already checked in CheckRequestAcceptsCompression which _should_ prevent any of
+        // these other methods from being called.
         if (StringValues.IsNullOrEmpty(accept))
         {
             Debug.Assert(false, "Duplicate check failed.");

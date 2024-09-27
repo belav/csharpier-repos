@@ -223,7 +223,8 @@ public class HtmlHelperSelectTest
         }
     }
 
-    // Select list -> expected HTML with null model, with model containing "2", and with model containing "1", "3".
+    // Select list -> expected HTML with null model, with model containing "2", and with model
+    // containing "1", "3".
     public static TheoryData<IEnumerable<SelectListItem>, string, string, string> ListBoxDataSet
     {
         get
@@ -1905,7 +1906,8 @@ public class HtmlHelperSelectTest
         return optionSource == source ? " selected=\"HtmlEncode[[selected]]\"" : string.Empty;
     }
 
-    // Confirm methods that wrap GetEnumSelectList(ModelMetadata) are not changing anything in returned collection.
+    // Confirm methods that wrap GetEnumSelectList(ModelMetadata) are not changing anything in returned
+    // collection.
     private void VerifySelectList(
         IEnumerable<SelectListItem> expected,
         IEnumerable<SelectListItem> actual

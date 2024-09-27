@@ -9,7 +9,8 @@ namespace System.IdentityModel.Protocols.WSTrust
     using System.IdentityModel.Tokens;
 
     /// <summary>
-    /// The content of a RequestedProofToken element could be EncryptedSecurityToken which means that EncryptedKey is used
+    /// The content of a RequestedProofToken element could be EncryptedSecurityToken which means that
+    // EncryptedKey is used
     /// under the RequestedProofToken. If the security token is a regular token, such as a SCT,
     /// then its session key will be the material which gets encrypted.  Another possibility is where
     /// we use combined entropy, then RequestedProofToken will only contain a ComputedKey element.
@@ -50,7 +51,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// When the requested proof token contains real key encrypted.
         /// </summary>
         /// <param name="secret">The key material.</param>
-        /// <param name="wrappingCredentials">The encrypting credentials to encrypt the key material.</param>
+        /// <param name="wrappingCredentials">The encrypting credentials to encrypt the key
+        // material.</param>
         public RequestedProofToken(byte[] secret, EncryptingCredentials wrappingCredentials)
         {
             _keys = new ProtectedKey(secret, wrappingCredentials);
@@ -59,7 +61,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Constructs a requested proof token instance with the protected key.
         /// </summary>
-        /// <param name="protectedKey">The protected key which can be either binary secret or encrypted key.</param>
+        /// <param name="protectedKey">The protected key which can be either binary secret or encrypted
+        // key.</param>
         public RequestedProofToken(ProtectedKey protectedKey)
         {
             if (protectedKey == null)

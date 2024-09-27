@@ -124,7 +124,8 @@ namespace System.Reflection.TypeLoading.Ecma
         protected internal sealed override RoType ComputeEnumUnderlyingType()
         {
             //
-            // This performs the functional equivalent of the base Type GetEnumUnderlyingType without going through all the BindingFlag lookup overhead.
+            // This performs the functional equivalent of the base Type GetEnumUnderlyingType without going
+            // through all the BindingFlag lookup overhead.
             //
 
             if (!IsEnum)

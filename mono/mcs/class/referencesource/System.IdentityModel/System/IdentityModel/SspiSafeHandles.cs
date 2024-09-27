@@ -4,89 +4,89 @@
 
 /*++
 Abstract:
-        The file contains SafeHandles implementations for SSPI.
-        These handle wrappers do guarantee that OS resources get cleaned up when the app domain dies.
+The file contains SafeHandles implementations for SSPI.
+These handle wrappers do guarantee that OS resources get cleaned up when the app domain dies.
 
-        All PInvoke declarations that do freeing  the  OS resources  _must_ be in this file
-        All PInvoke declarations that do allocation the OS resources _must_ be in this file
+All PInvoke declarations that do freeing  the  OS resources  _must_ be in this file
+All PInvoke declarations that do allocation the OS resources _must_ be in this file
 
 
 Details:
 
-        The protection from leaking OF the OS resources is based on two technologies
-        1) SafeHandle class
-        2) Non interuptible regions using Constrained Execution Region (CER) technology
+The protection from leaking OF the OS resources is based on two technologies
+1) SafeHandle class
+2) Non interuptible regions using Constrained Execution Region (CER) technology
 
-        For simple cases SafeHandle class does all the job. The Prerequisites are:
-        - A resource is able to be represented by IntPtr type (32 bits on 32 bits platforms).
-        - There is a PInvoke availble that does the creation of the resource.
-          That PInvoke either returns the handle value or it writes the handle into out/ref parameter.
-        - The above PInvoke as part of the call does NOT free any OS resource.
+For simple cases SafeHandle class does all the job. The Prerequisites are:
+- A resource is able to be represented by IntPtr type (32 bits on 32 bits platforms).
+- There is a PInvoke availble that does the creation of the resource.
+That PInvoke either returns the handle value or it writes the handle into out/ref parameter.
+- The above PInvoke as part of the call does NOT free any OS resource.
 
-        For those "simple" cases we desinged SafeHandle-derived classes that provide
-        static methods to allocate a handle object.
-        Each such derived class provides a handle release method that is run as non-interrupted.
+For those "simple" cases we desinged SafeHandle-derived classes that provide
+static methods to allocate a handle object.
+Each such derived class provides a handle release method that is run as non-interrupted.
 
-        For more complicated cases we employ the support for non-interruptible methods (CERs).
-        Each CER is a tree of code rooted at a catch or finally clause for a specially marked exception
-        handler (preceded by the RuntimeHelpers.PrepareConstrainedRegions() marker) or the Dispose or
-        ReleaseHandle method of a SafeHandle derived class. The graph is automatically computed by the
-        runtime (typically at the jit time of the root method), but cannot follow virtual or interface
-        calls (these must be explicitly prepared via RuntimeHelpers.PrepareMethod once the definite target
-        method is known). Also, methods in the graph that must be included in the CER must be marked with
-        a reliability contract stating guarantees about the consistency of the system if an error occurs
-        while they are executing. Look for ReliabilityContract for examples (a full explanation of the
-        semantics of this contract is beyond the scope of this comment).
+For more complicated cases we employ the support for non-interruptible methods (CERs).
+Each CER is a tree of code rooted at a catch or finally clause for a specially marked exception
+handler (preceded by the RuntimeHelpers.PrepareConstrainedRegions() marker) or the Dispose or
+ReleaseHandle method of a SafeHandle derived class. The graph is automatically computed by the
+runtime (typically at the jit time of the root method), but cannot follow virtual or interface
+calls (these must be explicitly prepared via RuntimeHelpers.PrepareMethod once the definite target
+method is known). Also, methods in the graph that must be included in the CER must be marked with
+a reliability contract stating guarantees about the consistency of the system if an error occurs
+while they are executing. Look for ReliabilityContract for examples (a full explanation of the
+semantics of this contract is beyond the scope of this comment).
 
-        An example of the top-level of a CER:
+An example of the top-level of a CER:
 
-            RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            {
-                // Normal code
-            }
-            finally
-            {
-                // Guaranteed to get here even in low memory scenarios. Thread abort will not interrupt
-                // this clause and we won't fail because of a jit allocation of any method called (modulo
-                // restrictions on interface/virtual calls listed above and further restrictions listed
-                // below).
-            }
+RuntimeHelpers.PrepareConstrainedRegions();
+try
+{
+// Normal code
+}
+finally
+{
+// Guaranteed to get here even in low memory scenarios. Thread abort will not interrupt
+// this clause and we won't fail because of a jit allocation of any method called (modulo
+// restrictions on interface/virtual calls listed above and further restrictions listed
+// below).
+}
 
-        Another common pattern is an empty-try (where you really just want a region of code the runtime
-        won't interrupt you in):
+Another common pattern is an empty-try (where you really just want a region of code the runtime
+won't interrupt you in):
 
-            RuntimeHelpers.PrepareConstrainedRegions();
-            try {} finally
-            {
-                // Non-interruptible code here
-            }
+RuntimeHelpers.PrepareConstrainedRegions();
+try {} finally
+{
+// Non-interruptible code here
+}
 
-        This ugly syntax will be supplanted with compiler support at some point.
+This ugly syntax will be supplanted with compiler support at some point.
 
-        While within a CER region certain restrictions apply in order to avoid having the runtime inject
-        a potential fault point into your code (and of course you're are responsible for ensuring your
-        code doesn't inject any explicit fault points of its own unless you know how to tolerate them).
+While within a CER region certain restrictions apply in order to avoid having the runtime inject
+a potential fault point into your code (and of course you're are responsible for ensuring your
+code doesn't inject any explicit fault points of its own unless you know how to tolerate them).
 
-        A quick and dirty guide to the possible causes of fault points in CER regions:
-        - Explicit allocations (though allocating a value type only implies allocation on the stack,
-          which may not present an issue).
-        - Boxing a value type (C# does this implicitly for you in many cases, so be careful).
-        - Use of Monitor.Enter or the lock keyword.
-        - Accessing a multi-dimensional array.
-        - Calling any method outside your control that doesn't make a guarantee (e.g. via a
-          ReliabilityAttribute) that it doesn't introduce failure points.
-        - Making P/Invoke calls with non-blittable parameters types. Blittable types are:
-            - SafeHandle when used as an [in] parameter
-            - NON BOXED base types that fit onto a machine word
-            - ref struct with blittable fields
-            - class type with blittable fields
-            - pinned Unicode strings using "fixed" statement
-            - pointers of any kind
-            - IntPtr type
-        - P/Invokes should not have any CharSet attribute on it's declaration.
-          Obvioulsy string types should not appear in the parameters.
-        - String type MUST not appear in a field of a marshaled ref struct or class in a P?Invoke
+A quick and dirty guide to the possible causes of fault points in CER regions:
+- Explicit allocations (though allocating a value type only implies allocation on the stack,
+which may not present an issue).
+- Boxing a value type (C# does this implicitly for you in many cases, so be careful).
+- Use of Monitor.Enter or the lock keyword.
+- Accessing a multi-dimensional array.
+- Calling any method outside your control that doesn't make a guarantee (e.g. via a
+ReliabilityAttribute) that it doesn't introduce failure points.
+- Making P/Invoke calls with non-blittable parameters types. Blittable types are:
+- SafeHandle when used as an [in] parameter
+- NON BOXED base types that fit onto a machine word
+- ref struct with blittable fields
+- class type with blittable fields
+- pinned Unicode strings using "fixed" statement
+- pointers of any kind
+- IntPtr type
+- P/Invokes should not have any CharSet attribute on it's declaration.
+Obvioulsy string types should not appear in the parameters.
+- String type MUST not appear in a field of a marshaled ref struct or class in a P?Invoke
 
 
 (taken from the NCL classes)
@@ -353,9 +353,11 @@ namespace System.IdentityModel
 
         //
         // After PINvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer or null can be passed if
+        // no handle is returned.
         //
-        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist on the system.
+        // Since it has a CER, this method can't have any references to imports from DLLs that may not exist
+        // on the system.
         //
         static unsafe int MustRunInitializeSecurityContext(
             SafeFreeCredentials inCredentials,
@@ -412,7 +414,8 @@ namespace System.IdentityModel
                 else if (b1 && b2)
                 {
                     SSPIHandle credentialHandle = inCredentials._handle;
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // This API does not set Win32 Last Error.
                     errorCode = InitializeSecurityContextW(
                         ref credentialHandle,
@@ -450,7 +453,8 @@ namespace System.IdentityModel
 
                     outContext.DangerousRelease();
 
-                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+                    // pointer.
                     if (handleTemplate != null)
                     {
                         handleTemplate.Set(
@@ -655,7 +659,8 @@ namespace System.IdentityModel
         }
 
         // After PINvoke call the method will fix the handleTemplate.handle with the returned value.
-        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeFreeContextBuffer_XXX flavour or null can be
+        // passed if no handle is returned.
         // This method is run as non-interruptible.
         static unsafe int MustRunAcceptSecurityContext(
             SafeFreeCredentials inCredentials,
@@ -710,7 +715,8 @@ namespace System.IdentityModel
                 else if (b1 && b2)
                 {
                     SSPIHandle credentialHandle = inCredentials._handle;
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // This API does not set Win32 Last Error.
                     errorCode = AcceptSecurityContext(
                         ref credentialHandle,
@@ -746,7 +752,8 @@ namespace System.IdentityModel
 
                     outContext.DangerousRelease();
 
-                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the pointer.
+                    // The idea is that SSPI has allocated a block and filled up outUnmanagedBuffer+8 slot with the
+                    // pointer.
                     if (handleTemplate != null)
                     {
                         handleTemplate.Set(
@@ -794,7 +801,8 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     status = ImpersonateSecurityContext(ref context._handle);
                     context.DangerousRelease();
@@ -834,7 +842,8 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     status = EncryptMessage(ref context._handle, 0, inputOutput, sequenceNumber);
                     context.DangerousRelease();
@@ -919,7 +928,8 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
                     status = QuerySecurityContextToken(ref _handle, out safeHandle);
                     DangerousRelease();
@@ -937,7 +947,8 @@ namespace System.IdentityModel
             if (this._EffectiveCredential != null)
                 this._EffectiveCredential.DangerousRelease();
 
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
             return DeleteSecurityContext(ref _handle) == 0;
         }
@@ -1054,7 +1065,8 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
                     null,
@@ -1090,7 +1102,8 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
                     null,
@@ -1137,7 +1150,8 @@ namespace System.IdentityModel
                 try { }
                 finally
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                     errorCode = AcquireCredentialsHandleW(
                         null,
@@ -1178,7 +1192,8 @@ namespace System.IdentityModel
             try { }
             finally
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
                 errorCode = AcquireCredentialsHandleW(
                     null,
@@ -1202,7 +1217,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. It returns a error code.
             return FreeCredentialsHandle(ref _handle) == 0;
         }
@@ -1283,7 +1299,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error.
             return CertFreeCertificateContext(handle);
         }
@@ -1306,7 +1323,8 @@ namespace System.IdentityModel
         internal static int EnumeratePackages(out int pkgnum, out SafeFreeContextBuffer pkgArray)
         {
             int res = -1;
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
             res = SafeFreeContextBuffer.EnumerateSecurityPackagesW(out pkgnum, out pkgArray);
 
@@ -1325,7 +1343,8 @@ namespace System.IdentityModel
 
         //
         // After PInvoke call the method will fix the refHandle.handle with the returned value.
-        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no handle is returned.
+        // The caller is responsible for creating a correct SafeHandle template or null can be passed if no
+        // handle is returned.
         //
         // This method is run as non-interruptible.
         //
@@ -1339,7 +1358,8 @@ namespace System.IdentityModel
             int status = (int)SecurityStatus.InvalidHandle;
             bool b = false;
 
-            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors failing to jit
+            // We don't want to be interrupted by thread abort exceptions or unexpected out-of-memory errors
+            // failing to jit
             // one of the following methods. So run within a CER non-interruptible block.
             RuntimeHelpers.PrepareConstrainedRegions();
 
@@ -1364,7 +1384,8 @@ namespace System.IdentityModel
             {
                 if (b)
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
                     status = SafeFreeContextBuffer.QueryContextAttributesW(
                         ref phContext._handle,
@@ -1406,7 +1427,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // The API does not set Win32 Last Error. The API returns a error code.
             return FreeContextBuffer(handle) == 0;
         }
@@ -1453,7 +1475,8 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+            // other interop call.
 #pragma warning suppress 56523 // We are not interested to throw an exception here. We can ignore the Last Error code.
             return CloseHandle(handle);
         }

@@ -711,12 +711,14 @@ class C
 
             CreateCompilation(code, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (6,21): error CS8112: Local function 'local()' must declare a body because it is not marked 'static extern'.
+                    // (6,21): error CS8112: Local function 'local()' must declare a body because it is not marked
+                    // 'static extern'.
                     //         extern void local();
                     Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "local")
                         .WithArguments("local()")
                         .WithLocation(6, 21),
-                    // (6,21): warning CS0626: Method, operator, or accessor 'local()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                    // (6,21): warning CS0626: Method, operator, or accessor 'local()' is marked external and has no
+                    // attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //         extern void local();
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "local")
                         .WithArguments("local()")
@@ -729,17 +731,20 @@ class C
                 );
             CreateCompilation(code, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     //         extern void local();
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern")
                         .WithArguments("extern local functions", "9.0")
                         .WithLocation(6, 9),
-                    // (6,21): error CS8112: Local function 'local()' must declare a body because it is not marked 'static extern'.
+                    // (6,21): error CS8112: Local function 'local()' must declare a body because it is not marked
+                    // 'static extern'.
                     //         extern void local();
                     Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "local")
                         .WithArguments("local()")
                         .WithLocation(6, 21),
-                    // (6,21): warning CS0626: Method, operator, or accessor 'local()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                    // (6,21): warning CS0626: Method, operator, or accessor 'local()' is marked external and has no
+                    // attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //         extern void local();
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "local")
                         .WithArguments("local()")
@@ -835,7 +840,8 @@ class C
                 );
             CreateCompilation(code, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (6,9): error CS8400: Feature 'extern local functions' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     //         extern void local() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "extern")
                         .WithArguments("extern local functions", "9.0")
@@ -1424,12 +1430,14 @@ class c
 
             CreateCompilation(text, parseOptions: TestOptions.Regular6)
                 .VerifyDiagnostics(
-                    // (2,7): warning CS8981: The type name 'c' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                    // (2,7): warning CS8981: The type name 'c' only contains lower-cased ascii characters. Such names
+                    // may become reserved for the language.
                     // class c
                     Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "c")
                         .WithArguments("c")
                         .WithLocation(2, 7),
-                    // (6,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (6,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         int local() => 0;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local")
                         .WithArguments("local functions", "7.0")
@@ -1439,7 +1447,8 @@ class c
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
                         .WithArguments("local")
                         .WithLocation(6, 13),
-                    // (10,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                    // (10,13): error CS8059: Feature 'local functions' is not available in C# 6. Please use language
+                    // version 7.0 or greater.
                     //         int local() { return 0; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "local")
                         .WithArguments("local functions", "7.0")
@@ -1527,7 +1536,8 @@ class c
                 // (6,32): error CS1513: } expected
                 //     async void m3() { await () => new await(); }
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(6, 32),
-                // (6,39): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
+                // (6,39): error CS4003: 'await' cannot be used as an identifier within an async method or lambda
+                // expression
                 //     async void m3() { await () => new await(); }
                 Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(6, 39),
                 // (8,38): error CS1002: ; expected
@@ -1536,7 +1546,8 @@ class c
                 // (8,38): error CS1513: } expected
                 //     async void m5() { await async () => new await(); }
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(8, 38),
-                // (8,45): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
+                // (8,45): error CS4003: 'await' cannot be used as an identifier within an async method or lambda
+                // expression
                 //     async void m5() { await async () => new await(); }
                 Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(8, 45)
             );
@@ -1859,7 +1870,8 @@ class c
 }";
             CreateCompilation(text, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static void F() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
@@ -1958,12 +1970,15 @@ class c
 }";
             CreateCompilation(text, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static async void F1() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
                         .WithLocation(5, 9),
-                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async void F1() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F1").WithLocation(5, 27),
                     // (5,27): warning CS8321: The local function 'F1' is declared but never used
@@ -1971,12 +1986,15 @@ class c
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F1")
                         .WithArguments("F1")
                         .WithLocation(5, 27),
-                    // (6,15): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,15): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         async static void F2() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
                         .WithLocation(6, 15),
-                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 27),
                     // (6,27): warning CS8321: The local function 'F2' is declared but never used
@@ -1987,7 +2005,9 @@ class c
                 );
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async void F1() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F1").WithLocation(5, 27),
                     // (5,27): warning CS8321: The local function 'F1' is declared but never used
@@ -1995,7 +2015,9 @@ class c
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F1")
                         .WithArguments("F1")
                         .WithLocation(5, 27),
-                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 27),
                     // (6,27): warning CS8321: The local function 'F2' is declared but never used
@@ -2006,7 +2028,9 @@ class c
                 );
             CreateCompilation(text, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (5,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async void F1() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F1").WithLocation(5, 27),
                     // (5,27): warning CS8321: The local function 'F1' is declared but never used
@@ -2014,7 +2038,9 @@ class c
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F1")
                         .WithArguments("F1")
                         .WithLocation(5, 27),
-                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,27): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 27),
                     // (6,27): warning CS8321: The local function 'F2' is declared but never used
@@ -2114,7 +2140,8 @@ class c
 }";
             CreateCompilation(text, parseOptions: TestOptions.Regular7_3)
                 .VerifyDiagnostics(
-                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (5,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static static void F1() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
@@ -2127,7 +2154,8 @@ class c
                     Diagnostic(ErrorCode.ERR_DuplicateModifier, "static")
                         .WithArguments("static")
                         .WithLocation(5, 16),
-                    // (5,16): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (5,16): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static static void F1() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
@@ -2137,7 +2165,8 @@ class c
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F1")
                         .WithArguments("F1")
                         .WithLocation(5, 28),
-                    // (6,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,9): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static async static void F2() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
@@ -2150,12 +2179,15 @@ class c
                     Diagnostic(ErrorCode.ERR_DuplicateModifier, "static")
                         .WithArguments("static")
                         .WithLocation(6, 22),
-                    // (6,22): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,22): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         static async static void F2() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
                         .WithLocation(6, 22),
-                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 34),
                     // (6,34): warning CS8321: The local function 'F2' is declared but never used
@@ -2187,7 +2219,9 @@ class c
                     Diagnostic(ErrorCode.ERR_DuplicateModifier, "static")
                         .WithArguments("static")
                         .WithLocation(6, 22),
-                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 34),
                     // (6,34): warning CS8321: The local function 'F2' is declared but never used
@@ -2219,7 +2253,9 @@ class c
                     Diagnostic(ErrorCode.ERR_DuplicateModifier, "static")
                         .WithArguments("static")
                         .WithLocation(6, 22),
-                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    // (6,34): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                    // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                    // CPU-bound work on a background thread.
                     //         static async static void F2() { }
                     Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "F2").WithLocation(6, 34),
                     // (6,34): warning CS8321: The local function 'F2' is declared but never used
@@ -2733,12 +2769,14 @@ class c
                     // (5,14): error CS1002: ; expected
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "static").WithLocation(5, 14),
-                    // (5,14): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (5,14): error CS8370: Feature 'static local functions' is not available in C# 7.3. Please use
+                    // language version 8.0 or greater.
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "static")
                         .WithArguments("static local functions", "8.0")
                         .WithLocation(5, 14),
-                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F")
                         .WithArguments("F")
@@ -2763,7 +2801,8 @@ class c
                     // (5,14): error CS1002: ; expected
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "static").WithLocation(5, 14),
-                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F")
                         .WithArguments("F")
@@ -2788,7 +2827,8 @@ class c
                     // (5,14): error CS1002: ; expected
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "static").WithLocation(5, 14),
-                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,21): error CS0246: The type or namespace name 'F' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         void static F() { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F")
                         .WithArguments("F")

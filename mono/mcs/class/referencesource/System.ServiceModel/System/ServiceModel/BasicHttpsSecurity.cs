@@ -167,7 +167,8 @@ namespace System.ServiceModel
 
         internal bool InternalShouldSerialize()
         {
-            // Default Security mode here is different from that of BasicHttpBinding. Therefore, we do not call into basicHttpSecurity here.
+            // Default Security mode here is different from that of BasicHttpBinding. Therefore, we do not call
+            // into basicHttpSecurity here.
             return this.Mode != BasicHttpsSecurity.DefaultMode
                 || this.ShouldSerializeMessage()
                 || this.ShouldSerializeTransport();

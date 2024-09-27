@@ -1149,7 +1149,8 @@ public class ControllerBinderDelegateProviderTest
     [MemberData(nameof(MultipleActionParametersAndValidationData))]
     public async Task MultipleActionParameter_ValidModelState(List<ParameterDescriptor> parameters)
     {
-        // Since validation attribute is only present on the FromBody model's property(TransferInfo's AccountId),
+        // Since validation attribute is only present on the FromBody model's property(TransferInfo's
+        // AccountId),
         // validation should not trigger for the parameter which is bound from Uri.
 
         // Arrange
@@ -1419,7 +1420,8 @@ public class ControllerBinderDelegateProviderTest
         );
     }
 
-    // No need for bind-related attributes on properties in this controller class. Properties are added directly
+    // No need for bind-related attributes on properties in this controller class. Properties are added
+    // directly
     // to the BoundProperties collection, bypassing usual requirements.
     private class TestController
     {

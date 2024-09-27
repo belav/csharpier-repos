@@ -18,7 +18,8 @@ namespace System.Xml.Schema
         string ns;
         XmlSchemaAnnotation annotation;
 
-        /// <include file='doc\XmlSchemaImport.uex' path='docs/doc[@for="XmlSchemaImport.XmlSchemaImport"]/*' />
+        /// <include file='doc\XmlSchemaImport.uex'
+        // path='docs/doc[@for="XmlSchemaImport.XmlSchemaImport"]/*' />
         public XmlSchemaImport()
         {
             Compositor = Compositor.Import;

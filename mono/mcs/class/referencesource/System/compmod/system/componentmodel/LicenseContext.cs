@@ -20,7 +20,8 @@ namespace System.ComponentModel
     public class LicenseContext : IServiceProvider
     {
         /// <devdoc>
-        ///    <para>When overridden in a derived class, gets a value that specifies when a license can be used.</para>
+        ///    <para>When overridden in a derived class, gets a value that specifies when a license can be
+        // used.</para>
         /// </devdoc>
         public virtual LicenseUsageMode UsageMode
         {
@@ -37,7 +38,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///    <para>When overridden in a derived class, will return an object that implements the asked for service.</para>
+        ///    <para>When overridden in a derived class, will return an object that implements the asked for
+        // service.</para>
         /// </devdoc>
         public virtual object GetService(Type type)
         {

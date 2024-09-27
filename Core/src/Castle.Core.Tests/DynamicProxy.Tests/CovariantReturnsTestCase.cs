@@ -23,8 +23,10 @@ namespace Castle.DynamicProxy.Tests
     [TestFixture]
     public class CovariantReturnsTestCase : BasePEVerifyTestCase
     {
-        // DynamicProxy's current implementation for covariant returns support expects to see override methods
-        // before the overridden methods. That is, we rely on a specific behavior of .NET Reflection, and this test
+        // DynamicProxy's current implementation for covariant returns support expects to see override
+        // methods
+        // before the overridden methods. That is, we rely on a specific behavior of .NET Reflection, and
+        // this test
         // codifies that assumption. If it ever breaks, we'll need to adjust our implementation accordingly.
         [Test]
         public void Reflection_returns_methods_from_a_derived_class_before_methods_from_its_base_class()

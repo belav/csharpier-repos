@@ -12,8 +12,10 @@ namespace System.Security.Cryptography
 {
     /// <summary>
     ///     Utility class to strongly type providers used with CNG. Since all CNG APIs which require a
-    ///     provider name take the name as a string, we use this string wrapper class to specifically mark
-    ///     which parameters are expected to be providers.  We also provide a list of well known provider
+    ///     provider name take the name as a string, we use this string wrapper class to specifically
+    // mark
+    ///     which parameters are expected to be providers.  We also provide a list of well known
+    // provider
     ///     names, which helps Intellisense users find a set of good providernames to use.
     /// </summary>
     [Serializable]

@@ -304,16 +304,22 @@ namespace System.Security.Cryptography
         // source breaks to scenarios that compile against the GAC.
         //
         // They used to be abstract, but the only concrete implementation in RSACryptoServiceProvider threw
-        // NotSupportedException! This has been moved up to the base so all subclasses can ignore them moving forward.
+        // NotSupportedException! This has been moved up to the base so all subclasses can ignore them
+        // moving forward.
         // They will also be removed from .NET Core altogether.
         //
-        // The original intent was for these to perform the RSA algorithm without padding/depadding. This can
-        // be seen by how the RSAXxx(De)Formatter classes call them in the non-RSACryptoServiceProvider case --
+        // The original intent was for these to perform the RSA algorithm without padding/depadding. This
+        // can
+        // be seen by how the RSAXxx(De)Formatter classes call them in the non-RSACryptoServiceProvider case
+        // --
         // they do the padding/depadding in managed code.
         //
-        // Unfortunately, these formatter classes are still incompatible with RSACng or any derived class that does not
-        // implement EncryptValue, DecryptValue as the formatters speculatively expected non-RSACryptoServiceProvider
-        // to do. That needs to be fixed in a subsequent release. We can still do it as it would move an exception to a
+        // Unfortunately, these formatter classes are still incompatible with RSACng or any derived class
+        // that does not
+        // implement EncryptValue, DecryptValue as the formatters speculatively expected
+        // non-RSACryptoServiceProvider
+        // to do. That needs to be fixed in a subsequent release. We can still do it as it would move an
+        // exception to a
         // correct result...
         //
 
@@ -437,14 +443,14 @@ namespace System.Security.Cryptography
         {
             // From the XMLDSIG spec, RFC 3075, Section 6.4.2, an RSAKeyValue looks like this:
             /*
-               <element name="RSAKeyValue">
-                 <complexType>
-                   <sequence>
-                     <element name="Modulus" type="ds:CryptoBinary"/>
-                     <element name="Exponent" type="ds:CryptoBinary"/>
-                   </sequence>
-                 </complexType>
-               </element>
+            <element name="RSAKeyValue">
+            <complexType>
+            <sequence>
+            <element name="Modulus" type="ds:CryptoBinary"/>
+            <element name="Exponent" type="ds:CryptoBinary"/>
+            </sequence>
+            </complexType>
+            </element>
             */
             // we extend appropriately for private components
             RSAParameters rsaParams = this.ExportParameters(includePrivateParameters);

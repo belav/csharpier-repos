@@ -31,9 +31,12 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Used to report that a complex property is about to change
         /// </summary>
-        /// <param name="entityMemberName">The name of the top-level entity property that is changing</param>
-        /// <param name="complexObject">The complex object that contains the property that is changing</param>
-        /// <param name="complexObjectMemberName">The name of the property that is changing on complexObject</param>
+        /// <param name="entityMemberName">The name of the top-level entity property that is
+        // changing</param>
+        /// <param name="complexObject">The complex object that contains the property that is
+        // changing</param>
+        /// <param name="complexObjectMemberName">The name of the property that is changing on
+        // complexObject</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1720:IdentifiersShouldNotContainTypeNames",
@@ -48,9 +51,11 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// Used to report that a complex property has been changed
         /// </summary>
-        /// <param name="entityMemberName">The name of the top-level entity property that has changed</param>
+        /// <param name="entityMemberName">The name of the top-level entity property that has
+        // changed</param>
         /// <param name="complexObject">The complex object that contains the property that changed</param>
-        /// <param name="complexObjectMemberName">The name of the property that changed on complexObject</param>
+        /// <param name="complexObjectMemberName">The name of the property that changed on
+        // complexObject</param>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1720:IdentifiersShouldNotContainTypeNames",

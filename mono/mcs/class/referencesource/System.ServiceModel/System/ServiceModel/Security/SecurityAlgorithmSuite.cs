@@ -519,7 +519,8 @@ namespace System.ServiceModel.Security
                 keySize = ((SymmetricSecurityKey)token.SecurityKeys[0]).KeySize;
 
                 // doing special case for derived key token signing length since
-                // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
+                // the sending side doesn't honor the algorithm suite. It used the
+                // DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultSignatureKeyDerivationLength)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
@@ -566,7 +567,8 @@ namespace System.ServiceModel.Security
                 keySize = ((SymmetricSecurityKey)token.SecurityKeys[0]).KeySize;
 
                 // doing special case for derived key token signing length since
-                // the sending side doesn't honor the algorithm suite. It used the DefaultSignatureKeyDerivationLength instead
+                // the sending side doesn't honor the algorithm suite. It used the
+                // DefaultSignatureKeyDerivationLength instead
                 if (dkt.SecurityKeys[0].KeySize < this.DefaultEncryptionKeyDerivationLength)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(

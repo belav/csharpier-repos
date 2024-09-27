@@ -11,7 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     internal sealed partial class DocumentOutlineViewModel
     {
         /// <summary>
-        /// Helper for <see cref="DocumentOutlineViewState.ViewModelItemsTree"/>.  Allows us to lookup a set of
+        /// Helper for <see cref="DocumentOutlineViewState.ViewModelItemsTree"/>.  Allows us to lookup a set
+        // of
         /// view-models that intersect the care efficiently.
         /// </summary>
         private readonly struct IntervalIntrospector

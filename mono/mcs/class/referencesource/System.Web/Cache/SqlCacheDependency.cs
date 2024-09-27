@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * SqlCacheDepModule
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* SqlCacheDepModule
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.Caching
 {

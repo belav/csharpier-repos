@@ -75,7 +75,8 @@ namespace System.Security.Principal
         }
     }
 
-    // The following two enums ported from WindowsIdentity.cs since it is needed for the impersonation APIs here.
+    // The following two enums ported from WindowsIdentity.cs since it is needed for the impersonation
+    // APIs here.
 
     // Keep in sync with vm\comprincipal.h
     internal enum WinSecurityContext

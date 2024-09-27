@@ -110,9 +110,12 @@ namespace System.Activities.Statements
             {
                 // This is a very small window of time in which we want to block update inside TryCatch.
                 // This is in between OnExceptionFromTry faultHandler and OnTryComplete completionHandler.
-                // A Catch handler could be found at OnExceptionFromTry before update, yet that appropriate Catch handler could have been removed during update and not be found at OnTryComplete.
+                // A Catch handler could be found at OnExceptionFromTry before update, yet that appropriate Catch
+                // handler could have been removed during update and not be found at OnTryComplete.
                 // In such case, the exception can be unintentionally ----ed without ever propagating it upward.
-                // Such TryCatch state is detected by inspecting the TryCatchState private variable for SuppressCancel == false && CaughtException != Null && this.FindCatch(state.CaughtException.Exception) == null.
+                // Such TryCatch state is detected by inspecting the TryCatchState private variable for
+                // SuppressCancel == false && CaughtException != Null &&
+                // this.FindCatch(state.CaughtException.Exception) == null.
                 updateContext.DisallowUpdate(
                     SR.TryCatchInvalidStateForUpdate(state.CaughtException.Exception)
                 );

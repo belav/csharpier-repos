@@ -20,9 +20,12 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which uppercase text is written.</param>
-        /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">The number of bytes actually written to <paramref
+        // name="destination"/>. It's the same as the number of bytes actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{byte}, out int)"/> for that.</remarks>
+        /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{byte}, out
+        // int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToUpper(
             ReadOnlySpan<byte> source,
@@ -36,9 +39,12 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which uppercase text is written.</param>
-        /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
+        /// <param name="charsWritten">The number of characters actually written to <paramref
+        // name="destination"/>. It's the same as the number of characters actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{char}, out int)"/> for that.</remarks>
+        /// <remarks>In-place conversion is prohibited, please use <see cref="ToUpperInPlace(Span{char}, out
+        // int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToUpper(
             ReadOnlySpan<char> source,
@@ -57,7 +63,9 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which uppercase text is written.</param>
-        /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
+        /// <param name="charsWritten">The number of characters actually written to <paramref
+        // name="destination"/>. It's the same as the number of bytes actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToUpper(
@@ -77,7 +85,9 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which uppercase text is written.</param>
-        /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">The number of bytes actually written to <paramref
+        // name="destination"/>. It's the same as the number of characters actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToUpper(
@@ -97,9 +107,12 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which lowercase text is written.</param>
-        /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">The number of bytes actually written to <paramref
+        // name="destination"/>. It's the same as the number of bytes actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{byte}, out int)"/> for that.</remarks>
+        /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{byte}, out
+        // int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToLower(
             ReadOnlySpan<byte> source,
@@ -113,9 +126,12 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which lowercase text is written.</param>
-        /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
+        /// <param name="charsWritten">The number of characters actually written to <paramref
+        // name="destination"/>. It's the same as the number of characters actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
-        /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{char}, out int)"/> for that.</remarks>
+        /// <remarks>In-place conversion is prohibited, please use <see cref="ToLowerInPlace(Span{char}, out
+        // int)"/> for that.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToLower(
             ReadOnlySpan<char> source,
@@ -134,7 +150,9 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which lowercase text is written.</param>
-        /// <param name="charsWritten">The number of characters actually written to <paramref name="destination"/>. It's the same as the number of bytes actually read from <paramref name="source"/>.</param>
+        /// <param name="charsWritten">The number of characters actually written to <paramref
+        // name="destination"/>. It's the same as the number of bytes actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToLower(
@@ -154,7 +172,9 @@ namespace System.Text
         /// </summary>
         /// <param name="source">The source buffer from which ASCII text is read.</param>
         /// <param name="destination">The destination buffer to which lowercase text is written.</param>
-        /// <param name="bytesWritten">The number of bytes actually written to <paramref name="destination"/>. It's the same as the number of characters actually read from <paramref name="source"/>.</param>
+        /// <param name="bytesWritten">The number of bytes actually written to <paramref
+        // name="destination"/>. It's the same as the number of characters actually read from <paramref
+        // name="source"/>.</param>
         /// <returns>An <see cref="OperationStatus"/> describing the result of the operation.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static OperationStatus ToLower(

@@ -36,13 +36,15 @@ namespace Microsoft.CodeAnalysis
         public string? ModuleName { get; protected set; }
 
         /// <summary>
-        /// The full name of a global implicit class (script class). This class implicitly encapsulates top-level statements,
+        /// The full name of a global implicit class (script class). This class implicitly encapsulates
+        // top-level statements,
         /// type declarations, and member declarations. Could be a namespace qualified name.
         /// </summary>
         public string? ScriptClassName { get; protected set; }
 
         /// <summary>
-        /// The full name of a type that declares static Main method. Must be a valid non-generic namespace-qualified name.
+        /// The full name of a type that declares static Main method. Must be a valid non-generic
+        // namespace-qualified name.
         /// Null if any static Main method is a candidate for an entry point.
         /// </summary>
         public string? MainTypeName { get; protected set; }
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis
         // such value is currently not serializable by JSON serializer.
 
         /// <summary>
-        /// Specifies public key used to generate strong name for the compilation assembly, or empty if not specified.
+        /// Specifies public key used to generate strong name for the compilation assembly, or empty if not
+        // specified.
         /// </summary>
         /// <remarks>
         /// If specified the values of <see cref="CryptoKeyFile"/> and <see cref="CryptoKeyContainer"/>
@@ -61,12 +64,14 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<byte> CryptoPublicKey { get; protected set; }
 
         /// <summary>
-        /// The name of the file containing the public and private keys to use to generate strong name of the
+        /// The name of the file containing the public and private keys to use to generate strong name of
+        // the
         /// compilation assembly and to sign it.
         /// </summary>
         /// <remarks>
         /// <para>
-        /// To sign the output supply either one of <see cref="CryptoKeyFile"/> or <see cref="CryptoKeyContainer"/>.
+        /// To sign the output supply either one of <see cref="CryptoKeyFile"/> or <see
+        // cref="CryptoKeyContainer"/>.
         /// but not both. If both are specified <see cref="CryptoKeyContainer"/> is ignored.
         /// </para>
         /// <para>
@@ -81,13 +86,15 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// <para>
-        /// To sign the output supply either one of <see cref="CryptoKeyFile"/> or <see cref="CryptoKeyContainer"/>.
+        /// To sign the output supply either one of <see cref="CryptoKeyFile"/> or <see
+        // cref="CryptoKeyContainer"/>.
         /// but not both. If both are specified <see cref="CryptoKeyContainer"/> is ignored.
         /// </para>
         /// <para>
         /// This setting is obsolete and only supported on Microsoft Windows platform.
         /// Use <see cref="CryptoPublicKey"/> to generate assemblies with strong name and
-        /// a signing tool (Microsoft .NET Framework Strong Name Utility (sn.exe) or equivalent) to sign them.
+        /// a signing tool (Microsoft .NET Framework Strong Name Utility (sn.exe) or equivalent) to sign
+        // them.
         /// </para>
         /// </remarks>
         public string? CryptoKeyContainer { get; protected set; }
@@ -98,12 +105,17 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// If true the resulting assembly is marked as delay signed.
         ///
-        /// If false and <see cref="CryptoPublicKey"/>, <see cref="CryptoKeyFile"/>, or <see cref="CryptoKeyContainer"/> is specified
-        /// or attribute System.Reflection.AssemblyKeyFileAttribute or System.Reflection.AssemblyKeyNameAttribute is applied to the
-        /// compilation assembly in source the resulting assembly is signed accordingly to the specified values/attributes.
+        /// If false and <see cref="CryptoPublicKey"/>, <see cref="CryptoKeyFile"/>, or <see
+        // cref="CryptoKeyContainer"/> is specified
+        /// or attribute System.Reflection.AssemblyKeyFileAttribute or
+        // System.Reflection.AssemblyKeyNameAttribute is applied to the
+        /// compilation assembly in source the resulting assembly is signed accordingly to the specified
+        // values/attributes.
         ///
-        /// If null the semantics is specified by the value of attribute System.Reflection.AssemblyDelaySignAttribute
-        /// applied to the compilation assembly in source. If the attribute is not present the value defaults to "false".
+        /// If null the semantics is specified by the value of attribute
+        // System.Reflection.AssemblyDelaySignAttribute
+        /// applied to the compilation assembly in source. If the attribute is not present the value
+        // defaults to "false".
         /// </remarks>
         public bool? DelaySign { get; protected set; }
 
@@ -158,7 +170,8 @@ namespace Microsoft.CodeAnalysis
         public bool Deterministic { get; protected set; }
 
         /// <summary>
-        /// Used for time-based version generation when <see cref="System.Reflection.AssemblyVersionAttribute"/> contains a wildcard.
+        /// Used for time-based version generation when <see
+        // cref="System.Reflection.AssemblyVersionAttribute"/> contains a wildcard.
         /// If equal to default(<see cref="DateTime"/>) the actual current local time will be used.
         /// </summary>
         internal DateTime CurrentLocalTime { get; private protected set; }
@@ -169,10 +182,12 @@ namespace Microsoft.CodeAnalysis
         internal bool DebugPlusMode { get; set; }
 
         /// <summary>
-        /// Specifies whether to import members with accessibility other than public or protected by default.
+        /// Specifies whether to import members with accessibility other than public or protected by
+        // default.
         /// Default value is <see cref="MetadataImportOptions.Public"/>. The value specified is not going to
         /// affect correctness of analysis performed by compilers because all members needed for correctness
-        /// are going to be imported regardless. This setting can force compilation to import members that it
+        /// are going to be imported regardless. This setting can force compilation to import members that
+        // it
         /// normally doesn't.
         /// </summary>
         public MetadataImportOptions MetadataImportOptions { get; protected set; }
@@ -183,7 +198,8 @@ namespace Microsoft.CodeAnalysis
         internal bool ReferencesSupersedeLowerVersions { get; private protected set; }
 
         /// <summary>
-        /// Modifies the incoming diagnostic, for example escalating its severity, or discarding it (returning null) based on the compilation options.
+        /// Modifies the incoming diagnostic, for example escalating its severity, or discarding it
+        // (returning null) based on the compilation options.
         /// </summary>
         /// <param name="diagnostic"></param>
         /// <returns>The modified diagnostic, or null</returns>
@@ -207,25 +223,29 @@ namespace Microsoft.CodeAnalysis
         public SyntaxTreeOptionsProvider? SyntaxTreeOptionsProvider { get; protected set; }
 
         /// <summary>
-        /// Whether diagnostics suppressed in source, i.e. <see cref="Diagnostic.IsSuppressed"/> is true, should be reported.
+        /// Whether diagnostics suppressed in source, i.e. <see cref="Diagnostic.IsSuppressed"/> is true,
+        // should be reported.
         /// </summary>
         public bool ReportSuppressedDiagnostics { get; protected set; }
 
         /// <summary>
         /// Resolves paths to metadata references specified in source via #r directives.
-        /// Null if the compilation can't contain references to metadata other than those explicitly passed to its factory (such as #r directives in sources).
+        /// Null if the compilation can't contain references to metadata other than those explicitly passed
+        // to its factory (such as #r directives in sources).
         /// </summary>
         public MetadataReferenceResolver? MetadataReferenceResolver { get; protected set; }
 
         /// <summary>
         /// Gets the resolver for resolving XML document references for the compilation.
-        /// Null if the compilation is not allowed to contain XML file references, such as XML doc comment include tags and permission sets stored in an XML file.
+        /// Null if the compilation is not allowed to contain XML file references, such as XML doc comment
+        // include tags and permission sets stored in an XML file.
         /// </summary>
         public XmlReferenceResolver? XmlReferenceResolver { get; protected set; }
 
         /// <summary>
         /// Gets the resolver for resolving source document references for the compilation.
-        /// Null if the compilation is not allowed to contain source file references, such as #line pragmas and #load directives.
+        /// Null if the compilation is not allowed to contain source file references, such as #line pragmas
+        // and #load directives.
         /// </summary>
         public SourceReferenceResolver? SourceReferenceResolver { get; protected set; }
 
@@ -236,7 +256,8 @@ namespace Microsoft.CodeAnalysis
         public StrongNameProvider? StrongNameProvider { get; protected set; }
 
         /// <summary>
-        /// Used to compare assembly identities. May implement unification and portability policies specific to the target platform.
+        /// Used to compare assembly identities. May implement unification and portability policies specific
+        // to the target platform.
         /// <see cref="AssemblyIdentityComparer.Default"/> if not specified.
         /// </summary>
         public AssemblyIdentityComparer AssemblyIdentityComparer { get; protected set; }
@@ -336,10 +357,13 @@ namespace Microsoft.CodeAnalysis
 
         internal bool CanReuseCompilationReferenceManager(CompilationOptions other)
         {
-            // This condition has to include all options the Assembly Manager depends on when binding references.
-            // In addition, the assembly name is determined based upon output kind. It is special for netmodules.
+            // This condition has to include all options the Assembly Manager depends on when binding
+            // references.
+            // In addition, the assembly name is determined based upon output kind. It is special for
+            // netmodules.
             // Can't reuse when file resolver or identity comparers change.
-            // Can reuse even if StrongNameProvider changes. When resolving a cyclic reference only the simple name is considered, not the strong name.
+            // Can reuse even if StrongNameProvider changes. When resolving a cyclic reference only the simple
+            // name is considered, not the strong name.
             return this.MetadataImportOptions == other.MetadataImportOptions
                 && this.ReferencesSupersedeLowerVersions == other.ReferencesSupersedeLowerVersions
                 && this.OutputKind.IsNetModule() == other.OutputKind.IsNetModule()

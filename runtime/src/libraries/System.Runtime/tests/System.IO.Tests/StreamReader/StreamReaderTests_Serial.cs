@@ -33,7 +33,8 @@ namespace System.IO.Tests
             {
                 Task<string> readToEndTask = reader.ReadToEndAsync(token);
 
-                // This is a time-sensitive test where the cancellation needs to happen before the async read completes.
+                // This is a time-sensitive test where the cancellation needs to happen before the async read
+                // completes.
                 // A sleep may be too long a delay, so spin-wait for a very short duration before canceling.
                 SpinWait spinner = default;
                 while (!spinner.NextSpinWillYield)

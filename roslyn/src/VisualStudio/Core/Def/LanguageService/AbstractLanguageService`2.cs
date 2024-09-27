@@ -63,11 +63,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
         internal AnalyzerFileWatcherService AnalyzerFileWatcherService { get; private set; }
 
         /// <summary>
-        /// Whether or not we have been set up. This is set once everything is wired up and cleared once tear down has begun.
+        /// Whether or not we have been set up. This is set once everything is wired up and cleared once
+        // tear down has begun.
         /// </summary>
         /// <remarks>
-        /// We don't set this until we've completed setup. If something goes sideways during it, we will never register
-        /// with the shell and thus have a floating thing around that can't be safely shut down either. We're in a bad
+        /// We don't set this until we've completed setup. If something goes sideways during it, we will
+        // never register
+        /// with the shell and thus have a floating thing around that can't be safely shut down either.
+        // We're in a bad
         /// state but trying to proceed will only make things worse.
         /// </remarks>
         private bool _isSetUp;

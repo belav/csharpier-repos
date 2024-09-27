@@ -29,11 +29,14 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     /// <summary>
-    /// Resolves a code action by filling out its Edit property. The handler is triggered only when a user hovers over a
-    /// code action. This system allows the basic code action data to be computed quickly, and the complex data, to be
+    /// Resolves a code action by filling out its Edit property. The handler is triggered only when a
+    // user hovers over a
+    /// code action. This system allows the basic code action data to be computed quickly, and the
+    // complex data, to be
     /// computed only when necessary (i.e. when hovering/previewing a code action).
     /// <para>
-    /// This system only supports text edits to documents.  In the future, supporting complex edits (including changes to
+    /// This system only supports text edits to documents.  In the future, supporting complex edits
+    // (including changes to
     /// project files) would be desirable.
     /// </para>
     /// </summary>
@@ -81,7 +84,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 return codeAction;
             }
 
-            // We don't need to resolve a top level code action that has nested actions - it requires further action
+            // We don't need to resolve a top level code action that has nested actions - it requires further
+            // action
             // on the client to pick which of the nested actions to actually apply.
             if (data.NestedCodeActions.HasValue && data.NestedCodeActions.Value.Length > 0)
             {

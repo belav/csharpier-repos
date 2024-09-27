@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> for dropping an existing index.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("DROP INDEX {Name}")]
 public class DropIndexOperation : MigrationOperation
@@ -18,7 +19,8 @@ public class DropIndexOperation : MigrationOperation
     public virtual string Name { get; set; } = null!;
 
     /// <summary>
-    ///     The schema that contains the table, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the table, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 

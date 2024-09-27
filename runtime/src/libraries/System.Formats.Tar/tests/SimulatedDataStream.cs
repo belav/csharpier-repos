@@ -5,7 +5,8 @@ using System.IO;
 
 namespace System.Formats.Tar.Tests
 {
-    // Stream that returns `length` amount of bytes with leading and trailing dummy data to verify it was correctly preserved
+    // Stream that returns `length` amount of bytes with leading and trailing dummy data to verify it
+    // was correctly preserved
     // e.g:
     // 0x01, 0x02, 0x03, 0x04, 0x05, 0x00, 0x00, 0x00, 0x00, ...0x00, 0x01, 0x02, 0x03, 0x04, 0x05.
     // or in decimal:

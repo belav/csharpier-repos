@@ -192,9 +192,11 @@ namespace System.Web.UI
             }
         }
 
-        // DevDiv Bugs 127369: This method should be private and the reflection lookup should assert reflection permission
+        // DevDiv Bugs 127369: This method should be private and the reflection lookup should assert
+        // reflection permission
         // so the private reflection works in medium trust.
-        // However, ASP.NET AJAX 1.0 was released with this method public. Since it would be a breaking change to make it private
+        // However, ASP.NET AJAX 1.0 was released with this method public. Since it would be a breaking
+        // change to make it private
         // now, it was decided to leave it as is.
         [SuppressMessage(
             "Microsoft.Security",

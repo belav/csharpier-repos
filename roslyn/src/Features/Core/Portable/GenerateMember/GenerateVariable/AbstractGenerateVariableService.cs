@@ -188,7 +188,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             if (state.TypeToGenerateIn.TypeKind == TypeKind.Interface && state.IsStatic)
                 return;
 
-            // Don't generate properties with a `_` prefix unless that's what the user really wants as their naming style.
+            // Don't generate properties with a `_` prefix unless that's what the user really wants as their
+            // naming style.
             if (
                 await NameIsHighlyUnlikelyToWarrantSymbolAsync(
                         document.Document,
@@ -233,7 +234,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
             CancellationToken cancellationToken
         )
         {
-            // Check If the user explicitly used _ as the start of the name they're generating.  Don't offer to generate
+            // Check If the user explicitly used _ as the start of the name they're generating.  Don't offer to
+            // generate
             // a non-field symbol unless that's genuinely the naming style they have setup.
             if (state.IdentifierToken.ValueText.StartsWith("_"))
             {
@@ -357,7 +359,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
         {
             if (state.CanGenerateLocal())
             {
-                // Don't generate locals with a `_` prefix unless that's what the user really wants as their naming style.
+                // Don't generate locals with a `_` prefix unless that's what the user really wants as their naming
+                // style.
                 if (
                     await NameIsHighlyUnlikelyToWarrantSymbolAsync(
                             document,
@@ -389,7 +392,8 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateVariable
         {
             if (state.CanGenerateParameter())
             {
-                // Don't generate parameters with a `_` prefix unless that's what the user really wants as their naming style.
+                // Don't generate parameters with a `_` prefix unless that's what the user really wants as their
+                // naming style.
                 if (
                     await NameIsHighlyUnlikelyToWarrantSymbolAsync(
                             document,

@@ -44,7 +44,8 @@ namespace System.ServiceModel.Channels
             KeyString = keyString;
         }
 
-        // The public constructor normalizes the parameters and calls this constructor, which creates the key string and adds it to the data avaliable to the "real" constructor.
+        // The public constructor normalizes the parameters and calls this constructor, which creates the
+        // key string and adds it to the data avaliable to the "real" constructor.
         CorrelationKey(ReadOnlyStringDictionary keyData, string scopeName, XNamespace provider)
             : this(GenerateKeyString(keyData, scopeName, provider.NamespaceName), provider)
         {
@@ -86,7 +87,8 @@ namespace System.ServiceModel.Channels
 
         public string KeyString { get; private set; }
 
-        // This name is not an aspect of the key itself, it exists to allow keys to be locally disambiguated.
+        // This name is not an aspect of the key itself, it exists to allow keys to be locally
+        // disambiguated.
         public string Name
         {
             get { return this.name; }

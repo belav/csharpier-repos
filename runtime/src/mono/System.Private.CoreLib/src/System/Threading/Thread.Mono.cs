@@ -57,9 +57,9 @@ namespace System.Threading
         private object? pending_exception;
 
         /* This is used only to check that we are in sync between the representation
-         * of MonoInternalThread in native and InternalThread in managed
-         *
-         * DO NOT RENAME! DO NOT ADD FIELDS AFTER! */
+        * of MonoInternalThread in native and InternalThread in managed
+        *
+        * DO NOT RENAME! DO NOT ADD FIELDS AFTER! */
         private IntPtr last;
         #endregion
 #pragma warning restore 169, 414, 649
@@ -72,9 +72,12 @@ namespace System.Threading
         internal WaitSubsystem.ThreadWaitInfo? _waitInfo;
 #endif
 
-        // This is used for a quick check on thread pool threads after running a work item to determine if the name, background
-        // state, or priority were changed by the work item, and if so to reset it. Other threads may also change some of those,
-        // but those types of changes may race with the reset anyway, so this field doesn't need to be synchronized.
+        // This is used for a quick check on thread pool threads after running a work item to determine if
+        // the name, background
+        // state, or priority were changed by the work item, and if so to reset it. Other threads may also
+        // change some of those,
+        // but those types of changes may race with the reset anyway, so this field doesn't need to be
+        // synchronized.
         private bool _mayNeedResetForThreadPool;
 
         private Thread()

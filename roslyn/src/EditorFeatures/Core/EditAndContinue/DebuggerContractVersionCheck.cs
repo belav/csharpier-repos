@@ -9,7 +9,8 @@ using Microsoft.VisualStudio.Debugger.Contracts.HotReload;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Allow us to run integration tests on older VS than build that has the required version of Microsoft.VisualStudio.Debugger.Contracts.
+    /// Allow us to run integration tests on older VS than build that has the required version of
+    // Microsoft.VisualStudio.Debugger.Contracts.
     /// </summary>
     internal static class DebuggerContractVersionCheck
     {

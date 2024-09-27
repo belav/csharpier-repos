@@ -77,7 +77,8 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         get
         {
             // This is the base GUID used by HTTP.SYS for generating the activity ID.
-            // HTTP.SYS overwrites the first 8 bytes of the base GUID with RequestId to generate ETW activity ID.
+            // HTTP.SYS overwrites the first 8 bytes of the base GUID with RequestId to generate ETW activity
+            // ID.
             var guid = new Guid(
                 0xffcb4c93,
                 0xa57f,

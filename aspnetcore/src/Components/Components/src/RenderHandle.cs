@@ -44,7 +44,8 @@ public readonly struct RenderHandle
     public bool IsInitialized => _renderer is not null;
 
     /// <summary>
-    /// Gets a value that determines if the <see cref="Renderer"/> is triggering a render in response to a metadata update (hot-reload) change.
+    /// Gets a value that determines if the <see cref="Renderer"/> is triggering a render in response to
+    // a metadata update (hot-reload) change.
     /// </summary>
     public bool IsRenderingOnMetadataUpdate =>
         HotReloadManager.Default.MetadataUpdateSupported
@@ -71,8 +72,10 @@ public readonly struct RenderHandle
     /// <summary>
     /// Dispatches an <see cref="Exception"/> to the <see cref="Renderer"/>.
     /// </summary>
-    /// <param name="exception">The <see cref="Exception"/> that will be dispatched to the renderer.</param>
-    /// <returns>A <see cref="Task"/> that will be completed when the exception has finished dispatching.</returns>
+    /// <param name="exception">The <see cref="Exception"/> that will be dispatched to the
+    // renderer.</param>
+    /// <returns>A <see cref="Task"/> that will be completed when the exception has finished
+    // dispatching.</returns>
     public Task DispatchExceptionAsync(Exception exception)
     {
         var renderer = _renderer;

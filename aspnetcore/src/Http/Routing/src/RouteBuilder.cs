@@ -14,18 +14,21 @@ namespace Microsoft.AspNetCore.Routing;
 public class RouteBuilder : IRouteBuilder
 {
     /// <summary>
-    /// Constructs a new <see cref="RouteBuilder"/> instance given an <paramref name="applicationBuilder"/>.
+    /// Constructs a new <see cref="RouteBuilder"/> instance given an <paramref
+    // name="applicationBuilder"/>.
     /// </summary>
     /// <param name="applicationBuilder">An <see cref="IApplicationBuilder"/> instance.</param>
     public RouteBuilder(IApplicationBuilder applicationBuilder)
         : this(applicationBuilder, defaultHandler: null) { }
 
     /// <summary>
-    /// Constructs a new <see cref="RouteBuilder"/> instance given an <paramref name="applicationBuilder"/>
+    /// Constructs a new <see cref="RouteBuilder"/> instance given an <paramref
+    // name="applicationBuilder"/>
     /// and <paramref name="defaultHandler"/>.
     /// </summary>
     /// <param name="applicationBuilder">An <see cref="IApplicationBuilder"/> instance.</param>
-    /// <param name="defaultHandler">The default <see cref="IRouter"/> used if a new route is added without a handler.</param>
+    /// <param name="defaultHandler">The default <see cref="IRouter"/> used if a new route is added
+    // without a handler.</param>
     public RouteBuilder(IApplicationBuilder applicationBuilder, IRouter? defaultHandler)
     {
         ArgumentNullException.ThrowIfNull(applicationBuilder);

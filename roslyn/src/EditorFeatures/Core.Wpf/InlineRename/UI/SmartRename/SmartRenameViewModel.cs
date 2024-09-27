@@ -45,7 +45,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
     private string? _selectedSuggestedName;
 
     /// <summary>
-    /// The last selected name when user click one of the suggestions. <see langword="null"/> if user hasn't clicked any suggestions.
+    /// The last selected name when user click one of the suggestions. <see langword="null"/> if user
+    // hasn't clicked any suggestions.
     /// </summary>
     public string? SelectedSuggestedName
     {
@@ -85,7 +86,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
     private void SessionPropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         _threadingContext.ThrowIfNotOnUIThread();
-        // _smartRenameSession.SuggestedNames is a normal list. We need to convert it to ObservableCollection to bind to UI Element.
+        // _smartRenameSession.SuggestedNames is a normal list. We need to convert it to
+        // ObservableCollection to bind to UI Element.
         if (e.PropertyName == nameof(_smartRenameSession.SuggestedNames))
         {
             SuggestedNames.Clear();
@@ -97,7 +99,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
             return;
         }
 
-        // For the rest of the property, like HasSuggestions, IsAvailable and etc. Just forward it has changed to subscriber
+        // For the rest of the property, like HasSuggestions, IsAvailable and etc. Just forward it has
+        // changed to subscriber
         PropertyChanged?.Invoke(this, e);
     }
 
@@ -110,7 +113,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
         }
 
         // ↑ and ↓ would navigate via the Suggested list.
-        // The previous element of first element is the last one. And the next element of the last element is the first one.
+        // The previous element of first element is the last one. And the next element of the last element
+        // is the first one.
         var currentIndex = SuggestedNames.IndexOf(currentIdentifier);
         currentIndex += down ? 1 : -1;
         var count = this.SuggestedNames.Count;

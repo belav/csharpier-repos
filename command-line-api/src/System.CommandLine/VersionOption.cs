@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
@@ -15,13 +16,17 @@ namespace System.CommandLine
         private CliAction? _action;
 
         /// <summary>
-        /// When added to a <see cref="CliCommand"/>, it enables the use of a <c>--version</c> option, which when specified in command line input will short circuit normal command handling and instead write out version information before exiting.
+        /// When added to a <see cref="CliCommand"/>, it enables the use of a <c>--version</c> option, which
+        // when specified in command line input will short circuit normal command handling and instead write
+        // out version information before exiting.
         /// </summary>
         public VersionOption()
             : this("--version", Array.Empty<string>()) { }
 
         /// <summary>
-        /// When added to a <see cref="CliCommand"/>, it enables the use of a provided option name and aliases, which when specified in command line input will short circuit normal command handling and instead write out version information before exiting.
+        /// When added to a <see cref="CliCommand"/>, it enables the use of a provided option name and
+        // aliases, which when specified in command line input will short circuit normal command handling and
+        // instead write out version information before exiting.
         /// </summary>
         public VersionOption(string name, params string[] aliases)
             : base(name, aliases, new CliArgument<bool>("--version") { Arity = ArgumentArity.Zero })

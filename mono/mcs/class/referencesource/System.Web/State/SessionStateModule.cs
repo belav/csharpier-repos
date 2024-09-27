@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * SessionStateModule
- *
- * Copyright (c) 1998-2002, Microsoft Corporation
- *
- */
+* SessionStateModule
+*
+* Copyright (c) 1998-2002, Microsoft Corporation
+*
+*/
 
 namespace System.Web.SessionState
 {
@@ -56,11 +56,11 @@ namespace System.Web.SessionState
         }
     }
 
-    /*
-     * Calls the OnSessionEnd event. We use an object other than the SessionStateModule
-     * because the state of the module is unknown - it could have been disposed
-     * when a session ends.
-     */
+/*
+* Calls the OnSessionEnd event. We use an object other than the SessionStateModule
+* because the state of the module is unknown - it could have been disposed
+* when a session ends.
+*/
     class SessionOnEndTarget
     {
         internal int _sessionEndEventHandlerCount;
@@ -115,10 +115,10 @@ namespace System.Web.SessionState
         }
     }
 
-    /*
-     * The sesssion state module provides session state services
-     * for an application.
-     */
+/*
+* The sesssion state module provides session state services
+* for an application.
+*/
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
@@ -212,7 +212,7 @@ namespace System.Web.SessionState
         static bool s_allowDelayedStateStoreItemCreation;
         static HttpSessionStateContainer s_delayedSessionState = new HttpSessionStateContainer();
 
-        /* per application vars */
+/* per application vars */
         EventHandler _sessionStartEventHandler;
         Timer _timer;
         TimerCallback _timerCallback;
@@ -225,7 +225,7 @@ namespace System.Web.SessionState
         bool _ignoreImpersonation;
         readonly SessionOnEndTarget _onEndTarget = new SessionOnEndTarget();
 
-        /* per request data goes in _rq* variables */
+/* per request data goes in _rq* variables */
         bool _acquireCalled;
         bool _releaseCalled;
         HttpSessionStateContainer _rqSessionState;
@@ -605,11 +605,11 @@ namespace System.Web.SessionState
             _rqSupportSessionIdReissue = false;
         }
 
-        /*
-         * Add a OnStart event handler.
-         *
-         * @param sessionEventHandler
-         */
+/*
+* Add a OnStart event handler.
+*
+* @param sessionEventHandler
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -659,21 +659,21 @@ namespace System.Web.SessionState
             }
         }
 
-        /*
-         * Fire the OnStart event.
-         *
-         * @param e
-         */
+/*
+* Fire the OnStart event.
+*
+* @param e
+*/
         void OnStart(EventArgs e)
         {
             RaiseOnStart(e);
         }
 
-        /*
-         * Add a OnEnd event handler.
-         *
-         * @param sessionEventHandler
-         */
+/*
+* Add a OnEnd event handler.
+*
+* @param sessionEventHandler
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -708,9 +708,9 @@ namespace System.Web.SessionState
             }
         }
 
-        /*
-         * Acquire session state
-         */
+/*
+* Acquire session state
+*/
         IAsyncResult BeginAcquireState(
             Object source,
             EventArgs e,
@@ -744,10 +744,10 @@ namespace System.Web.SessionState
                         _rqContext.WorkerRequest
                     );
 
-                /* Notify the store we are beginning to get process request */
+/* Notify the store we are beginning to get process request */
                 _store.InitializeRequest(_rqContext);
 
-                /* determine if the request requires state at all */
+/* determine if the request requires state at all */
                 requiresState = _rqContext.RequiresSessionState;
 
                 // SessionIDManager may need to do a redirect if cookieless setting is AutoDetect
@@ -797,7 +797,7 @@ namespace System.Web.SessionState
                 }
                 else
                 {
-                    /* Get sessionid */
+/* Get sessionid */
                     _rqId = _idManager.GetSessionID(_rqContext);
                     Debug.Trace("SessionStateModuleOnAcquireState", "Current request id=" + _rqId);
                 }
@@ -851,17 +851,17 @@ namespace System.Web.SessionState
                     _rqExecutionTimeout = s_configExecutionTimeout;
                 }
 
-                /* determine if we need just read-only access */
+/* determine if we need just read-only access */
                 _rqReadonly = _rqContext.ReadOnlySessionState;
 
                 if (_rqId != null)
                 {
-                    /* get the session state corresponding to this session id */
+/* get the session state corresponding to this session id */
                     isCompleted = GetSessionStateItem();
                 }
                 else if (!skipReadingId)
                 {
-                    /* if there's no id yet, create it */
+/* if there's no id yet, create it */
                     bool redirected = CreateSessionId();
 
                     _rqIdNew = true;
@@ -931,9 +931,12 @@ namespace System.Web.SessionState
         internal void EnsureStateStoreItemLocked()
         {
             // DevDiv 665141:
-            // Ensure ownership of the session state item here as the session ID now can be put on the wire (by Response.Flush)
-            // and the client can initiate a request before this one reaches OnReleaseState and thus causing a race condition.
-            // Note: It changes when we call into the Session Store provider. Now it may happen at BeginAcquireState instead of OnReleaseState.
+            // Ensure ownership of the session state item here as the session ID now can be put on the wire (by
+            // Response.Flush)
+            // and the client can initiate a request before this one reaches OnReleaseState and thus causing a
+            // race condition.
+            // Note: It changes when we call into the Session Store provider. Now it may happen at
+            // BeginAcquireState instead of OnReleaseState.
 
             // Item is locked yet here only if this is a new session
             if (!_rqSessionStateNotFound)
@@ -1302,7 +1305,7 @@ namespace System.Web.SessionState
                 //
                 if (lockAge >= _rqExecutionTimeout)
                 {
-                    /* Release the lock on the item, which is held by another thread*/
+/* Release the lock on the item, which is held by another thread*/
                     Debug.Trace(
                         "SessionStateModuleOnAcquireState",
                         "Lock timed out, lockAge=" + lockAge + ", id=" + _rqId
@@ -1550,17 +1553,17 @@ namespace System.Web.SessionState
             bool isCompleted = false;
             Exception error = null;
 
-            /* check whether we are currently in a callback */
+/* check whether we are currently in a callback */
             if (Interlocked.CompareExchange(ref _rqInCallback, 1, 0) != 0)
                 return;
 
             try
             {
-                /*
-                 * check whether this callback is for the current request,
-                 * and whether sufficient time has passed since the last poll
-                 * to try again.
-                 */
+/*
+* check whether this callback is for the current request,
+* and whether sufficient time has passed since the last poll
+* to try again.
+*/
                 int timerId = (int)state;
                 if (
                     (timerId == _timerId)
@@ -1622,9 +1625,9 @@ namespace System.Web.SessionState
             return _rqId;
         }
 
-        /*
-         * Release session state
-         */
+/*
+* Release session state
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -1668,9 +1671,9 @@ namespace System.Web.SessionState
                         delayedSessionState
                     );
 
-                    /*
-                     * Don't store untouched new sessions.
-                     */
+/*
+* Don't store untouched new sessions.
+*/
 
                     if (
                         // The store doesn't have the session state.
@@ -1908,9 +1911,9 @@ namespace System.Web.SessionState
             }
         }
 
-        /*
-         * End of request processing. Possibly does release if skipped due to errors
-         */
+/*
+* End of request processing. Possibly does release if skipped due to errors
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -1926,7 +1929,7 @@ namespace System.Web.SessionState
             app = (HttpApplication)source;
             context = app.Context;
 
-            /* determine if the request requires state at all */
+/* determine if the request requires state at all */
             if (!context.RequiresSessionState)
             {
                 return;
@@ -1940,16 +1943,16 @@ namespace System.Web.SessionState
                 {
                     if (_acquireCalled)
                     {
-                        /*
-                         * need to do release here if the request short-circuited due to an error
-                         */
+/*
+* need to do release here if the request short-circuited due to an error
+*/
                         OnReleaseState(source, eventArgs);
                     }
                     else
                     {
-                        /*
-                         * 'advise' -- update session timeout
-                         */
+/*
+* 'advise' -- update session timeout
+*/
 
                         if (_rqContext == null)
                         {
@@ -1980,7 +1983,7 @@ namespace System.Web.SessionState
                     }
                 }
 
-                /* Notify the store we are finishing a request */
+/* Notify the store we are finishing a request */
                 _store.EndRequest(_rqContext);
             }
             finally

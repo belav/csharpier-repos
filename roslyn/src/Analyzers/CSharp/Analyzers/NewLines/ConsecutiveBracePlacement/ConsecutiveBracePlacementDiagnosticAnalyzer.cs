@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.ConsecutiveBracePlacement
             var firstBrace = token;
             secondBrace = nextToken;
 
-            // two } tokens.  They need to be on the same line, or if they are not on subsequent lines, then there needs
+            // two } tokens.  They need to be on the same line, or if they are not on subsequent lines, then
+            // there needs
             // to be more than whitespace between them.
             var lines = text.Lines;
             var firstBraceLine = lines.GetLineFromPosition(firstBrace.SpanStart).LineNumber;

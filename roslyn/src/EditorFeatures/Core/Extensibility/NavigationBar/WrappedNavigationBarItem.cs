@@ -13,7 +13,8 @@ using Microsoft.VisualStudio.Text;
 namespace Microsoft.CodeAnalysis.Editor
 {
     /// <summary>
-    /// Implementation of the editor layer <see cref="NavigationBarItem"/> that wraps a feature layer <see cref="RoslynNavigationBarItem"/>
+    /// Implementation of the editor layer <see cref="NavigationBarItem"/> that wraps a feature layer
+    // <see cref="RoslynNavigationBarItem"/>
     /// </summary>
     // We suppress this as this type *does* override ComputeAdditionalHashCodeParts
     internal sealed class WrappedNavigationBarItem
@@ -54,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor
                 ArrayBuilder<TextSpan> spans
             )
             {
-                // For a regular symbol we want to select it if the user puts their caret in any of the spans of it in this file.
+                // For a regular symbol we want to select it if the user puts their caret in any of the spans of it
+                // in this file.
                 if (
                     underlyingItem is RoslynNavigationBarItem.SymbolItem
                     {
@@ -66,12 +68,16 @@ namespace Microsoft.CodeAnalysis.Editor
                 }
                 else if (underlyingItem is RoslynNavigationBarItem.ActionlessItem)
                 {
-                    // An actionless item represents something that exists just to show a child-list, but should otherwise
-                    // not navigate or cause anything to be generated.  However, we still want to automatically select it
+                    // An actionless item represents something that exists just to show a child-list, but should
+                    // otherwise
+                    // not navigate or cause anything to be generated.  However, we still want to automatically select
+                    // it
                     // whenever the user puts their caret in any of the spans of its child items in this file.
                     //
-                    // For example, in VB any withevents members will be put in the type-list, and the events those members
-                    // are hooked up to will then be in the member-list.  In this case, we want moving into the span of that
+                    // For example, in VB any withevents members will be put in the type-list, and the events those
+                    // members
+                    // are hooked up to will then be in the member-list.  In this case, we want moving into the span of
+                    // that
                     // member to select the withevent member in the type-list.
                     foreach (var child in underlyingItem.ChildItems)
                         AddSpans(child, spans);

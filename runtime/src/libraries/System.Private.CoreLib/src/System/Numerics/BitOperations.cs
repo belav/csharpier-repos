@@ -22,7 +22,8 @@ namespace System.Numerics
     /// </summary>
     public static class BitOperations
     {
-        // C# no-alloc optimization that directly wraps the data section of the dll (similar to string constants)
+        // C# no-alloc optimization that directly wraps the data section of the dll (similar to string
+        // constants)
         // https://github.com/dotnet/roslyn/pull/24621
 
         private static ReadOnlySpan<byte> TrailingZeroCountDeBruijn => // 32
@@ -445,7 +446,8 @@ namespace System.Numerics
             value |= value >> 08;
             value |= value >> 16;
 
-            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds check
+            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds
+            // check
             return Unsafe.AddByteOffset(
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
@@ -632,7 +634,8 @@ namespace System.Numerics
                 return (int)X86Base.BitScanForward(value);
             }
 
-            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds check
+            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds
+            // check
             return Unsafe.AddByteOffset(
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_0111_1100_1011_0101_0011_0001u
                 ref MemoryMarshal.GetReference(TrailingZeroCountDeBruijn),
@@ -760,7 +763,8 @@ namespace System.Numerics
         /// <param name="value">The value to rotate.</param>
         /// <param name="offset">The number of bits to rotate by.
         /// Any value outside the range [0..31] is treated as congruent mod 32 on a 32-bit process,
-        /// and any value outside the range [0..63] is treated as congruent mod 64 on a 64-bit process.</param>
+        /// and any value outside the range [0..63] is treated as congruent mod 64 on a 64-bit
+        // process.</param>
         /// <returns>The rotated value.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -809,7 +813,8 @@ namespace System.Numerics
         /// <param name="value">The value to rotate.</param>
         /// <param name="offset">The number of bits to rotate by.
         /// Any value outside the range [0..31] is treated as congruent mod 32 on a 32-bit process,
-        /// and any value outside the range [0..63] is treated as congruent mod 64 on a 64-bit process.</param>
+        /// and any value outside the range [0..63] is treated as congruent mod 64 on a 64-bit
+        // process.</param>
         /// <returns>The rotated value.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -924,7 +929,8 @@ namespace System.Numerics
         {
             // CRC-32 transition table.
             // While this implementation is based on the Castagnoli CRC-32 polynomial (CRC-32C),
-            // x32 + x28 + x27 + x26 + x25 + x23 + x22 + x20 + x19 + x18 + x14 + x13 + x11 + x10 + x9 + x8 + x6 + x0,
+            // x32 + x28 + x27 + x26 + x25 + x23 + x22 + x20 + x19 + x18 + x14 + x13 + x11 + x10 + x9 + x8 + x6
+            // + x0,
             // this version uses reflected bit ordering, so 0x1EDC6F41 becomes 0x82F63B78u.
             // This is computed lazily so as to avoid increasing the assembly size for data that's
             // only needed on a fallback path.

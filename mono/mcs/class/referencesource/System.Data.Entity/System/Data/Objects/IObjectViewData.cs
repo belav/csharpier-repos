@@ -50,11 +50,13 @@ namespace System.Data.Objects
         bool AllowRemove { get; }
 
         /// <summary>
-        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed events
+        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed
+        // events
         /// when items are added to the binding list.
         /// </summary>
         /// <value>
-        /// <b>True</b> if the IObjectViewData instance fires list changed events on add; otherwise <b>false</b>.
+        /// <b>True</b> if the IObjectViewData instance fires list changed events on add; otherwise
+        // <b>false</b>.
         /// </value>
         /// <remarks>
         /// List changed events are fired by the ObjectContext if the IObjectViewData.OnCollectionChanged
@@ -63,11 +65,13 @@ namespace System.Data.Objects
         bool FiresEventOnAdd { get; }
 
         /// <summary>
-        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed events
+        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed
+        // events
         /// when items are removed from the binding list.
         /// </summary>
         /// <value>
-        /// <b>True</b> if the IObjectViewData instance fires list changed events on remove; otherwise <b>false</b>.
+        /// <b>True</b> if the IObjectViewData instance fires list changed events on remove; otherwise
+        // <b>false</b>.
         /// </value>
         /// <remarks>
         /// List changed events are fired by the ObjectContext if the IObjectViewData.OnCollectionChanged
@@ -76,11 +80,13 @@ namespace System.Data.Objects
         bool FiresEventOnRemove { get; }
 
         /// <summary>
-        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed events
+        /// Get boolean that specifies whether the IObjectViewData instance implicitly fires list changed
+        // events
         /// when all items are cleared from the binding list.
         /// </summary>
         /// <value>
-        /// <b>True</b> if the IObjectViewData instance fires list changed events on clear; otherwise <b>false</b>.
+        /// <b>True</b> if the IObjectViewData instance fires list changed events on clear; otherwise
+        // <b>false</b>.
         /// </value>
         /// <remarks>
         /// List changed events are fired by the ObjectContext if the IObjectViewData.OnCollectionChanged
@@ -89,7 +95,8 @@ namespace System.Data.Objects
         bool FiresEventOnClear { get; }
 
         /// <summary>
-        /// Throw an exception if the IObjectViewData instance does not allow newly-created items to be added to this list.
+        /// Throw an exception if the IObjectViewData instance does not allow newly-created items to be
+        // added to this list.
         /// </summary>
         void EnsureCanAddNew();
 
@@ -110,7 +117,8 @@ namespace System.Data.Objects
         /// </returns>
         /// <remarks>
         /// If <paramref name="isAddNew"/> is true,
-        /// the item should only be added to the list returned by the List property, and not any underlying collection.
+        /// the item should only be added to the list returned by the List property, and not any underlying
+        // collection.
         /// Otherwise, the item should be added to the binding list as well as any underlying collection.
         /// </remarks>
         int Add(T item, bool isAddNew);
@@ -142,12 +150,14 @@ namespace System.Data.Objects
         /// otherwise <b>false</b>.
         /// </param>
         /// <returns>
-        /// <b>True</b> if item was removed from list; otherwise <b>false</b> if item was not present in the binding list.
+        /// <b>True</b> if item was removed from list; otherwise <b>false</b> if item was not present in the
+        // binding list.
         /// </returns>
         /// <remarks>
         /// If <paramref name="isCancelNew"/> is true,
         /// the item should only be removed from the binding list, and not any underlying collection.
-        /// Otherwise, the item should be removed from the binding list as well as any underlying collection.
+        /// Otherwise, the item should be removed from the binding list as well as any underlying
+        // collection.
         /// </remarks>
         bool Remove(T item, bool isCancelNew);
 
@@ -168,7 +178,8 @@ namespace System.Data.Objects
         /// </returns>
         /// <remarks>
         /// The listener.RegisterEntityEvent method should be called for items added to the binding list,
-        /// and the listener.UnregisterEntityEvents method should be called for items removed from the binding list.
+        /// and the listener.UnregisterEntityEvents method should be called for items removed from the
+        // binding list.
         /// Other methods of the ObjectViewListener should not be used.
         /// </remarks>
         ListChangedEventArgs OnCollectionChanged(

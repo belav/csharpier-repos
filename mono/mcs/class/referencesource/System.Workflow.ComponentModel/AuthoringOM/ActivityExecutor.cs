@@ -194,7 +194,8 @@ namespace System.Workflow.ComponentModel
             compositeActivity.OnWorkflowChangesCompleted(executionContext);
         }
 
-        // Refer Bug 9339 (VB Compilation Failure - Unable to load one or more of the requested types. Retrieve the LoaderExceptions property for more information.)
+        // Refer Bug 9339 (VB Compilation Failure - Unable to load one or more of the requested types.
+        // Retrieve the LoaderExceptions property for more information.)
         //An unhandled exception of type 'System.TypeLoadException' occurred
         // "Signature of the body and declaration in a method implementation do not match"
         protected override ActivityExecutionStatus Execute(
@@ -241,7 +242,8 @@ namespace System.Workflow.ComponentModel
                 object[] activityExecutorsObjects = null;
                 try
                 {
-                    //activityExecutorsObjects = ComponentDispenser.CreateComponents(activityType, typeof(ActivityExecutorAttribute));
+                    //activityExecutorsObjects = ComponentDispenser.CreateComponents(activityType,
+                    // typeof(ActivityExecutorAttribute));
                     activityExecutorsObjects = ComponentDispenser.CreateActivityExecutors(activity);
                 }
                 catch (Exception e)

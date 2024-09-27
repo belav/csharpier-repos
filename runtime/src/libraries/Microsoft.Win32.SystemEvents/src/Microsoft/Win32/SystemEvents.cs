@@ -63,7 +63,8 @@ namespace Microsoft.Win32
 
         private SystemEvents()
         {
-            // This class is intended to be static, but predates static classes (which were introduced in C# 2.0).
+            // This class is intended to be static, but predates static classes (which were introduced in C#
+            // 2.0).
         }
 
         // stole from SystemInformation... if we get SystemInformation moved
@@ -746,7 +747,8 @@ namespace Microsoft.Win32
         }
 
         /// <summary>
-        ///  Executes the given delegate asynchronously on the thread that listens for system events.  Similar to Control.BeginInvoke().
+        ///  Executes the given delegate asynchronously on the thread that listens for system events.
+        // Similar to Control.BeginInvoke().
         /// </summary>
         public static void InvokeOnEventsThread(Delegate method)
         {
@@ -970,7 +972,8 @@ namespace Microsoft.Win32
         private void OnThemeChanged()
         {
             // we need to fire a changing event handler for Themes.
-            // note that it needs to be documented that accessing theme information during the changing event is forbidden.
+            // note that it needs to be documented that accessing theme information during the changing event is
+            // forbidden.
             RaiseEvent(
                 s_onUserPreferenceChangingEvent,
                 this,

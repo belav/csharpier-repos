@@ -385,7 +385,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Draws or perform the hit test for the line chart.
         /// </summary>
-        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is
+        // active.</param>
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
@@ -1136,7 +1137,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             PointF adjustedPoint1 = PointF.Empty;
             PointF adjustedPoint2 = PointF.Empty;
 
-            // Check line angle. Intersection with vertical or horizontal lines will be done based on the results
+            // Check line angle. Intersection with vertical or horizontal lines will be done based on the
+            // results
             bool topBottomLine = (Math.Abs(pt2.Y - pt1.Y) > Math.Abs(pt2.X - pt1.X));
             RectangleF rect = new RectangleF(
                 0,
@@ -1407,7 +1409,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Draws or perform the hit test for the line chart in 3D.
         /// </summary>
-        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is
+        // active.</param>
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
@@ -1742,10 +1745,14 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
         /// <param name="topDarkening">Darkenning scale for top surface. 0 - None.</param>
         /// <param name="bottomDarkening">Darkenning scale for bottom surface. 0 - None.</param>
-        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN if same as in "firstPoint".</param>
-        /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
-        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should be drawn.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN
+        // if same as in "firstPoint".</param>
+        /// <param name="fourthPointPosition">Position where the fourth point is actually located or
+        // float.NaN if same as in "secondPoint".</param>
+        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should
+        // be drawn.</param>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         protected virtual GraphicsPath Draw3DSurface(
             ChartArea area,
             ChartGraphics graph,
@@ -1889,10 +1896,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointLoopIndex">Index of points loop.</param>
         /// <param name="tension">Line tension.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several segments.</param>
+        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several
+        // segments.</param>
         /// <param name="topDarkening">Darkenning scale for top surface. 0 - None.</param>
         /// <param name="bottomDarkening">Darkenning scale for bottom surface. 0 - None.</param>
-        /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         protected bool ClipTopPoints(
             GraphicsPath resultPath,
             ref DataPoint3D firstPoint,
@@ -2362,10 +2371,12 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointLoopIndex">Index of points loop.</param>
         /// <param name="tension">Line tension.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several segments.</param>
+        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several
+        // segments.</param>
         /// <param name="topDarkening">Darkenning scale for top surface. 0 - None.</param>
         /// <param name="bottomDarkening">Darkenning scale for bottom surface. 0 - None.</param>
-        /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns element shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         protected bool ClipBottomPoints(
             GraphicsPath resultPath,
             ref DataPoint3D firstPoint,
@@ -2875,15 +2886,22 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <param name="pointLoopIndex">Index of points loop.</param>
         /// <param name="tension">Line tension.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several segments.</param>
+        /// <param name="surfaceSegmentType">Define surface segment type if it consists of several
+        // segments.</param>
         /// <param name="topDarkening">Darkenning scale for top surface. 0 - None.</param>
         /// <param name="bottomDarkening">Darkenning scale for bottom surface. 0 - None.</param>
-        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN if same as in "firstPoint".</param>
-        /// <param name="fourthPointPosition">Position where the fourth point is actually located or float.NaN if same as in "secondPoint".</param>
-        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should be drawn.</param>
-        /// <param name="clipOnTop">Indicates that top segment line should be clipped to the pkot area.</param>
-        /// <param name="clipOnBottom">Indicates that bottom segment line should be clipped to the pkot area.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <param name="thirdPointPosition">Position where the third point is actually located or float.NaN
+        // if same as in "firstPoint".</param>
+        /// <param name="fourthPointPosition">Position where the fourth point is actually located or
+        // float.NaN if same as in "secondPoint".</param>
+        /// <param name="clippedSegment">Indicates that drawn segment is 3D clipped. Only top/bottom should
+        // be drawn.</param>
+        /// <param name="clipOnTop">Indicates that top segment line should be clipped to the pkot
+        // area.</param>
+        /// <param name="clipOnBottom">Indicates that bottom segment line should be clipped to the pkot
+        // area.</param>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         protected virtual GraphicsPath Draw3DSurface(
             DataPoint3D firstPoint,
             DataPoint3D secondPoint,
@@ -2919,7 +2937,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -4803,7 +4803,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         public void VerifyExpectedSignature_PssSha3_256()
         {
             // Signature independently created with
-            // echo -n Hello | openssl dgst -sha3-256 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt rsa_padding_mode:pss -pkeyopt digest:sha3-256 | xxd -i -c 16
+            // echo -n Hello | openssl dgst -sha3-256 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt
+            // rsa_padding_mode:pss -pkeyopt digest:sha3-256 | xxd -i -c 16
             byte[] helloSignature =
             {
                 0x0b,
@@ -5076,7 +5077,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         public void VerifyExpectedSignature_PssSha3_384()
         {
             // Signature independently created with
-            // echo -n Hello | openssl dgst -sha3-384 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt rsa_padding_mode:pss -pkeyopt digest:sha3-384 | xxd -i -c 16
+            // echo -n Hello | openssl dgst -sha3-384 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt
+            // rsa_padding_mode:pss -pkeyopt digest:sha3-384 | xxd -i -c 16
             byte[] helloSignature =
             {
                 0x75,
@@ -5349,7 +5351,8 @@ namespace System.Security.Cryptography.Rsa.Tests
         public void VerifyExpectedSignature_PssSha3_512()
         {
             // Signature independently created with
-            // echo -n Hello | openssl dgst -sha3-512 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt rsa_padding_mode:pss -pkeyopt digest:sha3-512 | xxd -i -c 16
+            // echo -n Hello | openssl dgst -sha3-512 -binary | openssl pkeyutl -sign -inkey key.pem -pkeyopt
+            // rsa_padding_mode:pss -pkeyopt digest:sha3-512 | xxd -i -c 16
             byte[] helloSignature =
             {
                 0x2b,

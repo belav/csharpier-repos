@@ -145,12 +145,16 @@ namespace System.DirectoryServices.AccountManagement
         //   \)                )                            \)
         //   \\                \                             \\
         //   x                 x                             x      (where x is anything else)
-        // Add \G to beginning and \z to the end so that the regex will be anchored at the either end of the property
+        // Add \G to beginning and \z to the end so that the regex will be anchored at the either end of the
+        // property
         // \G = Regex must match at the beginning
         // \z = Regex must match at the end
-        // ( ) * are special characters to Regex so they must be escaped with \\.  We support these from teh user either raw or already escaped.
-        // Any other \ in the input string are translated to an actual \ in the match because we cannot determine usage except for  ( ) *
-        // The user cannot enter any regex escape sequence they would like in their match string.  Only * is supported.
+        // ( ) * are special characters to Regex so they must be escaped with \\.  We support these from teh
+        // user either raw or already escaped.
+        // Any other \ in the input string are translated to an actual \ in the match because we cannot
+        // determine usage except for  ( ) *
+        // The user cannot enter any regex escape sequence they would like in their match string.  Only * is
+        // supported.
         //
         //  @"c:\Home" -> "c:\\\\Home" OR @"c:\\Home"
         //

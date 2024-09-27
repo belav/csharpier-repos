@@ -221,7 +221,8 @@ namespace MonoTests.System.Resources.Tools
         [Test]
         public void GeneratedCodeNamespaceProviderInvalidIdentifiersOK()
         {
-            // identifiers which are still invalid after CreateValidIdentifier called allowed through in .NET framework
+            // identifiers which are still invalid after CreateValidIdentifier called allowed through in .NET
+            // framework
             string[] unmatchables;
             string input,
                 output,

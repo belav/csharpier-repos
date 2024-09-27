@@ -222,7 +222,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                     typeof(ClassWithNoConstraints<string>),
                     $"Open generic service type '{serviceType}' requires registering an open generic implementation type.",
                 };
-                // Service type is GenericTypeDefinition, implementation type has different generic type definition arity
+                // Service type is GenericTypeDefinition, implementation type has different generic type definition
+                // arity
                 yield return new object[]
                 {
                     serviceType,
@@ -268,7 +269,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
             var provider = CreateServiceProvider(serviceCollection);
 
-            // Repeatedly resolve and re-check to ensure dynamically generated code properly initializes the values types.
+            // Repeatedly resolve and re-check to ensure dynamically generated code properly initializes the
+            // values types.
             for (int i = 0; i < 100; i++)
             {
                 var service = provider.GetService<ClassWithServiceAndOptionalArgsCtorWithStructs>();
@@ -633,7 +635,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 Assert.False(mreForThread1.WaitOne(10));
 
                 // By this time thread 1 has already reached InnerSingleton ctor and is waiting for mre1.
-                // within the GetRequiredService call, thread 2 should be waiting on a singleton lock for InnerSingleton
+                // within the GetRequiredService call, thread 2 should be waiting on a singleton lock for
+                // InnerSingleton
                 // (rather than trying to instantiating InnerSingleton twice).
                 mreForThread1.Set();
 
@@ -662,8 +665,10 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 // 3. Thread 1 enters the factory callback for Thing1 and takes the lazy lock
                 // 4. Thread 2 takes callsite for Thing2 as a singleton lock when it resolves Thing2
                 // 5. Thread 2 enters the factory callback for Thing1 and waits on the lazy lock
-                // 6. Thread 1 calls GetRequiredService<Thing0> on the service provider, takes callsite for Thing0 causing no deadlock
-                // (rather than taking the locks that are already taken - either the lazy lock or the Thing2 callsite lock)
+                // 6. Thread 1 calls GetRequiredService<Thing0> on the service provider, takes callsite for Thing0
+                // causing no deadlock
+                // (rather than taking the locks that are already taken - either the lazy lock or the Thing2
+                // callsite lock)
 
                 Thing0 thing0 = null;
                 Thing1 thing1 = null;
@@ -739,7 +744,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task GetRequiredService_BiggerObjectGraphWithOpenGenerics_NoDeadlock()
         {
-            // Test is similar to GetRequiredService_UsesSingletonAndLazyLocks_NoDeadlock (but for open generics and a larger object graph)
+            // Test is similar to GetRequiredService_UsesSingletonAndLazyLocks_NoDeadlock (but for open generics
+            // and a larger object graph)
             using (var mreForThread1 = new ManualResetEvent(false))
             using (var mreForThread2 = new ManualResetEvent(false))
             {
@@ -991,9 +997,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
         public void GenericIEnumerableItemCachedInTheRightSlot()
         {
             var services = new ServiceCollection();
-            // It's important that this service is generic, it hits a different codepath when resolved inside IEnumerable
+            // It's important that this service is generic, it hits a different codepath when resolved inside
+            // IEnumerable
             services.AddSingleton<IFakeOpenGenericService<PocoClass>, FakeService>();
-            // Doesn't matter what this services is, we just want something in the collection after generic registration
+            // Doesn't matter what this services is, we just want something in the collection after generic
+            // registration
             services.AddSingleton<FakeService>();
 
             var serviceProvider = CreateServiceProvider(services);

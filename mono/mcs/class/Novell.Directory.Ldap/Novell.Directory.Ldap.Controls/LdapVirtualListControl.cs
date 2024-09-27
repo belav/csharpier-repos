@@ -35,19 +35,19 @@ using Novell.Directory.Ldap.Asn1;
 
 namespace Novell.Directory.Ldap.Controls
 {
-    /* The following is the ASN.1 of the VLV Request packet:
-    *
-    * VirtualListViewRequest ::= SEQUENCE {
-    *      beforeCount    INTEGER (0..maxInt),
-    *         afterCount     INTEGER (0..maxInt),
-    *      CHOICE {
-    *          byoffset [0] SEQUENCE {
-    *              offset          INTEGER (0 .. maxInt),
-    *              contentCount    INTEGER (0 .. maxInt) },
-    *          greaterThanOrEqual [1] AssertionValue },
-    *      contextID     OCTET STRING OPTIONAL }
-    *
-    */
+/* The following is the ASN.1 of the VLV Request packet:
+*
+* VirtualListViewRequest ::= SEQUENCE {
+*      beforeCount    INTEGER (0..maxInt),
+*         afterCount     INTEGER (0..maxInt),
+*      CHOICE {
+*          byoffset [0] SEQUENCE {
+*              offset          INTEGER (0 .. maxInt),
+*              contentCount    INTEGER (0 .. maxInt) },
+*          greaterThanOrEqual [1] AssertionValue },
+*      contextID     OCTET STRING OPTIONAL }
+*
+*/
 
     /// <summary> LdapVirtualListControl is a Server Control used to specify
     /// that results from a search are to be returned in pages - which are
@@ -93,15 +93,15 @@ namespace Novell.Directory.Ldap.Controls
             {
                 m_contentCount = value;
 
-                /* since we just changed a field we need to rebuild the ber
-                * encoded control
-                */
+/* since we just changed a field we need to rebuild the ber
+* encoded control
+*/
                 BuildIndexedVLVRequest();
 
-                /* Set the request data field in the in the parent LdapControl to
-                * the ASN.1 encoded value of this control.  This encoding will be
-                * appended to the search request when the control is sent.
-                */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
                 setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
             }
         }
@@ -118,61 +118,61 @@ namespace Novell.Directory.Ldap.Controls
             get { return m_context; }
             set
             {
-                /* Index of the context field if one exists in the ber
-                */
+/* Index of the context field if one exists in the ber
+*/
                 int CONTEXTIDINDEX = 3;
 
-                /* Save off the new value in private variable
-                */
+/* Save off the new value in private variable
+*/
                 m_context = value;
 
-                /* Is there a context field that is already in the ber
-                */
+/* Is there a context field that is already in the ber
+*/
                 if (m_vlvRequest.size() == 4)
                 {
-                    /* If YES then replace it */
+/* If YES then replace it */
                     m_vlvRequest.set_Renamed(CONTEXTIDINDEX, new Asn1OctetString(m_context));
                 }
                 else if (m_vlvRequest.size() == 3)
                 {
-                    /* If no then add a new one */
+/* If no then add a new one */
                     m_vlvRequest.add(new Asn1OctetString(m_context));
                 }
 
-                /* Set the request data field in the in the parent LdapControl to
-                * the ASN.1 encoded value of this control.  This encoding will be
-                * appended to the search request when the control is sent.
-                */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
                 setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
             }
         }
 
-        /* The ASN.1 for the VLV Request has CHOICE field. These private
-        * variables represent differnt ids for these different options
-        */
+/* The ASN.1 for the VLV Request has CHOICE field. These private
+* variables represent differnt ids for these different options
+*/
         private static int BYOFFSET = 0;
         private static int GREATERTHANOREQUAL = 1;
 
         /// <summary> The Request OID for a VLV Request</summary>
         private static System.String requestOID = "2.16.840.1.113730.3.4.9";
 
-        /*
-        * The Response stOID for a VLV Response
-        */
+/*
+* The Response stOID for a VLV Response
+*/
         private static System.String responseOID = "2.16.840.1.113730.3.4.10";
 
-        /*
-        * The encoded ASN.1 VLV Control is stored in this variable
-        */
+/*
+* The encoded ASN.1 VLV Control is stored in this variable
+*/
         private Asn1Sequence m_vlvRequest;
 
-        /* Private instance variables go here.
-        * These variables are used to store copies of various fields
-        * that can be set in a VLV control. One could have managed
-        * without really defining these private variables by reverse
-        * engineering each field from the ASN.1 encoded control.
-        * However that would have complicated and slowed down the code.
-        */
+/* Private instance variables go here.
+* These variables are used to store copies of various fields
+* that can be set in a VLV control. One could have managed
+* without really defining these private variables by reverse
+* engineering each field from the ASN.1 encoded control.
+* However that would have complicated and slowed down the code.
+*/
         private int m_beforeCount;
         private int m_afterCount;
         private System.String m_jumpTo;
@@ -248,21 +248,21 @@ namespace Novell.Directory.Ldap.Controls
         )
             : base(requestOID, true, null)
         {
-            /* Save off the fields in local variables
-            */
+/* Save off the fields in local variables
+*/
             m_beforeCount = beforeCount;
             m_afterCount = afterCount;
             m_jumpTo = jumpTo;
             m_context = context;
 
-            /* Call private method to build the ASN.1 encoded request packet.
-            */
+/* Call private method to build the ASN.1 encoded request packet.
+*/
             BuildTypedVLVRequest();
 
-            /* Set the request data field in the in the parent LdapControl to
-            * the ASN.1 encoded value of this control.  This encoding will be
-            * appended to the search request when the control is sent.
-            */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
             setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
             return;
         }
@@ -272,19 +272,19 @@ namespace Novell.Directory.Ldap.Controls
         /// </summary>
         private void BuildTypedVLVRequest()
         {
-            /* Create a new Asn1Sequence object */
+/* Create a new Asn1Sequence object */
             m_vlvRequest = new Asn1Sequence(4);
 
-            /* Add the beforeCount and afterCount fields to the sequence */
+/* Add the beforeCount and afterCount fields to the sequence */
             m_vlvRequest.add(new Asn1Integer(m_beforeCount));
             m_vlvRequest.add(new Asn1Integer(m_afterCount));
 
-            /* The next field is dependent on the type of indexing being used.
-            * A "typed" VLV request uses a ASN.1 OCTET STRING to index to the
-            * correct object in the list.  Encode the ASN.1 CHOICE corresponding
-            * to this option (as indicated by the greaterthanOrEqual field)
-            * in the ASN.1.
-            */
+/* The next field is dependent on the type of indexing being used.
+* A "typed" VLV request uses a ASN.1 OCTET STRING to index to the
+* correct object in the list.  Encode the ASN.1 CHOICE corresponding
+* to this option (as indicated by the greaterthanOrEqual field)
+* in the ASN.1.
+*/
             m_vlvRequest.add(
                 new Asn1Tagged(
                     new Asn1Identifier(Asn1Identifier.CONTEXT, false, GREATERTHANOREQUAL),
@@ -293,8 +293,8 @@ namespace Novell.Directory.Ldap.Controls
                 )
             );
 
-            /* Add the optional context string if one is available.
-            */
+/* Add the optional context string if one is available.
+*/
             if ((System.Object)m_context != null)
                 m_vlvRequest.add(new Asn1OctetString(m_context));
 
@@ -370,22 +370,22 @@ namespace Novell.Directory.Ldap.Controls
         )
             : base(requestOID, true, null)
         {
-            /* Save off the fields in local variables
-            */
+/* Save off the fields in local variables
+*/
             m_beforeCount = beforeCount;
             m_afterCount = afterCount;
             m_startIndex = startIndex;
             m_contentCount = contentCount;
             m_context = context;
 
-            /* Call private method to build the ASN.1 encoded request packet.
-            */
+/* Call private method to build the ASN.1 encoded request packet.
+*/
             BuildIndexedVLVRequest();
 
-            /* Set the request data field in the in the parent LdapControl to
-            * the ASN.1 encoded value of this control.  This encoding will be
-            * appended to the search request when the control is sent.
-            */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
             setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
             return;
         }
@@ -395,25 +395,25 @@ namespace Novell.Directory.Ldap.Controls
         /// </summary>
         private void BuildIndexedVLVRequest()
         {
-            /* Create a new Asn1Sequence object */
+/* Create a new Asn1Sequence object */
             m_vlvRequest = new Asn1Sequence(4);
 
-            /* Add the beforeCount and afterCount fields to the sequence */
+/* Add the beforeCount and afterCount fields to the sequence */
             m_vlvRequest.add(new Asn1Integer(m_beforeCount));
             m_vlvRequest.add(new Asn1Integer(m_afterCount));
 
-            /* The next field is dependent on the type of indexing being used.
-            * An "indexed" VLV request uses a ASN.1 SEQUENCE to index to the
-            * correct object in the list.  Encode the ASN.1 CHOICE corresponding
-            * to this option (as indicated by the byoffset fieldin the ASN.1.
-            */
+/* The next field is dependent on the type of indexing being used.
+* An "indexed" VLV request uses a ASN.1 SEQUENCE to index to the
+* correct object in the list.  Encode the ASN.1 CHOICE corresponding
+* to this option (as indicated by the byoffset fieldin the ASN.1.
+*/
             Asn1Sequence byoffset = new Asn1Sequence(2);
             byoffset.add(new Asn1Integer(m_startIndex));
             byoffset.add(new Asn1Integer(m_contentCount));
             ;
 
-            /* Add the ASN.1 sequence to the encoded data
-            */
+/* Add the ASN.1 sequence to the encoded data
+*/
             m_vlvRequest.add(
                 new Asn1Tagged(
                     new Asn1Identifier(Asn1Identifier.CONTEXT, true, BYOFFSET),
@@ -422,8 +422,8 @@ namespace Novell.Directory.Ldap.Controls
                 )
             );
 
-            /* Add the optional context string if one is available.
-            */
+/* Add the optional context string if one is available.
+*/
             if ((System.Object)m_context != null)
                 m_vlvRequest.add(new Asn1OctetString(m_context));
 
@@ -448,21 +448,21 @@ namespace Novell.Directory.Ldap.Controls
         /// </param>
         public virtual void setRange(int listIndex, int beforeCount, int afterCount)
         {
-            /* Save off the fields in local variables
-            */
+/* Save off the fields in local variables
+*/
             m_beforeCount = beforeCount;
             m_afterCount = afterCount;
             m_startIndex = listIndex;
 
-            /* since we just changed a field we need to rebuild the ber
-            * encoded control
-            */
+/* since we just changed a field we need to rebuild the ber
+* encoded control
+*/
             BuildIndexedVLVRequest();
 
-            /* Set the request data field in the in the parent LdapControl to
-            * the ASN.1 encoded value of this control.  This encoding will be
-            * appended to the search request when the control is sent.
-            */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
             setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
         }
 
@@ -491,33 +491,33 @@ namespace Novell.Directory.Ldap.Controls
 
         public virtual void setRange(System.String jumpTo, int beforeCount, int afterCount)
         {
-            /* Save off the fields in local variables
-            */
+/* Save off the fields in local variables
+*/
             m_beforeCount = beforeCount;
             m_afterCount = afterCount;
             m_jumpTo = jumpTo;
 
-            /* since we just changed a field we need to rebuild the ber
-            * encoded control
-            */
+/* since we just changed a field we need to rebuild the ber
+* encoded control
+*/
             BuildTypedVLVRequest();
 
-            /* Set the request data field in the in the parent LdapControl to
-            * the ASN.1 encoded value of this control.  This encoding will be
-            * appended to the search request when the control is sent.
-            */
+/* Set the request data field in the in the parent LdapControl to
+* the ASN.1 encoded value of this control.  This encoding will be
+* appended to the search request when the control is sent.
+*/
             setValue(m_vlvRequest.getEncoding(new LBEREncoder()));
         }
 
         static LdapVirtualListControl()
         {
-            /*
-            * This is where we register the control responses
-            */
+/*
+* This is where we register the control responses
+*/
             {
-                /* Register the VLV Sort Control class which is returned by the server
-                * in response to a VLV Sort Request
-                */
+/* Register the VLV Sort Control class which is returned by the server
+* in response to a VLV Sort Request
+*/
                 try
                 {
                     LdapControl.register(

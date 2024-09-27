@@ -26,7 +26,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     // That's because they are invoked with special "this"! The "this" object
     // for all of these methods are not MapToCollectionAdapter objects. Rather, they are of type
     // IVector<KeyValuePair<K, V>> or IMap<K, V>. No actual MapToCollectionAdapter object is ever
-    // instantiated. Thus, you will see a lot of expressions that cast "this" to "IVector<KeyValuePair<K, V>>"
+    // instantiated. Thus, you will see a lot of expressions that cast "this" to
+    // "IVector<KeyValuePair<K, V>>"
     // or "IMap<K, V>".
     internal sealed class MapToCollectionAdapter
     {

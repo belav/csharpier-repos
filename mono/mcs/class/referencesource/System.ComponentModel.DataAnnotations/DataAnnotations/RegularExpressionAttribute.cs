@@ -25,7 +25,8 @@ namespace System.ComponentModel.DataAnnotations
         public string Pattern { get; private set; }
 
         /// <summary>
-        ///     Gets or sets the timeout to use when matching the regular expression pattern (in milliseconds)
+        ///     Gets or sets the timeout to use when matching the regular expression pattern (in
+        // milliseconds)
         ///     (-1 means never timeout).
         /// </summary>
         public int MatchTimeoutInMilliseconds
@@ -56,11 +57,14 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Override of <see cref="ValidationAttribute.IsValid(object)"/>
         /// </summary>
-        /// <remarks>This override performs the specific regular expression matching of the given <paramref name="value"/></remarks>
+        /// <remarks>This override performs the specific regular expression matching of the given <paramref
+        // name="value"/></remarks>
         /// <param name="value">The value to test for validity.</param>
         /// <returns><c>true</c> if the given value matches the current regular expression pattern</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
-        /// <exception cref="ArgumentException"> is thrown if the <see cref="Pattern"/> is not a valid regular expression.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
+        /// <exception cref="ArgumentException"> is thrown if the <see cref="Pattern"/> is not a valid
+        // regular expression.</exception>
 #if !SILVERLIGHT
         public
 #else
@@ -73,7 +77,8 @@ namespace System.ComponentModel.DataAnnotations
             // Convert the value to a string
             string stringValue = Convert.ToString(value, CultureInfo.CurrentCulture);
 
-            // Automatically pass if value is null or empty. RequiredAttribute should be used to assert a value is not empty.
+            // Automatically pass if value is null or empty. RequiredAttribute should be used to assert a value
+            // is not empty.
             if (String.IsNullOrEmpty(stringValue))
             {
                 return true;
@@ -92,8 +97,10 @@ namespace System.ComponentModel.DataAnnotations
         /// <remarks>This override provide a formatted error message describing the pattern</remarks>
         /// <param name="name">The user-visible name to include in the formatted message.</param>
         /// <returns>The localized message to present to the user</returns>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
-        /// <exception cref="ArgumentException"> is thrown if the <see cref="Pattern"/> is not a valid regular expression.</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
+        /// <exception cref="ArgumentException"> is thrown if the <see cref="Pattern"/> is not a valid
+        // regular expression.</exception>
         public override string FormatErrorMessage(string name)
         {
             this.SetupRegex();
@@ -109,9 +116,12 @@ namespace System.ComponentModel.DataAnnotations
         /// <summary>
         /// Sets up the <see cref="Regex"/> property from the <see cref="Pattern"/> property.
         /// </summary>
-        /// <exception cref="ArgumentException"> is thrown if the current <see cref="Pattern"/> cannot be parsed</exception>
-        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is ill-formed.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"> thrown if <see cref="MatchTimeoutInMilliseconds" /> is negative (except -1),
+        /// <exception cref="ArgumentException"> is thrown if the current <see cref="Pattern"/> cannot be
+        // parsed</exception>
+        /// <exception cref="InvalidOperationException"> is thrown if the current attribute is
+        // ill-formed.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"> thrown if <see cref="MatchTimeoutInMilliseconds"
+        // /> is negative (except -1),
         /// zero or greater than approximately 24 days </exception>
         private void SetupRegex()
         {

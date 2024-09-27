@@ -47,13 +47,18 @@ internal static class ChunkWriter
     {
         sliceOneByte = false;
         // If GetMemory returns one of the following values, there is no way to set the prefix/body lengths
-        // such that we either wouldn't have an invalid chunk or would need to copy if the entire memory chunk is used.
-        // For example, if GetMemory returned 21, we would guess that the chunked prefix is 4 bytes initially
-        // and the suffix is 2 bytes, meaning there is 15 bytes remaining to write into. However, 15 bytes only need 3
-        // bytes for the chunked prefix, so we would have to copy once we call advance. Therefore, to avoid this scenario,
+        // such that we either wouldn't have an invalid chunk or would need to copy if the entire memory
+        // chunk is used.
+        // For example, if GetMemory returned 21, we would guess that the chunked prefix is 4 bytes
+        // initially
+        // and the suffix is 2 bytes, meaning there is 15 bytes remaining to write into. However, 15 bytes
+        // only need 3
+        // bytes for the chunked prefix, so we would have to copy once we call advance. Therefore, to avoid
+        // this scenario,
         // we slice the memory by one byte.
 
-        // See https://gist.github.com/halter73/af2b9f78978f83813b19e187c4e5309e if you would like to tweak the algorithm at all.
+        // See https://gist.github.com/halter73/af2b9f78978f83813b19e187c4e5309e if you would like to tweak
+        // the algorithm at all.
 
         if (length <= 65544)
         {

@@ -11,7 +11,8 @@ namespace System.Formats.Asn1
         ///   Write a Boolean value with a specified tag.
         /// </summary>
         /// <param name="value">The value to write.</param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 1).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 1).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but

@@ -14,7 +14,8 @@ namespace System.Collections.Immutable
         /// A shareable container for the comparers used by an immutable dictionary.
         /// </summary>
         /// <remarks>
-        /// To reduce allocations, we directly implement the <see cref="HashBucket"/> and Key-Only comparers,
+        /// To reduce allocations, we directly implement the <see cref="HashBucket"/> and Key-Only
+        // comparers,
         /// but we try to keep this an implementation detail by exposing properties that return
         /// references for these particular facilities, that are implemented as returning "this".
         /// </remarks>
@@ -118,7 +119,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="obj">The obj.</param>
             /// <returns>
-            /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a
+            // hash table.
             /// </returns>
             public int GetHashCode(HashBucket obj)
             {
@@ -146,7 +148,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="obj">The obj.</param>
             /// <returns>
-            /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a
+            // hash table.
             /// </returns>
             int IEqualityComparer<KeyValuePair<TKey, TValue>>.GetHashCode(
                 KeyValuePair<TKey, TValue> obj

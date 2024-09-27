@@ -245,8 +245,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         }
 
         /// <summary>
-        /// Finds references to <paramref name="symbol"/> in this <paramref name="state"/>, but only if it referenced
-        /// though <paramref name="name"/> (which might be the actual name of the type, or a global alias to it).
+        /// Finds references to <paramref name="symbol"/> in this <paramref name="state"/>, but only if it
+        // referenced
+        /// though <paramref name="name"/> (which might be the actual name of the type, or a global alias to
+        // it).
         /// </summary>
         private static async Task AddReferencesInDocumentWorkerAsync(
             IMethodSymbol symbol,
@@ -327,7 +329,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             CancellationToken cancellationToken
         )
         {
-            // Only check `new (...)` calls that supply enough arguments to match all the required parameters for the constructor.
+            // Only check `new (...)` calls that supply enough arguments to match all the required parameters
+            // for the constructor.
             var minimumArgumentCount = symbol.Parameters.Count(p => !p.IsOptional && !p.IsParams);
             var maximumArgumentCount = symbol.Parameters is [.., { IsParams: true }]
                 ? int.MaxValue

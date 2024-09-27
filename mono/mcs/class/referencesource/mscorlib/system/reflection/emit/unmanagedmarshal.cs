@@ -19,11 +19,11 @@ namespace System.Reflection.Emit
     )]
     public sealed class UnmanagedMarshal
     {
-        /******************************
+/******************************
 [System.Runtime.InteropServices.ComVisible(true)]
-        * public static constructors. You can only construct
-        * UnmanagedMarshal using these static constructors.
-        ******************************/
+* public static constructors. You can only construct
+* UnmanagedMarshal using these static constructors.
+******************************/
         public static UnmanagedMarshal DefineUnmanagedMarshal(UnmanagedType unmanagedType)
         {
             if (
@@ -139,19 +139,19 @@ namespace System.Reflection.Emit
             m_baseType = type;
         }
 
-        /************************
-        *
-        * Data member
-        *
-        *************************/
+/************************
+*
+* Data member
+*
+*************************/
         internal UnmanagedType m_unmanagedType;
         internal Guid m_guid;
         internal int m_numElem;
         internal UnmanagedType m_baseType;
 
-        /************************
-        * this function return the byte representation of the marshal info.
-        *************************/
+/************************
+* this function return the byte representation of the marshal info.
+*************************/
         internal byte[] InternalGetBytes()
         {
             byte[] buf;

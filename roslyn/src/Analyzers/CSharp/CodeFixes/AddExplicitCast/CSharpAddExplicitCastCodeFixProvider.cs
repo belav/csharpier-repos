@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.AddExplicitCast
         : AbstractAddExplicitCastCodeFixProvider<ExpressionSyntax>
     {
         /// <summary>
-        /// CS0266: Cannot implicitly convert from type 'x' to 'y'. An explicit conversion exists (are you missing a cast?)
+        /// CS0266: Cannot implicitly convert from type 'x' to 'y'. An explicit conversion exists (are you
+        // missing a cast?)
         /// </summary>
         private const string CS0266 = nameof(CS0266);
 

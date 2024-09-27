@@ -12,7 +12,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
     {
         public static void Main()
         {
-            // Normally calls to GetMember use prefix lookup to match multiple values, we took a conservative approach
+            // Normally calls to GetMember use prefix lookup to match multiple values, we took a conservative
+            // approach
             // and preserve not based on the string passed but on the binding flags requirements
             TestWithName();
             TestWithNullName();

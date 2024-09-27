@@ -29,7 +29,8 @@ namespace AppHost.Bundle.Tests
         )]
         private void SingleFile_Apps_Are_Serviced()
         {
-            // On Unix systems, the servicing location is obtained from the environment variable $CORE_SERVICING.
+            // On Unix systems, the servicing location is obtained from the environment variable
+            // $CORE_SERVICING.
 
             var fixture = sharedTestState.TestFixture.Copy();
             var servicer = sharedTestState.ServiceFixture.Copy();
@@ -43,7 +44,8 @@ namespace AppHost.Bundle.Tests
             );
             var singleFile = BundleSelfContainedApp(fixture);
 
-            // Create the servicing directory, and copy the servived DLL from service fixture to the servicing directory.
+            // Create the servicing directory, and copy the servived DLL from service fixture to the servicing
+            // directory.
             var serviceBasePath = Path.Combine(
                 fixture.TestProject.ProjectDirectory,
                 "coreservicing"

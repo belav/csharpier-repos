@@ -38,7 +38,8 @@ namespace DbLinq.Oracle
 #endif
     class OracleSqlProvider : SqlProvider
     {
-        //public override string  GetInsert(string table, IList<string> inputColumns, IList<string> inputValues)
+        //public override string  GetInsert(string table, IList<string> inputColumns, IList<string>
+        // inputValues)
         //{
         //     return "BEGIN " + base.GetInsert(table, inputColumns, inputValues);
         //}

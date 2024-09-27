@@ -85,7 +85,8 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         /// <typeparam name="T">The typed interface.</typeparam>
         /// <param name="xmlNode">The underlying source of properties.</param>
-        /// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
+        /// <returns>An implementation of the typed interface bound to the <see
+        // cref="System.Xml.XmlNode"/>.</returns>
         /// <remarks>
         /// The type represented by T must be an interface with properties.
         /// </remarks>
@@ -96,7 +97,8 @@ namespace Castle.Components.DictionaryAdapter
         /// </summary>
         /// <param name="type">The typed interface.</param>
         /// <param name="xmlNode">The underlying source of properties.</param>
-        /// <returns>An implementation of the typed interface bound to the <see cref="System.Xml.XmlNode"/>.</returns>
+        /// <returns>An implementation of the typed interface bound to the <see
+        // cref="System.Xml.XmlNode"/>.</returns>
         /// <remarks>
         /// The type represented by T must be an interface with properties.
         /// </remarks>
@@ -121,7 +123,8 @@ namespace Castle.Components.DictionaryAdapter
         /// Gets the <see cref="DictionaryAdapterMeta"/> associated with the type.
         /// </summary>
         /// <param name="type">The typed interface.</param>
-        /// <param name="other">Another <see cref="DictionaryAdapterMeta"/> from which to copy behaviors.</param>
+        /// <param name="other">Another <see cref="DictionaryAdapterMeta"/> from which to copy
+        // behaviors.</param>
         /// <returns>The adapter meta-data.</returns>
         DictionaryAdapterMeta GetAdapterMeta(Type type, DictionaryAdapterMeta other);
     }

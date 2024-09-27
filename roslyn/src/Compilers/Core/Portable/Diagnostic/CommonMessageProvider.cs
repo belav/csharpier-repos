@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Given a message identifier (e.g., CS0219), severity, warning as error and a culture,
-        /// get the entire prefix (e.g., "error CS0219: Warning as Error:" for C# or "error BC42024:" for VB) used on error messages.
+        /// get the entire prefix (e.g., "error CS0219: Warning as Error:" for C# or "error BC42024:" for
+        // VB) used on error messages.
         /// </summary>
         public abstract string GetMessagePrefix(
             string id,
@@ -137,7 +138,8 @@ namespace Microsoft.CodeAnalysis
         /// Produces the filtering action for the diagnostic based on the options passed in.
         /// </summary>
         /// <returns>
-        /// A new <see cref="DiagnosticInfo"/> with new effective severity based on the options or null if the
+        /// A new <see cref="DiagnosticInfo"/> with new effective severity based on the options or null if
+        // the
         /// diagnostic has been suppressed.
         /// </returns>
         public abstract ReportDiagnostic GetDiagnosticReport(
@@ -146,9 +148,11 @@ namespace Microsoft.CodeAnalysis
         );
 
         /// <summary>
-        /// Filter a <see cref="DiagnosticInfo"/> based on the compilation options so that /nowarn and /warnaserror etc. take effect.options
+        /// Filter a <see cref="DiagnosticInfo"/> based on the compilation options so that /nowarn and
+        // /warnaserror etc. take effect.options
         /// </summary>
-        /// <returns>A <see cref="DiagnosticInfo"/> with effective severity based on option or null if suppressed.</returns>
+        /// <returns>A <see cref="DiagnosticInfo"/> with effective severity based on option or null if
+        // suppressed.</returns>
         public DiagnosticInfo? FilterDiagnosticInfo(
             DiagnosticInfo diagnosticInfo,
             CompilationOptions options

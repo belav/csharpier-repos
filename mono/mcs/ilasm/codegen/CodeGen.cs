@@ -156,7 +156,7 @@ namespace Mono.ILASM
             get { return entry_point; }
             set
             {
-                /* if (!value) error: unsetting entrypoint ? */
+/* if (!value) error: unsetting entrypoint ? */
                 if (entry_point)
                     Report.Error("Multiple .entrypoint declarations.");
                 entry_point = value;
@@ -327,8 +327,8 @@ namespace Mono.ILASM
                 {
                     outer = (TypeDef)typedef_stack[i];
                     if (i == 0)
-                        /* Use FullName for outermost class to get the
-                           namespace also */
+/* Use FullName for outermost class to get the
+namespace also */
                         sb.Append(outer.FullName);
                     else
                         sb.Append(outer.Name);

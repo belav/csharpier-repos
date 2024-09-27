@@ -215,7 +215,8 @@ namespace Microsoft.CSharp.RuntimeBinder
             return new ExpressionExpr(exp);
         }
 
-        // ExpressionTreeRewriter has optimized away identity or up-cast conversions, leaving us with a bare parameter
+        // ExpressionTreeRewriter has optimized away identity or up-cast conversions, leaving us with a bare
+        // parameter
         // access. Just get the expression for that parameter so the lambda produced can be p0 => p0
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         protected override Expr VisitWRAP(ExprWrap pExpr) =>
@@ -231,17 +232,17 @@ namespace Microsoft.CSharp.RuntimeBinder
             // is the initialization of the parameters.
             return Visit(((ExprList)pExpr.OptionalArguments).OptionalElement);
 
-            /*
-             * // Do we need to do this?
-            Expression e = (body as ExpressionExpr).Expression;
-            if (e.Type.IsValueType)
-            {
-                // If we have a value type, convert it to object so that boxing
-                // can happen.
+/*
+* // Do we need to do this?
+Expression e = (body as ExpressionExpr).Expression;
+if (e.Type.IsValueType)
+{
+// If we have a value type, convert it to object so that boxing
+// can happen.
 
-                e = Expression.Convert(body.Expression, typeof(object));
-            }
-             * */
+e = Expression.Convert(body.Expression, typeof(object));
+}
+* */
         }
 
         /////////////////////////////////////////////////////////////////////////////////

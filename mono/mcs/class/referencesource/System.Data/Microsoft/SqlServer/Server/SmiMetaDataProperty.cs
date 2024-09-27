@@ -17,7 +17,8 @@ namespace Microsoft.SqlServer.Server
     using System.Globalization;
 
     // SmiMetaDataProperty defines an extended, optional property to be used on the SmiMetaData class
-    //  This approach to adding properties is added combat the growing number of sparsely-used properties
+    //  This approach to adding properties is added combat the growing number of sparsely-used
+    // properties
     //  that are specially handled on the base classes
 
     internal enum SmiPropertySelector

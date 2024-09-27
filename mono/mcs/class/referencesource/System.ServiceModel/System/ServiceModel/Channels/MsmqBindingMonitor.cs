@@ -231,12 +231,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
-        /*
-        // We demand full trust because this method calls into MessageQueue, which is defined in a non-APTCA assembly.
-        // MSMQ is not enabled in partial trust, so this demand should not break customers.
-        [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
-        */
+        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next
+        // version.
+/*
+// We demand full trust because this method calls into MessageQueue, which is defined in a non-APTCA
+assembly.
+// MSMQ is not enabled in partial trust, so this demand should not break customers.
+[PermissionSet(SecurityAction.Demand, Unrestricted = true)]
+*/
         void OnTimer(object state)
         {
             try
@@ -301,12 +303,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
-        /*
-        // We demand full trust because this method calls into MessageQueue, which is defined in a non-APTCA assembly.
-        // MSMQ is not enabled in partial trust, so this demand should not break customers.
-        [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
-        */
+        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next
+        // version.
+/*
+// We demand full trust because this method calls into MessageQueue, which is defined in a non-APTCA
+assembly.
+// MSMQ is not enabled in partial trust, so this demand should not break customers.
+[PermissionSet(SecurityAction.Demand, Unrestricted = true)]
+*/
         void ProcessFoundQueues(
             MessageQueue[] queues,
             Dictionary<string, MatchState> knownQueues,

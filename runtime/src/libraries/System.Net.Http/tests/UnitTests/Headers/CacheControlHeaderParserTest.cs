@@ -19,7 +19,8 @@ namespace System.Net.Http.Tests
         [Fact]
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            // Just verify parser is implemented correctly. Don't try to test syntax parsed by CacheControlHeaderValue.
+            // Just verify parser is implemented correctly. Don't try to test syntax parsed by
+            // CacheControlHeaderValue.
             CacheControlHeaderValue expected = new CacheControlHeaderValue();
             expected.NoStore = true;
             expected.MinFresh = new TimeSpan(0, 2, 3);

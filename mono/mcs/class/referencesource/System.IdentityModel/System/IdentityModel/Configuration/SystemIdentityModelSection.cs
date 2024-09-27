@@ -29,7 +29,8 @@ namespace System.IdentityModel.Configuration
         }
 
         /// <summary>
-        /// Returns the unnamed <see cref="IdentityConfigurationElement"/> reference from the configuration file
+        /// Returns the unnamed <see cref="IdentityConfigurationElement"/> reference from the configuration
+        // file
         /// </summary>
         public static IdentityConfigurationElement DefaultIdentityConfigurationElement
         {

@@ -109,8 +109,10 @@ namespace System.Transactions
         [DisallowNull]
         public static HostCurrentTransactionCallback? HostCurrentCallback
         {
-            // get_HostCurrentCallback is used from get_CurrentTransaction, which doesn't have any permission requirements.
-            // We don't expose what is returned from this property in that case.  But we don't want just anybody being able
+            // get_HostCurrentCallback is used from get_CurrentTransaction, which doesn't have any permission
+            // requirements.
+            // We don't expose what is returned from this property in that case.  But we don't want just anybody
+            // being able
             // to retrieve the value.
             get
             {
@@ -496,9 +498,12 @@ namespace System.Transactions
         }
 
         /// <summary>
-        /// Controls whether usage of System.Transactions APIs that require escalation to a distributed transaction will do so;
-        /// if your application requires distributed transaction, opt into using them by setting this to <see langword="true" />.
-        /// If set to <see langword="false" /> (the default), escalation to a distributed transaction will throw a <see cref="NotSupportedException" />.
+        /// Controls whether usage of System.Transactions APIs that require escalation to a distributed
+        // transaction will do so;
+        /// if your application requires distributed transaction, opt into using them by setting this to
+        // <see langword="true" />.
+        /// If set to <see langword="false" /> (the default), escalation to a distributed transaction will
+        // throw a <see cref="NotSupportedException" />.
         /// </summary>
 #if WINDOWS
         public static bool ImplicitDistributedTransactions
@@ -510,7 +515,8 @@ namespace System.Transactions
             {
                 lock (s_implicitDistributedTransactionsLock)
                 {
-                    // Make sure this flag can only be set once, and that once distributed transactions have been initialized,
+                    // Make sure this flag can only be set once, and that once distributed transactions have been
+                    // initialized,
                     // it's frozen.
                     if (s_implicitDistributedTransactions is null)
                     {

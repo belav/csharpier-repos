@@ -282,7 +282,8 @@ public static class DotNetDispatcher
             // We require the invoked method to retrieve any pending byte arrays synchronously. If we didn't,
             // we wouldn't be able to have overlapping async calls. As a way to enforce this, we clear the
             // pending byte arrays synchronously after the call. This also helps because the recipient isn't
-            // required to consume all the pending byte arrays, since it's legal for the JS data model to contain
+            // required to consume all the pending byte arrays, since it's legal for the JS data model to
+            // contain
             // more data than the .NET data model (like overposting)
             jsRuntime.ByteArraysToBeRevived.Clear();
         }
@@ -348,7 +349,8 @@ public static class DotNetDispatcher
 
             if (index < parameterTypes.Length)
             {
-                // If we parsed fewer parameters, we can always make a definitive claim about how many parameters were received.
+                // If we parsed fewer parameters, we can always make a definitive claim about how many parameters
+                // were received.
                 throw new ArgumentException(
                     $"The call to '{methodIdentifier}' expects '{parameterTypes.Length}' parameters, but received '{index}'."
                 );
@@ -364,7 +366,8 @@ public static class DotNetDispatcher
 
             return suppliedArgs;
 
-            // Note that the JsonReader instance is intentionally not passed by ref (or an in parameter) since we want a copy of the original reader.
+            // Note that the JsonReader instance is intentionally not passed by ref (or an in parameter) since
+            // we want a copy of the original reader.
             static bool IsIncorrectDotNetObjectRefUse(Type parameterType, Utf8JsonReader jsonReader)
             {
                 // Check for incorrect use of DotNetObjectRef<T> at the top level. We know it's
@@ -416,7 +419,8 @@ public static class DotNetDispatcher
 
         // The payload that we're trying to parse is of the format
         // [ taskId: long, success: boolean, value: string? | object ]
-        // where value is the .NET type T originally specified on InvokeAsync<T> or the error string if success is false.
+        // where value is the .NET type T originally specified on InvokeAsync<T> or the error string if
+        // success is false.
         // We parse the first two arguments and call in to JSRuntimeBase to deserialize the actual value.
 
         var reader = new Utf8JsonReader(utf8JsonBytes);
@@ -520,7 +524,8 @@ public static class DotNetDispatcher
     {
         var type = objectReference.Value.GetType();
 
-        // Suppressed with "pragma warning disable" in addition to WarningSuppressions.xml so ILLink Roslyn Anayzer doesn't report the warning.
+        // Suppressed with "pragma warning disable" in addition to WarningSuppressions.xml so ILLink Roslyn
+        // Anayzer doesn't report the warning.
 #pragma warning disable IL2111 // Method with parameters or return value with `DynamicallyAccessedMembersAttribute` is accessed via reflection. Trimmer can't guarantee availability of the requirements of the method.
         var assemblyMethods = _cachedMethodsByType.GetOrAdd(type, ScanTypeForCallableMethods);
 #pragma warning restore IL2111 // Method with parameters or return value with `DynamicallyAccessedMembersAttribute` is accessed via reflection. Trimmer can't guarantee availability of the requirements of the method.
@@ -674,8 +679,10 @@ public static class DotNetDispatcher
             );
     }
 
-    // don't point the MetadataUpdateHandlerAttribute at the DotNetDispatcher class, since the attribute has
-    // DynamicallyAccessedMemberTypes.All. This causes unnecessary trim warnings on the non-MetadataUpdateHandler methods.
+    // don't point the MetadataUpdateHandlerAttribute at the DotNetDispatcher class, since the attribute
+    // has
+    // DynamicallyAccessedMemberTypes.All. This causes unnecessary trim warnings on the
+    // non-MetadataUpdateHandler methods.
     internal static class MetadataUpdateHandler
     {
         public static void ClearCache(Type[]? _)

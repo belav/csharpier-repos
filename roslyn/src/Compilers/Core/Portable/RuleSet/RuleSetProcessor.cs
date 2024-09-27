@@ -17,7 +17,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// This type is responsible for parsing a ruleset xml file and producing a <see cref="RuleSet"/> object.
+    /// This type is responsible for parsing a ruleset xml file and producing a <see cref="RuleSet"/>
+    // object.
     /// </summary>
     internal class RuleSetProcessor
     {
@@ -212,7 +213,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Reads the action from the given node
         /// </summary>
-        /// <param name="node">The node to read the action, it can be a rule node or an include node.</param>
+        /// <param name="node">The node to read the action, it can be a rule node or an include
+        // node.</param>
         /// <param name="allowDefault">Whether or not the default value is allowed.</param>
         /// <returns>The rule action</returns>
         private static ReportDiagnostic ReadAction(XElement node, bool allowDefault)
@@ -256,7 +258,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Load the IncludedAll from the XML node
         /// </summary>
-        /// <param name="includeAllNode">The IncludeAll node from which to create a IncludeAll object</param>
+        /// <param name="includeAllNode">The IncludeAll node from which to create a IncludeAll
+        // object</param>
         /// <returns>A IncludeAll object with data from the given XML node</returns>
         private static ReportDiagnostic ReadIncludeAll(XElement includeAllNode)
         {

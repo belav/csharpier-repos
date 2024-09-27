@@ -181,7 +181,8 @@ namespace System.Security.Cryptography.Xml.Tests
 #if NETCOREAPP
             if (!RuntimeFeature.IsDynamicCodeSupported)
             {
-                // XSLTs are only supported when dynamic code is supported. See https://github.com/dotnet/runtime/issues/84389
+                // XSLTs are only supported when dynamic code is supported. See
+                // https://github.com/dotnet/runtime/issues/84389
                 xsltTransform = "";
                 expectedTransformsCount = 5;
             }

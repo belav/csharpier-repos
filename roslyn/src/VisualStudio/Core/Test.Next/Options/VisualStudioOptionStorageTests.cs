@@ -75,7 +75,8 @@ public class VisualStudioOptionStorageTests
     }
 
     /// <summary>
-    /// Options with per-language values shouldn't be defined in language-specific assembly since then they wouldn't be
+    /// Options with per-language values shouldn't be defined in language-specific assembly since then
+    // they wouldn't be
     /// applicable to the other language.
     /// </summary>
     [Theory]
@@ -109,7 +110,8 @@ public class VisualStudioOptionStorageTests
     }
 
     /// <summary>
-    /// Language-specific options have correct name prefix and are defined in language-specific assemblies.
+    /// Language-specific options have correct name prefix and are defined in language-specific
+    // assemblies.
     /// </summary>
     [Theory]
     [MemberData(nameof(ConfigNames), DisableDiscoveryEnumeration = true)]
@@ -128,7 +130,8 @@ public class VisualStudioOptionStorageTests
 
         if (!info.Option.Definition.IsEditorConfigOption)
         {
-            // TODO: remove condition once all options have config name https://github.com/dotnet/roslyn/issues/65787
+            // TODO: remove condition once all options have config name
+            // https://github.com/dotnet/roslyn/issues/65787
             return;
         }
 
@@ -204,7 +207,8 @@ public class VisualStudioOptionStorageTests
             Path.GetDirectoryName(typeof(VisualStudioOptionStorage).Assembly.Location)
         );
 
-        // no two option names map to the same storage (however, there may be multiple option definitions that share the same option name and storage):
+        // no two option names map to the same storage (however, there may be multiple option definitions
+        // that share the same option name and storage):
 
         var duplicateRoamingProfileStorages =
             from storage in storages
@@ -318,7 +322,8 @@ public class VisualStudioOptionStorageTests
 
         var allGroupNames = allOptionGroups.Select(GetFullOptionGroupName);
 
-        // The full name of each Option group should be unique. Full name is obtained by joining the names of all groups that are chained via parent reference.
+        // The full name of each Option group should be unique. Full name is obtained by joining the names
+        // of all groups that are chained via parent reference.
         // e.g. option group, code_style -> prefer_object_initializer.
         // Its full name code_style.prefer_object_initializer should be unique.
         var set = new HashSet<string>();

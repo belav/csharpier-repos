@@ -108,7 +108,8 @@ namespace DbLinq.Data.Linq.Sugar
         /// <summary>
         /// Returns association definition, if any
         /// </summary>
-        /// <param name="thisTableExpression">The table referenced by the assocation (the type holding the member)</param>
+        /// <param name="thisTableExpression">The table referenced by the assocation (the type holding the
+        // member)</param>
         /// <param name="memberInfo">The memberInfo related to association</param>
         /// <param name="otherType"></param>
         /// <param name="otherKey">The keys in the associated table</param>

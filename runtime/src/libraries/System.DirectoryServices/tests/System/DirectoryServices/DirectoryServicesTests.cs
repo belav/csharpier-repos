@@ -106,7 +106,8 @@ namespace System.DirectoryServices.Tests
                     }
                     finally
                     {
-                        // rootOU.DeleteTree(); doesn't work as getting "A protocol error occurred. (Exception from HRESULT: 0x80072021)"
+                        // rootOU.DeleteTree(); doesn't work as getting "A protocol error occurred. (Exception from HRESULT:
+                        // 0x80072021)"
                         DeleteOU(de, "CoreFxRootOU");
                     }
                 }
@@ -279,7 +280,8 @@ namespace System.DirectoryServices.Tests
                             );
                             SearchOrganizationalRole(fromOU, "user.move.1");
 
-                            // The Lightweight Directory Access Protocol (LDAP) provider does not currently support the CopyTo(DirectoryEntry) method.
+                            // The Lightweight Directory Access Protocol (LDAP) provider does not currently support the
+                            // CopyTo(DirectoryEntry) method.
                             Assert.Throws<NotImplementedException>(() => user.CopyTo(toOU));
                             Assert.Throws<NotImplementedException>(
                                 () => user.CopyTo(toOU, "user.move.2")
@@ -433,7 +435,8 @@ namespace System.DirectoryServices.Tests
                         }
                         else
                         {
-                            // on non Active Directory Servers, DeleteTree() throws DirectoryServicesCOMException : A protocol error occurred. (Exception from HRESULT: 0x80072021)
+                            // on non Active Directory Servers, DeleteTree() throws DirectoryServicesCOMException : A protocol
+                            // error occurred. (Exception from HRESULT: 0x80072021)
                             Assert.Throws<DirectoryServicesCOMException>(() => rootOU.DeleteTree());
                         }
                     }
@@ -692,7 +695,8 @@ namespace System.DirectoryServices.Tests
         public void TestAttributesWithDifferentTypes()
         {
             // Windows server looks not supporting extensibleObject.
-            // It throw exception with the message "The specified directory service attribute or value does not exist."
+            // It throw exception with the message "The specified directory service attribute or value does not
+            // exist."
             if (IsActiveDirectoryServer)
                 return;
 
@@ -795,8 +799,10 @@ namespace System.DirectoryServices.Tests
         {
             try
             {
-                // We didn't use DirectoryEntry.DeleteTree as it fails on OpenDJ with "A protocol error occurred. (Exception from HRESULT: 0x80072021)"
-                // Also on AD servers DirectoryEntry.Children.Remove(de) will fail if the de is not a leaf entry. so we had to do it recursively.
+                // We didn't use DirectoryEntry.DeleteTree as it fails on OpenDJ with "A protocol error occurred.
+                // (Exception from HRESULT: 0x80072021)"
+                // Also on AD servers DirectoryEntry.Children.Remove(de) will fail if the de is not a leaf entry. so
+                // we had to do it recursively.
                 DirectoryEntry de = parentDe.Children.Find($"ou={ou}");
                 DeleteDirectoryEntry(parentDe, de);
             }

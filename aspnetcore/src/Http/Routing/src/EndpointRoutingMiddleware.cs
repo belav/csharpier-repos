@@ -53,8 +53,10 @@ internal sealed partial class EndpointRoutingMiddleware
         _next = next ?? throw new ArgumentNullException(nameof(next));
         _routeOptions = routeOptions.Value;
 
-        // rootCompositeEndpointDataSource is a constructor parameter only so it always gets disposed by DI. This ensures that any
-        // disposable EndpointDataSources also get disposed. _endpointDataSource is a component of rootCompositeEndpointDataSource.
+        // rootCompositeEndpointDataSource is a constructor parameter only so it always gets disposed by DI.
+        // This ensures that any
+        // disposable EndpointDataSources also get disposed. _endpointDataSource is a component of
+        // rootCompositeEndpointDataSource.
         _ = rootCompositeEndpointDataSource;
         _endpointDataSource = new CompositeEndpointDataSource(endpointRouteBuilder.DataSources);
     }

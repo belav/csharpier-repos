@@ -14,7 +14,8 @@ namespace System.Net.Mail
     //
     // RFC 2822 Section 3.2.4 - Atom, Dot-Atom
     //
-    // A Dot-Atom is a string of ASCII characters separated by dots.  Dots would normally not be allowed at the start
+    // A Dot-Atom is a string of ASCII characters separated by dots.  Dots would normally not be allowed
+    // at the start
     // or end, but we do allow dots at the end for compatibility with other mail clients.  We also allow
     // multiple consecutive dots, which would normally be invalid.
     //

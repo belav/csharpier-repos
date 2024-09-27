@@ -82,8 +82,9 @@ namespace System.IO
                     }
                     catch (ArgumentException)
                     {
-                        /* It might be due to a failure to encode a character, or due to a smaller than necessary buffer. In the
-                        * secode case, we want to fallback to simply allocating on the heap. */
+/* It might be due to a failure to encode a character, or due to a smaller than necessary buffer. In
+the
+* secode case, we want to fallback to simply allocating on the heap. */
                     }
                 }
 

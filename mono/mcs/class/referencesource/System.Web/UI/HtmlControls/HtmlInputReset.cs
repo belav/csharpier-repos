@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlInputReset.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlInputReset.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 using System.ComponentModel;
 using System.Security.Permissions;
@@ -29,23 +29,25 @@ namespace System.Web.UI.HtmlControls
     [SupportsEventValidation]
     public class HtmlInputReset : HtmlInputButton
     {
-        /*
-         *  Creates an intrinsic Html INPUT type=reset control.
-         */
+/*
+*  Creates an intrinsic Html INPUT type=reset control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputReset'/> class using
+        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputReset'/>
+        // class using
         ///    default values.</para>
         /// </devdoc>
         public HtmlInputReset()
             : base("reset") { }
 
-        /*
-         *  Creates an intrinsic Html INPUT type=reset control.
-         */
+/*
+*  Creates an intrinsic Html INPUT type=reset control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputReset'/> class using the
+        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputReset'/>
+        // class using the
         ///    specified string.</para>
         /// </devdoc>
         public HtmlInputReset(string type)

@@ -2007,7 +2007,8 @@ public class RazorViewEngineTest
     }
 
     // Tests to verify fix for https://github.com/aspnet/Mvc/issues/6672
-    // Without normalizing the path, the view engine would have attempted to lookup "/Views//MyView.cshtml"
+    // Without normalizing the path, the view engine would have attempted to lookup
+    // "/Views//MyView.cshtml"
     // which works for PhysicalFileProvider but fails for exact lookups performed during precompilation.
     // We normalize it to "/Views/MyView.cshtml" to avoid this discrepancy.
     [Fact]

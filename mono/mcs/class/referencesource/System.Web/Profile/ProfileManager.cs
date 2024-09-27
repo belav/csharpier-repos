@@ -4,10 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 /*
- * ProfileManager
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* ProfileManager
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 
 namespace System.Web.Profile
 {
@@ -340,7 +340,8 @@ namespace System.Web.Profile
                     AspNetHostingPermissionLevel.Low,
                     SR.Feature_not_supported_at_this_level
                 );
-                // WOS #1544130: Don't initialize providers when getting this property, because it is called in ProfileModule.Init
+                // WOS #1544130: Don't initialize providers when getting this property, because it is called in
+                // ProfileModule.Init
                 InitializeEnabled(false);
                 return s_AutomaticSaveEnabled;
             }

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -8,7 +9,8 @@ using System.Web.Http.Controllers;
 namespace System.Web.Http.Filters
 {
     /// <summary>
-    /// Represents an authentication challenge context containing information for executing an authentication
+    /// Represents an authentication challenge context containing information for executing an
+    // authentication
     /// challenge.
     /// </summary>
     public class HttpAuthenticationChallengeContext
@@ -44,8 +46,10 @@ namespace System.Web.Http.Filters
 
         /// <summary>Gets or sets the action result to execute.</summary>
         /// <remarks>
-        /// Authentication filters wishing to add an authentication challenge will often chain the result (set the
-        /// value to an action result that executes the previous value and then does something additional, such as add
+        /// Authentication filters wishing to add an authentication challenge will often chain the result
+        // (set the
+        /// value to an action result that executes the previous value and then does something additional,
+        // such as add
         /// a WWW-Authenticate header).
         /// </remarks>
         public IHttpActionResult Result

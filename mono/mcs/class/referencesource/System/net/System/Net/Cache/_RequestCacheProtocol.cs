@@ -3,23 +3,23 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _RequestCacheProtocol.cs
+_RequestCacheProtocol.cs
 
 Abstract:
 
 
-    The class is a cache protocol engine.
-    An application protocol such as HttpWebRequest or FtpWebRequest
-    gets all cache-related answers by talking to this class
+The class is a cache protocol engine.
+An application protocol such as HttpWebRequest or FtpWebRequest
+gets all cache-related answers by talking to this class
 
-    Sometime in the future it will become public.
+Sometime in the future it will become public.
 
 Author:
 
-    Alexei Vopilov    21-Dec-2002
+Alexei Vopilov    21-Dec-2002
 
 Revision History:
-    Aug 25 2003 - moved into separate file and revised as per Whidbey-M3 spec.
+Aug 25 2003 - moved into separate file and revised as per Whidbey-M3 spec.
 
 --*/
 namespace System.Net.Cache
@@ -283,7 +283,8 @@ namespace System.Net.Cache
         }
 
         //
-        // Returns UpdateResponseInformation if passed response stream has to be replaced (cache is updated in some way)
+        // Returns UpdateResponseInformation if passed response stream has to be replaced (cache is updated
+        // in some way)
         // Returns Fail if request is to fail
         // Any other return value should be ignored
         //

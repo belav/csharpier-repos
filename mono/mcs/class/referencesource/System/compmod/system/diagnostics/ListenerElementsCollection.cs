@@ -97,8 +97,10 @@ namespace System.Diagnostics
         }
     }
 
-    // This is the collection used by the sharedListener section.  It is only slightly different from ListenerElementsCollection.
-    // The differences are that it does not allow remove and clear, and that the ListenerElements it creates do not allow
+    // This is the collection used by the sharedListener section.  It is only slightly different from
+    // ListenerElementsCollection.
+    // The differences are that it does not allow remove and clear, and that the ListenerElements it
+    // creates do not allow
     // references.
     [ConfigurationCollection(
         typeof(ListenerElement),
@@ -432,7 +434,8 @@ namespace System.Diagnostics
                 }
                 else
                 {
-                    // We're the element with the type and initializeData info.  First see if those two are the same as they were.
+                    // We're the element with the type and initializeData info.  First see if those two are the same as
+                    // they were.
                     // If not, create a whole new object, otherwise, just update the other properties.
                     if (
                         Type.GetType(className) != listener.GetType()

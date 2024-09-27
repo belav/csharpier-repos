@@ -14,7 +14,8 @@ using Xunit.Abstractions;
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 {
     // Some examples of parsing subtleties:
-    // `(T id, ...) = ...` is a deconstruction-assignment into a tuple expression with declaration expressions
+    // `(T id, ...) = ...` is a deconstruction-assignment into a tuple expression with declaration
+    // expressions
     // `var (id, ...) = ...` is a deconstruction-assignment
     // `(T id, ...) id;` starts with a tuple type
     // `(T, ...) id;` starts with tuple type
@@ -2146,7 +2147,8 @@ class C
                 options: TestOptions.Regular.WithTuplesFeature()
             );
 
-            // This expectation is wrong. We should expect a foreach statement (because the 'in' keyword is there)
+            // This expectation is wrong. We should expect a foreach statement (because the 'in' keyword is
+            // there)
             Assert.True(statement.Kind() == SyntaxKind.ForStatement);
         }
 
@@ -2246,7 +2248,8 @@ namespace System
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (7,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (7,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not
+                    // available in C# 9.0. Please use language version 10.0 or greater.
                     //         (int x1, x2) = (1, 2);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(int x1, x2) = (1, 2)")
                         .WithArguments(
@@ -2254,7 +2257,8 @@ namespace System
                             "10.0"
                         )
                         .WithLocation(7, 9),
-                    // (8,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (8,9): error CS8773: Feature 'Mixed declarations and expressions in deconstruction' is not
+                    // available in C# 9.0. Please use language version 10.0 or greater.
                     //         (x3, int x4) = (1, 2);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "(x3, int x4) = (1, 2)")
                         .WithArguments(
@@ -2576,7 +2580,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,10): error CS1519: Invalid token 'object' in class, record, struct, or interface member declaration
+                    // (4,10): error CS1519: Invalid token 'object' in class, record, struct, or interface member
+                    // declaration
                     //     void object M(string e)
                     Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "object")
                         .WithArguments("object")

@@ -7,7 +7,8 @@ using System.Text.Encodings.Web;
 namespace Microsoft.AspNetCore.Razor.TagHelpers;
 
 /// <summary>
-/// A <see cref="HtmlEncoder"/> that does not encode. Should not be used when writing directly to a response
+/// A <see cref="HtmlEncoder"/> that does not encode. Should not be used when writing directly to a
+// response
 /// expected to contain valid HTML.
 /// </summary>
 public sealed class NullHtmlEncoder : HtmlEncoder
@@ -18,7 +19,8 @@ public sealed class NullHtmlEncoder : HtmlEncoder
     private NullHtmlEncoder() { }
 
     /// <summary>
-    /// A <see cref="HtmlEncoder"/> instance that does not encode. Should not be used when writing directly to a
+    /// A <see cref="HtmlEncoder"/> instance that does not encode. Should not be used when writing
+    // directly to a
     /// response expected to contain valid HTML.
     /// </summary>
     public static new NullHtmlEncoder Default { get; } = new NullHtmlEncoder();

@@ -24,7 +24,8 @@ public class HttpSysHttp3SupportedAttribute : Attribute, ITestCondition
             try
             {
                 // Http.Sys requires setting this reg key and rebooting to enable the HTTP/3 preview feature.
-                // reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\HTTP\Parameters" /v EnableHttp3 /t REG_DWORD /d 1 /f
+                // reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\services\HTTP\Parameters" /v EnableHttp3 /t
+                // REG_DWORD /d 1 /f
                 using var key = Registry.LocalMachine.OpenSubKey(
                     @"SYSTEM\CurrentControlSet\services\HTTP\Parameters"
                 );

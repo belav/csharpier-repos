@@ -583,7 +583,8 @@ public class Bar
 
             // The native C# compiler emits this:
             // .param[1]
-            // .custom instance void[mscorlib] System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = (
+            // .custom instance void[mscorlib]
+            // System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = (
             //         01 00 ff ff ff ff ff ff ff ff 00 00
             // )
             Action<ModuleSymbol> verifier = (module) =>
@@ -659,18 +660,21 @@ public class Consumer
 
             var comp2 = CreateCompilation(source2, new[] { libCompRef });
             comp2.VerifyDiagnostics(
-                // (6,19): error CS7036: There is no argument given that corresponds to the required parameter 'p1' of 'Bar.Method(DateTime)'
+                // (6,19): error CS7036: There is no argument given that corresponds to the required parameter 'p1'
+                // of 'Bar.Method(DateTime)'
                 //         new Bar().Method();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Method")
                     .WithArguments("p1", "Bar.Method(System.DateTime)")
                     .WithLocation(6, 19)
             );
 
-            // The native compiler also gives an error: error CS1501: No overload for method 'Method' takes 0 arguments
+            // The native compiler also gives an error: error CS1501: No overload for method 'Method' takes 0
+            // arguments
             var libAssemblyRef = libComp.EmitToImageReference();
             var comp3 = CreateCompilation(source2, new[] { libAssemblyRef });
             comp3.VerifyDiagnostics(
-                // (6,19): error CS7036: There is no argument given that corresponds to the required parameter 'p1' of 'Bar.Method(DateTime)'
+                // (6,19): error CS7036: There is no argument given that corresponds to the required parameter 'p1'
+                // of 'Bar.Method(DateTime)'
                 //         new Bar().Method();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Method")
                     .WithArguments("p1", "Bar.Method(System.DateTime)")
@@ -703,10 +707,13 @@ public class Bar
             #endregion
 
             // The native C# compiler would succeed and emit this:
-            // .method public hidebysig instance void M1([opt] valuetype[mscorlib] System.DateTime x) cil managed
+            // .method public hidebysig instance void M1([opt] valuetype[mscorlib] System.DateTime x) cil
+            // managed
             // {
             // .param [1] = nullref
-            // .custom instance void[mscorlib] System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 FF FF FF FF FF FF FF FF 00 00 )
+            // .custom instance void[mscorlib]
+            // System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 FF FF FF FF FF FF
+            // FF FF 00 00 )
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -743,7 +750,9 @@ public class Bar
 
             // The native C# compiler emits this:
             // .param [1] = nullref
-            // .custom instance void[mscorlib] System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = (01 00 2A 00 00 00 00 00 00 00 00 00 )
+            // .custom instance void[mscorlib]
+            // System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = (01 00 2A 00 00 00 00 00
+            // 00 00 00 00 )
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
@@ -782,7 +791,9 @@ public class C
 
             // The native C# compiler emits this:
             // .field public valuetype[mscorlib] System.DateTime F
-            // .custom instance void[mscorlib] System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 FF FF FF FF FF FF FF FF 00 00 )
+            // .custom instance void[mscorlib]
+            // System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 FF FF FF FF FF FF
+            // FF FF 00 00 )
 
             // using the native compiler, this code outputs 0
             var comp = CompileAndVerify(source, expectedOutput: "0");
@@ -817,7 +828,9 @@ public class C
 
             // The native C# compiler emits this:
             // .field public valuetype[mscorlib] System.DateTime F
-            // .custom instance void[mscorlib] System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 2A 00 00 00 00 00 00 00 00 00 )
+            // .custom instance void[mscorlib]
+            // System.Runtime.CompilerServices.DateTimeConstantAttribute::.ctor(int64) = ( 01 00 2A 00 00 00 00 00
+            // 00 00 00 00 )
 
             // Using the native compiler, the code executes to output 0
             var comp = CompileAndVerify(source, expectedOutput: "0");
@@ -962,7 +975,8 @@ public class C
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,59): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (6,59): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(decimal)")
                 );
         }
@@ -1612,7 +1626,9 @@ public class Goo: Attribute
 
             CreateCompilationWithMscorlib40(source)
                 .VerifyDiagnostics(
-                    // (15,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                    // (15,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in ''
+                    // conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib,
+                    // Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
                     //     public Goo([Optional(isOpt: false)][Goo]int y) {}
                     Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
                         .WithArguments(
@@ -1622,7 +1638,8 @@ public class Goo: Attribute
                             "System.Runtime.InteropServices.OptionalAttribute"
                         )
                         .WithLocation(15, 17),
-                    // (15,41): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'Goo.Goo(int)'
+                    // (15,41): error CS7036: There is no argument given that corresponds to the required parameter 'y'
+                    // of 'Goo.Goo(int)'
                     //     public Goo([Optional(isOpt: false)][Goo]int y) {}
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
                         .WithArguments("y", "Goo.Goo(int)")
@@ -1655,7 +1672,9 @@ public class Goo: Attribute
 
             CreateCompilationWithMscorlib40(source)
                 .VerifyDiagnostics(
-                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in ''
+                    // conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib,
+                    // Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
                     //     public Goo([Optional][Goo]int y) {}
                     Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
                         .WithArguments(
@@ -1664,7 +1683,8 @@ public class Goo: Attribute
                             "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                             "System.Runtime.InteropServices.OptionalAttribute"
                         ),
-                    // (16,17): error CS0592: Attribute 'Optional' is not valid on this declaration type. It is only valid on 'class' declarations.
+                    // (16,17): error CS0592: Attribute 'Optional' is not valid on this declaration type. It is only
+                    // valid on 'class' declarations.
                     //     public Goo([Optional][Goo]int y) {}
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "Optional")
                         .WithArguments("Optional", "class")
@@ -1696,7 +1716,9 @@ public class Goo: Attribute
 
             CreateCompilationWithMscorlib40(source)
                 .VerifyDiagnostics(
-                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in '' conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+                    // (16,17): warning CS0436: The type 'System.Runtime.InteropServices.OptionalAttribute' in ''
+                    // conflicts with the imported type 'System.Runtime.InteropServices.OptionalAttribute' in 'mscorlib,
+                    // Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
                     //     public Goo([Optional(new Goo())][Goo]int y) {}
                     Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "Optional")
                         .WithArguments(
@@ -1706,12 +1728,14 @@ public class Goo: Attribute
                             "System.Runtime.InteropServices.OptionalAttribute"
                         )
                         .WithLocation(16, 17),
-                    // (16,30): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'Goo.Goo(int)'
+                    // (16,30): error CS7036: There is no argument given that corresponds to the required parameter 'y'
+                    // of 'Goo.Goo(int)'
                     //     public Goo([Optional(new Goo())][Goo]int y) {}
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
                         .WithArguments("y", "Goo.Goo(int)")
                         .WithLocation(16, 30),
-                    // (16,38): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'Goo.Goo(int)'
+                    // (16,38): error CS7036: There is no argument given that corresponds to the required parameter 'y'
+                    // of 'Goo.Goo(int)'
                     //     public Goo([Optional(new Goo())][Goo]int y) {}
                     Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Goo")
                         .WithArguments("y", "Goo.Goo(int)")
@@ -2006,31 +2030,39 @@ class C
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (63,65): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
-                    //     public MyPermission5Attribute(SecurityAction action, object x = SecurityAction.Demand) : base(SecurityAction.Demand)
+                    // (63,65): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type
+                    // other than string can only be initialized with null
+                    //     public MyPermission5Attribute(SecurityAction action, object x = SecurityAction.Demand) :
+                    // base(SecurityAction.Demand)
                     Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
                         .WithArguments("x", "object")
                         .WithLocation(63, 65),
-                    // (76,42): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                    // (76,42): error CS1763: 'x' is of type 'object'. A default parameter value of a reference type
+                    // other than string can only be initialized with null
                     //     public MyPermission6Attribute(object x = SecurityAction.Demand) : base(SecurityAction.Demand)
                     Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "x")
                         .WithArguments("x", "object")
                         .WithLocation(76, 42),
-                    // (101,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
-                    //     public MyPermission8Attribute([Optional][DefaultParameterValueAttribute(null)]SecurityAction x) : base(SecurityAction.Demand)
+                    // (101,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must
+                    // match the parameter type
+                    //     public MyPermission8Attribute([Optional][DefaultParameterValueAttribute(null)]SecurityAction
+                    // x) : base(SecurityAction.Demand)
                     Diagnostic(
                             ErrorCode.ERR_DefaultValueTypeMustMatch,
                             "DefaultParameterValueAttribute"
                         )
                         .WithLocation(101, 46),
-                    // (113,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
-                    //     public MyPermission9Attribute([Optional][DefaultParameterValueAttribute(-1)]SecurityAction x) : base(SecurityAction.Demand)
+                    // (113,46): error CS1908: The type of the argument to the DefaultParameterValue attribute must
+                    // match the parameter type
+                    //     public MyPermission9Attribute([Optional][DefaultParameterValueAttribute(-1)]SecurityAction x)
+                    // : base(SecurityAction.Demand)
                     Diagnostic(
                             ErrorCode.ERR_DefaultValueTypeMustMatch,
                             "DefaultParameterValueAttribute"
                         )
                         .WithLocation(113, 46),
-                    // (137,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                    // (137,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter
+                    // value was specified.
                     // [MyPermission(SecurityAction.Demand)]
                     Diagnostic(
                             ErrorCode.ERR_BadAttributeParamDefaultArgument,
@@ -2038,7 +2070,8 @@ class C
                         )
                         .WithArguments("x")
                         .WithLocation(137, 2),
-                    // (140,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                    // (140,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter
+                    // value was specified.
                     // [MyPermission2(SecurityAction.Demand)]
                     Diagnostic(
                             ErrorCode.ERR_BadAttributeParamDefaultArgument,
@@ -2046,7 +2079,8 @@ class C
                         )
                         .WithArguments("x")
                         .WithLocation(140, 2),
-                    // (143,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter value was specified.
+                    // (143,2): error CS7067: Attribute constructor parameter 'x' is optional, but no default parameter
+                    // value was specified.
                     // [MyPermission3()]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamDefaultArgument, "MyPermission3()")
                         .WithArguments("x")
@@ -2056,26 +2090,31 @@ class C
                     Diagnostic(ErrorCode.ERR_BadArgType, "null")
                         .WithArguments("1", "<null>", "System.Security.Permissions.SecurityAction")
                         .WithLocation(149, 16),
-                    // (151,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (151,2): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [MyPermission5(SecurityAction.Demand)]
                     Diagnostic(
                             ErrorCode.ERR_BadAttributeArgument,
                             "MyPermission5(SecurityAction.Demand)"
                         )
                         .WithLocation(151, 2),
-                    // (154,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (154,2): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [MyPermission6()]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "MyPermission6()")
                         .WithLocation(154, 2),
-                    // (161,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (161,2): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [MyPermission8()]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "MyPermission8()")
                         .WithLocation(161, 2),
-                    // (164,2): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (164,2): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [MyPermission9()]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "MyPermission9()")
                         .WithLocation(164, 2),
-                    // (167,2): error CS1763: 'y' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                    // (167,2): error CS1763: 'y' is of type 'object'. A default parameter value of a reference type
+                    // other than string can only be initialized with null
                     // [MyPermission10(SecurityAction.Demand)]
                     Diagnostic(
                             ErrorCode.ERR_NotNullRefDefaultParameter,
@@ -2146,12 +2185,14 @@ static class Program
 ";
             CreateCompilation(source)
                 .VerifyEmitDiagnostics(
-                    // (6,52): warning CS8974: Converting method group 'Evil' to non-delegate type 'object'. Did you intend to invoke the method?
+                    // (6,52): warning CS8974: Converting method group 'Evil' to non-delegate type 'object'. Did you
+                    // intend to invoke the method?
                     //     public static void Evil([DefaultParameterValue(Evil)]) {}
                     Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "Evil")
                         .WithArguments("Evil", "object")
                         .WithLocation(6, 52),
-                    // (6,52): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (6,52): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     //     public static void Evil([DefaultParameterValue(Evil)]) {}
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Evil").WithLocation(6, 52),
                     // (6,58): error CS1031: Type expected
@@ -2180,12 +2221,14 @@ static class Program
 ";
             CreateCompilation(source)
                 .VerifyEmitDiagnostics(
-                    // (6,52): warning CS8974: Converting method group 'Evil' to non-delegate type 'object'. Did you intend to invoke the method?
+                    // (6,52): warning CS8974: Converting method group 'Evil' to non-delegate type 'object'. Did you
+                    // intend to invoke the method?
                     //     public static void Evil([DefaultParameterValue(Evil)] object x = null) {}
                     Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "Evil")
                         .WithArguments("Evil", "object")
                         .WithLocation(6, 52),
-                    // (6,52): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (6,52): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     //     public static void Evil([DefaultParameterValue(Evil)] object x = null) {}
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Evil").WithLocation(6, 52),
                     // (6,70): error CS8017: The parameter has multiple distinct default values.
@@ -2528,7 +2571,8 @@ class C
 }"
                 )
                 .VerifyDiagnostics(
-                    // (5,39): error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying the In attribute.
+                    // (5,39): error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying
+                    // the In attribute.
                     //     public static void M([Out]ref int p) { }
                     Diagnostic(ErrorCode.ERR_OutAttrOnRefParam, "p").WithLocation(5, 39)
                 );
@@ -2905,20 +2949,25 @@ namespace System.Runtime.InteropServices
 
             // NOTE (tomat)
             // Dev10 reports:
-            //   warning CS1685: The predefined type 'System.Runtime.InteropServices.DllImportAttribute' is defined in multiple assemblies in the global alias;
-            //                   using definition from 'c:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll'
+            //   warning CS1685: The predefined type 'System.Runtime.InteropServices.DllImportAttribute' is
+            // defined in multiple assemblies in the global alias;
+            //                   using definition from
+            // 'c:\Windows\Microsoft.NET\Framework\v4.0.30319\mscorlib.dll'
             //   error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
             //
             // DllImportAttribute is defined both in source and PE.
             // Both Dev10 and Roslyn correctly bind to the source symbol.
             // Dev10 generates incorrect warning CS1685.
             // CONSIDER: We may want to generate warning CS0436 in Roslyn:
-            //      (4,6): warning CS0436: The type 'DllImport' in '' conflicts with the imported type 'System.Runtime.InteropServices.DllImportAttribute' in
-            //      'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in ''.
+            //      (4,6): warning CS0436: The type 'DllImport' in '' conflicts with the imported type
+            // 'System.Runtime.InteropServices.DllImportAttribute' in
+            //      'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the
+            // type defined in ''.
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute class
+                    // (4,6): error CS0616: 'System.Runtime.InteropServices.DllImportAttribute' is not an attribute
+                    // class
                     //     [DllImport]
                     Diagnostic(ErrorCode.ERR_NotAnAttributeClass, "DllImport")
                         .WithArguments("System.Runtime.InteropServices.DllImportAttribute")
@@ -3607,19 +3656,23 @@ class M
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,31): error CS0037: Cannot convert null to 'System.Runtime.InteropServices.CharSet' because it is a non-nullable value type
+                    // (6,31): error CS0037: Cannot convert null to 'System.Runtime.InteropServices.CharSet' because it
+                    // is a non-nullable value type
                     Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
                         .WithArguments("System.Runtime.InteropServices.CharSet"),
-                    // (9,31): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
+                    // (9,31): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in
+                    // the given context
                     Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
                         .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
-                    // (12,31): error CS0029: Cannot implicitly convert type 'string' to 'System.Runtime.InteropServices.CharSet'
+                    // (12,31): error CS0029: Cannot implicitly convert type 'string' to
+                    // 'System.Runtime.InteropServices.CharSet'
                     Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""str""")
                         .WithArguments("string", "System.Runtime.InteropServices.CharSet"),
                     // (15,16): error CS1503: Argument 1: cannot convert from 'bool' to 'string'
                     Diagnostic(ErrorCode.ERR_BadArgType, "true")
                         .WithArguments("1", "bool", "string"),
-                    // (18,16): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in the given context
+                    // (18,16): error CS0119: 'System.Runtime.InteropServices.CharSet' is a type, which is not valid in
+                    // the given context
                     Diagnostic(ErrorCode.ERR_BadSKunknown, "CharSet")
                         .WithArguments("System.Runtime.InteropServices.CharSet", "type"),
                     // (21,16): error CS1503: Argument 1: cannot convert from 'int' to 'string'
@@ -4301,30 +4354,36 @@ public class C2 { }
             // Dev10 fails in Emit or emits invalid metadata
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (13,9): error CS0501: 'C.F2(int, string)' must declare a body because it is not marked abstract, extern, or partial
+                    // (13,9): error CS0501: 'C.F2(int, string)' must declare a body because it is not marked abstract,
+                    // extern, or partial
                     //     int F2(int bufSize, string buf);
                     Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "F2")
                         .WithArguments("C.F2(int, string)")
                         .WithLocation(13, 9),
-                    // (6,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
+                    // (6,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and
+                    // 'extern'
                     //     [DllImport("D.DLL")]
                     Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
                         .WithLocation(6, 6),
-                    // (9,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                    // (9,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only
+                    // valid on 'method' declarations.
                     //     [DllImport("D.DLL")]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
                         .WithArguments("DllImport", "method")
                         .WithLocation(9, 6),
-                    // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
+                    // (12,6): error CS0601: The DllImport attribute must be specified on a method marked 'static' and
+                    // 'extern'
                     //     [DllImport("D.DLL")]
                     Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
                         .WithLocation(12, 6),
-                    // (15,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                    // (15,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only
+                    // valid on 'method' declarations.
                     //     [DllImport("D.DLL")]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
                         .WithArguments("DllImport", "method")
                         .WithLocation(15, 6),
-                    // (18,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                    // (18,6): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only
+                    // valid on 'method' declarations.
                     //     [DllImport("d.dll")]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
                         .WithArguments("DllImport", "method")
@@ -4338,12 +4397,14 @@ public class C2 { }
                     //        [DllImport("d.dll")]
                     Diagnostic(ErrorCode.ERR_AttributesNotAllowed, @"[DllImport(""d.dll"")]")
                         .WithLocation(26, 8),
-                    // (31,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                    // (31,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only
+                    // valid on 'method' declarations.
                     // [DllImport("dd.dllL")]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
                         .WithArguments("DllImport", "method")
                         .WithLocation(31, 2),
-                    // (34,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only valid on 'method' declarations.
+                    // (34,2): error CS0592: Attribute 'DllImport' is not valid on this declaration type. It is only
+                    // valid on 'method' declarations.
                     // [DllImport("dd.dll")]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "DllImport")
                         .WithArguments("DllImport", "method")
@@ -4848,7 +4909,8 @@ public class MainClass
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (22,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its protection level
+                    // (22,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its
+                    // protection level
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_BadAccess, "Wrapper.IWorksheet")
                         .WithArguments("Wrapper.WorksheetClass.WorksheetClass()")
@@ -4896,7 +4958,8 @@ public class MainClass
             // Using metadata reference to test RetargetingNamedTypeSymbol CoClass type
             CreateCompilation(source2, references: new[] { compDll.ToMetadataReference() })
                 .VerifyDiagnostics(
-                    // (6,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its protection level
+                    // (6,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its
+                    // protection level
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_BadAccess, "Wrapper.IWorksheet")
                         .WithArguments("Wrapper.WorksheetClass.WorksheetClass()")
@@ -4906,7 +4969,8 @@ public class MainClass
             // Using assembly file reference to test PENamedTypeSymbol symbol CoClass type
             CreateCompilation(source2, references: new[] { compDll.EmitToImageReference() })
                 .VerifyDiagnostics(
-                    // (6,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its protection level
+                    // (6,21): error CS0122: 'Wrapper.WorksheetClass.WorksheetClass()' is inaccessible due to its
+                    // protection level
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_BadAccess, "Wrapper.IWorksheet")
                         .WithArguments("Wrapper.WorksheetClass.WorksheetClass()")
@@ -4943,7 +5007,8 @@ public class MainClass
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (10,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with 'ComImportAttribute'
+                    // (10,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with
+                    // 'ComImportAttribute'
                     //     [CoClass(typeof(WorksheetClass))]
                     Diagnostic(
                             ErrorCode.WRN_CoClassWithoutComImport,
@@ -4951,7 +5016,8 @@ public class MainClass
                         )
                         .WithArguments("IWorksheet")
                         .WithLocation(10, 6),
-                    // (20,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
+                    // (20,17): error CS0144: Cannot create an instance of the abstract type or interface
+                    // 'Wrapper.IWorksheet'
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
                         .WithArguments("Wrapper.IWorksheet")
@@ -4997,7 +5063,8 @@ public class MainClass
             // Using metadata reference to test RetargetingNamedTypeSymbol CoClass type
             CreateCompilation(source2, references: new[] { compDll.ToMetadataReference() })
                 .VerifyDiagnostics(
-                    // (6,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
+                    // (6,17): error CS0144: Cannot create an instance of the abstract type or interface
+                    // 'Wrapper.IWorksheet'
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
                         .WithArguments("Wrapper.IWorksheet")
@@ -5007,7 +5074,8 @@ public class MainClass
             var assemblyRef = compDll.EmitToImageReference(
                 expectedWarnings: new[]
                 {
-                    // (11,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with 'ComImportAttribute'
+                    // (11,6): warning CS0684: 'IWorksheet' interface marked with 'CoClassAttribute' not marked with
+                    // 'ComImportAttribute'
                     //     [CoClass(typeof(WorksheetClass))]
                     Diagnostic(
                             ErrorCode.WRN_CoClassWithoutComImport,
@@ -5020,7 +5088,8 @@ public class MainClass
             // Using assembly file reference to test PENamedTypeSymbol symbol CoClass type
             CreateCompilation(source2, references: new[] { assemblyRef })
                 .VerifyDiagnostics(
-                    // (6,17): error CS0144: Cannot create an instance of the abstract type or interface 'Wrapper.IWorksheet'
+                    // (6,17): error CS0144: Cannot create an instance of the abstract type or interface
+                    // 'Wrapper.IWorksheet'
                     //         var a = new Wrapper.IWorksheet();
                     Diagnostic(ErrorCode.ERR_NoNewAbstract, "new Wrapper.IWorksheet()")
                         .WithArguments("Wrapper.IWorksheet")
@@ -5312,7 +5381,8 @@ public class MainClass
             var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource);
 
             compilation.VerifyDiagnostics(
-                // (6,17): error CS1613: The managed coclass wrapper class 'YorksheetClass' for interface 'IWorksheet' cannot be found (are you missing an assembly reference?)
+                // (6,17): error CS1613: The managed coclass wrapper class 'YorksheetClass' for interface
+                // 'IWorksheet' cannot be found (are you missing an assembly reference?)
                 //         var a = new IWorksheet();
                 Diagnostic(ErrorCode.ERR_MissingCoClass, "new IWorksheet()")
                     .WithArguments("YorksheetClass", "IWorksheet")
@@ -5357,7 +5427,8 @@ public class MainClass
             var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource);
 
             compilation.VerifyDiagnostics(
-                // (6,17): error CS1639: The managed coclass wrapper class signature 'WorksheetClass<>' for interface 'IWorksheet' is not a valid class name signature
+                // (6,17): error CS1639: The managed coclass wrapper class signature 'WorksheetClass<>' for
+                // interface 'IWorksheet' is not a valid class name signature
                 //         var a = new IWorksheet();
                 Diagnostic(ErrorCode.ERR_BadCoClassSig, "new IWorksheet()")
                     .WithArguments("WorksheetClass<>", "IWorksheet")
@@ -5398,7 +5469,8 @@ public class MainClass
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (16,13): error CS0144: Cannot create an instance of the abstract type or interface 'InterfaceType'
+                    // (16,13): error CS0144: Cannot create an instance of the abstract type or interface
+                    // 'InterfaceType'
                     // [AAttribute(new InterfaceType())]
                     Diagnostic(ErrorCode.ERR_NoNewAbstract, "new InterfaceType()")
                         .WithArguments("InterfaceType")
@@ -5430,7 +5502,8 @@ class A
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (14,17): error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
-                    //         var x = new I(); // error CS0030: Cannot convert type 'System.StackOverflowException' to 'I'
+                    //         var x = new I(); // error CS0030: Cannot convert type 'System.StackOverflowException' to
+                    // 'I'
                     Diagnostic(ErrorCode.ERR_NoExplicitConv, "new I()")
                         .WithArguments("System.StackOverflowException", "I")
                         .WithLocation(14, 17)
@@ -5530,7 +5603,8 @@ class D {}
                         .WithArguments("Guid")
                         .WithLocation(7, 7),
                     // (10,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("{69D3E2A0-BB0F-4FE3-9860-ED714C510756}")]    // 32 digits separated by hyphens, enclosed in braces
+                    // [Guid("{69D3E2A0-BB0F-4FE3-9860-ED714C510756}")]    // 32 digits separated by hyphens, enclosed
+                    // in braces
                     Diagnostic(
                             ErrorCode.ERR_InvalidAttributeArgument,
                             @"""{69D3E2A0-BB0F-4FE3-9860-ED714C510756}"""
@@ -5538,7 +5612,8 @@ class D {}
                         .WithArguments("Guid")
                         .WithLocation(10, 7),
                     // (13,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("(69D3E2A0-BB0F-4FE3-9860-ED714C510756)")]    // 32 digits separated by hyphens, enclosed in parentheses
+                    // [Guid("(69D3E2A0-BB0F-4FE3-9860-ED714C510756)")]    // 32 digits separated by hyphens, enclosed
+                    // in parentheses
                     Diagnostic(
                             ErrorCode.ERR_InvalidAttributeArgument,
                             @"""(69D3E2A0-BB0F-4FE3-9860-ED714C510756)"""
@@ -5546,7 +5621,9 @@ class D {}
                         .WithArguments("Guid")
                         .WithLocation(13, 7),
                     // (16,7): error CS0591: Invalid value for argument to 'Guid' attribute
-                    // [Guid("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}")]    // Four hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal values that is also enclosed in braces
+                    // [Guid("{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}")]    // Four
+                    // hexadecimal values enclosed in braces, where the fourth value is a subset of eight hexadecimal
+                    // values that is also enclosed in braces
                     Diagnostic(
                             ErrorCode.ERR_InvalidAttributeArgument,
                             @"""{0x00000000,0x0000,0x0000,{0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00}}"""
@@ -6119,7 +6196,9 @@ namespace System
             var compilation = CreateCompilationWithMscorlib40(syntaxTree);
 
             var comp = compilation.VerifyDiagnostics(
-                // test.cs(4,6): warning CS0436: The type 'AttributeUsageAttribute' in 'test.cs' conflicts with the imported type 'AttributeUsageAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in 'test.cs'.
+                // test.cs(4,6): warning CS0436: The type 'AttributeUsageAttribute' in 'test.cs' conflicts with the
+                // imported type 'AttributeUsageAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089'. Using the type defined in 'test.cs'.
                 //     [AttributeUsage(AttributeTargets.Class)]
                 Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "AttributeUsage")
                     .WithArguments(
@@ -6129,7 +6208,9 @@ namespace System
                         "System.AttributeUsageAttribute"
                     )
                     .WithLocation(4, 6),
-                // test.cs(5,6): warning CS0436: The type 'AttributeUsageAttribute' in 'test.cs' conflicts with the imported type 'AttributeUsageAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. Using the type defined in 'test.cs'.
+                // test.cs(5,6): warning CS0436: The type 'AttributeUsageAttribute' in 'test.cs' conflicts with the
+                // imported type 'AttributeUsageAttribute' in 'mscorlib, Version=4.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089'. Using the type defined in 'test.cs'.
                 //     [AttributeUsage(AttributeTargets.Class)]
                 Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "AttributeUsage")
                     .WithArguments(
@@ -6276,7 +6357,8 @@ public class MyAttribute : Attribute
                     // 	public const AttributeTargets badAttributeTargets = Missing;
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
                         .WithArguments("Missing"),
-                    // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     // [AttributeUsage(badAttributeTargets)]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "badAttributeTargets")
                 );
@@ -6490,7 +6572,8 @@ public interface InvalidTarget {}
                     // [ClassInterface((short)3)]
                     Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)3")
                         .WithArguments("ClassInterface"),
-                    // (38,17): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ClassInterfaceType'
+                    // (38,17): error CS1503: Argument 1: cannot convert from 'int' to
+                    // 'System.Runtime.InteropServices.ClassInterfaceType'
                     // [ClassInterface(System.Int32.MaxValue)]
                     Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
                         .WithArguments(
@@ -6498,7 +6581,8 @@ public interface InvalidTarget {}
                             "int",
                             "System.Runtime.InteropServices.ClassInterfaceType"
                         ),
-                    // (41,2): error CS0592: Attribute 'ClassInterface' is not valid on this declaration type. It is only valid on 'assembly, class' declarations.
+                    // (41,2): error CS0592: Attribute 'ClassInterface' is not valid on this declaration type. It is
+                    // only valid on 'assembly, class' declarations.
                     // [ClassInterface(ClassInterfaceType.None)]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "ClassInterface")
                         .WithArguments("ClassInterface", "assembly, class")
@@ -6582,7 +6666,8 @@ public class InvalidTarget {}
                     // [InterfaceType((short)4)]
                     Diagnostic(ErrorCode.ERR_InvalidAttributeArgument, "(short)4")
                         .WithArguments("InterfaceType"),
-                    // (46,16): error CS1503: Argument 1: cannot convert from 'int' to 'System.Runtime.InteropServices.ComInterfaceType'
+                    // (46,16): error CS1503: Argument 1: cannot convert from 'int' to
+                    // 'System.Runtime.InteropServices.ComInterfaceType'
                     // [InterfaceType(System.Int32.MaxValue)]
                     Diagnostic(ErrorCode.ERR_BadArgType, "System.Int32.MaxValue")
                         .WithArguments(
@@ -6590,7 +6675,8 @@ public class InvalidTarget {}
                             "int",
                             "System.Runtime.InteropServices.ComInterfaceType"
                         ),
-                    // (49,2): error CS0592: Attribute 'InterfaceType' is not valid on this declaration type. It is only valid on 'interface' declarations.
+                    // (49,2): error CS0592: Attribute 'InterfaceType' is not valid on this declaration type. It is only
+                    // valid on 'interface' declarations.
                     // [InterfaceType(ComInterfaceType.InterfaceIsDual)]
                     Diagnostic(ErrorCode.ERR_AttributeOnBadSymbolType, "InterfaceType")
                         .WithArguments("InterfaceType", "interface")
@@ -6726,7 +6812,10 @@ using System.Runtime.InteropServices;
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,12): error CS7036: There is no argument given that corresponds to the required parameter 'build' of 'System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int, int, int, int)'
+                    // (4,12): error CS7036: There is no argument given that corresponds to the required parameter
+                    // 'build' of
+                    // 'System.Runtime.InteropServices.ComCompatibleVersionAttribute.ComCompatibleVersionAttribute(int,
+                    // int, int, int)'
                     // [assembly: ComCompatibleVersionAttribute("str", 0)]
                     Diagnostic(
                             ErrorCode.ERR_NoCorrespondingArgument,
@@ -6800,7 +6889,8 @@ class A
             // [token  0x02000003] Type load failed.
             //
             // Dev10 Runtime Exception:
-            // Unhandled Exception: System.TypeLoadException: Windows Runtime types can only be declared in Windows Runtime assemblies.
+            // Unhandled Exception: System.TypeLoadException: Windows Runtime types can only be declared in
+            // Windows Runtime assemblies.
 
             var verifier = CompileAndVerify(
                 source,
@@ -7048,7 +7138,8 @@ class SelfReferenceInBase1 : IGoo<SelfReferenceInBase> {}
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (78,7): error CS0101: The namespace '<global namespace>' already contains a definition for 'TypeClashWithNS'
+                    // (78,7): error CS0101: The namespace '<global namespace>' already contains a definition for
+                    // 'TypeClashWithNS'
                     // class TypeClashWithNS : Attribute
                     Diagnostic(ErrorCode.ERR_DuplicateNameInNS, "TypeClashWithNS")
                         .WithArguments("TypeClashWithNS", "<global namespace>")
@@ -7241,7 +7332,9 @@ public static class TestExtension
 ";
             CreateCompilationWithMscorlib40(source, new[] { TestMetadata.Net40.SystemCore })
                 .VerifyDiagnostics(
-                    // (98,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
+                    // (98,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It
+                    // is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event,
+                    // interface, delegate' declarations.
                     //         [Obsolete] add {}
                     Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Obsolete")
                         .WithArguments(
@@ -7249,7 +7342,9 @@ public static class TestExtension
                             "class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate"
                         )
                         .WithLocation(98, 10),
-                    // (99,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
+                    // (99,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It
+                    // is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event,
+                    // interface, delegate' declarations.
                     //         [Obsolete("Don't use remove accessor")] remove {}
                     Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Obsolete")
                         .WithArguments(
@@ -7317,7 +7412,8 @@ public static class TestExtension
                     Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "t.Prop4")
                         .WithArguments("Test.Prop4.set")
                         .WithLocation(27, 9),
-                    // (32,9): warning CS0618: 'TestExtension.ObsoleteExtensionMethod1(Test)' is obsolete: 'Do not call this extension method'
+                    // (32,9): warning CS0618: 'TestExtension.ObsoleteExtensionMethod1(Test)' is obsolete: 'Do not call
+                    // this extension method'
                     //         t.ObsoleteExtensionMethod1();
                     Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "t.ObsoleteExtensionMethod1()")
                         .WithArguments(
@@ -7714,7 +7810,8 @@ class F6 : F5
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
                         .WithArguments("C2.goo()", "C1.goo()")
                         .WithLocation(10, 26),
-                    // (90,30): warning CS0672: Member 'F2.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F2.Goo.get'.
+                    // (90,30): warning CS0672: Member 'F2.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the
+                    // Obsolete attribute to 'F2.Goo.get'.
                     //     public override int Goo {get; set;}
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
                         .WithArguments("F2.Goo.get", "F1.Goo.get")
@@ -7724,12 +7821,14 @@ class F6 : F5
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
                         .WithArguments("E5.Goo.get", "E1.Goo.get")
                         .WithLocation(77, 42),
-                    // (51,26): warning CS0672: Member 'D5.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D5.goo()'.
+                    // (51,26): warning CS0672: Member 'D5.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete
+                    // attribute to 'D5.goo()'.
                     //     public override void goo() {}
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
                         .WithArguments("D5.goo()", "D1.goo()")
                         .WithLocation(51, 26),
-                    // (38,26): warning CS0672: Member 'D2.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete attribute to 'D2.goo()'.
+                    // (38,26): warning CS0672: Member 'D2.goo()' overrides obsolete member 'D1.goo()'. Add the Obsolete
+                    // attribute to 'D2.goo()'.
                     //     public override void goo() {}
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "goo")
                         .WithArguments("D2.goo()", "D1.goo()")
@@ -7739,7 +7838,8 @@ class F6 : F5
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "goo")
                         .WithArguments("C5.goo()", "C1.goo()")
                         .WithLocation(24, 26),
-                    // (102,30): warning CS0672: Member 'F5.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the Obsolete attribute to 'F5.Goo.get'.
+                    // (102,30): warning CS0672: Member 'F5.Goo.get' overrides obsolete member 'F1.Goo.get'. Add the
+                    // Obsolete attribute to 'F5.Goo.get'.
                     //     public override int Goo {get; set;}
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
                         .WithArguments("F5.Goo.get", "F1.Goo.get")
@@ -7791,22 +7891,26 @@ public class Program
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (14,31): warning CS0672: Member 'Derived.Boo.get' overrides obsolete member 'Base.Boo.get'. Add the Obsolete attribute to 'Derived.Boo.get'.
+                    // (14,31): warning CS0672: Member 'Derived.Boo.get' overrides obsolete member 'Base.Boo.get'. Add
+                    // the Obsolete attribute to 'Derived.Boo.get'.
                     //     public override int Boo { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "get")
                         .WithArguments("Derived.Boo.get", "Base.Boo.get")
                         .WithLocation(14, 31),
-                    // (15,42): warning CS0809: Obsolete member 'Derived.Goo.get' overrides non-obsolete member 'Base.Goo.get'
+                    // (15,42): warning CS0809: Obsolete member 'Derived.Goo.get' overrides non-obsolete member
+                    // 'Base.Goo.get'
                     //     public override int Goo { [Obsolete] get; set; }
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
                         .WithArguments("Derived.Goo.get", "Base.Goo.get")
                         .WithLocation(15, 42),
-                    // (18,25): warning CS0672: Member 'Derived.Koo' overrides obsolete member 'Base.Koo'. Add the Obsolete attribute to 'Derived.Koo'.
+                    // (18,25): warning CS0672: Member 'Derived.Koo' overrides obsolete member 'Base.Koo'. Add the
+                    // Obsolete attribute to 'Derived.Koo'.
                     //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "Koo")
                         .WithArguments("Derived.Koo", "Base.Koo")
                         .WithLocation(18, 25),
-                    // (18,69): warning CS0809: Obsolete member 'Derived.Koo.get' overrides non-obsolete member 'Base.Koo.get'
+                    // (18,69): warning CS0809: Obsolete member 'Derived.Koo.get' overrides non-obsolete member
+                    // 'Base.Koo.get'
                     //     public override int Koo { [Obsolete("Derived.Koo is Obsolete")] get; set; }
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "get")
                         .WithArguments("Derived.Koo.get", "Base.Koo.get")
@@ -7919,12 +8023,14 @@ public class SomeAttr1: Attribute
                     Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "F4")
                         .WithArguments("Test.F4", "blah")
                         .WithLocation(18, 15),
-                    // (21,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.F5'
+                    // (21,15): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'Test.F5'
                     //     [Obsolete(F5)]
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "F5")
                         .WithArguments("Test.F5")
                         .WithLocation(21, 15),
-                    // (24,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P1'
+                    // (24,15): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'Test.P1'
                     //     [Obsolete(P1, true)]
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "P1")
                         .WithArguments("Test.P1")
@@ -7934,7 +8040,8 @@ public class SomeAttr1: Attribute
                     Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "P2")
                         .WithArguments("Test.P2")
                         .WithLocation(28, 15),
-                    // (28,15): error CS0120: An object reference is required for the non-static field, method, or property 'Test.P2'
+                    // (28,15): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'Test.P2'
                     //     [SomeAttr(P2, true)]
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "P2")
                         .WithArguments("Test.P2")
@@ -7949,7 +8056,8 @@ public class SomeAttr1: Attribute
                     Diagnostic(ErrorCode.ERR_BadArgType, "Method1")
                         .WithArguments("1", "method group", "string")
                         .WithLocation(31, 15),
-                    // (35,16): error CS0120: An object reference is required for the non-static field, method, or property 'Test.Method2()'
+                    // (35,16): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'Test.Method2()'
                     //     [SomeAttr1(Method2)]
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "Method2")
                         .WithArguments("Test.Method2()")
@@ -8211,19 +8319,23 @@ public class B : IEnumerable
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (9,26): warning CS1064: The best overloaded Add method 'B.Add(long)' for the collection initializer element is obsolete.
+                    // (9,26): warning CS1064: The best overloaded Add method 'B.Add(long)' for the collection
+                    // initializer element is obsolete.
                     //         B coll = new B { 1, new B(), "a", false };
                     Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "1")
                         .WithArguments("B.Add(long)"),
-                    // (9,29): warning CS1062: The best overloaded Add method 'B.Add(B)' for the collection initializer element is obsolete. Don't use this overload
+                    // (9,29): warning CS1062: The best overloaded Add method 'B.Add(B)' for the collection initializer
+                    // element is obsolete. Don't use this overload
                     //         B coll = new B { 1, new B(), "a", false };
                     Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAddStr, "new B()")
                         .WithArguments("B.Add(B)", "Don't use this overload"),
-                    // (9,38): error CS1063: The best overloaded Add method 'B.Add(string)' for the collection initializer element is obsolete. Don't use this overload
+                    // (9,38): error CS1063: The best overloaded Add method 'B.Add(string)' for the collection
+                    // initializer element is obsolete. Don't use this overload
                     //         B coll = new B { 1, new B(), "a", false };
                     Diagnostic(ErrorCode.ERR_DeprecatedCollectionInitAddStr, @"""a""")
                         .WithArguments("B.Add(string)", "Don't use this overload"),
-                    // (9,43): warning CS1064: The best overloaded Add method 'B.Add(bool)' for the collection initializer element is obsolete.
+                    // (9,43): warning CS1064: The best overloaded Add method 'B.Add(bool)' for the collection
+                    // initializer element is obsolete.
                     //         B coll = new B { 1, new B(), "a", false };
                     Diagnostic(ErrorCode.WRN_DeprecatedCollectionInitAdd, "false")
                         .WithArguments("B.Add(bool)")
@@ -8432,12 +8544,14 @@ public class Test
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (43,9): warning CS0672: Member 'DerivedAtt.Prop1.set' overrides obsolete member 'BaseAtt.Prop1.set'. Add the Obsolete attribute to 'DerivedAtt.Prop1.set'.
+                    // (43,9): warning CS0672: Member 'DerivedAtt.Prop1.set' overrides obsolete member
+                    // 'BaseAtt.Prop1.set'. Add the Obsolete attribute to 'DerivedAtt.Prop1.set'.
                     //         set { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "set")
                         .WithArguments("DerivedAtt.Prop1.set", "BaseAtt.Prop1.set")
                         .WithLocation(43, 9),
-                    // (55,36): warning CS0809: Obsolete member 'DerivedAtt.Prop3.set' overrides non-obsolete member 'BaseAtt.Prop3.set'
+                    // (55,36): warning CS0809: Obsolete member 'DerivedAtt.Prop3.set' overrides non-obsolete member
+                    // 'BaseAtt.Prop3.set'
                     //         [Obsolete("setter", true)] set { }
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "set")
                         .WithArguments("DerivedAtt.Prop3.set", "BaseAtt.Prop3.set")
@@ -8880,7 +8994,10 @@ class D
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A")
                     .WithArguments("A")
                     .WithLocation(11, 24),
-                // (21,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid on event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method, property, indexer, field, event, interface, parameter, delegate, return, type parameter' declarations.
+                // (21,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid
+                // on event accessors. It is only valid on 'assembly, module, class, struct, enum, constructor, method,
+                // property, indexer, field, event, interface, parameter, delegate, return, type parameter'
+                // declarations.
                 //         [Deprecated(null, DeprecationType.Deprecate, 0)] remove { M(new C()); }
                 Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Deprecated")
                     .WithArguments(
@@ -9017,27 +9134,33 @@ class Test
             // All member accesses produce obsolete warnings.
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
+                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute
+                    // to 'B.P'.
                     //     public override int P { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
                         .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'B.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("B.M()", "A.M()"),
-                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
+                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute
+                    // to 'B.E'.
                     //     public override event Action E { add { } remove { } }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
                         .WithArguments("B.E", "A.E"),
-                    // (24,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                    // (24,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute
+                    // to 'C.P'.
                     //     public override int P { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
                         .WithArguments("C.P", "A.P"),
-                    // (25,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                    // (25,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'C.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("C.M()", "A.M()"),
-                    // (23,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                    // (23,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute
+                    // to 'C.E'.
                     //     public override event Action E { add { } remove { } }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
                         .WithArguments("C.E", "A.E"),
@@ -9176,11 +9299,13 @@ class Test
             // All member accesses produce obsolete warnings.
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (17,26): warning CS0672: Member 'C<T>.M()' overrides obsolete member 'A<T>.M()'. Add the Obsolete attribute to 'C<T>.M()'.
+                    // (17,26): warning CS0672: Member 'C<T>.M()' overrides obsolete member 'A<T>.M()'. Add the Obsolete
+                    // attribute to 'C<T>.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("C<T>.M()", "A<T>.M()"),
-                    // (12,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A<int>.M()'. Add the Obsolete attribute to 'B.M()'.
+                    // (12,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A<int>.M()'. Add the Obsolete
+                    // attribute to 'B.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("B.M()", "A<int>.M()"),
@@ -9229,7 +9354,8 @@ class Test
             // All member accesses produce obsolete warnings.
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,26): warning CS0672: Member 'B.M<T>()' overrides obsolete member 'A.M<T>()'. Add the Obsolete attribute to 'B.M<T>()'.
+                    // (12,26): warning CS0672: Member 'B.M<T>()' overrides obsolete member 'A.M<T>()'. Add the Obsolete
+                    // attribute to 'B.M<T>()'.
                     //     public override void M<T>() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("B.M<T>()", "A.M<T>()"),
@@ -9289,27 +9415,33 @@ public class C : B
             // Reported in B.Test and C.Test against members of A.
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'B.P'.
+                    // (17,25): warning CS0672: Member 'B.P' overrides obsolete member 'A.P'. Add the Obsolete attribute
+                    // to 'B.P'.
                     //     public override int P { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
                         .WithArguments("B.P", "A.P"),
-                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                    // (18,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'B.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("B.M()", "A.M()"),
-                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'B.E'.
+                    // (16,34): warning CS0672: Member 'B.E' overrides obsolete member 'A.E'. Add the Obsolete attribute
+                    // to 'B.E'.
                     //     public override event Action E { add { } remove { } }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
                         .WithArguments("B.E", "A.E"),
-                    // (31,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                    // (31,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute
+                    // to 'C.P'.
                     //     public override int P { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
                         .WithArguments("C.P", "A.P"),
-                    // (32,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                    // (32,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'C.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("C.M()", "A.M()"),
-                    // (30,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                    // (30,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute
+                    // to 'C.E'.
                     //     public override event Action E { add { } remove { } }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
                         .WithArguments("C.E", "A.E"),
@@ -9383,19 +9515,23 @@ public class C : B
     }
 }
 ";
-            // Reported in B.Test and C.Test against members of A (seems like C.Test should report against members of B,
+            // Reported in B.Test and C.Test against members of A (seems like C.Test should report against
+            // members of B,
             // but this is dev11's behavior).
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (34,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute to 'C.P'.
+                    // (34,25): warning CS0672: Member 'C.P' overrides obsolete member 'A.P'. Add the Obsolete attribute
+                    // to 'C.P'.
                     //     public override int P { get; set; }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "P")
                         .WithArguments("C.P", "A.P"),
-                    // (35,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'C.M()'.
+                    // (35,26): warning CS0672: Member 'C.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'C.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("C.M()", "A.M()"),
-                    // (33,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute to 'C.E'.
+                    // (33,34): warning CS0672: Member 'C.E' overrides obsolete member 'A.E'. Add the Obsolete attribute
+                    // to 'C.E'.
                     //     public override event Action E { add { } remove { } }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "E")
                         .WithArguments("C.E", "A.E"),
@@ -9527,7 +9663,8 @@ public class C : B
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (15,25): warning CS0809: Obsolete member 'B.this[int]' overrides non-obsolete member 'A.this[int]'
+                    // (15,25): warning CS0809: Obsolete member 'B.this[int]' overrides non-obsolete member
+                    // 'A.this[int]'
                     //     public override int this[int x] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_ObsoleteOverridingNonObsolete, "this")
                         .WithArguments("B.this[int]", "A.this[int]"),
@@ -10072,12 +10209,14 @@ class C
             var diags = comp.GetDiagnostics();
 
             diags.Verify(
-                // (10,23): error CS0102: The type 'ObsoleteAttribute' already contains a definition for 'DiagnosticId'
+                // (10,23): error CS0102: The type 'ObsoleteAttribute' already contains a definition for
+                // 'DiagnosticId'
                 //         public string DiagnosticId { get; set; } // 1
                 Diagnostic(ErrorCode.ERR_DuplicateNameInClass, "DiagnosticId")
                     .WithArguments("System.ObsoleteAttribute", "DiagnosticId")
                     .WithLocation(10, 23),
-                // (16,15): error CS0229: Ambiguity between 'ObsoleteAttribute.DiagnosticId' and 'ObsoleteAttribute.DiagnosticId'
+                // (16,15): error CS0229: Ambiguity between 'ObsoleteAttribute.DiagnosticId' and
+                // 'ObsoleteAttribute.DiagnosticId'
                 //     [Obsolete(DiagnosticId = "TEST1")] // 2
                 Diagnostic(ErrorCode.ERR_AmbigMember, "DiagnosticId")
                     .WithArguments(
@@ -11007,7 +11146,8 @@ class C2 : C1
         [Fact, WorkItem(42119, "https://github.com/dotnet/roslyn/issues/42119")]
         public void Obsolete_CustomDiagnosticId_BadMetadata_07()
         {
-            // In this program C1.M1 has an ObsoleteAttribute with multiple values provided for DiagnosticId and UrlFormat
+            // In this program C1.M1 has an ObsoleteAttribute with multiple values provided for DiagnosticId and
+            // UrlFormat
             var ilSource =
                 @"
 .assembly extern mscorlib
@@ -11150,7 +11290,8 @@ class C2 : C1
         [Fact, WorkItem(42119, "https://github.com/dotnet/roslyn/issues/42119")]
         public void Obsolete_CustomDiagnosticId_BadMetadata_08()
         {
-            // In this program C1.M1 has an ObsoleteAttribute with a malformed value provided for a named argument
+            // In this program C1.M1 has an ObsoleteAttribute with a malformed value provided for a named
+            // argument
             var ilSource =
                 @"
 .assembly extern mscorlib
@@ -11503,14 +11644,17 @@ class C : ReadWriteControlDesigner
             model.GetSymbolInfo(syntax);
 
             comp2.VerifyDiagnostics(
-                // (6,29): warning CS0672: Member 'C.OnBehaviorAttached()' overrides obsolete member 'System.Web.UI.Design.ReadWriteControlDesignerBase.OnBehaviorAttached()'. Add the Obsolete attribute to 'C.OnBehaviorAttached()'.
+                // (6,29): warning CS0672: Member 'C.OnBehaviorAttached()' overrides obsolete member
+                // 'System.Web.UI.Design.ReadWriteControlDesignerBase.OnBehaviorAttached()'. Add the Obsolete attribute
+                // to 'C.OnBehaviorAttached()'.
                 //     protected override void OnBehaviorAttached()
                 Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "OnBehaviorAttached")
                     .WithArguments(
                         "C.OnBehaviorAttached()",
                         "System.Web.UI.Design.ReadWriteControlDesignerBase.OnBehaviorAttached()"
                     ),
-                // (8,9): warning CS0618: 'System.Web.UI.Design.ReadWriteControlDesignerBase.OnBehaviorAttached()' is obsolete: 'A'
+                // (8,9): warning CS0618: 'System.Web.UI.Design.ReadWriteControlDesignerBase.OnBehaviorAttached()'
+                // is obsolete: 'A'
                 //         base.OnBehaviorAttached();
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "base.OnBehaviorAttached()")
                     .WithArguments(
@@ -11566,7 +11710,8 @@ public class F : E
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (13,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete attribute to 'B.M()'.
+                    // (13,26): warning CS0672: Member 'B.M()' overrides obsolete member 'A.M()'. Add the Obsolete
+                    // attribute to 'B.M()'.
                     //     public override void M() { }
                     Diagnostic(ErrorCode.WRN_NonObsoleteOverridingObsolete, "M")
                         .WithArguments("B.M()", "A.M()"),
@@ -11740,7 +11885,9 @@ class Class6
                 Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "x6.P2")
                     .WithArguments("Class6.P2.set", "P1.get is deprecated.")
                     .WithLocation(22, 9),
-                // (52,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
+                // (52,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid
+                // on event accessors. It is only valid on 'class, struct, enum, constructor, method, property,
+                // indexer, field, event, interface, delegate' declarations.
                 //         [Deprecated("E1.add is deprecated.", DeprecationType.Remove, 1)]
                 Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Deprecated")
                     .WithArguments(
@@ -12159,7 +12306,8 @@ class Test
 
             var expected = new[]
             {
-                // (8,9): error CS0619: 'IExceptionalInterface.ExceptionalProp.set' is obsolete: 'Changed my mind; don't put this prop.'
+                // (8,9): error CS0619: 'IExceptionalInterface.ExceptionalProp.set' is obsolete: 'Changed my mind;
+                // don't put this prop.'
                 //         i.ExceptionalProp = "goo";
                 Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "i.ExceptionalProp")
                     .WithArguments(
@@ -12167,7 +12315,8 @@ class Test
                         "Changed my mind; don't put this prop."
                     )
                     .WithLocation(8, 9),
-                // (9,27): error CS0619: 'IExceptionalInterface.ExceptionalProp.get' is obsolete: 'Actually, don't even use the prop at all.'
+                // (9,27): error CS0619: 'IExceptionalInterface.ExceptionalProp.get' is obsolete: 'Actually, don't
+                // even use the prop at all.'
                 //         Console.WriteLine(i.ExceptionalProp);
                 Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "i.ExceptionalProp")
                     .WithArguments(
@@ -16029,7 +16178,8 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularPreview
             );
             comp.VerifyDiagnostics(
-                // (4,19): error CS8983: A 'struct' with field initializers must include an explicitly declared constructor.
+                // (4,19): error CS8983: A 'struct' with field initializers must include an explicitly declared
+                // constructor.
                 //     public struct IsReadOnlyAttribute
                 Diagnostic(
                         ErrorCode.ERR_StructHasInitializersAndNoDeclaredConstructor,
@@ -16161,7 +16311,8 @@ class C
 
             CreateCompilation(code, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3))
                 .VerifyDiagnostics(
-                    // (4,24): error CS8652: The feature 'obsolete on property accessor' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (4,24): error CS8652: The feature 'obsolete on property accessor' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //     public int Prop { [Obsolete] get; set; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "Obsolete")
                         .WithArguments("obsolete on property accessor", "8.0")
@@ -16187,8 +16338,10 @@ class C
                     parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
-                    // (5,24): error CS8652: The feature 'obsolete on property accessor' is not available in C# 7.3. Please use language version 8.0 or greater.
-                    //     public int Prop { [Deprecated("don't use this", DeprecationType.Remove, 50331648u)] get; set; }
+                    // (5,24): error CS8652: The feature 'obsolete on property accessor' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
+                    //     public int Prop { [Deprecated("don't use this", DeprecationType.Remove, 50331648u)] get; set;
+                    // }
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
                             @"Deprecated(""don't use this"", DeprecationType.Remove, 50331648u)"
@@ -16221,7 +16374,9 @@ class C
 
             CreateCompilation(code, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3))
                 .VerifyDiagnostics(
-                    // (7,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
+                    // (7,10): error CS8423: Attribute 'System.ObsoleteAttribute' is not valid on event accessors. It is
+                    // only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface,
+                    // delegate' declarations.
                     //         [Obsolete]
                     Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Obsolete")
                         .WithArguments(
@@ -16259,7 +16414,9 @@ class C
                     parseOptions: new CSharpParseOptions(LanguageVersion.CSharp7_3)
                 )
                 .VerifyDiagnostics(
-                    // (7,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid on event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate' declarations.
+                    // (7,10): error CS8423: Attribute 'Windows.Foundation.Metadata.DeprecatedAttribute' is not valid on
+                    // event accessors. It is only valid on 'class, struct, enum, constructor, method, property, indexer,
+                    // field, event, interface, delegate' declarations.
                     //         [Deprecated("don't use this", DeprecationType.Remove, 50331648u)]
                     Diagnostic(ErrorCode.ERR_AttributeNotOnEventAccessor, "Deprecated")
                         .WithArguments(
@@ -16447,15 +16604,20 @@ class C
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (6,53): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
-                //         [System.Runtime.CompilerServices.MethodImpl(MethodCodeType = System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                //         [System.Runtime.CompilerServices.MethodImpl(MethodCodeType =
+                // System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                 Diagnostic(
                         ErrorCode.ERR_InvalidNamedArgument,
                         "MethodCodeType = System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining"
                     )
                     .WithArguments("MethodCodeType")
                     .WithLocation(6, 53),
-                // (6,70): error CS0266: Cannot implicitly convert type 'System.Runtime.CompilerServices.MethodImplOptions' to 'System.Runtime.CompilerServices.MethodCodeType'. An explicit conversion exists (are you missing a cast?)
-                //         [System.Runtime.CompilerServices.MethodImpl(MethodCodeType = System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                // (6,70): error CS0266: Cannot implicitly convert type
+                // 'System.Runtime.CompilerServices.MethodImplOptions' to
+                // 'System.Runtime.CompilerServices.MethodCodeType'. An explicit conversion exists (are you missing a
+                // cast?)
+                //         [System.Runtime.CompilerServices.MethodImpl(MethodCodeType =
+                // System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                 Diagnostic(
                         ErrorCode.ERR_NoImplicitConvCast,
                         "System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining"
@@ -16487,7 +16649,10 @@ class C
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (6,117): error CS0599: Invalid value for named attribute argument 'MethodCodeType'
-                //         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized, MethodCodeType = (System.Runtime.CompilerServices.MethodCodeType)System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+                //
+                // [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.Synchronized,
+                // MethodCodeType =
+                // (System.Runtime.CompilerServices.MethodCodeType)System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
                 Diagnostic(
                         ErrorCode.ERR_InvalidNamedArgument,
                         "MethodCodeType = (System.Runtime.CompilerServices.MethodCodeType)System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining"
@@ -16512,7 +16677,8 @@ public struct S2 { }
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (4,2): error CS1729: 'StructLayoutAttribute' does not contain a constructor that takes 0 arguments
+                // (4,2): error CS1729: 'StructLayoutAttribute' does not contain a constructor that takes 0
+                // arguments
                 // [StructLayout(CharSet=0)]
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "StructLayout(CharSet=0)")
                     .WithArguments("System.Runtime.InteropServices.StructLayoutAttribute", "0")
@@ -16586,7 +16752,8 @@ public class LegacyObject
 """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (11,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 // [Obsolete($"Do not use {nameof(LegacyObject)}{string.Empty}")]
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -16616,7 +16783,8 @@ public class var
                 Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "var")
                     .WithArguments("var", "error")
                     .WithLocation(3, 1),
-                // (6,14): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (6,14): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // public class var
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "var")
                     .WithArguments("var")
@@ -16640,7 +16808,8 @@ public class Legacy
 """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (2,7): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 'var' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using var = Legacy;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "var")
                     .WithArguments("var")
@@ -16694,12 +16863,14 @@ public class notnull
                 Diagnostic(ErrorCode.ERR_DeprecatedSymbolStr, "notnull")
                     .WithArguments("notnull", "error")
                     .WithLocation(7, 30),
-                // (12,14): warning CS8981: The type name 'unmanaged' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (12,14): warning CS8981: The type name 'unmanaged' only contains lower-cased ascii characters.
+                // Such names may become reserved for the language.
                 // public class unmanaged
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "unmanaged")
                     .WithArguments("unmanaged")
                     .WithLocation(12, 14),
-                // (17,14): warning CS8981: The type name 'notnull' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (17,14): warning CS8981: The type name 'notnull' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // public class notnull
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "notnull")
                     .WithArguments("notnull")
@@ -16735,12 +16906,14 @@ public class Legacy2
 """;
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (2,7): warning CS8981: The type name 'unmanaged' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 'unmanaged' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // using unmanaged = Legacy1;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "unmanaged")
                     .WithArguments("unmanaged")
                     .WithLocation(2, 7),
-                // (3,7): warning CS8981: The type name 'notnull' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (3,7): warning CS8981: The type name 'notnull' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // using notnull = Legacy2;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "notnull")
                     .WithArguments("notnull")

@@ -36,12 +36,14 @@ namespace System.Net.Http.Json
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref name="inputValue"/> serialized as JSON.
+        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref
+        // name="inputValue"/> serialized as JSON.
         /// </summary>
         /// <typeparam name="T">The type of the value to serialize.</typeparam>
         /// <param name="inputValue">The value to serialize.</param>
         /// <param name="mediaType">The media type to use for the content.</param>
-        /// <param name="options">Options to control the behavior during serialization, the default options are <see cref="JsonSerializerDefaults.Web"/>.</param>
+        /// <param name="options">Options to control the behavior during serialization, the default options
+        // are <see cref="JsonSerializerDefaults.Web"/>.</param>
         /// <returns>A <see cref="JsonContent"/> instance.</returns>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
@@ -52,12 +54,14 @@ namespace System.Net.Http.Json
         ) => Create(inputValue, JsonHelpers.GetJsonTypeInfo(typeof(T), options), mediaType);
 
         /// <summary>
-        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref name="inputValue"/> serialized as JSON.
+        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref
+        // name="inputValue"/> serialized as JSON.
         /// </summary>
         /// <param name="inputValue">The value to serialize.</param>
         /// <param name="inputType">The type of the value to serialize.</param>
         /// <param name="mediaType">The media type to use for the content.</param>
-        /// <param name="options">Options to control the behavior during serialization, the default options are <see cref="JsonSerializerDefaults.Web"/>.</param>
+        /// <param name="options">Options to control the behavior during serialization, the default options
+        // are <see cref="JsonSerializerDefaults.Web"/>.</param>
         /// <returns>A <see cref="JsonContent"/> instance.</returns>
         [RequiresUnreferencedCode(HttpContentJsonExtensions.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(HttpContentJsonExtensions.SerializationDynamicCodeMessage)]
@@ -79,7 +83,8 @@ namespace System.Net.Http.Json
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref name="inputValue"/> serialized as JSON.
+        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref
+        // name="inputValue"/> serialized as JSON.
         /// </summary>
         /// <typeparam name="T">The type of the value to serialize.</typeparam>
         /// <param name="inputValue">The value to serialize.</param>
@@ -98,7 +103,8 @@ namespace System.Net.Http.Json
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref name="inputValue"/> serialized as JSON.
+        /// Creates a new instance of the <see cref="JsonContent"/> class that will contain the <paramref
+        // name="inputValue"/> serialized as JSON.
         /// </summary>
         /// <param name="inputValue">The value to serialize.</param>
         /// <param name="jsonTypeInfo">The JsonTypeInfo used to control the serialization behavior.</param>
@@ -149,7 +155,8 @@ namespace System.Net.Http.Json
             CancellationToken cancellationToken
         )
         {
-            // Wrap provided stream into a transcoding stream that buffers the data transcoded from utf-8 to the targetEncoding.
+            // Wrap provided stream into a transcoding stream that buffers the data transcoded from utf-8 to the
+            // targetEncoding.
 #if NETCOREAPP
             Stream transcodingStream = Encoding.CreateTranscodingStream(
                 targetStream,
@@ -199,7 +206,8 @@ namespace System.Net.Http.Json
                 await JsonSerializer
                     .SerializeAsync(transcodingStream, Value, _typeInfo, cancellationToken)
                     .ConfigureAwait(false);
-                // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush these
+                // The transcoding streams use Encoders and Decoders that have internal buffers. We need to flush
+                // these
                 // when there is no more data to be written. Stream.FlushAsync isn't suitable since it's
                 // acceptable to Flush a Stream (multiple times) prior to completion.
                 await transcodingStream.FinalWriteAsync(cancellationToken).ConfigureAwait(false);

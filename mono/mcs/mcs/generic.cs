@@ -1254,17 +1254,21 @@ namespace Mono.CSharp
                 return BaseType;
 
             //
-            // If T has a class-type constraint C but no type-parameter constraints, its effective base class is C
+            // If T has a class-type constraint C but no type-parameter constraints, its effective base class is
+            // C
             //
             if (BaseType != null && targs == null)
             {
                 //
-                // If T has a constraint V that is a value-type, use instead the most specific base type of V that is a class-type.
+                // If T has a constraint V that is a value-type, use instead the most specific base type of V that
+                // is a class-type.
                 //
                 // LAMESPEC: Is System.ValueType always the most specific base type in this case?
                 //
-                // Note: This can never happen in an explicitly given constraint, but may occur when the constraints of a generic method
-                // are implicitly inherited by an overriding method declaration or an explicit implementation of an interface method.
+                // Note: This can never happen in an explicitly given constraint, but may occur when the constraints
+                // of a generic method
+                // are implicitly inherited by an overriding method declaration or an explicit implementation of an
+                // interface method.
                 //
                 return BaseType.IsStruct ? BaseType.BaseType : BaseType;
             }

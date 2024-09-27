@@ -654,7 +654,8 @@ on a new line """
         [Theory, CombinatorialData]
         public async Task LinqFrom3(TestHost testHost)
         {
-            // query expression are not statement expressions, but the parser parses them anyways to give better errors
+            // query expression are not statement expressions, but the parser parses them anyways to give better
+            // errors
             var code = @"from it in ";
             await TestInMethodAsync(
                 code,
@@ -739,7 +740,8 @@ on a new line """
         [CombinatorialData]
         public async Task LinqKeywordsAtNamespaceLevel(bool script, TestHost testHost)
         {
-            // the contextual keywords are actual keywords since we parse top level field declaration and only give a semantic error
+            // the contextual keywords are actual keywords since we parse top level field declaration and only
+            // give a semantic error
             var code =
                 @"object goo = from goo in goo
              join goo in goo on goo equals goo

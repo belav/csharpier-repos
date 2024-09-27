@@ -20,10 +20,12 @@ namespace System.Threading.Channels
         /// </summary>
         public virtual Task Completion => ChannelUtilities.s_neverCompletingTask;
 
-        /// <summary>Gets whether <see cref="Count"/> is available for use on this <see cref="ChannelReader{T}"/> instance.</summary>
+        /// <summary>Gets whether <see cref="Count"/> is available for use on this <see
+        // cref="ChannelReader{T}"/> instance.</summary>
         public virtual bool CanCount => false;
 
-        /// <summary>Gets whether <see cref="TryPeek"/> is available for use on this <see cref="ChannelReader{T}"/> instance.</summary>
+        /// <summary>Gets whether <see cref="TryPeek"/> is available for use on this <see
+        // cref="ChannelReader{T}"/> instance.</summary>
         public virtual bool CanPeek => false;
 
         /// <summary>Gets the current number of items available from this channel reader.</summary>
@@ -44,10 +46,13 @@ namespace System.Threading.Channels
             return false;
         }
 
-        /// <summary>Returns a <see cref="ValueTask{Boolean}"/> that will complete when data is available to read.</summary>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the wait operation.</param>
+        /// <summary>Returns a <see cref="ValueTask{Boolean}"/> that will complete when data is available to
+        // read.</summary>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the wait
+        // operation.</param>
         /// <returns>
-        /// A <see cref="ValueTask{Boolean}"/> that will complete with a <c>true</c> result when data is available to read
+        /// A <see cref="ValueTask{Boolean}"/> that will complete with a <c>true</c> result when data is
+        // available to read
         /// or with a <c>false</c> result when no further data will ever be available to be read.
         /// </returns>
         public abstract ValueTask<bool> WaitToReadAsync(
@@ -55,8 +60,10 @@ namespace System.Threading.Channels
         );
 
         /// <summary>Asynchronously reads an item from the channel.</summary>
-        /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the read operation.</param>
-        /// <returns>A <see cref="ValueTask{TResult}"/> that represents the asynchronous read operation.</returns>
+        /// <param name="cancellationToken">A <see cref="CancellationToken"/> used to cancel the read
+        // operation.</param>
+        /// <returns>A <see cref="ValueTask{TResult}"/> that represents the asynchronous read
+        // operation.</returns>
         public virtual ValueTask<T> ReadAsync(CancellationToken cancellationToken = default)
         {
             if (cancellationToken.IsCancellationRequested)
@@ -96,11 +103,15 @@ namespace System.Threading.Channels
             }
         }
 
-        /// <summary>Creates an <see cref="IAsyncEnumerable{T}"/> that enables reading all of the data from the channel.</summary>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to use to cancel the enumeration.</param>
+        /// <summary>Creates an <see cref="IAsyncEnumerable{T}"/> that enables reading all of the data from
+        // the channel.</summary>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to use to cancel the
+        // enumeration.</param>
         /// <remarks>
-        /// Each <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> call that returns <c>true</c> will read the next item out of the channel.
-        /// <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> will return false once no more data is or will ever be available to read.
+        /// Each <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> call that returns <c>true</c> will read the
+        // next item out of the channel.
+        /// <see cref="IAsyncEnumerator{T}.MoveNextAsync"/> will return false once no more data is or will
+        // ever be available to read.
         /// </remarks>
         /// <returns>The created async enumerable.</returns>
         public virtual async IAsyncEnumerable<T> ReadAllAsync(

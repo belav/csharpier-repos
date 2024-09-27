@@ -16,13 +16,15 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
     internal static class CustomDataFlowAnalysis<TBlockAnalysisData>
     {
         /// <summary>
-        /// Runs dataflow analysis for the given <paramref name="analyzer"/> on the given <paramref name="controlFlowGraph"/>.
+        /// Runs dataflow analysis for the given <paramref name="analyzer"/> on the given <paramref
+        // name="controlFlowGraph"/>.
         /// </summary>
         /// <param name="controlFlowGraph">Control flow graph on which to execute analysis.</param>
         /// <param name="analyzer">Dataflow analyzer.</param>
         /// <returns>Block analysis data at the end of the exit block.</returns>
         /// <remarks>
-        /// Algorithm for this CFG walker has been forked from <see cref="ControlFlowGraphBuilder"/>'s internal
+        /// Algorithm for this CFG walker has been forked from <see cref="ControlFlowGraphBuilder"/>'s
+        // internal
         /// implementation for basic block reachability computation: "MarkReachableBlocks",
         /// we should keep them in sync as much as possible.
         /// </remarks>
@@ -377,7 +379,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     // For simplicity, we do a complete walk of the finally/filter region in isolation
                     // to make sure that the resume dispatch point is reachable from its beginning.
-                    // It could also be reachable through invalid branches into the finally and we don't want to consider
+                    // It could also be reachable through invalid branches into the finally and we don't want to
+                    // consider
                     // these cases for regular finally handling.
                     currentAnalysisData = RunCore(
                         blocks,

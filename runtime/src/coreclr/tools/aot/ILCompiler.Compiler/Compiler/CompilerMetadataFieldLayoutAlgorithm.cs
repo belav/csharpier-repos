@@ -40,7 +40,8 @@ namespace ILCompiler
                 layout.ThreadGcStatics.Size = LayoutInt.Zero;
             }
 
-            // NativeAOT makes no distinction between Gc / non-Gc thread statics. All are placed into ThreadGcStatics since thread statics
+            // NativeAOT makes no distinction between Gc / non-Gc thread statics. All are placed into
+            // ThreadGcStatics since thread statics
             // are typically rare.
             Debug.Assert(layout.ThreadNonGcStatics.Size == LayoutInt.Zero);
         }
@@ -54,7 +55,8 @@ namespace ILCompiler
             {
                 return ComputeExplicitFieldLayout(type, numInstanceFields);
             }
-            // Sequential layout has to be respected for blittable types only. We use approximation and respect it for
+            // Sequential layout has to be respected for blittable types only. We use approximation and respect
+            // it for
             // all types without GC references (ie C# unmanaged types).
             else if (type.IsSequentialLayout && !type.ContainsGCPointers)
             {

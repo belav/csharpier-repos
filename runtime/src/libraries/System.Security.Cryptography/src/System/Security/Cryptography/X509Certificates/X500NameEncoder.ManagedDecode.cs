@@ -36,7 +36,8 @@ namespace System.Security.Cryptography.X509Certificates
                 }
 
                 // We need to use a ValueStringBuilder to hold the data as we're building it, and there's the usual
-                // arbitrary process of choosing a number that's "big enough" to minimize reallocations without wasting
+                // arbitrary process of choosing a number that's "big enough" to minimize reallocations without
+                // wasting
                 // too much space in the average case.
                 //
                 // So, let's look at an example of what our output might be.

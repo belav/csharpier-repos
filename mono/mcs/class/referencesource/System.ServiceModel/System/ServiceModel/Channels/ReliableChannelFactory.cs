@@ -222,7 +222,8 @@ namespace System.ServiceModel.Channels
                                 channelParameters
                             );
 
-                // typeof(InnerChannel) == typeof(IRequestChannel) || typeof(InnerChannel) == typeof(IRequestSessionChannel))
+                // typeof(InnerChannel) == typeof(IRequestChannel) || typeof(InnerChannel) ==
+                // typeof(IRequestSessionChannel))
                 return (TChannel)
                     (object)
                         new ReliableOutputSessionChannelOverRequest(

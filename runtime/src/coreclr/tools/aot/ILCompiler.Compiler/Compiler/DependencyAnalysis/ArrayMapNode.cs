@@ -63,7 +63,8 @@ namespace ILCompiler.DependencyAnalysis
 
                 var arrayType = (ArrayType)type;
 
-                // Look at the constructed type symbol. If a constructed type wasn't emitted, then the array map entry isn't valid for use
+                // Look at the constructed type symbol. If a constructed type wasn't emitted, then the array map
+                // entry isn't valid for use
                 IEETypeNode arrayTypeSymbol = factory.ConstructedTypeSymbol(arrayType);
 
                 Vertex vertex = writer.GetUnsignedConstant(

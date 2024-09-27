@@ -23,7 +23,8 @@ namespace System.Xml.Xsl.Xslt
     using ScopeRecord = CompilerScopeManager<QilIterator>.ScopeRecord;
     using T = XmlQueryTypeFactory;
 
-    // Everywhere in this code in case of error in the stylesheet we should call ReportError or ReportWarning
+    // Everywhere in this code in case of error in the stylesheet we should call ReportError or
+    // ReportWarning
 
     internal class ReferenceReplacer : QilReplaceVisitor
     {
@@ -253,12 +254,16 @@ namespace System.Xml.Xsl.Xslt
 
         private void CompileInitializationCode()
         {
-            // Initialization code should be executed before any other code (global variables/parameters or root expression)
-            // For this purpose we insert it as THE FIRST global variable $init (global variables are calculated before global parameters)
+            // Initialization code should be executed before any other code (global variables/parameters or root
+            // expression)
+            // For this purpose we insert it as THE FIRST global variable $init (global variables are calculated
+            // before global parameters)
             // and put all initalization code in it.
             // In retail mode global variables are calculated lasely if they don't have side effects.
-            // To mark $init as variable with side effect we put all code to function and set SideEffect flag on this function.
-            // ILGen expects that all library functions are sideeffect free. To prevent calls to RegisterDecimalFormat() to be optimized out
+            // To mark $init as variable with side effect we put all code to function and set SideEffect flag on
+            // this function.
+            // ILGen expects that all library functions are sideeffect free. To prevent calls to
+            // RegisterDecimalFormat() to be optimized out
             // we add results returned from these calls and return them as a result of initialization function.
             QilNode init = f.Int32(0);
 
@@ -347,17 +352,23 @@ namespace System.Xml.Xsl.Xslt
             return null;
         }
 
-        // For each call instruction - call-template, use-attribute-sets, apply-template, apply-imports - we have
-        // to pass the current execution context which may be represented as three additional implicit arguments:
+        // For each call instruction - call-template, use-attribute-sets, apply-template, apply-imports - we
+        // have
+        // to pass the current execution context which may be represented as three additional implicit
+        // arguments:
         // current, position, last.  In most cases the last two ones are never used, so for the purpose
         // of optimization in non-debug mode we bind them only if they are actually needed.
 
-        // Strictly speaking, a (proto)template function is supplied with the additional position argument if both
+        // Strictly speaking, a (proto)template function is supplied with the additional position argument
+        // if both
         // the following conditions are true:
-        //   1. At least one template within the given stylesheet contains a "----" position() function invocation
+        //   1. At least one template within the given stylesheet contains a "----" position() function
+        // invocation
         //      (needPositionArgs == true).  ---- here means "not within any of for-each instructions".
-        //   2. THIS template contains a ---- position() invocation or a ---- call-template, use-attribute-sets,
-        //      or apply-imports instruction.  Note: apply-template's are not taken into account because in that
+        //   2. THIS template contains a ---- position() invocation or a ---- call-template,
+        // use-attribute-sets,
+        //      or apply-imports instruction.  Note: apply-template's are not taken into account because in
+        // that
         //      case the call will be actually wrapped in a tuple.
         //
         // The same is true for additional last arguments.
@@ -368,7 +379,8 @@ namespace System.Xml.Xsl.Xslt
         // 3. In context of global variable
         // We treating this methods differentely when they are called to create implicit arguments.
         // Implicite argument (position, last) are rare and lead to uneficiant code. So we treating them
-        // specialy to be able eliminate them later, wen we compiled everithing and can detect was they used or not.
+        // specialy to be able eliminate them later, wen we compiled everithing and can detect was they used
+        // or not.
 
         // Returns context node
         private QilNode GetCurrentNode()
@@ -456,10 +468,13 @@ namespace System.Xml.Xsl.Xslt
             }
         }
 
-        // In debugger we need to pass to each (almost) template $namespace parameter with list of namespaces that
+        // In debugger we need to pass to each (almost) template $namespace parameter with list of
+        // namespaces that
         // are defined on stylesheet and this template. In most cases this will be only xmlns:xsl="..."
-        // To prevent creating these list with each call-template/apply-template we create one global variable for each unique set of namespaces
-        // This function looks through list of existent global variables for suitable ns list and add one if none was found.
+        // To prevent creating these list with each call-template/apply-template we create one global
+        // variable for each unique set of namespaces
+        // This function looks through list of existent global variables for suitable ns list and add one if
+        // none was found.
         private QilIterator GetNsVar(QilList nsList)
         {
             Debug.Assert(IsDebug, "This is debug only logic");
@@ -592,8 +607,10 @@ namespace System.Xml.Xsl.Xslt
                                 {
                                     // We can't compile param default value here because it contains xsl:call-template and
                                     // we will not be able to compile any calls befor we finish with all headers
-                                    // So we compile this default value as a call to helper function. Now we create header for this function
-                                    // and preserve this param in paramWithCall list. Later in this function we finaly compile all preserved
+                                    // So we compile this default value as a call to helper function. Now we create header for this
+                                    // function
+                                    // and preserve this param in paramWithCall list. Later in this function we finaly compile all
+                                    // preserved
                                     // parameters and set resulted default values as helper function definition.
                                     QilList paramFormal = f.FormalParameterList();
                                     QilList paramActual = f.ActualParameterList();
@@ -608,7 +625,8 @@ namespace System.Xml.Xsl.Xslt
                                         paramFormal.Add(formal);
                                         paramActual.Add(args[j]);
                                     }
-                                    // Param doesn't know what implicit args it needs, so we pass all implicit args that was passed to its template.
+                                    // Param doesn't know what implicit args it needs, so we pass all implicit args that was passed to
+                                    // its template.
                                     // let's reflect this fact in parans FocusFlags:
                                     xslPar.Flags |= (template.Flags & XslFlags.FocusFilter);
                                     QilFunction paramFunc = f.Function(
@@ -736,8 +754,10 @@ namespace System.Xml.Xsl.Xslt
                 }
             }
             tmpl.Function.Definition = CompileInstructions(tmpl.Content);
-            // tmpl.Function.Definition = AddCurrentPositionLast(tmpl.Function.Definition); We don't mask Cur,Pos,Last parameters with Cur,Pos,Last wariables any more
-            // tmpl.Function.Definition = SetDebugNs(tmpl.Function.Definition, nsList); We add it as parameter now.
+            // tmpl.Function.Definition = AddCurrentPositionLast(tmpl.Function.Definition); We don't mask
+            // Cur,Pos,Last parameters with Cur,Pos,Last wariables any more
+            // tmpl.Function.Definition = SetDebugNs(tmpl.Function.Definition, nsList); We add it as parameter
+            // now.
             funcFocus.StopFocus();
 
             ExitScope();
@@ -838,7 +858,8 @@ namespace System.Xml.Xsl.Xslt
                     case XslNodeType.PI:
                         result = CompilePI(node);
                         break;
-                    //              case XslNodeType.Sort:              wrapped by ForEach or ApplyTemplates, see CompileSorts()
+                    //              case XslNodeType.Sort:              wrapped by ForEach or ApplyTemplates, see
+                    // CompileSorts()
                     //              case XslNodeType.Template:          global level element
                     case XslNodeType.Text:
                         result = CompileText((Text)node);
@@ -855,7 +876,8 @@ namespace System.Xml.Xsl.Xslt
                     case XslNodeType.Variable:
                         result = CompileVariable(node);
                         break;
-                    //              case XslNodeType.WithParam:         wrapped by CallTemplate or ApplyTemplates, see CompileWithParam()
+                    //              case XslNodeType.WithParam:         wrapped by CallTemplate or ApplyTemplates, see
+                    // CompileWithParam()
                     default:
                         Debug.Fail("Unexpected type of AST node: " + nodeType.ToString());
                         result = null;
@@ -1092,7 +1114,8 @@ namespace System.Xml.Xsl.Xslt
                 else
                 {
                     nsUri = (string)(QilLiteral)qilNs;
-                    // if both name and ns are non AVT and this ns is already bind to the same prefix we can avoid reseting ns management
+                    // if both name and ns are non AVT and this ns is already bind to the same prefix we can avoid
+                    // reseting ns management
                     explicitNamespace = true;
                 }
                 // Check the case <xsl:attribute name="foo:xmlns" namespace=""/>
@@ -1702,7 +1725,8 @@ namespace System.Xml.Xsl.Xslt
 
             if (select != null)
             {
-                // In case of incorrect stylesheet, variable or parameter may have both a 'select' attribute and non-empty content
+                // In case of incorrect stylesheet, variable or parameter may have both a 'select' attribute and
+                // non-empty content
                 QilList list = InstructionList();
                 list.Add(CompileXPathExpression(select));
                 varValue = CompileInstructions(content, list);
@@ -2047,19 +2071,19 @@ namespace System.Xml.Xsl.Xslt
                 CompileDataTypeAttribute(sort.DataType, fwdCompat, ref select, out select2);
 
                 order = CompileOrderAttribute(
-                    /*attName:  */"order",
-                    /*attValue: */sort.Order,
-                    /*value0:   */"ascending",
-                    /*value1:   */"descending",
-                    /*fwdCompat:*/fwdCompat
+/*attName:  */"order",
+/*attValue: */sort.Order,
+/*value0:   */"ascending",
+/*value1:   */"descending",
+/*fwdCompat:*/fwdCompat
                 );
 
                 caseOrder = CompileOrderAttribute(
-                    /*attName:  */"case-order",
-                    /*attValue: */sort.CaseOrder,
-                    /*value0:   */"lower-first",
-                    /*value1:   */"upper-first",
-                    /*fwdCompat:*/fwdCompat
+/*attName:  */"case-order",
+/*attValue: */sort.CaseOrder,
+/*value0:   */"lower-first",
+/*value1:   */"upper-first",
+/*fwdCompat:*/fwdCompat
                 );
 
                 // Restore loop context
@@ -2139,11 +2163,11 @@ namespace System.Xml.Xsl.Xslt
 
         private QilNode MatchCountPattern(QilNode countPattern, QilIterator testNode)
         {
-            /*
-                If the 'count' attribute is not specified, then it defaults to the pattern that matches any node
-                with the same node kind as the context node and, if the context node has an expanded-QName, with
-                the same expanded-QName as the context node.
-            */
+/*
+If the 'count' attribute is not specified, then it defaults to the pattern that matches any node
+with the same node kind as the context node and, if the context node has an expanded-QName, with
+the same expanded-QName as the context node.
+*/
             if (countPattern != null)
             {
                 return MatchPattern(countPattern, testNode);
@@ -2203,25 +2227,25 @@ namespace System.Xml.Xsl.Xslt
 
         private QilNode PlaceMarker(QilNode countPattern, QilNode fromPattern, bool multiple)
         {
-            /*
-                Quotation from XSLT 2.0 spec:
-                * Let $A be the node sequence selected by the expression
-                    ancestor-or-self::node()[matches-count(.)]          (level = "multiple")
-                    ancestor-or-self::node()[matches-count(.)][1]       (level = "single")
-                * Let $F be the node sequence selected by the expression
-                    ancestor-or-self::node()[matches-from(.)][1]
-                * Let $AF be the value of
-                    $A intersect ($F/descendant-or-self::node())
-                * Return the result of the expression
-                    for $af in $AF return 1+count($af/preceding-sibling::node()[matches-count(.)])
+/*
+Quotation from XSLT 2.0 spec:
+* Let $A be the node sequence selected by the expression
+ancestor-or-self::node()[matches-count(.)]          (level = "multiple")
+ancestor-or-self::node()[matches-count(.)][1]       (level = "single")
+* Let $F be the node sequence selected by the expression
+ancestor-or-self::node()[matches-from(.)][1]
+* Let $AF be the value of
+$A intersect ($F/descendant-or-self::node())
+* Return the result of the expression
+for $af in $AF return 1+count($af/preceding-sibling::node()[matches-count(.)])
 
-                NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
-                1) Assume that the 'matches-from()' function does not match root nodes by default.
-                2) Instead of '$A intersect ($F/descendant-or-self::node())' (which, by the way,
-                   would filter out attribute and namespace nodes from $A) we calculate
-                     '$A'           if the 'from' attribute is omitted,
-                     '$A[. >> $F]'  if the 'from' attribute is present.
-            */
+NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
+1) Assume that the 'matches-from()' function does not match root nodes by default.
+2) Instead of '$A intersect ($F/descendant-or-self::node())' (which, by the way,
+would filter out attribute and namespace nodes from $A) we calculate
+'$A'           if the 'from' attribute is omitted,
+'$A[. >> $F]'  if the 'from' attribute is present.
+*/
 
             QilNode countPattern2,
                 countMatches,
@@ -2276,23 +2300,23 @@ namespace System.Xml.Xsl.Xslt
 
         private QilNode PlaceMarkerAny(QilNode countPattern, QilNode fromPattern)
         {
-            /*
-                Quotation from XSLT 2.0 spec:
-                * If the context node is a document node, return the empty sequence, ()
-                * Let $A be the node sequence selected by the expression
-                    (preceding::node()|ancestor-or-self::node())[matches-count(.)]
-                * Let $F be the node sequence selected by the expression
-                    (preceding::node()|ancestor::node())[matches-from(.)][last()]
-                * Let $AF be the node sequence $A[. is $F or . >> $F].
-                * If $AF is empty, return the empty sequence, ()
-                * Otherwise return the value of the expression count($AF)
+/*
+Quotation from XSLT 2.0 spec:
+* If the context node is a document node, return the empty sequence, ()
+* Let $A be the node sequence selected by the expression
+(preceding::node()|ancestor-or-self::node())[matches-count(.)]
+* Let $F be the node sequence selected by the expression
+(preceding::node()|ancestor::node())[matches-from(.)][last()]
+* Let $AF be the node sequence $A[. is $F or . >> $F].
+* If $AF is empty, return the empty sequence, ()
+* Otherwise return the value of the expression count($AF)
 
-                NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
-                1) Assume that the 'matches-from()' function does not match root nodes by default.
-                2) Instead of '$A[. is $F or . >> $F]' we calculate
-                     '$A'           if the 'from' attribute is omitted,
-                     '$A[. >> $F]'  if the 'from' attribute is present.
-            */
+NOTE: There are some distinctions between XSLT 1.0 and XSLT 2.0 specs. In our 1.0 implementation we:
+1) Assume that the 'matches-from()' function does not match root nodes by default.
+2) Instead of '$A[. is $F or . >> $F]' we calculate
+'$A'           if the 'from' attribute is omitted,
+'$A[. >> $F]'  if the 'from' attribute is present.
+*/
 
             QilNode range,
                 fromMatches,
@@ -2306,7 +2330,8 @@ namespace System.Xml.Xsl.Xslt
             {
                 // According to XSLT 2.0 spec, if the 'from' attribute is omitted, matches-from() returns true
                 // only for the root node. It means $F is a sequence of length one containing the root node,
-                // and $AF = $A. XSLT 1.0 spec rules lead to the same result $AF = $A, so two specs are compliant here.
+                // and $AF = $A. XSLT 1.0 spec rules lead to the same result $AF = $A, so two specs are compliant
+                // here.
                 range = f.NodeRange(f.Root(GetCurrentNode()), GetCurrentNode());
                 AF = f.Filter(i = f.For(range), MatchCountPattern(countPattern, i));
             }
@@ -2683,8 +2708,10 @@ namespace System.Xml.Xsl.Xslt
             return f.TypeAssert(f.Sequence(), T.NodeNotRtfS);
         }
 
-        // Calls to CompileXPathExpression() can't be nested in the XSLT. So we can reuse the same instance of xpathBuilder.
-        // The only thing we need to do before its use is adjustment of IXPathEnvironment to have correct context tuple.
+        // Calls to CompileXPathExpression() can't be nested in the XSLT. So we can reuse the same instance
+        // of xpathBuilder.
+        // The only thing we need to do before its use is adjustment of IXPathEnvironment to have correct
+        // context tuple.
         private QilNode CompileXPathExpression(string expr)
         {
             XPathScanner scanner;
@@ -2993,7 +3020,8 @@ namespace System.Xml.Xsl.Xslt
 
         private IList<XslNode> AddRemoveImplicitArgs(IList<XslNode> args, XslFlags flags)
         {
-            //We currently don't reuse the same argument list. So remove is not needed and will not work in this code
+            //We currently don't reuse the same argument list. So remove is not needed and will not work in this
+            // code
             if (IsDebug)
             {
                 flags = XslFlags.FullFocus;
@@ -3096,7 +3124,8 @@ namespace System.Xml.Xsl.Xslt
             // From it we create:
             // invokeArgs -- values to use with QilInvoke
             // formalArgs -- list of iterators to use with QilFunction
-            // actualArgs -- modify it to hold iterators (formalArgs) instead of values to ise in invoke generator inside function budy
+            // actualArgs -- modify it to hold iterators (formalArgs) instead of values to ise in invoke
+            // generator inside function budy
 
             XslFlags flags;
             {
@@ -3111,7 +3140,8 @@ namespace System.Xml.Xsl.Xslt
             QilList invokeArgs = f.ActualParameterList();
             QilFunction applyFunction = null;
 
-            // Look at the list of all functions that have been already built.  If a suitable one is found, reuse it.
+            // Look at the list of all functions that have been already built.  If a suitable one is found,
+            // reuse it.
             List<QilFunction> functionsForMode;
             if (!sheet.ApplyFunctions.TryGetValue(mode, out functionsForMode))
             {
@@ -3198,7 +3228,7 @@ namespace System.Xml.Xsl.Xslt
                     LoopFocus curLoopSaved = curLoop;
                     curLoop.SetFocus(f.For(filter));
 
-                    /* Prepare actual arguments */
+/* Prepare actual arguments */
                     // At XSLT 1.0, if a built-in template rule is invoked with parameters, the parameters are not
                     // passed on to any templates invoked by the built-in rule. At XSLT 2.0, these parameters are
                     // passed through the built-in template rule unchanged.

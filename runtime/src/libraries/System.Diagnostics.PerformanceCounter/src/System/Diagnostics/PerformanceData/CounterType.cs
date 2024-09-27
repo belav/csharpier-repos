@@ -4,7 +4,8 @@
 namespace System.Diagnostics.PerformanceData
 {
     /// <summary>
-    /// Enum of friendly names to counter types (maps directory to the native types defined in winperf.h).
+    /// Enum of friendly names to counter types (maps directory to the native types defined in
+    // winperf.h).
     /// </summary>
     public enum CounterType
     {

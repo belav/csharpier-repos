@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-//Dev10 bug #512868: Invalid context used for generic types during constraint verification leads to BadImageFormatException
+//Dev10 bug #512868: Invalid context used for generic types during constraint verification leads to
+// BadImageFormatException
 
 using System;
 using Xunit;

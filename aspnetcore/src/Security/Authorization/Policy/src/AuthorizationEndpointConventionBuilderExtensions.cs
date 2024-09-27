@@ -33,7 +33,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// Adds authorization policies with the specified names to the endpoint(s).
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
-    /// <param name="policyNames">A collection of policy names. If empty, the default authorization policy will be used.</param>
+    /// <param name="policyNames">A collection of policy names. If empty, the default authorization
+    // policy will be used.</param>
     /// <returns>The original convention builder parameter.</returns>
     public static TBuilder RequireAuthorization<TBuilder>(
         this TBuilder builder,
@@ -58,7 +59,8 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="authorizeData">
-    /// A collection of <paramref name="authorizeData"/>. If empty, the default authorization policy will be used.
+    /// A collection of <paramref name="authorizeData"/>. If empty, the default authorization policy
+    // will be used.
     /// </param>
     /// <returns>The original convention builder parameter.</returns>
     public static TBuilder RequireAuthorization<TBuilder>(
@@ -133,8 +135,10 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     }
 
     /// <summary>
-    /// Allows anonymous access to the endpoint by adding <see cref="AllowAnonymousAttribute" /> to the endpoint metadata. This will bypass
-    /// all authorization checks for the endpoint including the default authorization policy and fallback authorization policy.
+    /// Allows anonymous access to the endpoint by adding <see cref="AllowAnonymousAttribute" /> to the
+    // endpoint metadata. This will bypass
+    /// all authorization checks for the endpoint including the default authorization policy and
+    // fallback authorization policy.
     /// </summary>
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>

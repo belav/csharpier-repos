@@ -20,36 +20,49 @@ namespace Microsoft.CodeAnalysis
             {
                 /// <summary>
                 /// The best generated documents we have for the current state. <see cref="DocumentsAreFinal"/>
-                /// specifies whether the documents are to be considered final and can be reused, or whether they're from
+                /// specifies whether the documents are to be considered final and can be reused, or whether they're
+                // from
                 /// a prior snapshot which needs to be recomputed.
                 /// </summary>
                 public readonly TextDocumentStates<SourceGeneratedDocumentState> Documents;
 
                 /// <summary>
-                /// The <see cref="GeneratorDriver"/> that was used for the last run, to allow for incremental reuse. May
-                /// be null if we don't have generators in the first place, haven't ran generators yet for this project,
+                /// The <see cref="GeneratorDriver"/> that was used for the last run, to allow for incremental
+                // reuse. May
+                /// be null if we don't have generators in the first place, haven't ran generators yet for this
+                // project,
                 /// or had to get rid of our driver for some reason.
                 /// </summary>
                 public readonly GeneratorDriver? Driver;
 
                 /// <summary>
-                /// Whether the generated documents in <see cref="Documents"/> are final and should not be regenerated.
-                /// It's important that once we've ran generators once we don't want to run them again. Once we've ran
-                /// them the first time, those syntax trees are visible from other parts of the Workspaces model; if we
-                /// run them a second time we'd end up with new trees which would confuse our snapshot model -- once the
+                /// Whether the generated documents in <see cref="Documents"/> are final and should not be
+                // regenerated.
+                /// It's important that once we've ran generators once we don't want to run them again. Once we've
+                // ran
+                /// them the first time, those syntax trees are visible from other parts of the Workspaces model; if
+                // we
+                /// run them a second time we'd end up with new trees which would confuse our snapshot model -- once
+                // the
                 /// tree has been handed out we can't make a second tree later.
                 /// </summary>
                 public readonly bool DocumentsAreFinal;
 
                 /// <summary>
-                /// Whether the generated documents are frozen and generators should never be ran again, ever, even if a document
-                /// is later changed. This is used to ensure that when we produce a frozen solution for partial semantics,
-                /// further downstream forking of that solution won't rerun generators. This is because of two reasons:
+                /// Whether the generated documents are frozen and generators should never be ran again, ever, even
+                // if a document
+                /// is later changed. This is used to ensure that when we produce a frozen solution for partial
+                // semantics,
+                /// further downstream forking of that solution won't rerun generators. This is because of two
+                // reasons:
                 /// <list type="number">
-                /// <item>Generally once we've produced a frozen solution with partial semantics, we now want speed rather
+                /// <item>Generally once we've produced a frozen solution with partial semantics, we now want speed
+                // rather
                 /// than accuracy; a generator running in a later path will still cause issues there.</item>
-                /// <item>The frozen solution with partial semantics makes no guarantee that other syntax trees exist or
-                /// whether we even have references -- it's pretty likely that running a generator might produce worse results
+                /// <item>The frozen solution with partial semantics makes no guarantee that other syntax trees
+                // exist or
+                /// whether we even have references -- it's pretty likely that running a generator might produce
+                // worse results
                 /// than what we originally had.</item>
                 /// </list>
                 /// </summary>
@@ -73,10 +86,14 @@ namespace Microsoft.CodeAnalysis
 
                 public CompilationTrackerGeneratorInfo WithDocumentsAreFinal(bool documentsAreFinal)
                 {
-                    // If we're already frozen, then we won't do anything even if somebody calls WithDocumentsAreFinal(false);
-                    // this for example would happen if we had a frozen snapshot, and then we fork it further with additional changes.
-                    // In that case we would be calling WithDocumentsAreFinal(false) to force generators to run again, but if we've
-                    // frozen in partial semantics, we're done running them period. So we'll just keep treating them as final,
+                    // If we're already frozen, then we won't do anything even if somebody calls
+                    // WithDocumentsAreFinal(false);
+                    // this for example would happen if we had a frozen snapshot, and then we fork it further with
+                    // additional changes.
+                    // In that case we would be calling WithDocumentsAreFinal(false) to force generators to run again,
+                    // but if we've
+                    // frozen in partial semantics, we're done running them period. So we'll just keep treating them as
+                    // final,
                     // no matter the wishes of the caller.
                     if (DocumentsAreFinalAndFrozen || DocumentsAreFinal == documentsAreFinal)
                         return this;
@@ -103,8 +120,10 @@ namespace Microsoft.CodeAnalysis
             }
 
             /// <summary>
-            /// The base type of all <see cref="CompilationTracker"/> states. The state of a <see cref="CompilationTracker" />
-            /// starts at <see cref="Empty"/>, and then will progress through the other states until it finally reaches
+            /// The base type of all <see cref="CompilationTracker"/> states. The state of a <see
+            // cref="CompilationTracker" />
+            /// starts at <see cref="Empty"/>, and then will progress through the other states until it finally
+            // reaches
             /// <see cref="FinalState" />.
             /// </summary>
             private abstract class CompilationTrackerState
@@ -129,8 +148,10 @@ namespace Microsoft.CodeAnalysis
                 public CompilationTrackerGeneratorInfo GeneratorInfo { get; }
 
                 /// <summary>
-                /// Specifies whether <see cref="FinalCompilationWithGeneratedDocuments"/> and all compilations it depends on contain full information or not. This can return
-                /// <see langword="null"/> if the state isn't at the point where it would know, and it's necessary to transition to <see cref="FinalState"/> to figure that out.
+                /// Specifies whether <see cref="FinalCompilationWithGeneratedDocuments"/> and all compilations it
+                // depends on contain full information or not. This can return
+                /// <see langword="null"/> if the state isn't at the point where it would know, and it's necessary
+                // to transition to <see cref="FinalState"/> to figure that out.
                 /// </summary>
                 public virtual bool? HasSuccessfullyLoaded => null;
 
@@ -149,7 +170,8 @@ namespace Microsoft.CodeAnalysis
 
 #if DEBUG
 
-                    // As a sanity check, we should never see the generated trees inside of the compilation that should not
+                    // As a sanity check, we should never see the generated trees inside of the compilation that should
+                    // not
                     // have generated trees.
                     var compilation = compilationWithoutGeneratedDocuments;
 
@@ -180,7 +202,8 @@ namespace Microsoft.CodeAnalysis
                     Contract.ThrowIfTrue(intermediateProjects is null);
 
                     // If we don't have any intermediate projects to process, just initialize our
-                    // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being called
+                    // DeclarationState now. We'll pass false for generatedDocumentsAreFinal because this is being
+                    // called
                     // if our referenced projects are changing, so we'll have to rerun to consume changes.
                     return intermediateProjects.IsEmpty
                         ? new AllSyntaxTreesParsedState(
@@ -207,13 +230,15 @@ namespace Microsoft.CodeAnalysis
                 ) { }
 
             /// <summary>
-            /// A state where we are holding onto a previously built compilation, and have a known set of transformations
+            /// A state where we are holding onto a previously built compilation, and have a known set of
+            // transformations
             /// that could get us to a more final state.
             /// </summary>
             private sealed class InProgressState : CompilationTrackerState
             {
                 /// <summary>
-                /// The list of changes that have happened since we last computed a compilation. The oldState corresponds to
+                /// The list of changes that have happened since we last computed a compilation. The oldState
+                // corresponds to
                 /// the state of the project prior to the mutation.
                 /// </summary>
                 public ImmutableList<(
@@ -222,9 +247,12 @@ namespace Microsoft.CodeAnalysis
                 )> IntermediateProjects { get; }
 
                 /// <summary>
-                /// The result of taking the original completed compilation that had generated documents and updating them by
-                /// apply the <see cref="CompilationAndGeneratorDriverTranslationAction" />; this is not a correct snapshot in that
-                /// the generators have not been rerun, but may be reusable if the generators are later found to give the
+                /// The result of taking the original completed compilation that had generated documents and
+                // updating them by
+                /// apply the <see cref="CompilationAndGeneratorDriverTranslationAction" />; this is not a correct
+                // snapshot in that
+                /// the generators have not been rerun, but may be reusable if the generators are later found to
+                // give the
                 /// same output.
                 /// </summary>
                 public Compilation? CompilationWithGeneratedDocuments { get; }
@@ -261,14 +289,18 @@ namespace Microsoft.CodeAnalysis
             ) : CompilationTrackerState(declarationCompilation, generatorInfo) { }
 
             /// <summary>
-            /// The final state a compilation tracker reaches. The real <see cref="CompilationTrackerState.FinalCompilationWithGeneratedDocuments"/> is available. It is a
-            /// requirement that any <see cref="Compilation"/> provided to any clients of the <see cref="Solution"/>
+            /// The final state a compilation tracker reaches. The real <see
+            // cref="CompilationTrackerState.FinalCompilationWithGeneratedDocuments"/> is available. It is a
+            /// requirement that any <see cref="Compilation"/> provided to any clients of the <see
+            // cref="Solution"/>
             /// (for example, through <see cref="Project.GetCompilationAsync"/> or <see
-            /// cref="Project.TryGetCompilation"/> must be from a <see cref="FinalState"/>.  This is because <see
+            /// cref="Project.TryGetCompilation"/> must be from a <see cref="FinalState"/>.  This is because
+            // <see
             /// cref="FinalState"/> stores extra information in it about that compilation that the <see
             /// cref="Solution"/> can be queried for (for example: <see
             /// cref="Solution.GetOriginatingProject(ISymbol)"/>.  If <see cref="Compilation"/>s from other <see
-            /// cref="CompilationTrackerState"/>s are passed out, then these other APIs will not function correctly.
+            /// cref="CompilationTrackerState"/>s are passed out, then these other APIs will not function
+            // correctly.
             /// </summary>
             private sealed class FinalState : CompilationTrackerState
             {
@@ -276,7 +308,8 @@ namespace Microsoft.CodeAnalysis
 
                 /// <summary>
                 /// Weak set of the assembly, module and dynamic symbols that this compilation tracker has created.
-                /// This can be used to determine which project an assembly symbol came from after the fact.  This is
+                /// This can be used to determine which project an assembly symbol came from after the fact.  This
+                // is
                 /// needed as the compilation an assembly came from can be GC'ed and further requests to get that
                 /// compilation (or any of it's assemblies) may produce new assembly symbols.
                 /// </summary>
@@ -284,10 +317,14 @@ namespace Microsoft.CodeAnalysis
 
                 /// <summary>
                 /// The final compilation, with all references and source generators run. This is distinct from <see
-                /// cref="Compilation"/>, which in the <see cref="FinalState"/> case will be the compilation before any
-                /// source generators were ran. This ensures that a later invocation of the source generators consumes
-                /// <see cref="Compilation"/> which will avoid generators being ran a second time on a compilation that
-                /// already contains the output of other generators. If source generators are not active, this is equal
+                /// cref="Compilation"/>, which in the <see cref="FinalState"/> case will be the compilation before
+                // any
+                /// source generators were ran. This ensures that a later invocation of the source generators
+                // consumes
+                /// <see cref="Compilation"/> which will avoid generators being ran a second time on a compilation
+                // that
+                /// already contains the output of other generators. If source generators are not active, this is
+                // equal
                 /// to <see cref="Compilation"/>.
                 /// </summary>
                 public override Compilation FinalCompilationWithGeneratedDocuments { get; }

@@ -520,13 +520,15 @@ namespace System.Data.SqlClient
         //
         internal override void CloseReaderFromConnection()
         {
-            // Context Connections do not support async - so there is no threading issues with closing from the connection
+            // Context Connections do not support async - so there is no threading issues with closing from the
+            // connection
             CloseInternal(closeConnection: false);
         }
 
         public override void Close()
         {
-            // Connection should be open at this point, so we can do multiple checks of HasEvents, and we may need to close the connection afterwards
+            // Connection should be open at this point, so we can do multiple checks of HasEvents, and we may
+            // need to close the connection afterwards
             CloseInternal(closeConnection: IsCommandBehavior(CommandBehavior.CloseConnection));
         }
 
@@ -541,7 +543,8 @@ namespace System.Data.SqlClient
                 {
                     _hasRows = false;
 
-                    // Process the remaining events. This makes sure that environment changes are applied and any errors are picked up.
+                    // Process the remaining events. This makes sure that environment changes are applied and any errors
+                    // are picked up.
                     while (_eventStream.HasEvents)
                     {
                         _eventStream.ProcessEvent(_readerEventSink);
@@ -686,7 +689,8 @@ namespace System.Data.SqlClient
                         _currentTextReader = null;
                     }
 
-                    // NOTE: SQLBUDT #386118 -- may indicate that we want to break this loop when we get a MessagePosted callback, but we can't prove that.
+                    // NOTE: SQLBUDT #386118 -- may indicate that we want to break this loop when we get a MessagePosted
+                    // callback, but we can't prove that.
                     while (
                         null == _currentColumnValues
                         && // Did we find a row?
@@ -1441,7 +1445,8 @@ namespace System.Data.SqlClient
 
         public override XmlReader GetXmlReader(int ordinal)
         {
-            // NOTE: sql_variant can not contain a XML data type: http://msdn.microsoft.com/en-us/library/ms173829.aspx
+            // NOTE: sql_variant can not contain a XML data type:
+            // http://msdn.microsoft.com/en-us/library/ms173829.aspx
 
             EnsureCanGetCol("GetXmlReader", ordinal);
             if (_currentMetaData[ordinal].SqlDbType != SqlDbType.Xml)

@@ -62,11 +62,14 @@ namespace System.Data.Common.QueryCache
         /// <summary>
         /// Creates a new instance of ObjectQueryCacheKey given a entityCommand instance
         /// </summary>
-        /// <param name="defaultContainerName">The default container name in effect when parsing the query (may be null)</param>
+        /// <param name="defaultContainerName">The default container name in effect when parsing the query
+        // (may be null)</param>
         /// <param name="eSqlStatement">The Entity-SQL text of the query</param>
         /// <param name="parameterCount">The number of parameters to the query</param>
-        /// <param name="parametersToken">A string representation of the parameters to the query (may be null)</param>
-        /// <param name="includePathsToken">A string representation of the Include span paths in effect (may be null)</param>
+        /// <param name="parametersToken">A string representation of the parameters to the query (may be
+        // null)</param>
+        /// <param name="includePathsToken">A string representation of the Include span paths in effect (may
+        // be null)</param>
         /// <param name="mergeOption">The merge option in effect. Required for result assembly.</param>
         internal EntitySqlQueryCacheKey(
             string defaultContainerName,
@@ -147,7 +150,8 @@ namespace System.Data.Common.QueryCache
         /// Returns a string representation of the state of this cache key
         /// </summary>
         /// <returns>
-        /// A string representation that includes query text, parameter information, include path information
+        /// A string representation that includes query text, parameter information, include path
+        // information
         /// and merge option information about this cache key.
         /// </returns>
         public override string ToString()

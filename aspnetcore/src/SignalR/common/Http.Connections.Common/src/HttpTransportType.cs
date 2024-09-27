@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Http.Connections;
 /// Specifies transports that the client can use to send HTTP requests.
 /// </summary>
 /// <remarks>
-/// This enumeration has a <see cref="FlagsAttribute"/> attribute that allows a bitwise combination of its member values.
+/// This enumeration has a <see cref="FlagsAttribute"/> attribute that allows a bitwise combination
+// of its member values.
 /// </remarks>
 [Flags]
 public enum HttpTransportType

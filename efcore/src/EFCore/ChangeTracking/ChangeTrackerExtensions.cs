@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Extension methods for <see cref="ChangeTracker" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for
+// more information and examples.
 /// </remarks>
 public static class ChangeTrackerExtensions
 {
@@ -25,7 +26,8 @@ public static class ChangeTrackerExtensions
     ///     </para>
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="changeTracker">The metadata item.</param>
     /// <param name="options">Options for generating the string.</param>

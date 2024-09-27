@@ -6,9 +6,11 @@ namespace Microsoft.AspNetCore.WebSockets;
 internal static class WebSocketDeflateConstants
 {
     /// <summary>
-    /// The maximum length that this extension can have, assuming that we're not using extra white space.
+    /// The maximum length that this extension can have, assuming that we're not using extra white
+    // space.
     /// <para />
-    /// "permessage-deflate; client_max_window_bits=15; client_no_context_takeover; server_max_window_bits=15; server_no_context_takeover"
+    /// "permessage-deflate; client_max_window_bits=15; client_no_context_takeover;
+    // server_max_window_bits=15; server_no_context_takeover"
     /// </summary>
     public const int MaxExtensionLength = 128;
 

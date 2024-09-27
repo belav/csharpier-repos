@@ -53,7 +53,10 @@ public class TestClass
 }
 /*
 
-Assert failure(PID 34336 [0x00008620], Thread: 38576 [0x96b0]): Assertion failed '!childNode->isContainableHWIntrinsic()' in 'TestClass:Method4(byref,TestClass+S1,bool,byref):uint:this' during 'Lowering nodeinfo' (IL size 63; hash 0xa4e6dede; Tier0)
-    File: D:\git\runtime\src\coreclr\jit\lowerxarch.cpp Line: 8201
-    Image: D:\git\runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
+Assert failure(PID 34336 [0x00008620], Thread: 38576 [0x96b0]): Assertion failed
+'!childNode->isContainableHWIntrinsic()' in
+'TestClass:Method4(byref,TestClass+S1,bool,byref):uint:this' during 'Lowering nodeinfo' (IL size 63;
+hash 0xa4e6dede; Tier0)
+File: D:\git\runtime\src\coreclr\jit\lowerxarch.cpp Line: 8201
+Image: D:\git\runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
 */

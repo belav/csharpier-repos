@@ -33,7 +33,8 @@ namespace Microsoft.SqlServer.Server
         // Called at end of stream whether errors or no
         internal abstract void BatchCompleted();
 
-        // Called zero or one time when output parameters are available (errors could prevent event from occuring)
+        // Called zero or one time when output parameters are available (errors could prevent event from
+        // occuring)
         internal virtual void ParameterAvailable(
             SmiParameterMetaData metaData,
             SmiTypedGetterSetter paramValue,
@@ -43,7 +44,8 @@ namespace Microsoft.SqlServer.Server
             // Adding as of V200
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V3- and hasn't implemented V200 yet.
+            //  1) Client is calling this method even though the server negotiated for V3- and hasn't
+            // implemented V200 yet.
             //  2) Server didn't implement V200 on some interface, but negotiated V200+.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
@@ -72,7 +74,8 @@ namespace Microsoft.SqlServer.Server
             // Adding as of V200
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V3- and hasn't implemented V200 yet.
+            //  1) Client is calling this method even though the server negotiated for V3- and hasn't
+            // implemented V200 yet.
             //  2) Server didn't implement V200 on some interface, but negotiated V200+.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
@@ -105,7 +108,8 @@ namespace Microsoft.SqlServer.Server
 
         #region OBSOLETE METHODS
         #region OBSOLETED as of V200 but active in previous version
-        // Called zero or one time when output parameters are available (errors could prevent event from occuring)
+        // Called zero or one time when output parameters are available (errors could prevent event from
+        // occuring)
         internal virtual void ParametersAvailable(
             SmiParameterMetaData[] metaData,
             ITypedGettersV3 paramValues
@@ -115,7 +119,8 @@ namespace Microsoft.SqlServer.Server
             // Obsoleting as of V200
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V200+ and dropped support for V200-.
+            //  1) Client is calling this method even though the server negotiated for V200+ and dropped support
+            // for V200-.
             //  2) Server didn't implement V3- on some interface and negotiated V3-.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
@@ -129,7 +134,8 @@ namespace Microsoft.SqlServer.Server
             // Obsoleting as of V200
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V200+ and dropped support for V200-.
+            //  1) Client is calling this method even though the server negotiated for V200+ and dropped support
+            // for V200-.
             //  2) Server didn't implement V3- on some interface and negotiated V3-.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod
@@ -146,7 +152,8 @@ namespace Microsoft.SqlServer.Server
             //  Intended to be removed (along with inheriting IDisposable) prior to RTM.
 
             // Implement body with throw because there are only a couple of ways to get to this code:
-            //  1) Client is calling this method even though the server negotiated for V3+ and dropped support for V2-.
+            //  1) Client is calling this method even though the server negotiated for V3+ and dropped support
+            // for V2-.
             //  2) Server didn't implement V2- on some interface and negotiated V2-.
             System.Data.Common.ADP.InternalError(
                 System.Data.Common.ADP.InternalErrorCode.UnimplementedSMIMethod

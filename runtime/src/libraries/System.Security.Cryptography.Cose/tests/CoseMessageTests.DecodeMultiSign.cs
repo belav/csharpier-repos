@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void DecodeMultiSign_VerifyDetachedContent()
         {
-            // Content is replaced with CBOR null - https://github.com/cose-wg/Examples/blob/master/ecdsa-examples/ecdsa-01.json.
+            // Content is replaced with CBOR null -
+            // https://github.com/cose-wg/Examples/blob/master/ecdsa-examples/ecdsa-01.json.
             CoseMultiSignMessage msg = CoseMessage.DecodeMultiSign(
                 ByteUtils.HexToByteArray(
                     "D8628443A10300A0F6818343A10126A1044231315840D71C05DB52C9CE7F1BF5AAC01334BBEACAC1D86A2303E6EEAA89266F45C01ED602CA649EAF790D8BC99D2458457CA6A872061940E7AFBE48E289DFAC146AE258"
@@ -93,11 +94,13 @@ namespace System.Security.Cryptography.Cose.Tests
         }
 
         [Theory]
-        // Tag is 998 (Unknown) - https://github.com/cose-wg/Examples/blob/master/sign-tests/sign-fail-01.json.
+        // Tag is 998 (Unknown) -
+        // https://github.com/cose-wg/Examples/blob/master/sign-tests/sign-fail-01.json.
         [InlineData(
             "D903E68440A054546869732069732074686520636F6E74656E742E818343A10126A1044231315840E2AEAFD40D69D19DFE6E52077C5D7FF4E408282CBEFB5D06CBF414AF2E19D982AC45AC98B8544C908B4507DE1E90B717C3D34816FE926A2B98F53AFD2FA0F30A"
         )]
-        // Tag is 18 (Sign1) - https://github.com/cose-wg/Examples/blob/master/sign1-tests/sign-pass-01.json.
+        // Tag is 18 (Sign1) -
+        // https://github.com/cose-wg/Examples/blob/master/sign1-tests/sign-pass-01.json.
         [InlineData(
             "D28441A0A201260442313154546869732069732074686520636F6E74656E742E584087DB0D2E5571843B78AC33ECB2830DF7B6E0A4D5B7376DE336B23C591C90C425317E56127FBE04370097CE347087B233BF722B64072BEB4486BDA4031D27244F"
         )]
@@ -178,7 +181,8 @@ namespace System.Security.Cryptography.Cose.Tests
         [InlineData(
             "D8629F40A054546869732069732074686520636F6E74656E742E818343A10126A1044231315840E2AEAFD40D69D19DFE6E52077C5D7FF4E408282CBEFB5D06CBF414AF2E19D982AC45AC98B8544C908B4507DE1E90B717C3D34816FE926A2B98F53AFD2FA0F30A40FF"
         )]
-        // [+COSE_Signature] - this structure does not have a fixed length required, but the byte string is unexpected.
+        // [+COSE_Signature] - this structure does not have a fixed length required, but the byte string is
+        // unexpected.
         [InlineData(
             "D8628440A054546869732069732074686520636F6E74656E742E9F8343A10126A1044231315840E2AEAFD40D69D19DFE6E52077C5D7FF4E408282CBEFB5D06CBF414AF2E19D982AC45AC98B8544C908B4507DE1E90B717C3D34816FE926A2B98F53AFD2FA0F30A40FF"
         )]

@@ -42,7 +42,8 @@ internal class BrokeredServiceBridgeProvider
     /// <param name="brokeredServicePipeName">the pipe name we use for the connection.</param>
     /// <param name="container">our local container.</param>
     /// <param name="cancellationToken">a cancellation token.</param>
-    /// <returns>a task that represents the lifetime of the bridge.  It will complete when the bridge closes.</returns>
+    /// <returns>a task that represents the lifetime of the bridge.  It will complete when the bridge
+    // closes.</returns>
     public async Task SetupBrokeredServicesBridgeAsync(
         string brokeredServicePipeName,
         BrokeredServiceContainer container,

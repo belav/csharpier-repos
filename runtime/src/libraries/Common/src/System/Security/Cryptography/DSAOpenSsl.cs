@@ -104,8 +104,10 @@ namespace System.Security.Cryptography
             )
                 throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MissingFields);
 
-            // J is not required and is not even used on CNG blobs. It should however be less than P (J == (P-1) / Q). This validation check
-            // is just to maintain parity with DSACNG and DSACryptoServiceProvider, which also perform this check.
+            // J is not required and is not even used on CNG blobs. It should however be less than P (J == (P-1)
+            // / Q). This validation check
+            // is just to maintain parity with DSACNG and DSACryptoServiceProvider, which also perform this
+            // check.
             if (parameters.J != null && parameters.J.Length >= parameters.P.Length)
                 throw new ArgumentException(SR.Cryptography_InvalidDsaParameters_MismatchedPJ);
 
@@ -383,7 +385,8 @@ namespace System.Security.Cryptography
                 int expectedSignatureBytes = Interop.Crypto.DsaSignatureFieldSize(key) * 2;
                 if (signature.Length != expectedSignatureBytes)
                 {
-                    // The input isn't of the right length (assuming no DER), so we can't sensibly re-encode it with DER.
+                    // The input isn't of the right length (assuming no DER), so we can't sensibly re-encode it with
+                    // DER.
                     return false;
                 }
 

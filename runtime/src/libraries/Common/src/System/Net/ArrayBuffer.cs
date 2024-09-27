@@ -66,7 +66,8 @@ namespace System.Net
             }
         }
 
-        // This is different from Dispose as the instance remains usable afterwards (_bytes will not be null).
+        // This is different from Dispose as the instance remains usable afterwards (_bytes will not be
+        // null).
         public void ClearAndReturnBuffer()
         {
             Debug.Assert(_usePool);

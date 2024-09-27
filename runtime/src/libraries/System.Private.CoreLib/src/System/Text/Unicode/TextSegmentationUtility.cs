@@ -12,7 +12,8 @@ namespace System.Text.Unicode
     /// as specified in UAX#29 (https://www.unicode.org/reports/tr29/).
     /// </summary>
     /// <remarks>
-    /// The current implementation is compliant per Rev. 35, https://www.unicode.org/reports/tr29/tr29-35.html.
+    /// The current implementation is compliant per Rev. 35,
+    // https://www.unicode.org/reports/tr29/tr29-35.html.
     /// </remarks>
     internal static class TextSegmentationUtility
     {

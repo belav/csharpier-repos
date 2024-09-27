@@ -1766,10 +1766,10 @@ namespace Mono.CSharp
                         most_specific_operator = candidates[1];
                         /*
                         foreach (var candidate in candidates) {
-                            if (candidate.ReturnType == t_x)
-                                most_specific_operator = candidate;
-                            else if (candidate.Parameters.Types[0] == s_x)
-                                ambig_arg = candidate;
+                        if (candidate.ReturnType == t_x)
+                        most_specific_operator = candidate;
+                        else if (candidate.Parameters.Types[0] == s_x)
+                        ambig_arg = candidate;
                         }
                         */
                         rc.Report.Error(
@@ -2706,7 +2706,8 @@ namespace Mono.CSharp
                 }
 
                 //
-                // From a single-dimensional array type S[] to System.Collections.Generic.IList<T> and its base interfaces,
+                // From a single-dimensional array type S[] to System.Collections.Generic.IList<T> and its base
+                // interfaces,
                 // provided that there is an explicit reference conversion from S to T
                 //
                 if (ArrayToIList(source_array, target_type, true))

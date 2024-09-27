@@ -8,17 +8,21 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
-///     Provides access to change tracking and loading information for a reference (i.e. non-collection)
+///     Provides access to change tracking and loading information for a reference (i.e.
+// non-collection)
 ///     navigation property that associates this entity to another entity.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ChangeTracker" /> API and it is
+///         Instances of this class are returned from methods when using the <see
+// cref="ChangeTracker" /> API and it is
 ///         not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+// EF Core</see>
+///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+// entities</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class ReferenceEntry : NavigationEntry
@@ -26,10 +30,14 @@ public class ReferenceEntry : NavigationEntry
     private IEntityFinder? _finder;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, string name)
@@ -45,10 +53,14 @@ public class ReferenceEntry : NavigationEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceEntry(InternalEntityEntry internalEntry, INavigation navigation)
@@ -83,25 +95,31 @@ public class ReferenceEntry : NavigationEntry
     }
 
     /// <summary>
-    ///     Loads the entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
+    ///     Loads the entities referenced by this navigation property, unless <see
+    // cref="NavigationEntry.IsLoaded" />
     ///     is already set to <see langword="true" />.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see>
+    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+    // entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
     public override void Load() => Load(LoadOptions.None);
 
     /// <summary>
-    ///     Loads the entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
+    ///     Loads the entities referenced by this navigation property, unless <see
+    // cref="NavigationEntry.IsLoaded" />
     ///     is already set to <see langword="true" />.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see>
+    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+    // entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="options">Options to control the way related entities are loaded.</param>
@@ -114,43 +132,57 @@ public class ReferenceEntry : NavigationEntry
     }
 
     /// <summary>
-    ///     Loads entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
+    ///     Loads entities referenced by this navigation property, unless <see
+    // cref="NavigationEntry.IsLoaded" />
     ///     is already set to <see langword="true" />.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Multiple active operations on the same context instance are not supported. Use <see langword="await" /> to ensure
-    ///         that any asynchronous operations have completed before calling another method on this context.
+    ///         Multiple active operations on the same context instance are not supported. Use <see
+    // langword="await" /> to ensure
+    ///         that any asynchronous operations have completed before calling another method on this
+    // context.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see>
+    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+    // entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public override Task LoadAsync(CancellationToken cancellationToken = default) =>
         LoadAsync(LoadOptions.None, cancellationToken);
 
     /// <summary>
-    ///     Loads entities referenced by this navigation property, unless <see cref="NavigationEntry.IsLoaded" />
+    ///     Loads entities referenced by this navigation property, unless <see
+    // cref="NavigationEntry.IsLoaded" />
     ///     is already set to <see langword="true" />.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Multiple active operations on the same context instance are not supported. Use <see langword="await" /> to ensure
-    ///         that any asynchronous operations have completed before calling another method on this context.
+    ///         Multiple active operations on the same context instance are not supported. Use <see
+    // langword="await" /> to ensure
+    ///         that any asynchronous operations have completed before calling another method on this
+    // context.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see>
+    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+    // entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <param name="options">Options to control the way related entities are loaded.</param>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous save operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     public override Task LoadAsync(
         LoadOptions options,
         CancellationToken cancellationToken = default
@@ -174,8 +206,10 @@ public class ReferenceEntry : NavigationEntry
     ///         actually loading all entities from the database.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related entities</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see>
+    ///         and <see href="https://aka.ms/efcore-docs-load-related-data">Loading related
+    // entities</see> for more information and examples.
     ///     </para>
     /// </remarks>
     /// <returns>The query to load related entities.</returns>
@@ -187,8 +221,10 @@ public class ReferenceEntry : NavigationEntry
     ///     when <see cref="DbContext.SaveChanges()" /> is called.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see>
-    ///     and <see href="https://aka.ms/efcore-docs-changing-relationships">Changing foreign keys and navigations</see>
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see>
+    ///     and <see href="https://aka.ms/efcore-docs-changing-relationships">Changing foreign keys and
+    // navigations</see>
     ///     for more information and examples.
     /// </remarks>
     public override bool IsModified
@@ -271,7 +307,8 @@ public class ReferenceEntry : NavigationEntry
     ///     The <see cref="EntityEntry" /> of the entity this navigation targets.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <value> An entry for the entity that this navigation targets. </value>
@@ -285,10 +322,14 @@ public class ReferenceEntry : NavigationEntry
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalEntityEntry? GetTargetEntry() =>

@@ -59,7 +59,8 @@ namespace System.Reflection
         #region Internal Members
         // this is an internal api for DynamicMethod. A better solution is to change the relationship
         // between ParameterInfo and ParameterBuilder so that a ParameterBuilder can be seen as a writer
-        // api over a ParameterInfo. However that is a possible breaking change so it needs to go through some process first
+        // api over a ParameterInfo. However that is a possible breaking change so it needs to go through
+        // some process first
         internal void SetName(String name)
         {
             NameImpl = name;
@@ -481,7 +482,8 @@ namespace System.Reflection
         #endregion
 
         #region Private Data Members
-        // These are new in Whidbey, so we cannot serialize them directly or we break backwards compatibility.
+        // These are new in Whidbey, so we cannot serialize them directly or we break backwards
+        // compatibility.
         [NonSerialized]
         private int m_tkParamDef;
 

@@ -155,7 +155,7 @@ namespace System.Web.UI
             if (!SupportAutoEvents || !AutoEventWireup)
                 return;
 
-            /* Avoid expensive reflection operations by computing the event info only once */
+/* Avoid expensive reflection operations by computing the event info only once */
             Type type = GetType();
             ArrayList events = auto_event_info.InsertOrGet(
                 (uint)type.GetHashCode(),
@@ -229,7 +229,7 @@ namespace System.Web.UI
                 EventInfo evt = type.GetEvent(eventName);
                 if (evt == null)
                 {
-                    /* This should never happen */
+/* This should never happen */
                     continue;
                 }
 

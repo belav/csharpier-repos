@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     different type in the store.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public abstract class ValueConverter
 {
@@ -19,7 +20,8 @@ public abstract class ValueConverter
     ///     Initializes a new instance of the <see cref="ValueConverter" /> class.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="convertToProviderExpression">
     ///     The expression to convert objects when writing data to the store,
@@ -32,7 +34,8 @@ public abstract class ValueConverter
     ///     nulls, boxing, and non-exact matches of simple types.
     /// </param>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     protected ValueConverter(
@@ -44,17 +47,21 @@ public abstract class ValueConverter
 
     /// <summary>
     ///     <para>
-    ///         Initializes a new instance of the <see cref="ValueConverter" /> class, allowing conversion of
+    ///         Initializes a new instance of the <see cref="ValueConverter" /> class, allowing
+    // conversion of
     ///         nulls.
     ///     </para>
     ///     <para>
-    ///         Warning: this is currently an internal API since converting nulls to and from the database can lead to broken
-    ///         queries and other issues. See <see href="https://github.com/dotnet/efcore/issues/26230">GitHub issue #26230</see>
+    ///         Warning: this is currently an internal API since converting nulls to and from the
+    // database can lead to broken
+    ///         queries and other issues. See <see
+    // href="https://github.com/dotnet/efcore/issues/26230">GitHub issue #26230</see>
     ///         for more information and examples.
     ///     </para>
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="convertToProviderExpression">
     ///     The expression to convert objects when writing data to the store,
@@ -67,11 +74,13 @@ public abstract class ValueConverter
     ///     nulls, boxing, and non-exact matches of simple types.
     /// </param>
     /// <param name="convertsNulls">
-    ///     If <see langword="true" />, then the nulls will be passed to the converter for conversion. Otherwise null
+    ///     If <see langword="true" />, then the nulls will be passed to the converter for conversion.
+    // Otherwise null
     ///     values always remain null.
     /// </param>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     [EntityFrameworkInternal]
@@ -96,7 +105,8 @@ public abstract class ValueConverter
     ///     setup to handle nulls, boxing, and non-exact matches of simple types.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public abstract Func<object?, object?> ConvertToProvider { get; }
 
@@ -105,7 +115,8 @@ public abstract class ValueConverter
     ///     setup to handle nulls, boxing, and non-exact matches of simple types.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public abstract Func<object?, object?> ConvertFromProvider { get; }
 
@@ -115,7 +126,8 @@ public abstract class ValueConverter
     ///     nulls, boxing, and non-exact matches of simple types.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public virtual LambdaExpression ConvertToProviderExpression { get; }
 
@@ -125,7 +137,8 @@ public abstract class ValueConverter
     ///     nulls, boxing, and non-exact matches of simple types.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public virtual LambdaExpression ConvertFromProviderExpression { get; }
 
@@ -133,7 +146,8 @@ public abstract class ValueConverter
     ///     The CLR type used in the EF model.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public abstract Type ModelClrType { get; }
 
@@ -141,36 +155,44 @@ public abstract class ValueConverter
     ///     The CLR type used when reading and writing from the store.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public abstract Type ProviderClrType { get; }
 
     /// <summary>
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public virtual ConverterMappingHints? MappingHints { get; }
 
     /// <summary>
-    ///     If <see langword="true" />, then the nulls will be passed to the converter for conversion. Otherwise null
+    ///     If <see langword="true" />, then the nulls will be passed to the converter for conversion.
+    // Otherwise null
     ///     values always remain null.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         By default, value converters do not handle nulls so that a value converter for a non-nullable property (such as
-    ///         a primary key) can be used for correlated nullable properties, such as any corresponding foreign key properties.
+    ///         By default, value converters do not handle nulls so that a value converter for a
+    // non-nullable property (such as
+    ///         a primary key) can be used for correlated nullable properties, such as any corresponding
+    // foreign key properties.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///         See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value
+    // converters</see> for more information and examples.
     ///     </para>
     /// </remarks>
     public virtual bool ConvertsNulls { get; }
 
     /// <summary>
-    ///     Checks that the type used with a value converter is supported by that converter and throws if not.
+    ///     Checks that the type used with a value converter is supported by that converter and throws
+    // if not.
     /// </summary>
     /// <param name="type">The type to check.</param>
     /// <param name="converterType">The value converter type.</param>
@@ -205,7 +227,8 @@ public abstract class ValueConverter
     ///     the result of the first conversion is used as the input to the second conversion.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="secondConverter">The second converter.</param>
     /// <returns>The composed converter.</returns>

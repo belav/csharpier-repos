@@ -16,9 +16,12 @@ namespace System.Runtime.InteropServices
     /// <list type="bullet">
     /// <item>The constructor assumes the handle type is valid; no range check is performed.</item>
     /// <item>The pinned flag is not stored in the <c>_handle</c> field.</item>
-    /// <item>The <c>Target</c> getter and setter assume the <c>UnsafeGCHandle</c> has been allocated.</item>
-    /// <item>No blittable check is performed when allocating a pinned <c>UnsafeGCHandle</c> or setting its target.</item>
-    /// <item>The <c>GetRawTargetAddress</c> method returns the raw address of the target (the pointer to
+    /// <item>The <c>Target</c> getter and setter assume the <c>UnsafeGCHandle</c> has been
+    // allocated.</item>
+    /// <item>No blittable check is performed when allocating a pinned <c>UnsafeGCHandle</c> or setting
+    // its target.</item>
+    /// <item>The <c>GetRawTargetAddress</c> method returns the raw address of the target (the pointer
+    // to
     /// its <c>m_pEEType</c> field).</item>
     /// <item>The <c>Free</c> method is not thread-safe and does not throw if the <c>UnsafeGCHandle</c>
     /// has not been allocated or has been already freed.</item>

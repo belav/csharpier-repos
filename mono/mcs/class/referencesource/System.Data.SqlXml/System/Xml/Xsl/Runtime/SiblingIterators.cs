@@ -51,7 +51,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over child following-sibling nodes.  This is a simple variation on the ContentMergeIterator, so use containment
+    /// Iterate over child following-sibling nodes.  This is a simple variation on the
+    // ContentMergeIterator, so use containment
     /// to reuse its code (can't use inheritance with structures).
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -68,9 +69,12 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes if there are
-        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node needs to be
-        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next node in the
+        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes
+        // if there are
+        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node
+        // needs to be
+        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next
+        // node in the
         /// iteration.
         /// </summary>
         public IteratorResult MoveNext(XPathNavigator navigator)
@@ -79,7 +83,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return the current result navigator.  This is only defined after MoveNext() has returned IteratorResult.HaveCurrent.
+        /// Return the current result navigator.  This is only defined after MoveNext() has returned
+        // IteratorResult.HaveCurrent.
         /// </summary>
         public XPathNavigator Current
         {
@@ -88,7 +93,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in reverse
+    /// Iterate over all preceding nodes according to XPath preceding axis rules, returning nodes in
+    // reverse
     /// document order.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]

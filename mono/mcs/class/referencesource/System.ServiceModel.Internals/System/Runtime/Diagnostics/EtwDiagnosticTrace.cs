@@ -65,7 +65,8 @@ namespace System.Runtime.Diagnostics
             0x20000000001A0065
         );
 
-        //Compiler will add all static initializers into the static constructor.  Adding an explicit one to mark SecurityCritical.
+        //Compiler will add all static initializers into the static constructor.  Adding an explicit one to
+        // mark SecurityCritical.
         [Fx.Tag.SecurityNote(Critical = "setting critical field defaultEtwProviderId")]
         [SecurityCritical]
         [SuppressMessage(
@@ -496,9 +497,12 @@ namespace System.Runtime.Diagnostics
             out int legacyEventId
         )
         {
-            // To avoid breaking changes between 4.0 and 4.5 we have to use the same values for EventID and TraceCode like in 4.0
-            // The mapping between legacy trace code and the new ETW event ids has to be done manually - for example
-            // because there was only one event for HandledException in system.diagnostics. For ETW there are multiple events
+            // To avoid breaking changes between 4.0 and 4.5 we have to use the same values for EventID and
+            // TraceCode like in 4.0
+            // The mapping between legacy trace code and the new ETW event ids has to be done manually - for
+            // example
+            // because there was only one event for HandledException in system.diagnostics. For ETW there are
+            // multiple events
             // because you have to specify the verbosity level per event in the manifest.
 
             switch (eventDescriptor.EventId)
@@ -639,7 +643,8 @@ namespace System.Runtime.Diagnostics
 
             if (exception != null)
             {
-                // We want to keep the ETW trace message to under 32k. So we keep the serialized exception to under 28k bytes.
+                // We want to keep the ETW trace message to under 32k. So we keep the serialized exception to under
+                // 28k bytes.
                 serializedException = ExceptionToTraceString(exception, MaxExceptionStringLength);
             }
 
@@ -684,7 +689,8 @@ namespace System.Runtime.Diagnostics
             // Checking against the level and keywords passed in the ETW callback can provide false positives,
             // but never a false negative.
             // The only code which specifies false is two generated classes, System.Runtime.TraceCore and
-            // System.Activities.EtwTrackingParticipantTrackRecords, and the method EtwDiagnosticTrace.TraceTransfer().
+            // System.Activities.EtwTrackingParticipantTrackRecords, and the method
+            // EtwDiagnosticTrace.TraceTransfer().
             // FxTrace uses IsEtwEventEnabled without the boolean, which then calls this method specifying true.
             if (fullCheck)
             {
@@ -1150,7 +1156,8 @@ namespace System.Runtime.Diagnostics
         {
             int xmlElementLength;
 
-            // Quirk to fix DevDiv 155469: All previous versions of that platform (up-to 4.6.2) will get the old behavior (throw null ref when Exception Message property is null)
+            // Quirk to fix DevDiv 155469: All previous versions of that platform (up-to 4.6.2) will get the old
+            // behavior (throw null ref when Exception Message property is null)
             if (
                 string.IsNullOrEmpty(value)
                 && !LocalAppContextSwitches.IncludeNullExceptionMessageInETWTrace

@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: CommonClasses
- **
- **
- ** Purpose: utility classes
- **
- **
- ===========================================================*/
+**
+** Class: CommonClasses
+**
+**
+** Purpose: utility classes
+**
+**
+===========================================================*/
 
 
 // All classes and methods in here are only for the internal use by the XML and Binary Formatters.
@@ -775,7 +775,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
                             memberName,
                             record.PRobjectId
                         );
-                        //                          Console.WriteLine("SerializationInfo: Main Object ({0}): {1}. SubObject ({2}): {3}", parent.PRobjectId,
+                        //                          Console.WriteLine("SerializationInfo: Main Object ({0}): {1}. SubObject
+                        // ({2}): {3}", parent.PRobjectId,
                         //                                            objectInfo.obj, record.PRobjectId, obj);
                     }
                     else
@@ -796,8 +797,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
                                 memberInfo,
                                 record.PRobjectId
                             );
-                        //                          Console.WriteLine("MemberFixup: Main Object({0}): {1}. SubObject({2}): {3}", parent.PRobjectId,
-                        //                                            objectInfo.obj.GetType(), record.PRobjectId, obj.GetType());
+                        //                          Console.WriteLine("MemberFixup: Main Object({0}): {1}. SubObject({2}):
+                        // {3}", parent.PRobjectId,
+                        //                                            objectInfo.obj.GetType(), record.PRobjectId,
+                        // obj.GetType());
                     }
                     break;
             }
@@ -811,7 +814,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
 #endif
     }
 
-    // Class used to transmit Enums from the XML and Binary Formatter class to the ObjectWriter and ObjectReader class
+    // Class used to transmit Enums from the XML and Binary Formatter class to the ObjectWriter and
+    // ObjectReader class
     internal sealed class InternalFE
     {
         internal FormatterTypeStyle FEtypeFormat;

@@ -144,7 +144,8 @@ namespace System.Data.SqlClient
                                 false,
                                 applyTransientFaultHandling: applyTransientFaultHandling
                             );
-                            // NOTE: Retrieve <UserInstanceName> here. This user instance name will be used below to connect to the Sql Express User Instance.
+                            // NOTE: Retrieve <UserInstanceName> here. This user instance name will be used below to connect to
+                            // the Sql Express User Instance.
                             instanceName = sseConnection.InstanceName;
 
                             if (!instanceName.StartsWith("\\\\.\\", StringComparison.Ordinal))
@@ -260,8 +261,10 @@ namespace System.Data.SqlClient
             return poolingOptions;
         }
 
-        // SxS (VSDD 545786): metadata files are opened from <.NetRuntimeFolder>\CONFIG\<metadatafilename.xml>
-        // this operation is safe in SxS because the file is opened in read-only mode and each NDP runtime accesses its own copy of the metadata
+        // SxS (VSDD 545786): metadata files are opened from
+        // <.NetRuntimeFolder>\CONFIG\<metadatafilename.xml>
+        // this operation is safe in SxS because the file is opened in read-only mode and each NDP runtime
+        // accesses its own copy of the metadata
         // under the runtime folder.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]

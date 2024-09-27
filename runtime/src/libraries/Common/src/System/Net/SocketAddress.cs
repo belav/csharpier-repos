@@ -126,7 +126,8 @@ namespace System.Net
 
         /// <summary>This represents underlying memory that can be passed to native OS calls.</summary>
         /// <remarks>
-        /// Content of the memory can be invalidated if <see cref="Size"/> is changed or if the SocketAddress is used in another receive call.
+        /// Content of the memory can be invalidated if <see cref="Size"/> is changed or if the
+        // SocketAddress is used in another receive call.
         /// </remarks>
         public Memory<byte> Buffer
         {

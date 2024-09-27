@@ -25,22 +25,27 @@ namespace System.Data.Mapping.Update.Internal
     /// structural type.
     ///
     /// Stores a 'row' (or element within a row) being propagated through the update pipeline, including
-    /// markup information and metadata. Internally, we maintain several different classes so that we only
+    /// markup information and metadata. Internally, we maintain several different classes so that we
+    // only
     /// store the necessary state.
     ///
     /// - StructuralValue (complex types, entities, and association end keys): type and member values,
     ///   one version for modified structural values and one version for unmodified structural values
     ///   (a structural type is modified if its _type_ is changed, not its values
-    /// - SimpleValue (scalar value): flags to describe the state of the value (is it a concurrency value,
+    /// - SimpleValue (scalar value): flags to describe the state of the value (is it a concurrency
+    // value,
     ///   is it modified) and the value itself
     /// - ServerGenSimpleValue: adds back-prop information to the above (record and position in record
     ///   so that we can set the value on back-prop)
-    /// - KeyValue: the originating IEntityStateEntry also travels with keys. These entries are used purely for
-    ///   error reporting. We send them with keys so that every row containing an entity (which must also
+    /// - KeyValue: the originating IEntityStateEntry also travels with keys. These entries are used
+    // purely for
+    ///   error reporting. We send them with keys so that every row containing an entity (which must
+    // also
     ///   contain the key) has enough context to recover the state entry.
     /// </summary>
     /// <remarks>
-    /// Not all memebers of a PropagatorResult are available for all specializations. For instance, GetSimpleValue
+    /// Not all memebers of a PropagatorResult are available for all specializations. For instance,
+    // GetSimpleValue
     /// is available only on simple types
     /// </remarks>
     internal abstract class PropagatorResult
@@ -121,7 +126,8 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Where a single result corresponds to multiple key inputs, they are chained using this linked list.
+        /// Where a single result corresponds to multiple key inputs, they are chained using this linked
+        // list.
         /// By convention, the first entry in the chain is the 'dominant' entry (the principal key).
         /// </summary>
         internal virtual PropagatorResult Next

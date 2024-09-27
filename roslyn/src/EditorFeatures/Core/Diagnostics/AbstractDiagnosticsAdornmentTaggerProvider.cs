@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             if (errorTag == null)
                 return null;
 
-            // Ensure the diagnostic has at least length 1.  Tags must have a non-empty length in order to actually show
+            // Ensure the diagnostic has at least length 1.  Tags must have a non-empty length in order to
+            // actually show
             // up in the editor.
             var adjustedSpan = AdjustSnapshotSpan(span, minimumLength: 1);
             if (adjustedSpan.Length == 0)

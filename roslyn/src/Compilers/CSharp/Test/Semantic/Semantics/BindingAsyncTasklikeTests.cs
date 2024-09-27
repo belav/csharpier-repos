@@ -507,7 +507,8 @@ namespace System.Runtime.CompilerServices { class AsyncMethodBuilderAttribute : 
 ";
             CreateCompilationWithMscorlib45(source)
                 .VerifyDiagnostics(
-                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'C.h(Func<MyTask>)' and 'C.h(Func<Task>)'
+                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'C.h(Func<MyTask>)' and 'C.h(Func<Task>)'
                     //         h(async () => { await (Task)null; });
                     Diagnostic(ErrorCode.ERR_AmbigCall, "h")
                         .WithArguments(

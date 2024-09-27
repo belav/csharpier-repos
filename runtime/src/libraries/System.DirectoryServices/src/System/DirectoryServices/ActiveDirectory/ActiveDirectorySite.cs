@@ -92,7 +92,8 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             catch (ActiveDirectoryObjectNotFoundException)
             {
-                // this is the case where the context is a config set and we could not find an ADAM instance in that config set
+                // this is the case where the context is a config set and we could not find an ADAM instance in that
+                // config set
                 throw new ActiveDirectoryOperationException(
                     SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
                 );
@@ -181,7 +182,8 @@ namespace System.DirectoryServices.ActiveDirectory
             }
             catch (ActiveDirectoryObjectNotFoundException)
             {
-                // this is the case where the context is a config set and we could not find an ADAM instance in that config set
+                // this is the case where the context is a config set and we could not find an ADAM instance in that
+                // config set
                 throw new ActiveDirectoryOperationException(
                     SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
                 );
@@ -1072,7 +1074,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 // get destination bridgehead servers
 
-                // first go to the servers container under the current site and then do a search to get the all server objects.
+                // first go to the servers container under the current site and then do a search to get the all
+                // server objects.
                 string serverContainer =
                     "CN=Servers,"
                     + (string)
@@ -1229,7 +1232,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 // get source bridgehead server
                 if (nonBridgHeadTable.Count != 0)
                 {
-                    // go to sites container to get all the connecdtion object that replicates from servers in the current sites that have
+                    // go to sites container to get all the connecdtion object that replicates from servers in the
+                    // current sites that have
                     // not been determined whether it is a bridgehead server or not.
                     DirectoryEntry serverEntry = DirectoryEntryManager.GetDirectoryEntry(
                         context,
@@ -1415,13 +1419,15 @@ namespace System.DirectoryServices.ActiveDirectory
         {
             ArgumentNullException.ThrowIfNull(context);
 
-            // if target is not specified, then we determin the target from the logon credential, so if it is a local user context, it should fail
+            // if target is not specified, then we determin the target from the logon credential, so if it is a
+            // local user context, it should fail
             if ((context.Name == null) && (!context.isRootDomain()))
             {
                 throw new ArgumentException(SR.ContextNotAssociatedWithDomain, nameof(context));
             }
 
-            // more validation for the context, if the target is not null, then it should be either forest name or server name
+            // more validation for the context, if the target is not null, then it should be either forest name
+            // or server name
             if (context.Name != null)
             {
                 if (!(context.isRootDomain() || context.isServer() || context.isADAMConfigSet()))

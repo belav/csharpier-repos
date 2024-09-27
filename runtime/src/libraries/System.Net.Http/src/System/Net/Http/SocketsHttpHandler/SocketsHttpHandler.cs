@@ -278,11 +278,13 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Defines the initial HTTP2 stream receive window size for all connections opened by the this <see cref="SocketsHttpHandler"/>.
+        /// Defines the initial HTTP2 stream receive window size for all connections opened by the this <see
+        // cref="SocketsHttpHandler"/>.
         /// </summary>
         /// <remarks>
         /// Larger the values may lead to faster download speed, but potentially higher memory footprint.
-        /// The property must be set to a value between 65535 and the configured maximum window size, which is 16777216 by default.
+        /// The property must be set to a value between 65535 and the configured maximum window size, which
+        // is 16777216 by default.
         /// </remarks>
         public int InitialHttp2StreamWindowSize
         {
@@ -311,11 +313,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets the keep alive ping delay. The client will send a keep alive ping to the server if it
-        /// doesn't receive any frames on a connection for this period of time. This property is used together with
+        /// Gets or sets the keep alive ping delay. The client will send a keep alive ping to the server if
+        // it
+        /// doesn't receive any frames on a connection for this period of time. This property is used
+        // together with
         /// <see cref="SocketsHttpHandler.KeepAlivePingTimeout"/> to close broken connections.
         /// <para>
-        /// Delay value must be greater than or equal to 1 second. Set to <see cref="Timeout.InfiniteTimeSpan"/> to
+        /// Delay value must be greater than or equal to 1 second. Set to <see
+        // cref="Timeout.InfiniteTimeSpan"/> to
         /// disable the keep alive ping.
         /// Defaults to <see cref="Timeout.InfiniteTimeSpan"/>.
         /// </para>
@@ -344,11 +349,14 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets the keep alive ping timeout. Keep alive pings are sent when a period of inactivity exceeds
-        /// the configured <see cref="KeepAlivePingDelay"/> value. The client will close the connection if it
+        /// Gets or sets the keep alive ping timeout. Keep alive pings are sent when a period of inactivity
+        // exceeds
+        /// the configured <see cref="KeepAlivePingDelay"/> value. The client will close the connection if
+        // it
         /// doesn't receive any frames within the timeout.
         /// <para>
-        /// Timeout must be greater than or equal to 1 second. Set to <see cref="Timeout.InfiniteTimeSpan"/> to
+        /// Timeout must be greater than or equal to 1 second. Set to <see cref="Timeout.InfiniteTimeSpan"/>
+        // to
         /// disable the keep alive ping timeout.
         /// Defaults to 20 seconds.
         /// </para>
@@ -377,7 +385,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets the keep alive ping behaviour. Keep alive pings are sent when a period of inactivity exceeds
+        /// Gets or sets the keep alive ping behaviour. Keep alive pings are sent when a period of
+        // inactivity exceeds
         /// the configured <see cref="KeepAlivePingDelay"/> value.
         /// </summary>
         public HttpKeepAlivePingPolicy KeepAlivePingPolicy
@@ -391,7 +400,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether additional HTTP/2 connections can be established to the same server
+        /// Gets or sets a value that indicates whether additional HTTP/2 connections can be established to
+        // the same server
         /// when the maximum of concurrent streams is reached on all existing connections.
         /// </summary>
         public bool EnableMultipleHttp2Connections
@@ -444,13 +454,16 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets a writable dictionary (that is, a map) of custom properties for the HttpClient requests. The dictionary is initialized empty; you can insert and query key-value pairs for your custom handlers and special processing.
+        /// Gets a writable dictionary (that is, a map) of custom properties for the HttpClient requests.
+        // The dictionary is initialized empty; you can insert and query key-value pairs for your custom
+        // handlers and special processing.
         /// </summary>
         public IDictionary<string, object?> Properties =>
             _settings._properties ??= new Dictionary<string, object?>();
 
         /// <summary>
-        /// Gets or sets a callback that returns the <see cref="Encoding"/> to encode the value for the specified request header name,
+        /// Gets or sets a callback that returns the <see cref="Encoding"/> to encode the value for the
+        // specified request header name,
         /// or <see langword="null"/> to use the default behavior.
         /// </summary>
         public HeaderEncodingSelector<HttpRequestMessage>? RequestHeaderEncodingSelector
@@ -464,7 +477,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the specified response header name,
+        /// Gets or sets a callback that returns the <see cref="Encoding"/> to decode the value for the
+        // specified response header name,
         /// or <see langword="null"/> to use the default behavior.
         /// </summary>
         public HeaderEncodingSelector<HttpRequestMessage>? ResponseHeaderEncodingSelector
@@ -478,7 +492,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="DistributedContextPropagator"/> to use when propagating the distributed trace and context.
+        /// Gets or sets the <see cref="DistributedContextPropagator"/> to use when propagating the
+        // distributed trace and context.
         /// Use <see langword="null"/> to disable propagation.
         /// Defaults to <see cref="DistributedContextPropagator.Current"/>.
         /// </summary>
@@ -494,10 +509,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IMeterFactory"/> to create a custom <see cref="Meter"/> for the <see cref="SocketsHttpHandler"/> instance.
+        /// Gets or sets the <see cref="IMeterFactory"/> to create a custom <see cref="Meter"/> for the <see
+        // cref="SocketsHttpHandler"/> instance.
         /// </summary>
         /// <remarks>
-        /// When <see cref="MeterFactory"/> is set to a non-<see langword="null"/> value, all metrics emitted by the <see cref="SocketsHttpHandler"/> instance
+        /// When <see cref="MeterFactory"/> is set to a non-<see langword="null"/> value, all metrics
+        // emitted by the <see cref="SocketsHttpHandler"/> instance
         /// will be recorded using the <see cref="Meter"/> provided by the <see cref="IMeterFactory"/>.
         /// </remarks>
         [CLSCompliant(false)]
@@ -535,7 +552,8 @@ namespace System.Net.Http
         private HttpMessageHandlerStage SetupHandlerChain()
         {
             // Clone the settings to get a relatively consistent view that won't change after this point.
-            // (This isn't entirely complete, as some of the collections it contains aren't currently deeply cloned.)
+            // (This isn't entirely complete, as some of the collections it contains aren't currently deeply
+            // cloned.)
             HttpConnectionSettings settings = _settings.CloneAndNormalize();
 
             HttpConnectionPoolManager poolManager = new HttpConnectionPoolManager(settings);
@@ -551,7 +569,8 @@ namespace System.Net.Http
                 handler = new HttpAuthenticatedConnectionHandler(poolManager);
             }
 
-            // DiagnosticsHandler is inserted before RedirectHandler so that trace propagation is done on redirects as well
+            // DiagnosticsHandler is inserted before RedirectHandler so that trace propagation is done on
+            // redirects as well
             if (
                 DiagnosticsHandler.IsGloballyEnabled()
                 && settings._activityHeadersPropagator is DistributedContextPropagator propagator

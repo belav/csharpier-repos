@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     Converts a <see cref="PhysicalAddress" /> to and from a <see cref="string" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class PhysicalAddressToStringConverter : ValueConverter<PhysicalAddress?, string?>
 {
@@ -19,7 +20,8 @@ public class PhysicalAddressToStringConverter : ValueConverter<PhysicalAddress?,
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public PhysicalAddressToStringConverter()
         : this(null) { }
@@ -28,10 +30,12 @@ public class PhysicalAddressToStringConverter : ValueConverter<PhysicalAddress?,
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     public PhysicalAddressToStringConverter(ConverterMappingHints? mappingHints)

@@ -186,7 +186,7 @@ namespace System.Data.Tests.SqlTypes
             ReadWriteXmlTestInternal(xml2, strtest2.ToString(), "BA02");
         }
 
-        /* Read tests */
+/* Read tests */
         [Fact]
         public void Read_SuccessTest1()
         {

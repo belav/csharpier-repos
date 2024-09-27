@@ -6,12 +6,14 @@ using Microsoft.EntityFrameworkCore.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Describes the binding from an EF dependency injection service, or metadata type, which may or
+///     Describes the binding from an EF dependency injection service, or metadata type, which may
+// or
 ///     may not also have and associated <see cref="IServiceProperty" />, to a parameter in
 ///     a constructor, factory method, or similar.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and examples.
 /// </remarks>
 public abstract class ServiceParameterBinding : ParameterBinding
 {
@@ -23,7 +25,8 @@ public abstract class ServiceParameterBinding : ParameterBinding
     /// </summary>
     /// <param name="parameterType">The parameter CLR type.</param>
     /// <param name="serviceType">The service or metadata CLR type.</param>
-    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> instances, or null.</param>
+    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> instances, or
+    // null.</param>
     protected ServiceParameterBinding(
         Type parameterType,
         Type serviceType,
@@ -67,8 +70,10 @@ public abstract class ServiceParameterBinding : ParameterBinding
     ///     Creates an expression tree representing the binding of the value of a property from a
     ///     materialization expression to a parameter of the constructor, factory method, etc.
     /// </summary>
-    /// <param name="materializationExpression">The expression representing the materialization context.</param>
-    /// <param name="bindingInfoExpression">The expression representing the <see cref="ParameterBindingInfo" /> constant.</param>
+    /// <param name="materializationExpression">The expression representing the materialization
+    // context.</param>
+    /// <param name="bindingInfoExpression">The expression representing the <see
+    // cref="ParameterBindingInfo" /> constant.</param>
     /// <returns>The expression tree.</returns>
     public abstract Expression BindToParameter(
         Expression materializationExpression,

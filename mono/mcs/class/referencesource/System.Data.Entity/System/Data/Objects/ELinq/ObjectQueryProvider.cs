@@ -188,10 +188,13 @@ namespace System.Data.Objects.ELinq
         /// currently handled as special cases, and the default behavior is to
         /// use the Enumerable.Single materialization pattern.
         /// </summary>
-        /// <typeparam name="TResult">The expected result type and the required element type of the IEnumerable collection</typeparam>
+        /// <typeparam name="TResult">The expected result type and the required element type of the
+        // IEnumerable collection</typeparam>
         /// <param name="query">The query result set</param>
-        /// <param name="queryRoot">The expression that is the root of the LINQ query expression tree</param>
-        /// <returns>An instance of TResult if evaluation of the expression-specific singleton-producing function is successful</returns>
+        /// <param name="queryRoot">The expression that is the root of the LINQ query expression
+        // tree</param>
+        /// <returns>An instance of TResult if evaluation of the expression-specific singleton-producing
+        // function is successful</returns>
         internal static TResult ExecuteSingle<TResult>(
             IEnumerable<TResult> query,
             Expression queryRoot

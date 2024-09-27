@@ -681,7 +681,7 @@ namespace System.Web.UI
                             // This does not affect runtime since designMode is by-default false.
                             /*
                             else {
-                                flags.Clear(designMode);
+                            flags.Clear(designMode);
                             }
                             */
                         }
@@ -739,7 +739,8 @@ namespace System.Web.UI
         ///    <para> Gets or sets the identifier for the control. Setting the
         ///       property on a control allows programmatic access to the control's properties. If
         ///       this property is not specified on a control, either declaratively or
-        ///       programmatically, then you cannot write event handlers and the like for the control.</para>
+        ///       programmatically, then you cannot write event handlers and the like for the
+        // control.</para>
         /// </devdoc>
         [
             ParenthesizePropertyName(true),
@@ -1425,8 +1426,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Determine whether this control is a descendent of the passed in control
-         */
+        * Determine whether this control is a descendent of the passed in control
+        */
         internal bool IsDescendentOf(Control ancestor)
         {
             Control current = this;
@@ -1469,7 +1470,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        ///    <para> Gets the virtual directory of the Page or UserControl that contains this control.</para>
+        ///    <para> Gets the virtual directory of the Page or UserControl that contains this
+        // control.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -1786,7 +1788,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        ///    <para>Occurs when the control binds to a data source. Notifies the control to perform any data binding during this event.</para>
+        ///    <para>Occurs when the control binds to a data source. Notifies the control to perform any
+        // data binding during this event.</para>
         /// </devdoc>
         [WebCategory("Data"), WebSysDescription(SR.Control_OnDataBind)]
         public event EventHandler DataBinding
@@ -1796,7 +1799,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        ///    <para>Occurs when the control is initialized, the first step in the page lifecycle. Controls should
+        ///    <para>Occurs when the control is initialized, the first step in the page lifecycle. Controls
+        // should
         ///       perform any initialization steps that are required to create and set up an
         ///       instantiation.</para>
         /// </devdoc>
@@ -1808,7 +1812,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// <para>Occurs when the control is loaded to the <see cref='System.Web.UI.Page'/> object. Notifies the control to perform any steps that
+        /// <para>Occurs when the control is loaded to the <see cref='System.Web.UI.Page'/> object. Notifies
+        // the control to perform any steps that
         ///    need to occur on each page request.</para>
         /// </devdoc>
         [WebSysDescription(SR.Control_OnLoad)]
@@ -1916,7 +1921,8 @@ namespace System.Web.UI
 
         /// <devdoc>
         ///    <para> Causes the invoked controls' context to be pushed on the stack,
-        ///       then conditionally call OnDataBinging on the invoked control, and databind all of its child
+        ///       then conditionally call OnDataBinging on the invoked control, and databind all of its
+        // child
         ///       controls.  A control would call this with false if it overrides DataBind without calling
         ///       Control.DataBind, but still wants to be an IDataItemContainer.  FormView and DetailsView
         ///       are good examples of this.</para>
@@ -2473,7 +2479,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Load the control state, which is the essential state information needed even if view state is disabled.
+        /// Load the control state, which is the essential state information needed even if view state is
+        // disabled.
         /// </devdoc>
         protected internal virtual void LoadControlState(object savedState) { }
 
@@ -2664,11 +2671,16 @@ namespace System.Web.UI
 
         /// <devdoc>
         /// <para>
-        ///   This function takes a virtual path, that is a relative or root relative URL without a protocol.
-        ///   It returns the mapped physcial file name relative to the template source. It throws an exception if
-        ///   there is insufficient security access to read or investigate the mapped result. This should be used
-        ///   by controls that can read files and live in fully trusted DLLs such as System.Web.dll to prevent
-        ///   security issues. The exception thrown does not give away information about the mapping.  For absolute
+        ///   This function takes a virtual path, that is a relative or root relative URL without a
+        // protocol.
+        ///   It returns the mapped physcial file name relative to the template source. It throws an
+        // exception if
+        ///   there is insufficient security access to read or investigate the mapped result. This should be
+        // used
+        ///   by controls that can read files and live in fully trusted DLLs such as System.Web.dll to
+        // prevent
+        ///   security issues. The exception thrown does not give away information about the mapping.  For
+        // absolute
         ///   physical paths, this function checks permission
         /// </para>
         /// </devdoc>
@@ -2701,12 +2713,16 @@ namespace System.Web.UI
 
         /// <devdoc>
         /// <para>
-        ///   This function takes a virtual path, that is a relative or root relative URL without a protocol.
+        ///   This function takes a virtual path, that is a relative or root relative URL without a
+        // protocol.
         ///   It can also take a physical path, either local (c:\) or UNC.
         ///   It returns a stream used to read to contents of the file. It throws an exception if
-        ///   there is insufficient security access to read or investigate the mapped result. This should be used
-        ///   by controls that can read files and live in fully trusted DLLs such as System.Web.dll to prevent
-        ///   security issues. The exception thrown does not give away information about the mapping.  For absolute
+        ///   there is insufficient security access to read or investigate the mapped result. This should be
+        // used
+        ///   by controls that can read files and live in fully trusted DLLs such as System.Web.dll to
+        // prevent
+        ///   security issues. The exception thrown does not give away information about the mapping.  For
+        // absolute
         ///   physical paths, this function checks permission
         /// </para>
         /// </devdoc>
@@ -3013,12 +3029,13 @@ namespace System.Web.UI
         }
 
         /*
-         * Walk the tree and fill in profile information
-         */
+        * Walk the tree and fill in profile information
+        */
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Gathers information about the control and delivers it to the <see cref='System.Web.UI.Page.Trace'/>
+        /// <para>Gathers information about the control and delivers it to the <see
+        // cref='System.Web.UI.Page.Trace'/>
         /// property to be displayed when tracing is enabled for the page.</para>
         /// </devdoc>
         protected void BuildProfileTree(string parentId, bool calcViewState)
@@ -3076,7 +3093,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Save the control state, which is the essential state information needed even if view state is disabled.
+        /// Save the control state, which is the essential state information needed even if view state is
+        // disabled.
         /// </devdoc>
         protected internal virtual object SaveControlState()
         {
@@ -3421,7 +3439,8 @@ namespace System.Web.UI
 
 
         /// <devdoc>
-        ///    <para> Gets a ControlCollection object that represents the child controls for a specified control in the
+        ///    <para> Gets a ControlCollection object that represents the child controls for a specified
+        // control in the
         ///       UI hierarchy.</para>
         /// </devdoc>
         [
@@ -3519,7 +3538,8 @@ namespace System.Web.UI
         // fast enough that we cam always use it.
 
         /// <devdoc>
-        /// <para>Indicates whether the <see cref='System.Web.UI.StateBag'/> object is case-insensitive.</para>
+        /// <para>Indicates whether the <see cref='System.Web.UI.StateBag'/> object is
+        // case-insensitive.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -3568,19 +3588,21 @@ namespace System.Web.UI
             }
 
             /*
-             * The following is for times when AddChild is called after CreateChildControls. This
-             * allows users to add children at any time in the creation process without having
-             * to understand the underlying machinery.
-             * Note that if page is null, it means we haven't been attached to a container ourselves.
-             * If this is true, when we are, our children will be recursively set up.
-             */
+            * The following is for times when AddChild is called after CreateChildControls. This
+            * allows users to add children at any time in the creation process without having
+            * to understand the underlying machinery.
+            * Note that if page is null, it means we haven't been attached to a container ourselves.
+            * If this is true, when we are, our children will be recursively set up.
+            */
             if (_controlState >= ControlState.ChildrenInitialized)
             {
                 Debug.Assert(namingContainer != null);
                 control.InitRecursive(namingContainer);
 
-                // VSWhidbey 396372: We need to reregister the control state if the control is reparented because the control
-                // is unregistered during unload, but its already been inited once, so it will not get its Init called again
+                // VSWhidbey 396372: We need to reregister the control state if the control is reparented because
+                // the control
+                // is unregistered during unload, but its already been inited once, so it will not get its Init
+                // called again
                 // which is where most controls call RegisterRequiresControlState
                 if (
                     control._controlState >= ControlState.Initialized
@@ -3669,7 +3691,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        ///    <para>Make a URL absolute using the AppRelativeTemplateSourceDirectory.  The returned URL is for
+        ///    <para>Make a URL absolute using the AppRelativeTemplateSourceDirectory.  The returned URL is
+        // for
         ///        client use, and will contain the session cookie if appropriate.</para>
         /// </devdoc>
         public string ResolveUrl(string relativeUrl)
@@ -3915,8 +3938,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Called when the controls of a naming container are cleared.
-         */
+        * Called when the controls of a naming container are cleared.
+        */
         internal void ClearNamingContainer()
         {
             Debug.Assert(this is INamingContainer);
@@ -3944,7 +3967,8 @@ namespace System.Web.UI
         ///    <para>Determines if the current control contains any child
         ///       controls. Since this method simply deteremines if any child controls exist at
         ///       all, it can enhance performance by avoiding a call to the Count property,
-        ///       inherited from the <see cref='System.Web.UI.ControlCollection'/> class, on the <see cref='System.Web.UI.Control.Controls'/>
+        ///       inherited from the <see cref='System.Web.UI.ControlCollection'/> class, on the <see
+        // cref='System.Web.UI.Control.Controls'/>
         ///       property.</para>
         /// </devdoc>
         public virtual bool HasControls()
@@ -3953,18 +3977,18 @@ namespace System.Web.UI
         }
 
         /*
-         * Check if a Control either has children or has a compiled render method.
-         * This is to address issues like ASURT 94127
-         */
+        * Check if a Control either has children or has a compiled render method.
+        * This is to address issues like ASURT 94127
+        */
         internal bool HasRenderingData()
         {
             return HasControls() || HasRenderDelegate();
         }
 
         /*
-         * Check if a Control either has children or has a compiled render method.
-         * This is to address issues like ASURT 94127
-         */
+        * Check if a Control either has children or has a compiled render method.
+        * This is to address issues like ASURT 94127
+        */
         internal bool HasRenderDelegate()
         {
             if (RareFields != null)
@@ -3975,9 +3999,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Returns true if the container contains just a static string, i.e.,
-         * when the Controls collection has a single LiteralControl.
-         */
+        * Returns true if the container contains just a static string, i.e.,
+        * when the Controls collection has a single LiteralControl.
+        */
 
         /// <devdoc>
         ///    <para>Determines if the container holds literal content only.
@@ -4017,7 +4041,8 @@ namespace System.Web.UI
 
         /// <devdoc>
         ///    <para>Checks that the control contains child controls; if it does not, it creates
-        ///       them. This includes any literal content being parsed as a <see cref='System.Web.UI.LiteralControl'/>
+        ///       them. This includes any literal content being parsed as a <see
+        // cref='System.Web.UI.LiteralControl'/>
         ///       object. </para>
         /// </devdoc>
         protected virtual void EnsureChildControls()

@@ -13,7 +13,8 @@ namespace System.IdentityModel
         /// <summary>
         /// Determines whether a URI is valid and can be created using the specified UriKind.
         /// Uri.TryCreate is used here, which is more lax than Uri.IsWellFormedUriString.
-        /// The reason we use this function is because IsWellFormedUriString will reject valid URIs if they are IPv6 or require escaping.
+        /// The reason we use this function is because IsWellFormedUriString will reject valid URIs if they
+        // are IPv6 or require escaping.
         /// </summary>
         /// <param name="uriString">The string to check.</param>
         /// <param name="uriKind">The type of URI (usually UriKind.Absolute)</param>
@@ -28,7 +29,8 @@ namespace System.IdentityModel
         /// <summary>
         /// Determines whether a URI is valid and can be created using the specified UriKind.
         /// Uri.TryCreate is used here, which is more lax than Uri.IsWellFormedUriString.
-        /// The reason we use this function is because IsWellFormedUriString will reject valid URIs if they are IPv6 or require escaping.
+        /// The reason we use this function is because IsWellFormedUriString will reject valid URIs if they
+        // are IPv6 or require escaping.
         /// </summary>
         /// <param name="uriString">The string to check.</param>
         /// <param name="uriKind">The type of URI (usually UriKind.Absolute)</param>

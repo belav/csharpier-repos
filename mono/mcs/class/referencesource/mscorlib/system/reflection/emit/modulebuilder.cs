@@ -30,7 +30,8 @@ namespace System.Reflection.Emit
     {
         #region Private Data Members
         // WARNING!! WARNING!!
-        // InternalModuleBuilder should not contain any data members as its reflectbase is the same as Module.
+        // InternalModuleBuilder should not contain any data members as its reflectbase is the same as
+        // Module.
         #endregion
 
         private InternalModuleBuilder() { }
@@ -517,7 +518,8 @@ namespace System.Reflection.Emit
 #endif //!FEATURE_CORECLR
 
 #if !FEATURE_CORECLR
-        // This is a helper called by AssemblyBuilder save to presave information for the persistable modules.
+        // This is a helper called by AssemblyBuilder save to presave information for the persistable
+        // modules.
         // no need to lock here because we have already taken the lock in AssemblyBuilder.Save
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
@@ -965,7 +967,8 @@ namespace System.Reflection.Emit
             }
             else
             {
-                // Use methodDef as parent because the method lives in this assembly and its declaringType has no generic arguments
+                // Use methodDef as parent because the method lives in this assembly and its declaringType has no
+                // generic arguments
                 if (masmi != null)
                     tkParent = GetMethodToken(masmi).Token;
                 else
@@ -2207,7 +2210,8 @@ namespace System.Reflection.Emit
         #endregion
 
         #region GetToken
-        // For a generic type definition, we should return the token for the generic type definition itself in two cases:
+        // For a generic type definition, we should return the token for the generic type definition itself
+        // in two cases:
         //   1. GetTypeToken
         //   2. ldtoken (see ILGenerator)
         // For all other occasions we should return the generic type instantiated on its formal parameters.
@@ -2372,10 +2376,12 @@ namespace System.Reflection.Emit
             }
         }
 
-        // For a method on a generic type, we should return the methoddef token on the generic type definition in two cases
+        // For a method on a generic type, we should return the methoddef token on the generic type
+        // definition in two cases
         //   1. GetMethodToken
         //   2. ldtoken (see ILGenerator)
-        // For all other occasions we should return the method on the generic type instantiated on the formal parameters.
+        // For all other occasions we should return the method on the generic type instantiated on the
+        // formal parameters.
         [System.Security.SecurityCritical] // auto-generated
         private MethodToken GetMethodTokenNoLock(MethodInfo method, bool getGenericTypeDefinition)
         {
@@ -2548,12 +2554,17 @@ namespace System.Reflection.Emit
             }
 
             // useMethodDef flag only affects the result if we pass in a generic method definition.
-            // If the caller is looking for a token for an ldtoken/ldftn/ldvirtftn instruction and passes in a generic method definition info/builder,
-            // we correclty return the MethodDef/Ref token of the generic definition that can be used with ldtoken/ldftn/ldvirtftn.
+            // If the caller is looking for a token for an ldtoken/ldftn/ldvirtftn instruction and passes in a
+            // generic method definition info/builder,
+            // we correclty return the MethodDef/Ref token of the generic definition that can be used with
+            // ldtoken/ldftn/ldvirtftn.
             //
-            // If the caller is looking for a token for a call/callvirt/jmp instruction and passes in a generic method definition info/builder,
-            // we also return the generic MethodDef/Ref token, which is indeed not acceptable for call/callvirt/jmp instruction.
-            // But the caller can always instantiate the info/builder and pass it in. Then we build the right MethodSpec.
+            // If the caller is looking for a token for a call/callvirt/jmp instruction and passes in a generic
+            // method definition info/builder,
+            // we also return the generic MethodDef/Ref token, which is indeed not acceptable for
+            // call/callvirt/jmp instruction.
+            // But the caller can always instantiate the info/builder and pass it in. Then we build the right
+            // MethodSpec.
 
             lock (SyncRoot)
             {
@@ -2602,7 +2613,8 @@ namespace System.Reflection.Emit
                     tk = GetMethodTokenInternal(methodInfoUnbound).Token;
                 }
 
-                // For Ldtoken, Ldftn, and Ldvirtftn, we should emit the method def/ref token for a generic method definition.
+                // For Ldtoken, Ldftn, and Ldvirtftn, we should emit the method def/ref token for a generic method
+                // definition.
                 if (isGenericMethodDef && useMethodDef)
                 {
                     return tk;
@@ -2730,9 +2742,12 @@ namespace System.Reflection.Emit
             CheckContext(returnType, arrayClass);
             CheckContext(parameterTypes);
 
-            // GetArrayMethod is useful when you have an array of a type whose definition has not been completed and
-            // you want to access methods defined on Array. For example, you might define a type and want to define a
-            // method that takes an array of the type as a parameter. In order to access the elements of the array,
+            // GetArrayMethod is useful when you have an array of a type whose definition has not been completed
+            // and
+            // you want to access methods defined on Array. For example, you might define a type and want to
+            // define a
+            // method that takes an array of the type as a parameter. In order to access the elements of the
+            // array,
             // you will need to call methods of the Array class.
 
             MethodToken token = GetArrayMethodToken(
@@ -3142,7 +3157,8 @@ namespace System.Reflection.Emit
 
             // This API has never worked.  It seems like we might want to call m_iSymWriter.SetSymAttribute,
             // but we don't have a metadata token to associate the attribute with.  Instead
-            // MethodBuilder.SetSymCustomAttribute could be used to associate a symbol attribute with a specific method.
+            // MethodBuilder.SetSymCustomAttribute could be used to associate a symbol attribute with a specific
+            // method.
         }
 
         [Pure]

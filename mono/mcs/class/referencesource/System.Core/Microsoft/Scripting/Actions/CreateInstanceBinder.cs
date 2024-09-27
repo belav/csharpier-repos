@@ -1,24 +1,25 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System.Dynamic.Utils;
 
 namespace System.Dynamic
 {
     /// <summary>
-    /// Represents the create dynamic operation at the call site, providing the binding semantic and the details about the operation.
+    /// Represents the create dynamic operation at the call site, providing the binding semantic and the
+    // details about the operation.
     /// </summary>
     public abstract class CreateInstanceBinder : DynamicMetaObjectBinder
     {
@@ -65,7 +66,8 @@ namespace System.Dynamic
         }
 
         /// <summary>
-        /// When overridden in the derived class, performs the binding of the dynamic create operation if the target dynamic object cannot bind.
+        /// When overridden in the derived class, performs the binding of the dynamic create operation if
+        // the target dynamic object cannot bind.
         /// </summary>
         /// <param name="target">The target of the dynamic create operation.</param>
         /// <param name="args">The arguments of the dynamic create operation.</param>

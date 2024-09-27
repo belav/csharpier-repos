@@ -264,7 +264,8 @@ namespace System.Xml.Serialization
 #if DEBUG
                 else
                 {
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     throw new InvalidOperationException(
                         SR.Format(
                             SR.XmlInternalErrorDetails,
@@ -815,11 +816,12 @@ namespace System.Xml.Serialization
         private static XmlSchema CreateFakeXsdSchema(string ns, string name)
         {
             /* Create fake xsd schema to fool the XmlSchema.Compiler
-                <xsd:schema targetNamespace="http://www.w3.org/2001/XMLSchema" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-                  <xsd:element name="schema">
-                    <xsd:complexType />
-                  </xsd:element>
-                </xsd:schema>
+            <xsd:schema targetNamespace="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+            <xsd:element name="schema">
+            <xsd:complexType />
+            </xsd:element>
+            </xsd:schema>
             */
             XmlSchema schema = new XmlSchema();
             schema.TargetNamespace = ns;

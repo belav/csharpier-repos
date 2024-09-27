@@ -3,16 +3,16 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _WinInetCache.cs
+_WinInetCache.cs
 
 Abstract:
-    The class implements low-level object model for
-    communications with the caching part of WinInet DLL
+The class implements low-level object model for
+communications with the caching part of WinInet DLL
 
 
 Author:
 
-    Alexei Vopilov    21-Dec-2002
+Alexei Vopilov    21-Dec-2002
 
 Revision History:
 
@@ -53,11 +53,12 @@ namespace System.Net.Cache
             Sparse = 0x00010000,
             Cookie = 0x00100000,
             UrlHistory = 0x00200000,
-            //            FindDefaultFilter   = NormalEntry|StickyEntry|Cookie|UrlHistory|TrackOffline|TrackOnline
+            //            FindDefaultFilter   =
+            // NormalEntry|StickyEntry|Cookie|UrlHistory|TrackOffline|TrackOnline
         }
 
         /*
-            Some More IE private entry types
+        Some More IE private entry types
         HTTP_1_1_CACHE_ENTRY            0x00000040
         STATIC_CACHE_ENTRY              0x00000080
         MUST_REVALIDATE_CACHE_ENTRY     0x00000100
@@ -71,22 +72,22 @@ namespace System.Net.Cache
         POST_RESPONSE_CACHE_ENTRY       0x04000000
         INSTALLED_CACHE_ENTRY           0x10000000
         POST_
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        */
 
 
         //  Some supported Entry fields references
@@ -632,14 +633,14 @@ namespace System.Net.Cache
         // Gets the managed copy of a null terminated string resided in the buffer
         //
 #if DEBUG
-        /*
-        // Consider removing.
-        private static unsafe string GetEntryBufferString(byte[] buffer, int offset) {
-            fixed (void* bufferPtr = buffer) {
-                return GetEntryBufferString(bufferPtr, offset);
-            }
-        }
-        */
+/*
+// Consider removing.
+private static unsafe string GetEntryBufferString(byte[] buffer, int offset) {
+fixed (void* bufferPtr = buffer) {
+return GetEntryBufferString(bufferPtr, offset);
+}
+}
+*/
 #endif
         private static unsafe string GetEntryBufferString(void* bufferPtr, int offset)
         {
@@ -680,7 +681,8 @@ namespace System.Net.Cache
                 bufferPtr->HeaderInfoChars + ((int)(bufferPtr->_OffsetHeaderInfo)) / c_CharSz;
             if (bufferCharLength * c_CharSz > entry.MaxBufferBytes)
             {
-                // WinInet bug? They may report offset+HeaderInfoChars as a greater value than MaxBufferBytes as total buffer size.
+                // WinInet bug? They may report offset+HeaderInfoChars as a greater value than MaxBufferBytes as
+                // total buffer size.
                 // Actually, the last one seems to be accurate based on the data we have provided for Commit.
                 bufferCharLength = entry.MaxBufferBytes / c_CharSz;
             }
@@ -697,90 +699,93 @@ namespace System.Net.Cache
             return entry.Error;
         }
         /********************
-                    ArrayList result = new ArrayList();
-                    NameValueCollection collection = new NameValueCollection();
-                    int offset = (int)bufferPtr->_OffsetHeaderInfo/c_CharSz;
-                    char *charPtr = (char*)bufferPtr;
-                    {
-                        int i = offset+1;
-                        for (; i < entry.MaxBufferBytes/c_CharSz; ++i) {
-                            if ((charPtr[i] == ':' || (charPtr[i] == '\n' && charPtr[(i-1)] == '\r'))) {
-                                break;
-                            }
-                        }
-                        if (i < entry.MaxBufferBytes/c_CharSz) {
-                            //If this looks like a status line
-                            if (charPtr[i] == '\n' && i > offset+1) {
-                                string s = Encoding.Unicode.GetString(buffer, offset*2, (i-offset-1)*2);
-                                offset = i+1;
-                                collection[string.Empty] = s;
-                            }
-                        }
-                    }
-                    int bufferCharLength = bufferPtr->HeaderInfoChars + ((int)(bufferPtr->_OffsetHeaderInfo))/c_CharSz;
-                    if (bufferCharLength*c_CharSz > entry.MaxBufferBytes) {
-                        // WinInet bug? They may report offset+HeaderInfoChars as a greater value than total buffer size.
-                        // Actually, the last one seems to be accurate based on the data we have provided for Commit.
-                        bufferCharLength = entry.MaxBufferBytes/c_CharSz;
-                    }
+        ArrayList result = new ArrayList();
+        NameValueCollection collection = new NameValueCollection();
+        int offset = (int)bufferPtr->_OffsetHeaderInfo/c_CharSz;
+        char *charPtr = (char*)bufferPtr;
+        {
+        int i = offset+1;
+        for (; i < entry.MaxBufferBytes/c_CharSz; ++i) {
+        if ((charPtr[i] == ':' || (charPtr[i] == '\n' && charPtr[(i-1)] == '\r'))) {
+        break;
+        }
+        }
+        if (i < entry.MaxBufferBytes/c_CharSz) {
+        //If this looks like a status line
+        if (charPtr[i] == '\n' && i > offset+1) {
+        string s = Encoding.Unicode.GetString(buffer, offset*2, (i-offset-1)*2);
+        offset = i+1;
+        collection[string.Empty] = s;
+        }
+        }
+        }
+        int bufferCharLength = bufferPtr->HeaderInfoChars + ((int)(bufferPtr->_OffsetHeaderInfo))/c_CharSz;
+        if (bufferCharLength*c_CharSz > entry.MaxBufferBytes) {
+        // WinInet bug? They may report offset+HeaderInfoChars as a greater value than total buffer size.
+        // Actually, the last one seems to be accurate based on the data we have provided for Commit.
+        bufferCharLength = entry.MaxBufferBytes/c_CharSz;
+        }
         
-                    while (true) {
-                        int totalLength = 0;
-                        DataParseStatus status = WebHeaderCollection.ParseHeaders(collection, false, buffer, bufferCharLength,
-                                                ref offset,
-                                                ref totalLength,
-                                                entry.MaxBufferBytes/c_CharSz);
+        while (true) {
+        int totalLength = 0;
+        DataParseStatus status = WebHeaderCollection.ParseHeaders(collection, false, buffer,
+        bufferCharLength,
+        ref offset,
+        ref totalLength,
+        entry.MaxBufferBytes/c_CharSz);
         
-                        if (status != DataParseStatus.Done) {
-                            if (status == DataParseStatus.NeedMoreData) {
-                                //WinInet puts terminating null at the end of the buffer, accept that as a "normal" case.
-                                if ((offset+1 == bufferCharLength) && charPtr[offset] == 0) {
-                                     // accept as the last metainfo block
-                                     if (collection.Count != 0) {
-                                         result.Add(collection);
-                                     }
-                                     break;
-                                }
-                            }
-                            entry.Error = Status.CorruptedHeaders;
-                            //throw new InvalidOperationException("Cannot convert Cache Entry metadata into a NameValueCollection instance");
-                            break;
-                        }
+        if (status != DataParseStatus.Done) {
+        if (status == DataParseStatus.NeedMoreData) {
+        //WinInet puts terminating null at the end of the buffer, accept that as a "normal" case.
+        if ((offset+1 == bufferCharLength) && charPtr[offset] == 0) {
+        // accept as the last metainfo block
+        if (collection.Count != 0) {
+        result.Add(collection);
+        }
+        break;
+        }
+        }
+        entry.Error = Status.CorruptedHeaders;
+        //throw new InvalidOperationException("Cannot convert Cache Entry metadata into a
+        NameValueCollection instance");
+        break;
+        }
         
-                        result.Add(collection);
-                        // do we have more meta data?
-                        if (offset >= bufferCharLength) {
-                            break;
-                        }
-                        // continue parsing next collection
-                        collection = new NameValueCollection();
-                    }
-                    entry.MetaInfo = (result.Count == 0? null: (NameValueCollection[])result.ToArray(typeof(NameValueCollection)));
-                    return entry.Error;
-                }
+        result.Add(collection);
+        // do we have more meta data?
+        if (offset >= bufferCharLength) {
+        break;
+        }
+        // continue parsing next collection
+        collection = new NameValueCollection();
+        }
+        entry.MetaInfo = (result.Count == 0? null:
+        (NameValueCollection[])result.ToArray(typeof(NameValueCollection)));
+        return entry.Error;
+        }
         *********************/
 #if DEBUG
 
-        /*
-        // Consider removing.
-        //
-        // For debugging will return a readbale representation of a cached entry info
-        //
-        private static string DebugEntryBuffer(byte[] buffer, int entryBufSize) {
+/*
+// Consider removing.
+//
+// For debugging will return a readbale representation of a cached entry info
+//
+private static string DebugEntryBuffer(byte[] buffer, int entryBufSize) {
 
-            EntryBuffer Info;
-            if (entryBufSize < EntryBuffer.MarshalSize) {
-                throw new ArgumentOutOfRangeException("size");
-            }
-            unsafe {
-                fixed(void* vptr = buffer) {
-                    IntPtr ptr = new IntPtr(vptr);
-                    Info = (EntryBuffer)Marshal.PtrToStructure(ptr,typeof(EntryBuffer));
-                }
-            }
+EntryBuffer Info;
+if (entryBufSize < EntryBuffer.MarshalSize) {
+throw new ArgumentOutOfRangeException("size");
+}
+unsafe {
+fixed(void* vptr = buffer) {
+IntPtr ptr = new IntPtr(vptr);
+Info = (EntryBuffer)Marshal.PtrToStructure(ptr,typeof(EntryBuffer));
+}
+}
 
-            string allHeaders = null;
-            //
+string allHeaders = null;
+//
 
 
 

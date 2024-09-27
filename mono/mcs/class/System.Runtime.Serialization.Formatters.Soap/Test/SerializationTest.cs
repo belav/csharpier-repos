@@ -594,7 +594,8 @@ namespace MonoTests.System.Runtime.Serialization.Formatters.Soap
             // FIXME: Once double.ToString("G17") is implemented
             // we'll be able to serialize double.MaxValue and double.MinValue.
             // Currently, it throws a System.OverflowException.
-            //_doubles = new double[] { 1010101.101010, 292929.29292, 3838383.38383, 4747474.474, 56565.5656565, 0, Double.NaN, Double.MaxValue, Double.MinValue, Double.NegativeInfinity, Double.PositiveInfinity };
+            //_doubles = new double[] { 1010101.101010, 292929.29292, 3838383.38383, 4747474.474, 56565.5656565,
+            // 0, Double.NaN, Double.MaxValue, Double.MinValue, Double.NegativeInfinity, Double.PositiveInfinity };
             _doubles = new double[]
             {
                 1010101.101010,

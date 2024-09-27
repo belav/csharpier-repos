@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         public const string NamingPreferencesOptionName = "dotnet_naming_preferences";
 
         /// <summary>
-        /// This option describes the naming rules that should be applied to specified categories of symbols,
+        /// This option describes the naming rules that should be applied to specified categories of
+        // symbols,
         /// and the level to which those rules should be enforced.
         /// </summary>
         internal static PerLanguageOption2<NamingStylePreferences> NamingPreferences { get; } =

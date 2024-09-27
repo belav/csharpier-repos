@@ -65,7 +65,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of <see cref="Saml2SecurityTokenHandler"/>
         /// </summary>
-        /// <param name="samlSecurityTokenRequirement">The SamlSecurityTokenRequirement to be used by the Saml2SecurityTokenHandler instance when validating tokens.</param>
+        /// <param name="samlSecurityTokenRequirement">The SamlSecurityTokenRequirement to be used by the
+        // Saml2SecurityTokenHandler instance when validating tokens.</param>
         public Saml2SecurityTokenHandler(SamlSecurityTokenRequirement samlSecurityTokenRequirement)
         {
             if (samlSecurityTokenRequirement == null)
@@ -82,8 +83,10 @@ namespace System.IdentityModel.Tokens
         /// Load custom configuration from Xml
         /// </summary>
         /// <param name="customConfigElements">SAML token authentication requirements.</param>
-        /// <exception cref="ArgumentNullException">Input parameter 'customConfigElements' is null.</exception>
-        /// <exception cref="InvalidOperationException">Custom configuration specified was invalid.</exception>
+        /// <exception cref="ArgumentNullException">Input parameter 'customConfigElements' is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Custom configuration specified was
+        // invalid.</exception>
         public override void LoadCustomConfiguration(XmlNodeList customConfigElements)
         {
             if (customConfigElements == null)
@@ -140,7 +143,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="X509CertificateValidator"/> that is used by the current instance to validate
+        /// Gets or sets the <see cref="X509CertificateValidator"/> that is used by the current instance to
+        // validate
         /// certificates that have signed the <see cref="Saml2SecurityToken"/>.
         /// </summary>
         public X509CertificateValidator CertificateValidator
@@ -167,8 +171,10 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a <see cref="SecurityTokenSerializer"/> that will be used to serialize and deserialize
-        /// a <see cref="SecurityKeyIdentifier"/>. For example, SamlSubject SecurityKeyIdentifier or Signature
+        /// Gets or sets a <see cref="SecurityTokenSerializer"/> that will be used to serialize and
+        // deserialize
+        /// a <see cref="SecurityKeyIdentifier"/>. For example, SamlSubject SecurityKeyIdentifier or
+        // Signature
         /// SecurityKeyIdentifier.
         /// </summary>
         public SecurityTokenSerializer KeyInfoSerializer
@@ -229,7 +235,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates a <see cref="SecurityKeyIdentifierClause"/> to be used as the security token reference when the token is not attached to the message.
+        /// Creates a <see cref="SecurityKeyIdentifierClause"/> to be used as the security token reference
+        // when the token is not attached to the message.
         /// </summary>
         /// <param name="token">The saml token.</param>
         /// <param name="attached">Boolean that indicates if a attached or unattached
@@ -249,9 +256,11 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates a <see cref="SecurityToken"/> based on a information contained in the <see cref="SecurityTokenDescriptor"/>.
+        /// Creates a <see cref="SecurityToken"/> based on a information contained in the <see
+        // cref="SecurityTokenDescriptor"/>.
         /// </summary>
-        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that has creation information.</param>
+        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that has creation
+        // information.</param>
         /// <returns>A <see cref="SecurityToken"/> instance.</returns>
         /// <exception cref="ArgumentNullException">Thrown if 'tokenDescriptor' is null.</exception>
         public override SecurityToken CreateToken(SecurityTokenDescriptor tokenDescriptor)
@@ -313,12 +322,17 @@ namespace System.IdentityModel.Tokens
         /// Validates a <see cref="Saml2SecurityToken"/>.
         /// </summary>
         /// <param name="token">The <see cref="Saml2SecurityToken"/> to validate.</param>
-        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
+        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the
+        // identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'token' is null.</exception>
-        /// <exception cref="ArgumentException">The token is not of assignable from <see cref="Saml2SecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
-        /// <exception cref="SecurityTokenValidationException">Thrown if Saml2SecurityToken.Assertion.IssuerToken is null.</exception>
-        /// <exception cref="SecurityTokenValidationException">Thrown if Saml2SecurityToken.Assertion.SigningToken is null.</exception>
+        /// <exception cref="ArgumentException">The token is not of assignable from <see
+        // cref="Saml2SecurityToken"/>.</exception>
+        /// <exception cref="InvalidOperationException">Configuration <see
+        // cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
+        /// <exception cref="SecurityTokenValidationException">Thrown if
+        // Saml2SecurityToken.Assertion.IssuerToken is null.</exception>
+        /// <exception cref="SecurityTokenValidationException">Thrown if
+        // Saml2SecurityToken.Assertion.SigningToken is null.</exception>
         /// <exception cref="InvalidOperationException">Saml2SecurityToken.Assertion is null.</exception>
         public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
@@ -376,7 +390,8 @@ namespace System.IdentityModel.Tokens
                 );
 
                 //
-                // We need something like AudienceUriMode and have a setting on Configuration to allow extensibility and custom settings
+                // We need something like AudienceUriMode and have a setting on Configuration to allow extensibility
+                // and custom settings
                 // By default we only check bearer tokens
                 //
                 if (this.Configuration.DetectReplayedTokens)
@@ -404,8 +419,10 @@ namespace System.IdentityModel.Tokens
 
                 if (this.samlSecurityTokenRequirement.MapToWindows)
                 {
-                    // TFS: 153865, Microsoft WindowsIdentity does not set Authtype. I don't think that authtype should be set here anyway.
-                    // The authtype will be S4U (kerberos) it doesn't really matter that the upn arrived in a SAML token.
+                    // TFS: 153865, Microsoft WindowsIdentity does not set Authtype. I don't think that authtype should
+                    // be set here anyway.
+                    // The authtype will be S4U (kerberos) it doesn't really matter that the upn arrived in a SAML
+                    // token.
                     claimsIdentity = this.CreateWindowsIdentity(this.FindUpn(claimsIdentity));
 
                     // PARTIAL TRUST: will fail when adding claims, AddClaims is SecurityCritical.
@@ -465,10 +482,13 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes a Saml2 Token using the XmlWriter.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityToken"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="SecurityToken"/>.</param>
         /// <param name="token">The <see cref="SecurityToken"/> to serialize.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'writer' or 'token' is null.</exception>
-        /// <exception cref="ArgumentException">The input argument 'token' is not a <see cref="Saml2SecurityToken"/>.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'writer' or 'token' is
+        // null.</exception>
+        /// <exception cref="ArgumentException">The input argument 'token' is not a <see
+        // cref="Saml2SecurityToken"/>.</exception>
         public override void WriteToken(XmlWriter writer, SecurityToken token)
         {
             if (writer == null)
@@ -497,9 +517,11 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Indicates whether the current XML element can be read as a token of the type handled by this instance.
+        /// Indicates whether the current XML element can be read as a token of the type handled by this
+        // instance.
         /// </summary>
-        /// <param name="reader">An <see cref="XmlReader"/> reader positioned at a start element. The reader should not be advanced.</param>
+        /// <param name="reader">An <see cref="XmlReader"/> reader positioned at a start element. The reader
+        // should not be advanced.</param>
         /// <returns>'True' if the ReadToken method can read the element.</returns>
         public override bool CanReadToken(XmlReader reader)
         {
@@ -516,8 +538,10 @@ namespace System.IdentityModel.Tokens
         /// Indicates if the current XML element is pointing to a KeyIdentifierClause that
         /// can be serialized by this instance.
         /// </summary>
-        /// <param name="reader">An <see cref="XmlReader"/> reader positioned at a start element. The reader should not be advanced.</param>
-        /// <returns>'True' if the ReadKeyIdentifierClause can read the element. 'False' otherwise.</returns>
+        /// <param name="reader">An <see cref="XmlReader"/> reader positioned at a start element. The reader
+        // should not be advanced.</param>
+        /// <returns>'True' if the ReadKeyIdentifierClause can read the element. 'False'
+        // otherwise.</returns>
         public override bool CanReadKeyIdentifierClause(XmlReader reader)
         {
             return IsSaml2KeyIdentifierClause(reader);
@@ -528,7 +552,8 @@ namespace System.IdentityModel.Tokens
         /// instance.
         /// </summary>
         /// <param name="securityKeyIdentifierClause">SecurityKeyIdentifierClause to be serialized.</param>
-        /// <returns>"True' if the given SecurityKeyIdentifierClause can be serialized. 'False' otherwise.</returns>
+        /// <returns>"True' if the given SecurityKeyIdentifierClause can be serialized. 'False'
+        // otherwise.</returns>
         public override bool CanWriteKeyIdentifierClause(
             SecurityKeyIdentifierClause securityKeyIdentifierClause
         )
@@ -540,7 +565,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads a SecurityKeyIdentifierClause.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see cref="SecurityKeyIdentifierClause"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see
+        // cref="SecurityKeyIdentifierClause"/> element.</param>
         /// <returns>A <see cref="SecurityKeyIdentifierClause"/> instance.</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'reader' is null.</exception>
         public override SecurityKeyIdentifierClause ReadKeyIdentifierClause(XmlReader reader)
@@ -675,9 +701,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads a SAML 2.0 token from the XmlReader.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see cref="Saml2SecurityToken"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see
+        // cref="Saml2SecurityToken"/> element.</param>
         /// <returns>An instance of <see cref="Saml2SecurityToken"/>.</returns>
-        /// <exception cref="InvalidOperationException">Is thrown if 'Configuration', 'Configruation.IssuerTokenResolver' or 'Configuration.ServiceTokenResolver is null.</exception>
+        /// <exception cref="InvalidOperationException">Is thrown if 'Configuration',
+        // 'Configruation.IssuerTokenResolver' or 'Configuration.ServiceTokenResolver is null.</exception>
         public override SecurityToken ReadToken(XmlReader reader)
         {
             if (Configuration == null)
@@ -716,9 +744,12 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Serializes a Saml2AssertionKeyIdentifierClause to the XmlWriter.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifierClause"/>.</param>
-        /// <param name="securityKeyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to be serialized.</param>
-        /// <exception cref="ArgumentNullException">Input parameter 'writer' or 'securityKeyIdentifierClause' is null.</exception>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="SecurityKeyIdentifierClause"/>.</param>
+        /// <param name="securityKeyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to be
+        // serialized.</param>
+        /// <exception cref="ArgumentNullException">Input parameter 'writer' or
+        // 'securityKeyIdentifierClause' is null.</exception>
         public override void WriteKeyIdentifierClause(
             XmlWriter writer,
             SecurityKeyIdentifierClause securityKeyIdentifierClause
@@ -953,7 +984,8 @@ namespace System.IdentityModel.Tokens
         /// Indicates if the current XML element is pointing to a Saml2SecurityKeyIdentifierClause.
         /// </summary>
         /// <param name="reader">An <see cref="XmlReader"/> reader.</param>
-        /// <returns>'True' if reader contains a <see cref="Saml2SecurityKeyIdentifierClause"/>. 'False' otherwise.</returns>
+        /// <returns>'True' if reader contains a <see cref="Saml2SecurityKeyIdentifierClause"/>. 'False'
+        // otherwise.</returns>
         internal static bool IsSaml2KeyIdentifierClause(XmlReader reader)
         {
             if (!reader.IsStartElement(WSSE.Elements.SecurityTokenReference, WSSE.Namespace))
@@ -1203,8 +1235,10 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Generates a Saml2Attribute from a claim.
         /// </summary>
-        /// <param name="claim">The <see cref="Claim"/> from which to generate a <see cref="Saml2Attribute"/>.</param>
-        /// <param name="tokenDescriptor">Contains all the information that is used in token issuance.</param>
+        /// <param name="claim">The <see cref="Claim"/> from which to generate a <see
+        // cref="Saml2Attribute"/>.</param>
+        /// <param name="tokenDescriptor">Contains all the information that is used in token
+        // issuance.</param>
         /// <returns>A <see cref="Saml2Attribute"/> based on the claim.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'claim' is null.</exception>
         protected virtual Saml2Attribute CreateAttribute(
@@ -1248,12 +1282,16 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates <see cref="Saml2AttributeStatement"/> from a <see cref="SecurityTokenDescriptor"/> and a <see cref="ClaimsIdentity"/>
+        /// Creates <see cref="Saml2AttributeStatement"/> from a <see cref="SecurityTokenDescriptor"/> and a
+        // <see cref="ClaimsIdentity"/>
         /// </summary>
-        /// <remarks>This method may return null if the token descriptor does not contain any subject or the subject does not have any claims.
+        /// <remarks>This method may return null if the token descriptor does not contain any subject or the
+        // subject does not have any claims.
         /// </remarks>
-        /// <param name="subject">The <see cref="ClaimsIdentity"/> that contains claims which will be converted to SAML Attributes.</param>
-        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on building the <see cref="Saml2AttributeStatement"/>.</param>
+        /// <param name="subject">The <see cref="ClaimsIdentity"/> that contains claims which will be
+        // converted to SAML Attributes.</param>
+        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains
+        // information on building the <see cref="Saml2AttributeStatement"/>.</param>
         /// <returns>A Saml2AttributeStatement.</returns>
         protected virtual Saml2AttributeStatement CreateAttributeStatement(
             ClaimsIdentity subject,
@@ -1306,7 +1344,8 @@ namespace System.IdentityModel.Tokens
         /// single attribute with multiple values.
         /// </summary>
         /// <param name="attributes">List of attributes generated from claims.</param>
-        /// <returns>A <see cref="ICollection{T}"/> of <see cref="Saml2Attribute"/> with common attributes collected into value lists.</returns>
+        /// <returns>A <see cref="ICollection{T}"/> of <see cref="Saml2Attribute"/> with common attributes
+        // collected into value lists.</returns>
         protected virtual ICollection<Saml2Attribute> CollectAttributeValues(
             ICollection<Saml2Attribute> attributes
         )
@@ -1345,9 +1384,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Adds all the delegates associated with the subject into the attribute collection.
         /// </summary>
-        /// <param name="subject">The delegate of this <see cref="ClaimsIdentity"/> will be serialized into a <see cref="Saml2Attribute"/>.</param>
+        /// <param name="subject">The delegate of this <see cref="ClaimsIdentity"/> will be serialized into
+        // a <see cref="Saml2Attribute"/>.</param>
         /// <param name="attributes">A <see cref="ICollection{T}"/> of <see cref="Saml2Attribute"/>.</param>
-        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on building the delegate.</param>
+        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains
+        // information on building the delegate.</param>
         protected virtual void AddDelegateToAttributes(
             ClaimsIdentity subject,
             ICollection<Saml2Attribute> attributes,
@@ -1401,7 +1442,9 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="attributes">An enumeration of Saml2Attributes.</param>
         /// <returns>A well-formed XML string.</returns>
-        /// <remarks>The string is of the form ""&lt;Actor&gt;&lt;Attribute name, ns&gt;&lt;AttributeValue&gt;...&lt;/AttributeValue&gt;, ...&lt;/Attribute&gt;...&lt;/Actor&gt;"</remarks>
+        /// <remarks>The string is of the form ""&lt;Actor&gt;&lt;Attribute name,
+        // ns&gt;&lt;AttributeValue&gt;...&lt;/AttributeValue&gt;,
+        // ...&lt;/Attribute&gt;...&lt;/Actor&gt;"</remarks>
         protected virtual string CreateXmlStringFromAttributes(
             IEnumerable<Saml2Attribute> attributes
         )
@@ -1445,7 +1488,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Creates an <see cref="IEnumerable{T}"/> of <see cref="Saml2Statement"/> to be included in the assertion.
+        /// Creates an <see cref="IEnumerable{T}"/> of <see cref="Saml2Statement"/> to be included in the
+        // assertion.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -1453,7 +1497,8 @@ namespace System.IdentityModel.Tokens
         /// return an empty collection.
         /// </para>
         /// </remarks>
-        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains information on creating the <see cref="Saml2Statement"/>.</param>
+        /// <param name="tokenDescriptor">The <see cref="SecurityTokenDescriptor"/> that contains
+        // information on creating the <see cref="Saml2Statement"/>.</param>
         /// <returns>An enumeration of Saml2Statements.</returns>
         protected virtual IEnumerable<Saml2Statement> CreateStatements(
             SecurityTokenDescriptor tokenDescriptor
@@ -1493,12 +1538,14 @@ namespace System.IdentityModel.Tokens
         /// to be added to the Saml2Assertion that is produced by the factory.
         /// </summary>
         /// <param name="authInfo">
-        /// An AuthenticationInformation object containing the state to be wrapped as a Saml2AuthenticationStatement
+        /// An AuthenticationInformation object containing the state to be wrapped as a
+        // Saml2AuthenticationStatement
         /// object.
         /// </param>
         /// <param name="tokenDescriptor">The token descriptor.</param>
         /// <returns>
-        /// The Saml2AuthenticationStatement to add to the assertion being created or null to ignore the AuthenticationInformation
+        /// The Saml2AuthenticationStatement to add to the assertion being created or null to ignore the
+        // AuthenticationInformation
         /// being wrapped as a statement.
         /// </returns>
         protected virtual Saml2AuthenticationStatement CreateAuthenticationStatement(
@@ -1740,7 +1787,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Override this method to change the token encrypting credentials.
         /// </summary>
-        /// <param name="tokenDescriptor">Retrieve some scope encrypting credentials from the Scope object</param>
+        /// <param name="tokenDescriptor">Retrieve some scope encrypting credentials from the Scope
+        // object</param>
         /// <returns>the token encrypting credentials</returns>
         /// <exception cref="ArgumentNullException">When the given tokenDescriptor is null</exception>
         protected virtual EncryptingCredentials GetEncryptingCredentials(
@@ -1804,7 +1852,8 @@ namespace System.IdentityModel.Tokens
         /// may contain unsupported SAML2 elements.
         /// </remarks>
         /// <param name="conditions">SAML 2.0 condition to be validated.</param>
-        /// <param name="enforceAudienceRestriction">True to check for Audience Restriction condition.</param>
+        /// <param name="enforceAudienceRestriction">True to check for Audience Restriction
+        // condition.</param>
         protected virtual void ValidateConditions(
             Saml2Conditions conditions,
             bool enforceAudienceRestriction
@@ -1892,7 +1941,8 @@ namespace System.IdentityModel.Tokens
         /// Finds the UPN claim value in the provided <see cref="ClaimsIdentity" /> object for the purpose
         /// of mapping the identity to a <see cref="WindowsIdentity" /> object.
         /// </summary>
-        /// <param name="claimsIdentity">The claims identity object containing the desired UPN claim.</param>
+        /// <param name="claimsIdentity">The claims identity object containing the desired UPN
+        // claim.</param>
         /// <returns>The UPN claim value found.</returns>
         protected virtual string FindUpn(ClaimsIdentity claimsIdentity)
         {
@@ -1903,7 +1953,8 @@ namespace System.IdentityModel.Tokens
         /// Returns the Saml2 AuthenticationContext matching a normalized value.
         /// </summary>
         /// <param name="normalizedAuthenticationType">Normalized value.</param>
-        /// <returns>A string that represents the denormalized authentication type used to obtain the token.</returns>
+        /// <returns>A string that represents the denormalized authentication type used to obtain the
+        // token.</returns>
         protected virtual string DenormalizeAuthenticationType(string normalizedAuthenticationType)
         {
             return AuthenticationTypeMaps.Denormalize(
@@ -1918,11 +1969,16 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="token">The token to detect for replay.</param>
         /// <exception cref="ArgumentNullException">The input argument 'token' is null.</exception>
-        /// <exception cref="InvalidOperationException">Configuration or Configuration.TokenReplayCache property is null.</exception>
-        /// <exception cref="ArgumentException">The input argument 'token' can not be cast as a 'Saml2SecurityToken'.</exception>
-        /// <exception cref="SecurityTokenValidationException">The Saml2SecurityToken.Assertion.Id.Value is null or empty.</exception>
-        /// <exception cref="SecurityTokenReplayDetectedException">The token is found in the <see cref="TokenReplayCache" />.</exception>
-        /// <remarks>The default behavior is to only check tokens bearer tokens (tokens that do not have keys).</remarks>
+        /// <exception cref="InvalidOperationException">Configuration or Configuration.TokenReplayCache
+        // property is null.</exception>
+        /// <exception cref="ArgumentException">The input argument 'token' can not be cast as a
+        // 'Saml2SecurityToken'.</exception>
+        /// <exception cref="SecurityTokenValidationException">The Saml2SecurityToken.Assertion.Id.Value is
+        // null or empty.</exception>
+        /// <exception cref="SecurityTokenReplayDetectedException">The token is found in the <see
+        // cref="TokenReplayCache" />.</exception>
+        /// <remarks>The default behavior is to only check tokens bearer tokens (tokens that do not have
+        // keys).</remarks>
         protected override void DetectReplayedToken(SecurityToken token)
         {
             if (token == null)
@@ -2026,11 +2082,13 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="token">The token to return an expiration time for.</param>
         /// <exception cref="ArgumentNullException">The input argument 'token' is null.</exception>
-        /// <exception cref="SecurityTokenValidationException">The Saml2SecurityToken's validity period is greater than the expiration period set to TokenReplayCache.</exception>
+        /// <exception cref="SecurityTokenValidationException">The Saml2SecurityToken's validity period is
+        // greater than the expiration period set to TokenReplayCache.</exception>
         /// <returns>A DateTime representing the expiration time.</returns>
         /// <remarks>By default, this function returns the NotOnOrAfter of the SAML Condition if present.
         /// If that value does not exist, it returns the NotOnOrAfter of the first SubjectConfirmationData.
-        /// This function will never return a value further from now than Configuration.TokenReplayCacheExpirationPeriod.</remarks>
+        /// This function will never return a value further from now than
+        // Configuration.TokenReplayCacheExpirationPeriod.</remarks>
         protected virtual DateTime GetTokenReplayCacheEntryExpirationTime(Saml2SecurityToken token)
         {
             if (token == null)
@@ -2099,7 +2157,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Returns the normalized value matching a SAML2 AuthenticationContext class reference.
         /// </summary>
-        /// <param name="saml2AuthenticationContextClassReference">A string representing the <see cref="Saml2Constants.AuthenticationContextClasses"/></param>
+        /// <param name="saml2AuthenticationContextClassReference">A string representing the <see
+        // cref="Saml2Constants.AuthenticationContextClasses"/></param>
         /// <returns>Normalized value.</returns>
         protected virtual string NormalizeAuthenticationContextClassReference(
             string saml2AuthenticationContextClassReference
@@ -2250,14 +2309,18 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// This method gets called when a special type of Saml2Attribute is detected. The Saml2Attribute passed in
-        /// wraps a Saml2Attribute that contains a collection of AttributeValues, each of which will get mapped to a
+        /// This method gets called when a special type of Saml2Attribute is detected. The Saml2Attribute
+        // passed in
+        /// wraps a Saml2Attribute that contains a collection of AttributeValues, each of which will get
+        // mapped to a
         /// claim.  All of the claims will be returned in an ClaimsIdentity with the specified issuer.
         /// </summary>
         /// <param name="attribute">The <see cref="Saml2Attribute"/> to use.</param>
-        /// <param name="subject">The <see cref="ClaimsIdentity"/> that is the subject of this token.</param>
+        /// <param name="subject">The <see cref="ClaimsIdentity"/> that is the subject of this
+        // token.</param>
         /// <param name="issuer">The issuer of the claim.</param>
-        /// <exception cref="InvalidOperationException">Will be thrown if the Saml2Attribute does not contain any
+        /// <exception cref="InvalidOperationException">Will be thrown if the Saml2Attribute does not
+        // contain any
         /// valid Saml2AttributeValues.
         /// </exception>
         protected virtual void SetDelegateFromAttribute(
@@ -2602,11 +2665,14 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Resolves the collection of <see cref="SecurityKey"/> referenced in a <see cref="Saml2Assertion"/>.
+        /// Resolves the collection of <see cref="SecurityKey"/> referenced in a <see
+        // cref="Saml2Assertion"/>.
         /// </summary>
         /// <param name="assertion"><see cref="Saml2Assertion"/> to process.</param>
-        /// <param name="resolver"><see cref="SecurityTokenResolver"/> to use in resolving the <see cref="SecurityKey"/>.</param>
-        /// <returns>A read only collection of <see cref="SecurityKey"/> contained in the assertion.</returns>
+        /// <param name="resolver"><see cref="SecurityTokenResolver"/> to use in resolving the <see
+        // cref="SecurityKey"/>.</param>
+        /// <returns>A read only collection of <see cref="SecurityKey"/> contained in the
+        // assertion.</returns>
         protected virtual ReadOnlyCollection<SecurityKey> ResolveSecurityKeys(
             Saml2Assertion assertion,
             SecurityTokenResolver resolver
@@ -2732,7 +2798,8 @@ namespace System.IdentityModel.Tokens
         /// Resolves the Signing Key Identifier to a SecurityToken.
         /// </summary>
         /// <param name="assertion">The Assertion for which the Issuer token is to be resolved.</param>
-        /// <param name="issuerResolver">The current SecurityTokenResolver associated with this handler.</param>
+        /// <param name="issuerResolver">The current SecurityTokenResolver associated with this
+        // handler.</param>
         /// <returns>Instance of SecurityToken</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'assertion' is null.</exception>
         /// <exception cref="SecurityTokenException">Unable to resolve token.</exception>
@@ -2766,7 +2833,8 @@ namespace System.IdentityModel.Tokens
         /// Resolves the Signing Key Identifier to a SecurityToken.
         /// </summary>
         /// <param name="assertion">The Assertion for which the Issuer token is to be resolved.</param>
-        /// <param name="issuerResolver">The current SecurityTokenResolver associated with this handler.</param>
+        /// <param name="issuerResolver">The current SecurityTokenResolver associated with this
+        // handler.</param>
         /// <param name="token">Resolved token.</param>
         /// <returns>True if token is resolved.</returns>
         protected virtual bool TryResolveIssuerToken(
@@ -2806,7 +2874,8 @@ namespace System.IdentityModel.Tokens
         ///     <element ref="saml:EncryptedID" />
         /// </choice>
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see cref="Saml2NameIdentifier"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> reader positioned at a <see
+        // cref="Saml2NameIdentifier"/> element.</param>
         /// <param name="parentElement">The parent element this SubjectID is part of.</param>
         /// <returns>A <see cref="Saml2NameIdentifier"/> constructed from the XML.</returns>
         protected virtual Saml2NameIdentifier ReadSubjectId(XmlReader reader, string parentElement)
@@ -2878,7 +2947,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Action> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Action"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Action"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Action"/> instance.</returns>
         protected virtual Saml2Action ReadAction(XmlReader reader)
         {
@@ -2972,7 +3042,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Action> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Action"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Action"/>.</param>
         /// <param name="data">The <see cref="Saml2Action"/> to serialize.</param>
         protected virtual void WriteAction(XmlWriter writer, Saml2Action data)
         {
@@ -3024,7 +3095,8 @@ namespace System.IdentityModel.Tokens
         /// of those elements, override this method.
         /// </para>
         /// </remarks>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Advice"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Advice"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Advice"/> instance.</returns>
         protected virtual Saml2Advice ReadAdvice(XmlReader reader)
         {
@@ -3131,7 +3203,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Advice> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Advice"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Advice"/>.</param>
         /// <param name="data">The <see cref="Saml2Advice"/> to serialize.</param>
         protected virtual void WriteAdvice(XmlWriter writer, Saml2Advice data)
         {
@@ -3181,7 +3254,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Assertion> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Assertion"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Assertion"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Assertion"/> instance.</returns>
         protected virtual Saml2Assertion ReadAssertion(XmlReader reader)
         {
@@ -3485,13 +3559,21 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Serializes the provided SamlAssertion to the XmlWriter.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Assertion"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Assertion"/>.</param>
         /// <param name="data">The <see cref="Saml2Assertion"/> to serialize.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> or <paramref name="data"/> parameters are null.</exception>
-        /// <exception cref="InvalidOperationException"> The <paramref name="data"/>  has both <see cref="EncryptingCredentials"/> and <see cref="ReceivedEncryptingCredentials"/> properties null.</exception>
-        /// <exception cref="InvalidOperationException">The <paramref name="data"/> must have a <see cref="Saml2Subject"/> if no <see cref="Saml2Statement"/> are present.</exception>
-        /// <exception cref="InvalidOperationException">The SAML2 authentication, attribute, and authorization decision <see cref="Saml2Statement"/> require a <see cref="Saml2Subject"/>.</exception>
-        /// <exception cref="CryptographicException">Token encrypting credentials must have a Symmetric Key specified.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> or <paramref name="data"/>
+        // parameters are null.</exception>
+        /// <exception cref="InvalidOperationException"> The <paramref name="data"/>  has both <see
+        // cref="EncryptingCredentials"/> and <see cref="ReceivedEncryptingCredentials"/> properties
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">The <paramref name="data"/> must have a <see
+        // cref="Saml2Subject"/> if no <see cref="Saml2Statement"/> are present.</exception>
+        /// <exception cref="InvalidOperationException">The SAML2 authentication, attribute, and
+        // authorization decision <see cref="Saml2Statement"/> require a <see
+        // cref="Saml2Subject"/>.</exception>
+        /// <exception cref="CryptographicException">Token encrypting credentials must have a Symmetric Key
+        // specified.</exception>
         protected virtual void WriteAssertion(XmlWriter writer, Saml2Assertion data)
         {
             if (null == writer)
@@ -3508,8 +3590,10 @@ namespace System.IdentityModel.Tokens
             MemoryStream plaintextStream = null;
             XmlDictionaryWriter plaintextWriter = null;
 
-            // If an EncryptingCredentials is present then check if this is not of type ReceivedEncryptinCredentials.
-            // ReceivedEncryptingCredentials mean that it was credentials that were hydrated from a token received
+            // If an EncryptingCredentials is present then check if this is not of type
+            // ReceivedEncryptinCredentials.
+            // ReceivedEncryptingCredentials mean that it was credentials that were hydrated from a token
+            // received
             // on the wire. We should not directly use this while re-serializing a token.
             if (
                 (null != data.EncryptingCredentials)
@@ -3692,7 +3776,8 @@ namespace System.IdentityModel.Tokens
         /// or content of declared simple types other than xs:string, override
         /// this method.
         /// </remarks>
-        /// <param name="reader">An <see cref="XmlReader"/> positioned at a <see cref="Saml2Attribute"/> element.</param>
+        /// <param name="reader">An <see cref="XmlReader"/> positioned at a <see cref="Saml2Attribute"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Attribute"/> instance.</returns>
         protected virtual Saml2Attribute ReadAttribute(XmlReader reader)
         {
@@ -3805,11 +3890,16 @@ namespace System.IdentityModel.Tokens
                         bool isEmptyValue = reader.IsEmptyElement;
                         bool isNil = XmlUtil.IsNil(reader);
 
-                        // FIP 9570 - ENTERPRISE SCENARIO: Saml11SecurityTokenHandler.ReadAttribute is not checking the AttributeValue XSI type correctly.
-                        // Lax on receive. If we dont find the AttributeValueXsiType in the format we are looking for in the xml, we default to string.
-                        // Read the xsi:type. We are expecting a value of the form "some-non-empty-string" or "some-non-empty-local-prefix:some-non-empty-string".
-                        // ":some-non-empty-string" and "some-non-empty-string:" are edge-cases where defaulting to string is reasonable.
-                        // For attributeValueXsiTypeSuffix, we want the portion after the local prefix in "some-non-empty-local-prefix:some-non-empty-string"
+                        // FIP 9570 - ENTERPRISE SCENARIO: Saml11SecurityTokenHandler.ReadAttribute is not checking the
+                        // AttributeValue XSI type correctly.
+                        // Lax on receive. If we dont find the AttributeValueXsiType in the format we are looking for in the
+                        // xml, we default to string.
+                        // Read the xsi:type. We are expecting a value of the form "some-non-empty-string" or
+                        // "some-non-empty-local-prefix:some-non-empty-string".
+                        // ":some-non-empty-string" and "some-non-empty-string:" are edge-cases where defaulting to string
+                        // is reasonable.
+                        // For attributeValueXsiTypeSuffix, we want the portion after the local prefix in
+                        // "some-non-empty-local-prefix:some-non-empty-string"
                         // "some-non-empty-local-prefix:some-non-empty-string" case
                         string attributeValueXsiTypePrefix = null;
                         string attributeValueXsiTypeSuffix = null;
@@ -3920,7 +4010,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads an attribute value.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Attribute"/>.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2Attribute"/>.</param>
         /// <param name="attribute">The <see cref="Saml2Attribute"/>.</param>
         /// <returns>The attribute value as a string.</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
@@ -3928,26 +4019,34 @@ namespace System.IdentityModel.Tokens
         {
             // This code was designed realizing that the writter of the xml controls how our
             // reader will report the NodeType. A completely differnet system (IBM, etc) could write the values.
-            // Considering NodeType is important, because we need to read the entire value, end element and not loose anything significant.
+            // Considering NodeType is important, because we need to read the entire value, end element and not
+            // loose anything significant.
             //
             // Couple of cases to help understand the design choices.
             //
             // 1.
-            // "<MyElement xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
-            // Could result in the our reader reporting the NodeType as Text OR Element, depending if '<' was entitized to '&lt;'
+            // "<MyElement
+            // xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
+            // Could result in the our reader reporting the NodeType as Text OR Element, depending if '<' was
+            // entitized to '&lt;'
             //
             // 2.
-            // " <MyElement xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
-            // Could result in the our reader reporting the NodeType as Text OR Whitespace.  Post Whitespace processing, the NodeType could be
+            // " <MyElement
+            // xmlns=""urn:mynamespace""><another>complex</another></MyElement><sibling>value</sibling>"
+            // Could result in the our reader reporting the NodeType as Text OR Whitespace.  Post Whitespace
+            // processing, the NodeType could be
             // reported as Text or Element, depending if '<' was entitized to '&lt;'
             //
             // 3.
             // "/r/n/t   "
             // Could result in the our reader reporting the NodeType as whitespace.
             //
-            // Since an AttributeValue with ONLY Whitespace and a complex Element proceeded by whitespace are reported as the same NodeType (2. and 3.)
-            // the whitespace is remembered and discarded if an found is found, otherwise it becomes the value. This is to help users who accidently put a space when adding claims in ADFS
-            // If we just skipped the Whitespace, then an AttributeValue that started with Whitespace would loose that part and claims generated from the AttributeValue
+            // Since an AttributeValue with ONLY Whitespace and a complex Element proceeded by whitespace are
+            // reported as the same NodeType (2. and 3.)
+            // the whitespace is remembered and discarded if an found is found, otherwise it becomes the value.
+            // This is to help users who accidently put a space when adding claims in ADFS
+            // If we just skipped the Whitespace, then an AttributeValue that started with Whitespace would
+            // loose that part and claims generated from the AttributeValue
             // would be missing that part.
             //
 
@@ -3992,7 +4091,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Attribute> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Attribute"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Attribute"/>.</param>
         /// <param name="data">The <see cref="Saml2Attribute"/> to serialize.</param>
         protected virtual void WriteAttribute(XmlWriter writer, Saml2Attribute data)
         {
@@ -4045,7 +4145,8 @@ namespace System.IdentityModel.Tokens
             if (!StringComparer.Ordinal.Equals(data.AttributeValueXsiType, ClaimValueTypes.String))
             {
                 // ClaimValueTypes are URIs of the form prefix#suffix, while xsi:type should be a QName.
-                // Hence, the tokens-to-claims spec requires that ClaimValueTypes be serialized as xmlns:tn="prefix" xsi:type="tn:suffix"
+                // Hence, the tokens-to-claims spec requires that ClaimValueTypes be serialized as xmlns:tn="prefix"
+                // xsi:type="tn:suffix"
                 int indexOfHash = data.AttributeValueXsiType.IndexOf('#');
                 xsiTypePrefix = data.AttributeValueXsiType.Substring(0, indexOfHash);
                 xsiTypeSuffix = data.AttributeValueXsiType.Substring(indexOfHash + 1);
@@ -4100,7 +4201,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the saml:Attribute value.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Attribute"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Attribute"/>.</param>
         /// <param name="value">The value of the attribute being serialized.</param>
         /// <param name="attribute">The <see cref="Saml2Attribute"/> to serialize.</param>
         /// <remarks>By default the method writes the value as a string.</remarks>
@@ -4124,7 +4226,8 @@ namespace System.IdentityModel.Tokens
         /// &lt;saml:Statement element that specifies an xsi:type of
         /// saml:AttributeStatementType.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AttributeStatement"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2AttributeStatement"/> element.</param>
         /// <returns>A <see cref="Saml2AttributeStatement"/> instance.</returns>
         protected virtual Saml2AttributeStatement ReadAttributeStatement(XmlReader reader)
         {
@@ -4244,7 +4347,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:AttributeStatement> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AttributeStatement"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2AttributeStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AttributeStatement"/> to serialize.</param>
         protected virtual void WriteAttributeStatement(
             XmlWriter writer,
@@ -4289,7 +4393,8 @@ namespace System.IdentityModel.Tokens
         /// &lt;saml:Condition> element that specifies an xsi:type
         /// of saml:AudienceRestrictionType.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AudienceRestriction"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2AudienceRestriction"/> element.</param>
         /// <returns>A <see cref="Saml2AudienceRestriction"/> instance.</returns>
         protected virtual Saml2AudienceRestriction ReadAudienceRestriction(XmlReader reader)
         {
@@ -4400,7 +4505,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:AudienceRestriction> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AudienceRestriction"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2AudienceRestriction"/>.</param>
         /// <param name="data">The <see cref="Saml2AudienceRestriction"/> to serialize.</param>
         protected virtual void WriteAudienceRestriction(
             XmlWriter writer,
@@ -4434,7 +4540,8 @@ namespace System.IdentityModel.Tokens
             // <Audience> - 1-OO
             foreach (Uri audience in data.Audiences)
             {
-                // When writing out the audience uri we use the OriginalString property to preserve the value that was initially passed down during token creation as-is.
+                // When writing out the audience uri we use the OriginalString property to preserve the value that
+                // was initially passed down during token creation as-is.
                 writer.WriteElementString(
                     Saml2Constants.Elements.Audience,
                     Saml2Constants.Namespace,
@@ -4454,7 +4561,8 @@ namespace System.IdentityModel.Tokens
         /// &lt;saml:AuthnContextDecl> element. To handle by-value
         /// authentication context declarations, override this method.
         /// </remarks>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AuthenticationContext"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2AuthenticationContext"/> element.</param>
         /// <returns>A <see cref="Saml2AuthenticationContext"/> instance.</returns>
         protected virtual Saml2AuthenticationContext ReadAuthenticationContext(XmlReader reader)
         {
@@ -4592,7 +4700,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:AuthnContext> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthenticationContext"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2AuthenticationContext"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthenticationContext"/> to serialize.</param>
         protected virtual void WriteAuthenticationContext(
             XmlWriter writer,
@@ -4661,7 +4770,8 @@ namespace System.IdentityModel.Tokens
         /// Reads the &lt;saml:AuthnStatement> element or a &lt;saml:Statement>
         /// element that specifies an xsi:type of saml:AuthnStatementType.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AuthenticationStatement"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2AuthenticationStatement"/> element.</param>
         /// <returns>A <see cref="Saml2AuthenticationStatement"/> instance.</returns>
         protected virtual Saml2AuthenticationStatement ReadAuthenticationStatement(XmlReader reader)
         {
@@ -4802,7 +4912,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:AuthnStatement> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthenticationStatement"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2AuthenticationStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthenticationStatement"/> to serialize.</param>
         protected virtual void WriteAuthenticationStatement(
             XmlWriter writer,
@@ -4873,7 +4984,8 @@ namespace System.IdentityModel.Tokens
         /// &lt;saml:Statement element that specifies an xsi:type of
         /// saml:AuthzDecisionStatementType.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2AuthorizationDecisionStatement"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2AuthorizationDecisionStatement"/> element.</param>
         /// <returns>A <see cref="Saml2AuthorizationDecisionStatement"/> instance.</returns>
         protected virtual Saml2AuthorizationDecisionStatement ReadAuthorizationDecisionStatement(
             XmlReader reader
@@ -5046,7 +5158,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:AuthzDecisionStatement> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2AuthorizationDecisionStatement"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2AuthorizationDecisionStatement"/>.</param>
         /// <param name="data">The <see cref="Saml2AuthorizationDecisionStatement"/> to serialize.</param>
         protected virtual void WriteAuthorizationDecisionStatement(
             XmlWriter writer,
@@ -5115,7 +5228,8 @@ namespace System.IdentityModel.Tokens
         /// To handle custom &lt;saml:Condition> elements, override this
         /// method.
         /// </remarks>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Conditions"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Conditions"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Conditions"/> instance.</returns>
         protected virtual Saml2Conditions ReadConditions(XmlReader reader)
         {
@@ -5339,7 +5453,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Conditions> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Conditions"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Conditions"/>.</param>
         /// <param name="data">The <see cref="Saml2Conditions"/> to serialize.</param>
         protected virtual void WriteConditions(XmlWriter writer, Saml2Conditions data)
         {
@@ -5409,7 +5524,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Evidence> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Evidence"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Evidence"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2Evidence"/> instance.</returns>
         protected virtual Saml2Evidence ReadEvidence(XmlReader reader)
         {
@@ -5526,7 +5642,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Evidence> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Evidence"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Evidence"/>.</param>
         /// <param name="data">The <see cref="Saml2Evidence"/> to serialize.</param>
         protected virtual void WriteEvidence(XmlWriter writer, Saml2Evidence data)
         {
@@ -5587,7 +5704,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Issuer> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/>
+        // element.</param>
         /// <returns>A <see cref="Saml2NameIdentifier"/> instance.</returns>
         protected virtual Saml2NameIdentifier ReadIssuer(XmlReader reader)
         {
@@ -5608,7 +5726,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Issuer> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2NameIdentifier"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2NameIdentifier"/>.</param>
         /// <param name="data">The <see cref="Saml2NameIdentifier"/> to serialize.</param>
         protected virtual void WriteIssuer(XmlWriter writer, Saml2NameIdentifier data)
         {
@@ -5646,9 +5765,12 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Deserializes the SAML Signing KeyInfo
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a than can be positioned at a ds:KeyInfo element.</param>
-        /// <param name="assertion">The <see cref="Saml2Assertion"/> that is having the signature checked.</param>
-        /// <returns>The <see cref="SecurityKeyIdentifier"/> that defines the key to use to check the signature.</returns>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a than can be positioned at a
+        // ds:KeyInfo element.</param>
+        /// <param name="assertion">The <see cref="Saml2Assertion"/> that is having the signature
+        // checked.</param>
+        /// <returns>The <see cref="SecurityKeyIdentifier"/> that defines the key to use to check the
+        // signature.</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'reader' is null.</exception>
         protected virtual SecurityKeyIdentifier ReadSigningKeyInfo(
             XmlReader reader,
@@ -5685,9 +5807,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Serializes the Subject KeyInfo into the given XmlWriter.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifier"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="SecurityKeyIdentifier"/>.</param>
         /// <param name="data">The <see cref="SecurityKeyIdentifier"/> to serialize.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'data' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'data' is
+        // null.</exception>
         protected virtual void WriteSubjectKeyInfo(XmlWriter writer, SecurityKeyIdentifier data)
         {
             if (null == writer)
@@ -5706,9 +5830,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Serializes the Signing KeyInfo into the given XmlWriter.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifier"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="SecurityKeyIdentifier"/>.</param>
         /// <param name="data">The <see cref="SecurityKeyIdentifier"/> to serialize.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'signingKeyIdentifier' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'signingKeyIdentifier'
+        // is null.</exception>
         protected virtual void WriteSigningKeyInfo(XmlWriter writer, SecurityKeyIdentifier data)
         {
             if (null == writer)
@@ -5733,7 +5859,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:NameID> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/>
+        // element.</param>
         /// <returns>An instance of <see cref="Saml2NameIdentifier"/></returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
         protected virtual Saml2NameIdentifier ReadNameId(XmlReader reader)
@@ -5755,10 +5882,13 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:NameID> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2NameIdentifier"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2NameIdentifier"/>.</param>
         /// <param name="data">The <see cref="Saml2NameIdentifier"/> to serialize.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'data' is null.</exception>
-        /// <exception cref="CryptographicException">Saml2NameIdentifier encrypting credentials must have a Symmetric Key specified.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'data' is
+        // null.</exception>
+        /// <exception cref="CryptographicException">Saml2NameIdentifier encrypting credentials must have a
+        // Symmetric Key specified.</exception>
         protected virtual void WriteNameId(XmlWriter writer, Saml2NameIdentifier data)
         {
             if (null == writer)
@@ -5859,7 +5989,8 @@ namespace System.IdentityModel.Tokens
         /// Both &lt;Issuer> and &lt;NameID> are of NameIDType. This method reads
         /// the content of either one of those elements.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2NameIdentifier"/>
+        // element.</param>
         /// <returns>An instance of <see cref="Saml2NameIdentifier"/></returns>
         protected virtual Saml2NameIdentifier ReadNameIdType(XmlReader reader)
         {
@@ -5922,8 +6053,10 @@ namespace System.IdentityModel.Tokens
                 // Content is string
                 nameIdentifier.Value = reader.ReadElementString();
 
-                // According to section 8.3.6, if the name identifier format is of type 'urn:oasis:names:tc:SAML:2.0:nameid-format:entity'
-                // the name identifier value must be a uri and name qualifier, spname qualifier, and spproded id must be omitted.
+                // According to section 8.3.6, if the name identifier format is of type
+                // 'urn:oasis:names:tc:SAML:2.0:nameid-format:entity'
+                // the name identifier value must be a uri and name qualifier, spname qualifier, and spproded id
+                // must be omitted.
                 if (
                     nameIdentifier.Format != null
                     && StringComparer.Ordinal.Equals(
@@ -5984,9 +6117,11 @@ namespace System.IdentityModel.Tokens
         /// Reads the &lt;saml:EncryptedId> element.
         /// </summary>
         /// <param name="reader"><see cref="XmlReader"/> pointing at the XML EncryptedId element</param>
-        /// <returns>An instance of <see cref="Saml2NameIdentifier"/> representing the EncryptedId that was read</returns>
+        /// <returns>An instance of <see cref="Saml2NameIdentifier"/> representing the EncryptedId that was
+        // read</returns>
         /// <exception cref="ArgumentNullException">The input parameter 'reader' is null.</exception>
-        /// <exception cref="XmlException">The 'reader' is not positioned at an 'EncryptedID' element.</exception>
+        /// <exception cref="XmlException">The 'reader' is not positioned at an 'EncryptedID'
+        // element.</exception>
         protected virtual Saml2NameIdentifier ReadEncryptedId(XmlReader reader)
         {
             if (null == reader)
@@ -6048,7 +6183,8 @@ namespace System.IdentityModel.Tokens
         /// Both &lt;Issuer> and &lt;NameID> are of NameIDType. This method writes
         /// the content of either one of those elements.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2NameIdentifier"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2NameIdentifier"/>.</param>
         /// <param name="data">The <see cref="Saml2NameIdentifier"/> to serialize.</param>
         protected virtual void WriteNameIdType(XmlWriter writer, Saml2NameIdentifier data)
         {
@@ -6100,7 +6236,8 @@ namespace System.IdentityModel.Tokens
         /// In the default implementation, the maximum value of the Count attribute
         /// is limited to Int32.MaxValue.
         /// </remarks>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2ProxyRestriction"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2ProxyRestriction"/> element.</param>
         /// <returns>An instance of <see cref="Saml2ProxyRestriction"/></returns>
         protected virtual Saml2ProxyRestriction ReadProxyRestriction(XmlReader reader)
         {
@@ -6192,7 +6329,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:ProxyRestriction> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2ProxyRestriction"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2ProxyRestriction"/>.</param>
         /// <param name="data">The <see cref="Saml2ProxyRestriction"/> to serialize.</param>
         protected virtual void WriteProxyRestriction(XmlWriter writer, Saml2ProxyRestriction data)
         {
@@ -6232,7 +6370,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Statement> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Statement"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Statement"/>
+        // element.</param>
         /// <returns>An instance of <see cref="Saml2Statement"/> derived type.</returns>
         /// <remarks>
         /// The default implementation only handles Statement elements which
@@ -6325,7 +6464,8 @@ namespace System.IdentityModel.Tokens
         /// or &lt;saml:AuthzDecisionStatement> element. To handle custom Saml2Statement
         /// classes for writing a &lt;saml:Statement> element, override this method.
         /// </remarks>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Statement"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Statement"/>.</param>
         /// <param name="data">The <see cref="Saml2Statement"/> to serialize.</param>
         protected virtual void WriteStatement(XmlWriter writer, Saml2Statement data)
         {
@@ -6371,7 +6511,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:Subject> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Subject"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2Subject"/>
+        // element.</param>
         /// <returns>An instance of <see cref="Saml2Subject"/> .</returns>
         /// <remarks>
         /// The default implementation does not handle the optional
@@ -6460,7 +6601,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:Subject> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2Subject"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2Subject"/>.</param>
         /// <param name="data">The <see cref="Saml2Subject"/> to serialize.</param>
         protected virtual void WriteSubject(XmlWriter writer, Saml2Subject data)
         {
@@ -6507,7 +6649,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;SubjectConfirmation> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2SubjectConfirmation"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2SubjectConfirmation"/> element.</param>
         /// <returns>An instance of <see cref="Saml2SubjectConfirmation"/> .</returns>
         protected virtual Saml2SubjectConfirmation ReadSubjectConfirmation(XmlReader reader)
         {
@@ -6621,7 +6764,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:SubjectConfirmation> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2SubjectConfirmation"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2SubjectConfirmation"/>.</param>
         /// <param name="data">The <see cref="Saml2SubjectConfirmation"/> to serialize.</param>
         protected virtual void WriteSubjectConfirmation(
             XmlWriter writer,
@@ -6676,7 +6820,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:SubjectConfirmationData> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2SubjectConfirmationData"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2SubjectConfirmationData"/> element.</param>
         /// <returns>An instance of <see cref="Saml2SubjectConfirmationData"/> .</returns>
         /// <remarks>
         /// The default implementation handles the unextended element
@@ -6863,7 +7008,8 @@ namespace System.IdentityModel.Tokens
         /// When the data.KeyIdentifiers collection is not empty, an xsi:type
         /// attribute will be written specifying saml:KeyInfoConfirmationDataType.
         /// </remarks>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2SubjectConfirmationData"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2SubjectConfirmationData"/>.</param>
         /// <param name="data">The <see cref="Saml2SubjectConfirmationData"/> to serialize.</param>
         protected virtual void WriteSubjectConfirmationData(
             XmlWriter writer,
@@ -6961,7 +7107,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads the &lt;saml:SubjectLocality> element.
         /// </summary>
-        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see cref="Saml2SubjectLocality"/> element.</param>
+        /// <param name="reader">A <see cref="XmlReader"/> positioned at a <see
+        // cref="Saml2SubjectLocality"/> element.</param>
         /// <returns>An instance of <see cref="Saml2SubjectLocality"/> .</returns>
         protected virtual Saml2SubjectLocality ReadSubjectLocality(XmlReader reader)
         {
@@ -7033,7 +7180,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Writes the &lt;saml:SubjectLocality> element.
         /// </summary>
-        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="Saml2SubjectLocality"/>.</param>
+        /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+        // cref="Saml2SubjectLocality"/>.</param>
         /// <param name="data">The <see cref="Saml2SubjectLocality"/> to serialize.</param>
         protected virtual void WriteSubjectLocality(XmlWriter writer, Saml2SubjectLocality data)
         {
@@ -7142,8 +7290,10 @@ namespace System.IdentityModel.Tokens
             /// <summary>
             /// Extensibility point for providing custom serialization.
             /// </summary>
-            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifierClause"/>.</param>
-            /// <param name="keyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to serialize.</param>
+            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+            // cref="SecurityKeyIdentifierClause"/>.</param>
+            /// <param name="keyIdentifierClause">The <see cref="SecurityKeyIdentifierClause"/> to
+            // serialize.</param>
             /// <remarks>This is not supported.</remarks>
             protected override void WriteKeyIdentifierClauseCore(
                 XmlWriter writer,
@@ -7158,7 +7308,8 @@ namespace System.IdentityModel.Tokens
             /// <summary>
             /// Extensibility point for providing custom serialization.
             /// </summary>
-            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityKeyIdentifier"/>.</param>
+            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+            // cref="SecurityKeyIdentifier"/>.</param>
             /// <param name="keyIdentifier">The <see cref="SecurityKeyIdentifier"/> to serialize.</param>
             protected override void WriteKeyIdentifierCore(
                 XmlWriter writer,
@@ -7171,7 +7322,8 @@ namespace System.IdentityModel.Tokens
             /// <summary>
             /// Extensibility point for providing custom serialization.
             /// </summary>
-            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see cref="SecurityToken"/>.</param>
+            /// <param name="writer">A <see cref="XmlWriter"/> to serialize the <see
+            // cref="SecurityToken"/>.</param>
             /// <param name="token">The <see cref="SecurityToken"/> to serialize.</param>
             protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
             {

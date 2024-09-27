@@ -4,7 +4,8 @@
 namespace System.IO
 {
     /// <summary>
-    /// Represents a temporary directory.  Creating an instance creates a directory at the specified path,
+    /// Represents a temporary directory.  Creating an instance creates a directory at the specified
+    // path,
     /// and disposing the instance deletes the directory.
     /// </summary>
     public class TempDirectory : IDisposable
@@ -54,6 +55,7 @@ namespace System.IO
         /// <summary>
         /// Generates a string with 255 random valid filename characters.
         /// 255 is the max file/folder name length in NTFS and FAT32:
+        //
         // https://docs.microsoft.com/en-us/windows/win32/fileio/filesystem-functionality-comparison?redirectedfrom=MSDN#limits
         /// </summary>
         /// <returns>A 255 length string with random valid filename characters.</returns>

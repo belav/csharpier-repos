@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Net.Http;
@@ -60,7 +61,8 @@ namespace System.Web.Http.Routing
             Assert.Equal(data, result);
         }
 
-        // Route where everything is not implemented. Tests that the generated route is not forwarding calls.
+        // Route where everything is not implemented. Tests that the generated route is not forwarding
+        // calls.
         private class InnerRoute : IHttpRoute
         {
             private readonly IHttpRouteData _routeData = new Mock<IHttpRouteData>().Object;

@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a binary operation in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -48,7 +49,8 @@ public class SqlBinaryExpression : SqlExpression
     /// <param name="left">An expression which is left operand.</param>
     /// <param name="right">An expression which is right operand.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlBinaryExpression(
         ExpressionType operatorType,
         SqlExpression left,
@@ -98,12 +100,14 @@ public class SqlBinaryExpression : SqlExpression
     }
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="left">The <see cref="Left" /> property of the result.</param>
     /// <param name="right">The <see cref="Right" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual SqlBinaryExpression Update(SqlExpression left, SqlExpression right) =>
         left != Left || right != Right
             ? new SqlBinaryExpression(OperatorType, left, right, Type, TypeMapping)

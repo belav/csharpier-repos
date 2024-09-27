@@ -25,16 +25,20 @@ public class EncodersController : Controller
         return View();
     }
 
-    // We've defined the behavior when multiple tag helpers target the same element. But this is an extreme corner
-    // case since one tag helper even using anything but the default HTML encoder is not going to be common.
+    // We've defined the behavior when multiple tag helpers target the same element. But this is an
+    // extreme corner
+    // case since one tag helper even using anything but the default HTML encoder is not going to be
+    // common.
     public IActionResult TwoEncoders()
     {
         ViewData["Title"] = "Using two HTML encoders";
         return View();
     }
 
-    // We've defined the behavior when multiple tag helpers target the same element. But this is an extreme corner
-    // case since one tag helper even using anything but the default HTML encoder is not going to be common.
+    // We've defined the behavior when multiple tag helpers target the same element. But this is an
+    // extreme corner
+    // case since one tag helper even using anything but the default HTML encoder is not going to be
+    // common.
     public IActionResult ThreeEncoders()
     {
         ViewData["Title"] = "Using three HTML encoders";

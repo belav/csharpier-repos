@@ -103,12 +103,12 @@ namespace MonoTests.System.Net
             result = c.GetCredential(new Uri("http://www.contoso.com"), "Basic");
             Assert.AreEqual(result, cred5, "#17");
 
-            /*
-            IEnumerator e = c.GetEnumerator ();
-            while (e.MoveNext ()) {
-                Console.WriteLine (e.Current.GetType () + " : " + e.Current.ToString ());
-            }
-            */
+/*
+IEnumerator e = c.GetEnumerator ();
+while (e.MoveNext ()) {
+Console.WriteLine (e.Current.GetType () + " : " + e.Current.ToString ());
+}
+*/
             result = c.GetCredential("www.ximian.com", 80, "Basic");
             Assert.IsTrue(result == null, "#18");
 

@@ -104,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                     CancellationToken cancellationToken
                 )
                 {
-                    // PERF: We don't to formatting on the entire global suppressions document, but instead do it for each attribute individual in the fixer.
+                    // PERF: We don't to formatting on the entire global suppressions document, but instead do it for
+                    // each attribute individual in the fixer.
                     return Task.FromResult(document);
                 }
             }

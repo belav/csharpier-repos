@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     public abstract class ResultProvider : IDkmClrResultProvider
     {
         // TODO: There is a potential that these values will conflict with debugger defined flags in future.
-        // It'd be better if we attached these flags to the DkmClrValue object via data items, however DkmClrValue is currently mutable
-        // and we can't clone it -- in some cases we might need to attach different flags in different code paths and it wouldn't be possible
+        // It'd be better if we attached these flags to the DkmClrValue object via data items, however
+        // DkmClrValue is currently mutable
+        // and we can't clone it -- in some cases we might need to attach different flags in different code
+        // paths and it wouldn't be possible
         // to do so due to mutability.
         // See https://github.com/dotnet/roslyn/issues/55676.
         internal const DkmEvaluationFlags NotRoot = (DkmEvaluationFlags)(1 << 30);
@@ -612,7 +614,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     }
                 }
 
-                // If the EvalResultDataItem doesn't specify a particular category, we'll just propagate DkmClrValue.Category,
+                // If the EvalResultDataItem doesn't specify a particular category, we'll just propagate
+                // DkmClrValue.Category,
                 // which typically appears to be set to the default value ("Other").
                 var category =
                     (result.Category != DkmEvaluationResultCategory.Other)
@@ -774,7 +777,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
                     value = nullableValue;
                     Debug.Assert(lmrNullableTypeArg.Equals(value.Type.GetLmrType())); // If this is not the case, add a test for includeRuntimeTypeIfNecessary.
-                    // CONSIDER: The DynamicAttribute for the type argument should just be Skip(1) of the original flag array.
+                    // CONSIDER: The DynamicAttribute for the type argument should just be Skip(1) of the original flag
+                    // array.
                     expansion = this.GetTypeExpansion(
                         inspectionContext,
                         new TypeAndCustomInfo(

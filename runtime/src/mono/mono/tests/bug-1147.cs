@@ -52,13 +52,13 @@ namespace Program
 
             //gr.InsertControl(0, new WindowlessControl()); //OK
 
-            /* need this block(A) this to crash */
+/* need this block(A) this to crash */
             var item = new WindowlessControl();
 
             new AlignPadLayoutPanel<WindowlessControl>().InsertControl(0, item); //OK if removed
 
             item.SetAttachedProperty(EDITING_TEXT, "label.Text");
-            /*end block(A)*/
+/*end block(A)*/
 
             gr.InsertControl(0, new WindowlessControl()); //NOT OK
 

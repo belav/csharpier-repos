@@ -547,9 +547,11 @@ public class Program
     }
 }
 ";
-            // All instrumentation points in method 4 are True because they are covered by at least one specialization.
+            // All instrumentation points in method 4 are True because they are covered by at least one
+            // specialization.
             //
-            // This test verifies that the payloads of methods of generic types are in terms of method definitions and
+            // This test verifies that the payloads of methods of generic types are in terms of method
+            // definitions and
             // not method references -- the indices for the methods would be different for references.
             string expectedOutput =
                 @"null
@@ -3862,7 +3864,8 @@ static void Test()
         {
             string il = verifier.VisualizeIL(qualifiedMethodName);
 
-            // Tests using this helper are constructed such that instrumented methods contain a call to CreatePayload,
+            // Tests using this helper are constructed such that instrumented methods contain a call to
+            // CreatePayload,
             // lambdas a reference to payload bool array.
             bool instrumented = il.Contains("CreatePayload") || il.Contains("bool[]");
 

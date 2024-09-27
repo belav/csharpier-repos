@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 > _analyzeLocalFunctionOrLambdaInvocation;
 
                 /// <summary>
-                /// Map from flow capture ID to set of captured symbol addresses along all possible control flow paths.
+                /// Map from flow capture ID to set of captured symbol addresses along all possible control flow
+                // paths.
                 /// </summary>
                 private readonly PooledDictionary<
                     CaptureId,
@@ -53,9 +54,11 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 > _lValueFlowCapturesMap;
 
                 /// <summary>
-                /// Map from operations to potential delegate creation targets that could be invoked via delegate invocation
+                /// Map from operations to potential delegate creation targets that could be invoked via delegate
+                // invocation
                 /// on the operation.
-                /// Used to analyze delegate creations/invocations of lambdas and local/functions defined in a method.
+                /// Used to analyze delegate creations/invocations of lambdas and local/functions defined in a
+                // method.
                 /// </summary>
                 private readonly PooledDictionary<
                     IOperation,
@@ -63,7 +66,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 > _reachingDelegateCreationTargets;
 
                 /// <summary>
-                /// Map from local functions to the <see cref="ControlFlowGraph"/> where the local function was accessed
+                /// Map from local functions to the <see cref="ControlFlowGraph"/> where the local function was
+                // accessed
                 /// to create an invocable delegate. This control flow graph is required to lazily get or create the
                 /// control flow graph for this local function at delegate invocation callsite.
                 /// </summary>
@@ -584,7 +588,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         currentRegion = currentRegion.EnclosingRegion;
                     } while (containingTryCatchFinallyRegion == null);
 
-                    // All symbol writes reachable at start of try region are considered reachable at start of catch/finally region.
+                    // All symbol writes reachable at start of try region are considered reachable at start of
+                    // catch/finally region.
                     var firstBasicBlockInOutermostRegion = ControlFlowGraph.Blocks[
                         containingTryCatchFinallyRegion.FirstBlockOrdinal
                     ];
@@ -593,7 +598,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                         GetBlockAnalysisData(firstBasicBlockInOutermostRegion)
                     );
 
-                    // All symbol writes within the try region are considered reachable at start of catch/finally region.
+                    // All symbol writes within the try region are considered reachable at start of catch/finally
+                    // region.
                     foreach (
                         var (symbol, write) in GetOrCreateSymbolWritesInBlockRange(
                             containingTryCatchFinallyRegion.FirstBlockOrdinal,
@@ -767,7 +773,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 )
                 {
                     // Transfer reaching delegate creation targets when assigning from a local/parameter symbol
-                    // that has known set of potential delegate creation targets. For example, this method will be called
+                    // that has known set of potential delegate creation targets. For example, this method will be
+                    // called
                     // for definition 'y' from symbol 'x' for below code:
                     //      Action x = () => { };
                     //      Action y = x;
@@ -836,7 +843,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                 )
                 {
                     // Sets a local function delegate target for the current write.
-                    // For example, this method will be called for the definition 'x' below with assigned LocalFunction delegate.
+                    // For example, this method will be called for the definition 'x' below with assigned LocalFunction
+                    // delegate.
                     //      Action x = LocalFunction;
                     //      void LocalFunction() { }
                     //
@@ -866,7 +874,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     out ImmutableHashSet<IOperation> targets
                 )
                 {
-                    // Attempts to return potential lamba/local function delegate invocation targets for the given write.
+                    // Attempts to return potential lamba/local function delegate invocation targets for the given
+                    // write.
                     if (_reachingDelegateCreationTargets.TryGetValue(write, out var targetsBuilder))
                     {
                         targets = targetsBuilder.ToImmutableHashSet();

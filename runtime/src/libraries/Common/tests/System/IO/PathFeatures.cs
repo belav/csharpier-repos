@@ -22,7 +22,8 @@ namespace System.IO
         private static State s_onCore;
 
         /// <summary>
-        /// Returns true if you can use long paths, including long DOS style paths (e.g. over 260 without \\?\).
+        /// Returns true if you can use long paths, including long DOS style paths (e.g. over 260 without
+        // \\?\).
         /// </summary>
         public static bool AreAllLongPathsAvailable()
         {
@@ -30,7 +31,8 @@ namespace System.IO
             if (RunningOnCoreLib)
                 return true;
 
-            // Otherwise we're running on Windows, see if we've got the capability in .NET, and that the feature is enabled in the OS
+            // Otherwise we're running on Windows, see if we've got the capability in .NET, and that the feature
+            // is enabled in the OS
             return !AreLongPathsBlocked() && AreOsLongPathsEnabled();
         }
 
@@ -41,7 +43,8 @@ namespace System.IO
 
         /// <summary>
         /// Returns true if > MAX_PATH (260) character paths are blocked.
-        /// Note that this doesn't reflect that you can actually use long paths without device syntax when on Windows.
+        /// Note that this doesn't reflect that you can actually use long paths without device syntax when
+        // on Windows.
         /// Use AreAllLongPathsAvailable() to see that you can use long DOS style paths if on Windows.
         /// </summary>
         public static bool AreLongPathsBlocked()

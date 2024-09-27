@@ -304,7 +304,8 @@ namespace System.Net.NetworkInformation
 
             parser.MoveNextOrFail(); // Skip Ip:
 
-            // According to RFC 1213, "1" indicates "acting as a gateway". "2" indicates "NOT acting as a gateway".
+            // According to RFC 1213, "1" indicates "acting as a gateway". "2" indicates "NOT acting as a
+            // gateway".
             return new IPGlobalStatisticsTable()
             {
                 Forwarding = parser.MoveAndExtractNext() == "1",

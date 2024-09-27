@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Formats the whitespace of a syntax tree.
         /// </summary>
         /// <param name="node">The root node of a syntax tree to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -66,7 +67,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="node">The root node of a syntax tree.</param>
         /// <param name="annotation">The descendant nodes of the root to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Determines the changes necessary to format the whitespace of a syntax tree.
         /// </summary>
         /// <param name="node">The root node of a syntax tree to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The changes necessary to format the tree.</returns>
         public static IList<TextChange> GetFormattedTextChanges(

@@ -22,10 +22,13 @@ namespace System.ServiceModel.Activities.Dispatcher
     //This will be the top most invoker for all endpoint operations for durable services.
     //It operates in 3 modes.
     //1) IWorkflowInstanceManagement endpoint operation(completely implemented by this type)
-    //2) Application endpoint(Modelled Receive/DurableService) Custom invoker inherited from this type overriding OnBegin/End ServiceOperation.
-    //3) Durable Standard Endpoint(LRCS/Interop/Delay) eventual dispatch call will be delegated to innerInvoker with DurableInstanceContext as service object.
+    //2) Application endpoint(Modelled Receive/DurableService) Custom invoker inherited from this type
+    // overriding OnBegin/End ServiceOperation.
+    //3) Durable Standard Endpoint(LRCS/Interop/Delay) eventual dispatch call will be delegated to
+    // innerInvoker with DurableInstanceContext as service object.
 
-    //This class is single point of interaction with DurableInstanceManagement and ensures appropriate DurableInstance for the request, based on the mode of operation
+    //This class is single point of interaction with DurableInstanceManagement and ensures appropriate
+    // DurableInstance for the request, based on the mode of operation
     //message will be dispatched to various part of DurableInstance.
     class ControlOperationInvoker : IManualConcurrencyOperationInvoker
     {
@@ -298,7 +301,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     else
                     {
                         // Message is not preserved.(DispatchRuntime.PreserveMessage is false.)
-                        // this could be a case where we only have context queries, in this case we don't preserve the message
+                        // this could be a case where we only have context queries, in this case we don't preserve the
+                        // message
                         success = this.keyCalculator.CalculateKeys(
                             operationContext.IncomingMessage,
                             out localInstanceKey,
@@ -407,13 +411,15 @@ namespace System.ServiceModel.Activities.Dispatcher
                     {
                         if (this.operationContext.SessionId == null)
                         {
-                            // Datagram messages are completely concurrent to loadOrCreate and instance operations. Same as WCF's ConcurrencyMode.Single
+                            // Datagram messages are completely concurrent to loadOrCreate and instance operations. Same as
+                            // WCF's ConcurrencyMode.Single
                             notification.NotifyInvokeReceived();
                         }
                         else
                         {
                             // For session, we will notify after we enter into WorkflowServiceInstance pending queue.
-                            // This achieves synchronization and ordered messages within a session and concurrent across distinct sessions.
+                            // This achieves synchronization and ordered messages within a session and concurrent across
+                            // distinct sessions.
                             this.notification = notification;
                         }
                     }
@@ -681,7 +687,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                     return thisPtr.AbandonReceiveContext(exception);
                 }
 
-                // When creating a new instance for a normal, keyless app message, create a key for use by context exchange.
+                // When creating a new instance for a normal, keyless app message, create a key for use by context
+                // exchange.
                 if (!thisPtr.instanceKey.IsValid && thisPtr.instanceId == Guid.Empty)
                 {
                     ContextMessageProperty outgoingContextMessageProperty = null;

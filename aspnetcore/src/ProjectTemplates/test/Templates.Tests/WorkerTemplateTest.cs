@@ -41,7 +41,8 @@ public class WorkerTemplateTest : LoggedTest
         Skip = "Unskip when Helix supports native AOT. https://github.com/dotnet/aspnetcore/pull/47247/"
     )]
     [InlineData("C#")]
-    // [InlineData("F#")] F# doesn't fully support NativeAOT - https://github.com/dotnet/fsharp/issues/13398
+    // [InlineData("F#")] F# doesn't fully support NativeAOT -
+    // https://github.com/dotnet/fsharp/issues/13398
     public async Task WorkerTemplateNativeAotAsync(string language)
     {
         await WorkerTemplateCoreAsync(language, args: new[] { ArgConstants.PublishNativeAot });
@@ -67,8 +68,10 @@ public class WorkerTemplateTest : LoggedTest
         // Force a restore if native AOT so that RID-specific assets are restored
         await project.RunDotNetPublishAsync(noRestore: !nativeAot);
 
-        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses Config = Release
-        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by calling build
+        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses
+        // Config = Release
+        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by
+        // calling build
         // later, while the opposite is not true.
 
         await project.RunDotNetBuildAsync();

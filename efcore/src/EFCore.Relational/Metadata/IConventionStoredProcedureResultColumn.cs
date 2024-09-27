@@ -18,19 +18,23 @@ public interface IConventionStoredProcedureResultColumn
     /// <summary>
     ///     Gets the builder that can be used to configure this result column.
     /// </summary>
-    /// <exception cref="InvalidOperationException">If the stored procedure result column has been removed from the model.</exception>
+    /// <exception cref="InvalidOperationException">If the stored procedure result column has been
+    // removed from the model.</exception>
     new IConventionStoredProcedureResultColumnBuilder Builder { get; }
 
     /// <summary>
     ///     Sets the result column name.
     /// </summary>
     /// <param name="name">The result column name.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     string? SetName(string name, bool fromDataAnnotation = false);
 
     /// <summary>
-    ///     Returns the configuration source for <see cref="IReadOnlyStoredProcedureResultColumn.Name" />.
+    ///     Returns the configuration source for <see cref="IReadOnlyStoredProcedureResultColumn.Name"
+    // />.
     /// </summary>
-    /// <returns>The configuration source for <see cref="IReadOnlyStoredProcedureResultColumn.Name" />.</returns>
+    /// <returns>The configuration source for <see cref="IReadOnlyStoredProcedureResultColumn.Name"
+    // />.</returns>
     ConfigurationSource? GetNameConfigurationSource();
 }

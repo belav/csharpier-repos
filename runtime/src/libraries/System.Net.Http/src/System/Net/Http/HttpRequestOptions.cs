@@ -82,9 +82,11 @@ namespace System.Net.Http
         /// <summary>
         /// Gets the value of a given HTTP request option.
         /// </summary>
-        /// <param name="key">Strongly typed key to get the value of HTTP request option. For example <code>new HttpRequestOptionsKey&lt;bool&gt;("WebAssemblyEnableStreamingResponse")</code></param>
+        /// <param name="key">Strongly typed key to get the value of HTTP request option. For example
+        // <code>new HttpRequestOptionsKey&lt;bool&gt;("WebAssemblyEnableStreamingResponse")</code></param>
         /// <param name="value">Returns the value of HTTP request option.</param>
-        /// <typeparam name="TValue">The type of the HTTP value as defined by <code>key</code> parameter.</typeparam>
+        /// <typeparam name="TValue">The type of the HTTP value as defined by <code>key</code>
+        // parameter.</typeparam>
         /// <returns>True, if an option is retrieved.</returns>
         public bool TryGetValue<TValue>(
             HttpRequestOptionsKey<TValue> key,
@@ -104,9 +106,11 @@ namespace System.Net.Http
         /// <summary>
         /// Sets the value of a given request option.
         /// </summary>
-        /// <param name="key">Strongly typed key to get the value of HTTP request option. For example <code>new HttpRequestOptionsKey&lt;bool&gt;("WebAssemblyEnableStreamingResponse")</code></param>
+        /// <param name="key">Strongly typed key to get the value of HTTP request option. For example
+        // <code>new HttpRequestOptionsKey&lt;bool&gt;("WebAssemblyEnableStreamingResponse")</code></param>
         /// <param name="value">The value of the HTTP request option.</param>
-        /// <typeparam name="TValue">The type of the HTTP value as defined by <code>key</code> parameter.</typeparam>
+        /// <typeparam name="TValue">The type of the HTTP value as defined by <code>key</code>
+        // parameter.</typeparam>
         public void Set<TValue>(HttpRequestOptionsKey<TValue> key, TValue value)
         {
             Options[key.Key] = value;

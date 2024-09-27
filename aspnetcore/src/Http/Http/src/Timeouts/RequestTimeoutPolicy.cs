@@ -14,7 +14,8 @@ public sealed class RequestTimeoutPolicy
     public TimeSpan? Timeout { get; init; }
 
     /// <summary>
-    /// Status code to be set in response when a timeout results in an <see cref="OperationCanceledException" /> being caught by the middleware.
+    /// Status code to be set in response when a timeout results in an <see
+    // cref="OperationCanceledException" /> being caught by the middleware.
     /// The status code cannot be applied if the response has already started.
     /// 504 will be used if none is specified.
     /// </summary>
@@ -22,7 +23,8 @@ public sealed class RequestTimeoutPolicy
 
     /// <summary>
     /// A callback for creating a timeout response.
-    /// This is called if a timeout results in an <see cref="OperationCanceledException" /> being caught by the middleware.
+    /// This is called if a timeout results in an <see cref="OperationCanceledException" /> being caught
+    // by the middleware.
     /// The status code will be set first.
     /// The status code and callback cannot be applied if the response has already started.
     /// The default behavior is an empty response with only the status code.

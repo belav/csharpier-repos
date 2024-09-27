@@ -52,10 +52,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         private IWpfTextView GetViewFromIVsIntellisenseHost(IVsIntellisenseHost intellisenseHost)
         {
-            // The easiest way (unfortunately) is to get do reflection to get the view from the IVsIntellisenseHost.
-            // In practice, the implementations we care about of this are just shim implementations from the editor.
-            // The only alternative way to do this is to do very complicated watching of ITextView and IVsTextView
-            // lifetimes to correlate them, but that requires running code in those code paths for all views which
+            // The easiest way (unfortunately) is to get do reflection to get the view from the
+            // IVsIntellisenseHost.
+            // In practice, the implementations we care about of this are just shim implementations from the
+            // editor.
+            // The only alternative way to do this is to do very complicated watching of ITextView and
+            // IVsTextView
+            // lifetimes to correlate them, but that requires running code in those code paths for all views
+            // which
             // seems a bit overkill for our needs.
             var field = intellisenseHost
                 .GetType()

@@ -195,7 +195,7 @@ namespace MonoTests.System.Text
             StringBuilder sb = new StringBuilder();
 
             Assert.AreEqual(String.Empty, sb.ToString());
-            /* Test empty StringBuilder conforms to spec */
+/* Test empty StringBuilder conforms to spec */
 
             sb.Insert(0, "Foo"); /* Test insert at start of empty string */
 
@@ -246,8 +246,8 @@ namespace MonoTests.System.Text
 
             Assert.AreEqual(String.Empty, sb.ToString());
 
-            /*           |         10        20        30
-            /*         |0123456789012345678901234567890| */
+/*           |         10        20        30
+/*         |0123456789012345678901234567890| */
             sb.Append("abc this is testing abc the abc abc partial replace abc");
 
             sb.Replace("abc", "!!!", 0, 31); /* Partial replace at start of string */

@@ -149,7 +149,8 @@ namespace Internal.TypeSystem.Ecma
             var type = _module.GetType(baseTypeHandle) as MetadataType;
             if (type == null)
             {
-                // PREFER: "new TypeSystemException.TypeLoadException(ExceptionStringID.ClassLoadBadFormat, this)" but the metadata is too broken
+                // PREFER: "new TypeSystemException.TypeLoadException(ExceptionStringID.ClassLoadBadFormat, this)"
+                // but the metadata is too broken
                 ThrowHelper.ThrowTypeLoadException(Namespace, Name, Module);
             }
             _baseType = type;
@@ -445,8 +446,10 @@ namespace Internal.TypeSystem.Ecma
 
         public override MethodDesc GetFinalizer()
         {
-            // System.Object defines Finalize but doesn't use it, so we can determine that a type has a Finalizer
-            // by checking for a virtual method override that lands anywhere other than Object in the inheritance
+            // System.Object defines Finalize but doesn't use it, so we can determine that a type has a
+            // Finalizer
+            // by checking for a virtual method override that lands anywhere other than Object in the
+            // inheritance
             // chain.
             if (!HasBaseType)
                 return null;

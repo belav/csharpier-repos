@@ -88,7 +88,8 @@ internal partial class RuntimeViewCompiler : IViewCompiler
     {
         ArgumentNullException.ThrowIfNull(relativePath);
 
-        // Attempt to lookup the cache entry using the passed in path. This will succeed if the path is already
+        // Attempt to lookup the cache entry using the passed in path. This will succeed if the path is
+        // already
         // normalized and a cache entry exists.
         if (
             _cache.TryGetValue<Task<CompiledViewDescriptor>>(relativePath, out var cachedResult)
@@ -115,8 +116,10 @@ internal partial class RuntimeViewCompiler : IViewCompiler
         TaskCompletionSource<CompiledViewDescriptor> taskSource;
         MemoryCacheEntryOptions cacheEntryOptions;
 
-        // Safe races cannot be allowed when compiling Razor pages. To ensure only one compilation request succeeds
-        // per file, we'll lock the creation of a cache entry. Creating the cache entry should be very quick. The
+        // Safe races cannot be allowed when compiling Razor pages. To ensure only one compilation request
+        // succeeds
+        // per file, we'll lock the creation of a cache entry. Creating the cache entry should be very
+        // quick. The
         // actual work for compiling files happens outside the critical section.
         lock (_cacheLock)
         {
@@ -206,10 +209,12 @@ internal partial class RuntimeViewCompiler : IViewCompiler
     {
         // We have a precompiled view - but we're not sure that we can use it yet.
         //
-        // We need to determine first if we have enough information to 'recompile' this view. If that's the case
+        // We need to determine first if we have enough information to 'recompile' this view. If that's the
+        // case
         // we'll create change tokens for all of the files.
         //
-        // Then we'll attempt to validate if any of those files have different content than the original sources
+        // Then we'll attempt to validate if any of those files have different content than the original
+        // sources
         // based on checksums.
         if (
             precompiledView.Item == null
@@ -238,8 +243,10 @@ internal partial class RuntimeViewCompiler : IViewCompiler
             ExpirationTokens = GetExpirationTokens(precompiledView),
         };
 
-        // We also need to create a new descriptor, because the original one doesn't have expiration tokens on
-        // it. These will be used by the view location cache, which is like an L1 cache for views (this class is
+        // We also need to create a new descriptor, because the original one doesn't have expiration tokens
+        // on
+        // it. These will be used by the view location cache, which is like an L1 cache for views (this
+        // class is
         // the L2 cache).
         item.Descriptor = new CompiledViewDescriptor()
         {
@@ -302,7 +309,8 @@ internal partial class RuntimeViewCompiler : IViewCompiler
 
         for (var i = 0; i < checksums.Count; i++)
         {
-            // We rely on Razor to provide the right set of checksums. Trust the compiler, it has to do a good job,
+            // We rely on Razor to provide the right set of checksums. Trust the compiler, it has to do a good
+            // job,
             // so it probably will.
             expirationTokens.Add(_fileProvider.Watch(checksums[i].Identifier));
         }

@@ -11,8 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
     internal static class Extensions
     {
         /// <summary>
-        /// Create a global undo transaction for the given workspace. if the host doesn't support undo transaction,
-        /// useFallback flag can be used to indicate whether it should fallback to base implementation or not.
+        /// Create a global undo transaction for the given workspace. if the host doesn't support undo
+        // transaction,
+        /// useFallback flag can be used to indicate whether it should fallback to base implementation or
+        // not.
         /// </summary>
         public static IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
             this Workspace workspace,

@@ -141,7 +141,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
                 workspace2.CurrentSolution.Options.GetOption<string>(perLanguageOptionKey)
             );
 
-            // Update global option directly (after the value is cached in the above current solution snapshots).
+            // Update global option directly (after the value is cached in the above current solution
+            // snapshots).
             // Doing so does NOT update current solutions.
             optionService.GlobalOptions.SetGlobalOption(
                 FormattingOptions2.NewLine,

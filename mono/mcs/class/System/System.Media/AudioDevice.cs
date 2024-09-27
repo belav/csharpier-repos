@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 
 namespace Mono.Audio
 {
-    /* these are the values used by alsa */
+/* these are the values used by alsa */
 #if PUBLIC_API
     public
 #else
@@ -71,7 +71,7 @@ namespace Mono.Audio
             AudioDevice dev;
 
             dev = TryAlsa(name);
-            /* if no option is found, return a silent device */
+/* if no option is found, return a silent device */
             if (dev == null)
                 dev = new AudioDevice();
             return dev;

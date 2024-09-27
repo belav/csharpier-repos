@@ -62,15 +62,15 @@ namespace System.Web.Configuration
                 ConfigurationPropertyOptions.None
             );
 
-        /*         <!--
-        hostingEnvironment attributes:
-            idleTimeout="[Infinite|minutes]" - idle timeout in minutes to unload this application
-            shutdownTimout="[seconds]" - time given for g----ful shutdown of this application
-        -->
-        <hostingEnvironment
-            idleTimeout="20"
-            shutdownTimeout="30"
-        />
+/*         <!--
+hostingEnvironment attributes:
+idleTimeout="[Infinite|minutes]" - idle timeout in minutes to unload this application
+shutdownTimout="[seconds]" - time given for g----ful shutdown of this application
+-->
+<hostingEnvironment
+idleTimeout="20"
+shutdownTimeout="30"
+/>
 
 */
         static HostingEnvironmentSection()

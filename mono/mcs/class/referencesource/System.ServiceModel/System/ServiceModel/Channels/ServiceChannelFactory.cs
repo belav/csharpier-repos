@@ -295,7 +295,8 @@ namespace System.ServiceModel.Channels
                     );
                 }
 
-                // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the session management, so
+                // and for SessionMode.Required, it is possible that the InstanceContextProvider is handling the
+                // session management, so
                 // accept datagram variants if that is the case
                 if (
                     type == typeof(IRequestSessionChannel)

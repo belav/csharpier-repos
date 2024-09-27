@@ -18,7 +18,8 @@ namespace System.Collections.Specialized
         private ArrayList data = new ArrayList();
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.Collections.Specialized.StringCollection'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.Collections.Specialized.StringCollection'/>.</para>
         /// </devdoc>
         public string this[int index]
         {
@@ -55,7 +56,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of a string array to the end of the <see cref='System.Collections.Specialized.StringCollection'/>.</para>
+        /// <para>Copies the elements of a string array to the end of the <see
+        // cref='System.Collections.Specialized.StringCollection'/>.</para>
         /// </devdoc>
         public void AddRange(string[] value)
         {
@@ -77,7 +79,8 @@ namespace System.Collections.Specialized
 
         /// <devdoc>
         ///    <para>Gets a value indicating whether the
-        ///    <see cref='System.Collections.Specialized.StringCollection'/> contains a string with the specified
+        ///    <see cref='System.Collections.Specialized.StringCollection'/> contains a string with the
+        // specified
         ///       value.</para>
         /// </devdoc>
         public bool Contains(string value)
@@ -86,7 +89,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.Collections.Specialized.StringCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.Collections.Specialized.StringCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(string[] array, int index)
@@ -113,7 +117,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Inserts a string into the <see cref='System.Collections.Specialized.StringCollection'/> at the specified
+        /// <para>Inserts a string into the <see cref='System.Collections.Specialized.StringCollection'/> at
+        // the specified
         ///    index.</para>
         /// </devdoc>
         public void Insert(int index, string value)
@@ -122,7 +127,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Gets a value indicating whether the <see cref='System.Collections.Specialized.StringCollection'/> is read-only.</para>
+        /// <para>Gets a value indicating whether the <see
+        // cref='System.Collections.Specialized.StringCollection'/> is read-only.</para>
         /// </devdoc>
         public bool IsReadOnly
         {
@@ -149,7 +155,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Removes the string at the specified index of the <see cref='System.Collections.Specialized.StringCollection'/>.</para>
+        /// <para>Removes the string at the specified index of the <see
+        // cref='System.Collections.Specialized.StringCollection'/>.</para>
         /// </devdoc>
         public void RemoveAt(int index)
         {
@@ -157,7 +164,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Gets an object that can be used to synchronize access to the <see cref='System.Collections.Specialized.StringCollection'/>.</para>
+        /// <para>Gets an object that can be used to synchronize access to the <see
+        // cref='System.Collections.Specialized.StringCollection'/>.</para>
         /// </devdoc>
         public object SyncRoot
         {

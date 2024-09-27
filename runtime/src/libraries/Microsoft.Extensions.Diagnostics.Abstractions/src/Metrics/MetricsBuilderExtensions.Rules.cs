@@ -8,15 +8,18 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.Extensions.Diagnostics.Metrics
 {
     /// <summary>
-    /// Extension methods for <see cref="IMetricsBuilder"/> to add or clear <see cref="IMetricsListener"/> registrations, and to enable or disable metrics.
+    /// Extension methods for <see cref="IMetricsBuilder"/> to add or clear <see
+    // cref="IMetricsListener"/> registrations, and to enable or disable metrics.
     /// </summary>
     public static partial class MetricsBuilderExtensions
     {
         /// <summary>
-        /// Enables all <see cref="Instrument"/>'s for the given meter, for all registered <see cref="IMetricsListener"/>'s.
+        /// Enables all <see cref="Instrument"/>'s for the given meter, for all registered <see
+        // cref="IMetricsListener"/>'s.
         /// </summary>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
         /// <returns>The original <see cref="IMetricsBuilder"/> for chaining.</returns>
         public static IMetricsBuilder EnableMetrics(
             this IMetricsBuilder builder,
@@ -24,13 +27,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         ) => builder.ConfigureRule(options => options.EnableMetrics(meterName));
 
         /// <summary>
-        /// Enables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see cref="IMetricsListener"/>.
+        /// Enables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see
+        // cref="IMetricsListener"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
-        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all instruments.</param>
-        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all listeners.</param>
-        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all scopes.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
+        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all
+        // instruments.</param>
+        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all
+        // listeners.</param>
+        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all
+        // scopes.</param>
         /// <returns>The original <see cref="IMetricsBuilder"/> for chaining.</returns>
         public static IMetricsBuilder EnableMetrics(
             this IMetricsBuilder builder,
@@ -44,10 +52,12 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             );
 
         /// <summary>
-        /// Enables all <see cref="Instrument"/>'s for the given meter, for all registered <see cref="IMetricsListener"/>'s.
+        /// Enables all <see cref="Instrument"/>'s for the given meter, for all registered <see
+        // cref="IMetricsListener"/>'s.
         /// </summary>
         /// <param name="options">The <see cref="MetricsOptions"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
         /// <returns>The original <see cref="MetricsOptions"/> for chaining.</returns>
         public static MetricsOptions EnableMetrics(
             this MetricsOptions options,
@@ -55,13 +65,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         ) => options.EnableMetrics(meterName: meterName, instrumentName: null);
 
         /// <summary>
-        /// Enables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see cref="IMetricsListener"/>.
+        /// Enables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see
+        // cref="IMetricsListener"/>.
         /// </summary>
         /// <param name="options">The <see cref="MeterOptions"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
-        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all instruments.</param>
-        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all listeners.</param>
-        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all scopes.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
+        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all
+        // instruments.</param>
+        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all
+        // listeners.</param>
+        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all
+        // scopes.</param>
         /// <returns>The original <see cref="MeterOptions"/> for chaining.</returns>
         public static MetricsOptions EnableMetrics(
             this MetricsOptions options,
@@ -72,10 +87,12 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         ) => options.AddRule(meterName, instrumentName, listenerName, scopes, enable: true);
 
         /// <summary>
-        /// Disables all <see cref="Instrument"/>'s for the given meter, for all registered <see cref="IMetricsListener"/>'s.
+        /// Disables all <see cref="Instrument"/>'s for the given meter, for all registered <see
+        // cref="IMetricsListener"/>'s.
         /// </summary>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
         /// <returns>The original <see cref="IMetricsBuilder"/> for chaining.</returns>
         public static IMetricsBuilder DisableMetrics(
             this IMetricsBuilder builder,
@@ -83,13 +100,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         ) => builder.ConfigureRule(options => options.DisableMetrics(meterName));
 
         /// <summary>
-        /// Disables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see cref="IMetricsListener"/>.
+        /// Disables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see
+        // cref="IMetricsListener"/>.
         /// </summary>
         /// <param name="builder">The <see cref="IMetricsBuilder"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
-        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all instruments.</param>
-        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all listeners.</param>
-        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all scopes.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
+        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all
+        // instruments.</param>
+        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all
+        // listeners.</param>
+        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all
+        // scopes.</param>
         /// <returns>The original <see cref="IMetricsBuilder"/> for chaining.</returns>
         public static IMetricsBuilder DisableMetrics(
             this IMetricsBuilder builder,
@@ -103,10 +125,12 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
             );
 
         /// <summary>
-        /// Disables all <see cref="Instrument"/>'s for the given meter, for all registered <see cref="IMetricsListener"/>'s.
+        /// Disables all <see cref="Instrument"/>'s for the given meter, for all registered <see
+        // cref="IMetricsListener"/>'s.
         /// </summary>
         /// <param name="options">The <see cref="MetricsOptions"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
         /// <returns>The original <see cref="MetricsOptions"/> for chaining.</returns>
         public static MetricsOptions DisableMetrics(
             this MetricsOptions options,
@@ -114,13 +138,18 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
         ) => options.DisableMetrics(meterName: meterName, instrumentName: null);
 
         /// <summary>
-        /// Disables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see cref="IMetricsListener"/>.
+        /// Disables a specified <see cref="Instrument"/> for the given <see cref="Meter"/> and <see
+        // cref="IMetricsListener"/>.
         /// </summary>
         /// <param name="options">The <see cref="MeterOptions"/>.</param>
-        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all meters.</param>
-        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all instruments.</param>
-        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all listeners.</param>
-        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all scopes.</param>
+        /// <param name="meterName">The <see cref="Meter.Name"/> or prefix. A null value matches all
+        // meters.</param>
+        /// <param name="instrumentName">The <see cref="Instrument.Name"/>. A null value matches all
+        // instruments.</param>
+        /// <param name="listenerName">The <see cref="IMetricsListener"/>.Name. A null value matches all
+        // listeners.</param>
+        /// <param name="scopes">Indicates which <see cref="MeterScope"/>'s to consider. Default to all
+        // scopes.</param>
         /// <returns>The original <see cref="MeterOptions"/> for chaining.</returns>
         public static MetricsOptions DisableMetrics(
             this MetricsOptions options,

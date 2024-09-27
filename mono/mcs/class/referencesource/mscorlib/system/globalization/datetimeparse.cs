@@ -444,7 +444,9 @@ namespace System
         //
         ////////////////////////////////////////////////////////////////////////////
 
-        //          End       NumEnd      NumAmPm     NumSpace    NumDaySep   NumTimesep  MonthEnd    MonthSpace  MonthDSep   NumDateSuff NumTimeSuff     DayOfWeek     YearSpace   YearDateSep YearEnd     TimeZone   Era         UTCTimeMark
+        //          End       NumEnd      NumAmPm     NumSpace    NumDaySep   NumTimesep  MonthEnd
+        // MonthSpace  MonthDSep   NumDateSuff NumTimeSuff     DayOfWeek     YearSpace   YearDateSep YearEnd
+        // TimeZone   Era         UTCTimeMark
         private static DS[][] dateParsingStates =
         {
             // DS.BEGIN                                                                             // DS.BEGIN
@@ -889,7 +891,9 @@ namespace System
             },
         };
 
-        //          End       NumEnd      NumAmPm     NumSpace    NumDaySep   NumTimesep  MonthEnd    MonthSpace  MonthDSep   NumDateSuff NumTimeSuff     DayOfWeek     YearSpace   YearDateSep YearEnd     TimeZone    Era        UTCMark
+        //          End       NumEnd      NumAmPm     NumSpace    NumDaySep   NumTimesep  MonthEnd
+        // MonthSpace  MonthDSep   NumDateSuff NumTimeSuff     DayOfWeek     YearSpace   YearDateSep YearEnd
+        // TimeZone    Era        UTCMark
 
         internal const String GMTName = "GMT";
         internal const String ZuluName = "Z";
@@ -1277,14 +1281,17 @@ namespace System
                                         return false;
                                     }
 
-                                    // we have the date and time separators are same and getting a year number, then change the token to YearDateSep as
+                                    // we have the date and time separators are same and getting a year number, then change the token to
+                                    // YearDateSep as
                                     // we are sure we are not parsing time.
                                     dtok.dtt = DTT.YearDateSep;
                                     break;
 
                                 case TokenType.SEP_DateOrOffset:
-                                    // The separator is either a date separator or the start of a time zone offset. If the token will complete the date then
-                                    // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
+                                    // The separator is either a date separator or the start of a time zone offset. If the token will
+                                    // complete the date then
+                                    // process just the number and roll back the index so that the outer loop can attempt to parse the
+                                    // time zone offset.
                                     if (
                                         (
                                             dateParsingStates[(int)dps][(int)DTT.YearDateSep]
@@ -1409,8 +1416,10 @@ namespace System
                             raw.AddNumber(dtok.num);
                             break;
                         case TokenType.SEP_DateOrOffset:
-                            // The separator is either a date separator or the start of a time zone offset. If the token will complete the date then
-                            // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
+                            // The separator is either a date separator or the start of a time zone offset. If the token will
+                            // complete the date then
+                            // process just the number and roll back the index so that the outer loop can attempt to parse the
+                            // time zone offset.
                             if (
                                 (dateParsingStates[(int)dps][(int)DTT.NumDatesep] == DS.ERROR)
                                 && (dateParsingStates[(int)dps][(int)DTT.NumSpace] > DS.ERROR)
@@ -1438,7 +1447,8 @@ namespace System
                                 )
                             )
                             {
-                                // we are parsing a date and we have the time separator same as date separator, so we mark the token as date separator
+                                // we are parsing a date and we have the time separator same as date separator, so we mark the token
+                                // as date separator
                                 dtok.dtt = DTT.NumDatesep;
                                 raw.AddNumber(dtok.num);
                                 break;
@@ -1509,8 +1519,10 @@ namespace System
                                     dtok.dtt = DTT.YearSpace;
                                     break;
                                 case TokenType.SEP_DateOrOffset:
-                                    // The separator is either a date separator or the start of a time zone offset. If the token will complete the date then
-                                    // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
+                                    // The separator is either a date separator or the start of a time zone offset. If the token will
+                                    // complete the date then
+                                    // process just the number and roll back the index so that the outer loop can attempt to parse the
+                                    // time zone offset.
                                     if (dateParsingStates[(int)dps][(int)DTT.YearSpace] > DS.ERROR)
                                     {
                                         str.Index = indexBeforeSeparator;
@@ -1564,8 +1576,10 @@ namespace System
                                 dtok.dtt = DTT.NumDatesep;
                                 break;
                             case TokenType.SEP_DateOrOffset:
-                                // The separator is either a date separator or the start of a time zone offset. If the token will complete the date then
-                                // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
+                                // The separator is either a date separator or the start of a time zone offset. If the token will
+                                // complete the date then
+                                // process just the number and roll back the index so that the outer loop can attempt to parse the
+                                // time zone offset.
                                 if (
                                     (dateParsingStates[(int)dps][(int)DTT.NumDatesep] == DS.ERROR)
                                     && (dateParsingStates[(int)dps][(int)DTT.NumSpace] > DS.ERROR)
@@ -1643,13 +1657,16 @@ namespace System
                                     return false;
                                 }
 
-                                // we have the date and time separators are same and getting a Month name, then change the token to MonthDatesep as
+                                // we have the date and time separators are same and getting a Month name, then change the token to
+                                // MonthDatesep as
                                 // we are sure we are not parsing time.
                                 dtok.dtt = DTT.MonthDatesep;
                                 break;
                             case TokenType.SEP_DateOrOffset:
-                                // The separator is either a date separator or the start of a time zone offset. If the token will complete the date then
-                                // process just the number and roll back the index so that the outer loop can attempt to parse the time zone offset.
+                                // The separator is either a date separator or the start of a time zone offset. If the token will
+                                // complete the date then
+                                // process just the number and roll back the index so that the outer loop can attempt to parse the
+                                // time zone offset.
                                 if (
                                     (dateParsingStates[(int)dps][(int)DTT.MonthDatesep] == DS.ERROR)
                                     && (dateParsingStates[(int)dps][(int)DTT.MonthSpace] > DS.ERROR)
@@ -1697,7 +1714,8 @@ namespace System
                     }
                     break;
                 case TokenType.JapaneseEraToken:
-                    // Special case for Japanese.  We allow Japanese era name to be used even if the calendar is not Japanese Calendar.
+                    // Special case for Japanese.  We allow Japanese era name to be used even if the calendar is not
+                    // Japanese Calendar.
                     result.calendar = JapaneseCalendar.GetDefaultInstance();
                     dtfi = DateTimeFormatInfo.GetJapaneseCalendarDTFI();
                     if (result.era != -1)
@@ -2358,7 +2376,8 @@ namespace System
             //    dd MMMM           MMMM yyyy         Year
             //    dd MMMM           yyyy MMMM         Day
             //
-            // In the first and last cases, it could be either or neither, but a day is a better default interpretation
+            // In the first and last cases, it could be either or neither, but a day is a better default
+            // interpretation
             // than a 2 digit year.
 
             int monthDayOrder;
@@ -2472,7 +2491,8 @@ namespace System
             //    dd MMMM           MMMM yyyy         Day
             //    dd MMMM           yyyy MMMM         Day
             //
-            // In the first and last cases, it could be either or neither, but a day is a better default interpretation
+            // In the first and last cases, it could be either or neither, but a day is a better default
+            // interpretation
             // than a 2 digit year.
 
             int monthDayOrder;
@@ -2932,8 +2952,10 @@ namespace System
             DateTimeFormatInfo dtfi
         )
         {
-            // For partial CJK Dates, the only valid formats are with a specified year, followed by two numbers, which
-            // will be the Month and Day, and with a specified Month, when the numbers are either the year and day or
+            // For partial CJK Dates, the only valid formats are with a specified year, followed by two numbers,
+            // which
+            // will be the Month and Day, and with a specified Month, when the numbers are either the year and
+            // day or
             // day and year, depending on the short date pattern.
 
             if ((result.flags & ParseFlags.HaveYear) != 0)
@@ -3096,7 +3118,8 @@ namespace System
                     }
                     break;
                 case DS.DX_YMN:
-                    // Deal with the default long/short date format when the year number is NOT ambigous (i.e. year >= 100).
+                    // Deal with the default long/short date format when the year number is NOT ambigous (i.e. year >=
+                    // 100).
                     if (!dtfi.YearMonthAdjustment(ref raw.year, ref raw.month, true))
                     {
                         result.SetFailure(
@@ -3470,8 +3493,10 @@ namespace System
                             || dtok.dtt == DTT.YearDateSep
                         )
                         {
-                            // When time and date separators are same and we are hitting a year number while the first parsed part of the string was recognized
-                            // as part of time (and not a date) DS.T_Nt, DS.T_NNt then change the state to be a date so we try to parse it as a date instead
+                            // When time and date separators are same and we are hitting a year number while the first parsed
+                            // part of the string was recognized
+                            // as part of time (and not a date) DS.T_Nt, DS.T_NNt then change the state to be a date so we try
+                            // to parse it as a date instead
                             if (dps == DS.T_Nt)
                             {
                                 dps = DS.D_Nd;
@@ -3487,7 +3512,8 @@ namespace System
                         {
                             switch (dtok.dtt)
                             {
-                                // we have the case of Serbia have dates in forms 'd.M.yyyy.' so we can expect '.' after the date parts.
+                                // we have the case of Serbia have dates in forms 'd.M.yyyy.' so we can expect '.' after the date
+                                // parts.
                                 // changing the token to end with space instead of Date Separator will avoid failing the parsing.
 
                                 case DTT.YearDateSep:
@@ -3757,7 +3783,8 @@ namespace System
                 }
                 else
                 {
-                    // AssumeLocal causes the offset to default to Local.  This flag is on by default for DateTimeOffset.
+                    // AssumeLocal causes the offset to default to Local.  This flag is on by default for
+                    // DateTimeOffset.
                     result.timeZoneOffset = TimeZoneInfo.GetLocalUtcOffset(
                         result.parsedDate,
                         TimeZoneInfoOptions.NoThrowOnInvalidTime
@@ -3767,11 +3794,13 @@ namespace System
 
             Int64 offsetTicks = result.timeZoneOffset.Ticks;
 
-            // there should be no overflow, because the offset can be no more than -+100 hours and the date already
+            // there should be no overflow, because the offset can be no more than -+100 hours and the date
+            // already
             // fits within a DateTime.
             Int64 utcTicks = result.parsedDate.Ticks - offsetTicks;
 
-            // For DateTimeOffset, both the parsed time and the corresponding UTC value must be within the boundaries
+            // For DateTimeOffset, both the parsed time and the corresponding UTC value must be within the
+            // boundaries
             // of a DateTime instance.
             if (utcTicks < DateTime.MinTicks || utcTicks > DateTime.MaxTicks)
             {
@@ -3786,8 +3815,10 @@ namespace System
                 return false;
             }
 
-            // DateTimeOffset should still honor the AdjustToUniversal flag for consistency with DateTime. It means you
-            // want to return an adjusted UTC value, so store the utcTicks in the DateTime and set the offset to zero
+            // DateTimeOffset should still honor the AdjustToUniversal flag for consistency with DateTime. It
+            // means you
+            // want to return an adjusted UTC value, so store the utcTicks in the DateTime and set the offset to
+            // zero
             if ((styles & DateTimeStyles.AdjustToUniversal) != 0)
             {
                 if (
@@ -3872,7 +3903,8 @@ namespace System
                 resultTicks -= result.timeZoneOffset.Ticks;
                 if (resultTicks < DateTime.MinTicks || resultTicks > DateTime.MaxTicks)
                 {
-                    // If the result ticks is greater than DateTime.MaxValue, we can not create a DateTime from this ticks.
+                    // If the result ticks is greater than DateTime.MaxValue, we can not create a DateTime from this
+                    // ticks.
                     // In this case, keep using the old code.
                     resultTicks += tz.GetUtcOffset(
                         result.parsedDate,
@@ -4569,7 +4601,8 @@ namespace System
         )
         {
             result = TM.NotSet;
-            // In some cultures have empty strings in AM/PM mark. E.g. af-ZA (0x0436), the AM mark is "", and PM mark is "nm".
+            // In some cultures have empty strings in AM/PM mark. E.g. af-ZA (0x0436), the AM mark is "", and PM
+            // mark is "nm".
             if (dtfi.AMDesignator.Length == 0)
             {
                 result = TM.AM;
@@ -4714,10 +4747,14 @@ namespace System
         {
             if ((result.flags & ParseFlags.CaptureOffset) != 0)
             {
-                // DateTimeOffset.Parse should allow dates without a year, but only if there is also no time zone marker;
-                // e.g. "May 1 5pm" is OK, but "May 1 5pm -08:30" is not.  This is somewhat pragmatic, since we would
-                // have to rearchitect parsing completely to allow this one case to correctly handle things like leap
-                // years and leap months.  Is is an extremely corner case, and DateTime is basically incorrect in that
+                // DateTimeOffset.Parse should allow dates without a year, but only if there is also no time zone
+                // marker;
+                // e.g. "May 1 5pm" is OK, but "May 1 5pm -08:30" is not.  This is somewhat pragmatic, since we
+                // would
+                // have to rearchitect parsing completely to allow this one case to correctly handle things like
+                // leap
+                // years and leap months.  Is is an extremely corner case, and DateTime is basically incorrect in
+                // that
                 // case today.
                 //
                 // values like "11:00Z" or "11:00 -3:00" are also acceptable
@@ -4746,21 +4783,28 @@ namespace System
                 /*
                 The following table describes the behaviors of getting the default value
                 when a certain year/month/day values are missing.
-
+                
                 An "X" means that the value exists.  And "--" means that value is missing.
-
+                
                 Year    Month   Day =>  ResultYear  ResultMonth     ResultDay       Note
-
+                
                 X       X       X       Parsed year Parsed month    Parsed day
-                X       X       --      Parsed Year Parsed month    First day       If we have year and month, assume the first day of that month.
-                X       --      X       Parsed year First month     Parsed day      If the month is missing, assume first month of that year.
-                X       --      --      Parsed year First month     First day       If we have only the year, assume the first day of that year.
-
-                --      X       X       CurrentYear Parsed month    Parsed day      If the year is missing, assume the current year.
-                --      X       --      CurrentYear Parsed month    First day       If we have only a month value, assume the current year and current day.
-                --      --      X       CurrentYear First month     Parsed day      If we have only a day value, assume current year and first month.
-                --      --      --      CurrentYear Current month   Current day     So this means that if the date string only contains time, you will get current date.
-
+                X       X       --      Parsed Year Parsed month    First day       If we have year and month,
+                assume the first day of that month.
+                X       --      X       Parsed year First month     Parsed day      If the month is missing, assume
+                first month of that year.
+                X       --      --      Parsed year First month     First day       If we have only the year, assume
+                the first day of that year.
+                
+                --      X       X       CurrentYear Parsed month    Parsed day      If the year is missing, assume
+                the current year.
+                --      X       --      CurrentYear Parsed month    First day       If we have only a month value,
+                assume the current year and current day.
+                --      --      X       CurrentYear First month     Parsed day      If we have only a day value,
+                assume current year and first month.
+                --      --      --      CurrentYear Current month   Current day     So this means that if the date
+                string only contains time, you will get current date.
+                
                 */
 
                 DateTime now = GetDateTimeNow(ref result, ref styles);
@@ -5296,8 +5340,10 @@ namespace System
                     // Otherwise it is unspecified and we consume no characters
                     break;
                 case ':':
-                    // We match the separator in time pattern with the character in the time string if both equal to ':' or the date separator is matching the characters in the date string
-                    // We have to exclude the case when the time separator is more than one character and starts with ':' something like "::" for instance.
+                    // We match the separator in time pattern with the character in the time string if both equal to ':'
+                    // or the date separator is matching the characters in the date string
+                    // We have to exclude the case when the time separator is more than one character and starts with
+                    // ':' something like "::" for instance.
                     if (
                         (
                             (dtfi.TimeSeparator.Length > 1 && dtfi.TimeSeparator[0] == ':')
@@ -5311,8 +5357,10 @@ namespace System
                     }
                     break;
                 case '/':
-                    // We match the separator in date pattern with the character in the date string if both equal to '/' or the date separator is matching the characters in the date string
-                    // We have to exclude the case when the date separator is more than one character and starts with '/' something like "//" for instance.
+                    // We match the separator in date pattern with the character in the date string if both equal to '/'
+                    // or the date separator is matching the characters in the date string
+                    // We have to exclude the case when the date separator is more than one character and starts with
+                    // '/' something like "//" for instance.
                     if (
                         (
                             (dtfi.DateSeparator.Length > 1 && dtfi.DateSeparator[0] == '/')
@@ -5348,7 +5396,8 @@ namespace System
                     format.Index += tokenLen - 1;
 
                     // Some cultures uses space in the quoted string.  E.g. Spanish has long date format as:
-                    // "dddd, dd' de 'MMMM' de 'yyyy".  When inner spaces flag is set, we should skip whitespaces if there is space
+                    // "dddd, dd' de 'MMMM' de 'yyyy".  When inner spaces flag is set, we should skip whitespaces if
+                    // there is space
                     // in the quoted string.
                     String quotedStr = enquotedString.ToString();
 
@@ -6080,7 +6129,8 @@ namespace System
         private CompareInfo m_info;
 
         // Flag to indicate if we encouter an digit, we should check for token or not.
-        // In some cultures, such as mn-MN, it uses "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440" in month names.
+        // In some cultures, such as mn-MN, it uses
+        // "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440" in month names.
         private bool m_checkDigitToken;
 
         internal __DTString(String str, DateTimeFormatInfo dtfi, bool checkDigitToken)
@@ -6217,7 +6267,8 @@ namespace System
                     TokenType tempType;
                     int tempValue;
                     // This DTFI has tokens starting with digits.
-                    // E.g. mn-MN has month name like "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440"
+                    // E.g. mn-MN has month name like
+                    // "\x0031\x00a0\x0434\x04af\x0433\x044d\x044d\x0440\x00a0\x0441\x0430\x0440"
                     if (
                         dtfi.Tokenize(
                             TokenType.RegularTokenMask,
@@ -6292,7 +6343,8 @@ namespace System
             }
             else
             {
-                // Do nothing here.  If we see a number, it will not be a separator. There is no need wasting time trying to find the
+                // Do nothing here.  If we see a number, it will not be a separator. There is no need wasting time
+                // trying to find the
                 // separator token.
                 tokenType = TokenType.SEP_Space;
             }
@@ -6445,7 +6497,8 @@ namespace System
         //
         // Check to see if the string starting from Index is a prefix of
         // str.
-        // If a match is found, true value is returned and Index is updated to the next character to be parsed.
+        // If a match is found, true value is returned and Index is updated to the next character to be
+        // parsed.
         // Otherwise, Index is unchanged.
         //
         internal bool Match(String str)
@@ -6491,8 +6544,10 @@ namespace System
 
         //
         //  Actions: From the current position, try matching the longest word in the specified string array.
-        //      E.g. words[] = {"AB", "ABC", "ABCD"}, if the current position points to a substring like "ABC DEF",
-        //          MatchLongestWords(words, ref MaxMatchStrLen) will return 1 (the index), and maxMatchLen will be 3.
+        //      E.g. words[] = {"AB", "ABC", "ABCD"}, if the current position points to a substring like
+        // "ABC DEF",
+        //          MatchLongestWords(words, ref MaxMatchStrLen) will return 1 (the index), and maxMatchLen
+        // will be 3.
         //  Returns:
         //      The index that contains the longest word to match
         //  Arguments:

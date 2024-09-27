@@ -10,19 +10,22 @@ using System.Text;
 namespace System.Threading.Tasks
 {
     /// <summary>
-    /// Fragile trick for getting a description of the current state of a .NET Core async method state machine.
+    /// Fragile trick for getting a description of the current state of a .NET Core async method state
+    // machine.
     /// To use, first await FetchAsync to get back an object:
     ///     object box = await GetStateMachineData.FetchAsync();
     /// and then when the description is desired, use:
     ///     string description = GetStateMachineData.Describe(box);
     /// For example:
-    ///     using (new Timer(s => Console.WriteLine(GetStateMachineData.Describe(s)), await GetStateMachineData.FetchAsync(), 60_000, 60_000))
+    ///     using (new Timer(s => Console.WriteLine(GetStateMachineData.Describe(s)), await
+    // GetStateMachineData.FetchAsync(), 60_000, 60_000))
     /// </summary>
     internal sealed class GetStateMachineData : ICriticalNotifyCompletion
     {
         private object _box;
 
-        /// <summary>Returns an awaitable whose awaited result will be the boxed state machine for the async method.</summary>
+        /// <summary>Returns an awaitable whose awaited result will be the boxed state machine for the async
+        // method.</summary>
         public static GetStateMachineData FetchAsync() => new GetStateMachineData();
 
         /// <summary>Creates a string representation of a boxed state machine object.</summary>

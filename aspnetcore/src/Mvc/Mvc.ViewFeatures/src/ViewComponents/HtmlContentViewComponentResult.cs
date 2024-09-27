@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewComponents;
 /// An <see cref="IViewComponentResult"/> which writes an <see cref="IHtmlContent"/> when executed.
 /// </summary>
 /// <remarks>
-/// The provided content will be HTML-encoded as specified when the content was created. To encoded and write
+/// The provided content will be HTML-encoded as specified when the content was created. To encoded
+// and write
 /// text, use a <see cref="ContentViewComponentResult"/>.
 /// </remarks>
 public class HtmlContentViewComponentResult : IViewComponentResult

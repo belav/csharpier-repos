@@ -741,7 +741,8 @@ public class MiddlewareTests
     [Fact]
     public async Task RewriteAfterUseRoutingHitsOriginalEndpoint()
     {
-        // This is an edge case where users setup routing incorrectly, but we don't want to accidentally change behavior in case someone
+        // This is an edge case where users setup routing incorrectly, but we don't want to accidentally
+        // change behavior in case someone
         // relies on it, so we have this test
         var options = new RewriteOptions().AddRewrite("(.*)", "$1s", skipRemainingRules: false);
         using var host = new HostBuilder()

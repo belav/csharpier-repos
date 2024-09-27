@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 namespace System.Globalization
 {
@@ -504,7 +505,8 @@ namespace System.Globalization
 
         // Working set optimization:
         // 1. code page, family code page stored as unsigned short
-        // 2. if web/header/body names are the same, only web name is stored; otherwise, we store "|webname|headername|bodyname"
+        // 2. if web/header/body names are the same, only web name is stored; otherwise, we store
+        // "|webname|headername|bodyname"
         // 3. Move flags before names to fill gap on 64-bit platforms
 
         static InternalCodePageDataItem MapCodePageDataItem(
@@ -582,7 +584,8 @@ namespace System.Globalization
                 "ASMO-708",
                 MIMECONTF_BROWSER | MIMECONTF_SAVABLE_BROWSER
             ), // "Arabic (ASMO 708)"
-            //    MapCodePageDataItem(   720,  1256, "DOS-720",     MIMECONTF_BROWSER | MIMECONTF_SAVABLE_BROWSER), // "Arabic (DOS)"
+            //    MapCodePageDataItem(   720,  1256, "DOS-720",     MIMECONTF_BROWSER |
+            // MIMECONTF_SAVABLE_BROWSER), // "Arabic (DOS)"
             MapCodePageDataItem(737, 1253, "ibm737", 0), // "Greek (DOS)"
             MapCodePageDataItem(775, 1257, "ibm775", 0), // "Baltic (DOS)"
             MapCodePageDataItem(850, 1252, "ibm850", 0), // "Western European (DOS)"
@@ -747,37 +750,37 @@ namespace System.Globalization
             ), // "Vietnamese (Windows)"
             //    MapCodePageDataItem(  1361,   949, "Johab",        0), // "Korean (Johab)"
             MapCodePageDataItem(10000, 1252, "macintosh", 0), // "Western European (Mac)"
-            /*
-                MapCodePageDataItem( 10001,   932, "x-mac-japanese", 0), // "Japanese (Mac)"
-                MapCodePageDataItem( 10002,   950, "x-mac-chinesetrad",   0), // "Chinese Traditional (Mac)"
-                MapCodePageDataItem( 10003,   949, "x-mac-korean",        0), // "Korean (Mac)"
-                MapCodePageDataItem( 10004,  1256, "x-mac-arabic",        0), // "Arabic (Mac)"
-                MapCodePageDataItem( 10005,  1255, "x-mac-hebrew",        0), // "Hebrew (Mac)"
-                MapCodePageDataItem( 10006,  1253, "x-mac-greek",         0), // "Greek (Mac)"
-                MapCodePageDataItem( 10007,  1251, "x-mac-cyrillic",      0), // "Cyrillic (Mac)"
-                MapCodePageDataItem( 10008,   936, "x-mac-chinesesimp",   0), // "Chinese Simplified (Mac)"
-                MapCodePageDataItem( 10010,  1250, "x-mac-romanian",      0), // "Romanian (Mac)"
-                MapCodePageDataItem( 10017,  1251, "x-mac-ukrainian",     0), // "Ukrainian (Mac)"
-                MapCodePageDataItem( 10021,   874, "x-mac-thai",          0), // "Thai (Mac)"
-                MapCodePageDataItem( 10029,  1250, "x-mac-ce",            0), // "Central European (Mac)"
-            */
+/*
+MapCodePageDataItem( 10001,   932, "x-mac-japanese", 0), // "Japanese (Mac)"
+MapCodePageDataItem( 10002,   950, "x-mac-chinesetrad",   0), // "Chinese Traditional (Mac)"
+MapCodePageDataItem( 10003,   949, "x-mac-korean",        0), // "Korean (Mac)"
+MapCodePageDataItem( 10004,  1256, "x-mac-arabic",        0), // "Arabic (Mac)"
+MapCodePageDataItem( 10005,  1255, "x-mac-hebrew",        0), // "Hebrew (Mac)"
+MapCodePageDataItem( 10006,  1253, "x-mac-greek",         0), // "Greek (Mac)"
+MapCodePageDataItem( 10007,  1251, "x-mac-cyrillic",      0), // "Cyrillic (Mac)"
+MapCodePageDataItem( 10008,   936, "x-mac-chinesesimp",   0), // "Chinese Simplified (Mac)"
+MapCodePageDataItem( 10010,  1250, "x-mac-romanian",      0), // "Romanian (Mac)"
+MapCodePageDataItem( 10017,  1251, "x-mac-ukrainian",     0), // "Ukrainian (Mac)"
+MapCodePageDataItem( 10021,   874, "x-mac-thai",          0), // "Thai (Mac)"
+MapCodePageDataItem( 10029,  1250, "x-mac-ce",            0), // "Central European (Mac)"
+*/
             MapCodePageDataItem(10079, 1252, "x-mac-icelandic", 0), // "Icelandic (Mac)"
             //    MapCodePageDataItem( 10081,  1254, "x-mac-turkish",       0), // "Turkish (Mac)"
             //    MapCodePageDataItem( 10082,  1250, "x-mac-croatian",      0), // "Croatian (Mac)"
             MapCodePageDataItem(12000, 1200, "utf-32", 0), // "Unicode (UTF-32)"
             MapCodePageDataItem(12001, 1200, "utf-32BE", 0), // "Unicode (UTF-32 Big Endian)"
-            /*
-                MapCodePageDataItem( 20000,   950, "x-Chinese-CNS",       0), // "Chinese Traditional (CNS)"
-                MapCodePageDataItem( 20001,   950, "x-cp20001",           0), // "TCA Taiwan"
-                MapCodePageDataItem( 20002,   950, "x-Chinese-Eten",      0), // "Chinese Traditional (Eten)"
-                MapCodePageDataItem( 20003,   950, "x-cp20003",           0), // "IBM5550 Taiwan"
-                MapCodePageDataItem( 20004,   950, "x-cp20004",           0), // "TeleText Taiwan"
-                MapCodePageDataItem( 20005,   950, "x-cp20005",           0), // "Wang Taiwan"
-                MapCodePageDataItem( 20105,  1252, "x-IA5",               0), // "Western European (IA5)"
-                MapCodePageDataItem( 20106,  1252, "x-IA5-German",        0), // "German (IA5)"
-                MapCodePageDataItem( 20107,  1252, "x-IA5-Swedish",       0), // "Swedish (IA5)"
-                MapCodePageDataItem( 20108,  1252, "x-IA5-Norwegian",     0), // "Norwegian (IA5)"
-            */
+/*
+MapCodePageDataItem( 20000,   950, "x-Chinese-CNS",       0), // "Chinese Traditional (CNS)"
+MapCodePageDataItem( 20001,   950, "x-cp20001",           0), // "TCA Taiwan"
+MapCodePageDataItem( 20002,   950, "x-Chinese-Eten",      0), // "Chinese Traditional (Eten)"
+MapCodePageDataItem( 20003,   950, "x-cp20003",           0), // "IBM5550 Taiwan"
+MapCodePageDataItem( 20004,   950, "x-cp20004",           0), // "TeleText Taiwan"
+MapCodePageDataItem( 20005,   950, "x-cp20005",           0), // "Wang Taiwan"
+MapCodePageDataItem( 20105,  1252, "x-IA5",               0), // "Western European (IA5)"
+MapCodePageDataItem( 20106,  1252, "x-IA5-German",        0), // "German (IA5)"
+MapCodePageDataItem( 20107,  1252, "x-IA5-Swedish",       0), // "Swedish (IA5)"
+MapCodePageDataItem( 20108,  1252, "x-IA5-Norwegian",     0), // "Norwegian (IA5)"
+*/
             MapCodePageDataItem(
                 20127,
                 1252,
@@ -797,7 +800,8 @@ namespace System.Globalization
             MapCodePageDataItem(20420, 1256, "IBM420", 0), // "IBM EBCDIC (Arabic)"
             //    MapCodePageDataItem( 20423,  1253, "IBM423",              0), // "IBM EBCDIC (Greek)"
             MapCodePageDataItem(20424, 1255, "IBM424", 0), // "IBM EBCDIC (Hebrew)"
-            //    MapCodePageDataItem( 20833,   949, "x-EBCDIC-KoreanExtended", 0), // "IBM EBCDIC (Korean Extended)"
+            //    MapCodePageDataItem( 20833,   949, "x-EBCDIC-KoreanExtended", 0), // "IBM EBCDIC (Korean
+            // Extended)"
             //    MapCodePageDataItem( 20838,   874, "IBM-Thai",            0), // "IBM EBCDIC (Thai)"
             MapCodePageDataItem(
                 20866,
@@ -809,14 +813,15 @@ namespace System.Globalization
                     | MIMECONTF_SAVABLE_BROWSER
             ), // "Cyrillic (KOI8-R)"
             MapCodePageDataItem(20871, 1252, "IBM871", 0), // "IBM EBCDIC (Icelandic)"
-            /*
-                MapCodePageDataItem( 20880,  1251, "IBM880",              0), // "IBM EBCDIC (Cyrillic Russian)"
-                MapCodePageDataItem( 20905,  1254, "IBM905",              0), // "IBM EBCDIC (Turkish)"
-                MapCodePageDataItem( 20924,  1252, "IBM00924",            0), // "IBM Latin-1"
-                MapCodePageDataItem( 20932,   932, "EUC-JP",              0), // "Japanese (JIS 0208-1990 and 0212-1990)"
-                MapCodePageDataItem( 20936,   936, "x-cp20936",           0), // "Chinese Simplified (GB2312-80)"
-                MapCodePageDataItem( 20949,   949, "x-cp20949",           0), // "Korean Wansung"
-            */
+/*
+MapCodePageDataItem( 20880,  1251, "IBM880",              0), // "IBM EBCDIC (Cyrillic Russian)"
+MapCodePageDataItem( 20905,  1254, "IBM905",              0), // "IBM EBCDIC (Turkish)"
+MapCodePageDataItem( 20924,  1252, "IBM00924",            0), // "IBM Latin-1"
+MapCodePageDataItem( 20932,   932, "EUC-JP",              0), // "Japanese (JIS 0208-1990 and
+0212-1990)"
+MapCodePageDataItem( 20936,   936, "x-cp20936",           0), // "Chinese Simplified (GB2312-80)"
+MapCodePageDataItem( 20949,   949, "x-cp20949",           0), // "Korean Wansung"
+*/
             MapCodePageDataItem(21025, 1251, "cp1025", 0), // "IBM EBCDIC (Cyrillic Serbian-Bulgarian)"
             MapCodePageDataItem(
                 21866,
@@ -902,7 +907,8 @@ namespace System.Globalization
                     | MIMECONTF_SAVABLE_MAILNEWS
                     | MIMECONTF_SAVABLE_BROWSER
             ), // "Turkish (ISO)"
-            //    MapCodePageDataItem( 28603,  1257, "iso-8859-13",         MIMECONTF_MAILNEWS | MIMECONTF_SAVABLE_MAILNEWS), // "Estonian (ISO)"
+            //    MapCodePageDataItem( 28603,  1257, "iso-8859-13",         MIMECONTF_MAILNEWS |
+            // MIMECONTF_SAVABLE_MAILNEWS), // "Estonian (ISO)"
             MapCodePageDataItem(
                 28605,
                 1252,
@@ -932,15 +938,25 @@ namespace System.Globalization
                 MIMECONTF_MAILNEWS | MIMECONTF_SAVABLE_MAILNEWS | MIMECONTF_SAVABLE_BROWSER
             ), // "Japanese (JIS-Allow 1 byte Kana)"
             MapCodePageDataItem(50222, 932, "iso-2022-jp", 0), // "Japanese (JIS-Allow 1 byte Kana - SO/SI)"
-            //    MapCodePageDataItem( 50225,   949, "|iso-2022-kr|euc-kr|iso-2022-kr", MIMECONTF_MAILNEWS), // "Korean (ISO)"
-            //    MapCodePageDataItem( 50227,   936, "x-cp50227",           0), // "Chinese Simplified (ISO-2022)"
-            //MapCodePageDataItem( 50229,   950, L"x-cp50229", L"x-cp50229", L"x-cp50229", 0}, // "Chinese Traditional (ISO-2022)"
-            //MapCodePageDataItem( 50930,   932, L"cp930", L"cp930", L"cp930", 0}, // "IBM EBCDIC (Japanese and Japanese Katakana)"
-            //MapCodePageDataItem( 50931,   932, L"x-EBCDIC-JapaneseAndUSCanada", L"x-EBCDIC-JapaneseAndUSCanada", L"x-EBCDIC-JapaneseAndUSCanada", 0}, // "IBM EBCDIC (Japanese and US-Canada)"
-            //MapCodePageDataItem( 50933,   949, L"cp933", L"cp933", L"cp933", 0}, // "IBM EBCDIC (Korean and Korean Extended)"
-            //MapCodePageDataItem( 50935,   936, L"cp935", L"cp935", L"cp935", 0}, // "IBM EBCDIC (Simplified Chinese)"
-            //MapCodePageDataItem( 50937,   950, L"cp937", L"cp937", L"cp937", 0}, // "IBM EBCDIC (Traditional Chinese)"
-            //MapCodePageDataItem( 50939,   932, L"cp939", L"cp939", L"cp939", 0}, // "IBM EBCDIC (Japanese and Japanese-Latin)"
+            //    MapCodePageDataItem( 50225,   949, "|iso-2022-kr|euc-kr|iso-2022-kr", MIMECONTF_MAILNEWS), //
+            // "Korean (ISO)"
+            //    MapCodePageDataItem( 50227,   936, "x-cp50227",           0), // "Chinese Simplified
+            // (ISO-2022)"
+            //MapCodePageDataItem( 50229,   950, L"x-cp50229", L"x-cp50229", L"x-cp50229", 0}, // "Chinese
+            // Traditional (ISO-2022)"
+            //MapCodePageDataItem( 50930,   932, L"cp930", L"cp930", L"cp930", 0}, // "IBM EBCDIC (Japanese and
+            // Japanese Katakana)"
+            //MapCodePageDataItem( 50931,   932, L"x-EBCDIC-JapaneseAndUSCanada",
+            // L"x-EBCDIC-JapaneseAndUSCanada", L"x-EBCDIC-JapaneseAndUSCanada", 0}, // "IBM EBCDIC (Japanese and
+            // US-Canada)"
+            //MapCodePageDataItem( 50933,   949, L"cp933", L"cp933", L"cp933", 0}, // "IBM EBCDIC (Korean and
+            // Korean Extended)"
+            //MapCodePageDataItem( 50935,   936, L"cp935", L"cp935", L"cp935", 0}, // "IBM EBCDIC (Simplified
+            // Chinese)"
+            //MapCodePageDataItem( 50937,   950, L"cp937", L"cp937", L"cp937", 0}, // "IBM EBCDIC (Traditional
+            // Chinese)"
+            //MapCodePageDataItem( 50939,   932, L"cp939", L"cp939", L"cp939", 0}, // "IBM EBCDIC (Japanese and
+            // Japanese-Latin)"
             MapCodePageDataItem(
                 51932,
                 932,
@@ -957,7 +973,9 @@ namespace System.Globalization
                 "euc-kr",
                 MIMECONTF_MAILNEWS | MIMECONTF_SAVABLE_MAILNEWS
             ), // "Korean (EUC)"
-            //    MapCodePageDataItem( 52936,   936, "hz-gb-2312",          MIMECONTF_MAILNEWS | MIMECONTF_BROWSER | MIMECONTF_SAVABLE_MAILNEWS | MIMECONTF_SAVABLE_BROWSER), // "Chinese Simplified (HZ)"
+            //    MapCodePageDataItem( 52936,   936, "hz-gb-2312",          MIMECONTF_MAILNEWS |
+            // MIMECONTF_BROWSER | MIMECONTF_SAVABLE_MAILNEWS | MIMECONTF_SAVABLE_BROWSER), // "Chinese Simplified
+            // (HZ)"
             MapCodePageDataItem(
                 54936,
                 936,
@@ -1038,21 +1056,22 @@ namespace System.Globalization
         //calling the native GetNumEncodingItems().
         private static int lastEncodingItem = GetNumEncodingItems() - 1;
 
-        //This number is the size of the code page table.  Its generated when we walk the table the first time.
+        //This number is the size of the code page table.  Its generated when we walk the table the first
+        // time.
         private static volatile int lastCodePageItem;
 
         /*
-                //
-                // This points to a native data table which maps an encoding name to the correct code page.
-                //
-                [SecurityCritical]
-                unsafe internal static InternalEncodingDataItem* encodingDataPtr = GetEncodingData();
-                //
-                // This points to a native data table which stores the properties for the code page, and
-                // the table is indexed by code page.
-                //
-                [SecurityCritical]
-                unsafe internal static InternalCodePageDataItem* codePageDataPtr = GetCodePageData();
+        //
+        // This points to a native data table which maps an encoding name to the correct code page.
+        //
+        [SecurityCritical]
+        unsafe internal static InternalEncodingDataItem* encodingDataPtr = GetEncodingData();
+        //
+        // This points to a native data table which stores the properties for the code page, and
+        // the table is indexed by code page.
+        //
+        [SecurityCritical]
+        unsafe internal static InternalCodePageDataItem* codePageDataPtr = GetCodePageData();
         */
 
         //
@@ -1244,25 +1263,25 @@ namespace System.Globalization
         }
 
         /*
-                [System.Security.SecurityCritical]  // auto-generated
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                private unsafe static extern InternalEncodingDataItem *GetEncodingData();
-                
-                //
-                // Return the number of encoding data items.
-                //
-                [System.Security.SecurityCritical]  // auto-generated
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                private static extern int GetNumEncodingItems();
+        [System.Security.SecurityCritical]  // auto-generated
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private unsafe static extern InternalEncodingDataItem *GetEncodingData();
         
-                [System.Security.SecurityCritical]  // auto-generated
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                private unsafe static extern InternalCodePageDataItem* GetCodePageData();
+        //
+        // Return the number of encoding data items.
+        //
+        [System.Security.SecurityCritical]  // auto-generated
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private static extern int GetNumEncodingItems();
         
-                [System.Security.SecurityCritical]  // auto-generated
-                [MethodImplAttribute(MethodImplOptions.InternalCall)]
-                internal unsafe static extern byte* nativeCreateOpenFileMapping(
-                    String inSectionName, int inBytesToAllocate, out IntPtr mappedFileHandle);
+        [System.Security.SecurityCritical]  // auto-generated
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        private unsafe static extern InternalCodePageDataItem* GetCodePageData();
+        
+        [System.Security.SecurityCritical]  // auto-generated
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal unsafe static extern byte* nativeCreateOpenFileMapping(
+        String inSectionName, int inBytesToAllocate, out IntPtr mappedFileHandle);
         */
     }
 

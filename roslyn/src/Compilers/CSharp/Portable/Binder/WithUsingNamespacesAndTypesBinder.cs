@@ -15,7 +15,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// A binder that represents a scope introduced by 'using' namespace or type directives and deals with looking up names in it.
+    /// A binder that represents a scope introduced by 'using' namespace or type directives and deals
+    // with looking up names in it.
     /// </summary>
     internal abstract class WithUsingNamespacesAndTypesBinder : Binder
     {
@@ -37,18 +38,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         );
 
         /// <summary>
-        /// Look for a type forwarder for the given type in any referenced assemblies, checking any using namespaces in
+        /// Look for a type forwarder for the given type in any referenced assemblies, checking any using
+        // namespaces in
         /// the current imports.
         /// </summary>
-        /// <param name="name">The metadata name of the (potentially) forwarded type, without qualifiers.</param>
+        /// <param name="name">The metadata name of the (potentially) forwarded type, without
+        // qualifiers.</param>
         /// <param name="qualifierOpt">Will be used to return the namespace of the found forwarder,
         /// if any.</param>
         /// <param name="diagnostics">Will be used to report non-fatal errors during look up.</param>
         /// <param name="location">Location to report errors on.</param>
-        /// <returns>Returns the Assembly to which the type is forwarded, or null if none is found.</returns>
+        /// <returns>Returns the Assembly to which the type is forwarded, or null if none is
+        // found.</returns>
         /// <remarks>
         /// Since this method is intended to be used for error reporting, it stops as soon as it finds
-        /// any type forwarder (or an error to report). It does not check other assemblies for consistency or better results.
+        /// any type forwarder (or an error to report). It does not check other assemblies for consistency
+        // or better results.
         /// </remarks>
         protected override AssemblySymbol? GetForwardedToAssemblyInUsingNamespaces(
             string name,
@@ -93,7 +98,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             bool callerIsSemanticModel = originalBinder.IsSemanticModelBinder;
 
-            // We need to avoid collecting multiple candidates for an extension method imported both through a namespace and a static class
+            // We need to avoid collecting multiple candidates for an extension method imported both through a
+            // namespace and a static class
             // We will look for duplicates only if both of the following flags are set to true
             bool seenNamespaceWithExtensionMethods = false;
             bool seenStaticClassWithExtensionMethods = false;

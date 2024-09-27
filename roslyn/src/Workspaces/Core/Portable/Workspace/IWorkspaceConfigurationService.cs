@@ -24,11 +24,16 @@ internal sealed class DefaultWorkspaceConfigurationService() : IWorkspaceConfigu
 }
 
 /// <summary>
-/// Options that affect behavior of workspace core APIs (<see cref="Solution"/>, <see cref="Project"/>, <see
-/// cref="Document"/>, <see cref="SyntaxTree"/>, etc.) to which it would be impractical to flow these options
-/// explicitly. The options are instead provided by <see cref="IWorkspaceConfigurationService"/>. The remote
-/// instance of this service is initialized based on the in-proc values (which themselves are loaded from global
-/// options) when we establish connection from devenv to ServiceHub process. If another process connects to our
+/// Options that affect behavior of workspace core APIs (<see cref="Solution"/>, <see
+// cref="Project"/>, <see
+/// cref="Document"/>, <see cref="SyntaxTree"/>, etc.) to which it would be impractical to flow
+// these options
+/// explicitly. The options are instead provided by <see cref="IWorkspaceConfigurationService"/>.
+// The remote
+/// instance of this service is initialized based on the in-proc values (which themselves are loaded
+// from global
+/// options) when we establish connection from devenv to ServiceHub process. If another process
+// connects to our
 /// ServiceHub process before that the remote instance provides a predefined set of options <see
 /// cref="RemoteDefault"/> that can later be updated when devenv connects to the ServiceHub process.
 /// </summary>
@@ -52,7 +57,8 @@ internal readonly record struct WorkspaceConfigurationOptions(
     public static readonly WorkspaceConfigurationOptions Default = new();
 
     /// <summary>
-    /// These values are such that the correctness of remote services is not affected if these options are changed from defaults
+    /// These values are such that the correctness of remote services is not affected if these options
+    // are changed from defaults
     /// to non-defaults while the services have already been executing.
     /// </summary>
     public static readonly WorkspaceConfigurationOptions RemoteDefault =

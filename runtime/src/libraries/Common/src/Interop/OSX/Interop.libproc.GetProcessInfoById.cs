@@ -82,7 +82,8 @@ internal static partial class Interop
         /// <param name="pid">The PID of the process</param>
         /// <param name="flavor">Should be PROC_PIDTASKALLINFO</param>
         /// <param name="arg">Flavor dependent value</param>
-        /// <param name="buffer">A pointer to a block of memory (of size proc_taskallinfo) allocated that will contain the data</param>
+        /// <param name="buffer">A pointer to a block of memory (of size proc_taskallinfo) allocated that
+        // will contain the data</param>
         /// <param name="bufferSize">The size of the allocated block above</param>
         /// <returns>
         /// The amount of data actually returned. If this size matches the bufferSize parameter then

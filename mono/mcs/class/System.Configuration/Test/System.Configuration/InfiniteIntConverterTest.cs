@@ -69,7 +69,7 @@ namespace MonoTests.System.Configuration
             Assert.AreEqual(typeof(int), o.GetType(), "A1");
             Assert.AreEqual(59, o, "A2");
 
-            /* and now test infinity */
+/* and now test infinity */
             o = cv.ConvertFrom(null, null, "Infinite");
             Assert.AreEqual(Int32.MaxValue, o, "A3");
         }
@@ -105,7 +105,7 @@ namespace MonoTests.System.Configuration
 
             Assert.AreEqual("144", cv.ConvertTo(null, null, 144, typeof(string)), "A2");
 
-            /* infinity tests */
+/* infinity tests */
             Assert.AreEqual(
                 "Infinite",
                 cv.ConvertTo(null, null, Int32.MaxValue, typeof(string)),

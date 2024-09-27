@@ -113,26 +113,26 @@ namespace Moq
         {
             return Mocks.CreateMocks<T>(behavior).AsQueryable();
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            After:
-                    static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+After:
+static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            After:
-                    static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+After:
+static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            After:
-                    static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+After:
+static IEnumerable<T> CreateMocks<T>(MockBehavior behavior) where T : class
+*/
         }
 
         /// <summary>

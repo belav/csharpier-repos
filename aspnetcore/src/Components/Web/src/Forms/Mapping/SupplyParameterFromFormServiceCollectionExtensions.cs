@@ -7,12 +7,14 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 namespace Microsoft.AspNetCore.Components.Forms.Mapping;
 
 /// <summary>
-/// Extension methods for configuring <see cref="SupplyParameterFromFormAttribute"/> within an <see cref="IServiceCollection"/>.
+/// Extension methods for configuring <see cref="SupplyParameterFromFormAttribute"/> within an <see
+// cref="IServiceCollection"/>.
 /// </summary>
 public static class SupplyParameterFromFormServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds support for <see cref="SupplyParameterFromFormAttribute"/> within the <see cref="IServiceCollection"/>.
+    /// Adds support for <see cref="SupplyParameterFromFormAttribute"/> within the <see
+    // cref="IServiceCollection"/>.
     /// </summary>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>

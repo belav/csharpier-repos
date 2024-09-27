@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore;
 
 /// <summary>
-///     Base event arguments for the <see cref="O:DbContext.SaveChanges" /> and <see cref="O:DbContext.SaveChangesAsync" /> events.
+///     Base event arguments for the <see cref="O:DbContext.SaveChanges" /> and <see
+// cref="O:DbContext.SaveChangesAsync" /> events.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-saving-data">Saving data in EF Core</see> and
-///     <see href="https://aka.ms/efcore-docs-events">EF Core events</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-events">EF Core events</see> for more information and
+// examples.
 /// </remarks>
 public abstract class SaveChangesEventArgs : EventArgs
 {
@@ -23,7 +25,8 @@ public abstract class SaveChangesEventArgs : EventArgs
     }
 
     /// <summary>
-    ///     The value passed to <see cref="O:DbContext.SaveChanges" /> or <see cref="O:DbContext.SaveChangesAsync" />.
+    ///     The value passed to <see cref="O:DbContext.SaveChanges" /> or <see
+    // cref="O:DbContext.SaveChangesAsync" />.
     /// </summary>
     public virtual bool AcceptAllChangesOnSuccess { get; }
 }

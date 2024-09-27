@@ -23,8 +23,10 @@ public class Tests
             ad.CreateInstanceAndUnwrap(helperType.Assembly.ToString(), helperType.FullName);
         var holder = new ResultHolder();
         helper.TheTest(holder);
-        // HACK: If everything went well, a thread is running in the other domain and is blocked in OnUnhandled
-        // waiting for AllDone().  Don't send it.  Instead just exit without waiting.  If we send AllDone, the
+        // HACK: If everything went well, a thread is running in the other domain and is blocked in
+        // OnUnhandled
+        // waiting for AllDone().  Don't send it.  Instead just exit without waiting.  If we send AllDone,
+        // the
         // process will terminate with a 255.  Don't try to unload the domain either, since the other thread
         // will never finish.
         //

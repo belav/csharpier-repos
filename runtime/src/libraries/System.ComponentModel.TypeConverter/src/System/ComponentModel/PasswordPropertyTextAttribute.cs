@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.ComponentModel
 {
     /// <summary>
-    /// If this attribute is placed on a property or a type, its text representation in a property window
+    /// If this attribute is placed on a property or a type, its text representation in a property
+    // window
     /// will appear as dots or asterisks to indicate a password field. This indication in no way
     /// represents any type of encryption or security.
     /// </summary>
@@ -49,7 +50,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Gets a value indicating if the property this attribute is defined for should be shown as password text.
+        /// Gets a value indicating if the property this attribute is defined for should be shown as
+        // password text.
         /// </summary>
         public bool Password { get; }
 

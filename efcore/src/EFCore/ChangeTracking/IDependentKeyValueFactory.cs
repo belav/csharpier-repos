@@ -5,15 +5,18 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
 ///     <para>
-///         A factory for key values based on the foreign key values taken from various forms of entity data.
+///         A factory for key values based on the foreign key values taken from various forms of
+// entity data.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface IDependentKeyValueFactory

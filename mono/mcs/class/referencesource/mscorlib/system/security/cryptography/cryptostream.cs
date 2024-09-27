@@ -131,7 +131,8 @@ namespace System.Security.Cryptography
             get { return _finalBlockTransformed; }
         }
 
-        // The flush final block functionality used to be part of close, but that meant you couldn't do something like this:
+        // The flush final block functionality used to be part of close, but that meant you couldn't do
+        // something like this:
         // MemoryStream ms = new MemoryStream();
         // CryptoStream cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
         // cs.Write(foo, 0, foo.Length);
@@ -148,7 +149,8 @@ namespace System.Security.Cryptography
                 throw new NotSupportedException(
                     Environment.GetResourceString("Cryptography_CryptoStream_FlushFinalBlockTwice")
                 );
-            // We have to process the last block here.  First, we have the final block in _InputBuffer, so transform it
+            // We have to process the last block here.  First, we have the final block in _InputBuffer, so
+            // transform it
 
             byte[] finalBytes = _Transform.TransformFinalBlock(_InputBuffer, 0, _InputBufferIndex);
 
@@ -163,7 +165,8 @@ namespace System.Security.Cryptography
             if (_canWrite)
                 _stream.Write(finalBytes, 0, finalBytes.Length);
 
-            // If the inner stream is a CryptoStream, then we want to call FlushFinalBlock on it too, otherwise just Flush.
+            // If the inner stream is a CryptoStream, then we want to call FlushFinalBlock on it too, otherwise
+            // just Flush.
             CryptoStream innerCryptoStream = _stream as CryptoStream;
             if (innerCryptoStream != null)
             {
@@ -346,7 +349,8 @@ namespace System.Security.Cryptography
                         currentOutputIndex,
                         numOutputBytes
                     );
-                    // Now, tempInputBuffer and tempOutputBuffer are no more needed, so zeroize them to protect plain text
+                    // Now, tempInputBuffer and tempOutputBuffer are no more needed, so zeroize them to protect plain
+                    // text
                     Array.Clear(tempInputBuffer, 0, tempInputBuffer.Length);
                     Array.Clear(tempOutputBuffer, 0, tempOutputBuffer.Length);
                     bytesToDeliver -= numOutputBytes;
@@ -655,7 +659,8 @@ namespace System.Security.Cryptography
                             currentOutputIndex,
                             numOutputBytes
                         );
-                        // Now, tempInputBuffer and tempOutputBuffer are no more needed, so zeroize them to protect plain text
+                        // Now, tempInputBuffer and tempOutputBuffer are no more needed, so zeroize them to protect plain
+                        // text
                         Array.Clear(tempInputBuffer, 0, tempInputBuffer.Length);
                         Array.Clear(tempOutputBuffer, 0, tempOutputBuffer.Length);
                         bytesToDeliver -= numOutputBytes;

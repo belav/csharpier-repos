@@ -38,7 +38,8 @@ internal sealed class SpaProxyLaunchManager : IDisposable
         // seconds and redirect to the SPA proxy url once it is ready.
         // Being ready in this context means that we were able to receive a 200 from the proxy or that
         // we gave up waiting.
-        // We do this to ensure Visual Studio can work correctly with IIS and when running without debugging.
+        // We do this to ensure Visual Studio can work correctly with IIS and when running without
+        // debugging.
         lock (_lock)
         {
             if (_launchTask == null)
@@ -387,8 +388,10 @@ rm {scriptPath};
                     // we now start a proxy every time.
                     // We can't guarantee that we stop/cleanup the proxy on every situation (for example if someone)
                     // kills this process in a "rude" way, but this gets 95% there.
-                    // For cases where the proxy is left open and where there might not be a "visible" window the recomendation
-                    // is to kill the process manually. (We will not fail, we will simply notify the proxy is "already" up.
+                    // For cases where the proxy is left open and where there might not be a "visible" window the
+                    // recomendation
+                    // is to kill the process manually. (We will not fail, we will simply notify the proxy is "already"
+                    // up.
                     if (!_spaProcess.CloseMainWindow())
                     {
                         _spaProcess.Kill(entireProcessTree: true);

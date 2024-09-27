@@ -16,7 +16,8 @@ namespace System.Xml.Serialization
         string memberName;
         XmlQualifiedName type = XmlQualifiedName.Empty;
 
-        /// <include file='doc\SoapSchemaMember.uex' path='docs/doc[@for="SoapSchemaMember.MemberType"]/*' />
+        /// <include file='doc\SoapSchemaMember.uex' path='docs/doc[@for="SoapSchemaMember.MemberType"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -26,7 +27,8 @@ namespace System.Xml.Serialization
             set { type = value; }
         }
 
-        /// <include file='doc\SoapSchemaMember.uex' path='docs/doc[@for="SoapSchemaMember.MemberName"]/*' />
+        /// <include file='doc\SoapSchemaMember.uex' path='docs/doc[@for="SoapSchemaMember.MemberName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

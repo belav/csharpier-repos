@@ -169,7 +169,8 @@ namespace System.Data.Common
                     case LoadOption.PreserveChanges:
                     case LoadOption.Upsert:
                         _fillLoadOption = value;
-                        //Bid.Trace("<comm.DataAdapter.set_FillLoadOption|API> %d#, %d{ds.LoadOption}\n", ObjectID, (int)value);
+                        //Bid.Trace("<comm.DataAdapter.set_FillLoadOption|API> %d#, %d{ds.LoadOption}\n", ObjectID,
+                        // (int)value);
                         break;
                     default:
                         throw ADP.InvalidLoadOption(value);
@@ -209,7 +210,8 @@ namespace System.Data.Common
                     case MissingMappingAction.Ignore:
                     case MissingMappingAction.Error:
                         _missingMappingAction = value;
-                        //Bid.Trace("<comm.DataAdapter.set_MissingMappingAction|API> %d#, %d{ds.MissingMappingAction}\n", ObjectID, (int)value);
+                        //Bid.Trace("<comm.DataAdapter.set_MissingMappingAction|API> %d#, %d{ds.MissingMappingAction}\n",
+                        // ObjectID, (int)value);
                         break;
                     default:
                         throw ADP.InvalidMissingMappingAction(value);
@@ -238,7 +240,8 @@ namespace System.Data.Common
                     case MissingSchemaAction.Error:
                     case MissingSchemaAction.AddWithKey:
                         _missingSchemaAction = value;
-                        //Bid.Trace("<comm.DataAdapter.set_MissingSchemaAction|API> %d#, %d{MissingSchemaAction}\n", ObjectID, (int)value);
+                        //Bid.Trace("<comm.DataAdapter.set_MissingSchemaAction|API> %d#, %d{MissingSchemaAction}\n",
+                        // ObjectID, (int)value);
                         break;
                     default:
                         throw ADP.InvalidMissingSchemaAction(value);
@@ -266,7 +269,8 @@ namespace System.Data.Common
             set
             {
                 _returnProviderSpecificTypes = value;
-                //Bid.Trace("<comm.DataAdapter.set_ReturnProviderSpecificTypes|API> %d#, %d\n", ObjectID, (int)value);
+                //Bid.Trace("<comm.DataAdapter.set_ReturnProviderSpecificTypes|API> %d#, %d\n", ObjectID,
+                // (int)value);
             }
         }
 

@@ -24,29 +24,44 @@ namespace System.Activities
     using System.Transactions;
     using System.Xml.Linq;
 
-    // WorkflowApplication is free-threaded. It is responsible for the correct locking and usage of the ActivityExecutor.
-    // Given that there are two simultaneous users of ActivityExecutor (WorkflowApplication and NativeActivityContext),
-    // it is imperative that WorkflowApplication only calls into ActivityExecutor when there are no activities executing
+    // WorkflowApplication is free-threaded. It is responsible for the correct locking and usage of the
+    // ActivityExecutor.
+    // Given that there are two simultaneous users of ActivityExecutor (WorkflowApplication and
+    // NativeActivityContext),
+    // it is imperative that WorkflowApplication only calls into ActivityExecutor when there are no
+    // activities executing
     // (and thus no worries about colliding with AEC calls).
 
     // SYNCHRONIZATION SCHEME
-    // WorkflowInstance is defined to not be thread safe and to disallow all operations while it is (potentially
-    // asynchronously) running.  The WorkflowInstance is in the "running" state between a call to Run and the
+    // WorkflowInstance is defined to not be thread safe and to disallow all operations while it is
+    // (potentially
+    // asynchronously) running.  The WorkflowInstance is in the "running" state between a call to Run
+    // and the
     // subsequent call to either WorkflowInstance NotifyPaused or NotifyUnhandledException.
-    // WorkflowApplication keeps track of a boolean "isBusy" and a list of pending operations.  WI is busy whenever
+    // WorkflowApplication keeps track of a boolean "isBusy" and a list of pending operations.  WI is
+    // busy whenever
     // it is servicing an operation or the runtime is in the "running" state.
-    // Enqueue - This enqueues an operation into the pending operation list.  If WI is not busy then the operation
+    // Enqueue - This enqueues an operation into the pending operation list.  If WI is not busy then the
+    // operation
     //    can be serviced immediately.  This is the only place where "isBusy" flips to true.
-    // OnNotifiedUnhandledException - This method performs some processing and then calls OnNotifiedPaused.
-    // OnNotifiedPaused - This method is only ever called when "isBusy" is true.  It first checks to see if there
-    //    is other work to be done (prioritization: raise completed, handle an operation, resume execution, raise
-    //    idle, stop).  This is the only place where "isBusy" flips to false and this only occurs when there is no
+    // OnNotifiedUnhandledException - This method performs some processing and then calls
+    // OnNotifiedPaused.
+    // OnNotifiedPaused - This method is only ever called when "isBusy" is true.  It first checks to see
+    // if there
+    //    is other work to be done (prioritization: raise completed, handle an operation, resume
+    // execution, raise
+    //    idle, stop).  This is the only place where "isBusy" flips to false and this only occurs when
+    // there is no
     //    other work to be done.
-    // [Force]NotifyOperationComplete - These methods are called by individual operations when they are done
-    //    processing.  If the operation was notified (IE - actually performed in the eyes of WI) then this is simply
+    // [Force]NotifyOperationComplete - These methods are called by individual operations when they are
+    // done
+    //    processing.  If the operation was notified (IE - actually performed in the eyes of WI) then
+    // this is simply
     //    a call to OnNotifiedPaused.
-    // Operation notification - The InstanceOperation class keeps tracks of whether a specified operation was
-    //    dispatched by WI or not.  If it was dispatched (determined either in Enqueue, FindOperation, or Remove)
+    // Operation notification - The InstanceOperation class keeps tracks of whether a specified
+    // operation was
+    //    dispatched by WI or not.  If it was dispatched (determined either in Enqueue, FindOperation,
+    // or Remove)
     //    then it MUST result in a call to OnNotifiedPaused when complete.
     [Fx.Tag.XamlVisible(false)]
     public sealed class WorkflowApplication : WorkflowInstance
@@ -335,7 +350,8 @@ namespace System.Activities
             }
         }
 
-        // host-facing access to our cascading ExtensionManager resolution. Used by WorkflowApplicationEventArgs
+        // host-facing access to our cascading ExtensionManager resolution. Used by
+        // WorkflowApplicationEventArgs
         internal IEnumerable<T> InternalGetExtensions<T>()
             where T : class
         {
@@ -405,8 +421,10 @@ namespace System.Activities
 
                 if (this.isBusy)
                 {
-                    // If base.IsReadOnly == false, we can't call the Controller yet because WorkflowInstance is not initialized.
-                    // But that's okay; if the instance isn't initialized then the scheduler's not running yet, so no need to pause it.
+                    // If base.IsReadOnly == false, we can't call the Controller yet because WorkflowInstance is not
+                    // initialized.
+                    // But that's okay; if the instance isn't initialized then the scheduler's not running yet, so no
+                    // need to pause it.
                     if (operation.InterruptsScheduler && base.IsReadOnly)
                     {
                         this.Controller.RequestPause();
@@ -841,7 +859,8 @@ namespace System.Activities
         {
             this.state = WorkflowApplicationState.Aborted;
 
-            // Need to ensure that either components see the Aborted state, this method sees the components, or both.
+            // Need to ensure that either components see the Aborted state, this method sees the components, or
+            // both.
             Thread.MemoryBarrier();
 
             // We do this outside of the lock since persistence
@@ -1230,7 +1249,8 @@ namespace System.Activities
             CancelAsyncResult.End(result);
         }
 
-        // called on the Invoke path, this will go away when WorkflowInvoker implements WorkflowInstance directly
+        // called on the Invoke path, this will go away when WorkflowInvoker implements WorkflowInstance
+        // directly
         static WorkflowApplication CreateInstance(
             Activity activity,
             IDictionary<string, object> inputs,
@@ -4215,7 +4235,8 @@ namespace System.Activities
                 bool success = false;
 
                 // Save off the current transaction in case we have an async operation before we end up creating
-                // the WorkflowPersistenceContext and create it on another thread. Do a blocking dependent clone that
+                // the WorkflowPersistenceContext and create it on another thread. Do a blocking dependent clone
+                // that
                 // we will complete when we are completed.
                 //
                 // This will throw TransactionAbortedException by design, if the transaction is already rolled back.
@@ -4350,7 +4371,8 @@ namespace System.Activities
 
             bool InitializeProvider()
             {
-                // We finally have the lock and are passed the guard.  Let's update our operation if this is an Unload.
+                // We finally have the lock and are passed the guard.  Let's update our operation if this is an
+                // Unload.
                 if (
                     this.operation == PersistenceOperation.Unload
                     && this.instance.Controller.State == WorkflowInstanceState.Complete
@@ -5245,7 +5267,8 @@ namespace System.Activities
 
                 // Save off the current transaction in case we have an async operation before we end up creating
                 // the WorkflowPersistenceContext and create it on another thread. Do a simple clone here to prevent
-                // the object referenced by Transaction.Current from disposing before we get around to referencing it
+                // the object referenced by Transaction.Current from disposing before we get around to referencing
+                // it
                 // when we create the WorkflowPersistenceContext.
                 //
                 // This will throw TransactionAbortedException by design, if the transaction is already rolled back.
@@ -5708,8 +5731,10 @@ namespace System.Activities
             }
         }
 
-        // this class is not a general purpose SyncContext and is only meant to work for workflow scenarios, where the scheduler ensures
-        // at most one work item pending. The scheduler ensures that Invoke must run before Post is called on a different thread.
+        // this class is not a general purpose SyncContext and is only meant to work for workflow scenarios,
+        // where the scheduler ensures
+        // at most one work item pending. The scheduler ensures that Invoke must run before Post is called
+        // on a different thread.
         class PumpBasedSynchronizationContext : SynchronizationContext
         {
             // The waitObject is cached per thread so that we can avoid the cost of creating

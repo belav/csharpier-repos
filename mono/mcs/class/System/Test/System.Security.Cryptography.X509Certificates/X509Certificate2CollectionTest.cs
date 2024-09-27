@@ -819,7 +819,8 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 collection.Find(X509FindType.FindByKeyUsage, X509KeyUsageFlags.None, true).Count,
                 "FindByKeyUsage/None/true"
             );
-            // always match if no KeyUsageExtension is present in certificate, EnhancedKeyUsageExtension not considered
+            // always match if no KeyUsageExtension is present in certificate, EnhancedKeyUsageExtension not
+            // considered
             Assert.AreEqual(
                 2,
                 collection

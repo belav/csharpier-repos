@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         public readonly ActiveStatementFlags Flags;
 
         /// <summary>
-        /// The id of the unmapped document where the source of the active statement is and from where the statement might be mapped to <see cref="LineSpan"/> via <c>#line</c> directive.
+        /// The id of the unmapped document where the source of the active statement is and from where the
+        // statement might be mapped to <see cref="LineSpan"/> via <c>#line</c> directive.
         /// Null if unknown (not determined yet).
         /// </summary>
         [DataMember(Order = 3)]

@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when there is an attempt to divide an integral or <see cref="decimal"/> value by zero.
+    /// The exception that is thrown when there is an attempt to divide an integral or <see
+    // cref="decimal"/> value by zero.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

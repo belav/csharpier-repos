@@ -644,8 +644,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                     && sourceDocument != null
                 )
                 {
-                    // must use "Document" here so that the snapshot doesn't go away. we need the snapshot to calculate p2p dependency graph later.
-                    // due to this, we might hold onto solution (and things kept alive by it) little bit longer than usual.
+                    // must use "Document" here so that the snapshot doesn't go away. we need the snapshot to calculate
+                    // p2p dependency graph later.
+                    // due to this, we might hold onto solution (and things kept alive by it) little bit longer than
+                    // usual.
                     _semanticChangeProcessor.Enqueue(
                         project,
                         documentId,
@@ -664,7 +666,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
             private static SyntaxPath? GetSyntaxPath(SyntaxNode? changedMember)
             {
                 // using syntax path might be too expansive since it will be created on every keystroke.
-                // but currently, we have no other way to track a node between two different tree (even for incrementally parsed one)
+                // but currently, we have no other way to track a node between two different tree (even for
+                // incrementally parsed one)
                 if (changedMember == null)
                 {
                     return null;
@@ -816,7 +819,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 var oldProject = projectChanges.OldProject;
                 var newProject = projectChanges.NewProject;
 
-                // TODO: why solution changes return Project not ProjectId but ProjectChanges return DocumentId not Document?
+                // TODO: why solution changes return Project not ProjectId but ProjectChanges return DocumentId not
+                // Document?
                 var projectConfigurationChange = InvocationReasons.Empty;
 
                 if (!object.Equals(oldProject.ParseOptions, newProject.ParseOptions))
@@ -869,7 +873,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                 if (differenceService == null)
                 {
-                    // For languages that don't use a Roslyn syntax tree, they don't export a document difference service.
+                    // For languages that don't use a Roslyn syntax tree, they don't export a document difference
+                    // service.
                     // The whole document should be considered as changed in that case.
                     await EnqueueDocumentWorkItemAsync(
                             newDocument.Project,
@@ -1114,7 +1119,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             var project = solution.GetProject(documentId.ProjectId);
                             if (project != null)
                             {
-                                // ReanalyzeScopes are created and held in a queue before they are processed later; it's possible the document
+                                // ReanalyzeScopes are created and held in a queue before they are processed later; it's possible
+                                // the document
                                 // that we queued for is no longer present.
                                 if (project.ContainsDocument(documentId))
                                     yield return (project, documentId);

@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Components.Rendering;
 namespace Microsoft.AspNetCore.Components.Forms;
 
 /// <summary>
-/// Displays a list of validation messages for a specified field within a cascaded <see cref="EditContext"/>.
+/// Displays a list of validation messages for a specified field within a cascaded <see
+// cref="EditContext"/>.
 /// </summary>
 public class ValidationMessage<TValue> : ComponentBase, IDisposable
 {
@@ -17,7 +18,8 @@ public class ValidationMessage<TValue> : ComponentBase, IDisposable
     private FieldIdentifier _fieldIdentifier;
 
     /// <summary>
-    /// Gets or sets a collection of additional attributes that will be applied to the created <c>div</c> element.
+    /// Gets or sets a collection of additional attributes that will be applied to the created
+    // <c>div</c> element.
     /// </summary>
     [Parameter(CaptureUnmatchedValues = true)]
     public IReadOnlyDictionary<string, object>? AdditionalAttributes { get; set; }
@@ -87,7 +89,8 @@ public class ValidationMessage<TValue> : ComponentBase, IDisposable
     /// <summary>
     /// Called to dispose this instance.
     /// </summary>
-    /// <param name="disposing"><see langword="true"/> if called within <see cref="IDisposable.Dispose"/>.</param>
+    /// <param name="disposing"><see langword="true"/> if called within <see
+    // cref="IDisposable.Dispose"/>.</param>
     protected virtual void Dispose(bool disposing) { }
 
     void IDisposable.Dispose()

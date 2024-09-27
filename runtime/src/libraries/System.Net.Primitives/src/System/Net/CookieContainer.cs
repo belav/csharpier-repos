@@ -10,7 +10,8 @@ using System.Text;
 // Relevant cookie specs:
 //
 // PERSISTENT CLIENT STATE HTTP COOKIES (1996)
-// From <http:// web.archive.org/web/20020803110822/http://wp.netscape.com/newsref/std/cookie_spec.html>
+// From <http://
+// web.archive.org/web/20020803110822/http://wp.netscape.com/newsref/std/cookie_spec.html>
 //
 // RFC2109 HTTP State Management Mechanism (February 1997)
 // From <http:// tools.ietf.org/html/rfc2109>
@@ -23,15 +24,18 @@ using System.Text;
 //
 // The Version attribute of the cookie header is defined and used only in RFC2109 and RFC2965 cookie
 // specs and specifies Version=1. The Version attribute is not used in the  Netscape cookie spec
-// (considered as Version=0). Nor is it used in the most recent cookie spec, RFC6265, introduced in 2011.
+// (considered as Version=0). Nor is it used in the most recent cookie spec, RFC6265, introduced in
+// 2011.
 // RFC6265 deprecates all previous cookie specs including the Version attribute.
 //
-// Cookies without an explicit Domain attribute will only match a potential uri that matches the original
+// Cookies without an explicit Domain attribute will only match a potential uri that matches the
+// original
 // uri from where the cookie came from.
 //
 // For explicit Domain attribute in the cookie, the following rules apply:
 //
-// Version=0 (Netscape, RFC6265) allows the Domain attribute of the cookie to match any tail substring
+// Version=0 (Netscape, RFC6265) allows the Domain attribute of the cookie to match any tail
+// substring
 // of the host uri.
 //
 // Version=1 related cookie specs only allows the Domain attribute to match the host uri based on a
@@ -40,7 +44,8 @@ using System.Text;
 // According to RFC2109/RFC2965, the cookie will be rejected for matching if:
 // * The value for the Domain attribute contains no embedded dots or does not start with a dot.
 // * The value for the request-host does not domain-match the Domain attribute.
-// " The request-host is a FQDN (not IP address) and has the form HD, where D is the value of the Domain
+// " The request-host is a FQDN (not IP address) and has the form HD, where D is the value of the
+// Domain
 //  attribute, and H is a string that contains one or more dots.
 //
 // Examples:
@@ -49,9 +54,11 @@ using System.Text;
 //
 // * A cookie from request-host x.foo.com for Domain=.foo.com would be accepted.
 //
-// * A cookie with Domain=.com or Domain=.com., will always be rejected, because there is no embedded dot.
+// * A cookie with Domain=.com or Domain=.com., will always be rejected, because there is no
+// embedded dot.
 //
-// * A cookie with Domain=ajax.com will be rejected because the value for Domain does not begin with a dot.
+// * A cookie with Domain=ajax.com will be rejected because the value for Domain does not begin with
+// a dot.
 
 namespace System.Net
 {
@@ -185,7 +192,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        ///   <para>After shrinking domain capacity, each domain will less hold than new domain capacity.</para>
+        ///   <para>After shrinking domain capacity, each domain will less hold than new domain
+        // capacity.</para>
         /// </devdoc>
         public int PerDomainCapacity
         {
@@ -836,8 +844,10 @@ namespace System.Net
             return InternalGetCookies(uri) ?? new CookieCollection();
         }
 
-        /// <summary>Gets a <see cref="CookieCollection"/> that contains all of the <see cref="Cookie"/> instances in the container.</summary>
-        /// <returns>A <see cref="CookieCollection"/> that contains all of the <see cref="Cookie"/> instances in the container.</returns>
+        /// <summary>Gets a <see cref="CookieCollection"/> that contains all of the <see cref="Cookie"/>
+        // instances in the container.</summary>
+        /// <returns>A <see cref="CookieCollection"/> that contains all of the <see cref="Cookie"/>
+        // instances in the container.</returns>
         public CookieCollection GetAllCookies()
         {
             var result = new CookieCollection();
@@ -1007,10 +1017,13 @@ namespace System.Net
         }
 
         // Implement path-matching according to https://tools.ietf.org/html/rfc6265#section-5.1.4:
-        // | A request-path path-matches a given cookie-path if at least one of the following conditions holds:
+        // | A request-path path-matches a given cookie-path if at least one of the following conditions
+        // holds:
         // | - The cookie-path and the request-path are identical.
-        // | - The cookie-path is a prefix of the request-path, and the last character of the cookie-path is %x2F ("/").
-        // | - The cookie-path is a prefix of the request-path, and the first character of the request-path that is not included in the cookie-path is a %x2F ("/") character.
+        // | - The cookie-path is a prefix of the request-path, and the last character of the cookie-path is
+        // %x2F ("/").
+        // | - The cookie-path is a prefix of the request-path, and the first character of the request-path
+        // that is not included in the cookie-path is a %x2F ("/") character.
         // The latter conditions are needed to make sure that
         // PathMatch("/fooBar, "/foo") == false
         // but:
@@ -1142,7 +1155,8 @@ namespace System.Net
         }
     }
 
-    // PathList needs to be public in order to maintain binary serialization compatibility as the System shim
+    // PathList needs to be public in order to maintain binary serialization compatibility as the System
+    // shim
     // needs to have access to type-forward it.
     [Serializable]
     [System.Runtime.CompilerServices.TypeForwardedFrom(

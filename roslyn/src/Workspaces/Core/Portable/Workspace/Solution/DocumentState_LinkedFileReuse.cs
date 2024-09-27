@@ -14,9 +14,11 @@ namespace Microsoft.CodeAnalysis
     internal partial class DocumentState
     {
         /// <summary>
-        /// Returns a new instance of this document state that points to <paramref name="siblingTextSource"/> as the
+        /// Returns a new instance of this document state that points to <paramref
+        // name="siblingTextSource"/> as the
         /// text contents of the document, and which will produce a syntax tree that reuses from <paramref
-        /// name="siblingTextSource"/> if possible, or which will incrementally parse the current tree to bring it up to
+        /// name="siblingTextSource"/> if possible, or which will incrementally parse the current tree to
+        // bring it up to
         /// date with <paramref name="siblingTextSource"/> otherwise.
         /// </summary>
         public DocumentState UpdateTextAndTreeContents(
@@ -41,10 +43,14 @@ namespace Microsoft.CodeAnalysis
 
             // Always pass along the sibling text.  We will always be in sync with that.
 
-            // if a sibling tree source is provided, then we'll want to attempt to use the tree it creates, to share as
-            // much memory as possible with linked files.  However, we can't point at that source directly.  If we did,
-            // we'd produce the *exact* same tree-reference as another file.  That would be bad as it would break the
-            // invariant that each document gets a unique SyntaxTree.  So, instead, we produce a ValueSource that defers
+            // if a sibling tree source is provided, then we'll want to attempt to use the tree it creates, to
+            // share as
+            // much memory as possible with linked files.  However, we can't point at that source directly.  If
+            // we did,
+            // we'd produce the *exact* same tree-reference as another file.  That would be bad as it would
+            // break the
+            // invariant that each document gets a unique SyntaxTree.  So, instead, we produce a ValueSource
+            // that defers
             // to the provided source, gets the tree from it, and then wraps its root in a new tree for us.
 
             // copy data from this entity, and pass to static helper, so we don't keep this green node alive.
@@ -133,8 +139,10 @@ namespace Microsoft.CodeAnalysis
 
                 var treeFactory = languageServices.GetRequiredService<ISyntaxTreeFactoryService>();
 
-                // Note: passing along siblingTree.Encoding is a bit suspect.  Ideally we would only populate this tree
-                // with our own data (*except* for the new root).  However, we think it's safe as the encoding really is
+                // Note: passing along siblingTree.Encoding is a bit suspect.  Ideally we would only populate this
+                // tree
+                // with our own data (*except* for the new root).  However, we think it's safe as the encoding
+                // really is
                 // a property of the file, and that should stay the same even if linked into multiple projects.
 
                 var newTree = treeFactory.CreateSyntaxTree(
@@ -148,21 +156,31 @@ namespace Microsoft.CodeAnalysis
                 newTreeAndVersion = new TreeAndVersion(newTree, siblingVersion);
                 return true;
 
-                // Determines if the root of a tree from a different project can be used in this project.  The general
-                // intuition (explained below) is that files without `#if` directives in them can be reused as the parse
+                // Determines if the root of a tree from a different project can be used in this project.  The
+                // general
+                // intuition (explained below) is that files without `#if` directives in them can be reused as the
+                // parse
                 // trees will be the same.
                 //
-                // This is *technically* not completely accurate as language-version can affect the parse tree as well.
-                // For example, `record X() { }` is a method prior to the addition of records to the language.  However,
-                // in practice this should not be an issue.  Specifically, either user code does not have a construct
-                // like this, in which case they are not affected by sharing.  *Or*, they do have such a construct, but
-                // are being deliberately pathological.  In other words, there are no realistic programs that depend on
-                // having one interpretation in one version, and another interpretation in another version.  So we are
+                // This is *technically* not completely accurate as language-version can affect the parse tree as
+                // well.
+                // For example, `record X() { }` is a method prior to the addition of records to the language.
+                // However,
+                // in practice this should not be an issue.  Specifically, either user code does not have a
+                // construct
+                // like this, in which case they are not affected by sharing.  *Or*, they do have such a construct,
+                // but
+                // are being deliberately pathological.  In other words, there are no realistic programs that depend
+                // on
+                // having one interpretation in one version, and another interpretation in another version.  So we
+                // are
                 // ok saying we don't care about having that not work in the IDE (it will still work fine in the
                 // compiler).
                 //
-                // Note: we deliberately do not look at language version because it often is different across project
-                // flavors.  So we would often get no benefit to sharing if we restricted to only when the lang version
+                // Note: we deliberately do not look at language version because it often is different across
+                // project
+                // flavors.  So we would often get no benefit to sharing if we restricted to only when the lang
+                // version
                 // is the same.
                 bool CanReuseSiblingRoot()
                 {
@@ -180,14 +198,16 @@ namespace Microsoft.CodeAnalysis
                         return true;
                     }
 
-                    // If the tree contains no `#` directives whatsoever, then you'll parse out the same tree and can reuse it.
+                    // If the tree contains no `#` directives whatsoever, then you'll parse out the same tree and can
+                    // reuse it.
                     if (!siblingRoot.ContainsDirectives)
                     {
                         Interlocked.Increment(ref s_couldReuseBecauseOfNoDirectives);
                         return true;
                     }
 
-                    // It's ok to contain directives like #nullable, or #region.  They don't affect parsing.  But if we have a
+                    // It's ok to contain directives like #nullable, or #region.  They don't affect parsing.  But if we
+                    // have a
                     // `#if` we can't share as each side might parse this differently.
                     var syntaxKinds = languageServices.GetRequiredService<ISyntaxKindsService>();
                     if (!siblingRoot.ContainsDirective(syntaxKinds.IfDirectiveTrivia))
@@ -199,7 +219,8 @@ namespace Microsoft.CodeAnalysis
                     // If the tree contains a #if directive, and the pp-symbol-names are different, then the files
                     // absolutely may be parsed differently, and so they should not be shared.
                     //
-                    // TODO(cyrusn): We could potentially be smarter here as well.  We can check what pp-symbols the file
+                    // TODO(cyrusn): We could potentially be smarter here as well.  We can check what pp-symbols the
+                    // file
                     // actually uses. (e.g. 'DEBUG'/'NETCORE'/etc.) and see if the project parse options actually differ
                     // for these values.  If not, we could reuse the trees even then.
                     Interlocked.Increment(ref s_couldNotReuse);
@@ -240,7 +261,8 @@ namespace Microsoft.CodeAnalysis
                 )
                     return newTreeAndVersion;
 
-                // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to the text passed in.
+                // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to
+                // the text passed in.
                 return await IncrementallyParseTreeAsync(
                         treeSource,
                         siblingTextSource,
@@ -279,7 +301,8 @@ namespace Microsoft.CodeAnalysis
                 )
                     return newTreeAndVersion;
 
-                // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to the text passed in.
+                // Couldn't use the sibling file to get the tree contents.  Instead, incrementally parse our tree to
+                // the text passed in.
                 return IncrementallyParseTree(
                     treeSource,
                     siblingTextSource,

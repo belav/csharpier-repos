@@ -15,7 +15,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers.TestFiles.ApiActionsDoNotRequir
                 return NotFound();
             }
 
-            /*MM*/if (ModelState.IsValid == false)
+/*MM*/if (ModelState.IsValid == false)
             {
                 return BadRequest();
             }

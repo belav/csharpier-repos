@@ -99,7 +99,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                 }
 
                 // Append in-set or in-end condition to both queries to produce more concise errors
-                // Otherwise, the errors are of the form "if there exists an entity in extent, then violation". We don't care about empty extents
+                // Otherwise, the errors are of the form "if there exists an entity in extent, then violation". We
+                // don't care about empty extents
                 BoolExpression inExtentCondition = BoolExpression.CreateLiteral(
                     wrapper.CreateRoleBoolean(),
                     _viewgenContext.MemberMaps.QueryDomainMap
@@ -148,7 +149,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
                         _viewgenContext,
                         _errorLog
                     );
-                    //If you have already found errors, just continue on to the next wrapper instead of                    //collecting more errors for the same
+                    //If you have already found errors, just continue on to the next wrapper instead of
+                    // //collecting more errors for the same
                     if (_errorLog.Count > 0)
                     {
                         continue;
@@ -467,7 +469,8 @@ namespace System.Data.Mapping.ViewGeneration.Validation
 
 
         /// <summary>
-        /// Given a LeftCellWrapper for the S-side fragment and a non-nullable colum m, return a CQuery with nullability condition
+        /// Given a LeftCellWrapper for the S-side fragment and a non-nullable colum m, return a CQuery with
+        // nullability condition
         /// appended to Cquery of c-side member that column m is mapped to
         /// </summary>
         private static FragmentQuery AddNullConditionOnCSideFragment(

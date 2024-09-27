@@ -23,8 +23,10 @@ public static class IdentityBuilderUIExtensions
     /// Razor Pages in an area named Identity.
     /// </summary>
     /// <remarks>
-    /// In order to use the default UI, the application must be using <see cref="Microsoft.AspNetCore.Mvc"/>,
-    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view that
+    /// In order to use the default UI, the application must be using <see
+    // cref="Microsoft.AspNetCore.Mvc"/>,
+    /// <see cref="Microsoft.AspNetCore.StaticFiles"/> and contain a <c>_LoginPartial</c> partial view
+    // that
     /// can be found by the application.
     /// </remarks>
     /// <param name="builder">The <see cref="IdentityBuilder"/>.</param>

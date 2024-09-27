@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls
     public class ListBox : ListControl, IPostBackDataHandler
     {
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListBox'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListBox'/>
+        // class.</para>
         /// </devdoc>
         public ListBox() { }
 

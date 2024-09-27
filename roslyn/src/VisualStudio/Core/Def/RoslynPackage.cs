@@ -52,8 +52,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
     [ProvideToolWindow(typeof(StackTraceExplorerToolWindow))]
     internal sealed class RoslynPackage : AbstractPackage
     {
-        // The randomly-generated key name is used for serializing the Background Analysis Scope preference to the .SUO
-        // file. It doesn't have any semantic meaning, but is intended to not conflict with any other extension that
+        // The randomly-generated key name is used for serializing the Background Analysis Scope preference
+        // to the .SUO
+        // file. It doesn't have any semantic meaning, but is intended to not conflict with any other
+        // extension that
         // might be saving an "AnalysisScope" named stream to the same file.
         // note: must be <= 31 characters long
         private const string BackgroundAnalysisScopeOptionKey = "AnalysisScope-DCE33A29A768";
@@ -170,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             // load some services that have to be loaded in UI thread
             LoadComponentsInUIContextOnceSolutionFullyLoadedAsync(cancellationToken).Forget();
 
-            // We are at the VS layer, so we know we must be able to get the IGlobalOperationNotificationService here.
+            // We are at the VS layer, so we know we must be able to get the IGlobalOperationNotificationService
+            // here.
             var globalNotificationService =
                 this.ComponentModel.GetService<IGlobalOperationNotificationService>();
             Assumes.Present(globalNotificationService);
@@ -181,7 +184,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             var settingsEditorFactory = this.ComponentModel.GetService<SettingsEditorFactory>();
             RegisterEditorFactory(settingsEditorFactory);
 
-            // Misc workspace has to be up and running by the time our package is usable so that it can track running
+            // Misc workspace has to be up and running by the time our package is usable so that it can track
+            // running
             // doc events and appropriately map files to/from it and other relevant workspaces (like the
             // metadata-as-source workspace).
             await this
@@ -276,7 +280,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
                 .InitializeAsync(this, cancellationToken)
                 .ConfigureAwait(false);
 
-            // Load and initialize the add solution item service so ConfigurationUpdater can use it to create editorconfig files.
+            // Load and initialize the add solution item service so ConfigurationUpdater can use it to create
+            // editorconfig files.
             await this
                 .ComponentModel.GetService<VisualStudioAddSolutionItemService>()
                 .InitializeAsync(this)
@@ -442,11 +447,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Setup
             IGlobalOperationNotificationService globalNotificationService
         )
         {
-            // we will pause whatever ambient work loads we have that are tied to IGlobalOperationNotificationService
-            // such as solution crawler, preemptive remote host synchronization and etc. any background work users
+            // we will pause whatever ambient work loads we have that are tied to
+            // IGlobalOperationNotificationService
+            // such as solution crawler, preemptive remote host synchronization and etc. any background work
+            // users
             // didn't explicitly asked for.
             //
-            // this should give all resources to BulkFileOperation. we do same for things like build, debugging, wait
+            // this should give all resources to BulkFileOperation. we do same for things like build, debugging,
+            // wait
             // dialog and etc. BulkFileOperation is used for things like git branch switching and etc.
             Contract.ThrowIfNull(globalNotificationService);
 

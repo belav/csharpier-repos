@@ -19,7 +19,8 @@ namespace System.Diagnostics.Metrics
         private static readonly QuantileAggregation s_defaultHistogramConfig =
             new QuantileAggregation(new double[] { 0.50, 0.95, 0.99 });
 
-        // these fields are modified after construction and accessed on multiple threads, use lock(this) to ensure the data
+        // these fields are modified after construction and accessed on multiple threads, use lock(this) to
+        // ensure the data
         // is synchronized
         private readonly List<Predicate<Instrument>> _instrumentConfigFuncs = new();
         public TimeSpan CollectionPeriod { get; private set; }

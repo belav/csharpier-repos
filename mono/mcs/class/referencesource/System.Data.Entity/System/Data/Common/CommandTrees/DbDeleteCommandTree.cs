@@ -41,7 +41,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Gets an <see cref="DbExpression"/> that specifies the predicate used to determine which members of the target collection should be deleted.
+        /// Gets an <see cref="DbExpression"/> that specifies the predicate used to determine which members
+        // of the target collection should be deleted.
         /// </summary>
         /// <remarks>
         /// The predicate can include only the following elements:

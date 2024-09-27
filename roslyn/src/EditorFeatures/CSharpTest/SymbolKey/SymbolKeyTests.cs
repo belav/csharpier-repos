@@ -198,9 +198,12 @@ file class C
         {
             var random = new Random(Seed: 0);
 
-            // try to trigger race caused by ability to find reference in multiple potential projects depending on what
-            // order things are in in internal collections.  This test was always able to hit the issue prior to the fix
-            // going in, but does not hit it with the fix.  While this doesn't prove the race is gone, it strongly
+            // try to trigger race caused by ability to find reference in multiple potential projects depending
+            // on what
+            // order things are in in internal collections.  This test was always able to hit the issue prior to
+            // the fix
+            // going in, but does not hit it with the fix.  While this doesn't prove the race is gone, it
+            // strongly
             // implies it.
             for (var i = 0; i < 100; i++)
             {

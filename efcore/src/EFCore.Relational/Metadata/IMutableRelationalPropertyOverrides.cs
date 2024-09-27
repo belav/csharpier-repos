@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents property facet overrides for a particular table-like store object.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IMutableRelationalPropertyOverrides
     : IReadOnlyRelationalPropertyOverrides,
@@ -19,7 +20,8 @@ public interface IMutableRelationalPropertyOverrides
     new IMutableProperty Property { get; }
 
     /// <summary>
-    ///     Gets or sets the column that the property maps to when targeting the specified table-like store object.
+    ///     Gets or sets the column that the property maps to when targeting the specified table-like
+    // store object.
     /// </summary>
     new string? ColumnName { get; set; }
 

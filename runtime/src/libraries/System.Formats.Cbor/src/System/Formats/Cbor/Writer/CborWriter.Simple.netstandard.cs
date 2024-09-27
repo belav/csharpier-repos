@@ -12,7 +12,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a half-precision floating point number (major type 7).</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>

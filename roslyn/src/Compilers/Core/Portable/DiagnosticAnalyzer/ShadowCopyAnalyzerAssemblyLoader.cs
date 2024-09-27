@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
         private readonly Lazy<(string directory, Mutex)> _shadowCopyDirectoryAndMutex;
 
         /// <summary>
-        /// Used to generate unique names for per-assembly directories. Should be updated with <see cref="Interlocked.Increment(ref int)"/>.
+        /// Used to generate unique names for per-assembly directories. Should be updated with <see
+        // cref="Interlocked.Increment(ref int)"/>.
         /// </summary>
         private int _assemblyDirectoryId;
 

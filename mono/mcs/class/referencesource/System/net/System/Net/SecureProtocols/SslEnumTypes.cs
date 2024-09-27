@@ -3,14 +3,14 @@ Copyright (c) 2003 Microsoft Corporation
 
 Module Name:
 
-    SslEnumProperties.cs
+SslEnumProperties.cs
 
 Abstract:
 
-    Public enum types used in conjunction SslStream class
+Public enum types used in conjunction SslStream class
 
 Author:
-    Alexei Vopilov    Sept 28-2003
+Alexei Vopilov    Sept 28-2003
 
 Revision History:
 

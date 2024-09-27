@@ -64,7 +64,8 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             var optionsBuilder = ImmutableDictionary.CreateBuilder<string, Option>();
-            // Only add the "May require additional work" option if it is true. This simplifies our equivalence key and makes testing easier.
+            // Only add the "May require additional work" option if it is true. This simplifies our equivalence
+            // key and makes testing easier.
             if (
                 diagnostic.Properties.TryGetValue(
                     ConvertToLibraryImportAnalyzer.MayRequireAdditionalWork,
@@ -102,7 +103,8 @@ namespace Microsoft.Interop.Analyzers
                     ? result
                     : null;
 
-            // We don't want the CharSet option contributing to the "selected options" set for the fix, so we remove it here.
+            // We don't want the CharSet option contributing to the "selected options" set for the fix, so we
+            // remove it here.
             var selectedOptions = options.Remove(CharSetOption);
 
             yield return new ConvertToSourceGeneratedInteropFix(
@@ -116,7 +118,8 @@ namespace Microsoft.Interop.Analyzers
                 // CharSet.Auto traditionally maps to either an A or W suffix
                 // depending on the default CharSet of the platform.
                 // We will offer both suffix options when CharSet.Auto is provided
-                // to enable developers to pick which variant they mean (since they could explicitly decide they want one or the other)
+                // to enable developers to pick which variant they mean (since they could explicitly decide they
+                // want one or the other)
                 if (charSet is CharSet.None or CharSet.Ansi or CharSet.Auto)
                 {
                     yield return new ConvertToSourceGeneratedInteropFix(
@@ -249,7 +252,8 @@ namespace Microsoft.Interop.Analyzers
             if (dllImportAttrType == null)
                 return methodSyntax;
 
-            // We wouldn't have offered this code fix if the LibraryImport type isn't available, so we can be sure it isn't null here.
+            // We wouldn't have offered this code fix if the LibraryImport type isn't available, so we can be
+            // sure it isn't null here.
             INamedTypeSymbol libraryImportAttrType =
                 editor.SemanticModel.Compilation.GetBestTypeByMetadataName(
                     TypeNames.LibraryImportAttribute
@@ -357,7 +361,8 @@ namespace Microsoft.Interop.Analyzers
                 .GetSyntaxRootAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // Sometimes we can't validate that we've fixed all callers, so we warn the user that this fix might produce invalid code.
+            // Sometimes we can't validate that we've fixed all callers, so we warn the user that this fix might
+            // produce invalid code.
             bool shouldWarn = false;
 
             foreach (ReferencedSymbol? referencedSymbol in referencedSymbols)
@@ -586,7 +591,8 @@ namespace Microsoft.Interop.Analyzers
                     if (MethodRequiresStringMarshalling(methodSymbol))
                     {
                         // For Unicode, we can translate the argument to StringMarshalling.Utf16
-                        // TODO: Handle ANSI once we have a public marshaller type for ANSI strings that we can use with StringMarshallerCustomType
+                        // TODO: Handle ANSI once we have a public marshaller type for ANSI strings that we can use with
+                        // StringMarshallerCustomType
                         if (
                             dllImportData.CharacterSet == CharSet.Unicode
                             || (
@@ -822,7 +828,8 @@ namespace Microsoft.Interop.Analyzers
             };
 
             // The user is using a calling convention type that doesn't have a matching CallConv type.
-            // There are no calling conventions like this, so we're already in a state that won't work at runtime.
+            // There are no calling conventions like this, so we're already in a state that won't work at
+            // runtime.
             // Leave the value as-is for now and let the user handle this however they see fit.
             if (callingConventionType is null)
             {

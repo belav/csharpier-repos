@@ -424,17 +424,25 @@ namespace System.Linq
         /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
-        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type argument is one
+        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type
+        // argument is one
         /// of the <see cref="Func{T,TResult}"/> types.
-        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see cref="Expression{TDelegate}"/>.
+        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see
+        // cref="Expression{TDelegate}"/>.
         ///
-        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/> that represents
-        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic method.
-        /// It then passes the <see cref="MethodCallExpression"/> to the <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
-        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/> property of the <paramref name="source"/>
-        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> is cast to
+        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/>
+        // that represents
+        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic
+        // method.
+        /// It then passes the <see cref="MethodCallExpression"/> to the <see
+        // cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
+        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/>
+        // property of the <paramref name="source"/>
+        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/>
+        // is cast to
         /// type <see cref="IOrderedQueryable{T}"/> and returned.
         ///
         /// The query behavior that occurs as a result of executing an expression tree
@@ -464,17 +472,25 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="comparer">An <see cref="IComparer{T}"/> to compare elements.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
-        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type argument is one
+        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type
+        // argument is one
         /// of the <see cref="Func{T,TResult}"/> types.
-        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see cref="Expression{TDelegate}"/>.
+        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see
+        // cref="Expression{TDelegate}"/>.
         ///
-        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/> that represents
-        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic method.
-        /// It then passes the <see cref="MethodCallExpression"/> to the <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
-        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/> property of the <paramref name="source"/>
-        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> is cast to
+        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/>
+        // that represents
+        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic
+        // method.
+        /// It then passes the <see cref="MethodCallExpression"/> to the <see
+        // cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
+        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/>
+        // property of the <paramref name="source"/>
+        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/>
+        // is cast to
         /// type <see cref="IOrderedQueryable{T}"/> and returned.
         ///
         /// The query behavior that occurs as a result of executing an expression tree
@@ -558,17 +574,25 @@ namespace System.Linq
         /// <typeparam name="T">The type of the elements of <paramref name="source"/>.</typeparam>
         /// <param name="source">A sequence of values to order.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
-        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type argument is one
+        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type
+        // argument is one
         /// of the <see cref="Func{T,TResult}"/> types.
-        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see cref="Expression{TDelegate}"/>.
+        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see
+        // cref="Expression{TDelegate}"/>.
         ///
-        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/> that represents
-        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic method.
-        /// It then passes the <see cref="MethodCallExpression"/> to the <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
-        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/> property of the <paramref name="source"/>
-        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> is cast to
+        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/>
+        // that represents
+        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic
+        // method.
+        /// It then passes the <see cref="MethodCallExpression"/> to the <see
+        // cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
+        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/>
+        // property of the <paramref name="source"/>
+        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/>
+        // is cast to
         /// type <see cref="IOrderedQueryable{T}"/> and returned.
         ///
         /// The query behavior that occurs as a result of executing an expression tree
@@ -598,17 +622,25 @@ namespace System.Linq
         /// <param name="source">A sequence of values to order.</param>
         /// <param name="comparer">An <see cref="IComparer{T}"/> to compare elements.</param>
         /// <returns>An <see cref="IOrderedEnumerable{TElement}"/> whose elements are sorted.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see
+        // langword="null"/>.</exception>
         /// <remarks>
-        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type argument is one
+        /// This method has at least one parameter of type <see cref="Expression{TDelegate}"/> whose type
+        // argument is one
         /// of the <see cref="Func{T,TResult}"/> types.
-        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see cref="Expression{TDelegate}"/>.
+        /// For these parameters, you can pass in a lambda expression and it will be compiled to an <see
+        // cref="Expression{TDelegate}"/>.
         ///
-        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/> that represents
-        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic method.
-        /// It then passes the <see cref="MethodCallExpression"/> to the <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
-        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/> property of the <paramref name="source"/>
-        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> is cast to
+        /// The <see cref="Order{T}(IQueryable{T})"/> method generates a <see cref="MethodCallExpression"/>
+        // that represents
+        /// calling <see cref="Enumerable.Order{T}(IEnumerable{T})"/> itself as a constructed generic
+        // method.
+        /// It then passes the <see cref="MethodCallExpression"/> to the <see
+        // cref="IQueryProvider.CreateQuery{TElement}(Expression)"/> method
+        /// of the <see cref="IQueryProvider"/> represented by the <see cref="IQueryable.Provider"/>
+        // property of the <paramref name="source"/>
+        /// parameter. The result of calling <see cref="IQueryProvider.CreateQuery{TElement}(Expression)"/>
+        // is cast to
         /// type <see cref="IOrderedQueryable{T}"/> and returned.
         ///
         /// The query behavior that occurs as a result of executing an expression tree
@@ -808,9 +840,12 @@ namespace System.Linq
         /// <summary>Returns a specified range of contiguous elements from a sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">The sequence to return elements from.</param>
-        /// <param name="range">The range of elements to return, which has start and end indexes either from the start or the end.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains the specified <paramref name="range" /> of elements from the <paramref name="source" /> sequence.</returns>
+        /// <param name="range">The range of elements to return, which has start and end indexes either from
+        // the start or the end.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains the specified <paramref name="range" />
+        // of elements from the <paramref name="source" /> sequence.</returns>
         [DynamicDependency("Take`1", typeof(Enumerable))]
         public static IQueryable<TSource> Take<TSource>(
             this IQueryable<TSource> source,
@@ -1198,13 +1233,16 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
+        /// <summary>Returns distinct elements from a sequence according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to distinguish elements by.</typeparam>
         /// <param name="source">The sequence to remove duplicate elements from.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains distinct elements from the source sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains distinct elements from the source
+        // sequence.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("DistinctBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> DistinctBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -1228,14 +1266,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
+        /// <summary>Returns distinct elements from a sequence according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to distinguish elements by.</typeparam>
         /// <param name="source">The sequence to remove duplicate elements from.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}" /> to compare keys.</param>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains distinct elements from the source sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains distinct elements from the source
+        // sequence.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("DistinctBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> DistinctBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -1262,11 +1303,13 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Split the elements of a sequence into chunks of size at most <paramref name="size"/>.</summary>
+        /// <summary>Split the elements of a sequence into chunks of size at most <paramref
+        // name="size"/>.</summary>
         /// <param name="source">An <see cref="IEnumerable{T}"/> whose elements to chunk.</param>
         /// <param name="size">Maximum size of each chunk.</param>
         /// <typeparam name="TSource">The type of the elements of source.</typeparam>
-        /// <returns>An <see cref="IQueryable{T}"/> that contains the elements the input sequence split into chunks of size <paramref name="size"/>.</returns>
+        /// <returns>An <see cref="IQueryable{T}"/> that contains the elements the input sequence split into
+        // chunks of size <paramref name="size"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is below 1.</exception>
         /// <remarks>
@@ -1371,7 +1414,8 @@ namespace System.Linq
         /// <param name="source1">The first sequence to merge.</param>
         /// <param name="source2">The second sequence to merge.</param>
         /// <param name="source3">The third sequence to merge.</param>
-        /// <returns>A sequence of tuples with elements taken from the first, second and third sequences, in that order.</returns>
+        /// <returns>A sequence of tuples with elements taken from the first, second and third sequences, in
+        // that order.</returns>
         [DynamicDependency("Zip`3", typeof(Enumerable))]
         public static IQueryable<(TFirst First, TSecond Second, TThird Third)> Zip<
             TFirst,
@@ -1450,14 +1494,19 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
+        /// <summary>Produces the set union of two sequences according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements form the first set for the union.</param>
-        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements form the second set for the union.</param>
+        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements form the first set
+        // for the union.</param>
+        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements form the second
+        // set for the union.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains the elements from both input sequences, excluding duplicates.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2" /> is <see langword="null" />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains the elements from both input sequences,
+        // excluding duplicates.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("UnionBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> UnionBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1485,15 +1534,20 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Produces the set union of two sequences according to a specified key selector function.</summary>
+        /// <summary>Produces the set union of two sequences according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements form the first set for the union.</param>
-        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements form the second set for the union.</param>
+        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements form the first set
+        // for the union.</param>
+        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements form the second
+        // set for the union.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">The <see cref="IEqualityComparer{T}" /> to compare values.</param>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains the elements from both input sequences, excluding duplicates.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2" /> is <see langword="null" />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains the elements from both input sequences,
+        // excluding duplicates.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("UnionBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> UnionBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1571,14 +1625,19 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Produces the set intersection of two sequences according to a specified key selector function.</summary>
+        /// <summary>Produces the set intersection of two sequences according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements that also appear in <paramref name="source2" /> will be returned.</param>
-        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements that also appear in the first sequence will be returned.</param>
+        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements that also appear
+        // in <paramref name="source2" /> will be returned.</param>
+        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements that also appear
+        // in the first sequence will be returned.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2" /> is <see langword="null" />.</exception>
+        /// <returns>A sequence that contains the elements that form the set intersection of two
+        // sequences.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("IntersectBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> IntersectBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1606,15 +1665,20 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Produces the set intersection of two sequences according to a specified key selector function.</summary>
+        /// <summary>Produces the set intersection of two sequences according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements that also appear in <paramref name="source2" /> will be returned.</param>
-        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements that also appear in the first sequence will be returned.</param>
+        /// <param name="source1">An <see cref="IQueryable{T}" /> whose distinct elements that also appear
+        // in <paramref name="source2" /> will be returned.</param>
+        /// <param name="source2">An <see cref="IEnumerable{T}" /> whose distinct elements that also appear
+        // in the first sequence will be returned.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}" /> to compare keys.</param>
-        /// <returns>A sequence that contains the elements that form the set intersection of two sequences.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2" /> is <see langword="null" />.</exception>
+        /// <returns>A sequence that contains the elements that form the set intersection of two
+        // sequences.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source1" /> or <paramref name="source2"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("IntersectBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> IntersectBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1697,10 +1761,13 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequence.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{TSource}" /> whose keys that are not also in <paramref name="source2"/> will be returned.</param>
-        /// <param name="source2">An <see cref="IEnumerable{TKey}" /> whose keys that also occur in the first sequence will cause those elements to be removed from the returned sequence.</param>
+        /// <param name="source1">An <see cref="IQueryable{TSource}" /> whose keys that are not also in
+        // <paramref name="source2"/> will be returned.</param>
+        /// <param name="source2">An <see cref="IEnumerable{TKey}" /> whose keys that also occur in the
+        // first sequence will cause those elements to be removed from the returned sequence.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
-        /// <returns>A <see cref="IQueryable{TSource}" /> that contains the set difference of the elements of two sequences.</returns>
+        /// <returns>A <see cref="IQueryable{TSource}" /> that contains the set difference of the elements
+        // of two sequences.</returns>
         [DynamicDependency("ExceptBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> ExceptBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1733,11 +1800,14 @@ namespace System.Linq
         /// </summary>
         /// <typeparam name="TSource">The type of the elements of the input sequence.</typeparam>
         /// <typeparam name="TKey">The type of key to identify elements by.</typeparam>
-        /// <param name="source1">An <see cref="IQueryable{TSource}" /> whose keys that are not also in <paramref name="source2"/> will be returned.</param>
-        /// <param name="source2">An <see cref="IEnumerable{TKey}" /> whose keys that also occur in the first sequence will cause those elements to be removed from the returned sequence.</param>
+        /// <param name="source1">An <see cref="IQueryable{TSource}" /> whose keys that are not also in
+        // <paramref name="source2"/> will be returned.</param>
+        /// <param name="source2">An <see cref="IEnumerable{TKey}" /> whose keys that also occur in the
+        // first sequence will cause those elements to be removed from the returned sequence.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}" /> to compare keys.</param>
-        /// <returns>A <see cref="IQueryable{TSource}" /> that contains the set difference of the elements of two sequences.</returns>
+        /// <returns>A <see cref="IQueryable{TSource}" /> that contains the set difference of the elements
+        // of two sequences.</returns>
         [DynamicDependency("ExceptBy`2", typeof(Enumerable))]
         public static IQueryable<TSource> ExceptBy<TSource, TKey>(
             this IQueryable<TSource> source1,
@@ -1817,12 +1887,15 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the first element of a sequence, or a default value if the sequence contains no elements.</summary>
+        /// <summary>Returns the first element of a sequence, or a default value if the sequence contains no
+        // elements.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">The <see cref="IEnumerable{T}" /> to return the first element of.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns><paramref name="defaultValue" /> if <paramref name="source" /> is empty; otherwise, the first element in <paramref name="source" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <returns><paramref name="defaultValue" /> if <paramref name="source" /> is empty; otherwise, the
+        // first element in <paramref name="source" />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("FirstOrDefault`1", typeof(Enumerable))]
         public static TSource FirstOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -1862,13 +1935,18 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the first element of the sequence that satisfies a condition or a default value if no such element is found.</summary>
+        /// <summary>Returns the first element of the sequence that satisfies a condition or a default value
+        // if no such element is found.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}" /> to return an element from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns><paramref name="defaultValue" /> if <paramref name="source" /> is empty or if no element passes the test specified by <paramref name="predicate" />; otherwise, the first element in <paramref name="source" /> that passes the test specified by <paramref name="predicate" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate" /> is <see langword="null" />.</exception>
+        /// <returns><paramref name="defaultValue" /> if <paramref name="source" /> is empty or if no
+        // element passes the test specified by <paramref name="predicate" />; otherwise, the first element in
+        // <paramref name="source" /> that passes the test specified by <paramref name="predicate"
+        // />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("FirstOrDefault`1", typeof(Enumerable))]
         public static TSource FirstOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -1944,12 +2022,15 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the last element of a sequence, or a default value if the sequence contains no elements.</summary>
+        /// <summary>Returns the last element of a sequence, or a default value if the sequence contains no
+        // elements.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}" /> to return the last element of.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns><paramref name="defaultValue" /> if the source sequence is empty; otherwise, the last element in the <see cref="IEnumerable{T}" />.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <returns><paramref name="defaultValue" /> if the source sequence is empty; otherwise, the last
+        // element in the <see cref="IEnumerable{T}" />.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("LastOrDefault`1", typeof(Enumerable))]
         public static TSource LastOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -1989,13 +2070,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the last element of a sequence that satisfies a condition or a default value if no such element is found.</summary>
+        /// <summary>Returns the last element of a sequence that satisfies a condition or a default value if
+        // no such element is found.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}" /> to return an element from.</param>
         /// <param name="predicate">A function to test each element for a condition.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns><paramref name="defaultValue" /> if the sequence is empty or if no elements pass the test in the predicate function; otherwise, the last element that passes the test in the predicate function.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate" /> is <see langword="null" />.</exception>
+        /// <returns><paramref name="defaultValue" /> if the sequence is empty or if no elements pass the
+        // test in the predicate function; otherwise, the last element that passes the test in the predicate
+        // function.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate"
+        // /> is <see langword="null" />.</exception>
         [DynamicDependency("LastOrDefault`1", typeof(Enumerable))]
         public static TSource LastOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -2071,13 +2156,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the only element of a sequence, or a default value if the sequence is empty; this method throws an exception if there is more than one element in the sequence.</summary>
+        /// <summary>Returns the only element of a sequence, or a default value if the sequence is empty;
+        // this method throws an exception if there is more than one element in the sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}" /> to return the single element of.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns>The single element of the input sequence, or <paramref name="defaultValue" /> if the sequence contains no elements.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="InvalidOperationException">The input sequence contains more than one element.</exception>
+        /// <returns>The single element of the input sequence, or <paramref name="defaultValue" /> if the
+        // sequence contains no elements.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="InvalidOperationException">The input sequence contains more than one
+        // element.</exception>
         [DynamicDependency("SingleOrDefault`1", typeof(Enumerable))]
         public static TSource SingleOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -2117,14 +2206,19 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the only element of a sequence that satisfies a specified condition or a default value if no such element exists; this method throws an exception if more than one element satisfies the condition.</summary>
+        /// <summary>Returns the only element of a sequence that satisfies a specified condition or a
+        // default value if no such element exists; this method throws an exception if more than one element
+        // satisfies the condition.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IEnumerable{T}" /> to return a single element from.</param>
         /// <param name="predicate">A function to test an element for a condition.</param>
         /// <param name="defaultValue">The default value to return if the sequence is empty.</param>
-        /// <returns>The single element of the input sequence that satisfies the condition, or <paramref name="defaultValue" /> if no such element is found.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate" /> is <see langword="null" />.</exception>
-        /// <exception cref="InvalidOperationException">More than one element satisfies the condition in <paramref name="predicate" />.</exception>
+        /// <returns>The single element of the input sequence that satisfies the condition, or <paramref
+        // name="defaultValue" /> if no such element is found.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> or <paramref name="predicate"
+        // /> is <see langword="null" />.</exception>
+        /// <exception cref="InvalidOperationException">More than one element satisfies the condition in
+        // <paramref name="predicate" />.</exception>
         [DynamicDependency("SingleOrDefault`1", typeof(Enumerable))]
         public static TSource SingleOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -2172,10 +2266,14 @@ namespace System.Linq
         /// <summary>Returns the element at a specified index in a sequence.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IQueryable{T}" /> to return an element from.</param>
-        /// <param name="index">The index of the element to retrieve, which is either from the start or the end.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> is outside the bounds of the <paramref name="source" /> sequence.</exception>
-        /// <returns>The element at the specified position in the <paramref name="source" /> sequence.</returns>
+        /// <param name="index">The index of the element to retrieve, which is either from the start or the
+        // end.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="index" /> is outside the bounds of
+        // the <paramref name="source" /> sequence.</exception>
+        /// <returns>The element at the specified position in the <paramref name="source" />
+        // sequence.</returns>
         [DynamicDependency("ElementAt`1", typeof(Enumerable))]
         public static TSource ElementAt<TSource>(this IQueryable<TSource> source, Index index)
         {
@@ -2212,12 +2310,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the element at a specified index in a sequence or a default value if the index is out of range.</summary>
+        /// <summary>Returns the element at a specified index in a sequence or a default value if the index
+        // is out of range.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">An <see cref="IQueryable{T}" /> to return an element from.</param>
-        /// <param name="index">The index of the element to retrieve, which is either from the start or the end.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <returns><see langword="default" /> if <paramref name="index" /> is outside the bounds of the <paramref name="source" /> sequence; otherwise, the element at the specified position in the <paramref name="source" /> sequence.</returns>
+        /// <param name="index">The index of the element to retrieve, which is either from the start or the
+        // end.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <returns><see langword="default" /> if <paramref name="index" /> is outside the bounds of the
+        // <paramref name="source" /> sequence; otherwise, the element at the specified position in the
+        // <paramref name="source" /> sequence.</returns>
         [DynamicDependency("ElementAtOrDefault`1", typeof(Enumerable))]
         public static TSource? ElementAtOrDefault<TSource>(
             this IQueryable<TSource> source,
@@ -2457,14 +2560,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the count of each element from a sequence according to a specified key selector function.</summary>
+        /// <summary>Returns the count of each element from a sequence according to a specified key selector
+        // function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to distinguish elements by.</typeparam>
         /// <param name="source">The sequence to count elements from.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}" /> to compare keys.</param>
-        /// <returns>An <see cref="IQueryable{T}" /> that contains count for each distinct elements from the source sequence as a <see cref="KeyValuePair{TKey, TValue}"/> object.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <returns>An <see cref="IQueryable{T}" /> that contains count for each distinct elements from the
+        // source sequence as a <see cref="KeyValuePair{TKey, TValue}"/> object.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("CountBy`2", typeof(Enumerable))]
         public static IQueryable<KeyValuePair<TKey, int>> CountBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -2541,13 +2647,16 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the minimum value in a generic <see cref="System.Linq.IQueryable{T}" />.</summary>
+        /// <summary>Returns the minimum value in a generic <see cref="System.Linq.IQueryable{T}"
+        // />.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">A sequence of values to determine the minimum value of.</param>
         /// <param name="comparer">The <see cref="IComparer{T}" /> to compare values.</param>
         /// <returns>The minimum value in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">No object in <paramref name="source" /> implements the <see cref="System.IComparable" /> or <see cref="System.IComparable{T}" /> interface.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentException">No object in <paramref name="source" /> implements the <see
+        // cref="System.IComparable" /> or <see cref="System.IComparable{T}" /> interface.</exception>
         [DynamicDependency("Min`1", typeof(Enumerable))]
         public static TSource? Min<TSource>(
             this IQueryable<TSource> source,
@@ -2587,14 +2696,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
+        /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a
+        // specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to compare elements by.</typeparam>
         /// <param name="source">A sequence of values to determine the minimum value of.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <returns>The value with the minimum key in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements
+        // the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
         [DynamicDependency("MinBy`2", typeof(Enumerable))]
         public static TSource? MinBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -2616,15 +2728,18 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
+        /// <summary>Returns the minimum value in a generic <see cref="IQueryable{T}"/> according to a
+        // specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to compare elements by.</typeparam>
         /// <param name="source">A sequence of values to determine the minimum value of.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">The <see cref="IComparer{TKey}" /> to compare keys.</param>
         /// <returns>The value with the minimum key in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements
+        // the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
         [DynamicDependency("MinBy`2", typeof(Enumerable))]
         public static TSource? MinBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -2665,12 +2780,14 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the maximum value in a generic <see cref="System.Linq.IQueryable{T}" />.</summary>
+        /// <summary>Returns the maximum value in a generic <see cref="System.Linq.IQueryable{T}"
+        // />.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <param name="source">A sequence of values to determine the maximum value of.</param>
         /// <param name="comparer">The <see cref="IComparer{T}" /> to compare values.</param>
         /// <returns>The maximum value in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
         [DynamicDependency("Max`1", typeof(Enumerable))]
         public static TSource? Max<TSource>(
             this IQueryable<TSource> source,
@@ -2710,14 +2827,17 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
+        /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a
+        // specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to compare elements by.</typeparam>
         /// <param name="source">A sequence of values to determine the maximum value of.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <returns>The value with the maximum key in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements
+        // the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
         [DynamicDependency("MaxBy`2", typeof(Enumerable))]
         public static TSource? MaxBy<TSource, TKey>(
             this IQueryable<TSource> source,
@@ -2739,15 +2859,18 @@ namespace System.Linq
             );
         }
 
-        /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a specified key selector function.</summary>
+        /// <summary>Returns the maximum value in a generic <see cref="IQueryable{T}"/> according to a
+        // specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
         /// <typeparam name="TKey">The type of key to compare elements by.</typeparam>
         /// <param name="source">A sequence of values to determine the maximum value of.</param>
         /// <param name="keySelector">A function to extract the key for each element.</param>
         /// <param name="comparer">The <see cref="IComparer{TKey}" /> to compare keys.</param>
         /// <returns>The value with the maximum key in the sequence.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="source" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentException">No key extracted from <paramref name="source" /> implements
+        // the <see cref="IComparable" /> or <see cref="IComparable{TKey}" /> interface.</exception>
         [DynamicDependency("MaxBy`2", typeof(Enumerable))]
         public static TSource? MaxBy<TSource, TKey>(
             this IQueryable<TSource> source,

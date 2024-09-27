@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Response Writer and Stream implementation
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Response Writer and Stream implementation
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -28,8 +28,8 @@ namespace System.Web
     //
 
     /*
-     * Constants for buffering
-     */
+    * Constants for buffering
+    */
     internal static class BufferingParams
     {
         internal static readonly int INTEGRATED_MODE_BUFFER_SIZE = 16 * 1024 - 4 * IntPtr.Size; // native buffer size for integrated mode
@@ -45,8 +45,8 @@ namespace System.Web
     }
 
     /*
-     * Interface implemented by elements of the response buffer list
-     */
+    * Interface implemented by elements of the response buffer list
+    */
     internal interface IHttpResponseElement
     {
         long GetSize();
@@ -55,8 +55,8 @@ namespace System.Web
     }
 
     /*
-     * Base class for recyclable memory buffer elements
-     */
+    * Base class for recyclable memory buffer elements
+    */
     internal abstract class HttpBaseMemoryResponseBufferElement
     {
         protected int _size;
@@ -93,8 +93,8 @@ namespace System.Web
     }
 
     /*
-     * Memory response buffer
-     */
+    * Memory response buffer
+    */
     internal sealed class HttpResponseBufferElement
         : HttpBaseMemoryResponseBufferElement,
             IHttpResponseElement
@@ -102,8 +102,8 @@ namespace System.Web
         private byte[] _data;
 
         /*
-         * Constructor that accepts the data buffer and holds on to it
-         */
+        * Constructor that accepts the data buffer and holds on to it
+        */
         internal HttpResponseBufferElement(byte[] data, int size)
         {
             _data = data;
@@ -113,9 +113,9 @@ namespace System.Web
         }
 
         /*
-         *  Close the buffer copying the data
-         *  (needed to 'compress' buffers for caching)
-         */
+        *  Close the buffer copying the data
+        *  (needed to 'compress' buffers for caching)
+        */
 
         internal override HttpResponseBufferElement Clone()
         {
@@ -164,24 +164,24 @@ namespace System.Web
         //
 
         /*
-         * Get number of bytes
-         */
+        * Get number of bytes
+        */
         long IHttpResponseElement.GetSize()
         {
             return (_size - _free);
         }
 
         /*
-         * Get bytes (for filtering)
-         */
+        * Get bytes (for filtering)
+        */
         byte[] IHttpResponseElement.GetBytes()
         {
             return _data;
         }
 
         /*
-         * Write HttpWorkerRequest
-         */
+        * Write HttpWorkerRequest
+        */
         void IHttpResponseElement.Send(HttpWorkerRequest wr)
         {
             int n = _size - _free;
@@ -192,8 +192,8 @@ namespace System.Web
 
 #if !FEATURE_PAL // FEATURE_PAL does not enable IIS-based hosting features
     /*
-     * Unmanaged memory response buffer
-     */
+    * Unmanaged memory response buffer
+    */
     internal sealed class HttpResponseUnmanagedBufferElement
         : HttpBaseMemoryResponseBufferElement,
             IHttpResponseElement
@@ -217,8 +217,8 @@ namespace System.Web
         }
 
         /*
-         * Constructor that creates an empty buffer
-         */
+        * Constructor that creates an empty buffer
+        */
         internal HttpResponseUnmanagedBufferElement()
         {
             if (HttpRuntime.UseIntegratedPipeline)
@@ -240,8 +240,8 @@ namespace System.Web
         }
 
         /*
-         * dtor - frees the unmanaged buffer
-         */
+        * dtor - frees the unmanaged buffer
+        */
         ~HttpResponseUnmanagedBufferElement()
         {
             IntPtr data = Interlocked.Exchange(ref _data, IntPtr.Zero);
@@ -259,9 +259,9 @@ namespace System.Web
         }
 
         /*
-         *  Clone the buffer copying the data int managed buffer
-         *  (needed to 'compress' buffers for caching)
-         */
+        *  Clone the buffer copying the data int managed buffer
+        *  (needed to 'compress' buffers for caching)
+        */
         internal override HttpResponseBufferElement Clone()
         {
             int clonedSize = _size - _free;
@@ -383,16 +383,16 @@ namespace System.Web
         //
 
         /*
-         * Get number of bytes
-         */
+        * Get number of bytes
+        */
         long IHttpResponseElement.GetSize()
         {
             return (_size - _free);
         }
 
         /*
-         * Get bytes (for filtering)
-         */
+        * Get bytes (for filtering)
+        */
         byte[] IHttpResponseElement.GetBytes()
         {
             int n = (_size - _free);
@@ -410,8 +410,8 @@ namespace System.Web
         }
 
         /*
-         * Write HttpWorkerRequest
-         */
+        * Write HttpWorkerRequest
+        */
         void IHttpResponseElement.Send(HttpWorkerRequest wr)
         {
             int n = _size - _free;
@@ -443,8 +443,8 @@ namespace System.Web
     }
 #endif // !FEATURE_PAL
     /*
-     * Response element where data comes from resource
-     */
+    * Response element where data comes from resource
+    */
     internal sealed class HttpResourceResponseElement : IHttpResponseElement
     {
         private IntPtr _data;
@@ -463,16 +463,16 @@ namespace System.Web
         //
 
         /*
-         * Get number of bytes
-         */
+        * Get number of bytes
+        */
         long IHttpResponseElement.GetSize()
         {
             return _size;
         }
 
         /*
-         * Get bytes (used only for filtering)
-         */
+        * Get bytes (used only for filtering)
+        */
         byte[] IHttpResponseElement.GetBytes()
         {
             if (_size > 0)
@@ -488,8 +488,8 @@ namespace System.Web
         }
 
         /*
-         * Write HttpWorkerRequest
-         */
+        * Write HttpWorkerRequest
+        */
         void IHttpResponseElement.Send(HttpWorkerRequest wr)
         {
             if (_size > 0)
@@ -504,8 +504,8 @@ namespace System.Web
     }
 
     /*
-     * Response element where data comes from file
-     */
+    * Response element where data comes from file
+    */
     internal sealed class HttpFileResponseElement : IHttpResponseElement
     {
         private String _filename;
@@ -515,8 +515,8 @@ namespace System.Web
         private bool _useTransmitFile;
 
         /**
-         * Constructor from filename, uses TransmitFile
-         */
+        * Constructor from filename, uses TransmitFile
+        */
         internal HttpFileResponseElement(
             String filename,
             long offset,
@@ -527,8 +527,8 @@ namespace System.Web
             : this(filename, offset, size, isImpersonating, true, supportsLongTransmitFile) { }
 
         /*
-         * Constructor from filename and range (doesn't use TransmitFile)
-         */
+        * Constructor from filename and range (doesn't use TransmitFile)
+        */
         internal HttpFileResponseElement(String filename, long offset, long size)
             : this(filename, offset, size, false, false, false) { }
 
@@ -575,16 +575,16 @@ namespace System.Web
         //
 
         /*
-         * Get number of bytes
-         */
+        * Get number of bytes
+        */
         long IHttpResponseElement.GetSize()
         {
             return _size;
         }
 
         /*
-         * Get bytes (for filtering)
-         */
+        * Get bytes (for filtering)
+        */
         byte[] IHttpResponseElement.GetBytes()
         {
             if (_size == 0)
@@ -633,8 +633,8 @@ namespace System.Web
         }
 
         /*
-         * Write HttpWorkerRequest
-         */
+        * Write HttpWorkerRequest
+        */
         void IHttpResponseElement.Send(HttpWorkerRequest wr)
         {
             if (_size > 0)
@@ -652,8 +652,8 @@ namespace System.Web
     }
 
     /*
-     * Response element for substituiton
-     */
+    * Response element for substituiton
+    */
     internal sealed class HttpSubstBlockResponseElement : IHttpResponseElement
     {
         private HttpResponseSubstitutionCallback _callback;
@@ -669,9 +669,9 @@ namespace System.Web
         }
 
         /*
-         * Constructor given the name and the data (fill char converted to bytes)
-         * holds on to the data
-         */
+        * Constructor given the name and the data (fill char converted to bytes)
+        * holds on to the data
+        */
         internal HttpSubstBlockResponseElement(
             HttpResponseSubstitutionCallback callback,
             Encoding encoding,
@@ -702,7 +702,8 @@ namespace System.Web
             _callback = callback;
         }
 
-        // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that return String.Empty
+        // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that
+        // return String.Empty
         private unsafe void CreateFirstSubstData(
             String s,
             IIS7WorkerRequest iis7WorkerRequest,
@@ -751,9 +752,9 @@ namespace System.Web
         }
 
         /*
-         * Performs substition -- return the resulting HttpResponseBufferElement
-         * holds on to the data
-         */
+        * Performs substition -- return the resulting HttpResponseBufferElement
+        * holds on to the data
+        */
         internal IHttpResponseElement Substitute(Encoding e)
         {
             String s = _callback(HttpContext.Current);
@@ -772,8 +773,8 @@ namespace System.Web
         //
 
         /*
-         * Get number of bytes
-         */
+        * Get number of bytes
+        */
         long IHttpResponseElement.GetSize()
         {
             if (_isIIS7WorkerRequest)
@@ -787,8 +788,8 @@ namespace System.Web
         }
 
         /*
-         * Get bytes (for filtering)
-         */
+        * Get bytes (for filtering)
+        */
         byte[] IHttpResponseElement.GetBytes()
         {
             if (_isIIS7WorkerRequest)
@@ -801,7 +802,8 @@ namespace System.Web
                 }
                 else
                 {
-                    // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that return String.Empty
+                    // WOS 1926509: ASP.NET:  WriteSubstitution in integrated mode needs to support callbacks that
+                    // return String.Empty
                     return (_firstSubstData == IntPtr.Zero) ? null : new byte[0];
                 }
             }
@@ -812,8 +814,8 @@ namespace System.Web
         }
 
         /*
-         * Write HttpWorkerRequest
-         */
+        * Write HttpWorkerRequest
+        */
         void IHttpResponseElement.Send(HttpWorkerRequest wr)
         {
             if (_isIIS7WorkerRequest)
@@ -836,8 +838,8 @@ namespace System.Web
     }
 
     /*
-     * Stream object synchronized with Writer
-     */
+    * Stream object synchronized with Writer
+    */
     internal class HttpResponseStream : Stream
     {
         private HttpWriter _writer;
@@ -936,8 +938,8 @@ namespace System.Web
     }
 
     /*
-     * Stream serving as sink for filters
-     */
+    * Stream serving as sink for filters
+    */
     internal sealed class HttpResponseStreamFilterSink : HttpResponseStream
     {
         private bool _filtering = false;
@@ -982,8 +984,8 @@ namespace System.Web
     }
 
     /*
-     * TextWriter synchronized with the response object
-     */
+    * TextWriter synchronized with the response object
+    */
 
     /// <devdoc>
     ///    <para>A TextWriter class synchronized with the Response object.</para>
@@ -1490,7 +1492,8 @@ namespace System.Web
         }
 
         //
-        // Support for response buffer manipulation: HasBeenClearedRecently, GetResponseBufferCountAfterFlush,
+        // Support for response buffer manipulation: HasBeenClearedRecently,
+        // GetResponseBufferCountAfterFlush,
         // and MoveResponseBufferRangeForward.  The intended use of these functions is to rearrange
         // the order of the buffers.  Improper use of these functions may result in excessive memory use.
         // They were added specifically so that custom hidden form data could be moved to the beginning
@@ -1574,7 +1577,8 @@ namespace System.Web
                 );
             }
 
-            //VSWhidbey 559434: Private Bytes goes thru roof because unmanaged buffers are not recycled when Response.Flush is called
+            //VSWhidbey 559434: Private Bytes goes thru roof because unmanaged buffers are not recycled when
+            // Response.Flush is called
             RecycleBufferElements();
 
             _buffers = new ArrayList();
@@ -2247,8 +2251,8 @@ namespace System.Web
         }
 
         /*
-         * The Stream for writing binary data
-         */
+        * The Stream for writing binary data
+        */
 
         /// <devdoc>
         ///    <para> Enables binary output to the client.</para>

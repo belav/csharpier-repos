@@ -44,7 +44,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///     Computes the signature of a hash that was produced by the hash algorithm specified by "hashAlgorithm."
+        ///     Computes the signature of a hash that was produced by the hash algorithm specified by
+        // "hashAlgorithm."
         /// </summary>
         public override byte[] SignHash(
             byte[] hash,

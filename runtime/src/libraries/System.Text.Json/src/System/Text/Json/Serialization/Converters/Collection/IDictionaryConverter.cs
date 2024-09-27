@@ -9,7 +9,8 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     /// <summary>
-    /// Converter for <cref>System.Collections.IDictionary</cref> that (de)serializes as a JSON object with properties
+    /// Converter for <cref>System.Collections.IDictionary</cref> that (de)serializes as a JSON object
+    // with properties
     /// representing the dictionary element key and value.
     /// </summary>
     internal sealed class IDictionaryConverter<TDictionary>

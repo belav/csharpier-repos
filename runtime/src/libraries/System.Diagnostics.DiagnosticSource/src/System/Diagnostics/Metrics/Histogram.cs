@@ -6,12 +6,16 @@ using System.Collections.Generic;
 namespace System.Diagnostics.Metrics
 {
     /// <summary>
-    /// The histogram is a metrics Instrument which can be used to report arbitrary values that are likely to be statistically meaningful.
+    /// The histogram is a metrics Instrument which can be used to report arbitrary values that are
+    // likely to be statistically meaningful.
     /// e.g. the request duration.
-    /// Use <see cref="Meter.CreateHistogram(string, string?, string?)" /> method to create the Histogram object.
+    /// Use <see cref="Meter.CreateHistogram(string, string?, string?)" /> method to create the
+    // Histogram object.
     /// </summary>
     /// <remarks>
-    /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
+    /// This class supports only the following generic parameter types: <see cref="byte" />, <see
+    // cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double"
+    // />, and <see cref="decimal" />
     /// </remarks>
     public sealed class Histogram<T> : Instrument<T>
         where T : struct
@@ -91,7 +95,8 @@ namespace System.Diagnostics.Metrics
         /// Record a measurement value.
         /// </summary>
         /// <param name="value">The measurement value.</param>
-        /// <param name="tagList">A <see cref="T:System.Diagnostics.TagList" /> of tags associated with the measurement.</param>
+        /// <param name="tagList">A <see cref="T:System.Diagnostics.TagList" /> of tags associated with the
+        // measurement.</param>
         public void Record(T value, in TagList tagList) => RecordMeasurement(value, in tagList);
     }
 }

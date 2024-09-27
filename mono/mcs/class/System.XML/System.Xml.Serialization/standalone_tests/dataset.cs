@@ -16,7 +16,7 @@ public class Test
     {
         XmlSerializer ser = new XmlSerializer(typeof(DataSet));
 
-        /* Create a new DataSet; add a table, column and ten rows */
+/* Create a new DataSet; add a table, column and ten rows */
         DataSet ds = new DataSet("myDataSet");
         DataTable t = new DataTable("table1");
         DataColumn c = new DataColumn("thing");

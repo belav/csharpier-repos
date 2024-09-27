@@ -35,12 +35,12 @@ using Mono.Security;
 namespace Mono.Security.X509
 {
     /*
-     * Extension  ::=  SEQUENCE  {
-     *	extnID      OBJECT IDENTIFIER,
-     *	critical    BOOLEAN DEFAULT FALSE,
-     *	extnValue   OCTET STRING
-     * }
-     */
+    * Extension  ::=  SEQUENCE  {
+    *	extnID      OBJECT IDENTIFIER,
+    *	critical    BOOLEAN DEFAULT FALSE,
+    *	extnValue   OCTET STRING
+    * }
+    */
 #if INSIDE_CORLIB || INSIDE_SYSTEM
     internal
 #else

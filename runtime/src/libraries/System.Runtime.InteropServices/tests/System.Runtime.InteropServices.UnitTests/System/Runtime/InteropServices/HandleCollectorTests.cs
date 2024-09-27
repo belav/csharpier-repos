@@ -156,7 +156,8 @@ namespace System.Runtime.InteropServices
                 Assert.True(lowLimitCollector.Count <= i + 1);
             }
 
-            // HandleLimitTester does the decrement on the HandleCollector during finalization, so we wait for pending finalizers.
+            // HandleLimitTester does the decrement on the HandleCollector during finalization, so we wait for
+            // pending finalizers.
             GC.WaitForPendingFinalizers();
 
             (int gen0, int gen1, int gen2) postLowLimitState = (
@@ -182,7 +183,8 @@ namespace System.Runtime.InteropServices
                 Assert.True(highLimitCollector.Count <= i + 1);
             }
 
-            // HandleLimitTester does the decrement on the HandleCollector during finalization, so we wait for pending finalizers.
+            // HandleLimitTester does the decrement on the HandleCollector during finalization, so we wait for
+            // pending finalizers.
             GC.WaitForPendingFinalizers();
 
             (int gen0, int gen1, int gen2) postHighLimitState = (

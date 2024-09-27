@@ -128,7 +128,8 @@ namespace System.Xml.XPath
             : this(uri, XmlSpace.Default) { }
 
         /// <summary>
-        /// Create a new document and load the content from the Uri, with whitespace handling controlled according to "space".
+        /// Create a new document and load the content from the Uri, with whitespace handling controlled
+        // according to "space".
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
@@ -147,8 +148,10 @@ namespace System.Xml.XPath
         }
 
         /// <summary>
-        /// Create a writer that can be used to create nodes in this document.  The root node will be assigned "baseUri", and flags
-        /// can be passed to indicate that names should be atomized by the builder and/or a fragment should be created.
+        /// Create a writer that can be used to create nodes in this document.  The root node will be
+        // assigned "baseUri", and flags
+        /// can be passed to indicate that names should be atomized by the builder and/or a fragment should
+        // be created.
         /// </summary>
         internal XmlRawWriter LoadFromWriter(LoadFlags flags, string baseUri)
         {
@@ -156,8 +159,10 @@ namespace System.Xml.XPath
         }
 
         /// <summary>
-        /// Create a writer that can be used to create nodes in this document.  The root node will be assigned "baseUri", and flags
-        /// can be passed to indicate that names should be atomized by the builder and/or a fragment should be created.
+        /// Create a writer that can be used to create nodes in this document.  The root node will be
+        // assigned "baseUri", and flags
+        /// can be passed to indicate that names should be atomized by the builder and/or a fragment should
+        // be created.
         /// </summary>
         internal void LoadFromReader(XmlReader reader, XmlSpace space)
         {

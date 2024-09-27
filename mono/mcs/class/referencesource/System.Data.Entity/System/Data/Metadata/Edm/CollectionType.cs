@@ -23,7 +23,8 @@ namespace System.Data.Metadata.Edm
         /// The constructor for constructing a CollectionType object with the element type it contains
         /// </summary>
         /// <param name="elementType">The element type that this collection type contains</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if the argument elementType is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if the argument elementType is
+        // null</exception>
         internal CollectionType(EdmType elementType)
             : this(TypeUsage.Create(elementType))
         {
@@ -31,10 +32,12 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// The constructor for constructing a CollectionType object with the element type (as a TypeUsage) it contains
+        /// The constructor for constructing a CollectionType object with the element type (as a TypeUsage)
+        // it contains
         /// </summary>
         /// <param name="elementType">The element type that this collection type contains</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if the argument elementType is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if the argument elementType is
+        // null</exception>
         internal CollectionType(TypeUsage elementType)
             : base(
                 GetIdentity(EntityUtil.GenericCheckArgumentNull(elementType, "elementType")),
@@ -74,7 +77,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Constructs the name of the collection type
         /// </summary>
-        /// <param name="typeUsage">The typeusage for the element type that this collection type refers to</param>
+        /// <param name="typeUsage">The typeusage for the element type that this collection type refers
+        // to</param>
         /// <returns>The identity of the resulting collection type</returns>
         private static string GetIdentity(TypeUsage typeUsage)
         {

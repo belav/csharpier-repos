@@ -493,7 +493,7 @@ namespace System.Web.Compilation
 
         protected virtual void AddApplicationAndSessionObjects() { }
 
-        /* Utility methods for <object> stuff */
+/* Utility methods for <object> stuff */
         protected void CreateApplicationOrSessionPropertyForObject(
             Type type,
             string propName,
@@ -501,25 +501,25 @@ namespace System.Web.Compilation
             bool isPublic
         )
         {
-            /* if isApplication this generates (the 'cachedapp' field is created earlier):
-            private MyNS.MyClass app {
-                get {
-                    if ((this.cachedapp == null)) {
-                        this.cachedapp = ((MyNS.MyClass)
-                            (this.Application.StaticObjects.GetObject("app")));
-                    }
-                    return this.cachedapp;
-                }
-            }
+/* if isApplication this generates (the 'cachedapp' field is created earlier):
+private MyNS.MyClass app {
+get {
+if ((this.cachedapp == null)) {
+this.cachedapp = ((MyNS.MyClass)
+(this.Application.StaticObjects.GetObject("app")));
+}
+return this.cachedapp;
+}
+}
 
-            else, this is for Session:
-            private MyNS.MyClass ses {
-                get {
-                    return ((MyNS.MyClass) (this.Session.StaticObjects.GetObject("ses")));
-                }
-            }
+else, this is for Session:
+private MyNS.MyClass ses {
+get {
+return ((MyNS.MyClass) (this.Session.StaticObjects.GetObject("ses")));
+}
+}
 
-            */
+*/
 
             CodeExpression result = null;
 
@@ -622,7 +622,7 @@ namespace System.Web.Compilation
             mainClass.Members.Add(prop);
         }
 
-        /******/
+/******/
 
         void CheckCompilerErrors(CompilerResults results)
         {

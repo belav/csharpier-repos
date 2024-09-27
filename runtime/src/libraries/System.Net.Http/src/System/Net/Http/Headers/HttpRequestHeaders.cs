@@ -136,7 +136,8 @@ namespace System.Net.Http.Headers
             get { return (string?)GetSingleParsedValue(KnownHeaders.From.Descriptor); }
             set
             {
-                // Null and empty string are equivalent. In this case it means, remove the From header value (if any).
+                // Null and empty string are equivalent. In this case it means, remove the From header value (if
+                // any).
                 if (value == string.Empty)
                 {
                     value = null;
@@ -153,7 +154,8 @@ namespace System.Net.Http.Headers
             get { return (string?)GetSingleParsedValue(KnownHeaders.Host.Descriptor); }
             set
             {
-                // Null and empty string are equivalent. In this case it means, remove the Host header value (if any).
+                // Null and empty string are equivalent. In this case it means, remove the Host header value (if
+                // any).
                 if (value == string.Empty)
                 {
                     value = null;
@@ -237,7 +239,8 @@ namespace System.Net.Http.Headers
             set { SetOrRemoveParsedValue(KnownHeaders.MaxForwards.Descriptor, value); }
         }
 
-        /// <summary>Gets or sets the value of the <see langword=":protocol" /> pseudo-header for an HTTP request.</summary>
+        /// <summary>Gets or sets the value of the <see langword=":protocol" /> pseudo-header for an HTTP
+        // request.</summary>
         /// <value>The value of the <see langword=":protocol" /> pseudo-header for an HTTP request.</value>
         public string? Protocol
         {

@@ -84,7 +84,8 @@ namespace System.Xml
         string xmlns;
         string xmlnsUri;
 
-        // incremental reading of added xmlns nodes (ReadValueChunk, ReadContentAsBase64, ReadContentAsBinHex)
+        // incremental reading of added xmlns nodes (ReadValueChunk, ReadContentAsBase64,
+        // ReadContentAsBinHex)
         int nsIncReadOffset;
         IncrementalReadDecoder binDecoder;
 

@@ -10,7 +10,8 @@ namespace System.Reflection
 {
     internal static class InvokeUtils
     {
-        // This method is similar to the NativeAot method ConvertOrWidenPrimitivesEnumsAndPointersIfPossible().
+        // This method is similar to the NativeAot method
+        // ConvertOrWidenPrimitivesEnumsAndPointersIfPossible().
         public static object ConvertOrWiden(
             RuntimeType srcType,
             object srcObject,

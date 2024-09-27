@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The ASP.NET/IIS 7 integrated pipeline runtime service host
- *
- * Copyright (c) 2004 Microsoft Corporation
- */
+* The ASP.NET/IIS 7 integrated pipeline runtime service host
+*
+* Copyright (c) 2004 Microsoft Corporation
+*/
 
 namespace System.Web.Hosting
 {
@@ -338,7 +338,8 @@ namespace System.Web.Hosting
         {
             if (s_ApplicationContext == IntPtr.Zero)
             {
-                // If InitializeApplication was never called, then no requests ever came in and StopProcessing will never be called.
+                // If InitializeApplication was never called, then no requests ever came in and StopProcessing will
+                // never be called.
                 // We can just short-circuit this method.
                 return;
             }
@@ -380,11 +381,14 @@ namespace System.Web.Hosting
         {
             s_ApplicationContext = appContext;
 
-            // DevDiv #381425 - webengine4!RegisterModule runs *after* HostingEnvironment.Initialize (and thus the
+            // DevDiv #381425 - webengine4!RegisterModule runs *after* HostingEnvironment.Initialize (and thus
+            // the
             // HttpRuntime static ctor) when application preload is active. This means that any global state set
-            // by RegisterModule (like the IIS version information, whether we're in integrated mode, misc server
+            // by RegisterModule (like the IIS version information, whether we're in integrated mode, misc
+            // server
             // info, etc.) will be unavailable to PreAppStart / preload code when the preload feature is active.
-            // But since RegisterModule runs before InitializeApplication, we have one last chance here to collect
+            // But since RegisterModule runs before InitializeApplication, we have one last chance here to
+            // collect
             // the information before the main part of the application starts, and the pipeline can depend on it
             // to be accurate.
             HttpRuntime.PopulateIISVersionInformation();
@@ -454,7 +458,8 @@ namespace System.Web.Hosting
                     }
 
                     // Always register a managed handler:
-                    // WOS 1990290: VS F5 Debugging: "AspNetInitializationExceptionModule" is registered for RQ_BEGIN_REQUEST,
+                    // WOS 1990290: VS F5 Debugging: "AspNetInitializationExceptionModule" is registered for
+                    // RQ_BEGIN_REQUEST,
                     // but the DEBUG verb skips notifications until post RQ_AUTHENTICATE_REQUEST.
                     hresult = UnsafeIISMethods.MgdRegisterEventSubscription(
                         appContext,
@@ -692,8 +697,10 @@ namespace System.Web.Hosting
                     out currentNotification
                 );
 
-                // If the HttpContext is null at this point, then we've already transitioned this request to a WebSockets request.
-                // The WebSockets module should already be running, and asynchronous module-level events (like SendResponse) are
+                // If the HttpContext is null at this point, then we've already transitioned this request to a
+                // WebSockets request.
+                // The WebSockets module should already be running, and asynchronous module-level events (like
+                // SendResponse) are
                 // ineligible to be hooked by managed code.
                 if (context == null || context.HasWebSocketRequestTransitionStarted)
                 {
@@ -783,7 +790,8 @@ namespace System.Web.Hosting
 
                 if (status != RequestNotificationStatus.Pending)
                 {
-                    // The current notification may have changed due to the HttpApplication progressing the IIS state machine, so retrieve the info again.
+                    // The current notification may have changed due to the HttpApplication progressing the IIS state
+                    // machine, so retrieve the info again.
                     IIS.MgdGetCurrentNotificationInfo(
                         nativeRequestContext,
                         out currentModuleIndex,
@@ -799,7 +807,8 @@ namespace System.Web.Hosting
                     ThreadContext threadContext = context.IndicateCompletionContext;
                     // DevDiv 482614:
                     // Don't use local copy to detect if we can call MgdIndicateCompletion because another thread
-                    // unwinding from MgdIndicateCompletion may be changing context.IndicateCompletionContext at the same time.
+                    // unwinding from MgdIndicateCompletion may be changing context.IndicateCompletionContext at the
+                    // same time.
                     if (!context.InIndicateCompletion && context.IndicateCompletionContext != null)
                     {
                         if (status == RequestNotificationStatus.Continue)
@@ -864,21 +873,30 @@ namespace System.Web.Hosting
                     && status == RequestNotificationStatus.Pending
                 )
                 {
-                    // At this point, the WebSocket module event (PostEndRequest) has executed and set up the appropriate contexts for us.
-                    // However, there is a race condition that we need to avoid. It is possible that one thread has kicked off some async
-                    // work, e.g. via an IHttpAsyncHandler, and that thread is unwinding and has reached this line of execution.
-                    // Meanwhile, the IHttpAsyncHandler completed quickly (but asynchronously) and invoked MgdPostCompletion, which
-                    // resulted in a new thread calling ProcessRequestNotification. If this second thread starts the WebSocket transition,
-                    // then there's the risk that *both* threads might attempt to call WebSocketPipeline.ProcessRequest, which could AV
+                    // At this point, the WebSocket module event (PostEndRequest) has executed and set up the
+                    // appropriate contexts for us.
+                    // However, there is a race condition that we need to avoid. It is possible that one thread has
+                    // kicked off some async
+                    // work, e.g. via an IHttpAsyncHandler, and that thread is unwinding and has reached this line of
+                    // execution.
+                    // Meanwhile, the IHttpAsyncHandler completed quickly (but asynchronously) and invoked
+                    // MgdPostCompletion, which
+                    // resulted in a new thread calling ProcessRequestNotification. If this second thread starts the
+                    // WebSocket transition,
+                    // then there's the risk that *both* threads might attempt to call WebSocketPipeline.ProcessRequest,
+                    // which could AV
                     // the process.
                     //
-                    // We protect against this by allowing only the thread which started the transition to complete the transition, so in
-                    // the above scenario the original thread (which invoked the IHttpAsyncHandler) no-ops at this point and just returns
+                    // We protect against this by allowing only the thread which started the transition to complete the
+                    // transition, so in
+                    // the above scenario the original thread (which invoked the IHttpAsyncHandler) no-ops at this point
+                    // and just returns
                     // Pending to its caller.
 
                     if (context.DidCurrentThreadStartWebSocketTransition)
                     {
-                        // We'll mark the HttpContext as complete, call the continuation to kick off the socket send / receive loop, and return
+                        // We'll mark the HttpContext as complete, call the continuation to kick off the socket send /
+                        // receive loop, and return
                         // Pending to IIS so that it doesn't advance the state machine until the WebSocket loop completes.
                         root.ReleaseHttpContext();
                         root.WebSocketPipeline.ProcessRequest();
@@ -908,7 +926,8 @@ namespace System.Web.Hosting
                 // this may throw, e.g. if the request Content-Length header has a value greater than Int32.MaxValue
                 wr = IIS7WorkerRequest.CreateWorkerRequest(nativeRequestContext, etwEnabled);
 
-                // this may throw, e.g. see WOS 1724573: ASP.Net v2.0: wrong error code returned when ? is used in the URL
+                // this may throw, e.g. see WOS 1724573: ASP.Net v2.0: wrong error code returned when ? is used in
+                // the URL
                 context = new HttpContext(wr, false);
             }
             catch
@@ -918,7 +937,8 @@ namespace System.Web.Hosting
             }
         }
 
-        /// <include file='doc\ISAPIRuntime.uex' path='docs/doc[@for="ISAPIRuntime.IRegisteredObject.Stop"]/*' />
+        /// <include file='doc\ISAPIRuntime.uex'
+        // path='docs/doc[@for="ISAPIRuntime.IRegisteredObject.Stop"]/*' />
         /// <internalonly/>
         void IRegisteredObject.Stop(bool immediate)
         {

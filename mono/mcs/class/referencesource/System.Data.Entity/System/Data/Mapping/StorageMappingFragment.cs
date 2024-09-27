@@ -19,7 +19,8 @@ namespace System.Data.Mapping
 {
     /// <summary>
     /// Represents the metadata for mapping fragment.
-    /// A set of mapping fragments makes up the Set mappings( EntitySet, AssociationSet or CompositionSet )
+    /// A set of mapping fragments makes up the Set mappings( EntitySet, AssociationSet or
+    // CompositionSet )
     /// Each MappingFragment provides mapping for those properties of a type that map to a single table.
     /// </summary>
     /// <example>
@@ -202,7 +203,8 @@ namespace System.Data.Mapping
 
         /// <summary>
         /// Add a condition property mapping as a child of this complex property mapping
-        /// Condition Property Mapping specifies a Condition either on the C side property or S side property.
+        /// Condition Property Mapping specifies a Condition either on the C side property or S side
+        // property.
         /// </summary>
         /// <param name="conditionPropertyMap">The mapping that needs to be added</param>
         internal void AddConditionProperty(

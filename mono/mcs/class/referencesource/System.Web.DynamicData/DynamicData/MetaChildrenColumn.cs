@@ -65,7 +65,7 @@ namespace System.Web.DynamicData
             }
         }
 
-        /*protected*/internal override bool ScaffoldNoCache
+/*protected*/internal override bool ScaffoldNoCache
         {
             get
             {
@@ -75,7 +75,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Shortcut for getting the path to the list action for all entities in the child table that have the given row as a parent.
+        /// Shortcut for getting the path to the list action for all entities in the child table that have
+        // the given row as a parent.
         /// </summary>
         /// <param name="row"></param>
         /// <returns></returns>

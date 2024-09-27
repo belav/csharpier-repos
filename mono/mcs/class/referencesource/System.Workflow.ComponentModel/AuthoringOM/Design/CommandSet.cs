@@ -18,11 +18,15 @@ namespace System.Workflow.ComponentModel.Design
     using System.Xml;
 
     // IMPORTANT:
-    //KEYBOARD: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\" and delete
-    // all of your *.vsk file, becuase VS always picks up keyboard bindings from that file, and also on deveenv.exe /.setup
+    //KEYBOARD: You need to goto <Document and settings\<user
+    // name>\ApplicationData\Microsoft\VisualStudio\8.0\" and delete
+    // all of your *.vsk file, becuase VS always picks up keyboard bindings from that file, and also on
+    // deveenv.exe /.setup
     // he does not clean that up.
-    //MENUS: You need to goto <Document and settings\<user name>\ApplicationData\Microsoft\VisualStudio\8.0\1033" and delete
-    // all of your *.prf file, becuase VS always picks up menus from that file, and also on deveenv.exe /.setup
+    //MENUS: You need to goto <Document and settings\<user
+    // name>\ApplicationData\Microsoft\VisualStudio\8.0\1033" and delete
+    // all of your *.prf file, becuase VS always picks up menus from that file, and also on deveenv.exe
+    // /.setup
     // he does not clean that up.
     internal sealed class CommandSet : IDisposable
     {
@@ -404,7 +408,8 @@ namespace System.Workflow.ComponentModel.Design
 
         internal void UpdatePageLayoutCommands(bool enable)
         {
-            //we might have two commands checked at the same (PrintPreviewPage and PrintPreview - since they have sligtly different logic (one is toggle and the other is not))
+            //we might have two commands checked at the same (PrintPreviewPage and PrintPreview - since they
+            // have sligtly different logic (one is toggle and the other is not))
             foreach (MenuCommand menuCommand in this.layoutCommands)
             {
                 menuCommand.Enabled = enable;
@@ -1342,7 +1347,8 @@ namespace System.Workflow.ComponentModel.Design
             );
 
             // check if we can insert or not
-            // I know  I should have disabled the paste menu it-self, but doing status check for paste gives a big performance hit. I am working on it.
+            // I know  I should have disabled the paste menu it-self, but doing status check for paste gives a
+            // big performance hit. I am working on it.
             if (
                 hitInfo == null
                 || !compositeDesigner.CanInsertActivities(hitInfo, topLevelActivities.AsReadOnly())

@@ -39,7 +39,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Append the entire contents of <paramref name="data"/> to the data already processed in the hash or HMAC.
+        /// Append the entire contents of <paramref name="data"/> to the data already processed in the hash
+        // or HMAC.
         /// </summary>
         /// <param name="data">The data to process.</param>
         /// <exception cref="ArgumentNullException"><paramref name="data"/> is <c>null</c>.</exception>
@@ -53,7 +54,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Append <paramref name="count"/> bytes of <paramref name="data"/>, starting at <paramref name="offset"/>,
+        /// Append <paramref name="count"/> bytes of <paramref name="data"/>, starting at <paramref
+        // name="offset"/>,
         /// to the data already processed in the hash or HMAC.
         /// </summary>
         /// <param name="data">The data to process.</param>
@@ -64,7 +66,8 @@ namespace System.Security.Cryptography
         ///     <paramref name="offset"/> is out of range. This parameter requires a non-negative number.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///     <paramref name="count"/> is out of range. This parameter requires a non-negative number less than
+        ///     <paramref name="count"/> is out of range. This parameter requires a non-negative number less
+        // than
         ///     the <see cref="Array.Length"/> value of <paramref name="data"/>.
         ///     </exception>
         /// <exception cref="ArgumentException">
@@ -142,7 +145,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Create an <see cref="IncrementalHash"/> for the algorithm specified by <paramref name="hashAlgorithm"/>.
+        /// Create an <see cref="IncrementalHash"/> for the algorithm specified by <paramref
+        // name="hashAlgorithm"/>.
         /// </summary>
         /// <param name="hashAlgorithm">The name of the hash algorithm to perform.</param>
         /// <returns>
@@ -153,7 +157,8 @@ namespace System.Security.Cryptography
         ///     <paramref name="hashAlgorithm"/>.<see cref="HashAlgorithmName.Name"/> is <c>null</c>, or
         ///     the empty string.
         /// </exception>
-        /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash algorithm.</exception>
+        /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash
+        // algorithm.</exception>
         public static IncrementalHash CreateHash(HashAlgorithmName hashAlgorithm)
         {
             if (string.IsNullOrEmpty(hashAlgorithm.Name))
@@ -172,9 +177,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="hashAlgorithm">The name of the hash algorithm to perform within the HMAC.</param>
         /// <param name="key">
-        ///     The secret key for the HMAC. The key can be any length, but a key longer than the output size
-        ///     of the hash algorithm specified by <paramref name="hashAlgorithm"/> will be hashed (using the
-        ///     algorithm specified by <paramref name="hashAlgorithm"/>) to derive a correctly-sized key. Therefore,
+        ///     The secret key for the HMAC. The key can be any length, but a key longer than the output
+        // size
+        ///     of the hash algorithm specified by <paramref name="hashAlgorithm"/> will be hashed (using
+        // the
+        ///     algorithm specified by <paramref name="hashAlgorithm"/>) to derive a correctly-sized key.
+        // Therefore,
         ///     the recommended size of the secret key is the output size of the hash specified by
         ///     <paramref name="hashAlgorithm"/>.
         /// </param>
@@ -186,7 +194,8 @@ namespace System.Security.Cryptography
         ///     <paramref name="hashAlgorithm"/>.<see cref="HashAlgorithmName.Name"/> is <c>null</c>, or
         ///     the empty string.
         /// </exception>
-        /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash algorithm.</exception>
+        /// <exception cref="CryptographicException"><paramref name="hashAlgorithm"/> is not a known hash
+        // algorithm.</exception>
         public static IncrementalHash CreateHMAC(HashAlgorithmName hashAlgorithm, byte[] key)
         {
             if (key == null)

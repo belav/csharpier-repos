@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net;
@@ -10,19 +11,23 @@ using System.Threading.Tasks;
 namespace System.Web.Http.Results
 {
     /// <summary>
-    /// Represents an action result that returns an empty <see cref="HttpStatusCode.InternalServerError"/> response.
+    /// Represents an action result that returns an empty <see
+    // cref="HttpStatusCode.InternalServerError"/> response.
     /// </summary>
     public class InternalServerErrorResult : IHttpActionResult
     {
         private readonly StatusCodeResult.IDependencyProvider _dependencies;
 
-        /// <summary>Initializes a new instance of the <see cref="InternalServerErrorResult"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="InternalServerErrorResult"/>
+        // class.</summary>
         /// <param name="request">The request message which led to this result.</param>
         public InternalServerErrorResult(HttpRequestMessage request)
             : this(new StatusCodeResult.DirectDependencyProvider(request)) { }
 
-        /// <summary>Initializes a new instance of the <see cref="InternalServerErrorResult"/> class.</summary>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <summary>Initializes a new instance of the <see cref="InternalServerErrorResult"/>
+        // class.</summary>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public InternalServerErrorResult(ApiController controller)
             : this(new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 

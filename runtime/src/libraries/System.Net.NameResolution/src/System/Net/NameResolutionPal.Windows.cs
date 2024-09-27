@@ -535,7 +535,8 @@ namespace System.Net
                             // If DangerousAddRef didn't throw ODE, the handle should contain a valid pointer.
                             GetAddrInfoExContext* context = @this.Context;
 
-                            // An outstanding operation will be completed with WSA_E_CANCELLED, and GetAddrInfoExCancel will return NO_ERROR.
+                            // An outstanding operation will be completed with WSA_E_CANCELLED, and GetAddrInfoExCancel will
+                            // return NO_ERROR.
                             // If this thread has lost the race between cancellation and completion, this will be a NOP
                             // with GetAddrInfoExCancel returning WSA_INVALID_HANDLE.
                             int cancelResult = Interop.Winsock.GetAddrInfoExCancel(
@@ -576,10 +577,12 @@ namespace System.Net
 
             public void SetResult(object result)
             {
-                // Store the result and then queue this object to the thread pool to actually complete the Tasks, as we
+                // Store the result and then queue this object to the thread pool to actually complete the Tasks, as
+                // we
                 // want to avoid invoking continuations on the Windows callback thread. Effectively we're manually
                 // implementing TaskCreationOptions.RunContinuationsAsynchronously, which we can't use because we're
-                // using AsyncTaskMethodBuilder, which we're using in order to create either a strongly-typed Task<IPHostEntry>
+                // using AsyncTaskMethodBuilder, which we're using in order to create either a strongly-typed
+                // Task<IPHostEntry>
                 // or Task<IPAddress[]> without allocating additional objects.
                 Debug.Assert(result is Exception || result is IPAddress[] || result is IPHostEntry);
                 _result = result;

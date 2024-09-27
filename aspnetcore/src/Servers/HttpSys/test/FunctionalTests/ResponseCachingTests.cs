@@ -126,7 +126,8 @@ public class ResponseCachingTests : LoggedTest
                 out string address,
                 httpContext =>
                 {
-                    // 304 responses are not themselves cachable. Their cache header mirrors the resource's original cache header.
+                    // 304 responses are not themselves cachable. Their cache header mirrors the resource's original
+                    // cache header.
                     httpContext.Response.StatusCode = StatusCodes.Status304NotModified;
                     httpContext.Response.ContentType = "some/thing"; // Http.Sys requires content-type for caching
                     httpContext.Response.Headers["x-request-count"] = (requestCount++).ToString(

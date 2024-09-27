@@ -407,9 +407,11 @@ namespace System.Runtime.Caching
             Init(config);
         }
 
-        // ignoreConfigSection is used when redirecting ASP.NET cache into the MemoryCache.  This avoids infinite recursion
+        // ignoreConfigSection is used when redirecting ASP.NET cache into the MemoryCache.  This avoids
+        // infinite recursion
         // due to the fact that the (ASP.NET) config system uses the cache, and the cache uses the
-        // config system.  This method could be made public, perhaps with CAS to prevent partial trust callers.
+        // config system.  This method could be made public, perhaps with CAS to prevent partial trust
+        // callers.
         [SuppressMessage(
             "Microsoft.Design",
             "CA1026:DefaultParametersShouldNotBeUsed",
@@ -705,7 +707,8 @@ namespace System.Runtime.Caching
             return (GetInternal(key, regionName) != null);
         }
 
-        // Dev10 907758: Breaking bug in System.RuntimeCaching.MemoryCache.AddOrGetExisting (CacheItem, CacheItemPolicy)
+        // Dev10 907758: Breaking bug in System.RuntimeCaching.MemoryCache.AddOrGetExisting (CacheItem,
+        // CacheItemPolicy)
         public override bool Add(CacheItem item, CacheItemPolicy policy)
         {
             CacheItem existingEntry = AddOrGetExisting(item, policy);

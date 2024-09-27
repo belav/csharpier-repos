@@ -13,11 +13,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This convention also adds the '__jObject' containing the JSON object returned by the store.
+///         This convention also adds the '__jObject' containing the JSON object returned by the
+// store.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>,
+// and
+///         <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF
+// Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class StoreKeyConvention
@@ -32,28 +35,40 @@ public class StoreKeyConvention
         IEntityTypeBaseTypeChangedConvention
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static readonly string IdPropertyJsonName = "id";
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static readonly string DefaultIdPropertyName = "__id";
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static readonly string JObjectPropertyName = "__jObject";

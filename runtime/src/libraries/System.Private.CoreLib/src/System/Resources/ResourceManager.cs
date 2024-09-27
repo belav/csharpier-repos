@@ -141,8 +141,10 @@ namespace System.Resources
 
         // It would be better if we could use a _neutralCulture instead of calling
         // CultureInfo.InvariantCulture everywhere, but we run into problems with the .cctor.  CultureInfo
-        // initializes assembly, which initializes ResourceManager, which tries to get a CultureInfo which isn't
-        // there yet because CultureInfo's class initializer hasn't finished.  If we move SystemResMgr off of
+        // initializes assembly, which initializes ResourceManager, which tries to get a CultureInfo which
+        // isn't
+        // there yet because CultureInfo's class initializer hasn't finished.  If we move SystemResMgr off
+        // of
         // Assembly (or at least make it an internal property) we should be able to circumvent this problem.
 
         // These Strings are used to avoid using Reflection in CreateResourceSet.
@@ -260,7 +262,8 @@ namespace System.Resources
         [MemberNotNull(nameof(_resourceGroveler))]
         private void CommonAssemblyInit()
         {
-            // Now we can use the managed resources even when using PRI's to support the APIs GetObject, GetStream...etc.
+            // Now we can use the managed resources even when using PRI's to support the APIs GetObject,
+            // GetStream...etc.
             _useManifest = true;
 
             _resourceSets = new Dictionary<string, ResourceSet>();
@@ -633,8 +636,10 @@ namespace System.Resources
             int simpleAsmNameLength =
                 ((secondComma != -1) ? secondComma : asmTypeName.Length) - (firstComma + 1);
 
-            // We have kept mscorlib as the simple assembly name for the default resource format. The type name of the default resource
-            // format is de-facto a magic string that we check for and it is not actually used to load any types. There has not been
+            // We have kept mscorlib as the simple assembly name for the default resource format. The type name
+            // of the default resource
+            // format is de-facto a magic string that we check for and it is not actually used to load any
+            // types. There has not been
             // a good reason to change the magic string to have the current assembly name.
 
             // Assembly names are case insensitive

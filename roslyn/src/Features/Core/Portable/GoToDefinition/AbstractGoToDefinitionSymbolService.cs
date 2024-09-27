@@ -80,7 +80,8 @@ namespace Microsoft.CodeAnalysis.GoToDefinition
                 project = mapping.Project;
             }
 
-            // The compilation will have already been realised, either by the semantic model or the symbol mapping
+            // The compilation will have already been realised, either by the semantic model or the symbol
+            // mapping
             var compilation = await project
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);

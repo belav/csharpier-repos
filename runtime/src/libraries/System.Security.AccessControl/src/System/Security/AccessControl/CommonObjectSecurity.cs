@@ -31,7 +31,8 @@ namespace System.Security.AccessControl
         #endregion
 
         #region Private Methods
-        // Ported from NDP\clr\src\BCL\System\Security\Principal\SID.cs since we can't access System.Security.Principal.IdentityReference's internals
+        // Ported from NDP\clr\src\BCL\System\Security\Principal\SID.cs since we can't access
+        // System.Security.Principal.IdentityReference's internals
         private static bool IsValidTargetTypeStatic(Type targetType)
         {
             if (targetType == typeof(NTAccount))

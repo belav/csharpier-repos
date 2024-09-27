@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
                 .GetService<ICompilationFactoryService>()
                 ?.GetDefaultCompilationOptions();
 
-            // Use latest language version which is more permissive, as we cannot find out language version of the project which the file belongs to
+            // Use latest language version which is more permissive, as we cannot find out language version of
+            // the project which the file belongs to
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/575761
             var parseOptions = languageServices
                 .GetService<ISyntaxTreeFactoryService>()
@@ -67,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
                 sourceCodeKind: sourceCodeKind
             );
 
-            // The assembly name must be unique for each collection of loose files. Since the name doesn't matter
+            // The assembly name must be unique for each collection of loose files. Since the name doesn't
+            // matter
             // a random GUID can be used.
             var assemblyName = Guid.NewGuid().ToString("N");
 
@@ -93,7 +95,8 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
             return projectInfo;
         }
 
-        // Do not inline this to avoid loading Microsoft.CodeAnalysis.Scripting unless a script file is opened in the workspace.
+        // Do not inline this to avoid loading Microsoft.CodeAnalysis.Scripting unless a script file is
+        // opened in the workspace.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static CompilationOptions GetCompilationOptionsWithScriptReferenceResolvers(
             SolutionServices services,
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Features.Workspaces
 
             var baseDirectory = PathUtilities.GetDirectoryName(filePath);
 
-            // TODO (https://github.com/dotnet/roslyn/issues/5325, https://github.com/dotnet/roslyn/issues/13886):
+            // TODO (https://github.com/dotnet/roslyn/issues/5325,
+            // https://github.com/dotnet/roslyn/issues/13886):
             // - Need to have a way to specify these somewhere in VS options.
             // - Add default namespace imports, default metadata references to match csi.rsp
             // - Add default script globals available in 'csi goo.csx' environment: CommandLineScriptGlobals

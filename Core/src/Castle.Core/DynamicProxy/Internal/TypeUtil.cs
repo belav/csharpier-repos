@@ -69,8 +69,10 @@ namespace Castle.DynamicProxy.Internal
         }
 
         /// <summary>
-        ///   Returns the methods implemented by a type. Use this instead of Type.GetMethods to filter out duplicate MethodInfos
-        ///   sometimes reported by the latter. The test suite documents cases where such duplicates may occur.
+        ///   Returns the methods implemented by a type. Use this instead of Type.GetMethods to filter out
+        // duplicate MethodInfos
+        ///   sometimes reported by the latter. The test suite documents cases where such duplicates may
+        // occur.
         /// </summary>
         internal static MethodInfo[] GetAllInstanceMethods(this Type type)
         {
@@ -93,7 +95,8 @@ namespace Castle.DynamicProxy.Internal
         }
 
         /// <summary>
-        ///   Returns list of all unique interfaces implemented given types, including their base interfaces.
+        ///   Returns list of all unique interfaces implemented given types, including their base
+        // interfaces.
         /// </summary>
         internal static Type[] GetAllInterfaces(params Type[] types)
         {
@@ -251,7 +254,8 @@ namespace Castle.DynamicProxy.Internal
         }
 
         /// <summary>
-        ///   Checks whether the specified <paramref name="type"/> is a delegate type (i.e. a direct subclass of <see cref="MulticastDelegate"/>).
+        ///   Checks whether the specified <paramref name="type"/> is a delegate type (i.e. a direct
+        // subclass of <see cref="MulticastDelegate"/>).
         /// </summary>
         internal static bool IsDelegateType(this Type type)
         {
@@ -262,7 +266,8 @@ namespace Castle.DynamicProxy.Internal
         {
             var array = new Type[types.Count];
             types.CopyTo(array, 0);
-            //NOTE: is there a better, stable way to sort Types. We will need to revise this once we allow open generics
+            //NOTE: is there a better, stable way to sort Types. We will need to revise this once we allow open
+            // generics
             Array.Sort(array, TypeNameComparer.Instance);
             //                ^^^^^^^^^^^^^^^^^^^^^^^^^
             // Using a `IComparer<T>` object instead of a `Comparison<T>` delegate prevents

@@ -192,7 +192,8 @@ namespace System.Data.Common
         )] // V1.0.5000, MDAC 82936
         protected virtual DBDataPermission CreateInstance()
         {
-            // derived class should override with a different implementation avoiding reflection to allow semi-trusted scenarios
+            // derived class should override with a different implementation avoiding reflection to allow
+            // semi-trusted scenarios
             return (
                 Activator.CreateInstance(
                     GetType(),
@@ -366,7 +367,8 @@ namespace System.Data.Common
         }
 
         // <IPermission class="...Permission" version="1" AllowBlankPassword=false>
-        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server="
+        // KeyRestrictionBehavior=PreventUsage/>
         // </IPermission>
         override public void FromXml(SecurityElement securityElement)
         {
@@ -434,8 +436,10 @@ namespace System.Data.Common
 
         // <IPermission class="...Permission" version="1" AllowBlankPassword=false>
         //     <add ConnectionString="provider=x;data source=y;"/>
-        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="user id=;password=;" KeyRestrictionBehavior=AllowOnly/>
-        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server=" KeyRestrictionBehavior=PreventUsage/>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="user id=;password=;"
+        // KeyRestrictionBehavior=AllowOnly/>
+        //     <add ConnectionString="provider=x;data source=y;" KeyRestrictions="address=;server="
+        // KeyRestrictionBehavior=PreventUsage/>
         // </IPermission>
         override public SecurityElement ToXml()
         {

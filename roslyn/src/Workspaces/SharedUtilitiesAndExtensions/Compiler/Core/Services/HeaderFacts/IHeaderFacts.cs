@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
     {
         /// <summary>
         /// <paramref name="fullHeader"/> controls how much of the type header should be considered. If <see
-        /// langword="false"/> only the span up through the type name will be considered.  If <see langword="true"/>
+        /// langword="false"/> only the span up through the type name will be considered.  If <see
+        // langword="true"/>
         /// then the span through the base-list will be considered.
         /// </summary>
         bool IsOnTypeHeader(

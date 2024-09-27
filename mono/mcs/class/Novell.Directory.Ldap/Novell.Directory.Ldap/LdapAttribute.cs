@@ -664,11 +664,11 @@ namespace Novell.Directory.Ldap
                     buf = new sbyte[4096];
                     totalLength += len;
                 }
-                /*
-                * Now that the length is known, allocate an array to hold all
-                * the bytes of data and copy the data to that array, store
-                * it in this LdapAttribute
-                */
+/*
+* Now that the length is known, allocate an array to hold all
+* the bytes of data and copy the data to that array, store
+* it in this LdapAttribute
+*/
                 sbyte[] data = new sbyte[totalLength];
                 int offset = 0; //
                 for (int i = 0; i < bufs.Count; i++)

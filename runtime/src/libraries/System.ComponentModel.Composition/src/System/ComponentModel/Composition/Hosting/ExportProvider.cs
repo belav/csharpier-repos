@@ -47,14 +47,17 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ExactlyOne"/> and
+        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ExactlyOne"/>
+        // and
         ///         there are zero <see cref="Export"/> objects that match the conditions of the specified
         ///         <see cref="ImportDefinition"/>.
         ///     </para>
         ///     -or-
         ///     <para>
-        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ZeroOrOne"/> or
-        ///         <see cref="ImportCardinality.ExactlyOne"/> and there are more than one <see cref="Export"/>
+        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ZeroOrOne"/>
+        // or
+        ///         <see cref="ImportCardinality.ExactlyOne"/> and there are more than one <see
+        // cref="Export"/>
         ///         objects that match the conditions of the specified <see cref="ImportDefinition"/>.
         ///     </para>
         /// </exception>
@@ -81,14 +84,17 @@ namespace System.ComponentModel.Composition.Hosting
         /// </exception>
         /// <exception cref="ImportCardinalityMismatchException">
         ///     <para>
-        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ExactlyOne"/> and
+        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ExactlyOne"/>
+        // and
         ///         there are zero <see cref="Export"/> objects that match the conditions of the specified
         ///         <see cref="ImportDefinition"/>.
         ///     </para>
         ///     -or-
         ///     <para>
-        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ZeroOrOne"/> or
-        ///         <see cref="ImportCardinality.ExactlyOne"/> and there are more than one <see cref="Export"/>
+        ///         <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ZeroOrOne"/>
+        // or
+        ///         <see cref="ImportCardinality.ExactlyOne"/> and there are more than one <see
+        // cref="Export"/>
         ///         objects that match the conditions of the specified <see cref="ImportDefinition"/>.
         ///     </para>
         /// </exception>
@@ -183,9 +189,11 @@ namespace System.ComponentModel.Composition.Hosting
         ///     <note type="inheritinfo">
         ///         Overriders of this method should not treat cardinality-related mismatches
         ///         as errors, and should not throw exceptions in those cases. For instance,
-        ///         if <see cref="ImportDefinition.Cardinality"/> is <see cref="ImportCardinality.ExactlyOne"/>
+        ///         if <see cref="ImportDefinition.Cardinality"/> is <see
+        // cref="ImportCardinality.ExactlyOne"/>
         ///         and there are zero <see cref="Export"/> objects that match the conditions of the
-        ///         specified <see cref="ImportDefinition"/>, an <see cref="IEnumerable{T}"/> should be returned.
+        ///         specified <see cref="ImportDefinition"/>, an <see cref="IEnumerable{T}"/> should be
+        // returned.
         ///     </note>
         /// </remarks>
         protected abstract IEnumerable<Export>? GetExportsCore(

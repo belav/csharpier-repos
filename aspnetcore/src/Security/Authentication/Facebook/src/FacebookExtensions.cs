@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class FacebookAuthenticationOptionsExtensions
 {
     /// <summary>
-    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the
+    // default scheme.
     /// The default scheme is specified by <see cref="FacebookDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Facebook authentication allows application users to sign in with their Facebook account.
@@ -24,7 +25,8 @@ public static class FacebookAuthenticationOptionsExtensions
         builder.AddFacebook(FacebookDefaults.AuthenticationScheme, _ => { });
 
     /// <summary>
-    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the
+    // default scheme.
     /// The default scheme is specified by <see cref="FacebookDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Facebook authentication allows application users to sign in with their Facebook account.
@@ -39,7 +41,8 @@ public static class FacebookAuthenticationOptionsExtensions
     ) => builder.AddFacebook(FacebookDefaults.AuthenticationScheme, configureOptions);
 
     /// <summary>
-    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the
+    // default scheme.
     /// The default scheme is specified by <see cref="FacebookDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Facebook authentication allows application users to sign in with their Facebook account.
@@ -56,7 +59,8 @@ public static class FacebookAuthenticationOptionsExtensions
     ) => builder.AddFacebook(authenticationScheme, FacebookDefaults.DisplayName, configureOptions);
 
     /// <summary>
-    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the default scheme.
+    /// Adds Facebook OAuth-based authentication to <see cref="AuthenticationBuilder"/> using the
+    // default scheme.
     /// The default scheme is specified by <see cref="FacebookDefaults.AuthenticationScheme"/>.
     /// <para>
     /// Facebook authentication allows application users to sign in with their Facebook account.

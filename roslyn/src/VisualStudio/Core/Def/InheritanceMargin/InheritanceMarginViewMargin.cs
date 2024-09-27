@@ -38,7 +38,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         private readonly Canvas _mainCanvas;
 
         /// <summary>
-        /// A flag indicates all the glyphs in this margin needs be refreshed when the Layout of the TextView changes.
+        /// A flag indicates all the glyphs in this margin needs be refreshed when the Layout of the
+        // TextView changes.
         /// Should only be read or written to by the UI thread.
         /// </summary>
         private bool _refreshAllGlyphs;

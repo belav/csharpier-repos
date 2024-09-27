@@ -8,7 +8,8 @@ using Newtonsoft.Json;
 namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
 {
     /// <summary>
-    /// Represents a single Capabilities vertex for serialization. See https://github.com/microsoft/lsif-node/blob/main/protocol/src/protocol.ts#L973 for further details.
+    /// Represents a single Capabilities vertex for serialization. See
+    // https://github.com/microsoft/lsif-node/blob/main/protocol/src/protocol.ts#L973 for further details.
     /// </summary>
     internal sealed class Capabilities : Vertex
     {

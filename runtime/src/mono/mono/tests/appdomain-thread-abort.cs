@@ -256,8 +256,8 @@ public static class Tests
             catch (Exception)
             {
                 stateExc = true;
-                /* FIXME: if we put this after the try/catch, mono
-                   quietly quits */
+/* FIXME: if we put this after the try/catch, mono
+quietly quits */
                 Thread.ResetAbort();
             }
             if (!stateExc)

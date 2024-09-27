@@ -46,8 +46,10 @@ namespace Roslyn.Test.Utilities
         /// </summary>
         NetLatest,
 
-        // Eventually these will be deleted and replaced with NetStandard20. Short term this creates the "standard"
-        // API set across desktop and coreclr. It's also helpful because there are no null annotations hence error
+        // Eventually these will be deleted and replaced with NetStandard20. Short term this creates the
+        // "standard"
+        // API set across desktop and coreclr. It's also helpful because there are no null annotations hence
+        // error
         // messages have consistent signatures across .NET Core / Framework tests.
         Standard,
         StandardAndCSharp,
@@ -130,7 +132,8 @@ namespace Roslyn.Test.Utilities
                 .Add(NetFx.ValueTuple.tuplelib);
 
         /// <summary>
-        /// This is a limited set of references on this .NET Framework TFM. This should be avoided in new code
+        /// This is a limited set of references on this .NET Framework TFM. This should be avoided in new
+        // code
         /// as it represents the way reference hookup used to work.
         /// </summary>
         /// <remarks>
@@ -184,11 +187,14 @@ namespace Roslyn.Test.Utilities
             StandardReferences.Add(StandardVisualBasicReference);
 
         /*
-         * ⚠ Dev note ⚠: properties in TestBase are backed by Lazy<T>. Avoid changes to the following properties
-         * which would force the initialization of these properties in the static constructor, since the stack traces
-         * for a TypeLoadException are missing important information for resolving problems if/when they occur.
-         * https://github.com/dotnet/roslyn/issues/25961
-         */
+        * ⚠ Dev note ⚠: properties in TestBase are backed by Lazy<T>. Avoid changes to the following
+        properties
+        * which would force the initialization of these properties in the static constructor, since the
+        stack traces
+        * for a TypeLoadException are missing important information for resolving problems if/when they
+        occur.
+        * https://github.com/dotnet/roslyn/issues/25961
+        */
 
         public static ImmutableArray<MetadataReference> Mscorlib40References =>
             ImmutableArray.Create<MetadataReference>(Net40.mscorlib);
@@ -348,9 +354,12 @@ namespace Roslyn.Test.Utilities
             checkForDuplicateReferences();
             return references.AddRange(additionalReferences);
 
-            // Check to see if there are any duplicate references. This guards against tests inadvertently passing multiple copies of
-            // say System.Core to the tests and implicitly depending on the higher one to win. The few tests which actually mean to
-            // pass multiple versions of a DLL should manually construct the reference list and not use this helper.
+            // Check to see if there are any duplicate references. This guards against tests inadvertently
+            // passing multiple copies of
+            // say System.Core to the tests and implicitly depending on the higher one to win. The few tests
+            // which actually mean to
+            // pass multiple versions of a DLL should manually construct the reference list and not use this
+            // helper.
             void checkForDuplicateReferences()
             {
                 var nameSet = new HashSet<string>(
@@ -420,9 +429,12 @@ namespace Roslyn.Test.Utilities
                 );
 
         /// <summary>
-        /// Many of our reference assemblies are only used by a subset of compiler unit tests. Having a PackageReference
-        /// to the assemblies here would cause them to be deployed to every unit test we write though. These are non-trivial
-        /// in size (4+ MB) and we have ~50 test projects so this adds up fast. To keep size down we just add
+        /// Many of our reference assemblies are only used by a subset of compiler unit tests. Having a
+        // PackageReference
+        /// to the assemblies here would cause them to be deployed to every unit test we write though. These
+        // are non-trivial
+        /// in size (4+ MB) and we have ~50 test projects so this adds up fast. To keep size down we just
+        // add
         /// PackageReference on the few projects that and dynamically load here.
         /// </summary>
         private static ImmutableArray<PortableExecutableReference> LoadDynamicReferences(

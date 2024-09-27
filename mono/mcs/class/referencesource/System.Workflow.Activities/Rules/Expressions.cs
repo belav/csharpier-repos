@@ -1621,7 +1621,8 @@ namespace System.Workflow.Activities.Rules
                 throw exception;
             }
 
-            // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite] attributes.
+            // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite]
+            // attributes.
             RulePropertyExpressionInfo propExprInfo =
                 analysis.Validation.ExpressionInfo(propGetExpr) as RulePropertyExpressionInfo;
             if (propExprInfo == null) // Oops, someone forgot to validate.
@@ -3334,7 +3335,8 @@ namespace System.Workflow.Activities.Rules
                 throw exception;
             }
 
-            // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite] attributes.
+            // Get the property info from the validator so we can look for [RuleRead] and [RuleWrite]
+            // attributes.
             RulePropertyExpressionInfo propExprInfo =
                 analysis.Validation.ExpressionInfo(indexerExpr) as RulePropertyExpressionInfo;
             if (propExprInfo == null) // Oops, someone forgot to validate.

@@ -56,19 +56,20 @@ namespace System
         [NonSerialized]
         private readonly int _stringLength;
 
-        // For empty strings, _firstChar will be '\0', since strings are both null-terminated and length-prefixed.
+        // For empty strings, _firstChar will be '\0', since strings are both null-terminated and
+        // length-prefixed.
         // The field is also read-only, however String uses .ctors that C# doesn't recognise as .ctors,
         // so trying to mark the field as 'readonly' causes the compiler to complain.
         [NonSerialized]
         private char _firstChar;
 
         /*
-         * CONSTRUCTORS
-         *
-         * Defining a new constructor for string-like types (like String) requires changes both
-         * to the managed code below and to the native VM code. See the comment at the top of
-         * src/vm/ecall.cpp for instructions on how to add new overloads.
-         */
+        * CONSTRUCTORS
+        *
+        * Defining a new constructor for string-like types (like String) requires changes both
+        * to the managed code below and to the native VM code. See the comment at the top of
+        * src/vm/ecall.cpp for instructions on how to add new overloads.
+        */
 
         [MethodImpl(MethodImplOptions.InternalCall)]
 #if MONO
@@ -381,21 +382,26 @@ namespace System
             return result;
         }
 
-        /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
+        /// <summary>Creates a new string by using the specified provider to control the formatting of the
+        // specified interpolated string.</summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
         /// <param name="handler">The interpolated string.</param>
-        /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
+        /// <returns>The string that results for formatting the interpolated string using the specified
+        // format provider.</returns>
         public static string Create(
             IFormatProvider? provider,
             [InterpolatedStringHandlerArgument(nameof(provider))]
                 ref DefaultInterpolatedStringHandler handler
         ) => handler.ToStringAndClear();
 
-        /// <summary>Creates a new string by using the specified provider to control the formatting of the specified interpolated string.</summary>
+        /// <summary>Creates a new string by using the specified provider to control the formatting of the
+        // specified interpolated string.</summary>
         /// <param name="provider">An object that supplies culture-specific formatting information.</param>
-        /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of the formatting operation. The contents of this buffer may be overwritten.</param>
+        /// <param name="initialBuffer">The initial buffer that may be used as temporary space as part of
+        // the formatting operation. The contents of this buffer may be overwritten.</param>
         /// <param name="handler">The interpolated string.</param>
-        /// <returns>The string that results for formatting the interpolated string using the specified format provider.</returns>
+        /// <returns>The string that results for formatting the interpolated string using the specified
+        // format provider.</returns>
         public static string Create(
             IFormatProvider? provider,
             Span<char> initialBuffer,
@@ -501,7 +507,8 @@ namespace System
 
         /// <summary>Copies the contents of this string into the destination span.</summary>
         /// <param name="destination">The span into which to copy this string's contents.</param>
-        /// <exception cref="ArgumentException">The destination span is shorter than the source string.</exception>
+        /// <exception cref="ArgumentException">The destination span is shorter than the source
+        // string.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void CopyTo(Span<char> destination)
         {
@@ -517,7 +524,8 @@ namespace System
 
         /// <summary>Copies the contents of this string into the destination span.</summary>
         /// <param name="destination">The span into which to copy this string's contents.</param>
-        /// <returns>true if the data was copied; false if the destination was too short to fit the contents of the string.</returns>
+        /// <returns>true if the data was copied; false if the destination was too short to fit the contents
+        // of the string.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public bool TryCopyTo(Span<char> destination)
         {
@@ -596,7 +604,8 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a reference to the first element of the String. If the string is null, an access will throw a NullReferenceException.
+        /// Returns a reference to the first element of the String. If the string is null, an access will
+        // throw a NullReferenceException.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         [NonVersionable]
@@ -641,8 +650,10 @@ namespace System
         }
 
         // This is only intended to be used by char.ToString.
-        // It is necessary to put the code in this class instead of Char, since _firstChar is a private member.
-        // Making _firstChar internal would be dangerous since it would make it much easier to break String's immutability.
+        // It is necessary to put the code in this class instead of Char, since _firstChar is a private
+        // member.
+        // Making _firstChar internal would be dangerous since it would make it much easier to break
+        // String's immutability.
         internal static string CreateFromChar(char c)
         {
             string result = FastAllocateString(1);

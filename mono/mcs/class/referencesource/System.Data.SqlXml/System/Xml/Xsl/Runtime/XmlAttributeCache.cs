@@ -53,7 +53,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// This writer will raise this event once cached attributes have been flushed in order to signal that the cache
+        /// This writer will raise this event once cached attributes have been flushed in order to signal
+        // that the cache
         /// no longer needs to be part of the pipeline.
         /// </summary>
         public OnRemoveWriter OnRemoveWriterEvent
@@ -67,7 +68,8 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         private void SetWrappedWriter(XmlRawWriter writer)
         {
-            // If new writer might remove itself from pipeline, have it callback on this method when its ready to go
+            // If new writer might remove itself from pipeline, have it callback on this method when its ready
+            // to go
             IRemovableWriter removable = writer as IRemovableWriter;
             if (removable != null)
                 removable.OnRemoveWriterEvent = SetWrappedWriter;
@@ -149,7 +151,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// All other WriteValue methods are implemented by XmlWriter to delegate to WriteValue(object) or WriteValue(string), so
+        /// All other WriteValue methods are implemented by XmlWriter to delegate to WriteValue(object) or
+        // WriteValue(string), so
         /// only these two methods need to be implemented.
         /// </summary>
         public override void WriteValue(object value)

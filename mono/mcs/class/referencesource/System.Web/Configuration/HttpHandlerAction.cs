@@ -132,7 +132,8 @@ namespace System.Web.Configuration
             set { base[_propValidate] = value; }
         }
 
-        // Dev10 732000: In a homogenous AppDomain, it is necessary to assert FileIoPermission to load types outside
+        // Dev10 732000: In a homogenous AppDomain, it is necessary to assert FileIoPermission to load types
+        // outside
         // the AppDomain's grant set.
         [FileIOPermission(
             SecurityAction.Assert,

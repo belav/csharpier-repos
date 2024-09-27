@@ -53,8 +53,8 @@ namespace Novell.Directory.Ldap.Asn1
             TAG
         );
 
-        /* Constructors for Asn1SetOf
-        */
+/* Constructors for Asn1SetOf
+*/
 
         /// <summary> Constructs an Asn1SetOf object with no actual
         /// Asn1Objects in it. Assumes a default size of 5 elements.
@@ -92,8 +92,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1SetOf specific methods
-        */
+/* Asn1SetOf specific methods
+*/
 
         /// <summary> Return a String representation of this Asn1SetOf.</summary>
         [CLSCompliantAttribute(false)]

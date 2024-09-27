@@ -423,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please
+                    // use language version 9.0 or greater.
                     // class C { void M() { var v = new(); } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
                         .WithArguments("target-typed object creation", "9.0")
@@ -478,7 +479,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please
+                    // use language version 9.0 or greater.
                     // class C { void M() { var v = new(){}; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
                         .WithArguments("target-typed object creation", "9.0")
@@ -565,7 +567,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,30): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please
+                    // use language version 9.0 or greater.
                     // class C { void M() { var v = new(a,b){x=y}; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
                         .WithArguments("target-typed object creation", "9.0")

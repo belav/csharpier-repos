@@ -3,19 +3,20 @@
 
 // Adapted from pidigits C# .NET Core #3 program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=pidigits&lang=csharpcore&id=3
-// aka (as of 2017-09-01) rev 1.2 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/pidigits/pidigits.csharp-3.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.2 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/pidigits/pidigits.csharp-3.csharp?root=benchmarksgame&view=log
 // Best-scoring C# .NET Core version as of 2017-09-01
 // (also best-scoring single-threaded C# .NET Core version as of 2017-09-01)
 // **** Version #3 on website pinvokes to native GMP library; this has been modified to
 //      use .NET's System.Numerics.BigInteger type instead ****
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
- *
- * Port of the Java port that uses native GMP to use native GMP with C#
- * contributed by Miguel de Icaza, based on the Java version, that was:
- * 	contributed by Mike Pall
- * 	java port by Stefan Krause
+http://benchmarksgame.alioth.debian.org/
+*
+* Port of the Java port that uses native GMP to use native GMP with C#
+* contributed by Miguel de Icaza, based on the Java version, that was:
+* 	contributed by Mike Pall
+* 	java port by Stefan Krause
 */
 using System;
 using System.Numerics;
@@ -59,7 +60,7 @@ namespace BenchmarksGame
             q *= bq;
         }
 
-        /* Compose matrix with numbers on the left. */
+/* Compose matrix with numbers on the left. */
         private void compose_l(int bq, int br, int bs, int bt)
         {
             r *= bt;
@@ -74,7 +75,7 @@ namespace BenchmarksGame
             q *= bq;
         }
 
-        /* Extract one digit. */
+/* Extract one digit. */
         private int extract(int j)
         {
             u = q * j;
@@ -85,7 +86,7 @@ namespace BenchmarksGame
             return (int)w;
         }
 
-        /* Print one digit. Returns 1 for the last digit. */
+/* Print one digit. Returns 1 for the last digit. */
         private bool prdigit(int y, bool verbose)
         {
             strBuf.Append(y);
@@ -106,7 +107,7 @@ namespace BenchmarksGame
             return i == n;
         }
 
-        /* Generate successive digits of PI. */
+/* Generate successive digits of PI. */
         void Run(bool verbose)
         {
             int k = 1;

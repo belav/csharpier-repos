@@ -265,9 +265,11 @@ namespace System.Workflow.ComponentModel.Serialization
                         return null;
 
                     Activity rootActivityDefinition = null;
-                    // We always call into runtime to resolve an activity.  The runtime may return an existing cached workflow definition
+                    // We always call into runtime to resolve an activity.  The runtime may return an existing cached
+                    // workflow definition
                     // or it may return a new one if none exists.
-                    // When we have dynamic updates, we ask runtime to always return us a new instance of the workflow definition.
+                    // When we have dynamic updates, we ask runtime to always return us a new instance of the workflow
+                    // definition.
                     // This new instance should not be initialized for runtime.  We must apply workflow changes first
                     // before we initialize it for runtime.
                     bool createNewDef = (this.workflowChanges != null);
@@ -419,7 +421,8 @@ namespace System.Workflow.ComponentModel.Serialization
                         }
                     }
 
-                    //throw new SerializationException(String.Format(Environment.GetResourceString("Serialization_MissingMember"),name,objectType));
+                    //throw new
+                    // SerializationException(String.Format(Environment.GetResourceString("Serialization_MissingMember"),name,objectType));
                     this.lastPosition = 0;
                     return -1;
                 }

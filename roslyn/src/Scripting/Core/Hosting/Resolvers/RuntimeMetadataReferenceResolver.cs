@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         : MetadataReferenceResolver,
             IEquatable<RuntimeMetadataReferenceResolver>
     {
-        // Ideally we'd use properties with no aliases, but currently that's not possible since empty aliases mean {global}.
+        // Ideally we'd use properties with no aliases, but currently that's not possible since empty
+        // aliases mean {global}.
         private static readonly MetadataReferenceProperties s_resolvedMissingAssemblyReferenceProperties =
             MetadataReferenceProperties.Assembly.WithAliases(ImmutableArray.Create("<implicit>"));
 
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             PortableExecutableReference
         > _fileReferenceProvider;
 
-        // TODO: Look for .winmd, but only if the identity has content WindowsRuntime (https://github.com/dotnet/roslyn/issues/6483)
+        // TODO: Look for .winmd, but only if the identity has content WindowsRuntime
+        // (https://github.com/dotnet/roslyn/issues/6483)
         // The extensions are in order in which the CLR loader looks for assembly files.
         internal static ImmutableArray<string> AssemblyExtensions = ImmutableArray.Create(
             ".dll",

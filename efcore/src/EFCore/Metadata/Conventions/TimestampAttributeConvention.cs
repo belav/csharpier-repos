@@ -6,10 +6,12 @@ using System.ComponentModel.DataAnnotations;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the property as a concurrency token if a <see cref="TimestampAttribute" /> is applied to it.
+///     A convention that configures the property as a concurrency token if a <see
+// cref="TimestampAttribute" /> is applied to it.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class TimestampAttributeConvention : PropertyAttributeConventionBase<TimestampAttribute>
 {

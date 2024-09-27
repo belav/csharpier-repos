@@ -7,7 +7,8 @@ public class TransportConnectionFeatureCollection
 {
     public static string GenerateFile()
     {
-        // NOTE: This list MUST always match the set of feature interfaces implemented by TransportConnection.
+        // NOTE: This list MUST always match the set of feature interfaces implemented by
+        // TransportConnection.
         // See also: shared/TransportConnection.FeatureCollection.cs
 
         var allFeatures = new[]

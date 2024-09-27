@@ -20,15 +20,18 @@ public static class ViewDataEvaluator
     /// </param>
     /// <param name="expression">Expression name, relative to <c>viewData.Model</c>.</param>
     /// <returns>
-    /// <see cref="ViewDataInfo"/> for named <paramref name="expression"/> in given <paramref name="viewData"/>.
+    /// <see cref="ViewDataInfo"/> for named <paramref name="expression"/> in given <paramref
+    // name="viewData"/>.
     /// </returns>
     public static ViewDataInfo Eval(ViewDataDictionary viewData, string expression)
     {
         ArgumentNullException.ThrowIfNull(viewData);
 
         // While it is not valid to generate a field for the top-level model itself because the result is an
-        // unnamed input element, do not throw here if full name is null or empty. Support is needed for cases
-        // such as Html.Label() and Html.Value(), where the user's code is not creating a name attribute. Checks
+        // unnamed input element, do not throw here if full name is null or empty. Support is needed for
+        // cases
+        // such as Html.Label() and Html.Value(), where the user's code is not creating a name attribute.
+        // Checks
         // are in place at higher levels for the invalid cases.
         var fullName = viewData.TemplateInfo.GetFullHtmlFieldName(expression);
 
@@ -68,7 +71,8 @@ public static class ViewDataEvaluator
     /// <param name="indexableObject">
     /// The <see cref="object"/> that may contain the <paramref name="expression"/> value.
     /// </param>
-    /// <param name="expression">Expression name, relative to <paramref name="indexableObject"/>.</param>
+    /// <param name="expression">Expression name, relative to <paramref
+    // name="indexableObject"/>.</param>
     /// <returns>
     /// <see cref="ViewDataInfo"/> for named <paramref name="expression"/> in given
     /// <paramref name="indexableObject"/>.
@@ -135,7 +139,8 @@ public static class ViewDataEvaluator
     //  "one.two"
     //  "one"
     //  ""
-    // Recursion of InnerEvalComplexExpression() further sub-divides these cases to cover the full set of
+    // Recursion of InnerEvalComplexExpression() further sub-divides these cases to cover the full set
+    // of
     // combinations shown in Eval(ViewDataDictionary, string) comments.
     private static string GetNextShorterExpression(string expression)
     {

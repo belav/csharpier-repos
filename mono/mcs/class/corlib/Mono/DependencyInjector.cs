@@ -32,10 +32,10 @@ namespace Mono
 {
     static class DependencyInjector
     {
-        /*
-         * Allows us to use code from `System.dll` in `mscorlib.dll`.
-         *
-         */
+/*
+* Allows us to use code from `System.dll` in `mscorlib.dll`.
+*
+*/
         internal static ISystemDependencyProvider SystemProvider
         {
             get

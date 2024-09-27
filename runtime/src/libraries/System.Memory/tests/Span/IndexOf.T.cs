@@ -74,7 +74,8 @@ namespace System.SpanTests
 
                 // Since we asked for a non-existent value, make sure each element of the array was compared once.
                 // (Strictly speaking, it would not be illegal for IndexOf to compare an element more than once but
-                // that would be a non-optimal implementation and a red flag. So we'll stick with the stricter test.)
+                // that would be a non-optimal implementation and a red flag. So we'll stick with the stricter
+                // test.)
                 Assert.Equal(a.Length, log.Count);
                 foreach (TInt elem in a)
                 {

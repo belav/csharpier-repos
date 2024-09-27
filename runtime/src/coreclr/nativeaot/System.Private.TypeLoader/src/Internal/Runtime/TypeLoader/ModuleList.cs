@@ -173,7 +173,8 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Move the enumerator state machine to the next element in the module map.
         /// </summary>
-        /// <returns>true when [another] module is available, false when the enumeration is finished</returns>
+        /// <returns>true when [another] module is available, false when the enumeration is
+        // finished</returns>
         public bool MoveNext()
         {
             if (_iterationIndex + 1 >= _modules.Length)
@@ -311,7 +312,8 @@ namespace Internal.Runtime.TypeLoader
         /// <summary>
         /// Move the enumerator state machine to the next element in the module map.
         /// </summary>
-        /// <returns>true when [another] module is available, false when the enumeration is finished</returns>
+        /// <returns>true when [another] module is available, false when the enumeration is
+        // finished</returns>
         public bool MoveNext()
         {
             do
@@ -360,7 +362,8 @@ namespace Internal.Runtime.TypeLoader
         private ModuleMap _loadedModuleMap;
 
         /// <summary>
-        /// Module list is a process-wide singleton that physically lives in the TypeLoaderEnvironment instance.
+        /// Module list is a process-wide singleton that physically lives in the TypeLoaderEnvironment
+        // instance.
         /// </summary>
         public static ModuleList Instance { get; } = new ModuleList();
 
@@ -419,7 +422,8 @@ namespace Internal.Runtime.TypeLoader
 
         /// <summary>
         /// Locate module info for a given module. Fail if not found or before the module registry
-        /// gets initialized. Must only be called for modules described as native format (not the mrt module, or an ECMA module)
+        /// gets initialized. Must only be called for modules described as native format (not the mrt
+        // module, or an ECMA module)
         /// </summary>
         /// <param name="moduleHandle">Handle of module to look up</param>
         public NativeFormatModuleInfo GetModuleInfoByHandle(TypeManagerHandle moduleHandle)

@@ -480,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Partial types and methods may have more than one declaration.
         /// </summary>
         /// <param name="symbol">The symbol to edit.</param>
-        /// <param name="member">A symbol whose declaration is contained within one of the primary symbol's declarations.</param>
+        /// <param name="member">A symbol whose declaration is contained within one of the primary symbol's
+        // declarations.</param>
         /// <param name="editAction">The action that makes edits to the declaration.</param>
         /// <param name="cancellationToken">An optional <see cref="CancellationToken"/>.</param>
         /// <returns>The new symbol including the changes.</returns>
@@ -532,7 +533,8 @@ namespace Microsoft.CodeAnalysis.Editing
         /// Partial types and methods may have more than one declaration.
         /// </summary>
         /// <param name="symbol">The symbol to edit.</param>
-        /// <param name="member">A symbol whose declaration is contained within one of the primary symbol's declarations.</param>
+        /// <param name="member">A symbol whose declaration is contained within one of the primary symbol's
+        // declarations.</param>
         /// <param name="editAction">The action that makes edits to the declaration.</param>
         /// <param name="cancellationToken">An optional <see cref="CancellationToken"/>.</param>
         /// <returns>The new symbol including the changes.</returns>

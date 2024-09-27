@@ -75,7 +75,7 @@ namespace MonoTests.System.Web.UI.WebControls.WebParts
             Assert.AreEqual(p.ChromeType, PartChromeType.Default, "A10");
             Assert.AreEqual(p.ConnectErrorMessage, String.Empty, "A11");
             Assert.AreEqual(p.Description, String.Empty, "A12");
-            /* Direction - A13 */
+/* Direction - A13 */
             Assert.AreEqual(p.DisplayTitle, "Untitled", "A14");
             Assert.AreEqual(p.ExportMode, WebPartExportMode.None, "A15");
             Assert.AreEqual(p.HasSharedData, false, "A16");
@@ -88,8 +88,8 @@ namespace MonoTests.System.Web.UI.WebControls.WebParts
             Assert.AreEqual(p.IsClosed, false, "A23");
             Assert.AreEqual(p.IsShared, false, "A24");
             Assert.AreEqual(p.IsStandalone, true, "A25");
-            /* this next isn't really a default - it's true
-             * because the part was created programmatically */
+/* this next isn't really a default - it's true
+* because the part was created programmatically */
             Assert.AreEqual(p.IsStatic, true, "A26");
             Assert.AreEqual(p.Subtitle, String.Empty, "A27");
             Assert.AreEqual(p.Title, String.Empty, "A28");

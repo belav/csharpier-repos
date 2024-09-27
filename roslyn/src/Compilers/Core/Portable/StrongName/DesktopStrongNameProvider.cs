@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
         /// Creates an instance of <see cref="DesktopStrongNameProvider"/>.
         /// </summary>
         /// <param name="tempPath">Path to use for any temporary file generation.</param>
-        /// <param name="keyFileSearchPaths">An ordered set of fully qualified paths which are searched when locating a cryptographic key file.</param>
+        /// <param name="keyFileSearchPaths">An ordered set of fully qualified paths which are searched when
+        // locating a cryptographic key file.</param>
         public DesktopStrongNameProvider(
             ImmutableArray<string> keyFileSearchPaths = default,
             string? tempPath = null
@@ -172,7 +173,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<string> keyFileSearchPaths
         )
         {
-            // Dev11: key path is simply appended to the search paths, even if it starts with the current (parent) directory ("." or "..").
+            // Dev11: key path is simply appended to the search paths, even if it starts with the current
+            // (parent) directory ("." or "..").
             // This is different from PathUtilities.ResolveRelativePath.
 
             if (PathUtilities.IsAbsolute(path))

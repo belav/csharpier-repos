@@ -12,13 +12,13 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * TemplateContainer class. A specialized version of Panel that is
-     * also a naming container. This class must be used by all mobile controls
-     * as the container for instantiating templates.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* TemplateContainer class. A specialized version of Panel that is
+* also a naming container. This class must be used by all mobile controls
+* as the container for instantiating templates.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\TemplateContainer.uex' path='docs/doc[@for="TemplateContainer"]/*' />
     [ToolboxItem(false)]
@@ -35,14 +35,16 @@ namespace System.Web.UI.MobileControls
     )]
     public class TemplateContainer : Panel, INamingContainer
     {
-        /// <include file='doc\TemplateContainer.uex' path='docs/doc[@for="TemplateContainer.TemplateContainer"]/*' />
+        /// <include file='doc\TemplateContainer.uex'
+        // path='docs/doc[@for="TemplateContainer.TemplateContainer"]/*' />
         public TemplateContainer()
         {
             _breakAfter = false;
         }
 
         // Override this property to change the default value attribute.
-        /// <include file='doc\TemplateContainer.uex' path='docs/doc[@for="TemplateContainer.BreakAfter"]/*' />
+        /// <include file='doc\TemplateContainer.uex' path='docs/doc[@for="TemplateContainer.BreakAfter"]/*'
+        // />
         [DefaultValue(false)]
         public override bool BreakAfter
         {

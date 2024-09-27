@@ -1345,7 +1345,8 @@ namespace System.DirectoryServices.ActiveDirectory
             return domainMode;
         }
 
-        /// <returns>Returns a DomainController object for the DC that holds the specified FSMO role</returns>
+        /// <returns>Returns a DomainController object for the DC that holds the specified FSMO
+        // role</returns>
         private DomainController GetRoleOwner(ActiveDirectoryRole role)
         {
             DirectoryEntry? entry = null;
@@ -1814,7 +1815,8 @@ namespace System.DirectoryServices.ActiveDirectory
                                 );
                                 tmpForestName = Utils.GetDnsNameFromDN(rootDomainNC);
 
-                                // only if either the local domain or tmpObject is the tree root, will this trust relationship be a Root, otherwise it is cross link
+                                // only if either the local domain or tmpObject is the tree root, will this trust relationship be a
+                                // Root, otherwise it is cross link
                                 DirectoryContext tmpContext = Utils.GetNewDirectoryContext(
                                     context.Name,
                                     DirectoryContextType.Forest,
@@ -1848,7 +1850,8 @@ namespace System.DirectoryServices.ActiveDirectory
                             ) != 0
                         )
                         {
-                            // should not happen as we specify DS_DOMAIN_IN_FOREST when enumerating the trust, so forest trust will not be returned
+                            // should not happen as we specify DS_DOMAIN_IN_FOREST when enumerating the trust, so forest trust
+                            // will not be returned
                             tmpObject.TrustType = TrustType.Forest;
                         }
                         else
@@ -1890,7 +1893,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 false
             );
 
-            // last we reset the secure channel again to make sure info is replicated and trust is indeed ready now
+            // last we reset the secure channel again to make sure info is replicated and trust is indeed ready
+            // now
 
             // verify outbound trust first
             if ((direction & TrustDirection.Outbound) != 0)

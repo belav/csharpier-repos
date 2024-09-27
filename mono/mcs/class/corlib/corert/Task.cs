@@ -8,16 +8,21 @@ using System.Security.Permissions;
 
 namespace System.Threading.Tasks
 {
-    // these members were copied from https://github.com/mono/mono/blob/7b4dfeebc40cf8c027819b8b7bd85a4e7c87ad50/mcs/class/referencesource/mscorlib/system/threading/Tasks/Task.cs#L220-L246
+    // these members were copied from
+    //
+    // https://github.com/mono/mono/blob/7b4dfeebc40cf8c027819b8b7bd85a4e7c87ad50/mcs/class/referencesource/mscorlib/system/threading/Tasks/Task.cs#L220-L246
     partial class Task
     {
-        // This dictonary relates the task id, from an operation id located in the Async Causality log to the actual
-        // task. This is to be used by the debugger ONLY. Task in this dictionary represent current active tasks.
+        // This dictonary relates the task id, from an operation id located in the Async Causality log to
+        // the actual
+        // task. This is to be used by the debugger ONLY. Task in this dictionary represent current active
+        // tasks.
         private static readonly Dictionary<int, Task> s_currentActiveTasks =
             new Dictionary<int, Task>();
         private static readonly Object s_activeTasksLock = new Object();
 
-        // These methods are a way to access the dictionary both from this class and for other classes that also
+        // These methods are a way to access the dictionary both from this class and for other classes that
+        // also
         // activate dummy tasks. Specifically the AsyncTaskMethodBuilder and AsyncTaskMethodBuilder<>
         [FriendAccessAllowed]
         internal static bool AddToActiveTasks(Task task)

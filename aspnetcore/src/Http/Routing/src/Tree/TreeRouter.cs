@@ -45,7 +45,8 @@ internal partial class TreeRouter
     /// <summary>
     /// Creates a new instance of <see cref="TreeRouter"/>.
     /// </summary>
-    /// <param name="trees">The list of <see cref="UrlMatchingTree"/> that contains the route entries.</param>
+    /// <param name="trees">The list of <see cref="UrlMatchingTree"/> that contains the route
+    // entries.</param>
     /// <param name="linkGenerationEntries">The set of <see cref="OutboundRouteEntry"/>.</param>
     /// <param name="urlEncoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="objectPool">The <see cref="ObjectPool{T}"/>.</param>

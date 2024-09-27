@@ -16,7 +16,8 @@ namespace System.Web.UI.Design.MobileControls
 
     /// <summary>
     ///    <para>
-    ///       Provides a component editor for a StyleSheet <see cref='System.Web.UI.MobileControls.StyleSheet'/>
+    ///       Provides a component editor for a StyleSheet <see
+    // cref='System.Web.UI.MobileControls.StyleSheet'/>
     ///       control.
     ///    </para>
     /// </summary>

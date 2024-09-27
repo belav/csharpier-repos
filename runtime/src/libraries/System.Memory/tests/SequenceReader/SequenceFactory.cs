@@ -76,7 +76,8 @@ namespace System.Memory.Tests.SequenceReader
                     chars[dataOffset + j] = source[j];
                 }
 
-                // Create a segment that has offset relative to the OwnedMemory and OwnedMemory itself has offset relative to array
+                // Create a segment that has offset relative to the OwnedMemory and OwnedMemory itself has offset
+                // relative to array
                 OwnedArray<T> ownedBuffer = new OwnedArray<T>(chars);
                 SequenceSegment<T> current = new SequenceSegment<T>();
                 current.SetMemory(ownedBuffer, length, length * 2);

@@ -28,21 +28,31 @@ namespace System.Security.Policy
 #endif // FEATURE_SERIALIZATION
 
     /// <summary>
-    ///     The Evidence class keeps track of information that can be used to make security decisions about
-    ///     an assembly or an AppDomain.  There are two types of evidence, one is supplied by the CLR or a
+    ///     The Evidence class keeps track of information that can be used to make security decisions
+    // about
+    ///     an assembly or an AppDomain.  There are two types of evidence, one is supplied by the CLR or
+    // a
     ///     host, the other supplied by the assembly itself.
     ///
-    ///     We keep a dictionary that maps each type of possbile evidence to an EvidenceTypeDescriptor which
-    ///     contains the evidence objects themselves if they exist as well as some extra metadata about that
-    ///     type of evidence.  This dictionary is fully populated with keys for host evidence at all times and
-    ///     for assembly evidence the first time the application evidence is touched.  This means that if a
-    ///     Type key does not exist in the dictionary, then that particular type of evidence will never be
-    ///     given to the assembly or AppDomain in question as host evidence.  The only exception is if the
+    ///     We keep a dictionary that maps each type of possbile evidence to an EvidenceTypeDescriptor
+    // which
+    ///     contains the evidence objects themselves if they exist as well as some extra metadata about
+    // that
+    ///     type of evidence.  This dictionary is fully populated with keys for host evidence at all
+    // times and
+    ///     for assembly evidence the first time the application evidence is touched.  This means that
+    // if a
+    ///     Type key does not exist in the dictionary, then that particular type of evidence will never
+    // be
+    ///     given to the assembly or AppDomain in question as host evidence.  The only exception is if
+    // the
     ///     user later manually adds host evidence via the AddHostEvidence API.
     ///
     ///     Assembly supplied evidence is created up front, however host supplied evidence may be lazily
-    ///     created.  In the lazy creation case, the Type will map to either an EvidenceTypeDescriptor that does
-    ///     not contain any evidence data or null.  As requests come in for that evidence, we'll populate the
+    ///     created.  In the lazy creation case, the Type will map to either an EvidenceTypeDescriptor
+    // that does
+    ///     not contain any evidence data or null.  As requests come in for that evidence, we'll
+    // populate the
     ///     EvidenceTypeDescriptor appropriately.
     /// </summary>
     [Serializable]
@@ -300,7 +310,8 @@ namespace System.Security.Policy
         //
         // Evidence synchronization locking wrappers. In the case where the lock has not yet been created,
         // we know that we're in the process of constructing the evidence collection and therefore we can
-        // act as though the evidence is locked.  If there is a lock in place, then just delegate back to it.
+        // act as though the evidence is locked.  If there is a lock in place, then just delegate back to
+        // it.
         //
         // The nested EvidenceLockHolder and EvidenceUpgradeLockHolder utility classes can be used to wrap
         // these methods when acquiring and releasing the evidence lock.
@@ -423,7 +434,8 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Add a piece of evidence to the assembly supplied evidence list. This method will disallow adding
+        ///     Add a piece of evidence to the assembly supplied evidence list. This method will disallow
+        // adding
         ///     evidence if there is already evidence of that type in the assembly list.
         /// </summary>
         [ComVisible(false)]
@@ -651,11 +663,14 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Set or check to see if the evidence is locked.  Locked evidence cannot have its host supplied
-        ///     evidence list be modified without a successful demand for ControlEvidence.  Any code can lock
+        ///     Set or check to see if the evidence is locked.  Locked evidence cannot have its host
+        // supplied
+        ///     evidence list be modified without a successful demand for ControlEvidence.  Any code can
+        // lock
         ///     evidence, but only code with ControlEvidence may unlock it.
         ///
-        ///     This lock is not the same as the synchronization lock that gates access to the evidence collection.
+        ///     This lock is not the same as the synchronization lock that gates access to the evidence
+        // collection.
         /// </summary>
         public bool Locked
         {
@@ -801,8 +816,10 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     This method is called if a piece of evidence is added but another piece of evidence of the same
-        ///     type already existed.  We have different strategies depending on compatibility concerns of the
+        ///     This method is called if a piece of evidence is added but another piece of evidence of the
+        // same
+        ///     type already existed.  We have different strategies depending on compatibility concerns of
+        // the
         ///     calling code.
         /// </summary>
         private static EvidenceBase HandleDuplicateEvidence(
@@ -853,7 +870,8 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Wrap evidence we recieved through a legacy API to ensure that it is stored in an EvidenceBase
+        ///     Wrap evidence we recieved through a legacy API to ensure that it is stored in an
+        // EvidenceBase
         /// </summary>
         private static EvidenceBase WrapLegacyEvidence(object evidence)
         {
@@ -1470,7 +1488,8 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Attempt to generate host evidence on demand via calls to the runtime host or the evidence facotry
+        ///     Attempt to generate host evidence on demand via calls to the runtime host or the evidence
+        // facotry
         /// </summary>
         [SecurityCritical]
         private EvidenceBase GenerateHostEvidence(Type type, bool hostCanGenerate)
@@ -1714,7 +1733,8 @@ namespace System.Security.Policy
         ///     if it was used during policy evaluation.
         ///
         ///     This method is called from the VM in SecurityPolicy::WasStrongNameEvidenceUsed
-        ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator to
+        ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator
+        // to
         ///     be able to get the evidence values out of an Evidence class.  It is tightly coupled with the
         ///     internal data structures holding the evidence objects in the Evidence class.
         /// </summary>
@@ -1814,11 +1834,14 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Enumerator that iterates directly over the evidence type map, returning back the evidence objects
-        ///     that are contained in it.  This enumerator will generate any lazy evaluated evidence it finds,
+        ///     Enumerator that iterates directly over the evidence type map, returning back the evidence
+        // objects
+        ///     that are contained in it.  This enumerator will generate any lazy evaluated evidence it
+        // finds,
         ///     but it does not attempt to deal with legacy evidence adapters.
         ///
-        ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator to
+        ///     This class should be used as an adapter layer to allow the public facing EvidenceEnumerator
+        // to
         ///     be able to get the evidence values out of an Evidence class.  It is tightly coupled with the
         ///     internal data structures holding the evidence objects in the Evidence class.
         /// </summary>

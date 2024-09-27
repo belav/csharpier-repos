@@ -11,8 +11,10 @@ using Microsoft.CodeAnalysis.Workspaces;
 namespace Microsoft.CodeAnalysis.Classification
 {
     /// <summary>
-    /// This is the tagger we use for view classification scenarios.  It is used for classifying code in the editor.  We
-    /// use a view tagger so that we can only classify what's in view, and not the whole file.  Intentionally not
+    /// This is the tagger we use for view classification scenarios.  It is used for classifying code in
+    // the editor.  We
+    /// use a view tagger so that we can only classify what's in view, and not the whole file.
+    // Intentionally not
     /// exported.  It is consumed by the <see cref="TotalClassificationTaggerProvider"/> instead.
     /// </summary>
     internal partial class SemanticClassificationViewTaggerProvider(

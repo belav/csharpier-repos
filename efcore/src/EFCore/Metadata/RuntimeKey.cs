@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a primary or alternate key on an entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
 {
@@ -20,10 +21,14 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     private object? _principalKeyValueFactory;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public RuntimeKey(IReadOnlyList<RuntimeProperty> properties)
@@ -37,8 +42,10 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     public virtual IReadOnlyList<RuntimeProperty> Properties { get; }
 
     /// <summary>
-    ///     Gets the entity type the key is defined on. This may be different from the type that <see cref="IKey.Properties" />
-    ///     are defined on when the key is defined a derived type in an inheritance hierarchy (since the properties
+    ///     Gets the entity type the key is defined on. This may be different from the type that <see
+    // cref="IKey.Properties" />
+    ///     are defined on when the key is defined a derived type in an inheritance hierarchy (since the
+    // properties
     ///     may be defined on a base type).
     /// </summary>
     public virtual RuntimeEntityType DeclaringEntityType
@@ -48,19 +55,27 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual ISet<RuntimeForeignKey>? ReferencingForeignKeys { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual void SetPrincipalKeyValueFactory<TKey>(
@@ -68,10 +83,14 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
     ) => _principalKeyValueFactory = factory;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual void SetIdentityMapFactory(Func<bool, IIdentityMap> factory) =>
@@ -85,10 +104,14 @@ public class RuntimeKey : RuntimeAnnotatableBase, IRuntimeKey
         ((IReadOnlyKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual DebugView DebugView =>

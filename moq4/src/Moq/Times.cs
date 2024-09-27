@@ -13,63 +13,63 @@ namespace Moq
     ///   Defines the number of invocations allowed by a mocked method.
     /// </summary>
     public readonly struct Times : IEquatable<Times>
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private readonly int from;
-            private readonly int to;
-            private readonly Kind kind;
-    After:
-            readonly int from;
-            readonly int to;
-            readonly Kind kind;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private readonly int from;
+private readonly int to;
+private readonly Kind kind;
+After:
+readonly int from;
+readonly int to;
+readonly Kind kind;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private readonly int from;
-            private readonly int to;
-            private readonly Kind kind;
-    After:
-            readonly int from;
-            readonly int to;
-            readonly Kind kind;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private readonly int from;
+private readonly int to;
+private readonly Kind kind;
+After:
+readonly int from;
+readonly int to;
+readonly Kind kind;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private readonly int from;
-            private readonly int to;
-            private readonly Kind kind;
-    After:
-            readonly int from;
-            readonly int to;
-            readonly Kind kind;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private readonly int from;
+private readonly int to;
+private readonly Kind kind;
+After:
+readonly int from;
+readonly int to;
+readonly Kind kind;
+*/
     {
         readonly int from;
         readonly int to;
         readonly Kind kind;
 
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                private Times(Kind kind, int from, int to)
-        After:
-                Times(Kind kind, int from, int to)
-        */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private Times(Kind kind, int from, int to)
+After:
+Times(Kind kind, int from, int to)
+*/
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                private Times(Kind kind, int from, int to)
-        After:
-                Times(Kind kind, int from, int to)
-        */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private Times(Kind kind, int from, int to)
+After:
+Times(Kind kind, int from, int to)
+*/
 
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                private Times(Kind kind, int from, int to)
-        After:
-                Times(Kind kind, int from, int to)
-        */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private Times(Kind kind, int from, int to)
+After:
+Times(Kind kind, int from, int to)
+*/
         Times(Kind kind, int from, int to)
         {
             this.from = from;
@@ -78,8 +78,10 @@ namespace Moq
         }
 
         /// <summary>Deconstructs this instance.</summary>
-        /// <param name="from">This output parameter will receive the minimum required number of calls satisfying this instance (i.e. the lower inclusive bound).</param>
-        /// <param name="to">This output parameter will receive the maximum allowed number of calls satisfying this instance (i.e. the upper inclusive bound).</param>
+        /// <param name="from">This output parameter will receive the minimum required number of calls
+        // satisfying this instance (i.e. the lower inclusive bound).</param>
+        /// <param name="to">This output parameter will receive the maximum allowed number of calls
+        // satisfying this instance (i.e. the upper inclusive bound).</param>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public void Deconstruct(out int from, out int to)
         {
@@ -221,7 +223,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
+        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/>
+        // value.
         /// </summary>
         /// <param name="other">A <see cref="Times"/> value to compare to this instance.</param>
         /// <returns>
@@ -236,7 +239,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/> value.
+        ///   Returns a value indicating whether this instance is equal to a specified <see cref="Times"/>
+        // value.
         /// </summary>
         /// <param name="obj">An object to compare to this instance.</param>
         /// <returns>
@@ -267,7 +271,8 @@ namespace Moq
         /// <param name="left">The first <see cref="Times"/>.</param>
         /// <param name="right">The second <see cref="Times"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="left"/> has the same value as <paramref name="right"/>;
+        ///   <see langword="true"/> if <paramref name="left"/> has the same value as <paramref
+        // name="right"/>;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         public static bool operator ==(Times left, Times right)
@@ -301,26 +306,26 @@ namespace Moq
                 Kind.BetweenExclusive => $"Between({this.from - 1}, {this.to + 1}, Exclusive)",
                 Kind.BetweenInclusive => $"Between({this.from}, {this.to}, Inclusive)",
 
-                /* Unmerged change from project 'Moq(netstandard2.0)'
-                Before:
-                        private enum Kind
-                After:
-                        enum Kind
-                */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private enum Kind
+After:
+enum Kind
+*/
 
-                /* Unmerged change from project 'Moq(netstandard2.1)'
-                Before:
-                        private enum Kind
-                After:
-                        enum Kind
-                */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private enum Kind
+After:
+enum Kind
+*/
 
-                /* Unmerged change from project 'Moq(net6.0)'
-                Before:
-                        private enum Kind
-                After:
-                        enum Kind
-                */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private enum Kind
+After:
+enum Kind
+*/
                 Kind.Exactly => $"Exactly({this.from})",
                 Kind.Once => "Once",
                 Kind.Never => "Never",
@@ -356,11 +361,13 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Checks whether the specified number of invocations matches the constraint described by this instance.
+        ///   Checks whether the specified number of invocations matches the constraint described by this
+        // instance.
         /// </summary>
         /// <param name="count">The number of invocations to check.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="count"/> matches the constraint described by this instance;
+        ///   <see langword="true"/> if <paramref name="count"/> matches the constraint described by this
+        // instance;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         public bool Validate(int count)

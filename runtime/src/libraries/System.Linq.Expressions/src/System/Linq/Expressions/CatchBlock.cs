@@ -8,7 +8,8 @@ namespace System.Linq.Expressions
 {
     /// <summary>
     /// Represents a catch statement in a try block.
-    /// This must have the same return type (i.e., the type of <see cref="Body"/>) as the try block it is associated with.
+    /// This must have the same return type (i.e., the type of <see cref="Body"/>) as the try block it
+    // is associated with.
     /// </summary>
     [DebuggerTypeProxy(typeof(Expression.CatchBlockProxy))]
     public sealed class CatchBlock
@@ -63,7 +64,8 @@ namespace System.Linq.Expressions
         /// <param name="variable">The <see cref="Variable"/> property of the result.</param>
         /// <param name="filter">The <see cref="Filter"/> property of the result.</param>
         /// <param name="body">The <see cref="Body"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public CatchBlock Update(ParameterExpression? variable, Expression? filter, Expression body)
         {
             if (variable == Variable && filter == Filter && body == Body)
@@ -81,7 +83,8 @@ namespace System.Linq.Expressions
         /// The <see cref="Type"/> of object to be caught can be specified but no reference to the object
         /// will be available for use in the <see cref="CatchBlock"/>.
         /// </summary>
-        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see cref="CatchBlock"/> will handle.</param>
+        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see
+        // cref="CatchBlock"/> will handle.</param>
         /// <param name="body">The body of the catch statement.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
         public static CatchBlock Catch(Type type, Expression body)
@@ -90,9 +93,11 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="CatchBlock"/> representing a catch statement with a reference to the caught object for use in the handler body.
+        /// Creates a <see cref="CatchBlock"/> representing a catch statement with a reference to the caught
+        // object for use in the handler body.
         /// </summary>
-        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see cref="Exception"/> object caught by this handler.</param>
+        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see
+        // cref="Exception"/> object caught by this handler.</param>
         /// <param name="body">The body of the catch statement.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
         public static CatchBlock Catch(ParameterExpression variable, Expression body)
@@ -105,7 +110,8 @@ namespace System.Linq.Expressions
         /// Creates a <see cref="CatchBlock"/> representing a catch statement with
         /// an <see cref="Exception"/> filter but no reference to the caught <see cref="Exception"/> object.
         /// </summary>
-        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see cref="CatchBlock"/> will handle.</param>
+        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see
+        // cref="CatchBlock"/> will handle.</param>
         /// <param name="body">The body of the catch statement.</param>
         /// <param name="filter">The body of the <see cref="Exception"/> filter.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
@@ -118,7 +124,8 @@ namespace System.Linq.Expressions
         /// Creates a <see cref="CatchBlock"/> representing a catch statement with
         /// an <see cref="Exception"/> filter and a reference to the caught <see cref="Exception"/> object.
         /// </summary>
-        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see cref="Exception"/> object caught by this handler.</param>
+        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see
+        // cref="Exception"/> object caught by this handler.</param>
         /// <param name="body">The body of the catch statement.</param>
         /// <param name="filter">The body of the <see cref="Exception"/> filter.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
@@ -135,12 +142,15 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="CatchBlock"/> representing a catch statement with the specified elements.
         /// </summary>
-        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see cref="CatchBlock"/> will handle.</param>
-        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see cref="Exception"/> object caught by this handler.</param>
+        /// <param name="type">The <see cref="Type"/> of <see cref="Exception"/> this <see
+        // cref="CatchBlock"/> will handle.</param>
+        /// <param name="variable">A <see cref="ParameterExpression"/> representing a reference to the <see
+        // cref="Exception"/> object caught by this handler.</param>
         /// <param name="body">The body of the catch statement.</param>
         /// <param name="filter">The body of the <see cref="Exception"/> filter.</param>
         /// <returns>The created <see cref="CatchBlock"/>.</returns>
-        /// <remarks><paramref name="type"/> must be non-null and match the type of <paramref name="variable"/> (if it is supplied).</remarks>
+        /// <remarks><paramref name="type"/> must be non-null and match the type of <paramref
+        // name="variable"/> (if it is supplied).</remarks>
         public static CatchBlock MakeCatchBlock(
             Type type,
             ParameterExpression? variable,

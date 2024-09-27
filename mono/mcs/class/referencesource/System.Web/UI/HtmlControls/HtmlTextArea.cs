@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlTextArea.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlTextArea.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -32,19 +32,20 @@ namespace System.Web.UI.HtmlControls
     {
         private static readonly object EventServerChange = new object();
 
-        /*
-         *  Creates an intrinsic Html TEXTAREA control.
-         */
+/*
+*  Creates an intrinsic Html TEXTAREA control.
+*/
 
         /// <devdoc>
-        ///    Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlTextArea'/> class.
+        ///    Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlTextArea'/>
+        // class.
         /// </devdoc>
         public HtmlTextArea()
             : base("textarea") { }
 
-        /*
-         * The property for the number of columns to display.
-         */
+/*
+* The property for the number of columns to display.
+*/
 
         /// <devdoc>
         ///    <para> Indicates the display width (in characters) of the
@@ -65,9 +66,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["cols"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * Name property.
-         */
+/*
+* Name property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -108,9 +109,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * The property for the number of rows to display.
-         */
+/*
+* The property for the number of rows to display.
+*/
 
         /// <devdoc>
         ///    <para>Gets or sets the display height (in rows) of the text area.</para>
@@ -145,7 +146,8 @@ namespace System.Web.UI.HtmlControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when the content of the <see langword='HtmlTextArea'/> control is changed upon server
+        /// <para>Occurs when the content of the <see langword='HtmlTextArea'/> control is changed upon
+        // server
         ///    postback.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.HtmlTextArea_OnServerChange)]
@@ -222,10 +224,10 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method of IPostBackDataHandler interface to process posted data.
-         * TextArea process a newly posted value.
-         */
+/*
+* Method of IPostBackDataHandler interface to process posted data.
+* TextArea process a newly posted value.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -254,10 +256,10 @@ namespace System.Web.UI.HtmlControls
             return false;
         }
 
-        /*
-         * Method of IPostBackDataHandler interface which is invoked whenever posted data
-         * for a control has changed.  TextArea fires an OnServerChange event.
-         */
+/*
+* Method of IPostBackDataHandler interface which is invoked whenever posted data
+* for a control has changed.  TextArea fires an OnServerChange event.
+*/
 
         /// <internalonly/>
         /// <devdoc>

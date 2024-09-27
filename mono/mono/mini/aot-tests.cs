@@ -9,8 +9,8 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 /*
- * Regression tests for the AOT/FULL-AOT code.
- */
+* Regression tests for the AOT/FULL-AOT code.
+*/
 
 #if __MOBILE__
 class AotTests
@@ -284,7 +284,8 @@ class Tests
         // Call Foo2.Get_T directly, so its gets an instance
         Foo2<Struct1>.Get_T(arg1, s);
         Type t = typeof(Foo3<>).MakeGenericType(new Type[] { typeof(Struct1) });
-        // Call Foo3.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt instance
+        // Call Foo3.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt
+        // instance
         var s_res = (Struct1)t.GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (s_res.a != 1.0f || s_res.b != 2.0f)
             return 1;
@@ -304,7 +305,8 @@ class Tests
         // Call Foo2.Get_T directly, so its gets an instance
         Foo2<Struct2>.Get_T(arg1, s);
         Type t = typeof(Foo3<>).MakeGenericType(new Type[] { typeof(Struct2) });
-        // Call Foo3.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt instance
+        // Call Foo3.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt
+        // instance
         var s_res = (Struct2)t.GetMethod("Get_T").Invoke(null, new object[] { arg1, s });
         if (s_res.a != 1.0f || s_res.b != 2.0f)
             return 1;
@@ -355,7 +357,8 @@ class Tests
                 Activator.CreateInstance(
                     typeof(Foo4<>).MakeGenericType(new Type[] { typeof(VTypeByRefStruct) })
                 );
-        // Call Foo4.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt instance
+        // Call Foo4.Get_T, this will call the gsharedvt instance, which will call the non-gsharedvt
+        // instance
         var s_res = o.Get_T(1.0f, s);
         if (s_res.o1 != 1 || s_res.o2 != 2 || s_res.o3 != 3)
             return 1;

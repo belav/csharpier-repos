@@ -19,7 +19,8 @@ public class PasswordValidator<TUser> : IPasswordValidator<TUser>
     /// <summary>
     /// Constructions a new instance of <see cref="PasswordValidator{TUser}"/>.
     /// </summary>
-    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> to retrieve error text from.</param>
+    /// <param name="errors">The <see cref="IdentityErrorDescriber"/> to retrieve error text
+    // from.</param>
     public PasswordValidator(IdentityErrorDescriber? errors = null)
     {
         Describer = errors ?? new IdentityErrorDescriber();
@@ -34,7 +35,8 @@ public class PasswordValidator<TUser> : IPasswordValidator<TUser>
     /// <summary>
     /// Validates a password as an asynchronous operation.
     /// </summary>
-    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref name="user"/> properties from.</param>
+    /// <param name="manager">The <see cref="UserManager{TUser}"/> to retrieve the <paramref
+    // name="user"/> properties from.</param>
     /// <param name="user">The user whose password should be validated.</param>
     /// <param name="password">The password supplied for validation</param>
     /// <returns>The task object representing the asynchronous operation.</returns>

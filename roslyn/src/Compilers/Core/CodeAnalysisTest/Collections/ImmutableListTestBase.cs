@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://raw.githubusercontent.com/dotnet/runtime/v6.0.0-preview.5.21301.5/src/libraries/System.Collections.Immutable/tests/ImmutableListTestBase.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -676,7 +678,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         }
 
         /// <summary>
-        /// Asserts that the <see cref="ImmutableSegmentedList{T}"/> or <see cref="ImmutableSegmentedList{T}.Builder"/>'s
+        /// Asserts that the <see cref="ImmutableSegmentedList{T}"/> or <see
+        // cref="ImmutableSegmentedList{T}.Builder"/>'s
         /// implementation of <see cref="IList"/> behave the same way <see cref="List{T}"/> does.
         /// </summary>
         /// <typeparam name="T">The type of the element for one collection to test with.</typeparam>
@@ -688,7 +691,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         /// of the operation across <see cref="IList"/> implementations.
         /// </param>
         /// <param name="item">The item to add to the collection.</param>
-        /// <param name="other">The item to pass to the <paramref name="operation"/> function as the second parameter.</param>
+        /// <param name="other">The item to pass to the <paramref name="operation"/> function as the second
+        // parameter.</param>
         protected void AssertIListBaseline<T>(
             Func<IList, object?, object> operation,
             T item,

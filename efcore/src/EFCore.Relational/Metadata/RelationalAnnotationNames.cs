@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     directly, but should instead use the extension methods on metadata objects.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public static class RelationalAnnotationNames
 {
@@ -150,7 +151,8 @@ public static class RelationalAnnotationNames
     public const string MaxIdentifierLength = Prefix + "MaxIdentifierLength";
 
     /// <summary>
-    ///     The name for the annotation containing a flag indicating whether the property is constrained to fixed length values.
+    ///     The name for the annotation containing a flag indicating whether the property is constrained
+    // to fixed length values.
     /// </summary>
     public const string IsFixedLength = Prefix + "IsFixedLength";
 

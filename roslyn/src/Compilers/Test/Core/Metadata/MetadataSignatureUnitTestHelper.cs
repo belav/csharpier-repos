@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// Uses Reflection to verify that the specified member signatures are present in emitted metadata
         /// </summary>
         /// <param name="appDomainHost">Unit test AppDomain host</param>
-        /// <param name="expectedSignatures">Baseline signatures - use the Signature() factory method to create instances of SignatureDescription</param>
+        /// <param name="expectedSignatures">Baseline signatures - use the Signature() factory method to
+        // create instances of SignatureDescription</param>
         internal static void VerifyMemberSignatures(
             IRuntimeEnvironment appDomainHost,
             params SignatureDescription[] expectedSignatures
@@ -70,12 +71,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="memberName">
         /// Name of member on specified type whose signature needs to be verified
         /// Names must be in format recognized by reflection
-        /// e.g. For explicitly implemented member - I1&lt;string&gt;.Method => I1&lt;System.String&gt;.Method
+        /// e.g. For explicitly implemented member - I1&lt;string&gt;.Method =>
+        // I1&lt;System.String&gt;.Method
         /// </param>
         /// <param name="expectedSignature">
         /// Baseline string for signature of specified member
-        /// Skip this argument to get an error message that shows all available signatures for specified member
-        /// This argument is passed by reference and it will be updated with a formatted form of the baseline signature for error reporting purposes
+        /// Skip this argument to get an error message that shows all available signatures for specified
+        // member
+        /// This argument is passed by reference and it will be updated with a formatted form of the
+        // baseline signature for error reporting purposes
         /// </param>
         /// <param name="actualSignatures">List of found signatures matching member name</param>
         /// <returns>True if a matching member signature was found, false otherwise</returns>

@@ -408,8 +408,10 @@ namespace System.Data.OleDb
             DbTransaction transaction = InnerConnection.BeginTransaction(isolationLevel);
 
             // InnerConnection doesn't maintain a ref on the outer connection (this) and
-            //   subsequently leaves open the possibility that the outer connection could be GC'ed before the DbTransaction
-            //   is fully hooked up (leaving a DbTransaction with a null connection property). Ensure that this is reachable
+            //   subsequently leaves open the possibility that the outer connection could be GC'ed before the
+            // DbTransaction
+            //   is fully hooked up (leaving a DbTransaction with a null connection property). Ensure that this
+            // is reachable
             //   until the completion of BeginTransaction with KeepAlive
             GC.KeepAlive(this);
 

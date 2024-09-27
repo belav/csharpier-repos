@@ -45,7 +45,7 @@ namespace MonoTests.System.Web.UI.WebControls
             {
                 Controls.Clear();
 
-                /* create 1 child control */
+/* create 1 child control */
                 Label label = new Label();
 
                 Controls.Add(label);

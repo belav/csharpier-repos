@@ -7,8 +7,10 @@ using StructLayoutAttribute = System.Runtime.InteropServices.StructLayoutAttribu
 
 namespace System.Reflection.TypeLoading
 {
-    // A convenience base class for implementing special-purpose RoTypes such as sentinels. It exists primarily to reduce the number
-    // of files that have to be edited whenever RoType adds or removes an abstract method rather than to imply any meaningful commonality.
+    // A convenience base class for implementing special-purpose RoTypes such as sentinels. It exists
+    // primarily to reduce the number
+    // of files that have to be edited whenever RoType adds or removes an abstract method rather than to
+    // imply any meaningful commonality.
     internal abstract class RoStubType : RoType
     {
         protected RoStubType()

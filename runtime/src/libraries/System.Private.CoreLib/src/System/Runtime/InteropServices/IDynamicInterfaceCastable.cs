@@ -7,7 +7,8 @@ namespace System.Runtime.InteropServices
     /// Interface used to participate in a type cast failure.
     /// </summary>
     /// <remarks>
-    /// Implementation of this interface on a value type will be ignored. Only non-value types are allowed
+    /// Implementation of this interface on a value type will be ignored. Only non-value types are
+    // allowed
     /// to participate in a type cast failure through this interface.
     /// </remarks>
     public interface IDynamicInterfaceCastable
@@ -17,7 +18,8 @@ namespace System.Runtime.InteropServices
         /// is not contained in the class's metadata.
         /// </summary>
         /// <param name="interfaceType">The interface type.</param>
-        /// <param name="throwIfNotImplemented">Indicates if the function should throw an exception instead of returning false.</param>
+        /// <param name="throwIfNotImplemented">Indicates if the function should throw an exception instead
+        // of returning false.</param>
         /// <returns>Whether or not this object can be cast to the given interface</returns>
         /// <remarks>
         /// This is called if casting this object to the given interface type would
@@ -36,7 +38,8 @@ namespace System.Runtime.InteropServices
         /// in the class's metadata.
         /// </summary>
         /// <param name="interfaceType">The interface type.</param>
-        /// <returns>The type that should be used to dispatch for <paramref name="interfaceType"/> on the current object.</returns>
+        /// <returns>The type that should be used to dispatch for <paramref name="interfaceType"/> on the
+        // current object.</returns>
         /// <remarks>
         /// When this function is called, the cast of this object to the given interface
         /// should already have been verified through the castclass/isinst instructions.
@@ -49,7 +52,8 @@ namespace System.Runtime.InteropServices
     }
 
     /// <summary>
-    /// Attribute required by any type that is returned by <see cref="IDynamicInterfaceCastable.GetInterfaceImplementation(RuntimeTypeHandle)"/>.
+    /// Attribute required by any type that is returned by <see
+    // cref="IDynamicInterfaceCastable.GetInterfaceImplementation(RuntimeTypeHandle)"/>.
     /// </summary>
     /// <remarks>
     /// This attribute is used to enforce policy in the runtime and make

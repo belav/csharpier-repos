@@ -125,7 +125,8 @@ namespace System.Net.Http.Functional.Tests
             // RFC 2046 Section 5.1.1
             // boundary := 0*69<bchars> bcharsnospace
             // bchars := bcharsnospace / " "
-            // bcharsnospace := DIGIT / ALPHA / "'" / "(" / ")" / "+" / "_" / "," / "-" / "." / "/" / ":" / "=" / "?"
+            // bcharsnospace := DIGIT / ALPHA / "'" / "(" / ")" / "+" / "_" / "," / "-" / "." / "/" / ":" / "="
+            // / "?"
             new MultipartContent("some", "09");
             new MultipartContent("some", "az");
             new MultipartContent("some", "AZ");

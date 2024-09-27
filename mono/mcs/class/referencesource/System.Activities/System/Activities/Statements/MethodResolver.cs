@@ -14,8 +14,10 @@ namespace System.Activities.Statements
     using System.Threading;
 
     // Helper class for InvokeMethod.
-    // Factory for MethodExecutor strategies. Conceptually, resolves to the correct MethodInfo based on target type,
-    // method name, parameters, and async flags + availability of Begin/End paired methods of the correct static-ness.
+    // Factory for MethodExecutor strategies. Conceptually, resolves to the correct MethodInfo based on
+    // target type,
+    // method name, parameters, and async flags + availability of Begin/End paired methods of the
+    // correct static-ness.
     sealed class MethodResolver
     {
         static readonly BindingFlags staticBindingFlags =
@@ -64,7 +66,8 @@ namespace System.Activities.Statements
             }
         }
 
-        // The Arguments added by the activity are named according to the method resolved by the MethodResolver.
+        // The Arguments added by the activity are named according to the method resolved by the
+        // MethodResolver.
         public void RegisterParameters(IList<RuntimeArgument> arguments)
         {
             bool useAsyncPattern =
@@ -139,7 +142,8 @@ namespace System.Activities.Statements
 
                 if (!useAsyncPattern && haveParameterArray)
                 {
-                    // RuntimeArgument bindings need names. In the case of params arrays, synthesize names based on the name of the formal params parameter
+                    // RuntimeArgument bindings need names. In the case of params arrays, synthesize names based on the
+                    // name of the formal params parameter
                     // plus a counter.
                     int paramArrayCount = Parameters.Count - formalParamCount;
 
@@ -238,7 +242,8 @@ namespace System.Activities.Statements
                 returnEarly = true;
             }
 
-            // If TargetType was set, look for a static method. If TargetObject was set, look for an instance method. They can't both be set.
+            // If TargetType was set, look for a static method. If TargetObject was set, look for an instance
+            // method. They can't both be set.
             BindingFlags bindingFlags =
                 this.TargetType != null ? staticBindingFlags : instanceBindingFlags;
             string bindingType = bindingFlags == staticBindingFlags ? staticString : instanceString;
@@ -287,7 +292,8 @@ namespace System.Activities.Statements
                     this.Parent
                 );
 
-            // It may be possible to know (and check) the resultType even if the result won't be assigned anywhere.
+            // It may be possible to know (and check) the resultType even if the result won't be assigned
+            // anywhere.
             // Used 1.) for detecting async pattern, and 2.) to make sure we selected the correct MethodInfo.
             Type resultType = this.ResultType;
 
@@ -549,7 +555,8 @@ namespace System.Activities.Statements
                 && !methodBinder.SelectMethodCalled
                 && genericTypeArguments.Length > 0
             )
-            // methodBinder is only used when there's more than one possible match, so method might still be generic
+            // methodBinder is only used when there's more than one possible match, so method might still be
+            // generic
             {
                 method = Instantiate(method, genericTypeArguments); // if it fails because of e.g. constraints it will just become null
             }
@@ -581,7 +588,8 @@ namespace System.Activities.Statements
             }
         }
 
-        // Store information about a particular asynchronous method call so we can update out/ref parameters, know
+        // Store information about a particular asynchronous method call so we can update out/ref
+        // parameters, know
         // when/what to return, etc.
         class InvokeMethodInstanceData
         {
@@ -715,7 +723,8 @@ namespace System.Activities.Statements
                 ParameterModifier[] modifiers
             )
             {
-                // Try the default binder first. Never gives false positive, but will fail to detect methods w/ parameter array because
+                // Try the default binder first. Never gives false positive, but will fail to detect methods w/
+                // parameter array because
                 // it will not expand the formal parameter list when checking against actual parameters.
                 MethodBase result = Type.DefaultBinder.SelectMethod(
                     bindingAttr,
@@ -724,7 +733,8 @@ namespace System.Activities.Statements
                     modifiers
                 );
 
-                // Could be false negative, check for parameter array and if so condense it back to an array before re-checking.
+                // Could be false negative, check for parameter array and if so condense it back to an array before
+                // re-checking.
                 if (result == null)
                 {
                     foreach (MethodBase method in methodCandidates)
@@ -737,8 +747,10 @@ namespace System.Activities.Statements
                                 .ParameterType.GetElementType();
 
                             bool allCompatible = true;
-                            // There could be more actual parameters than formal parameters, because the formal parameter is a params T'[] for some T'.
-                            // So, check that each actual parameter starting at position [formalParams.Length - 1] is compatible with T'.
+                            // There could be more actual parameters than formal parameters, because the formal parameter is a
+                            // params T'[] for some T'.
+                            // So, check that each actual parameter starting at position [formalParams.Length - 1] is compatible
+                            // with T'.
                             for (int i = formalParams.Length - 1; i < types.Length - 1; i++)
                             {
                                 if (!TypeHelper.AreTypesCompatible(types[i], elementType))

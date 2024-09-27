@@ -11,7 +11,9 @@ namespace Internal.Runtime.Augments
     /// To activate the stack trace resolution support, set up an instance of a class
     /// derived from this one using the method
     ///
-    /// Internal.Runtime.Augments.RuntimeAugments.InitializeStackTraceMetadataSupport(StackTraceMetadataCallbacks callbacks);
+    ///
+    // Internal.Runtime.Augments.RuntimeAugments.InitializeStackTraceMetadataSupport(StackTraceMetadataCallbacks
+    // callbacks);
     ///
     /// </summary>
     [CLSCompliant(false)]
@@ -22,7 +24,8 @@ namespace Internal.Runtime.Augments
         /// Return null if stack trace information is not available.
         /// </summary>
         /// <param name="methodStartAddress">Memory address representing the start of a method</param>
-        /// <param name="isStackTraceHidden">Returns a value indicating whether the method should be hidden in stack traces</param>
+        /// <param name="isStackTraceHidden">Returns a value indicating whether the method should be hidden
+        // in stack traces</param>
         /// <returns>Formatted method name or null if metadata for the method is not available</returns>
         public abstract string TryGetMethodNameFromStartAddress(
             IntPtr methodStartAddress,

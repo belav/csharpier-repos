@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             byte[] arrayImage = null;
             Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(arrayImage));
 
-            // It's not particularly important that this not throw. The parsing of the metadata is now lazy, and the result is that an exception
+            // It's not particularly important that this not throw. The parsing of the metadata is now lazy, and
+            // the result is that an exception
             // will be thrown when something tugs on the metadata later.
             ModuleMetadata.CreateFromImage(TestResources.MetadataTests.Invalid.EmptyModuleTable);
         }
@@ -460,7 +461,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         /// <summary>
-        /// Only test in 64-bit process. <see cref="UnmanagedMemoryStream"/> throws if the given length is greater than the size of the available address space.
+        /// Only test in 64-bit process. <see cref="UnmanagedMemoryStream"/> throws if the given length is
+        // greater than the size of the available address space.
         /// </summary>
         [ConditionalFact(typeof(Bitness64))]
         public unsafe void CreateFromUnmanagedMemoryStream_LargeIntSize()
@@ -468,7 +470,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var assembly = TestResources.Basic.Members;
             fixed (byte* assemblyPtr = assembly)
             {
-                // ensure that having an extremely large stream is not a problem (e.g. that we don't wrap the int around
+                // ensure that having an extremely large stream is not a problem (e.g. that we don't wrap the int
+                // around
                 // to be a negative size).
                 var disposed = false;
                 var seeked = false;

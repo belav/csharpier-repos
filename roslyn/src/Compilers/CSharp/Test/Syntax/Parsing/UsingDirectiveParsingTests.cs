@@ -364,7 +364,8 @@ public sealed class UsingDirectiveParsingTests : ParsingTests
                 // (1,14): error CS8085: A 'using static' directive cannot be used to declare an alias
                 // using static x = ref int;
                 Diagnostic(ErrorCode.ERR_NoAliasHere, "x").WithLocation(1, 14),
-                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using static x = ref int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -635,7 +636,8 @@ struct A { }";
                 // using x = A*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = A*;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = A*;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -694,7 +696,8 @@ struct A { }";
                 // using unsafe x = A*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe x = A*;")
                     .WithLocation(1, 1),
-                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using unsafe x = A*;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -749,7 +752,8 @@ struct A { }";
                 // using x = delegate*<int, void>;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = delegate*<int, void>;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = delegate*<int, void>;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -819,7 +823,8 @@ struct A { }";
                         "using unsafe x = delegate*<int, void>;"
                     )
                     .WithLocation(1, 1),
-                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using unsafe x = delegate*<int, void>;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -917,12 +922,14 @@ struct A { }";
                 // using x = int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
                     .WithLocation(1, 7),
-                // (1,11): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,11): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using x = int;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "int")
                     .WithArguments("using type alias", "12.0")
@@ -964,7 +971,8 @@ struct A { }";
                 // using x = int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1006,7 +1014,8 @@ struct A { }";
                 // using x = int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1048,7 +1057,8 @@ struct A { }";
                 // using x = ref int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = ref int;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = ref int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1097,7 +1107,8 @@ struct A { }";
                 // using x = ref readonly int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = ref readonly int;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = ref readonly int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1147,7 +1158,8 @@ struct A { }";
                 // using x = int*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int*;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = int*;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1196,7 +1208,8 @@ struct A { }";
                 // using unsafe x = int*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe x = int*;")
                     .WithLocation(1, 1),
-                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,14): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using unsafe x = int*;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1657,7 +1670,8 @@ namespace N
                 // using x = (int, int);
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = (int, int);")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = (int, int);
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1934,7 +1948,8 @@ namespace N
                 // using x = int?;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int?;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = int?;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
@@ -1980,12 +1995,14 @@ namespace N
                 // using x = string?;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = string?;")
                     .WithLocation(1, 1),
-                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using x = string?;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
                     .WithArguments("x")
                     .WithLocation(1, 7),
-                // (1,17): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (1,17): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 // using x = string?;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(1, 17),
@@ -2088,7 +2105,8 @@ namespace N
                 //     using Y = X?;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X?;")
                     .WithLocation(4, 5),
-                // (4,16): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+                // (4,16): warning CS8632: The annotation for nullable reference types should only be used in code
+                // within a '#nullable' annotations context.
                 //     using Y = X?;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                     .WithLocation(4, 16),
@@ -2725,7 +2743,8 @@ using dynamic;";
                 // using dynamic;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using dynamic;")
                     .WithLocation(2, 1),
-                // (2,7): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
+                // (2,7): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // using dynamic;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
                     .WithArguments("dynamic")
@@ -3134,12 +3153,15 @@ class dynamic
         UsingTree(text);
         CreateCompilation(text)
             .VerifyDiagnostics(
-                // (4,7): warning CS8981: The type name 'dynamic' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (4,7): warning CS8981: The type name 'dynamic' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // class dynamic
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "dynamic")
                     .WithArguments("dynamic")
                     .WithLocation(4, 7),
-                // (8,11): error CS1061: 'dynamic' does not contain a definition for 'Goo' and no accessible extension method 'Goo' accepting a first argument of type 'dynamic' could be found (are you missing a using directive or an assembly reference?)
+                // (8,11): error CS1061: 'dynamic' does not contain a definition for 'Goo' and no accessible
+                // extension method 'Goo' accepting a first argument of type 'dynamic' could be found (are you missing
+                // a using directive or an assembly reference?)
                 //         d.Goo();
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Goo")
                     .WithArguments("dynamic", "Goo")
@@ -4296,7 +4318,8 @@ using X = __makeref;
                         "using unsafe static System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe static System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -4361,7 +4384,8 @@ using X = __makeref;
                         "using unsafe static System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe static System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -4530,7 +4554,8 @@ using X = __makeref;
                         "using unsafe static X = System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe static X = System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -4606,7 +4631,8 @@ using X = __makeref;
                         "using unsafe static X = System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe static X = System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -4809,7 +4835,8 @@ using X = __makeref;
                         "using static unsafe System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using static unsafe System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -4864,7 +4891,8 @@ using X = __makeref;
                         "using static unsafe System.Console;"
                     )
                     .WithLocation(1, 1),
-                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using static unsafe System.Console;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -5005,7 +5033,8 @@ using X = __makeref;
                         "using static unsafe System.Collections.Generic.List<int*[]>;"
                     )
                     .WithLocation(1, 1),
-                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using static unsafe System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -5101,7 +5130,8 @@ using X = __makeref;
                         "using static unsafe System.Collections.Generic.List<int*[]>;"
                     )
                     .WithLocation(1, 1),
-                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (1,14): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using static unsafe System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")

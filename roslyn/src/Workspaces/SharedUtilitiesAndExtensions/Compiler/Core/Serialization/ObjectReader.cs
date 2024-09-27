@@ -50,7 +50,8 @@ internal sealed partial class ObjectReader : IDisposable
     /// Creates a new instance of a <see cref="ObjectReader"/>.
     /// </summary>
     /// <param name="stream">The stream to read objects from.</param>
-    /// <param name="leaveOpen">True to leave the <paramref name="stream"/> open after the <see cref="ObjectWriter"/> is disposed.</param>
+    /// <param name="leaveOpen">True to leave the <paramref name="stream"/> open after the <see
+    // cref="ObjectWriter"/> is disposed.</param>
     /// <param name="cancellationToken"></param>
     private ObjectReader(Stream stream, bool leaveOpen, CancellationToken cancellationToken)
     {
@@ -66,7 +67,8 @@ internal sealed partial class ObjectReader : IDisposable
 
     /// <summary>
     /// Attempts to create a <see cref="ObjectReader"/> from the provided <paramref name="stream"/>.
-    /// If the <paramref name="stream"/> does not start with a valid header, then <see langword="null"/> will
+    /// If the <paramref name="stream"/> does not start with a valid header, then <see langword="null"/>
+    // will
     /// be returned.
     /// </summary>
     public static ObjectReader TryGetReader(
@@ -420,7 +422,8 @@ internal sealed partial class ObjectReader : IDisposable
             _ => (int)this.ReadCompressedUInt(),
         };
 
-        // SUBTLE: If it was a primitive array, only the EncodingKind byte of the element type was written, instead of encoding as a type.
+        // SUBTLE: If it was a primitive array, only the EncodingKind byte of the element type was written,
+        // instead of encoding as a type.
         var elementKind = (TypeCode)_reader.ReadByte();
 
         return (length, elementKind);

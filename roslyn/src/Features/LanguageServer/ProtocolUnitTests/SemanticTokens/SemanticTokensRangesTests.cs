@@ -54,7 +54,8 @@ static class C { }
                 expectedResults.Data =
 #pragma warning disable format // Force explicit column spacing.
                 [
-                    // Line | Char | Len | Token type                                                               | Modifier
+                    // Line | Char | Len | Token type                                                               |
+                    // Modifier
                     0,
                     0,
                     10,
@@ -91,7 +92,8 @@ static class C { }
             {
                 expectedResults.Data =
                 [
-                    // Line | Char | Len | Token type                                                               | Modifier
+                    // Line | Char | Len | Token type                                                               |
+                    // Modifier
                     0,
                     0,
                     10,

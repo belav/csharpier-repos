@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Authentication;
 public static class ClaimActionCollectionUniqueExtensions
 {
     /// <summary>
-    /// Selects a top level value from the json user data with the given key name and adds it as a Claim.
+    /// Selects a top level value from the json user data with the given key name and adds it as a
+    // Claim.
     /// This no-ops if the ClaimsIdentity already contains a Claim with the given ClaimType.
     /// This no-ops if the key is not found or the value is empty.
     /// </summary>
@@ -30,7 +31,8 @@ public static class ClaimActionCollectionUniqueExtensions
     }
 
     /// <summary>
-    /// Selects a top level value from the json user data with the given key name and adds it as a Claim.
+    /// Selects a top level value from the json user data with the given key name and adds it as a
+    // Claim.
     /// This no-ops if the ClaimsIdentity already contains a Claim with the given ClaimType.
     /// This no-ops if the key is not found or the value is empty.
     /// </summary>

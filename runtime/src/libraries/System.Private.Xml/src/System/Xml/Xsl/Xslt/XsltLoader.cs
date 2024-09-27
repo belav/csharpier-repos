@@ -549,7 +549,8 @@ namespace System.Xml.Xsl.Xslt
             new XsltAttribute("href", V1Req | V2Req),
         };
 
-        // SxS: This method reads resource names from source document and does not expose any resources to the caller.
+        // SxS: This method reads resource names from source document and does not expose any resources to
+        // the caller.
         // It's OK to suppress the SxS warning.
         private void LoadImport()
         {
@@ -581,7 +582,8 @@ namespace System.Xml.Xsl.Xslt
             CheckNoContent();
         }
 
-        // SxS: This method reads resource names from source document and does not expose any resources to the caller.
+        // SxS: This method reads resource names from source document and does not expose any resources to
+        // the caller.
         // It's OK to suppress the SxS warning.
         private void LoadInclude()
         {
@@ -918,9 +920,9 @@ namespace System.Xml.Xsl.Xslt
         }
 
         /*
-            Default values for method="xml" :   version="1.0"   indent="no"     media-type="text/xml"
-            Default values for method="html":   version="4.0"   indent="yes"    media-type="text/html"
-            Default values for method="text":                                   media-type="text/plain"
+        Default values for method="xml" :   version="1.0"   indent="no"     media-type="text/xml"
+        Default values for method="html":   version="4.0"   indent="yes"    media-type="text/html"
+        Default values for method="text":                                   media-type="text/plain"
         */
         private void ProcessOutputSettings()
         {
@@ -2119,7 +2121,8 @@ namespace System.Xml.Xsl.Xslt
             ContextInfo ctxInfo = _input.GetAttributes(_forEachAttributes);
 
             string? select = ParseStringAttribute(0, "select");
-            // The current template rule becomes null, so we must not allow xsl:apply-import's within this element
+            // The current template rule becomes null, so we must not allow xsl:apply-import's within this
+            // element
             _input.CanHaveApplyImports = false;
             List<XslNode> content = LoadInstructions(InstructionFlags.AllowSort);
             ctxInfo.SaveExtendedLineInfo(_input);
@@ -2495,7 +2498,8 @@ namespace System.Xml.Xsl.Xslt
                         case XmlNodeType.Text:
                         case XmlNodeType.Whitespace:
                         case XmlNodeType.SignificantWhitespace:
-                            // xsl:text may contain multiple child text nodes separated by comments and PIs, which are ignored by XsltInput
+                            // xsl:text may contain multiple child text nodes separated by comments and PIs, which are ignored
+                            // by XsltInput
                             content.Add(F.Text(_input.Value, hints));
                             break;
                         default:
@@ -2723,7 +2727,8 @@ namespace System.Xml.Xsl.Xslt
                                     SR.Xslt_AnalyzeStringDupChild,
                                     atoms.MatchingSubstring
                                 );
-                                // The current template rule becomes null, so we must not allow xsl:apply-import's within this element
+                                // The current template rule becomes null, so we must not allow xsl:apply-import's within this
+                                // element
                                 input.CanHaveApplyImports = false;
                                 matching = SetInfo(F.List(), LoadInstructions(), ctxInfoChld);
                             }
@@ -2851,7 +2856,8 @@ namespace System.Xml.Xsl.Xslt
 
             ReportNYI("xsl:for-each-group");
 
-            // The current template rule becomes null, so we must not allow xsl:apply-import's within this element
+            // The current template rule becomes null, so we must not allow xsl:apply-import's within this
+            // element
             input.CanHaveApplyImports = false;
             List<XslNode> content = LoadInstructions(InstructionFlags.AllowSort);
             ctxInfo.SaveExtendedLineInfo(input);
@@ -3802,7 +3808,8 @@ namespace System.Xml.Xsl.Xslt
         {
             ISourceLineInfo? result = null;
 
-            // Really EMPTY means no content at all, but for the sake of compatibility with MSXML we allow whitespace
+            // Really EMPTY means no content at all, but for the sake of compatibility with MSXML we allow
+            // whitespace
             if (_input.MoveToFirstChild())
             {
                 do
@@ -3849,7 +3856,8 @@ namespace System.Xml.Xsl.Xslt
         // each toplevel element by MergeNamespaces().
         // Namespaces of stylesheet can be overridden in template and to make this works correclety we
         // should attache them after NsDec of top level elements.
-        // Toplevel element almost never contais NsDecl and in practice node duplication will not happened, but if they have
+        // Toplevel element almost never contais NsDecl and in practice node duplication will not happened,
+        // but if they have
         // we should copy NsDecls of stylesheet locally in toplevel elements.
         private static NsDecl? MergeNamespaces(NsDecl? thisList, NsDecl? parentList)
         {

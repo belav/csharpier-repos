@@ -43,7 +43,8 @@ namespace System.Web.DynamicData
             _iMetaColumn = column;
         }
 
-        /// <param name="mode">The mode that the associated field template should be in (readonly, edit, insert)</param>
+        /// <param name="mode">The mode that the associated field template should be in (readonly, edit,
+        // insert)</param>
         public DynamicControl(DataBoundControlMode mode)
         {
             Mode = mode;
@@ -207,7 +208,8 @@ namespace System.Web.DynamicData
             {
                 ((IFieldTemplate)FieldTemplate).SetHost(this);
 
-                // If we got some extra attributes declared on the tag, assign them to the user control if it has matching properties
+                // If we got some extra attributes declared on the tag, assign them to the user control if it has
+                // matching properties
                 if (_attributes != null)
                 {
                     var ucType = FieldTemplate.GetType();

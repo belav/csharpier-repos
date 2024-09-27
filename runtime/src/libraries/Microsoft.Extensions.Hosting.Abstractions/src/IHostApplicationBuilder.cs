@@ -11,7 +11,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.Extensions.Hosting;
 
 /// <summary>
-/// Represents a hosted applications and services builder which helps manage configuration, logging, lifetime, and more.
+/// Represents a hosted applications and services builder which helps manage configuration, logging,
+// lifetime, and more.
 /// </summary>
 public interface IHostApplicationBuilder
 {
@@ -34,7 +35,8 @@ public interface IHostApplicationBuilder
     IHostEnvironment Environment { get; }
 
     /// <summary>
-    /// Gets a collection of logging providers for the application to compose. This is useful for adding new logging providers.
+    /// Gets a collection of logging providers for the application to compose. This is useful for adding
+    // new logging providers.
     /// </summary>
     ILoggingBuilder Logging { get; }
 
@@ -44,26 +46,34 @@ public interface IHostApplicationBuilder
     IMetricsBuilder Metrics { get; }
 
     /// <summary>
-    /// Gets a collection of services for the application to compose. This is useful for adding user provided or framework provided services.
+    /// Gets a collection of services for the application to compose. This is useful for adding user
+    // provided or framework provided services.
     /// </summary>
     IServiceCollection Services { get; }
 
     /// <summary>
-    /// Registers a <see cref="IServiceProviderFactory{TContainerBuilder}" /> instance to be used to create the <see cref="IServiceProvider" />.
+    /// Registers a <see cref="IServiceProviderFactory{TContainerBuilder}" /> instance to be used to
+    // create the <see cref="IServiceProvider" />.
     /// </summary>
-    /// <param name="factory">The factory object that can create the <typeparamref name="TContainerBuilder"/> and <see cref="IServiceProvider"/>.</param>
+    /// <param name="factory">The factory object that can create the <typeparamref
+    // name="TContainerBuilder"/> and <see cref="IServiceProvider"/>.</param>
     /// <param name="configure">
-    /// A delegate used to configure the <typeparamref T="TContainerBuilder" />. This can be used to configure services using
+    /// A delegate used to configure the <typeparamref T="TContainerBuilder" />. This can be used to
+    // configure services using
     /// APIS specific to the <see cref="IServiceProviderFactory{TContainerBuilder}" /> implementation.
     /// </param>
-    /// <typeparam name="TContainerBuilder">The type of builder provided by the <see cref="IServiceProviderFactory{TContainerBuilder}" />.</typeparam>
+    /// <typeparam name="TContainerBuilder">The type of builder provided by the <see
+    // cref="IServiceProviderFactory{TContainerBuilder}" />.</typeparam>
     /// <remarks>
     /// <para>
-    /// The <see cref="IServiceProvider"/> is created when this builder is built and so the delegate provided
+    /// The <see cref="IServiceProvider"/> is created when this builder is built and so the delegate
+    // provided
     /// by <paramref name="configure"/> will run after all other services have been registered.
     /// </para>
     /// <para>
-    /// Multiple calls to <see cref="ConfigureContainer{TContainerBuilder}(IServiceProviderFactory{TContainerBuilder}, Action{TContainerBuilder})"/> will replace
+    /// Multiple calls to <see
+    // cref="ConfigureContainer{TContainerBuilder}(IServiceProviderFactory{TContainerBuilder},
+    // Action{TContainerBuilder})"/> will replace
     /// the previously stored <paramref name="factory"/> and <paramref name="configure"/> delegate.
     /// </para>
     /// </remarks>

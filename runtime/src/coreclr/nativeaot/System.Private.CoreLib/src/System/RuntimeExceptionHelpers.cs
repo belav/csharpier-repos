@@ -13,7 +13,8 @@ namespace System
     {
         public static OutOfMemoryException Instance { get; private set; }
 
-        // Eagerly preallocate instance of out of memory exception to avoid infinite recursion once we run out of memory
+        // Eagerly preallocate instance of out of memory exception to avoid infinite recursion once we run
+        // out of memory
         internal static void Initialize()
         {
             Instance = new OutOfMemoryException(message: null); // Cannot call the nullary constructor as that triggers non-trivial resource manager logic.
@@ -22,13 +23,22 @@ namespace System
 
     public class RuntimeExceptionHelpers
     {
-        //------------------------------------------------------------------------------------------------------------
+        //
+        //
+        // //------------------------------------------------------------------------------------------------------------
         // @TODO: this function is related to throwing exceptions out of Rtm. If we did not have to throw
-        // out of Rtm, then we would note have to have the code below to get a classlib exception object given
-        // an exception id, or the special functions to back up the MDIL THROW_* instructions, or the allocation
-        // failure helper. If we could move to a world where we never throw out of Rtm, perhaps by moving parts
-        // of Rtm that do need to throw out to Bartok- or Binder-generated functions, then we could remove all of this.
-        //------------------------------------------------------------------------------------------------------------
+        // out of Rtm, then we would note have to have the code below to get a classlib exception object
+        // given
+        // an exception id, or the special functions to back up the MDIL THROW_* instructions, or the
+        // allocation
+        // failure helper. If we could move to a world where we never throw out of Rtm, perhaps by moving
+        // parts
+        // of Rtm that do need to throw out to Bartok- or Binder-generated functions, then we could remove
+        // all of this.
+
+        //
+        //
+        // //------------------------------------------------------------------------------------------------------------
 
         [ThreadStatic]
         private static bool t_allocatingOutOfMemoryException;
@@ -48,7 +58,8 @@ namespace System
             {
                 // @TODO: this function should return pre-allocated exception objects, either frozen in the image
                 // or preallocated during DllMain(). In particular, this function will be called when out of memory,
-                // and failure to create an exception will result in infinite recursion and therefore a stack overflow.
+                // and failure to create an exception will result in infinite recursion and therefore a stack
+                // overflow.
                 switch (id)
                 {
                     case ExceptionIDs.OutOfMemory:
@@ -164,7 +175,8 @@ namespace System
             }
             catch
             {
-                // Returning from this callback will cause the runtime to FailFast without involving the class library.
+                // Returning from this callback will cause the runtime to FailFast without involving the class
+                // library.
             }
         }
 
@@ -309,7 +321,8 @@ namespace System
             }
 
             EXCEPTION_RECORD exceptionRecord;
-            // STATUS_STACK_BUFFER_OVERRUN is a "transport" exception code required by Watson to trigger the proper analyzer/provider for bucketing
+            // STATUS_STACK_BUFFER_OVERRUN is a "transport" exception code required by Watson to trigger the
+            // proper analyzer/provider for bucketing
             exceptionRecord.ExceptionCode = STATUS_STACK_BUFFER_OVERRUN;
             exceptionRecord.ExceptionFlags = EXCEPTION_NONCONTINUABLE;
             exceptionRecord.ExceptionRecord = IntPtr.Zero;
@@ -336,7 +349,8 @@ namespace System
 #endif
         }
 
-        // This returns "true" once enough of the framework has been initialized to safely perform operations
+        // This returns "true" once enough of the framework has been initialized to safely perform
+        // operations
         // such as filling in the stack frame and generating diagnostic support.
         public static bool SafeToPerformRichExceptionSupport
         {

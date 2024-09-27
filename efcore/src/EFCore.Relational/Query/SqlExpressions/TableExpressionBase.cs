@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a table source in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -63,7 +64,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
-    ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
+    ///     Creates a printable string representation of the given expression using <see
+    // cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
     protected abstract void Print(ExpressionPrinter expressionPrinter);
@@ -73,7 +75,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
         Print(expressionPrinter);
 
     /// <summary>
-    ///     Creates a printable string representation of annotations associated with the given expression using <see cref="ExpressionPrinter" />.
+    ///     Creates a printable string representation of annotations associated with the given
+    // expression using <see cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
     protected virtual void PrintAnnotations(ExpressionPrinter expressionPrinter)
@@ -102,7 +105,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     public override int GetHashCode() => 0;
 
     /// <summary>
-    ///     Adds an annotation to this object. Throws if an annotation with the specified name already exists.
+    ///     Adds an annotation to this object. Throws if an annotation with the specified name already
+    // exists.
     /// </summary>
     /// <param name="name">The key of the annotation to be added.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
@@ -134,11 +138,13 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     );
 
     /// <summary>
-    ///     Gets the annotation with the given name, returning <see langword="null" /> if it does not exist.
+    ///     Gets the annotation with the given name, returning <see langword="null" /> if it does not
+    // exist.
     /// </summary>
     /// <param name="name">The key of the annotation to find.</param>
     /// <returns>
-    ///     The existing annotation if an annotation with the specified name already exists. Otherwise, <see langword="null" />.
+    ///     The existing annotation if an annotation with the specified name already exists. Otherwise,
+    // <see langword="null" />.
     /// </returns>
     public virtual IAnnotation? FindAnnotation(string name) =>
         _annotations == null ? null

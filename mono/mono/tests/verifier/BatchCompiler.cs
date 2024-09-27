@@ -6,7 +6,8 @@
 //
 // Copyright (C) 2008 Novell, Inc (http://www.novell.com)
 //
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 using System;
 using System.IO;
 using System.Reflection;

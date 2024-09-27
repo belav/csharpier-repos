@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Cache Vary class.  Wraps Vary header
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Cache Vary class.  Wraps Vary header
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -183,11 +183,11 @@ namespace System.Web
                 {
                     IgnoreParams = value;
                 }
-                /*
-                 * Since adding a Vary parameter is more restrictive, we don't
-                 * want components to be able to set a Vary parameter to false
-                 * if another component has set it to true.
-                 */
+/*
+* Since adding a Vary parameter is more restrictive, we don't
+* want components to be able to set a Vary parameter to false
+* if another component has set it to true.
+*/
                 else if (value)
                 {
                     _isModified = true;

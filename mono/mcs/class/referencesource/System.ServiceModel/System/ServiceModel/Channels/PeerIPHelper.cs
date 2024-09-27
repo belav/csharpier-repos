@@ -106,7 +106,8 @@ namespace System.ServiceModel.Channels
             return clone;
         }
 
-        // Since scope ID of IPAddress is mutable, you want to be able to clone IP addresses in an array or collection
+        // Since scope ID of IPAddress is mutable, you want to be able to clone IP addresses in an array or
+        // collection
         static ReadOnlyCollection<IPAddress> CloneAddresses(IPAddress[] sourceArray)
         {
             IPAddress[] cloneArray = new IPAddress[sourceArray.Length];
@@ -338,7 +339,8 @@ namespace System.ServiceModel.Channels
             UriBuilder uriBuilder = new UriBuilder(uri);
             if (V6Address(ipAddress) && (ipAddress.IsIPv6LinkLocal || ipAddress.IsIPv6SiteLocal))
             {
-                // We make a copy of the IP address because scopeID will not be part of ToString() if set after IP address was created
+                // We make a copy of the IP address because scopeID will not be part of ToString() if set after IP
+                // address was created
                 uriBuilder.Host = new IPAddress(
                     ipAddress.GetAddressBytes(),
                     ipAddress.ScopeId
@@ -497,12 +499,17 @@ namespace System.ServiceModel.Channels
         }
 
         //
-        // Helper class to handle system address change events. Because multiple events can be fired as a result of
-        // a single significant change (such as interface being enabled/disabled), we try to handle the event just
+        // Helper class to handle system address change events. Because multiple events can be fired as a
+        // result of
+        // a single significant change (such as interface being enabled/disabled), we try to handle the
+        // event just
         // once using the below mechanism:
-        // Start a timer that goes off after Timeout seconds. If get another address change event from the system
-        // within this timespan, reset the timer to go off after another Timeout secs. When the timer finally fires,
-        // the registered handlers are notified. This should minimize (but not completely eliminate -- think wireless
+        // Start a timer that goes off after Timeout seconds. If get another address change event from the
+        // system
+        // within this timespan, reset the timer to go off after another Timeout secs. When the timer
+        // finally fires,
+        // the registered handlers are notified. This should minimize (but not completely eliminate -- think
+        // wireless
         // DHCP interface being enabled, for instance -- this could take longer) reacting multiple times for
         // a single change.
         //

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -225,8 +226,10 @@ namespace System.Web.Mvc
             return _innerDictionary.Remove(key);
         }
 
-        // This method will execute before the derived type's instance constructor executes. Derived types must
-        // be aware of this and should plan accordingly. For example, the logic in SetModel() should be simple
+        // This method will execute before the derived type's instance constructor executes. Derived types
+        // must
+        // be aware of this and should plan accordingly. For example, the logic in SetModel() should be
+        // simple
         // enough so as not to depend on the "this" pointer referencing a fully constructed object.
         protected virtual void SetModel(object value)
         {

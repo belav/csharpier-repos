@@ -133,7 +133,8 @@ namespace System.Reflection.Metadata
         {
             // In the PE File Header this is a "Time/Date Stamp" whose description is "Time and date
             // the file was created in seconds since January 1st 1970 00:00:00 or 0"
-            // However, when we want to make it deterministic we fill it in (later) with bits from the hash of the full PE file.
+            // However, when we want to make it deterministic we fill it in (later) with bits from the hash of
+            // the full PE file.
             uint timestamp = (uint)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds;
             return content => new BlobContentId(Guid.NewGuid(), timestamp);
         }

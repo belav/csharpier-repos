@@ -9,11 +9,13 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 
 /// <summary>
 /// <para>
-/// A <see cref="TextWriter"/> that is backed by a unbuffered writer (over the Response stream) and/or a
+/// A <see cref="TextWriter"/> that is backed by a unbuffered writer (over the Response stream)
+// and/or a
 /// <see cref="ViewBuffer"/>
 /// </para>
 /// <para>
-/// When <c>Flush</c> or <c>FlushAsync</c> is invoked, the writer copies all content from the buffer to
+/// When <c>Flush</c> or <c>FlushAsync</c> is invoked, the writer copies all content from the buffer
+// to
 /// the writer and switches to writing to the unbuffered writer for all further write operations.
 /// </para>
 /// </summary>
@@ -272,7 +274,8 @@ internal sealed class ViewBufferTextWriter : TextWriter
     /// <summary>
     /// Copies the buffered content to the unbuffered writer and invokes flush on it.
     /// </summary>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous copy and flush operations.</returns>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous copy and flush
+    // operations.</returns>
     public override async Task FlushAsync()
     {
         if (_inner == null || _inner is ViewBufferTextWriter)

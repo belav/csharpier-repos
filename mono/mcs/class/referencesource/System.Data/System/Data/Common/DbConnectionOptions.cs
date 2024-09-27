@@ -26,19 +26,19 @@ namespace System.Data.Common
         // when not worried about the class being modified during execution
 
 #if DEBUG
-        /*private const string ConnectionStringPatternV1 =
-             "[\\s;]*"
-            +"(?<key>([^=\\s]|\\s+[^=\\s]|\\s+==|==)+)"
-            +   "\\s*=(?!=)\\s*"
-            +"(?<value>("
-            +   "(" + "\"" + "([^\"]|\"\")*" + "\"" + ")"
-            +   "|"
-            +   "(" + "'" + "([^']|'')*" + "'" + ")"
-            +   "|"
-            +   "(" + "(?![\"'])" + "([^\\s;]|\\s+[^\\s;])*" + "(?<![\"'])" + ")"
-            + "))"
-            + "[\\s;]*"
-        ;*/
+/*private const string ConnectionStringPatternV1 =
+"[\\s;]*"
++"(?<key>([^=\\s]|\\s+[^=\\s]|\\s+==|==)+)"
++   "\\s*=(?!=)\\s*"
++"(?<value>("
++   "(" + "\"" + "([^\"]|\"\")*" + "\"" + ")"
++   "|"
++   "(" + "'" + "([^']|'')*" + "'" + ")"
++   "|"
++   "(" + "(?![\"'])" + "([^\\s;]|\\s+[^\\s;])*" + "(?<![\"'])" + ")"
++ "))"
++ "[\\s;]*"
+;*/
         private const string ConnectionStringPattern = // may not contain embedded null except trailing last value
             "([\\s;]*" // leading whitespace and extra semicolons
             + "(?![\\s;])" // key does not start with space or semicolon
@@ -69,7 +69,8 @@ namespace System.Data.Common
             + "([^;\\s\\p{Cc}]|\\s+[^;\\s\\p{Cc}])*" // control characters must be quoted
             + ")" // VSTFDEVDIV 94761: although the spec does not allow {}
             // embedded within a value, the retail code does.
-            // +  "(?<![\\}]))"                                            // unquoted value must not stop with }
+            // +  "(?<![\\}]))"                                            // unquoted value must not stop with
+            // }
 
             + ")(\\s*)(;|[\u0000\\s]*$)" // whitespace after value up to semicolon or end-of-line
             + ")*" // repeat the key-value pair
@@ -134,14 +135,18 @@ namespace System.Data.Common
 
         // differences between OleDb and Odbc
         // ODBC:
-        //     http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/odbcsqldriverconnect.asp
+        //
+        //
+        // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbc/htm/odbcsqldriverconnect.asp
         //     http://msdn.microsoft.com/library/default.asp?url=/library/en-us/odbcsql/od_odbc_d_4x4k.asp
         //     do not support == -> = in keywords
         //     first key-value pair wins
         //     quote values using \{ and \}, only driver= and pwd= appear to generically allow quoting
         //     do not strip quotes from value, or add quotes except for driver keyword
         // OLEDB:
-        //     http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp
+        //
+        //
+        // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/oledb/htm/oledbconnectionstringsyntax.asp
         //     support == -> = in keywords
         //     last key-value pair wins
         //     quote values using \" or \'
@@ -523,8 +528,10 @@ namespace System.Data.Common
 
         // SxS notes:
         // * this method queries "DataDirectory" value from the current AppDomain.
-        //   This string is used for to replace "!DataDirectory!" values in the connection string, it is not considered as an "exposed resource".
-        // * This method uses GetFullPath to validate that root path is valid, the result is not exposed out.
+        //   This string is used for to replace "!DataDirectory!" values in the connection string, it is not
+        // considered as an "exposed resource".
+        // * This method uses GetFullPath to validate that root path is valid, the result is not exposed
+        // out.
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         internal static string ExpandDataDirectory(string keyword, string value, ref string datadir)
@@ -557,7 +564,8 @@ namespace System.Data.Common
                     datadir = rootFolderPath;
                 }
 
-                // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with onw
+                // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with
+                // onw
                 int fileNamePosition = DataDirectory.Length; // filename starts right after the '|datadirectory|' keyword
                 bool rootFolderEndsWith =
                     (0 < rootFolderPath.Length)

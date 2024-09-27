@@ -21,7 +21,8 @@ static class TaskExtensions
         }
         else
         {
-            // Await the task we were asked to await. Either it's finished, or the otherTask finished successfully, and it's not our job to check that
+            // Await the task we were asked to await. Either it's finished, or the otherTask finished
+            // successfully, and it's not our job to check that
             await task;
         }
     }

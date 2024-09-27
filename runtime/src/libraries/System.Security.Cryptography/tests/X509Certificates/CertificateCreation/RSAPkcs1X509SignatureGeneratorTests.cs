@@ -32,7 +32,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                 );
                 PublicKey publicKey = signatureGenerator.PublicKey;
 
-                // Irrespective of what the current key thinks, the PublicKey value we encode for RSA will always write
+                // Irrespective of what the current key thinks, the PublicKey value we encode for RSA will always
+                // write
                 // DER-NULL parameters, by the guidance of RFC 3447:
                 //
                 //    The object identifier rsaEncryption identifies RSA public and private

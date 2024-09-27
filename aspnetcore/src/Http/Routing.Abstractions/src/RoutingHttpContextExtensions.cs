@@ -16,7 +16,8 @@ public static class RoutingHttpContextExtensions
     /// <summary>
     /// Gets the <see cref="RouteData"/> associated with the provided <paramref name="httpContext"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <returns>The <see cref="RouteData"/>.</returns>
     public static RouteData GetRouteData(this HttpContext httpContext)
     {
@@ -30,7 +31,8 @@ public static class RoutingHttpContextExtensions
     /// Gets a route value from <see cref="RouteData.Values"/> associated with the provided
     /// <paramref name="httpContext"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="key">The key of the route value.</param>
     /// <returns>The corresponding route value, or null.</returns>
     public static object? GetRouteValue(this HttpContext httpContext, string key)

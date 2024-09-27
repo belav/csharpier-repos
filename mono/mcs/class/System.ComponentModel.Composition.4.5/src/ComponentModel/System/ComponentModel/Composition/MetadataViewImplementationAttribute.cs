@@ -14,7 +14,8 @@ namespace System.ComponentModel.Composition
     public sealed class MetadataViewImplementationAttribute : Attribute
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MetadataViewImplementationAttribute"/> class, declaring the
+        ///     Initializes a new instance of the <see cref="MetadataViewImplementationAttribute"/> class,
+        // declaring the
         ///     type that holds the implementation for the view.
         /// </summary>
         /// <param name="typeOfImplementation">

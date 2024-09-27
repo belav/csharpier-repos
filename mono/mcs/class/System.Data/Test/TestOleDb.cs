@@ -43,7 +43,7 @@ namespace System.Data.OleDb.Test
             Console.WriteLine(" Provider: " + m_cnc.Provider);
             Console.WriteLine(" Server version:" + m_cnc.ServerVersion);
 
-            /* create temporary table */
+/* create temporary table */
             Console.WriteLine("Creating temporary table...");
             cmd = new OleDbCommand(
                 "CREATE TABLE mono_test_table ( "

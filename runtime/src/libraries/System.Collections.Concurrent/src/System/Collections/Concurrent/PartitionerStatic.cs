@@ -19,7 +19,8 @@ namespace System.Collections.Concurrent
     /// <summary>
     /// Out-of-the-box partitioners are created with a set of default behaviors.
     /// For example, by default, some form of buffering and chunking will be employed to achieve
-    /// optimal performance in the common scenario where an <see cref="IEnumerable{T}"/> implementation is fast and
+    /// optimal performance in the common scenario where an <see cref="IEnumerable{T}"/> implementation
+    // is fast and
     /// non-blocking.  These behaviors can be overridden via this enumeration.
     /// </summary>
     [Flags]
@@ -33,8 +34,10 @@ namespace System.Collections.Concurrent
         /// <summary>
         /// Creates a partitioner that will take items from the source enumerable one at a time
         /// and will not use intermediate storage that can be accessed more efficiently by multiple threads.
-        /// This option provides support for low latency (items will be processed as soon as they are available from
-        /// the source) and partial support for dependencies between items (a thread cannot deadlock waiting for an item
+        /// This option provides support for low latency (items will be processed as soon as they are
+        // available from
+        /// the source) and partial support for dependencies between items (a thread cannot deadlock waiting
+        // for an item
         /// that it, itself, is responsible for processing).
         /// </summary>
         NoBuffering = 0x1,
@@ -43,7 +46,8 @@ namespace System.Collections.Concurrent
     // The static class Partitioners implements 3 default partitioning strategies:
     // 1. dynamic load balance partitioning for indexable data source (IList and arrays)
     // 2. static partitioning for indexable data source (IList and arrays)
-    // 3. dynamic load balance partitioning for enumerables. Enumerables have indexes, which are the natural order
+    // 3. dynamic load balance partitioning for enumerables. Enumerables have indexes, which are the
+    // natural order
     //    of elements, but enumerators are not indexable
     // - data source of type IList/arrays have both dynamic and static partitioning, as 1 and 3.
     //   We assume that the source data of IList/Array is not changing concurrently.
@@ -51,7 +55,8 @@ namespace System.Collections.Concurrent
     // - Dynamic partitioning methods 1 and 3 are same, both being dynamic and load-balance. But the
     //   implementation is different for data source of IList/Array vs. IEnumerable:
     //   * When the source collection is IList/Arrays, we use Interlocked on the shared index;
-    //   * When the source collection is IEnumerable, we use Monitor to wrap around the access to the source
+    //   * When the source collection is IEnumerable, we use Monitor to wrap around the access to the
+    // source
     //     enumerator.
 
     /// <summary>
@@ -60,8 +65,10 @@ namespace System.Collections.Concurrent
     /// <remarks>
     /// <para>
     /// The static methods on <see cref="Partitioner"/> are all thread-safe and may be used concurrently
-    /// from multiple threads. However, while a created partitioner is in use, the underlying data source
-    /// should not be modified, whether from the same thread that's using a partitioner or from a separate
+    /// from multiple threads. However, while a created partitioner is in use, the underlying data
+    // source
+    /// should not be modified, whether from the same thread that's using a partitioner or from a
+    // separate
     /// thread.
     /// </para>
     /// </remarks>
@@ -135,7 +142,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>
-        /// Creates an orderable partitioner from a <see cref="System.Collections.Generic.IEnumerable{TSource}"/> instance.
+        /// Creates an orderable partitioner from a <see
+        // cref="System.Collections.Generic.IEnumerable{TSource}"/> instance.
         /// </summary>
         /// <typeparam name="TSource">Type of the elements in source enumerable.</typeparam>
         /// <param name="source">The enumerable to be partitioned.</param>
@@ -152,11 +160,13 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>
-        /// Creates an orderable partitioner from a <see cref="System.Collections.Generic.IEnumerable{TSource}"/> instance.
+        /// Creates an orderable partitioner from a <see
+        // cref="System.Collections.Generic.IEnumerable{TSource}"/> instance.
         /// </summary>
         /// <typeparam name="TSource">Type of the elements in source enumerable.</typeparam>
         /// <param name="source">The enumerable to be partitioned.</param>
-        /// <param name="partitionerOptions">Options to control the buffering behavior of the partitioner.</param>
+        /// <param name="partitionerOptions">Options to control the buffering behavior of the
+        // partitioner.</param>
         /// <exception cref="System.ArgumentOutOfRangeException">
         /// The <paramref name="partitionerOptions"/> argument specifies an invalid value for <see
         /// cref="System.Collections.Concurrent.EnumerablePartitionerOptions"/>.
@@ -185,9 +195,11 @@ namespace System.Collections.Concurrent
         /// <param name="fromInclusive">The lower, inclusive bound of the range.</param>
         /// <param name="toExclusive">The upper, exclusive bound of the range.</param>
         /// <returns>A partitioner.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/>
+        // argument is
         /// less than or equal to the <paramref name="fromInclusive"/> argument.</exception>
-        /// <remarks>if ProcessorCount == 1, for correct rangeSize calculation the const CoreOversubscriptionRate must be > 1 (avoid division by 1)</remarks>
+        /// <remarks>if ProcessorCount == 1, for correct rangeSize calculation the const
+        // CoreOversubscriptionRate must be > 1 (avoid division by 1)</remarks>
         public static OrderablePartitioner<Tuple<long, long>> Create(
             long fromInclusive,
             long toExclusive
@@ -211,9 +223,11 @@ namespace System.Collections.Concurrent
         /// <param name="toExclusive">The upper, exclusive bound of the range.</param>
         /// <param name="rangeSize">The size of each subrange.</param>
         /// <returns>A partitioner.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/>
+        // argument is
         /// less than or equal to the <paramref name="fromInclusive"/> argument.</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="rangeSize"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="rangeSize"/> argument
+        // is
         /// less than or equal to 0.</exception>
         public static OrderablePartitioner<Tuple<long, long>> Create(
             long fromInclusive,
@@ -270,10 +284,13 @@ namespace System.Collections.Concurrent
         /// <param name="fromInclusive">The lower, inclusive bound of the range.</param>
         /// <param name="toExclusive">The upper, exclusive bound of the range.</param>
         /// <returns>A partitioner.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/>
+        // argument is
         /// less than or equal to the <paramref name="fromInclusive"/> argument.</exception>
-        /// <remarks>if ProcessorCount == 1, for correct rangeSize calculation the const CoreOversubscriptionRate must be > 1 (avoid division by 1),
-        /// and the same issue could occur with rangeSize == -1 when fromInclusive = int.MinValue and toExclusive = int.MaxValue.</remarks>
+        /// <remarks>if ProcessorCount == 1, for correct rangeSize calculation the const
+        // CoreOversubscriptionRate must be > 1 (avoid division by 1),
+        /// and the same issue could occur with rangeSize == -1 when fromInclusive = int.MinValue and
+        // toExclusive = int.MaxValue.</remarks>
         public static OrderablePartitioner<Tuple<int, int>> Create(
             int fromInclusive,
             int toExclusive
@@ -295,9 +312,11 @@ namespace System.Collections.Concurrent
         /// <param name="toExclusive">The upper, exclusive bound of the range.</param>
         /// <param name="rangeSize">The size of each subrange.</param>
         /// <returns>A partitioner.</returns>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="toExclusive"/>
+        // argument is
         /// less than or equal to the <paramref name="fromInclusive"/> argument.</exception>
-        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="rangeSize"/> argument is
+        /// <exception cref="System.ArgumentOutOfRangeException"> The <paramref name="rangeSize"/> argument
+        // is
         /// less than or equal to 0.</exception>
         public static OrderablePartitioner<Tuple<int, int>> Create(
             int fromInclusive,
@@ -352,18 +371,23 @@ namespace System.Collections.Concurrent
 
         #region DynamicPartitionEnumerator_Abstract class
         /// <summary>
-        /// DynamicPartitionEnumerator_Abstract defines the enumerator for each partition for the dynamic load-balance
+        /// DynamicPartitionEnumerator_Abstract defines the enumerator for each partition for the dynamic
+        // load-balance
         /// partitioning algorithm.
         /// - Partition is an enumerator of KeyValuePairs, each corresponding to an item in the data source:
         ///   the key is the index in the source collection; the value is the item itself.
-        /// - a set of such partitions share a reader over data source. The type of the reader is specified by
+        /// - a set of such partitions share a reader over data source. The type of the reader is specified
+        // by
         ///   TSourceReader.
-        /// - each partition requests a contiguous chunk of elements at a time from the source data. The chunk
+        /// - each partition requests a contiguous chunk of elements at a time from the source data. The
+        // chunk
         ///   size is initially 1, and doubles every time until it reaches the maximum chunk size.
-        ///   The implementation for GrabNextChunk() method has two versions: one for data source of IndexRange
+        ///   The implementation for GrabNextChunk() method has two versions: one for data source of
+        // IndexRange
         ///   types (IList and the array), one for data source of IEnumerable.
         /// - The method "Reset" is not supported for any partitioning algorithm.
-        /// - The implementation for MoveNext() method is same for all dynamic partitioners, so we provide it
+        /// - The implementation for MoveNext() method is same for all dynamic partitioners, so we provide
+        // it
         ///   in this abstract class.
         /// </summary>
         /// <typeparam name="TSource">Type of the elements in the data source</typeparam>
@@ -383,7 +407,8 @@ namespace System.Collections.Concurrent
             protected static int s_defaultMaxChunkSize = GetDefaultChunkSize<TSource>();
 
             //deferred allocating in MoveNext() with initial value 0, to avoid false sharing
-            //we also use the fact that: (_currentChunkSize==null) means MoveNext is never called on this enumerator
+            //we also use the fact that: (_currentChunkSize==null) means MoveNext is never called on this
+            // enumerator
             protected StrongBox<int>? _currentChunkSize;
 
             //deferring allocation in MoveNext() with initial value -1, to avoid false sharing
@@ -559,7 +584,8 @@ namespace System.Collections.Concurrent
         #region Dynamic Partitioner for source data of IEnumerable<> type
         /// <summary>
         /// Inherits from DynamicPartitioners
-        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an instance
+        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an
+        // instance
         /// of EnumerableOfPartitionsForIEnumerator defined internally
         /// </summary>
         /// <typeparam name="TSource">Type of elements in the source data</typeparam>
@@ -633,9 +659,11 @@ namespace System.Collections.Concurrent
             #region Internal classes:  InternalPartitionEnumerable, InternalPartitionEnumerator
             /// <summary>
             /// Provides customized implementation for source data of IEnumerable
-            /// Different from the counterpart for IList/Array, this enumerable maintains several additional fields
+            /// Different from the counterpart for IList/Array, this enumerable maintains several additional
+            // fields
             /// shared by the partitions it owns, including a boolean "_hasNoElementsLef", a shared lock, and a
-            /// shared count "_activePartitionCount" used to track active partitions when they were created statically
+            /// shared count "_activePartitionCount" used to track active partitions when they were created
+            // statically
             /// </summary>
             private sealed class InternalPartitionEnumerable
                 : IEnumerable<KeyValuePair<long, TSource>>,
@@ -685,7 +713,8 @@ namespace System.Collections.Concurrent
                     if (!_useSingleChunking)
                     {
                         // Time to allocate the fill buffer which is used to reduce the contention on the shared lock.
-                        // First pick the buffer size multiplier. We use 4 for when there are more than 4 cores, and just 1 for below. This is based on empirical evidence.
+                        // First pick the buffer size multiplier. We use 4 for when there are more than 4 cores, and just 1
+                        // for below. This is based on empirical evidence.
                         int fillBufferMultiplier = (Environment.ProcessorCount > 4) ? 4 : 1;
 
                         // and allocate the fill buffer using these two numbers
@@ -1167,7 +1196,8 @@ namespace System.Collections.Concurrent
             : OrderablePartitioner<TSource>
         {
             // TCollection can be: IList<TSource>, TSource[] and IEnumerable<TSource>
-            // Derived classes specify TCollection, and implement the abstract method GetOrderableDynamicPartitions_Factory accordingly
+            // Derived classes specify TCollection, and implement the abstract method
+            // GetOrderableDynamicPartitions_Factory accordingly
             private readonly TCollection _data;
 
             /// <summary>
@@ -1282,7 +1312,8 @@ namespace System.Collections.Concurrent
                 while (!HasNoElementsLeft)
                 {
                     Debug.Assert(_sharedIndex != null);
-                    // use the new Volatile.Read method because it is cheaper than Interlocked.Read on AMD64 architecture
+                    // use the new Volatile.Read method because it is cheaper than Interlocked.Read on AMD64
+                    // architecture
                     long oldSharedIndex = Volatile.Read(ref _sharedIndex.Value);
 
                     if (HasNoElementsLeft)
@@ -1331,7 +1362,8 @@ namespace System.Collections.Concurrent
                 get
                 {
                     Debug.Assert(_sharedIndex != null);
-                    // use the new Volatile.Read method because it is cheaper than Interlocked.Read on AMD64 architecture
+                    // use the new Volatile.Read method because it is cheaper than Interlocked.Read on AMD64
+                    // architecture
                     return Volatile.Read(ref _sharedIndex.Value) >= SourceCount - 1;
                 }
             }
@@ -1345,7 +1377,8 @@ namespace System.Collections.Concurrent
 
         /// <summary>
         /// Inherits from DynamicPartitioners
-        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an instance
+        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an
+        // instance
         /// of EnumerableOfPartitionsForIList defined internally
         /// </summary>
         /// <typeparam name="TSource">Type of elements in the source data</typeparam>
@@ -1442,7 +1475,8 @@ namespace System.Collections.Concurrent
 
         /// <summary>
         /// Inherits from DynamicPartitioners
-        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an instance
+        /// Provides customized implementation of GetOrderableDynamicPartitions_Factory method, to return an
+        // instance
         /// of EnumerableOfPartitionsForArray defined internally
         /// </summary>
         /// <typeparam name="TSource">Type of elements in the source data</typeparam>
@@ -1573,14 +1607,17 @@ namespace System.Collections.Concurrent
             /// Overrides OrderablePartitioner.GetOrderablePartitions
             /// Return a list of partitions, each of which enumerate a fixed part of the source data
             /// The elements of the source data are distributed to each partition as evenly as possible.
-            /// Specifically, if the total number of elements is N, and number of partitions is x, and N = a*x +b,
-            /// where a is the quotient, and b is the remainder. Then the first b partitions each has a + 1 elements,
+            /// Specifically, if the total number of elements is N, and number of partitions is x, and N = a*x
+            // +b,
+            /// where a is the quotient, and b is the remainder. Then the first b partitions each has a + 1
+            // elements,
             /// and the last x-b partitions each has a elements.
             /// For example, if N=10, x =3, then
             ///    partition 0 ranges [0,3],
             ///    partition 1 ranges [4,6],
             ///    partition 2 ranges [7,9].
-            /// This also takes care of the situation of (x&gt;N), the last x-N partitions are empty enumerators.
+            /// This also takes care of the situation of (x&gt;N), the last x-N partitions are empty
+            // enumerators.
             /// An empty enumerator is indicated by
             ///      (_startIndex == list.Count &amp;&amp; _endIndex == list.Count -1)
             /// </summary>
@@ -1618,8 +1655,10 @@ namespace System.Collections.Concurrent
 
         /// <summary>
         /// Static Partition for IList/Array.
-        /// This class implements all methods required by IEnumerator interface, except for the Current property.
-        /// Current Property is different for IList and Array. Arrays calls 'ldelem' instructions for faster element
+        /// This class implements all methods required by IEnumerator interface, except for the Current
+        // property.
+        /// Current Property is different for IList and Array. Arrays calls 'ldelem' instructions for faster
+        // element
         /// retrieval.
         /// </summary>
         //We assume the source collection is not being updated concurrently. Otherwise it will break the
@@ -1640,7 +1679,8 @@ namespace System.Collections.Concurrent
             /// <summary>
             /// Constructs an instance of StaticIndexRangePartition
             /// </summary>
-            /// <param name="startIndex">the start index in the source collection for the current partition </param>
+            /// <param name="startIndex">the start index in the source collection for the current partition
+            // </param>
             /// <param name="endIndex">the end index in the source collection for the current partition</param>
             protected StaticIndexRangePartition(int startIndex, int endIndex)
             {
@@ -1883,7 +1923,8 @@ namespace System.Collections.Concurrent
         }
 
         //--------------------
-        // The following part calculates the default chunk size. It is copied from System.Linq.Parallel.Scheduling.
+        // The following part calculates the default chunk size. It is copied from
+        // System.Linq.Parallel.Scheduling.
         //--------------------
 
         // The number of bytes we want "chunks" to be, when partitioning, etc. We choose 4 cache

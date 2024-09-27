@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Completion
         public bool ForceExpandedCompletionIndexCreation { get; init; } = false;
 
         /// <summary>
-        /// Set to true to update import completion cache in background if the provider isn't supposed to be triggered in the context.
+        /// Set to true to update import completion cache in background if the provider isn't supposed to be
+        // triggered in the context.
         /// (cache will always be refreshed when provider is triggered)
         /// </summary>
         public bool UpdateImportCompletionCacheInBackground { get; init; } = false;
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 return false;
             }
 
-            // Don't trigger snippet completion if the option value is "default" and the experiment is disabled for the user.
+            // Don't trigger snippet completion if the option value is "default" and the experiment is disabled
+            // for the user.
             return ShowNewSnippetExperienceUserOption ?? ShowNewSnippetExperienceFeatureFlag;
         }
     }

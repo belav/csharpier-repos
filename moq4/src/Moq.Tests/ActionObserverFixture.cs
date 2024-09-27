@@ -257,12 +257,12 @@ namespace Moq.Tests
                     x => x.VoidWithInt(It.IsAny<short>())
                 );
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                            private void AssertReconstructable(string expected, Action<IX> action)
-                After:
-                            void AssertReconstructable(string expected, Action<IX> action)
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void AssertReconstructable(string expected, Action<IX> action)
+After:
+void AssertReconstructable(string expected, Action<IX> action)
+*/
             }
 
             void AssertReconstructable(string expected, Action<IX> action)
@@ -271,12 +271,12 @@ namespace Moq.Tests
                 actual = PrepareForComparison.Instance.Visit(actual);
                 Assert.Equal(expected, actual.ToStringFixed());
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                            private void AssertReconstructable(Expression<Action<IX>> expected, Action<IX> action)
-                After:
-                            void AssertReconstructable(Expression<Action<IX>> expected, Action<IX> action)
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void AssertReconstructable(Expression<Action<IX>> expected, Action<IX> action)
+After:
+void AssertReconstructable(Expression<Action<IX>> expected, Action<IX> action)
+*/
             }
 
             void AssertReconstructable(Expression<Action<IX>> expected, Action<IX> action)
@@ -344,12 +344,12 @@ namespace Moq.Tests
             {
                 AssertFailsAfter<IX>("x => x.SealedY...", x => x.SealedY.Method());
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                            private void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
-                After:
-                            void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
+After:
+void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
+*/
             }
 
             void AssertFailsAfter<TRoot>(string expectedPartial, Action<TRoot> action)
@@ -401,18 +401,19 @@ namespace Moq.Tests
             [Fact]
             public void Indexer_with_default_value_on_lfs_and_matcher_on_rhs_both_having_same_types()
             {
-                // Same as above, since LHS and RHS are actually both part of a single parameter list of a method call `get_Item(...lhs, rhs).
+                // Same as above, since LHS and RHS are actually both part of a single parameter list of a method
+                // call `get_Item(...lhs, rhs).
                 AssertIncorrectlyReconstructsAs(
                     "x => x[It.IsAny<int>()] = 0",
                     x => x[0] = It.IsAny<int>()
                 );
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                            private void AssertIncorrectlyReconstructsAs(string expected, Action<IX> action)
-                After:
-                            void AssertIncorrectlyReconstructsAs(string expected, Action<IX> action)
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void AssertIncorrectlyReconstructsAs(string expected, Action<IX> action)
+After:
+void AssertIncorrectlyReconstructsAs(string expected, Action<IX> action)
+*/
             }
 
             void AssertIncorrectlyReconstructsAs(string expected, Action<IX> action)
@@ -421,12 +422,12 @@ namespace Moq.Tests
                 actual = PrepareForComparison.Instance.Visit(actual);
                 Assert.Equal(expected, actual.ToStringFixed());
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                            private void AssertIncorrectlyReconstructsAs(Expression<Action<IX>> expected, Action<IX> action)
-                After:
-                            void AssertIncorrectlyReconstructsAs(Expression<Action<IX>> expected, Action<IX> action)
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void AssertIncorrectlyReconstructsAs(Expression<Action<IX>> expected, Action<IX> action)
+After:
+void AssertIncorrectlyReconstructsAs(Expression<Action<IX>> expected, Action<IX> action)
+*/
             }
 
             void AssertIncorrectlyReconstructsAs(Expression<Action<IX>> expected, Action<IX> action)
@@ -442,12 +443,12 @@ namespace Moq.Tests
                 int this[int index] { get; set; }
                 void Method(int arg1, int arg2);
 
-                /* Unmerged change from project 'Moq.Tests(net6.0)'
-                Before:
-                        private sealed class PrepareForComparison : ExpressionVisitor
-                After:
-                        sealed class PrepareForComparison : ExpressionVisitor
-                */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private sealed class PrepareForComparison : ExpressionVisitor
+After:
+sealed class PrepareForComparison : ExpressionVisitor
+*/
             }
         }
 

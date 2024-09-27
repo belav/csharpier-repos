@@ -246,7 +246,8 @@ namespace System.ComponentModel
         /// <internalonly/>
         /// <devdoc>
         ///    <para>
-        ///       Returns a <see cref='System.String'/> containing the name of the <see cref='System.ComponentModel.Component'/> , if any. This method should not be
+        ///       Returns a <see cref='System.String'/> containing the name of the <see
+        // cref='System.ComponentModel.Component'/> , if any. This method should not be
         ///       overridden. For
         ///       internal use only.
         ///    </para>

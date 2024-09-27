@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
 /// <summary>
-/// Represents a middleware that extracts the specified path base from request path and postpend it to the request path base.
+/// Represents a middleware that extracts the specified path base from request path and postpend it
+// to the request path base.
 /// </summary>
 public class UsePathBaseMiddleware
 {
@@ -16,7 +17,8 @@ public class UsePathBaseMiddleware
     /// <summary>
     /// Creates a new instance of <see cref="UsePathBaseMiddleware"/>.
     /// </summary>
-    /// <param name="next">The delegate representing the next middleware in the request pipeline.</param>
+    /// <param name="next">The delegate representing the next middleware in the request
+    // pipeline.</param>
     /// <param name="pathBase">The path base to extract.</param>
     public UsePathBaseMiddleware(RequestDelegate next, PathString pathBase)
     {

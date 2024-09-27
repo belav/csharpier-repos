@@ -264,12 +264,14 @@ namespace ComWrappersTests
             var testObjUnwrapped = GetUnwrappedObjectHandleForComInstance(wrappers, comWrapper);
             AssertSameInstanceAndFreeHandle(testObj, testObjUnwrapped);
 
-            // Make sure that unwrapping the wrapper in a different ComWrappers context gets back a different object
+            // Make sure that unwrapping the wrapper in a different ComWrappers context gets back a different
+            // object
             var wrappers2 = new TestComWrappers();
             var testObjWrapper2 = GetUnwrappedObjectHandleForComInstance(wrappers2, comWrapper);
             AssertNotSameInstanceAndFreeHandle(testObj, testObjWrapper2);
 
-            // Make sure that unwrapping a wrapper from a different ComWrappers context in a context that has created a CCW
+            // Make sure that unwrapping a wrapper from a different ComWrappers context in a context that has
+            // created a CCW
             // for the object only unwraps the wrapper from that context, not from any context.
             var wrappers3 = new TestComWrappers();
             IntPtr comWrapper3 = wrappers3.GetOrCreateComInterfaceForObject(
@@ -1007,7 +1009,8 @@ namespace ComWrappersTests
             var cw = new TestComWrappers();
 
             {
-                // Activate the Reference Tracker system in the .NET runtime by consuming an IReferenceTracker instance.
+                // Activate the Reference Tracker system in the .NET runtime by consuming an IReferenceTracker
+                // instance.
                 IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
                 var trackerObj = (ITrackerObjectWrapper)
                     cw.GetOrCreateObjectForComInstance(

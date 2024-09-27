@@ -806,7 +806,8 @@ namespace Baz
             );
         }
 
-        // SymbolTreeInfo explicitly ignores non-public types from metadata(likely for perf reasons). So we don't need to test internals in PE reference
+        // SymbolTreeInfo explicitly ignores non-public types from metadata(likely for perf reasons). So we
+        // don't need to test internals in PE reference
         [InlineData(ReferenceType.None)]
         [InlineData(ReferenceType.Project)]
         [Theory]

@@ -65,7 +65,9 @@ namespace System.ComponentModel
         public string? LookupMember { get; }
 
         /// <summary>
-        /// Specifies the default value for the <see cref='System.ComponentModel.LookupBindingPropertiesAttribute'/>, which is <see langword='null'/>. This
+        /// Specifies the default value for the <see
+        // cref='System.ComponentModel.LookupBindingPropertiesAttribute'/>, which is <see langword='null'/>.
+        // This
         /// <see langword='static '/>field is read-only.
         /// </summary>
         public static readonly LookupBindingPropertiesAttribute Default =

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents type base mapping to a table-like object.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface ITableMappingBase : IAnnotatable
 {
@@ -30,7 +31,8 @@ public interface ITableMappingBase : IAnnotatable
 
     /// <summary>
     ///     Gets the value indicating whether this is the mapping for the principal entity type
-    ///     if the table-like object is shared. <see langword="null" /> is the table-like object is not shared.
+    ///     if the table-like object is shared. <see langword="null" /> is the table-like object is not
+    // shared.
     /// </summary>
     bool? IsSharedTablePrincipal { get; }
 
@@ -41,7 +43,8 @@ public interface ITableMappingBase : IAnnotatable
     bool? IsSplitEntityTypePrincipal { get; }
 
     /// <summary>
-    ///     Gets the value indicating whether the mapped table-like object includes rows for the derived entity types.
+    ///     Gets the value indicating whether the mapped table-like object includes rows for the derived
+    // entity types.
     ///     Set to <see langword="false" /> for inherited mappings.
     /// </summary>
     bool IncludesDerivedTypes { get; }

@@ -288,14 +288,14 @@ namespace System.Web.Compilation
                 if (reader.Name != "precompiledApp")
                     return false;
 
-                /* unused
-                if (reader.HasAttributes)
-                    while (reader.MoveToNextAttribute ())
-                        if (reader.Name == "updatable") {
-                            updatable = (reader.Value == "true");
-                            break;
-                        }
-                */
+/* unused
+if (reader.HasAttributes)
+while (reader.MoveToNextAttribute ())
+if (reader.Name == "updatable") {
+updatable = (reader.Value == "true");
+break;
+}
+*/
             }
 
             string[] compiled = Directory.GetFiles(HttpRuntime.BinDirectory, "*.compiled");
@@ -1041,8 +1041,10 @@ namespace System.Web.Compilation
             CompilerResults results = abuilder.BuildAssembly(vp);
 
             // No results is not an error - it is possible that the assembly builder contained only .asmx and
-            // .ashx files which had no body, just the directive. In such case, no code unit or code file is added
-            // to the assembly builder and, in effect, no assembly is produced but there are STILL types that need
+            // .ashx files which had no body, just the directive. In such case, no code unit or code file is
+            // added
+            // to the assembly builder and, in effect, no assembly is produced but there are STILL types that
+            // need
             // to be added to the cache.
             Assembly compiledAssembly = results != null ? results.CompiledAssembly : null;
             try
@@ -1378,7 +1380,8 @@ namespace System.Web.Compilation
             return configReferencedAssemblies;
         }
 
-        // The 2 GetType() overloads work on the global.asax, App_GlobalResources, App_WebReferences or App_Browsers
+        // The 2 GetType() overloads work on the global.asax, App_GlobalResources, App_WebReferences or
+        // App_Browsers
         public static Type GetType(string typeName, bool throwOnError)
         {
             return GetType(typeName, throwOnError, false);

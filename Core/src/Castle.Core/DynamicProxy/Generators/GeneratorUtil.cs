@@ -89,11 +89,16 @@ namespace Castle.DynamicProxy.Generators
                     return false;
                 }
 
-                // This check allows to make the detection logic more robust on the platforms which support custom modifiers.
-                // The robustness is achieved by the fact, that usually the `IsReadOnlyAttribute` emitted by the compiler is internal to the assembly.
-                // Therefore, if clients use Reflection.Emit to create "a copy" of the methods with read-only members, they cannot re-use the existing attribute.
-                // Instead, they are forced to emit their own `IsReadOnlyAttribute` to mark some argument as immutable.
-                // The `InAttribute` type OTOH was always available in BCL. Therefore, it's much easier to copy the modreq and be recognized by Castle.
+                // This check allows to make the detection logic more robust on the platforms which support custom
+                // modifiers.
+                // The robustness is achieved by the fact, that usually the `IsReadOnlyAttribute` emitted by the
+                // compiler is internal to the assembly.
+                // Therefore, if clients use Reflection.Emit to create "a copy" of the methods with read-only
+                // members, they cannot re-use the existing attribute.
+                // Instead, they are forced to emit their own `IsReadOnlyAttribute` to mark some argument as
+                // immutable.
+                // The `InAttribute` type OTOH was always available in BCL. Therefore, it's much easier to copy the
+                // modreq and be recognized by Castle.
                 //
                 // If check fails, resort to the IsReadOnlyAttribute check.
                 // Check for the required modifiers first, as it's faster.

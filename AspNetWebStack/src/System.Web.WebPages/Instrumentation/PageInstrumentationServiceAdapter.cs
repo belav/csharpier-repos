@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -33,7 +34,8 @@ namespace System.Web.WebPages.Instrumentation
                 if (_listenerAdapters == null)
                 {
                     IEnumerable<dynamic> inner = Adaptee.ExecutionListeners;
-                    // Bug 235916: If we pass the type as an object, the callsite is limited to wherever the object is assigned to
+                    // Bug 235916: If we pass the type as an object, the callsite is limited to wherever the object is
+                    // assigned to
                     // dynamic which avoids private reflection issues in partial trust.
                     _listenerAdapters = inner
                         .Select(listener => new PageExecutionListenerAdapter((object)listener))

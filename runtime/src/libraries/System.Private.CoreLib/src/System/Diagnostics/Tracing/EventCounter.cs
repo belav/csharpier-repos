@@ -10,10 +10,12 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// Provides the ability to collect statistics through EventSource
     ///
-    /// See https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.Tracing/documentation/EventCounterTutorial.md
+    /// See
+    // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.Tracing/documentation/EventCounterTutorial.md
     /// for a tutorial guide.
     ///
-    /// See https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.Tracing/tests/BasicEventSourceTest/TestEventCounter.cs
+    /// See
+    // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Diagnostics.Tracing/tests/BasicEventSourceTest/TestEventCounter.cs
     /// which shows tests, which are also useful in seeing actual use.
     /// </summary>
 #if !ES_BUILD_STANDALONE
@@ -47,7 +49,8 @@ namespace System.Diagnostics.Tracing
         }
 
         /// <summary>
-        /// Writes 'value' to the stream of values tracked by the counter.  This updates the sum and other statistics that will
+        /// Writes 'value' to the stream of values tracked by the counter.  This updates the sum and other
+        // statistics that will
         /// be logged on the next timer interval.
         /// </summary>
         /// <param name="value">The value.</param>
@@ -157,7 +160,8 @@ namespace System.Diagnostics.Tracing
 
         private void Enqueue(double value)
         {
-            // It is possible that two threads read the same bufferedValuesIndex, but only one will be able to write the slot, so that is okay.
+            // It is possible that two threads read the same bufferedValuesIndex, but only one will be able to
+            // write the slot, so that is okay.
             int i = _bufferedValuesIndex;
             while (true)
             {
@@ -169,8 +173,10 @@ namespace System.Diagnostics.Tracing
                 i++;
                 if (_bufferedValues.Length <= i)
                 {
-                    // It is possible that two threads both think the buffer is full, but only one get to actually flush it, the other
-                    // will eventually enter this code path and potentially calling Flushing on a buffer that is not full, and that's okay too.
+                    // It is possible that two threads both think the buffer is full, but only one get to actually flush
+                    // it, the other
+                    // will eventually enter this code path and potentially calling Flushing on a buffer that is not
+                    // full, and that's okay too.
                     lock (this) // Lock the counter
                         Flush();
                     i = 0;

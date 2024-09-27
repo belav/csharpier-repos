@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -137,7 +138,8 @@ namespace System.Web.WebPages.Test
         // E.g. "default.aspx", "http://localhost/WebSite1/subfolder1/default.aspx"
 
         /// <summary>
-        /// Creates an instance of HttpContext and assigns it to HttpContext.Current. Ensure that the returned value is disposed at the end of the test.
+        /// Creates an instance of HttpContext and assigns it to HttpContext.Current. Ensure that the
+        // returned value is disposed at the end of the test.
         /// </summary>
         /// <returns>Returns an IDisposable that restores the original HttpContext.</returns>
         internal static IDisposable CreateHttpContext(string filename, string url)

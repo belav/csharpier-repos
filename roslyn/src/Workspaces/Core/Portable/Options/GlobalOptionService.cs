@@ -130,8 +130,10 @@ internal sealed class GlobalOptionService(
         // Ensure the option persisters are available before taking the global lock
         var persisters = GetOptionPersisters();
 
-        // Performance: This is called very frequently, with the vast majority (> 99%) of calls requesting a previously
-        //  added key. In those cases, we can avoid taking the lock as _currentValues is an immutable structure.
+        // Performance: This is called very frequently, with the vast majority (> 99%) of calls requesting a
+        // previously
+        //  added key. In those cases, we can avoid taking the lock as _currentValues is an immutable
+        // structure.
         if (_currentValues.TryGetValue(optionKey, out var value))
         {
             return (T)value!;
@@ -149,7 +151,8 @@ internal sealed class GlobalOptionService(
         var persisters = GetOptionPersisters();
         using var values = TemporaryArray<object?>.Empty;
 
-        // Performance: The vast majority of calls are for previously added keys. In those cases, we can avoid taking the lock
+        // Performance: The vast majority of calls are for previously added keys. In those cases, we can
+        // avoid taking the lock
         //  as _currentValues is an immutable structure.
         var currentValues = _currentValues;
         foreach (var optionKey in optionKeys)
@@ -183,7 +186,8 @@ internal sealed class GlobalOptionService(
         ImmutableArray<IOptionPersister> persisters
     )
     {
-        // The option must be internally defined and it can't be a legacy option whose value is mapped to another option:
+        // The option must be internally defined and it can't be a legacy option whose value is mapped to
+        // another option:
         Debug.Assert(optionKey.Option is IOption2 { Definition.StorageMapping: null });
 
         if (currentValues.TryGetValue(optionKey, out var value))

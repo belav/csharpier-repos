@@ -53,7 +53,8 @@ internal static class RequestDelegateFilterPipelineBuilder
             filteredInvocation = currentFilterFactory(factoryContext, filteredInvocation);
         }
 
-        // The filter factories have run without modifying per-request behavior, we can skip running the pipeline.
+        // The filter factories have run without modifying per-request behavior, we can skip running the
+        // pipeline.
         if (ReferenceEquals(initialFilteredInvocation, filteredInvocation))
         {
             return requestDelegate;

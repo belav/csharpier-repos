@@ -299,7 +299,8 @@ namespace System.ServiceModel.WasHosting
             {
                 // hit this exception only when IIS does not support CBT
                 // safe for us to igore this COMException so that services not using CBT still can be activated
-                // if a service does use CBT in binding, channel listener will catch it when comparing IIS setting against WCF (on CBT) and throw exception
+                // if a service does use CBT in binding, channel listener will catch it when comparing IIS setting
+                // against WCF (on CBT) and throw exception
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
                     TraceUtility.TraceEvent(
@@ -807,7 +808,8 @@ namespace System.ServiceModel.WasHosting
                 {
                     // hit this exception only when IIS does not support CBT
                     // safe for us to igore this COMException so that services not using CBT still can be activated
-                    // if a service does use CBT in binding, channel listener will catch it when comparing IIS setting against WCF (on CBT) and throw exception
+                    // if a service does use CBT in binding, channel listener will catch it when comparing IIS setting
+                    // against WCF (on CBT) and throw exception
                     if (DiagnosticUtility.ShouldTraceWarning)
                     {
                         TraceUtility.TraceEvent(

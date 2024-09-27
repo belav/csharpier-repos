@@ -137,8 +137,8 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int isSupported(
-            /*DOMString*/HandleRef feature,
-            /*DOMString*/HandleRef version,
+/*DOMString*/HandleRef feature,
+/*DOMString*/HandleRef version,
             out bool ret
         );
 

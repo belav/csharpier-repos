@@ -110,21 +110,21 @@ namespace System.DirectoryServices.ActiveDirectory
         NetBiosNameDisabledByConflict = 8,
     }
 
-    /*
-    typedef enum
-    {
-        DsRole_RoleStandaloneWorkstation,
-        DsRole_RoleMemberWorkstation,
-        DsRole_RoleStandaloneServer,
-        DsRole_RoleMemberServer,
-        DsRole_RoleBackupDomainController,
-        DsRole_RolePrimaryDomainController,
-        DsRole_WorkstationWithSharedAccountDomain,
-        DsRole_ServerWithSharedAccountDomain,
-        DsRole_MemberWorkstationWithSharedAccountDomain,
-        DsRole_MemberServerWithSharedAccountDomain
-    }DSROLE_MACHINE_ROLE;
-    */
+/*
+typedef enum
+{
+DsRole_RoleStandaloneWorkstation,
+DsRole_RoleMemberWorkstation,
+DsRole_RoleStandaloneServer,
+DsRole_RoleMemberServer,
+DsRole_RoleBackupDomainController,
+DsRole_RolePrimaryDomainController,
+DsRole_WorkstationWithSharedAccountDomain,
+DsRole_ServerWithSharedAccountDomain,
+DsRole_MemberWorkstationWithSharedAccountDomain,
+DsRole_MemberServerWithSharedAccountDomain
+}DSROLE_MACHINE_ROLE;
+*/
 
     internal enum DSROLE_MACHINE_ROLE
     {
@@ -140,15 +140,15 @@ namespace System.DirectoryServices.ActiveDirectory
         DsRole_MemberServerWithSharedAccountDomain,
     }
 
-    /*
-    typedef enum
-    {
-        DsRolePrimaryDomainInfoBasic,
-        DsRoleUpgradeStatus,
-        DsRoleOperationState,
-        DsRolePrimaryDomainInfoBasicEx
-    }DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
-    */
+/*
+typedef enum
+{
+DsRolePrimaryDomainInfoBasic,
+DsRoleUpgradeStatus,
+DsRoleOperationState,
+DsRolePrimaryDomainInfoBasicEx
+}DSROLE_PRIMARY_DOMAIN_INFO_LEVEL;
+*/
 
     internal enum DSROLE_PRIMARY_DOMAIN_INFO_LEVEL
     {
@@ -543,16 +543,16 @@ namespace System.DirectoryServices.ActiveDirectory
         public TRUSTED_DOMAIN_AUTH_INFORMATION? AuthInformation;
     }
 
-    /*
-     typedef struct _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
-     DSROLE_MACHINE_ROLE MachineRole;
-     ULONG Flags;
-     LPWSTR DomainNameFlat;
-     LPWSTR DomainNameDns;
-     LPWSTR DomainForestName;
-     GUID DomainGuid;
-     } DSROLE_PRIMARY_DOMAIN_INFO_BASIC,  *PDSROLE_PRIMARY_DOMAIN_INFO_BASIC;
-     */
+/*
+typedef struct _DSROLE_PRIMARY_DOMAIN_INFO_BASIC {
+DSROLE_MACHINE_ROLE MachineRole;
+ULONG Flags;
+LPWSTR DomainNameFlat;
+LPWSTR DomainNameDns;
+LPWSTR DomainForestName;
+GUID DomainGuid;
+} DSROLE_PRIMARY_DOMAIN_INFO_BASIC,  *PDSROLE_PRIMARY_DOMAIN_INFO_BASIC;
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal sealed class DSROLE_PRIMARY_DOMAIN_INFO_BASIC
@@ -709,12 +709,12 @@ namespace System.DirectoryServices.ActiveDirectory
             IntPtr s
         );
 
-        /*
-        DWORD DsRoleGetPrimaryDomainInformation(
-          LPCWSTR lpServer,
-          DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-          PBYTE* Buffer
-        ); */
+/*
+DWORD DsRoleGetPrimaryDomainInformation(
+LPCWSTR lpServer,
+DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
+PBYTE* Buffer
+); */
 
         [LibraryImport(
             global::Interop.Libraries.Netapi32,
@@ -738,11 +738,11 @@ namespace System.DirectoryServices.ActiveDirectory
             out IntPtr Buffer
         );
 
-        /*
-        void DsRoleFreeMemory(
-          PVOID Buffer
-        );
-        */
+/*
+void DsRoleFreeMemory(
+PVOID Buffer
+);
+*/
         [LibraryImport(global::Interop.Libraries.Netapi32)]
         public static partial int DsRoleFreeMemory(IntPtr buffer);
     }

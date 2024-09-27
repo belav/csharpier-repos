@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 /// <summary>
 /// A component that handles remote authentication operations in an application.
 /// </summary>
-/// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in progress. It must be serializable.</typeparam>
+/// <typeparam name="TAuthenticationState">The user state type persisted while the operation is in
+// progress. It must be serializable.</typeparam>
 public partial class RemoteAuthenticatorViewCore<
     [DynamicallyAccessedMembers(JsonSerialized)] TAuthenticationState
 > : ComponentBase
@@ -37,79 +38,92 @@ public partial class RemoteAuthenticatorViewCore<
     }
 
     /// <summary>
-    /// Gets or sets the <typeparamref name="TAuthenticationState"/> instance to be preserved during the authentication operation.
+    /// Gets or sets the <typeparamref name="TAuthenticationState"/> instance to be preserved during the
+    // authentication operation.
     /// </summary>
     [Parameter]
     public TAuthenticationState AuthenticationState { get; set; } = default!;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogIn"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogIn"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment? LoggingIn { get; set; } = DefaultLogInFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Register"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.Register"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment? Registering { get; set; }
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.Profile"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.Profile"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment? UserProfile { get; set; }
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInCallback"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogInCallback"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment CompletingLoggingIn { get; set; } = DefaultLogInCallbackFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogInFailed"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogInFailed"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment<string?> LogInFailed { get; set; } = DefaultLogInFailedFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOut"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogOut"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment LogOut { get; set; } = DefaultLogOutFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutCallback"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogOutCallback"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment CompletingLogOut { get; set; } = DefaultLogOutCallbackFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutFailed"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogOutFailed"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment<string?> LogOutFailed { get; set; } = DefaultLogOutFailedFragment;
 
     /// <summary>
-    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see cref="RemoteAuthenticationActions.LogOutSucceeded"/> is being handled.
+    /// Gets or sets a <see cref="RenderFragment"/> with the UI to display while <see
+    // cref="RemoteAuthenticationActions.LogOutSucceeded"/> is being handled.
     /// </summary>
     [Parameter]
     public RenderFragment LogOutSucceeded { get; set; } = DefaultLoggedOutFragment;
 
     /// <summary>
-    /// Gets or sets an event callback that will be invoked with the stored authentication state when a log in operation succeeds.
+    /// Gets or sets an event callback that will be invoked with the stored authentication state when a
+    // log in operation succeeds.
     /// </summary>
     [Parameter]
     public EventCallback<TAuthenticationState> OnLogInSucceeded { get; set; }
 
     /// <summary>
-    /// Gets or sets an event callback that will be invoked with the stored authentication state when a log out operation succeeds.
+    /// Gets or sets an event callback that will be invoked with the stored authentication state when a
+    // log out operation succeeds.
     /// </summary>
     [Parameter]
     public EventCallback<TAuthenticationState> OnLogOutSucceeded { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="RemoteAuthenticationApplicationPathsOptions"/> with the paths to different authentication pages.
+    /// Gets or sets the <see cref="RemoteAuthenticationApplicationPathsOptions"/> with the paths to
+    // different authentication pages.
     /// </summary>
     [Parameter]
     public RemoteAuthenticationApplicationPathsOptions ApplicationPaths
@@ -333,7 +347,8 @@ public partial class RemoteAuthenticatorViewCore<
         if (
             (Navigation.HistoryEntryState != null && !ValidateSignOutRequestState())
             ||
-            // For backcompat purposes, keep SignOutManager working, even though we now use the history.state for this.
+            // For backcompat purposes, keep SignOutManager working, even though we now use the history.state
+            // for this.
             (
                 Navigation.HistoryEntryState == null && !await SignOutManager.ValidateSignOutState()
             )

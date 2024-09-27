@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
-    /// Indicates that the use of <see cref="ValueTuple"/> on a member is meant to be treated as a tuple with element names.
+    /// Indicates that the use of <see cref="ValueTuple"/> on a member is meant to be treated as a tuple
+    // with element names.
     /// </summary>
     [CLSCompliant(false)]
     [AttributeUsage(

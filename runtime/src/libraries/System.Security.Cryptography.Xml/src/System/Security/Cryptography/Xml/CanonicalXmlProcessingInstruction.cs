@@ -6,7 +6,8 @@ using System.Xml;
 
 namespace System.Security.Cryptography.Xml
 {
-    // the class that provides node subset state and canonicalization function to XmlProcessingInstruction
+    // the class that provides node subset state and canonicalization function to
+    // XmlProcessingInstruction
     internal sealed class CanonicalXmlProcessingInstruction
         : XmlProcessingInstruction,
             ICanonicalizableNode

@@ -20,19 +20,22 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
 public interface IModel : IReadOnlyModel, IAnnotatable
 {
     /// <summary>
-    ///     Gets the entity with the given name. Returns <see langword="null" /> if no entity type with the given name is found
+    ///     Gets the entity with the given name. Returns <see langword="null" /> if no entity type with
+    // the given name is found
     ///     or the given CLR type is being used by shared type entity type
     ///     or the entity type has a defining navigation.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="name">The name of the entity type to find.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
@@ -40,10 +43,12 @@ public interface IModel : IReadOnlyModel, IAnnotatable
 
     /// <summary>
     ///     Gets the entity type for the given name, defining navigation name
-    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
+    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is
+    // found.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="name">The name of the entity type to find.</param>
     /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
@@ -56,13 +61,16 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     );
 
     /// <summary>
-    ///     Gets the entity that maps the given entity class, where the class may be a proxy derived from the
-    ///     actual entity type. Returns <see langword="null" /> if no entity type with the given CLR type is found
+    ///     Gets the entity that maps the given entity class, where the class may be a proxy derived
+    // from the
+    ///     actual entity type. Returns <see langword="null" /> if no entity type with the given CLR
+    // type is found
     ///     or the given CLR type is being used by shared type entity type
     ///     or the entity type has a defining navigation.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="type">The type to find the corresponding entity type for.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
@@ -88,7 +96,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ///     Gets all entity types defined in the model.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <returns>All entity types defined in the model.</returns>
     new IEnumerable<IEntityType> GetEntityTypes();
@@ -127,12 +136,14 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     }
 
     /// <summary>
-    ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with
+    ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no
+    // entity type with
     ///     the given CLR type is found or the given CLR type is being used by shared type entity type
     ///     or the entity type has a defining navigation.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="type">The type to find the corresponding entity type for.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
@@ -142,10 +153,12 @@ public interface IModel : IReadOnlyModel, IAnnotatable
 
     /// <summary>
     ///     Gets the entity type for the given name, defining navigation name
-    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is found.
+    ///     and the defining entity type. Returns <see langword="null" /> if no matching entity type is
+    // found.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="type">The type of the entity type to find.</param>
     /// <param name="definingNavigationName">The defining navigation of the entity type to find.</param>
@@ -163,7 +176,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ///     Gets the entity types matching the given type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="type">The type of the entity type to find.</param>
     /// <returns>The entity types found.</returns>
@@ -174,7 +188,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ///     Returns the entity types corresponding to the least derived types from the given.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="type">The base type.</param>
     /// <param name="condition">An optional condition for filtering entity types.</param>
@@ -185,10 +200,12 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ) => ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(type, condition).Cast<IEntityType>();
 
     /// <summary>
-    ///     Gets a value indicating whether the given <see cref="MethodInfo" /> represents an indexer access.
+    ///     Gets a value indicating whether the given <see cref="MethodInfo" /> represents an indexer
+    // access.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="methodInfo">The <see cref="MethodInfo" /> to check.</param>
     bool IsIndexerMethod(MethodInfo methodInfo);
@@ -197,7 +214,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ///     Gets all the pre-convention configurations.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <returns>The pre-convention configurations.</returns>
     IEnumerable<ITypeMappingConfiguration> GetTypeMappingConfigurations();
@@ -206,7 +224,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     ///     Finds the pre-convention configuration for a given scalar <see cref="Type" />.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="scalarType">The CLR type.</param>
     /// <returns>The pre-convention configuration or <see langword="null" /> if none is found.</returns>

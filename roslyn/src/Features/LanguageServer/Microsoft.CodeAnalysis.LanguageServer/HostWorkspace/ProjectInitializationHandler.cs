@@ -62,11 +62,13 @@ internal class ProjectInitializationHandler : IDisposable
 
     public async Task SubscribeToInitializationCompleteAsync(CancellationToken cancellationToken)
     {
-        // Use the ServiceBrokerClient so that we actually hold onto the instance of the service to prevent it from being disposed of until we're shutting down.
+        // Use the ServiceBrokerClient so that we actually hold onto the instance of the service to prevent
+        // it from being disposed of until we're shutting down.
         var didSubscribe = await TrySubscribeAsync(cancellationToken);
         if (!didSubscribe)
         {
-            // Service might be null the first time we try to access it - wait for it to become available on the remote side.
+            // Service might be null the first time we try to access it - wait for it to become available on the
+            // remote side.
             await _serviceAvailable.Task;
             didSubscribe = await TrySubscribeAsync(cancellationToken);
             Contract.ThrowIfFalse(

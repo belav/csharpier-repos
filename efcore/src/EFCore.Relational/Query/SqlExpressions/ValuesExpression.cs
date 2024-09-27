@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 /// <summary>
 ///     <para>
-///         An expression that represents a constant table in SQL, sometimes known as a table value constructor.
+///         An expression that represents a constant table in SQL, sometimes known as a table value
+// constructor.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -68,7 +70,8 @@ public class ValuesExpression : TableExpressionBase, IClonableTableExpressionBas
             : new ValuesExpression(Alias, newRowValues, ColumnNames);
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     public virtual ValuesExpression Update(IReadOnlyList<RowValueExpression> rowValues) =>

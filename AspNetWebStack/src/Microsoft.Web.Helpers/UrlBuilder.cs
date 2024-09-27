@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Globalization;
@@ -56,7 +57,8 @@ namespace Microsoft.Web.Helpers
             }
             else
             {
-                // If the url is being built as part of a WebPages request, use the template stack to identify the current template's virtual path.
+                // If the url is being built as part of a WebPages request, use the template stack to identify the
+                // current template's virtual path.
                 _path = GetPageRelativePath(httpContext, path);
                 int queryStringIndex = (_path ?? String.Empty).IndexOf('?');
                 if (queryStringIndex != -1)

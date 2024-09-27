@@ -139,11 +139,13 @@ namespace DebuggerTests.GetPropertiesTests
             "BaseBase#BaseBase_PropertyForHidingWithAutoProperty";
         public string BaseBase_AutoPropertyForHidingWithAutoProperty { get; set; }
 
-        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and virtual->override->override (VOO)
+        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and
+        // virtual->override->override (VOO)
         public virtual string BaseBase_PropertyForVOH => "BaseBase#BaseBase_PropertyForVOH";
         public virtual string BaseBase_PropertyForVHO => "BaseBase#BaseBase_PropertyForVHO";
 
-        // public virtual string BaseBase_PropertyForVOO => "BaseBase#BaseBase_PropertyForVOO"; // FixMe: Issue #69788
+        // public virtual string BaseBase_PropertyForVOO => "BaseBase#BaseBase_PropertyForVOO"; // FixMe:
+        // Issue #69788
         public virtual string BaseBase_AutoPropertyForVOH { get; set; }
         public virtual string BaseBase_AutoPropertyForVHO { get; set; }
 
@@ -220,11 +222,13 @@ namespace DebuggerTests.GetPropertiesTests
         public virtual string FirstName => "BaseClass#FirstName";
         public virtual string LastName => "BaseClass#LastName";
 
-        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and virtual->override->override (VOO)
+        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and
+        // virtual->override->override (VOO)
         public override string BaseBase_PropertyForVOH => "Base#BaseBase_PropertyForVOH";
         public new virtual string BaseBase_PropertyForVHO => "Base#BaseBase_PropertyForVHO";
 
-        // public override string BaseBase_PropertyForVOO => "BaseBase#BaseBase_PropertyForVOO"; // FixMe: Issue #69788
+        // public override string BaseBase_PropertyForVOO => "BaseBase#BaseBase_PropertyForVOO"; // FixMe:
+        // Issue #69788
         public override string BaseBase_AutoPropertyForVOH { get; set; }
         public new virtual string BaseBase_AutoPropertyForVHO { get; set; }
 
@@ -285,11 +289,13 @@ namespace DebuggerTests.GetPropertiesTests
             "Derived#BaseBase_AutoPropertyForHidingWithProperty";
         private new string BaseBase_FieldForHidingWithAutoProperty { get; set; }
 
-        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and virtual->override->override (VOO)
+        // for virtual->override->new-hidden (VOH), virtual->new-hidden->override (VHO) and
+        // virtual->override->override (VOO)
         public new string BaseBase_PropertyForVOH => "Derived#BaseBase_PropertyForVOH";
         public override string BaseBase_PropertyForVHO => "Derived#BaseBase_PropertyForVHO";
 
-        // public override string BaseBase_PropertyForVOO => "Derived#BaseBase_PropertyForVOO"; // FixMe: Issue #69788
+        // public override string BaseBase_PropertyForVOO => "Derived#BaseBase_PropertyForVOO"; // FixMe:
+        // Issue #69788
         public new string BaseBase_AutoPropertyForVOH { get; set; }
         public override string BaseBase_AutoPropertyForVHO { get; set; }
 

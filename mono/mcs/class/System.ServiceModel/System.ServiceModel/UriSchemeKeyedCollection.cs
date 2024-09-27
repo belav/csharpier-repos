@@ -38,8 +38,8 @@ namespace System.ServiceModel
             : base(new object())
         {
             if (addresses == null)
-                /* FIXME: masterinfo says, param name should be
-                   baseAddresses */
+/* FIXME: masterinfo says, param name should be
+baseAddresses */
                 throw new ArgumentNullException("addresses");
 
             for (int i = 0; i < addresses.Length; i++)

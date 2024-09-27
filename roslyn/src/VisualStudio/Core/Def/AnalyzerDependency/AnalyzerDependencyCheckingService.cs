@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     internal sealed class AnalyzerDependencyCheckingService
     {
         /// <summary>
-        /// Object given as key for <see cref="HostDiagnosticUpdateSource.UpdateAndAddDiagnosticsArgsForProject"/>.
+        /// Object given as key for <see
+        // cref="HostDiagnosticUpdateSource.UpdateAndAddDiagnosticsArgsForProject"/>.
         /// </summary>
         private static readonly object s_dependencyConflictErrorId = new();
         private static readonly IIgnorableAssemblyList s_systemPrefixList =
@@ -49,8 +50,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         private CancellationTokenSource _cancellationTokenSource = new();
 
         /// <summary>
-        /// The most recently started analysis task; if we start a new analysis we will cancel the previous one and start the next one
-        /// as a continuation of this task to ensure any notification to <see cref="_hostDiagnosticUpdateSource"/> was done first.
+        /// The most recently started analysis task; if we start a new analysis we will cancel the previous
+        // one and start the next one
+        /// as a continuation of this task to ensure any notification to <see
+        // cref="_hostDiagnosticUpdateSource"/> was done first.
         /// </summary>
         private Task _task = Task.CompletedTask;
         private ImmutableHashSet<string> _previousAnalyzerPaths = ImmutableHashSet.Create<string>(
@@ -112,7 +115,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 // Capturing cancellationToken here so the right instance is passed into the delegates below
                 var cancellationToken = _cancellationTokenSource.Token;
 
-                // We are explicitly relying on SafeContinueWith including LazyCancellation as a continuation option here
+                // We are explicitly relying on SafeContinueWith including LazyCancellation as a continuation option
+                // here
                 _task = _task.SafeContinueWith(
                     _ =>
                     {
@@ -170,7 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             {
                 builder.Clear();
 
-                // If our analysis has been cancelled, it means another request has been queued behind us; thus it's OK to stop
+                // If our analysis has been cancelled, it means another request has been queued behind us; thus it's
+                // OK to stop
                 // doing the analysis now and let that other one fix up any stale results.
                 cancellationToken.ThrowIfCancellationRequested();
 

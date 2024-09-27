@@ -1329,7 +1329,8 @@ namespace System.Workflow.ComponentModel.Design
                         Point imagePoint = new Point(itemBounds.Left + 3, itemBounds.Top + 3);
                         Size imageSize = this.enabledItems[i].Image.Size;
 
-                        //this code is to support a border around currently supported item, which unfortunatly is not currently available
+                        //this code is to support a border around currently supported item, which unfortunatly is not
+                        // currently available
                         //if (this.enabledItems[i] == this.parent.SelectedItem)
                         //{
                         //    Rectangle hotTrack = new Rectangle(imagePoint, imageSize);
@@ -4199,7 +4200,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private void EnsureValidDesignerPreview(ActivityDesigner designer)
         {
-            //We introduce this logic as beyond a point we can not show the preview as the designer size can become too large to show
+            //We introduce this logic as beyond a point we can not show the preview as the designer size can
+            // become too large to show
             //So if we go beyond a point then we always collapse the activity before rendering the preview
             CompositeActivityDesigner previewDesigner = designer as CompositeActivityDesigner;
             if (previewDesigner != null && previewDesigner.Expanded)

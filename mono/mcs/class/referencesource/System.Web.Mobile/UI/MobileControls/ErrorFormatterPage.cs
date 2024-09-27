@@ -12,16 +12,16 @@ using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Error Formatter page class.
-     * This is essentially a precompiled Mobile page, that formats error messages
-     * for other devices.
-     *
-     * NOTE: While there is nothing in the framework to let the developer override
-     * this page, it has been written so the developer can do so.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Error Formatter page class.
+* This is essentially a precompiled Mobile page, that formats error messages
+* for other devices.
+*
+* NOTE: While there is nothing in the framework to let the developer override
+* this page, it has been written so the developer can do so.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage"]/*' />
     [ToolboxItem(false)]
@@ -40,13 +40,15 @@ namespace System.Web.UI.MobileControls
     {
         private MobileErrorInfo _errorInfo;
 
-        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.ErrorInfo"]/*' />
+        /// <include file='doc\ErrorFormatterPage.uex'
+        // path='docs/doc[@for="ErrorFormatterPage.ErrorInfo"]/*' />
         protected MobileErrorInfo ErrorInfo
         {
             get { return _errorInfo; }
         }
 
-        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.OnInit"]/*' />
+        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.OnInit"]/*'
+        // />
         protected override void OnInit(EventArgs e)
         {
             base.OnInit(e);
@@ -79,7 +81,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.InitContent"]/*' />
+        /// <include file='doc\ErrorFormatterPage.uex'
+        // path='docs/doc[@for="ErrorFormatterPage.InitContent"]/*' />
         protected virtual void InitContent()
         {
             Form form;
@@ -140,13 +143,15 @@ namespace System.Web.UI.MobileControls
             Controls.Add(form);
         }
 
-        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.SavePageStateToPersistenceMedium"]/*' />
+        /// <include file='doc\ErrorFormatterPage.uex'
+        // path='docs/doc[@for="ErrorFormatterPage.SavePageStateToPersistenceMedium"]/*' />
         protected override void SavePageStateToPersistenceMedium(Object viewState)
         {
             // Override and ignore. No need to save view state for this page.
         }
 
-        /// <include file='doc\ErrorFormatterPage.uex' path='docs/doc[@for="ErrorFormatterPage.LoadPageStateFromPersistenceMedium"]/*' />
+        /// <include file='doc\ErrorFormatterPage.uex'
+        // path='docs/doc[@for="ErrorFormatterPage.LoadPageStateFromPersistenceMedium"]/*' />
         protected override Object LoadPageStateFromPersistenceMedium()
         {
             // Override and ignore. No view state to load for this page.

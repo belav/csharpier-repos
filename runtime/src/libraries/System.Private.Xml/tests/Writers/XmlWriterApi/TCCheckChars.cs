@@ -449,12 +449,13 @@ namespace System.Xml.XmlWriterApiTests
             Assert.Fail();
         }
 
-        /*=============================================================================
-        The writer constructor will throw XmlException when CheckCharacters=true and
-            - IndentChars or NewLineChars contains non-whitespace character when NewLineOnAttributes=true
-        or
-            - IndentChars or NewLineChars contains <, &, ]]> or an invalid surrogate character when NewLineOnAttributes=false
-        ===============================================================================*/
+/*=============================================================================
+The writer constructor will throw XmlException when CheckCharacters=true and
+- IndentChars or NewLineChars contains non-whitespace character when NewLineOnAttributes=true
+or
+- IndentChars or NewLineChars contains <, &, ]]> or an invalid surrogate character when
+NewLineOnAttributes=false
+===============================================================================*/
 
         [Theory]
         [XmlWriterInlineData("<")]

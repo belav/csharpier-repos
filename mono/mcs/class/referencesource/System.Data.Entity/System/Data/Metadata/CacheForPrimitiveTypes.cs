@@ -32,7 +32,8 @@ namespace System.Data.Metadata.Edm
         // In this class, primitive type is to be cached
 
         // Key for the cache: primitive type kind
-        // Value for the cache: List<PrimitiveType>.  A list is used because there an be multiple types mapping to the
+        // Value for the cache: List<PrimitiveType>.  A list is used because there an be multiple types
+        // mapping to the
         // same primitive type kind.  For example, sqlserver has multiple string types.
 
         private List<PrimitiveType>[] _primitiveTypeMap = new List<PrimitiveType>[
@@ -70,7 +71,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Try and get the mapped type for the given primitiveTypeKind in the given dataspace
         /// </summary>
-        /// <param name="primitiveTypeKind">The primitive type kind of the primitive type to retrieve</param>
+        /// <param name="primitiveTypeKind">The primitive type kind of the primitive type to
+        // retrieve</param>
         /// <param name="facets">The facets to use in picking the primitive type</param>
         /// <param name="type">The resulting type</param>
         /// <returns>Whether a type was retrieved or not</returns>
@@ -82,7 +84,8 @@ namespace System.Data.Metadata.Edm
         {
             type = null;
 
-            // Now, see if we have any types for this model type, if so, loop through to find the best matching one
+            // Now, see if we have any types for this model type, if so, loop through to find the best matching
+            // one
             List<PrimitiveType> primitiveTypes = EntityUtil.CheckArgumentOutOfRange(
                 _primitiveTypeMap,
                 (int)primitiveTypeKind,

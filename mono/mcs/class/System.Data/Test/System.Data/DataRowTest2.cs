@@ -136,7 +136,8 @@ namespace MonoTests.System.Data
             DataRow myRow = myTable.Rows[0];
 
             int iProposed;
-            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and Proposed values become available
+            //After calling the DataRow object's BeginEdit method, if you change the value, the Current and
+            // Proposed values become available
             myRow.BeginEdit();
             myRow[0] = 7;
             iProposed = (int)myRow[0, DataRowVersion.Proposed];
@@ -833,15 +834,17 @@ namespace MonoTests.System.Data
             drArrResult = drChild.GetParentRows("Parent-Child", DataRowVersion.Default);
             Assert.AreEqual(drArrExcepted, drArrResult, "DRW44");
 
-            /* .Net don't work as expected
-                //Check DataRowVersion.Proposed
-                // Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed
-                drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
-                //drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
-    
-                drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
-                Assert.AreEqual(drArrExcepted,  drArrResult, "DRW45");
-            */
+/* .Net don't work as expected
+//Check DataRowVersion.Proposed
+// Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed
+drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
+//drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
+
+drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
+Assert.AreEqual(drArrExcepted,  drArrResult, "DRW45");
+*/
         }
 
         private void CheckRowVersion(DataRow dr)
@@ -2331,14 +2334,14 @@ namespace MonoTests.System.Data
             //	testMore();
         }
 
-        /*public void testMore()
-        {
-            DataTable dt = DataProvider.CreateParentDataTable();
-            dt.Rows[0].BeginEdit();
-            dt.Rows[0][0] = 10;
-            dt.Rows[0].EndEdit();
-            dt.AcceptChanges();
-        }*/
+/*public void testMore()
+{
+DataTable dt = DataProvider.CreateParentDataTable();
+dt.Rows[0].BeginEdit();
+dt.Rows[0][0] = 10;
+dt.Rows[0].EndEdit();
+dt.AcceptChanges();
+}*/
 
         [Test]
         public void RejectChanges()
@@ -3041,7 +3044,8 @@ namespace MonoTests.System.Data
 
             t.RowChanged += new DataRowChangeEventHandler(RowChangedHandler);
 
-            /* neither of the calls to EndEdit below generate a RowChangedHandler on MS.  the first one does on mono */
+/* neither of the calls to EndEdit below generate a RowChangedHandler on MS.  the first one does on
+mono */
             t.DefaultView[0].BeginEdit();
             t.DefaultView[0].EndEdit(); /* this generates a call to the row changed handler */
             t.DefaultView[0].EndEdit(); /* this doesn't */

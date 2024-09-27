@@ -17,7 +17,8 @@ namespace System.Runtime.CompilerServices
     {
         private readonly object _wrappedException; // EE expects this name
 
-        // Not an api but has to be public as System.Linq.Expression invokes this through Reflection when an expression
+        // Not an api but has to be public as System.Linq.Expression invokes this through Reflection when an
+        // expression
         // throws an object that doesn't derive from Exception.
         public RuntimeWrappedException(object thrownObject)
             : base(SR.RuntimeWrappedException)

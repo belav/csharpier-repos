@@ -516,19 +516,19 @@ namespace System.ServiceModel.Security
             }
         }
 
-        /*
-        *   Negotiation consists of the following steps (some may be async in the async case):
-        *   1. Create negotiation state
-        *   2. Initialize channel factories
-        *   3. Create an channel
-        *   4. Open the channel
-        *   5. Create the next message to send to server
-        *   6. Send the message and get reply
-        *   8. Process incoming message and get next outgoing message.
-        *   9. If no outgoing message, then negotiation is over. Go to step 11.
-        *   10. Goto step 6
-        *   11. Close the IRequest channel and complete
-        */
+/*
+*   Negotiation consists of the following steps (some may be async in the async case):
+*   1. Create negotiation state
+*   2. Initialize channel factories
+*   3. Create an channel
+*   4. Open the channel
+*   5. Create the next message to send to server
+*   6. Send the message and get reply
+*   8. Process incoming message and get next outgoing message.
+*   9. If no outgoing message, then negotiation is over. Go to step 11.
+*   10. Goto step 6
+*   11. Close the IRequest channel and complete
+*/
         protected SecurityToken DoNegotiation(TimeSpan timeout)
         {
             ThrowIfClosedOrCreated();

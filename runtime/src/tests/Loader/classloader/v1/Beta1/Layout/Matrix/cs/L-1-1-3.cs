@@ -10,7 +10,8 @@
 // See ReadMe.txt in the same project as this source for
 // further details about these tests.
 //
-//@charp - C# will not allow illegal assembly access, so there is no negative testing for that in the L-*-*-3 suites
+//@charp - C# will not allow illegal assembly access, so there is no negative testing for that in
+// the L-*-*-3 suites
 
 using System;
 using Xunit;

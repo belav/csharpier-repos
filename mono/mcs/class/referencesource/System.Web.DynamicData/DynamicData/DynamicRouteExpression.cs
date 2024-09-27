@@ -21,7 +21,8 @@ namespace System.Web.DynamicData
         private PropertyExpression _expression = new PropertyExpression();
 
         /// <summary>
-        /// An optional column name that can be used to change the filtering mode (i.e. filter by foreign key instead
+        /// An optional column name that can be used to change the filtering mode (i.e. filter by foreign
+        // key instead
         /// of primary key).
         /// </summary>
         [DefaultValue("")]

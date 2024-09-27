@@ -7,7 +7,8 @@
 // Seed: 701457804295464207
 // Reduced from 37.8 KiB to 0.3 KiB in 00:00:50
 // Hits JIT assert in Release:
-// Assertion failed '!parentStruct->lvUndoneStructPromotion' in 'Program:M2(S0)' during 'Mark local vars' (IL size 33)
+// Assertion failed '!parentStruct->lvUndoneStructPromotion' in 'Program:M2(S0)' during 'Mark local
+// vars' (IL size 33)
 //
 //     File: D:\a\_work\1\s\src\coreclr\jit\lclvars.cpp Line: 4039
 //

@@ -27,11 +27,14 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages
         public string[] Languages { get; }
 
         /// <summary>
-        /// Identifiers in code (or StringSyntaxAttribute) used to identify an embedded language string. For example
+        /// Identifiers in code (or StringSyntaxAttribute) used to identify an embedded language string. For
+        // example
         /// <c>Regex</c> or <c>Json</c>.
         /// </summary>
-        /// <remarks>This can be used to find usages of an embedded language using a comment marker like <c>//
-        /// lang=regex</c> or passed to a symbol annotated with <c>[StringSyntaxAttribyte("Regex")]</c>.  The identifier
+        /// <remarks>This can be used to find usages of an embedded language using a comment marker like
+        // <c>//
+        /// lang=regex</c> or passed to a symbol annotated with <c>[StringSyntaxAttribyte("Regex")]</c>.
+        // The identifier
         /// is case sensitive for the StringSyntaxAttribute, and case insensitive for the comment.
         /// </remarks>
         public string[] Identifiers { get; }

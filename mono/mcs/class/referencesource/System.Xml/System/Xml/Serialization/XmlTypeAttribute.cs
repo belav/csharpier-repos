@@ -26,13 +26,15 @@ namespace System.Xml.Serialization
         string ns;
         string typeName;
 
-        /// <include file='doc\XmlTypeAttribute.uex' path='docs/doc[@for="XmlTypeAttribute.XmlTypeAttribute"]/*' />
+        /// <include file='doc\XmlTypeAttribute.uex'
+        // path='docs/doc[@for="XmlTypeAttribute.XmlTypeAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlTypeAttribute() { }
 
-        /// <include file='doc\XmlTypeAttribute.uex' path='docs/doc[@for="XmlTypeAttribute.XmlTypeAttribute1"]/*' />
+        /// <include file='doc\XmlTypeAttribute.uex'
+        // path='docs/doc[@for="XmlTypeAttribute.XmlTypeAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -41,7 +43,8 @@ namespace System.Xml.Serialization
             this.typeName = typeName;
         }
 
-        /// <include file='doc\XmlTypeAttribute.uex' path='docs/doc[@for="XmlTypeAttribute.AnonymousType"]/*' />
+        /// <include file='doc\XmlTypeAttribute.uex'
+        // path='docs/doc[@for="XmlTypeAttribute.AnonymousType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -51,7 +54,8 @@ namespace System.Xml.Serialization
             set { anonymousType = value; }
         }
 
-        /// <include file='doc\XmlTypeAttribute.uex' path='docs/doc[@for="XmlTypeAttribute.IncludeInSchema"]/*' />
+        /// <include file='doc\XmlTypeAttribute.uex'
+        // path='docs/doc[@for="XmlTypeAttribute.IncludeInSchema"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

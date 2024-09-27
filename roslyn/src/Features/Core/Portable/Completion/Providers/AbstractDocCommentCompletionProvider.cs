@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             (string tagOpen, string textBeforeCaret, string textAfterCaret, string? tagClose)
         >()
         {
-            //                                        tagOpen                                  textBeforeCaret       $$  textAfterCaret                            tagClose
+            //                                        tagOpen                                  textBeforeCaret
+            // $$  textAfterCaret                            tagClose
             {
                 ExceptionElementName,
                 ($"<{ExceptionElementName}", $" {CrefAttributeName}=\"", "\"", null)
@@ -170,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         protected abstract IEnumerable<string> GetKeywordNames();
 
         /// <summary>
-        /// A temporarily hack that should be removed once/if https://github.com/dotnet/roslyn/issues/53092 is fixed.
+        /// A temporarily hack that should be removed once/if https://github.com/dotnet/roslyn/issues/53092
+        // is fixed.
         /// </summary>
         protected abstract ImmutableArray<IParameterSymbol> GetParameters(ISymbol symbol);
 

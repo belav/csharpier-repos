@@ -173,7 +173,8 @@ namespace Microsoft.CodeAnalysis
             //
             // If the parameter kind is System.Type, (also, the middle line in above diagram) its value is
             // stored as a SerString (as defined in the previous paragraph), representing its canonical name.
-            // The canonical name is its full type name, followed optionally by the assembly where it is defined,
+            // The canonical name is its full type name, followed optionally by the assembly where it is
+            // defined,
             // its version, culture and public-key-token. If the assembly name is omitted, the CLI looks first
             // in the current assembly, and then in the system library (mscorlib); in these two special cases,
             // it is permitted to omit the assembly-name, version, culture and public-key-token.

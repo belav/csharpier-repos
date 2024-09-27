@@ -256,7 +256,8 @@ namespace System.Configuration
         }
 
         /// <summary>
-        ///     Recursively loads configuration section groups and sections belonging to a configuration object.
+        ///     Recursively loads configuration section groups and sections belonging to a configuration
+        // object.
         /// </summary>
         private static void PreloadConfiguration(Configuration configuration)
         {

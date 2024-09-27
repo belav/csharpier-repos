@@ -170,7 +170,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 {
     // <Area>variance</Area>
     // <Title> Error- Basic covariance on delegate types </Title>
-    // <Description> Having a covariant delegate and assigning it to a bigger type, incorrect types</Description>
+    // <Description> Having a covariant delegate and assigning it to a bigger type, incorrect
+    // types</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>
@@ -674,7 +675,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.basic.dlgateco
 {
     // <Area>variance</Area>
     // <Title> Error- Basic covariance on delegate types </Title>
-    // <Description> Having a covariant delegate and assigning it to a bigger type, incorrect types</Description>
+    // <Description> Having a covariant delegate and assigning it to a bigger type, incorrect
+    // types</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success></Expects>
     // <Code>

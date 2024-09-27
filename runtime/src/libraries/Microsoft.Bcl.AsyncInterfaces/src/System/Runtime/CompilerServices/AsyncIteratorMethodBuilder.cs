@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // NOTE: This is a copy of
+//
 // https://github.com/dotnet/coreclr/blame/07b3afc27304800f00975c8fd4836b319aaa8820/src/System.Private.CoreLib/shared/System/Runtime/CompilerServices/AsyncIteratorMethodBuilder.cs
 // modified to be compilable against .NET Standard 2.0.  Key differences:
 // - Uses the wrapped AsyncTaskMethodBuilder for Create and MoveNext.
@@ -25,14 +26,16 @@ namespace System.Runtime.CompilerServices
         public static AsyncIteratorMethodBuilder Create() =>
             new AsyncIteratorMethodBuilder() { _methodBuilder = AsyncTaskMethodBuilder.Create() };
 
-        /// <summary>Invokes <see cref="IAsyncStateMachine.MoveNext"/> on the state machine while guarding the <see cref="ExecutionContext"/>.</summary>
+        /// <summary>Invokes <see cref="IAsyncStateMachine.MoveNext"/> on the state machine while guarding
+        // the <see cref="ExecutionContext"/>.</summary>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="stateMachine">The state machine instance, passed by reference.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void MoveNext<TStateMachine>(ref TStateMachine stateMachine)
             where TStateMachine : IAsyncStateMachine => _methodBuilder.Start(ref stateMachine);
 
-        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
+        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter
+        // completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
@@ -45,7 +48,8 @@ namespace System.Runtime.CompilerServices
             where TStateMachine : IAsyncStateMachine =>
             _methodBuilder.AwaitOnCompleted(ref awaiter, ref stateMachine);
 
-        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
+        /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter
+        // completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
@@ -61,7 +65,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>Marks iteration as being completed, whether successfully or otherwise.</summary>
         public void Complete() => _methodBuilder.SetResult();
 
-        /// <summary>Gets an object that may be used to uniquely identify this builder to the debugger.</summary>
+        /// <summary>Gets an object that may be used to uniquely identify this builder to the
+        // debugger.</summary>
         internal object ObjectIdForDebugger =>
             _id ?? Interlocked.CompareExchange(ref _id, new object(), null) ?? _id;
     }

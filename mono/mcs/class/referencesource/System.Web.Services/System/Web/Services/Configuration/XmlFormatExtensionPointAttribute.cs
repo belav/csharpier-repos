@@ -8,7 +8,8 @@ namespace System.Web.Services.Configuration
 {
     using System;
 
-    /// <include file='doc\XmlFormatExtensionPointAttribute.uex' path='docs/doc[@for="XmlFormatExtensionPointAttribute"]/*' />
+    /// <include file='doc\XmlFormatExtensionPointAttribute.uex'
+    // path='docs/doc[@for="XmlFormatExtensionPointAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -18,7 +19,8 @@ namespace System.Web.Services.Configuration
         string name;
         bool allowElements = true;
 
-        /// <include file='doc\XmlFormatExtensionPointAttribute.uex' path='docs/doc[@for="XmlFormatExtensionPointAttribute.XmlFormatExtensionPointAttribute"]/*' />
+        /// <include file='doc\XmlFormatExtensionPointAttribute.uex'
+        // path='docs/doc[@for="XmlFormatExtensionPointAttribute.XmlFormatExtensionPointAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -27,7 +29,8 @@ namespace System.Web.Services.Configuration
             this.name = memberName;
         }
 
-        /// <include file='doc\XmlFormatExtensionPointAttribute.uex' path='docs/doc[@for="XmlFormatExtensionPointAttribute.MemberName"]/*' />
+        /// <include file='doc\XmlFormatExtensionPointAttribute.uex'
+        // path='docs/doc[@for="XmlFormatExtensionPointAttribute.MemberName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -37,7 +40,8 @@ namespace System.Web.Services.Configuration
             set { name = value; }
         }
 
-        /// <include file='doc\XmlFormatExtensionPointAttribute.uex' path='docs/doc[@for="XmlFormatExtensionPointAttribute.AllowElements"]/*' />
+        /// <include file='doc\XmlFormatExtensionPointAttribute.uex'
+        // path='docs/doc[@for="XmlFormatExtensionPointAttribute.AllowElements"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

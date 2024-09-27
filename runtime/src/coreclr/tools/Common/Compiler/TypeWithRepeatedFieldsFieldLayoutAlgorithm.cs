@@ -6,7 +6,8 @@ using Internal.TypeSystem;
 namespace ILCompiler
 {
     /// <summary>
-    /// Represents an algorithm that computes field layout for intrinsic vector types (Vector64/Vector128/Vector256).
+    /// Represents an algorithm that computes field layout for intrinsic vector types
+    // (Vector64/Vector128/Vector256).
     /// </summary>
     public class TypeWithRepeatedFieldsFieldLayoutAlgorithm : FieldLayoutAlgorithm
     {

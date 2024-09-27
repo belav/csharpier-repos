@@ -219,8 +219,10 @@ namespace System.Runtime.Serialization.Json
             get { return _rootName ?? JsonGlobals.rootDictionaryString; }
         }
 
-        // These Get/Set methods mirror the extensions that were added to DCS in the early days of Core, which allowed
-        // using a slimmed-down surrogate on both NetFx and Core via type-forwarding mechanisms. That's why these are
+        // These Get/Set methods mirror the extensions that were added to DCS in the early days of Core,
+        // which allowed
+        // using a slimmed-down surrogate on both NetFx and Core via type-forwarding mechanisms. That's why
+        // these are
         // a pair of methods instead of making the property itself public.
         public ISerializationSurrogateProvider? GetSerializationSurrogateProvider()
         {
@@ -236,7 +238,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override bool IsStartObject(XmlReader reader)
         {
-            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in IsStartObject
+            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in
+            // IsStartObject
             return IsStartObjectHandleExceptions(new JsonReaderDelegator(reader));
         }
 
@@ -244,7 +247,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override bool IsStartObject(XmlDictionaryReader reader)
         {
-            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in IsStartObject
+            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in
+            // IsStartObject
             return IsStartObjectHandleExceptions(new JsonReaderDelegator(reader));
         }
 
@@ -303,7 +307,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteEndObject(XmlWriter writer)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end
+            // object
             WriteEndObjectHandleExceptions(new JsonWriterDelegator(writer));
         }
 
@@ -311,7 +316,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteEndObject(XmlDictionaryWriter writer)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end
+            // object
             WriteEndObjectHandleExceptions(new JsonWriterDelegator(writer));
         }
 
@@ -374,7 +380,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteStartObject(XmlWriter writer, object? graph)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start
+            // object
             WriteStartObjectHandleExceptions(new JsonWriterDelegator(writer), graph);
         }
 
@@ -382,7 +389,8 @@ namespace System.Runtime.Serialization.Json
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         public override void WriteStartObject(XmlDictionaryWriter writer, object? graph)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start
+            // object
             WriteStartObjectHandleExceptions(new JsonWriterDelegator(writer), graph);
         }
 

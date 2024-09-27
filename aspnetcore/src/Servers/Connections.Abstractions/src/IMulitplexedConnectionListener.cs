@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Connections;
 public interface IMultiplexedConnectionListener : IAsyncDisposable
 {
     /// <summary>
-    /// The endpoint that was bound. This may differ from the requested endpoint, such as when the caller requested that any free port be selected.
+    /// The endpoint that was bound. This may differ from the requested endpoint, such as when the
+    // caller requested that any free port be selected.
     /// </summary>
     EndPoint EndPoint { get; }
 
@@ -31,7 +32,9 @@ public interface IMultiplexedConnectionListener : IAsyncDisposable
     /// </summary>
     /// <param name="features">A feature collection to pass options when accepting a connection.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-    /// <returns>A <see cref="ValueTask{MultiplexedConnectionContext}"/> that completes when a connection is accepted, yielding the <see cref="MultiplexedConnectionContext" /> representing the connection.</returns>
+    /// <returns>A <see cref="ValueTask{MultiplexedConnectionContext}"/> that completes when a
+    // connection is accepted, yielding the <see cref="MultiplexedConnectionContext" /> representing the
+    // connection.</returns>
     ValueTask<MultiplexedConnectionContext?> AcceptAsync(
         IFeatureCollection? features = null,
         CancellationToken cancellationToken = default

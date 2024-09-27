@@ -11,7 +11,9 @@ using Xunit;
 // Seed: 9097970668016732717
 // Reduced from 177.2 KiB to 1.0 KiB in 00:04:15
 // Hits JIT assert in Release:
-// Assertion failed '!comp->opts.compJitEarlyExpandMDArrays' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Lowering nodeinfo' (IL size 111; hash 0xade6b36b; FullOpts)
+// Assertion failed '!comp->opts.compJitEarlyExpandMDArrays' in
+// 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Lowering nodeinfo' (IL size 111; hash
+// 0xade6b36b; FullOpts)
 //
 //     File: D:\a\_work\1\s\src\coreclr\jit\lower.cpp Line: 264
 //

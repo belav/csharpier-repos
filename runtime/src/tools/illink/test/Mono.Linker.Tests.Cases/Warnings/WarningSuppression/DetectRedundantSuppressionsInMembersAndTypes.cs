@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -259,7 +260,8 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
 
         public class DoNotReportSuppressionsOnMethodsConvertedToThrow
         {
-            // The tool is unable to determine whether a suppression is redundant when it is placed on a method with unreachable body.
+            // The tool is unable to determine whether a suppression is redundant when it is placed on a method
+            // with unreachable body.
             // Currently suppressions on methods with unreachable bodies should never be reported as redundant.
             // https://github.com/dotnet/linker/issues/2920
             public static void Test()

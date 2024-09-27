@@ -172,13 +172,16 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents" when
+        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents"
+        // when
         /// "action" is executed.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
-        /// <param name="expectedEvents">All of the events that are expected to be raised by this action</param>
+        /// <param name="expectedEvents">All of the events that are expected to be raised by this
+        // action</param>
         /// <param name="action">The Action that will trigger events.</param>
-        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
+        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be
+        // run again if necessary.</param>
         public static void ExpectEvent(
             FileSystemWatcher watcher,
             WatcherChangeTypes expectedEvents,
@@ -190,15 +193,19 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents" when
+        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents"
+        // when
         /// "action" is executed.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
-        /// <param name="expectedEvents">All of the events that are expected to be raised by this action</param>
+        /// <param name="expectedEvents">All of the events that are expected to be raised by this
+        // action</param>
         /// <param name="action">The Action that will trigger events.</param>
-        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
+        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be
+        // run again if necessary.</param>
         /// <param name="expectedPath">Optional. Adds path verification to all expected events.</param>
-        /// <param name="attempts">Optional. Number of times the test should be executed if it's failing.</param>
+        /// <param name="attempts">Optional. Number of times the test should be executed if it's
+        // failing.</param>
         public static void ExpectEvent(
             FileSystemWatcher watcher,
             WatcherChangeTypes expectedEvents,
@@ -221,15 +228,19 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents" when
+        /// Does verification that the given watcher will throw exactly/only the events in "expectedEvents"
+        // when
         /// "action" is executed.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
-        /// <param name="expectedEvents">All of the events that are expected to be raised by this action</param>
+        /// <param name="expectedEvents">All of the events that are expected to be raised by this
+        // action</param>
         /// <param name="action">The Action that will trigger events.</param>
-        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
+        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be
+        // run again if necessary.</param>
         /// <param name="expectedPath">Optional. Adds path verification to all expected events.</param>
-        /// <param name="attempts">Optional. Number of times the test should be executed if it's failing.</param>
+        /// <param name="attempts">Optional. Number of times the test should be executed if it's
+        // failing.</param>
         public static void ExpectEvent(
             FileSystemWatcher watcher,
             WatcherChangeTypes expectedEvents,
@@ -249,9 +260,12 @@ namespace System.IO.Tests
                 {
                     // Re-create the watcher to get a clean iteration.
                     newWatcher = RecreateWatcher(newWatcher);
-                    // Most intermittent failures in FSW are caused by either a shortage of resources (e.g. inotify instances)
-                    // or by insufficient time to execute (e.g. CI gets bogged down). Immediately re-running a failed test
-                    // won't resolve the first issue, so we wait a little while hoping that things clear up for the next run.
+                    // Most intermittent failures in FSW are caused by either a shortage of resources (e.g. inotify
+                    // instances)
+                    // or by insufficient time to execute (e.g. CI gets bogged down). Immediately re-running a failed
+                    // test
+                    // won't resolve the first issue, so we wait a little while hoping that things clear up for the next
+                    // run.
                     Thread.Sleep(RetryDelayMilliseconds);
                 }
 
@@ -278,11 +292,14 @@ namespace System.IO.Tests
         private static readonly bool s_debug =
             Environment.GetEnvironmentVariable("DEBUG_RETRYHELPER") == "1";
 
-        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref name="maxAttempts"/> times.</summary>
+        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref
+        // name="maxAttempts"/> times.</summary>
         /// <param name="maxAttempts">The maximum number of times to invoke <paramref name="test"/>.</param>
         /// <param name="test">The test to invoke.</param>
-        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait before the next attempt.  It's passed the number of iterations attempted.</param>
-        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception will trigger a retry.</param>
+        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait
+        // before the next attempt.  It's passed the number of iterations attempted.</param>
+        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception
+        // will trigger a retry.</param>
         public static void Execute(
             Action test,
             int maxAttempts = 5,
@@ -343,13 +360,16 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Does verification that the given watcher will not throw exactly/only the events in "expectedEvents" when
+        /// Does verification that the given watcher will not throw exactly/only the events in
+        // "expectedEvents" when
         /// "action" is executed.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
-        /// <param name="unExpectedEvents">All of the events that are expected to be raised by this action</param>
+        /// <param name="unExpectedEvents">All of the events that are expected to be raised by this
+        // action</param>
         /// <param name="action">The Action that will trigger events.</param>
-        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
+        /// <param name="cleanup">Optional. Undoes the action and cleans up the watcher so the test may be
+        // run again if necessary.</param>
         /// <param name="expectedPath">Optional. Adds path verification to all expected events.</param>
         public static void ExpectNoEvent(
             FileSystemWatcher watcher,
@@ -378,9 +398,11 @@ namespace System.IO.Tests
         /// Helper for the ExpectEvent function.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
-        /// <param name="expectedEvents">All of the events that are expected to be raised by this action</param>
+        /// <param name="expectedEvents">All of the events that are expected to be raised by this
+        // action</param>
         /// <param name="action">The Action that will trigger events.</param>
-        /// <param name="assertExpected">True if results should be asserted. Used if there is no retry.</param>
+        /// <param name="assertExpected">True if results should be asserted. Used if there is no
+        // retry.</param>
         /// <param name="expectedPath"> Adds path verification to all expected events.</param>
         /// <returns>True if the events raised correctly; else, false.</returns>
         public static bool ExecuteAndVerifyEvents(
@@ -487,8 +509,10 @@ namespace System.IO.Tests
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
         /// <param name="action">The Action that will trigger a failure.</param>
-        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
-        /// <param name="attempts">Optional. Number of times the test should be executed if it's failing.</param>
+        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again
+        // if necessary.</param>
+        /// <param name="attempts">Optional. Number of times the test should be executed if it's
+        // failing.</param>
         public static void ExpectError(
             FileSystemWatcher watcher,
             Action action,
@@ -505,12 +529,15 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Does verification that the given watcher will <b>not</b> throw an Error when the given action is executed.
+        /// Does verification that the given watcher will <b>not</b> throw an Error when the given action is
+        // executed.
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
         /// <param name="action">The Action that will not trigger a failure.</param>
-        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
-        /// <param name="attempts">Optional. Number of times the test should be executed if it's failing.</param>
+        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again
+        // if necessary.</param>
+        /// <param name="attempts">Optional. Number of times the test should be executed if it's
+        // failing.</param>
         public static void ExpectNoError(
             FileSystemWatcher watcher,
             Action action,
@@ -534,10 +561,12 @@ namespace System.IO.Tests
         /// </summary>
         /// <param name="watcher">The FileSystemWatcher to test</param>
         /// <param name="action">The Action to execute.</param>
-        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again if necessary.</param>
+        /// <param name="cleanup">Undoes the action and cleans up the watcher so the test may be run again
+        // if necessary.</param>
         /// <param name="attempts">Number of times the test should be executed if it's failing.</param>
         /// <param name="expected">Whether it is expected that an error event will be arisen.</param>
-        /// <returns>True if an Error event was raised by the watcher when the given action was executed; else, false.</returns>
+        /// <returns>True if an Error event was raised by the watcher when the given action was executed;
+        // else, false.</returns>
         public static bool TryErrorEvent(
             FileSystemWatcher watcher,
             Action action,
@@ -554,9 +583,12 @@ namespace System.IO.Tests
                 {
                     // Re-create the watcher to get a clean iteration.
                     watcher = RecreateWatcher(watcher);
-                    // Most intermittent failures in FSW are caused by either a shortage of resources (e.g. inotify instances)
-                    // or by insufficient time to execute (e.g. CI gets bogged down). Immediately re-running a failed test
-                    // won't resolve the first issue, so we wait a little while hoping that things clear up for the next run.
+                    // Most intermittent failures in FSW are caused by either a shortage of resources (e.g. inotify
+                    // instances)
+                    // or by insufficient time to execute (e.g. CI gets bogged down). Immediately re-running a failed
+                    // test
+                    // won't resolve the first issue, so we wait a little while hoping that things clear up for the next
+                    // run.
                     Thread.Sleep(500);
                 }
 
@@ -566,7 +598,8 @@ namespace System.IO.Tests
                     errorOccurred.Set();
                 };
 
-                // Enable raising events but be careful with the possibility of the max user inotify instances being reached already.
+                // Enable raising events but be careful with the possibility of the max user inotify instances being
+                // reached already.
                 if (attemptsCompleted <= attempts)
                 {
                     try
@@ -660,7 +693,8 @@ namespace System.IO.Tests
             public override string ToString() => $"{EventType} {Dir1} {Dir2}";
         }
 
-        // Observe until an expected count of events is triggered, otherwise fail. Return all collected events.
+        // Observe until an expected count of events is triggered, otherwise fail. Return all collected
+        // events.
         internal static List<FiredEvent> ExpectEvents(
             FileSystemWatcher watcher,
             int expectedEvents,

@@ -92,7 +92,8 @@ namespace System.Text.RegularExpressions.Generator
                 HashSet<string> methodNames
             )
             {
-                // This warning is due to a false positive bug https://github.com/dotnet/roslyn-analyzers/issues/5804
+                // This warning is due to a false positive bug
+                // https://github.com/dotnet/roslyn-analyzers/issues/5804
                 // This issue has now been fixed, but we are not yet consuming the fix and getting this package
                 // as a transitive dependency from Microsoft.CodeAnalysis.CSharp.Workspaces. Once that dependency
                 // is updated at the repo-level, we should come and remove the pragma disable.
@@ -120,7 +121,8 @@ namespace System.Text.RegularExpressions.Generator
         }
 
         /// <summary>
-        /// Analyzes an invocation expression to see if the invocation is a call to one of the Regex static methods,
+        /// Analyzes an invocation expression to see if the invocation is a call to one of the Regex static
+        // methods,
         /// and checks if they could be using the source generator instead.
         /// </summary>
         /// <param name="context">The compilation context representing the invocation.</param>
@@ -141,8 +143,10 @@ namespace System.Text.RegularExpressions.Generator
                 return;
             }
 
-            // We need to save the parameters as properties so that we can save them onto the diagnostic so that the
-            // code fixer can later use that property bag to generate the code fix and emit the GeneratedRegex attribute.
+            // We need to save the parameters as properties so that we can save them onto the diagnostic so that
+            // the
+            // code fixer can later use that property bag to generate the code fix and emit the GeneratedRegex
+            // attribute.
             if (staticMethodsToDetect.Contains(method))
             {
                 // Validate that arguments pattern and options are constant and timeout was not passed in.
@@ -164,7 +168,8 @@ namespace System.Text.RegularExpressions.Generator
         }
 
         /// <summary>
-        /// Analyzes an object creation expression to see if the invocation is a call to one of the Regex constructors,
+        /// Analyzes an object creation expression to see if the invocation is a call to one of the Regex
+        // constructors,
         /// and checks if they could be using the source generator instead.
         /// </summary>
         /// <param name="context">The object creation context.</param>
@@ -203,7 +208,8 @@ namespace System.Text.RegularExpressions.Generator
         }
 
         /// <summary>
-        /// Validates the operation arguments ensuring they all have constant values, and if so it stores the argument
+        /// Validates the operation arguments ensuring they all have constant values, and if so it stores
+        // the argument
         /// indices for the pattern and options. If timeout argument was used, then this returns false.
         /// </summary>
         private static bool ValidateParameters(ImmutableArray<IArgumentOperation> arguments)
@@ -265,7 +271,8 @@ namespace System.Text.RegularExpressions.Generator
                     continue;
                 }
 
-                // If the argument is the options, then we validate that it is constant, that it doesn't have RegexOptions.NonBacktracking, and we store the index.
+                // If the argument is the options, then we validate that it is constant, that it doesn't have
+                // RegexOptions.NonBacktracking, and we store the index.
                 if (argumentName.Equals(OptionsArgumentName, StringComparison.OrdinalIgnoreCase))
                 {
                     if (!argument.Value.ConstantValue.HasValue)
@@ -287,12 +294,15 @@ namespace System.Text.RegularExpressions.Generator
         }
 
         /// <summary>
-        /// Ensures that the compilation can find the Regex and RegexAttribute types, and also validates that the
-        /// LangVersion of the project is >= 10.0 (which is the current requirement for the Regex source generator.
+        /// Ensures that the compilation can find the Regex and RegexAttribute types, and also validates
+        // that the
+        /// LangVersion of the project is >= 10.0 (which is the current requirement for the Regex source
+        // generator.
         /// </summary>
         /// <param name="compilation">The compilation to be analyzed.</param>
         /// <param name="regexTypeSymbol">The resolved Regex type symbol</param>
-        /// <returns><see langword="true"/> if source generator is supported in the project; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if source generator is supported in the project; otherwise, <see
+        // langword="false"/>.</returns>
         private static bool ProjectSupportsRegexSourceGenerator(
             Compilation compilation,
             [NotNullWhen(true)] out INamedTypeSymbol? regexTypeSymbol

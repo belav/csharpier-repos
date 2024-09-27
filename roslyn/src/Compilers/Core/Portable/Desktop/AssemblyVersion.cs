@@ -113,7 +113,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Converts <see cref="Version"/> to <see cref="AssemblyVersion"/>.
         /// </summary>
-        /// <exception cref="InvalidCastException">Major, minor, build or revision number are less than 0 or greater than 0xFFFF.</exception>
+        /// <exception cref="InvalidCastException">Major, minor, build or revision number are less than 0 or
+        // greater than 0xFFFF.</exception>
         public static explicit operator AssemblyVersion(Version version)
         {
             return new AssemblyVersion(

@@ -58,7 +58,8 @@ namespace MonoTests.System.Reflection
     public class MethodInfoTest
     {
 #if MONOTOUCH || FULL_AOT_RUNTIME
-        // use an existing symbol - so we can build without dlsym. It does not matter that the signature does not match for the test
+        // use an existing symbol - so we can build without dlsym. It does not matter that the signature
+        // does not match for the test
         [DllImport(
             "libc",
             EntryPoint = "readlink",
@@ -164,7 +165,8 @@ namespace MonoTests.System.Reflection
 
             // This doesn't work under MS.NET
             /*
-              MethodImplAttribute attr3 = (MethodImplAttribute)((t.GetMethod ("synchronizedMethod").GetCustomAttributes (true)) [0]);
+            MethodImplAttribute attr3 = (MethodImplAttribute)((t.GetMethod
+            ("synchronizedMethod").GetCustomAttributes (true)) [0]);
             */
         }
 
@@ -779,7 +781,7 @@ namespace MonoTests.System.Reflection
             return default(TFoo);
         }
 
-        /*Test for the uggly broken behavior of SRE.*/
+/*Test for the uggly broken behavior of SRE.*/
         [Test]
         public void MakeGenericMethodWithSreTypeResultsInStupidMethodInfo()
         {
@@ -795,7 +797,7 @@ namespace MonoTests.System.Reflection
             MethodInfo ins = gmi.MakeGenericMethod(typeof(int), tb);
 
             Assert.AreSame(tb, ins.GetGenericArguments()[1], "#1");
-            /*broken ReturnType*/
+/*broken ReturnType*/
             Assert.AreSame(gmi.GetGenericArguments()[0], ins.ReturnType, "#2");
         }
 #endif
@@ -1079,7 +1081,10 @@ namespace MonoTests.System.Reflection
         public void EnsureEntityFrameworkMethodsExist()
         {
             // EntityFramework6 relies on the following methods
-            // see https://github.com/aspnet/EntityFramework6/blob/master/src/EntityFramework/Core/Objects/ELinq/MethodCallTranslator.cs#L846
+            // see
+            //
+            //
+            // https://github.com/aspnet/EntityFramework6/blob/master/src/EntityFramework/Core/Objects/ELinq/MethodCallTranslator.cs#L846
             // also https://github.com/mono/mono/pull/10452
             EnsureMethodExists(typeof(Math), "Ceiling", typeof(decimal));
             EnsureMethodExists(typeof(Math), "Ceiling", typeof(double));

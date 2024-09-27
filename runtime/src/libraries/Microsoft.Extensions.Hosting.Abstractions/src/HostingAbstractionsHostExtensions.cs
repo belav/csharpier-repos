@@ -54,7 +54,8 @@ namespace Microsoft.Extensions.Hosting
         }
 
         /// <summary>
-        /// Runs an application and returns a <see cref="Task"/> that only completes when the token is triggered or shutdown is triggered.
+        /// Runs an application and returns a <see cref="Task"/> that only completes when the token is
+        // triggered or shutdown is triggered.
         /// The <paramref name="host"/> instance is disposed of after running.
         /// </summary>
         /// <param name="host">The <see cref="IHost"/> to run.</param>
@@ -123,7 +124,8 @@ namespace Microsoft.Extensions.Hosting
 #endif
 
             // Host will use its default ShutdownTimeout if none is specified.
-            // The cancellation token may have been triggered to unblock waitForStop. Don't pass it here because that would trigger an abortive shutdown.
+            // The cancellation token may have been triggered to unblock waitForStop. Don't pass it here because
+            // that would trigger an abortive shutdown.
             await host.StopAsync(CancellationToken.None).ConfigureAwait(false);
         }
     }

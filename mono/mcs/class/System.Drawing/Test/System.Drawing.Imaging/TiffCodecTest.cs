@@ -47,7 +47,7 @@ namespace MonoTests.System.Drawing.Imaging
             HostIgnoreList.CheckTest("MonoTests.System.Drawing.Imaging.TiffCodecTest");
         }
 
-        /* Get suffix to add to the filename */
+/* Get suffix to add to the filename */
         internal string getOutSufix()
         {
             string s;
@@ -66,7 +66,7 @@ namespace MonoTests.System.Drawing.Imaging
             return s;
         }
 
-        /* Checks bitmap features on a know 32bbp bitmap */
+/* Checks bitmap features on a know 32bbp bitmap */
         [Test]
         public void Bitmap32bitsFeatures()
         {

@@ -61,7 +61,8 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
 
     /// <summary>
     /// Gets or sets the display name for this field.
-    /// <para>This value is used when generating error messages when the input value fails to parse correctly.</para>
+    /// <para>This value is used when generating error messages when the input value fails to parse
+    // correctly.</para>
     /// </summary>
     [Parameter]
     public string? DisplayName { get; set; }
@@ -111,9 +112,12 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
     /// </summary>
     protected string? CurrentValueAsString
     {
-        // InputBase-derived components can hold invalid states (e.g., an InputNumber being blank even when bound
-        // to an int value). So, if parsing fails, we keep the rejected string in the UI even though it doesn't
-        // match what's on the .NET model. This avoids interfering with typing, but still notifies the EditContext
+        // InputBase-derived components can hold invalid states (e.g., an InputNumber being blank even when
+        // bound
+        // to an int value). So, if parsing fails, we keep the rejected string in the UI even though it
+        // doesn't
+        // match what's on the .NET model. This avoids interfering with typing, but still notifies the
+        // EditContext
         // about the validation error message.
         get => _parsingFailed ? _incomingValueBeforeParsing : FormatValueAsString(CurrentValue);
         set
@@ -169,19 +173,22 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
     }
 
     /// <summary>
-    /// Formats the value as a string. Derived classes can override this to determine the formatting used for <see cref="CurrentValueAsString"/>.
+    /// Formats the value as a string. Derived classes can override this to determine the formatting
+    // used for <see cref="CurrentValueAsString"/>.
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <returns>A string representation of the value.</returns>
     protected virtual string? FormatValueAsString(TValue? value) => value?.ToString();
 
     /// <summary>
-    /// Parses a string to create an instance of <typeparamref name="TValue"/>. Derived classes can override this to change how
+    /// Parses a string to create an instance of <typeparamref name="TValue"/>. Derived classes can
+    // override this to change how
     /// <see cref="CurrentValueAsString"/> interprets incoming values.
     /// </summary>
     /// <param name="value">The string value to be parsed.</param>
     /// <param name="result">An instance of <typeparamref name="TValue"/>.</param>
-    /// <param name="validationErrorMessage">If the value could not be parsed, provides a validation error message.</param>
+    /// <param name="validationErrorMessage">If the value could not be parsed, provides a validation
+    // error message.</param>
     /// <returns>True if the value could be parsed; otherwise false.</returns>
     protected abstract bool TryParseValueFromString(
         string? value,
@@ -192,7 +199,8 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
     /// <summary>
     /// Gets a CSS class string that combines the <c>class</c> attribute and and a string indicating
     /// the status of the field being edited (a combination of "modified", "valid", and "invalid").
-    /// Derived components should typically use this value for the primary HTML element's 'class' attribute.
+    /// Derived components should typically use this value for the primary HTML element's 'class'
+    // attribute.
     /// </summary>
     protected string CssClass
     {
@@ -242,7 +250,8 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
         if (!_hasInitializedParameters)
         {
             // This is the first run
-            // Could put this logic in OnInit, but its nice to avoid forcing people who override OnInit to call base.OnInit()
+            // Could put this logic in OnInit, but its nice to avoid forcing people who override OnInit to call
+            // base.OnInit()
 
             if (ValueExpression == null)
             {
@@ -388,7 +397,8 @@ public abstract class InputBase<TValue> : ComponentBase, IDisposable
 
     void IDisposable.Dispose()
     {
-        // When initialization in the SetParametersAsync method fails, the EditContext property can remain equal to null
+        // When initialization in the SetParametersAsync method fails, the EditContext property can remain
+        // equal to null
         if (EditContext is not null)
         {
             EditContext.OnValidationStateChanged -= _validationStateChangedHandler;

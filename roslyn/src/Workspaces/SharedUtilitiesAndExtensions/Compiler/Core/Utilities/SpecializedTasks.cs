@@ -124,7 +124,8 @@ namespace Roslyn.Utilities
         {
             using var _ = ArrayBuilder<TResult>.GetInstance(tasks.Count, out var result);
 
-            // Explicit cast to IEnumerable<Task> so we call the overload that doesn't allocate an array as the result.
+            // Explicit cast to IEnumerable<Task> so we call the overload that doesn't allocate an array as the
+            // result.
             await Task.WhenAll((IEnumerable<Task>)tasks).ConfigureAwait(false);
             foreach (var task in tasks)
                 result.Add(await task.ConfigureAwait(false));
@@ -133,8 +134,10 @@ namespace Roslyn.Utilities
         }
 
         /// <summary>
-        /// This helper method provides semantics equivalent to the following, but avoids throwing an intermediate
-        /// <see cref="OperationCanceledException"/> in the case where the asynchronous operation is cancelled.
+        /// This helper method provides semantics equivalent to the following, but avoids throwing an
+        // intermediate
+        /// <see cref="OperationCanceledException"/> in the case where the asynchronous operation is
+        // cancelled.
         ///
         /// <code><![CDATA[
         /// public ValueTask<TResult> MethodAsync(TArg arg, CancellationToken cancellationToken)
@@ -145,16 +148,23 @@ namespace Roslyn.Utilities
         /// ]]></code>
         /// </summary>
         /// <remarks>
-        /// This helper method is only intended for use in cases where profiling reveals substantial overhead related to
+        /// This helper method is only intended for use in cases where profiling reveals substantial
+        // overhead related to
         /// cancellation processing.
         /// </remarks>
-        /// <typeparam name="TArg">The type of a state variable to pass to <paramref name="func"/> and <paramref name="transform"/>.</typeparam>
-        /// <typeparam name="TIntermediate">The type of intermediate result produced by <paramref name="func"/>.</typeparam>
-        /// <typeparam name="TResult">The type of result produced by <paramref name="transform"/>.</typeparam>
+        /// <typeparam name="TArg">The type of a state variable to pass to <paramref name="func"/> and
+        // <paramref name="transform"/>.</typeparam>
+        /// <typeparam name="TIntermediate">The type of intermediate result produced by <paramref
+        // name="func"/>.</typeparam>
+        /// <typeparam name="TResult">The type of result produced by <paramref
+        // name="transform"/>.</typeparam>
         /// <param name="func">The intermediate asynchronous operation.</param>
-        /// <param name="transform">The synchronous transformation to apply to the result of <paramref name="func"/>.</param>
-        /// <param name="arg">The state to pass to <paramref name="func"/> and <paramref name="transform"/>.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that the operation will observe.</param>
+        /// <param name="transform">The synchronous transformation to apply to the result of <paramref
+        // name="func"/>.</param>
+        /// <param name="arg">The state to pass to <paramref name="func"/> and <paramref
+        // name="transform"/>.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> that the operation will
+        // observe.</param>
         /// <returns></returns>
         public static ValueTask<TResult> TransformWithoutIntermediateCancellationExceptionAsync<
             TArg,
@@ -222,7 +232,8 @@ namespace Roslyn.Utilities
                 //
                 // ¹ Direct faults are exceptions thrown from 'func' prior to returning a ValueTask<TIntermediate>
                 //   instances. Indirect faults are exceptions captured by return an instance of
-                //   ValueTask<TIntermediate> which (immediately or eventually) transitions to the faulted state. The
+                //   ValueTask<TIntermediate> which (immediately or eventually) transitions to the faulted state.
+                // The
                 //   direct fault behavior is currently handled without calling UnwrapAndTransformAsync.
                 return new ValueTask<TResult>(
                     intermediateResult

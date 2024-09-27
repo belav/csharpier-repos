@@ -8,12 +8,14 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         An expected column in the relational data reader.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public class ReaderColumn<T> : ReaderColumn
@@ -24,7 +26,8 @@ public class ReaderColumn<T> : ReaderColumn
     /// <param name="nullable">A value indicating if the column is nullable.</param>
     /// <param name="name">The name of the column.</param>
     /// <param name="property">The property being read if any, null otherwise.</param>
-    /// <param name="getFieldValue">A function to get field value for the column from the reader.</param>
+    /// <param name="getFieldValue">A function to get field value for the column from the
+    // reader.</param>
     public ReaderColumn(
         bool nullable,
         string? name,

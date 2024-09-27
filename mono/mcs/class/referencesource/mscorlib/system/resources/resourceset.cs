@@ -175,7 +175,7 @@ namespace System.Resources
         public Assembly Assembly
         {
             get { return _assembly; }
-            /*protected*/set { _assembly = value; }
+/*protected*/set { _assembly = value; }
         }
 #endif // LOOSELY_LINKED_RESOURCE_REFERENCE
 

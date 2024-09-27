@@ -6,7 +6,8 @@ using System.Text.Json;
 namespace Microsoft.EntityFrameworkCore.Storage.Json;
 
 /// <summary>
-///     Contains state for use with a <see cref="Utf8JsonReaderManager" />, abstracting the reading from a <see cref="Stream" /> or a buffer.
+///     Contains state for use with a <see cref="Utf8JsonReaderManager" />, abstracting the reading
+// from a <see cref="Stream" /> or a buffer.
 /// </summary>
 public class JsonReaderData
 {
@@ -38,7 +39,8 @@ public class JsonReaderData
     }
 
     /// <summary>
-    ///     Called to capture the state of the given <see cref="Utf8JsonReaderManager" /> so that a new <see cref="Utf8JsonReaderManager" />
+    ///     Called to capture the state of the given <see cref="Utf8JsonReaderManager" /> so that a new
+    // <see cref="Utf8JsonReaderManager" />
     ///     can later be created to pick up at the same position in the JSON document.
     /// </summary>
     /// <param name="manager">The manager.</param>

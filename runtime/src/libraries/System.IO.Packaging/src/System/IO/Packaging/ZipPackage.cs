@@ -31,8 +31,10 @@ namespace System.IO.Packaging
         /// <returns></returns>
         /// <exception cref="ArgumentNullException">If partUri parameter is null</exception>
         /// <exception cref="ArgumentNullException">If contentType parameter is null</exception>
-        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri syntax</exception>
-        /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration [compressionOption] does not have one of the valid values</exception>
+        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri
+        // syntax</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If CompressionOption enumeration
+        // [compressionOption] does not have one of the valid values</exception>
         protected override PackagePart CreatePartCore(
             Uri partUri,
             string contentType,
@@ -115,7 +117,8 @@ namespace System.IO.Packaging
         /// </summary>
         /// <param name="partUri"></param>
         /// <exception cref="ArgumentNullException">If partUri parameter is null</exception>
-        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri syntax</exception>
+        /// <exception cref="ArgumentException">If partUri parameter does not conform to the valid partUri
+        // syntax</exception>
         protected override void DeletePartCore(Uri partUri)
         {
             //Validating the PartUri - this method will do the argument checking required for uri.
@@ -139,7 +142,8 @@ namespace System.IO.Packaging
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Some or all of the parts may be interleaved. The Part object for an interleaved part encapsulates
+        /// Some or all of the parts may be interleaved. The Part object for an interleaved part
+        // encapsulates
         /// the Uri of the proper part name and the ZipFileInfo of the initial piece.
         /// This function does not go through the extra work of checking piece naming validity
         /// throughout the package.
@@ -270,7 +274,8 @@ namespace System.IO.Packaging
         /// </summary>
         /// <param name="path">File path to the container.</param>
         /// <param name="packageFileMode">Container is opened in the specified mode if possible</param>
-        /// <param name="packageFileAccess">Container is opened with the specified access if possible</param>
+        /// <param name="packageFileAccess">Container is opened with the specified access if
+        // possible</param>
         /// <param name="share">Container is opened with the specified share if possible</param>
 
         internal ZipPackage(
@@ -605,7 +610,8 @@ namespace System.IO.Packaging
                 _packageFileMode = packageFileMode;
                 _packageFileAccess = packageFileAccess;
                 _zipStreamManager = zipStreamManager; //initialized in the ZipPackage constructor
-                // The extensions are stored in the default Dictionary in their original form , but they are compared
+                // The extensions are stored in the default Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using the ExtensionComparer.
                 _defaultDictionary = new Dictionary<string, ContentType>(
                     DefaultDictionaryInitialSize,
@@ -728,7 +734,8 @@ namespace System.IO.Packaging
                     }
                     else
                     {
-                        // delete and re-create entry for content part.  When writing this, the stream will not truncate the content
+                        // delete and re-create entry for content part.  When writing this, the stream will not truncate the
+                        // content
                         // if the XML is shorter than the existing content part.
                         var contentTypefullName = _contentTypeZipArchiveEntry!.FullName;
                         var thisArchive = _contentTypeZipArchiveEntry.Archive;
@@ -788,7 +795,8 @@ namespace System.IO.Packaging
             [MemberNotNull(nameof(_overrideDictionary))]
             private void EnsureOverrideDictionary()
             {
-                // The part Uris are stored in the Override Dictionary in their original form , but they are compared
+                // The part Uris are stored in the Override Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using the PartUriComparer
                 _overrideDictionary ??= new Dictionary<PackUriHelper.ValidatedPartUri, ContentType>(
                     OverrideDictionaryInitialSize
@@ -818,7 +826,8 @@ namespace System.IO.Packaging
                     PackagingUtilities.PerformInitialReadAndVerifyEncoding(reader);
 
                     //Note: After the previous method call the reader should be at the first tag in the markup.
-                    //MoveToContent - Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
+                    //MoveToContent - Skips over the following - ProcessingInstruction, DocumentType, Comment,
+                    // Whitespace, or SignificantWhitespace
                     //If the reader is currently at a content node then this function call is a no-op
                     reader.MoveToContent();
 
@@ -847,7 +856,8 @@ namespace System.IO.Packaging
                         // now parse individual Default and Override tags
                         while (reader.Read())
                         {
-                            //Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
+                            //Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or
+                            // SignificantWhitespace
                             //If the reader is currently at a content node then this function call is a no-op
                             reader.MoveToContent();
 
@@ -980,7 +990,8 @@ namespace System.IO.Packaging
                     reader
                 );
 
-                // The extensions are stored in the Default Dictionary in their original form , but they are compared
+                // The extensions are stored in the Default Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using the ExtensionComparer.
                 PackUriHelper.ValidatedPartUri temporaryUri = PackUriHelper.ValidatePartUri(
                     new Uri(
@@ -1036,7 +1047,8 @@ namespace System.IO.Packaging
                 //Lazy initializing - ensure that the override dictionary has been initialized
                 EnsureOverrideDictionary();
 
-                // The part Uris are stored in the Override Dictionary in their original form , but they are compared
+                // The part Uris are stored in the Override Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using PartUriComparer.
                 _overrideDictionary.Add(partUri, new ContentType(contentTypeAttributeValue!));
 
@@ -1055,7 +1067,8 @@ namespace System.IO.Packaging
 
                 reader.Read();
 
-                //Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
+                //Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or
+                // SignificantWhitespace
                 reader.MoveToContent();
 
                 if (reader.NodeType == XmlNodeType.EndElement && elementName == reader.LocalName)
@@ -1082,7 +1095,8 @@ namespace System.IO.Packaging
                 //Lazy initializing - ensure that the override dictionary has been initialized
                 EnsureOverrideDictionary();
 
-                // The part Uris are stored in the Override Dictionary in their original form , but they are compared
+                // The part Uris are stored in the Override Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using PartUriComparer.
                 _overrideDictionary.Add(partUri, contentType);
                 _dirty = true;
@@ -1090,7 +1104,8 @@ namespace System.IO.Packaging
 
             private void AddDefaultElement(string extension, ContentType contentType)
             {
-                // The extensions are stored in the Default Dictionary in their original form , but they are compared
+                // The extensions are stored in the Default Dictionary in their original form , but they are
+                // compared
                 // in a normalized manner using the ExtensionComparer.
                 _defaultDictionary.Add(extension, contentType);
 

@@ -16,8 +16,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Serialization
 {
     /// <summary>
-    /// Represents a <see cref="SourceText"/> which can be serialized for sending to another process. The text is not
-    /// required to be a live object in the current process, and can instead be held in temporary storage accessible by
+    /// Represents a <see cref="SourceText"/> which can be serialized for sending to another process.
+    // The text is not
+    /// required to be a live object in the current process, and can instead be held in temporary
+    // storage accessible by
     /// both processes.
     /// </summary>
     internal sealed class SerializableSourceText
@@ -39,8 +41,10 @@ namespace Microsoft.CodeAnalysis.Serialization
         private readonly SourceText? _text;
 
         /// <summary>
-        /// Weak reference to a SourceText computed from <see cref="_storage"/>.  Useful so that if multiple requests
-        /// come in for the source text, the same one can be returned as long as something is holding it alive.
+        /// Weak reference to a SourceText computed from <see cref="_storage"/>.  Useful so that if multiple
+        // requests
+        /// come in for the source text, the same one can be returned as long as something is holding it
+        // alive.
         /// </summary>
         private readonly WeakReference<SourceText?> _computedText = new(target: null);
 
@@ -59,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Serialization
         }
 
         /// <summary>
-        /// Returns the strongly referenced SourceText if we have it, or tries to retrieve it from the weak reference if
+        /// Returns the strongly referenced SourceText if we have it, or tries to retrieve it from the weak
+        // reference if
         /// it's still being held there.
         /// </summary>
         /// <returns></returns>
@@ -76,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             if (text != null)
                 return text;
 
-            // Read and cache the text from the storage object so that other requests may see it if still kept alive by something.
+            // Read and cache the text from the storage object so that other requests may see it if still kept
+            // alive by something.
             text = await _storage!.ReadTextAsync(cancellationToken).ConfigureAwait(false);
             _computedText.SetTarget(text);
             return text;
@@ -88,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             if (text != null)
                 return text;
 
-            // Read and cache the text from the storage object so that other requests may see it if still kept alive by something.
+            // Read and cache the text from the storage object so that other requests may see it if still kept
+            // alive by something.
             text = _storage!.ReadText(cancellationToken);
             _computedText.SetTarget(text);
             return text;

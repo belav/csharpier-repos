@@ -299,8 +299,10 @@ namespace System
         // On arm this method behaves like memcpy and does not handle overlapping buffers.
         // While on other platforms it behaves like memmove and handles overlapping buffers.
         // This behavioral difference is unfortunate but intentional because
-        // 1. This method is given access to other internal dlls and this close to release we do not want to change it.
-        // 2. It is difficult to get this right for arm and again due to release dates we would like to visit it later.
+        // 1. This method is given access to other internal dlls and this close to release we do not want to
+        // change it.
+        // 2. It is difficult to get this right for arm and again due to release dates we would like to
+        // visit it later.
         [FriendAccessAllowed]
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -317,7 +319,8 @@ namespace System
         }
 #endif // ARM
 
-        // This method has different signature for x64 and other platforms and is done for performance reasons.
+        // This method has different signature for x64 and other platforms and is done for performance
+        // reasons.
         [System.Security.SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -327,8 +330,10 @@ namespace System
         internal unsafe static void Memmove(byte* dest, byte* src, uint len)
 #endif
         {
-            // P/Invoke into the native version when the buffers are overlapping and the copy needs to be performed backwards
-            // This check can produce false positives for lengths greater than Int32.MaxInt. It is fine because we want to use PInvoke path for the large lengths anyway.
+            // P/Invoke into the native version when the buffers are overlapping and the copy needs to be
+            // performed backwards
+            // This check can produce false positives for lengths greater than Int32.MaxInt. It is fine because
+            // we want to use PInvoke path for the large lengths anyway.
 #if WIN64
             if ((ulong)dest - (ulong)src < len)
                 goto PInvoke;
@@ -337,9 +342,11 @@ namespace System
                 goto PInvoke;
 #endif
             //
-            // This is portable version of memcpy. It mirrors what the hand optimized assembly versions of memcpy typically do.
+            // This is portable version of memcpy. It mirrors what the hand optimized assembly versions of
+            // memcpy typically do.
             //
-            // Ideally, we would just use the cpblk IL instruction here. Unfortunately, cpblk IL instruction is not as efficient as
+            // Ideally, we would just use the cpblk IL instruction here. Unfortunately, cpblk IL instruction is
+            // not as efficient as
             // possible yet and so we have this implementation here for now.
             //
 

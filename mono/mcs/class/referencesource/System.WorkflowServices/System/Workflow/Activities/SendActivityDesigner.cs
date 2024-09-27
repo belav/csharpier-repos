@@ -168,7 +168,8 @@ namespace System.Workflow.Activities
             {
                 OperationInfoBase operation = this.SendActivity.ServiceOperationInfo;
                 // Refresh the contract type in the case the type is a Design Time type)
-                //ServiceOperationHelpers.RefreshReferencedDesignTimeTypes(this.Activity.Site as IServiceProvider, operation);
+                //ServiceOperationHelpers.RefreshReferencedDesignTimeTypes(this.Activity.Site as IServiceProvider,
+                // operation);
                 isOneWay = operation.GetIsOneWay(this.Activity.Site as IServiceProvider);
             }
             if (!isOneWay)

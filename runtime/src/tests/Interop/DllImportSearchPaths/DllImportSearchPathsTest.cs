@@ -58,7 +58,8 @@ public class DllImportSearchPathsTest
         {
             Environment.CurrentDirectory = Subdirectory;
 
-            // Library should not be found in the assembly directory, but should fall back to the default OS search which includes CWD on Windows
+            // Library should not be found in the assembly directory, but should fall back to the default OS
+            // search which includes CWD on Windows
             int sum = NativeLibraryPInvoke.Sum(1, 2);
             Assert.Equal(3, sum);
         }
@@ -89,7 +90,8 @@ public class NativeLibraryPInvokeAot
     }
 
     // For NativeAOT, validate the case where the native library is next to the AOT application.
-    // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't fallback
+    // The passing of DllImportSearchPath.System32 is done to ensure on Windows the runtime won't
+    // fallback
     // and try to search the application directory by default.
     [DllImport(NativeLibraryToLoad.Name + "-in-native")]
     [DefaultDllImportSearchPaths(

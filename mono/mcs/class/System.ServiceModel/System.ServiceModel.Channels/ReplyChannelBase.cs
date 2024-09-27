@@ -179,7 +179,8 @@ namespace System.ServiceModel.Channels
                 result = try_recv_delegate.BeginInvoke(timeout, out dummy, callback, state);
                 currentAsyncResults.Add(result);
             }
-            // Note that at this point result can be missing from currentAsyncResults here if delegate has run to completion
+            // Note that at this point result can be missing from currentAsyncResults here if delegate has run
+            // to completion
             return result;
         }
 

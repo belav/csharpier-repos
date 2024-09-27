@@ -26,8 +26,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="operation">The binary operation kind.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp binary operation binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder BinaryOperation(
@@ -62,7 +64,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="type">The type to convert to.</param>
-        /// <param name="context">The <see cref="Type"/> that indicates where this operation is used.</param>
+        /// <param name="context">The <see cref="Type"/> that indicates where this operation is
+        // used.</param>
         /// <returns>Returns a new CSharp convert binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder Convert(CSharpBinderFlags flags, Type type, Type? context)
@@ -89,8 +92,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new CSharp get index binder.
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp get index binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder GetIndex(
@@ -109,8 +114,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="name">The name of the member to get.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp get member binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder GetMember(
@@ -135,8 +142,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new CSharp invoke binder.
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
-        /// <param name="context">The <see cref="Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp invoke binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder Invoke(
@@ -164,8 +173,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="name">The name of the member to invoke.</param>
         /// <param name="typeArguments">The list of type arguments specified for this invoke.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp invoke member binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder InvokeMember(
@@ -209,8 +220,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new CSharp invoke constructor binder.
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp invoke constructor binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder InvokeConstructor(
@@ -233,7 +246,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="name">The name of the event to look for.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
         /// <returns>Returns a new CSharp is event binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder IsEvent(CSharpBinderFlags flags, string name, Type? context)
@@ -247,8 +261,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// Initializes a new CSharp set index binder.
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp set index binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder SetIndex(
@@ -275,8 +291,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="name">The name of the member to set.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp set member binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder SetMember(
@@ -305,8 +323,10 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// </summary>
         /// <param name="flags">The flags with which to initialize the binder.</param>
         /// <param name="operation">The unary operation kind.</param>
-        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is used.</param>
-        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the arguments to this operation.</param>
+        /// <param name="context">The <see cref="System.Type"/> that indicates where this operation is
+        // used.</param>
+        /// <param name="argumentInfo">The sequence of <see cref="CSharpArgumentInfo"/> instances for the
+        // arguments to this operation.</param>
         /// <returns>Returns a new CSharp unary operation binder.</returns>
         [RequiresUnreferencedCode(TrimmerWarning)]
         public static CallSiteBinder UnaryOperation(

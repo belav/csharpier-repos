@@ -21,7 +21,8 @@ public class HubConnectionStore
     /// Get the <see cref="HubConnectionContext"/> by connection ID.
     /// </summary>
     /// <param name="connectionId">The ID of the connection.</param>
-    /// <returns>The connection for the <paramref name="connectionId"/>, null if there is no connection.</returns>
+    /// <returns>The connection for the <paramref name="connectionId"/>, null if there is no
+    // connection.</returns>
     public HubConnectionContext? this[string connectionId]
     {
         get

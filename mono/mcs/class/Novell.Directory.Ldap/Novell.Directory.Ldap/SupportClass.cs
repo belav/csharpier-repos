@@ -86,7 +86,7 @@ public class SupportClass
         return sbyteArray;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Converts an array of sbytes to an array of bytes
     /// </summary>
@@ -127,13 +127,16 @@ public class SupportClass
         return byteArray;
     }
 
-    /*******************************/
-    /// <summary>Reads a number of characters from the current source Stream and writes the data to the target array at the specified index.</summary>
+/*******************************/
+    /// <summary>Reads a number of characters from the current source Stream and writes the data to the
+    // target array at the specified index.</summary>
     /// <param name="sourceStream">The source Stream to read from.</param>
     /// <param name="target">Contains the array of characteres read from the source Stream.</param>
     /// <param name="start">The starting index of the target array.</param>
     /// <param name="count">The maximum number of characters to read from the source Stream.</param>
-    /// <returns>The number of characters read. The number will be less than or equal to count depending on the data available in the source Stream. Returns -1 if the end of the stream is reached.</returns>
+    /// <returns>The number of characters read. The number will be less than or equal to count depending
+    // on the data available in the source Stream. Returns -1 if the end of the stream is
+    // reached.</returns>
     [CLSCompliantAttribute(false)]
     public static System.Int32 ReadInput(
         System.IO.Stream sourceStream,
@@ -169,12 +172,15 @@ public class SupportClass
         return bytesRead;
     }
 
-    /// <summary>Reads a number of characters from the current source TextReader and writes the data to the target array at the specified index.</summary>
+    /// <summary>Reads a number of characters from the current source TextReader and writes the data to
+    // the target array at the specified index.</summary>
     /// <param name="sourceTextReader">The source TextReader to read from</param>
     /// <param name="target">Contains the array of characteres read from the source TextReader.</param>
     /// <param name="start">The starting index of the target array.</param>
     /// <param name="count">The maximum number of characters to read from the source TextReader.</param>
-    /// <returns>The number of characters read. The number will be less than or equal to count depending on the data available in the source TextReader. Returns -1 if the end of the stream is reached.</returns>
+    /// <returns>The number of characters read. The number will be less than or equal to count depending
+    // on the data available in the source TextReader. Returns -1 if the end of the stream is
+    // reached.</returns>
     [CLSCompliantAttribute(false)]
     public static System.Int32 ReadInput(
         System.IO.TextReader sourceTextReader,
@@ -200,7 +206,7 @@ public class SupportClass
         return bytesRead;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This method returns the literal value received
     /// </summary>
@@ -242,7 +248,7 @@ public class SupportClass
         return literal;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// The class performs token processing from strings
     /// </summary>
@@ -254,7 +260,8 @@ public class SupportClass
         //Source string to use
         private string source;
 
-        //The tokenizer uses the default delimiter set: the space character, the tab character, the newline character, and the carriage-return character
+        //The tokenizer uses the default delimiter set: the space character, the tab character, the newline
+        // character, and the carriage-return character
         private string delimiters = " \t\n\r";
 
         private bool returnDelims = false;
@@ -418,7 +425,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Provides support for DateFormat
     /// </summary>
@@ -508,7 +515,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Gets the DateTimeFormat instance and date instance to obtain the date with the format passed
     /// </summary>
@@ -525,7 +532,7 @@ public class SupportClass
         return date.ToString(datePattern + " " + timePattern, format);
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Adds a new key-and-value pair into the hash table
     /// </summary>
@@ -544,7 +551,7 @@ public class SupportClass
         return element;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class contains static methods to manage arrays.
     /// </summary>
@@ -569,7 +576,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Removes the first occurrence of an specific object from an ArrayList instance.
     /// </summary>
@@ -586,7 +593,7 @@ public class SupportClass
         return containsItem;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Support class used to handle threads
     /// </summary>
@@ -618,7 +625,8 @@ public class SupportClass
         /// <summary>
         /// Initializes a new instance of the Thread class.
         /// </summary>
-        /// <param name="Start">A ThreadStart delegate that references the methods to be invoked when this thread begins executing</param>
+        /// <param name="Start">A ThreadStart delegate that references the methods to be invoked when this
+        // thread begins executing</param>
         public ThreadClass(System.Threading.ThreadStart Start)
         {
             threadField = new System.Threading.Thread(Start);
@@ -627,7 +635,8 @@ public class SupportClass
         /// <summary>
         /// Initializes a new instance of the Thread class.
         /// </summary>
-        /// <param name="Start">A ThreadStart delegate that references the methods to be invoked when this thread begins executing</param>
+        /// <param name="Start">A ThreadStart delegate that references the methods to be invoked when this
+        // thread begins executing</param>
         /// <param name="Name">The name of the thread</param>
         public ThreadClass(System.Threading.ThreadStart Start, string Name)
         {
@@ -641,7 +650,8 @@ public class SupportClass
         public virtual void Run() { }
 
         /// <summary>
-        /// Causes the operating system to change the state of the current thread instance to ThreadState.Running
+        /// Causes the operating system to change the state of the current thread instance to
+        // ThreadState.Running
         /// </summary>
         public virtual void Start()
         {
@@ -761,7 +771,8 @@ public class SupportClass
         /// exception information about the thread termination.
         /// Calling this method usually terminates the thread.
         /// </summary>
-        /// <param name="stateInfo">An object that contains application-specific information, such as state, which can be used by the thread being aborted</param>
+        /// <param name="stateInfo">An object that contains application-specific information, such as state,
+        // which can be used by the thread being aborted</param>
         public void Abort(System.Object stateInfo)
         {
             lock (this)
@@ -799,7 +810,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class contains different methods to manage Collections.
     /// </summary>
@@ -825,7 +836,8 @@ public class SupportClass
         /// Adds all the elements contained in the specified collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -847,7 +859,8 @@ public class SupportClass
         /// Adds all the elements contained in the specified support class collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(CollectionSupport collection)
         {
             return this.AddAll((System.Collections.ICollection)collection);
@@ -857,17 +870,21 @@ public class SupportClass
         /// Verifies if the specified element is contained into the collection.
         /// </summary>
         /// <param name="element"> The element that will be verified.</param>
-        /// <returns>Returns true if the element is contained in the collection. Otherwise returns false.</returns>
+        /// <returns>Returns true if the element is contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool Contains(System.Object element)
         {
             return this.List.Contains(element);
         }
 
         /// <summary>
-        /// Verifies if all the elements of the specified collection are contained into the current collection.
+        /// Verifies if all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
-        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
+        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool ContainsAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -881,10 +898,13 @@ public class SupportClass
         }
 
         /// <summary>
-        /// Verifies if all the elements of the specified collection are contained into the current collection.
+        /// Verifies if all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
-        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
+        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool ContainsAll(CollectionSupport collection)
         {
             return this.ContainsAll((System.Collections.ICollection)collection);
@@ -918,8 +938,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
-        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
+        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns
+        // false.</returns>
         public virtual bool RemoveAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -937,8 +959,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
-        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
+        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns
+        // false.</returns>
         public virtual bool RemoveAll(CollectionSupport collection)
         {
             return this.RemoveAll((System.Collections.ICollection)collection);
@@ -947,8 +971,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
-        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
+        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns
+        // false.</returns>
         public virtual bool RetainAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -971,8 +997,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
-        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
+        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns
+        // false.</returns>
         public virtual bool RetainAll(CollectionSupport collection)
         {
             return this.RetainAll((System.Collections.ICollection)collection);
@@ -995,7 +1023,8 @@ public class SupportClass
         /// <summary>
         /// Obtains an array containing all the elements of the collection.
         /// </summary>
-        /// <param name="objects">The array into which the elements of the collection will be stored.</param>
+        /// <param name="objects">The array into which the elements of the collection will be
+        // stored.</param>
         /// <returns>The array containing all the elements of the collection.</returns>
         public virtual System.Object[] ToArray(System.Object[] objects)
         {
@@ -1009,7 +1038,8 @@ public class SupportClass
         /// <summary>
         /// Creates a CollectionSupport object with the contents specified in array.
         /// </summary>
-        /// <param name="array">The array containing the elements used to populate the new CollectionSupport object.</param>
+        /// <param name="array">The array containing the elements used to populate the new CollectionSupport
+        // object.</param>
         /// <returns>A CollectionSupport object populated with the contents of array.</returns>
         public static CollectionSupport ToCollectionSupport(System.Object[] array)
         {
@@ -1019,7 +1049,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class contains different methods to manage list collections.
     /// </summary>
@@ -1057,11 +1087,14 @@ public class SupportClass
         }
 
         /// <summary>
-        /// Adds all the elements contained into the specified collection, starting at the specified position.
+        /// Adds all the elements contained into the specified collection, starting at the specified
+        // position.
         /// </summary>
-        /// <param name="index">Position at which to add the first element from the specified collection.</param>
+        /// <param name="index">Position at which to add the first element from the specified
+        // collection.</param>
         /// <param name="list">The list used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(int index, System.Collections.IList list)
         {
             bool result = false;
@@ -1084,7 +1117,8 @@ public class SupportClass
         /// Adds all the elements contained in the specified collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(System.Collections.IList collection)
         {
             return this.AddAll(this.Count, collection);
@@ -1094,18 +1128,22 @@ public class SupportClass
         /// Adds all the elements contained in the specified support class collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(CollectionSupport collection)
         {
             return this.AddAll(this.Count, collection);
         }
 
         /// <summary>
-        /// Adds all the elements contained into the specified support class collection, starting at the specified position.
+        /// Adds all the elements contained into the specified support class collection, starting at the
+        // specified position.
         /// </summary>
-        /// <param name="index">Position at which to add the first element from the specified collection.</param>
+        /// <param name="index">Position at which to add the first element from the specified
+        // collection.</param>
         /// <param name="list">The list used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(int index, CollectionSupport collection)
         {
             return this.AddAll(index, (System.Collections.IList)collection);
@@ -1132,8 +1170,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
-        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
+        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns
+        // false.</returns>
         public virtual bool RemoveAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -1152,8 +1192,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
-        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
+        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns
+        // false.</returns>
         public virtual bool RemoveAll(CollectionSupport collection)
         {
             return this.RemoveAll((System.Collections.ICollection)collection);
@@ -1212,8 +1254,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
-        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
+        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns
+        // false.</returns>
         public virtual bool RetainAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -1235,18 +1279,23 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
-        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
+        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns
+        // false.</returns>
         public virtual bool RetainAll(CollectionSupport collection)
         {
             return this.RetainAll((System.Collections.ICollection)collection);
         }
 
         /// <summary>
-        /// Verifies if all the elements of the specified collection are contained into the current collection.
+        /// Verifies if all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
-        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
+        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool ContainsAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -1260,10 +1309,13 @@ public class SupportClass
         }
 
         /// <summary>
-        /// Verifies if all the elements of the specified collection are contained into the current collection.
+        /// Verifies if all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
-        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
+        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool ContainsAll(CollectionSupport collection)
         {
             return this.ContainsAll((System.Collections.ICollection)collection);
@@ -1288,7 +1340,8 @@ public class SupportClass
         /// <summary>
         /// Obtains an array containing all the elements of the collection.
         /// </summary>
-        /// <param name="objects">The array into which the elements of the collection will be stored.</param>
+        /// <param name="objects">The array into which the elements of the collection will be
+        // stored.</param>
         /// <returns>The array containing all the elements of the collection.</returns>
         public virtual System.Object[] ToArray(System.Object[] objects)
         {
@@ -1368,7 +1421,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class manages array operations.
     /// </summary>
@@ -1430,7 +1483,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class manages a set of elements.
     /// </summary>
@@ -1445,7 +1498,8 @@ public class SupportClass
         /// <summary>
         /// Creates a new set initialized with System.Collections.ICollection object
         /// </summary>
-        /// <param name="collection">System.Collections.ICollection object to initialize the set object</param>
+        /// <param name="collection">System.Collections.ICollection object to initialize the set
+        // object</param>
         public SetSupport(System.Collections.ICollection collection)
             : base(collection) { }
 
@@ -1476,7 +1530,8 @@ public class SupportClass
         /// Adds all the elements contained in the specified collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(System.Collections.ICollection collection)
         {
             bool result = false;
@@ -1498,16 +1553,19 @@ public class SupportClass
         /// Adds all the elements contained in the specified support class collection.
         /// </summary>
         /// <param name="collection">The collection used to extract the elements that will be added.</param>
-        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns false.</returns>
+        /// <returns>Returns true if all the elements were successfuly added. Otherwise returns
+        // false.</returns>
         public virtual bool AddAll(CollectionSupport collection)
         {
             return this.AddAll((System.Collections.ICollection)collection);
         }
 
         /// <summary>
-        /// Verifies that all the elements of the specified collection are contained into the current collection.
+        /// Verifies that all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
         /// <returns>True if the collection contains all the given elements.</returns>
         public virtual bool ContainsAll(System.Collections.ICollection collection)
         {
@@ -1520,10 +1578,13 @@ public class SupportClass
         }
 
         /// <summary>
-        /// Verifies if all the elements of the specified collection are contained into the current collection.
+        /// Verifies if all the elements of the specified collection are contained into the current
+        // collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be verified.</param>
-        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // verified.</param>
+        /// <returns>Returns true if all the elements are contained in the collection. Otherwise returns
+        // false.</returns>
         public virtual bool ContainsAll(CollectionSupport collection)
         {
             return this.ContainsAll((System.Collections.ICollection)collection);
@@ -1555,7 +1616,8 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained in the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
         /// <returns>True if all the elements were successfuly removed, false otherwise.</returns>
         public virtual bool RemoveAll(System.Collections.ICollection collection)
         {
@@ -1573,8 +1635,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to extract the elements that will be removed.</param>
-        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to extract the elements that will be
+        // removed.</param>
+        /// <returns>Returns true if all the elements were successfuly removed. Otherwise returns
+        // false.</returns>
         public virtual bool RemoveAll(CollectionSupport collection)
         {
             return this.RemoveAll((System.Collections.ICollection)collection);
@@ -1583,7 +1647,8 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained in the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
         /// <returns>True if all the elements were successfully removed, false otherwise.</returns>
         public virtual bool RetainAll(System.Collections.ICollection collection)
         {
@@ -1602,8 +1667,10 @@ public class SupportClass
         /// <summary>
         /// Removes all the elements that aren't contained into the specified collection.
         /// </summary>
-        /// <param name="collection">The collection used to verify the elements that will be retained.</param>
-        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns false.</returns>
+        /// <param name="collection">The collection used to verify the elements that will be
+        // retained.</param>
+        /// <returns>Returns true if all the elements were successfully removed. Otherwise returns
+        // false.</returns>
         public virtual bool RetainAll(CollectionSupport collection)
         {
             return this.RetainAll((System.Collections.ICollection)collection);
@@ -1626,7 +1693,8 @@ public class SupportClass
         /// <summary>
         /// Obtains an array containing all the elements in the collection.
         /// </summary>
-        /// <param name="objects">The array into which the elements of the collection will be stored.</param>
+        /// <param name="objects">The array into which the elements of the collection will be
+        // stored.</param>
         /// <returns>The array containing all the elements of the collection.</returns>
         public virtual object[] ToArray(object[] objects)
         {
@@ -1638,7 +1706,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class manages different operation with collections.
     /// </summary>
@@ -1650,7 +1718,7 @@ public class SupportClass
         public AbstractSetSupport() { }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Removes the element with the specified key from a Hashtable instance.
     /// </summary>
@@ -1667,9 +1735,11 @@ public class SupportClass
         return element;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
-    /// Sets the size of the ArrayList. If the new size is greater than the current capacity, then new null items are added to the end of the ArrayList. If the new size is lower than the current size, then all elements after the new size are discarded
+    /// Sets the size of the ArrayList. If the new size is greater than the current capacity, then new
+    // null items are added to the end of the ArrayList. If the new size is lower than the current size,
+    // then all elements after the new size are discarded
     /// </summary>
     /// <param name="arrayList">The ArrayList to be changed</param>
     /// <param name="newSize">The new ArrayList size</param>
@@ -1687,7 +1757,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Adds an element to the top end of a Stack instance.
     /// </summary>
@@ -1700,7 +1770,7 @@ public class SupportClass
         return element;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Copies an array of chars obtained from a String into a specified array of chars
     /// </summary>
@@ -1708,7 +1778,8 @@ public class SupportClass
     /// <param name="sourceStart">Position of the String to start getting the chars</param>
     /// <param name="sourceEnd">Position of the String to end getting the chars</param>
     /// <param name="destinationArray">Array to return the chars</param>
-    /// <param name="destinationStart">Position of the destination array of chars to start storing the chars</param>
+    /// <param name="destinationStart">Position of the destination array of chars to start storing the
+    // chars</param>
     /// <returns>An array of chars</returns>
     public static void GetCharsFromString(
         string sourceString,
@@ -1730,7 +1801,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Creates an output file stream to write to the file with the specified name.
     /// </summary>
@@ -1745,7 +1816,7 @@ public class SupportClass
             return new System.IO.FileStream(FileName, System.IO.FileMode.Create);
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Converts an array of sbytes to an array of chars
     /// </summary>
@@ -1771,7 +1842,7 @@ public class SupportClass
         return charArray;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Encapsulates the functionality of message digest algorithms such as SHA-1 or MD5.
     /// </summary>
@@ -1953,7 +2024,7 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// This class uses a cryptographic Random Number Generator to provide support for
     /// strong pseudo-random number generation.
@@ -2030,13 +2101,13 @@ public class SupportClass
         }
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Interface used by classes which must be single threaded.
     /// </summary>
     public interface SingleThreadModel { }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Creates an instance of a received Type.
     /// </summary>
@@ -2072,7 +2143,7 @@ public class SupportClass
         return instance;
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Writes the exception stack trace to the received stream
     /// </summary>
@@ -2084,13 +2155,14 @@ public class SupportClass
         stream.Flush();
     }
 
-    /*******************************/
+/*******************************/
     /// <summary>
     /// Determines whether two Collections instances are equals.
     /// </summary>
     /// <param name="source">The first Collections to compare. </param>
     /// <param name="target">The second Collections to compare. </param>
-    /// <returns>Return true if the first collection is the same instance as the second collection, otherwise return false.</returns>
+    /// <returns>Return true if the first collection is the same instance as the second collection,
+    // otherwise return false.</returns>
     public static bool EqualsSupport(
         System.Collections.ICollection source,
         System.Collections.ICollection target
@@ -2112,7 +2184,8 @@ public class SupportClass
     /// </summary>
     /// <param name="source">The first Collections to compare.</param>
     /// <param name="target">The Object to compare.</param>
-    /// <returns>Return true if the first collection contains the same values of the second Object, otherwise return false.</returns>
+    /// <returns>Return true if the first collection contains the same values of the second Object,
+    // otherwise return false.</returns>
     public static bool EqualsSupport(System.Collections.ICollection source, System.Object target)
     {
         if ((target.GetType()) != (typeof(System.Collections.ICollection)))
@@ -2126,7 +2199,8 @@ public class SupportClass
     /// </summary>
     /// <param name="source">The first IDictionaryEnumerator to compare.</param>
     /// <param name="target">The second Object to compare.</param>
-    /// <returns>Return true if the first IDictionaryEnumerator contains the same values of the second Object, otherwise return false.</returns>
+    /// <returns>Return true if the first IDictionaryEnumerator contains the same values of the second
+    // Object, otherwise return false.</returns>
     public static bool EqualsSupport(
         System.Collections.IDictionaryEnumerator source,
         System.Object target
@@ -2143,7 +2217,8 @@ public class SupportClass
     /// </summary>
     /// <param name="source">The first IDictionaryEnumerator to compare.</param>
     /// <param name="target">The second IDictionaryEnumerator to compare.</param>
-    /// <returns>Return true if the first IDictionaryEnumerator contains the same values as the second IDictionaryEnumerator, otherwise return false.</returns>
+    /// <returns>Return true if the first IDictionaryEnumerator contains the same values as the second
+    // IDictionaryEnumerator, otherwise return false.</returns>
     public static bool EqualsSupport(
         System.Collections.IDictionaryEnumerator source,
         System.Collections.IDictionaryEnumerator target
@@ -2160,7 +2235,8 @@ public class SupportClass
     /// Reverses the Stack Collection received.
     /// </summary>
     /// <param name="collection">The collection to reverse.</param>
-    /// <returns>The collection received in reverse order if it was a System.Collections.Stack type, otherwise it does
+    /// <returns>The collection received in reverse order if it was a System.Collections.Stack type,
+    // otherwise it does
     /// nothing to the collection.</returns>
     public static System.Collections.IEnumerator ReverseStack(
         System.Collections.ICollection collection

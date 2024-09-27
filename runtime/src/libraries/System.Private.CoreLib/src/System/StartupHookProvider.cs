@@ -116,8 +116,10 @@ namespace System
             else
             {
                 // The intent here is to only support simple assembly names, but AssemblyName .ctor accepts
-                // lot of other forms (fully qualified assembly name, strings which look like relative paths and so on).
-                // So add a check on top which will disallow any directory separator, space or comma in the assembly name.
+                // lot of other forms (fully qualified assembly name, strings which look like relative paths and so
+                // on).
+                // So add a check on top which will disallow any directory separator, space or comma in the assembly
+                // name.
                 for (int j = 0; j < disallowedSimpleAssemblyNameChars.Length; j++)
                 {
                     if (startupHookPart.Contains(disallowedSimpleAssemblyNameChars[j]))

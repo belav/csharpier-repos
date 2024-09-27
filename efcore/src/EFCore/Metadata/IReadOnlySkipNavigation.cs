@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     that is forwarded through a third entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IReadOnlySkipNavigation : IReadOnlyNavigationBase
 {
@@ -32,7 +33,8 @@ public interface IReadOnlySkipNavigation : IReadOnlyNavigationBase
     IReadOnlyForeignKey? ForeignKey { get; }
 
     /// <summary>
-    ///     Gets a value indicating whether the navigation property is defined on the dependent side of the underlying foreign key.
+    ///     Gets a value indicating whether the navigation property is defined on the dependent side of
+    // the underlying foreign key.
     /// </summary>
     bool IsOnDependent { get; }
 

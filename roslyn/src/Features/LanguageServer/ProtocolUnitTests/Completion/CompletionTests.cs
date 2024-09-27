@@ -117,7 +117,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 .ConfigureAwait(false);
             var expectedCommitCharacters = expected.CommitCharacters;
 
-            // Null out the commit characters since we're expecting the commit characters will be lifted onto the completion list.
+            // Null out the commit characters since we're expecting the commit characters will be lifted onto
+            // the completion list.
             expected.CommitCharacters = null;
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -192,7 +193,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 .ConfigureAwait(false);
             var expectedCommitCharacters = expected.CommitCharacters;
 
-            // Null out the commit characters since we're expecting the commit characters will be lifted onto the completion list.
+            // Null out the commit characters since we're expecting the commit characters will be lifted onto
+            // the completion list.
             expected.CommitCharacters = null;
 
             var results = await RunGetCompletionsAsync(testLspServer, completionParams)
@@ -865,7 +867,8 @@ class A
 
             var testAccessor = cache.GetTestAccessor();
 
-            // This test assumes that the maximum cache size is 3, and will have to modified if this number changes.
+            // This test assumes that the maximum cache size is 3, and will have to modified if this number
+            // changes.
             Assert.True(testAccessor.MaximumCacheSize == 3);
 
             var completionParams = CreateCompletionParams(
@@ -1686,7 +1689,8 @@ class A
                 (firstCaretLocation.Range.End.Line, firstCaretLocation.Range.End.Character, "a")
             );
 
-            // Trigger completion on 'a' (using incomplete as we previously returned incomplete completions from 'T').
+            // Trigger completion on 'a' (using incomplete as we previously returned incomplete completions from
+            // 'T').
             triggerLocation = GetLocationPlusOne(firstCaretLocation);
             completionParams = CreateCompletionParams(
                 triggerLocation,

@@ -9,7 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Provides a description about a programmatic suppression of a <see cref="Diagnostic"/> by a <see cref="DiagnosticSuppressor"/>.
+    /// Provides a description about a programmatic suppression of a <see cref="Diagnostic"/> by a <see
+    // cref="DiagnosticSuppressor"/>.
     /// </summary>
     public sealed class SuppressionDescriptor : IEquatable<SuppressionDescriptor?>
     {
@@ -29,22 +30,30 @@ namespace Microsoft.CodeAnalysis
         public LocalizableString Justification { get; }
 
         /// <summary>
-        /// Create a SuppressionDescriptor, which provides a justification about a programmatic suppression of a <see cref="Diagnostic"/>.
+        /// Create a SuppressionDescriptor, which provides a justification about a programmatic suppression
+        // of a <see cref="Diagnostic"/>.
         /// NOTE: For localizable <paramref name="justification"/>,
         /// use constructor overload <see cref="SuppressionDescriptor(string, string, LocalizableString)"/>.
         /// </summary>
-        /// <param name="id">A unique identifier for the suppression. For example, suppression ID "SP1001".</param>
-        /// <param name="suppressedDiagnosticId">Identifier of the suppressed diagnostic, i.e. <see cref="Diagnostic.Id"/>. For example, compiler warning Id "CS0649".</param>
-        /// <param name="justification">Justification for the suppression. For example: "Suppress CS0649 on fields marked with YYY attribute as they are implicitly assigned.".</param>
+        /// <param name="id">A unique identifier for the suppression. For example, suppression ID
+        // "SP1001".</param>
+        /// <param name="suppressedDiagnosticId">Identifier of the suppressed diagnostic, i.e. <see
+        // cref="Diagnostic.Id"/>. For example, compiler warning Id "CS0649".</param>
+        /// <param name="justification">Justification for the suppression. For example: "Suppress CS0649 on
+        // fields marked with YYY attribute as they are implicitly assigned.".</param>
         public SuppressionDescriptor(string id, string suppressedDiagnosticId, string justification)
             : this(id, suppressedDiagnosticId, (LocalizableString)justification) { }
 
         /// <summary>
-        /// Create a SuppressionDescriptor, which provides a localizable justification about a programmatic suppression of a <see cref="Diagnostic"/>.
+        /// Create a SuppressionDescriptor, which provides a localizable justification about a programmatic
+        // suppression of a <see cref="Diagnostic"/>.
         /// </summary>
-        /// <param name="id">A unique identifier for the suppression. For example, suppression ID "SP1001".</param>
-        /// <param name="suppressedDiagnosticId">Identifier of the suppressed diagnostic, i.e. <see cref="Diagnostic.Id"/>. For example, compiler warning Id "CS0649".</param>
-        /// <param name="justification">Justification for the suppression. For example: "Suppress CS0649 on fields marked with YYY attribute as they are implicitly assigned.".</param>
+        /// <param name="id">A unique identifier for the suppression. For example, suppression ID
+        // "SP1001".</param>
+        /// <param name="suppressedDiagnosticId">Identifier of the suppressed diagnostic, i.e. <see
+        // cref="Diagnostic.Id"/>. For example, compiler warning Id "CS0649".</param>
+        /// <param name="justification">Justification for the suppression. For example: "Suppress CS0649 on
+        // fields marked with YYY attribute as they are implicitly assigned.".</param>
         public SuppressionDescriptor(
             string id,
             string suppressedDiagnosticId,
@@ -103,7 +112,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a flag indicating if the suppression is disabled for the given <see cref="CompilationOptions"/>.
+        /// Returns a flag indicating if the suppression is disabled for the given <see
+        // cref="CompilationOptions"/>.
         /// </summary>
         /// <param name="compilationOptions">Compilation options</param>
         internal bool IsDisabled(CompilationOptions compilationOptions)

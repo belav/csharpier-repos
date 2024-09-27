@@ -14,13 +14,13 @@ using System.Threading;
 
 namespace System.Web.Util
 {
-    /*
-     * Property Accessor Generator class
-     *
-     * The purpose of this class is to generate some IL code on the fly that can efficiently
-     * access properties (and fields) of objects.  This is an alternative to using
-     * very slow reflection.
-     */
+/*
+* Property Accessor Generator class
+*
+* The purpose of this class is to generate some IL code on the fly that can efficiently
+* access properties (and fields) of objects.  This is an alternative to using
+* very slow reflection.
+*/
 
     internal class FastPropertyAccessor
     {

@@ -50,7 +50,8 @@ namespace System.Security.Util
         [OptionalField(VersionAdded = 3)]
         private bool m_isUncShare;
 
-        // legacy field from v1.x, not used in v2 and beyond. Retained purely for serialization compatability.
+        // legacy field from v1.x, not used in v2 and beyond. Retained purely for serialization
+        // compatability.
         private String m_fullurl;
 
         [OnDeserialized]
@@ -134,7 +135,8 @@ namespace System.Security.Util
                 DoDeferredParse();
         }
 
-        // Converts %XX and %uYYYY to the actual characters (I.e. Unesacpes any escape characters present in the URL)
+        // Converts %XX and %uYYYY to the actual characters (I.e. Unesacpes any escape characters present in
+        // the URL)
         private String UnescapeURL(String url)
         {
             StringBuilder intermediate = StringBuilderCache.Acquire(url.Length);
@@ -583,7 +585,8 @@ namespace System.Security.Util
                 modifiedUrl.Replace('\\', '/');
             }
 
-            // ITEM 3 - If the path is greater than or equal (due to terminating NULL in windows) MAX_PATH, we throw.
+            // ITEM 3 - If the path is greater than or equal (due to terminating NULL in windows) MAX_PATH, we
+            // throw.
             if (checkPathLength)
             {
                 // This needs to be a separate method to avoid hitting the static constructor on AppContextSwitches
@@ -879,15 +882,18 @@ namespace System.Security.Util
         /// <summary>
         ///     Make a best guess at determining if this is URL refers to a file with a relative path. Since
         ///     this is a guess to help out users of UrlMembershipCondition who may accidentally supply a
-        ///     relative URL, we'd rather err on the side of absolute than relative. (We'd rather accept some
+        ///     relative URL, we'd rather err on the side of absolute than relative. (We'd rather accept
+        // some
         ///     meaningless membership conditions rather than reject meaningful ones).
         ///
-        ///     In order to be a relative file URL, the URL needs to have a protocol of file, and not be on a
+        ///     In order to be a relative file URL, the URL needs to have a protocol of file, and not be on
+        // a
         ///     UNC share.
         ///
         ///     If both of the above are true, then the heuristics we'll use to detect an absolute URL are:
         ///         1. A host name which is:
-        ///              a. greater than one character and ends in a colon (representing the drive letter) OR
+        ///              a. greater than one character and ends in a colon (representing the drive letter)
+        // OR
         ///              b. ends with a * (so we match any file with the given prefix if any)
         ///         2. Has a directory name (cannot be simply file://c:)
         /// </summary>

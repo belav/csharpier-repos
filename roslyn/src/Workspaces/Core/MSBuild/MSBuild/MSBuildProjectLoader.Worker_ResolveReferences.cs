@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.MSBuild
             }
 
             /// <summary>
-            /// This type helps produces lists of metadata and project references. Initially, it contains a list of metadata references.
-            /// As project references are added, the metadata references that match those project references are removed.
+            /// This type helps produces lists of metadata and project references. Initially, it contains a list
+            // of metadata references.
+            /// As project references are added, the metadata references that match those project references are
+            // removed.
             /// </summary>
             private class ResolvedReferencesBuilder
             {
@@ -253,7 +255,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         }
 
                         // If we don't know how to load a project (that is, it's not a language we support), we can still
-                        // attempt to verify that its output exists on disk and is included in our set of metadata references.
+                        // attempt to verify that its output exists on disk and is included in our set of metadata
+                        // references.
                         // If it is, we'll just leave it in place.
                         if (
                             !IsProjectLoadable(projectReferencePath)
@@ -269,7 +272,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                         }
 
                         // If metadata is preferred, see if the project reference's output exists on disk and is included
-                        // in our metadata references. If it is, don't create a project reference; we'll just use the metadata.
+                        // in our metadata references. If it is, don't create a project reference; we'll just use the
+                        // metadata.
                         if (
                             _preferMetadataForReferencesOfDiscoveredProjects
                             && await VerifyProjectOutputExistsAsync(
@@ -521,7 +525,8 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 {
                     foreach (var projectReferenceId in projectReferenceIds)
                     {
-                        // Don't add a reference if the project already has a reference on us. Otherwise, it will cause a circularity.
+                        // Don't add a reference if the project already has a reference on us. Otherwise, it will cause a
+                        // circularity.
                         if (ProjectReferenceExists(to: id, from: projectReferenceId))
                         {
                             return false;

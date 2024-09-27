@@ -76,11 +76,11 @@ namespace MonoTests.System.Data.Connected.SqlClient
             Assert.AreEqual(3000, conn.ConnectionTimeout, "#A3");
 
             //'==' doesent work correctly in both msdotnet and mono
-            /*
-            conn = new SqlConnection ("server=local==host;database=tmp;");
-            Assert.AreEqual ("local==host", conn.DataSource,
-                "# Datasource name is set incorrectly");
-            */
+/*
+conn = new SqlConnection ("server=local==host;database=tmp;");
+Assert.AreEqual ("local==host", conn.DataSource,
+"# Datasource name is set incorrectly");
+*/
             string connStr =
                 "Server='loca\"lhost';Database='''Db'; packet Size=\"512\";"
                 + "connect Timeout=20;Workstation Id=\"'\"\"desktop\";";
@@ -985,9 +985,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "TABLE_NAME"
                         && row[col].ToString() == "tmptable1"
@@ -1012,9 +1012,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "table_name"
                         && row[col].ToString() == "binary_family"
@@ -1039,9 +1039,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "table_name"
                         && row[col].ToString() == "binary_family"
@@ -1066,9 +1066,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "SPECIFIC_NAME"
                         && row[col].ToString() == "sp_get_age"
@@ -1093,9 +1093,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "SPECIFIC_NAME"
                         && row[col].ToString() == "sp_get_age"
@@ -1120,9 +1120,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "TABLE_NAME"
                         && row[col].ToString() == "binary_family"
@@ -1150,9 +1150,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "TABLE_NAME"
                         && row[col].ToString() == "binary_family"
@@ -1177,9 +1177,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (col.ColumnName.ToString() == "user_name" && row[col].ToString() == "public")
                     {
                         flag = true;
@@ -1204,9 +1204,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values.
-                     */
+/*
+* We need to consider multiple values.
+*/
                     if (col.ColumnName.ToString() == "user_name" && row[col].ToString() == "public")
                     {
                         flag = true;
@@ -1231,9 +1231,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values.
-                     */
+/*
+* We need to consider multiple values.
+*/
                     if (col.ColumnName.ToString() == "user_name" && row[col].ToString() == "public")
                     {
                         flag = true;
@@ -1258,9 +1258,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values.
-                     */
+/*
+* We need to consider multiple values.
+*/
                     if (col.ColumnName.ToString() == "user_name" && row[col].ToString() == "public")
                     {
                         flag = true;
@@ -1289,9 +1289,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "TABLE_NAME"
                         && row[col].ToString() == "binary_family"
@@ -1323,9 +1323,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "table_name"
                         && row[col].ToString() == "binary_family"
@@ -1357,9 +1357,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "ROUTINE_NAME"
                         && row[col].ToString() == "sp_get_age"
@@ -1384,9 +1384,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "CollectionName"
                         && row[col].ToString() == "UserDefinedTypes"
@@ -1411,9 +1411,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "RestrictionDefault"
                         && row[col].ToString() == "CONSTRAINT_NAME"
@@ -1446,9 +1446,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "TypeName"
                         && row[col].ToString() == "uniqueidentifier"
@@ -1473,9 +1473,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "CollectionName"
                         && row[col].ToString() == "UserDefinedTypes"
@@ -1500,9 +1500,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "ReservedWord"
                         && row[col].ToString() == "UPPER"
@@ -1527,9 +1527,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "ReservedWord"
                         && row[col].ToString() == "upper"
@@ -1560,9 +1560,9 @@ namespace MonoTests.System.Data.Connected.SqlClient
             {
                 foreach (DataColumn col in tab1.Columns)
                 {
-                    /*
-                     * We need to consider multiple values
-                     */
+/*
+* We need to consider multiple values
+*/
                     if (
                         col.ColumnName.ToString() == "ROUTINE_NAME"
                         && row[col].ToString() == "mono"

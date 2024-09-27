@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Collections
             private ImmutableSegmentedHashSet<T> _set;
 
             /// <summary>
-            /// The current mutable collection this builder is operating on. This field is initialized to a copy of
+            /// The current mutable collection this builder is operating on. This field is initialized to a copy
+            // of
             /// <see cref="_set"/> the first time a change is made.
             /// </summary>
             private SegmentedHashSet<T>? _mutableSet;

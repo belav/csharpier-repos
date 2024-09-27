@@ -202,7 +202,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// Gets all filtered PropertiesEntries for a specified property (name uses dot-syntax e.g. Font.Bold)
+        /// Gets all filtered PropertiesEntries for a specified property (name uses dot-syntax e.g.
+        // Font.Bold)
         /// </devdoc>
         public ICollection GetPropertyAllFilters(string name)
         {

@@ -59,8 +59,10 @@ namespace System.IO
             // Try to delete the destination file if we're overwriting.
             if (error == Interop.Error.EEXIST && overwrite)
             {
-                // Delete the destination. This should fail on directories. Get a lock to the dest file to ensure we don't copy onto it when
-                // it's locked by something else, and then delete it. It should also fail if destination == source since it's already locked.
+                // Delete the destination. This should fail on directories. Get a lock to the dest file to ensure we
+                // don't copy onto it when
+                // it's locked by something else, and then delete it. It should also fail if destination == source
+                // since it's already locked.
                 try
                 {
                     using SafeFileHandle? dstHandle = SafeFileHandle.OpenNoFollowSymlink(

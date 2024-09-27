@@ -629,10 +629,12 @@ namespace System.Security.Permissions
         {
             // FileIOPermission doesn't allow for normalizing across various volume names. This means "C:\" and
             // "\\?\C:\" won't be considered correctly. In addition there are many other aliases for the volume
-            // besides "C:" such as (in one concrete example) "\\?\Harddisk0Partition2\", "\\?\HarddiskVolume6\",
+            // besides "C:" such as (in one concrete example) "\\?\Harddisk0Partition2\",
+            // "\\?\HarddiskVolume6\",
             // "\\?\Volume{d1655348-0000-0000-0000-f01500000000}\", etc.
             //
-            // This was never completely correct due to \\.\ paths. We'll allow \\?\ now if two conditions are met:
+            // This was never completely correct due to \\.\ paths. We'll allow \\?\ now if two conditions are
+            // met:
             // (1) We are in full trust and (2) we _aren't_ under the LegacyPathHandling switch.
 
             bool skipPrefix =
@@ -652,7 +654,8 @@ namespace System.Security.Permissions
             {
                 currentChar = path[i];
 
-                // We also check for null here as StringExpressionSet will trim it out. (Ensuring we still throw as we always have.)
+                // We also check for null here as StringExpressionSet will trim it out. (Ensuring we still throw as
+                // we always have.)
                 if (currentChar == '*' || currentChar == '?' || currentChar == '\0')
                     return true;
             }
@@ -1099,7 +1102,8 @@ namespace System.Security.Permissions
         }
 
         /// <summary>
-        /// Call this method if you don't need a the FileIOPermission for anything other than calling Demand() once.
+        /// Call this method if you don't need a the FileIOPermission for anything other than calling
+        // Demand() once.
         ///
         /// This method tries to verify full access before allocating a FileIOPermission object.
         /// If full access is there, then we still have to emulate the checks that creating the
@@ -1132,7 +1136,8 @@ namespace System.Security.Permissions
         }
 
         /// <summary>
-        /// Call this method if you don't need a the FileIOPermission for anything other than calling Demand() once.
+        /// Call this method if you don't need a the FileIOPermission for anything other than calling
+        // Demand() once.
         ///
         /// This method tries to verify full access before allocating a FileIOPermission object.
         /// If full access is there, then we still have to emulate the checks that creating the
@@ -1232,16 +1237,21 @@ namespace System.Security.Permissions
 #endif
 
         /// <summary>
-        /// Perform the additional path checks that would normally happen when creating a FileIOPermission object.
+        /// Perform the additional path checks that would normally happen when creating a FileIOPermission
+        // object.
         /// </summary>
         /// <param name="fullPath">A path that has already gone through GetFullPath or Normalize</param>
         internal static void EmulateFileIOPermissionChecks(string fullPath)
         {
-            // Callers should have already made checks for invalid path format via normalization. This method will only make the
-            // additional checks needed to throw the same exceptions that would normally throw when using FileIOPermission.
-            // These checks are done via CheckIllegalCharacters() and StringExpressionSet in AddPathList() above.
+            // Callers should have already made checks for invalid path format via normalization. This method
+            // will only make the
+            // additional checks needed to throw the same exceptions that would normally throw when using
+            // FileIOPermission.
+            // These checks are done via CheckIllegalCharacters() and StringExpressionSet in AddPathList()
+            // above.
             //
-            // We have to check the beginning as some paths may be passed in as path + @"\.", which will be normalized away.
+            // We have to check the beginning as some paths may be passed in as path + @"\.", which will be
+            // normalized away.
             BCLDebug.Assert(
                 fullPath.StartsWith(
                     Path.NormalizePath(fullPath, fullCheck: false),
@@ -1250,11 +1260,14 @@ namespace System.Security.Permissions
                 string.Format("path isn't normalized: {0}", fullPath)
             );
 
-            // Checking for colon / invalid characters on device paths blocks legitimate access to objects such as named pipes.
+            // Checking for colon / invalid characters on device paths blocks legitimate access to objects such
+            // as named pipes.
             if (AppContextSwitches.UseLegacyPathHandling || !PathInternal.IsDevice(fullPath))
             {
-                // GetFullPath already checks normal invalid path characters. We need to just check additional (wildcard) characters here.
-                // (By calling the standard helper we can allow extended paths \\?\ through when the support is enabled.)
+                // GetFullPath already checks normal invalid path characters. We need to just check additional
+                // (wildcard) characters here.
+                // (By calling the standard helper we can allow extended paths \\?\ through when the support is
+                // enabled.)
                 if (PathInternal.HasWildCardCharacters(fullPath))
                 {
                     throw new ArgumentException(

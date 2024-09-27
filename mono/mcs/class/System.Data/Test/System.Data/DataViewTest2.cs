@@ -714,7 +714,8 @@ namespace MonoTests.System.Data
         [Test]
         public void RowFilter()
         {
-            //note: this test does not check all the possible row filter expression. this is done in DataTable.Select method.
+            //note: this test does not check all the possible row filter expression. this is done in
+            // DataTable.Select method.
             // this test also check DataView.Count property
 
             DataRowView[] drvResult = null;
@@ -835,16 +836,18 @@ namespace MonoTests.System.Data
         [Test]
         public void RowStateFilter()
         {
-            /*
-                Added			A new row. 4
-                CurrentRows		Current rows including unchanged, new, and modified rows. 22
-                Deleted			A deleted row. 8
-                ModifiedCurrent A current version, which is a modified version of original data (see ModifiedOriginal). 16
-                ModifiedOriginal The original version (although it has since been modified and is available as ModifiedCurrent). 32
-                None			None. 0
-                OriginalRows	Original rows including unchanged and deleted rows. 42
-                Unchanged		An unchanged row. 2
-             */
+/*
+Added			A new row. 4
+CurrentRows		Current rows including unchanged, new, and modified rows. 22
+Deleted			A deleted row. 8
+ModifiedCurrent A current version, which is a modified version of original data (see
+ModifiedOriginal). 16
+ModifiedOriginal The original version (although it has since been modified and is available as
+ModifiedCurrent). 32
+None			None. 0
+OriginalRows	Original rows including unchanged and deleted rows. 42
+Unchanged		An unchanged row. 2
+*/
 
             //DataRowView[] drvResult = null;
             ArrayList al = new ArrayList();
@@ -896,13 +899,13 @@ namespace MonoTests.System.Data
             drResult = GetResultRows(dt, DataRowState.Deleted);
             // Deleted
             Assert.AreEqual(true, CompareSortedRowsByParentId(dv, drResult), "DV84");
-            /*
-                    //---------- OriginalRows --------
-                    dv.RowStateFilter = DataViewRowState.OriginalRows ;
-                    drResult = GetResultRows(dt,DataRowState.Unchanged | DataRowState.Deleted );
-                        // OriginalRows
-                        Assert.AreEqual(true , CompareSortedRowsByParentId(dv,drResult), "DV85");
-            */
+/*
+//---------- OriginalRows --------
+dv.RowStateFilter = DataViewRowState.OriginalRows ;
+drResult = GetResultRows(dt,DataRowState.Unchanged | DataRowState.Deleted );
+// OriginalRows
+Assert.AreEqual(true , CompareSortedRowsByParentId(dv,drResult), "DV85");
+*/
         }
 
         private DataRow[] GetResultRows(DataTable dt, DataRowState State)
@@ -1212,8 +1215,10 @@ namespace MonoTests.System.Data
             dv = dt.DefaultView;
 
             //	public DataViewManager DataViewManager {get;} -	The DataViewManager that created this view.
-            //	If this is the default DataView for a DataTable, the DataViewManager property returns the default DataViewManager for the DataSet.
-            //	Otherwise, if the DataView was created without a DataViewManager, this property is a null reference (Nothing in Visual Basic).
+            //	If this is the default DataView for a DataTable, the DataViewManager property returns the default
+            // DataViewManager for the DataSet.
+            //	Otherwise, if the DataView was created without a DataViewManager, this property is a null
+            // reference (Nothing in Visual Basic).
 
             dvm = dv.DataViewManager;
             Assert.AreSame(ds.DefaultViewManager, dvm, "DV114");

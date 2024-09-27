@@ -48,7 +48,8 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub>
         }
 
         _groups.Add(connection, groupName);
-        // Connection disconnected while adding to group, remove it in case the Add was called after OnDisconnectedAsync removed items from the group
+        // Connection disconnected while adding to group, remove it in case the Add was called after
+        // OnDisconnectedAsync removed items from the group
         if (connection.ConnectionAborted.IsCancellationRequested)
         {
             _groups.Remove(connection.ConnectionId, groupName);
@@ -149,7 +150,8 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub>
         return Task.WhenAll(tasks);
     }
 
-    // Tasks and message are passed by ref so they can be lazily created inside the method post-filtering,
+    // Tasks and message are passed by ref so they can be lazily created inside the method
+    // post-filtering,
     // while still being re-usable when sending to multiple groups
     private static void SendToGroupConnections(
         string methodName,
@@ -459,7 +461,8 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub>
         }
 
         var id = Interlocked.Increment(ref _lastInvocationId);
-        // prefix the client result ID with 's' for server, so that it won't conflict with other CompletionMessage's from the client
+        // prefix the client result ID with 's' for server, so that it won't conflict with other
+        // CompletionMessage's from the client
         // e.g. Stream IDs when completing
         var invocationId = $"s{id}";
 
@@ -490,7 +493,8 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub>
         }
         catch
         {
-            // ConnectionAborted will trigger a generic "Canceled" exception from the task, let's convert it into a more specific message.
+            // ConnectionAborted will trigger a generic "Canceled" exception from the task, let's convert it
+            // into a more specific message.
             if (connection.ConnectionAborted.IsCancellationRequested)
             {
                 throw new IOException($"Connection '{connectionId}' disconnected.");

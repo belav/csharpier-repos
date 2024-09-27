@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 }
                 else
                 {
-                    // If we were not initialized with a CompletionService or are called for a wrong textView, we should not make a commit.
+                    // If we were not initialized with a CompletionService or are called for a wrong textView, we should
+                    // not make a commit.
                     return ImmutableArray<char>.Empty;
                 }
             }
@@ -81,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         /// The method performs a preliminarily filtering of commit availability.
         /// In case of a doubt, it should respond with true.
         /// We will be able to cancel later in
-        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char, CancellationToken)"/>
+        /// <see cref="TryCommit(IAsyncCompletionSession, ITextBuffer, VSCompletionItem, char,
+        // CancellationToken)"/>
         /// based on <see cref="VSCompletionItem"/> item, e.g. based on <see cref="CompletionItemRules"/>.
         /// </summary>
         public bool ShouldCommitCompletion(
@@ -92,8 +94,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         )
         {
             // this is called only when the typedChar is in the list returned by PotentialCommitCharacters.
-            // It's possible typedChar is intended to be a filter char for some items (either currently considered for commit of not)
-            // we let this case to be handled in `TryCommit` instead, where we will have all the information needed to decide.
+            // It's possible typedChar is intended to be a filter char for some items (either currently
+            // considered for commit of not)
+            // we let this case to be handled in `TryCommit` instead, where we will have all the information
+            // needed to decide.
             return true;
         }
 
@@ -135,16 +139,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
             if (Helpers.IsFilterCharacter(roslynItem, typedChar, filterText))
             {
-                // Returning Cancel means we keep the current session and consider the character for further filtering.
+                // Returning Cancel means we keep the current session and consider the character for further
+                // filtering.
                 return new AsyncCompletionData.CommitResult(
                     isHandled: true,
                     AsyncCompletionData.CommitBehavior.CancelCommit
                 );
             }
 
-            // typedChar could be a filter character for another item. If we find such an item that the current filter
+            // typedChar could be a filter character for another item. If we find such an item that the current
+            // filter
             // text matches its start, then we should cancel commit and give ItemManager a chance to handle it.
-            // This is done here instead of in `ShouldCommitCompletion` because `ShouldCommitCompletion` might be called before
+            // This is done here instead of in `ShouldCommitCompletion` because `ShouldCommitCompletion` might
+            // be called before
             // CompletionSource add the `excludedCommitCharactersMap` to the session property bag.
             if (
                 session.Properties.TryGetProperty(
@@ -169,8 +176,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             var options = _globalOptions.GetCompletionOptions(document.Project.Language);
             var serviceRules = completionService.GetRules(options);
 
-            // We can be called before for ShouldCommitCompletion. However, that call does not provide rules applied for the completion item.
-            // Now we check for the commit character in the context of Rules that could change the list of commit characters.
+            // We can be called before for ShouldCommitCompletion. However, that call does not provide rules
+            // applied for the completion item.
+            // Now we check for the commit character in the context of Rules that could change the list of
+            // commit characters.
 
             if (
                 !Helpers.IsStandardCommitCharacter(typedChar)
@@ -206,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 return CommitResultUnhandled;
             }
 
-            // Commit with completion service assumes that null is provided is case of invoke. VS provides '\0' in the case.
+            // Commit with completion service assumes that null is provided is case of invoke. VS provides '\0'
+            // in the case.
             var commitChar = typedChar == '\0' ? null : (char?)typedChar;
             return Commit(
                 session,
@@ -269,7 +279,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             roslynItem = Helpers.DemoteItem(roslynItem);
             CompletionChange change;
 
-            // We met an issue when external code threw an OperationCanceledException and the cancellationToken is not canceled.
+            // We met an issue when external code threw an OperationCanceledException and the cancellationToken
+            // is not canceled.
             // Catching this scenario for further investigations.
             // See https://github.com/dotnet/roslyn/issues/38455.
             try
@@ -367,7 +378,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (change.NewPosition.HasValue)
             {
                 // Roslyn knows how to position the caret in the snapshot we just created.
-                // If there were more edits made by extensions, TryMoveCaretToAndEnsureVisible maps the snapshot point to the most recent one.
+                // If there were more edits made by extensions, TryMoveCaretToAndEnsureVisible maps the snapshot
+                // point to the most recent one.
                 view.TryMoveCaretToAndEnsureVisible(
                     new SnapshotPoint(updatedCurrentSnapshot, change.NewPosition.Value)
                 );
@@ -406,7 +418,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             if (roslynItem.Rules.FormatOnCommit)
             {
                 // The edit updates the snapshot however other extensions may make changes there.
-                // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather than the updated current snapshot defined above.
+                // Therefore, it is required to use subjectBuffer.CurrentSnapshot for further calculations rather
+                // than the updated current snapshot defined above.
                 var currentDocument =
                     subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 var formattingService =

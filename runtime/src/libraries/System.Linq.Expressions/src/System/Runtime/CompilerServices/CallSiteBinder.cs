@@ -77,8 +77,10 @@ namespace System.Runtime.CompilerServices
         /// Performs the runtime binding of the dynamic operation on a set of arguments.
         /// </summary>
         /// <param name="args">An array of arguments to the dynamic operation.</param>
-        /// <param name="parameters">The array of <see cref="ParameterExpression"/> instances that represent the parameters of the call site in the binding process.</param>
-        /// <param name="returnLabel">A LabelTarget used to return the result of the dynamic binding.</param>
+        /// <param name="parameters">The array of <see cref="ParameterExpression"/> instances that represent
+        // the parameters of the call site in the binding process.</param>
+        /// <param name="returnLabel">A LabelTarget used to return the result of the dynamic
+        // binding.</param>
         /// <returns>
         /// An Expression that performs tests on the dynamic operation arguments, and
         /// performs the dynamic operation if the tests are valid. If the tests fail on

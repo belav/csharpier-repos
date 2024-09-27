@@ -87,7 +87,8 @@ namespace System.Workflow.Runtime
         }
 
         /// <summary>
-        /// Callback for associating tracking listeners to in memory instances.  Fires for new and loading instances.
+        /// Callback for associating tracking listeners to in memory instances.  Fires for new and loading
+        // instances.
         /// </summary>
         /// <param name="sender">WorkflowExecutor</param>
         /// <param name="e"></param>
@@ -940,7 +941,8 @@ namespace System.Workflow.Runtime
             MakeProfilesPrivate(exec);
             //
             // Give the profiles the changes.  At this point we are in a volatile state.
-            // Profiles must act as if the changes will succeed but roll back any internal changes if they do not.
+            // Profiles must act as if the changes will succeed but roll back any internal changes if they do
+            // not.
             foreach (TrackingChannelWrapper channel in _channels)
             {
                 channel.GetTrackingProfile(exec).WorkflowChangeBegin(e.ChangeActions);
@@ -1122,9 +1124,12 @@ namespace System.Workflow.Runtime
     /// This is a lightweight class that is serialized so that the TrackingListener doesn't have to be.
     /// Every subscription that the listener adds holds a reference to this class.
     /// When an instance is loaded the broker is given to the listener factory and the listener factory
-    /// gives the broker the new listener.  This saves us from having to persist the listener itself which
-    /// means that while we do need to persist a list of service types and their profile version we don't
-    /// have to persist the channels themselves (and we can't control how heavy channels get as they are host defined).
+    /// gives the broker the new listener.  This saves us from having to persist the listener itself
+    // which
+    /// means that while we do need to persist a list of service types and their profile version we
+    // don't
+    /// have to persist the channels themselves (and we can't control how heavy channels get as they are
+    // host defined).
     /// </summary>
     [Serializable]
     internal class TrackingListenerBroker : System.Runtime.Serialization.ISerializable
@@ -1623,7 +1628,8 @@ namespace System.Workflow.Runtime
         /// </summary>
         /// <param name="profile">RTTrackingProfile to add</param>
         /// <param name="serviceType">TrackingService type</param>
-        /// <param name="resetNoProfiles">true will reset NoProfiles (to false); false will leave NoProfiles as is</param>
+        /// <param name="resetNoProfiles">true will reset NoProfiles (to false); false will leave NoProfiles
+        // as is</param>
         /// <returns>True if the profile was successfully added; false if not</returns>
         private bool AddToCache(RTTrackingProfile profile, Type serviceType, bool resetNoProfiles)
         {
@@ -1861,7 +1867,8 @@ namespace System.Workflow.Runtime
     }
 
     /// <summary>
-    /// Represents a wrapper around a channel and its artifacts, such as its tracking service type and profile
+    /// Represents a wrapper around a channel and its artifacts, such as its tracking service type and
+    // profile
     /// </summary>
     internal class TrackingChannelWrapper
     {
@@ -2071,7 +2078,8 @@ namespace System.Workflow.Runtime
     }
 
     /// <summary>
-    /// Persisted tracking State pertaining to workflow invoking for an individual schedule.  There could be multiple called schedules under
+    /// Persisted tracking State pertaining to workflow invoking for an individual schedule.  There
+    // could be multiple called schedules under
     /// an instance.
     /// </summary>
     [Serializable]

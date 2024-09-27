@@ -1052,14 +1052,14 @@ namespace System.Windows.Forms
                         if (ok > 0)
                         {
                             match++;
-                            /* and how much the keycode order matches */
+/* and how much the keycode order matches */
                             if (key > pkey)
                                 seq++;
                             pkey = key;
                         }
                         else
                         {
-                            /* print spaces instead of \0's */
+/* print spaces instead of \0's */
                             mismatch++;
                             score -= syms;
                         }
@@ -1586,7 +1586,8 @@ namespace System.Windows.Forms
         );
 
         //		[DllImport ("libX11", CallingConvention = CallingConvention.Cdecl)]
-        //		private static extern IntPtr XCreateIC (IntPtr xim, string name, XIMProperties im_style, string name2, IntPtr value2, string name3, IntPtr value3, string name4, IntPtr value4, IntPtr terminator);
+        //		private static extern IntPtr XCreateIC (IntPtr xim, string name, XIMProperties im_style, string
+        // name2, IntPtr value2, string name3, IntPtr value3, string name4, IntPtr value4, IntPtr terminator);
 
         [DllImport("libX11", CallingConvention = CallingConvention.Cdecl)]
         private static extern IntPtr XVaCreateNestedList(
@@ -1732,7 +1733,7 @@ namespace System.Windows.Forms
 
         private static readonly int[] nonchar_key_vkey = new int[]
         {
-            /* unused */
+/* unused */
             0,
             0,
             0,
@@ -1741,7 +1742,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FF00 */
-            /* special keys */
+/* special keys */
             (int)VirtualKeys.VK_BACK,
             (int)VirtualKeys.VK_TAB,
             0,
@@ -1782,7 +1783,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FF28 */
-            /* unused */
+/* unused */
             0,
             0,
             0,
@@ -1815,7 +1816,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FF48 */
-            /* cursor keys */
+/* cursor keys */
             (int)VirtualKeys.VK_HOME,
             (int)VirtualKeys.VK_LEFT,
             (int)VirtualKeys.VK_UP,
@@ -1832,7 +1833,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FF58 */
-            /* misc keys */
+/* misc keys */
             (int)VirtualKeys.VK_SELECT,
             (int)VirtualKeys.VK_SNAPSHOT,
             (int)VirtualKeys.VK_EXECUTE,
@@ -1857,7 +1858,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FF70 */
-            /* keypad keys */
+/* keypad keys */
             0,
             0,
             0,
@@ -1928,7 +1929,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FFB8 */
-            /* function keys */
+/* function keys */
             (int)VirtualKeys.VK_F1,
             (int)VirtualKeys.VK_F2,
             (int)VirtualKeys.VK_F3,
@@ -1963,7 +1964,7 @@ namespace System.Windows.Forms
             0,
             0,
             0, /* FFD8 */
-            /* modifier keys */
+/* modifier keys */
             0,
             (int)VirtualKeys.VK_SHIFT,
             (int)VirtualKeys.VK_SHIFT,
@@ -2002,7 +2003,7 @@ namespace System.Windows.Forms
 
         private static readonly int[] nonchar_key_scan = new int[]
         {
-            /* unused */
+/* unused */
             0x00,
             0x00,
             0x00,
@@ -2011,7 +2012,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF00 */
-            /* special keys */
+/* special keys */
             0x0E,
             0x0F,
             0x00, /*?*/
@@ -2036,7 +2037,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF18 */
-            /* unused */
+/* unused */
             0x00,
             0x00,
             0x00,
@@ -2085,7 +2086,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF48 */
-            /* cursor keys */
+/* cursor keys */
             0x147,
             0x14B,
             0x148,
@@ -2102,8 +2103,8 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF58 */
-            /* misc keys */
-            /*?*/0,
+/* misc keys */
+/*?*/0,
             0x137, /*?*/
             0,
             0x152,
@@ -2111,7 +2112,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF60 */
-            /*?*/0, /*?*/
+/*?*/0, /*?*/
             0,
             0x38,
             0x146,
@@ -2127,7 +2128,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FF70 */
-            /* keypad keys */
+/* keypad keys */
             0x00,
             0x00,
             0x00,
@@ -2198,7 +2199,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FFB8 */
-            /* function keys */
+/* function keys */
             0x3B,
             0x3C,
             0x3D,
@@ -2233,7 +2234,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x00, /* FFD8 */
-            /* modifier keys */
+/* modifier keys */
             0x00,
             0x2A,
             0x36,

@@ -126,8 +126,10 @@ namespace Microsoft.Extensions.Configuration
         /// directory cannot be found at the specified Path.</exception>
         /// <exception cref="FileNotFoundException">Optional is <c>false</c> on the source and a
         /// file does not exist at specified Path.</exception>
-        /// <exception cref="InvalidDataException">An exception was thrown by the concrete implementation of the
-        /// <see cref="Load()"/> method. Use the source <see cref="FileConfigurationSource.OnLoadException"/> callback
+        /// <exception cref="InvalidDataException">An exception was thrown by the concrete implementation of
+        // the
+        /// <see cref="Load()"/> method. Use the source <see
+        // cref="FileConfigurationSource.OnLoadException"/> callback
         /// if you need more control over the exception.</exception>
         public override void Load()
         {

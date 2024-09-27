@@ -69,23 +69,23 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(0, dgv.Rows[0].Cells[0].ColumnIndex, "A2");
         }
 
-        /* font measurement dependent
-        [Test]
-        public void ContentBounds ()
-        {
-            DataGridViewCell c = new BaseCell ();
-            Assert.AreEqual (Rectangle.Empty, c.ContentBounds, "A1");
+/* font measurement dependent
+[Test]
+public void ContentBounds ()
+{
+DataGridViewCell c = new BaseCell ();
+Assert.AreEqual (Rectangle.Empty, c.ContentBounds, "A1");
 
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("hi", "there");
+DataGridView dgv = new DataGridView ();
+dgv.Columns.Add ("hi", "there");
 
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (c);
-            dgv.Rows.Add (row);
+DataGridViewRow row = new DataGridViewRow ();
+row.Cells.Add (c);
+dgv.Rows.Add (row);
 
-            Assert.AreEqual (new Rectangle (0, 2, 14, 16), dgv.Rows[0].Cells[0].ContentBounds, "A2");
-        }
-        */
+Assert.AreEqual (new Rectangle (0, 2, 14, 16), dgv.Rows[0].Cells[0].ContentBounds, "A2");
+}
+*/
 
         [Test]
         public void ContextMenuStrip()
@@ -345,29 +345,29 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreSame(dgv.Rows[0], dgv.Rows[0].Cells[0].OwningRow, "A2");
         }
 
-        /* Font measurement dependent *
-        [Test]
-        public void PreferredSize ()
-        {
-            DataGridViewCell c = new BaseCell ();
-            Assert.AreEqual (new Size (-1, -1), c.PreferredSize, "A1");
+/* Font measurement dependent *
+[Test]
+public void PreferredSize ()
+{
+DataGridViewCell c = new BaseCell ();
+Assert.AreEqual (new Size (-1, -1), c.PreferredSize, "A1");
 
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("hi", "there");
+DataGridView dgv = new DataGridView ();
+dgv.Columns.Add ("hi", "there");
 
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (c);
-            dgv.Rows.Add (row);
+DataGridViewRow row = new DataGridViewRow ();
+row.Cells.Add (c);
+dgv.Rows.Add (row);
 
-            Assert.AreEqual (new Size (21, 20), dgv.Rows[0].Cells[0].PreferredSize, "A2");
+Assert.AreEqual (new Size (21, 20), dgv.Rows[0].Cells[0].PreferredSize, "A2");
 
-            dgv.Rows[0].Cells[0].Value = new Bitmap (20, 20);
-            Assert.AreEqual (new Size (21, 21), dgv.Rows[0].Cells[0].PreferredSize, "A3");
+dgv.Rows[0].Cells[0].Value = new Bitmap (20, 20);
+Assert.AreEqual (new Size (21, 21), dgv.Rows[0].Cells[0].PreferredSize, "A3");
 
-            dgv.Rows[0].Cells[0].Value = new Bitmap (32, 32);
-            Assert.AreEqual (new Size (33, 33), dgv.Rows[0].Cells[0].PreferredSize, "A4");
-        }
-         */
+dgv.Rows[0].Cells[0].Value = new Bitmap (32, 32);
+Assert.AreEqual (new Size (33, 33), dgv.Rows[0].Cells[0].PreferredSize, "A4");
+}
+*/
 
         [Test]
         public void ReadOnly()
@@ -476,27 +476,27 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(true, dgv.Rows[0].Cells[0].Selected, "A7");
         }
 
-        /* The height of a cell (row) is based on Font
-        [Test]
-        public void Size ()
-        {
-            DataGridViewCell c = new BaseCell ();
-            Assert.AreEqual (new Size (-1, -1), c.Size, "A1");
+/* The height of a cell (row) is based on Font
+[Test]
+public void Size ()
+{
+DataGridViewCell c = new BaseCell ();
+Assert.AreEqual (new Size (-1, -1), c.Size, "A1");
 
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("hi", "there");
+DataGridView dgv = new DataGridView ();
+dgv.Columns.Add ("hi", "there");
 
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (c);
-            dgv.Rows.Add (row);
+DataGridViewRow row = new DataGridViewRow ();
+row.Cells.Add (c);
+dgv.Rows.Add (row);
 
-            Assert.AreEqual (new Size (100, 22), dgv.Rows[0].Cells[0].Size, "A2");
-            
-            // Does not resize to content
-            dgv.Rows[0].Cells[0].Value = "bob";
-            Assert.AreEqual (new Size (100, 22), dgv.Rows[0].Cells[0].Size, "A3");
-        }
-        */
+Assert.AreEqual (new Size (100, 22), dgv.Rows[0].Cells[0].Size, "A2");
+
+// Does not resize to content
+dgv.Rows[0].Cells[0].Value = "bob";
+Assert.AreEqual (new Size (100, 22), dgv.Rows[0].Cells[0].Size, "A3");
+}
+*/
 
         [Test]
         public void Style()
@@ -687,51 +687,56 @@ namespace MonoTests.System.Windows.Forms
             );
         }
 
-        /* Font measurement dependent
-        [Test]
-        public void MethodGetContentBounds ()
-        {
-            DataGridViewCell c = new BaseCell ();
-            Assert.AreEqual (Rectangle.Empty, c.GetContentBounds (c.RowIndex), "A1");
-            c.Value = "hello there";
-            
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("hi", "there");
+/* Font measurement dependent
+[Test]
+public void MethodGetContentBounds ()
+{
+DataGridViewCell c = new BaseCell ();
+Assert.AreEqual (Rectangle.Empty, c.GetContentBounds (c.RowIndex), "A1");
+c.Value = "hello there";
 
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (c);
-            dgv.Rows.Add (row);
+DataGridView dgv = new DataGridView ();
+dgv.Columns.Add ("hi", "there");
 
-            Assert.AreEqual (new Rectangle (0, 2, 14, 16), dgv.Rows[0].Cells[0].GetContentBounds (dgv.Rows[0].Cells[0].RowIndex), "A2");
+DataGridViewRow row = new DataGridViewRow ();
+row.Cells.Add (c);
+dgv.Rows.Add (row);
 
-            dgv.Rows[0].Cells[0].Value = new Bitmap (20, 20);
-            Assert.AreEqual (new Rectangle (0, 0, 20, 20), dgv.Rows[0].Cells[0].GetContentBounds (dgv.Rows[0].Cells[0].RowIndex), "A3");
+Assert.AreEqual (new Rectangle (0, 2, 14, 16), dgv.Rows[0].Cells[0].GetContentBounds
+(dgv.Rows[0].Cells[0].RowIndex), "A2");
 
-            dgv.Rows[0].Cells[0].Value = new Bitmap (32, 32);
-            Assert.AreEqual (new Rectangle (0, -5, 32, 32), dgv.Rows[0].Cells[0].GetContentBounds (dgv.Rows[0].Cells[0].RowIndex), "A3");
-        }
-        
-        [Test]
-        public void MethodGetContentBoundsOverload ()
-        {
-            Bitmap b = new Bitmap (1, 1);
-            Graphics g = Graphics.FromImage (b);
+dgv.Rows[0].Cells[0].Value = new Bitmap (20, 20);
+Assert.AreEqual (new Rectangle (0, 0, 20, 20), dgv.Rows[0].Cells[0].GetContentBounds
+(dgv.Rows[0].Cells[0].RowIndex), "A3");
 
-            BaseCell c = new BaseCell ();
-            Assert.AreEqual (Rectangle.Empty, c.PublicGetContentBounds (g, c.Style, c.RowIndex), "A1");
+dgv.Rows[0].Cells[0].Value = new Bitmap (32, 32);
+Assert.AreEqual (new Rectangle (0, -5, 32, 32), dgv.Rows[0].Cells[0].GetContentBounds
+(dgv.Rows[0].Cells[0].RowIndex), "A3");
+}
 
-            DataGridView dgv = new DataGridView ();
-            dgv.Columns.Add ("hi", "there");
+[Test]
+public void MethodGetContentBoundsOverload ()
+{
+Bitmap b = new Bitmap (1, 1);
+Graphics g = Graphics.FromImage (b);
 
-            DataGridViewRow row = new DataGridViewRow ();
-            row.Cells.Add (c);
-            dgv.Rows.Add (row);
+BaseCell c = new BaseCell ();
+Assert.AreEqual (Rectangle.Empty, c.PublicGetContentBounds (g, c.Style, c.RowIndex), "A1");
 
-            Assert.AreEqual (new Rectangle (0, 2, 14, 16), (dgv.Rows[0].Cells[0] as BaseCell).PublicGetContentBounds (g, dgv.Rows[0].Cells[0].InheritedStyle, dgv.Rows[0].Cells[0].RowIndex), "A2");
-            g.Dispose ();
-            b.Dispose ();
-        }
-        */
+DataGridView dgv = new DataGridView ();
+dgv.Columns.Add ("hi", "there");
+
+DataGridViewRow row = new DataGridViewRow ();
+row.Cells.Add (c);
+dgv.Rows.Add (row);
+
+Assert.AreEqual (new Rectangle (0, 2, 14, 16), (dgv.Rows[0].Cells[0] as
+BaseCell).PublicGetContentBounds (g, dgv.Rows[0].Cells[0].InheritedStyle,
+dgv.Rows[0].Cells[0].RowIndex), "A2");
+g.Dispose ();
+b.Dispose ();
+}
+*/
 
         [Test]
         public void MethodGetErrorIconBounds()

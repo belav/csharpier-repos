@@ -205,45 +205,46 @@ namespace Mono.ServiceModel.IdentitySelectors
             return null;
         }
 
-        /* This will be used if we have to implement unmanaged foo.
+/* This will be used if we have to implement unmanaged foo.
 
-        public string GetToken (
-            string targetXml,
-            string issuerXml,
-            string claimTypeRequirementsXml,
-            string policyNoticeLink,
-            int policyNoticeVersion,
-            bool isManagedIssuer)
-        {
-            EndpointAddress target = EndpointAddress.ReadFrom (
-                XmlDictionaryReader.CreateDictionaryReader (
-                    XmlReader.Create (new StringReader (targetXml))));
-            EndpointAddress issuer = isManagedIssuer ?EndpointAddress.ReadFrom (
-                XmlDictionaryReader.CreateDictionaryReader (
-                    XmlReader.Create (new StringReader (issuerXml)))) : null;
-            XmlReaderSettings s = new XmlReaderSettings ();
-            s.ConformanceLevel = ConformanceLevel.Fragment;
-            Collection<ClaimTypeRequirement> reqs = new Collection<ClaimTypeRequirement> ();
-            Collection<XmlElement> parameters = new Collection<XmlElement> ();
-            XmlDictionaryReader dr = XmlDictionaryReader.CreateDictionaryReader (
-                XmlReader.Create (new StringReader (claimTypeRequirementsXml)));
-            XmlDocument doc = new XmlDocument ();
-            for (dr.MoveToContent (); !dr.EOF; dr.MoveToContent ()) {
-                XmlElement el = doc.ReadNode (dr) as XmlElement;
-                if (el.LocalName == "Claims" && el.NamespaceURI == Constants.WstNamespace)
-                    foreach (XmlElement c in el.ChildNodes)
-                        reqs.Add (new ClaimTypeRequirement (c.GetAttribute ("Uri"), c.GetAttribute ("Optional") == "true"));
-                else
-                    parameters.Add (el);
-            }
+public string GetToken (
+string targetXml,
+string issuerXml,
+string claimTypeRequirementsXml,
+string policyNoticeLink,
+int policyNoticeVersion,
+bool isManagedIssuer)
+{
+EndpointAddress target = EndpointAddress.ReadFrom (
+XmlDictionaryReader.CreateDictionaryReader (
+XmlReader.Create (new StringReader (targetXml))));
+EndpointAddress issuer = isManagedIssuer ?EndpointAddress.ReadFrom (
+XmlDictionaryReader.CreateDictionaryReader (
+XmlReader.Create (new StringReader (issuerXml)))) : null;
+XmlReaderSettings s = new XmlReaderSettings ();
+s.ConformanceLevel = ConformanceLevel.Fragment;
+Collection<ClaimTypeRequirement> reqs = new Collection<ClaimTypeRequirement> ();
+Collection<XmlElement> parameters = new Collection<XmlElement> ();
+XmlDictionaryReader dr = XmlDictionaryReader.CreateDictionaryReader (
+XmlReader.Create (new StringReader (claimTypeRequirementsXml)));
+XmlDocument doc = new XmlDocument ();
+for (dr.MoveToContent (); !dr.EOF; dr.MoveToContent ()) {
+XmlElement el = doc.ReadNode (dr) as XmlElement;
+if (el.LocalName == "Claims" && el.NamespaceURI == Constants.WstNamespace)
+foreach (XmlElement c in el.ChildNodes)
+reqs.Add (new ClaimTypeRequirement (c.GetAttribute ("Uri"), c.GetAttribute ("Optional") == "true"));
+else
+parameters.Add (el);
+}
 
-            GenericXmlSecurityToken token = GetToken (target, issuer, reqs, parameters, new Uri (policyNoticeLink), policyNoticeVersion);
-            StringWriter sw = new StringWriter ();
-            using (XmlWriter xw = XmlWriter.Create (sw)) {
-                WSSecurityTokenSerializer.DefaultInstance.WriteToken (xw, token);
-            }
-            return sw.ToString ();
-        }
-        */
+GenericXmlSecurityToken token = GetToken (target, issuer, reqs, parameters, new Uri
+(policyNoticeLink), policyNoticeVersion);
+StringWriter sw = new StringWriter ();
+using (XmlWriter xw = XmlWriter.Create (sw)) {
+WSSecurityTokenSerializer.DefaultInstance.WriteToken (xw, token);
+}
+return sw.ToString ();
+}
+*/
     }
 }

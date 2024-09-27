@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI.WebControls
 {
@@ -13,14 +13,16 @@ namespace System.Web.UI.WebControls
     using System.Collections;
 
     /// <devdoc>
-    /// <para>Represents the collection of <see cref='System.Web.UI.WebControls.DataListItem'/> objects</para>
+    /// <para>Represents the collection of <see cref='System.Web.UI.WebControls.DataListItem'/>
+    // objects</para>
     /// </devdoc>
     public sealed class DataListItemCollection : ICollection
     {
         private ArrayList items;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DataListItemCollection'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.DataListItemCollection'/> class.</para>
         /// </devdoc>
         public DataListItemCollection(ArrayList items)
         {
@@ -36,7 +38,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value that specifies whether items in the <see cref='System.Web.UI.WebControls.DataListItemCollection'/> can be modified.</para>
+        /// <para>Gets a value that specifies whether items in the <see
+        // cref='System.Web.UI.WebControls.DataListItemCollection'/> can be modified.</para>
         /// </devdoc>
         public bool IsReadOnly
         {
@@ -44,7 +47,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a value that indicates whether the <see cref='System.Web.UI.WebControls.DataListItemCollection'/> is thread-safe.</para>
+        /// <para>Gets a value that indicates whether the <see
+        // cref='System.Web.UI.WebControls.DataListItemCollection'/> is thread-safe.</para>
         /// </devdoc>
         public bool IsSynchronized
         {
@@ -69,7 +73,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the contents of the entire collection into an <see cref='System.Array' qualify='true'/> appending at
+        /// <para>Copies the contents of the entire collection into an <see cref='System.Array'
+        // qualify='true'/> appending at
         ///    the specified index of the <see cref='System.Array' qualify='true'/>.</para>
         /// </devdoc>
         public void CopyTo(Array array, int index)
@@ -79,7 +84,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates an enumerator for the <see cref='System.Web.UI.WebControls.DataListItemCollection'/> used to iterate
+        /// <para>Creates an enumerator for the <see
+        // cref='System.Web.UI.WebControls.DataListItemCollection'/> used to iterate
         ///    through the collection.</para>
         /// </devdoc>
         public IEnumerator GetEnumerator()

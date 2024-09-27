@@ -127,9 +127,12 @@ namespace System.ServiceModel.Activation
 
             HostedAspNetEnvironment.TrySetWebSocketVersion(context);
             this.context = context;
-            // WebSockets require the integrated pipeline mode and the WebSocket IIS module to be loaded. If these conditions
-            // are not met, the HttpContext.IsWebSocketRequest property throws. Also, if these conditions are not met,
-            // we do not let WebSocket listeners to be started (we fail the service activation), so setting the 'isWebSocketRequest' flag
+            // WebSockets require the integrated pipeline mode and the WebSocket IIS module to be loaded. If
+            // these conditions
+            // are not met, the HttpContext.IsWebSocketRequest property throws. Also, if these conditions are
+            // not met,
+            // we do not let WebSocket listeners to be started (we fail the service activation), so setting the
+            // 'isWebSocketRequest' flag
             // to false in this case will not create confusion (or make troubleshooting difficult).
             this.isWebSocketRequest =
                 HttpRuntime.UsingIntegratedPipeline
@@ -157,15 +160,20 @@ namespace System.ServiceModel.Activation
 
             if (!string.IsNullOrEmpty(aspNetRouteServiceVirtualPath))
             {
-                // aspnet routing can hijack CBA request as we append {*pathInfo} to urlpattern and there is no real file for CBA
+                // aspnet routing can hijack CBA request as we append {*pathInfo} to urlpattern and there is no real
+                // file for CBA
                 // check for CBA scenario. if the request is hijacked. i.e.,
                 // 1) route maps to a virtual directory:
-                // aspNetRouteServiceVirtualPath <> context.Request.AppRelativeCurrentExecutionFilePath == configurationBasedServiceVirtualPath
-                // if RouteExistingFiles <> true, set aspnetRouteServiceVirtualPath to null so that the request will be treated as CBA
+                // aspNetRouteServiceVirtualPath <> context.Request.AppRelativeCurrentExecutionFilePath ==
+                // configurationBasedServiceVirtualPath
+                // if RouteExistingFiles <> true, set aspnetRouteServiceVirtualPath to null so that the request will
+                // be treated as CBA
                 // if RouteExistingFiles == true, this hijack is by-design, do nothing
                 // 2) route maps to a CBA entry:
-                // aspNetRouteServiceVirtualPath == context.Request.AppRelativeCurrentExecutionFilePath == configurationBasedServiceVirtualPath
-                // we will use RouteExistingFiles to decide which service should be activated. We do it in ServiceHostingEnviroment.HostingManager,
+                // aspNetRouteServiceVirtualPath == context.Request.AppRelativeCurrentExecutionFilePath ==
+                // configurationBasedServiceVirtualPath
+                // we will use RouteExistingFiles to decide which service should be activated. We do it in
+                // ServiceHostingEnviroment.HostingManager,
                 // as we cannot pass this info to the latter.
                 if (
                     !RouteTable.Routes.RouteExistingFiles
@@ -212,7 +220,8 @@ namespace System.ServiceModel.Activation
             {
                 if (ServiceHostingEnvironment.AspNetCompatibilityEnabled)
                 {
-                    // Capture HttpContext/culture context if necessary.  Can be used later by HostedHttpInput to re-apply
+                    // Capture HttpContext/culture context if necessary.  Can be used later by HostedHttpInput to
+                    // re-apply
                     // the culture during dispatch.  Also flowed here.
                     hostedThreadData = new HostedThreadData();
                 }
@@ -364,12 +373,14 @@ namespace System.ServiceModel.Activation
             }
             catch (PlatformNotSupportedException)
             {
-                // contract with Asp.Net is that they will always throw a PlatformNotSupportedException if IIS is not patched for CBT yet
+                // contract with Asp.Net is that they will always throw a PlatformNotSupportedException if IIS is
+                // not patched for CBT yet
                 return false;
             }
             catch (COMException)
             {
-                // If IIS is patched for CBT and an error occurs when trying to retrieve the token a COMException is thrown. Even in this
+                // If IIS is patched for CBT and an error occurs when trying to retrieve the token a COMException is
+                // thrown. Even in this
                 // case we know that IIS is patched for CBT.
                 return true;
             }
@@ -524,8 +535,10 @@ namespace System.ServiceModel.Activation
             }
             catch (EndpointNotFoundException exception)
             {
-                // HTTP-GET is special cased to avoid that the ServiceActivation-HTTP-response is treated as service response.
-                // For WebSocket requests we treat the ServiceActivation in the same way like for SOAP (HTTP-POST) requests.
+                // HTTP-GET is special cased to avoid that the ServiceActivation-HTTP-response is treated as service
+                // response.
+                // For WebSocket requests we treat the ServiceActivation in the same way like for SOAP (HTTP-POST)
+                // requests.
                 if (
                     string.Compare(GetHttpMethod(), "GET", StringComparison.OrdinalIgnoreCase) == 0
                     && !this.isWebSocketRequest
@@ -546,8 +559,10 @@ namespace System.ServiceModel.Activation
             }
             catch (ServiceActivationException exception)
             {
-                // HTTP-GET is special cased to avoid that the ServiceActivation-HTTP-response is treated as service response.
-                // For WebSocket requests we treat the ServiceActivation in the same way like for SOAP (HTTP-POST) requests.
+                // HTTP-GET is special cased to avoid that the ServiceActivation-HTTP-response is treated as service
+                // response.
+                // For WebSocket requests we treat the ServiceActivation in the same way like for SOAP (HTTP-POST)
+                // requests.
                 if (
                     string.Compare(GetHttpMethod(), "GET", StringComparison.OrdinalIgnoreCase) == 0
                     && !this.isWebSocketRequest
@@ -653,15 +668,20 @@ namespace System.ServiceModel.Activation
             try
             {
                 // CSDMain #133228: "Consume GetBufferlessInputStream"
-                // The ReadEntityBodyMode property on the HttpRequest keeps track of whether the request stream has already been accessed, and if so, what API was used to access the request.
+                // The ReadEntityBodyMode property on the HttpRequest keeps track of whether the request stream has
+                // already been accessed, and if so, what API was used to access the request.
                 //     - "None" means that the request stream hasn't been accessed.
                 //     - "Bufferless" means that GetBufferlessInputStream() was used to access it.
                 //     - "Buffered" means GetBufferedInputStream() was used to access it.
-                //     - "Classic" means that either the InputStream, Form, Files, or BinaryRead APIs were invoked already.
-                // In general, these values are incompatible with one another, meaning that once the request was accessed in a "Classic" way, only "Classic" APIs can be invoked on the HttpRequest.
+                //     - "Classic" means that either the InputStream, Form, Files, or BinaryRead APIs were invoked
+                // already.
+                // In general, these values are incompatible with one another, meaning that once the request was
+                // accessed in a "Classic" way, only "Classic" APIs can be invoked on the HttpRequest.
                 // If incompatible APIs are invoked, an HttpException is thrown.
-                // In order to prevent HttpExceptions from being thrown for this reason, we will check the ReadEntityBodyMode, and access the request stream with the corresponding API
-                // If the request stream hasn't been accessed yet (eg, by an HttpModule which executed earlier), then we will use GetBufferlessInputStream by default.
+                // In order to prevent HttpExceptions from being thrown for this reason, we will check the
+                // ReadEntityBodyMode, and access the request stream with the corresponding API
+                // If the request stream hasn't been accessed yet (eg, by an HttpModule which executed earlier),
+                // then we will use GetBufferlessInputStream by default.
                 ReadEntityBodyMode mode = this.context.Request.ReadEntityBodyMode;
                 Fx.Assert(
                     mode == ReadEntityBodyMode.None

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Builder;
 public static class ApplicationBuilderExtensions
 {
     /// <summary>
-    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information for
+    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information
+    // for
     /// requests based on information provided by the client.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
@@ -25,11 +26,13 @@ public static class ApplicationBuilderExtensions
     }
 
     /// <summary>
-    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information for
+    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information
+    // for
     /// requests based on information provided by the client.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
-    /// <param name="options">The <see cref="RequestLocalizationOptions"/> to configure the middleware with.</param>
+    /// <param name="options">The <see cref="RequestLocalizationOptions"/> to configure the middleware
+    // with.</param>
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
         this IApplicationBuilder app,
@@ -43,13 +46,16 @@ public static class ApplicationBuilderExtensions
     }
 
     /// <summary>
-    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information for
+    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information
+    // for
     /// requests based on information provided by the client.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
-    /// <param name="optionsAction">A callback that configures the <see cref="RequestLocalizationOptions"/>.</param>
+    /// <param name="optionsAction">A callback that configures the <see
+    // cref="RequestLocalizationOptions"/>.</param>
     /// <remarks>
-    /// This will going to instantiate a new <see cref="RequestLocalizationOptions"/> that doesn't come from the services.
+    /// This will going to instantiate a new <see cref="RequestLocalizationOptions"/> that doesn't come
+    // from the services.
     /// </remarks>
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     public static IApplicationBuilder UseRequestLocalization(
@@ -67,11 +73,13 @@ public static class ApplicationBuilderExtensions
     }
 
     /// <summary>
-    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information for
+    /// Adds the <see cref="RequestLocalizationMiddleware"/> to automatically set culture information
+    // for
     /// requests based on information provided by the client.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/>.</param>
-    /// <param name="cultures">The culture names to be added by the application, which is represents both supported cultures and UI cultures.</param>
+    /// <param name="cultures">The culture names to be added by the application, which is represents
+    // both supported cultures and UI cultures.</param>
     /// <returns>The <see cref="IApplicationBuilder"/>.</returns>
     /// <remarks>
     /// Note that the first culture is the default culture name.

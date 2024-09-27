@@ -16,7 +16,8 @@ public class TextOutputFormatterTests
     {
         get
         {
-            // string acceptEncodings, string requestEncoding, string[] supportedEncodings, string expectedEncoding
+            // string acceptEncodings, string requestEncoding, string[] supportedEncodings, string
+            // expectedEncoding
             yield return new object[] { "", new string[] { "utf-8", "utf-16" }, "utf-8" };
 
             yield return new object[] { "utf-8", new string[] { "utf-8", "utf-16" }, "utf-8" };

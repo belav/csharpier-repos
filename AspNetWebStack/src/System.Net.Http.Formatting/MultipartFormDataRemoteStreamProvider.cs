@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -13,10 +14,14 @@ using System.Web.Http;
 namespace System.Net.Http
 {
     /// <summary>
-    /// A <see cref="MultipartStreamProvider"/> implementation suited for use with HTML file uploads for writing file
-    /// content to a remote storage <see cref="Stream"/>. The stream provider looks at the <b>Content-Disposition</b>
-    /// header field and determines an output remote <see cref="Stream"/> based on the presence of a <b>filename</b>
-    /// parameter. If a <b>filename</b> parameter is present in the <b>Content-Disposition</b> header field, then the
+    /// A <see cref="MultipartStreamProvider"/> implementation suited for use with HTML file uploads for
+    // writing file
+    /// content to a remote storage <see cref="Stream"/>. The stream provider looks at the
+    // <b>Content-Disposition</b>
+    /// header field and determines an output remote <see cref="Stream"/> based on the presence of a
+    // <b>filename</b>
+    /// parameter. If a <b>filename</b> parameter is present in the <b>Content-Disposition</b> header
+    // field, then the
     /// body part is written to a remote <see cref="Stream"/> provided by <see cref="GetRemoteStream"/>.
     /// Otherwise it is written to a <see cref="MemoryStream"/>.
     /// </summary>
@@ -44,13 +49,15 @@ namespace System.Net.Http
         public NameValueCollection FormData { get; private set; }
 
         /// <summary>
-        /// Provides a <see cref="RemoteStreamInfo"/> for <see cref="GetStream"/>. Override this method to provide a
+        /// Provides a <see cref="RemoteStreamInfo"/> for <see cref="GetStream"/>. Override this method to
+        // provide a
         /// remote stream to which the data should be written.
         /// </summary>
         /// <param name="parent">The parent <see cref="HttpContent"/> MIME multipart instance.</param>
         /// <param name="headers">The header fields describing the body part's content. </param>
         /// <returns>
-        /// A result specifying a remote stream where the file will be written to and a location where the file can be
+        /// A result specifying a remote stream where the file will be written to and a location where the
+        // file can be
         /// accessed. It cannot be null and the stream must be writable.
         /// </returns>
         public abstract RemoteStreamInfo GetRemoteStream(

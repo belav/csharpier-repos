@@ -15,7 +15,8 @@ using System.Threading;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // An event registration token table stores mappings from delegates to event tokens, in order to support
+    // An event registration token table stores mappings from delegates to event tokens, in order to
+    // support
     // sourcing WinRT style events from managed code.
     public sealed class EventRegistrationTokenTable<T>
         where T : class
@@ -25,7 +26,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             new Dictionary<EventRegistrationToken, T>();
 
         // Cached multicast delegate which will invoke all of the currently registered delegates.  This
-        // will be accessed frequently in common coding paterns, so we don't want to calculate it repeatedly.
+        // will be accessed frequently in common coding paterns, so we don't want to calculate it
+        // repeatedly.
         private volatile T m_invokeList;
 
         public EventRegistrationTokenTable()
@@ -43,8 +45,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        // The InvocationList property provides access to a delegate which will invoke every registered event handler
-        // in this table.  If the property is set, the new value will replace any existing token registrations.
+        // The InvocationList property provides access to a delegate which will invoke every registered
+        // event handler
+        // in this table.  If the property is set, the new value will replace any existing token
+        // registrations.
         public T InvocationList
         {
             get { return m_invokeList; }
@@ -82,7 +86,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         {
             Contract.Requires(handler != null);
 
-            // Get a registration token, making sure that we haven't already used the value.  This should be quite
+            // Get a registration token, making sure that we haven't already used the value.  This should be
+            // quite
             // rare, but in the case it does happen, just keep trying until we find one that's unused.
             EventRegistrationToken token = GetPreferredToken(handler);
             while (m_tokens.ContainsKey(token))
@@ -119,7 +124,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         // Generate a token that may be used for a particular event handler.  We will frequently be called
         // upon to look up a token value given only a delegate to start from.  Therefore, we want to make
-        // an initial token value that is easily determined using only the delegate instance itself.  Although
+        // an initial token value that is easily determined using only the delegate instance itself.
+        // Although
         // in the common case this token value will be used to uniquely identify the handler, it is not
         // the only possible token that can represent the handler.
         //

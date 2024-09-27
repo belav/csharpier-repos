@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         event EventHandler DiagnosticsCleared;
 
         /// <summary>
-        /// Return <see langword="true"/> if the source supports <see cref="GetDiagnosticsAsync"/> API otherwise, return
-        /// <see langword="false"/> so that the engine can cache data from <see cref="DiagnosticsUpdated"/> in memory.
+        /// Return <see langword="true"/> if the source supports <see cref="GetDiagnosticsAsync"/> API
+        // otherwise, return
+        /// <see langword="false"/> so that the engine can cache data from <see cref="DiagnosticsUpdated"/>
+        // in memory.
         /// </summary>
         bool SupportGetDiagnostics { get; }
 

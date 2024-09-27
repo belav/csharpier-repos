@@ -337,7 +337,8 @@ namespace System.Diagnostics.Tests
                     )
                 );
 
-                // Validate against current process. (Profilers / code coverage tools can add own environment variables
+                // Validate against current process. (Profilers / code coverage tools can add own environment
+                // variables
                 // but we start child process without them. Thus the set of variables from the child process could
                 // be a subset of variables from current process.)
                 var envEnv = new HashSet<string>(
@@ -508,10 +509,13 @@ namespace System.Diagnostics.Tests
             p.StartInfo.RedirectStandardOutput = true;
 
             // Environment Variables are case-insensitive on Windows.
-            // But it's possible to start a process with duplicate case-sensitive env vars using CreateProcess API (see #42029)
-            // To mimic this behaviour, we can't use Environment.SetEnvironmentVariable here as it's case-insensitive on Windows.
+            // But it's possible to start a process with duplicate case-sensitive env vars using CreateProcess
+            // API (see #42029)
+            // To mimic this behaviour, we can't use Environment.SetEnvironmentVariable here as it's
+            // case-insensitive on Windows.
             // We also can't use p.StartInfo.Environment as it's comparer is set to OrdinalIgnoreCAse.
-            // But we can overwrite it using reflection to mimic the CreateProcess behaviour and avoid having this test call CreateProcess directly.
+            // But we can overwrite it using reflection to mimic the CreateProcess behaviour and avoid having
+            // this test call CreateProcess directly.
             p.StartInfo.Environment.GetType()
                 .GetField(
                     "_contents",
@@ -1383,7 +1387,8 @@ namespace System.Diagnostics.Tests
                 "notepad.exe",
                 "Notepad"
             );
-            // from here we can try to open with with given extension and be sure that Notepad is going to open it (not other text file editor like Notepad++)
+            // from here we can try to open with with given extension and be sure that Notepad is going to open
+            // it (not other text file editor like Notepad++)
 
             string tempFile = GetTestFilePath() + fileExtension;
             File.WriteAllText(tempFile, $"StartInfo_TextFile_ShellExecute");

@@ -265,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             get
             {
-                // We manually propagate the CharSet field of StructLayout attribute for fabricated structs implementing fixed buffers.
+                // We manually propagate the CharSet field of StructLayout attribute for fabricated structs
+                // implementing fixed buffers.
                 // See void AttrBind::EmitStructLayoutAttributeCharSet(AttributeNode *attr) in native codebase.
                 return _field.ContainingType.MarshallingCharSet;
             }

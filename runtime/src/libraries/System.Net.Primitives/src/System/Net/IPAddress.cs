@@ -46,12 +46,14 @@ namespace System.Net
         /// <summary>
         /// For IPv4 addresses, this field stores the Address.
         /// For IPv6 addresses, this field stores the ScopeId.
-        /// Instead of accessing this field directly, use the <see cref="PrivateAddress"/> or <see cref="PrivateScopeId"/> properties.
+        /// Instead of accessing this field directly, use the <see cref="PrivateAddress"/> or <see
+        // cref="PrivateScopeId"/> properties.
         /// </summary>
         private uint _addressOrScopeId;
 
         /// <summary>
-        /// This field is only used for IPv6 addresses. A null value indicates that this instance is an IPv4 address.
+        /// This field is only used for IPv6 addresses. A null value indicates that this instance is an IPv4
+        // address.
         /// </summary>
         private readonly ushort[]? _numbers;
 
@@ -461,9 +463,12 @@ namespace System.Net
             TryFormatCore(destination, out charsWritten);
 
         /// <summary>Tries to format the current IP address into the provided span.</summary>
-        /// <param name="utf8Destination">When this method returns, the IP address as a span of UTF-8 bytes.</param>
-        /// <param name="bytesWritten">When this method returns, the number of bytes written into the <paramref name="utf8Destination"/>.</param>
-        /// <returns><see langword="true" /> if the formatting was successful; otherwise, <see langword="false" />.</returns>
+        /// <param name="utf8Destination">When this method returns, the IP address as a span of UTF-8
+        // bytes.</param>
+        /// <param name="bytesWritten">When this method returns, the number of bytes written into the
+        // <paramref name="utf8Destination"/>.</param>
+        /// <returns><see langword="true" /> if the formatting was successful; otherwise, <see
+        // langword="false" />.</returns>
         public bool TryFormat(Span<byte> utf8Destination, out int bytesWritten) =>
             TryFormatCore(utf8Destination, out bytesWritten);
 

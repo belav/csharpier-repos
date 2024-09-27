@@ -14,7 +14,8 @@ class Program
     {
         Type type = TypeDescriptor.InterfaceType;
 
-        // Tests that the ctor for System.ComponentModel.TypeDescriptor+TypeDescriptorInterface is not trimmed out.
+        // Tests that the ctor for System.ComponentModel.TypeDescriptor+TypeDescriptorInterface is not
+        // trimmed out.
         object obj = Activator.CreateInstance(type);
         string expectedObjTypeNamePrefix =
             "System.ComponentModel.TypeDescriptor+TypeDescriptorInterface, System.ComponentModel.TypeConverter, Version=";

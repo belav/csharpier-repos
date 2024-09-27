@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
             if (nextToken != nextTokenContainingStatement.GetFirstToken())
                 return;
 
-            // There has to be at least a blank line between the end of the block and the start of the next statement.
+            // There has to be at least a blank line between the end of the block and the start of the next
+            // statement.
 
             foreach (var trivia in nextToken.LeadingTrivia)
             {
@@ -132,7 +133,8 @@ namespace Microsoft.CodeAnalysis.NewLines.ConsecutiveStatementPlacement
                 if (_syntaxFacts.IsWhitespaceTrivia(trivia))
                     continue;
 
-                // got something that wasn't whitespace.  Bail out as we don't want to place any restrictions on this code.
+                // got something that wasn't whitespace.  Bail out as we don't want to place any restrictions on
+                // this code.
                 return;
             }
 

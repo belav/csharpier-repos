@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 }";
             var comp = CreateCompilation(new[] { source1, source2 });
             comp.VerifyEmitDiagnostics(
-                // (3,26): error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.ScopedRefAttribute..ctor'
+                // (3,26): error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.ScopedRefAttribute..ctor'
                 //     public static void F(scoped ref int i) { }
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "scoped ref int i")
                     .WithArguments("System.Runtime.CompilerServices.ScopedRefAttribute", ".ctor")
@@ -123,13 +124,16 @@ class Program
 }";
             var comp = CreateCompilation(new[] { ScopedRefAttributeDefinition, source });
             comp.VerifyDiagnostics(
-                // (2,18): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // (2,18): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the
+                // 'scoped' keyword instead.
                 // delegate void D([ScopedRef] ref int i);
                 Diagnostic(ErrorCode.ERR_ExplicitScopedRef, "ScopedRef").WithLocation(2, 18),
-                // (5,30): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // (5,30): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the
+                // 'scoped' keyword instead.
                 //     public static void Main([ScopedRef] string[] args)
                 Diagnostic(ErrorCode.ERR_ExplicitScopedRef, "ScopedRef").WithLocation(5, 30),
-                // (7,17): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // (7,17): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the
+                // 'scoped' keyword instead.
                 //         D d = ([ScopedRef] ref int i) => { };
                 Diagnostic(ErrorCode.ERR_ExplicitScopedRef, "ScopedRef").WithLocation(7, 17)
             );
@@ -188,16 +192,19 @@ ref struct R { }
 ";
             var comp = CreateCompilation(new[] { ScopedRefAttributeDefinition, source });
             comp.VerifyDiagnostics(
-                // (3,19): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // (3,19): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the
+                // 'scoped' keyword instead.
                 // record struct R1([ScopedRef] ref int i);
                 Diagnostic(ErrorCode.ERR_ExplicitScopedRef, "ScopedRef").WithLocation(3, 19),
                 // (3,30): error CS0631: ref and out are not valid in this context
                 // record struct R1([ScopedRef] ref int i);
                 Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(3, 30),
-                // (4,19): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the 'scoped' keyword instead.
+                // (4,19): error CS9065: Do not use 'System.Runtime.CompilerServices.ScopedRefAttribute'. Use the
+                // 'scoped' keyword instead.
                 // record struct R2([ScopedRef] R i);
                 Diagnostic(ErrorCode.ERR_ExplicitScopedRef, "ScopedRef").WithLocation(4, 19),
-                // (4,30): error CS8345: Field or auto-implemented property cannot be of type 'R' unless it is an instance member of a ref struct.
+                // (4,30): error CS8345: Field or auto-implemented property cannot be of type 'R' unless it is an
+                // instance member of a ref struct.
                 // record struct R2([ScopedRef] R i);
                 Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "R")
                     .WithArguments("R")

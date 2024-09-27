@@ -27,8 +27,10 @@ namespace Microsoft.Extensions.FileProviders
         /// <summary>
         /// Creates a <see cref="IChangeToken"/> for the specified <paramref name="filter"/>.
         /// </summary>
-        /// <param name="filter">Filter string used to determine what files or folders to monitor. Example: **/*.cs, *.*, subFolder/**/*.cshtml.</param>
-        /// <returns>An <see cref="IChangeToken"/> that is notified when a file matching <paramref name="filter"/> is added, modified or deleted.</returns>
+        /// <param name="filter">Filter string used to determine what files or folders to monitor. Example:
+        // **/*.cs, *.*, subFolder/**/*.cshtml.</param>
+        /// <returns>An <see cref="IChangeToken"/> that is notified when a file matching <paramref
+        // name="filter"/> is added, modified or deleted.</returns>
         IChangeToken Watch(string filter);
     }
 }

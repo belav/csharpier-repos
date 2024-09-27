@@ -36,13 +36,15 @@ public static class MapRouteRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, and default values.
+    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, and default
+    // values.
     /// </summary>
     /// <param name="routeBuilder">The <see cref="IRouteBuilder"/> to add the route to.</param>
     /// <param name="name">The name of the route.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the names
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the names
     /// and values of the default values.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
@@ -60,18 +62,21 @@ public static class MapRouteRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, default values, and
+    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, default
+    // values, and
     /// constraints.
     /// </summary>
     /// <param name="routeBuilder">The <see cref="IRouteBuilder"/> to add the route to.</param>
     /// <param name="name">The name of the route.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the names
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the names
     /// and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and values
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and values
     /// of the constraints.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
@@ -90,22 +95,26 @@ public static class MapRouteRouteBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, default values, and
+    /// Adds a route to the <see cref="IRouteBuilder"/> with the specified name, template, default
+    // values, and
     /// data tokens.
     /// </summary>
     /// <param name="routeBuilder">The <see cref="IRouteBuilder"/> to add the route to.</param>
     /// <param name="name">The name of the route.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the names
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the names
     /// and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and values
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and values
     /// of the constraints.
     /// </param>
     /// <param name="dataTokens">
-    /// An object that contains data tokens for the route. The object's properties represent the names and values
+    /// An object that contains data tokens for the route. The object's properties represent the names
+    // and values
     /// of the data tokens.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>

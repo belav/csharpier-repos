@@ -31,7 +31,8 @@ namespace System.Runtime.Versioning
         public RequiresPreviewFeaturesAttribute() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class with the specified message.
+        /// Initializes a new instance of the <see cref="RequiresPreviewFeaturesAttribute"/> class with the
+        // specified message.
         /// </summary>
         /// <param name="message">An optional message associated with this attribute instance.</param>
         public RequiresPreviewFeaturesAttribute(string? message)

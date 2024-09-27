@@ -436,7 +436,8 @@ namespace System.Linq.Tests
 
         // For testing vectorized overflow, confirms that overflow is detected in multiple vertical lanes
         // and with the overflow occurring at different vector offsets into the list of data. This includes
-        // the 5th and 6th vectors in the data to ensure overflow checks after the unrolled loop that processes
+        // the 5th and 6th vectors in the data to ensure overflow checks after the unrolled loop that
+        // processes
         // four vectors at a time.
         public static IEnumerable<object[]> SumOverflowsVerticalVectorLanes()
         {

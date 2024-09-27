@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var hostObjectType = GetHostObjectType();
             if (hostObjectType.Kind == SymbolKind.ErrorType)
             {
-                // The name '{0}' does not exist in the current context (are you missing a reference to assembly '{1}'?)
+                // The name '{0}' does not exist in the current context (are you missing a reference to assembly
+                // '{1}'?)
                 result.SetFrom(
                     new CSDiagnosticInfo(
                         ErrorCode.ERR_NameNotInContextPossibleMissingReference,

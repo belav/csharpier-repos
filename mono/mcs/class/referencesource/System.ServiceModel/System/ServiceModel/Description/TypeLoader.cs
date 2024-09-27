@@ -973,7 +973,8 @@ namespace System.ServiceModel.Description
             }
         }
 
-        // checks a contract for substitutability (in the Liskov Substitution Principle sense), throws on error
+        // checks a contract for substitutability (in the Liskov Substitution Principle sense), throws on
+        // error
         internal static void EnsureSubcontract(
             ServiceContractAttribute svcContractAttr,
             Type contractType
@@ -1158,7 +1159,8 @@ namespace System.ServiceModel.Description
 
         //Sync and Async should follow the rules:
         //    1. Parameter match
-        //    2. Async cannot have behaviors (verification happens later in ProcessOpMethod - behaviors haven't yet been loaded here)
+        //    2. Async cannot have behaviors (verification happens later in ProcessOpMethod - behaviors
+        // haven't yet been loaded here)
         //    3. Async cannot have known types
         //    4. Async cannot have known faults
         //    5. Sync and Async have to match on OneWay status
@@ -2839,17 +2841,20 @@ namespace System.ServiceModel.Description
             internal Type callbackiface;
         }
 
-        // This function factors out the logic of how programming model attributes interact with service inheritance.
+        // This function factors out the logic of how programming model attributes interact with service
+        // inheritance.
         // See MB 37427 for details.
         //
         // To use this, just call ApplyServiceInheritance() with
         //  - the service type you want to pull behavior attributes from
-        //  - the "destination" behavior collection, where all the right behavior attributes should be added to
+        //  - the "destination" behavior collection, where all the right behavior attributes should be added
+        // to
         //  - a delegate
         // The delegate is just a function you write that behaves like this:
         //    imagine that "currentType" was the only type (imagine there was no inheritance hierarchy)
         //    find desired behavior attributes on this type, and add them to "behaviors"
-        // ApplyServiceInheritance then uses the logic you provide for getting behavior attributes from a single type,
+        // ApplyServiceInheritance then uses the logic you provide for getting behavior attributes from a
+        // single type,
         // and it walks the actual type hierarchy and does the inheritance/override logic for you.
         public static void ApplyServiceInheritance<IBehavior, TBehaviorCollection>(
             Type serviceType,
@@ -2878,13 +2883,16 @@ namespace System.ServiceModel.Description
 
         // To use this, just call AddBehaviorsAtOneScope() with
         //  - the type you want to pull behavior attributes from
-        //  - the "destination" behavior collection, where all the right behavior attributes should be added to
+        //  - the "destination" behavior collection, where all the right behavior attributes should be added
+        // to
         //  - a delegate
         // The delegate is just a function you write that behaves like this:
         //    imagine that "currentType" was the only type (imagine there was no inheritance hierarchy)
         //    find desired behavior attributes on this type, and add them to "behaviors"
-        // AddBehaviorsAtOneScope then uses the logic you provide for getting behavior attributes from a single type,
-        // and it does the override logic for you (only add the behavior if it wasn't already in the descriptionBehaviors)
+        // AddBehaviorsAtOneScope then uses the logic you provide for getting behavior attributes from a
+        // single type,
+        // and it does the override logic for you (only add the behavior if it wasn't already in the
+        // descriptionBehaviors)
         static void AddBehaviorsAtOneScope<IBehavior, TBehaviorCollection>(
             Type type,
             TBehaviorCollection descriptionBehaviors,
@@ -2895,7 +2903,8 @@ namespace System.ServiceModel.Description
         {
             KeyedByTypeCollection<IBehavior> toAdd = new KeyedByTypeCollection<IBehavior>();
             callback(type, toAdd);
-            // toAdd now contains the set of behaviors we'd add if this type (scope) were the only source of behaviors
+            // toAdd now contains the set of behaviors we'd add if this type (scope) were the only source of
+            // behaviors
 
             for (int i = 0; i < toAdd.Count; i++)
             {

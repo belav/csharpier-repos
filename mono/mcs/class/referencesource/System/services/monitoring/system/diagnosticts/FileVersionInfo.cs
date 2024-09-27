@@ -160,7 +160,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        ///    <para>Gets a value that specifies whether the file was built using standard release procedures.</para>
+        ///    <para>Gets a value that specifies whether the file was built using standard release
+        // procedures.</para>
         /// </devdoc>
         public bool IsPrivateBuild
         {
@@ -235,7 +236,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        ///    <para>Gets the major part of the version number for the product this file is associated with.</para>
+        ///    <para>Gets the major part of the version number for the product this file is associated
+        // with.</para>
         /// </devdoc>
         public int ProductMajorPart
         {
@@ -243,7 +245,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        ///    <para>Gets the minor part of the version number for the product the file is associated with.</para>
+        ///    <para>Gets the minor part of the version number for the product the file is associated
+        // with.</para>
         /// </devdoc>
         public int ProductMinorPart
         {
@@ -470,7 +473,8 @@ namespace System.Diagnostics
         }
 
         /// <devdoc>
-        /// <para>Returns a System.Windows.Forms.FileVersionInfo representing the version information associated with the specified file.</para>
+        /// <para>Returns a System.Windows.Forms.FileVersionInfo representing the version information
+        // associated with the specified file.</para>
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -533,13 +537,15 @@ namespace System.Diagnostics
                             )
                         )
                         {
-                            // Some dlls might not contain correct codepage information. In this case we will fail during lookup.
+                            // Some dlls might not contain correct codepage information. In this case we will fail during
+                            // lookup.
                             // Explorer will take a few shots in dark by trying following ID:
                             //
                             // 040904B0 // US English + CP_UNICODE
                             // 040904E4 // US English + CP_USASCII
                             // 04090000 // US English + unknown codepage
-                            // Explorer also randomly guess 041D04B0=Swedish+CP_UNICODE and 040704B0=German+CP_UNICODE) sometimes.
+                            // Explorer also randomly guess 041D04B0=Swedish+CP_UNICODE and 040704B0=German+CP_UNICODE)
+                            // sometimes.
                             // We will try to simulate similiar behavior here.
                             int[] ids = new int[] { 0x040904B0, 0x040904E4, 0x04090000 };
                             foreach (int id in ids)

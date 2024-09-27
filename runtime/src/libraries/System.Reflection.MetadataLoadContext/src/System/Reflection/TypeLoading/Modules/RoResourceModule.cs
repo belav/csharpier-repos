@@ -15,7 +15,8 @@ namespace System.Reflection.TypeLoading
         private readonly RoAssembly _assembly;
 
         //
-        // "fullyQualifiedName" determines the string returned by Module.FullyQualifiedName. It is typically set to the full path of the
+        // "fullyQualifiedName" determines the string returned by Module.FullyQualifiedName. It is typically
+        // set to the full path of the
         // file on disk containing the module.
         //
         internal RoResourceModule(RoAssembly assembly, string fullyQualifiedName)

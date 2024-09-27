@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private interface INumericTC<T>
         {
             /// <summary>
-            /// Get the constant value of type <typeparamref name="T"/> from a <see cref="ConstantValue"/>. This method is shared among all
+            /// Get the constant value of type <typeparamref name="T"/> from a <see cref="ConstantValue"/>. This
+            // method is shared among all
             /// typeclasses for value sets.
             /// </summary>
             T FromConstantValue(ConstantValue constantValue);

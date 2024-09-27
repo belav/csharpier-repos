@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
 {
     /// <summary>
-    /// Special implementation of the copy paste service for testing.  This one avoids going through the actual
+    /// Special implementation of the copy paste service for testing.  This one avoids going through the
+    // actual
     /// clipboard, avoiding complexity of interacting with that during testing.
     /// </summary>
     [

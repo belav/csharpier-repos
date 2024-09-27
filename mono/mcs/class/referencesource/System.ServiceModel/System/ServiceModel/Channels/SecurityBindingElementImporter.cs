@@ -336,7 +336,8 @@ namespace System.ServiceModel.Channels
 
             if (importer.State.ContainsKey(InSecureConversationBootstrapBindingImportMode))
             {
-                // when importing secure conversation boostrap binding, add the endpoint scope protection requirements
+                // when importing secure conversation boostrap binding, add the endpoint scope protection
+                // requirements
                 // to the importer state to be consumed in SecurityPolicy11.TryImportWsspBootrstapPolicyAssertion
                 if (endpointEncryptedParts != null)
                     importer.State[SecureConversationBootstrapEncryptionRequirements] =
@@ -492,7 +493,8 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                // normalize protection level settings at the operation scope if possible to help avoid typed message generation
+                // normalize protection level settings at the operation scope if possible to help avoid typed
+                // message generation
                 if (hasProtectionLevel && isProtectionLevelUniform)
                 {
                     // (Microsoft) remove the foreach message here
@@ -585,7 +587,8 @@ namespace System.ServiceModel.Channels
                     && contractProtectionLevel == ProtectionLevel.EncryptAndSign
                 )
                 {
-                    // remove all explicitly set protection levels on the contract description, since they are uniform across the contract
+                    // remove all explicitly set protection levels on the contract description, since they are uniform
+                    // across the contract
                     // and match our binding's default of EncryptAndSign
                     foreach (OperationDescription operation in policyContext.Contract.Operations)
                     {
@@ -857,7 +860,8 @@ namespace System.ServiceModel.Channels
             return binding != null;
         }
 
-        // isDualSecurityModeOnly is true if the binding has both message security and https security enabled.
+        // isDualSecurityModeOnly is true if the binding has both message security and https security
+        // enabled.
         bool TryImportTransportSecurityBindingElement(
             MetadataImporter importer,
             PolicyConversionContext policyContext,
@@ -892,7 +896,8 @@ namespace System.ServiceModel.Channels
                         binding
                     );
 
-                    // If it is not DualSecurityMode then it is Mixed mode. So we need to look for supporting tokens in the binding.
+                    // If it is not DualSecurityMode then it is Mixed mode. So we need to look for supporting tokens in
+                    // the binding.
                     if (!isDualSecurityModeOnly)
                     {
                         this.ImportOperationScopeSupportingTokensPolicy(
@@ -1013,9 +1018,11 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    // We already have found and imported the message security binding element above. Hence this could be the dual mode security.
+                    // We already have found and imported the message security binding element above. Hence this could
+                    // be the dual mode security.
                     // Now let us see if there is HttpsTransportBinding assertion also below it .This is to avoid the
-                    // warning messages while importing wsdl representing the message security over Https transport security scenario. See Bug:136416.
+                    // warning messages while importing wsdl representing the message security over Https transport
+                    // security scenario. See Bug:136416.
 
                     SecurityBindingElement tbe = null;
                     this.TryImportTransportSecurityBindingElement(

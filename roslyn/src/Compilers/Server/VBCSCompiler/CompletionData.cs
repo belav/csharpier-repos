@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer
         RequestCompleted,
 
         /// <summary>
-        /// The request contained an error that should cause the server to shutdown. This can happen for cases
+        /// The request contained an error that should cause the server to shutdown. This can happen for
+        // cases
         /// like:
         ///    - server state is invalid because of a collision between analyzer assemblies
         ///    - client disconnected during build which is a treated as Ctrl-C event that should bring down

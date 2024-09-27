@@ -138,7 +138,8 @@ namespace System.Linq.Parallel
                 }
                 else if (IsIndexible)
                 {
-                    // The output of this operator is indexible. Pass the partitioned output into the IPartitionedStreamRecipient.
+                    // The output of this operator is indexible. Pass the partitioned output into the
+                    // IPartitionedStreamRecipient.
                     PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(
                         this,
                         m_settings.DegreeOfParallelism.Value,

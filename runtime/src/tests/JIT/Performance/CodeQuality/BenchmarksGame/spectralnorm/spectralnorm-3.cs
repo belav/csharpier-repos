@@ -3,14 +3,15 @@
 
 // Adapted from spectral-norm C# .NET Core #3 program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=spectralnorm&lang=csharpcore&id=3
-// aka (as of 2017-09-01) rev 1.1 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/spectralnorm/spectralnorm.csharp-3.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.1 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/spectralnorm/spectralnorm.csharp-3.csharp?root=benchmarksgame&view=log
 // Best-scoring C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
- 
-   contributed by Isaac Gouy
-   modified by Josh Goldfoot, based on the Java version by The Anh Tran
+http://benchmarksgame.alioth.debian.org/
+
+contributed by Isaac Gouy
+modified by Josh Goldfoot, based on the Java version by The Anh Tran
 */
 
 using System;
@@ -121,13 +122,13 @@ namespace BenchmarksGame
             }
         }
 
-        /* return element i,j of infinite matrix A */
+/* return element i,j of infinite matrix A */
         private double eval_A(int i, int j)
         {
             return 1.0 / ((i + j) * (i + j + 1) / 2 + i + 1);
         }
 
-        /* multiply vector v by matrix A, each thread evaluate its range only */
+/* multiply vector v by matrix A, each thread evaluate its range only */
         private void MultiplyAv(double[] v, double[] Av)
         {
             for (int i = range_begin; i < range_end; i++)
@@ -140,7 +141,7 @@ namespace BenchmarksGame
             }
         }
 
-        /* multiply vector v by matrix A transposed */
+/* multiply vector v by matrix A transposed */
         private void MultiplyAtv(double[] v, double[] Atv)
         {
             for (int i = range_begin; i < range_end; i++)
@@ -153,7 +154,7 @@ namespace BenchmarksGame
             }
         }
 
-        /* multiply vector v by matrix A and then by matrix A transposed */
+/* multiply vector v by matrix A and then by matrix A transposed */
         private void MultiplyAtAv(double[] v, double[] tmp, double[] AtAv)
         {
             MultiplyAv(v, tmp);

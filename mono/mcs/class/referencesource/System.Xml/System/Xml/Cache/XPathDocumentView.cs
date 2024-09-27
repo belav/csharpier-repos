@@ -31,11 +31,13 @@ namespace System.Xml.XPath.DataBinding
         // Constructors
         //
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.XPathDocumentView"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.XPathDocumentView"]/*' />
         public XPathDocumentView(XPathDocument document)
             : this(document, (IXmlNamespaceResolver)null) { }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.XPathDocumentView1"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.XPathDocumentView1"]/*' />
         public XPathDocumentView(XPathDocument document, IXmlNamespaceResolver namespaceResolver)
         {
             if (null == document)
@@ -58,11 +60,13 @@ namespace System.Xml.XPath.DataBinding
             DeriveShapeFromRows();
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.XPathDocumentView2"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.XPathDocumentView2"]/*' />
         public XPathDocumentView(XPathDocument document, string xpath)
             : this(document, xpath, null, true) { }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.XPathDocumentView3"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.XPathDocumentView3"]/*' />
         public XPathDocumentView(
             XPathDocument document,
             string xpath,
@@ -70,7 +74,8 @@ namespace System.Xml.XPath.DataBinding
         )
             : this(document, xpath, namespaceResolver, false) { }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.XPathDocumentView4"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.XPathDocumentView4"]/*' />
         public XPathDocumentView(
             XPathDocument document,
             string xpath,
@@ -104,7 +109,8 @@ namespace System.Xml.XPath.DataBinding
         //
         // public properties
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Document"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Document"]/*'
+        // />
         public XPathDocument Document
         {
             get { return this.document; }
@@ -119,7 +125,8 @@ namespace System.Xml.XPath.DataBinding
         //
         // IEnumerable Implementation
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.GetEnumerator"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.GetEnumerator"]/*' />
         public IEnumerator GetEnumerator()
         {
             return new RowEnumerator(this);
@@ -134,13 +141,15 @@ namespace System.Xml.XPath.DataBinding
             get { return this.rows.Count; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsSynchronized"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.IsSynchronized"]/*' />
         public bool IsSynchronized
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SyncRoot"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SyncRoot"]/*'
+        // />
         public object SyncRoot
         {
             get { return null; }
@@ -172,19 +181,22 @@ namespace System.Xml.XPath.DataBinding
         //
         // IList Implementation
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsReadOnly"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsReadOnly"]/*'
+        // />
         bool IList.IsReadOnly
         {
             get { return true; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsFixedSize"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.IsFixedSize"]/*' />
         bool IList.IsFixedSize
         {
             get { return true; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Contains"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Contains"]/*'
+        // />
         bool IList.Contains(object value)
         {
             return this.rows.Contains(value);
@@ -196,7 +208,8 @@ namespace System.Xml.XPath.DataBinding
             throw new NotSupportedException("IList.Remove");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.RemoveAt"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.RemoveAt"]/*'
+        // />
         void IList.RemoveAt(int index)
         {
             throw new NotSupportedException("IList.RemoveAt");
@@ -241,7 +254,8 @@ namespace System.Xml.XPath.DataBinding
             set { throw new NotSupportedException("IList.this[]"); }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Contains2"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.Contains2"]/*'
+        // />
         /// <devdoc>
         ///    <para>strongly typed version of Contains, demanded by Fxcop.</para>
         /// </devdoc>
@@ -268,7 +282,8 @@ namespace System.Xml.XPath.DataBinding
             throw new NotSupportedException("IList.Insert");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IndexOf2"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IndexOf2"]/*'
+        // />
         /// <devdoc>
         ///    <para>strongly typed version of IndexOf, demanded by Fxcop.</para>
         /// </devdoc>
@@ -311,25 +326,29 @@ namespace System.Xml.XPath.DataBinding
         //
         // IBindingList Implementation
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowEdit"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowEdit"]/*'
+        // />
         public bool AllowEdit
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowAdd"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowAdd"]/*'
+        // />
         public bool AllowAdd
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowRemove"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.AllowRemove"]/*' />
         public bool AllowRemove
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowNew"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AllowNew"]/*'
+        // />
         public bool AllowNew
         {
             get { return false; }
@@ -341,56 +360,65 @@ namespace System.Xml.XPath.DataBinding
             throw new NotSupportedException("IBindingList.AddNew");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SupportsChangeNotification"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.SupportsChangeNotification"]/*' />
         public bool SupportsChangeNotification
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.ListChanged"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.ListChanged"]/*' />
         public event ListChangedEventHandler ListChanged
         {
             add { throw new NotSupportedException("IBindingList.ListChanged"); }
             remove { throw new NotSupportedException("IBindingList.ListChanged"); }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SupportsSearching"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.SupportsSearching"]/*' />
         public bool SupportsSearching
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SupportsSorting"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.SupportsSorting"]/*' />
         public bool SupportsSorting
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsSorted"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.IsSorted"]/*'
+        // />
         public bool IsSorted
         {
             get { return false; }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SortProperty"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.SortProperty"]/*' />
         public PropertyDescriptor SortProperty
         {
             get { throw new NotSupportedException("IBindingList.SortProperty"); }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.SortDirection"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.SortDirection"]/*' />
         public ListSortDirection SortDirection
         {
             get { throw new NotSupportedException("IBindingList.SortDirection"); }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AddIndex"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.AddIndex"]/*'
+        // />
         public void AddIndex(PropertyDescriptor descriptor)
         {
             throw new NotSupportedException("IBindingList.AddIndex");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.ApplySort"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.ApplySort"]/*'
+        // />
         public void ApplySort(PropertyDescriptor descriptor, ListSortDirection direction)
         {
             throw new NotSupportedException("IBindingList.ApplySort");
@@ -402,13 +430,15 @@ namespace System.Xml.XPath.DataBinding
             throw new NotSupportedException("IBindingList.Find");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.RemoveIndex"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.RemoveIndex"]/*' />
         public void RemoveIndex(PropertyDescriptor propertyDescriptor)
         {
             throw new NotSupportedException("IBindingList.RemoveIndex");
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.RemoveSort"]/*' />
+        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.RemoveSort"]/*'
+        // />
         public void RemoveSort()
         {
             throw new NotSupportedException("IBindingList.RemoveSort");
@@ -417,7 +447,8 @@ namespace System.Xml.XPath.DataBinding
         //
         // ITypedList Implementation
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.GetListName"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.GetListName"]/*' />
         public string GetListName(PropertyDescriptor[] listAccessors)
         {
             if (listAccessors == null)
@@ -430,7 +461,8 @@ namespace System.Xml.XPath.DataBinding
             }
         }
 
-        /// <include file='doc\XPathDocumentView.uex' path='docs/doc[@for="XPathDocumentView.GetItemProperties"]/*' />
+        /// <include file='doc\XPathDocumentView.uex'
+        // path='docs/doc[@for="XPathDocumentView.GetItemProperties"]/*' />
         public PropertyDescriptorCollection GetItemProperties(PropertyDescriptor[] listAccessors)
         {
             Shape shape = null;

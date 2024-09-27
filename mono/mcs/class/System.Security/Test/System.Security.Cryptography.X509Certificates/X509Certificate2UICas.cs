@@ -184,7 +184,8 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 null,
                 new object[4] { unit.coll, null, null, X509SelectionFlag.MultiSelection }
             );
-            // no LinkDemand on the SelectFromCollection(X509Certificate2Collection,string,string,X509SelectionFlag) method
+            // no LinkDemand on the
+            // SelectFromCollection(X509Certificate2Collection,string,string,X509SelectionFlag) method
         }
 
         [Test]

@@ -44,7 +44,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="fullName">fullName</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="usage"></param>
-        /// <returns>a list of types that have the specified full name but may differ by strong name</returns>
+        /// <returns>a list of types that have the specified full name but may differ by strong
+        // name</returns>
         internal override bool TryGetTypeByName(
             string fullName,
             bool ignoreCase,

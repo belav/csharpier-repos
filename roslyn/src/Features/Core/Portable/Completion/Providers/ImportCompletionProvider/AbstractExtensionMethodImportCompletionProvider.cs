@@ -115,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
         {
             var parentNode = syntaxContext.TargetToken.Parent;
 
-            // Even though implicit access to extension method is allowed, we decide not support it for simplicity
+            // Even though implicit access to extension method is allowed, we decide not support it for
+            // simplicity
             // e.g. we will not provide completion for unimported extension method in this case
             // New Bar() {.X = .$$ }
             var expressionNode = syntaxFacts.GetLeftSideOfDot(
@@ -134,7 +135,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 )
                 {
                     // The expression we're calling off of needs to have an actual instance type.
-                    // We try to be more tolerant to errors here so completion would still be available in certain case of partially typed code.
+                    // We try to be more tolerant to errors here so completion would still be available in certain case
+                    // of partially typed code.
                     receiverTypeSymbol = syntaxContext
                         .SemanticModel.GetTypeInfo(expressionNode, cancellationToken)
                         .Type;

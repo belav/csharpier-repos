@@ -272,7 +272,8 @@ class Program
     }
 }
 ";
-            // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of '[...]S1', Expected = address of '[...]S1' }
+            // ILVerify: Unexpected type on the stack. { Offset = 20, Found = readonly address of '[...]S1',
+            // Expected = address of '[...]S1' }
             var compilation = CompileAndVerify(
                 source,
                 verify: Verification.FailsILVerify,
@@ -488,7 +489,8 @@ namespace NS
     }
 }
 ";
-            // ILVerify: Unexpected type on the stack. { Offset = 31, Found = readonly address of '[...]NS.N2.S`2<string,uint8>', Expected = address of '[...]NS.N2.S`2<string,uint8>' }
+            // ILVerify: Unexpected type on the stack. { Offset = 31, Found = readonly address of
+            // '[...]NS.N2.S`2<string,uint8>', Expected = address of '[...]NS.N2.S`2<string,uint8>' }
             var compilation = CompileAndVerify(
                 source,
                 verify: Verification.FailsILVerify,
@@ -2511,7 +2513,8 @@ public class Test
     }
 
 ";
-            // ILVerify: Unexpected type on the stack. { Offset = 10, Found = readonly address of '[...]C1', Expected = address of '[...]C1' }
+            // ILVerify: Unexpected type on the stack. { Offset = 10, Found = readonly address of '[...]C1',
+            // Expected = address of '[...]C1' }
             var compilation = CompileAndVerify(
                 source,
                 verify: Verification.FailsILVerify,

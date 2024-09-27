@@ -43,7 +43,8 @@ namespace System.ComponentModel
         /// <summary>
         ///    <para>Converts the given object to a Version.</para>
         /// </summary>
-        /// <exception cref="FormatException"><paramref name="value"/> is not a valid version string</exception>
+        /// <exception cref="FormatException"><paramref name="value"/> is not a valid version
+        // string</exception>
         public override object? ConvertFrom(
             ITypeDescriptorContext? context,
             CultureInfo? culture,

@@ -1570,7 +1570,8 @@ namespace Microsoft.Extensions.Primitives
             int expectedCompareToSign
         )
         {
-            // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
+            // quick sanity check: run the parameters against the normal string functions to ensure our test
+            // data is valid
             int returnedSign = string.Compare(a, b, comparisonType);
             Assert.Equal(expectedCompareToSign, Math.Sign(returnedSign));
 
@@ -1668,7 +1669,8 @@ namespace Microsoft.Extensions.Primitives
             bool expectedResult
         )
         {
-            // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
+            // quick sanity check: run the parameters against the normal string functions to ensure our test
+            // data is valid
             if (a != null)
             {
                 Assert.Equal(expectedResult, a.StartsWith(b, comparisonType));
@@ -1729,7 +1731,8 @@ namespace Microsoft.Extensions.Primitives
             bool expectedResult
         )
         {
-            // quick sanity check: run the parameters against the normal string functions to ensure our test data is valid
+            // quick sanity check: run the parameters against the normal string functions to ensure our test
+            // data is valid
             if (a != null)
             {
                 Assert.Equal(expectedResult, a.EndsWith(b, comparisonType));

@@ -44,7 +44,8 @@ namespace System.Diagnostics
             // we can add more cases here as we find need and opportunity.
         }
 
-        /// <summary>Attempt to load our fields from the metadata of the file, if it's a managed assembly.</summary>
+        /// <summary>Attempt to load our fields from the metadata of the file, if it's a managed
+        // assembly.</summary>
         /// <returns>true if the file is a managed assembly; otherwise, false.</returns>
         private bool TryLoadManagedAssemblyMetadata()
         {
@@ -76,7 +77,8 @@ namespace System.Diagnostics
             return false;
         }
 
-        /// <summary>Load our fields from the metadata of the file as represented by the provided metadata reader.</summary>
+        /// <summary>Load our fields from the metadata of the file as represented by the provided metadata
+        // reader.</summary>
         /// <param name="metadataReader">The metadata reader for the CLI file this represents.</param>\
         /// <param name="isExe">true if the assembly represents an executable; false if it's a dll.</param>
         private void LoadManagedAssemblyMetadata(MetadataReader metadataReader, bool isExe)
@@ -199,7 +201,8 @@ namespace System.Diagnostics
             // both the assembly version and the product version in the Win32 resources. If it doesn't
             // see an [AssemblyVersion(...)], then it sets the assembly version to 0.0.0.0, however it
             // sets the product version in the Win32 resources to whatever was defined in the
-            // [AssemblyFileVersionAttribute(...)] if there was one (unless there is an AssemblyInformationalVersionAttribute,
+            // [AssemblyFileVersionAttribute(...)] if there was one (unless there is an
+            // AssemblyInformationalVersionAttribute,
             // in which case it always uses that for the product version).  Without parsing the Win32 resources,
             // we can't differentiate these two cases, so given the rarity of explicitly setting an
             // assembly's version number to 0.0.0.0, we assume that if it is 0.0.0.0 then the attribute
@@ -226,7 +229,8 @@ namespace System.Diagnostics
         {
             // Relatively-forgiving parsing of a version:
             // - If there are more than four parts (separated by periods), all results are deemed 0
-            // - If any part fails to parse completely as an integer, no further parts are parsed and are left as 0.
+            // - If any part fails to parse completely as an integer, no further parts are parsed and are left
+            // as 0.
             // - If any part partially parses as an integer, that value is used for that part.
             // - Whitespace is treated like any other non-digit character and thus isn't ignored.
             // - Each component is parsed as a ushort, allowing for overflow.
@@ -324,10 +328,12 @@ namespace System.Diagnostics
             return false;
         }
 
-        /// <summary>Gets the string argument value of an attribute with a single fixed string argument.</summary>
+        /// <summary>Gets the string argument value of an attribute with a single fixed string
+        // argument.</summary>
         /// <param name="reader">The metadata reader.</param>
         /// <param name="attr">The attribute.</param>
-        /// <param name="value">The value parsed from the attribute, if it could be retrieved; otherwise, the value is left unmodified.</param>
+        /// <param name="value">The value parsed from the attribute, if it could be retrieved; otherwise,
+        // the value is left unmodified.</param>
         private static void GetStringAttributeArgumentValue(
             MetadataReader reader,
             CustomAttribute attr,

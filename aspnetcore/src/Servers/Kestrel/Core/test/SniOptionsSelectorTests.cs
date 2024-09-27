@@ -71,8 +71,10 @@ public class SniOptionsSelectorTests
         Assert.Equal("WildcardPrefix", pathDictionary[aSubdomainOptions.ServerCertificate]);
 
         // "*.example.org" is preferred over "*", but "*.example.org" doesn't match "example.org".
-        // REVIEW: Are we OK with "example.org" matching "*" instead of "*.example.org"? It feels annoying to me to have to configure example.org twice.
-        // Unfortunately, the alternative would have "a.example.org" match "*.a.example.org" before "*.example.org", and that just seems wrong.
+        // REVIEW: Are we OK with "example.org" matching "*" instead of "*.example.org"? It feels annoying
+        // to me to have to configure example.org twice.
+        // Unfortunately, the alternative would have "a.example.org" match "*.a.example.org" before
+        // "*.example.org", and that just seems wrong.
         var (noSubdomainOptions, _) = sniOptionsSelector.GetOptions(
             new MockConnectionContext(),
             "example.org"
@@ -119,7 +121,8 @@ public class SniOptionsSelectorTests
         );
         Assert.Equal("Long", pathDictionary[baSubdomainOptions.ServerCertificate]);
 
-        // "*.a.example.org" is preferred over "*.example.org", but "a.example.org" doesn't match "*.a.example.org".
+        // "*.a.example.org" is preferred over "*.example.org", but "a.example.org" doesn't match
+        // "*.a.example.org".
         var (aSubdomainOptions, _) = sniOptionsSelector.GetOptions(
             new MockConnectionContext(),
             "a.example.org"
@@ -219,13 +222,13 @@ public class SniOptionsSelectorTests
         );
         Assert.Equal("WildcardPrefix", pathDictionary[aSubdomainOptions.ServerCertificate]);
 
-        /*
-         * Chain test certs were created using smallstep cli: https://github.com/smallstep/cli
-         * root_ca(pwd: testroot) ->
-         * intermediate_ca 1(pwd: inter) ->
-         * intermediate_ca 2(pwd: inter) ->
-         * leaf.com(pwd: leaf) (bundled)
-         */
+/*
+* Chain test certs were created using smallstep cli: https://github.com/smallstep/cli
+* root_ca(pwd: testroot) ->
+* intermediate_ca 1(pwd: inter) ->
+* intermediate_ca 2(pwd: inter) ->
+* leaf.com(pwd: leaf) (bundled)
+*/
         var fullChain = fullChainDictionary[aSubdomainOptions.ServerCertificate];
         // Expect intermediate 2 cert and leaf.com
         Assert.Equal(2, fullChain.Count);
@@ -483,7 +486,8 @@ public class SniOptionsSelectorTests
         );
         Assert.Same(selectorCertificate, selectorOptions2.ServerCertificate);
 
-        // The SslServerAuthenticationOptions were cloned because the cert came from the ServerCertificateSelector fallback.
+        // The SslServerAuthenticationOptions were cloned because the cert came from the
+        // ServerCertificateSelector fallback.
         Assert.NotSame(selectorOptions1, selectorOptions2);
 
         var (configOptions1, _) = sniOptionsSelector.GetOptions(
@@ -498,7 +502,8 @@ public class SniOptionsSelectorTests
         );
         Assert.NotSame(selectorCertificate, configOptions2.ServerCertificate);
 
-        // The SslServerAuthenticationOptions don't need to be cloned if a static cert is defined in config for the given server name.
+        // The SslServerAuthenticationOptions don't need to be cloned if a static cert is defined in config
+        // for the given server name.
         Assert.Same(configOptions1, configOptions2);
     }
 
@@ -783,7 +788,8 @@ public class SniOptionsSelectorTests
         Assert.False(options.ClientCertificateRequired);
 
         Assert.NotNull(options.RemoteCertificateValidationCallback);
-        // The RemoteCertificateValidationCallback should first check if the certificate is null and return true since it's optional.
+        // The RemoteCertificateValidationCallback should first check if the certificate is null and return
+        // true since it's optional.
         Assert.True(
             options.RemoteCertificateValidationCallback(
                 sender: null,
@@ -823,11 +829,13 @@ public class SniOptionsSelectorTests
         );
 
         Assert.Equal(ClientCertificateMode.AllowCertificate, certMode);
-        // Despite the confusing name, ClientCertificateRequired being true simply requests a certificate from the client, but doesn't require it.
+        // Despite the confusing name, ClientCertificateRequired being true simply requests a certificate
+        // from the client, but doesn't require it.
         Assert.True(options.ClientCertificateRequired);
 
         Assert.NotNull(options.RemoteCertificateValidationCallback);
-        // The RemoteCertificateValidationCallback should see we're in the AllowCertificate mode and return true.
+        // The RemoteCertificateValidationCallback should see we're in the AllowCertificate mode and return
+        // true.
         Assert.True(
             options.RemoteCertificateValidationCallback(
                 sender: null,
@@ -860,7 +868,8 @@ public class SniOptionsSelectorTests
             catch (PlatformNotSupportedException)
             {
                 // The CipherSuitesPolicy ctor throws a PlatformNotSupportedException on Ubuntu 16.04.
-                // I don't know exactly which other distros/versions throw PNEs, but it isn't super relevant to this test,
+                // I don't know exactly which other distros/versions throw PNEs, but it isn't super relevant to this
+                // test,
                 // so let's just swallow this exception.
             }
         }
@@ -915,7 +924,8 @@ public class SniOptionsSelectorTests
         Assert.Equal(options.AllowRenegotiation, clonedOptions.AllowRenegotiation);
         Assert.True(propertyNames.Remove(nameof(options.AllowRenegotiation)));
 
-        // Ensure the List<SslApplicationProtocol> is also cloned since it could be modified by a user callback.
+        // Ensure the List<SslApplicationProtocol> is also cloned since it could be modified by a user
+        // callback.
         Assert.NotSame(options.ApplicationProtocols, clonedOptions.ApplicationProtocols);
         Assert.Equal(
             Assert.Single(options.ApplicationProtocols),
@@ -947,7 +957,8 @@ public class SniOptionsSelectorTests
         );
         Assert.True(propertyNames.Remove(nameof(options.RemoteCertificateValidationCallback)));
 
-        // Technically the ServerCertificate could be reset/reimported, but I'm hoping this is uncommon. Trying to clone the certificate and/or context seems risky.
+        // Technically the ServerCertificate could be reset/reimported, but I'm hoping this is uncommon.
+        // Trying to clone the certificate and/or context seems risky.
         Assert.Same(options.ServerCertificate, clonedOptions.ServerCertificate);
         Assert.True(propertyNames.Remove(nameof(options.ServerCertificate)));
 
@@ -966,7 +977,8 @@ public class SniOptionsSelectorTests
         Assert.Equal(options.AllowTlsResume, clonedOptions.AllowTlsResume);
         Assert.True(propertyNames.Remove(nameof(options.AllowTlsResume)));
 
-        // Ensure we've checked every property. When new properties get added, we'll have to update this test along with the CloneSslOptions implementation.
+        // Ensure we've checked every property. When new properties get added, we'll have to update this
+        // test along with the CloneSslOptions implementation.
         Assert.Empty(propertyNames);
     }
 

@@ -119,7 +119,8 @@ namespace System.ComponentModel.Design
                             CompareInfo comparer = CultureInfo.InvariantCulture.CompareInfo;
                             string shortAssemblyName = resourceAssembly.GetName().Name!;
                             // If the assembly has been renamed, we try our best to find a good match in the available resources
-                            // by looking at the assembly name (which doesn't change even after a file rename) + ".exe.licenses" or + ".dll.licenses"
+                            // by looking at the assembly name (which doesn't change even after a file rename) + ".exe.licenses"
+                            // or + ".dll.licenses"
                             foreach (
                                 string existingName in resourceAssembly.GetManifestResourceNames()
                             )
@@ -165,12 +166,12 @@ namespace System.ComponentModel.Design
             return (string?)_savedLicenseKeys[type.AssemblyQualifiedName!];
         }
 
-        /**
-        * Looks up a .licenses file in the assembly manifest using
-        * case-insensitive lookup rules. We do this because the name
-        * we are attempting to locate could have different casing
-        * depending on how the assembly was loaded.
-        **/
+/**
+* Looks up a .licenses file in the assembly manifest using
+* case-insensitive lookup rules. We do this because the name
+* we are attempting to locate could have different casing
+* depending on how the assembly was loaded.
+**/
         private static Stream? CaseInsensitiveManifestResourceStreamLookup(
             Assembly satellite,
             string name

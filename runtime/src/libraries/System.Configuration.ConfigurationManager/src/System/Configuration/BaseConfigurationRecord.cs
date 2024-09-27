@@ -873,7 +873,8 @@ namespace System.Configuration
                 AddImplicitSections(factoryList);
                 factoryRecord = (FactoryRecord)factoryList[configKey];
             }
-            // Guarantee that exceptions contain the name of the stream and an approximate line number if available.
+            // Guarantee that exceptions contain the name of the stream and an approximate line number if
+            // available.
             // And don't allow frames up the stack to run exception filters while impersonated.
             catch (Exception e)
             {
@@ -1341,11 +1342,14 @@ namespace System.Configuration
         //
         // If skipInChildApps == true (it means inheritInChildApplications=="false" in the location tag):
         //
-        // - If _flags[IsAboveApplication]==true, that means the app pointed to by _configPath is above of the
-        //   current running app.  In another word, the running app is a child app of the app pointed to by _configPath.
+        // - If _flags[IsAboveApplication]==true, that means the app pointed to by _configPath is above of
+        // the
+        //   current running app.  In another word, the running app is a child app of the app pointed to by
+        // _configPath.
         //   In this case, we should skip the input.
         //
-        // - If _flags[IsAboveApplication]==false, that means the app pointed to by _configPath == current running app.
+        // - If _flags[IsAboveApplication]==false, that means the app pointed to by _configPath == current
+        // running app.
         //   In this case it's okay to use the input.
         private bool ShouldSkipDueToInheritInChildApplications(bool skipInChildApps)
         {
@@ -2735,33 +2739,47 @@ namespace System.Configuration
             out OverrideMode childLockMode
         )
         {
-            // When the current record is a location config level we are a direct child of the config level of the actual
-            // config file inside which the location tag is. For example we have a file d:\inetpub\wwwroot\web.config which
-            // contains <location path="Sub"> then "this" will be the config level inside the location tag and this.Parent
+            // When the current record is a location config level we are a direct child of the config level of
+            // the actual
+            // config file inside which the location tag is. For example we have a file
+            // d:\inetpub\wwwroot\web.config which
+            // contains <location path="Sub"> then "this" will be the config level inside the location tag and
+            // this.Parent
             // is the config level of d:\inetpub\wwwroot\web.config.
 
             // What we will do to come up with the result is:
             // 1) Try to find an existing section record somewhere above us.
             //    If we find an existing section record then it will have the effective value of the lock mode
-            //    that applies to us in it's LockChidlren. We dont need to go further up once we find a section record
+            //    that applies to us in it's LockChidlren. We dont need to go further up once we find a section
+            // record
             //    as it has the lock mode of all it's parents accumulated
             //
-            //    There is one huge trick though - Location config records are different ( see beginning of the func for what a location config record is )
-            //    A location config record is not locked if the config level of the web.config file in which it lives is not locked.
+            //    There is one huge trick though - Location config records are different ( see beginning of the
+            // func for what a location config record is )
+            //    A location config record is not locked if the config level of the web.config file in which it
+            // lives is not locked.
             //    I.e. when we are looking for the effective value for a location config we have two cases
-            //      a) There is a section record in our immediate parent ( remember our immediate parent is the config file in which we /as a location tag/ are defined )
-            //         In this case our lock mode is not the LockChildren of this section record because this lock mode applies to child config levels in child config files
+            //      a) There is a section record in our immediate parent ( remember our immediate parent is the
+            // config file in which we /as a location tag/ are defined )
+            //         In this case our lock mode is not the LockChildren of this section record because this
+            // lock mode applies to child config levels in child config files
             //         The real lock mode for us is the Locked mode of the section record in self.
-            //      b) There is no section record in our immediate parent - in this case the locking is the same as for normal config - LockChildren value of any section
+            //      b) There is no section record in our immediate parent - in this case the locking is the same
+            // as for normal config - LockChildren value of any section
             //         record we may find above us.
             //
             // 2) If we can't find an existing section record we have two cases again:
-            //      a)  We are at the section declaration level - at this level a section is always unlocked by definition
+            //      a)  We are at the section declaration level - at this level a section is always unlocked by
+            // definition
             //          If this wasnt so there would be no way to unlock a section that is locked by default
-            //          A Location config is a bit weird again in a sence that a location config is unlocked if its in the config file where the section is declared
-            //          I.e. if "this" is a location record then a section is unconditionally unlocked if "this.Parent" is the section declaration level
-            //      b) We are not at section declaration level - in this case the result is whatever the default lock mode for the section is ( remember
-            //         that we fall back to the default since we couldn't find a section record with explicit lock mode nowhere above us)
+            //          A Location config is a bit weird again in a sence that a location config is unlocked if
+            // its in the config file where the section is declared
+            //          I.e. if "this" is a location record then a section is unconditionally unlocked if
+            // "this.Parent" is the section declaration level
+            //      b) We are not at section declaration level - in this case the result is whatever the default
+            // lock mode for the section is ( remember
+            //         that we fall back to the default since we couldn't find a section record with explicit
+            // lock mode nowhere above us)
             //
             // I sure hope that made some sense!
 
@@ -2771,7 +2789,8 @@ namespace System.Configuration
 
             childLockMode = OverrideMode.Inherit;
 
-            // Walk the hierarchy until we find an explicit setting for lock state at a config level or we reach to root
+            // Walk the hierarchy until we find an explicit setting for lock state at a config level or we reach
+            // to root
             while (!parent.IsRootConfig && (mode == OverrideMode.Inherit))
             {
                 SectionRecord sectionRecord = parent.GetSectionRecord(configKey, true);
@@ -2784,9 +2803,12 @@ namespace System.Configuration
                         // Apply case 1a
                         mode = sectionRecord.Locked ? OverrideMode.Deny : OverrideMode.Allow;
 
-                        // In this specific case the lock mode for our children is whatever the children of our parent should inherit
-                        // For example imagine a web.config which has a <location path="." overrideMode="Deny"> and we open "locationSubPath" from this web.config
-                        // The lock for the section is not Deny and will be allow ( see the code line above ). However the chidlren of this location tag
+                        // In this specific case the lock mode for our children is whatever the children of our parent
+                        // should inherit
+                        // For example imagine a web.config which has a <location path="." overrideMode="Deny"> and we open
+                        // "locationSubPath" from this web.config
+                        // The lock for the section is not Deny and will be allow ( see the code line above ). However the
+                        // chidlren of this location tag
                         // inherit the lock that applies to the children of the web.config file itself
                         childLockMode = sectionRecord.LockChildren
                             ? OverrideMode.Deny
@@ -2836,7 +2858,8 @@ namespace System.Configuration
                     // Case 2a
                     //
                     // Self is always allow at section declaration level
-                    // Child lock mode is the default value ( remember we are here because no explici mode was set anywhere above us )
+                    // Child lock mode is the default value ( remember we are here because no explici mode was set
+                    // anywhere above us )
 
                     mode = OverrideMode.Allow;
                     childLockMode = defaultMode;
@@ -2909,7 +2932,8 @@ namespace System.Configuration
 
             int depth;
 
-            // only move to child nodes when not on first level (we've already passed the first <configsections>)
+            // only move to child nodes when not on first level (we've already passed the first
+            // <configsections>)
             if ((parentConfigKey.Length == 0) && !inLocation)
             {
                 depth = 0;
@@ -3534,7 +3558,8 @@ namespace System.Configuration
                 // to Site2, whose application config path is "machine/webroot/2"
                 //
                 // Example #2: <location path="subdir"> has a targetConfigPath of "machine/webroot/1/root/subdir".
-                // This applies to an application with an application config path of "machine/webroot/1/root/subdir/app".
+                // This applies to an application with an application config path of
+                // "machine/webroot/1/root/subdir/app".
                 string targetConfigPath = host.GetConfigPathFromLocationSubPath(
                     _configPath,
                     locationSubPath
@@ -3565,7 +3590,8 @@ namespace System.Configuration
 
         // Resolve information about a location section at the time that the location section
         // is being used by child configuration records. This allows us to:
-        //      * Delay determining the configuration path for the location record until the sites section is available.
+        //      * Delay determining the configuration path for the location record until the sites section
+        // is available.
         //      * Delay reporting bad location paths until the location record has to be used.
         private void ResolveLocationSections()
         {
@@ -3582,7 +3608,8 @@ namespace System.Configuration
                 {
                     if (_locationSections != null)
                     {
-                        // Create dictionary that maps configPaths to (dictionary that maps sectionNames to locationSectionRecords)
+                        // Create dictionary that maps configPaths to (dictionary that maps sectionNames to
+                        // locationSectionRecords)
                         HybridDictionary locationConfigPaths = new HybridDictionary(true);
                         foreach (LocationSectionRecord locationSectionRecord in _locationSections)
                         {
@@ -3882,14 +3909,16 @@ namespace System.Configuration
                     errorInfo
                 );
 
-            // the file system ignores trailing '.', '\', or '/', so do not allow it in a location subpath specification
+            // the file system ignores trailing '.', '\', or '/', so do not allow it in a location subpath
+            // specification
             if (InvalidLastSubPathCharacters.IndexOf(subPath[subPath.Length - 1]) != -1)
                 throw new ConfigurationErrorsException(
                     SR.Config_location_path_invalid_last_character,
                     errorInfo
                 );
 
-            // combination of URI reserved characters and OS invalid filename characters, minus / (allowed reserved character)
+            // combination of URI reserved characters and OS invalid filename characters, minus / (allowed
+            // reserved character)
             if (subPath.AsSpan().IndexOfAny(s_invalidSubPathChars) >= 0)
                 throw new ConfigurationErrorsException(
                     SR.Config_location_path_invalid_character,
@@ -4199,7 +4228,8 @@ namespace System.Configuration
             {
                 sectionRecord.ClearResult();
 
-                // Need to clear all RawXml so that when GetSectionXmlReader is called later it will reload the file.
+                // Need to clear all RawXml so that when GetSectionXmlReader is called later it will reload the
+                // file.
                 sectionRecord.ClearRawXml();
             }
 
@@ -4563,7 +4593,8 @@ namespace System.Configuration
         /// <summary>
         /// Add implicit sections to the specified factory list.
         /// </summary>
-        /// <param name="factoryList">The factory list to add to. If null, adds to the current record's factory list.</param>
+        /// <param name="factoryList">The factory list to add to. If null, adds to the current record's
+        // factory list.</param>
         private void AddImplicitSections(Hashtable factoryList)
         {
             // Only add implicit sections to the factoryList if we're under the root

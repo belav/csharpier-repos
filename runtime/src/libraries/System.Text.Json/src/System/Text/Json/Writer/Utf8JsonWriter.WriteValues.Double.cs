@@ -18,7 +18,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="double"/> using the default <see cref="StandardFormat"/> on .NET Core 3 or higher
+        /// Writes the <see cref="double"/> using the default <see cref="StandardFormat"/> on .NET Core 3 or
+        // higher
         /// and 'G17' on any other framework.
         /// </remarks>
         public void WriteNumberValue(double value)

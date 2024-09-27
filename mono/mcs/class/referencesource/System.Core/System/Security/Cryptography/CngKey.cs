@@ -438,7 +438,8 @@ namespace System.Security.Cryptography
 
         /// <summary>
         ///     The name of the key, null if it is ephemeral. We can only detect ephemeral keys created by
-        ///     the CLR. Other ephemeral keys, such as those imported by handle, will get a CryptographicException
+        ///     the CLR. Other ephemeral keys, such as those imported by handle, will get a
+        // CryptographicException
         ///     if they read this property.
         /// </summary>
         public string KeyName
@@ -649,8 +650,10 @@ namespace System.Security.Cryptography
         /// <summary>
         ///     Build a key container permission for the specified access to this key
         ///
-        ///     If the key is a known ephemeral key, return null, since we don't require permission to work with
-        ///     those keys.  Otherwise return a permission scoped to the specific key and ksp if we can get those
+        ///     If the key is a known ephemeral key, return null, since we don't require permission to work
+        // with
+        ///     those keys.  Otherwise return a permission scoped to the specific key and ksp if we can get
+        // those
         ///     values, defaulting back to a full KeyContainerPermission if we cannot.
         /// </summary>
         [SecuritySafeCritical]
@@ -748,7 +751,8 @@ namespace System.Security.Cryptography
                 );
             }
 
-            // If we're not creating an ephemeral key, then we need to ensure the user has access to the key name
+            // If we're not creating an ephemeral key, then we need to ensure the user has access to the key
+            // name
             if (keyName != null)
             {
                 KeyContainerPermissionAccessEntry access = new KeyContainerPermissionAccessEntry(

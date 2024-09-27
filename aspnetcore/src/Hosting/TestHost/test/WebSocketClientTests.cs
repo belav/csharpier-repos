@@ -48,7 +48,8 @@ public class WebSocketClientTests
             }
             catch
             {
-                // An exception will be thrown because our dummy endpoint does not implement a full Web socket server
+                // An exception will be thrown because our dummy endpoint does not implement a full Web socket
+                // server
             }
         }
 

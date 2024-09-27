@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis
     internal abstract partial class CommonCompiler
     {
         /// <summary>
-        /// Special informational diagnostic for each programmatic <see cref="Diagnostics.Suppression"/> reported by a <see cref="Diagnostics.DiagnosticSuppressor"/>.
+        /// Special informational diagnostic for each programmatic <see cref="Diagnostics.Suppression"/>
+        // reported by a <see cref="Diagnostics.DiagnosticSuppressor"/>.
         /// </summary>
         private sealed class SuppressionDiagnostic : Diagnostic
         {
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis
 
             public override string GetMessage(IFormatProvider? formatProvider = null)
             {
-                // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
+                // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression
+                // ID '{2}' and justification '{3}'
                 var localizableMessageFormat =
                     s_suppressionDiagnosticDescriptor.MessageFormat.ToString(formatProvider);
                 return string.Format(

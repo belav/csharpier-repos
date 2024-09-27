@@ -597,7 +597,8 @@ namespace System.DirectoryServices.ActiveDirectory
 
                 if (error.dwWin32Err == ERROR_CANCELLED)
                 {
-                    // this is a special case. the failure is because user specifies SyncAllOptions.CheckServerAlivenessOnly, ignore it here
+                    // this is a special case. the failure is because user specifies
+                    // SyncAllOptions.CheckServerAlivenessOnly, ignore it here
                     return null;
                 }
                 else
@@ -627,7 +628,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 {
                     DS_REPSYNCALL_ERRINFO error = new DS_REPSYNCALL_ERRINFO();
                     Marshal.PtrToStructure(tempPtr, error);
-                    // this is a special case. the failure is because user specifies SyncAllOptions.CheckServerAlivenessOnly, ignore it here
+                    // this is a special case. the failure is because user specifies
+                    // SyncAllOptions.CheckServerAlivenessOnly, ignore it here
                     if (error.dwWin32Err != ERROR_CANCELLED)
                     {
                         string message = GetErrorMessage(error.dwWin32Err, false);

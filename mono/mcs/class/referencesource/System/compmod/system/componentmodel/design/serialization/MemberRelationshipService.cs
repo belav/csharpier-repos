@@ -33,7 +33,8 @@ namespace System.ComponentModel.Design.Serialization
             new Dictionary<RelationshipEntry, RelationshipEntry>();
 
         /// <devdoc>
-        ///    Returns the the current relationship associated with the source, or MemberRelationship.Empty if
+        ///    Returns the the current relationship associated with the source, or MemberRelationship.Empty
+        // if
         ///    there is no relationship.  Also sets a relationship between two objects.  Empty
         ///    can also be passed as the property value, in which case the relationship will
         ///    be cleared.
@@ -94,8 +95,10 @@ namespace System.ComponentModel.Design.Serialization
         }
 
         /// <devdoc>
-        ///    This is the implementation API for returning relationships.  The default implementation stores the
-        ///    relationship in a table.  Relationships are stored weakly, so they do not keep an object alive.
+        ///    This is the implementation API for returning relationships.  The default implementation
+        // stores the
+        ///    relationship in a table.  Relationships are stored weakly, so they do not keep an object
+        // alive.
         /// </devdoc>
         protected virtual MemberRelationship GetRelationship(MemberRelationship source)
         {
@@ -114,8 +117,10 @@ namespace System.ComponentModel.Design.Serialization
         }
 
         /// <devdoc>
-        ///    This is the implementation API for returning relationships.  The default implementation stores the
-        ///    relationship in a table.  Relationships are stored weakly, so they do not keep an object alive.  Empty can be
+        ///    This is the implementation API for returning relationships.  The default implementation
+        // stores the
+        ///    relationship in a table.  Relationships are stored weakly, so they do not keep an object
+        // alive.  Empty can be
         ///    passed in for relationship to remove the relationship.
         /// </devdoc>
         protected virtual void SetRelationship(

@@ -481,7 +481,8 @@ namespace System.Net.Security
             }
 
             //
-            // ATTN: When the client cert was returned by the user callback OR it was guessed AND it has no private key,
+            // ATTN: When the client cert was returned by the user callback OR it was guessed AND it has no
+            // private key,
             //       THEN anonymous (no client cert) credential will be used.
             //
             // SECURITY: Accessing X509 cert Credential is disabled for semitrust.
@@ -524,42 +525,42 @@ namespace System.Net.Security
             return selectedCert;
         }
 
-        /*++
-            AcquireCredentials - Attempts to find Client Credential
-            Information, that can be sent to the server.  In our case,
-            this is only Client Certificates, that we have Credential Info.
+/*++
+AcquireCredentials - Attempts to find Client Credential
+Information, that can be sent to the server.  In our case,
+this is only Client Certificates, that we have Credential Info.
 
-            How it works:
-                case 0: Cert Selection delegate is present
-                        Always use its result as the client cert answer.
-                        Try to use cached credential handle whenever feasible.
-                        Do not use cached anonymous creds if the delegate has returned null
-                        and the collection is not empty (allow responding with the cert later).
+How it works:
+case 0: Cert Selection delegate is present
+Always use its result as the client cert answer.
+Try to use cached credential handle whenever feasible.
+Do not use cached anonymous creds if the delegate has returned null
+and the collection is not empty (allow responding with the cert later).
 
-                case 1: Certs collection is empty
-                        Always use the same statically acquired anonymous SSL Credential
+case 1: Certs collection is empty
+Always use the same statically acquired anonymous SSL Credential
 
-                case 2: Before our Connection with the Server
-                        If we have a cached credential handle keyed by first X509Certificate
-                        **content** in the passed collection, then we use that cached
-                        credential and hoping to restart a session.
+case 2: Before our Connection with the Server
+If we have a cached credential handle keyed by first X509Certificate
+**content** in the passed collection, then we use that cached
+credential and hoping to restart a session.
 
-                        Otherwise create a new anonymous (allow responding with the cert later).
+Otherwise create a new anonymous (allow responding with the cert later).
 
-                case 3: After our Connection with the Server (i.e. during handshake or re-handshake)
-                        The server has requested that we send it a Certificate then
-                        we Enumerate a list of server sent Issuers trying to match against
-                        our list of Certificates, the first match is sent to the server.
+case 3: After our Connection with the Server (i.e. during handshake or re-handshake)
+The server has requested that we send it a Certificate then
+we Enumerate a list of server sent Issuers trying to match against
+our list of Certificates, the first match is sent to the server.
 
-                        Once we got a cert we again try to match cached credential handle if possible.
-                        This will not restart a session but helps minimizing the number of handles we create.
+Once we got a cert we again try to match cached credential handle if possible.
+This will not restart a session but helps minimizing the number of handles we create.
 
-                In the case of an error getting a Certificate or checking its private Key we fall back
-                to the behavior of having no certs, case 1.
+In the case of an error getting a Certificate or checking its private Key we fall back
+to the behavior of having no certs, case 1.
 
-            Returns: True if cached creds were used, false otherwise.
+Returns: True if cached creds were used, false otherwise.
 
-        --*/
+--*/
 
         private bool AcquireClientCredentials(
             ref byte[]? thumbPrint,
@@ -597,7 +598,8 @@ namespace System.Net.Security
             {
                 // Try to locate cached creds first.
                 //
-                // SECURITY: selectedCert ref if not null is a safe object that does not depend on possible **user** inherited X509Certificate type.
+                // SECURITY: selectedCert ref if not null is a safe object that does not depend on possible **user**
+                // inherited X509Certificate type.
                 //
                 byte[]? guessedThumbPrint = selectedCert?.GetCertHash();
                 SafeFreeCredentials? cachedCredentialHandle = SslSessionsCache.TryCachedCredential(
@@ -625,8 +627,10 @@ namespace System.Net.Security
                         NetEventSource.Info(this, "Reset to anonymous session.");
 
                     // IIS does not renegotiate a restarted session if client cert is needed.
-                    // So we don't want to reuse **anonymous** cached credential for a new SSL connection if the client has passed some certificate.
-                    // The following block happens if client did specify a certificate but no cached creds were found in the cache.
+                    // So we don't want to reuse **anonymous** cached credential for a new SSL connection if the client
+                    // has passed some certificate.
+                    // The following block happens if client did specify a certificate but no cached creds were found in
+                    // the cache.
                     // Since we don't restart a session the server side can still challenge for a client cert.
                     if ((object?)_selectedClientCertificate != (object?)selectedCert)
                     {
@@ -824,8 +828,10 @@ namespace System.Net.Security
             if (sslAuthenticationOptions.CertificateContext != null && cred != null)
             {
                 //
-                // Since the SafeFreeCredentials can be cached and reused, it may happen on long running processes that some cert on
-                // the chain expires and all subsequent connections would send expired intermediate certificates. Find the earliest
+                // Since the SafeFreeCredentials can be cached and reused, it may happen on long running processes
+                // that some cert on
+                // the chain expires and all subsequent connections would send expired intermediate certificates.
+                // Find the earliest
                 // NotAfter timestamp on the chain and use it as expiration timestamp for the credentials.
                 // This provides an opportunity to recreate the credentials with an alternative (and still valid)
                 // certificate chain.
@@ -837,9 +843,12 @@ namespace System.Net.Security
                 if (cred._expiry < DateTime.UtcNow)
                 {
                     //
-                    // The CertificateContext from auth options is recreated just before creating the SafeFreeCredentials. However, in case when
-                    // it was provided by the user code, it may still contain the (now expired) certificate chain. Such expiration timestamp would
-                    // effectively disable caching as it would lead to creating new credentials for each connection. We attempt to recover by creating
+                    // The CertificateContext from auth options is recreated just before creating the
+                    // SafeFreeCredentials. However, in case when
+                    // it was provided by the user code, it may still contain the (now expired) certificate chain. Such
+                    // expiration timestamp would
+                    // effectively disable caching as it would lead to creating new credentials for each connection. We
+                    // attempt to recover by creating
                     // a temporary certificate context (which builds a new chain with hopefully more recent chain).
                     //
                     certificateContext = certificateContext.Duplicate();
@@ -885,21 +894,21 @@ namespace System.Net.Security
             }
         }
 
-        /*++
-            GenerateToken - Called after each successive state
-            in the Client - Server handshake.  This function
-            generates a set of bytes that will be sent next to
-            the server.  The server responds, each response,
-            is pass then into this function, again, and the cycle
-            repeats until successful connection, or failure.
+/*++
+GenerateToken - Called after each successive state
+in the Client - Server handshake.  This function
+generates a set of bytes that will be sent next to
+the server.  The server responds, each response,
+is pass then into this function, again, and the cycle
+repeats until successful connection, or failure.
 
-            Input:
-                input  - bytes from the wire
-                output - ref to byte [], what we will send to the
-                    server in response
-            Return:
-                status - error information
-        --*/
+Input:
+input  - bytes from the wire
+output - ref to byte [], what we will send to the
+server in response
+Return:
+status - error information
+--*/
         private SecurityStatusPal GenerateToken(ReadOnlySpan<byte> inputBuffer, ref byte[]? output)
         {
             byte[]? result = Array.Empty<byte>();
@@ -1016,7 +1025,8 @@ namespace System.Net.Security
 
                     //
                     // This call may bump up the credential reference count further.
-                    // Note that thumbPrint is retrieved from a safe cert object that was possible cloned from the user passed cert.
+                    // Note that thumbPrint is retrieved from a safe cert object that was possible cloned from the user
+                    // passed cert.
                     //
                     if (
                         !cachedCreds
@@ -1058,13 +1068,13 @@ namespace System.Net.Security
             );
         }
 
-        /*++
-            ProcessHandshakeSuccess -
-               Called on successful completion of Handshake -
-               used to set header/trailer sizes for encryption use
+/*++
+ProcessHandshakeSuccess -
+Called on successful completion of Handshake -
+used to set header/trailer sizes for encryption use
 
-            Fills in the information about established protocol
-        --*/
+Fills in the information about established protocol
+--*/
         internal void ProcessHandshakeSuccess()
         {
             SslStreamPal.QueryContextStreamSizes(_securityContext!, out StreamSizes streamSizes);
@@ -1085,18 +1095,18 @@ namespace System.Net.Security
 #endif
         }
 
-        /*++
-            Encrypt - Encrypts our bytes before we send them over the wire
+/*++
+Encrypt - Encrypts our bytes before we send them over the wire
 
-            PERF: make more efficient, this does an extra copy when the offset
-            is non-zero.
+PERF: make more efficient, this does an extra copy when the offset
+is non-zero.
 
-            Input:
-                buffer - bytes for sending
-                offset -
-                size   -
-                output - Encrypted bytes
-        --*/
+Input:
+buffer - bytes for sending
+offset -
+size   -
+output - Encrypted bytes
+--*/
         internal SecurityStatusPal Encrypt(
             ReadOnlyMemory<byte> buffer,
             ref byte[] output,
@@ -1150,12 +1160,12 @@ namespace System.Net.Security
             return status;
         }
 
-        /*++
-            VerifyRemoteCertificate - Validates the content of a Remote Certificate
+/*++
+VerifyRemoteCertificate - Validates the content of a Remote Certificate
 
-            checkCRL if true, checks the certificate revocation list for validity.
-            checkCertName, if true checks the CN field of the certificate
-        --*/
+checkCRL if true, checks the certificate revocation list for validity.
+checkCertName, if true checks the CN field of the certificate
+--*/
 
         //This method validates a remote certificate.
         internal bool VerifyRemoteCertificate(

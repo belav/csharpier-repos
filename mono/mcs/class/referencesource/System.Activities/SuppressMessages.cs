@@ -5,7 +5,8 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
 
-// When a resource from SR.resx is only used in an expression, FxCop may issue an AvoidUncalledPrivateCode error
+// When a resource from SR.resx is only used in an expression, FxCop may issue an
+// AvoidUncalledPrivateCode error
 [module: SuppressMessage(
     FxCop.Category.Performance,
     FxCop.Rule.AvoidUncalledPrivateCode,

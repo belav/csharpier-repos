@@ -261,7 +261,8 @@ namespace System.Text.Json.Serialization.Metadata
                 name = propertyInfo.Options.PropertyNamingPolicy.ConvertName(declaredPropertyName);
             }
 
-            // Compat: We need to do validation before we assign Name so that we get InvalidOperationException rather than ArgumentNullException
+            // Compat: We need to do validation before we assign Name so that we get InvalidOperationException
+            // rather than ArgumentNullException
             if (name == null)
             {
                 ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameNull(propertyInfo);

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Trigger extension methods for relational database metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-triggers">Database triggers</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-triggers">Database triggers</see> for more
+// information and examples.
 /// </remarks>
 public static class RelationalTriggerExtensions
 {
@@ -105,7 +106,8 @@ public static class RelationalTriggerExtensions
     /// </summary>
     /// <param name="trigger">The trigger.</param>
     /// <param name="name">The name of the trigger in the database.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetDatabaseName(
         this IConventionTrigger trigger,
@@ -171,7 +173,8 @@ public static class RelationalTriggerExtensions
     /// </summary>
     /// <param name="trigger">The trigger.</param>
     /// <param name="name">The name of the table on which this trigger is defined.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetTableName(
         this IConventionTrigger trigger,
@@ -221,7 +224,8 @@ public static class RelationalTriggerExtensions
     /// </summary>
     /// <param name="trigger">The trigger.</param>
     /// <param name="schema">The schema of the table on which this trigger is defined.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetTableSchema(
         this IConventionTrigger trigger,

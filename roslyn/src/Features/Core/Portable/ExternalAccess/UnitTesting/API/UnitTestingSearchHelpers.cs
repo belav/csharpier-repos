@@ -118,7 +118,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         {
             if (query.MethodName == null)
             {
-                // if we don't have a method name, then the fully qualified type name needs to be broken into two parts:
+                // if we don't have a method name, then the fully qualified type name needs to be broken into two
+                // parts:
                 // 1. the name of the type symbol we're looking for (the last name portion of the qualified name)
                 // 2. the container of the type symbol we're looking for (all but the last name portion).
                 var fullyQualifiedTypeName = query.FullyQualifiedTypeName;
@@ -155,8 +156,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         }
 
         /// <summary>
-        /// Converts from a metadata-name into the internal simple dotted name we store in our index as the container
-        /// for a symbol.  In the future, we could consider storing the fully-qualified-metadata-name in our index as
+        /// Converts from a metadata-name into the internal simple dotted name we store in our index as the
+        // container
+        /// for a symbol.  In the future, we could consider storing the fully-qualified-metadata-name in our
+        // index as
         /// it's trivial to compute it as we're walking down the syntax tree.
         /// </summary>
         private static string ConvertFromMetadataTypeName(string fullyQualifiedTypeName)
@@ -277,7 +280,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             [EnumeratorCancellation] CancellationToken cancellationToken
         )
         {
-            // quick check that the symbol name is actually in the bloom-filter index for this document.  Can avoid
+            // quick check that the symbol name is actually in the bloom-filter index for this document.  Can
+            // avoid
             // checking any of the items in it if so.
             var syntaxTreeIndex = await SyntaxTreeIndex
                 .GetRequiredIndexAsync(document, cancellationToken)
@@ -285,7 +289,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
             if (!syntaxTreeIndex.ProbablyContainsIdentifier(symbolName))
                 yield break;
 
-            // Ok, the symbol name was in this document.  Now go get the declaration-index and look through that to find
+            // Ok, the symbol name was in this document.  Now go get the declaration-index and look through that
+            // to find
             // the location of a potential matching symbol.
 
             SyntaxTree? tree = null;

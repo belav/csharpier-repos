@@ -77,7 +77,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                             GetTypeRestrictionForDynamicMetaObject(curArgument)
                         );
 
-                        // we have restricted this argument to LimitType so we can convert and conversion will be trivial cast.
+                        // we have restricted this argument to LimitType so we can convert and conversion will be trivial
+                        // cast.
                         Expression boxedValueAccessor = Expression.Field(
                             Helpers.Convert(curArgument.Expression, curArgument.LimitType),
                             curArgument.LimitType.GetField("Value")

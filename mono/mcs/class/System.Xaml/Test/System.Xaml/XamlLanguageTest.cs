@@ -574,10 +574,11 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Byte;
             TestXamlTypePrimitive(t, "Byte", typeof(byte), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+*/
         }
 
         [Test]
@@ -586,13 +587,14 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Char;
             TestXamlTypePrimitive(t, "Char", typeof(char), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (3, l.Length, "#32");
-            l.First (m => m.Name == "UnicodeCategory");
-            l.First (m => m.Name == "NumericValue");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (3, l.Length, "#32");
+l.First (m => m.Name == "UnicodeCategory");
+l.First (m => m.Name == "NumericValue");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -601,12 +603,13 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Decimal;
             TestXamlTypePrimitive(t, "Decimal", typeof(decimal), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (2, l.Length, "#32");
-            l.First (m => m.Name == "Bits");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (2, l.Length, "#32");
+l.First (m => m.Name == "Bits");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -615,11 +618,12 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Double;
             TestXamlTypePrimitive(t, "Double", typeof(double), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -628,11 +632,12 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Int16;
             TestXamlTypePrimitive(t, "Int16", typeof(short), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -648,11 +653,12 @@ namespace MonoTests.System.Xaml
             }
             catch (MissingMethodException) { }
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -661,11 +667,12 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Int64;
             TestXamlTypePrimitive(t, "Int64", typeof(long), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -675,10 +682,11 @@ namespace MonoTests.System.Xaml
             TestXamlTypePrimitive(t, "Object", typeof(object), true, false);
             Assert.IsNull(t.BaseType, "#x1");
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (0, l.Length, "#32");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (0, l.Length, "#32");
+*/
         }
 
         [Test]
@@ -687,11 +695,12 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Single;
             TestXamlTypePrimitive(t, "Single", typeof(float), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -712,10 +721,11 @@ namespace MonoTests.System.Xaml
             }
             catch (MissingMethodException) { }
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (0, l.Length, "#32");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (0, l.Length, "#32");
+*/
         }
 
         [Test]
@@ -724,11 +734,12 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.TimeSpan;
             TestXamlTypePrimitive(t, "TimeSpan", typeof(TimeSpan), false, false);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (1, l.Length, "#32");
-            l.First (m => m.Name == "HashCodeOfPtr");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (1, l.Length, "#32");
+l.First (m => m.Name == "HashCodeOfPtr");
+*/
         }
 
         [Test]
@@ -737,10 +748,11 @@ namespace MonoTests.System.Xaml
             var t = XamlLanguage.Uri;
             TestXamlTypePrimitive(t, "Uri", typeof(Uri), true, true);
 
-            /* Those properties are pointless regarding practical use. Those "members" does not participate in serialization.
-            var l = t.GetAllAttachableMembers ().ToArray ();
-            Assert.AreEqual (0, l.Length, "#32");
-            */
+/* Those properties are pointless regarding practical use. Those "members" does not participate in
+serialization.
+var l = t.GetAllAttachableMembers ().ToArray ();
+Assert.AreEqual (0, l.Length, "#32");
+*/
         }
 
         // miscellaneous

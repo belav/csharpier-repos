@@ -547,7 +547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         // Wrap binder from factory in a generic constraints specific binder
                         // to avoid checking constraints when binding type names.
-                        // Also, suppress type argument binding in constraint types, this helps to avoid cycles while we figure out constraint kinds.
+                        // Also, suppress type argument binding in constraint types, this helps to avoid cycles while we
+                        // figure out constraint kinds.
                         Debug.Assert(!binder.Flags.Includes(BinderFlags.GenericConstraintsClause));
                         binder = binder
                             .WithContainingMemberOrLambda(this)
@@ -557,7 +558,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                     | BinderFlags.SuppressTypeArgumentBinding
                             );
 
-                        // We will recompute this diagnostics more accurately later, when binding without BinderFlags.SuppressTypeArgumentBinding
+                        // We will recompute this diagnostics more accurately later, when binding without
+                        // BinderFlags.SuppressTypeArgumentBinding
                         constraints = binder.BindTypeParameterConstraintClauses(
                             this,
                             typeParameters,
@@ -1050,11 +1052,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         #region Attributes
 
         /// <summary>
-        /// Gets all the attribute lists for this named type.  If <paramref name="quickAttributes"/> is provided
+        /// Gets all the attribute lists for this named type.  If <paramref name="quickAttributes"/> is
+        // provided
         /// the attribute lists will only be returned if there is reasonable belief that
         /// the type has one of the attributes specified by <paramref name="quickAttributes"/> on it.
         /// This can avoid going back to syntax if we know the type definitely doesn't have an attribute
-        /// on it that could be the one specified by <paramref name="quickAttributes"/>. Pass <see langword="null"/>
+        /// on it that could be the one specified by <paramref name="quickAttributes"/>. Pass <see
+        // langword="null"/>
         /// to get all attribute declarations.
         /// </summary>
         internal ImmutableArray<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations(
@@ -1116,7 +1120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns null if there are no attributes applied on the symbol.
+        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns
+        // null if there are no attributes applied on the symbol.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1154,7 +1159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no
+        // applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1172,7 +1178,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
 #nullable enable
         /// <summary>
-        /// Returns data decoded from special early bound well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from special early bound well-known attributes applied to the symbol or
+        // null if there are no applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1356,14 +1363,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return (null, null);
             }
 
-            // We want to decode this early because it can influence overload resolution, which could affect attribute binding itself. Consider an attribute with these
+            // We want to decode this early because it can influence overload resolution, which could affect
+            // attribute binding itself. Consider an attribute with these
             // constructors:
             //
             //   MyAttribute(string s)
-            //   MyAttribute(CustomBuilder c) // CustomBuilder has InterpolatedStringHandlerAttribute on the type
+            //   MyAttribute(CustomBuilder c) // CustomBuilder has InterpolatedStringHandlerAttribute on the
+            // type
             //
-            // If it's applied with [MyAttribute($"{1}")], overload resolution rules say that we should prefer the CustomBuilder overload over the string overload. This
-            // is an error scenario regardless (non-constant interpolated string), but it's good to get right as it will affect public API results.
+            // If it's applied with [MyAttribute($"{1}")], overload resolution rules say that we should prefer
+            // the CustomBuilder overload over the string overload. This
+            // is an error scenario regardless (non-constant interpolated string), but it's good to get right as
+            // it will affect public API results.
             if (
                 CSharpAttributeData.IsTargetEarlyAttribute(
                     arguments.AttributeType,
@@ -1491,7 +1502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal override ObsoleteAttributeData ObsoleteAttributeData
         {
@@ -1836,7 +1848,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 AttributeUsageInfo info = attribute.DecodeAttributeUsageAttribute();
 
-                // Validate first ctor argument for AttributeUsage specification is a valid AttributeTargets enum member
+                // Validate first ctor argument for AttributeUsage specification is a valid AttributeTargets enum
+                // member
                 if (!info.HasValidAttributeTargets)
                 {
                     if (diagnose)
@@ -2057,10 +2070,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (this.TypeKind == TypeKind.Struct)
                 {
                     // CLI spec 22.37.16:
-                    // "A ValueType shall have a non-zero size - either by defining at least one field, or by providing a non-zero ClassSize"
+                    // "A ValueType shall have a non-zero size - either by defining at least one field, or by providing
+                    // a non-zero ClassSize"
                     //
                     // Dev11 compiler sets the value to 1 for structs with no instance fields and no size specified.
-                    // It does not change the size value if it was explicitly specified to be 0, nor does it report an error.
+                    // It does not change the size value if it was explicitly specified to be 0, nor does it report an
+                    // error.
                     return new TypeLayout(
                         LayoutKind.Sequential,
                         this.HasInstanceFields() ? 0 : 1,
@@ -2312,7 +2327,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // If user specified an Obsolete attribute, we cannot emit ours.
                     // NB: we do not check the kind of deprecation.
                     //     we will not emit Obsolete even if Deprecated or Experimental was used.
-                    //     we do not want to get into a scenario where different kinds of deprecation are combined together.
+                    //     we do not want to get into a scenario where different kinds of deprecation are combined
+                    // together.
                     //
                     if (obsoleteData == null)
                     {
@@ -2464,11 +2480,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             base.AfterMembersCompletedChecks(diagnostics);
 
-            // We need to give warnings if Obsolete is applied to any required members and there are constructors where a user would be forced to set that member,
+            // We need to give warnings if Obsolete is applied to any required members and there are
+            // constructors where a user would be forced to set that member,
             // unless:
             //  1. We're in an obsolete context ourselves, or
             //  2. All constructors of this type are obsolete or attributed with SetsRequiredMembersAttribute
-            // We don't warn for obsolete required members from base types, as the user either has a warning that they're depending on an obsolete constructor/type
+            // We don't warn for obsolete required members from base types, as the user either has a warning
+            // that they're depending on an obsolete constructor/type
             // already, or the original author ignored this warning.
 
             // Obsolete states should have already been calculated by this point in the pipeline.
@@ -2503,7 +2521,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (member.ObsoleteKind != ObsoleteAttributeKind.None)
                 {
-                    // Required member '{0}' should not be attributed with 'ObsoleteAttribute' unless the containing type is obsolete or all constructors are obsolete.
+                    // Required member '{0}' should not be attributed with 'ObsoleteAttribute' unless the containing
+                    // type is obsolete or all constructors are obsolete.
                     diagnostics.Add(
                         ErrorCode.WRN_ObsoleteMembersShouldNotBeRequired,
                         member.GetFirstLocation(),

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public DocumentSpan DocumentSpan { get; }
 
         /// <summary>
-        /// The line and character the symbol is located.  If this is a mapped location (e.g. affected by a <c>#line</c>
+        /// The line and character the symbol is located.  If this is a mapped location (e.g. affected by a
+        // <c>#line</c>
         /// directive), this will be the final location the symbol was mapped to.
         /// </summary>
         public FileLinePositionSpan Span { get; }

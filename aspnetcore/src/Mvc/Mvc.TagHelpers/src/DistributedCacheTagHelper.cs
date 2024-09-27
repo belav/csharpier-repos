@@ -19,7 +19,8 @@ public class DistributedCacheTagHelper : CacheTagHelperBase
     private readonly IDistributedCacheTagHelperService _distributedCacheService;
 
     /// <summary>
-    /// Prefix used by <see cref="DistributedCacheTagHelper"/> instances when creating entries in <see cref="IDistributedCacheTagHelperStorage"/>.
+    /// Prefix used by <see cref="DistributedCacheTagHelper"/> instances when creating entries in <see
+    // cref="IDistributedCacheTagHelperStorage"/>.
     /// </summary>
     public static readonly string CacheKeyPrefix = nameof(DistributedCacheTagHelper);
 
@@ -28,7 +29,8 @@ public class DistributedCacheTagHelper : CacheTagHelperBase
     /// <summary>
     /// Creates a new <see cref="CacheTagHelper"/>.
     /// </summary>
-    /// <param name="distributedCacheService">The <see cref="IDistributedCacheTagHelperService"/>.</param>
+    /// <param name="distributedCacheService">The <see
+    // cref="IDistributedCacheTagHelperService"/>.</param>
     /// <param name="htmlEncoder">The <see cref="HtmlEncoder"/>.</param>
     public DistributedCacheTagHelper(
         IDistributedCacheTagHelperService distributedCacheService,

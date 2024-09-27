@@ -24,10 +24,13 @@ namespace System.Runtime.ConstrainedExecution
     using System;
     using System.Runtime.InteropServices;
 
+    //
     // **************************************************************************************************************************
     //
-    // Note that if you change either of the enums below or the constructors, fields or properties of the custom attribute itself
+    // Note that if you change either of the enums below or the constructors, fields or properties of
+    // the custom attribute itself
     // you must also change the logic and definitions in vm\ConstrainedExecutionRegion.cpp to match.
+    //
     //
     // **************************************************************************************************************************
 

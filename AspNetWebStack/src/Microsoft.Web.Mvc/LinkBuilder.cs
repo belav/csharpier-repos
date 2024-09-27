@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -18,7 +19,8 @@ namespace Microsoft.Web.Mvc
         /// </summary>
         /// <typeparam name="TController">Controller Type Only</typeparam>
         /// <param name="context">The current ViewContext</param>
-        /// <param name="routeCollection">The <see cref="RouteCollection"/> to use for building the URL.</param>
+        /// <param name="routeCollection">The <see cref="RouteCollection"/> to use for building the
+        // URL.</param>
         /// <param name="action">The action to invoke</param>
         /// <returns></returns>
         [SuppressMessage(

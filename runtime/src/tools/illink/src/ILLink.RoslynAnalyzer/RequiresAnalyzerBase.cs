@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -271,10 +272,12 @@ namespace ILLink.RoslynAnalyzer
         }
 
         /// <summary>
-        /// Finds the symbol of the caller to the current operation, helps to find out the symbol in cases where the operation passes
+        /// Finds the symbol of the caller to the current operation, helps to find out the symbol in cases
+        // where the operation passes
         /// through a lambda or a local function.
         /// </summary>
-        /// <param name="operationContext">Analyzer operation context to retrieve the current operation.</param>
+        /// <param name="operationContext">Analyzer operation context to retrieve the current
+        // operation.</param>
         /// <param name="targets">Scope of the attribute to search for callers.</param>
         /// <returns>The symbol of the caller to the operation</returns>
         protected static ISymbol FindContainingSymbol(
@@ -314,7 +317,8 @@ namespace ILLink.RoslynAnalyzer
         /// <summary>
         /// Creates a Requires diagnostic message based on the attribute data and RequiresDiagnosticRule.
         /// </summary>
-        /// <param name="operationContext">Analyzer operation context to be able to report the diagnostic.</param>
+        /// <param name="operationContext">Analyzer operation context to be able to report the
+        // diagnostic.</param>
         /// <param name="member">Information about the member that generated the diagnostic.</param>
         /// <param name="requiresAttribute">Requires attribute data to print attribute arguments.</param>
         private Diagnostic CreateRequiresDiagnostic(
@@ -397,7 +401,8 @@ namespace ILLink.RoslynAnalyzer
         protected abstract bool VerifyAttributeArguments(AttributeData attribute);
 
         /// <summary>
-        /// Compares the member against a list of incompatible members, if the member exist in the list then it generates a custom diagnostic declared inside the function.
+        /// Compares the member against a list of incompatible members, if the member exist in the list then
+        // it generates a custom diagnostic declared inside the function.
         /// </summary>
         /// <param name="operationContext">Analyzer operation context.</param>
         /// <param name="specialIncompatibleMembers">List of incompatible members.</param>
@@ -415,7 +420,8 @@ namespace ILLink.RoslynAnalyzer
         }
 
         /// <summary>
-        /// Creates a list of special incompatible members that can be used later on by the analyzer to generate diagnostics
+        /// Creates a list of special incompatible members that can be used later on by the analyzer to
+        // generate diagnostics
         /// </summary>
         /// <param name="compilation">Compilation to search for members</param>
         /// <returns>A list of special incomptaible members</returns>
@@ -427,12 +433,15 @@ namespace ILLink.RoslynAnalyzer
         /// Verifies that the MSBuild requirements to run the analyzer are fulfilled
         /// </summary>
         /// <param name="options">Analyzer options</param>
-        /// <returns>True if the requirements to run the analyzer are met; otherwise, returns false</returns>
+        /// <returns>True if the requirements to run the analyzer are met; otherwise, returns
+        // false</returns>
         internal abstract bool IsAnalyzerEnabled(AnalyzerOptions options);
 
-        // Check whether a given property serves as a check for the "feature" or "capability" associated with the attribute
+        // Check whether a given property serves as a check for the "feature" or "capability" associated
+        // with the attribute
         // understood by this analyzer. For now, this is only designed to support checks like
-        // RuntimeFeatures.IsDynamicCodeSupported, where a true return value indicates that the feature is supported.
+        // RuntimeFeatures.IsDynamicCodeSupported, where a true return value indicates that the feature is
+        // supported.
         // This doesn't support more general cases such as:
         // - false return value indicating that a feature is supported
         // - feature settings supplied by the project

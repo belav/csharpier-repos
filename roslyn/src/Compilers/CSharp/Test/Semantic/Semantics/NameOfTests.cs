@@ -289,7 +289,8 @@ class Test<T>
                     Diagnostic(ErrorCode.ERR_NoSuchMember, "Something")
                         .WithArguments("object", "Something")
                         .WithLocation(24, 27),
-                    // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global namespace (are you missing an assembly reference?)
+                    // (25,28): error CS0400: The type or namespace name 'Something' could not be found in the global
+                    // namespace (are you missing an assembly reference?)
                     //         s = nameof(global::Something);
                     Diagnostic(ErrorCode.ERR_GlobalSingleTypeNameNotFound, "Something")
                         .WithArguments("Something")
@@ -299,7 +300,8 @@ class Test<T>
                     Diagnostic(ErrorCode.ERR_AliasNotFound, "global2")
                         .WithArguments("global2")
                         .WithLocation(26, 20),
-                    // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                    // (27,20): error CS0234: The type or namespace name 'Collections2' does not exist in the namespace
+                    // 'System' (are you missing an assembly reference?)
                     //         s = nameof(System.Collections2.Generic.List);
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "System.Collections2")
                         .WithArguments("Collections2", "System")
@@ -328,8 +330,10 @@ class Test<T>
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "b")
                         .WithArguments("b")
                         .WithLocation(33, 20),
-                    // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to 'nameof'.
-                    //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on method group in nameof
+                    // (35,20): error CS8084: Type parameters are not allowed on a method group as an argument to
+                    // 'nameof'.
+                    //         s = nameof(System.Linq.Enumerable.Select<int, int>); // type parameters not allowed on
+                    // method group in nameof
                     Diagnostic(
                             ErrorCode.ERR_NameofMethodGroupWithTypeParameters,
                             "System.Linq.Enumerable.Select<int, int>"
@@ -478,7 +482,8 @@ class NameofLocal
                     Diagnostic(ErrorCode.ERR_BadArgCount, "nameof")
                         .WithArguments("nameof", "1")
                         .WithLocation(104, 31),
-                    // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of += or -=
+                    // (74,9): error CS0079: The event 'NameofEvent.nameof' can only appear on the left hand side of +=
+                    // or -=
                     //         nameof(Class.var);
                     Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "nameof")
                         .WithArguments("NameofEvent.nameof")
@@ -589,7 +594,8 @@ class Program
             );
 
             comp.VerifyDiagnostics(
-                // (4,24): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language version 6 or greater.
+                // (4,24): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language
+                // version 6 or greater.
                 //     Program(string s = nameof(Program))
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(Program)")
                     .WithArguments("nameof operator", "6")
@@ -717,7 +723,8 @@ class Program
                     parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
                 )
                 .VerifyDiagnostics(
-                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                    // expressions can be used as a statement
                     //         nameof(N);
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "nameof(N)").WithLocation(7, 9)
                 );
@@ -742,12 +749,14 @@ class Program
                     parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp5)
                 )
                 .VerifyDiagnostics(
-                    // (7,9): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language version 6 or greater.
+                    // (7,9): error CS8026: Feature 'nameof operator' is not available in C# 5. Please use language
+                    // version 6 or greater.
                     //         nameof(N);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion5, "nameof(N)")
                         .WithArguments("nameof operator", "6")
                         .WithLocation(7, 9),
-                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                    // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                    // expressions can be used as a statement
                     //         nameof(N);
                     Diagnostic(ErrorCode.ERR_IllegalStatement, "nameof(N)").WithLocation(7, 9)
                 );
@@ -926,7 +935,9 @@ public class Program
 }";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (14,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                // (14,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible
+                // extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing
+                // a using directive or an assembly reference?)
                 //         Use(nameof(a.Extension));
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
                     .WithArguments("A", "Extension")
@@ -965,7 +976,8 @@ public class Program
 }";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (10,22): error CS0572: 'Nested': cannot reference a type through an expression; try 'A.Nested' instead
+                // (10,22): error CS0572: 'Nested': cannot reference a type through an expression; try 'A.Nested'
+                // instead
                 //         Use(nameof(a.Nested));
                 Diagnostic(ErrorCode.ERR_BadTypeReference, "Nested")
                     .WithArguments("Nested", "A.Nested")
@@ -1060,7 +1072,9 @@ public class Program
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (9,22): error CS1061: 'A' does not contain a definition for 'Extension' and no extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                // (9,22): error CS1061: 'A' does not contain a definition for 'Extension' and no extension method
+                // 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive
+                // or an assembly reference?)
                 //         Use(nameof(a.Extension));
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
                     .WithArguments("A", "Extension")
@@ -1531,7 +1545,9 @@ public class Program
 ";
             var compilation = CreateCompilationWithMscorlib40AndSystemCore(source);
             compilation.VerifyDiagnostics(
-                // (16,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                // (16,22): error CS1061: 'A' does not contain a definition for 'Extension' and no accessible
+                // extension method 'Extension' accepting a first argument of type 'A' could be found (are you missing
+                // a using directive or an assembly reference?)
                 //         Use(nameof(a.Extension));
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Extension")
                     .WithArguments("A", "Extension")
@@ -1803,11 +1819,13 @@ unsafe struct Struct1
                     TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics(
-                    // (14,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (14,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //     return nameof(MessageType);
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "MessageType")
                         .WithLocation(14, 19),
-                    // (20,29): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda expression, or query expression
+                    // (20,29): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda
+                    // expression, or query expression
                     //     Action a = () => nameof(x);
                     Diagnostic(ErrorCode.ERR_AnonDelegateCantUse, "x")
                         .WithArguments("x")
@@ -2181,47 +2199,56 @@ public class C1
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (8,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (8,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public static string M() => nameof(Property.Property)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Property")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(8, 40),
-                    // (9,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (9,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Property.Field)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Property")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(9, 24),
-                    // (10,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (10,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Property.Method)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Property")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(10, 24),
-                    // (11,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (11,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Property.Event)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Property")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(11, 24),
-                    // (12,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (12,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Field.Property)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Field")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(12, 24),
-                    // (13,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (13,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Field.Field)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Field")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(13, 24),
-                    // (14,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (14,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Field.Method)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Field")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(14, 24),
-                    // (15,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (15,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Field.Event)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Field")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(15, 24),
-                    // (16,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (16,24): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         + "," + nameof(Event.Invoke)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Event")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2267,22 +2294,26 @@ public class C1
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (12,40): error CS9058: Feature 'lambda optional parameters' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (12,40): error CS9058: Feature 'lambda optional parameters' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         var lambda2 = static (string f = nameof(Field)) => f;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "=")
                         .WithArguments("lambda optional parameters", "12.0")
                         .WithLocation(12, 40),
-                    // (13,43): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (13,43): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         var lambda3 = static () => nameof(Event.Invoke);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Event")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(13, 43),
-                    // (14,40): error CS9058: Feature 'lambda optional parameters' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (14,40): error CS9058: Feature 'lambda optional parameters' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         var lambda4 = static (string i = nameof(Event.Invoke)) => i;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "=")
                         .WithArguments("lambda optional parameters", "12.0")
                         .WithLocation(14, 40),
-                    // (14,49): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (14,49): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         var lambda4 = static (string i = nameof(Event.Invoke)) => i;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Event")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2328,12 +2359,14 @@ public class C1
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (13,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (13,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         static string local3() => nameof(Event.Invoke);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Event")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(13, 42),
-                    // (14,48): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (14,48): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         static string local4(string i = nameof(Event.Invoke)) => i;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Event")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2361,7 +2394,8 @@ public class C
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (5,39): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (5,39): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public string S { get; } = nameof(S.Length);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2395,7 +2429,8 @@ public class C
                 .VerifyDiagnostics(expectedDiagnostics);
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (5,29): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (5,29): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     [System.Obsolete(nameof(S.Length))]
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2425,7 +2460,8 @@ public class C
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (6,30): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (6,30): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public C() : this(nameof(S.Length)){}
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2462,7 +2498,8 @@ public struct S
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (12,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (12,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         Func<string> func = () => nameof(P.Length);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "P")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2496,7 +2533,8 @@ public class C
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (7,33): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (7,33): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public string M() => nameof(Prop.StaticProp);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop.StaticProp")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2530,12 +2568,14 @@ public class C
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (7,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (7,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public static string M() => nameof(Prop.StaticProp);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop")
                         .WithArguments("instance member in 'nameof'", "12.0")
                         .WithLocation(7, 40),
-                    // (7,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (7,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public static string M() => nameof(Prop.StaticProp);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop.StaticProp")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2560,7 +2600,8 @@ public class C
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (6,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (6,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public static string M() => nameof(Prop.M);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2607,7 +2648,8 @@ public class C
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (5,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (5,40): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public static string M() => nameof(S.Length);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2626,7 +2668,8 @@ public class C
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (4,39): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (4,39): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public string S { get; } = nameof(S.Length);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2647,7 +2690,8 @@ public class C
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (4,29): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (4,29): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     [System.Obsolete(nameof(S.Length))]
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2668,7 +2712,8 @@ public class C
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (5,30): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (5,30): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public C() : this(nameof(S.Length)){}
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "S")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2693,7 +2738,8 @@ public struct S
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (9,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (9,42): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //         Func<string> func = () => nameof(P.Length);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "P")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2714,7 +2760,8 @@ public class C
 }";
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (6,33): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (6,33): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     public string M() => nameof(Prop.StaticProp);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop.StaticProp")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2809,7 +2856,8 @@ class Attr : Attribute
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (7,18): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (7,18): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     [Attr(nameof(Prop.StaticMethod))]
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2845,7 +2893,8 @@ class Attr : Attribute
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (7,18): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (7,18): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     //     [Attr(nameof(Prop.Prop))]
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "Prop.Prop")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2881,7 +2930,8 @@ class Attr : Attribute
                 .VerifyDiagnostics();
             CreateCompilation(source, parseOptions: TestOptions.Regular11)
                 .VerifyDiagnostics(
-                    // (5,14): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please use language version 12.0 or greater.
+                    // (5,14): error CS9058: Feature 'instance member in 'nameof'' is not available in C# 11.0. Please
+                    // use language version 12.0 or greater.
                     // [Attr(nameof(C.Prop.Prop))]
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "C.Prop.Prop")
                         .WithArguments("instance member in 'nameof'", "12.0")
@@ -2902,7 +2952,8 @@ class C
 class Attr : System.Attribute { public Attr(string s) {} }";
             var expectedDiagnostics = new[]
             {
-                // (4,18): error CS0411: The type arguments for method 'C.Method<T>()' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (4,18): error CS0411: The type arguments for method 'C.Method<T>()' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
                 //     [Attr(nameof(Method().Method))]
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Method")
                     .WithArguments("C.Method<T>()")

@@ -39,15 +39,20 @@ using Microsoft.Build.Exceptions;
 using Microsoft.Build.Framework;
 //
 // It is not always consistent to reuse Project and its evaluation stuff mostly because
-// both BuildParameters.ctor() and Project.ctor() takes arbitrary ProjectCollection, which are not very likely eqivalent
-// (as BuildParameters.ctor(), unlike Project.ctor(...), is known to create a new ProjectCollection instance).
+// both BuildParameters.ctor() and Project.ctor() takes arbitrary ProjectCollection, which are not
+// very likely eqivalent
+// (as BuildParameters.ctor(), unlike Project.ctor(...), is known to create a new ProjectCollection
+// instance).
 //
-// However, that inconsistency could happen even if you only use ProjectInstance and BuildParameters.
-// They both have constructors that take ProjectCollection and there is no guarantee that the arguments are the same.
+// However, that inconsistency could happen even if you only use ProjectInstance and
+// BuildParameters.
+// They both have constructors that take ProjectCollection and there is no guarantee that the
+// arguments are the same.
 // BuildManager.Build() does not fail because of inconsistent ProjectCollection instance on .NET.
 //
 // Anyhow, I'm not going to instantiate Project within ProjectInstance code for another reason:
-// ProjectCollection.GetLoadedProject() does not return any Project instnace for corresponding ProjectInstance
+// ProjectCollection.GetLoadedProject() does not return any Project instnace for corresponding
+// ProjectInstance
 // (or I should say, ProjectRootElement for both).
 using Microsoft.Build.Internal;
 using Microsoft.Build.Internal.Expressions;
@@ -213,12 +218,14 @@ namespace Microsoft.Build.Execution
         {
             UsingTasks = new List<ProjectUsingTaskElement>();
 
-            // this needs to be initialized here (regardless of that items won't be evaluated at property evaluation;
+            // this needs to be initialized here (regardless of that items won't be evaluated at property
+            // evaluation;
             // Conditions could incorrectly reference items and lack of this list causes NRE.
             all_evaluated_items = new List<ProjectItemInstance>();
 
             // property evaluation happens couple of times.
-            // At first step, all non-imported properties are evaluated TOO, WHILE those properties are being evaluated.
+            // At first step, all non-imported properties are evaluated TOO, WHILE those properties are being
+            // evaluated.
             // This means, Include and IncludeGroup elements with Condition attribute MAY contain references to
             // properties and they will be expanded.
             var elements = EvaluatePropertiesAndUsingTasksAndImportsAndChooses(xml.Children)

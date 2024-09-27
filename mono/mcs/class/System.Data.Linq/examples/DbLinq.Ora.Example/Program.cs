@@ -33,7 +33,8 @@ using System.Text;
 #endif
 
 #if ORACLE_PROVIDER
-//Oracle provider - download from http://www.oracle.com/technology/software/tech/windows/odpnet/utilsoft_11gbeta.html
+//Oracle provider - download from
+// http://www.oracle.com/technology/software/tech/windows/odpnet/utilsoft_11gbeta.html
 using Oracle.DataAccess.Client;
 #else
 using System.Data.OracleClient;
@@ -87,7 +88,8 @@ namespace nwind
             string sql =
                 "BEGIN insert INTO t1 (id1) values (t1_seq.NextVal);\n select t1_seq.CurrVal INTO :1 FROM DUAL; END;";
 #if ORACLE_PROVIDER
-            //Oracle provider - download from http://www.oracle.com/technology/software/tech/windows/odpnet/utilsoft_11gbeta.html
+            //Oracle provider - download from
+            // http://www.oracle.com/technology/software/tech/windows/odpnet/utilsoft_11gbeta.html
             //Oracle provider (check via TNSPING): "User Id=Scott;Password=PLACEHOLDER;Data Source=orcl9i"
             connStr = "User Id=Northwind;Password=PLACEHOLDER;Data Source=XE";
 #else
@@ -141,7 +143,8 @@ namespace nwind
         //    string sql = @"SELECT ProductID FROM products WHERE ProductName=:p1"; //returns no rows
         //    //string sql = @"SELECT * FROM USER_ALL_TABLES"; //returns many rows
 
-        //    OracleConnection conn = new OracleConnection("server=localhost;user=system;password=PLACEHOLDER");
+        //    OracleConnection conn = new
+        // OracleConnection("server=localhost;user=system;password=PLACEHOLDER");
         //    conn.Open();
         //    OracleCommand cmd = new OracleCommand(sql,conn);
         //    cmd.Parameters.Add(":p1", "Pen");

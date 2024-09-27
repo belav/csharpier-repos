@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         A class that processes the query expression after parameter values are known.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -21,7 +22,8 @@ public class RelationalParameterBasedSqlProcessor
     ///     Creates a new instance of the <see cref="RelationalParameterBasedSqlProcessor" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    /// <param name="useRelationalNulls">A bool value indicating if relational nulls should be used.</param>
+    /// <param name="useRelationalNulls">A bool value indicating if relational nulls should be
+    // used.</param>
     public RelationalParameterBasedSqlProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
         bool useRelationalNulls
@@ -73,7 +75,8 @@ public class RelationalParameterBasedSqlProcessor
     }
 
     /// <summary>
-    ///     Processes the query expression based on nullability of nodes to apply null semantics in use and
+    ///     Processes the query expression based on nullability of nodes to apply null semantics in use
+    // and
     ///     optimize it for given parameter values.
     /// </summary>
     /// <param name="queryExpression">A query expression to optimize.</param>
@@ -92,7 +95,8 @@ public class RelationalParameterBasedSqlProcessor
         );
 
     /// <summary>
-    ///     Expands the parameters to <see cref="FromSqlExpression" /> inside the query expression for given parameter values.
+    ///     Expands the parameters to <see cref="FromSqlExpression" /> inside the query expression for
+    // given parameter values.
     /// </summary>
     /// <param name="queryExpression">A query expression to optimize.</param>
     /// <param name="parametersValues">A dictionary of parameter values to use.</param>

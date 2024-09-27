@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// Produces a MoveNext() method for an async-iterator method.
-    /// Compared to an async method, this handles rewriting `yield return` (with states decreasing from -3) and
+    /// Compared to an async method, this handles rewriting `yield return` (with states decreasing from
+    // -3) and
     /// `yield break`, and adds special handling for `try` to allow disposal.
     /// `await` is handled like in async methods (with states 0 and up).
     /// </summary>
@@ -26,9 +27,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Where should we jump to to continue the execution of disposal path.
         ///
-        /// Initially, this is the method's return value label (<see cref="AsyncMethodToStateMachineRewriter._exprReturnLabel"/>).
-        /// Inside a `try` or `catch` with a `finally`, we'll use the label directly preceding the `finally`.
-        /// Inside a `try` or `catch` with an extracted `finally`, we will use the label preceding the extracted `finally`.
+        /// Initially, this is the method's return value label (<see
+        // cref="AsyncMethodToStateMachineRewriter._exprReturnLabel"/>).
+        /// Inside a `try` or `catch` with a `finally`, we'll use the label directly preceding the
+        // `finally`.
+        /// Inside a `try` or `catch` with an extracted `finally`, we will use the label preceding the
+        // extracted `finally`.
         /// Inside a `finally`, we'll have no/null label (disposal continues without a jump).
         /// </summary>
         private LabelSymbol _currentDisposalLabel;
@@ -40,7 +44,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly LabelSymbol _exprReturnLabelTrue;
 
         /// <summary>
-        /// States for `yield return` are decreasing from <see cref="StateMachineState.InitialAsyncIteratorState"/>.
+        /// States for `yield return` are decreasing from <see
+        // cref="StateMachineState.InitialAsyncIteratorState"/>.
         /// </summary>
         private readonly ResumableStateMachineStateAllocator _iteratorStateAllocator;
 
@@ -116,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // ... _exprReturnLabel: ...
             // ... this.state = FinishedState; ...
 
-            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; } // for enumerables only
+            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; }
+            // // for enumerables only
             // _current = default;
             // this.builder.Complete();
             // this.promiseOfValueOrEnd.SetResult(false);
@@ -129,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 
-            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; } // for enumerables only
+            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; }
+            // // for enumerables only
             AddDisposeCombinedTokensIfNeeded(builder);
 
             builder.AddRange(
@@ -181,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private void AddDisposeCombinedTokensIfNeeded(ArrayBuilder<BoundStatement> builder)
         {
-            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; } // for enumerables only
+            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; }
+            // // for enumerables only
             if (_asyncIteratorInfo.CombinedTokensField is object)
             {
                 var combinedTokens = F.Field(F.This(), _asyncIteratorInfo.CombinedTokensField);
@@ -210,7 +218,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var builder = ArrayBuilder<BoundStatement>.GetInstance();
 
-            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; } // for enumerables only
+            // if (this.combinedTokens != null) { this.combinedTokens.Dispose(); this.combinedTokens = null; }
+            // // for enumerables only
             AddDisposeCombinedTokensIfNeeded(builder);
 
             // _current = default;
@@ -390,17 +399,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// An async-iterator state machine has a flag indicating "dispose mode".
-        /// We enter dispose mode by calling DisposeAsync() when the state machine is paused on a `yield return`.
-        /// DisposeAsync() will resume execution of the state machine from that state (using existing dispatch mechanism
+        /// We enter dispose mode by calling DisposeAsync() when the state machine is paused on a `yield
+        // return`.
+        /// DisposeAsync() will resume execution of the state machine from that state (using existing
+        // dispatch mechanism
         /// to restore execution from a given state, without executing other code to get there).
         ///
         /// From there, we don't want normal code flow:
         /// - from `yield return` within a try, we'll jump to its `finally` if it has one (or method exit)
         /// - after finishing a `finally` within a `finally`, we'll continue
-        /// - after finishing a `finally` within a `try`, jump to the its `finally` if it has one (or method exit)
+        /// - after finishing a `finally` within a `try`, jump to the its `finally` if it has one (or method
+        // exit)
         ///
-        /// Some `finally` clauses may have already been rewritten and extracted to a plain block (<see cref="AsyncExceptionHandlerRewriter"/>).
-        /// In those cases, we saved the finally-entry label in <see cref="BoundTryStatement.FinallyLabelOpt"/>.
+        /// Some `finally` clauses may have already been rewritten and extracted to a plain block (<see
+        // cref="AsyncExceptionHandlerRewriter"/>).
+        /// In those cases, we saved the finally-entry label in <see
+        // cref="BoundTryStatement.FinallyLabelOpt"/>.
         /// </summary>
         public override BoundNode VisitTryStatement(BoundTryStatement node)
         {
@@ -441,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 result = AppendJumpToCurrentDisposalLabel(result);
             }
 
-            // Note: we add this jump to extracted `finally` blocks as well, using `VisitExtractedFinallyBlock` below
+            // Note: we add this jump to extracted `finally` blocks as well, using `VisitExtractedFinallyBlock`
+            // below
 
             return result;
         }
@@ -457,8 +472,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Some `finally` clauses may have already been rewritten and extracted to a plain block (<see cref="AsyncExceptionHandlerRewriter"/>).
-        /// The extracted block will have been wrapped as a <see cref="BoundExtractedFinallyBlock"/> so that we can process it as a `finally` block here.
+        /// Some `finally` clauses may have already been rewritten and extracted to a plain block (<see
+        // cref="AsyncExceptionHandlerRewriter"/>).
+        /// The extracted block will have been wrapped as a <see cref="BoundExtractedFinallyBlock"/> so that
+        // we can process it as a `finally` block here.
         /// </summary>
         public override BoundNode VisitExtractedFinallyBlock(
             BoundExtractedFinallyBlock extractedFinally

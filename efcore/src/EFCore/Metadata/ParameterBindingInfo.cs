@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Carries information about a parameter binding.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and examples.
 /// </remarks>
 public readonly struct ParameterBindingInfo
 {
@@ -15,7 +16,8 @@ public readonly struct ParameterBindingInfo
     ///     Creates a new <see cref="ParameterBindingInfo" /> to define a parameter binding.
     /// </summary>
     /// <param name="structuralType">The entity or complex type for this binding.</param>
-    /// <param name="materializationContextExpression">The expression tree from which the parameter value will come.</param>
+    /// <param name="materializationContextExpression">The expression tree from which the parameter
+    // value will come.</param>
     public ParameterBindingInfo(
         ITypeBase structuralType,
         Expression materializationContextExpression
@@ -32,8 +34,10 @@ public readonly struct ParameterBindingInfo
     /// <summary>
     ///     Creates a new <see cref="ParameterBindingInfo" /> to define a parameter binding.
     /// </summary>
-    /// <param name="materializerSourceParameters">Parameters for the materialization that is happening.</param>
-    /// <param name="materializationContextExpression">The expression tree from which the parameter value will come.</param>
+    /// <param name="materializerSourceParameters">Parameters for the materialization that is
+    // happening.</param>
+    /// <param name="materializationContextExpression">The expression tree from which the parameter
+    // value will come.</param>
     public ParameterBindingInfo(
         EntityMaterializerSourceParameters materializerSourceParameters,
         Expression materializationContextExpression
@@ -56,7 +60,8 @@ public readonly struct ParameterBindingInfo
     public string InstanceName { get; }
 
     /// <summary>
-    ///     The query tracking behavior, or <see langword="null" /> if this materialization is not from a query.
+    ///     The query tracking behavior, or <see langword="null" /> if this materialization is not from
+    // a query.
     /// </summary>
     public QueryTrackingBehavior? QueryTrackingBehavior { get; }
 

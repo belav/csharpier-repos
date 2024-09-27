@@ -17,8 +17,8 @@ namespace System.Web.Hosting
     using Util = System.Web.UI.Util;
 
     /*
-     * Base class for virtual path providers
-     */
+    * Base class for virtual path providers
+    */
 
     public abstract class VirtualPathProvider : MarshalByRefObject
     {
@@ -36,15 +36,15 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Initialize is called on the provider after it is registered.
-         */
+        * Initialize is called on the provider after it is registered.
+        */
 
         protected virtual void Initialize() { }
 
         /*
-         * Gives the provider access to the Previous provider.  It can be used to delegate some of the calls
-         * (e.g. as a way of having some files comes from the file system, and others from the database)
-         */
+        * Gives the provider access to the Previous provider.  It can be used to delegate some of the calls
+        * (e.g. as a way of having some files comes from the file system, and others from the database)
+        */
 
         protected internal VirtualPathProvider Previous
         {
@@ -52,12 +52,12 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Asks the provider for a hash string based on the state of a set of virtual paths.
-         * The primary virtualPath is also passed in by itself.
-         * If they match, the cached data held by the user of the provider is still
-         * valid.  Otherwise, it should be discarded, and a new version needs to be
-         * obtained via GetFile/GetDirectory.
-         */
+        * Asks the provider for a hash string based on the state of a set of virtual paths.
+        * The primary virtualPath is also passed in by itself.
+        * If they match, the cached data held by the user of the provider is still
+        * valid.  Otherwise, it should be discarded, and a new version needs to be
+        * obtained via GetFile/GetDirectory.
+        */
 
         public virtual string GetFileHash(string virtualPath, IEnumerable virtualPathDependencies)
         {
@@ -75,14 +75,14 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Asks the provider for a CacheDependency that will be invalidated if any of the
-         * input files become invalid.
-         * utcStart contains the time (UTC) at which the files were read.  Any change to the file
-         * made after that time (even if the change is in the past) should invalidate the
-         * CacheDependency.
-         * If the provider doesn't support using a CacheDependency, it should return null,
-         * or simply not override GetCacheDependency (the base implementation returns null).
-         */
+        * Asks the provider for a CacheDependency that will be invalidated if any of the
+        * input files become invalid.
+        * utcStart contains the time (UTC) at which the files were read.  Any change to the file
+        * made after that time (even if the change is in the past) should invalidate the
+        * CacheDependency.
+        * If the provider doesn't support using a CacheDependency, it should return null,
+        * or simply not override GetCacheDependency (the base implementation returns null).
+        */
 
         public virtual CacheDependency GetCacheDependency(
             string virtualPath,
@@ -113,9 +113,9 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns whether the file described by the virtual path exists from
-         * the point of view of this provider.
-         */
+        * Returns whether the file described by the virtual path exists from
+        * the point of view of this provider.
+        */
 
         public virtual bool FileExists(string virtualPath)
         {
@@ -133,9 +133,9 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns whether the directory described by the virtual path exists from
-         * the point of view of this provider.
-         */
+        * Returns whether the directory described by the virtual path exists from
+        * the point of view of this provider.
+        */
 
         public virtual bool DirectoryExists(string virtualDir)
         {
@@ -153,8 +153,8 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns a VirtualFile object for the passed in virtual path
-         */
+        * Returns a VirtualFile object for the passed in virtual path
+        */
 
         public virtual VirtualFile GetFile(string virtualPath)
         {
@@ -195,8 +195,8 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns a VirtualDirectory object for the passed in virtual path
-         */
+        * Returns a VirtualDirectory object for the passed in virtual path
+        */
 
         public virtual VirtualDirectory GetDirectory(string virtualDir)
         {
@@ -238,11 +238,11 @@ namespace System.Web.Hosting
         }
 
 #if OLD
-        /*
-         * Allow the file provider to replace a virtual path by a different (ghosted) one.  This can
-         * be used to have several virtual paths be mapped to the same compilation, hence saving
-         * resources.  If the path is not ghosted, this method must return null.
-         */
+/*
+* Allow the file provider to replace a virtual path by a different (ghosted) one.  This can
+* be used to have several virtual paths be mapped to the same compilation, hence saving
+* resources.  If the path is not ghosted, this method must return null.
+*/
 
         public virtual string GetGhostedVirtualPath(string virtualPath)
         {
@@ -252,10 +252,10 @@ namespace System.Web.Hosting
 #endif
 
         /*
-         * Returns a cache key to be used for this virtual path.  If not overridden, this returns
-         * null meaning that the virtual path itself should be used as the cache key.
-         * This should only be overridden to achieve Sharepoint like ghosting behavior.
-         */
+        * Returns a cache key to be used for this virtual path.  If not overridden, this returns
+        * null meaning that the virtual path itself should be used as the cache key.
+        * This should only be overridden to achieve Sharepoint like ghosting behavior.
+        */
 
         public virtual string GetCacheKey(string virtualPath)
         {
@@ -269,10 +269,10 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Allows the VirtualPathProvider to use custom logic to combine virtual path.
-         * This can be used to give a special meaning to app relative paths (DevDiv 31438).
-         * basePath is the path to the file in which the relative reference was found.
-         */
+        * Allows the VirtualPathProvider to use custom logic to combine virtual path.
+        * This can be used to give a special meaning to app relative paths (DevDiv 31438).
+        * basePath is the path to the file in which the relative reference was found.
+        */
         public virtual string CombineVirtualPaths(string basePath, string relativePath)
         {
             string baseDir = null;
@@ -293,8 +293,8 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Helper method to open a file from its virtual path
-         */
+        * Helper method to open a file from its virtual path
+        */
 
         public static Stream OpenFile(string virtualPath)
         {
@@ -319,8 +319,8 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Helper method to call CombineVirtualPaths if there is a VirtualPathProvider
-         */
+        * Helper method to call CombineVirtualPaths if there is a VirtualPathProvider
+        */
         internal static VirtualPath CombineVirtualPathsInternal(
             VirtualPath basePath,
             VirtualPath relativePath
@@ -356,9 +356,9 @@ namespace System.Web.Hosting
     }
 
     /*
-     * Base class for VirtualFile and VirtualDirectory.  This is analogous to
-     * System.IO.FileSystemInfo, but for virtual paths instead of physical.
-     */
+    * Base class for VirtualFile and VirtualDirectory.  This is analogous to
+    * System.IO.FileSystemInfo, but for virtual paths instead of physical.
+    */
 
     public abstract class VirtualFileBase : MarshalByRefObject
     {
@@ -370,11 +370,11 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns the name of the file or directory, without any path info.
-         * e.g. if the virtual path is /app/sub/foo.aspx, this returns foo.aspx.
-         * Note that this is expected to return the name in the correct casing,
-         * which may be different from the casing in the original virtual path.
-         */
+        * Returns the name of the file or directory, without any path info.
+        * e.g. if the virtual path is /app/sub/foo.aspx, this returns foo.aspx.
+        * Note that this is expected to return the name in the correct casing,
+        * which may be different from the casing in the original virtual path.
+        */
 
         public virtual string Name
         {
@@ -386,9 +386,9 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns the virtual path to the file or directory that this object
-         * represents.  This is typically the path passed in to the constructor.
-         */
+        * Returns the virtual path to the file or directory that this object
+        * represents.  This is typically the path passed in to the constructor.
+        */
 
         public string VirtualPath
         {
@@ -401,23 +401,23 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns true if this is a directory, and false if its a file
-         */
+        * Returns true if this is a directory, and false if its a file
+        */
 
         public abstract bool IsDirectory { get; }
     }
 
     /*
-     * Object that represents a virtual file.  This is analogous to
-     * System.IO.FileInfo, but for virtual paths instead of physical.
-     */
+    * Object that represents a virtual file.  This is analogous to
+    * System.IO.FileInfo, but for virtual paths instead of physical.
+    */
 
     public abstract class VirtualFile : VirtualFileBase
     {
         /*
-         * Contructs a VirtualFile, passing it the virtual path to the
-         * file it represents
-         */
+        * Contructs a VirtualFile, passing it the virtual path to the
+        * file it represents
+        */
 
         protected VirtualFile(string virtualPath)
         {
@@ -430,23 +430,23 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns a readonly stream to the file
-         */
+        * Returns a readonly stream to the file
+        */
 
         public abstract Stream Open();
     }
 
     /*
-     * Object that represents a virtual directory.  This is analogous to
-     * System.IO.DirectoryInfo, but for virtual paths instead of physical.
-     */
+    * Object that represents a virtual directory.  This is analogous to
+    * System.IO.DirectoryInfo, but for virtual paths instead of physical.
+    */
 
     public abstract class VirtualDirectory : VirtualFileBase
     {
         /*
-         * Contructs a VirtualDirectory, passing it the virtual path to the
-         * directory it represents
-         */
+        * Contructs a VirtualDirectory, passing it the virtual path to the
+        * directory it represents
+        */
 
         protected VirtualDirectory(string virtualPath)
         {
@@ -460,23 +460,23 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Returns an object that enumerates all the children VirtualDirectory's
-         * of this directory.
-         */
+        * Returns an object that enumerates all the children VirtualDirectory's
+        * of this directory.
+        */
 
         public abstract IEnumerable Directories { get; }
 
         /*
-         * Returns an object that enumerates all the children VirtualFile's
-         * of this directory.
-         */
+        * Returns an object that enumerates all the children VirtualFile's
+        * of this directory.
+        */
 
         public abstract IEnumerable Files { get; }
 
         /*
-         * Returns an object that enumerates all the children VirtualDirectory's
-         * and VirtualFiles of this directory.
-         */
+        * Returns an object that enumerates all the children VirtualDirectory's
+        * and VirtualFiles of this directory.
+        */
 
         public abstract IEnumerable Children { get; }
     }

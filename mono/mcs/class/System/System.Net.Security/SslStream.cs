@@ -58,9 +58,9 @@ namespace System.Net.Security
         string hostName
     );
 
-    /*
-     * Internal delegates from the referencesource / corefx.
-     */
+/*
+* Internal delegates from the referencesource / corefx.
+*/
 
     internal delegate bool RemoteCertValidationCallback(
         string host,

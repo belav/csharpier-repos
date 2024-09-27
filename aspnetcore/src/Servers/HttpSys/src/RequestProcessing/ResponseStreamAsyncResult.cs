@@ -316,7 +316,9 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
                     // TODO: Verbose log
                     // for (int i = 0; i < asyncResult._dataChunks.Length; i++)
                     // {
-                    // Logging.Dump(Logging.HttpListener, asyncResult, "Callback", (IntPtr)asyncResult._dataChunks[0].fromMemory.pBuffer, (int)asyncResult._dataChunks[0].fromMemory.BufferLength);
+                    // Logging.Dump(Logging.HttpListener, asyncResult, "Callback",
+                    // (IntPtr)asyncResult._dataChunks[0].fromMemory.pBuffer,
+                    // (int)asyncResult._dataChunks[0].fromMemory.BufferLength);
                     // }
                 }
                 asyncResult.Complete();

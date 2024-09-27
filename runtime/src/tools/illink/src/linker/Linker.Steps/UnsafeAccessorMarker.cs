@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Runtime.CompilerServices;
 using Mono.Cecil;
@@ -17,7 +18,8 @@ namespace Mono.Linker.Steps
 
         // We don't perform method overload resolution based on list of parameters (or return type) for now
         // Mono.Cecil's method resolution is problematic and has bugs. It's also not extensible
-        // and we would need that to correctly implement the desired behavior around custom modifiers. So for now we decided to not
+        // and we would need that to correctly implement the desired behavior around custom modifiers. So
+        // for now we decided to not
         // duplicate the logic to tweak it and will just mark entire method groups.
 
         public void ProcessUnsafeAccessorMethod(MethodDefinition method)

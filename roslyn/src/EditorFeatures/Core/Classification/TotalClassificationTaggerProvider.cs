@@ -100,10 +100,14 @@ internal sealed class TotalClassificationTaggerProvider(
             SegmentedList<ITagSpan<IClassificationTag>> totalTags
         )
         {
-            // First, get all the syntactic tags.  While they are generally overridden by semantic tags (since semantics
-            // allows us to understand better what things like identifiers mean), they do take precedence for certain
-            // tags like 'Comments' and 'Excluded Code'.  In those cases we want the classification to 'snap' instantly to
-            // the syntactic state, and we do not want things like semantic classifications showing up over that.
+            // First, get all the syntactic tags.  While they are generally overridden by semantic tags (since
+            // semantics
+            // allows us to understand better what things like identifiers mean), they do take precedence for
+            // certain
+            // tags like 'Comments' and 'Excluded Code'.  In those cases we want the classification to 'snap'
+            // instantly to
+            // the syntactic state, and we do not want things like semantic classifications showing up over
+            // that.
 
             using var _1 = SegmentedListPool.GetPooledList<ITagSpan<IClassificationTag>>(
                 out var stringLiterals
@@ -167,7 +171,8 @@ internal sealed class TotalClassificationTaggerProvider(
             // Add any remaining syntactic spans following the semantic ones.
             while (currentSyntactic != null)
             {
-                // don't have to worry about comments/excluded code since there are no semantic tags we want to override.
+                // don't have to worry about comments/excluded code since there are no semantic tags we want to
+                // override.
                 if (TryProcessSyntacticStringLiteral())
                     continue;
 
@@ -175,9 +180,11 @@ internal sealed class TotalClassificationTaggerProvider(
                 currentSyntactic = GetNextSyntacticSpan();
             }
 
-            // We've added almost all the syntactic and semantic tags (properly skipping any semantic tags that are
+            // We've added almost all the syntactic and semantic tags (properly skipping any semantic tags that
+            // are
             // overridden by comments or excluded code).  All that remains is adding back the string literals we
-            // skipped.  However, when we do so, we'll see if those string literals themselves should be overridden
+            // skipped.  However, when we do so, we'll see if those string literals themselves should be
+            // overridden
             // by any embedded classifications.
             AddEmbeddedClassifications();
 
@@ -247,8 +254,10 @@ internal sealed class TotalClassificationTaggerProvider(
                 stringLiterals.Sort(s_spanComparison);
                 embeddedClassifications.Sort(s_spanComparison);
 
-                // Call into the helper to merge the string literals and embedded classifications into the final result.
-                // The helper will add all the embedded classifications first, then add string literal classifications
+                // Call into the helper to merge the string literals and embedded classifications into the final
+                // result.
+                // The helper will add all the embedded classifications first, then add string literal
+                // classifications
                 // in the the space between the embedded classifications that were originally classified as a string
                 // literal.
                 ClassifierHelper.MergeParts<

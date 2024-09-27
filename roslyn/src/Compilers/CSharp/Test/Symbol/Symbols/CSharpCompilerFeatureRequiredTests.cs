@@ -87,112 +87,134 @@ public class CSharpCompilerFeatureRequiredTests
     protected override void AssertNormalErrors(CSharpCompilation comp)
     {
         comp.VerifyDiagnostics(
-            // (2,1): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (2,1): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType onType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments("OnType", "test")
                 .WithLocation(2, 1),
-            // (3,1): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,1): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments("OnType", "test")
                 .WithLocation(3, 1),
-            // (3,8): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,8): error CS9041: 'OnType' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnType", "test")
                 .WithLocation(3, 8),
-            // (4,10): error CS9041: 'OnMethod.M()' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (4,10): error CS9041: 'OnMethod.M()' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnMethod.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnMethod.M()", "test")
                 .WithLocation(4, 10),
-            // (5,16): error CS9041: 'void value' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (5,16): error CS9041: 'void value' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnMethodReturn.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("void value", "test")
                 .WithLocation(5, 16),
-            // (6,13): error CS9041: 'int param' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (6,13): error CS9041: 'int param' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnParameter.M(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("int param", "test")
                 .WithLocation(6, 13),
-            // (7,13): error CS9041: 'OnField.Field' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (7,13): error CS9041: 'OnField.Field' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnField.Field;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Field")
                 .WithArguments("OnField.Field", "test")
                 .WithLocation(7, 13),
-            // (8,12): error CS9041: 'OnProperty.Property' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (8,12): error CS9041: 'OnProperty.Property' requires compiler feature 'test', which is not
+            // supported by this version of the C# compiler.
             // OnProperty.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnProperty.Property", "test")
                 .WithLocation(8, 12),
-            // (9,16): error CS9041: 'OnProperty.Property' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (9,16): error CS9041: 'OnProperty.Property' requires compiler feature 'test', which is not
+            // supported by this version of the C# compiler.
             // _ = OnProperty.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnProperty.Property", "test")
                 .WithLocation(9, 16),
-            // (10,18): error CS9041: 'OnPropertySetter.Property.set' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (10,18): error CS9041: 'OnPropertySetter.Property.set' requires compiler feature 'test', which is
+            // not supported by this version of the C# compiler.
             // OnPropertySetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnPropertySetter.Property.set", "test")
                 .WithLocation(10, 18),
-            // (13,22): error CS9041: 'OnPropertyGetter.Property.get' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (13,22): error CS9041: 'OnPropertyGetter.Property.get' requires compiler feature 'test', which is
+            // not supported by this version of the C# compiler.
             // _ = OnPropertyGetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnPropertyGetter.Property.get", "test")
                 .WithLocation(13, 22),
-            // (14,9): error CS9041: 'OnEvent.Event' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (14,9): error CS9041: 'OnEvent.Event' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEvent.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnEvent.Event", "test")
                 .WithLocation(14, 9),
-            // (15,9): error CS9041: 'OnEvent.Event' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (15,9): error CS9041: 'OnEvent.Event' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEvent.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnEvent.Event", "test")
                 .WithLocation(15, 9),
-            // (20,1): error CS9041: 'OnEnum' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (20,1): error CS9041: 'OnEnum' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEnum onEnum;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEnum")
                 .WithArguments("OnEnum", "test")
                 .WithLocation(20, 1),
-            // (21,18): error CS9041: 'OnEnumMember.A' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (21,18): error CS9041: 'OnEnumMember.A' requires compiler feature 'test', which is not supported
+            // by this version of the C# compiler.
             // _ = OnEnumMember.A;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "A")
                 .WithArguments("OnEnumMember.A", "test")
                 .WithLocation(21, 18),
-            // (22,1): error CS9041: 'T' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (22,1): error CS9041: 'T' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnClassTypeParameter<int> onClassTypeParameter;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnClassTypeParameter<int>")
                 .WithArguments("T", "test")
                 .WithLocation(22, 1),
-            // (23,23): error CS9041: 'T' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (23,23): error CS9041: 'T' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethodTypeParameter.M<int>();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M<int>")
                 .WithArguments("T", "test")
                 .WithLocation(23, 23),
-            // (24,1): error CS9041: 'OnDelegateType' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (24,1): error CS9041: 'OnDelegateType' requires compiler feature 'test', which is not supported
+            // by this version of the C# compiler.
             // OnDelegateType onDelegateType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnDelegateType")
                 .WithArguments("OnDelegateType", "test")
                 .WithLocation(24, 1),
-            // (25,28): error CS9041: 'int param' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (25,28): error CS9041: 'int param' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnIndexedPropertyParameter.set_Property(1, 1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "set_Property")
                 .WithArguments("int param", "test")
                 .WithLocation(25, 28),
-            // (26,32): error CS9041: 'int param' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (26,32): error CS9041: 'int param' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnIndexedPropertyParameter.get_Property(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "get_Property")
                 .WithArguments("int param", "test")
                 .WithLocation(26, 32),
-            // (27,1): error CS9041: 'int i' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (27,1): error CS9041: 'int i' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // new OnThisIndexerParameter()[1] = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "new OnThisIndexerParameter()[1]")
                 .WithArguments("int i", "test")
                 .WithLocation(27, 1),
-            // (28,5): error CS9041: 'int i' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (28,5): error CS9041: 'int i' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = new OnThisIndexerParameter()[1];
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "new OnThisIndexerParameter()[1]")
                 .WithArguments("int i", "test")
@@ -302,252 +324,302 @@ public class CSharpCompilerFeatureRequiredTests
     protected override void AssertModuleErrors(CSharpCompilation comp, MetadataReference ilRef)
     {
         comp.VerifyDiagnostics(
-            // (2,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (2,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType onType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments("OnModule", "test")
                 .WithLocation(2, 1),
-            // (3,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments("OnModule", "test")
                 .WithLocation(3, 1),
-            // (3,8): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,8): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnModule", "test")
                 .WithLocation(3, 8),
-            // (4,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (4,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethod.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethod")
                 .WithArguments("OnModule", "test")
                 .WithLocation(4, 1),
-            // (4,10): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (4,10): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethod.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnModule", "test")
                 .WithLocation(4, 10),
-            // (5,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (5,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethodReturn.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethodReturn")
                 .WithArguments("OnModule", "test")
                 .WithLocation(5, 1),
-            // (5,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (5,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethodReturn.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnModule", "test")
                 .WithLocation(5, 16),
-            // (6,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (6,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnParameter.M(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(6, 1),
-            // (6,13): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (6,13): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnParameter.M(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments("OnModule", "test")
                 .WithLocation(6, 13),
-            // (7,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (7,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnField.Field;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnField")
                 .WithArguments("OnModule", "test")
                 .WithLocation(7, 5),
-            // (7,13): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (7,13): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnField.Field;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Field")
                 .WithArguments("OnModule", "test")
                 .WithLocation(7, 13),
-            // (8,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (8,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnProperty.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnProperty")
                 .WithArguments("OnModule", "test")
                 .WithLocation(8, 1),
-            // (8,12): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (8,12): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnProperty.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(8, 12),
-            // (9,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (9,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnProperty.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnProperty")
                 .WithArguments("OnModule", "test")
                 .WithLocation(9, 5),
-            // (9,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (9,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnProperty.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(9, 16),
-            // (10,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (10,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnPropertySetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertySetter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(10, 1),
-            // (10,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (10,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnPropertySetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(10, 18),
-            // (11,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (11,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnPropertySetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertySetter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(11, 5),
-            // (11,22): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (11,22): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnPropertySetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(11, 22),
-            // (12,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (12,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnPropertyGetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertyGetter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(12, 1),
-            // (12,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (12,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnPropertyGetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(12, 18),
-            // (13,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (13,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnPropertyGetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertyGetter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(13, 5),
-            // (13,22): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (13,22): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnPropertyGetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(13, 22),
-            // (14,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (14,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEvent.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEvent")
                 .WithArguments("OnModule", "test")
                 .WithLocation(14, 1),
-            // (14,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (14,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEvent.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(14, 9),
-            // (15,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (15,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEvent.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEvent")
                 .WithArguments("OnModule", "test")
                 .WithLocation(15, 1),
-            // (15,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (15,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEvent.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(15, 9),
-            // (16,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (16,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEventAdder.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventAdder")
                 .WithArguments("OnModule", "test")
                 .WithLocation(16, 1),
-            // (16,14): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (16,14): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEventAdder.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(16, 14),
-            // (17,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (17,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEventAdder.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventAdder")
                 .WithArguments("OnModule", "test")
                 .WithLocation(17, 1),
-            // (17,14): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (17,14): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEventAdder.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(17, 14),
-            // (18,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (18,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEventRemover.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventRemover")
                 .WithArguments("OnModule", "test")
                 .WithLocation(18, 1),
-            // (18,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (18,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEventRemover.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(18, 16),
-            // (19,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (19,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEventRemover.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventRemover")
                 .WithArguments("OnModule", "test")
                 .WithLocation(19, 1),
-            // (19,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (19,16): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnEventRemover.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments("OnModule", "test")
                 .WithLocation(19, 16),
-            // (20,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (20,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnEnum onEnum;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEnum")
                 .WithArguments("OnModule", "test")
                 .WithLocation(20, 1),
-            // (21,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (21,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnEnumMember.A;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEnumMember")
                 .WithArguments("OnModule", "test")
                 .WithLocation(21, 5),
-            // (21,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (21,18): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnEnumMember.A;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "A")
                 .WithArguments("OnModule", "test")
                 .WithLocation(21, 18),
-            // (22,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (22,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnClassTypeParameter<int> onClassTypeParameter;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnClassTypeParameter<int>")
                 .WithArguments("OnModule", "test")
                 .WithLocation(22, 1),
-            // (23,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (23,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnMethodTypeParameter.M<int>();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethodTypeParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(23, 1),
-            // (23,23): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (23,23): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnMethodTypeParameter.M<int>();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M<int>")
                 .WithArguments("OnModule", "test")
                 .WithLocation(23, 23),
-            // (24,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (24,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnDelegateType onDelegateType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnDelegateType")
                 .WithArguments("OnModule", "test")
                 .WithLocation(24, 1),
-            // (25,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (25,1): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // OnIndexedPropertyParameter.set_Property(1, 1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnIndexedPropertyParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(25, 1),
-            // (25,28): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (25,28): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // OnIndexedPropertyParameter.set_Property(1, 1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "set_Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(25, 28),
-            // (26,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (26,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = OnIndexedPropertyParameter.get_Property(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnIndexedPropertyParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(26, 5),
-            // (26,32): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (26,32): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by
+            // this version of the C# compiler.
             // _ = OnIndexedPropertyParameter.get_Property(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "get_Property")
                 .WithArguments("OnModule", "test")
                 .WithLocation(26, 32),
-            // (27,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (27,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // new OnThisIndexerParameter()[1] = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(27, 5),
-            // (27,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (27,5): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // new OnThisIndexerParameter()[1] = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(27, 5),
-            // (28,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (28,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = new OnThisIndexerParameter()[1];
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments("OnModule", "test")
                 .WithLocation(28, 9),
-            // (28,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (28,9): error CS9041: 'OnModule' requires compiler feature 'test', which is not supported by this
+            // version of the C# compiler.
             // _ = new OnThisIndexerParameter()[1];
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments("OnModule", "test")
@@ -562,7 +634,8 @@ public class CSharpCompilerFeatureRequiredTests
     protected override void AssertAssemblyErrors(CSharpCompilation comp, MetadataReference ilRef)
     {
         comp.VerifyDiagnostics(
-            // (2,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (2,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnType onType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments(
@@ -570,7 +643,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(2, 1),
-            // (3,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnType")
                 .WithArguments(
@@ -578,7 +652,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(3, 1),
-            // (3,8): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (3,8): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnType.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments(
@@ -586,7 +661,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(3, 8),
-            // (4,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (4,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethod.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethod")
                 .WithArguments(
@@ -594,7 +670,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(4, 1),
-            // (4,10): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (4,10): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethod.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments(
@@ -602,7 +679,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(4, 10),
-            // (5,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (5,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethodReturn.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethodReturn")
                 .WithArguments(
@@ -610,7 +688,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(5, 1),
-            // (5,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (5,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethodReturn.M();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments(
@@ -618,7 +697,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(5, 16),
-            // (6,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (6,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnParameter.M(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnParameter")
                 .WithArguments(
@@ -626,7 +706,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(6, 1),
-            // (6,13): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (6,13): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnParameter.M(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M")
                 .WithArguments(
@@ -634,7 +715,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(6, 13),
-            // (7,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (7,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnField.Field;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnField")
                 .WithArguments(
@@ -642,7 +724,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(7, 5),
-            // (7,13): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (7,13): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnField.Field;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Field")
                 .WithArguments(
@@ -650,7 +733,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(7, 13),
-            // (8,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (8,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnProperty.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnProperty")
                 .WithArguments(
@@ -658,7 +742,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(8, 1),
-            // (8,12): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (8,12): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnProperty.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -666,7 +751,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(8, 12),
-            // (9,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (9,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnProperty.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnProperty")
                 .WithArguments(
@@ -674,7 +760,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(9, 5),
-            // (9,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (9,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnProperty.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -682,7 +769,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(9, 16),
-            // (10,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (10,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnPropertySetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertySetter")
                 .WithArguments(
@@ -690,7 +778,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(10, 1),
-            // (10,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (10,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnPropertySetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -698,7 +787,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(10, 18),
-            // (11,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (11,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnPropertySetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertySetter")
                 .WithArguments(
@@ -706,7 +796,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(11, 5),
-            // (11,22): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (11,22): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnPropertySetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -714,7 +805,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(11, 22),
-            // (12,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (12,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnPropertyGetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertyGetter")
                 .WithArguments(
@@ -722,7 +814,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(12, 1),
-            // (12,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (12,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnPropertyGetter.Property = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -730,7 +823,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(12, 18),
-            // (13,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (13,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnPropertyGetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnPropertyGetter")
                 .WithArguments(
@@ -738,7 +832,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(13, 5),
-            // (13,22): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (13,22): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnPropertyGetter.Property;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Property")
                 .WithArguments(
@@ -746,7 +841,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(13, 22),
-            // (14,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (14,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEvent.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEvent")
                 .WithArguments(
@@ -754,7 +850,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(14, 1),
-            // (14,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (14,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEvent.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -762,7 +859,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(14, 9),
-            // (15,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (15,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEvent.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEvent")
                 .WithArguments(
@@ -770,7 +868,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(15, 1),
-            // (15,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (15,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEvent.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -778,7 +877,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(15, 9),
-            // (16,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (16,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventAdder.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventAdder")
                 .WithArguments(
@@ -786,7 +886,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(16, 1),
-            // (16,14): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (16,14): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventAdder.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -794,7 +895,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(16, 14),
-            // (17,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (17,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventAdder.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventAdder")
                 .WithArguments(
@@ -802,7 +904,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(17, 1),
-            // (17,14): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (17,14): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventAdder.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -810,7 +913,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(17, 14),
-            // (18,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (18,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventRemover.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventRemover")
                 .WithArguments(
@@ -818,7 +922,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(18, 1),
-            // (18,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (18,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventRemover.Event += () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -826,7 +931,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(18, 16),
-            // (19,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (19,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventRemover.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEventRemover")
                 .WithArguments(
@@ -834,7 +940,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(19, 1),
-            // (19,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (19,16): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEventRemover.Event -= () => {};
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "Event")
                 .WithArguments(
@@ -842,7 +949,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(19, 16),
-            // (20,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (20,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnEnum onEnum;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEnum")
                 .WithArguments(
@@ -850,7 +958,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(20, 1),
-            // (21,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (21,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnEnumMember.A;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnEnumMember")
                 .WithArguments(
@@ -858,7 +967,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(21, 5),
-            // (21,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (21,18): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnEnumMember.A;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "A")
                 .WithArguments(
@@ -866,7 +976,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(21, 18),
-            // (22,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (22,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnClassTypeParameter<int> onClassTypeParameter;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnClassTypeParameter<int>")
                 .WithArguments(
@@ -874,7 +985,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(22, 1),
-            // (23,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (23,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethodTypeParameter.M<int>();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnMethodTypeParameter")
                 .WithArguments(
@@ -882,7 +994,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(23, 1),
-            // (23,23): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (23,23): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnMethodTypeParameter.M<int>();
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "M<int>")
                 .WithArguments(
@@ -890,7 +1003,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(23, 23),
-            // (24,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (24,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnDelegateType onDelegateType;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnDelegateType")
                 .WithArguments(
@@ -898,7 +1012,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(24, 1),
-            // (25,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (25,1): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnIndexedPropertyParameter.set_Property(1, 1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnIndexedPropertyParameter")
                 .WithArguments(
@@ -906,7 +1021,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(25, 1),
-            // (25,28): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (25,28): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // OnIndexedPropertyParameter.set_Property(1, 1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "set_Property")
                 .WithArguments(
@@ -914,7 +1030,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(25, 28),
-            // (26,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (26,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnIndexedPropertyParameter.get_Property(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnIndexedPropertyParameter")
                 .WithArguments(
@@ -922,7 +1039,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(26, 5),
-            // (26,32): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (26,32): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = OnIndexedPropertyParameter.get_Property(1);
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "get_Property")
                 .WithArguments(
@@ -930,7 +1048,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(26, 32),
-            // (27,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (27,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // new OnThisIndexerParameter()[1] = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments(
@@ -938,7 +1057,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(27, 5),
-            // (27,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (27,5): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // new OnThisIndexerParameter()[1] = 1;
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments(
@@ -946,7 +1066,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(27, 5),
-            // (28,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (28,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = new OnThisIndexerParameter()[1];
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments(
@@ -954,7 +1075,8 @@ public class CSharpCompilerFeatureRequiredTests
                     "test"
                 )
                 .WithLocation(28, 9),
-            // (28,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' requires compiler feature 'test', which is not supported by this version of the C# compiler.
+            // (28,9): error CS9041: 'AssemblyTest, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+            // requires compiler feature 'test', which is not supported by this version of the C# compiler.
             // _ = new OnThisIndexerParameter()[1];
             Diagnostic(ErrorCode.ERR_UnsupportedCompilerFeature, "OnThisIndexerParameter")
                 .WithArguments(
@@ -1065,17 +1187,23 @@ public class CSharpCompilerFeatureRequiredTests
         );
 
         comp.VerifyDiagnostics(
-            // (4,2): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (4,2): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             // [CompilerFeatureRequired("OnType")]
             Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, @"CompilerFeatureRequired(""OnType"")")
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(4, 2),
-            // (11,6): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (11,6): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [CompilerFeatureRequired("OnMethod")]
             Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, @"CompilerFeatureRequired(""OnMethod"")")
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(11, 6),
-            // (17,14): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (17,14): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [return: CompilerFeatureRequired("OnMethodReturn")]
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1083,7 +1211,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(17, 14),
-            // (23,27): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (23,27): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     public static void M([CompilerFeatureRequired("OnParameter")] int param) {}
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1091,12 +1221,16 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(23, 27),
-            // (28,6): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (28,6): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [CompilerFeatureRequired("OnField")]
             Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, @"CompilerFeatureRequired(""OnField"")")
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(28, 6),
-            // (34,6): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (34,6): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [CompilerFeatureRequired("OnProperty")]
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1104,7 +1238,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(34, 6),
-            // (40,45): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (40,45): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     public static int Property { get => 0; [CompilerFeatureRequired("OnPropertySetter")] set {} }
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1112,7 +1248,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(40, 45),
-            // (45,35): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (45,35): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     public static int Property { [CompilerFeatureRequired("OnPropertyGetter")] get => 0; set {} }
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1120,33 +1258,45 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(45, 35),
-            // (50,6): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (50,6): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [CompilerFeatureRequired("OnEvent")]
             Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, @"CompilerFeatureRequired(""OnEvent"")")
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(50, 6),
-            // (56,41): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
-            //     public static event Action Event { [CompilerFeatureRequired("OnEventAdder")] add {} remove {} }
+            // (56,41): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
+            //     public static event Action Event { [CompilerFeatureRequired("OnEventAdder")] add {} remove {}
+            // }
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
                     @"CompilerFeatureRequired(""OnEventAdder"")"
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(56, 41),
-            // (61,41): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
-            //     public static event Action Event { [CompilerFeatureRequired("OnEventRemover")] add {} remove {} }
+            // (61,41): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
+            //     public static event Action Event { [CompilerFeatureRequired("OnEventRemover")] add {} remove
+            // {} }
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
                     @"CompilerFeatureRequired(""OnEventRemover"")"
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(61, 41),
-            // (64,2): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (64,2): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             // [CompilerFeatureRequired("OnEnum")]
             Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, @"CompilerFeatureRequired(""OnEnum"")")
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(64, 2),
-            // (72,6): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (72,6): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     [CompilerFeatureRequired("OnEnumMember")] A
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1154,7 +1304,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(72, 6),
-            // (75,36): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (75,36): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             // public class OnClassTypeParameter<[CompilerFeatureRequired("OnClassTypeParameter")] T>
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1162,7 +1314,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(75, 36),
-            // (81,27): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (81,27): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             //     public static void M<[CompilerFeatureRequired("OnMethodTypeParameter")] T>() {}
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,
@@ -1170,7 +1324,9 @@ public class CSharpCompilerFeatureRequiredTests
                 )
                 .WithArguments("System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute")
                 .WithLocation(81, 27),
-            // (84,2): error CS8335: Do not use 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler usage.
+            // (84,2): error CS8335: Do not use
+            // 'System.Runtime.CompilerServices.CompilerFeatureRequiredAttribute'. This is reserved for compiler
+            // usage.
             // [CompilerFeatureRequired("OnDelegateType")]
             Diagnostic(
                     ErrorCode.ERR_ExplicitReservedAttr,

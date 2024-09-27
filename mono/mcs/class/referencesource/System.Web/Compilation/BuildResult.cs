@@ -9,21 +9,21 @@
 /*********************************
 
 BuildResult
-    BuildResultCompileError
-    BuildResultCompiledAssemblyBase
-        BuildResultCompiledAssembly
-            BuildResultCustomString
-            BuildResultMainCodeAssembly
-            BuildResultResourceAssembly
-        BuildResultCompiledType
-            BuildResultCompiledTemplateType
-            BuildResultCompiledGlobalAsaxType
-            ImageGeneratorBuildResultCompiledType
-    BuildResultNoCompileTemplateControl
-        BuildResultNoCompilePage
-        BuildResultNoCompileUserControl
-            BuildResultNoCompileMasterPage
-    BuildResultCodeCompileUnit
+BuildResultCompileError
+BuildResultCompiledAssemblyBase
+BuildResultCompiledAssembly
+BuildResultCustomString
+BuildResultMainCodeAssembly
+BuildResultResourceAssembly
+BuildResultCompiledType
+BuildResultCompiledTemplateType
+BuildResultCompiledGlobalAsaxType
+ImageGeneratorBuildResultCompiledType
+BuildResultNoCompileTemplateControl
+BuildResultNoCompilePage
+BuildResultNoCompileUserControl
+BuildResultNoCompileMasterPage
+BuildResultCodeCompileUnit
 
 **********************************/
 
@@ -241,45 +241,45 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Can the result be unloaded from memory.  Most objects can, but things like
-         * Assemblies and Types can't.  This is used to determine the caching behavior.
-         */
+/*
+* Can the result be unloaded from memory.  Most objects can, but things like
+* Assemblies and Types can't.  This is used to determine the caching behavior.
+*/
         internal virtual bool IsUnloadable
         {
             get { return true; }
         }
 
-        /*
-         * Should the result be cached to disk.  Usually yes, but for things like compile
-         * errors, we only cache them to memory.
-         */
+/*
+* Should the result be cached to disk.  Usually yes, but for things like compile
+* errors, we only cache them to memory.
+*/
         internal virtual bool CacheToDisk
         {
             get { return true; }
         }
 
-        /*
-         * Should the result be cached to memory.  Usually yes, but for things like top level
-         * assemblies, we only cache them to disk.
-         */
+/*
+* Should the result be cached to memory.  Usually yes, but for things like top level
+* assemblies, we only cache them to disk.
+*/
         internal bool CacheToMemory
         {
             get { return !_flags[noMemoryCache]; }
             set { _flags[noMemoryCache] = !value; }
         }
 
-        /*
-         * Time the build result should expire from the memory cache
-         */
+/*
+* Time the build result should expire from the memory cache
+*/
         internal virtual DateTime MemoryCacheExpiration
         {
             get { return Cache.NoAbsoluteExpiration; }
         }
 
-        /*
-         * Sliding expiration for the build result
-         */
+/*
+* Sliding expiration for the build result
+*/
         internal virtual TimeSpan MemoryCacheSlidingExpiration
         {
             get { return Cache.NoSlidingExpiration; }
@@ -311,10 +311,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Tell the BuildResult that its dependencies are not up to date, in order
-         * to give it a chance to do some cleanup.
-         */
+/*
+* Tell the BuildResult that its dependencies are not up to date, in order
+* to give it a chance to do some cleanup.
+*/
         internal virtual void RemoveOutOfDateResources(PreservationFileReader pfw) { }
 
         // Compute the current hash code of the preserved data.  Return 0 if the
@@ -339,11 +339,11 @@ namespace System.Web.Compilation
             return hashCodeCombiner.CombinedHash;
         }
 
-        /*
-         * Compute the hash code of what this buid result depends on, excluding
-         * the virtual path dependencies (which are handled separately by
-         * VirtualPathDependenciesHash).
-         */
+/*
+* Compute the hash code of what this buid result depends on, excluding
+* the virtual path dependencies (which are handled separately by
+* VirtualPathDependenciesHash).
+*/
         protected virtual void ComputeHashCode(HashCodeCombiner hashCodeCombiner) { }
 
         internal virtual string ComputeSourceDependenciesHashCode(VirtualPath virtualPath)
@@ -449,9 +449,9 @@ namespace System.Web.Compilation
             _compileException = compileException;
         }
 
-        /*
-         * Don't cache compile errors to disk
-         */
+/*
+* Don't cache compile errors to disk
+*/
         internal override bool CacheToDisk
         {
             get { return false; }
@@ -671,10 +671,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Tell the BuildResult that its dependencies are not up to date, in order
-         * to give it a chance to do some cleanup.
-         */
+/*
+* Tell the BuildResult that its dependencies are not up to date, in order
+* to give it a chance to do some cleanup.
+*/
         internal override void RemoveOutOfDateResources(PreservationFileReader pfr)
         {
             // If the preservation file is pointing to an assembly that was not built
@@ -733,11 +733,11 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * Same as BuildResultCompiledAssembly, but with some special behavior specific to
-     * the main code assembly.  Specifically, it adds support for the AppInitialize method
-     * and for VB's My.*
-     */
+/*
+* Same as BuildResultCompiledAssembly, but with some special behavior specific to
+* the main code assembly.  Specifically, it adds support for the AppInitialize method
+* and for VB's My.*
+*/
     internal class BuildResultMainCodeAssembly : BuildResultCompiledAssembly
     {
         private const string appInitializeMethodName = "AppInitialize";
@@ -845,10 +845,10 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * Same as BuildResultCompiledAssembly, but with some special behavior specific to
-     * resources directory (both global and local)
-     */
+/*
+* Same as BuildResultCompiledAssembly, but with some special behavior specific to
+* resources directory (both global and local)
+*/
     internal class BuildResultResourceAssembly : BuildResultCompiledAssembly
     {
         internal BuildResultResourceAssembly() { }
@@ -1091,9 +1091,9 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * Used for pages, user controls, and master pages
-     */
+/*
+* Used for pages, user controls, and master pages
+*/
     internal class BuildResultCompiledTemplateType : BuildResultCompiledType
     {
         public BuildResultCompiledTemplateType() { }
@@ -1117,9 +1117,9 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-     * Used for global.asax
-     */
+/*
+* Used for global.asax
+*/
     internal class BuildResultCompiledGlobalAsaxType : BuildResultCompiledType
     {
         public BuildResultCompiledGlobalAsaxType() { }
@@ -1163,17 +1163,17 @@ namespace System.Web.Compilation
             return BuildResultTypeCode.Invalid;
         }
 
-        /*
-         * Don't cache the result of no-compile pages to disk (they are reparsed in each appdomain)
-         */
+/*
+* Don't cache the result of no-compile pages to disk (they are reparsed in each appdomain)
+*/
         internal override bool CacheToDisk
         {
             get { return false; }
         }
 
-        /*
-         * Give a 5 minute sliding expiration to no-compile pages
-         */
+/*
+* Give a 5 minute sliding expiration to no-compile pages
+*/
         internal override TimeSpan MemoryCacheSlidingExpiration
         {
             get { return TimeSpan.FromMinutes(5); }
@@ -1391,11 +1391,11 @@ namespace System.Web.Compilation
         }
     }
 
-    /*
-    * This class is used to cache the generated codecompileunit for CBM scenarios,
-    * when cached on disk, it uses BinaryFormatter to serialize the codecompileunit
-    * and other compile params.
-    */
+/*
+* This class is used to cache the generated codecompileunit for CBM scenarios,
+* when cached on disk, it uses BinaryFormatter to serialize the codecompileunit
+* and other compile params.
+*/
     internal class BuildResultCodeCompileUnit : BuildResult
     {
         private Type _codeDomProviderType;
@@ -1460,7 +1460,8 @@ namespace System.Web.Compilation
         {
             base.ComputeHashCode(hashCodeCombiner);
 
-            // Make the hash code depend on the relevant contents of the <page> and <compilation> config sections
+            // Make the hash code depend on the relevant contents of the <page> and <compilation> config
+            // sections
             CompilationSection compConfig = MTConfigUtil.GetCompilationConfig(VirtualPath);
 
             hashCodeCombiner.AddObject(compConfig.RecompilationHash);

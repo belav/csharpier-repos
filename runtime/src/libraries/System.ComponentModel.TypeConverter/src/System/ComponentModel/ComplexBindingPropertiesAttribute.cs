@@ -12,12 +12,14 @@ namespace System.ComponentModel
     public sealed class ComplexBindingPropertiesAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
+        /// Initializes a new instance of the <see
+        // cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
         /// </summary>
         public ComplexBindingPropertiesAttribute() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
+        /// Initializes a new instance of the <see
+        // cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
         /// </summary>
         public ComplexBindingPropertiesAttribute(string? dataSource)
         {
@@ -25,7 +27,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
+        /// Initializes a new instance of the <see
+        // cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/> class.
         /// </summary>
         public ComplexBindingPropertiesAttribute(string? dataSource, string? dataMember)
         {
@@ -46,7 +49,9 @@ namespace System.ComponentModel
         public string? DataMember { get; }
 
         /// <summary>
-        /// Specifies the default value for the <see cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/>, which is <see langword='null'/>. This
+        /// Specifies the default value for the <see
+        // cref='System.ComponentModel.ComplexBindingPropertiesAttribute'/>, which is <see langword='null'/>.
+        // This
         /// <see langword='static '/>field is read-only.
         /// </summary>
         public static readonly ComplexBindingPropertiesAttribute Default =

@@ -264,8 +264,10 @@ public partial class Router : IComponent, IHandleAfterRender, IDisposable
                 Log.DisplayingNotFound(_logger, locationPath, _baseUri);
 
                 // We did not find a Component that matches the route.
-                // Only show the NotFound content if the application developer programatically got us here i.e we did not
-                // intercept the navigation. In all other cases, force a browser navigation since this could be non-Blazor content.
+                // Only show the NotFound content if the application developer programatically got us here i.e we
+                // did not
+                // intercept the navigation. In all other cases, force a browser navigation since this could be
+                // non-Blazor content.
                 _renderHandle.Render(NotFound ?? DefaultNotFoundContent);
             }
             else

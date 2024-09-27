@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 /// <summary>
 /// An <see cref="ApplicationPartFactory"/> that produces no parts.
 /// <para>
-/// This factory may be used to to preempt Mvc's default part discovery allowing for custom configuration at a later stage.
+/// This factory may be used to to preempt Mvc's default part discovery allowing for custom
+// configuration at a later stage.
 /// </para>
 /// </summary>
 public class NullApplicationPartFactory : ApplicationPartFactory

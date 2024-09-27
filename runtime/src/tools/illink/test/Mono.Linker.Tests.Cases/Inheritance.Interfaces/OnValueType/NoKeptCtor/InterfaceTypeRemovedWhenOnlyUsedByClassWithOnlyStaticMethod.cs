@@ -8,7 +8,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnValueType.NoKeptCtor
         {
             StaticMethodOnlyUsed.StaticMethod();
 
-            // We are testing removing interfaces when no instance is created, we need to mark the interface types
+            // We are testing removing interfaces when no instance is created, we need to mark the interface
+            // types
             // so that we don't end up testing unused interface types being swept
             var tmp = typeof(IUsedInterface).ToString();
         }

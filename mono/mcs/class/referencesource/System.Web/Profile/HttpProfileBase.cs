@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * ProfileBase
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* ProfileBase
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 
 namespace System.Web.Profile
 {
@@ -741,7 +741,8 @@ namespace System.Web.Profile
                 {
                     pps.ProviderInternal = null;
                 }
-                // Providers that use NetDataContractSerialzier do not require Serializable attributes any longer, only enforce this for the SqlProfileProvider
+                // Providers that use NetDataContractSerialzier do not require Serializable attributes any longer,
+                // only enforce this for the SqlProfileProvider
                 bool requireSerializationCheck =
                     pps.ProviderInternal == null
                     || pps.ProviderInternal.GetType() == typeof(SqlProfileProvider);

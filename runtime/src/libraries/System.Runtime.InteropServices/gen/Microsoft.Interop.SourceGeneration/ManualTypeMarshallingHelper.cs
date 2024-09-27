@@ -217,7 +217,8 @@ namespace Microsoft.Interop
             if (attrs is null || attrs.Length == 0)
                 return false;
 
-            // We expect a callback for getting the element marshalling info when handling linear collection marshalling
+            // We expect a callback for getting the element marshalling info when handling linear collection
+            // marshalling
             if (isLinearCollectionMarshalling && getMarshallingInfoForElement is null)
                 return false;
 
@@ -227,7 +228,8 @@ namespace Microsoft.Interop
             {
                 if (attr.AttributeConstructor is null)
                 {
-                    // If the attribute constructor couldn't be bound by the compiler, then we shouldn't try to extract the constructor arguments.
+                    // If the attribute constructor couldn't be bound by the compiler, then we shouldn't try to extract
+                    // the constructor arguments.
                     // Roslyn doesn't provide them if it can't bind the constructor.
                     // We don't report a diagnostic here since Roslyn will report a diagnostic anyway.
                     continue;
@@ -249,8 +251,10 @@ namespace Microsoft.Interop
                 if (managedTypeOnAttr is null)
                     continue;
 
-                // Resolve the provided managed type to a specific generic instantiation based on the marshaller type
-                // If we're unable to resolve the instantiation based on our rules, skip this attribute. It is invalid.
+                // Resolve the provided managed type to a specific generic instantiation based on the marshaller
+                // type
+                // If we're unable to resolve the instantiation based on our rules, skip this attribute. It is
+                // invalid.
                 if (
                     !TryResolveManagedType(
                         entryPointType,
@@ -297,7 +301,8 @@ namespace Microsoft.Interop
                 }
 
                 // TODO: Report invalid shape for mode
-                //       Skip checking for bidirectional support for Default mode - always take / store marshaller data
+                //       Skip checking for bidirectional support for Default mode - always take / store marshaller
+                // data
                 CustomTypeMarshallerData? data = GetMarshallerDataForType(
                     marshallerType,
                     marshalMode,
@@ -381,7 +386,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Resolve the (possibly unbound generic) type to a fully constructed type based on the entry point type's generic parameters.
+        /// Resolve the (possibly unbound generic) type to a fully constructed type based on the entry point
+        // type's generic parameters.
         /// </summary>
         /// <param name="entryPointType">The entry point type</param>
         /// <param name="typeInAttribute">The managed type from the CustomMarshallerAttribute</param>
@@ -443,7 +449,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Resolve the (possibly unbound generic) type to a fully constructed type based on the entry point type's generic parameters.
+        /// Resolve the (possibly unbound generic) type to a fully constructed type based on the entry point
+        // type's generic parameters.
         /// </summary>
         /// <param name="entryPointType">The entry point type</param>
         /// <param name="typeInAttribute">The marshaller type from the CustomMarshallerAttribute</param>
@@ -490,7 +497,8 @@ namespace Microsoft.Interop
         /// <param name="managedType">The non-named managed type.</param>
         /// <param name="entryType">The marshaller type.</param>
         /// <param name="compilation">The compilation to use to make new type symbols.</param>
-        /// <returns>The resolved managed type, or <paramref name="managedType"/> if the provided type did not have any placeholders.</returns>
+        /// <returns>The resolved managed type, or <paramref name="managedType"/> if the provided type did
+        // not have any placeholders.</returns>
         public static ITypeSymbol ReplaceGenericPlaceholderInType(
             ITypeSymbol managedType,
             INamedTypeSymbol entryType,

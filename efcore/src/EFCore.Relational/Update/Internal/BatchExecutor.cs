@@ -6,20 +6,28 @@ using System.Data;
 namespace Microsoft.EntityFrameworkCore.Update.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class BatchExecutor : IBatchExecutor
 {
     private const string SavepointName = "__EFSavePoint";
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public BatchExecutor(
         ICurrentDbContext currentContext,
@@ -31,10 +39,14 @@ public class BatchExecutor : IBatchExecutor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual ICurrentDbContext CurrentContext { get; }
 
@@ -44,10 +56,14 @@ public class BatchExecutor : IBatchExecutor
     protected virtual IDiagnosticsLogger<DbLoggerCategory.Update> UpdateLogger { get; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual int Execute(
         IEnumerable<ModificationCommandBatch> commandBatches,
@@ -75,7 +91,8 @@ public class BatchExecutor : IBatchExecutor
                 transaction == null
                 && transactionEnlistManager?.EnlistedTransaction is null
                 && transactionEnlistManager?.CurrentAmbientTransaction is null
-                // Don't start a transaction if we have a single batch which doesn't require a transaction (single command), for perf.
+                // Don't start a transaction if we have a single batch which doesn't require a transaction (single
+                // command), for perf.
                 && (
                     (
                         autoTransactionBehavior == AutoTransactionBehavior.WhenNeeded
@@ -167,10 +184,14 @@ public class BatchExecutor : IBatchExecutor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual async Task<int> ExecuteAsync(
         IEnumerable<ModificationCommandBatch> commandBatches,
@@ -199,7 +220,8 @@ public class BatchExecutor : IBatchExecutor
                 transaction == null
                 && transactionEnlistManager?.EnlistedTransaction is null
                 && transactionEnlistManager?.CurrentAmbientTransaction is null
-                // Don't start a transaction if we have a single batch which doesn't require a transaction (single command), for perf.
+                // Don't start a transaction if we have a single batch which doesn't require a transaction (single
+                // command), for perf.
                 && (
                     (
                         autoTransactionBehavior == AutoTransactionBehavior.WhenNeeded

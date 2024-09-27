@@ -11,8 +11,10 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// Defines an interface for creating an <see cref="IActionInvoker"/> for the current request.
 /// </summary>
 /// <remarks>
-/// The default <see cref="IActionInvokerFactory"/> implementation creates an <see cref="IActionInvoker"/> by
-/// calling into each <see cref="IActionInvokerProvider"/>. See <see cref="IActionInvokerProvider"/> for more
+/// The default <see cref="IActionInvokerFactory"/> implementation creates an <see
+// cref="IActionInvoker"/> by
+/// calling into each <see cref="IActionInvokerProvider"/>. See <see cref="IActionInvokerProvider"/>
+// for more
 /// details.
 /// </remarks>
 public interface IActionInvokerFactory

@@ -7,10 +7,14 @@ using System.Runtime.CompilerServices;
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class ParameterExtractingExpressionVisitor : ExpressionVisitor
 {
@@ -30,10 +34,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     private IQueryProvider? _currentQueryProvider;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public ParameterExtractingExpressionVisitor(
         IEvaluatableExpressionFilter evaluatableExpressionFilter,
@@ -63,19 +71,27 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual Expression ExtractParameters(Expression expression) =>
         ExtractParameters(expression, clearEvaluatedValues: true);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual Expression ExtractParameters(Expression expression, bool clearEvaluatedValues)
     {
@@ -97,10 +113,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [return: NotNullIfNotNull("expression")]
     public override Expression? Visit(Expression? expression)
@@ -168,10 +188,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitConditional(ConditionalExpression conditionalExpression)
     {
@@ -193,15 +217,21 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
-        // If this is a call to EF.Constant(), or EF.Parameter(), then examine the operand; it it's isn't evaluatable (i.e. contains a
-        // reference to a database table), throw immediately. Otherwise, evaluate the operand (either as a constant or as a parameter) and
+        // If this is a call to EF.Constant(), or EF.Parameter(), then examine the operand; it it's isn't
+        // evaluatable (i.e. contains a
+        // reference to a database table), throw immediately. Otherwise, evaluate the operand (either as a
+        // constant or as a parameter) and
         // return that.
         if (methodCallExpression.Method.DeclaringType == typeof(EF))
         {
@@ -239,10 +269,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
@@ -318,10 +352,14 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitExtension(Expression extensionExpression)
     {
@@ -359,9 +397,12 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
         string? parameterName;
         if (_evaluatedValues.TryGetValue(expression, out var cachedValue))
         {
-            // The _generateContextAccessors condition allows us to reuse parameter expressions evaluated in query filters.
-            // In principle, _generateContextAccessors is orthogonal to query filters, but in practice it is only used in the
-            // nav expansion query filters (and defining query). If this changes in future, they would need to be decoupled.
+            // The _generateContextAccessors condition allows us to reuse parameter expressions evaluated in
+            // query filters.
+            // In principle, _generateContextAccessors is orthogonal to query filters, but in practice it is
+            // only used in the
+            // nav expansion query filters (and defining query). If this changes in future, they would need to
+            // be decoupled.
             var existingExpression =
                 generateParameter || _generateContextAccessors
                     ? cachedValue.Parameter
@@ -777,7 +818,8 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
                         );
 
                 // Identify a call to EF.Constant(), and flag that as non-evaluable.
-                // This is important to prevent a larger subtree containing EF.Constant from being evaluated, i.e. to make sure that
+                // This is important to prevent a larger subtree containing EF.Constant from being evaluated, i.e.
+                // to make sure that
                 // the EF.Function argument is present in the tree as its own, constant node.
                 case ExpressionType.Call
                     when expression is MethodCallExpression { Method: var method }

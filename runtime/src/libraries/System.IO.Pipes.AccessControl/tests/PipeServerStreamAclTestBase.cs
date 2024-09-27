@@ -15,13 +15,18 @@ namespace System.IO.Pipes.Tests
         protected const HandleInheritability DefaultInheritability = HandleInheritability.None;
         protected const int DefaultBufferSize = 1;
 
-        // As it is documented in the source definition of the PipeAccessRights enum, we do not have a 0 value on purpose (can't grant nor deny "nothing").
-        // So ReadWrite will be used in these unit tests the sole minimum additional granted right, considering that AnonymousPipeServerStreams can only
+        // As it is documented in the source definition of the PipeAccessRights enum, we do not have a 0
+        // value on purpose (can't grant nor deny "nothing").
+        // So ReadWrite will be used in these unit tests the sole minimum additional granted right,
+        // considering that AnonymousPipeServerStreams can only
         // get created with either ReadWrite or FullControl.
         protected const PipeAccessRights DefaultAccessRight = PipeAccessRights.ReadWrite;
 
-        // PipeAccessRights.Synchronize is not included in this arary because it is handled in a special way inside the PipeAccessRuleInstance constructor when creating the access mask: If Deny is specified, Synchronize gets removed from the rights.
-        // So this right's behavior is verified separately in the System.IO.Pipes.Tests.PipeTest_AclExtensions.PipeSecurity_VerifySynchronizeMasks unit test.
+        // PipeAccessRights.Synchronize is not included in this arary because it is handled in a special way
+        // inside the PipeAccessRuleInstance constructor when creating the access mask: If Deny is specified,
+        // Synchronize gets removed from the rights.
+        // So this right's behavior is verified separately in the
+        // System.IO.Pipes.Tests.PipeTest_AclExtensions.PipeSecurity_VerifySynchronizeMasks unit test.
         protected static readonly PipeAccessRights[] s_mostRights = new[]
         {
             PipeAccessRights.ReadData,

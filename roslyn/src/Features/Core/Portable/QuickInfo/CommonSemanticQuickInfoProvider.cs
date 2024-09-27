@@ -365,7 +365,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             if (GetBindableNodeForTokenIndicatingMemberAccess(token, out var accessedMember))
             {
-                // If the cursor is on the dot in an invocation `x.M()`, then we'll consider the cursor was placed on `M`
+                // If the cursor is on the dot in an invocation `x.M()`, then we'll consider the cursor was placed
+                // on `M`
                 token = accessedMember;
             }
 

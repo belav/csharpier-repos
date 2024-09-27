@@ -399,7 +399,8 @@ namespace XPathTests.FunctionalTests.MiscellaneousCases
         }
 
         /// <summary>
-        /// Execution of XPath expressions like that compare string to node-set with arithmetic operators in context of parent expression results in NRE.
+        /// Execution of XPath expressions like that compare string to node-set with arithmetic operators in
+        // context of parent expression results in NRE.
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]

@@ -1,26 +1,26 @@
 /*
- * ByteEncoding.cs - Implementation of the "I18N.Common.ByteEncoding" class.
- *
- * Copyright (c) 2002  Southern Storm Software, Pty Ltd
- *
- * Permission is hereby granted, free of charge, to any person obtaining
- * a copy of this software and associated documentation files (the "Software"),
- * to deal in the Software without restriction, including without limitation
- * the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the
- * Software is furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included
- * in all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
- * OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
- * OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
- * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
- * OTHER DEALINGS IN THE SOFTWARE.
- */
+* ByteEncoding.cs - Implementation of the "I18N.Common.ByteEncoding" class.
+*
+* Copyright (c) 2002  Southern Storm Software, Pty Ltd
+*
+* Permission is hereby granted, free of charge, to any person obtaining
+* a copy of this software and associated documentation files (the "Software"),
+* to deal in the Software without restriction, including without limitation
+* the rights to use, copy, modify, merge, publish, distribute, sublicense,
+* and/or sell copies of the Software, and to permit persons to whom the
+* Software is furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included
+* in all copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+* OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+* THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR
+* OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+* ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+* OTHER DEALINGS IN THE SOFTWARE.
+*/
 
 namespace I18N.Common
 {
@@ -146,18 +146,18 @@ namespace I18N.Common
             int byteCount
         );
 
-        /*
-        protected unsafe virtual void ToBytes (
-            char* chars, int charCount, byte* bytes, int byteCount)
-        {
-            // When it is not overriden, use ToBytes() with arrays.
-            char [] carr = new char [charCount];
-            Marshal.Copy ((IntPtr) chars, carr, 0, charCount);
-            byte [] barr = new byte [byteCount];
-            Marshal.Copy ((IntPtr) bytes, barr, 0, byteCount);
-            ToBytes (carr, 0, charCount, barr, 0);
-        }
-        */
+/*
+protected unsafe virtual void ToBytes (
+char* chars, int charCount, byte* bytes, int byteCount)
+{
+// When it is not overriden, use ToBytes() with arrays.
+char [] carr = new char [charCount];
+Marshal.Copy ((IntPtr) chars, carr, 0, charCount);
+byte [] barr = new byte [byteCount];
+Marshal.Copy ((IntPtr) bytes, barr, 0, byteCount);
+ToBytes (carr, 0, charCount, barr, 0);
+}
+*/
 
         // Convert an array of characters into a byte buffer,
         // once the parameters have been validated.
@@ -212,24 +212,24 @@ namespace I18N.Common
             }
         }
 
-        /*
-            // Convert a string into a byte buffer, once the parameters
-            // have been validated.
-            protected unsafe virtual void ToBytes(String s, int charIndex, int charCount,
-                                            byte[] bytes, int byteIndex)
-            {
-                // When it is not overriden, use ToBytes() with pointers
-                // (Ideal solution)
-                if (s.Length == 0 || bytes.Length == byteIndex)
-                    return;
-                fixed (char* cptr = s) {
-                    fixed (byte* bptr = bytes) {
-                        ToBytes (cptr + charIndex, charCount,
-                            bptr + byteIndex, bytes.Length - byteIndex);
-                    }
-                }
-            }
-        */
+/*
+// Convert a string into a byte buffer, once the parameters
+// have been validated.
+protected unsafe virtual void ToBytes(String s, int charIndex, int charCount,
+byte[] bytes, int byteIndex)
+{
+// When it is not overriden, use ToBytes() with pointers
+// (Ideal solution)
+if (s.Length == 0 || bytes.Length == byteIndex)
+return;
+fixed (char* cptr = s) {
+fixed (byte* bptr = bytes) {
+ToBytes (cptr + charIndex, charCount,
+bptr + byteIndex, bytes.Length - byteIndex);
+}
+}
+}
+*/
 
         //[CLSCompliant (false)]
         public unsafe override int GetBytesImpl(
@@ -243,81 +243,81 @@ namespace I18N.Common
             return charCount;
         }
 
-        /*
-            // Get the bytes that result from encoding a character buffer.
-            public override int GetBytes(char[] chars, int charIndex, int charCount,
-                                         byte[] bytes, int byteIndex)
-                    {
-                        if(chars == null)
-                        {
-                            throw new ArgumentNullException("chars");
-                        }
-                        if(bytes == null)
-                        {
-                            throw new ArgumentNullException("bytes");
-                        }
-                        if(charIndex < 0 || charIndex > chars.Length)
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("charIndex", Strings.GetString("ArgRange_Array"));
-                        }
-                        if(charCount < 0 || charCount > (chars.Length - charIndex))
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("charCount", Strings.GetString("ArgRange_Array"));
-                        }
-                        if(byteIndex < 0 || byteIndex > bytes.Length)
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("byteIndex", Strings.GetString("ArgRange_Array"));
-                        }
-                        if((bytes.Length - byteIndex) < charCount)
-                        {
-                            throw new ArgumentException
-                                (Strings.GetString("Arg_InsufficientSpace"));
-                        }
-                        ToBytes(chars, charIndex, charCount, bytes, byteIndex);
-                        return charCount;
-                    }
-        
-            // Convenience wrappers for "GetBytes".
-            public override int GetBytes(String s, int charIndex, int charCount,
-                                         byte[] bytes, int byteIndex)
-                    {
-                        if(s == null)
-                        {
-                            throw new ArgumentNullException("s");
-                        }
-                        if(bytes == null)
-                        {
-                            throw new ArgumentNullException("bytes");
-                        }
-                        if(charIndex < 0 || charIndex > s.Length)
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("charIndex",
-                                 Strings.GetString("ArgRange_StringIndex"));
-                        }
-                        if(charCount < 0 || charCount > (s.Length - charIndex))
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("charCount",
-                                 Strings.GetString("ArgRange_StringRange"));
-                        }
-                        if(byteIndex < 0 || byteIndex > bytes.Length)
-                        {
-                            throw new ArgumentOutOfRangeException
-                                ("byteIndex", Strings.GetString("ArgRange_Array"));
-                        }
-                        if((bytes.Length - byteIndex) < charCount)
-                        {
-                            throw new ArgumentException
-                                (Strings.GetString("Arg_InsufficientSpace"));
-                        }
-                        ToBytes(s, charIndex, charCount, bytes, byteIndex);
-                        return charCount;
-                    }
-        */
+/*
+// Get the bytes that result from encoding a character buffer.
+public override int GetBytes(char[] chars, int charIndex, int charCount,
+byte[] bytes, int byteIndex)
+{
+if(chars == null)
+{
+throw new ArgumentNullException("chars");
+}
+if(bytes == null)
+{
+throw new ArgumentNullException("bytes");
+}
+if(charIndex < 0 || charIndex > chars.Length)
+{
+throw new ArgumentOutOfRangeException
+("charIndex", Strings.GetString("ArgRange_Array"));
+}
+if(charCount < 0 || charCount > (chars.Length - charIndex))
+{
+throw new ArgumentOutOfRangeException
+("charCount", Strings.GetString("ArgRange_Array"));
+}
+if(byteIndex < 0 || byteIndex > bytes.Length)
+{
+throw new ArgumentOutOfRangeException
+("byteIndex", Strings.GetString("ArgRange_Array"));
+}
+if((bytes.Length - byteIndex) < charCount)
+{
+throw new ArgumentException
+(Strings.GetString("Arg_InsufficientSpace"));
+}
+ToBytes(chars, charIndex, charCount, bytes, byteIndex);
+return charCount;
+}
+
+// Convenience wrappers for "GetBytes".
+public override int GetBytes(String s, int charIndex, int charCount,
+byte[] bytes, int byteIndex)
+{
+if(s == null)
+{
+throw new ArgumentNullException("s");
+}
+if(bytes == null)
+{
+throw new ArgumentNullException("bytes");
+}
+if(charIndex < 0 || charIndex > s.Length)
+{
+throw new ArgumentOutOfRangeException
+("charIndex",
+Strings.GetString("ArgRange_StringIndex"));
+}
+if(charCount < 0 || charCount > (s.Length - charIndex))
+{
+throw new ArgumentOutOfRangeException
+("charCount",
+Strings.GetString("ArgRange_StringRange"));
+}
+if(byteIndex < 0 || byteIndex > bytes.Length)
+{
+throw new ArgumentOutOfRangeException
+("byteIndex", Strings.GetString("ArgRange_Array"));
+}
+if((bytes.Length - byteIndex) < charCount)
+{
+throw new ArgumentException
+(Strings.GetString("Arg_InsufficientSpace"));
+}
+ToBytes(s, charIndex, charCount, bytes, byteIndex);
+return charCount;
+}
+*/
 
         // Get the number of characters needed to decode a byte buffer.
         public override int GetCharCount(byte[] bytes, int index, int count)

@@ -23,10 +23,12 @@ public partial class ConcurrencyLimiterMiddleware
     /// <summary>
     /// Creates a new <see cref="ConcurrencyLimiterMiddleware"/>.
     /// </summary>
-    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
+    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the
+    // pipeline.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
     /// <param name="queue">The queueing strategy to use for the server.</param>
-    /// <param name="options">The options for the middleware, currently containing the 'OnRejected' callback.</param>
+    /// <param name="options">The options for the middleware, currently containing the 'OnRejected'
+    // callback.</param>
     public ConcurrencyLimiterMiddleware(
         RequestDelegate next,
         ILoggerFactory loggerFactory,

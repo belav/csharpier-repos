@@ -11,7 +11,8 @@ using Xunit;
 
 namespace System.IO.FileSystem.Tests
 {
-    // Separate class from the rest of the DriveInfo tests to prevent adding an extra virtual drive to GetDrives().
+    // Separate class from the rest of the DriveInfo tests to prevent adding an extra virtual drive to
+    // GetDrives().
     public class DriveInfoVirtualDriveTests
     {
         // Cannot set the volume label on a SUBST'ed folder

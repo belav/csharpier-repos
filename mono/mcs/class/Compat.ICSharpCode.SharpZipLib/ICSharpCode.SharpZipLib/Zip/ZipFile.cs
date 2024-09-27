@@ -174,11 +174,11 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// </exception>
         void ReadEntries()
         {
-            /* Search for the End Of Central Directory.  When a zip comment is
-            * present the directory may start earlier.
-            * FIXME: This searches the whole file in a very slow manner if the
-            * file isn't a zip file.
-            */
+/* Search for the End Of Central Directory.  When a zip comment is
+* present the directory may start earlier.
+* FIXME: This searches the whole file in a very slow manner if the
+* file isn't a zip file.
+*/
             long pos = baseStream.Length - ZipConstants.ENDHDR;
             do
             {
@@ -359,7 +359,7 @@ namespace ICSharpCode.SharpZipLib.Zip
                     throw new ZipException("Wrong Local header signature");
                 }
 
-                /* skip version and flags */
+/* skip version and flags */
                 long oldPos = baseStream.Position;
                 baseStream.Position += ZipConstants.LOCHOW - ZipConstants.LOCVER;
                 if (baseStream.Position - oldPos != ZipConstants.LOCHOW - ZipConstants.LOCVER)
@@ -372,7 +372,7 @@ namespace ICSharpCode.SharpZipLib.Zip
                     throw new ZipException("Compression method mismatch");
                 }
 
-                /* Skip time, crc, size and csize */
+/* Skip time, crc, size and csize */
                 oldPos = baseStream.Position;
                 baseStream.Position += ZipConstants.LOCNAM - ZipConstants.LOCTIM;
 

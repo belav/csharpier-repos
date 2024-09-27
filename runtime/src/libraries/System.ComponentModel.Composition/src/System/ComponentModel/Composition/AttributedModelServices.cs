@@ -206,7 +206,8 @@ namespace System.ComponentModel.Composition
         ///     The attributed object to set the imports.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="compositionService"/> or <paramref name="attributedPart"/> is <see langword="null"/>.
+        ///     <paramref name="compositionService"/> or <paramref name="attributedPart"/> is <see
+        // langword="null"/>.
         /// </exception>
         /// <exception cref="CompositionException">
         ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
@@ -240,7 +241,8 @@ namespace System.ComponentModel.Composition
         /// </param>
         /// <param name="reflectionContext">The reflection context for the part.</param>
         /// <exception cref="ArgumentNullException">
-        ///     <paramref name="compositionService"/> or <paramref name="attributedPart"/>  or <paramref name="reflectionContext"/> is <see langword="null"/>.
+        ///     <paramref name="compositionService"/> or <paramref name="attributedPart"/>  or <paramref
+        // name="reflectionContext"/> is <see langword="null"/>.
         /// </exception>
         /// <exception cref="CompositionException">
         ///     An error occurred during composition. <see cref="CompositionException.Errors"/> will
@@ -338,7 +340,8 @@ namespace System.ComponentModel.Composition
         /// <param name="contractType">Type of the contract.</param>
         /// <param name="importCardinality">The import cardinality.</param>
         /// <returns>
-        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality;
+        // otherwise, <c>false</c>.
         /// </returns>
         public static bool Imports(
             this ComposablePartDefinition part,
@@ -362,7 +365,8 @@ namespace System.ComponentModel.Composition
         /// <typeparam name="T">Type of the contract.</typeparam>
         /// <param name="importCardinality">The import cardinality.</param>
         /// <returns>
-        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality; otherwise, <c>false</c>.
+        ///     <c>true</c> if the specified part imports the specified contract with the given cardinality;
+        // otherwise, <c>false</c>.
         /// </returns>
         public static bool Imports<T>(
             this ComposablePartDefinition part,

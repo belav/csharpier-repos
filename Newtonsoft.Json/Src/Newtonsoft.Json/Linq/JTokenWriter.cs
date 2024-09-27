@@ -68,7 +68,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JTokenWriter"/> class writing to the given <see cref="JContainer"/>.
+        /// Initializes a new instance of the <see cref="JTokenWriter"/> class writing to the given <see
+        // cref="JContainer"/>.
         /// </summary>
         /// <param name="container">The container being written to.</param>
         public JTokenWriter(JContainer container)
@@ -91,10 +92,12 @@ namespace Newtonsoft.Json.Linq
 
         /// <summary>
         /// Closes this writer.
-        /// If <see cref="JsonWriter.AutoCompleteOnClose"/> is set to <c>true</c>, the JSON is auto-completed.
+        /// If <see cref="JsonWriter.AutoCompleteOnClose"/> is set to <c>true</c>, the JSON is
+        // auto-completed.
         /// </summary>
         /// <remarks>
-        /// Setting <see cref="JsonWriter.CloseOutput"/> to <c>true</c> has no additional effect, since the underlying <see cref="JContainer"/> is a type that cannot be closed.
+        /// Setting <see cref="JsonWriter.CloseOutput"/> to <c>true</c> has no additional effect, since the
+        // underlying <see cref="JContainer"/> is a type that cannot be closed.
         /// </remarks>
         public override void Close()
         {
@@ -499,7 +502,8 @@ namespace Newtonsoft.Json.Linq
             bool writeComments
         )
         {
-            // cloning the token rather than reading then writing it doesn't lose some type information, e.g. Guid, byte[], etc
+            // cloning the token rather than reading then writing it doesn't lose some type information, e.g.
+            // Guid, byte[], etc
             if (
                 reader is JTokenReader tokenReader
                 && writeChildren

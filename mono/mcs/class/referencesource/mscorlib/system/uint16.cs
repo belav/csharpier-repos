@@ -342,7 +342,8 @@ namespace System
         ///            //
         ///            //   true arithmetic range check         =>     re-written for unsigned int
         ///            // -------------------------------            -------------------------------
-        ///            // ((m_value * multiplier) > MaxValue)   =>   (multiplier != 0) && (m_value > (MaxValue / multiplier))
+        ///            // ((m_value * multiplier) > MaxValue)   =>   (multiplier != 0) && (m_value >
+        // (MaxValue / multiplier))
         ///            //
         ///
         ///            overflowed = (multiplier != 0) && (m_value > (MaxValue / multiplier));
@@ -357,7 +358,8 @@ namespace System
         ///        }
         ///
         ///        /// <internalonly/>
-        ///        UInt16 IArithmetic<UInt16>.DivideRemainder(UInt16 divisor, out UInt16 remainder, out bool overflowed) {
+        ///        UInt16 IArithmetic<UInt16>.DivideRemainder(UInt16 divisor, out UInt16 remainder, out bool
+        // overflowed) {
         ///            overflowed = false;
         ///            remainder = (UInt16) (m_value % divisor);
         ///            return (UInt16) (m_value / divisor);  // divide by zero will fail
@@ -383,7 +385,8 @@ namespace System
         ///        private static UInt16ArithmeticDescriptor s_descriptor;
         ///
         ///        class UInt16ArithmeticDescriptor : ArithmeticDescriptor<UInt16> {
-        ///            public UInt16ArithmeticDescriptor(ArithmeticCapabilities capabilities) : base(capabilities) {}
+        ///            public UInt16ArithmeticDescriptor(ArithmeticCapabilities capabilities) :
+        // base(capabilities) {}
         ///
         ///            public override UInt16 One {
         ///                get {

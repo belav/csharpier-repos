@@ -234,7 +234,8 @@ namespace System.Web.UI.Adapters
         }
 
         /// <devdoc>
-        ///    <para>Renders a client widget corresponding to a postback event, for example a wml do or a post link.   Note that this
+        ///    <para>Renders a client widget corresponding to a postback event, for example a wml do or a
+        // post link.   Note that this
         ///     widget may not submit the form data, e.g. scriptless html where this renders a link. </para>
         /// </devdoc>
         public virtual void RenderPostBackEvent(
@@ -260,7 +261,8 @@ namespace System.Web.UI.Adapters
         }
 
         /// <devdoc>
-        ///    <para>Renders a client widget corresponding to a postback event, for example a wml do or a post link.   Note that this
+        ///    <para>Renders a client widget corresponding to a postback event, for example a wml do or a
+        // post link.   Note that this
         ///     widget may not submit the form data, e.g. scriptless html where this renders a link. </para>
         /// </devdoc>
         protected void RenderPostBackEvent(
@@ -274,7 +276,8 @@ namespace System.Web.UI.Adapters
             bool encode
         )
         {
-            // Default: render postback event as scriptless anchor (works for all markups).  Override for specific markups.
+            // Default: render postback event as scriptless anchor (works for all markups).  Override for
+            // specific markups.
             string amp = encode ? "&amp;" : "&";
 
             bool isCrossPagePostBack = !String.IsNullOrEmpty(postUrl);
@@ -358,7 +361,8 @@ namespace System.Web.UI.Adapters
         }
 
         /// <devdoc>
-        ///     Transforms text for the target device.  The default transformation is the identity transformation,
+        ///     Transforms text for the target device.  The default transformation is the identity
+        // transformation,
         ///     which does not change the text.
         /// </devdoc>
         public virtual string TransformText(string text)

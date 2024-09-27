@@ -34,7 +34,8 @@ namespace IBM.Data.DB2
         {
             connectionPools = Hashtable.Synchronized(new Hashtable());
 
-            //			short sqlRet = DB2CLIWrapper.SQLAllocHandle(DB2Constants.SQL_HANDLE_ENV, IntPtr.Zero, ref penvHandle);
+            //			short sqlRet = DB2CLIWrapper.SQLAllocHandle(DB2Constants.SQL_HANDLE_ENV, IntPtr.Zero, ref
+            // penvHandle);
             short sqlRet = DB2CLIWrapper.Initialize(ref penvHandle);
             DB2ClientUtils.DB2CheckReturn(
                 sqlRet,
@@ -44,8 +45,10 @@ namespace IBM.Data.DB2
                 null
             );
 
-            // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_APP_TYPE 2473, vParam=4, cbParam=0 )	// 4=ADO.NET apptype????
-            // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_OUTPUT_NTS 10001, vParam=0, cbParam=0 ) // strings not 0-terminated
+            // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_APP_TYPE 2473, vParam=4, cbParam=0 )	// 4=ADO.NET
+            // apptype????
+            // SQLSetEnvAttr( hEnv=0:1, fAttribute=SQL_ATTR_OUTPUT_NTS 10001, vParam=0, cbParam=0 ) // strings
+            // not 0-terminated
         }
 
         public static DB2Environment Instance

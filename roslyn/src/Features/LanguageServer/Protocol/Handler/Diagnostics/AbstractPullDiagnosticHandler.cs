@@ -46,7 +46,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
     /// </summary>
     /// <typeparam name="TDiagnosticsParams">The LSP input param type</typeparam>
     /// <typeparam name="TReport">The LSP type that is reported via IProgress</typeparam>
-    /// <typeparam name="TReturn">The LSP type that is returned on completion of the request.</typeparam>
+    /// <typeparam name="TReturn">The LSP type that is returned on completion of the
+    // request.</typeparam>
     internal abstract partial class AbstractPullDiagnosticHandler<
         TDiagnosticsParams,
         TReport,
@@ -55,8 +56,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         where TDiagnosticsParams : IPartialResultParams<TReport>
     {
         /// <summary>
-        /// Special value we use to designate workspace diagnostics vs document diagnostics.  Document diagnostics
-        /// should always <see cref="VSInternalDiagnosticReport.Supersedes"/> a workspace diagnostic as the former are 'live'
+        /// Special value we use to designate workspace diagnostics vs document diagnostics.  Document
+        // diagnostics
+        /// should always <see cref="VSInternalDiagnosticReport.Supersedes"/> a workspace diagnostic as the
+        // former are 'live'
         /// while the latter are cached and may be stale.
         /// </summary>
         protected const int WorkspaceDiagnosticIdentifier = 1;
@@ -71,10 +74,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         protected readonly IDiagnosticAnalyzerService DiagnosticAnalyzerService;
 
         /// <summary>
-        /// Cache where we store the data produced by prior requests so that they can be returned if nothing of significance
-        /// changed. The <see cref="VersionStamp"/> is produced by <see cref="Project.GetDependentVersionAsync(CancellationToken)"/> while the
-        /// <see cref="Checksum"/> is produced by <see cref="Project.GetDependentChecksumAsync(CancellationToken)"/>.  The former is faster
-        /// and works well for us in the normal case.  The latter still allows us to reuse diagnostics when changes happen that
+        /// Cache where we store the data produced by prior requests so that they can be returned if nothing
+        // of significance
+        /// changed. The <see cref="VersionStamp"/> is produced by <see
+        // cref="Project.GetDependentVersionAsync(CancellationToken)"/> while the
+        /// <see cref="Checksum"/> is produced by <see
+        // cref="Project.GetDependentChecksumAsync(CancellationToken)"/>.  The former is faster
+        /// and works well for us in the normal case.  The latter still allows us to reuse diagnostics when
+        // changes happen that
         /// update the version stamp but not the content (for example, forking LSP text).
         /// </summary>
         private readonly ConcurrentDictionary<
@@ -104,7 +111,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
         ) => null;
 
         /// <summary>
-        /// Retrieve the previous results we reported.  Used so we can avoid resending data for unchanged files. Also
+        /// Retrieve the previous results we reported.  Used so we can avoid resending data for unchanged
+        // files. Also
         /// used so we can report which documents were removed and can have all their diagnostics cleared.
         /// </summary>
         protected abstract ImmutableArray<PreviousPullResult>? GetPreviousResults(
@@ -197,14 +205,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             // The progress object we will stream reports to.
             using var progress = BufferedProgress.Create(diagnosticsParams.PartialResultToken);
 
-            // Get the set of results the request said were previously reported.  We can use this to determine both
+            // Get the set of results the request said were previously reported.  We can use this to determine
+            // both
             // what to skip, and what files we have to tell the client have been removed.
             var previousResults =
                 GetPreviousResults(diagnosticsParams) ?? ImmutableArray<PreviousPullResult>.Empty;
             context.TraceInformation($"previousResults.Length={previousResults.Length}");
 
-            // Create a mapping from documents to the previous results the client says it has for them.  That way as we
-            // process documents we know if we should tell the client it should stay the same, or we can tell it what
+            // Create a mapping from documents to the previous results the client says it has for them.  That
+            // way as we
+            // process documents we know if we should tell the client it should stay the same, or we can tell it
+            // what
             // the updated diagnostics are.
             var documentToPreviousDiagnosticParams = GetIdToPreviousDiagnosticParams(
                 context,
@@ -212,12 +223,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 out var removedResults
             );
 
-            // First, let the client know if any workspace documents have gone away.  That way it can remove those for
+            // First, let the client know if any workspace documents have gone away.  That way it can remove
+            // those for
             // the user from squiggles or error-list.
             HandleRemovedDocuments(context, removedResults, progress);
 
-            // Next process each file in priority order. Determine if diagnostics are changed or unchanged since the
-            // last time we notified the client.  Report back either to the client so they can update accordingly.
+            // Next process each file in priority order. Determine if diagnostics are changed or unchanged since
+            // the
+            // last time we notified the client.  Report back either to the client so they can update
+            // accordingly.
             var orderedSources = await GetOrderedDiagnosticSourcesAsync(
                     diagnosticsParams,
                     context,
@@ -292,12 +306,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1809058
             context.ClearSolutionContext();
 
-            // Some implementations of the spec will re-open requests as soon as we close them, spamming the server.
-            // In those cases, we wait for the implementation to indicate that changes have occurred, then we close the connection
+            // Some implementations of the spec will re-open requests as soon as we close them, spamming the
+            // server.
+            // In those cases, we wait for the implementation to indicate that changes have occurred, then we
+            // close the connection
             // so that the client asks us again.
             await WaitForChangesAsync(context, cancellationToken).ConfigureAwait(false);
 
-            // If we had a progress object, then we will have been reporting to that.  Otherwise, take what we've been
+            // If we had a progress object, then we will have been reporting to that.  Otherwise, take what
+            // we've been
             // collecting and return that.
             context.TraceInformation($"{this.GetType()} finished getting diagnostics");
             return CreateReturn(progress);
@@ -332,7 +349,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     }
                     else
                     {
-                        // The client previously had a result from us for this document, but we no longer have it in our solution.
+                        // The client previously had a result from us for this document, but we no longer have it in our
+                        // solution.
                         // Record it so we can report to the client that it has been removed.
                         removedDocumentsBuilder.Add(diagnosticParams);
                     }
@@ -482,8 +500,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             if (capabilities.HasVisualStudioLspCapability())
             {
-                // Roslyn produces unnecessary diagnostics by using additional locations, however LSP doesn't support tagging
-                // additional locations separately.  Instead we just create multiple hidden diagnostics for unnecessary squiggling.
+                // Roslyn produces unnecessary diagnostics by using additional locations, however LSP doesn't
+                // support tagging
+                // additional locations separately.  Instead we just create multiple hidden diagnostics for
+                // unnecessary squiggling.
                 using var _ = ArrayBuilder<LSP.Diagnostic>.GetInstance(out var diagnosticsBuilder);
                 diagnosticsBuilder.Add(diagnostic);
                 foreach (var location in unnecessaryLocations)
@@ -567,7 +587,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                         },
                     ];
 
-                    // Defines an identifier used by the client for merging diagnostics across projects. We want diagnostics
+                    // Defines an identifier used by the client for merging diagnostics across projects. We want
+                    // diagnostics
                     // to be merged from separate projects if they have the same code, filepath, range, and message.
                     //
                     // Note: LSP pull diagnostics only operates on unmapped locations.
@@ -589,7 +610,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // We currently do not map diagnostics spans as
                 //   1.  Razor handles span mapping for razor files on their side.
                 //   2.  LSP does not allow us to report document pull diagnostics for a different file path.
-                //   3.  The VS LSP client does not support document pull diagnostics for files outside our content type.
+                //   3.  The VS LSP client does not support document pull diagnostics for files outside our content
+                // type.
                 //   4.  This matches classic behavior where we only squiggle the original location anyway.
 
                 // We also do not adjust the diagnostic locations to ensure they are in bounds because we've
@@ -626,9 +648,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     return true;
                 }
 
-                // Roslyn creates these for example in remove unnecessary imports, see RemoveUnnecessaryImportsConstants.DiagnosticFixableId.
+                // Roslyn creates these for example in remove unnecessary imports, see
+                // RemoveUnnecessaryImportsConstants.DiagnosticFixableId.
                 // These aren't meant to be visible in anyway, so we can safely exclude them.
-                // TODO - We should probably not be creating these as separate diagnostics or have a 'really really' hidden tag.
+                // TODO - We should probably not be creating these as separate diagnostics or have a 'really really'
+                // hidden tag.
                 if (string.IsNullOrEmpty(diagnosticData.Message))
                 {
                     return false;
@@ -641,7 +665,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     return true;
                 }
 
-                // We have a hidden diagnostic that has no fading.  This diagnostic can't be visible so don't send it to the client.
+                // We have a hidden diagnostic that has no fading.  This diagnostic can't be visible so don't send
+                // it to the client.
                 return false;
             }
         }
@@ -676,7 +701,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.
                 DiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
-                // VSCode shows information diagnostics as blue squiggles, and hint diagnostics as 3 dots.  We prefer the latter rendering so we return hint diagnostics in vscode.
+                // VSCode shows information diagnostics as blue squiggles, and hint diagnostics as 3 dots.  We
+                // prefer the latter rendering so we return hint diagnostics in vscode.
                 DiagnosticSeverity.Info => clientCapabilities.HasVisualStudioLspCapability()
                     ? LSP.DiagnosticSeverity.Information
                     : LSP.DiagnosticSeverity.Hint,
@@ -687,7 +713,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
         /// <summary>
         /// If you make change in this method, please also update the corresponding file in
-        /// src\VisualStudio\Xaml\Impl\Implementation\LanguageServer\Handler\Diagnostics\AbstractPullDiagnosticHandler.cs
+        ///
+        // src\VisualStudio\Xaml\Impl\Implementation\LanguageServer\Handler\Diagnostics\AbstractPullDiagnosticHandler.cs
         /// </summary>
         protected static DiagnosticTag[] ConvertTags(
             DiagnosticData diagnosticData,
@@ -711,12 +738,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             if (diagnosticData.CustomTags.Contains(PullDiagnosticConstants.TaskItemCustomTag))
                 result.Add(VSDiagnosticTags.TaskItem);
 
-            // Let the host know that these errors represent potentially stale information from the past that should
+            // Let the host know that these errors represent potentially stale information from the past that
+            // should
             // be superseded by fresher info.
             if (potentialDuplicate)
                 result.Add(VSDiagnosticTags.PotentialDuplicate);
 
-            // Mark this also as a build error.  That way an explicitly kicked off build from a source like CPS can
+            // Mark this also as a build error.  That way an explicitly kicked off build from a source like CPS
+            // can
             // override it.
             if (!isLiveSource)
                 result.Add(VSDiagnosticTags.BuildError);

@@ -53,8 +53,10 @@ namespace System.Security.Cryptography
                 bytesWritten: out bytesWritten
             );
 
-        // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG. Thus, both
-        // array-based APIs invoke this common helper with the "encrypt" parameter determining whether encryption or decryption is done.
+        // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG.
+        // Thus, both
+        // array-based APIs invoke this common helper with the "encrypt" parameter determining whether
+        // encryption or decryption is done.
         private unsafe byte[] EncryptOrDecrypt(
             byte[] data,
             RSAEncryptionPadding padding,
@@ -147,7 +149,8 @@ namespace System.Security.Cryptography
                             {
                                 pszAlgId = namePtr,
 
-                                // It would nice to put randomized data here but RSAEncryptionPadding does not at this point provide support for this.
+                                // It would nice to put randomized data here but RSAEncryptionPadding does not at this point provide
+                                // support for this.
                                 pbLabel = IntPtr.Zero,
                                 cbLabel = 0,
                             };
@@ -170,8 +173,10 @@ namespace System.Security.Cryptography
             }
         }
 
-        // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG. Thus, both
-        // span-based APIs invoke this common helper with the "encrypt" parameter determining whether encryption or decryption is done.
+        // Conveniently, Encrypt() and Decrypt() are identical save for the actual P/Invoke call to CNG.
+        // Thus, both
+        // span-based APIs invoke this common helper with the "encrypt" parameter determining whether
+        // encryption or decryption is done.
         private unsafe bool TryEncryptOrDecrypt(
             ReadOnlySpan<byte> data,
             Span<byte> destination,
@@ -292,7 +297,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // Now that the padding mode and information have been marshaled to their native counterparts, perform the encryption or decryption.
+        // Now that the padding mode and information have been marshaled to their native counterparts,
+        // perform the encryption or decryption.
         private unsafe byte[] EncryptOrDecrypt(
             SafeNCryptKeyHandle key,
             ReadOnlySpan<byte> input,
@@ -368,7 +374,8 @@ namespace System.Security.Cryptography
             return output;
         }
 
-        // Now that the padding mode and information have been marshaled to their native counterparts, perform the encryption or decryption.
+        // Now that the padding mode and information have been marshaled to their native counterparts,
+        // perform the encryption or decryption.
         private static unsafe bool TryEncryptOrDecrypt(
             SafeNCryptKeyHandle key,
             ReadOnlySpan<byte> input,

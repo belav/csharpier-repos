@@ -54,7 +54,8 @@ internal static class WebWorkerEventLoop
     }
 
     /// <summary>
-    ///  Increment the Emscripten keepalive count.  A thread with a positive keepalive can return from its
+    ///  Increment the Emscripten keepalive count.  A thread with a positive keepalive can return from
+    // its
     ///  thread start function or a JS event loop invocation and continue running in the JS event
     ///  loop.
     /// </summary>

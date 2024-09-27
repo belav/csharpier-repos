@@ -270,7 +270,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     );
                     obj.Validate();
 
-                    // Assert numbers are not written as strings - JsonException would be thrown here if written as strings.
+                    // Assert numbers are not written as strings - JsonException would be thrown here if written as
+                    // strings.
                     obj = JsonSerializer.Deserialize<Person>(
                         json,
                         JsonOptions.DefaultSerializerOptions_StrictNumberHandling
@@ -360,7 +361,8 @@ namespace System.Net.Http.Json.Functional.Tests
                     );
                     obj.Validate();
 
-                    // Assert numbers are not written as strings - JsonException would be thrown here if written as strings.
+                    // Assert numbers are not written as strings - JsonException would be thrown here if written as
+                    // strings.
                     obj = JsonSerializer.Deserialize<Person>(
                         json,
                         JsonOptions.DefaultSerializerOptions_StrictNumberHandling

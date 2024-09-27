@@ -18,7 +18,8 @@ namespace System.IO.Ports.Tests
         );
 
         //The buffer length used whe filling the output buffer
-        // This was set to 8, but the TX Fifo on a UART can swallow that completely, so you can't then tell if the data has been sent or not.
+        // This was set to 8, but the TX Fifo on a UART can swallow that completely, so you can't then tell
+        // if the data has been sent or not.
         private static readonly int s_DEFAULT_BUFFER_LENGTH = TCSupport.MinimumBlockingByteCount;
 
         #region Test Cases

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Design;
 ///     Helper for generating C# code.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface ICSharpHelper
@@ -18,9 +19,11 @@ public interface ICSharpHelper
     ///     Generates a method call code fragment.
     /// </summary>
     /// <param name="fragment">The method call.</param>
-    /// <param name="instanceIdentifier">An identifier on which the method call will be generated.</param>
+    /// <param name="instanceIdentifier">An identifier on which the method call will be
+    // generated.</param>
     /// <param name="typeQualified">
-    ///     <see langword="true" /> if the method call should be type-qualified, <see langword="false" /> for instance/extension syntax.
+    ///     <see langword="true" /> if the method call should be type-qualified, <see langword="false"
+    // /> for instance/extension syntax.
     /// </param>
     /// <returns>The fragment.</returns>
     string Fragment(
@@ -340,13 +343,18 @@ public interface ICSharpHelper
     ///     Translates a node representing a statement into source code that would produce it.
     /// </summary>
     /// <param name="node">The node to be translated.</param>
-    /// <param name="collectedNamespaces">Any namespaces required by the translated code will be added to this set.</param>
+    /// <param name="collectedNamespaces">Any namespaces required by the translated code will be added
+    // to this set.</param>
     /// <returns>Source code that would produce <paramref name="node" />.</returns>
     /// <remarks>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </remarks>
     [EntityFrameworkInternal]
     string Statement(Expression node, ISet<string> collectedNamespaces);
@@ -355,13 +363,18 @@ public interface ICSharpHelper
     ///     Translates a node representing an expression into source code that would produce it.
     /// </summary>
     /// <param name="node">The node to be translated.</param>
-    /// <param name="collectedNamespaces">Any namespaces required by the translated code will be added to this set.</param>
+    /// <param name="collectedNamespaces">Any namespaces required by the translated code will be added
+    // to this set.</param>
     /// <returns>Source code that would produce  <paramref name="node" />.</returns>
     /// <remarks>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </remarks>
     [EntityFrameworkInternal]
     string Expression(Expression node, ISet<string> collectedNamespaces);

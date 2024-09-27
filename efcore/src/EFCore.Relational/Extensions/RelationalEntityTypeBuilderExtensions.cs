@@ -11,16 +11,19 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Relational database specific extension methods for <see cref="EntityTypeBuilder" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public static partial class RelationalEntityTypeBuilderExtensions
 {
     /// <summary>
-    ///     Configures TPC as the mapping strategy for the derived types. Each type will be mapped to a different database object.
+    ///     Configures TPC as the mapping strategy for the derived types. Each type will be mapped to a
+    // different database object.
     ///     All properties will be mapped to columns on the corresponding object.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -32,11 +35,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     }
 
     /// <summary>
-    ///     Configures TPH as the mapping strategy for the derived types. All types will be mapped to the same database object.
+    ///     Configures TPH as the mapping strategy for the derived types. All types will be mapped to
+    // the same database object.
     ///     This is the default mapping strategy.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -48,11 +53,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     }
 
     /// <summary>
-    ///     Configures TPT as the mapping strategy for the derived types. Each type will be mapped to a different database object.
+    ///     Configures TPT as the mapping strategy for the derived types. Each type will be mapped to a
+    // different database object.
     ///     Only the declared properties will be mapped to columns on the corresponding object.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -64,11 +71,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     }
 
     /// <summary>
-    ///     Configures TPC as the mapping strategy for the derived types. Each type will be mapped to a different database object.
+    ///     Configures TPC as the mapping strategy for the derived types. Each type will be mapped to a
+    // different database object.
     ///     All properties will be mapped to columns on the corresponding object.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -79,11 +88,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTpcMappingStrategy();
 
     /// <summary>
-    ///     Configures TPH as the mapping strategy for the derived types. All types will be mapped to the same database object.
+    ///     Configures TPH as the mapping strategy for the derived types. All types will be mapped to
+    // the same database object.
     ///     This is the default mapping strategy.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -94,11 +105,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
         (EntityTypeBuilder<TEntity>)((EntityTypeBuilder)entityTypeBuilder).UseTphMappingStrategy();
 
     /// <summary>
-    ///     Configures TPT as the mapping strategy for the derived types. Each type will be mapped to a different database object.
+    ///     Configures TPT as the mapping strategy for the derived types. Each type will be mapped to a
+    // different database object.
     ///     Only the declared properties will be mapped to columns on the corresponding object.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
@@ -112,11 +125,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Sets the hierarchy mapping strategy.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-inheritance">Entity type hierarchy mapping</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="strategy">The mapping strategy for the derived types.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -141,11 +156,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="strategy">The mapping strategy for the derived types.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanSetMappingStrategy(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -162,11 +179,14 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Mark the table that this entity type is mapped to as excluded from migrations.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by
+    // migrations.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -195,15 +215,19 @@ public static partial class RelationalEntityTypeBuilderExtensions
     }
 
     /// <summary>
-    ///     Returns a value indicating whether the table that this entity type is mapped to can be excluded from migrations
+    ///     Returns a value indicating whether the table that this entity type is mapped to can be
+    // excluded from migrations
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+    // information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by migrations.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="excludedFromMigrations">A value indicating whether the table should be managed by
+    // migrations.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanExcludeTableFromMigrations(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -220,10 +244,12 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a SQL string used to provide data for the entity type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="query">The SQL query that will provide the underlying data for the entity type.</param>
+    /// <param name="query">The SQL query that will provide the underlying data for the entity
+    // type.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder ToSqlQuery(
         this EntityTypeBuilder entityTypeBuilder,
@@ -241,10 +267,12 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a SQL string used to provide data for the entity type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="query">The SQL query that will provide the underlying data for the entity type.</param>
+    /// <param name="query">The SQL query that will provide the underlying data for the entity
+    // type.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static EntityTypeBuilder<TEntity> ToSqlQuery<TEntity>(
         this EntityTypeBuilder<TEntity> entityTypeBuilder,
@@ -257,13 +285,17 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a SQL string used to provide data for the entity type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="name">The SQL query that will provide the underlying data for the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="name">The SQL query that will provide the underlying data for the entity
+    // type.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
-    ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
+    ///     The same builder instance if the configuration was applied, <see langword="null" />
+    // otherwise.
     /// </returns>
     public static IConventionEntityTypeBuilder? ToSqlQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -287,11 +319,14 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
-    /// <param name="name">The SQL query that will provide the underlying data for the entity type.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="name">The SQL query that will provide the underlying data for the entity
+    // type.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanSetSqlQuery(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -312,7 +347,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
@@ -333,7 +369,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
@@ -352,7 +389,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
@@ -381,7 +419,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
@@ -410,7 +449,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
@@ -427,7 +467,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
@@ -444,7 +485,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
@@ -475,7 +517,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
@@ -506,7 +549,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
@@ -527,7 +571,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
@@ -546,7 +591,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
@@ -575,7 +621,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
@@ -604,7 +651,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -627,7 +675,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -650,7 +699,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -688,7 +738,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -778,11 +829,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -817,11 +870,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures the function that the entity type maps to when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -854,11 +909,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the function.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanSetFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -880,11 +937,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="function">The method representing the function.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanSetFunction(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -900,7 +959,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
     /// <param name="name">The name of the check constraint.</param>
@@ -927,7 +987,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
     /// <param name="name">The name of the check constraint.</param>
@@ -958,7 +1019,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
@@ -979,7 +1041,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
@@ -1002,7 +1065,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
     /// <param name="name">The name of the check constraint.</param>
@@ -1029,7 +1093,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -1055,7 +1120,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="ownedNavigationBuilder">The navigation builder for the owned type.</param>
     /// <param name="name">The name of the check constraint.</param>
@@ -1088,7 +1154,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
     /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
@@ -1121,12 +1188,14 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a database check constraint when targeting a relational database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
     /// <param name="name">The name of the check constraint.</param>
     /// <param name="sql">The logical constraint sql used in the check constraint.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the check constraint was configured,
     ///     <see langword="null" /> otherwise.
@@ -1152,12 +1221,14 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Returns a value indicating whether the check constraint can be configured.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check constraints</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-check-constraints">Database check
+    // constraints</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">The name of the check constraint.</param>
     /// <param name="sql">The logical constraint sql used in the check constraint.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanHaveCheckConstraint(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -1176,7 +1247,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a comment to be applied to the table
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="comment">The comment for the table.</param>
@@ -1195,7 +1267,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a comment to be applied to the table
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <typeparam name="TEntity">The entity type being configured.</typeparam>
     /// <param name="entityTypeBuilder">The entity type builder.</param>
@@ -1213,11 +1286,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     Configures a comment to be applied to the table
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="comment">The comment for the table.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -1242,11 +1317,13 @@ public static partial class RelationalEntityTypeBuilderExtensions
     ///     using the specified configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+    // relationships</see> for more information and examples.
     /// </remarks>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="comment">The comment for the table.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns><see langword="true" /> if the configuration can be applied.</returns>
     public static bool CanSetComment(
         this IConventionEntityTypeBuilder entityTypeBuilder,
@@ -1265,7 +1342,8 @@ public static partial class RelationalEntityTypeBuilderExtensions
     /// </summary>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">JSON property name to be used.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
@@ -1287,12 +1365,15 @@ public static partial class RelationalEntityTypeBuilderExtensions
     }
 
     /// <summary>
-    ///     Returns a value indicating whether the given value can be used as a JSON property name for the entity type.
+    ///     Returns a value indicating whether the given value can be used as a JSON property name for
+    // the entity type.
     /// </summary>
     /// <param name="entityTypeBuilder">The builder for the entity type being configured.</param>
     /// <param name="name">JSON property name to be used.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    /// <returns><see langword="true" /> if the given value can be set as JSON property name for this entity type.</returns>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
+    /// <returns><see langword="true" /> if the given value can be set as JSON property name for this
+    // entity type.</returns>
     public static bool CanSetJsonPropertyName(
         this IConventionEntityTypeBuilder entityTypeBuilder,
         string? name,

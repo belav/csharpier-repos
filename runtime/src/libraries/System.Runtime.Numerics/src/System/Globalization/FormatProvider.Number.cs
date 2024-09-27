@@ -284,15 +284,22 @@ namespace System.Globalization
         {
             internal const int DECIMAL_PRECISION = 29; // Decimal.DecCalc also uses this value
 
+            //
             // **********************************************************************************************************
             //
-            // The remaining code in this module is an almost direct translation from the original unmanaged version in
-            // the CLR. The code uses NumberBuffer directly instead of an analog of the NUMBER unmanaged data structure
-            // but this causes next to no differences since we've modified NumberBuffer to take account of the changes (it
-            // has an inline array of digits and no need of a pack operation to prepare for use by the "unmanaged" code).
+            // The remaining code in this module is an almost direct translation from the original unmanaged
+            // version in
+            // the CLR. The code uses NumberBuffer directly instead of an analog of the NUMBER unmanaged data
+            // structure
+            // but this causes next to no differences since we've modified NumberBuffer to take account of the
+            // changes (it
+            // has an inline array of digits and no need of a pack operation to prepare for use by the
+            // "unmanaged" code).
             //
-            // Some minor cleanup has been done (e.g. taking advantage of StringBuilder instead of having to precompute
-            // string buffer sizes) but there's still plenty of opportunity to further C#'ize this code and potentially
+            // Some minor cleanup has been done (e.g. taking advantage of StringBuilder instead of having to
+            // precompute
+            // string buffer sizes) but there's still plenty of opportunity to further C#'ize this code and
+            // potentially
             // better unify it with the code above.
             //
 
@@ -549,13 +556,15 @@ namespace System.Globalization
                             if (isDecimal && (nMaxDigits == -1))
                             {
                                 // Default to 29 digits precision only for G formatting without a precision specifier
-                                // This ensures that the PAL code pads out to the correct place even when we use the default precision
+                                // This ensures that the PAL code pads out to the correct place even when we use the default
+                                // precision
                                 nMaxDigits = nMinDigits = DECIMAL_PRECISION;
                                 enableRounding = false; // Turn off rounding for ECMA compliance to output trailing 0's after decimal as significant
                             }
                             else
                             {
-                                // This ensures that the PAL code pads out to the correct place even when we use the default precision
+                                // This ensures that the PAL code pads out to the correct place even when we use the default
+                                // precision
                                 nMaxDigits = nMinDigits = number.precision;
                             }
                         }
@@ -1261,9 +1270,12 @@ namespace System.Globalization
                 src = section;
 
                 // Adjust can be negative, so we make this an int instead of an unsigned int.
-                // Adjust represents the number of characters over the formatting e.g. format string is "0000" and you are trying to
-                // format 100000 (6 digits). Means adjust will be 2. On the other hand if you are trying to format 10 adjust will be
-                // -2 and we'll need to fixup these digits with 0 padding if we have 0 formatting as in this example.
+                // Adjust represents the number of characters over the formatting e.g. format string is "0000" and
+                // you are trying to
+                // format 100000 (6 digits). Means adjust will be 2. On the other hand if you are trying to format
+                // 10 adjust will be
+                // -2 and we'll need to fixup these digits with 0 padding if we have 0 formatting as in this
+                // example.
                 Span<int> thousandsSepPos = stackalloc int[4];
                 int thousandsSepCtr = -1;
 
@@ -1272,9 +1284,12 @@ namespace System.Globalization
                     // We need to precompute this outside the number formatting loop
                     if (info.NumberGroupSeparator.Length > 0)
                     {
-                        // We need this array to figure out where to insert the thousands separator. We would have to traverse the string
-                        // backwards. PIC formatting always traverses forwards. These indices are precomputed to tell us where to insert
-                        // the thousands separator so we can get away with traversing forwards. Note we only have to compute up to digPos.
+                        // We need this array to figure out where to insert the thousands separator. We would have to
+                        // traverse the string
+                        // backwards. PIC formatting always traverses forwards. These indices are precomputed to tell us
+                        // where to insert
+                        // the thousands separator so we can get away with traversing forwards. Note we only have to compute
+                        // up to digPos.
                         // The max is not bound since you can have formatting strings of the form "000,000..", and this
                         // should handle that case too.
 

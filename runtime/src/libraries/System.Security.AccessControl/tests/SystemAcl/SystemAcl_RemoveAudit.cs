@@ -565,7 +565,8 @@ namespace System.Security.AccessControl.Tests
             propagationFlags = 3;
             removePossible = true;
             rawAcl = new RawAcl(0, 1);
-            //79 = AceFlags.SuccessfulAccess | AceFlags.ObjectInherit |AceFlags.ContainerInherit | AceFlags.NoPropagateInherit | AceFlags.InheritOnly
+            //79 = AceFlags.SuccessfulAccess | AceFlags.ObjectInherit |AceFlags.ContainerInherit |
+            // AceFlags.NoPropagateInherit | AceFlags.InheritOnly
             gAce = new CommonAce(
                 (AceFlags)79,
                 AceQualifier.SystemAudit,

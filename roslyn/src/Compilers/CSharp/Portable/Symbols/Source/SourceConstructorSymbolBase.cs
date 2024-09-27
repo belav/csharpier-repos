@@ -44,8 +44,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var binderFactory = this.DeclaringCompilation.GetBinderFactory(syntax.SyntaxTree);
             ParameterListSyntax parameterList = GetParameterList();
 
-            // NOTE: if we asked for the binder for the body of the constructor, we'd risk a stack overflow because
-            // we might still be constructing the member list of the containing type.  However, getting the binder
+            // NOTE: if we asked for the binder for the body of the constructor, we'd risk a stack overflow
+            // because
+            // we might still be constructing the member list of the containing type.  However, getting the
+            // binder
             // for the parameters should be safe.
             var bodyBinder = binderFactory
                 .GetBinder(parameterList, syntax, this)
@@ -252,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (position == ctorSyntax.SpanStart)
                 {
                     // Use a constant that is distinct from any other syntax offset.
-                    // -1 works since a field initializer and a constructor declaration header can't squeeze into a single character.
+                    // -1 works since a field initializer and a constructor declaration header can't squeeze into a
+                    // single character.
                     return -1;
                 }
             }

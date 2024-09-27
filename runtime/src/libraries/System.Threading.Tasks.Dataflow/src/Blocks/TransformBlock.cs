@@ -17,9 +17,12 @@ using System.Threading.Tasks.Dataflow.Internal;
 
 namespace System.Threading.Tasks.Dataflow
 {
-    /// <summary>Provides a dataflow block that invokes a provided <see cref="System.Func{TInput,TOutput}"/> delegate for every data element received.</summary>
-    /// <typeparam name="TInput">Specifies the type of data received and operated on by this <see cref="TransformBlock{TInput,TOutput}"/>.</typeparam>
-    /// <typeparam name="TOutput">Specifies the type of data output by this <see cref="TransformBlock{TInput,TOutput}"/>.</typeparam>
+    /// <summary>Provides a dataflow block that invokes a provided <see
+    // cref="System.Func{TInput,TOutput}"/> delegate for every data element received.</summary>
+    /// <typeparam name="TInput">Specifies the type of data received and operated on by this <see
+    // cref="TransformBlock{TInput,TOutput}"/>.</typeparam>
+    /// <typeparam name="TOutput">Specifies the type of data output by this <see
+    // cref="TransformBlock{TInput,TOutput}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(TransformBlock<,>.DebugView))]
     public sealed class TransformBlock<TInput, TOutput>
@@ -30,18 +33,24 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>The target side.</summary>
         private readonly TargetCore<TInput> _target;
 
-        /// <summary>Buffer used to reorder outputs that may have completed out-of-order between the target half and the source half.</summary>
+        /// <summary>Buffer used to reorder outputs that may have completed out-of-order between the target
+        // half and the source half.</summary>
         private readonly ReorderingBuffer<TOutput>? _reorderingBuffer;
 
         /// <summary>The source side.</summary>
         private readonly SourceCore<TOutput> _source;
 
-        /// <summary>Gets the object to use for writing to the source when multiple threads may be involved.</summary>
+        /// <summary>Gets the object to use for writing to the source when multiple threads may be
+        // involved.</summary>
         /// <remarks>
-        /// If a reordering buffer is used, it is safe for multiple threads to write to concurrently and handles safe
-        /// access to the source. If there's no reordering buffer because no parallelism is used, then only one thread at
-        /// a time will try to access the source, anyway.  But, if there's no reordering buffer and parallelism is being
-        /// employed, then multiple threads may try to access the source concurrently, in which case we need to manually
+        /// If a reordering buffer is used, it is safe for multiple threads to write to concurrently and
+        // handles safe
+        /// access to the source. If there's no reordering buffer because no parallelism is used, then only
+        // one thread at
+        /// a time will try to access the source, anyway.  But, if there's no reordering buffer and
+        // parallelism is being
+        /// employed, then multiple threads may try to access the source concurrently, in which case we need
+        // to manually
         /// synchronize all such access, and this lock is used for that purpose.
         /// </remarks>
         private object ParallelSourceLock
@@ -49,40 +58,52 @@ namespace System.Threading.Tasks.Dataflow
             get { return _source; }
         }
 
-        /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>.</summary>
+        /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see
+        // cref="System.Func{TInput,TOutput}"/>.</summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing
+        // in Visual Basic).</exception>
         public TransformBlock(Func<TInput, TOutput> transform)
             : this(transform, null, ExecutionDataflowBlockOptions.Default) { }
 
         /// <summary>
-        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/> and
+        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see
+        // cref="System.Func{TInput,TOutput}"/> and
         /// <see cref="ExecutionDataflowBlockOptions"/>.
         /// </summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformBlock{TInput,TOutput}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="TransformBlock{TInput,TOutput}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing
+        // in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         public TransformBlock(
             Func<TInput, TOutput> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
         )
             : this(transform, null, dataflowBlockOptions) { }
 
-        /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>.</summary>
+        /// <summary>Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see
+        // cref="System.Func{TInput,TOutput}"/>.</summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing
+        // in Visual Basic).</exception>
         public TransformBlock(Func<TInput, Task<TOutput>> transform)
             : this(null, transform, ExecutionDataflowBlockOptions.Default) { }
 
         /// <summary>
-        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>
+        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see
+        // cref="System.Func{TInput,TOutput}"/>
         /// and <see cref="ExecutionDataflowBlockOptions"/>.
         /// </summary>
         /// <param name="transform">The function to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformBlock{TInput,TOutput}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="TransformBlock{TInput,TOutput}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="transform"/> is null (Nothing
+        // in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         public TransformBlock(
             Func<TInput, Task<TOutput>> transform,
             ExecutionDataflowBlockOptions dataflowBlockOptions
@@ -90,14 +111,20 @@ namespace System.Threading.Tasks.Dataflow
             : this(null, transform, dataflowBlockOptions) { }
 
         /// <summary>
-        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see cref="System.Func{TInput,TOutput}"/>
+        /// Initializes the <see cref="TransformBlock{TInput,TOutput}"/> with the specified <see
+        // cref="System.Func{TInput,TOutput}"/>
         /// and <see cref="DataflowBlockOptions"/>.
         /// </summary>
-        /// <param name="transformSync">The synchronous function to invoke with each data element received.</param>
-        /// <param name="transformAsync">The asynchronous function to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="TransformBlock{TInput,TOutput}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="transformSync"/> and <paramref name="transformAsync"/> are both null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="transformSync">The synchronous function to invoke with each data element
+        // received.</param>
+        /// <param name="transformAsync">The asynchronous function to invoke with each data element
+        // received.</param>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="TransformBlock{TInput,TOutput}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="transformSync"/> and
+        // <paramref name="transformAsync"/> are both null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         private TransformBlock(
             Func<TInput, TOutput>? transformSync,
             Func<TInput, Task<TOutput>>? transformAsync,
@@ -142,7 +169,8 @@ namespace System.Threading.Tasks.Dataflow
                 onItemsRemoved
             );
 
-            // If parallelism is employed, we will need to support reordering messages that complete out-of-order.
+            // If parallelism is employed, we will need to support reordering messages that complete
+            // out-of-order.
             // However, a developer can override this with EnsureOrdered == false.
             if (
                 dataflowBlockOptions.SupportsParallelExecution && dataflowBlockOptions.EnsureOrdered
@@ -199,7 +227,8 @@ namespace System.Threading.Tasks.Dataflow
 
             // It is possible that the source half may fault on its own, e.g. due to a task scheduler exception.
             // In those cases we need to fault the target half to drop its buffered messages and to release its
-            // reservations. This should not create an infinite loop, because all our implementations are designed
+            // reservations. This should not create an infinite loop, because all our implementations are
+            // designed
             // to handle multiple completion requests and to carry over only one.
             _source.Completion.ContinueWith(
                 static (completed, state) =>
@@ -235,7 +264,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Processes the message with a user-provided transform function that returns a TOutput.</summary>
+        /// <summary>Processes the message with a user-provided transform function that returns a
+        // TOutput.</summary>
         /// <param name="transform">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
         private void ProcessMessage(
@@ -293,7 +323,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Processes the message with a user-provided transform function that returns a task of TOutput.</summary>
+        /// <summary>Processes the message with a user-provided transform function that returns a task of
+        // TOutput.</summary>
         /// <param name="transform">The transform function to use to process the message.</param>
         /// <param name="messageWithId">The message to be processed.</param>
         private void ProcessMessageWithTask(
@@ -359,7 +390,8 @@ namespace System.Threading.Tasks.Dataflow
         }
 
         /// <summary>Completes the processing of an asynchronous message.</summary>
-        /// <param name="completed">The completed task storing the output data generated for an input message.</param>
+        /// <param name="completed">The completed task storing the output data generated for an input
+        // message.</param>
         /// <param name="messageWithId">The originating message</param>
         private void AsyncCompleteProcessMessageWithTask(
             Task<TOutput> completed,
@@ -400,8 +432,10 @@ namespace System.Threading.Tasks.Dataflow
             }
 
             // Adjust the bounding count if necessary (we only need to decrement it for faulting
-            // and cancellation, since in the case of success we still have an item that's now in the output buffer).
-            // Even though this is more costly (again, only in the non-success case, we do this before we store the
+            // and cancellation, since in the case of success we still have an item that's now in the output
+            // buffer).
+            // Even though this is more costly (again, only in the non-success case, we do this before we store
+            // the
             // message, so that if there's a race to remove the element from the source buffer, the count is
             // appropriately incremented before it's decremented.
             if (!gotOutputItem && isBounded)
@@ -440,13 +474,15 @@ namespace System.Threading.Tasks.Dataflow
             _target.SignalOneAsyncMessageCompleted();
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
         public void Complete()
         {
             _target.Complete(exception: null, dropPendingMessages: false);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
             if (exception is null)
@@ -457,43 +493,50 @@ namespace System.Threading.Tasks.Dataflow
             _target.Complete(exception, dropPendingMessages: true);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
         public IDisposable LinkTo(ITargetBlock<TOutput> target, DataflowLinkOptions linkOptions)
         {
             return _source.LinkTo(target, linkOptions);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="TryReceive"]/*' />
         public bool TryReceive(Predicate<TOutput>? filter, [MaybeNullWhen(false)] out TOutput item)
         {
             return _source.TryReceive(filter, out item);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="TryReceiveAll"]/*' />
         public bool TryReceiveAll([NotNullWhen(true)] out IList<TOutput>? items)
         {
             return _source.TryReceiveAll(out items);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
         public Task Completion
         {
             get { return _source.Completion; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
         public int InputCount
         {
             get { return _target.InputCount; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="OutputCount"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="OutputCount"]/*' />
         public int OutputCount
         {
             get { return _source.OutputCount; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
         DataflowMessageStatus ITargetBlock<TInput>.OfferMessage(
             DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -504,7 +547,8 @@ namespace System.Threading.Tasks.Dataflow
             return _target.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
         TOutput? ISourceBlock<TOutput>.ConsumeMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target,
@@ -514,7 +558,8 @@ namespace System.Threading.Tasks.Dataflow
             return _source.ConsumeMessage(messageHeader, target, out messageConsumed);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
         bool ISourceBlock<TOutput>.ReserveMessage(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
@@ -523,7 +568,8 @@ namespace System.Threading.Tasks.Dataflow
             return _source.ReserveMessage(messageHeader, target);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
         void ISourceBlock<TOutput>.ReleaseReservation(
             DataflowMessageHeader messageHeader,
             ITargetBlock<TOutput> target
@@ -532,19 +578,22 @@ namespace System.Threading.Tasks.Dataflow
             _source.ReleaseReservation(messageHeader, target);
         }
 
-        /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
+        /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the
+        // debugger as it avoids taking necessary locks.</summary>
         private int InputCountForDebugger
         {
             get { return _target.GetDebuggingInformation().InputCount; }
         }
 
-        /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the debugger as it avoids taking necessary locks.</summary>
+        /// <summary>Gets the number of messages waiting to be processed.  This must only be used from the
+        // debugger as it avoids taking necessary locks.</summary>
         private int OutputCountForDebugger
         {
             get { return _source.GetDebuggingInformation().OutputCount; }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
         public override string ToString()
         {
             return Common.GetNameForDebugger(this, _source.DataflowBlockOptions);

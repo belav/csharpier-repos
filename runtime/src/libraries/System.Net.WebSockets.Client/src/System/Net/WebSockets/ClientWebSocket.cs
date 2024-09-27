@@ -11,7 +11,8 @@ namespace System.Net.WebSockets
 {
     public sealed partial class ClientWebSocket : WebSocket
     {
-        /// <summary>This is really an InternalState value, but Interlocked doesn't support operations on values of enum types.</summary>
+        /// <summary>This is really an InternalState value, but Interlocked doesn't support operations on
+        // values of enum types.</summary>
         private int _state;
         private WebSocketHandle? _innerWebSocket;
 
@@ -55,13 +56,16 @@ namespace System.Net.WebSockets
         }
 
         /// <summary>
-        /// Gets the upgrade response status code if <see cref="ClientWebSocketOptions.CollectHttpResponseDetails" /> is set.
+        /// Gets the upgrade response status code if <see
+        // cref="ClientWebSocketOptions.CollectHttpResponseDetails" /> is set.
         /// </summary>
         public System.Net.HttpStatusCode HttpStatusCode => _innerWebSocket?.HttpStatusCode ?? 0;
 
         /// <summary>
-        /// Gets the upgrade response headers if <see cref="ClientWebSocketOptions.CollectHttpResponseDetails" /> is set.
-        /// The setter may be used to reduce the memory usage of an active WebSocket connection once headers are no longer needed.
+        /// Gets the upgrade response headers if <see
+        // cref="ClientWebSocketOptions.CollectHttpResponseDetails" /> is set.
+        /// The setter may be used to reduce the memory usage of an active WebSocket connection once headers
+        // are no longer needed.
         /// </summary>
         public IReadOnlyDictionary<string, IEnumerable<string>>? HttpResponseHeaders
         {
@@ -79,7 +83,8 @@ namespace System.Net.WebSockets
         /// Connects to a WebSocket server as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI of the WebSocket server to connect to.</param>
-        /// <param name="cancellationToken">A cancellation token used to propagate notification that the operation should be canceled.</param>
+        /// <param name="cancellationToken">A cancellation token used to propagate notification that the
+        // operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         public Task ConnectAsync(Uri uri, CancellationToken cancellationToken)
         {
@@ -90,8 +95,10 @@ namespace System.Net.WebSockets
         /// Connects to a WebSocket server as an asynchronous operation.
         /// </summary>
         /// <param name="uri">The URI of the WebSocket server to connect to.</param>
-        /// <param name="invoker">The <see cref="HttpMessageInvoker" /> instance to use for connecting.</param>
-        /// <param name="cancellationToken">A cancellation token used to propagate notification that the operation should be canceled.</param>
+        /// <param name="invoker">The <see cref="HttpMessageInvoker" /> instance to use for
+        // connecting.</param>
+        /// <param name="cancellationToken">A cancellation token used to propagate notification that the
+        // operation should be canceled.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
         public Task ConnectAsync(
             Uri uri,

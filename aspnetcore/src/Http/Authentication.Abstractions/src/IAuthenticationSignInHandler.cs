@@ -14,7 +14,8 @@ public interface IAuthenticationSignInHandler : IAuthenticationSignOutHandler
     /// Handle sign in.
     /// </summary>
     /// <param name="user">The <see cref="ClaimsPrincipal"/> user.</param>
-    /// <param name="properties">The <see cref="AuthenticationProperties"/> that contains the extra meta-data arriving with the authentication.</param>
+    /// <param name="properties">The <see cref="AuthenticationProperties"/> that contains the extra
+    // meta-data arriving with the authentication.</param>
     /// <returns>A task.</returns>
     Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties);
 }

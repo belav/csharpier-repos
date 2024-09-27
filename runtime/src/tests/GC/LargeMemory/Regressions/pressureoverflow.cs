@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* NAME: PressureOverflow
- * DATE: 2004-03-22
- */
+* DATE: 2004-03-22
+*/
 
 using System;
 

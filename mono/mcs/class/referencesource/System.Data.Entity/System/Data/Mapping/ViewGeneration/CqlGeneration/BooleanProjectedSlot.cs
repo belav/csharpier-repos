@@ -24,7 +24,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
         #region Constructor
         /// <summary>
         /// Creates a boolean slot for expression that comes from originalCellNum, i.e.,
-        /// the value of the slot is <paramref name="expr"/> and the name is "_from{<paramref name="originalCellNum"/>}", e.g., _from2
+        /// the value of the slot is <paramref name="expr"/> and the name is "_from{<paramref
+        // name="originalCellNum"/>}", e.g., _from2
         /// </summary>
         internal BooleanProjectedSlot(
             BoolExpression expr,
@@ -81,7 +82,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             }
             else
             {
-                // Produce "CASE WHEN boolExpr THEN True ELSE False END" in order to enforce the two-state boolean logic:
+                // Produce "CASE WHEN boolExpr THEN True ELSE False END" in order to enforce the two-state boolean
+                // logic:
                 // if boolExpr returns the boolean Unknown, it gets converted to boolean False.
                 builder.Append("CASE WHEN ");
                 m_expr.AsEsql(builder, blockAlias);
@@ -98,7 +100,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
             }
             else
             {
-                // Produce "CASE WHEN boolExpr THEN True ELSE False END" in order to enforce the two-state boolean logic:
+                // Produce "CASE WHEN boolExpr THEN True ELSE False END" in order to enforce the two-state boolean
+                // logic:
                 // if boolExpr returns the boolean Unknown, it gets converted to boolean False.
                 return DbExpressionBuilder.Case(
                     new DbExpression[] { m_expr.AsCqt(row) },

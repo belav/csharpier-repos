@@ -42,47 +42,48 @@ using System.Xml;
 #endif
 namespace System.Diagnostics
 {
-    /*
-        // It handles following elements in <system.diagnostics> :
-        //	- <sharedListeners> [2.0]
-        //	- <sources>
-        //		- <source>
-        //			- <listeners> (collection)
-        //	- <switches>
-        //		- <add name=string value=string />
-        //	- <trace autoflush=bool indentsize=int useGlobalLock=bool>
-        //		- <listeners>
-        internal sealed class DiagnosticsConfiguration
-        {
-    #if NO_LOCK_FREE
-            private static object lock_ = new object();
-    #endif
-            private static object settings;
-    
-            public static IDictionary Settings {
-                get {
-    #if !NO_LOCK_FREE
-                    if (settings == null) {
-                        object s = ConfigurationSettings.GetConfig ("system.diagnostics");
-                        if (s == null)
-                            throw new Exception ("INTERNAL configuration error: failed to get configuration 'system.diagnostics'");
-                        Thread.MemoryBarrier ();
-                        while (Interlocked.CompareExchange (ref settings, s, null) == null) {
-                            // do nothing; we're just setting settings.
-                        }
-                        Thread.MemoryBarrier ();
-                    }
-    #else
-                    lock (lock_) {
-                        if (settings == null)
-                            settings = ConfigurationSettings.GetConfig ("system.diagnostics");
-                    }
-    #endif
-                    return (IDictionary) settings;
-                }
-            }
-        }
-    */
+/*
+// It handles following elements in <system.diagnostics> :
+//	- <sharedListeners> [2.0]
+//	- <sources>
+//		- <source>
+//			- <listeners> (collection)
+//	- <switches>
+//		- <add name=string value=string />
+//	- <trace autoflush=bool indentsize=int useGlobalLock=bool>
+//		- <listeners>
+internal sealed class DiagnosticsConfiguration
+{
+#if NO_LOCK_FREE
+private static object lock_ = new object();
+#endif
+private static object settings;
+
+public static IDictionary Settings {
+get {
+#if !NO_LOCK_FREE
+if (settings == null) {
+object s = ConfigurationSettings.GetConfig ("system.diagnostics");
+if (s == null)
+throw new Exception ("INTERNAL configuration error: failed to get configuration
+'system.diagnostics'");
+Thread.MemoryBarrier ();
+while (Interlocked.CompareExchange (ref settings, s, null) == null) {
+// do nothing; we're just setting settings.
+}
+Thread.MemoryBarrier ();
+}
+#else
+lock (lock_) {
+if (settings == null)
+settings = ConfigurationSettings.GetConfig ("system.diagnostics");
+}
+#endif
+return (IDictionary) settings;
+}
+}
+}
+*/
 
 #if (XML_DEP)
     [Obsolete("This class is obsoleted")]
@@ -435,7 +436,8 @@ namespace System.Diagnostics
         }
 
         // only defines "add" and "remove", but "clear" also works
-        // for add, "name" is required; initializeData is optional; "type" is required in 1.x, optional in 2.0.
+        // for add, "name" is required; initializeData is optional; "type" is required in 1.x, optional in
+        // 2.0.
         private void AddTraceListeners(
             IDictionary d,
             XmlNode listenersNode,

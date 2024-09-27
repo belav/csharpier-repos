@@ -111,7 +111,8 @@ class C
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock
+                    // statement
                     Diagnostic(ErrorCode.ERR_LockNeedsReference, "x => x")
                         .WithArguments("lambda expression")
                 );
@@ -187,11 +188,17 @@ class C
                 .VerifyDiagnostics(
                     // (16,14): error CS0631: ref and out are not valid in this context
                     Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
-                    // (9,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (9,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (10,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (10,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (11,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (11,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
                 );
         }
@@ -222,11 +229,17 @@ class C
                 .VerifyDiagnostics(
                     // (15,14): error CS0631: ref and out are not valid in this context
                     Diagnostic(ErrorCode.ERR_IllegalRefParam, "out"),
-                    // (8,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (8,13): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (9,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (9,21): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c"),
-                    // (10,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a using or lock statement. The Dispose call or unlocking will happen on the original value of the local.
+                    // (10,22): warning CS0728: Possibly incorrect assignment to local 'c' which is the argument to a
+                    // using or lock statement. The Dispose call or unlocking will happen on the original value of the
+                    // local.
                     Diagnostic(ErrorCode.WRN_AssignmentToLockOrDispose, "c").WithArguments("c")
                 );
         }
@@ -251,7 +264,8 @@ class Program
                     // (7,15): error CS0185: 'int' is not a reference type as required by the lock statement
                     //         lock (x)
                     Diagnostic(ErrorCode.ERR_LockNeedsReference, "x").WithArguments("int"),
-                    // (4,16): warning CS0649: Field 'Program.x' is never assigned to, and will always have its default value 0
+                    // (4,16): warning CS0649: Field 'Program.x' is never assigned to, and will always have its default
+                    // value 0
                     //     static int x;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "x")
                         .WithArguments("Program.x", "0")
@@ -398,14 +412,16 @@ class Test
 
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                    // (6,15): error CS0185: 'lambda expression' is not a reference type as required by the lock
+                    // statement
                     //         lock ((ref int y) => { y = y + 1; return y; })     // Invalid
                     Diagnostic(
                             ErrorCode.ERR_LockNeedsReference,
                             "(ref int y) => { y = y + 1; return y; }"
                         )
                         .WithArguments("lambda expression"),
-                    // (10,15): error CS0185: 'lambda expression' is not a reference type as required by the lock statement
+                    // (10,15): error CS0185: 'lambda expression' is not a reference type as required by the lock
+                    // statement
                     //         lock (() => { })     // Invalid
                     Diagnostic(ErrorCode.ERR_LockNeedsReference, "() => { }")
                         .WithArguments("lambda expression")
@@ -459,7 +475,8 @@ class Test
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "yield")
                         .WithArguments("yield")
                         .WithLocation(9, 20),
-                    // (9,26): error CS1622: Cannot return a value from an iterator. Use the yield return statement to return a value, or yield break to end the iteration.
+                    // (9,26): error CS1622: Cannot return a value from an iterator. Use the yield return statement to
+                    // return a value, or yield break to end the iteration.
                     //         lock ((C + yield return +D).ToString())
                     Diagnostic(ErrorCode.ERR_ReturnInIterator, "return").WithLocation(9, 26),
                     // (9,37): warning CS0162: Unreachable code detected

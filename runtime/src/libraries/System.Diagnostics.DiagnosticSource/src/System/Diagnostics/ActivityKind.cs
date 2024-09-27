@@ -19,7 +19,8 @@ namespace System.Diagnostics
     {
         /// <summary>
         /// Default value.
-        /// Indicates that the Activity represents an internal operation within an application, as opposed to an operations with remote parents or children.
+        /// Indicates that the Activity represents an internal operation within an application, as opposed
+        // to an operations with remote parents or children.
         /// </summary>
         Internal = 0,
 

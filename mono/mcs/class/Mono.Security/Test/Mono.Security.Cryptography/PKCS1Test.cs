@@ -35,7 +35,7 @@ using NUnit.Framework;
 
 namespace MonoTests.Mono.Security.Cryptography
 {
-    /* copied from MD5SHA1 which is internal in Mono.Security.dll */
+/* copied from MD5SHA1 which is internal in Mono.Security.dll */
     class MD5SHA1 : HashAlgorithm
     {
         private HashAlgorithm md5;

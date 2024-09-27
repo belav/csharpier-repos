@@ -761,7 +761,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// </param>
         /// <param name="expectedSignature">
         /// Baseline string for signature of specified member
-        /// Skip this argument to get an error message that shows all available signatures for specified member
+        /// Skip this argument to get an error message that shows all available signatures for specified
+        // member
         /// </param>
         /// <returns>Instance of SignatureDescription for specified member</returns>
         internal static SignatureDescription Signature(

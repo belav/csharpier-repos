@@ -17,7 +17,8 @@ namespace MonoTests.System.Security.AccessControl
     [TestFixture]
     public class SemaphoreSecurityTest
     {
-        // TODO: Mono System.Threading.Semaphore does not throw exceptions on failure (except in OpenExisting).
+        // TODO: Mono System.Threading.Semaphore does not throw exceptions on failure (except in
+        // OpenExisting).
         [Test, ExpectedExceptionAttribute(typeof(UnauthorizedAccessException))]
         public void PermissionsActuallyWork()
         {

@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 public enum FormInputRenderMode
 {
     /// <summary>
-    /// When appropriate, use <see cref="CultureInfo.InvariantCulture"/> to format HTML input element values.
+    /// When appropriate, use <see cref="CultureInfo.InvariantCulture"/> to format HTML input element
+    // values.
     /// Generate a hidden HTML form input for each value that uses culture-invariant formatting
     /// so model binding logic can parse with the correct culture.
     /// </summary>

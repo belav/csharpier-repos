@@ -35,7 +35,8 @@ namespace System.Net.Http.Metrics
             _peerAddressTag = peerAddress;
         }
 
-        // TagList is a huge struct, so we avoid storing it in a field to reduce the amount we allocate on the heap.
+        // TagList is a huge struct, so we avoid storing it in a field to reduce the amount we allocate on
+        // the heap.
         private TagList GetTags()
         {
             TagList tags = default;

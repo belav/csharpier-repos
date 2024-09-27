@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -73,7 +73,8 @@ namespace System.ComponentModel
         PropertyDescriptorCollection GetProperties();
 
         /// <devdoc>
-        ///    <para>Gets the properties for this instance of a component using the attribute array as a filter.</para>
+        ///    <para>Gets the properties for this instance of a component using the attribute array as a
+        // filter.</para>
         /// </devdoc>
         PropertyDescriptorCollection GetProperties(Attribute[] attributes);
 

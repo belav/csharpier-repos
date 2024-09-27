@@ -26,8 +26,9 @@ using System.Diagnostics.CodeAnalysis;
 )]
 
 /*
- This class has the HostProtectionAttribute. The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.
- Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
+This class has the HostProtectionAttribute. The purpose of this attribute is to enforce
+host-specific programming model guidelines, not security behavior.
+Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
 */
 [assembly: SuppressMessage(
     "Microsoft.Security",
@@ -286,7 +287,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptorCollection'/>
+        ///       Initializes a new instance of the <see
+        // cref='System.ComponentModel.PropertyDescriptorCollection'/>
         ///       class.
         ///    </para>
         /// </devdoc>
@@ -583,7 +585,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this PropertyDescriptorCollection, using the default sort for this collection,
+        ///       Sorts the members of this PropertyDescriptorCollection, using the default sort for this
+        // collection,
         ///       which is usually alphabetical.
         ///    </para>
         /// </devdoc>
@@ -599,7 +602,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>
@@ -615,7 +619,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>
@@ -631,7 +636,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this PropertyDescriptorCollection, using the specified IComparer to compare,
+        ///       Sorts the members of this PropertyDescriptorCollection, using the specified IComparer to
+        // compare,
         ///       the PropertyDescriptors contained in the collection.
         ///    </para>
         /// </devdoc>
@@ -647,7 +653,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments will
+        ///       Sorts the members of this PropertyDescriptorCollection.  Any specified NamedSort arguments
+        // will
         ///       be applied first, followed by sort using the specified IComparer.
         ///    </para>
         /// </devdoc>
@@ -723,7 +730,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Gets an enumerator for this <see cref='System.ComponentModel.PropertyDescriptorCollection'/>.
+        ///       Gets an enumerator for this <see
+        // cref='System.ComponentModel.PropertyDescriptorCollection'/>.
         ///    </para>
         /// </devdoc>
         public virtual IEnumerator GetEnumerator()

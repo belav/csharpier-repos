@@ -16,7 +16,8 @@ internal sealed class RangeBasedDocumentSymbol(Id<Range> id, TextSpan span)
     public Id<Range> Id { get; } = id;
 
     /// <summary>
-    /// The Roslyn <see cref="TextSpan"/> of the symbol, which is used only to produce the structure easily. Not serialized.
+    /// The Roslyn <see cref="TextSpan"/> of the symbol, which is used only to produce the structure
+    // easily. Not serialized.
     /// </summary>
     [JsonIgnore]
     public TextSpan Span { get; } = span;
@@ -36,7 +37,8 @@ internal sealed class RangeBasedDocumentSymbol(Id<Range> id, TextSpan span)
         }
         else
         {
-            // We are producing the symbols in document order, so we know that the new symbol is either inside the previous one,
+            // We are producing the symbols in document order, so we know that the new symbol is either inside
+            // the previous one,
             // or is after that one. As a result we'll check the last one only.
             var last = list[^1];
 

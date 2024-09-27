@@ -35,7 +35,8 @@ namespace System.Collections.Tests
         protected virtual IComparer<T> GetIComparer() => Comparer<T>.Default;
 
         /// <summary>
-        /// MemberData to be passed to tests that take an IEnumerable{T}. This method returns every permutation of
+        /// MemberData to be passed to tests that take an IEnumerable{T}. This method returns every
+        // permutation of
         /// EnumerableType to test on (e.g. HashSet, Queue), and size of set to test with (e.g. 0, 1, etc.).
         /// </summary>
         public static IEnumerable<object[]> EnumerableTestData() =>
@@ -44,7 +45,8 @@ namespace System.Collections.Tests
             );
 
         /// <summary>
-        /// MemberData to be passed to tests that take an IEnumerable{T}. This method returns results for various
+        /// MemberData to be passed to tests that take an IEnumerable{T}. This method returns results for
+        // various
         /// sizes of sets to test with (e.g. 0, 1, etc.) but only for List.
         /// </summary>
         public static IEnumerable<object[]> ListTestData() =>
@@ -98,9 +100,12 @@ namespace System.Collections.Tests
         }
 
         /// <summary>
-        /// Helper function to create an enumerable fulfilling the given specific parameters. The function will
-        /// create an enumerable of the desired type using the Default constructor for that type and then add values
-        /// to it until it is full. It will begin by adding the desired number of matching and duplicate elements,
+        /// Helper function to create an enumerable fulfilling the given specific parameters. The function
+        // will
+        /// create an enumerable of the desired type using the Default constructor for that type and then
+        // add values
+        /// to it until it is full. It will begin by adding the desired number of matching and duplicate
+        // elements,
         /// followed by random (deterministic) elements until the desired count is reached.
         /// </summary>
         protected IEnumerable<T> CreateEnumerable(
@@ -316,7 +321,8 @@ namespace System.Collections.Tests
         }
 
         /// <summary>
-        /// Helper function to create an SortedSet fulfilling the given specific parameters. The function will
+        /// Helper function to create an SortedSet fulfilling the given specific parameters. The function
+        // will
         /// create an SortedSet using the Comparer constructor and then add values
         /// to it until it is full. It will begin by adding the desired number of matching,
         /// followed by random (deterministic) elements until the desired count is reached.

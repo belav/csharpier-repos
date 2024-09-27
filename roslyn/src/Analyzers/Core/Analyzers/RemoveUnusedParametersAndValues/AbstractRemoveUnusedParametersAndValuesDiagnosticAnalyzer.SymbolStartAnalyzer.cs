@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 symbolStartAnalysisContext;
 
             /// <summary>
-            /// Map from unused parameters to a boolean value indicating if the parameter has a read reference or not.
+            /// Map from unused parameters to a boolean value indicating if the parameter has a read reference
+            // or not.
             /// For example, a parameter whose initial value is overwritten before any reads
             /// is an unused parameter with read reference(s).
             /// </summary>
@@ -237,10 +238,12 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 Compilation compilation
             )
             {
-                // Ignore conditional methods (One conditional will often call another conditional method as its only use of a parameter)
+                // Ignore conditional methods (One conditional will often call another conditional method as its
+                // only use of a parameter)
                 yield return compilation.ConditionalAttribute();
 
-                // Ignore methods with special serialization attributes (All serialization methods need to take 'StreamingContext')
+                // Ignore methods with special serialization attributes (All serialization methods need to take
+                // 'StreamingContext')
                 yield return compilation.OnDeserializingAttribute();
                 yield return compilation.OnDeserializedAttribute();
                 yield return compilation.OnSerializingAttribute();
@@ -260,7 +263,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
             )
             {
                 // Ignore certain special parameters/methods.
-                // Note that "method.ExplicitOrImplicitInterfaceImplementations" check below is not a complete check,
+                // Note that "method.ExplicitOrImplicitInterfaceImplementations" check below is not a complete
+                // check,
                 // as identifying this correctly requires analyzing referencing projects, which is not
                 // supported for analyzers. We believe this is still a good enough check for most cases so
                 // we don't have to bail out on reporting unused parameters for all public methods.
@@ -330,7 +334,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 // For example, methods used as a delegate in a different type or project.
                 // This also serves as a convenient way to suppress instances of unused parameter diagnostic
                 // without disabling the diagnostic completely.
-                // We ignore parameter names that start with an underscore and are optionally followed by an integer,
+                // We ignore parameter names that start with an underscore and are optionally followed by an
+                // integer,
                 // such as '_', '_1', '_2', etc.
                 if (parameter.IsSymbolWithSpecialDiscardName())
                 {
@@ -346,7 +351,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnusedParametersAndValues
                 }
 
                 // Don't report on valid GetInstance method of ICustomMarshaler.
-                // See https://docs.microsoft.com/dotnet/api/system.runtime.interopservices.icustommarshaler#implementing-the-getinstance-method
+                // See
+                // https://docs.microsoft.com/dotnet/api/system.runtime.interopservices.icustommarshaler#implementing-the-getinstance-method
                 if (
                     method
                         is {

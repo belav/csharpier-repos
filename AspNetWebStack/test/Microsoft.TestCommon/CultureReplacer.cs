@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Globalization;
@@ -18,8 +19,10 @@ namespace Microsoft.TestCommon
         private readonly CultureInfo _originalUICulture;
         private readonly long _threadId;
 
-        // Culture => Formatting of dates/times/money/etc, defaults to en-GB because en-US is the same as InvariantCulture
-        // We want to be able to find issues where the InvariantCulture is used, but a specific culture should be.
+        // Culture => Formatting of dates/times/money/etc, defaults to en-GB because en-US is the same as
+        // InvariantCulture
+        // We want to be able to find issues where the InvariantCulture is used, but a specific culture
+        // should be.
         //
         // UICulture => Language
         public CultureReplacer(
@@ -36,7 +39,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// The name of the culture that is used as the default value for Thread.CurrentCulture when CultureReplacer is used.
+        /// The name of the culture that is used as the default value for Thread.CurrentCulture when
+        // CultureReplacer is used.
         /// </summary>
         public static string DefaultCultureName
         {
@@ -44,7 +48,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// The name of the culture that is used as the default value for Thread.UICurrentCulture when CultureReplacer is used.
+        /// The name of the culture that is used as the default value for Thread.UICurrentCulture when
+        // CultureReplacer is used.
         /// </summary>
         public static string DefaultUICultureName
         {
@@ -52,7 +57,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// The culture that is used as the default value for Thread.CurrentCulture when CultureReplacer is used.
+        /// The culture that is used as the default value for Thread.CurrentCulture when CultureReplacer is
+        // used.
         /// </summary>
         public static CultureInfo DefaultCulture
         {

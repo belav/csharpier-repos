@@ -54,8 +54,10 @@ namespace Internal.IL
         }
 
         /// <summary>
-        /// Emits a call to a throw helper. Use this to emit calls to static parameterless methods that don't return.
-        /// The advantage of using this extension method is that you don't have to deal with what code to emit after
+        /// Emits a call to a throw helper. Use this to emit calls to static parameterless methods that
+        // don't return.
+        /// The advantage of using this extension method is that you don't have to deal with what code to
+        // emit after
         /// the call (e.g. do you need to make sure the stack is balanced?).
         /// </summary>
         public static void EmitCallThrowHelper(

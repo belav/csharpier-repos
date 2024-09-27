@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.CommandLine.Binding;
 using System.Threading;
@@ -22,7 +23,8 @@ public static class BindingContextExtensions
 
     public static BindingContext GetBindingContext(this ParseResult parseResult)
     {
-        // parsing resulted with no handler or it was not created yet, we fake it to just store the BindingContext between the calls
+        // parsing resulted with no handler or it was not created yet, we fake it to just store the
+        // BindingContext between the calls
         if (parseResult.CommandResult.Command.Action is null)
         {
             parseResult.CommandResult.Command.Action = new DummyStateHoldingHandler();

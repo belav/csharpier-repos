@@ -68,7 +68,8 @@ namespace System.Net.Security.Tests
 
         private static Lazy<bool> s_cipherSuitePolicySupported = new Lazy<bool>(() =>
         {
-            // see src/libraries/System.Net.Security/src/System/Net/Security/Pal.Android/SafeDeleteSslContext.cs:InitializeSslContext
+            // see
+            // src/libraries/System.Net.Security/src/System/Net/Security/Pal.Android/SafeDeleteSslContext.cs:InitializeSslContext
             if (PlatformDetection.IsAndroid)
                 return false;
 

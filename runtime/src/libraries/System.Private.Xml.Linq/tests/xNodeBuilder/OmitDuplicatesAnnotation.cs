@@ -51,8 +51,10 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "No annotation - element", Params = new object[] { typeof(XElement), "Simple.xml" })]
-                //[Variation(Priority = 0, Desc = "No annotation - document", Params = new object[] { typeof(XDocument), "Simple.xml" })]
+                //[Variation(Priority = 0, Desc = "No annotation - element", Params = new object[] {
+                // typeof(XElement), "Simple.xml" })]
+                //[Variation(Priority = 0, Desc = "No annotation - document", Params = new object[] {
+                // typeof(XDocument), "Simple.xml" })]
                 public void NoAnnotation()
                 {
                     Type t = CurrentChild.Params[0] as Type;
@@ -78,10 +80,14 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 2, Desc = "Annotation on document without omit - None", Params = new object[] { typeof(XDocument), "Simple.xml", SaveOptions.None })]
-                //[Variation(Priority = 2, Desc = "Annotation on document without omit - DisableFormating", Params = new object[] { typeof(XDocument), "Simple.xml", SaveOptions.DisableFormatting })]
-                //[Variation(Priority = 2, Desc = "Annotation on element without omit - None", Params = new object[] { typeof(XElement), "Simple.xml", SaveOptions.None })]
-                //[Variation(Priority = 2, Desc = "Annotation on element without omit - DisableFormating", Params = new object[] { typeof(XElement), "Simple.xml", SaveOptions.DisableFormatting })]
+                //[Variation(Priority = 2, Desc = "Annotation on document without omit - None", Params = new
+                // object[] { typeof(XDocument), "Simple.xml", SaveOptions.None })]
+                //[Variation(Priority = 2, Desc = "Annotation on document without omit - DisableFormating", Params =
+                // new object[] { typeof(XDocument), "Simple.xml", SaveOptions.DisableFormatting })]
+                //[Variation(Priority = 2, Desc = "Annotation on element without omit - None", Params = new object[]
+                // { typeof(XElement), "Simple.xml", SaveOptions.None })]
+                //[Variation(Priority = 2, Desc = "Annotation on element without omit - DisableFormating", Params =
+                // new object[] { typeof(XElement), "Simple.xml", SaveOptions.DisableFormatting })]
                 public void AnnotationWithoutTheOmitDuplicates()
                 {
                     Type t = CurrentChild.Params[0] as Type;
@@ -108,10 +114,16 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "Annotation on document - Omit", Params = new object[] { typeof(XDocument), "Simple.xml", SaveOptions.OmitDuplicateNamespaces })]
-                //[Variation(Priority = 1, Desc = "Annotation on document - Omit + Disable", Params = new object[] { typeof(XDocument), "Simple.xml", SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting })]
-                //[Variation(Priority = 0, Desc = "Annotation on element - Omit", Params = new object[] { typeof(XElement), "Simple.xml", SaveOptions.OmitDuplicateNamespaces })]
-                //[Variation(Priority = 1, Desc = "Annotation on element - Omit + Disable", Params = new object[] { typeof(XElement), "Simple.xml", SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting })]
+                //[Variation(Priority = 0, Desc = "Annotation on document - Omit", Params = new object[] {
+                // typeof(XDocument), "Simple.xml", SaveOptions.OmitDuplicateNamespaces })]
+                //[Variation(Priority = 1, Desc = "Annotation on document - Omit + Disable", Params = new object[] {
+                // typeof(XDocument), "Simple.xml", SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting
+                // })]
+                //[Variation(Priority = 0, Desc = "Annotation on element - Omit", Params = new object[] {
+                // typeof(XElement), "Simple.xml", SaveOptions.OmitDuplicateNamespaces })]
+                //[Variation(Priority = 1, Desc = "Annotation on element - Omit + Disable", Params = new object[] {
+                // typeof(XElement), "Simple.xml", SaveOptions.OmitDuplicateNamespaces | SaveOptions.DisableFormatting
+                // })]
                 public void XDocAnnotation()
                 {
                     Type t = CurrentChild.Params[0] as Type;
@@ -157,8 +169,10 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "Annotation on the parent nodes, XElement", Params = new object[] { typeof(XElement), "simple.xml" })]
-                //[Variation(Priority = 0, Desc = "Annotation on the parent nodes, XDocument", Params = new object[] { typeof(XDocument), "simple.xml" })]
+                //[Variation(Priority = 0, Desc = "Annotation on the parent nodes, XElement", Params = new object[]
+                // { typeof(XElement), "simple.xml" })]
+                //[Variation(Priority = 0, Desc = "Annotation on the parent nodes, XDocument", Params = new object[]
+                // { typeof(XDocument), "simple.xml" })]
                 public void AnnotationOnParent1()
                 {
                     Type t = CurrentChild.Params[0] as Type;
@@ -219,8 +233,10 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - both up - XElement", Param = typeof(XElement))]
-                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - both up - XDocument", Param = typeof(XDocument))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - both up - XElement", Param =
+                // typeof(XElement))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - both up - XDocument", Param =
+                // typeof(XDocument))]
                 public void MultipleAnnotationsInTree()
                 {
                     Type t = CurrentChild.Param as Type;
@@ -273,8 +289,10 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - up/down - XElement", Param = typeof(XElement))]
-                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - up/down - XDocument", Param = typeof(XDocument))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - up/down - XElement", Param =
+                // typeof(XElement))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations in the tree - up/down - XDocument", Param =
+                // typeof(XDocument))]
                 public void MultipleAnnotationsInTree2()
                 {
                     Type t = CurrentChild.Param as Type;
@@ -327,8 +345,10 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Priority = 0, Desc = "Multiple annotations on node - XDocument", Param = typeof(XDocument))]
-                //[Variation(Priority = 0, Desc = "Multiple annotations on node - XElement", Param = typeof(XElement))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations on node - XDocument", Param =
+                // typeof(XDocument))]
+                //[Variation(Priority = 0, Desc = "Multiple annotations on node - XElement", Param =
+                // typeof(XElement))]
                 public void MultipleAnnotationsOnElement()
                 {
                     Type t = CurrentChild.Param as Type;
@@ -459,10 +479,14 @@ namespace CoreXml.Test.XLinq
                     ReaderDiff.Compare(sb.ToString(), expected);
                 }
 
-                //[Variation(Priority = 0, Desc = "XDocument - ReaderOptions.None", Params = new object[] { typeof(XDocument), "simple.xml", ReaderOptions.None })]
-                //[Variation(Priority = 0, Desc = "XDocument - ReaderOptions.OmitDuplicateNamespaces", Params = new object[] { typeof(XDocument), "simple.xml", ReaderOptions.OmitDuplicateNamespaces })]
-                //[Variation(Priority = 0, Desc = "XElement - ReaderOptions.None", Params= new object [] {typeof(XElement), "simple.xml", ReaderOptions.None })]
-                //[Variation(Priority = 0, Desc = "XElement - ReaderOptions.OmitDuplicateNamespaces", Params = new object[] { typeof(XElement), "simple.xml", ReaderOptions.OmitDuplicateNamespaces })]
+                //[Variation(Priority = 0, Desc = "XDocument - ReaderOptions.None", Params = new object[] {
+                // typeof(XDocument), "simple.xml", ReaderOptions.None })]
+                //[Variation(Priority = 0, Desc = "XDocument - ReaderOptions.OmitDuplicateNamespaces", Params = new
+                // object[] { typeof(XDocument), "simple.xml", ReaderOptions.OmitDuplicateNamespaces })]
+                //[Variation(Priority = 0, Desc = "XElement - ReaderOptions.None", Params= new object []
+                // {typeof(XElement), "simple.xml", ReaderOptions.None })]
+                //[Variation(Priority = 0, Desc = "XElement - ReaderOptions.OmitDuplicateNamespaces", Params = new
+                // object[] { typeof(XElement), "simple.xml", ReaderOptions.OmitDuplicateNamespaces })]
                 public void ReaderOptionsSmoke()
                 {
                     Type t = CurrentChild.Params[0] as Type;

@@ -412,8 +412,10 @@ internal struct StaticFileContext
     {
         if (_range == null)
         {
-            // 14.16 Content-Range - A server sending a response with status code 416 (Requested range not satisfiable)
-            // SHOULD include a Content-Range field with a byte-range-resp-spec of "*". The instance-length specifies
+            // 14.16 Content-Range - A server sending a response with status code 416 (Requested range not
+            // satisfiable)
+            // SHOULD include a Content-Range field with a byte-range-resp-spec of "*". The instance-length
+            // specifies
             // the current length of the selected resource.  e.g. */length
             ResponseHeaders.ContentRange = new ContentRangeHeaderValue(_length);
             await ApplyResponseHeadersAsync(StatusCodes.Status416RangeNotSatisfiable);

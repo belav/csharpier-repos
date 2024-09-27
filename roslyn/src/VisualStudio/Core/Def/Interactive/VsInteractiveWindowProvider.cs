@@ -95,7 +95,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Interactive
 
             Debug.Assert(_vsInteractiveWindow == null);
 
-            // ForceCreate means that the window should be created if the persisted layout indicates that it is visible.
+            // ForceCreate means that the window should be created if the persisted layout indicates that it is
+            // visible.
             _vsInteractiveWindow = _vsInteractiveWindowFactory.Create(
                 Id,
                 instanceId,

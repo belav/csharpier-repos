@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -13,7 +14,8 @@ using System.Web.Http.Routing;
 namespace System.Web.Http.Results
 {
     /// <summary>
-    /// Represents an action result that performs route generation and returns a <see cref="HttpStatusCode.Redirect"/>
+    /// Represents an action result that performs route generation and returns a <see
+    // cref="HttpStatusCode.Redirect"/>
     /// response.
     /// </summary>
     public class RedirectToRouteResult : IHttpActionResult
@@ -23,7 +25,8 @@ namespace System.Web.Http.Results
         private readonly IDependencyProvider _dependencies;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values provided.
+        /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values
+        // provided.
         /// </summary>
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
@@ -38,11 +41,13 @@ namespace System.Web.Http.Results
             : this(routeName, routeValues, new DirectDependencyProvider(urlFactory, request)) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values provided.
+        /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values
+        // provided.
         /// </summary>
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public RedirectToRouteResult(
             string routeName,
             IDictionary<string, object> routeValues,
@@ -127,8 +132,10 @@ namespace System.Web.Http.Results
 
         /// <summary>Defines a provider for dependencies that are not always directly available.</summary>
         /// <remarks>
-        /// This abstraction supports the unit testing scenario of creating the result without creating a content
-        /// negotiator, request message, or formatters. (The ApiController provider implementation does lazy evaluation
+        /// This abstraction supports the unit testing scenario of creating the result without creating a
+        // content
+        /// negotiator, request message, or formatters. (The ApiController provider implementation does lazy
+        // evaluation
         /// to make that scenario work.)
         /// </remarks>
         private interface IDependencyProvider

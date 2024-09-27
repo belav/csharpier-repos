@@ -31,7 +31,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// </summary>
         internal static readonly DataflowEtwProvider Log = new DataflowEtwProvider();
 
-        /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
+        /// <summary>Prevent external instantiation.  All logging should go through the Log
+        // instance.</summary>
         private DataflowEtwProvider() { }
 
         /// <summary>Enabled for all keywords.</summary>
@@ -42,7 +43,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         // Dataflow Event IDs (must be unique)
         //
 
-        /// <summary>The event ID for when we encounter a new dataflow block object that hasn't had its name traced to the trace file.</summary>
+        /// <summary>The event ID for when we encounter a new dataflow block object that hasn't had its name
+        // traced to the trace file.</summary>
         private const int DATAFLOWBLOCKCREATED_EVENTID = 1;
 
         /// <summary>The event ID for the task launched event.</summary>
@@ -96,7 +98,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <param name="block">The owner block launching a task.</param>
         /// <param name="task">The task being launched for processing.</param>
         /// <param name="reason">The reason the task is being launched.</param>
-        /// <param name="availableMessages">The number of messages available to be handled by the task.</param>
+        /// <param name="availableMessages">The number of messages available to be handled by the
+        // task.</param>
         [NonEvent]
         internal void TaskLaunchedForMessageHandling(
             IDataflowBlock block,
@@ -255,7 +258,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Debug.Assert(target != null, "Target needed for the ETW event.");
             if (IsEnabled(EventLevel.Informational, ALL_KEYWORDS))
             {
-                // Try catch exists to prevent against faulty blocks or blocks that only partially implement the interface
+                // Try catch exists to prevent against faulty blocks or blocks that only partially implement the
+                // interface
                 DataflowBlockUnlinking(Common.GetBlockId(source), Common.GetBlockId(target));
             }
         }

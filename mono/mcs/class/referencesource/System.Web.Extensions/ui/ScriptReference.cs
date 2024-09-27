@@ -408,7 +408,8 @@ namespace System.Web.UI
                     resourceName = AddCultureName(culture, resourceName);
                 }
 
-                // Assembly name, fileVersion, and resource name may contain invalid URL characters (like '#' or '/'),
+                // Assembly name, fileVersion, and resource name may contain invalid URL characters (like '#' or
+                // '/'),
                 // so they must be url-encoded.
                 scriptPath = String.Join(
                     "/",
@@ -550,8 +551,10 @@ namespace System.Web.UI
                 : (secureConnection ? ScriptInfo.CdnPathSecureConnection : ScriptInfo.CdnPath);
 
             // then see if the WebResourceAttribute for the resource has one
-            // EXCEPT when the ScriptInfo has a cdnpath but it wasn't selected due to this being a secure connection
-            // and it does not support secure connections. Avoid having the HTTP cdn path come from the mapping and the
+            // EXCEPT when the ScriptInfo has a cdnpath but it wasn't selected due to this being a secure
+            // connection
+            // and it does not support secure connections. Avoid having the HTTP cdn path come from the mapping
+            // and the
             // HTTPS path come from the WRA.
             if (
                 isAssemblyResource
@@ -745,7 +748,8 @@ namespace System.Web.UI
             {
                 // Don't check if direct registration, because calls to ScriptManager.RegisterClientScriptResource
                 // with resources that do not exist does not throw an exception until the resource is served.
-                // This was the existing behavior and matches the behavior with ClientScriptManager.GetWebResourceUrl.
+                // This was the existing behavior and matches the behavior with
+                // ClientScriptManager.GetWebResourceUrl.
                 WebResourceUtil.VerifyAssemblyContainsReleaseWebResource(
                     assembly,
                     releaseName,

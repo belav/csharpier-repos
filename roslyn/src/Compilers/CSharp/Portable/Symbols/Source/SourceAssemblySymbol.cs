@@ -48,17 +48,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // Attribute binding will check type visibility which will possibly
         // check IVT relationships. To correctly determine the IVT relationship requires the public key.
         // To avoid infinite recursion, this type notes, per thread, the assembly for which the thread
-        // is actively computing the public key (assemblyForWhichCurrentThreadIsComputingKeys). Should a request to determine IVT
+        // is actively computing the public key (assemblyForWhichCurrentThreadIsComputingKeys). Should a
+        // request to determine IVT
         // relationship occur on the thread that is computing the public key, access is optimistically
         // granted provided the simple assembly names match. When such access is granted
-        // the assembly to which we have been granted access is noted (optimisticallyGrantedInternalsAccess).
+        // the assembly to which we have been granted access is noted
+        // (optimisticallyGrantedInternalsAccess).
         // After the public key has been computed, the set of optimistic grants is reexamined
         // to ensure that full identities match. This may produce diagnostics.
         private StrongNameKeys _lazyStrongNameKeys;
 
         /// <summary>
         /// A list of modules the assembly consists of.
-        /// The first (index=0) module is a SourceModuleSymbol, which is a primary module, the rest are net-modules.
+        /// The first (index=0) module is a SourceModuleSymbol, which is a primary module, the rest are
+        // net-modules.
         /// </summary>
         private readonly ImmutableArray<ModuleSymbol> _modules;
 
@@ -80,18 +83,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Indices of attributes that will not be emitted for one of two reasons:
-        /// - They are duplicates of another attribute (i.e. attributes that bind to the same constructor and have identical arguments)
+        /// - They are duplicates of another attribute (i.e. attributes that bind to the same constructor
+        // and have identical arguments)
         /// - They are InternalsVisibleToAttributes with invalid assembly identities
         /// </summary>
         /// <remarks>
-        /// These indices correspond to the merged assembly attributes from source and added net modules, i.e. attributes returned by <see cref="GetAttributes"/> method.
+        /// These indices correspond to the merged assembly attributes from source and added net modules,
+        // i.e. attributes returned by <see cref="GetAttributes"/> method.
         /// </remarks>
         private ConcurrentSet<int> _lazyOmittedAttributeIndices;
 
         private ThreeState _lazyContainsExtensionMethods;
 
         /// <summary>
-        /// Map for storing effectively private or effectively internal fields declared in this assembly but never initialized nor assigned.
+        /// Map for storing effectively private or effectively internal fields declared in this assembly but
+        // never initialized nor assigned.
         /// Each {symbol, bool} key-value pair in this map indicates the following:
         ///  (a) Key: Unassigned field symbol.
         ///  (b) Value: True if the unassigned field is effectively internal, false otherwise.
@@ -157,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (!compilation.Options.CryptoPublicKey.IsEmpty)
             {
-                // Private key is not necessary for assembly identity, only when emitting.  For this reason, the private key can remain null.
+                // Private key is not necessary for assembly identity, only when emitting.  For this reason, the
+                // private key can remain null.
                 _lazyStrongNameKeys = StrongNameKeys.Create(
                     compilation.Options.CryptoPublicKey,
                     privateKey: null,
@@ -585,7 +592,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
         }
 
-        // A collection of assemblies to which we were granted internals access by only checking matches for assembly name
+        // A collection of assemblies to which we were granted internals access by only checking matches for
+        // assembly name
         // and ignoring public key. This just acts as a set. The bool is ignored.
         private ConcurrentDictionary<AssemblySymbol, bool> _optimisticallyGrantedInternalsAccess;
 
@@ -647,7 +655,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             ValidateIVTPublicKeys(diagnostics);
-            //diagnostics that result from IVT checks performed while in the process of computing the public key.
+            //diagnostics that result from IVT checks performed while in the process of computing the public
+            // key.
             CheckOptimisticIVTAccessGrants(diagnostics);
 
             DetectAttributeAndOptionConflicts(diagnostics);
@@ -671,7 +680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // If the options and attributes applied on the compilation imply real signing,
             // but we have no private key to sign it with report an error.
-            // Note that if public key is set and delay sign is off we do OSS signing, which doesn't require private key.
+            // Note that if public key is set and delay sign is off we do OSS signing, which doesn't require
+            // private key.
             // Consider: should we allow to OSS sign if the key file only contains public key?
 
             if (
@@ -684,7 +694,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 && StrongNameKeys.DiagnosticOpt == null
             )
             {
-                // Since the container always contains both keys, the problem is that the key file didn't contain private key.
+                // Since the container always contains both keys, the problem is that the key file didn't contain
+                // private key.
                 diagnostics.Add(
                     ErrorCode.ERR_SignButNoPrivateKey,
                     NoLocation.Singleton,
@@ -696,13 +707,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// We're going to synthesize some well-known attributes for this assembly symbol.  However, at synthesis time, it is
-        /// too late to report diagnostics or cancel the emit.  Instead, we check for use site errors on the types and members
+        /// We're going to synthesize some well-known attributes for this assembly symbol.  However, at
+        // synthesis time, it is
+        /// too late to report diagnostics or cancel the emit.  Instead, we check for use site errors on the
+        // types and members
         /// we know we'll need at synthesis time.
         /// </summary>
         /// <remarks>
-        /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not erroneous) because we won't
-        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or
+        /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not
+        // erroneous) because we won't
+        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are
+        // present and either they or
         /// the attribute CONSTRUCTORS have errors.
         /// </remarks>
         private static void ReportDiagnosticsForSynthesizedAttributes(
@@ -724,7 +739,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
                 if (!(compilationRelaxationsAttribute is MissingMetadataTypeSymbol))
                 {
-                    // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute if CompilationRelaxationsAttribute is found.
+                    // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute
+                    // if CompilationRelaxationsAttribute is found.
                     Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(
                         compilation,
                         WellKnownMember.System_Runtime_CompilerServices_CompilationRelaxationsAttribute__ctorInt32,
@@ -742,7 +758,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 );
                 if (!(runtimeCompatibilityAttribute is MissingMetadataTypeSymbol))
                 {
-                    // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute if RuntimeCompatibilityAttribute is found.
+                    // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute
+                    // if RuntimeCompatibilityAttribute is found.
                     Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(
                         compilation,
                         WellKnownMember.System_Runtime_CompilerServices_RuntimeCompatibilityAttribute__ctor,
@@ -761,14 +778,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If this compilation allows unsafe code (note: allows, not contains), then when we actually emit the assembly/module,
-        /// we're going to synthesize SecurityPermissionAttribute/UnverifiableCodeAttribute.  However, at synthesis time, it is
-        /// too late to report diagnostics or cancel the emit.  Instead, we check for use site errors on the types and members
+        /// If this compilation allows unsafe code (note: allows, not contains), then when we actually emit
+        // the assembly/module,
+        /// we're going to synthesize SecurityPermissionAttribute/UnverifiableCodeAttribute.  However, at
+        // synthesis time, it is
+        /// too late to report diagnostics or cancel the emit.  Instead, we check for use site errors on the
+        // types and members
         /// we know we'll need at synthesis time.
         /// </summary>
         /// <remarks>
-        /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not erroneous) because we won't
-        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are present and either they or
+        /// As in Dev10, we won't report anything if the attribute TYPES are missing (note: missing, not
+        // erroneous) because we won't
+        /// synthesize anything in that case.  We'll only report diagnostics if the attribute TYPES are
+        // present and either they or
         /// the attribute CONSTRUCTORS have errors.
         /// </remarks>
         private static void ReportDiagnosticsForUnsafeSynthesizedAttributes(
@@ -794,7 +816,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute if
+            // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute
+            // if
             // UnverifiableCodeAttribute is found.
             Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(
                 compilation,
@@ -827,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return;
             }
 
-            // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute if
+            // As in Dev10 (see GlobalAttrBind::EmitCompilerGeneratedAttrs), we only synthesize this attribute
+            // if
             // UnverifiableCodeAttribute, SecurityAction, and SecurityPermissionAttribute are found.
             Binder.ReportUseSiteDiagnosticForSynthesizedAttribute(
                 compilation,
@@ -952,16 +976,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ) != 0
                 )
                 {
-                    // Native compiler reports a warning in this case, notifying the user that attribute value from source is ignored,
-                    // but it doesn't drop the attribute during emit. That might be fine if we produce an assembly because we actually sign it with correct
+                    // Native compiler reports a warning in this case, notifying the user that attribute value from
+                    // source is ignored,
+                    // but it doesn't drop the attribute during emit. That might be fine if we produce an assembly
+                    // because we actually sign it with correct
                     // key (the one from compilation options) without relying on the emitted attribute.
-                    // If we are building a .NET module, things get more complicated. In particular, we don't sign the module, we emit an attribute with the key
-                    // information, which will be used to sign an assembly once the module is linked into it. If there is already an attribute like that in source,
-                    // native compiler emits both of them, synthetic attribute is emitted after the one from source. Incidentally, ALink picks the last attribute
-                    // for signing and things seem to work out. However, relying on the order of attributes feels fragile, especially given that Roslyn emits
-                    // synthetic attributes before attributes from source. The behavior we settled on for .NET modules is that, if the attribute in source has the
-                    // same value as the one in compilation options, we won't emit the synthetic attribute. If the value doesn't match, we report an error, which
-                    // is a breaking change. Bottom line, we will never produce a module or an assembly with two attributes, regardless whether values are the same
+                    // If we are building a .NET module, things get more complicated. In particular, we don't sign the
+                    // module, we emit an attribute with the key
+                    // information, which will be used to sign an assembly once the module is linked into it. If there
+                    // is already an attribute like that in source,
+                    // native compiler emits both of them, synthetic attribute is emitted after the one from source.
+                    // Incidentally, ALink picks the last attribute
+                    // for signing and things seem to work out. However, relying on the order of attributes feels
+                    // fragile, especially given that Roslyn emits
+                    // synthetic attributes before attributes from source. The behavior we settled on for .NET modules
+                    // is that, if the attribute in source has the
+                    // same value as the one in compilation options, we won't emit the synthetic attribute. If the value
+                    // doesn't match, we report an error, which
+                    // is a breaking change. Bottom line, we will never produce a module or an assembly with two
+                    // attributes, regardless whether values are the same
                     // or not.
                     if (_compilation.Options.OutputKind == OutputKind.NetModule)
                     {
@@ -1508,7 +1541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (attributeClass.GetAttributeUsageInfo().AllowMultiple)
             {
-                // Duplicate attributes are allowed, but native compiler doesn't emit duplicate attributes, i.e. attributes with same constructor and arguments.
+                // Duplicate attributes are allowed, but native compiler doesn't emit duplicate attributes, i.e.
+                // attributes with same constructor and arguments.
                 return AddUniqueAssemblyAttribute(attribute, ref uniqueAttributes);
             }
             else
@@ -1540,7 +1574,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     // (a) Duplicate well-known assembly attributes and
                     // (b) Identical duplicates, i.e. attributes with same constructor and arguments.
 
-                    // For (a), native compiler picks the last of these duplicate well-known netmodule attributes, but these can vary based on the ordering of referenced netmodules.
+                    // For (a), native compiler picks the last of these duplicate well-known netmodule attributes, but
+                    // these can vary based on the ordering of referenced netmodules.
 
                     if (IsKnownAssemblyAttribute(attribute))
                     {
@@ -1571,10 +1606,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // CONSIDER Handling badly targeted assembly attributes from netmodules
-            //if (!badDuplicateAttribute && ((attributeUsageInfo.ValidTargets & AttributeTargets.Assembly) == 0))
+            //if (!badDuplicateAttribute && ((attributeUsageInfo.ValidTargets & AttributeTargets.Assembly) ==
+            // 0))
             //{
             //    // Error and skip
-            //    diagnostics.Add(ErrorCode.ERR_AttributeOnBadSymbolTypeInNetModule, NoLocation.Singleton, attribute.AttributeClass.Name, netModuleName, attributeUsageInfo.GetValidTargetsString());
+            //    diagnostics.Add(ErrorCode.ERR_AttributeOnBadSymbolTypeInNetModule, NoLocation.Singleton,
+            // attribute.AttributeClass.Name, netModuleName, attributeUsageInfo.GetValidTargetsString());
             //    return false;
             //}
         }
@@ -1640,7 +1677,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             arguments.Diagnostics = diagnostics;
             arguments.SymbolPart = AttributeLocation.None;
 
-            // Attributes from the second added module should override attributes from the first added module, etc.
+            // Attributes from the second added module should override attributes from the first added module,
+            // etc.
             // Attributes from source should override attributes from added modules.
             // That is why we are iterating attributes backwards.
             for (int i = netModuleAttributesCount - 1; i >= 0; i--)
@@ -1664,7 +1702,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arguments.Attribute = attribute;
                     arguments.Index = i;
 
-                    // CONSIDER: Provide usable AttributeSyntax node for diagnostics of malformed netmodule assembly attributes
+                    // CONSIDER: Provide usable AttributeSyntax node for diagnostics of malformed netmodule assembly
+                    // attributes
                     arguments.AttributeSyntaxOpt = null;
 
                     this.DecodeWellKnownAttribute(ref arguments, totalIndex, isFromNetModule: true);
@@ -1710,14 +1749,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    // Compute duplicate source assembly attributes, i.e. attributes with same constructor and arguments, that must not be emitted.
+                    // Compute duplicate source assembly attributes, i.e. attributes with same constructor and
+                    // arguments, that must not be emitted.
                     var unused = GetUniqueSourceAssemblyAttributes();
                 }
 
                 // Load type forwarders from modules
                 HashSet<NamedTypeSymbol> forwardedTypes = null;
 
-                // Similar to attributes, type forwarders from the second added module should override type forwarders from the first added module, etc.
+                // Similar to attributes, type forwarders from the second added module should override type
+                // forwarders from the first added module, etc.
                 // This affects only diagnostics.
                 for (int i = _modules.Length - 1; i > 0; i--)
                 {
@@ -1830,7 +1871,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return (CommonAssemblyWellKnownAttributeData)wellKnownData;
 
-            // Similar to ValidateAttributeUsageAndDecodeWellKnownAttributes, but doesn't load assembly-level attributes from source
+            // Similar to ValidateAttributeUsageAndDecodeWellKnownAttributes, but doesn't load assembly-level
+            // attributes from source
             // and only decodes 3 specific attributes.
             WellKnownAttributeData limitedDecodeWellKnownAttributes(
                 ImmutableArray<CSharpAttributeData> attributesFromNetModules,
@@ -1847,7 +1889,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 HashSet<CSharpAttributeData> uniqueAttributes = null;
                 CommonAssemblyWellKnownAttributeData result = null;
 
-                // Attributes from the second added module should override attributes from the first added module, etc.
+                // Attributes from the second added module should override attributes from the first added module,
+                // etc.
                 // We don't reach here when the attribute was found in source already.
                 for (int i = netModuleAttributesCount - 1; i >= 0; i--)
                 {
@@ -1870,7 +1913,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return result;
             }
 
-            // Similar to DecodeWellKnownAttribute but only handles 3 specific attributes and ignores diagnostics.
+            // Similar to DecodeWellKnownAttribute but only handles 3 specific attributes and ignores
+            // diagnostics.
             void limitedDecodeWellKnownAttribute(
                 CSharpAttributeData attribute,
                 QuickAttributes attributeMatches,
@@ -1957,7 +2001,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns null if there are no attributes applied on the symbol.
+        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns
+        // null if there are no attributes applied on the symbol.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1974,7 +2019,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// NOTE: This method should always be kept as a sealed override.
-        /// If you want to override attribute binding logic for a sub-class, then override <see cref="GetSourceAttributesBag"/> method.
+        /// If you want to override attribute binding logic for a sub-class, then override <see
+        // cref="GetSourceAttributesBag"/> method.
         /// </remarks>
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -2000,8 +2046,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns true if the assembly attribute at the given index is a duplicate assembly attribute that must not be emitted.
-        /// Duplicate assembly attributes are attributes that bind to the same constructor and have identical arguments.
+        /// Returns true if the assembly attribute at the given index is a duplicate assembly attribute that
+        // must not be emitted.
+        /// Duplicate assembly attributes are attributes that bind to the same constructor and have
+        // identical arguments.
         /// </summary>
         /// <remarks>
         /// This method must be invoked only after all the assembly attributes have been bound.
@@ -2028,8 +2076,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
-        /// TODO: We should replace methods GetSourceDecodedWellKnownAttributeData and GetNetModuleDecodedWellKnownAttributeData with
-        /// a single method GetDecodedWellKnownAttributeData, which merges DecodedWellKnownAttributeData from source and netmodule attributes.
+        /// TODO: We should replace methods GetSourceDecodedWellKnownAttributeData and
+        // GetNetModuleDecodedWellKnownAttributeData with
+        /// a single method GetDecodedWellKnownAttributeData, which merges DecodedWellKnownAttributeData
+        // from source and netmodule attributes.
         /// </remarks>
         internal CommonAssemblyWellKnownAttributeData GetSourceDecodedWellKnownAttributeData()
         {
@@ -2112,7 +2162,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private static PooledHashSet<AttributeSyntax> t_forwardedTypesAttributesInProgress;
 
         /// <summary>
-        /// This only forces binding of attributes that look like they may be forwarded types attributes (syntactically).
+        /// This only forces binding of attributes that look like they may be forwarded types attributes
+        // (syntactically).
         /// </summary>
         internal HashSet<NamedTypeSymbol> GetForwardedTypes()
         {
@@ -2240,7 +2291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (_compilation.Options.AllowUnsafe)
             {
-                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't available.
+                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't
+                // available.
                 if (
                     !(
                         _compilation.GetWellKnownType(
@@ -2426,7 +2478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Synthesize CompilationRelaxationsAttribute only if all the following requirements are met:
             // (a) We are not building a netmodule.
             // (b) There is no applied CompilationRelaxationsAttribute assembly attribute in source.
-            // (c) There is no applied CompilationRelaxationsAttribute assembly attribute for any of the added PE modules.
+            // (c) There is no applied CompilationRelaxationsAttribute assembly attribute for any of the added
+            // PE modules.
             // Above requirements also hold for synthesizing RuntimeCompatibilityAttribute attribute.
 
             bool emitCompilationRelaxationsAttribute =
@@ -2436,7 +2489,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // Synthesize attribute: [CompilationRelaxationsAttribute(CompilationRelaxations.NoStringInterning)]
 
-                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't available.
+                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't
+                // available.
                 if (
                     !(
                         _compilation.GetWellKnownType(
@@ -2474,7 +2528,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // Synthesize attribute: [RuntimeCompatibilityAttribute(WrapNonExceptionThrows = true)]
 
-                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't available.
+                // NOTE: GlobalAttrBind::EmitCompilerGeneratedAttrs skips attribute if the well-known types aren't
+                // available.
                 if (
                     !(
                         _compilation.GetWellKnownType(
@@ -2516,7 +2571,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // (b) We are emitting debug information (full or pdbonly).
             // (c) There is no applied DebuggableAttribute assembly attribute in source.
 
-            // CONSIDER: Native VB compiler and Roslyn VB compiler also have an additional requirement: There is no applied DebuggableAttribute *module* attribute in source.
+            // CONSIDER: Native VB compiler and Roslyn VB compiler also have an additional requirement: There is
+            // no applied DebuggableAttribute *module* attribute in source.
             // CONSIDER: Should we check for module DebuggableAttribute?
             if (!isBuildingNetModule && !this.HasDebuggableAttribute)
             {
@@ -2529,7 +2585,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (_compilation.Options.OutputKind == OutputKind.NetModule)
             {
                 // If the attribute is applied in source, do not add synthetic one.
-                // If its value is different from the supplied through options, an error should have been reported by now.
+                // If its value is different from the supplied through options, an error should have been reported
+                // by now.
 
                 if (
                     !string.IsNullOrEmpty(_compilation.Options.CryptoKeyContainer)
@@ -2675,8 +2732,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             string simpleName
         )
         {
-            //EDMAURER assume that if EnsureAttributesAreBound() returns, then the internals visible to map has been populated.
-            //Do not optimize by checking if m_lazyInternalsVisibleToMap is Nothing. It may be non-null yet still
+            //EDMAURER assume that if EnsureAttributesAreBound() returns, then the internals visible to map has
+            // been populated.
+            //Do not optimize by checking if m_lazyInternalsVisibleToMap is Nothing. It may be non-null yet
+            // still
             //incomplete because another thread is in the process of building it.
 
             EnsureAttributesAreBound();
@@ -2759,10 +2818,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
         }
 
-        //This maps from assembly name to a set of public keys. It uses concurrent dictionaries because it is built,
-        //one attribute at a time, in the callback that validates an attribute's application to a symbol. It is assumed
-        //to be complete after a call to GetAttributes(). The second dictionary is acting like a set. The value element is
-        //only used when the key is empty in which case it stores the location and value of the attribute string which
+        //This maps from assembly name to a set of public keys. It uses concurrent dictionaries because it
+        // is built,
+        //one attribute at a time, in the callback that validates an attribute's application to a symbol. It
+        // is assumed
+        //to be complete after a call to GetAttributes(). The second dictionary is acting like a set. The
+        // value element is
+        //only used when the key is empty in which case it stores the location and value of the attribute
+        // string which
         //may be used to construct a diagnostic if the assembly being compiled is found to be strong named.
         private ConcurrentDictionary<
             string,
@@ -3484,7 +3547,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override bool IsNetModule() => this._compilation.Options.OutputKind.IsNetModule();
 
         /// <summary>
-        /// Get the warnings for unused fields.  This should only be fetched when all method bodies have been compiled.
+        /// Get the warnings for unused fields.  This should only be fetched when all method bodies have
+        // been compiled.
         /// </summary>
         internal ImmutableArray<Diagnostic> GetUnusedFieldWarnings(
             CancellationToken cancellationToken
@@ -3747,7 +3811,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // See if any of added modules forward the type.
 
-                // Similar to attributes, type forwarders from the second added module should override type forwarders from the first added module, etc.
+                // Similar to attributes, type forwarders from the second added module should override type
+                // forwarders from the first added module, etc.
                 for (int i = _modules.Length - 1; i > 0; i--)
                 {
                     var peModuleSymbol = (Metadata.PE.PEModuleSymbol)_modules[i];
@@ -3792,7 +3857,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData? ObsoleteAttributeData
         {

@@ -118,8 +118,10 @@ namespace System.Xml
         // helper for Read[Element]ContentAs{Base64,BinHex} methods
         private ReadContentAsBinaryHelper? _readBinaryHelper;
 
-        // Outer XmlReader exposed to the user - either XmlValidatingReader or XmlValidatingReaderImpl (when created via XmlReader.Create).
-        // Virtual methods called from within XmlValidatingReaderImpl must be called on the outer reader so in case the user overrides
+        // Outer XmlReader exposed to the user - either XmlValidatingReader or XmlValidatingReaderImpl (when
+        // created via XmlReader.Create).
+        // Virtual methods called from within XmlValidatingReaderImpl must be called on the outer reader so
+        // in case the user overrides
         // some of the XmlValidatingReader methods we will call the overridden version.
         private XmlReader _outerReader;
 
@@ -172,9 +174,11 @@ namespace System.Xml
 #pragma warning restore 618
         }
 
-        // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the specified string, fragment type and parser context
+        // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the
+        // specified string, fragment type and parser context
         // This constructor is used when creating XmlValidatingReaderImpl for V1 XmlValidatingReader
-        // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the SxS warning.
+        // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the
+        // SxS warning.
         internal XmlValidatingReaderImpl(
             string xmlFragment,
             XmlNodeType fragType,
@@ -194,9 +198,11 @@ namespace System.Xml
             }
         }
 
-        // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the specified stream, fragment type and parser context
+        // Initializes a new instance of XmlValidatingReaderImpl class for parsing fragments with the
+        // specified stream, fragment type and parser context
         // This constructor is used when creating XmlValidatingReaderImpl for V1 XmlValidatingReader
-        // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the SxS warning.
+        // SxS: This method resolves an Uri but does not expose it to the caller. It's OK to suppress the
+        // SxS warning.
         internal XmlValidatingReaderImpl(
             Stream xmlFragment,
             XmlNodeType fragType,
@@ -558,7 +564,8 @@ namespace System.Xml
             }
         }
 
-        // Closes the input stream ot TextReader, changes the ReadState to Closed and sets all properties to zero/string.Empty
+        // Closes the input stream ot TextReader, changes the ReadState to Closed and sets all properties to
+        // zero/string.Empty
         public override void Close()
         {
             _coreReader.Close();
@@ -608,7 +615,8 @@ namespace System.Xml
                 );
             }
 
-            // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
+            // set parsingFunction to Read state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
@@ -635,7 +643,8 @@ namespace System.Xml
                 );
             }
 
-            // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
+            // set parsingFunction to Read state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
@@ -662,7 +671,8 @@ namespace System.Xml
                 );
             }
 
-            // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
+            // set parsingFunction to Read state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
@@ -689,7 +699,8 @@ namespace System.Xml
                 );
             }
 
-            // set parsingFunction to Read state in order to have a normal Read() behavior when called from readBinaryHelper
+            // set parsingFunction to Read state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _parsingFunction = ParsingFunction.Read;
 
             // call to the helper
@@ -1027,7 +1038,8 @@ namespace System.Xml
                 ;
         }
 
-        // SxS: This method resolves an Uri but does not expose it to caller. It's OK to suppress the SxS warning.
+        // SxS: This method resolves an Uri but does not expose it to caller. It's OK to suppress the SxS
+        // warning.
         [MemberNotNull(nameof(_validator))]
         private void SetupValidation(ValidationType valType)
         {

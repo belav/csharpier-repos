@@ -263,7 +263,8 @@ public class RedisProtocolTests
         );
 
         // Actual invocation doesn't matter because we're using a dummy hub protocol.
-        // But the dummy protocol will check that we gave it the test message to make sure everything flows through properly.
+        // But the dummy protocol will check that we gave it the test message to make sure everything flows
+        // through properly.
         var expected = testData.Decoded();
         var encoded = protocol.WriteInvocation(
             _testMessage.Target,
@@ -285,7 +286,8 @@ public class RedisProtocolTests
         var protocol = new RedisProtocol(hubMessageSerializer);
 
         // Actual invocation doesn't matter because we're using a dummy hub protocol.
-        // But the dummy protocol will check that we gave it the test message to make sure everything flows through properly.
+        // But the dummy protocol will check that we gave it the test message to make sure everything flows
+        // through properly.
         var expected = testData.Decoded();
         var encoded = protocol.WriteInvocation(
             _testMessage.Target,

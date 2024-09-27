@@ -74,7 +74,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         private ArrayList _wmlOnEnterForwardVarNames = new ArrayList();
         private bool _useDivsForBreaks = false;
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.XhtmlMobileTextWriter"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.XhtmlMobileTextWriter"]/*' />
         public XhtmlMobileTextWriter(TextWriter writer, MobileCapabilities device)
             : base(writer, device)
         {
@@ -91,7 +92,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             get { return _cachedEndTag; }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.CacheKey"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.CacheKey"]/*' />
         public virtual String CacheKey
         {
             get
@@ -130,7 +132,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.CustomBodyStyles"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.CustomBodyStyles"]/*' />
         public String CustomBodyStyles
         {
             get { return _customBodyStyles; }
@@ -141,7 +144,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SessionKey"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SessionKey"]/*' />
         public virtual String SessionKey
         {
             // Exception is for extensibility scenarios.
@@ -161,14 +165,16 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             set { _supportsNoWrapStyle = value; }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SuppressNewLine"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SuppressNewLine"]/*' />
         public bool SuppressNewLine
         {
             get { return _suppressNewLines; }
             set { _suppressNewLines = value; }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.UseDivsForBreaks"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.UseDivsForBreaks"]/*' />
         public bool UseDivsForBreaks
         {
             get { return _useDivsForBreaks; }
@@ -176,19 +182,22 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Add a variable name to clear.
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.AddOnEnterForwardSetVar"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.AddOnEnterForwardSetVar"]/*' />
         public virtual void AddOnEnterForwardSetVar(String var)
         {
             AddOnEnterForwardSetVar(var, String.Empty);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.AddOnEnterForwardSetVar1"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.AddOnEnterForwardSetVar1"]/*' />
         public virtual void AddOnEnterForwardSetVar(String var, String value)
         {
             _wmlOnEnterForwardVarNames.Add(new String[2] { var, value });
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.BeginCachedRendering"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.BeginCachedRendering"]/*' />
         public virtual void BeginCachedRendering()
         {
             _cachedInnerWriter = InnerWriter;
@@ -204,7 +213,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _cachedEndTag = null;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ClearPendingBreak"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ClearPendingBreak"]/*' />
         public virtual void ClearPendingBreak()
         {
             _pendingBreak = false;
@@ -237,7 +247,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return base.EncodeUrl(url);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.EndCachedRendering"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.EndCachedRendering"]/*' />
         public virtual void EndCachedRendering()
         {
             StringBuilder cachedMarkupBuilder = new StringBuilder();
@@ -273,7 +284,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             return existingClass == null ? styleClass : existingClass;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.EnterFormat"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.EnterFormat"]/*' />
         public override void EnterFormat(Style style)
         {
             StyleFilter filter = CurrentStyleClass.GetFilter(style);
@@ -284,7 +296,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             );
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.EnterLayout"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.EnterLayout"]/*' />
         public override void EnterLayout(Style style)
         {
             StyleFilter filter = CurrentStyleClass.GetFilter(style);
@@ -302,7 +315,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Hiding inherited member works because dynamic type is same as static type.
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.EnterStyle"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.EnterStyle"]/*' />
         public new void EnterStyle(Style style)
         {
             StyleFilter filter = CurrentStyleClass.GetFilter(style);
@@ -444,13 +458,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             );
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ExitFormat"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ExitFormat"]/*' />
         public override void ExitFormat(Style style)
         {
             ExitStyle(style);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ExitFormat"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ExitFormat"]/*' />
         public override void ExitFormat(Style style, bool breakafter)
         {
             ExitStyle(style);
@@ -460,13 +476,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ExitLayout"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ExitLayout"]/*' />
         public override void ExitLayout(Style style)
         {
             ExitStyle(style);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ExitLayout1"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ExitLayout1"]/*' />
         public override void ExitLayout(Style style, bool breakafter)
         {
             ExitStyle(style);
@@ -476,7 +494,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.ExitStyle"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.ExitStyle"]/*' />
         public new void ExitStyle(Style style)
         {
             StylePair pair = (StylePair)_styleStack.Pop();
@@ -490,8 +509,10 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Please see ASURT 144034 for this device-specific issue.
-        // Internal-only utility to return name of an XhtmlFormatStyleClass that represents the (format) diff of the
-        // parameter from the current style. This does not push the style stack -it is used only for tags with
+        // Internal-only utility to return name of an XhtmlFormatStyleClass that represents the (format)
+        // diff of the
+        // parameter from the current style. This does not push the style stack -it is used only for tags
+        // with
         // small content models such as <a>.
         internal String GetCssFormatClassName(Style style)
         {
@@ -512,7 +533,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                 return null;
             }
             XhtmlFormatStyleClass styleClass = new XhtmlFormatStyleClass(style, filter);
-            // Value returned is a valid styleClass which can be added to the attributes of, e.g., an <a> element
+            // Value returned is a valid styleClass which can be added to the attributes of, e.g., an <a>
+            // element
             // to cause character formatting.  Please see 144034 for the device specific issue.
             XhtmlStyleClass hashStyleClass = EnsureXhtmlStyleClassInHashtable(styleClass);
             if (hashStyleClass == null)
@@ -615,14 +637,16 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
                 || tag == "table";
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.IsStyleSheetEmpty"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.IsStyleSheetEmpty"]/*' />
         public virtual bool IsStyleSheetEmpty()
         {
             return _isStyleSheetEmpty;
         }
 
         // Call to switch from markup above the wml:onevent (if any) to below.
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.MarkWmlOnEventLocation"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.MarkWmlOnEventLocation"]/*' />
         public virtual void MarkWmlOnEventLocation()
         {
             InnerWriter = new StringWriter(
@@ -641,7 +665,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _physicalCssClasses.Push(cssClass);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SetBodyStyle"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SetBodyStyle"]/*' />
         public virtual void SetBodyStyle(Style style)
         {
             // Filter is not strictly needed here, since default property values are not written anyway
@@ -651,7 +676,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _isStyleSheetEmpty = filter == 0;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SetCacheKey"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SetCacheKey"]/*' />
         public virtual void SetCacheKey(Cache cache)
         {
             String styleText = GetStyles();
@@ -671,13 +697,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _cacheKeyValid = true;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SetPendingBreak"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SetPendingBreak"]/*' />
         public virtual void SetPendingBreak()
         {
             _pendingBreak = true;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.SetSessionKey"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.SetSessionKey"]/*' />
         public virtual void SetSessionKey(HttpSessionState session)
         {
             String styleText = GetStyles();
@@ -699,7 +727,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _sessionKeyValid = true;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteAttribute"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteAttribute"]/*' />
         public override void WriteAttribute(String attribute, String value, bool encode)
         {
             // If the value is null, we return without writing anything.  This is different
@@ -729,14 +758,16 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteBeginTag"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteBeginTag"]/*' />
         public override void WriteBeginTag(String tag)
         {
             HandleBreakForTag(tag);
             base.WriteBeginTag(tag);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteBreak"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteBreak"]/*' />
         public new virtual void WriteBreak()
         {
             if (UseDivsForBreaks)
@@ -753,19 +784,22 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // CachedEndTag used for devices that cannot render <select> directly after <table>
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteCachedMarkup"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteCachedMarkup"]/*' />
         public virtual void WriteCachedMarkup()
         {
             Write(_cachedMarkup);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteDoctypeDeclaration"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteDoctypeDeclaration"]/*' />
         public virtual void WriteDoctypeDeclaration(Doctype type)
         {
             WriteLine((String)_doctypeDeclarations[type]);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteEncodedAttributeValue"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteEncodedAttributeValue"]/*' />
         public virtual void WriteEncodedAttributeValue(String value)
         {
             StringBuilder builder = new StringBuilder();
@@ -773,7 +807,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             Write(builder.ToString());
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteEndTag"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteEndTag"]/*' />
         public override void WriteEndTag(String tag)
         {
             if (IsBlockElement(tag))
@@ -784,14 +819,16 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             _cachedEndTag = tag;
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteFullBeginTag"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteFullBeginTag"]/*' />
         public override void WriteFullBeginTag(String tag)
         {
             HandleBreakForTag(tag);
             base.WriteFullBeginTag(tag);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteHiddenField"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteHiddenField"]/*' />
         public virtual void WriteHiddenField(String name, String value)
         {
             WriteBeginTag("input");
@@ -802,7 +839,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Write a hidden field with no value attribute (useful for __ET hidden field).
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteHiddenField1"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteHiddenField1"]/*' />
         public virtual void WriteHiddenField(String name)
         {
             WriteBeginTag("input");
@@ -811,14 +849,16 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             WriteLine("/>");
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine"]/*' />
         public override void WriteLine()
         {
             if (!_suppressNewLines)
                 base.WriteLine();
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine1"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine1"]/*' />
         public override void WriteLine(String format, Object[] arg)
         {
             if (_suppressNewLines)
@@ -831,7 +871,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine2"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine2"]/*' />
         public override void WriteLine(String format, Object arg)
         {
             if (_suppressNewLines)
@@ -844,7 +885,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine3"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine3"]/*' />
         public override void WriteLine(String format, Object arg0, Object arg1)
         {
             if (_suppressNewLines)
@@ -857,7 +899,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine4"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine4"]/*' />
         public override void WriteLine(Object v)
         {
             if (_suppressNewLines)
@@ -870,7 +913,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine5"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine5"]/*' />
         public override void WriteLine(String s)
         {
             if (_suppressNewLines)
@@ -883,7 +927,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine6"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine6"]/*' />
         public override void WriteLine(Double v)
         {
             if (_suppressNewLines)
@@ -896,7 +941,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine7"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine7"]/*' />
         public override void WriteLine(Single v)
         {
             if (_suppressNewLines)
@@ -909,7 +955,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine8"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine8"]/*' />
         public override void WriteLine(Int64 v)
         {
             if (_suppressNewLines)
@@ -923,7 +970,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         }
 
         // Note: type UInt32 is not CLS compliant, hence no override for UInt32
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine9"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine9"]/*' />
         public override void WriteLine(Int32 v)
         {
             if (_suppressNewLines)
@@ -936,7 +984,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine10"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine10"]/*' />
         public override void WriteLine(Boolean v)
         {
             if (_suppressNewLines)
@@ -949,7 +998,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine11"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine11"]/*' />
         public override void WriteLine(Char[] buffer, Int32 index, Int32 count)
         {
             if (_suppressNewLines)
@@ -962,7 +1012,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine12"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine12"]/*' />
         public override void WriteLine(Char[] v)
         {
             if (_suppressNewLines)
@@ -975,7 +1026,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine13"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteLine13"]/*' />
         public override void WriteLine(Char v)
         {
             if (_suppressNewLines)
@@ -988,7 +1040,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WritePendingBreak"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WritePendingBreak"]/*' />
         public virtual void WritePendingBreak()
         {
             if (_pendingBreak)
@@ -998,7 +1051,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteUrlParameter"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteUrlParameter"]/*' />
         public virtual void WriteUrlParameter(String name, String value)
         {
             WriteEncodedUrlParameter(name);
@@ -1006,7 +1060,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             WriteEncodedUrlParameter(value);
         }
 
-        /// <include file='doc\XhtmlMobileTextWriter.uex' path='docs/doc[@for="XhtmlMobileTextWriter.WriteXmlDeclaration"]/*' />
+        /// <include file='doc\XhtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="XhtmlMobileTextWriter.WriteXmlDeclaration"]/*' />
         public virtual void WriteXmlDeclaration()
         {
             Write("<?xml version=\"1.0\" ");

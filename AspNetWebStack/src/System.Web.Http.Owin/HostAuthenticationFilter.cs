@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -20,7 +21,8 @@ namespace System.Web.Http
     {
         private readonly string _authenticationType;
 
-        /// <summary>Initializes a new instance of the <see cref="HostAuthenticationFilter"/> class.</summary>
+        /// <summary>Initializes a new instance of the <see cref="HostAuthenticationFilter"/>
+        // class.</summary>
         /// <param name="authenticationType">The authentication type of the OWIN middleware to use.</param>
         public HostAuthenticationFilter(string authenticationType)
         {

@@ -29,7 +29,8 @@ internal sealed class AccessTokenHttpMessageHandler : DelegatingHandler
         if (
             string.IsNullOrEmpty(_accessToken)
             ||
-            // Negotiate redirects likely will have a new access token so let's always grab a (potentially) new access token on negotiate
+            // Negotiate redirects likely will have a new access token so let's always grab a (potentially) new
+            // access token on negotiate
 #if NET5_0_OR_GREATER
             request.Options.TryGetValue(
                 new HttpRequestOptionsKey<bool>("IsNegotiate"),
@@ -58,7 +59,8 @@ internal sealed class AccessTokenHttpMessageHandler : DelegatingHandler
             SetAccessToken(_accessToken, request);
 
             // Retrying the request relies on any HttpContent being non-disposable.
-            // Currently this is true, the only HttpContent we send is type ReadOnlySequenceContent which is used by SSE and LongPolling for sending an already buffered byte[]
+            // Currently this is true, the only HttpContent we send is type ReadOnlySequenceContent which is
+            // used by SSE and LongPolling for sending an already buffered byte[]
             result = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
         }
         return result;
@@ -68,7 +70,8 @@ internal sealed class AccessTokenHttpMessageHandler : DelegatingHandler
     {
         if (!string.IsNullOrEmpty(accessToken))
         {
-            // Don't need to worry about WebSockets and browser because this code path will not be hit in the browser case
+            // Don't need to worry about WebSockets and browser because this code path will not be hit in the
+            // browser case
             // ClientWebSocketOptions.HttpVersion isn't settable in the browser
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
         }

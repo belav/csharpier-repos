@@ -45,10 +45,13 @@ public static class HtmlHelperLinkExtensions
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="actionName">The name of the action.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -81,15 +84,19 @@ public static class HtmlHelperLinkExtensions
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="actionName">The name of the action.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -154,10 +161,13 @@ public static class HtmlHelperLinkExtensions
     /// <param name="actionName">The name of the action.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -192,15 +202,19 @@ public static class HtmlHelperLinkExtensions
     /// <param name="actionName">The name of the action.</param>
     /// <param name="controllerName">The name of the controller.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -234,10 +248,13 @@ public static class HtmlHelperLinkExtensions
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -295,10 +312,13 @@ public static class HtmlHelperLinkExtensions
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -329,15 +349,19 @@ public static class HtmlHelperLinkExtensions
     /// <param name="htmlHelper">The <see cref="IHtmlHelper"/> instance this method extends.</param>
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>
@@ -369,15 +393,19 @@ public static class HtmlHelperLinkExtensions
     /// <param name="linkText">The inner text of the anchor element. Must not be <c>null</c>.</param>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">
-    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved through
-    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is typically
+    /// An <see cref="object"/> that contains the parameters for a route. The parameters are retrieved
+    // through
+    /// reflection by examining the properties of the <see cref="object"/>. This <see cref="object"/> is
+    // typically
     /// created using <see cref="object"/> initializer syntax. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the route
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // route
     /// parameters.
     /// </param>
     /// <param name="htmlAttributes">
     /// An <see cref="object"/> that contains the HTML attributes for the element. Alternatively, an
-    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the HTML
+    /// <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance containing the
+    // HTML
     /// attributes.
     /// </param>
     /// <returns>A new <see cref="IHtmlContent"/> containing the anchor element.</returns>

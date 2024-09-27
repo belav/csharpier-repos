@@ -577,7 +577,8 @@ public class Http2Tests : LoggedTest
                     var dataFrame = await h2Connection.ReceiveFrameAsync();
                     Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional streams.
+                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional
+                    // streams.
 
                     h2Connection.Logger.LogInformation("Connection stopped.");
                 }
@@ -637,7 +638,8 @@ public class Http2Tests : LoggedTest
                     var dataFrame = await h2Connection.ReceiveFrameAsync();
                     Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional streams.
+                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional
+                    // streams.
 
                     h2Connection.Logger.LogInformation("Connection stopped.");
                 }
@@ -703,7 +705,8 @@ public class Http2Tests : LoggedTest
                         length: 0
                     );
 
-                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional streams.
+                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional
+                    // streams.
 
                     for (var i = 1; i < 200; i++)
                     {

@@ -112,7 +112,8 @@ namespace System.Net.NetworkInformation
 
                         if (s_availabilityTimer == null)
                         {
-                            // Don't capture the current ExecutionContext and its AsyncLocals onto the timer causing them to live forever
+                            // Don't capture the current ExecutionContext and its AsyncLocals onto the timer causing them to
+                            // live forever
                             using (ExecutionContext.SuppressFlow())
                             {
                                 s_availabilityTimer = new Timer(

@@ -16,7 +16,8 @@ namespace System.IdentityModel.Diagnostics
     ///     URL
     ///     Action
     ///     ClaimPrincipal that is being authorized
-    /// Helps users diagnose authorization issues. In Authorize() this trace is written at the start of the method,
+    /// Helps users diagnose authorization issues. In Authorize() this trace is written at the start of
+    // the method,
     /// so it will appear when Authorize() fails.
     /// </summary>
     internal class AuthorizeTraceRecord : TraceRecord

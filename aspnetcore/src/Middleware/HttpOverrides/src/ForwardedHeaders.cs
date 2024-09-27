@@ -25,7 +25,8 @@ public enum ForwardedHeaders
     XForwardedHost = 1 << 1,
 
     /// <summary>
-    /// Process X-Forwarded-Proto, which identifies the protocol (HTTP or HTTPS) the client used to connect.
+    /// Process X-Forwarded-Proto, which identifies the protocol (HTTP or HTTPS) the client used to
+    // connect.
     /// </summary>
     XForwardedProto = 1 << 2,
 

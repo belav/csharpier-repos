@@ -51,10 +51,10 @@ internal class global
     public static bool write_to_file; // Write output to file
     public static int align; // Memory alignment
 
-    /*
-    ** Following are global structures, one built for
-    ** each of the tests.
-    */
+/*
+** Following are global structures, one built for
+** each of the tests.
+*/
     public static SortStruct numsortstruct_jagged; // For numeric sort
     public static SortStruct numsortstruct_rect; // For numeric sort
     public static StringSort strsortstruct; // For string sort
@@ -275,10 +275,10 @@ public class ByteMark
         global.align = 8;
         global.write_to_file = false;
 
-        /*
-        ** Indexes -- Baseline is DELL Pentium XP90
-        ** 11/28/94
-        */
+/*
+** Indexes -- Baseline is DELL Pentium XP90
+** 11/28/94
+*/
         // JTR: Should make member of HarnessTest, but left
         // this way to keep similar to original test.
         s_bindex = new double[14]
@@ -320,9 +320,9 @@ public class ByteMark
 
         SetRequestSecs();
 
-        /*
-        ** Handle any command-line arguments.
-        */
+/*
+** Handle any command-line arguments.
+*/
         int argc = argv.Length;
         if (argc > 0)
         {
@@ -336,9 +336,9 @@ public class ByteMark
             }
         }
 
-        /*
-        ** Output header
-        */
+/*
+** Output header
+*/
         OutputString("BBBBBB   YYY   Y  TTTTTTT  EEEEEEE");
         OutputString("BBB   B  YYY   Y    TTT    EEE");
         OutputString("BBB   B  YYY   Y    TTT    EEE");
@@ -364,9 +364,9 @@ public class ByteMark
 
         try
         {
-            /*
-            ** Execute the tests.
-            */
+/*
+** Execute the tests.
+*/
             int fpcount = 0;
             int intcount = 0;
             double intindex = 1.0; /* Integer index */
@@ -388,20 +388,20 @@ public class ByteMark
                         )
                     );
 
-                    /*
-                    ** Gather integer or FP indexes
-                    */
+/*
+** Gather integer or FP indexes
+*/
                     // JTR: indexes all have 1 added to them to compensate
                     // for splitting int sort into 2 tests
                     if ((i == 6) || (i == 12) || (i == 13) || (i == 11))
                     {
-                        /* FP index */
+/* FP index */
                         fpindex = fpindex * (bmean / s_bindex[i]);
                         fpcount++;
                     }
                     else
                     {
-                        /* Integer index */
+/* Integer index */
                         intindex = intindex * (bmean / s_bindex[i]);
                         intcount++;
                     }
@@ -414,9 +414,9 @@ public class ByteMark
                     }
                 }
             }
-            /*
-            ** Output the total indexes
-            */
+/*
+** Output the total indexes
+*/
             if (!global.custrun)
             {
                 OutputString("===========OVERALL============");
@@ -450,42 +450,42 @@ public class ByteMark
         return 100;
     }
 
-    /**************
-    ** parse_arg **
-    ***************
-    ** Given a pointer to a string, we assume that's an argument.
-    ** Parse that argument and act accordingly.
-    ** Return 0 if ok, else return -1.
-    */
+/**************
+** parse_arg **
+***************
+** Given a pointer to a string, we assume that's an argument.
+** Parse that argument and act accordingly.
+** Return 0 if ok, else return -1.
+*/
     private int parse_arg(String arg)
     {
         int i = 0; /* Index */
         StreamReader cfile = null; /* Command file identifier */
 
-        /*
-        ** First character has got to be a hyphen.
-        */
+/*
+** First character has got to be a hyphen.
+*/
         if (arg[i++] != '-')
             return (-1);
 
-        /*
-        ** Convert the rest of the argument to upper case
-        ** so there's little chance of confusion.
-        */
+/*
+** Convert the rest of the argument to upper case
+** so there's little chance of confusion.
+*/
         arg = arg.ToUpper();
 
-        /*
-        ** Next character picks the action.
-        */
+/*
+** Next character picks the action.
+*/
         switch (arg[i++])
         {
             case '?':
                 return (-1); /* Will display help */
 
             case 'C': /* Command file name */
-                /*
-                ** First try to open the file for reading.
-                */
+/*
+** First try to open the file for reading.
+*/
                 String inputFileName = arg.Substring(i);
 
                 try
@@ -506,12 +506,12 @@ public class ByteMark
         return (0);
     }
 
-    /*******************
-    ** display_help() **
-    ********************
-    ** Display a help message showing argument requirements and such.
-    ** Exit when you're done...I mean, REALLY exit.
-    */
+/*******************
+** display_help() **
+********************
+** Display a help message showing argument requirements and such.
+** Exit when you're done...I mean, REALLY exit.
+*/
     private static void display_help(String progname)
     {
         Console.WriteLine("Usage: {0} [-c<FILE>]", progname);
@@ -576,7 +576,7 @@ public class ByteMark
         MAXPARAM = 49,
     }
 
-    /* Parameter names */
+/* Parameter names */
     private static String[] s_paramnames =
     {
         "GLOBALMINTICKS",
@@ -632,34 +632,34 @@ public class ByteMark
         "DONNETRECT",
     };
 
-    /*****************
-    ** read_comfile **
-    ******************
-    ** Read the command file.  Set global parameters as
-    ** specified.  This routine assumes that the command file
-    ** is already open.
-    */
+/*****************
+** read_comfile **
+******************
+** Read the command file.  Set global parameters as
+** specified.  This routine assumes that the command file
+** is already open.
+*/
     private static void read_comfile(StreamReader cfile)
     {
         String inbuf;
 
         String eptr; /* Offset to "=" sign */
-        /* markples: now the value half of the key=value pair */
+/* markples: now the value half of the key=value pair */
 
         int eIndex; /* markples: now this is the "=" offset */
 
         PF i; /* Index */
 
-        /*
-        ** Sit in a big loop, reading a line from the file at each
-        ** pass.  Terminate on EOF.
-        */
+/*
+** Sit in a big loop, reading a line from the file at each
+** pass.  Terminate on EOF.
+*/
         while ((inbuf = cfile.ReadLine()) != null)
         {
-            /*
-            ** Parse up to the "=" sign.  If we don't find an
-            ** "=", then flag an error.
-            */
+/*
+** Parse up to the "=" sign.  If we don't find an
+** "=", then flag an error.
+*/
             if ((eIndex = inbuf.IndexOf('=')) == -1)
             {
                 Console.WriteLine("**COMMAND FILE ERROR at LINE:");
@@ -667,11 +667,11 @@ public class ByteMark
                 goto skipswitch; /* A GOTO!!!! */
             }
 
-            /*
-            ** Insert a null where the "=" was, then convert
-            ** the substring to uppercase.  That will enable
-            ** us to perform the match.
-            */
+/*
+** Insert a null where the "=" was, then convert
+** the substring to uppercase.  That will enable
+** us to perform the match.
+*/
             String name = inbuf.Substring(0, eIndex);
             eptr = inbuf.Substring(eIndex + 1);
             name = name.ToUpper();
@@ -690,10 +690,10 @@ public class ByteMark
                 goto skipswitch;
             }
 
-            /*
-            ** Advance eptr to the next field...which should be
-            ** the value assigned to the parameter.
-            */
+/*
+** Advance eptr to the next field...which should be
+** the value assigned to the parameter.
+*/
             switch (i)
             {
                 case PF.GMTICKS: /* GLOBALMINTICKS */
@@ -715,9 +715,9 @@ public class ByteMark
                     {
                         global.ofile = File.AppendText(global.ofile_name);
                         global.write_to_file = true;
-                        /*
-                        ** Open the output file.
-                        */
+/*
+** Open the output file.
+*/
                     }
                     catch (IOException)
                     {
@@ -944,24 +944,24 @@ public class ByteMark
         return;
     }
 
-    /************
-    ** getflag **
-    *************
-    ** Return 1 if cptr points to "T"; 0 otherwise.
-    */
+/************
+** getflag **
+*************
+** Return 1 if cptr points to "T"; 0 otherwise.
+*/
     private static bool getflag(String cptr)
     {
         return cptr[0] == 'T' || cptr[0] == 't';
     }
 
-    /*********************
-    ** set_request_secs **
-    **********************
-    ** Set everyone's "request_secs" entry to whatever
-    ** value is in global.min_secs.  This is done
-    ** at the beginning, and possibly later if the
-    ** user redefines global.min_secs in the command file.
-    */
+/*********************
+** set_request_secs **
+**********************
+** Set everyone's "request_secs" entry to whatever
+** value is in global.min_secs.  This is done
+** at the beginning, and possibly later if the
+** user redefines global.min_secs in the command file.
+*/
     private static void SetRequestSecs()
     {
         foreach (HarnessTest ht in s_tests)
@@ -971,15 +971,15 @@ public class ByteMark
         return;
     }
 
-    /**************************
-    ** bench_with_confidence **
-    ***************************
-    ** Given a benchmark id that indicates a function, this
-    ** routine repeatedly calls that benchmark, seeking
-    ** to collect enough scores to get 5 that meet the confidence
-    ** criteria.  Return 0 if ok, -1 if failure.
-    ** Returns mean ans std. deviation of results if successful.
-    */
+/**************************
+** bench_with_confidence **
+***************************
+** Given a benchmark id that indicates a function, this
+** routine repeatedly calls that benchmark, seeking
+** to collect enough scores to get 5 that meet the confidence
+** criteria.  Return 0 if ok, -1 if failure.
+** Returns mean ans std. deviation of results if successful.
+*/
     private static int bench_with_confidence(
         int fid, /* Function id */
         out double mean, /* Mean of scores */
@@ -992,42 +992,42 @@ public class ByteMark
         int i; /* Index */
         double newscore; /* For improving confidence interval */
 
-        /*
-        ** Get first 5 scores.  Then begin confidence testing.
-        */
+/*
+** Get first 5 scores.  Then begin confidence testing.
+*/
         for (i = 0; i < 5; i++)
         {
             myscores[i] = s_tests[fid].Run();
         }
         numtries = 5; /* Show 5 attempts */
 
-        /*
-        ** The system allows a maximum of 10 tries before it gives
-        ** up.  Since we've done 5 already, we'll allow 5 more.
-        */
+/*
+** The system allows a maximum of 10 tries before it gives
+** up.  Since we've done 5 already, we'll allow 5 more.
+*/
 
-        /*
-        ** Enter loop to test for confidence criteria.
-        */
+/*
+** Enter loop to test for confidence criteria.
+*/
         while (true)
         {
-            /*
-            ** Calculate confidence.
-            */
+/*
+** Calculate confidence.
+*/
             calc_confidence(myscores, out c_half_interval, out mean, out stdev);
 
-            /*
-            ** Is half interval 5% or less of mean?
-            ** If so, we can go home.  Otherwise,
-            ** we have to continue.
-            */
+/*
+** Is half interval 5% or less of mean?
+** If so, we can go home.  Otherwise,
+** we have to continue.
+*/
             if (c_half_interval / mean <= (double)0.05)
                 break;
 
-            /*
-            ** Go get a new score and see if it
-            ** improves existing scores.
-            */
+/*
+** Go get a new score and see if it
+** improves existing scores.
+*/
             do
             {
                 if (numtries == 10)
@@ -1043,18 +1043,18 @@ public class ByteMark
         return (0);
     }
 
-    /********************
-    ** seek_confidence **
-    *********************
-    ** Pass this routine an array of 5 scores PLUS a new score.
-    ** This routine tries the new score in place of each of
-    ** the other five scores to determine if the new score,
-    ** when replacing one of the others, improves the confidence
-    ** half-interval.
-    ** Return 0 if failure.  Original 5 scores unchanged.
-    ** Return -1 if success.  Also returns new half-interval,
-    ** mean, and stand. dev.
-    */
+/********************
+** seek_confidence **
+*********************
+** Pass this routine an array of 5 scores PLUS a new score.
+** This routine tries the new score in place of each of
+** the other five scores to determine if the new score,
+** when replacing one of the others, improves the confidence
+** half-interval.
+** Return 0 if failure.  Original 5 scores unchanged.
+** Return -1 if success.  Also returns new half-interval,
+** mean, and stand. dev.
+*/
     private static int seek_confidence(
         double[] scores,
         ref double newscore,
@@ -1068,17 +1068,17 @@ public class ByteMark
         int is_beaten; /* Indicates original was beaten */
         int i; /* Index */
 
-        /*
-        ** First calculate original standard deviation
-        */
+/*
+** First calculate original standard deviation
+*/
         calc_confidence(scores, out c_half_interval, out smean, out sdev);
         sdev_to_beat = sdev;
         is_beaten = -1;
 
-        /*
-        ** Try to beat original score.  We'll come out of this
-        ** loop with a flag.
-        */
+/*
+** Try to beat original score.  We'll come out of this
+** loop with a flag.
+*/
         for (i = 0; i < 5; i++)
         {
             temp = scores[i];
@@ -1100,15 +1100,15 @@ public class ByteMark
         return (0);
     }
 
-    /********************
-    ** calc_confidence **
-    *********************
-    ** Given a set of 5 scores, calculate the confidence
-    ** half-interval.  We'l also return the sample mean and sample
-    ** standard deviation.
-    ** NOTE: This routines presumes a confidence of 95% and
-    ** a confidence coefficient of .95
-    */
+/********************
+** calc_confidence **
+*********************
+** Given a set of 5 scores, calculate the confidence
+** half-interval.  We'l also return the sample mean and sample
+** standard deviation.
+** NOTE: This routines presumes a confidence of 95% and
+** a confidence coefficient of .95
+*/
     private static void calc_confidence(
         double[] scores, /* Array of scores */
         out double c_half_interval, /* Confidence half-int */
@@ -1117,14 +1117,14 @@ public class ByteMark
     ) /* Sample stand dev */
     {
         int i; /* Index */
-        /*
-        ** First calculate mean.
-        */
+/*
+** First calculate mean.
+*/
         smean = (scores[0] + scores[1] + scores[2] + scores[3] + scores[4]) / (double)5.0;
 
-        /*
-        ** Get standard deviation - first get variance
-        */
+/*
+** Get standard deviation - first get variance
+*/
         sdev = (double)0.0;
         for (i = 0; i < 5; i++)
         {
@@ -1133,13 +1133,13 @@ public class ByteMark
         sdev /= (double)4.0;
         sdev = Math.Sqrt(sdev) / Math.Sqrt(5.0);
 
-        /*
-        ** Now calculate the confidence half-interval.
-        ** For a confidence level of 95% our confidence coefficient
-        ** gives us a multiplying factor of 2.776
-        ** (The upper .025 quartile of a t distribution with 4 degrees
-        ** of freedom.)
-        */
+/*
+** Now calculate the confidence half-interval.
+** For a confidence level of 95% our confidence coefficient
+** gives us a multiplying factor of 2.776
+** (The upper .025 quartile of a t distribution with 4 degrees
+** of freedom.)
+*/
         c_half_interval = (double)2.776 * sdev;
         return;
     }
@@ -1163,22 +1163,22 @@ public class ByteMark
         }
     }
 
-    /****************************
-    ** TicksToSecs
-    ** Converts ticks to seconds.  Converts ticks to integer
-    ** seconds, discarding any fractional amount.
-    */
+/****************************
+** TicksToSecs
+** Converts ticks to seconds.  Converts ticks to integer
+** seconds, discarding any fractional amount.
+*/
     public static int TicksToSecs(long tickamount)
     {
         return ((int)(tickamount / global.TICKS_PER_SEC));
     }
 
-    /****************************
-    ** TicksToFracSecs
-    ** Converts ticks to fractional seconds.  In other words,
-    ** this returns the exact conversion from ticks to
-    ** seconds.
-    */
+/****************************
+** TicksToFracSecs
+** Converts ticks to fractional seconds.  In other words,
+** this returns the exact conversion from ticks to
+** seconds.
+*/
     public static double TicksToFracSecs(long tickamount)
     {
         return ((double)tickamount / (double)global.TICKS_PER_SEC);
@@ -1201,22 +1201,22 @@ public class ByteMark
         return x;
     }
 
-    /****************************
-    *         randwc()          *
-    *****************************
-    ** Returns int random modulo num.
-    */
+/****************************
+*         randwc()          *
+*****************************
+** Returns int random modulo num.
+*/
     public static int randwc(int num)
     {
         return (randnum(0) % num);
     }
 
-    /***************************
-    **      abs_randwc()      **
-    ****************************
-    ** Same as randwc(), only this routine returns only
-    ** positive numbers.
-    */
+/***************************
+**      abs_randwc()      **
+****************************
+** Same as randwc(), only this routine returns only
+** positive numbers.
+*/
     public static int abs_randwc(int num)
     {
         int temp; /* Temporary storage */
@@ -1228,14 +1228,14 @@ public class ByteMark
         return temp;
     }
 
-    /****************************
-    *        randnum()          *
-    *****************************
-    ** Second order linear congruential generator.
-    ** Constants suggested by J. G. Skellam.
-    ** If val==0, returns next member of sequence.
-    **    val!=0, restart generator.
-    */
+/****************************
+*        randnum()          *
+*****************************
+** Second order linear congruential generator.
+** Constants suggested by J. G. Skellam.
+** If val==0, returns next member of sequence.
+**    val!=0, restart generator.
+*/
     public static int randnum(int lngval)
     {
         int interm;

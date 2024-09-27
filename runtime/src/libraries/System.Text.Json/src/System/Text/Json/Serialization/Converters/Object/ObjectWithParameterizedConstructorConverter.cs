@@ -181,7 +181,8 @@ namespace System.Text.Json.Serialization.Converters
                     state.Current.ObjectState = StackFrameObjectState.ReadMetadata;
                 }
 
-                // Dispatch to any polymorphic converters: should always be entered regardless of ObjectState progress
+                // Dispatch to any polymorphic converters: should always be entered regardless of ObjectState
+                // progress
                 if (
                     (state.Current.MetadataPropertyNames & MetadataPropertyName.Type) != 0
                     && state.Current.PolymorphicSerializationState
@@ -278,7 +279,8 @@ namespace System.Text.Json.Serialization.Converters
                             {
                                 jsonPropertyInfo.Set(obj, propValue);
 
-                                // if this is required property IgnoreNullTokensOnRead will always be false because we don't allow for both to be true
+                                // if this is required property IgnoreNullTokensOnRead will always be false because we don't allow
+                                // for both to be true
                                 state.Current.MarkRequiredPropertyAsRead(jsonPropertyInfo);
                             }
                         }
@@ -751,10 +753,12 @@ namespace System.Text.Json.Serialization.Converters
                 out byte[] utf8PropertyName
             );
 
-            // Increment ConstructorParameterIndex so GetParameter() checks the next parameter first when called again.
+            // Increment ConstructorParameterIndex so GetParameter() checks the next parameter first when called
+            // again.
             state.Current.CtorArgumentState!.ParameterIndex++;
 
-            // For case insensitive and missing property support of JsonPath, remember the value on the temporary stack.
+            // For case insensitive and missing property support of JsonPath, remember the value on the
+            // temporary stack.
             state.Current.JsonPropertyName = utf8PropertyName;
 
             state.Current.CtorArgumentState.JsonParameterInfo = jsonParameterInfo;

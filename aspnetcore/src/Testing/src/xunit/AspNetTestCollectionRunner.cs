@@ -43,10 +43,13 @@ public class AspNetTestCollectionRunner : XunitTestCollectionRunner
     {
         await base.AfterTestCollectionStartingAsync().ConfigureAwait(false);
 
-        // note: We pass the assembly fixtures into the runner as ICollectionFixture<> - this seems to work OK without any
-        // drawbacks. It's reasonable that we could add IAssemblyFixture<> and related plumbing if it ever became required.
+        // note: We pass the assembly fixtures into the runner as ICollectionFixture<> - this seems to work
+        // OK without any
+        // drawbacks. It's reasonable that we could add IAssemblyFixture<> and related plumbing if it ever
+        // became required.
         //
-        // The reason for assembly fixture is when we want to start/stop something as the project scope - tests can only be
+        // The reason for assembly fixture is when we want to start/stop something as the project scope -
+        // tests can only be
         // in one test collection at a time.
         foreach (var mapping in _assemblyFixtureMappings)
         {

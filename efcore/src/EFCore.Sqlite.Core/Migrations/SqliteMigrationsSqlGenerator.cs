@@ -20,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations;
 ///     </para>
 ///     <para>
 ///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see>, and
-///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF
+// Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
@@ -40,7 +41,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Generates commands from a list of operations.
     /// </summary>
     /// <param name="operations">The operations.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="options">The options to use when generating commands.</param>
     /// <returns>The list of commands to be executed or scripted.</returns>
     public override IReadOnlyList<MigrationCommand> Generate(
@@ -568,11 +570,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     }
 
     /// <summary>
-    ///     Builds commands for the given <see cref="AlterDatabaseOperation" /> by making calls on the given
+    ///     Builds commands for the given <see cref="AlterDatabaseOperation" /> by making calls on the
+    // given
     ///     <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         AlterDatabaseOperation operation,
@@ -599,9 +603,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         AddColumnOperation operation,
         IModel? model,
@@ -654,9 +660,11 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     by making calls on the given <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         DropIndexOperation operation,
         IModel? model,
@@ -679,7 +687,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     by making calls on the given <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         RenameIndexOperation operation,
@@ -695,7 +704,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     by making calls on the given <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         RenameTableOperation operation,
@@ -720,7 +730,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     by making calls on the given <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         RenameColumnOperation operation,
@@ -738,13 +749,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             .EndCommand();
 
     /// <summary>
-    ///     Builds commands for the given <see cref="CreateTableOperation" /> by making calls on the given
+    ///     Builds commands for the given <see cref="CreateTableOperation" /> by making calls on the
+    // given
     ///     <see cref="MigrationCommandListBuilder" />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         CreateTableOperation operation,
         IModel? model,
@@ -765,7 +779,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         }
 
         // Lifts a primary key definition into the typename.
-        // This handles the quirks of creating integer primary keys using autoincrement, not default rowid behavior.
+        // This handles the quirks of creating integer primary keys using autoincrement, not default rowid
+        // behavior.
         if (operation.PrimaryKey?.Columns.Length == 1)
         {
             var columnOp = operation.Columns.FirstOrDefault(o =>
@@ -828,10 +843,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     }
 
     /// <summary>
-    ///     Generates a SQL fragment for the column definitions in a <see cref="CreateTableOperation" />.
+    ///     Generates a SQL fragment for the column definitions in a <see cref="CreateTableOperation"
+    // />.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to add the SQL fragment.</param>
     protected override void CreateTableColumns(
         CreateTableOperation operation,
@@ -883,11 +900,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <summary>
     ///     Generates a SQL fragment for a column definition for the given column metadata.
     /// </summary>
-    /// <param name="schema">The schema that contains the table, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the table, or <see langword="null" /> to use the
+    // default schema.</param>
     /// <param name="table">The table that contains the column.</param>
     /// <param name="name">The column name.</param>
     /// <param name="operation">The column metadata.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to add the SQL fragment.</param>
     protected override void ColumnDefinition(
         string? schema,
@@ -926,13 +945,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     #region Invalid migration operations
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         AddForeignKeyOperation operation,
         IModel? model,
@@ -944,13 +966,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         AddPrimaryKeyOperation operation,
         IModel? model,
@@ -962,11 +987,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         AddUniqueConstraintOperation operation,
@@ -978,11 +1005,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         AddCheckConstraintOperation operation,
@@ -994,13 +1023,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         DropColumnOperation operation,
         IModel? model,
@@ -1012,13 +1044,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         DropForeignKeyOperation operation,
         IModel? model,
@@ -1030,13 +1065,16 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
-    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL for the operation.</param>
+    /// <param name="terminate">Indicates whether or not to terminate the command after generating SQL
+    // for the operation.</param>
     protected override void Generate(
         DropPrimaryKeyOperation operation,
         IModel? model,
@@ -1048,11 +1086,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         DropUniqueConstraintOperation operation,
@@ -1064,11 +1104,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         DropCheckConstraintOperation operation,
@@ -1080,11 +1122,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
         );
 
     /// <summary>
-    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds, which
+    ///     Throws <see cref="NotSupportedException" /> since this operation requires table rebuilds,
+    // which
     ///     are not yet supported.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         AlterColumnOperation operation,
@@ -1098,11 +1142,13 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     /// <summary>
     ///     Generates a SQL fragment for a computed column definition for the given column metadata.
     /// </summary>
-    /// <param name="schema">The schema that contains the table, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The schema that contains the table, or <see langword="null" /> to use the
+    // default schema.</param>
     /// <param name="table">The table that contains the column.</param>
     /// <param name="name">The column name.</param>
     /// <param name="operation">The column metadata.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to add the SQL fragment.</param>
     protected override void ComputedColumnDefinition(
         string? schema,
@@ -1133,10 +1179,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     #region Ignored schema operations
 
     /// <summary>
-    ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve testing compatibility.
+    ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve
+    // testing compatibility.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         EnsureSchemaOperation operation,
@@ -1145,10 +1193,12 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ) { }
 
     /// <summary>
-    ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve testing compatibility.
+    ///     Ignored, since schemas are not supported by SQLite and are silently ignored to improve
+    // testing compatibility.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         DropSchemaOperation operation,
@@ -1164,7 +1214,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         RestartSequenceOperation operation,
@@ -1176,7 +1227,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         CreateSequenceOperation operation,
@@ -1188,7 +1240,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         RenameSequenceOperation operation,
@@ -1200,7 +1253,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         AlterSequenceOperation operation,
@@ -1212,7 +1266,8 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
     ///     Throws <see cref="NotSupportedException" /> since SQLite does not support sequences.
     /// </summary>
     /// <param name="operation">The operation.</param>
-    /// <param name="model">The target model which may be <see langword="null" /> if the operations exist without a model.</param>
+    /// <param name="model">The target model which may be <see langword="null" /> if the operations
+    // exist without a model.</param>
     /// <param name="builder">The command builder to use to build the commands.</param>
     protected override void Generate(
         DropSequenceOperation operation,

@@ -100,7 +100,8 @@ namespace System.Web.Handlers
         private static void EnsureHandlerExistenceChecked()
         {
             // First we have to check that the handler is registered:
-            // <add path="WebResource.axd" verb="GET" type="System.Web.Handlers.AssemblyResourceLoader" validate="True" />
+            // <add path="WebResource.axd" verb="GET" type="System.Web.Handlers.AssemblyResourceLoader"
+            // validate="True" />
             if (!_handlerExistenceChecked)
             {
                 HttpContext context = HttpContext.Current;
@@ -817,7 +818,8 @@ namespace System.Web.Handlers
                     realName.Version = new Version(parts[1]);
                     string cultureString = parts[2];
 
-                    // Try to determine the culture, using the invariant culture if there wasn't one (doesn't work without it)
+                    // Try to determine the culture, using the invariant culture if there wasn't one (doesn't work
+                    // without it)
                     if (cultureString.Length > 0)
                     {
                         realName.CultureInfo = new CultureInfo(cultureString);

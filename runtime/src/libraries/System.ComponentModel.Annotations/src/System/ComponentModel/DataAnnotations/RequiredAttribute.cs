@@ -32,8 +32,10 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="value">The value to test</param>
         /// <returns>
-        ///     Returns <see langword="false" /> if the <paramref name="value" /> is null or an empty string.
-        ///     If <see cref="AllowEmptyStrings" /> then <see langword="true" /> is returned for empty strings.
+        ///     Returns <see langword="false" /> if the <paramref name="value" /> is null or an empty
+        // string.
+        ///     If <see cref="AllowEmptyStrings" /> then <see langword="true" /> is returned for empty
+        // strings.
         /// </returns>
         public override bool IsValid(object? value)
         {

@@ -41,25 +41,25 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int hasFeature(
-            /*DOMString*/HandleRef feature,
-            /*DOMString*/HandleRef version,
+/*DOMString*/HandleRef feature,
+/*DOMString*/HandleRef version,
             out bool ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createDocumentType(
-            /*DOMString*/HandleRef qualifiedName,
-            /*DOMString*/HandleRef publicId,
-            /*DOMString*/HandleRef systemId,
+/*DOMString*/HandleRef qualifiedName,
+/*DOMString*/HandleRef publicId,
+/*DOMString*/HandleRef systemId,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMDocumentType ret
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createDocument(
-            /*DOMString*/HandleRef namespaceURI,
-            /*DOMString*/HandleRef qualifiedName,
+/*DOMString*/HandleRef namespaceURI,
+/*DOMString*/HandleRef qualifiedName,
             [MarshalAs(UnmanagedType.Interface)] nsIDOMDocumentType doctype,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMDocument ret
         );

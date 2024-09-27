@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Diagnostics;
@@ -105,7 +105,8 @@ namespace System.Linq.Expressions
         /// <param name="breakLabel">The <see cref="BreakLabel" /> property of the result.</param>
         /// <param name="continueLabel">The <see cref="ContinueLabel" /> property of the result.</param>
         /// <param name="body">The <see cref="Body" /> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public LoopExpression Update(
             LabelTarget breakLabel,
             LabelTarget continueLabel,

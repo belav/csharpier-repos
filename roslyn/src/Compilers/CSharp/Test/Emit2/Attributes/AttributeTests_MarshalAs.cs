@@ -575,57 +575,74 @@ class X
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (8,79): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int LPArray_e0;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType =
+                    // VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // LPArray_e0;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArraySubType = VarEnum.VT_BSTR"
                     ),
                     // (8,151): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int LPArray_e0;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType =
+                    // VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // LPArray_e0;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = -1")
                         .WithArguments("SizeConst"),
                     // (8,167): error CS0599: Invalid value for named attribute argument 'SizeParamIndex'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int LPArray_e0;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType =
+                    // VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // LPArray_e0;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeParamIndex = -1")
                         .WithArguments("SizeParamIndex"),
                     // (9,79): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = -1)]                                                                                             int LPArray_e1;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = -1)]
+                    // int LPArray_e1;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = -1")
                         .WithArguments("SizeConst"),
                     // (10,94): error CS0599: Invalid value for named attribute argument 'SizeParamIndex'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = 0, SizeParamIndex = -1)]                                                                         int LPArray_e2;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = 0,
+                    // SizeParamIndex = -1)]                                                                         int
+                    // LPArray_e2;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeParamIndex = -1")
                         .WithArguments("SizeParamIndex"),
                     // (11,79): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = int.MaxValue, SizeParamIndex = short.MaxValue)]                                                  int LPArray_e3;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst =
+                    // int.MaxValue, SizeParamIndex = short.MaxValue)]                                                  int
+                    // LPArray_e3;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = int.MaxValue")
                         .WithArguments("SizeConst"),
                     // (12,72): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U8, SizeConst = int.MaxValue/4 + 1, SizeParamIndex = short.MaxValue)]                                                   int LPArray_e4;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.U8, SizeConst = int.MaxValue/4
+                    // + 1, SizeParamIndex = short.MaxValue)]                                                   int
+                    // LPArray_e4;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = int.MaxValue/4 + 1")
                         .WithArguments("SizeConst"),
                     // (13,39): error CS0599: Invalid value for named attribute argument 'ArraySubType'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.CustomMarshaler)]                                                                                                       int LPArray_e5;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.CustomMarshaler)]
+                    // int LPArray_e5;
                     Diagnostic(
                             ErrorCode.ERR_InvalidNamedArgument,
                             "ArraySubType = UnmanagedType.CustomMarshaler"
                         )
                         .WithArguments("ArraySubType"),
                     // (14,39): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.LPArray, SafeArraySubType=VarEnum.VT_I1)]                                                                                                                     int LPArray_e6;
+                    //     [MarshalAs(UnmanagedType.LPArray, SafeArraySubType=VarEnum.VT_I1)]
+                    // int LPArray_e6;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArraySubType=VarEnum.VT_I1"
                     ),
                     // (15,39): error CS0599: Invalid value for named attribute argument 'ArraySubType'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = (UnmanagedType)0x20000000)]                                                                                                           int LPArray_e7;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = (UnmanagedType)0x20000000)]
+                    // int LPArray_e7;
                     Diagnostic(
                             ErrorCode.ERR_InvalidNamedArgument,
                             "ArraySubType = (UnmanagedType)0x20000000"
                         )
                         .WithArguments("ArraySubType"),
                     // (16,39): error CS0599: Invalid value for named attribute argument 'ArraySubType'
-                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = (UnmanagedType)(-1))]                                                                                                                 int LPArray_e8;
+                    //     [MarshalAs(UnmanagedType.LPArray, ArraySubType = (UnmanagedType)(-1))]
+                    // int LPArray_e8;
                     Diagnostic(
                             ErrorCode.ERR_InvalidNamedArgument,
                             "ArraySubType = (UnmanagedType)(-1)"
@@ -688,7 +705,8 @@ public class X
                     )
                     .WithLocation(6, 6),
                 // (9,6): warning CS9125: Attribute parameter 'SizeConst' must be specified.
-                //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, IidParameterIndex = -1, MarshalCookie = null, MarshalType = null, MarshalTypeRef = null,
+                //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr,
+                // IidParameterIndex = -1, MarshalCookie = null, MarshalType = null, MarshalTypeRef = null,
                 Diagnostic(
                         ErrorCode.WRN_ByValArraySizeConstRequired,
                         @"MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, IidParameterIndex = -1, MarshalCookie = null, MarshalType = null, MarshalTypeRef = null,
@@ -765,44 +783,56 @@ public class X
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (8,82): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int ByValArray_e1;
+                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // ByValArray_e1;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArraySubType = VarEnum.VT_BSTR"
                     ),
                     // (8,154):error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int ByValArray_e1;
+                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // ByValArray_e1;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = -1")
                         .WithArguments("SizeConst"),
                     // (8,170): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int ByValArray_e1;
+                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]int
+                    // ByValArray_e1;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeParamIndex = -1"),
                     // (9,6): warning CS9124: Attribute parameter 'SizeConst' must be specified.
-                    //     [MarshalAs(UnmanagedType.ByValArray, SizeParamIndex = short.MaxValue)]                                                                                                                    int ByValArray_e2;
+                    //     [MarshalAs(UnmanagedType.ByValArray, SizeParamIndex = short.MaxValue)]
+                    // int ByValArray_e2;
                     Diagnostic(
                         ErrorCode.WRN_ByValArraySizeConstRequired,
                         "MarshalAs(UnmanagedType.ByValArray, SizeParamIndex = short.MaxValue)"
                     ),
                     // (9,42): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValArray, SizeParamIndex = short.MaxValue)]                                                                                                                    int ByValArray_e2;
+                    //     [MarshalAs(UnmanagedType.ByValArray, SizeParamIndex = short.MaxValue)]
+                    // int ByValArray_e2;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SizeParamIndex = short.MaxValue"
                     ),
                     // (10,6): warning CS9124: Attribute parameter 'SizeConst' must be specified.
-                    //     [MarshalAs(UnmanagedType.ByValArray, SafeArraySubType = VarEnum.VT_I2)]                                                                                                                   int ByValArray_e3;
+                    //     [MarshalAs(UnmanagedType.ByValArray, SafeArraySubType = VarEnum.VT_I2)]
+                    // int ByValArray_e3;
                     Diagnostic(
                         ErrorCode.WRN_ByValArraySizeConstRequired,
                         "MarshalAs(UnmanagedType.ByValArray, SafeArraySubType = VarEnum.VT_I2)"
                     ),
                     // (10,42): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValArray, SafeArraySubType = VarEnum.VT_I2)]                                                                                                                   int ByValArray_e3;
+                    //     [MarshalAs(UnmanagedType.ByValArray, SafeArraySubType = VarEnum.VT_I2)]
+                    // int ByValArray_e3;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArraySubType = VarEnum.VT_I2"
                     ),
                     // (11,82): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst = 0x20000000)]                                                                                     int ByValArray_e4;
+                    //     [MarshalAs(UnmanagedType.ByValArray, ArraySubType = UnmanagedType.ByValTStr, SizeConst =
+                    // 0x20000000)]                                                                                     int
+                    // ByValArray_e4;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = 0x20000000")
                         .WithArguments("SizeConst")
                 );
@@ -838,8 +868,10 @@ public class X
         }
 
         /// <summary>
-        /// (SafeArraySubType, SafeArrayUserDefinedSubType), (ArraySubType, SizeConst, SizeParamIndex) not allowed,
-        /// (SafeArraySubType, SafeArrayUserDefinedSubType) not allowed together unless VT_DISPATCH, VT_UNKNOWN, VT_RECORD; others ignored.
+        /// (SafeArraySubType, SafeArrayUserDefinedSubType), (ArraySubType, SizeConst, SizeParamIndex) not
+        // allowed,
+        /// (SafeArraySubType, SafeArrayUserDefinedSubType) not allowed together unless VT_DISPATCH,
+        // VT_UNKNOWN, VT_RECORD; others ignored.
         /// </summary>
         [Fact]
         public void NativeTypeSafeArray()
@@ -1005,49 +1037,66 @@ public class X
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (8,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int SafeArray_e1;
+                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // SafeArray_e1;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "ArraySubType = UnmanagedType.ByValTStr"
                     ),
                     // (8,153): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int SafeArray_e1;
+                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // SafeArray_e1;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeConst = -1"),
                     // (8,169): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int SafeArray_e1;
+                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // SafeArray_e1;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeParamIndex = -1"),
                     // (8,117): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int SafeArray_e1;
+                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // SafeArray_e1;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArrayUserDefinedSubType = null"
                     ),
                     // (9,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr)]                                                                                                                int SafeArray_e2;
+                    //     [MarshalAs(UnmanagedType.SafeArray, ArraySubType = UnmanagedType.ByValTStr)]
+                    // int SafeArray_e2;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "ArraySubType = UnmanagedType.ByValTStr"
                     ),
                     // (10,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, SizeConst = 1)]                                                                                                                                         int SafeArray_e3;
+                    //     [MarshalAs(UnmanagedType.SafeArray, SizeConst = 1)]
+                    // int SafeArray_e3;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeConst = 1"),
                     // (11,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, SizeParamIndex = 1)]                                                                                                                                    int SafeArray_e4;
+                    //     [MarshalAs(UnmanagedType.SafeArray, SizeParamIndex = 1)]
+                    // int SafeArray_e4;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeParamIndex = 1"),
                     // (12,77): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null)]                                                                                int SafeArray_e5;
+                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR,
+                    // SafeArrayUserDefinedSubType = null)]
+                    // int SafeArray_e5;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArrayUserDefinedSubType = null"
                     ),
                     // (13,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArrayUserDefinedSubType = null, SafeArraySubType = VarEnum.VT_BLOB)]                                                                                int SafeArray_e6;
+                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArrayUserDefinedSubType = null, SafeArraySubType =
+                    // VarEnum.VT_BLOB)]                                                                                int
+                    // SafeArray_e6;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArrayUserDefinedSubType = null"
                     ),
                     // (14,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArrayUserDefinedSubType = typeof(int), SafeArraySubType = 0)]                                                                                       int SafeArray_e7;
+                    //     [MarshalAs(UnmanagedType.SafeArray, SafeArrayUserDefinedSubType = typeof(int),
+                    // SafeArraySubType = 0)]
+                    // int SafeArray_e7;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "SafeArrayUserDefinedSubType = typeof(int)"
@@ -1109,46 +1158,60 @@ public class X
             CreateCompilation(source)
                 .VerifyDiagnostics(
                     // (9,41): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int ByValTStr_e1;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // ByValTStr_e1;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "ArraySubType = UnmanagedType.ByValTStr"
                     ),
                     // (9,153): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int ByValTStr_e1;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // ByValTStr_e1;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = -1")
                         .WithArguments("SizeConst"),
                     // (9,169): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int ByValTStr_e1;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // ByValTStr_e1;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeParamIndex = -1"),
                     // (9,6): error CS7046: Attribute parameter 'SizeConst' must be specified.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int ByValTStr_e1;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, ArraySubType = UnmanagedType.ByValTStr, SafeArraySubType
+                    // = VarEnum.VT_BSTR, SafeArrayUserDefinedSubType = null, SizeConst = -1, SizeParamIndex = -1)]   int
+                    // ByValTStr_e1;
                     Diagnostic(ErrorCode.ERR_AttributeParameterRequired1, "MarshalAs")
                         .WithArguments("SizeConst"),
                     // (10,41): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = -1)]                                                                                                                                        int ByValTStr_e2;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = -1)]
+                    // int ByValTStr_e2;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, "SizeConst = -1")
                         .WithArguments("SizeConst"),
                     // (10,6): error CS7046: Attribute parameter 'SizeConst' must be specified.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = -1)]                                                                                                                                        int ByValTStr_e2;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = -1)]
+                    // int ByValTStr_e2;
                     Diagnostic(ErrorCode.ERR_AttributeParameterRequired1, "MarshalAs")
                         .WithArguments("SizeConst"),
                     // (11,41): error CS0599: Invalid value for named attribute argument 'SizeConst'
-                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Int32.MaxValue / 4 + 1)]                                                                                                                    int ByValTStr_e3;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = Int32.MaxValue / 4 + 1)]
+                    // int ByValTStr_e3;
                     Diagnostic(
                             ErrorCode.ERR_InvalidNamedArgument,
                             "SizeConst = Int32.MaxValue / 4 + 1"
                         )
                         .WithArguments("SizeConst"),
                     // (12,6): error CS7046: Attribute parameter 'SizeConst' must be specified.
-                    //     [MarshalAs(UnmanagedType.ByValTStr)]                                                                                                                                                        int ByValTStr_e4;
+                    //     [MarshalAs(UnmanagedType.ByValTStr)]
+                    // int ByValTStr_e4;
                     Diagnostic(ErrorCode.ERR_AttributeParameterRequired1, "MarshalAs")
                         .WithArguments("SizeConst"),
                     // (13,56): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1, SizeParamIndex=1)]                                                                                                                       int ByValTStr_e5;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1, SizeParamIndex=1)]
+                    // int ByValTStr_e5;
                     Diagnostic(ErrorCode.ERR_ParameterNotValidForType, "SizeParamIndex=1"),
                     // (14,56): error CS7045: Parameter not valid for the specified unmanaged type.
-                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1, ArraySubType = UnmanagedType.ByValTStr)]                                                                                                 int ByValTStr_e6;
+                    //     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 1, ArraySubType = UnmanagedType.ByValTStr)]
+                    // int ByValTStr_e6;
                     Diagnostic(
                         ErrorCode.ERR_ParameterNotValidForType,
                         "ArraySubType = UnmanagedType.ByValTStr"
@@ -1157,7 +1220,8 @@ public class X
         }
 
         /// <summary>
-        /// Custom (MarshalType, MarshalTypeRef, MarshalCookie) one of {MarshalType, MarshalTypeRef} required, others ignored
+        /// Custom (MarshalType, MarshalTypeRef, MarshalCookie) one of {MarshalType, MarshalTypeRef}
+        // required, others ignored
         /// </summary>
         [Fact]
         public void CustomMarshal()
@@ -1388,11 +1452,13 @@ public class X
                     Diagnostic(ErrorCode.ERR_AttributeParameterRequired2, "MarshalAs")
                         .WithArguments("MarshalType", "MarshalTypeRef"),
                     // (9,47): error CS0599: Invalid value for named attribute argument 'MarshalType'
-                    //     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "a\udc00b", MarshalCookie = "b" )]int CustomMarshaler_e1;
+                    //     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "a\udc00b", MarshalCookie = "b" )]int
+                    // CustomMarshaler_e1;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"MarshalType = ""a\udc00b""")
                         .WithArguments("MarshalType"),
                     // (10,66): error CS0599: Invalid value for named attribute argument 'MarshalCookie'
-                    //     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "x", MarshalCookie = "y\udc00" )]int CustomMarshaler_e2;
+                    //     [MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "x", MarshalCookie = "y\udc00" )]int
+                    // CustomMarshaler_e2;
                     Diagnostic(ErrorCode.ERR_InvalidNamedArgument, @"MarshalCookie = ""y\udc00""")
                         .WithArguments("MarshalCookie")
                 );
@@ -1826,7 +1892,8 @@ class X
                         .WithArguments("VBByRefStr"),
                     // TODO (tomat): remove
 
-                    // (23,16): warning CS0649: Field 'X.field' is never assigned to, and will always have its default value 0
+                    // (23,16): warning CS0649: Field 'X.field' is never assigned to, and will always have its default
+                    // value 0
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                         .WithArguments("X.field", "0")
                 );

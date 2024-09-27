@@ -501,8 +501,10 @@ namespace System.Collections.Generic
             }
             else
             {
-                // No need to use reflection to verify that the types are compatible because it isn't 100% correct and we can rely
-                // on the runtime validation during the cast that happens below (i.e. we will get an ArrayTypeMismatchException).
+                // No need to use reflection to verify that the types are compatible because it isn't 100% correct
+                // and we can rely
+                // on the runtime validation during the cast that happens below (i.e. we will get an
+                // ArrayTypeMismatchException).
                 object?[]? objects = array as object[];
                 if (objects == null)
                 {

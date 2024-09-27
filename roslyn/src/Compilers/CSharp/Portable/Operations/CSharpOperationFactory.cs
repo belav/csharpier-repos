@@ -563,7 +563,8 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             IOperation target = Create(boundDeconstructionAssignmentOperator.Left);
-            // Skip the synthetic deconstruction conversion wrapping the right operand. This is a compiler-generated conversion that we don't want to reflect
+            // Skip the synthetic deconstruction conversion wrapping the right operand. This is a
+            // compiler-generated conversion that we don't want to reflect
             // in the public API because it's an implementation detail.
             IOperation value = Create(boundDeconstructionAssignmentOperator.Right.Operand);
             SyntaxNode syntax = boundDeconstructionAssignmentOperator.Syntax;
@@ -1449,7 +1450,8 @@ namespace Microsoft.CodeAnalysis.Operations
                     ImmutableArray<IArgumentOperation> arguments;
                     if (!boundObjectInitializerMember.Arguments.IsEmpty)
                     {
-                        // In nested member initializers, the property is not actually set. Instead, it is retrieved for a series of Add method calls or nested property setter calls,
+                        // In nested member initializers, the property is not actually set. Instead, it is retrieved for a
+                        // series of Add method calls or nested property setter calls,
                         // so we need to use the getter for this property
                         MethodSymbol? accessor = isObjectOrCollectionInitializer
                             ? property.GetOwnOrInheritedGetMethod()
@@ -1659,9 +1661,12 @@ namespace Microsoft.CodeAnalysis.Operations
 
         private IOperation CreateUnboundLambdaOperation(UnboundLambda unboundLambda)
         {
-            // We want to ensure that we never see the UnboundLambda node, and that we don't end up having two different IOperation
-            // nodes for the lambda expression. So, we ask the semantic model for the IOperation node for the unbound lambda syntax.
-            // We are counting on the fact that will do the error recovery and actually create the BoundLambda node appropriate for
+            // We want to ensure that we never see the UnboundLambda node, and that we don't end up having two
+            // different IOperation
+            // nodes for the lambda expression. So, we ask the semantic model for the IOperation node for the
+            // unbound lambda syntax.
+            // We are counting on the fact that will do the error recovery and actually create the BoundLambda
+            // node appropriate for
             // this syntax node.
             BoundLambda boundLambda = unboundLambda.BindForErrorRecovery();
             return Create(boundLambda);
@@ -1739,14 +1744,19 @@ namespace Microsoft.CodeAnalysis.Operations
                     );
                 }
 
-                // We don't check HasErrors on the conversion here because if we actually have a MethodGroup conversion,
-                // overload resolution succeeded. The resulting method could be invalid for other reasons, but we don't
+                // We don't check HasErrors on the conversion here because if we actually have a MethodGroup
+                // conversion,
+                // overload resolution succeeded. The resulting method could be invalid for other reasons, but we
+                // don't
                 // hide the resolved method.
                 IOperation target = CreateDelegateTargetOperation(boundConversion);
 
-                // If this was an explicit tuple expression conversion, such as ((Action, int))(M, 1), we will be "explicit", because the
-                // original conversion was explicit in code, but the syntax node for this delegate creation and the nested method group will
-                // be the same. We therefore need to mark this node as implicit to ensure we don't have two explicit nodes for the same syntax.
+                // If this was an explicit tuple expression conversion, such as ((Action, int))(M, 1), we will be
+                // "explicit", because the
+                // original conversion was explicit in code, but the syntax node for this delegate creation and the
+                // nested method group will
+                // be the same. We therefore need to mark this node as implicit to ensure we don't have two explicit
+                // nodes for the same syntax.
                 Debug.Assert(
                     isImplicit
                         || target.Syntax != syntax
@@ -1770,13 +1780,16 @@ namespace Microsoft.CodeAnalysis.Operations
 
                 if (syntax.IsMissing)
                 {
-                    // If the underlying syntax IsMissing, then that means we're in case where the compiler generated a piece of syntax to fill in for
+                    // If the underlying syntax IsMissing, then that means we're in case where the compiler generated a
+                    // piece of syntax to fill in for
                     // an error, such as this case:
                     //
                     //  int i = ;
                     //
-                    // Semantic model has a special case here that we match: if the underlying syntax is missing, don't create a conversion expression,
-                    // and instead directly return the operand, which will be a BoundBadExpression. When we generate a node for the BoundBadExpression,
+                    // Semantic model has a special case here that we match: if the underlying syntax is missing, don't
+                    // create a conversion expression,
+                    // and instead directly return the operand, which will be a BoundBadExpression. When we generate a
+                    // node for the BoundBadExpression,
                     // the resulting IOperation will also have a null Type.
                     Debug.Assert(
                         boundOperand.Kind == BoundKind.BadExpression
@@ -1805,7 +1818,8 @@ namespace Microsoft.CodeAnalysis.Operations
                         )
                     )
                     {
-                        // Erase this conversion, this is an artificial conversion added on top of BoundConvertedTupleLiteral
+                        // Erase this conversion, this is an artificial conversion added on top of
+                        // BoundConvertedTupleLiteral
                         // in Binder.CreateTupleLiteralConversion
                         Debug.Assert(!forceOperandImplicitLiteral);
                         return Create(boundOperand);
@@ -1837,9 +1851,11 @@ namespace Microsoft.CodeAnalysis.Operations
                         )
                     )
                     {
-                        // Let's erase the nested conversion, this is an artificial conversion added on top of BoundConvertedTupleLiteral
+                        // Let's erase the nested conversion, this is an artificial conversion added on top of
+                        // BoundConvertedTupleLiteral
                         // in Binder.CreateTupleLiteralConversion.
-                        // We need to use conversion information from the nested conversion because that is where the real conversion
+                        // We need to use conversion information from the nested conversion because that is where the real
+                        // conversion
                         // information is stored.
                         conversion = nestedConversion.Conversion;
                         correctedConversionNode = nestedConversion;
@@ -1849,7 +1865,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 ITypeSymbol? type = boundConversion.GetPublicTypeSymbol();
                 ConstantValue? constantValue = boundConversion.ConstantValueOpt;
 
-                // If this is a lambda or method group conversion to a delegate type, we return a delegate creation instead of a conversion
+                // If this is a lambda or method group conversion to a delegate type, we return a delegate creation
+                // instead of a conversion
                 if (
                     (
                         boundOperand.Kind == BoundKind.Lambda
@@ -1870,7 +1887,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 else
                 {
                     bool isTryCast = false;
-                    // Checked conversions only matter if the conversion is a Numeric conversion. Don't have true unless the conversion is actually numeric.
+                    // Checked conversions only matter if the conversion is a Numeric conversion. Don't have true unless
+                    // the conversion is actually numeric.
                     bool isChecked =
                         boundConversion.Checked
                         && (
@@ -2416,10 +2434,12 @@ namespace Microsoft.CodeAnalysis.Operations
         )
         {
             SyntaxNode syntax = boundBadExpression.Syntax;
-            // We match semantic model here: if the expression IsMissing, we have a null type, rather than the ErrorType of the bound node.
+            // We match semantic model here: if the expression IsMissing, we have a null type, rather than the
+            // ErrorType of the bound node.
             ITypeSymbol? type = syntax.IsMissing ? null : boundBadExpression.GetPublicTypeSymbol();
 
-            // if child has syntax node point to same syntax node as bad expression, then this invalid expression is implicit
+            // if child has syntax node point to same syntax node as bad expression, then this invalid
+            // expression is implicit
             bool isImplicit =
                 boundBadExpression.WasCompilerGenerated
                 || boundBadExpression.ChildBoundNodes.Any(
@@ -2528,7 +2548,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 return CreateBoundInterpolatedStringBinaryOperator(binary);
             }
 
-            // Binary operators can be nested _many_ levels deep, and cause a stack overflow if we manually recurse.
+            // Binary operators can be nested _many_ levels deep, and cause a stack overflow if we manually
+            // recurse.
             // To solve this, we use a manual stack for the left side.
             var stack = ArrayBuilder<BoundBinaryOperatorBase>.GetInstance();
             BoundBinaryOperatorBase? currentBinary = boundBinaryOperatorBase;
@@ -3362,7 +3383,8 @@ namespace Microsoft.CodeAnalysis.Operations
             {
                 Debug.Assert(boundForEachStatement.IterationVariables.Length == 1);
                 var local = boundForEachStatement.IterationVariables[0];
-                // We use iteration variable type syntax as the underlying syntax node as there is no variable declarator syntax in the syntax tree.
+                // We use iteration variable type syntax as the underlying syntax node as there is no variable
+                // declarator syntax in the syntax tree.
                 var declaratorSyntax = boundForEachStatement.IterationVariableType.Syntax;
                 return new VariableDeclaratorOperation(
                     local.GetPublicSymbol(),
@@ -3382,7 +3404,8 @@ namespace Microsoft.CodeAnalysis.Operations
             IOperation loopControlVariable = CreateBoundForEachStatementLoopControlVariable(
                 boundForEachStatement
             );
-            // Strip identity conversion added by compiler on top of inline array. Conversion produces an rvalue, but we need the IOperation tree to preserve lvalue-ness of the original collection.
+            // Strip identity conversion added by compiler on top of inline array. Conversion produces an
+            // rvalue, but we need the IOperation tree to preserve lvalue-ness of the original collection.
             IOperation collection = Create(
                 boundForEachStatement.EnumeratorInfoOpt?.InlineArraySpanType
                     is null
@@ -3622,7 +3645,8 @@ namespace Microsoft.CodeAnalysis.Operations
         {
             SyntaxNode syntax = boundBadStatement.Syntax;
 
-            // if child has syntax node point to same syntax node as bad statement, then this invalid statement is implicit
+            // if child has syntax node point to same syntax node as bad statement, then this invalid statement
+            // is implicit
             bool isImplicit =
                 boundBadStatement.WasCompilerGenerated
                 || boundBadStatement.ChildBoundNodes.Any(
@@ -3667,7 +3691,8 @@ namespace Microsoft.CodeAnalysis.Operations
                 case SyntaxKind.VariableDeclarator:
                 {
                     // this happen for 'for loop' initializer
-                    // We generate a DeclarationGroup for this scenario to maintain tree shape consistency across IOperation.
+                    // We generate a DeclarationGroup for this scenario to maintain tree shape consistency across
+                    // IOperation.
                     // var statement points to VariableDeclarationSyntax
                     Debug.Assert(node.Parent != null);
                     varStatement = node.Parent;
@@ -3718,9 +3743,11 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundMultipleLocalDeclarationsBase boundMultipleLocalDeclarations
         )
         {
-            // The syntax for the boundMultipleLocalDeclarations can either be a LocalDeclarationStatement or a VariableDeclaration, depending on the context
+            // The syntax for the boundMultipleLocalDeclarations can either be a LocalDeclarationStatement or a
+            // VariableDeclaration, depending on the context
             // (using/fixed statements vs variable declaration)
-            // We generate a DeclarationGroup for these scenarios (using/fixed) to maintain tree shape consistency across IOperation.
+            // We generate a DeclarationGroup for these scenarios (using/fixed) to maintain tree shape
+            // consistency across IOperation.
             SyntaxNode declarationGroupSyntax = boundMultipleLocalDeclarations.Syntax;
             SyntaxNode declarationSyntax = declarationGroupSyntax.IsKind(
                 SyntaxKind.LocalDeclarationStatement
@@ -3746,8 +3773,10 @@ namespace Microsoft.CodeAnalysis.Operations
                     declarationIsImplicit
                 );
 
-            // If the syntax was the same, we're in a fixed statement or using statement. We make the Group operation implicit in this scenario, as the
-            // syntax itself is a VariableDeclaration. We do this for using declarations as well, but since that doesn't have a separate parent bound
+            // If the syntax was the same, we're in a fixed statement or using statement. We make the Group
+            // operation implicit in this scenario, as the
+            // syntax itself is a VariableDeclaration. We do this for using declarations as well, but since that
+            // doesn't have a separate parent bound
             // node, we need to check the current node for that explicitly.
             bool isImplicit =
                 declarationGroupSyntax == declarationSyntax
@@ -3813,15 +3842,18 @@ namespace Microsoft.CodeAnalysis.Operations
             BoundExpressionStatement boundExpressionStatement
         )
         {
-            // lambda body can point to expression directly and binder can insert expression statement there. and end up statement pointing to
-            // expression syntax node since there is no statement syntax node to point to. this will mark such one as implicit since it doesn't
+            // lambda body can point to expression directly and binder can insert expression statement there.
+            // and end up statement pointing to
+            // expression syntax node since there is no statement syntax node to point to. this will mark such
+            // one as implicit since it doesn't
             // actually exist in code
             bool isImplicit =
                 boundExpressionStatement.WasCompilerGenerated
                 || boundExpressionStatement.Syntax == boundExpressionStatement.Expression.Syntax;
             SyntaxNode syntax = boundExpressionStatement.Syntax;
 
-            // If we're creating the tree for a speculatively-bound constructor initializer, there can be a bound sequence as the child node here
+            // If we're creating the tree for a speculatively-bound constructor initializer, there can be a
+            // bound sequence as the child node here
             // that corresponds to the lifetime of any declared variables.
             IOperation expression = Create(boundExpressionStatement.Expression);
             if (boundExpressionStatement.Expression is BoundSequence sequence)
@@ -3940,9 +3972,11 @@ namespace Microsoft.CodeAnalysis.Operations
                 ImmutableArray<(bool IsLiteral, bool HasAlignment, bool HasFormat)> positionInfo
             )
             {
-                // For interpolated string handlers, we want to deconstruct the `AppendLiteral`/`AppendFormatted` calls into
+                // For interpolated string handlers, we want to deconstruct the `AppendLiteral`/`AppendFormatted`
+                // calls into
                 // their relevant components.
-                // https://github.com/dotnet/roslyn/issues/54505 we need to handle interpolated strings used as handler conversions.
+                // https://github.com/dotnet/roslyn/issues/54505 we need to handle interpolated strings used as
+                // handler conversions.
 
                 Debug.Assert(parts.Length == positionInfo.Length);
                 var builder = ArrayBuilder<IInterpolatedStringContentOperation>.GetInstance(
@@ -4003,10 +4037,14 @@ namespace Microsoft.CodeAnalysis.Operations
                             throw ExceptionUtilities.UnexpectedValue(part.Kind);
                     }
 
-                    // We are intentionally not checking the part for implicitness here. The part is a generated AppendLiteral or AppendFormatted call,
-                    // and will always be marked as CompilerGenerated. However, our existing behavior for non-builder interpolated strings does not mark
-                    // the BoundLiteral or BoundStringInsert components as compiler generated. This generates a non-implicit IInterpolatedStringTextOperation
-                    // with an implicit literal underneath, and a non-implicit IInterpolationOperation with non-implicit underlying components.
+                    // We are intentionally not checking the part for implicitness here. The part is a generated
+                    // AppendLiteral or AppendFormatted call,
+                    // and will always be marked as CompilerGenerated. However, our existing behavior for non-builder
+                    // interpolated strings does not mark
+                    // the BoundLiteral or BoundStringInsert components as compiler generated. This generates a
+                    // non-implicit IInterpolatedStringTextOperation
+                    // with an implicit literal underneath, and a non-implicit IInterpolationOperation with non-implicit
+                    // underlying components.
                     bool isImplicit = false;
                     if (currentPosition.IsLiteral)
                     {

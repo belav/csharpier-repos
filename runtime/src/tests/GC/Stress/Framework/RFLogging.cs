@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 #define USE_INSTRUMENTATION
@@ -170,8 +171,10 @@ internal class RFLogging
     }
 
     /// <summary>
-    /// This method will open our log file for writing.  If for any reason we can't open the log file the error is printed on the screen
-    /// and we'll simply refuse to log the data.   The log file's name is the current test's friendly name.  If a log file is already opened
+    /// This method will open our log file for writing.  If for any reason we can't open the log file
+    // the error is printed on the screen
+    /// and we'll simply refuse to log the data.   The log file's name is the current test's friendly
+    // name.  If a log file is already opened
     /// that log file will be closed & replaced with this one.
     /// </summary>
     public void OpenLog(string name)

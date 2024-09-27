@@ -132,7 +132,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParameter.cnstrctor004.cnstrctor004
 {
     // <Title>Formal parameter to constructor</Title>
-    // <Description>choose right sig for new ctor(..dynamic..) - only bind for public method</Description>
+    // <Description>choose right sig for new ctor(..dynamic..) - only bind for public
+    // method</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
     // <Code>

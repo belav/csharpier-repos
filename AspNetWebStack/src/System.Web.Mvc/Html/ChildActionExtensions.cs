@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -286,8 +287,10 @@ namespace System.Web.Mvc.Html
             routeData.DataTokens[ControllerContext.ParentActionViewContextToken] =
                 parentViewContext;
 
-            // It's possible that the outgoing route is a direct route - in which case it's not possible to reach using
-            // the action name and controller name. We need to check for that case to determine if we need to create a
+            // It's possible that the outgoing route is a direct route - in which case it's not possible to
+            // reach using
+            // the action name and controller name. We need to check for that case to determine if we need to
+            // create a
             // 'direct route' routedata to reach it.
             if (route.IsDirectRoute())
             {

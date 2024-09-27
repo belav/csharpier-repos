@@ -63,12 +63,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             _cancellationTokenSource = new CancellationTokenSource();
             _queue = new AsyncQueue<ListenResult>();
 
-            // The choice of 4 here is a bit arbitrary. The compiler server needs to scale to the number of clients that
-            // msbuild is going to attempt to connect here and be able to establish each connection in one second. In the
-            // majority of cases even one is enough to accomplish this. Four though gives us enough wiggle room to handle
+            // The choice of 4 here is a bit arbitrary. The compiler server needs to scale to the number of
+            // clients that
+            // msbuild is going to attempt to connect here and be able to establish each connection in one
+            // second. In the
+            // majority of cases even one is enough to accomplish this. Four though gives us enough wiggle room
+            // to handle
             // severe load scenarios.
             //
-            // Should you ever want to change this number in the future make sure to test the new values on sufficiently
+            // Should you ever want to change this number in the future make sure to test the new values on
+            // sufficiently
             // large builds such as dotnet/roslyn or dotnet/runtime
             var listenCount = Math.Min(4, Environment.ProcessorCount);
             _listenTasks = new Task[listenCount];

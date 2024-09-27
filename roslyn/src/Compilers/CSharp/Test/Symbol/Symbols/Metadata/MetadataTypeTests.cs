@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // 4 nested types, 67 members overall
             Assert.Equal(67, type1.GetMembers().Length);
             Assert.Equal(3, type1.GetTypeMembers().Length);
-            // IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>,
+            // IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>,
+            // IEnumerable<KeyValuePair<TKey, TValue>>,
             // IDictionary, ICollection, IEnumerable, ISerializable, IDeserializationCallback
             Assert.Equal(10, type1.Interfaces().Length);
 

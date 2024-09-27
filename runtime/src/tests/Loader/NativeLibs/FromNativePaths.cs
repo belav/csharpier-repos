@@ -33,8 +33,10 @@ public class FromNativePaths
 
     private static bool Test()
     {
-        // The loader checks the folder where the assembly that is loading the native library resides. The host-provided native
-        // search paths for corerun include the folder where corerun resides. Move the native library there to verify that it
+        // The loader checks the folder where the assembly that is loading the native library resides. The
+        // host-provided native
+        // search paths for corerun include the folder where corerun resides. Move the native library there
+        // to verify that it
         // can be loaded from there.
 
         var coreLibraries = Environment.GetEnvironmentVariable("CORE_LIBRARIES");
@@ -44,7 +46,8 @@ public class FromNativePaths
             return false;
         }
 
-        // In case there were multiple paths in CORE_LIBRARIES, assume that the last one is the one added in the test script.
+        // In case there were multiple paths in CORE_LIBRARIES, assume that the last one is the one added in
+        // the test script.
         coreLibraries = coreLibraries
             .Split(
                 new[] { TestLibrary.Utilities.IsWindows ? ';' : ':' },
@@ -120,7 +123,8 @@ public class FromNativePaths
         }
         finally
         {
-            // Copy the native library back to the test folder. Don't move it, since it is loaded and the move may fail.
+            // Copy the native library back to the test folder. Don't move it, since it is loaded and the move
+            // may fail.
             foreach (var movedLibraryDestinationPath in movedLibraryDestinationPaths)
             {
                 try

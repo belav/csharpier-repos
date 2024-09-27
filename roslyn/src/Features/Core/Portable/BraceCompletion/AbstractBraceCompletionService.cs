@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         protected abstract char ClosingBrace { get; }
 
         /// <summary>
-        /// Whether or not this brace completion session actually needs semantics to work (and thus should get a semantic model).
+        /// Whether or not this brace completion session actually needs semantics to work (and thus should
+        // get a semantic model).
         /// </summary>
         protected virtual bool NeedsSemantics => false;
 
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
                 );
             }
 
-            // Pass along a document with frozen partial semantics.  Brace completion is a highly latency sensitive
+            // Pass along a document with frozen partial semantics.  Brace completion is a highly latency
+            // sensitive
             // operation.  We don't want to wait on things like source generators to figure things out.
             return IsValidOpenBraceTokenAtPositionAsync(
                 document.WithFrozenPartialSemantics(cancellationToken),
@@ -167,7 +169,8 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
 
         /// <summary>
         /// Checks if the already inserted token is a valid opening token at the position in the document.
-        /// By default checks that the opening token is a valid token at the position and not in skipped token trivia.
+        /// By default checks that the opening token is a valid token at the position and not in skipped
+        // token trivia.
         /// </summary>
         protected virtual bool IsValidOpenBraceTokenAtPosition(
             SourceText text,
@@ -179,9 +182,11 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
             && !ParentIsSkippedTokensTriviaOrNull(this.SyntaxFacts, token);
 
         /// <summary>
-        /// Returns true when the current position is inside user code (e.g. not strings) and the closing token
+        /// Returns true when the current position is inside user code (e.g. not strings) and the closing
+        // token
         /// matches the expected closing token for this brace completion service.
-        /// Helper method used by <see cref="AllowOverType(BraceCompletionContext, CancellationToken)"/> implementations.
+        /// Helper method used by <see cref="AllowOverType(BraceCompletionContext, CancellationToken)"/>
+        // implementations.
         /// </summary>
         protected bool AllowOverTypeInUserCodeWithValidClosingToken(
             BraceCompletionContext context,
@@ -200,9 +205,11 @@ namespace Microsoft.CodeAnalysis.BraceCompletion
         }
 
         /// <summary>
-        /// Returns true when the closing token matches the expected closing token for this brace completion service.
+        /// Returns true when the closing token matches the expected closing token for this brace completion
+        // service.
         /// Used by <see cref="AllowOverType(BraceCompletionContext, CancellationToken)"/> implementations
-        /// when the over type could be triggered from outside of user code (e.g. overtyping end quotes in a string).
+        /// when the over type could be triggered from outside of user code (e.g. overtyping end quotes in a
+        // string).
         /// </summary>
         protected bool AllowOverTypeWithValidClosingToken(BraceCompletionContext context)
         {

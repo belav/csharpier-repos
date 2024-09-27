@@ -64,13 +64,16 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
                 selectedItemIndex
             );
 
-            // If the caller provided a preferred parameter for us to be on then override whatever we found syntactically.
+            // If the caller provided a preferred parameter for us to be on then override whatever we found
+            // syntactically.
             var argumentIndex = state.Value.ArgumentIndex;
             if (parameterIndexOverride >= 0)
             {
-                // However, in the case where the overridden index is to a variadic member, and the syntactic index goes
+                // However, in the case where the overridden index is to a variadic member, and the syntactic index
+                // goes
                 // beyond the length of hte normal parameters, do not do this.  The syntactic index is valid for the
-                // variadic member, and we still want to remember where we are syntactically so that if the user picks
+                // variadic member, and we still want to remember where we are syntactically so that if the user
+                // picks
                 // another member that we correctly pick the right parameter for it.
                 var keepSyntacticIndex =
                     argumentIndex > parameterIndexOverride

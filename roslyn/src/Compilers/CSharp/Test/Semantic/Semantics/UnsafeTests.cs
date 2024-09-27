@@ -85,7 +85,10 @@ class C
                 options: TestOptions.UnsafeDebugDll
             );
             comp2.VerifyDiagnostics(
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -94,7 +97,10 @@ class C
                         "mscorlib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -103,7 +109,10 @@ class C
                         "mscorlib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -112,7 +121,10 @@ class C
                         "mscorlib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -121,7 +133,10 @@ class C
                         "mscorlib"
                     )
                     .WithLocation(1, 1),
-                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime policy
+                // warning CS1701: Assuming assembly reference 'mscorlib, Version=2.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089' used by 'assembly1' matches identity 'mscorlib, Version=4.0.0.0,
+                // Culture=neutral, PublicKeyToken=b77a5c561934e089' of 'mscorlib', you may need to supply runtime
+                // policy
                 Diagnostic(ErrorCode.WRN_UnifyReferenceMajMin)
                     .WithArguments(
                         "mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -168,7 +183,8 @@ unsafe struct MyStruct<T>
 ";
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                    // (4,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short,
+                    // int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed T buf[16];
                     Diagnostic(ErrorCode.ERR_IllegalFixedType, "T").WithLocation(4, 18)
                 );
@@ -191,7 +207,8 @@ unsafe struct MyStruct<T> where T : unmanaged
 ";
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                    // (4,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short,
+                    // int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed T buf[16];
                     Diagnostic(ErrorCode.ERR_IllegalFixedType, "T").WithLocation(4, 18)
                 );
@@ -219,7 +236,8 @@ unsafe struct OuterStruct
 ";
             CreateCompilation(code, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
+                    // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short,
+                    // int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed MyStruct<int> buf[16];
                     Diagnostic(ErrorCode.ERR_IllegalFixedType, "MyStruct<int>")
                         .WithLocation(9, 18)
@@ -1147,7 +1165,8 @@ unsafe class Attr : System.Attribute
             // just as much sense.
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,6): error CS0181: Attribute constructor parameter 'i' has type 'int*', which is not a valid attribute parameter type
+                    // (4,6): error CS0181: Attribute constructor parameter 'i' has type 'int*', which is not a valid
+                    // attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "Attr")
                         .WithArguments("i", "int*")
                 );
@@ -1175,7 +1194,8 @@ unsafe class Attr : System.Attribute
             // just as much sense.
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (4,11): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "Unsafe() == null")
                 );
         }
@@ -1824,7 +1844,8 @@ class Container<T> {{ }}
                 new[]
                 {
                     // CONSIDER: this differs slightly from dev10, but is clearer.
-                    // (2,2): error CS0181: Attribute constructor parameter 'a' has type 'int*[]', which is not a valid attribute parameter type
+                    // (2,2): error CS0181: Attribute constructor parameter 'a' has type 'int*[]', which is not a valid
+                    // attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
                         .WithArguments("a", "int*[]"),
@@ -1835,7 +1856,8 @@ class Container<T> {{ }}
                 new[]
                 {
                     // CONSIDER: this differs slightly from dev10, but is clearer.
-                    // (2,2): error CS0181: Attribute constructor parameter 'a' has type 'int*[]', which is not a valid attribute parameter type
+                    // (2,2): error CS0181: Attribute constructor parameter 'a' has type 'int*[]', which is not a valid
+                    // attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
                         .WithArguments("a", "int*[]"),
@@ -1861,7 +1883,8 @@ class Container<T> {{ }}
                 new[]
                 {
                     // CONSIDER: this differs slightly from dev10, but is clearer.
-                    // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid attribute parameter type
+                    // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid
+                    // attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
                         .WithArguments("p", "int*"),
@@ -1872,7 +1895,8 @@ class Container<T> {{ }}
                 new[]
                 {
                     // CONSIDER: this differs slightly from dev10, but is clearer.
-                    // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid attribute parameter type
+                    // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid
+                    // attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
                         .WithArguments("p", "int*"),
@@ -4142,12 +4166,14 @@ public unsafe class C
                     .IsManagedTypeNoUseSiteDiagnostics
             );
             libComp.VerifyEmitDiagnostics(
-                // (4,42): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (4,42): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //     public static System.TypedReference* M(System.TypedReference* r)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "M")
                     .WithArguments("System.TypedReference")
                     .WithLocation(4, 42),
-                // (4,67): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (4,67): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //     public static System.TypedReference* M(System.TypedReference* r)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "r")
                     .WithArguments("System.TypedReference")
@@ -4169,12 +4195,14 @@ unsafe class D
                 references: new[] { libComp.EmitToImageReference() }
             );
             comp.VerifyDiagnostics(
-                // (3,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (3,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //     System.TypedReference* M(System.TypedReference* r)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "M")
                     .WithArguments("System.TypedReference")
                     .WithLocation(3, 28),
-                // (3,53): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (3,53): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //     System.TypedReference* M(System.TypedReference* r)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "r")
                     .WithArguments("System.TypedReference")
@@ -4244,7 +4272,8 @@ public unsafe class C
 ";
             var comp = CreateCompilation(src, options: TestOptions.UnsafeDebugDll);
             comp.VerifyEmitDiagnostics(
-                // (6,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (6,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //         System.TypedReference* trp = null;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "System.TypedReference*")
                     .WithArguments("System.TypedReference")
@@ -4298,7 +4327,8 @@ public class C
                 ).IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
-                // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be 'TypedReference'
+                // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be
+                // 'TypedReference'
                 //     public static System.TypedReference M(System.TypedReference r)
                 Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "System.TypedReference")
                     .WithArguments("System.TypedReference")
@@ -4326,7 +4356,8 @@ public class C
                 ).IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
-                // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be 'TypedReference'
+                // (4,19): error CS1599: The return type of a method, delegate, or function pointer cannot be
+                // 'TypedReference'
                 //     public static ref System.TypedReference M(ref System.TypedReference r)
                 Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "ref System.TypedReference")
                     .WithArguments("System.TypedReference")
@@ -4413,7 +4444,8 @@ public class C<T> where T : System.TypedReference
                 ).IsManagedTypeNoUseSiteDiagnostics
             );
             comp.VerifyEmitDiagnostics(
-                // (2,29): error CS0701: 'TypedReference' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                // (2,29): error CS0701: 'TypedReference' is not a valid constraint. A type used as a constraint
+                // must be an interface, a non-sealed class or a type parameter.
                 // public class C<T> where T : System.TypedReference
                 Diagnostic(ErrorCode.ERR_BadBoundType, "System.TypedReference")
                     .WithArguments("System.TypedReference")
@@ -4440,7 +4472,8 @@ public unsafe struct S2
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S1')
+                    // (4,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S1')
                     //     public S1* s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "s")
                         .WithArguments("S1")
@@ -4471,17 +4504,20 @@ public unsafe struct A
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A.B')
+                    // (4,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A.B')
                     //     public B** bb; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "bb")
                         .WithArguments("A.B")
                         .WithLocation(4, 16),
-                    // (9,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A.B.C')
+                    // (9,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A.B.C')
                     //         public C*[] cc; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "cc")
                         .WithArguments("A.B.C")
                         .WithLocation(9, 21),
-                    // (13,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('A')
+                    // (13,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('A')
                     //             public A*[,][] aa; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "aa")
                         .WithArguments("A")
@@ -4504,7 +4540,8 @@ public unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (6,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     public Alias* s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "s")
                         .WithArguments("S")
@@ -4533,32 +4570,38 @@ public unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,15): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (5,15): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     void M(S* p) { }
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "p")
                         .WithArguments("S")
                         .WithLocation(5, 15),
-                    // (12,15): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (12,15): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     public S* s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "s")
                         .WithArguments("S")
                         .WithLocation(12, 15),
-                    // (4,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (4,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     S* M() { return M(); }
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "M")
                         .WithArguments("S")
                         .WithLocation(4, 8),
-                    // (7,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (7,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     S* P { get; set; }
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "P")
                         .WithArguments("S")
                         .WithLocation(7, 8),
-                    // (9,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (9,8): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     S* this[int x] { get { return M(); } set { } }
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "this")
                         .WithArguments("S")
                         .WithLocation(9, 8),
-                    // (10,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (10,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //     int this[S* p] { get { return 0; } set { } }
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "p")
                         .WithArguments("S")
@@ -4578,7 +4621,8 @@ public unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    // (4,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('int[]')
                     //     public int[]* s;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "s")
                         .WithArguments("int[]")
@@ -4710,12 +4754,14 @@ public class C
             );
 
             compilation.VerifyDiagnostics(
-                // (13,22): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('External<object>')
+                // (13,22): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('External<object>')
                 //         var badPtr = &bad;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&bad")
                     .WithArguments("External<object>")
                     .WithLocation(13, 22),
-                // (16,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('External<U>')
+                // (16,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('External<U>')
                 //         var badPtr2 = &bad2;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&bad2")
                     .WithArguments("External<U>")
@@ -4905,7 +4951,8 @@ struct S : System.IDisposable
                     // (13,14): error CS0211: Cannot take the address of the given expression
                     //         p = &x; //CS0211
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "x").WithLocation(13, 14),
-                    // (6,11): warning CS0649: Field 'C.array' is never assigned to, and will always have its default value null
+                    // (6,11): warning CS0649: Field 'C.array' is never assigned to, and will always have its default
+                    // value null
                     //     int[] array;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "array")
                         .WithArguments("C.array", "null")
@@ -5003,13 +5050,15 @@ enum Color
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (76,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (76,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         var aa = &this; //CS0212 (need fixed)
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&this").WithLocation(76, 18),
                     // (23,14): error CS0211: Cannot take the address of the given expression
                     //         p = &1; //CS0211 (can't addr)
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "1").WithLocation(23, 14),
-                    // (24,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (24,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &array[0]; //CS0212 (need fixed)
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&array[0]").WithLocation(24, 13),
                     // (25,15): error CS0211: Cannot take the address of the given expression
@@ -5020,7 +5069,8 @@ enum Color
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "goo")
                         .WithArguments("goo")
                         .WithLocation(26, 14),
-                    // (27,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (27,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &base.f; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&base.f").WithLocation(27, 13),
                     // (28,15): error CS0211: Cannot take the address of the given expression
@@ -5050,10 +5100,12 @@ enum Color
                     //         p = &delegate { return 1; }; //CS0211
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "delegate { return 1; }")
                         .WithLocation(35, 14),
-                    // (36,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (36,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&instanceField").WithLocation(36, 13),
-                    // (37,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (37,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &staticField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&staticField").WithLocation(37, 13),
                     // (38,15): error CS0211: Cannot take the address of the given expression
@@ -5080,7 +5132,8 @@ enum Color
                     // (44,14): error CS0211: Cannot take the address of the given expression
                     //         p = &sizeof(int); //CS0211
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "sizeof(int)").WithLocation(44, 14),
-                    // (45,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (45,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &this.instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.instanceField")
                         .WithLocation(45, 13),
@@ -5100,12 +5153,14 @@ enum Color
                     //         var s = &(array as object); //CS0208, CS0211 (managed)
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array as object")
                         .WithLocation(53, 19),
-                    // (54,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Action')
+                    // (54,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('Action')
                     //         var t = &E; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&E")
                         .WithArguments("System.Action")
                         .WithLocation(54, 17),
-                    // (54,17): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (54,17): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         var t = &E; //CS0208
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&E").WithLocation(54, 17),
                     // (55,18): error CS0079: The event 'C.F' can only appear on the left hand side of += or -=
@@ -5172,22 +5227,26 @@ public struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (6,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //         var p0 = &t; // 1
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&t")
                         .WithArguments("T")
                         .WithLocation(6, 18),
-                    // (9,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
+                    // (9,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('C')
                     //         var p1 = &c; // 2
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&c")
                         .WithArguments("C")
                         .WithLocation(9, 18),
-                    // (12,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (12,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //         var p2 = &s; // 3
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
                         .WithArguments("S")
                         .WithLocation(12, 18),
-                    // (15,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('<empty anonymous type>')
+                    // (15,18): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('<empty anonymous type>')
                     //         var p3 = &anon; // 4
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&anon")
                         .WithArguments("<empty anonymous type>")
@@ -5222,7 +5281,8 @@ public struct S
                     Diagnostic(ErrorCode.ERR_StructLayoutCycle, "s")
                         .WithArguments("S.s", "S")
                         .WithLocation(13, 14),
-                    // (7,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (7,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //         var p = &s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
                         .WithArguments("S")
@@ -5269,37 +5329,48 @@ unsafe class Derived : Base
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (17,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (17,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&instanceField"),
-                    // (18,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (18,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &this.instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.instanceField"),
-                    // (19,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (19,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &base.instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&base.instanceField"),
-                    // (20,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (20,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &d.instanceField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&d.instanceField"),
-                    // (22,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (22,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &staticField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&staticField"),
-                    // (23,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (23,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &this.staticField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&this.staticField"),
-                    // (24,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (24,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &base.staticField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&base.staticField"),
-                    // (25,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (25,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &d.staticField; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&d.staticField"),
-                    // (27,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (27,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &array[0]; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&array[0]"),
-                    // (29,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (29,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &refParam; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&refParam"),
-                    // (30,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (30,13): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         p = &outParam; //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&outParam")
                 );
@@ -5352,7 +5423,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (7,11): error CS1686: Local 'x' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (7,11): error CS1686: Local 'x' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         M(&x, () => { x++; });
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x")
                 );
@@ -5375,7 +5447,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,18): error CS1686: Local 'x' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (8,18): error CS1686: Local 'x' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         int* p = &x;
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x")
                 );
@@ -5397,7 +5470,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (7,28): error CS1686: Local 'x' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (7,28): error CS1686: Local 'x' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         M(() => { int* p = &x; }); // in lambda
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x")
                 );
@@ -5421,7 +5495,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (7,28): error CS1686: Local 'x' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (7,28): error CS1686: Local 'x' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         M(() => { int* p = &x; }); // in lambda
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x")
                 );
@@ -5446,7 +5521,8 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         int* p = &s.x; //before capture
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
                         .WithArguments("s")
@@ -5473,7 +5549,8 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (11,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (11,18): error CS1686: Local 's' or its members cannot have their address taken and be used
+                    // inside an anonymous method or lambda expression
                     //         int* p = &s.x; //after capture
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
                         .WithArguments("s")
@@ -5498,7 +5575,8 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (9,28): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (9,28): error CS1686: Local 's' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         M(() => { int* p = &s.x; }); // in lambda
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
                         .WithArguments("s")
@@ -5525,7 +5603,8 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside
+                    // an anonymous method or lambda expression
                     //         int* p = &s.x; //only report the first
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
                         .WithArguments("s")
@@ -5553,10 +5632,12 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (10,23): error CS1686: Local 'x' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (10,23): error CS1686: Local 'x' or its members cannot have their address taken and be used
+                    // inside an anonymous method or lambda expression
                     //             int* p1 = &x;
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x"),
-                    // (11,23): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
+                    // (11,23): error CS1686: Local 's' or its members cannot have their address taken and be used
+                    // inside an anonymous method or lambda expression
                     //             int* p2 = &s.x;
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
                         .WithArguments("s")
@@ -5626,7 +5707,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,28): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda expression, or query expression
+                    // (8,28): error CS1628: Cannot use ref or out parameter 'x' inside an anonymous method, lambda
+                    // expression, or query expression
                     //             M(ref x, () => x++);
                     Diagnostic(ErrorCode.ERR_AnonDelegateCantUse, "x").WithArguments("x")
                 );
@@ -5766,7 +5848,8 @@ unsafe struct S
 
             // Specifically don't see diagnostic from speculative binding.
             compilation.VerifyDiagnostics(
-                // (4,19): warning CS0649: Field 'S.o' is never assigned to, and will always have its default value null
+                // (4,19): warning CS0649: Field 'S.o' is never assigned to, and will always have its default value
+                // null
                 //     public object o;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "o")
                     .WithArguments("S.o", "null")
@@ -6280,27 +6363,32 @@ static class Extensions
                     options: TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (26,9): error CS0176: Member 'S.StaticField' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (26,9): error CS0176: Member 'S.StaticField' cannot be accessed with an instance reference;
+                    // qualify it with a type name instead
                     //         p->StaticField = 1; //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticField")
                         .WithArguments("S.StaticField")
                         .WithLocation(26, 9),
-                    // (29,9): error CS0176: Member 'S.StaticProperty' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (29,9): error CS0176: Member 'S.StaticProperty' cannot be accessed with an instance reference;
+                    // qualify it with a type name instead
                     //         p->StaticProperty = 2; //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticProperty")
                         .WithArguments("S.StaticProperty")
                         .WithLocation(29, 9),
-                    // (32,9): error CS0176: Member 'S.StaticMethod()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (32,9): error CS0176: Member 'S.StaticMethod()' cannot be accessed with an instance reference;
+                    // qualify it with a type name instead
                     //         p->StaticMethod(); //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticMethod")
                         .WithArguments("S.StaticMethod()")
                         .WithLocation(32, 9),
-                    // (38,13): error CS0176: Member 'S.StaticMethod()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (38,13): error CS0176: Member 'S.StaticMethod()' cannot be accessed with an instance reference;
+                    // qualify it with a type name instead
                     //         a = p->StaticMethod; //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticMethod")
                         .WithArguments("S.StaticMethod()")
                         .WithLocation(38, 13),
-                    // (39,13): error CS1113: Extension method 'Extensions.ExtensionMethod(S)' defined on value type 'S' cannot be used to create delegates
+                    // (39,13): error CS1113: Extension method 'Extensions.ExtensionMethod(S)' defined on value type 'S'
+                    // cannot be used to create delegates
                     //         a = p->ExtensionMethod; //CS1113
                     Diagnostic(ErrorCode.ERR_ValueTypeExtDelegate, "p->ExtensionMethod")
                         .WithArguments("Extensions.ExtensionMethod(S)", "S")
@@ -6337,22 +6425,26 @@ unsafe struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (13,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (13,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //         S* p = &s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "S*")
                         .WithArguments("S")
                         .WithLocation(13, 9),
-                    // (13,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (13,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //         S* p = &s; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&s")
                         .WithArguments("S")
                         .WithLocation(13, 16),
-                    // (16,9): error CS0176: Member 'S.StaticFieldLikeEvent' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (16,9): error CS0176: Member 'S.StaticFieldLikeEvent' cannot be accessed with an instance
+                    // reference; qualify it with a type name instead
                     //         p->StaticFieldLikeEvent += null; //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticFieldLikeEvent")
                         .WithArguments("S.StaticFieldLikeEvent")
                         .WithLocation(16, 9),
-                    // (19,9): error CS0176: Member 'S.StaticCustomEvent' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (19,9): error CS0176: Member 'S.StaticCustomEvent' cannot be accessed with an instance reference;
+                    // qualify it with a type name instead
                     //         p->StaticCustomEvent += null; //CS0176
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "p->StaticCustomEvent")
                         .WithArguments("S.StaticCustomEvent")
@@ -7064,7 +7156,8 @@ unsafe struct S
 
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (10,22): error CS0266: Cannot implicitly convert type 'void*' to 'void**'. An explicit conversion exists (are you missing a cast?)
+                    // (10,22): error CS0266: Cannot implicitly convert type 'void*' to 'void**'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         void** vv4 = vv3;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "vv3")
                         .WithArguments("void*", "void**")
@@ -7440,11 +7533,13 @@ unsafe class C
 
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (13,15): error CS0266: Cannot implicitly convert type 'System.Array' to 'int*[]'. An explicit conversion exists (are you missing a cast?)
+                    // (13,15): error CS0266: Cannot implicitly convert type 'System.Array' to 'int*[]'. An explicit
+                    // conversion exists (are you missing a cast?)
                     //         api = a; //CS0266
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
                         .WithArguments("System.Array", "int*[]"),
-                    // (14,15): error CS0266: Cannot implicitly convert type 'System.Array' to 'void*[]'. An explicit conversion exists (are you missing a cast?)
+                    // (14,15): error CS0266: Cannot implicitly convert type 'System.Array' to 'void*[]'. An explicit
+                    // conversion exists (are you missing a cast?)
                     //         apv = a; //CS0266
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
                         .WithArguments("System.Array", "void*[]"),
@@ -8437,7 +8532,8 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,29): error CS1044: Cannot use more than one type in a for, using, fixed, or declaration statement
+                    // (8,29): error CS1044: Cannot use more than one type in a for, using, fixed, or declaration
+                    // statement
                     //         fixed (int* p = &x, var q = p) //multiple declarations (vs declarators)
                     Diagnostic(ErrorCode.ERR_MultiTypeInDeclaration, "var"),
                     // (8,33): error CS1026: ) expected
@@ -8489,7 +8585,8 @@ class NotString
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,22): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value null
+                    // (4,22): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value
+                    // null
                     //     public NotString n;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n")
                         .WithArguments("C.n", "null")
@@ -8527,7 +8624,8 @@ class NotArray
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (4,21): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value null
+                    // (4,21): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value
+                    // null
                     //     public NotArray n;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n")
                         .WithArguments("C.n", "null")
@@ -8579,7 +8677,8 @@ class NotPointer
                     // (17,25): error CS9385: The given expression cannot be used in a fixed statement
                     //         fixed (int* p = (int*)n)
                     Diagnostic(ErrorCode.ERR_ExprCannotBeFixed, "(int*)n").WithLocation(17, 25),
-                    // (5,23): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value null
+                    // (5,23): warning CS0649: Field 'C.n' is never assigned to, and will always have its default value
+                    // null
                     //     public NotPointer n;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n")
                         .WithArguments("C.n", "null")
@@ -8614,13 +8713,16 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (15,42): error CS1764: Cannot use fixed local 'p' inside an anonymous method, lambda expression, or query expression
+                    // (15,42): error CS1764: Cannot use fixed local 'p' inside an anonymous method, lambda expression,
+                    // or query expression
                     //             a = () => Console.WriteLine(*p);
                     Diagnostic(ErrorCode.ERR_FixedLocalInLambda, "p").WithArguments("p"),
-                    // (16,42): error CS1764: Cannot use fixed local 'q' inside an anonymous method, lambda expression, or query expression
+                    // (16,42): error CS1764: Cannot use fixed local 'q' inside an anonymous method, lambda expression,
+                    // or query expression
                     //             a = () => Console.WriteLine(*q);
                     Diagnostic(ErrorCode.ERR_FixedLocalInLambda, "q").WithArguments("q"),
-                    // (17,42): error CS1764: Cannot use fixed local 'r' inside an anonymous method, lambda expression, or query expression
+                    // (17,42): error CS1764: Cannot use fixed local 'r' inside an anonymous method, lambda expression,
+                    // or query expression
                     //             a = () => Console.WriteLine(*r);
                     Diagnostic(ErrorCode.ERR_FixedLocalInLambda, "r").WithArguments("r")
                 );
@@ -8652,10 +8754,12 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (15,34): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (15,34): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         fixed (int* px = &(p.a[*(&p.x)])) //CS0212
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&p.x"),
-                    // (5,11): warning CS0649: Field 'Program.a' is never assigned to, and will always have its default value null
+                    // (5,11): warning CS0649: Field 'Program.a' is never assigned to, and will always have its default
+                    // value null
                     //     int[] a;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "a")
                         .WithArguments("Program.a", "null")
@@ -8721,10 +8825,12 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (8,33): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* q = &f, r = &q[1]) //CS0213
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&q[1]"),
-                    // (5,11): warning CS0649: Field 'C.a' is never assigned to, and will always have its default value null
+                    // (5,11): warning CS0649: Field 'C.a' is never assigned to, and will always have its default value
+                    // null
                     //     int[] a;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "a")
                         .WithArguments("C.a", "null")
@@ -8868,7 +8974,8 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
+                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         fixed (int* p = s) //can't convert char* to int*
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "s")
                         .WithArguments("char*", "int*")
@@ -8894,7 +9001,8 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                    // (8,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('string')
                     //         fixed (void* p = a) //string* is not a valid type
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "a")
                         .WithArguments("string")
@@ -8962,7 +9070,8 @@ class Program
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (13,26): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (13,26): error CS8652: The feature 'unmanaged constructed types' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //         fixed (void* p = a)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "a")
                         .WithArguments("unmanaged constructed types", "8.0")
@@ -8997,7 +9106,8 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
+                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         fixed (int* p = a) //can't convert char* to int*
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
                         .WithArguments("char*", "int*")
@@ -9031,7 +9141,8 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
+                    // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         fixed (int* p = a) //can't convert char* to int*
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
                         .WithArguments("char*", "int*")
@@ -9057,7 +9168,8 @@ class Program
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (8,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('char[]')
+                    // (8,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('char[]')
                     //         fixed (void* p = a) //char[]* is not a valid type
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "a")
                         .WithArguments("char[]")
@@ -9318,17 +9430,20 @@ public struct S
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (7,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (7,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //         x = sizeof(T); //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "sizeof(T)")
                         .WithArguments("T")
                         .WithLocation(7, 13),
-                    // (8,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
+                    // (8,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('C')
                     //         x = sizeof(C); //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "sizeof(C)")
                         .WithArguments("C")
                         .WithLocation(8, 13),
-                    // (9,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S')
+                    // (9,13): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('S')
                     //         x = sizeof(S); //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "sizeof(S)")
                         .WithArguments("S")
@@ -9352,7 +9467,8 @@ public struct S
 ";
             CompareUnsafeDiagnostics(
                 template,
-                // (7,13): error CS0233: 'S' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                // (7,13): error CS0233: 'S' does not have a predefined size, therefore sizeof can only be used in
+                // an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                 //         x = sizeof(S);
                 Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(S)").WithArguments("S")
             );
@@ -9381,7 +9497,8 @@ public struct S
                 // (7,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         x = sizeof(int*);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*"),
-                // (7,13): error CS0233: 'int*' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                // (7,13): error CS0233: 'int*' does not have a predefined size, therefore sizeof can only be used
+                // in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                 //         x = sizeof(int*);
                 Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(int*)").WithArguments("int*"),
                 // (8,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -9390,13 +9507,15 @@ public struct S
                 // (8,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         x = sizeof(int**);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int**"),
-                // (8,13): error CS0233: 'int**' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                // (8,13): error CS0233: 'int**' does not have a predefined size, therefore sizeof can only be used
+                // in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                 //         x = sizeof(int**);
                 Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(int**)").WithArguments("int**"),
                 // (9,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         x = sizeof(void*);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "void*"),
-                // (9,13): error CS0233: 'void*' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                // (9,13): error CS0233: 'void*' does not have a predefined size, therefore sizeof can only be used
+                // in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                 //         x = sizeof(void*);
                 Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(void*)").WithArguments("void*"),
                 // (10,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
@@ -9405,7 +9524,8 @@ public struct S
                 // (10,20): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         x = sizeof(void**);
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "void**"),
-                // (10,13): error CS0233: 'void**' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                // (10,13): error CS0233: 'void**' does not have a predefined size, therefore sizeof can only be
+                // used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                 //         x = sizeof(void**);
                 Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(void**)").WithArguments("void**")
             );
@@ -9461,7 +9581,8 @@ unsafe struct S
                     //         i = sizeof(i);
                     Diagnostic(ErrorCode.ERR_BadSKknown, "i")
                         .WithArguments("i", "variable", "type"),
-                    // (11,20): error CS0246: The type or namespace name 'M' could not be found (are you missing a using directive or an assembly reference?)
+                    // (11,20): error CS0246: The type or namespace name 'M' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         i = sizeof(M);
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "M").WithArguments("M"),
                     // (6,11): warning CS0219: The variable 's' is assigned but its value is never used
@@ -9522,7 +9643,8 @@ unsafe struct S
                     // (9,26): error CS1513: } expected
                     //         i = sizeof(x => x); //parser error
                     Diagnostic(ErrorCode.ERR_RbraceExpected, ")"),
-                    // (9,20): error CS0246: The type or namespace name 'x' could not be found (are you missing a using directive or an assembly reference?)
+                    // (9,20): error CS0246: The type or namespace name 'x' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         i = sizeof(x => x); //parser error
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "x").WithArguments("x"),
                     // (9,25): error CS0103: The name 'x' does not exist in the current context
@@ -9552,7 +9674,8 @@ class Program
                     // (4,21): error CS1003: Syntax error, ',' expected
                     //     int F1 = sizeof(null);
                     Diagnostic(ErrorCode.ERR_SyntaxError, "null").WithArguments(","),
-                    // (4,14): error CS0233: '?' does not have a predefined size, therefore sizeof can only be used in an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
+                    // (4,14): error CS0233: '?' does not have a predefined size, therefore sizeof can only be used in
+                    // an unsafe context (consider using System.Runtime.InteropServices.Marshal.SizeOf)
                     //     int F1 = sizeof(null);
                     Diagnostic(ErrorCode.ERR_SizeofUnsafe, "sizeof(").WithArguments("?")
                 );
@@ -10089,8 +10212,10 @@ unsafe class C
 ";
             CreateCompilation(text, options: TestOptions.UnsafeReleaseDll)
                 .VerifyDiagnostics(
-                    // (7,35): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?)
-                    //         { int* p = stackalloc int[1L]; } //CS0266 (could cast), even though constant value is fine
+                    // (7,35): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion
+                    // exists (are you missing a cast?)
+                    //         { int* p = stackalloc int[1L]; } //CS0266 (could cast), even though constant value is
+                    // fine
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1L")
                         .WithArguments("long", "int")
                         .WithLocation(7, 35),
@@ -10099,12 +10224,14 @@ unsafe class C
                     Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""hello""")
                         .WithArguments("string", "int")
                         .WithLocation(9, 35),
-                    // (10,35): error CS0428: Cannot convert method group 'Main' to non-delegate type 'int'. Did you intend to invoke the method?
+                    // (10,35): error CS0428: Cannot convert method group 'Main' to non-delegate type 'int'. Did you
+                    // intend to invoke the method?
                     //         { int* p = stackalloc int[Main]; } //CS0428 (method group conversion)
                     Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "Main")
                         .WithArguments("Main", "int")
                         .WithLocation(10, 35),
-                    // (11,37): error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
+                    // (11,37): error CS1660: Cannot convert lambda expression to type 'int' because it is not a
+                    // delegate type
                     //         { int* p = stackalloc int[x => x]; } //CS1660 (lambda conversion)
                     Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                         .WithArguments("lambda expression", "int")
@@ -10139,7 +10266,8 @@ unsafe class C
                     // (7,31): error CS1575: A stackalloc expression requires [] after type
                     //         { int* p = stackalloc int[1, 1]; }
                     Diagnostic(ErrorCode.ERR_BadStackAllocExpr, "int[1, 1]").WithLocation(7, 31),
-                    // (8,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('int[]')
+                    // (8,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('int[]')
                     //         { int* p = stackalloc int[][]; }
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "int")
                         .WithArguments("int[]")
@@ -10147,7 +10275,8 @@ unsafe class C
                     // (8,31): error CS1575: A stackalloc expression requires [] after type
                     //         { int* p = stackalloc int[][]; }
                     Diagnostic(ErrorCode.ERR_BadStackAllocExpr, "int[][]").WithLocation(8, 31),
-                    // (9,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('int[]')
+                    // (9,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('int[]')
                     //         { int* p = stackalloc int[][1]; }
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "int")
                         .WithArguments("int[]")
@@ -10155,7 +10284,8 @@ unsafe class C
                     // (9,31): error CS1575: A stackalloc expression requires [] after type
                     //         { int* p = stackalloc int[][1]; }
                     Diagnostic(ErrorCode.ERR_BadStackAllocExpr, "int[][1]").WithLocation(9, 31),
-                    // (10,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('int[]')
+                    // (10,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('int[]')
                     //         { int* p = stackalloc int[1][]; }
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "int")
                         .WithArguments("int[]")
@@ -10163,7 +10293,8 @@ unsafe class C
                     // (10,31): error CS1575: A stackalloc expression requires [] after type
                     //         { int* p = stackalloc int[1][]; }
                     Diagnostic(ErrorCode.ERR_BadStackAllocExpr, "int[1][]").WithLocation(10, 31),
-                    // (11,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('int[]')
+                    // (11,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                    // managed type ('int[]')
                     //         { int* p = stackalloc int[1][1]; }
                     Diagnostic(ErrorCode.ERR_ManagedAddr, "int")
                         .WithArguments("int[]")
@@ -10200,7 +10331,8 @@ unsafe class C
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (6,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not possible.
+                    // (6,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not
+                    // possible.
                     //         { var p = (int*)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10208,7 +10340,8 @@ unsafe class C
                         )
                         .WithArguments("int", "int*")
                         .WithLocation(6, 19),
-                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'void*' is not possible.
+                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'void*' is not
+                    // possible.
                     //         { var p = (void*)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10216,7 +10349,8 @@ unsafe class C
                         )
                         .WithArguments("int", "void*")
                         .WithLocation(7, 19),
-                    // (8,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'C' is not possible.
+                    // (8,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'C' is not
+                    // possible.
                     //         { var p = (C)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10231,7 +10365,8 @@ unsafe class C
                     parseOptions: TestOptions.Regular8
                 )
                 .VerifyDiagnostics(
-                    // (6,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not possible.
+                    // (6,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not
+                    // possible.
                     //         { var p = (int*)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10239,7 +10374,8 @@ unsafe class C
                         )
                         .WithArguments("int", "int*")
                         .WithLocation(6, 19),
-                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'void*' is not possible.
+                    // (7,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'void*' is not
+                    // possible.
                     //         { var p = (void*)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10247,7 +10383,8 @@ unsafe class C
                         )
                         .WithArguments("int", "void*")
                         .WithLocation(7, 19),
-                    // (8,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'C' is not possible.
+                    // (8,19): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'C' is not
+                    // possible.
                     //         { var p = (C)stackalloc int[1]; }
                     Diagnostic(
                             ErrorCode.ERR_StackAllocConversionNotPossible,
@@ -10274,7 +10411,8 @@ unsafe class C
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (4,14): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (4,14): error CS8652: The feature 'stackalloc in nested expressions' is not available in C# 7.3.
+                    // Please use language version 8.0 or greater.
                     //     int* p = stackalloc int[1];
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "stackalloc")
                         .WithArguments("stackalloc in nested expressions", "8.0")
@@ -10286,7 +10424,8 @@ unsafe class C
                     parseOptions: TestOptions.Regular8
                 )
                 .VerifyDiagnostics(
-                    // (4,14): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not possible.
+                    // (4,14): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not
+                    // possible.
                     //     int* p = stackalloc int[1];
                     Diagnostic(ErrorCode.ERR_StackAllocConversionNotPossible, "stackalloc int[1]")
                         .WithArguments("int", "int*")
@@ -10347,7 +10486,8 @@ unsafe int* p = stackalloc int[1];
                     parseOptions: TestOptions.Script
                 )
                 .VerifyDiagnostics(
-                    // (2,17): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not possible.
+                    // (2,17): error CS8346: Conversion of a stackalloc expression of type 'int' to type 'int*' is not
+                    // possible.
                     // unsafe int* p = stackalloc int[1];
                     Diagnostic(ErrorCode.ERR_StackAllocConversionNotPossible, "stackalloc int[1]")
                         .WithArguments("int", "int*")
@@ -10369,7 +10509,8 @@ Span<int> p = stackalloc int[1];
                     parseOptions: TestOptions.Script
                 )
                 .VerifyDiagnostics(
-                    // (3,1): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it is an instance member of a ref struct.
+                    // (3,1): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it
+                    // is an instance member of a ref struct.
                     // Span<int> p = stackalloc int[1];
                     Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "Span<int>")
                         .WithArguments("System.Span<int>")
@@ -10390,7 +10531,8 @@ var p = stackalloc int[1];
                     parseOptions: TestOptions.Script
                 )
                 .VerifyDiagnostics(
-                    // (2,1): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it is an instance member of a ref struct.
+                    // (2,1): error CS8345: Field or auto-implemented property cannot be of type 'Span<int>' unless it
+                    // is an instance member of a ref struct.
                     // var p = stackalloc int[1];
                     Diagnostic(ErrorCode.ERR_FieldAutoPropCantBeByRefLike, "var")
                         .WithArguments("System.Span<int>")
@@ -10656,7 +10798,8 @@ class C<T> : A
 ";
             var expected = new[]
             {
-                // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('T')
                 //     private static C<T*[]> c;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                     .WithArguments("T")
@@ -10700,7 +10843,8 @@ class C<T> : A
                 // (10,22): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //     private static C<T*[]>.B b;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "T*").WithLocation(10, 22),
-                // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('T')
                 //     private static C<T*[]> c;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                     .WithArguments("T")
@@ -10768,7 +10912,8 @@ unsafe class C<T> : A
                     // (6,14): error CS0227: Unsafe code may only appear if compiling with /unsafe
                     // unsafe class C<T> : A
                     Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(6, 14),
-                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //     private static C<T*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("T")
@@ -10815,7 +10960,8 @@ unsafe class C<T> : A
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "b2")
                         .WithArguments("C<T>.b2")
                         .WithLocation(14, 24),
-                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //     private static C<T*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("T")
@@ -10832,7 +10978,8 @@ unsafe class C<T> : A
                     // (6,14): error CS0227: Unsafe code may only appear if compiling with /unsafe
                     // unsafe class C<T> : A
                     Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(6, 14),
-                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //     private static C<T*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("T")
@@ -10879,7 +11026,8 @@ unsafe class C<T> : A
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "b2")
                         .WithArguments("C<T>.b2")
                         .WithLocation(14, 24),
-                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
+                    // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('T')
                     //     private static C<T*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("T")
@@ -10915,7 +11063,8 @@ class C<T> : A
 ";
             var expected = new[]
             {
-                // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('string')
                 //     private static C<string*[]> c;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                     .WithArguments("string")
@@ -10949,7 +11098,8 @@ class C<T> : A
                 // (10,22): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //     private static C<string*[]>.B b;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "string*").WithLocation(10, 22),
-                // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('string')
                 //     private static C<string*[]> c;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                     .WithArguments("string")
@@ -11003,7 +11153,8 @@ unsafe class C<T> : A
                     // (6,14): error CS0227: Unsafe code may only appear if compiling with /unsafe
                     // unsafe class C<T> : A
                     Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(6, 14),
-                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('string')
                     //     private static C<string*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("string")
@@ -11030,7 +11181,8 @@ unsafe class C<T> : A
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                         .WithArguments("C<T>.b")
                         .WithLocation(10, 35),
-                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('string')
                     //     private static C<string*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("string")
@@ -11047,7 +11199,8 @@ unsafe class C<T> : A
                     // (6,14): error CS0227: Unsafe code may only appear if compiling with /unsafe
                     // unsafe class C<T> : A
                     Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(6, 14),
-                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('string')
                     //     private static C<string*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("string")
@@ -11074,7 +11227,8 @@ unsafe class C<T> : A
                     Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                         .WithArguments("C<T>.b")
                         .WithLocation(10, 35),
-                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('string')
+                    // (13,33): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                    // managed type ('string')
                     //     private static C<string*[]> c;
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
                         .WithArguments("string")
@@ -11305,7 +11459,8 @@ public class Test
                     // (9,27): error CS0244: Neither 'is' nor 'as' is valid on pointer types
                     //         Console.WriteLine(t as int*); // pointer
                     Diagnostic(ErrorCode.ERR_PointerInAsOrIs, "t as int*"),
-                    // (10,27): error CS0413: The type parameter 'T' cannot be used with the 'as' operator because it does not have a class type constraint nor a 'class' constraint
+                    // (10,27): error CS0413: The type parameter 'T' cannot be used with the 'as' operator because it
+                    // does not have a class type constraint nor a 'class' constraint
                     //         Console.WriteLine(p as T); // pointer
                     Diagnostic(ErrorCode.ERR_AsWithTypeVar, "p as T").WithArguments("T"),
                     // (11,27): error CS0244: Neither 'is' nor 'as' is valid on pointer types
@@ -11741,7 +11896,8 @@ unsafe struct S
         [WorkItem(547030, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/547030")]
         public void FixedBufferUsageDifferentAssemblies()
         {
-            // Ensure fixed buffers work as expected when fixed buffer is created in different assembly to where it is consumed.
+            // Ensure fixed buffers work as expected when fixed buffer is created in different assembly to where
+            // it is consumed.
             var s1 =
                 @"using System;
 
@@ -11973,7 +12129,8 @@ public class Test
                     options: TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (6,24): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (6,24): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         int* pointer = &p;
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&p").WithLocation(6, 24)
                 );
@@ -12005,18 +12162,22 @@ unsafe class C
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics(
-                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* a = &s.Buf) {}
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&s.Buf").WithLocation(12, 25),
-                    // (13,26): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (13,26): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //         fixed (int* b = &s_f.Buf) {}
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "s_f.Buf").WithLocation(13, 26),
-                    // (14,18): error CS0266: Cannot implicitly convert type 'int**' to 'int*'. An explicit conversion exists (are you missing a cast?)
+                    // (14,18): error CS0266: Cannot implicitly convert type 'int**' to 'int*'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         int* c = &s.Buf;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "&s.Buf")
                         .WithArguments("int**", "int*")
                         .WithLocation(14, 18),
-                    // (15,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (15,19): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //         int* d = &s_f.Buf;
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "s_f.Buf").WithLocation(15, 19)
                 );
@@ -12046,10 +12207,12 @@ unsafe class C
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics(
-                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* a = s.Buf) {}
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "s.Buf").WithLocation(12, 25),
-                    // (15,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (15,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //         int* d = s_f.Buf;
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "s_f.Buf").WithLocation(15, 18)
                 );
@@ -12077,7 +12240,8 @@ unsafe class C
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics(
-                    // (13,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try using the fixed statement.
+                    // (13,18): error CS1666: You cannot use fixed size buffers contained in unfixed expressions. Try
+                    // using the fixed statement.
                     //         int y = *s_f.Buf;
                     Diagnostic(ErrorCode.ERR_FixedBufferNotFixed, "s_f.Buf").WithLocation(13, 18)
                 );
@@ -12109,13 +12273,16 @@ unsafe class C
                     options: TestOptions.UnsafeDebugDll
                 )
                 .VerifyDiagnostics(
-                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed expression
+                    // (12,25): error CS0213: You cannot use the fixed statement to take the address of an already fixed
+                    // expression
                     //         fixed (int* a = &s.Buf[0]) { }
                     Diagnostic(ErrorCode.ERR_FixedNotNeeded, "&s.Buf[0]").WithLocation(12, 25),
-                    // (15,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (15,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         int* d = &s_f.Buf[0];
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&s_f.Buf[0]").WithLocation(15, 18),
-                    // (17,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                    // (17,18): error CS0212: You can only take the address of an unfixed expression inside of a fixed
+                    // statement initializer
                     //         int* f = &(s_f.Buf[0]);
                     Diagnostic(ErrorCode.ERR_FixedNeeded, "&(s_f.Buf[0])").WithLocation(17, 18)
                 );
@@ -12206,7 +12373,8 @@ using unsafe X = int*;
                 // using unsafe X = int*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = int*;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int*;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -12234,7 +12402,8 @@ using unsafe X = int;
                 // using unsafe X = int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = int;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -12262,7 +12431,8 @@ using unsafe X = int*;
                 // using unsafe X = int*;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = int*;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int*;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -12287,7 +12457,8 @@ using unsafe X = int;
                 // using unsafe X = int;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = int;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -12312,7 +12483,8 @@ using unsafe X = System.String;
                 // using unsafe X = System.String;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = System.String;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.String;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -12340,7 +12512,8 @@ using unsafe X = System.String;
                 // using unsafe X = System.String;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using unsafe X = System.String;")
                     .WithLocation(2, 1),
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.String;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13315,7 +13488,8 @@ class C
 ";
             var comp = CreateCompilation(csharp, parseOptions: TestOptions.Regular11);
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13356,7 +13530,8 @@ class C
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13455,7 +13630,8 @@ class C
 
             var comp = CreateCompilation(csharp, parseOptions: TestOptions.Regular11);
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int*[];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13505,7 +13681,8 @@ class C
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int*[];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13620,7 +13797,8 @@ unsafe class C
 ";
             var comp = CreateCompilation(csharp, parseOptions: TestOptions.Regular11);
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13639,7 +13817,8 @@ unsafe class C
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = System.Collections.Generic.List<int*[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -13687,7 +13866,8 @@ unsafe class C
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe X = int*[];
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")

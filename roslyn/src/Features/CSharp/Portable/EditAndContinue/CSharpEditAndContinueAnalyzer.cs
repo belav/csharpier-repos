@@ -67,12 +67,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
             // An active statement that covers IL generated for the decision tree:
             //   <governing-expression> [|switch { <arm>, ..., <arm> }|]
-            // This active statement is never a leaf active statement (does not correspond to a breakpoint span).
+            // This active statement is never a leaf active statement (does not correspond to a breakpoint
+            // span).
             SwitchBody = 1,
         }
 
         /// <returns>
-        /// <see cref="BaseMethodDeclarationSyntax"/> for methods, operators, constructors, destructors and accessors.
+        /// <see cref="BaseMethodDeclarationSyntax"/> for methods, operators, constructors, destructors and
+        // accessors.
         /// <see cref="VariableDeclaratorSyntax"/> for field initializers.
         /// <see cref="PropertyDeclarationSyntax"/> for property initializers and expression bodies.
         /// <see cref="IndexerDeclarationSyntax"/> for indexer expression bodies.
@@ -304,7 +306,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                             goto default;
 
                         case SyntaxKind.PropertyDeclaration:
-                            // The active span corresponding to a property declaration is the span corresponding to its initializer (if any),
+                            // The active span corresponding to a property declaration is the span corresponding to its
+                            // initializer (if any),
                             // not the span corresponding to the accessor.
                             // int P { [|get;|] } = [|<initializer>|];
                             Debug.Assert(
@@ -334,7 +337,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         case SyntaxKind.SwitchExpression:
                             // An active statement that covers IL generated for the decision tree:
                             //   <governing-expression> [|switch { <arm>, ..., <arm> }|]
-                            // This active statement is never a leaf active statement (does not correspond to a breakpoint span).
+                            // This active statement is never a leaf active statement (does not correspond to a breakpoint
+                            // span).
 
                             var switchExpression = (SwitchExpressionSyntax)node;
                             if (position == switchExpression.SwitchKeyword.SpanStart)
@@ -344,7 +348,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                                 return node;
                             }
 
-                            // The switch expression itself can be (a part of) an active statement associated with the containing node
+                            // The switch expression itself can be (a part of) an active statement associated with the
+                            // containing node
                             // For example, when it is used as a switch arm expression like so:
                             //   <expr> switch { <pattern> [|when <expr> switch { ... }|] ... }
                             Debug.Assert(position == switchExpression.Span.Start);
@@ -529,7 +534,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 Debug.Assert(newBody is ExpressionSyntax or BlockSyntax);
 
                 // The matching algorithm requires the roots to match each other.
-                // Lambda bodies, field/property initializers, and method/property/indexer/operator expression-bodies may also be lambda expressions.
+                // Lambda bodies, field/property initializers, and method/property/indexer/operator
+                // expression-bodies may also be lambda expressions.
                 // Say we have oldBody 'x => x' and newBody 'F(x => x + 1)', then
                 // the algorithm would match 'x => x' to 'F(x => x + 1)' instead of
                 // matching 'x => x' to 'x => x + 1'.
@@ -537,7 +543,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 // We use the parent node as a root:
                 // - for field/property initializers the root is EqualsValueClause.
                 // - for member expression-bodies the root is ArrowExpressionClauseSyntax.
-                // - for block bodies the root is a method/operator/accessor declaration (only happens when matching expression body with a block body)
+                // - for block bodies the root is a method/operator/accessor declaration (only happens when matching
+                // expression body with a block body)
                 // - for lambdas the root is a LambdaExpression.
                 // - for query lambdas the root is the query clause containing the lambda (e.g. where).
                 // - for local functions the root is LocalFunctionStatement.
@@ -545,7 +552,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 static SyntaxNode GetMatchingRoot(SyntaxNode body)
                 {
                     var parent = body.Parent!;
-                    // We could apply this change across all ArrowExpressionClause consistently not just for ones with LocalFunctionStatement parents
+                    // We could apply this change across all ArrowExpressionClause consistently not just for ones with
+                    // LocalFunctionStatement parents
                     // but it would require an essential refactoring.
                     return
                         parent.IsKind(SyntaxKind.ArrowExpressionClause)
@@ -614,8 +622,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             [NotNullWhen(true)] out SyntaxNode? newStatement
         )
         {
-            // TODO: Consider mapping an expression body to an equivalent statement expression or return statement and vice versa.
-            // It would benefit transformations of expression bodies to block bodies of lambdas, methods, operators and properties.
+            // TODO: Consider mapping an expression body to an equivalent statement expression or return
+            // statement and vice versa.
+            // It would benefit transformations of expression bodies to block bodies of lambdas, methods,
+            // operators and properties.
             // See https://github.com/dotnet/roslyn/issues/22696
 
             // field initializer, lambda and query expressions:
@@ -713,7 +723,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             switch (node.Kind())
             {
                 case SyntaxKind.ArrowExpressionClause:
-                    // Member block body is matched with expression body, so we might be called with statement part of open or closed brace.
+                    // Member block body is matched with expression body, so we might be called with statement part of
+                    // open or closed brace.
                     Debug.Assert(
                         statementPart
                             is DefaultStatementPart
@@ -753,7 +764,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     );
 
                 case SyntaxKind.PropertyDeclaration:
-                    // The active span corresponding to a property declaration is the span corresponding to its initializer (if any),
+                    // The active span corresponding to a property declaration is the span corresponding to its
+                    // initializer (if any),
                     // not the span corresponding to the accessor.
                     // int P { [|get;|] } = [|<initializer>|];
                     Debug.Assert(statementPart == DefaultStatementPart);
@@ -1027,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         (UsingStatementSyntax)newStatement
                     );
 
-                // fixed and for statements don't need special handling since the active statement is a variable declaration
+                // fixed and for statements don't need special handling since the active statement is a variable
+                // declaration
                 default:
                     return AreEquivalentIgnoringLambdaBodies(oldStatement, newStatement);
             }
@@ -1083,7 +1096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SwitchStatementSyntax newNode
         )
         {
-            // only check the expression, edits in the body are allowed, unless the switch expression contains patterns:
+            // only check the expression, edits in the body are allowed, unless the switch expression contains
+            // patterns:
             if (!AreEquivalentIgnoringLambdaBodies(oldNode.Expression, newNode.Expression))
             {
                 return false;
@@ -1444,18 +1458,23 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                 // Create candidate symbol edits to analyze:
                 // 1) An update of the containing member or type
-                //    Produces an update edit of the containing member or type, or delete & insert edits if the signature changed.
-                //    Reports rude edits for unsupported updates to the body (e.g. to active statements, lambdas, etc.).
-                //    The containing member edit will cover any changes of the name, modifiers and attributes of the parameter.
+                //    Produces an update edit of the containing member or type, or delete & insert edits if the
+                // signature changed.
+                //    Reports rude edits for unsupported updates to the body (e.g. to active statements, lambdas,
+                // etc.).
+                //    The containing member edit will cover any changes of the name, modifiers and attributes of the
+                // parameter.
                 // 2) Edit of the parameter itself
                 //    Produces semantic edits for any synthesized members generated based on the parameter.
                 //    Reports rude edits for unsupported renames, reoders, attribute and modifer changes.
                 //    Does not result in a semantic edit for the parameter itself.
                 // 3) Edits of symbols synthesized based on the parameters that have declaring syntax.
                 //    These members need to be analyzed for active statement mapping, type layout, etc.
-                //    E.g. property accessors synthesized for record primary constructor parameters have bodies that may contain active statements.
+                //    E.g. property accessors synthesized for record primary constructor parameters have bodies that
+                // may contain active statements.
 
-                // If the signature of a property/indexer changed or a parameter of an indexer has been renamed we need to update all its accessors
+                // If the signature of a property/indexer changed or a parameter of an indexer has been renamed we
+                // need to update all its accessors
                 if (
                     oldContainingMemberOrType is IPropertySymbol oldPropertySymbol
                     && newContainingMemberOrType is IPropertySymbol newPropertySymbol
@@ -1562,7 +1581,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     if (IsGlobalStatement(oldNode))
                     {
-                        // When global statements are reordered, we issue an update edit for the synthesized main method, which is what
+                        // When global statements are reordered, we issue an update edit for the synthesized main method,
+                        // which is what
                         // oldSymbol and newSymbol will point to
                         result.Add((oldSymbol, newSymbol, EditKind.Update));
                         return;
@@ -1570,11 +1590,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     // Otherwise, we don't do any semantic checks for reordering
                     // and we don't need to report them to the compiler either.
-                    // Consider: Currently symbol ordering changes are not reflected in metadata (Reflection will report original order).
+                    // Consider: Currently symbol ordering changes are not reflected in metadata (Reflection will report
+                    // original order).
 
                     // Consider: Reordering of fields is not allowed since it changes the layout of the type.
-                    // This ordering should however not matter unless the type has explicit layout so we might want to allow it.
-                    // We do not check changes to the order if they occur across multiple documents (the containing type is partial).
+                    // This ordering should however not matter unless the type has explicit layout so we might want to
+                    // allow it.
+                    // We do not check changes to the order if they occur across multiple documents (the containing type
+                    // is partial).
                     Debug.Assert(
                         !IsDeclarationWithInitializer(oldNode!)
                             && !IsDeclarationWithInitializer(newNode!)
@@ -1587,7 +1610,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     Contract.ThrowIfNull(oldModel);
 
                     // Updates of a property/indexer/event node might affect its accessors.
-                    // Return all affected symbols for these updates so that the changes in the accessor bodies get analyzed.
+                    // Return all affected symbols for these updates so that the changes in the accessor bodies get
+                    // analyzed.
 
                     if (
                         oldSymbol is IPropertySymbol oldPropertySymbol
@@ -1805,7 +1829,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case EditKind.Insert:
                     var node = oldNode ?? newNode;
 
-                    // If the entire block-bodied property/indexer is deleted/inserted (accessors and the list they are contained in),
+                    // If the entire block-bodied property/indexer is deleted/inserted (accessors and the list they are
+                    // contained in),
                     // ignore this edit. We will have a semantic edit for the property/indexer itself.
                     if (node.IsKind(SyntaxKind.GetAccessorDeclaration))
                     {
@@ -1837,7 +1862,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         return;
                     }
 
-                    // Inserting/deleting a type parameter constraint should result in an update of the corresponding type parameter symbol:
+                    // Inserting/deleting a type parameter constraint should result in an update of the corresponding
+                    // type parameter symbol:
                     if (node.IsKind(SyntaxKind.TypeParameterConstraintClause))
                     {
                         result.Add((oldSymbol, newSymbol, EditKind.Update));
@@ -1851,7 +1877,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         return;
                     }
 
-                    // Inserting/deleting a primary constructor base initializer/base list is an update of the constructor/type,
+                    // Inserting/deleting a primary constructor base initializer/base list is an update of the
+                    // constructor/type,
                     // not a delete/insert of the constructor/type itself:
                     if (
                         node is (kind: SyntaxKind.PrimaryConstructorBaseType or SyntaxKind.BaseList)
@@ -1958,7 +1985,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             {
                 Debug.Assert(otherNode != null);
 
-                // A parameter-less method/indexer has a parameter list, but non-generic method does not have a type parameter list.
+                // A parameter-less method/indexer has a parameter list, but non-generic method does not have a type
+                // parameter list.
                 fromOtherMap.TryGetValue(GetContainingDeclaration(otherNode), out declaration);
             }
             else
@@ -2183,7 +2211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 case SyntaxKind.CompilationUnit:
                     var unit = (CompilationUnitSyntax)node;
 
-                    // When deleting something from a compilation unit we just report diagnostics for the last global statement
+                    // When deleting something from a compilation unit we just report diagnostics for the last global
+                    // statement
                     var globalStatements = unit.Members.OfType<GlobalStatementSyntax>();
                     var globalNode =
                         (
@@ -2712,7 +2741,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     return CSharpFeaturesResources.extern_alias;
 
                 case SyntaxKind.UsingDirective:
-                    // Dev12 distinguishes using alias from using namespace and reports different errors for removing alias.
+                    // Dev12 distinguishes using alias from using namespace and reports different errors for removing
+                    // alias.
                     // None of these changes are allowed anyways, so let's keep it simple.
                     return CSharpFeaturesResources.using_directive;
 
@@ -3121,7 +3151,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     case SyntaxKind.FieldDeclaration:
                     case SyntaxKind.EventFieldDeclaration:
                     case SyntaxKind.VariableDeclarator:
-                        // Maybe we could allow changing order of field declarations unless the containing type layout is sequential.
+                        // Maybe we could allow changing order of field declarations unless the containing type layout is
+                        // sequential.
                         ReportError(RudeEditKind.Move);
                         return;
 
@@ -3148,7 +3179,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     case SyntaxKind.Attribute:
                     case SyntaxKind.AttributeList:
                         // To allow inserting of attributes we need to check if the inserted attribute
-                        // is a pseudo-custom attribute that CLR allows us to change, or if it is a compiler well-know attribute
+                        // is a pseudo-custom attribute that CLR allows us to change, or if it is a compiler well-know
+                        // attribute
                         // that affects the generated IL, so we defer those checks until semantic analysis.
 
                         // Unless the attribute is a module/assembly attribute
@@ -3177,7 +3209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     case SyntaxKind.AttributeList:
                     case SyntaxKind.Attribute:
                         // To allow removal of attributes we need to check if the removed attribute
-                        // is a pseudo-custom attribute that CLR does not allow us to change, or if it is a compiler well-know attribute
+                        // is a pseudo-custom attribute that CLR does not allow us to change, or if it is a compiler
+                        // well-know attribute
                         // that affects the generated IL, so we defer those checks until semantic analysis.
 
                         // Unless the attribute is a module/assembly attribute
@@ -3203,7 +3236,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
                     case SyntaxKind.Attribute:
                         // To allow update of attributes we need to check if the updated attribute
-                        // is a pseudo-custom attribute that CLR allows us to change, or if it is a compiler well-know attribute
+                        // is a pseudo-custom attribute that CLR allows us to change, or if it is a compiler well-know
+                        // attribute
                         // that affects the generated IL, so we defer those checks until semantic analysis.
 
                         // Unless the attribute is a module/assembly attribute
@@ -3250,7 +3284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         )
         {
             // Disallow editing the body even if the change is only in trivia.
-            // The compiler might emit extra temp local variables, which would change stack layout and cause the CLR to fail.
+            // The compiler might emit extra temp local variables, which would change stack layout and cause the
+            // CLR to fail.
 
             foreach (var node in nodes)
             {
@@ -3289,7 +3324,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 // Inserting extern member into a new or existing type is not allowed.
                 { IsExtern: true } => RudeEditKind.InsertExtern,
 
-                // All rude edits below only apply when inserting into an existing type (not when the type itself is inserted):
+                // All rude edits below only apply when inserting into an existing type (not when the type itself is
+                // inserted):
                 _ when !insertingIntoExistingContainingType => RudeEditKind.None,
 
                 // inserting any nested type is allowed
@@ -3308,11 +3344,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator
                 } => RudeEditKind.InsertOperator,
 
-                // Inserting a method that explictly implements an interface method into an existing type is not allowed.
+                // Inserting a method that explictly implements an interface method into an existing type is not
+                // allowed.
                 IMethodSymbol { ExplicitInterfaceImplementations.IsEmpty: false } =>
                     RudeEditKind.InsertMethodWithExplicitInterfaceSpecifier,
 
-                // TODO: Inserting non-virtual member to an interface (https://github.com/dotnet/roslyn/issues/37128)
+                // TODO: Inserting non-virtual member to an interface
+                // (https://github.com/dotnet/roslyn/issues/37128)
                 { ContainingType.TypeKind: TypeKind.Interface } => RudeEditKind.InsertIntoInterface,
 
                 // Inserting a field into an enum:
@@ -3454,17 +3492,20 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
 
         /// <summary>
         /// An active statement (leaf or not) inside a "catch" makes the catch block read-only.
-        /// An active statement (leaf or not) inside a "finally" makes the whole try/catch/finally block read-only.
+        /// An active statement (leaf or not) inside a "finally" makes the whole try/catch/finally block
+        // read-only.
         /// An active statement (non leaf)    inside a "try" makes the catch/finally block read-only.
         /// </summary>
         /// <remarks>
         /// Exception handling regions are only needed to be tracked if they contain user code.
-        /// <see cref="UsingStatementSyntax"/> and using <see cref="LocalDeclarationStatementSyntax"/> generate finally blocks,
+        /// <see cref="UsingStatementSyntax"/> and using <see cref="LocalDeclarationStatementSyntax"/>
+        // generate finally blocks,
         /// but they do not contain non-hidden sequence points.
         /// </remarks>
         /// <param name="node">An exception handling ancestor of an active statement node.</param>
         /// <param name="coversAllChildren">
-        /// True if all child nodes of the <paramref name="node"/> are contained in the exception region represented by the <paramref name="node"/>.
+        /// True if all child nodes of the <paramref name="node"/> are contained in the exception region
+        // represented by the <paramref name="node"/>.
         /// </param>
         protected override TextSpan GetExceptionHandlingRegion(
             SyntaxNode node,
@@ -3527,7 +3568,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 var oldContainingStatementPart = FindContainingStatementPart(oldNode);
                 var newContainingStatementPart = FindContainingStatementPart(newNode);
 
-                // If the old statement has spilled state and the new doesn't the edit is ok. We'll just not use the spilled state.
+                // If the old statement has spilled state and the new doesn't the edit is ok. We'll just not use the
+                // spilled state.
                 if (
                     !SyntaxFactory.AreEquivalent(
                         oldContainingStatementPart,
@@ -3687,10 +3729,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         }
 
         /// <summary>
-        /// Reports rude edits when an active statement is a when clause in a switch statement and any of the switch cases or the switch value changed.
-        /// This is necessary since the switch emits long-lived synthesized variables to store results of pattern evaluations.
-        /// These synthesized variables are mapped to the slots of the new methods via ordinals. The mapping preserves the values of these variables as long as
-        /// exactly the same variables are emitted for the new switch as they were for the old one and their order didn't change either.
+        /// Reports rude edits when an active statement is a when clause in a switch statement and any of
+        // the switch cases or the switch value changed.
+        /// This is necessary since the switch emits long-lived synthesized variables to store results of
+        // pattern evaluations.
+        /// These synthesized variables are mapped to the slots of the new methods via ordinals. The mapping
+        // preserves the values of these variables as long as
+        /// exactly the same variables are emitted for the new switch as they were for the old one and their
+        // order didn't change either.
         /// This is guaranteed if none of the case clauses have changed.
         /// </summary>
         private void ReportRudeEditsForSwitchWhenClauses(
@@ -3710,7 +3756,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 return;
             }
 
-            // switch statement does not match switch expression, so it must be part of a switch statement as well.
+            // switch statement does not match switch expression, so it must be part of a switch statement as
+            // well.
             var newSwitch = (SwitchStatementSyntax)newActiveStatement.Parent!.Parent!.Parent!;
 
             // when clauses can only match other when clauses:
@@ -3838,7 +3885,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             SyntaxNode newEncompassingAncestor
         )
         {
-            // Rude Edits for fixed/using/lock/foreach statements that are added/updated around an active statement.
+            // Rude Edits for fixed/using/lock/foreach statements that are added/updated around an active
+            // statement.
             // Although such changes are technically possible, they might lead to confusion since
             // the temporary variables these statements generate won't be properly initialized.
             //

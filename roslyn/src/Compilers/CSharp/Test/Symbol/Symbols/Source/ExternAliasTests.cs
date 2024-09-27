@@ -220,7 +220,8 @@ class Maine
         [Fact]
         public void ExternAliasDoesntFailNonSourceBinds()
         {
-            // Ensure that adding an alias doesn't interfere with resolution among metadata references. The alias only affects source usage
+            // Ensure that adding an alias doesn't interfere with resolution among metadata references. The
+            // alias only affects source usage
             // of the types defined in the aliased assembly.
 
             var src =
@@ -291,8 +292,10 @@ class Maine
             var comp = CreateCompilation(src);
             comp = comp.AddReferences(Goo1);
             comp.VerifyDiagnostics(
-                // (6,13): error CS0246: The type or namespace name 'NS' could not be found (are you missing a using directive or an assembly reference?)
-                //             NS.Goo d = null;    //shouldn't be able to see this type w/o qualification. it is in an extern alias.
+                // (6,13): error CS0246: The type or namespace name 'NS' could not be found (are you missing a using
+                // directive or an assembly reference?)
+                //             NS.Goo d = null;    //shouldn't be able to see this type w/o qualification. it is in
+                // an extern alias.
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NS").WithArguments("NS")
             );
         }

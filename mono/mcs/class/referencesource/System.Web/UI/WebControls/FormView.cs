@@ -497,7 +497,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use when no records are returned from the datasource within the FormView.
+        /// <para>Indicates the template to use when no records are returned from the datasource within the
+        // FormView.
         /// </devdoc>
         [
             Browsable(false),
@@ -858,7 +859,8 @@ namespace System.Web.UI.WebControls
         {
             get
             {
-                // if the mode wasn't explicitly set by LoadControlState or by the user, the mode is the DefaultMode.
+                // if the mode wasn't explicitly set by LoadControlState or by the user, the mode is the
+                // DefaultMode.
                 if (!_modeSet || DesignMode)
                 {
                     _mode = DefaultMode;
@@ -1020,7 +1022,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.FormViewRow'/> objects representing the individual
+        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.FormViewRow'/> objects
+        // representing the individual
         /// rows within the control.
         /// This property is read-only.</para>
         /// </devdoc>
@@ -1406,7 +1409,8 @@ namespace System.Web.UI.WebControls
                     _dataItem = lastItem; // if we broke out of the above loop, the current item will be invalid
                 }
 
-                // If we're not using server paging and this isn't a collection, or server paging doesn't return a page count, our _pageCount isn't accurate.
+                // If we're not using server paging and this isn't a collection, or server paging doesn't return a
+                // page count, our _pageCount isn't accurate.
                 // Loop through the rest of the enumeration to figure out how many items are in it.
                 if (
                     (!_useServerPaging && !(dataSource is ICollection))
@@ -2485,7 +2489,8 @@ namespace System.Web.UI.WebControls
                 {
                     return;
                 }
-                // DevDiv Bugs 188830: Don't clear key table if the page is out of range, since control won't be rebound.
+                // DevDiv Bugs 188830: Don't clear key table if the page is out of range, since control won't be
+                // rebound.
                 _keyTable = null;
                 _pageIndex = e.NewPageIndex;
             }
@@ -2833,7 +2838,8 @@ namespace System.Web.UI.WebControls
 
         protected internal virtual string ModifiedOuterTableStylePropertyName()
         {
-            // Verify that table specific and basic style properties are not not set (not different than their defaults).
+            // Verify that table specific and basic style properties are not not set (not different than their
+            // defaults).
             if (!String.IsNullOrEmpty(BackImageUrl))
             {
                 return "BackImageUrl";

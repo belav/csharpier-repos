@@ -107,7 +107,8 @@ internal sealed class RenderTreeUpdater
 
         // Update subtree length for this and all ancestor containers
         // Ancestors can only be regions or other elements, since components can't "contain" elements inline
-        // We only have to walk backwards, since later entries in the frames array can't contain an earlier one
+        // We only have to walk backwards, since later entries in the frames array can't contain an earlier
+        // one
         for (var otherFrameIndex = elementFrameIndex; otherFrameIndex >= 0; otherFrameIndex--)
         {
             ref var otherFrame = ref framesArray[otherFrameIndex];

@@ -167,7 +167,8 @@ public class ResponseCompressionTests : LoggedTest
                 Assert.True(httpClientHandler.SupportsAutomaticDecompression);
                 var httpClient = deploymentResult.CreateHttpClient(httpClientHandler);
 
-                // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
+                // Request to base address and check if various parts of the body are rendered & measure the cold
+                // startup time.
                 var response = await RetryHelper.RetryRequest(
                     () =>
                     {
@@ -230,7 +231,8 @@ public class ResponseCompressionTests : LoggedTest
 
     private static async Task CheckCompressionAsync(HttpClient client, string url, ILogger logger)
     {
-        // Manage the compression manually because HttpClient removes the Content-Encoding header when decompressing.
+        // Manage the compression manually because HttpClient removes the Content-Encoding header when
+        // decompressing.
         logger.LogInformation($"Testing /{url}");
         var request = new HttpRequestMessage(HttpMethod.Get, url);
         request.Headers.AcceptEncoding.ParseAdd("gzip,deflate");
@@ -253,7 +255,8 @@ public class ResponseCompressionTests : LoggedTest
 
     private static string GetContentLength(HttpResponseMessage response)
     {
-        // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it can.
+        // Don't use response.Content.Headers.ContentLength, it will dynamically calculate the value if it
+        // can.
         return response.Content.Headers.TryGetValues(HeaderNames.ContentLength, out var values)
             ? values.FirstOrDefault()
             : null;

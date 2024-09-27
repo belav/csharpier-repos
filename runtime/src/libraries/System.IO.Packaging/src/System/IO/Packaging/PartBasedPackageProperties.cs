@@ -419,7 +419,8 @@ namespace System.IO.Packaging
                 PackagingUtilities.PerformInitialReadAndVerifyEncoding(reader);
 
                 //Note: After the previous method call the reader should be at the first tag in the markup.
-                //MoveToContent - Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
+                //MoveToContent - Skips over the following - ProcessingInstruction, DocumentType, Comment,
+                // Whitespace, or SignificantWhitespace
                 //If the reader is currently at a content node then this function call is a no-op
                 if (
                     reader.MoveToContent() != XmlNodeType.Element
@@ -846,7 +847,8 @@ namespace System.IO.Packaging
                         _xmlWriter.WriteEndAttribute();
                     }
 
-                    // Use sortable ISO 8601 date/time pattern. Include second fractions down to the 100-nanosecond interval,
+                    // Use sortable ISO 8601 date/time pattern. Include second fractions down to the 100-nanosecond
+                    // interval,
                     // which is the definition of a "tick" for the DateTime type.
                     _xmlWriter.WriteString(
                         XmlConvert.ToString(
@@ -942,8 +944,10 @@ namespace System.IO.Packaging
         // xsd:DateTime requires full date time in sortable (ISO 8601) format.
         // It can be expressed in local time, universal time (Z), or relative to universal time (zzz).
         // Negative years are accepted.
-        // IMPORTANT: Second fractions are recognized only down to 1 tenth of a microsecond because this is the resolution
-        // of the DateTime type. The Xml standard, however, allows any number of decimals; but XmlConvert only offers
+        // IMPORTANT: Second fractions are recognized only down to 1 tenth of a microsecond because this is
+        // the resolution
+        // of the DateTime type. The Xml standard, however, allows any number of decimals; but XmlConvert
+        // only offers
         // this very awkward API with an explicit pattern enumeration.
         private static readonly string[] s_dateTimeFormats = new string[]
         {

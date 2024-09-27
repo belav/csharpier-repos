@@ -10,15 +10,20 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API for configuring a <see cref="IMutableDbFunction" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+// more information and examples.
 /// </remarks>
 public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunctionBuilder>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected DbFunctionBuilderBase(IMutableDbFunction function)
@@ -27,10 +32,14 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalDbFunctionBuilder Builder
@@ -55,10 +64,12 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     Sets the name of the database function.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="name">The name of the function in the database.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual DbFunctionBuilderBase HasName(string name)
     {
         Check.NullButNotEmpty(name, nameof(name));
@@ -72,10 +83,12 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     Sets the schema of the database function.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="schema">The schema of the function in the database.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual DbFunctionBuilderBase HasSchema(string? schema)
     {
         Builder.HasSchema(schema, ConfigurationSource.Explicit);
@@ -87,10 +100,12 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     Marks whether the database function is built-in.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="builtIn">The value indicating whether the database function is built-in.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual DbFunctionBuilderBase IsBuiltIn(bool builtIn = true)
     {
         Builder.IsBuiltIn(builtIn, ConfigurationSource.Explicit);
@@ -103,7 +118,8 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     If no parameter with the given name exists, then a new parameter will be added.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="name">The parameter name.</param>
     /// <returns>The builder to use for further parameter configuration.</returns>
@@ -115,12 +131,14 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     If no parameter with the given name exists, then a new parameter will be added.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="name">The parameter name.</param>
     /// <param name="buildAction">An action that performs configuration of the parameter.</param>
     /// <returns>The builder to use for further parameter configuration.</returns>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual DbFunctionBuilderBase HasParameter(
         string name,
         Action<DbFunctionParameterBuilder> buildAction
@@ -143,7 +161,8 @@ public abstract class DbFunctionBuilderBase : IInfrastructure<IConventionDbFunct
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
     public override bool Equals(object? obj) => base.Equals(obj);

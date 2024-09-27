@@ -457,7 +457,8 @@ namespace System.Data.Mapping.Update.Internal
                 }
             }
 
-            // If the result is still zero, it means key values are all the same. Switch to synthetic identifiers
+            // If the result is still zero, it means key values are all the same. Switch to synthetic
+            // identifiers
             // to differentiate.
             for (int i = 0; i < m_processor.KeyOrdinals.Length; i++)
             {

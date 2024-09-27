@@ -76,12 +76,17 @@ namespace System.Diagnostics
             }
         }
 
-        // InitialOffset is the offset in our global shared memory where we put the first CategoryEntry.  It needs to be 4 because in
-        // v1.0 and v1.1 we used IntPtr.Size.  That creates potential side-by-side issues on 64 bit machines using WOW64.
-        // A v1.0 app running on WOW64 will assume the InitialOffset is 4.  A true 64 bit app on the same machine will assume
+        // InitialOffset is the offset in our global shared memory where we put the first CategoryEntry.  It
+        // needs to be 4 because in
+        // v1.0 and v1.1 we used IntPtr.Size.  That creates potential side-by-side issues on 64 bit machines
+        // using WOW64.
+        // A v1.0 app running on WOW64 will assume the InitialOffset is 4.  A true 64 bit app on the same
+        // machine will assume
         // the initial offset is 8.
-        // However, using an offset of 4 means that our CounterEntry.Value is potentially misaligned.  This is why we have SetValue
-        // and other methods which split CounterEntry.Value into two ints.  With separate shared memory blocks per
+        // However, using an offset of 4 means that our CounterEntry.Value is potentially misaligned.  This
+        // is why we have SetValue
+        // and other methods which split CounterEntry.Value into two ints.  With separate shared memory
+        // blocks per
         // category, we can fix this and always use an inital offset of 8.
         internal int _initialOffset = 4;
 
@@ -178,7 +183,8 @@ namespace System.Diagnostics
 
                 newOffset = CalculateMemory(oldOffset, totalSize, out alignmentAdjustment);
 
-                // In the default shared mem we need to make sure that the end address is also aligned.  This is because
+                // In the default shared mem we need to make sure that the end address is also aligned.  This is
+                // because
                 // in v1.1/v1.0 we just assumed that the next free offset was always properly aligned.
                 int endAddressMod8 = (int)(_baseAddress + newOffset) & 0x7;
                 int endAlignmentAdjustment = (8 - endAddressMod8) & 0x7;
@@ -257,10 +263,12 @@ namespace System.Diagnostics
                 instanceNameLength = InstanceNameSlotSize;
                 totalSize += sizeof(ProcessLifetimeEntry) + instanceNameLength;
 
-                // If we're in a separate shared memory, we need to do a two stage update of the free memory pointer.
+                // If we're in a separate shared memory, we need to do a two stage update of the free memory
+                // pointer.
                 // First we calculate our alignment adjustment and where the new free offset is.  Then we
                 // write the new structs and data.  The last two operations are to link the new structs into the
-                // existing ones and update the next free offset.  Our process could get killed in between those two,
+                // existing ones and update the next free offset.  Our process could get killed in between those
+                // two,
                 // leaving the memory in an inconsistent state.  We use the "IsConsistent" flag to help determine
                 // when that has happened.
                 freeMemoryOffset = *((int*)_baseAddress);
@@ -280,11 +288,16 @@ namespace System.Diagnostics
 
             CategoryEntry* newCategoryEntryPointer;
             InstanceEntry* newInstanceEntryPointer;
-            // We need to decide where to put the padding returned in alignmentAdjustment.  There are several things that
-            // need to be aligned.  First, we need to align each struct on a 4 byte boundary so we can use interlocked
-            // operations on the int Spinlock field.  Second, we need to align the CounterEntry on an 8 byte boundary so that
-            // on 64 bit platforms we can use interlocked operations on the Value field.  alignmentAdjustment guarantees 8 byte
-            // alignment, so we use that for both.  If we're creating the very first category, however, we can't move that
+            // We need to decide where to put the padding returned in alignmentAdjustment.  There are several
+            // things that
+            // need to be aligned.  First, we need to align each struct on a 4 byte boundary so we can use
+            // interlocked
+            // operations on the int Spinlock field.  Second, we need to align the CounterEntry on an 8 byte
+            // boundary so that
+            // on 64 bit platforms we can use interlocked operations on the Value field.  alignmentAdjustment
+            // guarantees 8 byte
+            // alignment, so we use that for both.  If we're creating the very first category, however, we can't
+            // move that
             // CategoryEntry.  In this case we put the alignmentAdjustment before the InstanceEntry.
             if (freeMemoryOffset == _initialOffset)
             {
@@ -399,10 +412,12 @@ namespace System.Diagnostics
                 instanceNameLength = InstanceNameSlotSize;
                 totalSize += sizeof(ProcessLifetimeEntry) + instanceNameLength;
 
-                // If we're in a separate shared memory, we need to do a two stage update of the free memory pointer.
+                // If we're in a separate shared memory, we need to do a two stage update of the free memory
+                // pointer.
                 // First we calculate our alignment adjustment and where the new free offset is.  Then we
                 // write the new structs and data.  The last two operations are to link the new structs into the
-                // existing ones and update the next free offset.  Our process could get killed in between those two,
+                // existing ones and update the next free offset.  Our process could get killed in between those
+                // two,
                 // leaving the memory in an inconsistent state.  We use the "IsConsistent" flag to help determine
                 // when that has happened.
                 freeMemoryOffset = *((int*)_baseAddress);
@@ -459,7 +474,8 @@ namespace System.Diagnostics
             if (_categoryData.UseUniqueSharedMemory)
             {
                 // in the unique shared mem we'll assume that the CounterEntries of the first instance
-                // are all created.  Then we can just refer to the old counter name rather than copying in a new one.
+                // are all created.  Then we can just refer to the old counter name rather than copying in a new
+                // one.
                 InstanceEntry* firstInstanceInCategoryPointer = (InstanceEntry*)ResolveOffset(
                     categoryPointer->FirstInstanceOffset,
                     sizeof(InstanceEntry)
@@ -974,7 +990,8 @@ namespace System.Diagnostics
                                     lifetime,
                                     lockInstancePointer
                                 );
-                                // at this point we might have reused an instance that came from v1.1/v1.0.  We can't assume it will have the counter
+                                // at this point we might have reused an instance that came from v1.1/v1.0.  We can't assume it will
+                                // have the counter
                                 // we're looking for.
                             }
 
@@ -1097,7 +1114,8 @@ namespace System.Diagnostics
         // * when the function returns true the returnCategoryPointerReference is set to the CategoryEntry
         //   that matches 'categoryNameHashCode' and 'categoryName'
         //
-        // * when the function returns false the returnCategoryPointerReference is set to the last CategoryEntry
+        // * when the function returns false the returnCategoryPointerReference is set to the last
+        // CategoryEntry
         //   in the linked list
         //
         private unsafe bool FindCategory(CategoryEntry** returnCategoryPointerReference)
@@ -1693,7 +1711,8 @@ namespace System.Diagnostics
                                 }
                             }
 
-                            // Check to see if the process handle has been signaled by the kernel.  If this is the case then it's safe
+                            // Check to see if the process handle has been signaled by the kernel.  If this is the case then
+                            // it's safe
                             // to reclaim the instance as the process is in the process of exiting.
                             using (
                                 SafeProcessHandle procHandle = Interop.Kernel32.OpenProcess(
@@ -2130,13 +2149,17 @@ namespace System.Diagnostics
                     //
                     //
                     // Here we call CreateFileMapping to create the memory mapped file.  When CreateFileMapping fails
-                    // with ERROR_ACCESS_DENIED, we know the file mapping has been created and we then open it with OpenFileMapping.
+                    // with ERROR_ACCESS_DENIED, we know the file mapping has been created and we then open it with
+                    // OpenFileMapping.
                     //
-                    // There is chance of a race condition between CreateFileMapping and OpenFileMapping; The memory mapped file
-                    // may actually be closed in between these two calls.  When this happens, OpenFileMapping returns ERROR_FILE_NOT_FOUND.
+                    // There is chance of a race condition between CreateFileMapping and OpenFileMapping; The memory
+                    // mapped file
+                    // may actually be closed in between these two calls.  When this happens, OpenFileMapping returns
+                    // ERROR_FILE_NOT_FOUND.
                     // In this case, we need to loop back and retry creating the memory mapped file.
                     //
-                    // This loop will timeout in approximately 1.4 minutes.  An InvalidOperationException is thrown in the timeout case.
+                    // This loop will timeout in approximately 1.4 minutes.  An InvalidOperationException is thrown in
+                    // the timeout case.
                     //
                     //
                     int waitRetries = 14; //((2^13)-1)*10ms == approximately 1.4mins
@@ -2249,8 +2272,10 @@ namespace System.Diagnostics
         // The final tmpPadding field is needed to make the size of this structure 8-byte aligned.  This is
         // necessary on IA64.
         // </WARNING>
-        // Note that in V1.0 and v1.1 there was no explicit padding defined on any of these structs.  That means that
-        // sizeof(CategoryEntry) or Marshal.SizeOf(typeof(CategoryEntry)) returned 4 bytes less before Whidbey,
+        // Note that in V1.0 and v1.1 there was no explicit padding defined on any of these structs.  That
+        // means that
+        // sizeof(CategoryEntry) or Marshal.SizeOf(typeof(CategoryEntry)) returned 4 bytes less before
+        // Whidbey,
         // and the int we use as IsConsistent could actually overlap the InstanceEntry SpinLock.
 
         [StructLayout(LayoutKind.Sequential)]

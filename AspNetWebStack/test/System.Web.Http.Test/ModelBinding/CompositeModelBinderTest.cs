@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,7 +25,8 @@ namespace System.Web.Http.ModelBinding
         ////    ModelBindingContext bindingContext = new ModelBindingContext
         ////    {
         ////        FallbackToEmptyPrefix = true,
-        ////        ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(SimpleModel)),
+        ////        ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null,
+        // typeof(SimpleModel)),
         ////        //PropertyFilter = (new BindAttribute { Include = "FirstName " }).IsPropertyAllowed
         ////    };
 
@@ -34,7 +36,9 @@ namespace System.Web.Http.ModelBinding
         ////    // Act & assert
         ////    Assert.Throws<InvalidOperationException>(
         ////        delegate { shimBinder.BindModel(executionContext, bindingContext); },
-        ////        @"The new model binding system cannot be used when a property allow list or disallow list has been specified in [Bind] or via the call to UpdateModel() / TryUpdateModel(). Use the [BindRequired] and [BindNever] attributes on the model type or its properties instead.");
+        ////        @"The new model binding system cannot be used when a property allow list or disallow
+        // list has been specified in [Bind] or via the call to UpdateModel() / TryUpdateModel(). Use the
+        // [BindRequired] and [BindNever] attributes on the model type or its properties instead.");
         ////}
 
         [Fact]
@@ -78,7 +82,8 @@ namespace System.Web.Http.ModelBinding
                     }
                 );
 
-            //binderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, false /* suppressPrefixCheck */);
+            //binderProviders.RegisterBinderForType(typeof(int), mockIntBinder.Object, false /*
+            // suppressPrefixCheck */);
             IModelBinder shimBinder = new CompositeModelBinder(mockIntBinder.Object);
 
             // Act
@@ -139,7 +144,8 @@ namespace System.Web.Http.ModelBinding
                     }
                 );
 
-            //binderProviders.RegisterBinderForType(typeof(List<int>), mockIntBinder.Object, false /* suppressPrefixCheck */);
+            //binderProviders.RegisterBinderForType(typeof(List<int>), mockIntBinder.Object, false /*
+            // suppressPrefixCheck */);
             IModelBinder shimBinder = new CompositeModelBinder(mockIntBinder.Object);
 
             // Act

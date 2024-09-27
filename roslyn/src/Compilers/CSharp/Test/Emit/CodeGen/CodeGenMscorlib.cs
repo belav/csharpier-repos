@@ -153,7 +153,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             var c = CreateEmptyCompilation(text, options: TestOptions.UnsafeReleaseDll);
 
             c.VerifyDiagnostics(
-                // (100,34): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('TypedReference')
+                // (100,34): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('TypedReference')
                 //                 FCallGetNextArg (&result); // 1
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&result")
                     .WithArguments("System.TypedReference")
@@ -271,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             // no errors for compat reasons.
             compilation2.VerifyDiagnostics();
 
-            // The bug has been resolved as Won't Fix for being extremely niche scenario and being a compat concern.
+            // The bug has been resolved as Won't Fix for being extremely niche scenario and being a compat
+            // concern.
             // uncomment the following code if we are fixing this
             //var verifier = CompileAndVerify(compilation2);
         }
@@ -827,8 +829,10 @@ namespace System
             //           have different implementations
 
             // PEVerify:
-            // Error: Token 0x02000009 following ELEMENT_TYPE_CLASS (_VALUETYPE) in signature is a ValueType (Class,respectively).
-            // Error: Token 0x02000009 following ELEMENT_TYPE_CLASS(_VALUETYPE) in signature is a ValueType (Class, respectively).
+            // Error: Token 0x02000009 following ELEMENT_TYPE_CLASS (_VALUETYPE) in signature is a ValueType
+            // (Class,respectively).
+            // Error: Token 0x02000009 following ELEMENT_TYPE_CLASS(_VALUETYPE) in signature is a ValueType
+            // (Class, respectively).
             // Type load failed.
             // ILVerify: Failed to load type 'System.String' from assembly ...
             CompileAndVerify(comp, verify: Verification.Fails)

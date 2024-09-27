@@ -116,7 +116,8 @@ class C
             UsingTree(text, options: TestOptions.Regular8);
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // record C(int X, int Y);
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion8,
@@ -124,12 +125,14 @@ class C
                         )
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(1, 1),
-                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // record C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")
                         .WithLocation(1, 1),
-                    // (1,8): error CS8112: Local function 'C(int, int)' must declare a body because it is not marked 'static extern'.
+                    // (1,8): error CS8112: Local function 'C(int, int)' must declare a body because it is not marked
+                    // 'static extern'.
                     // record C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "C")
                         .WithArguments("C(int, int)")
@@ -287,12 +290,14 @@ class C
 
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // record Point;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record Point;")
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(1, 1),
-                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // record Point;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")
@@ -427,12 +432,14 @@ abstract record D
 }";
             UsingTree(
                 text,
-                // (2,15): error CS1519: Invalid token 'return' in class, record, struct, or interface member declaration
+                // (2,15): error CS1519: Invalid token 'return' in class, record, struct, or interface member
+                // declaration
                 // record R1() { return null; }
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return")
                     .WithArguments("return")
                     .WithLocation(2, 15),
-                // (5,19): error CS1519: Invalid token 'return' in class, record, struct, or interface member declaration
+                // (5,19): error CS1519: Invalid token 'return' in class, record, struct, or interface member
+                // declaration
                 //     record R2() { return null; }
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "return")
                     .WithArguments("return")
@@ -1269,12 +1276,14 @@ class C
 }";
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (4,13): error CS8400: Feature 'with on structs' is not available in C# 8.0. Please use language version 10.0 or greater.
+                    // (4,13): error CS8400: Feature 'with on structs' is not available in C# 8.0. Please use language
+                    // version 10.0 or greater.
                     //     int x = 0 with {};
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "0 with {}")
                         .WithArguments("with on structs", "10.0")
                         .WithLocation(4, 13),
-                    // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (4,15): error CS8400: Feature 'records' is not available in C# 8.0. Please use language version
+                    // 9.0 or greater.
                     //     int x = 0 with {};
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "with")
                         .WithArguments("records", "9.0")
@@ -2622,7 +2631,8 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language
+                    // version 10.0 or greater.
                     // record struct(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
                         .WithArguments("record structs", "10.0")
@@ -2720,12 +2730,14 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // record struct C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record ")
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(1, 1),
-                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // record struct C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")
@@ -2736,7 +2748,8 @@ class C(int X, int Y)
                     // (1,8): error CS1002: ; expected
                     // record struct C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 8),
-                    // (1,16): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                    // (1,16): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                    // language version 12.0 or greater.
                     // record struct C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int X, int Y)")
                         .WithArguments("primary constructors", "12.0")
@@ -2894,12 +2907,14 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular10)
                 .VerifyDiagnostics(
-                    // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
+                    // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not
+                    // defined or imported
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "X")
                         .WithArguments("System.Runtime.CompilerServices.IsExternalInit")
                         .WithLocation(1, 20),
-                    // (1,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
+                    // (1,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not
+                    // defined or imported
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Y")
                         .WithArguments("System.Runtime.CompilerServices.IsExternalInit")
@@ -2910,17 +2925,20 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (1,8): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language
+                    // version 10.0 or greater.
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "class")
                         .WithArguments("record structs", "10.0")
                         .WithLocation(1, 8),
-                    // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
+                    // (1,20): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not
+                    // defined or imported
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "X")
                         .WithArguments("System.Runtime.CompilerServices.IsExternalInit")
                         .WithLocation(1, 20),
-                    // (1,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not defined or imported
+                    // (1,27): error CS0518: Predefined type 'System.Runtime.CompilerServices.IsExternalInit' is not
+                    // defined or imported
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "Y")
                         .WithArguments("System.Runtime.CompilerServices.IsExternalInit")
@@ -2931,12 +2949,14 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "record ")
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(1, 1),
-                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,1): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")
@@ -2947,7 +2967,8 @@ class C(int X, int Y)
                     // (1,8): error CS1002: ; expected
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, "class").WithLocation(1, 8),
-                    // (1,15): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                    // (1,15): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                    // language version 12.0 or greater.
                     // record class C(int X, int Y);
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "(int X, int Y)")
                         .WithArguments("primary constructors", "12.0")
@@ -3872,10 +3893,12 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,5): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                    // (1,5): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                    // statements
                     // ref record struct S;
                     Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "record").WithLocation(1, 5),
-                    // (1,20): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use language version 12.0 or greater.
+                    // (1,20): error CS8400: Feature 'primary constructors' is not available in C# 8.0. Please use
+                    // language version 12.0 or greater.
                     // ref record struct S;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, ";")
                         .WithArguments("primary constructors", "12.0")
@@ -3914,7 +3937,8 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular9)
                 .VerifyDiagnostics(
-                    // (1,12): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language version 10.0 or greater.
+                    // (1,12): error CS8773: Feature 'record structs' is not available in C# 9.0. Please use language
+                    // version 10.0 or greater.
                     // ref record struct S;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "struct")
                         .WithArguments("record structs", "10.0")
@@ -3958,12 +3982,14 @@ class C(int X, int Y)
 
             CreateCompilation(text, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // ref record R;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "ref record R;")
                         .WithArguments("top-level statements", "9.0")
                         .WithLocation(1, 1),
-                    // (1,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,5): error CS0246: The type or namespace name 'record' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // ref record R;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "record")
                         .WithArguments("record")

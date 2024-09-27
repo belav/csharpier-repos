@@ -10,7 +10,8 @@ namespace System.Text.Json
     public static partial class JsonSerializer
     {
         /// <summary>
-        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <typeparamref name="TValue"/>.
+        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <typeparamref
+        // name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
         /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
@@ -36,7 +37,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <paramref name="returnType"/>.
+        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <paramref
+        // name="returnType"/>.
         /// </summary>
         /// <returns>A <paramref name="returnType"/> representation of the JSON value.</returns>
         /// <param name="element">The <see cref="JsonElement"/> to convert.</param>
@@ -71,7 +73,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <typeparamref name="TValue"/>.
+        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <typeparamref
+        // name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
         /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
@@ -103,7 +106,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Converts the <see cref="JsonElement"/> representing a single JSON value into an instance specified by the <paramref name="jsonTypeInfo"/>.
+        /// Converts the <see cref="JsonElement"/> representing a single JSON value into an instance
+        // specified by the <paramref name="jsonTypeInfo"/>.
         /// </summary>
         /// <returns>A <paramref name="jsonTypeInfo"/> representation of the JSON value.</returns>
         /// <param name="element">The <see cref="JsonElement"/> to convert.</param>
@@ -124,7 +128,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <paramref name="returnType"/>.
+        /// Converts the <see cref="JsonElement"/> representing a single JSON value into a <paramref
+        // name="returnType"/>.
         /// </summary>
         /// <returns>A <paramref name="returnType"/> representation of the JSON value.</returns>
         /// <param name="element">The <see cref="JsonElement"/> to convert.</param>

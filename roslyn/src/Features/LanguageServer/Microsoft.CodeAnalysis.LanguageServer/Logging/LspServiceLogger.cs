@@ -31,7 +31,8 @@ internal sealed class LspServiceLogger : ILspServiceLogger
     ) => _hostLogger.LogError(exception, message, @params);
 
     /// <summary>
-    /// TODO - This should call LogInformation, however we need to introduce a LogDebug call in clasp first.
+    /// TODO - This should call LogInformation, however we need to introduce a LogDebug call in clasp
+    // first.
     /// </summary>
     public void LogInformation(string message, params object[] @params) =>
         _hostLogger.LogDebug(message, @params);

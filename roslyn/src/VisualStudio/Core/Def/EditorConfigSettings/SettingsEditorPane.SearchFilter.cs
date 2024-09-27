@@ -47,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                     return false;
                 }
 
-                // An entry is considered matching a search query if all tokens in the search query are matching at least one of entry's columns.
+                // An entry is considered matching a search query if all tokens in the search query are matching at
+                // least one of entry's columns.
                 // Reserve one more column for details content
                 var cachedColumnValues = new string[_visibleColumns.Count + 1];
 

@@ -6,11 +6,13 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures tables with triggers to not use the OUTPUT clause when saving changes.
+///     A convention that configures tables with triggers to not use the OUTPUT clause when saving
+// changes.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITriggerRemovedConvention
@@ -19,7 +21,8 @@ public class SqlServerOutputClauseConvention : ITriggerAddedConvention, ITrigger
     ///     Creates a new instance of <see cref="SqlServerDbFunctionConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public SqlServerOutputClauseConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

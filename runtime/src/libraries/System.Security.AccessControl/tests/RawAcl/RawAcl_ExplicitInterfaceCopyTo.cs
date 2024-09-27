@@ -216,7 +216,8 @@ namespace System.Security.AccessControl.Tests
             myCollection = (ICollection)rAcl;
             myCollection.CopyTo(gAces, 0);
 
-            // Case 6, test ICollection.CopyTo, array rank is not one. all the other cases are tested by type-friendly version CopyTo
+            // Case 6, test ICollection.CopyTo, array rank is not one. all the other cases are tested by
+            // type-friendly version CopyTo
             //on my machine, a BCL assert as resource Rank_MutiDimNotSupported not found
             Assert.Throws<RankException>(() =>
             {

@@ -23,10 +23,12 @@ namespace Castle.DynamicProxy
     internal static class ExceptionMessageBuilder
     {
         /// <summary>
-        /// Provides instructions that a user could follow to make a type or method in <paramref name="targetAssembly"/>
+        /// Provides instructions that a user could follow to make a type or method in <paramref
+        // name="targetAssembly"/>
         /// visible to DynamicProxy.</summary>
         /// <param name="targetAssembly">The assembly containing the type or method.</param>
-        /// <returns>Instructions that a user could follow to make a type or method visible to DynamicProxy.</returns>
+        /// <returns>Instructions that a user could follow to make a type or method visible to
+        // DynamicProxy.</returns>
         internal static string CreateInstructionsToMakeVisible(Assembly targetAssembly)
         {
             string strongNamedOrNotIndicator = " not"; // assume not strong-named

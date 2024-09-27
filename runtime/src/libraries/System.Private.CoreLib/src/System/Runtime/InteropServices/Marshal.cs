@@ -1308,7 +1308,8 @@ namespace System.Runtime.InteropServices
             GetTypeFromCLSID(clsid, null, throwOnError: false);
 
         /// <summary>
-        /// Initializes the underlying handle of a newly created <see cref="SafeHandle" /> to the provided value.
+        /// Initializes the underlying handle of a newly created <see cref="SafeHandle" /> to the provided
+        // value.
         /// </summary>
         /// <param name="safeHandle">The <see cref="SafeHandle"/> instance to update.</param>
         /// <param name="handle">The pre-existing handle.</param>

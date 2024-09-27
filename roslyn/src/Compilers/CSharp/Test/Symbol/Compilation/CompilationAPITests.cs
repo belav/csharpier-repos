@@ -97,7 +97,8 @@ class C { }",
             comp = CreateCompilation(tree, options: options);
             // Syntax tree diagnostic options override global settting
             comp.VerifyDiagnostics(
-                // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for
+                // clarity
                 // class C { long _f = 0l;}
                 Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 22)
             );
@@ -110,7 +111,8 @@ class C { }",
 
             var comp = CreateCompilation(tree);
             comp.VerifyDiagnostics(
-                // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                // (1,22): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for
+                // clarity
                 // class C { long _f = 0l;}
                 Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 22),
                 // (1,16): warning CS0414: The field 'C._f' is assigned but its value is never used
@@ -263,7 +265,8 @@ long _f = 0l;
 
             CreateCompilation(tree, options: options)
                 .VerifyDiagnostics(
-                    // (1,23): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                    // (1,23): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for
+                    // clarity
                     //  class C { long _f = 0l; }
                     Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 23),
                     // (1,17): warning CS0414: The field 'C._f' is assigned but its value is never used
@@ -280,7 +283,8 @@ long _f = 0l;
             var source = @"public class C { public long Field = 0l; }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (1,39): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for clarity
+                    // (1,39): warning CS0078: The 'l' suffix is easily confused with the digit '1' -- use 'L' for
+                    // clarity
                     // public class C { public long Field = 0l; }
                     Diagnostic(ErrorCode.WRN_LowercaseEllSuffix, "l").WithLocation(1, 39)
                 );
@@ -300,7 +304,8 @@ long _f = 0l;
                 Diagnostic(ErrorCode.ERR_OptionMustBeAbsolutePath)
                     .WithArguments("CryptoKeyFile")
                     .WithLocation(1, 1),
-                // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                // error CS8102: Public signing was specified and requires a public key, but no public key was
+                // specified.
                 Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
             );
         }
@@ -314,7 +319,8 @@ long _f = 0l;
                     options: TestOptions.ReleaseDll.WithPublicSign(true).WithCryptoKeyFile("")
                 )
                 .VerifyDiagnostics(
-                    // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                    // error CS8102: Public signing was specified and requires a public key, but no public key was
+                    // specified.
                     Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
                 );
         }
@@ -332,7 +338,8 @@ long _f = 0l;
                     Diagnostic(ErrorCode.ERR_OptionMustBeAbsolutePath)
                         .WithArguments("CryptoKeyFile")
                         .WithLocation(1, 1),
-                    // error CS8102: Public signing was specified and requires a public key, but no public key was specified.
+                    // error CS8102: Public signing was specified and requires a public key, but no public key was
+                    // specified.
                     Diagnostic(ErrorCode.ERR_PublicSignButNoKey).WithLocation(1, 1)
                 );
         }
@@ -346,7 +353,8 @@ long _f = 0l;
             CSharpCompilation
                 .Create(@"C:/goo/Test.exe")
                 .VerifyEmitDiagnostics(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     // error CS8203: Invalid assembly name: Name contains invalid characters.
                     Diagnostic(ErrorCode.ERR_BadAssemblyName)
@@ -539,7 +547,8 @@ namespace A.B {
                 Diagnostic(ErrorCode.ERR_InvalidFileAlignment)
                     .WithArguments("513")
                     .WithLocation(1, 1),
-                // error CS1773: Invalid version 1000000.-1000000 for /subsystemversion. The version must be 6.02 or greater for ARM or AppContainerExe, and 4.00 or greater otherwise
+                // error CS1773: Invalid version 1000000.-1000000 for /subsystemversion. The version must be 6.02 or
+                // greater for ARM or AppContainerExe, and 4.00 or greater otherwise
                 Diagnostic(ErrorCode.ERR_InvalidSubsystemVersion)
                     .WithArguments("1000000.-1000000")
                     .WithLocation(1, 1),
@@ -908,7 +917,8 @@ namespace A.B {
             );
 
             comp.VerifyDiagnostics(
-                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character on a line
+                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character
+                // on a line
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_BadDirectivePlacement, "#").WithLocation(1, 21),
                 // (1,61): error CS1026: ) expected
@@ -917,17 +927,20 @@ namespace A.B {
                 // (1,61): error CS1002: ; expected
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 61),
-                // (1,14): error CS8112: Local function 'Alias()' must declare a body because it is not marked 'static extern'.
+                // (1,14): error CS8112: Local function 'Alias()' must declare a body because it is not marked
+                // 'static extern'.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "Alias")
                     .WithArguments("Alias()")
                     .WithLocation(1, 14),
-                // (1,8): error CS0246: The type or namespace name 'alias' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,8): error CS0246: The type or namespace name 'alias' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias")
                     .WithArguments("alias")
                     .WithLocation(1, 8),
-                // (1,14): warning CS0626: Method, operator, or accessor 'Alias()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                // (1,14): warning CS0626: Method, operator, or accessor 'Alias()' is marked external and has no
+                // attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "Alias")
                     .WithArguments("Alias()")
@@ -1009,7 +1022,8 @@ namespace A.B {
             );
 
             comp.VerifyDiagnostics(
-                // (1,1): error CS8059: Feature 'top-level statements' is not available in C# 6. Please use language version 9.0 or greater.
+                // (1,1): error CS8059: Feature 'top-level statements' is not available in C# 6. Please use language
+                // version 9.0 or greater.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion6,
@@ -1017,17 +1031,20 @@ namespace A.B {
                     )
                     .WithArguments("top-level statements", "9.0")
                     .WithLocation(1, 1),
-                // (1,1): error CS8059: Feature 'extern local functions' is not available in C# 6. Please use language version 9.0 or greater.
+                // (1,1): error CS8059: Feature 'extern local functions' is not available in C# 6. Please use
+                // language version 9.0 or greater.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "extern")
                     .WithArguments("extern local functions", "9.0")
                     .WithLocation(1, 1),
-                // (1,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language version 7.0 or greater.
+                // (1,14): error CS8059: Feature 'local functions' is not available in C# 6. Please use language
+                // version 7.0 or greater.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion6, "Alias")
                     .WithArguments("local functions", "7.0")
                     .WithLocation(1, 14),
-                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character on a line
+                // (1,21): error CS1040: Preprocessor directives must appear as the first non-whitespace character
+                // on a line
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_BadDirectivePlacement, "#").WithLocation(1, 21),
                 // (1,61): error CS1026: ) expected
@@ -1036,17 +1053,20 @@ namespace A.B {
                 // (1,61): error CS1002: ; expected
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 61),
-                // (1,14): error CS8112: Local function 'Alias()' must declare a body because it is not marked 'static extern'.
+                // (1,14): error CS8112: Local function 'Alias()' must declare a body because it is not marked
+                // 'static extern'.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "Alias")
                     .WithArguments("Alias()")
                     .WithLocation(1, 14),
-                // (1,8): error CS0246: The type or namespace name 'alias' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,8): error CS0246: The type or namespace name 'alias' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias")
                     .WithArguments("alias")
                     .WithLocation(1, 8),
-                // (1,14): warning CS0626: Method, operator, or accessor 'Alias()' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
+                // (1,14): warning CS0626: Method, operator, or accessor 'Alias()' is marked external and has no
+                // attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                 // extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}
                 Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "Alias")
                     .WithArguments("Alias()")
@@ -1236,7 +1256,8 @@ class D
             comp = comp.RemoveSyntaxTrees(withWarning);
             Assert.Equal(0, comp.GetDiagnostics().Count());
 
-            // Compilation.Create with syntaxtree with a non-CompilationUnit root node: should throw an ArgumentException.
+            // Compilation.Create with syntaxtree with a non-CompilationUnit root node: should throw an
+            // ArgumentException.
             Assert.False(
                 withExpressionRootTree.HasCompilationUnitRoot,
                 "how did we get a CompilationUnit root?"
@@ -1252,7 +1273,8 @@ class D
             // AddSyntaxTrees with a non-CompilationUnit root node: should throw an ArgumentException.
             Assert.Throws<ArgumentException>(() => comp.AddSyntaxTrees(withExpressionRootTree));
 
-            // ReplaceSyntaxTrees syntaxtree with a non-CompilationUnit root node: should throw an ArgumentException.
+            // ReplaceSyntaxTrees syntaxtree with a non-CompilationUnit root node: should throw an
+            // ArgumentException.
             Assert.Throws<ArgumentException>(
                 () => comp.ReplaceSyntaxTree(comp.SyntaxTrees[0], withExpressionRootTree)
             );
@@ -1665,13 +1687,15 @@ var a = new C2();
             //Assert.True(String.Equals(ns.Name, "Compilation", StringComparison.OrdinalIgnoreCase));
 
             // GetCompilationNamespace Not implemented(Derived Class MergedNamespaceSymbol)
-            //NamespaceSymbol merged = MergedNamespaceSymbol.Create(new NamespaceExtent(new MockAssemblySymbol("Merged")), null, null);
+            //NamespaceSymbol merged = MergedNamespaceSymbol.Create(new NamespaceExtent(new
+            // MockAssemblySymbol("Merged")), null, null);
             //ns = comp.GetCompilationNamespace(ns: merged);
             //Assert.Equal(ns.Kind, SymbolKind.Namespace);
             //Assert.True(String.Equals(ns.Name, "Compilation", StringComparison.OrdinalIgnoreCase));
 
             // GetCompilationNamespace Not implemented(Derived Class RetargetingNamespaceSymbol)
-            //Retargeting.RetargetingNamespaceSymbol retargetSmb = nsSmb as Retargeting.RetargetingNamespaceSymbol;
+            //Retargeting.RetargetingNamespaceSymbol retargetSmb = nsSmb as
+            // Retargeting.RetargetingNamespaceSymbol;
             //ns = comp.GetCompilationNamespace(ns: retargetSmb);
             //Assert.Equal(ns.Kind, SymbolKind.Namespace);
             //Assert.True(String.Equals(ns.Name, "Compilation", StringComparison.OrdinalIgnoreCase));
@@ -1710,7 +1734,8 @@ var a = new C2();
 
             // Not Implemented
             // var asmByteRef = MetadataReference.CreateFromImage(new byte[5], embedInteropTypes: true);
-            //var asmObjectRef = new AssemblyObjectReference(assembly: System.Reflection.Assembly.GetAssembly(typeof(object)),embedInteropTypes :true);
+            //var asmObjectRef = new AssemblyObjectReference(assembly:
+            // System.Reflection.Assembly.GetAssembly(typeof(object)),embedInteropTypes :true);
             //comp =comp.AddReferences(asmByteRef, asmObjectRef);
             //Assert.Equal(2, comp.References.Count);
             //Assert.Equal(ReferenceKind.AssemblyBytes, comp.References[0].Kind);
@@ -1784,7 +1809,8 @@ var a = new C2();
         }
 
         [WorkItem(537778, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537778")]
-        // Throw exception when the parameter of the parameter type of GetReferencedAssemblySymbol is VB.CompilationReference
+        // Throw exception when the parameter of the parameter type of GetReferencedAssemblySymbol is
+        // VB.CompilationReference
         [Fact]
         public void NegGetSymbol1()
         {
@@ -2287,7 +2313,8 @@ class A
                 parseOptions: TestOptions.Script
             );
             compilation.VerifyDiagnostics(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()'
+                // entry point.
                 //     static void Main() { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("A.Main()")
@@ -2300,7 +2327,8 @@ class A
             var entryPoint = compilation.GetEntryPointAndDiagnostics(default(CancellationToken));
             Assert.Equal(entryPoint.MethodSymbol, scriptMethod);
             entryPoint.Diagnostics.Verify(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()'
+                // entry point.
                 //     static void Main() { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("A.Main()")
@@ -2345,7 +2373,8 @@ class A
                 syntaxTree: Parse(source, options: TestOptions.Script)
             );
             compilation.VerifyDiagnostics(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()'
+                // entry point.
                 //     static void Main() { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("A.Main()")
@@ -2360,7 +2389,8 @@ class A
             var entryPoint = compilation.GetEntryPointAndDiagnostics(default(CancellationToken));
             Assert.Equal(entryPoint.MethodSymbol, scriptMethod);
             entryPoint.Diagnostics.Verify(
-                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()' entry point.
+                // (4,17): warning CS7022: The entry point of the program is global script code; ignoring 'A.Main()'
+                // entry point.
                 //     static void Main() { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("A.Main()")
@@ -2427,7 +2457,8 @@ class myClass : alias::Uri
             Assert.Equal(2, comp.References.Count());
             Assert.Equal("alias", comp.References.Last().Properties.Aliases.Single());
             comp.VerifyDiagnostics(
-                // (2,7): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 'alias' only contains lower-cased ascii characters. Such
+                // names may become reserved for the language.
                 // using alias=alias;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "alias")
                     .WithArguments("alias")
@@ -2437,7 +2468,8 @@ class myClass : alias::Uri
                 Diagnostic(ErrorCode.ERR_DuplicateAlias, "using alias=alias;")
                     .WithArguments("alias")
                     .WithLocation(2, 1),
-                // (3,17): error CS0104: 'alias' is an ambiguous reference between '<global namespace>' and '<global namespace>'
+                // (3,17): error CS0104: 'alias' is an ambiguous reference between '<global namespace>' and '<global
+                // namespace>'
                 // class myClass : alias::Uri
                 Diagnostic(ErrorCode.ERR_AmbigContext, "alias")
                     .WithArguments("alias", "<global namespace>", "<global namespace>")
@@ -2475,7 +2507,8 @@ public class TestClass
                 compilation
                     .GetDiagnostics()
                     .Verify(
-                        // (8,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
+                        // (8,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and
+                        // 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
                         // [MyAttribute]
                         Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
                             .WithArguments(
@@ -2496,7 +2529,8 @@ public class TestClass
                 compilation
                     .GetDiagnostics()
                     .Verify(
-                        // (10,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
+                        // (10,2): error CS1614: 'MyAttribute' is ambiguous between 'MyAttribute2Attribute' and
+                        // 'MyAttributeAttribute'; use either '@MyAttribute' or 'MyAttributeAttribute'
                         // [MyAttribute]
                         Diagnostic(ErrorCode.ERR_AmbiguousAttribute, "MyAttribute")
                             .WithArguments(
@@ -2710,7 +2744,8 @@ class C { }",
         [Fact]
         public void ReferenceManagerReuse_WithScriptCompilationInfo()
         {
-            // Note: The following results would change if we optimized sharing more: https://github.com/dotnet/roslyn/issues/43397
+            // Note: The following results would change if we optimized sharing more:
+            // https://github.com/dotnet/roslyn/issues/43397
 
             var c1 = CSharpCompilation.CreateScriptCompilation("c1");
             Assert.NotNull(c1.ScriptCompilationInfo);
@@ -2839,7 +2874,8 @@ class C { }",
             Assert.Equal(1, reference.QueryCount);
 
             c5.VerifyDiagnostics(
-                // (1,36): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
+                // (1,36): error CS0246: The type or namespace name 'C' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 // public class Main2 { public static C C; }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C").WithArguments("C")
             );
@@ -2897,7 +2933,8 @@ class C { }",
             );
 
             compilation.VerifyDiagnostics(
-                // error CS1703: Multiple assemblies with equivalent identity have been imported: 'System.dll' and 'System.v5.0.5.0_silverlight.dll'. Remove one of the duplicate references.
+                // error CS1703: Multiple assemblies with equivalent identity have been imported: 'System.dll' and
+                // 'System.v5.0.5.0_silverlight.dll'. Remove one of the duplicate references.
                 Diagnostic(ErrorCode.ERR_DuplicateImport)
                     .WithArguments("System.dll (net451)", "System.v5.0.5.0_silverlight.dll")
             );
@@ -2965,10 +3002,12 @@ public class C { public static FrameworkName Goo() { return null; }}";
             );
 
             c1.VerifyDiagnostics(
-                // error CS1703: Multiple assemblies with equivalent identity have been imported: 'System.dll' and 'System.v5.0.5.0_silverlight.dll'. Remove one of the duplicate references.
+                // error CS1703: Multiple assemblies with equivalent identity have been imported: 'System.dll' and
+                // 'System.v5.0.5.0_silverlight.dll'. Remove one of the duplicate references.
                 Diagnostic(ErrorCode.ERR_DuplicateImport)
                     .WithArguments("System.dll (net451)", "System.v5.0.5.0_silverlight.dll"),
-                // error CS7069: Reference to type 'System.Runtime.Versioning.FrameworkName' claims it is defined in 'System', but it could not be found
+                // error CS7069: Reference to type 'System.Runtime.Versioning.FrameworkName' claims it is defined in
+                // 'System', but it could not be found
                 Diagnostic(ErrorCode.ERR_MissingTypeInAssembly, "C.Goo")
                     .WithArguments("System.Runtime.Versioning.FrameworkName", "System")
             );
@@ -4541,7 +4580,8 @@ class C
 
             var comp = CreateCompilation(string.Empty, references: new[] { moduleReference });
             comp.VerifyEmitDiagnostics(
-                // error CS1542: '<in-memory module>' cannot be added to this assembly because it already is an assembly
+                // error CS1542: '<in-memory module>' cannot be added to this assembly because it already is an
+                // assembly
                 Diagnostic(ErrorCode.ERR_AddModuleAssembly)
                     .WithArguments("<in-memory module>")
                     .WithLocation(1, 1)
@@ -4682,7 +4722,8 @@ class C
                 returnType: typeof(int)
             );
             script.VerifyDiagnostics(
-                // (1,8): error CS4016: Since this is an async method, the return expression must be of type 'int' rather than 'Task<int>'
+                // (1,8): error CS4016: Since this is an async method, the return expression must be of type 'int'
+                // rather than 'Task<int>'
                 // return System.Threading.Tasks.Task.FromResult(42);
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncReturnExpression,

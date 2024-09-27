@@ -8,12 +8,14 @@ using System.Threading;
 namespace System.Management
 {
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementEventWatcher.EventArrived'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementEventWatcher.EventArrived'/> event.</para>
     /// </summary>
     public delegate void EventArrivedEventHandler(object sender, EventArrivedEventArgs e);
 
     /// <summary>
-    /// <para>Represents the method that will handle the <see cref='System.Management.ManagementEventWatcher.Stopped'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='System.Management.ManagementEventWatcher.Stopped'/> event.</para>
     /// </summary>
     public delegate void StoppedEventHandler(object sender, StoppedEventArgs e);
 
@@ -26,7 +28,8 @@ namespace System.Management
     ///    <code lang='C#'>using System;
     /// using System.Management;
     ///
-    /// // This example demonstrates how to subscribe to an event using the ManagementEventWatcher object.
+    /// // This example demonstrates how to subscribe to an event using the ManagementEventWatcher
+    // object.
     /// class Sample_ManagementEventWatcher
     /// {
     ///     public static int Main(string[] args) {
@@ -132,10 +135,12 @@ namespace System.Management
 
         //default constructor
         /// <overload>
-        ///    Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class.
+        ///    Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class.
         /// </overload>
         /// <summary>
-        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class. For further
+        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class. For further
         ///    initialization, set the properties on the object. This is the default constructor.</para>
         /// </summary>
         public ManagementEventWatcher()
@@ -143,9 +148,11 @@ namespace System.Management
 
         //parameterized constructors
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class when given a WMI event query.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class when given a WMI event query.</para>
         /// </summary>
-        /// <param name='query'>An <see cref='System.Management.EventQuery'/> object representing a WMI event query, which determines the events for which the watcher will listen.</param>
+        /// <param name='query'>An <see cref='System.Management.EventQuery'/> object representing a WMI
+        // event query, which determines the events for which the watcher will listen.</param>
         /// <remarks>
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
@@ -154,10 +161,12 @@ namespace System.Management
             : this(null, query, null) { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class when given a WMI event query in the
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class when given a WMI event query in the
         ///    form of a string.</para>
         /// </summary>
-        /// <param name='query'> A WMI event query, which defines the events for which the watcher will listen.</param>
+        /// <param name='query'> A WMI event query, which defines the events for which the watcher will
+        // listen.</param>
         /// <remarks>
         ///    <para>The namespace in which the watcher will be listening for
         ///       events is the default namespace that is currently set.</para>
@@ -169,8 +178,10 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
         /// class that listens for events conforming to the given WMI event query.</para>
         /// </summary>
-        /// <param name='scope'>A <see cref='System.Management.ManagementScope'/> object representing the scope (namespace) in which the watcher will listen for events.</param>
-        /// <param name=' query'>An <see cref='System.Management.EventQuery'/> object representing a WMI event query, which determines the events for which the watcher will listen.</param>
+        /// <param name='scope'>A <see cref='System.Management.ManagementScope'/> object representing the
+        // scope (namespace) in which the watcher will listen for events.</param>
+        /// <param name=' query'>An <see cref='System.Management.EventQuery'/> object representing a WMI
+        // event query, which determines the events for which the watcher will listen.</param>
         public ManagementEventWatcher(ManagementScope scope, EventQuery query)
             : this(scope, query, null) { }
 
@@ -179,32 +190,42 @@ namespace System.Management
         /// class that listens for events conforming to the given WMI event query. For this
         /// variant, the query and the scope are specified as strings.</para>
         /// </summary>
-        /// <param name='scope'> The management scope (namespace) in which the watcher will listen for events.</param>
-        /// <param name=' query'> The query that defines the events for which the watcher will listen.</param>
+        /// <param name='scope'> The management scope (namespace) in which the watcher will listen for
+        // events.</param>
+        /// <param name=' query'> The query that defines the events for which the watcher will
+        // listen.</param>
         public ManagementEventWatcher(string scope, string query)
             : this(new ManagementScope(scope), new EventQuery(query), null) { }
 
         /// <summary>
-        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class that listens for
+        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class that listens for
         ///    events conforming to the given WMI event query, according to the specified options. For
         ///    this variant, the query and the scope are specified as strings. The options
         ///    object can specify options such as a timeout and context information.</para>
         /// </summary>
-        /// <param name='scope'>The management scope (namespace) in which the watcher will listen for events.</param>
-        /// <param name=' query'>The query that defines the events for which the watcher will listen.</param>
-        /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing additional options used to watch for events. </param>
+        /// <param name='scope'>The management scope (namespace) in which the watcher will listen for
+        // events.</param>
+        /// <param name=' query'>The query that defines the events for which the watcher will
+        // listen.</param>
+        /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing
+        // additional options used to watch for events. </param>
         public ManagementEventWatcher(string scope, string query, EventWatcherOptions options)
             : this(new ManagementScope(scope), new EventQuery(query), options) { }
 
         /// <summary>
-        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/> class
+        /// <para> Initializes a new instance of the <see cref='System.Management.ManagementEventWatcher'/>
+        // class
         ///    that listens for events conforming to the given WMI event query, according to the specified
         ///    options. For this variant, the query and the scope are specified objects. The
         ///    options object can specify options such as timeout and context information.</para>
         /// </summary>
-        /// <param name='scope'>A <see cref='System.Management.ManagementScope'/> object representing the scope (namespace) in which the watcher will listen for events.</param>
-        /// <param name=' query'>An <see cref='System.Management.EventQuery'/> object representing a WMI event query, which determines the events for which the watcher will listen.</param>
-        /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing additional options used to watch for events. </param>
+        /// <param name='scope'>A <see cref='System.Management.ManagementScope'/> object representing the
+        // scope (namespace) in which the watcher will listen for events.</param>
+        /// <param name=' query'>An <see cref='System.Management.EventQuery'/> object representing a WMI
+        // event query, which determines the events for which the watcher will listen.</param>
+        /// <param name='options'>An <see cref='System.Management.EventWatcherOptions'/> object representing
+        // additional options used to watch for events. </param>
         public ManagementEventWatcher(
             ManagementScope scope,
             EventQuery query,
@@ -246,7 +267,8 @@ namespace System.Management
         }
 
         /// <summary>
-        ///    <para>Ensures that outstanding calls are cleared. This is the destructor for the object.</para>
+        ///    <para>Ensures that outstanding calls are cleared. This is the destructor for the
+        // object.</para>
         /// </summary>
         ~ManagementEventWatcher()
         {
@@ -502,7 +524,8 @@ namespace System.Management
         //********************************************
         /// <summary>
         ///    <para>Subscribes to events with the given query and delivers
-        ///       them, asynchronously, through the <see cref='System.Management.ManagementEventWatcher.EventArrived'/> event.</para>
+        ///       them, asynchronously, through the <see
+        // cref='System.Management.ManagementEventWatcher.EventArrived'/> event.</para>
         /// </summary>
         public void Start()
         {
@@ -787,11 +810,11 @@ namespace System.Management
             {
                 lock (this)
                 {
-                    /*
-                     * We force a release of the stub here so as to allow
-                     * unsecapp.exe to die as soon as possible.
-                     * however if it is local, unsecap won't be started
-                     */
+/*
+* We force a release of the stub here so as to allow
+* unsecapp.exe to die as soon as possible.
+* however if it is local, unsecap won't be started
+*/
                     if (null != stub)
                     {
                         try

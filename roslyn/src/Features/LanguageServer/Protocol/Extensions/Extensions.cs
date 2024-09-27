@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         /// <summary>
         /// Generate the Uri of a document by replace the name in file path using the document's name.
-        /// Used to generate the correct Uri when rename a document, because calling <seealso cref="Document.WithName(string)"/> doesn't update the file path.
+        /// Used to generate the correct Uri when rename a document, because calling <seealso
+        // cref="Document.WithName(string)"/> doesn't update the file path.
         /// </summary>
         public static Uri GetUriForRenamedDocument(this TextDocument document)
         {
@@ -141,7 +142,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             }
 
             // We either have only one item or have multiple, but none of them  matched our context. In the
-            // latter case, we'll just return the first one arbitrarily since this might just be some temporary mis-sync
+            // latter case, we'll just return the first one arbitrarily since this might just be some temporary
+            // mis-sync
             // of client and server state.
             return items[0];
         }
@@ -159,7 +161,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 projectIdGetter: (item) => item.Project.Id,
                 defaultGetter: () =>
                 {
-                    // We were not passed a project context.  This can happen when the LSP powered NavBar is not enabled.
+                    // We were not passed a project context.  This can happen when the LSP powered NavBar is not
+                    // enabled.
                     // This branch should be removed when we're using the LSP based navbar in all scenarios.
 
                     var solution = documents.First().Project.Solution;

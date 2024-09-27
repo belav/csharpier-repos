@@ -219,7 +219,8 @@ namespace System.Security.Cryptography
                     buffers[2].BufferType = CngBufferDescriptors.KDF_HASH_ALGORITHM;
                     buffers[2].pvBuffer = (IntPtr)pHashAlgorithmName;
 
-                    // C# spec: "A char* value produced by fixing a string instance always points to a null-terminated string"
+                    // C# spec: "A char* value produced by fixing a string instance always points to a null-terminated
+                    // string"
                     buffers[2].cbBuffer = checked((hashAlgorithmName.Length + 1) * sizeof(char)); // Add null terminator.
 
                     fixed (BCryptBuffer* pBuffers = buffers)
@@ -263,7 +264,8 @@ namespace System.Security.Cryptography
             const BCryptOpenAlgorithmProviderFlags OpenAlgorithmFlags =
                 BCryptOpenAlgorithmProviderFlags.BCRYPT_ALG_HANDLE_HMAC_FLAG;
 
-            // This code path will only be taken on Windows 7, so we can assume pseudo handles are not supported.
+            // This code path will only be taken on Windows 7, so we can assume pseudo handles are not
+            // supported.
             // Do not dispose handle since it is shared and cached.
             SafeBCryptAlgorithmHandle handle =
                 Interop.BCrypt.BCryptAlgorithmCache.GetCachedBCryptAlgorithmHandle(

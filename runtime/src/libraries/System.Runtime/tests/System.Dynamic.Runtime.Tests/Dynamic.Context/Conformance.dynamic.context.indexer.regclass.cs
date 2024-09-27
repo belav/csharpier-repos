@@ -523,7 +523,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             set { MemberClass.t_status = 2; }
         }
 
-        //  public MyEnum this[object[] p1] { get { MemberClass.Status = 1; return MyEnum.Second; } set { MemberClass.Status = 2; } }
+        //  public MyEnum this[object[] p1] { get { MemberClass.Status = 1; return MyEnum.Second; } set {
+        // MemberClass.Status = 2; } }
         public MyEnum[] this[dynamic p1]
         {
             get

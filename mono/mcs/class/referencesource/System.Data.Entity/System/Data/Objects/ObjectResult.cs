@@ -66,7 +66,8 @@ namespace System.Data.Objects
         ///   Get the next result set of a stored procedure.
         /// </summary>
         /// <returns>
-        ///   An ObjectResult that enumerates the values of the next result set.   null, if there are no more, or if the
+        ///   An ObjectResult that enumerates the values of the next result set.   null, if there are no
+        // more, or if the
         ///   the ObjectResult is not the result of a stored procedure call.
         /// </returns>
         public ObjectResult<TElement> GetNextResult<TElement>()

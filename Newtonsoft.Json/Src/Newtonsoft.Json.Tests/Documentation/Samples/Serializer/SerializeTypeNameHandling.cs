@@ -82,7 +82,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             //   "$type": "Newtonsoft.Json.Samples.Stockholder, Newtonsoft.Json.Tests",
             //   "FullName": "Steve Stockholder",
             //   "Businesses": {
-            //     "$type": "System.Collections.Generic.List`1[[Newtonsoft.Json.Samples.Business, Newtonsoft.Json.Tests]], mscorlib",
+            //     "$type": "System.Collections.Generic.List`1[[Newtonsoft.Json.Samples.Business,
+            // Newtonsoft.Json.Tests]], mscorlib",
             //     "$values": [
             //       {
             //         "$type": "Newtonsoft.Json.Samples.Hotel, Newtonsoft.Json.Tests",

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a function parameter.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+// more information and examples.
 /// </remarks>
 public interface IReadOnlyDbFunctionParameter : IReadOnlyAnnotatable
 {
@@ -35,7 +36,8 @@ public interface IReadOnlyDbFunctionParameter : IReadOnlyAnnotatable
 
     /// <summary>
     ///     Gets the value which indicates whether the parameter propagates nullability,
-    ///     meaning if it's value is <see langword="null" /> the database function itself returns <see langword="null" />.
+    ///     meaning if it's value is <see langword="null" /> the database function itself returns <see
+    // langword="null" />.
     /// </summary>
     bool PropagatesNullability { get; }
 

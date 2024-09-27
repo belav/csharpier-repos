@@ -184,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void NoPIALocalTypesEquivalentToEachOtherStructAsMethodParameterType()
         {
-            //Structure - As method parameter type in external assembly (test this by passing the parameter with a variable which was declared in the current assembly)
+            //Structure - As method parameter type in external assembly (test this by passing the parameter with
+            // a variable which was declared in the current assembly)
 
             var localTypeSource =
                 @"static class TypeSubstitution
@@ -631,7 +632,8 @@ static class TypeSubstitution
         [Fact]
         public void NoPiaLeaveOutAllidentifyingAttributesOnAStructButUseItInAPIAInterface()
         {
-            //Leave out all identifying attributes on a Struct, but use it in a PIA interface, and cause the PIA interface to be imported
+            //Leave out all identifying attributes on a Struct, but use it in a PIA interface, and cause the PIA
+            // interface to be imported
 
             var localTypeSource1 =
                 @"
@@ -719,7 +721,8 @@ public class InterfaceImpl
         [Fact]
         public void NoPiaTypeSubstitutionWithHandAuthoredLocalType()
         {
-            //Try to apply attributes to the local type that indicates that the type is intended to be used for type equivalence.
+            //Try to apply attributes to the local type that indicates that the type is intended to be used for
+            // type equivalence.
 
             var localTypeSource =
                 @"

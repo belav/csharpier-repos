@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     A parameter object passed to <see cref="IInstantiationBindingInterceptor" /> methods.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public readonly struct InstantiationBindingInterceptionData
 {

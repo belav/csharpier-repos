@@ -26,7 +26,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
 /// <summary>
-/// Simple HttpClient stress app that launches Kestrel in-proc and runs many concurrent requests of varying types against it.
+/// Simple HttpClient stress app that launches Kestrel in-proc and runs many concurrent requests of
+// varying types against it.
 /// </summary>
 public class Program
 {
@@ -137,7 +138,8 @@ public class Program
                 );
         // if (listener == null)
         // {
-        //     // If no command-line requested logging, enable the user to press 'L' to enable logging to the console
+        //     // If no command-line requested logging, enable the user to press 'L' to enable logging to
+        // the console
         //     // during execution, so that it can be done just-in-time when something goes awry.
         //     new Thread(() =>
         //     {
@@ -238,9 +240,12 @@ public class Program
             };
         }
 
-        // Set of operations that the client can select from to run.  Each item is a tuple of the operation's name
-        // and the delegate to invoke for it, provided with the HttpClient instance on which to make the call and
-        // returning asynchronously the retrieved response string from the server.  Individual operations can be
+        // Set of operations that the client can select from to run.  Each item is a tuple of the
+        // operation's name
+        // and the delegate to invoke for it, provided with the HttpClient instance on which to make the
+        // call and
+        // returning asynchronously the retrieved response string from the server.  Individual operations
+        // can be
         // commented out from here to turn them off, or additional ones can be added.
         var clientOperations = new (string, Func<ClientContext, Task>)[]
         {
@@ -267,8 +272,10 @@ public class Program
             //async ctx =>
             //{
             //    Version httpVersion = ctx.GetRandomVersion(httpVersions);
-            //    using (var req = new HttpRequestMessage(HttpMethod.Get, serverUri + "/slow") { Version = httpVersion })
-            //    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead))
+            //    using (var req = new HttpRequestMessage(HttpMethod.Get, serverUri + "/slow") { Version =
+            // httpVersion })
+            //    using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req,
+            // HttpCompletionOption.ResponseHeadersRead))
             //    {
             //        ValidateResponse(m, httpVersion);
             //        var buffer = new byte[1];
@@ -720,7 +727,8 @@ public class Program
                                 "/",
                                 async context =>
                                 {
-                                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                                    // Post echos back the requested content, first buffering it all server-side, then sending it all
+                                    // back.
                                     var s = new MemoryStream();
                                     await context.Request.Body.CopyToAsync(s);
                                     s.Position = 0;
@@ -788,7 +796,8 @@ public class Program
         };
         //var handler = new WinHttpHandler()
         //{
-        //    ServerCertificateValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        //    ServerCertificateValidationCallback =
+        // HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
         //};
 
         using (var client = new HttpClient(handler))
@@ -961,7 +970,8 @@ public class Program
             versions[_random.Next(0, versions.Length)];
     }
 
-    /// <summary>HttpContent that partially serializes and then waits for cancellation to be requested.</summary>
+    /// <summary>HttpContent that partially serializes and then waits for cancellation to be
+    // requested.</summary>
     private sealed class CancelableContent : HttpContent
     {
         private readonly CancellationToken _cancellationToken;
@@ -992,7 +1002,8 @@ public class Program
         }
     }
 
-    /// <summary>HttpContent that's similar to StringContent but that can be used with HTTP/2 duplex communication.</summary>
+    /// <summary>HttpContent that's similar to StringContent but that can be used with HTTP/2 duplex
+    // communication.</summary>
     private sealed class StringDuplexContent : HttpContent
     {
         private readonly byte[] _data;
@@ -1035,7 +1046,8 @@ public class Program
         }
     }
 
-    /// <summary>EventListener that dumps HTTP events out to either the console or a stream writer.</summary>
+    /// <summary>EventListener that dumps HTTP events out to either the console or a stream
+    // writer.</summary>
     private sealed class HttpEventListener : EventListener
     {
         private readonly StreamWriter _writer;

@@ -33,7 +33,8 @@ public class NegotiationResponse
     public string? ConnectionToken { get; set; }
 
     /// <summary>
-    /// The minimum value between the version the client sends and the maximum version the server supports.
+    /// The minimum value between the version the client sends and the maximum version the server
+    // supports.
     /// </summary>
     public int Version { get; set; }
 
@@ -43,13 +44,16 @@ public class NegotiationResponse
     public IList<AvailableTransport>? AvailableTransports { get; set; }
 
     /// <summary>
-    /// An optional error during the negotiate. If this is not null the other properties on the response can be ignored.
+    /// An optional error during the negotiate. If this is not null the other properties on the response
+    // can be ignored.
     /// </summary>
     public string? Error { get; set; }
 
     /// <summary>
-    /// If set, the connection should attempt to reconnect with the same <see cref="BaseConnectionContext.ConnectionId"/> if it disconnects.
-    /// It should also set <see cref="IStatefulReconnectFeature"/> on the <see cref="BaseConnectionContext.Features"/> collection so other layers of the
+    /// If set, the connection should attempt to reconnect with the same <see
+    // cref="BaseConnectionContext.ConnectionId"/> if it disconnects.
+    /// It should also set <see cref="IStatefulReconnectFeature"/> on the <see
+    // cref="BaseConnectionContext.Features"/> collection so other layers of the
     /// application (like SignalR) can react.
     /// </summary>
     public bool UseStatefulReconnect { get; set; }

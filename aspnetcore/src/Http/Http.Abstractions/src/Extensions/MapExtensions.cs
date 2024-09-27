@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Builder;
 public static class MapExtensions
 {
     /// <summary>
-    /// Branches the request pipeline based on matches of the given request path. If the request path starts with
+    /// Branches the request pipeline based on matches of the given request path. If the request path
+    // starts with
     /// the given path, the branch is executed.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
@@ -29,7 +30,8 @@ public static class MapExtensions
     }
 
     /// <summary>
-    /// Branches the request pipeline based on matches of the given request path. If the request path starts with
+    /// Branches the request pipeline based on matches of the given request path. If the request path
+    // starts with
     /// the given path, the branch is executed.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
@@ -46,12 +48,14 @@ public static class MapExtensions
     }
 
     /// <summary>
-    /// Branches the request pipeline based on matches of the given request path. If the request path starts with
+    /// Branches the request pipeline based on matches of the given request path. If the request path
+    // starts with
     /// the given path, the branch is executed.
     /// </summary>
     /// <param name="app">The <see cref="IApplicationBuilder"/> instance.</param>
     /// <param name="pathMatch">The request path to match.</param>
-    /// <param name="preserveMatchedPathSegment">if false, matched path would be removed from Request.Path and added to Request.PathBase.</param>
+    /// <param name="preserveMatchedPathSegment">if false, matched path would be removed from
+    // Request.Path and added to Request.PathBase.</param>
     /// <param name="configuration">The branch to take for positive path matches.</param>
     /// <returns>The <see cref="IApplicationBuilder"/> instance.</returns>
     public static IApplicationBuilder Map(

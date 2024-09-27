@@ -19,8 +19,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             string expected
         )
         {
-            // .Net Core has different assemblies for the same standard library types as .Net Framework, meaning that that the emitted output will be different to the expected if we run them .Net Core
-            // Since we do not expect there to be any meaningful differences between output for .Net Core and .Net Framework, we will skip these tests on .Net Core
+            // .Net Core has different assemblies for the same standard library types as .Net Framework, meaning
+            // that that the emitted output will be different to the expected if we run them .Net Core
+            // Since we do not expect there to be any meaningful differences between output for .Net Core and
+            // .Net Framework, we will skip these tests on .Net Core
             if (ExecutionConditionUtil.IsDesktop)
             {
                 compilation.VerifyTypeIL(typeName, expected);

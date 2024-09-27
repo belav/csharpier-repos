@@ -56,7 +56,8 @@ namespace System.Workflow.Runtime
         /// Creates a TimerEventSubscription for workflow Instance identified by
         /// workflowInstanceID.
         /// </summary>
-        /// <param name="workflowInstanceId">WorkflowInstanceId for which this subscription is created.</param>
+        /// <param name="workflowInstanceId">WorkflowInstanceId for which this subscription is
+        // created.</param>
         /// <param name="expiresAt"> Time at which timer event should fire.</param>
         public TimerEventSubscription(Guid workflowInstanceId, DateTime expiresAt)
             : this(Guid.NewGuid(), workflowInstanceId, expiresAt) { }
@@ -65,8 +66,10 @@ namespace System.Workflow.Runtime
         /// Constructor to create TimerEventSubscription with user provided
         /// value for timerid which will be SubscriptionId & QueueName of EventSubscription.
         /// </summary>
-        /// <param name="timerId">SubscriptionId for this subscription, this will be same value as QueueName.</param>
-        /// <param name="workflowInstanceId">WorkflowInstanceId for which this subscription is created.</param>
+        /// <param name="timerId">SubscriptionId for this subscription, this will be same value as
+        // QueueName.</param>
+        /// <param name="workflowInstanceId">WorkflowInstanceId for which this subscription is
+        // created.</param>
         /// <param name="expiresAt"> Time at which timer event should fire.</param>
         public TimerEventSubscription(Guid timerId, Guid workflowInstanceId, DateTime expiresAt)
         {

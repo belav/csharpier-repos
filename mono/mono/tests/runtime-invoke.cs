@@ -110,7 +110,7 @@ class Tests
 
     public static int test_0_enum_sharing()
     {
-        /* Check sharing of wrappers returning enums */
+/* Check sharing of wrappers returning enums */
         if (typeof(Tests).GetMethod("return_enum1").Invoke(null, null).GetType() != typeof(Enum1))
             return 1;
         if (typeof(Tests).GetMethod("return_enum2").Invoke(null, null).GetType() != typeof(Enum2))
@@ -120,7 +120,7 @@ class Tests
 
     public static int test_0_primitive_sharing()
     {
-        /* Check sharing of wrappers returning primitive types */
+/* Check sharing of wrappers returning primitive types */
         if (typeof(Tests).GetMethod("return_long").Invoke(null, null).GetType() != typeof(long))
             return 3;
         if (typeof(Tests).GetMethod("return_ulong").Invoke(null, null).GetType() != typeof(ulong))
@@ -144,7 +144,7 @@ class Tests
 
     public static int test_0_vtype_method_sharing()
     {
-        /* Check sharing of wrappers of vtype methods with static methods having an IntPtr argument */
+/* Check sharing of wrappers of vtype methods with static methods having an IntPtr argument */
         if ((string)(typeof(Foo).GetMethod("ToString2").Invoke(new Foo(), null)) != "FOO")
             return 3;
         object o = typeof(Tests)

@@ -15,7 +15,8 @@ namespace System.Numerics
             ITrigonometricFunctions<TSelf>
         where TSelf : IFloatingPointIeee754<TSelf>?
     {
-        /// <summary>Gets the smallest value such that can be added to <c>0</c> that does not result in <c>0</c>.</summary>
+        /// <summary>Gets the smallest value such that can be added to <c>0</c> that does not result in
+        // <c>0</c>.</summary>
         static abstract TSelf Epsilon { get; }
 
         /// <summary>Gets a value that represents <c>NaN</c>.</summary>
@@ -37,19 +38,23 @@ namespace System.Numerics
         /// <remarks>This computes <c>arctan(y / x)</c> in the interval <c>[-PI, +PI]</c> radians.</remarks>
         static abstract TSelf Atan2(TSelf y, TSelf x);
 
-        /// <summary>Computes the arc-tangent for the quotient of two values and divides the result by <c>pi</c>.</summary>
+        /// <summary>Computes the arc-tangent for the quotient of two values and divides the result by
+        // <c>pi</c>.</summary>
         /// <param name="y">The y-coordinate of a point.</param>
         /// <param name="x">The x-coordinate of a point.</param>
-        /// <returns>The arc-tangent of <paramref name="y" /> divided-by <paramref name="x" />, divided by <c>pi</c>.</returns>
+        /// <returns>The arc-tangent of <paramref name="y" /> divided-by <paramref name="x" />, divided by
+        // <c>pi</c>.</returns>
         /// <remarks>This computes <c>arctan(y / x) / PI</c> in the interval <c>[-1, +1]</c>.</remarks>
         static abstract TSelf Atan2Pi(TSelf y, TSelf x);
 
-        /// <summary>Decrements a value to the largest value that compares less than a given value.</summary>
+        /// <summary>Decrements a value to the largest value that compares less than a given
+        // value.</summary>
         /// <param name="x">The value to be bitwise decremented.</param>
         /// <returns>The largest value that compares less than <paramref name="x" />.</returns>
         static abstract TSelf BitDecrement(TSelf x);
 
-        /// <summary>Increments a value to the smallest value that compares greater than a given value.</summary>
+        /// <summary>Increments a value to the smallest value that compares greater than a given
+        // value.</summary>
         /// <param name="x">The value to be bitwise incremented.</param>
         /// <returns>The smallest value that compares greater than <paramref name="x" />.</returns>
         static abstract TSelf BitIncrement(TSelf x);
@@ -57,14 +62,17 @@ namespace System.Numerics
         /// <summary>Computes the fused multiply-add of three values.</summary>
         /// <param name="left">The value which <paramref name="right" /> multiplies.</param>
         /// <param name="right">The value which multiplies <paramref name="left" />.</param>
-        /// <param name="addend">The value that is added to the product of <paramref name="left" /> and <paramref name="right" />.</param>
-        /// <returns>The result of <paramref name="left" /> times <paramref name="right" /> plus <paramref name="addend" /> computed as one ternary operation.</returns>
+        /// <param name="addend">The value that is added to the product of <paramref name="left" /> and
+        // <paramref name="right" />.</param>
+        /// <returns>The result of <paramref name="left" /> times <paramref name="right" /> plus <paramref
+        // name="addend" /> computed as one ternary operation.</returns>
         static abstract TSelf FusedMultiplyAdd(TSelf left, TSelf right, TSelf addend);
 
         /// <summary>Computes the remainder of two values as specified by IEEE 754.</summary>
         /// <param name="left">The value which <paramref name="right" /> divides.</param>
         /// <param name="right">The value which divides <paramref name="left" />.</param>
-        /// <returns>The remainder of <paramref name="left" /> divided-by <paramref name="right" /> as specified by IEEE 754.</returns>
+        /// <returns>The remainder of <paramref name="left" /> divided-by <paramref name="right" /> as
+        // specified by IEEE 754.</returns>
         static abstract TSelf Ieee754Remainder(TSelf left, TSelf right);
 
         /// <summary>Computes the integer logarithm of a value.</summary>
@@ -75,9 +83,11 @@ namespace System.Numerics
         /// <summary>Performs a linear interpolation between two values based on the given weight.</summary>
         /// <param name="value1">The first value, which is intended to be the lower bound.</param>
         /// <param name="value2">The second value, which is intended to be the upper bound.</param>
-        /// <param name="amount">A value, intended to be between 0 and 1, that indicates the weight of the interpolation.</param>
+        /// <param name="amount">A value, intended to be between 0 and 1, that indicates the weight of the
+        // interpolation.</param>
         /// <returns>The interpolated value.</returns>
-        /// <remarks>This method presumes inputs are well formed and does not validate that <c>value1 &lt; value2</c> nor that <c>0 &lt;= amount &lt;= 1</c>.</remarks>
+        /// <remarks>This method presumes inputs are well formed and does not validate that <c>value1 &lt;
+        // value2</c> nor that <c>0 &lt;= amount &lt;= 1</c>.</remarks>
         static virtual TSelf Lerp(TSelf value1, TSelf value2, TSelf amount) =>
             (value1 * (TSelf.One - amount)) + (value2 * amount);
 
@@ -87,14 +97,19 @@ namespace System.Numerics
         static virtual TSelf ReciprocalEstimate(TSelf x) => TSelf.One / x;
 
         /// <summary>Computes an estimate of the reciprocal square root of a value.</summary>
-        /// <param name="x">The value whose estimate of the reciprocal square root is to be computed.</param>
+        /// <param name="x">The value whose estimate of the reciprocal square root is to be
+        // computed.</param>
         /// <returns>An estimate of the reciprocal square root of <paramref name="x" />.</returns>
         static virtual TSelf ReciprocalSqrtEstimate(TSelf x) => TSelf.One / TSelf.Sqrt(x);
 
-        /// <summary>Computes the product of a value and its base-radix raised to the specified power.</summary>
-        /// <param name="x">The value which base-radix raised to the power of <paramref name="n" /> multiplies.</param>
-        /// <param name="n">The value to which base-radix is raised before multipliying <paramref name="x" />.</param>
-        /// <returns>The product of <paramref name="x" /> and base-radix raised to the power of <paramref name="n" />.</returns>
+        /// <summary>Computes the product of a value and its base-radix raised to the specified
+        // power.</summary>
+        /// <param name="x">The value which base-radix raised to the power of <paramref name="n" />
+        // multiplies.</param>
+        /// <param name="n">The value to which base-radix is raised before multipliying <paramref name="x"
+        // />.</param>
+        /// <returns>The product of <paramref name="x" /> and base-radix raised to the power of <paramref
+        // name="n" />.</returns>
         static abstract TSelf ScaleB(TSelf x, int n);
 
         // The following methods are approved but not yet implemented in the libraries

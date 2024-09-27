@@ -60,7 +60,8 @@ namespace System.Runtime.DurableInstancing
             get { return this.inProgressHandlesPerInstance; }
         }
 
-        // This can be called to remove a handle from the BoundHandles table.  It should be called only after no more commands are in progress or could be made on the handle.
+        // This can be called to remove a handle from the BoundHandles table.  It should be called only
+        // after no more commands are in progress or could be made on the handle.
         internal void Unbind(InstanceHandle handle)
         {
             Fx.Assert(
@@ -86,7 +87,8 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        // This doesn't check the bound handles, since one of the scenarios is to re-bind to an instance and kick out the stale handle.
+        // This doesn't check the bound handles, since one of the scenarios is to re-bind to an instance and
+        // kick out the stale handle.
         internal void StartBind(InstanceHandle handle, ref InstanceHandleReference reference)
         {
             Fx.Assert(
@@ -193,12 +195,17 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        // This is called if we found an existing lock.  This handle doesn't own the lock, but it could claim it, if it can prove
-        // that no other live handle owns it.  If this returns non-null, the outcome will be available later on the
-        // InstanceHandleReference once the AsyncWaitHandle completes.  (Null indicates a conflict with another handle.)
+        // This is called if we found an existing lock.  This handle doesn't own the lock, but it could
+        // claim it, if it can prove
+        // that no other live handle owns it.  If this returns non-null, the outcome will be available later
+        // on the
+        // InstanceHandleReference once the AsyncWaitHandle completes.  (Null indicates a conflict with
+        // another handle.)
         //
-        // The instanceVersion reported here was read under the transaction, but not changed.  Either it was already committed, or it was written under
-        // this transaction in a prior command on a different handle.  Due to the latter case, we treat it as dirty - we do not publish it or take
+        // The instanceVersion reported here was read under the transaction, but not changed.  Either it was
+        // already committed, or it was written under
+        // this transaction in a prior command on a different handle.  Due to the latter case, we treat it
+        // as dirty - we do not publish it or take
         // any visible action (such as dooming handles) based on its value.
         internal AsyncWaitHandle InitiateLockResolution(
             long instanceVersion,
@@ -254,9 +261,12 @@ namespace System.Runtime.DurableInstancing
                         }
                     }
 
-                    // Put a marker in the InProgressHandles.  If it makes it through, and there's still no conflicting handle,
-                    // then the lock can be claimed at this version.  Only currently in-progress bindings have a chance of
-                    // staking a stronger claim to the lock version (if the store actually acquired the lock for the handle).
+                    // Put a marker in the InProgressHandles.  If it makes it through, and there's still no conflicting
+                    // handle,
+                    // then the lock can be claimed at this version.  Only currently in-progress bindings have a chance
+                    // of
+                    // staking a stronger claim to the lock version (if the store actually acquired the lock for the
+                    // handle).
                     markerReference = new LockResolutionMarker(
                         reference.InstanceHandle,
                         instanceVersion
@@ -285,7 +295,8 @@ namespace System.Runtime.DurableInstancing
             }
         }
 
-        // Called when a handle is bound to an instance while the handle is in-progress for a lock.  This can progress the queue-states since
+        // Called when a handle is bound to an instance while the handle is in-progress for a lock.  This
+        // can progress the queue-states since
         // this once can move from the general queue to the per-instance queue.
         internal void InstanceBound(
             ref InstanceHandleReference reference,
@@ -350,7 +361,8 @@ namespace System.Runtime.DurableInstancing
                 {
                     try
                     {
-                        // Nothing to do here - following the patterns of dealing with handlesPendingResolution and setting NotifyMarkerComplete in a finally.
+                        // Nothing to do here - following the patterns of dealing with handlesPendingResolution and setting
+                        // NotifyMarkerComplete in a finally.
                     }
                     finally
                     {
@@ -478,7 +490,8 @@ namespace System.Runtime.DurableInstancing
         }
 
         // Must be called with HandlesLock held.
-        // This process the top-level InProgressHandles queue, demuxing entries into the per-instance queues and completing markers.
+        // This process the top-level InProgressHandles queue, demuxing entries into the per-instance queues
+        // and completing markers.
         void ProcessInProgressHandles(ref List<InstanceHandleReference> handlesPendingResolution)
         {
             while (InProgressHandles.Count > 0)
@@ -511,7 +524,8 @@ namespace System.Runtime.DurableInstancing
                     }
                     else
                     {
-                        // It's ok to enqueue first, then dequeue, to err on the side of duplicates.  Duplicates do not cause a problem.
+                        // It's ok to enqueue first, then dequeue, to err on the side of duplicates.  Duplicates do not
+                        // cause a problem.
                         acceptingQueue.Enqueue(handleRef);
                     }
                 }
@@ -548,7 +562,8 @@ namespace System.Runtime.DurableInstancing
         }
 
         // Must be called with HandlesLock held.
-        // This is called when a reference becomes the oldest in-progress reference for an instance.  This triggers the end of resolution for markers.
+        // This is called when a reference becomes the oldest in-progress reference for an instance.  This
+        // triggers the end of resolution for markers.
         // Returns false if the resolution failed, meaning that the marker can be removed.
         bool CheckOldestReference(
             InstanceHandleReference handleRef,
@@ -591,7 +606,8 @@ namespace System.Runtime.DurableInstancing
                     }
                 }
 
-                // No other handles have committed a bind to this or a higher version!  We are ok to do so, but it is still not committed, so we stay in queue.
+                // No other handles have committed a bind to this or a higher version!  We are ok to do so, but it
+                // is still not committed, so we stay in queue.
                 return returnValue;
             }
             finally

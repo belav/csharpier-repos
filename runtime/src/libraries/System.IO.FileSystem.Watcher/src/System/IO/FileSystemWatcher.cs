@@ -181,7 +181,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Gets or sets a value indicating whether subdirectories within the specified path should be monitored.
+        ///    Gets or sets a value indicating whether subdirectories within the specified path should be
+        // monitored.
         /// </devdoc>
         public bool IncludeSubdirectories
         {
@@ -271,7 +272,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Occurs when a file or directory in the specified <see cref='System.IO.FileSystemWatcher.Path'/> is changed.
+        ///    Occurs when a file or directory in the specified <see
+        // cref='System.IO.FileSystemWatcher.Path'/> is changed.
         /// </devdoc>
         public event FileSystemEventHandler? Changed
         {
@@ -280,7 +282,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Occurs when a file or directory in the specified <see cref='System.IO.FileSystemWatcher.Path'/> is created.
+        ///    Occurs when a file or directory in the specified <see
+        // cref='System.IO.FileSystemWatcher.Path'/> is created.
         /// </devdoc>
         public event FileSystemEventHandler? Created
         {
@@ -289,7 +292,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Occurs when a file or directory in the specified <see cref='System.IO.FileSystemWatcher.Path'/> is deleted.
+        ///    Occurs when a file or directory in the specified <see
+        // cref='System.IO.FileSystemWatcher.Path'/> is deleted.
         /// </devdoc>
         public event FileSystemEventHandler? Deleted
         {
@@ -307,7 +311,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Occurs when a file or directory in the specified <see cref='System.IO.FileSystemWatcher.Path'/>
+        ///    Occurs when a file or directory in the specified <see
+        // cref='System.IO.FileSystemWatcher.Path'/>
         ///    is renamed.
         /// </devdoc>
         public event RenamedEventHandler? Renamed
@@ -684,7 +689,8 @@ namespace System.IO
 
         private void StartRaisingEventsIfNotDisposed()
         {
-            //Cannot allocate the directoryHandle and the readBuffer if the object has been disposed; finalization has been suppressed.
+            //Cannot allocate the directoryHandle and the readBuffer if the object has been disposed;
+            // finalization has been suppressed.
             ObjectDisposedException.ThrowIf(_disposed, this);
             StartRaisingEvents();
         }

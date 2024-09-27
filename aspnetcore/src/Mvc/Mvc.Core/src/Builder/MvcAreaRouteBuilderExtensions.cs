@@ -51,7 +51,8 @@ public static class MvcAreaRouteBuilderExtensions
     /// <param name="areaName">The MVC area name.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the
     /// names and values of the default values.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
@@ -85,11 +86,13 @@ public static class MvcAreaRouteBuilderExtensions
     /// <param name="areaName">The MVC area name.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the
     /// names and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and
     /// values of the constraints.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
@@ -124,15 +127,18 @@ public static class MvcAreaRouteBuilderExtensions
     /// <param name="areaName">The MVC area name.</param>
     /// <param name="template">The URL pattern of the route.</param>
     /// <param name="defaults">
-    /// An object that contains default values for route parameters. The object's properties represent the
+    /// An object that contains default values for route parameters. The object's properties represent
+    // the
     /// names and values of the default values.
     /// </param>
     /// <param name="constraints">
-    /// An object that contains constraints for the route. The object's properties represent the names and
+    /// An object that contains constraints for the route. The object's properties represent the names
+    // and
     /// values of the constraints.
     /// </param>
     /// <param name="dataTokens">
-    /// An object that contains data tokens for the route. The object's properties represent the names and
+    /// An object that contains data tokens for the route. The object's properties represent the names
+    // and
     /// values of the data tokens.
     /// </param>
     /// <returns>A reference to this instance after the operation has completed.</returns>

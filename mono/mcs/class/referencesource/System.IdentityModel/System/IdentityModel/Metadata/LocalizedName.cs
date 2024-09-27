@@ -20,10 +20,12 @@ namespace System.IdentityModel.Metadata
             : this(null, null) { }
 
         /// <summary>
-        /// Constructs a localized name with the input <paramref name="name"/> and <paramref name="language"/>.
+        /// Constructs a localized name with the input <paramref name="name"/> and <paramref
+        // name="language"/>.
         /// </summary>
         /// <param name="name">The name for this instance.</param>
-        /// <param name="language">The <see cref="CultureInfo"/> defining the language for this instance.</param>
+        /// <param name="language">The <see cref="CultureInfo"/> defining the language for this
+        // instance.</param>
         public LocalizedName(string name, CultureInfo language)
             : base(language)
         {

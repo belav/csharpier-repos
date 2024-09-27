@@ -6,10 +6,12 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions
 {
-    /// <summary>Analyzes a <see cref="RegexTree"/> of <see cref="RegexNode"/>s to produce data on the tree structure, in particular in support of code generation.</summary>
+    /// <summary>Analyzes a <see cref="RegexTree"/> of <see cref="RegexNode"/>s to produce data on the
+    // tree structure, in particular in support of code generation.</summary>
     internal static class RegexTreeAnalyzer
     {
-        /// <summary>Analyzes a <see cref="RegexInterpreterCode"/> to learn about the structure of the tree.</summary>
+        /// <summary>Analyzes a <see cref="RegexInterpreterCode"/> to learn about the structure of the
+        // tree.</summary>
         public static AnalysisResults Analyze(RegexTree regexTree)
         {
             var results = new AnalysisResults(regexTree);
@@ -51,8 +53,10 @@ namespace System.Text.RegularExpressions
                 }
                 else
                 {
-                    // Certain kinds of nodes incur backtracking logic themselves: add them to the backtracking collection.
-                    // We may later find that a node contains another that has backtracking; we'll add nodes based on that
+                    // Certain kinds of nodes incur backtracking logic themselves: add them to the backtracking
+                    // collection.
+                    // We may later find that a node contains another that has backtracking; we'll add nodes based on
+                    // that
                     // after examining the children.
                     switch (node.Kind)
                     {
@@ -74,7 +78,8 @@ namespace System.Text.RegularExpressions
                 bool isAtomicBySelf = false;
                 switch (node.Kind)
                 {
-                    // Some node types add atomicity around what they wrap.  Set isAtomicBySelfOrParent to true for such nodes
+                    // Some node types add atomicity around what they wrap.  Set isAtomicBySelfOrParent to true for such
+                    // nodes
                     // even if it was false upon entering the method.
                     case RegexNodeKind.Atomic:
                     case RegexNodeKind.NegativeLookaround:
@@ -119,7 +124,8 @@ namespace System.Text.RegularExpressions
                             or RegexNodeKind.BackreferenceConditional
                             or RegexNodeKind.ExpressionConditional => true,
 
-                            // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also atomic.
+                            // Captures don't impact atomicity: if the parent of a capture is atomic, the capture is also
+                            // atomic.
                             RegexNodeKind.Capture => true,
 
                             // If the parent is a concatenation and this is the last node, any atomicity
@@ -176,13 +182,15 @@ namespace System.Text.RegularExpressions
         /// </remarks>
         internal bool _complete;
 
-        /// <summary>Set of nodes that are considered to be atomic based on themselves or their ancestry.</summary>
+        /// <summary>Set of nodes that are considered to be atomic based on themselves or their
+        // ancestry.</summary>
         internal readonly HashSet<RegexNode> _isAtomicByAncestor = new(); // since the root is implicitly atomic, every tree will contain atomic-by-ancestor nodes
 
         /// <summary>Set of nodes that directly or indirectly contain capture groups.</summary>
         internal readonly HashSet<RegexNode> _containsCapture = new(); // the root is a capture, so this will always contain at least the root node
 
-        /// <summary>Set of nodes that directly or indirectly contain backtracking constructs that aren't hidden internaly by atomic constructs.</summary>
+        /// <summary>Set of nodes that directly or indirectly contain backtracking constructs that aren't
+        // hidden internaly by atomic constructs.</summary>
         internal HashSet<RegexNode>? _mayBacktrack;
 
         /// <summary>Set of nodes contained inside loops.</summary>
@@ -218,15 +226,20 @@ namespace System.Text.RegularExpressions
         public bool MayContainCapture(RegexNode node) =>
             !_complete || _containsCapture.Contains(node);
 
-        /// <summary>Gets whether a node is or directory or indirectly contains a backtracking construct that isn't hidden by an internal atomic construct.</summary>
+        /// <summary>Gets whether a node is or directory or indirectly contains a backtracking construct
+        // that isn't hidden by an internal atomic construct.</summary>
         /// <remarks>
         /// In most code generation situations, we only need to know after we emit the child code whether
-        /// the child may backtrack, and that we can see with 100% certainty.  This method is useful in situations
+        /// the child may backtrack, and that we can see with 100% certainty.  This method is useful in
+        // situations
         /// where we need to predict without traversing the child at code generation time whether it may
         /// incur backtracking.  This method may have (few) false positives (return true when it could have
-        /// returned false), but won't have any false negatives (return false when it should have returned true),
-        /// meaning it might claim a node requires backtracking even if it doesn't, but it will always return
-        /// true for any node that requires backtracking. In that vein, if the whole tree couldn't be examined,
+        /// returned false), but won't have any false negatives (return false when it should have returned
+        // true),
+        /// meaning it might claim a node requires backtracking even if it doesn't, but it will always
+        // return
+        /// true for any node that requires backtracking. In that vein, if the whole tree couldn't be
+        // examined,
         /// this returns true.
         /// </remarks>
         public bool MayBacktrack(RegexNode node) =>
@@ -234,17 +247,27 @@ namespace System.Text.RegularExpressions
 
         /// <summary>Gets whether a node may be contained inside of one or more loops.</summary>
         /// <remarks>
-        /// Constructs sometimes need to maintain state about their execution such that if they're backtracked
-        /// to, they have the necessary context to make a different choice and continue execution.  Such state
-        /// can often be maintained in locals dedicated to that construct.  If, however, the construct is inside
-        /// of a loop, an additional iteration of that outerloop could invoke the inner construct and cause those
-        /// locals to have their state overwritten.  In such situations, the constructs can't rely on the locals
-        /// maintaining the state and instead need to push the state on to a stack.  That pushing/popping has
-        /// additional cost, however, both in terms of run-time overheads and in terms of the additional code
-        /// required to handle it.  Code generators then can consult this <see cref="IsInLoop"/> to determine
-        /// whether locals are sufficient to maintain the state or whether the state needs to be pushed on to a stack.
+        /// Constructs sometimes need to maintain state about their execution such that if they're
+        // backtracked
+        /// to, they have the necessary context to make a different choice and continue execution.  Such
+        // state
+        /// can often be maintained in locals dedicated to that construct.  If, however, the construct is
+        // inside
+        /// of a loop, an additional iteration of that outerloop could invoke the inner construct and cause
+        // those
+        /// locals to have their state overwritten.  In such situations, the constructs can't rely on the
+        // locals
+        /// maintaining the state and instead need to push the state on to a stack.  That pushing/popping
+        // has
+        /// additional cost, however, both in terms of run-time overheads and in terms of the additional
+        // code
+        /// required to handle it.  Code generators then can consult this <see cref="IsInLoop"/> to
+        // determine
+        /// whether locals are sufficient to maintain the state or whether the state needs to be pushed on
+        // to a stack.
         ///
-        /// Loops are not considered to be "in" themselves.  This will only return true for a loop node if it's
+        /// Loops are not considered to be "in" themselves.  This will only return true for a loop node if
+        // it's
         /// nested inside of another loop node.
         ///
         /// If the whole tree couldn't be examined, this returns true.  That could lead to additional

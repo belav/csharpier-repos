@@ -166,7 +166,8 @@ namespace System.Data.Common
             base.SetCapacity(capacity);
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override object ConvertXmlToObject(string s)
@@ -192,7 +193,8 @@ namespace System.Data.Common
             return (deserializerWithOutRootAttribute.Deserialize(strreader))!;
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override object ConvertXmlToObject(XmlReader xmlReader, XmlRootAttribute? xmlAttrib)

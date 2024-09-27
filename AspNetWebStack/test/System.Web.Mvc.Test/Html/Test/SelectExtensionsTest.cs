@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -2598,7 +2599,8 @@ namespace System.Web.Mvc.Html.Test
             );
 
             // Assert
-            // TODO: https://aspnetwebstack.codeplex.com/workitem/1349 covers incorrect multi-select in this case
+            // TODO: https://aspnetwebstack.codeplex.com/workitem/1349 covers incorrect multi-select in this
+            // case
             Assert.Equal(
                 "<select id=\"WithDuplicates\" name=\"WithDuplicates\">"
                     + "<option value=\"0\">First</option>"
@@ -4924,7 +4926,8 @@ namespace System.Web.Mvc.Html.Test
 
         public void Dispose()
         {
-            // Reset ScopeStorage (written via e.g. ViewContext.ClientValidationEnabled) between tests to avoid unexpected interactions.
+            // Reset ScopeStorage (written via e.g. ViewContext.ClientValidationEnabled) between tests to avoid
+            // unexpected interactions.
             ScopeStorage.CurrentProvider = new StaticScopeStorageProvider();
             ScopeStorage.GlobalScope.Clear();
         }

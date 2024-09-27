@@ -185,7 +185,8 @@ namespace System.ServiceModel.Security
                     return this.mergedSupportingTokenProvidersMap[MessageHeaders.WildcardAction];
                 }
             }
-            // return null if the token providers list is empty - this gets a perf benefit since calling Count is expensive for an empty
+            // return null if the token providers list is empty - this gets a perf benefit since calling Count
+            // is expensive for an empty
             // ReadOnlyCollection
             return (this.channelSupportingTokenProviderSpecification == EmptyTokenProviders)
                 ? null

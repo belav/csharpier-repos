@@ -53,7 +53,8 @@ namespace System.Net
                 ) == 0;
         }
 
-        /// <summary>Ensures we've registered with NetworkChange to clear out statically-cached state upon a network change notification.</summary>
+        /// <summary>Ensures we've registered with NetworkChange to clear out statically-cached state upon a
+        // network change notification.</summary>
         private static void EnsureNetworkChangeRegistration()
         {
             if (s_networkChangeRegistered == 0)

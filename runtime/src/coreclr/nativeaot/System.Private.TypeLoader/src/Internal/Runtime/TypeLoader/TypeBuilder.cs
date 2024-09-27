@@ -69,7 +69,8 @@ namespace Internal.Runtime.TypeLoader
         internal class MissingTemplateException : Exception
         {
             public MissingTemplateException()
-                // Cannot afford calling into resource manager from here, even to get the default message for System.Exception.
+                // Cannot afford calling into resource manager from here, even to get the default message for
+                // System.Exception.
                 // This exception is always caught and rethrown as something more user friendly.
                 : base("Template is missing") { }
         }
@@ -106,8 +107,10 @@ namespace Internal.Runtime.TypeLoader
         }
 
         /// <summary>
-        /// Register the type for preparation. The preparation will be done once the current type is prepared.
-        /// This is the preferred way to get a dependent type prepared because of it avoids issues with cycles and recursion.
+        /// Register the type for preparation. The preparation will be done once the current type is
+        // prepared.
+        /// This is the preferred way to get a dependent type prepared because of it avoids issues with
+        // cycles and recursion.
         /// </summary>
         public void RegisterForPreparation(TypeDesc type)
         {
@@ -193,13 +196,15 @@ namespace Internal.Runtime.TypeLoader
             TypeBuilderState state = type.GetTypeBuilderStateIfExist();
             bool hasTypeHandle = type.RetrieveRuntimeTypeHandleIfPossible();
 
-            // If this type has type handle, do nothing and return unless we should prepare even in the presence of a type handle
+            // If this type has type handle, do nothing and return unless we should prepare even in the presence
+            // of a type handle
             if (hasTypeHandle)
                 return;
 
             state ??= type.GetOrCreateTypeBuilderState();
 
-            // If this type was already prepared, do nothing unless we are re-preparing it for the purpose of loading the field layout
+            // If this type was already prepared, do nothing unless we are re-preparing it for the purpose of
+            // loading the field layout
             if (state.HasBeenPrepared)
             {
                 return;
@@ -226,7 +231,8 @@ namespace Internal.Runtime.TypeLoader
                     else
                     {
                         // This call to ComputeTemplate will find the native layout info for the type, and the template
-                        // For metadata loaded types, a template will not exist, but we may find the NativeLayout describing the generic dictionary
+                        // For metadata loaded types, a template will not exist, but we may find the NativeLayout describing
+                        // the generic dictionary
                         TypeDesc.ComputeTemplate(state, false);
 
                         Debug.Assert(
@@ -492,19 +498,22 @@ namespace Internal.Runtime.TypeLoader
 
                     case BagElementKind.NonGcStaticDataSize:
                         TypeLoaderLogger.WriteLine("Found BagElementKind.NonGcStaticDataSize");
-                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in allocation of memory later)
+                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in
+                        // allocation of memory later)
                         state.NonGcDataSize = checked((int)typeInfoParser.GetUnsigned());
                         break;
 
                     case BagElementKind.GcStaticDataSize:
                         TypeLoaderLogger.WriteLine("Found BagElementKind.GcStaticDataSize");
-                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in allocation of memory later)
+                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in
+                        // allocation of memory later)
                         state.GcDataSize = checked((int)typeInfoParser.GetUnsigned());
                         break;
 
                     case BagElementKind.ThreadStaticDataSize:
                         TypeLoaderLogger.WriteLine("Found BagElementKind.ThreadStaticDataSize");
-                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in allocation of memory later)
+                        // Use checked typecast to int to ensure there aren't any overflows/truncations (size value used in
+                        // allocation of memory later)
                         state.ThreadDataSize = checked((int)typeInfoParser.GetUnsigned());
                         break;
 
@@ -563,10 +572,14 @@ namespace Internal.Runtime.TypeLoader
         }
 
         /// <summary>
-        /// Wraps information about how a type is laid out into one package.  Types may have been laid out by
-        /// TypeBuilder (which means they have a gc bitfield), or they could be types that were laid out by NUTC
-        /// (which means we only have a GCDesc for them).  This struct wraps both of those possibilities into
-        /// one package to be able to write that layout to another bitfield we are constructing.  (This is for
+        /// Wraps information about how a type is laid out into one package.  Types may have been laid out
+        // by
+        /// TypeBuilder (which means they have a gc bitfield), or they could be types that were laid out by
+        // NUTC
+        /// (which means we only have a GCDesc for them).  This struct wraps both of those possibilities
+        // into
+        /// one package to be able to write that layout to another bitfield we are constructing.  (This is
+        // for
         /// struct fields.)
         /// </summary>
         internal unsafe struct GCLayout
@@ -737,7 +750,8 @@ namespace Internal.Runtime.TypeLoader
         }
 
         //
-        // Returns either the registered type handle or half-baked type handle. This method should be only called
+        // Returns either the registered type handle or half-baked type handle. This method should be only
+        // called
         // during final phase of type building.
         //
 #pragma warning disable CA1822
@@ -817,7 +831,8 @@ namespace Internal.Runtime.TypeLoader
 
             if (state.Dictionary != null)
             {
-                // First, update the dictionary slot in the type's vtable to point to the created dictionary when applicable
+                // First, update the dictionary slot in the type's vtable to point to the created dictionary when
+                // applicable
                 Debug.Assert(state.HalfBakedDictionary != IntPtr.Zero);
 
                 int dictionarySlot = EETypeCreator.GetDictionarySlotInVTable(type);
@@ -871,8 +886,10 @@ namespace Internal.Runtime.TypeLoader
                 (byte*)generatedTypeStaticData + ClassConstructorOffset
             );
 
-            // Use the template type's class constructor method pointer and this type's generic type dictionary to generate a new fat pointer,
-            // and save that fat pointer back to this type's class constructor context offset within the non-GC static data.
+            // Use the template type's class constructor method pointer and this type's generic type dictionary
+            // to generate a new fat pointer,
+            // and save that fat pointer back to this type's class constructor context offset within the non-GC
+            // static data.
             IntPtr instantiationArgument = GetRuntimeTypeHandle(type).ToIntPtr();
             IntPtr generatedTypeClassConstructorFatFunctionPointer =
                 FunctionPointerOps.GetGenericMethodFunctionPointer(
@@ -894,10 +911,13 @@ namespace Internal.Runtime.TypeLoader
             {
                 RuntimeTypeHandle baseTypeHandle = GetRuntimeTypeHandle(baseType);
 
-                // If the basetype is currently being created by the TypeBuilder, we need to get its dictionary pointer from the
+                // If the basetype is currently being created by the TypeBuilder, we need to get its dictionary
+                // pointer from the
                 // TypeBuilder state (at this point, the dictionary has not yet been set on the baseTypeHandle). If
-                // the basetype is not a dynamic type, or has previously been dynamically allocated in the past, the TypeBuilder
-                // state will have a null dictionary pointer, in which case we need to read it directly from the basetype's vtable
+                // the basetype is not a dynamic type, or has previously been dynamically allocated in the past, the
+                // TypeBuilder
+                // state will have a null dictionary pointer, in which case we need to read it directly from the
+                // basetype's vtable
                 IntPtr dictionaryEntry = baseTypeState.HalfBakedDictionary;
                 if (dictionaryEntry == IntPtr.Zero)
                     dictionaryEntry = baseTypeHandle.GetDictionary();
@@ -1006,7 +1026,8 @@ namespace Internal.Runtime.TypeLoader
                         GetRuntimeTypeHandle(((ByRefType)type).ParameterType)
                     );
 
-                    // We used a pointer type for the template because they're similar enough. Adjust this to be a ByRef.
+                    // We used a pointer type for the template because they're similar enough. Adjust this to be a
+                    // ByRef.
                     unsafe
                     {
                         Debug.Assert(
@@ -1109,13 +1130,15 @@ namespace Internal.Runtime.TypeLoader
         private void FinishTypeAndMethodBuilding()
         {
             // Once we start allocating EETypes and dictionaries, the only accepted failure is OOM.
-            // TODO: Error handling - on retry, restart where we failed last time? The current implementation is leaking on OOM.
+            // TODO: Error handling - on retry, restart where we failed last time? The current implementation is
+            // leaking on OOM.
 
 #if DEBUG
             _finalTypeBuilding = true;
 #endif
 
-            // At this point we know all types that need EETypes. Allocate all EETypes so that we can start building
+            // At this point we know all types that need EETypes. Allocate all EETypes so that we can start
+            // building
             // their contents.
             for (int i = 0; i < _typesThatNeedTypeHandles.Count; i++)
             {
@@ -1127,7 +1150,8 @@ namespace Internal.Runtime.TypeLoader
                 AllocateRuntimeMethodDictionary(_methodsThatNeedDictionaries[i]);
             }
 
-            // Do not add more type phases here. Instead, read the required information from the TypeDesc or TypeBuilderState.
+            // Do not add more type phases here. Instead, read the required information from the TypeDesc or
+            // TypeBuilderState.
 
             // Fill in content of all EETypes
             for (int i = 0; i < _typesThatNeedTypeHandles.Count; i++)
@@ -1318,7 +1342,8 @@ namespace Internal.Runtime.TypeLoader
         }
 
         //
-        // This method is used by the lazy generic lookup. It resolves the signature of the runtime artifact in the given instantiation context.
+        // This method is used by the lazy generic lookup. It resolves the signature of the runtime artifact
+        // in the given instantiation context.
         //
         private unsafe IntPtr BuildGenericLookupTarget(
             TypeSystemContext typeSystemContext,
@@ -1339,7 +1364,8 @@ namespace Internal.Runtime.TypeLoader
             uint offset;
 
             // The first is a pointer that points to the TypeManager indirection cell.
-            // The second is the offset into the native layout info blob in that TypeManager, where the native signature is encoded.
+            // The second is the offset into the native layout info blob in that TypeManager, where the native
+            // signature is encoded.
             IntPtr** lazySignature = (IntPtr**)signature.ToPointer();
             typeManager = new TypeManagerHandle(lazySignature[0][0]);
             offset = checked((uint)new IntPtr(lazySignature[1]).ToInt32());
@@ -1418,7 +1444,8 @@ namespace Internal.Runtime.TypeLoader
                 IntPtr genericDictionary;
                 auxResult = IntPtr.Zero;
 
-                // There is a cache in place so that this function doesn't get called much, but we still need a registration store,
+                // There is a cache in place so that this function doesn't get called much, but we still need a
+                // registration store,
                 // so we don't leak allocated contexts
                 if (
                     TypeLoaderEnvironment.Instance.TryLookupConstructedLazyDictionaryForContext(
@@ -1500,7 +1527,8 @@ namespace Internal.Runtime.TypeLoader
                 runtimeTypeHandle = typeBeingLoaded.RuntimeTypeHandle;
                 Debug.Assert(!runtimeTypeHandle.IsNull());
 
-                // Recycle the context only if we successfully built the type. The state may be partially initialized otherwise.
+                // Recycle the context only if we successfully built the type. The state may be partially
+                // initialized otherwise.
                 TypeSystemContextFactory.Recycle(context);
 
                 return true;
@@ -1532,7 +1560,8 @@ namespace Internal.Runtime.TypeLoader
                 arrayTypeHandle = arrayType.RuntimeTypeHandle;
                 Debug.Assert(!arrayTypeHandle.IsNull());
 
-                // Recycle the context only if we successfully built the type. The state may be partially initialized otherwise.
+                // Recycle the context only if we successfully built the type. The state may be partially
+                // initialized otherwise.
                 TypeSystemContextFactory.Recycle(context);
 
                 return true;
@@ -1571,7 +1600,8 @@ namespace Internal.Runtime.TypeLoader
                 }
                 TypeSystemContext.PointerTypesCache.AddOrGetExisting(pointerTypeHandle);
 
-                // Recycle the context only if we successfully built the type. The state may be partially initialized otherwise.
+                // Recycle the context only if we successfully built the type. The state may be partially
+                // initialized otherwise.
                 TypeSystemContextFactory.Recycle(context);
             }
 
@@ -1605,7 +1635,8 @@ namespace Internal.Runtime.TypeLoader
                 }
                 TypeSystemContext.ByRefTypesCache.AddOrGetExisting(byRefTypeHandle);
 
-                // Recycle the context only if we successfully built the type. The state may be partially initialized otherwise.
+                // Recycle the context only if we successfully built the type. The state may be partially
+                // initialized otherwise.
                 TypeSystemContextFactory.Recycle(context);
             }
 
@@ -1649,7 +1680,8 @@ namespace Internal.Runtime.TypeLoader
                 }
                 TypeSystemContext.FunctionPointerTypesCache.AddOrGetExisting(runtimeTypeHandle);
 
-                // Recycle the context only if we successfully built the type. The state may be partially initialized otherwise.
+                // Recycle the context only if we successfully built the type. The state may be partially
+                // initialized otherwise.
                 TypeSystemContextFactory.Recycle(context);
             }
             return true;

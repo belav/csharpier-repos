@@ -676,7 +676,8 @@ namespace MonoTests.System.Data
 
             try
             {
-                //DataRelation rel3 = new DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]);
+                //DataRelation rel3 = new
+                // DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]);
                 ds.Relations.Remove("rel3");
                 Assert.Fail("DRC98: Remove failed to throw ArgumentException");
             }
@@ -725,7 +726,8 @@ namespace MonoTests.System.Data
 
             try
             {
-                //DataRelation rel3 = new DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]);
+                //DataRelation rel3 = new
+                // DataRelation("rel3",ds1.Tables[0].Columns["ParentId"],ds1.Tables[1].Columns["ParentId"]);
                 ds.Relations.RemoveAt(-1);
                 Assert.Fail("DRC105: RemoveAt failed to throw IndexOutOfRangeException");
             }

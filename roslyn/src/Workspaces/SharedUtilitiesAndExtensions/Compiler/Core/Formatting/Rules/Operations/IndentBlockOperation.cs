@@ -8,7 +8,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Formatting.Rules
 {
     /// <summary>
-    /// set indentation level for the given text span. it can be relative, absolute or dependent to other tokens
+    /// set indentation level for the given text span. it can be relative, absolute or dependent to
+    // other tokens
     /// </summary>
     internal sealed class IndentBlockOperation
     {

@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// a sequential number.
     /// IL gen will use these fake tokens during codegen and later, when actual token values are known
     /// the method bodies will be patched.
-    /// To support these two scenarios we need two maps - Item-->uint, and uint-->Item.  (the second is really just a list).
+    /// To support these two scenarios we need two maps - Item-->uint, and uint-->Item.  (the second is
+    // really just a list).
     /// This map supports tokens of type <see cref="Cci.ISignature"/> and <see cref="Cci.IReference"/>.
     /// </summary>
     internal sealed class TokenMap
@@ -102,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         //TODO: why is this is called twice during emit?
-        //      should probably return ROA instead of IE and cache that in Module. (and no need to return count)
+        //      should probably return ROA instead of IE and cache that in Module. (and no need to return
+        // count)
         public ReadOnlySpan<object> GetAllItems()
         {
             // Read _count before _items reference, to match inverse of the writes in AddItem.

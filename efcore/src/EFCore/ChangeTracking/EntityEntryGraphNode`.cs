@@ -10,15 +10,20 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///     graph of entities that is being traversed.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-track-graph">Tracking entities in EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-track-graph">Tracking entities in EF Core</see>
+// for more information and examples.
 /// </remarks>
 public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [DebuggerStepThrough]
     [EntityFrameworkInternal]
@@ -38,8 +43,10 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
     /// </summary>
     /// <param name="entry">The entry for the entity represented by this node.</param>
     /// <param name="state">A state object that will be available when processing each node.</param>
-    /// <param name="sourceEntry">The entry from which this node was reached, or <see langword="null" /> if this is the root node.</param>
-    /// <param name="inboundNavigation">The navigation from the source node to this node, or <see langword="null" /> if this is the root node.</param>
+    /// <param name="sourceEntry">The entry from which this node was reached, or <see langword="null" />
+    // if this is the root node.</param>
+    /// <param name="inboundNavigation">The navigation from the source node to this node, or <see
+    // langword="null" /> if this is the root node.</param>
     public EntityEntryGraphNode(
         EntityEntry entry,
         TState state,
@@ -59,10 +66,14 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
     public virtual TState NodeState { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public override EntityEntryGraphNode CreateNode(

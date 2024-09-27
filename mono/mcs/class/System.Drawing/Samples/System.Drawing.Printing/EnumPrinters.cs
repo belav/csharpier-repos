@@ -29,10 +29,10 @@ public class EnumPrinters
             Console.WriteLine("    MaximumPage {0}", ps.MaximumPage);
             Console.WriteLine("    MinimumPage {0}", ps.MinimumPage);
             Console.WriteLine("    LandscapeAngle {0}", ps.LandscapeAngle);
-            /*
-            for (int p = 0; p < ps.PrinterResolutions.Count; p++) {
-                Console.WriteLine ("        PrinterResolutions {0}", ps.PrinterResolutions [p]);
-            }*/
+/*
+for (int p = 0; p < ps.PrinterResolutions.Count; p++) {
+Console.WriteLine ("        PrinterResolutions {0}", ps.PrinterResolutions [p]);
+}*/
 
             for (int p = 0; p < ps.PaperSizes.Count; p++)
             {

@@ -420,8 +420,10 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
                     }
                     else if (!hasGuid)
                     {
-                        // Interfaces used with No-PIA ought to have a guid attribute, or the CLR cannot do type unification.
-                        // This interface lacks a guid, so unification probably won't work. We allow event interfaces to not have a Guid.
+                        // Interfaces used with No-PIA ought to have a guid attribute, or the CLR cannot do type
+                        // unification.
+                        // This interface lacks a guid, so unification probably won't work. We allow event interfaces to not
+                        // have a Guid.
                         // ERRID_NoPIAAttributeMissing2/ERR_InteropTypeMissingAttribute
                         ReportMissingAttribute(
                             AttributeDescription.GuidAttribute,
@@ -898,13 +900,15 @@ namespace Microsoft.CodeAnalysis.Emit.NoPia
 
             public sealed override bool Equals(object obj)
             {
-                // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+                // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+                // and hash them should be used.
                 throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
             }
 
             public sealed override int GetHashCode()
             {
-                // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+                // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+                // and hash them should be used.
                 throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
             }
         }

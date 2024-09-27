@@ -48,7 +48,8 @@ internal sealed class AddURLCommand : BaseCommand
         var sourceFile = Ensure.NotNullOrEmpty(_sourceFileArg.Value, SourceUrlArgName);
         var codeGenerator = GetCodeGenerator(_codeGeneratorOption);
 
-        // We have to download the file from that URL, save it to a local file, then create a OpenApiReference
+        // We have to download the file from that URL, save it to a local file, then create a
+        // OpenApiReference
         var outputFile = await DownloadGivenOption(sourceFile, _outputFileOption);
 
         await AddOpenAPIReference(

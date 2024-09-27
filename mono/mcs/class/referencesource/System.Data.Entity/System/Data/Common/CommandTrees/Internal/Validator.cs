@@ -143,7 +143,8 @@ namespace System.Data.Common.CommandTrees.Internal
                     );
                 }
 
-                // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types) - equality is required.
+                // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types) - equality is
+                // required.
                 if (!TypeSemantics.IsEqual(varRef.ResultType, foundType))
                 {
                     ThrowInvalid(
@@ -167,7 +168,8 @@ namespace System.Data.Common.CommandTrees.Internal
                 DbParameterReferenceExpression foundParam;
                 if (this.paramMappings.TryGetValue(paramRef.ParameterName, out foundParam))
                 {
-                    // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types for TVPs) - equality is required.
+                    // SQLBUDT#545720: Equivalence is not a sufficient check (consider row types for TVPs) - equality is
+                    // required.
                     if (!TypeSemantics.IsEqual(paramRef.ResultType, foundParam.ResultType))
                     {
                         ThrowInvalid(

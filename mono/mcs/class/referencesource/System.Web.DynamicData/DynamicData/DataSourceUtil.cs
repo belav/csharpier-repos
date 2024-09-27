@@ -64,7 +64,8 @@ namespace System.Web.DynamicData
 
         internal static void SetParameterTypeCodeAndDbType(Parameter parameter, MetaColumn column)
         {
-            // If it's a Guid, use a DbType, since TypeCode doesn't support it.  For everything else, use TypeCode
+            // If it's a Guid, use a DbType, since TypeCode doesn't support it.  For everything else, use
+            // TypeCode
             if (column.ColumnType == typeof(Guid))
             {
                 parameter.DbType = DbType.Guid;

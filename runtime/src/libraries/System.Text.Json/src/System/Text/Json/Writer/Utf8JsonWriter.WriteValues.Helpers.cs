@@ -34,7 +34,8 @@ namespace System.Text.Json
             {
                 Debug.Assert(_tokenType != JsonTokenType.PropertyName);
 
-                // It is more likely for CurrentDepth to not equal 0 when writing valid JSON, so check that first to rely on short-circuiting and return quickly.
+                // It is more likely for CurrentDepth to not equal 0 when writing valid JSON, so check that first to
+                // rely on short-circuiting and return quickly.
                 if (CurrentDepth == 0 && _tokenType != JsonTokenType.None)
                 {
                     ThrowHelper.ThrowInvalidOperationException(

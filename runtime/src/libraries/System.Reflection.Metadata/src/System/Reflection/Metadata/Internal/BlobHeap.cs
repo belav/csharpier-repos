@@ -382,7 +382,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             var blobReader = GetBlobReader(handle);
 
-            // Spec: separator is an ASCII encoded character in range [0x01, 0x7F], or byte 0 to represent an empty separator.
+            // Spec: separator is an ASCII encoded character in range [0x01, 0x7F], or byte 0 to represent an
+            // empty separator.
             int separator = blobReader.ReadByte();
             if (separator > 0x7f)
             {
@@ -416,7 +417,8 @@ namespace System.Reflection.Metadata.Ecma335
         {
             var blobReader = GetBlobReader(handle);
 
-            // Spec: separator is an ASCII encoded character in range [0x01, 0x7F], or byte 0 to represent an empty separator.
+            // Spec: separator is an ASCII encoded character in range [0x01, 0x7F], or byte 0 to represent an
+            // empty separator.
             int separator = blobReader.ReadByte();
             if (separator > 0x7f)
             {

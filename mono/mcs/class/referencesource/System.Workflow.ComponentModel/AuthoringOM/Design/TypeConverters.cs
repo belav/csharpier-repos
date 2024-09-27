@@ -514,8 +514,10 @@ namespace System.Workflow.ComponentModel.Design
             out ITypeDescriptorContext realContext
         )
         {
-            //The following case covers the scenario where we have users writting custom property descriptors in which they have returned custom type converters
-            //In such cases we should honor the type converter returned by property descriptor only if it is not a ActivityBindTypeConverter
+            //The following case covers the scenario where we have users writting custom property descriptors in
+            // which they have returned custom type converters
+            //In such cases we should honor the type converter returned by property descriptor only if it is not
+            // a ActivityBindTypeConverter
             //If it is ActivityBindTypeConveter then we should lookup the converter based on Property type
             //Please be care ful when you change this code as it will break ParameterInfoBasedPropertyDescriptor
             realContext = currentContext;

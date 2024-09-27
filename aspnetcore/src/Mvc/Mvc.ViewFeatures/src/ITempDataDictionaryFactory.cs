@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 public interface ITempDataDictionaryFactory
 {
     /// <summary>
-    /// Gets or creates an <see cref="ITempDataDictionary"/> instance for the request associated with the
+    /// Gets or creates an <see cref="ITempDataDictionary"/> instance for the request associated with
+    // the
     /// given <paramref name="context"/>.
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/>.</param>

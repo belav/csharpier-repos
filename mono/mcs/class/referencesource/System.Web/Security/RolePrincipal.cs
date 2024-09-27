@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * RolePrincipal
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* RolePrincipal
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 
 namespace System.Web.Security
 {
@@ -330,9 +330,12 @@ namespace System.Web.Security
                 bool originalSerializingForCookieValue = _serializingForCookie;
                 try
                 {
-                    // DevDiv 481327: ClaimsPrincipal is an expensive type to serialize and deserialize. If the developer is using
-                    // role management, then he is going to be querying regular ASP.NET membership roles rather than claims, so
-                    // we can cut back on the number of bytes sent across the wire by ignoring any claims in the underlying
+                    // DevDiv 481327: ClaimsPrincipal is an expensive type to serialize and deserialize. If the
+                    // developer is using
+                    // role management, then he is going to be querying regular ASP.NET membership roles rather than
+                    // claims, so
+                    // we can cut back on the number of bytes sent across the wire by ignoring any claims in the
+                    // underlying
                     // identity. Otherwise we risk sending a cookie too large for the browser to handle.
                     _serializingForCookie = true;
                     bf.Serialize(ms, this);

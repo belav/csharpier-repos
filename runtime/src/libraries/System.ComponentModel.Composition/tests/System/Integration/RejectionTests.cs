@@ -298,7 +298,8 @@ namespace Tests.Integration
             // and one way of satisfying its needs is as good as another
             var export = container.GetExport<Needy>();
 
-            // Adding more exports doesn't fail because we push the promise to use the NoImportPart from the catalog
+            // Adding more exports doesn't fail because we push the promise to use the NoImportPart from the
+            // catalog
             // using the priorities from the AggregateExportProvider
             container.ComposeParts(new NoImportPart());
 

@@ -100,7 +100,8 @@ internal partial class XmlSnippetParser
                         DefaultText = className,
                     };
                 case "GenerateSwitchCases":
-                    // Generate switch cases requires a multi-step snippet interaction, where the snippet is inserted first then the
+                    // Generate switch cases requires a multi-step snippet interaction, where the snippet is inserted
+                    // first then the
                     // client calls back to on commit so that we can generate the cases for the specified switch value.
                     // This is not yet supported via LSP.
                     return this;

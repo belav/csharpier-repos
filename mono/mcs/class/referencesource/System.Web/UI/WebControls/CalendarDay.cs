@@ -52,7 +52,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets the string equivilent of the date represented by an instance of this class. This property is read-only.</para>
+        ///    <para>Gets the string equivilent of the date represented by an instance of this class. This
+        // property is read-only.</para>
         /// </devdoc>
         public string DayNumberText
         {
@@ -81,7 +82,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para> Gets a value indicating whether date represented by an instance of this class is selected. This property is read-only.</para>
+        ///    <para> Gets a value indicating whether date represented by an instance of this class is
+        // selected. This property is read-only.</para>
         /// </devdoc>
         public bool IsSelected
         {
@@ -89,7 +91,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///    <para>Gets a value indicating whether the date represented by an instance of this class is today's date. This property is read-only.</para>
+        ///    <para>Gets a value indicating whether the date represented by an instance of this class is
+        // today's date. This property is read-only.</para>
         /// </devdoc>
         public bool IsToday
         {

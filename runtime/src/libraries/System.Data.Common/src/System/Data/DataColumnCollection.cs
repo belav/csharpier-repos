@@ -337,8 +337,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Does verification on the column and it's name, and points the column at the dataSet that owns this collection.
-        /// An ArgumentNullException is thrown if this column is null.  An ArgumentException is thrown if this column
+        /// Does verification on the column and it's name, and points the column at the dataSet that owns
+        // this collection.
+        /// An ArgumentNullException is thrown if this column is null.  An ArgumentException is thrown if
+        // this column
         /// already belongs to this collection, belongs to another collection.
         /// A DuplicateNameException is thrown if this collection already has a column with the same
         /// name (case insensitive).
@@ -871,7 +873,8 @@ namespace System.Data
         /// <summary>
         /// Registers this name as being used in the collection.  Will throw an ArgumentException
         /// if the name is already being used.  Called by Add, All property, and Column.ColumnName property.
-        /// if the name is equivalent to the next default name to hand out, we increment our defaultNameIndex.
+        /// if the name is equivalent to the next default name to hand out, we increment our
+        // defaultNameIndex.
         /// NOTE: To add a child table, pass column as null
         /// </summary>
         internal void RegisterColumnName(string name, DataColumn? column)
@@ -904,7 +907,8 @@ namespace System.Data
                 throw ExceptionBuilder.CannotAddDuplicate2(name);
             }
 
-            // If we're adding a child table, then update defaultNameIndex to avoid colisions between the child table and auto-generated column names
+            // If we're adding a child table, then update defaultNameIndex to avoid colisions between the child
+            // table and auto-generated column names
             if (
                 (column == null)
                 && NamesEqual(name, MakeName(_defaultNameIndex), true, _table.Locale) != 0
@@ -971,8 +975,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All property, and
-        /// Column.ColumnName property.  If the name is equivalent to the last proposed default name, we walk backwards
+        /// Unregisters this name as no longer being used in the collection.  Called by Remove, All
+        // property, and
+        /// Column.ColumnName property.  If the name is equivalent to the last proposed default name, we
+        // walk backwards
         /// to find the next proper default name to use.
         /// </summary>
         internal void UnregisterName(string name)

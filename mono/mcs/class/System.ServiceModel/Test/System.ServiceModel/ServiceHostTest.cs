@@ -210,7 +210,8 @@ namespace MonoTests.System.ServiceModel
             host.AddServiceEndpoint(typeof(IHoge), binding, new Uri(ep));
             host.AddServiceEndpoint(typeof(IFuga), binding, new Uri(ep));
 
-            // Use the same binding, results in one ChannelDispatcher (actually two, for metadata/debug behavior).
+            // Use the same binding, results in one ChannelDispatcher (actually two, for metadata/debug
+            // behavior).
             host.Open();
             try
             {
@@ -261,7 +262,8 @@ namespace MonoTests.System.ServiceModel
             }
             catch (InvalidOperationException e)
             {
-                //"ContractDescription 'IHaveZeroOperarationsContract' has zero operations; a contract must have at least one operation."
+                //"ContractDescription 'IHaveZeroOperarationsContract' has zero operations; a contract must have at
+                // least one operation."
                 StringAssert.Contains("IHaveZeroOperarationsContract", e.Message);
             }
             finally

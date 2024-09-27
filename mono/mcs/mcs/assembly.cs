@@ -894,7 +894,8 @@ namespace Mono.CSharp
             if (Compiler.Settings.Unsafe && module.PredefinedTypes.SecurityAction.Define())
             {
                 //
-                // Emits [assembly: SecurityPermissionAttribute (SecurityAction.RequestMinimum, SkipVerification = true)]
+                // Emits [assembly: SecurityPermissionAttribute (SecurityAction.RequestMinimum, SkipVerification =
+                // true)]
                 // when -unsafe option was specified
                 //
                 Location loc = Location.Null;

@@ -200,7 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Snippets
 
             try
             {
-                // Allocate enough memory for one VSExpansion structure. This memory is filled in by the Next method.
+                // Allocate enough memory for one VSExpansion structure. This memory is filled in by the Next
+                // method.
                 pSnippetInfo[0] = Marshal.AllocCoTaskMem(Marshal.SizeOf(snippetInfo));
 
                 expansionEnumerator.GetCount(out var count);

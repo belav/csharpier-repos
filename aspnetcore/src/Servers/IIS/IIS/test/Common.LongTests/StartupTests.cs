@@ -162,7 +162,8 @@ public class StartupTests : IISFunctionalTestBase
         await deploymentResult.AssertStarts();
 
         StopServer();
-        // Verify that in this scenario where.exe was invoked only once by shim and request handler uses cached value
+        // Verify that in this scenario where.exe was invoked only once by shim and request handler uses
+        // cached value
         Assert.Equal(
             1,
             TestSink.Writes.Count(w => w.Message.Contains("Invoking where.exe to find dotnet.exe"))
@@ -207,7 +208,8 @@ public class StartupTests : IISFunctionalTestBase
                 StopServer();
                 // Verify that in this scenario dotnet.exe was found using InstallLocation lookup
                 // I would've liked to make a copy of dotnet directory in this test and use it for verification
-                // but dotnet roots are usually very large on dev machines so this test would take disproportionally long time and disk space
+                // but dotnet roots are usually very large on dev machines so this test would take disproportionally
+                // long time and disk space
                 Assert.Equal(
                     1,
                     TestSink.Writes.Count(w =>
@@ -1276,7 +1278,8 @@ public class StartupTests : IISFunctionalTestBase
 
         StopServer();
 
-        // Logs can be split due to the ANCM logging occuring at the same time as logs from the app, so check for a portion of the
+        // Logs can be split due to the ANCM logging occuring at the same time as logs from the app, so
+        // check for a portion of the
         // string instead of the entire string. The entire string will still be present in the event log.
         var expectedLogString = new string('a', 16);
 
@@ -1309,7 +1312,8 @@ public class StartupTests : IISFunctionalTestBase
 
         var contents = GetLogFileContent(deploymentResult);
 
-        // Logs can be split due to the ANCM logging occuring at the same time as logs from the app, so check for a portion of the
+        // Logs can be split due to the ANCM logging occuring at the same time as logs from the app, so
+        // check for a portion of the
         // string instead of the entire string. The entire string will still be present in the event log.
         var expectedLogString = new string('a', 16);
 

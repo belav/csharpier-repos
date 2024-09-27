@@ -10,7 +10,8 @@ namespace ILCompiler.DependencyAnalysis
 {
     internal static class ReflectionInvokeSupportDependencyAlgorithm
     {
-        // Inserts dependencies to make the following corner case work (we need MethodTable for `MyStruct[]`):
+        // Inserts dependencies to make the following corner case work (we need MethodTable for
+        // `MyStruct[]`):
         //
         // struct MyStruct
         // {
@@ -21,7 +22,8 @@ namespace ILCompiler.DependencyAnalysis
         //
         //     public static void Main()
         //     {
-        //         typeof(MyStruct).InvokeMember(nameof(Count), BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static, null, null, new object[] { default(MyStruct) });
+        //         typeof(MyStruct).InvokeMember(nameof(Count), BindingFlags.InvokeMethod |
+        // BindingFlags.Public | BindingFlags.Static, null, null, new object[] { default(MyStruct) });
         //     }
         // }
         public static void GetDependenciesFromParamsArray(

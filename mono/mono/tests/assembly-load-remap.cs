@@ -37,7 +37,8 @@ public class Tests
             "Microsoft.Build.Framework, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
         );
 
-        // when run as part of the test suite, we need to register the xbuild 14.0 path or v14 assembly lookup will fail
+        // when run as part of the test suite, we need to register the xbuild 14.0 path or v14 assembly
+        // lookup will fail
         var mono_path = Environment.GetEnvironmentVariable("MONO_PATH");
         if (!String.IsNullOrEmpty(mono_path))
         {

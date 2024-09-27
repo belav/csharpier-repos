@@ -3,7 +3,8 @@
 namespace System.Web.DynamicData
 {
     /// <summary>
-    /// Interface that represents a field template. Though by default field templates are User Controls (ascx)
+    /// Interface that represents a field template. Though by default field templates are User Controls
+    // (ascx)
     /// they don't have to be.
     /// </summary>
     public interface IFieldTemplate

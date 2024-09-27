@@ -25,7 +25,8 @@ namespace SourceGenerators
         public string Name { get; }
 
         /// <summary>
-        /// Fully qualified assembly name, prefixed with "global::", e.g. global::System.Numerics.BigInteger.
+        /// Fully qualified assembly name, prefixed with "global::", e.g.
+        // global::System.Numerics.BigInteger.
         /// </summary>
         public string FullyQualifiedName { get; }
 

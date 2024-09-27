@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -12,7 +13,8 @@ using System.Web.Http.Properties;
 namespace System.Web.Http.Routing
 {
     /// <remarks>
-    /// Corresponds to the MVC implementation of attribute routing in System.Web.Mvc.Routing.AttributeRoutingMapper.
+    /// Corresponds to the MVC implementation of attribute routing in
+    // System.Web.Mvc.Routing.AttributeRoutingMapper.
     /// </remarks>
     internal static class AttributeRoutingMapper
     {

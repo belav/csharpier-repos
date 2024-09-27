@@ -47,38 +47,39 @@ namespace MonoTests.System.ServiceModel
     [TestFixture]
     public class ClientBaseTest
     {
-        /*
-                [Test]
-                [ExpectedException (typeof (InvalidOperationException))]
-                public void GenericTypeArgumentIsServiceContract ()
-                {
-                    new MyClientBase<ICloneable> (new BasicHttpBinding (), new EndpointAddress ("http://localhost:4126"));
-                }
-        */
+/*
+[Test]
+[ExpectedException (typeof (InvalidOperationException))]
+public void GenericTypeArgumentIsServiceContract ()
+{
+new MyClientBase<ICloneable> (new BasicHttpBinding (), new EndpointAddress
+("http://localhost:4126"));
+}
+*/
 
-        /*
-                public class MyClientBase<T> : ClientBase<T>
-                {
-                    public MyClientBase (Binding binding, EndpointAddress address)
-                        : base (binding, address)
-                    {
-                    }
-                }
-        
-                public class MyClientBase1 : ClientBase<TestService>
-                {
-                    public MyClientBase1 (Binding binding, EndpointAddress address)
-                        : base (binding, address)
-                    {
-                    }
-                }
-        
-                [Test]
-                public void ClassTypeArg ()
-                {
-                    new MyClientBase1 (new BasicHttpBinding (), new EndpointAddress ("urn:dummy"));
-                }
-        */
+/*
+public class MyClientBase<T> : ClientBase<T>
+{
+public MyClientBase (Binding binding, EndpointAddress address)
+: base (binding, address)
+{
+}
+}
+
+public class MyClientBase1 : ClientBase<TestService>
+{
+public MyClientBase1 (Binding binding, EndpointAddress address)
+: base (binding, address)
+{
+}
+}
+
+[Test]
+public void ClassTypeArg ()
+{
+new MyClientBase1 (new BasicHttpBinding (), new EndpointAddress ("urn:dummy"));
+}
+*/
 
         [ServiceContract]
         public interface ITestService
@@ -402,7 +403,8 @@ namespace MonoTests.System.ServiceModel
                     request.Headers.Action + "Response"
                 );
                 msg.Headers.Add(MessageHeader.CreateHeader("hoge", "urn:hoge", "heh"));
-                //msg.Headers.Add (MessageHeader.CreateHeader ("test", "http://schemas.microsoft.com/ws/2005/05/addressing/none", "testing"));
+                //msg.Headers.Add (MessageHeader.CreateHeader ("test",
+                // "http://schemas.microsoft.com/ws/2005/05/addressing/none", "testing"));
                 return msg;
             }
         }

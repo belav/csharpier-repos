@@ -288,7 +288,8 @@ class ThreadTest
 
         // Case 2: new Thread(ThreadStart).Start(parameter)
         var t2 = new Thread(() => Expect(false, "This thread must not be started"));
-        // InvalidOperationException: The thread was created with a ThreadStart delegate that does not accept a parameter.
+        // InvalidOperationException: The thread was created with a ThreadStart delegate that does not
+        // accept a parameter.
         ExpectException<InvalidOperationException>(
             () => t2.Start(null),
             "Expected InvalidOperationException for t2.Start()"

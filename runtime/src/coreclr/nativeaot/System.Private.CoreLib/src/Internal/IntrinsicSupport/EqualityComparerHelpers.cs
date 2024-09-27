@@ -1,12 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// The algoritm to choose the default equality comparer is duplicated in the IL compiler. The compiler will replace the code within
-// EqualityComparer<T>.Create method with more specific implementation based on what sort of type is being compared where possible.
+// The algoritm to choose the default equality comparer is duplicated in the IL compiler. The
+// compiler will replace the code within
+// EqualityComparer<T>.Create method with more specific implementation based on what sort of type is
+// being compared where possible.
 //
-// In addition, there are a set of generic functions which are used by Array.IndexOf<T> to perform equality checking
-// in a similar manner. Array.IndexOf<T> uses these functions instead of the EqualityComparer<T> infrastructure because constructing
-// a full EqualityComparer<T> has substantial size costs due to Array.IndexOf<T> use within all arrays.
+// In addition, there are a set of generic functions which are used by Array.IndexOf<T> to perform
+// equality checking
+// in a similar manner. Array.IndexOf<T> uses these functions instead of the EqualityComparer<T>
+// infrastructure because constructing
+// a full EqualityComparer<T> has substantial size costs due to Array.IndexOf<T> use within all
+// arrays.
 
 using System;
 using System.Collections.Generic;
@@ -141,7 +146,8 @@ namespace Internal.IntrinsicSupport
         // Instead, specialization at call time is used within the compiler.
         //
         // General Approach
-        // - Perform fancy redirection for EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>(). If T is a reference
+        // - Perform fancy redirection for EqualityComparerHelpers.GetComparerForReferenceTypesOnly<T>(). If
+        // T is a reference
         //   type or UniversalCanon, have this redirect to EqualityComparer<T>.get_Default, Otherwise, use
         //   the function as is. (will return null in that case)
         // - Change the contents of the IndexOf functions to have a pair of loops. One for if

@@ -107,7 +107,9 @@ namespace System.ComponentModel.Composition
                 }
                 catch (MissingMethodException ex)
                 {
-                    // Unable to create an Instance of the Metadata view '{0}' because a constructor could not be selected.  Ensure that the type implements a constructor which takes an argument of type IDictionary<string, object>.
+                    // Unable to create an Instance of the Metadata view '{0}' because a constructor could not be
+                    // selected.  Ensure that the type implements a constructor which takes an argument of type
+                    // IDictionary<string, object>.
                     throw new CompositionContractMismatchException(
                         SR.Format(
                             SR.CompositionException_MetadataViewInvalidConstructor,
@@ -123,7 +125,8 @@ namespace System.ComponentModel.Composition
                     {
                         if (ex.InnerException!.GetType() == typeof(InvalidCastException))
                         {
-                            // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata for the item {1} with the value {2} as type {3} but the view imports it as type {4}.
+                            // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata
+                            // for the item {1} with the value {2} as type {3} but the view imports it as type {4}.
                             throw new CompositionContractMismatchException(
                                 SR.Format(
                                     SR.ContractMismatch_InvalidCastOnMetadataField,
@@ -142,7 +145,8 @@ namespace System.ComponentModel.Composition
                         }
                         else if (ex.InnerException.GetType() == typeof(NullReferenceException))
                         {
-                            // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata for the item {1} with a null value and null is not a valid value for type {2}.
+                            // Unable to create an Instance of the Metadata view {0} because the exporter exported the metadata
+                            // for the item {1} with a null value and null is not a valid value for type {2}.
                             throw new CompositionContractMismatchException(
                                 SR.Format(
                                     SR.ContractMismatch_NullReferenceOnMetadataField,

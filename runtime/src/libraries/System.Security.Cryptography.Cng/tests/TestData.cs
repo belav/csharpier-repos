@@ -24,7 +24,8 @@ namespace System.Security.Cryptography.Cng.Tests
 
         public static RSAParameters TestRsaKeyPair;
 
-        // AllowExport|AllowPlainTextExport,  CngKeyCreationOptions.None, UIPolicy(CngUIProtectionLevels.None), CngKeyUsages.Decryption
+        // AllowExport|AllowPlainTextExport,  CngKeyCreationOptions.None,
+        // UIPolicy(CngUIProtectionLevels.None), CngKeyUsages.Decryption
         public static byte[] Key_ECDiffieHellmanP256 = (
             "45434b3120000000d679ed064a01dacd012d24495795d4a3272fb6f6bd3d9baf8b40c0db26a81dfb8b4919d5477a07ae5c4b"
             + "4b577f2221be085963abc7515bbbf6998919a34baefe"

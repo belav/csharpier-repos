@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
     /// Maintains a list of sequence points in a space efficient way. Most of the time sequence points
-    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset, and
+    /// occur in the same syntax tree, so optimize for that case. Store a sequence point as an offset,
+    // and
     /// position in a syntax tree, then translate to CCI format only on demand.
     ///
     /// Use a ArrayBuilder{RawSequencePoint} to create.
@@ -114,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
         }
 
         /// <summary>
-        /// Get all the sequence points, possibly mapping them using #line/ExternalSource directives, and mapping
+        /// Get all the sequence points, possibly mapping them using #line/ExternalSource directives, and
+        // mapping
         /// file names to debug documents with the given mapping function.
         /// </summary>
         /// <param name="documentProvider">Function that maps file paths to CCI debug documents</param>
@@ -149,8 +151,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 {
                     TextSpan span = offsetAndSpan.Span;
 
-                    // if it's a hidden sequence point, or a sequence point with syntax that points to a position that is inside
-                    // of a hidden region (can be defined with #line hidden (C#) or implicitly by #ExternalSource (VB), make it
+                    // if it's a hidden sequence point, or a sequence point with syntax that points to a position that
+                    // is inside
+                    // of a hidden region (can be defined with #line hidden (C#) or implicitly by #ExternalSource (VB),
+                    // make it
                     // a hidden sequence point.
 
                     bool isHidden = span == RawSequencePoint.HiddenSequencePointSpan;
@@ -214,8 +218,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                             int endColumn = fileLinePositionSpan.EndLinePosition.Character + 1;
 
                             // Trim column number if necessary.
-                            // Column must be in range [0, 0xffff) and end column must be greater than start column if on the same line.
-                            // The Portable PDB specifies 0x10000, but System.Reflection.Metadata reader has an off-by-one error.
+                            // Column must be in range [0, 0xffff) and end column must be greater than start column if on the
+                            // same line.
+                            // The Portable PDB specifies 0x10000, but System.Reflection.Metadata reader has an off-by-one
+                            // error.
                             // Windows PDBs allow the same range.
                             const int MaxColumn = ushort.MaxValue - 1;
 

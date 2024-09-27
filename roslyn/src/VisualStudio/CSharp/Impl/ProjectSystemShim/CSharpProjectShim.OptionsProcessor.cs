@@ -61,8 +61,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 // options can override them.
                 ReportDiagnostic? ruleSetGeneralDiagnosticOption = null;
 
-                // TODO: merge this core logic back down to the base of OptionsProcessor, since this should be the same for all languages. The CompilationOptions
-                // would then already contain the right information, and could be updated accordingly by the language-specific logic.
+                // TODO: merge this core logic back down to the base of OptionsProcessor, since this should be the
+                // same for all languages. The CompilationOptions
+                // would then already contain the right information, and could be updated accordingly by the
+                // language-specific logic.
                 if (ruleSetFile != null)
                 {
                     ruleSetGeneralDiagnosticOption = ruleSetFile.GetGeneralDiagnosticOption();
@@ -264,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim
                 var symbols = GetStringOption(CompilerOptions.OPTID_CCSYMBOLS, defaultValue: "")
                     .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
 
-                // The base implementation of OptionsProcessor already tried this, but it didn't have the real documentation
+                // The base implementation of OptionsProcessor already tried this, but it didn't have the real
+                // documentation
                 // path so we have to do it a second time
                 var documentationMode = DocumentationMode.Parse;
                 if (GetStringOption(CompilerOptions.OPTID_XML_DOCFILE, defaultValue: null) != null)

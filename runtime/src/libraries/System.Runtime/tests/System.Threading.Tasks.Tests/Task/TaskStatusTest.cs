@@ -168,7 +168,8 @@ namespace System.Threading.Tasks.Tests.Status
                     {
                         _mre.Wait();
                         //
-                        // Current Task status is WaitingForChildrenToComplete if Task didn't Cancel/Faulted and Child was created
+                        // Current Task status is WaitingForChildrenToComplete if Task didn't Cancel/Faulted and Child was
+                        // created
                         // without Detached options and current status of the child isn't RanToCompletion or Faulted yet
                         //
 

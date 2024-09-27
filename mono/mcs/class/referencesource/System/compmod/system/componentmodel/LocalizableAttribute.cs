@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -22,7 +22,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.LocalizableAttribute'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.LocalizableAttribute'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public LocalizableAttribute(bool isLocalizable)
@@ -59,7 +60,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default value, which is <see cref='System.ComponentModel.LocalizableAttribute.No'/> , that is
+        ///       Specifies the default value, which is <see
+        // cref='System.ComponentModel.LocalizableAttribute.No'/> , that is
         ///       a property should not be localized. This <see langword='static '/>field is
         ///       read-only.
         ///    </para>

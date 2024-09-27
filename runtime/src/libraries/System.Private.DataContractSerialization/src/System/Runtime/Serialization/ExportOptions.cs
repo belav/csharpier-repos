@@ -9,9 +9,12 @@ namespace System.Runtime.Serialization
     /// Represents the options that can be set for an <see cref="XsdDataContractExporter"/>.
     /// </summary>
     /// <remarks>
-    /// The <see cref="XsdDataContractExporter"/> is used to generate XSD schemas from a type or assembly. You can also use the XsdDataContractImporter to generate .NET Framework code from a schema document.
+    /// The <see cref="XsdDataContractExporter"/> is used to generate XSD schemas from a type or
+    // assembly. You can also use the XsdDataContractImporter to generate .NET Framework code from a schema
+    // document.
     ///
-    /// The <see cref="KnownTypes"/> property is used by the <see cref="DataContractSerializer"/> to include types that can be read in an object graph.
+    /// The <see cref="KnownTypes"/> property is used by the <see cref="DataContractSerializer"/> to
+    // include types that can be read in an object graph.
     /// </remarks>
     public class ExportOptions
     {

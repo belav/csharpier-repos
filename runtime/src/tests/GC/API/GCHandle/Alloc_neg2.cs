@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
-This test verifies GCHandle.Alloc's ability to validate bad GCHandleTypes, since any int can be cast as a GCHandleType
+This test verifies GCHandle.Alloc's ability to validate bad GCHandleTypes, since any int can be cast
+as a GCHandleType
 */
 
 using System;
@@ -12,7 +13,8 @@ public class Test_Alloc_neg2
 {
     public static int Main()
     {
-        // The third element needs to be updated if Pinned is no longer the last value in the GCHandleType enum
+        // The third element needs to be updated if Pinned is no longer the last value in the GCHandleType
+        // enum
         long[] invalidValues =
         {
             Int32.MinValue,

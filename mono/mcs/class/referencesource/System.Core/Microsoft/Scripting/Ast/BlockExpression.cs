@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Collections.Generic;
@@ -102,7 +102,8 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <param name="variables">The <see cref="Variables" /> property of the result.</param>
         /// <param name="expressions">The <see cref="Expressions" /> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public BlockExpression Update(
             IEnumerable<ParameterExpression> variables,
             IEnumerable<Expression> expressions
@@ -171,8 +172,10 @@ namespace System.Linq.Expressions
         /// supports nodes which hold onto 5 Expressions and puts all of the arguments into the
         /// ReadOnlyCollection.
         ///
-        /// Ultimately this means if we create the readonly collection we will be slightly more wasteful as we'll
-        /// have a readonly collection + some fields in the type.  The DLR internally avoids accessing anything
+        /// Ultimately this means if we create the readonly collection we will be slightly more wasteful as
+        // we'll
+        /// have a readonly collection + some fields in the type.  The DLR internally avoids accessing
+        // anything
         /// which would force the readonly collection to be created.
         ///
         /// This is used by BlockExpression5 and MethodCallExpression5.
@@ -836,7 +839,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="BlockExpression"/> that contains the given expressions and has no variables.
+        /// Creates a <see cref="BlockExpression"/> that contains the given expressions and has no
+        // variables.
         /// </summary>
         /// <param name="expressions">The expressions in the block.</param>
         /// <returns>The created <see cref="BlockExpression"/>.</returns>
@@ -868,7 +872,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="BlockExpression"/> that contains the given expressions and has no variables.
+        /// Creates a <see cref="BlockExpression"/> that contains the given expressions and has no
+        // variables.
         /// </summary>
         /// <param name="expressions">The expressions in the block.</param>
         /// <returns>The created <see cref="BlockExpression"/>.</returns>
@@ -878,7 +883,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="BlockExpression"/> that contains the given expressions, has no variables and has specific result type.
+        /// Creates a <see cref="BlockExpression"/> that contains the given expressions, has no variables
+        // and has specific result type.
         /// </summary>
         /// <param name="type">The result type of the block.</param>
         /// <param name="expressions">The expressions in the block.</param>
@@ -890,7 +896,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="BlockExpression"/> that contains the given expressions, has no variables and has specific result type.
+        /// Creates a <see cref="BlockExpression"/> that contains the given expressions, has no variables
+        // and has specific result type.
         /// </summary>
         /// <param name="type">The result type of the block.</param>
         /// <param name="expressions">The expressions in the block.</param>

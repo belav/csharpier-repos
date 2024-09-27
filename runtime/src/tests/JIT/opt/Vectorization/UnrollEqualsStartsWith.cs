@@ -108,7 +108,8 @@ public class UnrollEqualsStartsWith
         {
             for (int i = 0; i < refImpl.Length; i++)
             {
-                // Compare states for ref and tst (e.g. both should return the same value and the same exception if any)
+                // Compare states for ref and tst (e.g. both should return the same value and the same exception if
+                // any)
                 if (
                     !GetInvokeResult(refImpl[i], testStr)
                         .Equals(GetInvokeResult(tstImpl[i], testStr))

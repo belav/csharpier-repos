@@ -1036,7 +1036,8 @@ namespace System.Xml
                 {
                     XmlNodeType nt = curNode.NodeType;
                     //EntityReference's children come from the dtd where they are defined.
-                    //we need to investigate the same thing for entity's children if they are defined in an external dtd file.
+                    //we need to investigate the same thing for entity's children if they are defined in an external dtd
+                    // file.
                     if (nt == XmlNodeType.EntityReference)
                         return ((XmlEntityReference)curNode).ChildBaseURI;
                     if (

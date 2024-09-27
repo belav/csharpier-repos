@@ -132,7 +132,8 @@ namespace System.Text.Json
         /// ISO 8601 date time parser (ISO 8601-1:2019).
         /// </summary>
         /// <param name="source">The date/time to parse in UTF-8 format.</param>
-        /// <param name="parseData">The parsed <see cref="DateTimeParseData"/> for the given <paramref name="source"/>.</param>
+        /// <param name="parseData">The parsed <see cref="DateTimeParseData"/> for the given <paramref
+        // name="source"/>.</param>
         /// <remarks>
         /// Supports extended calendar date (5.2.2.1) and complete (5.4.2.1) calendar date/time of day
         /// representations with optional specification of seconds and fractional seconds.
@@ -432,7 +433,8 @@ namespace System.Text.Json
             return true;
         }
 
-        // The following methods are borrowed verbatim from src/Common/src/CoreLib/System/Buffers/Text/Utf8Parser/Utf8Parser.Date.Helpers.cs
+        // The following methods are borrowed verbatim from
+        // src/Common/src/CoreLib/System/Buffers/Text/Utf8Parser/Utf8Parser.Date.Helpers.cs
 
         /// <summary>
         /// Overflow-safe DateTimeOffset factory.
@@ -481,8 +483,10 @@ namespace System.Text.Json
             }
             catch (ArgumentOutOfRangeException)
             {
-                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year range. This case seems rare enough
-                // that it's better to catch the exception rather than replicate DateTime's range checking (which it's going to do anyway.)
+                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year
+                // range. This case seems rare enough
+                // that it's better to catch the exception rather than replicate DateTime's range checking (which
+                // it's going to do anyway.)
                 value = default;
                 return false;
             }
@@ -535,8 +539,10 @@ namespace System.Text.Json
             }
             catch (ArgumentOutOfRangeException)
             {
-                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year range. This case seems rare enough
-                // that it's better to catch the exception rather than replicate DateTime's range checking (which it's going to do anyway.)
+                // If we got here, the combination of the DateTime + UTC offset strayed outside the 1..9999 year
+                // range. This case seems rare enough
+                // that it's better to catch the exception rather than replicate DateTime's range checking (which
+                // it's going to do anyway.)
                 value = default;
                 return false;
             }

@@ -10,11 +10,16 @@ using System.Runtime.InteropServices;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop
 {
     /// <summary>
-    /// A redefinition of the EnvDTE.CodeElements interface. The interface, as defined in the PIA does not do
-    /// PreserveSig for the Item function. WinForms, specifically, uses the Item property when generating methods to see
-    /// if a method already exists. The only way it sees if something exists is if the call returns E_INVALIDARG. With
-    /// the normal PIAs though, this would result in a first-chance exception. Therefore, the WinForms team has their
-    /// own definition for CodeElements which also [PreserveSig]s Item. We do this here to make their work still
+    /// A redefinition of the EnvDTE.CodeElements interface. The interface, as defined in the PIA does
+    // not do
+    /// PreserveSig for the Item function. WinForms, specifically, uses the Item property when
+    // generating methods to see
+    /// if a method already exists. The only way it sees if something exists is if the call returns
+    // E_INVALIDARG. With
+    /// the normal PIAs though, this would result in a first-chance exception. Therefore, the WinForms
+    // team has their
+    /// own definition for CodeElements which also [PreserveSig]s Item. We do this here to make their
+    // work still
     /// worthwhile.
     /// </summary>
     [ComImport]

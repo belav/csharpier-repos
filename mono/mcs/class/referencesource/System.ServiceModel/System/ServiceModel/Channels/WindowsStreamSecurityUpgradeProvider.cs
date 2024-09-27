@@ -79,7 +79,8 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                // If the server credential is null, then we have not been opened yet and have no identity to expose.
+                // If the server credential is null, then we have not been opened yet and have no identity to
+                // expose.
                 if (this.serverCredential != null)
                 {
                     if (this.identity == null)
@@ -285,9 +286,12 @@ namespace System.ServiceModel.Channels
                 WindowsSecurityTokenAuthenticator authenticator =
                     new WindowsSecurityTokenAuthenticator(extractGroupsForWindowsAccounts);
 
-                // When NegotiateStream returns a WindowsIdentity the AuthenticationType is passed in the constructor to WindowsIdentity
-                // by it's internal NegoState class.  If this changes, then the call to remoteIdentity.AuthenticationType could fail if the
-                // current process token doesn't have sufficient priviledges.  It is a first class exception, and caught by the CLR
+                // When NegotiateStream returns a WindowsIdentity the AuthenticationType is passed in the
+                // constructor to WindowsIdentity
+                // by it's internal NegoState class.  If this changes, then the call to
+                // remoteIdentity.AuthenticationType could fail if the
+                // current process token doesn't have sufficient priviledges.  It is a first class exception, and
+                // caught by the CLR
                 // null is returned.
                 SecurityToken token = new WindowsSecurityToken(
                     remoteIdentity,
@@ -712,7 +716,8 @@ namespace System.ServiceModel.Channels
                     this.parent = parent;
                     TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
 
-                    // since we're at channel.Open and not per-message, minimize our statics overhead and leverage GC for our callback
+                    // since we're at channel.Open and not per-message, minimize our statics overhead and leverage GC
+                    // for our callback
                     this.onBaseOpen = Fx.ThunkCallback(new AsyncCallback(OnBaseOpen));
                     this.onGetSspiCredential = Fx.ThunkCallback(
                         new AsyncCallback(OnGetSspiCredential)
@@ -902,7 +907,8 @@ namespace System.ServiceModel.Channels
                     this.parent = parent;
                     this.timeoutHelper = new TimeoutHelper(timeout);
 
-                    // since we're at channel.Open and not per-message, minimize our statics overhead and leverage GC for our callback
+                    // since we're at channel.Open and not per-message, minimize our statics overhead and leverage GC
+                    // for our callback
                     this.onBaseClose = Fx.ThunkCallback(new AsyncCallback(OnBaseClose));
                     this.onCloseTokenProvider = Fx.ThunkCallback(
                         new AsyncCallback(OnCloseTokenProvider)

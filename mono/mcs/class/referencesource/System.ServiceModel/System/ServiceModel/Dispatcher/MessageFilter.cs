@@ -41,7 +41,8 @@ namespace System.ServiceModel.Dispatcher
         /// <summary>
         /// Tests whether the filter matches the given message without examining its body.
         /// Note: since this method never probes the message body, it should NOT close the message
-        /// If the filter probes the message body, then the filter must THROW an Exception. The filter should not return false
+        /// If the filter probes the message body, then the filter must THROW an Exception. The filter
+        // should not return false
         /// This is deliberate - we don't want to produce false positives.
         /// </summary>
         public abstract bool Match(Message message);

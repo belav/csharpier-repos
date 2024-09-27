@@ -54,8 +54,10 @@ namespace System.Data.Common.Internal
         /// otherwise if b is the starting quote char then d would be the ending quote character.
         /// </summary>
         /// <param name="name">string to parse</param>
-        /// <param name="leftQuote">set of characters which are valid quoteing characters to initiate a quote</param>
-        /// <param name="rightQuote">set of characters which are valid to stop a quote, array index's correspond to the the leftquote array.</param>
+        /// <param name="leftQuote">set of characters which are valid quoteing characters to initiate a
+        // quote</param>
+        /// <param name="rightQuote">set of characters which are valid to stop a quote, array index's
+        // correspond to the the leftquote array.</param>
         /// <param name="separator">separator to use</param>
         /// <returns></returns>
         internal static List<string> ParseMultipartIdentifier(
@@ -94,7 +96,8 @@ namespace System.Data.Common.Internal
                         }
                         else if (testchar == separator)
                         { // If we found a separator, no string was found, initalize the string we are parsing to Empty and the next one to Empty.
-                            // This is NOT a redundent setting of string.Empty it solves the case where we are parsing ".foo" and we should be returning null, null, empty, foo
+                            // This is NOT a redundent setting of string.Empty it solves the case where we are parsing ".foo"
+                            // and we should be returning null, null, empty, foo
                             parsedNames[stringCount] = string.Empty;
                             IncrementStringCount(parsedNames, ref stringCount);
                         }

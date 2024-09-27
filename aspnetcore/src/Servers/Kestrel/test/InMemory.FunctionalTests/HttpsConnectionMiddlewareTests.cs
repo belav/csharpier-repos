@@ -1083,7 +1083,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         using (var store = new X509Store(StoreName.CertificateAuthority, StoreLocation.CurrentUser))
         {
-            // add chain certificate so we can construct chain since there is no way how to pass intermediates directly.
+            // add chain certificate so we can construct chain since there is no way how to pass intermediates
+            // directly.
             store.Open(OpenFlags.ReadWrite);
             store.AddRange(clientChain);
             store.Close();
@@ -1156,7 +1157,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     }
 
     [ConditionalFact]
-    // TLS 1.2 and lower have to renegotiate the whole connection to get a client cert, and if that hits an error
+    // TLS 1.2 and lower have to renegotiate the whole connection to get a client cert, and if that hits
+    // an error
     // then the connection is aborted.
     [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing platform support.")]
     [TlsAlpnSupported]

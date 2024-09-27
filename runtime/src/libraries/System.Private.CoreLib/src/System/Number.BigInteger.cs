@@ -20,7 +20,8 @@ namespace System
             // * Quad:    112 + 16382 = 16494
             private const int BitsForLongestBinaryMantissa = 1074;
 
-            // The longest digit sequence requires: ceil(log2(pow(10, max significant digits + 1 rounding digit)))
+            // The longest digit sequence requires: ceil(log2(pow(10, max significant digits + 1 rounding
+            // digit)))
             // * Half:    ceil(log2(pow(10,    21 + 1))) =    74
             // * Single:  ceil(log2(pow(10,   112 + 1))) =   376
             // * Double:  ceil(log2(pow(10,   767 + 1))) =  2552
@@ -433,6 +434,7 @@ namespace System
             )
             {
                 // This is modified from the libraries BigIntegerCalculator.DivRem.cs implementation:
+                //
                 // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Runtime.Numerics/src/System/Numerics/BigIntegerCalculator.DivRem.cs
 
                 Debug.Assert(!rhs.IsZero());
@@ -670,7 +672,8 @@ namespace System
                 }
 
                 // If the dividend is still larger than the divisor, we overshot our estimate quotient. To correct,
-                // we increment the quotient and subtract one more divisor from the dividend (Because we guaranteed the error range).
+                // we increment the quotient and subtract one more divisor from the dividend (Because we guaranteed
+                // the error range).
                 if (Compare(ref dividend, ref divisor) >= 0)
                 {
                     quotient++;
@@ -851,27 +854,35 @@ namespace System
                 // Pow10BigNumTable stores the results of 10^8, 10^16, 10^32, 10^64, 10^128, 10^256, and 10^512
                 //
                 // For example, let's say exp = 0b111111. We can split the exp to two parts, one is small exp,
-                // which 10^smallExp can be represented as uint, another part is 10^bigExp, which must be represented as BigNum.
+                // which 10^smallExp can be represented as uint, another part is 10^bigExp, which must be
+                // represented as BigNum.
                 // So the result should be 10^smallExp * 10^bigExp.
                 //
                 // Calculating 10^smallExp is simple, we just lookup the 10^smallExp from Pow10UInt32Table.
                 // But here's a bad news: although uint can represent 10^9, exp 9's binary representation is 1001.
-                // That means 10^(1011), 10^(1101), 10^(1111) all cannot be stored as uint, we cannot easily say something like:
-                // "Any bits <= 3 is small exp, any bits > 3 is big exp". So instead of involving 10^8, 10^9 to Pow10UInt32Table,
-                // consider 10^8 and 10^9 as a bigNum, so they fall into Pow10BigNumTable. Now we can have a simple rule:
+                // That means 10^(1011), 10^(1101), 10^(1111) all cannot be stored as uint, we cannot easily say
+                // something like:
+                // "Any bits <= 3 is small exp, any bits > 3 is big exp". So instead of involving 10^8, 10^9 to
+                // Pow10UInt32Table,
+                // consider 10^8 and 10^9 as a bigNum, so they fall into Pow10BigNumTable. Now we can have a simple
+                // rule:
                 // "Any bits <= 3 is small exp, any bits > 3 is big exp".
                 //
-                // For 0b111111, we first calculate 10^(smallExp), which is 10^(7), now we can shift right 3 bits, prepare to calculate the bigExp part,
+                // For 0b111111, we first calculate 10^(smallExp), which is 10^(7), now we can shift right 3 bits,
+                // prepare to calculate the bigExp part,
                 // the exp now becomes 0b000111.
                 //
-                // Apparently the lowest bit of bigExp should represent 10^8 because we have already shifted 3 bits for smallExp, so Pow10BigNumTable[0] = 10^8.
+                // Apparently the lowest bit of bigExp should represent 10^8 because we have already shifted 3 bits
+                // for smallExp, so Pow10BigNumTable[0] = 10^8.
                 // Now let's shift exp right 1 bit, the lowest bit should represent 10^(8 * 2) = 10^16, and so on...
                 //
                 // That's why we just need the values of Pow10BigNumTable be power of 2.
                 //
-                // More details of this implementation can be found at: https://github.com/dotnet/coreclr/pull/12894#discussion_r128890596
+                // More details of this implementation can be found at:
+                // https://github.com/dotnet/coreclr/pull/12894#discussion_r128890596
 
-                // Validate that `Pow10BigNumTable` has exactly enough trailing elements to fill a BigInteger (which contains MaxBlockCount + 1 elements)
+                // Validate that `Pow10BigNumTable` has exactly enough trailing elements to fill a BigInteger (which
+                // contains MaxBlockCount + 1 elements)
                 // We validate here, since this is the only current consumer of the array
                 Debug.Assert(
                     (Pow10BigNumTableIndices[^1] + MaxBlockCount + 2) == Pow10BigNumTable.Length

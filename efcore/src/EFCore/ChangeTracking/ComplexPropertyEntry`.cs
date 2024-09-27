@@ -7,15 +7,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
-///     Provides access to change tracking information and operations for a given property of a complex type.
+///     Provides access to change tracking information and operations for a given property of a
+// complex type.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ChangeTracker" /> API and it is
+///         Instances of this class are returned from methods when using the <see
+// cref="ChangeTracker" /> API and it is
 ///         not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+// EF Core</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
@@ -25,10 +28,14 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     where TEntity : class
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ComplexPropertyEntry(InternalEntityEntry internalEntry, IComplexProperty complexProperty)
@@ -39,18 +46,22 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     /// </summary>
     /// <value> An entry for the entity that owns this member. </value>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     public new virtual EntityEntry<TEntity> EntityEntry => new(InternalEntry);
 
     /// <summary>
-    ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,
-    ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is not required
+    ///     Gets or sets the value currently assigned to this property. If the current value is set
+    // using this property,
+    ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is
+    // not required
     ///     for the context to detect the change.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     public new virtual TComplexProperty CurrentValue
@@ -60,16 +71,19 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given property of this complex type.
+    ///     Provides access to change tracking information and operations for a given property of this
+    // complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <param name="propertyExpression">
     ///     A lambda expression representing the property to access information and operations for.
     /// </param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(
         Expression<Func<TComplexProperty, TProperty>> propertyExpression
     )
@@ -85,16 +99,19 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given complex type property of this complex type.
+    ///     Provides access to change tracking information and operations for a given complex type
+    // property of this complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <param name="propertyExpression">
     ///     A lambda expression representing the property to access information and operations for.
     /// </param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual ComplexPropertyEntry<
         TEntity,
         TNestedComplexProperty
@@ -113,15 +130,18 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given property of this complex type.
+    ///     Provides access to change tracking information and operations for a given property of this
+    // complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <typeparam name="TProperty">The type of the property.</typeparam>
     /// <param name="property">The property to access information and operations for.</param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(IProperty property)
     {
         Check.NotNull(property, nameof(property));
@@ -132,15 +152,18 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given complex type property of this complex type.
+    ///     Provides access to change tracking information and operations for a given complex type
+    // property of this complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <typeparam name="TNestedComplexProperty">The type of the property.</typeparam>
     /// <param name="complexProperty">The property to access information and operations for.</param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual ComplexPropertyEntry<
         TEntity,
         TNestedComplexProperty
@@ -157,15 +180,18 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given property of this complex type.
+    ///     Provides access to change tracking information and operations for a given property of this
+    // complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <typeparam name="TProperty">The type of the property.</typeparam>
     /// <param name="propertyName">The property to access information and operations for.</param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual PropertyEntry<TEntity, TProperty> Property<TProperty>(string propertyName)
     {
         Check.NotEmpty(propertyName, nameof(propertyName));
@@ -179,15 +205,18 @@ public class ComplexPropertyEntry<TEntity, TComplexProperty> : ComplexPropertyEn
     }
 
     /// <summary>
-    ///     Provides access to change tracking information and operations for a given complex type property of this complex type.
+    ///     Provides access to change tracking information and operations for a given complex type
+    // property of this complex type.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <typeparam name="TNestedComplexProperty">The type of the property.</typeparam>
     /// <param name="propertyName">The property to access information and operations for.</param>
-    /// <returns>An object that exposes change tracking information and operations for the given property.</returns>
+    /// <returns>An object that exposes change tracking information and operations for the given
+    // property.</returns>
     public virtual ComplexPropertyEntry<
         TEntity,
         TNestedComplexProperty

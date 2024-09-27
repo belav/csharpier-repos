@@ -14,8 +14,10 @@ namespace System.Activities.Expressions
 
     public sealed class Divide<TLeft, TRight, TResult> : CodeActivity<TResult>
     {
-        //Lock is not needed for operationFunction here. The reason is that delegates for a given Divide<TLeft, TRight, TResult> are the same.
-        //It's possible that 2 threads are assigning the operationFucntion at the same time. But it's okay because the compiled codes are the same.
+        //Lock is not needed for operationFunction here. The reason is that delegates for a given
+        // Divide<TLeft, TRight, TResult> are the same.
+        //It's possible that 2 threads are assigning the operationFucntion at the same time. But it's okay
+        // because the compiled codes are the same.
         static Func<TLeft, TRight, TResult> operationFunction;
 
         [RequiredArgument]

@@ -905,7 +905,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="series">Data series</param>
         /// <param name="valuePosition">A value which should be found in data points x values</param>
         /// <param name="nonZeroXValues">Series X values are not zeros.</param>
-        /// <param name="indexedSeries">Series is indexed. All X values are zeros or IsXValueIndexed flag set.</param>
+        /// <param name="indexedSeries">Series is indexed. All X values are zeros or IsXValueIndexed flag
+        // set.</param>
         /// <returns>LabelStyle</returns>
         private string GetPointLabel(
             List<string> series,
@@ -1001,7 +1002,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="series">Data series</param>
         /// <param name="valuePosition">A value which should be found in data points x values</param>
         /// <param name="nonZeroXValues">Series X values are not zeros.</param>
-        /// <param name="indexedSeries">Series is indexed. All X values are zeros or IsXValueIndexed flag set.</param>
+        /// <param name="indexedSeries">Series is indexed. All X values are zeros or IsXValueIndexed flag
+        // set.</param>
         /// <returns>LabelStyle</returns>
         private string GetPointLabel(
             Series series,

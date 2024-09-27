@@ -125,7 +125,8 @@ namespace System.Collections.Tests
 
                 var provider = new CaseInsensitiveHashCodeProvider(culture);
 
-                // Turkish has lower-case and upper-case version of the dotted "i", so the upper case of "i" (U+0069) isn't "I" (U+0049)
+                // Turkish has lower-case and upper-case version of the dotted "i", so the upper case of "i"
+                // (U+0069) isn't "I" (U+0049)
                 // but rather U+0130.
                 Assert.Equal(
                     culture.Name != "tr-TR",
@@ -184,7 +185,8 @@ namespace System.Collections.Tests
         )]
         public void Default_Compare_TurkishI()
         {
-            // Turkish has lower-case and upper-case version of the dotted "i", so the upper case of "i" (U+0069) isn't "I" (U+0049)
+            // Turkish has lower-case and upper-case version of the dotted "i", so the upper case of "i"
+            // (U+0069) isn't "I" (U+0049)
             // but rather U+0130.
             using (new ThreadCultureChange("tr-TR"))
             {

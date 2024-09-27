@@ -21,7 +21,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 /// <summary>
-/// A <see cref="IActionResultExecutor{ViewComponentResult}"/> for <see cref="ViewComponentResult"/>.
+/// A <see cref="IActionResultExecutor{ViewComponentResult}"/> for <see
+// cref="ViewComponentResult"/>.
 /// </summary>
 public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewComponentResult>
 {
@@ -127,7 +128,8 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
 
         if (viewComponentResult is ViewBuffer viewBuffer)
         {
-            // In the ordinary case, DefaultViewComponentHelper will return an instance of ViewBuffer. We can simply
+            // In the ordinary case, DefaultViewComponentHelper will return an instance of ViewBuffer. We can
+            // simply
             // invoke WriteToAsync on it.
             await viewBuffer.WriteToAsync(writer, _htmlEncoder);
             await writer.FlushAsync();

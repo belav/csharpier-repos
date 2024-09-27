@@ -107,7 +107,7 @@ namespace System.Windows.Forms
             InternalBorderStyle = BorderStyle.Fixed3D;
             BackColor = ThemeEngine.Current.ColorControl;
 
-            /* Vertical scrollbar */
+/* Vertical scrollbar */
             vscrollbar = new ImplicitVScrollBar();
             vscrollbar.Minimum = 0;
             vscrollbar.SmallChange = 1;
@@ -116,7 +116,7 @@ namespace System.Windows.Forms
             vscrollbar.ValueChanged += new EventHandler(VerticalScrollEvent);
             vscrollbar.Visible = false;
 
-            /* Horizontal scrollbar */
+/* Horizontal scrollbar */
             hscrollbar = new ImplicitHScrollBar();
             hscrollbar.Minimum = 0;
             hscrollbar.SmallChange = 1;
@@ -128,7 +128,7 @@ namespace System.Windows.Forms
             Controls.AddImplicit(vscrollbar);
             Controls.AddImplicit(hscrollbar);
 
-            /* Events */
+/* Events */
             MouseDown += new MouseEventHandler(OnMouseDownLB);
             MouseMove += new MouseEventHandler(OnMouseMoveLB);
             MouseUp += new MouseEventHandler(OnMouseUpLB);
@@ -2415,7 +2415,7 @@ namespace System.Windows.Forms
             RepositionScrollBars();
         }
 
-        /* Determines if the horizontal scrollbar has to be displyed */
+/* Determines if the horizontal scrollbar has to be displyed */
         private bool UpdateHorizontalScrollBar()
         {
             bool show = false;
@@ -2455,7 +2455,7 @@ namespace System.Windows.Forms
             return show;
         }
 
-        /* Determines if the vertical scrollbar has to be displyed */
+/* Determines if the vertical scrollbar has to be displyed */
         private bool UpdateVerticalScrollBar()
         {
             if (MultiColumn || (Items.Count == 0 && !scroll_always_visible))

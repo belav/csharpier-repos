@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -153,8 +154,10 @@ namespace System.Web.Razor.Parser
         public static bool IsEmailPart(char character)
         {
             // Source: http://tools.ietf.org/html/rfc5322#section-3.4.1
-            // We restrict the allowed characters to alpha-numerics and '_' in order to ensure we cover most of the cases where an
-            // email address is intended without restricting the usage of code within JavaScript, CSS, and other contexts.
+            // We restrict the allowed characters to alpha-numerics and '_' in order to ensure we cover most of
+            // the cases where an
+            // email address is intended without restricting the usage of code within JavaScript, CSS, and other
+            // contexts.
             return Char.IsLetter(character) || Char.IsDigit(character) || character == '_';
         }
     }

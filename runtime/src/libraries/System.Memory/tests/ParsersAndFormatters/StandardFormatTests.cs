@@ -230,7 +230,8 @@ namespace System.Buffers.Text.Tests
         [Fact]
         public static void StandardFormatToStringOversizedPrecision()
         {
-            // Code coverage: Precision of 100 is not legal but ToString() isn't allowed to throw an exception for that.
+            // Code coverage: Precision of 100 is not legal but ToString() isn't allowed to throw an exception
+            // for that.
             // Make sure it doesn't.
 
             const byte BadPrecision = 100;

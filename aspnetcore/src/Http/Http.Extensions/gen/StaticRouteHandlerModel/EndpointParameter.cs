@@ -521,10 +521,14 @@ internal class EndpointParameter
     {
         var parameterType = typeSymbol.UnwrapTypeSymbol(unwrapArray: true, unwrapNullable: true);
 
-        // ParsabilityHelper returns a single enumeration with a Parsable/NonParsable enumeration result. We use this already
-        // in the analyzers to determine whether we need to warn on whether a type needs to implement TryParse/IParsable<T>. To
-        // support usage in the code generator an optional out parameter has been added to hint at what variant of the various
-        // TryParse methods should be used (this implies that the preferences are baked into ParsabilityHelper). If we aren't
+        // ParsabilityHelper returns a single enumeration with a Parsable/NonParsable enumeration result. We
+        // use this already
+        // in the analyzers to determine whether we need to warn on whether a type needs to implement
+        // TryParse/IParsable<T>. To
+        // support usage in the code generator an optional out parameter has been added to hint at what
+        // variant of the various
+        // TryParse methods should be used (this implies that the preferences are baked into
+        // ParsabilityHelper). If we aren't
         // parsable at all we bail.
         if (
             ParsabilityHelper.GetParsability(
@@ -538,8 +542,10 @@ internal class EndpointParameter
             return false;
         }
 
-        // If we are parsable we need to emit code based on the enumeration ParsabilityMethod which has a bunch of members
-        // which spell out the preferred TryParse usage. This switch statement makes slight variations to them based on
+        // If we are parsable we need to emit code based on the enumeration ParsabilityMethod which has a
+        // bunch of members
+        // which spell out the preferred TryParse usage. This switch statement makes slight variations to
+        // them based on
         // which method was encountered.
         Func<string, string, string>? preferredTryParseInvocation = parsabilityMethod switch
         {
@@ -918,6 +924,7 @@ internal class EndpointParameter
     }
 
     // Lifted from:
+    //
     // https://github.com/dotnet/runtime/blob/dc5a6c8be1644915c14c4a464447b0d54e223a46/src/libraries/Microsoft.Extensions.Logging.Abstractions/gen/LoggerMessageGenerator.Emitter.cs#L562
     private static string ConvertEndOfLineAndQuotationCharactersToEscapeForm(string s)
     {

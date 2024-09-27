@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis
                 return true;
             }
 
-            // the actual argument type doesn't match the type of the parameter - an error has already been reported by the binder
+            // the actual argument type doesn't match the type of the parameter - an error has already been
+            // reported by the binder
             value = default;
             return false;
         }

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -106,7 +107,8 @@ namespace System.Web.Http.WebHost.Routing
             }
 
             RouteData routeData = _routeCollection.GetRouteData(httpContextBase);
-            // If the match is from an IgnoreRoute, do not return a RouteData but return a null, which will be treated as a 404 NoRouteMatched.
+            // If the match is from an IgnoreRoute, do not return a RouteData but return a null, which will be
+            // treated as a 404 NoRouteMatched.
             if (
                 routeData != null
                 && !(routeData.RouteHandler is System.Web.Routing.StopRoutingHandler)
@@ -161,8 +163,10 @@ namespace System.Web.Http.WebHost.Routing
 
             if (virtualPathData != null)
             {
-                // If the route is not an HttpWebRoute, try getting a virtual path without the httproute key in the route value dictionary
-                // This ensures that httproute isn't picked up by non-WebAPI routes that might pollute the virtual path with httproute
+                // If the route is not an HttpWebRoute, try getting a virtual path without the httproute key in the
+                // route value dictionary
+                // This ensures that httproute isn't picked up by non-WebAPI routes that might pollute the virtual
+                // path with httproute
                 if (!(virtualPathData.Route is HttpWebRoute))
                 {
                     if (routeValues.Remove(HttpWebRoute.HttpRouteKey))
@@ -209,7 +213,8 @@ namespace System.Web.Http.WebHost.Routing
             object constraint
         )
         {
-            // In WebHost the constraint might be IHttpRouteConstraint or IRouteConstraint (System.Web) or a string
+            // In WebHost the constraint might be IHttpRouteConstraint or IRouteConstraint (System.Web) or a
+            // string
             HttpWebRoute.ValidateConstraint(routeTemplate, name, constraint);
         }
 

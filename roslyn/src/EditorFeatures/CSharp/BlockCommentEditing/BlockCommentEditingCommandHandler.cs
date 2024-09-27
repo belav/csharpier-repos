@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
 
         private static Span GetReplacementSpan(SnapshotPoint caretPosition)
         {
-            // We want to replace all the whitespace following the caret.  This is standard <enter> behavior in VS that
+            // We want to replace all the whitespace following the caret.  This is standard <enter> behavior in
+            // VS that
             // we want to mimic.
             var snapshot = caretPosition.Snapshot;
             var start = caretPosition.Position;
@@ -129,10 +130,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
             if (firstNonWhitespacePosition == -1)
                 return null;
 
-            // Do quick textual checks to see if it looks like we're inside a comment. That way we only do the expensive
+            // Do quick textual checks to see if it looks like we're inside a comment. That way we only do the
+            // expensive
             // syntactic work when necessary.
             //
-            // The line either has to contain `/*` or it has to start with `*`.  The former looks like we're starting a
+            // The line either has to contain `/*` or it has to start with `*`.  The former looks like we're
+            // starting a
             // comment in this line.  The latter looks like the continuation of a block comment.
             var containsBlockCommentStartString = currentLine.Contains(
                 firstNonWhitespacePosition,
@@ -165,7 +168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.BlockCommentEditing
 
             var textSnapshot = caretPosition.Snapshot;
 
-            // Now that we've found the real start of the comment, ensure that it's accurate with our quick textual check.
+            // Now that we've found the real start of the comment, ensure that it's accurate with our quick
+            // textual check.
             containsBlockCommentStartString =
                 currentLine.LineNumber
                 == textSnapshot.GetLineFromPosition(blockComment.FullSpan.Start).LineNumber;

@@ -150,7 +150,8 @@ namespace Microsoft.Cci
 
         /// <summary>
         /// NetModules and EnC deltas don't have AssemblyDef record.
-        /// We don't emit it for EnC deltas since assembly identity has to be preserved across generations (CLR/debugger get confused otherwise).
+        /// We don't emit it for EnC deltas since assembly identity has to be preserved across generations
+        // (CLR/debugger get confused otherwise).
         /// </summary>
         private bool EmitAssemblyDefinition =>
             module.OutputKind != OutputKind.NetModule && !IsMinimalDelta;
@@ -310,14 +311,18 @@ namespace Microsoft.Cci
         /// </summary>
         protected abstract IReadOnlyList<AssemblyIdentity> GetAssemblyRefs();
 
-        // ModuleRef table contains module names for TypeRefs that target types in netmodules (represented by IModuleReference),
-        // and module names specified by P/Invokes (plain strings). Names in the table must be unique and are case sensitive.
+        // ModuleRef table contains module names for TypeRefs that target types in netmodules (represented
+        // by IModuleReference),
+        // and module names specified by P/Invokes (plain strings). Names in the table must be unique and
+        // are case sensitive.
         //
         // Spec 22.31 (ModuleRef : 0x1A)
-        // "Name should match an entry in the Name column of the File table. Moreover, that entry shall enable the
+        // "Name should match an entry in the Name column of the File table. Moreover, that entry shall
+        // enable the
         // CLI to locate the target module (typically it might name the file used to hold the module)"
         //
-        // This is not how the Dev10 compilers and ILASM work. An entry is added to File table only for resources and netmodules.
+        // This is not how the Dev10 compilers and ILASM work. An entry is added to File table only for
+        // resources and netmodules.
         // Entries aren't added for P/Invoked modules.
 
         /// <summary>
@@ -463,7 +468,8 @@ namespace Microsoft.Cci
 
         protected readonly MetadataBuilder metadata;
 
-        // A builder for Portable or Embedded PDB metadata, or null if we are not emitting Portable/Embedded PDB.
+        // A builder for Portable or Embedded PDB metadata, or null if we are not emitting Portable/Embedded
+        // PDB.
         protected readonly MetadataBuilder _debugMetadataOpt;
 
         internal bool EmitPortableDebugMetadata => _debugMetadataOpt != null;
@@ -479,7 +485,8 @@ namespace Microsoft.Cci
         private readonly Dictionary<IFieldReference, BlobHandle> _fieldSignatureIndex =
             new Dictionary<IFieldReference, BlobHandle>(ReferenceEqualityComparer.Instance);
 
-        // We need to keep track of both the index of the signature and the actual blob to support VB static local naming scheme.
+        // We need to keep track of both the index of the signature and the actual blob to support VB static
+        // local naming scheme.
         private readonly Dictionary<
             ISignature,
             KeyValuePair<BlobHandle, ImmutableArray<byte>>
@@ -499,7 +506,8 @@ namespace Microsoft.Cci
             BlobHandle
         >(ReferenceEqualityComparer.Instance);
 
-        // Well known dummy cor library types whose refs are used for attaching assembly attributes off within net modules
+        // Well known dummy cor library types whose refs are used for attaching assembly attributes off
+        // within net modules
         // There is no guarantee the types actually exist in a cor library
         internal const string dummyAssemblyAttributeParentNamespace =
             "System.Runtime.CompilerServices";
@@ -725,7 +733,8 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// Returns a reference to the unit that defines the given referenced type. If the referenced type is a structural type, such as a pointer or a generic type instance,
+        /// Returns a reference to the unit that defines the given referenced type. If the referenced type
+        // is a structural type, such as a pointer or a generic type instance,
         /// then the result is null.
         /// </summary>
         public static IUnitReference GetDefiningUnitReference(
@@ -1537,8 +1546,10 @@ namespace Microsoft.Cci
         /// implementation).  Note that the namespace name of a nested type is always blank
         /// (since comes from the container).
         /// </summary>
-        /// <param name="namespaceType">We're trying to add the containing namespace of this type to the string heap.</param>
-        /// <param name="mangledTypeName">Namespace names are never used on their own - this is the type that is adding the namespace name.
+        /// <param name="namespaceType">We're trying to add the containing namespace of this type to the
+        // string heap.</param>
+        /// <param name="mangledTypeName">Namespace names are never used on their own - this is the type
+        // that is adding the namespace name.
         /// Used only for length checking.</param>
         private StringHandle GetStringHandleForNamespaceAndCheckLength(
             INamespaceTypeReference namespaceType,
@@ -1557,8 +1568,10 @@ namespace Microsoft.Cci
 
         private void CheckNameLength(string name, INamedEntity errorEntity)
         {
-            // NOTE: ildasm shows quotes around some names (e.g. explicit implementations of members of generic interfaces)
-            // but that seems to be tool-specific - they don't seem to and up in the string heap (so they don't count against
+            // NOTE: ildasm shows quotes around some names (e.g. explicit implementations of members of generic
+            // interfaces)
+            // but that seems to be tool-specific - they don't seem to and up in the string heap (so they don't
+            // count against
             // the length limit).
 
             if (IsTooLongInternal(name, NameLengthLimit))
@@ -2268,7 +2281,8 @@ namespace Microsoft.Cci
             this.PopulateTypeSpecTableRows();
             this.PopulateStandaloneSignatures();
 
-            // This table is populated after the others because it depends on the order of the entries of the generic parameter table.
+            // This table is populated after the others because it depends on the order of the entries of the
+            // generic parameter table.
             this.PopulateCustomAttributeTableRows(sortedGenericParameters);
         }
 
@@ -2354,10 +2368,14 @@ namespace Microsoft.Cci
             bool writingNetModule = module.OutputKind == OutputKind.NetModule;
             if (writingNetModule)
             {
-                // When writing netmodules, assembly security attributes are not emitted by PopulateDeclSecurityTableRows().
-                // Instead, here we make sure they are emitted as regular attributes, attached off the appropriate placeholder
-                // System.Runtime.CompilerServices.AssemblyAttributesGoHere* type refs.  This is the contract for publishing
-                // assembly attributes in netmodules so they may be migrated to containing/referencing multi-module assemblies,
+                // When writing netmodules, assembly security attributes are not emitted by
+                // PopulateDeclSecurityTableRows().
+                // Instead, here we make sure they are emitted as regular attributes, attached off the appropriate
+                // placeholder
+                // System.Runtime.CompilerServices.AssemblyAttributesGoHere* type refs.  This is the contract for
+                // publishing
+                // assembly attributes in netmodules so they may be migrated to containing/referencing multi-module
+                // assemblies,
                 // at multi-module assembly build time.
                 AddAssemblyAttributesToTable(
                     this.module.GetSourceAssemblySecurityAttributes().Select(sa => sa.Attribute),
@@ -2386,8 +2404,10 @@ namespace Microsoft.Cci
                 if (needsDummyParent)
                 {
                     // When writing netmodules, assembly attributes are attached off the appropriate placeholder
-                    // System.Runtime.CompilerServices.AssemblyAttributesGoHere* type refs.  This is the contract for publishing
-                    // assembly attributes in netmodules so they may be migrated to containing/referencing multi-module assemblies,
+                    // System.Runtime.CompilerServices.AssemblyAttributesGoHere* type refs.  This is the contract for
+                    // publishing
+                    // assembly attributes in netmodules so they may be migrated to containing/referencing multi-module
+                    // assemblies,
                     // at multi-module assembly build time.
                     parentHandle = GetDummyAssemblyAttributeParent(
                         isSecurity,
@@ -2405,8 +2425,10 @@ namespace Microsoft.Cci
         )
         {
             // Lazily get or create placeholder assembly attribute parent type ref for the given combination of
-            // whether isSecurity and allowMultiple.  Convert type ref row id to corresponding attribute parent tag.
-            // Note that according to the defacto contract, although the placeholder type refs have CorLibrary as their
+            // whether isSecurity and allowMultiple.  Convert type ref row id to corresponding attribute parent
+            // tag.
+            // Note that according to the defacto contract, although the placeholder type refs have CorLibrary
+            // as their
             // resolution scope, the types backing the placeholder type refs need not actually exist.
             int iS = isSecurity ? 1 : 0;
             int iM = allowMultiple ? 1 : 0;
@@ -2745,7 +2767,8 @@ namespace Microsoft.Cci
                     continue;
                 }
 
-                // The compiler always aligns each RVA data field to an 8-byte boundary; this accomodates the alignment
+                // The compiler always aligns each RVA data field to an 8-byte boundary; this accomodates the
+                // alignment
                 // needs for all primitive types, regardless of which type is actually being used, at the expense of
                 // potentially wasting up to 7 bytes per field if the alignment needs are less. In the future, this
                 // potentially could be tightened to align each field only as much as is actually required by that
@@ -2858,8 +2881,10 @@ namespace Microsoft.Cci
         {
             foreach (IGenericParameter genericParameter in sortedGenericParameters)
             {
-                // CONSIDER: The CLI spec doesn't mention a restriction on the Name column of the GenericParam table,
-                // but they go in the same string heap as all the other declaration names, so it stands to reason that
+                // CONSIDER: The CLI spec doesn't mention a restriction on the Name column of the GenericParam
+                // table,
+                // but they go in the same string heap as all the other declaration names, so it stands to reason
+                // that
                 // they should be restricted in the same way.
                 var genericParameterHandle = metadata.AddGenericParameter(
                     parent: GetDeclaringTypeOrMethodHandle(genericParameter),
@@ -2952,7 +2977,8 @@ namespace Microsoft.Cci
                 }
                 else
                 {
-                    // This is an embedded resource, we don't support references to resources from referenced assemblies.
+                    // This is an embedded resource, we don't support references to resources from referenced
+                    // assemblies.
                     implementation = default(EntityHandle);
                 }
 
@@ -3280,7 +3306,8 @@ namespace Microsoft.Cci
 
                     resolutionScope = GetTypeReferenceHandle(scopeTypeRef);
 
-                    // It's not possible to reference newer versions of reloadable types from another assembly, hence generation 0:
+                    // It's not possible to reference newer versions of reloadable types from another assembly, hence
+                    // generation 0:
                     // TODO: https://github.com/dotnet/roslyn/issues/54981
                     string metadataTypeName = GetMetadataName(nestedTypeRef, generation: 0);
 
@@ -3302,7 +3329,8 @@ namespace Microsoft.Cci
                         namespaceTypeRef.GetUnit(Context)
                     );
 
-                    // It's not possible to reference newer versions of reloadable types from another assembly, hence generation 0:
+                    // It's not possible to reference newer versions of reloadable types from another assembly, hence
+                    // generation 0:
                     // TODO: https://github.com/dotnet/roslyn/issues/54981
                     string metadataTypeName = GetMetadataName(namespaceTypeRef, generation: 0);
 
@@ -3411,7 +3439,8 @@ namespace Microsoft.Cci
 
                     localSignatureHandleOpt = this.SerializeLocalVariablesSignature(body);
 
-                    // TODO: consider parallelizing these (local signature tokens can be piped into IL serialization & debug info generation)
+                    // TODO: consider parallelizing these (local signature tokens can be piped into IL serialization &
+                    // debug info generation)
                     bodyOffset = SerializeMethodBody(
                         encoder,
                         body,
@@ -3436,7 +3465,8 @@ namespace Microsoft.Cci
 
                 if (_debugMetadataOpt != null)
                 {
-                    // methodRid is based on this delta but for async state machine debug info we need the "real" row number
+                    // methodRid is based on this delta but for async state machine debug info we need the "real" row
+                    // number
                     // of the method aggregated across generations
                     var aggregateMethodRid = MetadataTokens.GetRowNumber(
                         GetMethodDefinitionHandle(method)
@@ -3726,7 +3756,8 @@ namespace Microsoft.Cci
             DocumentRowId,
 
             /// <summary>
-            /// Emit ldc.i4 of row id of the hoisted local variable or parameter field that the pseudo-token represents,
+            /// Emit ldc.i4 of row id of the hoisted local variable or parameter field that the pseudo-token
+            // represents,
             /// increased by <see cref="LiftedVariableBaseIndex"/>.
             /// </summary>
             LiftedVariableId,
@@ -3854,7 +3885,8 @@ namespace Microsoft.Cci
                         {
                             // The pseudotoken encoding indicates that the string should refer to a textual encoding of the
                             // current module's module version ID (such that the MVID can be realized using Guid.Parse).
-                            // The value cannot be determined until very late in the compilation, so reserve a slot for it now and fill in the value later.
+                            // The value cannot be determined until very late in the compilation, so reserve a slot for it now
+                            // and fill in the value later.
                             if (mvidStringHandle.IsNil)
                             {
                                 const int guidStringLength = 36;
@@ -3994,7 +4026,8 @@ namespace Microsoft.Cci
                 fieldReference.RefCustomModifiers.Length == 0 || fieldReference.IsByReference
             );
 
-            // https://github.com/dotnet/roslyn/issues/61385: Use System.Reflection.Metadata.Ecma335.FieldTypeEncoder
+            // https://github.com/dotnet/roslyn/issues/61385: Use
+            // System.Reflection.Metadata.Ecma335.FieldTypeEncoder
             // instead, since that type supports ref fields directly.
             var typeEncoder = new BlobEncoder(builder).FieldSignature();
             SerializeCustomModifiers(
@@ -4159,8 +4192,10 @@ namespace Microsoft.Cci
                 {
                     vectorEncoder = encoder.Vector();
 
-                    // In FixedArg the element type of the parameter array has to match the element type of the argument array,
-                    // but in NamedArg T[] can be assigned to object[]. In that case we need to encode the arguments using
+                    // In FixedArg the element type of the parameter array has to match the element type of the argument
+                    // array,
+                    // but in NamedArg T[] can be assigned to object[]. In that case we need to encode the arguments
+                    // using
                     // the parameter element type not the argument element type.
                     targetElementType = targetArrayType.GetElementType(this.Context);
                 }
@@ -4734,7 +4769,8 @@ namespace Microsoft.Cci
             IArrayTypeReference arrayTypeReference
         )
         {
-            // A single-dimensional, zero-based array is specified as a single byte 0x1D followed by the FieldOrPropType of the element type.
+            // A single-dimensional, zero-based array is specified as a single byte 0x1D followed by the
+            // FieldOrPropType of the element type.
 
             // only non-jagged SZ arrays are allowed in attributes
             // (need to encode the type of the SZ array if the parameter type is Object):
@@ -4761,8 +4797,10 @@ namespace Microsoft.Cci
         {
             // Spec:
             // The FieldOrPropType shall be exactly one of:
-            // ELEMENT_TYPE_BOOLEAN, ELEMENT_TYPE_CHAR, ELEMENT_TYPE_I1, ELEMENT_TYPE_U1, ELEMENT_TYPE_I2, ELEMENT_TYPE_U2, ELEMENT_TYPE_I4,
-            // ELEMENT_TYPE_U4, ELEMENT_TYPE_I8, ELEMENT_TYPE_U8, ELEMENT_TYPE_R4, ELEMENT_TYPE_R8, ELEMENT_TYPE_STRING.
+            // ELEMENT_TYPE_BOOLEAN, ELEMENT_TYPE_CHAR, ELEMENT_TYPE_I1, ELEMENT_TYPE_U1, ELEMENT_TYPE_I2,
+            // ELEMENT_TYPE_U2, ELEMENT_TYPE_I4,
+            // ELEMENT_TYPE_U4, ELEMENT_TYPE_I8, ELEMENT_TYPE_U8, ELEMENT_TYPE_R4, ELEMENT_TYPE_R8,
+            // ELEMENT_TYPE_STRING.
             // An enum is specified as a single byte 0x55 followed by a SerString.
 
             var primitiveType = typeReference.TypeCode;
@@ -4895,7 +4933,8 @@ namespace Microsoft.Cci
             ImmutableArray<LocalSlotDebugInfo> encLocalSlots;
 
             // Kickoff method of a state machine (async/iterator method) doesn't have any interesting locals,
-            // so we use its EnC method debug info to store information about locals hoisted to the state machine.
+            // so we use its EnC method debug info to store information about locals hoisted to the state
+            // machine.
             var encSlotInfo = methodBody.StateMachineHoistedLocalSlots;
             if (encSlotInfo.IsDefault)
             {

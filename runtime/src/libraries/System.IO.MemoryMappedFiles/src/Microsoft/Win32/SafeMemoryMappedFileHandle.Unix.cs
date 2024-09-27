@@ -13,7 +13,8 @@ namespace Microsoft.Win32.SafeHandles
         /// <summary>File handle.</summary>
         internal SafeFileHandle? _fileStreamHandle;
 
-        /// <summary>Whether this instance owns the _fileStreamHandle and should Dispose it when disposed.</summary>
+        /// <summary>Whether this instance owns the _fileStreamHandle and should Dispose it when
+        // disposed.</summary>
         internal readonly bool _ownsFileHandle;
 
         /// <summary>The inheritability of the memory-mapped file.</summary>
@@ -30,7 +31,8 @@ namespace Microsoft.Win32.SafeHandles
 
         /// <summary>Initializes the memory-mapped file handle.</summary>
         /// <param name="fileHandle">The underlying file handle; may be null.</param>
-        /// <param name="ownsFileHandle">Whether this SafeHandle is responsible for Disposing the fileStream.</param>
+        /// <param name="ownsFileHandle">Whether this SafeHandle is responsible for Disposing the
+        // fileStream.</param>
         /// <param name="inheritability">The inheritability of the memory-mapped file.</param>
         /// <param name="access">The access for the memory-mapped file.</param>
         /// <param name="options">The options for the memory-mapped file.</param>
@@ -82,7 +84,8 @@ namespace Microsoft.Win32.SafeHandles
 
                 if (_ownsFileHandle)
                 {
-                    // Clean up the file descriptor (either for a file on disk or a shared memory object) if we created it
+                    // Clean up the file descriptor (either for a file on disk or a shared memory object) if we created
+                    // it
                     _fileStreamHandle.Dispose();
                 }
 

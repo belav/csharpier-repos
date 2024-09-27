@@ -77,7 +77,8 @@ namespace System.Collections.Generic
             {
                 _comparer = comparer ?? EqualityComparer<TKey>.Default;
 
-                // Special-case EqualityComparer<string>.Default, StringComparer.Ordinal, and StringComparer.OrdinalIgnoreCase.
+                // Special-case EqualityComparer<string>.Default, StringComparer.Ordinal, and
+                // StringComparer.OrdinalIgnoreCase.
                 // We use a non-randomized comparer for improved perf, falling back to a randomized comparer if the
                 // hash buckets become unbalanced.
                 if (
@@ -147,7 +148,8 @@ namespace System.Collections.Generic
                 }
 
                 // This is not currently a true .AddRange as it needs to be an initialized dictionary
-                // of the correct size, and also an empty dictionary with no current entities (and no argument checks).
+                // of the correct size, and also an empty dictionary with no current entities (and no argument
+                // checks).
                 Debug.Assert(source._entries is not null);
                 Debug.Assert(_entries is not null);
                 Debug.Assert(_entries.Length >= source.Count);
@@ -174,8 +176,10 @@ namespace System.Collections.Generic
                 return;
             }
 
-            // We similarly special-case KVP<>[] and List<KVP<>>, as they're commonly used to seed dictionaries, and
-            // we want to avoid the enumerator costs (e.g. allocation) for them as well. Extract a span if possible.
+            // We similarly special-case KVP<>[] and List<KVP<>>, as they're commonly used to seed dictionaries,
+            // and
+            // we want to avoid the enumerator costs (e.g. allocation) for them as well. Extract a span if
+            // possible.
             ReadOnlySpan<KeyValuePair<TKey, TValue>> span;
             if (enumerable is KeyValuePair<TKey, TValue>[] array)
             {
@@ -551,7 +555,8 @@ namespace System.Collections.Generic
             int[] buckets = new int[size];
             Entry[] entries = new Entry[size];
 
-            // Assign member variables after both arrays allocated to guard against corruption from OOM if second fails
+            // Assign member variables after both arrays allocated to guard against corruption from OOM if
+            // second fails
             _freeList = -1;
 #if TARGET_64BIT
             _fastModMultiplier = HashHelpers.GetFastModMultiplier((uint)size);
@@ -718,7 +723,8 @@ namespace System.Collections.Generic
                 && comparer is NonRandomizedStringEqualityComparer
             )
             {
-                // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
+                // If we hit the collision threshold we'll need to switch to the comparer which is using randomized
+                // string hashing
                 // i.e. EqualityComparer<string>.Default.
                 Resize(entries.Length, true);
             }
@@ -728,12 +734,15 @@ namespace System.Collections.Generic
 
         /// <summary>
         /// A helper class containing APIs exposed through <see cref="CollectionsMarshal"/>.
-        /// These methods are relatively niche and only used in specific scenarios, so adding them in a separate type avoids
-        /// the additional overhead on each <see cref="Dictionary{TKey, TValue}"/> instantiation, especially in AOT scenarios.
+        /// These methods are relatively niche and only used in specific scenarios, so adding them in a
+        // separate type avoids
+        /// the additional overhead on each <see cref="Dictionary{TKey, TValue}"/> instantiation, especially
+        // in AOT scenarios.
         /// </summary>
         internal static class CollectionsMarshalHelper
         {
-            /// <inheritdoc cref="CollectionsMarshal.GetValueRefOrAddDefault{TKey, TValue}(Dictionary{TKey, TValue}, TKey, out bool)"/>
+            /// <inheritdoc cref="CollectionsMarshal.GetValueRefOrAddDefault{TKey, TValue}(Dictionary{TKey,
+            // TValue}, TKey, out bool)"/>
             public static ref TValue? GetValueRefOrAddDefault(
                 Dictionary<TKey, TValue> dictionary,
                 TKey key,
@@ -876,15 +885,19 @@ namespace System.Collections.Generic
                     && comparer is NonRandomizedStringEqualityComparer
                 )
                 {
-                    // If we hit the collision threshold we'll need to switch to the comparer which is using randomized string hashing
+                    // If we hit the collision threshold we'll need to switch to the comparer which is using randomized
+                    // string hashing
                     // i.e. EqualityComparer<string>.Default.
                     dictionary.Resize(entries.Length, true);
 
                     exists = false;
 
-                    // At this point the entries array has been resized, so the current reference we have is no longer valid.
-                    // We're forced to do a new lookup and return an updated reference to the new entry instance. This new
-                    // lookup is guaranteed to always find a value though and it will never return a null reference here.
+                    // At this point the entries array has been resized, so the current reference we have is no longer
+                    // valid.
+                    // We're forced to do a new lookup and return an updated reference to the new entry instance. This
+                    // new
+                    // lookup is guaranteed to always find a value though and it will never return a null reference
+                    // here.
                     ref TValue? value = ref dictionary.FindValue(key)!;
 
                     Debug.Assert(
@@ -985,7 +998,8 @@ namespace System.Collections.Generic
                 }
             }
 
-            // Assign member variables after both arrays allocated to guard against corruption from OOM if second fails
+            // Assign member variables after both arrays allocated to guard against corruption from OOM if
+            // second fails
             _buckets = new int[newSize];
 #if TARGET_64BIT
             _fastModMultiplier = HashHelpers.GetFastModMultiplier((uint)newSize);
@@ -1280,7 +1294,8 @@ namespace System.Collections.Generic
             ((IEnumerable<KeyValuePair<TKey, TValue>>)this).GetEnumerator();
 
         /// <summary>
-        /// Ensures that the dictionary can hold up to 'capacity' entries without any further expansion of its backing storage
+        /// Ensures that the dictionary can hold up to 'capacity' entries without any further expansion of
+        // its backing storage
         /// </summary>
         public int EnsureCapacity(int capacity)
         {
@@ -1308,7 +1323,8 @@ namespace System.Collections.Generic
         }
 
         /// <summary>
-        /// Sets the capacity of this dictionary to what it would be if it had been originally initialized with all its entries
+        /// Sets the capacity of this dictionary to what it would be if it had been originally initialized
+        // with all its entries
         /// </summary>
         /// <remarks>
         /// This method can be used to minimize the memory overhead
@@ -1322,13 +1338,15 @@ namespace System.Collections.Generic
         public void TrimExcess() => TrimExcess(Count);
 
         /// <summary>
-        /// Sets the capacity of this dictionary to hold up 'capacity' entries without any further expansion of its backing storage
+        /// Sets the capacity of this dictionary to hold up 'capacity' entries without any further expansion
+        // of its backing storage
         /// </summary>
         /// <remarks>
         /// This method can be used to minimize the memory overhead
         /// once it is known that no new elements will be added.
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than entries count.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than entries
+        // count.</exception>
         public void TrimExcess(int capacity)
         {
             if (capacity < Count)
@@ -1510,8 +1528,10 @@ namespace System.Collections.Generic
 
             /// <summary>
             /// 0-based index of next entry in chain: -1 means end of chain
-            /// also encodes whether this entry _itself_ is part of the free list by changing sign and subtracting 3,
-            /// so -2 means end of free list, -3 means index 0 but on free list, -4 means index 1 but on free list, etc.
+            /// also encodes whether this entry _itself_ is part of the free list by changing sign and
+            // subtracting 3,
+            /// so -2 means end of free list, -3 means index 0 but on free list, -4 means index 1 but on free
+            // list, etc.
             /// </summary>
             public int next;
             public TKey key; // Key of entry

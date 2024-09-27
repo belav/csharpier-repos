@@ -29,7 +29,8 @@
 namespace System.Diagnostics
 {
     //
-    // The type is renamed to DebugInternal in the post processing to avoid conficts in IVT assemblies. The proper
+    // The type is renamed to DebugInternal in the post processing to avoid conficts in IVT assemblies.
+    // The proper
     // solution is to have support for IVT for members
     //
     static class Debug

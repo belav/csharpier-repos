@@ -159,7 +159,8 @@ namespace System.Activities.DynamicUpdate
                     if (entry.ImplementationUpdateMap == null)
                     {
                         // if a reference childActivity were newly added,
-                        // then we must have had a complete map chain from rootMap to the implementation map for the IdSpace the childActivity is declared in.
+                        // then we must have had a complete map chain from rootMap to the implementation map for the IdSpace
+                        // the childActivity is declared in.
                         return false;
                     }
 

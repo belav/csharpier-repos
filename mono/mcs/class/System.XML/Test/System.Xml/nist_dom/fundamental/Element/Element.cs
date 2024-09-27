@@ -24,21 +24,21 @@ namespace nist_dom.fundamental
     {
         public static int i = 2;
 
-        /*
-                public testResults[] RunTests()
-                {
-                    testResults[] tests = new testResults[] {core0001E(), core0002E(), core0003E(),core0004E(),
-                                                                core0005E(), core0006E(), core0007E(), core0008E(),
-                                                                core0009E(), core0010E(), core0011E(), core0012E(),
-                                                                core0013E(), core0014E(), core0015E(), core0016E(),
-                                                                core0017E(), core0018E(), core0019E(), core0020E(),
-                                                                core0021E(), core0022E(), core0023E(), core0024E(),
-                                                                core0025E(), core0026E(), core0027E(), core0028E(),
-                                                                core0029E(), core0030E()};
-          
-                    return tests;
-                }
-        */
+/*
+public testResults[] RunTests()
+{
+testResults[] tests = new testResults[] {core0001E(), core0002E(), core0003E(),core0004E(),
+core0005E(), core0006E(), core0007E(), core0008E(),
+core0009E(), core0010E(), core0011E(), core0012E(),
+core0013E(), core0014E(), core0015E(), core0016E(),
+core0017E(), core0018E(), core0019E(), core0020E(),
+core0021E(), core0022E(), core0023E(), core0024E(),
+core0025E(), core0026E(), core0027E(), core0028E(),
+core0029E(), core0030E()};
+
+return tests;
+}
+*/
         //------------------------ test case core-0001E ------------------------
         //
         // Testing feature - Elements may have attributes associated with them.

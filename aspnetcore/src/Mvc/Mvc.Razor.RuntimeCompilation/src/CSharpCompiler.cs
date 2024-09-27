@@ -135,7 +135,8 @@ internal class CSharpCompiler
         }
         else
         {
-            // Based on https://github.com/dotnet/roslyn/blob/1d28ff9ba248b332de3c84d23194a1d7bde07e4d/src/Compilers/CSharp/Portable/CommandLine/CSharpCommandLineParser.cs#L624-L640
+            // Based on
+            // https://github.com/dotnet/roslyn/blob/1d28ff9ba248b332de3c84d23194a1d7bde07e4d/src/Compilers/CSharp/Portable/CommandLine/CSharpCommandLineParser.cs#L624-L640
             switch (dependencyContextOptions.DebugType.ToLowerInvariant())
             {
                 case "none":
@@ -240,7 +241,8 @@ internal class CSharpCompiler
 
         if (string.IsNullOrEmpty(dependencyContextOptions.LanguageVersion))
         {
-            // If the user does not specify a LanguageVersion, assume CSharp 8.0. This matches the language version Razor 3.0 targets by default.
+            // If the user does not specify a LanguageVersion, assume CSharp 8.0. This matches the language
+            // version Razor 3.0 targets by default.
             parseOptions = parseOptions.WithLanguageVersion(LanguageVersion.CSharp8);
         }
         else if (

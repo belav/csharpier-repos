@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
 
         /// <summary>
         /// Only return this service as valid when we're starting an interpolated string.
-        /// Otherwise double quotes should be completed using the <see cref="StringLiteralBraceCompletionService"/>
+        /// Otherwise double quotes should be completed using the <see
+        // cref="StringLiteralBraceCompletionService"/>
         /// </summary>
         public override bool CanProvideBraceCompletion(
             char brace,
@@ -62,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
         ) => IsValidOpeningBraceToken(token) && token.Span.End - 1 == position;
 
         /// <summary>
-        /// Returns true when the input position could be starting an interpolated string if opening quotes were typed.
+        /// Returns true when the input position could be starting an interpolated string if opening quotes
+        // were typed.
         /// </summary>
         public static bool IsPositionInInterpolatedStringContext(
             ParsedDocument document,
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 return false;
 
             // Check if the user is typing an interpolated or interpolated verbatim string.
-            // If the preceding character(s) are not '$' or '$@' then we can't be starting an interpolated string.
+            // If the preceding character(s) are not '$' or '$@' then we can't be starting an interpolated
+            // string.
             if (text[start] == '@')
             {
                 if (--start < 0)

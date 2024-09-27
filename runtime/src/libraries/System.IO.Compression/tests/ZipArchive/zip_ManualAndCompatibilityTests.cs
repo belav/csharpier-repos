@@ -68,11 +68,14 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// This test ensures that a zipfile created on one platform with a file containing potentially invalid characters elsewhere
+        /// This test ensures that a zipfile created on one platform with a file containing potentially
+        // invalid characters elsewhere
         /// will be interpreted based on the source OS path name validation rules.
         ///
-        /// For example, the file "aa\bb\cc\dd" in a zip created on Unix should be one file "aa\bb\cc\dd" whereas the same file
-        /// in a zip created on Windows should be interpreted as the file "dd" underneath three subdirectories.
+        /// For example, the file "aa\bb\cc\dd" in a zip created on Unix should be one file "aa\bb\cc\dd"
+        // whereas the same file
+        /// in a zip created on Windows should be interpreted as the file "dd" underneath three
+        // subdirectories.
         /// </summary>
         [ConditionalTheory(nameof(IsUsingNewPathNormalization))]
         [InlineData("backslashes_FromUnix.zip", "aa\\bb\\cc\\dd")]
@@ -96,11 +99,13 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// This test compares binary content of a zip produced by the current version with a zip produced by
+        /// This test compares binary content of a zip produced by the current version with a zip produced
+        // by
         /// other frameworks. It does this by searching the two zips for the header signature and then
         /// it compares the subsequent header values for equality.
         ///
-        /// This test looks for the local file headers that each entry within a zip possesses and compares these
+        /// This test looks for the local file headers that each entry within a zip possesses and compares
+        // these
         /// values:
         /// local file header signature     4 bytes  (0x04034b50)
         /// version needed to extract       2 bytes
@@ -172,11 +177,13 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// This test compares binary content of a zip produced by the current version with a zip produced by
+        /// This test compares binary content of a zip produced by the current version with a zip produced
+        // by
         /// other frameworks. It does this by searching the two zips for the header signature and then
         /// it compares the subsequent header values for equality.
         ///
-        /// This test looks for the central directory headers that each entry within a zip possesses and compares these
+        /// This test looks for the central directory headers that each entry within a zip possesses and
+        // compares these
         /// values:
         /// central file header signature   4 bytes  (0x02014b50)
         /// version made by                 2 bytes
@@ -252,7 +259,8 @@ namespace System.IO.Compression.Tests
         }
 
         /// <summary>
-        /// Simple helper method to search <paramref name="bytesToSearch"/> for the exact byte sequence specified by
+        /// Simple helper method to search <paramref name="bytesToSearch"/> for the exact byte sequence
+        // specified by
         /// <paramref name="sequenceToFind"/>, starting at <paramref name="startIndex"/>.
         /// </summary>
         /// <returns>The first index of the first element in the matching sequence</returns>

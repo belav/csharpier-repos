@@ -19,10 +19,12 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         {
             OptionsBuilder<FakeOptions>? optionsBuilder = CreateOptionsBuilder();
 
-            // Newline between instance and invocation using configureBinder argument (with the dot on the first line)
+            // Newline between instance and invocation using configureBinder argument (with the dot on the first
+            // line)
             optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
 
-            // Newline between instance and invocation using configureBinder argument (with the dot on the second line)
+            // Newline between instance and invocation using configureBinder argument (with the dot on the
+            // second line)
             optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
 
             // Newline between instance and invocation (with the dot on the first line)
@@ -40,13 +42,16 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
         {
             OptionsBuilder<FakeOptions>? optionsBuilder = CreateOptionsBuilder();
 
-            // Newline between instance and invocation using configureBinder argument (with the dot on the first line)
+            // Newline between instance and invocation using configureBinder argument (with the dot on the first
+            // line)
             optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
-            // Newline between instance and invocation using configureBinder argument (with the dot on the second line)
+            // Newline between instance and invocation using configureBinder argument (with the dot on the
+            // second line)
             optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
-            // Newlines between the instance and invocation and within the arguments. No indentation before invocation.
+            // Newlines between the instance and invocation and within the arguments. No indentation before
+            // invocation.
             optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
             // Newlines in every place possible

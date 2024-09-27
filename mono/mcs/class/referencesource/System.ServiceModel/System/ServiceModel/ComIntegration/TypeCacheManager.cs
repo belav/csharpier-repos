@@ -501,7 +501,8 @@ namespace System.ServiceModel.ComIntegration
                     }
                 }
             }
-            // We failed to get the hive information from a native process hive lets go for the alternative bitness
+            // We failed to get the hive information from a native process hive lets go for the alternative
+            // bitness
 
             using (
                 RegistryHandle hkcr = RegistryHandle.GetBitnessHKCR(IntPtr.Size == 8 ? false : true)

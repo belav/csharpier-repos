@@ -281,7 +281,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        ///     Returns true if counter is read only (system counter, foreign extensible counter or remote counter)
+        ///     Returns true if counter is read only (system counter, foreign extensible counter or remote
+        // counter)
         /// </summary>
         public bool ReadOnly
         {
@@ -323,7 +324,8 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        ///     Directly accesses the raw value of this counter.  If counter type is of a 32-bit size, it will truncate
+        ///     Directly accesses the raw value of this counter.  If counter type is of a 32-bit size, it
+        // will truncate
         ///     the value given to 32 bits.  This can be significantly more performant for scenarios where
         ///     the raw value is sufficient.   Note that this only works for custom counters created using
         ///     this component,  non-custom counters will throw an exception if this property is accessed.
@@ -422,7 +424,8 @@ namespace System.Diagnostics
         /// <summary>
         ///     Increments the value of this counter.  If counter type is of a 32-bit size, it'll truncate
         ///     the value given to 32 bits. This method uses a mutex to guarantee correctness of
-        ///     the operation in case of multiple writers. This method should be used with caution because of the negative
+        ///     the operation in case of multiple writers. This method should be used with caution because
+        // of the negative
         ///     impact on performance due to creation of the mutex.
         /// </summary>
         public long IncrementBy(long value)

@@ -47,7 +47,8 @@ namespace System.Threading
 
         internal const int MaxWaitHandles = 64;
 
-        // We rely on the reference source implementation of WaitHandle, and it delegates to a function named
+        // We rely on the reference source implementation of WaitHandle, and it delegates to a function
+        // named
         //  WaitOneNative to perform the actual operation of waiting on a handle.
         // This native operation actually has to call back into managed code and invoke .Wait
         //  on the current SynchronizationContext. As such, our implementation of this "native" method
@@ -138,7 +139,7 @@ namespace System.Threading
                     finally
                     {
                         /* we have to put it in a finally block, to avoid having a ThreadAbortException
-                         * between the return from DangerousAddRef and the assignement to release_last */
+                        * between the return from DangerousAddRef and the assignement to release_last */
                         bool release = false;
                         waitHandles[i].SafeWaitHandle.DangerousAddRef(ref release);
                         release_last = i;

@@ -816,7 +816,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Add properties for all the build in complex type
         /// </summary>
-        /// <param name="builtInTypeKind">The type of the built In type whose properties are being added</param>
+        /// <param name="builtInTypeKind">The type of the built In type whose properties are being
+        // added</param>
         /// <param name="properties">properties of the built in type</param>
         private static void AddBuiltInTypeProperties(
             BuiltInTypeKind builtInTypeKind,

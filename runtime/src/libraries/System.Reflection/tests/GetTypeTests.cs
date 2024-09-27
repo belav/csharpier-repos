@@ -258,9 +258,12 @@ namespace System.Reflection.Tests
                 Assert.Equal(expectedResult, Type.GetType(typeName, throwOnError: true));
                 Assert.Equal(expectedResult, Type.GetType(aqn, throwOnError: true));
 
-                // When called with "ignoreCase: true", GetType() may have a choice of matching items. The one that is chosen
-                // is an implementation detail (and on the CLR, *very* implementation-dependent as it's influenced by the internal
-                // layout of private hash tables.) As a result, we do not expect the same result across runtimes and so the best
+                // When called with "ignoreCase: true", GetType() may have a choice of matching items. The one that
+                // is chosen
+                // is an implementation detail (and on the CLR, *very* implementation-dependent as it's influenced
+                // by the internal
+                // layout of private hash tables.) As a result, we do not expect the same result across runtimes and
+                // so the best
                 // we can do is compare the names.
                 string expectedName = expectedResult.AssemblyQualifiedName;
 
@@ -396,9 +399,12 @@ namespace System.Reflection.Tests
                 Assert.Throws<TypeLoadException>(() => Type.GetType(typeName, throwOnError: true));
                 Assert.Throws<TypeLoadException>(() => Type.GetType(aqn, throwOnError: true));
 
-                // When called with "ignoreCase: true", GetType() may have a choice of matching items. The one that is chosen
-                // is an implementation detail (and on the CLR, *very* implementation-dependent as it's influenced by the internal
-                // layout of private hash tables.) As a result, we do not expect the same result across runtimes and so the best
+                // When called with "ignoreCase: true", GetType() may have a choice of matching items. The one that
+                // is chosen
+                // is an implementation detail (and on the CLR, *very* implementation-dependent as it's influenced
+                // by the internal
+                // layout of private hash tables.) As a result, we do not expect the same result across runtimes and
+                // so the best
                 // we can do is compare the names.
                 string expectedName = expectedResult.AssemblyQualifiedName;
 
@@ -573,7 +579,8 @@ namespace System.Reflection.Tests
             object[] args = new object[1] { Activator.CreateInstance(typeof(EquivalentValueType)) };
             Assert.Equal(42, mi.Invoke(null, args));
 
-            // Ensure we can invoke with an arg type that is duplicated in another assembly but having [TypeIdentifier].
+            // Ensure we can invoke with an arg type that is duplicated in another assembly but having
+            // [TypeIdentifier].
             args = new object[1] { Activator.CreateInstance(otherEquivalentValueType) };
             Assert.Equal(42, mi.Invoke(null, args));
         }

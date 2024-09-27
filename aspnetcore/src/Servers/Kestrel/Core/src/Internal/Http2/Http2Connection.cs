@@ -26,7 +26,8 @@ internal sealed partial class Http2Connection
         IHttpStreamHeadersHandler,
         IRequestProcessor
 {
-    // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
+    // This uses C# compiler's ability to refer to static data directly. For more information see
+    // https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> ClientPrefaceBytes => "PRI * HTTP/2.0\r\n\r\nSM\r\n\r\n"u8;
     private static ReadOnlySpan<byte> AuthorityBytes => ":authority"u8;
     private static ReadOnlySpan<byte> MethodBytes => ":method"u8;
@@ -147,7 +148,8 @@ internal sealed partial class Http2Connection
             .ConnectionFeatures.GetRequiredFeature<IConnectionMetricsContextFeature>()
             .MetricsContext;
 
-        // Capture the ExecutionContext before dispatching HTTP/2 middleware. Will be restored by streams when processing request
+        // Capture the ExecutionContext before dispatching HTTP/2 middleware. Will be restored by streams
+        // when processing request
         _context.InitialExecutionContext = ExecutionContext.Capture();
 
         _input = new Pipe(GetInputPipeOptions());
@@ -177,7 +179,8 @@ internal sealed partial class Http2Connection
         _serverSettings.MaxHeaderListSize = (uint)httpLimits.MaxRequestHeadersTotalSize;
         _serverSettings.InitialWindowSize = (uint)http2Limits.InitialStreamWindowSize;
 
-        // Start pool off at a smaller size if the max number of streams is less than the InitialStreamPoolSize
+        // Start pool off at a smaller size if the max number of streams is less than the
+        // InitialStreamPoolSize
         StreamPool = new PooledStreamStack<Http2Stream>(
             Math.Min(InitialStreamPoolSize, http2Limits.MaxStreamsPerConnection)
         );
@@ -302,7 +305,8 @@ internal sealed partial class Http2Connection
             if (_isClosed == 0)
             {
                 await _frameWriter.WriteSettingsAsync(_serverSettings.GetNonProtocolDefaults());
-                // Inform the client that the connection window is larger than the default. It can't be lowered here,
+                // Inform the client that the connection window is larger than the default. It can't be lowered
+                // here,
                 // It can only be lowered by not issuing window updates after data is received.
                 var connectionWindow = _context
                     .ServiceContext
@@ -322,7 +326,8 @@ internal sealed partial class Http2Connection
                 var result = await Input.ReadAsync();
                 var buffer = result.Buffer;
 
-                // Call UpdateCompletedStreams() prior to frame processing in order to remove any streams that have exceeded their drain timeouts.
+                // Call UpdateCompletedStreams() prior to frame processing in order to remove any streams that have
+                // exceeded their drain timeouts.
                 UpdateCompletedStreams();
 
                 if (result.IsCanceled)
@@ -403,7 +408,8 @@ internal sealed partial class Http2Connection
         }
         catch (ConnectionResetException ex)
         {
-            // Don't log ECONNRESET errors when there are no active streams on the connection. Browsers like IE will reset connections regularly.
+            // Don't log ECONNRESET errors when there are no active streams on the connection. Browsers like IE
+            // will reset connections regularly.
             if (_clientActiveStreamCount > 0)
             {
                 Log.RequestProcessingError(ConnectionId, ex);
@@ -468,7 +474,8 @@ internal sealed partial class Http2Connection
                 {
                     // Use the server _serverActiveStreamCount to drain all requests on the server side.
                     // Can't use _clientActiveStreamCount now as we now decrement that count earlier/
-                    // Can't use _streams.Count as we wait for RST/END_STREAM before removing the stream from the dictionary
+                    // Can't use _streams.Count as we wait for RST/END_STREAM before removing the stream from the
+                    // dictionary
                     while (_serverActiveStreamCount > 0)
                     {
                         await _streamCompletionAwaitable;
@@ -536,11 +543,15 @@ internal sealed partial class Http2Connection
 
     private async Task<bool> TryReadPrefaceAsync()
     {
-        // HTTP/1.x and HTTP/2 support connections without TLS. That means ALPN hasn't been used to ensure both sides are
-        // using the same protocol. A common problem is someone using HTTP/1.x to talk to a HTTP/2 only endpoint.
+        // HTTP/1.x and HTTP/2 support connections without TLS. That means ALPN hasn't been used to ensure
+        // both sides are
+        // using the same protocol. A common problem is someone using HTTP/1.x to talk to a HTTP/2 only
+        // endpoint.
         //
-        // HTTP/2 starts a connection with a preface. This method reads and validates it. If the connection doesn't start
-        // with the preface, and it isn't using TLS, then we attempt to detect what the client is trying to do and send
+        // HTTP/2 starts a connection with a preface. This method reads and validates it. If the connection
+        // doesn't start
+        // with the preface, and it isn't using TLS, then we attempt to detect what the client is trying to
+        // do and send
         // back a friendly error message.
         //
         // Outcomes from this method:
@@ -549,7 +560,8 @@ internal sealed partial class Http2Connection
         // 3. Unknown content. Report HTTP/2 PROTOCOL_ERROR to client.
         // 4. Timeout while waiting for content.
         //
-        // Future improvement: Detect TLS frame. Useful for people starting TLS connection with a non-TLS endpoint.
+        // Future improvement: Detect TLS frame. Useful for people starting TLS connection with a non-TLS
+        // endpoint.
         var state = ReadPrefaceState.All;
 
         // With TLS, ALPN should have already errored if the wrong HTTP version is used.
@@ -1191,10 +1203,12 @@ internal sealed partial class Http2Connection
 
             // Maximum HPack encoder size is limited by Http2Limits.HeaderTableSize, configured max the server.
             //
-            // Note that the client HPack decoder doesn't care about the ACK so we don't need to lock sending the
+            // Note that the client HPack decoder doesn't care about the ACK so we don't need to lock sending
+            // the
             // ACK and updating the table size on the server together.
             // The client will wait until a size agreed upon by it (sent in SETTINGS_HEADER_TABLE_SIZE) and the
-            // server (sent as a dynamic table size update in the next HEADERS frame) is received before applying
+            // server (sent as a dynamic table size update in the next HEADERS frame) is received before
+            // applying
             // the new size.
             _frameWriter.UpdateMaxHeaderTableSize(
                 Math.Min(_clientSettings.HeaderTableSize, (uint)Limits.Http2.HeaderTableSize)
@@ -1280,7 +1294,8 @@ internal sealed partial class Http2Connection
             );
         }
 
-        // StopProcessingNextRequest must be called before RequestClose to ensure it's considered client initiated.
+        // StopProcessingNextRequest must be called before RequestClose to ensure it's considered client
+        // initiated.
         StopProcessingNextRequest(serverInitiated: false);
         _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>()?.RequestClose();
 
@@ -1367,7 +1382,8 @@ internal sealed partial class Http2Connection
         else
         {
             // The stream was not found in the dictionary which means the stream was probably closed. This can
-            // happen when the client sends a window update for a stream right as the server closes the same stream
+            // happen when the client sends a window update for a stream right as the server closes the same
+            // stream
             // Since this is an unavoidable race, we just ignore the window update frame.
         }
 
@@ -1479,7 +1495,8 @@ internal sealed partial class Http2Connection
     {
         Debug.Assert(_currentHeadersStream != null);
 
-        // The stream now exists and must be tracked and drained even if Http2StreamErrorException is thrown before dispatching to the application.
+        // The stream now exists and must be tracked and drained even if Http2StreamErrorException is thrown
+        // before dispatching to the application.
         _streams[_incomingFrame.StreamId] = _currentHeadersStream;
         IncrementActiveClientStreamCount();
         _serverActiveStreamCount++;
@@ -1488,7 +1505,8 @@ internal sealed partial class Http2Connection
         {
             _currentHeadersStream.TotalParsedHeaderSize = _totalParsedHeaderSize;
 
-            // This must be initialized before we offload the request or else we may start processing request body frames without it.
+            // This must be initialized before we offload the request or else we may start processing request
+            // body frames without it.
             _currentHeadersStream.InputRemaining = _currentHeadersStream
                 .RequestHeaders
                 .ContentLength;
@@ -1509,8 +1527,10 @@ internal sealed partial class Http2Connection
                     != _mandatoryRequestPseudoHeaderFields
             )
             {
-                // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header
-                // fields, unless it is a CONNECT request (Section 8.3). An HTTP request that omits mandatory pseudo-header
+                // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path
+                // pseudo-header
+                // fields, unless it is a CONNECT request (Section 8.3). An HTTP request that omits mandatory
+                // pseudo-header
                 // fields is malformed (Section 8.1.2.6).
                 throw new Http2StreamErrorException(
                     _currentHeadersStream.StreamId,
@@ -1522,13 +1542,16 @@ internal sealed partial class Http2Connection
             if (_clientActiveStreamCount == _serverSettings.MaxConcurrentStreams)
             {
                 // Provide feedback in server logs that the client hit the number of maximum concurrent streams,
-                // and that the client is likely waiting for existing streams to be completed before it can continue.
+                // and that the client is likely waiting for existing streams to be completed before it can
+                // continue.
                 Log.Http2MaxConcurrentStreamsReached(_context.ConnectionId);
             }
             else if (_clientActiveStreamCount > _serverSettings.MaxConcurrentStreams)
             {
-                // The protocol default stream limit is infinite so the client can exceed our limit at the start of the connection.
-                // Refused streams can be retried, by which time the client must have received our settings frame with our limit information.
+                // The protocol default stream limit is infinite so the client can exceed our limit at the start of
+                // the connection.
+                // Refused streams can be retried, by which time the client must have received our settings frame
+                // with our limit information.
                 throw new Http2StreamErrorException(
                     _currentHeadersStream.StreamId,
                     CoreStrings.Http2ErrorMaxStreams,
@@ -1536,7 +1559,8 @@ internal sealed partial class Http2Connection
                 );
             }
 
-            // We don't use the _serverActiveRequestCount here as during shutdown, it and the dictionary counts get out of sync.
+            // We don't use the _serverActiveRequestCount here as during shutdown, it and the dictionary counts
+            // get out of sync.
             // The streams still exist in the dictionary until the client responds with a RST or END_STREAM.
             // Also, we care about the dictionary size for too much memory consumption.
             if (_streams.Count > MaxTrackedStreams || SendEnhanceYourCalmOnStartStream)
@@ -1561,7 +1585,8 @@ internal sealed partial class Http2Connection
 
                     // This will close the socket - we want to do that right away
                     Abort(new ConnectionAbortedException(CoreStrings.Http2ConnectionFaulted));
-                    // Throwing an exception as well will help us clean up on our end more quickly by (e.g.) skipping processing of already-buffered input
+                    // Throwing an exception as well will help us clean up on our end more quickly by (e.g.) skipping
+                    // processing of already-buffered input
                     throw new Http2ConnectionErrorException(
                         CoreStrings.Http2ConnectionFaulted,
                         Http2ErrorCode.ENHANCE_YOUR_CALM
@@ -1699,7 +1724,8 @@ internal sealed partial class Http2Connection
             {
                 if (stream == _currentHeadersStream)
                 {
-                    // The drain expired out while receiving trailers. The most recent incoming frame is either a header or continuation frame for the timed out stream.
+                    // The drain expired out while receiving trailers. The most recent incoming frame is either a header
+                    // or continuation frame for the timed out stream.
                     throw new Http2ConnectionErrorException(
                         CoreStrings.FormatHttp2ErrorStreamClosed(
                             _incomingFrame.Type,
@@ -1846,9 +1872,12 @@ internal sealed partial class Http2Connection
         NameAndValue,
     }
 
-    // We can't throw a Http2StreamErrorException here, it interrupts the header decompression state and may corrupt subsequent header frames on other streams.
-    // For now these either need to be connection errors or BadRequests. If we want to downgrade any of them to stream errors later then we need to
-    // rework the flow so that the remaining headers are drained and the decompression state is maintained.
+    // We can't throw a Http2StreamErrorException here, it interrupts the header decompression state and
+    // may corrupt subsequent header frames on other streams.
+    // For now these either need to be connection errors or BadRequests. If we want to downgrade any of
+    // them to stream errors later then we need to
+    // rework the flow so that the remaining headers are drained and the decompression state is
+    // maintained.
     private void OnHeaderCore(
         HeaderType headerType,
         int? staticTableIndex,
@@ -1859,10 +1888,13 @@ internal sealed partial class Http2Connection
         Debug.Assert(_currentHeadersStream != null);
 
         // https://tools.ietf.org/html/rfc7540#section-6.5.2
-        // "The value is based on the uncompressed size of header fields, including the length of the name and value in octets plus an overhead of 32 octets for each header field.";
-        // We don't include the 32 byte overhead hear so we can accept a little more than the advertised limit.
+        // "The value is based on the uncompressed size of header fields, including the length of the name
+        // and value in octets plus an overhead of 32 octets for each header field.";
+        // We don't include the 32 byte overhead hear so we can accept a little more than the advertised
+        // limit.
         _totalParsedHeaderSize += name.Length + value.Length;
-        // Allow a 2x grace before aborting the connection. We'll check the size limit again later where we can send a 431.
+        // Allow a 2x grace before aborting the connection. We'll check the size limit again later where we
+        // can send a 431.
         if (
             _totalParsedHeaderSize
             > _context.ServiceContext.ServerOptions.Limits.MaxRequestHeadersTotalSize * 2
@@ -1948,7 +1980,8 @@ internal sealed partial class Http2Connection
                     case HeaderType.NameAndValue:
                         UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
 
-                        // Header and value are new and will get validated (i.e. check name is lower-case, check value doesn't contain newlines)
+                        // Header and value are new and will get validated (i.e. check name is lower-case, check value
+                        // doesn't contain newlines)
                         ValidateHeaderContent(name, value);
                         _currentHeadersStream.OnHeader(name, value, checkForNewlineChars: true);
                         break;
@@ -1984,7 +2017,8 @@ internal sealed partial class Http2Connection
         }
 
         // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2
-        // A request or response containing uppercase header field names MUST be treated as malformed (Section 8.1.2.6).
+        // A request or response containing uppercase header field names MUST be treated as malformed
+        // (Section 8.1.2.6).
         for (var i = 0; i < name.Length; i++)
         {
             if (((uint)name[i] - 65) <= (90 - 65))
@@ -2010,19 +2044,19 @@ internal sealed partial class Http2Connection
     private void UpdateHeaderParsingState(ReadOnlySpan<byte> value, PseudoHeaderFields headerField)
     {
         // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.1
-        /*
-           Intermediaries that process HTTP requests or responses (i.e., any
-           intermediary not acting as a tunnel) MUST NOT forward a malformed
-           request or response.  Malformed requests or responses that are
-           detected MUST be treated as a stream error (Section 5.4.2) of type
-           PROTOCOL_ERROR.
+/*
+Intermediaries that process HTTP requests or responses (i.e., any
+intermediary not acting as a tunnel) MUST NOT forward a malformed
+request or response.  Malformed requests or responses that are
+detected MUST be treated as a stream error (Section 5.4.2) of type
+PROTOCOL_ERROR.
 
-           For malformed requests, a server MAY send an HTTP response prior to
-           closing or resetting the stream.  Clients MUST NOT accept a malformed
-           response.  Note that these requirements are intended to protect
-           against several types of common attacks against HTTP; they are
-           deliberately strict because being permissive can expose
-           implementations to these vulnerabilities.*/
+For malformed requests, a server MAY send an HTTP response prior to
+closing or resetting the stream.  Clients MUST NOT accept a malformed
+response.  Note that these requirements are intended to protect
+against several types of common attacks against HTTP; they are
+deliberately strict because being permissive can expose
+implementations to these vulnerabilities.*/
         if (headerField != PseudoHeaderFields.None)
         {
             if (_requestHeaderParsingState == RequestHeaderParsingState.Headers)
@@ -2070,7 +2104,8 @@ internal sealed partial class Http2Connection
             if ((_parsedPseudoHeaderFields & headerField) == headerField)
             {
                 // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.3
-                // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path pseudo-header fields
+                // All HTTP/2 requests MUST include exactly one valid value for the :method, :scheme, and :path
+                // pseudo-header fields
                 throw new Http2ConnectionErrorException(
                     CoreStrings.HttpErrorDuplicatePseudoHeaderField,
                     Http2ErrorCode.PROTOCOL_ERROR

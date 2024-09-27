@@ -28,7 +28,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="map"></param>
         /// <returns>Returns false if no match found.</returns>
         internal virtual bool TryGetMap(string identity, DataSpace typeSpace, out Map map)
@@ -63,7 +64,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <exception cref="ArgumentException"> Thrown if mapping space is not valid</exception>
         internal virtual Map GetMap(string identity, DataSpace typeSpace, bool ignoreCase)
@@ -76,7 +78,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="map"></param>
         /// <returns>Returns false if no match found.</returns>
@@ -95,7 +98,8 @@ namespace System.Data.Mapping
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">identity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <exception cref="ArgumentException"> Thrown if mapping space is not valid</exception>
         internal virtual Map GetMap(string identity, DataSpace typeSpace)
         {

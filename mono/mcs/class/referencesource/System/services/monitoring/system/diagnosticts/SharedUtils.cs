@@ -157,16 +157,25 @@ namespace System.Diagnostics
             SafeWaitForMutex(tmpMutex, ref mutex);
         }
 
-        // We need to atomically attempt to acquire the mutex and record whether we took it (because we require thread affinity
-        // while the mutex is held and the two states must be kept in lock step). We can get atomicity with a CER, but we don't want
-        // to hold a CER over a call to WaitOne (this could cause deadlocks). The ---- is to provide a new API out of
-        // mscorlib that performs the wait and lets us know if it succeeded. But at this late stage we don't want to expose a new
+        // We need to atomically attempt to acquire the mutex and record whether we took it (because we
+        // require thread affinity
+        // while the mutex is held and the two states must be kept in lock step). We can get atomicity with
+        // a CER, but we don't want
+        // to hold a CER over a call to WaitOne (this could cause deadlocks). The ---- is to provide a new
+        // API out of
+        // mscorlib that performs the wait and lets us know if it succeeded. But at this late stage we don't
+        // want to expose a new
         // API out of mscorlib, so we'll build our own solution.
-        // We'll P/Invoke out to the WaitForSingleObject inside a CER, but use a timeout to ensure we can't block a thread abort for
-        // an unlimited time (we do this in an infinite loop so the semantic of acquiring the mutex is unchanged, the timeout is
-        // just to allow us to poll for abort). A limitation of CERs in Whidbey (and part of the problem that put us in this
-        // position in the first place) is that a CER root in a method will cause the entire method to delay thread aborts. So we
-        // need to carefully partition the real CER part of out logic in a sub-method (and ensure the jit doesn't inline on us).
+        // We'll P/Invoke out to the WaitForSingleObject inside a CER, but use a timeout to ensure we can't
+        // block a thread abort for
+        // an unlimited time (we do this in an infinite loop so the semantic of acquiring the mutex is
+        // unchanged, the timeout is
+        // just to allow us to poll for abort). A limitation of CERs in Whidbey (and part of the problem
+        // that put us in this
+        // position in the first place) is that a CER root in a method will cause the entire method to delay
+        // thread aborts. So we
+        // need to carefully partition the real CER part of out logic in a sub-method (and ensure the jit
+        // doesn't inline on us).
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private static bool SafeWaitForMutex(Mutex mutexIn, ref Mutex mutexOut)
@@ -182,15 +191,19 @@ namespace System.Diagnostics
                 if (mutexOut != null)
                     return true;
 
-                // We come out here to the outer method every so often so we're not in a CER and a thread abort can interrupt us.
-                // But the abort logic itself is poll based (in the this case) so we really need to check for a pending abort
-                // explicitly else the two timing windows will virtually never line up and we'll still end up stalling the abort
+                // We come out here to the outer method every so often so we're not in a CER and a thread abort can
+                // interrupt us.
+                // But the abort logic itself is poll based (in the this case) so we really need to check for a
+                // pending abort
+                // explicitly else the two timing windows will virtually never line up and we'll still end up
+                // stalling the abort
                 // attempt. Thread.Sleep checks for pending abort for us.
                 Thread.Sleep(0);
             }
         }
 
-        // The portion of SafeWaitForMutex that runs under a CER and thus must not block for a arbitrary period of time.
+        // The portion of SafeWaitForMutex that runs under a CER and thus must not block for a arbitrary
+        // period of time.
         // This method must not be inlined (to stop the CER accidently spilling into the calling method).
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -203,7 +216,8 @@ namespace System.Diagnostics
             try { }
             finally
             {
-                // Wait for the mutex for half a second (long enough to gain the mutex in most scenarios and short enough to avoid
+                // Wait for the mutex for half a second (long enough to gain the mutex in most scenarios and short
+                // enough to avoid
                 // impacting a thread abort for too long).
                 // Holding a mutex requires us to keep thread affinity and announce ourselves as a critical region.
                 Thread.BeginCriticalRegion();
@@ -229,7 +243,8 @@ namespace System.Diagnostics
                         break;
                 }
 
-                // If we're not leaving with the Mutex we don't require thread affinity and we're not a critical region any more.
+                // If we're not leaving with the Mutex we don't require thread affinity and we're not a critical
+                // region any more.
                 if (mutexOut == null)
                 {
                     Thread.EndThreadAffinity();
@@ -299,7 +314,8 @@ namespace System.Diagnostics
                     string installRoot = (string)complusReg.GetValue("InstallRoot");
                     if (installRoot != null && installRoot != String.Empty)
                     {
-                        // the "policy" subkey contains a v{major}.{minor} subkey for each version installed.  There are also
+                        // the "policy" subkey contains a v{major}.{minor} subkey for each version installed.  There are
+                        // also
                         // some extra subkeys like "standards" and "upgrades" we want to ignore.
 
                         // first we figure out what version we are...
@@ -307,7 +323,8 @@ namespace System.Diagnostics
                             "v" + Environment.Version.Major + "." + Environment.Version.Minor;
                         RegistryKey policyKey = complusReg.OpenSubKey("policy");
 
-                        // This is the full version string of the install on the remote machine we want to use (for example "v2.0.50727")
+                        // This is the full version string of the install on the remote machine we want to use (for example
+                        // "v2.0.50727")
                         string version = null;
 
                         if (policyKey != null)
@@ -341,7 +358,8 @@ namespace System.Diagnostics
                                     {
                                         string majorVersion = majorVersions[i];
 
-                                        // If this looks like a key of the form v{something}.{something}, we should see if it's a usable build.
+                                        // If this looks like a key of the form v{something}.{something}, we should see if it's a usable
+                                        // build.
                                         if (
                                             majorVersion.Length > 1
                                             && majorVersion[0] == 'v'

@@ -43,7 +43,8 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         /// <summary>
-        /// Gets the <see cref="ECDsa" /> public key from the certificate or null if the certificate does not have an ECDsa public key.
+        /// Gets the <see cref="ECDsa" /> public key from the certificate or null if the certificate does
+        // not have an ECDsa public key.
         /// </summary>
         [SecuritySafeCritical]
         public static ECDsa GetECDsaPublicKey(this X509Certificate2 certificate)
@@ -141,7 +142,8 @@ namespace System.Security.Cryptography.X509Certificates
                         if (!(ext.KeyUsages.HasFlag(X509KeyUsageFlags.KeyAgreement)))
                         {
                             //If this does not have KeyAgreement flag present, it cannot be ECDH or ECMQV key as KeyAgreement
-                            // is mandatory flag for ECDH or ECMQV. In that case, at this point, it is safe to assume it is ECDSA
+                            // is mandatory flag for ECDH or ECMQV. In that case, at this point, it is safe to assume it is
+                            // ECDSA
                             return true;
                         }
                         //If key has any of the following flag then it cannot be ECDH or ECMQV. Assume

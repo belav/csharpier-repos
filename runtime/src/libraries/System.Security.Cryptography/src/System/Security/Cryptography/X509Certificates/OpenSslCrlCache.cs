@@ -194,7 +194,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                     if (!Interop.Crypto.X509StoreAddCrl(store, crl))
                     {
-                        // Ignore error "cert already in store", throw on anything else. In any case the error queue will be cleared.
+                        // Ignore error "cert already in store", throw on anything else. In any case the error queue will be
+                        // cleared.
                         if (X509_R_CERT_ALREADY_IN_HASH_TABLE == Interop.Crypto.ErrPeekLastError())
                         {
                             Interop.Crypto.ErrClearError();
@@ -236,7 +237,8 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     if (!Interop.Crypto.X509StoreAddCrl(store, crl))
                     {
-                        // Ignore error "cert already in store", throw on anything else. In any case the error queue will be cleared.
+                        // Ignore error "cert already in store", throw on anything else. In any case the error queue will be
+                        // cleared.
                         if (X509_R_CERT_ALREADY_IN_HASH_TABLE == Interop.Crypto.ErrPeekLastError())
                         {
                             Interop.Crypto.ErrClearError();
@@ -299,7 +301,8 @@ namespace System.Security.Cryptography.X509Certificates
             Span<byte> hash = stackalloc byte[SHA256.HashSizeInBytes];
 
             // Endianness isn't important, it just needs to be consistent.
-            // (Even if the same storage was used for two different endianness systems it'd stabilize at two files).
+            // (Even if the same storage was used for two different endianness systems it'd stabilize at two
+            // files).
             ReadOnlySpan<byte> utf16Url = MemoryMarshal.AsBytes(crlUrl.AsSpan());
 
             if (SHA256.HashData(utf16Url, hash) != hash.Length)

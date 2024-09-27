@@ -7,7 +7,8 @@ using Xunit;
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.indexer001.indexer001
 {
     // <Title>Covariant return type for dynamic/object</Title>
-    // <Description> Tests simple indexers changing the return type from dynamic to object and vice versa
+    // <Description> Tests simple indexers changing the return type from dynamic to object and vice
+    // versa
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -376,7 +377,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.indexer003.indexer003
 {
     // <Title>Covariant return type for dynamic/object</Title>
-    // <Description> Tests generic indexer changing the return type from dynamic to object and vice versa
+    // <Description> Tests generic indexer changing the return type from dynamic to object and vice
+    // versa
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -1432,7 +1434,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.method003.method003
 {
     // <Title>Covariant return type for dynamic/object</Title>
-    // <Description> Tests generic methods changing the return type from dynamic to object and vice versa
+    // <Description> Tests generic methods changing the return type from dynamic to object and vice
+    // versa
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -1710,7 +1713,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.property001.property001
 {
     // <Title>Covariant return type for dynamic/object</Title>
-    // <Description> Tests simple indexers changing the return type from dynamic to object and vice versa
+    // <Description> Tests simple indexers changing the return type from dynamic to object and vice
+    // versa
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -2075,7 +2079,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.property003.property003
 {
     // <Title>Covariant return type for dynamic/object</Title>
-    // <Description> Tests generic indexer changing the return type from dynamic to object and vice versa
+    // <Description> Tests generic indexer changing the return type from dynamic to object and vice
+    // versa
     // </Description>
     // <RelatedBugs></RelatedBugs>
     //<Expects Status=success></Expects>
@@ -2775,7 +2780,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
 
-        // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
+        // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional
+        // attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
         RefReadonly2, // Members of readonly field '{0}' cannot be passed ref or out (except in a constructor)

@@ -18,8 +18,10 @@ namespace Microsoft.Win32
     internal static class UnsafeNativeMethods
     {
 #if !FEATURE_CORECLR
-        // On CoreCLR this is not the way to determine if a process is a tailored application (which means APPX).
-        // On CoreCLR AppX is determined by a flag past to the host which is exposed by AppDomain.IsAppXProcess in mscorlib.
+        // On CoreCLR this is not the way to determine if a process is a tailored application (which means
+        // APPX).
+        // On CoreCLR AppX is determined by a flag past to the host which is exposed by
+        // AppDomain.IsAppXProcess in mscorlib.
         // The reason for this if-def is to ensure nobody takes a dependency on this on CoreCLR.
 
         internal const String KERNEL32 = "kernel32.dll";

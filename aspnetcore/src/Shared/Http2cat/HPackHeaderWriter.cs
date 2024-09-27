@@ -32,7 +32,8 @@ internal static class HPackHeaderWriter
         }
 
         // We're ok with not throwing if no headers were encoded because we've already encoded the status.
-        // There is a small chance that the header will encode if there is no other content in the next HEADERS frame.
+        // There is a small chance that the header will encode if there is no other content in the next
+        // HEADERS frame.
         var done = EncodeHeaders(
             headersEnumerator,
             buffer.Slice(statusCodeLength),
@@ -63,7 +64,8 @@ internal static class HPackHeaderWriter
     }
 
     /// <summary>
-    /// Continue encoding headers in the next HEADERS frame. The enumerator should already have a current value.
+    /// Continue encoding headers in the next HEADERS frame. The enumerator should already have a
+    // current value.
     /// </summary>
     public static bool ContinueEncodeHeaders(
         IEnumerator<KeyValuePair<string, string>> headersEnumerator,

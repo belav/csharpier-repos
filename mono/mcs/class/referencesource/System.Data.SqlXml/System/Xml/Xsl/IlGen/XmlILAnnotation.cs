@@ -11,7 +11,8 @@ using System.Xml.Xsl.Qil;
 namespace System.Xml.Xsl.IlGen
 {
     /// <summary>
-    /// Several annotations are created and attached to Qil nodes during the optimization and code generation phase.
+    /// Several annotations are created and attached to Qil nodes during the optimization and code
+    // generation phase.
     /// </summary>
     internal class XmlILAnnotation : ListBase<object>
     {
@@ -72,7 +73,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// The IteratorDescriptor that is derived for Qil For and Let nodes is cached so that it can be used when the
+        /// The IteratorDescriptor that is derived for Qil For and Let nodes is cached so that it can be
+        // used when the
         /// For/Let node is referenced.
         /// Attached to For and Let nodes.
         /// </summary>

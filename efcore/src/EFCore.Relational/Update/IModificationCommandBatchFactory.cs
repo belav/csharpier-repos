@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         A service for creating <see cref="ModificationCommandBatch" /> instances.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
@@ -19,7 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>

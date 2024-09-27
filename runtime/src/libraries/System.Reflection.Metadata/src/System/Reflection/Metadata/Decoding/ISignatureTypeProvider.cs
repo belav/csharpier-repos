@@ -26,7 +26,8 @@ namespace System.Reflection.Metadata
         /// Gets the type symbol for a type with a custom modifier applied.
         /// </summary>
         /// <param name="modifier">The modifier type applied. </param>
-        /// <param name="unmodifiedType">The type symbol of the underlying type without modifiers applied.</param>
+        /// <param name="unmodifiedType">The type symbol of the underlying type without modifiers
+        // applied.</param>
         /// <param name="isRequired">True if the modifier is required, false if it's optional.</param>
         TType GetModifiedType(TType modifier, TType unmodifiedType, bool isRequired);
 
@@ -48,8 +49,11 @@ namespace System.Reflection.Metadata
         /// The type specification handle.
         /// </param>
         /// <param name="rawTypeKind">
-        /// The kind of the type as specified in the signature. To interpret this value use <see cref="Ecma335.MetadataReaderExtensions.ResolveSignatureTypeKind(MetadataReader, EntityHandle, byte)"/>
-        /// Note that when the signature comes from a WinMD file additional processing is needed to determine whether the target type is a value type or a reference type.
+        /// The kind of the type as specified in the signature. To interpret this value use <see
+        // cref="Ecma335.MetadataReaderExtensions.ResolveSignatureTypeKind(MetadataReader, EntityHandle,
+        // byte)"/>
+        /// Note that when the signature comes from a WinMD file additional processing is needed to
+        // determine whether the target type is a value type or a reference type.
         /// </param>
         TType GetTypeFromSpecification(
             MetadataReader reader,

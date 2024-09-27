@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* CollectionCountTest
- *
- * Tests GC.CollectionCount by passing it invalid values (<0) and
- * values that are too large (>GC.MaxGeneration).
- * It then tests valid values (0<=x<=GC.MaxGeneration)
- * by making sure result is at least the number of manual collections
- * (GC.Collect) per generation (must be at least, since the GC may collect
- * on it's own).
- */
+*
+* Tests GC.CollectionCount by passing it invalid values (<0) and
+* values that are too large (>GC.MaxGeneration).
+* It then tests valid values (0<=x<=GC.MaxGeneration)
+* by making sure result is at least the number of manual collections
+* (GC.Collect) per generation (must be at least, since the GC may collect
+* on it's own).
+*/
 
 using System;
 

@@ -12,14 +12,16 @@ using System.Runtime.CompilerServices;
 namespace System.Runtime.InteropServices
 {
     /// <summary>
-    /// Provides a collection of methods for interoperating with <see cref="Memory{T}"/>, <see cref="ReadOnlyMemory{T}"/>,
+    /// Provides a collection of methods for interoperating with <see cref="Memory{T}"/>, <see
+    // cref="ReadOnlyMemory{T}"/>,
     /// <see cref="Span{T}"/>, and <see cref="ReadOnlySpan{T}"/>.
     /// </summary>
     public static partial class MemoryMarshal
     {
         /// <summary>
         /// Casts a Span of one primitive type <typeparamref name="T"/> to Span of bytes.
-        /// That type may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// That type may not contain pointers or references. This is checked at runtime in order to
+        // preserve type safety.
         /// </summary>
         /// <param name="span">The source slice, of type <typeparamref name="T"/>.</param>
         /// <exception cref="ArgumentException">
@@ -43,7 +45,8 @@ namespace System.Runtime.InteropServices
 
         /// <summary>
         /// Casts a ReadOnlySpan of one primitive type <typeparamref name="T"/> to ReadOnlySpan of bytes.
-        /// That type may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// That type may not contain pointers or references. This is checked at runtime in order to
+        // preserve type safety.
         /// </summary>
         /// <param name="span">The source slice, of type <typeparamref name="T"/>.</param>
         /// <exception cref="ArgumentException">
@@ -67,32 +70,42 @@ namespace System.Runtime.InteropServices
 
         /// <summary>Creates a <see cref="Memory{T}"/> from a <see cref="ReadOnlyMemory{T}"/>.</summary>
         /// <param name="memory">The <see cref="ReadOnlyMemory{T}"/>.</param>
-        /// <returns>A <see cref="Memory{T}"/> representing the same memory as the <see cref="ReadOnlyMemory{T}"/>, but writable.</returns>
+        /// <returns>A <see cref="Memory{T}"/> representing the same memory as the <see
+        // cref="ReadOnlyMemory{T}"/>, but writable.</returns>
         /// <remarks>
-        /// <see cref="AsMemory{T}(ReadOnlyMemory{T})"/> must be used with extreme caution.  <see cref="ReadOnlyMemory{T}"/> is used
-        /// to represent immutable data and other memory that is not meant to be written to; <see cref="Memory{T}"/> instances created
-        /// by <see cref="AsMemory{T}(ReadOnlyMemory{T})"/> should not be written to.  The method exists to enable variables typed
+        /// <see cref="AsMemory{T}(ReadOnlyMemory{T})"/> must be used with extreme caution.  <see
+        // cref="ReadOnlyMemory{T}"/> is used
+        /// to represent immutable data and other memory that is not meant to be written to; <see
+        // cref="Memory{T}"/> instances created
+        /// by <see cref="AsMemory{T}(ReadOnlyMemory{T})"/> should not be written to.  The method exists to
+        // enable variables typed
         /// as <see cref="Memory{T}"/> but only used for reading to store a <see cref="ReadOnlyMemory{T}"/>.
         /// </remarks>
         public static Memory<T> AsMemory<T>(ReadOnlyMemory<T> memory) =>
             Unsafe.As<ReadOnlyMemory<T>, Memory<T>>(ref memory);
 
         /// <summary>
-        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns a reference to the location where the 0th element
-        /// would have been stored. Such a reference may or may not be null. It can be used for pinning but must never be dereferenced.
+        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns a reference to
+        // the location where the 0th element
+        /// would have been stored. Such a reference may or may not be null. It can be used for pinning but
+        // must never be dereferenced.
         /// </summary>
         public static ref T GetReference<T>(Span<T> span) => ref span._reference;
 
         /// <summary>
-        /// Returns a reference to the 0th element of the ReadOnlySpan. If the ReadOnlySpan is empty, returns a reference to the location where the 0th element
-        /// would have been stored. Such a reference may or may not be null. It can be used for pinning but must never be dereferenced.
+        /// Returns a reference to the 0th element of the ReadOnlySpan. If the ReadOnlySpan is empty,
+        // returns a reference to the location where the 0th element
+        /// would have been stored. Such a reference may or may not be null. It can be used for pinning but
+        // must never be dereferenced.
         /// </summary>
         public static ref T GetReference<T>(ReadOnlySpan<T> span) => ref span._reference;
 
 #pragma warning disable IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6228
         /// <summary>
-        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns a reference to fake non-null pointer. Such a reference can be used
-        /// for pinning but must never be dereferenced. This is useful for interop with methods that do not accept null pointers for zero-sized buffers.
+        /// Returns a reference to the 0th element of the Span. If the Span is empty, returns a reference to
+        // fake non-null pointer. Such a reference can be used
+        /// for pinning but must never be dereferenced. This is useful for interop with methods that do not
+        // accept null pointers for zero-sized buffers.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe ref T GetNonNullPinnableReference<T>(Span<T> span) =>
@@ -101,8 +114,10 @@ namespace System.Runtime.InteropServices
                 : ref Unsafe.AsRef<T>((void*)1);
 
         /// <summary>
-        /// Returns a reference to the 0th element of the ReadOnlySpan. If the ReadOnlySpan is empty, returns a reference to fake non-null pointer. Such a reference
-        /// can be used for pinning but must never be dereferenced. This is useful for interop with methods that do not accept null pointers for zero-sized buffers.
+        /// Returns a reference to the 0th element of the ReadOnlySpan. If the ReadOnlySpan is empty,
+        // returns a reference to fake non-null pointer. Such a reference
+        /// can be used for pinning but must never be dereferenced. This is useful for interop with methods
+        // that do not accept null pointers for zero-sized buffers.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe ref T GetNonNullPinnableReference<T>(ReadOnlySpan<T> span) =>
@@ -112,11 +127,14 @@ namespace System.Runtime.InteropServices
 #pragma warning restore IDE0060 // https://github.com/dotnet/roslyn-analyzers/issues/6228
 
         /// <summary>
-        /// Casts a Span of one primitive type <typeparamref name="TFrom"/> to another primitive type <typeparamref name="TTo"/>.
-        /// These types may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// Casts a Span of one primitive type <typeparamref name="TFrom"/> to another primitive type
+        // <typeparamref name="TTo"/>.
+        /// These types may not contain pointers or references. This is checked at runtime in order to
+        // preserve type safety.
         /// </summary>
         /// <remarks>
-        /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
+        /// Supported only for platforms that support misaligned memory access or when the memory block is
+        // aligned by other means.
         /// </remarks>
         /// <param name="span">The source slice, of type <typeparamref name="TFrom"/>.</param>
         /// <exception cref="ArgumentException">
@@ -165,11 +183,14 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Casts a ReadOnlySpan of one primitive type <typeparamref name="TFrom"/> to another primitive type <typeparamref name="TTo"/>.
-        /// These types may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// Casts a ReadOnlySpan of one primitive type <typeparamref name="TFrom"/> to another primitive
+        // type <typeparamref name="TTo"/>.
+        /// These types may not contain pointers or references. This is checked at runtime in order to
+        // preserve type safety.
         /// </summary>
         /// <remarks>
-        /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
+        /// Supported only for platforms that support misaligned memory access or when the memory block is
+        // aligned by other means.
         /// </remarks>
         /// <param name="span">The source slice, of type <typeparamref name="TFrom"/>.</param>
         /// <exception cref="ArgumentException">
@@ -226,11 +247,14 @@ namespace System.Runtime.InteropServices
         /// <paramref name="length"/> is not checked.
         /// </summary>
         /// <param name="reference">A reference to data.</param>
-        /// <param name="length">The number of <typeparamref name="T"/> elements the memory contains.</param>
+        /// <param name="length">The number of <typeparamref name="T"/> elements the memory
+        // contains.</param>
         /// <returns>A span representing the specified reference and length.</returns>
         /// <remarks>
-        /// This method should be used with caution. It is dangerous because the length argument is not checked.
-        /// Even though the ref is annotated as scoped, it will be stored into the returned span, and the lifetime
+        /// This method should be used with caution. It is dangerous because the length argument is not
+        // checked.
+        /// Even though the ref is annotated as scoped, it will be stored into the returned span, and the
+        // lifetime
         /// of the returned span will not be validated for safety, even by span-aware languages.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -243,11 +267,14 @@ namespace System.Runtime.InteropServices
         /// <paramref name="length"/> is not checked.
         /// </summary>
         /// <param name="reference">A reference to data.</param>
-        /// <param name="length">The number of <typeparamref name="T"/> elements the memory contains.</param>
+        /// <param name="length">The number of <typeparamref name="T"/> elements the memory
+        // contains.</param>
         /// <returns>A read-only span representing the specified reference and length.</returns>
         /// <remarks>
-        /// This method should be used with caution. It is dangerous because the length argument is not checked.
-        /// Even though the ref is annotated as scoped, it will be stored into the returned span, and the lifetime
+        /// This method should be used with caution. It is dangerous because the length argument is not
+        // checked.
+        /// Even though the ref is annotated as scoped, it will be stored into the returned span, and the
+        // lifetime
         /// of the returned span will not be validated for safety, even by span-aware languages.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -258,18 +285,23 @@ namespace System.Runtime.InteropServices
 
         /// <summary>Creates a new read-only span for a null-terminated string.</summary>
         /// <param name="value">The pointer to the null-terminated string of characters.</param>
-        /// <returns>A read-only span representing the specified null-terminated string, or an empty span if the pointer is null.</returns>
+        /// <returns>A read-only span representing the specified null-terminated string, or an empty span if
+        // the pointer is null.</returns>
         /// <remarks>The returned span does not include the null terminator.</remarks>
-        /// <exception cref="ArgumentException">The string is longer than <see cref="int.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentException">The string is longer than <see
+        // cref="int.MaxValue"/>.</exception>
         [CLSCompliant(false)]
         public static unsafe ReadOnlySpan<char> CreateReadOnlySpanFromNullTerminated(char* value) =>
             value != null ? new ReadOnlySpan<char>(value, string.wcslen(value)) : default;
 
         /// <summary>Creates a new read-only span for a null-terminated UTF-8 string.</summary>
         /// <param name="value">The pointer to the null-terminated string of bytes.</param>
-        /// <returns>A read-only span representing the specified null-terminated string, or an empty span if the pointer is null.</returns>
-        /// <remarks>The returned span does not include the null terminator, nor does it validate the well-formedness of the UTF-8 data.</remarks>
-        /// <exception cref="ArgumentException">The string is longer than <see cref="int.MaxValue"/>.</exception>
+        /// <returns>A read-only span representing the specified null-terminated string, or an empty span if
+        // the pointer is null.</returns>
+        /// <remarks>The returned span does not include the null terminator, nor does it validate the
+        // well-formedness of the UTF-8 data.</remarks>
+        /// <exception cref="ArgumentException">The string is longer than <see
+        // cref="int.MaxValue"/>.</exception>
         [CLSCompliant(false)]
         public static unsafe ReadOnlySpan<byte> CreateReadOnlySpanFromNullTerminated(byte* value) =>
             value != null ? new ReadOnlySpan<byte>(value, string.strlen(value)) : default;
@@ -346,7 +378,8 @@ namespace System.Runtime.InteropServices
         /// If unable to get the <typeparamref name="TManager"/> type, returns false.
         /// </summary>
         /// <typeparam name="T">The element type of the <paramref name="memory" />.</typeparam>
-        /// <typeparam name="TManager">The type of <see cref="MemoryManager{T}"/> to try and retrieve.</typeparam>
+        /// <typeparam name="TManager">The type of <see cref="MemoryManager{T}"/> to try and
+        // retrieve.</typeparam>
         /// <param name="memory">The memory to get the manager for.</param>
         /// <param name="manager">The returned manager of the <see cref="ReadOnlyMemory{T}"/>.</param>
         /// <returns>A <see cref="bool"/> indicating if it was successful.</returns>
@@ -364,15 +397,19 @@ namespace System.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Gets an <see cref="MemoryManager{T}"/> and <paramref name="start" />, <paramref name="length" /> from the underlying read-only memory.
+        /// Gets an <see cref="MemoryManager{T}"/> and <paramref name="start" />, <paramref name="length" />
+        // from the underlying read-only memory.
         /// If unable to get the <typeparamref name="TManager"/> type, returns false.
         /// </summary>
         /// <typeparam name="T">The element type of the <paramref name="memory" />.</typeparam>
-        /// <typeparam name="TManager">The type of <see cref="MemoryManager{T}"/> to try and retrieve.</typeparam>
+        /// <typeparam name="TManager">The type of <see cref="MemoryManager{T}"/> to try and
+        // retrieve.</typeparam>
         /// <param name="memory">The memory to get the manager for.</param>
         /// <param name="manager">The returned manager of the <see cref="ReadOnlyMemory{T}"/>.</param>
-        /// <param name="start">The offset from the start of the <paramref name="manager" /> that the <paramref name="memory" /> represents.</param>
-        /// <param name="length">The length of the <paramref name="manager" /> that the <paramref name="memory" /> represents.</param>
+        /// <param name="start">The offset from the start of the <paramref name="manager" /> that the
+        // <paramref name="memory" /> represents.</param>
+        /// <param name="length">The length of the <paramref name="manager" /> that the <paramref
+        // name="memory" /> represents.</param>
         /// <returns>A <see cref="bool"/> indicating if it was successful.</returns>
         public static bool TryGetMemoryManager<T, TManager>(
             ReadOnlyMemory<T> memory,
@@ -400,7 +437,8 @@ namespace System.Runtime.InteropServices
 
         /// <summary>
         /// Creates an <see cref="IEnumerable{T}"/> view of the given <paramref name="memory" /> to allow
-        /// the <paramref name="memory" /> to be used in existing APIs that take an <see cref="IEnumerable{T}"/>.
+        /// the <paramref name="memory" /> to be used in existing APIs that take an <see
+        // cref="IEnumerable{T}"/>.
         /// </summary>
         /// <typeparam name="T">The element type of the <paramref name="memory" />.</typeparam>
         /// <param name="memory">The ReadOnlyMemory to view as an <see cref="IEnumerable{T}"/></param>
@@ -453,7 +491,8 @@ namespace System.Runtime.InteropServices
                 }
             }
 
-            // The ROM<T> wraps a MemoryManager<T>. The best we can do is iterate, accessing .Span on each MoveNext.
+            // The ROM<T> wraps a MemoryManager<T>. The best we can do is iterate, accessing .Span on each
+            // MoveNext.
             return FromMemoryManager(memory);
 
             static IEnumerable<T> FromMemoryManager(ReadOnlyMemory<T> memory)
@@ -465,7 +504,8 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        /// <summary>Attempts to get the underlying <see cref="string"/> from a <see cref="ReadOnlyMemory{T}"/>.</summary>
+        /// <summary>Attempts to get the underlying <see cref="string"/> from a <see
+        // cref="ReadOnlyMemory{T}"/>.</summary>
         /// <param name="memory">The memory that may be wrapping a <see cref="string"/> object.</param>
         /// <param name="text">The string.</param>
         /// <param name="start">The starting location in <paramref name="text"/>.</param>
@@ -575,10 +615,12 @@ namespace System.Runtime.InteropServices
 
         /// <summary>
         /// Re-interprets a span of bytes as a reference to structure of type T.
-        /// The type may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// The type may not contain pointers or references. This is checked at runtime in order to preserve
+        // type safety.
         /// </summary>
         /// <remarks>
-        /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
+        /// Supported only for platforms that support misaligned memory access or when the memory block is
+        // aligned by other means.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe ref T AsRef<T>(Span<byte> span)
@@ -597,10 +639,12 @@ namespace System.Runtime.InteropServices
 
         /// <summary>
         /// Re-interprets a span of bytes as a reference to structure of type T.
-        /// The type may not contain pointers or references. This is checked at runtime in order to preserve type safety.
+        /// The type may not contain pointers or references. This is checked at runtime in order to preserve
+        // type safety.
         /// </summary>
         /// <remarks>
-        /// Supported only for platforms that support misaligned memory access or when the memory block is aligned by other means.
+        /// Supported only for platforms that support misaligned memory access or when the memory block is
+        // aligned by other means.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe ref readonly T AsRef<T>(ReadOnlySpan<byte> span)
@@ -625,12 +669,15 @@ namespace System.Runtime.InteropServices
         /// <param name="start">The index at which to begin the memory.</param>
         /// <param name="length">The number of items in the memory.</param>
         /// <remarks>This method should only be called on an array that is already pinned and
-        /// that array should not be unpinned while the returned Memory<typeparamref name="T"/> is still in use.
+        /// that array should not be unpinned while the returned Memory<typeparamref name="T"/> is still in
+        // use.
         /// Calling this method on an unpinned array could result in memory corruption.</remarks>
         /// <remarks>Returns default when <paramref name="array"/> is null.</remarks>
-        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant and array's type is not exactly T[].</exception>
+        /// <exception cref="ArrayTypeMismatchException">Thrown when <paramref name="array"/> is covariant
+        // and array's type is not exactly T[].</exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or &gt;=Length).
+        /// Thrown when the specified <paramref name="start"/> or end index is not in the range (&lt;0 or
+        // &gt;=Length).
         /// </exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Memory<T> CreateFromPinnedArray<T>(T[]? array, int start, int length)

@@ -98,7 +98,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         /// <summary>
-        /// Tests invalid arguments to the CreateNew access parameter, specifically MemoryMappedFileAccess.Write.
+        /// Tests invalid arguments to the CreateNew access parameter, specifically
+        // MemoryMappedFileAccess.Write.
         /// </summary>
         [Fact]
         public void InvalidArguments_WriteAccess()
@@ -288,7 +289,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         /// <summary>
-        /// Test various combinations of arguments to CreateNew, validating the created maps each time they're created.
+        /// Test various combinations of arguments to CreateNew, validating the created maps each time
+        // they're created.
         /// </summary>
         [Theory]
         [MemberData(
@@ -368,7 +370,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         /// non-null may be excluded based on platform.
         /// "CreateUniqueMapName()" will be translated to an invocation of that method.
         /// </param>
-        /// <param name="capacities">The capacities to yield.  -1 will be translated to system page size.</param>
+        /// <param name="capacities">The capacities to yield.  -1 will be translated to system page
+        // size.</param>
         /// <param name="accesses">The accesses to yield</param>
         /// <param name="options">The options to yield.</param>
         /// <param name="inheritabilities">The inheritabilities to yield.</param>
@@ -473,7 +476,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         /// <summary>
-        /// Test to verify expected capacity with regards to page size and automatically rounding up to the nearest.
+        /// Test to verify expected capacity with regards to page size and automatically rounding up to the
+        // nearest.
         /// </summary>
         [PlatformSpecific(TestPlatforms.Windows)] // Usable capacity limits with MMF APIs different on Windows and Unix
         [Fact]
@@ -494,7 +498,8 @@ namespace System.IO.MemoryMappedFiles.Tests
         }
 
         /// <summary>
-        /// Test to verify expected capacity with regards to page size and automatically rounding up to the nearest.
+        /// Test to verify expected capacity with regards to page size and automatically rounding up to the
+        // nearest.
         /// </summary>
         [PlatformSpecific(TestPlatforms.AnyUnix)] // Usable capacity limits with MMF APIs different on Windows and Unix
         [Fact]

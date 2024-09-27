@@ -85,7 +85,8 @@ namespace System.Net.Http.Headers
             obj is WarningHeaderValue other
             && _code == other._code
             &&
-            // 'agent' is a host/token, i.e. use case-insensitive comparison. Use case-sensitive comparison for 'text'
+            // 'agent' is a host/token, i.e. use case-insensitive comparison. Use case-sensitive comparison for
+            // 'text'
             // since it is a quoted string.
             string.Equals(_agent, other._agent, StringComparison.OrdinalIgnoreCase)
             && string.Equals(_text, other._text, StringComparison.Ordinal)
@@ -244,7 +245,8 @@ namespace System.Net.Http.Headers
             int whitespaceLength = HttpRuleParser.GetWhitespaceLength(input, current);
             current += whitespaceLength;
 
-            // Make sure the number is followed by at least one whitespace and that we have characters left to parse.
+            // Make sure the number is followed by at least one whitespace and that we have characters left to
+            // parse.
             if ((whitespaceLength == 0) || (current == input.Length))
             {
                 return false;
@@ -315,7 +317,8 @@ namespace System.Net.Http.Headers
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(agent);
 
-            // 'receivedBy' can either be a host or a token. Since a token is a valid host, we only verify if the value
+            // 'receivedBy' can either be a host or a token. Since a token is a valid host, we only verify if
+            // the value
             // is a valid host.
             if (HttpRuleParser.GetHostLength(agent, 0, true) != agent.Length)
             {

@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.Operations;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    /// <summary>Analyzer that looks for empty array allocations and recommends their replacement.</summary>
+    /// <summary>Analyzer that looks for empty array allocations and recommends their
+    // replacement.</summary>
     public class EmptyArrayAnalyzer : DiagnosticAnalyzer
     {
         private const string SystemCategory = "System";
@@ -26,7 +27,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         private static readonly LocalizableString s_localizableMessage =
             "Empty array creation can be replaced with Array.Empty";
 
-        /// <summary>The diagnostic descriptor used when Array.Empty should be used instead of a new array allocation.</summary>
+        /// <summary>The diagnostic descriptor used when Array.Empty should be used instead of a new array
+        // allocation.</summary>
         public static readonly DiagnosticDescriptor UseArrayEmptyDescriptor =
             new DiagnosticDescriptor(
                 "EmptyArrayRule",
@@ -61,7 +63,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             );
         }
 
-        /// <summary>Called once at compilation start to register actions in the compilation context.</summary>
+        /// <summary>Called once at compilation start to register actions in the compilation
+        // context.</summary>
         /// <param name="context">The analysis context.</param>
         internal void RegisterOperationAction(CompilationStartAnalysisContext context)
         {
@@ -74,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     // ToDo: Need to suppress analysis of array creation expressions within attribute applications.
 
                     // Detect array creation expression that have rank 1 and size 0. Such expressions
-                    // can be replaced with Array.Empty<T>(), provided that the element type can be a generic type argument.
+                    // can be replaced with Array.Empty<T>(), provided that the element type can be a generic type
+                    // argument.
 
                     var elementType = (arrayCreation as IArrayTypeSymbol)?.ElementType;
                     if (

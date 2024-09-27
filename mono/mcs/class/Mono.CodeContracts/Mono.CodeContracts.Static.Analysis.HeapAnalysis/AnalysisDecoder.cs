@@ -293,7 +293,8 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis
                 }
             }
             //todo:
-            //				if (extraVarargs.Count == 0 && !this.MetaDataProvider.IsVoidMethod(method) && this.ContractProvider.)
+            //				if (extraVarargs.Count == 0 && !this.MetaDataProvider.IsVoidMethod(method) &&
+            // this.ContractProvider.)
 
             {
                 Property property;

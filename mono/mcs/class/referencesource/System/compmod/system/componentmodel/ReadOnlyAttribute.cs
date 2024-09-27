@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -40,15 +40,18 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Specifies the default value for the <see cref='System.ComponentModel.ReadOnlyAttribute'/> , which is <see cref='System.ComponentModel.ReadOnlyAttribute.No'/>, that is,
-        ///       the property this attribute is bound to is read/write. This <see langword='static'/> field is read-only.
+        ///       Specifies the default value for the <see cref='System.ComponentModel.ReadOnlyAttribute'/>
+        // , which is <see cref='System.ComponentModel.ReadOnlyAttribute.No'/>, that is,
+        ///       the property this attribute is bound to is read/write. This <see langword='static'/> field
+        // is read-only.
         ///    </para>
         /// </devdoc>
         public static readonly ReadOnlyAttribute Default = No;
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.ReadOnlyAttribute'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.ReadOnlyAttribute'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public ReadOnlyAttribute(bool isReadOnly)

@@ -689,7 +689,8 @@ namespace System.ServiceModel.Description
                                     TraceEventType.Information
                                 );
                                 // A SecurityException will be thrown if the detail can't be obtained in partial trust
-                                // (This is guaranteed to happen unless there's an Assert for MemberAccessPermission, since ExceptionDetail
+                                // (This is guaranteed to happen unless there's an Assert for MemberAccessPermission, since
+                                // ExceptionDetail
                                 //     has DataMembers that have private setters.)
                                 // In that case, we want to just move on.
                             }

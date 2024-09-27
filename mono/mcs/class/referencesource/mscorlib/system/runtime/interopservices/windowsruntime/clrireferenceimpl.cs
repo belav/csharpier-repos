@@ -87,9 +87,11 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
         // We have T in an IReference<T>.  Need to QI for IReference<T> with the appropriate GUID, call
         // the get_Value property, allocate an appropriately-sized managed object, marshal the native object
-        // to the managed object, and free the native method.  Also we want the return value boxed (aka normal value type boxing).
+        // to the managed object, and free the native method.  Also we want the return value boxed (aka
+        // normal value type boxing).
         //
-        // This method is called by VM. Mark the method with FriendAccessAllowed attribute to ensure that the unreferenced method
+        // This method is called by VM. Mark the method with FriendAccessAllowed attribute to ensure that
+        // the unreferenced method
         // optimization skips it and the code will be saved into NGen image.
         [System.Runtime.CompilerServices.FriendAccessAllowed]
         internal static Object UnboxHelper(Object wrapper)
@@ -267,11 +269,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             get { return _list.IsSynchronized; }
         }
 
-        // We have T in an IReferenceArray<T>.  Need to QI for IReferenceArray<T> with the appropriate GUID, call
+        // We have T in an IReferenceArray<T>.  Need to QI for IReferenceArray<T> with the appropriate GUID,
+        // call
         // the get_Value property, allocate an appropriately-sized managed object, marshal the native object
         // to the managed object, and free the native method.
         //
-        // This method is called by VM. Mark the method with FriendAccessAllowed attribute to ensure that the unreferenced method
+        // This method is called by VM. Mark the method with FriendAccessAllowed attribute to ensure that
+        // the unreferenced method
         // optimization skips it and the code will be saved into NGen image.
         [System.Runtime.CompilerServices.FriendAccessAllowed]
         internal static Object UnboxHelper(Object wrapper)

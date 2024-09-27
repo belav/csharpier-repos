@@ -46,11 +46,13 @@ namespace System.Data.Objects
         /// <summary>
         /// Creates a new ObjectSet that has a base ObjectQuery with the CommandText that represents
         /// all of the entities in the specified EntitySet.
-        /// Sets the query's command text to the fully-qualified, quoted, EntitySet name, i.e. [EntityContainerName].[EntitySetName]
+        /// Sets the query's command text to the fully-qualified, quoted, EntitySet name, i.e.
+        // [EntityContainerName].[EntitySetName]
         /// Explicitly set MergeOption to AppendOnly in order to mirror CreateQuery behavior
         /// </summary>
         /// <param name="entitySet">Metadata EntitySet on which to base the ObjectSet.</param>
-        /// <param name="context">ObjectContext to be used for the query and data modification operations.</param>
+        /// <param name="context">ObjectContext to be used for the query and data modification
+        // operations.</param>
         internal ObjectSet(EntitySet entitySet, ObjectContext context)
             : base(entitySet, context, MergeOption.AppendOnly)
         {
@@ -81,7 +83,8 @@ namespace System.Data.Objects
         /// <param name="entity">Entity to be added</param>
         public void AddObject(TEntity entity)
         {
-            // this method is expected to behave exactly like ObjectContext.AddObject -- see devnote at the top of this class
+            // this method is expected to behave exactly like ObjectContext.AddObject -- see devnote at the top
+            // of this class
             this.Context.AddObject(FullyQualifiedEntitySetName, entity);
         }
 
@@ -92,33 +95,41 @@ namespace System.Data.Objects
         /// <param name="entity">Entity to be attached</param>
         public void Attach(TEntity entity)
         {
-            // this method is expected to behave exactly like ObjectContext.AttachTo -- see devnote at the top of this class
+            // this method is expected to behave exactly like ObjectContext.AttachTo -- see devnote at the top
+            // of this class
             this.Context.AttachTo(FullyQualifiedEntitySetName, entity);
         }
 
         /// <summary>
-        /// Deletes an object from the ObjectContext. Validates that the object is in the referenced EntitySet in the context.
+        /// Deletes an object from the ObjectContext. Validates that the object is in the referenced
+        // EntitySet in the context.
         /// See ObjectContext.DeleteObject for more details.
         /// </summary>
         /// <param name="entity">Entity to be deleted.</param>
-        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the EntitySet.</exception>
+        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the
+        // EntitySet.</exception>
         public void DeleteObject(TEntity entity)
         {
-            // this method is expected to behave exactly like ObjectContext.DeleteObject -- see devnote at the top of this class
-            // Note that in this case we use an internal DeleteObject overload so we can have the context validate
+            // this method is expected to behave exactly like ObjectContext.DeleteObject -- see devnote at the
+            // top of this class
+            // Note that in this case we use an internal DeleteObject overload so we can have the context
+            // validate
             // the EntitySet after it verifies that the specified object is in the context at all.
             this.Context.DeleteObject(entity, EntitySet);
         }
 
         /// <summary>
-        /// Detaches an object from the ObjectContext. Validates that the object is in the referenced EntitySet in the context.
+        /// Detaches an object from the ObjectContext. Validates that the object is in the referenced
+        // EntitySet in the context.
         /// See ObjectContext.Detach for more details.
         /// </summary>
         /// <param name="entity">Entity to be detached.</param>
-        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the EntitySet.</exception>
+        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the
+        // EntitySet.</exception>
         public void Detach(TEntity entity)
         {
-            // this method is expected to behave exactly like ObjectContext.Detach -- see devnote at the top of this class
+            // this method is expected to behave exactly like ObjectContext.Detach -- see devnote at the top of
+            // this class
             // Note that in this case we use an internal Detach overload so we can have the context validate
             // the EntitySet after it verifies that the specified object is in the context at all.
             this.Context.Detach(entity, EntitySet);
@@ -131,7 +142,8 @@ namespace System.Data.Objects
         /// <param name="TEntity">Entity that contains changes to be applied.</param>
         public TEntity ApplyCurrentValues(TEntity currentEntity)
         {
-            // this method is expected to behave exactly like ObjectContext.ApplyCurrentValues -- see devnote at the top of this class
+            // this method is expected to behave exactly like ObjectContext.ApplyCurrentValues -- see devnote at
+            // the top of this class
             return this.Context.ApplyCurrentValues<TEntity>(
                 FullyQualifiedEntitySetName,
                 currentEntity
@@ -145,7 +157,8 @@ namespace System.Data.Objects
         /// <param name="TEntity">Entity that contains values to be applied.</param>
         public TEntity ApplyOriginalValues(TEntity originalEntity)
         {
-            // this method is expected to behave exactly like ObjectContext.ApplyOriginalValues -- see devnote at the top of this class
+            // this method is expected to behave exactly like ObjectContext.ApplyOriginalValues -- see devnote
+            // at the top of this class
             return this.Context.ApplyOriginalValues<TEntity>(
                 FullyQualifiedEntitySetName,
                 originalEntity
@@ -188,7 +201,8 @@ namespace System.Data.Objects
             get
             {
                 // Fully-qualified name is used to ensure the ObjectContext can always resolve the EntitySet name
-                // The identifiers used here should not be escaped with brackets ("[]") because the ObjectContext does not allow escaping for the EntitySet name
+                // The identifiers used here should not be escaped with brackets ("[]") because the ObjectContext
+                // does not allow escaping for the EntitySet name
                 return string.Format(
                     CultureInfo.InvariantCulture,
                     "{0}.{1}",

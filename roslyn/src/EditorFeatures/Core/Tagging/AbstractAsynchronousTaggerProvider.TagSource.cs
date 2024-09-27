@@ -26,18 +26,21 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
     {
         /// <summary>
         /// <para>The <see cref="TagSource"/> is the core part of our asynchronous
-        /// tagging infrastructure. It is the coordinator between <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>s,
+        /// tagging infrastructure. It is the coordinator between <see
+        // cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/>s,
         /// <see cref="ITaggerEventSource"/>s, and <see cref="ITagger{T}"/>s.</para>
         ///
         /// <para>The <see cref="TagSource"/> is the type that actually owns the
         /// list of cached tags. When an <see cref="ITaggerEventSource"/> says tags need to be  recomputed,
-        /// the tag source starts the computation and calls <see cref="ProduceTagsAsync(TaggerContext{TTag}, CancellationToken)"/> to build
+        /// the tag source starts the computation and calls <see cref="ProduceTagsAsync(TaggerContext{TTag},
+        // CancellationToken)"/> to build
         /// the new list of tags. When that's done, the tags are stored in <see cref="CachedTagTrees"/>. The
         /// tagger, when asked for tags from the editor, then returns the tags that are stored in
         /// <see cref="CachedTagTrees"/></para>
         ///
         /// <para>There is a one-to-many relationship between <see cref="TagSource"/>s
-        /// and <see cref="ITagger{T}"/>s. Special cases, like reference highlighting (which processes multiple
+        /// and <see cref="ITagger{T}"/>s. Special cases, like reference highlighting (which processes
+        // multiple
         /// subject buffers at once) have their own providers and tag source derivations.</para>
         /// </summary>
         private sealed partial class TagSource
@@ -75,8 +78,10 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private readonly AsyncBatchingWorkQueue<NormalizedSnapshotSpanCollection> _normalPriTagsChangedQueue;
 
             /// <summary>
-            /// Boolean specifies if this is the initial set of tags being computed or not.  This queue is used to batch
-            /// up event change notifications and only dispatch one recomputation every <see cref="EventChangeDelay"/>
+            /// Boolean specifies if this is the initial set of tags being computed or not.  This queue is used
+            // to batch
+            /// up event change notifications and only dispatch one recomputation every <see
+            // cref="EventChangeDelay"/>
             /// to actually produce the latest set of tags.
             /// </summary>
             private readonly AsyncBatchingWorkQueue<bool, VoidResult> _eventChangeQueue;
@@ -86,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             #region Fields that can only be accessed from the foreground thread
 
             /// <summary>
-            /// Cancellation token governing all our async work.  Canceled/disposed when we are <see cref="Dispose"/>'d.
+            /// Cancellation token governing all our async work.  Canceled/disposed when we are <see
+            // cref="Dispose"/>'d.
             /// </summary>
             private readonly CancellationTokenSource _disposalTokenSource = new();
 
@@ -94,11 +100,15 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private readonly ITextBuffer _subjectBuffer;
 
             /// <summary>
-            /// Used to keep track of if this <see cref="_subjectBuffer"/> is visible or not (e.g. is in some <see
+            /// Used to keep track of if this <see cref="_subjectBuffer"/> is visible or not (e.g. is in some
+            // <see
             /// cref="ITextView"/> that has some part visible or not.  This is used so we can <see
-            /// cref="PauseIfNotVisible"/> tagging when not visible to avoid wasting machine resources. Note: we do not
-            /// examine <see cref="_textView"/> for this as that is only available for "view taggers" (taggers which
-            /// only tag portions of the view) whereas we want this for all taggers (including just buffer taggers which
+            /// cref="PauseIfNotVisible"/> tagging when not visible to avoid wasting machine resources. Note: we
+            // do not
+            /// examine <see cref="_textView"/> for this as that is only available for "view taggers" (taggers
+            // which
+            /// only tag portions of the view) whereas we want this for all taggers (including just buffer
+            // taggers which
             /// tag the entire document).
             /// </summary>
             private readonly ITextBufferVisibilityTracker? _visibilityTracker;
@@ -130,14 +140,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             private object? _state_doNotAccessDirecty;
 
             /// <summary>
-            /// Keep track of if we are processing the first <see cref="ITagger{T}.GetTags"/> request.  If our provider returns
-            /// <see langword="true"/> for <see cref="AbstractAsynchronousTaggerProvider{TTag}.ComputeInitialTagsSynchronously"/>,
+            /// Keep track of if we are processing the first <see cref="ITagger{T}.GetTags"/> request.  If our
+            // provider returns
+            /// <see langword="true"/> for <see
+            // cref="AbstractAsynchronousTaggerProvider{TTag}.ComputeInitialTagsSynchronously"/>,
             /// then we'll want to synchronously block then and only then for tags.
             /// </summary>
             private bool _firstTagsRequest = true;
 
             /// <summary>
-            /// Whether or not tag generation is paused.  We pause producing tags when documents become non-visible.
+            /// Whether or not tag generation is paused.  We pause producing tags when documents become
+            // non-visible.
             /// See <see cref="_visibilityTracker"/>.
             /// </summary>
             private bool _paused = false;
@@ -174,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 // Collapse all booleans added to just a max of two ('true' or 'false') representing if we're being
                 // asked for initial tags or not
                 //
-                // PERF: Use AsyncBatchingWorkQueue<bool, VoidResult> instead of AsyncBatchingWorkQueue<bool> because
+                // PERF: Use AsyncBatchingWorkQueue<bool, VoidResult> instead of AsyncBatchingWorkQueue<bool>
+                // because
                 // the latter has an async state machine that rethrows a very common cancellation exception.
                 _eventChangeQueue = new AsyncBatchingWorkQueue<bool, VoidResult>(
                     dataSource.EventChangeDelay.ComputeTimeDelay(),
@@ -223,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 // Now hook up this tagger to all interesting events.
                 Connect();
 
-                // Now that we're all hooked up to the events we care about, start computing the initial set of tags at
+                // Now that we're all hooked up to the events we care about, start computing the initial set of tags
+                // at
                 // high priority.  We want to get the UI to a complete state as soon as possible.
                 EnqueueWork(highPriority: true);
 
@@ -284,7 +299,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
 
                 return;
 
-                // Keep in sync with TagSource.Connect above (just performing the disconnect operations in the reverse order
+                // Keep in sync with TagSource.Connect above (just performing the disconnect operations in the
+                // reverse order
                 void Disconnect()
                 {
                     _dataSource.ThreadingContext.ThrowIfNotOnUIThread();
@@ -348,7 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 _paused = false;
                 _eventSource.Resume();
 
-                // We just transitioned to being visible, compute our tags at high priority so the view is updated as
+                // We just transitioned to being visible, compute our tags at high priority so the view is updated
+                // as
                 // quickly as possible.
                 EnqueueWork(highPriority: true);
             }

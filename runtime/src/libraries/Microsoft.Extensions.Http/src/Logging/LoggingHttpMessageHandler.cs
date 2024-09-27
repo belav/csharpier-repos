@@ -21,10 +21,12 @@ namespace Microsoft.Extensions.Http.Logging
         private static readonly Func<string, bool> _shouldNotRedactHeaderValue = (header) => false;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoggingHttpMessageHandler"/> class with a specified logger.
+        /// Initializes a new instance of the <see cref="LoggingHttpMessageHandler"/> class with a specified
+        // logger.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to log to.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="logger"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="logger"/> is <see
+        // langword="null"/>.</exception>
         public LoggingHttpMessageHandler(ILogger logger)
         {
             ThrowHelper.ThrowIfNull(logger);
@@ -33,11 +35,14 @@ namespace Microsoft.Extensions.Http.Logging
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="LoggingHttpMessageHandler"/> class with a specified logger and options.
+        /// Initializes a new instance of the <see cref="LoggingHttpMessageHandler"/> class with a specified
+        // logger and options.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/> to log to.</param>
-        /// <param name="options">The <see cref="HttpClientFactoryOptions"/> used to configure the <see cref="LoggingHttpMessageHandler"/> instance.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="logger"/> or <paramref name="options"/> is <see langword="null"/>.</exception>
+        /// <param name="options">The <see cref="HttpClientFactoryOptions"/> used to configure the <see
+        // cref="LoggingHttpMessageHandler"/> instance.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="logger"/> or <paramref name="options"/>
+        // is <see langword="null"/>.</exception>
         public LoggingHttpMessageHandler(ILogger logger, HttpClientFactoryOptions options)
         {
             ThrowHelper.ThrowIfNull(logger);
@@ -65,7 +70,8 @@ namespace Microsoft.Extensions.Http.Logging
                 Func<string, bool> shouldRedactHeaderValue =
                     _options?.ShouldRedactHeaderValue ?? _shouldNotRedactHeaderValue;
 
-                // Not using a scope here because we always expect this to be at the end of the pipeline, thus there's
+                // Not using a scope here because we always expect this to be at the end of the pipeline, thus
+                // there's
                 // not really anything to surround.
                 Log.RequestStart(_logger, request, shouldRedactHeaderValue);
                 var stopwatch = ValueStopwatch.StartNew();
@@ -88,7 +94,8 @@ namespace Microsoft.Extensions.Http.Logging
         }
 
         /// <inheritdoc />
-        /// <remarks>Logs the request to and response from the sent <see cref="HttpRequestMessage"/>.</remarks>
+        /// <remarks>Logs the request to and response from the sent <see
+        // cref="HttpRequestMessage"/>.</remarks>
         protected override Task<HttpResponseMessage> SendAsync(
             HttpRequestMessage request,
             CancellationToken cancellationToken
@@ -96,7 +103,8 @@ namespace Microsoft.Extensions.Http.Logging
 
 #if NET5_0_OR_GREATER
         /// <inheritdoc />
-        /// <remarks>Logs the request to and response from the sent <see cref="HttpRequestMessage"/>.</remarks>
+        /// <remarks>Logs the request to and response from the sent <see
+        // cref="HttpRequestMessage"/>.</remarks>
         protected override HttpResponseMessage Send(
             HttpRequestMessage request,
             CancellationToken cancellationToken

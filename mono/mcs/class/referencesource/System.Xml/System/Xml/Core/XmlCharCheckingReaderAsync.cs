@@ -232,7 +232,8 @@ namespace System.Xml
 
             if (state != State.InReadBinary)
             {
-                // forward ReadBase64Chunk calls into the base (wrapped) reader if possible, i.e. if it can read binary and we
+                // forward ReadBase64Chunk calls into the base (wrapped) reader if possible, i.e. if it can read
+                // binary and we
                 // should not check characters
                 if (base.CanReadBinaryContent && (!checkCharacters))
                 {
@@ -241,7 +242,8 @@ namespace System.Xml
                     return await base.ReadContentAsBase64Async(buffer, index, count)
                         .ConfigureAwait(false);
                 }
-                // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore white spaces
+                // the wrapped reader cannot read chunks or we are on an element where we should check characters or
+                // ignore white spaces
                 else
                 {
                     readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
@@ -260,7 +262,8 @@ namespace System.Xml
                 }
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             state = State.Interactive;
 
             // call to the helper
@@ -286,7 +289,8 @@ namespace System.Xml
 
             if (state != State.InReadBinary)
             {
-                // forward ReadBinHexChunk calls into the base (wrapped) reader if possible, i.e. if it can read chunks and we
+                // forward ReadBinHexChunk calls into the base (wrapped) reader if possible, i.e. if it can read
+                // chunks and we
                 // should not check characters
                 if (base.CanReadBinaryContent && (!checkCharacters))
                 {
@@ -295,7 +299,8 @@ namespace System.Xml
                     return await base.ReadContentAsBinHexAsync(buffer, index, count)
                         .ConfigureAwait(false);
                 }
-                // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore white spaces
+                // the wrapped reader cannot read chunks or we are on an element where we should check characters or
+                // ignore white spaces
                 else
                 {
                     readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
@@ -314,7 +319,8 @@ namespace System.Xml
                 }
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             state = State.Interactive;
 
             // call to the helper
@@ -358,7 +364,8 @@ namespace System.Xml
 
             if (state != State.InReadBinary)
             {
-                // forward ReadBase64Chunk calls into the base (wrapped) reader if possible, i.e. if it can read binary and we
+                // forward ReadBase64Chunk calls into the base (wrapped) reader if possible, i.e. if it can read
+                // binary and we
                 // should not check characters
                 if (base.CanReadBinaryContent && (!checkCharacters))
                 {
@@ -367,7 +374,8 @@ namespace System.Xml
                     return await base.ReadElementContentAsBase64Async(buffer, index, count)
                         .ConfigureAwait(false);
                 }
-                // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore white spaces
+                // the wrapped reader cannot read chunks or we are on an element where we should check characters or
+                // ignore white spaces
                 else
                 {
                     readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
@@ -386,7 +394,8 @@ namespace System.Xml
                 }
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             state = State.Interactive;
 
             // call to the helper
@@ -429,7 +438,8 @@ namespace System.Xml
 
             if (state != State.InReadBinary)
             {
-                // forward ReadBinHexChunk calls into the base (wrapped) reader if possible, i.e. if it can read chunks and we
+                // forward ReadBinHexChunk calls into the base (wrapped) reader if possible, i.e. if it can read
+                // chunks and we
                 // should not check characters
                 if (base.CanReadBinaryContent && (!checkCharacters))
                 {
@@ -438,7 +448,8 @@ namespace System.Xml
                     return await base.ReadElementContentAsBinHexAsync(buffer, index, count)
                         .ConfigureAwait(false);
                 }
-                // the wrapped reader cannot read chunks or we are on an element where we should check characters or ignore white spaces
+                // the wrapped reader cannot read chunks or we are on an element where we should check characters or
+                // ignore white spaces
                 else
                 {
                     readBinaryHelper = ReadContentAsBinaryHelper.CreateOrReset(
@@ -457,7 +468,8 @@ namespace System.Xml
                 }
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             state = State.Interactive;
 
             // call to the helper

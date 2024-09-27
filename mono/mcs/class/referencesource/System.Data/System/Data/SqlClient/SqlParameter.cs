@@ -437,8 +437,10 @@ namespace System.Data.SqlClient
             return MetaDataForSmi(out peekAhead);
         }
 
-        // IMPORTANT DEVNOTE: This method is being used for parameter encryption functionality, to get the type_info TDS object from SqlParameter.
-        // Please consider impact to that when changing this method. Refer to the callers of SqlParameter.GetMetadataForTypeInfo().
+        // IMPORTANT DEVNOTE: This method is being used for parameter encryption functionality, to get the
+        // type_info TDS object from SqlParameter.
+        // Please consider impact to that when changing this method. Refer to the callers of
+        // SqlParameter.GetMetadataForTypeInfo().
         internal MSS.SmiParameterMetaData MetaDataForSmi(out ParameterPeekAheadValue peekAhead)
         {
             peekAhead = null;
@@ -838,9 +840,12 @@ namespace System.Data.SqlClient
                         return _value;
                     }
 
-                    // SQLBU 503165: for Date and DateTime2, return the CLR object directly without converting it to a SqlValue
-                    // SQLBU 527900: GetMetaTypeOnly() will convert _value to a string in the case of char or char[], so only check
-                    //               the SqlDbType for DateTime. This is the only case when we might return the CLR value directly.
+                    // SQLBU 503165: for Date and DateTime2, return the CLR object directly without converting it to a
+                    // SqlValue
+                    // SQLBU 527900: GetMetaTypeOnly() will convert _value to a string in the case of char or char[], so
+                    // only check
+                    //               the SqlDbType for DateTime. This is the only case when we might return the CLR
+                    // value directly.
                     if (_value is DateTime)
                     {
                         SqlDbType sqlDbType = GetMetaTypeOnly().SqlDbType;
@@ -1025,7 +1030,8 @@ namespace System.Data.SqlClient
                         case SqlDbType.VarChar:
                         case SqlDbType.Text:
                             {
-                                // for these types, ActualSize is the num of chars, not actual bytes - since non-unicode chars are not always uniform size
+                                // for these types, ActualSize is the num of chars, not actual bytes - since non-unicode chars are
+                                // not always uniform size
                                 coercedSize =
                                     ((!_isNull) && (!_coercedValueIsDataFeed))
                                         ? (StringSize(val, _coercedValueIsSqlType))
@@ -1666,7 +1672,8 @@ namespace System.Data.SqlClient
                     SmiExtendedMetaData candidateMd =
                         MSS.MetaDataUtilsSmi.SmiMetaDataFromSchemaTableRow(row);
 
-                    // Determine destination ordinal.  Allow for ordinal not specified by assuming rowOrdinal *is* columnOrdinal
+                    // Determine destination ordinal.  Allow for ordinal not specified by assuming rowOrdinal *is*
+                    // columnOrdinal
                     //  in that case, but don't worry about mix-and-match of the two techniques
                     int columnOrdinal = rowOrdinal;
                     if (!row.IsNull(ordinalForColumnOrdinal))
@@ -1696,7 +1703,8 @@ namespace System.Data.SqlClient
                     }
                     else
                     {
-                        // Disallow two columns using the same ordinal (even if due to mixing null and non-null columnOrdinals)
+                        // Disallow two columns using the same ordinal (even if due to mixing null and non-null
+                        // columnOrdinals)
                         if (fields[columnOrdinal] != null)
                         {
                             throw SQL.InvalidSchemaTableOrdinals();
@@ -1930,7 +1938,8 @@ namespace System.Data.SqlClient
             MetaType metaType = GetMetaTypeOnly();
             _internalMetaType = metaType;
 
-            // NOTE: (General Criteria): SqlParameter does a Size Validation check and would fail if the size is 0.
+            // NOTE: (General Criteria): SqlParameter does a Size Validation check and would fail if the size is
+            // 0.
             //                           This condition filters all scenarios where we view a valid size 0.
             if (
                 ADP.IsDirection(this, ParameterDirection.Output)
@@ -2014,7 +2023,8 @@ namespace System.Data.SqlClient
                 // 'TdsEnums.TYPE_SIZE_LIMIT' is in bytes;
                 // For Non-NCharType and for non-Yukon or greater variables, size should be maintained;
                 // Reverting changes from bug VSTFDevDiv # 479739 as it caused an regression;
-                // Modifed variable names from 'size' to 'sizeInCharacters', 'actualSize' to 'actualSizeInBytes', and
+                // Modifed variable names from 'size' to 'sizeInCharacters', 'actualSize' to 'actualSizeInBytes',
+                // and
                 // 'maxSize' to 'maxSizeInBytes'
                 // The idea is to
                 //  1) revert the regression from bug 479739
@@ -2031,7 +2041,8 @@ namespace System.Data.SqlClient
                 else
                 {
                     // Notes:
-                    // Elevation from (n)(var)char (4001+) to (n)text succeeds without failure only with Yukon and greater.
+                    // Elevation from (n)(var)char (4001+) to (n)text succeeds without failure only with Yukon and
+                    // greater.
                     // it fails in sql server 2000
                     maxSizeInBytes =
                         (sizeInCharacters > actualSizeInBytes)

@@ -61,7 +61,8 @@ internal static class WorkspaceConfigurationOptionsStorage
         );
 
     /// <summary>
-    /// This option allows the user to enable this. We are putting this behind a feature flag for now since we could have extensions
+    /// This option allows the user to enable this. We are putting this behind a feature flag for now
+    // since we could have extensions
     /// surprised by this and we want some time to work through those issues.
     /// </summary>
     public static readonly Option2<bool?> EnableOpeningSourceGeneratedFilesInWorkspace =

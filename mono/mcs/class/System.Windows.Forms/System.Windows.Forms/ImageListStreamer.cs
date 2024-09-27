@@ -157,16 +157,16 @@ namespace System.Windows.Forms
             bmp.Dispose();
         }
 
-        /*
-        static void WriteToFile (MemoryStream st)
-        {
-            st.Position = 0;
-            FileStream fs = File.OpenWrite (Path.GetTempFileName ());
-            Console.WriteLine ("Writing to {0}", fs.Name);
-            st.WriteTo (fs);
-            fs.Close ();
-        }
-        */
+/*
+static void WriteToFile (MemoryStream st)
+{
+st.Position = 0;
+FileStream fs = File.OpenWrite (Path.GetTempFileName ());
+Console.WriteLine ("Writing to {0}", fs.Name);
+st.WriteTo (fs);
+fs.Close ();
+}
+*/
 
         static byte[] header = new byte[] { 77, 83, 70, 116, 73, 76, 1, 1 };
 

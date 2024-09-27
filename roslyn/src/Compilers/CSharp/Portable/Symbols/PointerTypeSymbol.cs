@@ -51,7 +51,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Gets the type of the storage location that an instance of the pointer type points to, along with its annotations.
+        /// Gets the type of the storage location that an instance of the pointer type points to, along with
+        // its annotations.
         /// </summary>
         public TypeWithAnnotations PointedAtTypeWithAnnotations
         {

@@ -14,7 +14,8 @@ namespace System.Reflection.Runtime.Dispensers
     internal static class DispenserFactory
     {
         //
-        // Note: If your K is a valuetype, use CreateDispenserV() instead. Some algorithms will not be available for use.
+        // Note: If your K is a valuetype, use CreateDispenserV() instead. Some algorithms will not be
+        // available for use.
         //
         public static Dispenser<K, V> CreateDispenser<
             K,

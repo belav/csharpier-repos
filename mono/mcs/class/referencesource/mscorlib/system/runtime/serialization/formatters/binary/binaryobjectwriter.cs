@@ -4,14 +4,14 @@
 //
 // ==--==
 /*============================================================
- **
- ** Class: ObjectWriter
- **
- **
- ** Purpose: Serializes an object graph into XML in SOAP format
- **
- **
- ===========================================================*/
+**
+** Class: ObjectWriter
+**
+**
+** Purpose: Serializes an object graph into XML in SOAP format
+**
+**
+===========================================================*/
 
 namespace System.Runtime.Serialization.Formatters.Binary
 {
@@ -439,8 +439,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
 
                     objectInfo.GetMemberInfo(out memberNames, out memberTypes, out memberData);
 
-                    // Only Binary needs to transmit types for ISerializable because the binary formatter transmits the types in URT format.
-                    // Soap transmits all types as strings, so it is up to the ISerializable object to convert the string back to its URT type
+                    // Only Binary needs to transmit types for ISerializable because the binary formatter transmits the
+                    // types in URT format.
+                    // Soap transmits all types as strings, so it is up to the ISerializable object to convert the
+                    // string back to its URT type
                     if (
                         objectInfo.isSi
                         || CheckTypeFormat(
@@ -1562,7 +1564,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
             serWriter.WriteSerializationHeader((int)topId, (int)headerId, 1, 0);
         }
 
-        // Transforms a type to the serialized string form. URT Primitive types are converted to XMLData Types
+        // Transforms a type to the serialized string form. URT Primitive types are converted to XMLData
+        // Types
         private NameInfo TypeToNameInfo(
             Type type,
             WriteObjectInfo objectInfo,

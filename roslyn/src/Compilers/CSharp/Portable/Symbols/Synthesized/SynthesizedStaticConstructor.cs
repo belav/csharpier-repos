@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override LexicalSortKey GetLexicalSortKey()
         {
-            //For the sake of matching the metadata output of the native compiler, make synthesized constructors appear last in the metadata.
+            //For the sake of matching the metadata output of the native compiler, make synthesized constructors
+            // appear last in the metadata.
             //This is not critical, but it makes it easier on tools that are comparing metadata.
             return LexicalSortKey.SynthesizedCCtor;
         }

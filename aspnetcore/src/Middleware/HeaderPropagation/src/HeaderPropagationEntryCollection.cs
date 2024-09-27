@@ -42,7 +42,8 @@ public sealed class HeaderPropagationEntryCollection : Collection<HeaderPropagat
     }
 
     /// <summary>
-    /// Adds an <see cref="HeaderPropagationEntry"/> that will use the provided <paramref name="inboundHeaderName"/>
+    /// Adds an <see cref="HeaderPropagationEntry"/> that will use the provided <paramref
+    // name="inboundHeaderName"/>
     /// and <paramref name="outboundHeaderName"/>.
     /// </summary>
     /// <param name="inboundHeaderName">
@@ -60,7 +61,8 @@ public sealed class HeaderPropagationEntryCollection : Collection<HeaderPropagat
     }
 
     /// <summary>
-    /// Adds an <see cref="HeaderPropagationEntry"/> that will use the provided <paramref name="inboundHeaderName"/>,
+    /// Adds an <see cref="HeaderPropagationEntry"/> that will use the provided <paramref
+    // name="inboundHeaderName"/>,
     /// <paramref name="outboundHeaderName"/>, and <paramref name="valueFilter"/>.
     /// </summary>
     /// <param name="inboundHeaderName">

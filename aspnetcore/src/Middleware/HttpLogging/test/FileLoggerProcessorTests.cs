@@ -418,7 +418,8 @@ public class FileLoggerProcessorTests
                 await WaitForFile(filePath2, _messageTwo.Length).DefaultTimeout();
             }
 
-            // Even with a big enough FileSizeLimit, we still won't try to write to files from a previous instance.
+            // Even with a big enough FileSizeLimit, we still won't try to write to files from a previous
+            // instance.
             options.FileSizeLimit = 10000;
 
             await using (
@@ -494,7 +495,8 @@ public class FileLoggerProcessorTests
                 await WaitForFile(filePath3, _messageThree.Length).DefaultTimeout();
             }
 
-            // Even with a big enough FileSizeLimit, we still won't try to write to files from a previous instance.
+            // Even with a big enough FileSizeLimit, we still won't try to write to files from a previous
+            // instance.
             options.FileSizeLimit = 10000;
 
             await using (

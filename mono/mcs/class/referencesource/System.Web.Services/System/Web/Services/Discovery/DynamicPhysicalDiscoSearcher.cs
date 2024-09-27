@@ -14,7 +14,8 @@ namespace System.Web.Services.Discovery
     using System.IO;
     using System.Text;
 
-    /// <include file='doc\DynamicPhysicalDiscoSearcher.uex' path='docs/doc[@for="DynamicPhysicalDiscoSearcher"]/*' />
+    /// <include file='doc\DynamicPhysicalDiscoSearcher.uex'
+    // path='docs/doc[@for="DynamicPhysicalDiscoSearcher"]/*' />
     /// <devdoc>
     /// Does a recursive search of virtual subdirectories to find stuff to
     /// make a disco file from. *.disco files (or whatever the PrimarySearchPattern is) are

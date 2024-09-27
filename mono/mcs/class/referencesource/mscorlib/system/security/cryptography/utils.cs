@@ -680,7 +680,8 @@ namespace System.Security.Cryptography
             else if (parameters.KeyNumber == Constants.CALG_RSA_KEYX)
                 parameters.KeyNumber = Constants.AT_KEYEXCHANGE;
 
-            // If no key container was specified and UseDefaultKeyContainer is not used, then use CRYPT_VERIFYCONTEXT
+            // If no key container was specified and UseDefaultKeyContainer is not used, then use
+            // CRYPT_VERIFYCONTEXT
             // to generate an ephemeral key
             randomKeyContainer =
                 (parameters.Flags & CspProviderFlags.CreateEphemeralKey)
@@ -762,7 +763,8 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <returns>
         ///     True if the FIPS policy is enabled, false otherwise.  An error reading the policy key is
-        ///     interpreted as if the policy is enabled, and a missing key is interpreted as the policy being
+        ///     interpreted as if the policy is enabled, and a missing key is interpreted as the policy
+        // being
         ///     disabled.
         /// </returns>
         [System.Security.SecurityCritical] // auto-generated
@@ -1209,7 +1211,8 @@ namespace System.Security.Cryptography
             int cb = rsa.KeySize / 8;
 
             // 1. Decode the input data
-            // It is important that the Integer to Octet String conversion errors be indistinguishable from the other decoding
+            // It is important that the Integer to Octet String conversion errors be indistinguishable from the
+            // other decoding
             // errors to protect against chosen cipher text attacks
             // A lecture given by James Manger during Crypto 2001 explains the issue in details
             byte[] data = null;
@@ -1316,7 +1319,8 @@ namespace System.Security.Cryptography
             // STRUCTURE {
             //  STRUCTURE {
             //    OID <hash algorithm OID>
-            //    NULL (0x05 0x00)  // this is actually an ANY and contains the parameters of the algorithm specified by the OID, I think
+            //    NULL (0x05 0x00)  // this is actually an ANY and contains the parameters of the algorithm
+            // specified by the OID, I think
             //  }
             //  OCTET STRING <hashvalue>
             // }
@@ -1413,7 +1417,8 @@ namespace System.Security.Cryptography
         //
         // Because the SignHash()/VerifyHash()/Encrypt()/Decrypt() methods are new on RSA, we may
         // encounter older third-party RSA-derived classes that don't override them
-        // (and if they don't override them, these methods will throw since they are effectively abstract methods that had to declared non-abstract
+        // (and if they don't override them, these methods will throw since they are effectively abstract
+        // methods that had to declared non-abstract
         // for backward compat reasons.)
         //
         internal static bool DoesRsaKeyOverride(

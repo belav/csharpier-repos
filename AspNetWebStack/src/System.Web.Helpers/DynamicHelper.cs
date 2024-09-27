@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,14 @@ namespace Microsoft.Internal.Web.Utils
     /// </summary>
     internal static class DynamicHelper
     {
-        // We must pass in "object" instead of "dynamic" for the target dynamic object because if we use dynamic, the compiler will
-        // convert the call to this helper into a dynamic expression, even though we don't need it to be.  Since this class is internal,
+        // We must pass in "object" instead of "dynamic" for the target dynamic object because if we use
+        // dynamic, the compiler will
+        // convert the call to this helper into a dynamic expression, even though we don't need it to be.
+        // Since this class is internal,
         // it cannot be accessed from a dynamic expression and thus we get errors.
 
-        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for
+        // details
         public static bool TryGetMemberValue(object obj, string memberName, out object result)
         {
             try
@@ -37,7 +41,8 @@ namespace Microsoft.Internal.Web.Utils
             return false;
         }
 
-        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for
+        // details
         [SuppressMessage(
             "Microsoft.Design",
             "CA1031:DoNotCatchGeneralExceptionTypes",
@@ -47,8 +52,10 @@ namespace Microsoft.Internal.Web.Utils
         {
             try
             {
-                // VB us an instance of GetBinderAdapter that does not implement FallbackGetMemeber. This causes lookup of property expressions on dynamic objects to fail.
-                // Since all types are private to the assembly, we assume that as long as they belong to CSharp runtime, it is the right one.
+                // VB us an instance of GetBinderAdapter that does not implement FallbackGetMemeber. This causes
+                // lookup of property expressions on dynamic objects to fail.
+                // Since all types are private to the assembly, we assume that as long as they belong to CSharp
+                // runtime, it is the right one.
                 if (typeof(Binder).Assembly.Equals(binder.GetType().Assembly))
                 {
                     // Only use the binder if its a C# binder.
@@ -67,14 +74,16 @@ namespace Microsoft.Internal.Web.Utils
             }
         }
 
-        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for
+        // details
         public static object GetMemberValue(object obj, string memberName)
         {
             var callSite = GetMemberAccessCallSite(memberName);
             return callSite.Target(callSite, obj);
         }
 
-        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for
+        // details
         public static object GetMemberValue(object obj, GetMemberBinder binder)
         {
             var callSite = GetMemberAccessCallSite(binder);
@@ -84,10 +93,13 @@ namespace Microsoft.Internal.Web.Utils
         // dynamic d = new object();
         // object s = d.Name;
         // The following code gets generated for this expression:
-        // callSite = CallSite<Func<CallSite, object, object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "Name", typeof(Program), new CSharpArgumentInfo[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }));
+        // callSite = CallSite<Func<CallSite, object,
+        // object>>.Create(Binder.GetMember(CSharpBinderFlags.None, "Name", typeof(Program), new
+        // CSharpArgumentInfo[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }));
         // callSite.Target(callSite, d);
         // typeof(Program) is the containing type of the dynamic operation.
-        // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at
+        // top for details
         public static CallSite<Func<CallSite, object, object>> GetMemberAccessCallSite(
             string memberName
         )
@@ -101,7 +113,8 @@ namespace Microsoft.Internal.Web.Utils
             return GetMemberAccessCallSite(binder);
         }
 
-        // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the callsite's target parameter from dynamic to object, see comment at
+        // top for details
         public static CallSite<Func<CallSite, object, object>> GetMemberAccessCallSite(
             CallSiteBinder binder
         )
@@ -109,7 +122,8 @@ namespace Microsoft.Internal.Web.Utils
             return CallSite<Func<CallSite, object, object>>.Create(binder);
         }
 
-        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for details
+        // Dev10 Bug 914027 - Changed the first parameter from dynamic to object, see comment at top for
+        // details
         public static IEnumerable<string> GetMemberNames(object obj)
         {
             var provider = obj as IDynamicMetaObjectProvider;

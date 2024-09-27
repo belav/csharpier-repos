@@ -8,7 +8,8 @@ using Xunit.Sdk;
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-// This is a workaround for https://github.com/xunit/xunit/issues/1782 - as such, this code is a copy-paste
+// This is a workaround for https://github.com/xunit/xunit/issues/1782 - as such, this code is a
+// copy-paste
 // from xUnit with the exception of fixing the bug.
 //
 // This will only work with [ConditionalTheory].
@@ -53,7 +54,8 @@ internal sealed class WORKAROUND_SkippedDataRowTestCase : XunitTestCase
     /// </summary>
     /// <param name="diagnosticMessageSink">The message sink used to send diagnostic messages</param>
     /// <param name="defaultMethodDisplay">Default method display to use (when not customized).</param>
-    /// <param name="defaultMethodDisplayOptions">Default method display options to use (when not customized).</param>
+    /// <param name="defaultMethodDisplayOptions">Default method display options to use (when not
+    // customized).</param>
     /// <param name="testMethod">The test method this test case belongs to.</param>
     /// <param name="skipReason">The reason that this test case will be skipped</param>
     /// <param name="testMethodArguments">The arguments for the test method.</param>

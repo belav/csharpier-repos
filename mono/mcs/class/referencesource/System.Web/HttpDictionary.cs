@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Ordered dictionary keyed by string
- * -- Utility class used in Collections
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Ordered dictionary keyed by string
+* -- Utility class used in Collections
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {

@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             string getClassName()
             {
-                // we include the module name in the name of the PrivateImplementationDetails class so that more than
+                // we include the module name in the name of the PrivateImplementationDetails class so that more
+                // than
                 // one of them can be included in an assembly as part of netmodules.
                 var name =
                     (moduleBuilder.OutputKind == OutputKind.NetModule)
@@ -218,11 +219,13 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal bool IsFrozen => _frozen != 0;
 
         /// <summary>
-        /// Gets a field that can be used to cache an array allocated to store data from a corresponding <see cref="CreateDataField"/> call.
+        /// Gets a field that can be used to cache an array allocated to store data from a corresponding
+        // <see cref="CreateDataField"/> call.
         /// </summary>
         /// <param name="data">The data that will be used to initialize the field.</param>
         /// <param name="arrayType">The type of the field, e.g. int[].</param>
-        /// <param name="emitContext">The emit context to use with the array type to extract its element type.</param>
+        /// <param name="emitContext">The emit context to use with the array type to extract its element
+        // type.</param>
         /// <returns>The field to use to cache an array for this data and alignment.</returns>
         internal Cci.IFieldReference CreateArrayCachingField(
             ImmutableArray<byte> data,
@@ -247,15 +250,19 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         or Cci.PrimitiveTypeCode.Float64
             );
 
-            // Create a dedicated mapped field for the array type, separate from the data that'll be stored into that array.
-            // Call sites will lazily instantiate the array to cache in this field, rather than forcibly instantiating
+            // Create a dedicated mapped field for the array type, separate from the data that'll be stored into
+            // that array.
+            // Call sites will lazily instantiate the array to cache in this field, rather than forcibly
+            // instantiating
             // all of them when the private implementation details class is first used.
             return _cachedArrayFields.GetOrAdd(
                 (data, (ushort)typeCode),
                 key =>
                 {
-                    // Hash the data to hex, but then tack on _A(ElementType). This is needed both to differentiate the array field from
-                    // the data field, but also to differentiate multiple fields that may have the same raw data but different array types.
+                    // Hash the data to hex, but then tack on _A(ElementType). This is needed both to differentiate the
+                    // array field from
+                    // the data field, but also to differentiate multiple fields that may have the same raw data but
+                    // different array types.
                     string name = $"{HashToHex(key.Data)}_A{key.ElementType}";
 
                     return new CachedArrayField(name, this, arrayType);
@@ -268,18 +275,28 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// </summary>
         /// <param name="data">The data for the field.</param>
         /// <param name="alignment">
-        /// The alignment value is the necessary alignment for addresses for the underlying element type of the array.
-        /// The data is stored by using a type whose size is equal to the total size of the blob. If a built-in system
-        /// type has an appropriate size and .pack, it can be used. Otherwise, a type is generated of the same size as
-        /// the data, and that type needs its .pack set to the alignment required for the underlying data. While that
-        /// .pack value isn't required by anything else in the compiler (the compiler always aligns RVA fields at 8-byte
-        /// boundaries, which accomodates any element type that's relevant), it is necessary for IL rewriters. Such rewriters
-        /// also need to ensure an appropriate alignment is maintained for the RVA field, and while they could also simplify
-        /// by choosing a worst-case alignment as does the compiler, they may instead use the .pack value as the alignment
-        /// to use for that field, since it's an opaque blob with no other indication as to what kind of data is
+        /// The alignment value is the necessary alignment for addresses for the underlying element type of
+        // the array.
+        /// The data is stored by using a type whose size is equal to the total size of the blob. If a
+        // built-in system
+        /// type has an appropriate size and .pack, it can be used. Otherwise, a type is generated of the
+        // same size as
+        /// the data, and that type needs its .pack set to the alignment required for the underlying data.
+        // While that
+        /// .pack value isn't required by anything else in the compiler (the compiler always aligns RVA
+        // fields at 8-byte
+        /// boundaries, which accomodates any element type that's relevant), it is necessary for IL
+        // rewriters. Such rewriters
+        /// also need to ensure an appropriate alignment is maintained for the RVA field, and while they
+        // could also simplify
+        /// by choosing a worst-case alignment as does the compiler, they may instead use the .pack value as
+        // the alignment
+        /// to use for that field, since it's an opaque blob with no other indication as to what kind of
+        // data is
         /// stored and what alignment might be required.
         /// </param>
-        /// <returns>The field. This may have been newly created or may be an existing field previously created for the same data and alignment.</returns>
+        /// <returns>The field. This may have been newly created or may be an existing field previously
+        // created for the same data and alignment.</returns>
         internal Cci.IFieldReference CreateDataField(ImmutableArray<byte> data, ushort alignment)
         {
             Debug.Assert(!IsFrozen);
@@ -709,13 +726,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public sealed override bool Equals(object? obj)
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
 
         public sealed override int GetHashCode()
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
     }
@@ -906,13 +925,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public sealed override bool Equals(object? obj)
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
 
         public sealed override int GetHashCode()
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
     }

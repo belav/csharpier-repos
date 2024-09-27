@@ -41,10 +41,12 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
 
         /// <summary>
         /// Specifies where the exception region starts and ends after the update. This value is 0-based.
-        /// An exception region value generally corresponds to a catch { } block source span before any update is made.
+        /// An exception region value generally corresponds to a catch { } block source span before any
+        // update is made.
         /// </summary>
         /// <remarks>
-        /// This value will take into account any lines affected by the update, so we can correctly track the new exception regions
+        /// This value will take into account any lines affected by the update, so we can correctly track
+        // the new exception regions
         /// when remapping the instruction pointer.
         /// The new span is expected to be: [PreviousExceptionRegionSpan] + [Delta of updated lines].
         /// </remarks>

@@ -40,8 +40,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Generate the list of implemented interfaces
-         */
+        * Generate the list of implemented interfaces
+        */
         protected override void GenerateInterfaces()
         {
             base.GenerateInterfaces();
@@ -71,8 +71,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build first-time intialization statements
-         */
+        * Build first-time intialization statements
+        */
         protected override void BuildInitStatements(
             CodeStatementCollection trueStatements,
             CodeStatementCollection topLevelStatements
@@ -146,8 +146,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the default constructor
-         */
+        * Build the default constructor
+        */
         protected override void BuildDefaultConstructor()
         {
             base.BuildDefaultConstructor();
@@ -430,8 +430,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build various properties, fields, methods
-         */
+        * Build various properties, fields, methods
+        */
         protected override void BuildMiscClassMembers()
         {
             base.BuildMiscClassMembers();
@@ -459,8 +459,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the data tree for the GetTypeHashCode method
-         */
+        * Build the data tree for the GetTypeHashCode method
+        */
         private void BuildGetTypeHashCodeMethod()
         {
             CodeMemberMethod method = new CodeMemberMethod();
@@ -487,8 +487,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the contents of the FrameworkInitialize method
-         */
+        * Build the contents of the FrameworkInitialize method
+        */
         protected override void BuildFrameworkInitializeMethodContents(CodeMemberMethod method)
         {
             // Generate code to apply stylesheet before calling base.FrameworkInitialize();
@@ -594,8 +594,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the data tree for the AspCompat implementation for IHttpAsyncHandler:
-         */
+        * Build the data tree for the AspCompat implementation for IHttpAsyncHandler:
+        */
         private void BuildAspCompatMethods()
         {
             CodeMemberMethod method;
@@ -659,8 +659,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the data tree for the Async page implementation for IHttpAsyncHandler:
-         */
+        * Build the data tree for the Async page implementation for IHttpAsyncHandler:
+        */
         private void BuildAsyncPageMethods()
         {
             CodeMemberMethod method;
@@ -724,9 +724,9 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build a ProcessRequest override which just calls the base.  This is used to make sure
-         * there is user code on the stack when requests are executed (VSWhidbey 499386)
-         */
+        * Build a ProcessRequest override which just calls the base.  This is used to make sure
+        * there is user code on the stack when requests are executed (VSWhidbey 499386)
+        */
         private void BuildProcessRequestOverride()
         {
             //  public override void ProcessRequest(HttpContext context) {

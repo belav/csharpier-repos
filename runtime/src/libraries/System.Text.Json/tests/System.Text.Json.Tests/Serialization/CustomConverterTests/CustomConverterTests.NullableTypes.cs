@@ -200,7 +200,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             // For compat, deserialize does not call converter for null token unless the type doesn't support
             // null or HandleNull is overridden and returns 'true'.
-            // For compat, serialize does not call converter for null unless null is a valid value and HandleNull is true.
+            // For compat, serialize does not call converter for null unless null is a valid value and
+            // HandleNull is true.
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new NullIntTo42Converter());
@@ -367,7 +368,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void StructConverter_SaysCanConvertNullableStruct_ConverterOnType()
         {
-            // Converter cannot be applied directly to nullable type, so the serializer wraps the converter it with NullableConverter<T> as expected.
+            // Converter cannot be applied directly to nullable type, so the serializer wraps the converter it
+            // with NullableConverter<T> as expected.
 
             string serialized = JsonSerializer.Serialize(
                 new ClassWithNullableStruct_ConverterOnType
@@ -406,7 +408,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void StructConverter_SaysCanConvertNullableStruct_StructAsRootType_ConverterOnType()
         {
-            // Converter cannot be applied directly to nullable type, so the serializer wraps the converter it with NullableConverter<T> as expected.
+            // Converter cannot be applied directly to nullable type, so the serializer wraps the converter it
+            // with NullableConverter<T> as expected.
 
             TestStructWithConverter? obj = new TestStructWithConverter { InnerValue = 5 };
             string serialized = JsonSerializer.Serialize(obj);

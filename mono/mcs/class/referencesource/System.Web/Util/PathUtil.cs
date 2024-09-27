@@ -20,7 +20,8 @@ namespace System.Web.Util
             return Environment.GetFolderPath(Environment.SpecialFolder.System);
         }
 
-        // Gets the full path to a file in the SYSTEM32 folder (which is correct for both 32-bit and 64-bit architectures).
+        // Gets the full path to a file in the SYSTEM32 folder (which is correct for both 32-bit and 64-bit
+        // architectures).
         // Example: "foo.dll" -> "C:\Windows\System32\foo.dll"
         internal static string GetSystemDllFullPath(string filename)
         {

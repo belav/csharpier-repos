@@ -8,7 +8,8 @@ namespace System.ServiceModel
     using System.ServiceModel.Channels;
 
     /// <summary>
-    /// An interface used by ChannelBase to override the ServiceChannel that would normally be returned by ClientBase.
+    /// An interface used by ChannelBase to override the ServiceChannel that would normally be returned
+    // by ClientBase.
     /// </summary>
     internal interface IChannelBaseProxy
     {

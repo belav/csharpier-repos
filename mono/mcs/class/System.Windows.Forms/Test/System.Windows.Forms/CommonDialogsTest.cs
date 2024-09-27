@@ -230,7 +230,8 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(Color.Black, fd.Color, "#67");
             Assert.IsFalse(fd.FixedPitchOnly, "#68");
 
-            //Assert.AreEqual ("[Font: Name=Microsoft Sans Serif, Size=8,25, Units=3, GdiCharSet=0, GdiVerticalFont=False]", fd.Font.ToString (), "#69");
+            //Assert.AreEqual ("[Font: Name=Microsoft Sans Serif, Size=8,25, Units=3, GdiCharSet=0,
+            // GdiVerticalFont=False]", fd.Font.ToString (), "#69");
 
             Assert.IsFalse(fd.FontMustExist, "#70");
 
@@ -247,7 +248,8 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.IsFalse(fd.ShowHelp, "#77");
 
-            //Assert.AreEqual ("System.Windows.Forms.FontDialog,  Font: [Font: Name=Microsoft Sans Serif, Size=8,25, Units=3, GdiCharSet=0, GdiVerticalFont=False]", fd.ToString (), "#78");
+            //Assert.AreEqual ("System.Windows.Forms.FontDialog,  Font: [Font: Name=Microsoft Sans Serif,
+            // Size=8,25, Units=3, GdiCharSet=0, GdiVerticalFont=False]", fd.ToString (), "#78");
 
             fd.MaxSize = -1;
             Assert.AreEqual(0, fd.MaxSize, "#79");
@@ -265,20 +267,32 @@ namespace MonoTests.System.Windows.Forms
 
         [Test]
         [NUnit.Framework.Category("NotWorking")]
-        /* a few people have been seeing the following:
+/* a few people have been seeing the following:
 Failures:
-1) MonoTests.System.Windows.Forms.CommonDialogsTest.FolderBrowserDialogTest : System.ArgumentException : oldValue is the empty string.
-  at System.String.Replace (System.String oldValue, System.String newValue) [0x00054] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/corlib/System/String.cs:1285
-  at System.Windows.Forms.FolderBrowserDialog+FolderBrowserTreeView.SetSelectedPath (System.String path) [0x00061] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:460
-  at System.Windows.Forms.FolderBrowserDialog+FolderBrowserTreeView.set_SelectedPath (System.String value) [0x0000c] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:363
-  at (wrapper remoting-invoke-with-check) FolderBrowserTreeView:set_SelectedPath (string)
-  at System.Windows.Forms.FolderBrowserDialog.set_SelectedPath (System.String value) [0x0001a] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:223
-  at (wrapper remoting-invoke-with-check) System.Windows.Forms.FolderBrowserDialog:set_SelectedPath (string)
-  at MonoTests.System.Windows.Forms.CommonDialogsTest.FolderBrowserDialogTest () [0x00094] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/CommonDialogsTest.cs:260
-  at <0x00000> <unknown method>
-  at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[])
-  at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x00040] in /tmp/scratch/BUILD/mono-1.2.70507/mcs/class/corlib/System.Reflection/MonoMethod.cs:143
-        */
+1) MonoTests.System.Windows.Forms.CommonDialogsTest.FolderBrowserDialogTest :
+System.ArgumentException : oldValue is the empty string.
+at System.String.Replace (System.String oldValue, System.String newValue) [0x00054] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/corlib/System/String.cs:1285
+at System.Windows.Forms.FolderBrowserDialog+FolderBrowserTreeView.SetSelectedPath (System.String
+path) [0x00061] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:460
+at System.Windows.Forms.FolderBrowserDialog+FolderBrowserTreeView.set_SelectedPath (System.String
+value) [0x0000c] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:363
+at (wrapper remoting-invoke-with-check) FolderBrowserTreeView:set_SelectedPath (string)
+at System.Windows.Forms.FolderBrowserDialog.set_SelectedPath (System.String value) [0x0001a] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/System.Windows.Forms/FolderBrowserDialog.cs:223
+at (wrapper remoting-invoke-with-check) System.Windows.Forms.FolderBrowserDialog:set_SelectedPath
+(string)
+at MonoTests.System.Windows.Forms.CommonDialogsTest.FolderBrowserDialogTest () [0x00094] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/Managed.Windows.Forms/Test/System.Windows.Forms/CommonDialogsTest.cs:260
+at <0x00000> <unknown method>
+at (wrapper managed-to-native) System.Reflection.MonoMethod:InternalInvoke (object,object[])
+at System.Reflection.MonoMethod.Invoke (System.Object obj, BindingFlags invokeAttr,
+System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo
+culture) [0x00040] in
+/tmp/scratch/BUILD/mono-1.2.70507/mcs/class/corlib/System.Reflection/MonoMethod.cs:143
+*/
         public void FolderBrowserDialogTest()
         {
             fbd = new FolderBrowserDialog();

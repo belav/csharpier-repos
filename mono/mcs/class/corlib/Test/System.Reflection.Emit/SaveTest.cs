@@ -921,7 +921,8 @@ namespace MonoTests.System.Reflection.Emit
             paramb.SetConstant(16);
             paramb.SetCustomAttribute(cattrb);
             paramb = ctorb.DefineParameter(2, ParameterAttributes.Out, "param2");
-            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
+            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor
+            // (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
             // .cctor
             var ctorb2 = tb5.DefineConstructor(
                 MethodAttributes.Public | MethodAttributes.Static,
@@ -950,10 +951,12 @@ namespace MonoTests.System.Reflection.Emit
             paramb = mb.DefineParameter(1, ParameterAttributes.None, "param1");
             paramb.SetConstant(16);
             paramb = mb.DefineParameter(2, ParameterAttributes.Out, "param2");
-            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
+            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor
+            // (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
             // return value
             paramb = mb.DefineParameter(0, ParameterAttributes.None, "ret");
-            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
+            //paramb.SetCustomAttribute (new CustomAttributeBuilder (typeof (MarshalAsAttribute).GetConstructor
+            // (new Type [] { typeof (UnmanagedType) }), new object [] { UnmanagedType.U4 }));
             paramb.SetCustomAttribute(cattrb);
             // override method
             tb5.AddInterfaceImplementation(typeof(IComparable));

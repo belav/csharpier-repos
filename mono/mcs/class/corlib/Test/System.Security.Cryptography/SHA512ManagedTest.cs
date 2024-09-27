@@ -68,7 +68,8 @@ namespace MonoTests.System.Security.Cryptography
         public void FIPSCompliance_Test2()
         {
             SHA512 sha = (SHA512)hash;
-            // Second test, we hash the string "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
+            // Second test, we hash the string
+            // "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu"
             FIPS186_Test2(sha);
         }
 

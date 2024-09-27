@@ -28,7 +28,8 @@ namespace System.Data
     {
         #region Constructors
         /// <summary>
-        /// initializes a new instance of EntityCommandExecutionException, no message, no inner exception.  Probably shouldn't
+        /// initializes a new instance of EntityCommandExecutionException, no message, no inner exception.
+        // Probably shouldn't
         /// exist, but it makes FxCop happy.
         /// </summary>
         public EntityCommandExecutionException()
@@ -38,7 +39,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// initializes a new instance of EntityCommandExecutionException, with message, no inner exception.  Probably shouldn't
+        /// initializes a new instance of EntityCommandExecutionException, with message, no inner exception.
+        // Probably shouldn't
         /// exist, but it makes FxCop happy.
         /// </summary>
         public EntityCommandExecutionException(string message)
@@ -48,7 +50,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// initializes a new instance of EntityCommandExecutionException with message and an inner exception instance
+        /// initializes a new instance of EntityCommandExecutionException with message and an inner
+        // exception instance
         /// </summary>
         /// <param name="message"></param>
         /// <param name="innerException"></param>
@@ -59,7 +62,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// initializes a new instance EntityCommandExecutionException with a given SerializationInfo and StreamingContext
+        /// initializes a new instance EntityCommandExecutionException with a given SerializationInfo and
+        // StreamingContext
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>

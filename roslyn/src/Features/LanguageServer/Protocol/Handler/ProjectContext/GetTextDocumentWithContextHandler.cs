@@ -57,10 +57,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 contexts.Add(projectContext);
             }
 
-            // If the document is open, it doesn't matter which DocumentId we pass to GetDocumentIdInCurrentContext since
-            // all the documents are linked at that point, so we can just pass the first arbitrarily. If the document is closed
-            // GetDocumentIdInCurrentContext will just return the same ID back, which means we're going to pick the first
-            // ID in GetDocumentIdsWithFilePath, but there's really nothing we can do since we don't have contexts for
+            // If the document is open, it doesn't matter which DocumentId we pass to
+            // GetDocumentIdInCurrentContext since
+            // all the documents are linked at that point, so we can just pass the first arbitrarily. If the
+            // document is closed
+            // GetDocumentIdInCurrentContext will just return the same ID back, which means we're going to pick
+            // the first
+            // ID in GetDocumentIdsWithFilePath, but there's really nothing we can do since we don't have
+            // contexts for
             // close documents anyways.
             var openDocument = documents.First();
             var currentContextDocumentId = context.Workspace.GetDocumentIdInCurrentContext(

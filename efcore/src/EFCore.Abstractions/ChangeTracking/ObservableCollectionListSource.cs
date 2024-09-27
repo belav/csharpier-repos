@@ -9,19 +9,23 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 
 /// <summary>
-///     Extends <see cref="ObservableCollection{T}" /> and adds an explicit implementation of <see cref="IListSource" />.
+///     Extends <see cref="ObservableCollection{T}" /> and adds an explicit implementation of <see
+// cref="IListSource" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The method <see cref="IListSource.GetList" /> is implemented to return an <see cref="IBindingList" />
+///         The method <see cref="IListSource.GetList" /> is implemented to return an <see
+// cref="IBindingList" />
 ///         implementation that stays in sync with the ObservableCollection.
 ///     </para>
 ///     <para>
-///         This class can be used to implement navigation properties on entities for use in Windows Forms data binding.
+///         This class can be used to implement navigation properties on entities for use in Windows
+// Forms data binding.
 ///         For WPF data binding use an ObservableCollection rather than an instance of this class.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities in EF Core</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-local-views">Local views of tracked entities
+// in EF Core</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
@@ -40,7 +44,8 @@ public class ObservableCollectionListSource<T> : ObservableCollection<T>, IListS
     public ObservableCollectionListSource() { }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class that
+    ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class
+    // that
     ///     contains elements copied from the specified collection.
     /// </summary>
     /// <param name="collection">The collection from which the elements are copied.</param>
@@ -48,7 +53,8 @@ public class ObservableCollectionListSource<T> : ObservableCollection<T>, IListS
         : base(collection) { }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class that
+    ///     Initializes a new instance of the <see cref="ObservableCollectionListSource{T}" /> class
+    // that
     ///     contains elements copied from the specified list.
     /// </summary>
     /// <param name="list">The list from which the elements are copied.</param>

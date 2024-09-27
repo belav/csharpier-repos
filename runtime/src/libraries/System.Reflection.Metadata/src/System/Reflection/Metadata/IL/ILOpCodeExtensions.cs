@@ -51,7 +51,8 @@ namespace System.Reflection.Metadata
         /// </summary>
         /// <param name="opCode">Branch op-code.</param>
         /// <returns>1 if <paramref name="opCode"/> is a short branch or 4 if it is a long branch.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch
+        // op-code.</exception>
         public static int GetBranchOperandSize(this ILOpCode opCode)
         {
             switch (opCode)
@@ -97,7 +98,8 @@ namespace System.Reflection.Metadata
         /// </summary>
         /// <param name="opCode">Branch op-code.</param>
         /// <returns>Short form of the branch op-code.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch
+        // op-code.</exception>
         public static ILOpCode GetShortBranch(this ILOpCode opCode)
         {
             switch (opCode)
@@ -169,7 +171,8 @@ namespace System.Reflection.Metadata
         /// </summary>
         /// <param name="opCode">Branch op-code.</param>
         /// <returns>Long form of the branch op-code.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
+        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch
+        // op-code.</exception>
         public static ILOpCode GetLongBranch(this ILOpCode opCode)
         {
             switch (opCode)

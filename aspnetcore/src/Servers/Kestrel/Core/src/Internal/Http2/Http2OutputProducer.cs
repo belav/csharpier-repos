@@ -40,10 +40,12 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
     private long _unconsumedBytes;
     private long _streamWindow;
 
-    // For scheduling changes that don't affect the number of bytes written to the pipe, we need another state.
+    // For scheduling changes that don't affect the number of bytes written to the pipe, we need another
+    // state.
     private State _unobservedState;
 
-    // This reflects the current state of the output, the current state becomes the unobserved state after it has been observed.
+    // This reflects the current state of the output, the current state becomes the unobserved state
+    // after it has been observed.
     private State _currentState;
     private bool _completedResponse;
     private bool _requestProcessingComplete;
@@ -63,7 +65,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         _pipeWriter = new ConcurrentPipeWriter(_pipe.Writer, _memoryPool, _dataWriterLock);
         _pipeReader = _pipe.Reader;
 
-        // No need to pass in timeoutControl here, since no minDataRates are passed to the TimingPipeFlusher.
+        // No need to pass in timeoutControl here, since no minDataRates are passed to the
+        // TimingPipeFlusher.
         // The minimum output data rate is enforced at the connection level by Http2FrameWriter.
         _flusher = new TimingPipeFlusher(timeoutControl: null, _log);
         _flusher.Initialize(_pipeWriter);
@@ -251,7 +254,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         }
     }
 
-    // This is called when a CancellationToken fires mid-write. In HTTP/1.x, this aborts the entire connection.
+    // This is called when a CancellationToken fires mid-write. In HTTP/1.x, this aborts the entire
+    // connection.
     // For HTTP/2 we abort the stream.
     void IHttpOutputAborter.Abort(ConnectionAbortedException abortReason)
     {
@@ -376,7 +380,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
     {
         lock (_dataWriterLock)
         {
-            // The HPACK header compressor is stateful, if we compress headers for an aborted stream we must send them.
+            // The HPACK header compressor is stateful, if we compress headers for an aborted stream we must
+            // send them.
             // Optimize for not compressing or sending them.
             if (_completeScheduled)
             {
@@ -414,7 +419,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         {
             ThrowIfSuffixSentOrCompleted();
 
-            // This length check is important because we don't want to set _startedWritingDataFrames unless a data
+            // This length check is important because we don't want to set _startedWritingDataFrames unless a
+            // data
             // frame will actually be written causing the headers to be flushed.
             if (_completeScheduled || data.Length == 0)
             {
@@ -551,7 +557,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         {
             ThrowIfSuffixSentOrCompleted();
 
-            // This length check is important because we don't want to set _startedWritingDataFrames unless a data
+            // This length check is important because we don't want to set _startedWritingDataFrames unless a
+            // data
             // frame will actually be written causing the headers to be flushed.
             if (_completeScheduled || data.Length == 0)
             {
@@ -673,7 +680,8 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
             if (_resetErrorCode is { } error)
             {
                 // If we have an error code to write, write it now that we're done with the response.
-                // Always send the reset even if the response body is completed. The request body may not have completed yet.
+                // Always send the reset even if the response body is completed. The request body may not have
+                // completed yet.
                 task = _frameWriter.WriteRstStreamAsync(StreamId, error);
             }
 

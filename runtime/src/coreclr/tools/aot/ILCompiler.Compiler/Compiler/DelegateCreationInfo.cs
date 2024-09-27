@@ -189,7 +189,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Constructs a new instance of <see cref="DelegateCreationInfo"/> set up to construct a delegate of type
+        /// Constructs a new instance of <see cref="DelegateCreationInfo"/> set up to construct a delegate
+        // of type
         /// '<paramref name="delegateType"/>' pointing to '<paramref name="targetMethod"/>'.
         /// </summary>
         public static DelegateCreationInfo Create(
@@ -235,7 +236,8 @@ namespace ILCompiler
                 }
                 else
                 {
-                    // Closed delegate to a static method (i.e. delegate to an extension method that locks the first parameter)
+                    // Closed delegate to a static method (i.e. delegate to an extension method that locks the first
+                    // parameter)
                     invokeThunk = delegateInfo.Thunks[DelegateThunkKind.ClosedStaticThunk];
                     initMethod = systemDelegate.GetKnownMethod("InitializeClosedStaticThunk", null);
                 }

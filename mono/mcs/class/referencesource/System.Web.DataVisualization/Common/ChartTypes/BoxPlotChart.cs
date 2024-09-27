@@ -281,7 +281,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// This method recalculates size of the bars. This method is used
         /// from Paint or Select method.
         /// </summary>
-        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is
+        // active.</param>
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
@@ -1247,7 +1248,8 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// This method recalculates size of the bars. This method is used
         /// from Paint or Select method.
         /// </summary>
-        /// <param name="selection">If True selection mode is active, otherwise paint mode is active.</param>
+        /// <param name="selection">If True selection mode is active, otherwise paint mode is
+        // active.</param>
         /// <param name="graph">The Chart Graphics object.</param>
         /// <param name="common">The Common elements object.</param>
         /// <param name="area">Chart area for this chart.</param>
@@ -2356,14 +2358,16 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             //Nothing to dispose at the base class.
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {

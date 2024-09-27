@@ -16,7 +16,8 @@ namespace System.Threading
     /// Provides lazy initialization routines.
     /// </summary>
     /// <remarks>
-    /// These routines avoid needing to allocate a dedicated, lazy-initialization instance, instead using
+    /// These routines avoid needing to allocate a dedicated, lazy-initialization instance, instead
+    // using
     /// references to ensure targets have been initialized as they are accessed.
     /// </remarks>
     public static class LazyInitializer
@@ -40,10 +41,14 @@ namespace System.Threading
         /// types, see other overloads of EnsureInitialized.
         /// </para>
         /// <para>
-        /// This method may be used concurrently by multiple threads to initialize <paramref name="target"/>.
-        /// In the event that multiple threads access this method concurrently, multiple instances of <typeparamref name="T"/>
-        /// may be created, but only one will be stored into <paramref name="target"/>. In such an occurrence, this method will not dispose of the
-        /// objects that were not stored.  If such objects must be disposed, it is up to the caller to determine
+        /// This method may be used concurrently by multiple threads to initialize <paramref
+        // name="target"/>.
+        /// In the event that multiple threads access this method concurrently, multiple instances of
+        // <typeparamref name="T"/>
+        /// may be created, but only one will be stored into <paramref name="target"/>. In such an
+        // occurrence, this method will not dispose of the
+        /// objects that were not stored.  If such objects must be disposed, it is up to the caller to
+        // determine
         /// if an object was not used and to then dispose of the object appropriately.
         /// </para>
         /// </remarks>
@@ -99,14 +104,19 @@ namespace System.Threading
         /// <remarks>
         /// <para>
         /// This method may only be used on reference types, and <paramref name="valueFactory"/> may
-        /// not return a null reference (<see langword="Nothing" /> in Visual Basic). To ensure initialization of value types or
+        /// not return a null reference (<see langword="Nothing" /> in Visual Basic). To ensure
+        // initialization of value types or
         /// to allow null reference types, see other overloads of EnsureInitialized.
         /// </para>
         /// <para>
-        /// This method may be used concurrently by multiple threads to initialize <paramref name="target"/>.
-        /// In the event that multiple threads access this method concurrently, multiple instances of <typeparamref name="T"/>
-        /// may be created, but only one will be stored into <paramref name="target"/>. In such an occurrence, this method will not dispose of the
-        /// objects that were not stored.  If such objects must be disposed, it is up to the caller to determine
+        /// This method may be used concurrently by multiple threads to initialize <paramref
+        // name="target"/>.
+        /// In the event that multiple threads access this method concurrently, multiple instances of
+        // <typeparamref name="T"/>
+        /// may be created, but only one will be stored into <paramref name="target"/>. In such an
+        // occurrence, this method will not dispose of the
+        /// objects that were not stored.  If such objects must be disposed, it is up to the caller to
+        // determine
         /// if an object was not used and to then dispose of the object appropriately.
         /// </para>
         /// </remarks>
@@ -142,10 +152,13 @@ namespace System.Threading
         /// <typeparam name="T">The type of the reference to be initialized.</typeparam>
         /// <param name="target">A reference or value of type <typeparamref name="T"/> to initialize if it
         /// has not already been initialized.</param>
-        /// <param name="initialized">A reference to a boolean that determines whether the target has already
+        /// <param name="initialized">A reference to a boolean that determines whether the target has
+        // already
         /// been initialized.</param>
-        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for initializing
-        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't already
+        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for
+        // initializing
+        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't
+        // already
         /// been initialized, a new object will be instantiated.</param>
         /// <returns>The initialized value of type <typeparamref name="T"/>.</returns>
         public static T EnsureInitialized<
@@ -174,8 +187,10 @@ namespace System.Threading
         /// </summary>
         /// <typeparam name="T">The type of target.</typeparam>
         /// <param name="target">A reference to the target to be initialized.</param>
-        /// <param name="initialized">A reference to a location tracking whether the target has been initialized.</param>
-        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If <paramref name="syncLock"/> is null,
+        /// <param name="initialized">A reference to a location tracking whether the target has been
+        // initialized.</param>
+        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If
+        // <paramref name="syncLock"/> is null,
         /// a new object will be instantiated.
         /// </param>
         /// <returns>The initialized object.</returns>
@@ -186,7 +201,8 @@ namespace System.Threading
                 T
         >([AllowNull] ref T target, ref bool initialized, [NotNull] ref object? syncLock)
         {
-            // Lazily initialize the lock if necessary and then double check if initialization is still required.
+            // Lazily initialize the lock if necessary and then double check if initialization is still
+            // required.
             lock (EnsureLockInitialized(ref syncLock))
             {
                 if (!Volatile.Read(ref initialized))
@@ -210,16 +226,20 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Initializes a target reference or value type with a specified function if it has not already been
+        /// Initializes a target reference or value type with a specified function if it has not already
+        // been
         /// initialized.
         /// </summary>
         /// <typeparam name="T">The type of the reference to be initialized.</typeparam>
         /// <param name="target">A reference or value of type <typeparamref name="T"/> to initialize if it
         /// has not already been initialized.</param>
-        /// <param name="initialized">A reference to a boolean that determines whether the target has already
+        /// <param name="initialized">A reference to a boolean that determines whether the target has
+        // already
         /// been initialized.</param>
-        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for initializing
-        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't already
+        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for
+        // initializing
+        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't
+        // already
         /// been initialized, a new object will be instantiated.</param>
         /// <param name="valueFactory">The <see cref="Func{T}"/> invoked to initialize the
         /// reference or value.</param>
@@ -246,8 +266,10 @@ namespace System.Threading
         /// </summary>
         /// <typeparam name="T">The type of target.</typeparam>
         /// <param name="target">A reference to the target to be initialized.</param>
-        /// <param name="initialized">A reference to a location tracking whether the target has been initialized.</param>
-        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If <paramref name="syncLock"/> is null,
+        /// <param name="initialized">A reference to a location tracking whether the target has been
+        // initialized.</param>
+        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If
+        // <paramref name="syncLock"/> is null,
         /// a new object will be instantiated.</param>
         /// <param name="valueFactory">
         /// The <see cref="Func{T}"/> to invoke in order to produce the lazily-initialized value.
@@ -260,7 +282,8 @@ namespace System.Threading
             Func<T> valueFactory
         )
         {
-            // Lazily initialize the lock if necessary and then double check if initialization is still required.
+            // Lazily initialize the lock if necessary and then double check if initialization is still
+            // required.
             lock (EnsureLockInitialized(ref syncLock))
             {
                 if (!Volatile.Read(ref initialized))
@@ -274,14 +297,20 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Initializes a target reference type with a specified function if it has not already been initialized.
+        /// Initializes a target reference type with a specified function if it has not already been
+        // initialized.
         /// </summary>
-        /// <typeparam name="T">The type of the reference to be initialized. Has to be reference type.</typeparam>
-        /// <param name="target">A reference of type <typeparamref name="T"/> to initialize if it has not already been initialized.</param>
-        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for initializing
-        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't already
+        /// <typeparam name="T">The type of the reference to be initialized. Has to be reference
+        // type.</typeparam>
+        /// <param name="target">A reference of type <typeparamref name="T"/> to initialize if it has not
+        // already been initialized.</param>
+        /// <param name="syncLock">A reference to an object used as the mutually exclusive lock for
+        // initializing
+        /// <paramref name="target"/>. If <paramref name="syncLock"/> is null, and if the target hasn't
+        // already
         /// been initialized, a new object will be instantiated.</param>
-        /// <param name="valueFactory">The <see cref="Func{T}"/> invoked to initialize the reference.</param>
+        /// <param name="valueFactory">The <see cref="Func{T}"/> invoked to initialize the
+        // reference.</param>
         /// <returns>The initialized value of type <typeparamref name="T"/>.</returns>
         public static T EnsureInitialized<T>(
             [NotNull] ref T? target,
@@ -293,12 +322,14 @@ namespace System.Threading
             ?? EnsureInitializedCore(ref target, ref syncLock, valueFactory);
 
         /// <summary>
-        /// Ensure the target is initialized and return the value (slow path). This overload works only for reference type targets.
+        /// Ensure the target is initialized and return the value (slow path). This overload works only for
+        // reference type targets.
         /// Uses the supplied function to create the value.
         /// </summary>
         /// <typeparam name="T">The type of target. Has to be reference type.</typeparam>
         /// <param name="target">A reference to the target to be initialized.</param>
-        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If <paramref name="syncLock"/> is null,
+        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If
+        // <paramref name="syncLock"/> is null,
         /// a new object will be instantiated.</param>
         /// <param name="valueFactory">
         /// The <see cref="Func{T}"/> to invoke in order to produce the lazily-initialized value.
@@ -311,7 +342,8 @@ namespace System.Threading
         )
             where T : class
         {
-            // Lazily initialize the lock if necessary and then double check if initialization is still required.
+            // Lazily initialize the lock if necessary and then double check if initialization is still
+            // required.
             lock (EnsureLockInitialized(ref syncLock))
             {
                 if (Volatile.Read(ref target) == null)
@@ -331,7 +363,8 @@ namespace System.Threading
         /// <summary>
         /// Ensure the lock object is initialized.
         /// </summary>
-        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If <paramref name="syncLock"/> is null,
+        /// <param name="syncLock">A reference to a location containing a mutual exclusive lock. If
+        // <paramref name="syncLock"/> is null,
         /// a new object will be instantiated.</param>
         /// <returns>Initialized lock object.</returns>
         private static object EnsureLockInitialized([NotNull] ref object? syncLock) =>

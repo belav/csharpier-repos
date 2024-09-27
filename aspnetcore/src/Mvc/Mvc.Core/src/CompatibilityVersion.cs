@@ -79,15 +79,18 @@ public enum CompatibilityVersion
     Version_2_2,
 
     /// <summary>
-    /// Sets the default value of settings on <see cref="MvcOptions"/> and other <c>Options</c> types to match
+    /// Sets the default value of settings on <see cref="MvcOptions"/> and other <c>Options</c> types to
+    // match
     /// the behavior of ASP.NET Core MVC 3.0.
     /// </summary>
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Version_3_0,
 
     /// <summary>
-    /// Sets the default value of settings on <see cref="MvcOptions"/> to match the latest release. Use this
-    /// value with care, upgrading minor versions will cause breaking changes when using <see cref="Latest"/>.
+    /// Sets the default value of settings on <see cref="MvcOptions"/> to match the latest release. Use
+    // this
+    /// value with care, upgrading minor versions will cause breaking changes when using <see
+    // cref="Latest"/>.
     /// </summary>
     [Obsolete("This " + nameof(CompatibilityVersion) + " value is obsolete.")]
     Latest = int.MaxValue,

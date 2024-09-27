@@ -78,21 +78,22 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.ColumnName, "missing column ColumnName");
-                dataRow[schemaTable.ColumnName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.ColumnName, "missing column ColumnName");
+dataRow[schemaTable.ColumnName] = value;
+}*/
         }
 
         //internal Int32 Ordinal {
-        /*get {
-            Debug.Assert(null != schemaTable.Ordinal, "no column Ordinal");
-            return Convert.ToInt32(dataRow[schemaTable.Ordinal, DataRowVersion.Default], CultureInfo.InvariantCulture);
-        }*/
-        /*set {
-            Debug.Assert(null != schemaTable.Ordinal, "missing column Ordinal");
-            dataRow[schemaTable.Ordinal] = value;
-        }*/
+/*get {
+Debug.Assert(null != schemaTable.Ordinal, "no column Ordinal");
+return Convert.ToInt32(dataRow[schemaTable.Ordinal, DataRowVersion.Default],
+CultureInfo.InvariantCulture);
+}*/
+/*set {
+Debug.Assert(null != schemaTable.Ordinal, "missing column Ordinal");
+dataRow[schemaTable.Ordinal] = value;
+}*/
 
         //}
 
@@ -108,10 +109,10 @@ namespace System.Data.Common
                 }
                 return 0;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.Size, "missing column Size");
-                dataRow[schemaTable.Size] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.Size, "missing column Size");
+dataRow[schemaTable.Size] = value;
+}*/
         }
 
         internal string BaseColumnName
@@ -128,10 +129,10 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.BaseColumnName, "missing column BaseColumnName");
-                dataRow[schemaTable.BaseColumnName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.BaseColumnName, "missing column BaseColumnName");
+dataRow[schemaTable.BaseColumnName] = value;
+}*/
         }
 
         internal string BaseServerName
@@ -148,10 +149,10 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.BaseServerName, "missing column BaseServerName");
-                dataRow[schemaTable.BaseServerName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.BaseServerName, "missing column BaseServerName");
+dataRow[schemaTable.BaseServerName] = value;
+}*/
         }
 
         internal string BaseCatalogName
@@ -168,10 +169,10 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.BaseCatalogName, "missing column BaseCatalogName");
-                dataRow[schemaTable.BaseCatalogName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.BaseCatalogName, "missing column BaseCatalogName");
+dataRow[schemaTable.BaseCatalogName] = value;
+}*/
         }
 
         internal string BaseSchemaName
@@ -188,10 +189,10 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.BaseSchemaName, "missing column BaseSchemaName");
-                dataRow[schemaTable.BaseSchemaName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.BaseSchemaName, "missing column BaseSchemaName");
+dataRow[schemaTable.BaseSchemaName] = value;
+}*/
         }
 
         internal string BaseTableName
@@ -208,10 +209,10 @@ namespace System.Data.Common
                 }
                 return "";
             }
-            /*set {
-                Debug.Assert(null != schemaTable.BaseTableName, "missing column BaseTableName");
-                dataRow[schemaTable.BaseTableName] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.BaseTableName, "missing column BaseTableName");
+dataRow[schemaTable.BaseTableName] = value;
+}*/
         }
 
         internal bool IsAutoIncrement
@@ -228,10 +229,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsAutoIncrement, "missing column IsAutoIncrement");
-                dataRow[schemaTable.IsAutoIncrement] = (bool)value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsAutoIncrement, "missing column IsAutoIncrement");
+dataRow[schemaTable.IsAutoIncrement] = (bool)value;
+}*/
         }
 
         internal bool IsUnique
@@ -248,10 +249,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsUnique, "missing column IsUnique");
-                dataRow[schemaTable.IsUnique] = (bool)value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsUnique, "missing column IsUnique");
+dataRow[schemaTable.IsUnique] = (bool)value;
+}*/
         }
 
         internal bool IsRowVersion
@@ -268,10 +269,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsRowVersion, "missing column IsRowVersion");
-                dataRow[schemaTable.IsRowVersion] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsRowVersion, "missing column IsRowVersion");
+dataRow[schemaTable.IsRowVersion] = value;
+}*/
         }
 
         internal bool IsKey
@@ -288,27 +289,27 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsKey, "missing column IsKey");
-                dataRow[schemaTable.IsKey] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsKey, "missing column IsKey");
+dataRow[schemaTable.IsKey] = value;
+}*/
         }
 
         // consider:  just do comparison directly -> (object)(baseColumnName) == (object)(columnName)
         //internal bool IsAliased {
-        /*get {
-            if (null != schemaTable.IsAliased) { // MDAC 62336
-                object value = dataRow[schemaTable.IsAliased, DataRowVersion.Default];
-                if (!Convert.IsDBNull(value)) {
-                    return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
-                }
-            }
-            return false;
-        }*/
-        /*set {
-            Debug.Assert(null != schemaTable.IsAliased, "missing column IsAliased");
-            dataRow[schemaTable.IsAliased] = value;
-        }*/
+/*get {
+if (null != schemaTable.IsAliased) { // MDAC 62336
+object value = dataRow[schemaTable.IsAliased, DataRowVersion.Default];
+if (!Convert.IsDBNull(value)) {
+return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
+}
+}
+return false;
+}*/
+/*set {
+Debug.Assert(null != schemaTable.IsAliased, "missing column IsAliased");
+dataRow[schemaTable.IsAliased] = value;
+}*/
         //}
 
         internal bool IsExpression
@@ -325,26 +326,26 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsExpression, "missing column IsExpression");
-                dataRow[schemaTable.IsExpression] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsExpression, "missing column IsExpression");
+dataRow[schemaTable.IsExpression] = value;
+}*/
         }
 
         //internal bool IsIdentity {
-        /*get {
-            if (null != schemaTable.IsIdentity) { // MDAC 62336
-                object value = dataRow[schemaTable.IsIdentity, DataRowVersion.Default];
-                if (!Convert.IsDBNull(value)) {
-                    return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
-                }
-            }
-            return false;
-        }*/
-        /*set {
-            Debug.Assert(null != schemaTable.IsIdentity, "missing column IsIdentity");
-            dataRow[schemaTable.IsIdentity] = value;
-        }*/
+/*get {
+if (null != schemaTable.IsIdentity) { // MDAC 62336
+object value = dataRow[schemaTable.IsIdentity, DataRowVersion.Default];
+if (!Convert.IsDBNull(value)) {
+return Convert.ToBoolean(value, CultureInfo.InvariantCulture);
+}
+}
+return false;
+}*/
+/*set {
+Debug.Assert(null != schemaTable.IsIdentity, "missing column IsIdentity");
+dataRow[schemaTable.IsIdentity] = value;
+}*/
         //}
 
         internal bool IsHidden
@@ -361,10 +362,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsHidden, "missing column IsHidden");
-                dataRow[schemaTable.IsHidden] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsHidden, "missing column IsHidden");
+dataRow[schemaTable.IsHidden] = value;
+}*/
         }
 
         internal bool IsLong
@@ -381,10 +382,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsLong, "missing column IsHidden");
-                dataRow[schemaTable.IsLong] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsLong, "missing column IsHidden");
+dataRow[schemaTable.IsLong] = value;
+}*/
         }
 
         internal bool IsReadOnly
@@ -401,10 +402,10 @@ namespace System.Data.Common
                 }
                 return false;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.IsReadOnly, "missing column IsReadOnly");
-                dataRow[schemaTable.IsReadOnly] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.IsReadOnly, "missing column IsReadOnly");
+dataRow[schemaTable.IsReadOnly] = value;
+}*/
         }
 
         internal System.Type DataType
@@ -421,10 +422,10 @@ namespace System.Data.Common
                 }
                 return null;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.DataType, "missing column DataType");
-                dataRow[schemaTable.DataType] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.DataType, "missing column DataType");
+dataRow[schemaTable.DataType] = value;
+}*/
         }
 
         internal bool AllowDBNull
@@ -441,27 +442,27 @@ namespace System.Data.Common
                 }
                 return true;
             }
-            /*set {
-                Debug.Assert(null != schemaTable.AllowDBNull, "missing column MaybeNull");
-                dataRow[schemaTable.AllowDBNull] = value;
-            }*/
+/*set {
+Debug.Assert(null != schemaTable.AllowDBNull, "missing column MaybeNull");
+dataRow[schemaTable.AllowDBNull] = value;
+}*/
         }
 
-        /*internal Int32 ProviderType {
-            get {
-                if (null != schemaTable.ProviderType) {
-                    object value = dataRow[schemaTable.ProviderType, DataRowVersion.Default];
-                    if (!Convert.IsDBNull(value)) {
-                        return Convert.ToInt32(value);
-                    }
-                }
-                return 0;
-            }
-            set {
-                Debug.Assert(null != schemaTable.ProviderType, "missing column ProviderType");
-                dataRow[schemaTable.ProviderType] = value;
-            }
-        }*/
+/*internal Int32 ProviderType {
+get {
+if (null != schemaTable.ProviderType) {
+object value = dataRow[schemaTable.ProviderType, DataRowVersion.Default];
+if (!Convert.IsDBNull(value)) {
+return Convert.ToInt32(value);
+}
+}
+return 0;
+}
+set {
+Debug.Assert(null != schemaTable.ProviderType, "missing column ProviderType");
+dataRow[schemaTable.ProviderType] = value;
+}
+}*/
 
         internal Int32 UnsortedIndex
         {

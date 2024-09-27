@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.ProjectTelemetry;
 /// <summary>
 /// Defines a tfm and file ext hashing algorithm for telemetry
 /// This is the same algorithm used for O# and VS, so must not change.
-/// See https://github.com/OmniSharp/omnisharp-roslyn/blob/b2e64c6006beed49460f063117793f42ab2a8a5c/src/OmniSharp.MSBuild/VsTfmAndFileExtHashingAlgorithm.cs
+/// See
+// https://github.com/OmniSharp/omnisharp-roslyn/blob/b2e64c6006beed49460f063117793f42ab2a8a5c/src/OmniSharp.MSBuild/VsTfmAndFileExtHashingAlgorithm.cs
 /// </summary>
 internal static class VsTfmAndFileExtHashingAlgorithm
 {

@@ -11,8 +11,10 @@ using Microsoft.Test.ModuleCore;
 namespace XLinqTests
 {
     //[TestCase(Name = "Constructors with params - XElement - array", Param = InputParamStyle.Array)]
-    //[TestCase(Name = "Constructors with params - XElement - node + array", Param = InputParamStyle.SingleAndArray)]
-    //[TestCase(Name = "Constructors with params - XElement - IEnumerable", Param = InputParamStyle.IEnumerable)]
+    //[TestCase(Name = "Constructors with params - XElement - node + array", Param =
+    // InputParamStyle.SingleAndArray)]
+    //[TestCase(Name = "Constructors with params - XElement - IEnumerable", Param =
+    // InputParamStyle.IEnumerable)]
 
     public class ParamsObjectsCreationElem : XLinqTestCase
     {
@@ -179,12 +181,18 @@ namespace XLinqTests
             );
         }
 
-        //[Variation(Priority = 0, Desc = "(BVT)XElement - multiple nodes, connected", Params = new object[] { true, 2 })]
-        //[Variation(Priority = 0, Desc = "(BVT)XElement - multiple nodes, not connected", Params = new object[] { false, 2 })]
-        //[Variation(Priority = 1, Desc = "XElement - multiple nodes, connected", Params = new object[] { true, 4 })]
-        //[Variation(Priority = 1, Desc = "XElement - multiple nodes, not connected", Params = new object[] { false, 4 })]
-        //[Variation(Priority = 0, Desc = "XElement - single node, connected", Params = new object[] { true, 1 })]
-        //[Variation(Priority = 0, Desc = "XElement - single node, not connected", Params = new object[] { false, 1 })]
+        //[Variation(Priority = 0, Desc = "(BVT)XElement - multiple nodes, connected", Params = new object[]
+        // { true, 2 })]
+        //[Variation(Priority = 0, Desc = "(BVT)XElement - multiple nodes, not connected", Params = new
+        // object[] { false, 2 })]
+        //[Variation(Priority = 1, Desc = "XElement - multiple nodes, connected", Params = new object[] {
+        // true, 4 })]
+        //[Variation(Priority = 1, Desc = "XElement - multiple nodes, not connected", Params = new object[]
+        // { false, 4 })]
+        //[Variation(Priority = 0, Desc = "XElement - single node, connected", Params = new object[] { true,
+        // 1 })]
+        //[Variation(Priority = 0, Desc = "XElement - single node, not connected", Params = new object[] {
+        // false, 1 })]
 
         //[Variation(Priority = 2, Desc = "XElement - build from Query result")]
 

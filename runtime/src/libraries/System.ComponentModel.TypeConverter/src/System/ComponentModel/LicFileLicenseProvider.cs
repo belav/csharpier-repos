@@ -10,13 +10,15 @@ using System.IO;
 namespace System.ComponentModel
 {
     /// <summary>
-    /// Provides an implementation of a <see cref='System.ComponentModel.LicenseProvider'/>. The provider works in
+    /// Provides an implementation of a <see cref='System.ComponentModel.LicenseProvider'/>. The
+    // provider works in
     /// a similar fashion to Microsoft .NET Framework standard licensing module.
     /// </summary>
     public class LicFileLicenseProvider : LicenseProvider
     {
         /// <summary>
-        /// Determines if the key retrieved by the <see cref='System.ComponentModel.LicFileLicenseProvider.GetLicense'/> method is valid
+        /// Determines if the key retrieved by the <see
+        // cref='System.ComponentModel.LicFileLicenseProvider.GetLicense'/> method is valid
         /// for the specified type.
         /// </summary>
         protected virtual bool IsKeyValid(string? key, Type type)

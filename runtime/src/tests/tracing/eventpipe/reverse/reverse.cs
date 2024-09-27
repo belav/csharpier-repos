@@ -185,8 +185,10 @@ namespace Tracing.Tests.ReverseValidation
         public static async Task<bool> TEST_ServerIsResilientToNoBufferAgent()
         {
             bool fSuccess = true;
-            // N.B. - this test is only testing behavior on Windows since Unix Domain Sockets get their buffer size from the
-            // system configuration and isn't set here.  Tests passing on Windows should indicate it would pass on Unix systems as well.
+            // N.B. - this test is only testing behavior on Windows since Unix Domain Sockets get their buffer
+            // size from the
+            // system configuration and isn't set here.  Tests passing on Windows should indicate it would pass
+            // on Unix systems as well.
             string serverName = ReverseServer.MakeServerAddress();
             Logger.logger.Log($"Server name is '{serverName}'");
             var server = new ReverseServer(serverName, 0);

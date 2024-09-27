@@ -12,7 +12,8 @@ namespace System.Runtime.InteropServices.Marshalling
     public unsafe interface IComExposedDetails
     {
         /// <summary>
-        /// Get the COM interface information to provide to a <see cref="ComWrappers"/> instance to expose this type to COM.
+        /// Get the COM interface information to provide to a <see cref="ComWrappers"/> instance to expose
+        // this type to COM.
         /// </summary>
         /// <param name="count">The number of COM interfaces this type implements.</param>
         /// <returns>The interface entry information for the interfaces the type implements.</returns>

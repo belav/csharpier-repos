@@ -27,7 +27,7 @@ namespace System.Transactions
         TransactionScope parentScope;
         TimeSpan timeout;
 
-        /* Num of non-disposed nested scopes */
+/* Num of non-disposed nested scopes */
         int nested;
 
         bool disposed;
@@ -228,7 +228,7 @@ namespace System.Transactions
                 return Transaction.CurrentInternal;
             }
 
-            /* RequiresNew */
+/* RequiresNew */
             if (Transaction.CurrentInternal != null)
                 parentScope = Transaction.CurrentInternal.Scope;
             isRoot = true;
@@ -304,7 +304,7 @@ namespace System.Transactions
                 var variedTransaction = Transaction.CurrentInternal;
 
                 if (transaction == null && variedTransaction == null)
-                    /* scope was not in a transaction, (Suppress) */
+/* scope was not in a transaction, (Suppress) */
                     return;
 
                 variedTransaction.Scope = parentScope;
@@ -324,7 +324,7 @@ namespace System.Transactions
                 }
 
                 if (!isRoot)
-                    /* Non-root scope has completed+ended */
+/* Non-root scope has completed+ended */
                     return;
 
                 variedTransaction.CommitInternal();
@@ -338,7 +338,7 @@ namespace System.Transactions
                 Transaction.CurrentInternal = oldTransaction;
 
                 if (transaction == null)
-                    /* scope was not in a transaction, (Suppress) */
+/* scope was not in a transaction, (Suppress) */
                     return;
 
                 if (IsAborted)
@@ -353,7 +353,7 @@ namespace System.Transactions
                 }
 
                 if (!isRoot)
-                    /* Non-root scope has completed+ended */
+/* Non-root scope has completed+ended */
                     return;
 
                 transaction.CommitInternal();

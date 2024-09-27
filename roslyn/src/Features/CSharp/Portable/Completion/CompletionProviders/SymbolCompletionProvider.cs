@@ -141,7 +141,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             if (completionContext is null)
                 return true;
 
-            // If we are triggered in argument list, provide symbols only when the invoked method accept any arguments.
+            // If we are triggered in argument list, provide symbols only when the invoked method accept any
+            // arguments.
             if (
                 await IsTriggeredInArgumentListAsync(
                         completionContext,
@@ -253,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return token.GetPreviousToken().Kind() != SyntaxKind.NumericLiteralToken;
         }
 
-        /// <returns><see langword="null"/> if not an argument list character, otherwise whether the trigger is in an argument list.</returns>
+        /// <returns><see langword="null"/> if not an argument list character, otherwise whether the trigger
+        // is in an argument list.</returns>
         private static async Task<bool?> IsTriggerInArgumentListAsync(
             Document document,
             int characterPosition,
@@ -348,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             );
 
             var symbol = symbols[0].Symbol;
-            // If it is a method symbol, also consider appending parenthesis when later, it is committed by using special characters.
+            // If it is a method symbol, also consider appending parenthesis when later, it is committed by
+            // using special characters.
             // 2 cases are excluded.
             // 1. If it is invoked under Nameof Context.
             // For example: var a = nameof(Bar$$)
@@ -373,7 +376,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 || symbol is IAliasSymbol aliasSymbol && aliasSymbol.Target.IsType
             )
             {
-                // If this is a type symbol/alias symbol, also consider appending parenthesis when later, it is committed by using special characters,
+                // If this is a type symbol/alias symbol, also consider appending parenthesis when later, it is
+                // committed by using special characters,
                 // and the type is used as constructor
                 if (context.IsObjectCreationTypeContext)
                     item = SymbolCompletionItem.AddShouldProvideParenthesisCompletion(item);

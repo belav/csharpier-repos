@@ -267,23 +267,23 @@ namespace System.ServiceModel.Security
 
         public void ProcessMessageType3(byte[] raw)
         {
-            /*
-            MemoryStream ms = new MemoryStream (raw);
-            if (!Verify (NtlmSSP, raw, 0, 8))
-                throw new SecurityNegotiationException ("Expected NTLM SSPI header not found");
-            BinaryReader reader = new BinaryReader (ms);
-            reader.ReadInt64 (); // skip 8 bytes
-            if (reader.ReadInt32 () != 3)
-                throw new SecurityNegotiationException ("SSPI type 3 message is expected");
-            SspiSecurityBufferStruct lmResInfo = ReadSecurityBuffer (reader);
-            SspiSecurityBufferStruct ntlmResInfo = ReadSecurityBuffer (reader);
-            SspiSecurityBufferStruct targetNameInfo = ReadSecurityBuffer (reader);
-            SspiSecurityBufferStruct userNameInfo = ReadSecurityBuffer (reader);
-            SspiSecurityBufferStruct wsNameInfo = ReadSecurityBuffer (reader);
-            SspiSecurityBufferStruct sessionKeyInfo = ReadSecurityBuffer (reader);
-            int flags = reader.ReadInt32 ();
-            ServerOSVersion = reader.ReadInt64 ();
-            */
+/*
+MemoryStream ms = new MemoryStream (raw);
+if (!Verify (NtlmSSP, raw, 0, 8))
+throw new SecurityNegotiationException ("Expected NTLM SSPI header not found");
+BinaryReader reader = new BinaryReader (ms);
+reader.ReadInt64 (); // skip 8 bytes
+if (reader.ReadInt32 () != 3)
+throw new SecurityNegotiationException ("SSPI type 3 message is expected");
+SspiSecurityBufferStruct lmResInfo = ReadSecurityBuffer (reader);
+SspiSecurityBufferStruct ntlmResInfo = ReadSecurityBuffer (reader);
+SspiSecurityBufferStruct targetNameInfo = ReadSecurityBuffer (reader);
+SspiSecurityBufferStruct userNameInfo = ReadSecurityBuffer (reader);
+SspiSecurityBufferStruct wsNameInfo = ReadSecurityBuffer (reader);
+SspiSecurityBufferStruct sessionKeyInfo = ReadSecurityBuffer (reader);
+int flags = reader.ReadInt32 ();
+ServerOSVersion = reader.ReadInt64 ();
+*/
             type3 = new Type3Message(raw, NtlmVersion.Version3);
         }
     }

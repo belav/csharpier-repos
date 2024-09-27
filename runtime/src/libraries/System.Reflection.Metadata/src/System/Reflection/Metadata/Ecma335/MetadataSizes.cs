@@ -96,12 +96,14 @@ namespace System.Reflection.Metadata.Ecma335
         internal readonly ulong PresentTablesMask;
 
         /// <summary>
-        /// Non-empty tables stored in an external metadata table stream that might be referenced from the metadata table stream being emitted.
+        /// Non-empty tables stored in an external metadata table stream that might be referenced from the
+        // metadata table stream being emitted.
         /// </summary>
         internal readonly ulong ExternalTablesMask;
 
         /// <summary>
-        /// Overall size of metadata stream storage (stream headers, table stream, heaps, additional streams).
+        /// Overall size of metadata stream storage (stream headers, table stream, heaps, additional
+        // streams).
         /// Aligned to <see cref="StreamAlignment"/>.
         /// </summary>
         internal readonly int MetadataStreamStorageSize;
@@ -140,7 +142,8 @@ namespace System.Reflection.Metadata.Ecma335
             ExternalTablesMask = ComputeNonEmptyTableMask(externalRowCounts);
 
             // Auto-detect EnC delta from presence of EnC tables.
-            // EnC delta tables are stored as uncompressed metadata table stream, other metadata use compressed stream.
+            // EnC delta tables are stored as uncompressed metadata table stream, other metadata use compressed
+            // stream.
             // We could support uncompress non-EnC metadata in future if we needed to.
             bool isEncDelta = IsPresent(TableIndex.EncLog) || IsPresent(TableIndex.EncMap);
             bool isCompressed = !isEncDelta;

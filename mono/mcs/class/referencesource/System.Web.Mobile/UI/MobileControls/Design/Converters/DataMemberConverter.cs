@@ -40,7 +40,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
     )]
     public class DataMemberConverter : TypeConverter
     {
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.DataMemberConverter"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.DataMemberConverter"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Initializes a new instance of <see cref='System.Web.UI.Design.DataFieldConverter'/>.
@@ -48,7 +49,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
         /// </devdoc>
         public DataMemberConverter() { }
 
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.CanConvertFrom"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.CanConvertFrom"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether this converter can
@@ -65,7 +67,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
             return false;
         }
 
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.ConvertFrom"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.ConvertFrom"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Converts the given object to the converter's native type.
@@ -88,10 +91,12 @@ namespace System.Web.UI.Design.MobileControls.Converters
             throw GetConvertFromException(value);
         }
 
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.GetStandardValues"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.GetStandardValues"]/*' />
         /// <devdoc>
         ///    <para>
-        ///       Gets the fields present within the selected data source if information about them is available.
+        ///       Gets the fields present within the selected data source if information about them is
+        // available.
         ///    </para>
         /// </devdoc>
         public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
@@ -141,7 +146,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
             return new StandardValuesCollection(names);
         }
 
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.GetStandardValuesExclusive"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.GetStandardValuesExclusive"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether the collection of standard values returned from
@@ -154,7 +160,8 @@ namespace System.Web.UI.Design.MobileControls.Converters
             return false;
         }
 
-        /// <include file='doc\DataMemberConverter.uex' path='docs/doc[@for="DataMemberConverter.GetStandardValuesSupported"]/*' />
+        /// <include file='doc\DataMemberConverter.uex'
+        // path='docs/doc[@for="DataMemberConverter.GetStandardValuesSupported"]/*' />
         /// <devdoc>
         ///    <para>
         ///       Gets a value indicating whether this object supports a standard set of values

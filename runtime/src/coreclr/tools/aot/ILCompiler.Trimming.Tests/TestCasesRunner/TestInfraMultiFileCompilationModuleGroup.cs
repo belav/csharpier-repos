@@ -9,7 +9,8 @@ using Internal.TypeSystem;
 namespace Mono.Linker.Tests.TestCasesRunner
 {
     /// <summary>
-    /// Represents a non-leaf multifile compilation group where types contained in the group are always fully expanded.
+    /// Represents a non-leaf multifile compilation group where types contained in the group are always
+    // fully expanded.
     /// </summary>
     public class TestInfraMultiFileSharedCompilationModuleGroup : MultiFileCompilationModuleGroup
     {

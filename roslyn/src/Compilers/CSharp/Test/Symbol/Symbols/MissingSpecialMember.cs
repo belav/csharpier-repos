@@ -41,7 +41,8 @@ public class Program
             );
 
             comp.VerifyEmitDiagnostics(
-                // (10,5): error CS0656: Missing compiler required member 'System.Collections.Generic.IEnumerable`1.GetEnumerator'
+                // (10,5): error CS0656: Missing compiler required member
+                // 'System.Collections.Generic.IEnumerable`1.GetEnumerator'
                 //     {
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -146,7 +147,9 @@ public static class Program
             );
 
             comp.VerifyEmitDiagnostics(
-                // (9,34): error CS1110: Cannot define a new extension method because the compiler required type 'System.Runtime.CompilerServices.ExtensionAttribute' cannot be found. Are you missing a reference to System.Core.dll?
+                // (9,34): error CS1110: Cannot define a new extension method because the compiler required type
+                // 'System.Runtime.CompilerServices.ExtensionAttribute' cannot be found. Are you missing a reference to
+                // System.Core.dll?
                 //     public static void Extension(this string x) {}
                 Diagnostic(ErrorCode.ERR_ExtensionAttrNotFound, "this")
                     .WithArguments("System.Runtime.CompilerServices.ExtensionAttribute")
@@ -538,7 +541,8 @@ namespace System
                 .EmitToImageReference(
                     expectedWarnings: new[]
                     {
-                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                        // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                        // was found nor was a value for RuntimeMetadataVersion specified through options.
                         Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     }
                 );
@@ -583,7 +587,8 @@ namespace System
             var reference = comp1.EmitToImageReference(
                 expectedWarnings: new[]
                 {
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 }
             );
@@ -1728,7 +1733,8 @@ namespace Test
             var compilation = CreateCompilationWithMscorlib45(source);
             compilation.MakeMemberMissing(SpecialMember.System_Nullable_T_GetValueOrDefault);
 
-            // We use more optimal `GetValueOrDefault(defaultValue)` member for this case, so no error about missing `GetValueOrDefault()` is reported
+            // We use more optimal `GetValueOrDefault(defaultValue)` member for this case, so no error about
+            // missing `GetValueOrDefault()` is reported
             compilation.VerifyEmitDiagnostics();
         }
 
@@ -1901,7 +1907,8 @@ class C
                     .WithArguments("System.String", "Concat")
                     .WithLocation(15, 58),
                 // (16,61): error CS0656: Missing compiler required member 'System.String.Concat'
-                //     public static S operator << (S x, int y) { return new S('(' + x.str + '<' + '<' + y.ToString() + ')'); }
+                //     public static S operator << (S x, int y) { return new S('(' + x.str + '<' + '<' +
+                // y.ToString() + ')'); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         "'(' + x.str + '<' + '<' + y.ToString() + ')'"
@@ -1909,7 +1916,8 @@ class C
                     .WithArguments("System.String", "Concat")
                     .WithLocation(16, 61),
                 // (17,61): error CS0656: Missing compiler required member 'System.String.Concat'
-                //     public static S operator >> (S x, int y) { return new S('(' + x.str + '>' + '>' + y.ToString() + ')'); }
+                //     public static S operator >> (S x, int y) { return new S('(' + x.str + '>' + '>' +
+                // y.ToString() + ')'); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         "'(' + x.str + '>' + '>' + y.ToString() + ')'"
@@ -1917,7 +1925,8 @@ class C
                     .WithArguments("System.String", "Concat")
                     .WithLocation(17, 61),
                 // (18,59): error CS0656: Missing compiler required member 'System.String.Concat'
-                //     public static S operator >= (S x, S y) { return new S('(' + x.str + '>' + '=' + y.str + ')'); }
+                //     public static S operator >= (S x, S y) { return new S('(' + x.str + '>' + '=' + y.str + ')');
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         "'(' + x.str + '>' + '=' + y.str + ')'"
@@ -1925,7 +1934,8 @@ class C
                     .WithArguments("System.String", "Concat")
                     .WithLocation(18, 59),
                 // (19,59): error CS0656: Missing compiler required member 'System.String.Concat'
-                //     public static S operator <= (S x, S y) { return new S('(' + x.str + '<' + '=' + y.str + ')'); }
+                //     public static S operator <= (S x, S y) { return new S('(' + x.str + '<' + '=' + y.str + ')');
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         "'(' + x.str + '<' + '=' + y.str + ')'"

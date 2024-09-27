@@ -9,12 +9,12 @@
 Class hierarchy:
 
 BaseCodeDomTreeGenerator
-    BaseTemplateCodeDomTreeGenerator
-        TemplateControlCodeDomTreeGenerator
-            PageCodeDomTreeGenerator
-            UserControlCodeDomTreeGenerator
-        PageThemeCodeDomTreeGenerator
-    ApplicationFileCodeDomTreeGenerator
+BaseTemplateCodeDomTreeGenerator
+TemplateControlCodeDomTreeGenerator
+PageCodeDomTreeGenerator
+UserControlCodeDomTreeGenerator
+PageThemeCodeDomTreeGenerator
+ApplicationFileCodeDomTreeGenerator
 ***********************************************/
 
 
@@ -172,8 +172,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Set some fields that are needed for code generation
-         */
+        * Set some fields that are needed for code generation
+        */
         protected BaseCodeDomTreeGenerator(TemplateParser parser)
         {
             _parser = parser;
@@ -266,7 +266,8 @@ namespace System.Web.Compilation
             _codeCompileUnit.UserData["AllowLateBound"] = !Parser.FStrict;
             _codeCompileUnit.UserData["RequireVariableDeclaration"] = Parser.FExplicit;
 
-            // Set a flag indicating if we're using the VJS compiler.  See comment in BuildExtractMethod for more information.
+            // Set a flag indicating if we're using the VJS compiler.  See comment in BuildExtractMethod for
+            // more information.
             _usingVJSCompiler = (_codeDomProvider.FileExtension == ".jsl");
 
             _sourceDataNamespace = new CodeNamespace(Parser.GeneratedNamespace);
@@ -400,8 +401,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Add metadata attributes to the class
-         */
+        * Add metadata attributes to the class
+        */
         protected virtual void GenerateClassAttributes()
         {
             // If this is a debuggable page, generate a
@@ -416,8 +417,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Generate the list of implemented interfaces
-         */
+        * Generate the list of implemented interfaces
+        */
         protected virtual void GenerateInterfaces()
         {
             if (Parser.ImplementedInterfaces != null)
@@ -430,16 +431,16 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build first-time intialization statements
-         */
+        * Build first-time intialization statements
+        */
         protected virtual void BuildInitStatements(
             CodeStatementCollection trueStatements,
             CodeStatementCollection topLevelStatements
         ) { }
 
         /*
-         * Build the default constructor
-         */
+        * Build the default constructor
+        */
         protected virtual void BuildDefaultConstructor()
         {
             _ctor.Attributes &= ~MemberAttributes.AccessMask;
@@ -475,8 +476,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build various properties, fields, methods
-         */
+        * Build various properties, fields, methods
+        */
         protected virtual void BuildMiscClassMembers()
         {
             // Build the Profile property
@@ -515,8 +516,8 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the Profile property
-         */
+        * Build the Profile property
+        */
         private void BuildProfileProperty()
         {
             if (!ProfileManager.Enabled)
@@ -622,20 +623,20 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Helper method used to build the properties of injected
-         * global.asax properties.  These look like:
-         *   PropType __propName;
-         *   protected PropType propName
-         *   {
-         *       get
-         *       {
-         *           if (__propName == null)
-         *               __propName = [some expression];
-         *
-         *           return __propName;
-         *       }
-         *   }
-         */
+        * Helper method used to build the properties of injected
+        * global.asax properties.  These look like:
+        *   PropType __propName;
+        *   protected PropType propName
+        *   {
+        *       get
+        *       {
+        *           if (__propName == null)
+        *               __propName = [some expression];
+        *
+        *           return __propName;
+        *       }
+        *   }
+        */
         private void BuildInjectedGetPropertyMethod(
             string propName,
             Type propType,
@@ -677,10 +678,10 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Helper method for building application and session scope injected
-         * properties.  If useApplicationState, build application properties, otherwise
-         * build session properties.
-         */
+        * Helper method for building application and session scope injected
+        * properties.  If useApplicationState, build application properties, otherwise
+        * build session properties.
+        */
         private void BuildObjectPropertiesHelper(IDictionary objects, bool useApplicationState)
         {
             IDictionaryEnumerator en = objects.GetEnumerator();
@@ -735,9 +736,9 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the injected properties from the global.asax <object> tags
-         * declared with scope=application
-         */
+        * Build the injected properties from the global.asax <object> tags
+        * declared with scope=application
+        */
         private void BuildApplicationObjectProperties()
         {
             if (Parser.ApplicationObjects != null)
@@ -745,9 +746,9 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the injected properties from the global.asax <object> tags
-         * declared with scope=session
-         */
+        * Build the injected properties from the global.asax <object> tags
+        * declared with scope=session
+        */
         private void BuildSessionObjectProperties()
         {
             if (Parser.SessionObjects != null)
@@ -760,9 +761,9 @@ namespace System.Web.Compilation
         }
 
         /*
-         * Build the injected properties from the global.asax <object> tags
-         * declared with scope=appinstance, or the aspx/ascx tags with scope=page.
-         */
+        * Build the injected properties from the global.asax <object> tags
+        * declared with scope=appinstance, or the aspx/ascx tags with scope=page.
+        */
         private void BuildPageObjectProperties()
         {
             if (Parser.PageObjectList == null)
@@ -955,9 +956,9 @@ namespace System.Web.Compilation
             // get line information on compile errors, while in v1 we did. So
             // unless we find a better solution, don't disable pragmas in non-debug
             /*
-                    // Also, don't bother with pragmas unless we're compiling for debugging
-                    if (!CompilParams.IncludeDebugInformation)
-                        return null;
+            // Also, don't bother with pragmas unless we're compiling for debugging
+            if (!CompilParams.IncludeDebugInformation)
+            return null;
             */
 
             if (String.IsNullOrEmpty(virtualPath))
@@ -1042,7 +1043,8 @@ namespace System.Web.Compilation
         {
             if (method == null)
                 return;
-            // If LinePragmas is false, the user might want to debug generated code, so we do not add the attribute
+            // If LinePragmas is false, the user might want to debug generated code, so we do not add the
+            // attribute
             if (!Parser.FLinePragmas)
                 return;
 

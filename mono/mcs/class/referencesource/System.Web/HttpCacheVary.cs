@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Cache Vary class.  Wraps Vary header
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Cache Vary class.  Wraps Vary header
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -82,9 +82,9 @@ namespace System.Web
             return _isModified;
         }
 
-        /*
-         * Construct header value string
-         */
+/*
+* Construct header value string
+*/
         internal String ToHeaderString()
         {
             StringBuilder s;
@@ -189,12 +189,13 @@ namespace System.Web
             return _varyStar;
         }
 
-        /*
-         * Vary by accept types
-         */
+/*
+* Vary by accept types
+*/
 
         /// <devdoc>
-        ///    <para>Retrieves or assigns a value indicating whether the cache should vary by Accept types. This causes the
+        ///    <para>Retrieves or assigns a value indicating whether the cache should vary by Accept types.
+        // This causes the
         ///       Vary: header to include an Accept field.</para>
         /// </devdoc>
         public bool AcceptTypes
@@ -207,9 +208,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Vary by accept language
-         */
+/*
+* Vary by accept language
+*/
 
         /// <devdoc>
         ///    <para> Retrieves or assigns a Boolean value indicating whether
@@ -225,9 +226,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Vary by user agent
-         */
+/*
+* Vary by user agent
+*/
 
         /// <devdoc>
         ///    <para> Retrieves or assigns a Boolean value indicating whether
@@ -243,9 +244,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Vary by charset
-         */
+/*
+* Vary by charset
+*/
 
         /// <devdoc>
         ///    <para> Retrieves or assigns a value indicating whether the
@@ -261,9 +262,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Vary by a given header
-         */
+/*
+* Vary by a given header
+*/
 
         /// <devdoc>
         ///    <para> Default property.
@@ -295,11 +296,11 @@ namespace System.Web
                     throw new ArgumentNullException("header");
                 }
 
-                /*
-                 * Since adding a Vary header is more restrictive, we don't
-                 * want components to be able to set a Vary header to false
-                 * if another component has set it to true.
-                 */
+/*
+* Since adding a Vary header is more restrictive, we don't
+* want components to be able to set a Vary header to false
+* if another component has set it to true.
+*/
                 if (value == false)
                 {
                     return;

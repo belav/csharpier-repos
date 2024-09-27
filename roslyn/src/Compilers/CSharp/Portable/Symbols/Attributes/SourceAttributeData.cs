@@ -122,8 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// If the <see cref="CSharpAttributeData.ConstructorArguments"/> contains any named constructor arguments or default value arguments,
-        /// it returns an array representing each argument's source argument index. A value of -1 indicates default value argument.
+        /// If the <see cref="CSharpAttributeData.ConstructorArguments"/> contains any named constructor
+        // arguments or default value arguments,
+        /// it returns an array representing each argument's source argument index. A value of -1 indicates
+        // default value argument.
         /// Otherwise, returns null.
         /// </summary>
         internal ImmutableArray<int> ConstructorArgumentsSourceIndices
@@ -228,9 +230,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// This method finds an attribute by metadata name and signature. The algorithm for signature matching is similar to the one
-        /// in Module.GetTargetAttributeSignatureIndex. Note, the signature matching is limited to primitive types
-        /// and System.Type.  It will not match an arbitrary signature but it is sufficient to match the signatures of the current set of
+        /// This method finds an attribute by metadata name and signature. The algorithm for signature
+        // matching is similar to the one
+        /// in Module.GetTargetAttributeSignatureIndex. Note, the signature matching is limited to primitive
+        // types
+        /// and System.Type.  It will not match an arbitrary signature but it is sufficient to match the
+        // signatures of the current set of
         /// well known attributes.
         /// </summary>
         /// <param name="description">The attribute to match.</param>

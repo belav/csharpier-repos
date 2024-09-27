@@ -31,8 +31,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         }
 
         /// <summary>
-        /// Whether or not this is an argument to a well known api for this language (like Regex.Match or JToken.Parse).
-        /// We light up support if we detect these, even if these APIs don't have the StringSyntaxAttribute attribute on
+        /// Whether or not this is an argument to a well known api for this language (like Regex.Match or
+        // JToken.Parse).
+        /// We light up support if we detect these, even if these APIs don't have the StringSyntaxAttribute
+        // attribute on
         /// them.  That way users can get a decent experience even on downlevel frameworks.
         /// </summary>
         protected abstract bool IsArgumentToWellKnownAPI(
@@ -44,8 +46,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         );
 
         /// <summary>
-        /// Giving a sibling argument expression to the string literal, attempts to determine if they correspond to
-        /// options for that language.  For example with <c>new Regex("[a-z]", RegexOptions.CaseInsensitive)</c> the
+        /// Giving a sibling argument expression to the string literal, attempts to determine if they
+        // correspond to
+        /// options for that language.  For example with <c>new Regex("[a-z]",
+        // RegexOptions.CaseInsensitive)</c> the
         /// second argument's expression defines options that control how the literal is parsed.
         /// </summary>
         protected abstract bool TryGetOptions(
@@ -64,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         ) => false;
 
         /// <summary>
-        /// What options we should assume by default if we're matched up against a symbol that has a [StringSyntax]
+        /// What options we should assume by default if we're matched up against a symbol that has a
+        // [StringSyntax]
         /// attribute on it.
         /// </summary>
         protected virtual TOptions GetStringSyntaxDefaultOptions() => default;
@@ -78,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         {
             options = default;
 
-            // First check for the standard pattern of either a `// lang=...` comment or an API annotated with the
+            // First check for the standard pattern of either a `// lang=...` comment or an API annotated with
+            // the
             // [StringSyntax] attribute.
             if (
                 _detector.IsEmbeddedLanguageToken(
@@ -90,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                 )
             )
             {
-                // If we got string-options back, then we were on a comment string (e.g. `// lang=regex,option1,option2`).
+                // If we got string-options back, then we were on a comment string (e.g. `//
+                // lang=regex,option1,option2`).
                 // Attempt to convert the string options to actual options requested.
                 if (stringOptions != null)
                     return EmbeddedLanguageCommentOptions<TOptions>.TryGetOptions(
@@ -98,7 +105,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                         out options
                     );
 
-                // If we weren't on a comment, then we were on an API with StringSyntaxAttribute on it.  Attempt to grab
+                // If we weren't on a comment, then we were on an API with StringSyntaxAttribute on it.  Attempt to
+                // grab
                 // API specific options for the client to use.
                 var syntaxFacts = Info.SyntaxFacts;
                 if (
@@ -118,7 +126,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
             }
             else
             {
-                // We did not have a comment, and we didn't have a StringSyntax API.  See if this is an unannotated API
+                // We did not have a comment, and we didn't have a StringSyntax API.  See if this is an unannotated
+                // API
                 // (e.g. Regex/Json prior to .net core).
 
                 if (Info.IsAnyStringLiteral(token.RawKind))
@@ -258,8 +267,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
             new(LanguageIdentifiers);
 
         /// <summary>
-        /// Cache so that we can reuse the same TDetector when analyzing a particular compilation model. This saves the
-        /// time from having to recreate this for every string literal that features examine for a particular
+        /// Cache so that we can reuse the same TDetector when analyzing a particular compilation model.
+        // This saves the
+        /// time from having to recreate this for every string literal that features examine for a
+        // particular
         /// compilation.
         /// </summary>
         private static readonly ConditionalWeakTable<
@@ -276,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
 
         public static TDetector GetOrCreate(Compilation compilation, EmbeddedLanguageInfo info)
         {
-            // Do a quick non-allocating check first.  If not already created, go the path that will have to allocate
+            // Do a quick non-allocating check first.  If not already created, go the path that will have to
+            // allocate
             // the lambda closure.
             return s_compilationToDetector.TryGetValue(compilation, out var detector)
                 ? detector
@@ -295,8 +307,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         protected abstract TTree? TryParse(VirtualCharSequence chars, TOptions options);
 
         /// <summary>
-        /// Attempts to parse the string-literal-like <paramref name="token"/> into an embedded language tree.  The
-        /// token must either be in a location semantically known to accept this language, or it must have an
+        /// Attempts to parse the string-literal-like <paramref name="token"/> into an embedded language
+        // tree.  The
+        /// token must either be in a location semantically known to accept this language, or it must have
+        // an
         /// appropriate comment on it stating that it should be interpreted as this language.
         /// </summary>
         public TTree? TryParseString(

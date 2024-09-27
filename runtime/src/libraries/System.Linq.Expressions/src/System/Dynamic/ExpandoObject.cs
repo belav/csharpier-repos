@@ -83,15 +83,15 @@ namespace System.Dynamic
             ExpandoData data = _data;
             if (data.Class != indexClass || ignoreCase)
             {
-                /* Re-search for the index matching the name here if
-                 *  1) the class has changed, we need to get the correct index and return
-                 *  the value there.
-                 *  2) the search is case insensitive:
-                 *      a. the member specified by index may be deleted, but there might be other
-                 *      members matching the name if the binder is case insensitive.
-                 *      b. the member that exactly matches the name didn't exist before and exists now,
-                 *      need to find the exact match.
-                 */
+/* Re-search for the index matching the name here if
+*  1) the class has changed, we need to get the correct index and return
+*  the value there.
+*  2) the search is case insensitive:
+*      a. the member specified by index may be deleted, but there might be other
+*      members matching the name if the binder is case insensitive.
+*      b. the member that exactly matches the name didn't exist before and exists now,
+*      need to find the exact match.
+*/
                 index = data.Class.GetValueIndex(name, ignoreCase, this);
                 if (index == ExpandoObject.AmbiguousMatchFound)
                 {
@@ -348,7 +348,8 @@ namespace System.Dynamic
         // that uses DebuggerTypeProxy, instead of defining a generic debug view type and
         // using different instantiations. The reason for this is that support for generics
         // with using DebuggerTypeProxy is limited. For C#, DebuggerTypeProxy supports only
-        // open types (from MSDN https://docs.microsoft.com/en-us/visualstudio/debugger/using-debuggertypeproxy-attribute).
+        // open types (from MSDN
+        // https://docs.microsoft.com/en-us/visualstudio/debugger/using-debuggertypeproxy-attribute).
         private sealed class KeyCollectionDebugView
         {
             private readonly ICollection<string> _collection;
@@ -493,7 +494,8 @@ namespace System.Dynamic
         // that uses DebuggerTypeProxy, instead of defining a generic debug view type and
         // using different instantiations. The reason for this is that support for generics
         // with using DebuggerTypeProxy is limited. For C#, DebuggerTypeProxy supports only
-        // open types (from MSDN https://docs.microsoft.com/en-us/visualstudio/debugger/using-debuggertypeproxy-attribute).
+        // open types (from MSDN
+        // https://docs.microsoft.com/en-us/visualstudio/debugger/using-debuggertypeproxy-attribute).
         private sealed class ValueCollectionDebugView
         {
             private readonly ICollection<object> _collection;
@@ -1031,9 +1033,12 @@ namespace System.Dynamic
             }
 
             /// <summary>
-            /// Gets the class and the index associated with the given name.  Does not update the expando object.  Instead
-            /// this returns both the original and desired new class.  A rule is created which includes the test for the
-            /// original class, the promotion to the new class, and the set/delete based on the class post-promotion.
+            /// Gets the class and the index associated with the given name.  Does not update the expando
+            // object.  Instead
+            /// this returns both the original and desired new class.  A rule is created which includes the test
+            // for the
+            /// original class, the promotion to the new class, and the set/delete based on the class
+            // post-promotion.
             /// </summary>
             private ExpandoClass? GetClassEnsureIndex(
                 string name,
@@ -1229,7 +1234,8 @@ namespace System.Runtime.CompilerServices
         /// <param name="indexClass">The class of the expando object.</param>
         /// <param name="index">The index of the member.</param>
         /// <param name="name">The name of the member.</param>
-        /// <param name="ignoreCase">true if the name should be matched ignoring case; false otherwise.</param>
+        /// <param name="ignoreCase">true if the name should be matched ignoring case; false
+        // otherwise.</param>
         /// <param name="value">The out parameter containing the value of the member.</param>
         /// <returns>True if the member exists in the expando object, otherwise false.</returns>
         [
@@ -1256,7 +1262,8 @@ namespace System.Runtime.CompilerServices
         /// <param name="index">The index of the member.</param>
         /// <param name="value">The value of the member.</param>
         /// <param name="name">The name of the member.</param>
-        /// <param name="ignoreCase">true if the name should be matched ignoring case; false otherwise.</param>
+        /// <param name="ignoreCase">true if the name should be matched ignoring case; false
+        // otherwise.</param>
         /// <returns>
         /// Returns the index for the set member.
         /// </returns>
@@ -1284,7 +1291,8 @@ namespace System.Runtime.CompilerServices
         /// <param name="indexClass">The class of the expando object.</param>
         /// <param name="index">The index of the member.</param>
         /// <param name="name">The name of the member.</param>
-        /// <param name="ignoreCase">true if the name should be matched ignoring case; false otherwise.</param>
+        /// <param name="ignoreCase">true if the name should be matched ignoring case; false
+        // otherwise.</param>
         /// <returns>true if the item was successfully removed; otherwise, false.</returns>
         [
             Obsolete("RuntimeOps has been deprecated and is not supported.", error: true),

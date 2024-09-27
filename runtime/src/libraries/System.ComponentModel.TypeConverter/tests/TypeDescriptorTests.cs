@@ -559,7 +559,8 @@ namespace System.ComponentModel.Tests
             Assert.Throws<MissingMethodException>(
                 () => TypeDescriptor.GetConverter(typeof(ClassWithInvalidConverter))
             );
-            // GetConverter should throw MissingMethodException because parameterless constructor is missing in the InvalidConverter class.
+            // GetConverter should throw MissingMethodException because parameterless constructor is missing in
+            // the InvalidConverter class.
         }
 
         [Fact]

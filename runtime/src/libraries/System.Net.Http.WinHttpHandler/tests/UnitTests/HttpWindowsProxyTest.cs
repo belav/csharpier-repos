@@ -47,7 +47,8 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
 
             Assert.True(HttpWindowsProxy.TryCreate(out IWebProxy webProxy));
 
-            // The first GetProxy() call will try using WinInetProxyHelper (and thus WinHTTP) since AutoDetect is on.
+            // The first GetProxy() call will try using WinInetProxyHelper (and thus WinHTTP) since AutoDetect
+            // is on.
             Uri proxyUri1 = webProxy.GetProxy(destination);
 
             // The second GetProxy call will skip using WinHTTP since AutoDetect is on but

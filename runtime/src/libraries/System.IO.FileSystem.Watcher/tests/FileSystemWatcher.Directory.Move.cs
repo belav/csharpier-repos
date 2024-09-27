@@ -207,7 +207,8 @@ namespace System.IO.Tests
                 dir.DirectoryInWatchedDir
             ));
 
-            // Remove Created events as there is racecondition when create dir and then observe parent folder. It receives Create event altought Watcher is not registered yet.
+            // Remove Created events as there is racecondition when create dir and then observe parent folder.
+            // It receives Create event altought Watcher is not registered yet.
             Assert.Equal(
                 expectedEvents,
                 events.Where(x => x.EventType != WatcherChangeTypes.Created)

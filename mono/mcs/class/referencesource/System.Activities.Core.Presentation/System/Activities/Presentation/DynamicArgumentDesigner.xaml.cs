@@ -207,7 +207,8 @@ namespace System.Activities.Presentation
             }
         }
 
-        // The DataGrid does not bubble up KeyDown event and we expect the upper window to be closed when ESC key is down.
+        // The DataGrid does not bubble up KeyDown event and we expect the upper window to be closed when
+        // ESC key is down.
         // Thus we added an event handler in DataGrid to handle ESC key and closes the uppper window.
         void OnDataGridRowKeyDown(object sender, KeyEventArgs args)
         {
@@ -740,7 +741,8 @@ namespace System.Activities.Presentation
             return ArgumentDirection.InOut;
         }
 
-        //Hook LoadingRow event to set different row template (<Click here to add new item>) for new place holder
+        //Hook LoadingRow event to set different row template (<Click here to add new item>) for new place
+        // holder
         void DataGrid_Standard_LoadingRow(object sender, DataGridRowEventArgs e)
         {
             if (e.Row.Item != CollectionView.NewItemPlaceholder)

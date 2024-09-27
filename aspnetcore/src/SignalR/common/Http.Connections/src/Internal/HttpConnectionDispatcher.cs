@@ -75,8 +75,10 @@ internal sealed partial class HttpConnectionDispatcher
         ConnectionDelegate connectionDelegate
     )
     {
-        // Create the log scope and attempt to pass the Connection ID to it so as many logs as possible contain
-        // the Connection ID metadata. If this is the negotiate request then the Connection ID for the scope will
+        // Create the log scope and attempt to pass the Connection ID to it so as many logs as possible
+        // contain
+        // the Connection ID metadata. If this is the negotiate request then the Connection ID for the scope
+        // will
         // be set a little later.
 
         HttpConnectionContext? connectionContext = null;
@@ -84,7 +86,8 @@ internal sealed partial class HttpConnectionDispatcher
 
         if (!StringValues.IsNullOrEmpty(connectionToken))
         {
-            // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to string.
+            // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to
+            // string.
             _manager.TryGetConnection(connectionToken.ToString(), out connectionContext);
         }
 
@@ -146,7 +149,8 @@ internal sealed partial class HttpConnectionDispatcher
         ConnectionLogScope logScope
     )
     {
-        // set a tag to allow Application Performance Management tools to differentiate long running requests for reporting purposes
+        // set a tag to allow Application Performance Management tools to differentiate long running
+        // requests for reporting purposes
         context.Features.Get<IHttpActivityFeature>()?.Activity.AddTag("http.long_running", "true");
 
         var supportedTransports = options.Transports;
@@ -187,7 +191,8 @@ internal sealed partial class HttpConnectionDispatcher
             // ServerSentEvents is a text protocol only
             connection.SupportedFormats = TransferFormat.Text;
 
-            // We only need to provide the Input channel since writing to the application is handled through /send.
+            // We only need to provide the Input channel since writing to the application is handled through
+            // /send.
             var sse = new ServerSentEventsServerTransport(
                 connection.Application.Input,
                 connection.ConnectionId,
@@ -258,7 +263,8 @@ internal sealed partial class HttpConnectionDispatcher
                 }
             }
 
-            // Create a new Tcs every poll to keep track of the poll finishing, so we can properly wait on previous polls
+            // Create a new Tcs every poll to keep track of the poll finishing, so we can properly wait on
+            // previous polls
             var currentRequestTcs = new TaskCompletionSource(
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
@@ -292,7 +298,8 @@ internal sealed partial class HttpConnectionDispatcher
 
                     if (connection.UseStatefulReconnect && isReconnect)
                     {
-                        // Should call this after the transport has started, otherwise we'll be writing to a Pipe that isn't being read from
+                        // Should call this after the transport has started, otherwise we'll be writing to a Pipe that isn't
+                        // being read from
                         reconnectTask =
                             connection.NotifyOnReconnect?.Invoke(connection.Transport.Output)
                             ?? Task.CompletedTask;
@@ -395,7 +402,8 @@ internal sealed partial class HttpConnectionDispatcher
                 }
                 else
                 {
-                    // If false then the transport was ungracefully closed, this can mean a temporary network disconnection
+                    // If false then the transport was ungracefully closed, this can mean a temporary network
+                    // disconnection
                     // We'll mark the connection as inactive and allow the connection to reconnect if that's the case.
                     if (
                         await connection.TransportTask!
@@ -419,7 +427,8 @@ internal sealed partial class HttpConnectionDispatcher
             finally
             {
                 // Artificial task queue
-                // This will cause incoming polls to wait until the previous poll has finished updating internal state info
+                // This will cause incoming polls to wait until the previous poll has finished updating internal
+                // state info
                 currentRequestTcs.TrySetResult();
             }
         }
@@ -631,8 +640,10 @@ internal sealed partial class HttpConnectionDispatcher
                 }
                 catch (InvalidOperationException ex)
                 {
-                    // PipeWriter will throw an error if it is written to while dispose is in progress and the writer has been completed
-                    // Dispose isn't taking WriteLock because it could be held because of backpressure, and calling CancelPendingFlush
+                    // PipeWriter will throw an error if it is written to while dispose is in progress and the writer
+                    // has been completed
+                    // Dispose isn't taking WriteLock because it could be held because of backpressure, and calling
+                    // CancelPendingFlush
                     // then taking the lock introduces a race condition that could lead to a deadlock
                     Log.ConnectionDisposedWhileWriteInProgress(
                         _logger,
@@ -787,7 +798,8 @@ internal sealed partial class HttpConnectionDispatcher
 
                 // Don't copy the identity if it's a windows identity
                 // We specifically clone the identity on first poll if it's a windows identity
-                // If we swapped the new User here we'd have to dispose the old identities which could race with the application
+                // If we swapped the new User here we'd have to dispose the old identities which could race with the
+                // application
                 // trying to access the identity.
                 if (!(context.User.Identity is WindowsIdentity))
                 {
@@ -838,7 +850,8 @@ internal sealed partial class HttpConnectionDispatcher
     private static void CloneUser(HttpContext newContext, HttpContext oldContext)
     {
         // If the identity is a WindowsIdentity we need to clone the User.
-        // This is because the WindowsIdentity uses SafeHandle's which are disposed at the end of the request
+        // This is because the WindowsIdentity uses SafeHandle's which are disposed at the end of the
+        // request
         // and accessing the identity can happen outside of the request scope.
         if (oldContext.User.Identity is WindowsIdentity windowsIdentity)
         {
@@ -951,7 +964,8 @@ internal sealed partial class HttpConnectionDispatcher
             return null;
         }
 
-        // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to string.
+        // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to
+        // string.
         if (!_manager.TryGetConnection(connectionToken.ToString(), out var connection))
         {
             // No connection with that ID: Not Found
@@ -978,7 +992,8 @@ internal sealed partial class HttpConnectionDispatcher
         {
             connection = CreateConnection(options);
         }
-        // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to string.
+        // Use ToString; IsNullOrEmpty doesn't tell the compiler anything about implicit conversion to
+        // string.
         else if (!_manager.TryGetConnection(connectionToken.ToString(), out connection))
         {
             // No connection with that ID: Not Found

@@ -13,9 +13,12 @@ namespace System.Collections.Immutable
     /// </summary>
     /// <remarks>
     /// This is a trimmed down version of <see cref="ImmutableSortedDictionary{TKey, TValue}.Node"/>
-    /// with <c>TKey</c> fixed to be <see cref="int"/>.  This avoids multiple interface-based dispatches while examining
-    /// each node in the tree during a lookup: an interface call to the comparer's <see cref="IComparer{T}.Compare"/> method,
-    /// and then an interface call to <see cref="int"/>'s <see cref="IComparable{T}.CompareTo"/> method as part of
+    /// with <c>TKey</c> fixed to be <see cref="int"/>.  This avoids multiple interface-based dispatches
+    // while examining
+    /// each node in the tree during a lookup: an interface call to the comparer's <see
+    // cref="IComparer{T}.Compare"/> method,
+    /// and then an interface call to <see cref="int"/>'s <see cref="IComparable{T}.CompareTo"/> method
+    // as part of
     /// the comparer's <see cref="IComparer{T}.Compare"/> implementation.
     /// </remarks>
     [DebuggerDisplay("{_key} = {_value}")]
@@ -62,7 +65,8 @@ namespace System.Collections.Immutable
         private SortedInt32KeyNode<TValue>? _right;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SortedInt32KeyNode{TValue}"/> class that is pre-frozen.
+        /// Initializes a new instance of the <see cref="SortedInt32KeyNode{TValue}"/> class that is
+        // pre-frozen.
         /// </summary>
         private SortedInt32KeyNode()
         {
@@ -70,7 +74,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SortedInt32KeyNode{TValue}"/> class that is not yet frozen.
+        /// Initializes a new instance of the <see cref="SortedInt32KeyNode{TValue}"/> class that is not yet
+        // frozen.
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
@@ -196,8 +201,10 @@ namespace System.Collections.Immutable
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="valueComparer">The value comparer.</param>
-        /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
-        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+        /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was
+        // replaced.</param>
+        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+        // this operation.</param>
         internal SortedInt32KeyNode<TValue> SetItem(
             int key,
             TValue value,
@@ -222,7 +229,8 @@ namespace System.Collections.Immutable
         /// Removes the specified key.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+        // this operation.</param>
         /// <returns>The new AVL tree.</returns>
         internal SortedInt32KeyNode<TValue> Remove(int key, out bool mutated)
         {
@@ -295,7 +303,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Freezes this node and all descendant nodes so that any mutations require a new instance of the nodes.
+        /// Freezes this node and all descendant nodes so that any mutations require a new instance of the
+        // nodes.
         /// </summary>
         internal void Freeze(Action<KeyValuePair<int, TValue>>? freezeAction = null)
         {
@@ -392,7 +401,8 @@ namespace System.Collections.Immutable
         /// Returns a value indicating whether the tree is in balance.
         /// </summary>
         /// <param name="tree">The tree.</param>
-        /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a negative integer if the left side is heavy.</returns>
+        /// <returns>0 if the tree is in balance, a positive integer if the right side is heavy, or a
+        // negative integer if the left side is heavy.</returns>
         private static int Balance(SortedInt32KeyNode<TValue> tree)
         {
             Requires.NotNull(tree, nameof(tree));
@@ -454,9 +464,12 @@ namespace System.Collections.Immutable
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
         /// <param name="valueComparer">The value comparer.</param>
-        /// <param name="overwriteExistingValue">if <c>true</c>, an existing key=value pair will be overwritten with the new one.</param>
-        /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
-        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+        /// <param name="overwriteExistingValue">if <c>true</c>, an existing key=value pair will be
+        // overwritten with the new one.</param>
+        /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was
+        // replaced.</param>
+        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+        // this operation.</param>
         /// <returns>The new AVL tree.</returns>
         private SortedInt32KeyNode<TValue> SetOrAdd(
             int key,
@@ -536,7 +549,8 @@ namespace System.Collections.Immutable
         /// Removes the specified key. Callers are expected to validate arguments.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
+        /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of
+        // this operation.</param>
         /// <returns>The new AVL tree.</returns>
         private SortedInt32KeyNode<TValue> RemoveRecursive(int key, out bool mutated)
         {
@@ -605,7 +619,8 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
+        /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone
+        // of this node
         /// with the described changes.
         /// </summary>
         /// <param name="left">The left branch of the mutated node.</param>

@@ -10,8 +10,10 @@ using System.Threading.Tasks;
 namespace System.Threading.RateLimiting
 {
     /// <summary>
-    /// Acquires leases from rate limiters in the order given. If a lease fails to be acquired (throwing or IsAcquired == false)
-    /// then the already acquired leases are disposed in reverse order and the failing lease is returned or the exception is thrown to user code.
+    /// Acquires leases from rate limiters in the order given. If a lease fails to be acquired (throwing
+    // or IsAcquired == false)
+    /// then the already acquired leases are disposed in reverse order and the failing lease is returned
+    // or the exception is thrown to user code.
     /// </summary>
     internal sealed class ChainedPartitionedRateLimiter<TResource>
         : PartitionedRateLimiter<TResource>
@@ -235,8 +237,10 @@ namespace System.Threading.RateLimiting
                 {
                     foreach (RateLimitLease lease in _leases)
                     {
-                        // Use the first metadata item of a given name, ignore duplicates, we can't reliably merge arbitrary metadata
-                        // Creating an object[] if there are multiple of the same metadataName could work, but makes consumption of metadata messy
+                        // Use the first metadata item of a given name, ignore duplicates, we can't reliably merge arbitrary
+                        // metadata
+                        // Creating an object[] if there are multiple of the same metadataName could work, but makes
+                        // consumption of metadata messy
                         // and makes MetadataName.Create<T>(...) uses no longer work
                         if (lease.TryGetMetadata(metadataName, out metadata))
                         {
@@ -258,8 +262,10 @@ namespace System.Threading.RateLimiting
 
                 List<Exception>? exceptions = null;
                 // Dispose in reverse order
-                // Avoids issues where dispose might unblock a queued acquire and then the acquire fails when acquiring the next limiter.
-                // When disposing in reverse order there wont be any issues of unblocking an acquire that affects acquires on limiters in the chain after it
+                // Avoids issues where dispose might unblock a queued acquire and then the acquire fails when
+                // acquiring the next limiter.
+                // When disposing in reverse order there wont be any issues of unblocking an acquire that affects
+                // acquires on limiters in the chain after it
                 for (int i = _leases.Length - 1; i >= 0; i--)
                 {
                     try

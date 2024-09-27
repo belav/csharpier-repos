@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Shared;
 namespace Microsoft.AspNetCore.Routing;
 
 /// <summary>
-/// Represents metadata used during link generation. If <see cref="SuppressLinkGeneration"/> is <c>true</c>
+/// Represents metadata used during link generation. If <see cref="SuppressLinkGeneration"/> is
+// <c>true</c>
 /// the associated endpoint will not be used for link generation.
 /// </summary>
 [DebuggerDisplay("{ToString(),nq}")]

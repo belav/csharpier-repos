@@ -155,7 +155,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Editor
 
         public Glyph Glyph => FSharpGlyphHelpers.ConvertTo(_info.Glyph);
 
-        // This property isn't currently supported in F# since it would involve modifying the IFSharpInlineRenameInfo interface.
+        // This property isn't currently supported in F# since it would involve modifying the
+        // IFSharpInlineRenameInfo interface.
         public ImmutableArray<DocumentSpan> DefinitionLocations => default;
 
         public async Task<IInlineRenameLocationSet> FindRenameLocationsAsync(

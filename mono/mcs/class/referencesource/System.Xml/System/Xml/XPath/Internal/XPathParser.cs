@@ -52,7 +52,8 @@ namespace MS.Internal.Xml.XPath
 
 
         //The recursive is like
-        //ParseOrExpr->ParseAndExpr->ParseEqualityExpr->ParseRelationalExpr...->ParseFilterExpr->ParsePredicate->ParseExpresion
+        
+        // //ParseOrExpr->ParseAndExpr->ParseEqualityExpr->ParseRelationalExpr...->ParseFilterExpr->ParsePredicate->ParseExpresion
         //So put 200 limitation here will max cause about 2000~3000 depth stack.
         private int parseDepth = 0;
         private const int MaxParseDepth = 200;
@@ -112,7 +113,7 @@ namespace MS.Internal.Xml.XPath
                     this.scanner.Kind == XPathScanner.LexKind.Eq ? Operator.Op.EQ
                     : this.scanner.Kind == XPathScanner.LexKind.Ne ? Operator.Op.NE
                     :
-                    /*default :*/Operator.Op.INVALID
+/*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -137,7 +138,7 @@ namespace MS.Internal.Xml.XPath
                     : this.scanner.Kind == XPathScanner.LexKind.Gt ? Operator.Op.GT
                     : this.scanner.Kind == XPathScanner.LexKind.Ge ? Operator.Op.GE
                     :
-                    /*default :*/Operator.Op.INVALID
+/*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -160,7 +161,7 @@ namespace MS.Internal.Xml.XPath
                     this.scanner.Kind == XPathScanner.LexKind.Plus ? Operator.Op.PLUS
                     : this.scanner.Kind == XPathScanner.LexKind.Minus ? Operator.Op.MINUS
                     :
-                    /*default :*/Operator.Op.INVALID
+/*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -184,7 +185,7 @@ namespace MS.Internal.Xml.XPath
                     : TestOp("div") ? Operator.Op.DIV
                     : TestOp("mod") ? Operator.Op.MOD
                     :
-                    /*default :*/Operator.Op.INVALID
+/*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -401,8 +402,9 @@ namespace MS.Internal.Xml.XPath
                     axisType == Axis.AxisType.Attribute
                         ? XPathNodeType.Attribute
                         :
-                        //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why it's this way but othervise Axes doesn't work
-                        /* default: */XPathNodeType.Element
+                        //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why
+                        // it's this way but othervise Axes doesn't work
+/* default: */XPathNodeType.Element
                 );
 
                 opnd = ParseNodeTest(qyInput, axisType, nodeType);
@@ -415,7 +417,8 @@ namespace MS.Internal.Xml.XPath
             return opnd;
         }
 
-        //>> NodeTest ::= NameTest | 'comment ()' | 'text ()' | 'node ()' | 'processing-instruction ('  Literal ? ')'
+        //>> NodeTest ::= NameTest | 'comment ()' | 'text ()' | 'node ()' | 'processing-instruction ('
+        // Literal ? ')'
         private AstNode ParseNodeTest(
             AstNode qyInput,
             Axis.AxisType axisType,
@@ -439,7 +442,7 @@ namespace MS.Internal.Xml.XPath
                             : this.scanner.Name == "processing-instruction"
                                 ? XPathNodeType.ProcessingInstruction
                             :
-                            /* default: */XPathNodeType.Root
+/* default: */XPathNodeType.Root
                         );
                         Debug.Assert(nodeType != XPathNodeType.Root);
                         NextLex();
@@ -658,7 +661,8 @@ namespace MS.Internal.Xml.XPath
             } while (true);
         }
 
-        //>> LocationPathPattern ::= '/' | RelativePathPattern | '//' RelativePathPattern  |  '/' RelativePathPattern
+        //>> LocationPathPattern ::= '/' | RelativePathPattern | '//' RelativePathPattern  |  '/'
+        // RelativePathPattern
         //>>                       | IdKeyPattern (('/' | '//') RelativePathPattern)?
         private AstNode ParseLocationPathPattern(AstNode qyInput)
         {
@@ -785,7 +789,7 @@ namespace MS.Internal.Xml.XPath
                 axisType == Axis.AxisType.Attribute
                     ? XPathNodeType.Attribute
                     :
-                    /* default: */XPathNodeType.Element
+/* default: */XPathNodeType.Element
             );
 
             opnd = ParseNodeTest(qyInput, axisType, nodeType);

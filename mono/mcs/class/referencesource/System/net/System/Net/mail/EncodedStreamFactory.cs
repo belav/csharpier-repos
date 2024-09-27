@@ -7,8 +7,10 @@ namespace System.Net.Mime
     internal class EncodedStreamFactory
     {
         //RFC 2822: no encoded-word line should be longer than 76 characters not including the soft CRLF
-        //since the header length is unknown (if there even is one) we're going to be slightly more conservative
-        //and cut off at 70.  This will also prevent any other folding behavior from being triggered anywhere
+        //since the header length is unknown (if there even is one) we're going to be slightly more
+        // conservative
+        //and cut off at 70.  This will also prevent any other folding behavior from being triggered
+        // anywhere
         //in the code
         private const int defaultMaxLineLength = 70;
 

@@ -45,7 +45,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         Properties Properties
         {
             [DispId(500)]
-            //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "ADODB.PropertiesToInternalPropertiesMarshaler")]
+            //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalType =
+            // "ADODB.PropertiesToInternalPropertiesMarshaler")]
             get;
         }
 
@@ -119,7 +120,8 @@ namespace Castle.DynamicProxy.Tests.ComInteropTypes.ADODB
         Fields Fields
         {
             [DispId(0)]
-            //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalType = "ADODB.FieldsToInternalFieldsMarshaler")]
+            //[return: MarshalAs(UnmanagedType.CustomMarshaler, MarshalType =
+            // "ADODB.FieldsToInternalFieldsMarshaler")]
             get;
         }
 

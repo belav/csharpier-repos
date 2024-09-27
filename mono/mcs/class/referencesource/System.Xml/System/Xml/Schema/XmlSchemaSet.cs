@@ -141,7 +141,8 @@ namespace System.Xml.Schema
             get { return nameTable; }
         }
 
-        /// <include file='doc\XmlSchemaSet.uex' path='docs/doc[@for="XmlSchemaSet.ValidationEventHandler"]/*' />
+        /// <include file='doc\XmlSchemaSet.uex'
+        // path='docs/doc[@for="XmlSchemaSet.ValidationEventHandler"]/*' />
         public event ValidationEventHandler ValidationEventHandler
         {
             add
@@ -181,7 +182,8 @@ namespace System.Xml.Schema
             set { readerSettings.XmlResolver = value; }
         }
 
-        /// <include file='doc\XmlSchemaSet.uex' path='docs/doc[@for="XmlSchemaSet.CompilationSettings"]/*' />
+        /// <include file='doc\XmlSchemaSet.uex' path='docs/doc[@for="XmlSchemaSet.CompilationSettings"]/*'
+        // />
         /// <devdoc>
         ///    <para></para>
         /// </devdoc>
@@ -248,7 +250,8 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaSet.uex' path='docs/doc[@for="XmlSchemaSet.SubstitutionGroups"]/*' />
+        /// <include file='doc\XmlSchemaSet.uex' path='docs/doc[@for="XmlSchemaSet.SubstitutionGroups"]/*'
+        // />
         /// <devdoc>
         ///    <para></para>
         /// </devdoc>
@@ -631,7 +634,8 @@ namespace System.Xml.Schema
                     }
                     try
                     { //First thing to do in the try block is to acquire locks since finally will try to release them.
-                        //If we dont accuire the locks first, and an exception occurs in the code before the locking code, then Threading.SynchronizationLockException will be thrown
+                        //If we dont accuire the locks first, and an exception occurs in the code before the locking code,
+                        // then Threading.SynchronizationLockException will be thrown
                         //when attempting to release it in the finally block
                         XmlSchema currentSchema;
                         XmlSchema xmlNSSchema = Preprocessor.GetBuildInSchema();
@@ -713,9 +717,12 @@ namespace System.Xml.Schema
         /// </devdoc>
         public XmlSchema Reprocess(XmlSchema schema)
         {
-            // Due to bug 644477 - this method is tightly coupled (THE CODE IS BASICALLY COPIED) to Remove, Add and AddSchemaToSet
-            // methods. If you change anything here *make sure* to update Remove/Add/AddSchemaToSet method(s) accordingly.
-            // The only difference is that we don't touch .schemas collection here to not break a code like this:
+            // Due to bug 644477 - this method is tightly coupled (THE CODE IS BASICALLY COPIED) to Remove, Add
+            // and AddSchemaToSet
+            // methods. If you change anything here *make sure* to update Remove/Add/AddSchemaToSet method(s)
+            // accordingly.
+            // The only difference is that we don't touch .schemas collection here to not break a code like
+            // this:
             // foreach(XmlSchema s in schemaset.schemas) { schemaset.Reprocess(s); }
             // This is by purpose.
             if (schema == null)
@@ -731,7 +738,8 @@ namespace System.Xml.Schema
             { //Lock set so that set cannot be compiled in another thread
                 // This code is copied from method:
                 // Remove(XmlSchema schema, bool forceCompile)
-                // If you changed anything here go and change the same in Remove(XmlSchema schema, bool forceCompile) method
+                // If you changed anything here go and change the same in Remove(XmlSchema schema, bool
+                // forceCompile) method
     #region Copied from Remove(XmlSchema schema, bool forceCompile)
 
                 RemoveSchemaFromGlobalTables(schema);
@@ -752,7 +760,8 @@ namespace System.Xml.Schema
 
                 // This code is copied from method:
                 // Add(string targetNamespace, XmlSchema schema)
-                // If you changed anything here go and change the same in Add(string targetNamespace, XmlSchema schema) method
+                // If you changed anything here go and change the same in Add(string targetNamespace, XmlSchema
+                // schema) method
     #region Copied from Add(string targetNamespace, XmlSchema schema)
 
                 if (schema.ErrorCount != 0)
@@ -1090,8 +1099,10 @@ namespace System.Xml.Schema
                 }
                 else if (tns == string.Empty)
                 { //There could be a chameleon for same ns
-                    // It is OK to pass in the schema we have found so far, since it must have the schemaUri we're looking for
-                    // (we found it that way above) and it must be the original chameleon schema (the one without target ns)
+                    // It is OK to pass in the schema we have found so far, since it must have the schemaUri we're
+                    // looking for
+                    // (we found it that way above) and it must be the original chameleon schema (the one without target
+                    // ns)
                     // as we don't add the chameleon copies into the locations tables above.
                     Debug.Assert(schema.BaseUri.Equals(schemaUri));
                     ChameleonKey cKey = new ChameleonKey(ns, schema);

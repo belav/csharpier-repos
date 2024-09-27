@@ -23,9 +23,11 @@ namespace System.IdentityModel.Tokens
         private string serviceName = ConfigurationStrings.DefaultServiceName;
 
         /// <summary>
-        /// Initialize an instance of <see cref="SecurityTokenHandlerCollectionManager"/> for a given named service.
+        /// Initialize an instance of <see cref="SecurityTokenHandlerCollectionManager"/> for a given named
+        // service.
         /// </summary>
-        /// <param name="serviceName">A <see cref="String"/> indicating the name of the associated service.</param>
+        /// <param name="serviceName">A <see cref="String"/> indicating the name of the associated
+        // service.</param>
         public SecurityTokenHandlerCollectionManager(string serviceName)
         {
             if (serviceName == null)
@@ -114,7 +116,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates the default set of SecurityTokenHandlers.
         /// </summary>
-        /// <returns>A SecurityTokenHandlerCollectionManager with a default collection of token handlers.</returns>
+        /// <returns>A SecurityTokenHandlerCollectionManager with a default collection of token
+        // handlers.</returns>
         public static SecurityTokenHandlerCollectionManager CreateDefaultSecurityTokenHandlerCollectionManager()
         {
             SecurityTokenHandlerCollection defaultHandlers =
@@ -134,7 +137,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Checks if a SecurityTokenHandlerCollection exists for the given usage.
         /// </summary>
-        /// <param name="usage">A string that represents the usage of the SecurityTokenHandlerCollection.</param>
+        /// <param name="usage">A string that represents the usage of the
+        // SecurityTokenHandlerCollection.</param>
         /// <returns>Whether or not a token handler collection exists for the given usage.</returns>
         public bool ContainsKey(string usage)
         {

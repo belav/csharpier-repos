@@ -109,7 +109,8 @@ namespace System.Security.Cryptography
         /// Gets the padding mode to use in conjunction with <see cref="RSAEncryptionPaddingMode.Oaep"/>.
         /// </summary>
         /// <remarks>
-        /// If <see cref="Mode"/> is not <see cref="RSAEncryptionPaddingMode.Oaep"/>, then <see cref="HashAlgorithmName.Name" /> will be null.
+        /// If <see cref="Mode"/> is not <see cref="RSAEncryptionPaddingMode.Oaep"/>, then <see
+        // cref="HashAlgorithmName.Name" /> will be null.
         /// </remarks>
         public HashAlgorithmName OaepHashAlgorithm
         {

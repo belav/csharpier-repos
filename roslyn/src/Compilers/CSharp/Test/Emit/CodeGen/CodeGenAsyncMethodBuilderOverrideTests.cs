@@ -128,18 +128,23 @@ class C
                 parseOptions: TestOptions.Regular9
             );
             compilation.VerifyDiagnostics(
-                // (11,25): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (11,25): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 //     static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "F")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(11, 25),
-                // (14,28): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                // (14,28): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "G")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(14, 28),
-                // (17,37): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
+                // (17,37): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await
+                // G(3); }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "M")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(17, 37)
@@ -264,7 +269,8 @@ class C
                 //         return await G((string?)null); // 2
                 Diagnostic(ErrorCode.WRN_NullReferenceReturn, "await G((string?)null)")
                     .WithLocation(20, 16),
-                // (44,16): warning CS8618: Non-nullable field '_result' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
+                // (44,16): warning CS8618: Non-nullable field '_result' must contain a non-null value when exiting
+                // constructor. Consider declaring the field as nullable.
                 //     internal T _result;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "_result")
                     .WithArguments("field", "_result")
@@ -315,7 +321,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (9,51): error CS1997: Since 'C.F()' is an async method that returns 'MyTask', a return keyword must not be followed by an object expression
+                // (9,51): error CS1997: Since 'C.F()' is an async method that returns 'MyTask', a return keyword
+                // must not be followed by an object expression
                 //     static async MyTask F() { await Task.Yield(); return 1; } // 1
                 Diagnostic(ErrorCode.ERR_TaskRetNoObjectRequired, "return")
                     .WithArguments("C.F()", "MyTask")
@@ -330,12 +337,14 @@ class C
                 Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
                     .WithArguments("int")
                     .WithLocation(15, 63),
-                // (18,78): error CS4016: Since this is an async method, the return expression must be of type 'int' rather than 'MyTask<int>'
+                // (18,78): error CS4016: Since this is an async method, the return expression must be of type 'int'
+                // rather than 'MyTask<int>'
                 //     static async MyTask<int> M2(MyTask<int> mt) { await Task.Yield(); return mt; } // 4
                 Diagnostic(ErrorCode.ERR_BadAsyncReturnExpression, "mt")
                     .WithArguments("int", "MyTask<int>")
                     .WithLocation(18, 78),
-                // (21,39): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // (21,39): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //     static async MyTask M2(bool b) => b ? await Task.Yield() : await Task.Yield(); // 5
                 Diagnostic(
                         ErrorCode.ERR_IllegalStatement,
@@ -596,17 +605,20 @@ static async MyTask<int> M() {{ System.Console.Write(""M ""); await F(); return 
                 parseOptions: TestOptions.Regular9
             );
             compilation.VerifyDiagnostics(
-                // (9,21): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (9,21): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "F")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(9, 21),
-                // (12,24): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (12,24): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "G")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(12, 24),
-                // (15,26): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (15,26): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
                 // static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "M")
                     .WithArguments("async method builder override", "10.0")
@@ -658,17 +670,20 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (8,32): error CS0246: The type or namespace name 'Error' could not be found (are you missing a using directive or an assembly reference?)
+                // (8,32): error CS0246: The type or namespace name 'Error' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [AsyncMethodBuilder(typeof(Error))]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error")
                     .WithArguments("Error")
                     .WithLocation(8, 32),
-                // (11,32): error CS0246: The type or namespace name 'Error<>' could not be found (are you missing a using directive or an assembly reference?)
+                // (11,32): error CS0246: The type or namespace name 'Error<>' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [AsyncMethodBuilder(typeof(Error<>))]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error<>")
                     .WithArguments("Error<>")
                     .WithLocation(11, 32),
-                // (14,32): error CS0246: The type or namespace name 'Error<>' could not be found (are you missing a using directive or an assembly reference?)
+                // (14,32): error CS0246: The type or namespace name 'Error<>' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [AsyncMethodBuilder(typeof(Error<>))]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Error<>")
                     .WithArguments("Error<>")
@@ -714,23 +729,30 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (9,29): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (9,29): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like
+                // type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncReturn,
                         @"{ System.Console.Write(""F ""); await Task.Delay(0); }"
                     )
                     .WithLocation(9, 29),
-                // (12,38): error CS8940: A generic task-like return type was expected, but the type 'MyTaskMethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                // (12,38): error CS8940: A generic task-like return type was expected, but the type
+                // 'MyTaskMethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an
+                // unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_WrongArityAsyncReturn,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithArguments("MyTaskMethodBuilder")
                     .WithLocation(12, 38),
-                // (15,41): error CS8940: A generic task-like return type was expected, but the type 'MyTaskMethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
-                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
+                // (15,41): error CS8940: A generic task-like return type was expected, but the type
+                // 'MyTaskMethodBuilder' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an
+                // unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await
+                // G(3); }
                 Diagnostic(
                         ErrorCode.ERR_WrongArityAsyncReturn,
                         @"{ System.Console.Write(""M ""); await F(); return await G(3); }"
@@ -831,7 +853,8 @@ class C
                     .WithArguments("MyTaskMethodBuilderFactory", "Task")
                     .WithLocation(11, 29),
                 // (14,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilderFactory<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -839,7 +862,8 @@ class C
                     .WithArguments("MyTaskMethodBuilderFactory<T>", "Create")
                     .WithLocation(14, 38),
                 // (14,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilderFactory<T>.Task'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -847,7 +871,8 @@ class C
                     .WithArguments("MyTaskMethodBuilderFactory<T>", "Task")
                     .WithLocation(14, 38),
                 // (17,41): error CS0656: Missing compiler required member 'MyTaskMethodBuilderFactory<int>.Create'
-                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
+                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await
+                // G(3); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""M ""); await F(); return await G(3); }"
@@ -855,7 +880,8 @@ class C
                     .WithArguments("MyTaskMethodBuilderFactory<int>", "Create")
                     .WithLocation(17, 41),
                 // (17,41): error CS0656: Missing compiler required member 'MyTaskMethodBuilderFactory<int>.Task'
-                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
+                //     public static async MyTask<int> M() { System.Console.Write("M "); await F(); return await
+                // G(3); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""M ""); await F(); return await G(3); }"
@@ -923,35 +949,47 @@ return;
                 parseOptions: TestOptions.Regular9
             );
             compilation.VerifyEmitDiagnostics(
-                // (6,18): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,18): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
                         "[AsyncMethodBuilder(typeof(MyTaskMethodBuilder))]"
                     )
                     .WithArguments("lambda attributes", "10.0")
                     .WithLocation(6, 18),
-                // (6,84): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,84): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without
+                // an explicit return type.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(6, 84),
-                // (6,84): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,84): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "=>")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(6, 84),
-                // (8,23): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,23): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => {
+                // System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
                         "[AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]"
                     )
                     .WithArguments("lambda attributes", "10.0")
                     .WithLocation(8, 23),
-                // (8,84): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,84): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without
+                // an explicit return type.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => {
+                // System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(8, 84),
-                // (8,84): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,84): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => {
+                // System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "=>")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(8, 84)
@@ -961,11 +999,15 @@ return;
                 parseOptions: TestOptions.Regular10
             );
             compilation.VerifyEmitDiagnostics(
-                // (6,84): error CS8933: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,84): error CS8933: The AsyncMethodBuilder attribute is disallowed on anonymous methods without
+                // an explicit return type.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(6, 84),
-                // (8,84): error CS8933: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,84): error CS8933: The AsyncMethodBuilder attribute is disallowed on anonymous methods without
+                // an explicit return type.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async () => {
+                // System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(8, 84)
             );
         }
@@ -998,39 +1040,51 @@ return;
                 parseOptions: TestOptions.Regular9
             );
             compilation.VerifyEmitDiagnostics(
-                // (6,18): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,18): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
                         "[AsyncMethodBuilder(typeof(MyTaskMethodBuilder))]"
                     )
                     .WithArguments("lambda attributes", "10.0")
                     .WithLocation(6, 18),
-                // (6,81): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,81): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "MyTask")
                     .WithArguments("lambda return type", "10.0")
                     .WithLocation(6, 81),
-                // (6,91): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => { System.Console.Write("F "); await Task.Delay(0); };
+                // (6,91): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                // Func<MyTask> f = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async MyTask () => {
+                // System.Console.Write("F "); await Task.Delay(0); };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "=>")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(6, 91),
-                // (8,23): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,23): error CS8773: Feature 'lambda attributes' is not available in C# 9.0. Please use language
+                // version 10.0 or greater.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () =>
+                // { System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion9,
                         "[AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]"
                     )
                     .WithArguments("lambda attributes", "10.0")
                     .WithLocation(8, 23),
-                // (8,81): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,81): error CS8773: Feature 'lambda return type' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () =>
+                // { System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "MyTask<int>")
                     .WithArguments("lambda return type", "10.0")
                     .WithLocation(8, 81),
-                // (8,96): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please use language version 10.0 or greater.
-                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () => { System.Console.Write("M "); await f(); return 3; };
+                // (8,96): error CS8773: Feature 'async method builder override' is not available in C# 9.0. Please
+                // use language version 10.0 or greater.
+                // Func<MyTask<int>> m = [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] async MyTask<int> () =>
+                // { System.Console.Write("M "); await f(); return 3; };
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "=>")
                     .WithArguments("async method builder override", "10.0")
                     .WithLocation(8, 96)
@@ -1086,11 +1140,15 @@ public class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (7,71): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => { System.Console.Write("Lambda1 "); await Task.Delay(0); } // 1
+                // (7,71): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without
+                // an explicit return type.
+                //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))] static async () => {
+                // System.Console.Write("Lambda1 "); await Task.Delay(0); } // 1
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(7, 71),
-                // (11,73): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods without an explicit return type.
-                //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] static async () => { System.Console.Write("Lambda2 "); await Task.Delay(0); return 3; } // 2
+                // (11,73): error CS8935: The AsyncMethodBuilder attribute is disallowed on anonymous methods
+                // without an explicit return type.
+                //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))] static async () => {
+                // System.Console.Write("Lambda2 "); await Task.Delay(0); return 3; } // 2
                 Diagnostic(ErrorCode.ERR_BuilderAttributeDisallowed, "=>").WithLocation(11, 73)
             );
 
@@ -1207,7 +1265,8 @@ class C
             );
             compilation.VerifyDiagnostics();
             compilation.VerifyEmitDiagnostics(
-                // (8,29): error CS8204: For type 'MyTaskMethodBuilder' to be used as an AsyncMethodBuilder for type 'MyTask', its Task property should return type 'MyTask' instead of type 'object'.
+                // (8,29): error CS8204: For type 'MyTaskMethodBuilder' to be used as an AsyncMethodBuilder for type
+                // 'MyTask', its Task property should return type 'MyTask' instead of type 'object'.
                 //     static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
@@ -1215,15 +1274,18 @@ class C
                     )
                     .WithArguments("MyTaskMethodBuilder", "MyTask", "object")
                     .WithLocation(8, 29),
-                // (11,38): error CS8204: For type 'MyTaskMethodBuilder<T>' to be used as an AsyncMethodBuilder for type 'MyTask<T>', its Task property should return type 'MyTask<T>' instead of type 'object'.
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                // (11,38): error CS8204: For type 'MyTaskMethodBuilder<T>' to be used as an AsyncMethodBuilder for
+                // type 'MyTask<T>', its Task property should return type 'MyTask<T>' instead of type 'object'.
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithArguments("MyTaskMethodBuilder<T>", "MyTask<T>", "object")
                     .WithLocation(11, 38),
-                // (14,34): error CS8204: For type 'MyTaskMethodBuilder<int>' to be used as an AsyncMethodBuilder for type 'MyTask<int>', its Task property should return type 'MyTask<int>' instead of type 'object'.
+                // (14,34): error CS8204: For type 'MyTaskMethodBuilder<int>' to be used as an AsyncMethodBuilder
+                // for type 'MyTask<int>', its Task property should return type 'MyTask<int>' instead of type 'object'.
                 //     static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncMethodBuilderTaskProperty,
@@ -1279,7 +1341,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1340,7 +1403,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1400,7 +1464,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1460,7 +1525,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1520,7 +1586,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1588,7 +1655,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1722,7 +1790,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Create")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Create'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -1829,21 +1898,25 @@ namespace System.Runtime.CompilerServices
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (10,29): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (10,29): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncReturn,
                         @"{ System.Console.Write(""F ""); await Task.Delay(0); }"
                     )
                     .WithLocation(10, 29),
-                // (14,38): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                // (14,38): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncReturn,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithLocation(14, 38),
-                // (18,34): error CS1983: The return type of an async method must be void, Task, Task<T>, a task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
+                // (18,34): error CS1983: The return type of an async method must be void, Task, Task<T>, a
+                // task-like type, IAsyncEnumerable<T>, or IAsyncEnumerator<T>
                 //     static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(
                         ErrorCode.ERR_BadAsyncReturn,
@@ -1910,7 +1983,9 @@ class C<U>
 ";
             var compilation = CreateCompilationWithMscorlib45(source);
             compilation.VerifyEmitDiagnostics(
-                // (9,34): error CS8940: A generic task-like return type was expected, but the type 'MyTaskMethodBuilder<int>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an unbound generic type of arity one, and its containing type (if any) must be non-generic.
+                // (9,34): error CS8940: A generic task-like return type was expected, but the type
+                // 'MyTaskMethodBuilder<int>' found in 'AsyncMethodBuilder' attribute was not suitable. It must be an
+                // unbound generic type of arity one, and its containing type (if any) must be non-generic.
                 //     static async MyTask<int> M() { await Task.Delay(0); throw null; }
                 Diagnostic(
                         ErrorCode.ERR_WrongArityAsyncReturn,
@@ -1962,7 +2037,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Task")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Task'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2021,7 +2097,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Task")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Task'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2080,7 +2157,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Task")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Task'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2139,7 +2217,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "SetException")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.SetException'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2202,7 +2281,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "SetException")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.SetException'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2261,7 +2341,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "SetException")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.SetException'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2320,7 +2401,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "SetResult")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.SetResult'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2379,14 +2461,16 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "AwaitOnCompleted")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.AwaitOnCompleted'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithArguments("MyTaskMethodBuilder<T>", "AwaitOnCompleted")
                     .WithLocation(11, 38),
-                // (14,34): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<int>.AwaitOnCompleted'
+                // (14,34): error CS0656: Missing compiler required member
+                // 'MyTaskMethodBuilder<int>.AwaitOnCompleted'
                 //     static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -2429,7 +2513,8 @@ class C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (8,29): error CS0656: Missing compiler required member 'MyTaskMethodBuilder.AwaitUnsafeOnCompleted'
+                // (8,29): error CS0656: Missing compiler required member
+                // 'MyTaskMethodBuilder.AwaitUnsafeOnCompleted'
                 //     static async MyTask F() { System.Console.Write("F "); await Task.Delay(0); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -2437,15 +2522,18 @@ class C
                     )
                     .WithArguments("MyTaskMethodBuilder", "AwaitUnsafeOnCompleted")
                     .WithLocation(8, 29),
-                // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.AwaitUnsafeOnCompleted'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                // (11,38): error CS0656: Missing compiler required member
+                // 'MyTaskMethodBuilder<T>.AwaitUnsafeOnCompleted'
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithArguments("MyTaskMethodBuilder<T>", "AwaitUnsafeOnCompleted")
                     .WithLocation(11, 38),
-                // (14,34): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<int>.AwaitUnsafeOnCompleted'
+                // (14,34): error CS0656: Missing compiler required member
+                // 'MyTaskMethodBuilder<int>.AwaitUnsafeOnCompleted'
                 //     static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -2497,7 +2585,8 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "Start")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.Start'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
@@ -2556,14 +2645,16 @@ class C
                     .WithArguments("MyTaskMethodBuilder", "SetStateMachine")
                     .WithLocation(8, 29),
                 // (11,38): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<T>.SetStateMachine'
-                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t; }
+                //     static async MyTask<T> G<T>(T t) { System.Console.Write("G "); await Task.Delay(0); return t;
+                // }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
                         @"{ System.Console.Write(""G ""); await Task.Delay(0); return t; }"
                     )
                     .WithArguments("MyTaskMethodBuilder<T>", "SetStateMachine")
                     .WithLocation(11, 38),
-                // (14,34): error CS0656: Missing compiler required member 'MyTaskMethodBuilder<int>.SetStateMachine'
+                // (14,34): error CS0656: Missing compiler required member
+                // 'MyTaskMethodBuilder<int>.SetStateMachine'
                 //     static async MyTask<int> M() { System.Console.Write("M "); await F(); return await G(3); }
                 Diagnostic(
                         ErrorCode.ERR_MissingPredefinedMember,
@@ -2688,7 +2779,9 @@ public class MyTaskMethodBuilder<T>
                 parseOptions: TestOptions.RegularPreview
             );
             compilation.VerifyEmitDiagnostics(
-                // (10,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
+                // (10,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported
+                // type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1,
+                // Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
                 //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder))]
                 Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "AsyncMethodBuilder")
                     .WithArguments(
@@ -2698,7 +2791,9 @@ public class MyTaskMethodBuilder<T>
                         "System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"
                     )
                     .WithLocation(10, 6),
-                // (13,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
+                // (13,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported
+                // type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1,
+                // Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
                 //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]
                 Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "AsyncMethodBuilder")
                     .WithArguments(
@@ -2708,7 +2803,9 @@ public class MyTaskMethodBuilder<T>
                         "System.Runtime.CompilerServices.AsyncMethodBuilderAttribute"
                     )
                     .WithLocation(13, 6),
-                // (16,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
+                // (16,6): warning CS0436: The type 'AsyncMethodBuilderAttribute' in '' conflicts with the imported
+                // type 'AsyncMethodBuilderAttribute' in 'System.Threading.Tasks.Extensions, Version=4.2.0.1,
+                // Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51'. Using the type defined in ''.
                 //     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]
                 Diagnostic(ErrorCode.WRN_SameFullNameThisAggAgg, "AsyncMethodBuilder")
                     .WithArguments(

@@ -180,7 +180,8 @@ namespace System.Reflection
             throw new NotImplementedException();
         }
 
-        // If you implement this method, make sure to include _ConstructorInfo.Invoke in VM\DangerousAPIs.h and
+        // If you implement this method, make sure to include _ConstructorInfo.Invoke in VM\DangerousAPIs.h
+        // and
         // include _ConstructorInfo in SystemDomain::IsReflectionInvocationMethod in AppDomain.cpp.
         void _ConstructorInfo.Invoke(
             uint dispIdMember,
@@ -439,7 +440,8 @@ namespace System.Reflection
             get { return m_bindingFlags; }
         }
 
-        // Differs from MethodHandle in that it will return a valid handle even for reflection only loaded types
+        // Differs from MethodHandle in that it will return a valid handle even for reflection only loaded
+        // types
         internal RuntimeMethodHandle GetMethodHandle()
         {
             return new RuntimeMethodHandle(this);
@@ -718,7 +720,8 @@ namespace System.Reflection
             if ((invocationFlags & INVOCATION_FLAGS.INVOCATION_FLAGS_NO_INVOKE) != 0)
                 ThrowNoInvokeException();
 
-            // check basic method consistency. This call will throw if there are problems in the target/method relationship
+            // check basic method consistency. This call will throw if there are problems in the target/method
+            // relationship
             CheckConsistency(obj);
 
 #if FEATURE_APPX

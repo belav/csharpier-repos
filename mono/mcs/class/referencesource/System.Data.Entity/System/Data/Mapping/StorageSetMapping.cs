@@ -47,7 +47,8 @@ namespace System.Data.Mapping
         /// Construct the new StorageSetMapping object.
         /// </summary>
         /// <param name="extent">Extent metadata object</param>
-        /// <param name="entityContainerMapping">The EntityContainer mapping that contains this extent mapping</param>
+        /// <param name="entityContainerMapping">The EntityContainer mapping that contains this extent
+        // mapping</param>
         internal StorageSetMapping(
             EntitySetBase extent,
             StorageEntityContainerMapping entityContainerMapping

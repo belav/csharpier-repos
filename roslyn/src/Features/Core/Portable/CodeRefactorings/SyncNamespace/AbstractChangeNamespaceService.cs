@@ -31,7 +31,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ChangeNamespace
 {
     /// <summary>
-    /// This intermediate class is used to hide method `TryGetReplacementReferenceSyntax` from <see cref="IChangeNamespaceService" />.
+    /// This intermediate class is used to hide method `TryGetReplacementReferenceSyntax` from <see
+    // cref="IChangeNamespaceService" />.
     /// </summary>
     internal abstract class AbstractChangeNamespaceService : IChangeNamespaceService
     {
@@ -57,14 +58,19 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         );
 
         /// <summary>
-        /// Try to get a new node to replace given node, which is a reference to a top-level type declared inside the
-        /// namespace to be changed. If this reference is the right side of a qualified name, the new node returned would
-        /// be the entire qualified name. Depends on whether <paramref name="newNamespaceParts"/> is provided, the name
+        /// Try to get a new node to replace given node, which is a reference to a top-level type declared
+        // inside the
+        /// namespace to be changed. If this reference is the right side of a qualified name, the new node
+        // returned would
+        /// be the entire qualified name. Depends on whether <paramref name="newNamespaceParts"/> is
+        // provided, the name
         /// in the new node might be qualified with this new namespace instead.
         /// </summary>
-        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated
+        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which
+        // is calculated
         /// based on results from `SymbolFinder.FindReferencesAsync`.</param>
-        /// <param name="newNamespaceParts">If specified, the namespace of original reference will be replaced with given
+        /// <param name="newNamespaceParts">If specified, the namespace of original reference will be
+        // replaced with given
         /// namespace in the replacement node.</param>
         /// <param name="old">The node to be replaced. This might be an ancestor of original </param>
         /// <param name="new">The replacement node.</param>
@@ -117,13 +123,18 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         protected abstract string GetDeclaredNamespace(SyntaxNode container);
 
         /// <summary>
-        /// Decide if we can change the namespace for provided <paramref name="container"/> based on the criteria listed for
-        /// <see cref="IChangeNamespaceService.CanChangeNamespaceAsync(Document, SyntaxNode, CancellationToken)"/>
+        /// Decide if we can change the namespace for provided <paramref name="container"/> based on the
+        // criteria listed for
+        /// <see cref="IChangeNamespaceService.CanChangeNamespaceAsync(Document, SyntaxNode,
+        // CancellationToken)"/>
         /// </summary>
         /// <returns>
-        /// If namespace can be changed, returns a list of documents that linked to the provided document (including itself)
-        /// and the corresponding container nodes in each document, which will later be used for annotation. Otherwise, a
-        /// default ImmutableArray is returned. Currently we only support linked document in multi-targeting project scenario.
+        /// If namespace can be changed, returns a list of documents that linked to the provided document
+        // (including itself)
+        /// and the corresponding container nodes in each document, which will later be used for annotation.
+        // Otherwise, a
+        /// default ImmutableArray is returned. Currently we only support linked document in multi-targeting
+        // project scenario.
         /// </returns>
         protected abstract Task<
             ImmutableArray<(DocumentId id, SyntaxNode container)>
@@ -308,7 +319,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // 3. Remove added imports that are unnecessary.
             // 4. Do another explicit diff merge based on last merged solution.
             //
-            // The reason for doing explicit diff merge twice is so merging after remove unnecessary imports can be correctly handled.
+            // The reason for doing explicit diff merge twice is so merging after remove unnecessary imports can
+            // be correctly handled.
 
             var documentIds = containersFromAllDocuments.SelectAsArray(pair => pair.id);
             var solutionAfterNamespaceChange = annotatedSolution;
@@ -337,11 +349,15 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 .ConfigureAwait(false);
 
             // After changing documents, we still need to remove unnecessary imports related to our change.
-            // We don't try to remove all imports that might become unnecessary/invalid after the namespace change,
-            // just ones that fully match the old/new namespace. Because it's hard to get it right and will almost
+            // We don't try to remove all imports that might become unnecessary/invalid after the namespace
+            // change,
+            // just ones that fully match the old/new namespace. Because it's hard to get it right and will
+            // almost
             // certainly cause perf issue.
-            // For example, if we are changing namespace `Foo.Bar` (which is the only namespace declaration with such name)
-            // to `A.B`, the using of name `Bar` in a different file below would remain untouched, even it's no longer valid:
+            // For example, if we are changing namespace `Foo.Bar` (which is the only namespace declaration with
+            // such name)
+            // to `A.B`, the using of name `Bar` in a different file below would remain untouched, even it's no
+            // longer valid:
             //
             //      namespace Foo
             //      {
@@ -388,10 +404,14 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             CancellationToken cancellationToken
         )
         {
-            // If the node specified by span doesn't meet the requirement to be an applicable container in any of the documents
-            // (See `TryGetApplicableContainerFromSpanAsync`), or we are getting different namespace declarations among
-            // those documents, then we know we can't make a proper code change. We will return null and the check
-            // will return false. We use span of namespace declaration found in each document to decide if they are identical.
+            // If the node specified by span doesn't meet the requirement to be an applicable container in any
+            // of the documents
+            // (See `TryGetApplicableContainerFromSpanAsync`), or we are getting different namespace
+            // declarations among
+            // those documents, then we know we can't make a proper code change. We will return null and the
+            // check
+            // will return false. We use span of namespace declaration found in each document to decide if they
+            // are identical.
 
             var documents = ids.SelectAsArray(solution.GetRequiredDocument);
             using var _1 = ArrayBuilder<(DocumentId, SyntaxNode)>.GetInstance(
@@ -431,7 +451,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         }
 
         /// <summary>
-        /// Mark container nodes with our annotation so we can keep track of them across syntax modifications.
+        /// Mark container nodes with our annotation so we can keep track of them across syntax
+        // modifications.
         /// </summary>
         protected static async Task<Solution> AnnotateContainersAsync(
             Solution solution,
@@ -495,7 +516,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             // TODO: figure out how to properly determine if and how a document is linked using project system.
 
             // If we found a linked document which is part of a project with different project file,
-            // then it's an actual linked file (i.e. not a multi-targeting project). We don't support that for now.
+            // then it's an actual linked file (i.e. not a multi-targeting project). We don't support that for
+            // now.
             if (
                 linkedDocumentIds.Any(
                     static (id, arg) =>
@@ -586,9 +608,12 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
         }
 
         /// <summary>
-        /// Try to change the namespace declaration in the document (specified by <paramref name="id"/> in <paramref name="solution"/>).
-        /// Returns a new solution after changing namespace, and a list of IDs for documents that also changed because they reference
-        /// the types declared in the changed namespace (not include the document contains the declaration itself).
+        /// Try to change the namespace declaration in the document (specified by <paramref name="id"/> in
+        // <paramref name="solution"/>).
+        /// Returns a new solution after changing namespace, and a list of IDs for documents that also
+        // changed because they reference
+        /// the types declared in the changed namespace (not include the document contains the declaration
+        // itself).
         /// </summary>
         private async Task<(
             Solution,
@@ -621,8 +646,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
                 .CreateAsync(document, cancellationToken)
                 .ConfigureAwait(false);
 
-            // Separating references to declaredSymbols into two groups based on whether it's located in the same
-            // document as the namespace declaration. This is because code change required for them are different.
+            // Separating references to declaredSymbols into two groups based on whether it's located in the
+            // same
+            // document as the namespace declaration. This is because code change required for them are
+            // different.
             var refLocationsInCurrentDocument = new List<LocationForAffectedSymbol>();
             var refLocationsInOtherDocuments = new List<LocationForAffectedSymbol>();
 
@@ -879,7 +906,8 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
 
             Debug.Assert(containersToAddImports.Length > 0);
 
-            // Need to import all containing namespaces of old namespace and add them to the document (if it's not global namespace)
+            // Need to import all containing namespaces of old namespace and add them to the document (if it's
+            // not global namespace)
             // Include the new namespace in case there are multiple namespace declarations in
             // the declaring document. They may need a using statement added to correctly keep
             // references to the type inside it's new namespace
@@ -1033,8 +1061,10 @@ namespace Microsoft.CodeAnalysis.ChangeNamespace
             {
                 Debug.Assert(document.Id == refLoc.Document.Id);
 
-                // Ignore references via alias. For simple cases where the alias is defined as the type we are interested,
-                // it will be handled properly because it is one of the reference to the type symbol. Otherwise, we don't
+                // Ignore references via alias. For simple cases where the alias is defined as the type we are
+                // interested,
+                // it will be handled properly because it is one of the reference to the type symbol. Otherwise, we
+                // don't
                 // attempt to make a potential fix, and user might end up with errors as a result.
                 if (refLoc.ReferenceLocation.Alias != null)
                 {

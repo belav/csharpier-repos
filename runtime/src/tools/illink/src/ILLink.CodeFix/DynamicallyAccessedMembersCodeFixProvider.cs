@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -53,7 +54,8 @@ namespace ILLink.CodeFix
                     DiagnosticId.DynamicallyAccessedMembersMismatchParameterTargetsThisParameter
                 )
             );
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchParameterTargetsGenericParameter));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchParameterTargetsGenericParameter));
             diagDescriptorsArrayBuilder.Add(
                 DiagnosticDescriptors.GetDiagnosticDescriptor(
                     DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsParameter
@@ -74,7 +76,8 @@ namespace ILLink.CodeFix
                     DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsThisParameter
                 )
             );
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsGenericParameter));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsGenericParameter));
             diagDescriptorsArrayBuilder.Add(
                 DiagnosticDescriptors.GetDiagnosticDescriptor(
                     DiagnosticId.DynamicallyAccessedMembersMismatchFieldTargetsParameter
@@ -95,7 +98,8 @@ namespace ILLink.CodeFix
                     DiagnosticId.DynamicallyAccessedMembersMismatchFieldTargetsThisParameter
                 )
             );
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchFieldTargetsGenericParameter));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchFieldTargetsGenericParameter));
             diagDescriptorsArrayBuilder.Add(
                 DiagnosticDescriptors.GetDiagnosticDescriptor(
                     DiagnosticId.DynamicallyAccessedMembersMismatchThisParameterTargetsParameter
@@ -116,7 +120,8 @@ namespace ILLink.CodeFix
                     DiagnosticId.DynamicallyAccessedMembersMismatchThisParameterTargetsThisParameter
                 )
             );
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchThisParameterTargetsGenericParameter));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchThisParameterTargetsGenericParameter));
             diagDescriptorsArrayBuilder.Add(
                 DiagnosticDescriptors.GetDiagnosticDescriptor(
                     DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsParameter
@@ -152,8 +157,10 @@ namespace ILLink.CodeFix
                     DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides
                 )
             );
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchOnImplicitThisBetweenOverrides));
-            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor (DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchOnImplicitThisBetweenOverrides));
+            // diagDescriptorsArrayBuilder.Add (DiagnosticDescriptors.GetDiagnosticDescriptor
+            // (DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides));
 
             return diagDescriptorsArrayBuilder.ToImmutable();
         }
@@ -195,7 +202,8 @@ namespace ILLink.CodeFix
 
         public sealed override FixAllProvider GetFixAllProvider()
         {
-            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
+            // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more
+            // information on Fix All Providers
             return WellKnownFixAllProviders.BatchFixer;
         }
 
@@ -287,7 +295,8 @@ namespace ILLink.CodeFix
 
             if (addAsReturnAttribute)
             {
-                // don't use AddReturnAttribute because it's the same as AddAttribute https://github.com/dotnet/roslyn/pull/63084
+                // don't use AddReturnAttribute because it's the same as AddAttribute
+                // https://github.com/dotnet/roslyn/pull/63084
                 editor.ReplaceNode(
                     targetNode,
                     (d, g) => g.AddReturnAttributes(d, new[] { attribute })
@@ -295,7 +304,8 @@ namespace ILLink.CodeFix
             }
             else if (addGenericParameterAttribute)
             {
-                // AddReturnAttributes currently doesn't support adding attributes to type arguments https://github.com/dotnet/roslyn/pull/63292
+                // AddReturnAttributes currently doesn't support adding attributes to type arguments
+                // https://github.com/dotnet/roslyn/pull/63292
                 var newNode = (TypeParameterSyntax)targetNode;
                 var nodeWithAttribute = newNode.AddAttributeLists((AttributeListSyntax)attribute);
                 editor.ReplaceNode(targetNode, nodeWithAttribute);

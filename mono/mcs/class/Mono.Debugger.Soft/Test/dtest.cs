@@ -266,8 +266,8 @@ namespace MonoTests
         }
 
         /* One of the tests executes a complex tree of recursive functions.
-           The only good way to specify how its behavior should appear from this side
-           is to just run the function tree once over here and record what it does. */
+        The only good way to specify how its behavior should appear from this side
+        is to just run the function tree once over here and record what it does. */
         public struct RecursiveChaoticPoint
         {
             public bool breakpoint;
@@ -291,7 +291,8 @@ namespace MonoTests
         )
         {
             // Depth is calculated as:
-            // Main + single_stepping + ss_recursive_chaotic + (n is 5 at outermost frame and 0 at innermost frame) + ss_recursive_chaotic_trap
+            // Main + single_stepping + ss_recursive_chaotic + (n is 5 at outermost frame and 0 at innermost
+            // frame) + ss_recursive_chaotic_trap
             trace.Add(new RecursiveChaoticPoint(true, "ss_recursive_chaotic_trap", 5 - n + 5));
             didLast = true;
         }
@@ -304,11 +305,13 @@ namespace MonoTests
             ref bool didAny
         )
         {
-            // This will be called after every return from a function. The other function will return whether "step out" is currently active, and it will be passed in here as didLast.
+            // This will be called after every return from a function. The other function will return whether
+            // "step out" is currently active, and it will be passed in here as didLast.
             if (didLast)
             {
                 // Depth is calculated as:
-                // Main + single_stepping + ss_recursive_chaotic + (n is 5 at outermost frame and 0 at innermost frame)
+                // Main + single_stepping + ss_recursive_chaotic + (n is 5 at outermost frame and 0 at innermost
+                // frame)
                 trace.Add(
                     new RecursiveChaoticPoint(false, "ss_recursive_chaotic_" + at, 5 - n + 4)
                 );
@@ -1090,7 +1093,8 @@ namespace MonoTests
             AssertValue(1, f.GetValue(f.Method.GetLocal("n")));
             req.Disable();
 
-            // Check that step-over stops correctly when inner frames with recursive functions contain breakpoints
+            // Check that step-over stops correctly when inner frames with recursive functions contain
+            // breakpoints
             e = run_until("ss_recursive2");
             ReusableBreakpoint breakpoint = new ReusableBreakpoint(this, "ss_recursive2_trap");
             try
@@ -1125,7 +1129,8 @@ namespace MonoTests
                 breakpoint.Disable();
             }
 
-            // Check that step-out stops correctly when inner frames with recursive functions contain breakpoints
+            // Check that step-out stops correctly when inner frames with recursive functions contain
+            // breakpoints
             e = run_until("ss_recursive2");
             breakpoint = new ReusableBreakpoint(this, "ss_recursive2_trap");
             try
@@ -2307,17 +2312,17 @@ namespace MonoTests
             //Assert.IsTrue (child.IsCollected);
 
             /*
-             * No longer works since Type is read eagerly
-             */
-            /*
-            AssertThrows<ObjectCollectedException> (delegate () {
-                TypeMirror t = child.Type;
-                });
+            * No longer works since Type is read eagerly
             */
             /*
             AssertThrows<ObjectCollectedException> (delegate () {
-                    long addr = child.Address;
-                });
+            TypeMirror t = child.Type;
+            });
+            */
+            /*
+            AssertThrows<ObjectCollectedException> (delegate () {
+            long addr = child.Address;
+            });
             */
         }
 

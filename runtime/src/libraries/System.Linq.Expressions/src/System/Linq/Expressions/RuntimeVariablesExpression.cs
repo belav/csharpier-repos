@@ -25,7 +25,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Gets the static type of the expression that this <see cref="Expression"/> represents.
         /// </summary>
-        /// <returns>The <see cref="System.Type"/> that represents the static type of the expression.</returns>
+        /// <returns>The <see cref="System.Type"/> that represents the static type of the
+        // expression.</returns>
         public sealed override Type Type => typeof(IRuntimeVariables);
 
         /// <summary>
@@ -54,7 +55,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="variables">The <see cref="Variables"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public RuntimeVariablesExpression Update(IEnumerable<ParameterExpression> variables)
         {
             if (variables != null)
@@ -74,8 +76,11 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates an instance of <see cref="RuntimeVariablesExpression"/>.
         /// </summary>
-        /// <param name="variables">An array of <see cref="ParameterExpression"/> objects to use to populate the <see cref="RuntimeVariablesExpression.Variables"/> collection.</param>
-        /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
+        /// <param name="variables">An array of <see cref="ParameterExpression"/> objects to use to populate
+        // the <see cref="RuntimeVariablesExpression.Variables"/> collection.</param>
+        /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see
+        // cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see
+        // cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
         public static RuntimeVariablesExpression RuntimeVariables(
             params ParameterExpression[] variables
         )
@@ -86,8 +91,11 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates an instance of <see cref="RuntimeVariablesExpression"/>.
         /// </summary>
-        /// <param name="variables">A collection of <see cref="ParameterExpression"/> objects to use to populate the <see cref="RuntimeVariablesExpression.Variables"/> collection.</param>
-        /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
+        /// <param name="variables">A collection of <see cref="ParameterExpression"/> objects to use to
+        // populate the <see cref="RuntimeVariablesExpression.Variables"/> collection.</param>
+        /// <returns>An instance of <see cref="RuntimeVariablesExpression"/> that has the <see
+        // cref="NodeType"/> property equal to <see cref="ExpressionType.RuntimeVariables"/> and the <see
+        // cref="RuntimeVariablesExpression.Variables"/> property set to the specified value.</returns>
         public static RuntimeVariablesExpression RuntimeVariables(
             IEnumerable<ParameterExpression> variables
         )

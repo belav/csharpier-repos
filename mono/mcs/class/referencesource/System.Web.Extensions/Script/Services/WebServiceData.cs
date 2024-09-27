@@ -50,10 +50,13 @@ namespace System.Web.Script.Services
 
         private static WebServiceData GetApplicationService(string appRelativePath)
         {
-            // we only support the application services being accessed at the root level, so that url authorization can be used to control their access.
-            // In other words, "~/Profile_JSON_AppService.axd" should work but not "~/SomeSubDir/Profile_JSON_AppService.axd".
+            // we only support the application services being accessed at the root level, so that url
+            // authorization can be used to control their access.
+            // In other words, "~/Profile_JSON_AppService.axd" should work but not
+            // "~/SomeSubDir/Profile_JSON_AppService.axd".
             // AppRelativeCurrentExecutionFilePath looks like "~/path/filename.ext".
-            // So we can easily detect if the file requested is in the root by ensuring that the last index of "/" is == 1,
+            // So we can easily detect if the file requested is in the root by ensuring that the last index of
+            // "/" is == 1,
             // as in the path "~/rootfile.ext", where "/" is the second character.
             // Note that the WebServiceData object is cached higher in the stack once calculated
             int slashIndex = appRelativePath.LastIndexOf('/');
@@ -171,7 +174,8 @@ namespace System.Web.Script.Services
                         );
                         if (deps != null)
                         {
-                            // Dev10 718863: It's possible 'deps' is null if the service is modified between GetCompiledType and here.
+                            // Dev10 718863: It's possible 'deps' is null if the service is modified between GetCompiledType and
+                            // here.
                             // in that case simply do not cache the result so it is re-established next time it is required.
                             CacheDependency cd =
                                 HostingEnvironment.VirtualPathProvider.GetCacheDependency(
@@ -187,7 +191,8 @@ namespace System.Web.Script.Services
                     virtualPath.EndsWith("_AppService.axd", StringComparison.OrdinalIgnoreCase)
                 )
                 {
-                    // File does not exist, but the url may be a request for one of the three built-in services: ProfileService, AuthenticationService, RoleService
+                    // File does not exist, but the url may be a request for one of the three built-in services:
+                    // ProfileService, AuthenticationService, RoleService
                     data = WebServiceData.GetApplicationService(
                         context.Request.AppRelativeCurrentExecutionFilePath
                     );
@@ -204,7 +209,8 @@ namespace System.Web.Script.Services
                 {
                     if (inlineScript)
                     {
-                        //DevDiv 74432: InlineScript = true fails, for WCF serviceReferences: Need an appropriate error message
+                        //DevDiv 74432: InlineScript = true fails, for WCF serviceReferences: Need an appropriate error
+                        // message
                         throw new InvalidOperationException(
                             String.Format(
                                 CultureInfo.InvariantCulture,
@@ -468,7 +474,8 @@ namespace System.Web.Script.Services
                 }
 
                 // DevDiv 60672: Only set to true if the proxies were SUCCESSFULLY processed
-                // Only setting _clientTypesProcessed=true on success will cause us to retry creating the proxies each
+                // Only setting _clientTypesProcessed=true on success will cause us to retry creating the proxies
+                // each
                 // request when there is an exception, and so the same exception will be thrown each time.
                 _clientTypesProcessed = true;
             }
@@ -527,7 +534,8 @@ namespace System.Web.Script.Services
             ProcessClientType(t, force, false);
         }
 
-        // Force = true is required for when we detect a GenerateScriptType which may supply a new ScriptTypeID
+        // Force = true is required for when we detect a GenerateScriptType which may supply a new
+        // ScriptTypeID
         [SuppressMessage(
             "Microsoft.Usage",
             "CA2301:EmbeddableTypesInContainersRule",

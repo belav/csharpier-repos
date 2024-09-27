@@ -80,8 +80,8 @@ namespace System.Web.UI.Design.MobileControls
 
             if (declarativeType == null)
             {
-                /* Begin AUI 7201  */
-                /* Original declarativeType = type.FullName; */
+/* Begin AUI 7201  */
+/* Original declarativeType = type.FullName; */
                 if (type == typeof(System.Web.UI.MobileControls.Style))
                 {
                     declarativeType = type.Name;
@@ -90,7 +90,7 @@ namespace System.Web.UI.Design.MobileControls
                 {
                     declarativeType = type.FullName;
                 }
-                /* End AUI 7201 */
+/* End AUI 7201 */
             }
 
             return declarativeType;
@@ -180,8 +180,8 @@ namespace System.Web.UI.Design.MobileControls
                 {
                     itemTypeName = persistName;
                 }
-                /* AUI Change #3911 */
-                /* Original : else if (collItem is Control) */
+/* AUI Change #3911 */
+/* Original : else if (collItem is Control) */
                 else if (
                     collItem is Control
                     || collItem.GetType() == typeof(System.Web.UI.MobileControls.Style)
@@ -460,7 +460,7 @@ namespace System.Web.UI.Design.MobileControls
                         );
                     }
                 }
-                /* AUI change 03/21/01 */
+/* AUI change 03/21/01 */
                 else if (
                     propDescs[i].DisplayName.Equals("Templates")
                     && component is DeviceSpecificChoice
@@ -474,7 +474,7 @@ namespace System.Web.UI.Design.MobileControls
                         PersistTemplateProperty(sw, templateName, template);
                     }
                 }
-                /* End of AUI change*/
+/* End of AUI change*/
                 else if (typeof(ICollection).IsAssignableFrom(propDescs[i].PropertyType))
                 {
                     // Collection based property...
@@ -659,12 +659,12 @@ namespace System.Web.UI.Design.MobileControls
                     continue;
 
                 string persistName = propName;
-                /* AUI Change 3876 -- Change is taken out because of 4347
-                                if (component is DeviceSpecificChoice && persistName.Equals("Xmlns"))
-                                {
-                                    persistName = "xmlns";
-                                }
-                   End of Change */
+/* AUI Change 3876 -- Change is taken out because of 4347
+if (component is DeviceSpecificChoice && persistName.Equals("Xmlns"))
+{
+persistName = "xmlns";
+}
+End of Change */
 
                 if (prefix.Length != 0)
                     persistName = persistPrefix + persistName;
@@ -726,11 +726,12 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 else
                 {
-                    /*
-                     *  This will force all ListDictionary properties with DesignerSerializationVisibility.Content atttribute be
-                     *  persisted as a series of attributes eg. <PropertyFoo Key1="Value1" Key2="Value2" ... />. The
-                     *  WebControlPersistor is not able to handle this case and will return undesired results.
-                     */
+/*
+*  This will force all ListDictionary properties with DesignerSerializationVisibility.Content
+atttribute be
+*  persisted as a series of attributes eg. <PropertyFoo Key1="Value1" Key2="Value2" ... />. The
+*  WebControlPersistor is not able to handle this case and will return undesired results.
+*/
                     // AUI Change to handle DeviceSpecificChoice.Contents
                     if (obj is ListDictionary)
                     {
@@ -820,7 +821,7 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name=' propDesc'>
         ///    A property descriptor for the property.
         /// </param>
-        /* AUI change 03/21/01 added support for persisting Template collection */
+/* AUI change 03/21/01 added support for persisting Template collection */
         private static void PersistTemplateProperty(
             TextWriter sw,
             object component,
@@ -837,7 +838,7 @@ namespace System.Web.UI.Design.MobileControls
             PersistTemplateProperty(sw, templateName, template);
         }
 
-        /* AUI change 03/21/01 made the following code a seperate method */
+/* AUI change 03/21/01 made the following code a seperate method */
         private static void PersistTemplateProperty(
             TextWriter sw,
             String templateName,

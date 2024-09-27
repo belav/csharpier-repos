@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         An expression that represents an enumerable or group translated from chain over a grouping element.
+///         An expression that represents an enumerable or group translated from chain over a
+// grouping element.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -102,7 +104,8 @@ public class EnumerableExpression : Expression, IPrintableExpression
     }
 
     /// <summary>
-    ///     Applies ordering to the <see cref="EnumerableExpression" />. This overwrites any previous ordering specified.
+    ///     Applies ordering to the <see cref="EnumerableExpression" />. This overwrites any previous
+    // ordering specified.
     /// </summary>
     /// <param name="orderingExpression">An ordering expression to use for ordering.</param>
     /// <returns>The new expression with specified component updated.</returns>

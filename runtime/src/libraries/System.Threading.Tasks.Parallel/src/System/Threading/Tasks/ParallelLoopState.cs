@@ -53,7 +53,8 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <remarks>
         /// When an iteration of a loop calls <see cref="Break()"/> or <see cref="Stop()"/>, or
-        /// when one throws an exception, or when the loop is canceled, the <see cref="Parallel"/> class will proactively
+        /// when one throws an exception, or when the loop is canceled, the <see cref="Parallel"/> class
+        // will proactively
         /// attempt to prohibit additional iterations of the loop from starting execution.
         /// However, there may be cases where it is unable to prevent additional iterations from starting.
         /// It may also be the case that a long-running iteration has already begun execution.  In such
@@ -122,7 +123,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Communicates that the <see cref="Parallel"/> loop should cease execution at the system's earliest
+        /// Communicates that the <see cref="Parallel"/> loop should cease execution at the system's
+        // earliest
         /// convenience.
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
@@ -131,13 +133,16 @@ namespace System.Threading.Tasks
         /// </exception>
         /// <remarks>
         /// <para>
-        /// <see cref="Stop()"/> may be used to communicate to the loop that no other iterations need be run.
-        /// For long-running iterations that may already be executing, <see cref="Stop()"/> causes <see cref="IsStopped"/>
+        /// <see cref="Stop()"/> may be used to communicate to the loop that no other iterations need be
+        // run.
+        /// For long-running iterations that may already be executing, <see cref="Stop()"/> causes <see
+        // cref="IsStopped"/>
         /// to return true for all other iterations of the loop, such that another iteration may check <see
         /// cref="IsStopped"/> and exit early if it's observed to be true.
         /// </para>
         /// <para>
-        /// <see cref="Stop()"/> is typically employed in search-based algorithms, where once a result is found,
+        /// <see cref="Stop()"/> is typically employed in search-based algorithms, where once a result is
+        // found,
         /// no other iterations need be executed.
         /// </para>
         /// </remarks>
@@ -156,24 +161,28 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Communicates that the <see cref="Parallel"/> loop should cease execution at the system's earliest
+        /// Communicates that the <see cref="Parallel"/> loop should cease execution at the system's
+        // earliest
         /// convenience of iterations beyond the current iteration.
         /// </summary>
         /// <exception cref="System.InvalidOperationException">
-        /// The <see cref="Stop()"/> method was previously called. <see cref="Break()"/> and <see cref="Stop()"/>
+        /// The <see cref="Stop()"/> method was previously called. <see cref="Break()"/> and <see
+        // cref="Stop()"/>
         /// may not be used in combination by iterations of the same loop.
         /// </exception>
         /// <remarks>
         /// <para>
         /// <see cref="Break()"/> may be used to communicate to the loop that no other iterations after the
         /// current iteration need be run. For example, if <see cref="Break()"/> is called from the 100th
-        /// iteration of a for loop iterating in parallel from 0 to 1000, all iterations less than 100 should
+        /// iteration of a for loop iterating in parallel from 0 to 1000, all iterations less than 100
+        // should
         /// still be run, but the iterations from 101 through to 1000 are not necessary.
         /// </para>
         /// <para>
         /// For long-running iterations that may already be executing, <see cref="Break()"/> causes <see
         /// cref="LowestBreakIteration"/>
-        /// to be set to the current iteration's index if the current index is less than the current value of
+        /// to be set to the current iteration's index if the current index is less than the current value
+        // of
         /// <see cref="LowestBreakIteration"/>.
         /// </para>
         /// <para>
@@ -302,7 +311,8 @@ namespace System.Threading.Tasks
         /// <remarks>
         /// This is shared with all other concurrent threads in the system which are participating in the
         /// loop's execution. After calling Break(), no additional iterations will be executed on
-        /// the current thread, and other worker threads will execute once they get beyond the calling iteration.
+        /// the current thread, and other worker threads will execute once they get beyond the calling
+        // iteration.
         /// </remarks>
         internal override void InternalBreak()
         {
@@ -471,12 +481,16 @@ namespace System.Threading.Tasks
     /// Provides completion status on the execution of a <see cref="Parallel"/> loop.
     /// </summary>
     /// <remarks>
-    /// If <see cref="IsCompleted"/> returns true, then the loop ran to completion, such that all iterations
+    /// If <see cref="IsCompleted"/> returns true, then the loop ran to completion, such that all
+    // iterations
     /// of the loop were executed. If <see cref="IsCompleted"/> returns false and <see
     /// cref="LowestBreakIteration"/> returns null, a call to <see
-    /// cref="System.Threading.Tasks.ParallelLoopState.Stop"/> was used to end the loop prematurely. If <see
-    /// cref="IsCompleted"/> returns false and <see cref="LowestBreakIteration"/> returns a non-null integral
-    /// value, <see cref="System.Threading.Tasks.ParallelLoopState.Break()"/> was used to end the loop prematurely.
+    /// cref="System.Threading.Tasks.ParallelLoopState.Stop"/> was used to end the loop prematurely. If
+    // <see
+    /// cref="IsCompleted"/> returns false and <see cref="LowestBreakIteration"/> returns a non-null
+    // integral
+    /// value, <see cref="System.Threading.Tasks.ParallelLoopState.Break()"/> was used to end the loop
+    // prematurely.
     /// </remarks>
     public struct ParallelLoopResult
     {
@@ -498,7 +512,8 @@ namespace System.Threading.Tasks
         /// was called.
         /// </summary>
         /// <remarks>
-        /// If <see cref="System.Threading.Tasks.ParallelLoopState.Break()"/> was not employed, this property will
+        /// If <see cref="System.Threading.Tasks.ParallelLoopState.Break()"/> was not employed, this
+        // property will
         /// return null.
         /// </remarks>
         public long? LowestBreakIteration

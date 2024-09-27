@@ -237,9 +237,11 @@ namespace System.Globalization.Tests
                 }
 
                 // Line has format "\u00F7 (XXXX (\u00D7 YYYY)* \u00F7)+ # <comment>"
-                // We'll yield return a Rune[][], representing a collection of clusters, where each cluster contains a collection of Runes.
+                // We'll yield return a Rune[][], representing a collection of clusters, where each cluster contains
+                // a collection of Runes.
                 //
-                // Example: "\u00F7 AAAA \u00F7 BBBB \u00D7 CCCC \u00D7 DDDD \u00F7 EEEE \u00D7 FFFF \u00F7 # <comment>"
+                // Example: "\u00F7 AAAA \u00F7 BBBB \u00D7 CCCC \u00D7 DDDD \u00F7 EEEE \u00D7 FFFF \u00F7 #
+                // <comment>"
                 // -> [ [ AAAA ], [ BBBB, CCCC, DDDD ], [ EEEE, FFFF ] ]
                 //
                 // We also return the line for ease of debugging any test failures.
@@ -278,7 +280,8 @@ namespace System.Globalization.Tests
             }
         }
 
-        // Given a sequence of UTF-16 code points, prints them in "[ XXXX YYYY ZZZZ ]" form, combining surrogates where possible
+        // Given a sequence of UTF-16 code points, prints them in "[ XXXX YYYY ZZZZ ]" form, combining
+        // surrogates where possible
         private static string PrintCodePointsForDebug(IEnumerable<char> input)
         {
             StringBuilder sb = new StringBuilder();

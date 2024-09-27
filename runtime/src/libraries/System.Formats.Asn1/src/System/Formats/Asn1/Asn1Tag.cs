@@ -117,7 +117,8 @@ namespace System.Formats.Asn1
 
         /// <summary>
         ///   Produces a tag with the same <see cref="TagClass"/> and
-        ///   <see cref="TagValue"/> values, but whose <see cref="IsConstructed"/> is <see langword="true"/>.
+        ///   <see cref="TagValue"/> values, but whose <see cref="IsConstructed"/> is <see
+        // langword="true"/>.
         /// </summary>
         /// <returns>
         ///   A tag with the same <see cref="TagClass"/> and <see cref="TagValue"/>
@@ -130,7 +131,8 @@ namespace System.Formats.Asn1
 
         /// <summary>
         ///   Produces a tag with the same <see cref="TagClass"/> and
-        ///   <see cref="TagValue"/> values, but whose <see cref="IsConstructed"/> is <see langword="false"/>.
+        ///   <see cref="TagValue"/> values, but whose <see cref="IsConstructed"/> is <see
+        // langword="false"/>.
         /// </summary>
         /// <returns>
         ///   A tag with the same <see cref="TagClass"/> and <see cref="TagValue"/>
@@ -362,7 +364,8 @@ namespace System.Formats.Asn1
         /// </returns>
         /// <seealso cref="CalculateEncodedSize"/>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="destination"/>.<see cref="Span{T}.Length"/> &lt; <see cref="CalculateEncodedSize"/>.
+        ///   <paramref name="destination"/>.<see cref="Span{T}.Length"/> &lt; <see
+        // cref="CalculateEncodedSize"/>.
         /// </exception>
         public int Encode(Span<byte> destination)
         {
@@ -438,7 +441,8 @@ namespace System.Formats.Asn1
         /// <param name="left">The first value to compare.</param>
         /// <param name="right">The second value to compare.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> have a different
+        ///   <see langword="true"/> if <paramref name="left"/> and <paramref name="right"/> have a
+        // different
         ///   BER encoding, <see langword="false"/> otherwise.
         /// </returns>
         public static bool operator !=(Asn1Tag left, Asn1Tag right)
@@ -447,12 +451,14 @@ namespace System.Formats.Asn1
         }
 
         /// <summary>
-        ///   Tests if <paramref name="other"/> has the same <see cref="TagClass"/> and <see cref="TagValue"/>
+        ///   Tests if <paramref name="other"/> has the same <see cref="TagClass"/> and <see
+        // cref="TagValue"/>
         ///   values as this tag, and does not compare <see cref="IsConstructed"/>.
         /// </summary>
         /// <param name="other">Tag to test for concept equality.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="other"/> has the same <see cref="TagClass"/> and <see cref="TagValue"/>
+        ///   <see langword="true"/> if <paramref name="other"/> has the same <see cref="TagClass"/> and
+        // <see cref="TagValue"/>
         ///   as this tag, <see langword="false"/> otherwise.
         /// </returns>
         public bool HasSameClassAndValue(Asn1Tag other)

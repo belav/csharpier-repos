@@ -141,7 +141,8 @@ namespace System.Net
             }
 
 #if DEBUG
-            //This may cause duplicate requests if we let it through in retail but it's may be expensive to catch here
+            //This may cause duplicate requests if we let it through in retail but it's may be expensive to
+            // catch here
             for (int j = 0; j < returnResult.m_Context.Count; ++j)
                 if ((object)returnResult.m_Context[j].Request == (object)request)
                     throw new InternalException();
@@ -174,12 +175,14 @@ namespace System.Net
             {
                 returnResult = new ConnectionReturnResult(requests.Length);
             }
-            // "abortedRequestExeption" is assigned to the "abortedRequest" or to the very first request if the latest is null
+            // "abortedRequestExeption" is assigned to the "abortedRequest" or to the very first request if the
+            // latest is null
             // Everyone else will get "exception"
             for (int i = 0; i < requests.Length; ++i)
             {
 #if DEBUG
-                //This may cause duplicate requests if we let it through in retail but it's may be expensive to catch here
+                //This may cause duplicate requests if we let it through in retail but it's may be expensive to
+                // catch here
                 for (int j = 0; j < returnResult.m_Context.Count; ++j)
                     if ((object)returnResult.m_Context[j].Request == (object)requests[i])
                         throw new InternalException();
@@ -396,7 +399,8 @@ namespace System.Net
         private bool m_RemovedFromConnectionList;
         private bool m_NonKeepAliveRequestPipelined;
 
-        // Pipeline Throttling: m_IsPipelinePaused==true when we stopped and false when it's ok to add to the pipeline.
+        // Pipeline Throttling: m_IsPipelinePaused==true when we stopped and false when it's ok to add to
+        // the pipeline.
         private bool m_IsPipelinePaused;
         private static int s_MaxPipelinedCount = 10;
         private static int s_MinPipelinedCount = 5;
@@ -464,7 +468,8 @@ namespace System.Net
 
                 UnlockConnectionDelegate chkDelegate = value.UnlockConnectionDelegate;
                 //
-                // If "value" request was already locking a connection that is not "this", unlock that other connection
+                // If "value" request was already locking a connection that is not "this", unlock that other
+                // connection
                 //
                 if ((object)chkDelegate != null)
                 {
@@ -513,18 +518,18 @@ namespace System.Net
         }
 
 #if TRAVE
-        /*
-        private string MyLocalEndPoint {
-            get {
-                try {
-                    return NetworkStream.InternalSocket.LocalEndPoint.ToString();
-                }
-                catch {
-                    return "no connection";
-                }
-            }
-        }
-        */
+/*
+private string MyLocalEndPoint {
+get {
+try {
+return NetworkStream.InternalSocket.LocalEndPoint.ToString();
+}
+catch {
+return "no connection";
+}
+}
+}
+*/
 
         private string MyLocalPort
         {
@@ -603,7 +608,8 @@ namespace System.Net
         }
 
         // If the buffer came from the the pinnable cache, return it to the cache.
-        // NOTE: This method is called from this object's finalizer and should not access any member objects.
+        // NOTE: This method is called from this object's finalizer and should not access any member
+        // objects.
         void FreeReadBuffer()
         {
             if (m_ReadBufferFromPinnableCache)
@@ -648,28 +654,28 @@ namespace System.Net
         }
 
         /*++
-
-            SubmitRequest       - Submit a request for sending.
-
-            The core submit handler. This is called when a request needs to be
-            submitted to the network. This routine is asynchronous; the caller
-            passes in an HttpSubmitDelegate that we invoke when the caller
-            can use the underlying network. The delegate is invoked with the
-            stream that it can right to.
-
-            On the Sync path, we work by attempting to gain control of the Connection
-            for writing and reading.  If some other thread is using the Connection,
-            We wait inside of a LazyAsyncResult until it is availble.
-
-
-            Input:
-                    request                 - request that's being submitted.
-                    SubmitDelegate          - Delegate to be invoked.
-                    forcedsubmit            - Queue the request even if connection is going to close.
-
-            Returns:
-                    true when the request was correctly submitted
-
+        
+        SubmitRequest       - Submit a request for sending.
+        
+        The core submit handler. This is called when a request needs to be
+        submitted to the network. This routine is asynchronous; the caller
+        passes in an HttpSubmitDelegate that we invoke when the caller
+        can use the underlying network. The delegate is invoked with the
+        stream that it can right to.
+        
+        On the Sync path, we work by attempting to gain control of the Connection
+        for writing and reading.  If some other thread is using the Connection,
+        We wait inside of a LazyAsyncResult until it is availble.
+        
+        
+        Input:
+        request                 - request that's being submitted.
+        SubmitDelegate          - Delegate to be invoked.
+        forcedsubmit            - Queue the request even if connection is going to close.
+        
+        Returns:
+        true when the request was correctly submitted
+        
         --*/
         // userReqeustThread says whether we can post IO from this thread or not.
         [SuppressMessage(
@@ -711,7 +717,8 @@ namespace System.Net
 
                 if (request.Aborted)
                 {
-                    // Note that request is not on the connection list yet and Abort() will push the response on the request
+                    // Note that request is not on the connection list yet and Abort() will push the response on the
+                    // request
                     GlobalLog.Leave(
                         "Connection#"
                             + ValidationHelper.HashString(this)
@@ -795,7 +802,8 @@ namespace System.Net
 
                 //
                 // If this request is marked as non keep-alive, we should stop pipelining more requests on this
-                // connection. The keep-alive context is transfered to the connection from request only after we start
+                // connection. The keep-alive context is transfered to the connection from request only after we
+                // start
                 // receiving response for the request.
                 //
                 if (!forcedsubmit && !m_NonKeepAliveRequestPipelined)
@@ -984,27 +992,27 @@ namespace System.Net
         }
 
         /*++
-
-            StartRequest       - Start a request going.
-
-            Routine to start a request. Called when we know the connection is
-            free and we want to get a request going. This routine initializes
-            some state, adds the request to the write queue, and checks to
-            see whether or not the underlying connection is alive. If it's
-            not, it queues a request to get it going. If the connection
-            was alive we call the callback delegate of the request.
-
-            This routine MUST BE called with the critcal section held.
-
-            Input:
-                    request                 - request that's being started.
-                    canPollRead             - whether the calling code handles
-                                              Unspecified due to the Connection
-                                              being closed by the server.
-
-            Returns:
-                    True if request was started, false otherwise.
-
+        
+        StartRequest       - Start a request going.
+        
+        Routine to start a request. Called when we know the connection is
+        free and we want to get a request going. This routine initializes
+        some state, adds the request to the write queue, and checks to
+        see whether or not the underlying connection is alive. If it's
+        not, it queues a request to get it going. If the connection
+        was alive we call the callback delegate of the request.
+        
+        This routine MUST BE called with the critcal section held.
+        
+        Input:
+        request                 - request that's being started.
+        canPollRead             - whether the calling code handles
+        Unspecified due to the Connection
+        being closed by the server.
+        
+        Returns:
+        True if request was started, false otherwise.
+        
         --*/
 
         private TriState StartRequest(HttpWebRequest request, bool canPollRead)
@@ -1243,14 +1251,14 @@ namespace System.Net
         }
 
         /*++
-
-            CheckNextRequest
-
-            Gets the next request from the wait queue, if there is one.
-
-            Must be called with the crit sec held.
-
-
+        
+        CheckNextRequest
+        
+        Gets the next request from the wait queue, if there is one.
+        
+        Must be called with the crit sec held.
+        
+        
         --*/
         private HttpWebRequest CheckNextRequest()
         {
@@ -1333,7 +1341,8 @@ namespace System.Net
 #if DEBUG
                 lock (this)
                 {
-                    // m_WriteList can be empty if request got aborted.  In that case no new requests can come in so it should remain zero.
+                    // m_WriteList can be empty if request got aborted.  In that case no new requests can come in so it
+                    // should remain zero.
                     if (m_WriteList.Count != 0)
                     {
                         GlobalLog.Assert(
@@ -1732,7 +1741,8 @@ namespace System.Net
                 Buffer.BlockCopy(buffer, bufferOffset, buffer, 0, bufferCount);
             }
 
-            // If we had to reallocate the buffer, we are going to clobber the one that was allocated from the pin friendly cache.
+            // If we had to reallocate the buffer, we are going to clobber the one that was allocated from the
+            // pin friendly cache.
             // give it back
             if (m_ReadBuffer != buffer)
             {
@@ -1746,15 +1756,15 @@ namespace System.Net
         }
 
         /*++
-
-            ReadStartNextRequest
-
-            This method is called by a stream interface when it's done reading.
-            We might possible free up the connection for another request here.
-
-            Called when we think we might need to start another request because
-            a read completed.
-
+        
+        ReadStartNextRequest
+        
+        This method is called by a stream interface when it's done reading.
+        We might possible free up the connection for another request here.
+        
+        Called when we think we might need to start another request because
+        a read completed.
+        
         --*/
         internal void ReadStartNextRequest(
             WebRequest currentRequest,
@@ -1802,7 +1812,8 @@ namespace System.Net
                         m_ReadState = ReadState.Start;
                         m_WriteList.RemoveAt(0);
 
-                        // Must reset ConnectStream here to prevent a leak through the stream of the last request on each connection.
+                        // Must reset ConnectStream here to prevent a leak through the stream of the last request on each
+                        // connection.
                         m_ResponseData.m_ConnectStream = null;
 
                         GlobalLog.Print(
@@ -1836,7 +1847,8 @@ namespace System.Net
                     if (!mustExit)
                     {
                         //
-                        // m_ReadDone==true is implied because we just finished a request but really the value must still be false here
+                        // m_ReadDone==true is implied because we just finished a request but really the value must still be
+                        // false here
                         //
                         if (m_ReadDone)
                             throw new InternalException(); // other requests may already started reading on this connection, need a QFE
@@ -1977,7 +1989,8 @@ namespace System.Net
                         }
                         else
                         {
-                            // Offload to the threadpool to protect against the case where one request's thread posts IO that another request
+                            // Offload to the threadpool to protect against the case where one request's thread posts IO that
+                            // another request
                             // depends on, but the first thread dies in the mean time.
                             GlobalLog.Print(
                                 "Connection#"
@@ -1998,7 +2011,8 @@ namespace System.Net
         {
             // We use an interlock here rather than a lock() to avoid deadlocks in the following situation:
             // - ConnectionGroup is holding lock(obj1), calls into Connection which is waiting for lock(obj2)
-            // - on another thread Connection is holding lock(obj2) and calls into ConnectionGroup which will wait
+            // - on another thread Connection is holding lock(obj2) and calls into ConnectionGroup which will
+            // wait
             //   for lock(obj1).
             int currentCount = Interlocked.Increment(ref m_ReservedCount);
             GlobalLog.Assert(
@@ -2022,7 +2036,8 @@ namespace System.Net
                     return;
                 }
 
-                // Note we do NOT allow receive if pipelining and the passed request is not the first one on the write queue
+                // Note we do NOT allow receive if pipelining and the passed request is not the first one on the
+                // write queue
                 if (!m_ReadDone || m_WriteList[0] != (object)request)
                 {
                     // ReadStartNextRequest should take care of these cases
@@ -2063,7 +2078,8 @@ namespace System.Net
             }
             else
             {
-                // Offload to the threadpool to protect against the case where one request's thread posts IO that another request
+                // Offload to the threadpool to protect against the case where one request's thread posts IO that
+                // another request
                 // depends on, but the first thread dies in the mean time.
                 GlobalLog.Print(
                     "Connection#"
@@ -2075,19 +2091,19 @@ namespace System.Net
         }
 
         /*++
-
+        
         Routine Description:
-
-           Clears out common member vars used for Status Line parsing
-
+        
+        Clears out common member vars used for Status Line parsing
+        
         Arguments:
-
-           None.
-
+        
+        None.
+        
         Return Value:
-
-           None.
-
+        
+        None.
+        
         --*/
 
         private void InitializeParseStatusLine()
@@ -2100,23 +2116,23 @@ namespace System.Net
         }
 
         /*++
-
+        
         Routine Description:
-
-           Performs status line parsing on incomming server responses
-
+        
+        Performs status line parsing on incomming server responses
+        
         Arguments:
-
-           statusLine - status line that we wish to parse
-           statusLineLength - length of the array
-           statusLineInts - array of ints contanes result
-           statusDescription - string with discription
-           statusStatus     - state stored between parse attempts
-
+        
+        statusLine - status line that we wish to parse
+        statusLineLength - length of the array
+        statusLineInts - array of ints contanes result
+        statusDescription - string with discription
+        statusStatus     - state stored between parse attempts
+        
         Return Value:
-
-           bool - Success true/false
-
+        
+        bool - Success true/false
+        
         --*/
 
         private const int BeforeVersionNumbers = 0;
@@ -2446,7 +2462,8 @@ namespace System.Net
 
             fixed (byte* byteBuffer = statusLine)
             {
-                // Use this switch to jump midway into the action.  They all fall through until the end of the buffer is reached or
+                // Use this switch to jump midway into the action.  They all fall through until the end of the
+                // buffer is reached or
                 // the status line is fully parsed.
                 switch (statusState)
                 {
@@ -2532,7 +2549,8 @@ namespace System.Net
 
                         statusState = StatusCodeNumber;
 
-                        // Start the status code out as "1".  This will effectively add 1000 to the code.  It's used to count
+                        // Start the status code out as "1".  This will effectively add 1000 to the code.  It's used to
+                        // count
                         // the number of digits to make sure it's three.  At the end, subtract 1000.
                         statusLineValues.StatusCode = 1;
 
@@ -2706,20 +2724,20 @@ namespace System.Net
         }
 
         /*++
-
+        
         Routine Description:
-
-           SetStatusLineParsed - processes the result of status line,
-             after it has been parsed, reads vars and formats result of parsing
-
+        
+        SetStatusLineParsed - processes the result of status line,
+        after it has been parsed, reads vars and formats result of parsing
+        
         Arguments:
-
-           None - uses member vars
-
+        
+        None - uses member vars
+        
         Return Value:
-
-           None
-
+        
+        None
+        
         --*/
 
         private void SetStatusLineParsed()
@@ -2746,18 +2764,18 @@ namespace System.Net
         }
 
         /*++
-
-            ProcessHeaderData - Pulls out Content-length, and other critical
-                data from the newly parsed headers
-
-            Input:
-
-                Nothing.
-
-            Returns:
-
-                long - size of contentLength that we are to use
-
+        
+        ProcessHeaderData - Pulls out Content-length, and other critical
+        data from the newly parsed headers
+        
+        Input:
+        
+        Nothing.
+        
+        Returns:
+        
+        long - size of contentLength that we are to use
+        
         --*/
         private long ProcessHeaderData(
             ref bool fHaveChunked,
@@ -2866,7 +2884,8 @@ namespace System.Net
                 }
                 //(2) A workaround for a failed client ssl session on IIS6
                 //    The problem is that we cannot change the connection group name after it gets created.
-                //    IIS6 does not close the connection on 403 so all subsequent requests will fail to be authorized on THAT connection.
+                //    IIS6 does not close the connection on 403 so all subsequent requests will fail to be
+                // authorized on THAT connection.
                 //-----------------------------------------------------------------------------------------------
                 //5/15/2006
                 //Microsoft
@@ -2882,11 +2901,14 @@ namespace System.Net
                 {
                     resetKeepAlive = true;
                 }
-                // (3) Possibly cease posting a big body on the connection, was invented mainly for the very first 401 response
+                // (3) Possibly cease posting a big body on the connection, was invented mainly for the very first
+                // 401 response
                 //
-                //     This optimization is for the discovery legs only.  For ntlm this is fine, because the 1st actual authleg
+                //     This optimization is for the discovery legs only.  For ntlm this is fine, because the 1st
+                // actual authleg
                 //     is always sent w/ content-length = 0.
-                //     For Kerberos preauth, it there could be 1 or 2 auth legs, but we don't know how many there are in advance,
+                //     For Kerberos preauth, it there could be 1 or 2 auth legs, but we don't know how many there
+                // are in advance,
                 //     so we don't have a way of eliminating the 1st auth leg.
                 else if (
                     m_ResponseData.m_StatusCode > HttpWebRequest.MaxOkStatus
@@ -2999,15 +3021,15 @@ namespace System.Net
         }
 
         /*++
-
-            ParseStreamData
-
-            Handles parsing of the blocks of data received after buffer,
-             distributes the data to stream constructors as needed
-
-            returnResult - contains a object containing Requests
-                that must be notified upon return from callback
-
+        
+        ParseStreamData
+        
+        Handles parsing of the blocks of data received after buffer,
+        distributes the data to stream constructors as needed
+        
+        returnResult - contains a object containing Requests
+        that must be notified upon return from callback
+        
         --*/
         private DataParseStatus ParseStreamData(ref ConnectionReturnResult returnResult)
         {
@@ -3140,7 +3162,8 @@ namespace System.Net
                     m_CurrentRequest
                 );
 
-                // This is the default case where we have a buffer with no more streams except the last one to create so we create it.
+                // This is the default case where we have a buffer with no more streams except the last one to
+                // create so we create it.
                 // Note the buffer is fully consumed so we can reset the buffer offests.
                 result = DataParseStatus.Done;
                 ClearReaderState();
@@ -3167,20 +3190,20 @@ namespace System.Net
         }
 
         /*++
-
-            ParseResponseData - Parses the incomming headers, and handles
-              creation of new streams that are found while parsing, and passes
-              extra data the new streams
-
-            Input:
-
-                returnResult - returns an object containing items that need to be called
-                    at the end of the read callback
-
-            Returns:
-
-                bool - true if one should continue reading more data
-
+        
+        ParseResponseData - Parses the incomming headers, and handles
+        creation of new streams that are found while parsing, and passes
+        extra data the new streams
+        
+        Input:
+        
+        returnResult - returns an object containing items that need to be called
+        at the end of the read callback
+        
+        Returns:
+        
+        bool - true if one should continue reading more data
+        
         --*/
         private DataParseStatus ParseResponseData(
             ref ConnectionReturnResult returnResult,
@@ -3488,7 +3511,8 @@ namespace System.Net
 
                             if (m_ResponseData.m_StatusCode == HttpStatusCode.BadRequest)
                             {
-                                // If we have a 400 and we were sending a chunked request going through to a proxy with a chunked upload,
+                                // If we have a 400 and we were sending a chunked request going through to a proxy with a chunked
+                                // upload,
                                 // this proxy is a partially compliant so shut off fancy features (pipelining and chunked uploads)
                                 GlobalLog.Print(
                                     "Connection#"
@@ -3662,7 +3686,8 @@ namespace System.Net
             lock (this)
             {
                 int idx = m_WriteList.IndexOf(request);
-                // If the request is in the submission AND this is the first request we have to abort the connection,
+                // If the request is in the submission AND this is the first request we have to abort the
+                // connection,
                 // Otheriwse we simply disassociate it from the current connection.
                 if (idx == -1)
                 {
@@ -3698,7 +3723,8 @@ namespace System.Net
                 else if (idx != 0)
                 {
                     // Make this connection Keep-Alive=false, remove the request and do not close the connection
-                    // When the active request completes, the rest of the pipeline (minus aborted request) will be resubmitted.
+                    // When the active request completes, the rest of the pipeline (minus aborted request) will be
+                    // resubmitted.
                     m_WriteList.RemoveAt(idx);
                     m_KeepAlive = false;
                     GlobalLog.Leave(
@@ -3761,7 +3787,8 @@ namespace System.Net
 
         internal void AbortSocket(bool isAbortState)
         {
-            // The timer/finalization thread is allowed to call this.  (It doesn't call user code and doesn't block.)
+            // The timer/finalization thread is allowed to call this.  (It doesn't call user code and doesn't
+            // block.)
             GlobalLog.ThreadContract(
                 ThreadKinds.Unknown,
                 ThreadKinds.SafeSources | ThreadKinds.Timer | ThreadKinds.Finalization,
@@ -3797,19 +3824,19 @@ namespace System.Net
         }
 
         /*++
-
-            PrepareCloseConnectionSocket - reset the connection requests list.
-
-            This method is called when we want to close the conection.
-            It must be called with the critical section held.
-            The caller must call this.Close if decided to call this method.
-
-            All connection closes (either ours or server initiated) eventually go through here.
-
-            As to what we do: we loop through our write and wait list and pull requests
-            off it, and give each request an error failure. Then the caller will
-            dispatch the responses.
-
+        
+        PrepareCloseConnectionSocket - reset the connection requests list.
+        
+        This method is called when we want to close the conection.
+        It must be called with the critical section held.
+        The caller must call this.Close if decided to call this method.
+        
+        All connection closes (either ours or server initiated) eventually go through here.
+        
+        As to what we do: we loop through our write and wait list and pull requests
+        off it, and give each request an error failure. Then the caller will
+        dispatch the responses.
+        
         --*/
 
         private void PrepareCloseConnectionSocket(ref ConnectionReturnResult returnResult)
@@ -3897,7 +3924,8 @@ namespace System.Net
                 }
 
                 //
-                // WriteList (except for single request list) gets Recoverable exception status, may be retired if not failed once
+                // WriteList (except for single request list) gets Recoverable exception status, may be retired if
+                // not failed once
                 // For a single request list the exception is computed here
                 // InnerExeption if any may tell more details in both cases
                 //
@@ -3997,7 +4025,8 @@ namespace System.Net
                             {
                                 // Real scenario: SSL against IIS-5 would fail if pipelinning.
                                 // retry = true will cover a general case when >>the server<< aborts a pipeline
-                                // Basically all pipelined requests are marked with recoverable error including the very active request.
+                                // Basically all pipelined requests are marked with recoverable error including the very active
+                                // request.
                                 retry = true;
                             }
                             else if (m_Error == WebExceptionStatus.KeepAliveFailure)
@@ -4093,22 +4122,22 @@ namespace System.Net
         }
 
         /*++
-
-            HandleError - Handle a protocol error from the server.
-
-            This method is called when we've detected some sort of fatal protocol
-            violation while parsing a response, receiving data from the server,
-            or failing to connect to the server. We'll fabricate
-            a WebException and then call CloseConnection which closes the
-            connection as well as informs the request through a callback.
-
-            Input:
-                    webExceptionStatus -
-                    connectFailure -
-                    readFailure -
-
-            Returns: Nothing
-
+        
+        HandleError - Handle a protocol error from the server.
+        
+        This method is called when we've detected some sort of fatal protocol
+        violation while parsing a response, receiving data from the server,
+        or failing to connect to the server. We'll fabricate
+        a WebException and then call CloseConnection which closes the
+        connection as well as informs the request through a callback.
+        
+        Input:
+        webExceptionStatus -
+        connectFailure -
+        readFailure -
+        
+        Returns: Nothing
+        
         --*/
         internal void HandleConnectStreamException(
             bool writeDone,
@@ -4123,7 +4152,8 @@ namespace System.Net
                 m_InnerException = e;
                 if (!(e is WebException) && NetworkStream is TlsStream)
                 {
-                    // Unless a WebException is passed the Connection knows better the error code if the transport is TlsStream
+                    // Unless a WebException is passed the Connection knows better the error code if the transport is
+                    // TlsStream
                     webExceptionStatus = ((TlsStream)NetworkStream).ExceptionStatus;
                 }
                 else if (e is ObjectDisposedException)
@@ -4238,7 +4268,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes to
+                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes
+                // to
                 // throw an IOException.
                 HttpWebRequest curRequest = m_CurrentRequest;
                 if (curRequest != null)
@@ -4293,7 +4324,8 @@ namespace System.Net
                 "Connection#" + ValidationHelper.HashString(this) + "::PollAndRead"
             );
 
-            // Ensure that we don't already have a response for this request, before we attempt to read the socket.
+            // Ensure that we don't already have a response for this request, before we attempt to read the
+            // socket.
             request.NeedsToReadForResponse = true;
             GlobalLog.Print(
                 "Connection#"
@@ -4490,7 +4522,8 @@ namespace System.Net
         //    handles getting headers parsed and streams created
         //
         //    bytesRead == 0  when  we re-enter on buffered data without doing actual read
-        //    bytesRead == -1 when  we got a connection close plus when errorStatus == sucess we got a g----ful close.
+        //    bytesRead == -1 when  we got a connection close plus when errorStatus == sucess we got a
+        // g----ful close.
         //    Otheriwse bytesRead is read byted to add to m_BytesRead i.e. to previously buffered data
         //
         private bool ReadComplete(int bytesRead, WebExceptionStatus errorStatus)
@@ -4536,7 +4569,8 @@ namespace System.Net
                         errorStatus = WebExceptionStatus.ConnectionClosed;
                     }
 
-                    // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes to
+                    // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes
+                    // to
                     // throw an IOException.
                     HttpWebRequest curRequest = m_CurrentRequest;
                     if (curRequest != null)
@@ -4655,7 +4689,8 @@ namespace System.Net
                         if (m_BytesScanned == 0 && m_BytesRead == m_ReadBuffer.Length)
                         {
                             //
-                            // 1) we need to grow the buffer, move the unparsed data to the beginning of the buffer before reading more data.
+                            // 1) we need to grow the buffer, move the unparsed data to the beginning of the buffer before
+                            // reading more data.
                             // since the buffer size is 4k, should we just double
                             //
                             byte[] newReadBuffer = new byte[
@@ -4724,7 +4759,8 @@ namespace System.Net
                             }
                             else
                             {
-                                // Offload to the threadpool to protect against the case where one request's thread posts IO that another request
+                                // Offload to the threadpool to protect against the case where one request's thread posts IO that
+                                // another request
                                 // depends on, but the first thread dies in the mean time.
                                 GlobalLog.Print(
                                     "Connection#"
@@ -4751,7 +4787,8 @@ namespace System.Net
                 if (m_InnerException == null)
                     m_InnerException = exception;
 
-                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes to
+                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes
+                // to
                 // throw an IOException.
                 HttpWebRequest curRequest = m_CurrentRequest;
                 if (curRequest != null)
@@ -4839,20 +4876,20 @@ namespace System.Net
         }
 
         /*++
-
-            PostReceiveWrapper - Post a receive from a worker thread.
-
-            This is our delegate, used for posting receives from a worker thread.
-            We do this when we can't be sure that we're already on a worker thread,
-            and we don't want to post from a client thread because if it goes away
-            I/O gets cancelled.
-
-            Input:
-
-            state           - a null object
-
-            Returns:
-
+        
+        PostReceiveWrapper - Post a receive from a worker thread.
+        
+        This is our delegate, used for posting receives from a worker thread.
+        We do this when we can't be sure that we're already on a worker thread,
+        and we don't want to post from a client thread because if it goes away
+        I/O gets cancelled.
+        
+        Input:
+        
+        state           - a null object
+        
+        Returns:
+        
         --*/
         private static void PostReceiveWrapper(object state)
         {
@@ -4917,7 +4954,8 @@ namespace System.Net
             }
             catch (Exception exception)
             {
-                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes to
+                // Notify request's SubmitWriteStream that a socket error happened.  This will cause future writes
+                // to
                 // throw an IOException.
                 HttpWebRequest curRequest = m_CurrentRequest;
                 if (curRequest != null)
@@ -5027,7 +5065,8 @@ namespace System.Net
                     connectRequest = new HttpWebRequest(
                         proxy,
                         originalRequest.Address,
-                        // new Uri("https://" + originalRequest.Address.GetParts(UriComponents.HostAndPort, UriFormat.UriEscaped)),
+                        // new Uri("https://" + originalRequest.Address.GetParts(UriComponents.HostAndPort,
+                        // UriFormat.UriEscaped)),
                         originalRequest
                     );
                 }

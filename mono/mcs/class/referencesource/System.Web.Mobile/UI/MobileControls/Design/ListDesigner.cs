@@ -400,7 +400,8 @@ namespace System.Web.UI.Design.MobileControls
         /// <returns>
         ///    <para>
         ///       An IEnumerable with the
-        ///       selected data source, or <see langword='null'/> if a data source is not found, or if a data
+        ///       selected data source, or <see langword='null'/> if a data source is not found, or if a
+        // data
         ///       source with the same name does not exist.
         ///    </para>
         /// </returns>
@@ -567,7 +568,8 @@ namespace System.Web.UI.Design.MobileControls
         ///    The source of the event.
         /// </param>
         /// <param name=' e'>
-        ///    The <see cref='System.ComponentModel.Design.ComponentChangedEventArgs'/> that provides data about the event.
+        ///    The <see cref='System.ComponentModel.Design.ComponentChangedEventArgs'/> that provides data
+        // about the event.
         /// </param>
         public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e)
         {

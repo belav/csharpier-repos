@@ -16,9 +16,11 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Formats the whitespace in areas of a document corresponding to multiple non-overlapping spans.
         /// </summary>
         /// <param name="document">The document to format.</param>
-        /// <param name="spans">The spans of the document's text to format. If null, the entire document should be formatted.</param>
+        /// <param name="spans">The spans of the document's text to format. If null, the entire document
+        // should be formatted.</param>
         /// <param name="lineFormattingOptions">Line formatting options.</param>
-        /// <param name="syntaxFormattingOptions">Formatting options, if available. Null for non-Roslyn languages.</param>
+        /// <param name="syntaxFormattingOptions">Formatting options, if available. Null for non-Roslyn
+        // languages.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>The formatted document.</returns>
         Task<Document> FormatAsync(

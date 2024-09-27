@@ -42,7 +42,8 @@ namespace System.Data.Mapping
         /// </summary>
         /// <param name="extent">Represents the Association Set Metadata object. Will
         ///                      change this to Extent instead of MemberMetadata.</param>
-        /// <param name="entityContainerMapping">The entityContainerMapping mapping that contains this Set mapping</param>
+        /// <param name="entityContainerMapping">The entityContainerMapping mapping that contains this Set
+        // mapping</param>
         internal StorageAssociationSetMapping(
             AssociationSet extent,
             StorageEntityContainerMapping entityContainerMapping

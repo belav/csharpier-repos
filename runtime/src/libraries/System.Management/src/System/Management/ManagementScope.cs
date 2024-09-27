@@ -829,7 +829,8 @@ namespace System.Management
     }
 
     /// <summary>
-    ///    <para>Represents a scope for management operations. In v1.0 the scope defines the WMI namespace in which management operations are performed.</para>
+    ///    <para>Represents a scope for management operations. In v1.0 the scope defines the WMI
+    // namespace in which management operations are performed.</para>
     /// </summary>
     /// <example>
     ///    <code lang='C#'>using System;
@@ -924,9 +925,12 @@ namespace System.Management
         internal IWbemServices GetIWbemServices()
         {
             IWbemServices localCopy = wbemServices;
-            //IWbemServices is always created in MTA context. Only if call is made through non MTA context we need to use IWbemServices in right context.
-            // Lets start by assuming that we'll return the RCW that we already have. When WMINet_Utils.dll wraps the real COM proxy, credentials don't get
-            // lost when the CLR marshals the wrapped object to a different COM apartment. The wrap was added to prevent marshalling of IManagedObject from native
+            //IWbemServices is always created in MTA context. Only if call is made through non MTA context we
+            // need to use IWbemServices in right context.
+            // Lets start by assuming that we'll return the RCW that we already have. When WMINet_Utils.dll
+            // wraps the real COM proxy, credentials don't get
+            // lost when the CLR marshals the wrapped object to a different COM apartment. The wrap was added to
+            // prevent marshalling of IManagedObject from native
             // to managed code.
 
             if (CompatSwitches.AllowIManagementObjectQI)
@@ -964,7 +968,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para> Gets or sets a value indicating whether the <see cref='System.Management.ManagementScope'/> is currently bound to a
+        /// <para> Gets or sets a value indicating whether the <see
+        // cref='System.Management.ManagementScope'/> is currently bound to a
         ///    WMI server and namespace.</para>
         /// </summary>
         /// <value>
@@ -973,9 +978,11 @@ namespace System.Management
         /// </value>
         /// <remarks>
         ///    <para> A scope is disconnected after creation until someone
-        ///       explicitly calls <see cref='System.Management.ManagementScope.Connect'/>(), or uses the scope for any
+        ///       explicitly calls <see cref='System.Management.ManagementScope.Connect'/>(), or uses the
+        // scope for any
         ///       operation that requires a live connection. Also, the scope is
-        ///       disconnected from the previous connection whenever the identifying properties of the scope are
+        ///       disconnected from the previous connection whenever the identifying properties of the scope
+        // are
         ///       changed.</para>
         /// </remarks>
         public bool IsConnected
@@ -1078,7 +1085,8 @@ namespace System.Management
         ///    of the <see cref='System.Management.ManagementScope'/> class.
         /// </overload>
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class, with default values. This is the
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class,
+        // with default values. This is the
         ///    default constructor.</para>
         /// </summary>
         /// <remarks>
@@ -1101,12 +1109,15 @@ namespace System.Management
 
         //Parameterized constructors
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class
+        // representing
         ///    the specified scope path.</para>
         /// </summary>
-        /// <param name='path'>A <see cref='System.Management.ManagementPath'/> containing the path to a server and namespace for the <see cref='System.Management.ManagementScope'/>.</param>
+        /// <param name='path'>A <see cref='System.Management.ManagementPath'/> containing the path to a
+        // server and namespace for the <see cref='System.Management.ManagementScope'/>.</param>
         /// <example>
-        ///    <code lang='C#'>ManagementScope s = new ManagementScope(new ManagementPath("\\\\MyServer\\root\\default"));
+        ///    <code lang='C#'>ManagementScope s = new ManagementScope(new
+        // ManagementPath("\\\\MyServer\\root\\default"));
         ///    </code>
         ///    <code lang='VB'>Dim p As New ManagementPath("\\MyServer\root\default")
         /// Dim s As New ManagementScope(p)
@@ -1116,10 +1127,12 @@ namespace System.Management
             : this(path, (ConnectionOptions)null) { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class
+        // representing the specified scope
         ///    path.</para>
         /// </summary>
-        /// <param name='path'>The server and namespace path for the <see cref='System.Management.ManagementScope'/>.</param>
+        /// <param name='path'>The server and namespace path for the <see
+        // cref='System.Management.ManagementScope'/>.</param>
         /// <example>
         ///    <code lang='C#'>ManagementScope s = new ManagementScope("\\\\MyServer\\root\\default");
         ///    </code>
@@ -1130,11 +1143,14 @@ namespace System.Management
             : this(new ManagementPath(path), (ConnectionOptions)null) { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class
+        // representing the specified scope path,
         ///    with the specified options.</para>
         /// </summary>
-        /// <param name='path'>The server and namespace for the <see cref='System.Management.ManagementScope'/>.</param>
-        /// <param name=' options'>A <see cref='System.Management.ConnectionOptions'/> containing options for the connection.</param>
+        /// <param name='path'>The server and namespace for the <see
+        // cref='System.Management.ManagementScope'/>.</param>
+        /// <param name=' options'>A <see cref='System.Management.ConnectionOptions'/> containing options
+        // for the connection.</param>
         /// <example>
         ///    <code lang='C#'>ConnectionOptions opt = new ConnectionOptions();
         /// opt.Username = "Me";
@@ -1151,11 +1167,14 @@ namespace System.Management
             : this(new ManagementPath(path), options) { }
 
         /// <summary>
-        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
+        /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class
+        // representing the specified scope path,
         ///    with the specified options.</para>
         /// </summary>
-        /// <param name='path'>A <see cref='System.Management.ManagementPath'/> containing the path to the server and namespace for the <see cref='System.Management.ManagementScope'/>.</param>
-        /// <param name=' options'>The <see cref='System.Management.ConnectionOptions'/> containing options for the connection.</param>
+        /// <param name='path'>A <see cref='System.Management.ManagementPath'/> containing the path to the
+        // server and namespace for the <see cref='System.Management.ManagementScope'/>.</param>
+        /// <param name=' options'>The <see cref='System.Management.ConnectionOptions'/> containing options
+        // for the connection.</param>
         /// <example>
         ///    <code lang='C#'>ConnectionOptions opt = new ConnectionOptions();
         /// opt.Username = "Me";
@@ -1207,14 +1226,16 @@ namespace System.Management
         /// ManagementScope s = new ManagementScope("root\\MyApp");
         ///
         /// //Change default connection options -
-        /// //In this example, set the system privileges to enabled for operations that require system privileges.
+        /// //In this example, set the system privileges to enabled for operations that require system
+        // privileges.
         /// s.Options.EnablePrivileges = true;
         ///    </code>
         ///    <code lang='VB'>'This constructor creates a scope object with default options
         /// Dim s As New ManagementScope("root\\MyApp")
         ///
         /// 'Change default connection options -
-        /// 'In this example, set the system privileges to enabled for operations that require system privileges.
+        /// 'In this example, set the system privileges to enabled for operations that require system
+        // privileges.
         /// s.Options.EnablePrivileges = True
         ///    </code>
         /// </example>
@@ -1352,12 +1373,12 @@ namespace System.Management
             if (null == prvpath)
                 throw new InvalidOperationException();
 
-            /*
-             * If we're not connected yet, this is the time to do it... We lock
-             * the state to prevent 2 threads simultaneously doing the same
-             * connection. To avoid taking the lock unnecessarily we examine
-             * isConnected first
-             */
+/*
+* If we're not connected yet, this is the time to do it... We lock
+* the state to prevent 2 threads simultaneously doing the same
+* connection. To avoid taking the lock unnecessarily we examine
+* isConnected first
+*/
             if (!IsConnected)
             {
                 lock (this)
@@ -1617,7 +1638,8 @@ namespace System.Management
         )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_NOT_SUPPORTED;
-            //This should go through WMINET_utils layer and ppWorkingNamespace should be secured. See implementation of CreateInstanceEnum method.
+            //This should go through WMINET_utils layer and ppWorkingNamespace should be secured. See
+            // implementation of CreateInstanceEnum method.
             return status;
         }
 
@@ -2141,7 +2163,8 @@ namespace System.Management
     internal sealed class ManagementScopeConverter : ExpandableObjectConverter
     {
         /// <summary>
-        /// Determines if this converter can convert an object in the given source type to the native type of the converter.
+        /// Determines if this converter can convert an object in the given source type to the native type
+        // of the converter.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
         /// <param name='sourceType'>A Type that represents the type you wish to convert from.</param>
@@ -2158,7 +2181,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Gets a value indicating whether this converter can convert an object to the given destination type using the context.
+        /// Gets a value indicating whether this converter can convert an object to the given destination
+        // type using the context.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
         /// <param name='destinationType'>A Type that represents the type you wish to convert to.</param>
@@ -2182,7 +2206,8 @@ namespace System.Management
         ///      throw a NotSupportedException.
         /// </summary>
         /// <param name='context'>An ITypeDescriptorContext that provides a format context.</param>
-        /// <param name='culture'>A CultureInfo object. If a null reference (Nothing in Visual Basic) is passed, the current culture is assumed.</param>
+        /// <param name='culture'>A CultureInfo object. If a null reference (Nothing in Visual Basic) is
+        // passed, the current culture is assumed.</param>
         /// <param name='value'>The Object to convert.</param>
         /// <param name='destinationType'>The Type to convert the value parameter to.</param>
         /// <returns>An Object that represents the converted value.</returns>

@@ -7,7 +7,8 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 /// Allows customization of the properties and parameters on controllers and Razor Pages.
 /// </summary>
 /// <remarks>
-/// To use this interface, create an <see cref="System.Attribute"/> class which implements the interface and
+/// To use this interface, create an <see cref="System.Attribute"/> class which implements the
+// interface and
 /// place it on an action method parameter.
 /// </remarks>
 public interface IParameterModelBaseConvention

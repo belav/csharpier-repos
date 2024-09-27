@@ -13,9 +13,11 @@ public readonly struct HeaderPropagationContext
 {
     /// <summary>
     /// Initializes a new instance of <see cref="HeaderPropagationContext"/> with the provided
-    /// <paramref name="httpContext"/>, <paramref name="headerName"/> and <paramref name="headerValue"/>.
+    /// <paramref name="httpContext"/>, <paramref name="headerName"/> and <paramref
+    // name="headerValue"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="Http.HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="Http.HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="headerName">The header name.</param>
     /// <param name="headerValue">The header value present in the current request.</param>
     public HeaderPropagationContext(

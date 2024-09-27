@@ -6,20 +6,27 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using Xunit;
 
-// This test case reproduces a race condition involving type initialization (aka, .cctor, aka static constructor).
+// This test case reproduces a race condition involving type initialization (aka, .cctor, aka static
+// constructor).
 //
-// The idea is that Thread1 initiates a type load and type initialization on MyClass (running of the static constructor/.cctor).
+// The idea is that Thread1 initiates a type load and type initialization on MyClass (running of the
+// static constructor/.cctor).
 //
 // While Thread1 is doing this, Thread2 attempts to access a static member, MyClass.X
 // by invoking static method MyClass.getX().
 //
-// The failing behavior is that Thread2 is able to access MyClass.X before it is initialized--Thread1 is still busy
-// with type initialization, but hasn't yet initialized MyClass.X.  This is because the prestub for MyClass.getX(), the mechanism that
-// would normally trigger the .cctor to be run, was already run by Thread1.  By the time Thread2 hit getX(), there is
-// no more prestub to trigger the .cctor--so Thread2 (effectively) assumes that MyClass is already initialized and
+// The failing behavior is that Thread2 is able to access MyClass.X before it is
+// initialized--Thread1 is still busy
+// with type initialization, but hasn't yet initialized MyClass.X.  This is because the prestub for
+// MyClass.getX(), the mechanism that
+// would normally trigger the .cctor to be run, was already run by Thread1.  By the time Thread2 hit
+// getX(), there is
+// no more prestub to trigger the .cctor--so Thread2 (effectively) assumes that MyClass is already
+// initialized and
 // proceeds to access the still uninitialized static member, MyClass.X.
 //
-// A likely fix for this would be to delay backpatching getX() until after the .cctor has fully completed.
+// A likely fix for this would be to delay backpatching getX() until after the .cctor has fully
+// completed.
 // mwilk. 2/3/04.
 
 

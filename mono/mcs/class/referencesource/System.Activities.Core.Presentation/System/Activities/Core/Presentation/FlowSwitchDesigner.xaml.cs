@@ -57,7 +57,8 @@ namespace System.Activities.Core.Presentation
             InitializeComponent();
             this.Loaded += (sender, e) =>
             {
-                //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an Unloaded event.
+                //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an
+                // Unloaded event.
                 this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
                 this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
                 OnModelItemPropertyChanged(
@@ -221,7 +222,8 @@ namespace System.Activities.Core.Presentation
                 // is a FakeModelPropertyImpl, and would not generate a Undo unit
                 // (FakeModelNotifyPropertyChange.GetInverse() returns null).
                 // However, there is a known issue with PropertyGrid bound to a fake ModelItem.  The workaround is
-                // to shift the focus to the FlowchartDesigner IF the keyboard focus is on the connector when the user
+                // to shift the focus to the FlowchartDesigner IF the keyboard focus is on the connector when the
+                // user
                 // calls Undo/Redo, to avoid the problem of PropertyGrid not refreshable.
                 FlowchartDesigner flowchartDesigner =
                     VisualTreeUtils.FindVisualAncestor<FlowchartDesigner>(this);

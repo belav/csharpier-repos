@@ -14,7 +14,8 @@ namespace System.Net.Http.Functional.Tests
     // This test class contains tests which are strongly timing-dependent.
     // There are two mitigations avoid flaky behavior on CI:
     // - Parallel test execution is disabled
-    // - Using extreme parameters, and checks which are very unlikely to fail, if the implementation is correct
+    // - Using extreme parameters, and checks which are very unlikely to fail, if the implementation is
+    // correct
     [Collection(nameof(DisableParallelization))]
     [ConditionalClass(typeof(SocketsHttpHandler_Http2FlowControl_Test), nameof(IsSupported))]
     public sealed class SocketsHttpHandler_Http2FlowControl_Test : HttpClientHandlerTestBase
@@ -241,7 +242,8 @@ namespace System.Net.Http.Functional.Tests
             // send server SETTINGS:
             await connection.WriteFrameAsync(new SettingsFrame()).ConfigureAwait(false);
 
-            // Initial client SETTINGS also works as a PING. Do not send ACK immediately to avoid low RTT estimation
+            // Initial client SETTINGS also works as a PING. Do not send ACK immediately to avoid low RTT
+            // estimation
             await Task.Delay(networkDelay);
             await connection.WriteFrameAsync(
                 new SettingsFrame(FrameFlags.Ack, new SettingsEntry[0])

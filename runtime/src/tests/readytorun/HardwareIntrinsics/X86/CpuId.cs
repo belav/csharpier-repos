@@ -37,7 +37,8 @@ namespace XarchHardwareIntrinsicTest._CpuId
             if (!isAuthenticAmd && !isGenuineIntel && !isVirtualCPU)
             {
                 // CPUID checks are vendor specific and aren't guaranteed to match up, even across Intel/AMD
-                // as such, we limit ourselves to just AuthenticAMD, GenuineIntel and "Virtual CPU" right now. Any other
+                // as such, we limit ourselves to just AuthenticAMD, GenuineIntel and "Virtual CPU" right now. Any
+                // other
                 // vendors would need to be validated against the checks below and added to the list as necessary.
 
                 // An example of a difference is Intel/AMD for LZCNT. While the same underlying bit is used to
@@ -298,7 +299,8 @@ namespace XarchHardwareIntrinsicTest._CpuId
             {
                 // The runtime currently requires that all of F + BW + CD + DQ + VL be supported together or none
                 // are supported. To handle this we simple check them all twice so that if any of them are disabled
-                // the first time around, we'll then assert that they are all actually disabled the second time around
+                // the first time around, we'll then assert that they are all actually disabled the second time
+                // around
 
                 if (
                     IsBitIncorrect(

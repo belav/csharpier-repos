@@ -81,28 +81,32 @@ class Program
 }";
             var comp = CreateCompilationWithIndexAndRange(new[] { src, TestSources.GetSubArray });
             comp.VerifyEmitDiagnostics(
-                // (16,55): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
+                // (16,55): error CS8790: An expression tree may not contain a pattern System.Index or System.Range
+                // indexer access
                 //         Expression<Func<int[], int>> e = (int[] a) => a[new Index(0, true)]; // 1
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
                         "a[new Index(0, true)]"
                     )
                     .WithLocation(16, 55),
-                // (17,64): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
+                // (17,64): error CS8790: An expression tree may not contain a pattern System.Index or System.Range
+                // indexer access
                 //         Expression<Func<List<int>, int>> e2 = (List<int> a) => a[new Index(0, true)]; // 2
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
                         "a[new Index(0, true)]"
                     )
                     .WithLocation(17, 64),
-                // (19,58): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
+                // (19,58): error CS8790: An expression tree may not contain a pattern System.Index or System.Range
+                // indexer access
                 //         Expression<Func<int[], int[]>> e3 = (int[] a) => a[new Range(0, 1)]; // 3
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
                         "a[new Range(0, 1)]"
                     )
                     .WithLocation(19, 58),
-                // (20,46): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
+                // (20,46): error CS8790: An expression tree may not contain a pattern System.Index or System.Range
+                // indexer access
                 //         Expression<Func<S, S>> e4 = (S s) => s[new Range(0, 1)]; // 4
                 Diagnostic(
                         ErrorCode.ERR_ExpressionTreeContainsPatternImplicitIndexer,
@@ -412,7 +416,8 @@ public struct S
 ";
             var comp = CreateCompilationWithIndexAndRangeAndSpan(src);
             comp.VerifyDiagnostics(
-                // (24,9): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member results in an implicit copy of 'this'.
+                // (24,9): warning CS8656: Call to non-readonly member 'S.Length.get' from a 'readonly' member
+                // results in an implicit copy of 'this'.
                 //         this[^1] += 5;
                 Diagnostic(ErrorCode.WRN_ImplicitCopyInReadOnlyMember, "this")
                     .WithArguments("S.Length.get", "this")

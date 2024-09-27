@@ -182,16 +182,16 @@ namespace Novell.Directory.Ldap.Asn1
         /// </summary>
         public const int PRIVATE = 3;
 
-        /* Private variables
-        */
+/* Private variables
+*/
 
         private int tagClass;
         private bool constructed;
         private int tag;
         private int encodedLength;
 
-        /* Constructors for Asn1Identifier
-        */
+/* Constructors for Asn1Identifier
+*/
 
         /// <summary> Constructs an Asn1Identifier using the classtype, form and tag.
         ///
@@ -279,8 +279,8 @@ namespace Novell.Directory.Ldap.Asn1
             return n;
         }
 
-        /* Convenience methods
-        */
+/* Convenience methods
+*/
 
         /// <summary> Creates a duplicate, not a true clone, of this object and returns
         /// a reference to the duplicate.

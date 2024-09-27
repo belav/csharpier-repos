@@ -61,7 +61,8 @@ namespace Tests.System.Security
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
         public void GetNormalizedStrongNameHash()
         {
-            // Validating that we match the exact hash the .NET Framework IsolatedStorage implementation would create.
+            // Validating that we match the exact hash the .NET Framework IsolatedStorage implementation would
+            // create.
             Assert.Equal(
                 @"10nbq10da2m1qfsisndjihnhqmilalwl",
                 IdentityHelper.GetNormalizedStrongNameHash(GetAssemblyNameWithFullKey())
@@ -72,7 +73,8 @@ namespace Tests.System.Security
         [SkipOnPlatform(TestPlatforms.Browser, "Not supported on Browser.")]
         public void GetNormalizedUrlHash()
         {
-            // Validating that we match the exact hash the .NET Framework IsolatedStorage implementation would create.
+            // Validating that we match the exact hash the .NET Framework IsolatedStorage implementation would
+            // create.
             Uri uri = new Uri(
                 @"file://C:/Users/jerem/Documents/Visual Studio 2015/Projects/LongPath/LongPath/bin/Debug/TestAssembly.EXE"
             );
@@ -255,7 +257,9 @@ namespace Tests.System.Security
 
             return name;
 
+            //
             // C:\Users\jerem\AppData\Local\IsolatedStorage\10v31ho4.bo2\eeolfu22.f2w\Url.qgeirsoc3cznuklvq5xlalurh1m0unxl\AssemFiles\
+            //
             // C:\Users\jerem\AppData\Local\IsolatedStorage\10v31ho4.bo2\eeolfu22.f2w\StrongName.10nbq10da2m1qfsisndjihnhqmilalwl\AssemFiles\
         }
     }

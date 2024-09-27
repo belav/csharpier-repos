@@ -143,7 +143,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                         );
 
                         // Below removes the first argument
-                        // we need to reuse the separators to maintain existing formatting & comments in the arguments itself
+                        // we need to reuse the separators to maintain existing formatting & comments in the arguments
+                        // itself
                         var newArguments = SyntaxFactory.SeparatedList<ArgumentSyntax>(
                             argumentList.Arguments.GetWithSeparators().AsEnumerable().Skip(2)
                         );

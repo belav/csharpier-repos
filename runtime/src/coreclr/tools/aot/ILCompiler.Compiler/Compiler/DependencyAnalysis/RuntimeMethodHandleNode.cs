@@ -17,7 +17,8 @@ namespace ILCompiler.DependencyAnalysis
         {
             Debug.Assert(!targetMethod.IsSharedByGenericInstantiations);
 
-            // IL is allowed to LDTOKEN an uninstantiated thing. Do not check IsRuntimeDetermined for the nonexact thing.
+            // IL is allowed to LDTOKEN an uninstantiated thing. Do not check IsRuntimeDetermined for the
+            // nonexact thing.
             Debug.Assert(
                 (targetMethod.HasInstantiation && targetMethod.IsMethodDefinition)
                     || targetMethod.OwningType.IsGenericDefinition

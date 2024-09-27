@@ -312,7 +312,8 @@ namespace System.ServiceModel.Channels
             {
                 messageBytes = this.CopyMessageIntoBufferManager(messageBytes);
                 //if HandleDataReceived returns false, it means that the max pending message count was hit.
-                //when receiveHandler.HandleDataReceived is called (whether now or later), it will return the buffer to the buffer manager.
+                //when receiveHandler.HandleDataReceived is called (whether now or later), it will return the buffer
+                // to the buffer manager.
                 return this.receiveHandler.HandleDataReceived(
                     messageBytes,
                     state.RemoteEndPoint,
@@ -354,7 +355,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (CommunicationException ex)
                     {
-                        //message too big, ICMP errors, etc, are translated by the socket into a CommunicationException derived exception.
+                        //message too big, ICMP errors, etc, are translated by the socket into a CommunicationException
+                        // derived exception.
                         //These should not be fatal to the receive loop, so we need to continue receiving.
                         this.receiveHandler.HandleAsyncException(ex);
                         jumpThreads = !Thread.CurrentThread.IsThreadPoolThread;

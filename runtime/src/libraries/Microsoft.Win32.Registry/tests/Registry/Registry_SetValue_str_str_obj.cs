@@ -13,7 +13,8 @@ namespace Microsoft.Win32.RegistryTests
         public void Test01()
         {
             // [] Passing in null should throw ArgumentNullException
-            //UPDATE: This sets the default value. We should move this test to a newly defined reg key so as not to screw up the system
+            //UPDATE: This sets the default value. We should move this test to a newly defined reg key so as not
+            // to screw up the system
             const string expected = "This is a test";
             Registry.SetValue(TestRegistryKey.Name, null, expected);
             Assert.Equal(expected, TestRegistryKey.GetValue(null));
@@ -39,7 +40,8 @@ namespace Microsoft.Win32.RegistryTests
                 () => Registry.SetValue("HHHH_MMMM", "test", "test")
             );
 
-            // Should throw if passed string which only starts with one of the valid base key names but actually it isn't valid.
+            // Should throw if passed string which only starts with one of the valid base key names but actually
+            // it isn't valid.
             AssertExtensions.Throws<ArgumentException>(
                 "keyName",
                 null,

@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                     || GeneratedNameParser.GetKind(field.Name)
                         == GeneratedNameKind.AnonymousTypeField
             );
-            // CONSIDER: Instead of digging fields out of the unsubstituted type and then performing substitution
+            // CONSIDER: Instead of digging fields out of the unsubstituted type and then performing
+            // substitution
             // on each one individually, we could dig fields out of the substituted type.
             return new EEDisplayClassFieldSymbol(
                 typeMap.SubstituteNamedType(field.ContainingType),

@@ -35,8 +35,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
         }
 
         [Kept]
-        // The event will not be kept as it's internal and the behavior of Type.GetEvents() is to only return public events
-        // But we don't mark it as unrecognized access pattern - we did recognize it fully, just didn't find the event being asked for
+        // The event will not be kept as it's internal and the behavior of Type.GetEvents() is to only
+        // return public events
+        // But we don't mark it as unrecognized access pattern - we did recognize it fully, just didn't find
+        // the event being asked for
         // The behavior of the code will not change by linking it:
         //   - Without linking the GetEvents will return null
         //   - After linking the GetEvents will still return null

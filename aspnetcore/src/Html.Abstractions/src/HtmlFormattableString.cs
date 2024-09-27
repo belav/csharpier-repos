@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Html;
 
 /// <summary>
 /// An <see cref="IHtmlContent"/> implementation of composite string formatting
-/// (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd(v=vs.110).aspx"/>) which HTML encodes
+/// (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd(v=vs.110).aspx"/>) which HTML
+// encodes
 /// formatted arguments.
 /// </summary>
 [DebuggerDisplay("{DebuggerToString()}")]
@@ -33,10 +34,12 @@ public class HtmlFormattableString : IHtmlContent
         : this(formatProvider: null, format: format, args: args) { }
 
     /// <summary>
-    /// Creates a new <see cref="HtmlFormattableString"/> with the given <paramref name="formatProvider"/>,
+    /// Creates a new <see cref="HtmlFormattableString"/> with the given <paramref
+    // name="formatProvider"/>,
     /// <paramref name="format"/> and <paramref name="args"/>.
     /// </summary>
-    /// <param name="formatProvider">An object that provides culture-specific formatting information.</param>
+    /// <param name="formatProvider">An object that provides culture-specific formatting
+    // information.</param>
     /// <param name="format">A composite format string.</param>
     /// <param name="args">An array that contains objects to format.</param>
     public HtmlFormattableString(

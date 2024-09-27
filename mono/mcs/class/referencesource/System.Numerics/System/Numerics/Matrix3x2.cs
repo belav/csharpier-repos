@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Globalization;
 
@@ -242,7 +243,8 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Creates a scale matrix that scales uniformly with the given scale with an offset from the given center.
+        /// Creates a scale matrix that scales uniformly with the given scale with an offset from the given
+        // center.
         /// </summary>
         /// <param name="scale">The uniform scale to use.</param>
         /// <param name="centerPoint">The center offset.</param>
@@ -440,7 +442,8 @@ namespace System.Numerics
 
         /// <summary>
         /// Calculates the determinant for this matrix.
-        /// The determinant is calculated by expanding the matrix with a third column whose values are (0,0,1).
+        /// The determinant is calculated by expanding the matrix with a third column whose values are
+        // (0,0,1).
         /// </summary>
         /// <returns>The determinant.</returns>
         public float GetDeterminant()
@@ -465,7 +468,8 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Attempts to invert the given matrix. If the operation succeeds, the inverted matrix is stored in the result parameter.
+        /// Attempts to invert the given matrix. If the operation succeeds, the inverted matrix is stored in
+        // the result parameter.
         /// </summary>
         /// <param name="matrix">The source matrix.</param>
         /// <param name="result">The output matrix.</param>

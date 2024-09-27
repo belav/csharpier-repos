@@ -89,7 +89,8 @@ namespace System.Security.Cryptography
 
         public void SetKeySize(int keySize, ICngSymmetricAlgorithm outer)
         {
-            // Warning: This gets invoked once before "this" is initialized, due to Aes(), DES(), etc., setting the KeySize property in their
+            // Warning: This gets invoked once before "this" is initialized, due to Aes(), DES(), etc., setting
+            // the KeySize property in their
             // nullary constructor. That's why we require "outer" being passed as parameter.
             Debug.Assert(_outer == null || _outer == outer);
 
@@ -421,7 +422,8 @@ namespace System.Security.Cryptography
 
         private readonly ICngSymmetricAlgorithm _outer;
 
-        // If using a stored CNG key, these fields provide the CngKey.Open() parameters. If using a plaintext key, _keyName is set to null.
+        // If using a stored CNG key, these fields provide the CngKey.Open() parameters. If using a
+        // plaintext key, _keyName is set to null.
         private string? _keyName;
         private readonly CngProvider? _provider;
         private readonly CngKeyOpenOptions _optionOptions;

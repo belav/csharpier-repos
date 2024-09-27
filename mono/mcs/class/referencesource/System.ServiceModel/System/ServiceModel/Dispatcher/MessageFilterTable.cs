@@ -381,7 +381,8 @@ namespace System.ServiceModel.Dispatcher
             return this.GetMatchingValue(buffer, null, out data);
         }
 
-        // this optimization is only for CorrelationActionMessageFilter and ActionMessageFilter if they override CreateFilterTable to return ActionMessageFilterTable
+        // this optimization is only for CorrelationActionMessageFilter and ActionMessageFilter if they
+        // override CreateFilterTable to return ActionMessageFilterTable
         internal bool GetMatchingValue(
             MessageBuffer buffer,
             Message messageToReadHeaders,
@@ -407,13 +408,15 @@ namespace System.ServiceModel.Dispatcher
                     && this.tables[i].table is ActionMessageFilterTable<TFilterData>
                 )
                 {
-                    // this is an action message, in this case we can pass in the message itself since the filter will only read from the header
+                    // this is an action message, in this case we can pass in the message itself since the filter will
+                    // only read from the header
                     result = this.tables[i]
                         .table.GetMatchingValue(messageToReadHeaders, out currentData);
                 }
                 else
                 {
-                    // this is a custom filter that might read from the message body, pass in the message buffer itself in this case
+                    // this is a custom filter that might read from the message body, pass in the message buffer itself
+                    // in this case
                     result = this.tables[i].table.GetMatchingValue(buffer, out currentData);
                 }
                 if (result)

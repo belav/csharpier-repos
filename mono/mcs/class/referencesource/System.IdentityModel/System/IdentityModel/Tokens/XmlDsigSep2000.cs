@@ -251,7 +251,8 @@ namespace System.IdentityModel.Tokens
             }
         }
 
-        // so far, we only support two types of X509Data directly under KeyInfo  - X509Certificate and X509SKI
+        // so far, we only support two types of X509Data directly under KeyInfo  - X509Certificate and
+        // X509SKI
         //   <ds:X509Data>
         //     <ds:X509Certificate>...</ds:X509Certificate>
         //      or
@@ -354,7 +355,9 @@ namespace System.IdentityModel.Tokens
             public override bool SupportsCore(SecurityKeyIdentifierClause keyIdentifierClause)
             {
                 return (keyIdentifierClause is X509RawDataKeyIdentifierClause);
-                // This method should not write X509IssuerSerialKeyIdentifierClause or X509SubjectKeyIdentifierClause as that should be written by the WSSecurityXXX classes with SecurityTokenReference tag.
+                // This method should not write X509IssuerSerialKeyIdentifierClause or
+                // X509SubjectKeyIdentifierClause as that should be written by the WSSecurityXXX classes with
+                // SecurityTokenReference tag.
                 // The XmlDsig entries are written by the X509SecurityTokenHandler.
             }
 

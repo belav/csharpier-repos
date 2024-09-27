@@ -13,9 +13,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Public;
 
-// A document diagnostic partial report is defined as having the first literal send = WorkspaceDiagnosticReport followed
+// A document diagnostic partial report is defined as having the first literal send =
+// WorkspaceDiagnosticReport followed
 // by n WorkspaceDiagnosticReportPartialResult literals.
-// See https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#workspace_diagnostic
+// See
+// https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#workspace_diagnostic
 using WorkspaceDiagnosticPartialReport = SumType<
     WorkspaceDiagnosticReport,
     WorkspaceDiagnosticReportPartialResult

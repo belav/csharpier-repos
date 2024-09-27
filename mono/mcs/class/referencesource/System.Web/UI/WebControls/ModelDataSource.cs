@@ -68,7 +68,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <summary>
-        /// Control for which this is an internal data source to support the data methods for data operations.
+        /// Control for which this is an internal data source to support the data methods for data
+        // operations.
         /// </summary>
         public Control DataControl { get; private set; }
 

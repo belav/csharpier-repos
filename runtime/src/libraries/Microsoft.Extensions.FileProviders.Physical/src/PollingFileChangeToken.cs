@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
     ///     A change token that polls for file system changes.
     ///     </para>
     ///     <para>
-    ///     This change token does not raise any change callbacks. Callers should watch for <see cref="HasChanged" /> to turn
+    ///     This change token does not raise any change callbacks. Callers should watch for <see
+    // cref="HasChanged" /> to turn
     ///     from false to true
     ///     and dispose the token after this happens.
     ///     </para>
@@ -33,7 +34,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
         private CancellationChangeToken? _changeToken;
 
         /// <summary>
-        /// Initializes a new instance of <see cref="PollingFileChangeToken" /> that polls the specified file for changes as
+        /// Initializes a new instance of <see cref="PollingFileChangeToken" /> that polls the specified
+        // file for changes as
         /// determined by <see cref="System.IO.FileSystemInfo.LastWriteTimeUtc" />.
         /// </summary>
         /// <param name="fileInfo">The <see cref="System.IO.FileInfo"/> to poll</param>
@@ -85,10 +87,12 @@ namespace Microsoft.Extensions.FileProviders.Physical
             CancellationTokenSource;
 
         /// <summary>
-        /// True when the file has changed since the change token was created. Once the file changes, this value is always true
+        /// True when the file has changed since the change token was created. Once the file changes, this
+        // value is always true
         /// </summary>
         /// <remarks>
-        /// Once true, the value will always be true. Change tokens should not re-used once expired. The caller should discard this
+        /// Once true, the value will always be true. Change tokens should not re-used once expired. The
+        // caller should discard this
         /// instance once it sees <see cref="HasChanged" /> is true.
         /// </remarks>
         public bool HasChanged

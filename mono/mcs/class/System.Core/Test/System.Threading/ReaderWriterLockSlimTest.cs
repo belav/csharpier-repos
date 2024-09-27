@@ -453,7 +453,7 @@ namespace MonoTests.System.Threading
             while (ready_count != thread_count)
                 Thread.Sleep(10);
 
-            /* Extra up to 2s of sleep to ensure all threads got the chance to enter the lock */
+/* Extra up to 2s of sleep to ensure all threads got the chance to enter the lock */
             for (int i = 0; i < 200 && v.WaitingReadCount != thread_count; ++i)
                 Thread.Sleep(10);
             local = 11;

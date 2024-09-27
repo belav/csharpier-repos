@@ -7,7 +7,8 @@ using System.Globalization;
 namespace System.Configuration
 {
     /// <summary>
-    ///     The AppSettingsReader class provides a wrapper for System.Configuration.ConfigurationManager.AppSettings
+    ///     The AppSettingsReader class provides a wrapper for
+    // System.Configuration.ConfigurationManager.AppSettings
     ///     which provides a single method for reading values from the config file of a particular type.
     /// </summary>
     public class AppSettingsReader

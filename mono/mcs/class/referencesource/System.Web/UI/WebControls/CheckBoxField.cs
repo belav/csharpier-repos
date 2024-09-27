@@ -12,14 +12,16 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel;
 
     /// <devdoc>
-    /// <para>Creates a field bounded to a data field in a <see cref='System.Web.UI.WebControls.DataBoundControl'/>.</para>
+    /// <para>Creates a field bounded to a data field in a <see
+    // cref='System.Web.UI.WebControls.DataBoundControl'/>.</para>
     /// </devdoc>
     public class CheckBoxField : BoundField
     {
         private bool _suppressPropertyThrows = false;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.WebControls.CheckBoxField'/> class.</para>
+        /// <para>Initializes a new instance of a <see cref='System.Web.UI.WebControls.CheckBoxField'/>
+        // class.</para>
         /// </devdoc>
         public CheckBoxField() { }
 
@@ -100,7 +102,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets a property indicating whether data should be HtmlEncoded when it is displayed to the user.</para>
+        /// <para>Gets or sets a property indicating whether data should be HtmlEncoded when it is displayed
+        // to the user.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -272,7 +275,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Extracts the value(s) from the given cell and puts the value(s) into a dictionary.  Indicate includeReadOnly
+        /// Extracts the value(s) from the given cell and puts the value(s) into a dictionary.  Indicate
+        // includeReadOnly
         /// to have readonly fields' values inserted into the dictionary.
         /// </devdoc>
         public override void ExtractValuesFromCell(
@@ -411,7 +415,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>Override with an empty body if the field's controls all support callback.
-        ///  Otherwise, override and throw a useful error message about why the field can't support callbacks.</para>
+        ///  Otherwise, override and throw a useful error message about why the field can't support
+        // callbacks.</para>
         /// </devdoc>
         public override void ValidateSupportsCallback() { }
     }

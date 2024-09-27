@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// The field of the generated async class used to store the async method builder: an instance of
-        /// <see cref="AsyncVoidMethodBuilder"/>, <see cref="AsyncTaskMethodBuilder"/>, or <see cref="AsyncTaskMethodBuilder{TResult}"/> depending on the
+        /// <see cref="AsyncVoidMethodBuilder"/>, <see cref="AsyncTaskMethodBuilder"/>, or <see
+        // cref="AsyncTaskMethodBuilder{TResult}"/> depending on the
         /// return type of the async method.
         /// </summary>
         protected readonly FieldSymbol _asyncMethodBuilderField;
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected readonly AsyncMethodBuilderMemberCollection _asyncMethodBuilderMemberCollection;
 
         /// <summary>
-        /// The exprReturnLabel is used to label the return handling code at the end of the async state-machine
+        /// The exprReturnLabel is used to label the return handling code at the end of the async
+        // state-machine
         /// method. Return expressions are rewritten as unconditional branches to exprReturnLabel.
         /// </summary>
         protected readonly LabelSymbol _exprReturnLabel;
@@ -49,8 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly LabelSymbol _exitLabel;
 
         /// <summary>
-        /// The field of the generated async class used in generic task returning async methods to store the value
-        /// of rewritten return expressions. The return-handling code then uses <c>SetResult</c> on the async method builder
+        /// The field of the generated async class used in generic task returning async methods to store the
+        // value
+        /// of rewritten return expressions. The return-handling code then uses <c>SetResult</c> on the
+        // async method builder
         /// to make the result available to the caller.
         /// </summary>
         private readonly LocalSymbol? _exprRetValue;
@@ -121,9 +125,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             FieldSymbol result;
 
-            // Awaiters of the same type always share the same slot, regardless of what await expressions they belong to.
+            // Awaiters of the same type always share the same slot, regardless of what await expressions they
+            // belong to.
             // Even in case of nested await expressions only one awaiter is active.
-            // So we don't need to tie the awaiter variable to a particular await expression and only use its type
+            // So we don't need to tie the awaiter variable to a particular await expression and only use its
+            // type
             // to find the previous awaiter field.
             if (!_awaiterFields.TryGetValue(awaiterType, out result))
             {
@@ -217,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     F.SequencePointWithSpan(block, block.CloseBraceToken.Span, stateDone)
                 );
                 bodyBuilder.Add(F.HiddenSequencePoint());
-                // The remaining code is hidden to hide the fact that it can run concurrently with the task's continuation
+                // The remaining code is hidden to hide the fact that it can run concurrently with the task's
+                // continuation
             }
 
             bodyBuilder.Add(GenerateHoistedLocalsCleanup(rootScopeHoistedLocals));
@@ -294,7 +301,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             //     for each hoisted local:
             //     <>x__y = default
             //
-            //     builder.SetException(ex);  OR  if (this.combinedTokens != null) this.combinedTokens.Dispose(); _promiseOfValueOrEnd.SetException(ex); /* for async-iterator method */
+            //     builder.SetException(ex);  OR  if (this.combinedTokens != null)
+            // this.combinedTokens.Dispose(); _promiseOfValueOrEnd.SetException(ex); /* for async-iterator method
+            // */
             //     return;
             // }
 
@@ -306,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 )
             );
 
-            // builder.SetException(ex);  OR  if (this.combinedTokens != null) this.combinedTokens.Dispose(); _promiseOfValueOrEnd.SetException(ex);
+            // builder.SetException(ex);  OR  if (this.combinedTokens != null) this.combinedTokens.Dispose();
+            // _promiseOfValueOrEnd.SetException(ex);
             BoundStatement callSetException = GenerateSetExceptionCall(exceptionLocal);
 
             return new BoundCatchBlock(
@@ -463,7 +473,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var awaitIfIncomplete = F.Block(
                 // temp $awaiterTemp = <expr>.GetAwaiter();
                 F.Assignment(F.Local(awaiterTemp), getAwaiter),
-                // hidden sequence point facilitates EnC method remapping, see explanation on SynthesizedLocalKind.Awaiter:
+                // hidden sequence point facilitates EnC method remapping, see explanation on
+                // SynthesizedLocalKind.Awaiter:
                 F.HiddenSequencePoint(),
                 // if(!($awaiterTemp.IsCompleted)) { ... }
                 F.If(

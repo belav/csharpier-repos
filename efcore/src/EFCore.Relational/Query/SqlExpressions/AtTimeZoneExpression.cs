@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents an AT TIME ZONE operation in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -20,7 +21,8 @@ public class AtTimeZoneExpression : SqlExpression
     /// <param name="operand">The operand on which to perform the time zone conversion.</param>
     /// <param name="timeZone">The time zone to convert to.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public AtTimeZoneExpression(
         SqlExpression operand,
         SqlExpression timeZone,
@@ -53,12 +55,14 @@ public class AtTimeZoneExpression : SqlExpression
     }
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
     /// <param name="timeZone">The <see cref="TimeZone" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual AtTimeZoneExpression Update(SqlExpression operand, SqlExpression timeZone) =>
         operand != Operand || timeZone != TimeZone
             ? new AtTimeZoneExpression(operand, timeZone, Type, TypeMapping)

@@ -5,7 +5,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
 ///     A simple logging interface for Entity Framework events.
-///     Used by <see cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />
+///     Used by <see
+// cref="DbContextOptionsBuilder.LogTo(Action{string},LogLevel,DbContextLoggerOptions?)" />
 /// </summary>
 /// <remarks>
 ///     <para>
@@ -15,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-simple-logging">EF Core simple logging</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-simple-logging">EF Core simple logging</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public interface IDbContextLogger
@@ -29,7 +31,8 @@ public interface IDbContextLogger
     ///     </para>
     ///     <para>
     ///         The specific subtype of the <see cref="EventData" /> argument is dependent on the event
-    ///         being logged. See <see cref="CoreEventId" /> for the type of event data used for each core event.
+    ///         being logged. See <see cref="CoreEventId" /> for the type of event data used for each
+    // core event.
     ///     </para>
     /// </remarks>
     /// <param name="eventData">The event to log.</param>
@@ -40,6 +43,7 @@ public interface IDbContextLogger
     /// </summary>
     /// <param name="eventId">The ID of the event.</param>
     /// <param name="logLevel">The level of the event.</param>
-    /// <returns>Returns <see langword="true" /> if the event should be logged; <see langword="false" /> if it should be filtered out.</returns>
+    /// <returns>Returns <see langword="true" /> if the event should be logged; <see langword="false" />
+    // if it should be filtered out.</returns>
     bool ShouldLog(EventId eventId, LogLevel logLevel);
 }

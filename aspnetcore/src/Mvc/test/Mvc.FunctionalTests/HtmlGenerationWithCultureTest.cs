@@ -192,7 +192,8 @@ public class HtmlGenerationWithCultureTest
 
         if (cachedCorrelationId != "10")
         {
-            // This is logging to investigate potential flakiness in this test tracked by https://github.com/aspnet/Mvc/issues/8281
+            // This is logging to investigate potential flakiness in this test tracked by
+            // https://github.com/aspnet/Mvc/issues/8281
             var documentContent = document.ToHtml(new HtmlMarkupFormatter());
             throw new XunitException(
                 $"Unexpected correlation Id, reading values from document:{Environment.NewLine}{documentContent}"

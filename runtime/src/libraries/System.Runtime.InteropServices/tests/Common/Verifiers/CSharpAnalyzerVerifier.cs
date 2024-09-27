@@ -36,7 +36,8 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             await test.RunAsync(CancellationToken.None);
         }
 
-        // Code fix tests support both analyzer and code fix testing. This test class is derived from the code fix test
+        // Code fix tests support both analyzer and code fix testing. This test class is derived from the
+        // code fix test
         // to avoid the need to maintain duplicate copies of the customization work.
         internal class Test : CSharpCodeFixVerifier<TAnalyzer, EmptyCodeFixProvider>.Test { }
     }

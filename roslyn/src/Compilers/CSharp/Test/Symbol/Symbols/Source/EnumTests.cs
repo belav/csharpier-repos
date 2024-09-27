@@ -86,7 +86,8 @@ ValueC = 257 // Out of underlying range
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""3""")
                     .WithArguments("string", "byte")
                     .WithLocation(3, 10),
-                // (4,10): error CS0266: Cannot implicitly convert type 'double' to 'byte'. An explicit conversion exists (are you missing a cast?)
+                // (4,10): error CS0266: Cannot implicitly convert type 'double' to 'byte'. An explicit conversion
+                // exists (are you missing a cast?)
                 // ValueB = 2.2, // Can't implicitly convert
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "2.2")
                     .WithArguments("double", "byte")
@@ -272,12 +273,14 @@ ValueC = 257 // Out of underlying range
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "Figure0")
                     .WithArguments("sealed")
                     .WithLocation(8, 17),
-                // (9,14): warning CS0109: The member 'Program.Figure' does not hide an accessible member. The new keyword is not required.
+                // (9,14): warning CS0109: The member 'Program.Figure' does not hide an accessible member. The new
+                // keyword is not required.
                 //     new enum Figure { Zero };                   // OK
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "Figure")
                     .WithArguments("Program.Figure")
                     .WithLocation(9, 14),
-                // (4,21): warning CS0109: The member 'Program.Figure2' does not hide an accessible member. The new keyword is not required.
+                // (4,21): warning CS0109: The member 'Program.Figure2' does not hide an accessible member. The new
+                // keyword is not required.
                 //     new public enum Figure2 { Zero = 0 };       // new + protection modifier is OK
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "Figure2")
                     .WithArguments("Program.Figure2")
@@ -848,7 +851,8 @@ class c1
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (9,27): error CS1763: 'o' is of type 'object'. A default parameter value of a reference type other than string can only be initialized with null
+                // (9,27): error CS1763: 'o' is of type 'object'. A default parameter value of a reference type
+                // other than string can only be initialized with null
                 //     public int Moo(object o = ABC.a)
                 Diagnostic(ErrorCode.ERR_NotNullRefDefaultParameter, "o")
                     .WithArguments("o", "object")
@@ -893,7 +897,8 @@ class Test
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (4,14): error CS0110: The evaluation of the constant value for 'Test.e' involves a circular definition
+                    // (4,14): error CS0110: The evaluation of the constant value for 'Test.e' involves a circular
+                    // definition
                     Diagnostic(ErrorCode.ERR_CircConstValue, "e").WithArguments("Test.e")
                 ); // No Errors
         }
@@ -931,7 +936,8 @@ class Test
 }";
             CreateCompilation(text)
                 .VerifyDiagnostics(
-                    // (16,18): error CS0266: Cannot implicitly convert type 'Test.E3' to 'int'. An explicit conversion exists (are you missing a cast?)
+                    // (16,18): error CS0266: Cannot implicitly convert type 'Test.E3' to 'int'. An explicit conversion
+                    // exists (are you missing a cast?)
                     //         Member = (E3)e
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E3)e")
                         .WithArguments("Test.E3", "int")
@@ -1019,7 +1025,9 @@ class C<T> { enum E4 : T { } }
                 // (2,11): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
                 // enum E2 : int* { }
                 Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "int*").WithLocation(2, 11),
-                // (3,11): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
+                // (3,11): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the
+                // compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you
+                // missing a reference?
                 // enum E3 : dynamic { }
                 Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic")
                     .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")
@@ -1048,7 +1056,9 @@ class C<T> { enum E4 : T { } }
                 // (1,11): error CS1008: Type byte, sbyte, short, ushort, int, uint, long, or ulong expected
                 // enum E1 : int[] { }
                 Diagnostic(ErrorCode.ERR_IntegralTypeExpected, "int[]").WithLocation(1, 11),
-                // (3,11): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you missing a reference?
+                // (3,11): error CS1980: Cannot define a class or member that utilizes 'dynamic' because the
+                // compiler required type 'System.Runtime.CompilerServices.DynamicAttribute' cannot be found. Are you
+                // missing a reference?
                 // enum E3 : dynamic { }
                 Diagnostic(ErrorCode.ERR_DynamicAttributeMissing, "dynamic")
                     .WithArguments("System.Runtime.CompilerServices.DynamicAttribute")

@@ -331,12 +331,16 @@ WHERE (
 
     #region Specific element types in ordered context
 
-    // When we don't need to preserve the collection's ordering (e.g. when Contains/Count is composed on top of it), we use OPENJSON with
+    // When we don't need to preserve the collection's ordering (e.g. when Contains/Count is composed on
+    // top of it), we use OPENJSON with
     // WITH, which handles all conversions out of JSON well.
-    // However, OPENJSON with WITH doesn't support preserving the ordering, so when that's needed we switch to OPENJSON without WITH, at
-    // which point we need to manually convert JSON values into their relational counterparts (this isn't always possible, e.g. varbinary
+    // However, OPENJSON with WITH doesn't support preserving the ordering, so when that's needed we
+    // switch to OPENJSON without WITH, at
+    // which point we need to manually convert JSON values into their relational counterparts (this
+    // isn't always possible, e.g. varbinary
     // which is base64 in JSON).
-    // The regular element type tests above test in unordered context, so we repeat them here but with an order-preserving context.
+    // The regular element type tests above test in unordered context, so we repeat them here but with
+    // an order-preserving context.
 
     [ConditionalFact]
     public virtual async Task Ordered_array_of_string()
@@ -426,7 +430,8 @@ WHERE (
         );
     }
 
-    // On relational databases, byte[] gets mapped to a special binary data type, which isn't queryable as a regular primitive collection.
+    // On relational databases, byte[] gets mapped to a special binary data type, which isn't queryable
+    // as a regular primitive collection.
     [ConditionalFact]
     public virtual async Task Ordered_array_of_byte() =>
         await AssertTranslationFailed(() => TestOrderedArray((byte)1, (byte)2));
@@ -740,7 +745,8 @@ WHERE (
             entityParam
         );
 
-        // context.Set<TestEntity>().SingleAsync(m => EF.Property<int[]>(m, "SomeArray").Skip(1).Count(a => a == <value1>) == 2)
+        // context.Set<TestEntity>().SingleAsync(m => EF.Property<int[]>(m, "SomeArray").Skip(1).Count(a =>
+        // a == <value1>) == 2)
         var result = await context.Set<TestEntity>().SingleAsync(predicate);
         Assert.Equal(1, result.Id);
     }

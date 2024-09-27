@@ -69,7 +69,8 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="path">Path relative to the base path stored in
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <param name="optional">Whether the file is optional.</param>
-        /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
+        /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file
+        // changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
@@ -97,7 +98,8 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="path">Path relative to the base path stored in
         /// <see cref="IConfigurationBuilder.Properties"/> of <paramref name="builder"/>.</param>
         /// <param name="optional">Whether the file is optional.</param>
-        /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file changes.</param>
+        /// <param name="reloadOnChange">Whether the configuration should be reloaded if the file
+        // changes.</param>
         /// <returns>The <see cref="IConfigurationBuilder"/>.</returns>
         [RequiresDynamicCode(XmlDocumentDecryptor.RequiresDynamicCodeMessage)]
         [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]

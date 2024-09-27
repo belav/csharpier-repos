@@ -10,29 +10,43 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Buffers.Text
 {
-    // AVX2 version based on https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/avx2
-    // Vector128 version based on https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/ssse3
+    // AVX2 version based on
+    // https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/avx2
+    // Vector128 version based on
+    // https://github.com/aklomp/base64/tree/e516d769a2a432c08404f1981e73b431566057be/lib/arch/ssse3
 
     public static partial class Base64
     {
         /// <summary>
         /// Decode the span of UTF-8 encoded text represented as base64 into binary data.
-        /// If the input is not a multiple of 4, it will decode as much as it can, to the closest multiple of 4.
+        /// If the input is not a multiple of 4, it will decode as much as it can, to the closest multiple
+        // of 4.
         /// </summary>
-        /// <param name="utf8">The input span which contains UTF-8 encoded text in base64 that needs to be decoded.</param>
-        /// <param name="bytes">The output span which contains the result of the operation, i.e. the decoded binary data.</param>
-        /// <param name="bytesConsumed">The number of input bytes consumed during the operation. This can be used to slice the input for subsequent calls, if necessary.</param>
-        /// <param name="bytesWritten">The number of bytes written into the output span. This can be used to slice the output for subsequent calls, if necessary.</param>
-        /// <param name="isFinalBlock"><see langword="true"/> (default) when the input span contains the entire data to encode.
-        /// Set to <see langword="true"/> when the source buffer contains the entirety of the data to encode.
-        /// Set to <see langword="false"/> if this method is being called in a loop and if more input data may follow.
-        /// At the end of the loop, call this (potentially with an empty source buffer) passing <see langword="true"/>.</param>
+        /// <param name="utf8">The input span which contains UTF-8 encoded text in base64 that needs to be
+        // decoded.</param>
+        /// <param name="bytes">The output span which contains the result of the operation, i.e. the decoded
+        // binary data.</param>
+        /// <param name="bytesConsumed">The number of input bytes consumed during the operation. This can be
+        // used to slice the input for subsequent calls, if necessary.</param>
+        /// <param name="bytesWritten">The number of bytes written into the output span. This can be used to
+        // slice the output for subsequent calls, if necessary.</param>
+        /// <param name="isFinalBlock"><see langword="true"/> (default) when the input span contains the
+        // entire data to encode.
+        /// Set to <see langword="true"/> when the source buffer contains the entirety of the data to
+        // encode.
+        /// Set to <see langword="false"/> if this method is being called in a loop and if more input data
+        // may follow.
+        /// At the end of the loop, call this (potentially with an empty source buffer) passing <see
+        // langword="true"/>.</param>
         /// <returns>It returns the OperationStatus enum values:
         /// - Done - on successful processing of the entire input span
         /// - DestinationTooSmall - if there is not enough space in the output span to fit the decoded input
-        /// - NeedMoreData - only if <paramref name="isFinalBlock"/> is false and the input is not a multiple of 4, otherwise the partial input would be considered as InvalidData
-        /// - InvalidData - if the input contains bytes outside of the expected base64 range, or if it contains invalid/more than two padding characters,
-        ///   or if the input is incomplete (i.e. not a multiple of 4) and <paramref name="isFinalBlock"/> is <see langword="true"/>.
+        /// - NeedMoreData - only if <paramref name="isFinalBlock"/> is false and the input is not a
+        // multiple of 4, otherwise the partial input would be considered as InvalidData
+        /// - InvalidData - if the input contains bytes outside of the expected base64 range, or if it
+        // contains invalid/more than two padding characters,
+        ///   or if the input is incomplete (i.e. not a multiple of 4) and <paramref name="isFinalBlock"/>
+        // is <see langword="true"/>.
         /// </returns>
         public static OperationStatus DecodeFromUtf8(
             ReadOnlySpan<byte> utf8,
@@ -150,7 +164,8 @@ namespace System.Buffers.Text
                     }
                 }
 
-                // Last bytes could have padding characters, so process them separately and treat them as valid only if isFinalBlock is true
+                // Last bytes could have padding characters, so process them separately and treat them as valid only
+                // if isFinalBlock is true
                 // if isFinalBlock is false, padding characters are considered invalid
                 int skipLastChunk = isFinalBlock ? 4 : 0;
 
@@ -160,7 +175,8 @@ namespace System.Buffers.Text
                 }
                 else
                 {
-                    // This should never overflow since destLength here is less than int.MaxValue / 4 * 3 (i.e. 1610612733)
+                    // This should never overflow since destLength here is less than int.MaxValue / 4 * 3 (i.e.
+                    // 1610612733)
                     // Therefore, (destLength / 3) * 4 will always be less than 2147483641
                     Debug.Assert(destLength < (int.MaxValue / 4 * 3));
                     maxSrcLength = (destLength / 3) * 4;
@@ -392,7 +408,8 @@ namespace System.Buffers.Text
         }
 
         /// <summary>
-        /// Returns the maximum length (in bytes) of the result if you were to decode base 64 encoded text within a byte span of size "length".
+        /// Returns the maximum length (in bytes) of the result if you were to decode base 64 encoded text
+        // within a byte span of size "length".
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Thrown when the specified <paramref name="length"/> is less than 0.
@@ -410,14 +427,17 @@ namespace System.Buffers.Text
 
         /// <summary>
         /// Decode the span of UTF-8 encoded text in base 64 (in-place) into binary data.
-        /// The decoded binary output is smaller than the text data contained in the input (the operation deflates the data).
+        /// The decoded binary output is smaller than the text data contained in the input (the operation
+        // deflates the data).
         /// If the input is not a multiple of 4, it will not decode any.
         /// </summary>
-        /// <param name="buffer">The input span which contains the base 64 text data that needs to be decoded.</param>
+        /// <param name="buffer">The input span which contains the base 64 text data that needs to be
+        // decoded.</param>
         /// <param name="bytesWritten">The number of bytes written into the buffer.</param>
         /// <returns>It returns the OperationStatus enum values:
         /// - Done - on successful processing of the entire input span
-        /// - InvalidData - if the input contains bytes outside of the expected base 64 range, or if it contains invalid/more than two padding characters,
+        /// - InvalidData - if the input contains bytes outside of the expected base 64 range, or if it
+        // contains invalid/more than two padding characters,
         ///   or if the input is incomplete (i.e. not a multiple of 4).
         /// It does not return DestinationTooSmall since that is not possible for base 64 decoding.
         /// It does not return NeedMoreData since this method tramples the data in the buffer and
@@ -584,7 +604,8 @@ namespace System.Buffers.Text
                 bool hasAnotherBlock = utf8.Length >= BlockSize && bufferIdx == BlockSize;
                 bool localIsFinalBlock = !hasAnotherBlock;
 
-                // If this block contains padding and there's another block, then only whitespace may follow for being valid.
+                // If this block contains padding and there's another block, then only whitespace may follow for
+                // being valid.
                 if (hasAnotherBlock)
                 {
                     int paddingCount = GetPaddingCount(ref buffer[^1]);
@@ -1094,7 +1115,8 @@ namespace System.Buffers.Text
                 Vector256<sbyte> shift = Avx2.Shuffle(lutShift, Avx2.Add(eq2F, hiNibbles));
                 str = Avx2.Add(str, shift);
 
-                // in, lower lane, bits, upper case are most significant bits, lower case are least significant bits:
+                // in, lower lane, bits, upper case are most significant bits, lower case are least significant
+                // bits:
                 // 00llllll 00kkkkLL 00jjKKKK 00JJJJJJ
                 // 00iiiiii 00hhhhII 00ggHHHH 00GGGGGG
                 // 00ffffff 00eeeeFF 00ddEEEE 00DDDDDD
@@ -1194,7 +1216,8 @@ namespace System.Buffers.Text
 
             // We will use LUTS for character validation & offset computation
             // Remember that 0x2X and 0x0X are the same index for _mm_shuffle_epi8,
-            // this allows to mask with 0x2F instead of 0x0F and thus save one constant declaration (register and/or memory access)
+            // this allows to mask with 0x2F instead of 0x0F and thus save one constant declaration (register
+            // and/or memory access)
 
             // For offsets:
             // Perfect hash for lut = ((src>>4)&0x2F)+((src==0x2F)?0xFF:0x00)
@@ -1211,40 +1234,65 @@ namespace System.Buffers.Text
             // For validation, here's the table.
             // A character is valid if and only if the AND of the 2 lookups equals 0:
 
-            // hi \ lo              0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110 1111
-            //      LUT             0x15 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x13 0x1A 0x1B 0x1B 0x1B 0x1A
+            // hi \ lo              0000 0001 0010 0011 0100 0101 0110 0111 1000 1001 1010 1011 1100 1101 1110
+            // 1111
+            //      LUT             0x15 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x11 0x13 0x1A 0x1B 0x1B 0x1B
+            // 0x1A
 
-            // 0000 0X10 char        NUL  SOH  STX  ETX  EOT  ENQ  ACK  BEL   BS   HT   LF   VT   FF   CR   SO   SI
-            //           andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0000 0X10 char        NUL  SOH  STX  ETX  EOT  ENQ  ACK  BEL   BS   HT   LF   VT   FF   CR   SO
+            // SI
+            //           andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
 
-            // 0001 0x10 char        DLE  DC1  DC2  DC3  DC4  NAK  SYN  ETB  CAN   EM  SUB  ESC   FS   GS   RS   US
-            //           andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0001 0x10 char        DLE  DC1  DC2  DC3  DC4  NAK  SYN  ETB  CAN   EM  SUB  ESC   FS   GS   RS
+            // US
+            //           andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
 
-            // 0010 0x01 char               !    "    #    $    %    &    '    (    )    *    +    ,    -    .    /
-            //           andlut     0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x00 0x01 0x01 0x01 0x00
+            // 0010 0x01 char               !    "    #    $    %    &    '    (    )    *    +    ,    -    .
+            // /
+            //           andlut     0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x01 0x00 0x01 0x01 0x01
+            // 0x00
 
-            // 0011 0x02 char          0    1    2    3    4    5    6    7    8    9    :    ;    <    =    >    ?
-            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x02 0x02 0x02 0x02 0x02
+            // 0011 0x02 char          0    1    2    3    4    5    6    7    8    9    :    ;    <    =    >
+            // ?
+            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x02 0x02 0x02 0x02
+            // 0x02
 
-            // 0100 0x04 char          @    A    B    C    D    E    F    G    H    I    J    K    L    M    N    0
-            //           andlut     0x04 0x00 0x00 0x00 0X00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+            // 0100 0x04 char          @    A    B    C    D    E    F    G    H    I    J    K    L    M    N
+            // 0
+            //           andlut     0x04 0x00 0x00 0x00 0X00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+            // 0x00
 
-            // 0101 0x08 char          P    Q    R    S    T    U    V    W    X    Y    Z    [    \    ]    ^    _
-            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x08 0x08 0x08 0x08 0x08
+            // 0101 0x08 char          P    Q    R    S    T    U    V    W    X    Y    Z    [    \    ]    ^
+            // _
+            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x08 0x08 0x08 0x08
+            // 0x08
 
-            // 0110 0x04 char          `    a    b    c    d    e    f    g    h    i    j    k    l    m    n    o
-            //           andlut     0x04 0x00 0x00 0x00 0X00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+            // 0110 0x04 char          `    a    b    c    d    e    f    g    h    i    j    k    l    m    n
+            // o
+            //           andlut     0x04 0x00 0x00 0x00 0X00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+            // 0x00
             // 0111 0X08 char          p    q    r    s    t    u    v    w    x    y    z    {    |    }    ~
-            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x08 0x08 0x08 0x08 0x08
+            //           andlut     0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x08 0x08 0x08 0x08
+            // 0x08
 
-            // 1000 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1001 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1010 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1011 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1100 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1101 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1110 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
-            // 1111 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 1000 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1001 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1010 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1011 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1100 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1101 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1110 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
+            // 1111 0x10 andlut     0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10 0x10
+            // 0x10
 
             // The JIT won't hoist these "constants", so help it
             Vector128<byte> lutHi = Vector128
@@ -1414,7 +1462,8 @@ namespace System.Buffers.Text
         {
             if (Environment.Is64BitProcess)
             {
-                // For description see https://github.com/dotnet/runtime/blob/48e74187cb15386c29eedaa046a5ee2c7ddef161/src/libraries/Common/src/System/HexConverter.cs#L314-L330
+                // For description see
+                // https://github.com/dotnet/runtime/blob/48e74187cb15386c29eedaa046a5ee2c7ddef161/src/libraries/Common/src/System/HexConverter.cs#L314-L330
                 // Lookup bit mask for "\t\n\r ".
                 const ulong MagicConstant = 0xC800010000000000UL;
                 ulong i = (uint)value - '\t';
@@ -1432,7 +1481,8 @@ namespace System.Buffers.Text
             return value == 32;
         }
 
-        // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify (found in tests)
+        // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify
+        // (found in tests)
         private static ReadOnlySpan<sbyte> DecodingMap =>
             [
                 -1,

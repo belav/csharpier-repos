@@ -211,8 +211,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Enumerates all green nodes of the tree rooted by this node (including this node).  This includes normal
-        /// nodes, list nodes, and tokens.  The nodes will be returned in depth-first order.  This will not descend
+        /// Enumerates all green nodes of the tree rooted by this node (including this node).  This includes
+        // normal
+        /// nodes, list nodes, and tokens.  The nodes will be returned in depth-first order.  This will not
+        // descend
         /// into trivia or structured trivia.
         /// </summary>
         public NodeEnumerable EnumerateNodes() => new NodeEnumerable(this);
@@ -843,13 +845,15 @@ namespace Microsoft.CodeAnalysis
             where TNode : SyntaxNode;
         public abstract bool IsTriviaWithEndOfLine(); // trivia node has end of line
 
-        /*
-         * There are 3 overloads of this, because most callers already know what they have is a List<T> and only transform it.
-         * In those cases List<TFrom> performs much better.
-         * In other cases, the type is unknown / is IEnumerable<T>, where we try to find the best match.
-         * There is another overload for IReadOnlyList, since most collections already implement this, so checking for it will
-         * perform better then copying to a List<T>, though not as good as List<T> directly.
-         */
+/*
+* There are 3 overloads of this, because most callers already know what they have is a List<T> and
+only transform it.
+* In those cases List<TFrom> performs much better.
+* In other cases, the type is unknown / is IEnumerable<T>, where we try to find the best match.
+* There is another overload for IReadOnlyList, since most collections already implement this, so
+checking for it will
+* perform better then copying to a List<T>, though not as good as List<T> directly.
+*/
         public static GreenNode? CreateList<TFrom>(
             IEnumerable<TFrom>? enumerable,
             Func<TFrom, GreenNode> select
@@ -995,7 +999,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="err">The error to attach to this node</param>
         /// <returns>A new node, with no parent, that has this error added to it.</returns>
-        /// <remarks>Since nodes are immutable, the only way to create nodes with errors attached is to create a node without an error,
+        /// <remarks>Since nodes are immutable, the only way to create nodes with errors attached is to
+        // create a node without an error,
         /// then add an error with this method to create another node.</remarks>
         internal GreenNode AddError(DiagnosticInfo err)
         {

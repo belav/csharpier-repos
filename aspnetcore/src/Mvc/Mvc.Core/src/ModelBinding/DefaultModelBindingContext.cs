@@ -277,7 +277,8 @@ public class DefaultModelBindingContext : ModelBindingContext
     {
         _stack.Push(_state);
 
-        // Would this new scope (which isn't in _stack) exceed the allowed recursion depth? That is, has the model
+        // Would this new scope (which isn't in _stack) exceed the allowed recursion depth? That is, has the
+        // model
         // binding system already nested MaxModelBindingRecursionDepth binders?
         if (_stack.Count >= MaxModelBindingRecursionDepth)
         {

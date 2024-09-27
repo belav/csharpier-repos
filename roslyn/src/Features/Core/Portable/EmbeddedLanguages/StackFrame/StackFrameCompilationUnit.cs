@@ -12,8 +12,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
     using StackFrameTrivia = EmbeddedSyntaxTrivia<StackFrameKind>;
 
     /// <summary>
-    /// The root unit for a stackframe. Includes the method declaration for the stack frame and optional file information.
-    /// Any leading "at " is considered trivia of <see cref="MethodDeclaration"/>, and " in " is put as trivia for the <see cref="FileInformationExpression"/>.
+    /// The root unit for a stackframe. Includes the method declaration for the stack frame and optional
+    // file information.
+    /// Any leading "at " is considered trivia of <see cref="MethodDeclaration"/>, and " in " is put as
+    // trivia for the <see cref="FileInformationExpression"/>.
     /// Remaining unparsable text is put as leading trivia on the <see cref="EndOfLineToken"/>
     /// </summary>
     internal class StackFrameCompilationUnit(
@@ -30,7 +32,8 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
 
         /// <summary>
         /// File information for a stack frame. May be optionally contained. If available, represents
-        /// the file path of a stackframe and optionally the line number. This is available as hint information
+        /// the file path of a stackframe and optionally the line number. This is available as hint
+        // information
         /// and may be useful for a user, but is not always accurate when mapping back to source.
         /// </summary>
         public readonly StackFrameFileInformationNode? FileInformationExpression =

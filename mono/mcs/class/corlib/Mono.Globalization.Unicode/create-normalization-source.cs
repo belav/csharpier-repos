@@ -221,14 +221,14 @@ namespace Mono.Globalization.Unicode
         {
             COut = new StreamWriter("normalization-tables.h", false);
 
-            /*
-            CSOut.WriteLine ("static readonly int [] singleNorm = new int [] {");
-            DumpArray (singleNorm, singleCount, false);
-            CSOut.WriteLine ("};");
-            CSOut.WriteLine ("static readonly int [] multiNorm = new int [] {");
-            DumpArray (multiNorm, multiCount, false);
-            CSOut.WriteLine ("};");
-            */
+/*
+CSOut.WriteLine ("static readonly int [] singleNorm = new int [] {");
+DumpArray (singleNorm, singleCount, false);
+CSOut.WriteLine ("};");
+CSOut.WriteLine ("static readonly int [] multiNorm = new int [] {");
+DumpArray (multiNorm, multiCount, false);
+CSOut.WriteLine ("};");
+*/
             CSOut.WriteLine("static readonly byte [] propsArr = new byte [] {");
             COut.WriteLine("static const guint8 props [] = {");
             DumpPropArray(prop, NUtil.PropCount, true);
@@ -434,43 +434,43 @@ namespace Mono.Globalization.Unicode
                     case "NFKC_QC":
                         SetProp(cp, cpEnd, (values == "M") ? MaybeNfkc : NoNfkc);
                         break;
-                    /*
-                    case "Expands_On_NFD":
-                        if (cp != 0xAC00) // Hangul Syllables are computed
-                            SetProp (cp, cpEnd, ExpandOnNfd);
-                        break;
-                    case "Expands_On_NFC":
-                        SetProp (cp, cpEnd, ExpandOnNfc);
-                        break;
-                    case "Expands_On_NFKD":
-                        if (cp != 0xAC00) // Hangul Syllables are computed
-                            SetProp (cp, cpEnd, ExpandOnNfkd);
-                        break;
-                    case "Expands_On_NFKC":
-                        SetProp (cp, cpEnd, ExpandOnNfkc);
-                        break;
-                    */
-                    /*
-                    case "FC_NFKC":
-                        int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
-                        foreach (string s in values.Split (' ')) {
-                            if (s.Trim ().Length == 0)
-                                continue;
-                            int v = int.Parse (s, NumberStyles.HexNumber);
-                            if (v1 == 0)
-                                v1 = v;
-                            else if (v2 == 0)
-                                v2 = v;
-                            else if (v3 == 0)
-                                v3 = v;
-                            else if (v4 == 0)
-                                v4 = v;
-                            else
-                                throw new NotSupportedException (String.Format ("more than 4 values in FC_NFKC: {0:x}", cp));
-                        }
-                        SetNFKC (cp, cpEnd, v1, v2, v3, v4);
-                        break;
-                    */
+/*
+case "Expands_On_NFD":
+if (cp != 0xAC00) // Hangul Syllables are computed
+SetProp (cp, cpEnd, ExpandOnNfd);
+break;
+case "Expands_On_NFC":
+SetProp (cp, cpEnd, ExpandOnNfc);
+break;
+case "Expands_On_NFKD":
+if (cp != 0xAC00) // Hangul Syllables are computed
+SetProp (cp, cpEnd, ExpandOnNfkd);
+break;
+case "Expands_On_NFKC":
+SetProp (cp, cpEnd, ExpandOnNfkc);
+break;
+*/
+/*
+case "FC_NFKC":
+int v1 = 0, v2 = 0, v3 = 0, v4 = 0;
+foreach (string s in values.Split (' ')) {
+if (s.Trim ().Length == 0)
+continue;
+int v = int.Parse (s, NumberStyles.HexNumber);
+if (v1 == 0)
+v1 = v;
+else if (v2 == 0)
+v2 = v;
+else if (v3 == 0)
+v3 = v;
+else if (v4 == 0)
+v4 = v;
+else
+throw new NotSupportedException (String.Format ("more than 4 values in FC_NFKC: {0:x}", cp));
+}
+SetNFKC (cp, cpEnd, v1, v2, v3, v4);
+break;
+*/
                 }
             }
             reader.Close();
@@ -493,41 +493,41 @@ namespace Mono.Globalization.Unicode
             }
         }
 
-        /*
-        private void SetNFKC (int cp, int cpEnd, int v1, int v2, int v3, int v4)
-        {
-            if (v2 == 0) {
-                int idx = -1;
-                for (int i = 0; i < singleCount; i++)
-                    if (singleNorm [i] == v1) {
-                        idx = i;
-                        break;
-                    }
-                if (idx < 0) {
-                    if (singleNorm.Length == singleCount) {
-                        int [] tmp = new int [singleCount << 1];
-                        Array.Copy (singleNorm, tmp, singleCount);
-                        singleNorm = tmp;
-                        idx = singleCount;
-                    }
-                    singleNorm [singleCount++] = v1;
-                }
-                SetProp (cp, cpEnd, idx << 16);
-            } else {
-                if (multiNorm.Length == multiCount) {
-                    int [] tmp = new int [multiCount << 1];
-                    Array.Copy (multiNorm, tmp, multiCount);
-                    multiNorm = tmp;
-                }
-                SetProp (cp, cpEnd,
-                    (int) ((multiCount << 16) | 0xF0000000));
-                multiNorm [multiCount++] = v1;
-                multiNorm [multiCount++] = v2;
-                multiNorm [multiCount++] = v3;
-                multiNorm [multiCount++] = v4;
-            }
-        }
-        */
+/*
+private void SetNFKC (int cp, int cpEnd, int v1, int v2, int v3, int v4)
+{
+if (v2 == 0) {
+int idx = -1;
+for (int i = 0; i < singleCount; i++)
+if (singleNorm [i] == v1) {
+idx = i;
+break;
+}
+if (idx < 0) {
+if (singleNorm.Length == singleCount) {
+int [] tmp = new int [singleCount << 1];
+Array.Copy (singleNorm, tmp, singleCount);
+singleNorm = tmp;
+idx = singleCount;
+}
+singleNorm [singleCount++] = v1;
+}
+SetProp (cp, cpEnd, idx << 16);
+} else {
+if (multiNorm.Length == multiCount) {
+int [] tmp = new int [multiCount << 1];
+Array.Copy (multiNorm, tmp, multiCount);
+multiNorm = tmp;
+}
+SetProp (cp, cpEnd,
+(int) ((multiCount << 16) | 0xF0000000));
+multiNorm [multiCount++] = v1;
+multiNorm [multiCount++] = v2;
+multiNorm [multiCount++] = v3;
+multiNorm [multiCount++] = v4;
+}
+}
+*/
 
         class CharMapping
         {

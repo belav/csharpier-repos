@@ -15,9 +15,11 @@ public class DiagnosticMessage
     /// <param name="formattedMessage">The formatted error message.</param>
     /// <param name="filePath">The path of the file that produced the message.</param>
     /// <param name="startLine">The one-based line index for the start of the compilation error.</param>
-    /// <param name="startColumn">The zero-based column index for the start of the compilation error.</param>
+    /// <param name="startColumn">The zero-based column index for the start of the compilation
+    // error.</param>
     /// <param name="endLine">The one-based line index for the end of the compilation error.</param>
-    /// <param name="endColumn">The zero-based column index for the end of the compilation error.</param>
+    /// <param name="endColumn">The zero-based column index for the end of the compilation
+    // error.</param>
     public DiagnosticMessage(
         string? message,
         string? formattedMessage,

@@ -67,11 +67,14 @@ public class PageRouteModel
     /// Gets the path relative to the base path for page discovery.
     /// <para>
     /// This value is the path of the file without extension, relative to the pages root directory.
-    /// e.g. the <see cref="ViewEnginePath"/> for the file /Pages/Catalog/Antiques.cshtml is <c>/Catalog/Antiques</c>
+    /// e.g. the <see cref="ViewEnginePath"/> for the file /Pages/Catalog/Antiques.cshtml is
+    // <c>/Catalog/Antiques</c>
     /// </para>
     /// <para>
-    /// In an area, this value is the path of the file without extension, relative to the pages root directory for the specified area.
-    /// e.g. the <see cref="ViewEnginePath"/>  for the file Areas/Identity/Pages/Manage/Accounts.cshtml, is <c>/Manage/Accounts</c>.
+    /// In an area, this value is the path of the file without extension, relative to the pages root
+    // directory for the specified area.
+    /// e.g. the <see cref="ViewEnginePath"/>  for the file Areas/Identity/Pages/Manage/Accounts.cshtml,
+    // is <c>/Manage/Accounts</c>.
     /// </para>
     /// </summary>
     public string ViewEnginePath { get; }
@@ -114,7 +117,8 @@ public class PageRouteModel
     /// <summary>
     /// Gets or sets an <see cref="IOutboundParameterTransformer"/> that will be used to transform
     /// built-in route parameters such as <c>action</c>, <c>controller</c>, and <c>area</c> as well as
-    /// additional parameters specified by <see cref="RouteValues"/> into static segments in the route template.
+    /// additional parameters specified by <see cref="RouteValues"/> into static segments in the route
+    // template.
     /// </summary>
     /// <remarks>
     /// <para>

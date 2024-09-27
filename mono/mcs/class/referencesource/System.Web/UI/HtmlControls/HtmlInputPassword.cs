@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlInputPassword.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlInputPassword.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -36,9 +36,9 @@ namespace System.Web.UI.HtmlControls
     {
         private static readonly object EventServerChange = new object();
 
-        /*
-         * Creates an intrinsic Html INPUT type=password control.
-         */
+/*
+* Creates an intrinsic Html INPUT type=password control.
+*/
 
         public HtmlInputPassword()
             : base("password") { }

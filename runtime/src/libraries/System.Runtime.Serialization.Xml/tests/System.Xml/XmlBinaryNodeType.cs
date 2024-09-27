@@ -5,8 +5,10 @@ using System;
 
 namespace System.Xml
 {
-    // This file is a decompiled "snapshot" based on actual file in System.Private.DataContractSerialization
-    // All members are assigned constants so that accidental changes to original will not be reflected here
+    // This file is a decompiled "snapshot" based on actual file in
+    // System.Private.DataContractSerialization
+    // All members are assigned constants so that accidental changes to original will not be reflected
+    // here
     internal enum XmlBinaryNodeType : byte
     {
         EndElement = 1,

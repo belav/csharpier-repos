@@ -32,7 +32,8 @@ internal sealed partial class ServerSentEventsServerTransport : IHttpTransport
         _connectionId = connectionId;
         _connection = connection;
 
-        // We create the logger with a string to preserve the logging namespace after the server side transport renames.
+        // We create the logger with a string to preserve the logging namespace after the server side
+        // transport renames.
         _logger = loggerFactory.CreateLogger(
             "Microsoft.AspNetCore.Http.Connections.Internal.Transports.ServerSentEventsTransport"
         );

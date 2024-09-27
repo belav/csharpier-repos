@@ -364,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("};");
 
             var tree = CSharpSyntaxTree.ParseText(builder.ToString());
-            // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
+            // Do not descend into InitializerExpressionSyntax since that will populate
+            // SeparatedWithManyChildren._children.
             var node = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InitializerExpressionSyntax>()
@@ -393,7 +394,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             builder.AppendLine("};");
 
             var tree = CSharpSyntaxTree.ParseText(builder.ToString());
-            // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
+            // Do not descend into InitializerExpressionSyntax since that will populate
+            // SeparatedWithManyChildren._children.
             var node = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InitializerExpressionSyntax>()
@@ -442,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             static InitializerExpressionSyntax parseAndGetInitializer(string source)
             {
                 var tree = CSharpSyntaxTree.ParseText(source);
-                // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
+                // Do not descend into InitializerExpressionSyntax since that will populate
+                // SeparatedWithManyChildren._children.
                 return tree.GetRoot()
                     .DescendantNodes()
                     .OfType<InitializerExpressionSyntax>()

@@ -65,7 +65,8 @@ namespace DbLinq.MySql
             return procedure;
         }
 
-        // We use mysql.PROC instead of information_schema.ROUTINES, because it saves us parsing of parameters.
+        // We use mysql.PROC instead of information_schema.ROUTINES, because it saves us parsing of
+        // parameters.
         // Note: higher permissions are required to access mysql.PROC.
         public List<DataStoredProcedure> ReadProcedures(IDbConnection conn, string db)
         {

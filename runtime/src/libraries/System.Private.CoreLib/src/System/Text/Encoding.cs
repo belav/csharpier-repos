@@ -138,8 +138,10 @@ namespace System.Text
             this.SetDefaultFallbacks();
         }
 
-        // This constructor is needed to allow any sub-classing implementation to provide encoder/decoder fallback objects
-        // because the encoding object is always created as read-only object and don't allow setting encoder/decoder fallback
+        // This constructor is needed to allow any sub-classing implementation to provide encoder/decoder
+        // fallback objects
+        // because the encoding object is always created as read-only object and don't allow setting
+        // encoder/decoder fallback
         // after the creation is done.
         protected Encoding(
             int codePage,
@@ -791,11 +793,14 @@ namespace System.Text
             }
         }
 
-        /// <summary>Encodes into a span of bytes a set of characters from the specified read-only span if the destination is large enough.</summary>
+        /// <summary>Encodes into a span of bytes a set of characters from the specified read-only span if
+        // the destination is large enough.</summary>
         /// <param name="chars">The span containing the set of characters to encode.</param>
         /// <param name="bytes">The byte span to hold the encoded bytes.</param>
-        /// <param name="bytesWritten">Upon successful completion of the operation, the number of bytes encoded into <paramref name="bytes"/>.</param>
-        /// <returns><see langword="true"/> if all of the characters were encoded into the destination; <see langword="false"/> if the destination was too small to contain all the encoded bytes.</returns>
+        /// <param name="bytesWritten">Upon successful completion of the operation, the number of bytes
+        // encoded into <paramref name="bytes"/>.</param>
+        /// <returns><see langword="true"/> if all of the characters were encoded into the destination; <see
+        // langword="false"/> if the destination was too small to contain all the encoded bytes.</returns>
         public virtual bool TryGetBytes(
             ReadOnlySpan<char> chars,
             Span<byte> bytes,
@@ -951,11 +956,14 @@ namespace System.Text
             }
         }
 
-        /// <summary>Decodes into a span of chars a set of bytes from the specified read-only span if the destination is large enough.</summary>
+        /// <summary>Decodes into a span of chars a set of bytes from the specified read-only span if the
+        // destination is large enough.</summary>
         /// <param name="bytes">A read-only span containing the sequence of bytes to decode.</param>
         /// <param name="chars">The character span receiving the decoded bytes.</param>
-        /// <param name="charsWritten">Upon successful completion of the operation, the number of chars decoded into <paramref name="chars"/>.</param>
-        /// <returns><see langword="true"/> if all of the characters were decoded into the destination; <see langword="false"/> if the destination was too small to contain all the decoded chars.</returns>
+        /// <param name="charsWritten">Upon successful completion of the operation, the number of chars
+        // decoded into <paramref name="chars"/>.</param>
+        /// <returns><see langword="true"/> if all of the characters were decoded into the destination; <see
+        // langword="false"/> if the destination was too small to contain all the decoded chars.</returns>
         public virtual bool TryGetChars(
             ReadOnlySpan<byte> bytes,
             Span<char> chars,
@@ -1135,22 +1143,30 @@ namespace System.Text
             _codePage + this.EncoderFallback.GetHashCode() + this.DecoderFallback.GetHashCode();
 
         /// <summary>
-        /// Creates a <see cref="Stream"/> which serves to transcode data between an inner <see cref="Encoding"/>
+        /// Creates a <see cref="Stream"/> which serves to transcode data between an inner <see
+        // cref="Encoding"/>
         /// and an outer <see cref="Encoding"/>, similar to <see cref="Convert"/>.
         /// </summary>
         /// <param name="innerStream">The <see cref="Stream"/> to wrap.</param>
-        /// <param name="innerStreamEncoding">The <see cref="Encoding"/> associated with <paramref name="innerStream"/>.</param>
-        /// <param name="outerStreamEncoding">The <see cref="Encoding"/> associated with the <see cref="Stream"/> returned
+        /// <param name="innerStreamEncoding">The <see cref="Encoding"/> associated with <paramref
+        // name="innerStream"/>.</param>
+        /// <param name="outerStreamEncoding">The <see cref="Encoding"/> associated with the <see
+        // cref="Stream"/> returned
         /// by this method.</param>
-        /// <param name="leaveOpen"><see langword="true"/> if disposing the <see cref="Stream"/> returned by this method
+        /// <param name="leaveOpen"><see langword="true"/> if disposing the <see cref="Stream"/> returned by
+        // this method
         /// should <em>not</em> dispose <paramref name="innerStream"/>.</param>
         /// <returns>A <see cref="Stream"/> which transcodes the contents of <paramref name="innerStream"/>
         /// as <paramref name="outerStreamEncoding"/>.</returns>
         /// <remarks>
-        /// The returned <see cref="Stream"/>'s <see cref="Stream.CanRead"/> and <see cref="Stream.CanWrite"/> properties
-        /// will reflect whether <paramref name="innerStream"/> is readable or writable. If <paramref name="innerStream"/>
-        /// is full-duplex, the returned <see cref="Stream"/> will be as well. However, the returned <see cref="Stream"/>
-        /// is not seekable, even if <paramref name="innerStream"/>'s <see cref="Stream.CanSeek"/> property returns <see langword="true"/>.
+        /// The returned <see cref="Stream"/>'s <see cref="Stream.CanRead"/> and <see
+        // cref="Stream.CanWrite"/> properties
+        /// will reflect whether <paramref name="innerStream"/> is readable or writable. If <paramref
+        // name="innerStream"/>
+        /// is full-duplex, the returned <see cref="Stream"/> will be as well. However, the returned <see
+        // cref="Stream"/>
+        /// is not seekable, even if <paramref name="innerStream"/>'s <see cref="Stream.CanSeek"/> property
+        // returns <see langword="true"/>.
         /// </remarks>
         public static Stream CreateTranscodingStream(
             Stream innerStream,
@@ -1163,10 +1179,14 @@ namespace System.Text
             ArgumentNullException.ThrowIfNull(innerStreamEncoding);
             ArgumentNullException.ThrowIfNull(outerStreamEncoding);
 
-            // We can't entirely optimize away the case where innerStreamEncoding == outerStreamEncoding. For example,
-            // the Encoding might perform a lossy conversion when it sees invalid data, so we still need to call it
-            // to perform basic validation. It's also possible that somebody subclassed one of the built-in types
-            // like ASCIIEncoding or UTF8Encoding and is running some non-standard logic. If this becomes a bottleneck
+            // We can't entirely optimize away the case where innerStreamEncoding == outerStreamEncoding. For
+            // example,
+            // the Encoding might perform a lossy conversion when it sees invalid data, so we still need to call
+            // it
+            // to perform basic validation. It's also possible that somebody subclassed one of the built-in
+            // types
+            // like ASCIIEncoding or UTF8Encoding and is running some non-standard logic. If this becomes a
+            // bottleneck
             // we can consider targeted optimizations in a future release.
 
             return new TranscodingStream(

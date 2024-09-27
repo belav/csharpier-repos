@@ -619,7 +619,8 @@ namespace System.Data.Odbc
         //      internal const Int32  SQL_IGNORE         = -6;
 
         // column ordinals for SQLProcedureColumns result set
-        // this column ordinals are not defined in any c/c++ header but in the ODBC Programmer's Reference under SQLProcedureColumns
+        // this column ordinals are not defined in any c/c++ header but in the ODBC Programmer's Reference
+        // under SQLProcedureColumns
         //
         internal const int COLUMN_NAME = 4;
         internal const int COLUMN_TYPE = 5;
@@ -821,8 +822,13 @@ namespace System.Data.Odbc
 
     internal sealed class TypeMap
     { // MDAC 68988
-        //      private TypeMap                                           (OdbcType odbcType,         DbType dbType,                Type type,        ODBC32.SQL_TYPE sql_type,       ODBC32.SQL_C sql_c,          ODBC32.SQL_C param_sql_c,   int bsize, int csize, bool signType)
-        //      ---------------                                            ------------------         --------------                ----------        -------------------------       -------------------          -------------------------   -----------------------
+        //      private TypeMap                                           (OdbcType odbcType,         DbType
+        // dbType,                Type type,        ODBC32.SQL_TYPE sql_type,       ODBC32.SQL_C sql_c,
+        // ODBC32.SQL_C param_sql_c,   int bsize, int csize, bool signType)
+        //      ---------------                                            ------------------
+        // --------------                ----------        -------------------------
+        // -------------------
+        // -------------------------   -----------------------
         private static readonly TypeMap s_bigInt = new TypeMap(
             OdbcType.BigInt,
             DbType.Int64,
@@ -912,7 +918,9 @@ namespace System.Data.Odbc
             false
         );
 
-        //        private static  readonly TypeMap _Currency   = new TypeMap(OdbcType.Decimal,          DbType.Currency,              typeof(Decimal),  ODBC32.SQL_TYPE.DECIMAL,        ODBC32.SQL_C.NUMERIC,        ODBC32.SQL_C.NUMERIC,        19, ADP.DecimalMaxPrecision28, false);
+        //        private static  readonly TypeMap _Currency   = new TypeMap(OdbcType.Decimal,
+        // DbType.Currency,              typeof(Decimal),  ODBC32.SQL_TYPE.DECIMAL,
+        // ODBC32.SQL_C.NUMERIC,        ODBC32.SQL_C.NUMERIC,        19, ADP.DecimalMaxPrecision28, false);
         private static readonly TypeMap s_double = new TypeMap(
             OdbcType.Double,
             DbType.Double,
@@ -1272,7 +1280,8 @@ namespace System.Data.Odbc
                 case TypeCode.Boolean:
                     return s_bit;
 
-                // devnote: Char is actually not supported. Our _Char type is actually a fixed length string, not a single character
+                // devnote: Char is actually not supported. Our _Char type is actually a fixed length string, not a
+                // single character
                 //            case TypeCode.Char:      return _Char;
                 case TypeCode.SByte:
                     return s_smallInt;

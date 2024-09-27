@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System.Text.Json
 {
     /// <summary>
-    /// Defines a thread-local cache for JsonSerializer to store reusable Utf8JsonWriter/IBufferWriter instances.
+    /// Defines a thread-local cache for JsonSerializer to store reusable Utf8JsonWriter/IBufferWriter
+    // instances.
     /// </summary>
     internal static class Utf8JsonWriterCache
     {

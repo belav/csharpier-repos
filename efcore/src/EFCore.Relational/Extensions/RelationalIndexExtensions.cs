@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Index extension methods for relational database metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-indexes">Indexes</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-indexes">Indexes</see> for more information and
+// examples.
 /// </remarks>
 public static class RelationalIndexExtensions
 {
@@ -91,7 +92,8 @@ public static class RelationalIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="name">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetDatabaseName(
         this IConventionIndex index,
@@ -111,7 +113,8 @@ public static class RelationalIndexExtensions
     ///     Gets the <see cref="ConfigurationSource" /> for the name of the index in the database.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the name of the index in the database.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the name of the index in the
+    // database.</returns>
     public static ConfigurationSource? GetDatabaseNameConfigurationSource(
         this IConventionIndex index
     ) => index.FindAnnotation(RelationalAnnotationNames.Name)?.GetConfigurationSource();
@@ -158,7 +161,8 @@ public static class RelationalIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="value">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static string? SetFilter(
         this IConventionIndex index,
@@ -194,10 +198,12 @@ public static class RelationalIndexExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IIndex" /> that is mapped to the same index in a shared table-like object.
+    ///         Finds the first <see cref="IIndex" /> that is mapped to the same index in a shared
+    // table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -249,10 +255,12 @@ public static class RelationalIndexExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IMutableIndex" /> that is mapped to the same index in a shared table-like object.
+    ///         Finds the first <see cref="IMutableIndex" /> that is mapped to the same index in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -266,10 +274,12 @@ public static class RelationalIndexExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionIndex" /> that is mapped to the same index in a shared table-like object.
+    ///         Finds the first <see cref="IConventionIndex" /> that is mapped to the same index in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -283,10 +293,12 @@ public static class RelationalIndexExtensions
 
     /// <summary>
     ///     <para>
-    ///         Finds the first <see cref="IConventionIndex" /> that is mapped to the same index in a shared table-like object.
+    ///         Finds the first <see cref="IConventionIndex" /> that is mapped to the same index in a
+    // shared table-like object.
     ///     </para>
     ///     <para>
-    ///         This method is typically used by database providers (and other extensions). It is generally
+    ///         This method is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>

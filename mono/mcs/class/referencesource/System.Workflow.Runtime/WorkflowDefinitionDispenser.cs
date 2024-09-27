@@ -159,8 +159,10 @@ namespace System.Workflow.Runtime
             return root;
         }
 
-        // This function will create a new root activity definition tree by deserializing the xoml and the rules file.
-        // The last parameter createNew should be true when the caller is asking for a new definition for performing
+        // This function will create a new root activity definition tree by deserializing the xoml and the
+        // rules file.
+        // The last parameter createNew should be true when the caller is asking for a new definition for
+        // performing
         // dynamic updates instead of a cached definition.
         internal Activity GetRootActivity(
             string xomlText,

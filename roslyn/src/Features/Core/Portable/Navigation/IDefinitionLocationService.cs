@@ -14,17 +14,23 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Navigation;
 
 /// <summary>
-/// Service used by "go to definition" and "ctrl-click on symbol" to find the symbol definition location and navigate to
-/// it. Specifically, services that do not intend to show any interesting UI for the symbol definition, they just intend
-/// to navigate to it.  If richer information is desired (like determining what to display for the symbol name), then
+/// Service used by "go to definition" and "ctrl-click on symbol" to find the symbol definition
+// location and navigate to
+/// it. Specifically, services that do not intend to show any interesting UI for the symbol
+// definition, they just intend
+/// to navigate to it.  If richer information is desired (like determining what to display for the
+// symbol name), then
 /// <see cref="INavigableItemsService"/> should be used instead.
 /// </summary>
 internal interface IDefinitionLocationService : ILanguageService
 {
     /// <summary>
-    /// If the supplied <paramref name="position"/> is on a code construct with a navigable location, then this
-    /// returns that <see cref="INavigableLocation"/>.  The <see cref="TextSpan"/> returned in the span of the
-    /// symbol in the code that references that navigable location.  e.g. the full identifier token that the
+    /// If the supplied <paramref name="position"/> is on a code construct with a navigable location,
+    // then this
+    /// returns that <see cref="INavigableLocation"/>.  The <see cref="TextSpan"/> returned in the span
+    // of the
+    /// symbol in the code that references that navigable location.  e.g. the full identifier token that
+    // the
     /// position is within.
     /// </summary>
     Task<DefinitionLocation?> GetDefinitionLocationAsync(
@@ -37,11 +43,14 @@ internal interface IDefinitionLocationService : ILanguageService
 /// <summary>
 /// The result of a <see cref="IDefinitionLocationService.GetDefinitionLocationAsync"/> call.
 /// </summary>
-/// <param name="Location">The location where the symbol is actually defined at.  Can be used to then navigate to that
+/// <param name="Location">The location where the symbol is actually defined at.  Can be used to
+// then navigate to that
 /// symbol.
 /// </param>
-/// <param name="Span">The <see cref="TextSpan"/> returned in the span of the symbol in the code that references that
-/// navigable location.  e.g. the full identifier token that the position is within.  Can be used to highlight/underline
+/// <param name="Span">The <see cref="TextSpan"/> returned in the span of the symbol in the code
+// that references that
+/// navigable location.  e.g. the full identifier token that the position is within.  Can be used to
+// highlight/underline
 /// that text in the document in some fashion.</param>
 internal sealed record DefinitionLocation(INavigableLocation Location, DocumentSpan Span);
 
@@ -79,8 +88,10 @@ internal static class DefinitionLocationServiceHelpers
 
         DocumentSpan GetDocumentSpan()
         {
-            // To determine the span to underline, just use a simple heuristic of expanding out to the surrounding
-            // letters and numbers.  F#/TS can reimplement this in the future to be more accurate to their language.
+            // To determine the span to underline, just use a simple heuristic of expanding out to the
+            // surrounding
+            // letters and numbers.  F#/TS can reimplement this in the future to be more accurate to their
+            // language.
 
             var startPosition = position;
             var endPosition = position + 1;

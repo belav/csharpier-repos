@@ -15,8 +15,8 @@ internal static partial class Interop
         )]
         internal static partial uint SetSecurityInfoByHandle(
             SafeHandle handle,
-            /*DWORD*/uint objectType,
-            /*DWORD*/uint securityInformation,
+/*DWORD*/uint objectType,
+/*DWORD*/uint securityInformation,
             byte[]? owner,
             byte[]? group,
             byte[]? dacl,

@@ -565,7 +565,8 @@ namespace System.Net.Tests
                 response.Close();
             }
 
-            // The Transfer-Encoding: chunked header should be added to the list of headers if SendChunked == true.
+            // The Transfer-Encoding: chunked header should be added to the list of headers if SendChunked ==
+            // true.
             Assert.Equal(
                 sendChunked ? "chunked" : null,
                 response.Headers[HttpResponseHeader.TransferEncoding]
@@ -760,7 +761,8 @@ namespace System.Net.Tests
                 response.Close();
             }
 
-            // The "Content-Length: contentLength64" header should be added to the list of headers if there is a Content-Length specified.
+            // The "Content-Length: contentLength64" header should be added to the list of headers if there is a
+            // Content-Length specified.
             Assert.Equal(
                 contentLength64.ToString(),
                 response.Headers[HttpResponseHeader.ContentLength]

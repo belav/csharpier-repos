@@ -6,7 +6,8 @@ using System;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// Indicates that the parameter should be bound using the keyed service registered with the specified key.
+    /// Indicates that the parameter should be bound using the keyed service registered with the
+    // specified key.
     /// </summary>
     [AttributeUsage(AttributeTargets.Parameter)]
     public class FromKeyedServicesAttribute : Attribute

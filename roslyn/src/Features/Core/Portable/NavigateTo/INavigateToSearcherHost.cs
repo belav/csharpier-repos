@@ -13,8 +13,10 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 namespace Microsoft.CodeAnalysis.NavigateTo
 {
     /// <summary>
-    /// Host interface abstracting over all the external functionality the <see cref="NavigateToSearcher"/> needs. This
-    /// provide an easy entry point for swapping out functionality of the host, including for testing purposes.
+    /// Host interface abstracting over all the external functionality the <see
+    // cref="NavigateToSearcher"/> needs. This
+    /// provide an easy entry point for swapping out functionality of the host, including for testing
+    // purposes.
     /// </summary>
     internal interface INavigateToSearcherHost
     {

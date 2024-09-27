@@ -10,18 +10,23 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Query.InternalTrees;
-//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
+//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this
+// class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
 // to prevent from simple mistakes during development (e.g. method argument validation
-// in cases where it was you who created the variables or the variables had already been validated or
+// in cases where it was you who created the variables or the variables had already been validated
+// or
 // in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts
+// are
 // (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
 // the shipped product.
 // PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
-// about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
+// about how the tree was built etc. - in these cases we probably want to throw an exception (this
+// is
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not
+// correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -37,7 +42,8 @@ using md = System.Data.Metadata.Edm;
 //    * Self-joins: The join can be eliminated, and either of the table instances can be
 //                  used instead
 //    * Implied self-joins: Same as above
-//    * PK-FK joins: (More generally, UniqueKey-FK joins): Eliminate the join, and use just the FK table, if no
+//    * PK-FK joins: (More generally, UniqueKey-FK joins): Eliminate the join, and use just the FK
+// table, if no
 //       column of the PK table is used (other than the join condition)
 //    * PK-PK joins: Eliminate the right side table, if we have a left-outer join
 //
@@ -1262,15 +1268,18 @@ namespace System.Data.Query.PlanCompiler
         /// and the child multiplicity is One. However, this scenario cannot be specified in the ssdl,
         /// thus this case has not be implemented, and
         ///
-        /// 2. All the rows from the right table B are preserved (i.e. not filtered out) at the level of the join.
-        /// This means that if B is participating in any joins prior to being joined with A, these have to be
+        /// 2. All the rows from the right table B are preserved (i.e. not filtered out) at the level of the
+        // join.
+        /// This means that if B is participating in any joins prior to being joined with A, these have to
+        // be
         /// left outer joins and B has to be a driver (on the left spine).
         ///
         /// This second condition does not apply for SQL CE becase it has optimizations that help execute
         /// queries faster when at least one OUTER JOIN statement is still present in the SQL query. If we
         /// convert all OUTER JOIN statements into INNER JOINS then these optimizations don't kick in. In
         /// order to maintain compatibility to .NET 4.0 we had to create a special case for SQL CE.
-        /// See DevDiv bug #462067 for more details.  Also see bug DevDev2 bug#488375 for the UseFx40CompatMode check.
+        /// See DevDiv bug #462067 for more details.  Also see bug DevDev2 bug#488375 for the
+        // UseFx40CompatMode check.
         /// </summary>
         private void TryTurnLeftOuterJoinsIntoInnerJoins()
         {
@@ -1416,8 +1425,10 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// 1. There is a foreign key constraint based on which such transformation is possible
         ///
-        /// 2. All the rows from the right table B are preserved (i.e. not filtered out) at the level of the join.
-        /// This means that if B is participating in any joins prior to being joined with A, these have to be
+        /// 2. All the rows from the right table B are preserved (i.e. not filtered out) at the level of the
+        // join.
+        /// This means that if B is participating in any joins prior to being joined with A, these have to
+        // be
         /// left outer joins and B has to be a driver (on the left spine).
         /// </summary>
         /// <param name="rightNode"></param>
@@ -1557,11 +1568,14 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Can the right table of the given tableJoinEdge be eliminated and replaced by the right table of the replacingTableJoinEdge
+        /// Can the right table of the given tableJoinEdge be eliminated and replaced by the right table of
+        // the replacingTableJoinEdge
         /// based on both tables participation in other joins.
         /// It can be if:
-        ///     - The table coming from tableJoinEdge does not participate in any other join on the way up to the least common ancestor
-        ///     - The table coming from replacingTableJoinEdge does not get filtered on the way up to the least common ancestor
+        ///     - The table coming from tableJoinEdge does not participate in any other join on the way up
+        // to the least common ancestor
+        ///     - The table coming from replacingTableJoinEdge does not get filtered on the way up to the
+        // least common ancestor
         /// </summary>
         /// <param name="tableJoinEdge"></param>
         /// <param name="replacingTableJoinEdge"></param>
@@ -1585,10 +1599,12 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Can the right table of the joinEdge be filtered by joins on the the way up the the given leastCommonAncestor.
+        /// Can the right table of the joinEdge be filtered by joins on the the way up the the given
+        // leastCommonAncestor.
         /// It can, if
         ///     - dissallowAnyJoin is specified, or
-        ///     - if it is on the right side of a left outer join or participates in any inner join, thus it is only
+        ///     - if it is on the right side of a left outer join or participates in any inner join, thus it
+        // is only
         ///     allowed to be on the left side of a left outer join
         /// </summary>
         /// <param name="joinEdge"></param>
@@ -2421,9 +2437,11 @@ namespace System.Data.Query.PlanCompiler
         /// From C LOJ P ON (p1 = c1 and p2 = c2)
         /// WHERE �
         ///
-        /// If only the keys are used from P, we should but should be carefull about composite keys with nullable foreign key columns.
+        /// If only the keys are used from P, we should but should be carefull about composite keys with
+        // nullable foreign key columns.
         /// If a composite foreign key has been defined on columns that allow nulls,
-        /// and at least one of the columns, upon the insert or update of a row, is set to null, then the foreign key constraint will be satisfied
+        /// and at least one of the columns, upon the insert or update of a row, is set to null, then the
+        // foreign key constraint will be satisfied
         /// on SqlServer.
         ///
         /// Thus we should do the elimination only if
@@ -2455,7 +2473,8 @@ namespace System.Data.Query.PlanCompiler
             //  1. Non composite, or
             //  2. All columns on the child side are non nullable
             // NOTE: Technically we could also allow the case when only one column on the child side is nullable
-            // and its corresponding column on the parent side is the only column referenced from the parent table.
+            // and its corresponding column on the parent side is the only column referenced from the parent
+            // table.
             if (
                 childColumnVars.Count > 1
                 && childColumnVars.Where(v => v.ColumnMetadata.IsNullable).Count() > 0
@@ -2720,25 +2739,30 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Rebuilds the predicate for a join node and caculates the minimum location id at which it can be specified.
+        /// Rebuilds the predicate for a join node and caculates the minimum location id at which it can be
+        // specified.
         /// The predicate is an AND of the equijoin conditions and the "otherPredicate".
         ///
         /// We first remap all columns in the equijoin predicates - if a column pair
         /// resolves to the same column, then we skip that pair.
         ///
         /// The minimum location id at which a predicate can be specified is the minimum location id that is
-        /// still at or above the minimum location id of all participating vars.  By default, it is the location id
+        /// still at or above the minimum location id of all participating vars.  By default, it is the
+        // location id
         /// of the input join node. However, because a table producing a participating var may be moved or
         /// replaced by another table, the rebuilt predicate may need to be specified at higher location id.
         /// </summary>
         /// <param name="joinNode">the current join node</param>
-        /// <param name="minLocationId">the minimum location id (AugumentedNode.Id) at which this predicate can be specified</param>
+        /// <param name="minLocationId">the minimum location id (AugumentedNode.Id) at which this predicate
+        // can be specified</param>
         /// <returns>the rebuilt predicate</returns>
         private Node RebuildPredicate(AugmentedJoinNode joinNode, out int minLocationId)
         {
             //
-            // It is safe to initilaze the output location id to the location id of the joinNode. The nodes at lower
-            // location ids have already been processed, thus even if the least common ancestor of all participating
+            // It is safe to initilaze the output location id to the location id of the joinNode. The nodes at
+            // lower
+            // location ids have already been processed, thus even if the least common ancestor of all
+            // participating
             // vars is lower than the location id of the joinNode, the rebuilt predicate would not be propagated
             // to nodes at lower location ids.
             //
@@ -2861,7 +2885,8 @@ namespace System.Data.Query.PlanCompiler
         /// invoke this function recursively on the left and the right inputs.
         /// </summary>
         /// <param name="joinNode">the annotated join node tree</param>
-        /// <param name="predicates">A dictionary of output predicates that should be included in ancestor joins
+        /// <param name="predicates">A dictionary of output predicates that should be included in ancestor
+        // joins
         /// along with the minimum location id at which they can be specified</param>
         /// <returns>rebuilt tree</returns>
         private Node RebuildNodeTree(
@@ -3053,17 +3078,22 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Helper method for RebuildNodeTree.
         /// Given predicate nodes and the minimum location ids at which they can be specified, it creates:
-        /// 1. A single predicate AND-ing all input predicates with a minimum location id that is less or equal to the given targetNodeId.
+        /// 1. A single predicate AND-ing all input predicates with a minimum location id that is less or
+        // equal to the given targetNodeId.
         /// 2. A dictionary of all other input predicates and their target minimum location ids.
         /// </summary>
         /// <param name="targetNodeId">The location id of the resulting predicate </param>
         /// <param name="localPredicateNode">A predicate</param>
         /// <param name="localPredicateMinLocationId">The location id for the localPredicateNode</param>
-        /// <param name="leftPredicates">A dictionary of predicates and the minimum location id at which they can be specified</param>
-        /// <param name="rightPredicates">A dictionary of predicates and the minimum location id at which they can be specified</param>
-        /// <param name="outPredicates">An output dictionary of predicates and the minimum location id at which they can be specified
+        /// <param name="leftPredicates">A dictionary of predicates and the minimum location id at which
+        // they can be specified</param>
+        /// <param name="rightPredicates">A dictionary of predicates and the minimum location id at which
+        // they can be specified</param>
+        /// <param name="outPredicates">An output dictionary of predicates and the minimum location id at
+        // which they can be specified
         /// that includes all input predicates with minimum location id greater then targetNodeId</param>
-        /// <returns>A single predicate "AND"-ing all input predicates with a minimum location id that is less or equal to the tiven targetNodeId.</returns>
+        /// <returns>A single predicate "AND"-ing all input predicates with a minimum location id that is
+        // less or equal to the tiven targetNodeId.</returns>
         private Node CombinePredicateNodes(
             int targetNodeId,
             Node localPredicateNode,
@@ -3120,8 +3150,10 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Helper method for <see cref="CombinePredicateNodes"/>
-        /// If the predicateMinimuLocationId is less or equal to the target location id of the current result, it is AND-ed with the
-        /// current result, otherwise it is included in the list of predicates that need to be propagated up (outPredicates)
+        /// If the predicateMinimuLocationId is less or equal to the target location id of the current
+        // result, it is AND-ed with the
+        /// current result, otherwise it is included in the list of predicates that need to be propagated up
+        // (outPredicates)
         /// </summary>
         /// <param name="targetNodeId"></param>
         /// <param name="predicateNode"></param>
@@ -3222,7 +3254,8 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Helper method for <see cref="GetLeastCommonAncestor(int, int)"/>
-        /// Given a root node pick its immediate child to which the node identifed with the given nodeId bellongs.
+        /// Given a root node pick its immediate child to which the node identifed with the given nodeId
+        // bellongs.
         /// </summary>
         /// <param name="nodeId"></param>
         /// <param name="root"></param>

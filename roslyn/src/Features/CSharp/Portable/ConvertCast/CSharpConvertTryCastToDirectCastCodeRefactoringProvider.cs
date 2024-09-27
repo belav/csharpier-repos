@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
             // #0 exp #1 as #2 Type #3
             // #0 #2 (Type)exp #1 #3
             // Some trivia in the middle (#1 and #2) is moved to the front or behind  the expression
-            // #1 and #2 change their position in the expression (#2 goes in front to stay near the type and #1 to the end to stay near the expression)
+            // #1 and #2 change their position in the expression (#2 goes in front to stay near the type and #1
+            // to the end to stay near the expression)
             var openParen = Token(SyntaxKind.OpenParenToken);
             var closeParen = Token(SyntaxKind.CloseParenToken);
             var newTrailingTrivia = asExpression
@@ -74,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertCast
                 .AddRange(asExpression.OperatorToken.TrailingTrivia.SkipInitialWhitespace());
             typeNode = typeNode.WithoutTrailingTrivia();
 
-            // Make sure we make reference type nullable when converting expressions like `null as string` -> `(string?)null`
+            // Make sure we make reference type nullable when converting expressions like `null as string` ->
+            // `(string?)null`
             if (
                 expression.IsKind(SyntaxKind.NullLiteralExpression)
                 && nullableContext.HasFlag(NullableContext.AnnotationsEnabled)

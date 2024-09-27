@@ -32,7 +32,8 @@ public class PartialTagHelper : TagHelper
     /// <summary>
     /// Creates a new <see cref="PartialTagHelper"/>.
     /// </summary>
-    /// <param name="viewEngine">The <see cref="ICompositeViewEngine"/> used to locate the partial view.</param>
+    /// <param name="viewEngine">The <see cref="ICompositeViewEngine"/> used to locate the partial
+    // view.</param>
     /// <param name="viewBufferScope">The <see cref="IViewBufferScope"/>.</param>
     public PartialTagHelper(ICompositeViewEngine viewEngine, IViewBufferScope viewBufferScope)
     {
@@ -47,7 +48,8 @@ public class PartialTagHelper : TagHelper
     public string Name { get; set; }
 
     /// <summary>
-    /// An expression to be evaluated against the current model. Cannot be used together with <see cref="Model"/>.
+    /// An expression to be evaluated against the current model. Cannot be used together with <see
+    // cref="Model"/>.
     /// </summary>
     [HtmlAttributeName(ForAttributeName)]
     public ModelExpression For
@@ -160,7 +162,8 @@ public class PartialTagHelper : TagHelper
         // 1. Disallow specifying values for both Model and For
         // 2. If a Model was assigned, use it even if it's null.
         // 3. For cannot have a null value. Use it if it was assigned to.
-        // 4. Fall back to using the Model property on ViewContext.ViewData if none of the above conditions are met.
+        // 4. Fall back to using the Model property on ViewContext.ViewData if none of the above conditions
+        // are met.
 
         if (_hasFor && _hasModel)
         {

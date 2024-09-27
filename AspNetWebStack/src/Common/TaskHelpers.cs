@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace System.Threading.Tasks
 {
@@ -25,7 +26,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Returns a canceled Task of the given type. The task is completed, IsCanceled = True, IsFaulted = False.
+        /// Returns a canceled Task of the given type. The task is completed, IsCanceled = True, IsFaulted =
+        // False.
         /// </summary>
         internal static Task<TResult> Canceled<TResult>()
         {
@@ -49,7 +51,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Returns an error task of the given type. The task is Completed, IsCanceled = False, IsFaulted = True
+        /// Returns an error task of the given type. The task is Completed, IsCanceled = False, IsFaulted =
+        // True
         /// </summary>
         /// <typeparam name="TResult"></typeparam>
         internal static Task<TResult> FromError<TResult>(Exception exception)

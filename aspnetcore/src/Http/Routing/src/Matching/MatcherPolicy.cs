@@ -34,13 +34,17 @@ public abstract class MatcherPolicy
     /// <returns><c>true</c> if a dynamic endpoint is found; otherwise returns <c>false</c>.</returns>
     /// <remarks>
     /// <para>
-    /// The presence of <see cref="IDynamicEndpointMetadata"/> signifies that an endpoint that may be replaced
+    /// The presence of <see cref="IDynamicEndpointMetadata"/> signifies that an endpoint that may be
+    // replaced
     /// during processing by an <see cref="IEndpointSelectorPolicy"/>.
     /// </para>
     /// <para>
-    /// An implementation of <see cref="INodeBuilderPolicy"/> should also implement <see cref="IEndpointSelectorPolicy"/>
-    /// and use its <see cref="IEndpointSelectorPolicy"/> implementation when a node contains a dynamic endpoint.
-    /// <see cref="INodeBuilderPolicy"/> implementations rely on caching of data based on a static set of endpoints. This
+    /// An implementation of <see cref="INodeBuilderPolicy"/> should also implement <see
+    // cref="IEndpointSelectorPolicy"/>
+    /// and use its <see cref="IEndpointSelectorPolicy"/> implementation when a node contains a dynamic
+    // endpoint.
+    /// <see cref="INodeBuilderPolicy"/> implementations rely on caching of data based on a static set
+    // of endpoints. This
     /// is not possible when endpoints are replaced dynamically.
     /// </para>
     /// </remarks>

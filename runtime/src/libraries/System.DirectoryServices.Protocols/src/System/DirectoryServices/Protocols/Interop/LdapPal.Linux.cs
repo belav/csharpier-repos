@@ -447,12 +447,14 @@ namespace System.DirectoryServices.Protocols
 
 #pragma warning disable IDE0060
         /// <summary>
-        /// Function that will be sent to the Sasl interactive bind procedure which will resolve all Sasl challenges
+        /// Function that will be sent to the Sasl interactive bind procedure which will resolve all Sasl
+        // challenges
         /// that get passed in by using the defaults that we get passed in.
         /// </summary>
         /// <param name="ldapHandle">The connection handle to the LDAP server.</param>
         /// <param name="flags"></param>
-        /// <param name="defaultsPtr">Pointer to the defaults structure that was sent to sasl_interactive_bind</param>
+        /// <param name="defaultsPtr">Pointer to the defaults structure that was sent to
+        // sasl_interactive_bind</param>
         /// <param name="interactPtr">Pointer to the challenge we need to resolve</param>
         /// <returns></returns>
         internal static int SaslInteractionProcedure(

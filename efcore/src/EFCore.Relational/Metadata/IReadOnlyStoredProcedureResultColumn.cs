@@ -26,7 +26,8 @@ public interface IReadOnlyStoredProcedureResultColumn : IReadOnlyAnnotatable
     string? PropertyName { get; }
 
     /// <summary>
-    ///     Gets a value indicating whether the result column will hold the rows affected by the stored procedure.
+    ///     Gets a value indicating whether the result column will hold the rows affected by the stored
+    // procedure.
     /// </summary>
     bool ForRowsAffected { get; }
 

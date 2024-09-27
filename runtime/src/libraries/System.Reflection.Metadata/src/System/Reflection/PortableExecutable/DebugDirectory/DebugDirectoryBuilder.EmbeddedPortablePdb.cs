@@ -16,7 +16,8 @@ namespace System.Reflection.PortableExecutable
         /// <param name="debugMetadata">Portable PDB metadata builder.</param>
         /// <param name="portablePdbVersion">Version of Portable PDB format (e.g. 0x0100 for 1.0).</param>
         /// <exception cref="ArgumentNullException"><paramref name="debugMetadata"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="portablePdbVersion"/> is smaller than 0x0100.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="portablePdbVersion"/> is smaller
+        // than 0x0100.</exception>
         public void AddEmbeddedPortablePdbEntry(
             BlobBuilder debugMetadata,
             ushort portablePdbVersion

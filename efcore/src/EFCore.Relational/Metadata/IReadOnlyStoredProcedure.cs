@@ -33,7 +33,8 @@ public interface IReadOnlyStoredProcedure : IReadOnlyAnnotatable
     /// <summary>
     ///     Returns the store identifier of this stored procedure.
     /// </summary>
-    /// <returns>The store identifier. <see langword="null" /> if there is no corresponding store object.</returns>
+    /// <returns>The store identifier. <see langword="null" /> if there is no corresponding store
+    // object.</returns>
     StoreObjectIdentifier? GetStoreIdentifier()
     {
         var name = Name;
@@ -69,7 +70,8 @@ public interface IReadOnlyStoredProcedure : IReadOnlyAnnotatable
     ///     Returns the parameter corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The parameter corresponding to the given property if found; <see langword="true" /> otherwise.</returns>
+    /// <returns>The parameter corresponding to the given property if found; <see langword="true" />
+    // otherwise.</returns>
     IReadOnlyStoredProcedureParameter? FindParameter(string propertyName);
 
     /// <summary>
@@ -77,7 +79,8 @@ public interface IReadOnlyStoredProcedure : IReadOnlyAnnotatable
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
     /// <returns>
-    ///     The original value parameter corresponding to the given property if found; <see langword="true" /> otherwise.
+    ///     The original value parameter corresponding to the given property if found; <see
+    // langword="true" /> otherwise.
     /// </returns>
     IReadOnlyStoredProcedureParameter? FindOriginalValueParameter(string propertyName);
 
@@ -98,7 +101,8 @@ public interface IReadOnlyStoredProcedure : IReadOnlyAnnotatable
     ///     Returns the result column corresponding to the given property.
     /// </summary>
     /// <param name="propertyName">The name of a property.</param>
-    /// <returns>The result column corresponding to the given property if found; <see langword="true" /> otherwise.</returns>
+    /// <returns>The result column corresponding to the given property if found; <see langword="true" />
+    // otherwise.</returns>
     IReadOnlyStoredProcedureResultColumn? FindResultColumn(string propertyName);
 
     /// <summary>

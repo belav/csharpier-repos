@@ -62,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 ? XamlCapabilities.None
                 : XamlCapabilities.Current;
 
-            // Only turn on CodeAction support for client scenarios. Hosts will get non-LSP lightbulbs automatically.
+            // Only turn on CodeAction support for client scenarios. Hosts will get non-LSP lightbulbs
+            // automatically.
             capabilities.CodeActionProvider = new CodeActionOptions
             {
                 CodeActionKinds = [CodeActionKind.QuickFix, CodeActionKind.Refactor],
@@ -73,7 +74,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
         }
 
         /// <summary>
-        /// Failures are catastrophic as liveshare guests will not have language features without this server.
+        /// Failures are catastrophic as liveshare guests will not have language features without this
+        // server.
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 

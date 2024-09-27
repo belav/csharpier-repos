@@ -13,7 +13,8 @@ namespace System.Reflection.Internal
     /// Represents data read from a stream.
     /// </summary>
     /// <remarks>
-    /// Uses memory map to load data from streams backed by files that are bigger than <see cref="MemoryMapThreshold"/>.
+    /// Uses memory map to load data from streams backed by files that are bigger than <see
+    // cref="MemoryMapThreshold"/>.
     /// </remarks>
     internal sealed class StreamMemoryBlockProvider : MemoryBlockProvider
     {
@@ -133,7 +134,8 @@ namespace System.Reflection.Internal
             return _stream;
         }
 
-        /// <exception cref="IOException">IO error while mapping memory or not enough memory to create the mapping.</exception>
+        /// <exception cref="IOException">IO error while mapping memory or not enough memory to create the
+        // mapping.</exception>
         private unsafe bool TryCreateMemoryMappedFileBlock(
             long start,
             int size,

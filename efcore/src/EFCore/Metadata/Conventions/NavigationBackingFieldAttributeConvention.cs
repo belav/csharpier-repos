@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     based on the <see cref="BackingFieldAttribute" /> attribute.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class NavigationBackingFieldAttributeConvention
     : NavigationAttributeConventionBase<BackingFieldAttribute>,

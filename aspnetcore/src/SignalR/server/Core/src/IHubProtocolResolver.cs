@@ -16,10 +16,12 @@ public interface IHubProtocolResolver
     IReadOnlyList<IHubProtocol> AllProtocols { get; }
 
     /// <summary>
-    /// Gets the hub protocol with the specified name, if it is allowed by the specified list of supported protocols.
+    /// Gets the hub protocol with the specified name, if it is allowed by the specified list of
+    // supported protocols.
     /// </summary>
     /// <param name="protocolName">The protocol name.</param>
     /// <param name="supportedProtocols">A collection of supported protocols.</param>
-    /// <returns>A matching <see cref="IHubProtocol"/> or <c>null</c> if no matching protocol was found.</returns>
+    /// <returns>A matching <see cref="IHubProtocol"/> or <c>null</c> if no matching protocol was
+    // found.</returns>
     IHubProtocol? GetProtocol(string protocolName, IReadOnlyList<string>? supportedProtocols);
 }

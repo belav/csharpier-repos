@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public void Initialize()
         {
             // Force completion providers to resolve in initialize, because it means MEF parts will be loaded.
-            // We need to do this before GetCapabilities is called as that is on the UI thread, and loading MEF parts
+            // We need to do this before GetCapabilities is called as that is on the UI thread, and loading MEF
+            // parts
             // could cause assembly loads, which we want to do off the UI thread.
             foreach (var completionProvider in _completionProviders)
             {
@@ -111,8 +112,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             capabilities.HoverProvider = true;
 
-            // Using only range handling has shown to be more performant than using a combination of full/edits/range
-            // handling, especially for larger files. With range handling, we only need to compute tokens for whatever
+            // Using only range handling has shown to be more performant than using a combination of
+            // full/edits/range
+            // handling, especially for larger files. With range handling, we only need to compute tokens for
+            // whatever
             // is in view, while with full/edits handling we need to compute tokens for the entire file and then
             // potentially run a diff between the old and new tokens.
             capabilities.SemanticTokensOptions = new SemanticTokensOptions

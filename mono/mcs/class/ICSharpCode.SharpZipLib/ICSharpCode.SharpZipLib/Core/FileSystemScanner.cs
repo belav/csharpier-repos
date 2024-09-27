@@ -91,7 +91,8 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Initialize an instance of <see cref="DirectoryEventArgs"></see>.
         /// </summary>
         /// <param name="name">The name for this directory.</param>
-        /// <param name="hasMatchingFiles">Flag value indicating if any matching files are contained in this directory.</param>
+        /// <param name="hasMatchingFiles">Flag value indicating if any matching files are contained in this
+        // directory.</param>
         public DirectoryEventArgs(string name, bool hasMatchingFiles)
             : base(name)
         {
@@ -214,7 +215,8 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Initialise a new instance of <see cref="FileSystemScanner"></see>
         /// </summary>
         /// <param name="fileFilter">The file <see cref="NameFilter"></see>filter to apply.</param>
-        /// <param name="directoryFilter">The directory <see cref="NameFilter"></see>filter to apply.</param>
+        /// <param name="directoryFilter">The directory <see cref="NameFilter"></see>filter to
+        // apply.</param>
         public FileSystemScanner(string fileFilter, string directoryFilter)
         {
             this.fileFilter = new PathFilter(fileFilter);
@@ -234,7 +236,8 @@ namespace ICSharpCode.SharpZipLib.Core
         /// Initialise a new instance of <see cref="FileSystemScanner"></see>
         /// </summary>
         /// <param name="fileFilter">The file <see cref="IScanFilter"></see>filter to apply.</param>
-        /// <param name="directoryFilter">The directory <see cref="IScanFilter"></see>filter to apply.</param>
+        /// <param name="directoryFilter">The directory <see cref="IScanFilter"></see>filter to
+        // apply.</param>
         public FileSystemScanner(IScanFilter fileFilter, IScanFilter directoryFilter)
         {
             this.fileFilter = fileFilter;

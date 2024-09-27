@@ -19,7 +19,8 @@ namespace System.Web.UI.HtmlControls
     ///       The <see langword='HtmlTableRow'/>
     ///       class defines the properties, methods, and events for the HtmlTableRow control.
     ///       This class allows programmatic access on the server to individual HTML
-    ///       &lt;tr&gt; elements enclosed within an <see cref='System.Web.UI.HtmlControls.HtmlTable'/> control.
+    ///       &lt;tr&gt; elements enclosed within an <see cref='System.Web.UI.HtmlControls.HtmlTable'/>
+    // control.
     ///    </para>
     /// </devdoc>
     [ParseChildren(true, "Cells")]
@@ -51,9 +52,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["align"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Collection of child TableCells.
-         */
+/*
+* Collection of child TableCells.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -234,7 +235,8 @@ namespace System.Web.UI.HtmlControls
                 : base(owner) { }
 
             /// <devdoc>
-            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
+            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new
+            // control is added
             ///    to the end of the array.</para>
             /// </devdoc>
             public override void Add(Control child)
@@ -252,7 +254,8 @@ namespace System.Web.UI.HtmlControls
             }
 
             /// <devdoc>
-            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new control is added
+            /// <para>Adds the specified <see cref='System.Web.UI.Control'/> object to the collection. The new
+            // control is added
             ///    to the array at the specified index location.</para>
             /// </devdoc>
             public override void AddAt(int index, Control child)

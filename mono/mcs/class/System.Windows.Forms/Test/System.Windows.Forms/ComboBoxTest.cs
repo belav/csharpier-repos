@@ -439,7 +439,8 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(false, mycmbbox.DroppedDown, "#4");
             Assert.AreEqual(true, mycmbbox.IntegralHeight, "#5");
             Assert.AreEqual(0, mycmbbox.Items.Count, "#6");
-            //Assert.AreEqual (15, mycmbbox.ItemHeight, "#7"); 	// Note: Item height depends on the current font.
+            //Assert.AreEqual (15, mycmbbox.ItemHeight, "#7"); 	// Note: Item height depends on the current
+            // font.
             Assert.AreEqual(8, mycmbbox.MaxDropDownItems, "#8");
             Assert.AreEqual(0, mycmbbox.MaxLength, "#9");
             //Assert.AreEqual (20, mycmbbox.PreferredHeight, "#10");

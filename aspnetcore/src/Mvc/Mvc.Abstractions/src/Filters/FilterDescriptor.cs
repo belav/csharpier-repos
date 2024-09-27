@@ -9,16 +9,21 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// Descriptor for an <see cref="IFilterMetadata"/>.
 /// </summary>
 /// <remarks>
-/// <see cref="FilterDescriptor"/> describes an <see cref="IFilterMetadata"/> with an order and scope.
+/// <see cref="FilterDescriptor"/> describes an <see cref="IFilterMetadata"/> with an order and
+// scope.
 ///
-/// Order and scope control the execution order of filters. Filters with a higher value of Order execute
+/// Order and scope control the execution order of filters. Filters with a higher value of Order
+// execute
 /// later in the pipeline.
 ///
-/// When filters have the same Order, the Scope value is used to determine the order of execution. Filters
-/// with a higher value of Scope execute later in the pipeline. See <c>Microsoft.AspNetCore.Mvc.FilterScope</c>
+/// When filters have the same Order, the Scope value is used to determine the order of execution.
+// Filters
+/// with a higher value of Scope execute later in the pipeline. See
+// <c>Microsoft.AspNetCore.Mvc.FilterScope</c>
 /// for commonly used scopes.
 ///
-/// For <see cref="IExceptionFilter"/> implementations, the filter runs only after an exception has occurred,
+/// For <see cref="IExceptionFilter"/> implementations, the filter runs only after an exception has
+// occurred,
 /// and so the observed order of execution will be opposite that of other filters.
 /// </remarks>
 [DebuggerDisplay("Filter = {Filter.ToString(),nq}, Order = {Order}")]

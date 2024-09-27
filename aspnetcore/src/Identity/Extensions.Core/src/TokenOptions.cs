@@ -40,39 +40,48 @@ public class TokenOptions
     /// Gets or sets the token provider used to generate tokens used in account confirmation emails.
     /// </summary>
     /// <value>
-    /// The <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used in account confirmation emails.
+    /// The <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used in account
+    // confirmation emails.
     /// </value>
     public string EmailConfirmationTokenProvider { get; set; } = DefaultProvider;
 
     /// <summary>
-    /// Gets or sets the <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used in password reset emails.
+    /// Gets or sets the <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used
+    // in password reset emails.
     /// </summary>
     /// <value>
-    /// The <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used in password reset emails.
+    /// The <see cref="IUserTwoFactorTokenProvider{TUser}"/> used to generate tokens used in password
+    // reset emails.
     /// </value>
     public string PasswordResetTokenProvider { get; set; } = DefaultProvider;
 
     /// <summary>
-    /// Gets or sets the <see cref="ChangeEmailTokenProvider"/> used to generate tokens used in email change confirmation emails.
+    /// Gets or sets the <see cref="ChangeEmailTokenProvider"/> used to generate tokens used in email
+    // change confirmation emails.
     /// </summary>
     /// <value>
-    /// The <see cref="ChangeEmailTokenProvider"/> used to generate tokens used in email change confirmation emails.
+    /// The <see cref="ChangeEmailTokenProvider"/> used to generate tokens used in email change
+    // confirmation emails.
     /// </value>
     public string ChangeEmailTokenProvider { get; set; } = DefaultProvider;
 
     /// <summary>
-    /// Gets or sets the <see cref="ChangePhoneNumberTokenProvider"/> used to generate tokens used when changing phone numbers.
+    /// Gets or sets the <see cref="ChangePhoneNumberTokenProvider"/> used to generate tokens used when
+    // changing phone numbers.
     /// </summary>
     /// <value>
-    /// The <see cref="ChangePhoneNumberTokenProvider"/> used to generate tokens used when changing phone numbers.
+    /// The <see cref="ChangePhoneNumberTokenProvider"/> used to generate tokens used when changing
+    // phone numbers.
     /// </value>
     public string ChangePhoneNumberTokenProvider { get; set; } = DefaultPhoneProvider;
 
     /// <summary>
-    /// Gets or sets the <see cref="AuthenticatorTokenProvider"/> used to validate two factor sign ins with an authenticator.
+    /// Gets or sets the <see cref="AuthenticatorTokenProvider"/> used to validate two factor sign ins
+    // with an authenticator.
     /// </summary>
     /// <value>
-    /// The <see cref="AuthenticatorTokenProvider"/> used to validate two factor sign ins with an authenticator.
+    /// The <see cref="AuthenticatorTokenProvider"/> used to validate two factor sign ins with an
+    // authenticator.
     /// </value>
     public string AuthenticatorTokenProvider { get; set; } = DefaultAuthenticatorProvider;
 

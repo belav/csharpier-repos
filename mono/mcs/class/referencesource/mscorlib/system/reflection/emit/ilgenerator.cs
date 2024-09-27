@@ -269,7 +269,8 @@ namespace System.Reflection.Emit
         internal byte[] BakeByteArray()
         {
             // BakeByteArray is an internal function designed to be called by MethodBuilder to do
-            // all of the fixups and return a new byte array representing the byte stream with labels resolved, etc.
+            // all of the fixups and return a new byte array representing the byte stream with labels resolved,
+            // etc.
 
             int newSize;
             int updateAddr;
@@ -303,7 +304,8 @@ namespace System.Reflection.Emit
                     - (m_fixupData[i].m_fixupPos + m_fixupData[i].m_fixupInstSize);
 
                 //Handle single byte instructions
-                //Throw an exception if they're trying to store a jump in a single byte instruction that doesn't fit.
+                //Throw an exception if they're trying to store a jump in a single byte instruction that doesn't
+                // fit.
                 if (m_fixupData[i].m_fixupInstSize == 1)
                 {
                     //Verify that our one-byte arg will fit into a Signed Byte.
@@ -436,8 +438,10 @@ namespace System.Reflection.Emit
 
         private static void SortExceptions(__ExceptionInfo[] exceptions)
         {
-            // In order to call exceptions properly we have to sort them in ascending order by their end position.
-            // Just a cheap insertion sort.  We don't expect many exceptions (<10), where InsertionSort beats QuickSort.
+            // In order to call exceptions properly we have to sort them in ascending order by their end
+            // position.
+            // Just a cheap insertion sort.  We don't expect many exceptions (<10), where InsertionSort beats
+            // QuickSort.
             // If we have more exceptions than this in real life, we should consider moving to a QuickSort.
 
             int least;
@@ -1137,7 +1141,8 @@ namespace System.Reflection.Emit
 
         public virtual void BeginExceptFilterBlock()
         {
-            // Begins a eception filter block.  Emits a branch instruction to the end of the current exception block.
+            // Begins a eception filter block.  Emits a branch instruction to the end of the current exception
+            // block.
 
             if (m_currExcStackCount == 0)
                 throw new NotSupportedException(

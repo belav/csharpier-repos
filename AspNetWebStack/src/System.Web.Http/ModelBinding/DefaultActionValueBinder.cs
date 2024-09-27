@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,8 @@ namespace System.Web.Http.ModelBinding
     public class DefaultActionValueBinder : IActionValueBinder
     {
         /// <summary>
-        /// Implementation of <see cref="IActionValueBinder"/>, Primary entry point for binding parameters for an action.
+        /// Implementation of <see cref="IActionValueBinder"/>, Primary entry point for binding parameters
+        // for an action.
         /// </summary>
         public virtual HttpActionBinding GetBinding(HttpActionDescriptor actionDescriptor)
         {
@@ -76,7 +78,8 @@ namespace System.Web.Http.ModelBinding
         }
 
         // Determine how a single parameter will get bound.
-        // This is all sync. We don't need to actually read the body just to determine that we'll bind to the body.
+        // This is all sync. We don't need to actually read the body just to determine that we'll bind to
+        // the body.
         protected virtual HttpParameterBinding GetParameterBinding(
             HttpParameterDescriptor parameter
         )
@@ -105,11 +108,13 @@ namespace System.Web.Http.ModelBinding
             Type type = parameter.ParameterType;
             if (TypeHelper.CanConvertFromString(type))
             {
-                // For simple types, the default is to look in URI. Exactly as if the parameter had a [FromUri] attribute.
+                // For simple types, the default is to look in URI. Exactly as if the parameter had a [FromUri]
+                // attribute.
                 return parameter.BindWithAttribute(new FromUriAttribute());
             }
 
-            // Fallback. Must be a complex type. Default is to look in body. Exactly as if this type had a [FromBody] attribute.
+            // Fallback. Must be a complex type. Default is to look in body. Exactly as if this type had a
+            // [FromBody] attribute.
             attr = new FromBodyAttribute();
             return attr.GetBinding(parameter);
         }

@@ -1344,12 +1344,12 @@ namespace Microsoft.Win32
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool EvtClose(IntPtr handle);
 
-        /*
-        [DllImport(WEVTAPI, EntryPoint = "EvtClose", SetLastError = true)]
-        public static extern bool EvtClose(
-                            IntPtr eventHandle
-                                           );
-         */
+/*
+[DllImport(WEVTAPI, EntryPoint = "EvtClose", SetLastError = true)]
+public static extern bool EvtClose(
+IntPtr eventHandle
+);
+*/
 
         [DllImport(WEVTAPI, CharSet = CharSet.Auto, SetLastError = true)]
         [SecurityCritical]

@@ -15,7 +15,8 @@ namespace System.ComponentModel.DataAnnotations
         private readonly Type? _associatedMetadataType;
 
         /// <summary>
-        /// Initializes a new instance of the System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptionProvider
+        /// Initializes a new instance of the
+        // System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptionProvider
         /// class by using the specified type.
         /// </summary>
         /// <param name="type">The type for which the metadata provider is created.</param>
@@ -23,12 +24,14 @@ namespace System.ComponentModel.DataAnnotations
             : base(TypeDescriptor.GetProvider(type)) { }
 
         /// <summary>
-        /// Initializes a new instance of the System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptionProvider
+        /// Initializes a new instance of the
+        // System.ComponentModel.DataAnnotations.AssociatedMetadataTypeTypeDescriptionProvider
         /// class by using the specified metadata provider type and associated type.
         /// </summary>
         /// <param name="type">The type for which the metadata provider is created.</param>
         /// <param name="associatedMetadataType">The associated type that contains the metadata.</param>
-        /// <exception cref="System.ArgumentNullException">The value of associatedMetadataType is null.</exception>
+        /// <exception cref="System.ArgumentNullException">The value of associatedMetadataType is
+        // null.</exception>
         public AssociatedMetadataTypeTypeDescriptionProvider(
             Type type,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]

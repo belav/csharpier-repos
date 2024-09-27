@@ -1,6 +1,8 @@
 ﻿/*
- * Security review: We're calling into potentially untrusted code, as we don't check the identity of the target. But since we're neither passing sensitive information nor treating the return values as trusted, this is fine.
- */
+* Security review: We're calling into potentially untrusted code, as we don't check the identity of
+the target. But since we're neither passing sensitive information nor treating the return values as
+trusted, this is fine.
+*/
 
 namespace System.Web.UI
 {
@@ -12,7 +14,8 @@ namespace System.Web.UI
     internal sealed class BundleReflectionHelper
     {
         // Helper class for ScriptManager to call into Bundling
-        // Expectation is that this Bundling will expose an object at System.Web.Optimization.BundleResolver.Current
+        // Expectation is that this Bundling will expose an object at
+        // System.Web.Optimization.BundleResolver.Current
         // and this type will have the following public methods:
         //    bool IsBundleVirtualPath(string virtualPath);
         private delegate bool IsBundleVirtualPathDelegate(string virtualPath);
@@ -30,7 +33,8 @@ namespace System.Web.UI
         private delegate object BundleResolverCurrentDelegate();
         private static BundleResolverCurrentDelegate BundleResolverCurrentMethod { get; set; }
 
-        // Normal runtime code path, try to get the resolver from System.Web.Optimization.BundleResolver.Current and bind to its methods
+        // Normal runtime code path, try to get the resolver from
+        // System.Web.Optimization.BundleResolver.Current and bind to its methods
         public BundleReflectionHelper()
         {
             BundleResolver = CallBundleResolverCurrent();

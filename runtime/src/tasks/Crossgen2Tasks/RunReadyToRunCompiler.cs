@@ -184,7 +184,8 @@ namespace Microsoft.NET.Build.Tasks
                     return false;
                 }
 
-                // R2R image has to be created before emitting native symbols (crossgen needs this as an input argument)
+                // R2R image has to be created before emitting native symbols (crossgen needs this as an input
+                // argument)
                 if (string.IsNullOrEmpty(_outputPDBImage))
                 {
                     Log.LogError(Strings.MissingOutputPDBImagePath);
@@ -247,7 +248,8 @@ namespace Microsoft.NET.Build.Tasks
                     )
                 )
                 {
-                    // When generating PDBs, we must not add a reference to the IL version of the R2R image for which we're trying to generate a PDB
+                    // When generating PDBs, we must not add a reference to the IL version of the R2R image for which
+                    // we're trying to generate a PDB
                     if (
                         IsPdbCompilation
                         && string.Equals(
@@ -399,8 +401,10 @@ namespace Microsoft.NET.Build.Tasks
 
                 result.Append(GetAssemblyReferencesCommands());
 
-                // Note: do not add double quotes around the input assembly, even if the file path contains spaces. The command line
-                // parsing logic will append this string to the working directory if it's a relative path, so any double quotes will result in errors.
+                // Note: do not add double quotes around the input assembly, even if the file path contains spaces.
+                // The command line
+                // parsing logic will append this string to the working directory if it's a relative path, so any
+                // double quotes will result in errors.
                 foreach (var reference in ReadyToRunCompositeBuildInput)
                 {
                     result.AppendLine(reference.ItemSpec);
@@ -411,8 +415,10 @@ namespace Microsoft.NET.Build.Tasks
                 result.Append(GetAssemblyReferencesCommands());
                 result.AppendLine($"--out:\"{_outputR2RImage}\"");
 
-                // Note: do not add double quotes around the input assembly, even if the file path contains spaces. The command line
-                // parsing logic will append this string to the working directory if it's a relative path, so any double quotes will result in errors.
+                // Note: do not add double quotes around the input assembly, even if the file path contains spaces.
+                // The command line
+                // parsing logic will append this string to the working directory if it's a relative path, so any
+                // double quotes will result in errors.
                 result.AppendLine($"{_inputAssembly}");
             }
 
@@ -425,7 +431,8 @@ namespace Microsoft.NET.Build.Tasks
             string commandLineCommands
         )
         {
-            // Ensure output sub-directories exists - Crossgen does not create directories for output files. Any relative path used with the
+            // Ensure output sub-directories exists - Crossgen does not create directories for output files. Any
+            // relative path used with the
             // '/out' parameter has to have an existing directory.
             Directory.CreateDirectory(Path.GetDirectoryName(_outputR2RImage));
 

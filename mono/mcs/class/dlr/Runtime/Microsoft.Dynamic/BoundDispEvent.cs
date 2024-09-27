@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 using System;
 using Microsoft;
 #if !SILVERLIGHT // ComObject
@@ -55,7 +55,8 @@ namespace Microsoft.Scripting
         /// <param name="binder">The binder provided by the call site.</param>
         /// <param name="handler">The handler for the operation.</param>
         /// <param name="result">The result of the operation.</param>
-        /// <returns>true if the operation is complete, false if the call site should determine behavior.</returns>
+        /// <returns>true if the operation is complete, false if the call site should determine
+        // behavior.</returns>
         public override bool TryBinaryOperation(
             BinaryOperationBinder binder,
             object handler,

@@ -26,9 +26,9 @@ internal static unsafe partial class UnsafeNativeMethods
     private const string NCRYPT_LIB = "ncrypt.dll";
     private static SafeLibraryHandle? _lazyNCryptLibHandle;
 
-    /*
-     * BCRYPT.DLL
-     */
+/*
+* BCRYPT.DLL
+*/
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa375377(v=vs.85).aspx
 #if NET7_0_OR_GREATER
     [LibraryImport(BCRYPT_LIB)]
@@ -276,9 +276,9 @@ internal static unsafe partial class UnsafeNativeMethods
         uint dwFlags
     );
 
-    /*
-     * CRYPT32.DLL
-     */
+/*
+* CRYPT32.DLL
+*/
 
     [return: MarshalAs(UnmanagedType.Bool)]
     // http://msdn.microsoft.com/en-us/library/windows/desktop/aa380261(v=vs.85).aspx
@@ -349,9 +349,9 @@ internal static unsafe partial class UnsafeNativeMethods
 #endif
         SafeHandle pData, uint cbData, uint dwFlags);
 
-    /*
-     * NCRYPT.DLL
-     */
+/*
+* NCRYPT.DLL
+*/
 
     // http://msdn.microsoft.com/en-us/library/windows/desktop/hh706799(v=vs.85).aspx
 #if NETSTANDARD2_0
@@ -447,9 +447,9 @@ internal static unsafe partial class UnsafeNativeMethods
         out uint pcbData
     );
 
-    /*
-     * HELPER FUNCTIONS
-     */
+/*
+* HELPER FUNCTIONS
+*/
     private static SafeLibraryHandle GetLibHandle(
         string libraryName,
         ref SafeLibraryHandle? safeLibraryHandle
@@ -467,7 +467,8 @@ internal static unsafe partial class UnsafeNativeMethods
         return safeLibraryHandle;
     }
 
-    // We use methods instead of properties to access lazy handles in order to prevent debuggers from automatically attempting to load libraries on unsupported platforms.
+    // We use methods instead of properties to access lazy handles in order to prevent debuggers from
+    // automatically attempting to load libraries on unsupported platforms.
     private static SafeLibraryHandle GetBCryptLibHandle() =>
         GetLibHandle(BCRYPT_LIB, ref _lazyBCryptLibHandle);
 

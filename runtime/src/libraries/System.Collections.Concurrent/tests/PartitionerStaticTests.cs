@@ -56,8 +56,10 @@ namespace System.Collections.Concurrent.Tests
         #region Dispose tests. The dispose logic of PartitionerStatic
 
         // In the official dev unit test run, this test should be commented out
-        // - Each time we call GetDynamicPartitions method, we create an internal "reader enumerator" to read the
-        // source data, and we need to make sure that whenever the object returned by GetDynamicPartitions is disposed,
+        // - Each time we call GetDynamicPartitions method, we create an internal "reader enumerator" to
+        // read the
+        // source data, and we need to make sure that whenever the object returned by GetDynamicPartitions
+        // is disposed,
         // the "reader enumerator" is also disposed.
         [Fact]
         public static void TestDisposeException()
@@ -78,9 +80,11 @@ namespace System.Collections.Concurrent.Tests
 
         /// <summary>
         /// Race in Partitioner's dynamic partitioning Dispose logic
-        /// After the fix, the partitioner created through Partitioner.Create(IEnumerable) has the following behavior:
+        /// After the fix, the partitioner created through Partitioner.Create(IEnumerable) has the following
+        // behavior:
         ///     1. reference counting in static partitioning. All partitions need to be disposed explicitly
-        ///     2. no reference counting in dynamic partitioning. The partitioner need to be disposed explicitly
+        ///     2. no reference counting in dynamic partitioning. The partitioner need to be disposed
+        // explicitly
         /// </summary>
         /// <returns></returns>
         [Fact]
@@ -356,7 +360,8 @@ namespace System.Collections.Concurrent.Tests
         }
 
         //
-        // Try calling MoveNext on a Partitioner enumerator after that enumerator has already returned false.
+        // Try calling MoveNext on a Partitioner enumerator after that enumerator has already returned
+        // false.
         //
         [Fact]
         public static void TestExtraMoveNext()

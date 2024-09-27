@@ -114,7 +114,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Syntax
             new Name("GetOrCreateEventRegistrationTokenTable"),
             new Name("void"),
             new Name(""),
-            /* Above here corresponds with PredefinedName enum */
+/* Above here corresponds with PredefinedName enum */
             new Name("true"),
             new Name("false"),
             new Name("null"),

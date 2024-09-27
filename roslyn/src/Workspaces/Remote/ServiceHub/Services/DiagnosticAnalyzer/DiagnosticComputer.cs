@@ -26,16 +26,22 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
     internal class DiagnosticComputer
     {
         /// <summary>
-        /// Cache of <see cref="CompilationWithAnalyzers"/> and a map from analyzer IDs to <see cref="DiagnosticAnalyzer"/>s
+        /// Cache of <see cref="CompilationWithAnalyzers"/> and a map from analyzer IDs to <see
+        // cref="DiagnosticAnalyzer"/>s
         /// for all analyzers for the last project to be analyzed.
-        /// The <see cref="CompilationWithAnalyzers"/> instance is shared between all the following document analyses modes for the project:
+        /// The <see cref="CompilationWithAnalyzers"/> instance is shared between all the following document
+        // analyses modes for the project:
         ///  1. Span-based analysis for active document (lightbulb)
         ///  2. Background analysis for active and open documents.
         ///
-        /// NOTE: We do not re-use this cache for project analysis as it leads to significant memory increase in the OOP process.
-        /// Additionally, we only store the cache entry for the last project to be analyzed instead of maintaining a CWT keyed off
-        /// each project in the solution, as the CWT does not seem to drop entries until ForceGC happens, leading to significant memory
-        /// pressure when there are large number of open documents across different projects to be analyzed by background analysis.
+        /// NOTE: We do not re-use this cache for project analysis as it leads to significant memory
+        // increase in the OOP process.
+        /// Additionally, we only store the cache entry for the last project to be analyzed instead of
+        // maintaining a CWT keyed off
+        /// each project in the solution, as the CWT does not seem to drop entries until ForceGC happens,
+        // leading to significant memory
+        /// pressure when there are large number of open documents across different projects to be analyzed
+        // by background analysis.
         /// </summary>
         private static CompilationWithAnalyzersCacheEntry? s_compilationWithAnalyzersCache = null;
 
@@ -43,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
         /// Set of high priority diagnostic computation tasks which are currently executing.
         /// Any new high priority diagnostic request is added to this set before the core diagnostics
         /// compute call is performed, and removed from this list after the computation finishes.
-        /// Any new normal priority diagnostic request first waits for all the high priority tasks in this set
+        /// Any new normal priority diagnostic request first waits for all the high priority tasks in this
+        // set
         /// to complete, and moves ahead only after this list becomes empty.
         /// </summary>
         /// <remarks>
@@ -53,12 +60,17 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             ImmutableHashSet<Task>.Empty;
 
         /// <summary>
-        /// Set of cancellation token sources for normal priority diagnostic computation tasks which are currently executing.
-        /// For any new normal priority diagnostic request, a new cancellation token source is created and added to this set
-        /// before the core diagnostics compute call is performed, and removed from this set after the computation finishes.
-        /// Any new high priority diagnostic request first fires cancellation on all the cancellation token sources in this set
+        /// Set of cancellation token sources for normal priority diagnostic computation tasks which are
+        // currently executing.
+        /// For any new normal priority diagnostic request, a new cancellation token source is created and
+        // added to this set
+        /// before the core diagnostics compute call is performed, and removed from this set after the
+        // computation finishes.
+        /// Any new high priority diagnostic request first fires cancellation on all the cancellation token
+        // sources in this set
         /// to avoid resource contention between normal and high priority requests.
-        /// Canceled normal priority diagnostic requests are re-attempted from scratch after all the high priority requests complete.
+        /// Canceled normal priority diagnostic requests are re-attempted from scratch after all the high
+        // priority requests complete.
         /// </summary>
         /// <remarks>
         /// Read/write access to this field is guarded by <see cref="s_gate"/>.
@@ -152,8 +164,10 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
                 }
             }
 
-            // We execute explicit, user-invoked diagnostics requests with higher priority compared to implicit requests
-            // from clients such as editor diagnostic tagger to show squiggles, background analysis to populate the error list, etc.
+            // We execute explicit, user-invoked diagnostics requests with higher priority compared to implicit
+            // requests
+            // from clients such as editor diagnostic tagger to show squiggles, background analysis to populate
+            // the error list, etc.
             var diagnosticsComputer = new DiagnosticComputer(
                 document,
                 project,
@@ -395,7 +409,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
 
             if (_document == null && analyzers.Length < compilationWithAnalyzers.Analyzers.Length)
             {
-                // PERF: Generate a new CompilationWithAnalyzers with trimmed analyzers for non-document analysis case.
+                // PERF: Generate a new CompilationWithAnalyzers with trimmed analyzers for non-document analysis
+                // case.
                 compilationWithAnalyzers = compilationWithAnalyzers.Compilation.WithAnalyzers(
                     analyzers,
                     compilationWithAnalyzers.AnalysisOptions
@@ -638,7 +653,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             CancellationToken cancellationToken
         )
         {
-            // We could consider creating a service so that we don't do this repeatedly if this shows up as perf cost
+            // We could consider creating a service so that we don't do this repeatedly if this shows up as perf
+            // cost
             using var pooledObject = SharedPools.Default<HashSet<object>>().GetPooledObject();
             using var pooledMap = SharedPools
                 .Default<Dictionary<string, DiagnosticAnalyzer>>()
@@ -707,7 +723,8 @@ namespace Microsoft.CodeAnalysis.Remote.Diagnostics
             );
 
             // Run analyzers concurrently, with performance logging and reporting suppressed diagnostics.
-            // This allows all client requests with or without performance data and/or suppressed diagnostics to be satisfied.
+            // This allows all client requests with or without performance data and/or suppressed diagnostics to
+            // be satisfied.
             // TODO: can we support analyzerExceptionFilter in remote host?
             //       right now, host doesn't support watson, we might try to use new NonFatal watson API?
             var analyzerOptions = new CompilationWithAnalyzersOptions(

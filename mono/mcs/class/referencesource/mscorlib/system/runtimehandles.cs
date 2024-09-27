@@ -1083,13 +1083,16 @@ namespace System
     }
 
     // This type is used to remove the expense of having a managed reference object that is dynamically
-    // created when we can prove that we don't need that object. Use of this type requires code to ensure
+    // created when we can prove that we don't need that object. Use of this type requires code to
+    // ensure
     // that the underlying native resource is not freed.
     // Cases in which this may be used:
     //  1. When native code calls managed code passing one of these as a parameter
-    //  2. When managed code acquires one of these from an IRuntimeMethodInfo, and ensure that the IRuntimeMethodInfo is preserved
+    //  2. When managed code acquires one of these from an IRuntimeMethodInfo, and ensure that the
+    // IRuntimeMethodInfo is preserved
     //     across the lifetime of the RuntimeMethodHandleInternal instance
-    //  3. When another object is used to keep the RuntimeMethodHandleInternal alive. See delegates, CreateInstance cache, Signature structure
+    //  3. When another object is used to keep the RuntimeMethodHandleInternal alive. See delegates,
+    // CreateInstance cache, Signature structure
     // When in doubt, do not use.
     internal struct RuntimeMethodHandleInternal
     {
@@ -1138,7 +1141,8 @@ namespace System
 
         object m_keepalive;
 
-        // These unused variables are used to ensure that this class has the same layout as RuntimeMethodInfo
+        // These unused variables are used to ensure that this class has the same layout as
+        // RuntimeMethodInfo
 #pragma warning disable 169
         object m_a;
         object m_b;
@@ -1751,11 +1755,13 @@ namespace System
     }
 
     // This type is used to remove the expense of having a managed reference object that is dynamically
-    // created when we can prove that we don't need that object. Use of this type requires code to ensure
+    // created when we can prove that we don't need that object. Use of this type requires code to
+    // ensure
     // that the underlying native resource is not freed.
     // Cases in which this may be used:
     //  1. When native code calls managed code passing one of these as a parameter
-    //  2. When managed code acquires one of these from an RtFieldInfo, and ensure that the RtFieldInfo is preserved
+    //  2. When managed code acquires one of these from an RtFieldInfo, and ensure that the RtFieldInfo
+    // is preserved
     //     across the lifetime of the RuntimeFieldHandleInternal instance
     //  3. When another object is used to keep the RuntimeFieldHandleInternal alive.
     // When in doubt, do not use.

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * XmlSiteMapProvider class definition
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* XmlSiteMapProvider class definition
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -854,7 +854,8 @@ namespace System.Web
 
             XmlSiteMapProvider childProvider = new XmlSiteMapProvider();
 
-            // siteMapFile was relative to the sitemap file where this xmlnode is defined, make it an application path.
+            // siteMapFile was relative to the sitemap file where this xmlnode is defined, make it an
+            // application path.
             siteMapFile = _normalizedVirtualPath.Parent.Combine(siteMapFile);
 
             childProvider.ParentProvider = this;

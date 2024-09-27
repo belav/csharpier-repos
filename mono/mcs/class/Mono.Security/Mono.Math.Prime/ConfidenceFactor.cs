@@ -48,7 +48,8 @@ namespace Mono.Math.Prime
         ExtraLow,
 
         /// <summary>
-        /// Suitable only for transactions which do not require forward secrecy.  Probability of failure about 1/2^40
+        /// Suitable only for transactions which do not require forward secrecy.  Probability of failure
+        // about 1/2^40
         /// </summary>
         Low,
 

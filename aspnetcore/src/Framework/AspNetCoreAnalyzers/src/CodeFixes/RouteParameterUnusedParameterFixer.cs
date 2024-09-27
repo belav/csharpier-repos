@@ -83,7 +83,8 @@ public class RouteParameterUnusedParameterFixer : CodeFixProvider
         var token = param.GetFirstToken();
         var routeUsage = routeUsageCache.Get(token, cancellationToken);
 
-        // Check that the route is used in a context with a method, e.g. attribute on an action or Map method.
+        // Check that the route is used in a context with a method, e.g. attribute on an action or Map
+        // method.
         if (routeUsage?.UsageContext.MethodSyntax == null)
         {
             return Task.FromResult(document);

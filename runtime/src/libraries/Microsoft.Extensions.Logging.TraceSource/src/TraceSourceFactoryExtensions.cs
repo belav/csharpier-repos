@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging.TraceSource;
 namespace Microsoft.Extensions.Logging
 {
     /// <summary>
-    /// Extension methods for setting up <see cref="TraceSourceLoggerProvider"/> on a <see cref="ILoggingBuilder"/>.
+    /// Extension methods for setting up <see cref="TraceSourceLoggerProvider"/> on a <see
+    // cref="ILoggingBuilder"/>.
     /// </summary>
     public static class TraceSourceFactoryExtensions
     {

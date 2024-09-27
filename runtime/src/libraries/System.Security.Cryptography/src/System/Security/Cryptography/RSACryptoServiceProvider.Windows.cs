@@ -264,7 +264,8 @@ namespace System.Security.Cryptography
         ///     Decrypt raw data, generally used for decrypting symmetric key material
         /// </summary>
         /// <param name="rgb">encrypted data</param>
-        /// <param name="fOAEP">true to use OAEP padding (PKCS #1 v2), false to use PKCS #1 type 2 padding</param>
+        /// <param name="fOAEP">true to use OAEP padding (PKCS #1 v2), false to use PKCS #1 type 2
+        // padding</param>
         /// <returns>decrypted data</returns>
         public byte[] Decrypt(byte[] rgb, bool fOAEP)
         {
@@ -320,12 +321,15 @@ namespace System.Security.Cryptography
         ///     Encrypt raw data, generally used for encrypting symmetric key material.
         /// </summary>
         /// <remarks>
-        ///     This method can only encrypt (keySize - 88 bits) of data, so should not be used for encrypting
-        ///     arbitrary byte arrays. Instead, encrypt a symmetric key with this method, and use the symmetric
+        ///     This method can only encrypt (keySize - 88 bits) of data, so should not be used for
+        // encrypting
+        ///     arbitrary byte arrays. Instead, encrypt a symmetric key with this method, and use the
+        // symmetric
         ///     key to encrypt the sensitive data.
         /// </remarks>
         /// <param name="rgb">raw data to encrypt</param>
-        /// <param name="fOAEP">true to use OAEP padding (PKCS #1 v2), false to use PKCS #1 type 2 padding</param>
+        /// <param name="fOAEP">true to use OAEP padding (PKCS #1 v2), false to use PKCS #1 type 2
+        // padding</param>
         /// <returns>Encrypted key</returns>
         public byte[] Encrypt(byte[] rgb, bool fOAEP)
         {

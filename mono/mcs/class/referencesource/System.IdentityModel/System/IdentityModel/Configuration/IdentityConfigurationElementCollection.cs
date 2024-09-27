@@ -17,7 +17,8 @@ namespace System.IdentityModel.Configuration
         : ConfigurationElementCollection
     {
         // Note:This is a BasicMap collection type with ThrowOnDuplicate true.
-        // If there are two configuration elements defined with the same key the configuration system throws an error.
+        // If there are two configuration elements defined with the same key the configuration system throws
+        // an error.
 
         protected override bool ThrowOnDuplicate
         {

@@ -107,7 +107,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 Assert.Equal(propertyName, p2.Name);
                 Assert.Equal(CngPropertyOptions.CustomProperty, p2.Options);
 
-                // This one is odd. CNG keys can have properties with zero length but CngKey.GetProperty() transforms this into null.
+                // This one is odd. CNG keys can have properties with zero length but CngKey.GetProperty()
+                // transforms this into null.
                 Assert.Null(p2.GetValue());
             }
         }

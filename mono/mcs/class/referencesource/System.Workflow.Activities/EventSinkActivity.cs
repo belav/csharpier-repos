@@ -663,16 +663,16 @@ namespace System.Workflow.Activities
                         )
                     );
             }
-            /*  else
-              {
-                  Type[] types = type.GetNestedTypes();
-                  foreach (Type nestedType in types)
-                  {
-                      object[] dsAttribs = nestedType.GetCustomAttributes(typeof(ExternalDataExchangeAttribute), false);
-                      if (dsAttribs.Length != 0)
-                          return true;
-                  }
-              }*/
+/*  else
+{
+Type[] types = type.GetNestedTypes();
+foreach (Type nestedType in types)
+{
+object[] dsAttribs = nestedType.GetCustomAttributes(typeof(ExternalDataExchangeAttribute), false);
+if (dsAttribs.Length != 0)
+return true;
+}
+}*/
 
             if (throwOnError)
                 throw new Exception(

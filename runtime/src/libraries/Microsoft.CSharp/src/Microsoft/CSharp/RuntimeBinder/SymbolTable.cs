@@ -830,10 +830,12 @@ namespace Microsoft.CSharp.RuntimeBinder
             return callChain;
         }
 
-        // We have an aggregate symbol of the correct parent and full name, but it may have the wrong arity, or, due to
+        // We have an aggregate symbol of the correct parent and full name, but it may have the wrong arity,
+        // or, due to
         // dynamic loading or creation, two different types can exist that have the same name.
 
-        // In the static compiler, this would have been an error and name lookup would be ambiguous, but here we never have
+        // In the static compiler, this would have been an error and name lookup would be ambiguous, but
+        // here we never have
         // to lookup names of types for real (only names of members).
 
         // For either case, move onto the next symbol in the chain, and check again for appropriate type.
@@ -1422,7 +1424,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         {
             Type t = type.getThisType().AssociatedSystemType;
 
-            // If we got here, it means we couldn't find it in our initial lookup. Means we haven't loaded it from reflection yet.
+            // If we got here, it means we couldn't find it in our initial lookup. Means we haven't loaded it
+            // from reflection yet.
             // Lets go and do that now.
             // Check if we have constructors or not.
             if (methodName == NameManager.GetPredefinedName(PredefinedName.PN_CTOR))

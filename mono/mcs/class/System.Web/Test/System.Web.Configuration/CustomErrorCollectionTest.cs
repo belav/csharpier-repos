@@ -84,7 +84,7 @@ namespace MonoTests.System.Web.Configuration
             col.Add(new CustomError(403, "http://403-error.com/"));
             col.Add(new CustomError(999, "http://403-error.com/"));
 
-            /* override the 999 entry with a duplicate 403 */
+/* override the 999 entry with a duplicate 403 */
             col[2] = new CustomError(403, "http://403-error2.com/");
 
             Assert.AreEqual(3, col.Count, "A1");

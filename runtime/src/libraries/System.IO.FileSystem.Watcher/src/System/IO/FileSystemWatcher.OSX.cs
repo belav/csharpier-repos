@@ -142,7 +142,8 @@ namespace System.IO
                 | Interop.EventStream.FSEventStreamCreateFlags.kFSEventStreamCreateFlagWatchRoot
             );
 
-            // Weak reference to the associated watcher. A weak reference is used so that the FileSystemWatcher may be collected and finalized,
+            // Weak reference to the associated watcher. A weak reference is used so that the FileSystemWatcher
+            // may be collected and finalized,
             // causing an active operation to be torn down.
             private readonly WeakReference<FileSystemWatcher> _weakWatcher;
 
@@ -297,7 +298,8 @@ namespace System.IO
                     runLoopStarted.Set();
                     try
                     {
-                        // Start the OS X RunLoop (a blocking call) that will pump file system changes into the callback function
+                        // Start the OS X RunLoop (a blocking call) that will pump file system changes into the callback
+                        // function
                         Interop.RunLoop.CFRunLoopRun();
                     }
                     finally
@@ -317,7 +319,8 @@ namespace System.IO
                 {
                     _cancellationRegistration.Unregister();
 
-                    // When we get here, we've requested to stop so cleanup the EventStream and unschedule from the RunLoop
+                    // When we get here, we've requested to stop so cleanup the EventStream and unschedule from the
+                    // RunLoop
                     Interop.EventStream.FSEventStreamStop(eventStream);
 
                     StaticWatcherRunLoopManager.UnscheduleFromRunLoop(eventStream);
@@ -414,7 +417,8 @@ namespace System.IO
 
                     if (!Interop.EventStream.FSEventStreamStart(_eventStream))
                     {
-                        // Try to get the Watcher to raise the error event; if we can't do that, just silently exit since the watcher is gone anyway
+                        // Try to get the Watcher to raise the error event; if we can't do that, just silently exit since
+                        // the watcher is gone anyway
                         int error = Marshal.GetLastPInvokeError();
                         if (_weakWatcher.TryGetTarget(out FileSystemWatcher? watcher))
                         {
@@ -468,7 +472,8 @@ namespace System.IO
                     GCHandle.FromIntPtr(clientCallBackInfo).Target;
                 Debug.Assert(instance != null);
 
-                // Try to get the actual watcher from our weak reference.  We maintain a weak reference most of the time
+                // Try to get the actual watcher from our weak reference.  We maintain a weak reference most of the
+                // time
                 // so as to avoid a rooted cycle that would prevent our processing loop from ever ending
                 // if the watcher is dropped by the user without being disposed. If we can't get the watcher,
                 // there's nothing more to do (we can't raise events), so bail.
@@ -515,8 +520,10 @@ namespace System.IO
                 FileSystemWatcher watcher
             )
             {
-                // Since renames come in pairs, when we reach the first we need to test for the next one if it is the case. If the next one belongs into the pair,
-                // we'll store the event id so when the for-loop comes across it, we'll skip it since it's already been processed as part of the original of the pair.
+                // Since renames come in pairs, when we reach the first we need to test for the next one if it is
+                // the case. If the next one belongs into the pair,
+                // we'll store the event id so when the for-loop comes across it, we'll skip it since it's already
+                // been processed as part of the original of the pair.
                 int? handledRenameEvents = null;
 
                 for (int i = 0; i < numEvents; i++)
@@ -539,7 +546,8 @@ namespace System.IO
                     }
 
                     WatcherChangeTypes eventType = 0;
-                    // First, we should check if this event should kick off a re-scan since we can't really rely on anything after this point if that is true
+                    // First, we should check if this event should kick off a re-scan since we can't really rely on
+                    // anything after this point if that is true
                     if (ShouldRescanOccur(eventFlags[i]))
                     {
                         watcher.OnError(
@@ -560,7 +568,8 @@ namespace System.IO
                     )
                     {
                         // The base FileSystemWatcher does a match check against the relative path before combining with
-                        // the root dir; however, null is special cased to signify the root dir, so check if we should use that.
+                        // the root dir; however, null is special cased to signify the root dir, so check if we should use
+                        // that.
                         ReadOnlySpan<char> relativePath = ReadOnlySpan<char>.Empty;
                         if (
                             path.Length > _fullDirectory.Length
@@ -787,7 +796,8 @@ namespace System.IO
             {
                 // If we shouldn't include subdirectories, check if this path's parent is the watch directory
                 // Check if the parent is the root. If so, then we'll continue processing based on the name.
-                // If it isn't, then this will be set to false and we'll skip the name processing since it's irrelevant.
+                // If it isn't, then this will be set to false and we'll skip the name processing since it's
+                // irrelevant.
                 return _includeChildren
                     || _fullDirectory
                         .AsSpan()
@@ -803,10 +813,14 @@ namespace System.IO
                 Span<FSEventStreamEventId> ids
             )
             {
-                // The rename event can be composed of two events. The first contains the original file name the second contains the new file name.
-                // Each of the events is delivered only when the corresponding folder is watched. It means both events are delivered when the rename/move
-                // occurs inside the watched folder. When the move has origin o final destination outside, only one event is delivered. To distinguish
-                // between two nonrelated events and the event which belong together the event ID is tested. Only related rename events differ in ID by one.
+                // The rename event can be composed of two events. The first contains the original file name the
+                // second contains the new file name.
+                // Each of the events is delivered only when the corresponding folder is watched. It means both
+                // events are delivered when the rename/move
+                // occurs inside the watched folder. When the move has origin o final destination outside, only one
+                // event is delivered. To distinguish
+                // between two nonrelated events and the event which belong together the event ID is tested. Only
+                // related rename events differ in ID by one.
                 // This behavior isn't documented and there is an open radar http://www.openradar.me/13461247.
 
                 int nextIndex = currentIndex + 1;

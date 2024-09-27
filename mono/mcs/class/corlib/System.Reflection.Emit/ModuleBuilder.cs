@@ -768,10 +768,11 @@ namespace System.Reflection.Emit
                 table_indexes = new int[64];
                 for (int i = 0; i < 64; ++i)
                     table_indexes[i] = 1;
-                /* allow room for .<Module> in TypeDef table */
+/* allow room for .<Module> in TypeDef table */
                 table_indexes[0x02] = 2;
             }
-            // Console.WriteLine ("getindex for table "+table.ToString()+" got "+table_indexes [table].ToString());
+            // Console.WriteLine ("getindex for table "+table.ToString()+" got "+table_indexes
+            // [table].ToString());
             var index = table_indexes[table];
             table_indexes[table] += count;
             return index;
@@ -1228,16 +1229,16 @@ namespace System.Reflection.Emit
             return getToken(this, helper, true);
         }
 
-        /*
-         * Register the token->obj mapping with the runtime so the Module.Resolve...
-         * methods will work for obj.
-         */
+/*
+* Register the token->obj mapping with the runtime so the Module.Resolve...
+* methods will work for obj.
+*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern void RegisterToken(object obj, int token);
 
-        /*
-         * Returns MemberInfo registered with the given token.
-         */
+/*
+* Returns MemberInfo registered with the given token.
+*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern object GetRegisteredToken(int token);
 
@@ -1416,7 +1417,7 @@ namespace System.Reflection.Emit
                         }
                         catch
                         {
-                            /* do something */
+/* do something */
                         }
                     }
                 }

@@ -15,9 +15,12 @@ namespace Microsoft.CodeAnalysis
     internal partial class SolutionState
     {
         /// <summary>
-        /// An implementation of <see cref="ICompilationTracker"/> that takes a compilation from another compilation tracker and updates it
-        /// to return a generated document with a specific content, regardless of what the generator actually produces. In other words, it says
-        /// "take the compilation this other thing produced, and pretend the generator gave this content, even if it wouldn't."
+        /// An implementation of <see cref="ICompilationTracker"/> that takes a compilation from another
+        // compilation tracker and updates it
+        /// to return a generated document with a specific content, regardless of what the generator
+        // actually produces. In other words, it says
+        /// "take the compilation this other thing produced, and pretend the generator gave this content,
+        // even if it wouldn't."
         /// </summary>
         private class GeneratedFileReplacingCompilationTracker(
             ICompilationTracker underlyingTracker,
@@ -27,7 +30,8 @@ namespace Microsoft.CodeAnalysis
             private AsyncLazy<Checksum>? _lazyDependentChecksum;
 
             /// <summary>
-            /// The lazily-produced compilation that has the generated document updated. This is initialized by call to
+            /// The lazily-produced compilation that has the generated document updated. This is initialized by
+            // call to
             /// <see cref="GetCompilationAsync"/>.
             /// </summary>
             [DisallowNull]
@@ -60,8 +64,10 @@ namespace Microsoft.CodeAnalysis
                 CompilationAndGeneratorDriverTranslationAction? translate
             )
             {
-                // TODO: This only needs to be implemented if a feature that operates from a source generated file then makes
-                // further mutations to that project, which isn't needed for now. This will be need to be fixed up when we complete
+                // TODO: This only needs to be implemented if a feature that operates from a source generated file
+                // then makes
+                // further mutations to that project, which isn't needed for now. This will be need to be fixed up
+                // when we complete
                 // https://github.com/dotnet/roslyn/issues/49533.
                 throw new NotImplementedException();
             }
@@ -73,7 +79,8 @@ namespace Microsoft.CodeAnalysis
                 CancellationToken cancellationToken
             )
             {
-                // Because we override SourceGeneratedDocument.WithFrozenPartialSemantics directly, we shouldn't be able to get here.
+                // Because we override SourceGeneratedDocument.WithFrozenPartialSemantics directly, we shouldn't be
+                // able to get here.
                 throw ExceptionUtilities.Unreachable();
             }
 
@@ -108,7 +115,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (existingState != null)
                 {
-                    // The generated file still exists in the underlying compilation, but the contents may not match the open file if the open file
+                    // The generated file still exists in the underlying compilation, but the contents may not match the
+                    // open file if the open file
                     // is stale. Replace the syntax tree so we have a tree that matches the text.
                     var existingSyntaxTree = await existingState
                         .GetSyntaxTreeAsync(cancellationToken)
@@ -120,9 +128,12 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    // The existing output no longer exists in the underlying compilation. This could happen if the user made
-                    // an edit which would cause this file to no longer exist, but they're still operating on an open representation
-                    // of that file. To ensure that this snapshot is still usable, we'll just add this document back in. This is not a
+                    // The existing output no longer exists in the underlying compilation. This could happen if the user
+                    // made
+                    // an edit which would cause this file to no longer exist, but they're still operating on an open
+                    // representation
+                    // of that file. To ensure that this snapshot is still usable, we'll just add this document back in.
+                    // This is not a
                     // semantically correct operation, but working on stale snapshots never has that guarantee.
                     newCompilation = underlyingCompilation.AddSyntaxTrees(newSyntaxTree);
                 }
@@ -179,13 +190,15 @@ namespace Microsoft.CodeAnalysis
                 ProjectReference projectReference
             )
             {
-                // This method is used if you're forking a solution with partial semantics, and used to quickly produce references.
+                // This method is used if you're forking a solution with partial semantics, and used to quickly
+                // produce references.
                 // So this method should only be called if:
                 //
                 // 1. Project A has a open source generated document, and this CompilationTracker represents A
                 // 2. Project B references that A, and is being frozen for partial semantics.
                 //
-                // We generally don't use partial semantics in a different project than the open file, so this isn't a scenario we need to support.
+                // We generally don't use partial semantics in a different project than the open file, so this isn't
+                // a scenario we need to support.
                 throw new NotImplementedException();
             }
 
@@ -202,7 +215,8 @@ namespace Microsoft.CodeAnalysis
 
                 if (underlyingGeneratedDocumentStates.Contains(replacementDocumentState.Id))
                 {
-                    // The generated file still exists in the underlying compilation, but the contents may not match the open file if the open file
+                    // The generated file still exists in the underlying compilation, but the contents may not match the
+                    // open file if the open file
                     // is stale. Replace the syntax tree so we have a tree that matches the text.
                     return underlyingGeneratedDocumentStates.SetState(
                         replacementDocumentState.Id,
@@ -211,9 +225,12 @@ namespace Microsoft.CodeAnalysis
                 }
                 else
                 {
-                    // The generated output no longer exists in the underlying compilation. This could happen if the user made
-                    // an edit which would cause this file to no longer exist, but they're still operating on an open representation
-                    // of that file. To ensure that this snapshot is still usable, we'll just add this document back in. This is not a
+                    // The generated output no longer exists in the underlying compilation. This could happen if the
+                    // user made
+                    // an edit which would cause this file to no longer exist, but they're still operating on an open
+                    // representation
+                    // of that file. To ensure that this snapshot is still usable, we'll just add this document back in.
+                    // This is not a
                     // semantically correct operation, but working on stale snapshots never has that guarantee.
                     return underlyingGeneratedDocumentStates.AddRange(
                         ImmutableArray.Create(replacementDocumentState)

@@ -28,7 +28,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="name">name of the property</param>
         /// <param name="typeUsage">TypeUsage object containing the property type and its facets</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if name or typeUsage arguments are null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if name or typeUsage arguments are
+        // null</exception>
         /// <exception cref="System.ArgumentException">Thrown if name argument is empty string</exception>
         internal EdmProperty(string name, TypeUsage typeUsage)
             : base(name, typeUsage)
@@ -39,13 +40,16 @@ namespace System.Data.Metadata.Edm
         #endregion
 
         #region Fields
-        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be GC'd</summary>
+        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be
+        // GC'd</summary>
         internal readonly System.RuntimeMethodHandle PropertyGetterHandle;
 
-        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be GC'd</summary>
+        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be
+        // GC'd</summary>
         internal readonly System.RuntimeMethodHandle PropertySetterHandle;
 
-        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be GC'd</summary>
+        /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be
+        // GC'd</summary>
         internal readonly System.RuntimeTypeHandle EntityDeclaringType;
 
         /// <summary>cached dynamic method to get the property value from a CLR instance</summary>
@@ -61,7 +65,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">name of the property</param>
         /// <param name="typeUsage">TypeUsage object containing the property type and its facets</param>
         /// <param name="propertyInfo">for the property</param>
-        /// <param name="entityDeclaringType">The declaring type of the entity containing the property</param>
+        /// <param name="entityDeclaringType">The declaring type of the entity containing the
+        // property</param>
         internal EdmProperty(
             string name,
             TypeUsage typeUsage,
@@ -108,16 +113,20 @@ namespace System.Data.Metadata.Edm
         /// the property is not part of the primary key.
         /// When using attribute based mapping (usually used with entities that derive from the EntityObject
         /// base class), a property is considered nullable if the IsNullable flag is set to true in the
-        /// <see cref="System.Data.Objects.DataClasses.EdmScalarPropertyAttribute"/> attribute. This flag can
+        /// <see cref="System.Data.Objects.DataClasses.EdmScalarPropertyAttribute"/> attribute. This flag
+        // can
         /// be set to true even if the underlying type is not nullable, and can be set to false even if the
         /// underlying type is nullable. The latter case happens as part of default code generation when
-        /// a non-nullable property in the conceptual model is mapped to a nullable CLR type such as a string.
-        /// In such a case, the Entity Framework treats the property as non-nullable even though the CLR would
+        /// a non-nullable property in the conceptual model is mapped to a nullable CLR type such as a
+        // string.
+        /// In such a case, the Entity Framework treats the property as non-nullable even though the CLR
+        // would
         /// allow null to be set.
         /// There is no good reason to set a non-nullable CLR type as nullable in the object model and this
         /// should not be done even though the attribute allows it.
         /// </remarks>
-        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the EdmProperty instance is in ReadOnly state</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the
+        // EdmProperty instance is in ReadOnly state</exception>
         public bool Nullable
         {
             get { return (bool)TypeUsage.Facets[DbProviderManifest.NullableFacetName].Value; }
@@ -126,7 +135,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the default value for this property
         /// </summary>
-        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the EdmProperty instance is in ReadOnly state</exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the
+        // EdmProperty instance is in ReadOnly state</exception>
         public Object DefaultValue
         {
             get { return TypeUsage.Facets[DbProviderManifest.DefaultValueFacetName].Value; }

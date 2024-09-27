@@ -4,7 +4,8 @@
 namespace Microsoft.Win32
 {
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see cref='Microsoft.Win32.SystemEvents.PowerModeChanged'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='Microsoft.Win32.SystemEvents.PowerModeChanged'/> event.</para>
     /// </devdoc>
     public delegate void PowerModeChangedEventHandler(object sender, PowerModeChangedEventArgs e);
 }

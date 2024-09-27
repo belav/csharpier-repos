@@ -83,7 +83,8 @@ namespace XPathTests.FunctionalTests
         }
 
         /// <summary>
-        /// Expected: Selects the second chapter element child if that child has a name attribute with value ""Chapter2"".
+        /// Expected: Selects the second chapter element child if that child has a name attribute with value
+        // ""Chapter2"".
         /// Chapter[2][@name="Chapter2"]
         /// </summary>
         [Theory]

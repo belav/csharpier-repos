@@ -13,12 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     <para>
 ///         Instances of this class are returned from a call to
 ///         <see
-///             cref="InMemoryDbContextOptionsExtensions.UseInMemoryDatabase(DbContextOptionsBuilder, string, System.Action{InMemoryDbContextOptionsBuilder})" />
+///
+// cref="InMemoryDbContextOptionsExtensions.UseInMemoryDatabase(DbContextOptionsBuilder, string,
+// System.Action{InMemoryDbContextOptionsBuilder})" />
 ///         and it is not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-///         <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database provider</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using
+// DbContextOptions</see>, and
+///         <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database
+// provider</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderInfrastructure
@@ -43,13 +47,17 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
         OptionsBuilder;
 
     /// <summary>
-    ///     Enables nullability check for all properties across all entities within the in-memory database.
+    ///     Enables nullability check for all properties across all entities within the in-memory
+    // database.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-    ///     <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database provider</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>,
+    // and
+    ///     <see href="https://aka.ms/efcore-docs-in-memory">The EF Core in-memory database
+    // provider</see> for more information and examples.
     /// </remarks>
-    /// <param name="nullChecksEnabled">If <see langword="true" />, then nullability check is enforced.</param>
+    /// <param name="nullChecksEnabled">If <see langword="true" />, then nullability check is
+    // enforced.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public virtual InMemoryDbContextOptionsBuilder EnableNullChecks(bool nullChecksEnabled = true)
     {
@@ -77,7 +85,8 @@ public class InMemoryDbContextOptionsBuilder : IInMemoryDbContextOptionsBuilderI
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override bool Equals(object? obj) => base.Equals(obj);
 

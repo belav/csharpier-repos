@@ -9,7 +9,8 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel;
 
     /// <devdoc>
-    /// <para> Defines the properties and methods of the <see cref='System.Web.UI.WebControls.TableSectionStyle'/> class.</para>
+    /// <para> Defines the properties and methods of the <see
+    // cref='System.Web.UI.WebControls.TableSectionStyle'/> class.</para>
     /// </devdoc>
     public class TableSectionStyle : Style
     {

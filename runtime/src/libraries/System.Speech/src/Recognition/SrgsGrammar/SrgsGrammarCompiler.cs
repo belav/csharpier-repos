@@ -206,7 +206,8 @@ namespace System.Speech.Recognition.SrgsGrammar
             if (isCFG)
             {
                 // Just copy the input to the output:
-                // {We later check the header on the output stream - we could do it on the input stream but it may not be seekable}.
+                // {We later check the header on the output stream - we could do it on the input stream but it may
+                // not be seekable}.
                 Helpers.CopyStream(seekableInputStream, outputStream, cfgLength);
             }
             else

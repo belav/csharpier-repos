@@ -11,7 +11,8 @@ using System.Security.Cryptography.X509Certificates;
 namespace Microsoft.AspNetCore.InternalTesting;
 
 #nullable enable
-// Copied from https://github.com/dotnet/runtime/main/src/libraries/System.Net.Security/tests/FunctionalTests/TestHelper.cs
+// Copied from
+// https://github.com/dotnet/runtime/main/src/libraries/System.Net.Security/tests/FunctionalTests/TestHelper.cs
 public static class CertHelper
 {
     private static readonly X509KeyUsageExtension s_eeKeyUsage = new X509KeyUsageExtension(

@@ -204,7 +204,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
         [KeptBaseType(typeof(MyReflect))]
         class MyReflectDerived : MyReflect { }
 
-        // This is effectively an E2E test for a situation encountered in https://github.com/dotnet/winforms/blob/main/src/System.Windows.Forms/src/System/Windows/Forms/HtmlToClrEventProxy.cs
+        // This is effectively an E2E test for a situation encountered in
+        // https://github.com/dotnet/winforms/blob/main/src/System.Windows.Forms/src/System/Windows/Forms/HtmlToClrEventProxy.cs
         // Validates that by using IReflect there's no escaping the annotations system.
         [Kept]
         class ReflectOverType

@@ -149,7 +149,8 @@ public class B : A<object?>
                 parseOptions: parseOptions.WithNullablePublicOnly()
             );
             comp.VerifyEmitDiagnostics(
-                // error CS0656: Missing compiler required member 'System.Runtime.CompilerServices.NullablePublicOnlyAttribute..ctor'
+                // error CS0656: Missing compiler required member
+                // 'System.Runtime.CompilerServices.NullablePublicOnlyAttribute..ctor'
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                     .WithArguments(
                         "System.Runtime.CompilerServices.NullablePublicOnlyAttribute",
@@ -361,7 +362,8 @@ public class A
                 parseOptions: TestOptions.Regular8.WithNullablePublicOnly()
             );
             comp.VerifyDiagnostics(
-                // (6,13): warning CS8604: Possible null reference argument for parameter 'o' in 'void A.M(object o)'.
+                // (6,13): warning CS8604: Possible null reference argument for parameter 'o' in 'void A.M(object
+                // o)'.
                 //         A.M(A.F);
                 Diagnostic(ErrorCode.WRN_NullReferenceArgument, "A.F")
                     .WithArguments("o", "void A.M(object o)")
@@ -641,7 +643,8 @@ public class Program
             static void verifyDiagnostics(CSharpCompilation comp)
             {
                 comp.VerifyDiagnostics(
-                    // (3,10): error CS8335: Do not use 'System.Runtime.CompilerServices.NullablePublicOnlyAttribute'. This is reserved for compiler usage.
+                    // (3,10): error CS8335: Do not use 'System.Runtime.CompilerServices.NullablePublicOnlyAttribute'.
+                    // This is reserved for compiler usage.
                     // [module: NullablePublicOnly(false)]
                     Diagnostic(ErrorCode.ERR_ExplicitReservedAttr, "NullablePublicOnly(false)")
                         .WithArguments(

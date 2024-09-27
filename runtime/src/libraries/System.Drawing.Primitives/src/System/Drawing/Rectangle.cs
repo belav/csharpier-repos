@@ -26,7 +26,8 @@ namespace System.Drawing
         private int height; // Do not rename (binary serialization)
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.Drawing.Rectangle'/> class with the specified location
+        /// Initializes a new instance of the <see cref='System.Drawing.Rectangle'/> class with the
+        // specified location
         /// and size.
         /// </summary>
         public Rectangle(int x, int y, int width, int height)
@@ -55,7 +56,8 @@ namespace System.Drawing
             new Rectangle(left, top, unchecked(right - left), unchecked(bottom - top));
 
         /// <summary>
-        /// Gets or sets the coordinates of the upper-left corner of the rectangular region represented by this
+        /// Gets or sets the coordinates of the upper-left corner of the rectangular region represented by
+        // this
         /// <see cref='System.Drawing.Rectangle'/>.
         /// </summary>
         [Browsable(false)]
@@ -104,7 +106,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Gets or sets the width of the rectangular region defined by this <see cref='System.Drawing.Rectangle'/>.
+        /// Gets or sets the width of the rectangular region defined by this <see
+        // cref='System.Drawing.Rectangle'/>.
         /// </summary>
         public int Width
         {
@@ -113,7 +116,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Gets or sets the width of the rectangular region defined by this <see cref='System.Drawing.Rectangle'/>.
+        /// Gets or sets the width of the rectangular region defined by this <see
+        // cref='System.Drawing.Rectangle'/>.
         /// </summary>
         public int Height
         {
@@ -150,14 +154,16 @@ namespace System.Drawing
         public readonly int Bottom => unchecked(Y + Height);
 
         /// <summary>
-        /// Tests whether this <see cref='System.Drawing.Rectangle'/> has a <see cref='System.Drawing.Rectangle.Width'/>
+        /// Tests whether this <see cref='System.Drawing.Rectangle'/> has a <see
+        // cref='System.Drawing.Rectangle.Width'/>
         /// or a <see cref='System.Drawing.Rectangle.Height'/> of 0.
         /// </summary>
         [Browsable(false)]
         public readonly bool IsEmpty => height == 0 && width == 0 && x == 0 && y == 0;
 
         /// <summary>
-        /// Tests whether <paramref name="obj"/> is a <see cref='System.Drawing.Rectangle'/> with the same location
+        /// Tests whether <paramref name="obj"/> is a <see cref='System.Drawing.Rectangle'/> with the same
+        // location
         /// and size of this Rectangle.
         /// </summary>
         public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
@@ -241,7 +247,8 @@ namespace System.Drawing
         public readonly bool Contains(Point pt) => Contains(pt.X, pt.Y);
 
         /// <summary>
-        /// Determines if the rectangular region represented by <paramref name="rect"/> is entirely contained within the
+        /// Determines if the rectangular region represented by <paramref name="rect"/> is entirely
+        // contained within the
         /// rectangular region represented by this <see cref='System.Drawing.Rectangle'/> .
         /// </summary>
         public readonly bool Contains(Rectangle rect) =>
@@ -296,7 +303,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Creates a rectangle that represents the intersection between a and b. If there is no intersection, an
+        /// Creates a rectangle that represents the intersection between a and b. If there is no
+        // intersection, an
         /// empty rectangle is returned.
         /// </summary>
         public static Rectangle Intersect(Rectangle a, Rectangle b)
@@ -354,7 +362,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        /// Converts the attributes of this <see cref='System.Drawing.Rectangle'/> to a human readable string.
+        /// Converts the attributes of this <see cref='System.Drawing.Rectangle'/> to a human readable
+        // string.
         /// </summary>
         public override readonly string ToString() =>
             $"{{X={X},Y={Y},Width={Width},Height={Height}}}";

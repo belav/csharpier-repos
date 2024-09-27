@@ -183,7 +183,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public void RemoveMember(object element)
         {
-            // Is this an EnvDTE.CodeElement that we created? If so, try to get the underlying code element object.
+            // Is this an EnvDTE.CodeElement that we created? If so, try to get the underlying code element
+            // object.
             var abstractCodeElement = ComAggregate.TryGetManagedObject<AbstractCodeElement>(
                 element
             );

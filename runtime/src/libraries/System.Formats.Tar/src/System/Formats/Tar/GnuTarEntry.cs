@@ -6,7 +6,9 @@ namespace System.Formats.Tar
     /// <summary>
     /// Represents a tar entry from an archive of the GNU format.
     /// </summary>
-    /// <remarks>Even though the <see cref="TarEntryFormat.Gnu"/> format is not POSIX compatible, it implements and supports the Unix-specific fields that were defined in the POSIX IEEE P1003.1 standard from 1988: <c>devmajor</c>, <c>devminor</c>, <c>gname</c> and <c>uname</c>.</remarks>
+    /// <remarks>Even though the <see cref="TarEntryFormat.Gnu"/> format is not POSIX compatible, it
+    // implements and supports the Unix-specific fields that were defined in the POSIX IEEE P1003.1
+    // standard from 1988: <c>devmajor</c>, <c>devminor</c>, <c>gname</c> and <c>uname</c>.</remarks>
     public sealed class GnuTarEntry : PosixTarEntry
     {
         // Constructor called when reading a TarEntry from a TarReader.
@@ -14,17 +16,23 @@ namespace System.Formats.Tar
             : base(header, readerOfOrigin, TarEntryFormat.Gnu) { }
 
         /// <summary>
-        /// Initializes a new <see cref="GnuTarEntry"/> instance with the specified entry type and entry name.
+        /// Initializes a new <see cref="GnuTarEntry"/> instance with the specified entry type and entry
+        // name.
         /// </summary>
         /// <param name="entryType">The type of the entry.</param>
         /// <param name="entryName">A string with the path and file name of this entry.</param>
-        /// <remarks>When creating an instance using the <see cref="GnuTarEntry(TarEntryType, string)"/> constructor, only the following entry types are supported:
+        /// <remarks>When creating an instance using the <see cref="GnuTarEntry(TarEntryType, string)"/>
+        // constructor, only the following entry types are supported:
         /// <list type="bullet">
-        /// <item>In all platforms: <see cref="TarEntryType.Directory"/>, <see cref="TarEntryType.HardLink"/>, <see cref="TarEntryType.SymbolicLink"/>, <see cref="TarEntryType.RegularFile"/>.</item>
-        /// <item>In Unix platforms only: <see cref="TarEntryType.BlockDevice"/>, <see cref="TarEntryType.CharacterDevice"/> and <see cref="TarEntryType.Fifo"/>.</item>
+        /// <item>In all platforms: <see cref="TarEntryType.Directory"/>, <see
+        // cref="TarEntryType.HardLink"/>, <see cref="TarEntryType.SymbolicLink"/>, <see
+        // cref="TarEntryType.RegularFile"/>.</item>
+        /// <item>In Unix platforms only: <see cref="TarEntryType.BlockDevice"/>, <see
+        // cref="TarEntryType.CharacterDevice"/> and <see cref="TarEntryType.Fifo"/>.</item>
         /// </list>
         /// </remarks>
-        /// <exception cref="ArgumentNullException"><paramref name="entryName"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="entryName"/> is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><para><paramref name="entryName"/> is empty.</para>
         /// <para>-or-</para>
         /// <para><paramref name="entryType"/> is not supported in the specified format.</para></exception>
@@ -36,11 +44,14 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// Initializes a new <see cref="GnuTarEntry"/> instance by converting the specified <paramref name="other"/> entry into the GNU format.
+        /// Initializes a new <see cref="GnuTarEntry"/> instance by converting the specified <paramref
+        // name="other"/> entry into the GNU format.
         /// </summary>
-        /// <exception cref="ArgumentException"><para><paramref name="other"/> is a <see cref="PaxGlobalExtendedAttributesTarEntry"/> and cannot be converted.</para>
+        /// <exception cref="ArgumentException"><para><paramref name="other"/> is a <see
+        // cref="PaxGlobalExtendedAttributesTarEntry"/> and cannot be converted.</para>
         /// <para>-or-</para>
-        /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the GNU format.</para></exception>
+        /// <para>The entry type of <paramref name="other"/> is not supported for conversion to the GNU
+        // format.</para></exception>
         public GnuTarEntry(TarEntry other)
             : base(other, TarEntryFormat.Gnu)
         {
@@ -110,7 +121,8 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// A timestamp that represents the last time the metadata of the file represented by this entry was changed.
+        /// A timestamp that represents the last time the metadata of the file represented by this entry was
+        // changed.
         /// </summary>
         /// <remarks>In Unix platforms, this timestamp is commonly known as <c>ctime</c>.</remarks>
         public DateTimeOffset ChangeTime

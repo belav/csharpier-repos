@@ -45,10 +45,10 @@ namespace Mono.Posix
     [Obsolete("Use Mono.Unix.PeerCred")]
     public class PeerCred
     {
-        /* Make sure this doesn't clash with anything in
-         * SocketOptionName, and keep it synchronised with the
-         * runtime
-         */
+/* Make sure this doesn't clash with anything in
+* SocketOptionName, and keep it synchronised with the
+* runtime
+*/
         private const int so_peercred = 10001;
         private PeerCredData data;
 

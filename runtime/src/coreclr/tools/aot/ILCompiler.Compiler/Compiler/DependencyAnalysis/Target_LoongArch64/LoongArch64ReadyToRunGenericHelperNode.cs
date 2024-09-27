@@ -84,7 +84,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             encoder.EmitADD(
                                 encoder.TargetRegister.Arg3,
                                 encoder.TargetRegister.Arg0,
@@ -146,7 +147,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             GenericLookupResult nonGcRegionLookup =
                                 factory.GenericLookup.TypeNonGCStaticBase(target);
                             EmitDictionaryLookup(

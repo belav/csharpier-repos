@@ -69,7 +69,7 @@ namespace System.Threading
         private IntPtr runtime_thread_info;
 
         /* current System.Runtime.Remoting.Contexts.Context instance
-           keep as an object to avoid triggering its class constructor when not needed */
+        keep as an object to avoid triggering its class constructor when not needed */
         private object current_appcontext;
         private object root_domain_thread;
         internal byte[] _serialized_principal;
@@ -102,9 +102,9 @@ namespace System.Threading
         private IntPtr netcore2;
 
         /* This is used only to check that we are in sync between the representation
-         * of MonoInternalThread in native and InternalThread in managed
-         *
-         * DO NOT RENAME! DO NOT ADD FIELDS AFTER! */
+        * of MonoInternalThread in native and InternalThread in managed
+        *
+        * DO NOT RENAME! DO NOT ADD FIELDS AFTER! */
         private IntPtr last;
         #endregion
 #pragma warning restore 169, 414, 649
@@ -158,11 +158,11 @@ namespace System.Threading
         }
 
         /*
-         * These two methods return an array in the target
-         * domain with the same content as the argument.  If
-         * the argument is already in the target domain, then
-         * the argument is returned, otherwise a copy.
-         */
+        * These two methods return an array in the target
+        * domain with the same content as the argument.  If
+        * the argument is already in the target domain, then
+        * the argument is returned, otherwise a copy.
+        */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern byte[] ByteArrayToRootDomain(byte[] arr);
 
@@ -475,9 +475,9 @@ namespace System.Threading
         }
 
         /*
-         * The thread name must be shared by appdomains, so it is stored in
-         * unmanaged code.
-         */
+        * The thread name must be shared by appdomains, so it is stored in
+        * unmanaged code.
+        */
 
         public string Name
         {

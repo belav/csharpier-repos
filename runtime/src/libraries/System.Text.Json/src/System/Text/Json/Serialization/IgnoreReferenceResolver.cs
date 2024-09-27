@@ -8,7 +8,8 @@ namespace System.Text.Json.Serialization
 {
     internal sealed class IgnoreReferenceResolver : ReferenceResolver
     {
-        // The stack of references on the branch of the current object graph, used to detect reference cycles.
+        // The stack of references on the branch of the current object graph, used to detect reference
+        // cycles.
         private Stack<ReferenceEqualsWrapper>? _stackForCycleDetection;
 
         internal override void PopReferenceForCycleDetection()

@@ -29,7 +29,8 @@ namespace System.Xml.Linq
         private const int NamespacesCapacity = 32; // Starting capacity of XNamespace table, which must be power of 2
 
         /// <summary>
-        /// Constructor, internal so that external users must go through the Get() method to create an XNamespace.
+        /// Constructor, internal so that external users must go through the Get() method to create an
+        // XNamespace.
         /// </summary>
         internal XNamespace(string namespaceName)
         {
@@ -47,10 +48,12 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="XName"/> object created from the current instance and the specified local name.
+        /// Returns an <see cref="XName"/> object created from the current instance and the specified local
+        // name.
         /// </summary>
         /// <remarks>
-        /// The returned <see cref="XName"/> object is guaranteed to be atomic (i.e. the only one in the system for this
+        /// The returned <see cref="XName"/> object is guaranteed to be atomic (i.e. the only one in the
+        // system for this
         /// particular expanded name).
         /// </remarks>
         public XName GetName(string localName)
@@ -82,7 +85,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Gets the <see cref="XNamespace"/> object that corresponds to the xml uri (http://www.w3.org/XML/1998/namespace).
+        /// Gets the <see cref="XNamespace"/> object that corresponds to the xml uri
+        // (http://www.w3.org/XML/1998/namespace).
         /// </summary>
         public static XNamespace Xml
         {
@@ -90,7 +94,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Gets the <see cref="XNamespace"/> object that corresponds to the xmlns uri (http://www.w3.org/2000/xmlns/).
+        /// Gets the <see cref="XNamespace"/> object that corresponds to the xmlns uri
+        // (http://www.w3.org/2000/xmlns/).
         /// </summary>
         public static XNamespace Xmlns
         {
@@ -137,11 +142,14 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="XNamespace"/> is equal to the current <see cref="XNamespace"/>.
+        /// Determines whether the specified <see cref="XNamespace"/> is equal to the current <see
+        // cref="XNamespace"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="XNamespace"/> to compare to the current <see cref="XNamespace"/>.</param>
+        /// <param name="obj">The <see cref="XNamespace"/> to compare to the current <see
+        // cref="XNamespace"/>.</param>
         /// <returns>
-        /// true if the specified <see cref="XNamespace"/> is equal to the current <see cref="XNamespace"/>; otherwise false.
+        /// true if the specified <see cref="XNamespace"/> is equal to the current <see cref="XNamespace"/>;
+        // otherwise false.
         /// </returns>
         /// <remarks>
         /// For two <see cref="XNamespace"/> objects to be equal they must have the same
@@ -198,8 +206,10 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="XName"/> created from this XNamespace <see cref="XName"/> and a portion of the passed in
-        /// local name parameter.  The returned <see cref="XName"/> object is guaranteed to be atomic (i.e. the only one in the system for
+        /// Returns an <see cref="XName"/> created from this XNamespace <see cref="XName"/> and a portion of
+        // the passed in
+        /// local name parameter.  The returned <see cref="XName"/> object is guaranteed to be atomic (i.e.
+        // the only one in the system for
         /// this particular expanded name).
         /// </summary>
         internal XName GetName(string localName, int index, int count)
@@ -223,8 +233,10 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Returns an <see cref="XNamespace"/> created from a portion of the passed in namespace name parameter.  The returned <see cref="XNamespace"/>
-        /// object is guaranteed to be atomic (i.e. the only one in the system for this particular namespace name).
+        /// Returns an <see cref="XNamespace"/> created from a portion of the passed in namespace name
+        // parameter.  The returned <see cref="XNamespace"/>
+        /// object is guaranteed to be atomic (i.e. the only one in the system for this particular namespace
+        // name).
         /// </summary>
         internal static XNamespace Get(string namespaceName, int index, int count)
         {
@@ -240,7 +252,8 @@ namespace System.Xml.Linq
             if (count == 0)
                 return None;
 
-            // Use CompareExchange to ensure that exactly one XHashtable<WeakReference> is used to store namespaces
+            // Use CompareExchange to ensure that exactly one XHashtable<WeakReference> is used to store
+            // namespaces
             if (s_namespaces == null)
                 Interlocked.CompareExchange(
                     ref s_namespaces,
@@ -294,7 +307,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// This function is used by the <see cref="XHashtable{XName}"/> to extract the local name part from an <see cref="XName"/>.  The hash table
+        /// This function is used by the <see cref="XHashtable{XName}"/> to extract the local name part from
+        // an <see cref="XName"/>.  The hash table
         /// uses the local name as the hash key.
         /// </summary>
         private static string ExtractLocalName(XName n)
@@ -311,9 +325,12 @@ namespace System.Xml.Linq
             r is not null && r.TryGetTarget(out XNamespace? target) ? target.NamespaceName : null;
 
         /// <summary>
-        /// Ensure that an XNamespace object for 'namespaceName' has been atomically created.  In other words, all outstanding
-        /// references to this particular namespace, on any thread, must all be to the same object.  Care must be taken,
-        /// since other threads can be concurrently calling this method, and the target of a WeakReference can be cleaned up
+        /// Ensure that an XNamespace object for 'namespaceName' has been atomically created.  In other
+        // words, all outstanding
+        /// references to this particular namespace, on any thread, must all be to the same object.  Care
+        // must be taken,
+        /// since other threads can be concurrently calling this method, and the target of a WeakReference
+        // can be cleaned up
         /// at any time by the GC.
         /// </summary>
         private static XNamespace EnsureNamespace(
@@ -326,7 +343,8 @@ namespace System.Xml.Linq
             // Keep looping until a non-null namespace has been retrieved
             while (true)
             {
-                // Save refNmsp in local variable, so we can work on a value that will not be changed by another thread
+                // Save refNmsp in local variable, so we can work on a value that will not be changed by another
+                // thread
                 refOld = refNmsp;
 
                 if (refOld != null && refOld.TryGetTarget(out XNamespace? ns))

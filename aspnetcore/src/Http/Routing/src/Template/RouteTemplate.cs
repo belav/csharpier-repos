@@ -51,7 +51,8 @@ public class RouteTemplate
     }
 
     /// <summary>
-    /// Constructs a a new <see cref="RouteTemplate" /> instance given the <paramref name="template"/> string
+    /// Constructs a a new <see cref="RouteTemplate" /> instance given the <paramref name="template"/>
+    // string
     /// and a list of <paramref name="segments"/>. Computes the parameters in the route template.
     /// </summary>
     /// <param name="template">A string representation of the route template.</param>
@@ -85,7 +86,8 @@ public class RouteTemplate
     public string? TemplateText { get; }
 
     /// <summary>
-    /// Gets the list of <see cref="TemplatePart"/> that represent that parameters defined in the route template.
+    /// Gets the list of <see cref="TemplatePart"/> that represent that parameters defined in the route
+    // template.
     /// </summary>
     public IList<TemplatePart> Parameters { get; }
 

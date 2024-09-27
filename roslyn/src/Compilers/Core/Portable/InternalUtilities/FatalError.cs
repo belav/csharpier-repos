@@ -13,8 +13,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.ErrorReporting
 {
     /// <summary>
-    /// Thrown when async code must cancel the current execution but does not have access to the <see cref="CancellationTokenSource"/> of the <see cref="CancellationToken"/> passed to the code.
-    /// Should be used in very rare cases where the <see cref="CancellationTokenSource"/> is out of our control (e.g. owned but not exposed by JSON RPC in certain call-back scenarios).
+    /// Thrown when async code must cancel the current execution but does not have access to the <see
+    // cref="CancellationTokenSource"/> of the <see cref="CancellationToken"/> passed to the code.
+    /// Should be used in very rare cases where the <see cref="CancellationTokenSource"/> is out of our
+    // control (e.g. owned but not exposed by JSON RPC in certain call-back scenarios).
     /// </summary>
     internal sealed class OperationCanceledIgnoringCallerTokenException : OperationCanceledException
     {
@@ -41,7 +43,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <summary>
         /// Set by the host to handle an error report; this may crash the process or report telemetry.
         /// </summary>
-        /// <param name="nonFatalHandler">A handler that will not crash the process when called.  Used when calling <see
+        /// <param name="nonFatalHandler">A handler that will not crash the process when called.  Used when
+        // calling <see
         /// cref="ReportNonFatalError(Exception, ErrorSeverity, bool)"/></param>
         public static void SetHandlers(
             ErrorReporterHandler handler,
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// Copies the handler in this instance to the linked copy of this type in this other assembly.
         /// </summary>
         /// <remarks>
-        /// This file is in linked into multiple layers, but we want to ensure that all layers have the same copy.
+        /// This file is in linked into multiple layers, but we want to ensure that all layers have the same
+        // copy.
         /// This lets us copy the handler in this instance into the same in another instance.
         /// </remarks>
         public static void CopyHandlersTo(Assembly assembly)
@@ -94,7 +98,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 )!;
                 if (handler is not null)
                 {
-                    // We need to convert the delegate type to the type in the linked copy since they won't have identity.
+                    // We need to convert the delegate type to the type in the linked copy since they won't have
+                    // identity.
                     var convertedDelegate = Delegate.CreateDelegate(
                         targetHandlerProperty.FieldType,
                         handler.Target,
@@ -144,17 +149,23 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         }
 
         /// <summary>
-        /// <para>Use in an exception filter to report an error (by calling <see cref="s_handler"/>), unless the
-        /// operation has been cancelled at the request of <paramref name="contextCancellationToken"/>. The exception is
+        /// <para>Use in an exception filter to report an error (by calling <see cref="s_handler"/>), unless
+        // the
+        /// operation has been cancelled at the request of <paramref name="contextCancellationToken"/>. The
+        // exception is
         /// never caught.</para>
         ///
-        /// <para>Cancellable operations are only expected to throw <see cref="OperationCanceledException"/> if the
-        /// applicable <paramref name="contextCancellationToken"/> indicates cancellation is requested by setting
+        /// <para>Cancellable operations are only expected to throw <see cref="OperationCanceledException"/>
+        // if the
+        /// applicable <paramref name="contextCancellationToken"/> indicates cancellation is requested by
+        // setting
         /// <see cref="CancellationToken.IsCancellationRequested"/>. Unexpected cancellation, i.e. an
-        /// <see cref="OperationCanceledException"/> which occurs without <paramref name="contextCancellationToken"/>
+        /// <see cref="OperationCanceledException"/> which occurs without <paramref
+        // name="contextCancellationToken"/>
         /// requesting cancellation, is treated as an error by this method.</para>
         ///
-        /// <para>This method does not require <see cref="OperationCanceledException.CancellationToken"/> to match
+        /// <para>This method does not require <see cref="OperationCanceledException.CancellationToken"/> to
+        // match
         /// <paramref name="contextCancellationToken"/>, provided cancellation is expected per the previous
         /// paragraph.</para>
         /// </summary>
@@ -242,13 +253,17 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// catch the exception, unless the operation was cancelled at the request of
         /// <paramref name="contextCancellationToken"/>.</para>
         ///
-        /// <para>Cancellable operations are only expected to throw <see cref="OperationCanceledException"/> if the
-        /// applicable <paramref name="contextCancellationToken"/> indicates cancellation is requested by setting
+        /// <para>Cancellable operations are only expected to throw <see cref="OperationCanceledException"/>
+        // if the
+        /// applicable <paramref name="contextCancellationToken"/> indicates cancellation is requested by
+        // setting
         /// <see cref="CancellationToken.IsCancellationRequested"/>. Unexpected cancellation, i.e. an
-        /// <see cref="OperationCanceledException"/> which occurs without <paramref name="contextCancellationToken"/>
+        /// <see cref="OperationCanceledException"/> which occurs without <paramref
+        // name="contextCancellationToken"/>
         /// requesting cancellation, is treated as an error by this method.</para>
         ///
-        /// <para>This method does not require <see cref="OperationCanceledException.CancellationToken"/> to match
+        /// <para>This method does not require <see cref="OperationCanceledException.CancellationToken"/> to
+        // match
         /// <paramref name="contextCancellationToken"/>, provided cancellation is expected per the previous
         /// paragraph.</para>
         /// </summary>
@@ -280,8 +295,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
 
         private static readonly object s_reportedMarker = new();
 
-        // Do not allow this method to be inlined.  That way when we have a dump we can see this frame in the stack and
-        // can examine things like s_reportedExceptionMessage.  Without this, it's a lot tricker as FatalError is linked
+        // Do not allow this method to be inlined.  That way when we have a dump we can see this frame in
+        // the stack and
+        // can examine things like s_reportedExceptionMessage.  Without this, it's a lot tricker as
+        // FatalError is linked
         // into many assemblies and finding the right type can be much harder.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void Report(
@@ -294,7 +311,8 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         }
 
         /// <summary>
-        /// Used to report a non-fatal-watson (when possible) to report an exception.  The exception is not caught. Does
+        /// Used to report a non-fatal-watson (when possible) to report an exception.  The exception is not
+        // caught. Does
         /// nothing if no non-fatal error handler is registered.  See the second argument to <see
         /// cref="SetHandlers(ErrorReporterHandler, ErrorReporterHandler?)"/>.
         /// </summary>
@@ -349,8 +367,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     }
 
     /// <summary>
-    /// The severity of the error, see the enum members for a description of when to use each. This is metadata that's included
-    /// in a non-fatal fault report, which we can take advantage of on the backend to automatically triage bugs. For example,
+    /// The severity of the error, see the enum members for a description of when to use each. This is
+    // metadata that's included
+    /// in a non-fatal fault report, which we can take advantage of on the backend to automatically
+    // triage bugs. For example,
     /// a critical severity issue we can open with a lower bug count compared to a low priority one.
     /// </summary>
     internal enum ErrorSeverity
@@ -361,21 +381,27 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         Uncategorized,
 
         /// <summary>
-        /// Something failed, but the user is unlikely to notice. Especially useful for background things that we can silently recover
+        /// Something failed, but the user is unlikely to notice. Especially useful for background things
+        // that we can silently recover
         /// from, like bugs in caching systems.
         /// </summary>
         Diagnostic,
 
         /// <summary>
-        /// Something failed, and the user might notice, but they're still likely able to carry on. For example, if the user
-        /// asked for some information from the IDE (find references, completion, etc.) and we were able to give partial results.
+        /// Something failed, and the user might notice, but they're still likely able to carry on. For
+        // example, if the user
+        /// asked for some information from the IDE (find references, completion, etc.) and we were able to
+        // give partial results.
         /// </summary>
         General,
 
         /// <summary>
-        /// Something failed, and the user likely noticed. For example, the user pressed a button to do an action, and
-        /// we threw an exception so we completely failed to do that in an unrecoverable way. This may also be used
-        /// for back-end systems where a failure is going to result in a highly broken experience, for example if parsing a file
+        /// Something failed, and the user likely noticed. For example, the user pressed a button to do an
+        // action, and
+        /// we threw an exception so we completely failed to do that in an unrecoverable way. This may also
+        // be used
+        /// for back-end systems where a failure is going to result in a highly broken experience, for
+        // example if parsing a file
         /// catastrophically failed.
         /// </summary>
         Critical,

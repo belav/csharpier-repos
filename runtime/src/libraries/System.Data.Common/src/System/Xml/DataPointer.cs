@@ -704,7 +704,8 @@ namespace System.Xml
                 throw new InvalidOperationException(SR.DataDom_Foliation);
             }
 
-            // Cannot use MoveTo( n ); b/c the initial state for MoveTo is invalid (region is foliated but this is not)
+            // Cannot use MoveTo( n ); b/c the initial state for MoveTo is invalid (region is foliated but this
+            // is not)
             _node = n;
             _column = null;
             _fOnValue = false;
@@ -713,7 +714,8 @@ namespace System.Xml
             _bNeedFoliate = false;
         }
 
-        //for the 6 properties below, only when the this.column == null that the nodetype could be XmlDeclaration node
+        //for the 6 properties below, only when the this.column == null that the nodetype could be
+        // XmlDeclaration node
         internal string? PublicId
         {
             get

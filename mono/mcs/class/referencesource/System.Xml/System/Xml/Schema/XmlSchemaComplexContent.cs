@@ -9,7 +9,8 @@ namespace System.Xml.Schema
 {
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaComplexContent.uex' path='docs/doc[@for="XmlSchemaComplexContent"]/*' />
+    /// <include file='doc\XmlSchemaComplexContent.uex'
+    // path='docs/doc[@for="XmlSchemaComplexContent"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -19,7 +20,8 @@ namespace System.Xml.Schema
         bool isMixed;
         bool hasMixedAttribute;
 
-        /// <include file='doc\XmlSchemaComplexContent.uex' path='docs/doc[@for="XmlSchemaComplexContent.IsMixed"]/*' />
+        /// <include file='doc\XmlSchemaComplexContent.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContent.IsMixed"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -34,7 +36,8 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaComplexContent.uex' path='docs/doc[@for="XmlSchemaComplexContent.Content"]/*' />
+        /// <include file='doc\XmlSchemaComplexContent.uex'
+        // path='docs/doc[@for="XmlSchemaComplexContent.Content"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

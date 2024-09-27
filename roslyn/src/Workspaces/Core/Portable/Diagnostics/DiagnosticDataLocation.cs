@@ -13,10 +13,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     internal sealed class DiagnosticDataLocation
     {
         /// <summary>
-        /// Path to where the diagnostic was originally reported.  May be a path to a document in a project, or the
-        /// project file itself. This should only be used by clients that truly need to know the original location a
-        /// diagnostic was reported at, ignoring things like <c>#line</c> directives or other systems that would map the
-        /// diagnostic to a different file or location.  Most clients should instead use <see cref="MappedFileSpan"/>,
+        /// Path to where the diagnostic was originally reported.  May be a path to a document in a project,
+        // or the
+        /// project file itself. This should only be used by clients that truly need to know the original
+        // location a
+        /// diagnostic was reported at, ignoring things like <c>#line</c> directives or other systems that
+        // would map the
+        /// diagnostic to a different file or location.  Most clients should instead use <see
+        // cref="MappedFileSpan"/>,
         /// which contains the final location (file and span) that the diagnostic should be considered at.
         /// </summary>
         [DataMember(Order = 0)]
@@ -29,8 +33,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public readonly DocumentId? DocumentId;
 
         /// <summary>
-        /// Path and span where the diagnostic has been finally mapped to.  If no mapping happened, this will be equal
-        /// to <see cref="UnmappedFileSpan"/>.  The <see cref="FileLinePositionSpan.Path"/> of this value will be the
+        /// Path and span where the diagnostic has been finally mapped to.  If no mapping happened, this
+        // will be equal
+        /// to <see cref="UnmappedFileSpan"/>.  The <see cref="FileLinePositionSpan.Path"/> of this value
+        // will be the
         /// fully normalized file path where the diagnostic is located at.
         /// </summary>
         [DataMember(Order = 2)]
@@ -43,7 +49,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         )
             : this(unmappedFileSpan, documentId, mappedFileSpan, forceMappedPath: false)
         {
-            // This constructor is used for deserialization, so the arguments must have the same exact order and type
+            // This constructor is used for deserialization, so the arguments must have the same exact order and
+            // type
             // as the fields with the [DataMember] attribute.
         }
 
@@ -65,8 +72,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             UnmappedFileSpan = unmappedFileSpan;
             DocumentId = documentId;
 
-            // If we were passed in a mapped span use it with the original span to determine the true final mapped
-            // location. If forceMappedSpan is true, then this is a test which is explicitly making a mapped span that
+            // If we were passed in a mapped span use it with the original span to determine the true final
+            // mapped
+            // location. If forceMappedSpan is true, then this is a test which is explicitly making a mapped
+            // span that
             // it wants us to not mess with.  In that case, just hold onto that value directly.
             if (mappedFileSpan is { } mappedSpan && (mappedSpan.HasMappedPath || forceMappedPath))
             {
@@ -104,7 +113,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Return a new location with the same <see cref="DocumentId"/> as this, but with updated <see
-        /// cref="UnmappedFileSpan"/> and <see cref="MappedFileSpan"/> corresponding to the respection locations of
+        /// cref="UnmappedFileSpan"/> and <see cref="MappedFileSpan"/> corresponding to the respection
+        // locations of
         /// <paramref name="newSourceSpan"/> within <paramref name="tree"/>.
         /// </summary>
         public DiagnosticDataLocation WithSpan(TextSpan newSourceSpan, SyntaxTree tree) =>

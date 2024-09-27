@@ -9,12 +9,15 @@ namespace Microsoft.AspNetCore.Rewrite.IISUrlRewrite;
 internal static class ServerVariables
 {
     /// <summary>
-    /// Returns the matching <see cref="PatternSegment"/> for the given <paramref name="serverVariable"/>
+    /// Returns the matching <see cref="PatternSegment"/> for the given <paramref
+    // name="serverVariable"/>
     /// </summary>
     /// <param name="serverVariable">The server variable</param>
     /// <param name="context">The parser context which is utilized when an exception is thrown</param>
-    /// <param name="uriMatchPart">Indicates whether the full URI or the path should be evaluated for URL segments</param>
-    /// <param name="alwaysUseManagedServerVariables">Determines whether server variables are sourced from the managed server</param>
+    /// <param name="uriMatchPart">Indicates whether the full URI or the path should be evaluated for
+    // URL segments</param>
+    /// <param name="alwaysUseManagedServerVariables">Determines whether server variables are sourced
+    // from the managed server</param>
     /// <exception cref="FormatException">Thrown when the server variable is unknown</exception>
     /// <returns>The matching <see cref="PatternSegment"/></returns>
     public static PatternSegment FindServerVariable(

@@ -3,7 +3,8 @@
 
 namespace System.Speech.Recognition
 {
-    // Event args used in the RecognizerUpdateReached event, which is raised after a call is made to RequestRecognizerUpdate.
+    // Event args used in the RecognizerUpdateReached event, which is raised after a call is made to
+    // RequestRecognizerUpdate.
 
     public class RecognizerUpdateReachedEventArgs : EventArgs
     {

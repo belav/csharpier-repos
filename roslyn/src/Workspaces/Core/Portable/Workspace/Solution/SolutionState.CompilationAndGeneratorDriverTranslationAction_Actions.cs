@@ -41,7 +41,8 @@ namespace Microsoft.CodeAnalysis
 
                 public DocumentId DocumentId => _newState.Attributes.Id;
 
-                // Replacing a single tree doesn't impact the generated trees in a compilation, so we can use this against
+                // Replacing a single tree doesn't impact the generated trees in a compilation, so we can use this
+                // against
                 // compilations that have generated trees.
                 public override bool CanUpdateCompilationWithStaleGeneratedTreesIfGeneratorsGiveSameOutput =>
                     true;
@@ -222,7 +223,8 @@ namespace Microsoft.CodeAnalysis
                     return Task.FromResult(oldCompilation.WithOptions(state.CompilationOptions));
                 }
 
-                // Updating the options of a compilation doesn't require us to reparse trees, so we can use this to update
+                // Updating the options of a compilation doesn't require us to reparse trees, so we can use this to
+                // update
                 // compilations with stale generated trees.
                 public override bool CanUpdateCompilationWithStaleGeneratedTreesIfGeneratorsGiveSameOutput =>
                     true;
@@ -257,7 +259,8 @@ namespace Microsoft.CodeAnalysis
                     return Task.FromResult(oldCompilation.WithAssemblyName(assemblyName));
                 }
 
-                // Updating the options of a compilation doesn't require us to reparse trees, so we can use this to update
+                // Updating the options of a compilation doesn't require us to reparse trees, so we can use this to
+                // update
                 // compilations with stale generated trees.
                 public override bool CanUpdateCompilationWithStaleGeneratedTreesIfGeneratorsGiveSameOutput =>
                     true;
@@ -351,7 +354,8 @@ namespace Microsoft.CodeAnalysis
 
                 public override GeneratorDriver? TransformGeneratorDriver(GeneratorDriver _)
                 {
-                    // The GeneratorDriver that we have here is from a prior version of the Project, it may be missing state changes due
+                    // The GeneratorDriver that we have here is from a prior version of the Project, it may be missing
+                    // state changes due
                     // to changes to the project. We'll update everything here.
                     var generatorDriver = oldGeneratorDriver
                         .ReplaceAdditionalTexts(
@@ -372,7 +376,8 @@ namespace Microsoft.CodeAnalysis
                     CompilationAndGeneratorDriverTranslationAction priorAction
                 )
                 {
-                    // If the prior action is also a ReplaceGeneratorDriverAction, we'd entirely overwrite it's changes, so we can drop the prior one entirely.
+                    // If the prior action is also a ReplaceGeneratorDriverAction, we'd entirely overwrite it's changes,
+                    // so we can drop the prior one entirely.
                     return priorAction is ReplaceGeneratorDriverAction ? this : null;
                 }
             }

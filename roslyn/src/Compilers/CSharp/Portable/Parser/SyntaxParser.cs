@@ -533,7 +533,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return CreateMissingToken(kind, this.CurrentToken.Kind, reportError: true);
         }
 
-        // Consume a token if it is the right kind. Otherwise skip a token and replace it with one of the correct kind.
+        // Consume a token if it is the right kind. Otherwise skip a token and replace it with one of the
+        // correct kind.
         protected SyntaxToken EatTokenAsKind(SyntaxKind expected)
         {
             Debug.Assert(SyntaxFacts.IsAnyToken(expected));
@@ -1037,7 +1038,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         /// <summary>
         /// Converts skippedSyntax node into tokens and adds these as trivia on the target token.
-        /// Also adds the first error (in depth-first preorder) found in the skipped syntax tree to the target token.
+        /// Also adds the first error (in depth-first preorder) found in the skipped syntax tree to the
+        // target token.
         /// </summary>
         internal SyntaxToken AddSkippedSyntax(
             SyntaxToken target,
@@ -1169,7 +1171,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         /// <summary>
         /// This function searches for the given location node within the subtree rooted at root node.
-        /// If it finds it, the function computes the offset span of that child node within the root and returns true,
+        /// If it finds it, the function computes the offset span of that child node within the root and
+        // returns true,
         /// otherwise it returns false.
         /// </summary>
         /// <param name="root">Root node</param>
@@ -1308,7 +1311,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         /// <summary>
-        /// Whenever parsing in a <c>while (true)</c> loop and a bug could prevent the loop from making progress,
+        /// Whenever parsing in a <c>while (true)</c> loop and a bug could prevent the loop from making
+        // progress,
         /// this method can prevent the parsing from hanging.
         /// Use as:
         ///     int tokenProgress = -1;

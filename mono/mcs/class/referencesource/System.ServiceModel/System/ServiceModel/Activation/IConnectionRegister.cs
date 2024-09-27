@@ -32,7 +32,8 @@ namespace System.ServiceModel.Activation
         void Unregister();
     }
 
-    //Used on the client side (e.g. inside WebHost) to add async support to validate the Uri without blocking IO threads to improve scalability.
+    //Used on the client side (e.g. inside WebHost) to add async support to validate the Uri without
+    // blocking IO threads to improve scalability.
     [ServiceContract(
         SessionMode = SessionMode.Required,
         CallbackContract = typeof(IConnectionDuplicator)

@@ -19,10 +19,13 @@ namespace Moq
     /// </summary>
     /// <typeparam name="T">Type to mock, which can be an interface, a class, or a delegate.</typeparam>
     /// <remarks>
-    ///   Any interface type can be used for mocking, but for classes, only abstract and virtual members can be mocked.
+    ///   Any interface type can be used for mocking, but for classes, only abstract and virtual members
+    // can be mocked.
     ///   <para>
-    ///     The behavior of the mock with regards to the setups and the actual calls is determined by the optional
-    ///     <see cref = "MockBehavior" /> that can be passed to the <see cref="Mock{T}(MockBehavior)"/> constructor.
+    ///     The behavior of the mock with regards to the setups and the actual calls is determined by
+    // the optional
+    ///     <see cref = "MockBehavior" /> that can be passed to the <see cref="Mock{T}(MockBehavior)"/>
+    // constructor.
     ///   </para>
     /// </remarks>
     /// <example group="overview">
@@ -69,32 +72,32 @@ namespace Moq
     /// </example>
     public partial class Mock<T> : Mock, IMock<T>
         where T : class
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private static Type[] inheritedInterfaces;
-            private static int serialNumberCounter;
-    After:
-            static Type[] inheritedInterfaces;
-            static int serialNumberCounter;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static Type[] inheritedInterfaces;
+private static int serialNumberCounter;
+After:
+static Type[] inheritedInterfaces;
+static int serialNumberCounter;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private static Type[] inheritedInterfaces;
-            private static int serialNumberCounter;
-    After:
-            static Type[] inheritedInterfaces;
-            static int serialNumberCounter;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static Type[] inheritedInterfaces;
+private static int serialNumberCounter;
+After:
+static Type[] inheritedInterfaces;
+static int serialNumberCounter;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private static Type[] inheritedInterfaces;
-            private static int serialNumberCounter;
-    After:
-            static Type[] inheritedInterfaces;
-            static int serialNumberCounter;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static Type[] inheritedInterfaces;
+private static int serialNumberCounter;
+After:
+static Type[] inheritedInterfaces;
+static int serialNumberCounter;
+*/
     {
         static Type[] inheritedInterfaces;
         static int serialNumberCounter;
@@ -108,74 +111,74 @@ namespace Moq
 
             serialNumberCounter = 0;
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private T instance;
-                    private List<Type> additionalInterfaces;
-                    private Dictionary<Type, object> configuredDefaultValues;
-                    private object[] constructorArguments;
-                    private DefaultValueProvider defaultValueProvider;
-                    private EventHandlerCollection eventHandlers;
-                    private InvocationCollection invocations;
-                    private string name;
-                    private SetupCollection setups;
-            After:
-                    T instance;
-                    List<Type> additionalInterfaces;
-                    Dictionary<Type, object> configuredDefaultValues;
-                    object[] constructorArguments;
-                    DefaultValueProvider defaultValueProvider;
-                    EventHandlerCollection eventHandlers;
-                    InvocationCollection invocations;
-                    string name;
-                    SetupCollection setups;
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private T instance;
+private List<Type> additionalInterfaces;
+private Dictionary<Type, object> configuredDefaultValues;
+private object[] constructorArguments;
+private DefaultValueProvider defaultValueProvider;
+private EventHandlerCollection eventHandlers;
+private InvocationCollection invocations;
+private string name;
+private SetupCollection setups;
+After:
+T instance;
+List<Type> additionalInterfaces;
+Dictionary<Type, object> configuredDefaultValues;
+object[] constructorArguments;
+DefaultValueProvider defaultValueProvider;
+EventHandlerCollection eventHandlers;
+InvocationCollection invocations;
+string name;
+SetupCollection setups;
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private T instance;
-                    private List<Type> additionalInterfaces;
-                    private Dictionary<Type, object> configuredDefaultValues;
-                    private object[] constructorArguments;
-                    private DefaultValueProvider defaultValueProvider;
-                    private EventHandlerCollection eventHandlers;
-                    private InvocationCollection invocations;
-                    private string name;
-                    private SetupCollection setups;
-            After:
-                    T instance;
-                    List<Type> additionalInterfaces;
-                    Dictionary<Type, object> configuredDefaultValues;
-                    object[] constructorArguments;
-                    DefaultValueProvider defaultValueProvider;
-                    EventHandlerCollection eventHandlers;
-                    InvocationCollection invocations;
-                    string name;
-                    SetupCollection setups;
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private T instance;
+private List<Type> additionalInterfaces;
+private Dictionary<Type, object> configuredDefaultValues;
+private object[] constructorArguments;
+private DefaultValueProvider defaultValueProvider;
+private EventHandlerCollection eventHandlers;
+private InvocationCollection invocations;
+private string name;
+private SetupCollection setups;
+After:
+T instance;
+List<Type> additionalInterfaces;
+Dictionary<Type, object> configuredDefaultValues;
+object[] constructorArguments;
+DefaultValueProvider defaultValueProvider;
+EventHandlerCollection eventHandlers;
+InvocationCollection invocations;
+string name;
+SetupCollection setups;
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private T instance;
-                    private List<Type> additionalInterfaces;
-                    private Dictionary<Type, object> configuredDefaultValues;
-                    private object[] constructorArguments;
-                    private DefaultValueProvider defaultValueProvider;
-                    private EventHandlerCollection eventHandlers;
-                    private InvocationCollection invocations;
-                    private string name;
-                    private SetupCollection setups;
-            After:
-                    T instance;
-                    List<Type> additionalInterfaces;
-                    Dictionary<Type, object> configuredDefaultValues;
-                    object[] constructorArguments;
-                    DefaultValueProvider defaultValueProvider;
-                    EventHandlerCollection eventHandlers;
-                    InvocationCollection invocations;
-                    string name;
-                    SetupCollection setups;
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private T instance;
+private List<Type> additionalInterfaces;
+private Dictionary<Type, object> configuredDefaultValues;
+private object[] constructorArguments;
+private DefaultValueProvider defaultValueProvider;
+private EventHandlerCollection eventHandlers;
+private InvocationCollection invocations;
+private string name;
+private SetupCollection setups;
+After:
+T instance;
+List<Type> additionalInterfaces;
+Dictionary<Type, object> configuredDefaultValues;
+object[] constructorArguments;
+DefaultValueProvider defaultValueProvider;
+EventHandlerCollection eventHandlers;
+InvocationCollection invocations;
+string name;
+SetupCollection setups;
+*/
         }
 
         T instance;
@@ -188,38 +191,38 @@ namespace Moq
         string name;
         SetupCollection setups;
 
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                private MockBehavior behavior;
-                private bool callBase;
-                private Switches switches;
-        After:
-                MockBehavior behavior;
-                bool callBase;
-                Switches switches;
-        */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private MockBehavior behavior;
+private bool callBase;
+private Switches switches;
+After:
+MockBehavior behavior;
+bool callBase;
+Switches switches;
+*/
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                private MockBehavior behavior;
-                private bool callBase;
-                private Switches switches;
-        After:
-                MockBehavior behavior;
-                bool callBase;
-                Switches switches;
-        */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private MockBehavior behavior;
+private bool callBase;
+private Switches switches;
+After:
+MockBehavior behavior;
+bool callBase;
+Switches switches;
+*/
 
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                private MockBehavior behavior;
-                private bool callBase;
-                private Switches switches;
-        After:
-                MockBehavior behavior;
-                bool callBase;
-                Switches switches;
-        */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private MockBehavior behavior;
+private bool callBase;
+private Switches switches;
+After:
+MockBehavior behavior;
+bool callBase;
+Switches switches;
+*/
         MockBehavior behavior;
         bool callBase;
         Switches switches;
@@ -252,7 +255,8 @@ namespace Moq
 
         /// <summary>
         ///   Initializes an instance of the mock with <see cref="MockBehavior.Default"/> behavior
-        ///   and with the given constructor arguments for the class. (Only valid when <typeparamref name="T"/> is a class.)
+        ///   and with the given constructor arguments for the class. (Only valid when <typeparamref
+        // name="T"/> is a class.)
         /// </summary>
         /// <param name="args">Optional constructor arguments if the mocked type is a class.</param>
         /// <remarks>
@@ -316,36 +320,38 @@ namespace Moq
         ///   Initializes an instance of the mock using the given constructor call including its
         ///   argument values and with a specific <see cref="MockBehavior"/> behavior.
         /// </summary>
-        /// <param name="newExpression">Lambda expression that creates an instance of <typeparamref name="T"/>.</param>
+        /// <param name="newExpression">Lambda expression that creates an instance of <typeparamref
+        // name="T"/>.</param>
         /// <param name="behavior">Behavior of the mock.</param>
         /// <example>
-        /// <code>var mock = new Mock&lt;MyProvider&gt;(() => new MyProvider(someArgument, 25), MockBehavior.Loose);</code>
+        /// <code>var mock = new Mock&lt;MyProvider&gt;(() => new MyProvider(someArgument, 25),
+        // MockBehavior.Loose);</code>
         /// </example>
         public Mock(Expression<Func<T>> newExpression, MockBehavior behavior = MockBehavior.Default)
             : this(
                 behavior,
                 Expressions.Visitors.ConstructorCallVisitor.ExtractArgumentValues(newExpression)
             )
-        /* Unmerged change from project 'Moq(netstandard2.0)'
-        Before:
-                private static string CreateUniqueDefaultMockName()
-        After:
-                static string CreateUniqueDefaultMockName()
-        */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static string CreateUniqueDefaultMockName()
+After:
+static string CreateUniqueDefaultMockName()
+*/
 
-        /* Unmerged change from project 'Moq(netstandard2.1)'
-        Before:
-                private static string CreateUniqueDefaultMockName()
-        After:
-                static string CreateUniqueDefaultMockName()
-        */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static string CreateUniqueDefaultMockName()
+After:
+static string CreateUniqueDefaultMockName()
+*/
 
-        /* Unmerged change from project 'Moq(net6.0)'
-        Before:
-                private static string CreateUniqueDefaultMockName()
-        After:
-                static string CreateUniqueDefaultMockName()
-        */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static string CreateUniqueDefaultMockName()
+After:
+static string CreateUniqueDefaultMockName()
+*/
         { }
 
         static string CreateUniqueDefaultMockName()
@@ -360,26 +366,26 @@ namespace Moq
                 .Append('>');
             return name.ToString();
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private void CheckParameters()
-            After:
-                    void CheckParameters()
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private void CheckParameters()
+After:
+void CheckParameters()
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private void CheckParameters()
-            After:
-                    void CheckParameters()
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private void CheckParameters()
+After:
+void CheckParameters()
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private void CheckParameters()
-            After:
-                    void CheckParameters()
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private void CheckParameters()
+After:
+void CheckParameters()
+*/
         }
 
         void CheckParameters()
@@ -454,7 +460,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Allows naming of your mocks, so they can be easily identified in error messages (e.g. from failed assertions).
+        ///   Allows naming of your mocks, so they can be easily identified in error messages (e.g. from
+        // failed assertions).
         /// </summary>
         public string Name
         {
@@ -469,26 +476,26 @@ namespace Moq
         {
             return this.Name;
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private void InitializeInstance()
-            After:
-                    void InitializeInstance()
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private void InitializeInstance()
+After:
+void InitializeInstance()
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private void InitializeInstance()
-            After:
-                    void InitializeInstance()
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private void InitializeInstance()
+After:
+void InitializeInstance()
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private void InitializeInstance()
-            After:
-                    void InitializeInstance()
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private void InitializeInstance()
+After:
+void InitializeInstance()
+*/
         }
 
         void InitializeInstance()
@@ -544,14 +551,16 @@ namespace Moq
         /// </summary>
         /// <remarks>
         ///   This method can only be called before the first use of the mock <see cref="Object"/> property,
-        ///   at which point the runtime type has already been generated and no more interfaces can be added to it.
+        ///   at which point the runtime type has already been generated and no more interfaces can be added
+        // to it.
         ///   <para>
         ///     Also, <typeparamref name="TInterface"/> must be an interface and not a class,
         ///     which must be specified when creating the mock instead.
         ///   </para>
         /// </remarks>
         /// <typeparam name="TInterface">Type of interface to cast the mock to.</typeparam>
-        /// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an interface.</exception>
+        /// <exception cref="ArgumentException">The <typeparamref name="TInterface"/> specified is not an
+        // interface.</exception>
         /// <exception cref="InvalidOperationException">
         ///   The mock type has already been generated by accessing the <see cref="Object"/> property.
         /// </exception>
@@ -610,7 +619,8 @@ namespace Moq
         /// <summary>
         ///   Specifies a setup on the mocked type for a call to a <see langword="void"/> method.
         /// </summary>
-        /// <param name="expression">Lambda expression that specifies the expected method invocation.</param>
+        /// <param name="expression">Lambda expression that specifies the expected method
+        // invocation.</param>
         /// <remarks>
         ///   If more than one setup is specified for the same method or property,
         ///   the latest one wins and is the one that will be executed.
@@ -628,10 +638,12 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Specifies a setup on the mocked type for a call to a non-<see langword="void"/> (value-returning) method.
+        ///   Specifies a setup on the mocked type for a call to a non-<see langword="void"/>
+        // (value-returning) method.
         /// </summary>
         /// <param name="expression">Lambda expression that specifies the method invocation.</param>
-        /// <typeparam name="TResult">Type of the return value. Typically omitted as it can be inferred from the expression.</typeparam>
+        /// <typeparam name="TResult">Type of the return value. Typically omitted as it can be inferred from
+        // the expression.</typeparam>
         /// <remarks>
         ///   If more than one setup is specified for the same method or property,
         ///   the latest one wins and is the one that will be executed.
@@ -652,7 +664,8 @@ namespace Moq
         ///   Specifies a setup on the mocked type for a call to a property getter.
         /// </summary>
         /// <param name="expression">Lambda expression that specifies the property getter.</param>
-        /// <typeparam name="TProperty">Type of the property. Typically omitted as it can be inferred from the expression.</typeparam>
+        /// <typeparam name="TProperty">Type of the property. Typically omitted as it can be inferred from
+        // the expression.</typeparam>
         /// <remarks>
         ///   If more than one setup is set for the same property getter,
         ///   the latest one wins and is the one that will be executed.
@@ -779,7 +792,8 @@ namespace Moq
 
         /// <summary>
         ///   Specifies that the given property should have "property behavior",
-        ///   meaning that setting its value will cause it to be saved and later returned when the property is requested.
+        ///   meaning that setting its value will cause it to be saved and later returned when the property
+        // is requested.
         ///   (This is also known as "stubbing".)
         /// </summary>
         /// <param name="property">Property expression to stub.</param>
@@ -808,7 +822,8 @@ namespace Moq
 
         /// <summary>
         ///   Specifies that the given property should have "property behavior",
-        ///   meaning that setting its value will cause it to be saved and later returned when the property is requested.
+        ///   meaning that setting its value will cause it to be saved and later returned when the property
+        // is requested.
         ///   This overload allows setting the initial value for the property.
         ///   (This is also known as "stubbing".)
         /// </summary>
@@ -846,9 +861,11 @@ namespace Moq
 
         /// <summary>
         ///   Specifies that the all properties on the mock should have "property behavior",
-        ///   meaning that setting their value will cause them to be saved and later returned when the properties is requested.
+        ///   meaning that setting their value will cause them to be saved and later returned when the
+        // properties is requested.
         ///   (This is also known as "stubbing".)
-        ///   The default value for each property will be the one generated as specified by the <see cref="Mock.DefaultValue"/>
+        ///   The default value for each property will be the one generated as specified by the <see
+        // cref="Mock.DefaultValue"/>
         ///   property for the mock.
         /// </summary>
         /// <remarks>
@@ -1105,7 +1122,8 @@ namespace Moq
         /// </summary>
         /// <param name="expression">Expression to verify.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">The invocation was not performed on the mock.</exception>
         /// <example group="verification">
@@ -1131,7 +1149,8 @@ namespace Moq
         /// <param name="times">The number of times a method is expected to be called.</param>
         /// <param name="expression">Expression to verify.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
@@ -1147,7 +1166,8 @@ namespace Moq
         /// <param name="times">The number of times a method is expected to be called.</param>
         /// <param name="expression">Expression to verify.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
@@ -1166,7 +1186,8 @@ namespace Moq
         /// <param name="expression">Expression to verify.</param>
         /// <param name="failMessage">Message to show if verification fails.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">The invocation was not performed on the mock.</exception>
         public void VerifyGet<TProperty>(
@@ -1184,7 +1205,8 @@ namespace Moq
         /// <param name="expression">Expression to verify.</param>
         /// <param name="failMessage">Message to show if verification fails.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
@@ -1205,7 +1227,8 @@ namespace Moq
         /// <param name="expression">Expression to verify.</param>
         /// <param name="failMessage">Message to show if verification fails.</param>
         /// <typeparam name="TProperty">
-        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's return type.
+        ///   Type of the property to verify. Typically omitted as it can be inferred from the expression's
+        // return type.
         /// </typeparam>
         /// <exception cref="MockException">
         ///   The invocation was not called the number times specified by <paramref name="times"/>.
@@ -1604,7 +1627,8 @@ namespace Moq
         /// <summary>
         /// Verifies that there were no calls other than those already verified.
         /// </summary>
-        /// <exception cref="MockException">There was at least one invocation not previously verified.</exception>
+        /// <exception cref="MockException">There was at least one invocation not previously
+        // verified.</exception>
         public void VerifyNoOtherCalls()
         {
             Mock.VerifyNoOtherCalls(this);
@@ -1615,7 +1639,8 @@ namespace Moq
         #region Raise
 
         /// <summary>
-        ///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref name="args"/> argument.
+        ///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref
+        // name="args"/> argument.
         /// </summary>
         /// <exception cref="ArgumentException">
         ///   The <paramref name="args"/> argument is invalid for the target event invocation,
@@ -1640,7 +1665,8 @@ namespace Moq
         ///     Assert.Null(presenter.SelectedOrder);
         ///
         ///     // Raise the event with a specific arguments data
-        ///     mockView.Raise(v => v.SelectionChanged += null, new OrderEventArgs { Order = new Order("moq", 500) });
+        ///     mockView.Raise(v => v.SelectionChanged += null, new OrderEventArgs { Order = new
+        // Order("moq", 500) });
         ///
         ///     // Now the presenter reacted to the event, and we have a selected order
         ///     Assert.NotNull(presenter.SelectedOrder);
@@ -1653,7 +1679,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref name="args"/> argument for a non-<see cref="EventHandler"/>-typed event.
+        ///   Raises the event referenced in <paramref name="eventExpression"/> using the given <paramref
+        // name="args"/> argument for a non-<see cref="EventHandler"/>-typed event.
         /// </summary>
         /// <exception cref="ArgumentException">
         ///   The <paramref name="args"/> arguments are invalid for the target event invocation,
@@ -1674,8 +1701,10 @@ namespace Moq
 
         /// <summary>
         ///   Raises the event referenced in <paramref name="eventExpression"/> using the given arguments
-        ///   for an event with a <c>Func&lt;..., Task&gt;</c> or <c>Func&lt;..., ValueTask&gt;</c> signature.
-        ///   The returned <see cref="Task"/> completes when all of the <see cref="Task"/>s / <see cref="ValueTask"/>s
+        ///   for an event with a <c>Func&lt;..., Task&gt;</c> or <c>Func&lt;..., ValueTask&gt;</c>
+        // signature.
+        ///   The returned <see cref="Task"/> completes when all of the <see cref="Task"/>s / <see
+        // cref="ValueTask"/>s
         ///   returned by the event handlers have completed.
         /// </summary>
         /// <exception cref="ArgumentException">

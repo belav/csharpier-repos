@@ -9,7 +9,8 @@ namespace System.ServiceModel
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
 
-    // Due to friend relationships with other assemblies, naming this class as AppSettings causes ambiguity when building those assemblies
+    // Due to friend relationships with other assemblies, naming this class as AppSettings causes
+    // ambiguity when building those assemblies
     internal static class ServiceModelAppSettings
     {
         internal const string HttpTransportPerFactoryConnectionPoolString =

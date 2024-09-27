@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -51,8 +52,10 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void TypeIsSerializable()
         {
-            // If this ever fails with SerializationException : Unable to find assembly 'System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'
-            // (usually when the assembly version is incremented) you need to modify the App.config file in this test project to reference the new version.
+            // If this ever fails with SerializationException : Unable to find assembly 'System.Web.Mvc,
+            // Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'
+            // (usually when the assembly version is incremented) you need to modify the App.config file in this
+            // test project to reference the new version.
 
             // Arrange
             MemoryStream ms = new MemoryStream();

@@ -37,7 +37,8 @@ namespace System.Net.PeerToPeer.Collaboration
         //
 
         // <SecurityKernel Critical="True" Ring="1">
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static PeerObject()
@@ -151,7 +152,9 @@ namespace System.Net.PeerToPeer.Collaboration
         public event EventHandler<ObjectChangedEventArgs> ObjectChanged
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: AddObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void" Ring="1" />
+            // <ReferencesCritical Name="Method:
+            // AddObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void"
+            // Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             add
@@ -163,7 +166,9 @@ namespace System.Net.PeerToPeer.Collaboration
                 AddObjectChangedEvent(value);
             }
             // <SecurityKernel Critical="True" Ring="2">
-            // <ReferencesCritical Name="Method: RemoveObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method:
+            // RemoveObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             remove
@@ -196,14 +201,21 @@ namespace System.Net.PeerToPeer.Collaboration
         #endregion
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <SatisfiesLinkDemand Name="GCHandle.Alloc(System.Object,System.Runtime.InteropServices.GCHandleType):System.Runtime.InteropServices.GCHandle" />
+        // <SatisfiesLinkDemand
+        // Name="GCHandle.Alloc(System.Object,System.Runtime.InteropServices.GCHandleType):System.Runtime.InteropServices.GCHandle"
+        // />
         // <SatisfiesLinkDemand Name="GCHandle.AddrOfPinnedObject():System.IntPtr" />
-        // <SatisfiesLinkDemand Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+        // <SatisfiesLinkDemand
+        // Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
         // <SatisfiesLinkDemand Name="GCHandle.Free():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabRegisterEvent(Microsoft.Win32.SafeHandles.SafeWaitHandle,System.UInt32,System.Net.PeerToPeer.Collaboration.PEER_COLLAB_EVENT_REGISTRATION&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabRegisterEvent(Microsoft.Win32.SafeHandles.SafeWaitHandle,System.UInt32,System.Net.PeerToPeer.Collaboration.PEER_COLLAB_EVENT_REGISTRATION&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&):System.Int32"
+        // />
         // <ReferencesCritical Name="Method: ObjectChangedCallback(Object, Boolean):Void" Ring="1" />
         // <ReferencesCritical Name="Field: m_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private void AddObjectChangedEvent(EventHandler<ObjectChangedEventArgs> callback)
@@ -289,7 +301,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: m_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private void RemoveObjectChangedEvent(EventHandler<ObjectChangedEventArgs> callback)
@@ -353,13 +367,23 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local eventData of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Field: m_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_OBJECTToPeerObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT):System.Net.PeerToPeer.Collaboration.PeerObject" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(System.Net.PeerToPeer.Collaboration.PEER_CONTACT):System.Net.PeerToPeer.Collaboration.PeerContact" Ring="2" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_OBJECTToPeerObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT):System.Net.PeerToPeer.Collaboration.PeerObject"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(System.Net.PeerToPeer.Collaboration.PEER_CONTACT):System.Net.PeerToPeer.Collaboration.PeerContact"
+        // Ring="2" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private void ObjectChangedCallback(object state, bool timedOut)
@@ -549,7 +573,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: m_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         protected virtual void Dispose(bool disposing)

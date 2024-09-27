@@ -271,7 +271,8 @@ namespace System.ServiceModel.Description
                 {
                     if (!this.isSingleWsdlInitialized)
                     {
-                        // Could throw NotSupportedException if multiple contract namespaces. Let the exception propagate to the dispatcher and show up on the html error page
+                        // Could throw NotSupportedException if multiple contract namespaces. Let the exception propagate to
+                        // the dispatcher and show up on the html error page
                         this.singleWsdl = WsdlHelper.GetSingleWsdl(this.Metadata);
                         this.isSingleWsdlInitialized = true;
                     }
@@ -735,7 +736,8 @@ namespace System.ServiceModel.Description
             }
         }
 
-        //If this contract is changed, you may need to change ServiceMetadataExtension.CreateHttpGetDispatcher()
+        //If this contract is changed, you may need to change
+        // ServiceMetadataExtension.CreateHttpGetDispatcher()
         [ServiceContract]
         internal interface IHttpGetMetadata
         {

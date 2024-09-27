@@ -22,7 +22,8 @@ namespace MonoTests.System.Web.Services.Description
         [SetUp]
         public void InitializeOperation()
         {
-            // workaround: OperationInput, OperationOutput and OperationFault are all empty derivations of OperationMessage
+            // workaround: OperationInput, OperationOutput and OperationFault are all empty derivations of
+            // OperationMessage
             operation = new OperationInput();
         }
 

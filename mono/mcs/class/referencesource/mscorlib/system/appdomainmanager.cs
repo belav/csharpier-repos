@@ -118,7 +118,8 @@ namespace System
                 }
             }
 
-            // If there was no specified TargetFrameworkName for the new domain, default it to the current domain's.
+            // If there was no specified TargetFrameworkName for the new domain, default it to the current
+            // domain's.
             if (appDomainInfo.TargetFrameworkName == null)
                 appDomainInfo.TargetFrameworkName =
                     AppDomain.CurrentDomain.GetTargetFrameworkName();
@@ -136,7 +137,8 @@ namespace System
         [System.Security.SecurityCritical]
         public virtual void InitializeNewDomain(AppDomainSetup appDomainInfo)
         {
-            // By default, InitializeNewDomain does nothing. AppDomain.CreateAppDomainManager relies on this fact.
+            // By default, InitializeNewDomain does nothing. AppDomain.CreateAppDomainManager relies on this
+            // fact.
         }
 
 #if FEATURE_APPDOMAINMANAGER_INITOPTIONS

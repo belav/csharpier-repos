@@ -27,7 +27,8 @@ namespace System
         };
 
         // http://host/Path/Path/File?Query is the base of
-        //      - http://host/Path/Path/File/ ...    (those "File" words may be different in semantic but anyway)
+        //      - http://host/Path/Path/File/ ...    (those "File" words may be different in semantic but
+        // anyway)
         //      - http://host/Path/Path/#Fragment
         //      - http://host/Path/Path/?Query
         //      - http://host/Path/Path/MoreDir/ ...
@@ -43,7 +44,8 @@ namespace System
         //      - http://host/Path/Path2/MoreDir
         //      - http://host/Path/File
         //
-        // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before going to this method.
+        // ASSUMES that strings like http://host/Path/Path/MoreDir/../../  have been canonicalized before
+        // going to this method.
         // ASSUMES that back slashes already have been converted if applicable.
         //
         internal static unsafe bool TestForSubPath(
@@ -136,11 +138,14 @@ namespace System
         //
         // start    - starting offset from input
         // end      - the exclusive ending offset in input
-        // destPos  - starting offset in dest for output, on return this will be an exclusive "end" in the output.
+        // destPos  - starting offset in dest for output, on return this will be an exclusive "end" in the
+        // output.
         //
-        // In case "dest" has lack of space it will be reallocated by preserving the _whole_ content up to current destPos
+        // In case "dest" has lack of space it will be reallocated by preserving the _whole_ content up to
+        // current destPos
         //
-        // Returns null if nothing has to be escaped AND passed dest was null, otherwise the resulting array with the updated destPos
+        // Returns null if nothing has to be escaped AND passed dest was null, otherwise the resulting array
+        // with the updated destPos
         //
         const short c_MaxAsciiCharsReallocate = 40;
         const short c_MaxUnicodeCharsReallocate = 40;
@@ -347,7 +352,8 @@ namespace System
         // - Any "bad" escape sequence will remain as is or '%' will be escaped.
         // - destPosition tells the starting index in dest for placing the result.
         //   On return destPosition tells the last character + 1 postion in the "dest" array.
-        // - The control chars and chars passed in rsdvX parameters may be re-escaped depending on UnescapeLevel
+        // - The control chars and chars passed in rsdvX parameters may be re-escaped depending on
+        // UnescapeLevel
         // - It is a RARE case when Unescape actually needs escaping some characteres mentioned above.
         //   For this reason it returns a char[] that is usually the same ref as the input "dest" value.
         //
@@ -553,7 +559,8 @@ namespace System
                             if (escapeReserved)
                             {
                                 //escape that char
-                                // Since this should be _really_ rare case, reallocate with constant size increase of 30 rsvd-type characters.
+                                // Since this should be _really_ rare case, reallocate with constant size increase of 30 rsvd-type
+                                // characters.
                                 if (escapedReallocations == 0)
                                 {
                                     escapedReallocations = 30;

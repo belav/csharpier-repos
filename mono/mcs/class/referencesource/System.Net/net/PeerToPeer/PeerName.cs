@@ -134,11 +134,17 @@ namespace System.Net.PeerToPeer
         /// <param name="secured"></param>
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerCreatePeerName(System.String,System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerIdentityGetDefault(System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeP2PNativeMethods.PeerCreatePeerName(System.String,System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeP2PNativeMethods.PeerIdentityGetDefault(System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local shNewPeerName of type: SafePeerData" Ring="1" />
         // <ReferencesCritical Name="Local shDefaultIdentity of type: SafePeerData" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // <ReferencesCritical Name="Method: SafePeerData.get_UnicodeString():System.String" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
@@ -243,9 +249,13 @@ namespace System.Net.PeerToPeer
         /// <returns>a PeerName instance</returns>
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerHostNameToPeerName(System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeP2PNativeMethods.PeerHostNameToPeerName(System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local shPeerName of type: SafePeerData" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // <ReferencesCritical Name="Method: SafePeerData.get_UnicodeString():System.String" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
@@ -313,9 +323,13 @@ namespace System.Net.PeerToPeer
         /// <returns></returns>
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerCreatePeerName(System.String,System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeP2PNativeMethods.PeerCreatePeerName(System.String,System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local shNewPeerName of type: SafePeerData" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // <ReferencesCritical Name="Method: SafePeerData.get_UnicodeString():System.String" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
@@ -354,10 +368,13 @@ namespace System.Net.PeerToPeer
             try
             {
                 //Here there is change made on the native side
-                //when passing secured peer names, it takes string of the form [40hexdigits].claasisifer and a newclassifier
+                //when passing secured peer names, it takes string of the form [40hexdigits].claasisifer and a
+                // newclassifier
                 //returns [40hexdigits.newclassifier]
-                //But for unsecured peer names it does not take 0.clasfier and newclassfier to return 0.newclassfier.
-                //It expects NULL as the first param. To satisfy this broken finctionality, we are passing null if the
+                //But for unsecured peer names it does not take 0.clasfier and newclassfier to return
+                // 0.newclassfier.
+                //It expects NULL as the first param. To satisfy this broken finctionality, we are passing null if
+                // the
                 //peer name is unsecured.
                 result = UnsafeP2PNativeMethods.PeerCreatePeerName(
                     peerName.IsSecured ? peerName.m_PeerName : null,
@@ -457,9 +474,13 @@ namespace System.Net.PeerToPeer
         {
             // <SecurityKernel Critical="True" Ring="0">
             // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-            // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerNameToPeerHostName(System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeP2PNativeMethods.PeerNameToPeerHostName(System.String,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+            // />
             // <ReferencesCritical Name="Local shPeerHostName of type: SafePeerData" Ring="1" />
-            // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+            // <ReferencesCritical Name="Method:
+            // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+            // Ring="1" />
             // <ReferencesCritical Name="Method: SafePeerData.get_UnicodeString():System.String" Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]

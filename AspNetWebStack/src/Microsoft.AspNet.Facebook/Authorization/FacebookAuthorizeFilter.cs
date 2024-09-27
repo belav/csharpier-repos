@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
         private static readonly Uri DefaultAuthorizationRedirectUrl = FacebookUri;
         private static readonly Uri DefaultCannotCreateCookiesRedirectPath = FacebookUri;
 
-        // Facebook Missing Permissions, shortened version to not add excessively long query string parameters to the url.
+        // Facebook Missing Permissions, shortened version to not add excessively long query string
+        // parameters to the url.
         private const string MissingPermissionsQueryName = "__fb_mps";
 
         private FacebookConfiguration _config;
@@ -173,7 +175,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
                         permissionContext.DeclinedPermissions
                     );
 
-                    // Add a query string parameter that enables us to identify if we've already prompted for missing permissions
+                    // Add a query string parameter that enables us to identify if we've already prompted for missing
+                    // permissions
                     // and therefore can detect cookies.
                     AddCookieVerificationQuery(parsedQueries);
                     // Rebuild the redirect Url so it contains the new query string parameter.
@@ -186,13 +189,15 @@ namespace Microsoft.AspNet.Facebook.Authorization
 
         /// <summary>
         /// Adds a query string parameter to a <see cref="NameValueCollection"/> that enables a
-        /// <see cref="FacebookAuthorizeFilter"/> to detect when cookies are unavailable and then trigger the
+        /// <see cref="FacebookAuthorizeFilter"/> to detect when cookies are unavailable and then trigger
+        // the
         /// <see cref="OnCannotCreateCookies"/> hook.
         /// </summary>
         /// <param name="queries">List of query parameters that are used to create a url.</param>
         protected static void AddCookieVerificationQuery(NameValueCollection queries)
         {
-            // Add a query string parameter that enables us to identify if we've already prompted for missing permissions
+            // Add a query string parameter that enables us to identify if we've already prompted for missing
+            // permissions
             queries.Add(MissingPermissionsQueryName, "true");
         }
 
@@ -212,10 +217,13 @@ namespace Microsoft.AspNet.Facebook.Authorization
         }
 
         /// <summary>
-        /// Returns an <see cref="ActionResult"/> that indicates we want to show a permission prompt.  Should only be used as a
-        /// return value within the <see cref="OnPermissionPrompt"/> and <see cref="OnDeniedPermissionPrompt"/> methods.
+        /// Returns an <see cref="ActionResult"/> that indicates we want to show a permission prompt.
+        // Should only be used as a
+        /// return value within the <see cref="OnPermissionPrompt"/> and <see
+        // cref="OnDeniedPermissionPrompt"/> methods.
         /// </summary>
-        /// <returns>An <see cref="ActionResult"/> that indicates that we want to show a permission prompt.</returns>
+        /// <returns>An <see cref="ActionResult"/> that indicates that we want to show a permission
+        // prompt.</returns>
         protected ShowPromptResult ShowPrompt(PermissionContext context)
         {
             FacebookClient client = context.FacebookContext.Client;
@@ -229,10 +237,12 @@ namespace Microsoft.AspNet.Facebook.Authorization
         }
 
         /// <summary>
-        /// Invoked during <see cref="OnAuthorization"/> after determining that cookies cannot be created. Default behavior
+        /// Invoked during <see cref="OnAuthorization"/> after determining that cookies cannot be created.
+        // Default behavior
         /// redirects to a no cookies error page.
         /// </summary>
-        /// <param name="context">Provides access to permission information associated with the user.</param>
+        /// <param name="context">Provides access to permission information associated with the
+        // user.</param>
         protected virtual void OnCannotCreateCookies(PermissionContext context)
         {
             Uri redirectPath;
@@ -250,17 +260,22 @@ namespace Microsoft.AspNet.Facebook.Authorization
         }
 
         /// <summary>
-        /// Invoked during <see cref="OnAuthorization"/> when a prompt requests permissions that were skipped or revoked.
+        /// Invoked during <see cref="OnAuthorization"/> when a prompt requests permissions that were
+        // skipped or revoked.
         /// Set the <paramref name="context"/>'s Result property to modify login flow.
         /// </summary>
-        /// <param name="context">Provides access to permission information associated with the user.</param>
+        /// <param name="context">Provides access to permission information associated with the
+        // user.</param>
         protected virtual void OnDeniedPermissionPrompt(PermissionContext context) { }
 
         /// <summary>
-        /// Invoked during <see cref="OnAuthorization"/> prior to a permission prompt that is requesting permissions that have
-        /// not been requested before. Set the <paramref name="context"/>'s Result property to modify login flow.
+        /// Invoked during <see cref="OnAuthorization"/> prior to a permission prompt that is requesting
+        // permissions that have
+        /// not been requested before. Set the <paramref name="context"/>'s Result property to modify login
+        // flow.
         /// </summary>
-        /// <param name="context">Provides access to permission information associated with the user.</param>
+        /// <param name="context">Provides access to permission information associated with the
+        // user.</param>
         protected virtual void OnPermissionPrompt(PermissionContext context)
         {
             context.Result = ShowPrompt(context);
@@ -356,8 +371,10 @@ namespace Microsoft.AspNet.Facebook.Authorization
             IEnumerable<string> skippedPermissions = permissionContext.SkippedPermissions;
             IEnumerable<string> missingPermissions = permissionContext.MissingPermissions;
 
-            // Declined permissions and skipped permissions can persist through multiple pages.  So we need to cross check
-            // them against the current pages permissions, this will determine if we should invoke the denied permission hook.
+            // Declined permissions and skipped permissions can persist through multiple pages.  So we need to
+            // cross check
+            // them against the current pages permissions, this will determine if we should invoke the denied
+            // permission hook.
             bool deniedPermissions = missingPermissions
                 .Where(permission =>
                     declinedPermissions.Contains(permission)
@@ -367,8 +384,10 @@ namespace Microsoft.AspNet.Facebook.Authorization
 
             permissionContext.RedirectUrl = redirectUrl;
 
-            // See if our persisted permissions cookie doesn't exist and if we've had missing permissions before.
-            // Essentially this checks to see if we've tried to persist permissions before and were unsuccessful due to an
+            // See if our persisted permissions cookie doesn't exist and if we've had missing permissions
+            // before.
+            // Essentially this checks to see if we've tried to persist permissions before and were unsuccessful
+            // due to an
             // inability to create cookies.
             if (
                 !PermissionHelper.RequestedPermissionsCookieExists(
@@ -383,7 +402,8 @@ namespace Microsoft.AspNet.Facebook.Authorization
             else
             {
                 // The DeniedPermissionPromptHook will only be invoked if we detect there are denied permissions.
-                // It is attempted instead of the permission hook to allow app creators to handle situations when a user
+                // It is attempted instead of the permission hook to allow app creators to handle situations when a
+                // user
                 // skip's or revokes previously prompted permissions. Ex: redirect to a different page.
                 if (deniedPermissions)
                 {

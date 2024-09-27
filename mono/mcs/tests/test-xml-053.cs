@@ -12,19 +12,22 @@ public class Outer<T, U>
     /// <summary>Outer`2.CopyTo(`0[,,][,][])</summary>
     public void CopyTo(T[][,][,,] array) { }
 
-    /// <summary>Outer`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.List{`1}}[],System.Int32)</summary>
+    ///
+    // <summary>Outer`2.CopyTo(System.Collections.Generic.KeyValuePair{`0,System.Collections.Generic.List{`1}}[],System.Int32)</summary>
     public void CopyTo(
         System.Collections.Generic.KeyValuePair<T, System.Collections.Generic.List<U>>[] array,
         int n
     ) { }
 
-    /// <summary>Outer`2.CopyTo``2(System.Collections.Generic.KeyValuePair{``0,System.Collections.Generic.List{``1}}[],System.Int32)</summary>
+    ///
+    // <summary>Outer`2.CopyTo``2(System.Collections.Generic.KeyValuePair{``0,System.Collections.Generic.List{``1}}[],System.Int32)</summary>
     public void CopyTo<W, X>(
         System.Collections.Generic.KeyValuePair<W, System.Collections.Generic.List<X>>[] array,
         int n
     ) { }
 
-    /// <summary>Outer`2.CopyTo``1(System.Collections.Generic.KeyValuePair{`1,System.Collections.Generic.List{``0}}[],System.Int32)</summary>
+    ///
+    // <summary>Outer`2.CopyTo``1(System.Collections.Generic.KeyValuePair{`1,System.Collections.Generic.List{``0}}[],System.Int32)</summary>
     public void CopyTo<V>(
         System.Collections.Generic.KeyValuePair<U, System.Collections.Generic.List<V>>[] array,
         int n

@@ -6,9 +6,12 @@
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    // A candidate can be discarded because there are too many or too few arguments, argument ref/out-ness is wrong,
-    // argument is not convertible to parameter type, type inference fails to infer valid type parameters, generic arity
-    // is wrong, member is on a less-derived type than an applicable member on a more-derived type, or the candidate is
+    // A candidate can be discarded because there are too many or too few arguments, argument
+    // ref/out-ness is wrong,
+    // argument is not convertible to parameter type, type inference fails to infer valid type
+    // parameters, generic arity
+    // is wrong, member is on a less-derived type than an applicable member on a more-derived type, or
+    // the candidate is
     // worse than another candidate.
 
     /// <summary>
@@ -39,19 +42,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         InaccessibleTypeArgument,
 
         /// <summary>
-        /// The candidate member was rejected because an argument was specified that did not have a corresponding
+        /// The candidate member was rejected because an argument was specified that did not have a
+        // corresponding
         /// parameter.
         /// </summary>
         NoCorrespondingParameter,
 
         /// <summary>
-        /// The candidate member was rejected because a named argument was specified that did not have a corresponding
+        /// The candidate member was rejected because a named argument was specified that did not have a
+        // corresponding
         /// parameter.
         /// </summary>
         NoCorrespondingNamedParameter,
 
         /// <summary>
-        /// The candidate member was rejected because there were two named arguments with the same parameter name.
+        /// The candidate member was rejected because there were two named arguments with the same parameter
+        // name.
         /// </summary>
         DuplicateNamedArgument,
 
@@ -61,12 +67,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         RequiredParameterMissing,
 
         /// <summary>
-        /// The candidate member was rejected because a named argument was used that corresponded to a previously-given positional argument.
+        /// The candidate member was rejected because a named argument was used that corresponded to a
+        // previously-given positional argument.
         /// </summary>
         NameUsedForPositional,
 
         /// <summary>
-        /// The candidate member was rejected because a named argument was used out-of-position and followed by unnamed arguments.
+        /// The candidate member was rejected because a named argument was used out-of-position and followed
+        // by unnamed arguments.
         /// </summary>
         BadNonTrailingNamedArgument,
 
@@ -85,7 +93,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         UnsupportedMetadata,
 
         /// <summary>
-        /// The candidate member was rejected because an argument could not be converted to the appropriate parameter
+        /// The candidate member was rejected because an argument could not be converted to the appropriate
+        // parameter
         /// type.
         /// </summary>
         BadArgumentConversion,
@@ -102,7 +111,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         TypeInferenceExtensionInstanceArgument,
 
         /// <summary>
-        /// The candidate member was rejected because a constraint on the type of a parameter was not satisfied.
+        /// The candidate member was rejected because a constraint on the type of a parameter was not
+        // satisfied.
         /// </summary>
         ConstructedParameterFailedConstraintCheck,
 
@@ -118,35 +128,41 @@ namespace Microsoft.CodeAnalysis.CSharp
         StaticInstanceMismatch,
 
         /// <summary>
-        /// The candidate member was rejected because its calling convention did not match the function pointer
+        /// The candidate member was rejected because its calling convention did not match the function
+        // pointer
         /// calling convention.
         /// </summary>
         WrongCallingConvention,
 
         /// <summary>
-        /// The candidate method in a delegate conversion was rejected because the ref kind of its return does not match the delegate.
+        /// The candidate method in a delegate conversion was rejected because the ref kind of its return
+        // does not match the delegate.
         /// </summary>
         WrongRefKind,
 
         /// <summary>
-        /// The candidate method in a delegate conversion was rejected because its return type does not match the return type of the delegate.
+        /// The candidate method in a delegate conversion was rejected because its return type does not
+        // match the return type of the delegate.
         /// </summary>
         WrongReturnType,
 
         /// <summary>
-        /// The candidate member was rejected because another member further down in the inheritance hierarchy was
+        /// The candidate member was rejected because another member further down in the inheritance
+        // hierarchy was
         /// present.
         /// </summary>
         LessDerived,
 
         /// <summary>
-        /// The candidate member was rejected because it was considered worse that another member (according to section
+        /// The candidate member was rejected because it was considered worse that another member (according
+        // to section
         /// 7.5.3.2 of the language specification).
         /// </summary>
         Worse,
 
         /// <summary>
-        /// Same as <see cref="Worse"/>, but the candidate shouldn't be mentioned in an ambiguity diagnostics.
+        /// Same as <see cref="Worse"/>, but the candidate shouldn't be mentioned in an ambiguity
+        // diagnostics.
         /// </summary>
         Worst,
     }

@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis
         /// <para>There are a few different reasons the expression could have not been analyzed:
         /// </para>
         /// <list type="number">
-        /// <item><description>The symbol producing the expression comes from a method that has not been annotated, such as invoking a C# 7.3 or earlier method, or a method in this compilation that is in a disabled context.</description></item>
+        /// <item><description>The symbol producing the expression comes from a method that has not been
+        // annotated, such as invoking a C# 7.3 or earlier method, or a method in this compilation that is in a
+        // disabled context.</description></item>
         /// <item><description>Nullable is completely disabled in this compilation.</description></item>
         /// </list>
         /// </summary>

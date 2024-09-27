@@ -19,7 +19,8 @@ internal static class InputExtensions
     {
         try
         {
-            // We special-case bool values because BindConverter reserves bool conversion for conditional attributes.
+            // We special-case bool values because BindConverter reserves bool conversion for conditional
+            // attributes.
             if (typeof(TValue) == typeof(bool))
             {
                 if (TryConvertToBool(value, out result))

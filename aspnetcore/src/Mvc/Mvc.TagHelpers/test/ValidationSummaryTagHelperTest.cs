@@ -763,7 +763,8 @@ public class ValidationSummaryTagHelperTest
 
         public string[] Strings { get; set; }
 
-        // Exists to ensure #4989 does not regress. Issue specific to case where collection has a ModelStateEntry
+        // Exists to ensure #4989 does not regress. Issue specific to case where collection has a
+        // ModelStateEntry
         // but no element does.
         public byte[] Empty { get; set; }
     }

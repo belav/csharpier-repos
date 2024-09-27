@@ -150,9 +150,11 @@ namespace System.Data.Common
         /// <summary>
         /// Retrieve the provider manifest token based on the specified connection.
         /// </summary>
-        /// <param name="connection">The connection for which the provider manifest token should be retrieved.</param>
+        /// <param name="connection">The connection for which the provider manifest token should be
+        // retrieved.</param>
         /// <returns>
-        /// The provider manifest token that describes the specified connection, as determined by the provider.
+        /// The provider manifest token that describes the specified connection, as determined by the
+        // provider.
         /// </returns>
         /// <remarks>
         /// This method simply delegates to the provider's implementation of GetDbProviderManifestToken.
@@ -460,15 +462,20 @@ namespace System.Data.Common
 
         /// <summary>
         /// Generates a DDL script which creates schema objects (tables, primary keys, foreign keys)
-        /// based on the contents of the storeItemCollection and targeted for the version of the backend corresponding to
+        /// based on the contents of the storeItemCollection and targeted for the version of the backend
+        // corresponding to
         /// the providerManifestToken.
         /// Individual statements should be separated using database-specific DDL command separator.
-        /// It is expected that the generated script would be executed in the context of existing database with
-        /// sufficient permissions, and it should not include commands to create the database, but it may include
+        /// It is expected that the generated script would be executed in the context of existing database
+        // with
+        /// sufficient permissions, and it should not include commands to create the database, but it may
+        // include
         /// commands to create schemas and other auxiliary objects such as sequences, etc.
         /// </summary>
-        /// <param name="providerManifestToken">The provider manifest token identifying the target version</param>
-        /// <param name="storeItemCollection">The collection of all store items based on which the script should be created</param>
+        /// <param name="providerManifestToken">The provider manifest token identifying the target
+        // version</param>
+        /// <param name="storeItemCollection">The collection of all store items based on which the script
+        // should be created</param>
         /// <returns>
         /// A DDL script which creates schema objects based on contents of storeItemCollection
         /// and targeted for the version of the backend corresponding to the providerManifestToken.
@@ -502,8 +509,10 @@ namespace System.Data.Common
         /// </summary>
         /// <param name="connection">Connection to a non-existent database that needs to be created
         /// and be populated with the store objects indicated by the storeItemCollection</param>
-        /// <param name="commandTimeout">Execution timeout for any commands needed to create the database.</param>
-        /// <param name="storeItemCollection">The collection of all store items based on which the script should be created<</param>
+        /// <param name="commandTimeout">Execution timeout for any commands needed to create the
+        // database.</param>
+        /// <param name="storeItemCollection">The collection of all store items based on which the script
+        // should be created<</param>
         public void CreateDatabase(
             DbConnection connection,
             int? commandTimeout,
@@ -533,11 +542,14 @@ namespace System.Data.Common
         /// If the provider can deduct the database only based on the connection, they do not need
         /// to additionally verify all elements of the storeItemCollection.
         /// </summary>
-        /// <param name="connection">Connection to a database whose existence is checked by this method</param>
-        /// <param name="commandTimeout">Execution timeout for any commands needed to determine the existence of the database</param>
+        /// <param name="connection">Connection to a database whose existence is checked by this
+        // method</param>
+        /// <param name="commandTimeout">Execution timeout for any commands needed to determine the
+        // existence of the database</param>
         /// <param name="storeItemCollection">The collection of all store items contained in the database
         /// whose existence is determined by this method<</param>
-        /// <returns>Whether the database indicated by the connection and the storeItemCollection exist</returns>
+        /// <returns>Whether the database indicated by the connection and the storeItemCollection
+        // exist</returns>
         public bool DatabaseExists(
             DbConnection connection,
             int? commandTimeout,
@@ -562,11 +574,14 @@ namespace System.Data.Common
         }
 
         /// <summary>
-        /// Deletes all store objects specified in the store item collection from the database and the database itself.
+        /// Deletes all store objects specified in the store item collection from the database and the
+        // database itself.
         /// </summary>
         /// <param name="connection">Connection to an existing database that needs to be deleted</param>
-        /// <param name="commandTimeout">Execution timeout for any commands needed to delete the database</param>
-        /// <param name="storeItemCollection">The collection of all store items contained in the database that should be deleted<</param>
+        /// <param name="commandTimeout">Execution timeout for any commands needed to delete the
+        // database</param>
+        /// <param name="storeItemCollection">The collection of all store items contained in the database
+        // that should be deleted<</param>
         public void DeleteDatabase(
             DbConnection connection,
             int? commandTimeout,

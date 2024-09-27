@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * FileAclAuthorizationModule class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* FileAclAuthorizationModule class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Security
 {
@@ -39,7 +39,8 @@ namespace System.Web.Security
     {
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Web.Security.FileAuthorizationModule'/>
+        ///       Initializes a new instance of the <see
+        // cref='System.Web.Security.FileAuthorizationModule'/>
         ///       class.
         ///     </para>
         /// </devdoc>
@@ -321,7 +322,8 @@ namespace System.Web.Security
                 string cacheDependencyPath = oSecDesc.GetCacheDependencyPath();
                 if (cacheDependencyPath != null)
                 {
-                    // Add it to the cache: ignore failures, since a different thread may have added it or the file doesn't exist
+                    // Add it to the cache: ignore failures, since a different thread may have added it or the file
+                    // doesn't exist
                     try
                     {
                         Debug.Trace(
@@ -637,7 +639,9 @@ namespace System.Web.Security
             get
             {
                 return SR.GetString(SR.Assess_Denied_Description3);
-                //return "An error occurred while accessing the resources required to serve this request. &nbsp; This typically happens if you do not have permissions to view the file you are trying to access.";
+                //return "An error occurred while accessing the resources required to serve this request. &nbsp;
+                // This typically happens if you do not have permissions to view the file you are trying to
+                // access.";
             }
         }
 
@@ -657,7 +661,8 @@ namespace System.Web.Security
                         SR.Assess_Denied_Misc_Content3,
                         HttpRuntime.GetSafePath(_strFile)
                     );
-                //return "Access is denied due to NT ACLs on the requested file. Ask the web server's administrator to give you access to "+ _strFile + ".";
+                //return "Access is denied due to NT ACLs on the requested file. Ask the web server's administrator
+                // to give you access to "+ _strFile + ".";
                 else
                     miscContent = SR.GetString(SR.Assess_Denied_Misc_Content3_2);
 

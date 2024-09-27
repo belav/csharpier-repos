@@ -8,9 +8,9 @@ using System.Threading;
 using Xunit;
 
 /*
- * Issue description:
-  Running foreground threads do not prevent runtime shutdown
-  on return from main
+* Issue description:
+Running foreground threads do not prevent runtime shutdown
+on return from main
 */
 
 public class Test_foreground_shutdown

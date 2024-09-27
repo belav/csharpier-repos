@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         /// Decomposes a name or member access expression into its component parts.
         /// </summary>
         /// <param name="expression">The name or member access expression.</param>
-        /// <param name="qualifier">The qualifier (or left-hand-side) of the name expression. This may be null if there is no qualifier.</param>
+        /// <param name="qualifier">The qualifier (or left-hand-side) of the name expression. This may be
+        // null if there is no qualifier.</param>
         /// <param name="name">The name of the expression.</param>
         /// <param name="arity">The number of generic type parameters.</param>
         private static void DecomposeName(
@@ -355,7 +356,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
                 }
             }
 
-            // Type constraint must be at least as accessible as the declaring member (class, interface, delegate, method)
+            // Type constraint must be at least as accessible as the declaring member (class, interface,
+            // delegate, method)
             if (type.IsParentKind(SyntaxKind.TypeConstraint))
             {
                 return AllContainingTypesArePublicOrProtected(

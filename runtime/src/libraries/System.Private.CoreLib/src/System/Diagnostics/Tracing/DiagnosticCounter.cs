@@ -9,7 +9,8 @@ using System.Threading;
 namespace System.Diagnostics.Tracing
 {
     /// <summary>
-    /// DiagnosticCounter is an abstract class that serves as the parent class for various Counter* classes,
+    /// DiagnosticCounter is an abstract class that serves as the parent class for various Counter*
+    // classes,
     /// namely EventCounter, PollingCounter, IncrementingEventCounter, and IncrementingPollingCounter.
     /// </summary>
 #if !ES_BUILD_STANDALONE

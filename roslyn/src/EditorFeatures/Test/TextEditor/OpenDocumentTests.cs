@@ -54,7 +54,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
                 documentIds.Add(documentId);
             }
 
-            // Confirm the files have been linked by file path. This isn't the core part of this test but without it
+            // Confirm the files have been linked by file path. This isn't the core part of this test but
+            // without it
             // nothing else will work.
             Assert.Equal(
                 documentIds,
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.TextEditor
                 workspace.CurrentSolution.GetDocument(documentIds.First()).GetLinkedDocumentIds()
             );
 
-            // Now the core test: first, if we make a modified version of the source text, and attempt to get the document for it,
+            // Now the core test: first, if we make a modified version of the source text, and attempt to get
+            // the document for it,
             // both copies should be updated.
             var originalSnapshot = buffer.CurrentSnapshot;
             buffer.Insert(5, ", World!");

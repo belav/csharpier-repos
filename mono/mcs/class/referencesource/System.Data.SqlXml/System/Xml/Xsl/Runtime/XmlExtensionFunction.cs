@@ -17,7 +17,8 @@ namespace System.Xml.Xsl.Runtime
     using Res = System.Xml.Utils.Res;
 
     /// <summary>
-    /// Table of bound extension functions.  Once an extension function is bound and entered into the table, future bindings
+    /// Table of bound extension functions.  Once an extension function is bound and entered into the
+    // table, future bindings
     /// will be very fast.  This table is not thread-safe.
     /// </summary>
     internal class XmlExtensionFunctionTable
@@ -60,7 +61,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// This internal class contains methods that allow binding to extension functions and invoking them.
+    /// This internal class contains methods that allow binding to extension functions and invoking
+    // them.
     /// </summary>
     internal class XmlExtensionFunction
     {
@@ -168,7 +170,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Once Bind has been successfully called, the inferred Xml type of the return value can be accessed.
+        /// Once Bind has been successfully called, the inferred Xml type of the return value can be
+        // accessed.
         /// </summary>
         public XmlQueryType XmlReturnType
         {
@@ -204,7 +207,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Bind to the CLR type specified in the Init() call.  If a matching method cannot be found, throw an exception.
+        /// Bind to the CLR type specified in the Init() call.  If a matching method cannot be found, throw
+        // an exception.
         /// </summary>
         public void Bind()
         {
@@ -321,7 +325,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Convert the incoming arguments to an array of CLR objects, and then invoke the external function on the "extObj" object instance.
+        /// Convert the incoming arguments to an array of CLR objects, and then invoke the external function
+        // on the "extObj" object instance.
         /// </summary>
         public object Invoke(object extObj, object[] args)
         {

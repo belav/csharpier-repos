@@ -11,7 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
     using SymbolKind = LanguageServer.Protocol.SymbolKind;
 
     /// <summary>
-    /// Represents the immutable symbol returned from the LSP request to get document symbols, but mapped into
+    /// Represents the immutable symbol returned from the LSP request to get document symbols, but
+    // mapped into
     /// editor/text-snapshot concepts.
     /// </summary>
     internal sealed record DocumentSymbolData(

@@ -17,7 +17,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote;
 
-// TODO: Use generic IRemoteOptionsCallback<TOptions> once https://github.com/microsoft/vs-streamjsonrpc/issues/789 is fixed
+// TODO: Use generic IRemoteOptionsCallback<TOptions> once
+// https://github.com/microsoft/vs-streamjsonrpc/issues/789 is fixed
 
 internal sealed class RemoteOptionsProviderCache<TOptions>
 {

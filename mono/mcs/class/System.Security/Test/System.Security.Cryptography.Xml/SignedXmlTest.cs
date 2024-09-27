@@ -171,6 +171,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
 
         [Test]
         [Ignore("2.0 throws a NullReferenceException - reported as FDBK25892")]
+        //
         // http://lab.msdn.microsoft.com/ProductFeedback/viewfeedback.aspx?feedbackid=02dd9730-d1ad-4170-8c82-36858c55fbe2
         [ExpectedException(typeof(ArgumentNullException))]
         public void Constructor_XmlDocument_Null()
@@ -3283,9 +3284,12 @@ namespace MonoTests.System.Security.Cryptography.Xml
                 @"<Signature xmlns=""http://www.w3.org/2000/09/xmldsig#""><SignedInfo><CanonicalizationMethod Algorithm=""http://www.w3.org/TR/2001/REC-xml-c14n-20010315"" /><SignatureMethod Algorithm=""http://www.w3.org/2001/04/xmldsig-more#hmac-sha256""><HMACOutputLength>128</HMACOutputLength></SignatureMethod><Reference URI=""#object""><DigestMethod Algorithm=""http://www.w3.org/2000/09/xmldsig#sha1"" /><DigestValue>nz4GS0NbH2SrWlD/4fX313CoTzc=</DigestValue></Reference></SignedInfo><SignatureValue>aegpvkAwOL8gN/CjSnW6qw==</SignatureValue><Object Id=""object"">some other text</Object></Signature>";
             var sut = GetSignedXml(xml);
 
-            // By default, .NET Framework doesn't allow using truncated HMACs, since it may lead to security issues.
-            // That being said, the XML Signature standard allows using truncated HMACs, but with some limitations.
-            // It's possible to use truncated HMACs by using a custom signature format validator, or not using it at all.
+            // By default, .NET Framework doesn't allow using truncated HMACs, since it may lead to security
+            // issues.
+            // That being said, the XML Signature standard allows using truncated HMACs, but with some
+            // limitations.
+            // It's possible to use truncated HMACs by using a custom signature format validator, or not using
+            // it at all.
             sut.SignatureFormatValidator = null;
 
             Assert.That(

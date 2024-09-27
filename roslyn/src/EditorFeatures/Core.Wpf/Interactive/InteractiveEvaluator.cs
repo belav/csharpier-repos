@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Interactive
     using Microsoft.VisualStudio.Text.Editor;
 
     // TODO: Rename to InteractiveEvaluator https://github.com/dotnet/roslyn/issues/6441
-    // The code is not specific to C#, but Interactive Window has hardcoded "CSharpInteractiveEvaluator" name.
+    // The code is not specific to C#, but Interactive Window has hardcoded "CSharpInteractiveEvaluator"
+    // name.
     internal sealed class CSharpInteractiveEvaluator : IResettableInteractiveEvaluator
     {
         private const string CommandPrefix = "#";
@@ -126,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             RemoteExecutionResult result
         )
         {
-            // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
+            // Capture and clear exising submission buffers. Independent of other operations that occur on
+            // restart.
             _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
             {
                 await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -165,7 +167,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         }
 
         /// <summary>
-        /// Invoked before the process is reset. The argument is the value of <see cref="InteractiveHostOptions.Platform"/>.
+        /// Invoked before the process is reset. The argument is the value of <see
+        // cref="InteractiveHostOptions.Platform"/>.
         /// </summary>
         public event Action<InteractiveHostPlatform>? OnBeforeReset;
 
@@ -184,7 +187,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             );
 
         /// <summary>
-        /// Invoked on UI thread when a new language buffer is created and before it is added to the projection.
+        /// Invoked on UI thread when a new language buffer is created and before it is added to the
+        // projection.
         /// </summary>
         private void SubmissionBufferAdded(object sender, SubmissionBufferAddedEventArgs args)
         {
@@ -265,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         /// <summary>
         /// Called on UI thread by the Interactive Window once a code snippet is submitted.
-        /// Followed on UI thread by creation of a new language buffer and call to <see cref="SubmissionBufferAdded"/>.
+        /// Followed on UI thread by creation of a new language buffer and call to <see
+        // cref="SubmissionBufferAdded"/>.
         /// </summary>
         public async Task<ExecutionResult> ExecuteCodeAsync(string text)
         {

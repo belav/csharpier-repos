@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
         }
 
         /// <summary>
-        /// <see cref="AdvanceToEndOfEscape"/> does not actually lex out an escape token.  Instead, it just moves the
+        /// <see cref="AdvanceToEndOfEscape"/> does not actually lex out an escape token.  Instead, it just
+        // moves the
         /// position forward and returns a diagnostic if this was not a valid escape.
         /// </summary>
         private EmbeddedDiagnostic? AdvanceToEndOfEscape(int stringStart, int escapeStart)

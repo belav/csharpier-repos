@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlInputFile.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlInputFile.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -24,7 +24,8 @@ namespace System.Web.UI.HtmlControls
     /// <devdoc>
     ///    <para>
     ///       The <see langword='HtmlInputFile'/> class defines the
-    ///       methods, properties, and events for the <see langword='HtmlInputFile'/> control. This class allows
+    ///       methods, properties, and events for the <see langword='HtmlInputFile'/> control. This
+    // class allows
     ///       programmatic access to the HTML &lt;input type= file&gt; element on the server.
     ///       It provides access to the stream, as well as a useful SaveAs functionality
     ///       provided by the <see cref='System.Web.UI.HtmlControls.HtmlInputFile.PostedFile'/>
@@ -41,19 +42,20 @@ namespace System.Web.UI.HtmlControls
     [ValidationProperty("Value")]
     public class HtmlInputFile : HtmlInputControl, IPostBackDataHandler
     {
-        /*
-         * Creates an intrinsic Html INPUT type=file control.
-         */
+/*
+* Creates an intrinsic Html INPUT type=file control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlInputFile'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlInputFile'/>
+        // class.</para>
         /// </devdoc>
         public HtmlInputFile()
             : base("file") { }
 
-        /*
-         * Accept type property.
-         */
+/*
+* Accept type property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -79,9 +81,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["accept"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * The property for the maximum characters allowed.
-         */
+/*
+* The property for the maximum characters allowed.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -105,9 +107,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["maxlength"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * PostedFile property.
-         */
+/*
+* PostedFile property.
+*/
 
         /// <devdoc>
         ///    <para>Gets access to the uploaded file specified by a client.</para>
@@ -122,9 +124,9 @@ namespace System.Web.UI.HtmlControls
             get { return Context.Request.Files[RenderedNameAttribute]; }
         }
 
-        /*
-         * The property for the width in characters.
-         */
+/*
+* The property for the width in characters.
+*/
 
         /// <devdoc>
         ///    <para>Gets or sets the width of the file-path text box that the
@@ -175,9 +177,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method of IPostBackDataHandler interface to process posted data.
-         */
+/*
+* Method of IPostBackDataHandler interface to process posted data.
+*/
 
         /// <internalonly/>
         bool IPostBackDataHandler.LoadPostData(
@@ -193,11 +195,11 @@ namespace System.Web.UI.HtmlControls
             return false;
         }
 
-        /*
-         * Method of IPostBackDataHandler interface which is invoked whenever
-         * posted data for a control has changed.  RadioButton fires an
-         * OnServerChange event.
-         */
+/*
+* Method of IPostBackDataHandler interface which is invoked whenever
+* posted data for a control has changed.  RadioButton fires an
+* OnServerChange event.
+*/
 
         /// <internalonly/>
         void IPostBackDataHandler.RaisePostDataChangedEvent()

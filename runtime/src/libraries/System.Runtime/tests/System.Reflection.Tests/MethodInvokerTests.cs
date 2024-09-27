@@ -258,7 +258,8 @@ namespace System.Reflection.Tests
                 GetMethod(methodDeclaringType, methodName)
             );
 
-            // Adapt the input since Type.Missing is not supported, and Span<object> requires an object[] array (e.g. not string[]).
+            // Adapt the input since Type.Missing is not supported, and Span<object> requires an object[] array
+            // (e.g. not string[]).
             if (parameters is null)
             {
                 Assert.Equal(result, invoker.Invoke(obj, new Span<object?>()));

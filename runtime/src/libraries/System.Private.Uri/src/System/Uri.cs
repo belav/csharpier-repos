@@ -127,17 +127,20 @@ namespace System
             UnixPath = 0x100000000000,
 
             /// <summary>
-            /// Disables any validation/normalization past the authority. Fragments will always be empty. GetComponents will throw for Path/Query.
+            /// Disables any validation/normalization past the authority. Fragments will always be empty.
+            // GetComponents will throw for Path/Query.
             /// </summary>
             DisablePathAndQueryCanonicalization = 0x200000000000,
 
             /// <summary>
-            /// Used to ensure that InitializeAndValidate is only called once per Uri instance and only from an override of InitializeAndValidate
+            /// Used to ensure that InitializeAndValidate is only called once per Uri instance and only from an
+            // override of InitializeAndValidate
             /// </summary>
             CustomParser_ParseMinimalAlreadyCalled = 0x4000000000000000,
 
             /// <summary>
-            /// Used for asserting that certain methods are only called from the constructor to validate thread-safety assumptions
+            /// Used for asserting that certain methods are only called from the constructor to validate
+            // thread-safety assumptions
             /// </summary>
             Debug_LeftConstructor = 0x8000000000000000,
         }
@@ -216,7 +219,8 @@ namespace System
             else
             {
                 // Custom parsers still use a lock in CreateHostString and perform non-atomic flags updates
-                // We have to take the lock to ensure flags access synchronization if CreateHostString and ParseRemaining are called concurrently
+                // We have to take the lock to ensure flags access synchronization if CreateHostString and
+                // ParseRemaining are called concurrently
                 lock (_info)
                 {
                     _flags |= flags;
@@ -346,11 +350,11 @@ namespace System
             {
                 if (allowDnsOptimization && InFact(Flags.CanonicalDnsHost))
                 {
-                    /* Optimization for a canonical DNS name
-                    *  ATTN: the host string won't be created,
-                    *  Hence ALL _info.Host callers first call EnsureHostString(false)
-                    *  For example IsLoopBack property is one of such callers.
-                    */
+/* Optimization for a canonical DNS name
+*  ATTN: the host string won't be created,
+*  Hence ALL _info.Host callers first call EnsureHostString(false)
+*  For example IsLoopBack property is one of such callers.
+*/
                     return;
                 }
                 CreateHostString();
@@ -423,10 +427,13 @@ namespace System
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Uri"/> class with the specified URI and additional <see cref="UriCreationOptions"/>.
+        /// Initializes a new instance of the <see cref="Uri"/> class with the specified URI and additional
+        // <see cref="UriCreationOptions"/>.
         /// </summary>
-        /// <param name="uriString">A string that identifies the resource to be represented by the <see cref="Uri"/> instance.</param>
-        /// <param name="creationOptions">Options that control how the <seealso cref="Uri"/> is created and behaves.</param>
+        /// <param name="uriString">A string that identifies the resource to be represented by the <see
+        // cref="Uri"/> instance.</param>
+        /// <param name="creationOptions">Options that control how the <seealso cref="Uri"/> is created and
+        // behaves.</param>
         public Uri(
             [StringSyntax(StringSyntaxAttribute.Uri)] string uriString,
             in UriCreationOptions creationOptions
@@ -1273,7 +1280,8 @@ namespace System
             }
         }
 
-        // Returns the host name represented as IDN (using punycode encoding) regardless of app.config settings
+        // Returns the host name represented as IDN (using punycode encoding) regardless of app.config
+        // settings
         public string IdnHost
         {
             get
@@ -1345,7 +1353,8 @@ namespace System
         }
 
         //
-        //  Returns 'true' if the 'dontEscape' parameter was set to 'true ' when the Uri instance was created.
+        //  Returns 'true' if the 'dontEscape' parameter was set to 'true ' when the Uri instance was
+        // created.
         public bool UserEscaped
         {
             get { return InFact(Flags.UserEscaped); }
@@ -1713,11 +1722,15 @@ namespace System
         }
 
         /// <summary>
-        /// Attempts to format a canonical string representation for the <see cref="Uri"/> instance into the specified span.
+        /// Attempts to format a canonical string representation for the <see cref="Uri"/> instance into the
+        // specified span.
         /// </summary>
-        /// <param name="destination">The span into which to write this instance's value formatted as a span of characters.</param>
-        /// <param name="charsWritten">When this method returns, contains the number of characters that were written in <paramref name="destination"/>.</param>
-        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+        /// <param name="destination">The span into which to write this instance's value formatted as a span
+        // of characters.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters that were
+        // written in <paramref name="destination"/>.</param>
+        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see
+        // langword="false"/>.</returns>
         public bool TryFormat(Span<char> destination, out int charsWritten)
         {
             ReadOnlySpan<char> result;
@@ -1999,7 +2012,8 @@ namespace System
             }
 
             // We want to cache RemoteUrl to improve perf for Uri as a key.
-            // We should consider reducing the overall working set by not caching some other properties mentioned in MoreInfo
+            // We should consider reducing the overall working set by not caching some other properties
+            // mentioned in MoreInfo
 
             MoreInfo selfInfo = _info.MoreInfo;
             MoreInfo otherInfo = obj._info.MoreInfo;
@@ -2070,11 +2084,13 @@ namespace System
         // http://www.ietf.org/rfc/rfc3986.txt
         //
         // 3.3.  Path
-        // In addition, a URI reference (Section 4.1) may be a relative-path reference, in which case the  first
+        // In addition, a URI reference (Section 4.1) may be a relative-path reference, in which case the
+        // first
         // path segment cannot contain a colon (":") character.
         //
         // 4.2.  Relative Reference
-        // A path segment that contains a colon character (e.g., "this:that") cannot be used as the first segment
+        // A path segment that contains a colon character (e.g., "this:that") cannot be used as the first
+        // segment
         // of a relative-path reference, as it would be mistaken for a scheme name.  Such a segment must be
         // preceded by a dot-segment (e.g., "./this:that") to make a relative-path reference.
         //
@@ -2123,7 +2139,8 @@ namespace System
             if (length >= c_MaxUriBufferSize)
                 return ParsingError.SizeLimit;
 
-            // Fast path for valid http(s) schemes with no leading whitespace that are expected to be very common.
+            // Fast path for valid http(s) schemes with no leading whitespace that are expected to be very
+            // common.
             if (uriString.StartsWith("https:", StringComparison.OrdinalIgnoreCase))
             {
                 syntax = UriParser.HttpsUri;
@@ -2136,7 +2153,8 @@ namespace System
             }
             else
             {
-                // STEP1: parse scheme, lookup this Uri Syntax or create one using UnknownV1SyntaxFlags uri syntax template
+                // STEP1: parse scheme, lookup this Uri Syntax or create one using UnknownV1SyntaxFlags uri syntax
+                // template
                 ParsingError err = ParsingError.None;
                 int idx = ParseSchemeCheckImplicitFile(uriString, ref err, ref flags, ref syntax);
                 Debug.Assert((err is ParsingError.None) == (syntax is not null));
@@ -2343,10 +2361,12 @@ namespace System
                         idx += 2;
                     }
                     // There is no Authority component, save the Path index
-                    // Ideally we would treat mailto like any other URI, but for historical reasons we have to separate out its host parsing.
+                    // Ideally we would treat mailto like any other URI, but for historical reasons we have to separate
+                    // out its host parsing.
                     else if (_syntax.NotAny(UriSyntaxFlags.MailToLikeUri))
                     {
-                        // By now we know the URI has no Authority, so if the URI must be normalized, initialize it without one.
+                        // By now we know the URI has no Authority, so if the URI must be normalized, initialize it without
+                        // one.
                         if (
                             (_flags & (Flags.HasUnicode | Flags.HostUnicodeNormalized))
                             == Flags.HasUnicode
@@ -2364,10 +2384,12 @@ namespace System
                     return ParsingError.BadAuthority;
                 }
                 // There is no Authority component, save the Path index
-                // Ideally we would treat mailto like any other URI, but for historical reasons we have to separate out its host parsing.
+                // Ideally we would treat mailto like any other URI, but for historical reasons we have to separate
+                // out its host parsing.
                 else if (_syntax.NotAny(UriSyntaxFlags.MailToLikeUri))
                 {
-                    // By now we know the URI has no Authority, so if the URI must be normalized, initialize it without one.
+                    // By now we know the URI has no Authority, so if the URI must be normalized, initialize it without
+                    // one.
                     if (
                         (_flags & (Flags.HasUnicode | Flags.HostUnicodeNormalized))
                         == Flags.HasUnicode
@@ -2419,7 +2441,8 @@ namespace System
                     {
                         char hostTerminator = pUriString[idx];
 
-                        // This will disallow '\' as the host terminator for any scheme that is not implicitFile or cannot have a Dos Path
+                        // This will disallow '\' as the host terminator for any scheme that is not implicitFile or cannot
+                        // have a Dos Path
                         if (
                             hostTerminator == '\\'
                             && NotAny(Flags.ImplicitFile)
@@ -2442,7 +2465,8 @@ namespace System
                     }
                 }
 
-                // The Path (or Port) parsing index is reloaded on demand in CreateUriInfo when accessing a Uri property
+                // The Path (or Port) parsing index is reloaded on demand in CreateUriInfo when accessing a Uri
+                // property
                 _flags |= (Flags)idx;
 
                 // The rest of the string will be parsed on demand
@@ -3175,7 +3199,8 @@ namespace System
                             }
                             else
                             {
-                                // We would ideally throw here if InFact(Flags.E_UserNotCanonical) but currently just accept user input known as invalid
+                                // We would ideally throw here if InFact(Flags.E_UserNotCanonical) but currently just accept user
+                                // input known as invalid
                                 dest.Append(slice);
                             }
                             break;
@@ -3835,7 +3860,8 @@ namespace System
             {
                 DebugAssertInCtor();
 
-                // Dos/Unix paths have no host.  Other schemes cleared/set _string with host information in PrivateParseMinimal.
+                // Dos/Unix paths have no host.  Other schemes cleared/set _string with host information in
+                // PrivateParseMinimal.
                 if (IsFile && !IsUncPath)
                 {
                     if (IsImplicitFile)
@@ -3981,7 +4007,8 @@ namespace System
                 // This becomes more interesting knowing how a file uri is used in "file://c:/path"
                 // It will be converted to file:///c:/path
                 //
-                // However, even more interesting is that vsmacros://c:\path will not add the third slash in the _canoical_ case
+                // However, even more interesting is that vsmacros://c:\path will not add the third slash in the
+                // _canoical_ case
                 //
                 // We use special syntax flag to check if the path is rooted, i.e. has a first slash
                 //
@@ -4843,7 +4870,8 @@ namespace System
                 else
                 {
                     //
-                    // ATTN V1 compat: V1 supports hostnames like ".." and ".", and so we do but only for unknown schemes.
+                    // ATTN V1 compat: V1 supports hostnames like ".." and ".", and so we do but only for unknown
+                    // schemes.
                     //
                     if (syntax.InFact(UriSyntaxFlags.V1_UnknownUri))
                     {
@@ -4951,7 +4979,8 @@ namespace System
         //
         // When delim=='?', then '#' character is also considered as delimiter additionally to passed '?'.
         //
-        // The method pays attention to the dots and slashes so to signal potential Path compression action needed.
+        // The method pays attention to the dots and slashes so to signal potential Path compression action
+        // needed.
         // Even that is not required for other components, the cycles are still spent (little inefficiency)
         //
 
@@ -5265,7 +5294,8 @@ namespace System
 
                     dest.Length = start;
 
-                    // CS8350 & CS8352: We can't pass `copy` and `dest` as arguments together as that could leak the scope of the above stackalloc
+                    // CS8350 & CS8352: We can't pass `copy` and `dest` as arguments together as that could leak the
+                    // scope of the above stackalloc
                     // As a workaround, re-create the Span in a way that avoids analysis
                     ReadOnlySpan<char> copySpan = MemoryMarshal.CreateReadOnlySpan(
                         ref copy.GetPinnableReference(),
@@ -5353,7 +5383,8 @@ namespace System
 
                     dest.Length = start;
 
-                    // CS8350 & CS8352: We can't pass `copy` and `dest` as arguments together as that could leak the scope of the above stackalloc
+                    // CS8350 & CS8352: We can't pass `copy` and `dest` as arguments together as that could leak the
+                    // scope of the above stackalloc
                     // As a workaround, re-create the Span in a way that avoids analysis
                     ReadOnlySpan<char> copySpan = MemoryMarshal.CreateReadOnlySpan(
                         ref copy.GetPinnableReference(),
@@ -5707,7 +5738,8 @@ namespace System
                     }
 
                     // here we got an absolute path in relativePart,
-                    // For compatibility with V1.0 parser we restrict the compression scope to Unc Share, i.e. \\host\share\
+                    // For compatibility with V1.0 parser we restrict the compression scope to Unc Share, i.e.
+                    // \\host\share\
                     if (basePart.IsUnc)
                     {
                         ReadOnlySpan<char> share = basePart.GetParts(
@@ -5737,7 +5769,8 @@ namespace System
                             relativePart
                         );
                     }
-                    // It's not obvious but we've checked (for this relativePart format) that baseUti is nor UNC nor DOS path
+                    // It's not obvious but we've checked (for this relativePart format) that baseUti is nor UNC nor DOS
+                    // path
                     //
                     // Means base is a Unix style path and, btw, IsImplicitFile cannot be the case either
                     return "file://" + relativePart;
@@ -5745,7 +5778,8 @@ namespace System
             }
 
             // If we are here we did not recognize absolute DOS/UNC path for a file: base uri
-            // Note that DOS path may still happen in the relativePart and if so it may override the base uri scheme.
+            // Note that DOS path may still happen in the relativePart and if so it may override the base uri
+            // scheme.
 
             bool convBackSlashes = basePart.Syntax.InFact(UriSyntaxFlags.ConvertPathSlashes);
 

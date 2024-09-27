@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <param name="diagnosticId">Diagnostic ID reported by this analyzer</param>
         /// <param name="enforceOnBuild">Build enforcement recommendation for this analyzer</param>
         /// <param name="option">
-        /// Code style editorconfig option that can be used to configure the given <paramref name="diagnosticId"/>.
+        /// Code style editorconfig option that can be used to configure the given <paramref
+        // name="diagnosticId"/>.
         /// <see langword="null"/>, if there is no such option that can be set in an editorconfig.
         /// </param>
         /// <param name="title">Title for the diagnostic descriptor</param>
@@ -30,8 +31,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// Message for the diagnostic descriptor.
         /// <see langword="null"/> if the message is identical to the title.
         /// </param>
-        /// <param name="isUnnecessary"><see langword="true"/> if the diagnostic is reported on unnecessary code; otherwise, <see langword="false"/>.</param>
-        /// <param name="configurable">Flag indicating if the reported diagnostics are configurable by the end users</param>
+        /// <param name="isUnnecessary"><see langword="true"/> if the diagnostic is reported on unnecessary
+        // code; otherwise, <see langword="false"/>.</param>
+        /// <param name="configurable">Flag indicating if the reported diagnostics are configurable by the
+        // end users</param>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             string diagnosticId,
             EnforceOnBuild enforceOnBuild,
@@ -61,15 +64,18 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <param name="diagnosticId">Diagnostic ID reported by this analyzer</param>
         /// <param name="enforceOnBuild">Build enforcement recommendation for this analyzer</param>
         /// <param name="options">
-        /// Set of two or more code style editorconfig options that can be used to configure the diagnostic severity of the given diagnosticId.
+        /// Set of two or more code style editorconfig options that can be used to configure the diagnostic
+        // severity of the given diagnosticId.
         /// </param>
         /// <param name="title">Title for the diagnostic descriptor</param>
         /// <param name="messageFormat">
         /// Message for the diagnostic descriptor.
         /// Null if the message is identical to the title.
         /// </param>
-        /// <param name="isUnnecessary"><see langword="true"/> if the diagnostic is reported on unnecessary code; otherwise, <see langword="false"/>.</param>
-        /// <param name="configurable">Flag indicating if the reported diagnostics are configurable by the end users</param>
+        /// <param name="isUnnecessary"><see langword="true"/> if the diagnostic is reported on unnecessary
+        // code; otherwise, <see langword="false"/>.</param>
+        /// <param name="configurable">Flag indicating if the reported diagnostics are configurable by the
+        // end users</param>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             string diagnosticId,
             EnforceOnBuild enforceOnBuild,
@@ -95,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         }
 
         /// <summary>
-        /// Constructor for a code style analyzer with a multiple diagnostic descriptors with a code style editorconfig option that can be used to configure each descriptor.
+        /// Constructor for a code style analyzer with a multiple diagnostic descriptors with a code style
+        // editorconfig option that can be used to configure each descriptor.
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             ImmutableDictionary<DiagnosticDescriptor, IOption2> supportedDiagnosticsWithOptions
@@ -115,7 +122,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         }
 
         /// <summary>
-        /// Constructor for a code style analyzer with multiple diagnostic descriptors with zero or more code style editorconfig options that can be used to configure each descriptor.
+        /// Constructor for a code style analyzer with multiple diagnostic descriptors with zero or more
+        // code style editorconfig options that can be used to configure each descriptor.
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
             ImmutableDictionary<

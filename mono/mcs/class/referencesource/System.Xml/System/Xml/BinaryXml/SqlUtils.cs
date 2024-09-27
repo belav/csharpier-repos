@@ -48,7 +48,8 @@ namespace System.Xml
 
         //private static readonly double DMAX_NUME = 1.0e+38;                  // Max value of numeric
         //private static readonly uint DBL_DIG = 17;                       // Max decimal digits of double
-        //private static readonly byte x_cNumeDivScaleMin = 6;     // Minimum result scale of numeric division
+        //private static readonly byte x_cNumeDivScaleMin = 6;     // Minimum result scale of numeric
+        // division
         // Array of multipliers for lAdjust and Ceiling/Floor.
         private static readonly uint[] x_rgulShiftBase = new uint[9]
         {
@@ -161,7 +162,8 @@ namespace System.Xml
         // Find the case where we overflowed 10**38, but not 2**128
         private bool FGt10_38(uint[] rglData)
         {
-            //Debug.Assert(rglData.Length == 4, "rglData.Length == 4", "Wrong array length: " + rglData.Length.ToString(CultureInfo.InvariantCulture));
+            //Debug.Assert(rglData.Length == 4, "rglData.Length == 4", "Wrong array length: " +
+            // rglData.Length.ToString(CultureInfo.InvariantCulture));
             return rglData[3] >= 0x4b3b4ca8L
                 && (
                     (rglData[3] > 0x4b3b4ca8L)
@@ -1116,7 +1118,8 @@ namespace System.Xml
             long timeTicks = GetKatmaiTimeTicks(data, ref offset);
             long dateTicks = GetKatmaiDateTicks(data, ref offset);
             long zoneTicks = GetKatmaiTimeZoneTicks(data, offset);
-            // The DATETIMEOFFSET values are serialized in UTC, but DateTimeOffset takes adjusted time -> we need to add zoneTicks
+            // The DATETIMEOFFSET values are serialized in UTC, but DateTimeOffset takes adjusted time -> we
+            // need to add zoneTicks
             DateTimeOffset dto = new DateTimeOffset(
                 dateTicks + timeTicks + zoneTicks,
                 new TimeSpan(zoneTicks)
@@ -1245,55 +1248,56 @@ namespace System.Xml
             );
         }
 
-        /*
-        const long SqlDateTicks2Ticks = (long)10000 * 1000 * 60 * 60 * 24;
-        const long SqlBaseDate = 693595;
+/*
+const long SqlDateTicks2Ticks = (long)10000 * 1000 * 60 * 60 * 24;
+const long SqlBaseDate = 693595;
 
-        public static void DateTime2SqlDateTime(DateTime datetime, out int dateticks, out uint timeticks) {
-            dateticks = (int)(datetime.Ticks / SqlDateTicks2Ticks) - 693595;
-            double time = (double)(datetime.Ticks % SqlDateTicks2Ticks);
-            time = time / 10000; // adjust to ms
-            time = time * 0.3 + .5;  // adjust to sqlticks (and round correctly)
-            timeticks = (uint)time;
-        }
-        public static void DateTime2SqlSmallDateTime(DateTime datetime, out short dateticks, out ushort timeticks) {
-            dateticks = (short)((int)(datetime.Ticks / SqlDateTicks2Ticks) - 693595);
-            int time = (int)(datetime.Ticks % SqlDateTicks2Ticks);
-            timeticks = (ushort)(time / (10000 * 1000 * 60)); // adjust to min
-        }
-        public static long DateTime2XsdTime(DateTime datetime) {
-            // adjust to ms
-            return (datetime.TimeOfDay.Ticks / 10000) * 4 + 0;
-        }
-        public static long DateTime2XsdDateTime(DateTime datetime) {
-            long t = datetime.TimeOfDay.Ticks / 10000;
-            t += (datetime.Day-1) * (long)1000*60*60*24;
-            t += (datetime.Month-1) * (long)1000*60*60*24*31;
-            int year = datetime.Year;
-            if (year < -9999 || year > 9999)
-                throw new XmlException(Res.SqlTypes_ArithOverflow, (string)null);
-            t += (datetime.Year+9999) * (long)1000*60*60*24*31*12;
-            return t*4 + 2;
-        }
-        public static long DateTime2XsdDate(DateTime datetime) {
-            // compute local offset
-            long tzOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(datetime).Ticks  / TimeSpan.TicksPerMinute;
-            tzOffset += 14*60;
-            // adjust datetime to UTC
-            datetime = TimeZone.CurrentTimeZone.ToUniversalTime(datetime);
+public static void DateTime2SqlDateTime(DateTime datetime, out int dateticks, out uint timeticks) {
+dateticks = (int)(datetime.Ticks / SqlDateTicks2Ticks) - 693595;
+double time = (double)(datetime.Ticks % SqlDateTicks2Ticks);
+time = time / 10000; // adjust to ms
+time = time * 0.3 + .5;  // adjust to sqlticks (and round correctly)
+timeticks = (uint)time;
+}
+public static void DateTime2SqlSmallDateTime(DateTime datetime, out short dateticks, out ushort
+timeticks) {
+dateticks = (short)((int)(datetime.Ticks / SqlDateTicks2Ticks) - 693595);
+int time = (int)(datetime.Ticks % SqlDateTicks2Ticks);
+timeticks = (ushort)(time / (10000 * 1000 * 60)); // adjust to min
+}
+public static long DateTime2XsdTime(DateTime datetime) {
+// adjust to ms
+return (datetime.TimeOfDay.Ticks / 10000) * 4 + 0;
+}
+public static long DateTime2XsdDateTime(DateTime datetime) {
+long t = datetime.TimeOfDay.Ticks / 10000;
+t += (datetime.Day-1) * (long)1000*60*60*24;
+t += (datetime.Month-1) * (long)1000*60*60*24*31;
+int year = datetime.Year;
+if (year < -9999 || year > 9999)
+throw new XmlException(Res.SqlTypes_ArithOverflow, (string)null);
+t += (datetime.Year+9999) * (long)1000*60*60*24*31*12;
+return t*4 + 2;
+}
+public static long DateTime2XsdDate(DateTime datetime) {
+// compute local offset
+long tzOffset = -TimeZone.CurrentTimeZone.GetUtcOffset(datetime).Ticks  / TimeSpan.TicksPerMinute;
+tzOffset += 14*60;
+// adjust datetime to UTC
+datetime = TimeZone.CurrentTimeZone.ToUniversalTime(datetime);
 
-            Debug.Assert( tzOffset >= 0 );
+Debug.Assert( tzOffset >= 0 );
 
-            int year = datetime.Year;
-            if (year < -9999 || year > 9999)
-                throw new XmlException(Res.SqlTypes_ArithOverflow, (string)null);
-            long t = (datetime.Day - 1)
-                 + 31*(datetime.Month - 1)
-                 + 31*12*((long)(year+9999));
-            t *= (29*60); // adjust in timezone
-            t += tzOffset;
-            return t*4+1;
-        }
-         * */
+int year = datetime.Year;
+if (year < -9999 || year > 9999)
+throw new XmlException(Res.SqlTypes_ArithOverflow, (string)null);
+long t = (datetime.Day - 1)
++ 31*(datetime.Month - 1)
++ 31*12*((long)(year+9999));
+t *= (29*60); // adjust in timezone
+t += tzOffset;
+return t*4+1;
+}
+* */
     }
 }

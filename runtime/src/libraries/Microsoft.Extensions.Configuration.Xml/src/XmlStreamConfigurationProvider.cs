@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Configuration.Xml
     [RequiresUnreferencedCode(XmlDocumentDecryptor.RequiresUnreferencedCodeMessage)]
     public class XmlStreamConfigurationProvider : StreamConfigurationProvider
     {
-        // work around https://github.com/dotnet/runtime/issues/81864 by splitting this into a separate class.
+        // work around https://github.com/dotnet/runtime/issues/81864 by splitting this into a separate
+        // class.
         internal static class Consts
         {
             internal const string NameAttributeKey = "Name";
@@ -80,7 +81,8 @@ namespace Microsoft.Extensions.Configuration.Xml
                                 // If parent already has a dictionary of children, update the collection accordingly
                                 if (parent.ChildrenBySiblingName != null)
                                 {
-                                    // check if this element has appeared before, elements are considered siblings if their SiblingName properties match
+                                    // check if this element has appeared before, elements are considered siblings if their SiblingName
+                                    // properties match
                                     if (
                                         !parent.ChildrenBySiblingName.TryGetValue(
                                             element.SiblingName,
@@ -105,7 +107,8 @@ namespace Microsoft.Extensions.Configuration.Xml
                                     }
                                     else
                                     {
-                                        // If we encounter a second child after assigning "SingleChild", we clear SingleChild and initialize the dictionary
+                                        // If we encounter a second child after assigning "SingleChild", we clear SingleChild and initialize
+                                        // the dictionary
                                         var children = new Dictionary<
                                             string,
                                             List<XmlConfigurationElement>
@@ -286,7 +289,8 @@ namespace Microsoft.Extensions.Configuration.Xml
 
         // The special attribute "Name" only contributes to prefix
         // This method retrieves the Name of the element, if the attribute is present
-        // Unfortunately XmlReader.GetAttribute cannot be used, as it does not support looking for attributes in a case insensitive manner
+        // Unfortunately XmlReader.GetAttribute cannot be used, as it does not support looking for
+        // attributes in a case insensitive manner
         private static string? GetName(XmlReader reader)
         {
             string? name = null;

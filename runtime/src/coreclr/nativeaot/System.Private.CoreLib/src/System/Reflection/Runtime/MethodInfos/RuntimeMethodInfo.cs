@@ -96,7 +96,8 @@ namespace System.Reflection.Runtime.MethodInfos
 
         public sealed override MethodInfo GetBaseDefinition()
         {
-            // This check is for compatibility. Yes, it happens before we normalize constructed generic methods back to their backing definition.
+            // This check is for compatibility. Yes, it happens before we normalize constructed generic methods
+            // back to their backing definition.
             Type declaringType = DeclaringType;
             if (!IsVirtual || IsStatic || declaringType == null || declaringType.IsInterface)
                 return this;
@@ -221,7 +222,8 @@ namespace System.Reflection.Runtime.MethodInfos
         protected abstract MethodBaseInvoker UncachedMethodInvoker { get; }
 
         //
-        // The non-public version of MethodInfo.GetGenericArguments() (does not array-copy and has a more truthful name.)
+        // The non-public version of MethodInfo.GetGenericArguments() (does not array-copy and has a more
+        // truthful name.)
         //
         internal abstract RuntimeTypeInfo[] RuntimeGenericArgumentsOrParameters { get; }
 
@@ -255,7 +257,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 RuntimeParameterInfo returnParameter = _lazyReturnParameter;
                 if (returnParameter == null)
                 {
-                    // Though the returnParameter is our primary objective, we can opportunistically initialize the _lazyParameters latch too.
+                    // Though the returnParameter is our primary objective, we can opportunistically initialize the
+                    // _lazyParameters latch too.
                     _lazyParameters = GetRuntimeParameters(this, out returnParameter);
                     _lazyReturnParameter = returnParameter;
                 }
@@ -276,7 +279,8 @@ namespace System.Reflection.Runtime.MethodInfos
         private volatile MethodBaseInvoker _lazyMethodInvoker;
 
         /// <summary>
-        /// Common CreateDelegate worker. NOTE: If the method signature is not compatible, this method returns null rather than throwing an ArgumentException.
+        /// Common CreateDelegate worker. NOTE: If the method signature is not compatible, this method
+        // returns null rather than throwing an ArgumentException.
         /// This is needed to support the api overloads that have a "throwOnBindFailure" parameter.
         /// </summary>
         internal Delegate CreateDelegateNoThrowOnBindFailure(
@@ -296,7 +300,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 return null;
             if (expectedReturnType.IsValueType && !actualReturnType.IsValueType)
             {
-                // For value type returning methods, conversions between enums and primitives are allowed (and screened by the above call to IsAssignableFrom)
+                // For value type returning methods, conversions between enums and primitives are allowed (and
+                // screened by the above call to IsAssignableFrom)
                 // but conversions to Object or interfaces implemented by the value type are not.
                 return null;
             }
@@ -321,7 +326,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 }
                 else
                 {
-                    // Closed static: This is the "weird" v2.0 case where the delegate is closed over the target method's first parameter.
+                    // Closed static: This is the "weird" v2.0 case where the delegate is closed over the target
+                    // method's first parameter.
                     //   (it make some kinda sense if you think of extension methods.)
                     if (!allowClosed)
                         return null;
@@ -351,7 +357,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 }
                 else
                 {
-                    // Open instance: This is the "weird" v2.0 case where the delegate has a leading extra parameter that's assignable to the target method's
+                    // Open instance: This is the "weird" v2.0 case where the delegate has a leading extra parameter
+                    // that's assignable to the target method's
                     // declaring type.
                     if (!delegateParameterEnumerator.MoveNext())
                         return null;
@@ -421,7 +428,8 @@ namespace System.Reflection.Runtime.MethodInfos
                     return false;
             }
 
-            // Enable pointers (which don't necessarily have typehandles). todo:be able to handle intptr <-> pointer, check if we need to handle
+            // Enable pointers (which don't necessarily have typehandles). todo:be able to handle intptr <->
+            // pointer, check if we need to handle
             // casts via pointer where the pointer types aren't identical
             if (dstType.Equals(srcType))
             {
@@ -434,7 +442,8 @@ namespace System.Reflection.Runtime.MethodInfos
                 return true;
             }
 
-            // they are not compatible yet enums can go into each other if their underlying element type is the same
+            // they are not compatible yet enums can go into each other if their underlying element type is the
+            // same
             // or into their equivalent integral type
             Type dstTypeUnderlying = dstType;
             if (dstType.IsEnum)

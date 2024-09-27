@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /* FragMan
- *
- * This test creates an array of FragNodes, then reorganizes them into a tree.
- * Then it removes the references from the array, and verifies the tree keeps
- * all the elements alive (verified by checking the Finalized count against 0).
+*
+* This test creates an array of FragNodes, then reorganizes them into a tree.
+* Then it removes the references from the array, and verifies the tree keeps
+* all the elements alive (verified by checking the Finalized count against 0).
 */
 
 namespace DefaultNamespace

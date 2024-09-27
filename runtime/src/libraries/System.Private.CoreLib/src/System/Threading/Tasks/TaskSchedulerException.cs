@@ -42,7 +42,8 @@ namespace System.Threading.Tasks
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TaskSchedulerException"/>
-        /// class using the default error message and a reference to the inner exception that is the cause of
+        /// class using the default error message and a reference to the inner exception that is the cause
+        // of
         /// this exception.
         /// </summary>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>

@@ -13,12 +13,15 @@ public interface ISingleClientProxy : IClientProxy
     // over InvokeAsync(string, object) overload
 
     /// <summary>
-    /// Invokes a method on the connection represented by the <see cref="ISingleClientProxy"/> instance and waits for a result.
+    /// Invokes a method on the connection represented by the <see cref="ISingleClientProxy"/> instance
+    // and waits for a result.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="method">Name of the method to invoke.</param>
     /// <param name="args">A collection of arguments to pass to the client.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. It is recommended to set a max wait for expecting a result.</param>
-    /// <returns>A <see cref="Task"/> that represents the asynchronous invoke and wait for a client result.</returns>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. It is
+    // recommended to set a max wait for expecting a result.</param>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous invoke and wait for a client
+    // result.</returns>
     Task<T> InvokeCoreAsync<T>(string method, object?[] args, CancellationToken cancellationToken);
 }

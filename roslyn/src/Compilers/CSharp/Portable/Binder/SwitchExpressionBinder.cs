@@ -65,7 +65,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Build the decision dag, giving an error if some cases are subsumed and a warning if the switch expression is not exhaustive.
+        /// Build the decision dag, giving an error if some cases are subsumed and a warning if the switch
+        // expression is not exhaustive.
         /// </summary>
         /// <param name="node"></param>
         /// <param name="boundInputExpression"></param>
@@ -120,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 addNonNullSuccessors,
                 out var nodes
             );
-            // Since decisionDag.RootNode is acyclic by construction, its subset of nodes sorted here cannot be cyclic
+            // Since decisionDag.RootNode is acyclic by construction, its subset of nodes sorted here cannot be
+            // cyclic
             Debug.Assert(wasAcyclic);
             foreach (var n in nodes)
             {
@@ -206,7 +208,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             typesInOrder.Free();
 
-            // We've found a candidate common type among those arms that have a type.  Also check that every arm's
+            // We've found a candidate common type among those arms that have a type.  Also check that every
+            // arm's
             // expression (even those without a type) can be converted to that type.
             if (commonType is object)
             {

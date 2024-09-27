@@ -2,9 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// This file is one of a group of files (AesCng.cs, TripleDESCng.cs) that are almost identical except
-// for the algorithm name. If you make a change to this file, there's a good chance you'll have to make
-// the same change to the other files so please check. This is a pain but given that the contracts demand
+// This file is one of a group of files (AesCng.cs, TripleDESCng.cs) that are almost identical
+// except
+// for the algorithm name. If you make a change to this file, there's a good chance you'll have to
+// make
+// the same change to the other files so please check. This is a pain but given that the contracts
+// demand
 // that each of these derive from a different class, it can't be helped.
 //
 
@@ -50,7 +53,8 @@ namespace System.Security.Cryptography
 
         public override ICryptoTransform CreateDecryptor()
         {
-            // Do not change to CreateDecryptor(this.Key, this.IV). this.Key throws if a non-exportable hardware key is being used.
+            // Do not change to CreateDecryptor(this.Key, this.IV). this.Key throws if a non-exportable hardware
+            // key is being used.
             return _core.CreateDecryptor();
         }
 
@@ -61,7 +65,8 @@ namespace System.Security.Cryptography
 
         public override ICryptoTransform CreateEncryptor()
         {
-            // Do not change to CreateEncryptor(this.Key, this.IV). this.Key throws if a non-exportable hardware key is being used.
+            // Do not change to CreateEncryptor(this.Key, this.IV). this.Key throws if a non-exportable hardware
+            // key is being used.
             return _core.CreateEncryptor();
         }
 

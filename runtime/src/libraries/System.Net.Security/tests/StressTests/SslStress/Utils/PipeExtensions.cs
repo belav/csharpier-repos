@@ -12,7 +12,8 @@ namespace SslStress.Utils
 {
     public static class PipeExtensions
     {
-        // Adapted from https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net/
+        // Adapted from
+        // https://devblogs.microsoft.com/dotnet/system-io-pipelines-high-performance-io-in-net/
         public static async Task ReadLinesUsingPipesAsync(
             this Stream stream,
             Func<ReadOnlySequence<byte>, Task> callback,

@@ -9,7 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Text
 {
     /// <summary>
-    /// Immutable abstract representation of a span of text.  For example, in an error diagnostic that reports a
+    /// Immutable abstract representation of a span of text.  For example, in an error diagnostic that
+    // reports a
     /// location, it could come from a parsed string, text from a tool editor buffer, etc.
     /// </summary>
     [DataContract]
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Determines whether <paramref name="span"/> overlaps this span. Two spans are considered to overlap
+        /// Determines whether <paramref name="span"/> overlaps this span. Two spans are considered to
+        // overlap
         /// if they have positions in common and neither is empty. Empty spans do not overlap with any
         /// other span.
         /// </summary>
@@ -242,8 +244,10 @@ namespace Microsoft.CodeAnalysis.Text
 
         /// <summary>
         /// Provides a string representation for <see cref="TextSpan"/>.
-        /// This representation uses "half-open interval" notation, indicating the endpoint character is not included.
-        /// Example: <c>[10..20)</c>, indicating the text starts at position 10 and ends at position 20 not included.
+        /// This representation uses "half-open interval" notation, indicating the endpoint character is not
+        // included.
+        /// Example: <c>[10..20)</c>, indicating the text starts at position 10 and ends at position 20 not
+        // included.
         /// </summary>
         public override string ToString()
         {

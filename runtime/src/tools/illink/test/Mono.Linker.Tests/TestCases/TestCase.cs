@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Linq;
@@ -81,15 +82,20 @@ namespace Mono.Linker.Tests.TestCases
                 reconstructedFullTypeName
             );
 
-            // For all of the Test Cases, the full type name we constructed from the directory structure will be correct and we can successfully find
+            // For all of the Test Cases, the full type name we constructed from the directory structure will be
+            // correct and we can successfully find
             // the type from GetType.
             if (typeDefinition != null)
                 return typeDefinition;
 
-            // However, some of types are supporting types rather than test cases and may not follow the standardized naming scheme of the test cases.
-            // We still need to be able to locate these type defs so that we can parse some of the metadata on them.
-            // One example, Unity run's into this with its tests that require a type UnityEngine.MonoBehaviours to exist.  This type is defined in its own
-            // file and it cannot follow our standardized naming directory & namespace naming scheme since the namespace must be UnityEngine.
+            // However, some of types are supporting types rather than test cases and may not follow the
+            // standardized naming scheme of the test cases.
+            // We still need to be able to locate these type defs so that we can parse some of the metadata on
+            // them.
+            // One example, Unity run's into this with its tests that require a type UnityEngine.MonoBehaviours
+            // to exist.  This type is defined in its own
+            // file and it cannot follow our standardized naming directory & namespace naming scheme since the
+            // namespace must be UnityEngine.
             // Also look for compiler-generated Program type for top-level statements.
             foreach (var type in caseAssemblyDefinition.MainModule.Types)
             {
@@ -101,13 +107,15 @@ namespace Mono.Linker.Tests.TestCases
                 )
                     return type;
 
-                //  Let's assume we should never have to search for a test case that has no namespace.  If we don't find the type from GetType, then o well, that's not a test case.
+                //  Let's assume we should never have to search for a test case that has no namespace.  If we don't
+                // find the type from GetType, then o well, that's not a test case.
                 if (string.IsNullOrEmpty(type.Namespace))
                     continue;
 
                 if (type.Name == Name)
                 {
-                    // This isn't foolproof, but let's do a little extra vetting to make sure the type we found corresponds to the source file we are
+                    // This isn't foolproof, but let's do a little extra vetting to make sure the type we found
+                    // corresponds to the source file we are
                     // processing.
                     if (!SourceFile.ReadAllText().Contains($"namespace {type.Namespace}"))
                         continue;

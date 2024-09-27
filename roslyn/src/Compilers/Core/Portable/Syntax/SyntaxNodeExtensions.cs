@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="oldNode">The node to be replaced; a descendant of the root node and an element of a list member.</param>
+        /// <param name="oldNode">The node to be replaced; a descendant of the root node and an element of a
+        // list member.</param>
         /// <param name="newNodes">A sequence of nodes to use in the tree in place of the old node.</param>
         public static TRoot ReplaceNode<TRoot>(
             this TRoot root,
@@ -119,8 +120,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="nodeInList">The node to insert before; a descendant of the root node an element of a list member.</param>
-        /// <param name="newNodes">A sequence of nodes to insert into the tree immediately before the specified node.</param>
+        /// <param name="nodeInList">The node to insert before; a descendant of the root node an element of
+        // a list member.</param>
+        /// <param name="newNodes">A sequence of nodes to insert into the tree immediately before the
+        // specified node.</param>
         public static TRoot InsertNodesBefore<TRoot>(
             this TRoot root,
             SyntaxNode nodeInList,
@@ -136,8 +139,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="nodeInList">The node to insert after; a descendant of the root node an element of a list member.</param>
-        /// <param name="newNodes">A sequence of nodes to insert into the tree immediately after the specified node.</param>
+        /// <param name="nodeInList">The node to insert after; a descendant of the root node an element of a
+        // list member.</param>
+        /// <param name="newNodes">A sequence of nodes to insert into the tree immediately after the
+        // specified node.</param>
         public static TRoot InsertNodesAfter<TRoot>(
             this TRoot root,
             SyntaxNode nodeInList,
@@ -153,8 +158,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="tokenInList">The token to be replaced; a descendant of the root node and an element of a list member.</param>
-        /// <param name="newTokens">A sequence of tokens to use in the tree in place of the specified token.</param>
+        /// <param name="tokenInList">The token to be replaced; a descendant of the root node and an element
+        // of a list member.</param>
+        /// <param name="newTokens">A sequence of tokens to use in the tree in place of the specified
+        // token.</param>
         public static TRoot ReplaceToken<TRoot>(
             this TRoot root,
             SyntaxToken tokenInList,
@@ -170,8 +177,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="tokenInList">The token to insert before; a descendant of the root node and an element of a list member.</param>
-        /// <param name="newTokens">A sequence of tokens to insert into the tree immediately before the specified token.</param>
+        /// <param name="tokenInList">The token to insert before; a descendant of the root node and an
+        // element of a list member.</param>
+        /// <param name="newTokens">A sequence of tokens to insert into the tree immediately before the
+        // specified token.</param>
         public static TRoot InsertTokensBefore<TRoot>(
             this TRoot root,
             SyntaxToken tokenInList,
@@ -187,8 +196,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
-        /// <param name="tokenInList">The token to insert after; a descendant of the root node and an element of a list member.</param>
-        /// <param name="newTokens">A sequence of tokens to insert into the tree immediately after the specified token.</param>
+        /// <param name="tokenInList">The token to insert after; a descendant of the root node and an
+        // element of a list member.</param>
+        /// <param name="newTokens">A sequence of tokens to insert into the tree immediately after the
+        // specified token.</param>
         public static TRoot InsertTokensAfter<TRoot>(
             this TRoot root,
             SyntaxToken tokenInList,
@@ -205,7 +216,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
         /// <param name="oldTrivia">The trivia to be replaced; a descendant of the root node.</param>
-        /// <param name="newTrivia">A sequence of trivia to use in the tree in place of the specified trivia.</param>
+        /// <param name="newTrivia">A sequence of trivia to use in the tree in place of the specified
+        // trivia.</param>
         public static TRoot ReplaceTrivia<TRoot>(
             this TRoot root,
             SyntaxTrivia oldTrivia,
@@ -222,7 +234,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
         /// <param name="trivia">The trivia to insert before; a descendant of the root node.</param>
-        /// <param name="newTrivia">A sequence of trivia to insert into the tree immediately before the specified trivia.</param>
+        /// <param name="newTrivia">A sequence of trivia to insert into the tree immediately before the
+        // specified trivia.</param>
         public static TRoot InsertTriviaBefore<TRoot>(
             this TRoot root,
             SyntaxTrivia trivia,
@@ -239,7 +252,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root of the tree of nodes.</param>
         /// <param name="trivia">The trivia to insert after; a descendant of the root node.</param>
-        /// <param name="newTrivia">A sequence of trivia to insert into the tree immediately after the specified trivia.</param>
+        /// <param name="newTrivia">A sequence of trivia to insert into the tree immediately after the
+        // specified trivia.</param>
         public static TRoot InsertTriviaAfter<TRoot>(
             this TRoot root,
             SyntaxTrivia trivia,
@@ -324,7 +338,8 @@ namespace Microsoft.CodeAnalysis
         /// <typeparam name="TRoot">The type of the root node.</typeparam>
         /// <param name="root">The root node of the tree of nodes.</param>
         /// <param name="trivia">The trivia to be replaced.</param>
-        /// <param name="newTrivia">The new trivia to use in the new tree in place of the old trivia.</param>
+        /// <param name="newTrivia">The new trivia to use in the new tree in place of the old
+        // trivia.</param>
         public static TRoot ReplaceTrivia<TRoot>(
             this TRoot root,
             SyntaxTrivia trivia,
@@ -383,7 +398,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TNode">The type of the node.</typeparam>
         /// <param name="node">The node to format.</param>
-        /// <param name="indentation">A sequence of whitespace characters that defines a single level of indentation.</param>
+        /// <param name="indentation">A sequence of whitespace characters that defines a single level of
+        // indentation.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
         public static TNode NormalizeWhitespace<TNode>(
             this TNode node,
@@ -401,7 +417,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <typeparam name="TNode">The type of the node.</typeparam>
         /// <param name="node">The node to format.</param>
-        /// <param name="indentation">An optional sequence of whitespace characters that defines a single level of indentation.</param>
+        /// <param name="indentation">An optional sequence of whitespace characters that defines a single
+        // level of indentation.</param>
         /// <param name="eol">An optional sequence of whitespace characters used for end of line.</param>
         /// <param name="elasticTrivia">If true the replaced trivia is elastic trivia.</param>
         public static TNode NormalizeWhitespace<TNode>(
@@ -416,7 +433,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new node from this node with both the leading and trailing trivia of the specified node.
+        /// Creates a new node from this node with both the leading and trailing trivia of the specified
+        // node.
         /// </summary>
         public static TSyntax WithTriviaFrom<TSyntax>(this TSyntax syntax, SyntaxNode node)
             where TSyntax : SyntaxNode

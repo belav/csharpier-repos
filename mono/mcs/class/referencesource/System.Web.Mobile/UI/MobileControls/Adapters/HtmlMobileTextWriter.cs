@@ -23,9 +23,9 @@ namespace System.Web.UI.MobileControls.Adapters
 #endif
 
 {
-    /*
-     * HtmlMobileTextWriter class.
-     */
+/*
+* HtmlMobileTextWriter class.
+*/
     /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -45,7 +45,8 @@ namespace System.Web.UI.MobileControls.Adapters
         //  mobile device type constants (should be defined somewhere else eventually)
         internal WriterState _currentState;
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.HtmlMobileTextWriter"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.HtmlMobileTextWriter"]/*' />
         public HtmlMobileTextWriter(TextWriter writer, MobileCapabilities device)
             : base(writer, device)
         {
@@ -61,40 +62,45 @@ namespace System.Web.UI.MobileControls.Adapters
             _currentState = new WriterState(this);
         }
 
-        /*
-         * the following TextWriter methods are overridden to
-         * first call EnsureStyle before delegating to the base
-         * class implementation
-         */
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteBeginTag"]/*' />
+/*
+* the following TextWriter methods are overridden to
+* first call EnsureStyle before delegating to the base
+* class implementation
+*/
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteBeginTag"]/*' />
         public override void WriteBeginTag(String tag)
         {
             EnsureStyle();
             base.WriteBeginTag(tag);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteFullBeginTag"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteFullBeginTag"]/*' />
         public override void WriteFullBeginTag(String tag)
         {
             EnsureStyle();
             base.WriteFullBeginTag(tag);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.Write"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.Write"]/*' />
         public override void Write(char c)
         {
             EnsureStyle();
             base.Write(c);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.Write1"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.Write1"]/*' />
         public override void Write(String text)
         {
             EnsureStyle();
             base.Write(text);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteEncodedText"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteEncodedText"]/*' />
         public override void WriteEncodedText(String text)
         {
             EnsureStyle();
@@ -143,21 +149,24 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteLine"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteLine"]/*' />
         public override void WriteLine(String text)
         {
             EnsureStyle();
             base.WriteLine(text);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteBreak"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteBreak"]/*' />
         public new void WriteBreak()
         {
             //Do not EnsureStyle for the break
             base.WriteLine("<br>");
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.EnterLayout"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.EnterLayout"]/*' />
         public override void EnterLayout(Style style)
         {
             WriterStyle writerStyle = new WriterStyle(style);
@@ -165,33 +174,38 @@ namespace System.Web.UI.MobileControls.Adapters
             EnterStyle(writerStyle);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitLayout"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitLayout"]/*' />
         public override void ExitLayout(Style style, bool breakAfter)
         {
             ExitStyle(style, breakAfter);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitLayout1"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitLayout1"]/*' />
         public override void ExitLayout(Style style)
         {
             ExitStyle(style, false);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.MarkStyleContext"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.MarkStyleContext"]/*' />
         protected internal void MarkStyleContext()
         {
             _shouldEnsureStyle = true;
             _currentState.MarkStyleContext();
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.UnMarkStyleContext"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.UnMarkStyleContext"]/*' />
         protected internal void UnMarkStyleContext()
         {
             _shouldEnsureStyle = true;
             _currentState.UnMarkStyleContext();
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.EnterFormat"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.EnterFormat"]/*' />
         public override void EnterFormat(Style style)
         {
             WriterStyle writerStyle = new WriterStyle(style);
@@ -199,19 +213,22 @@ namespace System.Web.UI.MobileControls.Adapters
             EnterStyle(writerStyle);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitFormat"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitFormat"]/*' />
         public override void ExitFormat(Style style)
         {
             ExitStyle(style);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitFormat1"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitFormat1"]/*' />
         public override void ExitFormat(Style style, bool breakAfter)
         {
             ExitStyle(style, breakAfter);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.BeginStyleContext"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.BeginStyleContext"]/*' />
         public void BeginStyleContext()
         {
             if (_currentState.BreakPending)
@@ -223,7 +240,8 @@ namespace System.Web.UI.MobileControls.Adapters
             EnterStyle(new WriterStyle());
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.EndStyleContext"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.EndStyleContext"]/*' />
         public void EndStyleContext()
         {
             if (_currentState.BreakPending)
@@ -236,19 +254,21 @@ namespace System.Web.UI.MobileControls.Adapters
             _currentState.Transition(new WriterStyle());
         }
 
-        /* all calls to Enter... converge to this */
+/* all calls to Enter... converge to this */
         private void EnterStyle(WriterStyle style)
         {
             _currentState.Push(style);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.EnterStyle"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.EnterStyle"]/*' />
         public new void EnterStyle(Style style)
         {
             EnterStyle(new WriterStyle(style));
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitStyle"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitStyle"]/*' />
         public new void ExitStyle(Style style)
         {
             ExitStyle(style, false);
@@ -260,10 +280,11 @@ namespace System.Web.UI.MobileControls.Adapters
             set { _shouldEnsureStyle = value; }
         }
 
-        /*
-        all calls to Exit... converge to this
-        */
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitStyle1"]/*' />
+/*
+all calls to Exit... converge to this
+*/
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.ExitStyle1"]/*' />
         public void ExitStyle(Style style, bool breakAfter)
         {
             _currentState.Pop();
@@ -302,7 +323,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteText"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteText"]/*' />
         public void WriteText(String text, bool encodeText)
         {
             if (text != null && text.Length == 0)
@@ -320,7 +342,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteUrlParameter"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteUrlParameter"]/*' />
         public void WriteUrlParameter(String name, String value)
         {
             WriteEncodedUrlParameter(name);
@@ -328,7 +351,8 @@ namespace System.Web.UI.MobileControls.Adapters
             WriteEncodedUrlParameter(value);
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteHiddenField"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.WriteHiddenField"]/*' />
         public void WriteHiddenField(String name, String value)
         {
             WriteBeginTag("input");
@@ -354,63 +378,72 @@ namespace System.Web.UI.MobileControls.Adapters
             set { _maintainState = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderBold"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderBold"]/*' />
         protected internal bool RenderBold
         {
             get { return _renderBold; }
             set { _renderBold = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderItalic"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderItalic"]/*' />
         protected internal bool RenderItalic
         {
             get { return _renderItalic; }
             set { _renderItalic = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontSize"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderFontSize"]/*' />
         protected internal bool RenderFontSize
         {
             get { return _renderFontSize; }
             set { _renderFontSize = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontName"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderFontName"]/*' />
         protected internal bool RenderFontName
         {
             get { return _renderFontName; }
             set { _renderFontName = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontColor"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderFontColor"]/*' />
         protected internal bool RenderFontColor
         {
             get { return _renderFontColor; }
             set { _renderFontColor = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderBodyColor"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderBodyColor"]/*' />
         protected internal bool RenderBodyColor
         {
             get { return _renderBodyColor; }
             set { _renderBodyColor = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderDivAlign"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderDivAlign"]/*' />
         protected internal bool RenderDivAlign
         {
             get { return _renderDivAlign; }
             set { _renderDivAlign = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderDivNoWrap"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RenderDivNoWrap"]/*' />
         protected internal bool RenderDivNoWrap
         {
             get { return _renderDivNoWrap; }
             set { _renderDivNoWrap = value; }
         }
 
-        /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RequiresNoBreakInFormatting"]/*' />
+        /// <include file='doc\HtmlMobileTextWriter.uex'
+        // path='docs/doc[@for="HtmlMobileTextWriter.RequiresNoBreakInFormatting"]/*' />
         protected internal bool RequiresNoBreakInFormatting
         {
             get { return _requiresNoBreakInFormatting; }
@@ -428,10 +461,10 @@ namespace System.Web.UI.MobileControls.Adapters
         private bool _requiresNoBreakInFormatting = false;
     }
 
-    /*
-     * the WriterStyle class is used to store and
-     * control state for rendering format and layout
-     */
+/*
+* the WriterStyle class is used to store and
+* control state for rendering format and layout
+*/
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
     )]
@@ -540,9 +573,9 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    /*
-     * The StyleTag class is extended for specific tags
-     */
+/*
+* The StyleTag class is extended for specific tags
+*/
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
     )]
@@ -842,11 +875,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    /*
-     * the StyleStack class maintains WriterStyle objects
-     * pushed on the stack from Enter[Style/Format/Layout]
-     * and removed using Exit[Style/Format/Layout]
-     */
+/*
+* the StyleStack class maintains WriterStyle objects
+* pushed on the stack from Enter[Style/Format/Layout]
+* and removed using Exit[Style/Format/Layout]
+*/
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
     )]
@@ -888,9 +921,9 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    /* the WriterState tracks what styles have been entered, what tags have been written
-        and controls transitions from the current state to a desired state
-    */
+/* the WriterState tracks what styles have been entered, what tags have been written
+and controls transitions from the current state to a desired state
+*/
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
     )]
@@ -923,10 +956,10 @@ namespace System.Web.UI.MobileControls.Adapters
             get { return _current; }
         }
 
-        /*
-        Pushes the current WriterStyle and tagsWritten stack for later use,
-        starts using a new default WriterStyle
-        */
+/*
+Pushes the current WriterStyle and tagsWritten stack for later use,
+starts using a new default WriterStyle
+*/
         internal void PushState()
         {
             _writer.ShouldEnsureStyle = true;
@@ -950,10 +983,10 @@ namespace System.Web.UI.MobileControls.Adapters
             set { _divLevel = value; }
         }
 
-        /*
-        Pops the last WriterStyle pushed and makes it current
-        and restores the tagsWritten stack
-        */
+/*
+Pops the last WriterStyle pushed and makes it current
+and restores the tagsWritten stack
+*/
         internal WriterStyle PopState()
         {
             _writer.ShouldEnsureStyle = true;
@@ -968,9 +1001,9 @@ namespace System.Web.UI.MobileControls.Adapters
             return _current;
         }
 
-        /*
-        BreakPending property accessor
-        */
+/*
+BreakPending property accessor
+*/
         internal bool BreakPending
         {
             get { return _breakPending; }
@@ -987,10 +1020,10 @@ namespace System.Web.UI.MobileControls.Adapters
             get { return _tagsWritten; }
         }
 
-        /*
-        pop a tag from the stack of StyleTags,
-        adjust state accordingly
-        */
+/*
+pop a tag from the stack of StyleTags,
+adjust state accordingly
+*/
         internal void CloseTag()
         {
             StyleTag tag = (StyleTag)_tagsWritten.Pop();

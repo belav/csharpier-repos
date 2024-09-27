@@ -50,7 +50,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="keyIdentifierClause">The Clause to be resolved.</param>
         /// <param name="key">The resolved SecurityKey</param>
         /// <returns>True if successfully resolved.</returns>
-        /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is null.</exception>
+        /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is
+        // null.</exception>
         protected override bool TryResolveSecurityKeyCore(
             SecurityKeyIdentifierClause keyIdentifierClause,
             out SecurityKey key
@@ -112,7 +113,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="keyIdentifierClause">The KeyIdentifier to be resolved.</param>
         /// <param name="token">The resolved SecurityToken</param>
         /// <returns>True if successfully resolved.</returns>
-        /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is null.</exception>
+        /// <exception cref="ArgumentNullException">Input argument 'keyIdentifierClause' is
+        // null.</exception>
         protected override bool TryResolveTokenCore(
             SecurityKeyIdentifierClause keyIdentifierClause,
             out SecurityToken token

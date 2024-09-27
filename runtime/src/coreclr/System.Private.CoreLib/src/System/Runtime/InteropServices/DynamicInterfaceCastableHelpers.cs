@@ -6,8 +6,10 @@ using System.Diagnostics;
 namespace System.Runtime.InteropServices
 {
     /// <summary>
-    /// Helpers that allows VM to call into IDynamicInterfaceCastable methods without having to deal with RuntimeTypeHandle.
-    /// RuntimeTypeHandle is a struct and is always passed in stack in x86, which our VM call helpers don't
+    /// Helpers that allows VM to call into IDynamicInterfaceCastable methods without having to deal
+    // with RuntimeTypeHandle.
+    /// RuntimeTypeHandle is a struct and is always passed in stack in x86, which our VM call helpers
+    // don't
     /// particularly like.
     /// </summary>
     internal static class DynamicInterfaceCastableHelpers

@@ -68,11 +68,11 @@ namespace System.Net.NetworkInformation
                     }
                     catch (ArgumentNullException)
                     {
-                        /* Ignore this, as the
-                         * internal call might have
-                         * left some blank entries at
-                         * the end of the array
-                         */
+/* Ignore this, as the
+* internal call might have
+* left some blank entries at
+* the end of the array
+*/
                     }
                 }
 

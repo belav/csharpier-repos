@@ -26,7 +26,8 @@ internal class InlineConstraint
     }
 
     /// <summary>
-    /// Creates a new <see cref="InlineConstraint"/> instance given a <see cref="RoutePatternParameterPolicyReference"/>.
+    /// Creates a new <see cref="InlineConstraint"/> instance given a <see
+    // cref="RoutePatternParameterPolicyReference"/>.
     /// </summary>
     /// <param name="other">A <see cref="RoutePatternParameterPolicyReference"/> instance.</param>
     public InlineConstraint(RoutePatternParameterPolicyReference other)

@@ -44,8 +44,10 @@ namespace System.Xml
         Error,
     };
 
-    // Represents a writer that provides fast non-cached forward-only way of generating XML streams containing XML documents
-    // that conform to the W3C Extensible Markup Language (XML) 1.0 specification and the Namespaces in XML specification.
+    // Represents a writer that provides fast non-cached forward-only way of generating XML streams
+    // containing XML documents
+    // that conform to the W3C Extensible Markup Language (XML) 1.0 specification and the Namespaces in
+    // XML specification.
     public abstract partial class XmlWriter : IDisposable
     {
         // Helper buffer for WriteNode(XmlReader, bool)
@@ -54,7 +56,8 @@ namespace System.Xml
         // Constants
         const int WriteNodeBufferSize = 1024;
 
-        // Returns the settings describing the features of the the writer. Returns null for V1 XmlWriters (XmlTextWriter).
+        // Returns the settings describing the features of the the writer. Returns null for V1 XmlWriters
+        // (XmlTextWriter).
         public virtual XmlWriterSettings Settings
         {
             get { return null; }
@@ -97,7 +100,8 @@ namespace System.Xml
 
         public abstract void WriteEndElement();
 
-        // Closes one element and pops the corresponding namespace scope. Writes out a full end element tag, e.g. </element>.
+        // Closes one element and pops the corresponding namespace scope. Writes out a full end element tag,
+        // e.g. </element>.
 
         public abstract void WriteFullEndElement();
 
@@ -155,7 +159,8 @@ namespace System.Xml
 
         public abstract void WriteComment(string text);
 
-        // Writes out a processing instruction with a space between the name and text as follows: <?name text?>
+        // Writes out a processing instruction with a space between the name and text as follows: <?name
+        // text?>
 
         public abstract void WriteProcessingInstruction(string name, string text);
 
@@ -207,11 +212,13 @@ namespace System.Xml
         // Closes the XmlWriter and the underlying stream/TextReader (if Settings.CloseOutput is true).
         public virtual void Close() { }
 
-        // Flushes data that is in the internal buffers into the underlying streams/TextReader and flushes the stream/TextReader.
+        // Flushes data that is in the internal buffers into the underlying streams/TextReader and flushes
+        // the stream/TextReader.
 
         public abstract void Flush();
 
-        // Returns the closest prefix defined in the current namespace scope for the specified namespace URI.
+        // Returns the closest prefix defined in the current namespace scope for the specified namespace
+        // URI.
         public abstract string LookupPrefix(string ns);
 
         // Gets an XmlSpace representing the current xml:space scope.
@@ -246,7 +253,8 @@ namespace System.Xml
             WriteString(XmlConvert.VerifyQName(name, ExceptionType.ArgumentException));
         }
 
-        // Writes out the specified namespace-qualified name by looking up the prefix that is in scope for the given namespace.
+        // Writes out the specified namespace-qualified name by looking up the prefix that is in scope for
+        // the given namespace.
         public virtual void WriteQualifiedName(string localName, string ns)
         {
             if (ns != null && ns.Length > 0)
@@ -395,7 +403,8 @@ namespace System.Xml
             }
         }
 
-        // Copies the current node from the given reader to the writer (including child nodes), and if called on an element moves the XmlReader
+        // Copies the current node from the given reader to the writer (including child nodes), and if
+        // called on an element moves the XmlReader
         // to the corresponding end element.
         public virtual void WriteNode(XmlReader reader, bool defattr)
         {
@@ -665,7 +674,8 @@ namespace System.Xml
         }
 
 #if !SILVERLIGHT // Removing dependency on XPathNavigator
-        // Copy local namespaces on the navigator's current node to the raw writer. The namespaces are returned by the navigator in reversed order.
+        // Copy local namespaces on the navigator's current node to the raw writer. The namespaces are
+        // returned by the navigator in reversed order.
         // The recursive call reverses them back.
         private void WriteLocalNamespaces(XPathNavigator nsNav)
         {

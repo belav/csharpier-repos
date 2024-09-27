@@ -34,21 +34,25 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     internal abstract partial class AbstractNavigateToSearchService
     {
         /// <summary>
-        /// Cached map from document key to the (potentially stale) syntax tree index for it we use prior to the
+        /// Cached map from document key to the (potentially stale) syntax tree index for it we use prior to
+        // the
         /// full solution becoming available.  Once the full solution is available, this will be dropped
         /// (set to <see langword="null"/>) to release all cached data.
         /// </summary>
         private static CachedIndexMap? s_cachedIndexMap = new();
 
         /// <summary>
-        /// String table we use to dedupe common values while deserializing <see cref="SyntaxTreeIndex"/>s.  Once the
-        /// full solution is available, this will be dropped (set to <see langword="null"/>) to release all cached data.
+        /// String table we use to dedupe common values while deserializing <see cref="SyntaxTreeIndex"/>s.
+        // Once the
+        /// full solution is available, this will be dropped (set to <see langword="null"/>) to release all
+        // cached data.
         /// </summary>
         private static StringTable? s_stringTable = new();
 
         private static void ClearCachedData()
         {
-            // Volatiles are technically not necessary due to automatic fencing of reference-type writes.  However,
+            // Volatiles are technically not necessary due to automatic fencing of reference-type writes.
+            // However,
             // i prefer the explicitness here as we are reading and writing these fields from different threads.
             Volatile.Write(ref s_cachedIndexMap, null);
             Volatile.Write(ref s_stringTable, null);
@@ -157,7 +161,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo
 
             using var _1 = GetPooledHashSet(priorityDocumentKeys, out var priorityDocumentKeysSet);
 
-            // Sort the groups into a high pri group (projects that contain a high-pri doc), and low pri groups (those
+            // Sort the groups into a high pri group (projects that contain a high-pri doc), and low pri groups
+            // (those
             // that don't).
             using var _2 = GetPooledHashSet(
                 groups.Where(g => g.Any(priorityDocumentKeysSet.Contains)),
@@ -278,16 +283,20 @@ namespace Microsoft.CodeAnalysis.NavigateTo
             CancellationToken cancellationToken
         )
         {
-            // Retrieve the string table we use to dedupe strings.  If we can't get it, that means the solution has
+            // Retrieve the string table we use to dedupe strings.  If we can't get it, that means the solution
+            // has
             // fully loaded and we've switched over to normal navto lookup.
             if (!ShouldSearchCachedDocuments(out var cachedIndexMap, out var stringTable))
                 return SpecializedTasks.Null<TopLevelSyntaxTreeIndex>();
 
-            // Add the async lazy to compute the index for this document.  Or, return the existing cached one if already
-            // present.  This ensures that subsequent searches that are run while the solution is still loading are fast
+            // Add the async lazy to compute the index for this document.  Or, return the existing cached one if
+            // already
+            // present.  This ensures that subsequent searches that are run while the solution is still loading
+            // are fast
             // and avoid the cost of loading from the persistence service every time.
             //
-            // Pass in null for the checksum as we want to search stale index values regardless if the documents don't
+            // Pass in null for the checksum as we want to search stale index values regardless if the documents
+            // don't
             // match on disk anymore.
             var asyncLazy = cachedIndexMap.GetOrAdd(
                 (storageService, documentKey, stringTable),

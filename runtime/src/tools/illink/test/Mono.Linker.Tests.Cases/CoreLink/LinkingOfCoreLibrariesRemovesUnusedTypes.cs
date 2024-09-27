@@ -12,7 +12,8 @@ namespace Mono.Linker.Tests.Cases.CoreLink
     [SetupLinkerTrimMode("link")]
     [Reference("System.dll")]
     [KeptAssembly(PlatformAssemblies.CoreLib)]
-    // We can't check everything that should be removed, but we should be able to check a few niche things that
+    // We can't check everything that should be removed, but we should be able to check a few niche
+    // things that
     // we know should be removed which will at least verify that the core library was processed
     [KeptTypeInAssembly(
         PlatformAssemblies.CoreLib,

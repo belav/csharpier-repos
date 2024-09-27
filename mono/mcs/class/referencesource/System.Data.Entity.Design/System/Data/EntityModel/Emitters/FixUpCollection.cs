@@ -658,7 +658,8 @@ namespace System.Data.EntityModel.Emitters
             line = line.Replace('\t', ' ').Trim();
 
             // consecutuve spaces are replaced with single spaces...
-            // (we don't care about hammering strings; we just use the normalized line for statment identification...
+            // (we don't care about hammering strings; we just use the normalized line for statment
+            // identification...
             while (line.IndexOf("  ", 0, StringComparison.Ordinal) >= 0)
                 line = line.Replace("  ", " ");
 

@@ -44,7 +44,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
             IAsynchronousOperationListenerProvider listenerProvider
         )
         {
-            // MEFv2 doesn't support type based contract for Import above and for this particular contract (SAsyncServiceProvider)
+            // MEFv2 doesn't support type based contract for Import above and for this particular contract
+            // (SAsyncServiceProvider)
             // actual type cast doesn't work. (https://github.com/microsoft/vs-mef/issues/138)
             // workaround by getting the service as object and cast to actual interface
             _asyncServiceProvider = (IAsyncServiceProvider)asyncServiceProvider;

@@ -573,8 +573,10 @@ namespace Mono.CSharp
             if (t.Kind == MemberKind.InternalCompilerType || t is ElementTypeSpec || t.Arity > 0)
                 return left;
 
-            // In a member access of the form E.I, if E is a single identifier, and if the meaning of E as a simple-name is
-            // a constant, field, property, local variable, or parameter with the same type as the meaning of E as a type-name
+            // In a member access of the form E.I, if E is a single identifier, and if the meaning of E as a
+            // simple-name is
+            // a constant, field, property, local variable, or parameter with the same type as the meaning of E
+            // as a type-name
 
             if (left is MemberExpr || left is VariableReference)
             {
@@ -1213,10 +1215,12 @@ namespace Mono.CSharp
                 else if (!errorMode && !member.IsNotCSharpCompatible)
                 {
                     //
-                    // Interface members that are hidden by class members are removed from the set when T is a type parameter and
+                    // Interface members that are hidden by class members are removed from the set when T is a type
+                    // parameter and
                     // T has both an effective base class other than object and a non-empty effective interface set.
                     //
-                    // The spec has more complex rules but we simply remove all members declared in an interface declaration.
+                    // The spec has more complex rules but we simply remove all members declared in an interface
+                    // declaration.
                     //
                     var tps = queried_type as TypeParameterSpec;
                     if (tps != null && tps.HasTypeConstraint)
@@ -2292,7 +2296,8 @@ namespace Mono.CSharp
 
         public override void EmitSideEffect(EmitContext ec)
         {
-            // boxing is side-effectful, since it involves runtime checks, except when boxing to Object or ValueType
+            // boxing is side-effectful, since it involves runtime checks, except when boxing to Object or
+            // ValueType
             // so, we need to emit the box+pop instructions in most cases
             if (
                 child.Type.IsStruct
@@ -5466,7 +5471,8 @@ namespace Mono.CSharp
             if (cerrors != null)
                 r.CustomErrors = cerrors;
 
-            // TODO: When in probing mode do IsApplicable only and when called again do VerifyArguments for full error reporting
+            // TODO: When in probing mode do IsApplicable only and when called again do VerifyArguments for full
+            // error reporting
             best_candidate = r.ResolveMember<MethodSpec>(ec, ref args);
             if (best_candidate == null)
             {
@@ -5963,7 +5969,8 @@ namespace Mono.CSharp
                 var am = (AnonymousMethodExpression)a.Expr;
 
                 //
-                // When anonymous method is an asynchronous, and P has a return type Task<Y1>, and Q has a return type Task<Y2>
+                // When anonymous method is an asynchronous, and P has a return type Task<Y1>, and Q has a return
+                // type Task<Y2>
                 // better conversion is performed between underlying types Y1 and Y2
                 //
                 if (p.IsGenericTask || q.IsGenericTask)
@@ -6380,7 +6387,8 @@ namespace Mono.CSharp
                     // LAMESPEC:
                     //
                     // void Foo (int i = 0) is better than void Foo (params int[]) for Foo ()
-                    // void Foo (string[] s, string value = null) is better than Foo (string s, params string[]) for Foo (null) or Foo ()
+                    // void Foo (string[] s, string value = null) is better than Foo (string s, params string[]) for Foo
+                    // (null) or Foo ()
                     //
                     if (cand_param.HasDefaultValue)
                     {
@@ -9951,7 +9959,8 @@ namespace Mono.CSharp
         )
         {
             //
-            // If the event is local to this class and we are not lhs of +=/-= we transform ourselves into a FieldExpr
+            // If the event is local to this class and we are not lhs of +=/-= we transform ourselves into a
+            // FieldExpr
             //
             if (!ec.HasSet(ResolveContext.Options.CompoundAssignmentScope))
             {

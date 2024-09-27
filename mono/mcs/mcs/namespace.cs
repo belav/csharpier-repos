@@ -1788,7 +1788,8 @@ namespace Mono.CSharp
             // TODO: Need to move it to post_process_using_aliases
             //ObsoleteAttribute obsolete_attr = resolved.Type.GetAttributeObsolete ();
             //if (obsolete_attr != null) {
-            //	AttributeTester.Report_ObsoleteMessage (obsolete_attr, resolved.GetSignatureForError (), Location, ctx.Compiler.Report);
+            //	AttributeTester.Report_ObsoleteMessage (obsolete_attr, resolved.GetSignatureForError (),
+            // Location, ctx.Compiler.Report);
             //}
         }
     }

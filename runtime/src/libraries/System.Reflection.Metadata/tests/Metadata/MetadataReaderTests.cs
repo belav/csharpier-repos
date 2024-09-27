@@ -192,7 +192,8 @@ namespace System.Reflection.Metadata.Tests
                         MetadataReaderOptions.Default
                     )
             );
-            //NotEnoughSpaceForStreamHeaderName for index of five + uint16 + COR20Constants.MinimumSizeofStreamHeader
+            //NotEnoughSpaceForStreamHeaderName for index of five + uint16 +
+            // COR20Constants.MinimumSizeofStreamHeader
             Assert.Throws<BadImageFormatException>(
                 () =>
                     new MetadataReader(
@@ -317,7 +318,8 @@ namespace System.Reflection.Metadata.Tests
         {
             byte[] peImage = (byte[])PortablePdbs.DocumentsPdb.Clone();
             GCHandle pinned = GetPinnedPEImage(peImage);
-            //Find COR20Constants.StringStreamName to be changed to COR20Constants.MinimalDeltaMetadataTableStreamName
+            //Find COR20Constants.StringStreamName to be changed to
+            // COR20Constants.MinimalDeltaMetadataTableStreamName
             int stringIndex = IndexOf(
                 peImage,
                 Encoding.ASCII.GetBytes(COR20Constants.StringStreamName),
@@ -435,7 +437,8 @@ namespace System.Reflection.Metadata.Tests
                         headers.MetadataSize
                     )
             );
-            //0xcc90da21758 is a value to make (presentTables & ~validTables) != 0 but not (presentTables & (ulong)(TableMask.PtrTables | TableMask.EnCMap)) != 0
+            //0xcc90da21758 is a value to make (presentTables & ~validTables) != 0 but not (presentTables &
+            // (ulong)(TableMask.PtrTables | TableMask.EnCMap)) != 0
             Array.Copy(
                 new byte[] { 0x58, 0x17, 0xa2, 0x0d, 0xc9, 0x0c, 0, 0 },
                 0,
@@ -584,7 +587,8 @@ namespace System.Reflection.Metadata.Tests
                     "<WinRT>\uFFFDSTests.WithNestedType"
                 )
             );
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+            // ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             // recreate our reader with exception fallback decoder.
             reader = GetMetadataReader(
@@ -690,7 +694,8 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal("Class1"u8.ToArray(), strReader.ReadBytes("Class1".Length));
             Assert.Equal(0, strReader.RemainingBytes);
 
-            // .class /*02000003*/ private auto ansi import windowsruntime sealed beforefieldinit Lib.'<WinRT>Class1'
+            // .class /*02000003*/ private auto ansi import windowsruntime sealed beforefieldinit
+            // Lib.'<WinRT>Class1'
             var clrDefHandle = MetadataTokens.TypeDefinitionHandle(3);
             var clrDef = reader.GetTypeDefinition(clrDefHandle);
             Assert.Equal(StringKind.WinRTPrefixed, clrDef.Name.StringKind);
@@ -763,7 +768,8 @@ namespace System.Reflection.Metadata.Tests
         {
             var reader = GetMetadataReader(WinRT.Lib, options: MetadataReaderOptions.None);
 
-            //  4: 0x23000001 (AssemblyRef)  'CompilationRelaxationsAttribute' (#1c3)  'System.Runtime.CompilerServices' (#31a)
+            //  4: 0x23000001 (AssemblyRef)  'CompilationRelaxationsAttribute' (#1c3)
+            // 'System.Runtime.CompilerServices' (#31a)
             var typeRef = reader.GetTypeReference(MetadataTokens.TypeReferenceHandle(4));
             Assert.Equal("System.Runtime.CompilerServices", reader.GetString(typeRef.Namespace));
 
@@ -1049,7 +1055,8 @@ namespace System.Reflection.Metadata.Tests
             var expHashes = new byte[][]
             {
                 // ModuleCS00.mod
-                // new byte [] { 0xd4, 0x6b, 0xec, 0x25, 0x47, 0x01, 0x20, 0x30, 0x05, 0x42, 0x34, 0x4b, 0x31, 0x22, 0x44, 0xd8, 0x1c, 0x87, 0xd0, 0x98 },
+                // new byte [] { 0xd4, 0x6b, 0xec, 0x25, 0x47, 0x01, 0x20, 0x30, 0x05, 0x42, 0x34, 0x4b, 0x31, 0x22,
+                // 0x44, 0xd8, 0x1c, 0x87, 0xd0, 0x98 },
             };
 
             // ModuleVB01
@@ -1576,23 +1583,23 @@ namespace System.Reflection.Metadata.Tests
             };
             var expFlags = new TypeAttributes[]
             {
-                /* 0 */
+/* 0 */
                 TypeAttributes.NotPublic, /* 1 */
                 TypeAttributes.Public,
-                /* 0x00100109 */
+/* 0x00100109 */
                 TypeAttributes.BeforeFieldInit
                     | TypeAttributes.Sealed
                     | TypeAttributes.SequentialLayout
                     | TypeAttributes.Public,
-                /* 0x0102 */
+/* 0x0102 */
                 TypeAttributes.Sealed | TypeAttributes.NestedPublic,
-                /* 0x010a */
+/* 0x010a */
                 TypeAttributes.Sealed
                     | TypeAttributes.SequentialLayout
                     | TypeAttributes.NestedPublic,
-                /* 0x0102 */
+/* 0x0102 */
                 TypeAttributes.Sealed | TypeAttributes.NestedPublic,
-                /* 0x00a2 */
+/* 0x00a2 */
                 TypeAttributes.Abstract
                     | TypeAttributes.Interface
                     | TypeAttributes.NestedPublic,
@@ -1613,13 +1620,13 @@ namespace System.Reflection.Metadata.Tests
             // TODO: check with DEV - too much work to figure out, hard code for now - property, event
             var expMemberCount = new uint[]
             {
-                /*<Module>*/0,
+/*<Module>*/0,
                 0, /*ModVBClass*/
                 2,
                 0, /*ModVBStruct*/
                 0,
                 1,
-                /*ModVBInnerEnum*/0,
+/*ModVBInnerEnum*/0,
                 0, /*ModVBInnerStruct*/
                 0,
                 0, /*ModVBDele*/
@@ -1684,7 +1691,8 @@ namespace System.Reflection.Metadata.Tests
                     );
                 }
 
-                // == Field & Method: validate previous row's member as it needs current row's member other to calc how many
+                // == Field & Method: validate previous row's member as it needs current row's member other to calc
+                // how many
                 if (!first)
                 {
                     ValidateFieldDef(reader, prevFieldStart, fieldStart - prevFieldStart, true);
@@ -1707,17 +1715,22 @@ namespace System.Reflection.Metadata.Tests
         }
 
         /// <summary>
-        /// Helper method that will validate that a NamespaceDefinition (and all NamespaceDefinitions considered children
-        /// of it) report correct values for their child namespaces, types, etc. All namespaces in the module are expected
-        /// to be listed in the allNamespaces array. Additionally, the global namespace is expected to have type definitions
+        /// Helper method that will validate that a NamespaceDefinition (and all NamespaceDefinitions
+        // considered children
+        /// of it) report correct values for their child namespaces, types, etc. All namespaces in the
+        // module are expected
+        /// to be listed in the allNamespaces array. Additionally, the global namespace is expected to have
+        // type definitions
         /// for GlobalClassA, GlobalClassB, and Module. No type forwarder declarations are expected.
         ///
-        /// All namespaces that aren't the global NS are expected to have type definitions equal to the array
+        /// All namespaces that aren't the global NS are expected to have type definitions equal to the
+        // array
         /// @namespaceName.Split('.')
         /// So, ns1.Ns2.NS3 is expected to have type definitions
         /// {"ns1", "Ns2", "NS3"}.
         ///
-        /// definitionExceptions and forwarderExceptions may be used to override the default expectations. Pass in
+        /// definitionExceptions and forwarderExceptions may be used to override the default expectations.
+        // Pass in
         /// namespace (key) and what is expected (list of strings) for each exception.
         /// </summary>
         private void ValidateNamespaceChildren(
@@ -1919,7 +1932,8 @@ namespace System.Reflection.Metadata.Tests
         }
 
         /// <summary>
-        /// Validates that the namespace cache is lazy and will not automatically be created with simple name lookups.
+        /// Validates that the namespace cache is lazy and will not automatically be created with simple
+        // name lookups.
         /// </summary>
         [Fact]
         public void ValidateNamespaceCacheLaziness()
@@ -2058,9 +2072,9 @@ namespace System.Reflection.Metadata.Tests
             var expNames = new string[] { "AppField01", "AppField02" };
             var expFlags = new FieldAttributes[]
             {
-                /*0x11*/
+/*0x11*/
                 FieldAttributes.Private | FieldAttributes.Static,
-                /*0x01*/FieldAttributes.Private,
+/*0x01*/FieldAttributes.Private,
             };
             var expSigs = new byte[][]
             {
@@ -2068,6 +2082,7 @@ namespace System.Reflection.Metadata.Tests
                 new byte[] { 0x06, 0x12, 0x25 },
             };
 
+            //
             // =====================================================================================================
             // VB Module - 8
             var modNames = new string[]
@@ -2083,34 +2098,34 @@ namespace System.Reflection.Metadata.Tests
             };
             var modFlags = new FieldAttributes[]
             {
-                /* 0x8053 */
+/* 0x8053 */
                 FieldAttributes.HasDefault
                     | FieldAttributes.Literal
                     | FieldAttributes.Static
                     | FieldAttributes.FamANDAssem
                     | FieldAttributes.Private,
-                /* 0x0016 */FieldAttributes.Static | FieldAttributes.Family | FieldAttributes.FamANDAssem,
-                /* 0x0001 */FieldAttributes.Private,
-                /* 0x0606 */FieldAttributes.RTSpecialName
+/* 0x0016 */FieldAttributes.Static | FieldAttributes.Family | FieldAttributes.FamANDAssem,
+/* 0x0001 */FieldAttributes.Private,
+/* 0x0606 */FieldAttributes.RTSpecialName
                     | FieldAttributes.SpecialName
                     | FieldAttributes.Family
                     | FieldAttributes.FamANDAssem,
-                /* 0x8056 */FieldAttributes.HasDefault
+/* 0x8056 */FieldAttributes.HasDefault
                     | FieldAttributes.Literal
                     | FieldAttributes.Static
                     | FieldAttributes.Family
                     | FieldAttributes.FamANDAssem,
-                /* 0x8056 */FieldAttributes.HasDefault
+/* 0x8056 */FieldAttributes.HasDefault
                     | FieldAttributes.Literal
                     | FieldAttributes.Static
                     | FieldAttributes.Family
                     | FieldAttributes.FamANDAssem,
-                /* 0x8056 */FieldAttributes.HasDefault
+/* 0x8056 */FieldAttributes.HasDefault
                     | FieldAttributes.Literal
                     | FieldAttributes.Static
                     | FieldAttributes.Family
                     | FieldAttributes.FamANDAssem,
-                /* 0x8056 */FieldAttributes.HasDefault
+/* 0x8056 */FieldAttributes.HasDefault
                     | FieldAttributes.Literal
                     | FieldAttributes.Static
                     | FieldAttributes.Family
@@ -2912,15 +2927,15 @@ namespace System.Reflection.Metadata.Tests
             var expNames = new string[] { "V", "CT", "CO", "T", "CT1", "CO1", "T1" };
             var expFlags = new GenericParameterAttributes[]
             {
-                /* 4 */
+/* 4 */
                 GenericParameterAttributes.ReferenceTypeConstraint,
-                /* 6 */GenericParameterAttributes.ReferenceTypeConstraint
+/* 6 */GenericParameterAttributes.ReferenceTypeConstraint
                     | GenericParameterAttributes.Contravariant,
-                /* 1 */GenericParameterAttributes.Covariant,
-                /* 0 */GenericParameterAttributes.None,
-                /* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
-                /* 0x10 */GenericParameterAttributes.DefaultConstructorConstraint, // Mask 001C
-                /* 0 */GenericParameterAttributes.None,
+/* 1 */GenericParameterAttributes.Covariant,
+/* 0 */GenericParameterAttributes.None,
+/* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
+/* 0x10 */GenericParameterAttributes.DefaultConstructorConstraint, // Mask 001C
+/* 0 */GenericParameterAttributes.None,
             };
             var expNumber = new ushort[] { 0, 0, 0, 0, 0, 0, 0 };
             var expTypeTokens = new int[]
@@ -2939,13 +2954,13 @@ namespace System.Reflection.Metadata.Tests
             var modNames = new string[] { "T", "T", "R", "T", "X" };
             var modFlags = new GenericParameterAttributes[]
             {
-                /* 0 */
+/* 0 */
                 GenericParameterAttributes.None,
-                /* 4 */
+/* 4 */
                 GenericParameterAttributes.ReferenceTypeConstraint,
-                /* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
-                /* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
-                /* 0 */GenericParameterAttributes.None,
+/* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
+/* 4 */GenericParameterAttributes.ReferenceTypeConstraint,
+/* 0 */GenericParameterAttributes.None,
             };
 
             var modNumber = new ushort[] { 0, 0, 1, 0, 0 };
@@ -4272,7 +4287,8 @@ namespace System.Reflection.Metadata.Tests
             public int Size; // size of stream
         }
 
-        // Mimic what at least one version of at least one obfuscator has done to use the undocumented/non-standard extra-data flag.
+        // Mimic what at least one version of at least one obfuscator has done to use the
+        // undocumented/non-standard extra-data flag.
         // If setFlag is false, do everything but setting the flag.
         private static unsafe byte[] ObfuscateWithExtraData(
             byte[] unobfuscated,

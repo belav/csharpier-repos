@@ -9,7 +9,8 @@ namespace System.Reflection.Metadata
     /// Debug information associated with a method definition. Stored in debug metadata.
     /// </summary>
     /// <remarks>
-    /// See https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PortablePdb-Metadata.md#methoddebuginformation-table-0x31.
+    /// See
+    // https://github.com/dotnet/runtime/blob/main/src/libraries/System.Reflection.Metadata/specs/PortablePdb-Metadata.md#methoddebuginformation-table-0x31.
     /// </remarks>
     public readonly struct MethodDebugInformation
     {
@@ -72,7 +73,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// If the method is a MoveNext method of a state machine returns the kickoff method of the state machine, otherwise returns nil handle.
+        /// If the method is a MoveNext method of a state machine returns the kickoff method of the state
+        // machine, otherwise returns nil handle.
         /// </summary>
         public MethodDefinitionHandle GetStateMachineKickoffMethod()
         {

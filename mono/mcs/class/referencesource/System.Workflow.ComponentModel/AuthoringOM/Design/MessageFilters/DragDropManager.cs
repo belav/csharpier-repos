@@ -243,7 +243,8 @@
         #region DragDrop Operations
         protected override bool OnDragEnter(DragEventArgs eventArgs)
         {
-            //We purposely pass the DragEnter thru to the next behavior so that the WindowingBehavior can clear the
+            //We purposely pass the DragEnter thru to the next behavior so that the WindowingBehavior can clear
+            // the
             //active designer
             Debug.Assert(this.dropTargetDesigner == null);
 
@@ -255,7 +256,8 @@
             eventArgs.Effect = DragDropEffects.None;
             this.wasCtrlKeyPressed = false;
 
-            //Now cache the components which are getting dragged so that we don't need to create them again and again
+            //Now cache the components which are getting dragged so that we don't need to create them again and
+            // again
             if (this.existingDraggedActivities.Count > 0)
             {
                 this.draggedActivities.AddRange(this.existingDraggedActivities);
@@ -297,7 +299,8 @@
             if (!parentView.IsClientPointInActiveLayout(clientPoint))
                 return false;
 
-            //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
+            //Now we have a potential for successful drag drop, so construct drag event arguments with logical
+            // coordinates
             this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
             ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
                 eventArgs,
@@ -381,7 +384,8 @@
             }
             else
             {
-                //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
+                //Now we have a potential for successful drag drop, so construct drag event arguments with logical
+                // coordinates
                 this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
                 ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
                     eventArgs,
@@ -501,7 +505,8 @@
                 return false;
             }
 
-            //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
+            //Now we have a potential for successful drag drop, so construct drag event arguments with logical
+            // coordinates
             this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
             ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
                 eventArgs,
@@ -552,7 +557,8 @@
                     {
                         // IMPORTANT: Don't use draggedActivities variable, because components which are
                         // there may not be created using the assembly references  added to ITypeResultionService
-                        // this.workflowView.time the components will be created using the assembly references got added to the project
+                        // this.workflowView.time the components will be created using the assembly references got added to
+                        // the project
                         List<Activity> droppedActivities = new List<Activity>();
                         string transactionDescription = SR.GetString(SR.DragDropActivities);
 
@@ -946,14 +952,16 @@
             if (dropTargetComponent == null || selectionService == null)
                 return false;
 
-            // First check for activity designer specific recursion - possible recursion when drag-n-drop from outside the current
+            // First check for activity designer specific recursion - possible recursion when drag-n-drop from
+            // outside the current
             // designer such toolbox or other activity designers.
             WorkflowView workflowView = GetService(typeof(WorkflowView)) as WorkflowView;
             IDesignerHost host = GetService(typeof(IDesignerHost)) as IDesignerHost;
             WorkflowDesignerLoader loader =
                 GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
 
-            // When drag-n-drop within the same designer, if the drag drop is not within designer or no valid droptarget, we do not do anything
+            // When drag-n-drop within the same designer, if the drag drop is not within designer or no valid
+            // droptarget, we do not do anything
             if (this.draggedActivities.Count == 0 || this.existingDraggedActivities.Count == 0)
                 return false;
 
@@ -1023,7 +1031,8 @@
                 // get component serialization service
                 this.existingDraggedActivities.AddRange(Helpers.GetTopLevelActivities(components));
 
-                //IMPORTANT: FOR WITHIN DESIGNER COMPONENT MOVE WE REMOVE THE ACTIVITIES BEFORE WE ADD THEM WHICH IS IN
+                //IMPORTANT: FOR WITHIN DESIGNER COMPONENT MOVE WE REMOVE THE ACTIVITIES BEFORE WE ADD THEM WHICH IS
+                // IN
                 //ONDRAGDROP FUNCTION. ALTHOUGH THIS VIOLATES THE DODRAGDROP FUNCTION SIMANTICS, WE NEED TO DO THIS
                 //SO THAT WE CAN USE THE SAME IDS FOR THE ACTIVITIES
                 DragDropEffects allowedEffects =

@@ -27,7 +27,8 @@ namespace System.Runtime.InteropServices
     internal class ComEventsMethod
     {
         // This delegate wrapper class handles dynamic invocation of delegates. The reason for the wrapper's
-        // existence is that under certain circumstances we need to coerce arguments to types expected by the
+        // existence is that under certain circumstances we need to coerce arguments to types expected by
+        // the
         // delegates signature. Normally, reflection (Delegate.DynamicInvoke) handles types coercion
         // correctly but one known case is when the expected signature is 'ref Enum' - in this case
         // reflection by design does not do the coercion. Since we need to be compatible with COM interop

@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.ComponentModel.Design.Serialization;
@@ -28,7 +28,8 @@ namespace System.ComponentModel
     {
         /// <devdoc>
         ///    <para>Gets a value indicating whether this
-        ///       converter can convert an object in the given source type to a globally unique identifier object
+        ///       converter can convert an object in the given source type to a globally unique identifier
+        // object
         ///       using the context.</para>
         /// </devdoc>
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

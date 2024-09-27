@@ -415,13 +415,15 @@ namespace Internal.TypeSystem.Ecma
                         == (int)SignatureCallingConvention.Unmanaged
                 );
 
-                // If skipEmbeddedSignatureData is true, we're building the signature for the purposes of building a type.
+                // If skipEmbeddedSignatureData is true, we're building the signature for the purposes of building a
+                // type.
                 // We normalize unmanaged calling convention into a single value - "unmanaged".
                 if (skipEmbeddedSignatureData)
                 {
                     flags = MethodSignatureFlags.UnmanagedCallingConvention;
 
-                    // But we still need to remember this signature is different, so add this to the EmbeddedSignatureData of the owner signature.
+                    // But we still need to remember this signature is different, so add this to the
+                    // EmbeddedSignatureData of the owner signature.
                     _embeddedSignatureDataList?.Add(
                         new EmbeddedSignatureData
                         {

@@ -7,15 +7,18 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>
 ///     <para>
-///         Represents a set of indexed values. Typically used to represent a row of data returned from a database.
+///         Represents a set of indexed values. Typically used to represent a row of data returned
+// from a database.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public readonly struct ValueBuffer : IEquatable<ValueBuffer>
@@ -70,13 +73,15 @@ public readonly struct ValueBuffer : IEquatable<ValueBuffer>
         _values == null;
 
     /// <summary>
-    ///     Determines if this value buffer is equivalent to a given object (i.e. if they are both value buffers and contain the same values).
+    ///     Determines if this value buffer is equivalent to a given object (i.e. if they are both value
+    // buffers and contain the same values).
     /// </summary>
     /// <param name="obj">
     ///     The object to compare this value buffer to.
     /// </param>
     /// <returns>
-    ///     <see langword="true" /> if the object is a <see cref="ValueBuffer" /> and contains the same values, otherwise <see langword="false" />.
+    ///     <see langword="true" /> if the object is a <see cref="ValueBuffer" /> and contains the same
+    // values, otherwise <see langword="false" />.
     /// </returns>
     public override bool Equals(object? obj) => obj is ValueBuffer buffer && Equals(buffer);
 
@@ -87,7 +92,8 @@ public readonly struct ValueBuffer : IEquatable<ValueBuffer>
     ///     An object to compare with this object.
     /// </param>
     /// <returns>
-    ///     <see langword="true" /> if the current object is equal to the <paramref name="other" /> parameter; otherwise, <see langword="false" />.
+    ///     <see langword="true" /> if the current object is equal to the <paramref name="other" />
+    // parameter; otherwise, <see langword="false" />.
     /// </returns>
     public bool Equals(ValueBuffer other)
     {

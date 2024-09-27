@@ -110,9 +110,11 @@ namespace ConsoleApplication
                 .Expression;
 
             //This is the crux of the test.
-            //Without this line, with or without the fix, the model never gets pushed to evaluate extension method candidates
+            //Without this line, with or without the fix, the model never gets pushed to evaluate extension
+            // method candidates
             //and therefore never marked ClassLibrary2 as a used import in consoleApplication.
-            //Without the fix, this call used to result in ClassLibrary2 getting marked as used, after the fix, this call does not
+            //Without the fix, this call used to result in ClassLibrary2 getting marked as used, after the fix,
+            // this call does not
             //result in changing ClassLibrary2's used status.
             model.GetMemberGroup(syntax);
 
@@ -142,7 +144,8 @@ class Program
             var comp = CreateEmptyCompilation(text, new[] { MscorlibRef });
             //all unused because system.core was not included and Enumerable didn't bind
             comp.VerifyDiagnostics(
-                // (4,14): error CS0234: The type or namespace name 'Linq' does not exist in the namespace 'System' (are you missing an assembly reference?)
+                // (4,14): error CS0234: The type or namespace name 'Linq' does not exist in the namespace 'System'
+                // (are you missing an assembly reference?)
                 // using System.Linq;
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Linq")
                     .WithArguments("Linq", "System"),
@@ -497,7 +500,8 @@ partial class Program
                 .Verify(
                 //// (1,1): hidden CS8019: Unnecessary using directive.
                 //// using System.Runtime.InteropServices;
-                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
+                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using
+                // System.Runtime.InteropServices;").WithLocation(1, 1)
                 );
         }
 
@@ -527,7 +531,8 @@ partial class Program
                 .Verify(
                 //// (1,1): hidden CS8019: Unnecessary using directive.
                 //// using System.Runtime.InteropServices;
-                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System.Runtime.InteropServices;").WithLocation(1, 1)
+                //Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using
+                // System.Runtime.InteropServices;").WithLocation(1, 1)
                 );
         }
 

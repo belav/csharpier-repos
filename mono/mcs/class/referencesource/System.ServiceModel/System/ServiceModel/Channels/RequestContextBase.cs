@@ -307,7 +307,8 @@ namespace System.ServiceModel.Channels
             this.replySent = true;
         }
 
-        // This method is designed for WebSocket only, and will only be used once the WebSocket response was sent.
+        // This method is designed for WebSocket only, and will only be used once the WebSocket response was
+        // sent.
         // For WebSocket, we never call HttpRequestContext.Reply to send the response back.
         // Instead we call AcceptWebSocket directly. So we need to set the replyInitiated and
         // replySent boolean to be true once the response was sent successfully. Otherwise when we

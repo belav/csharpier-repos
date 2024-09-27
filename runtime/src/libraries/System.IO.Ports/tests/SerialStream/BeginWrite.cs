@@ -300,7 +300,8 @@ namespace System.IO.Ports.Tests
                 com2.RtsEnable = true;
                 read();
 
-                // callbackHandler.WriteAsyncResult guarantees that the callback has been called however it does not gauarentee that
+                // callbackHandler.WriteAsyncResult guarantees that the callback has been called however it does not
+                // gauarentee that
                 // the code calling the callback has finished it's processing
                 IAsyncResult callbackWriteAsyncResult = callbackHandler.WriteAsyncResult;
 
@@ -371,7 +372,8 @@ namespace System.IO.Ports.Tests
                 com2.RtsEnable = true;
                 read();
 
-                // callbackHandler.WriteAsyncResult guarantees that the callback has been called however it does not gauarentee that
+                // callbackHandler.WriteAsyncResult guarantees that the callback has been called however it does not
+                // gauarentee that
                 // the code calling the callback has finished it's processing
                 IAsyncResult callbackWriteAsyncResult = callbackHandler.WriteAsyncResult;
 

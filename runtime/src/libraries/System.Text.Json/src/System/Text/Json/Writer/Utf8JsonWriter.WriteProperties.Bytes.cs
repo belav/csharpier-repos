@@ -10,7 +10,8 @@ namespace System.Text.Json
     public sealed partial class Utf8JsonWriter
     {
         /// <summary>
-        /// Writes the pre-encoded property name and raw bytes value (as a Base64 encoded JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the pre-encoded property name and raw bytes value (as a Base64 encoded JSON string) as
+        // part of a name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The JSON-encoded name of the property to write.</param>
         /// <param name="bytes">The binary data to write as Base64 encoded text.</param>
@@ -29,7 +30,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="bytes">The binary data to write as Base64 encoded text.</param>
@@ -55,7 +57,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="bytes">The binary data to write as Base64 encoded text.</param>
@@ -79,7 +82,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and raw bytes value (as a Base64 encoded JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="utf8PropertyName">The UTF-8 encoded name of the property to write.</param>
         /// <param name="bytes">The binary data to write as Base64 encoded text.</param>
@@ -259,7 +263,8 @@ namespace System.Text.Json
                     < int.MaxValue - encodedLength - 6
             );
 
-            // All ASCII, 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, and 1 colon => escapedPropertyName.Length + encodedLength + 5
+            // All ASCII, 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, and
+            // 1 colon => escapedPropertyName.Length + encodedLength + 5
             // Optionally, 1 list separator, and up to 3x growth when transcoding.
             int maxRequired =
                 (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
@@ -300,7 +305,8 @@ namespace System.Text.Json
 
             Debug.Assert(escapedPropertyName.Length < int.MaxValue - encodedLength - 6);
 
-            // 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, and 1 colon => escapedPropertyName.Length + encodedLength + 5
+            // 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, and 1 colon =>
+            // escapedPropertyName.Length + encodedLength + 5
             // Optionally, 1 list separator.
             int maxRequired = escapedPropertyName.Length + encodedLength + 6;
 
@@ -345,7 +351,8 @@ namespace System.Text.Json
                     < int.MaxValue - indent - encodedLength - 7 - s_newLineLength
             );
 
-            // All ASCII, 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, 1 colon, and 1 space => indent + escapedPropertyName.Length + encodedLength + 6
+            // All ASCII, 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, 1
+            // colon, and 1 space => indent + escapedPropertyName.Length + encodedLength + 6
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding.
             int maxRequired =
                 indent
@@ -406,7 +413,8 @@ namespace System.Text.Json
                     < int.MaxValue - indent - encodedLength - 7 - s_newLineLength
             );
 
-            // 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, 1 colon, and 1 space => indent + escapedPropertyName.Length + encodedLength + 6
+            // 2 quotes for property name, 2 quotes to surround the base-64 encoded string value, 1 colon, and 1
+            // space => indent + escapedPropertyName.Length + encodedLength + 6
             // Optionally, 1 list separator, and 1-2 bytes for new line.
             int maxRequired =
                 indent + escapedPropertyName.Length + encodedLength + 7 + s_newLineLength;

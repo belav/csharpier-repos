@@ -137,7 +137,8 @@ namespace System.Activities.Core.Presentation
             ModelItem flowElementMI = GetFlowElementMI(shapeModelItem);
             Fx.Assert(flowElementMI != null, "Invalid shape in Flowchart");
             bool itemRemoved = this.ModelItem.Properties["Nodes"].Collection.Remove(flowElementMI);
-            //Clean up the FlowStep so that shapeModelItem.Parents will be updated and FlowStep will not be leaked.
+            //Clean up the FlowStep so that shapeModelItem.Parents will be updated and FlowStep will not be
+            // leaked.
             if (
                 typeof(FlowStep).IsAssignableFrom(flowElementMI.ItemType)
                 && (updatedItems == null || !updatedItems.Contains(flowElementMI))

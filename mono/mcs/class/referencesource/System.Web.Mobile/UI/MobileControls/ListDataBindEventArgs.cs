@@ -5,18 +5,18 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 using System;
 using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * List item data binding arguments.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* List item data binding arguments.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\ListDataBindEventArgs.uex' path='docs/doc[@for="ListDataBindEventArgs"]/*' />
     [AspNetHostingPermission(
@@ -35,20 +35,23 @@ namespace System.Web.UI.MobileControls
         private MobileListItem _listItem;
         private Object _dataItem;
 
-        /// <include file='doc\ListDataBindEventArgs.uex' path='docs/doc[@for="ListDataBindEventArgs.ListDataBindEventArgs"]/*' />
+        /// <include file='doc\ListDataBindEventArgs.uex'
+        // path='docs/doc[@for="ListDataBindEventArgs.ListDataBindEventArgs"]/*' />
         public ListDataBindEventArgs(MobileListItem item, Object dataItem)
         {
             _listItem = item;
             _dataItem = dataItem;
         }
 
-        /// <include file='doc\ListDataBindEventArgs.uex' path='docs/doc[@for="ListDataBindEventArgs.ListItem"]/*' />
+        /// <include file='doc\ListDataBindEventArgs.uex'
+        // path='docs/doc[@for="ListDataBindEventArgs.ListItem"]/*' />
         public MobileListItem ListItem
         {
             get { return _listItem; }
         }
 
-        /// <include file='doc\ListDataBindEventArgs.uex' path='docs/doc[@for="ListDataBindEventArgs.DataItem"]/*' />
+        /// <include file='doc\ListDataBindEventArgs.uex'
+        // path='docs/doc[@for="ListDataBindEventArgs.DataItem"]/*' />
         public Object DataItem
         {
             get { return _dataItem; }

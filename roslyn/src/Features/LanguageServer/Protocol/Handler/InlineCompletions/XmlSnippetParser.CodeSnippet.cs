@@ -18,7 +18,8 @@ internal partial class XmlSnippetParser
 {
     /// <summary>
     /// Shamelessly copied from the editor
-    /// https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform?path=/src/Editor/VisualStudio/Impl/Snippet/CodeSnippet.cs
+    ///
+    // https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform?path=/src/Editor/VisualStudio/Impl/Snippet/CodeSnippet.cs
     /// </summary>
     internal class CodeSnippet
     {
@@ -143,7 +144,8 @@ internal partial class XmlSnippetParser
     }
 
     /// <summary>
-    /// Shamelessly adapted from https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform?path=/src/Editor/VisualStudio/Impl/Snippet/ExpansionTemplate.cs
+    /// Shamelessly adapted from
+    // https://devdiv.visualstudio.com/DevDiv/_git/VS-Platform?path=/src/Editor/VisualStudio/Impl/Snippet/ExpansionTemplate.cs
     /// with changes to parsing to store the snippet as a set of parts instead of a single string.
     /// </summary>
     private class ExpansionTemplate
@@ -302,8 +304,10 @@ internal partial class XmlSnippetParser
                                 // first check to see if this is a "special" literal
                                 if (string.Equals(fieldName, Selected, StringComparison.Ordinal))
                                 {
-                                    // LSP client currently only invokes on typing (tab) so there is no way to have a selection as part of a snippet request.
-                                    // Additionally, TM_SELECTED_TEXT is not supported in the VS LSP client, so we can't set the selection even if we wanted to.
+                                    // LSP client currently only invokes on typing (tab) so there is no way to have a selection as part
+                                    // of a snippet request.
+                                    // Additionally, TM_SELECTED_TEXT is not supported in the VS LSP client, so we can't set the
+                                    // selection even if we wanted to.
                                     // Since there's no way for the user to ask for a selection replacement, we can ignore it.
                                 }
                                 else if (string.Equals(fieldName, End, StringComparison.Ordinal))
@@ -315,7 +319,8 @@ internal partial class XmlSnippetParser
                                     var field = FindField(fieldName);
                                     if (field != null)
                                     {
-                                        // If we have an editable field we need to know its order in the snippet so we can place the appropriate tab stop indices.
+                                        // If we have an editable field we need to know its order in the snippet so we can place the
+                                        // appropriate tab stop indices.
                                         int? fieldIndex = field.IsEditable
                                             ? fieldNameToSnippetIndex.GetOrAdd(
                                                 field.ID,

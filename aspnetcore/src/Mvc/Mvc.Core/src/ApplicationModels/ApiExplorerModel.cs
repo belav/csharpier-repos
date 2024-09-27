@@ -14,7 +14,8 @@ public class ApiExplorerModel
     public ApiExplorerModel() { }
 
     /// <summary>
-    /// Creates a new <see cref="ApiExplorerModel"/> with properties copied from <paramref name="other"/>.
+    /// Creates a new <see cref="ApiExplorerModel"/> with properties copied from <paramref
+    // name="other"/>.
     /// </summary>
     /// <param name="other">The <see cref="ApiExplorerModel"/> to copy.</param>
     public ApiExplorerModel(ApiExplorerModel other)
@@ -30,7 +31,8 @@ public class ApiExplorerModel
     /// controller or action.
     /// </summary>
     /// <remarks>
-    /// Set this value to configure whether or not the associated controller or action will appear in ApiExplorer.
+    /// Set this value to configure whether or not the associated controller or action will appear in
+    // ApiExplorer.
     /// </remarks>
     public bool? IsVisible { get; set; }
 

@@ -122,8 +122,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         /// </summary>
         /// <param name="code">The source code of the script.</param>
         /// <param name="options">The script options.</param>
-        /// <param name="globals">An object instance whose members can be accessed by the script as global variables.</param>
-        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if not specified.</param>
+        /// <param name="globals">An object instance whose members can be accessed by the script as global
+        // variables.</param>
+        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if
+        // not specified.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <typeparam name="T">The return type of the submission</typeparam>
         /// <exception cref="CompilationErrorException">Specified code has errors.</exception>
@@ -144,8 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         /// </summary>
         /// <param name="code">The source code of the script.</param>
         /// <param name="options">The script options.</param>
-        /// <param name="globals">An object instance whose members can be accessed by the script as global variables.</param>
-        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if not specified.</param>
+        /// <param name="globals">An object instance whose members can be accessed by the script as global
+        // variables.</param>
+        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if
+        // not specified.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <exception cref="CompilationErrorException">Specified code has errors.</exception>
         public static Task<ScriptState<object>> RunAsync(
@@ -164,8 +168,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         /// </summary>
         /// <param name="code">The source code of the script.</param>
         /// <param name="options">The script options.</param>
-        /// <param name="globals">An object instance whose members can be accessed by the script as global variables.</param>
-        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if not specified.</param>
+        /// <param name="globals">An object instance whose members can be accessed by the script as global
+        // variables.</param>
+        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if
+        // not specified.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <typeparam name="T">The return type of the submission</typeparam>
         /// <return>Returns the value returned by running the script.</return>
@@ -187,8 +193,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting
         /// </summary>
         /// <param name="code">The source code of the script.</param>
         /// <param name="options">The script options.</param>
-        /// <param name="globals">An object instance whose members can be accessed by the script as global variables.</param>
-        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if not specified.</param>
+        /// <param name="globals">An object instance whose members can be accessed by the script as global
+        // variables.</param>
+        /// <param name="globalsType">Type of global object, <paramref name="globals"/>.GetType() is used if
+        // not specified.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <return>Returns the value returned by running the script.</return>
         /// <exception cref="CompilationErrorException">Specified code has errors.</exception>

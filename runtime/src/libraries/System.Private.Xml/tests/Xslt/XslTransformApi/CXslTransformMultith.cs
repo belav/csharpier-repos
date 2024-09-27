@@ -52,35 +52,47 @@ namespace System.Xml.XslTransformApiTests
         [InlineData("xslt_multithreading_test.xsl", "foo.xml")]
         //[Variation("AVTs", Params = new object[] { "xslt_multith_AVTs.xsl", "xslt_multith_AVTs.xml" })]
         [InlineData("xslt_multith_AVTs.xsl", "xslt_multith_AVTs.xml")]
-        //[Variation("xsl:key", Params = new object[] { "xslt_multith_keytest.xsl", "xslt_multith_keytest.xml" })]
+        //[Variation("xsl:key", Params = new object[] { "xslt_multith_keytest.xsl",
+        // "xslt_multith_keytest.xml" })]
         [InlineData("xslt_multith_keytest.xsl", "xslt_multith_keytest.xml")]
-        //[Variation("xsl:sort", Params = new object[] { "xslt_multith_sorting.xsl", "xslt_multith_sorting.xml" })]
+        //[Variation("xsl:sort", Params = new object[] { "xslt_multith_sorting.xsl",
+        // "xslt_multith_sorting.xml" })]
         [InlineData("xslt_multith_sorting.xsl", "xslt_multith_sorting.xml")]
-        //[Variation("Attribute Sets", Params = new object[] { "xslt_mutith_attribute_sets.xsl", "xslt_mutith_attribute_sets.xml" })]
+        //[Variation("Attribute Sets", Params = new object[] { "xslt_mutith_attribute_sets.xsl",
+        // "xslt_mutith_attribute_sets.xml" })]
         [InlineData("xslt_mutith_attribute_sets.xsl", "xslt_mutith_attribute_sets.xml")]
-        //[Variation("Boolean Expression AND", Params = new object[] { "xslt_mutith_boolean_expr_and.xsl", "xslt_mutith_boolean_expr_and.xml" })]
+        //[Variation("Boolean Expression AND", Params = new object[] { "xslt_mutith_boolean_expr_and.xsl",
+        // "xslt_mutith_boolean_expr_and.xml" })]
         [InlineData("xslt_mutith_boolean_expr_and.xsl", "xslt_mutith_boolean_expr_and.xml")]
-        //[Variation("Boolean Expression OR", Params = new object[] { "xslt_mutith_boolean_expr_or.xsl", "xslt_mutith_boolean_expr_or.xml" })]
+        //[Variation("Boolean Expression OR", Params = new object[] { "xslt_mutith_boolean_expr_or.xsl",
+        // "xslt_mutith_boolean_expr_or.xml" })]
         [InlineData("xslt_mutith_boolean_expr_or.xsl", "xslt_mutith_boolean_expr_or.xml")]
-        //[Variation("FormatNumber function", Params = new object[] { "xslt_mutith_format_number.xsl", "xslt_mutith_format_number.xml" })]
+        //[Variation("FormatNumber function", Params = new object[] { "xslt_mutith_format_number.xsl",
+        // "xslt_mutith_format_number.xml" })]
         [InlineData("xslt_mutith_format_number.xsl", "xslt_mutith_format_number.xml")]
-        //[Variation("Position() function", Params = new object[] { "xslt_mutith_position_func.xsl", "xslt_mutith_position_func.xml" })]
+        //[Variation("Position() function", Params = new object[] { "xslt_mutith_position_func.xsl",
+        // "xslt_mutith_position_func.xml" })]
         [InlineData("xslt_mutith_position_func.xsl", "xslt_mutith_position_func.xml")]
-        //[Variation("preserve space", Params = new object[] { "xslt_mutith_preserve_space.xsl", "xslt_mutith_preserve_space.xml" })]
+        //[Variation("preserve space", Params = new object[] { "xslt_mutith_preserve_space.xsl",
+        // "xslt_mutith_preserve_space.xml" })]
         [InlineData("xslt_mutith_preserve_space.xsl", "xslt_mutith_preserve_space.xml")]
-        //[Variation("Variable nodeset", Params = new object[] { "xslt_mutith_variable_nodeset.xsl", "xslt_mutith_variable_nodeset.xml" })]
+        //[Variation("Variable nodeset", Params = new object[] { "xslt_mutith_variable_nodeset.xsl",
+        // "xslt_mutith_variable_nodeset.xml" })]
         [InlineData("xslt_mutith_variable_nodeset.xsl", "xslt_mutith_variable_nodeset.xml")]
-        //[Variation("Forward global variable reference", Params = new object[] { "xslt_mutith_variable_global_forward_ref.xsl", "xslt_mutith_variable_nodeset.xml" })]
+        //[Variation("Forward global variable reference", Params = new object[] {
+        // "xslt_mutith_variable_global_forward_ref.xsl", "xslt_mutith_variable_nodeset.xml" })]
         [InlineData(
             "xslt_mutith_variable_global_forward_ref.xsl",
             "xslt_mutith_variable_nodeset.xml"
         )]
-        //[Variation("Forward global variable reference deep", Params = new object[] { "xslt_mutith_variable_global_forward_ref_deep.xsl", "xslt_mutith_variable_nodeset.xml" })]
+        //[Variation("Forward global variable reference deep", Params = new object[] {
+        // "xslt_mutith_variable_global_forward_ref_deep.xsl", "xslt_mutith_variable_nodeset.xml" })]
         [InlineData(
             "xslt_mutith_variable_global_forward_ref_deep.xsl",
             "xslt_mutith_variable_nodeset.xml"
         )]
-        //[Variation("Local and global variables", Params = new object[] { "xslt_mutith_variable_local_and_global.xsl", "xslt_mutith_variable_local_and_global.xsl" })]
+        //[Variation("Local and global variables", Params = new object[] {
+        // "xslt_mutith_variable_local_and_global.xsl", "xslt_mutith_variable_local_and_global.xsl" })]
         [InlineData(
             "xslt_mutith_variable_local_and_global.xsl",
             "xslt_mutith_variable_local_and_global.xsl"

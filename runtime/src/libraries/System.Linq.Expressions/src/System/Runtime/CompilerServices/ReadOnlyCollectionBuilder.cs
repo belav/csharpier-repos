@@ -42,7 +42,8 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>
-        /// Constructs a <see cref="ReadOnlyCollectionBuilder{T}"/>, copying contents of the given collection.
+        /// Constructs a <see cref="ReadOnlyCollectionBuilder{T}"/>, copying contents of the given
+        // collection.
         /// </summary>
         /// <param name="collection">The collection whose elements to copy to the builder.</param>
         public ReadOnlyCollectionBuilder(IEnumerable<T> collection)
@@ -121,7 +122,8 @@ namespace System.Runtime.CompilerServices
         /// Inserts an item to the <see cref="ReadOnlyCollectionBuilder{T}"/> at the specified index.
         /// </summary>
         /// <param name="index">The zero-based index at which item should be inserted.</param>
-        /// <param name="item">The object to insert into the <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
+        /// <param name="item">The object to insert into the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.</param>
         public void Insert(int index, T item)
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(index, _size);
@@ -213,15 +215,18 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Determines whether the <see cref="ReadOnlyCollectionBuilder{T}"/> contains a specific value
         /// </summary>
-        /// <param name="item">the object to locate in the <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
-        /// <returns>true if item is found in the <see cref="ReadOnlyCollectionBuilder{T}"/>; otherwise, false.</returns>
+        /// <param name="item">the object to locate in the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.</param>
+        /// <returns>true if item is found in the <see cref="ReadOnlyCollectionBuilder{T}"/>; otherwise,
+        // false.</returns>
         public bool Contains(T item) => IndexOf(item) >= 0;
 
         /// <summary>
         /// Copies the elements of the <see cref="ReadOnlyCollectionBuilder{T}"/> to an <see cref="Array"/>,
         /// starting at particular <see cref="Array"/> index.
         /// </summary>
-        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the elements copied from <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
+        /// <param name="array">The one-dimensional <see cref="Array"/> that is the destination of the
+        // elements copied from <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         public void CopyTo(T[] array, int arrayIndex) =>
             Array.Copy(_items, 0, array, arrayIndex, _size);
@@ -229,11 +234,15 @@ namespace System.Runtime.CompilerServices
         bool ICollection<T>.IsReadOnly => false;
 
         /// <summary>
-        /// Removes the first occurrence of a specific object from the <see cref="ReadOnlyCollectionBuilder{T}"/>.
+        /// Removes the first occurrence of a specific object from the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.
         /// </summary>
-        /// <param name="item">The object to remove from the <see cref="ReadOnlyCollectionBuilder{T}"/>.</param>
-        /// <returns>true if item was successfully removed from the <see cref="ReadOnlyCollectionBuilder{T}"/>;
-        /// otherwise, false. This method also returns false if item is not found in the original <see cref="ReadOnlyCollectionBuilder{T}"/>.
+        /// <param name="item">The object to remove from the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.</param>
+        /// <returns>true if item was successfully removed from the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>;
+        /// otherwise, false. This method also returns false if item is not found in the original <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.
         /// </returns>
         public bool Remove(T item)
         {
@@ -254,7 +263,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
-        /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.</returns>
+        /// <returns>A <see cref="IEnumerator{T}"/> that can be used to iterate through the
+        // collection.</returns>
         public IEnumerator<T> GetEnumerator() => new Enumerator(this);
 
         #endregion
@@ -388,7 +398,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Copies the elements of the <see cref="ReadOnlyCollectionBuilder{T}"/> to a new array.
         /// </summary>
-        /// <returns>An array containing copies of the elements of the <see cref="ReadOnlyCollectionBuilder{T}"/>.</returns>
+        /// <returns>An array containing copies of the elements of the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>.</returns>
         public T[] ToArray()
         {
             T[] array = new T[_size];
@@ -397,8 +408,10 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>
-        /// Creates a <see cref="ReadOnlyCollection{T}"/> containing all of the elements of the <see cref="ReadOnlyCollectionBuilder{T}"/>,
-        /// avoiding copying the elements to the new array if possible. Resets the <see cref="ReadOnlyCollectionBuilder{T}"/> after the
+        /// Creates a <see cref="ReadOnlyCollection{T}"/> containing all of the elements of the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/>,
+        /// avoiding copying the elements to the new array if possible. Resets the <see
+        // cref="ReadOnlyCollectionBuilder{T}"/> after the
         /// <see cref="ReadOnlyCollection{T}"/> has been created.
         /// </summary>
         /// <returns>A new instance of <see cref="ReadOnlyCollection{T}"/>.</returns>

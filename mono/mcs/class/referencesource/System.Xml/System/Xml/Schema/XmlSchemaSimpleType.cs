@@ -18,7 +18,8 @@ namespace System.Xml.Schema
     {
         XmlSchemaSimpleTypeContent content;
 
-        /// <include file='doc\XmlSchemaSimpleType.uex' path='docs/doc[@for="XmlSchemaSimpleType.Content"]/*' />
+        /// <include file='doc\XmlSchemaSimpleType.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleType.Content"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -28,7 +29,8 @@ namespace System.Xml.Schema
             Debug.Assert(SchemaContentType == XmlSchemaContentType.TextOnly);
         }
 
-        /// <include file='doc\XmlSchemaSimpleType.uex' path='docs/doc[@for="XmlSchemaSimpleType.Content1"]/*' />
+        /// <include file='doc\XmlSchemaSimpleType.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleType.Content1"]/*' />
         [
             XmlElement("restriction", typeof(XmlSchemaSimpleTypeRestriction)),
             XmlElement("list", typeof(XmlSchemaSimpleTypeList)),

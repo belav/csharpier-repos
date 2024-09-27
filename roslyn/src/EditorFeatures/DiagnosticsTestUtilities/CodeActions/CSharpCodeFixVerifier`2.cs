@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public static DiagnosticResult Diagnostic(string diagnosticId) =>
             CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(diagnosticId);
 
-        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.Diagnostic(DiagnosticDescriptor)"/>
+        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest,
+        // TVerifier}.Diagnostic(DiagnosticDescriptor)"/>
         public static DiagnosticResult Diagnostic(DiagnosticDescriptor descriptor) =>
             CSharpCodeFixVerifier<TAnalyzer, TCodeFix, XUnitVerifier>.Diagnostic(descriptor);
 
@@ -36,7 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
         public static void VerifyStandardProperty(AnalyzerProperty property) =>
             CodeFixVerifierHelper.VerifyStandardProperty(new TAnalyzer(), property);
 
-        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
+        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest,
+        // TVerifier}.VerifyAnalyzerAsync(string, DiagnosticResult[])"/>
         public static async Task VerifyAnalyzerAsync(
             string source,
             params DiagnosticResult[] expected
@@ -48,18 +50,21 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             await test.RunAsync();
         }
 
-        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, string)"/>
+        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest,
+        // TVerifier}.VerifyCodeFixAsync(string, string)"/>
         public static async Task VerifyCodeFixAsync(string source, string fixedSource) =>
             await VerifyCodeFixAsync(source, DiagnosticResult.EmptyDiagnosticResults, fixedSource);
 
-        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult, string)"/>
+        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest,
+        // TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult, string)"/>
         public static async Task VerifyCodeFixAsync(
             string source,
             DiagnosticResult expected,
             string fixedSource
         ) => await VerifyCodeFixAsync(source, [expected], fixedSource);
 
-        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest, TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
+        /// <inheritdoc cref="CodeFixVerifier{TAnalyzer, TCodeFix, TTest,
+        // TVerifier}.VerifyCodeFixAsync(string, DiagnosticResult[], string)"/>
         public static async Task VerifyCodeFixAsync(
             string source,
             DiagnosticResult[] expected,

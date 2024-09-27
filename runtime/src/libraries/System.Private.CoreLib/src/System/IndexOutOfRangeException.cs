@@ -7,7 +7,8 @@ using System.Runtime.Serialization;
 namespace System
 {
     /// <summary>
-    /// The exception that is thrown when an attempt is made to access an element of an array or collection with an index that is outside its bounds.
+    /// The exception that is thrown when an attempt is made to access an element of an array or
+    // collection with an index that is outside its bounds.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

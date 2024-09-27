@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     .BindType(attribute.Name, BindingDiagnosticBag.Discarded, out aliasOpt)
                     .Type;
 
-            // For attributes where a nameof could introduce some type parameters, we need to track the attribute target
+            // For attributes where a nameof could introduce some type parameters, we need to track the
+            // attribute target
             Symbol? attributeTarget = getAttributeTarget(attribute.Parent?.Parent);
 
             return AttributeSemanticModel.Create(

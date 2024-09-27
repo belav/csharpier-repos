@@ -154,10 +154,14 @@ namespace System.Xml.Xsl.Xslt
                 }
             }
 
-            // The stylesheet may be an embedded stylesheet. If this is the case the reader will be in Interactive state and should be
-            // positioned on xsl:stylesheet element (or any preceding whitespace) but there also can be namespaces defined on one
-            // of the ancestor nodes. These namespace definitions have to be copied to the xsl:stylesheet element scope. Otherwise it
-            // will not be possible to resolve them later and loading the stylesheet will end up with throwing an exception.
+            // The stylesheet may be an embedded stylesheet. If this is the case the reader will be in
+            // Interactive state and should be
+            // positioned on xsl:stylesheet element (or any preceding whitespace) but there also can be
+            // namespaces defined on one
+            // of the ancestor nodes. These namespace definitions have to be copied to the xsl:stylesheet
+            // element scope. Otherwise it
+            // will not be possible to resolve them later and loading the stylesheet will end up with throwing
+            // an exception.
             IDictionary<string, string> namespacesInScope = null;
             if (reader.ReadState == ReadState.Interactive)
             {
@@ -177,14 +181,17 @@ namespace System.Xml.Xsl.Xslt
             // An Element node was reached. Potentially this is xsl:stylesheet instruction.
             if (nodeType == XmlNodeType.Element)
             {
-                // If namespacesInScope is not null then the stylesheet being read is an embedded stylesheet that can have namespaces
-                // defined outside of xsl:stylesheet instruction. In this case the namespace definitions collected above have to be added
+                // If namespacesInScope is not null then the stylesheet being read is an embedded stylesheet that
+                // can have namespaces
+                // defined outside of xsl:stylesheet instruction. In this case the namespace definitions collected
+                // above have to be added
                 // to the element scope.
                 if (namespacesInScope != null)
                 {
                     foreach (KeyValuePair<string, string> prefixNamespacePair in namespacesInScope)
                     {
-                        // The namespace could be redefined on the element we just read. If this is the case scopeManager already has
+                        // The namespace could be redefined on the element we just read. If this is the case scopeManager
+                        // already has
                         // namespace definition for this prefix and the old definition must not be added to the scope.
                         if (scopeManager.LookupNamespace(prefixNamespacePair.Key) == null)
                         {
@@ -195,11 +202,13 @@ namespace System.Xml.Xsl.Xslt
                     }
                 }
 
-                // return true to indicate that we reached XmlNodeType.Element node - potentially xsl:stylesheet element.
+                // return true to indicate that we reached XmlNodeType.Element node - potentially xsl:stylesheet
+                // element.
                 return true;
             }
 
-            // return false to indicate that we did not reach XmlNodeType.Element node so it is not a valid stylesheet.
+            // return false to indicate that we did not reach XmlNodeType.Element node so it is not a valid
+            // stylesheet.
             return false;
         }
 
@@ -368,7 +377,7 @@ namespace System.Xml.Xsl.Xslt
                 ctxInfo.AddNamespace(string.Empty, atomizedValue);
                 return false;
             }
-            /* Read Attribute Value */{
+/* Read Attribute Value */{
                 if (!reader.ReadAttributeValue())
                 {
                     // XmlTextReader never returns false from first call to ReadAttributeValue()
@@ -535,7 +544,7 @@ namespace System.Xml.Xsl.Xslt
                             !textIsWhite ? XmlNodeType.Text
                             : textPreserveWS ? XmlNodeType.SignificantWhitespace
                             :
-                            /*default:    */XmlNodeType.Whitespace
+/*default:    */XmlNodeType.Whitespace
                         );
                         return curTextNode;
                 }
@@ -760,13 +769,17 @@ namespace System.Xml.Xsl.Xslt
 
         // -------------------- Scope Management --------------------
         // See private class InputScopeManager bellow.
-        // InputScopeManager handles some flags and values with respect of scope level where they as defined.
+        // InputScopeManager handles some flags and values with respect of scope level where they as
+        // defined.
         // To parse XSLT style sheet we need the folloing values:
         //  BackwardCompatibility -- this flag is set when compiler.version==2 && xsl:version<2.
-        //  ForwardCompatibility  -- this flag is set when compiler.version==2 && xsl:version>1 or compiler.version==1 && xsl:version!=1
-        //  CanHaveApplyImports  -- we allow xsl:apply-templates instruction to apear in any template with match!=null, but not inside xsl:for-each
+        //  ForwardCompatibility  -- this flag is set when compiler.version==2 && xsl:version>1 or
+        // compiler.version==1 && xsl:version!=1
+        //  CanHaveApplyImports  -- we allow xsl:apply-templates instruction to apear in any template with
+        // match!=null, but not inside xsl:for-each
         //                          so it can't be inside global variable and has initial value = false
-        //  ExtentionNamespace   -- is defined by extension-element-prefixes attribute on LRE or xsl:stylesheet
+        //  ExtentionNamespace   -- is defined by extension-element-prefixes attribute on LRE or
+        // xsl:stylesheet
 
         public bool CanHaveApplyImports
         {
@@ -862,7 +875,8 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // --------------- GetAtributes(...) -------------------------
-        // All Xslt Instructions allows fixed set of attributes in null-ns, no in XSLT-ns and any in other ns.
+        // All Xslt Instructions allows fixed set of attributes in null-ns, no in XSLT-ns and any in other
+        // ns.
         // In ForwardCompatibility mode we should ignore any of this problems.
         // We not use these functions for parseing LiteralResultElement and xsl:stylesheet
 
@@ -1118,7 +1132,7 @@ namespace System.Xml.Xsl.Xslt
                         Ref.Equal(NamespaceUri, atoms.UriWdXsl)
                         && Ref.Equal(LocalName, atoms.Stylesheet)
                             ?
-                            /*[XT_025]*/Res.Xslt_WdXslNamespace
+/*[XT_025]*/Res.Xslt_WdXslNamespace
                             : /*[XT0150]*/
                             Res.Xslt_WrongStylesheetElement
                     );
@@ -1183,11 +1197,16 @@ namespace System.Xml.Xsl.Xslt
 
         private void InsertExNamespaces(int attExPrefixes, ContextInfo ctxInfo, bool extensions)
         {
-            // List of Extension namespaces are maintaned by XsltInput's ScopeManager and is used by IsExtensionNamespace() in XsltLoader.LoadLiteralResultElement()
-            // Both Extension and Exclusion namespaces will not be coppied by LiteralResultElement. Logic of copping namespaces are in QilGenerator.CompileLiteralElement().
-            // At this time we will have different scope manager and need preserve all required information from load time to compile time.
-            // Each XslNode contains list of NsDecls (nsList) wich stores prefix+namespaces pairs for each namespace decls as well as exclusion namespaces.
-            // In addition it also contains Exclusion namespace. They are represented as (null+namespace). Special case is Exlusion "#all" represented as (null+null).
+            // List of Extension namespaces are maintaned by XsltInput's ScopeManager and is used by
+            // IsExtensionNamespace() in XsltLoader.LoadLiteralResultElement()
+            // Both Extension and Exclusion namespaces will not be coppied by LiteralResultElement. Logic of
+            // copping namespaces are in QilGenerator.CompileLiteralElement().
+            // At this time we will have different scope manager and need preserve all required information from
+            // load time to compile time.
+            // Each XslNode contains list of NsDecls (nsList) wich stores prefix+namespaces pairs for each
+            // namespace decls as well as exclusion namespaces.
+            // In addition it also contains Exclusion namespace. They are represented as (null+namespace).
+            // Special case is Exlusion "#all" represented as (null+null).
             //and Exclusion namespace
             if (MoveToLiteralAttribute(attExPrefixes))
             {
@@ -1342,7 +1361,8 @@ namespace System.Xml.Xsl.Xslt
 
             // LocalName is checked against null since it is used to calculate QualifiedName used in turn to
             // calculate end position.
-            // LocalName (and other cached properties) can be null only if nothing has been read from the reader.
+            // LocalName (and other cached properties) can be null only if nothing has been read from the
+            // reader.
             // This happens for instance when a reader which has already been closed or a reader positioned
             // on the very last node of the document is passed to the ctor.
             if (LocalName == null)

@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Name of the native entry point or null if not specified (the effective name is the same as the name of the target method).
+        /// Name of the native entry point or null if not specified (the effective name is the same as the
+        // name of the target method).
         /// </summary>
         public string? EntryPointName
         {
@@ -85,7 +86,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Indicates whether the callee calls the SetLastError Win32 API function before returning from the attributed method.
+        /// Indicates whether the callee calls the SetLastError Win32 API function before returning from the
+        // attributed method.
         /// </summary>
         public bool SetLastError
         {
@@ -120,8 +122,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Enables or disables best-fit mapping behavior when converting Unicode characters to ANSI characters.
-        /// Null if not specified (the setting for the containing type or assembly should be used, <see cref="BestFitMappingAttribute"/>).
+        /// Enables or disables best-fit mapping behavior when converting Unicode characters to ANSI
+        // characters.
+        /// Null if not specified (the setting for the containing type or assembly should be used, <see
+        // cref="BestFitMappingAttribute"/>).
         /// </summary>
         public bool? BestFitMapping
         {
@@ -142,7 +146,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Enables or disables the throwing of an exception on an unmappable Unicode character that is converted to an ANSI "?" character.
+        /// Enables or disables the throwing of an exception on an unmappable Unicode character that is
+        // converted to an ANSI "?" character.
         /// Null if not specified.
         /// </summary>
         public bool? ThrowOnUnmappableCharacter

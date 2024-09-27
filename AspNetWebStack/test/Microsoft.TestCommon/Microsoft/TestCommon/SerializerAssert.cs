@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.IO;
@@ -119,7 +120,8 @@ namespace Microsoft.TestCommon
 
         /// <summary>
         /// Creates a <see cref="Stream"/>, serializes <paramref name="objectInstance"/> to it using
-        /// <see cref="DataContractJsonSerializer"/>, rewinds the stream and calls <see cref="codeThatChecks"/>.
+        /// <see cref="DataContractJsonSerializer"/>, rewinds the stream and calls <see
+        // cref="codeThatChecks"/>.
         /// </summary>
         /// <param name="type">The type to serialize.  It cannot be <c>null</c>.</param>
         /// <param name="objectInstance">The value to serialize.</param>
@@ -155,7 +157,8 @@ namespace Microsoft.TestCommon
 
         /// <summary>
         /// Creates a <see cref="Stream"/>, serializes <paramref name="objectInstance"/> to it using
-        /// <see cref="DataContractJsonSerializer"/>, rewinds the stream and calls <see cref="codeThatChecks"/>.
+        /// <see cref="DataContractJsonSerializer"/>, rewinds the stream and calls <see
+        // cref="codeThatChecks"/>.
         /// </summary>
         /// <typeparam name="T">The type to serialize.</typeparam>
         /// <param name="objectInstance">The value to serialize.</param>

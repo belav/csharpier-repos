@@ -5,7 +5,8 @@ namespace Microsoft.Interop
 {
     /// <summary>
     /// Contains the data related to a LibraryImportAttribute, without references to Roslyn symbols.
-    /// See <seealso cref="LibraryImportCompilationData"/> for a type with a reference to the StringMarshallingCustomType
+    /// See <seealso cref="LibraryImportCompilationData"/> for a type with a reference to the
+    // StringMarshallingCustomType
     /// </summary>
     internal sealed record LibraryImportData(string ModuleName) : InteropAttributeData
     {
@@ -28,7 +29,8 @@ namespace Microsoft.Interop
 
     /// <summary>
     /// Contains the data related to a LibraryImportAttribute, with references to Roslyn symbols.
-    /// Use <seealso cref="LibraryImportData"/> instead when using for incremental compilation state to avoid keeping a compilation alive
+    /// Use <seealso cref="LibraryImportData"/> instead when using for incremental compilation state to
+    // avoid keeping a compilation alive
     /// </summary>
     internal sealed record LibraryImportCompilationData(string ModuleName)
         : InteropAttributeCompilationData

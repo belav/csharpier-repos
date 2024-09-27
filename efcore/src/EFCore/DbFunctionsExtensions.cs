@@ -4,17 +4,20 @@
 namespace Microsoft.EntityFrameworkCore;
 
 /// <summary>
-///     Provides CLR methods that get translated to database functions when used in LINQ to Entities queries.
+///     Provides CLR methods that get translated to database functions when used in LINQ to Entities
+// queries.
 ///     The methods on this class are accessed via <see cref="EF.Functions" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for
+// more information and examples.
 /// </remarks>
 // ReSharper disable once InconsistentNaming
 public static class DbFunctionsExtensions
 {
     /// <summary>
-    ///     An implementation of the SQL <c>LIKE</c> operation. On relational databases this is usually directly
+    ///     An implementation of the SQL <c>LIKE</c> operation. On relational databases this is usually
+    // directly
     ///     translated to SQL.
     /// </summary>
     /// <remarks>
@@ -23,8 +26,10 @@ public static class DbFunctionsExtensions
     ///         In particular, it may be either case-sensitive or case-insensitive.
     ///     </para>
     ///     <para>
-    ///         This DbFunction method has no in-memory implementation and will throw if the query switches to client-evaluation.
-    ///         This can happen if the query contains one or more expressions that could not be translated to the store.
+    ///         This DbFunction method has no in-memory implementation and will throw if the query
+    // switches to client-evaluation.
+    ///         This can happen if the query contains one or more expressions that could not be
+    // translated to the store.
     ///     </para>
     /// </remarks>
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
@@ -35,7 +40,8 @@ public static class DbFunctionsExtensions
         throw new InvalidOperationException(CoreStrings.FunctionOnClient(nameof(Like)));
 
     /// <summary>
-    ///     An implementation of the SQL LIKE operation. On relational databases this is usually directly
+    ///     An implementation of the SQL LIKE operation. On relational databases this is usually
+    // directly
     ///     translated to SQL.
     /// </summary>
     /// <remarks>
@@ -44,8 +50,10 @@ public static class DbFunctionsExtensions
     ///         In particular, it may be either case-sensitive or case-insensitive.
     ///     </para>
     ///     <para>
-    ///         This DbFunction method has no in-memory implementation and will throw if the query switches to client-evaluation.
-    ///         This can happen if the query contains one or more expressions that could not be translated to the store.
+    ///         This DbFunction method has no in-memory implementation and will throw if the query
+    // switches to client-evaluation.
+    ///         This can happen if the query contains one or more expressions that could not be
+    // translated to the store.
     ///     </para>
     /// </remarks>
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
@@ -67,8 +75,10 @@ public static class DbFunctionsExtensions
     ///     A random double number generator which generates a number between 0 and 1, exclusive.
     /// </summary>
     /// <remarks>
-    ///     This DbFunction method has no in-memory implementation and will throw if the query switches to client-evaluation.
-    ///     This can happen if the query contains one or more expressions that could not be translated to the store.
+    ///     This DbFunction method has no in-memory implementation and will throw if the query switches
+    // to client-evaluation.
+    ///     This can happen if the query contains one or more expressions that could not be translated
+    // to the store.
     /// </remarks>
     /// <param name="_">The <see cref="DbFunctions" /> instance.</param>
     /// <returns>A random double number between 0 and 1, exclusive.</returns>

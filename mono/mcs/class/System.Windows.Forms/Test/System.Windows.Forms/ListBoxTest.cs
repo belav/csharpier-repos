@@ -116,7 +116,8 @@ namespace MonoTests.System.Windows.Forms
             listBox.Items.Add("c");
             Assert.AreEqual(3, listBox.Items.Count, "#7");
             Assert.AreEqual(false, listBox.MultiColumn, "#8");
-            //Assert.AreEqual (46, listBox.PreferredHeight, "#9"); // Note: Item height depends on the current font.
+            //Assert.AreEqual (46, listBox.PreferredHeight, "#9"); // Note: Item height depends on the current
+            // font.
             //Assert.AreEqual (RightToLeft.No , listBox.RightToLeft, "#10"); // Depends on Windows version
             Assert.AreEqual(false, listBox.ScrollAlwaysVisible, "#11");
             Assert.AreEqual(-1, listBox.SelectedIndex, "#12");

@@ -81,12 +81,14 @@ namespace Microsoft.CodeAnalysis
         );
 
         /// <summary>
-        /// Looks up specified partial assembly name in the GAC and returns the best matching <see cref="AssemblyIdentity"/>.
+        /// Looks up specified partial assembly name in the GAC and returns the best matching <see
+        // cref="AssemblyIdentity"/>.
         /// </summary>
         /// <param name="displayName">The display name of an assembly</param>
         /// <param name="architectureFilter">The optional processor architecture</param>
         /// <param name="preferredCulture">The optional preferred culture information</param>
-        /// <returns>An assembly identity or null, if <paramref name="displayName"/> can't be resolved.</returns>
+        /// <returns>An assembly identity or null, if <paramref name="displayName"/> can't be
+        // resolved.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="displayName"/> is null.</exception>
         public AssemblyIdentity? ResolvePartialName(
             string displayName,
@@ -98,13 +100,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Looks up specified partial assembly name in the GAC and returns the best matching <see cref="AssemblyIdentity"/>.
+        /// Looks up specified partial assembly name in the GAC and returns the best matching <see
+        // cref="AssemblyIdentity"/>.
         /// </summary>
         /// <param name="displayName">The display name of an assembly</param>
         /// <param name="location">Full path name of the resolved assembly</param>
         /// <param name="architectureFilter">The optional processor architecture</param>
         /// <param name="preferredCulture">The optional preferred culture information</param>
-        /// <returns>An assembly identity or null, if <paramref name="displayName"/> can't be resolved.</returns>
+        /// <returns>An assembly identity or null, if <paramref name="displayName"/> can't be
+        // resolved.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="displayName"/> is null.</exception>
         public abstract AssemblyIdentity? ResolvePartialName(
             string displayName,

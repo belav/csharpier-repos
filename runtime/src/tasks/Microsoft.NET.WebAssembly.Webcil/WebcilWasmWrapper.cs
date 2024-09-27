@@ -16,8 +16,10 @@ namespace Microsoft.NET.WebAssembly.Webcil;
 // segments.  segment 0 is 4 bytes and contains the length of the webcil payload.  segment 1 is of a
 // variable size and contains the webcil payload.
 //
-// The unchanging parts are stored as a "prefix" and "suffix" which contain the bytes for the following
-// WAT module, split into the parts that come before the data section, and the bytes that come after:
+// The unchanging parts are stored as a "prefix" and "suffix" which contain the bytes for the
+// following
+// WAT module, split into the parts that come before the data section, and the bytes that come
+// after:
 //
 // (module
 //  (data "\0f\00\00\00") ;; data segment 0: payload size as a 4 byte LE uint32
@@ -324,7 +326,8 @@ public class WebcilWasmWrapper
             dataSectionSize += SegmentCodeSize + (uint)ulebWebcilPayloadSize.Length;
         }
 
-        // at this point the data section size includes everything except the data section code, the data section size and the webcil payload itself
+        // at this point the data section size includes everything except the data section code, the data
+        // section size and the webcil payload itself
         // and any extra padding that we may want to add to segment 0.
         // So we can compute the offset of the payload within the wasm module.
         byte[] putativeULEBDataSectionSize = ULEB128Encode(dataSectionSize + _webcilPayloadSize);

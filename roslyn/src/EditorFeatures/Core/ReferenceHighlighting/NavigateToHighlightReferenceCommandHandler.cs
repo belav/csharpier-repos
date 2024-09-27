@@ -41,9 +41,12 @@ internal partial class NavigateToHighlightReferenceCommandHandler(
 
     public string DisplayName => EditorFeaturesResources.Navigate_To_Highlight_Reference;
 
-    // We always want to support these commands.  If we don't, then they will be processed by the next higher item in
-    // the command stack, which can cause VS to cycle focus to some other control other than the actual editor.  Once
-    // the user is in a roslyn editing session, we always want to be processing this, even if the user is not actually
+    // We always want to support these commands.  If we don't, then they will be processed by the next
+    // higher item in
+    // the command stack, which can cause VS to cycle focus to some other control other than the actual
+    // editor.  Once
+    // the user is in a roslyn editing session, we always want to be processing this, even if the user
+    // is not actually
     // on a symbol (or symbol information hasn't been computed yet).
     //
     // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1875365

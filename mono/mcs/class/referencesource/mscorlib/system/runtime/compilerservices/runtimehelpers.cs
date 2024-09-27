@@ -193,7 +193,8 @@ namespace System.Runtime.CompilerServices
 
         // This method ensures that there is sufficient stack to execute the average Framework function.
         // If there is not enough stack, then it throws System.InsufficientExecutionStackException.
-        // Note: this method is not part of the CER support, and is not to be confused with ProbeForSufficientStack
+        // Note: this method is not part of the CER support, and is not to be confused with
+        // ProbeForSufficientStack
         // below.
         [System.Security.SecuritySafeCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -207,8 +208,10 @@ namespace System.Runtime.CompilerServices
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static extern void ProbeForSufficientStack();
 
-        // This method is a marker placed immediately before a try clause to mark the corresponding catch and finally blocks as
-        // constrained. There's no code here other than the probe because most of the work is done at JIT time when we spot a call to this routine.
+        // This method is a marker placed immediately before a try clause to mark the corresponding catch
+        // and finally blocks as
+        // constrained. There's no code here other than the probe because most of the work is done at JIT
+        // time when we spot a call to this routine.
         [System.Security.SecurityCritical] // auto-generated_required
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static void PrepareConstrainedRegions()

@@ -2607,7 +2607,8 @@ namespace MonoTests.System.Drawing
 //	Console.WriteLine("\t\t{");
 //	Console.WriteLine("\t\t\tPen pen = Pens." + property.Name + ";");
 //	Console.WriteLine("\t\t\tAssertEquals (\"P" + count + "#1\", pen.PenType, PenType.SolidColor);");
-//	Console.WriteLine("\t\t\tAssertEquals (\"P" + count + "#2\", pen.Color, Color." + property.Name + ");\n");
+//	Console.WriteLine("\t\t\tAssertEquals (\"P" + count + "#2\", pen.Color, Color." + property.Name +
+// ");\n");
 //
 //	Console.WriteLine("\t\t\ttry {");
 //	Console.WriteLine("\t\t\t\tpen.Color = Color." + property.Name + ";");

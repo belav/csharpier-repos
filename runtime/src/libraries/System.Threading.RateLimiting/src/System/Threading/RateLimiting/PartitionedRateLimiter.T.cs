@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace System.Threading.RateLimiting
 {
     /// <summary>
-    /// Represents a limiter type that users interact with to determine if an operation can proceed given a specific <typeparamref name="TResource"/>.
+    /// Represents a limiter type that users interact with to determine if an operation can proceed
+    // given a specific <typeparamref name="TResource"/>.
     /// </summary>
     /// <typeparam name="TResource">The resource type that is being limited.</typeparam>
     public abstract class PartitionedRateLimiter<TResource> : IAsyncDisposable, IDisposable
@@ -14,7 +15,8 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Gets a snapshot of the statistics for the <paramref name="resource"/> if available.
         /// </summary>
-        /// <returns>An instance of <see cref="RateLimiterStatistics"/> containing a snapshot of the statistics for a <paramref name="resource"/>.</returns>
+        /// <returns>An instance of <see cref="RateLimiterStatistics"/> containing a snapshot of the
+        // statistics for a <paramref name="resource"/>.</returns>
         public abstract RateLimiterStatistics? GetStatistics(TResource resource);
 
         /// <summary>
@@ -38,7 +40,8 @@ namespace System.Threading.RateLimiting
         }
 
         /// <summary>
-        /// Method that <see cref="PartitionedRateLimiter{TResource}"/> implementations implement for <see cref="AttemptAcquire"/>.
+        /// Method that <see cref="PartitionedRateLimiter{TResource}"/> implementations implement for <see
+        // cref="AttemptAcquire"/>.
         /// </summary>
         /// <param name="resource">The resource to limit.</param>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
@@ -53,8 +56,10 @@ namespace System.Threading.RateLimiting
         /// </remarks>
         /// <param name="resource">The resource to limit.</param>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
-        /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
-        /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
+        /// <param name="cancellationToken">Optional token to allow canceling a queued request for
+        // permits.</param>
+        /// <returns>A task that completes when the requested permits are acquired or when the requested
+        // permits are denied.</returns>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         public ValueTask<RateLimitLease> AcquireAsync(
             TResource resource,
@@ -78,12 +83,15 @@ namespace System.Threading.RateLimiting
         }
 
         /// <summary>
-        /// Method that <see cref="PartitionedRateLimiter{TResource}"/> implementations implement for <see cref="AcquireAsync"/>.
+        /// Method that <see cref="PartitionedRateLimiter{TResource}"/> implementations implement for <see
+        // cref="AcquireAsync"/>.
         /// </summary>
         /// <param name="resource">The resource to limit.</param>
         /// <param name="permitCount">Number of permits to try and acquire.</param>
-        /// <param name="cancellationToken">Optional token to allow canceling a queued request for permits.</param>
-        /// <returns>A task that completes when the requested permits are acquired or when the requested permits are denied.</returns>
+        /// <param name="cancellationToken">Optional token to allow canceling a queued request for
+        // permits.</param>
+        /// <returns>A task that completes when the requested permits are acquired or when the requested
+        // permits are denied.</returns>
         protected abstract ValueTask<RateLimitLease> AcquireAsyncCore(
             TResource resource,
             int permitCount,
@@ -131,17 +139,27 @@ namespace System.Threading.RateLimiting
         }
 
         /// <summary>
-        /// Translates PartitionedRateLimiter&lt;TOuter&gt; into the current <see cref="PartitionedRateLimiter{TResource}"/>
-        /// using the <paramref name="keyAdapter"/> to translate <typeparamref name="TOuter"/> to <typeparamref name="TResource"/>.
+        /// Translates PartitionedRateLimiter&lt;TOuter&gt; into the current <see
+        // cref="PartitionedRateLimiter{TResource}"/>
+        /// using the <paramref name="keyAdapter"/> to translate <typeparamref name="TOuter"/> to
+        // <typeparamref name="TResource"/>.
         /// </summary>
-        /// <typeparam name="TOuter">The type to translate into <typeparamref name="TResource"/>.</typeparam>
-        /// <param name="keyAdapter">The function to be called every time a <typeparamref name="TOuter"/> is passed to
-        /// PartitionedRateLimiter&lt;TOuter&gt;.Acquire(TOuter, int) or PartitionedRateLimiter&lt;TOuter&gt;.WaitAsync(TOuter, int, CancellationToken).
+        /// <typeparam name="TOuter">The type to translate into <typeparamref
+        // name="TResource"/>.</typeparam>
+        /// <param name="keyAdapter">The function to be called every time a <typeparamref name="TOuter"/> is
+        // passed to
+        /// PartitionedRateLimiter&lt;TOuter&gt;.Acquire(TOuter, int) or
+        // PartitionedRateLimiter&lt;TOuter&gt;.WaitAsync(TOuter, int, CancellationToken).
         /// <para />
-        /// <remarks><paramref name="keyAdapter"/> should be implemented in a thread-safe way.</remarks></param>
-        /// <param name="leaveOpen">Specifies whether the returned <see cref="PartitionedRateLimiter{TOuter}"/> will dispose the wrapped <see cref="PartitionedRateLimiter{TResource}"/>.</param>
-        /// <returns>A new PartitionedRateLimiter&lt;TOuter&gt; that translates <typeparamref name="TOuter"/>
-        /// to <typeparamref name="TResource"/> and calls the inner <see cref="PartitionedRateLimiter{TResource}"/>.</returns>
+        /// <remarks><paramref name="keyAdapter"/> should be implemented in a thread-safe
+        // way.</remarks></param>
+        /// <param name="leaveOpen">Specifies whether the returned <see
+        // cref="PartitionedRateLimiter{TOuter}"/> will dispose the wrapped <see
+        // cref="PartitionedRateLimiter{TResource}"/>.</param>
+        /// <returns>A new PartitionedRateLimiter&lt;TOuter&gt; that translates <typeparamref
+        // name="TOuter"/>
+        /// to <typeparamref name="TResource"/> and calls the inner <see
+        // cref="PartitionedRateLimiter{TResource}"/>.</returns>
         public PartitionedRateLimiter<TOuter> WithTranslatedKey<TOuter>(
             Func<TOuter, TResource> keyAdapter,
             bool leaveOpen

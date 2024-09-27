@@ -26,7 +26,8 @@ namespace System.ComponentModel.Design
         void AddVerb(DesignerVerb verb);
 
         /// <summary>
-        /// Searches for the given command ID and returns the <see cref='System.ComponentModel.Design.MenuCommand'/>
+        /// Searches for the given command ID and returns the <see
+        // cref='System.ComponentModel.Design.MenuCommand'/>
         /// associated with it.
         /// </summary>
         MenuCommand? FindCommand(CommandID commandID);

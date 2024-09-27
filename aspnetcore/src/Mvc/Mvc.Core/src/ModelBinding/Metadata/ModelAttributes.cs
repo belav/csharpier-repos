@@ -9,7 +9,8 @@ using System.Reflection;
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 /// <summary>
-/// Provides access to the combined list of attributes associated with a <see cref="Type"/>, property, or parameter.
+/// Provides access to the combined list of attributes associated with a <see cref="Type"/>,
+// property, or parameter.
 /// </summary>
 public class ModelAttributes
 {
@@ -28,7 +29,8 @@ public class ModelAttributes
     /// </summary>
     /// <param name="typeAttributes">
     /// If this instance represents a type, the set of attributes for that type.
-    /// If this instance represents a property, the set of attributes for the property's <see cref="Type"/>.
+    /// If this instance represents a property, the set of attributes for the property's <see
+    // cref="Type"/>.
     /// Otherwise, <c>null</c>.
     /// </param>
     /// <param name="propertyAttributes">
@@ -74,28 +76,35 @@ public class ModelAttributes
     }
 
     /// <summary>
-    /// Gets the set of all attributes. If this instance represents the attributes for a property, the attributes
-    /// on the property definition are before those on the property's <see cref="Type"/>. If this instance
-    /// represents the attributes for a parameter, the attributes on the parameter definition are before those on
+    /// Gets the set of all attributes. If this instance represents the attributes for a property, the
+    // attributes
+    /// on the property definition are before those on the property's <see cref="Type"/>. If this
+    // instance
+    /// represents the attributes for a parameter, the attributes on the parameter definition are before
+    // those on
     /// the parameter's <see cref="Type"/>.
     /// </summary>
     public IReadOnlyList<object> Attributes { get; }
 
     /// <summary>
-    /// Gets the set of attributes on the property, or <c>null</c> if this instance does not represent the attributes
+    /// Gets the set of attributes on the property, or <c>null</c> if this instance does not represent
+    // the attributes
     /// for a property.
     /// </summary>
     public IReadOnlyList<object>? PropertyAttributes { get; }
 
     /// <summary>
-    /// Gets the set of attributes on the parameter, or <c>null</c> if this instance does not represent the attributes
+    /// Gets the set of attributes on the parameter, or <c>null</c> if this instance does not represent
+    // the attributes
     /// for a parameter.
     /// </summary>
     public IReadOnlyList<object>? ParameterAttributes { get; }
 
     /// <summary>
-    /// Gets the set of attributes on the <see cref="Type"/>. If this instance represents a property, then
-    /// <see cref="TypeAttributes"/> contains attributes retrieved from <see cref="PropertyInfo.PropertyType"/>.
+    /// Gets the set of attributes on the <see cref="Type"/>. If this instance represents a property,
+    // then
+    /// <see cref="TypeAttributes"/> contains attributes retrieved from <see
+    // cref="PropertyInfo.PropertyType"/>.
     /// If this instance represents a parameter, then contains attributes retrieved from
     /// <see cref="ParameterInfo.ParameterType"/>.
     /// </summary>
@@ -109,7 +118,8 @@ public class ModelAttributes
     /// <param name="property">A <see cref="PropertyInfo"/> for which attributes need to be resolved.
     /// </param>
     /// <returns>
-    /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see cref="Type"/>.
+    /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see
+    // cref="Type"/>.
     /// </returns>
     public static ModelAttributes GetAttributesForProperty(Type type, PropertyInfo property)
     {
@@ -117,15 +127,18 @@ public class ModelAttributes
     }
 
     /// <summary>
-    /// Gets the attributes for the given <paramref name="property"/> with the specified <paramref name="modelType"/>.
+    /// Gets the attributes for the given <paramref name="property"/> with the specified <paramref
+    // name="modelType"/>.
     /// </summary>
-    /// <param name="containerType">The <see cref="Type"/> in which caller found <paramref name="property"/>.
+    /// <param name="containerType">The <see cref="Type"/> in which caller found <paramref
+    // name="property"/>.
     /// </param>
     /// <param name="property">A <see cref="PropertyInfo"/> for which attributes need to be resolved.
     /// </param>
     /// <param name="modelType">The model type</param>
     /// <returns>
-    /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see cref="Type"/>.
+    /// A <see cref="ModelAttributes"/> instance with the attributes of the property and its <see
+    // cref="Type"/>.
     /// </returns>
     public static ModelAttributes GetAttributesForProperty(
         Type containerType,
@@ -159,7 +172,8 @@ public class ModelAttributes
     /// </summary>
     /// <param name="type">The <see cref="Type"/> for which attributes need to be resolved.
     /// </param>
-    /// <returns>A <see cref="ModelAttributes"/> instance with the attributes of the <see cref="Type"/>.</returns>
+    /// <returns>A <see cref="ModelAttributes"/> instance with the attributes of the <see
+    // cref="Type"/>.</returns>
     public static ModelAttributes GetAttributesForType(Type type)
     {
         ArgumentNullException.ThrowIfNull(type);
@@ -182,12 +196,14 @@ public class ModelAttributes
     /// The <see cref="ParameterInfo"/> for which attributes need to be resolved.
     /// </param>
     /// <returns>
-    /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see cref="Type"/>.
+    /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see
+    // cref="Type"/>.
     /// </returns>
     public static ModelAttributes GetAttributesForParameter(ParameterInfo parameterInfo)
     {
         // Prior versions called IModelMetadataProvider.GetMetadataForType(...) and therefore
-        // GetAttributesForType(...) for parameters. Maintain that set of attributes (including those from an
+        // GetAttributesForType(...) for parameters. Maintain that set of attributes (including those from
+        // an
         // ModelMetadataTypeAttribute reference) for back-compatibility.
         var typeAttributes = GetAttributesForType(parameterInfo.ParameterType).TypeAttributes!;
         var parameterAttributes = parameterInfo.GetCustomAttributes();
@@ -196,14 +212,16 @@ public class ModelAttributes
     }
 
     /// <summary>
-    /// Gets the attributes for the given <paramref name="parameterInfo"/> with the specified <paramref name="modelType"/>.
+    /// Gets the attributes for the given <paramref name="parameterInfo"/> with the specified <paramref
+    // name="modelType"/>.
     /// </summary>
     /// <param name="parameterInfo">
     /// The <see cref="ParameterInfo"/> for which attributes need to be resolved.
     /// </param>
     /// <param name="modelType">The model type.</param>
     /// <returns>
-    /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see cref="Type"/>.
+    /// A <see cref="ModelAttributes"/> instance with the attributes of the parameter and its <see
+    // cref="Type"/>.
     /// </returns>
     public static ModelAttributes GetAttributesForParameter(
         ParameterInfo parameterInfo,
@@ -214,7 +232,8 @@ public class ModelAttributes
         ArgumentNullException.ThrowIfNull(modelType);
 
         // Prior versions called IModelMetadataProvider.GetMetadataForType(...) and therefore
-        // GetAttributesForType(...) for parameters. Maintain that set of attributes (including those from an
+        // GetAttributesForType(...) for parameters. Maintain that set of attributes (including those from
+        // an
         // ModelMetadataTypeAttribute reference) for back-compatibility.
         var typeAttributes = GetAttributesForType(modelType).TypeAttributes!;
         var parameterAttributes = parameterInfo.GetCustomAttributes();

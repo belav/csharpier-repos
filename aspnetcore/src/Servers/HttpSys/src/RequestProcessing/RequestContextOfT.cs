@@ -84,7 +84,8 @@ internal sealed partial class RequestContext<TContext> : RequestContext
                     }
                     else if (Request.ProtocolVersion == HttpVersion.Version30)
                     {
-                        // HTTP/3 H3_INTERNAL_ERROR = 0x0102 https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-8.1
+                        // HTTP/3 H3_INTERNAL_ERROR = 0x0102
+                        // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-8.1
                         SetResetCode(0x0102);
                     }
                     Abort();

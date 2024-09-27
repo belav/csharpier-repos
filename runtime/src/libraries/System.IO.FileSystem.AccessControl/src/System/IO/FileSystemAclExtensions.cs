@@ -76,10 +76,13 @@ namespace System.IO
         }
 
         /// <summary>
-        /// This extension method for FileStream returns a FileSecurity object containing security descriptors from the Access, Owner, and Group AccessControlSections.
+        /// This extension method for FileStream returns a FileSecurity object containing security
+        // descriptors from the Access, Owner, and Group AccessControlSections.
         /// </summary>
-        /// <param name="fileStream">An object that represents the file for retrieving security descriptors from</param>
-        /// <exception cref="ArgumentNullException"><paramref name="fileStream" /> is <see langword="null" />.</exception>
+        /// <param name="fileStream">An object that represents the file for retrieving security descriptors
+        // from</param>
+        /// <exception cref="ArgumentNullException"><paramref name="fileStream" /> is <see langword="null"
+        // />.</exception>
         /// <exception cref="ObjectDisposedException">The file stream is closed.</exception>
         public static FileSecurity GetAccessControl(this FileStream fileStream)
         {
@@ -100,11 +103,15 @@ namespace System.IO
         }
 
         /// <summary>
-        /// This extension method for FileStream sets the security descriptors for the file using a FileSecurity instance.
+        /// This extension method for FileStream sets the security descriptors for the file using a
+        // FileSecurity instance.
         /// </summary>
-        /// <param name="fileStream">An object that represents the file to apply security changes to.</param>
-        /// <param name="fileSecurity">An object that determines the access control and audit security for the file.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="fileStream" /> or <paramref name="fileSecurity" /> is <see langword="null" />.</exception>
+        /// <param name="fileStream">An object that represents the file to apply security changes
+        // to.</param>
+        /// <param name="fileSecurity">An object that determines the access control and audit security for
+        // the file.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="fileStream" /> or <paramref
+        // name="fileSecurity" /> is <see langword="null" />.</exception>
         /// <exception cref="ObjectDisposedException">The file stream is closed.</exception>
         public static void SetAccessControl(this FileStream fileStream, FileSecurity fileSecurity)
         {
@@ -120,13 +127,19 @@ namespace System.IO
             fileSecurity.Persist(handle, fileStream.Name);
         }
 
-        /// <summary>Creates a new directory, ensuring it is created with the specified directory security. If the directory already exists, nothing is done.</summary>
-        /// <param name="directoryInfo">The object describing a directory that does not exist in disk yet.</param>
-        /// <param name="directorySecurity">An object that determines the access control and audit security for the directory.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="directoryInfo" /> or <paramref name="directorySecurity" /> is <see langword="null" />.</exception>
+        /// <summary>Creates a new directory, ensuring it is created with the specified directory security.
+        // If the directory already exists, nothing is done.</summary>
+        /// <param name="directoryInfo">The object describing a directory that does not exist in disk
+        // yet.</param>
+        /// <param name="directorySecurity">An object that determines the access control and audit security
+        // for the directory.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="directoryInfo" /> or <paramref
+        // name="directorySecurity" /> is <see langword="null" />.</exception>
         /// <exception cref="DirectoryNotFoundException">Could not find a part of the path.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
-        /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.DirectoryInfo.Create(System.Security.AccessControl.DirectorySecurity)` .NET Framework method.</remarks>
+        /// <remarks>This extension method was added to .NET Core to bring the functionality that was
+        // provided by the `System.IO.DirectoryInfo.Create(System.Security.AccessControl.DirectorySecurity)`
+        // .NET Framework method.</remarks>
         public static void Create(
             this DirectoryInfo directoryInfo,
             DirectorySecurity directorySecurity
@@ -142,25 +155,38 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Creates a new file stream, ensuring it is created with the specified properties and security settings.
+        /// Creates a new file stream, ensuring it is created with the specified properties and security
+        // settings.
         /// </summary>
-        /// <param name="fileInfo">The current instance describing a file that does not exist in disk yet.</param>
-        /// <param name="mode">One of the enumeration values that specifies how the operating system should open a file.</param>
-        /// <param name="rights">One of the enumeration values that defines the access rights to use when creating access and audit rules.</param>
-        /// <param name="share">One of the enumeration values for controlling the kind of access other FileStream objects can have to the same file.</param>
+        /// <param name="fileInfo">The current instance describing a file that does not exist in disk
+        // yet.</param>
+        /// <param name="mode">One of the enumeration values that specifies how the operating system should
+        // open a file.</param>
+        /// <param name="rights">One of the enumeration values that defines the access rights to use when
+        // creating access and audit rules.</param>
+        /// <param name="share">One of the enumeration values for controlling the kind of access other
+        // FileStream objects can have to the same file.</param>
         /// <param name="bufferSize">The number of bytes buffered for reads and writes to the file.</param>
-        /// <param name="options">One of the enumeration values that describes how to create or overwrite the file.</param>
-        /// <param name="fileSecurity">An optional object that determines the access control and audit security for the file.</param>
+        /// <param name="options">One of the enumeration values that describes how to create or overwrite
+        // the file.</param>
+        /// <param name="fileSecurity">An optional object that determines the access control and audit
+        // security for the file.</param>
         /// <returns>A file stream for the newly created file.</returns>
-        /// <exception cref="ArgumentException">The <paramref name="rights" /> and <paramref name="mode" /> combination is invalid.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="fileInfo" /> is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="mode" /> or <paramref name="share" /> are out of their legal enum range.
+        /// <exception cref="ArgumentException">The <paramref name="rights" /> and <paramref name="mode" />
+        // combination is invalid.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="fileInfo" /> is <see langword="null"
+        // />.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="mode" /> or <paramref name="share"
+        // /> are out of their legal enum range.
         ///-or-
         /// <paramref name="bufferSize" /> is not a positive number.</exception>
         /// <exception cref="DirectoryNotFoundException">Could not find a part of the path.</exception>
         /// <exception cref="IOException">An I/O error occurs.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
-        /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.Security.AccessControl.FileSystemRights,System.IO.FileShare,System.Int32,System.IO.FileOptions,System.Security.AccessControl.FileSecurity)` .NET Framework constructor.</remarks>
+        /// <remarks>This extension method was added to .NET Core to bring the functionality that was
+        // provided by the
+        // `System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.Security.AccessControl.FileSystemRights,System.IO.FileShare,System.Int32,System.IO.FileOptions,System.Security.AccessControl.FileSecurity)`
+        // .NET Framework constructor.</remarks>
         public static FileStream Create(
             this FileInfo fileInfo,
             FileMode mode,
@@ -212,7 +238,8 @@ namespace System.IO
             }
 
             // Additionally, append is disallowed if any read rights are provided
-            // ReadAndExecute contains ExecuteFile, ReadAttributes, ReadData, ReadExtendedAttributes and ReadPermissions
+            // ReadAndExecute contains ExecuteFile, ReadAttributes, ReadData, ReadExtendedAttributes and
+            // ReadPermissions
             if ((rights & FileSystemRights.ReadAndExecute) != 0 && mode == FileMode.Append)
             {
                 throw new ArgumentException(SR.Argument_InvalidAppendMode);
@@ -250,23 +277,31 @@ namespace System.IO
             }
             catch
             {
-                // If anything goes wrong while setting up the stream, make sure we deterministically dispose of the opened handle.
+                // If anything goes wrong while setting up the stream, make sure we deterministically dispose of the
+                // opened handle.
                 handle.Dispose();
                 throw;
             }
         }
 
         /// <summary>
-        /// Creates a directory and returns it, ensuring it is created with the specified directory security. If the directory already exists, the existing directory is returned.
+        /// Creates a directory and returns it, ensuring it is created with the specified directory
+        // security. If the directory already exists, the existing directory is returned.
         /// </summary>
-        /// <param name="directorySecurity">An object that determines the access control and audit security for the directory.</param>
+        /// <param name="directorySecurity">An object that determines the access control and audit security
+        // for the directory.</param>
         /// <param name="path">The path of the directory to create.</param>
-        /// <returns>A directory information object representing either a created directory with the provided security properties, or the existing directory.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="directorySecurity" /> or <paramref name="path" /> is <see langword="null" />.</exception>
+        /// <returns>A directory information object representing either a created directory with the
+        // provided security properties, or the existing directory.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="directorySecurity" /> or <paramref
+        // name="path" /> is <see langword="null" />.</exception>
         /// <exception cref="ArgumentException"><paramref name="path" /> is empty.</exception>
         /// <exception cref="DirectoryNotFoundException">Could not find a part of the path.</exception>
         /// <exception cref="UnauthorizedAccessException">Access to the path is denied.</exception>
-        /// <remarks>This extension method was added to .NET Core to bring the functionality that was provided by the `System.IO.Directory.CreateDirectory(System.String,System.Security.AccessControl.DirectorySecurity)` .NET Framework method.</remarks>
+        /// <remarks>This extension method was added to .NET Core to bring the functionality that was
+        // provided by the
+        // `System.IO.Directory.CreateDirectory(System.String,System.Security.AccessControl.DirectorySecurity)`
+        // .NET Framework method.</remarks>
         public static DirectoryInfo CreateDirectory(
             this DirectorySecurity directorySecurity,
             string path
@@ -282,7 +317,8 @@ namespace System.IO
             return dirInfo;
         }
 
-        // In the context of a FileStream, the only ACCESS_MASK ACE rights we care about are reading/writing data and the generic read/write rights.
+        // In the context of a FileStream, the only ACCESS_MASK ACE rights we care about are reading/writing
+        // data and the generic read/write rights.
         // See: https://docs.microsoft.com/en-us/windows/win32/secauthz/access-mask
         private static FileAccess GetFileAccessFromRights(FileSystemRights rights)
         {
@@ -349,8 +385,10 @@ namespace System.IO
                 mode = FileMode.OpenOrCreate;
             }
 
-            // For mitigating local elevation of privilege attack through named pipes make sure we always call CreateFile with SECURITY_ANONYMOUS so that the
-            // named pipe server can't impersonate a high privileged client security context (note that this is the effective default on CreateFile2)
+            // For mitigating local elevation of privilege attack through named pipes make sure we always call
+            // CreateFile with SECURITY_ANONYMOUS so that the
+            // named pipe server can't impersonate a high privileged client security context (note that this is
+            // the effective default on CreateFile2)
             // SECURITY_SQOS_PRESENT flags that a SECURITY_ flag is present.
             int flagsAndAttributes =
                 (int)options

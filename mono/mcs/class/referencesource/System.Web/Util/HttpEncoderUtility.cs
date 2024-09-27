@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Helper class for common encoding routines
- *
- * Copyright (c) 2009 Microsoft Corporation
- */
+* Helper class for common encoding routines
+*
+* Copyright (c) 2009 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {

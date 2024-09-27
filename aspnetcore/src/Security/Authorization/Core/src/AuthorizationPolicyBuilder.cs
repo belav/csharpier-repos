@@ -21,7 +21,8 @@ public class AuthorizationPolicyBuilder
     /// <summary>
     /// Creates a new instance of <see cref="AuthorizationPolicyBuilder"/>
     /// </summary>
-    /// <param name="authenticationSchemes">An array of authentication schemes the policy should be evaluated against.</param>
+    /// <param name="authenticationSchemes">An array of authentication schemes the policy should be
+    // evaluated against.</param>
     public AuthorizationPolicyBuilder(params string[] authenticationSchemes)
     {
         AddAuthenticationSchemes(authenticationSchemes);
@@ -44,7 +45,8 @@ public class AuthorizationPolicyBuilder
         new List<IAuthorizationRequirement>();
 
     /// <summary>
-    /// Gets or sets a list authentication schemes the <see cref="AuthorizationPolicyBuilder.Requirements"/>
+    /// Gets or sets a list authentication schemes the <see
+    // cref="AuthorizationPolicyBuilder.Requirements"/>
     /// are evaluated against.
     /// <para>
     /// When not specified, the requirements are evaluated against default schemes.
@@ -107,10 +109,12 @@ public class AuthorizationPolicyBuilder
 
     /// <summary>
     /// Adds a <see cref="ClaimsAuthorizationRequirement"/> to the current instance which requires
-    /// that the current user has the specified claim and that the claim value must be one of the allowed values.
+    /// that the current user has the specified claim and that the claim value must be one of the
+    // allowed values.
     /// </summary>
     /// <param name="claimType">The claim type required.</param>
-    /// <param name="allowedValues">Optional list of claim values. If specified, the claim must match one or more of these values.</param>
+    /// <param name="allowedValues">Optional list of claim values. If specified, the claim must match
+    // one or more of these values.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public AuthorizationPolicyBuilder RequireClaim(string claimType, params string[] allowedValues)
     {
@@ -121,10 +125,12 @@ public class AuthorizationPolicyBuilder
 
     /// <summary>
     /// Adds a <see cref="ClaimsAuthorizationRequirement"/> to the current instance which requires
-    /// that the current user has the specified claim and that the claim value must be one of the allowed values.
+    /// that the current user has the specified claim and that the claim value must be one of the
+    // allowed values.
     /// </summary>
     /// <param name="claimType">The claim type required.</param>
-    /// <param name="allowedValues">Optional list of claim values. If specified, the claim must match one or more of these values.</param>
+    /// <param name="allowedValues">Optional list of claim values. If specified, the claim must match
+    // one or more of these values.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public AuthorizationPolicyBuilder RequireClaim(
         string claimType,
@@ -152,7 +158,8 @@ public class AuthorizationPolicyBuilder
     }
 
     /// <summary>
-    /// Adds a <see cref="RolesAuthorizationRequirement"/> to the current instance which enforces that the current user
+    /// Adds a <see cref="RolesAuthorizationRequirement"/> to the current instance which enforces that
+    // the current user
     /// must have at least one of the specified roles.
     /// </summary>
     /// <param name="roles">The allowed roles.</param>
@@ -165,7 +172,8 @@ public class AuthorizationPolicyBuilder
     }
 
     /// <summary>
-    /// Adds a <see cref="RolesAuthorizationRequirement"/> to the current instance which enforces that the current user
+    /// Adds a <see cref="RolesAuthorizationRequirement"/> to the current instance which enforces that
+    // the current user
     /// must have at least one of the specified roles.
     /// </summary>
     /// <param name="roles">The allowed roles.</param>
@@ -179,7 +187,8 @@ public class AuthorizationPolicyBuilder
     }
 
     /// <summary>
-    /// Adds a <see cref="NameAuthorizationRequirement"/> to the current instance which enforces that the current user matches the specified name.
+    /// Adds a <see cref="NameAuthorizationRequirement"/> to the current instance which enforces that
+    // the current user matches the specified name.
     /// </summary>
     /// <param name="userName">The user name the current user must have.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
@@ -192,7 +201,8 @@ public class AuthorizationPolicyBuilder
     }
 
     /// <summary>
-    /// Adds <see cref="DenyAnonymousAuthorizationRequirement"/> to the current instance which enforces that the current user is authenticated.
+    /// Adds <see cref="DenyAnonymousAuthorizationRequirement"/> to the current instance which enforces
+    // that the current user is authenticated.
     /// </summary>
     /// <returns>A reference to this instance after the operation has completed.</returns>
     public AuthorizationPolicyBuilder RequireAuthenticatedUser()

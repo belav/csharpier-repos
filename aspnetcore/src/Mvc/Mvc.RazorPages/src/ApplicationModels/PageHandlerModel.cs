@@ -16,7 +16,8 @@ public class PageHandlerModel : ICommonModel
     /// <summary>
     /// Creates a new <see cref="PageHandlerModel"/>.
     /// </summary>
-    /// <param name="handlerMethod">The <see cref="System.Reflection.MethodInfo"/> for the handler.</param>
+    /// <param name="handlerMethod">The <see cref="System.Reflection.MethodInfo"/> for the
+    // handler.</param>
     /// <param name="attributes">Any attributes annotated on the handler method.</param>
     public PageHandlerModel(MethodInfo handlerMethod, IReadOnlyList<object> attributes)
     {
@@ -28,7 +29,8 @@ public class PageHandlerModel : ICommonModel
     }
 
     /// <summary>
-    /// Creates a new instance of <see cref="PageHandlerModel"/> from a given <see cref="PageHandlerModel"/>.
+    /// Creates a new instance of <see cref="PageHandlerModel"/> from a given <see
+    // cref="PageHandlerModel"/>.
     /// </summary>
     /// <param name="other">The <see cref="PageHandlerModel"/> which needs to be copied.</param>
     public PageHandlerModel(PageHandlerModel other)

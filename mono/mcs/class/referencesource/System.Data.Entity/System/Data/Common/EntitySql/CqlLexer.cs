@@ -1,23 +1,23 @@
 namespace System.Data.Common.EntitySql
 {
-    /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    !!                                                                            !!
-    !!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION        !!
-    !!                                                                            !!
-    !!                     DO NOT CHANGE THIS FILE BY HAND!!!!                    !!
-    !!                          YOU HAVE BEEN WARNED !!!!                         !!
-    !!                                                                            !!
-    !!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION        !!
-    !!                                                                            !!
-    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-    /*------------------------------------------------------------------------------
-    // <copyright file="CqlLexer.l" company="Microsoft">
-    //      Copyright (c) Microsoft Corporation.  All rights reserved.
-    // </copyright>
-    //
-    // @owner  Microsoft
-    // @backupOwner Microsoft
-    //----------------------------------------------------------------------------*/
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!                                                                            !!
+!!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION        !!
+!!                                                                            !!
+!!                     DO NOT CHANGE THIS FILE BY HAND!!!!                    !!
+!!                          YOU HAVE BEEN WARNED !!!!                         !!
+!!                                                                            !!
+!!         ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION ATTENTION        !!
+!!                                                                            !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+/*------------------------------------------------------------------------------
+// <copyright file="CqlLexer.l" company="Microsoft">
+//      Copyright (c) Microsoft Corporation.  All rights reserved.
+// </copyright>
+//
+// @owner  Microsoft
+// @backupOwner Microsoft
+//----------------------------------------------------------------------------*/
     using System;
     using System.Data.Common.EntitySql.AST;
     using System.Data.Entity;
@@ -779,91 +779,91 @@ namespace System.Data.Common.EntitySql
 
         private static int[] yy_acpt = new int[]
         {
-            /* 0 */YY_NOT_ACCEPT,
-            /* 1 */YY_NO_ANCHOR,
-            /* 2 */YY_NO_ANCHOR,
-            /* 3 */YY_NO_ANCHOR,
-            /* 4 */YY_NO_ANCHOR,
-            /* 5 */YY_NO_ANCHOR,
-            /* 6 */YY_NO_ANCHOR,
-            /* 7 */YY_NO_ANCHOR,
-            /* 8 */YY_NO_ANCHOR,
-            /* 9 */YY_NO_ANCHOR,
-            /* 10 */YY_NO_ANCHOR,
-            /* 11 */YY_NO_ANCHOR,
-            /* 12 */YY_NO_ANCHOR,
-            /* 13 */YY_END,
-            /* 14 */YY_NO_ANCHOR,
-            /* 15 */YY_NO_ANCHOR,
-            /* 16 */YY_NO_ANCHOR,
-            /* 17 */YY_NO_ANCHOR,
-            /* 18 */YY_NO_ANCHOR,
-            /* 19 */YY_NOT_ACCEPT,
-            /* 20 */YY_NO_ANCHOR,
-            /* 21 */YY_NO_ANCHOR,
-            /* 22 */YY_NO_ANCHOR,
-            /* 23 */YY_NO_ANCHOR,
-            /* 24 */YY_NOT_ACCEPT,
-            /* 25 */YY_NO_ANCHOR,
-            /* 26 */YY_NO_ANCHOR,
-            /* 27 */YY_NO_ANCHOR,
-            /* 28 */YY_NO_ANCHOR,
-            /* 29 */YY_NOT_ACCEPT,
-            /* 30 */YY_NO_ANCHOR,
-            /* 31 */YY_NO_ANCHOR,
-            /* 32 */YY_NO_ANCHOR,
-            /* 33 */YY_NOT_ACCEPT,
-            /* 34 */YY_NO_ANCHOR,
-            /* 35 */YY_NO_ANCHOR,
-            /* 36 */YY_NOT_ACCEPT,
-            /* 37 */YY_NO_ANCHOR,
-            /* 38 */YY_NOT_ACCEPT,
-            /* 39 */YY_NOT_ACCEPT,
-            /* 40 */YY_NOT_ACCEPT,
-            /* 41 */YY_NOT_ACCEPT,
-            /* 42 */YY_NOT_ACCEPT,
-            /* 43 */YY_NOT_ACCEPT,
-            /* 44 */YY_NOT_ACCEPT,
-            /* 45 */YY_NOT_ACCEPT,
-            /* 46 */YY_NOT_ACCEPT,
-            /* 47 */YY_NOT_ACCEPT,
-            /* 48 */YY_NOT_ACCEPT,
-            /* 49 */YY_NOT_ACCEPT,
-            /* 50 */YY_NOT_ACCEPT,
-            /* 51 */YY_NOT_ACCEPT,
-            /* 52 */YY_NOT_ACCEPT,
-            /* 53 */YY_NO_ANCHOR,
-            /* 54 */YY_NO_ANCHOR,
-            /* 55 */YY_NO_ANCHOR,
-            /* 56 */YY_NO_ANCHOR,
-            /* 57 */YY_NO_ANCHOR,
-            /* 58 */YY_NO_ANCHOR,
-            /* 59 */YY_NO_ANCHOR,
-            /* 60 */YY_NO_ANCHOR,
-            /* 61 */YY_NO_ANCHOR,
-            /* 62 */YY_NO_ANCHOR,
-            /* 63 */YY_NO_ANCHOR,
-            /* 64 */YY_NO_ANCHOR,
-            /* 65 */YY_NO_ANCHOR,
-            /* 66 */YY_NO_ANCHOR,
-            /* 67 */YY_NO_ANCHOR,
-            /* 68 */YY_NO_ANCHOR,
-            /* 69 */YY_NO_ANCHOR,
-            /* 70 */YY_NO_ANCHOR,
-            /* 71 */YY_NO_ANCHOR,
-            /* 72 */YY_NO_ANCHOR,
-            /* 73 */YY_NO_ANCHOR,
-            /* 74 */YY_NO_ANCHOR,
-            /* 75 */YY_NO_ANCHOR,
-            /* 76 */YY_NO_ANCHOR,
-            /* 77 */YY_NO_ANCHOR,
-            /* 78 */YY_NO_ANCHOR,
-            /* 79 */YY_NO_ANCHOR,
-            /* 80 */YY_NO_ANCHOR,
-            /* 81 */YY_NO_ANCHOR,
-            /* 82 */YY_NO_ANCHOR,
-            /* 83 */YY_NO_ANCHOR,
-            /* 84 */YY_NO_ANCHOR,
+/* 0 */YY_NOT_ACCEPT,
+/* 1 */YY_NO_ANCHOR,
+/* 2 */YY_NO_ANCHOR,
+/* 3 */YY_NO_ANCHOR,
+/* 4 */YY_NO_ANCHOR,
+/* 5 */YY_NO_ANCHOR,
+/* 6 */YY_NO_ANCHOR,
+/* 7 */YY_NO_ANCHOR,
+/* 8 */YY_NO_ANCHOR,
+/* 9 */YY_NO_ANCHOR,
+/* 10 */YY_NO_ANCHOR,
+/* 11 */YY_NO_ANCHOR,
+/* 12 */YY_NO_ANCHOR,
+/* 13 */YY_END,
+/* 14 */YY_NO_ANCHOR,
+/* 15 */YY_NO_ANCHOR,
+/* 16 */YY_NO_ANCHOR,
+/* 17 */YY_NO_ANCHOR,
+/* 18 */YY_NO_ANCHOR,
+/* 19 */YY_NOT_ACCEPT,
+/* 20 */YY_NO_ANCHOR,
+/* 21 */YY_NO_ANCHOR,
+/* 22 */YY_NO_ANCHOR,
+/* 23 */YY_NO_ANCHOR,
+/* 24 */YY_NOT_ACCEPT,
+/* 25 */YY_NO_ANCHOR,
+/* 26 */YY_NO_ANCHOR,
+/* 27 */YY_NO_ANCHOR,
+/* 28 */YY_NO_ANCHOR,
+/* 29 */YY_NOT_ACCEPT,
+/* 30 */YY_NO_ANCHOR,
+/* 31 */YY_NO_ANCHOR,
+/* 32 */YY_NO_ANCHOR,
+/* 33 */YY_NOT_ACCEPT,
+/* 34 */YY_NO_ANCHOR,
+/* 35 */YY_NO_ANCHOR,
+/* 36 */YY_NOT_ACCEPT,
+/* 37 */YY_NO_ANCHOR,
+/* 38 */YY_NOT_ACCEPT,
+/* 39 */YY_NOT_ACCEPT,
+/* 40 */YY_NOT_ACCEPT,
+/* 41 */YY_NOT_ACCEPT,
+/* 42 */YY_NOT_ACCEPT,
+/* 43 */YY_NOT_ACCEPT,
+/* 44 */YY_NOT_ACCEPT,
+/* 45 */YY_NOT_ACCEPT,
+/* 46 */YY_NOT_ACCEPT,
+/* 47 */YY_NOT_ACCEPT,
+/* 48 */YY_NOT_ACCEPT,
+/* 49 */YY_NOT_ACCEPT,
+/* 50 */YY_NOT_ACCEPT,
+/* 51 */YY_NOT_ACCEPT,
+/* 52 */YY_NOT_ACCEPT,
+/* 53 */YY_NO_ANCHOR,
+/* 54 */YY_NO_ANCHOR,
+/* 55 */YY_NO_ANCHOR,
+/* 56 */YY_NO_ANCHOR,
+/* 57 */YY_NO_ANCHOR,
+/* 58 */YY_NO_ANCHOR,
+/* 59 */YY_NO_ANCHOR,
+/* 60 */YY_NO_ANCHOR,
+/* 61 */YY_NO_ANCHOR,
+/* 62 */YY_NO_ANCHOR,
+/* 63 */YY_NO_ANCHOR,
+/* 64 */YY_NO_ANCHOR,
+/* 65 */YY_NO_ANCHOR,
+/* 66 */YY_NO_ANCHOR,
+/* 67 */YY_NO_ANCHOR,
+/* 68 */YY_NO_ANCHOR,
+/* 69 */YY_NO_ANCHOR,
+/* 70 */YY_NO_ANCHOR,
+/* 71 */YY_NO_ANCHOR,
+/* 72 */YY_NO_ANCHOR,
+/* 73 */YY_NO_ANCHOR,
+/* 74 */YY_NO_ANCHOR,
+/* 75 */YY_NO_ANCHOR,
+/* 76 */YY_NO_ANCHOR,
+/* 77 */YY_NO_ANCHOR,
+/* 78 */YY_NO_ANCHOR,
+/* 79 */YY_NO_ANCHOR,
+/* 80 */YY_NO_ANCHOR,
+/* 81 */YY_NO_ANCHOR,
+/* 82 */YY_NO_ANCHOR,
+/* 83 */YY_NO_ANCHOR,
+/* 84 */YY_NO_ANCHOR,
         };
         private static int[] yy_cmap = new int[]
         {

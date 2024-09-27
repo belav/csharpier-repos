@@ -31,7 +31,8 @@ namespace System.IO.Hashing.Tests
         {
             byte[] destination = new byte[16];
 
-            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands of cases.
+            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands
+            // of cases.
             foreach ((ulong HashHigh, ulong HashLow, long Seed, string Ascii) test in TestCases())
             {
                 var expectedHash128 = new Hash128(test.HashHigh, test.HashLow);
@@ -103,7 +104,8 @@ namespace System.IO.Hashing.Tests
             byte[] destination = new byte[16],
                 destination2 = new byte[16];
 
-            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands of cases.
+            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands
+            // of cases.
             foreach (
                 (ulong HashHigh, ulong HashLow, long Seed, string Ascii) test in TestCases()
                     .OrderBy(t => t.Seed)

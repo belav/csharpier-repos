@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Configuration
     public interface IConfigurationBuilder
     {
         /// <summary>
-        /// Gets a key/value collection that can be used to share data between the <see cref="IConfigurationBuilder"/>
+        /// Gets a key/value collection that can be used to share data between the <see
+        // cref="IConfigurationBuilder"/>
         /// and the registered <see cref="IConfigurationSource"/>s.
         /// </summary>
         IDictionary<string, object> Properties { get; }
@@ -29,10 +30,12 @@ namespace Microsoft.Extensions.Configuration
         IConfigurationBuilder Add(IConfigurationSource source);
 
         /// <summary>
-        /// Builds an <see cref="IConfiguration"/> with keys and values from the set of sources registered in
+        /// Builds an <see cref="IConfiguration"/> with keys and values from the set of sources registered
+        // in
         /// <see cref="Sources"/>.
         /// </summary>
-        /// <returns>An <see cref="IConfigurationRoot"/> with keys and values from the registered sources.</returns>
+        /// <returns>An <see cref="IConfigurationRoot"/> with keys and values from the registered
+        // sources.</returns>
         IConfigurationRoot Build();
     }
 }

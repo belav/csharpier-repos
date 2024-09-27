@@ -28,7 +28,8 @@ namespace System.Net.Mail
 
         #region ISmtpAuthenticationModule Members
 
-        // Security this method will access NetworkCredential properties that demand UnmanagedCode and Environment Permission
+        // Security this method will access NetworkCredential properties that demand UnmanagedCode and
+        // Environment Permission
         [EnvironmentPermission(SecurityAction.Assert, Unrestricted = true)]
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public Authorization Authenticate(

@@ -846,7 +846,8 @@ namespace System.Runtime.InteropServices
                                 }
 
                                 //
-                                // Remove entries in the  HKEY_CLASS_ROOT\CLSID\<CLSID>\Implemented Categories\<Managed Category Guid> key.
+                                // Remove entries in the  HKEY_CLASS_ROOT\CLSID\<CLSID>\Implemented Categories\<Managed Category
+                                // Guid> key.
                                 //
 
                                 using (

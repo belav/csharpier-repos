@@ -15,7 +15,8 @@ public static class RateLimiterServiceCollectionExtensions
     /// Add rate limiting services and configure the related options.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="RateLimiterOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="RateLimiterOptions"/>.</param>
     /// <returns></returns>
     public static IServiceCollection AddRateLimiter(
         this IServiceCollection services,

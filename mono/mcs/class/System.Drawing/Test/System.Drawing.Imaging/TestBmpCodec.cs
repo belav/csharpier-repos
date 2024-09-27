@@ -43,7 +43,7 @@ namespace MonoTests.System.Drawing.Imaging
     [TestFixture]
     public class BmpCodecTest
     {
-        /* Get suffix to add to the filename */
+/* Get suffix to add to the filename */
         internal string getOutSufix()
         {
             string s;
@@ -62,7 +62,7 @@ namespace MonoTests.System.Drawing.Imaging
             return s;
         }
 
-        /* Checks bitmap features on a know 1bbp bitmap */
+/* Checks bitmap features on a know 1bbp bitmap */
         [Test]
         public void Bitmap1bitFeatures()
         {
@@ -144,7 +144,7 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        /* Checks bitmap features on a know 8bbp bitmap */
+/* Checks bitmap features on a know 8bbp bitmap */
         [Test]
         public void Bitmap8bitFeatures()
         {
@@ -225,7 +225,7 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        /* Checks bitmap features on a know 24-bits bitmap */
+/* Checks bitmap features on a know 24-bits bitmap */
         [Test]
         public void Bitmap24bitFeatures()
         {
@@ -441,7 +441,7 @@ namespace MonoTests.System.Drawing.Imaging
             }
         }
 
-        /* Checks bitmap features on a know 32-bits bitmap (codec)*/
+/* Checks bitmap features on a know 32-bits bitmap (codec)*/
         [Test]
         public void Bitmap32bitFeatures()
         {

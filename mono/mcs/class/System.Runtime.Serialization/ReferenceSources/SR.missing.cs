@@ -30,14 +30,21 @@ namespace System.Runtime.Serialization
         // This was retrieved as follows:
         //
         // 1. mcs ReferenceSources/SR.cs -t:library -out:existing.dll
-        // 2. mcs {https://raw.githubusercontent.com/mono/mono/wip-serialization-halfway/mcs/class/System.Runtime.Serialization/ReferenceSource/SR.cs} -t:library -out:full.dll
-        // 3. csharp -e "System.IO.File.WriteAllLines ("existing.txt", System.Reflection.Assembly.ReflectionOnlyLoadFrom ("existing.dll").GetTypes ().SelectMany (t => t.GetFields ()).Select (f => f.Name).ToArray ())"
-        // 4. csharp -e "System.IO.File.WriteAllLines ("full.txt", System.Reflection.Assembly.ReflectionOnlyLoadFrom ("full.dll").GetTypes ().SelectMany (t => t.GetFields ()).Select (f => f.Name).ToArray ())"
+        // 2. mcs
+        // {https://raw.githubusercontent.com/mono/mono/wip-serialization-halfway/mcs/class/System.Runtime.Serialization/ReferenceSource/SR.cs}
+        // -t:library -out:full.dll
+        // 3. csharp -e "System.IO.File.WriteAllLines ("existing.txt",
+        // System.Reflection.Assembly.ReflectionOnlyLoadFrom ("existing.dll").GetTypes ().SelectMany (t =>
+        // t.GetFields ()).Select (f => f.Name).ToArray ())"
+        // 4. csharp -e "System.IO.File.WriteAllLines ("full.txt",
+        // System.Reflection.Assembly.ReflectionOnlyLoadFrom ("full.dll").GetTypes ().SelectMany (t =>
+        // t.GetFields ()).Select (f => f.Name).ToArray ())"
         // 5. csharp
         //	var existing = System.IO.File.ReadAllLines ("existing.txt");
         //	var full = System.IO.File.ReadAllLines ("full.txt");
         //  var missing = full.Where (f => !existing.Contains (f));
-        //  System.IO.File.WriteAllLines ("missing.cs", missing.Select (m => "public const string " + m + " = @\"" + m + "\";").ToArray ())
+        //  System.IO.File.WriteAllLines ("missing.cs", missing.Select (m => "public const string " + m + "
+        // = @\"" + m + "\";").ToArray ())
         // 6. copy missing.cs contents here.
         //
 

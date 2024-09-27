@@ -23,7 +23,8 @@ namespace System.Collections.Tests
             yield return new object[] { null, "abc", -1 };
             yield return new object[] { "abc", null, 1 };
             yield return new object[] { "abc", "abc", 0 };
-            // Invariant mode comparison of strings, ends up returning firstChar - secondChar when different, i.e 'd' - 'a'
+            // Invariant mode comparison of strings, ends up returning firstChar - secondChar when different,
+            // i.e 'd' - 'a'
             yield return new object[]
             {
                 "abc",

@@ -849,7 +849,8 @@ void local() => System.Console.WriteLine(i);
                 Assert.NotNull(operation2);
                 Assert.IsAssignableFrom<ILocalReferenceOperation>(operation2);
 
-                // The following assert fails due to https://github.com/dotnet/roslyn/issues/41853, enable once the issue is fixed.
+                // The following assert fails due to https://github.com/dotnet/roslyn/issues/41853, enable once the
+                // issue is fixed.
                 //Assert.Contains(declSymbol, model1.AnalyzeDataFlow(localRef).DataFlowsIn);
             }
         }
@@ -866,7 +867,8 @@ void local() => System.Console.WriteLine(i);
             );
 
             comp.VerifyDiagnostics(
-                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                // language version 9.0 or greater.
                 // System.Console.WriteLine("Hi!");
                 Diagnostic(
                         ErrorCode.ERR_FeatureNotAvailableInVersion8,
@@ -906,7 +908,8 @@ class Test
                 // (4,30): error CS1026: ) expected
                 //     System.Console.WriteLine("Hi!");
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, @"""Hi!""").WithLocation(4, 30),
-                // (4,30): error CS1519: Invalid token '"Hi!"' in class, record, struct, or interface member declaration
+                // (4,30): error CS1519: Invalid token '"Hi!"' in class, record, struct, or interface member
+                // declaration
                 //     System.Console.WriteLine("Hi!");
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, @"""Hi!""")
                     .WithArguments(@"""Hi!""")
@@ -1038,7 +1041,8 @@ System.Console.WriteLine(g);
                 // (2,12): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // new string a = "Hi!";
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "a").WithLocation(2, 12),
-                // (2,12): warning CS0109: The member '<invalid-global-code>.a' does not hide an accessible member. The new keyword is not required.
+                // (2,12): warning CS0109: The member '<invalid-global-code>.a' does not hide an accessible member.
+                // The new keyword is not required.
                 // new string a = "Hi!";
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "a")
                     .WithArguments("<invalid-global-code>.a")
@@ -1477,7 +1481,8 @@ System.Console.Write(args);
             );
 
             comp.VerifyDiagnostics(
-                // (2,8): error CS0136: A local or parameter named 'args' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (2,8): error CS0136: A local or parameter named 'args' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 // string args = "1";
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "args")
                     .WithArguments("args")
@@ -1550,7 +1555,8 @@ System.Console.WriteLine(await);
             );
 
             comp.VerifyDiagnostics(
-                // (3,8): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
+                // (3,8): error CS4003: 'await' cannot be used as an identifier within an async method or lambda
+                // expression
                 // string await = "Hi!";
                 Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(3, 8),
                 // (3,8): warning CS0219: The variable 'await' is assigned but its value is never used
@@ -1957,7 +1963,8 @@ class C1
             );
 
             comp.VerifyDiagnostics(
-                // (6,30): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
+                // (6,30): error CS8801: Cannot use local variable or local function 'x' declared in a top-level
+                // statement in this context.
                 //         System.Console.Write(x);
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -1989,7 +1996,8 @@ class C1
             );
 
             comp.VerifyDiagnostics(
-                // (6,30): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
+                // (6,30): error CS8801: Cannot use local variable or local function 'x' declared in a top-level
+                // statement in this context.
                 //         System.Console.Write(x);
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2306,7 +2314,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2314,7 +2323,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2322,7 +2332,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2330,7 +2341,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2338,7 +2350,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 20),
-                // (34,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (34,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2346,7 +2359,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(34, 38),
-                // (35,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (35,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test.ToString(); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2354,7 +2368,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(35, 13),
-                // (36,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (36,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test.EndsWith(null); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2362,7 +2377,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(36, 13),
-                // (37,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (37,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2549,7 +2565,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2557,7 +2574,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2565,7 +2583,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2573,7 +2592,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2581,7 +2601,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 20),
-                // (31,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (31,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2589,7 +2610,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(31, 38),
-                // (32,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (32,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test.ToString(); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2597,7 +2619,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(32, 13),
-                // (33,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (33,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test.EndsWith(null); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2605,7 +2628,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(33, 13),
-                // (34,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (34,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2798,7 +2822,8 @@ namespace N1
                 parseOptions: TestOptions.Regular7
             );
             comp.VerifyDiagnostics(
-                // (2,1): error CS8107: Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
+                // (2,1): error CS8107: Feature 'top-level statements' is not available in C# 7.0. Please use
+                // language version 9.0 or greater.
                 // string Test = "1";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, @"string Test = ""1"";")
                     .WithArguments("top-level statements", "9.0")
@@ -2863,7 +2888,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2871,7 +2897,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2879,7 +2906,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2887,7 +2915,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2895,7 +2924,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2903,7 +2933,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(21, 20),
-                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test()); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2911,7 +2942,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(36, 38),
-                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().ToString(); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2919,7 +2951,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(37, 13),
-                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().EndsWith(null); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2927,7 +2960,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(38, 13),
-                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             var d = new System.Func<string>(Test); // 9
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -2935,7 +2969,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(39, 45),
-                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 10
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3110,7 +3145,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3118,7 +3154,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3126,7 +3163,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3134,7 +3172,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3142,7 +3181,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 33),
-                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3150,7 +3190,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 20),
-                // (33,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (33,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test()); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3158,7 +3199,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(33, 38),
-                // (34,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (34,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().ToString(); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3166,7 +3208,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(34, 13),
-                // (35,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (35,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().EndsWith(null); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3174,7 +3217,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(35, 13),
-                // (36,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (36,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             var d = new System.Func<string>(Test); // 9
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3182,7 +3226,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(36, 45),
-                // (38,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (38,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 10
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3356,7 +3401,8 @@ namespace N1
                 parseOptions: TestOptions.Regular7
             );
             comp.VerifyDiagnostics(
-                // (2,1): error CS8107: Feature 'top-level statements' is not available in C# 7.0. Please use language version 9.0 or greater.
+                // (2,1): error CS8107: Feature 'top-level statements' is not available in C# 7.0. Please use
+                // language version 9.0 or greater.
                 // string Test() => "1";
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, @"string Test() => ""1"";")
                     .WithArguments("top-level statements", "9.0")
@@ -3612,7 +3658,8 @@ new void M()
                 // (5,10): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // new void M()
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "M").WithLocation(5, 10),
-                // (5,10): warning CS0109: The member '<invalid-global-code>.M()' does not hide an accessible member. The new keyword is not required.
+                // (5,10): warning CS0109: The member '<invalid-global-code>.M()' does not hide an accessible
+                // member. The new keyword is not required.
                 // new void M()
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "M")
                     .WithArguments("<invalid-global-code>.M()")
@@ -3650,7 +3697,8 @@ class C1
                 // (5,9): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // new int F = C1.GetInt(out var Test);
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "F").WithLocation(5, 9),
-                // (5,9): warning CS0109: The member '<invalid-global-code>.F' does not hide an accessible member. The new keyword is not required.
+                // (5,9): warning CS0109: The member '<invalid-global-code>.F' does not hide an accessible member.
+                // The new keyword is not required.
                 // new int F = C1.GetInt(out var Test);
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "F")
                     .WithArguments("<invalid-global-code>.F")
@@ -3682,7 +3730,8 @@ new void M()
                 // (5,10): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // new void M()
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "M").WithLocation(5, 10),
-                // (5,10): warning CS0109: The member '<invalid-global-code>.M()' does not hide an accessible member. The new keyword is not required.
+                // (5,10): warning CS0109: The member '<invalid-global-code>.M()' does not hide an accessible
+                // member. The new keyword is not required.
                 // new void M()
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "M")
                     .WithArguments("<invalid-global-code>.M()")
@@ -3747,7 +3796,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3755,7 +3805,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3763,7 +3814,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3771,7 +3823,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3779,7 +3832,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3787,7 +3841,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(21, 20),
-                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test()); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3795,7 +3850,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(36, 38),
-                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().ToString(); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3803,7 +3859,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(37, 13),
-                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().EndsWith(null); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3811,7 +3868,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(38, 13),
-                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             var d = new System.Func<string>(Test); // 9
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3819,7 +3877,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(39, 45),
-                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 10
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3888,7 +3947,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3896,7 +3956,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3904,7 +3965,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3912,7 +3974,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3920,7 +3983,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3928,7 +3992,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(21, 20),
-                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (36,38): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             System.Console.WriteLine(Test()); // 6
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3936,7 +4001,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(36, 38),
-                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (37,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().ToString(); // 7
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3944,7 +4010,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(37, 13),
-                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (38,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             Test().EndsWith(null); // 8
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3952,7 +4019,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(38, 13),
-                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (39,45): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             var d = new System.Func<string>(Test); // 9
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -3960,7 +4028,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(39, 45),
-                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (41,24): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //             _ = nameof(Test); // 10
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4033,7 +4102,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (9,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (9,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //     T = Test,
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4041,7 +4111,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(9, 9),
-                // (16,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,13): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         T = Test,
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4092,12 +4163,14 @@ void local()
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
                     .WithArguments("local")
                     .WithLocation(3, 6),
-                // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // alias2 y = "1";
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias2")
                     .WithArguments("alias2")
                     .WithLocation(4, 1),
-                // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a using directive or an assembly reference?)
+                // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     alias1 a = "2";
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1")
                     .WithArguments("alias1")
@@ -4135,7 +4208,8 @@ void local()
             model1
                 .GetDiagnostics(nameRef.Ancestors().OfType<StatementSyntax>().First().Span)
                 .Verify(
-                    // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // alias2 y = "1";
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias2")
                         .WithArguments("alias2")
@@ -4144,7 +4218,8 @@ void local()
             model1
                 .GetDiagnostics()
                 .Verify(
-                    // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,1): error CS0246: The type or namespace name 'alias2' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // alias2 y = "1";
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias2")
                         .WithArguments("alias2")
@@ -4179,7 +4254,8 @@ void local()
             model2
                 .GetDiagnostics(nameRef.Ancestors().OfType<StatementSyntax>().First().Span)
                 .Verify(
-                    // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     alias1 a = "2";
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1")
                         .WithArguments("alias1")
@@ -4200,7 +4276,8 @@ void local()
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
                         .WithArguments("local")
                         .WithLocation(3, 6),
-                    // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,5): error CS0246: The type or namespace name 'alias1' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     //     alias1 a = "2";
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "alias1")
                         .WithArguments("alias1")
@@ -4259,7 +4336,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4267,7 +4345,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4275,7 +4354,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4283,7 +4363,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4347,7 +4428,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4355,7 +4437,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4363,7 +4446,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4371,7 +4455,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4435,7 +4520,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4443,7 +4529,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4451,7 +4538,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4459,7 +4547,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4467,7 +4556,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4533,7 +4623,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4541,7 +4632,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4549,7 +4641,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4557,7 +4650,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4565,7 +4659,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 33),
-                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4627,7 +4722,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4635,7 +4731,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4643,7 +4740,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4651,7 +4749,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4715,7 +4814,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4723,7 +4823,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4731,7 +4832,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4739,7 +4841,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4803,7 +4906,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4811,7 +4915,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4819,7 +4924,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4827,7 +4933,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4835,7 +4942,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4901,7 +5009,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4909,7 +5018,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4917,7 +5027,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4925,7 +5036,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4933,7 +5045,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 33),
-                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -4995,7 +5108,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5003,7 +5117,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5011,7 +5126,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5019,7 +5135,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5083,7 +5200,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5091,7 +5209,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5099,7 +5218,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test.EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5107,7 +5227,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5171,7 +5292,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5179,7 +5301,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 34),
-                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (17,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5187,7 +5310,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(17, 9),
-                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5195,7 +5319,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(18, 9),
-                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (19,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5203,7 +5328,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(19, 33),
-                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (21,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5269,7 +5395,8 @@ namespace N1
             );
 
             comp.VerifyDiagnostics(
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5277,7 +5404,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5285,7 +5413,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5293,7 +5422,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5301,7 +5431,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 33),
-                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5367,7 +5498,8 @@ namespace N1
                 // using static N2;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N2;")
                     .WithLocation(2, 1),
-                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5375,7 +5507,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 34),
-                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (14,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5383,7 +5516,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(14, 9),
-                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5391,7 +5525,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(15, 9),
-                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (16,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5399,7 +5534,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(16, 33),
-                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (18,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5467,7 +5603,8 @@ namespace N1
                 // using static N2;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N2;")
                     .WithLocation(2, 1),
-                // (10,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (10,34): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Console.WriteLine(Test()); // 1
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5475,7 +5612,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(10, 34),
-                // (11,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (11,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().ToString(); // 2
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5483,7 +5621,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(11, 9),
-                // (12,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (12,9): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         Test().EndsWith(null); // 3
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5491,7 +5630,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(12, 9),
-                // (13,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (13,33): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         System.Func<string> d = Test; // 4
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5499,7 +5639,8 @@ namespace N1
                     )
                     .WithArguments("Test")
                     .WithLocation(13, 33),
-                // (15,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level statement in this context.
+                // (15,20): error CS8801: Cannot use local variable or local function 'Test' declared in a top-level
+                // statement in this context.
                 //         _ = nameof(Test); // 5
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -5567,7 +5708,8 @@ namespace N1
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "args")
                     .WithArguments("args", "type")
                     .WithLocation(15, 34),
-                // (16,9): error CS0120: An object reference is required for the non-static field, method, or property 'object.ToString()'
+                // (16,9): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'object.ToString()'
                 //         args.ToString(); // 2
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "args.ToString")
                     .WithArguments("object.ToString()")
@@ -5582,7 +5724,8 @@ namespace N1
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "args")
                     .WithArguments("args", "type")
                     .WithLocation(33, 38),
-                // (34,13): error CS0120: An object reference is required for the non-static field, method, or property 'object.ToString()'
+                // (34,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'object.ToString()'
                 //             args.ToString(); // 5
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "args.ToString")
                     .WithArguments("object.ToString()")
@@ -5750,7 +5893,8 @@ namespace N1
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "args")
                     .WithArguments("args", "type")
                     .WithLocation(13, 34),
-                // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'object.ToString()'
+                // (14,9): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'object.ToString()'
                 //         args.ToString(); // 2
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "args.ToString")
                     .WithArguments("object.ToString()")
@@ -5765,7 +5909,8 @@ namespace N1
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "args")
                     .WithArguments("args", "type")
                     .WithLocation(31, 38),
-                // (32,13): error CS0120: An object reference is required for the non-static field, method, or property 'object.ToString()'
+                // (32,13): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'object.ToString()'
                 //             args.ToString(); // 5
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "args.ToString")
                     .WithArguments("object.ToString()")
@@ -6127,7 +6272,8 @@ localI();
                 // (2,10): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // new void localA() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localA").WithLocation(2, 10),
-                // (2,10): warning CS0109: The member '<invalid-global-code>.localA()' does not hide an accessible member. The new keyword is not required.
+                // (2,10): warning CS0109: The member '<invalid-global-code>.localA()' does not hide an accessible
+                // member. The new keyword is not required.
                 // new void localA() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.WRN_NewNotRequired, "localA")
                     .WithArguments("<invalid-global-code>.localA()")
@@ -6145,7 +6291,8 @@ localI();
                 // (6,14): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // virtual void localC() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localC").WithLocation(6, 14),
-                // (6,14): error CS0621: '<invalid-global-code>.localC()': virtual or abstract members cannot be private
+                // (6,14): error CS0621: '<invalid-global-code>.localC()': virtual or abstract members cannot be
+                // private
                 // virtual void localC() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_VirtualPrivate, "localC")
                     .WithArguments("<invalid-global-code>.localC()")
@@ -6158,7 +6305,8 @@ localI();
                 // (8,13): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // sealed void localD() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localD").WithLocation(8, 13),
-                // (8,13): error CS0238: '<invalid-global-code>.localD()' cannot be sealed because it is not an override
+                // (8,13): error CS0238: '<invalid-global-code>.localD()' cannot be sealed because it is not an
+                // override
                 // sealed void localD() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_SealedNonOverride, "localD")
                     .WithArguments("<invalid-global-code>.localD()")
@@ -6171,7 +6319,8 @@ localI();
                 // (10,15): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // override void localE() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localE").WithLocation(10, 15),
-                // (10,15): error CS0621: '<invalid-global-code>.localE()': virtual or abstract members cannot be private
+                // (10,15): error CS0621: '<invalid-global-code>.localE()': virtual or abstract members cannot be
+                // private
                 // override void localE() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_VirtualPrivate, "localE")
                     .WithArguments("<invalid-global-code>.localE()")
@@ -6189,12 +6338,14 @@ localI();
                 // (12,15): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // abstract void localF() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localF").WithLocation(12, 15),
-                // (12,15): error CS0500: '<invalid-global-code>.localF()' cannot declare a body because it is marked abstract
+                // (12,15): error CS0500: '<invalid-global-code>.localF()' cannot declare a body because it is
+                // marked abstract
                 // abstract void localF() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_AbstractHasBody, "localF")
                     .WithArguments("<invalid-global-code>.localF()")
                     .WithLocation(12, 15),
-                // (12,15): error CS0621: '<invalid-global-code>.localF()': virtual or abstract members cannot be private
+                // (12,15): error CS0621: '<invalid-global-code>.localF()': virtual or abstract members cannot be
+                // private
                 // abstract void localF() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_VirtualPrivate, "localF")
                     .WithArguments("<invalid-global-code>.localF()")
@@ -6207,7 +6358,8 @@ localI();
                 // (14,14): error CS0116: A namespace cannot directly contain members such as fields or methods
                 // partial void localG() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "localG").WithLocation(14, 14),
-                // (14,14): error CS0759: No defining declaration found for implementing declaration of partial method '<invalid-global-code>.localG()'
+                // (14,14): error CS0759: No defining declaration found for implementing declaration of partial
+                // method '<invalid-global-code>.localG()'
                 // partial void localG() => System.Console.WriteLine();
                 Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "localG")
                     .WithArguments("<invalid-global-code>.localG()")
@@ -6516,7 +6668,8 @@ void args(int x)
             );
 
             comp.VerifyDiagnostics(
-                // (3,6): error CS0136: A local or parameter named 'args' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (3,6): error CS0136: A local or parameter named 'args' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 // void args(int x)
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "args")
                     .WithArguments("args")
@@ -6678,7 +6831,8 @@ System.Console.WriteLine(await());
             );
 
             comp.VerifyDiagnostics(
-                // (3,8): error CS4003: 'await' cannot be used as an identifier within an async method or lambda expression
+                // (3,8): error CS4003: 'await' cannot be used as an identifier within an async method or lambda
+                // expression
                 // string await() => "Hi!";
                 Diagnostic(ErrorCode.ERR_BadAwaitAsIdentifier, "await").WithLocation(3, 8),
                 // (3,8): warning CS8321: The local function 'await' is declared but never used
@@ -7084,7 +7238,8 @@ System.Console.Write(""Hi!"");
             );
 
             comp.VerifyDiagnostics(
-                // (2,13): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry point.
+                // (2,13): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry
+                // point.
                 // static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main()")
@@ -7121,7 +7276,8 @@ static void Main()
             );
 
             comp.VerifyDiagnostics(
-                // (6,13): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry point.
+                // (6,13): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry
+                // point.
                 // static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main()")
@@ -7158,7 +7314,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (9,23): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()' entry point.
+                // (9,23): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()'
+                // entry point.
                 //     static async Task Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main()")
@@ -7197,7 +7354,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (10,23): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()' entry point.
+                // (10,23): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()'
+                // entry point.
                 //     static async Task Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main()")
@@ -7234,7 +7392,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (10,17): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()' entry point.
+                // (10,17): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()'
+                // entry point.
                 //     static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main()")
@@ -7267,7 +7426,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (6,17): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()' entry point.
+                // (6,17): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()'
+                // entry point.
                 //     static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main()")
@@ -7310,12 +7470,14 @@ class Program2
             );
 
             comp.VerifyDiagnostics(
-                // (9,17): warning CS7022: The entry point of the program is global code; ignoring 'Program2.Main(string[])' entry point.
+                // (9,17): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program2.Main(string[])' entry point.
                 //     static void Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program2.Main(string[])")
                     .WithLocation(9, 17),
-                // (14,23): warning CS7022: The entry point of the program is global code; ignoring 'Program2.Main()' entry point.
+                // (14,23): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program2.Main()' entry point.
                 //     static async Task Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program2.Main()")
@@ -7358,12 +7520,14 @@ class Program2
             );
 
             comp.VerifyDiagnostics(
-                // (10,17): warning CS7022: The entry point of the program is global code; ignoring 'Program2.Main()' entry point.
+                // (10,17): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program2.Main()' entry point.
                 //     static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program2.Main()")
                     .WithLocation(10, 17),
-                // (15,23): warning CS7022: The entry point of the program is global code; ignoring 'Program2.Main(string[])' entry point.
+                // (15,23): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program2.Main(string[])' entry point.
                 //     static async Task Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program2.Main(string[])")
@@ -7424,7 +7588,8 @@ class Helpers
             );
 
             comp.VerifyEmitDiagnostics(
-                // (19,21): warning CS7022: The entry point of the program is global code; ignoring 'Helpers.Main()' entry point.
+                // (19,21): warning CS7022: The entry point of the program is global code; ignoring 'Helpers.Main()'
+                // entry point.
                 //         static void Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("N1.Helpers.Main()")
@@ -7470,7 +7635,8 @@ class Program3
             comp.VerifyEmitDiagnostics(
                 // error CS8804: Cannot specify /main if there is a compilation unit with top-level statements.
                 Diagnostic(ErrorCode.ERR_SimpleProgramDisallowsMainType).WithLocation(1, 1),
-                // (12,23): warning CS8892: Method 'Program2.Main(string[])' will not be used as an entry point because a synchronous entry point 'Program2.Main()' was found.
+                // (12,23): warning CS8892: Method 'Program2.Main(string[])' will not be used as an entry point
+                // because a synchronous entry point 'Program2.Main()' was found.
                 //     static async Task Main(string[] args)
                 Diagnostic(ErrorCode.WRN_SyncAndAsyncEntryPoints, "Main")
                     .WithArguments("Program2.Main(string[])", "Program2.Main()")
@@ -7610,7 +7776,8 @@ static int Main()
             );
 
             comp.VerifyDiagnostics(
-                // (6,12): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry point.
+                // (6,12): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry
+                // point.
                 // static int Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main()")
@@ -7641,7 +7808,8 @@ static void Main(string[] args)
             );
 
             comp.VerifyDiagnostics(
-                // (6,13): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])' entry point.
+                // (6,13): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])'
+                // entry point.
                 // static void Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main(string[])")
@@ -7673,7 +7841,8 @@ static int Main(string[] args)
             );
 
             comp.VerifyDiagnostics(
-                // (6,12): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])' entry point.
+                // (6,12): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])'
+                // entry point.
                 // static int Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main(string[])")
@@ -7707,7 +7876,8 @@ async static Task Main()
             );
 
             comp.VerifyDiagnostics(
-                // (8,19): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry point.
+                // (8,19): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry
+                // point.
                 // async static Task Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main()")
@@ -7742,7 +7912,8 @@ static async Task<int> Main()
             );
 
             comp.VerifyDiagnostics(
-                // (8,24): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry point.
+                // (8,24): warning CS7022: The entry point of the program is global code; ignoring 'Main()' entry
+                // point.
                 // static async Task<int> Main()
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main()")
@@ -7776,7 +7947,8 @@ static async Task Main(string[] args)
             );
 
             comp.VerifyDiagnostics(
-                // (8,19): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])' entry point.
+                // (8,19): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])'
+                // entry point.
                 // static async Task Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main(string[])")
@@ -7811,7 +7983,8 @@ static async Task<int> Main(string[] args)
             );
 
             comp.VerifyDiagnostics(
-                // (8,24): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])' entry point.
+                // (8,24): warning CS7022: The entry point of the program is global code; ignoring 'Main(string[])'
+                // entry point.
                 // static async Task<int> Main(string[] args)
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Main(string[])")
@@ -7904,7 +8077,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (1,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
+                // (1,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block
+                // because 'void' is not an iterator interface type
                 // yield break;
                 Diagnostic(ErrorCode.ERR_BadIteratorReturn, "yield break;")
                     .WithArguments("<top-level-statements-entry-point>", "void")
@@ -7924,7 +8098,8 @@ partial class Program
             );
 
             comp.VerifyDiagnostics(
-                // (1,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block because 'void' is not an iterator interface type
+                // (1,1): error CS1624: The body of '<top-level-statements-entry-point>' cannot be an iterator block
+                // because 'void' is not an iterator interface type
                 // {yield return 0;}
                 Diagnostic(ErrorCode.ERR_BadIteratorReturn, "{yield return 0;}")
                     .WithArguments("<top-level-statements-entry-point>", "void")
@@ -8197,7 +8372,8 @@ Console.WriteLine(1);
             );
 
             comp.VerifyDiagnostics(
-                // (4,1): error CS1529: A using clause must precede all other elements defined in the namespace except extern alias declarations
+                // (4,1): error CS1529: A using clause must precede all other elements defined in the namespace
+                // except extern alias declarations
                 // using System;
                 Diagnostic(ErrorCode.ERR_UsingAfterElements, "using System;").WithLocation(4, 1),
                 // (6,1): error CS0103: The name 'Console' does not exist in the current context
@@ -8228,7 +8404,8 @@ class MyAttribute : System.Attribute
             );
 
             comp.VerifyDiagnostics(
-                // (4,2): error CS1730: Assembly and module attributes must precede all other elements defined in a file except using clauses and extern alias declarations
+                // (4,2): error CS1730: Assembly and module attributes must precede all other elements defined in a
+                // file except using clauses and extern alias declarations
                 // [module: MyAttribute]
                 Diagnostic(ErrorCode.ERR_GlobalAttributesNotFirst, "module").WithLocation(4, 2)
             );
@@ -8251,7 +8428,8 @@ extern alias A;
             );
 
             comp.VerifyDiagnostics(
-                // (4,1): error CS0439: An extern alias declaration must precede all other elements defined in the namespace
+                // (4,1): error CS0439: An extern alias declaration must precede all other elements defined in the
+                // namespace
                 // extern alias A;
                 Diagnostic(ErrorCode.ERR_ExternAfterElements, "extern").WithLocation(4, 1)
             );
@@ -8371,7 +8549,8 @@ class MyAttribute : System.Attribute
                 // [MyAttribute(i + 3)]
                 Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[MyAttribute(i + 3)]")
                     .WithLocation(12, 1),
-                // (16,1): error CS0246: The type or namespace name 'local' could not be found (are you missing a using directive or an assembly reference?)
+                // (16,1): error CS0246: The type or namespace name 'local' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 // local();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "local")
                     .WithArguments("local")
@@ -8379,7 +8558,8 @@ class MyAttribute : System.Attribute
                 // (16,6): error CS1001: Identifier expected
                 // local();
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(16, 6),
-                // (16,6): error CS8112: Local function '()' must declare a body because it is not marked 'static extern'.
+                // (16,6): error CS8112: Local function '()' must declare a body because it is not marked 'static
+                // extern'.
                 // local();
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "")
                     .WithArguments("()")
@@ -8721,7 +8901,8 @@ class A
                 Diagnostic(ErrorCode.ERR_BadAccess, "M")
                     .WithArguments("A.M()")
                     .WithLocation(2, 17),
-                // (8,9): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
+                // (8,9): error CS8801: Cannot use local variable or local function 'x' declared in a top-level
+                // statement in this context.
                 //         x = null;
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -8780,7 +8961,8 @@ class B : A
                 parseOptions: DefaultParseOptions
             );
             comp.VerifyDiagnostics(
-                // (13,13): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
+                // (13,13): error CS8801: Cannot use local variable or local function 'x' declared in a top-level
+                // statement in this context.
                 //         _ = x;
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -8856,7 +9038,8 @@ class B : A
                 parseOptions: DefaultParseOptions
             );
             comp.VerifyDiagnostics(
-                // (11,13): error CS8801: Cannot use local variable or local function 'x' declared in a top-level statement in this context.
+                // (11,13): error CS8801: Cannot use local variable or local function 'x' declared in a top-level
+                // statement in this context.
                 //         _ = x;
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -10273,7 +10456,8 @@ class C1
                 parseOptions: DefaultParseOptions
             );
             comp.VerifyEmitDiagnostics(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                // was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 // (1,1): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // return;
@@ -10312,7 +10496,8 @@ class C1
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound)
                     .WithArguments("System.Threading.Tasks.Task")
                     .WithLocation(1, 1),
-                // (1,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an entry point
+                // (1,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an
+                // entry point
                 // await Test();
                 Diagnostic(ErrorCode.WRN_InvalidMainSig, "await Test();")
                     .WithArguments("<top-level-statements-entry-point>")
@@ -10390,7 +10575,8 @@ return 11;
                     .WithLocation(1, 1),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                 Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1),
-                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an entry point
+                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an
+                // entry point
                 // await System.Threading.Tasks.Task.Factory.StartNew(() => 5L);
                 Diagnostic(
                         ErrorCode.WRN_InvalidMainSig,
@@ -10462,7 +10648,8 @@ return 11;
                     .WithLocation(1, 1),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                 Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1),
-                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an entry point
+                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an
+                // entry point
                 // await System.Threading.Tasks.Task.Factory.StartNew(() => "5");
                 Diagnostic(
                         ErrorCode.WRN_InvalidMainSig,
@@ -10510,7 +10697,8 @@ return 11;
                     .WithLocation(1, 1),
                 // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                 Diagnostic(ErrorCode.ERR_NoEntryPoint).WithLocation(1, 1),
-                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an entry point
+                // (2,1): warning CS0028: '<top-level-statements-entry-point>' has the wrong signature to be an
+                // entry point
                 // await System.Threading.Tasks.Task.Factory.StartNew(() => "5");
                 Diagnostic(
                         ErrorCode.WRN_InvalidMainSig,
@@ -12007,7 +12195,8 @@ for (Span<int> inner = stackalloc int[10];; inner = outer)
             );
 
             comp.VerifyDiagnostics(
-                // (7,13): error CS8352: Cannot use variable 'inner' in this context because it may expose referenced variables outside of their declaration scope
+                // (7,13): error CS8352: Cannot use variable 'inner' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //     outer = inner;
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "inner")
                     .WithArguments("inner")
@@ -12126,7 +12315,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
                     .WithLocation(2, 5),
-                // (7,13): error CS8801: Cannot use local variable or local function 'i' declared in a top-level statement in this context.
+                // (7,13): error CS8801: Cannot use local variable or local function 'i' declared in a top-level
+                // statement in this context.
                 //         _ = i;
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -12207,7 +12397,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M2")
                     .WithArguments("M2")
                     .WithLocation(4, 6),
-                // (9,9): error CS8801: Cannot use local variable or local function 'M1' declared in a top-level statement in this context.
+                // (9,9): error CS8801: Cannot use local variable or local function 'M1' declared in a top-level
+                // statement in this context.
                 //         M1();
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -12215,7 +12406,8 @@ class C
                     )
                     .WithArguments("M1")
                     .WithLocation(9, 9),
-                // (10,9): error CS8801: Cannot use local variable or local function 'M2' declared in a top-level statement in this context.
+                // (10,9): error CS8801: Cannot use local variable or local function 'M2' declared in a top-level
+                // statement in this context.
                 //         M2();
                 Diagnostic(
                         ErrorCode.ERR_SimpleProgramLocalIsReferencedOutsideOfTopLevelStatement,
@@ -12389,7 +12581,8 @@ class Program2
                 // (3,1): error CS8937: At least one top-level statement must be non-empty.
                 // ;
                 Diagnostic(ErrorCode.ERR_SimpleProgramIsEmpty, ";").WithLocation(3, 1),
-                // (7,17): warning CS7022: The entry point of the program is global code; ignoring 'Program2.Main(string[])' entry point.
+                // (7,17): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program2.Main(string[])' entry point.
                 //     static void Main(String[] args) {}
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program2.Main(string[])")
@@ -12544,7 +12737,8 @@ public class Program
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (4,14): error CS0260: Missing partial modifier on declaration of type 'Program'; another partial declaration of this type exists
+                // (4,14): error CS0260: Missing partial modifier on declaration of type 'Program'; another partial
+                // declaration of this type exists
                 // public class Program
                 Diagnostic(ErrorCode.ERR_MissingPartial, "Program")
                     .WithArguments("Program")
@@ -12633,7 +12827,8 @@ partial struct Program
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes, all structs, all record structs, or all interfaces
+                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes,
+                // all structs, all record structs, or all interfaces
                 // M();
                 Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "M")
                     .WithArguments("Program")
@@ -12669,7 +12864,8 @@ partial record Program
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes, all structs, all record structs, or all interfaces
+                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes,
+                // all structs, all record structs, or all interfaces
                 // M();
                 Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "M")
                     .WithArguments("Program")
@@ -12696,7 +12892,8 @@ partial interface Program
 
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes, all structs, all record structs, or all interfaces
+                // (2,1): error CS0261: Partial declarations of 'Program' must be all classes, all record classes,
+                // all structs, all record structs, or all interfaces
                 // System.Console.Write(42);
                 Diagnostic(ErrorCode.ERR_PartialTypeKindConflict, "System")
                     .WithArguments("Program")
@@ -12901,7 +13098,8 @@ partial class Program
             var comp = CreateCompilation(text);
 
             comp.VerifyDiagnostics(
-                // (6,24): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main(string[])' entry point.
+                // (6,24): warning CS7022: The entry point of the program is global code; ignoring
+                // 'Program.Main(string[])' entry point.
                 //     public static void Main(string[] args) { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main(string[])")
@@ -12924,7 +13122,8 @@ partial class Program
             var comp = CreateCompilation(text);
             var verifier = CompileAndVerify(comp, expectedOutput: "42");
             verifier.VerifyDiagnostics(
-                // (6,24): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()' entry point.
+                // (6,24): warning CS7022: The entry point of the program is global code; ignoring 'Program.Main()'
+                // entry point.
                 //     public static void Main() { }
                 Diagnostic(ErrorCode.WRN_MainIgnored, "Main")
                     .WithArguments("Program.Main()")
@@ -13105,7 +13304,8 @@ System.Console.Write(42);
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (3,16): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (3,16): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // System.Console.Write(42);
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "Write").WithLocation(3, 16),
                 // (3,22): error CS1026: ) expected
@@ -13128,10 +13328,12 @@ var x = 1;
 
             var comp = CreateCompilation(src);
             comp.VerifyDiagnostics(
-                // (3,1): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                // (3,1): error CS0825: The contextual keyword 'var' may only appear within a local variable
+                // declaration or in script code
                 // var x = 1;
                 Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(3, 1),
-                // (3,5): error CS0116: A namespace cannot directly contain members such as fields, methods or statements
+                // (3,5): error CS0116: A namespace cannot directly contain members such as fields, methods or
+                // statements
                 // var x = 1;
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "x").WithLocation(3, 5)
             );

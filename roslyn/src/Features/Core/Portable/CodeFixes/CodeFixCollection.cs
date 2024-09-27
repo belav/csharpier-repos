@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public ImmutableArray<CodeFix> Fixes { get; } = fixes.NullToEmpty();
 
         /// <summary>
-        /// Optional fix all context, which is non-null if the given <see cref="Provider"/> supports fix all occurrences code fix.
+        /// Optional fix all context, which is non-null if the given <see cref="Provider"/> supports fix all
+        // occurrences code fix.
         /// </summary>
         public FixAllState FixAllState { get; } = fixAllState;
         public ImmutableArray<FixAllScope> SupportedScopes { get; } = supportedScopes.NullToEmpty();

@@ -355,17 +355,17 @@ namespace System.Numerics.Tests
             Assert.True(d.Equals(d));
         }
 
-        /* Enable when size of Vector3 is correct
-        // A test to make sure these types are blittable directly into GPU buffer memory layouts
-        [Fact]
-        public unsafe void PlaneSizeofTest()
-        {
-            Assert.Equal(16, sizeof(Plane));
-            Assert.Equal(32, sizeof(Plane_2x));
-            Assert.Equal(20, sizeof(PlanePlusFloat));
-            Assert.Equal(40, sizeof(PlanePlusFloat_2x));
-        }
-        */
+/* Enable when size of Vector3 is correct
+// A test to make sure these types are blittable directly into GPU buffer memory layouts
+[Fact]
+public unsafe void PlaneSizeofTest()
+{
+Assert.Equal(16, sizeof(Plane));
+Assert.Equal(32, sizeof(Plane_2x));
+Assert.Equal(20, sizeof(PlanePlusFloat));
+Assert.Equal(40, sizeof(PlanePlusFloat_2x));
+}
+*/
 
         [Fact]
         public void PlaneToStringTest()

@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.PickMembers
         public readonly ImmutableArray<PickMembersOption> Options;
 
         /// <summary>
-        /// <see langword="true"/> if 'Select All' was chosen.  <see langword="false"/> if 'Deselect All' was chosen.
+        /// <see langword="true"/> if 'Select All' was chosen.  <see langword="false"/> if 'Deselect All'
+        // was chosen.
         /// </summary>
         public readonly bool SelectedAll;
 

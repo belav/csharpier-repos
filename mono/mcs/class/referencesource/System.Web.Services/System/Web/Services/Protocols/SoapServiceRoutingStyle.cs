@@ -6,13 +6,16 @@
 
 namespace System.Web.Services.Protocols
 {
-    /// <include file='doc\SoapServiceRoutingStyle.uex' path='docs/doc[@for="SoapServiceRoutingStyle"]/*' />
+    /// <include file='doc\SoapServiceRoutingStyle.uex'
+    // path='docs/doc[@for="SoapServiceRoutingStyle"]/*' />
     public enum SoapServiceRoutingStyle
     {
-        /// <include file='doc\SoapServiceRoutingStyle.uex' path='docs/doc[@for="SoapServiceRoutingStyle.SoapAction"]/*' />
+        /// <include file='doc\SoapServiceRoutingStyle.uex'
+        // path='docs/doc[@for="SoapServiceRoutingStyle.SoapAction"]/*' />
         SoapAction,
 
-        /// <include file='doc\SoapServiceRoutingStyle.uex' path='docs/doc[@for="SoapServiceRoutingStyle.MessageElement"]/*' />
+        /// <include file='doc\SoapServiceRoutingStyle.uex'
+        // path='docs/doc[@for="SoapServiceRoutingStyle.MessageElement"]/*' />
         RequestElement,
     }
 }

@@ -6,8 +6,10 @@ using Xunit.Sdk;
 
 namespace System.Linq.Expressions.Tests
 {
-    /// <summary>Forces tests to be carried out according to the order of their <see cref="TestOrderAttribute.Order"/>, with
-    /// those tests with no attribute happening in the same batch as those with an Order of zero.</summary>
+    /// <summary>Forces tests to be carried out according to the order of their <see
+    // cref="TestOrderAttribute.Order"/>, with
+    /// those tests with no attribute happening in the same batch as those with an Order of
+    // zero.</summary>
     internal class TestOrderer : ITestCaseOrderer
     {
         IEnumerable<TTestCase> ITestCaseOrderer.OrderTestCases<TTestCase>(

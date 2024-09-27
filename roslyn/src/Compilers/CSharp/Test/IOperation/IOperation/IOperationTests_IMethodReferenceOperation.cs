@@ -310,12 +310,14 @@ Block[B7] - Exit
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(7,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         m1 = c1.M1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.M1")
                     .WithArguments("C.M1()")
                     .WithLocation(7, 14),
-                // file.cs(8,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(8,14): error CS0176: Member 'C.M1()' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         m2 = (c1 ?? c2).M1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M1")
                     .WithArguments("C.M1()")

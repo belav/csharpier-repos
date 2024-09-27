@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Input nodes are the 'root' nodes in the graph, and get their values from the inputs of the driver state table
+    /// Input nodes are the 'root' nodes in the graph, and get their values from the inputs of the
+    // driver state table
     /// </summary>
     /// <typeparam name="T">The type of the input</typeparam>
     internal sealed class InputNode<T> : IIncrementalGeneratorNode<T>
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis
 
             var tableBuilder = graphState.CreateTableBuilder(previousTable, _name, _comparer);
 
-            // We always have no inputs steps into an InputNode, but we track the difference between "no inputs" (empty collection) and "no step information" (default value)
+            // We always have no inputs steps into an InputNode, but we track the difference between "no inputs"
+            // (empty collection) and "no step information" (default value)
             var noInputStepsStepInfo = tableBuilder.TrackIncrementalSteps
                 ? ImmutableArray<(IncrementalGeneratorRunStep, int)>.Empty
                 : default;
@@ -87,9 +89,12 @@ namespace Microsoft.CodeAnalysis
                     }
                     else if (inputItems.Length == previousTable.Count)
                     {
-                        // When the number of items matches the previous iteration, we use a heuristic to mark the input as modified
-                        // This allows us to correctly 'replace' items even when they aren't actually the same. In the case that the
-                        // item really isn't modified, but a new item, we still function correctly as we mostly treat them the same,
+                        // When the number of items matches the previous iteration, we use a heuristic to mark the input as
+                        // modified
+                        // This allows us to correctly 'replace' items even when they aren't actually the same. In the case
+                        // that the
+                        // item really isn't modified, but a new item, we still function correctly as we mostly treat them
+                        // the same,
                         // but will perform an extra comparison that is omitted in the pure 'added' case.
                         var modified = tableBuilder.TryModifyEntry(
                             inputItems[itemIndex],

@@ -128,7 +128,8 @@ public class StartupForDynamicOrder
                 ((string)values?["slug"])?.Split("/")?.LastOrDefault()?.Split(",")
                 ?? Array.Empty<string>();
 
-            // Go to index by default if the route doesn't follow the slug pattern, we want to make sure always match to
+            // Go to index by default if the route doesn't follow the slug pattern, we want to make sure always
+            // match to
             // test the order is applied
             var state = (TransformerState)State;
             var results = new RouteValueDictionary();

@@ -99,7 +99,8 @@ namespace System.DirectoryServices.ActiveDirectory
             {
                 //
                 // only for configurationset, we select a server, so we should not copy over that
-                // information, for all other types, this is either the same as name of the target or if the target is netbios name
+                // information, for all other types, this is either the same as name of the target or if the target
+                // is netbios name
                 // (for domain and forest) it could be the dns name. We should copy over this information.
                 //
                 this.serverName = context.serverName;
@@ -112,7 +113,8 @@ namespace System.DirectoryServices.ActiveDirectory
         public DirectoryContext(DirectoryContextType contextType)
         {
             //
-            // this constructor can only be called for DirectoryContextType.Forest or DirectoryContextType.Domain
+            // this constructor can only be called for DirectoryContextType.Forest or
+            // DirectoryContextType.Domain
             // since all other types require the name to be specified
             //
             if (
@@ -160,7 +162,8 @@ namespace System.DirectoryServices.ActiveDirectory
         )
         {
             //
-            // this constructor can only be called for DirectoryContextType.Forest or DirectoryContextType.Domain
+            // this constructor can only be called for DirectoryContextType.Forest or
+            // DirectoryContextType.Domain
             // since all other types require the name to be specified
             //
             if (
@@ -439,7 +442,8 @@ namespace System.DirectoryServices.ActiveDirectory
                 tempServerName = Utils.SplitServerNameAndPortNumber(context.Name!, out portNumber);
 
                 //
-                // this will validate that the name specified in the context is truely the name of a machine (and not of a domain)
+                // this will validate that the name specified in the context is truely the name of a machine (and
+                // not of a domain)
                 //
                 DirectoryEntry de = new DirectoryEntry(
                     "WinNT://" + tempServerName + ",computer",
@@ -695,7 +699,8 @@ namespace System.DirectoryServices.ActiveDirectory
             LsaLogonProcessSafeHandle lsaHandle;
 
             //
-            // since we are using safe handles, we don't need to explicitly call NativeMethods.LsaDeregisterLogonProcess(lsaHandle)
+            // since we are using safe handles, we don't need to explicitly call
+            // NativeMethods.LsaDeregisterLogonProcess(lsaHandle)
             //
             result = NativeMethods.LsaConnectUntrusted(out lsaHandle);
 
@@ -790,14 +795,16 @@ namespace System.DirectoryServices.ActiveDirectory
                 );
             }
 
-            // If we're running as a local user (i.e. NT AUTHORITY\LOCAL SYSTEM, IIS APPPOOL\APPPoolIdentity, etc.),
+            // If we're running as a local user (i.e. NT AUTHORITY\LOCAL SYSTEM, IIS APPPOOL\APPPoolIdentity,
+            // etc.),
             // domainName will be null and we fall back to the machine's domain
             domainName = GetDnsDomainName(domainName);
 
             if (domainName == null)
             {
                 //
-                // we should never get to this point here since we should have already verified that the context is valid
+                // we should never get to this point here since we should have already verified that the context is
+                // valid
                 // by the time we get to this point
                 //
                 throw new ActiveDirectoryOperationException(SR.ContextNotAssociatedWithDomain);

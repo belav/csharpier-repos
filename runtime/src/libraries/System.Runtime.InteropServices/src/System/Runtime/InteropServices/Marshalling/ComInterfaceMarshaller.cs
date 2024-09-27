@@ -30,7 +30,8 @@ namespace System.Runtime.InteropServices.Marshalling
             ?.Iid;
 
         /// <summary>
-        /// Convert a managed object to a COM interface pointer for the COM interface represented by <typeparamref name="T"/>.
+        /// Convert a managed object to a COM interface pointer for the COM interface represented by
+        // <typeparamref name="T"/>.
         /// </summary>
         /// <param name="managed">The managed object</param>
         /// <returns>The COM interface pointer</returns>
@@ -56,7 +57,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// </summary>
         /// <param name="unmanaged">The COM interface pointer</param>
         /// <remarks>
-        /// If the passed in COM interface pointer wraps a managed object, this method returns the underlying object.
+        /// If the passed in COM interface pointer wraps a managed object, this method returns the
+        // underlying object.
         /// </remarks>
         public static T? ConvertToManaged(void* unmanaged)
         {

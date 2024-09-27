@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.Logging
     public static class EventLoggerFactoryExtensions
     {
         /// <summary>
-        /// Adds an event logger. Use <paramref name="settings"/> to enable logging for specific <see cref="LogLevel"/>s.
+        /// Adds an event logger. Use <paramref name="settings"/> to enable logging for specific <see
+        // cref="LogLevel"/>s.
         /// </summary>
         /// <param name="factory">The extension method argument.</param>
         /// <param name="settings">The <see cref="EventLogSettings"/>.</param>
@@ -81,7 +82,8 @@ namespace Microsoft.Extensions.Logging
         }
 
         /// <summary>
-        /// Adds an event logger. Use <paramref name="settings"/> to enable logging for specific <see cref="LogLevel"/>s.
+        /// Adds an event logger. Use <paramref name="settings"/> to enable logging for specific <see
+        // cref="LogLevel"/>s.
         /// </summary>
         /// <param name="builder">The extension method argument.</param>
         /// <param name="settings">The <see cref="EventLogSettings"/>.</param>
@@ -102,7 +104,8 @@ namespace Microsoft.Extensions.Logging
         }
 
         /// <summary>
-        /// Adds an event logger. Use <paramref name="configure"/> to enable logging for specific <see cref="LogLevel"/>s.
+        /// Adds an event logger. Use <paramref name="configure"/> to enable logging for specific <see
+        // cref="LogLevel"/>s.
         /// </summary>
         /// <param name="builder">The extension method argument.</param>
         /// <param name="configure">A delegate to configure the <see cref="EventLogSettings"/>.</param>

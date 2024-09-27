@@ -19,17 +19,20 @@ public class HubOptions
     // for all available protocols.
 
     /// <summary>
-    /// Gets or sets the interval used by the server to timeout incoming handshake requests by clients. The default timeout is 15 seconds.
+    /// Gets or sets the interval used by the server to timeout incoming handshake requests by clients.
+    // The default timeout is 15 seconds.
     /// </summary>
     public TimeSpan? HandshakeTimeout { get; set; }
 
     /// <summary>
-    /// Gets or sets the interval used by the server to send keep alive pings to connected clients. The default interval is 15 seconds.
+    /// Gets or sets the interval used by the server to send keep alive pings to connected clients. The
+    // default interval is 15 seconds.
     /// </summary>
     public TimeSpan? KeepAliveInterval { get; set; }
 
     /// <summary>
-    /// Gets or sets the time window clients have to send a message before the server closes the connection. The default timeout is 30 seconds.
+    /// Gets or sets the time window clients have to send a message before the server closes the
+    // connection. The default timeout is 30 seconds.
     /// </summary>
     public TimeSpan? ClientTimeoutInterval { get; set; }
 
@@ -58,7 +61,8 @@ public class HubOptions
 
     /// <summary>
     /// By default a client is only allowed to invoke a single Hub method at a time.
-    /// Changing this property will allow clients to invoke multiple methods at the same time before queueing.
+    /// Changing this property will allow clients to invoke multiple methods at the same time before
+    // queueing.
     /// </summary>
     public int MaximumParallelInvocationsPerClient
     {
@@ -72,8 +76,10 @@ public class HubOptions
     }
 
     /// <summary>
-    /// When <see langword="false"/>, <see cref="IServiceProviderIsService"/> determines if a Hub method parameter will be injected from the DI container.
-    /// Parameters can be explicitly marked with an attribute that implements <see cref="IFromServiceMetadata"/> with or without this option set.
+    /// When <see langword="false"/>, <see cref="IServiceProviderIsService"/> determines if a Hub method
+    // parameter will be injected from the DI container.
+    /// Parameters can be explicitly marked with an attribute that implements <see
+    // cref="IFromServiceMetadata"/> with or without this option set.
     /// </summary>
     /// <remarks>
     /// False by default. Hub method arguments will be resolved from a DI container if possible.

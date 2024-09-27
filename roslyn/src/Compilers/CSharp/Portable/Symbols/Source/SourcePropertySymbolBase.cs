@@ -63,7 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private SynthesizedSealedPropertyAccessor _lazySynthesizedSealedAccessor;
         private CustomAttributesBag<CSharpAttributeData> _lazyCustomAttributesBag;
 
-        // CONSIDER: if the parameters were computed lazily, ParameterCount could be overridden to fall back on the syntax (as in SourceMemberMethodSymbol).
+        // CONSIDER: if the parameters were computed lazily, ParameterCount could be overridden to fall back
+        // on the syntax (as in SourceMemberMethodSymbol).
 
         public Location Location { get; }
 
@@ -571,7 +572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 #nullable enable
         /// <summary>
         /// The method is called at the end of <see cref="SourcePropertySymbolBase"/> constructor.
-        /// The implementation may depend only on information available from the <see cref="SourcePropertySymbolBase"/> type.
+        /// The implementation may depend only on information available from the <see
+        // cref="SourcePropertySymbolBase"/> type.
         /// </summary>
         protected abstract SourcePropertyAccessorSymbol CreateGetAccessorSymbol(
             bool isAutoPropertyAccessor,
@@ -580,7 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The method is called at the end of <see cref="SourcePropertySymbolBase"/> constructor.
-        /// The implementation may depend only on information available from the <see cref="SourcePropertySymbolBase"/> type.
+        /// The implementation may depend only on information available from the <see
+        // cref="SourcePropertySymbolBase"/> type.
         /// </summary>
         protected abstract SourcePropertyAccessorSymbol CreateSetAccessorSymbol(
             bool isAutoPropertyAccessor,
@@ -1151,7 +1154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
         }
 
-        // Separate these checks out of FindExplicitlyImplementedProperty because they depend on the accessor symbols,
+        // Separate these checks out of FindExplicitlyImplementedProperty because they depend on the
+        // accessor symbols,
         // which depend on the explicitly implemented property
         private void CheckExplicitImplementationAccessor(
             MethodSymbol thisAccessor,
@@ -1288,7 +1292,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 : AttributeLocation.Property;
 
         /// <summary>
-        /// Returns a bag of custom attributes applied on the property and data decoded from well-known attributes. Returns null if there are no attributes.
+        /// Returns a bag of custom attributes applied on the property and data decoded from well-known
+        // attributes. Returns null if there are no attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1325,7 +1330,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         /// <remarks>
         /// NOTE: This method should always be kept as a sealed override.
-        /// If you want to override attribute binding logic for a sub-class, then override <see cref="GetAttributesBag"/> method.
+        /// If you want to override attribute binding logic for a sub-class, then override <see
+        // cref="GetAttributesBag"/> method.
         /// </remarks>
         public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
@@ -1333,7 +1339,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no
+        // applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1350,7 +1357,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from special early bound well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from special early bound well-known attributes applied to the symbol or
+        // null if there are no applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -1528,7 +1536,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal override ObsoleteAttributeData ObsoleteAttributeData
         {

@@ -136,7 +136,8 @@ namespace System
 
         private IntPtr ArgCookie; // Cookie from the EE.
 
-        // The SigPointer structure consists of the following members.  (Note: this is an inline native SigPointer data type)
+        // The SigPointer structure consists of the following members.  (Note: this is an inline native
+        // SigPointer data type)
         private IntPtr sigPtr; // Pointer to remaining signature.
         private IntPtr sigPtrLen; // Remaining length of the pointer
 

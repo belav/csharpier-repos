@@ -92,15 +92,15 @@ namespace Mono.Debugger.Soft
             return retval;
         }
 
-        /*
-         * Construct a normal object from the value, so accessing the cattr doesn't
-         * require remoting calls.
-         */
+/*
+* Construct a normal object from the value, so accessing the cattr doesn't
+* require remoting calls.
+*/
         static CustomAttributeTypedArgumentMirror CreateArg(VirtualMachine vm, ValueImpl vi)
         {
             object val;
 
-            /* Instead of receiving a mirror of the Type object, we receive the id of the type */
+/* Instead of receiving a mirror of the Type object, we receive the id of the type */
             if (vi.Type == (ElementType)ValueTypeId.VALUE_TYPE_ID_TYPE)
                 val = vm.GetType(vi.Id);
             else

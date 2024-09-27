@@ -285,7 +285,8 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
         }
 
         /// <summary>
-        /// Checks any expression for a TableExpression, and eventually replaces it with the convenient columns selection
+        /// Checks any expression for a TableExpression, and eventually replaces it with the convenient
+        // columns selection
         /// </summary>
         /// <param name="expression"></param>
         /// <param name="builderContext"></param>

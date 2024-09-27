@@ -86,7 +86,8 @@ namespace System.Data.Common.Utils
             valueList.Add(value);
         }
 
-        // effects: Adds <key, value> for each value in values to this. If the entry already exists, another one is added
+        // effects: Adds <key, value> for each value in values to this. If the entry already exists, another
+        // one is added
         internal void AddRange(TKey key, IEnumerable<TValue> values)
         {
             foreach (TValue value in values)

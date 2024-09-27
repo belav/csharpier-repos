@@ -34,7 +34,8 @@
 
 //
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 // Files:
 //  - mscorlib/system/valuetype.cs
@@ -51,10 +52,10 @@ namespace System
     [ComVisible(true)]
     public abstract class ValueType
     {
-        /*
-         * Caution: Fields added to ValueType can mess with sub class layouts.
-         * Causing bugs that appear completely unrelated as #30060
-         */
+/*
+* Caution: Fields added to ValueType can mess with sub class layouts.
+* Causing bugs that appear completely unrelated as #30060
+*/
         private static class Internal
         {
             public static int hash_code_of_ptr_seed = 0;
@@ -139,9 +140,9 @@ namespace System
 
             if (seed == 0)
             {
-                /* We use the first non-0 pointer as the seed, all hashcodes will be
-                 * based off that. This is to make sure that we only reveal relative
-                 * memory addresses and never absolute ones. */
+/* We use the first non-0 pointer as the seed, all hashcodes will be
+* based off that. This is to make sure that we only reveal relative
+* memory addresses and never absolute ones. */
                 seed = hash_code;
                 Interlocked.CompareExchange(ref Internal.hash_code_of_ptr_seed, seed, 0);
                 seed = Internal.hash_code_of_ptr_seed;

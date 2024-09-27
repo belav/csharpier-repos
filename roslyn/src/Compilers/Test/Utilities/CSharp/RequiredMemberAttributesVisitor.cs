@@ -68,7 +68,8 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
         _builder.AppendLine(symbol.ToDisplayString(DisplayFormat));
         _reported.Add(symbol);
 
-        // If attributes aren't filtered out, this will print extra data and cause an error in test assertion.
+        // If attributes aren't filtered out, this will print extra data and cause an error in test
+        // assertion.
         base.ReportSymbol(symbol);
     }
 

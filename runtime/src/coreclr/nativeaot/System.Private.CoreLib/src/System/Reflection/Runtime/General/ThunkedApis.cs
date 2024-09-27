@@ -30,7 +30,8 @@ namespace System.Reflection.Runtime.Assemblies
         [RequiresUnreferencedCode("Types might be removed")]
         public sealed override Type[] GetTypes() => DefinedTypes.ToArray();
 
-        // "copiedName" only affects whether CodeBase is set to the assembly location before or after the shadow-copy.
+        // "copiedName" only affects whether CodeBase is set to the assembly location before or after the
+        // shadow-copy.
         // That concept is meaningless on .NET Native.
         public sealed override AssemblyName GetName(bool copiedName) => GetName();
 
@@ -103,7 +104,8 @@ namespace System.Reflection.Runtime.MethodInfos
         public sealed override MethodImplAttributes GetMethodImplementationFlags() =>
             MethodImplementationFlags;
 
-        // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything as SecurityCritical by fiat.
+        // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything
+        // as SecurityCritical by fiat.
         public sealed override bool IsSecurityCritical => true;
         public sealed override bool IsSecuritySafeCritical => false;
         public sealed override bool IsSecurityTransparent => false;
@@ -135,7 +137,8 @@ namespace System.Reflection.Runtime.MethodInfos
         public sealed override ICustomAttributeProvider ReturnTypeCustomAttributes =>
             ReturnParameter;
 
-        // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything as SecurityCritical by fiat.
+        // Partial trust doesn't exist in Aot so these legacy apis are meaningless. Will report everything
+        // as SecurityCritical by fiat.
         public sealed override bool IsSecurityCritical => true;
         public sealed override bool IsSecuritySafeCritical => false;
         public sealed override bool IsSecurityTransparent => false;

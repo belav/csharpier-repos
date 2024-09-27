@@ -38,7 +38,8 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// When the FSW Site is set to a nonnull Site with DesignMode enabled, Event raising will be set to true
+        /// When the FSW Site is set to a nonnull Site with DesignMode enabled, Event raising will be set to
+        // true
         /// </summary>
         [Fact]
         public void Site_NonNullSetEnablesRaisingEvents()
@@ -159,7 +160,8 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Calling BeginInit and EndInit in a loop is fine. If events are enabled, they will start and stop in the loop as well.
+        /// Calling BeginInit and EndInit in a loop is fine. If events are enabled, they will start and stop
+        // in the loop as well.
         /// </summary>
         [Fact]
         public void BeginEndInit_Repeated()
@@ -234,7 +236,8 @@ namespace System.IO.Tests
         }
 
         /// <summary>
-        /// Stopping events during the initialization period will prevent the watcher from restarting after EndInit()
+        /// Stopping events during the initialization period will prevent the watcher from restarting after
+        // EndInit()
         /// </summary>
         [Fact]
         public void EndRaisingEventsDuringPause()

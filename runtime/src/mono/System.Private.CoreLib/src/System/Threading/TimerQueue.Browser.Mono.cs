@@ -21,7 +21,8 @@ namespace System.Threading
         private static List<TimerQueue>? s_scheduledTimersToFire;
         private static long s_shortestDueTimeMs = long.MaxValue;
 
-        // this means that it's in the s_scheduledTimers collection, not that it's the one which would run on the next TimeoutCallback
+        // this means that it's in the s_scheduledTimers collection, not that it's the one which would run
+        // on the next TimeoutCallback
         private bool _isScheduled;
         private long _scheduledDueTimeMs;
 

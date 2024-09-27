@@ -197,7 +197,8 @@ namespace MonoTests.System.Web.Configuration
         [Test]
         [Category("NotWorking")]
         [ExpectedException(typeof(InvalidOperationException))]
-        // InvalidOperationException (WebConfigurationManager.GetSection(sectionName,path) can only be called from within a web application.)
+        // InvalidOperationException (WebConfigurationManager.GetSection(sectionName,path) can only be
+        // called from within a web application.)
         // thrown from WebConfigurationManager.GetSection
         public void GetSection_2()
         {

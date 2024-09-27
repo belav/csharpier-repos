@@ -36,8 +36,10 @@ namespace Microsoft.CodeAnalysis
         /// Return true if the bag is completely empty - not even containing void diagnostics.
         /// </summary>
         /// <remarks>
-        /// This exists for short-circuiting purposes. Use <see cref="System.Linq.Enumerable.Any{T}(IEnumerable{T})"/>
-        /// to get a resolved Tuple(Of NamedTypeSymbol, ImmutableArray(Of Diagnostic)) (i.e. empty after eliminating void diagnostics).
+        /// This exists for short-circuiting purposes. Use <see
+        // cref="System.Linq.Enumerable.Any{T}(IEnumerable{T})"/>
+        /// to get a resolved Tuple(Of NamedTypeSymbol, ImmutableArray(Of Diagnostic)) (i.e. empty after
+        // eliminating void diagnostics).
         /// </remarks>
         public bool IsEmptyWithoutResolution
         {
@@ -53,13 +55,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if the bag has any diagnostics with DefaultSeverity=Error. Does not consider warnings or informationals
+        /// Returns true if the bag has any diagnostics with DefaultSeverity=Error. Does not consider
+        // warnings or informationals
         /// or warnings promoted to error via /warnaserror.
         /// </summary>
         /// <remarks>
         /// Resolves any lazy diagnostics in the bag.
         ///
-        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
+        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use
+        // bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
         public bool HasAnyErrors()
@@ -81,13 +85,15 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if the bag has any non-lazy diagnostics with DefaultSeverity=Error. Does not consider warnings or informationals
+        /// Returns true if the bag has any non-lazy diagnostics with DefaultSeverity=Error. Does not
+        // consider warnings or informationals
         /// or warnings promoted to error via /warnaserror.
         /// </summary>
         /// <remarks>
         /// Does not resolve any lazy diagnostics in the bag.
         ///
-        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
+        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use
+        // bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
         internal bool HasAnyResolvedErrors()
@@ -168,7 +174,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Seal the bag so no further errors can be added, while clearing it and returning the old set of errors.
+        /// Seal the bag so no further errors can be added, while clearing it and returning the old set of
+        // errors.
         /// Return the bag to the pool.
         /// </summary>
         public ImmutableArray<TDiagnostic> ToReadOnlyAndFree<TDiagnostic>()
@@ -222,7 +229,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <remarks>
-        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use bags to communicate -
+        /// Generally, this should only be called by the creator (modulo pooling) of the bag (i.e. don't use
+        // bags to communicate -
         /// if you need more info, pass more info).
         /// </remarks>
         public IEnumerable<Diagnostic> AsEnumerable()

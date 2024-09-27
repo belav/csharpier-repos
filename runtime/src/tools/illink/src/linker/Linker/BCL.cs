@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using ILLink.Shared.TypeSystemProxy;
 using Mono.Cecil;
@@ -80,7 +81,8 @@ namespace Mono.Linker
                     continue;
 
                 TypeDefinition resolvedType = corlib.MainModule.GetType(ns, name);
-                // The assembly could be a facade with type forwarders, in which case we don't find the type in this assembly.
+                // The assembly could be a facade with type forwarders, in which case we don't find the type in this
+                // assembly.
                 if (resolvedType != null)
                     return resolvedType;
             }

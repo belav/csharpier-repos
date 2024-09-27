@@ -79,7 +79,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         [Fact]
-        //[Variation(Desc = "TFS_470021 Unexpected local particle qualified name when chameleon schema is added to set")]
+        //[Variation(Desc = "TFS_470021 Unexpected local particle qualified name when chameleon schema is
+        // added to set")]
         public void TFS_470021()
         {
             string cham =
@@ -131,7 +132,8 @@ namespace System.Xml.XmlSchemaTests
                 ss.ValidationEventHandler += new ValidationEventHandler(ValidationCallback);
 
                 ss.Add(null, XmlReader.Create(new StringReader(cham)));
-                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml validation.
+                // TempDirectory path must end with a DirectorySeratorChar, otherwise it will throw in the Xml
+                // validation.
                 var settings = new XmlReaderSettings() { XmlResolver = new XmlUrlResolver() };
                 ss.Add(null, XmlReader.Create(new StringReader(main), settings, tempDirectoryPath));
                 ss.Compile();

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
@@ -10,7 +11,8 @@ namespace ILLink.RoslynAnalyzer
     public static class ISymbolExtensions
     {
         /// <summary>
-        /// Returns true if symbol <see paramref="symbol"/> has an attribute with name <see paramref="attributeName"/>.
+        /// Returns true if symbol <see paramref="symbol"/> has an attribute with name <see
+        // paramref="attributeName"/>.
         /// </summary>
         internal static bool HasAttribute(this ISymbol symbol, string attributeName)
         {

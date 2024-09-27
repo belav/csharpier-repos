@@ -28,18 +28,24 @@ namespace System.Data.EntityModel.SchemaObjectModel
         // this is what we should be doing for CDM schemas
         // the RegEx for valid identifiers are taken from the C# Language Specification (2.4.2 Identifiers)
         // (except that we exclude _ as a valid starting character).
-        // This results in a somewhat smaller set of identifier from what System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier
-        // allows. Not all identifiers allowed by IsValidLanguageIndependentIdentifier are valid in C#.IsValidLanguageIndependentIdentifier allows:
-        //    Mn, Mc, and Pc as a leading character (which the spec and C# (at least for some Mn and Mc characters) do not allow)
-        //    characters that Char.GetUnicodeCategory says are in Nl and Cf but which the RegEx does not accept (and which C# does allow).
+        // This results in a somewhat smaller set of identifier from what
+        // System.CodeDom.Compiler.CodeGenerator.IsValidLanguageIndependentIdentifier
+        // allows. Not all identifiers allowed by IsValidLanguageIndependentIdentifier are valid in
+        // C#.IsValidLanguageIndependentIdentifier allows:
+        //    Mn, Mc, and Pc as a leading character (which the spec and C# (at least for some Mn and Mc
+        // characters) do not allow)
+        //    characters that Char.GetUnicodeCategory says are in Nl and Cf but which the RegEx does not
+        // accept (and which C# does allow).
         //
-        // we could create the StartCharacterExp and OtherCharacterExp dynamically to force inclusion of the missing Nl and Cf characters...
+        // we could create the StartCharacterExp and OtherCharacterExp dynamically to force inclusion of the
+        // missing Nl and Cf characters...
         private const string StartCharacterExp = @"[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Lm}\p{Nl}]";
         private const string OtherCharacterExp =
             @"[\p{Ll}\p{Lu}\p{Lt}\p{Lo}\p{Lm}\p{Nl}\p{Mn}\p{Mc}\p{Nd}\p{Pc}\p{Cf}]";
         private const string NameExp = StartCharacterExp + OtherCharacterExp + "{0,}";
 
-        //private static Regex ValidDottedName=new Regex(@"^"+NameExp+@"(\."+NameExp+@"){0,}$",RegexOptions.Singleline);
+        //private static Regex ValidDottedName=new
+        // Regex(@"^"+NameExp+@"(\."+NameExp+@"){0,}$",RegexOptions.Singleline);
         private static Regex UndottedNameValidator = new Regex(
             @"^" + NameExp + @"$",
             RegexOptions.Singleline | RegexOptions.Compiled

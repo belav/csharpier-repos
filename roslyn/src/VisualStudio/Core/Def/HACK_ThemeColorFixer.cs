@@ -23,7 +23,8 @@ namespace Microsoft.VisualStudio.LanguageServices
     /// editor classification format map unless a classification type is registered as a font and
     /// color item in that format map's font and color category. So, for example, the "Keyword"
     /// classification type in the "tooltip" classification format map is never is never updated
-    /// from its default blue. As a work around, we listen to <see cref="IClassificationFormatMap.ClassificationFormatMappingChanged"/>
+    /// from its default blue. As a work around, we listen to <see
+    // cref="IClassificationFormatMap.ClassificationFormatMappingChanged"/>
     /// and update the classification format maps that we care about.
     /// </summary>
     [Export(typeof(IWpfTextViewConnectionListener))]
@@ -74,8 +75,10 @@ namespace Microsoft.VisualStudio.LanguageServices
                     "tooltip"
                 );
 
-                // We have features that would like to classify the contents of strings (for example, as regex/json, or even
-                // as C# code itself).  To ensure that the classifications provided for the string show up over the string
+                // We have features that would like to classify the contents of strings (for example, as regex/json,
+                // or even
+                // as C# code itself).  To ensure that the classifications provided for the string show up over the
+                // string
                 // literal, we reprioritize the 'string literal' classification to have the lowest priority of all
                 // classifications.
                 DeprioritizeStringClassification(
@@ -110,7 +113,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             string typeName
         )
         {
-            // No better option (According to DPugh) than bubble sorting this classification backwards to the start of
+            // No better option (According to DPugh) than bubble sorting this classification backwards to the
+            // start of
             // the list.  Use a batch-update though to make this only do updates once.
             var classificationType = _classificationTypeRegistryService.GetClassificationType(
                 typeName
@@ -118,7 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices
             if (classificationType is null)
                 return;
 
-            // We're only changing StringLiteral and VerbatimStringLiteral.  Once those are both at the start of the
+            // We're only changing StringLiteral and VerbatimStringLiteral.  Once those are both at the start of
+            // the
             // list, we don't have to do anything else with them.
             var index = formatMap.CurrentPriorityOrder.IndexOf(classificationType);
             if (index <= 1)

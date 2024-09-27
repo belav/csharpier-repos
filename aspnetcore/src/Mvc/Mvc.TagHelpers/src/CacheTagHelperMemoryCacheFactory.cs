@@ -8,14 +8,16 @@ namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
 /// A factory for <see cref="IMemoryCache"/>s configured using <see cref="CacheTagHelperOptions"/>.
-/// <see cref="CacheTagHelper"/> uses this factory to set its <see cref="CacheTagHelper.MemoryCache"/>.
+/// <see cref="CacheTagHelper"/> uses this factory to set its <see
+// cref="CacheTagHelper.MemoryCache"/>.
 /// </summary>
 public class CacheTagHelperMemoryCacheFactory
 {
     /// <summary>
     /// Creates a new <see cref="CacheTagHelperMemoryCacheFactory"/>.
     /// </summary>
-    /// <param name="options">The <see cref="CacheTagHelperOptions"/> to apply to the <see cref="Cache"/>.</param>
+    /// <param name="options">The <see cref="CacheTagHelperOptions"/> to apply to the <see
+    // cref="Cache"/>.</param>
     public CacheTagHelperMemoryCacheFactory(IOptions<CacheTagHelperOptions> options)
     {
         Cache = new MemoryCache(

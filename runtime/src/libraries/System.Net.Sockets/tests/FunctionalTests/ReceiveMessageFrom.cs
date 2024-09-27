@@ -119,7 +119,8 @@ namespace System.Net.Sockets.Tests
             {
                 // [ActiveIssue("https://github.com/dotnet/runtime/issues/47335")]
                 // accept() will create a (seemingly) DualMode socket on Mac,
-                // but since recvmsg() does not work with DualMode on that OS, we throw PNSE CheckDualModeReceiveSupport().
+                // but since recvmsg() does not work with DualMode on that OS, we throw PNSE
+                // CheckDualModeReceiveSupport().
                 // Weirdly, the flag is readable, but an attempt to write it leads to EINVAL.
                 // The best option seems to be to skip this test for the Mac+IPV6 case
                 return;
@@ -318,7 +319,8 @@ namespace System.Net.Sockets.Tests
             socket.Shutdown(shutdown);
 
             // [ActiveIssue("https://github.com/dotnet/runtime/issues/47469")]
-            // Shutdown(Both) does not seem to take immediate effect for Receive(Message)From in a consistent manner, trying to workaround with a delay:
+            // Shutdown(Both) does not seem to take immediate effect for Receive(Message)From in a consistent
+            // manner, trying to workaround with a delay:
             if (shutdown == SocketShutdown.Both)
                 await Task.Delay(50);
 

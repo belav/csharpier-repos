@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             private ProjectAnalyzerStateSets GetOrCreateProjectStateSets(Project project)
             {
                 // if we can't use cached one, we will create a new analyzer map. which is a bit of waste since
-                // we will create new StateSet for all analyzers. but since this only happens when project analyzer references
+                // we will create new StateSet for all analyzers. but since this only happens when project analyzer
+                // references
                 // are changed, I believe it is acceptable to have a bit of waste for simplicity.
                 return TryGetProjectStateSets(project) ?? CreateProjectStateSets(project);
             }

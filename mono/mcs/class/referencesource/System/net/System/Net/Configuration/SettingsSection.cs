@@ -247,7 +247,8 @@ namespace System.Net.Configuration
             }
         }
 
-        // This method is required - it gets called through reflection, matching all the other XxxSectionInternal classes.
+        // This method is required - it gets called through reflection, matching all the other
+        // XxxSectionInternal classes.
         // This one gets it fresh for each call.  Generally it shouldn't be used.
         internal static SettingsSectionInternal GetSection()
         {

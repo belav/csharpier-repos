@@ -56,7 +56,8 @@ namespace Microsoft.Extensions.Logging
                         && activity.TagObjects.GetEnumerator().MoveNext()
                     )
                     {
-                        // As TagObjects is a IEnumerable<KeyValuePair<string, object?>> this can be used directly as a scope.
+                        // As TagObjects is a IEnumerable<KeyValuePair<string, object?>> this can be used directly as a
+                        // scope.
                         // We do this to safe the allocation of a wrapper object.
                         callback(activity.TagObjects, state);
                     }
@@ -68,7 +69,8 @@ namespace Microsoft.Extensions.Logging
                         if (baggage.GetEnumerator().MoveNext())
                         {
                             // For the baggage a wrapper object is necessary because we need to be able to overwrite ToString().
-                            // In contrast to the TagsObject, Baggage doesn't have one underlining type where we can do this overwrite.
+                            // In contrast to the TagsObject, Baggage doesn't have one underlining type where we can do this
+                            // overwrite.
                             ActivityBaggageLogScopeWrapper scope =
                                 GetOrCreateActivityBaggageLogScopeWrapper(activity, baggage);
                             callback(scope, state);

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -143,7 +144,8 @@ namespace System.Web.Http
         [Fact]
         public void Initialize_In_InheritenceHierarchy()
         {
-            // Verifies that initialization is run in order with , and that they all mutate on the same descriptor object
+            // Verifies that initialization is run in order with , and that they all mutate on the same
+            // descriptor object
             HttpConfiguration config = new HttpConfiguration();
 
             // Act.
@@ -169,7 +171,8 @@ namespace System.Web.Http
         [Fact]
         public void Initialize_In_InheritenceHierarchy_Branching()
         {
-            // Verifies that initialization is run in order with, and that they all mutate on the same descriptor object
+            // Verifies that initialization is run in order with, and that they all mutate on the same
+            // descriptor object
             HttpConfiguration config = new HttpConfiguration();
 
             // Act.

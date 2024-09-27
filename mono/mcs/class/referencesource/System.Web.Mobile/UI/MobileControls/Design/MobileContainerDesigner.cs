@@ -50,7 +50,8 @@ namespace System.Web.UI.Design.MobileControls
 
         /// <summary>
         ///    <para>
-        ///       Initializes an instance of the <see cref='System.Web.UI.Design.MobileControls.MobileContainerDesigner'/> class.
+        ///       Initializes an instance of the <see
+        // cref='System.Web.UI.Design.MobileControls.MobileContainerDesigner'/> class.
         ///    </para>
         /// </summary>
         internal MobileContainerDesigner()

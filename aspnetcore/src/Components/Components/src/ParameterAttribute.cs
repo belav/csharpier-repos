@@ -25,7 +25,9 @@ public sealed class ParameterAttribute : Attribute
     /// </para>
     /// <para>
     /// <see cref="CaptureUnmatchedValues"/> should only be applied to parameters of a type that
-    /// can be used with <see cref="RenderTreeBuilder.AddMultipleAttributes(int, System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{string, System.Object}})"/>
+    /// can be used with <see cref="RenderTreeBuilder.AddMultipleAttributes(int,
+    // System.Collections.Generic.IEnumerable{System.Collections.Generic.KeyValuePair{string,
+    // System.Object}})"/>
     /// such as <see cref="Dictionary{String, Object}"/>.
     /// </para>
     /// </remarks>

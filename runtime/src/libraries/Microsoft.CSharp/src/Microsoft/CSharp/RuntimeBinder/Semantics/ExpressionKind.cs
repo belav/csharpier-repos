@@ -37,7 +37,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         NamedArgumentSpecification,
 
         /***************************************************************************************************
-            Ones below here are not used to create actual expr types, only EK_ values.
+        Ones below here are not used to create actual expr types, only EK_ values.
         ***************************************************************************************************/
         ExpressionKindCount,
         EqualsParam, // this is only used as a parameter, no actual exprs are constructed with it

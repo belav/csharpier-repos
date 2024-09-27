@@ -93,7 +93,8 @@ namespace Microsoft.Interop
             {
                 (string managedIdentifier, string nativeIdentifier) = context.GetIdentifiers(info);
 
-                // fixed (void* <nativeIdentifier> = &<getPinnableReferenceType>.GetPinnableReference(<managedIdentifier>))
+                // fixed (void* <nativeIdentifier> =
+                // &<getPinnableReferenceType>.GetPinnableReference(<managedIdentifier>))
                 yield return FixedStatement(
                     VariableDeclaration(
                         PointerType(PredefinedType(Token(SyntaxKind.VoidKeyword))),

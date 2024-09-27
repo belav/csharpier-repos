@@ -3,15 +3,16 @@
 
 // Adapted from fasta C# .NET Core program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=fasta&lang=csharpcore&id=1
-// aka (as of 2017-09-01) rev 1.1 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/fasta/fasta.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.1 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/fasta/fasta.csharp?root=benchmarksgame&view=log
 // Best-scoring C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-  http://benchmarksgame.alioth.debian.org/
+http://benchmarksgame.alioth.debian.org/
 
-  contributed by Serge Smith
-  further optimized (rewrote threading, random generation loop) by Jan de Vaan
-  modified by Josh Goldfoot (fasta-repeat buffering)
+contributed by Serge Smith
+further optimized (rewrote threading, random generation loop) by Jan de Vaan
+modified by Josh Goldfoot (fasta-repeat buffering)
 */
 
 using System;
@@ -159,8 +160,8 @@ namespace BenchmarksGame
             byte[] descStr = Encoding.ASCII.GetBytes(">" + id + " " + desc + "\n");
             s.Write(descStr, 0, descStr.Length);
 
-            /* JG: fasta_repeat repeats every len(alu) * line-length = 287 * 61 = 17507 characters.
-               So, calculate this once, then just print that buffer over and over. */
+/* JG: fasta_repeat repeats every len(alu) * line-length = 287 * 61 = 17507 characters.
+So, calculate this once, then just print that buffer over and over. */
 
             byte[] sequence;
             int sequenceLength;

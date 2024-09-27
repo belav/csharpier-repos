@@ -88,7 +88,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         /// <summary>
         /// Presses the specified button.
-        /// The button is identified using its automation ID; see <see cref="PressButtonWithNameAsync(JoinableTaskFactory, IntPtr, string, string, CancellationToken)"/>
+        /// The button is identified using its automation ID; see <see
+        // cref="PressButtonWithNameAsync(JoinableTaskFactory, IntPtr, string, string, CancellationToken)"/>
         /// for the equivalent method that finds the button by name.
         /// </summary>
         public static async Task PressButtonAsync(
@@ -114,7 +115,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         /// <summary>
         /// Presses the specified button.
-        /// The button is identified using its name; see <see cref="PressButtonAsync(JoinableTaskFactory, IntPtr, string, string, CancellationToken)"/>
+        /// The button is identified using its name; see <see cref="PressButtonAsync(JoinableTaskFactory,
+        // IntPtr, string, string, CancellationToken)"/>
         /// for the equivalent methods that finds the button by automation ID.
         /// </summary>
         public static async Task PressButtonWithNameAsync(
@@ -138,7 +140,8 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
 
         /// <summary>
         /// Presses the specified button from a legacy dialog that has no AutomationId.
-        /// The button is identified using its name; see <see cref="PressButtonAsync(JoinableTaskFactory, IntPtr, string, string, CancellationToken)"/>
+        /// The button is identified using its name; see <see cref="PressButtonAsync(JoinableTaskFactory,
+        // IntPtr, string, string, CancellationToken)"/>
         /// for the equivalent methods that finds the button by automation ID.
         /// </summary>
         public static async Task PressButtonWithNameFromDialogWithNameAsync(

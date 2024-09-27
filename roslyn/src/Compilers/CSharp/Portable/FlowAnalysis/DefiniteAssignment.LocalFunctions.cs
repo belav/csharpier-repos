@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <remarks>
         /// Specifying the slot manually may be necessary if the symbol is a field,
-        /// in which case <see cref="LocalDataFlowPass{TLocalState, TLocalFunctionState}.VariableSlot(Symbol, int)"/>
+        /// in which case <see cref="LocalDataFlowPass{TLocalState,
+        // TLocalFunctionState}.VariableSlot(Symbol, int)"/>
         /// will not know which containing slot to look for.
         /// </remarks>
         private void CheckIfAssignedDuringLocalFunctionReplay(

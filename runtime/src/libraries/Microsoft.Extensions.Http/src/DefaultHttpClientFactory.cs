@@ -37,7 +37,8 @@ namespace Microsoft.Extensions.Http
         // We use a new timer for each regular cleanup cycle, protected with a lock. Note that this scheme
         // doesn't give us anything to dispose, as the timer is started/stopped as needed.
         //
-        // There's no need for the factory itself to be disposable. If you stop using it, eventually everything will
+        // There's no need for the factory itself to be disposable. If you stop using it, eventually
+        // everything will
         // get reclaimed.
         private Timer? _cleanupTimer;
         private readonly object _cleanupTimerLock;
@@ -104,7 +105,8 @@ namespace Microsoft.Extensions.Http
             // We want to prevent a circular depencency between ILoggerFactory and IHttpClientFactory, in case
             // any of ILoggerProvider instances use IHttpClientFactory to send logs to an external server.
             // Logger will be created during the first ExpiryTimer_Tick execution. Lazy guarantees thread safety
-            // to prevent creation of unnecessary ILogger objects in case several handlers expired at the same time.
+            // to prevent creation of unnecessary ILogger objects in case several handlers expired at the same
+            // time.
             _logger = new Lazy<ILogger>(
                 () =>
                     _services
@@ -161,6 +163,7 @@ namespace Microsoft.Extensions.Http
                 builder.Name = name;
 
                 // This is similar to the initialization pattern in:
+                //
                 // https://github.com/aspnet/Hosting/blob/e892ed8bbdcd25a0dafc1850033398dc57f65fe1/src/Microsoft.AspNetCore.Hosting/Internal/WebHost.cs#L188
                 Action<HttpMessageHandlerBuilder> configure = Configure;
                 for (int i = _filters.Length - 1; i >= 0; i--)
@@ -194,7 +197,8 @@ namespace Microsoft.Extensions.Http
                         options.HttpMessageHandlerBuilderActions[i](b);
                     }
 
-                    // Logging is added separately in the end. But for now it should be still possible to override it via filters...
+                    // Logging is added separately in the end. But for now it should be still possible to override it
+                    // via filters...
                     foreach (
                         Action<HttpMessageHandlerBuilder> action in options.LoggingBuilderActions
                     )
@@ -232,7 +236,8 @@ namespace Microsoft.Extensions.Http
             // However we haven't dropped our strong reference to the handler, so we can't yet determine if
             // there are still any other outstanding references (we know there is at least one).
             //
-            // We use a different state object to track expired handlers. This allows any other thread that acquired
+            // We use a different state object to track expired handlers. This allows any other thread that
+            // acquired
             // the 'active' entry to use it without safety problems.
             var expired = new ExpiredHandlerTrackingEntry(active);
             _expiredHandlers.Enqueue(expired);
@@ -275,13 +280,16 @@ namespace Microsoft.Extensions.Http
         // Internal for tests
         internal void CleanupTimer_Tick()
         {
-            // Stop any pending timers, we'll restart the timer if there's anything left to process after cleanup.
+            // Stop any pending timers, we'll restart the timer if there's anything left to process after
+            // cleanup.
             //
             // With the scheme we're using it's possible we could end up with some redundant cleanup operations.
             // This is expected and fine.
             //
-            // An alternative would be to take a lock during the whole cleanup process. This isn't ideal because it
-            // would result in threads executing ExpiryTimer_Tick as they would need to block on cleanup to figure out
+            // An alternative would be to take a lock during the whole cleanup process. This isn't ideal because
+            // it
+            // would result in threads executing ExpiryTimer_Tick as they would need to block on cleanup to
+            // figure out
             // whether we need to start the timer.
             StopCleanupTimer();
 

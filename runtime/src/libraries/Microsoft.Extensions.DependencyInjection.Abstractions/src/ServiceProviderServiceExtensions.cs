@@ -16,8 +16,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Get service of type <typeparamref name="T"/> from the <see cref="IServiceProvider"/>.
         /// </summary>
         /// <typeparam name="T">The type of service object to get.</typeparam>
-        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object from.</param>
-        /// <returns>A service object of type <typeparamref name="T"/> or null if there is no such service.</returns>
+        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object
+        // from.</param>
+        /// <returns>A service object of type <typeparamref name="T"/> or null if there is no such
+        // service.</returns>
         public static T? GetService<T>(this IServiceProvider provider)
         {
             ThrowHelper.ThrowIfNull(provider);
@@ -28,10 +30,12 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Get service of type <paramref name="serviceType"/> from the <see cref="IServiceProvider"/>.
         /// </summary>
-        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object from.</param>
+        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object
+        // from.</param>
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
         /// <returns>A service object of type <paramref name="serviceType"/>.</returns>
-        /// <exception cref="System.InvalidOperationException">There is no service of type <paramref name="serviceType"/>.</exception>
+        /// <exception cref="System.InvalidOperationException">There is no service of type <paramref
+        // name="serviceType"/>.</exception>
         public static object GetRequiredService(this IServiceProvider provider, Type serviceType)
         {
             ThrowHelper.ThrowIfNull(provider);
@@ -55,9 +59,11 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Get service of type <typeparamref name="T"/> from the <see cref="IServiceProvider"/>.
         /// </summary>
         /// <typeparam name="T">The type of service object to get.</typeparam>
-        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object from.</param>
+        /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the service object
+        // from.</param>
         /// <returns>A service object of type <typeparamref name="T"/>.</returns>
-        /// <exception cref="System.InvalidOperationException">There is no service of type <typeparamref name="T"/>.</exception>
+        /// <exception cref="System.InvalidOperationException">There is no service of type <typeparamref
+        // name="T"/>.</exception>
         public static T GetRequiredService<T>(this IServiceProvider provider)
             where T : notnull
         {
@@ -67,7 +73,8 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Get an enumeration of services of type <typeparamref name="T"/> from the <see cref="IServiceProvider"/>.
+        /// Get an enumeration of services of type <typeparamref name="T"/> from the <see
+        // cref="IServiceProvider"/>.
         /// </summary>
         /// <typeparam name="T">The type of service object to get.</typeparam>
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the services from.</param>
@@ -80,7 +87,8 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         /// <summary>
-        /// Get an enumeration of services of type <paramref name="serviceType"/> from the <see cref="IServiceProvider"/>.
+        /// Get an enumeration of services of type <paramref name="serviceType"/> from the <see
+        // cref="IServiceProvider"/>.
         /// </summary>
         /// <param name="provider">The <see cref="IServiceProvider"/> to retrieve the services from.</param>
         /// <param name="serviceType">An object that specifies the type of service object to get.</param>
@@ -114,7 +122,8 @@ namespace Microsoft.Extensions.DependencyInjection
         /// Creates a new <see cref="AsyncServiceScope"/> that can be used to resolve scoped services.
         /// </summary>
         /// <param name="provider">The <see cref="IServiceProvider"/> to create the scope from.</param>
-        /// <returns>An <see cref="AsyncServiceScope"/> that can be used to resolve scoped services.</returns>
+        /// <returns>An <see cref="AsyncServiceScope"/> that can be used to resolve scoped
+        // services.</returns>
         public static AsyncServiceScope CreateAsyncScope(this IServiceProvider provider)
         {
             return new AsyncServiceScope(provider.CreateScope());
@@ -123,8 +132,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <summary>
         /// Creates a new <see cref="AsyncServiceScope"/> that can be used to resolve scoped services.
         /// </summary>
-        /// <param name="serviceScopeFactory">The <see cref="IServiceScopeFactory"/> to create the scope from.</param>
-        /// <returns>An <see cref="AsyncServiceScope"/> that can be used to resolve scoped services.</returns>
+        /// <param name="serviceScopeFactory">The <see cref="IServiceScopeFactory"/> to create the scope
+        // from.</param>
+        /// <returns>An <see cref="AsyncServiceScope"/> that can be used to resolve scoped
+        // services.</returns>
         public static AsyncServiceScope CreateAsyncScope(
             this IServiceScopeFactory serviceScopeFactory
         )

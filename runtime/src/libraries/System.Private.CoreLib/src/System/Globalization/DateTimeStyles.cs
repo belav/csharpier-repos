@@ -4,7 +4,8 @@
 namespace System.Globalization
 {
     /// <summary>
-    /// Defines the formatting options that customize string parsing for some date and time parsing methods.
+    /// Defines the formatting options that customize string parsing for some date and time parsing
+    // methods.
     /// </summary>
     [Flags]
     public enum DateTimeStyles
@@ -28,7 +29,8 @@ namespace System.Globalization
 
         NoCurrentDateDefault = 0x00000008,
 
-        // When parsing a date/time string, if a timezone specifier ("GMT","Z","+xxxx", "-xxxx" exists), we will
+        // When parsing a date/time string, if a timezone specifier ("GMT","Z","+xxxx", "-xxxx" exists), we
+        // will
         // adjust the parsed time based to GMT.
 
         AdjustToUniversal = 0x00000010,

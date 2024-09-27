@@ -148,7 +148,8 @@ w.Content = g;",
                 HangMitigatingCancellationToken
             );
 
-            // Directly type #help, rather than sending it through VisualStudio.InteractiveWindow.SubmitText. We want to actually test
+            // Directly type #help, rather than sending it through VisualStudio.InteractiveWindow.SubmitText. We
+            // want to actually test
             // that completion doesn't interfere and there aren't problems with the content-type switching.
             await TestServices.Input.SendWithoutActivateAsync(
                 "#help",

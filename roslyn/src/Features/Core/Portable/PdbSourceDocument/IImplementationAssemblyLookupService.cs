@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
     internal interface IImplementationAssemblyLookupService
     {
         /// <summary>
-        /// Uses various heuristics to try to find the implementation assembly for a reference assembly without
+        /// Uses various heuristics to try to find the implementation assembly for a reference assembly
+        // without
         /// loading
         /// </summary>
         bool TryFindImplementationAssemblyPath(

@@ -58,7 +58,7 @@ namespace Microsoft.Build.Utilities
         bool typeLoadException;
         ManualResetEvent canceled;
 
-        /* dummy getter/setter for msbuild compability */
+/* dummy getter/setter for msbuild compability */
         public bool YieldDuringToolExecution { get; set; }
 
         protected ToolTask()

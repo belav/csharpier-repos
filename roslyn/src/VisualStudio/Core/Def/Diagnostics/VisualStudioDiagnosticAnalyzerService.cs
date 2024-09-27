@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         : IVisualStudioDiagnosticAnalyzerService
     {
         // "Run Code Analysis on <%ProjectName%>" command for Top level "Build" and "Analyze" menus.
-        // The below ID is actually defined as "ECMD_RUNFXCOPSEL" in stdidcmd.h, we're just referencing it here.
+        // The below ID is actually defined as "ECMD_RUNFXCOPSEL" in stdidcmd.h, we're just referencing it
+        // here.
         private const int RunCodeAnalysisForSelectedProjectCommandId = 1647;
 
         private readonly VisualStudioWorkspace _workspace;
@@ -188,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
             else
             {
-                // Multiple workspace projects map to the same hierarchy, return a union of descriptors for all projects.
+                // Multiple workspace projects map to the same hierarchy, return a union of descriptors for all
+                // projects.
                 // For example, this can happen for web projects where we create on the fly projects for aspx files.
                 var descriptorsMap = ImmutableDictionary.CreateBuilder<
                     string,
@@ -264,7 +266,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             command.Enabled = true;
 
-            // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches the
+            // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches
+            // the
             // value saved for the solution.
             var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
             {
@@ -393,7 +396,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             var command = (OleMenuCommand)sender;
 
             // We hook up the "Run Code Analysis" menu commands for CPS based managed projects.
-            // These commands are already hooked up for csproj based projects in StanCore, but those will eventually go away.
+            // These commands are already hooked up for csproj based projects in StanCore, but those will
+            // eventually go away.
             var visible =
                 VisualStudioCommandHandlerHelpers.TryGetSelectedProjectHierarchy(
                     _serviceProvider,

@@ -19,8 +19,10 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Utilities
 {
     /// <summary>
-    /// A helper class that makes getting the "current" position of the cursor in an <see cref="IVsCodeWindow"/> easier to do. This is necessary
-    /// because a <see cref="IVsCodeWindow"/> can have more than one view if there's a split involved. Watching for cursor changes also requires
+    /// A helper class that makes getting the "current" position of the cursor in an <see
+    // cref="IVsCodeWindow"/> easier to do. This is necessary
+    /// because a <see cref="IVsCodeWindow"/> can have more than one view if there's a split involved.
+    // Watching for cursor changes also requires
     /// tracking the lifetime of the views as appropriate.
     /// </summary>
     /// <remarks>
@@ -37,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         private readonly ComEventSink _codeWindowEventsSink;
 
         /// <summary>
-        /// The map from <see cref="IVsTextView"/> and corresponding <see cref="ITextView"/> for views that we are currently watching for caret movements.
+        /// The map from <see cref="IVsTextView"/> and corresponding <see cref="ITextView"/> for views that
+        // we are currently watching for caret movements.
         /// </summary>
         private readonly Dictionary<IVsTextView, ITextView> _trackedTextViews = new();
 
@@ -131,7 +134,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
         /// Raised when the a caret has moved in a view, or when the current view has changed.
         /// </summary>
         /// <remarks>
-        /// This is combined into one event since in practice consumers need to respond to either the same way, by refreshing what the current
+        /// This is combined into one event since in practice consumers need to respond to either the same
+        // way, by refreshing what the current
         /// symbol or token or whatever is.
         /// </remarks>
         public event EventHandler<EventArgs>? CaretMovedOrActiveViewChanged;
@@ -144,7 +148,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
 
         public void Dispose()
         {
-            // StopTrackingView will update _trackedTextViews; the ToList() avoids modification during enumeration
+            // StopTrackingView will update _trackedTextViews; the ToList() avoids modification during
+            // enumeration
             foreach (var view in _trackedTextViews.Keys.ToList())
             {
                 StopTrackingView(view);

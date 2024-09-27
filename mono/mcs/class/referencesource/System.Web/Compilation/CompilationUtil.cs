@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Code related to the <assemblies> config section
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Code related to the <assemblies> config section
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.Compilation
 {
     using System;
@@ -82,9 +82,9 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Return a CompilerType that a file name's extension maps to.
-         */
+/*
+* Return a CompilerType that a file name's extension maps to.
+*/
         internal static CompilerType GetCompilerInfoFromVirtualPath(VirtualPath virtualPath)
         {
             // Get the extension of the source file to compile
@@ -99,9 +99,9 @@ namespace System.Web.Compilation
             return GetCompilerInfoFromExtension(virtualPath, extension);
         }
 
-        /*
-         * Return a CompilerType that a extension maps to.
-         */
+/*
+* Return a CompilerType that a extension maps to.
+*/
         private static CompilerType GetCompilerInfoFromExtension(
             VirtualPath configPath,
             string extension
@@ -116,9 +116,9 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Return a CompilerType that a language maps to.
-         */
+/*
+* Return a CompilerType that a language maps to.
+*/
         internal static CompilerType GetCompilerInfoFromLanguage(
             VirtualPath configPath,
             string language
@@ -329,9 +329,9 @@ namespace System.Web.Compilation
             return recompilationHash.CombinedHash;
         }
 
-        /*
-         * Return a file provider Type that an extension maps to.
-         */
+/*
+* Return a file provider Type that an extension maps to.
+*/
         internal static Type GetBuildProviderTypeFromExtension(
             VirtualPath configPath,
             string extension,
@@ -418,7 +418,8 @@ namespace System.Web.Compilation
             return buildProviders.GetBuildProviderTypes(appliesTo);
         }
 
-        // In partial trust, do not allow the CompilerDirectoryPath provider option in codedom settings (Dev10 bug 462348)
+        // In partial trust, do not allow the CompilerDirectoryPath provider option in codedom settings
+        // (Dev10 bug 462348)
         internal static void CheckCompilerDirectoryPathAllowed(
             IDictionary<string, string> providerOptions
         )
@@ -584,7 +585,8 @@ namespace System.Web.Compilation
         }
 
         // Devdiv Bug 57600
-        // We need to use the constructor with ProviderOptions to get the v3.5/v4.0 compiler that was possibly set in config.
+        // We need to use the constructor with ProviderOptions to get the v3.5/v4.0 compiler that was
+        // possibly set in config.
         // We first check if there is any providerOptions and invoke the constructor if so.
         // Otherwise, we fall back to the default constructor.
         internal static CodeDomProvider CreateCodeDomProvider(Type codeDomProviderType)
@@ -668,7 +670,8 @@ namespace System.Web.Compilation
             {
                 Debug.Assert(codeDomProviderType != null, "codeDomProviderType should not be null");
                 // Check whether the codedom provider supports a constructor that takes in providerOptions.
-                // Currently only VB and C# support providerOptions for sure, while others such as JScript might not.
+                // Currently only VB and C# support providerOptions for sure, while others such as JScript might
+                // not.
                 ConstructorInfo ci = codeDomProviderType.GetConstructor(
                     new Type[] { typeof(IDictionary<string, string>) }
                 );
@@ -684,7 +687,8 @@ namespace System.Web.Compilation
                     provider = CodeDomProvider.CreateProvider(language, providerOptions);
                 }
                 // Restore the provider options if we previously manually added the compilerDirectoryPath.
-                // Otherwise, we might incorrectly invalidate the compilerDirectoryPath in medium trust (Dev10 bug 550299).
+                // Otherwise, we might incorrectly invalidate the compilerDirectoryPath in medium trust (Dev10 bug
+                // 550299).
                 if (addedCompilerDirectoryPath)
                 {
                     providerOptions.Remove(CompilerDirectoryPath);

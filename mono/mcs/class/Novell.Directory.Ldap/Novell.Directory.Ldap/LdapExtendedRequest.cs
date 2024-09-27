@@ -42,11 +42,11 @@ namespace Novell.Directory.Ldap
     /// </summary>
     /// <seealso cref="LdapConnection.SendRequest">
     /// </seealso>
-    /*
-     *       ExtendedRequest ::= [APPLICATION 23] SEQUENCE {
-     *               requestName      [0] LdapOID,
-     *               requestValue     [1] OCTET STRING OPTIONAL }
-     */
+/*
+*       ExtendedRequest ::= [APPLICATION 23] SEQUENCE {
+*               requestName      [0] LdapOID,
+*               requestValue     [1] OCTET STRING OPTIONAL }
+*/
     public class LdapExtendedRequest : LdapMessage
     {
         /// <summary> Retrieves an extended operation from this request</summary>

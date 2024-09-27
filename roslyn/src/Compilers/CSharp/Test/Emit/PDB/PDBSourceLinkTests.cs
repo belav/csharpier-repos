@@ -217,7 +217,8 @@ class C
             );
 
             result.Diagnostics.Verify(
-                // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support SourceLink feature: '<lib name>''
+                // error CS0041: Unexpected error writing debug information -- 'Windows PDB writer doesn't support
+                // SourceLink feature: '<lib name>''
                 Diagnostic(ErrorCode.FTL_DebugEmitFailure)
                     .WithArguments(
                         string.Format(

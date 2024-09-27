@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.FindReferences
             // This is called for all: class, struct or interface member.
             results.AddRange(symbol.ExplicitOrImplicitInterfaceImplementations());
 
-            // The type scenario. Iterate over all base classes to find overridden and hidden (new/Shadows) methods.
+            // The type scenario. Iterate over all base classes to find overridden and hidden (new/Shadows)
+            // methods.
             foreach (var type in FindBaseTypes(symbol.ContainingType))
             {
                 foreach (var member in type.GetMembers(symbol.Name))

@@ -632,7 +632,8 @@ namespace System.ServiceModel.Dispatcher
         {
             public IDisposable Impersonate()
             {
-                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                // other interop call.
 #pragma warning suppress 56523 // The LastWin32Error can be ignored here.
                 IntPtr threadHandle = SafeNativeMethods.GetCurrentThread();
                 SafeCloseHandle tokenHandle;
@@ -684,11 +685,13 @@ namespace System.ServiceModel.Dispatcher
 
                 void Undo()
                 {
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
 #pragma warning suppress 56523 // The LastWin32Error can be ignored here.
                     Fx.Assert(this.threadHandle == SafeNativeMethods.GetCurrentThread(), "");
                     // We are in the Dispose method. If a failure occurs we just have to ignore it.
-                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
+                    // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any
+                    // other interop call.
                     // #pragma warning suppress 56523 // The LastWin32Error can be ignored here.
                     if (!SafeNativeMethods.SetCurrentThreadToken(IntPtr.Zero, this.tokenHandle))
                     {

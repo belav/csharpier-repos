@@ -123,7 +123,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
+        /// Contains a value indicating the relative order of this event within the context of a workflow
+        // instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder
@@ -249,7 +250,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
+        /// Contains a value indicating the relative order of this event within the context of a workflow
+        // instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder
@@ -321,7 +323,8 @@ namespace System.Workflow.Runtime.Tracking
         }
 
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
+        /// Contains a value indicating the relative order of this event within the context of a workflow
+        // instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder

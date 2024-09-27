@@ -190,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
             NotificationOption2 notificationOption
         )
         {
-            // When the user writes the array creation we raise the diagnostic on the first token, which will be the "new" keyword
+            // When the user writes the array creation we raise the diagnostic on the first token, which will be
+            // the "new" keyword
             var location = syntaxNode.GetFirstToken().GetLocation();
 
             ReportDiagnostic(

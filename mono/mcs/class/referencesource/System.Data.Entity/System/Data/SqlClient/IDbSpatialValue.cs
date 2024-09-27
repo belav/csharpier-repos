@@ -13,12 +13,17 @@ using System.Data.Spatial;
 namespace System.Data.SqlClient.Internal
 {
     /// <summary>
-    /// Adapter interface to make working with instances of <see cref="DbGeometry"/> or <see cref="DbGeography"/> easier.
-    /// Implementing types wrap instances of DbGeography/DbGeometry and allow them to be consumed in a common way.
+    /// Adapter interface to make working with instances of <see cref="DbGeometry"/> or <see
+    // cref="DbGeography"/> easier.
+    /// Implementing types wrap instances of DbGeography/DbGeometry and allow them to be consumed in a
+    // common way.
     /// This interface is implemented by wrapping types for two reasons:
-    /// 1. The DbGeography/DbGeometry classes cannot directly implement internal interfaces because their members are virtual (behavior is not guaranteed).
-    /// 2. The wrapping types ensure that instances of IDbSpatialValue handle the <see cref="NotImplementedException"/>s thrown
-    ///    by any unimplemented members of derived DbGeography/DbGeometry types that correspond to the properties and methods declared in the interface.
+    /// 1. The DbGeography/DbGeometry classes cannot directly implement internal interfaces because
+    // their members are virtual (behavior is not guaranteed).
+    /// 2. The wrapping types ensure that instances of IDbSpatialValue handle the <see
+    // cref="NotImplementedException"/>s thrown
+    ///    by any unimplemented members of derived DbGeography/DbGeometry types that correspond to the
+    // properties and methods declared in the interface.
     /// </summary>
     internal interface IDbSpatialValue
     {
@@ -36,11 +41,14 @@ namespace System.Data.SqlClient.Internal
     internal static class IDbSpatialValueExtensionMethods
     {
         /// <summary>
-        /// Returns an instance of <see cref="IDbSpatialValue"/> that wraps the specified <see cref="DbGeography"/> value.
-        /// IDbSpatialValue members are guaranteed not to throw the <see cref="NotImplementedException"/>s caused by unimplemented members of their wrapped values.
+        /// Returns an instance of <see cref="IDbSpatialValue"/> that wraps the specified <see
+        // cref="DbGeography"/> value.
+        /// IDbSpatialValue members are guaranteed not to throw the <see cref="NotImplementedException"/>s
+        // caused by unimplemented members of their wrapped values.
         /// </summary>
         /// <param name="geographyValue">The geography instance to wrap</param>
-        /// <returns>An instance of <see cref="IDbSpatialValue"/> that wraps the specified geography value</returns>
+        /// <returns>An instance of <see cref="IDbSpatialValue"/> that wraps the specified geography
+        // value</returns>
         internal static IDbSpatialValue AsSpatialValue(this DbGeography geographyValue)
         {
             if (geographyValue == null)
@@ -51,11 +59,14 @@ namespace System.Data.SqlClient.Internal
         }
 
         /// <summary>
-        /// Returns an instance of <see cref="IDbSpatialValue"/> that wraps the specified <see cref="DbGeometry"/> value.
-        /// IDbSpatialValue members are guaranteed not to throw the <see cref="NotImplementedException"/>s caused by unimplemented members of their wrapped values.
+        /// Returns an instance of <see cref="IDbSpatialValue"/> that wraps the specified <see
+        // cref="DbGeometry"/> value.
+        /// IDbSpatialValue members are guaranteed not to throw the <see cref="NotImplementedException"/>s
+        // caused by unimplemented members of their wrapped values.
         /// </summary>
         /// <param name="geometryValue">The geometry instance to wrap</param>
-        /// <returns>An instance of <see cref="IDbSpatialValue"/> that wraps the specified geometry value</returns>
+        /// <returns>An instance of <see cref="IDbSpatialValue"/> that wraps the specified geometry
+        // value</returns>
         internal static IDbSpatialValue AsSpatialValue(this DbGeometry geometryValue)
         {
             if (geometryValue == null)

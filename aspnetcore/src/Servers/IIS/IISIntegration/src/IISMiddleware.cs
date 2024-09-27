@@ -44,7 +44,8 @@ public class IISMiddleware
     /// <param name="pairingToken">A token used to coordinate with the ASP.NET Core Module.</param>
     /// <param name="authentication">The <see cref="IAuthenticationSchemeProvider"/>.</param>
     /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/>.</param>
-    // Can't break public API, so creating a second constructor to propagate the isWebsocketsSupported flag.
+    // Can't break public API, so creating a second constructor to propagate the isWebsocketsSupported
+    // flag.
     public IISMiddleware(
         RequestDelegate next,
         ILoggerFactory loggerFactory,
@@ -160,7 +161,8 @@ public class IISMiddleware
             )
         )
         {
-            // The Visual Studio debugger tooling sends a DEBUG request to make IIS & AspNetCoreModule launch the process
+            // The Visual Studio debugger tooling sends a DEBUG request to make IIS & AspNetCoreModule launch
+            // the process
             // so the debugger can attach. Filter out this request from the app.
             return Task.CompletedTask;
         }

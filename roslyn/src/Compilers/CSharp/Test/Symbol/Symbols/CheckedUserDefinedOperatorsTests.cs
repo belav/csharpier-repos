@@ -53,7 +53,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             compilation1.VerifyDiagnostics(
-                // (4,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (4,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static C operator checked ++(C x) => x;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -222,7 +223,8 @@ struct C
                     .GetDiagnostics()
                     .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                     .Verify(
-                        // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedDecrement' with the same parameter types
+                        // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedDecrement' with the
+                        // same parameter types
                         //     public static C? operator checked --(C x) => x;
                         Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                             .WithArguments(name, "C")
@@ -235,10 +237,12 @@ struct C
                     .GetDiagnostics()
                     .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                     .Verify(
-                        // (5,39): error CS0448: The return type for ++ or -- operator must match the parameter type or be derived from the parameter type
+                        // (5,39): error CS0448: The return type for ++ or -- operator must match the parameter type or be
+                        // derived from the parameter type
                         //     public static C? operator checked --(C x) => x;
                         Diagnostic(ErrorCode.ERR_BadIncDecRetType, op).WithLocation(5, 39),
-                        // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedDecrement' with the same parameter types
+                        // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedDecrement' with the
+                        // same parameter types
                         //     public static C? operator checked --(C x) => x;
                         Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                             .WithArguments(name, "C")
@@ -284,7 +288,8 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (4,39): error CS0448: The return type for ++ or -- operator must match the parameter type or be derived from the parameter type
+                    // (4,39): error CS0448: The return type for ++ or -- operator must match the parameter type or be
+                    // derived from the parameter type
                     //     public static int operator checked--(C x) => default;
                     Diagnostic(ErrorCode.ERR_BadIncDecRetType, op).WithLocation(4, 39)
                 );
@@ -371,7 +376,8 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (4,23): error CS0558: User-defined operator 'C.operator checked --(C)' must be declared static and public
+                    // (4,23): error CS0558: User-defined operator 'C.operator checked --(C)' must be declared static
+                    // and public
                     //     C operator checked--(C x) => default;
                     Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, op)
                         .WithArguments("C.operator checked " + op + "(C)")
@@ -471,12 +477,14 @@ class C5
                     Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, name)
                         .WithArguments("C.operator checked " + op + "(C)")
                         .WithLocation(8, 18),
-                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedUnaryNegation' with the same parameter types
+                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedUnaryNegation' with
+                    // the same parameter types
                     //     static C1 op_CheckedUnaryNegation(C1 x) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, name)
                         .WithArguments(name, "C1")
                         .WithLocation(16, 15),
-                    // (23,39): error CS0111: Type 'C2' already defines a member called 'op_CheckedUnaryNegation' with the same parameter types
+                    // (23,39): error CS0111: Type 'C2' already defines a member called 'op_CheckedUnaryNegation' with
+                    // the same parameter types
                     //     public static C2 operator checked -(C2 x) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C2")
@@ -491,7 +499,8 @@ class C5
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, op)
                         .WithArguments("C4", name)
                         .WithLocation(37, 39),
-                    // (44,39): error CS0111: Type 'C5' already defines a member called 'op_CheckedSubtraction' with the same parameter types
+                    // (44,39): error CS0111: Type 'C5' already defines a member called 'op_CheckedSubtraction' with the
+                    // same parameter types
                     //     public static C5 operator checked -(C5 x, C5 y) => y;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C5")
@@ -604,7 +613,8 @@ static class C
                     Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "C")
                         .WithArguments("C")
                         .WithLocation(4, 19),
-                    // (4,38): error CS0715: 'C.operator checked ++(C)': static classes cannot contain user-defined operators
+                    // (4,38): error CS0715: 'C.operator checked ++(C)': static classes cannot contain user-defined
+                    // operators
                     //     public static C operator checked ++(C x) => x;
                     Diagnostic(ErrorCode.ERR_OperatorInStaticClass, op)
                         .WithArguments("C.operator checked " + op + "(C)")
@@ -642,7 +652,8 @@ struct C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (4,38): error CS9152: The operator 'C.operator checked -(C)' requires a matching non-checked version of the operator to also be defined
+                // (4,38): error CS9152: The operator 'C.operator checked -(C)' requires a matching non-checked
+                // version of the operator to also be defined
                 //     public static C operator checked -(C x) => x;
                 Diagnostic(ErrorCode.ERR_CheckedOperatorNeedsMatch, op)
                     .WithArguments("C.operator checked " + op + "(C)")
@@ -772,12 +783,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked ++'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // ++'
                 // /// See <see cref="operator checked ++"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op)
                     .WithArguments("operator checked " + op)
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked ++"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -785,7 +798,8 @@ class C
                         "8936"
                     )
                     .WithLocation(3, 29),
-                // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static C operator checked ++(C c)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -894,7 +908,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be
+                // resolved
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
@@ -934,7 +949,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be
+                // resolved
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked -")
                     .WithArguments("operator checked -")
@@ -966,12 +982,14 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked -'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // -'
                     // /// See <see cref="operator checked -"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked -")
                         .WithArguments("operator checked -")
                         .WithLocation(3, 20),
-                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked -"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -979,7 +997,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 29),
-                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static C operator checked -(C c)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -1060,12 +1079,14 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked ++(C)'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // ++(C)'
                     // /// See <see cref="operator checked ++(C)"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op + "(C)")
                         .WithArguments("operator checked " + op + "(C)")
                         .WithLocation(3, 20),
-                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked ++(C)"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -1073,7 +1094,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 29),
-                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static C operator checked ++(C c)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -1137,7 +1159,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator --(C)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator --(C)' that could not be
+                // resolved
                 // /// See <see cref="operator --(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator " + op + "(C)")
                     .WithArguments("operator " + op + "(C)")
@@ -1185,7 +1208,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -(C)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -(C)' that could not be
+                // resolved
                 // /// See <see cref="operator checked -(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
@@ -1223,7 +1247,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked (C)'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // (C)'
                 // /// See <see cref="operator checked (C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked (C)")
                     .WithArguments("operator checked (C)")
@@ -1516,7 +1541,8 @@ class C
                 Diagnostic(ErrorCode.ERR_OperatorCantBeChecked, "checked")
                     .WithArguments(op)
                     .WithLocation(5, 30),
-                // (5,38): error CS0111: Type 'C' already defines a member called 'op_OnesComplement' with the same parameter types
+                // (5,38): error CS0111: Type 'C' already defines a member called 'op_OnesComplement' with the same
+                // parameter types
                 //     public static C operator checked ~(C x) => x;
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                     .WithArguments(name, "C")
@@ -1565,7 +1591,8 @@ class C
                 Diagnostic(ErrorCode.ERR_OperatorCantBeChecked, "checked")
                     .WithArguments(op)
                     .WithLocation(6, 33),
-                // (6,41): error CS0111: Type 'C' already defines a member called 'op_False' with the same parameter types
+                // (6,41): error CS0111: Type 'C' already defines a member called 'op_False' with the same parameter
+                // types
                 //     public static bool operator checked false(C x) => false;
                 Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                     .WithArguments(name, "C")
@@ -1614,7 +1641,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked !' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked !' that could not be
+                // resolved
                 // /// See <see cref="operator checked !"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
@@ -1640,12 +1668,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // +'
                 // /// See <see cref="operator checked +"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op)
                     .WithArguments("operator checked " + op)
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked +"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -1692,7 +1722,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked true' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked true' that could not be
+                // resolved
                 // /// See <see cref="operator checked true"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
@@ -1718,12 +1749,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked false'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // false'
                 // /// See <see cref="operator checked false"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op)
                     .WithArguments("operator checked " + op)
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked true"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -1775,7 +1808,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked ~(C)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked ~(C)' that could not be
+                // resolved
                 // /// See <see cref="operator checked ~(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
@@ -1801,12 +1835,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +(C)'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // +(C)'
                 // /// See <see cref="operator checked +(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked +(C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -1853,7 +1889,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked true(C)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked true(C)' that could not
+                // be resolved
                 // /// See <see cref="operator checked true(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
@@ -1883,7 +1920,8 @@ class C
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked true(C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -1948,7 +1986,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             compilation1.VerifyDiagnostics(
-                // (4,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (4,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static C operator checked +(C x, C y) => x;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -2121,7 +2160,8 @@ struct C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedSubtraction' with the same parameter types
+                    // (5,39): error CS0111: Type 'C' already defines a member called 'op_CheckedSubtraction' with the
+                    // same parameter types
                     //     public static C? operator checked -(C x, C y) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C")
@@ -2200,7 +2240,8 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (4,23): error CS0558: User-defined operator 'C.operator checked -(C, C)' must be declared static and public
+                    // (4,23): error CS0558: User-defined operator 'C.operator checked -(C, C)' must be declared static
+                    // and public
                     //     C operator checked-(C x, C y) => default;
                     Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, op)
                         .WithArguments("C.operator checked " + op + "(C, C)")
@@ -2301,12 +2342,14 @@ class C5
                     Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, name)
                         .WithArguments("C.operator checked " + op + "(C, C)")
                         .WithLocation(8, 18),
-                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedSubtraction' with the same parameter types
+                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedSubtraction' with the
+                    // same parameter types
                     //     static C1 op_CheckedSubtraction(C1 x, C1 y) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, name)
                         .WithArguments(name, "C1")
                         .WithLocation(16, 15),
-                    // (23,39): error CS0111: Type 'C2' already defines a member called 'op_CheckedSubtraction' with the same parameter types
+                    // (23,39): error CS0111: Type 'C2' already defines a member called 'op_CheckedSubtraction' with the
+                    // same parameter types
                     //     public static C2 operator checked -(C2 x, C2 y) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C2")
@@ -2321,7 +2364,8 @@ class C5
                     Diagnostic(ErrorCode.ERR_DuplicateNameInClass, op)
                         .WithArguments("C4", name)
                         .WithLocation(37, 39),
-                    // (44,39): error CS0111: Type 'C5' already defines a member called 'op_CheckedSubtraction' with the same parameter types
+                    // (44,39): error CS0111: Type 'C5' already defines a member called 'op_CheckedSubtraction' with the
+                    // same parameter types
                     //     public static C5 operator checked -(C5 x, C5 y) => y;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C5")
@@ -2437,7 +2481,8 @@ static class C
                     Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "C")
                         .WithArguments("C")
                         .WithLocation(4, 19),
-                    // (4,38): error CS0715: 'C.operator checked -(C, C)': static classes cannot contain user-defined operators
+                    // (4,38): error CS0715: 'C.operator checked -(C, C)': static classes cannot contain user-defined
+                    // operators
                     //     public static C operator checked -(C x, C y) => x;
                     Diagnostic(ErrorCode.ERR_OperatorInStaticClass, op)
                         .WithArguments("C.operator checked " + op + "(C, C)")
@@ -2484,7 +2529,8 @@ struct C
                 parseOptions: TestOptions.RegularPreview
             );
             compilation1.VerifyDiagnostics(
-                // (4,38): error CS9152: The operator 'C.operator checked -(C, C)' requires a matching non-checked version of the operator to also be defined
+                // (4,38): error CS9152: The operator 'C.operator checked -(C, C)' requires a matching non-checked
+                // version of the operator to also be defined
                 //     public static C operator checked -(C x, C y) => x;
                 Diagnostic(ErrorCode.ERR_CheckedOperatorNeedsMatch, op)
                     .WithArguments("C.operator checked " + op + "(C, C)")
@@ -2622,12 +2668,14 @@ class C
             );
 
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // +'
                 // /// See <see cref="operator checked +"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op)
                     .WithArguments("operator checked " + op)
                     .WithLocation(3, 20),
-                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="operator checked +"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -2635,7 +2683,8 @@ class C
                         "8936"
                     )
                     .WithLocation(3, 29),
-                // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static C operator checked +(C c, C y)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -2746,7 +2795,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -' that could not be
+                // resolved
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
@@ -2836,7 +2886,8 @@ class C
                     Diagnostic(ErrorCode.WRN_ErrorOverride, @"""")
                         .WithArguments("Overloadable operator expected", "1037")
                         .WithLocation(3, 37),
-                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static C operator checked +(C c, C y)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -3026,12 +3077,14 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked +(C, C)'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // +(C, C)'
                     // /// See <see cref="operator checked +(C, C)"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + op + "(C, C)")
                         .WithArguments("operator checked " + op + "(C, C)")
                         .WithLocation(3, 20),
-                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked +(C, C)"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -3039,7 +3092,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 29),
-                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static C operator checked +(C c, C y)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -3153,7 +3207,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -(C, C)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked -(C, C)' that could not
+                // be resolved
                 // /// See <see cref="operator checked -(C, C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C, C)")
                     .WithArguments("operator checked " + op + "(C, C)")
@@ -3191,7 +3246,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked (C, C)'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                // (C, C)'
                 // /// See <see cref="operator checked (C, C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked (C, C)")
                     .WithArguments("operator checked (C, C)")
@@ -3234,7 +3290,8 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked (C, C)'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // (C, C)'
                     // /// See <see cref="operator checked (C, C)"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked (C, C)")
                         .WithArguments("operator checked (C, C)")
@@ -3244,7 +3301,8 @@ class C
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "(")
                         .WithArguments("Overloadable operator expected", "1037")
                         .WithLocation(3, 37),
-                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static C operator checked +(C c, C y)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -3416,7 +3474,8 @@ class C
                         Diagnostic(ErrorCode.ERR_OperatorCantBeChecked, "checked")
                             .WithArguments(">>>")
                             .WithLocation(4, 30),
-                        // (4,38): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
+                        // (4,38): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use
+                        // language version 11.0 or greater.
                         //     public static C operator checked >>>(C x, int y) => x;
                         Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
                             .WithArguments("unsigned right shift", "11.0")
@@ -3510,7 +3569,8 @@ class C
                     Diagnostic(ErrorCode.ERR_OperatorCantBeChecked, "checked")
                         .WithArguments(op)
                         .WithLocation(5, 30),
-                    // (5,38): error CS0111: Type 'C' already defines a member called 'op_Modulus' with the same parameter types
+                    // (5,38): error CS0111: Type 'C' already defines a member called 'op_Modulus' with the same
+                    // parameter types
                     //     public static C operator checked %(C x) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, op)
                         .WithArguments(name, "C")
@@ -3574,7 +3634,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked !' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked !' that could not be
+                // resolved
                 // /// See <see cref="operator checked %"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + opForXml)
                     .WithArguments("operator checked " + opForXml)
@@ -3623,12 +3684,14 @@ class C
                             )
                     )
                     .Verify(
-                        // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}'
+                        // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                        // }}'
                         // /// See <see cref="operator checked }}"/>.
                         Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked " + opForXml)
                             .WithArguments("operator checked " + opForXml)
                             .WithLocation(3, 20),
-                        // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                        // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                        // Please use language version 11.0 or greater.. See also error CS8936.
                         // /// See <see cref="operator checked }}"/>.
                         Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                             .WithArguments(
@@ -3641,12 +3704,14 @@ class C
             else
             {
                 compilation.VerifyDiagnostics(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}}'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // }}}'
                     // /// See <see cref="operator checked }}}"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked }}}")
                         .WithArguments("operator checked }}}")
                         .WithLocation(3, 20),
-                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked }}}"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -3654,7 +3719,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 29),
-                    // (3,37): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,37): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use
+                    // language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked }}}"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "}}}")
                         .WithArguments(
@@ -3662,7 +3728,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 37),
-                    // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use
+                    // language version 11.0 or greater.
                     //     public static C operator >>>(C c, int y)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
                         .WithArguments("unsigned right shift", "11.0")
@@ -3750,7 +3817,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked %(C, int)' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'operator checked %(C, int)' that could
+                // not be resolved
                 // /// See <see cref="operator checked %(C, int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + opForXml + "(C, int)")
                     .WithArguments("operator checked " + opForXml + "(C, int)")
@@ -3799,7 +3867,8 @@ class C
                             )
                     )
                     .Verify(
-                        // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}(C, int)'
+                        // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                        // }}(C, int)'
                         // /// See <see cref="operator checked }}(C, int)"/>.
                         Diagnostic(
                                 ErrorCode.WRN_BadXMLRefSyntax,
@@ -3807,7 +3876,8 @@ class C
                             )
                             .WithArguments("operator checked " + opForXml + "(C, int)")
                             .WithLocation(3, 20),
-                        // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                        // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                        // Please use language version 11.0 or greater.. See also error CS8936.
                         // /// See <see cref="operator checked }}(C, int)"/>.
                         Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                             .WithArguments(
@@ -3820,12 +3890,14 @@ class C
             else
             {
                 compilation.VerifyDiagnostics(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked }}}(C, int)'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'operator checked
+                    // }}}(C, int)'
                     // /// See <see cref="operator checked }}}(C, int)"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "operator checked }}}(C, int)")
                         .WithArguments("operator checked }}}(C, int)")
                         .WithLocation(3, 20),
-                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,29): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked }}}(C, int)"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -3833,7 +3905,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 29),
-                    // (3,37): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,37): warning CS1658: Feature 'unsigned right shift' is not available in C# 10.0. Please use
+                    // language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="operator checked }}}(C, int)"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "}}}")
                         .WithArguments(
@@ -3841,7 +3914,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 37),
-                    // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,30): error CS8936: Feature 'unsigned right shift' is not available in C# 10.0. Please use
+                    // language version 11.0 or greater.
                     //     public static C operator >>>(C c, int y)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, ">>>")
                         .WithArguments("unsigned right shift", "11.0")
@@ -3979,7 +4053,8 @@ class C
                 parseOptions: TestOptions.Regular10
             );
             compilation1.VerifyDiagnostics(
-                // (4,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (4,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static explicit operator checked int(C x) => 0;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -4230,7 +4305,8 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (4,31): error CS0558: User-defined operator 'C.explicit operator checked int(C)' must be declared static and public
+                    // (4,31): error CS0558: User-defined operator 'C.explicit operator checked int(C)' must be declared
+                    // static and public
                     //     explicit operator checked int(C x) => 0;
                     Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, "int")
                         .WithArguments("C.explicit operator checked int(C)")
@@ -4298,17 +4374,20 @@ class C5
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (8,18): error CS0571: 'C.explicit operator checked int(C)': cannot explicitly call operator or accessor
+                    // (8,18): error CS0571: 'C.explicit operator checked int(C)': cannot explicitly call operator or
+                    // accessor
                     //         return C.op_CheckedExplicit(x);
                     Diagnostic(ErrorCode.ERR_CantCallSpecialMethod, "op_CheckedExplicit")
                         .WithArguments("C.explicit operator checked int(C)")
                         .WithLocation(8, 18),
-                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedExplicit' with the same parameter types
+                    // (16,15): error CS0111: Type 'C1' already defines a member called 'op_CheckedExplicit' with the
+                    // same parameter types
                     //     static C1 op_CheckedExplicit(C1 x) => x;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "op_CheckedExplicit")
                         .WithArguments("op_CheckedExplicit", "C1")
                         .WithLocation(16, 15),
-                    // (23,45): error CS0111: Type 'C2' already defines a member called 'op_CheckedExplicit' with the same parameter types
+                    // (23,45): error CS0111: Type 'C2' already defines a member called 'op_CheckedExplicit' with the
+                    // same parameter types
                     //     public static explicit operator checked int(C2 x) => 0;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "int")
                         .WithArguments("op_CheckedExplicit", "C2")
@@ -4418,7 +4497,8 @@ static class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (4,45): error CS0715: 'C.explicit operator checked int(C)': static classes cannot contain user-defined operators
+                    // (4,45): error CS0715: 'C.explicit operator checked int(C)': static classes cannot contain
+                    // user-defined operators
                     //     public static explicit operator checked int(C x) => 0;
                     Diagnostic(ErrorCode.ERR_OperatorInStaticClass, "int")
                         .WithArguments("C.explicit operator checked int(C)")
@@ -4452,7 +4532,8 @@ struct C
             );
 
             compilation1.VerifyDiagnostics(
-                // (4,45): error CS9152: The operator 'C.explicit operator checked int(C)' requires a matching non-checked version of the operator to also be defined
+                // (4,45): error CS9152: The operator 'C.explicit operator checked int(C)' requires a matching
+                // non-checked version of the operator to also be defined
                 //     public static explicit operator checked int(C x) => 0;
                 Diagnostic(ErrorCode.ERR_CheckedOperatorNeedsMatch, "int")
                     .WithArguments("C.explicit operator checked int(C)")
@@ -4506,12 +4587,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator checked int'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator
+                // checked int'
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "explicit operator checked int")
                     .WithArguments("explicit operator checked int")
                     .WithLocation(3, 20),
-                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -4519,7 +4602,8 @@ class C
                         "8936"
                     )
                     .WithLocation(3, 38),
-                // (7,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (7,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //     public static explicit operator checked int(C c)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -4573,7 +4657,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int' that could not be
+                // resolved
                 // /// See <see cref="explicit operator int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator int")
                     .WithArguments("explicit operator int")
@@ -4614,7 +4699,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int")
                     .WithArguments("explicit operator checked int")
@@ -4652,7 +4738,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator int' that could not be
+                // resolved
                 // /// See <see cref="implicit operator int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator int")
                     .WithArguments("implicit operator int")
@@ -4693,7 +4780,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int")
                     .WithArguments("explicit operator checked int")
@@ -4760,12 +4848,14 @@ class C
                 .GetDiagnostics()
                 .Where(d => d.Code is not (int)ErrorCode.ERR_CheckedOperatorNeedsMatch)
                 .Verify(
-                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator checked int(C)'
+                    // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'explicit operator
+                    // checked int(C)'
                     // /// See <see cref="explicit operator checked int(C)"/>.
                     Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "explicit operator checked int(C)")
                         .WithArguments("explicit operator checked int(C)")
                         .WithLocation(3, 20),
-                    // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                    // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.. See also error CS8936.
                     // /// See <see cref="explicit operator checked int(C)"/>.
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                         .WithArguments(
@@ -4773,7 +4863,8 @@ class C
                             "8936"
                         )
                         .WithLocation(3, 38),
-                    // (7,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                    // (7,37): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                    // Please use language version 11.0 or greater.
                     //     public static explicit operator checked int(C c)
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "checked")
                         .WithArguments("checked user-defined operators", "11.0")
@@ -4830,7 +4921,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator int' that could not be
+                // resolved
                 // /// See <see cref="explicit operator int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator int(C)")
                     .WithArguments("explicit operator int(C)")
@@ -4871,7 +4963,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="explicit operator checked int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int(C)")
                     .WithArguments("explicit operator checked int(C)")
@@ -4909,7 +5002,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator int' that could not be
+                // resolved
                 // /// See <see cref="implicit operator int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator int(C)")
                     .WithArguments("implicit operator int(C)")
@@ -4950,7 +5044,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'explicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int(C)")
                     .WithArguments("explicit operator checked int(C)")
@@ -5076,7 +5171,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="implicit operator checked int" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator checked int")
                     .WithArguments("implicit operator checked int")
@@ -5102,12 +5198,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator checked int'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator
+                // checked int'
                 // /// See <see cref="implicit operator checked int" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "implicit operator checked int")
                     .WithArguments("implicit operator checked int")
                     .WithLocation(3, 20),
-                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="implicit operator checked int" />.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -5152,7 +5250,8 @@ class C
 ";
             var expected = new[]
             {
-                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator checked int' that could not be resolved
+                // (3,20): warning CS1574: XML comment has cref attribute 'implicit operator checked int' that could
+                // not be resolved
                 // /// See <see cref="implicit operator checked int(C)" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator checked int(C)")
                     .WithArguments("implicit operator checked int(C)")
@@ -5178,12 +5277,14 @@ class C
                 )
             );
             compilation.VerifyDiagnostics(
-                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator checked int(C)'
+                // (3,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'implicit operator
+                // checked int(C)'
                 // /// See <see cref="implicit operator checked int(C)" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "implicit operator checked int(C)")
                     .WithArguments("implicit operator checked int(C)")
                     .WithLocation(3, 20),
-                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.. See also error CS8936.
+                // (3,38): warning CS1658: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.. See also error CS8936.
                 // /// See <see cref="implicit operator checked int(C)" />.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "checked")
                     .WithArguments(
@@ -5372,12 +5473,14 @@ regular C2
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (16,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (16,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(++x); // C0
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, op + "x")
                     .WithArguments("checked user-defined operators", "11.0")
                     .WithLocation(16, 24),
-                // (26,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (26,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(++x); // C1
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, op + "x")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -5836,7 +5939,8 @@ null
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (12,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (12,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(++x);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, op + "x")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -6309,12 +6413,14 @@ regular C2
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (16,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (16,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(x + x); // C0
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x " + op + " x")
                     .WithArguments("checked user-defined operators", "11.0")
                     .WithLocation(16, 24),
-                // (26,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (26,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(x + x); // C1
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x " + op + " x")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -6875,12 +6981,14 @@ regular C2
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (16,19): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (16,19): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         checked { x += x; } // C0
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x " + op + "= x")
                     .WithArguments("checked user-defined operators", "11.0")
                     .WithLocation(16, 19),
-                // (26,19): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (26,19): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         checked { x += x; } // C1
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x " + op + "= x")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -7037,7 +7145,8 @@ null
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (14,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (14,24): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         return checked(x + y);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "x " + op + " y")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -7587,7 +7696,8 @@ implicit C0
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (23,26): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (23,26): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         checked { return (long)x; }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "(long)x")
                     .WithArguments("checked user-defined operators", "11.0")
@@ -7700,22 +7810,26 @@ class Program
                 parseOptions: TestOptions.RegularPreview
             );
             compilation2.VerifyDiagnostics(
-                // (25,26): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion exists (are you missing a cast?)
+                // (25,26): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         checked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "long")
                     .WithLocation(25, 26),
-                // (30,28): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion exists (are you missing a cast?)
+                // (30,28): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         unchecked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "long")
                     .WithLocation(30, 28),
-                // (35,26): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (35,26): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         checked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "int")
                     .WithLocation(35, 26),
-                // (40,28): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (40,28): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         unchecked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "int")
@@ -8025,7 +8139,8 @@ class Program
                 parseOptions: TestOptions.RegularPreview
             );
             compilation2.VerifyDiagnostics(
-                // (10,26): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion exists (are you missing a cast?)
+                // (10,26): error CS0266: Cannot implicitly convert type 'C0' to 'long'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         checked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "long")
@@ -8040,7 +8155,8 @@ class Program
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(long)x")
                     .WithArguments("C0", "long")
                     .WithLocation(20, 28),
-                // (25,26): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (25,26): error CS0266: Cannot implicitly convert type 'C0' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         checked { return x; }
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "x")
                     .WithArguments("C0", "int")
@@ -8139,7 +8255,8 @@ null
                 references: new[] { compilation2.ToMetadataReference() }
             );
             compilation3.VerifyDiagnostics(
-                // (12,26): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0. Please use language version 11.0 or greater.
+                // (12,26): error CS8936: Feature 'checked user-defined operators' is not available in C# 10.0.
+                // Please use language version 11.0 or greater.
                 //         checked { return (long?)x; }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "(long?)x")
                     .WithArguments("checked user-defined operators", "11.0")

@@ -88,7 +88,8 @@ namespace System.Text.Json.Serialization.Metadata
             Debug.Assert(!typeInfo.IsReadOnly);
             Debug.Assert(typeInfo.Kind is JsonTypeInfoKind.Object);
 
-            // SetsRequiredMembersAttribute means that all required members are assigned by constructor and therefore there is no enforcement
+            // SetsRequiredMembersAttribute means that all required members are assigned by constructor and
+            // therefore there is no enforcement
             bool constructorHasSetsRequiredMembersAttribute =
                 typeInfo.Converter.ConstructorInfo?.HasSetsRequiredMembersAttribute() ?? false;
 
@@ -135,7 +136,8 @@ namespace System.Text.Json.Serialization.Metadata
                 | BindingFlags.NonPublic
                 | BindingFlags.DeclaredOnly;
 
-            // Compiler adds RequiredMemberAttribute to type if any of the members are marked with 'required' keyword.
+            // Compiler adds RequiredMemberAttribute to type if any of the members are marked with 'required'
+            // keyword.
             bool shouldCheckMembersForRequiredMemberAttribute =
                 !constructorHasSetsRequiredMembersAttribute
                 && currentType.HasRequiredMemberAttribute();
@@ -154,7 +156,8 @@ namespace System.Text.Json.Serialization.Metadata
                 bool hasJsonIncludeAttribute =
                     propertyInfo.GetCustomAttribute<JsonIncludeAttribute>(inherit: false) != null;
 
-                // Only include properties that either have a public getter or a public setter or have the JsonIncludeAttribute set.
+                // Only include properties that either have a public getter or a public setter or have the
+                // JsonIncludeAttribute set.
                 if (
                     propertyInfo.GetMethod?.IsPublic == true
                     || propertyInfo.SetMethod?.IsPublic == true

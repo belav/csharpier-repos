@@ -118,7 +118,8 @@ namespace System.ServiceProcess.Tests
                         );
                     }
 
-                    // A local variable in an unsafe method is already fixed -- so we don't need a "fixed { }" blocks to protect
+                    // A local variable in an unsafe method is already fixed -- so we don't need a "fixed { }" blocks to
+                    // protect
                     // across the p/invoke calls below.
 
                     if (Description.Length != 0)
@@ -192,7 +193,8 @@ namespace System.ServiceProcess.Tests
         {
             using (ServiceController svc = new ServiceController(ServiceName))
             {
-                // The Service exists at this point, but OpenService is failing, possibly because its being invoked concurrently for another service.
+                // The Service exists at this point, but OpenService is failing, possibly because its being invoked
+                // concurrently for another service.
                 // https://github.com/dotnet/runtime/issues/23247
                 if (svc.Status != ServiceControllerStatus.Stopped)
                 {

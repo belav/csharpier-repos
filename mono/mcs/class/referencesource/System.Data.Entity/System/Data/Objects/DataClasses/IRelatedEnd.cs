@@ -102,7 +102,8 @@ namespace System.Data.Objects.DataClasses
         /// <param name="entity">
         ///   Entity instance to remove from the related end
         /// </param>
-        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part of the IRelatedEnd.</returns>
+        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part
+        // of the IRelatedEnd.</returns>
         bool Remove(IEntityWithRelationships entity);
 
         /// <summary>
@@ -115,7 +116,8 @@ namespace System.Data.Objects.DataClasses
         /// <param name="entity">
         ///   Entity instance to remove from the related end
         /// </param>
-        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part of the IRelatedEnd.</returns>
+        /// <returns>Returns true if the entity was successfully removed, false if the entity was not part
+        // of the IRelatedEnd.</returns>
         bool Remove(object entity);
 
         /// <summary>
@@ -128,8 +130,10 @@ namespace System.Data.Objects.DataClasses
         /// instance.
         /// </summary>
         /// <param name="entity">The entity to attach to the related end</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the current relationship end.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the
+        // current relationship end.</exception>
         void Attach(IEntityWithRelationships entity);
 
         /// <summary>
@@ -144,8 +148,10 @@ namespace System.Data.Objects.DataClasses
         /// This overload is meant to be used by classes that do not implement IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">The entity to attach to the related end</param>
-        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the current relationship end.</exception>
+        /// <exception cref="ArgumentNullException">Thrown when <paramref name="entity"/> is
+        // null.</exception>
+        /// <exception cref="InvalidOperationException">Thrown when the entity cannot be related via the
+        // current relationship end.</exception>
         void Attach(object entity);
 
         /// <summary>

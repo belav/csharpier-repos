@@ -118,7 +118,8 @@ internal class ComponentApplicationBuilder
     }
 
     /// <summary>
-    /// Gets the <see cref="ComponentApplicationBuilder"/> for the given <typeparamref name="TComponent"/>.
+    /// Gets the <see cref="ComponentApplicationBuilder"/> for the given <typeparamref
+    // name="TComponent"/>.
     /// </summary>
     /// <typeparam name="TComponent">A component inside the assembly.</typeparam>
     /// <returns></returns>

@@ -11,17 +11,20 @@
         const string RemotingLeaseLifetimeInMinutesEnvironmentVariableName =
             "XamlBuildTaskTimeoutInMinutes";
 
-        // In order to take advantage of the XamlBuildTaskRemotingLeaseLifetimeInMinutes environment variable from an MSBuild
+        // In order to take advantage of the XamlBuildTaskRemotingLeaseLifetimeInMinutes environment
+        // variable from an MSBuild
         // project file (e.g. csproj file), the following needs to be added to that project file:
         //
         // After the initial "<Project ..." line:
-        // <UsingTask TaskName="MySetEnv" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
+        // <UsingTask TaskName="MySetEnv" TaskFactory="CodeTaskFactory"
+        // AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" >
         //   <ParameterGroup>
         //     <Name Required="true" />
         //     <Value Required="false" />
         //   </ParameterGroup>
         //   <Task>
-        //     <Code Type="Fragment" Language="cs">System.Environment.SetEnvironmentVariable(Name, Value);</Code>
+        //     <Code Type="Fragment" Language="cs">System.Environment.SetEnvironmentVariable(Name,
+        // Value);</Code>
         //   </Task>
         // </UsingTask>
         //
@@ -36,7 +39,8 @@
         //
         // This example uses a task name of "MySetEnv", but it that name could be anything desired.
         // It also sets the timeout to 24 minutes, as defined as the Value specified to the MySetEnv task.
-        // The AfterBuild target is not required, but is probably desired so that the environment variable setting
+        // The AfterBuild target is not required, but is probably desired so that the environment variable
+        // setting
         // does not persist after the processing of this particular project file.
         // The valid values for the environment variable are numbers between 1 and 2147483647 inclusive
         // (positive 32-bit integers). Any other value will result in no change to the lease lifetime.
@@ -78,7 +82,8 @@
                 }
                 catch (Exception ex)
                 {
-                    // simply ignore any exceptions that might have occurred and go with the default. We can't log it because
+                    // simply ignore any exceptions that might have occurred and go with the default. We can't log it
+                    // because
                     // we aren't initialized enough at this point.
                     if (Fx.IsFatal(ex))
                     {

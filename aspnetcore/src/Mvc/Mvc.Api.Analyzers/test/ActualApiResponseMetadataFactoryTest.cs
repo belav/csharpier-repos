@@ -220,7 +220,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         ReturnOperationTestVariant variant
     )
     {
-        // This is a gap in the analyzer. We're using this to document the current behavior and not an expecation.
+        // This is a gap in the analyzer. We're using this to document the current behavior and not an
+        // expecation.
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
 
@@ -236,7 +237,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         ReturnOperationTestVariant variant
     )
     {
-        // This is a gap in the analyzer. We're using this to document the current behavior and not an expecation.
+        // This is a gap in the analyzer. We're using this to document the current behavior and not an
+        // expecation.
         // Arrange & Act
         var actualResponseMetadata = await RunInspectReturnStatementSyntax(variant);
 

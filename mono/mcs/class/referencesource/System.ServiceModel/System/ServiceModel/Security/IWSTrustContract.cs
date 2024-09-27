@@ -26,9 +26,12 @@ namespace System.ServiceModel.Security
         /// Begin Async Method for Cancel binding for WS-Trust
         /// </summary>
         /// <param name="message">The Request Message that contains a RST.</param>
-        /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send request from other requests.</param>
-        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be pending. </returns>
+        /// <param name="callback">An optional asynchronous callback, to be called when the send is
+        // complete.</param>
+        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous
+        // send request from other requests.</param>
+        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be
+        // pending. </returns>
         [OperationContract(AsyncPattern = true, Name = "Cancel", Action = "*", ReplyAction = "*")]
         IAsyncResult BeginCancel(Message message, AsyncCallback callback, object asyncState);
 
@@ -51,9 +54,12 @@ namespace System.ServiceModel.Security
         /// Begin Async Method for Issue binding for WS-Trust
         /// </summary>
         /// <param name="message">The Request Message that contains a RST.</param>
-        /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send request from other requests.</param>
-        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be pending. </returns>
+        /// <param name="callback">An optional asynchronous callback, to be called when the send is
+        // complete.</param>
+        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous
+        // send request from other requests.</param>
+        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be
+        // pending. </returns>
         [OperationContract(AsyncPattern = true, Name = "Issue", Action = "*", ReplyAction = "*")]
         IAsyncResult BeginIssue(Message message, AsyncCallback callback, object asyncState);
 
@@ -76,9 +82,12 @@ namespace System.ServiceModel.Security
         /// Begin Async Method for Renew binding for WS-Trust
         /// </summary>
         /// <param name="message">The Request Message that contains a RST.</param>
-        /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send request from other requests.</param>
-        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be pending. </returns>
+        /// <param name="callback">An optional asynchronous callback, to be called when the send is
+        // complete.</param>
+        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous
+        // send request from other requests.</param>
+        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be
+        // pending. </returns>
         [OperationContract(AsyncPattern = true, Name = "Renew", Action = "*", ReplyAction = "*")]
         IAsyncResult BeginRenew(Message message, AsyncCallback callback, object asyncState);
 
@@ -101,9 +110,12 @@ namespace System.ServiceModel.Security
         /// Begin Async Method for Validate binding for WS-Trust
         /// </summary>
         /// <param name="message">The Request Message that contains a RST.</param>
-        /// <param name="callback">An optional asynchronous callback, to be called when the send is complete.</param>
-        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous send request from other requests.</param>
-        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be pending. </returns>
+        /// <param name="callback">An optional asynchronous callback, to be called when the send is
+        // complete.</param>
+        /// <param name="asyncState">A user-provided object that distinguishes this particular asynchronous
+        // send request from other requests.</param>
+        /// <returns>An IAsyncResult object that represents the asynchronous send, which could still be
+        // pending. </returns>
         [OperationContract(AsyncPattern = true, Name = "Validate", Action = "*", ReplyAction = "*")]
         IAsyncResult BeginValidate(Message message, AsyncCallback callback, object asyncState);
 

@@ -7,8 +7,10 @@ using System.Diagnostics;
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Base class for all RoParameter's returned by MethodBase.GetParameters() that don't have an entry in the Param table.
-    /// (in practice, these are return value "parameters.") These parameters have no name, custom attributes or default values.
+    /// Base class for all RoParameter's returned by MethodBase.GetParameters() that don't have an entry
+    // in the Param table.
+    /// (in practice, these are return value "parameters.") These parameters have no name, custom
+    // attributes or default values.
     /// </summary>
     internal sealed class RoThinMethodParameter : RoMethodParameter
     {
@@ -29,7 +31,8 @@ namespace System.Reflection.TypeLoading
 
         public sealed override bool HasDefaultValue => true; // Compat: returning "true" makes no sense but this is how it's always been.
 
-        // Returning "null" matches the .NET Framework behavior, though this is inconsistent with the DBNull/Missing values
+        // Returning "null" matches the .NET Framework behavior, though this is inconsistent with the
+        // DBNull/Missing values
         // returned by fat ParameterInfo's without default values.
         public sealed override object? RawDefaultValue => null;
     }

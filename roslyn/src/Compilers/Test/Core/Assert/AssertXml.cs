@@ -20,9 +20,12 @@ using ReferenceEqualityComparer = Roslyn.Utilities.ReferenceEqualityComparer;
 namespace Roslyn.Test.Utilities
 {
     /// <summary>
-    /// There are many ways to compare XML documents.  This class aims to provide functionality somewhere
-    /// between a straight string comparison and a fully-configurable XML tree comparison.  In particular,
-    /// given a shallow comparer (i.e. one that does not consider children), it will compare the root elements
+    /// There are many ways to compare XML documents.  This class aims to provide functionality
+    // somewhere
+    /// between a straight string comparison and a fully-configurable XML tree comparison.  In
+    // particular,
+    /// given a shallow comparer (i.e. one that does not consider children), it will compare the root
+    // elements
     /// and, if they are equal, match up children by shallow equality, recursing on each pair.
     /// </summary>
     public static class AssertXml
@@ -109,7 +112,8 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Helpful diff output message.  Can be printed as either an XML literal (VB) or a string literal (C#).
+        /// Helpful diff output message.  Can be printed as either an XML literal (VB) or a string literal
+        // (C#).
         /// </summary>
         private static string GetAssertText(
             string expected,
@@ -173,9 +177,11 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Compare the root elements and, if they are equal, match up children by shallow equality, recursing on each pair.
+        /// Compare the root elements and, if they are equal, match up children by shallow equality,
+        // recursing on each pair.
         /// </summary>
-        /// <returns>True if the elements are equal, false otherwise (in which case, firstMismatch will try to indicate a point of disagreement).</returns>
+        /// <returns>True if the elements are equal, false otherwise (in which case, firstMismatch will try
+        // to indicate a point of disagreement).</returns>
         private static bool CheckEqual(
             XElement expectedRoot,
             XElement actualRoot,
@@ -285,7 +291,8 @@ namespace Roslyn.Test.Utilities
         }
 
         /// <summary>
-        /// Convenience shallow element comparer.  Checks names and attribute name-value pairs (ignoring order).
+        /// Convenience shallow element comparer.  Checks names and attribute name-value pairs (ignoring
+        // order).
         /// </summary>
         private class NameAndAttributeComparer : IEqualityComparer<XElement>
         {

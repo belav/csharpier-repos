@@ -50,7 +50,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public void TestDecryptSimpleAes256_RsaOaepMd5_Throws()
         {
             // Generated with:
-            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep -keyopt rsa_mgf1_md:md5 --aes256 -keyopt rsa_oaep_md:md5
+            // openssl cms -encrypt -in input.txt -out out.msg -recip cert.pem -keyopt rsa_padding_mode:oaep
+            // -keyopt rsa_mgf1_md:md5 --aes256 -keyopt rsa_oaep_md:md5
             byte[] encodedMessage = Convert.FromBase64String(
                 "MIIBUgYJKoZIhvcNAQcDoIIBQzCCAT8CAQAxgfswgfgCAQAwNDAgMR4wHAYDVQQD"
                     + "ExVSU0FTaGEyNTZLZXlUcmFuc2ZlcjECEHLGx3NJFkaMTWCCU9oBdnYwOgYJKoZI"

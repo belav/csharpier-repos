@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var first = ReferenceHolder<object?>.Weak(obj);
             var second = ReferenceHolder<object?>.Weak(obj);
 
-            // 📝 There is no need for a GC.KeepAlive(obj) here. 'VerifyEqual' will produce correct results whether
+            // 📝 There is no need for a GC.KeepAlive(obj) here. 'VerifyEqual' will produce correct results
+            // whether
             // or not the object is still alive. When the object is alive, the equality path is the same as
             // SameStrongObjectsEqual. When the object is not alive, the equality path is the same as
             // ExpiredSameValuesEqual.

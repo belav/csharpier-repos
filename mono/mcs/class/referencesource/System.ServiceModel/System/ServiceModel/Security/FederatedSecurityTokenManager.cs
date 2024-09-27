@@ -42,7 +42,8 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Initializes an instance of <see cref="FederatedSecurityTokenManager"/>.
         /// </summary>
-        /// <param name="parentCredentials">ServiceCredentials that created this instance of TokenManager.</param>
+        /// <param name="parentCredentials">ServiceCredentials that created this instance of
+        // TokenManager.</param>
         /// <exception cref="ArgumentNullException">The argument 'parentCredentials' is null.</exception>
         public FederatedSecurityTokenManager(ServiceCredentials parentCredentials)
             : base(parentCredentials)
@@ -109,11 +110,14 @@ namespace System.ServiceModel.Security
         /// based on the TokenType Uri in the SecurityTokenRequirement. If none is found,
         /// then the call is delegated to the inner Token Manager.
         /// </summary>
-        /// <param name="tokenRequirement">Security Token Requirement for which the Authenticator should be created.</param>
-        /// <param name="outOfBandTokenResolver">Token resolver that resolves any out-of-band tokens.</param>
+        /// <param name="tokenRequirement">Security Token Requirement for which the Authenticator should be
+        // created.</param>
+        /// <param name="outOfBandTokenResolver">Token resolver that resolves any out-of-band
+        // tokens.</param>
         /// <returns>Instance of Security Token Authenticator.</returns>
         /// <exception cref="ArgumentNullException">'tokenRequirement' parameter is null.</exception>
-        /// <exception cref="NotSupportedException">No Authenticator is registered for the given token type.</exception>
+        /// <exception cref="NotSupportedException">No Authenticator is registered for the given token
+        // type.</exception>
         public override SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(
             SecurityTokenRequirement tokenRequirement,
             out SecurityTokenResolver outOfBandTokenResolver
@@ -134,7 +138,8 @@ namespace System.ServiceModel.Security
             string tokenType = tokenRequirement.TokenType;
 
             //
-            // When the TokenRequirement.TokenType is null, we treat this as a SAML issued token case. It may be SAML 1.1 or SAML 2.0.
+            // When the TokenRequirement.TokenType is null, we treat this as a SAML issued token case. It may be
+            // SAML 1.1 or SAML 2.0.
             //
             if (String.IsNullOrEmpty(tokenType))
             {
@@ -387,11 +392,15 @@ namespace System.ServiceModel.Security
             // WCF expects this securityTokenAuthenticator to support:
             // 1. IIssuanceSecurityTokenAuthenticator
             // 2. ICommunicationObject is needed for this to work right.
-            // WCF opens a listener in this STA that handles the nego and uses an internal class for negotiating the
-            // the bootstrap tokens.  We want to handle ValidateToken to return our authorization policies and surface the bootstrap tokens.
+            // WCF opens a listener in this STA that handles the nego and uses an internal class for negotiating
+            // the
+            // the bootstrap tokens.  We want to handle ValidateToken to return our authorization policies and
+            // surface the bootstrap tokens.
 
             // when sp1 is installed, use this one.
-            //SecurityTokenAuthenticator sta = base.CreateSecureConversationTokenAuthenticator( tokenRequirement as RecipientServiceModelSecurityTokenRequirement, _saveBootstrapTokensInSession, out outOfBandTokenResolver );
+            //SecurityTokenAuthenticator sta = base.CreateSecureConversationTokenAuthenticator( tokenRequirement
+            // as RecipientServiceModelSecurityTokenRequirement, _saveBootstrapTokensInSession, out
+            // outOfBandTokenResolver );
 
             // use this code if SP1 is not installed
             SecurityTokenAuthenticator sta = base.CreateSecurityTokenAuthenticator(
@@ -469,7 +478,8 @@ namespace System.ServiceModel.Security
                 (sta as TlsnegoTokenAuthenticator).IssuedTokenCache = wrappedTokenCache;
             }
 
-            // we need to special case this as the OnTokenIssued callback is not hooked up in the cookie mode case.
+            // we need to special case this as the OnTokenIssued callback is not hooked up in the cookie mode
+            // case.
             IIssuanceSecurityTokenAuthenticator issuanceTokenAuthenticator =
                 sta as IIssuanceSecurityTokenAuthenticator;
             if (issuanceTokenAuthenticator != null)
@@ -646,7 +656,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// There is a bug in WCF where the version obtained from the public SecurityTokenVersion strings is wrong.
+        /// There is a bug in WCF where the version obtained from the public SecurityTokenVersion strings is
+        // wrong.
         /// The internal MessageSecurityTokenVersion has the right version.
         /// </summary>
         internal static SecurityVersion GetSecurityVersion(SecurityTokenVersion tokenVersion)
@@ -838,7 +849,8 @@ namespace System.ServiceModel.Security
         /// The method preserves the Uri scheme, port and absolute path and replaces the host name
         /// with the string 'NormalizedHostName'.
         /// </summary>
-        /// <param name="tokenRequirement">The <see cref="SecurityTokenRequirement"/> which contains the 'ListenUri' property.</param>
+        /// <param name="tokenRequirement">The <see cref="SecurityTokenRequirement"/> which contains the
+        // 'ListenUri' property.</param>
         /// <returns>A string representing the Normalized URI string.</returns>
         public static string GetNormalizedEndpointId(SecurityTokenRequirement tokenRequirement)
         {

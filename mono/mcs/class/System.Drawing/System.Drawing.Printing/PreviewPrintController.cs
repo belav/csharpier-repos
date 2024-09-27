@@ -60,7 +60,7 @@ namespace System.Drawing.Printing
             if (!document.PrinterSettings.IsValid)
                 throw new InvalidPrinterException(document.PrinterSettings);
 
-            /* maybe we should reuse the images, and clear them? */
+/* maybe we should reuse the images, and clear them? */
             foreach (PreviewPageInfo pi in pageInfoList)
                 pi.Image.Dispose();
 

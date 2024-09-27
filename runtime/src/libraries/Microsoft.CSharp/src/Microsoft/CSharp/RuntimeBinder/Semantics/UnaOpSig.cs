@@ -52,10 +52,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 this.fnkind = fnkind;
             }
 
-            /***************************************************************************************************
-                Set the values of the UnaOpFullSig from the given UnaOpSig. The ExpressionBinder is needed to get
-                the predefined type. Returns true iff the predef type is found.
-            ***************************************************************************************************/
+/***************************************************************************************************
+Set the values of the UnaOpFullSig from the given UnaOpSig. The ExpressionBinder is needed to get
+the predefined type. Returns true iff the predef type is found.
+***************************************************************************************************/
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
             public UnaOpFullSig(UnaOpSig uos)
             {

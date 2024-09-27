@@ -579,7 +579,8 @@ class C
         {
             // This only works with a partially written name.
             // Because async is not a keyword, the syntax tree when the name is missing is completely broken
-            // in that there can be multiple statements full of missing and skipped tokens depending on the type syntax.
+            // in that there can be multiple statements full of missing and skipped tokens depending on the type
+            // syntax.
             var markup =
                 $@"
 using System.Collections.Generic;

@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * EtwTrace class
- */
+* EtwTrace class
+*/
 namespace System.Web
 {
     using System.Web.Hosting;

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,10 @@ namespace Microsoft.TestCommon
 
     /// <summary>
     /// This class allocates ports while ensuring that:
-    /// 1. Ports that are permanently taken (or taken for the duration of the test) are not being attempted to be used.
-    /// 2. Ports are not shared across different tests (but you can allocate two different ports in the same test).
+    /// 1. Ports that are permanently taken (or taken for the duration of the test) are not being
+    // attempted to be used.
+    /// 2. Ports are not shared across different tests (but you can allocate two different ports in the
+    // same test).
     ///
     /// Gotcha: If another application grabs a port during the test, we have a race condition.
     /// </summary>
@@ -30,9 +33,12 @@ namespace Microsoft.TestCommon
         private Mutex _portMutex;
         private Thread _acquiredOn;
 
-        // We use this list to hold on to all the ports used because the Mutex will be blown through on the same thread.
-        // Theoretically we can do a thread local HashSet, but that makes dispose thread-dependent, or requires more complicated concurrency checks.
-        // Since practically there is no perf issue or concern here, this keeps the code the simplest possible.
+        // We use this list to hold on to all the ports used because the Mutex will be blown through on the
+        // same thread.
+        // Theoretically we can do a thread local HashSet, but that makes dispose thread-dependent, or
+        // requires more complicated concurrency checks.
+        // Since practically there is no perf issue or concern here, this keeps the code the simplest
+        // possible.
         private static HashSet<int> _appDomainOwnedPorts = new HashSet<int>();
 
         public int PortNumber { get; private set; }
@@ -47,7 +53,8 @@ namespace Microsoft.TestCommon
                 );
             }
 
-            // Grab a cross appdomain/cross process/cross thread lock, to ensure only one port is reserved at a time.
+            // Grab a cross appdomain/cross process/cross thread lock, to ensure only one port is reserved at a
+            // time.
             using (Mutex mutex = GetGlobalMutex())
             {
                 try

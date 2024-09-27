@@ -25,7 +25,8 @@ namespace System.Data.EntityClient
         private DbTransaction _storeTransaction;
 
         /// <summary>
-        /// Constructs the EntityTransaction object with an associated connection and the underlying store transaction
+        /// Constructs the EntityTransaction object with an associated connection and the underlying store
+        // transaction
         /// </summary>
         /// <param name="connection">The EntityConnetion object owning this transaction</param>
         /// <param name="storeTransaction">The underlying transaction object</param>
@@ -121,7 +122,8 @@ namespace System.Data.EntityClient
         /// <summary>
         /// Cleans up this transaction object
         /// </summary>
-        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources</param>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release
+        // only unmanaged resources</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)

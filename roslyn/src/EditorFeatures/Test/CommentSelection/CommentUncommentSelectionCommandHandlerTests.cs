@@ -406,7 +406,8 @@ class C
         }
 
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/563927")]
-        // This test is just measuring current behavior, there is no reason not to support maintaining box selection.
+        // This test is just measuring current behavior, there is no reason not to support maintaining box
+        // selection.
         public void Uncomment_BoxSelection()
         {
             var code =

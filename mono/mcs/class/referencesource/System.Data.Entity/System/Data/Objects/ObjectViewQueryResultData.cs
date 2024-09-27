@@ -49,7 +49,8 @@ namespace System.Data.Objects
         private bool _canModifyList;
 
         /// <summary>
-        /// Construct a new instance of the ObjectViewQueryResultData class using the supplied query results.
+        /// Construct a new instance of the ObjectViewQueryResultData class using the supplied query
+        // results.
         /// </summary>
         /// <param name="queryResults">
         /// Result of object query execution used to populate the binding list.
@@ -60,7 +61,8 @@ namespace System.Data.Objects
         /// </param>
         /// <param name="forceReadOnlyList">
         /// <b>True</b> if items should not be allowed to be added or removed from the binding list.
-        /// Note that other conditions may prevent the binding list from being modified, so a value of <b>false</b>
+        /// Note that other conditions may prevent the binding list from being modified, so a value of
+        // <b>false</b>
         /// supplied for this parameter doesn't necessarily mean that the list will be writable.
         /// </param>
         /// <param name="entitySet">

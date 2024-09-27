@@ -83,7 +83,8 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Security.Cryptography.CngUIProtectionLevels)
 )]
-// TODO: [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.DSACng))]
+// TODO: [assembly:
+// System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Security.Cryptography.DSACng))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Security.Cryptography.ECDsaCng)
 )]

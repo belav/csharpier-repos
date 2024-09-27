@@ -15,7 +15,8 @@ namespace System.Web.UI
 
     /// <devdoc>
     /// Contains parsed attributes organized by filter.
-    /// The IDictionary implementation uses the combination of all filters using filter:attrName as the attribute names
+    /// The IDictionary implementation uses the combination of all filters using filter:attrName as the
+    // attribute names
     /// </devdoc>
     internal sealed class ParsedAttributeCollection : IDictionary
     {
@@ -90,12 +91,14 @@ namespace System.Web.UI
         }
 
         /// <summary>
-        /// This adds an entry for the attribute name and the starting column of attribute value within the text.
+        /// This adds an entry for the attribute name and the starting column of attribute value within the
+        // text.
         /// This information is later used for generating line pragmas for intellisense to work.
         /// </summary>
         /// <param name="name">Name of the attribute.</param>
         /// <param name="line">The line number where the attribute value expression is present.</param>
-        /// <param name="column">The column value where the attribute value expression begins. Note that this is actually after the attribute name itself.</param>
+        /// <param name="column">The column value where the attribute value expression begins. Note that
+        // this is actually after the attribute name itself.</param>
         public void AddAttributeValuePositionInformation(string name, int line, int column)
         {
             Debug.Assert(!String.IsNullOrEmpty(name));

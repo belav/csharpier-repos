@@ -462,7 +462,8 @@ namespace System.ServiceModel.Channels
 
                 if (extendedProtectionPolicy.PolicyEnforcement == PolicyEnforcement.Always)
                 {
-                    // If the securityBinding does not support ExtendedProtectionPolicy OR { there is no channel-binding-provider and we are not in TrustedProxy scenario } then we throw.
+                    // If the securityBinding does not support ExtendedProtectionPolicy OR { there is no
+                    // channel-binding-provider and we are not in TrustedProxy scenario } then we throw.
                     // For NetFXw7, we only suppport SPNego and Kerb.
                     if (
                         SecurityUtils.IsChannelBindingDisabled

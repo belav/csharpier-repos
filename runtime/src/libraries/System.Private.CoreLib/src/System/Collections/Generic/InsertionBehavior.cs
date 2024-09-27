@@ -4,7 +4,8 @@
 namespace System.Collections.Generic
 {
     /// <summary>
-    /// Used internally to control behavior of insertion into a <see cref="Dictionary{TKey, TValue}"/> or <see cref="HashSet{T}"/>.
+    /// Used internally to control behavior of insertion into a <see cref="Dictionary{TKey, TValue}"/>
+    // or <see cref="HashSet{T}"/>.
     /// </summary>
     internal enum InsertionBehavior : byte
     {
@@ -19,7 +20,8 @@ namespace System.Collections.Generic
         OverwriteExisting = 1,
 
         /// <summary>
-        /// Specifies that if an existing entry with the same key is encountered, an exception should be thrown.
+        /// Specifies that if an existing entry with the same key is encountered, an exception should be
+        // thrown.
         /// </summary>
         ThrowOnExisting = 2,
     }

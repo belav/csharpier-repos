@@ -181,7 +181,8 @@ namespace System.ServiceModel.Description
         }
 
         /// <summary>
-        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </summary>
         public SecurityTokenHandlerCollectionManager SecurityTokenHandlerCollectionManager
@@ -328,7 +329,8 @@ namespace System.ServiceModel.Description
         {
             CardSpacePolicyElement[] dummyPolicyElements;
             Uri dummyRelyingPartyIssuer;
-            // we add the initializer only if infocard is required. At this point, serviceEndpoint.Address is not populated correctly but that's not needed to
+            // we add the initializer only if infocard is required. At this point, serviceEndpoint.Address is
+            // not populated correctly but that's not needed to
             // determine whether infocard is required or not.
             if (
                 InfoCardHelper.IsInfocardRequired(
@@ -399,7 +401,8 @@ namespace System.ServiceModel.Description
                 this.peer.MakeReadOnly();
         }
 
-        // This APTCA method calls CardSpaceSelector.GetToken(..), which is defined in a non-APTCA assembly. It would be a breaking change to add a Demand,
+        // This APTCA method calls CardSpaceSelector.GetToken(..), which is defined in a non-APTCA assembly.
+        // It would be a breaking change to add a Demand,
         // while we don't have an identified security vulnerability here.
         [SuppressMessage(
             FxCop.Category.Security,

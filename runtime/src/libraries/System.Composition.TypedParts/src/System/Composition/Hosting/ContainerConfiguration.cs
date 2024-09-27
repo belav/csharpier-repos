@@ -99,7 +99,8 @@ namespace System.Composition.Hosting
         /// will be ignored.
         /// </summary>
         /// <param name="partType">The part type.</param>
-        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
+        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or
+        // null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithPart(Type partType, AttributedModelProvider conventions)
         {
@@ -124,7 +125,8 @@ namespace System.Composition.Hosting
         /// will be ignored.
         /// </summary>
         /// <typeparam name="TPart">The part type.</typeparam>
-        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
+        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or
+        // null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithPart<TPart>(AttributedModelProvider conventions)
         {
@@ -158,7 +160,8 @@ namespace System.Composition.Hosting
         /// will be ignored.
         /// </summary>
         /// <param name="partTypes">The part types.</param>
-        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
+        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or
+        // null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithParts(
             IEnumerable<Type> partTypes,
@@ -190,7 +193,8 @@ namespace System.Composition.Hosting
         /// will be ignored.
         /// </summary>
         /// <param name="assembly">The assembly from which to add part types.</param>
-        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
+        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or
+        // null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithAssembly(
             Assembly assembly,
@@ -201,7 +205,8 @@ namespace System.Composition.Hosting
         }
 
         /// <summary>
-        /// Add part types from a list of assemblies to the container. If a part type does not have any exports it
+        /// Add part types from a list of assemblies to the container. If a part type does not have any
+        // exports it
         /// will be ignored.
         /// </summary>
         /// <param name="assemblies">Assemblies containing part types.</param>
@@ -212,11 +217,13 @@ namespace System.Composition.Hosting
         }
 
         /// <summary>
-        /// Add part types from a list of assemblies to the container. If a part type does not have any exports it
+        /// Add part types from a list of assemblies to the container. If a part type does not have any
+        // exports it
         /// will be ignored.
         /// </summary>
         /// <param name="assemblies">Assemblies containing part types.</param>
-        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or null.</param>
+        /// <param name="conventions">Conventions represented by a <see cref="AttributedModelProvider"/>, or
+        // null.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithAssemblies(
             IEnumerable<Assembly> assemblies,
@@ -255,8 +262,10 @@ namespace System.Composition.Hosting
         /// </summary>
         /// <typeparam name="TExport">The type of the contract of the instance.</typeparam>
         /// <param name="exportedInstance">The instance to add to the container.</param>
-        /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
-        /// <param name="metadata">Optionally, a non-empty collection of named constraints that apply to the contract.</param>
+        /// <param name="contractName">Optionally, a name that discriminates this contract from others with
+        // the same type.</param>
+        /// <param name="metadata">Optionally, a non-empty collection of named constraints that apply to the
+        // contract.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithExport<TExport>(
             TExport exportedInstance,
@@ -297,8 +306,10 @@ namespace System.Composition.Hosting
         /// </summary>
         /// <param name="contractType">The type of the contract of the instance.</param>
         /// <param name="exportedInstance">The instance to add to the container.</param>
-        /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
-        /// <param name="metadata">Optionally, a non-empty collection of named constraints that apply to the contract.</param>
+        /// <param name="contractName">Optionally, a name that discriminates this contract from others with
+        // the same type.</param>
+        /// <param name="metadata">Optionally, a non-empty collection of named constraints that apply to the
+        // contract.</param>
         /// <returns>A configuration object allowing configuration to continue.</returns>
         public ContainerConfiguration WithExport(
             Type contractType,

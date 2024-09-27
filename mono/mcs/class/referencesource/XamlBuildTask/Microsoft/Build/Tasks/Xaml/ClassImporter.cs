@@ -35,7 +35,8 @@ namespace Microsoft.Build.Tasks.Xaml
             this.namespaceTable = new NamespaceTable(localAssemblyName);
         }
 
-        // Throws InvalidOperationException at DesignTime: Input XAML contains invalid constructs for generating a class. For example, unexpected content or unknown class or field modifiers.
+        // Throws InvalidOperationException at DesignTime: Input XAML contains invalid constructs for
+        // generating a class. For example, unexpected content or unknown class or field modifiers.
         public ClassData ReadFromXaml(XamlNodeList nodes)
         {
             if (nodes == null)
@@ -58,7 +59,8 @@ namespace Microsoft.Build.Tasks.Xaml
 
             // We loop through the provided XAML; for each node, we do two things:
             //  1. If it's a directive that's relevant to x:Class, we extract the data.
-            //  2. Unless it's a directive that's exclusively relevant to x:Class, we write it to strippedXamlNodes.
+            //  2. Unless it's a directive that's exclusively relevant to x:Class, we write it to
+            // strippedXamlNodes.
             // The result is two outputs: class data, and stripped XAML that can be used to initialize the
             // an instance of the class.
 
@@ -330,7 +332,8 @@ namespace Microsoft.Build.Tasks.Xaml
                         && clrNs == oldNamespace
                     )
                     {
-                        // This is a member defined on the document root type, but missing the project root namespace. Fix it.
+                        // This is a member defined on the document root type, but missing the project root namespace. Fix
+                        // it.
                         XamlMember newMember = new XamlMember(
                             member.Name,
                             rootXamlType,

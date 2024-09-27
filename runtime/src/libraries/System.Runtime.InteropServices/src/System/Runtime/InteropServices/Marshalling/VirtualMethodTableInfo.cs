@@ -1,7 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// This type is for the COM Source Generator and defines basic vtable interactions that we would need in the COM source generator in one form or another.
+// This type is for the COM Source Generator and defines basic vtable interactions that we would
+// need in the COM source generator in one form or another.
 namespace System.Runtime.InteropServices.Marshalling
 {
     /// <summary>
@@ -14,7 +15,8 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Construct a <see cref="VirtualMethodTableInfo"/> from a given instance pointer and table memory.
         /// </summary>
         /// <param name="thisPointer">The pointer to the instance.</param>
-        /// <param name="virtualMethodTable">The block of memory that represents the virtual method table.</param>
+        /// <param name="virtualMethodTable">The block of memory that represents the virtual method
+        // table.</param>
         public VirtualMethodTableInfo(void* thisPointer, void** virtualMethodTable)
         {
             ThisPointer = thisPointer;

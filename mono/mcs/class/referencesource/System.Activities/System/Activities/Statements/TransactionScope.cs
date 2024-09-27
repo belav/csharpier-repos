@@ -203,7 +203,8 @@ namespace System.Activities.Statements
                                                             Assertion = new IsolationLevelValidator
                                                             {
                                                                 ParentActivity = parent,
-                                                                //CurrentIsolationLevel = new InArgument<IsolationLevel>(context => element.Get(context).IsolationLevel)
+                                                                //CurrentIsolationLevel = new InArgument<IsolationLevel>(context =>
+                                                                // element.Get(context).IsolationLevel)
                                                                 CurrentIsolationLevel =
                                                                     new InArgument<IsolationLevel>
                                                                     {
@@ -335,9 +336,12 @@ namespace System.Activities.Statements
             else
             {
                 //nested case
-                //foundHandle.IsRuntimeOwnedTransaction will be true only in the Invoke case within an ambient Sys.Tx transaction.
-                //If this TSA is nested inside the ambient transaction from Invoke, then the AbortInstanceFlag is always false since the RTH corresponding to the ambient
-                //transaction has this flag as false. In this case, we ignore if this TSA has this flag explicitly set to true.
+                //foundHandle.IsRuntimeOwnedTransaction will be true only in the Invoke case within an ambient
+                // Sys.Tx transaction.
+                //If this TSA is nested inside the ambient transaction from Invoke, then the AbortInstanceFlag is
+                // always false since the RTH corresponding to the ambient
+                //transaction has this flag as false. In this case, we ignore if this TSA has this flag explicitly
+                // set to true.
                 if (
                     !foundHandle.IsRuntimeOwnedTransaction
                     && this.abortInstanceFlagWasExplicitlySet
@@ -703,7 +707,8 @@ namespace System.Activities.Statements
                         != currentTransactionScope.AbortInstanceOnTransactionFailure
                     )
                     {
-                        //If the Inner TSA was default and still different from outer, we dont flag validation warning. See design spec for all variations
+                        //If the Inner TSA was default and still different from outer, we dont flag validation warning. See
+                        // design spec for all variations
                         if (!currentTransactionScope.abortInstanceFlagWasExplicitlySet)
                         {
                             return true;

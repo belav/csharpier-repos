@@ -19,18 +19,22 @@ namespace System.Reflection.PortableExecutable
 
         /// <summary>
         /// For PE images, the address of the first byte of the section relative to the image base when the
-        /// section is loaded into memory. For object files, this field is the address of the first byte before
+        /// section is loaded into memory. For object files, this field is the address of the first byte
+        // before
         /// relocation is applied; for simplicity, compilers should set this to zero. Otherwise,
         /// it is an arbitrary value that is subtracted from offsets during relocation.
         /// </summary>
         public int VirtualAddress { get; }
 
         /// <summary>
-        /// The size of the section (for object files) or the size of the initialized data on disk (for image files).
+        /// The size of the section (for object files) or the size of the initialized data on disk (for
+        // image files).
         /// For PE images, this must be a multiple of <see cref="PEHeader.FileAlignment"/>.
         /// If this is less than <see cref="VirtualSize"/>, the remainder of the section is zero-filled.
-        /// Because the <see cref="SizeOfRawData"/> field is rounded but the <see cref="VirtualSize"/> field is not,
-        /// it is possible for <see cref="SizeOfRawData"/> to be greater than <see cref="VirtualSize"/> as well.
+        /// Because the <see cref="SizeOfRawData"/> field is rounded but the <see cref="VirtualSize"/> field
+        // is not,
+        /// it is possible for <see cref="SizeOfRawData"/> to be greater than <see cref="VirtualSize"/> as
+        // well.
         ///  When a section contains only uninitialized data, this field should be zero.
         /// </summary>
         public int SizeOfRawData { get; }

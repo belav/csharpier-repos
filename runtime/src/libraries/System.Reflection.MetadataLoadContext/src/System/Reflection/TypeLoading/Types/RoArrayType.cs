@@ -51,8 +51,10 @@ namespace System.Reflection.TypeLoading
                 RoType? ifc = Loader.TryGetCoreType(coreType);
                 if (ifc != null)
                 {
-                    // All of our types are from a fixed list so we know they're supposed be generic interfaces taking one type parameter.
-                    // But since we're loading them from a core assembly that the user supplied us, we should verify and skip if
+                    // All of our types are from a fixed list so we know they're supposed be generic interfaces taking
+                    // one type parameter.
+                    // But since we're loading them from a core assembly that the user supplied us, we should verify and
+                    // skip if
                     // this is not the case.
                     if (
                         ifc is RoDefinitionType roDefinitionType
@@ -98,7 +100,8 @@ namespace System.Reflection.TypeLoading
                 int uniquifier = 0;
 
                 //
-                // Expose a constructor that takes n Int32's (one for each dimension) and constructs a zero lower-bounded array. For example,
+                // Expose a constructor that takes n Int32's (one for each dimension) and constructs a zero
+                // lower-bounded array. For example,
                 //
                 //   String[,]
                 //
@@ -118,7 +121,8 @@ namespace System.Reflection.TypeLoading
                 if (!multiDim)
                 {
                     //
-                    // Jagged arrays also expose constructors that take multiple indices and construct a jagged matrix. For example,
+                    // Jagged arrays also expose constructors that take multiple indices and construct a jagged matrix.
+                    // For example,
                     //
                     //   String[][][][]
                     //
@@ -147,7 +151,8 @@ namespace System.Reflection.TypeLoading
                 if (multiDim)
                 {
                     //
-                    // Expose a constructor that takes n*2 Int32's (two for each dimension) and constructs a arbitrarily lower-bounded array. For example,
+                    // Expose a constructor that takes n*2 Int32's (two for each dimension) and constructs a arbitrarily
+                    // lower-bounded array. For example,
                     //
                     //   String[,]
                     //

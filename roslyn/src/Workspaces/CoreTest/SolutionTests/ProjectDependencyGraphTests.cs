@@ -48,12 +48,15 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
         }
 
         /// <summary>
-        /// Verifies that <see cref="ProjectDependencyGraph.GetTopologicallySortedProjects(CancellationToken)"/>
+        /// Verifies that <see
+        // cref="ProjectDependencyGraph.GetTopologicallySortedProjects(CancellationToken)"/>
         /// returns one of the correct results.
         /// </summary>
         /// <param name="solution"></param>
-        /// <param name="expectedResults">A list of possible results. Because topological sorting is ambiguous
-        /// in that a graph could have multiple topological sorts, this helper lets you give all the possible
+        /// <param name="expectedResults">A list of possible results. Because topological sorting is
+        // ambiguous
+        /// in that a graph could have multiple topological sorts, this helper lets you give all the
+        // possible
         /// results and it asserts that one of them does match.</param>
         private static void VerifyTopologicalSort(
             Solution solution,
@@ -154,7 +157,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             //
             // A -> B -> C -> D
             //
-            // but we will add the B -> C link last, to verify that when we add the B to C link we update the references of A.
+            // but we will add the B -> C link last, to verify that when we add the B to C link we update the
+            // references of A.
 
             var solution = CreateSolutionFromReferenceMap("A B C D");
             VerifyTransitiveReferences(solution, "A", []);
@@ -190,7 +194,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             //
             // A -> B -> C   D -> E -> F
             //
-            // but we will add the C-> D link last, to verify that when we add the C to D link we update the references of A. This is similar
+            // but we will add the C-> D link last, to verify that when we add the C to D link we update the
+            // references of A. This is similar
             // to the previous test but with a longer chain.
 
             var solution = CreateSolutionFromReferenceMap("A:B B:C C D:E E:F F");
@@ -252,7 +257,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // At this point, we know the references for "A" (it's empty), but B and C's are still unknown.
             // At this point, we're also going to directly use the underlying project graph APIs;
             // the higher level solution APIs often call and ask for transitive information as well, which makes
-            // this particularly hard to test -- it turns out the data we think is uncomputed might be computed prior
+            // this particularly hard to test -- it turns out the data we think is uncomputed might be computed
+            // prior
             // to adding the reference.
             var dependencyGraph = solution.GetProjectDependencyGraph();
             var projectAId = solution.GetProjectsByName("A").Single().Id;
@@ -421,7 +427,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             //
             // A -> B -> C -> D
             //
-            // but we will add the B -> C link last, to verify that when we add the B to C link we update the reverse references of D.
+            // but we will add the B -> C link last, to verify that when we add the B to C link we update the
+            // reverse references of D.
 
             var solution = CreateSolutionFromReferenceMap("A B C D");
             VerifyReverseTransitiveReferences(solution, "A", []);
@@ -571,7 +578,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             //   \
             //    > D
             //
-            // and will then remove the project reference A->B. This test verifies that the new project dependency graph
+            // and will then remove the project reference A->B. This test verifies that the new project
+            // dependency graph
             // did not lose previously-computed information about the transitive reverse references for D.
 
             var solution = CreateSolutionFromReferenceMap("A:B,D B:C C D");
@@ -587,8 +595,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
             solution = solution.RemoveProjectReference(a.Id, aToB);
 
-            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
-            // non-null set. Specifically, it returns the _same_ set that was computed prior to the project reference
+            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject
+            // returns a
+            // non-null set. Specifically, it returns the _same_ set that was computed prior to the project
+            // reference
             // removal.
             Assert.Same(
                 expected,
@@ -607,7 +617,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // A -> B -> C
             // D -> E
             //
-            // and will then remove the project reference A->B. This test verifies that the new project dependency graph
+            // and will then remove the project reference A->B. This test verifies that the new project
+            // dependency graph
             // did not lose previously-computed information about the transitive reverse references for E.
 
             var solution = CreateSolutionFromReferenceMap("A:B B:C C D:E E");
@@ -623,8 +634,10 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
             solution = solution.RemoveProjectReference(a.Id, aToB);
 
-            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
-            // non-null set. Specifically, it returns the _same_ set that was computed prior to the project reference
+            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject
+            // returns a
+            // non-null set. Specifically, it returns the _same_ set that was computed prior to the project
+            // reference
             // removal.
             Assert.Same(
                 expected,
@@ -644,7 +657,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             //   \
             //    > D
             //
-            // and will then remove the project reference A->B. This test verifies that the new project dependency graph
+            // and will then remove the project reference A->B. This test verifies that the new project
+            // dependency graph
             // discards previously-computed information about the transitive reverse references for C.
 
             var solution = CreateSolutionFromReferenceMap("A:B,D B:C C D");
@@ -661,7 +675,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             var aToB = a.ProjectReferences.Single(reference => reference.ProjectId == b.Id);
             solution = solution.RemoveProjectReference(a.Id, aToB);
 
-            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject returns a
+            // Before any other operations, verify that TryGetProjectsThatTransitivelyDependOnThisProject
+            // returns a
             // null set.
             Assert.Null(
                 solution
@@ -680,7 +695,8 @@ namespace Microsoft.CodeAnalysis.Host.UnitTests
             // A -> B -> C -> D
             //        \__^
             //
-            // This solution has multiple references from B->C. We will remove one reference from B->C and verify that
+            // This solution has multiple references from B->C. We will remove one reference from B->C and
+            // verify that
             // the project dependency graph in the solution state did not change (reference equality).
             //
             // We then remove the second reference, and verify that the dependency graph does change.

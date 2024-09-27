@@ -108,9 +108,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 
             ConversionKind[,] conversions =
             {
-                // from   obj  str  arr  i64  u64  i32  u32  i16  u16  i08  u08  r64  r32  dec  chr ni64 nu64 ni32 nu32 ni16 nu16  ni8  nu8 nr64 nr32  ndc  nch  exc  ien  ieo  ies  iec  ars  aro  ils  ilo  aex  del  fee  fao  ser  cmp
+                // from   obj  str  arr  i64  u64  i32  u32  i16  u16  i08  u08  r64  r32  dec  chr ni64 nu64 ni32
+                // nu32 ni16 nu16  ni8  nu8 nr64 nr32  ndc  nch  exc  ien  ieo  ies  iec  ars  aro  ils  ilo  aex  del
+                // fee  fao  ser  cmp
                 // to:
-                /*obj*/{
+/*obj*/{
                     Idn,
                     Irf,
                     Irf,
@@ -154,7 +156,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Irf,
                     Irf,
                 },
-                /*str*/
+/*str*/
                 {
                     Xrf,
                     Idn,
@@ -199,7 +201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Xrf,
                 },
-                /*arr*/
+/*arr*/
                 {
                     Xrf,
                     Non,
@@ -244,7 +246,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*i64*/
+/*i64*/
                 {
                     Ubx,
                     Non,
@@ -289,7 +291,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*u64*/
+/*u64*/
                 {
                     Ubx,
                     Non,
@@ -334,7 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*i32*/
+/*i32*/
                 {
                     Ubx,
                     Non,
@@ -379,7 +381,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*u32*/
+/*u32*/
                 {
                     Ubx,
                     Non,
@@ -424,7 +426,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*i16*/
+/*i16*/
                 {
                     Ubx,
                     Non,
@@ -469,7 +471,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*u16*/
+/*u16*/
                 {
                     Ubx,
                     Non,
@@ -514,7 +516,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*i08*/
+/*i08*/
                 {
                     Ubx,
                     Non,
@@ -559,7 +561,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*u08*/
+/*u08*/
                 {
                     Ubx,
                     Non,
@@ -604,7 +606,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*r64*/
+/*r64*/
                 {
                     Ubx,
                     Non,
@@ -649,7 +651,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*r32*/
+/*r32*/
                 {
                     Ubx,
                     Non,
@@ -694,7 +696,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*dec*/
+/*dec*/
                 {
                     Ubx,
                     Non,
@@ -739,7 +741,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*chr*/
+/*chr*/
                 {
                     Ubx,
                     Non,
@@ -784,7 +786,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*ni64*/
+/*ni64*/
                 {
                     Ubx,
                     Non,
@@ -829,7 +831,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nu64*/
+/*nu64*/
                 {
                     Ubx,
                     Non,
@@ -874,7 +876,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*ni32*/
+/*ni32*/
                 {
                     Ubx,
                     Non,
@@ -919,7 +921,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nu32*/
+/*nu32*/
                 {
                     Ubx,
                     Non,
@@ -964,7 +966,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*ni16*/
+/*ni16*/
                 {
                     Ubx,
                     Non,
@@ -1009,7 +1011,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nu16*/
+/*nu16*/
                 {
                     Ubx,
                     Non,
@@ -1054,7 +1056,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*ni8*/
+/*ni8*/
                 {
                     Ubx,
                     Non,
@@ -1099,7 +1101,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nu8*/
+/*nu8*/
                 {
                     Ubx,
                     Non,
@@ -1144,7 +1146,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nr64*/
+/*nr64*/
                 {
                     Ubx,
                     Non,
@@ -1189,7 +1191,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nr32*/
+/*nr32*/
                 {
                     Ubx,
                     Non,
@@ -1234,7 +1236,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*ndc*/
+/*ndc*/
                 {
                     Ubx,
                     Non,
@@ -1279,7 +1281,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*nch*/
+/*nch*/
                 {
                     Ubx,
                     Non,
@@ -1324,7 +1326,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Ubx,
                 },
-                /*exc*/
+/*exc*/
                 {
                     Xrf,
                     Non,
@@ -1369,7 +1371,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*ien*/
+/*ien*/
                 {
                     Xrf,
                     Irf,
@@ -1414,7 +1416,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*ieo*/
+/*ieo*/
                 {
                     Xrf,
                     Non,
@@ -1459,7 +1461,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*ies*/
+/*ies*/
                 {
                     Xrf,
                     Non,
@@ -1504,7 +1506,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*iec*/
+/*iec*/
                 {
                     Xrf,
                     Irf,
@@ -1549,7 +1551,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*ars*/
+/*ars*/
                 {
                     Xrf,
                     Non,
@@ -1594,7 +1596,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                 },
-                /*aro*/
+/*aro*/
                 {
                     Xrf,
                     Non,
@@ -1639,7 +1641,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                 },
-                /*ils*/
+/*ils*/
                 {
                     Xrf,
                     Non,
@@ -1684,7 +1686,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*ilo*/
+/*ilo*/
                 {
                     Xrf,
                     Non,
@@ -1729,7 +1731,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*aex*/
+/*aex*/
                 {
                     Xrf,
                     Non,
@@ -1774,7 +1776,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*del*/
+/*del*/
                 {
                     Xrf,
                     Non,
@@ -1819,7 +1821,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Xrf,
                 },
-                /*fee*/
+/*fee*/
                 {
                     Xrf,
                     Non,
@@ -1864,7 +1866,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Non,
                 },
-                /*fao*/
+/*fao*/
                 {
                     Xrf,
                     Non,
@@ -1909,7 +1911,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Xrf,
                     Non,
                 },
-                /*ser*/
+/*ser*/
                 {
                     Xrf,
                     Non,
@@ -1954,7 +1956,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Idn,
                     Xrf,
                 },
-                /*cmp*/
+/*cmp*/
                 {
                     Xrf,
                     Irf,
@@ -2563,7 +2565,8 @@ class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
                         .WithArguments(
                             "B.implicit operator A(B)",
@@ -2605,7 +2608,8 @@ class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.implicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
                         .WithArguments(
                             "B.implicit operator A(B)",
@@ -2647,7 +2651,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B<A>.implicit operator A(B<A>)' and
+                    // 'A.implicit operator A(B<A>)' when converting from 'B<A>' to 'A'
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "b")
                         .WithArguments(
                             "B<A>.implicit operator A(B<A>)",
@@ -2689,7 +2694,8 @@ class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.explicit operator A(B)' when converting from 'B' to 'A'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and
+                    // 'A.explicit operator A(B)' when converting from 'B' to 'A'
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
                         .WithArguments(
                             "B.explicit operator A(B)",
@@ -2731,7 +2737,8 @@ class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists (are you missing a cast?)
+                    // (23,15): error CS0266: Cannot implicitly convert type 'B' to 'A'. An explicit conversion exists
+                    // (are you missing a cast?)
                     Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("B", "A")
                 );
         }
@@ -2800,7 +2807,8 @@ class Test
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and 'A.implicit operator A(B)' when converting from 'B' to 'A'
+                    // (23,15): error CS0457: Ambiguous user defined conversions 'B.explicit operator A(B)' and
+                    // 'A.implicit operator A(B)' when converting from 'B' to 'A'
                     //         A a = (A)b;
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "(A)b")
                         .WithArguments(
@@ -2826,7 +2834,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because there are no standard conversions to type 'float'
+                    // (4,20): error CS1750: A value of type 'double' cannot be used as a default parameter because
+                    // there are no standard conversions to type 'float'
                     //     void Goo(float x = 0.0)
                     Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
                         .WithArguments("double", "float")
@@ -2856,7 +2865,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'int'
+                    // (12,18): error CS1750: A value of type 'A' cannot be used as a default parameter because there
+                    // are no standard conversions to type 'int'
                     Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
                         .WithArguments("A", "int")
                 );
@@ -2884,7 +2894,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'A'
+                    // (12,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there
+                    // are no standard conversions to type 'A'
                     Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
                         .WithArguments("int", "A")
                 );
@@ -2915,7 +2926,8 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there are no standard conversions to type 'Base'
+                    // (15,19): error CS1750: A value of type 'A' cannot be used as a default parameter because there
+                    // are no standard conversions to type 'Base'
                     Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "b")
                         .WithArguments("A", "Base")
                 );
@@ -3000,10 +3012,12 @@ class C
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                    // (27,27): error CS0039: Cannot convert type 'A' to 'B' via a reference conversion, boxing
+                    // conversion, unboxing conversion, wrapping conversion, or null type conversion
                     Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "a as B")
                         .WithArguments("A", "B"),
-                    // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion
+                    // (28,27): error CS0039: Cannot convert type 'B' to 'A' via a reference conversion, boxing
+                    // conversion, unboxing conversion, wrapping conversion, or null type conversion
                     Diagnostic(ErrorCode.ERR_NoExplicitBuiltinConv, "b as A")
                         .WithArguments("B", "A")
                 );
@@ -3203,7 +3217,8 @@ class C
 }";
             CreateCompilationWithILAndMscorlib40(csharp, il)
                 .VerifyDiagnostics(
-                    // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                    // (6,16): error CS1674: 'ConvertibleToIDisposable': type used in a using statement must be
+                    // implicitly convertible to 'System.IDisposable'.
                     Diagnostic(
                             ErrorCode.ERR_NoConvToIDisp,
                             "var d = new ConvertibleToIDisposable()"
@@ -3450,7 +3465,8 @@ public class Test {
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
+                    // (126,12): error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)'
+                    // and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
                     //         F0(h1a);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "h1a")
                         .WithArguments(
@@ -3459,7 +3475,8 @@ public class Test {
                             "H1<A>",
                             "G0"
                         ),
-                    // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
+                    // (129,12): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A,
+                    // B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G0'
                     //         F0(hs2ab);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
                         .WithArguments(
@@ -3468,7 +3485,9 @@ public class Test {
                             "HS2<A, B>",
                             "G0"
                         ),
-                    // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G0'
+                    // (132,12): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A,
+                    // B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from
+                    // 'HS3<A, B, C>' to 'G0'
                     //         F0(hs3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
                         .WithArguments(
@@ -3477,11 +3496,14 @@ public class Test {
                             "HS3<A, B, C>",
                             "G0"
                         ),
-                    // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (135,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from
+                    // the usage. Try specifying the type arguments explicitly.
                     //         F1(h1a);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
                         .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A, B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to 'G1<B>'
+                    // (138,15): error CS0457: Ambiguous user defined conversions 'HS2<A, B>.implicit operator GS2<A,
+                    // B>(HS2<A, B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A, B>' to
+                    // 'G1<B>'
                     //         F1<B>(hs2ab);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs2ab")
                         .WithArguments(
@@ -3490,7 +3512,9 @@ public class Test {
                             "HS2<A, B>",
                             "G1<B>"
                         ),
-                    // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'G1<C>'
+                    // (141,15): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A,
+                    // B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from
+                    // 'HS3<A, B, C>' to 'G1<C>'
                     //         F1<C>(hs3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
                         .WithArguments(
@@ -3499,11 +3523,14 @@ public class Test {
                             "HS3<A, B, C>",
                             "G1<C>"
                         ),
-                    // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (144,9): error CS0411: The type arguments for method 'Test.FS2<R, S>(GS2<R, S>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FS2(hs2ab);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS2")
                         .WithArguments("Test.FS2<R, S>(GS2<R, S>)"),
-                    // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A, B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from 'HS3<A, B, C>' to 'GS2<B, C>'
+                    // (147,18): error CS0457: Ambiguous user defined conversions 'HS3<A, B, C>.implicit operator GS3<A,
+                    // B, C>(HS3<A, B, C>)' and 'HS2<B, C>.implicit operator GS2<B, C>(HS2<B, C>)' when converting from
+                    // 'HS3<A, B, C>' to 'GS2<B, C>'
                     //         FS2<B,C>(hs3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hs3abc")
                         .WithArguments(
@@ -3512,11 +3539,14 @@ public class Test {
                             "HS3<A, B, C>",
                             "GS2<B, C>"
                         ),
-                    // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (150,9): error CS0411: The type arguments for method 'Test.FS3<R, S, T>(GS3<R, S, T>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FS3(hs3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FS3")
                         .WithArguments("Test.FS3<R, S, T>(GS3<R, S, T>)"),
-                    // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G0'
+                    // (155,12): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A,
+                    // B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,
+                    // B>' to 'G0'
                     //         F0(hc2ab);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
                         .WithArguments(
@@ -3525,7 +3555,9 @@ public class Test {
                             "HC2<A, B>",
                             "G0"
                         ),
-                    // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
+                    // (158,12): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A,
+                    // B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A,
+                    // G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G0'
                     //         F0(hc3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
                         .WithArguments(
@@ -3534,7 +3566,9 @@ public class Test {
                             "HC3<A, B, C>",
                             "G0"
                         ),
-                    // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A, B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A, B>' to 'G1<G1<B>>'
+                    // (161,19): error CS0457: Ambiguous user defined conversions 'HC2<A, B>.implicit operator GC2<A,
+                    // B>(HC2<A, B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,
+                    // B>' to 'G1<G1<B>>'
                     //         F1<G1<B>>(hc2ab);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc2ab")
                         .WithArguments(
@@ -3543,7 +3577,9 @@ public class Test {
                             "HC2<A, B>",
                             "G1<G1<B>>"
                         ),
-                    // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
+                    // (164,30): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A,
+                    // B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A,
+                    // G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'G1<G1<GC2<A, G1<B>>>>'
                     //         F1<G1<GC2<A,G1<B>>>>(hc3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
                         .WithArguments(
@@ -3552,11 +3588,15 @@ public class Test {
                             "HC3<A, B, C>",
                             "G1<G1<GC2<A, G1<B>>>>"
                         ),
-                    // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (167,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC2(hc2ab);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
                         .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A, B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A, G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A, G1<B>>>'
+                    // (170,33): error CS0457: Ambiguous user defined conversions 'HC3<A, B, C>.implicit operator GC3<A,
+                    // B, C>(HC3<A, B, C>)' and 'HC2<G1<C>, GC2<A, G1<B>>>.implicit operator GC2<G1<C>, GC2<A,
+                    // G1<B>>>(HC2<G1<C>, GC2<A, G1<B>>>)' when converting from 'HC3<A, B, C>' to 'GC2<G1<C>, GC2<A,
+                    // G1<B>>>'
                     //         FC2<G1<C>,GC2<A,G1<B>>>(hc3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hc3abc")
                         .WithArguments(
@@ -3565,11 +3605,14 @@ public class Test {
                             "HC3<A, B, C>",
                             "GC2<G1<C>, GC2<A, G1<B>>>"
                         ),
-                    // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (173,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC3(hc3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
                         .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)"),
-                    // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A, B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A, B>' to 'G0'
+                    // (178,12): error CS0457: Ambiguous user defined conversions 'HH2<A, B>.implicit operator GC2<A,
+                    // B>(HH2<A, B>)' and 'H1<H1<B>>.implicit operator G1<H1<B>>(H1<H1<B>>)' when converting from 'HH2<A,
+                    // B>' to 'G0'
                     //         F0(hh2ab);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh2ab")
                         .WithArguments(
@@ -3578,7 +3621,9 @@ public class Test {
                             "HH2<A, B>",
                             "G0"
                         ),
-                    // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A, B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A, H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
+                    // (181,12): error CS0457: Ambiguous user defined conversions 'HH3<A, B, C>.implicit operator GC3<A,
+                    // B, C>(HH3<A, B, C>)' and 'HH2<H1<C>, HH2<A, H1<B>>>.implicit operator GC2<H1<C>, HH2<A,
+                    // H1<B>>>(HH2<H1<C>, HH2<A, H1<B>>>)' when converting from 'HH3<A, B, C>' to 'G0'
                     //         F0(hh3abc);
                     Diagnostic(ErrorCode.ERR_AmbigUDConv, "hh3abc")
                         .WithArguments(
@@ -3587,60 +3632,99 @@ public class Test {
                             "HH3<A, B, C>",
                             "G0"
                         ),
-                    // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (184,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from
+                    // the usage. Try specifying the type arguments explicitly.
                     //         F1(hh2ab);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
                         .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (187,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from
+                    // the usage. Try specifying the type arguments explicitly.
                     //         F1(hh3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
                         .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (190,9): error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from
+                    // the usage. Try specifying the type arguments explicitly.
                     //         F1(hh3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F1")
                         .WithArguments("Test.F1<R>(G1<R>)"),
-                    // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (193,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC2(hh2ab);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
                         .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (196,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC2(hh3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
                         .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (199,9): error CS0411: The type arguments for method 'Test.FC2<R, S>(GC2<R, S>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC2(hh3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC2")
                         .WithArguments("Test.FC2<R, S>(GC2<R, S>)"),
-                    // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                    // (202,9): error CS0411: The type arguments for method 'Test.FC3<R, S, T>(GC3<R, S, T>)' cannot be
+                    // inferred from the usage. Try specifying the type arguments explicitly.
                     //         FC3(hh3abc);
                     Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "FC3")
                         .WithArguments("Test.FC3<R, S, T>(GC3<R, S, T>)")
                 //Dev10
-                //error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HS2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HS3<A,B,C>' to 'G0'
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)' and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A,B>' to 'G1<B>'
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'H1<C>.implicit operator G1<C>(H1<C>)' when converting from 'HS3<A,B,C>' to 'G1<C>'
-                //error CS0411: The type arguments for method 'Test.FS2<R,S>(GS2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator GS3<A,B,C>(HS3<A,B,C>)' and 'HS2<B,C>.implicit operator GS2<B,C>(HS2<B,C>)' when converting from 'HS3<A,B,C>' to 'GS2<B,C>'
-                //error CS0411: The type arguments for method 'Test.FS3<R,S,T>(GS3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HC2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HC3<A,B,C>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)' and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,B>' to 'G1<G1<B>>'
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'H1<G1<GC2<A,G1<B>>>>.implicit operator G1<G1<GC2<A,G1<B>>>>(H1<G1<GC2<A,G1<B>>>>)' when converting from 'HC3<A,B,C>' to 'G1<G1<GC2<A,G1<B>>>>'
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator GC3<A,B,C>(HC3<A,B,C>)' and 'HC2<G1<C>,GC2<A,G1<B>>>.implicit operator GC2<G1<C>,GC2<A,G1<B>>>(HC2<G1<C>,GC2<A,G1<B>>>)' when converting from 'HC3<A,B,C>' to 'GC2<G1<C>,GC2<A,G1<B>>>'
-                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0457: Ambiguous user defined conversions 'HH2<A,B>.implicit operator GC2<A,B>(HH2<A,B>)' and 'H0.implicit operator G0(H0)' when converting from 'HH2<A,B>' to 'G0'
-                //error CS0457: Ambiguous user defined conversions 'HH3<A,B,C>.implicit operator GC3<A,B,C>(HH3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HH3<A,B,C>' to 'G0'
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
-                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'H1<A>.implicit operator G1<A>(H1<A>)' and
+                // 'H0.implicit operator G0(H0)' when converting from 'H1<A>' to 'G0'
+                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)'
+                // and 'H0.implicit operator G0(H0)' when converting from 'HS2<A,B>' to 'G0'
+                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator
+                // GS3<A,B,C>(HS3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HS3<A,B,C>' to 'G0'
+                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage.
+                // Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'HS2<A,B>.implicit operator GS2<A,B>(HS2<A,B>)'
+                // and 'H1<B>.implicit operator G1<B>(H1<B>)' when converting from 'HS2<A,B>' to 'G1<B>'
+                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator
+                // GS3<A,B,C>(HS3<A,B,C>)' and 'H1<C>.implicit operator G1<C>(H1<C>)' when converting from 'HS3<A,B,C>'
+                // to 'G1<C>'
+                //error CS0411: The type arguments for method 'Test.FS2<R,S>(GS2<R,S>)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'HS3<A,B,C>.implicit operator
+                // GS3<A,B,C>(HS3<A,B,C>)' and 'HS2<B,C>.implicit operator GS2<B,C>(HS2<B,C>)' when converting from
+                // 'HS3<A,B,C>' to 'GS2<B,C>'
+                //error CS0411: The type arguments for method 'Test.FS3<R,S,T>(GS3<R,S,T>)' cannot be inferred from
+                // the usage. Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)'
+                // and 'H0.implicit operator G0(H0)' when converting from 'HC2<A,B>' to 'G0'
+                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator
+                // GC3<A,B,C>(HC3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HC3<A,B,C>' to 'G0'
+                //error CS0457: Ambiguous user defined conversions 'HC2<A,B>.implicit operator GC2<A,B>(HC2<A,B>)'
+                // and 'H1<G1<B>>.implicit operator G1<G1<B>>(H1<G1<B>>)' when converting from 'HC2<A,B>' to
+                // 'G1<G1<B>>'
+                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator
+                // GC3<A,B,C>(HC3<A,B,C>)' and 'H1<G1<GC2<A,G1<B>>>>.implicit operator
+                // G1<G1<GC2<A,G1<B>>>>(H1<G1<GC2<A,G1<B>>>>)' when converting from 'HC3<A,B,C>' to
+                // 'G1<G1<GC2<A,G1<B>>>>'
+                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'HC3<A,B,C>.implicit operator
+                // GC3<A,B,C>(HC3<A,B,C>)' and 'HC2<G1<C>,GC2<A,G1<B>>>.implicit operator
+                // GC2<G1<C>,GC2<A,G1<B>>>(HC2<G1<C>,GC2<A,G1<B>>>)' when converting from 'HC3<A,B,C>' to
+                // 'GC2<G1<C>,GC2<A,G1<B>>>'
+                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from
+                // the usage. Try specifying the type arguments explicitly.
+                //error CS0457: Ambiguous user defined conversions 'HH2<A,B>.implicit operator GC2<A,B>(HH2<A,B>)'
+                // and 'H0.implicit operator G0(H0)' when converting from 'HH2<A,B>' to 'G0'
+                //error CS0457: Ambiguous user defined conversions 'HH3<A,B,C>.implicit operator
+                // GC3<A,B,C>(HH3<A,B,C>)' and 'H0.implicit operator G0(H0)' when converting from 'HH3<A,B,C>' to 'G0'
+                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage.
+                // Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage.
+                // Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.F1<R>(G1<R>)' cannot be inferred from the usage.
+                // Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.FC2<R,S>(GC2<R,S>)' cannot be inferred from the
+                // usage. Try specifying the type arguments explicitly.
+                //error CS0411: The type arguments for method 'Test.FC3<R,S,T>(GC3<R,S,T>)' cannot be inferred from
+                // the usage. Try specifying the type arguments explicitly.
                 );
         }
 
@@ -3826,7 +3910,8 @@ class C<T>
 
             var comp = (Compilation)CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,21): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)' and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
+                // (6,21): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)'
+                // and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
                 //         C<int> x1 = (C<int>)1; // Expression to type
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "(C<int>)1")
                     .WithArguments(
@@ -3835,7 +3920,8 @@ class C<T>
                         "int",
                         "C<int>"
                     ),
-                // (8,9): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)' and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
+                // (8,9): error CS0457: Ambiguous user defined conversions 'C<int>.explicit operator C<int>(int)'
+                // and 'C<int>.implicit operator C<int>(int)' when converting from 'int' to 'C<int>'
                 //         foreach (C<int> x2 in a) { } // Type to type
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "foreach")
                     .WithArguments(
@@ -4159,20 +4245,24 @@ public class Test
     static int F() { return 0; }
 }
 ";
-            // NOTE: It's pretty wacky that some of these implicit UDCs can only be applied via explicit (cast) conversions,
-            // but that's the native behavior.  We need to replicate it for back-compat, but most of the strangeness will
+            // NOTE: It's pretty wacky that some of these implicit UDCs can only be applied via explicit (cast)
+            // conversions,
+            // but that's the native behavior.  We need to replicate it for back-compat, but most of the
+            // strangeness will
             // not be spec'd.
             CreateCompilationWithMscorlib40AndSystemCore(
                     source,
                     options: TestOptions.UnsafeReleaseDll
                 )
                 .VerifyDiagnostics(
-                    // (46,20): error CS1660: Cannot convert lambda expression to type 'Q' because it is not a delegate type
+                    // (46,20): error CS1660: Cannot convert lambda expression to type 'Q' because it is not a delegate
+                    // type
                     //             q = () => 1; //CS1660
                     Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                         .WithArguments("lambda expression", "Q")
                         .WithLocation(46, 20),
-                    // (53,17): error CS0428: Cannot convert method group 'F' to non-delegate type 'Q'. Did you intend to invoke the method?
+                    // (53,17): error CS0428: Cannot convert method group 'F' to non-delegate type 'Q'. Did you intend
+                    // to invoke the method?
                     //             q = F; //CS0428
                     Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
                         .WithArguments("F", "Q")
@@ -4249,12 +4339,14 @@ class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (14,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'E.F(long)' requires a receiver of type 'long'
+                // (14,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method
+                // overload 'E.F(long)' requires a receiver of type 'long'
                 //         i.F();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i")
                     .WithArguments("int", "F", "E.F(long)", "long")
                     .WithLocation(14, 9),
-                // (16,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension method overload 'E.G((long, long))' requires a receiver of type '(long, long)'
+                // (16,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension
+                // method overload 'E.G((long, long))' requires a receiver of type '(long, long)'
                 //         t.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t")
                     .WithArguments("(int, int)", "G", "E.G((long, long))", "(long, long)")
@@ -4292,12 +4384,14 @@ class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (13,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'E.F(int?)' requires a receiver of type 'int?'
+                // (13,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method
+                // overload 'E.F(int?)' requires a receiver of type 'int?'
                 //         i.F();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "i")
                     .WithArguments("int", "F", "E.F(int?)", "int?")
                     .WithLocation(13, 9),
-                // (17,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension method overload 'E.G((int, int)?)' requires a receiver of type '(int, int)?'
+                // (17,9): error CS1929: '(int, int)' does not contain a definition for 'G' and the best extension
+                // method overload 'E.G((int, int)?)' requires a receiver of type '(int, int)?'
                 //         t.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "t")
                     .WithArguments("(int, int)", "G", "E.G((int, int)?)", "(int, int)?")
@@ -4341,22 +4435,26 @@ static class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (15,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method overload 'C.F(E)' requires a receiver of type 'E'
+                // (15,9): error CS1929: 'int' does not contain a definition for 'F' and the best extension method
+                // overload 'C.F(E)' requires a receiver of type 'E'
                 //         0.F();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
                     .WithArguments("int", "F", "C.F(E)", "E")
                     .WithLocation(15, 9),
-                // (17,9): error CS1929: 'E' does not contain a definition for 'G' and the best extension method overload 'C.G(E?)' requires a receiver of type 'E?'
+                // (17,9): error CS1929: 'E' does not contain a definition for 'G' and the best extension method
+                // overload 'C.G(E?)' requires a receiver of type 'E?'
                 //         e.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "e")
                     .WithArguments("E", "G", "C.G(E?)", "E?")
                     .WithLocation(17, 9),
-                // (21,9): error CS1929: 'int' does not contain a definition for 'G' and the best extension method overload 'C.G(E?)' requires a receiver of type 'E?'
+                // (21,9): error CS1929: 'int' does not contain a definition for 'G' and the best extension method
+                // overload 'C.G(E?)' requires a receiver of type 'E?'
                 //         0.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "0")
                     .WithArguments("int", "G", "C.G(E?)", "E?")
                     .WithLocation(21, 9),
-                // (23,9): error CS1929: '(E, E)' does not contain a definition for 'H' and the best extension method overload 'C.H((E, E?))' requires a receiver of type '(E, E?)'
+                // (23,9): error CS1929: '(E, E)' does not contain a definition for 'H' and the best extension
+                // method overload 'C.H((E, E?))' requires a receiver of type '(E, E?)'
                 //         (e, e).H();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(e, e)")
                     .WithArguments("(E, E)", "H", "C.H((E, E?))", "(E, E?)")
@@ -4407,42 +4505,50 @@ static class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method overload 'C.S08(sbyte)' requires a receiver of type 'sbyte'
+                // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method
+                // overload 'C.S08(sbyte)' requires a receiver of type 'sbyte'
                 //         1.S08();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1")
                     .WithArguments("int", "S08", "C.S08(sbyte)", "sbyte")
                     .WithLocation(21, 9),
-                // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method overload 'C.S16(short)' requires a receiver of type 'short'
+                // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method
+                // overload 'C.S16(short)' requires a receiver of type 'short'
                 //         2.S16();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2")
                     .WithArguments("int", "S16", "C.S16(short)", "short")
                     .WithLocation(22, 9),
-                // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long)' requires a receiver of type 'long'
+                // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method
+                // overload 'C.S64(long)' requires a receiver of type 'long'
                 //         4.S64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4")
                     .WithArguments("int", "S64", "C.S64(long)", "long")
                     .WithLocation(24, 9),
-                // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method overload 'C.U08(byte)' requires a receiver of type 'byte'
+                // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method
+                // overload 'C.U08(byte)' requires a receiver of type 'byte'
                 //         5.U08();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5")
                     .WithArguments("int", "U08", "C.U08(byte)", "byte")
                     .WithLocation(25, 9),
-                // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method overload 'C.U16(ushort)' requires a receiver of type 'ushort'
+                // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method
+                // overload 'C.U16(ushort)' requires a receiver of type 'ushort'
                 //         6.U16();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6")
                     .WithArguments("int", "U16", "C.U16(ushort)", "ushort")
                     .WithLocation(26, 9),
-                // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method overload 'C.U32(uint)' requires a receiver of type 'uint'
+                // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method
+                // overload 'C.U32(uint)' requires a receiver of type 'uint'
                 //         7.U32();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7")
                     .WithArguments("int", "U32", "C.U32(uint)", "uint")
                     .WithLocation(27, 9),
-                // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong)' requires a receiver of type 'ulong'
+                // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method
+                // overload 'C.U64(ulong)' requires a receiver of type 'ulong'
                 //         8.U64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8")
                     .WithArguments("int", "U64", "C.U64(ulong)", "ulong")
                     .WithLocation(28, 9),
-                // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong)' requires a receiver of type 'ulong'
+                // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension
+                // method overload 'C.U64(ulong)' requires a receiver of type 'ulong'
                 //         10L.U64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L")
                     .WithArguments("long", "U64", "C.U64(ulong)", "ulong")
@@ -4493,52 +4599,62 @@ static class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method overload 'C.S08(sbyte?)' requires a receiver of type 'sbyte?'
+                // (21,9): error CS1929: 'int' does not contain a definition for 'S08' and the best extension method
+                // overload 'C.S08(sbyte?)' requires a receiver of type 'sbyte?'
                 //         1.S08();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "1")
                     .WithArguments("int", "S08", "C.S08(sbyte?)", "sbyte?")
                     .WithLocation(21, 9),
-                // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method overload 'C.S16(short?)' requires a receiver of type 'short?'
+                // (22,9): error CS1929: 'int' does not contain a definition for 'S16' and the best extension method
+                // overload 'C.S16(short?)' requires a receiver of type 'short?'
                 //         2.S16();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "2")
                     .WithArguments("int", "S16", "C.S16(short?)", "short?")
                     .WithLocation(22, 9),
-                // (23,9): error CS1929: 'int' does not contain a definition for 'S32' and the best extension method overload 'C.S32(int?)' requires a receiver of type 'int?'
+                // (23,9): error CS1929: 'int' does not contain a definition for 'S32' and the best extension method
+                // overload 'C.S32(int?)' requires a receiver of type 'int?'
                 //         3.S32();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "3")
                     .WithArguments("int", "S32", "C.S32(int?)", "int?")
                     .WithLocation(23, 9),
-                // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long?)' requires a receiver of type 'long?'
+                // (24,9): error CS1929: 'int' does not contain a definition for 'S64' and the best extension method
+                // overload 'C.S64(long?)' requires a receiver of type 'long?'
                 //         4.S64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "4")
                     .WithArguments("int", "S64", "C.S64(long?)", "long?")
                     .WithLocation(24, 9),
-                // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method overload 'C.U08(byte?)' requires a receiver of type 'byte?'
+                // (25,9): error CS1929: 'int' does not contain a definition for 'U08' and the best extension method
+                // overload 'C.U08(byte?)' requires a receiver of type 'byte?'
                 //         5.U08();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "5")
                     .WithArguments("int", "U08", "C.U08(byte?)", "byte?")
                     .WithLocation(25, 9),
-                // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method overload 'C.U16(ushort?)' requires a receiver of type 'ushort?'
+                // (26,9): error CS1929: 'int' does not contain a definition for 'U16' and the best extension method
+                // overload 'C.U16(ushort?)' requires a receiver of type 'ushort?'
                 //         6.U16();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "6")
                     .WithArguments("int", "U16", "C.U16(ushort?)", "ushort?")
                     .WithLocation(26, 9),
-                // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method overload 'C.U32(uint?)' requires a receiver of type 'uint?'
+                // (27,9): error CS1929: 'int' does not contain a definition for 'U32' and the best extension method
+                // overload 'C.U32(uint?)' requires a receiver of type 'uint?'
                 //         7.U32();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "7")
                     .WithArguments("int", "U32", "C.U32(uint?)", "uint?")
                     .WithLocation(27, 9),
-                // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
+                // (28,9): error CS1929: 'int' does not contain a definition for 'U64' and the best extension method
+                // overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
                 //         8.U64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "8")
                     .WithArguments("int", "U64", "C.U64(ulong?)", "ulong?")
                     .WithLocation(28, 9),
-                // (31,9): error CS1929: 'long' does not contain a definition for 'S64' and the best extension method overload 'C.S64(long?)' requires a receiver of type 'long?'
+                // (31,9): error CS1929: 'long' does not contain a definition for 'S64' and the best extension
+                // method overload 'C.S64(long?)' requires a receiver of type 'long?'
                 //         9L.S64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "9L")
                     .WithArguments("long", "S64", "C.S64(long?)", "long?")
                     .WithLocation(31, 9),
-                // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension method overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
+                // (32,9): error CS1929: 'long' does not contain a definition for 'U64' and the best extension
+                // method overload 'C.U64(ulong?)' requires a receiver of type 'ulong?'
                 //         10L.U64();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "10L")
                     .WithArguments("long", "U64", "C.U64(ulong?)", "ulong?")
@@ -4586,16 +4702,19 @@ class C
 }";
             var comp = CreateCompilationWithMscorlib40AndSystemCore(source);
             comp.VerifyDiagnostics(
-                // (24,9): error CS1929: 'A' does not contain a definition for 'F' and the best extension method overload 'E.F(B)' requires a receiver of type 'B'
+                // (24,9): error CS1929: 'A' does not contain a definition for 'F' and the best extension method
+                // overload 'E.F(B)' requires a receiver of type 'B'
                 //         a.F();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a")
                     .WithArguments("A", "F", "E.F(B)", "B"),
-                // (26,9): error CS1929: 'S' does not contain a definition for 'G' and the best extension method overload 'E.G(S?)' requires a receiver of type 'S?'
+                // (26,9): error CS1929: 'S' does not contain a definition for 'G' and the best extension method
+                // overload 'E.G(S?)' requires a receiver of type 'S?'
                 //         s.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "s")
                     .WithArguments("S", "G", "E.G(S?)", "S?")
                     .WithLocation(26, 9),
-                // (28,9): error CS1929: 'A' does not contain a definition for 'G' and the best extension method overload 'E.G(S?)' requires a receiver of type 'S?'
+                // (28,9): error CS1929: 'A' does not contain a definition for 'G' and the best extension method
+                // overload 'E.G(S?)' requires a receiver of type 'S?'
                 //         a.G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "a")
                     .WithArguments("A", "G", "E.G(S?)", "S?")
@@ -4647,17 +4766,20 @@ class C
                 references: new[] { ValueTupleRef, SystemRuntimeFacadeRef }
             );
             comp.VerifyDiagnostics(
-                // (26,9): error CS1929: '(A, B)' does not contain a definition for 'F' and the best extension method overload 'E.F((B, B))' requires a receiver of type '(B, B)'
+                // (26,9): error CS1929: '(A, B)' does not contain a definition for 'F' and the best extension
+                // method overload 'E.F((B, B))' requires a receiver of type '(B, B)'
                 //         (a, b).F();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(a, b)")
                     .WithArguments("(A, B)", "F", "E.F((B, B))", "(B, B)")
                     .WithLocation(26, 9),
-                // (28,9): error CS1929: '(B, A)' does not contain a definition for 'G' and the best extension method overload 'E.G((B, B)?)' requires a receiver of type '(B, B)?'
+                // (28,9): error CS1929: '(B, A)' does not contain a definition for 'G' and the best extension
+                // method overload 'E.G((B, B)?)' requires a receiver of type '(B, B)?'
                 //         (b, a).G();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(b, a)")
                     .WithArguments("(B, A)", "G", "E.G((B, B)?)", "(B, B)?")
                     .WithLocation(28, 9),
-                // (30,9): error CS1929: '(S, S)' does not contain a definition for 'H' and the best extension method overload 'E.H((S, S?))' requires a receiver of type '(S, S?)'
+                // (30,9): error CS1929: '(S, S)' does not contain a definition for 'H' and the best extension
+                // method overload 'E.H((S, S?))' requires a receiver of type '(S, S?)'
                 //         (s, s).H();
                 Diagnostic(ErrorCode.ERR_BadInstanceArgType, "(s, s)")
                     .WithArguments("(S, S)", "H", "E.H((S, S?))", "(S, S?)")

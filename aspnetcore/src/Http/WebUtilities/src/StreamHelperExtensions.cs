@@ -34,7 +34,8 @@ public static class StreamHelperExtensions
     /// </para>
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to completely read.</param>
-    /// <param name="limit">The maximum number of bytes to read. Throws if the <see cref="Stream"/> is larger than this limit.</param>
+    /// <param name="limit">The maximum number of bytes to read. Throws if the <see cref="Stream"/> is
+    // larger than this limit.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     public static Task DrainAsync(
         this Stream stream,
@@ -54,7 +55,8 @@ public static class StreamHelperExtensions
     /// </summary>
     /// <param name="stream">The <see cref="Stream"/> to completely read.</param>
     /// <param name="bytePool">The byte array pool to use.</param>
-    /// <param name="limit">The maximum number of bytes to read. Throws if the <see cref="Stream"/> is larger than this limit.</param>
+    /// <param name="limit">The maximum number of bytes to read. Throws if the <see cref="Stream"/> is
+    // larger than this limit.</param>
     /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
     public static async Task DrainAsync(
         this Stream stream,

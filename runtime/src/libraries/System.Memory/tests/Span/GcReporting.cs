@@ -8,7 +8,8 @@ namespace System.SpanTests
     public static class SpanGcReportingTests
     {
         /// <summary>
-        /// This is a simple sanity test to check that GC reporting for Span is not completely broken, it is not meant to be
+        /// This is a simple sanity test to check that GC reporting for Span is not completely broken, it is
+        // not meant to be
         /// comprehensive.
         /// </summary>
         [Theory]

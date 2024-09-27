@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 {
     internal static partial class Logger
     {
-        // Regardless of how many tasks we can run in parallel on the machine, we likely won't need more than 256
+        // Regardless of how many tasks we can run in parallel on the machine, we likely won't need more
+        // than 256
         // instrumentation points in flight at a given time.
         // Use an object pool since we may be logging up to 1-10k events/second
         private static readonly ObjectPool<RoslynLogBlock> s_pool =
@@ -33,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         /// <summary>
         /// This tracks the logged message. On instantiation, it logs 'Started block' with other event data.
-        /// On dispose, it logs 'Ended block' with the same event data so we can track which block started and ended when looking at logs.
+        /// On dispose, it logs 'Ended block' with the same event data so we can track which block started
+        // and ended when looking at logs.
         /// </summary>
         private class RoslynLogBlock(ObjectPool<RoslynLogBlock> pool) : IDisposable
         {

@@ -80,7 +80,8 @@ namespace System.Data.SqlTypes
         // INullable
         /// <devdoc>
         ///    <para>
-        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.Null'/>.
+        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see
+        // cref='System.Data.SqlTypes.SqlBoolean.Null'/>.
         ///    </para>
         /// </devdoc>
         public bool IsNull
@@ -91,7 +92,8 @@ namespace System.Data.SqlTypes
         // property: Value
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the <see cref='System.Data.SqlTypes.SqlBoolean'/> to be <see langword='true'/> or
+        ///       Gets or sets the <see cref='System.Data.SqlTypes.SqlBoolean'/> to be <see
+        // langword='true'/> or
         ///    <see langword='false'/>.
         ///    </para>
         /// </devdoc>
@@ -116,7 +118,8 @@ namespace System.Data.SqlTypes
         // property: IsTrue
         /// <devdoc>
         ///    <para>
-        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.True'/>.
+        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see
+        // cref='System.Data.SqlTypes.SqlBoolean.True'/>.
         ///    </para>
         /// </devdoc>
         public bool IsTrue
@@ -127,7 +130,8 @@ namespace System.Data.SqlTypes
         // property: IsFalse
         /// <devdoc>
         ///    <para>
-        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see cref='System.Data.SqlTypes.SqlBoolean.False'/>.
+        ///       Gets whether the current <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> is <see
+        // cref='System.Data.SqlTypes.SqlBoolean.False'/>.
         ///    </para>
         /// </devdoc>
         public bool IsFalse
@@ -638,7 +642,8 @@ namespace System.Data.SqlTypes
             string isNull = reader.GetAttribute("nil", XmlSchema.InstanceNamespace);
             if (isNull != null && XmlConvert.ToBoolean(isNull))
             {
-                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix - Read the next value.
+                // VSTFDevDiv# 479603 - SqlTypes read null value infinitely and never read the next value. Fix -
+                // Read the next value.
                 reader.ReadElementString();
                 m_value = x_Null;
             }
@@ -693,7 +698,8 @@ namespace System.Data.SqlTypes
 
         /// <devdoc>
         ///    <para>
-        ///       Represents a null value that can be assigned to the <see cref='System.Data.SqlTypes.SqlBoolean.Value'/> property of an instance of
+        ///       Represents a null value that can be assigned to the <see
+        // cref='System.Data.SqlTypes.SqlBoolean.Value'/> property of an instance of
         ///       the <see cref='System.Data.SqlTypes.SqlBoolean'/> class.
         ///    </para>
         /// </devdoc>

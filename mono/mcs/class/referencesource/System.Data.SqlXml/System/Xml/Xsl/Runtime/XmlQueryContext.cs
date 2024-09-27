@@ -21,7 +21,8 @@ namespace System.Xml.Xsl.Runtime
     using Res = System.Xml.Utils.Res;
 
     /// <summary>
-    /// The context of a query consists of all user-provided information which influences the operation of the
+    /// The context of a query consists of all user-provided information which influences the operation
+    // of the
     /// query. The context manages the following information:
     ///
     ///   1. Input data sources, including the default data source if one exists
@@ -41,7 +42,8 @@ namespace System.Xml.Xsl.Runtime
         private QueryReaderSettings readerSettings; // If we create reader out of stream we will use these settings
 
         /// <summary>
-        /// This constructor is internal so that external users cannot construct it (and therefore we do not have to test it separately).
+        /// This constructor is internal so that external users cannot construct it (and therefore we do not
+        // have to test it separately).
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
@@ -101,7 +103,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Returns the name table used by the default data source, or null if there is no default data source.
+        /// Returns the name table used by the default data source, or null if there is no default data
+        // source.
         /// </summary>
         public XmlNameTable DefaultNameTable
         {
@@ -109,7 +112,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return the document which is queried by default--i.e. no data source is explicitly selected in the query.
+        /// Return the document which is queried by default--i.e. no data source is explicitly selected in
+        // the query.
         /// </summary>
         public XPathNavigator DefaultDataSource
         {
@@ -124,8 +128,10 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Fetch the data source specified by "uriRelative" and "uriBase" from the XmlResolver that the user provided.
-        /// If the resolver returns a stream or reader, create an instance of XPathDocument.  If the resolver returns an
+        /// Fetch the data source specified by "uriRelative" and "uriBase" from the XmlResolver that the
+        // user provided.
+        /// If the resolver returns a stream or reader, create an instance of XPathDocument.  If the
+        // resolver returns an
         /// XPathNavigator, return the navigator.  Throw an exception if no data source was found.
         /// </summary>
         [ResourceConsumption(ResourceScope.Machine)]
@@ -239,7 +245,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// Get a named parameter from the external argument list.  Return null if no argument list was provided, or if
+        /// Get a named parameter from the external argument list.  Return null if no argument list was
+        // provided, or if
         /// there is no parameter by that name.
         /// </summary>
         public object GetParameter(string localName, string namespaceUri)
@@ -252,7 +259,8 @@ namespace System.Xml.Xsl.Runtime
         //-----------------------------------------------
 
         /// <summary>
-        /// Return the extension object that is mapped to the specified namespace, or null if no object is mapped.
+        /// Return the extension object that is mapped to the specified namespace, or null if no object is
+        // mapped.
         /// </summary>
         public object GetLateBoundObject(string namespaceUri)
         {
@@ -260,7 +268,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return true if the late bound object identified by "namespaceUri" contains a method that matches "name".
+        /// Return true if the late bound object identified by "namespaceUri" contains a method that matches
+        // "name".
         /// </summary>
         public bool LateBoundFunctionExists(string name, string namespaceUri)
         {
@@ -283,7 +292,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Get a late-bound extension object from the external argument list.  Bind to a method on the object and invoke it,
+        /// Get a late-bound extension object from the external argument list.  Bind to a method on the
+        // object and invoke it,
         /// passing "args" as arguments.
         /// </summary>
         public IList<XPathItem> InvokeXsltLateBoundFunction(
@@ -298,7 +308,8 @@ namespace System.Xml.Xsl.Runtime
             Type clrTypeFormalArg;
             object objRet;
 
-            // Get external object instance from argument list (throw if either the list or the instance doesn't exist)
+            // Get external object instance from argument list (throw if either the list or the instance doesn't
+            // exist)
             instance =
                 (this.argList != null) ? this.argList.GetExtensionObject(namespaceUri) : null;
             if (instance == null)
@@ -324,8 +335,10 @@ namespace System.Xml.Xsl.Runtime
             {
                 // 1. Assume that the input value can only have one of the following 5 Xslt types:
                 //      xs:double, xs:string, xs:boolean, node* (can be rtf)
-                // 2. Convert each Rtf value to a NodeSet containing one node.  Now the value may only have one of the 4 Xslt types.
-                // 3. Convert from one of the 4 Xslt internal types to the Xslt internal type which is closest to the formal
+                // 2. Convert each Rtf value to a NodeSet containing one node.  Now the value may only have one of
+                // the 4 Xslt types.
+                // 3. Convert from one of the 4 Xslt internal types to the Xslt internal type which is closest to
+                // the formal
                 //    argument's Xml type (inferred from the Clr type of the formal argument).
 
                 xmlTypeFormalArg = extFunc.GetXmlArgumentType(i);

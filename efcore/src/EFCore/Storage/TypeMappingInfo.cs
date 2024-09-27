@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///     Describes metadata needed to decide on a type mapping for a property or type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public readonly record struct TypeMappingInfo
@@ -25,18 +26,22 @@ public readonly record struct TypeMappingInfo
     /// <summary>
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
     /// </summary>
-    /// <param name="elementType">The collection element for the property for which mapping is needed.</param>
+    /// <param name="elementType">The collection element for the property for which mapping is
+    // needed.</param>
     /// <param name="fallbackUnicode">
     ///     Specifies Unicode or ANSI for the mapping or <see langword="null" /> for the default.
     /// </param>
     /// <param name="fallbackSize">
-    ///     Specifies a size for the mapping, in case one isn't found at the core level, or <see langword="null" /> for the default.
+    ///     Specifies a size for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for the default.
     /// </param>
     /// <param name="fallbackPrecision">
-    ///     Specifies a precision for the mapping, in case one isn't found at the core level, or <see langword="null" /> for the default.
+    ///     Specifies a precision for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for the default.
     /// </param>
     /// <param name="fallbackScale">
-    ///     Specifies a scale for the mapping, in case one isn't found at the core level, or <see langword="null" /> for the default.
+    ///     Specifies a scale for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for the default.
     /// </param>
     public TypeMappingInfo(
         IElementType elementType,
@@ -109,18 +114,22 @@ public readonly record struct TypeMappingInfo
     /// <summary>
     ///     Creates a new instance of <see cref="TypeMappingInfo" />.
     /// </summary>
-    /// <param name="principals">The principal property chain for the property for which mapping is needed.</param>
+    /// <param name="principals">The principal property chain for the property for which mapping is
+    // needed.</param>
     /// <param name="fallbackUnicode">
     ///     Specifies Unicode or ANSI for the mapping or <see langword="null" /> for default.
     /// </param>
     /// <param name="fallbackSize">
-    ///     Specifies a size for the mapping, in case one isn't found at the core level, or <see langword="null" /> for default.
+    ///     Specifies a size for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for default.
     /// </param>
     /// <param name="fallbackPrecision">
-    ///     Specifies a precision for the mapping, in case one isn't found at the core level, or <see langword="null" /> for default.
+    ///     Specifies a precision for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for default.
     /// </param>
     /// <param name="fallbackScale">
-    ///     Specifies a scale for the mapping, in case one isn't found at the core level, or <see langword="null" /> for default.
+    ///     Specifies a scale for the mapping, in case one isn't found at the core level, or <see
+    // langword="null" /> for default.
     /// </param>
     public TypeMappingInfo(
         IReadOnlyList<IProperty> principals,
@@ -200,10 +209,14 @@ public readonly record struct TypeMappingInfo
     /// </summary>
     /// <param name="member">The property or field for which mapping is needed.</param>
     /// <param name="elementTypeMapping">The type mapping for elements, if known.</param>
-    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for default.</param>
-    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for default.</param>
+    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for
+    // default.</param>
     public TypeMappingInfo(
         MemberInfo member,
         CoreTypeMapping? elementTypeMapping = null,
@@ -245,12 +258,18 @@ public readonly record struct TypeMappingInfo
     /// </summary>
     /// <param name="type">The CLR type in the model for which mapping is needed.</param>
     /// <param name="elementTypeMapping">The type mapping for elements, if known.</param>
-    /// <param name="keyOrIndex">If <see langword="true" />, then a special mapping for a key or index may be returned.</param>
-    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for default.</param>
-    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="rowVersion">Specifies a row-version, or <see langword="null" /> for default.</param>
-    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for default.</param>
+    /// <param name="keyOrIndex">If <see langword="true" />, then a special mapping for a key or index
+    // may be returned.</param>
+    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="rowVersion">Specifies a row-version, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for
+    // default.</param>
     public TypeMappingInfo(
         Type? type = null,
         CoreTypeMapping? elementTypeMapping = null,
@@ -274,14 +293,19 @@ public readonly record struct TypeMappingInfo
     }
 
     /// <summary>
-    ///     Creates a new instance of <see cref="TypeMappingInfo" /> with the given <see cref="ValueConverterInfo" />.
+    ///     Creates a new instance of <see cref="TypeMappingInfo" /> with the given <see
+    // cref="ValueConverterInfo" />.
     /// </summary>
     /// <param name="source">The source info.</param>
     /// <param name="converter">The converter to apply.</param>
-    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for default.</param>
-    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for default.</param>
-    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for default.</param>
+    /// <param name="unicode">Specifies Unicode or ANSI mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="size">Specifies a size for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="precision">Specifies a precision for the mapping, or <see langword="null" /> for
+    // default.</param>
+    /// <param name="scale">Specifies a scale for the mapping, or <see langword="null" /> for
+    // default.</param>
     public TypeMappingInfo(
         TypeMappingInfo source,
         ValueConverterInfo converter,
@@ -331,12 +355,14 @@ public readonly record struct TypeMappingInfo
     public int? Size { get; init; }
 
     /// <summary>
-    ///     Indicates whether or not the mapping supports Unicode, or <see langword="null" /> if not defined.
+    ///     Indicates whether or not the mapping supports Unicode, or <see langword="null" /> if not
+    // defined.
     /// </summary>
     public bool? IsUnicode { get; init; }
 
     /// <summary>
-    ///     Indicates whether or not the mapping will be used for a row version, or <see langword="null" /> if not defined.
+    ///     Indicates whether or not the mapping will be used for a row version, or <see langword="null"
+    // /> if not defined.
     /// </summary>
     public bool? IsRowVersion { get; init; }
 

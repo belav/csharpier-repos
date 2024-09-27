@@ -28,10 +28,10 @@ class T
         m1.Invoke(obj, null);
         Console.WriteLine("after reinit a is {0}", obj.a);
         Console.WriteLine("after reinit v is {0}", obj.v);
-        /* value not preserved */
+/* value not preserved */
         if (obj.a != 2)
             return 1;
-        /* value not reinitialized */
+/* value not reinitialized */
         if (obj.v != 1)
             return 2;
 

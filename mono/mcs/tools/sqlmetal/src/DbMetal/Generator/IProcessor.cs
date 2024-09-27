@@ -37,7 +37,8 @@ namespace DbMetal.Generator
     interface IProcessor
     {
         /// <summary>
-        /// The SchemaLoadFactory is used to create the ISchemaLoader (who loads the schema from the database)
+        /// The SchemaLoadFactory is used to create the ISchemaLoader (who loads the schema from the
+        // database)
         /// Automatically created by IProcessor implementation
         /// </summary>
         ISchemaLoaderFactory SchemaLoaderFactory { get; set; }

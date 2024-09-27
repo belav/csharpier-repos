@@ -200,7 +200,8 @@ namespace System.Data.Common
                 return -1;
             }
             return valueNo1.CompareTo((Int64)value);
-            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to Int64.CompareTo(Int64)
+            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to
+            // Int64.CompareTo(Int64)
         }
 
         public override object ConvertValue(object value)

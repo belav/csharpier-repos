@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 private readonly LowPriorityProcessor _lowPriorityProcessor;
 
                 /// <summary>
-                /// The keys in this are either a string or a (string, Guid) tuple. See <see cref="SolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics"/>
+                /// The keys in this are either a string or a (string, Guid) tuple. See <see
+                // cref="SolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics"/>
                 /// for what is writing this out.
                 /// </summary>
                 private CountLogAggregator<object> _logAggregator = new();
@@ -416,7 +417,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         var reasons = workItem.InvocationReasons;
                         if (root == null || syntaxFactsService == null)
                         {
-                            // as a fallback mechanism, if we can't run one method body due to some missing service, run whole document analyzer.
+                            // as a fallback mechanism, if we can't run one method body due to some missing service, run whole
+                            // document analyzer.
                             await RunAnalyzersAsync(
                                     analyzers,
                                     document,
@@ -434,7 +436,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             return;
                         }
 
-                        // check whether we know what body has changed. currently, this is an optimization toward typing case. if there are more than one body changes
+                        // check whether we know what body has changed. currently, this is an optimization toward typing
+                        // case. if there are more than one body changes
                         // it will be considered as semantic change and whole document analyzer will take care of that case.
                         var activeMember = GetMemberNode(
                             syntaxFactsService,
@@ -443,8 +446,10 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         );
                         if (activeMember == null)
                         {
-                            // no active member means, change is out side of a method body, but it didn't affect semantics (such as change in comment)
-                            // in that case, we update whole document (just this document) so that we can have updated locations.
+                            // no active member means, change is out side of a method body, but it didn't affect semantics (such
+                            // as change in comment)
+                            // in that case, we update whole document (just this document) so that we can have updated
+                            // locations.
                             await RunAnalyzersAsync(
                                     analyzers,
                                     document,

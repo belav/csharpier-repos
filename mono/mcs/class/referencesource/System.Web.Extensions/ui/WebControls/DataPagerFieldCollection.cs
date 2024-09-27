@@ -36,7 +36,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a <see cref='System.Web.UI.WebControls.DataPagerField'/> at the specified index in the
+        /// <para>Gets a <see cref='System.Web.UI.WebControls.DataPagerField'/> at the specified index in
+        // the
         /// collection.</para>
         /// </devdoc>
         [Browsable(false)]
@@ -54,7 +55,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Provides a deep copy of the collection.  Used mainly by design time dialogs to implement "cancel" rollback behavior.</para>
+        /// <para>Provides a deep copy of the collection.  Used mainly by design time dialogs to implement
+        // "cancel" rollback behavior.</para>
         /// </devdoc>
         public DataPagerFieldCollection CloneFields(DataPager pager)
         {
@@ -75,7 +77,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the contents of the entire collection into an <see cref='System.Array' qualify='true'/> appending at
+        /// <para>Copies the contents of the entire collection into an <see cref='System.Array'
+        // qualify='true'/> appending at
         /// the specified index of the <see cref='System.Array' qualify='true'/>.</para>
         /// </devdoc>
         public void CopyTo(DataPagerField[] array, int index)
@@ -113,7 +116,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Returns the index of the first occurrence of a value in a <see cref='System.Web.UI.WebControls.DataPagerField'/>.</para>
+        /// <para>Returns the index of the first occurrence of a value in a <see
+        // cref='System.Web.UI.WebControls.DataPagerField'/>.</para>
         /// </devdoc>
         public int IndexOf(DataPagerField field)
         {
@@ -192,7 +196,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Removes a <see cref='System.Web.UI.WebControls.DataPagerField'/> from the collection at the specified
+        /// <para>Removes a <see cref='System.Web.UI.WebControls.DataPagerField'/> from the collection at
+        // the specified
         /// index.</para>
         /// </devdoc>
         public void RemoveAt(int index)
@@ -201,7 +206,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Removes the specified <see cref='System.Web.UI.WebControls.DataPagerField'/> from the collection.</para>
+        /// <para>Removes the specified <see cref='System.Web.UI.WebControls.DataPagerField'/> from the
+        // collection.</para>
         /// </devdoc>
         public void Remove(DataPagerField field)
         {
@@ -209,7 +215,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Marks a DataPagerField as dirty so that it will record its entire state into view state.</para>
+        /// <para>Marks a DataPagerField as dirty so that it will record its entire state into view
+        // state.</para>
         /// </devdoc>
         protected override void SetDirtyObject(object o)
         {

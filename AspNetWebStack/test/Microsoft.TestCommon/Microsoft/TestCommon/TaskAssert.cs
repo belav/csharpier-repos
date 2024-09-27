@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Threading.Tasks;
 
@@ -34,7 +35,8 @@ namespace Microsoft.TestCommon
 
         /// <summary>
         /// Asserts the given task completes successfully and returns a <typeparamref name="T"/> result.
-        /// This method will block the current thread waiting for the task, but will timeout if it does not complete.
+        /// This method will block the current thread waiting for the task, but will timeout if it does not
+        // complete.
         /// </summary>
         /// <typeparam name="T">The result of the <see cref="Task"/>.</typeparam>
         /// <param name="task">The <see cref="Task"/> to test.</param>

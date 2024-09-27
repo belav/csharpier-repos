@@ -18,14 +18,21 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
         /// <summary>
         /// Constructor for mock DkmClrDebuggerVisualizerAttribute.
         /// </summary>
-        /// <param name="targetMember">[Optional] Should be null. Not supported for the DebuggerVisualizer attribute</param>
-        /// <param name="uiSideVisualizerTypeName">[Required] The full name of the UI-side visualizer type</param>
-        /// <param name="uiSideVisualizerAssemblyName">[Required] The full name of the UI-side visualizer assembly</param>
-        /// <param name="uiSideVisualizerAssemblyLocation">[Required] The location of the UI-side visualizer assembly</param>
-        /// <param name="debuggeeSideVisualizerTypeName">[Required] The full name of the debuggee-side visualizer type</param>
-        /// <param name="debuggeeSideVisualizerAssemblyName">[Required] The full name of the debuggee-side visualizer assembly</param>
+        /// <param name="targetMember">[Optional] Should be null. Not supported for the DebuggerVisualizer
+        // attribute</param>
+        /// <param name="uiSideVisualizerTypeName">[Required] The full name of the UI-side visualizer
+        // type</param>
+        /// <param name="uiSideVisualizerAssemblyName">[Required] The full name of the UI-side visualizer
+        // assembly</param>
+        /// <param name="uiSideVisualizerAssemblyLocation">[Required] The location of the UI-side visualizer
+        // assembly</param>
+        /// <param name="debuggeeSideVisualizerTypeName">[Required] The full name of the debuggee-side
+        // visualizer type</param>
+        /// <param name="debuggeeSideVisualizerAssemblyName">[Required] The full name of the debuggee-side
+        // visualizer assembly</param>
         /// <param name="visualizerDescription">[Required] The visualizer description</param>
-        /// <param name="extensionPartId">[Required] This is a unique id for visualizers that are installed via the ExtensionPartManager.</param>
+        /// <param name="extensionPartId">[Required] This is a unique id for visualizers that are installed
+        // via the ExtensionPartManager.</param>
         internal DkmClrDebuggerVisualizerAttribute(
             string targetMember,
             string uiSideVisualizerTypeName,

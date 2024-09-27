@@ -239,10 +239,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// For callers that just want to unwrap a <see cref="RefTypeSyntax"/> and don't care if ref/readonly was there.
-        /// As these callers don't care about 'ref', they are in scenarios where 'ref' is not legal, and existing code
+        /// For callers that just want to unwrap a <see cref="RefTypeSyntax"/> and don't care if
+        // ref/readonly was there.
+        /// As these callers don't care about 'ref', they are in scenarios where 'ref' is not legal, and
+        // existing code
         /// will error out for them.  Callers that do want to know what the ref-kind is should use <see
-        /// cref="SkipRefInLocalOrReturn"/> or <see cref="SkipRefInField"/> depending on which language feature they are
+        /// cref="SkipRefInLocalOrReturn"/> or <see cref="SkipRefInField"/> depending on which language
+        // feature they are
         /// asking for.
         /// </summary>
         internal static TypeSyntax SkipRef(this TypeSyntax syntax) =>
@@ -250,7 +253,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal static TypeSyntax SkipRefInField(this TypeSyntax syntax, out RefKind refKind)
         {
-            // Intentionally pass no diagnostics here.  This is for ref-fields which handles all its diagnostics itself
+            // Intentionally pass no diagnostics here.  This is for ref-fields which handles all its diagnostics
+            // itself
             // in the field symbol.
             return SkipRefWorker(syntax, diagnostics: null, out refKind);
         }
@@ -405,7 +409,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// I.e. something like "var(x, y)" or "var(x, (y, z))" or "var(1)".
         /// We report an error when such an invocation is used in a certain syntactic contexts that
         /// will require an lvalue because we may elect to support deconstruction
-        /// in the future. We need to ensure that we do not successfully interpret this as an invocation of a
+        /// in the future. We need to ensure that we do not successfully interpret this as an invocation of
+        // a
         /// ref-returning method named var.
         /// </summary>
         private static bool IsDeconstructionCompatibleArgument(ExpressionSyntax expression)

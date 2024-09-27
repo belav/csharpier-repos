@@ -104,7 +104,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the style properties for alternating items in the <see cref='System.Web.UI.WebControls.DataList'/>. This
+        /// <para>Gets the style properties for alternating items in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>. This
         ///    property is read-only. </para>
         /// </devdoc>
         [
@@ -130,7 +131,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for alternating items in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for alternating items in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -196,7 +198,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for an item set in edit mode within the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for an item set in edit mode within the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -257,7 +260,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para> Indicates the template to use for the footer in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para> Indicates the template to use for the footer in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -315,7 +319,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for the header in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for the header in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -331,7 +336,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataListItem'/> objects representing the individual
+        /// <para>Gets a collection of <see cref='System.Web.UI.WebControls.DataListItem'/> objects
+        // representing the individual
         ///    items within the control.</para>
         /// </devdoc>
         [
@@ -385,7 +391,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for an item in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for an item in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -598,7 +605,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for the currently selected item in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for the currently selected item in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -661,7 +669,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the template to use for the separator in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the template to use for the separator in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -698,7 +707,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets or sets a value that specifies whether the header is displayed in the<see cref='System.Web.UI.WebControls.DataGrid'/>.</para>
+        /// <para>Gets or sets a value that specifies whether the header is displayed in the<see
+        // cref='System.Web.UI.WebControls.DataGrid'/>.</para>
         /// </devdoc>
         [
             WebCategory("Appearance"),
@@ -728,7 +738,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataList'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataList'/> with a
         /// <see langword='Command'/> property of <see langword='cancel'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataList_OnCancelCommand)]
@@ -739,7 +750,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataList'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataList'/> with a
         /// <see langword='Command'/> property of <see langword='delete'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataList_OnDeleteCommand)]
@@ -750,7 +762,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataList'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataList'/> with a
         /// <see langword='Command'/> property of <see langword='edit'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataList_OnEditCommand)]
@@ -761,7 +774,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataList'/> not covered by
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataList'/> not covered by
         /// <see langword='edit'/>, <see langword='cancel'/>, <see langword='delete'/> or
         /// <see langword='update'/>.</para>
         /// </devdoc>
@@ -793,7 +807,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Occurs when a control bubbles an event to the <see cref='System.Web.UI.WebControls.DataList'/> with a
+        /// <para>Occurs when a control bubbles an event to the <see
+        // cref='System.Web.UI.WebControls.DataList'/> with a
         /// <see langword='Command'/> property of <see langword='update'/>.</para>
         /// </devdoc>
         [WebCategory("Action"), WebSysDescription(SR.DataList_OnUpdateCommand)]
@@ -1210,8 +1225,10 @@ namespace System.Web.UI.WebControls
             if (onItemDataBoundHandler != null)
                 onItemDataBoundHandler(this, e);
 
-            // EventWizardListItemDataBound is a key for an internal event declared on IWizardSideBarListControl, which is
-            // an interface that is meant to provide a facade to make ListView and DataList look the same. This handler
+            // EventWizardListItemDataBound is a key for an internal event declared on
+            // IWizardSideBarListControl, which is
+            // an interface that is meant to provide a facade to make ListView and DataList look the same. This
+            // handler
             // is meant to abstract away the differences between each controls ItemDataBound events.
             var onWizardListItemDataBoundHandler =
                 (EventHandler<WizardSideBarListControlItemEventArgs>)

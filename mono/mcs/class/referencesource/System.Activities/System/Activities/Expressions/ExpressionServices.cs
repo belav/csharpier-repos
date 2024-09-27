@@ -672,11 +672,13 @@ namespace System.Activities.Expressions
             }
 
             //This is to handle the expression whose evaluation result is a variable object.
-            //Limitation: The expression of variable object has to be evaludated in conversion time. It means after conversion, the variable object should not be changed any more.
+            //Limitation: The expression of variable object has to be evaludated in conversion time. It means
+            // after conversion, the variable object should not be changed any more.
             //For example, the following case is not legal:
             //
             //Program.static_X = new Variable<string> { Default = "Hello" };
-            //Activity<Location<string>> weRef = ExpressionServices.ConvertReference<string>((env) => Program.static_X.Get(env));
+            //Activity<Location<string>> weRef = ExpressionServices.ConvertReference<string>((env) =>
+            // Program.static_X.Get(env));
             //Program.static_X = new Variable<string> { Default = "World" };
             //Sequence sequence = new Sequence
             //{
@@ -696,7 +698,8 @@ namespace System.Activities.Expressions
             //};
             //WorkflowInvoker.Invoke(sequence);
             //
-            // The reason is that "Program.static_X = new Variable<string> { Default = "World" }" happens after conversion.
+            // The reason is that "Program.static_X = new Variable<string> { Default = "World" }" happens after
+            // conversion.
             try
             {
                 Expression<Func<Variable>> funcExpression = Expression.Lambda<Func<Variable>>(
@@ -754,8 +757,10 @@ namespace System.Activities.Expressions
                     return SR.DoNotSupportArrayIndexerOnNonArrayType(leftType);
                 }
             }
-            //Because co-variance for LValue requires that TResult is compatible with actual type. However, we cannot write such a lambda expression. E,g:
-            //Expression<Func<ActivityContext, DerivedClass> expr = env => a.Get(env). Here a.Get(env) returns BaseClass.  So we needn't co-viariance here.
+            //Because co-variance for LValue requires that TResult is compatible with actual type. However, we
+            // cannot write such a lambda expression. E,g:
+            //Expression<Func<ActivityContext, DerivedClass> expr = env => a.Get(env). Here a.Get(env) returns
+            // BaseClass.  So we needn't co-viariance here.
             if (leftType.GetElementType() != typeof(TResult))
             {
                 if (throwOnError)
@@ -855,7 +860,8 @@ namespace System.Activities.Expressions
             }
 
             //This is to handle the expression whose evaluation result is a variable object.
-            //Limitation: The expression of variable object has to be evaludated in conversion time. It means after conversion, the variable object should not be changed any more.
+            //Limitation: The expression of variable object has to be evaludated in conversion time. It means
+            // after conversion, the variable object should not be changed any more.
             //For example, the following case is not legal:
             //
             //  Program.static_X = new Variable<string> { Default = "Hello" };
@@ -874,7 +880,8 @@ namespace System.Activities.Expressions
             //  };
             //  WorkflowInvoker.Invoke(sequence);
             //
-            // The reason is that "Program.static_X = new Variable<string> { Default = "World" }" happens after conversion.
+            // The reason is that "Program.static_X = new Variable<string> { Default = "World" }" happens after
+            // conversion.
 
             try
             {
@@ -913,7 +920,8 @@ namespace System.Activities.Expressions
             DelegateArgument delegateArgument = null;
 
             //This is to handle the expression whose evaluation result is a DelegateArgument.
-            //Limitation: The expression of variable object has to be evaluated in conversion time. It means after conversion, the DelegateArgument object should not be changed any more.
+            //Limitation: The expression of variable object has to be evaluated in conversion time. It means
+            // after conversion, the DelegateArgument object should not be changed any more.
             //For example, the following case is not legal:
             //
             //  Program.static_X = new DelegateInArgument<string>();
@@ -974,7 +982,8 @@ namespace System.Activities.Expressions
             DelegateArgument delegateArgument = null;
 
             //This is to handle the expression whose evaluation result is a DelegateArgument.
-            //Limitation: The expression of variable object has to be evaluated in conversion time. It means after conversion, the DelegateArgument object should not be changed any more.
+            //Limitation: The expression of variable object has to be evaluated in conversion time. It means
+            // after conversion, the DelegateArgument object should not be changed any more.
             //For example, the following case is not legal:
             //
             //  Program.static_X = new DelegateInArgument<string>();
@@ -1078,7 +1087,8 @@ namespace System.Activities.Expressions
             }
             else
             {
-                //Assumption: Arguments must be properties of Activity object. Otherwise, it cannot be found by runtime via ArgumentValue.
+                //Assumption: Arguments must be properties of Activity object. Otherwise, it cannot be found by
+                // runtime via ArgumentValue.
                 if (memberExpression != null && memberExpression.Member is PropertyInfo)
                 {
                     PropertyInfo property = memberExpression.Member as PropertyInfo;
@@ -1105,7 +1115,8 @@ namespace System.Activities.Expressions
         )
         {
             result = null;
-            //Assumption: Arguments must be properties of Activity object. Otherwise, it cannot be found by runtime via ArgumentReference.
+            //Assumption: Arguments must be properties of Activity object. Otherwise, it cannot be found by
+            // runtime via ArgumentReference.
             if (methodCallExpression.Object is MemberExpression)
             {
                 MemberExpression member = methodCallExpression.Object as MemberExpression;
@@ -1154,7 +1165,8 @@ namespace System.Activities.Expressions
             }
         }
 
-        //this method handles single dimentional array. Multiple dimentional array accessor is method call expression
+        //this method handles single dimentional array. Multiple dimentional array accessor is method call
+        // expression
         static string TryConvertArrayItemValue<TResult>(
             BinaryExpression binaryExpression,
             Type leftType,

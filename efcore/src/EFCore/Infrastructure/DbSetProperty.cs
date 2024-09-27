@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     A struct representing facets of <see cref="DbSet{TEntity}" /> property defined on DbContext derived type.
+///     A struct representing facets of <see cref="DbSet{TEntity}" /> property defined on DbContext
+// derived type.
 /// </summary>
 public readonly struct DbSetProperty
 {

@@ -338,15 +338,15 @@ namespace System.Data.OleDb
             }
         }
 
-        /*public OleDbCommand CreateCommand() { // MDAC 68309
-            OleDbCommand cmd = Connection.CreateCommand();
-            cmd.Transaction = this;
-            return cmd;
-        }
+/*public OleDbCommand CreateCommand() { // MDAC 68309
+OleDbCommand cmd = Connection.CreateCommand();
+cmd.Transaction = this;
+return cmd;
+}
 
-        IDbCommand IDbTransaction.CreateCommand() {
-            return CreateCommand();
-        }*/
+IDbCommand IDbTransaction.CreateCommand() {
+return CreateCommand();
+}*/
 
         protected override void Dispose(bool disposing)
         {
@@ -400,7 +400,7 @@ namespace System.Data.OleDb
             }
         }
 
-        /*protected virtual*/internal OleDbHResult RollbackInternal(bool exceptionHandling)
+/*protected virtual*/internal OleDbHResult RollbackInternal(bool exceptionHandling)
         {
             OleDbHResult hr = 0;
             if (null != _transaction)

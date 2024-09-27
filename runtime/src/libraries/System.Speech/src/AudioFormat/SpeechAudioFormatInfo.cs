@@ -95,7 +95,8 @@ namespace System.Speech.AudioFormat
                 formatSpecificData
             )
         {
-            // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
+            // Don't explicitly check these are sensible values - allow flexibility here as some formats may do
+            // unexpected things here.
             if (averageBytesPerSecond <= 0)
             {
                 throw new ArgumentOutOfRangeException(
@@ -121,7 +122,8 @@ namespace System.Speech.AudioFormat
         )
             : this(EncodingFormat.Pcm, samplesPerSecond, (short)bitsPerSample, (short)channel, null)
         {
-            // Don't explicitly check these are sensible values - allow flexibility here as some formats may do unexpected things here.
+            // Don't explicitly check these are sensible values - allow flexibility here as some formats may do
+            // unexpected things here.
             _blockAlign = (short)(_channelCount * (_bitsPerSample / 8));
             _averageBytesPerSecond = _samplesPerSecond * _blockAlign;
         }

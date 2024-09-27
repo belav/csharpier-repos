@@ -55,12 +55,12 @@ internal static partial class Interop
             return ret;
         }
 
-        /*-
-         * returns
-         *      1: correct signature
-         *      0: incorrect signature
-         *     -1: error
-         */
+/*-
+* returns
+*      1: correct signature
+*      0: incorrect signature
+*     -1: error
+*/
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_EcDsaVerify")]
         private static partial int EcDsaVerify(
             ref byte dgst,

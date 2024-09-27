@@ -546,7 +546,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BoundKind.Call:
                         var call = (BoundCall)expression;
 
-                        // If the method is known to have no observable side-effects, we can spill its receiver and arguments,
+                        // If the method is known to have no observable side-effects, we can spill its receiver and
+                        // arguments,
                         // and call it later, after some other (unrelated) side-effects are evaluated.
                         // It is similar to spilling a field/array access.
                         if (refKind != RefKind.None)
@@ -1151,14 +1152,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                         break;
 
                     default:
-                        // must be something indirectly assignable, just visit and spill as an ordinary Ref  (not a RefReadOnly!!)
+                        // must be something indirectly assignable, just visit and spill as an ordinary Ref  (not a
+                        // RefReadOnly!!)
                         //
                         // NOTE: in some cases this will result in spiller producing an error.
                         //       For example if the LHS is a ref-returning method like
                         //
                         //       obj.RefReturning(a, b, c) = await Something();
                         //
-                        //       the spiller would eventually have to spill the evaluation result of "refReturning" call as an ordinary Ref,
+                        //       the spiller would eventually have to spill the evaluation result of "refReturning" call as
+                        // an ordinary Ref,
                         //       which it can't.
                         left = Spill(
                             leftBuilder,
@@ -1201,7 +1204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else if (field.ReceiverOpt is BoundArrayAccess arrayAccess)
                     {
-                        // an arrayAccess returns a ref so can only be called after the await, but spill expression and indices
+                        // an arrayAccess returns a ref so can only be called after the await, but spill expression and
+                        // indices
                         var expression = VisitExpression(ref leftBuilder, arrayAccess.Expression);
                         expression = Spill(leftBuilder, expression, RefKind.None);
                         var indices = this.VisitExpressionList(
@@ -1995,8 +1999,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// If an expression node that declares synthesized short-lived locals (currently only sequence) contains
-        /// a spill sequence (from an await or switch expression), these locals become long-lived since their
+        /// If an expression node that declares synthesized short-lived locals (currently only sequence)
+        // contains
+        /// a spill sequence (from an await or switch expression), these locals become long-lived since
+        // their
         /// values may be read by code that follows. We promote these variables to long-lived of kind
         /// <see cref="SynthesizedLocalKind.Spill"/>.
         /// </summary>

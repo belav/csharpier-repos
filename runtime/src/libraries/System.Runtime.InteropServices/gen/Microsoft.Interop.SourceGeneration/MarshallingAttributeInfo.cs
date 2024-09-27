@@ -12,7 +12,8 @@ namespace Microsoft.Interop
     /// </summary>
     /// <remarks>
     /// This type used to pass default marshalling details to the various marshalling info parsers.
-    /// Since it contains a <see cref="INamedTypeSymbol"/>, it should not be used as a field on any types
+    /// Since it contains a <see cref="INamedTypeSymbol"/>, it should not be used as a field on any
+    // types
     /// derived from <see cref="MarshallingInfo"/>. See remarks on <see cref="MarshallingInfo"/>.
     /// </remarks>
     public sealed record DefaultMarshallingInfo(
@@ -28,8 +29,10 @@ namespace Microsoft.Interop
     /// Base type for marshalling information
     /// </summary>
     /// <remarks>
-    /// Types derived from this are used to represent the stub information calculated from the semantic model.
-    /// To support incremental generation, they must not include any types derived from <see cref="ISymbol"/>.
+    /// Types derived from this are used to represent the stub information calculated from the semantic
+    // model.
+    /// To support incremental generation, they must not include any types derived from <see
+    // cref="ISymbol"/>.
     /// </remarks>
     public abstract record MarshallingInfo
     {
@@ -73,9 +76,11 @@ namespace Microsoft.Interop
     public record MarshallingInfoStringSupport(CharEncoding CharEncoding) : MarshallingInfo;
 
     /// <summary>
-    /// The provided type was determined to be an "unmanaged" type that can be passed as-is to native code.
+    /// The provided type was determined to be an "unmanaged" type that can be passed as-is to native
+    // code.
     /// </summary>
-    /// <param name="IsStrictlyBlittable">Indicates if the type is blittable as defined by the built-in .NET marshallers.</param>
+    /// <param name="IsStrictlyBlittable">Indicates if the type is blittable as defined by the built-in
+    // .NET marshallers.</param>
     public sealed record UnmanagedBlittableMarshallingInfo(bool IsStrictlyBlittable)
         : MarshallingInfo;
 
@@ -118,7 +123,8 @@ namespace Microsoft.Interop
     ) : MarshallingInfo;
 
     /// <summary>
-    /// Custom type marshalling via MarshalUsingAttribute or NativeMarshallingAttribute for a linear collection
+    /// Custom type marshalling via MarshalUsingAttribute or NativeMarshallingAttribute for a linear
+    // collection
     /// </summary>
     public sealed record NativeLinearCollectionMarshallingInfo(
         ManagedTypeInfo EntryPointType,
@@ -142,7 +148,8 @@ namespace Microsoft.Interop
     ) : MissingSupportMarshallingInfo;
 
     /// <summary>
-    /// Marshal an exception based on the same rules as the built-in COM system based on the unmanaged type of the native return marshaller.
+    /// Marshal an exception based on the same rules as the built-in COM system based on the unmanaged
+    // type of the native return marshaller.
     /// </summary>
     public sealed record ComExceptionMarshalling : MarshallingInfo
     {

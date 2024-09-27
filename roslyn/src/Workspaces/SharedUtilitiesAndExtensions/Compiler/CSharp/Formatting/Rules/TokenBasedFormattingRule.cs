@@ -152,7 +152,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // e is
             // {
             //     property1: pattern1, // newline so the next line should be indented same as this one
-            //     property2: pattern2, property3: pattern3, ... // but with minimum 0 lines so each property isn't forced to its own line
+            //     property2: pattern2, property3: pattern3, ... // but with minimum 0 lines so each property
+            // isn't forced to its own line
             // ```
             if (previousToken.IsCommaInPropertyPatternClause())
             {

@@ -163,7 +163,8 @@ namespace Newtonsoft.Json.Tests.Utilities
             AssertNewDateTimeParseEqual("9999-12-31T23:59:5");
             AssertNewDateTimeParseEqual("9999-12-31T23:59:59.x");
             AssertNewDateTimeParseEqual("9999-12-31T23:59:59.99999999");
-            //AssertNewDateTimeParseEqual("9999-12-31T23:59:59.", null); // DateTime.TryParse is bugged and should return null
+            //AssertNewDateTimeParseEqual("9999-12-31T23:59:59.", null); // DateTime.TryParse is bugged and
+            // should return null
 
             AssertNewDateTimeParseEqual("2000-12-15T22:11:03.055Z");
             AssertNewDateTimeParseEqual("2000-12-15T22:11:03.055");
@@ -179,8 +180,10 @@ namespace Newtonsoft.Json.Tests.Utilities
 
             AssertNewDateTimeParseEqual("0001-01-01T00:00:00Z");
             AssertNewDateTimeParseEqual("0001-01-01T00:00:00"); // this is DateTime.MinDate
-            //AssertNewDateTimeParseEqual("0001-01-01T00:00:00+00:00"); // when the timezone is negative then this breaks
-            //AssertNewDateTimeParseEqual("0001-01-01T00:00:00+11:30"); // when the timezone is negative then this breaks
+            //AssertNewDateTimeParseEqual("0001-01-01T00:00:00+00:00"); // when the timezone is negative then
+            // this breaks
+            //AssertNewDateTimeParseEqual("0001-01-01T00:00:00+11:30"); // when the timezone is negative then
+            // this breaks
             AssertNewDateTimeParseEqual("0001-01-01T00:00:00-12:00");
 
             AssertNewDateTimeParseEqual("9999-12-31T23:59:59.9999999Z");

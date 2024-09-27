@@ -46,7 +46,7 @@ namespace System.Web
 
         public HttpCacheVaryByParams()
         {
-            /* the parameter names are meant to be case insensitive */
+/* the parameter names are meant to be case insensitive */
             parms = new Hashtable(StringComparer.InvariantCultureIgnoreCase);
         }
 

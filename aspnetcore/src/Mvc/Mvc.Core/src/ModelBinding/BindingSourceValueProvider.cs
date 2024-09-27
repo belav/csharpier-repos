@@ -12,14 +12,17 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// </summary>
 /// <remarks>
 /// <para>
-/// A <see cref="BindingSourceValueProvider"/> is an <see cref="IValueProvider"/> base-implementation which
+/// A <see cref="BindingSourceValueProvider"/> is an <see cref="IValueProvider"/>
+// base-implementation which
 /// can provide data for all parameters and model properties which specify the corresponding
 /// <see cref="ModelBinding.BindingSource"/>.
 /// </para>
 /// <para>
-/// <see cref="BindingSourceValueProvider"/> implements <see cref="IBindingSourceValueProvider"/> and will
+/// <see cref="BindingSourceValueProvider"/> implements <see cref="IBindingSourceValueProvider"/>
+// and will
 /// include or exclude itself from the set of value providers based on the model's associated
-/// <see cref="ModelBinding.BindingSource"/>. Value providers are by-default included; if a model does not
+/// <see cref="ModelBinding.BindingSource"/>. Value providers are by-default included; if a model
+// does not
 /// specify a <see cref="ModelBinding.BindingSource"/> then all value providers are valid.
 /// </para>
 /// </remarks>

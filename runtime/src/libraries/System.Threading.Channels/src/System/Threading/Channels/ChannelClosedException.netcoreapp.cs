@@ -10,7 +10,8 @@ namespace System.Threading.Channels
     [Serializable]
     public partial class ChannelClosedException : InvalidOperationException
     {
-        /// <summary>Initializes a new instance of the <see cref="ChannelClosedException"/> class with serialized data.</summary>
+        /// <summary>Initializes a new instance of the <see cref="ChannelClosedException"/> class with
+        // serialized data.</summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
 #if NET8_0_OR_GREATER

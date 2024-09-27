@@ -26,7 +26,8 @@ namespace System.Data.Common
         //     quote values using \{ and \}, only driver= and pwd= appear to generically allow quoting
         //     do not strip quotes from value, or add quotes except for driver keyword
         // OLEDB:
-        //     https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-string-syntax#oledb-connection-string-syntax
+        //
+        // https://docs.microsoft.com/en-us/dotnet/framework/data/adonet/connection-string-syntax#oledb-connection-string-syntax
         //     support == -> = in keywords
         //     last key-value pair wins
         //     quote values using \" or \'
@@ -315,8 +316,10 @@ namespace System.Data.Common
 
         // SxS notes:
         // * this method queries "DataDirectory" value from the current AppDomain.
-        //   This string is used for to replace "!DataDirectory!" values in the connection string, it is not considered as an "exposed resource".
-        // * This method uses GetFullPath to validate that root path is valid, the result is not exposed out.
+        //   This string is used for to replace "!DataDirectory!" values in the connection string, it is not
+        // considered as an "exposed resource".
+        // * This method uses GetFullPath to validate that root path is valid, the result is not exposed
+        // out.
         internal static string? ExpandDataDirectory(
             string keyword,
             string? value,
@@ -351,7 +354,8 @@ namespace System.Data.Common
                     datadir = rootFolderPath;
                 }
 
-                // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with onw
+                // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with
+                // onw
                 int fileNamePosition = DataDirectory.Length; // filename starts right after the '|datadirectory|' keyword
                 bool rootFolderEndsWith =
                     (0 < rootFolderPath.Length)

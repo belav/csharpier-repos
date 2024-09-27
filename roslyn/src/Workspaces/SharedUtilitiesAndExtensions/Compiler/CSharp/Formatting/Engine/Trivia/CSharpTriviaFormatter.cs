@@ -119,12 +119,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                         or SyntaxKind.EndRegionDirectiveTrivia
                 )
                 {
-                    // When we have a '#region' in conditionally disabled conditional (e.g, `#if false`), we cannot determine a correct indentation for '#region'.
+                    // When we have a '#region' in conditionally disabled conditional (e.g, `#if false`), we cannot
+                    // determine a correct indentation for '#region'.
                     // So we preserve the existing indentation.
                     // To figure whether we are in a disabled region, we do the following:
                     // - Starting from the given trivia, keep going back.
                     // - Once we find a disabled text, we know this is a disabled region.
-                    // - If we find a BranchingDirectiveTriviaSyntax, we can directly determine whether it's active or not via BranchTaken property.
+                    // - If we find a BranchingDirectiveTriviaSyntax, we can directly determine whether it's active or
+                    // not via BranchTaken property.
                     var previous = trivia2;
                     while (
                         (
@@ -232,7 +234,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             // Below represents the tokens for a file:
             // (None) - It is the start of the file. This means there are no previous tokens.
             // (...) - All the tokens in the compilation unit.
-            // (EndOfFileToken) - This is the synthetic end of file token. Should be treated as the end of the file.
+            // (EndOfFileToken) - This is the synthetic end of file token. Should be treated as the end of the
+            // file.
             // (None) - It is the end of the file. This means there are no more tokens.
 
             var isStartOrEndOfFile =

@@ -14,7 +14,8 @@ namespace System.Reflection.Context.Tests
         private readonly CustomReflectionContext _customReflectionContext =
             new VirtualPropertyInfoCustomReflectionContext();
 
-        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only context.
+        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only
+        // context.
         private readonly PropertyInfo[] _virtualProperties;
 
         // Fully functional virtual property with getter and setter.

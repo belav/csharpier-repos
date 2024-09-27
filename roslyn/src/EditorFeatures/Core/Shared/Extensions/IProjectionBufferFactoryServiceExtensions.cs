@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                         var finalSpanStart = Math.Max(line.Start, span.Start);
                         var finalSpanEnd = Math.Min(line.EndIncludingLineBreak, span.End);
 
-                        // We'll only offset if our span doesn't already start at the start of the line. See the similar exclusion in
+                        // We'll only offset if our span doesn't already start at the start of the line. See the similar
+                        // exclusion in
                         // DetermineIndentationColumn that this matches.
                         if (line.Start == finalSpanStart)
                         {
@@ -117,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                             }
                         }
 
-                        // We don't expect edits to happen while this projection buffer is active. We'll choose EdgeExclusive so
+                        // We don't expect edits to happen while this projection buffer is active. We'll choose
+                        // EdgeExclusive so
                         // if they do we don't end up in any cases where there is overlapping source spans.
                         finalSpans.Add(
                             snapshot.CreateTrackingSpan(

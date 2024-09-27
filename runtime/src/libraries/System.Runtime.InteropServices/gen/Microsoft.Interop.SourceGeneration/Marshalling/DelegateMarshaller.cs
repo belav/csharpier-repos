@@ -52,7 +52,8 @@ namespace Microsoft.Interop
                             or MarshalDirection.Bidirectional
                     )
                     {
-                        // <nativeIdentifier> = <managedIdentifier> != null ? Marshal.GetFunctionPointerForDelegate(<managedIdentifier>) : default;
+                        // <nativeIdentifier> = <managedIdentifier> != null ?
+                        // Marshal.GetFunctionPointerForDelegate(<managedIdentifier>) : default;
                         yield return AssignmentStatement(
                             IdentifierName(nativeIdentifier),
                             ConditionalExpression(
@@ -78,7 +79,8 @@ namespace Microsoft.Interop
                             or MarshalDirection.Bidirectional
                     )
                     {
-                        // <managedIdentifier> = <nativeIdentifier> != default : Marshal.GetDelegateForFunctionPointer<<managedType>>(<nativeIdentifier>) : null;
+                        // <managedIdentifier> = <nativeIdentifier> != default :
+                        // Marshal.GetDelegateForFunctionPointer<<managedType>>(<nativeIdentifier>) : null;
                         yield return AssignmentStatement(
                             IdentifierName(managedIdentifier),
                             ConditionalExpression(

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -27,8 +28,10 @@ namespace System.Web.Mvc
         public static readonly Assembly MvcAssembly = typeof(Controller).Assembly;
         public static readonly Assembly SystemWebAssembly = typeof(HttpContext).Assembly;
 
-        // method is used primarily for lighting up new .NET Framework features even if MVC targets the previous version
-        // thisParameter is the 'this' parameter if target method is instance method, should be null for static method
+        // method is used primarily for lighting up new .NET Framework features even if MVC targets the
+        // previous version
+        // thisParameter is the 'this' parameter if target method is instance method, should be null for
+        // static method
         public static TDelegate CreateDelegate<TDelegate>(
             Assembly assembly,
             string typeName,
@@ -100,7 +103,8 @@ namespace System.Web.Mvc
 
             Type dictionaryType = ExtractGenericInterface(targetType, typeof(IDictionary<,>));
 
-            // just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be cast to TKey
+            // just wrap a call to the underlying IDictionary<TKey, TValue>.TryGetValue() where string can be
+            // cast to TKey
             if (dictionaryType != null)
             {
                 Type[] typeArguments = dictionaryType.GetGenericArguments();
@@ -163,11 +167,13 @@ namespace System.Web.Mvc
         }
 
         /// <summary>
-        /// Provide a new <see cref="MissingMethodException"/> if original Message does not contain given full Type name.
+        /// Provide a new <see cref="MissingMethodException"/> if original Message does not contain given
+        // full Type name.
         /// </summary>
         /// <param name="originalException"><see cref="MissingMethodException"/> to check.</param>
         /// <param name="fullTypeName">Full Type name which Message should contain.</param>
-        /// <returns>New <see cref="MissingMethodException"/> if an update is required; null otherwise.</returns>
+        /// <returns>New <see cref="MissingMethodException"/> if an update is required; null
+        // otherwise.</returns>
         public static MissingMethodException EnsureDebuggableException(
             MissingMethodException originalException,
             string fullTypeName

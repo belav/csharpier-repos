@@ -212,7 +212,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Used when iterating through base types in contexts in which the caller needs to avoid cycles and can't use BaseType
+        /// Used when iterating through base types in contexts in which the caller needs to avoid cycles and
+        // can't use BaseType
         /// (perhaps because BaseType is in the process of being computed)
         /// </summary>
         /// <param name="type"></param>

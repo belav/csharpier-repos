@@ -3,8 +3,10 @@
 
 // NOTE: This file is copied from src/Middleware/StaticFiles/src/IContentTypeProvider.cs
 // and made internal with a namespace change.
-// It can't be referenced directly from the StaticFiles package because that would cause this package to require
-// Microsoft.AspNetCore.App, thus preventing it from being used anywhere ASP.NET Core isn't supported (such as
+// It can't be referenced directly from the StaticFiles package because that would cause this
+// package to require
+// Microsoft.AspNetCore.App, thus preventing it from being used anywhere ASP.NET Core isn't
+// supported (such as
 // various platforms that .NET MAUI runs on, such as Android and iOS).
 
 using System.Diagnostics.CodeAnalysis;
@@ -17,8 +19,10 @@ namespace Microsoft.AspNetCore.Components.WebView;
 internal sealed class FileExtensionContentTypeProvider : IContentTypeProvider
 {
     // Notes:
-    // - This table was initially copied from IIS and has many legacy entries we will maintain for backwards compatibility.
-    // - We only plan to add new entries where we expect them to be applicable to a majority of developers such as being
+    // - This table was initially copied from IIS and has many legacy entries we will maintain for
+    // backwards compatibility.
+    // - We only plan to add new entries where we expect them to be applicable to a majority of
+    // developers such as being
     // used in the project templates.
     #region Extension mapping table
     /// <summary>

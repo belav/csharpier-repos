@@ -2,7 +2,8 @@
 //
 // MIT license
 //
-// Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne
+// Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal
+// Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne, Pascal Craponne
 // Copyright (c) 2009 Novell, Inc.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy

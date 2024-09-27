@@ -37,12 +37,14 @@ namespace System.Data.SqlClient
         internal const string RSAEncryptionAlgorithmWithOAEP = @"RSA_OAEP";
 
         /// <summary>
-        /// LocalMachine certificate store location. Valid certificate locations are LocalMachine and CurrentUser.
+        /// LocalMachine certificate store location. Valid certificate locations are LocalMachine and
+        // CurrentUser.
         /// </summary>
         private const string _certLocationLocalMachine = @"LocalMachine";
 
         /// <summary>
-        /// CurrentUser certificate store location. Valid certificate locations are LocalMachine and CurrentUser.
+        /// CurrentUser certificate store location. Valid certificate locations are LocalMachine and
+        // CurrentUser.
         /// </summary>
         private const string _certLocationCurrentUser = @"CurrentUser";
 
@@ -106,7 +108,8 @@ namespace System.Data.SqlClient
             // Format is
             //           version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
             //
-            // keyPath is present in the encrypted column encryption key for identifying the original source of the asymmetric key pair and
+            // keyPath is present in the encrypted column encryption key for identifying the original source of
+            // the asymmetric key pair and
             // we will not validate it against the data contained in the CMK metadata (masterKeyPath).
 
             // Validate the version byte
@@ -293,7 +296,8 @@ namespace System.Data.SqlClient
             );
 
             // Construct the encrypted column encryption key
-            // EncryptedColumnEncryptionKey = version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
+            // EncryptedColumnEncryptionKey = version + keyPathLength + ciphertextLength + keyPath + ciphertext
+            // +  signature
             int encryptedColumnEncryptionKeyLength =
                 version.Length
                 + cipherTextLength.Length
@@ -443,7 +447,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Parses the given certificate path, searches in certificate store and returns a matching certificate
+        /// Parses the given certificate path, searches in certificate store and returns a matching
+        // certificate
         /// </summary>
         /// <param name="keyPath">
         /// Certificate key path. Format of the path is [LocalMachine|CurrentUser]/[storename]/thumbprint
@@ -459,7 +464,8 @@ namespace System.Data.SqlClient
             string[] certParts = keyPath.Split('/');
 
             // Validate certificate path
-            // Certificate path should only contain 3 parts (Certificate Location, Certificate Store Name and Thumbprint)
+            // Certificate path should only contain 3 parts (Certificate Location, Certificate Store Name and
+            // Thumbprint)
             if (certParts.Length > 3)
             {
                 throw SQL.InvalidCertificatePath(

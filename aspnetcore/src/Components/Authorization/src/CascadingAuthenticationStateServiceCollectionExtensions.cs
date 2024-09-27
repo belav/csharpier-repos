@@ -12,8 +12,10 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class CascadingAuthenticationStateServiceCollectionExtensions
 {
     /// <summary>
-    /// Adds cascading authentication state to the <paramref name="serviceCollection"/>. This is equivalent to
-    /// having a <see cref="CascadingAuthenticationState"/> component at the root of your component hierarchy.
+    /// Adds cascading authentication state to the <paramref name="serviceCollection"/>. This is
+    // equivalent to
+    /// having a <see cref="CascadingAuthenticationState"/> component at the root of your component
+    // hierarchy.
     /// </summary>
     /// <param name="serviceCollection">The <see cref="IServiceCollection"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
@@ -50,9 +52,12 @@ public static class CascadingAuthenticationStateServiceCollectionExtensions
 
         private void HandleAuthenticationStateChanged(Task<AuthenticationState> newAuthStateTask)
         {
-            // It's OK to discard the task because this only represents the duration of the dispatch to sync context.
-            // It handles any exceptions internally by dispatching them to the renderer within the context of whichever
-            // component threw when receiving the update. This is the same as how a CascadingValue doesn't get notified
+            // It's OK to discard the task because this only represents the duration of the dispatch to sync
+            // context.
+            // It handles any exceptions internally by dispatching them to the renderer within the context of
+            // whichever
+            // component threw when receiving the update. This is the same as how a CascadingValue doesn't get
+            // notified
             // about exceptions that happen inside the recipients of value notifications.
             _ = NotifyChangedAsync(newAuthStateTask);
         }

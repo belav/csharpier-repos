@@ -21,7 +21,8 @@ namespace System.Xml.Schema
         XmlSchemaContentProcessing processContents = XmlSchemaContentProcessing.None;
         NamespaceList namespaceList;
 
-        /// <include file='doc\XmlSchemaAnyAttribute.uex' path='docs/doc[@for="XmlSchemaAnyAttribute.Namespaces"]/*' />
+        /// <include file='doc\XmlSchemaAnyAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAnyAttribute.Namespaces"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -32,7 +33,8 @@ namespace System.Xml.Schema
             set { ns = value; }
         }
 
-        /// <include file='doc\XmlSchemaAnyAttribute.uex' path='docs/doc[@for="XmlSchemaAnyAttribute.ProcessContents"]/*' />
+        /// <include file='doc\XmlSchemaAnyAttribute.uex'
+        // path='docs/doc[@for="XmlSchemaAnyAttribute.ProcessContents"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

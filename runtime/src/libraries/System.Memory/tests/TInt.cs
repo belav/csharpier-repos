@@ -12,7 +12,8 @@ namespace System
         public TInt(int value)
             : this(value, (Action<int, int>)null)
         {
-            // This constructor does not report comparisons but is still useful for catching uses of the boxing Equals().
+            // This constructor does not report comparisons but is still useful for catching uses of the boxing
+            // Equals().
         }
 
         public TInt(int value, Action<int, int> onCompare)

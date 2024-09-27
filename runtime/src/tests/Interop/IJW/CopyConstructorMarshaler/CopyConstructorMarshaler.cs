@@ -29,7 +29,8 @@ namespace CopyConstructorMarshaler
                 object testInstance = Activator.CreateInstance(testType);
                 MethodInfo testMethod = testType.GetMethod("PInvokeNumCopies");
 
-                // PInvoke will copy twice. Once from argument to parameter, and once from the managed to native parameter.
+                // PInvoke will copy twice. Once from argument to parameter, and once from the managed to native
+                // parameter.
                 Assert.Equal(2, (int)testMethod.Invoke(testInstance, null));
 
                 testMethod = testType.GetMethod("ReversePInvokeNumCopies");
@@ -40,7 +41,8 @@ namespace CopyConstructorMarshaler
 
                 testMethod = testType.GetMethod("PInvokeNumCopiesDerivedType");
 
-                // PInvoke will copy twice. Once from argument to parameter, and once from the managed to native parameter.
+                // PInvoke will copy twice. Once from argument to parameter, and once from the managed to native
+                // parameter.
                 Assert.Equal(2, (int)testMethod.Invoke(testInstance, null));
 
                 testMethod = testType.GetMethod("ReversePInvokeNumCopiesDerivedType");

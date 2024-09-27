@@ -262,7 +262,8 @@
 
             switch (expression.Body.NodeType)
             {
-                // ArrayIndex always means a single-dimensional indexer; multi-dimensional indexer is a method call to Get()
+                // ArrayIndex always means a single-dimensional indexer; multi-dimensional indexer is a method call
+                // to Get()
                 case ExpressionType.ArrayIndex:
                     legalExpression = true;
                     break;

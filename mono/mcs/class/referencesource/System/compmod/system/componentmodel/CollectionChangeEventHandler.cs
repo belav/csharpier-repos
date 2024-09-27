@@ -13,7 +13,8 @@ namespace System.ComponentModel
 
     /// <devdoc>
     ///    <para>Represents the method that will handle the
-    ///    <see langword='CollectionChanged '/>event raised when adding elements to or removing elements from a
+    ///    <see langword='CollectionChanged '/>event raised when adding elements to or removing elements
+    // from a
     ///       collection.</para>
     /// </devdoc>
     [HostProtection(SharedState = true)]

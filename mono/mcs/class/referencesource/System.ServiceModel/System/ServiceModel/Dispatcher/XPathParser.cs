@@ -171,7 +171,8 @@ namespace System.ServiceModel.Dispatcher
                         break;
 
                     case XPathTokenID.DblSlash:
-                        // '//' is special. If found at the start of an absolute path, it implies that the descendant-or-self axis
+                        // '//' is special. If found at the start of an absolute path, it implies that the
+                        // descendant-or-self axis
                         // is applied to the ROOT
                         path = new XPathExprList();
                         path.Add(

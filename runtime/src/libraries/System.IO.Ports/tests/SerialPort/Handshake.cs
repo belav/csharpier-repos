@@ -15,7 +15,8 @@ namespace System.IO.Ports.Tests
         //and that the bytes were transferred successfully
         private static readonly int s_DEFAULT_BYTE_SIZE = TCSupport.MinimumBlockingByteCount;
 
-        //The number of bytes to send when send XOn or XOff, the actual XOn/XOff char will be inserted somewhere
+        //The number of bytes to send when send XOn or XOff, the actual XOn/XOff char will be inserted
+        // somewhere
         //in the array of bytes
         private static readonly int s_DEFAULT_BYTE_SIZE_XON_XOFF =
             TCSupport.MinimumBlockingByteCount * 2;

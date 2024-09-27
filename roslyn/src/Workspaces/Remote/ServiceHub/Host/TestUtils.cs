@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Remote
                 .ConfigureAwait(false);
 
             // check 4 things
-            // 1. first see if we create new solution from scratch, it works as expected (indicating a bug in incremental update)
+            // 1. first see if we create new solution from scratch, it works as expected (indicating a bug in
+            // incremental update)
             var mismatch1 = assetMapFromNewSolution
                 .Where(p => !allChecksumsFromRequest.Contains(p.Key))
                 .ToList();
@@ -257,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         /// <summary>
-        /// create checksum to corresponding object map from project this map should contain every parts of project that
+        /// create checksum to corresponding object map from project this map should contain every parts of
+        // project that
         /// can be used to re-create the project back
         /// </summary>
         public static async Task<Dictionary<Checksum, object>> GetAssetMapAsync(

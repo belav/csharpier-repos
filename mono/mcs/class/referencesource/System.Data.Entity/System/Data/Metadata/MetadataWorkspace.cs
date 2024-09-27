@@ -39,13 +39,16 @@ namespace System.Data.Metadata.Edm
         public MetadataWorkspace() { }
 
         /// <summary>
-        /// Create MetadataWorkspace that is populated with ItemCollections for all the spaces that the metadata artifacts provided.
-        /// All res:// paths will be resolved only from the assemblies returned from the enumerable assembliesToConsider.
+        /// Create MetadataWorkspace that is populated with ItemCollections for all the spaces that the
+        // metadata artifacts provided.
+        /// All res:// paths will be resolved only from the assemblies returned from the enumerable
+        // assembliesToConsider.
         /// </summary>
         /// <param name="paths">The paths where the metadata artifacts located</param>
         /// <param name="assembliesToConsider">User specified assemblies to consider</param>
         /// <exception cref="ArgumentNullException"></exception>
-        /// <exception cref="ArgumentException">Throw when assembliesToConsider is empty or contains null, or cannot find the corresponding assembly in it</exception>
+        /// <exception cref="ArgumentException">Throw when assembliesToConsider is empty or contains null,
+        // or cannot find the corresponding assembly in it</exception>
         /// <exception cref="MetadataException"></exception>
         [ResourceExposure(ResourceScope.Machine)] //Exposes the file path names which are a Machine resource
         [ResourceConsumption(ResourceScope.Machine)] //For MetadataWorkspace.CreateMetadataWorkspaceWithResolver method call but we do not create the file paths in this method
@@ -197,7 +200,8 @@ namespace System.Data.Metadata.Edm
 
         #region Methods
         /// <summary>
-        /// Create an <see cref="eSQL.EntitySqlParser"/> configured to use the <see cref="DataSpace.CSpace"/> data space.
+        /// Create an <see cref="eSQL.EntitySqlParser"/> configured to use the <see
+        // cref="DataSpace.CSpace"/> data space.
         /// </summary>
         public eSQL.EntitySqlParser CreateEntitySqlParser()
         {
@@ -205,13 +209,17 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Creates a new <see cref="DbQueryCommandTree"/> bound to this metadata workspace based on the specified query expression.
+        /// Creates a new <see cref="DbQueryCommandTree"/> bound to this metadata workspace based on the
+        // specified query expression.
         /// </summary>
         /// <param name="query">A <see cref="DbExpression"/> that defines the query</param>
-        /// <returns>A new <see cref="DbQueryCommandTree"/> with the specified expression as it's <see cref="DbQueryCommandTree.Query"/> property</returns>
+        /// <returns>A new <see cref="DbQueryCommandTree"/> with the specified expression as it's <see
+        // cref="DbQueryCommandTree.Query"/> property</returns>
         /// <exception cref="ArgumentNullException">If <paramref name="query"/> is null</exception>
-        /// <exception cref="ArgumentException">If <paramref name="query"/> contains metadata that cannot be resolved in this metadata workspace</exception>
-        /// <exception cref="ArgumentException">If <paramref name="query"/> is not structurally valid because it contains unresolvable variable references</exception>
+        /// <exception cref="ArgumentException">If <paramref name="query"/> contains metadata that cannot be
+        // resolved in this metadata workspace</exception>
+        /// <exception cref="ArgumentException">If <paramref name="query"/> is not structurally valid
+        // because it contains unresolvable variable references</exception>
         public DbQueryCommandTree CreateQueryCommandTree(DbExpression query)
         {
             return new DbQueryCommandTree(this, DataSpace.CSpace, query);
@@ -224,7 +232,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">The dataspace for the item colelction that should be returned</param>
         /// <returns>The item collection for the given space</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
         [CLSCompliant(false)]
         public ItemCollection GetItemCollection(DataSpace dataSpace)
         {
@@ -240,7 +249,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="collection">The out parameter collection that needs to be filled up</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if collection argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If there is an ItemCollection that has already been registered for collection's space passed in</exception>
+        /// <exception cref="System.InvalidOperationException">If there is an ItemCollection that has
+        // already been registered for collection's space passed in</exception>
         [CLSCompliant(false)]
         public void RegisterItemCollection(ItemCollection collection)
         {
@@ -419,7 +429,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Add a token for this MetadataWorkspace just so this metadata workspace holds a reference to it, this
+        /// Add a token for this MetadataWorkspace just so this metadata workspace holds a reference to it,
+        // this
         /// is for metadata caching to make the workspace marking a particular cache entry is still in used
         /// </summary>
         /// <param name="token"></param>
@@ -491,14 +502,17 @@ namespace System.Data.Metadata.Edm
         /// we filter out assemblies with the Ecma or MicrosoftPublic PublicKeyToken on them
         ///
         /// Load metadata from the type's assembly into the OSpace ItemCollection.
-        /// If type comes from known source, has Ecma or Microsoft PublicKeyToken then the type's assembly is not
+        /// If type comes from known source, has Ecma or Microsoft PublicKeyToken then the type's assembly
+        // is not
         /// loaded, but the callingAssembly and its referenced assemblies are loaded.
         /// </summary>
         /// <param name="type">The type's assembly is loaded into the OSpace ItemCollection</param>
-        /// <param name="callingAssembly">The assembly and its referenced assemblies to load when type is insuffiecent</param>
+        /// <param name="callingAssembly">The assembly and its referenced assemblies to load when type is
+        // insuffiecent</param>
         internal void ImplicitLoadAssemblyForType(Type type, Assembly callingAssembly)
         {
-            // this exists separately from LoadFromAssembly so that we can handle generics, like IEnumerable<Product>
+            // this exists separately from LoadFromAssembly so that we can handle generics, like
+            // IEnumerable<Product>
             Debug.Assert(null != type, "null type");
             ItemCollection collection;
             if (TryGetItemCollection(DataSpace.OSpace, out collection))
@@ -517,11 +531,13 @@ namespace System.Data.Metadata.Edm
                     // then loaded referenced assemblies of calling assembly
 
                     // attempt automatic discovery of user types
-                    // interesting code paths are ObjectQuery<object>, ObjectQuery<DbDataRecord>, ObjectQuery<IExtendedDataRecord>
+                    // interesting code paths are ObjectQuery<object>, ObjectQuery<DbDataRecord>,
+                    // ObjectQuery<IExtendedDataRecord>
                     // other interesting code paths are ObjectQuery<Nullable<Int32>>, ObjectQuery<IEnumerable<object>>
                     // when assemblies is mscorlib, System.Data or System.Data.Entity
 
-                    // If the schema attribute is presented on the assembly or any referenced assemblies, then it is a V1 scenario that we should
+                    // If the schema attribute is presented on the assembly or any referenced assemblies, then it is a
+                    // V1 scenario that we should
                     // strictly follow the Get all referenced assemblies rules.
                     // If the attribute is not presented on the assembly, then we won't load the referenced ----sembly
                     // for this callingAssembly
@@ -558,11 +574,13 @@ namespace System.Data.Metadata.Edm
         /// the load metadata from the callingAssembly and its referenced assemblies.
         /// </summary>
         /// <param name="type">The CSPace type to verify its OSpace counterpart is loaded</param>
-        /// <param name="callingAssembly">The assembly and its referenced assemblies to load when type is insuffiecent</param>
+        /// <param name="callingAssembly">The assembly and its referenced assemblies to load when type is
+        // insuffiecent</param>
         internal void ImplicitLoadFromEntityType(EntityType type, Assembly callingAssembly)
         {
             // used by ObjectContext.*GetObjectByKey when the clr type is not available
-            // so we check the OCMap to find the clr type else attempt to autoload the OSpace from callingAssembly
+            // so we check the OCMap to find the clr type else attempt to autoload the OSpace from
+            // callingAssembly
             Debug.Assert(null != type, "null type");
             Map map;
             if (!TryGetMap(type, DataSpace.OCSpace, out map))
@@ -597,10 +615,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if identity argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have an item with the given identity</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if identity argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have an
+        // item with the given identity</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public T GetItem<T>(string identity, DataSpace dataSpace)
             where T : GlobalItem
         {
@@ -644,10 +666,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if identity argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have an item with the given identity</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if identity argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have an
+        // item with the given identity</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public T GetItem<T>(string identity, bool ignoreCase, DataSpace dataSpace)
             where T : GlobalItem
         {
@@ -681,8 +707,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public ReadOnlyCollection<T> GetItems<T>(DataSpace dataSpace)
             where T : GlobalItem
         {
@@ -698,10 +726,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">Dataspace to search the type for</param>
         /// <returns>Returns null if no match found.</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if name or namespaceName arguments passed in are null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a type with the given name and namespaceName</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if name or namespaceName arguments passed in are
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // type with the given name and namespaceName</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public EdmType GetType(string name, string namespaceName, DataSpace dataSpace)
         {
             ItemCollection collection = GetItemCollection(dataSpace, true);
@@ -720,7 +752,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">Dataspace to search the type for</param>
         /// <param name="type">The type that needs to be filled with the return value</param>
         /// <returns>Returns false if no match found.</returns>
-        /// <exception cref="System.ArgumentNullException">if name, namespaceName or space argument is null</exception>
+        /// <exception cref="System.ArgumentNullException">if name, namespaceName or space argument is
+        // null</exception>
         public bool TryGetType(
             string name,
             string namespaceName,
@@ -749,10 +782,14 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">Dataspace to search the type for</param>
         /// <returns>Returns null if no match found.</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if name or namespaceName arguments passed in are null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a type with the given name and namespaceName</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if name or namespaceName arguments passed in are
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // type with the given name and namespaceName</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public EdmType GetType(
             string name,
             string namespaceName,
@@ -773,7 +810,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase"></param>
         /// <param name="type">The type that needs to be filled with the return value</param>
         /// <returns>Returns null if no match found.</returns>
-        /// <exception cref="System.ArgumentNullException">if name, namespaceName or space argument is null</exception>
+        /// <exception cref="System.ArgumentNullException">if name, namespaceName or space argument is
+        // null</exception>
         public bool TryGetType(
             string name,
             string namespaceName,
@@ -795,10 +833,13 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <returns>The EntityContainer</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
         /// <exception cref="System.ArgumentNullException">if name argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a EntityContainer with the given name</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // EntityContainer with the given name</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public EntityContainer GetEntityContainer(string name, DataSpace dataSpace)
         {
             ItemCollection collection = GetItemCollection(dataSpace, true);
@@ -811,7 +852,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="name">name of the entity container</param>
         /// <param name="dataSpace"></param>
         /// <param name="entityContainer"></param>
-        /// <exception cref="System.ArgumentNullException">if either space or name arguments is null</exception>
+        /// <exception cref="System.ArgumentNullException">if either space or name arguments is
+        // null</exception>
         public bool TryGetEntityContainer(
             string name,
             DataSpace dataSpace,
@@ -834,10 +876,13 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <returns>The EntityContainer</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
         /// <exception cref="System.ArgumentNullException">if name argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a EntityContainer with the given name</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // EntityContainer with the given name</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public EntityContainer GetEntityContainer(string name, bool ignoreCase, DataSpace dataSpace)
         {
             ItemCollection collection = GetItemCollection(dataSpace, true);
@@ -875,12 +920,17 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">The dataspace for which we need to get the function for</param>
         /// <returns>A collection of all the functions with the given name in the given data space</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.ArgumentNullException">if name or namespaceName argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if functionName argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a EdmFunction with the given functionName</exception>
+        /// <exception cref="System.ArgumentNullException">if name or namespaceName argument is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if functionName argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // EdmFunction with the given functionName</exception>
         /// <exception cref="System.ArgumentException">If the name or namespaceName is empty</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public ReadOnlyCollection<EdmFunction> GetFunctions(
             string name,
             string namespaceName,
@@ -904,12 +954,17 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <returns>A collection of all the functions with the given name in the given data space</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.ArgumentNullException">if name or namespaceName argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentNullException">if functionName argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a EdmFunction with the given functionName</exception>
+        /// <exception cref="System.ArgumentNullException">if name or namespaceName argument is
+        // null</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentNullException">if functionName argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">If the ItemCollection for this space does not have a
+        // EdmFunction with the given functionName</exception>
         /// <exception cref="System.ArgumentException">If the name or namespaceName is empty</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public ReadOnlyCollection<EdmFunction> GetFunctions(
             string name,
             string namespaceName,
@@ -936,7 +991,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace"></param>
         /// <param name="function">The function that needs to be returned</param>
         /// <returns> The function as specified in the function key or null</returns>
-        /// <exception cref="System.ArgumentNullException">if name, namespaceName, parameterTypes or space argument is null</exception>
+        /// <exception cref="System.ArgumentNullException">if name, namespaceName, parameterTypes or space
+        // argument is null</exception>
         internal bool TryGetFunction(
             string name,
             string namespaceName,
@@ -967,8 +1023,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace for which you need the list of primitive types</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public ReadOnlyCollection<PrimitiveType> GetPrimitiveTypes(DataSpace dataSpace)
         {
             ItemCollection collection = GetItemCollection(dataSpace, true);
@@ -981,8 +1039,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace for which you need the list of items</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         public ReadOnlyCollection<GlobalItem> GetItems(DataSpace dataSpace)
         {
             ItemCollection collection = GetItemCollection(dataSpace, true);
@@ -996,8 +1056,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace in which one needs to the mapping primitive types</param>
         /// <returns>The mapped scalar type</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
-        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for the space passed in</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space is either C, O, CS or OCSpace</exception>
+        /// <exception cref="System.InvalidOperationException">If ItemCollection has not been registered for
+        // the space passed in</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the space is not a valid space. Valid space
+        // is either C, O, CS or OCSpace</exception>
         internal PrimitiveType GetMappedPrimitiveType(
             PrimitiveTypeKind primitiveTypeKind,
             DataSpace dataSpace
@@ -1011,7 +1073,8 @@ namespace System.Data.Metadata.Edm
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="typeIdentity">type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="mappingSpace">space for which you want to get the mapped type</param>
         /// <param name="map"></param>
@@ -1039,7 +1102,8 @@ namespace System.Data.Metadata.Edm
         /// Search for a Mapping metadata with the specified type key.
         /// </summary>
         /// <param name="identity">typeIdentity of the type</param>
-        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs to</param>
+        /// <param name="typeSpace">The dataspace that the type for which map needs to be returned belongs
+        // to</param>
         /// <param name="dataSpace">space for which you want to get the mapped type</param>
         /// <exception cref="ArgumentException"> Thrown if mapping space is not valid</exception>
         internal Map GetMap(string identity, DataSpace typeSpace, DataSpace dataSpace)
@@ -1087,12 +1151,14 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Get item collection for the space, if registered. If returned, the ItemCollection is in read only mode as it is
+        /// Get item collection for the space, if registered. If returned, the ItemCollection is in read
+        // only mode as it is
         /// part of the workspace.
         /// </summary>
         /// <param name="dataSpace">The dataspace for the item collection that should be returned</param>
         /// <param name="collection">The collection registered for the specified dataspace, if any</param>
-        /// <returns><c>true</c> if an item collection is currently registered for the specified space; otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if an item collection is currently registered for the specified space;
+        // otherwise <c>false</c>.</returns>
         /// <exception cref="System.ArgumentNullException">if space argument is null</exception>
         [CLSCompliant(false)]
         public bool TryGetItemCollection(DataSpace dataSpace, out ItemCollection collection)
@@ -1102,12 +1168,14 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Checks if the space is valid and whether the collection is registered for the given space, and if both are valid,
+        /// Checks if the space is valid and whether the collection is registered for the given space, and
+        // if both are valid,
         /// then returns the itemcollection for the given space
         /// </summary>
         /// <param name="dataSpace"></param>
         /// <param name="required">if true, will throw</param>
-        /// <exception cref="ArgumentException">Thrown if required and mapping space is not valid or registered</exception>
+        /// <exception cref="ArgumentException">Thrown if required and mapping space is not valid or
+        // registered</exception>
         internal ItemCollection GetItemCollection(DataSpace dataSpace, bool required)
         {
             ItemCollection collection;
@@ -1258,7 +1326,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Helper method returning the OSpace structural or enum type mapped to the specified Edm Space Type.
+        /// Helper method returning the OSpace structural or enum type mapped to the specified Edm Space
+        // Type.
         /// If the DataSpace of the argument is not CSpace, or if the mapped OSpace type
         /// cannot be determined, the method returns false and sets the out parameter
         /// to null.
@@ -1385,7 +1454,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Helper method returning the Edm Space structural or enum type mapped to the OSpace Type parameter. If the
+        /// Helper method returning the Edm Space structural or enum type mapped to the OSpace Type
+        // parameter. If the
         /// DataSpace of the supplied type is not OSpace, or the mapped Edm Space type cannot
         /// be determined, an ArgumentException is thrown.
         /// </summary>
@@ -1414,7 +1484,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Helper method returning the Edm Space structural or enum type mapped to the OSpace Type parameter. If the
+        /// Helper method returning the Edm Space structural or enum type mapped to the OSpace Type
+        // parameter. If the
         /// DataSpace of the supplied type is not OSpace, or the mapped Edm Space type cannot
         /// be determined, the method returns false and sets the out parameter to null.
         /// </summary>
@@ -1513,8 +1584,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Determines if a target function exists for the given function import.
         /// </summary>
-        /// <param name="functionImport">Function import (function declared in a model entity container)</param>
-        /// <param name="targetFunctionMapping">Function target mapping (function to which the import is mapped in the target store)</param>
+        /// <param name="functionImport">Function import (function declared in a model entity
+        // container)</param>
+        /// <param name="targetFunctionMapping">Function target mapping (function to which the import is
+        // mapped in the target store)</param>
         /// <returns>true if a mapped target function exists; false otherwise</returns>
         internal bool TryGetFunctionImportMapping(
             EdmFunction functionImport,
@@ -1606,7 +1679,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Returns true if the item collection for the given space has already been registered else returns false
+        /// Returns true if the item collection for the given space has already been registered else returns
+        // false
         /// </summary>
         /// <param name="dataSpace"></param>
         /// <returns></returns>
@@ -1676,7 +1750,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the canonical Model TypeUsage for a given PrimitiveTypeKind
         /// </summary>
-        /// <param name="primitiveTypeKind">PrimitiveTypeKind for which a canonical TypeUsage is expected</param>
+        /// <param name="primitiveTypeKind">PrimitiveTypeKind for which a canonical TypeUsage is
+        // expected</param>
         /// <returns>a canonical model TypeUsage</returns>
         internal TypeUsage GetCanonicalModelTypeUsage(PrimitiveTypeKind primitiveTypeKind)
         {
@@ -1686,34 +1761,41 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the Model PrimitiveType for a given primitiveTypeKind
         /// </summary>
-        /// <param name="primitiveTypeKind">a PrimitiveTypeKind for which a Model PrimitiveType is expected</param>
+        /// <param name="primitiveTypeKind">a PrimitiveTypeKind for which a Model PrimitiveType is
+        // expected</param>
         /// <returns>Model PrimitiveType</returns>
         internal PrimitiveType GetModelPrimitiveType(PrimitiveTypeKind primitiveTypeKind)
         {
             return EdmProviderManifest.Instance.GetPrimitiveType(primitiveTypeKind);
         }
 
-        // GetRequiredOriginalValueMembers and GetRelevantMembersForUpdate return list of "interesting" members for the given EntitySet/EntityType
+        // GetRequiredOriginalValueMembers and GetRelevantMembersForUpdate return list of "interesting"
+        // members for the given EntitySet/EntityType
         // Interesting Members are a subset of the following:
         //    0. Key members
         //    1. Members with C-Side conditions (complex types can not have C-side condition at present)
         //    2. Members participating in association end
         //    3. Members with ConcurrencyMode 'Fixed'
         //      3.1 Complex Members with any child member having Concurrency mode Fixed
-        //    4. Members included in Update ModificationFunction with Version='Original' (Original = Not Current)
+        //    4. Members included in Update ModificationFunction with Version='Original' (Original = Not
+        // Current)
         //      4.1 Complex Members in ModificationFunction if any sub-member is interesting
-        //    5. Members included in Update ModificationFunction (mutually exclusive with 4 - required for partial update scenarios)
+        //    5. Members included in Update ModificationFunction (mutually exclusive with 4 - required for
+        // partial update scenarios)
         //    6. Foreign keys
         //    7. All complex members - partial update scenarios only
         /// <summary>
-        /// Returns members of a given EntitySet/EntityType for which original values are necessary for determining which tables to modify.
+        /// Returns members of a given EntitySet/EntityType for which original values are necessary for
+        // determining which tables to modify.
         /// </summary>
         /// <param name="entitySet">An EntitySet belonging to the C-Space</param>
         /// <param name="entityType">An EntityType that participates in the given EntitySet</param>
         /// <returns>Edm Members for which original Value is required</returns>
         /// <remarks>
-        /// This method returns the following groups of members: 0, 1, 2, 3, 3.1, 4, 4.1. (see group descriptions above).
-        /// This method is marked as obsolete since it does not support partial update scenarios as it does not return
+        /// This method returns the following groups of members: 0, 1, 2, 3, 3.1, 4, 4.1. (see group
+        // descriptions above).
+        /// This method is marked as obsolete since it does not support partial update scenarios as it does
+        // not return
         /// members from group 5 and changing it to return these members would be a breaking change.
         /// </remarks>
         [Obsolete(
@@ -1732,7 +1814,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Returns members of a given EntitySet/EntityType for which original values are needed when modifying an entity.
+        /// Returns members of a given EntitySet/EntityType for which original values are needed when
+        // modifying an entity.
         /// </summary>
         /// <param name="entitySet">An EntitySet belonging to the C-Space</param>
         /// <param name="entityType">An EntityType that participates in the given EntitySet</param>
@@ -1740,8 +1823,10 @@ namespace System.Data.Metadata.Edm
         /// <returns>Edm Members for which original Value is required</returns>
         /// <remarks>
         /// This method returns the following groups of members:
-        /// - if <paramref name="partialUpdateSupported"/> is <c>false</c>: 1, 2, 3, 3.1, 4, 4.1, 6 (see group descriptions above)
-        /// - if <paramref name="partialUpdateSupported"/> is <c>true</c>: 1, 2, 3, 3.1, 5, 6, 7 (see group descriptions above)
+        /// - if <paramref name="partialUpdateSupported"/> is <c>false</c>: 1, 2, 3, 3.1, 4, 4.1, 6 (see
+        // group descriptions above)
+        /// - if <paramref name="partialUpdateSupported"/> is <c>true</c>: 1, 2, 3, 3.1, 5, 6, 7 (see group
+        // descriptions above)
         /// See DevDiv bugs #124460 and #272992 for more details.
         /// </remarks>
         public ReadOnlyCollection<EdmMember> GetRelevantMembersForUpdate(
@@ -1760,12 +1845,14 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Return members for <see cref="GetRequiredOriginalValueMembers"/> and <see cref="GetRelevantMembersForUpdate"/> methods.
+        /// Return members for <see cref="GetRequiredOriginalValueMembers"/> and <see
+        // cref="GetRelevantMembersForUpdate"/> methods.
         /// </summary>
         /// <param name="entitySet">An EntitySet belonging to the C-Space</param>
         /// <param name="entityType">An EntityType that participates in the given EntitySet</param>
         /// <param name="interestingMembersKind">Scenario the members should be returned for.</param>
-        /// <returns>ReadOnlyCollection of interesting members for the requested scenario (<paramref name="interestingMembersKind"/>).</returns>
+        /// <returns>ReadOnlyCollection of interesting members for the requested scenario (<paramref
+        // name="interestingMembersKind"/>).</returns>
         private ReadOnlyCollection<EdmMember> GetInterestingMembers(
             EntitySetBase entitySet,
             EntityTypeBase entityType,

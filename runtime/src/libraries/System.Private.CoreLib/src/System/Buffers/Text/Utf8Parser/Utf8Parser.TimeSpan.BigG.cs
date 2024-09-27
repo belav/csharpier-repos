@@ -134,7 +134,8 @@ namespace System.Buffers.Text
             }
 
             //
-            // There cannot legally be a sixth number. If the next character is a period or colon, treat this as a error as it's likely
+            // There cannot legally be a sixth number. If the next character is a period or colon, treat this as
+            // a error as it's likely
             // to indicate the start of a sixth number. Otherwise, treat as end of parse with data left over.
             //
             if (

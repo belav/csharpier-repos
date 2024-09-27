@@ -189,10 +189,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             int? xi = obj.GetPropertyAsInt32("x");
             Assert.Equal(42, xi);
 
-            /*
-            obj.GetProperty("x", out string? xs);
-            Assert.Equal("42", xs);
-            */
+/*
+obj.GetProperty("x", out string? xs);
+Assert.Equal("42", xs);
+*/
 
             obj.SetProperty("b", 3);
             double? b = obj.GetPropertyAsDouble("b");
@@ -1916,6 +1916,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             var task = JavaScriptTestHelper.echo1_Task(Task.CompletedTask);
             Assert.NotEqual(Task.CompletedTask, task);
             // yield to main loop, because "the respective handler function will be called asynchronously"
+            //
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then#return_value
             await Task.Delay(100);
             Assert.True(task.IsCompleted);

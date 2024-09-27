@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return bodyWithAwaitLifted;
             }
 
-            // The CLR doesn't support adding fields to structs, so in order to enable EnC in an async method we need to generate a class.
+            // The CLR doesn't support adding fields to structs, so in order to enable EnC in an async method we
+            // need to generate a class.
             // For async-iterators, we also need to generate a class.
             var typeKind =
                 (compilationState.Compilation.Options.EnableEditAndContinue || method.IsIterator)
@@ -245,8 +246,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasMethodBodyDependency: false
             );
 
-            // SetStateMachine is used to initialize the underlying AsyncMethodBuilder's reference to the boxed copy of the state machine.
-            // If the state machine is a class there is no copy made and thus the initialization is not necessary.
+            // SetStateMachine is used to initialize the underlying AsyncMethodBuilder's reference to the boxed
+            // copy of the state machine.
+            // If the state machine is a class there is no copy made and thus the initialization is not
+            // necessary.
             // In fact it is an error to reinitialize the builder since it already is initialized.
             if (F.CurrentType.TypeKind == TypeKind.Class)
             {
@@ -309,9 +312,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             IReadOnlyDictionary<Symbol, CapturedSymbolReplacement> proxies
         )
         {
-            // If the async method's result type is a type parameter of the method, then the AsyncTaskMethodBuilder<T>
-            // needs to use the method's type parameters inside the rewritten method body. All other methods generated
-            // during async rewriting are members of the synthesized state machine struct, and use the type parameters
+            // If the async method's result type is a type parameter of the method, then the
+            // AsyncTaskMethodBuilder<T>
+            // needs to use the method's type parameters inside the rewritten method body. All other methods
+            // generated
+            // during async rewriting are members of the synthesized state machine struct, and use the type
+            // parameters
             // structs type parameters.
             AsyncMethodBuilderMemberCollection methodScopeAsyncMethodBuilderMemberCollection;
             if (

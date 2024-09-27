@@ -10,7 +10,8 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.Runtime.ParameterInfos
 {
     //
-    // This implements ParameterInfo objects owned by MethodBase objects that have associated Parameter metadata. (In practice,
+    // This implements ParameterInfo objects owned by MethodBase objects that have associated Parameter
+    // metadata. (In practice,
     // this means all non-return parameters since most such parameters have at least a name.)
     //
     internal abstract class RuntimeFatMethodParameterInfo : RuntimeMethodParameterInfo

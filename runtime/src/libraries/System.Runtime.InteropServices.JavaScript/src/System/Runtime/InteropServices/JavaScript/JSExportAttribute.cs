@@ -6,12 +6,14 @@ using System.Runtime.Versioning;
 namespace System.Runtime.InteropServices.JavaScript
 {
     /// <summary>
-    /// Indicates that a source generator should export the attributed method to JavaScript and create thunks necessary to marshal its arguments and any return value or thrown exception.
+    /// Indicates that a source generator should export the attributed method to JavaScript and create
+    // thunks necessary to marshal its arguments and any return value or thrown exception.
     /// </summary>
     /// <remarks>
     /// For marshaling arguments of complex types <see cref="JSMarshalAsAttribute{T}" />.
     /// This attribute is meaningless if the source generator associated with it is not enabled.
-    /// The current built-in source generator only supports C# and only supplies an implementation when applied to static, non-partial, or non-generic methods.
+    /// The current built-in source generator only supports C# and only supplies an implementation when
+    // applied to static, non-partial, or non-generic methods.
     /// applied to static, non-partial, non-generic methods.
     /// Exported methods cannot be trimmed by the ILLink.
     /// </remarks>

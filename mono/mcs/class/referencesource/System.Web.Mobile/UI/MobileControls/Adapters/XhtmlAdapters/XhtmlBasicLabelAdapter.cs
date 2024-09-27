@@ -28,13 +28,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlLabelAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicLabelAdapter.uex' path='docs/doc[@for="XhtmlLabelAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicLabelAdapter.uex'
+        // path='docs/doc[@for="XhtmlLabelAdapter.Control"]/*' />
         public new Label Control
         {
             get { return base.Control as Label; }
         }
 
-        /// <include file='doc\XhtmlBasicLabelAdapter.uex' path='docs/doc[@for="XhtmlLabelAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicLabelAdapter.uex'
+        // path='docs/doc[@for="XhtmlLabelAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             // ConditionalClearCachedEndTag() is for a device special case.

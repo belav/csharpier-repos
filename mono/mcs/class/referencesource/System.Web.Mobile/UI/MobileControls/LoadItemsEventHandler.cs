@@ -8,11 +8,11 @@ using System;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Used for dynamically loading items into a paged control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Used for dynamically loading items into a paged control.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\LoadItemsEventHandler.uex' path='docs/doc[@for="LoadItemsEventHandler"]/*' />
     [Obsolete(

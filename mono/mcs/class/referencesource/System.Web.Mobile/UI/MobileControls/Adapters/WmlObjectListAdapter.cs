@@ -22,10 +22,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlObjectListAdapter provides WML rendering of Object List control.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlObjectListAdapter provides WML rendering of Object List control.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -49,13 +49,15 @@ namespace System.Web.UI.MobileControls.Adapters
         private const int _modeItemMenu = 1;
         private const int _modeItemDetails = 2;
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.Control"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.Control"]/*' />
         protected new ObjectList Control
         {
             get { return (ObjectList)base.Control; }
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.OnPreRender"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.OnPreRender"]/*' />
         public override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -85,7 +87,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.Render"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.Render"]/*' />
         public override void Render(WmlMobileTextWriter writer)
         {
             switch (Control.ViewMode)
@@ -118,7 +121,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.CreateTemplatedUI"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.CreateTemplatedUI"]/*' />
         public override void CreateTemplatedUI(bool doDataBind)
         {
             if (Control.ViewMode == ObjectListViewMode.List)
@@ -131,7 +135,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.RenderItemsList"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.RenderItemsList"]/*' />
         protected virtual void RenderItemsList(WmlMobileTextWriter writer)
         {
             bool rendersAcceptsInline = Device.RendersWmlDoAcceptsInline;
@@ -252,7 +257,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.ExitLayout(Style);
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.RenderItemMenu"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.RenderItemMenu"]/*' />
         protected virtual void RenderItemMenu(WmlMobileTextWriter writer, ObjectListItem item)
         {
             bool requiresDetails = HasItemDetails();
@@ -300,7 +306,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.ExitStyle(commandStyle);
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.RenderItemDetails"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.RenderItemDetails"]/*' />
         protected virtual void RenderItemDetails(WmlMobileTextWriter writer, ObjectListItem item)
         {
             String backCommandText =
@@ -336,7 +343,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.ExitStyle(Style);
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.HandlePostBackEvent"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.HandlePostBackEvent"]/*' />
         public override bool HandlePostBackEvent(String eventArgument)
         {
             switch (Control.ViewMode)
@@ -419,7 +427,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return Int32.Parse(arg.Substring(_showMore.Length), CultureInfo.InvariantCulture);
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.ShouldRenderAsTable"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.ShouldRenderAsTable"]/*' />
         protected virtual bool ShouldRenderAsTable()
         {
             int avgFieldWidth = 10; // an arbitrary estimate.
@@ -434,7 +443,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private BooleanOption _hasItemDetails = BooleanOption.NotSet;
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.HasItemDetails"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.HasItemDetails"]/*' />
         protected bool HasItemDetails()
         {
             if (Control.Items.Count == 0)
@@ -489,13 +499,15 @@ namespace System.Web.UI.MobileControls.Adapters
             return _hasItemDetails == BooleanOption.True;
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.HasCommands"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.HasCommands"]/*' />
         protected bool HasCommands()
         {
             return Control.Commands.Count > 0;
         }
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.HasDefaultCommand"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.HasDefaultCommand"]/*' />
         protected bool HasDefaultCommand()
         {
             return Control.DefaultCommand.Length > 0;
@@ -503,7 +515,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private BooleanOption _onlyHasDefaultCommand = BooleanOption.NotSet;
 
-        /// <include file='doc\WmlObjectListAdapter.uex' path='docs/doc[@for="WmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
+        /// <include file='doc\WmlObjectListAdapter.uex'
+        // path='docs/doc[@for="WmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
         protected bool OnlyHasDefaultCommand()
         {
             if (_onlyHasDefaultCommand == BooleanOption.NotSet)

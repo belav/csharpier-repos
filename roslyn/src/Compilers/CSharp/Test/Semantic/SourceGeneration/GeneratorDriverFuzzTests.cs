@@ -71,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
         {
             public required HintNameProvider HintNameProvider { protected get; init; }
 
-            /// <summary>Creates an IncrementalValuesProvider which is the result of applying this operator to <paramref name="provider"/>.</summary>
+            /// <summary>Creates an IncrementalValuesProvider which is the result of applying this operator to
+            // <paramref name="provider"/>.</summary>
             public abstract IncrementalValuesProvider<AdditionalText> Apply(
                 IncrementalValuesProvider<AdditionalText> provider
             );

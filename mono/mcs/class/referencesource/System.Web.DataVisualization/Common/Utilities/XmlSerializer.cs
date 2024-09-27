@@ -743,7 +743,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="list">List used to detect type of the item objects.</param>
         /// <param name="itemTypeName">Name of collection type.</param>
         /// <param name="itemName">Optional item name to return.</param>
-        /// <param name="reusedObject">Indicates that object with specified name was already in the collection and it being reused.</param>
+        /// <param name="reusedObject">Indicates that object with specified name was already in the
+        // collection and it being reused.</param>
         /// <returns>New list item object.</returns>
         internal object GetListNewItem(
             IList list,
@@ -1051,7 +1052,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// </summary>
         /// <param name="itemInfo">Class/Property item information.</param>
         /// <param name="objectName">Class/Property name.</param>
-        /// <param name="type">AxisName of matching. 0-No Match; 1-'*' any wild card; 2-'Back*' contain wild card; 3-exact match</param>
+        /// <param name="type">AxisName of matching. 0-No Match; 1-'*' any wild card; 2-'Back*' contain wild
+        // card; 3-exact match</param>
         /// <returns>True if name match the mask.</returns>
         private bool NameMatchMask(ItemInfo itemInfo, string objectName, out int type)
         {
@@ -1584,7 +1586,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         ///  - all public properties with Get method which derived from ICollection
         /// </summary>
         /// <param name="objectToSerialize">Object to be serialized.</param>
-        /// <param name="writer">Defines the serialization destination. Can be Stream, TextWriter, XmlWriter or String (file name).</param>
+        /// <param name="writer">Defines the serialization destination. Can be Stream, TextWriter, XmlWriter
+        // or String (file name).</param>
 
         internal override void Serialize(object objectToSerialize, object writer)
         {
@@ -2229,7 +2232,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// Deserialize object from different types of readers using XML format.
         /// </summary>
         /// <param name="objectToDeserialize">Object to be deserialized.</param>
-        /// <param name="reader">Defines the deserialization data source. Can be Stream, TextReader, XmlReader or String (file name).</param>
+        /// <param name="reader">Defines the deserialization data source. Can be Stream, TextReader,
+        // XmlReader or String (file name).</param>
         internal override void Deserialize(object objectToDeserialize, object reader)
         {
             // the four possible types of readers
@@ -2318,7 +2322,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <param name="objectToDeserialize">Object to be deserialized.</param>
         /// <param name="parent">Parent of the deserialized object.</param>
         /// <param name="elementName">Object element name.</param>
-        /// <param name="xmlParentNode">The XmlNode of the parent object to deserialize the data from.</param>
+        /// <param name="xmlParentNode">The XmlNode of the parent object to deserialize the data
+        // from.</param>
         /// <param name="xmlDocument">The XmlDocument the parent node belongs to.</param>
         /// <returns>Number of properties set.</returns>
         virtual internal int DeserializeObject(
@@ -2431,7 +2436,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             foreach (XmlNode childNode in xmlParentNode.ChildNodes)
             {
                 // Special handling for the collections
-                // Bug VSTS #235707 - The collections IsSerializableContent are already checked as a property in the else statement.
+                // Bug VSTS #235707 - The collections IsSerializableContent are already checked as a property in the
+                // else statement.
                 if (list != null)
                 {
                     // Create new item object
@@ -3505,7 +3511,8 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
                     {
                         list.Insert(listItemIndex++, listItem);
                     }
-                    // TD: here was removed a code which doesn't work but cause heavy workload: GetListNewItem removes the reusedObject from the list.
+                    // TD: here was removed a code which doesn't work but cause heavy workload: GetListNewItem removes
+                    // the reusedObject from the list.
                     // Add properties set for collection item
                     setPropertiesNumber += itemSetProperties;
                 }

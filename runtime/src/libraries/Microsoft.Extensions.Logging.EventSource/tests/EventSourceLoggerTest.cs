@@ -152,7 +152,8 @@ namespace Microsoft.Extensions.Logging.Test
                 Assert.True(logger3.IsEnabled(LogLevel.Debug));
                 Assert.False(logger3.IsEnabled(LogLevel.Trace));
 
-                // Note: default disabling rule does not take precedence on filter rules that specify both a provider and a category
+                // Note: default disabling rule does not take precedence on filter rules that specify both a
+                // provider and a category
                 Assert.False(logger4.IsEnabled(LogLevel.None));
                 Assert.True(logger4.IsEnabled(LogLevel.Critical));
                 Assert.True(logger4.IsEnabled(LogLevel.Error));
@@ -977,7 +978,8 @@ namespace Microsoft.Extensions.Logging.Test
                         {
                             var dictProperty =
                                 (IDictionary<string, object>)eventWrittenArgs.Payload[i];
-                            // EventPayload claims to support IDictionary<string, object>, but you cannot get a KeyValuePair enumerator out of it
+                            // EventPayload claims to support IDictionary<string, object>, but you cannot get a KeyValuePair
+                            // enumerator out of it
                             // So we need to serialize manually
                             writer.WriteStartObject();
 
@@ -1013,7 +1015,8 @@ namespace Microsoft.Extensions.Logging.Test
 
             private bool IsJsonProperty(int eventId, int propertyOrdinal, string propertyName)
             {
-                // __payload_nn is an artificial property name that we are using in the .NET 4.5 case, where EventWrittenEventArgs does not carry payload name information
+                // __payload_nn is an artificial property name that we are using in the .NET 4.5 case, where
+                // EventWrittenEventArgs does not carry payload name information
                 if (!propertyName.StartsWith("__payload"))
                 {
                     return propertyName.EndsWith("Json");

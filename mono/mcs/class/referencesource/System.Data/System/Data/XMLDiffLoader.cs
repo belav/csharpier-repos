@@ -154,7 +154,8 @@ namespace System.Data
             int iSsyncDepth = ssync.Depth;
             ssync.Read(); // pass the before node.
 
-            //SkipWhitespaces(ssync); for given scenario does not require this change, but in fact we should do it.
+            //SkipWhitespaces(ssync); for given scenario does not require this change, but in fact we should do
+            // it.
 
             while (iSsyncDepth < ssync.Depth)
             {
@@ -422,7 +423,8 @@ namespace System.Data
                         )
                             row.Read(); // consume the current node
                         row.Read(); // now points to the next column
-                        //SkipWhitespaces(row); seems no need, just in case if we see other issue , this will be here as hint
+                        //SkipWhitespaces(row); seems no need, just in case if we see other issue , this will be here as
+                        // hint
                         continue; // add a read here!
                     }
 
@@ -471,7 +473,8 @@ namespace System.Data
                         int iColumnDepth = row.Depth;
                         row.Read();
 
-                        // SkipWhitespaces(row);seems no need, just in case if we see other issue , this will be here as hint
+                        // SkipWhitespaces(row);seems no need, just in case if we see other issue , this will be here as
+                        // hint
                         if (row.Depth > iColumnDepth)
                         { //we are inside the column
                             if (

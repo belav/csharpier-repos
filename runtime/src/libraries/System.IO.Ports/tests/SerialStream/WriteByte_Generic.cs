@@ -153,7 +153,8 @@ namespace System.IO.Ports.Tests
                 );
                 com1.Open();
 
-                // Call EnableRTS asynchronously this will enable RTS in the middle of the following write call allowing it to succeed
+                // Call EnableRTS asynchronously this will enable RTS in the middle of the following write call
+                // allowing it to succeed
                 // before the timeout is reached
                 t.Start();
                 TCSupport.WaitForTaskToStart(t);
@@ -184,7 +185,8 @@ namespace System.IO.Ports.Tests
                 com.Open();
                 com.WriteTimeout = 200;
 
-                // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
+                // Write a random byte[] asynchronously so we can verify some things while the write call is
+                // blocking
                 Task task = Task.Run(
                     () => WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount)
                 );
@@ -215,14 +217,16 @@ namespace System.IO.Ports.Tests
 
                 int blockLength = TCSupport.MinimumBlockingByteCount;
 
-                // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
+                // Write a random byte[] asynchronously so we can verify some things while the write call is
+                // blocking
                 Task t1 = Task.Run(() => WriteRandomDataBlock(com, blockLength));
 
                 TCSupport.WaitForTaskToStart(t1);
 
                 TCSupport.WaitForWriteBufferToLoad(com, blockLength);
 
-                // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
+                // Write a random byte[] asynchronously so we can verify some things while the write call is
+                // blocking
                 Task t2 = Task.Run(() => WriteRandomDataBlock(com, blockLength));
 
                 TCSupport.WaitForTaskToStart(t2);
@@ -248,7 +252,8 @@ namespace System.IO.Ports.Tests
 
                 com.Open();
 
-                // Write a random byte[] asynchronously so we can verify some things while the write call is blocking
+                // Write a random byte[] asynchronously so we can verify some things while the write call is
+                // blocking
                 Task task = Task.Run(
                     () => WriteRandomDataBlock(com, TCSupport.MinimumBlockingByteCount)
                 );
@@ -298,7 +303,8 @@ namespace System.IO.Ports.Tests
                         var rndGen = new Random(-55);
                         int sleepPeriod = rndGen.Next(minRandomTimeout, maxRandomTimeout / 2);
 
-                        // Sleep some random period with of a maximum duration of half the largest possible timeout value for a write method on COM1
+                        // Sleep some random period with of a maximum duration of half the largest possible timeout value
+                        // for a write method on COM1
                         Thread.Sleep(sleepPeriod);
 
                         com2.Open();
@@ -364,7 +370,8 @@ namespace System.IO.Ports.Tests
             actualTime /= NUM_TRYS;
             percentageDifference = Math.Abs((expectedTime - actualTime) / (double)expectedTime);
 
-            // Verify that the percentage difference between the expected and actual timeout is less then maxPercentageDifference
+            // Verify that the percentage difference between the expected and actual timeout is less then
+            // maxPercentageDifference
             if (maxPercentageDifference < percentageDifference)
             {
                 Fail(
@@ -433,7 +440,8 @@ namespace System.IO.Ports.Tests
                 );
                 Assert.Equal(0, com1.BytesToWrite);
 
-                // Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is used
+                // Verify that CtsHolding is true if the RequestToSend or RequestToSendXOnXOff handshake method is
+                // used
                 if (rts)
                 {
                     Assert.True(com1.CtsHolding);

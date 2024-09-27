@@ -151,8 +151,10 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
                 return false;
             }
 
-            // If there is an else clause, we *could* in theory separate these and move the current else clause to the second
-            // statement, but we won't. It would break the else-if chain in an odd way. We'll insert an else-if instead.
+            // If there is an else clause, we *could* in theory separate these and move the current else clause
+            // to the second
+            // statement, but we won't. It would break the else-if chain in an odd way. We'll insert an else-if
+            // instead.
             if (ifGenerator.GetElseIfAndElseClauses(ifOrElseIf).Length > 0)
             {
                 return false;
@@ -162,14 +164,17 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             if (insideStatements.Count == 0)
             {
                 // Even though there are no statements inside, we still can't split this into separate statements
-                // because it would change the semantics from short-circuiting to always evaluating the second condition,
+                // because it would change the semantics from short-circuiting to always evaluating the second
+                // condition,
                 // breaking code like 'if (a == null || a.InstanceMethod())'.
                 return false;
             }
             else
             {
-                // There are statements inside. We can split this into separate statements and leave out the 'else' if
-                // control flow can't reach the end of these statements (otherwise, it would continue to the second 'if'
+                // There are statements inside. We can split this into separate statements and leave out the 'else'
+                // if
+                // control flow can't reach the end of these statements (otherwise, it would continue to the second
+                // 'if'
                 // and in the case that both conditions are true, run the same statements twice).
                 // This will typically look like a single return, break, continue or a throw statement.
 

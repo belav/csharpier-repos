@@ -481,7 +481,8 @@ namespace System.Linq.Expressions.Tests
         }
 
         /// <summary>
-        /// Verifies that compiling and executing a lambda method works when IsDynamicCodeSupported == false.
+        /// Verifies that compiling and executing a lambda method works when IsDynamicCodeSupported ==
+        // false.
         /// </summary>
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void CompileWorksWhenDynamicCodeNotSupported()
@@ -518,7 +519,8 @@ namespace System.Linq.Expressions.Tests
                 .Compile();
             Assert.Equal(305, del.DynamicInvoke(300));
 
-            // testing more than 2 parameters is important because because it follows a different code path in Compile.
+            // testing more than 2 parameters is important because because it follows a different code path in
+            // Compile.
             Expression<Func<int, int, int, int, int, int>> fiveParameterExpression = (
                 a,
                 b,

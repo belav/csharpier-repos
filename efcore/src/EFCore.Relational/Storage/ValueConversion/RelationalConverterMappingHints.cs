@@ -9,12 +9,14 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     Specifies hints used by the type mapper when mapping using a <see cref="ValueConverter" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class RelationalConverterMappingHints : ConverterMappingHints
 {
     /// <summary>
-    ///     Creates a new <see cref="ConverterMappingHints" /> instance. Any hint contained in the instance
+    ///     Creates a new <see cref="ConverterMappingHints" /> instance. Any hint contained in the
+    // instance
     ///     can be <see langword="null" /> to indicate it has not been specified.
     /// </summary>
     /// <param name="size">The suggested size of the mapped data type.</param>
@@ -22,7 +24,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
     /// <param name="scale">The suggested scale of the mapped data type.</param>
     /// <param name="unicode">Whether or not the mapped data type should support Unicode.</param>
     /// <param name="fixedLength">Whether or not the mapped data type is fixed length.</param>
-    /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see cref="ValueGenerator" />.</param>
+    /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see
+    // cref="ValueGenerator" />.</param>
     /// <param name="dbType">The suggested <see cref="DbType" />.</param>
     public RelationalConverterMappingHints(
         int? size = null,
@@ -40,7 +43,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
     }
 
     /// <summary>
-    ///     Creates a new <see cref="ConverterMappingHints" /> instance. Any hint contained in the instance
+    ///     Creates a new <see cref="ConverterMappingHints" /> instance. Any hint contained in the
+    // instance
     ///     can be <see langword="null" /> to indicate it has not been specified.
     /// </summary>
     /// <param name="size">The suggested size of the mapped data type.</param>
@@ -48,7 +52,8 @@ public class RelationalConverterMappingHints : ConverterMappingHints
     /// <param name="scale">The suggested scale of the mapped data type.</param>
     /// <param name="unicode">Whether or not the mapped data type should support Unicode.</param>
     /// <param name="fixedLength">Whether or not the mapped data type is fixed length.</param>
-    /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see cref="ValueGenerator" />.</param>
+    /// <param name="valueGeneratorFactory">An optional factory for creating a specific <see
+    // cref="ValueGenerator" />.</param>
     [Obsolete("Use the overload with more parameters.")]
     public RelationalConverterMappingHints(
         int? size,

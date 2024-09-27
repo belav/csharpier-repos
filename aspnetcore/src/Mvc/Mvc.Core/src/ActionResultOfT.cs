@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// A type that wraps either an <typeparamref name="TValue"/> instance or an <see cref="ActionResult"/>.
+/// A type that wraps either an <typeparamref name="TValue"/> instance or an <see
+// cref="ActionResult"/>.
 /// </summary>
 /// <typeparam name="TValue">The type of the result.</typeparam>
 public sealed class ActionResult<TValue> : IConvertToActionResult
@@ -16,7 +17,8 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     private const int DefaultStatusCode = StatusCodes.Status200OK;
 
     /// <summary>
-    /// Initializes a new instance of <see cref="ActionResult{TValue}"/> using the specified <paramref name="value"/>.
+    /// Initializes a new instance of <see cref="ActionResult{TValue}"/> using the specified <paramref
+    // name="value"/>.
     /// </summary>
     /// <param name="value">The value.</param>
     public ActionResult(TValue value)
@@ -37,7 +39,8 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     }
 
     /// <summary>
-    /// Initializes a new instance of <see cref="ActionResult{TValue}"/> using the specified <see cref="ActionResult"/>.
+    /// Initializes a new instance of <see cref="ActionResult{TValue}"/> using the specified <see
+    // cref="ActionResult"/>.
     /// </summary>
     /// <param name="result">The <see cref="ActionResult"/>.</param>
     public ActionResult(ActionResult result)
@@ -68,7 +71,8 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     public TValue? Value { get; }
 
     /// <summary>
-    /// Implicitly converts the specified <paramref name="value"/> to an <see cref="ActionResult{TValue}"/>.
+    /// Implicitly converts the specified <paramref name="value"/> to an <see
+    // cref="ActionResult{TValue}"/>.
     /// </summary>
     /// <param name="value">The value to convert.</param>
     public static implicit operator ActionResult<TValue>(TValue value)
@@ -77,7 +81,8 @@ public sealed class ActionResult<TValue> : IConvertToActionResult
     }
 
     /// <summary>
-    /// Implicitly converts the specified <paramref name="result"/> to an <see cref="ActionResult{TValue}"/>.
+    /// Implicitly converts the specified <paramref name="result"/> to an <see
+    // cref="ActionResult{TValue}"/>.
     /// </summary>
     /// <param name="result">The <see cref="ActionResult"/>.</param>
     public static implicit operator ActionResult<TValue>(ActionResult result)

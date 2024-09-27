@@ -10,8 +10,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents a span of text in a source code file in terms of file name, line number, and offset within line.
-    /// However, the file is actually whatever was passed in when asked to parse; there may not really be a file.
+    /// Represents a span of text in a source code file in terms of file name, line number, and offset
+    // within line.
+    /// However, the file is actually whatever was passed in when asked to parse; there may not really
+    // be a file.
     /// </summary>
     [DataContract]
     public readonly struct FileLinePositionSpan : IEquatable<FileLinePositionSpan>
@@ -35,7 +37,8 @@ namespace Microsoft.CodeAnalysis
         /// True if the <see cref="Path"/> is a mapped path.
         /// </summary>
         /// <remarks>
-        /// A mapped path is a path specified in source via <c>#line</c> (C#) or <c>#ExternalSource</c> (VB) directives.
+        /// A mapped path is a path specified in source via <c>#line</c> (C#) or <c>#ExternalSource</c> (VB)
+        // directives.
         /// </remarks>
         [DataMember(Order = 2)]
         public bool HasMappedPath { get; }

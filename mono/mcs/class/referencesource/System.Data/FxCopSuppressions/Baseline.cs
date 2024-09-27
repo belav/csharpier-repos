@@ -8,7 +8,8 @@
 // <owner current="true" primary="false">sukanyas</owner>
 //------------------------------------------------------------------------------
 //
-// This file has a list of FXCOP messages to suppress, converted from ddsuites\src\FxCop\Excludes\1.32Baselines\System.Data.dll.xml using FXCOP GUI.
+// This file has a list of FXCOP messages to suppress, converted from
+// ddsuites\src\FxCop\Excludes\1.32Baselines\System.Data.dll.xml using FXCOP GUI.
 // DO NOT ADD NEW ENTRIES HERE - new SuppressMessage attributes should be added to the target method
 
 using System.Diagnostics.CodeAnalysis;

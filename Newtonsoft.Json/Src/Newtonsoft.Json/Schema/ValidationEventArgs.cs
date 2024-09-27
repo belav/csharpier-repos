@@ -35,7 +35,9 @@ namespace Newtonsoft.Json.Schema
     /// Returns detailed information related to the <see cref="ValidationEventHandler"/>.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see
+    // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+    // details.
     /// </note>
     /// </summary>
     [Obsolete(

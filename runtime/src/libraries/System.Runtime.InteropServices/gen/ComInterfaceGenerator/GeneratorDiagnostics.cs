@@ -85,7 +85,8 @@ namespace Microsoft.Interop
                 )
             );
 
-        /// <inheritdoc cref="SR.InvalidAttributedMethodContainingTypeMissingUnmanagedObjectUnwrapperAttributeMessage"/>
+        /// <inheritdoc
+        // cref="SR.InvalidAttributedMethodContainingTypeMissingUnmanagedObjectUnwrapperAttributeMessage"/>
         public static readonly DiagnosticDescriptor InvalidAttributedMethodContainingTypeMissingUnmanagedObjectUnwrapperAttribute =
             DiagnosticDescriptorHelper.Create(
                 Ids.InvalidLibraryImportAttributeUsage,

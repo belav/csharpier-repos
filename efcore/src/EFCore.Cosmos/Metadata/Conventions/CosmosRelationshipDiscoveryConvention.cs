@@ -6,13 +6,15 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures relationships between entity types based on the navigation properties
+///     A convention that configures relationships between entity types based on the navigation
+// properties
 ///     as long as there is no ambiguity as to which is the corresponding inverse navigation.
 ///     All navigations are assumed to be targeting owned entity types for Cosmos.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-cosmos">Accessing Azure Cosmos DB with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public class CosmosRelationshipDiscoveryConvention : RelationshipDiscoveryConvention
 {
@@ -26,7 +28,8 @@ public class CosmosRelationshipDiscoveryConvention : RelationshipDiscoveryConven
         : base(dependencies) { }
 
     /// <summary>
-    ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.
+    ///     Returns a value indicating whether the given entity type should be added as owned if it
+    // isn't currently in the model.
     /// </summary>
     /// <param name="targetType">Target entity type.</param>
     /// <param name="model">The model.</param>
@@ -35,7 +38,8 @@ public class CosmosRelationshipDiscoveryConvention : RelationshipDiscoveryConven
         ShouldBeOwnedType(targetType, model);
 
     /// <summary>
-    ///     Returns a value indicating whether the given entity type should be added as owned if it isn't currently in the model.
+    ///     Returns a value indicating whether the given entity type should be added as owned if it
+    // isn't currently in the model.
     /// </summary>
     /// <param name="targetType">Target entity type.</param>
     /// <param name="model">The model.</param>

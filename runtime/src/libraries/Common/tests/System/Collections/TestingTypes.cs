@@ -337,7 +337,8 @@ namespace System.Collections.Tests
         public int Value { get; }
 
         // Equals(object) is not implemented on purpose.
-        // EqualityComparer is only supposed to call through to the strongly-typed Equals since we implement IEquatable.
+        // EqualityComparer is only supposed to call through to the strongly-typed Equals since we implement
+        // IEquatable.
 
         public bool Equals(Equatable other)
         {

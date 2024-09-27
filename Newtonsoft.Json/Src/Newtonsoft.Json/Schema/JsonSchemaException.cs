@@ -35,7 +35,9 @@ namespace Newtonsoft.Json.Schema
     /// Returns detailed information about the schema exception.
     /// </para>
     /// <note type="caution">
-    /// JSON Schema validation has been moved to its own package. See <see href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more details.
+    /// JSON Schema validation has been moved to its own package. See <see
+    // href="https://www.newtonsoft.com/jsonschema">https://www.newtonsoft.com/jsonschema</see> for more
+    // details.
     /// </note>
     /// </summary>
 #if HAVE_BINARY_EXCEPTION_SERIALIZATION
@@ -79,10 +81,12 @@ namespace Newtonsoft.Json.Schema
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class
-        /// with a specified error message and a reference to the inner exception that is the cause of this exception.
+        /// with a specified error message and a reference to the inner exception that is the cause of this
+        // exception.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
-        /// <param name="innerException">The exception that is the cause of the current exception, or <c>null</c> if no inner exception is specified.</param>
+        /// <param name="innerException">The exception that is the cause of the current exception, or
+        // <c>null</c> if no inner exception is specified.</param>
         public JsonSchemaException(string message, Exception innerException)
             : base(message, innerException) { }
 
@@ -90,10 +94,14 @@ namespace Newtonsoft.Json.Schema
         /// <summary>
         /// Initializes a new instance of the <see cref="JsonSchemaException"/> class.
         /// </summary>
-        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is <c>null</c>.</exception>
-        /// <exception cref="SerializationException">The class name is <c>null</c> or <see cref="Exception.HResult"/> is zero (0).</exception>
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data
+        // about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information
+        // about the source or destination.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="info"/> parameter is
+        // <c>null</c>.</exception>
+        /// <exception cref="SerializationException">The class name is <c>null</c> or <see
+        // cref="Exception.HResult"/> is zero (0).</exception>
         public JsonSchemaException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 #endif

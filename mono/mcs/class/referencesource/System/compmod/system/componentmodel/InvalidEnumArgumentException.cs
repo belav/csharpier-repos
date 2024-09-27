@@ -24,13 +24,15 @@ namespace System.ComponentModel
     public class InvalidEnumArgumentException : ArgumentException
     {
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.InvalidEnumArgumentException'/> class without a message.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.InvalidEnumArgumentException'/> class without a message.</para>
         /// </devdoc>
         public InvalidEnumArgumentException()
             : this(null) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.InvalidEnumArgumentException'/> class with
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.InvalidEnumArgumentException'/> class with
         ///    the specified message.</para>
         /// </devdoc>
         public InvalidEnumArgumentException(string message)
@@ -45,7 +47,8 @@ namespace System.ComponentModel
             : base(message, innerException) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.InvalidEnumArgumentException'/> class with a
+        /// <para>Initializes a new instance of the <see
+        // cref='System.ComponentModel.InvalidEnumArgumentException'/> class with a
         ///    message generated from the argument, invalid value, and enumeration
         ///    class.</para>
         /// </devdoc>

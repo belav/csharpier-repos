@@ -109,7 +109,8 @@ namespace System.ServiceModel.Configuration
 
             XmlDictionaryReaderQuotasElement thisQuotas = this.ReaderQuotas;
 
-            // Can't call thisQuotas.InitializeFrom() because it's internal to System.ServiceModel.dll, so we duplicate the logic
+            // Can't call thisQuotas.InitializeFrom() because it's internal to System.ServiceModel.dll, so we
+            // duplicate the logic
             if (readerQuotas.MaxDepth != EncoderDefaults.MaxDepth && readerQuotas.MaxDepth != 0)
             {
                 thisQuotas.MaxDepth = readerQuotas.MaxDepth;

@@ -340,12 +340,12 @@ namespace Microsoft.Build.BuildEngine
             get { return token; }
         }
 
-        /*
-                public bool IgnoreWhiteSpace {
-                    get { return ignoreWhiteSpace; }
-                    set { ignoreWhiteSpace = value; }
-                }
-        */
+/*
+public bool IgnoreWhiteSpace {
+get { return ignoreWhiteSpace; }
+set { ignoreWhiteSpace = value; }
+}
+*/
 
         struct CharToTokenType
         {

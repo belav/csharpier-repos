@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             ).isBrowsable;
         }
 
-        // In addition to given symbol's browsability, also returns its EditorBrowsableState if it contains EditorBrowsableAttribute.
+        // In addition to given symbol's browsability, also returns its EditorBrowsableState if it contains
+        // EditorBrowsableAttribute.
         public static (
             bool isBrowsable,
             bool isEditorBrowsableStateAdvanced
@@ -262,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     {
                         if (Equals(attribute.AttributeConstructor, constructor))
                         {
-                            // Check for both constructor signatures. The constructor that takes a TypeLib*Flags reports an int argument.
+                            // Check for both constructor signatures. The constructor that takes a TypeLib*Flags reports an int
+                            // argument.
                             var argumentValue = attribute.ConstructorArguments.First().Value;
 
                             int actualFlags;
@@ -368,7 +370,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             static bool IsEligibleForAutomaticInheritdoc(ISymbol symbol)
             {
-                // Only the following symbols are eligible to inherit documentation without an <inheritdoc/> element:
+                // Only the following symbols are eligible to inherit documentation without an <inheritdoc/>
+                // element:
                 //
                 // * Members that override an inherited member
                 // * Members that implement an interface member
@@ -567,24 +570,26 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     }
                 }
 
-                // Consider the following code, we want Test<int>.Clone to say "Clones a Test<int>" instead of "Clones a int", thus
+                // Consider the following code, we want Test<int>.Clone to say "Clones a Test<int>" instead of
+                // "Clones a int", thus
                 // we rewrite `typeparamref`s as cref pointing to the correct type:
-                /*
-                    public class Test<T> : ICloneable<Test<T>>
-                    {
-                        /// <inheritdoc/>
-                        public Test<T> Clone() => new();
-                    }
+/*
+public class Test<T> : ICloneable<Test<T>>
+{
+/// <inheritdoc/>
+public Test<T> Clone() => new();
+}
 
-                    /// <summary>A type that has clonable instances.</summary>
-                    /// <typeparam name="T">The type of instances that can be cloned.</typeparam>
-                    public interface ICloneable<T>
-                    {
-                        /// <summary>Clones a <typeparamref name="T"/>.</summary>
-                        public T Clone();
-                    }
-                */
-                // Note: there is no way to cref an instantiated generic type. See https://github.com/dotnet/csharplang/issues/401
+/// <summary>A type that has clonable instances.</summary>
+/// <typeparam name="T">The type of instances that can be cloned.</typeparam>
+public interface ICloneable<T>
+{
+/// <summary>Clones a <typeparamref name="T"/>.</summary>
+public T Clone();
+}
+*/
+                // Note: there is no way to cref an instantiated generic type. See
+                // https://github.com/dotnet/csharplang/issues/401
                 var typeParameterRefs = document
                     .Descendants(DocumentationCommentXmlNames.TypeParameterReferenceElementName)
                     .ToImmutableArray();
@@ -836,7 +841,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             // constructors once and reuse.
             var editorBrowsableInfo = new EditorBrowsableInfo(compilation);
 
-            // PERF: HasUnsupportedMetadata may require recreating the syntax tree to get the base class, so first
+            // PERF: HasUnsupportedMetadata may require recreating the syntax tree to get the base class, so
+            // first
             // check to see if we're referencing a symbol defined in source.
             static bool isSymbolDefinedInSource(Location l) => l.IsInSource;
             return symbols.WhereAsArray(

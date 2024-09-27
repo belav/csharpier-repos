@@ -148,7 +148,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal("base64Binary", qualifiedName.Name);
         }
 
-        /* Read tests */
+/* Read tests */
         [Fact]
         public void Read_SuccessTest1()
         {
@@ -260,7 +260,7 @@ namespace System.Data.Tests.SqlTypes
             Assert.Throws<ArgumentOutOfRangeException>(() => bytes.Read(0, b2, 3, 4));
         }
 
-        /* Write Tests */
+/* Write Tests */
         [Fact]
         public void Write_SuccessTest1()
         {

@@ -46,22 +46,28 @@ class C : CSharpErrors.ClassMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass ReturnType1() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (5,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (4,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass ReturnType1() { return null; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType2")
                         .WithArguments(
@@ -84,14 +90,18 @@ class C : ILErrors.ClassMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int ReturnType1() { return 0; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType2")
                         .WithArguments(
@@ -114,11 +124,13 @@ class C : CSharpErrors.ClassMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,41): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,41): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override void ParameterType1(UnavailableClass x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (5,41): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,41): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override void ParameterType2(UnavailableClass[] x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -138,14 +150,18 @@ class C : ILErrors.ClassMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override void ParameterType1(int x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override void ParameterType2(int[] x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType2")
                         .WithArguments(
@@ -170,27 +186,33 @@ class C : CSharpErrors.InterfaceMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (5,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 12),
-                    // (6,32): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,32): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public void ParameterType1(UnavailableClass x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(6, 32),
-                    // (7,32): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,32): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public void ParameterType2(UnavailableClass[] x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(7, 32),
-                    // (4,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass ReturnType1() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(4, 12),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -198,7 +220,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -206,7 +230,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -214,7 +240,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -240,28 +268,36 @@ class C : ILErrors.InterfaceMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,16): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,16): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int ReturnType1() { return 0; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,18): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,18): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (6,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public void ParameterType1(int x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public void ParameterType2(int[] x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType2")
                         .WithArguments(
@@ -286,47 +322,57 @@ class C : CSharpErrors.InterfaceMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (5,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass[] CSharpErrors.InterfaceMethods.ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 5),
-                    // (5,54): error CS0539: 'C.ReturnType2()' in explicit interface declaration is not a member of interface
+                    // (5,54): error CS0539: 'C.ReturnType2()' in explicit interface declaration is not a member of
+                    // interface
                     //     UnavailableClass[] CSharpErrors.InterfaceMethods.ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "ReturnType2")
                         .WithArguments("C.ReturnType2()")
                         .WithLocation(5, 54),
-                    // (6,55): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,55): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     void CSharpErrors.InterfaceMethods.ParameterType1(UnavailableClass x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(6, 55),
-                    // (6,40): error CS0539: 'C.ParameterType1(UnavailableClass)' in explicit interface declaration is not a member of interface
+                    // (6,40): error CS0539: 'C.ParameterType1(UnavailableClass)' in explicit interface declaration is
+                    // not a member of interface
                     //     void CSharpErrors.InterfaceMethods.ParameterType1(UnavailableClass x) { }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "ParameterType1")
                         .WithArguments("C.ParameterType1(UnavailableClass)")
                         .WithLocation(6, 40),
-                    // (7,55): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,55): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     void CSharpErrors.InterfaceMethods.ParameterType2(UnavailableClass[] x) { }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(7, 55),
-                    // (7,40): error CS0539: 'C.ParameterType2(UnavailableClass[])' in explicit interface declaration is not a member of interface
+                    // (7,40): error CS0539: 'C.ParameterType2(UnavailableClass[])' in explicit interface declaration is
+                    // not a member of interface
                     //     void CSharpErrors.InterfaceMethods.ParameterType2(UnavailableClass[] x) { }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "ParameterType2")
                         .WithArguments("C.ParameterType2(UnavailableClass[])")
                         .WithLocation(7, 40),
-                    // (4,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass CSharpErrors.InterfaceMethods.ReturnType1() { return null; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(4, 5),
-                    // (4,52): error CS0539: 'C.ReturnType1()' in explicit interface declaration is not a member of interface
+                    // (4,52): error CS0539: 'C.ReturnType1()' in explicit interface declaration is not a member of
+                    // interface
                     //     UnavailableClass CSharpErrors.InterfaceMethods.ReturnType1() { return null; }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "ReturnType1")
                         .WithArguments("C.ReturnType1()")
                         .WithLocation(4, 52),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -334,7 +380,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -342,7 +390,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -350,7 +400,9 @@ class C : CSharpErrors.InterfaceMethods
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceMethods
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceMethods")
                         .WithArguments(
@@ -376,28 +428,36 @@ class C : ILErrors.InterfaceMethods
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,16): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,16): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int ReturnType1() { return 0; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,18): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,18): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] ReturnType2() { return null; }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ReturnType2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (6,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public void ParameterType1(int x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,17): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public void ParameterType2(int[] x) { }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "ParameterType2")
                         .WithArguments(
@@ -426,66 +486,84 @@ class C : CSharpErrors.ClassProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass Get1 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (5,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass[] Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (7,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (8,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass[] Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (10,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (10,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass GetSet1 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (11,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (11,21): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override UnavailableClass[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (4,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass Get1 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Get1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass[] Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Get2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Set1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (8,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (8,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass[] Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Set2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (10,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,38): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass GetSet1 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,40): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override UnavailableClass[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet2")
                         .WithArguments(
@@ -514,42 +592,54 @@ class C : ILErrors.ClassProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int Get1 { get { return 0; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Get1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int[] Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Get2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Set1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (8,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (8,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int[] Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Set2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (10,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int GetSet1 { get { return 0; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,27): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override int[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet2")
                         .WithArguments(
@@ -578,37 +668,45 @@ class C : CSharpErrors.InterfaceProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (5,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass[] Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 12),
-                    // (7,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(7, 12),
-                    // (8,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass[] Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(8, 12),
-                    // (10,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (10,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass GetSet1 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(10, 12),
-                    // (11,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (11,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(11, 12),
-                    // (4,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,12): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public UnavailableClass Get1 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(4, 12),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -616,7 +714,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -624,7 +724,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -632,7 +734,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -640,7 +744,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -648,7 +754,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -678,56 +786,72 @@ class C : ILErrors.InterfaceProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (10,44): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,44): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int GetSet1 { get { return 0; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,28): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,28): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,49): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,49): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (4,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int Get1 { get { return 0; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (8,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (8,25): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int[] Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (10,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,26): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public int GetSet1 { get { return 0; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
@@ -756,7 +880,8 @@ class C : CSharpErrors.InterfaceProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass CSharpErrors.InterfaceProperties.Get1 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -766,7 +891,8 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Get1")
                         .WithArguments("C.Get1")
                         .WithLocation(4, 55),
-                    // (5,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass[] CSharpErrors.InterfaceProperties.Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -776,7 +902,8 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Get2")
                         .WithArguments("C.Get2")
                         .WithLocation(5, 57),
-                    // (7,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (7,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass CSharpErrors.InterfaceProperties.Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -786,7 +913,8 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Set1")
                         .WithArguments("C.Set1")
                         .WithLocation(7, 55),
-                    // (8,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (8,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass[] CSharpErrors.InterfaceProperties.Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -796,7 +924,8 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Set2")
                         .WithArguments("C.Set2")
                         .WithLocation(8, 57),
-                    // (10,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (10,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass CSharpErrors.InterfaceProperties.GetSet1 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -806,7 +935,8 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "GetSet1")
                         .WithArguments("C.GetSet1")
                         .WithLocation(10, 55),
-                    // (11,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (11,5): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     UnavailableClass[] CSharpErrors.InterfaceProperties.GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
@@ -816,7 +946,9 @@ class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "GetSet2")
                         .WithArguments("C.GetSet2")
                         .WithLocation(11, 57),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -824,7 +956,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -832,7 +966,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -840,7 +976,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -848,7 +986,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -856,7 +996,9 @@ class C : CSharpErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceProperties
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceProperties")
                         .WithArguments(
@@ -886,56 +1028,72 @@ class C : ILErrors.InterfaceProperties
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (10,66): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,66): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int ILErrors.InterfaceProperties.GetSet1 { get { return 0; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,50): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,50): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int[] ILErrors.InterfaceProperties.GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (11,71): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,71): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int[] ILErrors.InterfaceProperties.GetSet2 { get { return null; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (4,45): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,45): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int ILErrors.InterfaceProperties.Get1 { get { return 0; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,47): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,47): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int[] ILErrors.InterfaceProperties.Get2 { get { return null; } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (7,45): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,45): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int ILErrors.InterfaceProperties.Set1 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (8,47): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (8,47): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int[] ILErrors.InterfaceProperties.Set2 { set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "set")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (10,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     int ILErrors.InterfaceProperties.GetSet1 { get { return 0; } set { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "get")
                         .WithArguments(
@@ -964,7 +1122,9 @@ class C : ILErrors.InterfaceProperties
 }";
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (5,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet1 = c.GetSet1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet1")
                         .WithArguments(
@@ -972,7 +1132,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(5, 11),
-                    // (5,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet1 = c.GetSet1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet1")
                         .WithArguments(
@@ -980,7 +1142,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(5, 23),
-                    // (6,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet2 = c.GetSet2;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet2")
                         .WithArguments(
@@ -988,7 +1152,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(6, 11),
-                    // (6,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet2 = c.GetSet2;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet2")
                         .WithArguments(
@@ -996,7 +1162,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(6, 23),
-                    // (7,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet3 = c.GetSet3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet3")
                         .WithArguments(
@@ -1004,7 +1172,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(7, 11),
-                    // (7,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,23): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.GetSet3 = c.GetSet3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet3")
                         .WithArguments(
@@ -1012,7 +1182,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(7, 23),
-                    // (11,9): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,9): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         GetSet3 = GetSet3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet3")
                         .WithArguments(
@@ -1020,7 +1192,9 @@ class C : ILErrors.InterfaceProperties
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(11, 9),
-                    // (11,19): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (11,19): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         GetSet3 = GetSet3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "GetSet3")
                         .WithArguments(
@@ -1047,33 +1221,42 @@ class C : CSharpErrors.ClassEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,27): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,27): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     //     public override event UnavailableDelegate Event1;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableDelegate")
                         .WithArguments("UnavailableDelegate"),
-                    // (5,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass> Event2;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (6,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass[]> Event3;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (4,47): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,47): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event UnavailableDelegate Event1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
                             "UnavailableDelegate",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,72): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,72): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass> Event2;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (6,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass[]> Event3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event3")
                         .WithArguments(
@@ -1097,33 +1280,42 @@ class C : CSharpErrors.ClassEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,27): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,27): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     //     public override event UnavailableDelegate Event1;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableDelegate")
                         .WithArguments("UnavailableDelegate"),
-                    // (5,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass> Event2;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (6,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,54): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass[]> Event3;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass"),
-                    // (4,47): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,47): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event UnavailableDelegate Event1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
                             "UnavailableDelegate",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (5,72): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,72): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass> Event2;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event2")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (6,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event CSharpErrors.EventDelegate<UnavailableClass[]> Event3;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event3")
                         .WithArguments(
@@ -1147,7 +1339,9 @@ class C : ILErrors.ClassEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event System.Action<int[]> Event1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
@@ -1169,7 +1363,9 @@ class C : ILErrors.ClassEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public override event System.Action<int[]> Event1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
@@ -1193,22 +1389,27 @@ class C : CSharpErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,18): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,18): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     //     public event UnavailableDelegate Event1 = () => { };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableDelegate")
                         .WithArguments("UnavailableDelegate")
                         .WithLocation(4, 18),
-                    // (5,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public event CSharpErrors.EventDelegate<UnavailableClass> Event2 = () => { };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 45),
-                    // (6,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public event CSharpErrors.EventDelegate<UnavailableClass[]> Event3 = () => { };
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(6, 45),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1216,7 +1417,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1224,7 +1427,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1249,22 +1454,27 @@ class C : CSharpErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,18): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,18): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     //     public event UnavailableDelegate Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableDelegate")
                         .WithArguments("UnavailableDelegate")
                         .WithLocation(4, 18),
-                    // (5,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (5,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public event CSharpErrors.EventDelegate<UnavailableClass> Event2 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 45),
-                    // (6,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
+                    // (6,45): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
                     //     public event CSharpErrors.EventDelegate<UnavailableClass[]> Event3 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(6, 45),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1272,7 +1482,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1280,7 +1492,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1303,14 +1517,18 @@ class C : ILErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,39): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,39): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public event System.Action<int[]> Event1 = x => { };
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (4,39): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,39): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public event System.Action<int[]> Event1 = x => { };
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
@@ -1332,14 +1550,18 @@ class C : ILErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public event System.Action<int[]> Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "remove")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,48): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     public event System.Action<int[]> Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "add")
                         .WithArguments(
@@ -1363,7 +1585,8 @@ class C : CSharpErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,11): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are you missing a using directive or an assembly reference?)
+                    // (4,11): error CS0246: The type or namespace name 'UnavailableDelegate' could not be found (are
+                    // you missing a using directive or an assembly reference?)
                     //     event UnavailableDelegate CSharpErrors.InterfaceEvents.Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableDelegate")
                         .WithArguments("UnavailableDelegate")
@@ -1373,27 +1596,35 @@ class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Event1")
                         .WithArguments("C.Event1")
                         .WithLocation(4, 60),
-                    // (5,38): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
-                    //     event CSharpErrors.EventDelegate<UnavailableClass> CSharpErrors.InterfaceEvents.Event2 { add { } remove { } }
+                    // (5,38): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
+                    //     event CSharpErrors.EventDelegate<UnavailableClass> CSharpErrors.InterfaceEvents.Event2 { add
+                    // { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(5, 38),
                     // (5,85): error CS0539: 'C.Event2' in explicit interface declaration is not a member of interface
-                    //     event CSharpErrors.EventDelegate<UnavailableClass> CSharpErrors.InterfaceEvents.Event2 { add { } remove { } }
+                    //     event CSharpErrors.EventDelegate<UnavailableClass> CSharpErrors.InterfaceEvents.Event2 { add
+                    // { } remove { } }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Event2")
                         .WithArguments("C.Event2")
                         .WithLocation(5, 85),
-                    // (6,38): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you missing a using directive or an assembly reference?)
-                    //     event CSharpErrors.EventDelegate<UnavailableClass[]> CSharpErrors.InterfaceEvents.Event3 { add { } remove { } }
+                    // (6,38): error CS0246: The type or namespace name 'UnavailableClass' could not be found (are you
+                    // missing a using directive or an assembly reference?)
+                    //     event CSharpErrors.EventDelegate<UnavailableClass[]> CSharpErrors.InterfaceEvents.Event3 {
+                    // add { } remove { } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "UnavailableClass")
                         .WithArguments("UnavailableClass")
                         .WithLocation(6, 38),
                     // (6,87): error CS0539: 'C.Event3' in explicit interface declaration is not a member of interface
-                    //     event CSharpErrors.EventDelegate<UnavailableClass[]> CSharpErrors.InterfaceEvents.Event3 { add { } remove { } }
+                    //     event CSharpErrors.EventDelegate<UnavailableClass[]> CSharpErrors.InterfaceEvents.Event3 {
+                    // add { } remove { } }
                     Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "Event3")
                         .WithArguments("C.Event3")
                         .WithLocation(6, 87),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1401,7 +1632,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1409,7 +1642,9 @@ class C : CSharpErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(2, 11),
-                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (2,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     // class C : CSharpErrors.InterfaceEvents
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "CSharpErrors.InterfaceEvents")
                         .WithArguments(
@@ -1432,14 +1667,18 @@ class C : ILErrors.InterfaceEvents
 
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (4,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,74): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     event System.Action<int[]> ILErrors.InterfaceEvents.Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "remove")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (4,66): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (4,66): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //     event System.Action<int[]> ILErrors.InterfaceEvents.Event1 { add { } remove { } }
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "add")
                         .WithArguments(
@@ -1463,14 +1702,18 @@ class C : ILErrors.InterfaceEvents
 }";
             CompileWithMissingReference(text)
                 .VerifyDiagnostics(
-                    // (5,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (5,11): error CS0012: The type 'UnavailableDelegate' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         c.Event1 += null;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
                             "UnavailableDelegate",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (6,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (6,11): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         i.Event1 += null;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Event1")
                         .WithArguments(
@@ -1521,32 +1764,42 @@ class C : ILErrors.InterfaceEvents
                 .DelegatesWithoutInvoke;
             CreateCompilation(text, new MetadataReference[] { delegatesWithoutInvokeReference })
                 .VerifyDiagnostics(
-                    // (7,16): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateGenericFunctionWithoutInvoke<T>' has no invoke method or an invoke method with a return type or parameter types that are not supported.
-                    //         return del("goo"); // will show ERR_InvalidDelegateType instead of ERR_NoSuchMemberOrExtension
+                    // (7,16): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateGenericFunctionWithoutInvoke<T>'
+                    // has no invoke method or an invoke method with a return type or parameter types that are not
+                    // supported.
+                    //         return del("goo"); // will show ERR_InvalidDelegateType instead of
+                    // ERR_NoSuchMemberOrExtension
                     Diagnostic(ErrorCode.ERR_InvalidDelegateType, @"del(""goo"")")
                         .WithArguments(
                             "DelegateWithoutInvoke.DelegateGenericFunctionWithoutInvoke<T>"
                         )
                         .WithLocation(7, 16),
-                    // (13,70): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke method or an invoke method with a return type or parameter types that are not supported.
+                    // (13,70): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke
+                    // method or an invoke method with a return type or parameter types that are not supported.
                     //         DelegateWithoutInvoke.DelegateSubWithoutInvoke myDelegate1 = bar;
                     Diagnostic(ErrorCode.ERR_InvalidDelegateType, "bar")
                         .WithArguments("DelegateWithoutInvoke.DelegateSubWithoutInvoke")
                         .WithLocation(13, 70),
-                    // (14,21): error CS1061: 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' does not contain a definition for 'Invoke' and no accessible extension method 'Invoke' accepting a first argument of type 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' could be found (are you missing a using directive or an assembly reference?)
+                    // (14,21): error CS1061: 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' does not contain a
+                    // definition for 'Invoke' and no accessible extension method 'Invoke' accepting a first argument of
+                    // type 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' could be found (are you missing a using
+                    // directive or an assembly reference?)
                     //         myDelegate1.Invoke("goo"); // will show an ERR_NoSuchMemberOrExtension
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "Invoke")
                         .WithArguments("DelegateWithoutInvoke.DelegateSubWithoutInvoke", "Invoke")
                         .WithLocation(14, 21),
-                    // (15,70): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke method or an invoke method with a return type or parameter types that are not supported.
-                    //         DelegateWithoutInvoke.DelegateSubWithoutInvoke myDelegate2 = new DelegateWithoutInvoke.DelegateSubWithoutInvoke(myDelegate1);
+                    // (15,70): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke
+                    // method or an invoke method with a return type or parameter types that are not supported.
+                    //         DelegateWithoutInvoke.DelegateSubWithoutInvoke myDelegate2 = new
+                    // DelegateWithoutInvoke.DelegateSubWithoutInvoke(myDelegate1);
                     Diagnostic(
                             ErrorCode.ERR_InvalidDelegateType,
                             "new DelegateWithoutInvoke.DelegateSubWithoutInvoke(myDelegate1)"
                         )
                         .WithArguments("DelegateWithoutInvoke.DelegateSubWithoutInvoke")
                         .WithLocation(15, 70),
-                    // (16,30): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke method or an invoke method with a return type or parameter types that are not supported.
+                    // (16,30): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke
+                    // method or an invoke method with a return type or parameter types that are not supported.
                     //         object myDelegate3 = new DelegateWithoutInvoke.DelegateSubWithoutInvoke(bar2);
                     Diagnostic(
                             ErrorCode.ERR_InvalidDelegateType,
@@ -1554,13 +1807,17 @@ class C : ILErrors.InterfaceEvents
                         )
                         .WithArguments("DelegateWithoutInvoke.DelegateSubWithoutInvoke")
                         .WithLocation(16, 30),
-                    // (17,72): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke method or an invoke method with a return type or parameter types that are not supported.
-                    //         DelegateWithoutInvoke.DelegateSubWithoutInvoke myDelegate4 = x => System.Console.WriteLine("Hello World");
+                    // (17,72): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateSubWithoutInvoke' has no invoke
+                    // method or an invoke method with a return type or parameter types that are not supported.
+                    //         DelegateWithoutInvoke.DelegateSubWithoutInvoke myDelegate4 = x =>
+                    // System.Console.WriteLine("Hello World");
                     Diagnostic(ErrorCode.ERR_InvalidDelegateType, "=>")
                         .WithArguments("DelegateWithoutInvoke.DelegateSubWithoutInvoke")
                         .WithLocation(17, 72),
-                    // (18,89): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateFunctionWithoutInvoke' has no invoke method or an invoke method with a return type or parameter types that are not supported.
-                    //         object myDelegate6 = new DelegateWithoutInvoke.DelegateFunctionWithoutInvoke( x => "Hello World");
+                    // (18,89): error CS7024: Delegate 'DelegateWithoutInvoke.DelegateFunctionWithoutInvoke' has no
+                    // invoke method or an invoke method with a return type or parameter types that are not supported.
+                    //         object myDelegate6 = new DelegateWithoutInvoke.DelegateFunctionWithoutInvoke( x => "Hello
+                    // World");
                     Diagnostic(ErrorCode.ERR_InvalidDelegateType, "=>")
                         .WithArguments("DelegateWithoutInvoke.DelegateFunctionWithoutInvoke")
                         .WithLocation(18, 89)
@@ -1609,7 +1866,9 @@ class C : ILErrors.InterfaceEvents
                     new MetadataReference[] { csharpAssemblyReference, ilAssemblyReference }
                 )
                 .VerifyDiagnostics(
-                    // (7,16): error CS0012: The type 'UnavailableClass<>' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (7,16): error CS0012: The type 'UnavailableClass<>' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         return del.Invoke("goo");
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "del.Invoke")
                         .WithArguments(
@@ -1617,7 +1876,9 @@ class C : ILErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(7, 16),
-                    // (13,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (13,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         CSharpErrors.DelegateReturnType1 myDelegate1 = bar;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "bar")
                         .WithArguments(
@@ -1625,7 +1886,9 @@ class C : ILErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(13, 56),
-                    // (14,9): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (14,9): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         myDelegate1("goo");
                     Diagnostic(ErrorCode.ERR_NoTypeDef, @"myDelegate1(""goo"")")
                         .WithArguments(
@@ -1633,8 +1896,11 @@ class C : ILErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(14, 9),
-                    // (15,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-                    //         CSharpErrors.DelegateReturnType1 myDelegate2 = new CSharpErrors.DelegateReturnType1(myDelegate1);
+                    // (15,56): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
+                    //         CSharpErrors.DelegateReturnType1 myDelegate2 = new
+                    // CSharpErrors.DelegateReturnType1(myDelegate1);
                     Diagnostic(
                             ErrorCode.ERR_NoTypeDef,
                             "new CSharpErrors.DelegateReturnType1(myDelegate1)"
@@ -1644,7 +1910,9 @@ class C : ILErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(15, 56),
-                    // (16,30): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (16,30): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         object myDelegate3 = new CSharpErrors.DelegateReturnType1(bar);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "new CSharpErrors.DelegateReturnType1(bar)")
                         .WithArguments(
@@ -1652,15 +1920,20 @@ class C : ILErrors.InterfaceEvents
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(16, 30),
-                    // (17,58): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
-                    //         CSharpErrors.DelegateReturnType1 myDelegate4 = x => System.Console.WriteLine("Hello World");
+                    // (17,58): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
+                    //         CSharpErrors.DelegateReturnType1 myDelegate4 = x => System.Console.WriteLine("Hello
+                    // World");
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "=>")
                         .WithArguments(
                             "UnavailableClass",
                             "Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         )
                         .WithLocation(17, 58),
-                    // (18,70): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (18,70): error CS0012: The type 'UnavailableClass' is defined in an assembly that is not
+                    // referenced. You must add a reference to assembly 'Unavailable, Version=0.0.0.0, Culture=neutral,
+                    // PublicKeyToken=null'.
                     //         object myDelegate6 = new CSharpErrors.DelegateReturnType1( x => "Hello World");
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "=>")
                         .WithArguments(
@@ -1712,7 +1985,9 @@ class Program
             );
 
             lib2.VerifyDiagnostics(
-                // (6,13): error CS0012: The type 'System.Func<,>' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+                // (6,13): error CS0012: The type 'System.Func<,>' is defined in an assembly that is not referenced.
+                // You must add a reference to assembly 'System.Core, Version=3.5.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089'.
                 //         new A(x => x);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "A")
                     .WithArguments(
@@ -1756,7 +2031,8 @@ class B : C, I { }
             );
 
             main.VerifyDiagnostics(
-                // (2,7): error CS7069: Reference to type 'X' claims it is defined in 'Test', but it could not be found
+                // (2,7): error CS7069: Reference to type 'X' claims it is defined in 'Test', but it could not be
+                // found
                 // class B : C, I { }
                 Diagnostic(ErrorCode.ERR_MissingTypeInAssembly, "B")
                     .WithArguments("X", "Test")
@@ -1834,11 +2110,13 @@ class B : C, I { }
             );
 
             main.VerifyDiagnostics(
-                // (2,7): error CS0012: The type 'X' is defined in an assembly that is not referenced. You must add a reference to assembly 'X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,7): error CS0012: The type 'X' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // class B : C, I { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments("X", "X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"),
-                // (2,7): error CS0012: The type 'X' is defined in an assembly that is not referenced. You must add a reference to assembly 'X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,7): error CS0012: The type 'X' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // class B : C, I { }
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments("X", "X, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null")
@@ -1970,7 +2248,8 @@ class Program
                     references: new[] { new CSharpCompilationReference(derivedLib) }
                 )
                 .VerifyDiagnostics(
-                    // (9,18): error CS0012: The type 'Base' is defined in an assembly that is not referenced. You must add a reference to assembly 'BaseAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (9,18): error CS0012: The type 'Base' is defined in an assembly that is not referenced. You must
+                    // add a reference to assembly 'BaseAssembly, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //             case string s: break;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "string s")
                         .WithArguments(
@@ -1984,7 +2263,8 @@ class Program
         #region Attributes for unsafe code
 
         /// <summary>
-        /// Simple test to verify that the infrastructure for the other UnsafeAttributes_* tests works correctly.
+        /// Simple test to verify that the infrastructure for the other UnsafeAttributes_* tests works
+        // correctly.
         /// </summary>
         [Fact]
         public void UnsafeAttributes_NoErrors()
@@ -2286,7 +2566,8 @@ namespace System.Security
             CompileUnsafeAttributesAndCheckDiagnostics(
                 text,
                 false,
-                // error CS0656: Missing compiler required member 'System.Security.Permissions.SecurityPermissionAttribute..ctor'
+                // error CS0656: Missing compiler required member
+                // 'System.Security.Permissions.SecurityPermissionAttribute..ctor'
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                     .WithArguments(
                         "System.Security.Permissions.SecurityPermissionAttribute",
@@ -2301,7 +2582,8 @@ namespace System.Security
             CompileUnsafeAttributesAndCheckDiagnostics(
                 text,
                 true,
-                // error CS0656: Missing compiler required member 'System.Security.Permissions.SecurityPermissionAttribute..ctor'
+                // error CS0656: Missing compiler required member
+                // 'System.Security.Permissions.SecurityPermissionAttribute..ctor'
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                     .WithArguments(
                         "System.Security.Permissions.SecurityPermissionAttribute",
@@ -2357,7 +2639,8 @@ namespace System.Security
             CompileUnsafeAttributesAndCheckDiagnostics(
                 text,
                 false,
-                // error CS0656: Missing compiler required member 'System.Security.Permissions.SecurityPermissionAttribute.SkipVerification'
+                // error CS0656: Missing compiler required member
+                // 'System.Security.Permissions.SecurityPermissionAttribute.SkipVerification'
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                     .WithArguments(
                         "System.Security.Permissions.SecurityPermissionAttribute",
@@ -2371,7 +2654,8 @@ namespace System.Security
             CompileUnsafeAttributesAndCheckDiagnostics(
                 text,
                 true,
-                // error CS0656: Missing compiler required member 'System.Security.Permissions.SecurityPermissionAttribute.SkipVerification'
+                // error CS0656: Missing compiler required member
+                // 'System.Security.Permissions.SecurityPermissionAttribute.SkipVerification'
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember)
                     .WithArguments(
                         "System.Security.Permissions.SecurityPermissionAttribute",
@@ -2463,56 +2747,64 @@ class C
                     }
                 )
                 .VerifyDiagnostics(
-                    // (8,22): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (8,22): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         var c1 = new Constructor1(1);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Constructor1")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (9,22): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (9,22): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         var c2 = new Constructor2(2);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Constructor2")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (9,9): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (9,9): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         Methods.M1(1);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Methods.M1")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (10,9): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,9): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         Methods.M2(2);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Methods.M2")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (14,26): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (14,26): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         Action<int> a1 = Methods.M1;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Methods.M1")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (15,26): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (15,26): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         Action<int> a2 = Methods.M2;
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "Methods.M2")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (17,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (17,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         var i1 = new Indexer1()[1];
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "new Indexer1()[1]")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (18,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (18,18): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         var i2 = new Indexer2()[2];
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "new Indexer2()[2]")
                         .WithArguments(
@@ -2579,14 +2871,16 @@ class Derived : Base
                     }
                 )
                 .VerifyDiagnostics(
-                    // (9,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (9,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = d.M(1);
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "d.M")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (12,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (12,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = d[1];
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "d[1]")
                         .WithArguments(
@@ -2654,21 +2948,24 @@ class Test
                     }
                 )
                 .VerifyDiagnostics(
-                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         c = new C("A"); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c.M("A"); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "c.M")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c["A"]; // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, @"c[""A""]")
                         .WithArguments(
@@ -2736,21 +3033,24 @@ class Test
                     }
                 )
                 .VerifyDiagnostics(
-                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         c = new C("A", null); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c.M("A", null); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "c.M")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c["A", null]; // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, @"c[""A"", null]")
                         .WithArguments(
@@ -2818,21 +3118,24 @@ class Test
                     }
                 )
                 .VerifyDiagnostics(
-                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (10,17): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         c = new C(null, "A"); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "C")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (13,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c.M(null, "A"); // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, "c.M")
                         .WithArguments(
                             "Missing",
                             "Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                         ),
-                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // (16,13): error CS0012: The type 'Missing' is defined in an assembly that is not referenced. You
+                    // must add a reference to assembly 'Missing, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     //         i = c[null, "A"]; // Error
                     Diagnostic(ErrorCode.ERR_NoTypeDef, @"c[null, ""A""]")
                         .WithArguments(
@@ -3138,7 +3441,8 @@ class C
                     Diagnostic(ErrorCode.ERR_BindToBogus, "Methods.M")
                         .WithArguments("Methods.M(string)")
                         .WithLocation(12, 29),
-                    // (14,18): error CS1546: Property, indexer, or event 'Indexers.this[string]' is not supported by the language; try directly calling accessor method 'Indexers.get_Item(string)'
+                    // (14,18): error CS1546: Property, indexer, or event 'Indexers.this[string]' is not supported by
+                    // the language; try directly calling accessor method 'Indexers.get_Item(string)'
                     //         var i2 = new Indexers()[null];
                     Diagnostic(ErrorCode.ERR_BindToBogusProp1, "new Indexers()[null]")
                         .WithArguments("Indexers.this[string]", "Indexers.get_Item(string)")
@@ -3192,7 +3496,9 @@ class Test
 
             DiagnosticDescription[] expected =
             {
-                // (9,23): error CS0012: The type 'GeneralException' is defined in an assembly that is not referenced. You must add a reference to assembly 'Base, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (9,23): error CS0012: The type 'GeneralException' is defined in an assembly that is not
+                // referenced. You must add a reference to assembly 'Base, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //                 throw e;
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "e")
                     .WithArguments(
@@ -3209,7 +3515,9 @@ class Test
                 //             catch (SpecificException)
                 Diagnostic(ErrorCode.ERR_BadExceptionType, "SpecificException")
                     .WithLocation(11, 20),
-                // (11,20): error CS0012: The type 'GeneralException' is defined in an assembly that is not referenced. You must add a reference to assembly 'Base, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (11,20): error CS0012: The type 'GeneralException' is defined in an assembly that is not
+                // referenced. You must add a reference to assembly 'Base, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //             catch (SpecificException)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "SpecificException")
                     .WithArguments(
@@ -3248,7 +3556,8 @@ namespace System
 ";
 
         /// <summary>
-        /// Compile without corlib, and then verify semantic diagnostics, emit-metadata diagnostics, and emit diagnostics.
+        /// Compile without corlib, and then verify semantic diagnostics, emit-metadata diagnostics, and
+        // emit diagnostics.
         /// </summary>
         private static void CompileUnsafeAttributesAndCheckDiagnostics(
             string corLibText,
@@ -3377,7 +3686,9 @@ interface I2
             );
 
             compilation4.VerifyDiagnostics(
-                // (4,10): error CS0012: The type 'ValueType' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,10): error CS0012: The type 'ValueType' is defined in an assembly that is not referenced. You
+                // must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "A")
                     .WithArguments(
@@ -3385,7 +3696,9 @@ interface I2
                         "mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2"
                     )
                     .WithLocation(4, 10),
-                // (4,15): error CS0012: The type 'Enum' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,15): error CS0012: The type 'Enum' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments(
@@ -3393,7 +3706,9 @@ interface I2
                         "mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2"
                     )
                     .WithLocation(4, 15),
-                // (4,25): error CS0012: The type 'MulticastDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,25): error CS0012: The type 'MulticastDelegate' is defined in an assembly that is not
+                // referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
@@ -3427,7 +3742,8 @@ interface I2
             );
 
             compilation5.VerifyEmitDiagnostics(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                // was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
             );
             // ILVerify: no corlib
@@ -3447,7 +3763,9 @@ interface I2
             );
 
             compilation6.VerifyDiagnostics(
-                // (4,10): error CS0012: The type 'ValueType' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,10): error CS0012: The type 'ValueType' is defined in an assembly that is not referenced. You
+                // must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "A")
                     .WithArguments(
@@ -3455,7 +3773,9 @@ interface I2
                         "mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2"
                     )
                     .WithLocation(4, 10),
-                // (4,15): error CS0012: The type 'Enum' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,15): error CS0012: The type 'Enum' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "B")
                     .WithArguments(
@@ -3463,7 +3783,9 @@ interface I2
                         "mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2"
                     )
                     .WithLocation(4, 15),
-                // (4,25): error CS0012: The type 'MulticastDelegate' is defined in an assembly that is not referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=ce65828c82a341f2'.
+                // (4,25): error CS0012: The type 'MulticastDelegate' is defined in an assembly that is not
+                // referenced. You must add a reference to assembly 'mincorlib, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=ce65828c82a341f2'.
                 //     I1 M(A a, B b, C c, D d);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "D")
                     .WithArguments(
@@ -3581,7 +3903,8 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (6,19): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,19): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var ptr = &s2;
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "&s2")
                     .WithArguments(
@@ -3589,7 +3912,8 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(6, 19),
-                // (6,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (6,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         var ptr = &s2;
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2")
                     .WithArguments("S2")
@@ -3624,7 +3948,8 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (6,20): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,20): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         var size = sizeof(S2);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "sizeof(S2)")
                     .WithArguments(
@@ -3632,7 +3957,8 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(6, 20),
-                // (6,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (6,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         var size = sizeof(S2);
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "sizeof(S2)")
                     .WithArguments("S2")
@@ -3666,7 +3992,8 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (4,23): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (4,23): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //     unsafe void M(S2* ptr)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "ptr")
                     .WithArguments(
@@ -3674,7 +4001,8 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(4, 23),
-                // (4,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (4,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //     unsafe void M(S2* ptr)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr")
                     .WithArguments("S2")
@@ -3710,7 +4038,8 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (6,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span = stackalloc S2[16];
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2*")
                     .WithArguments(
@@ -3718,12 +4047,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(6, 9),
-                // (6,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (6,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         S2* span = stackalloc S2[16];
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
                     .WithArguments("S2")
                     .WithLocation(6, 9),
-                // (6,31): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (6,31): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span = stackalloc S2[16];
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2")
                     .WithArguments(
@@ -3731,12 +4062,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(6, 31),
-                // (6,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('S2')
+                // (6,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('S2')
                 //         S2* span = stackalloc S2[16];
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "S2")
                     .WithArguments("S2")
                     .WithLocation(6, 31),
-                // (7,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2*")
                     .WithArguments(
@@ -3744,12 +4077,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 9),
-                // (7,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (7,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
                     .WithArguments("S2")
                     .WithLocation(7, 9),
-                // (7,21): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,21): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "stackalloc [] { default(S2) }")
                     .WithArguments(
@@ -3757,7 +4092,8 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 21),
-                // (7,21): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('S2')
+                // (7,21): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a
+                // managed type ('S2')
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.ERR_ManagedAddr, "stackalloc [] { default(S2) }")
                     .WithArguments("S2")
@@ -3795,7 +4131,8 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (7,16): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,16): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2*")
                     .WithArguments(
@@ -3803,12 +4140,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 16),
-                // (7,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (7,16): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
                     .WithArguments("S2")
                     .WithLocation(7, 16),
-                // (7,26): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,26): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "&s2")
                     .WithArguments(
@@ -3816,12 +4155,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 26),
-                // (7,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (7,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2")
                     .WithArguments("S2")
                     .WithLocation(7, 26),
-                // (7,26): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,26): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "&s2")
                     .WithArguments(
@@ -3829,7 +4170,8 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(7, 26),
-                // (7,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
+                // (7,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('S2')
                 //         fixed (S2* ptr = &s2)
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2")
                     .WithArguments("S2")
@@ -3867,12 +4209,14 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (8,9): error CS8377: The type 'S2' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
+                // (8,9): error CS8377: The type 'S2' must be a non-nullable value type, along with all fields at
+                // any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
                 //         M(default(S2)); // 1, 2
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
                     .WithArguments("C.M<T>(T)", "T", "S2")
                     .WithLocation(8, 9),
-                // (8,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (8,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         M(default(S2)); // 1, 2
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "M")
                     .WithArguments(
@@ -3880,12 +4224,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(8, 9),
-                // (9,9): error CS8377: The type 'S2' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
+                // (9,9): error CS8377: The type 'S2' must be a non-nullable value type, along with all fields at
+                // any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
                 //         M(default(S2)); // 3, 4
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
                     .WithArguments("C.M<T>(T)", "T", "S2")
                     .WithLocation(9, 9),
-                // (9,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (9,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         M(default(S2)); // 3, 4
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "M")
                     .WithArguments(
@@ -3931,12 +4277,14 @@ class C
                 references: new[] { UnmanagedUseSiteError_Ref2 }
             );
             comp.VerifyEmitDiagnostics(
-                // (13,9): error CS8377: The type 'S3' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
+                // (13,9): error CS8377: The type 'S3' must be a non-nullable value type, along with all fields at
+                // any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
                 //         M(default(S3)); // 1, 2
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
                     .WithArguments("C.M<T>(T)", "T", "S3")
                     .WithLocation(13, 9),
-                // (13,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (13,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         M(default(S3)); // 1, 2
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "M")
                     .WithArguments(
@@ -3944,12 +4292,14 @@ class C
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(13, 9),
-                // (14,9): error CS8377: The type 'S3' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
+                // (14,9): error CS8377: The type 'S3' must be a non-nullable value type, along with all fields at
+                // any level of nesting, in order to use it as parameter 'T' in the generic type or method 'C.M<T>(T)'
                 //         M(default(S3)); // 3, 4
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "M")
                     .WithArguments("C.M<T>(T)", "T", "S3")
                     .WithLocation(14, 9),
-                // (14,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (14,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must
+                // add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         M(default(S3)); // 3, 4
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "M")
                     .WithArguments(
@@ -3988,14 +4338,16 @@ class C
 ";
             var comp = CreateCompilation(source, references: new[] { UnmanagedUseSiteError_Ref2 });
             comp.VerifyEmitDiagnostics(
-                // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a
+                // reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef)
                     .WithArguments(
                         "S1",
                         "libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(1, 1),
-                // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a
+                // reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef)
                     .WithArguments(
                         "S1",
@@ -4041,7 +4393,8 @@ public struct S3
                 );
                 Assert.True(s3.IsManagedType(ref managedKindUseSiteInfo));
                 managedKindUseSiteInfo.Diagnostics.Verify(
-                    // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                    // error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a
+                    // reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                     Diagnostic(ErrorCode.ERR_NoTypeDef)
                         .WithArguments(
                             "S1",
@@ -4166,7 +4519,8 @@ class Test : CL1
 ";
             CreateCompilationWithIL(source, il)
                 .VerifyDiagnostics(
-                    // (4,25): error CS0569: 'Test.P': cannot override 'CL1.P' because it is not supported by the language
+                    // (4,25): error CS0569: 'Test.P': cannot override 'CL1.P' because it is not supported by the
+                    // language
                     //     public override int P
                     Diagnostic(ErrorCode.ERR_CantOverrideBogusMethod, "P")
                         .WithArguments("Test.P", "CL1.P")
@@ -4744,12 +5098,14 @@ class Test2 : CL1
 ";
             CreateCompilationWithIL(source, il)
                 .VerifyDiagnostics(
-                    // (6,9): error CS0686: Accessor 'Test1.P.get' cannot implement interface member 'CL1.get_P()' for type 'Test1'. Use an explicit interface implementation.
+                    // (6,9): error CS0686: Accessor 'Test1.P.get' cannot implement interface member 'CL1.get_P()' for
+                    // type 'Test1'. Use an explicit interface implementation.
                     //         get => throw null;
                     Diagnostic(ErrorCode.ERR_AccessorImplementingMethod, "get")
                         .WithArguments("Test1.P.get", "CL1.get_P()", "Test1")
                         .WithLocation(6, 9),
-                    // (12,13): error CS0682: 'Test2.CL1.P' cannot implement 'CL1.P' because it is not supported by the language
+                    // (12,13): error CS0682: 'Test2.CL1.P' cannot implement 'CL1.P' because it is not supported by the
+                    // language
                     //     int CL1.P
                     Diagnostic(ErrorCode.ERR_BogusExplicitImpl, "P")
                         .WithArguments("Test2.CL1.P", "CL1.P")

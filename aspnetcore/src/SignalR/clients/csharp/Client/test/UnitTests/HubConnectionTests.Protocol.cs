@@ -11,8 +11,10 @@ using Xunit;
 
 namespace Microsoft.AspNetCore.SignalR.Client.Tests;
 
-// This includes tests that verify HubConnection conforms to the Hub Protocol, without setting up a full server (even TestServer).
-// We can also have more control over the messages we send to HubConnection in order to ensure that protocol errors and other quirks
+// This includes tests that verify HubConnection conforms to the Hub Protocol, without setting up a
+// full server (even TestServer).
+// We can also have more control over the messages we send to HubConnection in order to ensure that
+// protocol errors and other quirks
 // don't cause problems.
 public partial class HubConnectionTests
 {
@@ -31,7 +33,8 @@ public partial class HubConnectionTests
 
                 var invokeMessage = await connection.ReadSentTextMessageAsync().DefaultTimeout();
 
-                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator now that we use Pipelines)
+                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator
+                // now that we use Pipelines)
                 Assert.Equal("{\"type\":1,\"target\":\"Foo\",\"arguments\":[]}", invokeMessage);
 
                 await invokeTask.DefaultTimeout();
@@ -57,7 +60,8 @@ public partial class HubConnectionTests
                     .ReadHandshakeAndSendResponseAsync()
                     .DefaultTimeout();
 
-                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator now that we use Pipelines)
+                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator
+                // now that we use Pipelines)
                 Assert.Equal("{\"protocol\":\"json\",\"version\":1}", handshakeMessage);
 
                 await startTask.DefaultTimeout();
@@ -83,7 +87,8 @@ public partial class HubConnectionTests
 
                     await connection.ReadSentTextMessageAsync().DefaultTimeout();
 
-                    // The client expects the first message to be a handshake response, but a handshake response doesn't have a "type".
+                    // The client expects the first message to be a handshake response, but a handshake response doesn't
+                    // have a "type".
                     await connection.ReceiveJsonMessage(new { type = "foo" }).DefaultTimeout();
 
                     var ex = await Assert
@@ -104,7 +109,8 @@ public partial class HubConnectionTests
         public async Task ClientIsOkayReceivingMinorVersionInHandshake()
         {
             // We're just testing that the client doesn't fail when a minor version is added to the handshake
-            // The client doesn't actually use that version anywhere yet so there's nothing else to test at this time
+            // The client doesn't actually use that version anywhere yet so there's nothing else to test at this
+            // time
 
             var connection = new TestConnection(autoHandshake: false);
             var hubConnection = CreateHubConnection(connection);
@@ -137,7 +143,8 @@ public partial class HubConnectionTests
 
                 var invokeMessage = await connection.ReadSentTextMessageAsync().DefaultTimeout();
 
-                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator now that we use Pipelines)
+                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator
+                // now that we use Pipelines)
                 Assert.Equal(
                     "{\"type\":1,\"invocationId\":\"1\",\"target\":\"Foo\",\"arguments\":[]}",
                     invokeMessage
@@ -230,7 +237,8 @@ public partial class HubConnectionTests
 
                 var invokeMessage = await connection.ReadSentTextMessageAsync().DefaultTimeout();
 
-                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator now that we use Pipelines)
+                // ReadSentTextMessageAsync strips off the record separator (because it has use it as a separator
+                // now that we use Pipelines)
                 Assert.Equal(
                     "{\"type\":4,\"invocationId\":\"1\",\"target\":\"Foo\",\"arguments\":[]}",
                     invokeMessage
@@ -597,7 +605,8 @@ public partial class HubConnectionTests
                     .DefaultTimeout();
                 var handlerTask = handlerCalled.Task;
 
-                // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
+                // We expect the handler task to timeout since the handler has been removed with the call to
+                // Remove("Foo")
                 var ex = Assert.ThrowsAsync<TimeoutException>(
                     async () => await handlerTask.DefaultTimeout(2000)
                 );
@@ -646,7 +655,8 @@ public partial class HubConnectionTests
 
                 subscription.Dispose();
 
-                // We expect the handler task to timeout since the handler has been removed with the call to Remove("Foo")
+                // We expect the handler task to timeout since the handler has been removed with the call to
+                // Remove("Foo")
                 var ex = Assert.ThrowsAsync<TimeoutException>(
                     async () => await handlerTask.DefaultTimeout(2000)
                 );

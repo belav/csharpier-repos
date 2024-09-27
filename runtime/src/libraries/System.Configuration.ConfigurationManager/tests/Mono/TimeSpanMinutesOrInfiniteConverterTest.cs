@@ -64,14 +64,14 @@ namespace MonoTests.System.Configuration
             TimeSpanMinutesOrInfiniteConverter cv = new TimeSpanMinutesOrInfiniteConverter();
             object o;
 
-            /* make sure the TimeSpanMinutesConverter tests work here too */
+/* make sure the TimeSpanMinutesConverter tests work here too */
             o = cv.ConvertFrom(null, null, "59");
             Assert.Equal(typeof(TimeSpan), o.GetType());
             Assert.Equal("00:59:00", o.ToString());
             o = cv.ConvertFrom(null, null, "104");
             Assert.Equal("01:44:00", o.ToString());
 
-            /* and now test infinity */
+/* and now test infinity */
             o = cv.ConvertFrom(null, null, "Infinite");
             Assert.Equal(TimeSpan.MaxValue.ToString(), o.ToString());
         }
@@ -111,7 +111,7 @@ namespace MonoTests.System.Configuration
             ts = TimeSpan.FromSeconds(390);
             Assert.Equal("6", cv.ConvertTo(null, null, ts, typeof(string)));
 
-            /* infinity tests */
+/* infinity tests */
             Assert.Equal("Infinite", cv.ConvertTo(null, null, TimeSpan.MaxValue, typeof(string)));
             Assert.Equal(
                 "Infinite",

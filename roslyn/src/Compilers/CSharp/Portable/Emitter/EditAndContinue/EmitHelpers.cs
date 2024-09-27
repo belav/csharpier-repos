@@ -182,7 +182,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                 isDeletedMemberMapping: false
             );
 
-            // Deleted members are mapped the same way as synthesized members, so we can just call the same method.
+            // Deleted members are mapped the same way as synthesized members, so we can just call the same
+            // method.
             var mappedDeletedMembers = matcher.MapSynthesizedOrDeletedMembers(
                 previousGeneration.DeletedMembers,
                 currentDeletedMembers,

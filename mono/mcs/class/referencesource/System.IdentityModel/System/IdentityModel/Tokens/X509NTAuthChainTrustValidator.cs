@@ -28,7 +28,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Creates an instance of <see cref="X509NTAuthChainTrustValidator"/>
         /// </summary>
-        /// <param name="useMachineContext">True to use local machine context to build the cert chain.</param>
+        /// <param name="useMachineContext">True to use local machine context to build the cert
+        // chain.</param>
         /// <param name="chainPolicy">X509Chain policy to use.</param>
         public X509NTAuthChainTrustValidator(bool useMachineContext, X509ChainPolicy chainPolicy)
         {
@@ -41,7 +42,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="certificate">X.509 Certificate to validate.</param>
         /// <exception cref="ArgumentNullException">The input parameter 'certificate' is null.</exception>
-        /// <exception cref="SecurityTokenValidationException">X.509 Certificate validation failed.</exception>
+        /// <exception cref="SecurityTokenValidationException">X.509 Certificate validation
+        // failed.</exception>
         public override void Validate(X509Certificate2 certificate)
         {
             if (certificate == null)

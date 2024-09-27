@@ -11,8 +11,10 @@ namespace System.Web.Util
     using System.Threading;
     using System.Threading.Tasks;
 
-    // This class is used by the AspNetSynchronizationContext to assist with scheduling tasks in a non-blocking fashion.
-    // Asynchronous work will be queued and will execute sequentially, never consuming more than a single thread at a time.
+    // This class is used by the AspNetSynchronizationContext to assist with scheduling tasks in a
+    // non-blocking fashion.
+    // Asynchronous work will be queued and will execute sequentially, never consuming more than a
+    // single thread at a time.
     // Synchronous work will block and will execute on the current thread.
 
     internal sealed class SynchronizationHelper
@@ -102,7 +104,8 @@ namespace System.Web.Util
             }
 
             // The original task may end up Faulted, which would make its Wait() method throw an exception.
-            // To avoid this, we instead wait on a continuation which is always guaranteed to complete successfully.
+            // To avoid this, we instead wait on a continuation which is always guaranteed to complete
+            // successfully.
             if (!lastTask.IsCompleted)
             {
                 lastTask

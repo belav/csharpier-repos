@@ -249,7 +249,8 @@ namespace System.Drawing.Drawing2D
         {
             get
             {
-                // Interpolation colors and blends don't work together very well. Getting the Blend when InterpolationColors
+                // Interpolation colors and blends don't work together very well. Getting the Blend when
+                // InterpolationColors
                 // is set set puts the Brush into an unusable state afterwards.
                 // Bail out here to avoid that.
                 if (_interpolationColorsWasSet)

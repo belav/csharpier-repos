@@ -70,7 +70,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             );
         }
 
-        // Disabling it for full .Net Framework due to a missing ALPN API which leads to a protocol downgrade
+        // Disabling it for full .Net Framework due to a missing ALPN API which leads to a protocol
+        // downgrade
 #if !NETFRAMEWORK
         [ConditionalFact(
             typeof(PlatformDetection),

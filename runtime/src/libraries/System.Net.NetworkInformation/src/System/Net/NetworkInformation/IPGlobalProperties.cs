@@ -54,7 +54,8 @@ namespace System.Net.NetworkInformation
         public abstract string HostName { get; }
 
         /// <summary>
-        /// Gets a bool value that specifies whether the local computer is acting as a Windows Internet Name Service (WINS) proxy.
+        /// Gets a bool value that specifies whether the local computer is acting as a Windows Internet Name
+        // Service (WINS) proxy.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract bool IsWinsProxy { get; }
@@ -92,13 +93,15 @@ namespace System.Net.NetworkInformation
         public abstract UdpStatistics GetUdpIPv6Statistics();
 
         /// <summary>
-        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local computer.
+        /// Provides Internet Control Message Protocol (ICMP) version 4 statistical data for the local
+        // computer.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract IcmpV4Statistics GetIcmpV4Statistics();
 
         /// <summary>
-        /// Provides Internet Control Message Protocol (ICMP) version 6 statistical data for the local computer.
+        /// Provides Internet Control Message Protocol (ICMP) version 6 statistical data for the local
+        // computer.
         /// </summary>
         [UnsupportedOSPlatform("android")]
         public abstract IcmpV6Statistics GetIcmpV6Statistics();

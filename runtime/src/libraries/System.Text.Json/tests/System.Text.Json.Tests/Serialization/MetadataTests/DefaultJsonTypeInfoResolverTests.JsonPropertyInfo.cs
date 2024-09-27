@@ -1130,7 +1130,8 @@ namespace System.Text.Json.Serialization.Tests
                 ModifyJsonIgnore modify
             )
             {
-                // defaultIgnoreCondition is not taken into account, we might expect null if defaultIgnoreCondition == ignoreConditionOnProperty
+                // defaultIgnoreCondition is not taken into account, we might expect null if defaultIgnoreCondition
+                // == ignoreConditionOnProperty
                 switch (ignoreConditionOnProperty)
                 {
                     case null:

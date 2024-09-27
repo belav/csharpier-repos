@@ -38,7 +38,8 @@ namespace Tests.Collections
         }
 
         /// <summary>
-        ///     When overridden in a derived class, Gets an instance of the enumerable under test containing the given items.
+        ///     When overridden in a derived class, Gets an instance of the enumerable under test containing
+        // the given items.
         /// </summary>
         /// <param name="items">The items to initialize the enumerable with.</param>
         /// <returns>An instance of the enumerable under test containing the given items.</returns>

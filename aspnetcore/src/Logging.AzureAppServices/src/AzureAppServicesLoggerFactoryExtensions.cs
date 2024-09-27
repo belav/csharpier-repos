@@ -34,7 +34,8 @@ public static class AzureAppServicesLoggerFactoryExtensions
     /// Adds an Azure Web Apps diagnostics logger.
     /// </summary>
     /// <param name="builder">The extension method argument.</param>
-    /// <param name="configureBlobLoggerOptions">An Action to configure the <see cref="AzureBlobLoggerOptions"/>.</param>
+    /// <param name="configureBlobLoggerOptions">An Action to configure the <see
+    // cref="AzureBlobLoggerOptions"/>.</param>
     /// <returns></returns>
     public static ILoggingBuilder AddAzureWebAppDiagnostics(
         this ILoggingBuilder builder,

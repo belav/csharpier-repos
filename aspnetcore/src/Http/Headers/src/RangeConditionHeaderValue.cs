@@ -8,7 +8,8 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.Net.Http.Headers;
 
 /// <summary>
-/// Represents an <c>If-Range</c> header value which can either be a date/time or an entity-tag value.
+/// Represents an <c>If-Range</c> header value which can either be a date/time or an entity-tag
+// value.
 /// </summary>
 public class RangeConditionHeaderValue
 {
@@ -118,11 +119,13 @@ public class RangeConditionHeaderValue
     }
 
     /// <summary>
-    /// Attempts to parse the specified <paramref name="input"/> as a <see cref="RangeConditionHeaderValue"/>.
+    /// Attempts to parse the specified <paramref name="input"/> as a <see
+    // cref="RangeConditionHeaderValue"/>.
     /// </summary>
     /// <param name="input">The value to parse.</param>
     /// <param name="parsedValue">The parsed value.</param>
-    /// <returns><see langword="true"/> if input is a valid <see cref="RangeConditionHeaderValue"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if input is a valid <see cref="RangeConditionHeaderValue"/>,
+    // otherwise <see langword="false"/>.</returns>
     public static bool TryParse(
         StringSegment input,
         [NotNullWhen(true)] out RangeConditionHeaderValue? parsedValue
@@ -154,7 +157,8 @@ public class RangeConditionHeaderValue
         DateTimeOffset date = DateTimeOffset.MinValue;
         EntityTagHeaderValue? entityTag = null;
 
-        // Entity tags are quoted strings optionally preceded by "W/". By looking at the first two character we
+        // Entity tags are quoted strings optionally preceded by "W/". By looking at the first two character
+        // we
         // can determine whether the string is en entity tag or a date.
         var firstChar = input[current];
         var secondChar = input[current + 1];

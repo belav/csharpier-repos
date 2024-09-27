@@ -10,7 +10,8 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 namespace Microsoft.Extensions.DependencyInjection;
 
 /// <summary>
-/// Provides basic extension methods for registering <see cref="IHealthCheck"/> instances in an <see cref="IHealthChecksBuilder"/>.
+/// Provides basic extension methods for registering <see cref="IHealthCheck"/> instances in an <see
+// cref="IHealthChecksBuilder"/>.
 /// </summary>
 public static class HealthChecksBuilderAddCheckExtensions
 {
@@ -21,7 +22,8 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="name">The name of the health check.</param>
     /// <param name="instance">An <see cref="IHealthCheck"/> instance.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
@@ -45,11 +47,13 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="name">The name of the health check.</param>
     /// <param name="instance">An <see cref="IHealthCheck"/> instance.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
-    /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the check.</param>
+    /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the
+    // check.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -81,15 +85,20 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="builder">The <see cref="IHealthChecksBuilder"/>.</param>
     /// <param name="name">The name of the health check.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.GetServiceOrCreateInstance{T}(IServiceProvider)"/> to create the health check
-    /// instance when needed. If a service of type <typeparamref name="T"/> is registered in the dependency injection container
-    /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will be constructed with
+    /// This method will use <see
+    // cref="ActivatorUtilities.GetServiceOrCreateInstance{T}(IServiceProvider)"/> to create the health
+    // check
+    /// instance when needed. If a service of type <typeparamref name="T"/> is registered in the
+    // dependency injection container
+    /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will
+    // be constructed with
     /// access to services from the dependency injection container.
     /// </remarks>
     // 2.0 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
@@ -113,16 +122,22 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="builder">The <see cref="IHealthChecksBuilder"/>.</param>
     /// <param name="name">The name of the health check.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
-    /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the check.</param>
+    /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the
+    // check.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.GetServiceOrCreateInstance{T}(IServiceProvider)"/> to create the health check
-    /// instance when needed. If a service of type <typeparamref name="T"/> is registered in the dependency injection container
-    /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will be constructed with
+    /// This method will use <see
+    // cref="ActivatorUtilities.GetServiceOrCreateInstance{T}(IServiceProvider)"/> to create the health
+    // check
+    /// instance when needed. If a service of type <typeparamref name="T"/> is registered in the
+    // dependency injection container
+    /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will
+    // be constructed with
     /// access to services from the dependency injection container.
     /// </remarks>
     public static IHealthChecksBuilder AddCheck<
@@ -158,7 +173,8 @@ public static class HealthChecksBuilderAddCheckExtensions
             ActivatorUtilities.GetServiceOrCreateInstance<T>(serviceProvider);
     }
 
-    // NOTE: AddTypeActivatedCheck has overloads rather than default parameters values, because default parameter values don't
+    // NOTE: AddTypeActivatedCheck has overloads rather than default parameters values, because default
+    // parameter values don't
     // play super well with params.
 
     /// <summary>
@@ -170,8 +186,10 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="args">Additional arguments to provide to the constructor.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> to create the health check
-    /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
+    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider,
+    // object[])"/> to create the health check
+    /// instance when needed. Additional arguments can be provided to the constructor via <paramref
+    // name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
@@ -191,14 +209,17 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="builder">The <see cref="IHealthChecksBuilder"/>.</param>
     /// <param name="name">The name of the health check.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="args">Additional arguments to provide to the constructor.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> to create the health check
-    /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
+    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider,
+    // object[])"/> to create the health check
+    /// instance when needed. Additional arguments can be provided to the constructor via <paramref
+    // name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
@@ -223,15 +244,18 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="builder">The <see cref="IHealthChecksBuilder"/>.</param>
     /// <param name="name">The name of the health check.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
     /// <param name="args">Additional arguments to provide to the constructor.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> to create the health check
-    /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
+    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider,
+    // object[])"/> to create the health check
+    /// instance when needed. Additional arguments can be provided to the constructor via <paramref
+    // name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
@@ -265,7 +289,8 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="builder">The <see cref="IHealthChecksBuilder"/>.</param>
     /// <param name="name">The name of the health check.</param>
     /// <param name="failureStatus">
-    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure. If the provided value
+    /// The <see cref="HealthStatus"/> that should be reported when the health check reports a failure.
+    // If the provided value
     /// is <c>null</c>, then <see cref="HealthStatus.Unhealthy"/> will be reported.
     /// </param>
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
@@ -273,8 +298,10 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="timeout">A <see cref="TimeSpan"/> representing the timeout of the check.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
     /// <remarks>
-    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider, object[])"/> to create the health check
-    /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
+    /// This method will use <see cref="ActivatorUtilities.CreateInstance{T}(IServiceProvider,
+    // object[])"/> to create the health check
+    /// instance when needed. Additional arguments can be provided to the constructor via <paramref
+    // name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T

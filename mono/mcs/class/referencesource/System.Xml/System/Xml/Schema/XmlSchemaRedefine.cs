@@ -20,7 +20,8 @@ namespace System.Xml.Schema
         XmlSchemaObjectTable types = new XmlSchemaObjectTable();
         XmlSchemaObjectTable groups = new XmlSchemaObjectTable();
 
-        /// <include file='doc\XmlSchemaRedefine.uex' path='docs/doc[@for="XmlSchemaRedefine.XmlSchemaRedefine"]/*' />
+        /// <include file='doc\XmlSchemaRedefine.uex'
+        // path='docs/doc[@for="XmlSchemaRedefine.XmlSchemaRedefine"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -45,7 +46,8 @@ namespace System.Xml.Schema
             get { return items; }
         }
 
-        /// <include file='doc\XmlSchemaRedefine.uex' path='docs/doc[@for="XmlSchemaRedefine.AttributeGroups"]/*' />
+        /// <include file='doc\XmlSchemaRedefine.uex'
+        // path='docs/doc[@for="XmlSchemaRedefine.AttributeGroups"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -55,7 +57,8 @@ namespace System.Xml.Schema
             get { return attributeGroups; }
         }
 
-        /// <include file='doc\XmlSchemaRedefine.uex' path='docs/doc[@for="XmlSchemaRedefine.SchemaTypes"]/*' />
+        /// <include file='doc\XmlSchemaRedefine.uex'
+        // path='docs/doc[@for="XmlSchemaRedefine.SchemaTypes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

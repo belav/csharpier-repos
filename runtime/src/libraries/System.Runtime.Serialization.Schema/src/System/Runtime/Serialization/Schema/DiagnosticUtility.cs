@@ -14,7 +14,8 @@ namespace System.Runtime.Serialization
         {
             while (exception != null)
             {
-                // NetFx checked for FatalException and FatalInternalException as well, which were ServiceModel constructs.
+                // NetFx checked for FatalException and FatalInternalException as well, which were ServiceModel
+                // constructs.
                 if (
                     (
                         exception is OutOfMemoryException

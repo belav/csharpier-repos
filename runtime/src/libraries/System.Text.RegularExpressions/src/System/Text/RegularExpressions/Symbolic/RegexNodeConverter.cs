@@ -10,7 +10,8 @@ using System.Threading;
 
 namespace System.Text.RegularExpressions.Symbolic
 {
-    /// <summary>Provides functionality to convert <see cref="RegexNode"/>s to corresponding <see cref="SymbolicRegexNode{S}"/>s.</summary>
+    /// <summary>Provides functionality to convert <see cref="RegexNode"/>s to corresponding <see
+    // cref="SymbolicRegexNode{S}"/>s.</summary>
     internal sealed class RegexNodeConverter
     {
         /// <summary>Capture information.</summary>
@@ -20,7 +21,8 @@ namespace System.Text.RegularExpressions.Symbolic
         internal readonly SymbolicRegexBuilder<BDD> _builder;
 
         /// <summary>Cache of BDDs created to represent <see cref="RegexCharClass"/> set strings.</summary>
-        /// <remarks>This cache is useful iff the same character class is used multiple times in the same regex, but that's fairly common.</remarks>
+        /// <remarks>This cache is useful iff the same character class is used multiple times in the same
+        // regex, but that's fairly common.</remarks>
         private Dictionary<string, BDD>? _setBddCache;
 
         /// <summary>Constructs a regex to symbolic finite automata converter</summary>
@@ -33,9 +35,11 @@ namespace System.Text.RegularExpressions.Symbolic
             _captureSparseMapping = captureSparseMapping;
         }
 
-        /// <summary>Converts the root <see cref="RegexNode"/> into its corresponding <see cref="SymbolicRegexNode{S}"/>.</summary>
+        /// <summary>Converts the root <see cref="RegexNode"/> into its corresponding <see
+        // cref="SymbolicRegexNode{S}"/>.</summary>
         /// <param name="root">The root node to convert.</param>
-        /// <returns>The generated <see cref="SymbolicRegexNode{S}"/> that corresponds to the supplied <paramref name="root"/>.</returns>
+        /// <returns>The generated <see cref="SymbolicRegexNode{S}"/> that corresponds to the supplied
+        // <paramref name="root"/>.</returns>
         internal SymbolicRegexNode<BDD> ConvertToSymbolicRegexNode(RegexNode root)
         {
             Debug.Assert(_builder is not null);
@@ -43,7 +47,8 @@ namespace System.Text.RegularExpressions.Symbolic
             // Create the root list that will store the built-up result.
             DoublyLinkedList<SymbolicRegexNode<BDD>> rootResult = new();
 
-            // Create a stack to be processed in order to process iteratively rather than recursively, and push the root on.
+            // Create a stack to be processed in order to process iteratively rather than recursively, and push
+            // the root on.
             Stack<(
                 RegexNode Node,
                 DoublyLinkedList<SymbolicRegexNode<BDD>> Result,
@@ -127,7 +132,8 @@ namespace System.Text.RegularExpressions.Symbolic
                                 childResults is not null && childResults.Length == node.ChildCount()
                             );
 
-                            // Push back the temporarily popped item. Next time this work item is seen, its ChildResults list will be ready.
+                            // Push back the temporarily popped item. Next time this work item is seen, its ChildResults list
+                            // will be ready.
                             stack.Push(popped);
 
                             // Push all the children to be converted
@@ -309,7 +315,8 @@ namespace System.Text.RegularExpressions.Symbolic
                                     i
                                 ];
 
-                                // If childResult is a non-singleton list, then it denotes a concatenation that must be constructed at this point.
+                                // If childResult is a non-singleton list, then it denotes a concatenation that must be constructed
+                                // at this point.
                                 SymbolicRegexNode<BDD> elem =
                                     childResult.Count == 1
                                         ? childResult.FirstElement
@@ -395,7 +402,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
             void EnsureWordLetterPredicateInitialized()
             {
-                // Initialize the word letter set based on the Unicode definition of it if it was not updated already
+                // Initialize the word letter set based on the Unicode definition of it if it was not updated
+                // already
                 if (_builder._wordLetterForBoundariesSet.Equals(_builder._solver.Empty))
                 {
                     // Use the set including joiner and non-joiner
@@ -420,9 +428,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 k == 0 ? null : new DoublyLinkedList<SymbolicRegexNode<BDD>>[k];
         }
 
-        /// <summary>Creates a BDD from the <see cref="RegexCharClass"/> set string to determine whether a char is in the set.</summary>
+        /// <summary>Creates a BDD from the <see cref="RegexCharClass"/> set string to determine whether a
+        // char is in the set.</summary>
         /// <param name="set">The RegexCharClass set string.</param>
-        /// <returns>A BDD that, when queried with a char, answers whether that char is in the specified set.</returns>
+        /// <returns>A BDD that, when queried with a char, answers whether that char is in the specified
+        // set.</returns>
         private BDD CreateBDDFromSetString(string set)
         {
             // If we're too deep on the stack, continue any recursion on another thread.
@@ -431,7 +441,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 return StackHelper.CallOnEmptyStack(CreateBDDFromSetString, set);
             }
 
-            // Lazily-initialize the set cache on first use, since some expressions may not have character classes in them.
+            // Lazily-initialize the set cache on first use, since some expressions may not have character
+            // classes in them.
             _setBddCache ??= new Dictionary<string, BDD>();
 
             // Try to get the cached BDD for the set key.
@@ -443,25 +454,33 @@ namespace System.Text.RegularExpressions.Symbolic
             );
             return result ??= Compute(set);
 
-            // <summary>Parses the RegexCharClass set string and creates a BDD that represents the same condition.</summary>
+            // <summary>Parses the RegexCharClass set string and creates a BDD that represents the same
+            // condition.</summary>
             BDD Compute(string set)
             {
                 List<BDD> conditions = new();
                 var charSetSolver = (CharSetSolver)_builder._solver;
 
-                // The set string is composed of four parts: flags (which today are just for negation), ranges (a list
-                // of pairs of values representing the ranges a character that matches the set could fall in (or if it's
-                // negated, fall out of), categories (a list of codes based on UnicodeCategory values), and then optionally
-                // another entire set string that's subtracted from the outer set string.  We parse each of those pieces
-                // to build up a BDD that will return true if a char matches the set string, and otherwise false. This
+                // The set string is composed of four parts: flags (which today are just for negation), ranges (a
+                // list
+                // of pairs of values representing the ranges a character that matches the set could fall in (or if
+                // it's
+                // negated, fall out of), categories (a list of codes based on UnicodeCategory values), and then
+                // optionally
+                // another entire set string that's subtracted from the outer set string.  We parse each of those
+                // pieces
+                // to build up a BDD that will return true if a char matches the set string, and otherwise false.
+                // This
                 // BDD then is functionally equivalent to RegexCharClass.CharInClass.
 
                 bool negate = RegexCharClass.IsNegated(set);
 
                 // Handle ranges
                 // A BDD is created for each range, and is then negated if the set is negated.  All of the BDDs for
-                // all of the ranges are stored in a set of these "conditions", which will later have all of the BDDs
-                // and'd (conjunction) together if the set is negated, or or'd (disjunction) together if not negated.
+                // all of the ranges are stored in a set of these "conditions", which will later have all of the
+                // BDDs
+                // and'd (conjunction) together if the set is negated, or or'd (disjunction) together if not
+                // negated.
                 List<(char First, char Last)>? ranges = RegexCharClass.ComputeRanges(set);
                 if (ranges is not null)
                 {
@@ -539,9 +558,12 @@ namespace System.Text.RegularExpressions.Symbolic
                         categoryCode = (short)set[i++];
                     }
 
-                    // Create a BDD that represents all of the categories or'd (disjunction) together (C1 | C2 | ... | Cn),
-                    // then negate the result if necessary (noting that two negations cancel each other out... if the set
-                    // is negated but then the group itself is also negated).  And add the resulting BDD to our set of conditions.
+                    // Create a BDD that represents all of the categories or'd (disjunction) together (C1 | C2 | ... |
+                    // Cn),
+                    // then negate the result if necessary (noting that two negations cancel each other out... if the
+                    // set
+                    // is negated but then the group itself is also negated).  And add the resulting BDD to our set of
+                    // conditions.
                     BDD bdd = MapCategoryCodeSetToCondition(categoryCodes);
                     if (negate ^ negatedGroup)
                     {
@@ -587,7 +609,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 return result;
 
-                // <summary>Creates a BDD that matches when a character is part of any of the specified UnicodeCategory values.</summary>
+                // <summary>Creates a BDD that matches when a character is part of any of the specified
+                // UnicodeCategory values.</summary>
                 BDD MapCategoryCodeSetToCondition(Span<bool> catCodes)
                 {
                     // \w is so common, to help speed up construction we special-case it by using

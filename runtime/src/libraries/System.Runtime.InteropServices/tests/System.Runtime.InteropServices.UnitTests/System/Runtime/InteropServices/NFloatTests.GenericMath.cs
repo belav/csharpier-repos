@@ -4346,7 +4346,9 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)9223372036854775808.0, NumberBaseHelper<NFloat>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual((NFloat)9223372036854775808.0,
+                // NumberBaseHelper<NFloat>.CreateChecked<nuint>(unchecked((nuint)0x8000000000000000)));
+                //
                 // AssertBitwiseEqual((NFloat)18446744073709551615.0,NumberBaseHelper<NFloat>.CreateChecked<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
@@ -4365,8 +4367,10 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)2147483648.0f, NumberBaseHelper<NFloat>.CreateChecked<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual((NFloat)4294967295.0f, NumberBaseHelper<NFloat>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual((NFloat)2147483648.0f,
+                // NumberBaseHelper<NFloat>.CreateChecked<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual((NFloat)4294967295.0f,
+                // NumberBaseHelper<NFloat>.CreateChecked<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -5189,8 +5193,10 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)9223372036854775808.0, NumberBaseHelper<NFloat>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual((NFloat)18446744073709551615.0, NumberBaseHelper<NFloat>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual((NFloat)9223372036854775808.0,
+                // NumberBaseHelper<NFloat>.CreateSaturating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual((NFloat)18446744073709551615.0,
+                // NumberBaseHelper<NFloat>.CreateSaturating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -5208,8 +5214,10 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)2147483648.0f, NumberBaseHelper<NFloat>.CreateSaturating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual((NFloat)4294967295.0f, NumberBaseHelper<NFloat>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual((NFloat)2147483648.0f,
+                // NumberBaseHelper<NFloat>.CreateSaturating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual((NFloat)4294967295.0f,
+                // NumberBaseHelper<NFloat>.CreateSaturating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 
@@ -6032,8 +6040,10 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)9223372036854775808.0, NumberBaseHelper<NFloat>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
-                // AssertBitwiseEqual((NFloat)18446744073709551615.0, NumberBaseHelper<NFloat>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
+                // AssertBitwiseEqual((NFloat)9223372036854775808.0,
+                // NumberBaseHelper<NFloat>.CreateTruncating<nuint>(unchecked((nuint)0x8000000000000000)));
+                // AssertBitwiseEqual((NFloat)18446744073709551615.0,
+                // NumberBaseHelper<NFloat>.CreateTruncating<nuint>(unchecked((nuint)0xFFFFFFFFFFFFFFFF)));
             }
             else
             {
@@ -6051,8 +6061,10 @@ namespace System.Runtime.InteropServices.Tests
                 );
 
                 // https://github.com/dotnet/roslyn/issues/60714
-                // AssertBitwiseEqual((NFloat)2147483648.0f, NumberBaseHelper<NFloat>.CreateTruncating<nuint>((nuint)0x80000000));
-                // AssertBitwiseEqual((NFloat)4294967295.0f, NumberBaseHelper<NFloat>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
+                // AssertBitwiseEqual((NFloat)2147483648.0f,
+                // NumberBaseHelper<NFloat>.CreateTruncating<nuint>((nuint)0x80000000));
+                // AssertBitwiseEqual((NFloat)4294967295.0f,
+                // NumberBaseHelper<NFloat>.CreateTruncating<nuint>((nuint)0xFFFFFFFF));
             }
         }
 

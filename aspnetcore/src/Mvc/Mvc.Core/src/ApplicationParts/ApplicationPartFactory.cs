@@ -10,15 +10,18 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 /// Specifies a contract for synthesizing one or more <see cref="ApplicationPart"/> instances
 /// from an <see cref="Assembly"/>.
 /// <para>
-/// By default, Mvc registers each application assembly that it discovers as an <see cref="AssemblyPart"/>.
-/// Assemblies can optionally specify an <see cref="ApplicationPartFactory"/> to configure parts for the assembly
+/// By default, Mvc registers each application assembly that it discovers as an <see
+// cref="AssemblyPart"/>.
+/// Assemblies can optionally specify an <see cref="ApplicationPartFactory"/> to configure parts for
+// the assembly
 /// by using <see cref="ProvideApplicationPartFactoryAttribute"/>.
 /// </para>
 /// </summary>
 public abstract class ApplicationPartFactory
 {
     /// <summary>
-    /// Gets one or more <see cref="ApplicationPart"/> instances for the specified <paramref name="assembly"/>.
+    /// Gets one or more <see cref="ApplicationPart"/> instances for the specified <paramref
+    // name="assembly"/>.
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/>.</param>
     public abstract IEnumerable<ApplicationPart> GetApplicationParts(Assembly assembly);
@@ -26,7 +29,8 @@ public abstract class ApplicationPartFactory
     /// <summary>
     /// Gets the <see cref="ApplicationPartFactory"/> for the specified assembly.
     /// <para>
-    /// An assembly may specify an <see cref="ApplicationPartFactory"/> using <see cref="ProvideApplicationPartFactoryAttribute"/>.
+    /// An assembly may specify an <see cref="ApplicationPartFactory"/> using <see
+    // cref="ProvideApplicationPartFactoryAttribute"/>.
     /// Otherwise, <see cref="DefaultApplicationPartFactory"/> is used.
     /// </para>
     /// </summary>

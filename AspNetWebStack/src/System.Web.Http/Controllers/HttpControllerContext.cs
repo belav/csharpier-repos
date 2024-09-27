@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 using System.Web.Http.Routing;
@@ -89,7 +90,8 @@ namespace System.Web.Http.Controllers
         /// <remarks>The default constructor is intended for use by unit testing only.</remarks>
         public HttpControllerContext()
         {
-            // Note: This constructor is also used by a FormDataCollectionExtensions where we attempt to create a
+            // Note: This constructor is also used by a FormDataCollectionExtensions where we attempt to create
+            // a
             // controller context with incomplete request context.
             _requestContext = new HttpRequestContext();
         }

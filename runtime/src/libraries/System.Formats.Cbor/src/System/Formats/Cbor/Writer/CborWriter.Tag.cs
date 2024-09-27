@@ -11,7 +11,8 @@ namespace System.Formats.Cbor
     {
         /// <summary>Assign a semantic tag (major type 6) to the next data item.</summary>
         /// <param name="tag">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -30,9 +31,11 @@ namespace System.Formats.Cbor
             _isTagContext = true;
         }
 
-        /// <summary>Writes the provided value as a tagged date/time string, as described in RFC7049 section 2.4.1.</summary>
+        /// <summary>Writes the provided value as a tagged date/time string, as described in RFC7049 section
+        // 2.4.1.</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -55,9 +58,11 @@ namespace System.Formats.Cbor
             WriteTextString(dateString);
         }
 
-        /// <summary>Writes a unix time in seconds as a tagged date/time value, as described in RFC7049 section 2.4.1.</summary>
+        /// <summary>Writes a unix time in seconds as a tagged date/time value, as described in RFC7049
+        // section 2.4.1.</summary>
         /// <param name="seconds">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -68,10 +73,13 @@ namespace System.Formats.Cbor
             WriteInt64(seconds);
         }
 
-        /// <summary>Writes a unix time in seconds as a tagged date/time value, as described in RFC7049 section 2.4.1.</summary>
+        /// <summary>Writes a unix time in seconds as a tagged date/time value, as described in RFC7049
+        // section 2.4.1.</summary>
         /// <param name="seconds">The value to write.</param>
-        /// <exception cref="ArgumentException">The <paramref name="seconds" /> parameter cannot be infinite or NaN.</exception>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="ArgumentException">The <paramref name="seconds" /> parameter cannot be infinite
+        // or NaN.</exception>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -90,9 +98,11 @@ namespace System.Formats.Cbor
             WriteDouble(seconds);
         }
 
-        /// <summary>Writes the provided value as a tagged bignum encoding, as described in RFC7049 section 2.4.2.</summary>
+        /// <summary>Writes the provided value as a tagged bignum encoding, as described in RFC7049 section
+        // 2.4.2.</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -108,9 +118,11 @@ namespace System.Formats.Cbor
             WriteByteString(unsignedBigEndianEncoding);
         }
 
-        /// <summary>Writes the provided value value as a tagged decimal fraction encoding, as described in RFC7049 section 2.4.3</summary>
+        /// <summary>Writes the provided value value as a tagged decimal fraction encoding, as described in
+        // RFC7049 section 2.4.3</summary>
         /// <param name="value">The value to write.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>

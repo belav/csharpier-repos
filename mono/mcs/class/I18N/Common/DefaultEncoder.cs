@@ -1,4 +1,5 @@
-// This is partially copied source from referencesource/mscorlib/system/text/encoding.cs, modifying a bit.
+// This is partially copied source from referencesource/mscorlib/system/text/encoding.cs, modifying
+// a bit.
 
 // ==++==
 //
@@ -68,12 +69,12 @@ namespace I18N.Common
             Encoder encoder = m_encoding.GetEncoder();
             /*
             if (m_fallback != null)
-                encoder.m_fallback = m_fallback;
+            encoder.m_fallback = m_fallback;
             if (charLeftOver != (char) 0)
             {
-                EncoderNLS encoderNls = encoder as EncoderNLS;
-                if (encoderNls != null)
-                    encoderNls.charLeftOver = charLeftOver;
+            EncoderNLS encoderNls = encoder as EncoderNLS;
+            if (encoderNls != null)
+            encoderNls.charLeftOver = charLeftOver;
             }
             */
             return encoder;

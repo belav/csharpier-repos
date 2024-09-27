@@ -12,13 +12,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
     /// Debug information maintained for each lambda.
     /// </summary>
     /// <remarks>
-    /// The information is emitted to PDB in Custom Debug Information record for a method containing the lambda.
+    /// The information is emitted to PDB in Custom Debug Information record for a method containing the
+    // lambda.
     /// </remarks>
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     internal readonly struct LambdaDebugInfo : IEquatable<LambdaDebugInfo>
     {
         /// <summary>
-        /// The syntax offset of the syntax node declaring the lambda (lambda expression) or its body (lambda in a query).
+        /// The syntax offset of the syntax node declaring the lambda (lambda expression) or its body
+        // (lambda in a query).
         /// </summary>
         public readonly int SyntaxOffset;
 

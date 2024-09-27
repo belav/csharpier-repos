@@ -34,7 +34,8 @@ namespace System.Data.Objects.DataClasses
         /// Parent may be an Entity or ComplexObject
         /// </summary>
         /// <param name="parent">Object to be added to.</param>
-        /// <param name="parentPropertyName">The property on the parent that reference the complex type.</param>
+        /// <param name="parentPropertyName">The property on the parent that reference the complex
+        // type.</param>
         internal void AttachToParent(StructuralObject parent, string parentPropertyName)
         {
             Debug.Assert(null != parent, "Attempt to attach to a null parent");
@@ -83,7 +84,8 @@ namespace System.Data.Objects.DataClasses
 
             base.ReportPropertyChanging(property);
 
-            // Since we are a ComplexObject, all changes (scalar or complex) are considered complex property changes
+            // Since we are a ComplexObject, all changes (scalar or complex) are considered complex property
+            // changes
             ReportComplexPropertyChanging(null, this, property);
         }
 
@@ -96,7 +98,8 @@ namespace System.Data.Objects.DataClasses
         {
             EntityUtil.CheckStringArgument(property, "property");
 
-            // Since we are a ComplexObject, all changes (scalar or complex) are considered complex property changes
+            // Since we are a ComplexObject, all changes (scalar or complex) are considered complex property
+            // changes
             ReportComplexPropertyChanged(null, this, property);
 
             base.ReportPropertyChanged(property);
@@ -108,12 +111,14 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// This method is used to report all changes on this ComplexObject to its parent entity or ComplexObject
+        /// This method is used to report all changes on this ComplexObject to its parent entity or
+        // ComplexObject
         /// </summary>
         /// <param name="entityMemberName">
         /// Should be null in this method override.
         /// This is only relevant in Entity's implementation of this method, so it is unused here
-        /// Instead of passing the most-derived property name up the hierarchy, we will always pass the current _parentPropertyName
+        /// Instead of passing the most-derived property name up the hierarchy, we will always pass the
+        // current _parentPropertyName
         /// Once this gets up to the Entity, it will actually use the value that was passed in
         /// </param>
         /// <param name="complexObject">
@@ -128,7 +133,8 @@ namespace System.Data.Objects.DataClasses
             string complexMemberName
         )
         {
-            // entityMemberName is unused here because we just keep passing the current parent name up the hierarchy
+            // entityMemberName is unused here because we just keep passing the current parent name up the
+            // hierarchy
             // This value is only used in the EntityObject override of this method
 
             Debug.Assert(complexObject != null, "invalid complexObject");
@@ -145,12 +151,14 @@ namespace System.Data.Objects.DataClasses
         }
 
         /// <summary>
-        /// This method is used to report all changes on this ComplexObject to its parent entity or ComplexObject
+        /// This method is used to report all changes on this ComplexObject to its parent entity or
+        // ComplexObject
         /// </summary>
         /// <param name="entityMemberName">
         /// Should be null in this method override.
         /// This is only relevant in Entity's implementation of this method, so it is unused here
-        /// Instead of passing the most-derived property name up the hierarchy, we will always pass the current _parentPropertyName
+        /// Instead of passing the most-derived property name up the hierarchy, we will always pass the
+        // current _parentPropertyName
         /// Once this gets up to the Entity, it will actually use the value that was passed in.
         /// </param>
         /// <param name="complexObject">
@@ -165,7 +173,8 @@ namespace System.Data.Objects.DataClasses
             string complexMemberName
         )
         {
-            // entityMemberName is unused here because we just keep passing the current parent name up the hierarchy
+            // entityMemberName is unused here because we just keep passing the current parent name up the
+            // hierarchy
             // This value is only used in the EntityObject override of this method
 
             Debug.Assert(complexObject != null, "invalid complexObject");

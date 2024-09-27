@@ -90,7 +90,8 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
             var healthCheck = registration.Factory(scope.ServiceProvider);
 
             // If the health check does things like make Database queries using EF or backend HTTP calls,
-            // it may be valuable to know that logs it generates are part of a health check. So we start a scope.
+            // it may be valuable to know that logs it generates are part of a health check. So we start a
+            // scope.
             using (_logger.BeginScope(new HealthCheckLogScope(registration.Name)))
             {
                 var stopwatch = ValueStopwatch.StartNew();
@@ -208,7 +209,8 @@ internal sealed partial class DefaultHealthCheckService : HealthCheckService
         public const int HealthCheckErrorId = 104;
         public const int HealthCheckDataId = 105;
 
-        // Hard code the event names to avoid breaking changes. Even if the methods are renamed, these hard-coded names shouldn't change.
+        // Hard code the event names to avoid breaking changes. Even if the methods are renamed, these
+        // hard-coded names shouldn't change.
         public const string HealthCheckProcessingBeginName = "HealthCheckProcessingBegin";
         public const string HealthCheckProcessingEndName = "HealthCheckProcessingEnd";
         public const string HealthCheckBeginName = "HealthCheckBegin";

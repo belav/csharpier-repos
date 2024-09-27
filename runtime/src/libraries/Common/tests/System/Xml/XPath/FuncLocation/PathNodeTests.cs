@@ -489,7 +489,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Expected: Selects node of same type AND name.
-        /// Set node test to return node with same name but different type (return attribute with name of para and also have child element with name of para).
+        /// Set node test to return node with same name but different type (return attribute with name of
+        // para and also have child element with name of para).
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -524,7 +525,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Expected: Selects node of same type AND name.
-        /// Set node test to return node with same name but different type (return element with name of para and also have an attribute with name of para).
+        /// Set node test to return node with same name but different type (return element with name of para
+        // and also have an attribute with name of para).
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -557,7 +559,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// QName of only the principal node type can be used in the node test. For child axis it is the element node type.
+        /// QName of only the principal node type can be used in the node test. For child axis it is the
+        // element node type.
         /// /bookstore/child::book
         /// </summary>
         [Theory]
@@ -653,7 +656,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// QName of only the principal node type can be used in the node test. The test expression uses name of an attribute. Expected empty node-set.
+        /// QName of only the principal node type can be used in the node test. The test expression uses
+        // name of an attribute. Expected empty node-set.
         /// /bookstore/magazine/child::frequency
         /// </summary>
         [Theory]

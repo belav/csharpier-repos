@@ -23,8 +23,10 @@ namespace System.Configuration
         // Add a stream to the list of streams to intercept.
         //
         // Parameters:
-        //  alwaysIntercept -   If true, then don't check whether the old stream and the new stream are the same.
-        //                      SaveAs() will set this to true if oldStreamname is actually referring to a stream
+        //  alwaysIntercept -   If true, then don't check whether the old stream and the new stream are the
+        // same.
+        //                      SaveAs() will set this to true if oldStreamname is actually referring to a
+        // stream
         //                      on a remote machine.
         internal void AddStreamname(
             string oldStreamname,

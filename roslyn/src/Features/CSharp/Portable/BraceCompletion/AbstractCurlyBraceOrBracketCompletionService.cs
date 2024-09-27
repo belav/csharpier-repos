@@ -46,8 +46,10 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             CancellationToken cancellationToken
         )
         {
-            // After the closing brace is completed we need to format the span from the opening point to the closing point.
-            // E.g. when the user triggers completion for an if statement ($$ is the caret location) we insert braces to get
+            // After the closing brace is completed we need to format the span from the opening point to the
+            // closing point.
+            // E.g. when the user triggers completion for an if statement ($$ is the caret location) we insert
+            // braces to get
             // if (true){$$}
             // We then need to format this to
             // if (true) { $$}
@@ -113,7 +115,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             var originalDocumentText = document.Text;
 
             // check whether shape of the braces are what we support
-            // shape must be either "{|}" or "{ }". | is where caret is. otherwise, we don't do any special behavior
+            // shape must be either "{|}" or "{ }". | is where caret is. otherwise, we don't do any special
+            // behavior
             if (!ContainsOnlyWhitespace(originalDocumentText, openingPoint, closingPoint))
             {
                 return null;
@@ -127,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 .LineNumber;
 
             // If there are already multiple empty lines between the braces, don't do anything.
-            // We need to allow a single empty line between the braces to account for razor scenarios where they insert a line.
+            // We need to allow a single empty line between the braces to account for razor scenarios where they
+            // insert a line.
             if (closingPointLine - openingPointLine > 2)
             {
                 return null;
@@ -235,7 +239,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
             {
                 // The new line edit is calculated against the original text, d0, to get text d1.
                 // The formatting edits are calculated against d1 to get text d2.
-                // Merge the formatting and new line edits into a set of whitespace only text edits that all apply to d0.
+                // Merge the formatting and new line edits into a set of whitespace only text edits that all apply
+                // to d0.
                 if (!newLineEdit.HasValue)
                     return formattingChanges;
 
@@ -255,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
                 {
                     var newTextChangeSpan = newRange.Span;
                     // Get the text to put in the text change by looking at the span in the formatted text.
-                    // As the new range start is relative to the original text, we need to adjust it assuming the previous changes were applied
+                    // As the new range start is relative to the original text, we need to adjust it assuming the
+                    // previous changes were applied
                     // to get the correct start location in the formatted text.
                     // E.g. with changes
                     //     1. Insert "hello" at 2

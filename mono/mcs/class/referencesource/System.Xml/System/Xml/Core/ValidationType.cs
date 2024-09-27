@@ -19,9 +19,12 @@ namespace System.Xml
         //    process the DTD declarations such that default attributes and general entities will
         //    be made available. General entities are only loaded and parsed if they are used (expanded).
         // 3) If there is no <!DOCTYPE ...> declaration but there is an XSD "schemaLocation" attribute,
-        //    it will load and process those XSD schemas and it will return any default attributes defined in those schemas.
-        // 4) If there is no <!DOCTYPE ...&> declaration and no XSD "schemaLocation" attribute but there are some namespaces
-        //    using the MSXML "x-schema:" URN prefix, it will load and process those schemas and it will return any default
+        //    it will load and process those XSD schemas and it will return any default attributes defined
+        // in those schemas.
+        // 4) If there is no <!DOCTYPE ...&> declaration and no XSD "schemaLocation" attribute but there are
+        // some namespaces
+        //    using the MSXML "x-schema:" URN prefix, it will load and process those schemas and it will
+        // return any default
         //    attributes defined in those schemas.
         [Obsolete("Validation type should be specified as DTD or Schema.")]
         Auto,
@@ -33,7 +36,8 @@ namespace System.Xml
         [Obsolete("XDR Validation through XmlValidatingReader is obsoleted")]
         XDR,
 
-        // Validate according to W3C XSD schemas, including inline schemas. An error is returned if both XDR and XSD schemas
+        // Validate according to W3C XSD schemas, including inline schemas. An error is returned if both XDR
+        // and XSD schemas
         // are referenced from the same document.
         Schema,
     }

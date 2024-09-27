@@ -78,9 +78,11 @@ namespace System.Data.Common.QueryCache
         #region Construction and Initialization
 
         /// <summary>
-        /// Constructs a new Query Cache Manager instance, with default values for all 'configurable' parameters.
+        /// Constructs a new Query Cache Manager instance, with default values for all 'configurable'
+        // parameters.
         /// </summary>
-        /// <returns>A new instance of <see cref="QueryCacheManager"/> configured with default entry count, load factor and recycle period</returns>
+        /// <returns>A new instance of <see cref="QueryCacheManager"/> configured with default entry count,
+        // load factor and recycle period</returns>
         internal static QueryCacheManager Create()
         {
             return new QueryCacheManager(
@@ -102,7 +104,8 @@ namespace System.Data.Common.QueryCache
         ///   Must be greater than 0 and less than or equal to 1.0
         /// </param>
         /// <param name="recycleMillis">
-        ///   The interval, in milliseconds, at which the number of entries will be compared to the load factor
+        ///   The interval, in milliseconds, at which the number of entries will be compared to the load
+        // factor
         ///   and eviction carried out if necessary.
         /// </param>
         private QueryCacheManager(int maximumSize, float loadFactor, int recycleMillis)
@@ -265,7 +268,8 @@ namespace System.Data.Common.QueryCache
         /// It should take no action beyond invoking the <see cref="SweepCache"/> method on the
         /// cache manager instance passed as <paramref name="state"/>.
         /// </summary>
-        /// <param name="state">The cache manager instance on which the 'recycle' handler should be invoked</param>
+        /// <param name="state">The cache manager instance on which the 'recycle' handler should be
+        // invoked</param>
         private static void CacheRecyclerHandler(object state)
         {
             ((QueryCacheManager)state).SweepCache();
@@ -365,7 +369,8 @@ namespace System.Data.Common.QueryCache
         #endregion
 
         /// <summary>
-        /// Periodically invokes cache cleanup logic on a specified <see cref="QueryCacheManager"/> instance,
+        /// Periodically invokes cache cleanup logic on a specified <see cref="QueryCacheManager"/>
+        // instance,
         /// and allows this periodic callback to be suspended, resumed or stopped in a thread-safe way.
         /// </summary>
         private sealed class EvictionTimer
@@ -406,12 +411,15 @@ namespace System.Data.Common.QueryCache
 
             /// <summary>
             /// Permanently stops the eviction timer.
-            /// It will no longer generate periodic callbacks and further calls to <see cref="Suspend"/>, <see cref="Resume"/>, or <see cref="Stop"/>,
+            /// It will no longer generate periodic callbacks and further calls to <see cref="Suspend"/>, <see
+            // cref="Resume"/>, or <see cref="Stop"/>,
             /// though thread-safe, will have no effect.
             /// </summary>
             /// <returns>
-            ///   If this eviction timer has already been stopped (using the <see cref="Stop"/> method), returns <c>false</c>;
-            ///   otherwise, returns <c>true</c> to indicate that the call successfully stopped and cleaned up the underlying timer instance.
+            ///   If this eviction timer has already been stopped (using the <see cref="Stop"/> method), returns
+            // <c>false</c>;
+            ///   otherwise, returns <c>true</c> to indicate that the call successfully stopped and cleaned up
+            // the underlying timer instance.
             /// </returns>
             /// <remarks>
             ///   Thread safe. May be called regardless of the current state of the eviction timer.
@@ -438,9 +446,12 @@ namespace System.Data.Common.QueryCache
             /// Pauses the operation of the eviction timer.
             /// </summary>
             /// <returns>
-            ///   If this eviction timer has already been stopped (using the <see cref="Stop"/> method), returns <c>false</c>;
-            ///   otherwise, returns <c>true</c> to indicate that the call successfully suspended the inderlying <see cref="Timer"/>
-            ///   and no further periodic callbacks will be generated until the <see cref="Resume"/> method is called.
+            ///   If this eviction timer has already been stopped (using the <see cref="Stop"/> method), returns
+            // <c>false</c>;
+            ///   otherwise, returns <c>true</c> to indicate that the call successfully suspended the inderlying
+            // <see cref="Timer"/>
+            ///   and no further periodic callbacks will be generated until the <see cref="Resume"/> method is
+            // called.
             /// </returns>
             /// <remarks>
             ///   Thread-safe. May be called regardless of the current state of the eviction timer.
@@ -463,7 +474,8 @@ namespace System.Data.Common.QueryCache
             }
 
             /// <summary>
-            /// Causes this eviction timer to generate periodic callbacks, provided it has not been permanently stopped (using the <see cref="Stop"/> method).
+            /// Causes this eviction timer to generate periodic callbacks, provided it has not been permanently
+            // stopped (using the <see cref="Stop"/> method).
             /// </summary>
             /// <remarks>
             ///   Thread-safe. May be called regardless of the current state of the eviction timer.

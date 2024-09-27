@@ -21,8 +21,10 @@ namespace System.Runtime.CompilerServices
         // we use that for preemption.
         //
         // versionNum is a monotonically increasing numerical tag.
-        // Writer "claims" entry by atomically incrementing the tag. Thus odd number indicates an entry in progress.
-        // Upon completion of adding an entry the tag is incremented again making it even. Even number indicates a complete entry.
+        // Writer "claims" entry by atomically incrementing the tag. Thus odd number indicates an entry in
+        // progress.
+        // Upon completion of adding an entry the tag is incremented again making it even. Even number
+        // indicates a complete entry.
         //
         // Readers will read the version twice before and after retrieving the entry.
         // To have a usable entry both reads must yield the same even version.
@@ -89,7 +91,8 @@ namespace System.Runtime.CompilerServices
 
             _table =
 #if !DEBUG
-                // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in Set.
+                // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in
+                // Set.
                 CreateCacheTable(initialCacheSize) ??
 #endif
                 s_sentinelTable!;
@@ -160,7 +163,8 @@ namespace System.Runtime.CompilerServices
 
                 // NOTE: We could store hash as a part of entry info and compare hash before comparing keys.
                 //       Space-wise it would typically be free because of alignment.
-                //       However, hash compare would be advantageous only if it is much cheaper than the key compare.
+                //       However, hash compare would be advantageous only if it is much cheaper than the key
+                // compare.
                 //       That is not the case for current uses of this cache, so for now we do not store
                 //       hash and just do direct comparing of keys. (hash compare can be easily added, if needed)
                 if (key.Equals(pEntry._key))
@@ -232,7 +236,8 @@ namespace System.Runtime.CompilerServices
 
             ref Entry tableData = ref TableData(table);
 
-            // Fibonacci hash reduces the value into desired range by shifting right by the number of leading zeroes in 'size-1'
+            // Fibonacci hash reduces the value into desired range by shifting right by the number of leading
+            // zeroes in 'size-1'
             byte shift = (byte)BitOperations.LeadingZeroCount((nuint)(size - 1));
             HashShift(table) = shift;
 
@@ -281,8 +286,10 @@ namespace System.Runtime.CompilerServices
 
                     if ((version & VERSION_NUM_MASK) >= (VERSION_NUM_MASK - 2))
                     {
-                        // If exactly VERSION_NUM_MASK updates happens between here and publishing, we may not recognize a race.
-                        // It is extremely unlikely, but to not worry about the possibility, lets not allow version to go this high and just get a new cache.
+                        // If exactly VERSION_NUM_MASK updates happens between here and publishing, we may not recognize a
+                        // race.
+                        // It is extremely unlikely, but to not worry about the possibility, lets not allow version to go
+                        // this high and just get a new cache.
                         // This will not happen often.
                         FlushCurrentCache();
                         return;
@@ -352,8 +359,10 @@ namespace System.Runtime.CompilerServices
 
                 if ((version & VERSION_NUM_MASK) >= (VERSION_NUM_MASK - 2))
                 {
-                    // If exactly VERSION_NUM_MASK updates happens between here and publishing, we may not recognize a race.
-                    // It is extremely unlikely, but to not worry about the possibility, lets not allow version to go this high and just get a new cache.
+                    // If exactly VERSION_NUM_MASK updates happens between here and publishing, we may not recognize a
+                    // race.
+                    // It is extremely unlikely, but to not worry about the possibility, lets not allow version to go
+                    // this high and just get a new cache.
                     // This will not happen often.
                     FlushCurrentCache();
                     return;

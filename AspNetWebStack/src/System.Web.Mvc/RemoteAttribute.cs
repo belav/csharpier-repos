@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -77,7 +78,8 @@ namespace System.Web.Mvc
         /// <param name="action">The route name.</param>
         /// <param name="controller">The name of the controller.</param>
         /// <param name="areaReference">
-        /// Find the controller in the root if <see cref="AreaReference.UseRoot"/>. Otherwise look in the current area.
+        /// Find the controller in the root if <see cref="AreaReference.UseRoot"/>. Otherwise look in the
+        // current area.
         /// </param>
         public RemoteAttribute(string action, string controller, AreaReference areaReference)
             : this(action, controller)

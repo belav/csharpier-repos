@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * An object that can rollback edits.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* An object that can rollback edits.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.ComponentModel
 {
     using System.Diagnostics;

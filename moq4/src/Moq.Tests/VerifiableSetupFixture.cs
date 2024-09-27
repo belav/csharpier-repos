@@ -31,12 +31,12 @@ namespace Moq.Tests
         {
             VerifyFailsFastWhenUpperBoundExceeded(Times.AtMost(2));
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private void VerifyFailsFastWhenUpperBoundExceeded(Times times)
-            After:
-                    void VerifyFailsFastWhenUpperBoundExceeded(Times times)
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void VerifyFailsFastWhenUpperBoundExceeded(Times times)
+After:
+void VerifyFailsFastWhenUpperBoundExceeded(Times times)
+*/
         }
 
         void VerifyFailsFastWhenUpperBoundExceeded(Times times)
@@ -143,8 +143,10 @@ namespace Moq.Tests
         [Fact]
         public void Verifiable_Times_can_be_used_to_verify_invocation_count_of_reused_mutable_arguments()
         {
-            // First, let's introduce the problem: mutating a reused, reference-typed argument affects the recorded invocations,
-            // meaning `mock.Verify(call, times)` will only see the final object state instead of the state as it was during the invocations:
+            // First, let's introduce the problem: mutating a reused, reference-typed argument affects the
+            // recorded invocations,
+            // meaning `mock.Verify(call, times)` will only see the final object state instead of the state as
+            // it was during the invocations:
             var mock1 = new Mock<IX>();
             var mutableArg1 = new MutableArg { Value = 1 };
             mock1.Object.Method(mutableArg1);
@@ -158,7 +160,8 @@ namespace Moq.Tests
                     )
             );
 
-            // This can be worked around by explicitly setting up the call and specifying the expected number of calls upfront:
+            // This can be worked around by explicitly setting up the call and specifying the expected number of
+            // calls upfront:
             var mock2 = new Mock<IX>();
             mock2
                 .Setup(m => m.Method(It.Is<MutableArg>(arg => arg.Value is int)))

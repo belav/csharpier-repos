@@ -10,9 +10,9 @@
 using System;
 
 /*********************************************************************
- * NOTE: A copy of this file exists at: WF\Common\Shared
- * The two files must be kept in sync.  Any change made here must also
- * be made to WF\Common\Shared\AssemblyRef.cs
+* NOTE: A copy of this file exists at: WF\Common\Shared
+* The two files must be kept in sync.  Any change made here must also
+* be made to WF\Common\Shared\AssemblyRef.cs
 *********************************************************************/
 
 namespace System.Workflow.Activities.Common

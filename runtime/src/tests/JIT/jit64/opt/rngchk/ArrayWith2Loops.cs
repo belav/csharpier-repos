@@ -62,9 +62,9 @@ namespace SimpleArray_01
 
     internal class Test
     {
-        /********************************************************************************************
-        * RngChk shall not be eliminated inner loop uppbound is modified in the outer loop
-        *********************************************************************************************/
+/********************************************************************************************
+* RngChk shall not be eliminated inner loop uppbound is modified in the outer loop
+*********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test1()
         {
@@ -81,9 +81,10 @@ namespace SimpleArray_01
             }
         }
 
-        /********************************************************************************************
-        * RngChk shall not be eliminated if induction vairable is modified through function call in the outer loop
-        ********************************************************************************************/
+/********************************************************************************************
+* RngChk shall not be eliminated if induction vairable is modified through function call in the
+outer loop
+********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test2()
         {
@@ -100,9 +101,10 @@ namespace SimpleArray_01
             }
         }
 
-        /********************************************************************************************
-        * RngChk shall not be eliminated if induction vairable is modified through function call in the inner loop
-        ********************************************************************************************/
+/********************************************************************************************
+* RngChk shall not be eliminated if induction vairable is modified through function call in the
+inner loop
+********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test3()
         {
@@ -118,9 +120,9 @@ namespace SimpleArray_01
             }
         }
 
-        /********************************************************************************************
-        * RngChk shall not be eliminated outer loop uppbound is modified in the inner loop
-        *********************************************************************************************/
+/********************************************************************************************
+* RngChk shall not be eliminated outer loop uppbound is modified in the inner loop
+*********************************************************************************************/
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void Test4()
         {

@@ -8,7 +8,8 @@ namespace System.Net.NetworkInformation
         /// Gets the Internet Protocol (IP) address.
         public abstract IPAddress Address { get; }
 
-        /// Gets a bool value that indicates whether the Internet Protocol (IP) address is legal to appear in a Domain Name System (DNS) server database.
+        /// Gets a bool value that indicates whether the Internet Protocol (IP) address is legal to appear
+        // in a Domain Name System (DNS) server database.
         public abstract bool IsDnsEligible { get; }
 
         /// Gets a bool value that indicates whether the Internet Protocol (IP) address is transient.

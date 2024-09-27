@@ -11,7 +11,8 @@ namespace System
     // The class is used as a base for custom uri parsing and derived Uri factoring.
     // A set of protected .ctors allows to hookup on the builtin parser behaviors.
     //
-    // A developer must implement at least internal default .ctor to participate in the Uri extensibility game.
+    // A developer must implement at least internal default .ctor to participate in the Uri
+    // extensibility game.
     //
     public abstract partial class UriParser
     {
@@ -72,7 +73,8 @@ namespace System
 
             Debug.Assert(sizeof(Uri.Flags) == sizeof(ulong));
 
-            // If ParseMinimal is called multiple times this Uri instance may be corrupted, throw an exception instead
+            // If ParseMinimal is called multiple times this Uri instance may be corrupted, throw an exception
+            // instead
             ulong previous = Interlocked.Or(
                 ref Unsafe.As<Uri.Flags, ulong>(ref uri._flags),
                 (ulong)Uri.Flags.CustomParser_ParseMinimalAlreadyCalled

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.IO;
 using System.Text;
@@ -7,7 +8,8 @@ using System.Text;
 namespace System.CommandLine.IO
 {
     /// <summary>
-    /// Provides access to in-memory standard streams that are not attached to <see cref="System.Console"/>.
+    /// Provides access to in-memory standard streams that are not attached to <see
+    // cref="System.Console"/>.
     /// </summary>
     public class TestConsole : IConsole
     {

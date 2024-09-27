@@ -32,7 +32,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.integeregereraction.com
             catch (Exception e)
             {
                 result++;
-                //System.Console.WriteLine("Catch an unknown exception when run test {0}, \nexception: {1}", testmethod.Method.Name, e.ToString());
+                //System.Console.WriteLine("Catch an unknown exception when run test {0}, \nexception: {1}",
+                // testmethod.Method.Name, e.ToString());
             }
 
             return result;

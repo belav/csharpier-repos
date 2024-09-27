@@ -128,7 +128,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MisplacedUsingDirectives
             // Only report for non-global usings.  Global usings must stay at the compilation unit level.
             var nonGlobalUsings = compilationUnit.Usings.Where(u => u.GlobalKeyword == default);
 
-            // Note: We will report diagnostics when a code file contains multiple namespaces even though we will not
+            // Note: We will report diagnostics when a code file contains multiple namespaces even though we
+            // will not
             // offer a code fix in these cases.
             ReportDiagnostics(context, s_insideDiagnosticDescriptor, nonGlobalUsings, option);
         }

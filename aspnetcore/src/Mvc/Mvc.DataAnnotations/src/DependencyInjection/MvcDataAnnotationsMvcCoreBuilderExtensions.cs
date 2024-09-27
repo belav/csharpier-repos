@@ -39,11 +39,13 @@ public static class MvcDataAnnotationsMvcCoreBuilderExtensions
     }
 
     /// <summary>
-    /// Registers an action to configure <see cref="MvcDataAnnotationsLocalizationOptions"/> for MVC data
+    /// Registers an action to configure <see cref="MvcDataAnnotationsLocalizationOptions"/> for MVC
+    // data
     /// annotations localization.
     /// </summary>
     /// <param name="builder">The <see cref="IMvcBuilder"/>.</param>
-    /// <param name="setupAction">An <see cref="Action{MvcDataAnnotationsLocalizationOptions}"/>.</param>
+    /// <param name="setupAction">An <see
+    // cref="Action{MvcDataAnnotationsLocalizationOptions}"/>.</param>
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcCoreBuilder AddDataAnnotationsLocalization(
         this IMvcCoreBuilder builder,

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification
                 || token.IsKind(SyntaxKind.DiscardDesignation)
             )
             {
-                // When classifying `_`, IsKeywordKind handles UnderscoreToken, but need to additional check for DiscardDesignation
+                // When classifying `_`, IsKeywordKind handles UnderscoreToken, but need to additional check for
+                // DiscardDesignation
                 return ClassificationTypeNames.Keyword;
             }
             else if (SyntaxFacts.IsPunctuation(token.Kind()))

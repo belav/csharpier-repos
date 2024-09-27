@@ -8,8 +8,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.IO.Packaging
 {
     /// <summary>
-    /// A collection that ensures uniqueness among a list of elements while maintaining the order in which the elements were added.
-    /// This is similar to <see cref="OrderedDictionary{TKey, TValue}"/>, but the items will not be sorted by a comparer but rather retain the
+    /// A collection that ensures uniqueness among a list of elements while maintaining the order in
+    // which the elements were added.
+    /// This is similar to <see cref="OrderedDictionary{TKey, TValue}"/>, but the items will not be
+    // sorted by a comparer but rather retain the
     /// order in which they were added while still retaining good lookup, insertion, and removal.
     /// </summary>
     internal sealed class OrderedDictionary<TKey, TValue> : IEnumerable<TValue>

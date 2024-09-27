@@ -11,13 +11,16 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         The principal data structure used by a compiled query during execution.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public abstract class QueryContext : IParameterValues
 {
@@ -30,7 +33,8 @@ public abstract class QueryContext : IParameterValues
     ///         Creates a new <see cref="QueryContext" /> instance.
     ///     </para>
     ///     <para>
-    ///         This type is typically used by database providers (and other extensions). It is generally
+    ///         This type is typically used by database providers (and other extensions). It is
+    // generally
     ///         not used in application code.
     ///     </para>
     /// </summary>
@@ -110,17 +114,22 @@ public abstract class QueryContext : IParameterValues
     /// <summary>
     ///     Initializes the <see cref="IStateManager" /> to be used with this QueryContext.
     /// </summary>
-    /// <param name="standAlone">Whether a stand-alone <see cref="IStateManager" /> should be created to perform identity resolution.</param>
+    /// <param name="standAlone">Whether a stand-alone <see cref="IStateManager" /> should be created to
+    // perform identity resolution.</param>
     public virtual void InitializeStateManager(bool standAlone = false) =>
         _stateManager ??= standAlone
             ? new StateManager(Dependencies.StateManager.Dependencies)
             : Dependencies.StateManager;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual InternalEntityEntry? TryGetEntry(
@@ -134,10 +143,14 @@ public abstract class QueryContext : IParameterValues
         _stateManager!.TryGetEntry(key, keyValues, throwOnNullKey, out hasNullKey);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual InternalEntityEntry StartTracking(

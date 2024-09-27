@@ -78,11 +78,11 @@ namespace System.Security.Policy
                 }
             }
 
-            /*			if ((version < minimumVersion) || (version > maximumVersion)) {
-                            string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
-                            msg = String.Format (msg, version, minimumVersion, maximumVersion);
-                            throw new ArgumentException (msg, parameterName);
-                        }*/
+/*			if ((version < minimumVersion) || (version > maximumVersion)) {
+string msg = Locale.GetText ("Unknown version '{0}', expected versions between ['{1}','{2}'].");
+msg = String.Format (msg, version, minimumVersion, maximumVersion);
+throw new ArgumentException (msg, parameterName);
+}*/
             return version;
         }
 

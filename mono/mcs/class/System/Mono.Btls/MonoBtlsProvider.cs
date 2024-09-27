@@ -238,11 +238,11 @@ namespace Mono.Btls
             using (var store = new MonoBtlsX509Store())
             using (var storeCtx = new MonoBtlsX509StoreCtx())
             {
-                /*
-                 * We're called from X509Certificate2.Verify() via X509CertificateImplBtls.Verify().
-                 *
-                 * Use the default settings and assume client-mode.
-                 */
+/*
+* We're called from X509Certificate2.Verify() via X509CertificateImplBtls.Verify().
+*
+* Use the default settings and assume client-mode.
+*/
                 SetupCertificateStore(store, MonoTlsSettings.DefaultSettings, false);
 
                 storeCtx.Initialize(store, chain);
@@ -387,13 +387,13 @@ namespace Mono.Btls
             bool server
         )
         {
-            /*
-             * In server-mode, we only add certificates which are explicitly trusted via
-             * MonoTlsSettings.TrustAnchors.
-             *
-             * MonoTlsSettings.CertificateSearchPaths is ignored on Android.
-             *
-             */
+/*
+* In server-mode, we only add certificates which are explicitly trusted via
+* MonoTlsSettings.TrustAnchors.
+*
+* MonoTlsSettings.CertificateSearchPaths is ignored on Android.
+*
+*/
 
 #if MONODROID
             AddTrustedRoots(store, settings, server);

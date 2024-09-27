@@ -11,11 +11,13 @@ using Internal.Runtime.CompilerServices;
 
 namespace System.Diagnostics.Tracing
 {
-    // This is part of the NativeRuntimeEventsource, which is the managed version of the Microsoft-Windows-DotNETRuntime provider.
+    // This is part of the NativeRuntimeEventsource, which is the managed version of the
+    // Microsoft-Windows-DotNETRuntime provider.
     // It contains the runtime specific interop to native event sinks.
     internal sealed partial class NativeRuntimeEventSource : EventSource
     {
-        // We don't have these keywords defined from the genRuntimeEventSources.py, so we need to manually define them here.
+        // We don't have these keywords defined from the genRuntimeEventSources.py, so we need to manually
+        // define them here.
         public static partial class Keywords
         {
             public const EventKeywords ContentionKeyword = (EventKeywords)0x4000;

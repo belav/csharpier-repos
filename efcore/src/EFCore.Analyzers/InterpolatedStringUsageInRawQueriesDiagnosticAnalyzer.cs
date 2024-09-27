@@ -109,7 +109,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
 
         Debug.Assert(correctFromSqlRaw is not null, "Unable to find original `FromSqlRaw` method");
 
-        // Verify that the method is the one we analyze and its second argument, which corresponds to `string sql`, is an interpolated string
+        // Verify that the method is the one we analyze and its second argument, which corresponds to
+        // `string sql`, is an interpolated string
         if (
             correctFromSqlRaw is null
             || !targetMethod.ConstructedFrom.Equals(
@@ -122,7 +123,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             return false;
         }
 
-        // Report warning if interpolated string is not a constant and all its interpolations are not constants
+        // Report warning if interpolated string is not a constant and all its interpolations are not
+        // constants
         return AnalyzeInterpolatedString(interpolatedString);
     }
 
@@ -166,15 +168,18 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             }
         }
 
-        // At this point assume that the method is correct since both `ExecuteSqlRaw` and `ExecuteSqlRawAsync` have multiple overloads.
+        // At this point assume that the method is correct since both `ExecuteSqlRaw` and
+        // `ExecuteSqlRawAsync` have multiple overloads.
         // Checking for every possible one is too much work for almost no gain.
-        // So check whether the second argument, that corresponds to `string sql` parameter, is an interpolated string...
+        // So check whether the second argument, that corresponds to `string sql` parameter, is an
+        // interpolated string...
         if (invocation.Arguments[1].Value is not IInterpolatedStringOperation interpolatedString)
         {
             return false;
         }
 
-        // ...and report warning if interpolated string is not a constant and all its interpolations are not constants
+        // ...and report warning if interpolated string is not a constant and all its interpolations are not
+        // constants
         return AnalyzeInterpolatedString(interpolatedString);
     }
 
@@ -192,7 +197,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             "Unable to find original `SqlQueryRaw` method"
         );
 
-        // Verify that the method is the one we analyze and its second argument, which corresponds to `string sql`, is an interpolated string
+        // Verify that the method is the one we analyze and its second argument, which corresponds to
+        // `string sql`, is an interpolated string
         if (
             correctSqlQueryRaw is null
             || !targetMethod.ConstructedFrom.Equals(
@@ -205,7 +211,8 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             return false;
         }
 
-        // Report warning if interpolated string is not a constant and all its interpolations are not constants
+        // Report warning if interpolated string is not a constant and all its interpolations are not
+        // constants
         return AnalyzeInterpolatedString(interpolatedString);
     }
 

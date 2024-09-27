@@ -102,8 +102,10 @@ namespace System.Web.UI
                 }
 
                 // The default path points to the built-in service (if it is enabled)
-                // Note that the client can't default to this path because it doesn't know what the app root is, we must tell it.
-                // We must specify the default path to the proxy even if a custom path is provided, because on the client they could
+                // Note that the client can't default to this path because it doesn't know what the app root is, we
+                // must tell it.
+                // We must specify the default path to the proxy even if a custom path is provided, because on the
+                // client they could
                 // reset the path back to the default if they want.
                 defaultServicePath = scriptManager.ResolveClientUrl(
                     "~/" + System.Web.Script.Services.WebServiceData._roleServiceFileName
@@ -116,8 +118,10 @@ namespace System.Web.UI
             bool pathSpecified = !String.IsNullOrEmpty(serviceUrl);
             if (pathSpecified)
             {
-                // DevDiv Bug 71954:When loadRoles="true" and the path is set, we should not load the roles from the default path
-                // loadRoles script always retrieves the roles from default role provider, which is not correct if RolesService
+                // DevDiv Bug 71954:When loadRoles="true" and the path is set, we should not load the roles from the
+                // default path
+                // loadRoles script always retrieves the roles from default role provider, which is not correct if
+                // RolesService
                 // points to non default path. Hence throw when non default path and loadRoles both are specified.
                 if (defaultServicePath == null)
                 {
@@ -147,7 +151,8 @@ namespace System.Web.UI
                 sb.Append("');\n");
             }
 
-            // Dev10 757178: Do not attempt during design mode. This code isn't important for intellisense anyway.
+            // Dev10 757178: Do not attempt during design mode. This code isn't important for intellisense
+            // anyway.
             if (loadRoles)
             {
                 if (scriptManager.DesignMode)

@@ -69,7 +69,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="sizeAfterPurge">
         /// If the cache size exceeds <paramref name="maximumSize"/>,
-        /// the cache will be resized to <paramref name="sizeAfterPurge"/> by removing least recently used items.
+        /// the cache will be resized to <paramref name="sizeAfterPurge"/> by removing least recently used
+        // items.
         /// </param>
         /// <param name="maximumSize">Defines the maximum size of the cache.</param>
         public MruSessionSecurityTokenCache(int sizeAfterPurge, int maximumSize)
@@ -78,7 +79,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Constructor to create an instance of this class.
         /// </summary>
-        /// <param name="sizeAfterPurge">Specifies the size to which the cache is purged after it reaches <paramref name="maximumSize"/>.</param>
+        /// <param name="sizeAfterPurge">Specifies the size to which the cache is purged after it reaches
+        // <paramref name="maximumSize"/>.</param>
         /// <param name="maximumSize">Specifies the maximum size of the cache.</param>
         /// <param name="comparer">Specifies the method used for comparing cache entries.</param>
         public MruSessionSecurityTokenCache(
@@ -180,7 +182,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Returns the Session Security Token corresponding to the specified key exists in the cache. Also if it exists, marks it as MRU.
+        /// Returns the Session Security Token corresponding to the specified key exists in the cache. Also
+        // if it exists, marks it as MRU.
         /// </summary>
         /// <param name="key">Specifies the key for the entry to be retrieved.</param>
         /// <returns>Returns the Session Security Token from the cache if found, otherwise, null.</returns>
@@ -289,7 +292,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="endpointId">The endpoint id for the entries to be retrieved.</param>
         /// <param name="contextId">The context id for the entries to be retrieved.</param>
-        /// <returns>A collection of all the matching entries, an empty collection of no match found.</returns>
+        /// <returns>A collection of all the matching entries, an empty collection of no match
+        // found.</returns>
         public override IEnumerable<SessionSecurityToken> GetAll(
             string endpointId,
             System.Xml.UniqueId contextId

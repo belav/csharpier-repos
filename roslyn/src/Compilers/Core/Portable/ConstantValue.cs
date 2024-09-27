@@ -68,11 +68,15 @@ namespace Microsoft.CodeAnalysis
         // This is needed when constant values are reinterpreted during constant folding -
         // for example a Byte value may be read via UIntValue accessor when folding Byte + Uint
         //
-        // I have decided that default implementation of Int16Value in terms of SByteValue is appropriate here.
-        // Same pattern is used for providing default implementation of Int32Value in terms of Int16Value and so on.
+        // I have decided that default implementation of Int16Value in terms of SByteValue is appropriate
+        // here.
+        // Same pattern is used for providing default implementation of Int32Value in terms of Int16Value
+        // and so on.
         //
-        // An alternative solution would be to override Int16Value, Int32Value, Int64Value whenever I override SByteValue
-        // and so on for Int16Value, Int32Value. That could work mildly faster but would result in a lot more code.
+        // An alternative solution would be to override Int16Value, Int32Value, Int64Value whenever I
+        // override SByteValue
+        // and so on for Int16Value, Int32Value. That could work mildly faster but would result in a lot
+        // more code.
 
         public virtual short Int16Value
         {
@@ -154,7 +158,8 @@ namespace Microsoft.CodeAnalysis
             get { return Null; }
         }
 
-        // Null, Nothing and Unset are all ConstantValueNull. Null and Nothing are equivalent and represent the null and
+        // Null, Nothing and Unset are all ConstantValueNull. Null and Nothing are equivalent and represent
+        // the null and
         // nothing constants in C# and VB.  Unset indicates an uninitialized ConstantValue.
         public static ConstantValue Unset
         {

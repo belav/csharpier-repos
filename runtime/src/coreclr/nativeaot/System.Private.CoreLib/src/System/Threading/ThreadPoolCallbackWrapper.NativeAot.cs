@@ -4,11 +4,14 @@
 namespace System.Threading
 {
     /// <summary>
-    /// Ensures <c>Thread.CurrentThread</c> is initialized for a callback running on a thread pool thread.
-    /// If WinRT is enabled, also ensures the Windows Runtime is initialized during the execution of the callback.
+    /// Ensures <c>Thread.CurrentThread</c> is initialized for a callback running on a thread pool
+    // thread.
+    /// If WinRT is enabled, also ensures the Windows Runtime is initialized during the execution of the
+    // callback.
     /// </summary>
     /// <remarks>
-    /// This structure does not implement <c>IDisposable</c> to save on exception support, which callers do not need.
+    /// This structure does not implement <c>IDisposable</c> to save on exception support, which callers
+    // do not need.
     /// </remarks>
     internal struct ThreadPoolCallbackWrapper
     {

@@ -15,9 +15,11 @@ public abstract class EndpointSelector
     /// <summary>
     /// Asynchronously selects an <see cref="Endpoint"/> from the <see cref="CandidateSet"/>.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="candidates">The <see cref="CandidateSet"/>.</param>
-    /// <returns>A <see cref="Task"/> that completes asynchronously once endpoint selection is complete.</returns>
+    /// <returns>A <see cref="Task"/> that completes asynchronously once endpoint selection is
+    // complete.</returns>
     /// <remarks>
     /// An <see cref="EndpointSelector"/> should assign the endpoint by calling
     /// <see cref="EndpointHttpContextExtensions.SetEndpoint(HttpContext, Endpoint)"/>

@@ -18,13 +18,16 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal partial class ClosureConversion
     {
         /// <summary>
-        /// Perform a first analysis pass in preparation for removing all lambdas from a method body.  The entry point is Analyze.
-        /// The results of analysis are placed in the fields seenLambda, blockParent, variableBlock, captured, and captures.
+        /// Perform a first analysis pass in preparation for removing all lambdas from a method body.  The
+        // entry point is Analyze.
+        /// The results of analysis are placed in the fields seenLambda, blockParent, variableBlock,
+        // captured, and captures.
         /// </summary>
         internal sealed partial class Analysis
         {
             /// <summary>
-            /// If a local function is in the set, at some point in the code it is converted to a delegate and should then not be optimized to a struct closure.
+            /// If a local function is in the set, at some point in the code it is converted to a delegate and
+            // should then not be optimized to a struct closure.
             /// Also contains all lambdas (as they are converted to delegates implicitly).
             /// </summary>
             public readonly PooledHashSet<MethodSymbol> MethodsConvertedToDelegates;
@@ -433,7 +436,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 environmentsToScopes.Free();
 
-                // if a function captures a scope, which captures its parent, then the closure also captures the parents scope.
+                // if a function captures a scope, which captures its parent, then the closure also captures the
+                // parents scope.
                 // we update closuresCapturingScopeVariables to reflect this.
                 foreach (var (scope, capturingClosures) in closuresCapturingScopeVariables)
                 {
@@ -469,13 +473,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Must be called only after <see cref="MakeAndAssignEnvironments"/> and <see cref="ComputeLambdaScopesAndFrameCaptures"/>.
+            /// Must be called only after <see cref="MakeAndAssignEnvironments"/> and <see
+            // cref="ComputeLambdaScopesAndFrameCaptures"/>.
             ///
-            /// In order to reduce allocations, merge environments into a parent environment when it is safe to do so.
+            /// In order to reduce allocations, merge environments into a parent environment when it is safe to
+            // do so.
             /// This must be done whilst preserving semantics.
             ///
             /// We also have to make sure not to extend the life of any variable.
-            /// This means that we can only merge an environment into its parent if exactly the same closures directly or indirectly reference both environments.
+            /// This means that we can only merge an environment into its parent if exactly the same closures
+            // directly or indirectly reference both environments.
             /// </summary>
             private void MergeEnvironments()
             {
@@ -499,7 +506,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // Walk up the scope tree, checking at each point if it is:
                     // a) semantically safe to merge the scope's environment into it's parent scope's environment
                     // b) doing so would not change GC behaviour
-                    // Once either of these conditions fails, we merge into the closure environment furthest up the scope tree we've found so far
+                    // Once either of these conditions fails, we merge into the closure environment furthest up the
+                    // scope tree we've found so far
                     while (currentScope.Parent != null)
                     {
                         if (!currentScope.CanMergeWithParent)
@@ -507,7 +515,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                         var parentScope = currentScope.Parent;
 
-                        // we skip any scopes which do not have any captured variables, and try to merge into the parent scope instead.
+                        // we skip any scopes which do not have any captured variables, and try to merge into the parent
+                        // scope instead.
                         // We also skip any struct environments as they don't allocate, so no point merging them
                         var env = parentScope.DeclaredEnvironment;
                         if (env is null || env.IsStruct)
@@ -521,7 +530,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ];
 
                         // if more closures reference one scope's environments than the other scope's environments,
-                        // then merging the two environments would increase the number of objects referencing some variables,
+                        // then merging the two environments would increase the number of objects referencing some
+                        // variables,
                         // which may prevent the variables being garbage collected.
                         if (!closuresCapturingParentScope.SetEquals(closuresCapturingScope))
                             break;
@@ -718,7 +728,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Finds a <see cref="NestedFunction"/> with a matching original symbol somewhere in the given scope or nested scopes.
+            /// Finds a <see cref="NestedFunction"/> with a matching original symbol somewhere in the given
+            // scope or nested scopes.
             /// </summary>
             public static NestedFunction GetNestedFunctionInTree(
                 Scope treeRoot,

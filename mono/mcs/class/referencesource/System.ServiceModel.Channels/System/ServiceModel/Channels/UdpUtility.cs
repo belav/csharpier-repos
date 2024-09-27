@@ -49,9 +49,11 @@ namespace System.ServiceModel.Channels
             return factory;
         }
 
-        //there are some errors on the server side that we should just ignore because the server will not need
+        //there are some errors on the server side that we should just ignore because the server will not
+        // need
         //to change its behavior if it sees the exception.  These errors are not ignored on the client
-        //because it may need to adjust settings (e.g. TTL, send smaller messages, double check server address for correctness)
+        //because it may need to adjust settings (e.g. TTL, send smaller messages, double check server
+        // address for correctness)
         internal static bool CanIgnoreServerException(Exception ex)
         {
             SocketError error;
@@ -187,7 +189,8 @@ namespace System.ServiceModel.Channels
         )
         {
             // We need both IPv4 and IPv6 on the same port. We can't atomicly bind for IPv4 and IPv6,
-            // so we try 10 times, which even with a 50% failure rate will statistically succeed 99.9% of the time.
+            // so we try 10 times, which even with a 50% failure rate will statistically succeed 99.9% of the
+            // time.
             //
             // We look in the range of 49152-65534 for Vista default behavior parity.
             // http://www.iana.org/assignments/port-numbers
@@ -657,7 +660,8 @@ namespace System.ServiceModel.Channels
 
             if (listenMulticast)
             {
-                //Win2k3 requires that the joining of the multicast group be after the socket is bound (not true on Vista).
+                //Win2k3 requires that the joining of the multicast group be after the socket is bound (not true on
+                // Vista).
                 if (isIPv6)
                 {
                     IPv6MulticastOption multicastGroup = (

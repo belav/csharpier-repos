@@ -10,7 +10,8 @@ namespace System.Text.Json
     public sealed partial class Utf8JsonWriter
     {
         /// <summary>
-        /// Writes the pre-encoded property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the pre-encoded property name and <see cref="DateTimeOffset"/> value (as a JSON string)
+        // as part of a name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The JSON-encoded name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -18,7 +19,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
+        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see
+        // cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
         /// </remarks>
         public void WriteString(JsonEncodedText propertyName, DateTimeOffset value)
         {
@@ -32,7 +34,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -46,7 +49,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
+        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see
+        // cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
         /// The property name is escaped before writing.
         /// </remarks>
         public void WriteString(string propertyName, DateTimeOffset value)
@@ -59,7 +63,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="value">The value to write.</param>
@@ -70,7 +75,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
+        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see
+        // cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
         /// The property name is escaped before writing.
         /// </remarks>
         public void WriteString(ReadOnlySpan<char> propertyName, DateTimeOffset value)
@@ -84,9 +90,11 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a name/value pair of a JSON object.
+        /// Writes the property name and <see cref="DateTimeOffset"/> value (as a JSON string) as part of a
+        // name/value pair of a JSON object.
         /// </summary>
-        /// <param name="utf8PropertyName">The UTF-8 encoded property name of the JSON object to be written.</param>
+        /// <param name="utf8PropertyName">The UTF-8 encoded property name of the JSON object to be
+        // written.</param>
         /// <param name="value">The value to write.</param>
         /// <exception cref="ArgumentException">
         /// Thrown when the specified property name is too large.
@@ -95,7 +103,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
+        /// Writes the <see cref="DateTimeOffset"/> using the round-trippable ('O') <see
+        // cref="StandardFormat"/> , for example: 2017-06-12T05:30:45.7680000-07:00.
         /// The property name is escaped before writing.
         /// </remarks>
         public void WriteString(ReadOnlySpan<byte> utf8PropertyName, DateTimeOffset value)
@@ -259,7 +268,8 @@ namespace System.Text.Json
                         - 6
             );
 
-            // All ASCII, 2 quotes for property name, 2 quotes for date, and 1 colon => escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 5
+            // All ASCII, 2 quotes for property name, 2 quotes for date, and 1 colon =>
+            // escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 5
             // Optionally, 1 list separator, and up to 3x growth when transcoding
             int maxRequired =
                 (escapedPropertyName.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
@@ -358,7 +368,8 @@ namespace System.Text.Json
                         - s_newLineLength
             );
 
-            // All ASCII, 2 quotes for property name, 2 quotes for date, 1 colon, and 1 space => escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 6
+            // All ASCII, 2 quotes for property name, 2 quotes for date, 1 colon, and 1 space =>
+            // escapedPropertyName.Length + JsonConstants.MaximumFormatDateTimeOffsetLength + 6
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
             int maxRequired =
                 indent

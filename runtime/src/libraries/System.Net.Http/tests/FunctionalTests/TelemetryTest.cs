@@ -1068,7 +1068,8 @@ namespace System.Net.Http.Functional.Tests
                                                 GetUnderlyingSocketsHttpHandler(handler);
                                             socketsHttpHandler.MaxConnectionsPerServer = 1;
 
-                                            // Dummy request to establish connection and ensure that the MaxConcurrentStreams setting has been acknowledged
+                                            // Dummy request to establish connection and ensure that the MaxConcurrentStreams setting has been
+                                            // acknowledged
                                             await client.GetStringAsync(uri);
 
                                             Task firstRequest = client.GetStringAsync(uri);

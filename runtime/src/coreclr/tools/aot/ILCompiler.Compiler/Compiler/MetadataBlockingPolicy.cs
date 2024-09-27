@@ -7,7 +7,8 @@ using Debug = System.Diagnostics.Debug;
 namespace ILCompiler
 {
     /// <summary>
-    /// Represents a metadata blocking policy. A metadata blocking policy decides what types or members are never
+    /// Represents a metadata blocking policy. A metadata blocking policy decides what types or members
+    // are never
     /// eligible to have their metadata generated into the executable.
     /// </summary>
     public abstract class MetadataBlockingPolicy

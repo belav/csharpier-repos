@@ -42,10 +42,10 @@ namespace System.Web.UI.WebControls
             return true;
         }
 
-        /*public ICollection GetStandardValues ()
-        {
-            return null;
-        }*/
+/*public ICollection GetStandardValues ()
+{
+return null;
+}*/
 
         public override TypeConverter.StandardValuesCollection GetStandardValues(
             ITypeDescriptorContext context
@@ -70,20 +70,20 @@ namespace System.Web.UI.WebControls
             return new StandardValuesCollection(arrayList);
         }
 
-        /*public bool GetStandardValuesExclusive ()
-        {
-            return false;
-        }*/
+/*public bool GetStandardValuesExclusive ()
+{
+return false;
+}*/
 
         public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
         {
             return false;
         }
 
-        /*public bool GetStandardValuesSupported ()
-        {
-            return false;
-        }*/
+/*public bool GetStandardValuesSupported ()
+{
+return false;
+}*/
 
         public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
         {

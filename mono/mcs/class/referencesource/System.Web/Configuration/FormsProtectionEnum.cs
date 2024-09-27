@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * AuthenticationConfigHandler class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* AuthenticationConfigHandler class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Configuration
 {

@@ -52,9 +52,12 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     }
 
     /// <summary>
-    /// Replaces the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/> matching
-    /// <paramref name="name"/> and removes any additional matching <see cref="TagHelperAttribute"/>s. If a
-    /// matching <see cref="TagHelperAttribute"/> is not found, adds a <see cref="TagHelperAttribute"/> with
+    /// Replaces the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/>
+    // matching
+    /// <paramref name="name"/> and removes any additional matching <see cref="TagHelperAttribute"/>s.
+    // If a
+    /// matching <see cref="TagHelperAttribute"/> is not found, adds a <see cref="TagHelperAttribute"/>
+    // with
     /// <paramref name="name"/> and <paramref name="value"/> to the end of the collection.</summary>
     /// <param name="name">
     /// The <see cref="TagHelperAttribute.Name"/> of the <see cref="TagHelperAttribute"/> to set.
@@ -70,9 +73,12 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     }
 
     /// <summary>
-    /// Replaces the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/> matching
-    /// <paramref name="attribute"/>'s <see cref="TagHelperAttribute.Name"/> and removes any additional matching
-    /// <see cref="TagHelperAttribute"/>s. If a matching <see cref="TagHelperAttribute"/> is not found, adds the
+    /// Replaces the first <see cref="TagHelperAttribute"/> with <see cref="TagHelperAttribute.Name"/>
+    // matching
+    /// <paramref name="attribute"/>'s <see cref="TagHelperAttribute.Name"/> and removes any additional
+    // matching
+    /// <see cref="TagHelperAttribute"/>s. If a matching <see cref="TagHelperAttribute"/> is not found,
+    // adds the
     /// specified <paramref name="attribute"/> to the end of the collection.
     /// </summary>
     /// <param name="attribute">
@@ -145,7 +151,8 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
 
     /// <inheritdoc />
     /// <remarks>
-    /// <paramref name="attribute"/>s <see cref="TagHelperAttribute.Name"/> is compared case-insensitively.
+    /// <paramref name="attribute"/>s <see cref="TagHelperAttribute.Name"/> is compared
+    // case-insensitively.
     /// </remarks>
     public bool Remove(TagHelperAttribute attribute)
     {
@@ -161,7 +168,8 @@ public class TagHelperAttributeList : ReadOnlyTagHelperAttributeList, IList<TagH
     }
 
     /// <summary>
-    /// Removes all <see cref="TagHelperAttribute"/>s with <see cref="TagHelperAttribute.Name"/> matching
+    /// Removes all <see cref="TagHelperAttribute"/>s with <see cref="TagHelperAttribute.Name"/>
+    // matching
     /// <paramref name="name"/>.
     /// </summary>
     /// <param name="name">

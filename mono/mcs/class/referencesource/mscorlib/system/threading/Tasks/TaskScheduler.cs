@@ -32,8 +32,10 @@ namespace System.Threading.Tasks
     /// </summary>
     /// <remarks>
     /// <para>
-    /// <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see> acts as the extension point for all
-    /// pluggable scheduling logic.  This includes mechanisms such as how to schedule a task for execution, and
+    /// <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see> acts as the extension point
+    // for all
+    /// pluggable scheduling logic.  This includes mechanisms such as how to schedule a task for
+    // execution, and
     /// how scheduled tasks should be exposed to debuggers.
     /// </para>
     /// <para>
@@ -70,8 +72,10 @@ namespace System.Threading.Tasks
         /// for maintaining the consistency of the system.
         /// </para>
         /// </remarks>
-        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task">Task</see> to be queued.</param>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="task"/> argument is null.</exception>
+        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task">Task</see> to be
+        // queued.</param>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="task"/> argument is
+        // null.</exception>
         [SecurityCritical]
         protected internal abstract void QueueTask(Task task);
 
@@ -87,14 +91,17 @@ namespace System.Threading.Tasks
         /// scalability typically results the more tasks that can be inlined, and in fact a scheduler that
         /// inlines too little may be prone to deadlocks. A proper implementation should ensure that a
         /// request executing under the policies guaranteed by the scheduler can successfully inline. For
-        /// example, if a scheduler uses a dedicated thread to execute tasks, any inlining requests from that
+        /// example, if a scheduler uses a dedicated thread to execute tasks, any inlining requests from
+        // that
         /// thread should succeed.
         /// </para>
         /// <para>
         /// If a scheduler decides to perform the inline execution, it should do so by calling to the base
         /// TaskScheduler's
-        /// <see cref="TryExecuteTask">TryExecuteTask</see> method with the provided task object, propagating
-        /// the return value. It may also be appropriate for the scheduler to remove an inlined task from its
+        /// <see cref="TryExecuteTask">TryExecuteTask</see> method with the provided task object,
+        // propagating
+        /// the return value. It may also be appropriate for the scheduler to remove an inlined task from
+        // its
         /// internal data structures if it decides to honor the inlining request. Note, however, that under
         /// some circumstances a scheduler may be asked to inline a task that was not previously provided to
         /// it with the <see cref="QueueTask"/> method.
@@ -132,7 +139,8 @@ namespace System.Threading.Tasks
         /// </para>
         /// <para>
         /// It is important to note that, when this method is called, all other threads in the process will
-        /// be frozen. Therefore, it's important to avoid synchronization with other threads that may lead to
+        /// be frozen. Therefore, it's important to avoid synchronization with other threads that may lead
+        // to
         /// blocking. If synchronization is necessary, the method should prefer to throw a <see
         /// cref="System.NotSupportedException"/>
         /// than to block, which could cause a debugger to experience delays. Additionally, this method and
@@ -189,7 +197,8 @@ namespace System.Threading.Tasks
         {
             // Do not inline unstarted tasks (i.e., task.ExecutingTaskScheduler == null).
             // Do not inline TaskCompletionSource-style (a.k.a. "promise") tasks.
-            // No need to attempt inlining if the task body was already run (i.e. either TASK_STATE_DELEGATE_INVOKED or TASK_STATE_CANCELED bits set)
+            // No need to attempt inlining if the task body was already run (i.e. either
+            // TASK_STATE_DELEGATE_INVOKED or TASK_STATE_CANCELED bits set)
             TaskScheduler ets = task.ExecutingTaskScheduler;
 
             // Delegate cross-scheduler inlining requests to target scheduler
@@ -208,9 +217,12 @@ namespace System.Threading.Tasks
                 return false;
             }
 
-            // Task class will still call into TaskScheduler.TryRunInline rather than TryExecuteTaskInline() so that
-            // 1) we can adjust the return code from TryExecuteTaskInline in case a buggy custom scheduler lies to us
-            // 2) we maintain a mechanism for the TLS lookup optimization that we used to have for the ConcRT scheduler (will potentially introduce the same for TP)
+            // Task class will still call into TaskScheduler.TryRunInline rather than TryExecuteTaskInline() so
+            // that
+            // 1) we can adjust the return code from TryExecuteTaskInline in case a buggy custom scheduler lies
+            // to us
+            // 2) we maintain a mechanism for the TLS lookup optimization that we used to have for the ConcRT
+            // scheduler (will potentially introduce the same for TP)
             bool bInlined = false;
             try
             {
@@ -222,7 +234,8 @@ namespace System.Threading.Tasks
                 currentStackGuard.EndInliningScope();
             }
 
-            // If the custom scheduler returned true, we should either have the TASK_STATE_DELEGATE_INVOKED or TASK_STATE_CANCELED bit set
+            // If the custom scheduler returned true, we should either have the TASK_STATE_DELEGATE_INVOKED or
+            // TASK_STATE_CANCELED bit set
             // Otherwise the scheduler is buggy
             if (bInlined && !(task.IsDelegateInvoked || task.IsCanceled))
             {
@@ -237,12 +250,16 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Attempts to dequeue a <see cref="T:System.Threading.Tasks.Task">Task</see> that was previously queued to
+        /// Attempts to dequeue a <see cref="T:System.Threading.Tasks.Task">Task</see> that was previously
+        // queued to
         /// this scheduler.
         /// </summary>
-        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task">Task</see> to be dequeued.</param>
-        /// <returns>A Boolean denoting whether the <paramref name="task"/> argument was successfully dequeued.</returns>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="task"/> argument is null.</exception>
+        /// <param name="task">The <see cref="T:System.Threading.Tasks.Task">Task</see> to be
+        // dequeued.</param>
+        /// <returns>A Boolean denoting whether the <paramref name="task"/> argument was successfully
+        // dequeued.</returns>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="task"/> argument is
+        // null.</exception>
         [SecurityCritical]
         protected internal virtual bool TryDequeue(Task task)
         {
@@ -255,7 +272,8 @@ namespace System.Threading.Tasks
         internal virtual void NotifyWorkItemProgress() { }
 
         /// <summary>
-        /// Indicates whether this is a custom scheduler, in which case the safe code paths will be taken upon task entry
+        /// Indicates whether this is a custom scheduler, in which case the safe code paths will be taken
+        // upon task entry
         /// using a CAS to transition from queued state to executing.
         /// </summary>
         internal virtual bool RequiresAtomicStartTransition
@@ -314,7 +332,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Adds this scheduler ot the active schedulers tracking collection for debugging purposes.</summary>
+        /// <summary>Adds this scheduler ot the active schedulers tracking collection for debugging
+        // purposes.</summary>
         private void AddToActiveTaskSchedulers()
         {
             ConditionalWeakTable<TaskScheduler, object> activeTaskSchedulers =
@@ -344,7 +363,8 @@ namespace System.Threading.Tasks
         /// associated with the currently executing task.
         /// </summary>
         /// <remarks>
-        /// When not called from within a task, <see cref="Current"/> will return the <see cref="Default"/> scheduler.
+        /// When not called from within a task, <see cref="Current"/> will return the <see cref="Default"/>
+        // scheduler.
         /// </remarks>
         public static TaskScheduler Current
         {
@@ -393,8 +413,10 @@ namespace System.Threading.Tasks
         /// </remarks>
         /// <returns>
         /// A <see cref="TaskScheduler"/> associated with
-        /// the current <see cref="T:System.Threading.SynchronizationContext">SynchronizationContext</see>, as
-        /// determined by <see cref="System.Threading.SynchronizationContext.Current">SynchronizationContext.Current</see>.
+        /// the current <see cref="T:System.Threading.SynchronizationContext">SynchronizationContext</see>,
+        // as
+        /// determined by <see
+        // cref="System.Threading.SynchronizationContext.Current">SynchronizationContext.Current</see>.
         /// </returns>
         /// <exception cref="T:System.InvalidOperationException">
         /// The current SynchronizationContext may not be used as a TaskScheduler.
@@ -453,7 +475,8 @@ namespace System.Threading.Tasks
         /// <exception cref="T:System.InvalidOperationException">
         /// The <paramref name="task"/> is not associated with this scheduler.
         /// </exception>
-        /// <returns>A Boolean that is true if <paramref name="task"/> was successfully executed, false if it
+        /// <returns>A Boolean that is true if <paramref name="task"/> was successfully executed, false if
+        // it
         /// was not. A common reason for execution failure is that the task had previously been executed or
         /// is in the process of being executed by another thread.</returns>
         [SecurityCritical]
@@ -478,7 +501,8 @@ namespace System.Threading.Tasks
         private static readonly object _unobservedTaskExceptionLockObject = new object();
 
         /// <summary>
-        /// Occurs when a faulted <see cref="System.Threading.Tasks.Task"/>'s unobserved exception is about to trigger exception escalation
+        /// Occurs when a faulted <see cref="System.Threading.Tasks.Task"/>'s unobserved exception is about
+        // to trigger exception escalation
         /// policy, which, by default, would terminate the process.
         /// </summary>
         /// <remarks>
@@ -550,7 +574,8 @@ namespace System.Threading.Tasks
         internal Task[] GetScheduledTasksForDebugger()
         {
             // this can throw InvalidOperationException indicating that they are unable to provide the info
-            // at the moment. We should let the debugger receive that exception so that it can indicate it in the UI
+            // at the moment. We should let the debugger receive that exception so that it can indicate it in
+            // the UI
             IEnumerable<Task> activeTasksSource = GetScheduledTasks();
 
             if (activeTasksSource == null)
@@ -563,7 +588,8 @@ namespace System.Threading.Tasks
                 activeTasksArray = (new List<Task>(activeTasksSource)).ToArray();
             }
 
-            // touch all Task.Id fields so that the debugger doesn't need to do a lot of cross-proc calls to generate them
+            // touch all Task.Id fields so that the debugger doesn't need to do a lot of cross-proc calls to
+            // generate them
             foreach (Task t in activeTasksArray)
             {
                 int tmp = t.Id;
@@ -573,14 +599,16 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Provides an array of all active <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
+        /// Provides an array of all active <see
+        // cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
         /// instances for the debugger.
         /// </summary>
         /// <remarks>
         /// This function is only meant to be invoked by a debugger remotely.
         /// It should not be called by any other codepaths.
         /// </remarks>
-        /// <returns>An array of <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see> instances.</returns>
+        /// <returns>An array of <see cref="System.Threading.Tasks.TaskScheduler">TaskScheduler</see>
+        // instances.</returns>
         [SecurityCritical]
         internal static TaskScheduler[] GetTaskSchedulersForDebugger()
         {
@@ -640,17 +668,21 @@ namespace System.Threading.Tasks
 
     /// <summary>
     /// A TaskScheduler implementation that executes all tasks queued to it through a call to
-    /// <see cref="System.Threading.SynchronizationContext.Post"/> on the <see cref="T:System.Threading.SynchronizationContext"/>
-    /// that its associated with. The default constructor for this class binds to the current <see cref="T:System.Threading.SynchronizationContext"/>
+    /// <see cref="System.Threading.SynchronizationContext.Post"/> on the <see
+    // cref="T:System.Threading.SynchronizationContext"/>
+    /// that its associated with. The default constructor for this class binds to the current <see
+    // cref="T:System.Threading.SynchronizationContext"/>
     /// </summary>
     internal sealed class SynchronizationContextTaskScheduler : TaskScheduler
     {
         private SynchronizationContext m_synchronizationContext;
 
         /// <summary>
-        /// Constructs a SynchronizationContextTaskScheduler associated with <see cref="T:System.Threading.SynchronizationContext.Current"/>
+        /// Constructs a SynchronizationContextTaskScheduler associated with <see
+        // cref="T:System.Threading.SynchronizationContext.Current"/>
         /// </summary>
-        /// <exception cref="T:System.InvalidOperationException">This constructor expects <see cref="T:System.Threading.SynchronizationContext.Current"/> to be set.</exception>
+        /// <exception cref="T:System.InvalidOperationException">This constructor expects <see
+        // cref="T:System.Threading.SynchronizationContext.Current"/> to be set.</exception>
         internal SynchronizationContextTaskScheduler()
         {
             SynchronizationContext synContext = SynchronizationContext.Current;
@@ -669,9 +701,11 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Implemetation of <see cref="T:System.Threading.Tasks.TaskScheduler.QueueTask"/> for this scheduler class.
+        /// Implemetation of <see cref="T:System.Threading.Tasks.TaskScheduler.QueueTask"/> for this
+        // scheduler class.
         ///
-        /// Simply posts the tasks to be executed on the associated <see cref="T:System.Threading.SynchronizationContext"/>.
+        /// Simply posts the tasks to be executed on the associated <see
+        // cref="T:System.Threading.SynchronizationContext"/>.
         /// </summary>
         /// <param name="task"></param>
         [SecurityCritical]
@@ -681,7 +715,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Implementation of <see cref="T:System.Threading.Tasks.TaskScheduler.TryExecuteTaskInline"/>  for this scheduler class.
+        /// Implementation of <see cref="T:System.Threading.Tasks.TaskScheduler.TryExecuteTaskInline"/>  for
+        // this scheduler class.
         ///
         /// The task will be executed inline only if the call happens within
         /// the associated <see cref="T:System.Threading.SynchronizationContext"/>.
@@ -707,7 +742,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>
-        /// Implementes the <see cref="T:System.Threading.Tasks.TaskScheduler.MaximumConcurrencyLevel"/> property for
+        /// Implementes the <see cref="T:System.Threading.Tasks.TaskScheduler.MaximumConcurrencyLevel"/>
+        // property for
         /// this scheduler class.
         ///
         /// By default it returns 1, because a <see cref="T:System.Threading.SynchronizationContext"/> based
@@ -726,19 +762,22 @@ namespace System.Threading.Tasks
         {
             Task task = (Task)obj;
 
-            // calling ExecuteEntry with double execute check enabled because a user implemented SynchronizationContext could be buggy
+            // calling ExecuteEntry with double execute check enabled because a user implemented
+            // SynchronizationContext could be buggy
             task.ExecuteEntry(true);
         }
     }
 
     /// <summary>
-    /// Provides data for the event that is raised when a faulted <see cref="System.Threading.Tasks.Task"/>'s
+    /// Provides data for the event that is raised when a faulted <see
+    // cref="System.Threading.Tasks.Task"/>'s
     /// exception goes unobserved.
     /// </summary>
     /// <remarks>
     /// The Exception property is used to examine the exception without marking it
     /// as observed, whereas the <see cref="SetObserved"/> method is used to mark the exception
-    /// as observed.  Marking the exception as observed prevents it from triggering exception escalation policy
+    /// as observed.  Marking the exception as observed prevents it from triggering exception escalation
+    // policy
     /// which, by default, terminates the process.
     /// </remarks>
     public class UnobservedTaskExceptionEventArgs : EventArgs

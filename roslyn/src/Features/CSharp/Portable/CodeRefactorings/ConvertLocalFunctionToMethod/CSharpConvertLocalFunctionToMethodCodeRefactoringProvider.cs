@@ -67,7 +67,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
             }
 
             var container = localFunction.GetAncestor<MemberDeclarationSyntax>();
-            // If the local function is defined in a block within the top-level statements context, then we can't provide the refactoring because
+            // If the local function is defined in a block within the top-level statements context, then we
+            // can't provide the refactoring because
             // there is no class we can put the generated method in.
             if (container == null || container.IsKind(SyntaxKind.GlobalStatement))
             {
@@ -121,9 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.ConvertLocalFunctionToM
                 .Except(declaredSymbol.Parameters)
                 .ToList();
 
-            // First, create a parameter per each capture so that we can pass them as arguments to the final method
-            // Filter out `this` because it doesn't need a parameter, we will just make a non-static method for that
-            // We also make a `ref` parameter here for each capture that is being written into inside the function
+            // First, create a parameter per each capture so that we can pass them as arguments to the final
+            // method
+            // Filter out `this` because it doesn't need a parameter, we will just make a non-static method for
+            // that
+            // We also make a `ref` parameter here for each capture that is being written into inside the
+            // function
             var capturesAsParameters = captures
                 .Where(capture => !capture.IsThisParameter())
                 .Select(capture =>

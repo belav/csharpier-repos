@@ -26,7 +26,9 @@ namespace System.ServiceModel
         }
 
         /// <summary>
-        /// Gets a complete, in-memory description of the service being configured, including all the endpoints for the service and specifications for their respective addresses, bindings, contracts and behaviors.
+        /// Gets a complete, in-memory description of the service being configured, including all the
+        // endpoints for the service and specifications for their respective addresses, bindings, contracts and
+        // behaviors.
         /// </summary>
         public ServiceDescription Description
         {
@@ -159,7 +161,8 @@ namespace System.ServiceModel
             {
                 // Throw if contract is not valid for this service
                 //   i.e. if contract is not implemented by service, unless endpoint is a standard endpoint
-                //   note: (metadata endpoints require metadata behavior to implement IMetadataExchange even though it's a standard endpoint)
+                //   note: (metadata endpoints require metadata behavior to implement IMetadataExchange even though
+                // it's a standard endpoint)
                 IContractResolver resolver = this.host.GetContractResolver(
                     this.host.ImplementedContracts
                 );
@@ -178,7 +181,8 @@ namespace System.ServiceModel
         /// </summary>
         /// <param name="contractType">interface annotated with [ServiceContract]</param>
         /// <param name="binding">protocol to use for communication</param>
-        /// <param name="address">absolute address for service, or address relative to base address for supplied binding</param>
+        /// <param name="address">absolute address for service, or address relative to base address for
+        // supplied binding</param>
         /// <returns>The endpoint which was created</returns>
         public ServiceEndpoint AddServiceEndpoint(
             Type contractType,
@@ -199,7 +203,8 @@ namespace System.ServiceModel
         /// </summary>
         /// <param name="contractType">interface annotated with [ServiceContract]</param>
         /// <param name="binding">protocol to use for communication</param>
-        /// <param name="address">absolute address for service, or address relative to base address for supplied binding</param>
+        /// <param name="address">absolute address for service, or address relative to base address for
+        // supplied binding</param>
         /// <returns>The endpoint which was created</returns>
         public ServiceEndpoint AddServiceEndpoint(Type contractType, Binding binding, Uri address)
         {
@@ -241,8 +246,10 @@ namespace System.ServiceModel
         /// </summary>
         /// <param name="contractType">interface annotated with [ServiceContract]</param>
         /// <param name="binding">protocol to use for communication</param>
-        /// <param name="address">absolute logical address for service, or address relative to base address for supplied binding</param>
-        /// <param name="listenUri">absolute physical address for service, or address relative to base address for supplied binding</param>
+        /// <param name="address">absolute logical address for service, or address relative to base address
+        // for supplied binding</param>
+        /// <param name="listenUri">absolute physical address for service, or address relative to base
+        // address for supplied binding</param>
         /// <returns>The endpoint which was created</returns>
         public ServiceEndpoint AddServiceEndpoint(
             Type contractType,
@@ -263,8 +270,10 @@ namespace System.ServiceModel
         /// </summary>
         /// <param name="contractType">interface annotated with [ServiceContract]</param>
         /// <param name="binding">protocol to use for communication</param>
-        /// <param name="address">absolute logical address for service, or address relative to base address for supplied binding</param>
-        /// <param name="listenUri">absolute physical address for service, or address relative to base address for supplied binding</param>
+        /// <param name="address">absolute logical address for service, or address relative to base address
+        // for supplied binding</param>
+        /// <param name="listenUri">absolute physical address for service, or address relative to base
+        // address for supplied binding</param>
         /// <returns>The endpoint which was created</returns>
         public ServiceEndpoint AddServiceEndpoint(
             Type contractType,
@@ -284,7 +293,8 @@ namespace System.ServiceModel
         /// Convenience method to compute and set endpoint's address
         /// </summary>
         /// <param name="endpoint">endpoint to set</param>
-        /// <param name="relativeAddress">address relative to the ServiceHost's base address, if any, for endpoint's current binding</param>
+        /// <param name="relativeAddress">address relative to the ServiceHost's base address, if any, for
+        // endpoint's current binding</param>
         public void SetEndpointAddress(ServiceEndpoint endpoint, string relativeAddress)
         {
             CheckArgument(endpoint, "endpoint");
@@ -294,7 +304,8 @@ namespace System.ServiceModel
         }
 
         /// <summary>
-        /// Automatically add endpoints for all of a service's enabled contracts, for all of its enabled base addresses that match the specified binding.
+        /// Automatically add endpoints for all of a service's enabled contracts, for all of its enabled
+        // base addresses that match the specified binding.
         /// </summary>
         /// <param name="protocol">Binding to add endpoints for</param>
         /// <returns>Endpoints created</returns>

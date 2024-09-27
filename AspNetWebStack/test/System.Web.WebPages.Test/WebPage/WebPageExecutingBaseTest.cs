@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using System.Text;
@@ -210,7 +211,8 @@ namespace System.Web.WebPages.Test
         }
 
         /// <remarks>
-        /// This is a regression test for Html.Raw behaving incorrectly in attributes - the code here is derived from that generated
+        /// This is a regression test for Html.Raw behaving incorrectly in attributes - the code here is
+        // derived from that generated
         /// by the Razor engine on input like the following:
         ///
         /// cool="@Html.Raw("this is cool text")"

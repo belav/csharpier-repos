@@ -60,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
 
         private readonly AsyncBatchingWorkQueue _workQueue;
 
-        // We'll get notifications from the OOP server about new attribute arguments. Collect those notifications and
+        // We'll get notifications from the OOP server about new attribute arguments. Collect those
+        // notifications and
         // deliver them to VS in batches to prevent flooding the UI thread.
         private readonly AsyncBatchingWorkQueue<DesignerAttributeData> _projectSystemNotificationQueue;
 
@@ -296,7 +297,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             catch
             {
                 // DevDiv # 933717
-                // turns out RegisterDesignViewAttribute can throw in certain cases such as a file failed to be checked out by source control
+                // turns out RegisterDesignViewAttribute can throw in certain cases such as a file failed to be
+                // checked out by source control
                 // or IVSHierarchy failed to set a property for this project
                 //
                 // just swallow it. don't crash VS.
@@ -313,7 +315,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DesignerAttribu
             cancellationToken.ThrowIfCancellationRequested();
 
             // We may have updates for many different configurations of the same logical project system project.
-            // However, the project system only associates designer attributes with one of those projects.  So just drop
+            // However, the project system only associates designer attributes with one of those projects.  So
+            // just drop
             // the notifications for any sibling configurations.
             if (!_workspace.IsPrimaryProject(projectId))
                 return;

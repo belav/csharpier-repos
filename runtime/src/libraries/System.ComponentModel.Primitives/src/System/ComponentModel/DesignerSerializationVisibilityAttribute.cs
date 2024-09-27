@@ -41,7 +41,8 @@ namespace System.ComponentModel
             new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Visible);
 
         /// <summary>
-        /// Specifies the default value, which is <see cref='System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible'/>,
+        /// Specifies the default value, which is <see
+        // cref='System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible'/>,
         /// that is, a visual designer  uses default rules to generate the value of a property.
         /// This <see langword='static'/> field is read-only.
         /// </summary>

@@ -70,8 +70,10 @@ namespace Internal.Runtime
     };
 
     /// <summary>
-    /// Represents the extra flags stored in the <c>_usComponentSize</c> field of a <c>System.Runtime.MethodTable</c>
-    /// when <c>_usComponentSize</c> does not represent ComponentSize. (i.e. when the type is not an array, string or typedef)
+    /// Represents the extra flags stored in the <c>_usComponentSize</c> field of a
+    // <c>System.Runtime.MethodTable</c>
+    /// when <c>_usComponentSize</c> does not represent ComponentSize. (i.e. when the type is not an
+    // array, string or typedef)
     /// </summary>
     [Flags]
     internal enum EETypeFlagsEx : ushort
@@ -110,7 +112,8 @@ namespace Internal.Runtime
     }
 
     /// <summary>
-    /// These are flag values that are rarely set for types. If any of them are set then an optional field will
+    /// These are flag values that are rarely set for types. If any of them are set then an optional
+    // field will
     /// be associated with the MethodTable to represent them.
     /// </summary>
     [Flags]

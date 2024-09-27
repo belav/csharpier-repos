@@ -39,10 +39,13 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         // Error strings
         //internal string inputArrayStart = "Formula requires";
         //internal string inputArrayEnd = "arrays";
-        //internal string SR.ExceptionPriceIndicatorsSameYNumber = "Formula requires the same number of Y values for each input data point";
-        //internal string SR.ExceptionPriceIndicatorsFormulaRequiresFourArrays = "Formula requires the same number of X and Y values for each input data point";
+        //internal string SR.ExceptionPriceIndicatorsSameYNumber = "Formula requires the same number of Y
+        // values for each input data point";
+        //internal string SR.ExceptionPriceIndicatorsFormulaRequiresFourArrays = "Formula requires the same
+        // number of X and Y values for each input data point";
         //internal string periodMissing = "Formula error - Period parameter is missing. ";
-        //internal string SR.ExceptionPriceIndicatorsFormulaRequiresFourArrays = "Formula error - There are not enough data points for the Period. ";
+        //internal string SR.ExceptionPriceIndicatorsFormulaRequiresFourArrays = "Formula error - There are
+        // not enough data points for the Period. ";
 
         #endregion
 
@@ -734,7 +737,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         ///
         /// </summary>
         /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values</param>
-        /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Bollinger Band Up, 3. row - Bollinger Band Down</param>
+        /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Bollinger Band Up, 3.
+        // row - Bollinger Band Down</param>
         /// <param name="parameterList">Array of strings: 1. Period</param>
         /// <param name="extraParameterList">Array of strings: 1. Start from zero</param>
         private void BollingerBands(
@@ -890,7 +894,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value Weighted Close Indicator.
         /// </summary>
-        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (Close), 3. row - Y values (High), 4. row - Y values (Low)</param>
+        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (Close), 3.
+        // row - Y values (High), 4. row - Y values (Low)</param>
         /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Weighted Close</param>
         private void TypicalPrice(double[][] inputValues, out double[][] outputValues)
         {
@@ -932,7 +937,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value Median Price Indicator.
         /// </summary>
-        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (High), 3. row - Y values (Low)</param>
+        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (High), 3. row
+        // - Y values (Low)</param>
         /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Median Price</param>
         private void MedianPrice(double[][] inputValues, out double[][] outputValues)
         {
@@ -978,7 +984,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// Output:
         ///		- 1 Y value Weighted Close Indicator.
         /// </summary>
-        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (Close), 3. row - Y values (High), 4. row - Y values (Low)</param>
+        /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values (Close), 3.
+        // row - Y values (High), 4. row - Y values (Low)</param>
         /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Weighted Close</param>
         private void WeightedClose(double[][] inputValues, out double[][] outputValues)
         {
@@ -1035,7 +1042,8 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         ///
         /// </summary>
         /// <param name="inputValues">Arrays of doubles: 1. row - X values, 2. row - Y values</param>
-        /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Envelopes Up, 3. row - Envelopes Down</param>
+        /// <param name="outputValues">Arrays of doubles: 1. row - X values, 2. row - Envelopes Up, 3. row -
+        // Envelopes Down</param>
         /// <param name="parameterList">Array of strings: parameters</param>
         /// <param name="extraParameterList">Array of strings: Extra parameters </param>
         private void Envelopes(
@@ -1226,8 +1234,10 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         /// <param name="inputValues">Arrays of doubles - Input values</param>
         /// <param name="outputValues">Arrays of doubles - Output values</param>
         /// <param name="parameterList">Array of strings - Formula parameters</param>
-        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from DataManipulator object</param>
-        /// <param name="outLabels">Array of strings - Used for Labels. Description for output results.</param>
+        /// <param name="extraParameterList">Array of strings - Extra Formula parameters from
+        // DataManipulator object</param>
+        /// <param name="outLabels">Array of strings - Used for Labels. Description for output
+        // results.</param>
         virtual public void Formula(
             string formulaName,
             double[][] inputValues,

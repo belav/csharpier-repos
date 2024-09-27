@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Components.Rendering;
 
 public class RendererSynchronizationContextTest
 {
-    // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch
+    // Nothing should exceed the timeout in a successful run of the the tests, this is just here to
+    // catch
     // failures.
     public TimeSpan Timeout = Debugger.IsAttached
         ? System.Threading.Timeout.InfiniteTimeSpan

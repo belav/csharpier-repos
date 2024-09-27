@@ -91,7 +91,8 @@ namespace Newtonsoft.Json.Linq
         public JConstructor() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JConstructor"/> class from another <see cref="JConstructor"/> object.
+        /// Initializes a new instance of the <see cref="JConstructor"/> class from another <see
+        // cref="JConstructor"/> object.
         /// </summary>
         /// <param name="other">A <see cref="JConstructor"/> object to copy from.</param>
         public JConstructor(JConstructor other)
@@ -107,7 +108,8 @@ namespace Newtonsoft.Json.Linq
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and content.
+        /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and
+        // content.
         /// </summary>
         /// <param name="name">The constructor name.</param>
         /// <param name="content">The contents of the constructor.</param>
@@ -115,7 +117,8 @@ namespace Newtonsoft.Json.Linq
             : this(name, (object)content) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and content.
+        /// Initializes a new instance of the <see cref="JConstructor"/> class with the specified name and
+        // content.
         /// </summary>
         /// <param name="name">The constructor name.</param>
         /// <param name="content">The contents of the constructor.</param>
@@ -158,7 +161,8 @@ namespace Newtonsoft.Json.Linq
         /// Writes this token to a <see cref="JsonWriter"/>.
         /// </summary>
         /// <param name="writer">A <see cref="JsonWriter"/> into which this method will write.</param>
-        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when writing the token.</param>
+        /// <param name="converters">A collection of <see cref="JsonConverter"/> which will be used when
+        // writing the token.</param>
         public override void WriteTo(JsonWriter writer, params JsonConverter[] converters)
         {
             writer.WriteStartConstructor(_name!);
@@ -226,8 +230,10 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Loads a <see cref="JConstructor"/> from a <see cref="JsonReader"/>.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JConstructor"/>.</param>
-        /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
+        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see
+        // cref="JConstructor"/>.</param>
+        /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified
+        // <see cref="JsonReader"/>.</returns>
         public new static JConstructor Load(JsonReader reader)
         {
             return Load(reader, null);
@@ -236,10 +242,12 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Loads a <see cref="JConstructor"/> from a <see cref="JsonReader"/>.
         /// </summary>
-        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see cref="JConstructor"/>.</param>
+        /// <param name="reader">A <see cref="JsonReader"/> that will be read for the content of the <see
+        // cref="JConstructor"/>.</param>
         /// <param name="settings">The <see cref="JsonLoadSettings"/> used to load the JSON.
         /// If this is <c>null</c>, default load settings will be used.</param>
-        /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified <see cref="JsonReader"/>.</returns>
+        /// <returns>A <see cref="JConstructor"/> that contains the JSON that was read from the specified
+        // <see cref="JsonReader"/>.</returns>
         public new static JConstructor Load(JsonReader reader, JsonLoadSettings? settings)
         {
             if (reader.TokenType == JsonToken.None)

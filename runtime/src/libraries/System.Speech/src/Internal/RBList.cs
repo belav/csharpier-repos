@@ -430,7 +430,8 @@ namespace System.Speech.Internal
                     //
                     // Note that onlyChild could be null.
                     // The deleted node and its only child are BLACK, and there is a real parent, therefore,
-                    // the total black height was at least 2 (excluding the real parent), thus the sibling subtree also has a black height of at least 2
+                    // the total black height was at least 2 (excluding the real parent), thus the sibling subtree also
+                    // has a black height of at least 2
                     //
                     FixRemovalCase2(GetSibling(onlyChild, node.Parent));
                 }

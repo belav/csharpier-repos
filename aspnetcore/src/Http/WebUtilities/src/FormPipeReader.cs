@@ -25,7 +25,8 @@ public class FormPipeReader
     private const int DefaultValueLengthLimit = 1024 * 1024 * 4;
 
     // Used for UTF8/ASCII (precalculated for fast path)
-    // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
+    // This uses C# compiler's ability to refer to static data directly. For more information see
+    // https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> UTF8EqualEncoded => "="u8;
     private static ReadOnlySpan<byte> UTF8AndEncoded => "&"u8;
 
@@ -179,7 +180,8 @@ public class FormPipeReader
             }
             else
             {
-                // We can't know that what is currently read is the end of the form value, that's only the case if this is the final block
+                // We can't know that what is currently read is the end of the form value, that's only the case if
+                // this is the final block
                 // If we're not in the final block, then consume nothing
                 if (!isFinalBlock)
                 {
@@ -414,7 +416,8 @@ public class FormPipeReader
         {
             // UrlDecoder only works on UTF8 (and implicitly ASCII)
 
-            // We need to create a Span from a ReadOnlySpan. This cast is safe because the memory is still held by the pipe
+            // We need to create a Span from a ReadOnlySpan. This cast is safe because the memory is still held
+            // by the pipe
             // We will also create a string from it by the end of the function.
             var span = MemoryMarshal.CreateSpan(
                 ref MemoryMarshal.GetReference(readOnlySpan),

@@ -13,7 +13,8 @@ using System.Runtime.InteropServices;
 namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 {
     /// <summary>
-    /// The ComObject class wraps a runtime-callable-wrapper and enables it to be used with the Dynamic Language Runtime and the C# dynamic keyword.
+    /// The ComObject class wraps a runtime-callable-wrapper and enables it to be used with the Dynamic
+    // Language Runtime and the C# dynamic keyword.
     /// </summary>
     internal class ComObject : IDynamicMetaObjectProvider
     {
@@ -28,7 +29,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         private static readonly object s_comObjectInfoKey = new object();
 
         /// <summary>
-        /// Gets a <see cref="ComObject"/> that wraps the runtime-callable-wrapper, or creates one if none currently exists.
+        /// Gets a <see cref="ComObject"/> that wraps the runtime-callable-wrapper, or creates one if none
+        // currently exists.
         /// </summary>
         /// <returns></returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]

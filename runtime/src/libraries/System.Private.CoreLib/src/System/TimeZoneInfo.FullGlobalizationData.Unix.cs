@@ -14,7 +14,8 @@ namespace System
 #if !TARGET_MACCATALYST && !TARGET_IOS && !TARGET_TVOS
         private const string GmtId = "GMT";
 
-        // Some time zones may give better display names using their location names rather than their generic name.
+        // Some time zones may give better display names using their location names rather than their
+        // generic name.
         // We can update this list as need arises.
         private static readonly string[] s_ZonesThatUseLocationName = new[]
         {
@@ -221,7 +222,8 @@ namespace System
         {
             CultureInfo uiCulture = UICulture;
             // Get the base offset to prefix in front of the time zone.
-            // Only UTC and its aliases have "(UTC)", handled earlier.  All other zones include an offset, even if it's zero.
+            // Only UTC and its aliases have "(UTC)", handled earlier.  All other zones include an offset, even
+            // if it's zero.
             string baseOffsetText = string.Create(
                 null,
                 stackalloc char[128],
@@ -285,7 +287,8 @@ namespace System
                     return;
                 }
 
-                // Other zones with a zero offset and the equivalent of "Greenwich Mean Time" should only use the location name.
+                // Other zones with a zero offset and the equivalent of "Greenwich Mean Time" should only use the
+                // location name.
                 // For example, prefer "Iceland Time" over "Greenwich Mean Time (Reykjavik)".
                 string? gmtGenericName = null;
                 GetDisplayName(
@@ -376,7 +379,8 @@ namespace System
 #endif
         }
 
-        // Helper function that gets an exmplar city name either from ICU or from the IANA time zone ID itself
+        // Helper function that gets an exmplar city name either from ICU or from the IANA time zone ID
+        // itself
         private static string GetExemplarCityName(string timeZoneId, string uiCultureName)
         {
             // First try to get the name through the localization data.
@@ -397,7 +401,8 @@ namespace System
             return timeZoneId.Substring(i + 1).Replace('_', ' ');
         }
 
-        // Helper function that returns an alternative ID using ICU data. Used primarily for converting from Windows IDs.
+        // Helper function that returns an alternative ID using ICU data. Used primarily for converting from
+        // Windows IDs.
         private static unsafe string? GetAlternativeId(string id, out bool idIsIana)
         {
             idIsIana = false;

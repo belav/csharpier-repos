@@ -11,9 +11,11 @@ namespace Microsoft.AspNetCore.Mvc.ApplicationParts;
 public class CompiledRazorAssemblyApplicationPartFactory : ApplicationPartFactory
 {
     /// <summary>
-    /// Gets the sequence of <see cref="ApplicationPart"/> instances that are created by this instance of <see cref="DefaultApplicationPartFactory"/>.
+    /// Gets the sequence of <see cref="ApplicationPart"/> instances that are created by this instance
+    // of <see cref="DefaultApplicationPartFactory"/>.
     /// <para>
-    /// Applications may use this method to get the same behavior as this factory produces during MVC's default part discovery.
+    /// Applications may use this method to get the same behavior as this factory produces during MVC's
+    // default part discovery.
     /// </para>
     /// </summary>
     /// <param name="assembly">The <see cref="Assembly"/>.</param>

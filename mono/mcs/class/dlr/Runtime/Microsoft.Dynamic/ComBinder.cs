@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Microsoft Public License. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Microsoft Public License, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Microsoft Public License.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Microsoft Public License. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Microsoft Public License, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Microsoft Public License.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 using System;
 using Microsoft;
 #if !SILVERLIGHT
@@ -77,9 +77,11 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic get member operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="GetMemberBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="GetMemberBinder"/> that represents the
+        // details of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <param name="delayInvocation">true if member evaluation may be delayed.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
@@ -126,9 +128,11 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic get member operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="GetMemberBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="GetMemberBinder"/> that represents the
+        // details of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
         public static bool TryBindGetMember(
             GetMemberBinder binder,
@@ -142,10 +146,13 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic set member operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="SetMemberBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="SetMemberBinder"/> that represents the
+        // details of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation.</param>
-        /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set member operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set
+        // member operation.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -184,10 +191,13 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic invoke operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="InvokeBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="InvokeBinder"/> that represents the details
+        // of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the
+        // invoke member operation.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -226,10 +236,13 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic invoke member operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="InvokeMemberBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="InvokeMemberBinder"/> that represents the
+        // details of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the
+        // invoke member operation.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -268,10 +281,13 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic get index operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="GetIndexBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="GetIndexBinder"/> that represents the details
+        // of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the
+        // invoke member operation.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -310,11 +326,15 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic set index operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="SetIndexBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="SetIndexBinder"/> that represents the details
+        // of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation. </param>
-        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the invoke member operation.</param>
-        /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set index operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="args">An array of <see cref="DynamicMetaObject"/> instances - arguments to the
+        // invoke member operation.</param>
+        /// <param name="value">The <see cref="DynamicMetaObject"/> representing the value for the set index
+        // operation.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -355,9 +375,11 @@ namespace Microsoft.Scripting
         /// <summary>
         /// Tries to perform binding of the dynamic Convert operation.
         /// </summary>
-        /// <param name="binder">An instance of the <see cref="ConvertBinder"/> that represents the details of the dynamic operation.</param>
+        /// <param name="binder">An instance of the <see cref="ConvertBinder"/> that represents the details
+        // of the dynamic operation.</param>
         /// <param name="instance">The target of the dynamic operation.</param>
-        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the binding.</param>
+        /// <param name="result">The new <see cref="DynamicMetaObject"/> representing the result of the
+        // binding.</param>
         /// <returns>true if operation was bound successfully; otherwise, false.</returns>
 #if CLR2
         [SecurityCritical, SecurityTreatAsSafe]
@@ -462,7 +484,8 @@ namespace Microsoft.Scripting
         /// This function can operate only with objects for which <see cref="IsComObject"/> returns true.
         /// </summary>
         /// <param name="value">The object for which data members are requested.</param>
-        /// <param name="names">The enumeration of names of data members for which to retrieve values.</param>
+        /// <param name="names">The enumeration of names of data members for which to retrieve
+        // values.</param>
         /// <returns>The collection of pairs that represent data member's names and their data.</returns>
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]

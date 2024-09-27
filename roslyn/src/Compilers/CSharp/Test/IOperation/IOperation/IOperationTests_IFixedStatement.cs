@@ -403,7 +403,8 @@ IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(15,22): error CS0266: Cannot implicitly convert type 'int**' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // file.cs(15,22): error CS0266: Cannot implicitly convert type 'int**' to 'int'. An explicit
+                // conversion exists (are you missing a cast?)
                 //                 i3 = &p1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "&p1")
                     .WithArguments("int**", "int")
@@ -445,9 +446,11 @@ unsafe public class MyClass
                     .WithLocation(9, 46),
             };
 
-            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
+            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify
+            // general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
-            //                      Need to make sure we haven't lost coverage for the general implementation and
+            //                      Need to make sure we haven't lost coverage for the general implementation
+            // and
             //                      add new tests if necessary.
             string expectedFlowGraph =
                 @"
@@ -542,9 +545,11 @@ unsafe public class MyClass
                     .WithLocation(11, 50),
             };
 
-            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
+            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify
+            // general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
-            //                      Need to make sure we haven't lost coverage for the general implementation and
+            //                      Need to make sure we haven't lost coverage for the general implementation
+            // and
             //                      add new tests if necessary.
             string expectedFlowGraph =
                 @"
@@ -640,17 +645,21 @@ unsafe public class MyClass
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // CS0212: You can only take the address of an unfixed expression inside of a fixed statement
+                // initializer
                 //         fixed (int* p = b ? &i1 : &i2)
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "&i1").WithLocation(7, 29),
-                // CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
+                // CS0212: You can only take the address of an unfixed expression inside of a fixed statement
+                // initializer
                 //         fixed (int* p = b ? &i1 : &i2)
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "&i2").WithLocation(7, 35),
             };
 
-            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
+            // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify
+            // general handling of operations
             //                      with OperationKind.None. We have special handling for fixed statements now.
-            //                      Need to make sure we haven't lost coverage for the general implementation and
+            //                      Need to make sure we haven't lost coverage for the general implementation
+            // and
             //                      add new tests if necessary.
             string expectedFlowGraph =
                 @"

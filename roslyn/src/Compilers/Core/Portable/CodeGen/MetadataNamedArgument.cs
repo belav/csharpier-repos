@@ -9,7 +9,8 @@ using Cci = Microsoft.Cci;
 namespace Microsoft.CodeAnalysis.CodeGen
 {
     /// <summary>
-    /// An expression that represents a (name, value) pair and that is typically used in method calls, custom attributes and object initializers.
+    /// An expression that represents a (name, value) pair and that is typically used in method calls,
+    // custom attributes and object initializers.
     /// </summary>
     internal sealed class MetadataNamedArgument : Cci.IMetadataNamedArgument
     {

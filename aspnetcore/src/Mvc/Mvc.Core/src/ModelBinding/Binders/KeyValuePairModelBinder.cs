@@ -22,7 +22,8 @@ public class KeyValuePairModelBinder<TKey, TValue> : IModelBinder
     /// Creates a new <see cref="KeyValuePair{TKey, TValue}"/>.
     /// </summary>
     /// <param name="keyBinder">The <see cref="IModelBinder"/> for <typeparamref name="TKey"/>.</param>
-    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref name="TValue"/>.</param>
+    /// <param name="valueBinder">The <see cref="IModelBinder"/> for <typeparamref
+    // name="TValue"/>.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public KeyValuePairModelBinder(
         IModelBinder keyBinder,

@@ -6,14 +6,17 @@ using System.Diagnostics;
 namespace System.Threading
 {
     /// <summary>
-    /// A helper class to capture a start time using <see cref="Environment.TickCount"/> as a time in milliseconds.
+    /// A helper class to capture a start time using <see cref="Environment.TickCount"/> as a time in
+    // milliseconds.
     /// Also updates a given timeout by subtracting the current time from the start time.
     /// </summary>
     internal static class TimeoutHelper
     {
         /// <summary>
-        /// Returns <see cref="Environment.TickCount"/> as a start time in milliseconds as a <see cref="uint"/>.
-        /// <see cref="Environment.TickCount"/> rolls over from positive to negative every ~25 days, then ~25 days to back to positive again.
+        /// Returns <see cref="Environment.TickCount"/> as a start time in milliseconds as a <see
+        // cref="uint"/>.
+        /// <see cref="Environment.TickCount"/> rolls over from positive to negative every ~25 days, then
+        // ~25 days to back to positive again.
         /// <see cref="uint"/> is used to ignore the sign and double the range to 50 days.
         /// </summary>
         public static uint GetTime()

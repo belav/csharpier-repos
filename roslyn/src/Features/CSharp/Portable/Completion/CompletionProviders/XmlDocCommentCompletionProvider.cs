@@ -281,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 ) attributeSyntax
             )
             {
-                // In the following, 'attr1' may be a regular text attribute, or one of the special 'cref' or 'name' attributes
+                // In the following, 'attr1' may be a regular text attribute, or one of the special 'cref' or 'name'
+                // attributes
                 // <elem attr1="" $$
                 // <elem attr1="" $$attr2
                 // <elem attr1="" attr2$$

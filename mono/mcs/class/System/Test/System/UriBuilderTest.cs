@@ -140,7 +140,8 @@ namespace MonoTests.System
             Assert.AreEqual(string.Empty, b.Password, "1.Password");
             Assert.AreEqual("//myname:mypwd@contoso.com", b.Uri.LocalPath, "1.Uri.LocalPath");
 
-            // weird ?caching? issue, UserInfo is not updated if we look at the value of UserName before setting Password
+            // weird ?caching? issue, UserInfo is not updated if we look at the value of UserName before setting
+            // Password
             b = new UriBuilder("mailto", "contoso.com");
             b.UserName = "myname";
             Assert.AreEqual("myname", b.Uri.UserInfo, "2.UserName");

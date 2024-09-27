@@ -29,8 +29,10 @@ namespace System.Workflow.ComponentModel.Design
 
     #region ActivityDesigner Class
     /// <summary>
-    /// ActivityDesigner provides a simple designer which allows user to visually design activities in the design mode.
-    /// ActivityDesigner provides simple mechanism using which the activities can participate in rendering the Workflow.
+    /// ActivityDesigner provides a simple designer which allows user to visually design activities in
+    // the design mode.
+    /// ActivityDesigner provides simple mechanism using which the activities can participate in
+    // rendering the Workflow.
     /// ActivityDesigner enables the user to customize layouting, drawing associated with the activity.
     /// It also enables the user to extend the meta data associated with the activity.
     /// </summary>
@@ -985,7 +987,8 @@ namespace System.Workflow.ComponentModel.Design
         /// This method is called in case of insertion operation such as Drag-Drop or Paste.
         /// </summary>
         /// <param name="parentActivity">CompositeActivity which can be potentially set as parent.</param>
-        /// <returns>True if the CompositeActivity can be set as parent of activity associated with designer, false otherwise.</returns>
+        /// <returns>True if the CompositeActivity can be set as parent of activity associated with
+        // designer, false otherwise.</returns>
         public virtual bool CanBeParentedTo(CompositeActivityDesigner parentActivityDesigner)
         {
             if (parentActivityDesigner == null)
@@ -1285,7 +1288,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Disposes the resources held by the designer.
         /// </summary>
-        /// <param name="disposing">True if the designer is being disposed, false if the designer is being finalized.</param>
+        /// <param name="disposing">True if the designer is being disposed, false if the designer is being
+        // finalized.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -1400,9 +1404,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to add items to the set of attributes that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to add items to the set of attributes that
+        // it exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="attributes">The Attribute objects for the class of the activity. The keys in the dictionary of attributes are the TypeID values of the attributes.</param>
+        /// <param name="attributes">The Attribute objects for the class of the activity. The keys in the
+        // dictionary of attributes are the TypeID values of the attributes.</param>
         protected virtual void PreFilterAttributes(IDictionary attributes)
         {
             if (attributes == null)
@@ -1410,9 +1416,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to add items to the set of properties that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to add items to the set of properties that
+        // it exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="properties">The PropertyDescriptor objects that represent the properties of the class of the activity. The keys in the dictionary of properties are property names.</param>
+        /// <param name="properties">The PropertyDescriptor objects that represent the properties of the
+        // class of the activity. The keys in the dictionary of properties are property names.</param>
         protected virtual void PreFilterProperties(IDictionary properties)
         {
             if (properties == null)
@@ -1420,9 +1428,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to add items to the set of events that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to add items to the set of events that it
+        // exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="events">The EventDescriptor objects that represent the events of the class of the activity. The keys in the dictionary of events are event names.</param>
+        /// <param name="events">The EventDescriptor objects that represent the events of the class of the
+        // activity. The keys in the dictionary of events are event names.</param>
         protected virtual void PreFilterEvents(IDictionary events)
         {
             if (events == null)
@@ -1430,9 +1440,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to change or remove items from the set of attributes that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to change or remove items from the set of
+        // attributes that it exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="attributes">The Attribute objects for the class of the activity. The keys in the dictionary of attributes are the TypeID values of the attributes.</param>
+        /// <param name="attributes">The Attribute objects for the class of the activity. The keys in the
+        // dictionary of attributes are the TypeID values of the attributes.</param>
         protected virtual void PostFilterAttributes(IDictionary attributes)
         {
             if (attributes == null)
@@ -1440,9 +1452,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to change or remove items from the set of properties that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to change or remove items from the set of
+        // properties that it exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="properties">The PropertyDescriptor objects that represent the properties of the class of the activity. The keys in the dictionary of properties are property names.</param>
+        /// <param name="properties">The PropertyDescriptor objects that represent the properties of the
+        // class of the activity. The keys in the dictionary of properties are property names.</param>
         protected virtual void PostFilterProperties(IDictionary properties)
         {
             if (properties == null)
@@ -1469,9 +1483,11 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// When overridden in a derived class, allows a designer to change or remove items from the set of events that it exposes through a TypeDescriptor.
+        /// When overridden in a derived class, allows a designer to change or remove items from the set of
+        // events that it exposes through a TypeDescriptor.
         /// </summary>
-        /// <param name="events">The EventDescriptor objects that represent the events of the class of the activity. The keys in the dictionary of events are event names.</param>
+        /// <param name="events">The EventDescriptor objects that represent the events of the class of the
+        // activity. The keys in the dictionary of events are event names.</param>
         protected virtual void PostFilterEvents(IDictionary events)
         {
             if (events == null)
@@ -1479,10 +1495,12 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Attempts to retrieve the specified type of service from the designer's activity's design mode site.
+        /// Attempts to retrieve the specified type of service from the designer's activity's design mode
+        // site.
         /// </summary>
         /// <param name="serviceType">The type of service to request.</param>
-        /// <returns>An object implementing the requested service, or a null reference (Nothing in Visual Basic) if the service cannot be resolved.</returns>
+        /// <returns>An object implementing the requested service, or a null reference (Nothing in Visual
+        // Basic) if the service cannot be resolved.</returns>
         protected object GetService(Type serviceType)
         {
             if (serviceType == null)
@@ -1621,7 +1639,8 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Called when the drag drop operation is in progress and mouse cursor is inside the designer bounds.
+        /// Called when the drag drop operation is in progress and mouse cursor is inside the designer
+        // bounds.
         /// </summary>
         /// <param name="e">Drag drop event arguments.</param>
         protected virtual void OnDragOver(ActivityDragEventArgs e)
@@ -1695,7 +1714,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Allows designer to process raw win32 message
         /// </summary>
-        /// <param name="message">Message structure containing details of the message to be processed</param>
+        /// <param name="message">Message structure containing details of the message to be
+        // processed</param>
         protected virtual void OnProcessMessage(Message message) { }
 
         /// <summary>
@@ -1790,7 +1810,8 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Return if an activity type is valid in context of a root designer. This function is called only if
+        /// Return if an activity type is valid in context of a root designer. This function is called only
+        // if
         /// the designer is a root designer
         /// </summary>
         /// <param name="activityType">Type of the activity being queried</param>
@@ -1910,7 +1931,8 @@ namespace System.Workflow.ComponentModel.Design
                 this.textSize.Width = Math.Min(this.textSize.Width, actualTextSize.Width);
                 this.textSize.Width = Math.Max(this.textSize.Width, requestedLineSize.Width);
 
-                //We calculate the text size in onlayoutsize as we get access to the graphics and font information in this function
+                //We calculate the text size in onlayoutsize as we get access to the graphics and font information
+                // in this function
                 this.textSize.Height = requestedLineSize.Height;
                 int textLines = actualTextSize.Width / this.textSize.Width;
                 textLines += ((actualTextSize.Width % this.textSize.Width) > 0) ? 1 : 0;
@@ -1939,7 +1961,8 @@ namespace System.Workflow.ComponentModel.Design
         }
 
         /// <summary>
-        /// Called when the user starts to visually resize the designer when designer is inside freeform designer
+        /// Called when the user starts to visually resize the designer when designer is inside freeform
+        // designer
         /// </summary>
         /// <param name="e"></param>
         protected virtual void OnBeginResizing(ActivityDesignerResizeEventArgs e) { }
@@ -1947,7 +1970,8 @@ namespace System.Workflow.ComponentModel.Design
         /// <summary>
         /// Called when the user is visually resizing the designer when designer is inside freeform designer
         /// </summary>
-        /// <param name="e">ActivityDesignerResizeEventArgs specifying the edge being used to resize and new bounds</param>
+        /// <param name="e">ActivityDesignerResizeEventArgs specifying the edge being used to resize and new
+        // bounds</param>
         protected virtual void OnResizing(ActivityDesignerResizeEventArgs e)
         {
             FreeformActivityDesigner.SetDesignerBounds(this, e.Bounds);
@@ -2768,7 +2792,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (targetFramework != 0)
                 {
-                    // if target framework is less than 3.0 dont show any toolbox item, because workflow didnt ship then.
+                    // if target framework is less than 3.0 dont show any toolbox item, because workflow didnt ship
+                    // then.
                     if (targetFramework < ActivityDesigner.FrameworkVersion_3_0)
                     {
                         return false;
@@ -3491,7 +3516,8 @@ namespace System.Workflow.ComponentModel.Design
                         )
                     );
 
-                //work around: This is in order to show the smarttag activated when the drop down is shown but cursor leaves the active area of glyph
+                //work around: This is in order to show the smarttag activated when the drop down is shown but
+                // cursor leaves the active area of glyph
                 if (!activated)
                 {
                     if (this.activeDesigner != null)

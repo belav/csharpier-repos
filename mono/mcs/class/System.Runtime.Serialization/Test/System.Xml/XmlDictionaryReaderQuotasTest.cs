@@ -39,23 +39,23 @@ namespace MonoTests.System.Xml
         [Test]
         public void StaticAndDefaultValues()
         {
-            /*
-            Assert.AreEqual (
-                int.MaxValue, Q.DefaultMaxArrayLength,
-                "static DefaultMaxArrayLength");
-            Assert.AreEqual (
-                int.MaxValue, Q.DefaultMaxBytesPerRead,
-                "static DefaultMaxBytesPerRead");
-            Assert.AreEqual (
-                int.MaxValue, Q.DefaultMaxDepth,
-                "static DefaultMaxDepth");
-            Assert.AreEqual (
-                int.MaxValue, Q.DefaultMaxNameTableCharCount,
-                "static DefaultMaxNameTableCharCount");
-            Assert.AreEqual (
-                int.MaxValue, Q.DefaultMaxStringContentLength,
-                "static DefaultMaxStringContentLength");
-            */
+/*
+Assert.AreEqual (
+int.MaxValue, Q.DefaultMaxArrayLength,
+"static DefaultMaxArrayLength");
+Assert.AreEqual (
+int.MaxValue, Q.DefaultMaxBytesPerRead,
+"static DefaultMaxBytesPerRead");
+Assert.AreEqual (
+int.MaxValue, Q.DefaultMaxDepth,
+"static DefaultMaxDepth");
+Assert.AreEqual (
+int.MaxValue, Q.DefaultMaxNameTableCharCount,
+"static DefaultMaxNameTableCharCount");
+Assert.AreEqual (
+int.MaxValue, Q.DefaultMaxStringContentLength,
+"static DefaultMaxStringContentLength");
+*/
 
             Q q = new Q(); //Q.Default;
 

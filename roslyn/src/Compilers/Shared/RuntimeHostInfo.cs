@@ -12,7 +12,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// This type provides information about the runtime which is hosting application. It must be included in a concrete
+    /// This type provides information about the runtime which is hosting application. It must be
+    // included in a concrete
     /// target framework to be used.
     /// </summary>
     internal static class RuntimeHostInfo

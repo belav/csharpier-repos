@@ -123,10 +123,12 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <typeparam name="T">The type of the expression.</typeparam>
         /// <param name="node">The expression to visit.</param>
-        /// <param name="callerName">The name of the calling method; used to report a better error message.</param>
+        /// <param name="callerName">The name of the calling method; used to report a better error
+        // message.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
+        /// <exception cref="InvalidOperationException">The visit method for this node returned a different
+        // type.</exception>
         [return: NotNullIfNotNull(nameof(node))]
         public T? VisitAndConvert<T>(T? node, string? callerName)
             where T : Expression
@@ -148,10 +150,12 @@ namespace System.Linq.Expressions
         /// </summary>
         /// <typeparam name="T">The type of the expression.</typeparam>
         /// <param name="nodes">The expression to visit.</param>
-        /// <param name="callerName">The name of the calling method; used to report a better error message.</param>
+        /// <param name="callerName">The name of the calling method; used to report a better error
+        // message.</param>
         /// <returns>The modified expression, if it or any subexpression was modified;
         /// otherwise, returns the original expression.</returns>
-        /// <exception cref="InvalidOperationException">The visit method for this node returned a different type.</exception>
+        /// <exception cref="InvalidOperationException">The visit method for this node returned a different
+        // type.</exception>
         public ReadOnlyCollection<T> VisitAndConvert<T>(
             ReadOnlyCollection<T> nodes,
             string? callerName

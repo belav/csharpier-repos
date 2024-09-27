@@ -11,7 +11,8 @@ namespace System.IdentityModel
     using System.Xml;
 
     /// <summary>
-    /// This class implements a deserialization for: EncryptedType as defined in section 3.5.1 of http://www.w3.org/TR/2002/REC-xmlenc-core-2002120
+    /// This class implements a deserialization for: EncryptedType as defined in section 3.5.1 of
+    // http://www.w3.org/TR/2002/REC-xmlenc-core-2002120
     /// </summary>
     internal class EncryptedKeyElement : EncryptedTypeElement
     {

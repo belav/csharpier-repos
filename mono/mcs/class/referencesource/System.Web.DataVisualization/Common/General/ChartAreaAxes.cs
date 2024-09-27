@@ -407,7 +407,8 @@ namespace System.Web.UI.DataVisualization.Charting
 
         /// <summary>
         /// Sets the axis defaults.
-        /// If the at least one of the series bound to this axis is Indexed then the defaults are set using the SetDefaultsFromIndexes().
+        /// If the at least one of the series bound to this axis is Indexed then the defaults are set using
+        // the SetDefaultsFromIndexes().
         /// Otherwise the SetDefaultFromData() is used.
         /// </summary>
         /// <param name="axis">Axis to process</param>
@@ -1485,8 +1486,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// this chart area to collection and sets a list of all
         /// different chart types.
         /// </summary>
-        /// <param name="initializeAxes">If set to <c>true</c> the method will initialize axes default values.</param>
-        /// <param name="checkIndexedAligned">If set to <c>true</c> the method will check that all primary X axis series are aligned if use the IsXValueIndexed flag.</param>
+        /// <param name="initializeAxes">If set to <c>true</c> the method will initialize axes default
+        // values.</param>
+        /// <param name="checkIndexedAligned">If set to <c>true</c> the method will check that all primary X
+        // axis series are aligned if use the IsXValueIndexed flag.</param>
         internal void SetData(bool initializeAxes, bool checkIndexedAligned)
         {
             // Initialize chart type properties

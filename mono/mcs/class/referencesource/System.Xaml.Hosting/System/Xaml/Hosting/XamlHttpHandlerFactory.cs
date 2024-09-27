@@ -222,10 +222,12 @@ namespace System.Xaml.Hosting
             )]
             // Why this triple try blocks instead of using "using" statement:
             // 1. "using" will do the impersonation prior to entering the try,
-            //    which leaves an opertunity to Thread.Abort this thread and get it to exit the method still impersonated.
+            //    which leaves an opertunity to Thread.Abort this thread and get it to exit the method still
+            // impersonated.
             // 2. put the assignment of unsafeImpersonate in a finally block
             //    in order to prevent Threat.Abort after impersonation but before the assignment.
-            // 3. the finally of a "using" doesn't run until exception filters higher up the stack have executed.
+            // 3. the finally of a "using" doesn't run until exception filters higher up the stack have
+            // executed.
             //    they will do so in the impersonated context if an exception is thrown inside the try.
             // In sumary, this should prevent the thread from existing this method well still impersonated.
             Type GetCompiledCustomString(string normalizedVirtualPath)

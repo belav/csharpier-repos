@@ -33,15 +33,23 @@ using Microsoft.Build.Utilities;
 namespace System.Data.Entity.Design
 {
     /// <summary>
-    /// EntityViewGenerator class produces the views for the extents in the passed in StorageMappingItemCollection.
-    /// The views are written as code to the passed in output stream. There are a set of options that user
-    /// can use to control the code generation process. The options should be apssed into the constrcutor.
-    /// While storing the views in the code, the view generator class also stores a Hash value produced based
-    /// on the content of the views and the names of extents. We also generate a hash for each schema file( csdl, ssdl and msl)
-    /// that was used in view generation process and store the hash in the generated code.The entity runtime will try to discover this
-    /// type and if it does discover it will use the generated views in this type. The discovery process is
+    /// EntityViewGenerator class produces the views for the extents in the passed in
+    // StorageMappingItemCollection.
+    /// The views are written as code to the passed in output stream. There are a set of options that
+    // user
+    /// can use to control the code generation process. The options should be apssed into the
+    // constrcutor.
+    /// While storing the views in the code, the view generator class also stores a Hash value produced
+    // based
+    /// on the content of the views and the names of extents. We also generate a hash for each schema
+    // file( csdl, ssdl and msl)
+    /// that was used in view generation process and store the hash in the generated code.The entity
+    // runtime will try to discover this
+    /// type and if it does discover it will use the generated views in this type. The discovery process
+    // is
     /// explained in detail in the comments for StorageMappingItemCollection class.
-    /// The runtime will throw an exception if any of the the hash values produced in the design time does not match
+    /// The runtime will throw an exception if any of the the hash values produced in the design time
+    // does not match
     /// the hash values produced at the runtime.
     /// </summary>
     public class EntityViewGenerator
@@ -94,7 +102,8 @@ namespace System.Data.Entity.Design
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
-        /// <param name="mappingCollection">Mapping Item Collection for which views should be generated</param>
+        /// <param name="mappingCollection">Mapping Item Collection for which views should be
+        // generated</param>
         /// <param name="outputUri">Uri to which generated code needs to be written</param>
         [ResourceExposure(ResourceScope.Machine)] //Exposes the outputPath as part of ConnectionString which are a Machine resource.
         [ResourceConsumption(ResourceScope.Machine)] //For StreamWriter constructor call. But the path to the stream is not created in this method.
@@ -132,7 +141,8 @@ namespace System.Data.Entity.Design
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
-        /// <param name="mappingCollection">Mapping Item Collection for which views should be generated</param>
+        /// <param name="mappingCollection">Mapping Item Collection for which views should be
+        // generated</param>
         /// <param name="outputWriter">Output writer to which we want to write the code</param>
         [CLSCompliant(false)]
         public IList<EdmSchemaError> GenerateViews(
@@ -160,7 +170,8 @@ namespace System.Data.Entity.Design
         /// metadata and mapping. It also produces a hash based
         /// on the view content and the name of the extents.
         /// </summary>
-        /// <param name="mappingCollection">Mapping Item Collection for which views should be generated</param>
+        /// <param name="mappingCollection">Mapping Item Collection for which views should be
+        // generated</param>
         /// <param name="outputWriter">Output writer to which we want to write the code</param>
         [CLSCompliant(false)]
         public IList<EdmSchemaError> GenerateViews(
@@ -288,7 +299,8 @@ namespace System.Data.Entity.Design
             );
             CheckForCompatibleSchemaAndTarget(mappingCollection, targetEntityFrameworkVersion);
 
-            // purpose of this API is to validate the mappingCollection, it basically will call GetEntitySetViews
+            // purpose of this API is to validate the mappingCollection, it basically will call
+            // GetEntitySetViews
 
             EDesignUtil.CheckArgumentNull(mappingCollection, "mappingCollection");
 
@@ -512,9 +524,12 @@ namespace System.Data.Entity.Design
                         )
                         .ToUpperInvariant();
 
-                //Add typeof expression to get the type that contains ViewGen type. This will help us in avoiding to go through
-                //all the types in the assembly. I have also verified that this works with VB with a root namespace prepended to the
-                //namespace since VB is picking up the type correctly as long as it is in the same assembly even with out the root namespace.
+                //Add typeof expression to get the type that contains ViewGen type. This will help us in avoiding to
+                // go through
+                //all the types in the assembly. I have also verified that this works with VB with a root namespace
+                // prepended to the
+                //namespace since VB is picking up the type correctly as long as it is in the same assembly even
+                // with out the root namespace.
                 CodeTypeOfExpression viewGenTypeOfExpression = new CodeTypeOfExpression(
                     EntityViewGenerationConstants.NamespaceName + "." + viewStorageTypeName
                 );
@@ -813,9 +828,11 @@ namespace System.Data.Entity.Design
                 viewTextExpression = new CodePrimitiveExpression(viewText);
             }
 
-            // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products", viewString.ToString());
+            // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products",
+            // viewString.ToString());
             // or
-            // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products", "SELECT value c...");
+            // return new System.Collections.Generic.KeyValuePair<string, string>("dbo.Products", "SELECT value
+            // c...");
             CodeObjectCreateExpression newExpression = new CodeObjectCreateExpression(
                 viewMethod.ReturnType,
                 new CodePrimitiveExpression(extentFullName),

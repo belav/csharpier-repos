@@ -31,7 +31,8 @@ public sealed partial class ForbidHttpResult : IResult
     /// Initializes a new instance of <see cref="ForbidHttpResult"/> with the
     /// specified <paramref name="properties"/>.
     /// </summary>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     internal ForbidHttpResult(AuthenticationProperties? properties)
         : this(Array.Empty<string>(), properties) { }
@@ -41,7 +42,8 @@ public sealed partial class ForbidHttpResult : IResult
     /// specified authentication scheme and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationScheme">The authentication schemes to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     internal ForbidHttpResult(string authenticationScheme, AuthenticationProperties? properties)
         : this(new[] { authenticationScheme }, properties) { }
@@ -51,7 +53,8 @@ public sealed partial class ForbidHttpResult : IResult
     /// specified authentication schemes and <paramref name="properties"/>.
     /// </summary>
     /// <param name="authenticationSchemes">The authentication scheme to challenge.</param>
-    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the authentication
+    /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the
+    // authentication
     /// challenge.</param>
     internal ForbidHttpResult(
         IList<string> authenticationSchemes,

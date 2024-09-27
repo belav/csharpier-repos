@@ -53,7 +53,8 @@ public partial class ParameterBinder
     protected ILogger Logger { get; }
 
     /// <summary>
-    /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the initial value.
+    /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the
+    // initial value.
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="modelBinder">The <see cref="IModelBinder"/>.</param>
@@ -82,7 +83,8 @@ public partial class ParameterBinder
             .AsTask();
 
     /// <summary>
-    /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the initial value.
+    /// Binds a model specified by <paramref name="parameter"/> using <paramref name="value"/> as the
+    // initial value.
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="modelBinder">The <see cref="IModelBinder"/>.</param>

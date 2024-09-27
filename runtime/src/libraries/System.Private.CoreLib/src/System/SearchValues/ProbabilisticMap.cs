@@ -15,7 +15,8 @@ using System.Runtime.Intrinsics.X86;
 
 namespace System.Buffers
 {
-    /// <summary>Data structure used to optimize checks for whether a char is in a set of chars.</summary>
+    /// <summary>Data structure used to optimize checks for whether a char is in a set of
+    // chars.</summary>
     /// <remarks>
     /// Like a Bloom filter, the idea is to create a bit map of the characters we are
     /// searching for and use this map as a "cheap" check to decide if the current

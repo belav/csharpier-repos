@@ -26,7 +26,8 @@ namespace System.Data.SqlClient
         internal new const string AlgorithmName = @"AES_256_CBC";
 
         /// <summary>
-        /// Initializes a new instance of SqlAes256CbcAlgorithm algorithm with a given key and encryption type
+        /// Initializes a new instance of SqlAes256CbcAlgorithm algorithm with a given key and encryption
+        // type
         /// </summary>
         /// <param name="encryptionKey">
         /// Root encryption key from which three other keys will be derived

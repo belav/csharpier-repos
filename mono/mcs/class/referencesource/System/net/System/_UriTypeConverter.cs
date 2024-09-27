@@ -3,11 +3,11 @@ Copyright (c) 2003 Microsoft Corporation
 
 Module Name:
 
-    _UriTypeConverter.cs
+_UriTypeConverter.cs
 
 Abstract:
 
-    A default TypeConverter implementation for the System.Uri type
+A default TypeConverter implementation for the System.Uri type
 
 Revision History:
 

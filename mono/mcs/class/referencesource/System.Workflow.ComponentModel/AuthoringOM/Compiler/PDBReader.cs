@@ -113,7 +113,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 index = index - 1;
 
                 // Work Around: AkashS - The SymReader returns bad line-column data for unconditional branch
-                // instructions. The line number is whacky and the column number is 0. Need to verify why this is so.
+                // instructions. The line number is whacky and the column number is 0. Need to verify why this is
+                // so.
                 // We just look for a good sequence point data, it should be close enough in the source code.
                 while (columns[index] == 0 && index > 0)
                     index--;

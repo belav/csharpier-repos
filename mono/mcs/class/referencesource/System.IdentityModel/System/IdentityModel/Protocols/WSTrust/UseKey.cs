@@ -28,7 +28,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Creates an instance of <see cref="UseKey"/>.
         /// </summary>
-        /// <param name="ski">A security key identifier which represents the existing key that should be used. </param>
+        /// <param name="ski">A security key identifier which represents the existing key that should be
+        // used. </param>
         public UseKey(SecurityKeyIdentifier ski)
             : this(ski, null) { }
 
@@ -42,7 +43,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Creates an instance of <see cref="UseKey"/>.
         /// </summary>
-        /// <param name="ski">A security key identifier which represents the existing key that should be used. </param>
+        /// <param name="ski">A security key identifier which represents the existing key that should be
+        // used. </param>
         /// <param name="token">A token which represents existing key that should be used.</param>
         public UseKey(SecurityKeyIdentifier ski, SecurityToken token)
         {

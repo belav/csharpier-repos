@@ -40,10 +40,14 @@ namespace System.ServiceModel.Activities
             this.correlationQueries = new Collection<CorrelationQuery>();
             this.Behaviors.Add(new CorrelationQueryBehavior(this.correlationQueries));
 
-            // If TransactionFlowOption.Allowed or TransactionFlowOption.Mandatory is defined on an operation, we will set
-            // TransactionScopeRequired = true for that operation.  The operation will become transacted (use transaction flow,
-            // or create one locally).  For usability reason, we assume this is the majority usage.  User could opt out by
-            // setting TransactionScopeRequired to false or remove the TransactionFlowAttribute from the operation.
+            // If TransactionFlowOption.Allowed or TransactionFlowOption.Mandatory is defined on an operation,
+            // we will set
+            // TransactionScopeRequired = true for that operation.  The operation will become transacted (use
+            // transaction flow,
+            // or create one locally).  For usability reason, we assume this is the majority usage.  User could
+            // opt out by
+            // setting TransactionScopeRequired to false or remove the TransactionFlowAttribute from the
+            // operation.
             foreach (OperationDescription operationDescription in this.Contract.Operations)
             {
                 TransactionFlowAttribute transactionFlow =
@@ -66,7 +70,8 @@ namespace System.ServiceModel.Activities
         }
 
         // There are two main scenario that user will override this api.
-        // - For ResumeBookmark, User explicitly put or know how to extract InstanceId from Message.  This enables user to provide
+        // - For ResumeBookmark, User explicitly put or know how to extract InstanceId from Message.  This
+        // enables user to provide
         //   customized and lighter-weight (no InstanceKeys indirection) correlation.
         // - For Workflow Creation, User could provide a preferred Id for newly created Workflow Instance.
         protected internal virtual Guid OnGetInstanceId(

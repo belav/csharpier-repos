@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <remarks>
-            /// Rewrites nodes in <paramref name="nodes"/>, which is a snapshot of nodes from the original document.
+            /// Rewrites nodes in <paramref name="nodes"/>, which is a snapshot of nodes from the original
+            // document.
             /// We're mutating the tree as we rewrite, so it's important to grab a snapshot of the
             /// nodes that we're going to reparent before we enumerate them.
             /// </remarks>
@@ -341,7 +342,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <remarks>
-            /// This method boils down to Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).
+            /// This method boils down to
+            // Rewrite(XDocument.Load(fileAttrValue).XPathSelectElements(pathAttrValue)).
             /// Everything else is error handling.
             /// </remarks>
             private XNode[] RewriteIncludeElement(
@@ -649,8 +651,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return location;
                 }
 
-                // If we are not in an XML file, then we must be in a source file.  Since we're traversing the XML tree in the same
-                // order as the DocumentationCommentWalker, we can access the elements of includeElementNodes in order.
+                // If we are not in an XML file, then we must be in a source file.  Since we're traversing the XML
+                // tree in the same
+                // order as the DocumentationCommentWalker, we can access the elements of includeElementNodes in
+                // order.
                 if (currentXmlFilePath == null)
                 {
                     Debug.Assert(

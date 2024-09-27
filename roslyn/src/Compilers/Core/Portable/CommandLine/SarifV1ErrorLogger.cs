@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis
     /// Used for logging compiler diagnostics to a stream in the unstandardized SARIF
     /// (Static Analysis Results Interchange Format) v1.0.0 format.
     /// https://github.com/sarif-standard/sarif-spec
-    /// https://rawgit.com/sarif-standard/sarif-spec/main/Static%20Analysis%20Results%20Interchange%20Format%20(SARIF).html
+    ///
+    // https://rawgit.com/sarif-standard/sarif-spec/main/Static%20Analysis%20Results%20Interchange%20Format%20(SARIF).html
     /// </summary>
     /// <remarks>
     /// To log diagnostics in the standardized SARIF v2.1.0 format, use the SarifV2ErrorLogger.
@@ -240,7 +241,8 @@ namespace Microsoft.CodeAnalysis
         /// Represents a distinct set of <see cref="DiagnosticDescriptor"/>s and provides unique string keys
         /// to distinguish them.
         ///
-        /// The first <see cref="DiagnosticDescriptor"/> added with a given <see cref="DiagnosticDescriptor.Id"/>
+        /// The first <see cref="DiagnosticDescriptor"/> added with a given <see
+        // cref="DiagnosticDescriptor.Id"/>
         /// value is given that value as its unique key. Subsequent adds with the same ID will have .NNN
         /// appended to their with an auto-incremented numeric value.
         /// </summary>

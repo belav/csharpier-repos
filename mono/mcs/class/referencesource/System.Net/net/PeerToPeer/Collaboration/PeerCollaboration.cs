@@ -26,9 +26,12 @@ namespace System.Net.PeerToPeer.Collaboration
             // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
             // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
             // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetPresenceInfo(System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabGetPresenceInfo(System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+            // />
             // <ReferencesCritical Name="Local safePresenceInfo of type: SafeCollabData" Ring="1" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             get
@@ -90,9 +93,14 @@ namespace System.Net.PeerToPeer.Collaboration
                 return peerPresenceInfo;
             }
             // <SecurityKernel Critical="True" Ring="0">
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabSetPresenceInfo(System.Net.PeerToPeer.Collaboration.PEER_PRESENCE_INFO&):System.Int32" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabSetPresenceInfo(System.Net.PeerToPeer.Collaboration.PEER_PRESENCE_INFO&):System.Int32"
+            // />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+            // Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             set
@@ -134,7 +142,8 @@ namespace System.Net.PeerToPeer.Collaboration
         public static string LocalEndPointName
         {
             // <SecurityKernel Critical="True" Ring="0">
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEndpointName(System.String&):System.Int32" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabGetEndpointName(System.String&):System.Int32" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             get
@@ -186,8 +195,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 return localEndPointName;
             }
             // <SecurityKernel Critical="True" Ring="0">
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabSetEndpointName(System.String):System.Int32" />
-            // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabSetEndpointName(System.String):System.Int32" />
+            // <ReferencesCritical Name="Method:
+            // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+            // Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             set
@@ -229,8 +241,11 @@ namespace System.Net.PeerToPeer.Collaboration
         public static PeerScope SignInScope
         {
             // <SecurityKernel Critical="True" Ring="0">
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetSigninOptions(System.Net.PeerToPeer.Collaboration.PeerScope&):System.Int32" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabGetSigninOptions(System.Net.PeerToPeer.Collaboration.PeerScope&):System.Int32"
+            // />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             get
@@ -300,11 +315,19 @@ namespace System.Net.PeerToPeer.Collaboration
         {
             // <SecurityKernel Critical="True" Ring="0">
             // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
-            // <SatisfiesLinkDemand Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
-            // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetAppLaunchInfo(System.Net.PeerToPeer.Collaboration.PEER_APP_LAUNCH_INFO&):System.Int32" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint" Ring="1" />
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(System.Net.PeerToPeer.Collaboration.PEER_CONTACT):System.Net.PeerToPeer.Collaboration.PeerContact" Ring="2" />
+            // <SatisfiesLinkDemand
+            // Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
+            // <CallsSuppressUnmanagedCode
+            // Name="UnsafeCollabNativeMethods.PeerCollabGetAppLaunchInfo(System.Net.PeerToPeer.Collaboration.PEER_APP_LAUNCH_INFO&):System.Int32"
+            // />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint"
+            // Ring="1" />
+            // <ReferencesCritical Name="Method:
+            // CollaborationHelperFunctions.ConvertPEER_CONTACTToPeerContact(System.Net.PeerToPeer.Collaboration.PEER_CONTACT):System.Net.PeerToPeer.Collaboration.PeerContact"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             get
@@ -443,9 +466,14 @@ namespace System.Net.PeerToPeer.Collaboration
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabSignin(System.IntPtr,System.Net.PeerToPeer.Collaboration.PeerScope):System.Int32" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabSignin(System.IntPtr,System.Net.PeerToPeer.Collaboration.PeerScope):System.Int32"
+        // />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void SignIn(PeerScope peerScope)
@@ -494,9 +522,14 @@ namespace System.Net.PeerToPeer.Collaboration
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabSignout(System.Net.PeerToPeer.Collaboration.PeerScope):System.Int32" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabSignout(System.Net.PeerToPeer.Collaboration.PeerScope):System.Int32"
+        // />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void SignOut(PeerScope peerScope)
@@ -552,14 +585,25 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabEnumPeopleNearMe(System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabEnumPeopleNearMe(System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local handlePeerEnum of type: SafeCollabEnum" Ring="1" />
         // <ReferencesCritical Name="Local appArray of type: SafeCollabData" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static PeerNearMeCollection GetPeersNearMe()
@@ -682,16 +726,24 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32):System.Void" />
-        // <SatisfiesLinkDemand Name="GCHandle.Alloc(System.Object,System.Runtime.InteropServices.GCHandleType):System.Runtime.InteropServices.GCHandle" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="GCHandle.Alloc(System.Object,System.Runtime.InteropServices.GCHandleType):System.Runtime.InteropServices.GCHandle"
+        // />
         // <SatisfiesLinkDemand Name="GCHandle.AddrOfPinnedObject():System.IntPtr" />
         // <SatisfiesLinkDemand Name="GCHandle.Free():System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabRegisterApplication(System.Net.PeerToPeer.Collaboration.PEER_APPLICATION_REGISTRATION_INFO&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabRegisterApplication(System.Net.PeerToPeer.Collaboration.PEER_APPLICATION_REGISTRATION_INFO&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType):System.Int32"
+        // />
         // <ReferencesCritical Name="Local data of type: SafeCollabMemory" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
         // <ReferencesCritical Name="Method: SafeCollabMemory..ctor(System.Int32)" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void RegisterApplication(
@@ -826,9 +878,14 @@ namespace System.Net.PeerToPeer.Collaboration
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabUnregisterApplication(System.Net.PeerToPeer.Collaboration.GUID&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType):System.Int32" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabUnregisterApplication(System.Net.PeerToPeer.Collaboration.GUID&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType):System.Int32"
+        // />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void UnregisterApplication(
@@ -960,20 +1017,32 @@ namespace System.Net.PeerToPeer.Collaboration
         // <UsesUnsafeCode Name="Method: IntPtr.op_Explicit(System.IntPtr):System.Void*" />
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.get_IsInvalid():System.Boolean" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabEnumApplications(System.IntPtr,System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetApplicationRegistrationInfo(System.Net.PeerToPeer.Collaboration.GUID&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabEnumApplications(System.IntPtr,System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetApplicationRegistrationInfo(System.Net.PeerToPeer.Collaboration.GUID&,System.Net.PeerToPeer.Collaboration.PeerApplicationRegistrationType,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local handlePeerEnum of type: SafeCollabEnum" Ring="1" />
         // <ReferencesCritical Name="Local appArray of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Local safeAppRegInfo of type: SafeCollabData" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
         // <ReferencesCritical Name="Method: SafeCollabEnum..ctor()" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // <ReferencesCritical Name="Method: SafeCollabData..ctor()" Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
@@ -1196,13 +1265,19 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.Byte[],System.Int32,System.IntPtr,System.Int32):System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabSetObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabSetObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local data of type: SafeCollabMemory" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
         // <ReferencesCritical Name="Method: SafeCollabMemory..ctor(System.Int32)" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void SetObject(PeerObject peerObject)
@@ -1298,9 +1373,14 @@ namespace System.Net.PeerToPeer.Collaboration
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabDeleteObject(System.Net.PeerToPeer.Collaboration.GUID&):System.Int32" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabDeleteObject(System.Net.PeerToPeer.Collaboration.GUID&):System.Int32"
+        // />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static void DeleteObject(PeerObject peerObject)
@@ -1355,15 +1435,25 @@ namespace System.Net.PeerToPeer.Collaboration
         // <UsesUnsafeCode Name="Local pPeerObject of type: PEER_OBJECT*" />
         // <UsesUnsafeCode Name="Method: IntPtr.op_Explicit(System.IntPtr):System.Void*" />
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabEnumObjects(System.IntPtr,System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabEnumObjects(System.IntPtr,System.IntPtr,System.Net.PeerToPeer.Collaboration.SafeCollabEnum&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetItemCount(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&):System.Int32"
+        // />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerGetNextItem(System.Net.PeerToPeer.Collaboration.SafeCollabEnum,System.UInt32&,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local handlePeerEnum of type: SafeCollabEnum" Ring="1" />
         // <ReferencesCritical Name="Local objectArray of type: SafeCollabData" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+        // />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public static PeerObjectCollection GetLocalSetObjects()
@@ -1514,8 +1604,11 @@ namespace System.Net.PeerToPeer.Collaboration
         public static event EventHandler<NameChangedEventArgs> LocalNameChanged
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: AddNameChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.NameChangedEventArgs>):Void" Ring="1" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // AddNameChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.NameChangedEventArgs>):Void"
+            // Ring="1" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             add
@@ -1526,8 +1619,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 AddNameChanged(value);
             }
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: RemoveNameChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.NameChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // RemoveNameChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.NameChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             remove
@@ -1560,11 +1656,16 @@ namespace System.Net.PeerToPeer.Collaboration
         #endregion
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <SatisfiesLinkDemand Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabRegisterEvent(Microsoft.Win32.SafeHandles.SafeWaitHandle,System.UInt32,System.Net.PeerToPeer.Collaboration.PEER_COLLAB_EVENT_REGISTRATION&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&):System.Int32" />
+        // <SatisfiesLinkDemand
+        // Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabRegisterEvent(Microsoft.Win32.SafeHandles.SafeWaitHandle,System.UInt32,System.Net.PeerToPeer.Collaboration.PEER_COLLAB_EVENT_REGISTRATION&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&):System.Int32"
+        // />
         // <ReferencesCritical Name="Method: NameChangedCallback(Object, Boolean):Void" Ring="1" />
         // <ReferencesCritical Name="Field: s_safeNameChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private static void AddNameChanged(EventHandler<NameChangedEventArgs> callback)
@@ -1636,7 +1737,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safeNameChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private static void RemoveNameChanged(EventHandler<NameChangedEventArgs> callback)
@@ -1675,10 +1778,14 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local eventData of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Field: s_safeNameChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         private static void NameChangedCallback(object state, bool timedOut)
@@ -1786,8 +1893,11 @@ namespace System.Net.PeerToPeer.Collaboration
         public static event EventHandler<PresenceChangedEventArgs> LocalPresenceChanged
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: AddPresenceChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // AddPresenceChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             add
@@ -1798,8 +1908,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 AddPresenceChanged(value);
             }
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: RemovePresenceChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // RemovePresenceChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             remove
@@ -1834,7 +1947,9 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safePresenceChangedEvent" Ring="1" />
         // <ReferencesCritical Name="Method: PresenceChangedCallback(Object, Boolean):Void" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.AddMyPresenceChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.AddMyPresenceChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.PresenceChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void AddPresenceChanged(EventHandler<PresenceChangedEventArgs> callback)
@@ -1852,7 +1967,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safePresenceChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void RemovePresenceChanged(EventHandler<PresenceChangedEventArgs> callback)
@@ -1891,10 +2008,14 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local eventData of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Field: s_safePresenceChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void PresenceChangedCallback(object state, bool timedOut)
@@ -2022,8 +2143,11 @@ namespace System.Net.PeerToPeer.Collaboration
         public static event EventHandler<ObjectChangedEventArgs> LocalObjectChanged
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: AddObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // AddObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             add
@@ -2034,8 +2158,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 AddObjectChangedEvent(value);
             }
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: RemoveObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // RemoveObjectChangedEvent(EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             remove
@@ -2070,7 +2197,9 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safeObjChangedEvent" Ring="1" />
         // <ReferencesCritical Name="Method: ObjectChangedCallback(Object, Boolean):Void" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.AddMyObjectChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.AddMyObjectChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ObjectChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void AddObjectChangedEvent(EventHandler<ObjectChangedEventArgs> callback)
@@ -2088,7 +2217,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void RemoveObjectChangedEvent(EventHandler<ObjectChangedEventArgs> callback)
@@ -2127,12 +2258,20 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local eventData of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Field: s_safeObjChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_OBJECTToPeerObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT):System.Net.PeerToPeer.Collaboration.PeerObject" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_OBJECTToPeerObject(System.Net.PeerToPeer.Collaboration.PEER_OBJECT):System.Net.PeerToPeer.Collaboration.PeerObject"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_ENDPOINTToPeerEndPoint(System.Net.PeerToPeer.Collaboration.PEER_ENDPOINT):System.Net.PeerToPeer.Collaboration.PeerEndPoint"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void ObjectChangedCallback(object state, bool timedOut)
@@ -2254,8 +2393,11 @@ namespace System.Net.PeerToPeer.Collaboration
         public static event EventHandler<ApplicationChangedEventArgs> LocalApplicationChanged
         {
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: AddApplicationChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // AddApplicationChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             add
@@ -2266,8 +2408,11 @@ namespace System.Net.PeerToPeer.Collaboration
                 AddApplicationChanged(value);
             }
             // <SecurityKernel Critical="True" Ring="1">
-            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1" />
-            // <ReferencesCritical Name="Method: RemoveApplicationChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>):Void" Ring="2" />
+            // <ReferencesCritical Name="Method: CollaborationHelperFunctions.Initialize():System.Void" Ring="1"
+            // />
+            // <ReferencesCritical Name="Method:
+            // RemoveApplicationChanged(EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>):Void"
+            // Ring="2" />
             // </SecurityKernel>
             [System.Security.SecurityCritical]
             remove
@@ -2302,7 +2447,9 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safeAppChangedEvent" Ring="1" />
         // <ReferencesCritical Name="Method: ApplicationChangedCallback(Object, Boolean):Void" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.AddMyApplicationChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.AddMyApplicationChanged(System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>,System.EventHandler`1<System.Net.PeerToPeer.Collaboration.ApplicationChangedEventArgs>&,System.Object,System.Threading.RegisteredWaitHandle&,System.Threading.AutoResetEvent&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.WaitOrTimerCallback):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void AddApplicationChanged(EventHandler<ApplicationChangedEventArgs> callback)
@@ -2320,7 +2467,9 @@ namespace System.Net.PeerToPeer.Collaboration
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Field: s_safeAppChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.CleanEventVars(System.Threading.RegisteredWaitHandle&,System.Net.PeerToPeer.Collaboration.SafeCollabEvent&,System.Threading.AutoResetEvent&):System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void RemoveApplicationChanged(EventHandler<ApplicationChangedEventArgs> callback)
@@ -2359,11 +2508,17 @@ namespace System.Net.PeerToPeer.Collaboration
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStructure(System.IntPtr,System.Type):System.Object" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        // Name="UnsafeCollabNativeMethods.PeerCollabGetEventData(System.Net.PeerToPeer.Collaboration.SafeCollabEvent,System.Net.PeerToPeer.Collaboration.SafeCollabData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local eventData of type: SafeCollabData" Ring="1" />
         // <ReferencesCritical Name="Field: s_safeAppChangedEvent" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
-        // <ReferencesCritical Name="Method: CollaborationHelperFunctions.ConvertPEER_APPLICATIONToPeerApplication(System.Net.PeerToPeer.Collaboration.PEER_APPLICATION):System.Net.PeerToPeer.Collaboration.PeerApplication" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
+        // <ReferencesCritical Name="Method:
+        // CollaborationHelperFunctions.ConvertPEER_APPLICATIONToPeerApplication(System.Net.PeerToPeer.Collaboration.PEER_APPLICATION):System.Net.PeerToPeer.Collaboration.PeerApplication"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         static void ApplicationChangedCallback(object state, bool timedOut)

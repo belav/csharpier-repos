@@ -15,7 +15,8 @@ namespace System.Web.Security
     using System.Security.Claims;
 
     /// <summary>
-    /// This internal class is used to wrap role claims that are served up by the RolePrincipal.  They need to be kept distinct from other claims.
+    /// This internal class is used to wrap role claims that are served up by the RolePrincipal.  They
+    // need to be kept distinct from other claims.
     /// ClaimsIdentity has a property the holds this type.
     /// made on parameters.
     /// </summary>

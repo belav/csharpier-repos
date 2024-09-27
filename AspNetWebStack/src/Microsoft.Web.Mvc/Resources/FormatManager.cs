@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.ObjectModel;
@@ -59,8 +60,10 @@ namespace Microsoft.Web.Mvc.Resources
             }
         }
 
-        // CONSIDER: the FormatHelper is an abstraction that lets users extend the content negotiation process
-        // we must reconsider the FormatManager/FormatHelper factoring and provide a cleaner way of allowing this same extensibility
+        // CONSIDER: the FormatHelper is an abstraction that lets users extend the content negotiation
+        // process
+        // we must reconsider the FormatManager/FormatHelper factoring and provide a cleaner way of allowing
+        // this same extensibility
         public FormatHelper FormatHelper
         {
             get { return _formatHelper; }

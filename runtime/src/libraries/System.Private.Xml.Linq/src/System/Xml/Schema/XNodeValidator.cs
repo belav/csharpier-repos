@@ -469,7 +469,8 @@ namespace System.Xml.Schema
     public static class Extensions
     {
         /// <summary>
-        /// Gets the schema information that has been assigned to the <see cref="XElement"/> as a result of schema validation.
+        /// Gets the schema information that has been assigned to the <see cref="XElement"/> as a result of
+        // schema validation.
         /// </summary>
         /// <param name="source">Extension point</param>
         public static IXmlSchemaInfo? GetSchemaInfo(this XElement source)
@@ -480,7 +481,8 @@ namespace System.Xml.Schema
         }
 
         /// <summary>
-        /// Gets the schema information that has been assigned to the <see cref="XAttribute"/> as a result of schema validation.
+        /// Gets the schema information that has been assigned to the <see cref="XAttribute"/> as a result
+        // of schema validation.
         /// </summary>
         /// <param name="source">Extension point</param>
         public static IXmlSchemaInfo? GetSchemaInfo(this XAttribute source)

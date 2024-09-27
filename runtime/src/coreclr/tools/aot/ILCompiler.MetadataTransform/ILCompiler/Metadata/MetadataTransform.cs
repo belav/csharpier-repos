@@ -19,10 +19,12 @@ namespace ILCompiler.Metadata
         /// </summary>
         /// <remarks>
         /// The list of <paramref name="modules"/> is required to be transitively complete with respect to
-        /// <paramref name="policy"/>: whenever there's a reference from the object graph to a type or member defined in a
+        /// <paramref name="policy"/>: whenever there's a reference from the object graph to a type or
+        // member defined in a
         /// module that was not included in the <paramref name="modules"/> enumeration, the
         /// <see cref="IMetadataPolicy.GeneratesMetadata(Cts.MetadataType)"/>
-        /// and <see cref="IMetadataPolicy.GeneratesMetadata(Cts.MethodDesc)"/> are required to return false.
+        /// and <see cref="IMetadataPolicy.GeneratesMetadata(Cts.MethodDesc)"/> are required to return
+        // false.
         /// </remarks>
         public static MetadataTransformResult<TPolicy> Run<TPolicy>(
             TPolicy policy,
@@ -53,13 +55,15 @@ namespace ILCompiler.Metadata
 
         /// <summary>
         /// Retrieves an existing <see cref="TypeDefinition"/>, <see cref="TypeReference"/>,
-        /// or <see cref="TypeSpecification"/> record representing specified type in the metadata writer object
+        /// or <see cref="TypeSpecification"/> record representing specified type in the metadata writer
+        // object
         /// model, or creates a new one.
         /// </summary>
         public abstract MetadataRecord HandleType(Cts.TypeDesc type);
 
         /// <summary>
-        /// Retrieves an existing <see cref="QualifiedMethod"/>, <see cref="MemberReference"/>, or <see cref="MethodInstantiation"/>
+        /// Retrieves an existing <see cref="QualifiedMethod"/>, <see cref="MemberReference"/>, or <see
+        // cref="MethodInstantiation"/>
         /// record representing specified method in the metadata writer object model, or creates a new one.
         /// </summary>
         public abstract MetadataRecord HandleQualifiedMethod(Cts.MethodDesc method);

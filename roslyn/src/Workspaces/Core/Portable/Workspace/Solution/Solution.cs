@@ -171,11 +171,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Given a <paramref name="symbol"/> returns the <see cref="ProjectId"/> of the <see cref="Project"/> it came
-        /// from.  Returns <see langword="null"/> if <paramref name="symbol"/> does not come from any project in this solution.
+        /// Given a <paramref name="symbol"/> returns the <see cref="ProjectId"/> of the <see
+        // cref="Project"/> it came
+        /// from.  Returns <see langword="null"/> if <paramref name="symbol"/> does not come from any
+        // project in this solution.
         /// </summary>
         /// <remarks>
-        /// This function differs from <see cref="GetProject(IAssemblySymbol, CancellationToken)"/> in terms of how it
+        /// This function differs from <see cref="GetProject(IAssemblySymbol, CancellationToken)"/> in terms
+        // of how it
         /// treats <see cref="IAssemblySymbol"/>s.  Specifically, say there is the following:
         ///
         /// <c>
@@ -183,12 +186,18 @@ namespace Microsoft.CodeAnalysis
         /// Project-B, with a reference to Project-A, and usage of Symbol-A.
         /// </c>
         ///
-        /// It is possible (with retargeting, and other complex cases) that Symbol-A from Project-B will be a different
-        /// symbol than Symbol-A from Project-A.  However, <see cref="GetProject(IAssemblySymbol, CancellationToken)"/>
-        /// will always try to return Project-A for either of the Symbol-A's, as it prefers to return the original
-        /// Source-Project of the original definition, not the project that actually produced the symbol.  For many
-        /// features this is an acceptable abstraction.  However, for some cases (Find-References in particular) it is
-        /// necessary to resolve symbols back to the actual project/compilation that produced them for correctness.
+        /// It is possible (with retargeting, and other complex cases) that Symbol-A from Project-B will be
+        // a different
+        /// symbol than Symbol-A from Project-A.  However, <see cref="GetProject(IAssemblySymbol,
+        // CancellationToken)"/>
+        /// will always try to return Project-A for either of the Symbol-A's, as it prefers to return the
+        // original
+        /// Source-Project of the original definition, not the project that actually produced the symbol.
+        // For many
+        /// features this is an acceptable abstraction.  However, for some cases (Find-References in
+        // particular) it is
+        /// necessary to resolve symbols back to the actual project/compilation that produced them for
+        // correctness.
         /// </remarks>
         internal ProjectId? GetOriginatingProjectId(ISymbol symbol) =>
             _state.GetOriginatingProjectId(symbol);
@@ -257,7 +266,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets a document, additional document, analyzer config document or a source generated document in this solution with the specified document ID.
+        /// Gets a document, additional document, analyzer config document or a source generated document in
+        // this solution with the specified document ID.
         /// </summary>
         internal ValueTask<TextDocument?> GetTextDocumentAsync(
             DocumentId? documentId,
@@ -331,9 +341,12 @@ namespace Microsoft.CodeAnalysis
 
                 if (documentState is SourceGeneratedDocumentState)
                 {
-                    // We have the underlying state, but we need to get the wrapper SourceGeneratedDocument object. The wrapping is maintained by
-                    // the Project object, so we'll now fetch the project and ask it to get the SourceGeneratedDocument wrapper. Under the covers this
-                    // implicity may call to fetch the SourceGeneratedDocumentState a second time but that's not expensive.
+                    // We have the underlying state, but we need to get the wrapper SourceGeneratedDocument object. The
+                    // wrapping is maintained by
+                    // the Project object, so we'll now fetch the project and ask it to get the SourceGeneratedDocument
+                    // wrapper. Under the covers this
+                    // implicity may call to fetch the SourceGeneratedDocumentState a second time but that's not
+                    // expensive.
                     var generatedDocument = this.GetRequiredProject(documentState.Id.ProjectId)
                         .TryGetSourceGeneratedDocumentForAlreadyGeneratedId(documentState.Id);
                     Contract.ThrowIfNull(
@@ -441,7 +454,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project specified updated to have the reference assembly output file path.
+        /// Creates a new solution instance with the project specified updated to have the reference
+        // assembly output file path.
         /// </summary>
         public Solution WithProjectOutputRefFilePath(ProjectId projectId, string? outputRefFilePath)
         {
@@ -457,7 +471,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project specified updated to have the compiler output file path.
+        /// Creates a new solution instance with the project specified updated to have the compiler output
+        // file path.
         /// </summary>
         public Solution WithProjectCompilationOutputInfo(
             ProjectId projectId,
@@ -476,7 +491,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project specified updated to have the default namespace.
+        /// Creates a new solution instance with the project specified updated to have the default
+        // namespace.
         /// </summary>
         public Solution WithProjectDefaultNamespace(ProjectId projectId, string? defaultNamespace)
         {
@@ -492,7 +508,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project specified updated to have the specified attributes.
+        /// Creates a new solution instance with the project specified updated to have the specified
+        // attributes.
         /// </summary>
         internal Solution WithProjectChecksumAlgorithm(
             ProjectId projectId,
@@ -532,7 +549,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project specified updated to have the project file path.
+        /// Creates a new solution instance with the project specified updated to have the project file
+        // path.
         /// </summary>
         public Solution WithProjectFilePath(ProjectId projectId, string? filePath)
         {
@@ -631,14 +649,22 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the project documents in the order by the specified document ids.
-        /// The specified document ids must be the same as what is already in the project; no adding or removing is allowed.
+        /// Creates a new solution instance with the project documents in the order by the specified
+        // document ids.
+        /// The specified document ids must be the same as what is already in the project; no adding or
+        // removing is allowed.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="documentIds"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="ArgumentException">The number of documents specified in <paramref name="documentIds"/> is not equal to the number of documents in project <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">Document specified in <paramref name="documentIds"/> does not exist in project <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="documentIds"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="ArgumentException">The number of documents specified in <paramref
+        // name="documentIds"/> is not equal to the number of documents in project <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">Document specified in <paramref name="documentIds"/>
+        // does not exist in project <paramref name="projectId"/>.</exception>
         public Solution WithProjectDocumentsOrder(
             ProjectId projectId,
             ImmutableList<DocumentId> documentIds
@@ -664,10 +690,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include
         /// the specified project reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="projectReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project already references the target project.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project already references the target
+        // project.</exception>
         public Solution AddProjectReference(ProjectId projectId, ProjectReference projectReference)
         {
             return AddProjectReferences(
@@ -682,12 +712,18 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include
         /// the specified project references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="projectReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="projectReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project already references the target project.</exception>
-        /// <exception cref="InvalidOperationException">Adding the project reference would create a circular dependency.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="projectReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project already references the target
+        // project.</exception>
+        /// <exception cref="InvalidOperationException">Adding the project reference would create a circular
+        // dependency.</exception>
         public Solution AddProjectReferences(
             ProjectId projectId,
             IEnumerable<ProjectReference> projectReferences
@@ -730,9 +766,12 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to no longer
         /// include the specified project reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="projectReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException">The solution does not contain <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
         public Solution RemoveProjectReference(
             ProjectId projectId,
             ProjectReference projectReference
@@ -761,12 +800,17 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to contain
         /// the specified list of project references.
         /// </summary>
-        /// <param name="projectId">Id of the project whose references to replace with <paramref name="projectReferences"/>.</param>
+        /// <param name="projectId">Id of the project whose references to replace with <paramref
+        // name="projectReferences"/>.</param>
         /// <param name="projectReferences">New project references.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="projectReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="projectReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="projectReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
         public Solution WithProjectReferences(
             ProjectId projectId,
             IEnumerable<ProjectReference>? projectReferences
@@ -796,10 +840,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include the
         /// specified metadata reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="metadataReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project already contains the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="metadataReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project already contains the specified
+        // reference.</exception>
         public Solution AddMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
@@ -817,11 +865,16 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include the
         /// specified metadata references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="metadataReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="metadataReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project already contains the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="metadataReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="metadataReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project already contains the specified
+        // reference.</exception>
         public Solution AddMetadataReferences(
             ProjectId projectId,
             IEnumerable<MetadataReference> metadataReferences
@@ -856,10 +909,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to no longer include
         /// the specified metadata reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="metadataReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project does not contain the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="metadataReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project does not contain the specified
+        // reference.</exception>
         public Solution RemoveMetadataReference(
             ProjectId projectId,
             MetadataReference metadataReference
@@ -887,10 +944,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include only the
         /// specified metadata references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="metadataReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="metadataReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="metadataReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="metadataReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
         public Solution WithProjectMetadataReferences(
             ProjectId projectId,
             IEnumerable<MetadataReference> metadataReferences
@@ -918,9 +979,12 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include the
         /// specified analyzer reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
         public Solution AddAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
@@ -938,11 +1002,16 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include the
         /// specified analyzer references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project already contains the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project already contains the specified
+        // reference.</exception>
         public Solution AddAnalyzerReferences(
             ProjectId projectId,
             IEnumerable<AnalyzerReference> analyzerReferences
@@ -982,10 +1051,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to no longer include
         /// the specified analyzer reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
-        /// <exception cref="InvalidOperationException">The project does not contain the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
+        /// <exception cref="InvalidOperationException">The project does not contain the specified
+        // reference.</exception>
         public Solution RemoveAnalyzerReference(
             ProjectId projectId,
             AnalyzerReference analyzerReference
@@ -1013,10 +1086,14 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to include only the
         /// specified analyzer references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain <paramref name="projectId"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="projectId"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain <paramref
+        // name="projectId"/>.</exception>
         public Solution WithProjectAnalyzerReferences(
             ProjectId projectId,
             IEnumerable<AnalyzerReference> analyzerReferences
@@ -1043,7 +1120,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a new solution instance updated to include the specified analyzer reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see
+        // langword="null"/>.</exception>
         public Solution AddAnalyzerReference(AnalyzerReference analyzerReference)
         {
             return AddAnalyzerReferences(
@@ -1056,9 +1134,12 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a new solution instance updated to include the specified analyzer references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate items.</exception>
-        /// <exception cref="InvalidOperationException">The solution already contains the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate
+        // items.</exception>
+        /// <exception cref="InvalidOperationException">The solution already contains the specified
+        // reference.</exception>
         public Solution AddAnalyzerReferences(IEnumerable<AnalyzerReference> analyzerReferences)
         {
             // avoid enumerating multiple times:
@@ -1089,8 +1170,10 @@ namespace Microsoft.CodeAnalysis
         /// Create a new solution instance with the project specified updated to no longer include
         /// the specified analyzer reference.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see langword="null"/>.</exception>
-        /// <exception cref="InvalidOperationException">The solution does not contain the specified reference.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReference"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The solution does not contain the specified
+        // reference.</exception>
         public Solution RemoveAnalyzerReference(AnalyzerReference analyzerReference)
         {
             if (analyzerReference == null)
@@ -1112,8 +1195,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Creates a new solution instance with the specified analyzer references.
         /// </summary>
-        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate items.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="analyzerReferences"/> contains <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="analyzerReferences"/> contains duplicate
+        // items.</exception>
         public Solution WithAnalyzerReferences(IEnumerable<AnalyzerReference> analyzerReferences)
         {
             var newState = _state.WithAnalyzerReferences(
@@ -1304,7 +1389,8 @@ namespace Microsoft.CodeAnalysis
             AddDocuments(ImmutableArray.Create(documentInfo));
 
         /// <summary>
-        /// Create a new <see cref="Solution"/> instance with the corresponding <see cref="Project"/>s updated to include
+        /// Create a new <see cref="Solution"/> instance with the corresponding <see cref="Project"/>s
+        // updated to include
         /// the documents specified by <paramref name="documentInfos"/>.
         /// </summary>
         /// <returns>A new <see cref="Solution"/> with the documents added.</returns>
@@ -1439,7 +1525,8 @@ namespace Microsoft.CodeAnalysis
             );
 
         /// <summary>
-        /// Creates a new Solution instance that contains a new compiler configuration document like a .editorconfig file.
+        /// Creates a new Solution instance that contains a new compiler configuration document like a
+        // .editorconfig file.
         /// </summary>
         public Solution AddAnalyzerConfigDocuments(ImmutableArray<DocumentInfo> documentInfos)
         {
@@ -1511,7 +1598,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance that no longer includes the specified <see cref="AnalyzerConfigDocument"/>.
+        /// Creates a new solution instance that no longer includes the specified <see
+        // cref="AnalyzerConfigDocument"/>.
         /// </summary>
         public Solution RemoveAnalyzerConfigDocument(DocumentId documentId)
         {
@@ -1520,7 +1608,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance that no longer includes the specified <see cref="AnalyzerConfigDocument"/>s.
+        /// Creates a new solution instance that no longer includes the specified <see
+        // cref="AnalyzerConfigDocument"/>s.
         /// </summary>
         public Solution RemoveAnalyzerConfigDocuments(ImmutableArray<DocumentId> documentIds)
         {
@@ -1582,7 +1671,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the document specified updated to have the specified file path.
+        /// Creates a new solution instance with the document specified updated to have the specified file
+        // path.
         /// </summary>
         public Solution WithDocumentFilePath(DocumentId documentId, string filePath)
         {
@@ -1668,7 +1758,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the analyzer config document specified updated to have the text
+        /// Creates a new solution instance with the analyzer config document specified updated to have the
+        // text
         /// supplied by the text loader.
         /// </summary>
         public Solution WithAnalyzerConfigDocumentText(
@@ -1761,7 +1852,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with the analyzer config document specified updated to have the text
+        /// Creates a new solution instance with the analyzer config document specified updated to have the
+        // text
         /// and version specified.
         /// </summary>
         public Solution WithAnalyzerConfigDocumentText(
@@ -1888,7 +1980,8 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.UpdateDocumentTextLoader(documentId, loader, mode);
 
             // Note: state is currently not reused.
-            // If UpdateDocumentTextLoader is changed to reuse the state replace this assert with Solution instance reusal.
+            // If UpdateDocumentTextLoader is changed to reuse the state replace this assert with Solution
+            // instance reusal.
             Debug.Assert(newState != _state);
 
             return new Solution(newState);
@@ -1919,14 +2012,16 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.UpdateAdditionalDocumentTextLoader(documentId, loader, mode);
 
             // Note: state is currently not reused.
-            // If UpdateAdditionalDocumentTextLoader is changed to reuse the state replace this assert with Solution instance reusal.
+            // If UpdateAdditionalDocumentTextLoader is changed to reuse the state replace this assert with
+            // Solution instance reusal.
             Debug.Assert(newState != _state);
 
             return new Solution(newState);
         }
 
         /// <summary>
-        /// Creates a new solution instance with the analyzer config document specified updated to have the text
+        /// Creates a new solution instance with the analyzer config document specified updated to have the
+        // text
         /// supplied by the text loader.
         /// </summary>
         public Solution WithAnalyzerConfigDocumentTextLoader(
@@ -1950,17 +2045,20 @@ namespace Microsoft.CodeAnalysis
             var newState = _state.UpdateAnalyzerConfigDocumentTextLoader(documentId, loader, mode);
 
             // Note: state is currently not reused.
-            // If UpdateAnalyzerConfigDocumentTextLoader is changed to reuse the state replace this assert with Solution instance reusal.
+            // If UpdateAnalyzerConfigDocumentTextLoader is changed to reuse the state replace this assert with
+            // Solution instance reusal.
             Debug.Assert(newState != _state);
 
             return new Solution(newState);
         }
 
         /// <summary>
-        /// Creates a branch of the solution that has its compilations frozen in whatever state they are in at the time, assuming a background compiler is
+        /// Creates a branch of the solution that has its compilations frozen in whatever state they are in
+        // at the time, assuming a background compiler is
         /// busy building this compilations.
         ///
-        /// A compilation for the project containing the specified document id will be guaranteed to exist with at least the syntax tree for the document.
+        /// A compilation for the project containing the specified document id will be guaranteed to exist
+        // with at least the syntax tree for the document.
         ///
         /// This not intended to be the public API, use Document.WithFrozenPartialSemantics() instead.
         /// </summary>
@@ -1983,7 +2081,8 @@ namespace Microsoft.CodeAnalysis
             CancellationToken cancellationToken = default
         )
         {
-            // we only log sessioninfo for actual changes committed to workspace which should exclude ones from preview
+            // we only log sessioninfo for actual changes committed to workspace which should exclude ones from
+            // preview
             var session = new LinkedFileDiffMergingSession(
                 oldSolution,
                 this,
@@ -2018,7 +2117,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Formerly, returned a copy of the solution isolated from the original so that they do not share computed state. It now does nothing.
+        /// Formerly, returned a copy of the solution isolated from the original so that they do not share
+        // computed state. It now does nothing.
         /// </summary>
         [Obsolete(
             "This method no longer produces a Solution that does not share state and is no longer necessary to call.",
@@ -2032,7 +2132,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new solution instance with all the documents specified updated to have the same specified text.
+        /// Creates a new solution instance with all the documents specified updated to have the same
+        // specified text.
         /// </summary>
         public Solution WithDocumentText(
             IEnumerable<DocumentId?> documentIds,
@@ -2065,8 +2166,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a new Solution that will always produce a specific output for a generated file. This is used only in the
-        /// implementation of <see cref="TextExtensions.GetOpenDocumentInCurrentContextWithChanges"/> where if a user has a source
+        /// Returns a new Solution that will always produce a specific output for a generated file. This is
+        // used only in the
+        /// implementation of <see cref="TextExtensions.GetOpenDocumentInCurrentContextWithChanges"/> where
+        // if a user has a source
         /// generated file open, we need to make sure everything lines up.
         /// </summary>
         internal Document WithFrozenSourceGeneratedDocument(
@@ -2088,7 +2191,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Undoes the operation of <see cref="WithFrozenSourceGeneratedDocument"/>; any frozen source generated document is allowed
+        /// Undoes the operation of <see cref="WithFrozenSourceGeneratedDocument"/>; any frozen source
+        // generated document is allowed
         /// to have it's real output again.
         /// </summary>
         internal Solution WithoutFrozenSourceGeneratedDocuments()
@@ -2103,11 +2207,14 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a new Solution which represents the same state as before, but with the cached generator driver state from the given project updated to match.
+        /// Returns a new Solution which represents the same state as before, but with the cached generator
+        // driver state from the given project updated to match.
         /// </summary>
         /// <remarks>
-        /// When generators are ran in a Solution snapshot, they may cache state to speed up future runs. For Razor, we only run their generator on forked
-        /// solutions that are thrown away; this API gives us a way to reuse that cached state in other forked solutions, since otherwise there's no way to reuse
+        /// When generators are ran in a Solution snapshot, they may cache state to speed up future runs.
+        // For Razor, we only run their generator on forked
+        /// solutions that are thrown away; this API gives us a way to reuse that cached state in other
+        // forked solutions, since otherwise there's no way to reuse
         /// the cached state.
         /// </remarks>
         internal Solution WithCachedSourceGeneratorState(
@@ -2149,13 +2256,15 @@ namespace Microsoft.CodeAnalysis
             _state.GetDocumentIdsWithFilePath(filePath);
 
         /// <summary>
-        /// Gets a <see cref="ProjectDependencyGraph"/> that details the dependencies between projects for this solution.
+        /// Gets a <see cref="ProjectDependencyGraph"/> that details the dependencies between projects for
+        // this solution.
         /// </summary>
         public ProjectDependencyGraph GetProjectDependencyGraph() =>
             _state.GetProjectDependencyGraph();
 
         /// <summary>
-        /// Returns the options that should be applied to this solution. This is equivalent to <see cref="Workspace.Options" /> when the <see cref="Solution"/>
+        /// Returns the options that should be applied to this solution. This is equivalent to <see
+        // cref="Workspace.Options" /> when the <see cref="Solution"/>
         /// instance was created.
         /// </summary>
         public OptionSet Options => _state.Options;
@@ -2295,7 +2404,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Throws if setting the project references of project <paramref name="projectId"/> to specified <paramref name="projectReferences"/>
+        /// Throws if setting the project references of project <paramref name="projectId"/> to specified
+        // <paramref name="projectReferences"/>
         /// would form a cycle in project dependency graph.
         /// </summary>
         private void CheckCircularProjectReferences(
@@ -2326,10 +2436,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Throws if setting the project references of project <paramref name="projectId"/> to specified <paramref name="projectReferences"/>
+        /// Throws if setting the project references of project <paramref name="projectId"/> to specified
+        // <paramref name="projectReferences"/>
         /// would form an invalid submission project chain.
         ///
-        /// Submission projects can reference at most one other submission project. Regular projects can't reference any.
+        /// Submission projects can reference at most one other submission project. Regular projects can't
+        // reference any.
         /// </summary>
         private void CheckSubmissionProjectReferences(
             ProjectId projectId,

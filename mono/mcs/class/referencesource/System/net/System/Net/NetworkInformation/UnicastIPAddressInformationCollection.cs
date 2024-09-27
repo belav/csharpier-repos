@@ -10,13 +10,15 @@ namespace System.Net.NetworkInformation
 
         protected internal UnicastIPAddressInformationCollection() { }
 
-        /// <include file='doc\HttpListenerPrefixCollection.uex' path='docs/doc[@for="HttpListenerPrefixCollection.CopyTo"]/*' />
+        /// <include file='doc\HttpListenerPrefixCollection.uex'
+        // path='docs/doc[@for="HttpListenerPrefixCollection.CopyTo"]/*' />
         public virtual void CopyTo(UnicastIPAddressInformation[] array, int offset)
         {
             addresses.CopyTo(array, offset);
         }
 
-        /// <include file='doc\HttpListenerPrefixCollection.uex' path='docs/doc[@for="HttpListenerPrefixCollection.Count"]/*' />
+        /// <include file='doc\HttpListenerPrefixCollection.uex'
+        // path='docs/doc[@for="HttpListenerPrefixCollection.Count"]/*' />
         public virtual int Count
         {
             get { return addresses.Count; }
@@ -37,7 +39,8 @@ namespace System.Net.NetworkInformation
             addresses.Add(address);
         }
 
-        /// <include file='doc\HttpListenerPrefixCollection.uex' path='docs/doc[@for="HttpListenerPrefixCollection.Contains"]/*' />
+        /// <include file='doc\HttpListenerPrefixCollection.uex'
+        // path='docs/doc[@for="HttpListenerPrefixCollection.Contains"]/*' />
         public virtual bool Contains(UnicastIPAddressInformation address)
         {
             return addresses.Contains(address);
@@ -59,13 +62,15 @@ namespace System.Net.NetworkInformation
             get { return (UnicastIPAddressInformation)addresses[index]; }
         }
 
-        /// <include file='doc\HttpListenerPrefixCollection.uex' path='docs/doc[@for="HttpListenerPrefixCollection.Remove"]/*' />
+        /// <include file='doc\HttpListenerPrefixCollection.uex'
+        // path='docs/doc[@for="HttpListenerPrefixCollection.Remove"]/*' />
         public virtual bool Remove(UnicastIPAddressInformation address)
         {
             throw new NotSupportedException(SR.GetString(SR.net_collection_readonly));
         }
 
-        /// <include file='doc\HttpListenerPrefixCollection.uex' path='docs/doc[@for="HttpListenerPrefixCollection.Clear"]/*' />
+        /// <include file='doc\HttpListenerPrefixCollection.uex'
+        // path='docs/doc[@for="HttpListenerPrefixCollection.Clear"]/*' />
         public virtual void Clear()
         {
             throw new NotSupportedException(SR.GetString(SR.net_collection_readonly));

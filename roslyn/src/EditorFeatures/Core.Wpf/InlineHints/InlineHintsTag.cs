@@ -32,7 +32,8 @@ using Microsoft.VisualStudio.Text.Formatting;
 namespace Microsoft.CodeAnalysis.Editor.InlineHints
 {
     /// <summary>
-    /// This is the tag which implements the IntraTextAdornmentTag and is meant to create the UIElements that get shown
+    /// This is the tag which implements the IntraTextAdornmentTag and is meant to create the UIElements
+    // that get shown
     /// in the editor
     /// </summary>
     internal sealed class InlineHintsTag : IntraTextAdornmentTag
@@ -68,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _taggerProvider = taggerProvider;
 
             // Sets the tooltip to a string so that the tool tip opening event can be triggered
-            // Tooltip value does not matter at this point because it immediately gets overwritten by the correct
+            // Tooltip value does not matter at this point because it immediately gets overwritten by the
+            // correct
             // information in the Border_ToolTipOpening event handler
             adornment.ToolTip = "Quick info";
             adornment.ToolTipOpening += Border_ToolTipOpening;
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
         /// <summary>
         /// Creates the UIElement on call
-        /// Uses PositionAffinity.Predecessor because we want the tag to be associated with the preceding character
+        /// Uses PositionAffinity.Predecessor because we want the tag to be associated with the preceding
+        // character
         /// </summary>
         /// <param name="textView">The view of the editor</param>
         /// <param name="span">The span that has the location of the hint</param>
@@ -160,8 +163,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             bool classify
         )
         {
-            // Constructs the hint block which gets assigned parameter name and FontStyles according to the options
-            // page. Calculates a inline tag that will be 3/4s the size of a normal line. This shrink size tends to work
+            // Constructs the hint block which gets assigned parameter name and FontStyles according to the
+            // options
+            // page. Calculates a inline tag that will be 3/4s the size of a normal line. This shrink size tends
+            // to work
             // well with VS at any zoom level or font size.
             var block = new TextBlock
             {
@@ -196,8 +201,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
             block.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
 
-            // Encapsulates the TextBlock within a border. Gets foreground/background colors from the options menu.
-            // If the tag is started or followed by a space, we trim that off but represent the space as buffer on hte
+            // Encapsulates the TextBlock within a border. Gets foreground/background colors from the options
+            // menu.
+            // If the tag is started or followed by a space, we trim that off but represent the space as buffer
+            // on hte
             // left or right side.
             var left = leftPadding * 5;
             var right = rightPadding * 5;
@@ -226,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
             var stackPanel = new StackPanel
             {
-                // Height set to align the baseline of the text within the TextBlock with the baseline of text in the editor
+                // Height set to align the baseline of the text within the TextBlock with the baseline of text in
+                // the editor
                 Height =
                     dockPanelHeight
                     + (block.DesiredSize.Height - (block.FontFamily.Baseline * block.FontSize)),

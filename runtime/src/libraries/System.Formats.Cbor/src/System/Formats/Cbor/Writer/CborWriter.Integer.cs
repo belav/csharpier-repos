@@ -11,7 +11,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a value as a signed integer encoding (major types 0,1)</summary>
         /// <param name="value">The value to write</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -20,7 +21,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes the provided value as a signed integer encoding (major types 0,1)</summary>
         /// <param name="value">The value to write</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -43,7 +45,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a value as an unsigned integer encoding (major type 0).</summary>
         /// <param name="value">The value to write</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -53,7 +56,8 @@ namespace System.Formats.Cbor
 
         /// <summary>Writes a value as an unsigned integer encoding (major type 0).</summary>
         /// <param name="value">The value to write</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>
@@ -65,9 +69,11 @@ namespace System.Formats.Cbor
             AdvanceDataItemCounters();
         }
 
-        /// <summary>Writes the provided value as a CBOR negative integer representation (major type 1).</summary>
+        /// <summary>Writes the provided value as a CBOR negative integer representation (major type
+        // 1).</summary>
         /// <param name="value">An unsigned integer denoting -1 minus the integer.</param>
-        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite length of the parent data item.</para>
+        /// <exception cref="InvalidOperationException"><para>Writing a new value exceeds the definite
+        // length of the parent data item.</para>
         /// <para>-or-</para>
         /// <para>The major type of the encoded value is not permitted in the parent data item.</para>
         /// <para>-or-</para>

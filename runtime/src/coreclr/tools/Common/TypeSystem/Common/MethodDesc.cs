@@ -55,7 +55,8 @@ namespace Internal.TypeSystem
 
         // Value of <see cref="EmbeddedSignatureData.index" /> for any custom modifiers on
         // SomeStruct when SomeStruct *, or SomeStruct & is the type of a parameter or return type
-        // Parameter index 0 represents the return type, and indices 1-n represent the parameters to the signature
+        // Parameter index 0 represents the return type, and indices 1-n represent the parameters to the
+        // signature
         public static string GetIndexOfCustomModifierOnPointedAtTypeByParameterIndex(
             int parameterIndex
         )
@@ -63,7 +64,8 @@ namespace Internal.TypeSystem
             return $"0.1.1.2.{(parameterIndex + 1).ToStringInvariant()}.1";
         }
 
-        // Provide a means to create a MethodSignature which ignores EmbeddedSignature data in the MethodSignatures it is compared to
+        // Provide a means to create a MethodSignature which ignores EmbeddedSignature data in the
+        // MethodSignatures it is compared to
         public static EmbeddedSignatureData[] EmbeddedSignatureMismatchPermittedFlag =
             Array.Empty<EmbeddedSignatureData>();
 
@@ -538,7 +540,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Compute HashCode. Should only be overridden by a MethodDesc that represents an instantiated method.
+        /// Compute HashCode. Should only be overridden by a MethodDesc that represents an instantiated
+        // method.
         /// </summary>
         protected virtual int ComputeHashCode()
         {
@@ -687,7 +690,8 @@ namespace Internal.TypeSystem
 
         /// <summary>
         /// Retrieves the generic definition of the method on the generic definition of the owning type.
-        /// To only uninstantiate the method without uninstantiating the owning type, use <see cref="GetMethodDefinition"/>.
+        /// To only uninstantiate the method without uninstantiating the owning type, use <see
+        // cref="GetMethodDefinition"/>.
         /// </summary>
         public virtual MethodDesc GetTypicalMethodDefinition()
         {

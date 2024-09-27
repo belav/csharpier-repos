@@ -251,7 +251,7 @@ public class Tests
         return TestDriver.RunTests(typeof(Tests));
     }
 
-    /* Test structures as arguments and return values of delegates */
+/* Test structures as arguments and return values of delegates */
     public static int test_0_marshal_struct_delegate()
     {
         SimpleDelegate2 d = new SimpleDelegate2(delegate_test_struct);
@@ -259,7 +259,7 @@ public class Tests
         return mono_test_marshal_delegate2(d);
     }
 
-    /* Test structures as byref arguments of delegates */
+/* Test structures as byref arguments of delegates */
     public static int test_0_marshal_byref_struct_delegate()
     {
         SimpleStruct ss = new SimpleStruct();
@@ -277,7 +277,7 @@ public class Tests
         return 0;
     }
 
-    /* Test structures as out arguments of delegates */
+/* Test structures as out arguments of delegates */
     public static int test_0_marshal_out_struct_delegate()
     {
         SimpleStruct ss = new SimpleStruct();
@@ -286,7 +286,7 @@ public class Tests
         return mono_test_marshal_out_struct(1, out ss, 2, d);
     }
 
-    /* Test structures as in arguments of delegates */
+/* Test structures as in arguments of delegates */
     public static int test_0_marshal_in_struct_delegate()
     {
         SimpleStruct ss = new SimpleStruct()
@@ -301,7 +301,7 @@ public class Tests
         return mono_test_marshal_in_struct(1, ref ss, 2, d);
     }
 
-    /* Test classes as arguments and return values of delegates */
+/* Test classes as arguments and return values of delegates */
     public static int test_0_marshal_class_delegate()
     {
         SimpleDelegate4 d = new SimpleDelegate4(delegate_test_class);
@@ -309,7 +309,7 @@ public class Tests
         return mono_test_marshal_delegate4(d);
     }
 
-    /* Test classes as byref arguments of delegates */
+/* Test classes as byref arguments of delegates */
     public static int test_0_marshal_byref_class_delegate()
     {
         SimpleDelegate5 d = new SimpleDelegate5(delegate_test_class_byref);
@@ -317,7 +317,7 @@ public class Tests
         return mono_test_marshal_delegate5(d);
     }
 
-    /* Test classes as out arguments of delegates */
+/* Test classes as out arguments of delegates */
     public static int test_0_marshal_out_class_delegate()
     {
         SimpleDelegate7 d = new SimpleDelegate7(delegate_test_class_out);
@@ -325,7 +325,7 @@ public class Tests
         return mono_test_marshal_delegate7(d);
     }
 
-    /* Test string marshalling with delegates */
+/* Test string marshalling with delegates */
     public static int test_0_marshal_string_delegate()
     {
         SimpleDelegate8 d = new SimpleDelegate8(delegate_test_string_marshalling);
@@ -333,7 +333,7 @@ public class Tests
         return mono_test_marshal_delegate8(d, "ABC");
     }
 
-    /* Test string builder marshalling with delegates */
+/* Test string builder marshalling with delegates */
     public static int test_0_marshal_string_builder_delegate()
     {
         SimpleDelegate11 d = new SimpleDelegate11(delegate_test_string_builder_marshalling);
@@ -344,7 +344,7 @@ public class Tests
         return mono_test_marshal_delegate11(d, "ABC");
     }
 
-    /* Test that the delegate wrapper correctly catches null byref arguments */
+/* Test that the delegate wrapper correctly catches null byref arguments */
     public static int test_0_marshal_byref_class_delegate_null()
     {
         SimpleDelegate5 d = new SimpleDelegate5(delegate_test_class_byref);
@@ -413,7 +413,7 @@ public class Tests
         return mono_test_marshal_delegate_ref_delegate(del);
     }
 
-    /* Passing and returning strings */
+/* Passing and returning strings */
 
     public delegate String ReturnStringDelegate(String s);
 
@@ -436,7 +436,7 @@ public class Tests
         return (s == "12345") ? 0 : 1;
     }
 
-    /* Passing and returning enums */
+/* Passing and returning enums */
 
     public enum FooEnum
     {
@@ -463,7 +463,7 @@ public class Tests
         return e == FooEnum.Foo3 ? 0 : 1;
     }
 
-    /* Passing and returning blittable structs */
+/* Passing and returning blittable structs */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct BlittableStruct
@@ -498,11 +498,11 @@ public class Tests
         );
     }
 
-    /*
-     * Passing and returning small structs
-     */
+/*
+* Passing and returning small structs
+*/
 
-    /* TEST 1: 4 byte long INTEGER struct */
+/* TEST 1: 4 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct1
@@ -531,7 +531,7 @@ public class Tests
         );
     }
 
-    /* TEST 2: 2+2 byte long INTEGER struct */
+/* TEST 2: 2+2 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct2
@@ -562,7 +562,7 @@ public class Tests
         );
     }
 
-    /* TEST 3: 2+1 byte long INTEGER struct */
+/* TEST 3: 2+1 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct3
@@ -593,7 +593,7 @@ public class Tests
         );
     }
 
-    /* TEST 4: 2 byte long INTEGER struct */
+/* TEST 4: 2 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct4
@@ -622,7 +622,7 @@ public class Tests
         );
     }
 
-    /* TEST 5: 8 byte long INTEGER struct */
+/* TEST 5: 8 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct5
@@ -651,7 +651,7 @@ public class Tests
         );
     }
 
-    /* TEST 6: 4+4 byte long INTEGER struct */
+/* TEST 6: 4+4 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct6
@@ -682,7 +682,7 @@ public class Tests
         );
     }
 
-    /* TEST 7: 4+2 byte long INTEGER struct */
+/* TEST 7: 4+2 byte long INTEGER struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct7
@@ -713,7 +713,7 @@ public class Tests
         );
     }
 
-    /* TEST 8: 4 byte long FLOAT struct */
+/* TEST 8: 4 byte long FLOAT struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct8
@@ -742,7 +742,7 @@ public class Tests
         );
     }
 
-    /* TEST 9: 8 byte long FLOAT struct */
+/* TEST 9: 8 byte long FLOAT struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct9
@@ -771,7 +771,7 @@ public class Tests
         );
     }
 
-    /* TEST 10: 4+4 byte long FLOAT struct */
+/* TEST 10: 4+4 byte long FLOAT struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct10
@@ -802,7 +802,7 @@ public class Tests
         );
     }
 
-    /* TEST 11: 4+4 byte long MIXED struct */
+/* TEST 11: 4+4 byte long MIXED struct */
 
     [StructLayout(LayoutKind.Sequential)]
     public struct SmallStruct11
@@ -833,9 +833,9 @@ public class Tests
         );
     }
 
-    /*
-     * Passing arrays
-     */
+/*
+* Passing arrays
+*/
     public delegate int ArrayDelegate1(
         int i,
         string j,
@@ -1176,7 +1176,7 @@ public class Tests
         return mono_test_marshal_array_delegate8(arr, 2, new ArrayDelegate8(array_delegate8));
     }
 
-    /* Array with size param of type long */
+/* Array with size param of type long */
 
     public delegate int ArrayDelegate8_2(
         long i,
@@ -1214,9 +1214,9 @@ public class Tests
         );
     }
 
-    /*
-     * [Out] blittable arrays
-     */
+/*
+* [Out] blittable arrays
+*/
 
     public delegate int ArrayDelegate9(
         int i,
@@ -1248,9 +1248,9 @@ public class Tests
         return mono_test_marshal_out_array_delegate(arr, 2, new ArrayDelegate9(array_delegate9));
     }
 
-    /*
-     * [Out] string arrays
-     */
+/*
+* [Out] string arrays
+*/
 
     public delegate int ArrayDelegate10(
         int i,
@@ -1287,9 +1287,9 @@ public class Tests
         );
     }
 
-    /*
-     * [In, Out] classes
-     */
+/*
+* [In, Out] classes
+*/
 
     public delegate int InOutByvalClassDelegate([In, Out] SimpleClass ss);
 
@@ -1318,9 +1318,9 @@ public class Tests
         );
     }
 
-    /*
-     * Returning unicode strings
-     */
+/*
+* Returning unicode strings
+*/
     [return: MarshalAs(UnmanagedType.LPWStr)]
     public delegate string ReturnUnicodeStringDelegate(
         [MarshalAs(UnmanagedType.LPWStr)] string message
@@ -1343,9 +1343,9 @@ public class Tests
         );
     }
 
-    /*
-     * Returning string arrays
-     */
+/*
+* Returning string arrays
+*/
     public delegate string[] ReturnArrayDelegate(int i);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_return_string_array_delegate")]
@@ -1380,9 +1380,9 @@ public class Tests
         );
     }
 
-    /*
-     * Byref string marshalling
-     */
+/*
+* Byref string marshalling
+*/
     public delegate int ByrefStringDelegate(ref string s);
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_byref_string_delegate")]
@@ -1405,9 +1405,9 @@ public class Tests
         );
     }
 
-    /*
-     * Thread attach
-     */
+/*
+* Thread attach
+*/
 
     public delegate int SimpleDelegate(int i);
 
@@ -1528,9 +1528,9 @@ public class Tests
         return 43;
     }
 
-    /*
-     * Appdomain save/restore
-     */
+/*
+* Appdomain save/restore
+*/
     static Func<int> callback;
 
     [DllImport("libtest", EntryPoint = "mono_test_marshal_set_callback")]

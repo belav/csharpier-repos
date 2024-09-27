@@ -18,8 +18,10 @@ namespace System.Configuration
     public class ConfigurationFileMap : ICloneable
     {
         // DevDiv #407902 - This used to be two fields: one containing the filename and the other containing
-        // a Boolean dictating whether a security check needed to take place. Such a pattern wasn't thread-safe
-        // and could be circumvented by malicious callers. Using a single reference field is guaranteed atomic
+        // a Boolean dictating whether a security check needed to take place. Such a pattern wasn't
+        // thread-safe
+        // and could be circumvented by malicious callers. Using a single reference field is guaranteed
+        // atomic
         // read and write across all platforms, so the race condition is eliminated.
         private Func<string> _getFilenameThunk;
 

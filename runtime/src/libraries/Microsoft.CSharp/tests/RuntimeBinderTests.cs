@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Xunit;
 
-// IVT to "Microsoft.CSharp.RuntimeBinder.Binder", just to use IVT in a test (see: InternalsVisibleToTest below)
+// IVT to "Microsoft.CSharp.RuntimeBinder.Binder", just to use IVT in a test (see:
+// InternalsVisibleToTest below)
 [assembly: InternalsVisibleTo(
     "Microsoft.CSharp, PublicKey = 002400000480000094000000060200000024000052534131000400000100010007D1FA57C4AED9F0A32E84AA0FAEFD0DE9E8FD6AEC8F87FB03766C834C99921EB23BE79AD9D5DCC1DD9AD236132102900B723CF980957FC4E177108FC607774F29E8320E92EA05ECE4E821C0A5EFE8F1645C4C0C93C1AB99285D622CAA652C1DFAD63D745D6F2DE5F17E5EAF0FC4963D261C8A12436518206DC093344D5AD293"
 )]
@@ -85,7 +86,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             Class1 typed = new Class1();
 
-            // make a callsite as if it is contained inside "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
+            // make a callsite as if it is contained inside
+            // "Microsoft.CSharp.RuntimeBinder.RuntimeBinderException"
             MySite.mySite = CallSite<Action<CallSite, object>>.Create(
                 Microsoft.CSharp.RuntimeBinder.Binder.InvokeMember(
                     CSharpBinderFlags.ResultDiscarded,
@@ -356,8 +358,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 .Throws<RuntimeBinderException>(() => icb.Count((dynamic)new int[3]))
                 .Message;
             // The call is ambiguous between the following methods or properties:
+            //
             // 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.Count(System.Collections.ICollection)'
-            // and 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter2.Count(System.Collections.ICollection)'
+            // and
+            // 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter2.Count(System.Collections.ICollection)'
             Assert.Contains(
                 "'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.Count(System.Collections.ICollection)'",
                 message
@@ -394,7 +398,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             string message = Assert
                 .Throws<RuntimeBinderException>(() => target0(compileTimeTypeValueSetter, null, 2))
                 .Message;
-            // Ambiguity between 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.ExplicitCount'
+            // Ambiguity between
+            // 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.ExplicitCount'
             // and 'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter2.ExplicitCount'
             Assert.Contains(
                 "'Microsoft.CSharp.RuntimeBinder.Tests.RuntimeBinderTests.ICounter1.ExplicitCount'",

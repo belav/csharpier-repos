@@ -202,8 +202,10 @@ namespace System.Text.RegularExpressions.Tests
             Assert.All(cultInvariantRegex, rex => Assert.True(rex.IsMatch(input)));
             if (PlatformDetection.IsNetFramework)
             {
-                // If running in .NET Framework, when the Regex was created with a turkish locale the lower cased turkish version will
-                // no longer match the input string which contains upper and lower case iiiis hence even the input string
+                // If running in .NET Framework, when the Regex was created with a turkish locale the lower cased
+                // turkish version will
+                // no longer match the input string which contains upper and lower case iiiis hence even the input
+                // string
                 // will no longer match. For more info, check https://github.com/dotnet/runtime/issues/58958
                 Assert.All(turkishRegex, rex => Assert.False(rex.IsMatch(input)));
             }
@@ -238,8 +240,10 @@ namespace System.Text.RegularExpressions.Tests
         {
             using (new ThreadCultureChange(info))
             {
-                // When RegexOptions.IgnoreCase is supplied the current thread culture is used to lowercase the input string.
-                // Except if RegexOptions.CultureInvariant is additionally added locale dependent effects on the generated code or state machine may happen.
+                // When RegexOptions.IgnoreCase is supplied the current thread culture is used to lowercase the
+                // input string.
+                // Except if RegexOptions.CultureInvariant is additionally added locale dependent effects on the
+                // generated code or state machine may happen.
                 return new Regex[]
                 {
                     new Regex(input, additional),
@@ -376,7 +380,8 @@ namespace System.Text.RegularExpressions.Tests
                         continue;
                     }
 
-                    // \u0130 (Turkish I with dot) and \u0131 (Turkish i without dot) are unrelated characters in general
+                    // \u0130 (Turkish I with dot) and \u0131 (Turkish i without dot) are unrelated characters in
+                    // general
 
                     // Expected answers in the default en-US culture
                     yield return new object[] { "(?i:I)", option, engine, enUS, "xy\u0131ab", "" };

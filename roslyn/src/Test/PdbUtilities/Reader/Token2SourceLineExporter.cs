@@ -642,7 +642,8 @@ namespace Roslyn.Test.PdbUtilities
                     // We need to search this entire collision chain because we have to ensure that there are no
                     // duplicate entries in the table.
 
-                    // Insert the key/value pair into this bucket if this bucket is empty and has never contained an entry
+                    // Insert the key/value pair into this bucket if this bucket is empty and has never contained an
+                    // entry
                     // OR
                     // This bucket once contained an entry but there has never been a collision
                     if (_buckets[bucketNumber].val == null)
@@ -697,7 +698,8 @@ namespace Roslyn.Test.PdbUtilities
                     seed += incr;
                 } while (++ntry < _buckets.Length);
 
-                // This code is here if and only if there were no buckets without a collision bit set in the entire table
+                // This code is here if and only if there were no buckets without a collision bit set in the entire
+                // table
                 if (emptySlotNumber != -1)
                 {
                     // We pretty much have to insert in this order.  Don't set hash

@@ -18,7 +18,8 @@ namespace System.Data.Objects.Internal
     internal interface IChangeTrackingStrategy
     {
         /// <summary>
-        /// Sets a change tracker onto an entity, or does nothing if the entity does not support change trackers.
+        /// Sets a change tracker onto an entity, or does nothing if the entity does not support change
+        // trackers.
         /// </summary>
         /// <param name="changeTracker">The change tracker to set</param>
         void SetChangeTracker(IEntityChangeTracker changeTracker);
@@ -37,7 +38,8 @@ namespace System.Data.Objects.Internal
         /// <param name="entry">The state entry of the entity to for which a value should be set</param>
         /// <param name="member">State member information indicating the member to set</param>
         /// <param name="ordinal">The ordinal of the member to set</param>
-        /// <param name="target">The object onto which the value should be set; may be the entity, or a contained complex value</param>
+        /// <param name="target">The object onto which the value should be set; may be the entity, or a
+        // contained complex value</param>
         /// <param name="value">The value to set</param>
         void SetCurrentValue(
             EntityEntry entry,
@@ -48,7 +50,8 @@ namespace System.Data.Objects.Internal
         );
 
         /// <summary>
-        /// Updates the current value records using Shaper.UpdateRecord but with additional change tracking logic
+        /// Updates the current value records using Shaper.UpdateRecord but with additional change tracking
+        // logic
         /// added as required by POCO and proxy entities.
         /// </summary>
         /// <param name="value">The value</param>

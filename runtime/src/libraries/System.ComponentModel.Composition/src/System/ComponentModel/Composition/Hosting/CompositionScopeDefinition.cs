@@ -93,7 +93,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             try
@@ -131,7 +132,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Gets the export definitions that describe the exports surfaced by the CompositionScopedefinition.
+        ///     Gets the export definitions that describe the exports surfaced by the
+        // CompositionScopedefinition.
         /// </summary>
         /// <value>
         ///     An <see cref="IEnumerable{T}"/> of <see cref="ExportDefinition"/> objects describing
@@ -238,7 +240,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Raises the <see cref="Changed"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see
+        // cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance
+        // containing the event data.</param>
         protected virtual void OnChanged(ComposablePartCatalogChangeEventArgs e)
         {
             Changed?.Invoke(this, e);
@@ -247,7 +251,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <summary>
         /// Raises the <see cref="Changing"/> event.
         /// </summary>
-        /// <param name="e">The <see cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see
+        // cref="System.ComponentModel.Composition.Hosting.ComposablePartCatalogChangeEventArgs"/> instance
+        // containing the event data.</param>
         protected virtual void OnChanging(ComposablePartCatalogChangeEventArgs e)
         {
             Changing?.Invoke(this, e);

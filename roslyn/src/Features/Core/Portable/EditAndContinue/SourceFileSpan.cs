@@ -10,8 +10,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
     /// <summary>
-    /// Represents a span of text in a source code file in terms of file name, line number, and offset within line.
-    /// An alternative for <see cref="FileLinePositionSpan"/> without <see cref="FileLinePositionSpan.HasMappedPath"/> bit.
+    /// Represents a span of text in a source code file in terms of file name, line number, and offset
+    // within line.
+    /// An alternative for <see cref="FileLinePositionSpan"/> without <see
+    // cref="FileLinePositionSpan.HasMappedPath"/> bit.
     /// </summary>
     /// <remarks>
     /// Initializes the <see cref="SourceFileSpan"/> instance.

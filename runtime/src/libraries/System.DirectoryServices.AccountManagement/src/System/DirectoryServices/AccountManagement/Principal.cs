@@ -374,7 +374,8 @@ namespace System.DirectoryServices.AccountManagement
             // Make sure we're not a fake principal
             CheckFakePrincipal();
 
-            // We must have a PrincipalContext to save into.  This should always be the case, unless we're unpersisted
+            // We must have a PrincipalContext to save into.  This should always be the case, unless we're
+            // unpersisted
             // and they never set a PrincipalContext.
             if (_ctx == null)
             {
@@ -423,7 +424,8 @@ namespace System.DirectoryServices.AccountManagement
             // Make sure we're not a fake principal
             CheckFakePrincipal();
 
-            // We must have a PrincipalContext to save into.  This should always be the case, unless we're unpersisted
+            // We must have a PrincipalContext to save into.  This should always be the case, unless we're
+            // unpersisted
             // and they never set a PrincipalContext.
             if (context == null)
             {
@@ -439,7 +441,8 @@ namespace System.DirectoryServices.AccountManagement
                 throw new InvalidOperationException(SR.SaveToNotSupportedAgainstMachineStore);
             }
 
-            // If the user is trying to save to the same context we are already set to then just save the changes
+            // If the user is trying to save to the same context we are already set to then just save the
+            // changes
             if (context == _ctx)
             {
                 Save();
@@ -898,7 +901,8 @@ namespace System.DirectoryServices.AccountManagement
             set { _loaded = value; }
         }
 
-        // A low-level way for derived classes to access the ctx field.  Note this is intended for internal use only,
+        // A low-level way for derived classes to access the ctx field.  Note this is intended for internal
+        // use only,
         // hence the LinkDemand.
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)]
@@ -978,7 +982,8 @@ namespace System.DirectoryServices.AccountManagement
 
         // The underlying search object (e.g., SearcResult, Item) corresponding to this Principal.
         // Set by StoreCtx.GetAsPrincipal when this Principal was instantiated by it.
-        // If not set, this object was not created from a search.  We need to store the searchresult until the object is persisted because
+        // If not set, this object was not created from a search.  We need to store the searchresult until
+        // the object is persisted because
         // we may need to load properties from it.
         private object _underlyingSearchObject;
         internal object UnderlyingSearchObject
@@ -994,7 +999,8 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         // Optional.  This property exists entirely for the use of the StoreCtxs.  When UnderlyingObject
-        // can correspond to more than one possible principal in the store (e.g., WinFS's "multiple principals
+        // can correspond to more than one possible principal in the store (e.g., WinFS's "multiple
+        // principals
         // per contact" model), the StoreCtx can use this to track and discern which principal in the
         // UnderlyingObject this Principal object corresponds to.  Set by GetAsPrincipal(), if set at all.
         private object _discriminant;
@@ -1004,8 +1010,10 @@ namespace System.DirectoryServices.AccountManagement
             set { _discriminant = value; }
         }
 
-        // A store-specific key, used to determine if two CLR Principal objects represent the same store principal.
-        // Set by GetAsPrincipal when Principal is created from a query, or when a unpersisted Principal is persisted.
+        // A store-specific key, used to determine if two CLR Principal objects represent the same store
+        // principal.
+        // Set by GetAsPrincipal when Principal is created from a query, or when a unpersisted Principal is
+        // persisted.
         private StoreKey _key;
         internal StoreKey Key
         {
@@ -1015,7 +1023,8 @@ namespace System.DirectoryServices.AccountManagement
 
         private bool _disposed;
 
-        // Checks if the principal has been disposed or deleted, and throws an appropriate exception if it has.
+        // Checks if the principal has been disposed or deleted, and throws an appropriate exception if it
+        // has.
         [System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Advanced)]
         protected void CheckDisposedOrDeleted()
         {
@@ -1212,8 +1221,10 @@ namespace System.DirectoryServices.AccountManagement
 
         // These methods implement the logic shared by all the get/set accessors for the public properties.
 
-        // We pass currentValue by ref, even though we don't directly modify it, because if the LoadIfNeeded()
-        // call causes the data to be loaded, we need to pick up the post-load value, not the (empty) value at the point
+        // We pass currentValue by ref, even though we don't directly modify it, because if the
+        // LoadIfNeeded()
+        // call causes the data to be loaded, we need to pick up the post-load value, not the (empty) value
+        // at the point
         // HandleGet<T> was called.
         //
         // We'd like this to be marked protected AND internal, but that's not possible, so we'll settle for
@@ -1345,7 +1356,8 @@ namespace System.DirectoryServices.AccountManagement
         // Getting changes to persist (or to build a query from a QBE filter)
         //
 
-        // Given a property name, returns true if that property has changed since it was loaded, false otherwise.
+        // Given a property name, returns true if that property has changed since it was loaded, false
+        // otherwise.
         internal virtual bool GetChangeStatusForProperty(string propertyName)
         {
             GlobalDebug.WriteLineIf(
@@ -1376,14 +1388,17 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         // Given a property name, returns the current value for the property.
-        // Generally, this method is called only if GetChangeStatusForProperty indicates there are changes on the
+        // Generally, this method is called only if GetChangeStatusForProperty indicates there are changes
+        // on the
         // property specified.
         //
         // If the property is a scalar property, the return value is an object of the property type.
-        // If the property is an IdentityClaimCollection property, the return value is the IdentityClaimCollection
+        // If the property is an IdentityClaimCollection property, the return value is the
+        // IdentityClaimCollection
         // itself.
         // If the property is a ValueCollection<T>, the return value is the ValueCollection<T> itself.
-        // If the property is a X509Certificate2Collection, the return value is the X509Certificate2Collection itself.
+        // If the property is a X509Certificate2Collection, the return value is the
+        // X509Certificate2Collection itself.
         // If the property is a PrincipalCollection, the return value is the PrincipalCollection itself.
         internal virtual object GetValueForProperty(string propertyName)
         {

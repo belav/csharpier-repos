@@ -62,10 +62,12 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para>Represents the number of objects in the <see cref='System.Management.MethodDataCollection'/>.</para>
+        /// <para>Represents the number of objects in the <see
+        // cref='System.Management.MethodDataCollection'/>.</para>
         /// </summary>
         /// <value>
-        /// <para> The number of objects in the <see cref='System.Management.MethodDataCollection'/>. </para>
+        /// <para> The number of objects in the <see cref='System.Management.MethodDataCollection'/>.
+        // </para>
         /// </value>
         public int Count
         {
@@ -168,10 +170,12 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Copies the <see cref='System.Management.MethodDataCollection'/> to a specialized <see cref='System.Management.MethodData'/>
+        /// <para>Copies the <see cref='System.Management.MethodDataCollection'/> to a specialized <see
+        // cref='System.Management.MethodData'/>
         /// array.</para>
         /// </summary>
-        /// <param name='methodArray'>The destination array to which to copy the <see cref='System.Management.MethodData'/> objects.</param>
+        /// <param name='methodArray'>The destination array to which to copy the <see
+        // cref='System.Management.MethodData'/> objects.</param>
         /// <param name=' index'>The index in the destination array from which to start the copy.</param>
         public void CopyTo(MethodData[] methodArray, int index)
         {
@@ -196,7 +200,8 @@ namespace System.Management
         ///       of the collection, so changes made to the collection after the enumerator was
         ///       obtained are not reflected.</para>
         /// </remarks>
-        /// <returns>An <see cref="System.Collections.IEnumerator"/> to enumerate through the collection.</returns>
+        /// <returns>An <see cref="System.Collections.IEnumerator"/> to enumerate through the
+        // collection.</returns>
         public MethodDataEnumerator GetEnumerator()
         {
             return new MethodDataEnumerator(parent);
@@ -325,7 +330,8 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Returns the current <see cref='System.Management.MethodData'/> in the <see cref='System.Management.MethodDataCollection'/>
+            /// <para>Returns the current <see cref='System.Management.MethodData'/> in the <see
+            // cref='System.Management.MethodDataCollection'/>
             /// enumeration.</para>
             /// </summary>
             /// <value>The current <see cref='System.Management.MethodData'/> item in the collection.</value>
@@ -335,16 +341,19 @@ namespace System.Management
             }
 
             /// <summary>
-            /// <para>Moves to the next element in the <see cref='System.Management.MethodDataCollection'/> enumeration.</para>
+            /// <para>Moves to the next element in the <see cref='System.Management.MethodDataCollection'/>
+            // enumeration.</para>
             /// </summary>
-            /// <returns><see langword='true'/> if the enumerator was successfully advanced to the next method; <see langword='false'/> if the enumerator has passed the end of the collection.</returns>
+            /// <returns><see langword='true'/> if the enumerator was successfully advanced to the next method;
+            // <see langword='false'/> if the enumerator has passed the end of the collection.</returns>
             public bool MoveNext()
             {
                 return en.MoveNext();
             }
 
             /// <summary>
-            /// <para>Resets the enumerator to the beginning of the <see cref='System.Management.MethodDataCollection'/> enumeration.</para>
+            /// <para>Resets the enumerator to the beginning of the <see
+            // cref='System.Management.MethodDataCollection'/> enumeration.</para>
             /// </summary>
             public void Reset()
             {
@@ -357,10 +366,12 @@ namespace System.Management
         //
 
         /// <summary>
-        /// <para>Returns the specified <see cref='System.Management.MethodData'/> from the <see cref='System.Management.MethodDataCollection'/>.</para>
+        /// <para>Returns the specified <see cref='System.Management.MethodData'/> from the <see
+        // cref='System.Management.MethodDataCollection'/>.</para>
         /// </summary>
         /// <param name='methodName'>The name of the method requested.</param>
-        /// <value>A <see cref='System.Management.MethodData'/> instance containing all information about the specified method.</value>
+        /// <value>A <see cref='System.Management.MethodData'/> instance containing all information about
+        // the specified method.</value>
         public virtual MethodData this[string methodName]
         {
             get
@@ -373,12 +384,14 @@ namespace System.Management
         }
 
         /// <summary>
-        /// <para>Removes a <see cref='System.Management.MethodData'/> from the <see cref='System.Management.MethodDataCollection'/>.</para>
+        /// <para>Removes a <see cref='System.Management.MethodData'/> from the <see
+        // cref='System.Management.MethodDataCollection'/>.</para>
         /// </summary>
         /// <param name='methodName'>The name of the method to remove from the collection.</param>
         /// <remarks>
         ///    <para>
-        ///       Removing <see cref='System.Management.MethodData'/> objects from the <see cref='System.Management.MethodDataCollection'/>
+        ///       Removing <see cref='System.Management.MethodData'/> objects from the <see
+        // cref='System.Management.MethodDataCollection'/>
         ///       can only be done when the class has no
         ///       instances. Any other case will result in an exception.</para>
         /// </remarks>
@@ -410,15 +423,18 @@ namespace System.Management
 
         //This variant takes only a method name and assumes a void method with no in/out parameters
         /// <overload>
-        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see cref='System.Management.MethodDataCollection'/>.</para>
+        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see
+        // cref='System.Management.MethodDataCollection'/>.</para>
         /// </overload>
         /// <summary>
-        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see cref='System.Management.MethodDataCollection'/>. This overload will
+        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see
+        // cref='System.Management.MethodDataCollection'/>. This overload will
         ///    add a new method with no parameters to the collection.</para>
         /// </summary>
         /// <param name='methodName'>The name of the method to add.</param>
         /// <remarks>
-        /// <para> Adding <see cref='System.Management.MethodData'/> objects to the <see cref='System.Management.MethodDataCollection'/> can only
+        /// <para> Adding <see cref='System.Management.MethodData'/> objects to the <see
+        // cref='System.Management.MethodDataCollection'/> can only
         ///    be done when the class has no instances. Any other case will result in an
         ///    exception.</para>
         /// </remarks>
@@ -429,14 +445,18 @@ namespace System.Management
 
         //This variant takes the full information, i.e. the method name and in & out param objects
         /// <summary>
-        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see cref='System.Management.MethodDataCollection'/>. This overload will add a new method with the
+        /// <para>Adds a <see cref='System.Management.MethodData'/> to the <see
+        // cref='System.Management.MethodDataCollection'/>. This overload will add a new method with the
         ///    specified parameter objects to the collection.</para>
         /// </summary>
         /// <param name='methodName'>The name of the method to add.</param>
-        /// <param name=' inParameters'>The <see cref='System.Management.ManagementBaseObject'/> holding the input parameters to the method.</param>
-        /// <param name=' outParameters'>The <see cref='System.Management.ManagementBaseObject'/> holding the output parameters to the method.</param>
+        /// <param name=' inParameters'>The <see cref='System.Management.ManagementBaseObject'/> holding the
+        // input parameters to the method.</param>
+        /// <param name=' outParameters'>The <see cref='System.Management.ManagementBaseObject'/> holding
+        // the output parameters to the method.</param>
         /// <remarks>
-        /// <para> Adding <see cref='System.Management.MethodData'/> objects to the <see cref='System.Management.MethodDataCollection'/> can only be
+        /// <para> Adding <see cref='System.Management.MethodData'/> objects to the <see
+        // cref='System.Management.MethodDataCollection'/> can only be
         ///    done when the class has no instances. Any other case will result in an
         ///    exception.</para>
         /// </remarks>

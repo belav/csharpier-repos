@@ -34,16 +34,16 @@ namespace System.Net
             }
         }
 
-        /*internal static ConnectionPool[] ConnectionPools {
-            get {
-                lock(InternalSyncObject) {
-                    ConnectionPool [] connectionPools = new ConnectionPool[m_ConnectionPools.Count];
-                    m_ConnectionPools.CopyTo(connectionPools, 0);
-                    return connectionPools;
-                }
-            }
-        }
-        */
+/*internal static ConnectionPool[] ConnectionPools {
+get {
+lock(InternalSyncObject) {
+ConnectionPool [] connectionPools = new ConnectionPool[m_ConnectionPools.Count];
+m_ConnectionPools.CopyTo(connectionPools, 0);
+return connectionPools;
+}
+}
+}
+*/
         private static string GenerateKey(string hostName, int port, string groupName)
         {
             return hostName
@@ -78,20 +78,23 @@ namespace System.Net
             }
         }
 
-        /*
-        internal static ConnectionPool GetConnectionPool(string hostName, int port, string groupName, CreateConnectionDelegate createConnectionCallback) {
-            string key = hostName + "\r" + port.ToString(NumberFormatInfo.InvariantInfo) + "\r" + groupName;
-            lock(InternalSyncObject) {
-                ConnectionPool connectionPool = (ConnectionPool) m_ConnectionPools[key];
-                if (connectionPool == null) {
-                    ServicePoint servicePoint = ServicePointManager.FindServicePoint(new Uri("sockets://" + hostName + ":" + port.ToString(NumberFormatInfo.InvariantInfo)), null);
-                    connectionPool = new ConnectionPool(servicePoint, m_DefaultMaxPool, 0,  servicePoint.MaxIdleTime, createConnectionCallback);
-                    m_ConnectionPools[key] = connectionPool;
-                }
-                return connectionPool;
-            }
-        }
-        */
+/*
+internal static ConnectionPool GetConnectionPool(string hostName, int port, string groupName,
+CreateConnectionDelegate createConnectionCallback) {
+string key = hostName + "\r" + port.ToString(NumberFormatInfo.InvariantInfo) + "\r" + groupName;
+lock(InternalSyncObject) {
+ConnectionPool connectionPool = (ConnectionPool) m_ConnectionPools[key];
+if (connectionPool == null) {
+ServicePoint servicePoint = ServicePointManager.FindServicePoint(new Uri("sockets://" + hostName +
+":" + port.ToString(NumberFormatInfo.InvariantInfo)), null);
+connectionPool = new ConnectionPool(servicePoint, m_DefaultMaxPool, 0,  servicePoint.MaxIdleTime,
+createConnectionCallback);
+m_ConnectionPools[key] = connectionPool;
+}
+return connectionPool;
+}
+}
+*/
 
         internal static bool RemoveConnectionPool(ServicePoint servicePoint, string groupName)
         {

@@ -104,7 +104,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 ITypeSymbol? typeSymbol = targetMethod
                     .TypeArguments[0]
                     .WithNullableAnnotation(NullableAnnotation.None);
-                // This would violate generic type constraint; any such invocation could not have been included in the initial parser.
+                // This would violate generic type constraint; any such invocation could not have been included in
+                // the initial parser.
                 Debug.Assert(typeSymbol?.IsValueType is not true);
 
                 EnqueueTargetTypeForRootInvocation(typeSymbol, overload, invocation);
@@ -143,7 +144,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
                 _interceptorInfoBuilder.MethodsToGen |= overload;
                 _helperInfoBuilder!.RegisterNamespace("Microsoft.Extensions.DependencyInjection");
-                // Emitting refs to IOptionsChangeTokenSource, ConfigurationChangeTokenSource, IConfigureOptions<>, ConfigureNamedOptions<>.
+                // Emitting refs to IOptionsChangeTokenSource, ConfigurationChangeTokenSource, IConfigureOptions<>,
+                // ConfigureNamedOptions<>.
                 _helperInfoBuilder!.RegisterNamespace("Microsoft.Extensions.Options");
                 return true;
             }

@@ -203,7 +203,8 @@ namespace System.ServiceModel.Security
             //  <Generation>...</Generation> - optional
             //  <Offset>...</Offset> - optional
             // choice end
-            //  <Length>...</Length> - optional - default 32 on read (default specified in spec, not in schema - we always write it)
+            //  <Length>...</Length> - optional - default 32 on read (default specified in spec, not in schema -
+            // we always write it)
             //  <Label>...</Label> - optional
             //  <Nonce>...</Nonce> - required (optional in spec, but we require it)
             //</DerivedKeyToken>

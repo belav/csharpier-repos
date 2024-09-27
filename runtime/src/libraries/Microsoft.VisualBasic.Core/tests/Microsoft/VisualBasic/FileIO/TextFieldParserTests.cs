@@ -25,7 +25,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
                 Assert.Throws<ObjectDisposedException>(() => stream.ReadByte());
             }
 
-            // public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding, bool detectEncoding, bool leaveOpen);
+            // public TextFieldParser(System.IO.Stream stream, System.Text.Encoding defaultEncoding, bool
+            // detectEncoding, bool leaveOpen);
             using (var stream = new FileStream(path, FileMode.Open))
             {
                 using (

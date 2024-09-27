@@ -8,7 +8,8 @@ using System.Reflection.Metadata;
 namespace System.Reflection.TypeLoading.Ecma
 {
     /// <summary>
-    /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a PEReader.
+    /// Base class for all Assembly objects created by a MetadataLoadContext and get its metadata from a
+    // PEReader.
     /// </summary>
     internal sealed partial class EcmaAssembly
     {
@@ -32,7 +33,8 @@ namespace System.Reflection.TypeLoading.Ecma
                 == ResourceLocation.ContainedInAnotherAssembly
             )
             {
-                // Must get resource info from other assembly, and OR in the contained in another assembly information
+                // Must get resource info from other assembly, and OR in the contained in another assembly
+                // information
                 ManifestResourceInfo underlyingManifestResourceInfo =
                     internalManifestResourceInfo.ReferencedAssembly.GetManifestResourceInfo(
                         resourceName

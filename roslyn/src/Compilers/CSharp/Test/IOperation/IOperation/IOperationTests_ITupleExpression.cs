@@ -637,12 +637,14 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16 A, System.String B)) (
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by
+                // the target type '(short, string)'.
                 //         (short, string) t = /*<bind>*/(A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1")
                     .WithArguments("A", "(short, string)")
                     .WithLocation(8, 40),
-                // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by
+                // the target type '(short, string)'.
                 //         (short, string) t = /*<bind>*/(A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
                     .WithArguments("B", "(short, string)")
@@ -700,12 +702,14 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // CS8123: The tuple element name 'A' is ignored because a different name or no name is specified by
+                // the target type '(short, string)'.
                 //         /*<bind>*/(short, string) t = (A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "A: 1")
                     .WithArguments("A", "(short, string)")
                     .WithLocation(8, 40),
-                // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by the target type '(short, string)'.
+                // CS8123: The tuple element name 'B' is ignored because a different name or no name is specified by
+                // the target type '(short, string)'.
                 //         /*<bind>*/(short, string) t = (A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
                     .WithArguments("B", "(short, string)")
@@ -1511,12 +1515,14 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (8,56): warning CS8123: The tuple element name 'a' is ignored because a different name or no name is specified by the target type '(long c, int d)'.
+                // (8,56): warning CS8123: The tuple element name 'a' is ignored because a different name or no name
+                // is specified by the target type '(long c, int d)'.
                 //         var t = /*<bind>*/((int, (long c, int d)))(1, (a: 2, b: 3))/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "a: 2")
                     .WithArguments("a", "(long c, int d)")
                     .WithLocation(8, 56),
-                // (8,62): warning CS8123: The tuple element name 'b' is ignored because a different name or no name is specified by the target type '(long c, int d)'.
+                // (8,62): warning CS8123: The tuple element name 'b' is ignored because a different name or no name
+                // is specified by the target type '(long c, int d)'.
                 //         var t = /*<bind>*/((int, (long c, int d)))(1, (a: 2, b: 3))/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "b: 3")
                     .WithArguments("b", "(long c, int d)")
@@ -2508,7 +2514,8 @@ class C
 
             var expectedDiagnostics = new[]
             {
-                // file.cs(6,19): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // file.cs(6,19): error CS0201: Only assignment, call, increment, decrement, await, and new object
+                // expressions can be used as a statement
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "(var ((a,b), c), int d)")
                     .WithLocation(6, 19),

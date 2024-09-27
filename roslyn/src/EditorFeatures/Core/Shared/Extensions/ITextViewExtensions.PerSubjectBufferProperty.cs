@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 Dictionary<object, TProperty>
             > _subjectBufferMap = new();
 
-            // Some other VS components (e.g. Razor) will temporarily disconnect out ITextBuffer from the ITextView.  When listening to
-            // BufferGraph.GraphBuffersChanged, we should allow buffers we previously knew about to be re-attached.
+            // Some other VS components (e.g. Razor) will temporarily disconnect out ITextBuffer from the
+            // ITextView.  When listening to
+            // BufferGraph.GraphBuffersChanged, we should allow buffers we previously knew about to be
+            // re-attached.
             private readonly ConditionalWeakTable<
                 ITextBuffer,
                 Dictionary<object, TProperty>

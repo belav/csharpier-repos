@@ -19,7 +19,8 @@ namespace Algorithms
             : base(dp, abortFunc) { }
 
         // Render the fractal on a single thread using raw Vector<double> data types
-        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
+        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in
+        // VectorFloat.cs
         public void RenderSingleThreadedNoADT(
             float xminf,
             float xmaxf,
@@ -82,7 +83,8 @@ namespace Algorithms
         }
 
         // Render the fractal on a single thread using the ComplexVecDouble data type
-        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
+        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in
+        // VectorFloat.cs
         public void RenderSingleThreadedWithADT(
             float xminf,
             float xmaxf,
@@ -141,7 +143,8 @@ namespace Algorithms
         }
 
         // Render the fractal on multiple threads using raw Vector<double> data types
-        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
+        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in
+        // VectorFloat.cs
         public void RenderMultiThreadedNoADT(
             float xminf,
             float xmaxf,
@@ -206,7 +209,8 @@ namespace Algorithms
         }
 
         // Render the fractal on multiple threads using the ComplexVecDouble data type
-        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in VectorFloat.cs
+        // For a well commented version, go see VectorFloatRenderer.RenderSingleThreadedWithADT in
+        // VectorFloat.cs
         public void RenderMultiThreadedWithADT(
             float xminf,
             float xmaxf,

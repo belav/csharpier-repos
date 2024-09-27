@@ -81,16 +81,16 @@ internal class FirefoxProvider : WasmHostProvider
             throw;
         }
 
-        /*
-         * Firefox uses a plain tcp connection, so we use that for communicating
-         * with the browser. But the tests connect to the webserver via a websocket,
-         * so we *accept* that here to complete the connection.
-         *
-         * Normally, when the tests are closing down, they close that webserver
-         * connection, and the proxy would shutdown too. But in this case, we need
-         * to explicitly trigger the proxy/browser shutdown when the websocket
-         * is closed.
-         */
+/*
+* Firefox uses a plain tcp connection, so we use that for communicating
+* with the browser. But the tests connect to the webserver via a websocket,
+* so we *accept* that here to complete the connection.
+*
+* Normally, when the tests are closing down, they close that webserver
+* connection, and the proxy would shutdown too. But in this case, we need
+* to explicitly trigger the proxy/browser shutdown when the websocket
+* is closed.
+*/
         _ideWebSocket = await context.WebSockets.AcceptWebSocketAsync();
 
         ArraySegment<byte> buff = new(new byte[10]);

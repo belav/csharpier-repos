@@ -13,8 +13,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         /// CPS-based project system extracts out the full path to the assembly.
         /// </summary>
         /// <param name="projectDirectoryPath">The full path to the project directory</param>
-        /// <param name="analyzerNodeCanonicalName">The canonical name of the analyzer node in the hierarchy</param>
-        /// <returns>The full path to the analyzer assembly on disk, or null if <paramref name="analyzerNodeCanonicalName"/>
+        /// <param name="analyzerNodeCanonicalName">The canonical name of the analyzer node in the
+        // hierarchy</param>
+        /// <returns>The full path to the analyzer assembly on disk, or null if <paramref
+        // name="analyzerNodeCanonicalName"/>
         /// cannot be parsed.</returns>
         /// <remarks>
         /// The canonical name takes the following form:
@@ -23,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         ///
         /// e.g.:
         ///
-        ///   C:\projects\solutions\MyProj\netstandard2.0\analyzerdependency\C:\users\me\.packages\somePackage\lib\someAnalyzer.dll
+        ///
+        // C:\projects\solutions\MyProj\netstandard2.0\analyzerdependency\C:\users\me\.packages\somePackage\lib\someAnalyzer.dll
         ///
         /// This method exists solely to extract out the "path to assembly" part, i.e.
         /// "C:\users\me\.packages\somePackage\lib\someAnalyzer.dll". We don't need the

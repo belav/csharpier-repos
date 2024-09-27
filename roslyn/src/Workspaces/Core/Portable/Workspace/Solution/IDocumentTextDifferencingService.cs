@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="oldDocument">The old version of the document.</param>
         /// <param name="newDocument">The new version of the document.</param>
-        /// <param name="preferredDifferenceType">The type of differencing to perform. Not supported by all text differencing services.</param>
+        /// <param name="preferredDifferenceType">The type of differencing to perform. Not supported by all
+        // text differencing services.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>An array of changes.</returns>
         Task<ImmutableArray<TextChange>> GetTextChangesAsync(

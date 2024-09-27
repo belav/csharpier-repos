@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -13,7 +14,8 @@ namespace System.Web.Razor.Generator
     {
         private static readonly char[] _newLineChars = { '\r', '\n' };
 
-        // there is some duplicity of code here, but its very simple and since this is a host path, I'd rather not create another class to encapsulate the data.
+        // there is some duplicity of code here, but its very simple and since this is a host path, I'd
+        // rather not create another class to encapsulate the data.
         public static int PaddingCharCount(RazorEngineHost host, Span target, int generatedStart)
         {
             int padding = CalculatePadding(host, target, generatedStart);
@@ -118,14 +120,16 @@ namespace System.Web.Razor.Generator
 
             padding = CollectSpacesAndTabs(target, host.TabSize) - generatedStart;
 
-            // if we add generated text that is longer than the padding we wanted to insert we have no recourse and we have to skip padding
+            // if we add generated text that is longer than the padding we wanted to insert we have no recourse
+            // and we have to skip padding
             // example:
             // Razor code at column zero: @somecode()
             // Generated code will be:
             // In design time: __o = somecode();
             // In Run time: Write(somecode());
             //
-            // In both cases the padding would have been 1 space to remote the space the @ symbol takes, which will be smaller than the 6 chars the hidden generated code takes.
+            // In both cases the padding would have been 1 space to remote the space the @ symbol takes, which
+            // will be smaller than the 6 chars the hidden generated code takes.
             if (padding < 0)
             {
                 padding = 0;
@@ -166,7 +170,8 @@ namespace System.Web.Razor.Generator
             while (firstSpanInLine.Previous != null)
             {
                 // When scanning previous spans we need to be break down the spans with spaces.
-                // Because the parser doesn't so for example a span looking like \n\n\t needs to be broken down, and we should just grab the \t.
+                // Because the parser doesn't so for example a span looking like \n\n\t needs to be broken down, and
+                // we should just grab the \t.
                 String previousContent = firstSpanInLine.Previous.Content ?? String.Empty;
 
                 int lastNewLineIndex = previousContent.LastIndexOfAny(_newLineChars);
@@ -187,7 +192,8 @@ namespace System.Web.Razor.Generator
                 }
             }
 
-            // We need to walk from the beginning of the line, because space + tab(tabSize) = tabSize columns, but tab(tabSize) + space = tabSize+1 columns.
+            // We need to walk from the beginning of the line, because space + tab(tabSize) = tabSize columns,
+            // but tab(tabSize) + space = tabSize+1 columns.
             Span currentSpanInLine = firstSpanInLine;
 
             if (currentContent == null)

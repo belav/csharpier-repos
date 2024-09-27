@@ -1,17 +1,17 @@
 ﻿/* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Collections.Generic;
@@ -76,14 +76,16 @@ namespace System.Linq.Expressions.Compiler
                         && ReferenceLabel(g.Target).CanReturn
                     )
                     {
-                        // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be emitted
+                        // Since tail call flags are not passed into EmitTryExpression, CanReturn means the goto will be
+                        // emitted
                         // as Ret. Therefore we can emit the current expression with tail call.
                         tailCallFlag = CompilationFlags.EmitAsTail;
                     }
                     else
                     {
                         // In the middle of the block.
-                        // We may do better here by marking it as Tail if the following expressions are not going to emit any IL.
+                        // We may do better here by marking it as Tail if the following expressions are not going to emit
+                        // any IL.
                         tailCallFlag = CompilationFlags.EmitAsMiddle;
                     }
                 }

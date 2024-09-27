@@ -175,7 +175,8 @@ namespace MockInterop01
     public delegate void EventDele03(ComplexStruct p);
 
     [ComVisible(false)]
-    // [TypeIdentifier("71B8C65D-7748-447A-B786-64682CBEF136", "MockInterop01.InteropDeleWithStructArray")]
+    // [TypeIdentifier("71B8C65D-7748-447A-B786-64682CBEF136",
+    // "MockInterop01.InteropDeleWithStructArray")]
     [UnmanagedFunctionPointerAttribute(
         CallingConvention.StdCall,
         BestFitMapping = false,

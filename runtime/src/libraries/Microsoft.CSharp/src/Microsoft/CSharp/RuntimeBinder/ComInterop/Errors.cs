@@ -45,7 +45,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         /// <summary>
-        /// ArgumentException with message like "Error while invoking {0}. Named arguments are not supported."
+        /// ArgumentException with message like "Error while invoking {0}. Named arguments are not
+        // supported."
         /// </summary>
         internal static Exception DispNoNamedArgs(object p0)
         {
@@ -69,7 +70,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         /// <summary>
-        /// ArgumentException with message like "Error while invoking {0}. A required parameter was omitted."
+        /// ArgumentException with message like "Error while invoking {0}. A required parameter was
+        // omitted."
         /// </summary>
         internal static Exception DispParamNotOptional(object p0)
         {
@@ -93,7 +95,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         /// <summary>
-        /// InvalidOperationException with message like "Attempting to pass an event handler of an unsupported type."
+        /// InvalidOperationException with message like "Attempting to pass an event handler of an
+        // unsupported type."
         /// </summary>
         internal static Exception UnsupportedHandlerType()
         {
@@ -109,7 +112,8 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
         }
 
         /// <summary>
-        /// System.Reflection.AmbiguousMatchException with message like "There are valid conversions from {0} to {1}."
+        /// System.Reflection.AmbiguousMatchException with message like "There are valid conversions from
+        // {0} to {1}."
         /// </summary>
         internal static Exception AmbiguousConversion(object p0, object p1)
         {

@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CancellationToken cancellationToken = default
         )
         {
-            // We don't need SemanticModel here, just want to make sure it won't get GC'd before CompletionProviders are able to get it.
+            // We don't need SemanticModel here, just want to make sure it won't get GC'd before
+            // CompletionProviders are able to get it.
             (document, var semanticModel) = await GetDocumentWithFrozenPartialSemanticsAsync(
                     document,
                     cancellationToken
@@ -94,10 +95,12 @@ namespace Microsoft.CodeAnalysis.Completion
             );
 
             // Phase 1: Completion Providers decide if they are triggered based on textual analysis
-            // Phase 2: Completion Providers use syntax to confirm they are triggered, or decide they are not actually triggered and should become an augmenting provider
+            // Phase 2: Completion Providers use syntax to confirm they are triggered, or decide they are not
+            // actually triggered and should become an augmenting provider
             // Phase 3: Triggered Providers are asked for items
             // Phase 4: If any items were provided, all augmenting providers are asked for items
-            // This allows a provider to be textually triggered but later decide to be an augmenting provider based on deeper syntactic analysis.
+            // This allows a provider to be textually triggered but later decide to be an augmenting provider
+            // based on deeper syntactic analysis.
 
             var triggeredProviders = GetTriggeredProviders(
                 document,
@@ -122,8 +125,10 @@ namespace Microsoft.CodeAnalysis.Completion
                 .Except(additionalAugmentingProviders)
                 .ToImmutableArray();
 
-            // PERF: Many CompletionProviders compute identical contexts. This actually shows up on the 2-core typing test.
-            // so we try to share a single SyntaxContext based on document/caretPosition among all providers to reduce repeat computation.
+            // PERF: Many CompletionProviders compute identical contexts. This actually shows up on the 2-core
+            // typing test.
+            // so we try to share a single SyntaxContext based on document/caretPosition among all providers to
+            // reduce repeat computation.
             var sharedContext = new SharedSyntaxContextsWithSpeculativeModel(
                 document,
                 caretPosition
@@ -143,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 )
                 .ConfigureAwait(false);
 
-            // Nothing to do if we didn't even get any regular items back (i.e. 0 items or suggestion item only.)
+            // Nothing to do if we didn't even get any regular items back (i.e. 0 items or suggestion item
+            // only.)
             if (!triggeredContexts.Any(static cc => cc.Items.Count > 0))
                 return CompletionList.Empty;
 
@@ -291,9 +297,12 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Returns a document with frozen partial semantic unless we already have a complete compilation available.
-        /// Getting full semantic could be costly in certain scenarios and would cause significant delay in completion.
-        /// In most cases we'd still end up with complete document, but we'd consider it an acceptable trade-off even when
+        /// Returns a document with frozen partial semantic unless we already have a complete compilation
+        // available.
+        /// Getting full semantic could be costly in certain scenarios and would cause significant delay in
+        // completion.
+        /// In most cases we'd still end up with complete document, but we'd consider it an acceptable
+        // trade-off even when
         /// we get into this transient state.
         /// </summary>
         private async Task<(
@@ -349,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Completion
                     return true;
                 }
 
-                // Only verify against built in providers.  3rd party ones do not necessarily implement the possible trigger characters API.
+                // Only verify against built in providers.  3rd party ones do not necessarily implement the possible
+                // trigger characters API.
                 foreach (var provider in triggeredProviders)
                 {
                     if (
@@ -447,7 +457,8 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Determines if the items are similar enough they should be represented by a single item in the list.
+        /// Determines if the items are similar enough they should be represented by a single item in the
+        // list.
         /// </summary>
         protected virtual bool ItemsMatch(CompletionItem item, CompletionItem existingItem)
         {
@@ -509,7 +520,8 @@ namespace Microsoft.CodeAnalysis.Completion
                 cancellationToken
             );
 
-            // Wrap with extension manager call.  This will ensure this provider is not disabled.  If not, it will ask
+            // Wrap with extension manager call.  This will ensure this provider is not disabled.  If not, it
+            // will ask
             // it for completions.  If that throws, then the provider will be moved to the disabled state.
             await extensionManager
                 .PerformActionAsync(provider, () => provider.ProvideCompletionsAsync(context))

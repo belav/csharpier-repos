@@ -62,7 +62,8 @@ namespace StandAloneTests.BuildManagerCacheFiles
             // System.ArgumentException: Value does not fall within the expected range.
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.CreateCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 56)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 56)
             "create[2]: error write (System.ArgumentException)",
             "read[2]: codeGen",
             // .NET exception:
@@ -70,7 +71,8 @@ namespace StandAloneTests.BuildManagerCacheFiles
             // System.ArgumentException: Value does not fall within the expected range.
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.ReadCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 86)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 86)
             "read[2]: error read (System.ArgumentException)",
             "read[3]: codeGen",
             "read[3]: stream is null",
@@ -81,7 +83,8 @@ namespace StandAloneTests.BuildManagerCacheFiles
             // at System.IO.Path.Combine(String path1, String path2)
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.CreateCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 61)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 61)
             "create[4]: error write (System.ArgumentNullException)",
             "read[4]: codeGen",
             // .NET exception
@@ -90,21 +93,24 @@ namespace StandAloneTests.BuildManagerCacheFiles
             // at System.IO.Path.Combine(String path1, String path2)
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.ReadCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 91)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 91)
             "read[4]: error read (System.ArgumentNullException)",
             "create[5]: codeGen",
             // .NET exception
             // System.ArgumentException: Value does not fall within the expected range.
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.CreateCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 61)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 61)
             "create[5]: error write (System.ArgumentException)",
             "read[5]: codeGen",
             // .NET exception
             // System.ArgumentException: Value does not fall within the expected range.
             // at System.Web.Compilation.BuildManager.GetUserCacheFilePath(String fileName)
             // at System.Web.Compilation.BuildManager.ReadCachedFile(String fileName)
-            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 91)
+            // at _Default.RunTest(String fileName, String logTag, List`1 messages, Boolean noCreate) in
+            // c:\Users\grendel\Documents\Visual Studio 2010\Websites\BuildManager4.0\Default.aspx.cs:line 91)
             "read[5]: error read (System.ArgumentException)",
         };
 

@@ -187,7 +187,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 > await textViewWindow.TestServices.Shell.GetVersionAsync(cancellationToken)
             )
             {
-                // Workaround for extremely unstable async lightbulb (can dismiss itself when SuggestedActionsChanged
+                // Workaround for extremely unstable async lightbulb (can dismiss itself when
+                // SuggestedActionsChanged
                 // fires while expanding the light bulb).
                 await textViewWindow.TestServices.Input.SendAsync(
                     (VirtualKeyCode.OEM_PERIOD, VirtualKeyCode.CONTROL),

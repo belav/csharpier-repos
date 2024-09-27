@@ -7,8 +7,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 ///     A simple model for a database sequence used when reverse engineering an existing database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an existing database</see>, and
-///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an
+// existing database</see>, and
+///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time
+// services</see> for more information and examples.
 /// </remarks>
 public class DatabaseSequence : Annotatable
 {
@@ -38,7 +40,8 @@ public class DatabaseSequence : Annotatable
     public virtual long? StartValue { get; set; }
 
     /// <summary>
-    ///     The amount to increment by to generate the next value in, the sequence, or <see langword="null" /> if not set.
+    ///     The amount to increment by to generate the next value in, the sequence, or <see
+    // langword="null" /> if not set.
     /// </summary>
     public virtual int? IncrementBy { get; set; }
 
@@ -53,7 +56,8 @@ public class DatabaseSequence : Annotatable
     public virtual long? MaxValue { get; set; }
 
     /// <summary>
-    ///     Indicates whether or not the sequence will start over when the max value is reached, or <see langword="null" /> if not set.
+    ///     Indicates whether or not the sequence will start over when the max value is reached, or <see
+    // langword="null" /> if not set.
     /// </summary>
     public virtual bool? IsCyclic { get; set; }
 

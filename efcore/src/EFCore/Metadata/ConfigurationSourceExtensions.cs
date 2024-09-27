@@ -9,19 +9,23 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Provides extension methods for <see cref="ConfigurationSource" />
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public static class ConfigurationSourceExtensions
 {
     /// <summary>
-    ///     Returns a value indicating whether the new configuration source can override configuration set with the old configuration source.
+    ///     Returns a value indicating whether the new configuration source can override configuration
+    // set with the old configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="newConfigurationSource">The new configuration source.</param>
     /// <param name="oldConfigurationSource">The old configuration source.</param>
-    /// <returns><see langword="true" /> if the new configuration source can override configuration set with the old configuration source.</returns>
+    /// <returns><see langword="true" /> if the new configuration source can override configuration set
+    // with the old configuration source.</returns>
     [ContractAnnotation("oldConfigurationSource:null => true")]
     public static bool Overrides(
         this ConfigurationSource newConfigurationSource,
@@ -52,14 +56,17 @@ public static class ConfigurationSourceExtensions
     }
 
     /// <summary>
-    ///     Returns a value indicating whether the new configuration source can override configuration set with the old configuration source.
+    ///     Returns a value indicating whether the new configuration source can override configuration
+    // set with the old configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="newConfigurationSource">The new configuration source.</param>
     /// <param name="oldConfigurationSource">The old configuration source.</param>
-    /// <returns><see langword="true" /> if the new configuration source can override configuration set with the old configuration source.</returns>
+    /// <returns><see langword="true" /> if the new configuration source can override configuration set
+    // with the old configuration source.</returns>
     public static bool Overrides(
         this ConfigurationSource? newConfigurationSource,
         ConfigurationSource? oldConfigurationSource
@@ -67,14 +74,17 @@ public static class ConfigurationSourceExtensions
         newConfigurationSource?.Overrides(oldConfigurationSource) ?? oldConfigurationSource == null;
 
     /// <summary>
-    ///     Returns a value indicating whether the configuration source always takes precedence over the other configuration source.
+    ///     Returns a value indicating whether the configuration source always takes precedence over the
+    // other configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="newConfigurationSource">The new configuration source.</param>
     /// <param name="oldConfigurationSource">The old configuration source.</param>
-    /// <returns><see langword="true" /> if the configuration source always takes precedence over the other configuration source.</returns>
+    /// <returns><see langword="true" /> if the configuration source always takes precedence over the
+    // other configuration source.</returns>
     public static bool OverridesStrictly(
         this ConfigurationSource newConfigurationSource,
         ConfigurationSource? oldConfigurationSource
@@ -83,14 +93,17 @@ public static class ConfigurationSourceExtensions
         && newConfigurationSource != oldConfigurationSource;
 
     /// <summary>
-    ///     Returns a value indicating whether the configuration source always takes precedence over the other configuration source.
+    ///     Returns a value indicating whether the configuration source always takes precedence over the
+    // other configuration source.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="newConfigurationSource">The new configuration source.</param>
     /// <param name="oldConfigurationSource">The old configuration source.</param>
-    /// <returns><see langword="true" /> if the configuration source always takes precedence over the other configuration source.</returns>
+    /// <returns><see langword="true" /> if the configuration source always takes precedence over the
+    // other configuration source.</returns>
     public static bool OverridesStrictly(
         this ConfigurationSource? newConfigurationSource,
         ConfigurationSource? oldConfigurationSource
@@ -102,7 +115,8 @@ public static class ConfigurationSourceExtensions
     ///     Returns the configuration source which has higher priority.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="left">The left configuration source.</param>
     /// <param name="right">The right configuration source.</param>
@@ -117,7 +131,8 @@ public static class ConfigurationSourceExtensions
     ///     Returns the configuration source which has higher priority.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+    // more information and examples.
     /// </remarks>
     /// <param name="left">The left configuration source.</param>
     /// <param name="right">The right configuration source.</param>

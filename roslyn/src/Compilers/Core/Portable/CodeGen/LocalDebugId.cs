@@ -22,18 +22,24 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// It gets a bit complicated when the containing method body is not contiguous (constructors).
         /// If the variable is in the body of the constructor the definition of syntax offset is the same.
         /// If the variable is defined in a constructor  initializer or in a member initializer
-        /// (this is only possible when declaration expressions or closures in primary constructors are involved)
-        /// then the distance is a negative sum of the widths of all the initializers that succeed the declarator
+        /// (this is only possible when declaration expressions or closures in primary constructors are
+        // involved)
+        /// then the distance is a negative sum of the widths of all the initializers that succeed the
+        // declarator
         /// of the variable in the emitted constructor body plus the relative offset of the declarator from
         /// the start of the containing initializer.
         /// </summary>
         public readonly int SyntaxOffset;
 
         /// <summary>
-        /// If a single node is a declarator for multiple variables of the same synthesized kind (it can only happen for synthesized variables)
-        /// we calculate additional number "ordinal" for such variable. We assign the ordinals to the synthesized variables with the same kind
-        /// and syntax offset in the order as they appear in the lowered bound tree. It is important that a valid EnC edit can't change
-        /// the ordinal of a synthesized variable. If it could it would need to be assigned a different kind or associated with a different declarator node.
+        /// If a single node is a declarator for multiple variables of the same synthesized kind (it can
+        // only happen for synthesized variables)
+        /// we calculate additional number "ordinal" for such variable. We assign the ordinals to the
+        // synthesized variables with the same kind
+        /// and syntax offset in the order as they appear in the lowered bound tree. It is important that a
+        // valid EnC edit can't change
+        /// the ordinal of a synthesized variable. If it could it would need to be assigned a different kind
+        // or associated with a different declarator node.
         /// </summary>
         public readonly int Ordinal;
 

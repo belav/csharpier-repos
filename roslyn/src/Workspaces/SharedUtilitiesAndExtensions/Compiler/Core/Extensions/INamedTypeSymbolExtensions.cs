@@ -196,9 +196,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             if (implementation?.ContainingType.TypeKind == TypeKind.Interface)
             {
-                // Treat all implementations in interfaces as explicit, even the original declaration with implementation.
-                // There are no implicit interface implementations in derived interfaces and it feels reasonable to treat
-                // original declaration with implementation as an explicit implementation as well, the implementation is
+                // Treat all implementations in interfaces as explicit, even the original declaration with
+                // implementation.
+                // There are no implicit interface implementations in derived interfaces and it feels reasonable to
+                // treat
+                // original declaration with implementation as an explicit implementation as well, the
+                // implementation is
                 // explicitly provided after all. All implementations in interfaces will be treated uniformly.
                 return true;
             }
@@ -731,7 +734,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // Don't suggest already overridden members
                 RemoveOverriddenMembers(result, containingType, cancellationToken);
 
-                // Don't suggest members that can't be overridden (because they would collide with an existing member).
+                // Don't suggest members that can't be overridden (because they would collide with an existing
+                // member).
                 RemoveNonOverriddableMembers(result, containingType, cancellationToken);
             }
 

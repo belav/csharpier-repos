@@ -21,7 +21,8 @@ internal sealed class JwtBearerConfigureOptions : IConfigureNamedOptions<JwtBear
     /// Initializes a new <see cref="JwtBearerConfigureOptions"/> given the configuration
     /// provided by the <paramref name="configurationProvider"/>.
     /// </summary>
-    /// <param name="configurationProvider">An <see cref="IAuthenticationConfigurationProvider"/> instance.</param>\
+    /// <param name="configurationProvider">An <see cref="IAuthenticationConfigurationProvider"/>
+    // instance.</param>\
     public JwtBearerConfigureOptions(IAuthenticationConfigurationProvider configurationProvider)
     {
         _authenticationConfigurationProvider = configurationProvider;

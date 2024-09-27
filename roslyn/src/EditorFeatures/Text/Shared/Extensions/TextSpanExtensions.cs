@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             new TextSpan(textSpan.Start + offset, textSpan.Length);
 
         /// <summary>
-        /// Convert a <see cref="TextSpan"/> to a <see cref="SnapshotSpan"/> on the given <see cref="ITextSnapshot"/> instance
+        /// Convert a <see cref="TextSpan"/> to a <see cref="SnapshotSpan"/> on the given <see
+        // cref="ITextSnapshot"/> instance
         /// </summary>
         public static SnapshotSpan ToSnapshotSpan(this TextSpan textSpan, ITextSnapshot snapshot)
         {

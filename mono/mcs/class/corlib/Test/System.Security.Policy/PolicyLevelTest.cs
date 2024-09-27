@@ -236,7 +236,8 @@ namespace MonoTests.System.Security.Policy
         private PolicyLevel Load(string xml, PolicyLevelType type)
         {
             return SecurityManager.LoadPolicyLevelFromString(xml, type);
-            //			return SecurityManager.LoadPolicyLevelFromFile (@"C:\WINDOWS\Microsoft.NET\Framework\v1.0.3705\CONFIG\minimal.config", type);
+            //			return SecurityManager.LoadPolicyLevelFromFile
+            // (@"C:\WINDOWS\Microsoft.NET\Framework\v1.0.3705\CONFIG\minimal.config", type);
         }
 
         [Test]

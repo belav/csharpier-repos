@@ -666,10 +666,10 @@ namespace System.Resources
         {
             ArrayList resources = new ArrayList();
 
-            /*
-             * We can't use a BinaryReader since we have to keep track of the
-             * stream position for padding.
-             */
+/*
+* We can't use a BinaryReader since we have to keep track of the
+* stream position for padding.
+*/
 
             while (true)
             {
@@ -679,7 +679,7 @@ namespace System.Resources
                 int data_size = read_int32();
 
                 if (data_size == -1)
-                    /* EOF */
+/* EOF */
                     break;
 
                 //int header_size =
@@ -701,7 +701,7 @@ namespace System.Resources
                 read_int32();
 
                 if (data_size == 0)
-                    /* Empty resource entry */
+/* Empty resource entry */
                     continue;
 
                 byte[] data = new byte[data_size];
@@ -777,7 +777,7 @@ namespace System.Resources
                     int dwBytesInRes = r.ReadInt32();
                     int dwImageOffset = r.ReadInt32();
 
-                    /* Read image */
+/* Read image */
                     entry.image = new byte[dwBytesInRes];
 
                     long pos = iconFile.Position;
@@ -785,11 +785,11 @@ namespace System.Resources
                     iconFile.Read(entry.image, 0, dwBytesInRes);
                     iconFile.Position = pos;
 
-                    /*
-                     * The wPlanes and wBitCount members in the ICONDIRENTRY
-                     * structure can be 0, so we set them from the BITMAPINFOHEADER
-                     * structure that follows
-                     */
+/*
+* The wPlanes and wBitCount members in the ICONDIRENTRY
+* structure can be 0, so we set them from the BITMAPINFOHEADER
+* structure that follows
+*/
 
                     if (entry.wPlanes == 0)
                         entry.wPlanes = (short)(entry.image[12] | (entry.image[13] << 8));

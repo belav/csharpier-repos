@@ -11,7 +11,8 @@ namespace System.Reflection
     //  - Immutable, unlike the public AssemblyName
     //  - Has a useful Equals() override, unlike the public AssemblyName.
     //
-    // We use this as our internal interchange type and only convert to and from the public AssemblyName class at public boundaries.
+    // We use this as our internal interchange type and only convert to and from the public AssemblyName
+    // class at public boundaries.
     //
     public sealed class RuntimeAssemblyName : IEquatable<RuntimeAssemblyName>
     {
@@ -54,8 +55,10 @@ namespace System.Reflection
         // Optional public key (if Flags.PublicKey == true) or public key token.
         public byte[] PublicKeyOrToken { get; }
 
-        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use as keys in a cache
-        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding rules or
+        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use
+        // as keys in a cache
+        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding
+        // rules or
         // assembly binding unification rules.
         public bool Equals(RuntimeAssemblyName? other)
         {

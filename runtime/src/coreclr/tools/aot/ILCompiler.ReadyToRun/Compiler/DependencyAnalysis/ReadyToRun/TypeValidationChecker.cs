@@ -126,11 +126,14 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     )
                 );
             }
-            // The runtime has a number of checks in the type loader which it will skip running if the SkipValidation flag is set
+            // The runtime has a number of checks in the type loader which it will skip running if the
+            // SkipValidation flag is set
             // This function attempts to document all of them, and implement *some* of them.
 
-            // This function performs a portion of the validation skipping that has been found to have some importance, or to serve as
-            // In addition, there are comments about all validation skipping activities that the runtime will perform.
+            // This function performs a portion of the validation skipping that has been found to have some
+            // importance, or to serve as
+            // In addition, there are comments about all validation skipping activities that the runtime will
+            // perform.
             try
             {
                 var typeDef = type.MetadataReader.GetTypeDefinition(type.Handle);
@@ -160,7 +163,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     }
                 }
 
-                // Validate that each interface type explicitly implemented on this type is accessible to this type -- UNIMPLEMENTED
+                // Validate that each interface type explicitly implemented on this type is accessible to this type
+                // -- UNIMPLEMENTED
                 foreach (var field in type.GetFields())
                 {
                     // Validate that all fields on the type are both loadable
@@ -182,7 +186,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     var method = (EcmaMethod)methodDesc;
                     var methodDef = method.MetadataReader.GetMethodDefinition(method.Handle);
                     // Validate that the validateTokenSig algorithm on all methods defined on the type
-                    // The validateTokenSig algorithm simply validates the phyical structure of the signature. Getting a MethodSignature object is a more complete check
+                    // The validateTokenSig algorithm simply validates the phyical structure of the signature. Getting a
+                    // MethodSignature object is a more complete check
                     try
                     {
                         var getSignature = method.Signature;
@@ -203,7 +208,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         return false;
                     }
 
-                    // Validate that if the method has an RVA that (the Class is not a ComImport class, it is not abstract, it is not marked with the miRuntime flag, and is not marked as InternalCall)
+                    // Validate that if the method has an RVA that (the Class is not a ComImport class, it is not
+                    // abstract, it is not marked with the miRuntime flag, and is not marked as InternalCall)
                     if (methodDef.RelativeVirtualAddress != 0)
                     {
                         // Validate that if the method has an RVA that the Class is not a ComImport class -- UNIMPLEMENTED
@@ -268,7 +274,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             return false;
                         }
                     }
-                    // Validate that interfaces can only have rtSpecialName methods which are "_VtblGap" or ".cctor" methods
+                    // Validate that interfaces can only have rtSpecialName methods which are "_VtblGap" or ".cctor"
+                    // methods
                     if (type.IsInterface)
                     {
                         if (methodDef.Attributes.HasFlag(MethodAttributes.RTSpecialName))
@@ -337,7 +344,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                         );
                         return false;
                     }
-                    // Validate that a generic method cannot be on a ComImport class, or a ComEventInterface  -- UNIMPLEMENTED
+                    // Validate that a generic method cannot be on a ComImport class, or a ComEventInterface  --
+                    // UNIMPLEMENTED
                     // Validate that a generic method cannot be a p/invoke
                     if (method.IsPInvoke)
                     {
@@ -393,8 +401,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 }
 
                 // Generic class special rules
-                // Validate that a generic class cannot be a ComImport class, or a ComEventInterface class -- UNIMPLEMENTED
-                // Validate that there are no cyclical class or method constraints, and that constraints are all acccessible to the type using them -- UNIMPLEMENTED
+                // Validate that a generic class cannot be a ComImport class, or a ComEventInterface class --
+                // UNIMPLEMENTED
+                // Validate that there are no cyclical class or method constraints, and that constraints are all
+                // acccessible to the type using them -- UNIMPLEMENTED
 
                 // Override rules
                 // Validate that each override results does not violate accessibility rules -- UNIMPLEMENTED
@@ -512,7 +522,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                         if (resolvedMethod != null)
                         {
-                            // Validate that for every override involving generic methods that the generic method constraints are matching
+                            // Validate that for every override involving generic methods that the generic method constraints
+                            // are matching
                             if (!CompareMethodConstraints(interfaceMethod, resolvedMethod))
                             {
                                 AddTypeValidationError(
@@ -550,7 +561,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                                 if (impl != null)
                                 {
-                                    // Validate that for every override involving generic methods that the generic method constraints are matching
+                                    // Validate that for every override involving generic methods that the generic method constraints
+                                    // are matching
                                     if (!CompareMethodConstraints(interfaceMethod, impl))
                                     {
                                         AddTypeValidationError(
@@ -575,7 +587,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                     if (implementationMethod != null)
                     {
-                        // Validate that for every override involving generic methods that the generic method constraints are matching
+                        // Validate that for every override involving generic methods that the generic method constraints
+                        // are matching
                         if (!CompareMethodConstraints(virtualMethod, implementationMethod))
                         {
                             AddTypeValidationError(
@@ -585,8 +598,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                             return false;
                         }
 
-                        // Validate that if the decl method for the virtual is not on the immediate base type, that the intermediate type did not establish a
-                        // covariant return type which requires the implementation method to specify a more specific base type
+                        // Validate that if the decl method for the virtual is not on the immediate base type, that the
+                        // intermediate type did not establish a
+                        // covariant return type which requires the implementation method to specify a more specific base
+                        // type
                         if (
                             (virtualMethod.OwningType != type.BaseType)
                             && (virtualMethod.OwningType != type)
@@ -743,7 +758,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
                 if (typeDesc is EcmaType ecmaType)
                 {
-                    // Trigger the ecmaType to have its type checked, but do not check the task immediately. Unfortunately this can be recursive.
+                    // Trigger the ecmaType to have its type checked, but do not check the task immediately.
+                    // Unfortunately this can be recursive.
                     _tasksThatMustFinish.Enqueue(ValidateType(this, ecmaType));
                     return Task.FromResult(true);
                 }

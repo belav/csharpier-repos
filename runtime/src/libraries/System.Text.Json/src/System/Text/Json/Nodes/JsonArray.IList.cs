@@ -53,7 +53,8 @@ namespace System.Text.Json.Nodes
         /// </summary>
         /// <param name="item">The object to locate in the <see cref="JsonArray"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="item"/> is found in the <see cref="JsonArray"/>; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if <paramref name="item"/> is found in the <see cref="JsonArray"/>;
+        // otherwise, <see langword="false"/>.
         /// </returns>
         public bool Contains(JsonNode? item) => List.Contains(item);
 
@@ -69,10 +70,12 @@ namespace System.Text.Json.Nodes
         /// <summary>
         ///   Inserts an element into the <see cref="JsonArray"/> at the specified index.
         /// </summary>
-        /// <param name="index">The zero-based index at which <paramref name="item"/> should be inserted.</param>
+        /// <param name="index">The zero-based index at which <paramref name="item"/> should be
+        // inserted.</param>
         /// <param name="item">The <see cref="JsonNode"/> to insert.</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="index"/> is less than 0 or <paramref name="index"/> is greater than <see cref="Count"/>.
+        ///   <paramref name="index"/> is less than 0 or <paramref name="index"/> is greater than <see
+        // cref="Count"/>.
         /// </exception>
         public void Insert(int index, JsonNode? item)
         {
@@ -81,13 +84,15 @@ namespace System.Text.Json.Nodes
         }
 
         /// <summary>
-        ///   Removes the first occurrence of a specific <see cref="JsonNode"/> from the <see cref="JsonArray"/>.
+        ///   Removes the first occurrence of a specific <see cref="JsonNode"/> from the <see
+        // cref="JsonArray"/>.
         /// </summary>
         /// <param name="item">
         ///   The <see cref="JsonNode"/> to remove from the <see cref="JsonArray"/>.
         /// </param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="item"/> is successfully removed; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if <paramref name="item"/> is successfully removed; otherwise, <see
+        // langword="false"/>.
         /// </returns>
         public bool Remove(JsonNode? item)
         {
@@ -105,7 +110,8 @@ namespace System.Text.Json.Nodes
         /// </summary>
         /// <param name="index">The zero-based index of the element to remove.</param>
         /// <exception cref="ArgumentOutOfRangeException">
-        ///   <paramref name="index"/> is less than 0 or <paramref name="index"/> is greater than <see cref="Count"/>.
+        ///   <paramref name="index"/> is less than 0 or <paramref name="index"/> is greater than <see
+        // cref="Count"/>.
         /// </exception>
         public void RemoveAt(int index)
         {
@@ -133,7 +139,8 @@ namespace System.Text.Json.Nodes
         ///   <paramref name="index"/> is less than 0.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   The number of elements in the source ICollection is greater than the available space from <paramref name="index"/>
+        ///   The number of elements in the source ICollection is greater than the available space from
+        // <paramref name="index"/>
         ///   to the end of the destination <paramref name="array"/>.
         /// </exception>
         void ICollection<JsonNode?>.CopyTo(JsonNode?[] array, int index) =>

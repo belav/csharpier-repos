@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
             CancellationToken cancellationToken
         )
         {
-            // this is the TS entrypoint to get push diagnostics.  Only return diagnostics if we're actually in push-mode.
+            // this is the TS entrypoint to get push diagnostics.  Only return diagnostics if we're actually in
+            // push-mode.
             var diagnosticMode = _globalOptions.GetDiagnosticMode();
             if (diagnosticMode != DiagnosticMode.SolutionCrawlerPush)
                 return ImmutableArray<VSTypeScriptDiagnosticData>.Empty;

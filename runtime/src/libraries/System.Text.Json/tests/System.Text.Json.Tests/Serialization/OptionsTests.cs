@@ -522,7 +522,8 @@ namespace System.Text.Json.Serialization.Tests
             public string MyString { get; set; }
         }
 
-        // This is a copy of the test data in System.Text.Json.Tests.JsonEncodedTextTests.JsonEncodedTextStringsCustom
+        // This is a copy of the test data in
+        // System.Text.Json.Tests.JsonEncodedTextTests.JsonEncodedTextStringsCustom
         public static IEnumerable<object[]> JsonEncodedTextStringsCustom
         {
             get
@@ -1096,7 +1097,8 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         [Fact]
-        // KeyValuePair converter is not a primitive JsonConverter<T>, so there's no way to properly flow the ReadStack state in the direct call to the serializer.
+        // KeyValuePair converter is not a primitive JsonConverter<T>, so there's no way to properly flow
+        // the ReadStack state in the direct call to the serializer.
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50205")]
         public static void Options_GetConverter_GivesCorrectKeyValuePairConverter()
         {
@@ -1516,7 +1518,8 @@ namespace System.Text.Json.Serialization.Tests
                 TypeInfoResolver = originalOptions.TypeInfoResolver,
             };
 
-            // The new options should preserve the original TypeInfoResolver but use a copy for the chain that it owns
+            // The new options should preserve the original TypeInfoResolver but use a copy for the chain that
+            // it owns
             Assert.Same(originalOptions.TypeInfoResolver, optionsCopy.TypeInfoResolver);
             Assert.Equal(
                 new IJsonTypeInfoResolver[]
@@ -1532,7 +1535,8 @@ namespace System.Text.Json.Serialization.Tests
                 optionsCopy.TypeInfoResolverChain
             );
 
-            // Mutating the resolver chain should update the TypeInfoResolver property but not impact the original options
+            // Mutating the resolver chain should update the TypeInfoResolver property but not impact the
+            // original options
             var appendedResolver = new DefaultJsonTypeInfoResolver();
             optionsCopy.TypeInfoResolverChain.Add(appendedResolver);
 

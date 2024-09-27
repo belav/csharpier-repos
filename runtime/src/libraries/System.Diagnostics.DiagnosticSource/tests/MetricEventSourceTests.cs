@@ -3393,7 +3393,8 @@ namespace System.Diagnostics.Metrics.Tests
             );
             AssertCollectStartStopEventsPresent(events, IntervalSecs, 3);
 
-            // Now create a new listener and do everything a 2nd time. Because the listener above has been disposed the source should be
+            // Now create a new listener and do everything a 2nd time. Because the listener above has been
+            // disposed the source should be
             // free to accept a new connection.
             events = null;
             using (
@@ -3486,7 +3487,8 @@ namespace System.Diagnostics.Metrics.Tests
 
             EventWrittenEventArgs[] events;
             // MaxTimeSeries = 3, MaxHistograms = 2
-            // HistogramLimitReached should be raised when Record(tags: "Color=green"), but TimeSeriesLimitReached should not be raised
+            // HistogramLimitReached should be raised when Record(tags: "Color=green"), but
+            // TimeSeriesLimitReached should not be raised
             using (
                 MetricsEventListener listener = new MetricsEventListener(
                     _output,

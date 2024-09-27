@@ -81,19 +81,29 @@ namespace Microsoft.CodeAnalysis
         /// <param name="version">The version of the assembly.</param>
         /// <param name="cultureName">
         /// The name of the culture to associate with the assembly.
-        /// Specify null, <see cref="string.Empty"/>, or "neutral" (any casing) to represent <see cref="System.Globalization.CultureInfo.InvariantCulture"/>.
-        /// The name can be an arbitrary string that doesn't contain NUL character, the legality of the culture name is not validated.
+        /// Specify null, <see cref="string.Empty"/>, or "neutral" (any casing) to represent <see
+        // cref="System.Globalization.CultureInfo.InvariantCulture"/>.
+        /// The name can be an arbitrary string that doesn't contain NUL character, the legality of the
+        // culture name is not validated.
         /// </param>
         /// <param name="publicKeyOrToken">The public key or public key token of the assembly.</param>
-        /// <param name="hasPublicKey">Indicates whether <paramref name="publicKeyOrToken"/> represents a public key.</param>
+        /// <param name="hasPublicKey">Indicates whether <paramref name="publicKeyOrToken"/> represents a
+        // public key.</param>
         /// <param name="isRetargetable">Indicates whether the assembly is retargetable.</param>
-        /// <param name="contentType">Specifies the binding model for how this object will be treated in comparisons.</param>
-        /// <exception cref="ArgumentException">If <paramref name="name"/> is null, empty or contains a NUL character.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="cultureName"/> contains a NUL character.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="contentType"/> is not a value of the <see cref="AssemblyContentType"/> enumeration.</exception>
-        /// <exception cref="ArgumentException"><paramref name="version"/> contains values that are not greater than or equal to zero and less than or equal to ushort.MaxValue.</exception>
-        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is true and <paramref name="publicKeyOrToken"/> is not set.</exception>
-        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is false and <paramref name="publicKeyOrToken"/>
+        /// <param name="contentType">Specifies the binding model for how this object will be treated in
+        // comparisons.</param>
+        /// <exception cref="ArgumentException">If <paramref name="name"/> is null, empty or contains a NUL
+        // character.</exception>
+        /// <exception cref="ArgumentException">If <paramref name="cultureName"/> contains a NUL
+        // character.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="contentType"/> is not a value of
+        // the <see cref="AssemblyContentType"/> enumeration.</exception>
+        /// <exception cref="ArgumentException"><paramref name="version"/> contains values that are not
+        // greater than or equal to zero and less than or equal to ushort.MaxValue.</exception>
+        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is true and <paramref
+        // name="publicKeyOrToken"/> is not set.</exception>
+        /// <exception cref="ArgumentException"><paramref name="hasPublicKey"/> is false and <paramref
+        // name="publicKeyOrToken"/>
         /// contains a value that is not the size of a public key token, 8 bytes.</exception>
         public AssemblyIdentity(
             string? name,
@@ -242,15 +252,18 @@ namespace Microsoft.CodeAnalysis
 
         private static string NormalizeCultureName(string? cultureName)
         {
-            // Treat "neutral" culture as invariant culture name, although it is technically not a legal culture name.
+            // Treat "neutral" culture as invariant culture name, although it is technically not a legal culture
+            // name.
             //
             // A few reasons:
             // 1) Invariant culture is displayed as "neutral" in the identity display name.
             //    Thus a) an identity with culture "neutral" wouldn't roundrip serialization to display name.
-            //         b) an identity with culture "neutral" wouldn't compare equal to invariant culture identity,
+            //         b) an identity with culture "neutral" wouldn't compare equal to invariant culture
+            // identity,
             //            yet their display names are the same which is confusing.
             //
-            // 2) The implementation of AssemblyName.CultureName on Mono incorrectly returns "neutral" for invariant culture identities.
+            // 2) The implementation of AssemblyName.CultureName on Mono incorrectly returns "neutral" for
+            // invariant culture identities.
 
             return
                 cultureName == null
@@ -484,7 +497,8 @@ namespace Microsoft.CodeAnalysis
         {
             if (_lazyHashCode == 0)
             {
-                // Do not include PK/PKT in the hash - collisions on PK/PKT are rare (assembly identities differ only in PKT/PK)
+                // Do not include PK/PKT in the hash - collisions on PK/PKT are rare (assembly identities differ
+                // only in PKT/PK)
                 // and we can't calculate hash of PKT if only PK is available
                 _lazyHashCode = Hash.Combine(
                     AssemblyIdentityComparer.SimpleNameComparer.GetHashCode(_name),

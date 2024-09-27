@@ -1,5 +1,6 @@
 //
-// X509ChainElementCollection.cs - System.Security.Cryptography.X509Certificates.X509ChainElementCollection
+// X509ChainElementCollection.cs -
+// System.Security.Cryptography.X509Certificates.X509ChainElementCollection
 //
 // Author:
 //	Sebastien Pouliot  <sebastien@ximian.com>

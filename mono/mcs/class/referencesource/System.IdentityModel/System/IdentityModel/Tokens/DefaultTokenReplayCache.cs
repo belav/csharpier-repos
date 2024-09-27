@@ -44,7 +44,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets or Sets the current Capacity of the cache in number of SecurityTokens.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">If 'value' is less than or equal to zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If 'value' is less than or equal to
+        // zero.</exception>
         public int Capacity
         {
             get { return _internalCache.Capacity; }
@@ -75,9 +76,11 @@ namespace System.IdentityModel.Tokens
         /// Increases the maximum number of SecurityTokens that this cache will hold.
         /// </summary>
         /// <param name="size">The capacity to increase.</param>
-        /// <exception cref="ArgumentOutOfRangeException">The input parameter 'size' is less than or equal to zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The input parameter 'size' is less than or equal
+        // to zero.</exception>
         /// <returns>Updated capacity</returns>
-        /// <remarks>If size + current capacity >= int.MaxValue then capacity will be set to int.MaxValue and the cache capacity will be unbounded.</remarks>
+        /// <remarks>If size + current capacity >= int.MaxValue then capacity will be set to int.MaxValue
+        // and the cache capacity will be unbounded.</remarks>
         public int IncreaseCapacity(int size)
         {
             if (size <= 0)
@@ -95,7 +98,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets or Sets the time interval that will be used when checking for expired SecurityTokens.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">If 'value' is less than or equal to TimeSpan.Zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If 'value' is less than or equal to
+        // TimeSpan.Zero.</exception>
         public TimeSpan PurgeInterval
         {
             get { return _internalCache.PurgeInterval; }
@@ -120,8 +124,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="key">Key to use when adding item.</param>
         /// <param name="securityToken">SecurityToken to add to cache, can be null.</param>
         /// <param name="expirationTime">The expiration instant of the token being added.</param>
-        /// <exception cref="System.IdentityModel.LimitExceededException">Thrown if an attempt is made to add a SecurityToken if cache is at capacity.</exception>
-        /// <exception cref="InvalidOperationException">Thrown if the expiration time is infinite.</exception>
+        /// <exception cref="System.IdentityModel.LimitExceededException">Thrown if an attempt is made to
+        // add a SecurityToken if cache is at capacity.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if the expiration time is
+        // infinite.</exception>
         public override void AddOrUpdate(
             string key,
             SecurityToken securityToken,

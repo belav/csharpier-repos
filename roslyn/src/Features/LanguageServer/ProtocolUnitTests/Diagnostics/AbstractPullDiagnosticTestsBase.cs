@@ -148,7 +148,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             if (triggerConnectionClose)
             {
-                // Workspace diagnostics wait for a change before closing the connection so we manually tell it to close here to let the test finish.
+                // Workspace diagnostics wait for a change before closing the connection so we manually tell it to
+                // close here to let the test finish.
                 var service = testLspServer.GetRequiredLspService<WorkspacePullDiagnosticHandler>();
                 service.GetTestAccessor().TriggerConnectionClose();
             }
@@ -191,7 +192,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
             if (triggerConnectionClose)
             {
-                // Workspace diagnostics wait for a change before closing the connection so we manually tell it to close here to let the test finish.
+                // Workspace diagnostics wait for a change before closing the connection so we manually tell it to
+                // close here to let the test finish.
                 var service =
                     testLspServer.GetRequiredLspService<PublicWorkspacePullDiagnosticsHandler>();
                 service.GetTestAccessor().TriggerConnectionClose();
@@ -440,12 +442,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
 
                 if (diagnostics == null)
                 {
-                    // The public LSP spec returns null when no diagnostics are available for a document wheres VS returns an empty array.
+                    // The public LSP spec returns null when no diagnostics are available for a document wheres VS
+                    // returns an empty array.
                     return ImmutableArray<TestDiagnosticResult>.Empty;
                 }
                 else if (diagnostics.Value.Value is UnchangedDocumentDiagnosticReport)
                 {
-                    // The public LSP spec returns different types when unchanged in contrast to VS which just returns null diagnostic array.
+                    // The public LSP spec returns different types when unchanged in contrast to VS which just returns
+                    // null diagnostic array.
                     return ImmutableArray.Create(
                         new TestDiagnosticResult(
                             vsTextDocumentIdentifier,
@@ -558,7 +562,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             IEnumerable<DiagnosticAnalyzer>? additionalAnalyzers = null
         )
         {
-            // If no explicit compiler diagnostics scope has been provided, match it with the provided analyzer diagnostics scope
+            // If no explicit compiler diagnostics scope has been provided, match it with the provided analyzer
+            // diagnostics scope
             compilerDiagnosticsScope ??= analyzerDiagnosticsScope switch
             {
                 BackgroundAnalysisScope.None => CompilerDiagnosticsScope.None,

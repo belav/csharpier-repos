@@ -940,7 +940,8 @@ public class ResponseCachingMiddlewareTests
     }
 
     [Theory]
-    // If allowResponseCaching is false, other settings will not matter but are included for completeness
+    // If allowResponseCaching is false, other settings will not matter but are included for
+    // completeness
     [InlineData(false, false, false)]
     [InlineData(false, false, true)]
     [InlineData(false, true, false)]

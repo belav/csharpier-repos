@@ -18,13 +18,16 @@ using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // This is a set of stub methods implementing the support for the IReadOnlyDictionary`2 interface on WinRT
+    // This is a set of stub methods implementing the support for the IReadOnlyDictionary`2 interface on
+    // WinRT
     // objects that support IMapView`2. Used by the interop mashaling infrastructure.
     //
     // The methods on this class must be written VERY carefully to avoid introducing security holes.
     // That's because they are invoked with special "this"! The "this" object
-    // for all of these methods are not IMapViewToIReadOnlyDictionaryAdapter objects. Rather, they are of type
-    // IMapView<K, V>. No actual IMapViewToIReadOnlyDictionaryAdapter object is ever instantiated. Thus, you will see
+    // for all of these methods are not IMapViewToIReadOnlyDictionaryAdapter objects. Rather, they are
+    // of type
+    // IMapView<K, V>. No actual IMapViewToIReadOnlyDictionaryAdapter object is ever instantiated. Thus,
+    // you will see
     // a lot of expressions that cast "this" to "IMapView<K, V>".
     [DebuggerDisplay("Count = {Count}")]
     internal sealed class IMapViewToIReadOnlyDictionaryAdapter
@@ -147,34 +150,35 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             this.dictionary = dictionary;
         }
 
-        /*
-        public void CopyTo(TKey[] array, int index)
-        {
-            if (array == null)
-                throw new ArgumentNullException("array");
-            if (index < 0)
-                throw new ArgumentOutOfRangeException("index");
-            if (array.Length <= index && this.Count > 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
-            if (array.Length - index < dictionary.Count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
+/*
+public void CopyTo(TKey[] array, int index)
+{
+if (array == null)
+throw new ArgumentNullException("array");
+if (index < 0)
+throw new ArgumentOutOfRangeException("index");
+if (array.Length <= index && this.Count > 0)
+throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
+if (array.Length - index < dictionary.Count)
+throw new
+ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
 
-            int i = index;
-            foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
-            {
-                array[i++] = mapping.Key;
-            }
-        }
-        
-        public int Count {
-            get { return dictionary.Count; }
-        }
+int i = index;
+foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
+{
+array[i++] = mapping.Key;
+}
+}
 
-        public bool Contains(TKey item)
-        {
-            return dictionary.ContainsKey(item);
-        }
-        */
+public int Count {
+get { return dictionary.Count; }
+}
+
+public bool Contains(TKey item)
+{
+return dictionary.ContainsKey(item);
+}
+*/
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -242,38 +246,39 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             this.dictionary = dictionary;
         }
 
-        /*
-        public void CopyTo(TValue[] array, int index)
-        {
-            if (array == null)
-                throw new ArgumentNullException("array");
-            if (index < 0)
-                throw new ArgumentOutOfRangeException("index");
-            if (array.Length <= index && this.Count > 0)
-                throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
-            if (array.Length - index < dictionary.Count)
-                throw new ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
+/*
+public void CopyTo(TValue[] array, int index)
+{
+if (array == null)
+throw new ArgumentNullException("array");
+if (index < 0)
+throw new ArgumentOutOfRangeException("index");
+if (array.Length <= index && this.Count > 0)
+throw new ArgumentException(Environment.GetResourceString("Arg_IndexOutOfRangeException"));
+if (array.Length - index < dictionary.Count)
+throw new
+ArgumentException(Environment.GetResourceString("Argument_InsufficientSpaceToCopyCollection"));
 
-            int i = index;
-            foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
-            {
-                array[i++] = mapping.Value;
-            }
-        }
+int i = index;
+foreach (KeyValuePair<TKey, TValue> mapping in dictionary)
+{
+array[i++] = mapping.Value;
+}
+}
 
-        public int Count {
-            get { return dictionary.Count; }
-        }
+public int Count {
+get { return dictionary.Count; }
+}
 
-        public bool Contains(TValue item)
-        {
-            EqualityComparer<TValue> comparer = EqualityComparer<TValue>.Default;
-            foreach (TValue value in this)
-                if (comparer.Equals(item, value))
-                    return true;
-            return false;
-        }
-        */
+public bool Contains(TValue item)
+{
+EqualityComparer<TValue> comparer = EqualityComparer<TValue>.Default;
+foreach (TValue value in this)
+if (comparer.Equals(item, value))
+return true;
+return false;
+}
+*/
 
         IEnumerator IEnumerable.GetEnumerator()
         {

@@ -2,12 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- *  A Simple Framework to manage the life time of of objects
- * Objects are required to implement LifeTime Interface in order to keep track of their lifetime.
- * TODO: we need to add flexibility to the framework to control the type of datastructure used to keep track
- * of the objects. Right now we are using a simple 1 D array , but other interesting datastructures can be
- *    used instead like a HashTable.
- */
+*  A Simple Framework to manage the life time of of objects
+* Objects are required to implement LifeTime Interface in order to keep track of their lifetime.
+* TODO: we need to add flexibility to the framework to control the type of datastructure used to
+keep track
+* of the objects. Right now we are using a simple 1 D array , but other interesting datastructures
+can be
+*    used instead like a HashTable.
+*/
 using System;
 using System.Collections.Generic;
 
@@ -36,7 +38,8 @@ namespace LifeTimeFX
     /// implementation.
     /// The only restriction on the ObjectContainer is that the objects contained in it must implement
     /// LifeTime interface.
-    /// Right now we have a simple array container as a stock implementation for that. for more information
+    /// Right now we have a simple array container as a stock implementation for that. for more
+    // information
     /// see code:#ArrayContainer
     /// </summary>
     /// <param name="o"></param>

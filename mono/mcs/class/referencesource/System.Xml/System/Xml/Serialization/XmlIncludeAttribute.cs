@@ -24,7 +24,8 @@ namespace System.Xml.Serialization
     {
         Type type;
 
-        /// <include file='doc\XmlIncludeAttribute.uex' path='docs/doc[@for="XmlIncludeAttribute.XmlIncludeAttribute"]/*' />
+        /// <include file='doc\XmlIncludeAttribute.uex'
+        // path='docs/doc[@for="XmlIncludeAttribute.XmlIncludeAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -33,7 +34,8 @@ namespace System.Xml.Serialization
             this.type = type;
         }
 
-        /// <include file='doc\XmlIncludeAttribute.uex' path='docs/doc[@for="XmlIncludeAttribute.Type"]/*' />
+        /// <include file='doc\XmlIncludeAttribute.uex' path='docs/doc[@for="XmlIncludeAttribute.Type"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

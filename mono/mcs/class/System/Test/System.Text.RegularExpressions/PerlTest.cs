@@ -28,8 +28,10 @@ namespace MonoTests.System.Text.RegularExpressions
             Console.WriteLine("{0} trials", PerlTrials.trials.Length);
         }
 
-        // We choose to run the trials in separate tests rather than in a loop, since we want all trials to be run.
-        // A failing assertion in a test aborts the rest of the trials in that test.  So, we put one trial in each test.
+        // We choose to run the trials in separate tests rather than in a loop, since we want all trials to
+        // be run.
+        // A failing assertion in a test aborts the rest of the trials in that test.  So, we put one trial
+        // in each test.
         [Test]
         public void Trial0000()
         {

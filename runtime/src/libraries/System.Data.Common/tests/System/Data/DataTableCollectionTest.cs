@@ -115,7 +115,7 @@ namespace System.Data.Tests
                 null,
                 () =>
                 {
-                    /* table already exist in the collection */
+/* table already exist in the collection */
                     DataTableCollection tbcol = _dataset[0].Tables;
                     tbcol.Add(_tables[0]);
                     tbcol.Add(_tables[0]);
@@ -160,7 +160,7 @@ namespace System.Data.Tests
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Clear();
-            /* _tables is array of type DataTable defined in Setup */
+/* _tables is array of type DataTable defined in Setup */
             tbcol.AddRange(_tables);
             int i,
                 j;
@@ -183,14 +183,14 @@ namespace System.Data.Tests
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Clear();
-            /* _tables is array of DataTables defined in Setup */
+/* _tables is array of DataTables defined in Setup */
             tbcol.AddRange(_tables);
             DataTable tbl = null;
-            /* checking for a recently input table, expecting true */
+/* checking for a recently input table, expecting true */
             Assert.True(tbcol.CanRemove(_tables[0]));
-            /* trying to check with a null reference, expecting false */
+/* trying to check with a null reference, expecting false */
             Assert.False(tbcol.CanRemove(tbl));
-            /* trying to check with a table that does not exist in collection, expecting false */
+/* trying to check with a table that does not exist in collection, expecting false */
             Assert.False(tbcol.CanRemove(new DataTable("newTable")));
         }
 
@@ -199,17 +199,17 @@ namespace System.Data.Tests
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Clear();
-            /* _tables is array of DataTables defined in Setup */
+/* _tables is array of DataTables defined in Setup */
             tbcol.AddRange(_tables);
 
-            /* removing a recently added table */
+/* removing a recently added table */
             int count = tbcol.Count;
             tbcol.Remove(_tables[0]);
             Assert.Equal(count - 1, tbcol.Count);
             DataTable tbl = null;
-            /* removing a null reference. must generate an Exception */
+/* removing a null reference. must generate an Exception */
             Assert.Throws<ArgumentNullException>(() => tbcol.Remove(tbl));
-            /* removing a table that is not there in collection */
+/* removing a table that is not there in collection */
             Assert.Throws<ArgumentException>(() => tbcol.Remove(new DataTable("newTable")));
         }
 
@@ -231,14 +231,14 @@ namespace System.Data.Tests
         {
             DataTableCollection tbcol = _dataset[0].Tables;
             tbcol.Clear();
-            /* _tables is array of DataTables defined in Setup */
+/* _tables is array of DataTables defined in Setup */
             tbcol.AddRange(_tables);
             string tblname = "";
-            /* checking for a recently input table, expecting true */
+/* checking for a recently input table, expecting true */
             Assert.True(tbcol.Contains(_tables[0].TableName));
-            /* trying to check with an empty string, expecting false */
+/* trying to check with an empty string, expecting false */
             Assert.False(tbcol.Contains(tblname));
-            /* trying to check for a table that donot exist, expecting false */
+/* trying to check for a table that donot exist, expecting false */
             Assert.False(tbcol.Contains("InvalidTableName"));
         }
 
@@ -252,7 +252,7 @@ namespace System.Data.Tests
             tbcol.Add("Table4");
 
             DataTable[] array = new DataTable[4];
-            /* copying to the beginning of the array */
+/* copying to the beginning of the array */
             tbcol.CopyTo(array, 0);
             Assert.Equal(4, array.Length);
             Assert.Equal("Table1", array[0].TableName);
@@ -260,7 +260,7 @@ namespace System.Data.Tests
             Assert.Equal("Table3", array[2].TableName);
             Assert.Equal("Table4", array[3].TableName);
 
-            /* copying with in an array */
+/* copying with in an array */
             DataTable[] array1 = new DataTable[6];
             tbcol.CopyTo(array1, 2);
             Assert.Null(array1[0]);

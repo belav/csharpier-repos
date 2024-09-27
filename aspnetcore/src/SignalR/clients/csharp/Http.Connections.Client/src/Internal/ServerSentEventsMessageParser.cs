@@ -16,7 +16,8 @@ internal sealed class ServerSentEventsMessageParser
     private const byte ByteLF = (byte)'\n';
     private const byte ByteColon = (byte)':';
 
-    // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
+    // This uses C# compiler's ability to refer to static data directly. For more information see
+    // https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> DataPrefix => "data: "u8;
     private static ReadOnlySpan<byte> SseLineEnding => "\r\n"u8;
     private static readonly byte[] _newLine = Encoding.UTF8.GetBytes(Environment.NewLine);

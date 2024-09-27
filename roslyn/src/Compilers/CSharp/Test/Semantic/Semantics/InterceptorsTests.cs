@@ -137,7 +137,9 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: TestOptions.Regular.WithFeature("InterceptorsPreviewNamespaces", "NS")
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1</InterceptorsPreviewNamespaces>' to your project.
+            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add
+            // '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1</InterceptorsPreviewNamespaces>'
+            // to your project.
             //         [InterceptsLocation("Program.cs", 4, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorsFeatureNotEnabled,
@@ -157,7 +159,9 @@ public class InterceptorsTests : CSharpTestBase
             )
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1</InterceptorsPreviewNamespaces>' to your project.
+            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add
+            // '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1</InterceptorsPreviewNamespaces>'
+            // to your project.
             //         [InterceptsLocation("Program.cs", 4, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorsFeatureNotEnabled,
@@ -238,7 +242,9 @@ public class InterceptorsTests : CSharpTestBase
                 )
             );
             comp.VerifyEmitDiagnostics(
-                // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1.NS2</InterceptorsPreviewNamespaces>' to your project.
+                // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled. Add
+                // '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);NS1.NS2</InterceptorsPreviewNamespaces>'
+                // to your project.
                 //         [InterceptsLocation("Program.cs", 4, 3)]
                 Diagnostic(
                         ErrorCode.ERR_InterceptorsFeatureNotEnabled,
@@ -378,7 +384,10 @@ public class InterceptorsTests : CSharpTestBase
             )
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled in this namespace. Add '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);global.B</InterceptorsPreviewNamespaces>' to your project.
+            // Program.cs(15,10): error CS9137: The 'interceptors' experimental feature is not enabled in this
+            // namespace. Add
+            // '<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);global.B</InterceptorsPreviewNamespaces>'
+            // to your project.
             //         [InterceptsLocation("Program.cs", 4, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorsFeatureNotEnabled,
@@ -479,7 +488,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,6): error CS9155: Cannot intercept because 'D.Interceptor1()' is not accessible within 'C.Main()'.
+            // Program.cs(17,6): error CS9155: Cannot intercept because 'D.Interceptor1()' is not accessible
+            // within 'C.Main()'.
             //     [InterceptsLocation("Program.cs", 11, 9)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorNotAccessible,
@@ -493,7 +503,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void Accessibility_02()
     {
-        // An interceptor declared within a file-local type can intercept a call even if the call site can't normally refer to the file-local type.
+        // An interceptor declared within a file-local type can intercept a call even if the call site can't
+        // normally refer to the file-local type.
         var source1 = """
             using System;
 
@@ -531,7 +542,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void FileLocalAttributeDefinitions_01()
     {
-        // Treat a file-local declaration of InterceptsLocationAttribute as a well-known attribute within the declaring compilation.
+        // Treat a file-local declaration of InterceptsLocationAttribute as a well-known attribute within
+        // the declaring compilation.
         var source = """
             using System;
             using System.Runtime.CompilerServices;
@@ -570,7 +582,8 @@ public class InterceptorsTests : CSharpTestBase
     }
 
     /// <summary>
-    /// File-local InterceptsLocationAttribute from another compilation is not considered to *duplicate* an interception, even if it is inherited.
+    /// File-local InterceptsLocationAttribute from another compilation is not considered to *duplicate*
+    // an interception, even if it is inherited.
     /// See also <see cref="DuplicateLocation_03"/>.
     /// </summary>
     [Fact]
@@ -603,7 +616,8 @@ public class InterceptorsTests : CSharpTestBase
             }
             """;
 
-        // Inherited attribute on 'override void Interceptor' from other compilation doesn't cause a call in this compilation to be intercepted.
+        // Inherited attribute on 'override void Interceptor' from other compilation doesn't cause a call in
+        // this compilation to be intercepted.
         var source2 = """
 
 
@@ -781,7 +795,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9144: Cannot intercept method 'C.InterceptableMethod(string)' with interceptor 'D.Interceptor1(C, string)' because the signatures do not match.
+            // Program.cs(21,6): error CS9144: Cannot intercept method 'C.InterceptableMethod(string)' with
+            // interceptor 'D.Interceptor1(C, string)' because the signatures do not match.
             //     [InterceptsLocation("Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorSignatureMismatch,
@@ -849,7 +864,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Interceptor.cs(15,25): error CS9152: Cannot intercept a call in file with path 'Program.cs' because multiple files in the compilation have this path.
+            // Interceptor.cs(15,25): error CS9152: Cannot intercept a call in file with path 'Program.cs'
+            // because multiple files in the compilation have this path.
             //     [InterceptsLocation("Program.cs", 5, 11)]
             Diagnostic(ErrorCode.ERR_InterceptorNonUniquePath, @"""Program.cs""")
                 .WithArguments("Program.cs")
@@ -969,7 +985,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void DuplicateLocation_03()
     {
-        // InterceptsLocationAttribute is not considered to *duplicate* an interception, even if it is inherited.
+        // InterceptsLocationAttribute is not considered to *duplicate* an interception, even if it is
+        // inherited.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -1152,7 +1169,8 @@ public class InterceptorsTests : CSharpTestBase
 
         var comp = CreateCompilation((source, "Program.cs"), parseOptions: RegularWithInterceptors);
         comp.VerifyEmitDiagnostics(
-            // Program.cs(9,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'D this' on 'D.M()'.
+            // Program.cs(9,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'D
+            // this' on 'D.M()'.
             //     [InterceptsLocation("Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
@@ -1205,7 +1223,8 @@ public class InterceptorsTests : CSharpTestBase
 
         var comp = CreateCompilation((source, "Program.cs"), parseOptions: RegularWithInterceptors);
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C this' on 'C.M()'.
+            // Program.cs(17,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C
+            // this' on 'C.M()'.
             //     [InterceptsLocation("Program.cs", 5, 3)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
@@ -1324,7 +1343,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void EmitMetadataOnly_02()
     {
-        // We can't emit a ref assembly when a problem is found with an InterceptsLocationAttribute in the declaration phase.
+        // We can't emit a ref assembly when a problem is found with an InterceptsLocationAttribute in the
+        // declaration phase.
         // Strictly, we should perhaps allow this emit anyway, but it doesn't feel urgent to do so.
         var source = """
             using System.Runtime.CompilerServices;
@@ -1351,7 +1371,8 @@ public class InterceptorsTests : CSharpTestBase
         );
         comp.VerifyEmitDiagnostics(
             EmitOptions.Default.WithEmitMetadataOnly(true),
-            // Program.cs(13,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '('.
+            // Program.cs(13,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '('.
             //     [InterceptsLocation("Program.cs", 3, 4)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -1365,7 +1386,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void InterceptsLocationFromMetadata()
     {
-        // Verify that `[InterceptsLocation]` on a method from metadata does not cause a call in the current compilation to be intercepted.
+        // Verify that `[InterceptsLocation]` on a method from metadata does not cause a call in the current
+        // compilation to be intercepted.
         var source0 = """
             using System.Runtime.CompilerServices;
             using System;
@@ -1459,7 +1481,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         compilation.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9151: Possible method name 'InterceptableMethod' cannot be intercepted because it is not being invoked.
+            // Program.cs(21,6): error CS9151: Possible method name 'InterceptableMethod' cannot be intercepted
+            // because it is not being invoked.
             //     [InterceptsLocation("Program.cs", 15, 21)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -1576,7 +1599,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         compilation.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '__arglist'.
+            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '__arglist'.
             //     [InterceptsLocation("Program.cs", 8, 12)] // __arglist
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -1584,7 +1608,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("__arglist")
                 .WithLocation(21, 6),
-            // Program.cs(22,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '__makeref'.
+            // Program.cs(22,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '__makeref'.
             //     [InterceptsLocation("Program.cs", 11, 29)] // __makeref
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -1592,7 +1617,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("__makeref")
                 .WithLocation(22, 6),
-            // Program.cs(23,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '__refvalue'.
+            // Program.cs(23,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '__refvalue'.
             //     [InterceptsLocation("Program.cs", 12, 26)] // __refvalue
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -1600,7 +1626,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("__refvalue")
                 .WithLocation(23, 6),
-            // Program.cs(24,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '__reftype'.
+            // Program.cs(24,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '__reftype'.
             //     [InterceptsLocation("Program.cs", 13, 18)] // __reftype
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -1646,7 +1673,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         compilation.VerifyEmitDiagnostics(
-            // Program.cs(22,6): error CS9207: Cannot intercept 'action' because it is not an invocation of an ordinary member method.
+            // Program.cs(22,6): error CS9207: Cannot intercept 'action' because it is not an invocation of an
+            // ordinary member method.
             //     [InterceptsLocation("Program.cs", 11, 9)]
             Diagnostic(
                     ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
@@ -1654,7 +1682,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("action")
                 .WithLocation(22, 6),
-            // Program.cs(23,6): error CS9207: Cannot intercept 'action' because it is not an invocation of an ordinary member method.
+            // Program.cs(23,6): error CS9207: Cannot intercept 'action' because it is not an invocation of an
+            // ordinary member method.
             //     [InterceptsLocation("Program.cs", 16, 14)]
             Diagnostic(
                     ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
@@ -1700,7 +1729,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         compilation.VerifyEmitDiagnostics(
-            // Program.cs(22,6): error CS9151: Possible method name 'action' cannot be intercepted because it is not being invoked.
+            // Program.cs(22,6): error CS9151: Possible method name 'action' cannot be intercepted because it is
+            // not being invoked.
             //     [InterceptsLocation("Program.cs", 11, 9)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -1708,7 +1738,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("action")
                 .WithLocation(22, 6),
-            // Program.cs(23,6): error CS9151: Possible method name 'action' cannot be intercepted because it is not being invoked.
+            // Program.cs(23,6): error CS9151: Possible method name 'action' cannot be intercepted because it is
+            // not being invoked.
             //     [InterceptsLocation("Program.cs", 16, 14)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -1817,7 +1848,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(14,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C c' on 'D.InterceptableMethod(C)'.
+            // Program.cs(14,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C c'
+            // on 'D.InterceptableMethod(C)'.
             //     [InterceptsLocation("Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
@@ -1886,7 +1918,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,6): error CS9149: Interceptor must not have a 'this' parameter because 'C.InterceptableMethod(string)' does not have a 'this' parameter.
+            // Program.cs(17,6): error CS9149: Interceptor must not have a 'this' parameter because
+            // 'C.InterceptableMethod(string)' does not have a 'this' parameter.
             //     [InterceptsLocation("Program.cs", 8, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustNotHaveThisParameter,
@@ -2075,7 +2108,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyDiagnostics(
-            // Program.cs(20,53): error CS9142: The given file has '22' lines, which is fewer than the provided line number '50'.
+            // Program.cs(20,53): error CS9142: The given file has '22' lines, which is fewer than the provided
+            // line number '50'.
             //     [InterceptsLocation("Program.cs", character: 1, line: 50)] // 1
             Diagnostic(ErrorCode.ERR_InterceptorLineOutOfRange, "line: 50")
                 .WithArguments("22", "50")
@@ -2258,7 +2292,8 @@ public class InterceptorsTests : CSharpTestBase
             options: TestOptions.UnsafeDebugExe
         );
         comp.VerifyDiagnostics(
-            // Program.cs(16,6): error CS9151: Possible method name 'Prop' cannot be intercepted because it is not being invoked.
+            // Program.cs(16,6): error CS9151: Possible method name 'Prop' cannot be intercepted because it is
+            // not being invoked.
             //     [InterceptsLocation("Program.cs", 8, 13)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -2266,7 +2301,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("Prop")
                 .WithLocation(16, 6),
-            // Program.cs(17,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token 'new'.
+            // Program.cs(17,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token 'new'.
             //     [InterceptsLocation("Program.cs", 11, 9)] // 2, 'new'
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -2274,7 +2310,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("new")
                 .WithLocation(17, 6),
-            // Program.cs(18,6): error CS9151: Possible method name 'Program' cannot be intercepted because it is not being invoked.
+            // Program.cs(18,6): error CS9151: Possible method name 'Program' cannot be intercepted because it
+            // is not being invoked.
             //     [InterceptsLocation("Program.cs", 11, 13)] // 3, 'Program'
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -2323,7 +2360,8 @@ public class InterceptorsTests : CSharpTestBase
             options: TestOptions.UnsafeDebugExe
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(23,6): error CS9207: Cannot intercept 'a' because it is not an invocation of an ordinary member method.
+            // Program.cs(23,6): error CS9207: Cannot intercept 'a' because it is not an invocation of an
+            // ordinary member method.
             //     [InterceptsLocation("Program.cs", 10, 9)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
@@ -2331,7 +2369,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("a")
                 .WithLocation(23, 6),
-            // Program.cs(24,6): error CS9207: Cannot intercept 'local' because it is not an invocation of an ordinary member method.
+            // Program.cs(24,6): error CS9207: Cannot intercept 'local' because it is not an invocation of an
+            // ordinary member method.
             //     [InterceptsLocation("Program.cs", 14, 9)] // 2
             Diagnostic(
                     ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
@@ -2339,7 +2378,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("local")
                 .WithLocation(24, 6),
-            // Program.cs(25,6): error CS9207: Cannot intercept 'fnptr' because it is not an invocation of an ordinary member method.
+            // Program.cs(25,6): error CS9207: Cannot intercept 'fnptr' because it is not an invocation of an
+            // ordinary member method.
             //     [InterceptsLocation("Program.cs", 18, 9)] // 3
             Diagnostic(
                     ErrorCode.ERR_InterceptableMethodMustBeOrdinary,
@@ -2384,7 +2424,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(22,6): error CS9138: Method 'D.Interceptor1<T>(I1, string)' must be non-generic to match 'C.InterceptableMethod(string)'.
+            // Program.cs(22,6): error CS9138: Method 'D.Interceptor1<T>(I1, string)' must be non-generic to
+            // match 'C.InterceptableMethod(string)'.
             //     [InterceptsLocation("Program.cs", 16, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorCannotBeGeneric,
@@ -2428,7 +2469,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9138: Method 'D<T>.Interceptor1(string)' cannot be used as an interceptor because its containing type has type parameters.
+            // Program.cs(21,6): error CS9138: Method 'D<T>.Interceptor1(string)' cannot be used as an
+            // interceptor because its containing type has type parameters.
             //     [InterceptsLocation("Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorContainingTypeCannotBeGeneric,
@@ -2475,7 +2517,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(23,10): error CS9138: Method 'Outer<T>.D.Interceptor1(string)' cannot be used as an interceptor because its containing type has type parameters.
+            // Program.cs(23,10): error CS9138: Method 'Outer<T>.D.Interceptor1(string)' cannot be used as an
+            // interceptor because its containing type has type parameters.
             //         [InterceptsLocation("Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorContainingTypeCannotBeGeneric,
@@ -2557,7 +2600,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(20,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '<'.
+            // Program.cs(20,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '<'.
             //     [InterceptsLocation("Program.cs", 14, 30)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -2565,7 +2609,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("<")
                 .WithLocation(20, 6),
-            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token 'string'.
+            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token 'string'.
             //     [InterceptsLocation("Program.cs", 14, 31)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -2573,7 +2618,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("string")
                 .WithLocation(21, 6),
-            // Program.cs(22,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '>'.
+            // Program.cs(22,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '>'.
             //     [InterceptsLocation("Program.cs", 14, 37)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -2655,7 +2701,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(22,6): error CS9144: Cannot intercept method 'C.InterceptableMethod<T2>(T2)' with interceptor 'D.Interceptor1(object)' because the signatures do not match.
+            // Program.cs(22,6): error CS9144: Cannot intercept method 'C.InterceptableMethod<T2>(T2)' with
+            // interceptor 'D.Interceptor1(object)' because the signatures do not match.
             //     [InterceptsLocation("Program.cs", 14, 11)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorSignatureMismatch,
@@ -2663,7 +2710,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("C.InterceptableMethod<T2>(T2)", "D.Interceptor1(object)")
                 .WithLocation(22, 6),
-            // Program.cs(23,6): error CS9144: Cannot intercept method 'C.InterceptableMethod<T2>(T2)' with interceptor 'D.Interceptor1(object)' because the signatures do not match.
+            // Program.cs(23,6): error CS9144: Cannot intercept method 'C.InterceptableMethod<T2>(T2)' with
+            // interceptor 'D.Interceptor1(object)' because the signatures do not match.
             //     [InterceptsLocation("Program.cs", 15, 11)] // 2
             Diagnostic(
                     ErrorCode.ERR_InterceptorSignatureMismatch,
@@ -2740,7 +2788,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(16,6): error CS0453: The type 'string' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'D.Interceptor1<T>(T)'
+            // Program.cs(16,6): error CS0453: The type 'string' must be a non-nullable value type in order to
+            // use it as parameter 'T' in the generic type or method 'D.Interceptor1<T>(T)'
             //     [InterceptsLocation("Program.cs", 10, 11)] // 1
             Diagnostic(
                     ErrorCode.ERR_ValConstraintNotSatisfied,
@@ -2836,8 +2885,10 @@ public class InterceptorsTests : CSharpTestBase
         // original containing type and method are generic
         // interceptor has arity 1
 
-        // Note: the behavior in this scenario might push us toward using a "unification" model for generic interceptors.
-        // All the cases supported in our current design would also be supported by unification, so we should be able to add it later.
+        // Note: the behavior in this scenario might push us toward using a "unification" model for generic
+        // interceptors.
+        // All the cases supported in our current design would also be supported by unification, so we
+        // should be able to add it later.
         var source = """
             using System.Runtime.CompilerServices;
 
@@ -2862,7 +2913,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(15,6): error CS9177: Method 'D.Interceptor1<T>(object, T)' must be non-generic or have arity 2 to match 'C<object>.InterceptableMethod<T>(object, T)'.
+            // Program.cs(15,6): error CS9177: Method 'D.Interceptor1<T>(object, T)' must be non-generic or have
+            // arity 2 to match 'C<object>.InterceptableMethod<T>(object, T)'.
             //     [InterceptsLocation("Program.cs", 12, 19)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorArityNotCompatible,
@@ -3076,7 +3128,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(13,6): error CS9178: Method 'D.Interceptor1<T>()' must be non-generic to match 'C.Original()'.
+            // Program.cs(13,6): error CS9178: Method 'D.Interceptor1<T>()' must be non-generic to match
+            // 'C.Original()'.
             //     [InterceptsLocation("Program.cs", 4, 3)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorCannotBeGeneric,
@@ -3118,7 +3171,9 @@ public class InterceptorsTests : CSharpTestBase
             expectedOutput: "1"
         );
         verifier.VerifyDiagnostics(
-            // Program.cs(18,6): warning CS8714: The type 'string?' cannot be used as type parameter 'T' in the generic type or method 'D.Interceptor1<T>(T)'. Nullability of type argument 'string?' doesn't match 'notnull' constraint.
+            // Program.cs(18,6): warning CS8714: The type 'string?' cannot be used as type parameter 'T' in the
+            // generic type or method 'D.Interceptor1<T>(T)'. Nullability of type argument 'string?' doesn't match
+            // 'notnull' constraint.
             //     [InterceptsLocation("Program.cs", 12, 11)] // 1
             Diagnostic(
                     ErrorCode.WRN_NullabilityMismatchInTypeParameterNotNullConstraint,
@@ -3155,7 +3210,8 @@ public class InterceptorsTests : CSharpTestBase
             Diagnostic(ErrorCode.ERR_BadArgType, @"""10""")
                 .WithArguments("3", "string", "int")
                 .WithLocation(6, 42),
-            // Program.cs(7,6): error CS1729: 'InterceptsLocationAttribute' does not contain a constructor that takes 4 arguments
+            // Program.cs(7,6): error CS1729: 'InterceptsLocationAttribute' does not contain a constructor that
+            // takes 4 arguments
             //     [InterceptsLocation("Program.cs", 1, 1, 9999)]
             Diagnostic(
                     ErrorCode.ERR_BadCtorArgCount,
@@ -3168,7 +3224,8 @@ public class InterceptorsTests : CSharpTestBase
             Diagnostic(ErrorCode.ERR_NameNotInContext, "ERROR")
                 .WithArguments("ERROR")
                 .WithLocation(8, 39),
-            // Program.cs(9,6): error CS7036: There is no argument given that corresponds to the required parameter 'filePath' of 'InterceptsLocationAttribute.InterceptsLocationAttribute(string, int, int)'
+            // Program.cs(9,6): error CS7036: There is no argument given that corresponds to the required
+            // parameter 'filePath' of 'InterceptsLocationAttribute.InterceptsLocationAttribute(string, int, int)'
             //     [InterceptsLocation()]
             Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "InterceptsLocation()")
                 .WithArguments(
@@ -3212,7 +3269,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,25): error CS9139: Cannot intercept: compilation does not contain a file with path 'BAD'.
+            // Program.cs(21,25): error CS9139: Cannot intercept: compilation does not contain a file with path
+            // 'BAD'.
             //     [InterceptsLocation("BAD", 15, 11)]
             Diagnostic(ErrorCode.ERR_InterceptorPathNotInCompilation, @"""BAD""")
                 .WithArguments("BAD")
@@ -3253,7 +3311,9 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // /Users/me/projects/Program.cs(21,25): error CS9140: Cannot intercept: compilation does not contain a file with path 'projects/Program.cs'. Did you mean to use path '/Users/me/projects/Program.cs'?
+            // /Users/me/projects/Program.cs(21,25): error CS9140: Cannot intercept: compilation does not
+            // contain a file with path 'projects/Program.cs'. Did you mean to use path
+            // '/Users/me/projects/Program.cs'?
             //     [InterceptsLocation("projects/Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithCandidate,
@@ -3334,7 +3394,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(20,25): error CS9139: Cannot intercept: compilation does not contain a file with path 'program.cs'.
+            // Program.cs(20,25): error CS9139: Cannot intercept: compilation does not contain a file with path
+            // 'program.cs'.
             //     [InterceptsLocation("program.cs", 15, 11)]
             Diagnostic(ErrorCode.ERR_InterceptorPathNotInCompilation, @"""program.cs""")
                 .WithArguments("program.cs")
@@ -3377,7 +3438,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '}'.
+            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '}'.
             //     [InterceptsLocation("Program.cs", 25, 1)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -3385,12 +3447,14 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("}")
                 .WithLocation(21, 6),
-            // Program.cs(22,39): error CS9142: The given file has '25' lines, which is fewer than the provided line number '26'.
+            // Program.cs(22,39): error CS9142: The given file has '25' lines, which is fewer than the provided
+            // line number '26'.
             //     [InterceptsLocation("Program.cs", 26, 1)]
             Diagnostic(ErrorCode.ERR_InterceptorLineOutOfRange, "26")
                 .WithArguments("25", "26")
                 .WithLocation(22, 39),
-            // Program.cs(23,39): error CS9142: The given file has '25' lines, which is fewer than the provided line number '100'.
+            // Program.cs(23,39): error CS9142: The given file has '25' lines, which is fewer than the provided
+            // line number '100'.
             //     [InterceptsLocation("Program.cs", 100, 1)]
             Diagnostic(ErrorCode.ERR_InterceptorLineOutOfRange, "100")
                 .WithArguments("25", "100")
@@ -3433,7 +3497,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an interceptable method name, but rather to token '}'.
+            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method name, but rather to token '}'.
             //     [InterceptsLocation("Program.cs", 16, 5)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -3441,12 +3506,14 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("}")
                 .WithLocation(21, 6),
-            // Program.cs(22,43): error CS9143: The given line is '5' characters long, which is fewer than the provided character number '6'.
+            // Program.cs(22,43): error CS9143: The given line is '5' characters long, which is fewer than the
+            // provided character number '6'.
             //     [InterceptsLocation("Program.cs", 16, 6)]
             Diagnostic(ErrorCode.ERR_InterceptorCharacterOutOfRange, "6")
                 .WithArguments("5", "6")
                 .WithLocation(22, 43),
-            // Program.cs(23,43): error CS9143: The given line is '5' characters long, which is fewer than the provided character number '1000'.
+            // Program.cs(23,43): error CS9143: The given line is '5' characters long, which is fewer than the
+            // provided character number '1000'.
             //     [InterceptsLocation("Program.cs", 16, 1000)]
             Diagnostic(ErrorCode.ERR_InterceptorCharacterOutOfRange, "1000")
                 .WithArguments("5", "1000")
@@ -3487,7 +3554,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an interceptable method, but rather to token 'c'.
+            // Program.cs(21,6): error CS9141: The provided line and character number does not refer to an
+            // interceptable method, but rather to token 'c'.
             //     [InterceptsLocation("Program.cs", 15, 9)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPositionBadToken,
@@ -3531,7 +3599,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9147: The provided line and character number does not refer to the start of token 'InterceptableMethod'. Did you mean to use line '15' and character '11'?
+            // Program.cs(21,6): error CS9147: The provided line and character number does not refer to the
+            // start of token 'InterceptableMethod'. Did you mean to use line '15' and character '11'?
             //     [InterceptsLocation("Program.cs", 15, 13)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustReferToStartOfTokenPosition,
@@ -3579,16 +3648,20 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(20,6): error CS9147: The provided line and character number does not refer to the start of token 'InterceptableMethod'. Did you mean to use line '12' and character '13'?
-            //     [InterceptsLocation("Program.cs", 12, 11)] // intercept spaces before 'InterceptableMethod' token
+            // Program.cs(20,6): error CS9147: The provided line and character number does not refer to the
+            // start of token 'InterceptableMethod'. Did you mean to use line '12' and character '13'?
+            //     [InterceptsLocation("Program.cs", 12, 11)] // intercept spaces before 'InterceptableMethod'
+            // token
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustReferToStartOfTokenPosition,
                     @"InterceptsLocation(""Program.cs"", 12, 11)"
                 )
                 .WithArguments("InterceptableMethod", "12", "13")
                 .WithLocation(20, 6),
-            // Program.cs(21,6): error CS9147: The provided line and character number does not refer to the start of token 'InterceptableMethod'. Did you mean to use line '14' and character '11'?
-            //     [InterceptsLocation("Program.cs", 14, 33)] // intercept spaces after 'InterceptableMethod' token
+            // Program.cs(21,6): error CS9147: The provided line and character number does not refer to the
+            // start of token 'InterceptableMethod'. Did you mean to use line '14' and character '11'?
+            //     [InterceptsLocation("Program.cs", 14, 33)] // intercept spaces after 'InterceptableMethod'
+            // token
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustReferToStartOfTokenPosition,
                     @"InterceptsLocation(""Program.cs"", 14, 33)"
@@ -3631,8 +3704,10 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,6): error CS9147: The provided line and character number does not refer to the start of token 'InterceptableMethod'. Did you mean to use line '11' and character '11'?
-            //     [InterceptsLocation("Program.cs", 11, 31)] // intercept comment after 'InterceptableMethod' token
+            // Program.cs(17,6): error CS9147: The provided line and character number does not refer to the
+            // start of token 'InterceptableMethod'. Did you mean to use line '11' and character '11'?
+            //     [InterceptsLocation("Program.cs", 11, 31)] // intercept comment after 'InterceptableMethod'
+            // token
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustReferToStartOfTokenPosition,
                     @"InterceptsLocation(""Program.cs"", 11, 31)"
@@ -3678,8 +3753,10 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(19,6): error CS9147: The provided line and character number does not refer to the start of token 'InterceptableMethod'. Did you mean to use line '13' and character '13'?
-            //     [InterceptsLocation("Program.cs", 12, 13)] // intercept comment above 'InterceptableMethod' token
+            // Program.cs(19,6): error CS9147: The provided line and character number does not refer to the
+            // start of token 'InterceptableMethod'. Did you mean to use line '13' and character '13'?
+            //     [InterceptsLocation("Program.cs", 12, 13)] // intercept comment above 'InterceptableMethod'
+            // token
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustReferToStartOfTokenPosition,
                     @"InterceptsLocation(""Program.cs"", 12, 13)"
@@ -3724,27 +3801,33 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,39): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(17,39): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", -1, 1)] // 1
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "-1")
                 .WithLocation(17, 39),
-            // Program.cs(18,42): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(18,42): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", 1, -1)] // 2
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "-1")
                 .WithLocation(18, 42),
-            // Program.cs(19,39): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(19,39): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", -1, -1)] // 3
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "-1")
                 .WithLocation(19, 39),
-            // Program.cs(20,39): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(20,39): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", 0, 1)] // 4
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "0")
                 .WithLocation(20, 39),
-            // Program.cs(21,42): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(21,42): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", 1, 0)] // 5
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "0")
                 .WithLocation(21, 42),
-            // Program.cs(22,39): error CS9157: Line and character numbers provided to InterceptsLocationAttribute must be positive.
+            // Program.cs(22,39): error CS9157: Line and character numbers provided to
+            // InterceptsLocationAttribute must be positive.
             //     [InterceptsLocation("Program.cs", 0, 0)] // 6
             Diagnostic(ErrorCode.ERR_InterceptorLineCharacterMustBePositive, "0")
                 .WithLocation(22, 39)
@@ -3784,7 +3867,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9144: Cannot intercept method 'Program.InterceptableMethod(I1, string)' with interceptor 'D.Interceptor1(I1, int)' because the signatures do not match.
+            // Program.cs(21,6): error CS9144: Cannot intercept method 'Program.InterceptableMethod(I1, string)'
+            // with interceptor 'D.Interceptor1(I1, int)' because the signatures do not match.
             //     [InterceptsLocation("Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorSignatureMismatch,
@@ -3830,7 +3914,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(22,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C this' on 'C.InterceptableMethod(string)'.
+            // Program.cs(22,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'C
+            // this' on 'C.InterceptableMethod(string)'.
             //     [InterceptsLocation("Program.cs", 16, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
@@ -3875,7 +3960,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'ref S this' on 'S.InterceptableMethod(string)'.
+            // Program.cs(21,6): error CS9148: Interceptor must have a 'this' parameter matching parameter 'ref
+            // S this' on 'S.InterceptableMethod(string)'.
             //     [InterceptsLocation("Program.cs", 15, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorMustHaveMatchingThisParameter,
@@ -3964,7 +4050,8 @@ public class InterceptorsTests : CSharpTestBase
             options: WithNullableEnable()
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(24,6): warning CS9159: Nullability of reference types in type of parameter 'param2' doesn't match interceptable method 'C.Method1(string?)'.
+            // Program.cs(24,6): warning CS9159: Nullability of reference types in type of parameter 'param2'
+            // doesn't match interceptable method 'C.Method1(string?)'.
             //     [InterceptsLocation("Program.cs", 17, 11)] // 1
             Diagnostic(
                     ErrorCode.WRN_NullabilityMismatchInParameterTypeOnInterceptor,
@@ -3972,7 +4059,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("param2", "C.Method1(string?)")
                 .WithLocation(24, 6),
-            // Program.cs(27,6): warning CS9158: Nullability of reference types in return type doesn't match interceptable method 'C.Method2()'.
+            // Program.cs(27,6): warning CS9158: Nullability of reference types in return type doesn't match
+            // interceptable method 'C.Method2()'.
             //     [InterceptsLocation("Program.cs", 18, 15)] // 2
             Diagnostic(
                     ErrorCode.WRN_NullabilityMismatchInReturnTypeOnInterceptor,
@@ -3988,11 +4076,13 @@ public class InterceptorsTests : CSharpTestBase
             options: WithNullableDisable()
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(6,31): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+            // Program.cs(6,31): warning CS8632: The annotation for nullable reference types should only be used
+            // in code within a '#nullable' annotations context.
             //     public void Method1(string? param1) => throw null!;
             Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                 .WithLocation(6, 31),
-            // Program.cs(28,25): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+            // Program.cs(28,25): warning CS8632: The annotation for nullable reference types should only be
+            // used in code within a '#nullable' annotations context.
             //     public static string? Interceptor2(this C s) => throw null!;
             Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
                 .WithLocation(28, 25)
@@ -4039,7 +4129,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(24,6): warning CS9154: Intercepting a call to 'C.Method1(object)' with interceptor 'D.Interceptor1(C, dynamic)', but the signatures do not match.
+            // Program.cs(24,6): warning CS9154: Intercepting a call to 'C.Method1(object)' with interceptor
+            // 'D.Interceptor1(C, dynamic)', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 17, 11)] // 1
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4047,7 +4138,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("C.Method1(object)", "D.Interceptor1(C, dynamic)")
                 .WithLocation(24, 6),
-            // Program.cs(27,6): warning CS9154: Intercepting a call to 'C.Method2()' with interceptor 'D.Interceptor2(C)', but the signatures do not match.
+            // Program.cs(27,6): warning CS9154: Intercepting a call to 'C.Method2()' with interceptor
+            // 'D.Interceptor2(C)', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 18, 15)] // 2
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4117,7 +4209,8 @@ public class InterceptorsTests : CSharpTestBase
             expectedOutput: "111222333"
         );
         verifier.VerifyDiagnostics(
-            // Program.cs(34,6): warning CS9154: Intercepting a call to 'C.Method2((string x, string y))' with interceptor 'D.Interceptor1(C, (string a, string b))', but the signatures do not match.
+            // Program.cs(34,6): warning CS9154: Intercepting a call to 'C.Method2((string x, string y))' with
+            // interceptor 'D.Interceptor1(C, (string a, string b))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 18, 11)] // 1
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4128,7 +4221,8 @@ public class InterceptorsTests : CSharpTestBase
                     "D.Interceptor1(C, (string a, string b))"
                 )
                 .WithLocation(34, 6),
-            // Program.cs(35,6): warning CS9154: Intercepting a call to 'C.Method3((string, string))' with interceptor 'D.Interceptor1(C, (string a, string b))', but the signatures do not match.
+            // Program.cs(35,6): warning CS9154: Intercepting a call to 'C.Method3((string, string))' with
+            // interceptor 'D.Interceptor1(C, (string a, string b))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 19, 11)] // 2
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4139,7 +4233,8 @@ public class InterceptorsTests : CSharpTestBase
                     "D.Interceptor1(C, (string a, string b))"
                 )
                 .WithLocation(35, 6),
-            // Program.cs(38,6): warning CS9154: Intercepting a call to 'C.Method1((string a, string b))' with interceptor 'D.Interceptor2(C, (string x, string y))', but the signatures do not match.
+            // Program.cs(38,6): warning CS9154: Intercepting a call to 'C.Method1((string a, string b))' with
+            // interceptor 'D.Interceptor2(C, (string x, string y))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 21, 11)] // 3
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4150,7 +4245,8 @@ public class InterceptorsTests : CSharpTestBase
                     "D.Interceptor2(C, (string x, string y))"
                 )
                 .WithLocation(38, 6),
-            // Program.cs(40,6): warning CS9154: Intercepting a call to 'C.Method3((string, string))' with interceptor 'D.Interceptor2(C, (string x, string y))', but the signatures do not match.
+            // Program.cs(40,6): warning CS9154: Intercepting a call to 'C.Method3((string, string))' with
+            // interceptor 'D.Interceptor2(C, (string x, string y))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 23, 11)] // 4
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4161,7 +4257,8 @@ public class InterceptorsTests : CSharpTestBase
                     "D.Interceptor2(C, (string x, string y))"
                 )
                 .WithLocation(40, 6),
-            // Program.cs(43,6): warning CS9154: Intercepting a call to 'C.Method1((string a, string b))' with interceptor 'D.Interceptor3(C, (string, string))', but the signatures do not match.
+            // Program.cs(43,6): warning CS9154: Intercepting a call to 'C.Method1((string a, string b))' with
+            // interceptor 'D.Interceptor3(C, (string, string))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 25, 11)] // 5
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4172,7 +4269,8 @@ public class InterceptorsTests : CSharpTestBase
                     "D.Interceptor3(C, (string, string))"
                 )
                 .WithLocation(43, 6),
-            // Program.cs(44,6): warning CS9154: Intercepting a call to 'C.Method2((string x, string y))' with interceptor 'D.Interceptor3(C, (string, string))', but the signatures do not match.
+            // Program.cs(44,6): warning CS9154: Intercepting a call to 'C.Method2((string x, string y))' with
+            // interceptor 'D.Interceptor3(C, (string, string))', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 26, 11)] // 6
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4231,7 +4329,8 @@ public class InterceptorsTests : CSharpTestBase
             expectedOutput: "1122"
         );
         verifier.VerifyDiagnostics(
-            // Program.cs(26,6): warning CS9154: Intercepting a call to 'C.Method1(nint)' with interceptor 'D.Interceptor1(C, IntPtr)', but the signatures do not match.
+            // Program.cs(26,6): warning CS9154: Intercepting a call to 'C.Method1(nint)' with interceptor
+            // 'D.Interceptor1(C, IntPtr)', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 16, 11)] // 1
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4239,7 +4338,8 @@ public class InterceptorsTests : CSharpTestBase
                 )
                 .WithArguments("C.Method1(nint)", "D.Interceptor1(C, System.IntPtr)")
                 .WithLocation(26, 6),
-            // Program.cs(30,6): warning CS9154: Intercepting a call to 'C.Method2(IntPtr)' with interceptor 'D.Interceptor2(C, nint)', but the signatures do not match.
+            // Program.cs(30,6): warning CS9154: Intercepting a call to 'C.Method2(IntPtr)' with interceptor
+            // 'D.Interceptor2(C, nint)', but the signatures do not match.
             //     [InterceptsLocation("Program.cs", 19, 11)] // 2
             Diagnostic(
                     ErrorCode.WRN_InterceptorSignatureMismatch,
@@ -4279,7 +4379,8 @@ public class InterceptorsTests : CSharpTestBase
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(17,6): error CS9144: Cannot intercept method 'Program.InterceptableMethod(ref readonly int)' with interceptor 'D.Interceptor(in int)' because the signatures do not match.
+            // Program.cs(17,6): error CS9144: Cannot intercept method 'Program.InterceptableMethod(ref readonly
+            // int)' with interceptor 'D.Interceptor(in int)' because the signatures do not match.
             //     [InterceptsLocation("Program.cs", 11, 9)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorSignatureMismatch,
@@ -4327,7 +4428,9 @@ public class InterceptorsTests : CSharpTestBase
             options: WithNullableEnable()
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(20,6): error CS9156: Cannot intercept call to 'C.InterceptableMethod(scoped ref int)' with 'D.Interceptor1(ref int)' because of a difference in 'scoped' modifiers or '[UnscopedRef]' attributes.
+            // Program.cs(20,6): error CS9156: Cannot intercept call to 'C.InterceptableMethod(scoped ref int)'
+            // with 'D.Interceptor1(ref int)' because of a difference in 'scoped' modifiers or '[UnscopedRef]'
+            // attributes.
             //     [InterceptsLocation("Program.cs", 14, 11)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorScopedMismatch,
@@ -4470,7 +4573,9 @@ public class InterceptorsTests : CSharpTestBase
             options: WithNullableEnable()
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(21,6): error CS9156: Cannot intercept call to 'C.InterceptableMethod(out int)' with 'D.Interceptor1(out int)' because of a difference in 'scoped' modifiers or '[UnscopedRef]' attributes.
+            // Program.cs(21,6): error CS9156: Cannot intercept call to 'C.InterceptableMethod(out int)' with
+            // 'D.Interceptor1(out int)' because of a difference in 'scoped' modifiers or '[UnscopedRef]'
+            // attributes.
             //     [InterceptsLocation("Program.cs", 15, 11)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorScopedMismatch,
@@ -4735,7 +4840,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void ParamsMismatch_02()
     {
-        // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is called as if it has one.
+        // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is
+        // called as if it has one.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -4793,7 +4899,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void ParamsMismatch_03()
     {
-        // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is called in normal form.
+        // Test when interceptable method lacks 'params' parameter, and interceptor has one, and method is
+        // called in normal form.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -4841,7 +4948,8 @@ public class InterceptorsTests : CSharpTestBase
     [Fact]
     public void InterpolatedStringHandler_01()
     {
-        // Verify that interpolated string-related attributes on an intercepted call use the attributes from the interceptable method.
+        // Verify that interpolated string-related attributes on an intercepted call use the attributes from
+        // the interceptable method.
         var code = """
 using System;
 using System.Runtime.CompilerServices;
@@ -4902,7 +5010,8 @@ partial struct CustomHandler
     [Fact]
     public void InterpolatedStringHandler_02()
     {
-        // Verify that interpolated string-related attributes are ignored on an interceptor in an intercepted call.
+        // Verify that interpolated string-related attributes are ignored on an interceptor in an
+        // intercepted call.
         var code = """
 using System;
 using System.Runtime.CompilerServices;
@@ -4963,7 +5072,8 @@ partial struct CustomHandler
     [Fact]
     public void InterpolatedStringHandler_03()
     {
-        // Verify that interpolated string attributes on an interceptor don't cause us to somehow pick a different argument.
+        // Verify that interpolated string attributes on an interceptor don't cause us to somehow pick a
+        // different argument.
         var code = """
 using System;
 using System.Runtime.CompilerServices;
@@ -5025,7 +5135,8 @@ partial struct CustomHandler
     [Fact]
     public void LineDirective_01()
     {
-        // Verify that line directives are not considered when deciding if a particular call is being intercepted.
+        // Verify that line directives are not considered when deciding if a particular call is being
+        // intercepted.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -5059,7 +5170,8 @@ partial struct CustomHandler
     [Fact]
     public void LineDirective_02()
     {
-        // Verify that line directives are not considered when deciding if a particular call is being intercepted.
+        // Verify that line directives are not considered when deciding if a particular call is being
+        // intercepted.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -5087,7 +5199,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // OtherFile.cs(48,25): error CS9139: Cannot intercept: compilation does not contain a file with path 'OtherFile.cs'.
+            // OtherFile.cs(48,25): error CS9139: Cannot intercept: compilation does not contain a file with
+            // path 'OtherFile.cs'.
             //     [InterceptsLocation("OtherFile.cs", 42, 9)]
             Diagnostic(ErrorCode.ERR_InterceptorPathNotInCompilation, @"""OtherFile.cs""")
                 .WithArguments("OtherFile.cs")
@@ -5130,7 +5243,8 @@ partial struct CustomHandler
     [Fact]
     public void CallerInfo()
     {
-        // CallerLineNumber, etc. on the interceptor doesn't affect the default arguments passed to an intercepted call.
+        // CallerLineNumber, etc. on the interceptor doesn't affect the default arguments passed to an
+        // intercepted call.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -5161,7 +5275,8 @@ partial struct CustomHandler
     [Fact]
     public void DefaultArguments_01()
     {
-        // Default parameter values on the interceptor doesn't affect the default arguments passed to an intercepted call.
+        // Default parameter values on the interceptor doesn't affect the default arguments passed to an
+        // intercepted call.
         var source = """
             using System.Runtime.CompilerServices;
             using System;
@@ -5216,7 +5331,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(4,3): error CS7036: There is no argument given that corresponds to the required parameter 'lineNumber' of 'C.M(int)'
+            // Program.cs(4,3): error CS7036: There is no argument given that corresponds to the required
+            // parameter 'lineNumber' of 'C.M(int)'
             // C.M(); // 1
             Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "M")
                 .WithArguments("lineNumber", "C.M(int)")
@@ -5361,7 +5477,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(16,6): error CS9151: Possible method name 'myEnumerable' cannot be intercepted because it is not being invoked.
+            // Program.cs(16,6): error CS9151: Possible method name 'myEnumerable' cannot be intercepted because
+            // it is not being invoked.
             //     [InterceptsLocation("Program.cs", 5, 22)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -5401,7 +5518,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(16,6): error CS9151: Possible method name 'myDisposable' cannot be intercepted because it is not being invoked.
+            // Program.cs(16,6): error CS9151: Possible method name 'myDisposable' cannot be intercepted because
+            // it is not being invoked.
             //     [InterceptsLocation("Program.cs", 5, 8)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -5439,7 +5557,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(14,6): error CS9151: Possible method name 'myDeconstructable' cannot be intercepted because it is not being invoked.
+            // Program.cs(14,6): error CS9151: Possible method name 'myDeconstructable' cannot be intercepted
+            // because it is not being invoked.
             //     [InterceptsLocation("Program.cs", 5, 14)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorNameNotInvoked,
@@ -5519,7 +5638,8 @@ partial struct CustomHandler
             )
         );
         comp.VerifyEmitDiagnostics(
-            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9145: Cannot intercept: Path 'C:\My\Machine\Specific\Path\Program.cs' is unmapped. Expected mapped path '/_/Program.cs'.
+            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9145: Cannot intercept: Path
+            // 'C:\My\Machine\Specific\Path\Program.cs' is unmapped. Expected mapped path '/_/Program.cs'.
             //     [InterceptsLocation(@"C:\My\Machine\Specific\Path\Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithUnmappedCandidate,
@@ -5562,7 +5682,8 @@ partial struct CustomHandler
             )
         );
         comp.VerifyEmitDiagnostics(
-            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does not contain a file with path '\_\Program.cs'. Did you mean to use path '/_/Program.cs'?
+            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does
+            // not contain a file with path '\_\Program.cs'. Did you mean to use path '/_/Program.cs'?
             //     [InterceptsLocation(@"\_\Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithCandidate,
@@ -5637,7 +5758,8 @@ partial struct CustomHandler
             )
         );
         comp.VerifyEmitDiagnostics(
-            // C:\My\Machine\Specific\Path1\Program.cs(16,25): error CS9152: Cannot intercept a call in file with path '/_/Program.cs' because multiple files in the compilation have this path.
+            // C:\My\Machine\Specific\Path1\Program.cs(16,25): error CS9152: Cannot intercept a call in file
+            // with path '/_/Program.cs' because multiple files in the compilation have this path.
             //     [InterceptsLocation(@"/_/Program.cs", 11, 9)]
             Diagnostic(ErrorCode.ERR_InterceptorNonUniquePath, @"@""/_/Program.cs""")
                 .WithArguments("/_/Program.cs")
@@ -5714,7 +5836,8 @@ partial struct CustomHandler
             )
         );
         comp.VerifyEmitDiagnostics(
-            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does not contain a file with path '/_/Program.cs'. Did you mean to use path '\_/Program.cs'?
+            // C:\My\Machine\Specific\Path\Program.cs(11,25): error CS9140: Cannot intercept: compilation does
+            // not contain a file with path '/_/Program.cs'. Did you mean to use path '\_/Program.cs'?
             //     [InterceptsLocation(@"/_/Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithCandidate,
@@ -5851,7 +5974,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // src\Program.cs(14,25): error CS9140: Cannot intercept: compilation does not contain a file with path 'src/Program.cs'. Did you mean to use path 'src\Program.cs'?
+            // src\Program.cs(14,25): error CS9140: Cannot intercept: compilation does not contain a file with
+            // path 'src/Program.cs'. Did you mean to use path 'src\Program.cs'?
             //     [InterceptsLocation(@"src/Program.cs", 9, 11)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithCandidate,
@@ -5891,7 +6015,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // C:\src\Program.cs(14,25): error CS9140: Cannot intercept: compilation does not contain a file with path 'C:/src/Program.cs'. Did you mean to use path 'C:\src\Program.cs'?
+            // C:\src\Program.cs(14,25): error CS9140: Cannot intercept: compilation does not contain a file
+            // with path 'C:/src/Program.cs'. Did you mean to use path 'C:\src\Program.cs'?
             //     [InterceptsLocation("C:/src/Program.cs", 9, 11)] // 1
             Diagnostic(
                     ErrorCode.ERR_InterceptorPathNotInCompilationWithCandidate,
@@ -5935,7 +6060,8 @@ partial struct CustomHandler
             parseOptions: RegularWithInterceptors
         );
         comp.VerifyEmitDiagnostics(
-            // Program.cs(14,6): error CS9161: An interceptor cannot be marked with 'UnmanagedCallersOnlyAttribute'.
+            // Program.cs(14,6): error CS9161: An interceptor cannot be marked with
+            // 'UnmanagedCallersOnlyAttribute'.
             //     [InterceptsLocation("Program.cs", 5, 3)]
             Diagnostic(
                     ErrorCode.ERR_InterceptorCannotUseUnmanagedCallersOnly,

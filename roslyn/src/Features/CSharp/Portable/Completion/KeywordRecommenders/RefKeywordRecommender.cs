@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
         };
 
         /// <summary>
-        /// Same as <see cref="SyntaxKindSet.AllGlobalMemberModifiers"/> with ref-specific exclusions for C# script
+        /// Same as <see cref="SyntaxKindSet.AllGlobalMemberModifiers"/> with ref-specific exclusions for C#
+        // script
         /// </summary>
         private static readonly ISet<SyntaxKind> RefGlobalMemberScriptModifiers =
             new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)

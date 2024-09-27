@@ -511,7 +511,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // lhs is static typed and rhs is dynamic runtime delegate: with event accessor and rhs is inside the invocation list
+    // lhs is static typed and rhs is dynamic runtime delegate: with event accessor and rhs is inside
+    // the invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -571,7 +572,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // lhs is static typed and rhs is dynamic runtime delegate: without event accessor and rhs is inside the invocation list
+    // lhs is static typed and rhs is dynamic runtime delegate: without event accessor and rhs is inside
+    // the invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -632,7 +634,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // lhs is static typed and rhs is dynamic runtime delegate: with event accessor and rhs is outside the invocation list
+    // lhs is static typed and rhs is dynamic runtime delegate: with event accessor and rhs is outside
+    // the invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -692,7 +695,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // lhs is static typed and rhs is dynamic runtime delegate: without event accessor and rhs is outside the invocation list
+    // lhs is static typed and rhs is dynamic runtime delegate: without event accessor and rhs is
+    // outside the invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -753,7 +757,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is field/property of delegate type : with event accessor and field/property is inside the invocation list
+    // rhs is field/property of delegate type : with event accessor and field/property is inside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -833,7 +838,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is field/property of delegate type : without event accessor and field/property is inside the invocation list
+    // rhs is field/property of delegate type : without event accessor and field/property is inside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -914,7 +920,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is field/property of delegate type : with event accessor and field/property is outside the invocation list
+    // rhs is field/property of delegate type : with event accessor and field/property is outside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -995,7 +1002,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is field/property of delegate type : without event accessor and field/property is outside the invocation list
+    // rhs is field/property of delegate type : without event accessor and field/property is outside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -1317,7 +1325,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is delegate invocation return delegate : with event accessor and rhs is outside the invocation list
+    // rhs is delegate invocation return delegate : with event accessor and rhs is outside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -1384,7 +1393,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.compoun
     // <Area> Dynamic -- compound operator</Area>
     // <Title> compound operator +=/-= on event </Title>
     // <Description>
-    // rhs is delegate invocation return delegate : without event accessor and rhs is outside the invocation list
+    // rhs is delegate invocation return delegate : without event accessor and rhs is outside the
+    // invocation list
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>

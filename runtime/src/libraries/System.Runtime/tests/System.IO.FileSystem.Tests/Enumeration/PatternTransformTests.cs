@@ -102,7 +102,8 @@ namespace System.IO.Tests.Enumeration
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetFiles_ExtendedDosWildcards_Unix()
         {
-            // The extended wildcards ('"', '<', and '>') should not be considered on Unix, even when doing DOS style matching.
+            // The extended wildcards ('"', '<', and '>') should not be considered on Unix, even when doing DOS
+            // style matching.
             // Getting these behaviors requires using the FileSystemEnumerable/Enumerator directly.
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
             FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, "File\"One"));

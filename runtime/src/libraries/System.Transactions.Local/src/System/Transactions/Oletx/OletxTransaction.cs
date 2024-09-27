@@ -46,7 +46,8 @@ namespace System.Transactions.Oletx
 
         // In GetRealObject, we ask LTM if it has a promoted transaction with the same ID.  If it does,
         // we need to remember that transaction because GetRealObject is called twice during
-        // deserialization.  In this case, GetRealObject returns the LTM transaction, not this OletxTransaction.
+        // deserialization.  In this case, GetRealObject returns the LTM transaction, not this
+        // OletxTransaction.
         // The OletxTransaction will get GC'd because there will be no references to it.
         internal Transaction? SavedLtmPromotedTransaction;
 
@@ -276,7 +277,8 @@ namespace System.Transactions.Oletx
         /// <remarks>
         /// Initiates rollback processing of the transaction.  This method can be called on any instance
         /// of a Transaction class, regardless of how the Transaction was obtained.  It is possible for this
-        /// method to be called "too late", after the outcome of the transaction has already been determined.
+        /// method to be called "too late", after the outcome of the transaction has already been
+        // determined.
         /// In this case, an exception is raised.
         /// </remarks>
         internal void Rollback()
@@ -514,9 +516,12 @@ namespace System.Transactions.Oletx
                             }
                             catch (TransactionException ex)
                             {
-                                // realOletxTransaction.Identifier throws a TransactionException if it can't determine the guid of the
-                                // transaction because the transaction was already committed or aborted before the RealOletxTransaction was
-                                // created.  If that happens, we don't want to throw just because we are trying to trace.  So just use
+                                // realOletxTransaction.Identifier throws a TransactionException if it can't determine the guid of
+                                // the
+                                // transaction because the transaction was already committed or aborted before the
+                                // RealOletxTransaction was
+                                // created.  If that happens, we don't want to throw just because we are trying to trace.  So just
+                                // use
                                 // the TransactionTraceIdentifier.Empty.
 
                                 TransactionsEtwProvider etwLog = TransactionsEtwProvider.Log;
@@ -598,7 +603,8 @@ namespace System.Transactions.Oletx
         // pointer.
         private int _undisposedOletxTransactionCount;
 
-        // The list of containers for phase0 volatile enlistment multiplexing so we only enlist with the proxy once per wave.
+        // The list of containers for phase0 volatile enlistment multiplexing so we only enlist with the
+        // proxy once per wave.
         // The last one on the list is the "current" one.
         internal ArrayList? Phase0EnlistVolatilementContainerList;
 
@@ -608,7 +614,8 @@ namespace System.Transactions.Oletx
         // Used to get outcomes of transactions with a voter.
         private readonly OutcomeEnlistment? _outcomeEnlistment;
 
-        // This is a count of volatile and Phase0 durable enlistments on this transaction that have not yet voted.
+        // This is a count of volatile and Phase0 durable enlistments on this transaction that have not yet
+        // voted.
         // This is incremented when an enlistment is made and decremented when the
         // enlistment votes.  It is checked in Rollback.  If the count is greater than 0,
         // then the doomed field is set to true and the Rollback is allowed.  If the count
@@ -624,7 +631,8 @@ namespace System.Transactions.Oletx
         internal bool Doomed { get; private set; }
 
         // This property is used to allocate enlistment identifiers for enlistment trace identifiers.
-        // It is only incremented when a new enlistment is created for this instance of RealOletxTransaction.
+        // It is only incremented when a new enlistment is created for this instance of
+        // RealOletxTransaction.
         // Enlistments on all clones of this Real transaction use this value.
         internal int _enlistmentCount;
 
@@ -636,17 +644,22 @@ namespace System.Transactions.Oletx
         // for non-root RealOletxTransactions.
         internal OletxCommittableTransaction? CommittableTransaction;
 
-        // This is an internal OletxTransaction.  It is created as part of the RealOletxTransaction constructor.
+        // This is an internal OletxTransaction.  It is created as part of the RealOletxTransaction
+        // constructor.
         // It is used by the DependentCloneEnlistments when creating their volatile enlistments.
         internal OletxTransaction InternalClone;
 
-        // This is set initialized to false.  It is set to true when the OletxPhase1VolatileContainer gets a VoteRequest or
-        // when any OletxEnlistment attached to this transaction gets a PrepareRequest.  At that point, it is too late for any
+        // This is set initialized to false.  It is set to true when the OletxPhase1VolatileContainer gets a
+        // VoteRequest or
+        // when any OletxEnlistment attached to this transaction gets a PrepareRequest.  At that point, it
+        // is too late for any
         // more enlistments.
         internal bool TooLateForEnlistments { get; set; }
 
-        // This is the InternalTransaction that instigated creation of this RealOletxTransaction.  When we get the outcome
-        // of the transaction, we use this to notify the InternalTransaction of the outcome.  We do this to avoid the LTM
+        // This is the InternalTransaction that instigated creation of this RealOletxTransaction.  When we
+        // get the outcome
+        // of the transaction, we use this to notify the InternalTransaction of the outcome.  We do this to
+        // avoid the LTM
         // always creating a volatile enlistment just to get the outcome.
         internal InternalTransaction? InternalTransaction { get; set; }
 
@@ -867,7 +880,8 @@ namespace System.Transactions.Oletx
 
                     try
                     {
-                        //At this point, we definitely need the lock on the phase0 container so that it doesnt race with shim notifications from unmanaged code
+                        //At this point, we definitely need the lock on the phase0 container so that it doesnt race with
+                        // shim notifications from unmanaged code
                         //corrupting state while we are in the middle of an AddDependentClone processing
                         if (localPhase0VolatileContainer != null)
                         {
@@ -946,8 +960,10 @@ namespace System.Transactions.Oletx
             }
             finally
             {
-                //First release the lock on the phase 0 container if it was acquired. Any work on localPhase0VolatileContainer
-                //that needs its state to be consistent while processing should do so before this statement is executed.
+                //First release the lock on the phase 0 container if it was acquired. Any work on
+                // localPhase0VolatileContainer
+                //that needs its state to be consistent while processing should do so before this statement is
+                // executed.
                 if (localPhase0VolatileContainer != null)
                 {
                     ReleaseContainerLock(
@@ -1175,7 +1191,8 @@ namespace System.Transactions.Oletx
                     );
                 }
 
-                // If the transaciton is already aborted, we can get out now.  Calling Rollback on an already aborted transaction
+                // If the transaciton is already aborted, we can get out now.  Calling Rollback on an already
+                // aborted transaction
                 // is legal.
                 if (TransactionStatus.Aborted == Status)
                 {
@@ -1338,8 +1355,10 @@ namespace System.Transactions.Oletx
                             else
                             {
                                 // We don't have a txGuid if we couldn't determine the guid of the
-                                // transaction because the transaction was already committed or aborted before the RealOletxTransaction was
-                                // created.  If that happens, we don't want to throw just because we are trying to trace.  So just use the
+                                // transaction because the transaction was already committed or aborted before the
+                                // RealOletxTransaction was
+                                // created.  If that happens, we don't want to throw just because we are trying to trace.  So just
+                                // use the
                                 // TransactionTraceIdentifier.Empty.
                             }
                         }
@@ -1399,7 +1418,8 @@ namespace System.Transactions.Oletx
                 // We want to do this while holding the lock.
                 if (!localHaveIssuedOutcome)
                 {
-                    // We don't use MemoryBarrier here because all access to these member variables is done while holding
+                    // We don't use MemoryBarrier here because all access to these member variables is done while
+                    // holding
                     // a lock on the object.
 
                     // We are going to use a weak reference so the transaction object can get garbage
@@ -1417,7 +1437,8 @@ namespace System.Transactions.Oletx
             {
                 realTx.FireOutcome(localStatus);
 
-                // We may be getting this notification while there are still volatile prepare notifications outstanding.  Tell the
+                // We may be getting this notification while there are still volatile prepare notifications
+                // outstanding.  Tell the
                 // container to drive the aborted notification in that case.
                 if (
                     localStatus is TransactionStatus.Aborted or TransactionStatus.InDoubt
@@ -1461,7 +1482,8 @@ namespace System.Transactions.Oletx
                 {
                     realOletxTransaction.FireOutcome(status);
 
-                    // The container list won't be changing on us now because the transaction status has changed such that
+                    // The container list won't be changing on us now because the transaction status has changed such
+                    // that
                     // new enlistments will not be created.
                     // Tell the Phase0Volatile containers, if any, about the outcome of the transaction.
                     // I am not protecting the access to phase0EnlistVolatilementContainerList with a lock on "this"
@@ -1476,7 +1498,8 @@ namespace System.Transactions.Oletx
                         }
                     }
 
-                    // We may be getting this notification while there are still volatile prepare notifications outstanding.  Tell the
+                    // We may be getting this notification while there are still volatile prepare notifications
+                    // outstanding.  Tell the
                     // container to drive the aborted notification in that case.
                     if (
                         status is TransactionStatus.Aborted or TransactionStatus.InDoubt

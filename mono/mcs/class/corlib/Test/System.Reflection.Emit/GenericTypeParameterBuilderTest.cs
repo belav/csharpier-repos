@@ -386,19 +386,20 @@ namespace MonoTests.System.Reflection.Emit
         {
             // Regression test for https://bugzilla.xamarin.com/show_bug.cgi?id=58454
             //
-            // Need to check that GenericTypeParameterBuilderTest:InternalResolve() passes the declaring type to GetMethodFromHandle()
+            // Need to check that GenericTypeParameterBuilderTest:InternalResolve() passes the declaring type to
+            // GetMethodFromHandle()
             //
-            /* Want to generate:
+/* Want to generate:
 
-               public class Store<TState> {
-               public Action<TSelection> Subscribe<TSelection> (TState state) {
-                   return new Action<TSelection> (Foo<TSelection>);
-               }
-               public static void Foo<X> (X x) { }
-               }
+public class Store<TState> {
+public Action<TSelection> Subscribe<TSelection> (TState state) {
+return new Action<TSelection> (Foo<TSelection>);
+}
+public static void Foo<X> (X x) { }
+}
 
-               ...  and then: new Store<string>().Subscribe<int>("x");
-            */
+...  and then: new Store<string>().Subscribe<int>("x");
+*/
 
             SetUp(AssemblyBuilderAccess.Run);
 

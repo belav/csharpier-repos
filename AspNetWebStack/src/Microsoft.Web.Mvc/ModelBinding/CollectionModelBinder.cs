@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +10,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public class CollectionModelBinder<TElement> : IExtensibleModelBinder
     {
-        // Used when the ValueProvider contains the collection to be bound as multiple elements, e.g. foo[0], foo[1].
+        // Used when the ValueProvider contains the collection to be bound as multiple elements, e.g.
+        // foo[0], foo[1].
         private static List<TElement> BindComplexCollection(
             ControllerContext controllerContext,
             ExtensibleModelBindingContext bindingContext
@@ -123,7 +125,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
             return retVal;
         }
 
-        // Used when the ValueProvider contains the collection to be bound as a single element, e.g. the raw value
+        // Used when the ValueProvider contains the collection to be bound as a single element, e.g. the raw
+        // value
         // is [ "1", "2" ] and needs to be converted to an int[].
         internal static List<TElement> BindSimpleCollection(
             ControllerContext controllerContext,

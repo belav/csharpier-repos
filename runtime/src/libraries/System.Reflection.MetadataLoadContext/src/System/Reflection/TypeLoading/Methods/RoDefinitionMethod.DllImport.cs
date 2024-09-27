@@ -6,7 +6,8 @@ using System.Runtime.InteropServices;
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Class for all RoMethod objects created by a MetadataLoadContext that has a MethodDef token associated with it
+    /// Class for all RoMethod objects created by a MetadataLoadContext that has a MethodDef token
+    // associated with it
     /// and for which IsConstructedGenericMethod returns false.
     /// </summary>
     internal sealed partial class RoDefinitionMethod<TMethodDecoder>
@@ -16,7 +17,8 @@ namespace System.Reflection.TypeLoading
             if ((Attributes & MethodAttributes.PinvokeImpl) == 0)
                 return null;
 
-            // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If one doesn't, skip.
+            // Make sure all the necessary framework types exist in this MetadataLoadContext's core assembly. If
+            // one doesn't, skip.
             CoreTypes ct = Loader.GetAllFoundCoreTypes();
             if (
                 ct[CoreType.String] == null

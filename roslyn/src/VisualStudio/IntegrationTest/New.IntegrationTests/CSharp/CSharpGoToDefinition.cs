@@ -254,7 +254,8 @@ class C
                 HangMitigatingCancellationToken
             );
 
-            // When collapsing, not everything is collapsed (eg, namespace and class aren't), but most things are
+            // When collapsing, not everything is collapsed (eg, namespace and class aren't), but most things
+            // are
             Assert.Equal(31, actual.Length);
             Assert.Equal(7, actual.Count(s => !s.Collapsed));
         }
@@ -375,7 +376,8 @@ class C
                 )
             );
 
-            // Close the file and try again. If symbol mapping isn't working, the second GTD to AbstractEditorTest.cs will fail
+            // Close the file and try again. If symbol mapping isn't working, the second GTD to
+            // AbstractEditorTest.cs will fail
             await TestServices.SolutionExplorer.CloseActiveWindow(HangMitigatingCancellationToken);
 
             await TestServices.Editor.PlaceCaretAsync(

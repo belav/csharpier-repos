@@ -113,7 +113,8 @@ namespace System.Reflection.PortableExecutable
             Debug.Assert(count <= sizeof(long)); // Error message assumes we're trying to read constant small number of bytes.
             Debug.Assert(_reader.BaseStream.Position >= 0 && _maxOffset >= 0);
 
-            // Add cannot overflow because the worst case is (ulong)long.MaxValue + uint.MaxValue < ulong.MaxValue.
+            // Add cannot overflow because the worst case is (ulong)long.MaxValue + uint.MaxValue <
+            // ulong.MaxValue.
             if ((ulong)_reader.BaseStream.Position + count > (ulong)_maxOffset)
             {
                 Throw.ImageTooSmall();
@@ -124,7 +125,8 @@ namespace System.Reflection.PortableExecutable
         {
             Debug.Assert(startPosition >= 0 && _maxOffset >= 0);
 
-            // Add cannot overflow because the worst case is (ulong)long.MaxValue + uint.MaxValue < ulong.MaxValue.
+            // Add cannot overflow because the worst case is (ulong)long.MaxValue + uint.MaxValue <
+            // ulong.MaxValue.
             // Negative count is handled by overflow to greater than maximum size = int.MaxValue.
             if ((ulong)startPosition + unchecked((uint)count) > (ulong)_maxOffset)
             {

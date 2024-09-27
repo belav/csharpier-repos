@@ -16,7 +16,8 @@ namespace System.Web
     using System.Web.Security;
     using System.Web.Util;
 
-    // Used by the IIS integrated pipeline to reference managed objects so that they're not claimed by the GC while unmanaged code is executing.
+    // Used by the IIS integrated pipeline to reference managed objects so that they're not claimed by
+    // the GC while unmanaged code is executing.
 
     [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
     internal sealed class RootedObjects : IPrincipalContainer
@@ -87,7 +88,8 @@ namespace System.Web
         {
             Debug.Trace("RootedObjects", "Destroy");
 
-            // 'isDestroying = true' means that we'll release the implicit 'this' ref in _requestActivityIdRefCount
+            // 'isDestroying = true' means that we'll release the implicit 'this' ref in
+            // _requestActivityIdRefCount
             using (WithinTraceBlock(isDestroying: true))
             {
                 try
@@ -97,7 +99,8 @@ namespace System.Web
                     ReleaseWorkerRequest();
                     ReleasePrincipal();
 
-                    // need to raise OnPipelineCompleted outside of the ThreadContext so that HttpContext.Current, User, etc. are unavailable
+                    // need to raise OnPipelineCompleted outside of the ThreadContext so that HttpContext.Current, User,
+                    // etc. are unavailable
                     RaiseOnPipelineCompleted();
 
                     PerfCounters.DecrementCounter(AppPerfCounter.REQUESTS_EXECUTING);

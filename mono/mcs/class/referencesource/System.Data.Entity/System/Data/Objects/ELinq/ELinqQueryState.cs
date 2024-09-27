@@ -46,8 +46,10 @@ namespace System.Data.Objects.ELinq
         /// Constructs a new <see cref="ELinqQueryState"/> instance based on the specified Linq Expression
         /// against the specified ObjectContext.
         /// </summary>
-        /// <param name="elementType">The element type of the implemented ObjectQuery, as a CLR type.</param>
-        /// <param name="context">The ObjectContext with which the implemented ObjectQuery is associated.</param>
+        /// <param name="elementType">The element type of the implemented ObjectQuery, as a CLR
+        // type.</param>
+        /// <param name="context">The ObjectContext with which the implemented ObjectQuery is
+        // associated.</param>
         /// <param name="expression">The Linq Expression that defines this query.</param>
         internal ELinqQueryState(Type elementType, ObjectContext context, Expression expression)
             : base(elementType, context, null, null)
@@ -70,7 +72,8 @@ namespace System.Data.Objects.ELinq
         /// Constructs a new <see cref="ELinqQueryState"/> instance based on the specified Linq Expression,
         /// copying the state information from the specified ObjectQuery.
         /// </summary>
-        /// <param name="elementType">The element type of the implemented ObjectQuery, as a CLR type.</param>
+        /// <param name="elementType">The element type of the implemented ObjectQuery, as a CLR
+        // type.</param>
         /// <param name="query">The ObjectQuery from which the state information should be copied.</param>
         /// <param name="expression">The Linq Expression that defines this query.</param>
         internal ELinqQueryState(Type elementType, ObjectQuery query, Expression expression)
@@ -104,14 +107,17 @@ namespace System.Data.Objects.ELinq
             ObjectQueryExecutionPlan plan = this._cachedPlan;
             if (plan != null)
             {
-                // Was a merge option specified in the call to Execute(MergeOption) or set via ObjectQuery.MergeOption?
+                // Was a merge option specified in the call to Execute(MergeOption) or set via
+                // ObjectQuery.MergeOption?
                 MergeOption? explicitMergeOption = GetMergeOption(
                     forMergeOption,
                     this.UserSpecifiedMergeOption
                 );
 
-                // If a merge option was explicitly specified, and it does not match the plan's merge option, then the plan is no longer valid.
-                // If the context flag UseCSharpNullComparisonBehavior was modified, then the plan is no longer valid.
+                // If a merge option was explicitly specified, and it does not match the plan's merge option, then
+                // the plan is no longer valid.
+                // If the context flag UseCSharpNullComparisonBehavior was modified, then the plan is no longer
+                // valid.
                 if (
                     (explicitMergeOption.HasValue && explicitMergeOption.Value != plan.MergeOption)
                     || this._recompileRequired()
@@ -143,7 +149,8 @@ namespace System.Data.Objects.ELinq
                 // Determine the merge option, with the following precedence:
                 // 1. A merge option was specified explicitly as the argument to Execute(MergeOption).
                 // 2. The user has set the MergeOption property on the ObjectQuery instance.
-                // 3. A merge option has been extracted from the 'root' query and propagated to the root of the expression tree.
+                // 3. A merge option has been extracted from the 'root' query and propagated to the root of the
+                // expression tree.
                 // 4. The global default merge option.
                 MergeOption mergeOption = EnsureMergeOption(
                     forMergeOption,
@@ -155,7 +162,8 @@ namespace System.Data.Objects.ELinq
                     .ContextOptions
                     .UseCSharpNullComparisonBehavior;
 
-                // If parameters were aggregated from referenced (non-LINQ) ObjectQuery instances then add them to the parameters collection
+                // If parameters were aggregated from referenced (non-LINQ) ObjectQuery instances then add them to
+                // the parameters collection
                 _linqParameters = converter.GetParameters();
                 if (_linqParameters != null && _linqParameters.Count > 0)
                 {
@@ -237,14 +245,16 @@ namespace System.Data.Objects.ELinq
                         QueryCacheEntry foundEntry = null;
                         if (cacheManager.TryLookupAndAdd(newEntry, out foundEntry))
                         {
-                            // If TryLookupAndAdd returns 'true' then the entry was already present in the cache when the attempt to add was made.
+                            // If TryLookupAndAdd returns 'true' then the entry was already present in the cache when the
+                            // attempt to add was made.
                             // In this case the existing execution plan should be used.
                             plan = (ObjectQueryExecutionPlan)foundEntry.GetTarget();
                         }
                     }
                 }
 
-                // Remember the current plan in the local cache, so that we don't have to recalc the key and look into the global cache
+                // Remember the current plan in the local cache, so that we don't have to recalc the key and look
+                // into the global cache
                 // if the same instance of query gets executed more than once.
                 this._cachedPlan = plan;
             }
@@ -269,14 +279,18 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Returns a new ObjectQueryState instance with the specified navigation property path specified as an Include span.
-        /// For eLINQ queries the Include operation is modelled as a method call expression applied to the source ObectQuery,
+        /// Returns a new ObjectQueryState instance with the specified navigation property path specified as
+        // an Include span.
+        /// For eLINQ queries the Include operation is modelled as a method call expression applied to the
+        // source ObectQuery,
         /// so the <see cref="Span"/> property is always <c>null</c> on the returned instance.
         /// </summary>
         /// <typeparam name="TElementType">The element type of the resulting query</typeparam>
-        /// <param name="sourceQuery">The ObjectQuery on which Include was called; required to build the new method call expression</param>
+        /// <param name="sourceQuery">The ObjectQuery on which Include was called; required to build the new
+        // method call expression</param>
         /// <param name="includePath">The new Include path</param>
-        /// <returns>A new ObjectQueryState instance that incorporates the Include path, in this case a new method call expression</returns>
+        /// <returns>A new ObjectQueryState instance that incorporates the Include path, in this case a new
+        // method call expression</returns>
         internal override ObjectQueryState Include<TElementType>(
             ObjectQuery<TElementType> sourceQuery,
             string includePath
@@ -315,7 +329,8 @@ namespace System.Data.Objects.ELinq
         /// <summary>
         /// Gets the LINQ Expression that defines this query for external (of ObjectQueryState) use.
         /// Note that the <see cref="Expression"/> property is used, which is overridden by compiled eLINQ
-        /// queries to produce an Expression tree where parameter references have been replaced with constants.
+        /// queries to produce an Expression tree where parameter references have been replaced with
+        // constants.
         /// </summary>
         /// <param name="expression">The LINQ expression that describes this query</param>
         /// <returns>Always returns <c>true</c></returns>

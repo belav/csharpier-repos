@@ -2,7 +2,8 @@ using System;
 
 namespace System.Net.NetworkInformation
 {
-    /// Provides information about the Transmission Control Protocol (TCP) connections on the local computer.
+    /// Provides information about the Transmission Control Protocol (TCP) connections on the local
+    // computer.
     public abstract class TcpConnectionInformation
     {
         /// Gets the local endpoint of a Transmission Control Protocol (TCP) connection.

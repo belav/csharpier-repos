@@ -20,16 +20,22 @@ public interface IUrlHelper
     /// <summary>
     /// Generates a URL with an absolute path for an action method, which contains the action
     /// name, controller name, route values, protocol to use, host name, and fragment specified by
-    /// <see cref="UrlActionContext"/>. Generates an absolute URL if <see cref="UrlActionContext.Protocol"/> and
-    /// <see cref="UrlActionContext.Host"/> are non-<c>null</c>. See the remarks section for important security information.
+    /// <see cref="UrlActionContext"/>. Generates an absolute URL if <see
+    // cref="UrlActionContext.Protocol"/> and
+    /// <see cref="UrlActionContext.Host"/> are non-<c>null</c>. See the remarks section for important
+    // security information.
     /// </summary>
-    /// <param name="actionContext">The context object for the generated URLs for an action method.</param>
+    /// <param name="actionContext">The context object for the generated URLs for an action
+    // method.</param>
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <see cref="UrlActionContext.Host" /> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <see cref="UrlActionContext.Host" /> should be a trusted value. Relying on the
+    // value of the current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -48,8 +54,10 @@ public interface IUrlHelper
     string? Content(string? contentPath);
 
     /// <summary>
-    /// Returns a value that indicates whether the URL is local. A URL is considered local if it does not have a
-    /// host / authority part and it has an absolute path. URLs using virtual paths ('~/') are also local.
+    /// Returns a value that indicates whether the URL is local. A URL is considered local if it does
+    // not have a
+    /// host / authority part and it has an absolute path. URLs using virtual paths ('~/') are also
+    // local.
     /// </summary>
     /// <param name="url">The URL.</param>
     /// <returns><c>true</c> if the URL is local; otherwise, <c>false</c>.</returns>
@@ -73,18 +81,23 @@ public interface IUrlHelper
     bool IsLocalUrl([NotNullWhen(true)] [StringSyntax(StringSyntaxAttribute.Uri)] string? url);
 
     /// <summary>
-    /// Generates a URL with an absolute path, which contains the route name, route values, protocol to use, host
+    /// Generates a URL with an absolute path, which contains the route name, route values, protocol to
+    // use, host
     /// name, and fragment specified by <see cref="UrlRouteContext"/>. Generates an absolute URL if
-    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are non-<c>null</c>.
+    /// <see cref="UrlActionContext.Protocol"/> and <see cref="UrlActionContext.Host"/> are
+    // non-<c>null</c>.
     /// See the remarks section for important security information.
     /// </summary>
     /// <param name="routeContext">The context object for the generated URLs for a route.</param>
     /// <returns>The generated URL.</returns>
     /// <remarks>
     /// <para>
-    /// The value of <see cref="UrlRouteContext.Host" /> should be a trusted value. Relying on the value of the current request
-    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been validated.
-    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c> header in
+    /// The value of <see cref="UrlRouteContext.Host" /> should be a trusted value. Relying on the value
+    // of the current request
+    /// can allow untrusted input to influence the resulting URI unless the <c>Host</c> header has been
+    // validated.
+    /// See the deployment documentation for instructions on how to properly validate the <c>Host</c>
+    // header in
     /// your deployment environment.
     /// </para>
     /// </remarks>
@@ -92,7 +105,8 @@ public interface IUrlHelper
 
     /// <summary>
     /// Generates an absolute URL for the specified <paramref name="routeName"/> and route
-    /// <paramref name="values"/>, which contains the protocol (such as "http" or "https") and host name from the
+    /// <paramref name="values"/>, which contains the protocol (such as "http" or "https") and host name
+    // from the
     /// current request. See the remarks section for important security information.
     /// </summary>
     /// <param name="routeName">The name of the route that is used to generate URL.</param>
@@ -100,9 +114,12 @@ public interface IUrlHelper
     /// <returns>The generated absolute URL.</returns>
     /// <remarks>
     /// <para>
-    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the generated URI.
-    /// Relying on the value of the current request can allow untrusted input to influence the resulting URI unless
-    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on how to properly
+    /// This method uses the value of <see cref="HttpRequest.Host"/> to populate the host section of the
+    // generated URI.
+    /// Relying on the value of the current request can allow untrusted input to influence the resulting
+    // URI unless
+    /// the <c>Host</c> header has been validated. See the deployment documentation for instructions on
+    // how to properly
     /// validate the <c>Host</c> header in your deployment environment.
     /// </para>
     /// </remarks>

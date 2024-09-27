@@ -404,7 +404,8 @@ namespace Activator
                 ValidateAssemblyIsolation(builtInComDisabled, useIsolatedContext: true);
                 if (!builtInComDisabled)
                 {
-                    // We don't test this scenario with builtInComDisabled since it is covered by ValidateAssemblyIsolation() above
+                    // We don't test this scenario with builtInComDisabled since it is covered by
+                    // ValidateAssemblyIsolation() above
                     ValidateAssemblyIsolation(builtInComDisabled, useIsolatedContext: false);
                     ValidateUserDefinedRegistrationCallbacks();
                 }

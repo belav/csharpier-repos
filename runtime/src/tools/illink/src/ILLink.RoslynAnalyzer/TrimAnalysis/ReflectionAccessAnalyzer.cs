@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -39,14 +40,15 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                     case IPropertySymbol property:
                         GetReflectionAccessDiagnosticsForProperty(diagnosticContext, property);
                         break;
-                    /* Skip Type and InterfaceImplementation marking since doesnt seem relevant for diagnostic generation
-                    case ITypeSymbol nestedType:
-                        MarkType (diagnosticContext, nestedType);
-                        break;
-                    case InterfaceImplementation interfaceImplementation:
-                        MarkInterfaceImplementation (analysisContext, interfaceImplementation, dependencyKind);
-                        break;
-                    */
+/* Skip Type and InterfaceImplementation marking since doesnt seem relevant for diagnostic
+generation
+case ITypeSymbol nestedType:
+MarkType (diagnosticContext, nestedType);
+break;
+case InterfaceImplementation interfaceImplementation:
+MarkInterfaceImplementation (analysisContext, interfaceImplementation, dependencyKind);
+break;
+*/
                     case IEventSymbol @event:
                         GetDiagnosticsForEvent(diagnosticContext, @event);
                         break;

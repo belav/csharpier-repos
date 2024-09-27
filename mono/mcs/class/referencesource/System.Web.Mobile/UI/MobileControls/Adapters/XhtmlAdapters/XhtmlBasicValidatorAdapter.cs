@@ -17,7 +17,8 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-    /// <include file='doc\XhtmlBasicValidatorAdapter.uex' path='docs/doc[@for="XhtmlValidatorAdapter"]/*' />
+    /// <include file='doc\XhtmlBasicValidatorAdapter.uex'
+    // path='docs/doc[@for="XhtmlValidatorAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -31,13 +32,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlValidatorAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicValidatorAdapter.uex' path='docs/doc[@for="XhtmlValidatorAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicValidatorAdapter.uex'
+        // path='docs/doc[@for="XhtmlValidatorAdapter.Control"]/*' />
         protected new BaseValidator Control
         {
             get { return base.Control as BaseValidator; }
         }
 
-        /// <include file='doc\XhtmlBasicValidatorAdapter.uex' path='docs/doc[@for="XhtmlValidatorAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicValidatorAdapter.uex'
+        // path='docs/doc[@for="XhtmlValidatorAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             if (!Control.IsValid && Control.Display != WebControls.ValidatorDisplay.None)

@@ -22,6 +22,7 @@ namespace System.Web.Mvc.ExpressionUtil
             TypeOperand = typeOperand;
         }
 
+        //
         // http://msdn.microsoft.com/en-us/library/system.linq.expressions.typebinaryexpression.typeoperand.aspx
         public Type TypeOperand { get; private set; }
 

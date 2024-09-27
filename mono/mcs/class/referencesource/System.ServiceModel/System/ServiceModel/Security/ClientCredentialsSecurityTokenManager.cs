@@ -1264,7 +1264,8 @@ namespace System.ServiceModel
         }
 
         /// <summary>
-        /// Looks for the first FederatedClientCredentialsParameters object in the ChannelParameterCollection
+        /// Looks for the first FederatedClientCredentialsParameters object in the
+        // ChannelParameterCollection
         /// property on the tokenRequirement.
         /// </summary>
         internal FederatedClientCredentialsParameters FindFederatedChannelParameters(

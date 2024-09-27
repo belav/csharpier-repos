@@ -29,7 +29,8 @@ namespace System.Security.AccessControl
             var customObjectSecurity = new CustomDirectoryObjectSecurity();
 
             // DACL:SDDL_PROTECTED SDDL_AUTO_INHERITED
-            //  (SDDL_ACCESS_ALLOWED;SDDL_OBJECT_INHERIT SDDL_CONTAINER_INHERIT;access mask;;;SDDL_BUILTIN_USERS)
+            //  (SDDL_ACCESS_ALLOWED;SDDL_OBJECT_INHERIT SDDL_CONTAINER_INHERIT;access
+            // mask;;;SDDL_BUILTIN_USERS)
             customObjectSecurity.SetSecurityDescriptorSddlForm("D:PAI(A;OICI;0x1200a9;;;BU)");
             var rules = customObjectSecurity.GetAccessRules(true, true, typeof(SecurityIdentifier));
 

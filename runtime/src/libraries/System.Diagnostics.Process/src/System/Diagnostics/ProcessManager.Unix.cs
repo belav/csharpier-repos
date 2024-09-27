@@ -10,7 +10,8 @@ namespace System.Diagnostics
 {
     internal static partial class ProcessManager
     {
-        /// <summary>Gets whether the process with the specified ID on the specified machine is currently running.</summary>
+        /// <summary>Gets whether the process with the specified ID on the specified machine is currently
+        // running.</summary>
         /// <param name="processId">The process ID.</param>
         /// <param name="machineName">The machine name.</param>
         /// <returns>true if the process is running; otherwise, false.</returns>

@@ -7,7 +7,8 @@ namespace Microsoft.CommonLanguageServerProtocol.Framework;
 public interface IInitializeManager<TRequest, TResponse>
 {
     /// <summary>
-    /// Gets a response to be used for "initialize", completing the negoticaitons between client and server.
+    /// Gets a response to be used for "initialize", completing the negoticaitons between client and
+    // server.
     /// </summary>
     /// <returns>An InitializeResult.</returns>
     TResponse GetInitializeResult();

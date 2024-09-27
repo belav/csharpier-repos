@@ -83,7 +83,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             encoder.EmitLEAQ(
                                 encoder.TargetRegister.Arg0,
                                 factory.TypeNonGCStaticsSymbol(target),
@@ -238,7 +239,8 @@ namespace ILCompiler.DependencyAnalysis
                         }
                         else
                         {
-                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the non-GC statics region.
+                            // We need to trigger the cctor before returning the base. It is stored at the beginning of the
+                            // non-GC statics region.
                             encoder.EmitLEAQ(
                                 encoder.TargetRegister.Arg0,
                                 factory.TypeNonGCStaticsSymbol(target),
@@ -380,14 +382,16 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         // emits code that results in ThreadStaticBase referenced in RAX.
-        // may trash volatile registers. (there are calls to the slow helper and possibly to platform's TLS support)
+        // may trash volatile registers. (there are calls to the slow helper and possibly to platform's TLS
+        // support)
         private static void EmitInlineTLSAccess(NodeFactory factory, ref X64Emitter encoder)
         {
             ISymbolNode getInlinedThreadStaticBaseSlow = factory.HelperEntrypoint(
                 HelperEntrypoint.GetInlinedThreadStaticBaseSlow
             );
             ISymbolNode tlsRoot = factory.TlsRoot;
-            // IsSingleFileCompilation is not enough to guarantee that we can use "Initial Executable" optimizations.
+            // IsSingleFileCompilation is not enough to guarantee that we can use "Initial Executable"
+            // optimizations.
             // we need a special compiler flag analogous to /GA. Just assume "false" for now.
             // bool isInitialExecutable = factory.CompilationModuleGroup.IsSingleFileCompilation;
             bool isInitialExecutable = false;

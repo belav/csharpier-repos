@@ -12,7 +12,8 @@ namespace System.Web.UI.WebControls
     using System.Drawing.Design;
 
     /// <devdoc>
-    /// <para>Specifies the <see cref='System.Web.UI.WebControls.GridView'/> pager setting for the control. This class cannot be inherited.</para>
+    /// <para>Specifies the <see cref='System.Web.UI.WebControls.GridView'/> pager setting for the
+    // control. This class cannot be inherited.</para>
     /// </devdoc>
     [TypeConverter(typeof(ExpandableObjectConverter))]
     public sealed class PagerSettings : IStateManager
@@ -480,7 +481,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The propertyGrid uses ToString() to determine what text should be in the PagerSetting's edit box.
+        /// The propertyGrid uses ToString() to determine what text should be in the PagerSetting's edit
+        // box.
         /// </devdoc>
         public override string ToString()
         {

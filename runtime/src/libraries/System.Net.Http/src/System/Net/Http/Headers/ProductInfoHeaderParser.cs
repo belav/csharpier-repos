@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Net.Http.Headers
 {
-    // Don't derive from BaseHeaderParser since empty values are not supported. After a ' ' separator a valid value
+    // Don't derive from BaseHeaderParser since empty values are not supported. After a ' ' separator a
+    // valid value
     // must follow. Also leading separators are not allowed.
     internal sealed class ProductInfoHeaderParser : HttpHeaderParser
     {
@@ -57,11 +58,13 @@ namespace System.Net.Http.Headers
             // GetProductInfoLength() already skipped trailing whitespace. No need to do it here again.
             current += length;
 
-            // If we have more values, make sure we saw a whitespace before. Values like "product/1.0(comment)" are
+            // If we have more values, make sure we saw a whitespace before. Values like "product/1.0(comment)"
+            // are
             // invalid since there must be a whitespace between the product and the comment value.
             if (current < value.Length)
             {
-                // Note that for \r\n to be a valid whitespace, it must be followed by a space/tab. I.e. it's enough if
+                // Note that for \r\n to be a valid whitespace, it must be followed by a space/tab. I.e. it's enough
+                // if
                 // we check whether the char before the next value is space/tab.
                 char lastSeparatorChar = value[current - 1];
                 if ((lastSeparatorChar != ' ') && (lastSeparatorChar != '\t'))
@@ -70,7 +73,8 @@ namespace System.Net.Http.Headers
                 }
             }
 
-            // Separators for "User-Agent" and "Server" headers are whitespace. This is different from most other headers
+            // Separators for "User-Agent" and "Server" headers are whitespace. This is different from most
+            // other headers
             // where comma/semicolon is used as separator.
             index = current;
             parsedValue = result!;

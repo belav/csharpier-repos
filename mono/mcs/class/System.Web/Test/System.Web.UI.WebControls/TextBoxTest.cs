@@ -152,8 +152,8 @@ namespace MonoTests.System.Web.UI.WebControls
         [Test]
         public void ValidationRender()
         {
-            /* test to show that the validation settings
-             * have no effect on downlevel rendering */
+/* test to show that the validation settings
+* have no effect on downlevel rendering */
             Poker t = new Poker();
 
             t.TrackState();

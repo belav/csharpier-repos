@@ -10,10 +10,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     <para>
 ///         This interface is used during model creation and allows the metadata to be modified.
-///         Once the model is built, <see cref="ISkipNavigation" /> represents a read-only view of the same metadata.
+///         Once the model is built, <see cref="ISkipNavigation" /> represents a read-only view of
+// the same metadata.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public interface IConventionSkipNavigation : IReadOnlySkipNavigation, IConventionNavigationBase
@@ -21,7 +23,8 @@ public interface IConventionSkipNavigation : IReadOnlySkipNavigation, IConventio
     /// <summary>
     ///     Gets the builder that can be used to configure this property.
     /// </summary>
-    /// <exception cref="InvalidOperationException">If the skip navigation has been removed from the model.</exception>
+    /// <exception cref="InvalidOperationException">If the skip navigation has been removed from the
+    // model.</exception>
     new IConventionSkipNavigationBuilder Builder { get; }
 
     /// <summary>
@@ -64,9 +67,11 @@ public interface IConventionSkipNavigation : IReadOnlySkipNavigation, IConventio
     ///     Sets the foreign key.
     /// </summary>
     /// <param name="foreignKey">
-    ///     The foreign key. Passing <see langword="null" /> will result in there being no foreign key associated.
+    ///     The foreign key. Passing <see langword="null" /> will result in there being no foreign key
+    // associated.
     /// </param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The new foreign key.</returns>
     IConventionForeignKey? SetForeignKey(
         IConventionForeignKey? foreignKey,
@@ -92,9 +97,11 @@ public interface IConventionSkipNavigation : IReadOnlySkipNavigation, IConventio
     ///     Sets the inverse skip navigation.
     /// </summary>
     /// <param name="inverse">
-    ///     The inverse skip navigation. Passing <see langword="null" /> will result in there being no inverse navigation property defined.
+    ///     The inverse skip navigation. Passing <see langword="null" /> will result in there being no
+    // inverse navigation property defined.
     /// </param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     [DebuggerStepThrough]
     IConventionSkipNavigation? SetInverse(
         IConventionSkipNavigation? inverse,

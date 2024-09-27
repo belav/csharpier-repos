@@ -305,9 +305,9 @@ namespace Mono.Debugger.Soft
             return EndListen(BeginListen(dbg_ep, con_ep, null));
         }
 
-        /*
-         * Connect to a virtual machine listening at the specified address.
-         */
+/*
+* Connect to a virtual machine listening at the specified address.
+*/
         public static VirtualMachine Connect(IPEndPoint endpoint)
         {
             return Connect(endpoint, null);

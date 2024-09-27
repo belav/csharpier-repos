@@ -331,7 +331,8 @@ namespace System.Data.Common
                 await connection!.DisposeAsync().ConfigureAwait(false);
             }
 
-            // In most case, preparation doesn't make sense on a connectionless command since prepared statements are
+            // In most case, preparation doesn't make sense on a connectionless command since prepared
+            // statements are
             // usually bound to specific physical connections.
             // When prepared statements are global (not bound to a specific connection), providers would need to
             // provide their own connection-less implementation anyway (i.e. interacting with the originating
@@ -342,7 +343,8 @@ namespace System.Data.Common
             public override Task PrepareAsync(CancellationToken cancellationToken = default) =>
                 Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
 
-            // The below are incompatible with commands executed directly against DbDataSource, since no DbConnection
+            // The below are incompatible with commands executed directly against DbDataSource, since no
+            // DbConnection
             // is involved at the user API level and the DbCommandWrapper owns the DbConnection.
             protected override DbConnection? DbConnection
             {
@@ -570,7 +572,8 @@ namespace System.Data.Common
                 await connection!.DisposeAsync().ConfigureAwait(false);
             }
 
-            // In most case, preparation doesn't make sense on a connectionless command since prepared statements are
+            // In most case, preparation doesn't make sense on a connectionless command since prepared
+            // statements are
             // usually bound to specific physical connections.
             // When prepared statements are global (not bound to a specific connection), providers would need to
             // provide their own connection-less implementation anyway (i.e. interacting with the originating
@@ -581,7 +584,8 @@ namespace System.Data.Common
             public override Task PrepareAsync(CancellationToken cancellationToken = default) =>
                 Task.FromException(ExceptionBuilder.NotSupportedOnDataSourceCommand());
 
-            // The below are incompatible with batches executed directly against DbDataSource, since no DbConnection
+            // The below are incompatible with batches executed directly against DbDataSource, since no
+            // DbConnection
             // is involved at the user API level and the DbBatchWrapper owns the DbConnection.
             protected override DbConnection? DbConnection
             {

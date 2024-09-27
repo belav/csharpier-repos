@@ -182,7 +182,8 @@ namespace System.Runtime.Serialization.Json
                 {
                     // check if the declared type is System.Enum and throw because
                     // __type information cannot be written for enums since it results in invalid JSON.
-                    // Without __type, the resulting JSON cannot be deserialized since a number cannot be directly assigned to System.Enum.
+                    // Without __type, the resulting JSON cannot be deserialized since a number cannot be directly
+                    // assigned to System.Enum.
                     if (declaredContract.UnderlyingType == typeof(Enum))
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(

@@ -25,15 +25,15 @@ namespace System.Web.Configuration
             ConfigurationPropertyOptions.None
         );
 
-        /*
-        <!--
-        deployment Attributes:
-          retail="[true|false]" - turns on retail deployment mode
-        -->
-        <deployment
-            retail="false"
-        />
-        */
+/*
+<!--
+deployment Attributes:
+retail="[true|false]" - turns on retail deployment mode
+-->
+<deployment
+retail="false"
+/>
+*/
         static DeploymentSection()
         {
             // Property initialization

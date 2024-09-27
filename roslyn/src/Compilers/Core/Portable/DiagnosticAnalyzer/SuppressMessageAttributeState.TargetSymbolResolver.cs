@@ -79,10 +79,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
 
             /// <summary>
-            /// Attempts to resolve the "Target" argument of the global SuppressMessageAttribute to symbols in compilation.
+            /// Attempts to resolve the "Target" argument of the global SuppressMessageAttribute to symbols in
+            // compilation.
             /// </summary>
-            /// <param name="resolvedWithDocCommentIdFormat">Indicates if resolved "Target" argument is in Roslyn's <see cref="DocumentationCommentId"/> format.</param>
-            /// <returns>Resolved symbols for the the "Target" argument of the global SuppressMessageAttribute.</returns>
+            /// <param name="resolvedWithDocCommentIdFormat">Indicates if resolved "Target" argument is in
+            // Roslyn's <see cref="DocumentationCommentId"/> format.</param>
+            /// <returns>Resolved symbols for the the "Target" argument of the global
+            // SuppressMessageAttribute.</returns>
             public ImmutableArray<ISymbol> Resolve(out bool resolvedWithDocCommentIdFormat)
             {
                 resolvedWithDocCommentIdFormat = false;
@@ -105,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 var results = ArrayBuilder<ISymbol>.GetInstance();
 
-                // Parse 'e:' prefix used by FxCop to differentiate between event and non-event symbols of the same name.
+                // Parse 'e:' prefix used by FxCop to differentiate between event and non-event symbols of the same
+                // name.
                 bool isEvent = false;
                 if (_name.Length >= 2 && _name[0] == 'e' && _name[1] == ':')
                 {
@@ -120,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     var segment = ParseNextNameSegment();
 
-                    // Special case: Roslyn names indexers "this[]" in CSharp, FxCop names them "Item" with parameters in [] brackets
+                    // Special case: Roslyn names indexers "this[]" in CSharp, FxCop names them "Item" with parameters
+                    // in [] brackets
                     bool isIndexerProperty = false;
                     if (segment == "Item" && PeekNextChar() == '[')
                     {

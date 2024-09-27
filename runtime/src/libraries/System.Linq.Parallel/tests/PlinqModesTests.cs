@@ -176,11 +176,16 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (int dop in dops)
             {
-                // Use data sources that have a fixed set of elements in each partition (no load balancing between the partitions).
-                // PLINQ will assign a Task to each partition, and no other task will process that partition. As a result, we can
-                // verify that we get a known number of tasks doing the processing. (This doesn't guarantee that such tasks are
-                // running in parallel, but it's "good enough".  If PLINQ's implementation is ever changed to proactively exit
-                // tasks and spawn replicas to continue the processing, ala Parallel.For*, this test will need to be updated.)
+                // Use data sources that have a fixed set of elements in each partition (no load balancing between
+                // the partitions).
+                // PLINQ will assign a Task to each partition, and no other task will process that partition. As a
+                // result, we can
+                // verify that we get a known number of tasks doing the processing. (This doesn't guarantee that
+                // such tasks are
+                // running in parallel, but it's "good enough".  If PLINQ's implementation is ever changed to
+                // proactively exit
+                // tasks and spawn replicas to continue the processing, ala Parallel.For*, this test will need to be
+                // updated.)
                 int count = 3 * dop; // 3 chosen arbitrarily as a small value; any positive value will do
                 var partitionedRanges = new Labeled<ParallelQuery<int>>[]
                 {
@@ -193,7 +198,8 @@ namespace System.Linq.Parallel.Tests
                     ),
                 };
 
-                // For each source and mode, get both unordered and ordered queries that should easily parallelize for all execution modes
+                // For each source and mode, get both unordered and ordered queries that should easily parallelize
+                // for all execution modes
                 foreach (
                     ParallelExecutionMode mode in new[]
                     {
@@ -212,7 +218,8 @@ namespace System.Linq.Parallel.Tests
                     }
                 }
 
-                // For each source, get queries that are difficult to parallelize and thus only do so with ForceParallelism.
+                // For each source, get queries that are difficult to parallelize and thus only do so with
+                // ForceParallelism.
                 foreach (Labeled<ParallelQuery<int>> source in partitionedRanges)
                 {
                     foreach (var query in HardQueries(count))

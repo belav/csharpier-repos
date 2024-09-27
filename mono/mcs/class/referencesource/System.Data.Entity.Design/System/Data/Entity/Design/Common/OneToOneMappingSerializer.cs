@@ -140,11 +140,13 @@ namespace System.Data.Entity.Design.Common
                 // |      |       |      |
                 // --------       --------
                 //
-                // Notice that the of the new "link table association" muliplicities are opposite of what comming into the original link table
+                // Notice that the of the new "link table association" muliplicities are opposite of what comming
+                // into the original link table
                 // this seems counter intuitive at first, but makes sense when you think all the way through it
                 //
                 // CascadeDelete Behavior (we can assume the runtime will always delete cascade
-                //                         to the link table from the outside tables (it actually doesn't, but that is a bug))
+                //                         to the link table from the outside tables (it actually doesn't, but that
+                // is a bug))
                 //  Store               Effective
                 //  A -> AToB <- B      None
                 //  A <- AToB <- B      <-

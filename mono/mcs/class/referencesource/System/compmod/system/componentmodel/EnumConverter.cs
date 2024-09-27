@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Collections;
@@ -30,7 +30,8 @@ namespace System.ComponentModel
     {
         /// <devdoc>
         ///    <para>
-        ///       Provides a <see cref='System.ComponentModel.TypeConverter.StandardValuesCollection'/> that specifies the
+        ///       Provides a <see cref='System.ComponentModel.TypeConverter.StandardValuesCollection'/> that
+        // specifies the
         ///       possible values for the enumeration.
         ///    </para>
         /// </devdoc>
@@ -48,7 +49,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.EnumConverter'/> class for the given
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.EnumConverter'/> class
+        // for the given
         ///       type.
         ///    </para>
         /// </devdoc>

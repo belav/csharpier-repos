@@ -20,18 +20,25 @@ namespace System.Reflection.TypeLoading
 
             if (toTypeInfo.IsGenericTypeDefinition)
             {
-                // Asking whether something can cast to a generic type definition is arguably meaningless. The .NET Framework CLR Reflection layer converts all
-                // generic type definitions to generic type instantiations closed over the formal generic type parameters. The .NET Native framework
-                // keeps the two separate. Fortunately, under either interpretation, returning "false" unless the two types are identical is still a
-                // defensible behavior. To avoid having the rest of the code deal with the differing interpretations, we'll short-circuit this now.
+                // Asking whether something can cast to a generic type definition is arguably meaningless. The .NET
+                // Framework CLR Reflection layer converts all
+                // generic type definitions to generic type instantiations closed over the formal generic type
+                // parameters. The .NET Native framework
+                // keeps the two separate. Fortunately, under either interpretation, returning "false" unless the
+                // two types are identical is still a
+                // defensible behavior. To avoid having the rest of the code deal with the differing
+                // interpretations, we'll short-circuit this now.
                 return false;
             }
 
             if (fromTypeInfo.IsGenericTypeDefinition)
             {
-                // The .NET Framework CLR Reflection layer converts all generic type definitions to generic type instantiations closed over the formal
-                // generic type parameters. The .NET Native framework keeps the two separate. For the purpose of IsAssignableFrom(),
-                // it makes sense to unify the two for the sake of backward compat. We'll just make the transform here so that the rest of code
+                // The .NET Framework CLR Reflection layer converts all generic type definitions to generic type
+                // instantiations closed over the formal
+                // generic type parameters. The .NET Native framework keeps the two separate. For the purpose of
+                // IsAssignableFrom(),
+                // it makes sense to unify the two for the sake of backward compat. We'll just make the transform
+                // here so that the rest of code
                 // doesn't need to know about this quirk.
                 fromTypeInfo = fromTypeInfo
                     .GetGenericTypeDefinition()
@@ -41,7 +48,8 @@ namespace System.Reflection.TypeLoading
             if (fromTypeInfo.CanCastTo(toTypeInfo, coreTypes))
                 return true;
 
-            // .NET Framework compat: IsAssignableFrom() considers T as assignable to Nullable<T> (but does not check if T is a generic parameter.)
+            // .NET Framework compat: IsAssignableFrom() considers T as assignable to Nullable<T> (but does not
+            // check if T is a generic parameter.)
             if (!fromTypeInfo.IsGenericParameter)
             {
                 if (
@@ -131,10 +139,12 @@ namespace System.Reflection.TypeLoading
             if (fromTypeInfo.IsGenericParameter)
             {
                 //
-                // A generic parameter can be cast to any of its constraints, or object, if none are specified, or ValueType if the "struct" constraint is
+                // A generic parameter can be cast to any of its constraints, or object, if none are specified, or
+                // ValueType if the "struct" constraint is
                 // specified.
                 //
-                // This has to be coded as its own case as TypeInfo.BaseType on a generic parameter doesn't always return what you'd expect.
+                // This has to be coded as its own case as TypeInfo.BaseType on a generic parameter doesn't always
+                // return what you'd expect.
                 //
                 if (toTypeInfo.Equals(coreTypes[CoreType.Object]))
                     return true;
@@ -180,7 +190,8 @@ namespace System.Reflection.TypeLoading
             }
             else
             {
-                // Interfaces are always castable to System.Object. The code below will not catch this as interfaces report their BaseType as null.
+                // Interfaces are always castable to System.Object. The code below will not catch this as interfaces
+                // report their BaseType as null.
                 if (toTypeInfo.Equals(coreTypes[CoreType.Object]) && fromTypeInfo.IsInterface)
                     return true;
 
@@ -198,7 +209,8 @@ namespace System.Reflection.TypeLoading
         }
 
         //
-        // Check a base type or implemented interface type for equivalence (taking into account variance for generic instantiations.)
+        // Check a base type or implemented interface type for equivalence (taking into account variance for
+        // generic instantiations.)
         // Does not check ancestors recursively.
         //
         private static bool MatchesWithVariance(
@@ -288,8 +300,10 @@ namespace System.Reflection.TypeLoading
         //
         //    A can cast to B under variance rules.
         //
-        //    A and B are both integers or enums and have the same reduced type (i.e. represent the same-sized integer, ignoring signed/unsigned differences.)
-        //        "char" is not interchangeable with short/ushort. "bool" is not interchangeable with byte/sbyte.
+        //    A and B are both integers or enums and have the same reduced type (i.e. represent the
+        // same-sized integer, ignoring signed/unsigned differences.)
+        //        "char" is not interchangeable with short/ushort. "bool" is not interchangeable with
+        // byte/sbyte.
         //
         // For .NET Framework compat, A& and A* follow the same rules.
         //
@@ -337,7 +351,8 @@ namespace System.Reflection.TypeLoading
         //
         // Contra/CoVariance.
         //
-        // IEnumerable<D> can cast to IEnumerable<B> if D can cast to B and if there's no possibility that D is a value type.
+        // IEnumerable<D> can cast to IEnumerable<B> if D can cast to B and if there's no possibility that D
+        // is a value type.
         //
         private static bool IsGcReferenceTypeAndCastableTo(
             this Type fromTypeInfo,
@@ -355,7 +370,8 @@ namespace System.Reflection.TypeLoading
         }
 
         //
-        // A true result indicates that a type can never be a value type. This is important when testing variance-compatibility.
+        // A true result indicates that a type can never be a value type. This is important when testing
+        // variance-compatibility.
         //
         private static bool ProvablyAGcReferenceType(this Type t, CoreTypes coreTypes)
         {

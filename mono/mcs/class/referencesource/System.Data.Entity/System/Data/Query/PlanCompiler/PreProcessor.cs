@@ -7,18 +7,23 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
+//using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this
+// class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
 // to prevent from simple mistakes during development (e.g. method argument validation
-// in cases where it was you who created the variables or the variables had already been validated or
+// in cases where it was you who created the variables or the variables had already been validated
+// or
 // in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts
+// are
 // (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
 // the shipped product.
 // PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
-// about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
+// about how the tree was built etc. - in these cases we probably want to throw an exception (this
+// is
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not
+// correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -118,7 +123,8 @@ namespace System.Data.Query.PlanCompiler
         #region private state
         /// <summary>
         /// Tracks affinity of entity constructors to entity sets (aka scoped entity type constructors).
-        /// Scan view ops and entityset-bound tvfs push corresponding entity sets so that their child nodes representing entity constructors could
+        /// Scan view ops and entityset-bound tvfs push corresponding entity sets so that their child nodes
+        // representing entity constructors could
         /// determine the entity set to which the constructed entity belongs.
         /// </summary>
         private readonly Stack<EntitySet> m_entityTypeScopes = new Stack<EntitySet>();
@@ -284,7 +290,8 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Find all entitysets (that are reachable in the current query) that can hold instances that
         /// are *at least* of type "entityType".
-        /// An entityset ES of type T1 can hold instances that are at least of type T2, if one of the following
+        /// An entityset ES of type T1 can hold instances that are at least of type T2, if one of the
+        // following
         /// is true
         ///   - T1 is a subtype of T2
         ///   - T2 is a subtype of T1
@@ -361,7 +368,8 @@ namespace System.Data.Query.PlanCompiler
             //
             // Call the GetGeneratedView method to retrieve the query mapping view for the extent referenced
             // by the ScanTableOp. The actual method used to do this differs depending on whether the default
-            // Query Mapping View is sufficient or a targeted view that only filters by element type is required.
+            // Query Mapping View is sufficient or a targeted view that only filters by element type is
+            // required.
             //
             System.Data.Mapping.ViewGeneration.GeneratedView definingQuery = null;
             EntityTypeBase requiredType = scanTableOp.Table.TableMetadata.Extent.ElementType;
@@ -373,7 +381,8 @@ namespace System.Data.Query.PlanCompiler
                 // an optimized expansion of the view based on type-specific views generated for the
                 // C-Space entity set.
                 // The type for which the view should be tuned is the 'OfType' specified on the type filter.
-                // If the type filter is an 'IsOfOnly' filter then the view should NOT include subtypes of the required type.
+                // If the type filter is an 'IsOfOnly' filter then the view should NOT include subtypes of the
+                // required type.
                 //
                 requiredType = (EntityTypeBase)typeFilter.IsOfType.EdmType;
                 includeSubtypes = !typeFilter.IsOfOnly;
@@ -401,7 +410,8 @@ namespace System.Data.Query.PlanCompiler
             // - A type filter was specified but no type-specific view exists that satisfies its constraints.
             //   OR
             // - No type filter was specified.
-            // In either case the default query mapping view for the referenced entity set should now be retrieved.
+            // In either case the default query mapping view for the referenced entity set should now be
+            // retrieved.
             //
             if (null == definingQuery)
             {
@@ -512,7 +522,8 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <param name="navigateOpNode">the navigateOp tree</param>
         /// <param name="navigateOp">the navigateOp</param>
-        /// <param name="outputVar">the output var produced by the subquery (ONLY if the to-End is single-valued)</param>
+        /// <param name="outputVar">the output var produced by the subquery (ONLY if the to-End is
+        // single-valued)</param>
         /// <returns>the resulting node</returns>
         private Node RewriteNavigateOp(
             Node navigateOpNode,
@@ -685,7 +696,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Produces a relop tree that "logically" produces the target of the derefop. In essence, this gets rewritten
+        /// Produces a relop tree that "logically" produces the target of the derefop. In essence, this gets
+        // rewritten
         /// into
         ///      SELECT VALUE e
         ///      FROM (SELECT VALUE e0 FROM OFTYPE(ES0, T) as e0
@@ -697,13 +709,16 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// "T" is the target type of the Deref, and myRef is the (single) argument to the DerefOp
         ///
-        /// ES0, ES1 etc. are all the EntitySets that could hold instances that are at least of type "T". We identify this list of sets
-        /// by looking at all entitycontainers referenced in the query, and looking at all entitysets in those
+        /// ES0, ES1 etc. are all the EntitySets that could hold instances that are at least of type "T". We
+        // identify this list of sets
+        /// by looking at all entitycontainers referenced in the query, and looking at all entitysets in
+        // those
         /// containers that are of the right type
         /// An EntitySet ES (of entity type X) can hold instances of T, if one of the following is true
         ///   - T is a subtype of X
         ///   - X is equal to T
-        /// Our situation is a little trickier, since we also need to look for cases where X is a subtype of T.
+        /// Our situation is a little trickier, since we also need to look for cases where X is a subtype of
+        // T.
         /// </summary>
         /// <param name="derefOpNode">the derefOp subtree</param>
         /// <param name="derefOp">the derefOp</param>
@@ -801,7 +816,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Builds up a join between the relationshipset and the entityset corresponding to its toEnd. In essence,
+        /// Builds up a join between the relationshipset and the entityset corresponding to its toEnd. In
+        // essence,
         /// we produce
         ///    SELECT r, e
         ///    FROM RS as r, OFTYPE(ES, T) as e
@@ -811,8 +827,10 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <param name="relSet">the relationshipset</param>
         /// <param name="end">the toEnd of the relationship</param>
-        /// <param name="rsVar">the var representing the relationship instance ("r") in the output subquery</param>
-        /// <param name="esVar">the var representing the entity instance ("e") in the output subquery</param>
+        /// <param name="rsVar">the var representing the relationship instance ("r") in the output
+        // subquery</param>
+        /// <param name="esVar">the var representing the entity instance ("e") in the output
+        // subquery</param>
         /// <returns>the join subquery described above</returns>
         private Node BuildJoinForNavProperty(
             RelationshipSet relSet,
@@ -864,7 +882,8 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// Note that this translation is also valid for a navigation property when the target
         /// end has multiplicity of one (or zero..one) and the source end has multiplicity of one
-        /// (or zero..one), but a different translation is used because it yields a simpler query in some cases.
+        /// (or zero..one), but a different translation is used because it yields a simpler query in some
+        // cases.
         ///
         /// We simply pick up the corresponding rel property from the input entity, and
         /// apply a deref operation
@@ -915,7 +934,8 @@ namespace System.Data.Query.PlanCompiler
                 out outputVar
             );
 
-            // The return value is a collection, but used as a property, thus it needs to be capped with a collect
+            // The return value is a collection, but used as a property, thus it needs to be capped with a
+            // collect
             ret = m_command.BuildCollect(ret, outputVar);
 
             return ret;
@@ -1056,9 +1076,11 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// We essentially produce the following subquery
         ///   SELECT VALUE x.e
-        ///   FROM (SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd = Ref(e1)
+        ///   FROM (SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd =
+        // Ref(e1)
         ///         UNION ALL
-        ///         SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd = Ref(e1)
+        ///         SELECT r1 as r, e1 as e FROM RS1 as r1 INNER JOIN OFTYPE(ES1, T) as e1 on r1.ToEnd =
+        // Ref(e1)
         ///         ...
         ///         ) as x
         ///   WHERE x.r.FromEnd = sourceRef
@@ -1270,14 +1292,16 @@ namespace System.Data.Query.PlanCompiler
         /// Rewrite a DerefOp subtree. We have two cases to consider here.
         /// We call RewriteDerefOp to return a subtree (and an optional outputVar).
         /// If the outputVar is null, then we simply return the subtree produced by those calls.
-        /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the outputVar
+        /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the
+        // outputVar
         /// in its place.
         ///
         /// As an example,
         ///    select deref(e) from T
         /// gets rewritten into
         ///    select v from T OuterApply X
-        /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by X
+        /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by
+        // X
         ///
         /// </summary>
         /// <param name="op">the derefOp</param>
@@ -1337,7 +1361,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Visit a function call expression. If function is mapped, expand and visit the mapping expression.
+        /// Visit a function call expression. If function is mapped, expand and visit the mapping
+        // expression.
         /// If this is TVF or a collection aggregate function, NestPullUp and Normalization are needed.
         /// </summary>
         /// <param name="op"></param>
@@ -1375,10 +1400,13 @@ namespace System.Data.Query.PlanCompiler
 
                 // Visit children (function call arguments) before processing the function view.
                 // Visiting argument trees before the view tree is required because we want to process them first
-                // outside of the context of the view. For example if an argument tree contains a free-floating entity-type constructor
+                // outside of the context of the view. For example if an argument tree contains a free-floating
+                // entity-type constructor
                 // and the function mapping scopes the function results to a particular entity set, we don't want
-                // the free-floating constructor to be auto-scoped to this set. So we process the argument first, it will
-                // scope the constructor to the null scope and which guarantees that this constructor will not be rescoped after the argument
+                // the free-floating constructor to be auto-scoped to this set. So we process the argument first, it
+                // will
+                // scope the constructor to the null scope and which guarantees that this constructor will not be
+                // rescoped after the argument
                 // tree is embedded into the function view inside the functionMapping.GetInternalTree(...) call.
                 VisitChildren(n);
 
@@ -1547,9 +1575,12 @@ namespace System.Data.Query.PlanCompiler
 
             //
             // In this special case we visit the parent before the child to avoid TSQL regressions.
-            // In particular, a subquery coming out of the child would need to be attached to the closest rel-op parent
-            // and if the parent is already visited that rel op parent would be part of the subtree resulting from the parent.
-            // If the parent is not visited it would be a rel op parent higher in the tree (also valid), and leaves less room
+            // In particular, a subquery coming out of the child would need to be attached to the closest rel-op
+            // parent
+            // and if the parent is already visited that rel op parent would be part of the subtree resulting
+            // from the parent.
+            // If the parent is not visited it would be a rel op parent higher in the tree (also valid), and
+            // leaves less room
             // for join elimination.
             // The original out-of-order visitation was put in place to work around a bug that has been fixed.
             //
@@ -1593,7 +1624,8 @@ namespace System.Data.Query.PlanCompiler
         /// Rewrite a PropertyOp subtree.
         ///
         /// If the PropertyOp represents a simple property (ie) not a navigation property, we simply call
-        /// VisitScalarOpDefault() and return. Otherwise, we call VisitNavPropertyOp and return the result from
+        /// VisitScalarOpDefault() and return. Otherwise, we call VisitNavPropertyOp and return the result
+        // from
         /// that function
         ///
         /// </summary>
@@ -1673,7 +1705,8 @@ namespace System.Data.Query.PlanCompiler
                 n = RewriteIsOfAsIsNull(op, n);
             }
 
-            // For IsOfOnly(abstract type), suppress DiscriminatorMaps since no explicit type id is available for
+            // For IsOfOnly(abstract type), suppress DiscriminatorMaps since no explicit type id is available
+            // for
             // abstract types.
             if (op.IsOfOnly && op.IsOfType.EdmType.Abstract)
             {
@@ -1778,14 +1811,16 @@ namespace System.Data.Query.PlanCompiler
         /// Rewrite a NavigateOp subtree.
         /// We call RewriteNavigateOp to return a subtree (and an optional outputVar).
         /// If the outputVar is null, then we simply return the subtree produced by those calls.
-        /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the outputVar
+        /// Otherwise, we add the subtree to the "parent" relop (to be outer-applied), and then use the
+        // outputVar
         /// in its place.
         ///
         /// As an example,
         ///    select navigate(e) from T
         /// gets rewritten into
         ///    select v from T OuterApply X
-        /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by X
+        /// where X is the subtree returned from the RewriteXXX calls, and "v" is the output var produced by
+        // X
         ///
         /// </summary>
         /// <param name="op">the navigateOp</param>
@@ -1932,7 +1967,8 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// If no single relationship-set is found, we return a NULL instead.
         /// </summary>
-        /// <param name="entitySet">entity set that logically holds instances of the entity we're building</param>
+        /// <param name="entitySet">entity set that logically holds instances of the entity we're
+        // building</param>
         /// <param name="relProperty">the rel-property we're trying to build up</param>
         /// <param name="keyExpr">the "key" of the entity instance</param>
         /// <returns>the rel-property expression</returns>
@@ -2074,7 +2110,8 @@ namespace System.Data.Query.PlanCompiler
             else
             {
                 //
-                // Note: We don't do the default processing first to avoid adding references to types and entity sets
+                // Note: We don't do the default processing first to avoid adding references to types and entity
+                // sets
                 // that may only be used in pre-built rel property expressions that may not be needed.
                 //
 
@@ -2429,7 +2466,8 @@ namespace System.Data.Query.PlanCompiler
             EntitySet entitySet = op.Table.TableMetadata.Extent as EntitySet;
             if (entitySet != null)
             {
-                // If entitySet is an association set, the appropriate entity set references will be registered inside Visit(RefOp, Node).
+                // If entitySet is an association set, the appropriate entity set references will be registered
+                // inside Visit(RefOp, Node).
                 AddEntitySetReference(entitySet);
             }
 
@@ -2444,7 +2482,8 @@ namespace System.Data.Query.PlanCompiler
         ///
         /// The "ofType" and "includeSubtypes" parameters are optional hints for view expansion, allowing
         /// for more customized (and hopefully, more optimal) views. The wasOfTypeSatisfied out parameter
-        /// tells whether the ofType filter was already handled by the view expansion, or if the caller still
+        /// tells whether the ofType filter was already handled by the view expansion, or if the caller
+        // still
         /// needs to deal with it.
         ///
         /// If the "table" is a C-space entityset, then we produce a ScanViewOp
@@ -2457,7 +2496,8 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="scanTableNode">the scanTable node tree</param>
         /// <param name="scanTableOp">the scanTableOp</param>
         /// <param name="typeFilter">
-        ///     An optional IsOfOp representing a type filter to apply to the scan table; will be set to <c>null</c>
+        ///     An optional IsOfOp representing a type filter to apply to the scan table; will be set to
+        // <c>null</c>
         ///     if the scan target is expanded to a view that renders the type filter superfluous.
         /// </param>
         /// <returns></returns>
@@ -2668,7 +2708,8 @@ namespace System.Data.Query.PlanCompiler
         /// <summary>
         /// Handler for a FilterOp. Usually delegates to VisitRelOpDefault.
         ///
-        /// There's one special case - where we have an ISOF predicate over a ScanTable. In that case, we attempt
+        /// There's one special case - where we have an ISOF predicate over a ScanTable. In that case, we
+        // attempt
         /// to get a more "optimal" view; and return that optimal view
         ///
         /// </summary>

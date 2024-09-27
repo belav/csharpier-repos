@@ -7,11 +7,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that manipulates names of database objects for entity types that share a table to avoid clashes.
+///     A convention that manipulates names of database objects for entity types that share a table
+// to avoid clashes.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public class SqlServerSharedTableConvention : SharedTableConvention
@@ -20,7 +22,8 @@ public class SqlServerSharedTableConvention : SharedTableConvention
     ///     Creates a new instance of <see cref="SqlServerSharedTableConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public SqlServerSharedTableConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

@@ -784,7 +784,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     continue;
                 }
 
-                // verify only "simple" types are used in the Options classes, there can't be any generic collections
+                // verify only "simple" types are used in the Options classes, there can't be any generic
+                // collections
                 // or else NativeAOT would break
                 Assert.True(
                     prop.PropertyType == typeof(string)

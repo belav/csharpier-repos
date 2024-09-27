@@ -4,7 +4,8 @@
 namespace System.Security.Cryptography.Xml
 {
     // <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
-    //     <ec:InclusiveNamespaces PrefixList="dsig soap #default" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+    //     <ec:InclusiveNamespaces PrefixList="dsig soap #default"
+    // xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#"/>
     // </ds:Transform>
 
     public class XmlDsigExcC14NWithCommentsTransform : XmlDsigExcC14NTransform

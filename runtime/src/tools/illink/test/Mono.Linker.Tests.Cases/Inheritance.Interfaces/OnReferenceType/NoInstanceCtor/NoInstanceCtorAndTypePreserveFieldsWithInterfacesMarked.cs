@@ -9,7 +9,8 @@ namespace Mono.Linker.Tests.Cases.Inheritance.Interfaces.OnReferenceType.NoInsta
         "library.dll",
         new[] { "Dependencies/NoInstanceCtorAndAssemblyPreserveAll_Lib.il" }
     )]
-    // Interfaces should be removed because preserve fields would not normally cause an instance ctor to be marked.  This means that no instance ctor
+    // Interfaces should be removed because preserve fields would not normally cause an instance ctor to
+    // be marked.  This means that no instance ctor
     // sweeping logic should kick in and remove interfaces
     [RemovedInterfaceOnTypeInAssembly(
         "library",

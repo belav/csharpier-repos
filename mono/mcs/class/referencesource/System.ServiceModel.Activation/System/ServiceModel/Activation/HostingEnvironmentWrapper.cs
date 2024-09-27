@@ -14,7 +14,8 @@ namespace System.ServiceModel
 
     // wrapper class that helps with partial trust analysis
     // -- HostingEnvironment does a number of Demands and LinkDemands
-    // -- this wrapper encapsulates access into "Safe" and "Unsafe" methods that do the appropriate asserts
+    // -- this wrapper encapsulates access into "Safe" and "Unsafe" methods that do the appropriate
+    // asserts
     // -- it is recommended that ALL HostingEnvironment access go through this class
     // -- "Safe" methods are [SecurityCritical, SecurityTreatAsSafe] or not [SecurityCritical]
     // -- "Unsafe" methods are [SecurityCritical]

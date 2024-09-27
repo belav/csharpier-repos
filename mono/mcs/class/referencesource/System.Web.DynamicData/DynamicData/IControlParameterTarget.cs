@@ -4,7 +4,8 @@ namespace System.Web.DynamicData
 {
     /// <summary>
     /// Interface implemented by controls that can provide data to a DynamicControlParameter's.
-    /// i.e. the control implmenting this interface can be set as the ControlId of the DynamicControlParameter.
+    /// i.e. the control implmenting this interface can be set as the ControlId of the
+    // DynamicControlParameter.
     /// </summary>
     public interface IControlParameterTarget
     {

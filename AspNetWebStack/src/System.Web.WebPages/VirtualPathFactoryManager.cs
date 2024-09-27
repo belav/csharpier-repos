@@ -1,12 +1,14 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
 
 namespace System.Web.WebPages
 {
-    // This class encapsulates the creation of objects from virtual paths.  The creation is either performed via BuildBanager API's, or
+    // This class encapsulates the creation of objects from virtual paths.  The creation is either
+    // performed via BuildBanager API's, or
     // by using explicitly registered factories (which happens through ApplicationPart.Register).
     public class VirtualPathFactoryManager : IVirtualPathFactory
     {

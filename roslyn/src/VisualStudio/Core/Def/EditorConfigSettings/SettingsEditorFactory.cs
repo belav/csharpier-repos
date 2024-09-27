@@ -94,7 +94,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 )
             )
             {
-                // If there are no VB or C# projects loaded in the solution (so an editorconfig file in a C++ project) then we want their
+                // If there are no VB or C# projects loaded in the solution (so an editorconfig file in a C++
+                // project) then we want their
                 // editorfactory to present the file instead of use showing ours
                 return VSConstants.VS_E_UNSUPPORTEDFORMAT;
             }
@@ -107,7 +108,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings
                 )
             )
             {
-                // If the user is simply opening an editorconfig file that does not apply to the current solution we just want to show the text view
+                // If the user is simply opening an editorconfig file that does not apply to the current solution we
+                // just want to show the text view
                 return VSConstants.VS_E_UNSUPPORTEDFORMAT;
             }
 

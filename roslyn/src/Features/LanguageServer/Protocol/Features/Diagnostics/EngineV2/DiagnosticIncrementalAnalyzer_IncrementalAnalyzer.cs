@@ -88,13 +88,17 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     .Contains(document.Id);
 
                 // We split the diagnostic computation for document into following steps:
-                //  1. Try to get cached diagnostics for each analyzer, while computing the set of analyzers that do not have cached diagnostics.
+                //  1. Try to get cached diagnostics for each analyzer, while computing the set of analyzers that do
+                // not have cached diagnostics.
                 //  2. Execute all the non-cached analyzers with a single invocation into CompilationWithAnalyzers.
-                //  3. Fetch computed diagnostics per-analyzer from the above invocation, and cache and raise diagnostic reported events.
-                // In near future, the diagnostic computation invocation into CompilationWithAnalyzers will be moved to OOP.
+                //  3. Fetch computed diagnostics per-analyzer from the above invocation, and cache and raise
+                // diagnostic reported events.
+                // In near future, the diagnostic computation invocation into CompilationWithAnalyzers will be moved
+                // to OOP.
                 // This should help simplify and/or remove the IDE layer diagnostic caching in devenv process.
 
-                // First attempt to fetch diagnostics from the cache, while computing the analyzers that are not cached.
+                // First attempt to fetch diagnostics from the cache, while computing the analyzers that are not
+                // cached.
                 using var _ = ArrayBuilder<(
                     DiagnosticAnalyzer analyzer,
                     ActiveFileState state
@@ -132,10 +136,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 }
 
                 // Send events for cached analyzers as a batch. The preceding loop is expected to quickly aggregate
-                // results from cached analyzers, since it will not wait for analyzers that are not already complete.
+                // results from cached analyzers, since it will not wait for analyzers that are not already
+                // complete.
                 AnalyzerService.RaiseDiagnosticsUpdated(argsBuilder.ToImmutableAndClear());
 
-                // Then, compute the diagnostics for non-cached state sets, and cache and raise diagnostic reported events for these diagnostics.
+                // Then, compute the diagnostics for non-cached state sets, and cache and raise diagnostic reported
+                // events for these diagnostics.
                 if (nonCachedAnalyzersAndStates.Count > 0)
                 {
                     var analysisScope = new DocumentAnalysisScope(
@@ -219,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
 
             void OnAnalysisException()
             {
-                // Do not re-use cached CompilationWithAnalyzers instance in presence of an exception, as the underlying analysis state might be corrupt.
+                // Do not re-use cached CompilationWithAnalyzers instance in presence of an exception, as the
+                // underlying analysis state might be corrupt.
                 ClearCompilationsWithAnalyzersCache(document.Project);
             }
         }
@@ -505,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             await AnalyzeDocumentForKindAsync(document, AnalysisKind.Syntax, cancellationToken)
                 .ConfigureAwait(false);
 
-            // Trigger semantic analysis for source documents. Non-source documents do not support semantic analysis.
+            // Trigger semantic analysis for source documents. Non-source documents do not support semantic
+            // analysis.
             if (document is Document)
                 await AnalyzeDocumentForKindAsync(
                         document,
@@ -689,7 +697,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             Project project
         )
         {
-            // PERF: Don't query descriptors for compiler analyzer or workspace load analyzer, always execute them.
+            // PERF: Don't query descriptors for compiler analyzer or workspace load analyzer, always execute
+            // them.
             if (
                 analyzer == FileContentLoadAnalyzer.Instance
                 || analyzer == GeneratorDiagnosticsPlaceholderAnalyzer.Instance
@@ -905,14 +914,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             DiagnosticAnalysisResult newResult
         )
         {
-            // if our old result is from build and we don't have actual data, don't try micro-optimize and always refresh diagnostics.
-            // most of time, we don't actually load or hold the old data in memory from persistent storage due to perf reasons.
+            // if our old result is from build and we don't have actual data, don't try micro-optimize and
+            // always refresh diagnostics.
+            // most of time, we don't actually load or hold the old data in memory from persistent storage due
+            // to perf reasons.
             //
-            // we need this special behavior for errors from build since unlike live errors, we don't know whether errors
-            // from build is for syntax, semantic or others. due to that, we blindly mark them as semantic errors (most common type of errors from build)
+            // we need this special behavior for errors from build since unlike live errors, we don't know
+            // whether errors
+            // from build is for syntax, semantic or others. due to that, we blindly mark them as semantic
+            // errors (most common type of errors from build)
             //
-            // that can sometime cause issues. for example, if the error turns out to be syntax error (live) then we at the end fail to de-dup.
-            // but since this optimization saves us a lot of refresh between live errors analysis we want to disable this only in this condition.
+            // that can sometime cause issues. for example, if the error turns out to be syntax error (live)
+            // then we at the end fail to de-dup.
+            // but since this optimization saves us a lot of refresh between live errors analysis we want to
+            // disable this only in this condition.
             var forceUpdate = oldResult.FromBuild && oldResult.IsAggregatedForm;
 
             var oldItems = oldResult.GetDocumentDiagnostics(document.Id, kind);
@@ -965,7 +980,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             {
                 var document = project.GetTextDocument(documentId);
 
-                // If we couldn't find a normal document, and all features are enabled for source generated documents,
+                // If we couldn't find a normal document, and all features are enabled for source generated
+                // documents,
                 // attempt to locate a matching source generated document in the project.
                 if (
                     document is null

@@ -11,7 +11,8 @@
 
 // 4th edition (2004) - http://www.w3.org/TR/2004/REC-xml11-20040204/
 // 5th edition (2008) - http://www.w3.org/TR/REC-xml/
-// NOTE: when this is changed, XMLCHARTYPE_USE_LITERAL_TABLE must be disabled or tables need to be re-generated
+// NOTE: when this is changed, XMLCHARTYPE_USE_LITERAL_TABLE must be disabled or tables need to be
+// re-generated
 //       see instructions on how to do that below.
 // #define XML10_FIFTH_EDITION
 
@@ -40,10 +41,13 @@ namespace Microsoft.CodeAnalysis
         // Public ID characters       -- Section 2.3 [13]
 
         // Characters defined in the XML 1.0 Fourth Edition
-        // NCNameCharacters           -- Appending B: Characters Classes in XML 1.0 4th edition and earlier - minus the ':' char per the Namespaces in XML spec
+        // NCNameCharacters           -- Appending B: Characters Classes in XML 1.0 4th edition and earlier
+        // - minus the ':' char per the Namespaces in XML spec
         // Letter characters          -- Appending B: Characters Classes in XML 1.0 4th edition and earlier
-        //                               This appendix has been deprecated in XML 1.0 5th edition, but we still need to use
-        //                               the Letter and NCName definitions from the 4th edition in some places because of backwards compatibility
+        //                               This appendix has been deprecated in XML 1.0 5th edition, but we
+        // still need to use
+        //                               the Letter and NCName definitions from the 4th edition in some
+        // places because of backwards compatibility
         internal const int fWhitespace = 1;
         internal const int fLetter = 2;
         internal const int fNCStartNameSC = 4; // SC = Single Char
@@ -82,7 +86,8 @@ namespace Microsoft.CodeAnalysis
         internal const int fAttrValue = 128;
 #endif
 
-        // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC ID char
+        // bitmap for public ID characters - 1 bit per character 0x0 - 0x80; no character > 0x80 is a PUBLIC
+        // ID char
         private const string s_PublicIdBitmap = "\u2400\u0000\uffbb\uafff\uffff\u87ff\ufffe\u07ff";
 
         // 8 results in the smaller combined size of the tables.
@@ -7528,7 +7533,8 @@ namespace Microsoft.CodeAnalysis
 
         private static byte GetCharProperties(char i)
         {
-            // The index entry, table, identifies the start of the appropriate 256-entry table within s_charProperties
+            // The index entry, table, identifies the start of the appropriate 256-entry table within
+            // s_charProperties
             byte table = s_charPropertiesIndex[i >> innerSizeBits];
             return s_charProperties[unchecked((table << innerSizeBits) + (i & innerSizeMask))];
         }
@@ -8232,7 +8238,8 @@ namespace Microsoft.CodeAnalysis
             return -1;
         }
 
-        // This method tests whether a value is in a given range with just one test; start and end should be constants
+        // This method tests whether a value is in a given range with just one test; start and end should be
+        // constants
         private static bool InRange(int value, int start, int end)
         {
             Debug.Assert(start <= end);

@@ -79,9 +79,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
             catch (TargetParameterCountException exception)
             {
-                // Exception was a TargetParameterCountException this occurs when we try to set an Indexer that has an Import
-                // this is not supported in MEF currently.  Ideally we would validate against it, however, we already shipped
-                // so we will turn it into a ComposablePartException instead, that they should already be prepared for
+                // Exception was a TargetParameterCountException this occurs when we try to set an Indexer that has
+                // an Import
+                // this is not supported in MEF currently.  Ideally we would validate against it, however, we
+                // already shipped
+                // so we will turn it into a ComposablePartException instead, that they should already be prepared
+                // for
                 throw new ComposablePartException(
                     SR.Format(SR.ImportNotValidOnIndexers, _member.GetDisplayName()),
                     Definition.ToElement(),

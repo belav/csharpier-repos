@@ -13,18 +13,18 @@ using System.Web;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * LiteralTextParser class.
-     *
-     * The LiteralTextParser class parses a string of literal text,
-     * containing certain recognizable tags, and creates a set of controls
-     * from them. Any unrecognized tags are ignored.
-     *
-     * This is an abstract base class. RuntimeLiteralTextParser and
-     * CompileTimeLiteralTextParser inherit from this class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* LiteralTextParser class.
+*
+* The LiteralTextParser class parses a string of literal text,
+* containing certain recognizable tags, and creates a set of controls
+* from them. Any unrecognized tags are ignored.
+*
+* This is an abstract base class. RuntimeLiteralTextParser and
+* CompileTimeLiteralTextParser inherit from this class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
@@ -685,13 +685,13 @@ namespace System.Web.UI.MobileControls
             return true;
         }
 
-        /*
-         * FormatStack private class
-         *
-         * This class maintains a simple stack of formatting directives. As tags and
-         * closing tags are processed, they are pushed on and popped off this stack.
-         * The CurrentFormat property returns the current state.
-         */
+/*
+* FormatStack private class
+*
+* This class maintains a simple stack of formatting directives. As tags and
+* closing tags are processed, they are pushed on and popped off this stack.
+* The CurrentFormat property returns the current state.
+*/
 
         private class FormatStack
         {

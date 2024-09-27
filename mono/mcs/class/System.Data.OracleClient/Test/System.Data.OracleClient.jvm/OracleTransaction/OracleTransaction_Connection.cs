@@ -80,7 +80,8 @@ namespace MonoTests.System.Data.OracleClient
             //check exception - using a command with the same connection as the transaction
             OracleCommand cmd = new OracleCommand("Select * from Employees", con);
 
-            //Execute requires the command to have a transaction object when the connection assigned to the command is in a pending local transaction.
+            //Execute requires the command to have a transaction object when the connection assigned to the
+            // command is in a pending local transaction.
             //The Transaction property of the command has not been initialized.
             try
             {

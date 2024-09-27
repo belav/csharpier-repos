@@ -20,7 +20,8 @@ namespace System.Globalization.Tests
 
             // Creates and initializes a string containing the following:
             //   - a surrogate pair (high surrogate U+D800 and low surrogate U+DC00)
-            //   - a combining character sequence (the Latin small letter "a" followed by the combining grave accent)
+            //   - a combining character sequence (the Latin small letter "a" followed by the combining grave
+            // accent)
             //   - a base character (the ligature "")
             yield return new object[]
             {

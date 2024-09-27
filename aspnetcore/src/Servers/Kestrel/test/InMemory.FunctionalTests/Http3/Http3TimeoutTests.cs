@@ -396,7 +396,8 @@ public class Http3TimeoutTests : Http3TestBase
         var inboundControlStream = await Http3Api.GetInboundControlStream();
         await inboundControlStream.ExpectSettingsAsync();
 
-        // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the grace period.
+        // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the
+        // grace period.
         var requestStream = await Http3Api.CreateRequestStream(
             ReadRateRequestHeaders(_helloWorldBytes.Length),
             endStream: false
@@ -635,8 +636,10 @@ public class Http3TimeoutTests : Http3TestBase
 
         await requestStream.ExpectDataAsync();
 
-        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from elapsed
-        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick cushion.
+        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from
+        // elapsed
+        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick
+        // cushion.
         var timeToReadMaxData =
             TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond)
             - TimeSpan.FromSeconds(.5);
@@ -700,8 +703,10 @@ public class Http3TimeoutTests : Http3TestBase
         // Double the timeout for the second stream.
         timeToReadMaxData += timeToReadMaxData;
 
-        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from elapsed
-        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick cushion.
+        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from
+        // elapsed
+        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick
+        // cushion.
         timeToReadMaxData -= TimeSpan.FromSeconds(.5);
 
         // Don't send any more data and advance just to and then past the rate timeout.
@@ -762,8 +767,10 @@ public class Http3TimeoutTests : Http3TestBase
         await requestStream2.ExpectHeadersAsync();
         await requestStream2.ExpectDataAsync();
 
-        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from elapsed
-        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick cushion.
+        // Due to the imprecision of floating point math and the fact that TimeoutControl derives rate from
+        // elapsed
+        // time for reads instead of vice versa like for writes, use a half-second instead of single-tick
+        // cushion.
         var timeToReadMaxData =
             TimeSpan.FromSeconds(_maxData.Length / limits.MinRequestBodyDataRate.BytesPerSecond)
             - TimeSpan.FromSeconds(.5);
@@ -809,7 +816,8 @@ public class Http3TimeoutTests : Http3TestBase
 
         Http3Api.OutboundControlStream = await Http3Api.CreateControlStream();
 
-        // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the grace period.
+        // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the
+        // grace period.
         var requestStream = await Http3Api.CreateRequestStream(
             ReadRateRequestHeaders(_helloWorldBytes.Length),
             endStream: false

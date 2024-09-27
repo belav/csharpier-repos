@@ -103,7 +103,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             var originalParameter = methodSymbol.Parameters.First();
 
-            // Replace `[AllowNull] Foo` with `Foo` or `Foo?` (no longer needed after https://github.com/dotnet/roslyn/issues/39256?)
+            // Replace `[AllowNull] Foo` with `Foo` or `Foo?` (no longer needed after
+            // https://github.com/dotnet/roslyn/issues/39256?)
             var parameters = ImmutableArray.Create(
                 CodeGenerationSymbolFactory.CreateParameterSymbol(
                     originalParameter,
@@ -145,8 +146,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             using var _1 = ArrayBuilder<SyntaxNode>.GetInstance(out var statements);
 
-            // A ref like type can not be boxed. Because of this an overloaded Equals taking object in the general case
-            // can never be true, because an equivalent object can never be boxed into the object itself. Therefore only
+            // A ref like type can not be boxed. Because of this an overloaded Equals taking object in the
+            // general case
+            // can never be true, because an equivalent object can never be boxed into the object itself.
+            // Therefore only
             // need to return false.
             if (containingType.IsRefLikeType)
             {
@@ -509,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         {
             if (iequatableType != null)
             {
-                // We compare ignoring nested nullability here, as it's possible the underlying object could have implemented IEquatable<Type>
+                // We compare ignoring nested nullability here, as it's possible the underlying object could have
+                // implemented IEquatable<Type>
                 // or IEquatable<Type?>. From the perspective of this, either is allowable.
                 var constructed = iequatableType.Construct(memberType);
                 return memberType.AllInterfaces.Contains(

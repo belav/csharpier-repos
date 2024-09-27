@@ -153,7 +153,8 @@ namespace System.Globalization
             );
 
             // Day & Month Names
-            // These are all single calType entries, 1 per day, so we have to make 7 or 13 calls to collect all the names
+            // These are all single calType entries, 1 per day, so we have to make 7 or 13 calls to collect all
+            // the names
 
             // Day
             // Note that we're off-by-one since managed starts on sunday and windows starts on monday
@@ -412,7 +413,8 @@ namespace System.Globalization
             {
                 result &= CallGetCalendarInfoEx(localeName, calendar, calType, out results[i]);
 
-                // On the first iteration we need to go from CAL_SDAYNAME7 to CAL_SDAYNAME1, so subtract 7 before the ++ happens
+                // On the first iteration we need to go from CAL_SDAYNAME7 to CAL_SDAYNAME1, so subtract 7 before
+                // the ++ happens
                 // This is because the framework starts on sunday and windows starts on monday when counting days
                 if (i == 0)
                     calType -= 7;
@@ -489,7 +491,8 @@ namespace System.Globalization
                         }
                     }
 
-                    // We didn't find it, we insert it at the beginning of the array. If calendar's array is full, we drop the last element.
+                    // We didn't find it, we insert it at the beginning of the array. If calendar's array is full, we
+                    // drop the last element.
                     count = count < calendars.Length ? count + 1 : count;
                     Span<CalendarId> tmpSpan = stackalloc CalendarId[count]; // should be 23 max.
                     tmpSpan[0] = userOverride;

@@ -26,9 +26,11 @@ namespace System.Net.Http
 
         /// <summary>
         /// Reads a header line.
-        /// Empty header lines are skipped, as are malformed header lines that are missing a colon character.
+        /// Empty header lines are skipped, as are malformed header lines that are missing a colon
+        // character.
         /// </summary>
-        /// <returns>true if the next header was read successfully, or false if all characters have been read.</returns>
+        /// <returns>true if the next header was read successfully, or false if all characters have been
+        // read.</returns>
         public bool ReadHeader(
             [NotNullWhen(true)] out string? name,
             [NotNullWhen(true)] out string? value
@@ -87,7 +89,8 @@ namespace System.Net.Http
         /// <summary>
         /// Reads lines separated by "\r\n".
         /// </summary>
-        /// <returns>true if the next line was read successfully, or false if all characters have been read.</returns>
+        /// <returns>true if the next line was read successfully, or false if all characters have been
+        // read.</returns>
         public bool ReadLine()
         {
             return ReadLine(out _, out _);
@@ -98,7 +101,8 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="startIndex">The start of the line segment.</param>
         /// <param name="length">The length of the line segment.</param>
-        /// <returns>true if the next line was read successfully, or false if all characters have been read.</returns>
+        /// <returns>true if the next line was read successfully, or false if all characters have been
+        // read.</returns>
         private bool ReadLine(out int startIndex, out int length)
         {
             Debug.Assert(_buffer != null);

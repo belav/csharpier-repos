@@ -45,6 +45,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             Assert.Equal(typeof(string), attribute.ErrorMessageResourceType);
         }
 
+        //
         // Public_IsValid_throws_NotImplementedException_if_derived_ValidationAttribute_does_not_override_either_IsValid_method
         [Fact]
         public static void TestThrowIfNoOverrideIsValid()
@@ -55,6 +56,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_string_throws_NotImplementedException_if_derived_ValidationAttribute_does_not_override_either_IsValid_method
         [Fact]
         public static void TestThrowIfNoOverrideIsValid01()
@@ -69,6 +71,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_ValidationContext_throws_NotImplementedException_if_derived_ValidationAttribute_does_not_override_either_IsValid_method
         [Fact]
         public static void TestThrowIfNoOverrideIsValid02()
@@ -94,6 +97,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_string_successful_if_derived_ValidationAttribute_overrides_Two_Args_IsValid_method
         [Fact]
         public static void TestNoThrowIfOverrideIsValid01()
@@ -105,6 +109,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_ValidationContext_successful_if_derived_ValidationAttribute_overrides_One_Arg_IsValid_method
         [Fact]
         public static void TestNoThrowIfOverrideIsValid02()
@@ -113,6 +118,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             attribute.Validate("Valid Value", s_testValidationContext);
         }
 
+        //
         // Validate_object_ValidationContext_successful_if_derived_ValidationAttribute_overrides_Two_Args_IsValid_method()
         [Fact]
         public static void TestNoThrowIfOverrideIsValid03()
@@ -273,6 +279,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_string_throws_exception_with_ValidationResult_ErrorMessage_matching_ErrorMessage_passed_in
         [Fact]
         public static void TestThrowWithValidationResultErrorMessage()
@@ -291,6 +298,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // Validate_object_string_throws_exception_with_ValidationResult_ErrorMessage_from_ErrorMessageResourceName_and_ErrorMessageResourceType
         [Fact]
         public static void TestThrowWithValidationResultErrorMessage01()
@@ -312,6 +320,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             );
         }
 
+        //
         // FormatErrorMessage_is_successful_when_ErrorMessage_from_ErrorMessageResourceName_and_ErrorMessageResourceType_point_to_internal_property
         [Fact]
         public static void TestFormatErrorMessage05()
@@ -365,6 +374,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             attribute.GetValidationResult("Valid Value", s_testValidationContext);
         }
 
+        //
         // GetValidationResult_returns_ValidationResult_with_preset_error_message_if_One_Arg_IsValid_fails_to_validate
         [Fact]
         public static void TestReturnPresetErrorMessage()
@@ -378,6 +388,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // cannot check error message - not defined on ret builds
         }
 
+        //
         // GetValidationResult_returns_ValidationResult_with_error_message_defined_in_IsValid_if_Two_Args_IsValid_fails_to_validate
         [Fact]
         public static void TestReturnErrorMessageInIsValid()

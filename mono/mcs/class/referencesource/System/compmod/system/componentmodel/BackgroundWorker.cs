@@ -90,7 +90,8 @@ namespace System.ComponentModel
             }
         }
 
-        /// <include file='doc\BackgroundWorker.uex' path='docs/doc[@for="BackgroundWorker.OnRunWorkerCompleted"]/*' />
+        /// <include file='doc\BackgroundWorker.uex'
+        // path='docs/doc[@for="BackgroundWorker.OnRunWorkerCompleted"]/*' />
         protected virtual void OnRunWorkerCompleted(RunWorkerCompletedEventArgs e)
         {
             RunWorkerCompletedEventHandler handler = (RunWorkerCompletedEventHandler)(

@@ -37,8 +37,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
 
-            // If the from expression is of the type dynamic we can't infer the types for any lambdas that occur in the query.
-            // Only if there are none we could bind the query but we report an error regardless since such queries are not useful.
+            // If the from expression is of the type dynamic we can't infer the types for any lambdas that occur
+            // in the query.
+            // Only if there are none we could bind the query but we report an error regardless since such
+            // queries are not useful.
             if (boundFromExpression.HasDynamicType())
             {
                 diagnostics.Add(ErrorCode.ERR_BadDynamicQuery, fromClause.Expression.Location);
@@ -525,8 +527,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var inExpression = BindRValueWithoutTargetType(join.InExpression, diagnostics);
 
-            // If the from expression is of the type dynamic we can't infer the types for any lambdas that occur in the query.
-            // Only if there are none we could bind the query but we report an error regardless since such queries are not useful.
+            // If the from expression is of the type dynamic we can't infer the types for any lambdas that occur
+            // in the query.
+            // Only if there are none we could bind the query but we report an error regardless since such
+            // queries are not useful.
             if (inExpression.HasDynamicType())
             {
                 diagnostics.Add(ErrorCode.ERR_BadDynamicQuery, join.InExpression.Location);
@@ -680,7 +684,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundCall invocation;
                 if (join.Into == null)
                 {
-                    // A query expression with a join clause without an into followed by something other than a select clause
+                    // A query expression with a join clause without an into followed by something other than a select
+                    // clause
                     //     from x1 in e1
                     //     join x2 in e2 on k1 equals k2
                     //     ...
@@ -718,7 +723,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else
                 {
-                    // A query expression with a join clause with an into followed by something other than a select clause
+                    // A query expression with a join clause with an into followed by something other than a select
+                    // clause
                     //     from x1 in e1
                     //     join x2 in e2 on k1 equals k2 into g
                     //     ...
@@ -902,7 +908,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 state.nextInvokedMethodName = null;
 #endif
 
-                // Adjust the second-to-last parameter to be a query clause (if it was an extension method, an extra parameter was added)
+                // Adjust the second-to-last parameter to be a query clause (if it was an extension method, an extra
+                // parameter was added)
                 BoundExpression? castInvocation =
                     (from.Type != null) ? ExtractCastInvocation(invocation) : null;
 
@@ -1138,7 +1145,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     d
                 );
 
-                // The bound block represents a closure scope for transparent identifiers captured in the let clause.
+                // The bound block represents a closure scope for transparent identifiers captured in the let
+                // clause.
                 // Such closures shall be associated with the lambda body expression.
                 return lambdaBodyBinder.CreateLambdaBlockForQueryClause(
                     let.Expression,
@@ -1624,7 +1632,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (ultimateReceiver.Kind == BoundKind.TypeOrValueExpression)
             {
-                // CheckValue will be called by MakeInvocationExpression when it makes the member access, which will resolve
+                // CheckValue will be called by MakeInvocationExpression when it makes the member access, which will
+                // resolve
                 // the type or value to the appropriate kind at that point.
             }
             else if (receiver.Type!.IsVoidType())
@@ -1673,7 +1682,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 typeArgsSyntax,
                 typeArgs,
                 queryClause: node,
-                // Queries are syntactical rewrites, so we allow fields and properties of delegate types to be invoked,
+                // Queries are syntactical rewrites, so we allow fields and properties of delegate types to be
+                // invoked,
                 // although no well-known non-generic query method is used atm.
                 allowFieldsAndProperties: true
             );

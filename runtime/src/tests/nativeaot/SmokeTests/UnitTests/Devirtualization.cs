@@ -44,7 +44,8 @@ class Devirtualization
         {
             IFactory factory = new Factory();
 
-            // This is a generic virtual method call so we'll only ever see BaseFtnn and DerivedFtnn instantiated
+            // This is a generic virtual method call so we'll only ever see BaseFtnn and DerivedFtnn
+            // instantiated
             // over __Canon at compile time.
             var made = factory.Make<object>();
             if (made.GetId() != "Derived")

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 using System.ServiceModel.Channels;
@@ -87,7 +88,8 @@ namespace System.Web.Http.SelfHost.Channels
         /// hold a reference to an <see cref="HttpResponseMessage"/>
         /// instance.
         /// </summary>
-        /// <remarks>The caller takes over the ownership of the associated <see cref="HttpRequestMessage"/> and is responsible for its disposal.</remarks>
+        /// <remarks>The caller takes over the ownership of the associated <see cref="HttpRequestMessage"/>
+        // and is responsible for its disposal.</remarks>
         /// <param name="message">The given <see cref="Message"/> that holds a reference to an
         /// <see cref="HttpResponseMessage"/> instance.
         /// </param>

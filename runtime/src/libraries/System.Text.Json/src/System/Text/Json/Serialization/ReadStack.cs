@@ -36,7 +36,8 @@ namespace System.Text.Json
             Current.HasParentObject ? Parent.JsonPropertyInfo : null;
 
         /// <summary>
-        /// Buffer containing all frames in the stack. For performance it is only populated for serialization depths > 1.
+        /// Buffer containing all frames in the stack. For performance it is only populated for
+        // serialization depths > 1.
         /// </summary>
         private ReadStackFrame[] _stack;
 
@@ -285,7 +286,8 @@ namespace System.Text.Json
                 : PolymorphicSerializationState.PolymorphicReEntrySuspended;
         }
 
-        // Return a JSONPath using simple dot-notation when possible. When special characters are present, bracket-notation is used:
+        // Return a JSONPath using simple dot-notation when possible. When special characters are present,
+        // bracket-notation is used:
         // $.x.y[0].z
         // $['PropertyName.With.Special.Chars']
         public string JsonPath()
@@ -328,7 +330,8 @@ namespace System.Text.Json
                         return;
                     }
 
-                    // For continuation scenarios only, before or after all elements are read, the exception is not within the array.
+                    // For continuation scenarios only, before or after all elements are read, the exception is not
+                    // within the array.
                     if (
                         frame.ObjectState == StackFrameObjectState.None
                         || frame.ObjectState == StackFrameObjectState.CreatedObject

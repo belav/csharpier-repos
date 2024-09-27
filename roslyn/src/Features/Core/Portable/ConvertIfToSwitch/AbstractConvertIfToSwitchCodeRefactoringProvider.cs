@@ -232,7 +232,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                     return false;
                 }
 
-                // If there are two or more labels, we can support this as long as the language supports 'or' patterns
+                // If there are two or more labels, we can support this as long as the language supports 'or'
+                // patterns
                 // and as long as no label has any guards.
                 return supportsOrPattern
                     && section.Labels.All(label => label.Guards.IsDefaultOrEmpty);
@@ -329,7 +330,8 @@ namespace Microsoft.CodeAnalysis.ConvertIfToSwitch
                 )
                     continue;
 
-                // When converting to switch expression, we need to perform an additional check to ensure this conversion is possible.
+                // When converting to switch expression, we need to perform an additional check to ensure this
+                // conversion is possible.
                 if (
                     convertToSwitchExpression
                     && !CanConvertToSwitchExpression(analyzer.Supports(Feature.OrPattern), sections)

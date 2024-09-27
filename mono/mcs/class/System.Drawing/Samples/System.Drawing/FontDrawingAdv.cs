@@ -336,7 +336,7 @@ namespace Font1Sample
                 "MeasureString str7 [" + str + "] " + sz + ";chars:" + chars + " lines:" + lines
             );
 
-            /* 3rd row */
+/* 3rd row */
 
             Font f8 = new Font("Verdana", 10);
             Font f9 = new Font("Verdana", 6);

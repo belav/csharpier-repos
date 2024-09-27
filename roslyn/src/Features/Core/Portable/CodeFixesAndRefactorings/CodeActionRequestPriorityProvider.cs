@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         CodeActionRequestPriority? Priority { get; }
 
         /// <summary>
-        /// Tracks the given <paramref name="analyzer"/> as a de-prioritized analyzer that should be moved to
+        /// Tracks the given <paramref name="analyzer"/> as a de-prioritized analyzer that should be moved
+        // to
         /// <see cref="CodeActionRequestPriority.Low"/> bucket.
         /// </summary>
         void AddDeprioritizedAnalyzerWithLowPriority(DiagnosticAnalyzer analyzer);
@@ -32,10 +33,13 @@ namespace Microsoft.CodeAnalysis.CodeActions
     internal static class ICodeActionRequestPriorityProviderExtensions
     {
         /// <summary>
-        /// Returns true if the given <paramref name="analyzer"/> can report diagnostics that can have fixes from a code
+        /// Returns true if the given <paramref name="analyzer"/> can report diagnostics that can have fixes
+        // from a code
         /// fix provider with <see cref="CodeFixProvider.RequestPriority"/> matching <see
-        /// cref="ICodeActionRequestPriorityProvider.Priority"/>. This method is useful for performing a performance
-        /// optimization for lightbulb diagnostic computation, wherein we can reduce the set of analyzers to be executed
+        /// cref="ICodeActionRequestPriorityProvider.Priority"/>. This method is useful for performing a
+        // performance
+        /// optimization for lightbulb diagnostic computation, wherein we can reduce the set of analyzers to
+        // be executed
         /// when computing fixes for a specific <see cref="ICodeActionRequestPriorityProvider.Priority"/>.
         /// </summary>
         public static bool MatchesPriority(
@@ -80,7 +84,8 @@ namespace Microsoft.CodeAnalysis.CodeActions
         }
 
         /// <summary>
-        /// Returns true if the given <paramref name="codeFixProvider"/> should be considered a candidate when computing
+        /// Returns true if the given <paramref name="codeFixProvider"/> should be considered a candidate
+        // when computing
         /// fixes for the given <see cref="ICodeActionRequestPriorityProvider.Priority"/>.
         /// </summary>
         public static bool MatchesPriority(

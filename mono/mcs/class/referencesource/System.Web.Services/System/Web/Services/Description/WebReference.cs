@@ -34,7 +34,8 @@ namespace System.Web.Services.Description
         ServiceDescriptionImportWarnings warnings;
         StringCollection validationWarnings;
 
-        /// <include file='doc\ServiceDescriptionImporter.uex' path='docs/doc[@for="WebReference.WebReference"]/*' />
+        /// <include file='doc\ServiceDescriptionImporter.uex'
+        // path='docs/doc[@for="WebReference.WebReference"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -67,14 +68,16 @@ namespace System.Web.Services.Description
             this.proxyCode = proxyCode;
         }
 
-        /// <include file='doc\ServiceDescriptionImporter.uex' path='docs/doc[@for="WebReference.WebReference2"]/*' />
+        /// <include file='doc\ServiceDescriptionImporter.uex'
+        // path='docs/doc[@for="WebReference.WebReference2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebReference(DiscoveryClientDocumentCollection documents, CodeNamespace proxyCode)
             : this(documents, proxyCode, null, null, null) { }
 
-        /// <include file='doc\ServiceDescriptionImporter.uex' path='docs/doc[@for="WebReference.WebReference3"]/*' />
+        /// <include file='doc\ServiceDescriptionImporter.uex'
+        // path='docs/doc[@for="WebReference.WebReference3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -122,7 +125,8 @@ namespace System.Web.Services.Description
             get { return proxyCode; }
         }
 
-        /// <include file='doc\WebReference.uex' path='docs/doc[@for="WebReference.ValidationWarnings"]/*' />
+        /// <include file='doc\WebReference.uex' path='docs/doc[@for="WebReference.ValidationWarnings"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

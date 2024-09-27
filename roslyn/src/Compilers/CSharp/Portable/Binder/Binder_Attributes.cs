@@ -18,9 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         #region Bind All Attributes
 
-        // Method to bind attributes types early for all attributes to enable early decoding of some well-known attributes used within the binder.
-        // Note: attributesToBind contains merged attributes from all the different syntax locations (e.g. for named types, partial methods, etc.).
-        // Note: Additionally, the attributes with non-matching target specifier for the given owner symbol have been filtered out, i.e. Binder.MatchAttributeTarget method returned true.
+        // Method to bind attributes types early for all attributes to enable early decoding of some
+        // well-known attributes used within the binder.
+        // Note: attributesToBind contains merged attributes from all the different syntax locations (e.g.
+        // for named types, partial methods, etc.).
+        // Note: Additionally, the attributes with non-matching target specifier for the given owner symbol
+        // have been filtered out, i.e. Binder.MatchAttributeTarget method returned true.
         // For example, if were binding attributes on delegate type symbol for below code snippet:
         //      [A1]
         //      [return: A2]
@@ -52,8 +55,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     beforeAttributePartBound?.Invoke(attributeToBind);
 
-                    // BindType for AttributeSyntax's name is handled specially during lookup, see Binder.LookupAttributeType.
-                    // When looking up a name in attribute type context, we generate a diagnostic + error type if it is not an attribute type, i.e. named type deriving from System.Attribute.
+                    // BindType for AttributeSyntax's name is handled specially during lookup, see
+                    // Binder.LookupAttributeType.
+                    // When looking up a name in attribute type context, we generate a diagnostic + error type if it is
+                    // not an attribute type, i.e. named type deriving from System.Attribute.
                     // Hence we can assume here that BindType returns a NamedTypeSymbol.
                     var boundType = binder.BindType(attributeToBind.Name, diagnostics);
                     var boundTypeSymbol = (NamedTypeSymbol)boundType.Type;
@@ -121,8 +126,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // attributesBuilder might contain some early bound well-known attributes, which had no errors.
                     // We don't rebind the early bound attributes, but need to compute isConditionallyOmitted.
-                    // Note that AttributeData.IsConditionallyOmitted is required only during emit, but must be computed here as
-                    // its value depends on the values of conditional symbols, which in turn depends on the source file where the attribute is applied.
+                    // Note that AttributeData.IsConditionallyOmitted is required only during emit, but must be computed
+                    // here as
+                    // its value depends on the values of conditional symbols, which in turn depends on the source file
+                    // where the attribute is applied.
 
                     Debug.Assert(!attribute.HasErrors);
                     Debug.Assert(attribute.AttributeClass is object);
@@ -438,7 +445,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     diagnostics,
                     ref hasErrors
                 );
-                // Arguments and parameters length are only required to match when the attribute doesn't have errors.
+                // Arguments and parameters length are only required to match when the attribute doesn't have
+                // errors.
                 Debug.Assert(rewrittenArguments.Length == attributeConstructor.ParameterCount);
             }
 
@@ -562,8 +570,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
         )
         {
-            // When early binding attributes, we don't want to determine if the attribute type is conditional and if so, must be emitted or not.
-            // Invoking IsConditional property on attributeType can lead to a cycle, hence we delay this computation until after early binding.
+            // When early binding attributes, we don't want to determine if the attribute type is conditional
+            // and if so, must be emitted or not.
+            // Invoking IsConditional property on attributeType can lead to a cycle, hence we delay this
+            // computation until after early binding.
             if (IsEarlyAttributeBinder)
             {
                 return false;
@@ -599,7 +609,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The caller is responsible for freeing <see cref="AnalyzedAttributeArguments.ConstructorArguments"/> and <see cref="AnalyzedAttributeArguments.NamedArguments"/>.
+        /// The caller is responsible for freeing <see
+        // cref="AnalyzedAttributeArguments.ConstructorArguments"/> and <see
+        // cref="AnalyzedAttributeArguments.NamedArguments"/>.
         /// </summary>
         private AnalyzedAttributeArguments BindAttributeArguments(
             AttributeArgumentListSyntax? attributeArgumentList,
@@ -763,7 +775,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // BindRValue just binds the expression without doing any validation (if its a valid expression for attribute argument).
+            // BindRValue just binds the expression without doing any validation (if its a valid expression for
+            // attribute argument).
             // Validation is done later by AttributeExpressionVisitor
             BoundExpression namedArgumentValue = this.BindValue(
                 namedArgument.Expression,
@@ -870,7 +883,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // SPEC:    For each named-argument Arg in named-argument-list N:
             // SPEC:        Let Name be the identifier of the named-argument Arg.
             // SPEC:        Name must identify a non-static read-write public field or property on
-            // SPEC:            attribute class T. If T has no such field or property, then a compile-time error occurs.
+            // SPEC:            attribute class T. If T has no such field or property, then a compile-time error
+            // occurs.
 
             bool invalidNamedArgument = false;
             TypeSymbol? namedArgumentType = null;
@@ -1005,7 +1019,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                     )
                     {
-                        // NOTE: As in dev11, we don't allow array covariance conversions (presumably, we don't have a way to
+                        // NOTE: As in dev11, we don't allow array covariance conversions (presumably, we don't have a way
+                        // to
                         // represent the conversion in metadata).
                         diagnostics.Add(ErrorCode.ERR_BadAttributeArgument, syntax.Location);
                         hasErrors = true;
@@ -1026,7 +1041,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         #region AttributeExpressionVisitor
 
         /// <summary>
-        /// Walk a custom attribute argument bound node and return a TypedConstant.  Verify that the expression is a constant expression.
+        /// Walk a custom attribute argument bound node and return a TypedConstant.  Verify that the
+        // expression is a constant expression.
         /// </summary>
         private readonly struct AttributeExpressionVisitor
         {
@@ -1142,7 +1158,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return visitedArgument;
             }
 
-            // SPEC:    An expression E is an attribute-argument-expression if all of the following statements are true:
+            // SPEC:    An expression E is an attribute-argument-expression if all of the following statements
+            // are true:
             // SPEC:    1) The type of E is an attribute parameter type (§17.1.3).
             // SPEC:    2) At compile-time, the value of Expression can be resolved to one of the following:
             // SPEC:        a) A constant value.
@@ -1306,11 +1323,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // We have a bound conversion with a non-constant value.
                 // According to statement 2) of the spec comment, this is not a valid attribute argument.
-                // However, native compiler allows conversions to object type if the conversion operand is a valid attribute argument.
+                // However, native compiler allows conversions to object type if the conversion operand is a valid
+                // attribute argument.
                 // See method AttributeHelper::VerifyAttrArg(EXPR *arg).
 
                 // We will match native compiler's behavior here.
-                // Devdiv Bug #8763: Additionally we allow conversions from array type to object[], provided a conversion exists and each array element is a valid attribute argument.
+                // Devdiv Bug #8763: Additionally we allow conversions from array type to object[], provided a
+                // conversion exists and each array element is a valid attribute argument.
 
                 var type = node.Type;
                 var operand = node.Operand;
@@ -1512,7 +1531,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // Devdiv Bug #12636: Constant values of open types should not be allowed in attributes
 
-                    // SPEC ERROR:  C# language specification does not explicitly disallow constant values of open types. For e.g.
+                    // SPEC ERROR:  C# language specification does not explicitly disallow constant values of open
+                    // types. For e.g.
 
                     //  public class C<T>
                     //  {
@@ -1522,7 +1542,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     //  [SomeAttr(C<T>.E.V)]        // case (a): Constant value of open type.
                     //  [SomeAttr(C<int>.E.V)]      // case (b): Constant value of constructed type.
 
-                    // Both expressions 'C<T>.E.V' and 'C<int>.E.V' satisfy the requirements for a valid attribute-argument-expression:
+                    // Both expressions 'C<T>.E.V' and 'C<int>.E.V' satisfy the requirements for a valid
+                    // attribute-argument-expression:
                     //  (a) Its type is a valid attribute parameter type as per section 17.1.3 of the specification.
                     //  (b) It has a compile time constant value.
 

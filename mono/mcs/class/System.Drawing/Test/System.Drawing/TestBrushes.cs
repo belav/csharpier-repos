@@ -1322,16 +1322,16 @@ namespace MonoTests.System.Drawing
             Assert.AreEqual(Color.Red, (Brushes.Yellow as SolidBrush).Color, "P140#4");
             solid.Color = Color.Yellow; // revert to correct color (for other unit tests)
 
-            /* YellowGreen is broken by "destructive" Dispose test
-            br = Brushes.YellowGreen;
-            Assert.IsTrue ((br is SolidBrush), "P141#1");
-            solid = (SolidBrush) br;
-            Assert.AreEqual (Color.YellowGreen, solid.Color, "P141#2");
-            solid.Color = Color.Red;
-            Assert.AreEqual (Color.Red, solid.Color, "P141#3");
-            Assert.AreEqual (Color.Red, (Brushes.YellowGreen as SolidBrush).Color, "P141#4");
-            solid.Color = Color.YellowGreen; // revert to correct color (for other unit tests)
-            */
+/* YellowGreen is broken by "destructive" Dispose test
+br = Brushes.YellowGreen;
+Assert.IsTrue ((br is SolidBrush), "P141#1");
+solid = (SolidBrush) br;
+Assert.AreEqual (Color.YellowGreen, solid.Color, "P141#2");
+solid.Color = Color.Red;
+Assert.AreEqual (Color.Red, solid.Color, "P141#3");
+Assert.AreEqual (Color.Red, (Brushes.YellowGreen as SolidBrush).Color, "P141#4");
+solid.Color = Color.YellowGreen; // revert to correct color (for other unit tests)
+*/
         }
     }
 }
@@ -1342,29 +1342,33 @@ using System;
 using System.Drawing;
 using System.Reflection;
 class Program {
-    static void Main ()
-    {
-        Type type = typeof (Brushes);
-        PropertyInfo[] properties = type.GetProperties ();
-        int count = 1;
-        foreach (PropertyInfo property in properties) {
-            Console.WriteLine("\n\t\t\tbr = Brushes." + property.Name + ";");
-            Console.WriteLine("\t\t\tAssert.IsTrue ((br is SolidBrush), \"P" + count + "#1\");");
-            Console.WriteLine("\t\t\tsolid = (SolidBrush) br;");
-            Console.WriteLine("\t\t\tAssert.AreEqual (Color." + property.Name + ", solid.Color, \"P" + count + "#2\");");
+static void Main ()
+{
+Type type = typeof (Brushes);
+PropertyInfo[] properties = type.GetProperties ();
+int count = 1;
+foreach (PropertyInfo property in properties) {
+Console.WriteLine("\n\t\t\tbr = Brushes." + property.Name + ";");
+Console.WriteLine("\t\t\tAssert.IsTrue ((br is SolidBrush), \"P" + count + "#1\");");
+Console.WriteLine("\t\t\tsolid = (SolidBrush) br;");
+Console.WriteLine("\t\t\tAssert.AreEqual (Color." + property.Name + ", solid.Color, \"P" + count +
+"#2\");");
 
-            if (property.Name != "Red") {
-                Console.WriteLine("\t\t\tsolid.Color = Color.Red;");
-                Console.WriteLine("\t\t\tAssert.AreEqual (Color.Red, solid.Color, \"P" + count + "#3\");");
-                Console.WriteLine("\t\t\tAssert.AreEqual (Color.Red, (Brushes." + property.Name + " as SolidBrush).Color, \"P" + count + "#4\");");
-            } else {
-                Console.WriteLine("\t\t\tsolid.Color = Color.White;");
-                Console.WriteLine("\t\t\tAssert.AreEqual (Color.White, solid.Color, \"P" + count + "#3\");");
-                Console.WriteLine("\t\t\tAssert.AreEqual (Color.White, (Brushes." + property.Name + " as SolidBrush).Color, \"P" + count + "#4\");");
-            }
-            Console.WriteLine("\t\t\tsolid.Color = Color." + property.Name + "; // revert to correct color (for other unit tests)");
-            count++;
-        }
-    }
+if (property.Name != "Red") {
+Console.WriteLine("\t\t\tsolid.Color = Color.Red;");
+Console.WriteLine("\t\t\tAssert.AreEqual (Color.Red, solid.Color, \"P" + count + "#3\");");
+Console.WriteLine("\t\t\tAssert.AreEqual (Color.Red, (Brushes." + property.Name + " as
+SolidBrush).Color, \"P" + count + "#4\");");
+} else {
+Console.WriteLine("\t\t\tsolid.Color = Color.White;");
+Console.WriteLine("\t\t\tAssert.AreEqual (Color.White, solid.Color, \"P" + count + "#3\");");
+Console.WriteLine("\t\t\tAssert.AreEqual (Color.White, (Brushes." + property.Name + " as
+SolidBrush).Color, \"P" + count + "#4\");");
 }
- */
+Console.WriteLine("\t\t\tsolid.Color = Color." + property.Name + "; // revert to correct color (for
+other unit tests)");
+count++;
+}
+}
+}
+*/

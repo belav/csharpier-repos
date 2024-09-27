@@ -16,18 +16,27 @@ using System.Security;
 namespace System.Reflection
 {
     //
-    // We can destroy the unmanaged part of collectible type only after the managed part is definitely gone and thus
-    // nobody can call/allocate/reference anything related to the collectible assembly anymore. A call to finalizer
-    // alone does not guarantee that the managed part is gone. A malicious code can keep a reference to some object
-    // in a way that that survives finalization, or we can be running during shutdown where everything is finalized.
+    // We can destroy the unmanaged part of collectible type only after the managed part is definitely
+    // gone and thus
+    // nobody can call/allocate/reference anything related to the collectible assembly anymore. A call
+    // to finalizer
+    // alone does not guarantee that the managed part is gone. A malicious code can keep a reference to
+    // some object
+    // in a way that that survives finalization, or we can be running during shutdown where everything
+    // is finalized.
     //
-    // The unmanaged LoaderAllocator keeps a reference to the managed LoaderAllocator in long weak handle. If the long
-    // weak handle is null, we can be sure that the managed part of the LoaderAllocator is definitely gone and that it
-    // is safe to destroy the unmanaged part. Unfortunately, we can not perform the above check in a finalizer on the
+    // The unmanaged LoaderAllocator keeps a reference to the managed LoaderAllocator in long weak
+    // handle. If the long
+    // weak handle is null, we can be sure that the managed part of the LoaderAllocator is definitely
+    // gone and that it
+    // is safe to destroy the unmanaged part. Unfortunately, we can not perform the above check in a
+    // finalizer on the
     // LoaderAllocator, but it can be performed on a helper object.
     //
-    // The finalization does not have to be done using CriticalFinalizerObject. We have to go over all LoaderAllocators
-    // during AppDomain shutdown anyway to avoid leaks e.g. if somebody stores reference to LoaderAllocator in a static.
+    // The finalization does not have to be done using CriticalFinalizerObject. We have to go over all
+    // LoaderAllocators
+    // during AppDomain shutdown anyway to avoid leaks e.g. if somebody stores reference to
+    // LoaderAllocator in a static.
     //
     internal sealed class LoaderAllocatorScout
     {
@@ -48,7 +57,8 @@ namespace System.Reflection
             // Assemblies and LoaderAllocators will be cleaned up during AppDomain shutdown in
             // unmanaged code
             // So it is ok to skip reregistration and cleanup for finalization during appdomain shutdown.
-            // We also avoid early finalization of LoaderAllocatorScout due to AD unload when the object was inside DelayedFinalizationList.
+            // We also avoid early finalization of LoaderAllocatorScout due to AD unload when the object was
+            // inside DelayedFinalizationList.
             if (!Environment.HasShutdownStarted && !AppDomain.CurrentDomain.IsFinalizingForUnload())
             {
                 // Destroy returns false if the managed LoaderAllocator is still alive.

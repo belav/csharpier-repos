@@ -39,7 +39,8 @@ namespace System.Collections.Specialized
         /// <summary>
         /// Construct a NotifyCollectionChangedEventArgs that describes a one-item change.
         /// </summary>
-        /// <param name="action">The action that caused the event; can only be Reset, Add or Remove action.</param>
+        /// <param name="action">The action that caused the event; can only be Reset, Add or Remove
+        // action.</param>
         /// <param name="changedItem">The item affected by the change.</param>
         public NotifyCollectionChangedEventArgs(
             NotifyCollectionChangedAction action,

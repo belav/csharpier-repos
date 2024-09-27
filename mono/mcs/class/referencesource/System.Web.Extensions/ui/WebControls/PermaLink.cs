@@ -18,32 +18,38 @@
 //    using System.Web.UI.WebControls;
 
 //    /// <devdoc>
-//    ///    <para>Creates a link to the current page that automatically updates its url as history state changes.</para>
+//    ///    <para>Creates a link to the current page that automatically updates its url as history
+// state changes.</para>
 //    /// </devdoc>
 //    [
 //    ControlBuilderAttribute(typeof(HyperLinkControlBuilder)),
 //    DefaultProperty("Text"),
 //    ToolboxData("<{0}:PermaLink runat=\"server\">PermaLink</{0}:PermaLink>"),
 //    ParseChildren(false),
-//    AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal),
-//    AspNetHostingPermission(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)
+//    AspNetHostingPermission(SecurityAction.LinkDemand, Level =
+// AspNetHostingPermissionLevel.Minimal),
+//    AspNetHostingPermission(SecurityAction.InheritanceDemand, Level =
+// AspNetHostingPermissionLevel.Minimal)
 //    ]
 //    public class PermaLink : ScriptControl {
 
 //        private string _url;
 
 //        /// <devdoc>
-//        ///    <para>Gets or sets the URL reference to an image to display as an alternative to plain text for the
+//        ///    <para>Gets or sets the URL reference to an image to display as an alternative to
+// plain text for the
 //        ///       Permalink.</para>
 //        /// </devdoc>
 //        [
 //        Bindable(true),
 //        Category("Appearance"),
 //        DefaultValue(""),
-//        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign, typeof(UITypeEditor)),
+//        Editor("System.Web.UI.Design.ImageUrlEditor, " + AssemblyRef.SystemDesign,
+// typeof(UITypeEditor)),
 //        UrlProperty(),
 //        ResourceDescription("PermaLink_ImageUrl"),
-//        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "Consistent with other asp.net url properties.")
+//        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
+// Justification = "Consistent with other asp.net url properties.")
 //        ]
 //        public virtual string ImageUrl {
 //            get {
@@ -60,7 +66,8 @@
 //        [
 //        UrlProperty(),
 //        ResourceDescription("PermaLink_NavigateUrl"),
-//        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings", Justification = "Consistent with other asp.net url properties.")
+//        SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings",
+// Justification = "Consistent with other asp.net url properties.")
 //        ]
 //        public string NavigateUrl {
 //            get {
@@ -69,7 +76,8 @@
 //                }
 
 //                if (String.IsNullOrEmpty(_url)) {
-//                    // Logic to figure out a reliable path to the current page as copied from HtmlForm.
+//                    // Logic to figure out a reliable path to the current page as copied from
+// HtmlForm.
 //                    VirtualPath clientFilePath = Context.Request.ClientFilePath;
 
 //                    // ASURT 15075/11054/59970: always set the action to the current page.
@@ -84,8 +92,10 @@
 //                        }
 //                    }
 //                    else {
-//                        // Server.Transfer or RewritePath case.  We need to make the form action relative
-//                        // to the original ClientFilePath (since that's where the browser thinks we are).
+//                        // Server.Transfer or RewritePath case.  We need to make the form action
+// relative
+//                        // to the original ClientFilePath (since that's where the browser thinks
+// we are).
 //                        currentFilePath = clientFilePath.MakeRelative(currentFilePath);
 //                        _url = currentFilePath.VirtualPathString;
 //                    }
@@ -94,8 +104,10 @@
 
 //                    string queryString = Page.ClientQueryString;
 //                    // ASURT 15355: Don't lose the query string if there is one.
-//                    // In scriptless mobile HTML, we prepend __EVENTTARGET, et. al. to the query string.  These have to be
-//                    // removed from the form action.  Use new HttpValueCollection to leverage ToString(bool encoded).
+//                    // In scriptless mobile HTML, we prepend __EVENTTARGET, et. al. to the query
+// string.  These have to be
+//                    // removed from the form action.  Use new HttpValueCollection to leverage
+// ToString(bool encoded).
 //                    if (!String.IsNullOrEmpty(queryString)) {
 //                        _url += "?" + queryString;
 //                    }
@@ -113,7 +125,8 @@
 
 //        /// <devdoc>
 //        ///    <para>Gets or sets the target window or frame the contents of
-//        ///       the <see cref='System.Web.UI.WebControls.PermaLink'/> will be displayed into when clicked.</para>
+//        ///       the <see cref='System.Web.UI.WebControls.PermaLink'/> will be displayed into
+// when clicked.</para>
 //        /// </devdoc>
 //        [
 //        Category("Navigation"),
@@ -133,7 +146,8 @@
 
 //        /// <devdoc>
 //        ///    <para>
-//        ///       Gets or sets the text displayed for the <see cref='System.Web.UI.WebControls.PermaLink'/>.</para>
+//        ///       Gets or sets the text displayed for the <see
+// cref='System.Web.UI.WebControls.PermaLink'/>.</para>
 //        /// </devdoc>
 //        [
 //        Localizable(true),
@@ -157,7 +171,8 @@
 
 //        /// <internalonly/>
 //        /// <devdoc>
-//        /// <para>Adds the attribututes of the a <see cref='System.Web.UI.WebControls.PermaLink'/> to the output
+//        /// <para>Adds the attribututes of the a <see cref='System.Web.UI.WebControls.PermaLink'/>
+// to the output
 //        ///    stream for rendering.</para>
 //        /// </devdoc>
 //        protected override void AddAttributesToRender(HtmlTextWriter writer) {
@@ -206,7 +221,8 @@
 //            if (Page != null) {
 //                ScriptManager sm = ScriptManager.GetCurrent(Page);
 //                if (sm.EnableHistory && Visible) {
-//                    ScriptControlDescriptor desc = new ScriptControlDescriptor("Sys.UI.PermaLink", ClientID);
+//                    ScriptControlDescriptor desc = new ScriptControlDescriptor("Sys.UI.PermaLink",
+// ClientID);
 //                    yield return desc;
 //                }
 //            }

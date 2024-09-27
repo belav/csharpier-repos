@@ -47,7 +47,8 @@ namespace System.Threading.Tasks
             Contract.Requires(task != null);
 
             // If the task has already completed, then since the Task's CompletedSynchronously==false
-            // and we want it to be true, we need to create a new IAsyncResult. (We also need the AsyncState to match.)
+            // and we want it to be true, we need to create a new IAsyncResult. (We also need the AsyncState to
+            // match.)
             IAsyncResult asyncResult;
             if (task.IsCompleted)
             {
@@ -181,7 +182,8 @@ namespace System.Threading.Tasks
             /// <summary>The new CompletedSynchronously value.</summary>
             private readonly bool m_completedSynchronously;
 
-            /// <summary>Initializes the IAsyncResult with the Task to wrap and the overriding AsyncState and CompletedSynchronously values.</summary>
+            /// <summary>Initializes the IAsyncResult with the Task to wrap and the overriding AsyncState and
+            // CompletedSynchronously values.</summary>
             /// <param name="task">The Task to wrap.</param>
             /// <param name="state">The new AsyncState value</param>
             /// <param name="completedSynchronously">The new CompletedSynchronously value.</param>

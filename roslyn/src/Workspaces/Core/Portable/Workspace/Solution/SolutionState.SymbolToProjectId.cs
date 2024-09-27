@@ -20,19 +20,24 @@ namespace Microsoft.CodeAnalysis
 
             var projectId = GetOriginatingProjectIdWorker(symbol);
 
-            // Validate some invariants we think should hold.  We want to know if this breaks, which indicates some part
+            // Validate some invariants we think should hold.  We want to know if this breaks, which indicates
+            // some part
             // of our system not working as we might expect.  If they break, create NFWs so we can find out and
             // investigate.
 
             if (SymbolKey.IsBodyLevelSymbol(symbol))
             {
-                // If this is a method-body-level symbol, then we will have it's syntax tree.  Since  we already have a
-                // mapping from syntax-trees to docs, so we can immediately map this back to it's originating project.
+                // If this is a method-body-level symbol, then we will have it's syntax tree.  Since  we already
+                // have a
+                // mapping from syntax-trees to docs, so we can immediately map this back to it's originating
+                // project.
                 //
                 // Note: we don't do this for all source symbols, only method-body-level ones.  That's because other
                 // source symbols may be *retargetted*.  So you can have the same symbol retargetted into multiple
-                // projects, but which have the same syntax-tree (which is only in one project).  We need to actually
-                // check it's assembly symbol so that we get the actual project it is from (the original project, or the
+                // projects, but which have the same syntax-tree (which is only in one project).  We need to
+                // actually
+                // check it's assembly symbol so that we get the actual project it is from (the original project, or
+                // the
                 // retargetted project).
                 var syntaxTree = symbol.Locations[0].SourceTree;
                 Contract.ThrowIfNull(syntaxTree);

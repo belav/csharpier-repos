@@ -42,7 +42,8 @@ namespace System.Xml.Xsl.Runtime
         public abstract bool MoveToPreviousSibling(XPathNavigator navigator);
 
         /// <summary>
-        /// Reposition the navigator to the next following node (inc. descendants); skip over filtered nodes.
+        /// Reposition the navigator to the next following node (inc. descendants); skip over filtered
+        // nodes.
         /// If there are no matching nodes, then return false.
         /// </summary>
         public abstract bool MoveToFollowing(
@@ -155,7 +156,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return a previously constructed XmlNavigatorFilter that skips over nodes that do not match the specified type.
+        /// Return a previously constructed XmlNavigatorFilter that skips over nodes that do not match the
+        // specified type.
         /// </summary>
         public static XmlNavigatorFilter Create(XPathNodeType nodeType)
         {
@@ -164,7 +166,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Keep only nodes with XPathNodeType = nodeType, where XPathNodeType.Text selects whitespace as well.
+        /// Keep only nodes with XPathNodeType = nodeType, where XPathNodeType.Text selects whitespace as
+        // well.
         /// </summary>
         private XmlNavTypeFilter(XPathNodeType nodeType)
         {
@@ -362,7 +365,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Move to navigator's first attribute node.  If no attribute's exist, move to the first content node.
+        /// Move to navigator's first attribute node.  If no attribute's exist, move to the first content
+        // node.
         /// If no content nodes exist, return null.  Otherwise, return navigator.
         /// </summary>
         public static bool MoveToFirstAttributeContent(XPathNavigator navigator)
@@ -373,8 +377,10 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// If navigator is positioned on an attribute, move to the next attribute node.  If there are no more
-        /// attributes, move to the first content node.  If navigator is positioned on a content node, move to
+        /// If navigator is positioned on an attribute, move to the next attribute node.  If there are no
+        // more
+        /// attributes, move to the first content node.  If navigator is positioned on a content node, move
+        // to
         /// the next content node.  If there are no more attributes and content nodes, return null.
         /// Otherwise, return navigator.
         /// </summary>

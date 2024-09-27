@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that ensures property mappings have any ElementMapping discovered by the type mapper.
+///     A convention that ensures property mappings have any ElementMapping discovered by the type
+// mapper.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public class ElementMappingConvention : IModelFinalizingConvention

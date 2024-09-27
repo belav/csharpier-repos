@@ -22,59 +22,59 @@ namespace System.ServiceModel.Routing
             IRequestReplyRouter,
             IDuplexSessionRouter
     {
-        /*
-                class SimplexDatagramClient : ClientBase<ISimplexDatagramRouter>, ISimplexDatagramRouter
-                {
-                    public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
-                    {
-                        return Channel.BeginProcessMessage (message, callback, state);
-                    }
-        
-                    public void EndProcessMessage (IAsyncResult result);
-                    {
-                        Channel.EndProcessMessage (result);
-                    }
-                }
-        
-                class SimplexSessionClient : ClientBase<ISimplexSessionRouter>, ISimplexSessionRouter
-                {
-                    public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
-                    {
-                        return Channel.BeginProcessMessage (message, callback, state);
-                    }
-        
-                    public void EndProcessMessage (IAsyncResult result);
-                    {
-                        Channel.EndProcessMessage (result);
-                    }
-                }
-        
-                class DuplexSessionClient : ClientBase<IDuplexSessionRouter>, IDuplexSessionRouter
-                {
-                    public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
-                    {
-                        return Channel.BeginProcessMessage (message, callback, state);
-                    }
-        
-                    public void EndProcessMessage (IAsyncResult result);
-                    {
-                        Channel.EndProcessMessage (result);
-                    }
-                }
-        
-                class RequestReplyClient : ClientBase<IRequestReplyRouter>, IRequestReplyRouter
-                {
-                    public IAsyncResult BeginProcessRequest (Message message, AsyncCallback callback, object state)
-                    {
-                        return Channel.BeginProcessRequest (message, callback, state);
-                    }
-        
-                    public Message EndProcessRequest (IAsyncResult result);
-                    {
-                        return Channel.EndProcessRequest (result);
-                    }
-                }
-        */
+/*
+class SimplexDatagramClient : ClientBase<ISimplexDatagramRouter>, ISimplexDatagramRouter
+{
+public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
+{
+return Channel.BeginProcessMessage (message, callback, state);
+}
+
+public void EndProcessMessage (IAsyncResult result);
+{
+Channel.EndProcessMessage (result);
+}
+}
+
+class SimplexSessionClient : ClientBase<ISimplexSessionRouter>, ISimplexSessionRouter
+{
+public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
+{
+return Channel.BeginProcessMessage (message, callback, state);
+}
+
+public void EndProcessMessage (IAsyncResult result);
+{
+Channel.EndProcessMessage (result);
+}
+}
+
+class DuplexSessionClient : ClientBase<IDuplexSessionRouter>, IDuplexSessionRouter
+{
+public IAsyncResult BeginProcessMessage (Message message, AsyncCallback callback, object state)
+{
+return Channel.BeginProcessMessage (message, callback, state);
+}
+
+public void EndProcessMessage (IAsyncResult result);
+{
+Channel.EndProcessMessage (result);
+}
+}
+
+class RequestReplyClient : ClientBase<IRequestReplyRouter>, IRequestReplyRouter
+{
+public IAsyncResult BeginProcessRequest (Message message, AsyncCallback callback, object state)
+{
+return Channel.BeginProcessRequest (message, callback, state);
+}
+
+public Message EndProcessRequest (IAsyncResult result);
+{
+return Channel.EndProcessRequest (result);
+}
+}
+*/
 
         internal RoutingService() { }
 
@@ -101,7 +101,8 @@ namespace System.ServiceModel.Routing
             return ret;
         }
 
-        //		static readonly MethodInfo create_factory_method = typeof (ChannelFactory).GetMethod ("CreateFactory", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        //		static readonly MethodInfo create_factory_method = typeof (ChannelFactory).GetMethod
+        // ("CreateFactory", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
         void ProcessMessageDuplexSession(Message message)
         {
@@ -114,7 +115,8 @@ namespace System.ServiceModel.Routing
                     cf = new ChannelFactory<IDuplexSessionRouter>(se);
                     factories[se] = cf;
                 }
-                // FIXME: possibly reuse session channels, though I doubt saving session *at the router* makes sense...
+                // FIXME: possibly reuse session channels, though I doubt saving session *at the router* makes
+                // sense...
                 var ch = ((ChannelFactory<IDuplexSessionRouter>)cf).CreateChannel();
                 ch.EndProcessMessage(ch.BeginProcessMessage(message, null, null));
             }
@@ -147,7 +149,8 @@ namespace System.ServiceModel.Routing
                     cf = new ChannelFactory<ISimplexSessionRouter>(se);
                     factories[se] = cf;
                 }
-                // FIXME: possibly reuse session channels, though I doubt saving session *at the router* makes sense...
+                // FIXME: possibly reuse session channels, though I doubt saving session *at the router* makes
+                // sense...
                 var ch = ((ChannelFactory<ISimplexSessionRouter>)cf).CreateChannel();
                 ch.EndProcessMessage(ch.BeginProcessMessage(message, null, null));
             }

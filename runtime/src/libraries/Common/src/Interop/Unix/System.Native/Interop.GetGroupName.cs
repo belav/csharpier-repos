@@ -18,7 +18,8 @@ internal static partial class Interop
         /// Tries to get the group name associated to the specified group ID.
         /// </summary>
         /// <param name="gid">The group ID.</param>
-        /// <param name="groupName">When this method returns true, gets the value of the group name associated with the specified id. On failure, it is null.</param>
+        /// <param name="groupName">When this method returns true, gets the value of the group name
+        // associated with the specified id. On failure, it is null.</param>
         /// <returns>On success, returns true. On failure, returns false.</returns>
         internal static bool TryGetGroupName(
             uint gid,

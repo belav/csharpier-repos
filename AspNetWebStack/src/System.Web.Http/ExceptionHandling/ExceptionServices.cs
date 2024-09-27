@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -50,12 +51,14 @@ namespace System.Web.Http.ExceptionHandling
         }
 
         /// <summary>
-        /// Gets an exception handler that calls the registered handler service, if any, and ensures exceptions do not
+        /// Gets an exception handler that calls the registered handler service, if any, and ensures
+        // exceptions do not
         /// accidentally propagate to the host.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <returns>
-        /// An exception handler that calls any registered handler and ensures exceptions do not accidentally propagate
+        /// An exception handler that calls any registered handler and ensures exceptions do not
+        // accidentally propagate
         /// to the host.
         /// </returns>
         public static IExceptionHandler GetHandler(HttpConfiguration configuration)
@@ -71,12 +74,14 @@ namespace System.Web.Http.ExceptionHandling
         }
 
         /// <summary>
-        /// Gets an exception handler that calls the registered handler service, if any, and ensures exceptions do not
+        /// Gets an exception handler that calls the registered handler service, if any, and ensures
+        // exceptions do not
         /// accidentally propagate to the host.
         /// </summary>
         /// <param name="services">The services container.</param>
         /// <returns>
-        /// An exception handler that calls any registered handler and ensures exceptions do not accidentally propagate
+        /// An exception handler that calls any registered handler and ensures exceptions do not
+        // accidentally propagate
         /// to the host.
         /// </returns>
         public static IExceptionHandler GetHandler(ServicesContainer services)

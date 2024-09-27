@@ -56,7 +56,8 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// Returns the number of elements in the given enumerable. A null enumerable is allowed and results in 0.
+        /// Returns the number of elements in the given enumerable. A null enumerable is allowed and results
+        // in 0.
         /// </summary>
         public static uint EnumerableCount<T>(IEnumerable<T>? enumerable)
         {
@@ -90,9 +91,12 @@ namespace Microsoft.Cci
     }
 
     /// <summary>
-    /// A declarative specification of a security action applied to a set of permissions. Used by the CLR loader to enforce security restrictions.
-    /// Each security attribute represents a serialized permission or permission set for a specified security action.
-    /// The union of the security attributes with identical security action, define the permission set to which the security action applies.
+    /// A declarative specification of a security action applied to a set of permissions. Used by the
+    // CLR loader to enforce security restrictions.
+    /// Each security attribute represents a serialized permission or permission set for a specified
+    // security action.
+    /// The union of the security attributes with identical security action, define the permission set
+    // to which the security action applies.
     /// </summary>
     internal readonly struct SecurityAttribute
     {
@@ -112,7 +116,8 @@ namespace Microsoft.Cci
     internal interface IMarshallingInformation
     {
         /// <summary>
-        /// <see cref="ITypeReference"/> or a string (usually a fully-qualified type name of a type implementing the custom marshaller, but Dev11 allows any string).
+        /// <see cref="ITypeReference"/> or a string (usually a fully-qualified type name of a type
+        // implementing the custom marshaller, but Dev11 allows any string).
         /// </summary>
         object GetCustomMarshaller(EmitContext context);
 
@@ -128,13 +133,15 @@ namespace Microsoft.Cci
         System.Runtime.InteropServices.UnmanagedType ElementType { get; }
 
         /// <summary>
-        /// Specifies the index of the parameter that contains the value of the Interface Identifier (IID) of the marshalled object.
+        /// Specifies the index of the parameter that contains the value of the Interface Identifier (IID)
+        // of the marshalled object.
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
         int IidParameterIndex { get; }
 
         /// <summary>
-        /// The unmanaged type to which the managed type will be marshalled. This can be UnmanagedType.CustomMarshaler, in which case the unmanaged type
+        /// The unmanaged type to which the managed type will be marshalled. This can be
+        // UnmanagedType.CustomMarshaler, in which case the unmanaged type
         /// is decided at runtime.
         /// </summary>
         System.Runtime.InteropServices.UnmanagedType UnmanagedType { get; }
@@ -146,22 +153,29 @@ namespace Microsoft.Cci
         int NumberOfElements { get; }
 
         /// <summary>
-        /// The zero based index of the parameter in the unmanaged method that contains the number of elements in the variable portion of unmanaged array.
-        /// If -1, the variable portion is of size zero, or the caller conveys the size of the variable portion of the array to the unmanaged method in some other way.
+        /// The zero based index of the parameter in the unmanaged method that contains the number of
+        // elements in the variable portion of unmanaged array.
+        /// If -1, the variable portion is of size zero, or the caller conveys the size of the variable
+        // portion of the array to the unmanaged method in some other way.
         /// </summary>
         short ParamIndex { get; }
 
         /// <summary>
-        /// The type to which the variant values of all elements of the safe array must belong. See also SafeArrayElementUserDefinedSubtype.
-        /// (The element type of a safe array is VARIANT. The "sub type" specifies the value of all of the tag fields (vt) of the element values. )
+        /// The type to which the variant values of all elements of the safe array must belong. See also
+        // SafeArrayElementUserDefinedSubtype.
+        /// (The element type of a safe array is VARIANT. The "sub type" specifies the value of all of the
+        // tag fields (vt) of the element values. )
         /// -1 if it should be omitted from the marshal blob.
         /// </summary>
         VarEnum SafeArrayElementSubtype { get; }
 
         /// <summary>
-        /// A reference to the user defined type to which the variant values of all elements of the safe array must belong.
-        /// (The element type of a safe array is VARIANT. The tag fields will all be either VT_DISPATCH or VT_UNKNOWN or VT_RECORD.
-        /// The "user defined sub type" specifies the type of value the ppdispVal/ppunkVal/pvRecord fields of the element values may point to.)
+        /// A reference to the user defined type to which the variant values of all elements of the safe
+        // array must belong.
+        /// (The element type of a safe array is VARIANT. The tag fields will all be either VT_DISPATCH or
+        // VT_UNKNOWN or VT_RECORD.
+        /// The "user defined sub type" specifies the type of value the ppdispVal/ppunkVal/pvRecord fields
+        // of the element values may point to.)
         /// </summary>
         ITypeReference GetSafeArrayElementUserDefinedSubtype(EmitContext context);
     }
@@ -190,7 +204,8 @@ namespace Microsoft.Cci
     }
 
     /// <summary>
-    /// Implemented by an entity that is always a member of a particular parameter list, such as an IParameterDefinition.
+    /// Implemented by an entity that is always a member of a particular parameter list, such as an
+    // IParameterDefinition.
     /// Provides a way to determine the position where the entity appears in the parameter list.
     /// </summary>
     internal interface IParameterListEntry
@@ -241,7 +256,8 @@ namespace Microsoft.Cci
     }
 
     /// <summary>
-    /// A resource file formatted according to Win32 API conventions and typically obtained from a Portable Executable (PE) file.
+    /// A resource file formatted according to Win32 API conventions and typically obtained from a
+    // Portable Executable (PE) file.
     /// See the Win32 UpdateResource method for more details.
     /// </summary>
     internal interface IWin32Resource
@@ -254,7 +270,8 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// An integer tag that identifies what type of resource this is. If the value is less than 0, this.TypeName should be used instead.
+        /// An integer tag that identifies what type of resource this is. If the value is less than 0,
+        // this.TypeName should be used instead.
         /// </summary>
         int TypeId { get; }
 
@@ -266,7 +283,8 @@ namespace Microsoft.Cci
         }
 
         /// <summary>
-        /// An integer tag that identifies this resource. If the value is less than 0, this.Name should be used instead.
+        /// An integer tag that identifies this resource. If the value is less than 0, this.Name should be
+        // used instead.
         /// </summary>
         int Id { get; }
 

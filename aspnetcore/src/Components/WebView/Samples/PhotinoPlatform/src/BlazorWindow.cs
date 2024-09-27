@@ -22,7 +22,8 @@ public class BlazorWindow
     /// <param name="hostPage">The path to the host page.</param>
     /// <param name="services">The service provider.</param>
     /// <param name="configureWindow">A callback that configures the window.</param>
-    /// <param name="pathBase">The pathbase for the application. URLs will be resolved relative to this.</param>
+    /// <param name="pathBase">The pathbase for the application. URLs will be resolved relative to
+    // this.</param>
     public BlazorWindow(
         string title,
         string hostPage,

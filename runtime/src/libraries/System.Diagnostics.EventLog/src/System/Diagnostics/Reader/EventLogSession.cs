@@ -37,7 +37,8 @@ namespace System.Diagnostics.Eventing.Reader
     {
         //
         // the two context handles for rendering (for EventLogRecord).
-        // the system and user context handles. They are both common for all the event instances and can be created only once.
+        // the system and user context handles. They are both common for all the event instances and can be
+        // created only once.
         // access to the data member references is safe, while
         // invoking methods on it is marked SecurityCritical as appropriate.
         //
@@ -62,7 +63,8 @@ namespace System.Diagnostics.Eventing.Reader
                 if (this.renderContextHandleSystem.IsInvalid)
                 {
                     // Create the SYSTEM render context
-                    // Call the EvtCreateRenderContext to get the renderContextHandleSystem, so that we can get the system/values/user properties.
+                    // Call the EvtCreateRenderContext to get the renderContextHandleSystem, so that we can get the
+                    // system/values/user properties.
                     this.renderContextHandleSystem = NativeWrapper.EvtCreateRenderContext(
                         0,
                         null,

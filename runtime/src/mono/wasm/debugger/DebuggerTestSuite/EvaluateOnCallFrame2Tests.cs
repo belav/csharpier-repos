@@ -48,7 +48,8 @@ namespace DebuggerTests
                 true,
             };
 
-            // TODO: { "DebuggerTests.EvaluateTestsGeneric`1", "Instance", 9, "EvaluateTestsGenericStructInstanceMethod", prefix }
+            // TODO: { "DebuggerTests.EvaluateTestsGeneric`1", "Instance", 9,
+            // "EvaluateTestsGenericStructInstanceMethod", prefix }
         }
 
         public static IEnumerable<object[]> InstanceMethodForTypeMembersTestData(string type_name)
@@ -1231,7 +1232,9 @@ namespace DebuggerTests
                             TNumber("-3.3000000000000003", isDecimal: true)
                         ), // default: -3.2
                         // https://github.com/dotnet/runtime/issues/93057
-                        // ("test.SumDefaultNegativeAndRequiredParamShortInts(-1, -120)", TNumber(-121)), // we have no way of testing it, debugger recognizes passed literals as integers and does not find the correct overload. We would need to cast to short and we don't support passing parameters with a cast.
+                        // ("test.SumDefaultNegativeAndRequiredParamShortInts(-1, -120)", TNumber(-121)), // we have no way
+                        // of testing it, debugger recognizes passed literals as integers and does not find the correct
+                        // overload. We would need to cast to short and we don't support passing parameters with a cast.
                         // ("test.SumDefaultNegativeAndRequiredParamShortInts(-1)", TNumber(-124)), // default: -123
                         // ("test.GetDefaultNegativeShortInt(-123)", TNumber(-123)),
                         ("test.GetDefaultNegativeShortInt()", TNumber(-123)), // default: -123
@@ -1643,7 +1646,8 @@ namespace DebuggerTests
                         id,
                         ("s_valueTypeEnum.ToString()", TString("no")),
                         ("mc.valueTypeEnum.ToString()", TString("yes"))
-                    //    ("mc.valueTypeEnum.HasFlag(SampleEnum.no)", TBool(true)) // ToDo: https://github.com/dotnet/runtime/issues/92262
+                    //    ("mc.valueTypeEnum.HasFlag(SampleEnum.no)", TBool(true)) // ToDo:
+                    // https://github.com/dotnet/runtime/issues/92262
                     );
                 }
             );

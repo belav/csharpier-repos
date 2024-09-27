@@ -48,11 +48,13 @@ public class BindingInfo
     public string? BinderModelName { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="Type"/> of the <see cref="IModelBinder"/> implementation used to bind the
+    /// Gets or sets the <see cref="Type"/> of the <see cref="IModelBinder"/> implementation used to
+    // bind the
     /// model.
     /// </summary>
     /// <remarks>
-    /// Also set <see cref="BindingSource"/> if the specified <see cref="IModelBinder"/> implementation does not
+    /// Also set <see cref="BindingSource"/> if the specified <see cref="IModelBinder"/> implementation
+    // does not
     /// use values from form data, route values or the query string.
     /// </remarks>
     public Type? BinderType
@@ -81,7 +83,8 @@ public class BindingInfo
     public IPropertyFilterProvider? PropertyFilterProvider { get; set; }
 
     /// <summary>
-    /// Gets or sets a predicate which determines whether or not the model should be bound based on state
+    /// Gets or sets a predicate which determines whether or not the model should be bound based on
+    // state
     /// from the current request.
     /// </summary>
     public Func<ActionContext, bool>? RequestPredicate { get; set; }
@@ -97,14 +100,18 @@ public class BindingInfo
     public object? ServiceKey { get; set; }
 
     /// <summary>
-    /// Constructs a new instance of <see cref="BindingInfo"/> from the given <paramref name="attributes"/>.
+    /// Constructs a new instance of <see cref="BindingInfo"/> from the given <paramref
+    // name="attributes"/>.
     /// <para>
-    /// This overload does not account for <see cref="BindingInfo"/> specified via <see cref="ModelMetadata"/>. Consider using
-    /// <see cref="GetBindingInfo(IEnumerable{object}, ModelMetadata)"/> overload, or <see cref="TryApplyBindingInfo(ModelMetadata)"/>
+    /// This overload does not account for <see cref="BindingInfo"/> specified via <see
+    // cref="ModelMetadata"/>. Consider using
+    /// <see cref="GetBindingInfo(IEnumerable{object}, ModelMetadata)"/> overload, or <see
+    // cref="TryApplyBindingInfo(ModelMetadata)"/>
     /// on the result of this method to get a more accurate <see cref="BindingInfo"/> instance.
     /// </para>
     /// </summary>
-    /// <param name="attributes">A collection of attributes which are used to construct <see cref="BindingInfo"/>
+    /// <param name="attributes">A collection of attributes which are used to construct <see
+    // cref="BindingInfo"/>
     /// </param>
     /// <returns>A new instance of <see cref="BindingInfo"/>.</returns>
     public static BindingInfo? GetBindingInfo(IEnumerable<object> attributes)
@@ -199,11 +206,14 @@ public class BindingInfo
     }
 
     /// <summary>
-    /// Constructs a new instance of <see cref="BindingInfo"/> from the given <paramref name="attributes"/> and <paramref name="modelMetadata"/>.
+    /// Constructs a new instance of <see cref="BindingInfo"/> from the given <paramref
+    // name="attributes"/> and <paramref name="modelMetadata"/>.
     /// </summary>
-    /// <param name="attributes">A collection of attributes which are used to construct <see cref="BindingInfo"/>.</param>
+    /// <param name="attributes">A collection of attributes which are used to construct <see
+    // cref="BindingInfo"/>.</param>
     /// <param name="modelMetadata">The <see cref="ModelMetadata"/>.</param>
-    /// <returns>A new instance of <see cref="BindingInfo"/> if any binding metadata was discovered; otherwise or <see langword="null"/>.</returns>
+    /// <returns>A new instance of <see cref="BindingInfo"/> if any binding metadata was discovered;
+    // otherwise or <see langword="null"/>.</returns>
     public static BindingInfo? GetBindingInfo(
         IEnumerable<object> attributes,
         ModelMetadata modelMetadata
@@ -232,7 +242,8 @@ public class BindingInfo
     /// </para>
     /// </summary>
     /// <param name="modelMetadata">The <see cref="ModelMetadata"/>.</param>
-    /// <returns><see langword="true"/> if any binding metadata from <paramref name="modelMetadata"/> was applied;
+    /// <returns><see langword="true"/> if any binding metadata from <paramref name="modelMetadata"/>
+    // was applied;
     /// <see langword="false"/> otherwise.</returns>
     public bool TryApplyBindingInfo(ModelMetadata modelMetadata)
     {

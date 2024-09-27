@@ -101,7 +101,8 @@ namespace Internal.TypeSystem
             return true;
         }
 
-        // Used to determine whether a type parameter used to instantiate another type parameter with a specific special
+        // Used to determine whether a type parameter used to instantiate another type parameter with a
+        // specific special
         // constraint satisfies that constraint.
         private static bool CheckGenericSpecialConstraint(
             TypeDesc type,
@@ -144,7 +145,8 @@ namespace Internal.TypeSystem
                             return true;
                         break;
                     case GenericConstraints.DefaultConstructorConstraint:
-                        // As constraint is only ancestor, can only be sure whether type has public default constructor if it is a value type
+                        // As constraint is only ancestor, can only be sure whether type has public default constructor if
+                        // it is a value type
                         if (constraint.IsValueType)
                             return true;
                         break;

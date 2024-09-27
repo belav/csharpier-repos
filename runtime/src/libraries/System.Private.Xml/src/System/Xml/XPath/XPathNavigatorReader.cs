@@ -60,7 +60,8 @@ namespace System.Xml.XPath
 
         /// <summary>
         /// Translates an XPathNodeType value into the corresponding XmlNodeType value.
-        /// XPathNodeType.Whitespace and XPathNodeType.SignificantWhitespace are mapped into XmlNodeType.Text.
+        /// XPathNodeType.Whitespace and XPathNodeType.SignificantWhitespace are mapped into
+        // XmlNodeType.Text.
         /// </summary>
         internal static XmlNodeType ToXmlNodeType(XPathNodeType typ)
         {
@@ -487,8 +488,10 @@ namespace System.Xml.XPath
             }
             if (null == namespaceURI)
                 namespaceURI = string.Empty;
-            // We need to clone the navigator and move the clone to the attribute to see whether the attribute exists,
-            // because XPathNavigator.GetAttribute return string.Empty for both when the attribute is not there or when
+            // We need to clone the navigator and move the clone to the attribute to see whether the attribute
+            // exists,
+            // because XPathNavigator.GetAttribute return string.Empty for both when the attribute is not there
+            // or when
             // it has an empty value. XmlReader.GetAttribute must return null if the attribute does not exist.
             if ((object)nav == (object)_nav)
                 nav = nav.Clone();
@@ -862,7 +865,8 @@ namespace System.Xml.XPath
                 _savedState = _state;
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _state = _savedState;
 
             // call to the helper
@@ -891,7 +895,8 @@ namespace System.Xml.XPath
                 _savedState = _state;
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _state = _savedState;
 
             // call to the helper
@@ -920,7 +925,8 @@ namespace System.Xml.XPath
                 _savedState = _state;
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _state = _savedState;
 
             // call to the helper
@@ -949,7 +955,8 @@ namespace System.Xml.XPath
                 _savedState = _state;
             }
 
-            // turn off InReadBinary state in order to have a normal Read() behavior when called from readBinaryHelper
+            // turn off InReadBinary state in order to have a normal Read() behavior when called from
+            // readBinaryHelper
             _state = _savedState;
 
             // call to the helper
@@ -1220,7 +1227,8 @@ namespace System.Xml.XPath
 
     /// <summary>
     /// The XmlEmptyNavigator exposes a document node with no children.
-    /// Only one XmlEmptyNavigator exists per AppDomain (Singleton).  That's why the constructor is private.
+    /// Only one XmlEmptyNavigator exists per AppDomain (Singleton).  That's why the constructor is
+    // private.
     /// Use the Singleton property to get the EmptyNavigator.
     /// </summary>
     internal sealed class XmlEmptyNavigator : XPathNavigator

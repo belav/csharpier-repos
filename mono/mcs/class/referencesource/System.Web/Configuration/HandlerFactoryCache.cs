@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * Config related classes for HttpApplication
- */
+* Config related classes for HttpApplication
+*/
 
 namespace System.Web.Configuration
 {
@@ -17,9 +17,9 @@ namespace System.Web.Configuration
     using System.Web;
     using System.Web.Compilation;
 
-    /*
-     * An object to cache a factory
-     */
+/*
+* An object to cache a factory
+*/
     internal class HandlerFactoryCache
     {
         private IHttpHandlerFactory _factory;
@@ -80,7 +80,8 @@ namespace System.Web.Configuration
             get { return _factory; }
         }
 
-        // Dev10 732000: In a homogenous AppDomain, it is necessary to assert FileIoPermission to load types outside
+        // Dev10 732000: In a homogenous AppDomain, it is necessary to assert FileIoPermission to load types
+        // outside
         // the AppDomain's grant set.
         [FileIOPermission(
             SecurityAction.Assert,

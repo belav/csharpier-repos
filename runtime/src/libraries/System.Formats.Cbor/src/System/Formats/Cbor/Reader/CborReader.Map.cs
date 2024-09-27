@@ -12,19 +12,25 @@ namespace System.Formats.Cbor
         private Stack<HashSet<(int Offset, int Length)>>? _pooledKeyEncodingRangeAllocations;
 
         /// <summary>Reads the next data item as the start of a map (major type 5).</summary>
-        /// <returns>The number of key-value pairs in a definite-length map, or <see langword="null" /> if the map is indefinite-length.</returns>
-        /// <exception cref="InvalidOperationException">The next data item does not have the correct major type.</exception>
+        /// <returns>The number of key-value pairs in a definite-length map, or <see langword="null" /> if
+        // the map is indefinite-length.</returns>
+        /// <exception cref="InvalidOperationException">The next data item does not have the correct major
+        // type.</exception>
         /// <exception cref="CborContentException"><para>The next value has an invalid CBOR encoding.</para>
         /// <para>-or-</para>
         /// <para>There was an unexpected end of CBOR encoding data.</para>
         /// <para>-or-</para>
-        /// <para>The next value uses a CBOR encoding that is not valid under the current conformance mode.</para></exception>
+        /// <para>The next value uses a CBOR encoding that is not valid under the current conformance
+        // mode.</para></exception>
         /// <remarks>
         /// Map contents are consumed as if they were arrays twice the length of the map's declared size.
-        /// For instance, a map of size 1 containing a key of type <see cref="int" /> with a value of type <see cref="string" />
-        /// must be consumed by successive calls to <see cref="ReadInt32" /> and <see cref="ReadTextString" />.
+        /// For instance, a map of size 1 containing a key of type <see cref="int" /> with a value of type
+        // <see cref="string" />
+        /// must be consumed by successive calls to <see cref="ReadInt32" /> and <see cref="ReadTextString"
+        // />.
         /// It is up to the caller to keep track of whether the next value is a key or a value.
-        /// Fundamentally, this is a technical restriction stemming from the fact that CBOR allows keys of arbitrary type,
+        /// Fundamentally, this is a technical restriction stemming from the fact that CBOR allows keys of
+        // arbitrary type,
         /// for instance a map can contain keys that are maps themselves.
         /// </remarks>
         public int? ReadStartMap()
@@ -79,7 +85,8 @@ namespace System.Formats.Cbor
         /// <para>-or-</para>
         /// <para>There was an unexpected end of CBOR encoding data.</para>
         /// <para>-or-</para>
-        /// <para>The next value uses a CBOR encoding that is not valid under the current conformance mode.</para></exception>
+        /// <para>The next value uses a CBOR encoding that is not valid under the current conformance
+        // mode.</para></exception>
         public void ReadEndMap()
         {
             if (_definiteLength is null)

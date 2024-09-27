@@ -137,7 +137,8 @@ namespace PartialCompactionTest
             DeleteSpaces();
         }
 
-        //want to create fragmentation in Gen2; when objects in the "spaces" list get in gen2, clear the list.
+        //want to create fragmentation in Gen2; when objects in the "spaces" list get in gen2, clear the
+        // list.
         public static void DeleteSpaces()
         {
             if (regionList.Count == 0)
@@ -270,13 +271,13 @@ namespace PartialCompactionTest
 
         public static void RemoveObjects(List<ObjectWrapper> Arr)
         {
-            /*
-            int CountPinned = CountPinnedObjects(Arr);
-            Console.WriteLine("pinned objects, before removing= " + CountPinned);
-            int Count = CountTotalObjects(Arr);
-            Console.WriteLine("total objects, before removing= " + Count);
-            Console.WriteLine("percentage pinned " + (float)CountPinned * 100.0f / (float)Count);
-            */
+/*
+int CountPinned = CountPinnedObjects(Arr);
+Console.WriteLine("pinned objects, before removing= " + CountPinned);
+int Count = CountTotalObjects(Arr);
+Console.WriteLine("total objects, before removing= " + Count);
+Console.WriteLine("percentage pinned " + (float)CountPinned * 100.0f / (float)Count);
+*/
             Console.WriteLine("Removing Objects");
             //Console.WriteLine("before: Arr.Count " + Arr.Count);
             for (int i = Arr.Count - 1; i >= 0; i--)
@@ -663,7 +664,8 @@ namespace PartialCompactionTest
             {
                 while (size < regionSizeMB * 1024 * 1024)
                 {
-                    //create an object with the characteristics(size, pinned) of this region. The object is added either o the static array or to Arr
+                    //create an object with the characteristics(size, pinned) of this region. The object is added either
+                    // o the static array or to Arr
                     bool useStatic = Rand.Next(0, 2) == 0 ? true : false;
 
                     if (useStatic)

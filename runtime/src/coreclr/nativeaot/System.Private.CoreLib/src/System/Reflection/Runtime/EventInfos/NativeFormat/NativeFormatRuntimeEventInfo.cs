@@ -24,9 +24,12 @@ namespace System.Reflection.Runtime.EventInfos.NativeFormat
     {
         //
         // eventHandle    - the "tkEventDef" that identifies the event.
-        // definingType   - the "tkTypeDef" that defined the field (this is where you get the metadata reader that created eventHandle.)
-        // contextType    - the type that supplies the type context (i.e. substitutions for generic parameters.) Though you
-        //                  get your raw information from "definingType", you report "contextType" as your DeclaringType property.
+        // definingType   - the "tkTypeDef" that defined the field (this is where you get the metadata
+        // reader that created eventHandle.)
+        // contextType    - the type that supplies the type context (i.e. substitutions for generic
+        // parameters.) Though you
+        //                  get your raw information from "definingType", you report "contextType" as your
+        // DeclaringType property.
         //
         //  For example:
         //

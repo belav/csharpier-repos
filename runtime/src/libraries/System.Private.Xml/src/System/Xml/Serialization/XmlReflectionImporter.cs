@@ -350,7 +350,8 @@ namespace System.Xml.Serialization
                     && !root.IsNullable
                     && model.TypeDesc.IsOptionalValue
                 )
-                    //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
+                    //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider
+                    // using '{0}' type or removing the IsNullable property from the XmlElement attribute.
                     throw new InvalidOperationException(
                         SR.Format(
                             SR.XmlInvalidNotNullable,
@@ -1105,7 +1106,8 @@ namespace System.Xml.Serialization
                         // if InitializeStructMembers returns true, then there were *no* changes to the DeferredWorkItems
                         //
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (index != limiter.DeferredWorkItems.Count - 1)
                             throw new InvalidOperationException(
                                 SR.Format(
@@ -1147,7 +1149,8 @@ namespace System.Xml.Serialization
                 TypeModel baseModel = _modelScope.GetTypeModel(model.Type.BaseType!, false);
                 if (!(baseModel is StructModel))
                 {
-                    //XmlUnsupportedInheritance=Using '{0}' as a base type for a class is not supported by XmlSerializer.
+                    //XmlUnsupportedInheritance=Using '{0}' as a base type for a class is not supported by
+                    // XmlSerializer.
                     throw new NotSupportedException(
                         SR.Format(SR.XmlUnsupportedInheritance, model.Type.BaseType!.FullName)
                     );
@@ -1181,7 +1184,8 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    // the import of the baseMapping was deferred, make sure that the derived mappings is deferred as well
+                    // the import of the baseMapping was deferred, make sure that the derived mappings is deferred as
+                    // well
                     if (!limiter.DeferredWorkItems.Contains(mapping))
                     {
                         limiter.DeferredWorkItems.Add(new ImportStructWorkItem(model, mapping));
@@ -2365,7 +2369,8 @@ namespace System.Xml.Serialization
                             && !xmlElement.IsNullable
                             && typeModel.TypeDesc.IsOptionalValue
                         )
-                            //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
+                            //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider
+                            // using '{0}' type or removing the IsNullable property from the XmlElement attribute.
                             throw new InvalidOperationException(
                                 SR.Format(
                                     SR.XmlInvalidNotNullable,
@@ -2648,7 +2653,8 @@ namespace System.Xml.Serialization
                                 && !xmlElement.IsNullable
                                 && typeModel.TypeDesc.IsOptionalValue
                             )
-                                //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
+                                //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider
+                                // using '{0}' type or removing the IsNullable property from the XmlElement attribute.
                                 throw new InvalidOperationException(
                                     SR.Format(
                                         SR.XmlInvalidNotNullable,
@@ -2765,7 +2771,8 @@ namespace System.Xml.Serialization
                             && !xmlElement.IsNullable
                             && typeModel.TypeDesc.IsOptionalValue
                         )
-                            //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider using '{0}' type or removing the IsNullable property from the XmlElement attribute.
+                            //XmlInvalidNotNullable=IsNullable may not be set to 'false' for a Nullable<{0}> type. Consider
+                            // using '{0}' type or removing the IsNullable property from the XmlElement attribute.
                             throw new InvalidOperationException(
                                 SR.Format(
                                     SR.XmlInvalidNotNullable,

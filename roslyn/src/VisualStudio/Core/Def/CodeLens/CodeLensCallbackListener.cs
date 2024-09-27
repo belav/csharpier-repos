@@ -222,7 +222,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 .ConfigureAwait(false);
             var textSpan = descriptorContext.ApplicableSpan.Value.ToTextSpan();
 
-            // TODO: This check avoids ArgumentOutOfRangeException but it's not clear if this is the right solution
+            // TODO: This check avoids ArgumentOutOfRangeException but it's not clear if this is the right
+            // solution
             // https://github.com/dotnet/roslyn/issues/44639
             if (!root.FullSpan.Contains(textSpan))
             {
@@ -297,7 +298,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 }
             }
 
-            // If we couldn't find the document the usual way we did so, then maybe it's source generated; let's try locating it
+            // If we couldn't find the document the usual way we did so, then maybe it's source generated; let's
+            // try locating it
             // with the DocumentId we have directly
             if (
                 TryGetGuid("RoslynDocumentIdGuid", out var documentIdGuid)

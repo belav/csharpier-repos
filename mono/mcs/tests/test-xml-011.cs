@@ -15,11 +15,11 @@ namespace Testing
         /// </invalid>
         public string PublicField2;
 
-        /**
-         <summary>
-         Javadoc comment for public field
-         </summary>
-        */
+/**
+<summary>
+Javadoc comment for public field
+</summary>
+*/
         public string PublicField3;
 
         public static void Main() { }

@@ -153,10 +153,10 @@ namespace Mono.AppleTls
 
         public static bool Equals(SafeSecCertificateHandle first, SafeSecCertificateHandle second)
         {
-            /*
-             * This is a little bit expensive, but unfortunately there is no better API to compare two
-             * SecCertificateRef's for equality.
-             */
+/*
+* This is a little bit expensive, but unfortunately there is no better API to compare two
+* SecCertificateRef's for equality.
+*/
             if (first == null || first.IsInvalid)
                 throw new ArgumentNullException(nameof(first));
             if (second == null || second.IsInvalid)

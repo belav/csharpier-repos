@@ -6,7 +6,8 @@ using System.Runtime.ExceptionServices;
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
 /// <summary>
-/// A context for resource filters, specifically <see cref="IResourceFilter.OnResourceExecuted"/> calls.
+/// A context for resource filters, specifically <see cref="IResourceFilter.OnResourceExecuted"/>
+// calls.
 /// </summary>
 public class ResourceExecutedContext : FilterContext
 {
@@ -84,10 +85,12 @@ public class ResourceExecutedContext : FilterContext
 
     /// <summary>
     /// <para>
-    /// Gets or sets a value indicating whether or not the current <see cref="Exception"/> has been handled.
+    /// Gets or sets a value indicating whether or not the current <see cref="Exception"/> has been
+    // handled.
     /// </para>
     /// <para>
-    /// If <c>false</c> the <see cref="Exception"/> will be rethrown by the runtime after resource filters
+    /// If <c>false</c> the <see cref="Exception"/> will be rethrown by the runtime after resource
+    // filters
     /// have executed.
     /// </para>
     /// </summary>

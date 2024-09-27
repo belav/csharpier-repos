@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -25,14 +26,20 @@ namespace System.Net.Http.Formatting
         }
 
         /// <summary>
-        /// Compares two <see cref="MediaTypeWithQualityHeaderValue"/> based on their quality value (a.k.a their "q-value").
-        /// Values with identical q-values are considered equal (i.e the result is 0) with the exception that sub-type wild-cards are
-        /// considered less than specific media types and full wild-cards are considered less than sub-type wild-cards. This allows to
-        /// sort a sequence of <see cref="StringWithQualityHeaderValue"/> following their q-values in the order of specific media types,
+        /// Compares two <see cref="MediaTypeWithQualityHeaderValue"/> based on their quality value (a.k.a
+        // their "q-value").
+        /// Values with identical q-values are considered equal (i.e the result is 0) with the exception
+        // that sub-type wild-cards are
+        /// considered less than specific media types and full wild-cards are considered less than sub-type
+        // wild-cards. This allows to
+        /// sort a sequence of <see cref="StringWithQualityHeaderValue"/> following their q-values in the
+        // order of specific media types,
         /// sub-type wildcards, and last any full wild-cards.
         /// </summary>
-        /// <param name="mediaType1">The first <see cref="MediaTypeWithQualityHeaderValue"/> to compare.</param>
-        /// <param name="mediaType2">The second <see cref="MediaTypeWithQualityHeaderValue"/> to compare.</param>
+        /// <param name="mediaType1">The first <see cref="MediaTypeWithQualityHeaderValue"/> to
+        // compare.</param>
+        /// <param name="mediaType2">The second <see cref="MediaTypeWithQualityHeaderValue"/> to
+        // compare.</param>
         /// <returns></returns>
         public int Compare(
             MediaTypeWithQualityHeaderValue mediaType1,

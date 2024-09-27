@@ -34,7 +34,8 @@ namespace MonoTests.System.Xml
 
         internal void XmlNodeBaseProperties(XmlNode original, XmlNode cloned)
         {
-            // Assert.AreEqual (// 		 original.baseuri, cloned.baseuri, original.nodetype + " was incorrectly cloned.");
+            // Assert.AreEqual (// 		 original.baseuri, cloned.baseuri, original.nodetype + " was incorrectly
+            // cloned.");
             Assert.IsNull(cloned.ParentNode);
             Assert.IsTrue(!Object.ReferenceEquals(original, cloned), "Copies, not pointers");
         }

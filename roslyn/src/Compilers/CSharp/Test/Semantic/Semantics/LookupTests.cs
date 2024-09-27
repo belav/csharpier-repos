@@ -132,10 +132,12 @@ class Test
 /*</bind>*/
 ";
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupSymbols(testSrc);
         }
 
@@ -196,10 +198,12 @@ class Test
                 "Test",
             };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
 
             Assert.Equal(
@@ -232,10 +236,12 @@ class Test
 
             List<string> expected_in_lookupSymbols = new List<string> { "j", "k" };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e => e.ToString());
 
@@ -260,7 +266,8 @@ class Test
 }
 ";
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupSymbols(testSrc, name: "i", arity: 1);
 
             var actual_lookupSymbols = GetLookupSymbols(testSrc, name: "i", arity: 1);
@@ -279,10 +286,12 @@ protected class MyClass {
 }
 ";
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupSymbols(testSrc);
         }
 
@@ -301,10 +310,12 @@ class Test {
 }
 ";
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             GetLookupSymbols(testSrc);
         }
 
@@ -331,10 +342,12 @@ namespace T1
 
             List<string> expected_in_lookupSymbols = new List<string> { "T1", "T2" };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e => e.ToString());
 
@@ -381,10 +394,12 @@ namespace T2
                 //"T2.Test" this is hidden by T1.Test
             };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
                 e.ToTestDisplayString()
@@ -442,12 +457,14 @@ class Test
             var position = GetPositionForBinding(tree);
             var binder = ((CSharpSemanticModel)model).GetEnclosingBinder(position);
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var info = LookupSymbolsInfo.GetInstance();
             binder.AddLookupSymbolsInfo(info, LookupOptions.MustBeInvocableIfMember);
             var actual_lookupNames = info.Names;
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = actual_lookupNames.SelectMany(name =>
             {
                 var lookupResult = LookupResult.GetInstance();
@@ -536,10 +553,12 @@ class Test
                 "void Test.F<T, U>(T i, U j)",
             };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc, name: "F", arity: 0);
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
                 e.ToTestDisplayString()
@@ -595,7 +614,8 @@ class Test
                 "void Test.F<T, U>(T i, U j)",
             };
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var comp = CreateCompilation(testSrc);
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
@@ -620,7 +640,8 @@ class Test
                 .ToArray();
             lookupResult.Free();
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = model.LookupNames(position);
 
             Assert.Contains(expected_in_lookupNames[0], actual_lookupNames);
@@ -658,13 +679,15 @@ class Test
                 "<CppImplementationDetails>",
             };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = model.LookupNames(GetPositionForBinding(tree), null).ToList();
             var actual_lookupNames_ignoreAcc = model
                 .LookupNames(GetPositionForBinding(tree), null)
                 .ToList();
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = model.LookupSymbols(GetPositionForBinding(tree));
             var actual_lookupSymbols_ignoreAcc = model.LookupSymbols(GetPositionForBinding(tree));
             var actual_lookupSymbols_as_string = actual_lookupSymbols.Select(e =>
@@ -1363,10 +1386,12 @@ class Program
 
             List<string> expected_in_lookupSymbols = new List<string> { "p2" };
 
-            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupNames = GetLookupNames(testSrc);
 
-            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
+            // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind>
+            // </bind> tags
             var actual_lookupSymbols = GetLookupSymbols(testSrc);
             var actual_lookupSymbols_as_string = actual_lookupSymbols
                 .Select(e => e.ToString())
@@ -1549,7 +1574,8 @@ class Q : P
             var source = "class C { public static void Main() { @var v = 1; } }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (1,39): error CS0246: The type or namespace name 'var' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,39): error CS0246: The type or namespace name 'var' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // class C { public static void Main() { @var v = 1; } }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "@var")
                         .WithArguments("var")
@@ -1661,7 +1687,8 @@ class C
             var source = @"using A = List<int>;";
             var compilation = CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (1,11): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,11): error CS0246: The type or namespace name 'List<>' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // using A = List<int>;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "List<int>")
                         .WithArguments("List<>")

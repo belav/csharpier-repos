@@ -137,21 +137,25 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The absolute span of the list elements in characters, including the leading and trailing trivia of the first and last elements.
+        /// The absolute span of the list elements in characters, including the leading and trailing trivia
+        // of the first and last elements.
         /// </summary>
         public TextSpan FullSpan => _node?.FullSpan ?? default(TextSpan);
 
         /// <summary>
-        /// The absolute span of the list elements in characters, not including the leading and trailing trivia of the first and last elements.
+        /// The absolute span of the list elements in characters, not including the leading and trailing
+        // trivia of the first and last elements.
         /// </summary>
         public TextSpan Span => _node?.Span ?? default(TextSpan);
 
         /// <summary>
-        /// Returns the string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
+        /// Returns the string representation of the nodes and tokens in this list, not including the first
+        // node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The string representation of the nodes and tokens in this list, not including the first node or token's leading trivia
+        /// The string representation of the nodes and tokens in this list, not including the first node or
+        // token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public override string ToString()
@@ -160,11 +164,13 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the full string representation of the nodes and tokens in this list including the first node or token's leading trivia
+        /// Returns the full string representation of the nodes and tokens in this list including the first
+        // node or token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the nodes and tokens in this list including the first node or token's leading trivia
+        /// The full string representation of the nodes and tokens in this list including the first node or
+        // token's leading trivia
         /// and the last node or token's trailing trivia.
         /// </returns>
         public string ToFullString()
@@ -181,7 +187,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the first SyntaxNodeOrToken structure from this list if present, else default(SyntaxNodeOrToken).
+        /// Gets the first SyntaxNodeOrToken structure from this list if present, else
+        // default(SyntaxNodeOrToken).
         /// </summary>
         public SyntaxNodeOrToken FirstOrDefault()
         {
@@ -197,7 +204,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Gets the last SyntaxNodeOrToken structure from this list if present, else default(SyntaxNodeOrToken).
+        /// Gets the last SyntaxNodeOrToken structure from this list if present, else
+        // default(SyntaxNodeOrToken).
         /// </summary>
         public SyntaxNodeOrToken LastOrDefault()
         {
@@ -250,7 +258,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified node or token added to the end.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified node or token added to the
+        // end.
         /// </summary>
         /// <param name="nodeOrToken">The node or token to add.</param>
         public SyntaxNodeOrTokenList Add(SyntaxNodeOrToken nodeOrToken)
@@ -259,7 +268,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified nodes or tokens added to the end.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified nodes or tokens added to
+        // the end.
         /// </summary>
         /// <param name="nodesOrTokens">The nodes or tokens to add.</param>
         public SyntaxNodeOrTokenList AddRange(IEnumerable<SyntaxNodeOrToken> nodesOrTokens)
@@ -268,7 +278,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified node or token inserted at the index.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified node or token inserted at
+        // the index.
         /// </summary>
         /// <param name="index">The index to insert at.</param>
         /// <param name="nodeOrToken">The node or token to insert.</param>
@@ -283,7 +294,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified nodes or tokens inserted at the index.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified nodes or tokens inserted at
+        // the index.
         /// </summary>
         /// <param name="index">The index to insert at.</param>
         /// <param name="nodesAndTokens">The nodes or tokens to insert.</param>
@@ -331,7 +343,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the element at the specified index removed.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the element at the specified index
+        // removed.
         /// </summary>
         /// <param name="index">The index of the element to remove.</param>
         public SyntaxNodeOrTokenList RemoveAt(int index)
@@ -362,7 +375,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified element replaced with a new node or token.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified element replaced with a new
+        // node or token.
         /// </summary>
         /// <param name="nodeOrTokenInList">The element to replace.</param>
         /// <param name="newNodeOrToken">The new node or token.</param>
@@ -380,7 +394,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified element replaced with a new nodes and tokens.
+        /// Creates a new <see cref="SyntaxNodeOrTokenList"/> with the specified element replaced with a new
+        // nodes and tokens.
         /// </summary>
         /// <param name="nodeOrTokenInList">The element to replace.</param>
         /// <param name="newNodesAndTokens">The new nodes and tokens.</param>
@@ -487,7 +502,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="obj">The <see cref="object"/> to compare with this instance.</param>
         /// <returns>
-        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise, <c>false</c>.
+        ///   <c>true</c> if the specified <see cref="object"/> is equal to this instance; otherwise,
+        // <c>false</c>.
         /// </returns>
         public override bool Equals(object? obj)
         {
@@ -498,7 +514,8 @@ namespace Microsoft.CodeAnalysis
         /// Returns a hash code for this instance.
         /// </summary>
         /// <returns>
-        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+        /// A hash code for this instance, suitable for use in hashing algorithms and data structures like a
+        // hash table.
         /// </returns>
         public override int GetHashCode()
         {
@@ -529,9 +546,11 @@ namespace Microsoft.CodeAnalysis
             /// Advances the enumerator to the next element of the collection.
             /// </summary>
             /// <returns>
-            /// true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            /// true if the enumerator was successfully advanced to the next element; false if the enumerator
+            // has passed the end of the collection.
             /// </returns>
-            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was
+            // created. </exception>
             public bool MoveNext()
             {
                 if (_index < _list.Count)
@@ -553,16 +572,19 @@ namespace Microsoft.CodeAnalysis
             object IEnumerator.Current => this.Current;
 
             /// <summary>
-            /// Sets the enumerator to its initial position, which is before the first element in the collection.
+            /// Sets the enumerator to its initial position, which is before the first element in the
+            // collection.
             /// </summary>
-            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was created. </exception>
+            /// <exception cref="InvalidOperationException">The collection was modified after the enumerator was
+            // created. </exception>
             void IEnumerator.Reset()
             {
                 throw new NotSupportedException();
             }
 
             /// <summary>
-            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+            // resources.
             /// </summary>
             void IDisposable.Dispose() { }
 

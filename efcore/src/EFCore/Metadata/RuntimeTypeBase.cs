@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a structural type in a model.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
 {
@@ -31,10 +32,14 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     private RuntimeComplexProperty[]? _flattenedComplexProperties;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected RuntimeTypeBase(
@@ -109,30 +114,42 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         _directlyDerivedTypes ?? Enumerable.Empty<RuntimeTypeBase>();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual bool HasDirectlyDerivedTypes =>
         _directlyDerivedTypes != null && _directlyDerivedTypes.Count > 0;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual IEnumerable<RuntimeTypeBase> GetDerivedTypes() =>
         GetDerivedTypes<RuntimeTypeBase>();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual IEnumerable<T> GetDerivedTypes<T>()
         where T : RuntimeTypeBase
@@ -160,31 +177,46 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// </summary>
     /// <param name="name">The name of the property to add.</param>
     /// <param name="clrType">The type of value the property will hold.</param>
-    /// <param name="propertyInfo">The corresponding CLR property or <see langword="null" /> for a shadow property.</param>
-    /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow property.</param>
-    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this property.</param>
-    /// <param name="nullable">A value indicating whether this property can contain <see langword="null" />.</param>
-    /// <param name="concurrencyToken">A value indicating whether this property is used as a concurrency token.</param>
-    /// <param name="valueGenerated">A value indicating when a value for this property will be generated by the database.</param>
+    /// <param name="propertyInfo">The corresponding CLR property or <see langword="null" /> for a
+    // shadow property.</param>
+    /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow
+    // property.</param>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this
+    // property.</param>
+    /// <param name="nullable">A value indicating whether this property can contain <see langword="null"
+    // />.</param>
+    /// <param name="concurrencyToken">A value indicating whether this property is used as a concurrency
+    // token.</param>
+    /// <param name="valueGenerated">A value indicating when a value for this property will be generated
+    // by the database.</param>
     /// <param name="beforeSaveBehavior">
-    ///     A value indicating whether or not this property can be modified before the entity is saved to the database.
+    ///     A value indicating whether or not this property can be modified before the entity is saved
+    // to the database.
     /// </param>
     /// <param name="afterSaveBehavior">
-    ///     A value indicating whether or not this property can be modified after the entity is saved to the database.
+    ///     A value indicating whether or not this property can be modified after the entity is saved to
+    // the database.
     /// </param>
     /// <param name="maxLength">The maximum length of data that is allowed in this property.</param>
-    /// <param name="unicode">A value indicating whether or not the property can persist Unicode characters.</param>
+    /// <param name="unicode">A value indicating whether or not the property can persist Unicode
+    // characters.</param>
     /// <param name="precision">The precision of data that is allowed in this property.</param>
     /// <param name="scale">The scale of data that is allowed in this property.</param>
     /// <param name="providerPropertyType">
-    ///     The type that the property value will be converted to before being sent to the database provider.
+    ///     The type that the property value will be converted to before being sent to the database
+    // provider.
     /// </param>
-    /// <param name="valueGeneratorFactory">The factory that has been set to generate values for this property, if any.</param>
-    /// <param name="valueConverter">The custom <see cref="ValueConverter" /> set for this property.</param>
+    /// <param name="valueGeneratorFactory">The factory that has been set to generate values for this
+    // property, if any.</param>
+    /// <param name="valueConverter">The custom <see cref="ValueConverter" /> set for this
+    // property.</param>
     /// <param name="valueComparer">The <see cref="ValueComparer" /> for this property.</param>
-    /// <param name="keyValueComparer">The <see cref="ValueComparer" /> to use with keys for this property.</param>
-    /// <param name="providerValueComparer">The <see cref="ValueComparer" /> to use for the provider values for this property.</param>
-    /// <param name="jsonValueReaderWriter">The <see cref="JsonValueReaderWriter" /> for this property.</param>
+    /// <param name="keyValueComparer">The <see cref="ValueComparer" /> to use with keys for this
+    // property.</param>
+    /// <param name="providerValueComparer">The <see cref="ValueComparer" /> to use for the provider
+    // values for this property.</param>
+    /// <param name="jsonValueReaderWriter">The <see cref="JsonValueReaderWriter" /> for this
+    // property.</param>
     /// <param name="typeMapping">The <see cref="CoreTypeMapping" /> for this property.</param>
     /// <param name="sentinel">The property value to use to consider the property not set.</param>
     /// <returns>The newly created property.</returns>
@@ -247,7 +279,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
+    ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the
+    // given name is defined.
     /// </summary>
     /// <remarks>
     ///     This API only finds scalar properties and does not find navigation properties.
@@ -258,10 +291,14 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
         FindDeclaredProperty(name) ?? _baseType?.FindProperty(name);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual RuntimeProperty? FindDeclaredProperty(string name) =>
@@ -272,7 +309,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// </summary>
     /// <remarks>
     ///     This method does not return properties declared on base types.
-    ///     It is useful when iterating over all types to avoid processing the same property more than once.
+    ///     It is useful when iterating over all types to avoid processing the same property more than
+    // once.
     ///     Use <see cref="GetProperties" /> to also return properties declared on base types.
     /// </remarks>
     /// <returns>Declared scalar properties.</returns>
@@ -284,7 +322,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
             : GetDerivedTypes().SelectMany(et => et.GetDeclaredProperties());
 
     /// <summary>
-    ///     Finds matching properties on the given entity type. Returns <see langword="null" /> if any property is not found.
+    ///     Finds matching properties on the given entity type. Returns <see langword="null" /> if any
+    // property is not found.
     /// </summary>
     /// <remarks>
     ///     This API only finds scalar properties and does not find navigations or service properties.
@@ -330,10 +369,14 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual IEnumerable<RuntimeProperty> GetProperties() =>
@@ -364,20 +407,30 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     /// <param name="name">The name of the property to add.</param>
     /// <param name="clrType">The type of value the property will hold.</param>
     /// <param name="targetTypeName">The name of the complex type to be added.</param>
-    /// <param name="targetType">The CLR type that is used to represent instances of this complex type.</param>
-    /// <param name="propertyInfo">The corresponding CLR property or <see langword="null" /> for a shadow property.</param>
-    /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow property.</param>
-    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this property.</param>
-    /// <param name="nullable">A value indicating whether this property can contain <see langword="null" />.</param>
+    /// <param name="targetType">The CLR type that is used to represent instances of this complex
+    // type.</param>
+    /// <param name="propertyInfo">The corresponding CLR property or <see langword="null" /> for a
+    // shadow property.</param>
+    /// <param name="fieldInfo">The corresponding CLR field or <see langword="null" /> for a shadow
+    // property.</param>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> used for this
+    // property.</param>
+    /// <param name="nullable">A value indicating whether this property can contain <see langword="null"
+    // />.</param>
     /// <param name="collection">Indicates whether the property represents a collection.</param>
     /// <param name="changeTrackingStrategy">The change tracking strategy for this complex type.</param>
-    /// <param name="indexerPropertyInfo">The <see cref="PropertyInfo" /> for the indexer on the associated CLR type if one exists.</param>
+    /// <param name="indexerPropertyInfo">The <see cref="PropertyInfo" /> for the indexer on the
+    // associated CLR type if one exists.</param>
     /// <param name="propertyBag">
-    ///     A value indicating whether this entity type has an indexer which is able to contain arbitrary properties
-    ///     and a method that can be used to determine whether a given indexer property contains a value.
+    ///     A value indicating whether this entity type has an indexer which is able to contain
+    // arbitrary properties
+    ///     and a method that can be used to determine whether a given indexer property contains a
+    // value.
     /// </param>
-    /// <param name="propertyCount">The expected number of declared properties for this complex type.</param>
-    /// <param name="complexPropertyCount">The expected number of declared complex properties for this complex type.</param>
+    /// <param name="propertyCount">The expected number of declared properties for this complex
+    // type.</param>
+    /// <param name="complexPropertyCount">The expected number of declared complex properties for this
+    // complex type.</param>
     /// <returns>The newly created property.</returns>
     public virtual RuntimeComplexProperty AddComplexProperty(
         string name,
@@ -421,7 +474,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     Gets the complex property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
+    ///     Gets the complex property with a given name. Returns <see langword="null" /> if no property
+    // with the given name is defined.
     /// </summary>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
@@ -451,7 +505,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     ///     Gets the complex properties defined on this type.
     /// </summary>
     /// <remarks>
-    ///     This API only returns complex properties and does not find navigation, scalar or service properties.
+    ///     This API only returns complex properties and does not find navigation, scalar or service
+    // properties.
     /// </remarks>
     /// <returns>The complex properties defined on this type.</returns>
     public virtual IEnumerable<RuntimeComplexProperty> GetComplexProperties() =>
@@ -486,34 +541,50 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public abstract IEnumerable<RuntimePropertyBase> GetMembers();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public abstract IEnumerable<RuntimePropertyBase> GetDeclaredMembers();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public abstract RuntimePropertyBase? FindMember(string name);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public abstract IEnumerable<RuntimePropertyBase> FindMembersInHierarchy(string name);
 
@@ -523,7 +594,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     public abstract InstantiationBinding? ConstructorBinding { get; set; }
 
     /// <summary>
-    ///     Returns all <see cref="IProperty" /> members from this type and all nested complex types, if any.
+    ///     Returns all <see cref="IProperty" /> members from this type and all nested complex types, if
+    // any.
     /// </summary>
     /// <returns>The properties.</returns>
     public virtual IEnumerable<RuntimeProperty> GetFlattenedProperties()
@@ -552,7 +624,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     Returns all <see cref="RuntimeComplexProperty" /> members from this type and all nested complex types, if any.
+    ///     Returns all <see cref="RuntimeComplexProperty" /> members from this type and all nested
+    // complex types, if any.
     /// </summary>
     /// <returns>The properties.</returns>
     public virtual IEnumerable<RuntimeComplexProperty> GetFlattenedComplexProperties()
@@ -580,7 +653,8 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     Returns all <see cref="IProperty" /> members from this type and all nested complex types, if any.
+    ///     Returns all <see cref="IProperty" /> members from this type and all nested complex types, if
+    // any.
     /// </summary>
     /// <returns>The properties.</returns>
     public virtual IEnumerable<RuntimeProperty> GetFlattenedDeclaredProperties()
@@ -611,27 +685,39 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public abstract IEnumerable<RuntimePropertyBase> GetSnapshottableMembers();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual void FinalizeType() { }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected static IEnumerable<T> ToEnumerable<T>(T? element)
         where T : class => element == null ? Enumerable.Empty<T>() : new[] { element };
@@ -805,20 +891,23 @@ public abstract class RuntimeTypeBase : RuntimeAnnotatableBase, IRuntimeTypeBase
     IEnumerable<IPropertyBase> ITypeBase.GetSnapshottableMembers() => GetSnapshottableMembers();
 
     /// <summary>
-    ///     Returns all properties that implement <see cref="IProperty" />, including those on complex types.
+    ///     Returns all properties that implement <see cref="IProperty" />, including those on complex
+    // types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IProperty> ITypeBase.GetFlattenedProperties() => GetFlattenedProperties();
 
     /// <summary>
-    ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on complex types.
+    ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on
+    // complex types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IComplexProperty> ITypeBase.GetFlattenedComplexProperties() =>
         GetFlattenedComplexProperties();
 
     /// <summary>
-    ///     Returns all properties declared properties that implement <see cref="IProperty" />, including those on complex types.
+    ///     Returns all properties declared properties that implement <see cref="IProperty" />,
+    // including those on complex types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IProperty> ITypeBase.GetFlattenedDeclaredProperties() =>

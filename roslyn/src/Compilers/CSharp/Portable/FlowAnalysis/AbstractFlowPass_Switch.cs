@@ -96,13 +96,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private bool IsTraditionalSwitch(BoundSwitchStatement node)
         {
-            // Before recursive patterns were introduced, we did not consider handling both 'true' and 'false' to
-            // completely handle all case of a switch on a bool unless there was some patterny syntax or semantics
+            // Before recursive patterns were introduced, we did not consider handling both 'true' and 'false'
+            // to
+            // completely handle all case of a switch on a bool unless there was some patterny syntax or
+            // semantics
             // in the switch.  We had two different bound nodes and separate flow analysis handling for
             // "traditional" switch statements and "pattern-based" switch statements.  We simulate that behavior
             // by testing to see if this switch would have been handled under the old rules by the old compiler.
 
-            // If we are in a recent enough language version, we treat the switch as a fully pattern-based switch
+            // If we are in a recent enough language version, we treat the switch as a fully pattern-based
+            // switch
             // for the purposes of flow analysis.
             if (
                 compilation.LanguageVersion

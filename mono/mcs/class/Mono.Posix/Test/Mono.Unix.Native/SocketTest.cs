@@ -400,7 +400,8 @@ namespace MonoTests.Mono.Unix.Native
             var storage2 = address4.ToSockaddrStorage();
             var address5 = SockaddrUn.FromSockaddrStorage(storage2);
             Assert.AreEqual(address4, address5);
-            // Test the malloc() path for long SockaddrUn adresses (the syscalls will fail because the fd is invalid and because the path is too long)
+            // Test the malloc() path for long SockaddrUn adresses (the syscalls will fail because the fd is
+            // invalid and because the path is too long)
             Syscall.bind(-1, address4);
             Syscall.getsockname(-1, address4);
 
@@ -578,7 +579,8 @@ namespace MonoTests.Mono.Unix.Native
                         UnixMarshal.ThrowExceptionForLastError();
                     Assert.AreEqual(address.sa_family, address3.sa_family);
 
-                    // Try to store a sockaddr_in6 into a Sockaddr. Should fail because sockaddr_in6 should be larger than sockaddr_in
+                    // Try to store a sockaddr_in6 into a Sockaddr. Should fail because sockaddr_in6 should be larger
+                    // than sockaddr_in
                     var address4 = new SockaddrIn();
                     if (Syscall.getsockname(so1, address4) == 0)
                         Assert.Fail("getsockname() should have failed");
@@ -937,7 +939,8 @@ namespace MonoTests.Mono.Unix.Native
 
         public unsafe void ControlMsg(bool useMultipleControlMessages)
         {
-            // Create two socket pairs and send inner_so1 and inner_so2 over the other socket pair using SCM_RIGHTS
+            // Create two socket pairs and send inner_so1 and inner_so2 over the other socket pair using
+            // SCM_RIGHTS
             WithSocketPair(
                 (inner_so1, inner_so2) =>
                 {

@@ -51,7 +51,8 @@ public static class ApplicationModelConventionExtensions
     /// </summary>
     /// <param name="conventions">The list of <see cref="IApplicationModelConvention"/>
     /// in <see cref="AspNetCore.Mvc.MvcOptions"/>.</param>
-    /// <param name="controllerModelConvention">The <see cref="IControllerModelConvention"/> which needs to be
+    /// <param name="controllerModelConvention">The <see cref="IControllerModelConvention"/> which needs
+    // to be
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
@@ -87,7 +88,8 @@ public static class ApplicationModelConventionExtensions
     /// </summary>
     /// <param name="conventions">The list of <see cref="IApplicationModelConvention"/>
     /// in <see cref="AspNetCore.Mvc.MvcOptions"/>.</param>
-    /// <param name="parameterModelConvention">The <see cref="IParameterModelConvention"/> which needs to be
+    /// <param name="parameterModelConvention">The <see cref="IParameterModelConvention"/> which needs
+    // to be
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,
@@ -101,11 +103,13 @@ public static class ApplicationModelConventionExtensions
     }
 
     /// <summary>
-    /// Adds a <see cref="IParameterModelBaseConvention"/> to all properties and parameters in the application.
+    /// Adds a <see cref="IParameterModelBaseConvention"/> to all properties and parameters in the
+    // application.
     /// </summary>
     /// <param name="conventions">The list of <see cref="IApplicationModelConvention"/>
     /// in <see cref="AspNetCore.Mvc.MvcOptions"/>.</param>
-    /// <param name="parameterModelConvention">The <see cref="IParameterModelBaseConvention"/> which needs to be
+    /// <param name="parameterModelConvention">The <see cref="IParameterModelBaseConvention"/> which
+    // needs to be
     /// added.</param>
     public static void Add(
         this IList<IApplicationModelConvention> conventions,

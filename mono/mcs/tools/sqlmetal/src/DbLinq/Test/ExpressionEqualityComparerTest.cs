@@ -112,8 +112,10 @@ namespace DbLinqTest
         //public void Equality8Test()
         //{
         //    CheckEquality(
-        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static))),
-        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)))
+        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic |
+        // BindingFlags.Static))),
+        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic |
+        // BindingFlags.Static)))
         //        );
         //}
 
@@ -121,8 +123,10 @@ namespace DbLinqTest
         //public void Inequality8Test()
         //{
         //    CheckInequality(
-        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static))),
-        //        Expression.Invoke(Expression.Call(GetType().GetMethod("G", BindingFlags.NonPublic | BindingFlags.Static)))
+        //        Expression.Invoke(Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic |
+        // BindingFlags.Static))),
+        //        Expression.Invoke(Expression.Call(GetType().GetMethod("G", BindingFlags.NonPublic |
+        // BindingFlags.Static)))
         //        );
         //}
         [Test]

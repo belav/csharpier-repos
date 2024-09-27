@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // this is a regression test for VSWhidbey 359519
-// a struct Root, has a static field that appears earlier in the metadata than a valuetype instance field.
+// a struct Root, has a static field that appears earlier in the metadata than a valuetype instance
+// field.
 
 using System;
 using System.Runtime.InteropServices;

@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         internal readonly struct Arg
         {
             // To display enums in Expression Evaluator we need to remember the type of the enum.
-            // The debugger currently does not support evaluating expressions that involve Type instances nor lambdas,
+            // The debugger currently does not support evaluating expressions that involve Type instances nor
+            // lambdas,
             // so we need to manually special case the types of enums we care about displaying.
 
             private enum EnumType

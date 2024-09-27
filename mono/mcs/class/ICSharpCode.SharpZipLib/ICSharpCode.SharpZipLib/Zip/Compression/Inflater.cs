@@ -844,10 +844,10 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
                 return 0;
             }
             /*
-                        // Check for correct buff, off, len triple
-                        if (off < 0 || off + len >= buf.Length) {
-                            throw new ArgumentException("off/len outside buf bounds");
-                        }
+            // Check for correct buff, off, len triple
+            if (off < 0 || off + len >= buf.Length) {
+            throw new ArgumentException("off/len outside buf bounds");
+            }
             */
             int count = 0;
             int more;

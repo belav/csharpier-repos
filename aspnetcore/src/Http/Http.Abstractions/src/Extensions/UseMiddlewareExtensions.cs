@@ -183,8 +183,10 @@ public static class UseMiddlewareExtensions
                     _invokeMethod.CreateDelegate(typeof(RequestDelegate), instance);
             }
 
-            // Performance optimization: Use compiled expressions to invoke middleware with services injected in Invoke.
-            // If IsDynamicCodeCompiled is false then use standard reflection to avoid overhead of interpreting expressions.
+            // Performance optimization: Use compiled expressions to invoke middleware with services injected in
+            // Invoke.
+            // If IsDynamicCodeCompiled is false then use standard reflection to avoid overhead of interpreting
+            // expressions.
             var factory = RuntimeFeature.IsDynamicCodeCompiled
                 ? CompileExpression<object>(_invokeMethod, _parameters)
                 : ReflectionFallback<object>(_invokeMethod, _parameters);
@@ -331,14 +333,16 @@ public static class UseMiddlewareExtensions
         //
         //   Task Invoke(Middleware instance, HttpContext httpContext, IServiceProvider provider)
         //   {
-        //      return instance.Invoke(httpContext, (ILoggerFactory)UseMiddlewareExtensions.GetService(provider, typeof(ILoggerFactory));
+        //      return instance.Invoke(httpContext,
+        // (ILoggerFactory)UseMiddlewareExtensions.GetService(provider, typeof(ILoggerFactory));
         //   }
 
         //   Non generic version:
         //
         //   Task Invoke(object instance, HttpContext httpContext, IServiceProvider provider)
         //   {
-        //      return ((Middleware)instance).Invoke(httpContext, (ILoggerFactory)UseMiddlewareExtensions.GetService(provider, typeof(ILoggerFactory));
+        //      return ((Middleware)instance).Invoke(httpContext,
+        // (ILoggerFactory)UseMiddlewareExtensions.GetService(provider, typeof(ILoggerFactory));
         //   }
 
         var middleware = typeof(T);

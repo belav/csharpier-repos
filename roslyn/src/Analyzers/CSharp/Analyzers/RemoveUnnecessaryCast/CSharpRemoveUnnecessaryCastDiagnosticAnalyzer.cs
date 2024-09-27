@@ -14,7 +14,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryCast
 {
     /// <summary>
-    /// Supports simplifying cast expressions like <c>(T)x</c> as well as try-cast expressions like <c>x as T</c>
+    /// Supports simplifying cast expressions like <c>(T)x</c> as well as try-cast expressions like <c>x
+    // as T</c>
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpRemoveUnnecessaryCastDiagnosticAnalyzer

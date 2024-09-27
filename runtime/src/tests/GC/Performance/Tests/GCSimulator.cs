@@ -80,7 +80,8 @@ namespace GCSimulator
     }
 
     /// <summary>
-    /// we might want to implement a different strategy that decide the life time of the object based on the time
+    /// we might want to implement a different strategy that decide the life time of the object based on
+    // the time
     /// elapsed since the last object access.
     ///
     /// </summary>
@@ -372,7 +373,8 @@ namespace GCSimulator
         /// Parse the arguments, no error checking is done yet.
         /// TODO: Add more error checking.
         ///
-        ///  Populate variables with defaults, then overwrite them with config settings.  Finally overwrite them with command line parameters
+        ///  Populate variables with defaults, then overwrite them with config settings.  Finally overwrite
+        // them with command line parameters
         /// </summary>
         public static bool ParseArgs(string[] args)
         {

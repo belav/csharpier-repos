@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -14,9 +15,11 @@ using System.Web.Http.WebHost.Properties;
 
 namespace System.Web.Http.WebHost
 {
-    /// <summary>Provides the default implementation for handling exceptions within Web API web host.</summary>
+    /// <summary>Provides the default implementation for handling exceptions within Web API web
+    // host.</summary>
     /// <remarks>
-    /// This class preserves the legacy behavior of catch blocks and is the the default registered IExceptionHandler
+    /// This class preserves the legacy behavior of catch blocks and is the the default registered
+    // IExceptionHandler
     /// for web host.
     /// </remarks>
     internal class WebHostExceptionHandler : IExceptionHandler

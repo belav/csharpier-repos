@@ -30,13 +30,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlPanelAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicPanelAdapter.uex' path='docs/doc[@for="XhtmlPanelAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicPanelAdapter.uex'
+        // path='docs/doc[@for="XhtmlPanelAdapter.Control"]/*' />
         protected new Panel Control
         {
             get { return base.Control as Panel; }
         }
 
-        /// <include file='doc\XhtmlBasicPanelAdapter.uex' path='docs/doc[@for="XhtmlPanelAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicPanelAdapter.uex'
+        // path='docs/doc[@for="XhtmlPanelAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             if (Control.Content != null)

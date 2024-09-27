@@ -15,7 +15,8 @@ using Internal.Reflection.Core.Execution;
 namespace System.Reflection.Runtime.ParameterInfos.NativeFormat
 {
     //
-    // This implements ParameterInfo objects owned by MethodBase objects that have an associated Parameter metadata entity.
+    // This implements ParameterInfo objects owned by MethodBase objects that have an associated
+    // Parameter metadata entity.
     //
     internal sealed partial class NativeFormatMethodParameterInfo : RuntimeFatMethodParameterInfo
     {

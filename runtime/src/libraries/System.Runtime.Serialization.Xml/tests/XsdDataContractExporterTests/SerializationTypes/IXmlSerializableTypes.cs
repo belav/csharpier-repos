@@ -340,13 +340,16 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
 
         protected static bool PublishLegacyWSDL()
         {
-            //System.Collections.Specialized.NameValueCollection settings = ((System.Collections.Specialized.NameValueCollection)(System.Configuration.ConfigurationManager.GetSection("system.data.dataset")));
+            //System.Collections.Specialized.NameValueCollection settings =
+            //
+            // ((System.Collections.Specialized.NameValueCollection)(System.Configuration.ConfigurationManager.GetSection("system.data.dataset")));
             //if ((settings != null))
             //{
             //    string[] values = settings.GetValues("WSDL_VERSION");
             //    if ((values != null))
             //    {
-            //        System.Single version = System.Single.Parse(((string)(values[0])), ((System.IFormatProvider)(null)));
+            //        System.Single version = System.Single.Parse(((string)(values[0])),
+            // ((System.IFormatProvider)(null)));
             //        return(version < 2);
             //    }
             //}

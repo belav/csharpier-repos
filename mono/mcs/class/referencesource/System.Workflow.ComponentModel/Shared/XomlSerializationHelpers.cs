@@ -130,13 +130,15 @@ namespace System.Workflow.ComponentModel.Serialization
                 {
                     case XmlNodeType.Element:
                     {
-                        /*
-                        if (!reader.LocalName.Equals(localName))
-                        {
-                            serializationManager.ReportError(new WorkflowMarkupSerializationException(string.Format(resourceManager.GetString("DefnTagsCannotBeNested"), "def", localName, reader.LocalName), reader.LineNumber, reader.LinePosition));
-                            return;
-                        }
-                        */
+/*
+if (!reader.LocalName.Equals(localName))
+{
+serializationManager.ReportError(new
+WorkflowMarkupSerializationException(string.Format(resourceManager.GetString("DefnTagsCannotBeNested"),
+"def", localName, reader.LocalName), reader.LineNumber, reader.LinePosition));
+return;
+}
+*/
 
                         switch (reader.LocalName)
                         {
@@ -208,18 +210,19 @@ namespace System.Workflow.ComponentModel.Serialization
                         }
                         codeSegments.Add(codeSegment);
                         //}
-                        /*else
-                        {
-                            serializationManager.ReportError( new WorkflowMarkupSerializationException(
-                                                                        string.Format(resourceManager.GetString("IllegalCDataTextScoping"),
-                                                                                    "def",
-                                                                                    reader.LocalName,
-                                                                                    (currNodeType == XmlNodeType.CDATA ? resourceManager.GetString("CDATASection") : resourceManager.GetString("TextSection"))),
-                                                                        reader.LineNumber,
-                                                                        reader.LinePosition)
-                                                            );
-                        }
-                        */
+/*else
+{
+serializationManager.ReportError( new WorkflowMarkupSerializationException(
+string.Format(resourceManager.GetString("IllegalCDataTextScoping"),
+"def",
+reader.LocalName,
+(currNodeType == XmlNodeType.CDATA ? resourceManager.GetString("CDATASection") :
+resourceManager.GetString("TextSection"))),
+reader.LineNumber,
+reader.LinePosition)
+);
+}
+*/
                         break;
                     }
                 }
@@ -291,7 +294,8 @@ namespace System.Workflow.ComponentModel.Serialization
                                     )
                                 )
                                 {
-                                    // WinOE Bug 14561.  This is to fix a performance problem.  When an activity is added to the activity
+                                    // WinOE Bug 14561.  This is to fix a performance problem.  When an activity is added to the
+                                    // activity
                                     // tree at the runtime, it's much faster if the ID of the activity is already set.  The code that
                                     // the CodeDomSerializer generates will add the activity first before it sets the ID for the child
                                     // activity.  We can change that order by always serializing the children first.  Therefore, we

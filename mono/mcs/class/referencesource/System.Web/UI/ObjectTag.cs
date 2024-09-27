@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the <object runat=server> tag
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Implements the <object runat=server> tag
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -21,10 +21,10 @@ namespace System.Web.UI
     using System.Web.Util;
 
     /*
-     * ObjectTag is a marker class, that should never be instantiated.  Its
-     * only purpose is to point to the ObjectTagBuilder class through its
-     * metadata.
-     */
+    * ObjectTag is a marker class, that should never be instantiated.  Its
+    * only purpose is to point to the ObjectTagBuilder class through its
+    * metadata.
+    */
     [ControlBuilderAttribute(typeof(ObjectTagBuilder))]
     internal class ObjectTag
     {
@@ -216,8 +216,8 @@ namespace System.Web.UI
     }
 
     /*
-     * Enum for the scope of an object tag
-     */
+    * Enum for the scope of an object tag
+    */
     internal enum ObjectTagScope
     {
         Default = 0,

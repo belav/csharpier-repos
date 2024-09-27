@@ -764,17 +764,20 @@ class C
             using (new EnsureEnglishUICulture())
             {
                 compilation.VerifyDiagnostics(
-                    // (15,13): error CS0221: Constant value '1.7976931348623157E+308' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (15,13): error CS0221: Constant value '1.7976931348623157E+308' cannot be converted to a 'int'
+                    // (use 'unchecked' syntax to override)
                     //         i = (int?)double.MaxValue;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)double.MaxValue")
                         .WithArguments(double.MaxValue.ToString(), "int")
                         .WithLocation(15, 13),
-                    // (16,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (16,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked'
+                    // syntax to override)
                     //         i = (int?)double.NaN;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)double.NaN")
                         .WithArguments(double.NaN.ToString(), "int")
                         .WithLocation(16, 13),
-                    // (17,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (17,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         i = (int?)double.NegativeInfinity;
                     Diagnostic(
                             ErrorCode.ERR_ConstOutOfRangeChecked,
@@ -782,7 +785,8 @@ class C
                         )
                         .WithArguments(double.NegativeInfinity.ToString(), "int")
                         .WithLocation(17, 13),
-                    // (18,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (18,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         i = (int?)double.PositiveInfinity;
                     Diagnostic(
                             ErrorCode.ERR_ConstOutOfRangeChecked,
@@ -790,62 +794,74 @@ class C
                         )
                         .WithArguments(double.PositiveInfinity.ToString(), "int")
                         .WithLocation(18, 13),
-                    // (22,13): error CS0221: Constant value '3.4028235E+38' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (22,13): error CS0221: Constant value '3.4028235E+38' cannot be converted to a 'int' (use
+                    // 'unchecked' syntax to override)
                     //         i = (int?)float.MaxValue;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)float.MaxValue")
                         .WithArguments(float.MaxValue.ToString(), "int")
                         .WithLocation(22, 13),
-                    // (23,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (23,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked'
+                    // syntax to override)
                     //         i = (int?)float.NaN;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)float.NaN")
                         .WithArguments(float.NaN.ToString(), "int")
                         .WithLocation(23, 13),
-                    // (24,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (24,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         i = (int?)float.NegativeInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)float.NegativeInfinity")
                         .WithArguments(float.NegativeInfinity.ToString(), "int")
                         .WithLocation(24, 13),
-                    // (25,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (25,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         i = (int?)float.PositiveInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int?)float.PositiveInfinity")
                         .WithArguments(float.PositiveInfinity.ToString(), "int")
                         .WithLocation(25, 13),
-                    // (29,13): error CS0221: Constant value '1.7976931348623157E+308' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (29,13): error CS0221: Constant value '1.7976931348623157E+308' cannot be converted to a 'int'
+                    // (use 'unchecked' syntax to override)
                     //         _ = (int)double.MaxValue;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)double.MaxValue")
                         .WithArguments(double.MaxValue.ToString(), "int")
                         .WithLocation(29, 13),
-                    // (30,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (30,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked'
+                    // syntax to override)
                     //         _ = (int)double.NaN;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)double.NaN")
                         .WithArguments(double.NaN.ToString(), "int")
                         .WithLocation(30, 13),
-                    // (31,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (31,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         _ = (int)double.NegativeInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)double.NegativeInfinity")
                         .WithArguments(double.NegativeInfinity.ToString(), "int")
                         .WithLocation(31, 13),
-                    // (32,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (32,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         _ = (int)double.PositiveInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)double.PositiveInfinity")
                         .WithArguments(double.PositiveInfinity.ToString(), "int")
                         .WithLocation(32, 13),
-                    // (36,13): error CS0221: Constant value '3.4028235E+38' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (36,13): error CS0221: Constant value '3.4028235E+38' cannot be converted to a 'int' (use
+                    // 'unchecked' syntax to override)
                     //         _ = (int)float.MaxValue;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)float.MaxValue")
                         .WithArguments(float.MaxValue.ToString(), "int")
                         .WithLocation(36, 13),
-                    // (37,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (37,13): error CS0221: Constant value 'NaN' cannot be converted to a 'int' (use 'unchecked'
+                    // syntax to override)
                     //         _ = (int)float.NaN;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)float.NaN")
                         .WithArguments(float.NaN.ToString(), "int")
                         .WithLocation(37, 13),
-                    // (38,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (38,13): error CS0221: Constant value '-∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         _ = (int)float.NegativeInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)float.NegativeInfinity")
                         .WithArguments(float.NegativeInfinity.ToString(), "int")
                         .WithLocation(38, 13),
-                    // (39,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax to override)
+                    // (39,13): error CS0221: Constant value '∞' cannot be converted to a 'int' (use 'unchecked' syntax
+                    // to override)
                     //         _ = (int)float.PositiveInfinity;
                     Diagnostic(ErrorCode.ERR_ConstOutOfRangeChecked, "(int)float.PositiveInfinity")
                         .WithArguments(float.PositiveInfinity.ToString(), "int")
@@ -862,7 +878,8 @@ class C
             var operand = target.Expression;
             Assert.Equal("double.NaN", operand.ToFullString());
 
-            // Note: there is a valid conversion here at the type level.  It's the process of evaluating the conversion, which for
+            // Note: there is a valid conversion here at the type level.  It's the process of evaluating the
+            // conversion, which for
             // constants happens at compile time, that triggers the error.
             HashSet<DiagnosticInfo> unused = null;
             var bag = DiagnosticBag.GetInstance();

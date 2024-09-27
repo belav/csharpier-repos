@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections;
@@ -26,10 +27,13 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Asserts that the expected <see cref="HttpRequestMessage"/> is equal to the actual <see cref="HttpRequestMessage"/>.
+        /// Asserts that the expected <see cref="HttpRequestMessage"/> is equal to the actual <see
+        // cref="HttpRequestMessage"/>.
         /// </summary>
-        /// <param name="expected">The expected <see cref="HttpRequestMessage"/>. Should not be <c>null</c>.</param>
-        /// <param name="actual">The actual <see cref="HttpRequestMessage"/>. Should not be <c>null</c>.</param>
+        /// <param name="expected">The expected <see cref="HttpRequestMessage"/>. Should not be
+        // <c>null</c>.</param>
+        /// <param name="actual">The actual <see cref="HttpRequestMessage"/>. Should not be
+        // <c>null</c>.</param>
         public async Task EqualAsync(HttpRequestMessage expected, HttpRequestMessage actual)
         {
             Assert.NotNull(expected);
@@ -54,21 +58,28 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Asserts that the expected <see cref="HttpResponseMessage"/> is equal to the actual <see cref="HttpResponseMessage"/>.
+        /// Asserts that the expected <see cref="HttpResponseMessage"/> is equal to the actual <see
+        // cref="HttpResponseMessage"/>.
         /// </summary>
-        /// <param name="expected">The expected <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
-        /// <param name="actual">The actual <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
+        /// <param name="expected">The expected <see cref="HttpResponseMessage"/>. Should not be
+        // <c>null</c>.</param>
+        /// <param name="actual">The actual <see cref="HttpResponseMessage"/>. Should not be
+        // <c>null</c>.</param>
         public Task EqualAsync(HttpResponseMessage expected, HttpResponseMessage actual)
         {
             return EqualAsync(expected, actual, verifyContentStringCallback: null);
         }
 
         /// <summary>
-        /// Asserts that the expected <see cref="HttpResponseMessage"/> is equal to the actual <see cref="HttpResponseMessage"/>.
+        /// Asserts that the expected <see cref="HttpResponseMessage"/> is equal to the actual <see
+        // cref="HttpResponseMessage"/>.
         /// </summary>
-        /// <param name="expected">The expected <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
-        /// <param name="actual">The actual <see cref="HttpResponseMessage"/>. Should not be <c>null</c>.</param>
-        /// <param name="verifyContentCallback">The callback to verify the Content string. If it is null, Assert.Equal will be used. </param>
+        /// <param name="expected">The expected <see cref="HttpResponseMessage"/>. Should not be
+        // <c>null</c>.</param>
+        /// <param name="actual">The actual <see cref="HttpResponseMessage"/>. Should not be
+        // <c>null</c>.</param>
+        /// <param name="verifyContentCallback">The callback to verify the Content string. If it is null,
+        // Assert.Equal will be used. </param>
         public async Task EqualAsync(
             HttpResponseMessage expected,
             HttpResponseMessage actual,
@@ -106,10 +117,13 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Asserts that the expected <see cref="HttpHeaders"/> instance is equal to the actual <see cref="actualHeaders"/> instance.
+        /// Asserts that the expected <see cref="HttpHeaders"/> instance is equal to the actual <see
+        // cref="actualHeaders"/> instance.
         /// </summary>
-        /// <param name="expectedHeaders">The expected <see cref="HttpHeaders"/> instance. Should not be <c>null</c>.</param>
-        /// <param name="actualHeaders">The actual <see cref="HttpHeaders"/> instance. Should not be <c>null</c>.</param>
+        /// <param name="expectedHeaders">The expected <see cref="HttpHeaders"/> instance. Should not be
+        // <c>null</c>.</param>
+        /// <param name="actualHeaders">The actual <see cref="HttpHeaders"/> instance. Should not be
+        // <c>null</c>.</param>
         public void Equal(HttpHeaders expectedHeaders, HttpHeaders actualHeaders)
         {
             Assert.NotNull(expectedHeaders);
@@ -138,7 +152,8 @@ namespace Microsoft.TestCommon
         /// Asserts the given <see cref="HttpHeaders"/> contain the given <paramref name="values"/>
         /// for the given <paramref name="name"/>.
         /// </summary>
-        /// <param name="headers">The <see cref="HttpHeaders"/> to examine.  It cannot be <c>null</c>.</param>
+        /// <param name="headers">The <see cref="HttpHeaders"/> to examine.  It cannot be
+        // <c>null</c>.</param>
         /// <param name="name">The name of the header.  It cannot be empty.</param>
         /// <param name="values">The values that must all be present.  It cannot be null.</param>
         public void Contains(HttpHeaders headers, string name, params string[] values)

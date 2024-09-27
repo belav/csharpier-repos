@@ -27,7 +27,8 @@ namespace Microsoft.Build.Tasks.Xaml
     {
         const string MSBuildNamespace = "http://schemas.microsoft.com/developer/msbuild/2003";
 
-        // We will do Dev10 behavior if the new required property GeneratedResourceFiles is NOT specified. This can happen
+        // We will do Dev10 behavior if the new required property GeneratedResourceFiles is NOT specified.
+        // This can happen
         // if a Dev10 version of the Microsoft.Xaml.Targets file is being used with Dev11 installed.
         bool supportExtensions = false;
         ITaskItem[] generatedResourceFiles;
@@ -50,7 +51,8 @@ namespace Microsoft.Build.Tasks.Xaml
         [Required]
         public string CompileTargetName { get; set; }
 
-        // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
+        // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as
+        // required.
         public ITaskItem[] GeneratedResourcesFiles
         {
             get { return this.generatedResourceFiles; }

@@ -641,7 +641,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             async,
             ss => ss.Set<Customer>().Skip(5),
             elementAsserter: (_, __) => {
-                /* non-deterministic */
+/* non-deterministic */
             }
         );
 
@@ -652,7 +652,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             async,
             ss => ss.Set<Customer>().OrderBy(c => true).Skip(5),
             elementAsserter: (_, __) => {
-                /* non-deterministic */
+/* non-deterministic */
             }
         );
 
@@ -4639,7 +4639,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Distinct()
                     .Take(5),
             elementAsserter: (_, __) => {
-                /* non-deterministic */
+/* non-deterministic */
             }
         );
 

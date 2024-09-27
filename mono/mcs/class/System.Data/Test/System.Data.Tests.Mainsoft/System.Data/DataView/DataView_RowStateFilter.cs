@@ -71,16 +71,18 @@ namespace tests.system_data_dll.System_Data
 
         public void run()
         {
-            /*
-                Added			A new row. 4
-                CurrentRows		Current rows including unchanged, new, and modified rows. 22
-                Deleted			A deleted row. 8
-                ModifiedCurrent A current version, which is a modified version of original data (see ModifiedOriginal). 16
-                ModifiedOriginal The original version (although it has since been modified and is available as ModifiedCurrent). 32
-                None			None. 0
-                OriginalRows	Original rows including unchanged and deleted rows. 42
-                Unchanged		An unchanged row. 2
-             */
+/*
+Added			A new row. 4
+CurrentRows		Current rows including unchanged, new, and modified rows. 22
+Deleted			A deleted row. 8
+ModifiedCurrent A current version, which is a modified version of original data (see
+ModifiedOriginal). 16
+ModifiedOriginal The original version (although it has since been modified and is available as
+ModifiedCurrent). 32
+None			None. 0
+OriginalRows	Original rows including unchanged and deleted rows. 42
+Unchanged		An unchanged row. 2
+*/
 
             //DataRowView[] drvResult = null;
             System.Collections.ArrayList al = new System.Collections.ArrayList();
@@ -193,18 +195,18 @@ namespace tests.system_data_dll.System_Data
                 EndCase(exp);
                 exp = null;
             }
-            /*
-                    //---------- OriginalRows --------
-                    dv.RowStateFilter = DataViewRowState.OriginalRows ;
-                    drResult = GetResultRows(dt,DataRowState.Unchanged | DataRowState.Deleted );
-                    try
-                    {
-                        BeginCase("OriginalRows");
-                        Compare(CompareSortedRows(dv,drResult),true );
-                    }
-                    catch(Exception ex)	{exp = ex;}
-                    finally	{EndCase(exp); exp = null;}
-            */
+/*
+//---------- OriginalRows --------
+dv.RowStateFilter = DataViewRowState.OriginalRows ;
+drResult = GetResultRows(dt,DataRowState.Unchanged | DataRowState.Deleted );
+try
+{
+BeginCase("OriginalRows");
+Compare(CompareSortedRows(dv,drResult),true );
+}
+catch(Exception ex)	{exp = ex;}
+finally	{EndCase(exp); exp = null;}
+*/
         }
 
         private DataRow[] GetResultRows(DataTable dt, DataRowState State)

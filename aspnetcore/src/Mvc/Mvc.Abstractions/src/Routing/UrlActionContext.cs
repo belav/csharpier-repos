@@ -4,17 +4,20 @@
 namespace Microsoft.AspNetCore.Mvc.Routing;
 
 /// <summary>
-/// Context object to be used for the URLs that <see cref="IUrlHelper.Action(UrlActionContext)"/> generates.
+/// Context object to be used for the URLs that <see cref="IUrlHelper.Action(UrlActionContext)"/>
+// generates.
 /// </summary>
 public class UrlActionContext
 {
     /// <summary>
-    /// The name of the action method that <see cref="IUrlHelper.Action(UrlActionContext)"/> uses to generate URLs.
+    /// The name of the action method that <see cref="IUrlHelper.Action(UrlActionContext)"/> uses to
+    // generate URLs.
     /// </summary>
     public string? Action { get; set; }
 
     /// <summary>
-    /// The name of the controller that <see cref="IUrlHelper.Action(UrlActionContext)"/> uses to generate URLs.
+    /// The name of the controller that <see cref="IUrlHelper.Action(UrlActionContext)"/> uses to
+    // generate URLs.
     /// </summary>
     public string? Controller { get; set; }
 

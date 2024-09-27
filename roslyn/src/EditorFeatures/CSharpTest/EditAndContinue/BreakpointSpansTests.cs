@@ -78,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
         /// Verifies all breakpoint spans of the declaration node marked by $$ in <paramref name="markup"/>
         /// and it's breakpoint span envelope (span that contains all breakpoint span of the declaration).
         ///
-        /// Only test declarations that have a single possible body (e.g. <see cref="VariableDeclaratorSyntax"/>,
+        /// Only test declarations that have a single possible body (e.g. <see
+        // cref="VariableDeclaratorSyntax"/>,
         /// not <see cref="FieldDeclarationSyntax"/> or <see cref="VariableDeclarationSyntax"/>).
         /// </summary>
         private static void VerifyAllSpansInDeclaration<TDeclaration>(string markup)

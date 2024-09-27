@@ -21,10 +21,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
             CancellationToken cancellationToken
         )
         {
-            // PERF:  This method will be called synchronously on the UI thread for every breakpoint in the solution.
-            // Therefore, it is important that we make this call as cheap as possible.  Rather than constructing a
-            // containing Symbol and using ToDisplayString (which might be more *correct*), we'll just do the best we
-            // can with Syntax.  This approach is capable of providing parity with the pre-Roslyn implementation.
+            // PERF:  This method will be called synchronously on the UI thread for every breakpoint in the
+            // solution.
+            // Therefore, it is important that we make this call as cheap as possible.  Rather than constructing
+            // a
+            // containing Symbol and using ToDisplayString (which might be more *correct*), we'll just do the
+            // best we
+            // can with Syntax.  This approach is capable of providing parity with the pre-Roslyn
+            // implementation.
             var tree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
             var root = await tree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
@@ -45,7 +49,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 return default;
             }
 
-            // field or event field declarations may contain multiple variable declarators. Try finding the correct one.
+            // field or event field declarations may contain multiple variable declarators. Try finding the
+            // correct one.
             // If the position does not point to one, try using the first one.
             VariableDeclaratorSyntax fieldDeclarator = null;
             if (

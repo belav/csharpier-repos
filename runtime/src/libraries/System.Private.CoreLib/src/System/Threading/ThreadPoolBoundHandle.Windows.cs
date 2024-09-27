@@ -135,7 +135,8 @@ namespace System.Threading
         ///     <see cref="NativeOverlapped"/> instances. Can be <see langword="null"/>.
         /// </param>
         /// <param name="pinData">
-        ///     An object or array of objects representing the input or output buffer for the operation. Each
+        ///     An object or array of objects representing the input or output buffer for the operation.
+        // Each
         ///     object represents a buffer, for example an array of bytes.  Can be <see langword="null"/>.
         /// </param>
         /// <returns>
@@ -148,7 +149,8 @@ namespace System.Threading
         ///         physical memory until <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> is called.
         ///     </para>
         ///     <para>
-        ///         The buffer or buffers specified in <paramref name="pinData"/> must be the same as those passed
+        ///         The buffer or buffers specified in <paramref name="pinData"/> must be the same as those
+        // passed
         ///         to the unmanaged operating system function that performs the asynchronous I/O.
         ///     </para>
         ///     <note>
@@ -186,7 +188,8 @@ namespace System.Threading
         ///     <see cref="NativeOverlapped"/> instances. Can be <see langword="null"/>.
         /// </param>
         /// <param name="pinData">
-        ///     An object or array of objects representing the input or output buffer for the operation. Each
+        ///     An object or array of objects representing the input or output buffer for the operation.
+        // Each
         ///     object represents a buffer, for example an array of bytes.  Can be <see langword="null"/>.
         /// </param>
         /// <returns>
@@ -199,7 +202,8 @@ namespace System.Threading
         ///         physical memory until <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> is called.
         ///     </para>
         ///     <para>
-        ///         The buffer or buffers specified in <paramref name="pinData"/> must be the same as those passed
+        ///         The buffer or buffers specified in <paramref name="pinData"/> must be the same as those
+        // passed
         ///         to the unmanaged operating system function that performs the asynchronous I/O.
         ///     </para>
         ///     <para>
@@ -227,11 +231,14 @@ namespace System.Threading
                 : UnsafeAllocateNativeOverlappedPortableCore(callback, state, pinData);
 
         /// <summary>
-        ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, using the callback,
-        ///     state, and buffers associated with the specified <see cref="PreAllocatedOverlapped"/> object.
+        ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, using the
+        // callback,
+        ///     state, and buffers associated with the specified <see cref="PreAllocatedOverlapped"/>
+        // object.
         /// </summary>
         /// <param name="preAllocated">
-        ///     A <see cref="PreAllocatedOverlapped"/> object from which to create the NativeOverlapped pointer.
+        ///     A <see cref="PreAllocatedOverlapped"/> object from which to create the NativeOverlapped
+        // pointer.
         /// </param>
         /// <returns>
         ///     An unmanaged pointer to a <see cref="NativeOverlapped"/> structure.
@@ -271,12 +278,16 @@ namespace System.Threading
         /// </param>
         /// <remarks>
         ///     <note type="caution">
-        ///         You must call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> method exactly once
+        ///         You must call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> method exactly
+        // once
         ///         on every <see cref="NativeOverlapped"/> unmanaged pointer allocated using the
         ///         <see cref="AllocateNativeOverlapped"/> method.
-        ///         If you do not call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> method, you will
-        ///         leak memory. If you call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> method more
-        ///         than once on the same <see cref="NativeOverlapped"/> unmanaged pointer, memory will be corrupted.
+        ///         If you do not call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/> method, you
+        // will
+        ///         leak memory. If you call the <see cref="FreeNativeOverlapped(NativeOverlapped*)"/>
+        // method more
+        ///         than once on the same <see cref="NativeOverlapped"/> unmanaged pointer, memory will be
+        // corrupted.
         ///     </note>
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -299,16 +310,20 @@ namespace System.Threading
         }
 
         /// <summary>
-        ///     Returns the user-provided object specified when the <see cref="NativeOverlapped"/> instance was
-        ///     allocated using the <see cref="AllocateNativeOverlapped(IOCompletionCallback, object, object)"/>.
+        ///     Returns the user-provided object specified when the <see cref="NativeOverlapped"/> instance
+        // was
+        ///     allocated using the <see cref="AllocateNativeOverlapped(IOCompletionCallback, object,
+        // object)"/>.
         /// </summary>
         /// <param name="overlapped">
-        ///     An unmanaged pointer to the <see cref="NativeOverlapped"/> structure from which to return the
+        ///     An unmanaged pointer to the <see cref="NativeOverlapped"/> structure from which to return
+        // the
         ///     associated user-provided object.
         /// </param>
         /// <returns>
         ///     A user-provided object that distinguishes this <see cref="NativeOverlapped"/>
-        ///     from other <see cref="NativeOverlapped"/> instances, otherwise, <see langword="null"/> if one was
+        ///     from other <see cref="NativeOverlapped"/> instances, otherwise, <see langword="null"/> if
+        // one was
         ///     not specified when the instance was allocated using <see cref="AllocateNativeOverlapped"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">

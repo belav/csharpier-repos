@@ -200,16 +200,16 @@ namespace System.Configuration
             {
                 if (value != null)
                 {
-                    /* XXX all i know for certain is that Validation happens here */
+/* XXX all i know for certain is that Validation happens here */
                     prop.Validate(value);
 
-                    /* XXX presumably the actual setting of the
-                     * property happens here instead of in the
-                     * set_Item code below, but that would mean
-                     * the Value needs to be stuffed in the
-                     * property, not the propertyinfo (or else the
-                     * property needs a ref to the property info
-                     * to correctly set the value). */
+/* XXX presumably the actual setting of the
+* property happens here instead of in the
+* set_Item code below, but that would mean
+* the Value needs to be stuffed in the
+* property, not the propertyinfo (or else the
+* property needs a ref to the property info
+* to correctly set the value). */
                 }
             }
             catch (Exception e)
@@ -364,7 +364,7 @@ namespace System.Configuration
                 PropertyInformation prop = ElementInformation.Properties[reader.LocalName];
                 if (prop == null || (serializeCollectionKey && !prop.IsKey))
                 {
-                    /* handle the built in ConfigurationElement attributes here */
+/* handle the built in ConfigurationElement attributes here */
                     if (reader.LocalName == "lockAllAttributesExcept")
                     {
                         LockAllAttributesExcept.SetFromList(reader.Value);
@@ -387,11 +387,11 @@ namespace System.Configuration
                     }
                     else if (reader.LocalName == "xmlns")
                     {
-                        /* ignore */
+/* ignore */
                     }
                     else if (this is ConfigurationSection && reader.LocalName == "configSource")
                     {
-                        /* ignore */
+/* ignore */
                     }
                     else if (!OnDeserializeUnrecognizedAttribute(reader.LocalName, reader.Value))
                         throw new ConfigurationErrorsException(
@@ -756,37 +756,37 @@ namespace System.Configuration
             validator.Validate(p.ConvertFromString(value));
         }
 
-        /*
-         * FIXME: LAMESPEC
-         *
-         * SerializeElement() and SerializeToXmlElement() need to emit different output
-         * based on the ConfigurationSaveMode that's being used.  Unfortunately, neither
-         * of these methods take it as an argument and there seems to be no documented way
-         * how to get it.
-         *
-         * The parent element is needed because the element could be set to a different
-         * than the default value in a parent configuration file, then set locally to that
-         * same value.  This makes the element appear locally modified (so it's included
-         * with ConfigurationSaveMode.Modified), but it should not be emitted with
-         * ConfigurationSaveMode.Minimal.
-         *
-         * In theory, we could save it into some private field in Unmerge(), but the
-         * problem is that Unmerge() is kinda expensive and we also need a way of
-         * determining whether or not the configuration has changed in Configuration.Save(),
-         * prior to opening the output file for writing.
-         *
-         * There are two places from where HasValues() is called:
-         * a) From Configuration.Save() / SaveAs() to check whether the configuration needs
-         *    to be saved.  This check is done prior to opening the file for writing.
-         * b) From SerializeToXmlElement() to check whether to emit the element, using the
-         *    parent and mode values from the cached 'SaveContext'.
-         *
-         */
+/*
+* FIXME: LAMESPEC
+*
+* SerializeElement() and SerializeToXmlElement() need to emit different output
+* based on the ConfigurationSaveMode that's being used.  Unfortunately, neither
+* of these methods take it as an argument and there seems to be no documented way
+* how to get it.
+*
+* The parent element is needed because the element could be set to a different
+* than the default value in a parent configuration file, then set locally to that
+* same value.  This makes the element appear locally modified (so it's included
+* with ConfigurationSaveMode.Modified), but it should not be emitted with
+* ConfigurationSaveMode.Minimal.
+*
+* In theory, we could save it into some private field in Unmerge(), but the
+* problem is that Unmerge() is kinda expensive and we also need a way of
+* determining whether or not the configuration has changed in Configuration.Save(),
+* prior to opening the output file for writing.
+*
+* There are two places from where HasValues() is called:
+* a) From Configuration.Save() / SaveAs() to check whether the configuration needs
+*    to be saved.  This check is done prior to opening the file for writing.
+* b) From SerializeToXmlElement() to check whether to emit the element, using the
+*    parent and mode values from the cached 'SaveContext'.
+*
+*/
 
-        /*
-         * Check whether property 'prop' should be included in the serialized XML
-         * based on the current ConfigurationSaveMode.
-         */
+/*
+* Check whether property 'prop' should be included in the serialized XML
+* based on the current ConfigurationSaveMode.
+*/
         internal bool HasValue(
             ConfigurationElement parent,
             PropertyInformation prop,
@@ -807,11 +807,11 @@ namespace System.Configuration
                 return true;
             }
 
-            /*
-             * Ok, now we have to check whether we're different from the inherited
-             * value - which could either be a value that's set in a parent
-             * configuration file or the default value.
-             */
+/*
+* Ok, now we have to check whether we're different from the inherited
+* value - which could either be a value that's set in a parent
+* configuration file or the default value.
+*/
 
             var hasParentValue = parent != null && parent.HasValue(prop.Name);
             var parentOrDefault = hasParentValue ? parent[prop.Name] : prop.DefaultValue;
@@ -819,24 +819,24 @@ namespace System.Configuration
             if (!prop.IsElement)
                 return !object.Equals(prop.Value, parentOrDefault);
 
-            /*
-             * Ok, it's an element that has been set in a parent configuration file.			 *
-             * Recursively call HasValues() to check whether it's been locally modified.
-             */
+/*
+* Ok, it's an element that has been set in a parent configuration file.			 *
+* Recursively call HasValues() to check whether it's been locally modified.
+*/
             var element = (ConfigurationElement)prop.Value;
             var parentElement = (ConfigurationElement)parentOrDefault;
 
             return element.HasValues(parentElement, mode);
         }
 
-        /*
-         * Check whether this element should be included in the serialized XML
-         * based on the current ConfigurationSaveMode.
-         *
-         * The 'parent' value is needed to determine whether the element currently
-         * has a different value from what's been set in the parent configuration
-         * hierarchy.
-         */
+/*
+* Check whether this element should be included in the serialized XML
+* based on the current ConfigurationSaveMode.
+*
+* The 'parent' value is needed to determine whether the element currently
+* has a different value from what's been set in the parent configuration
+* hierarchy.
+*/
         internal virtual bool HasValues(ConfigurationElement parent, ConfigurationSaveMode mode)
         {
             if (mode == ConfigurationSaveMode.Full)
@@ -853,12 +853,12 @@ namespace System.Configuration
             return false;
         }
 
-        /*
-         * Cache the current 'parent' and 'mode' values for later use in SerializeToXmlElement()
-         * and SerializeElement().
-         *
-         * Make sure to call base when overriding this in a derived class.
-         */
+/*
+* Cache the current 'parent' and 'mode' values for later use in SerializeToXmlElement()
+* and SerializeElement().
+*
+* Make sure to call base when overriding this in a derived class.
+*/
         internal virtual void PrepareSave(ConfigurationElement parent, ConfigurationSaveMode mode)
         {
             saveContext = new SaveContext(this, parent, mode);

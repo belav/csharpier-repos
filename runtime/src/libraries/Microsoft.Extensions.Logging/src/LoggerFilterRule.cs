@@ -46,7 +46,8 @@ namespace Microsoft.Extensions.Logging
         public LogLevel? LogLevel { get; }
 
         /// <summary>
-        /// Gets the filter delegate that would be applied to messages that passed the <see cref="LogLevel"/>.
+        /// Gets the filter delegate that would be applied to messages that passed the <see
+        // cref="LogLevel"/>.
         /// </summary>
         public Func<string?, string?, LogLevel, bool>? Filter { get; }
 

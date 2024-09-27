@@ -714,7 +714,8 @@ namespace System.Data.OleDb
             Debug.Assert((NativeDBType.BYREF | NativeDBType.BYTES) == DbType, "Value_ByRefBYTES");
 
             // we expect the provider/server to apply the silent truncation when binding BY_REF
-            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
+            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value"
+            // }
             int length = (
                 (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
             );
@@ -767,7 +768,8 @@ namespace System.Data.OleDb
             Debug.Assert(null != value, "Value_ByRefWSTR null");
             Debug.Assert((NativeDBType.BYREF | NativeDBType.WSTR) == DbType, "Value_ByRefWSTR");
             // we expect the provider/server to apply the silent truncation when binding BY_REF
-            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
+            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value"
+            // }
             int length = (
                 (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
             );
@@ -791,7 +793,8 @@ namespace System.Data.OleDb
             Debug.Assert(null != value, "Value_ByRefWSTR null");
             Debug.Assert((NativeDBType.BYREF | NativeDBType.WSTR) == DbType, "Value_ByRefWSTR");
             // we expect the provider/server to apply the silent truncation when binding BY_REF
-            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value" }
+            // if (value.Length < ValueBindingOffset) { throw "Offset must refer to a location within the value"
+            // }
             int length = (
                 (ValueBindingOffset < value.Length) ? (value.Length - ValueBindingOffset) : 0
             );
@@ -936,7 +939,7 @@ namespace System.Data.OleDb
 
             /* pending breaking change approval
             if (_precision < ((System.Data.SqlTypes.SqlDecimal) value).Precision) {
-                throw ADP.ParameterValueOutOfRange(value);
+            throw ADP.ParameterValueOutOfRange(value);
             }
             */
 
@@ -1167,7 +1170,7 @@ namespace System.Data.OleDb
 
             /* pending breaking change approval
             if (_precision < ((System.Data.SqlTypes.SqlDecimal) value).Precision) {
-                throw ADP.ParameterValueOutOfRange(value);
+            throw ADP.ParameterValueOutOfRange(value);
             }
             */
 

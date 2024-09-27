@@ -41,7 +41,8 @@ public class PageContext : ActionContext
     /// </summary>
     /// <param name="httpContext">The <see cref="HttpContext"/> for the current request.</param>
     /// <param name="routeData">The <see cref="RouteData"/> for the current request.</param>
-    /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/> for the selected action.</param>
+    /// <param name="actionDescriptor">The <see cref="CompiledPageActionDescriptor"/> for the selected
+    // action.</param>
     internal PageContext(
         HttpContext httpContext,
         RouteData routeData,

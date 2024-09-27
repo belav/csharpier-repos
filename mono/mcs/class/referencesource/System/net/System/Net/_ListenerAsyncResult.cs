@@ -78,7 +78,8 @@ namespace System.Net
                         {
                             if (stoleBlob)
                             {
-                                // The request has been handed to the user, which means this code can't reuse the blob.  Reset it here.
+                                // The request has been handed to the user, which means this code can't reuse the blob.  Reset it
+                                // here.
                                 asyncResult.m_RequestContext =
                                     result == null ? new AsyncRequestContext(asyncResult) : null;
                             }
@@ -96,7 +97,8 @@ namespace System.Net
                         );
                     }
 
-                    // We need to issue a new request, either because auth failed, or because our buffer was too small the first time.
+                    // We need to issue a new request, either because auth failed, or because our buffer was too small
+                    // the first time.
                     if (result == null)
                     {
                         uint statusCode = asyncResult.QueueBeginGetContext();

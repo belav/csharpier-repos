@@ -7,7 +7,8 @@ using System.Text.Json;
 namespace SerializerTrimmingTest
 {
     /// <summary>
-    /// Tests that the serializer's warm up routine for (de)serializing ConcurrentDictionary<TKey, TValue> is trimming-safe.
+    /// Tests that the serializer's warm up routine for (de)serializing ConcurrentDictionary<TKey,
+    // TValue> is trimming-safe.
     /// </summary>
     internal class Program
     {

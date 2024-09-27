@@ -45,7 +45,8 @@ namespace System.Activities.Debugger
 
         // CurrentLocation consists of the current line number and the current position on the line.
         //
-        // The current position is like a cursor moving along the line. For example, a string "abc" ending with "\r\n":
+        // The current position is like a cursor moving along the line. For example, a string "abc" ending
+        // with "\r\n":
         //
         //    abc\r\n
         //
@@ -53,13 +54,15 @@ namespace System.Activities.Debugger
         //
         //    |a|b|c|\r|\n
         //
-        // When we are at the beginning of the line, the current position is 1. After we read the first char,
+        // When we are at the beginning of the line, the current position is 1. After we read the first
+        // char,
         // we advance the current position to 2, and so on:
         //
         //    1 2 3 4
         //    |a|b|c|\r|\n
         //
-        // As we reach the end-of-line character on the line, which can be \r, \r\n or \n, we move to the next line and reset the current position to 1.
+        // As we reach the end-of-line character on the line, which can be \r, \r\n or \n, we move to the
+        // next line and reset the current position to 1.
         private DocumentLocation CurrentLocation
         {
             get { return new DocumentLocation(this.currentLine, this.currentPosition); }
@@ -95,7 +98,8 @@ namespace System.Activities.Debugger
                 "We should always find character for special characters only"
             );
 
-            // Note that this 'nextLocation' may not represent a real document location (we could hit an end line character here so that there is no next line
+            // Note that this 'nextLocation' may not represent a real document location (we could hit an end
+            // line character here so that there is no next line
             // position. This is merely used for the search algorithm below:
             DocumentLocation nextLocation = new DocumentLocation(
                 afterLocation.LineNumber,

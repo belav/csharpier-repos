@@ -201,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
                 case ConversionKind.PinnedObjectToPointer:
                     // CLR allows unsafe conversion from(O) to native int/uint.
                     // The conversion does not change the representation of the value,
-                    // but the value will not be reported to subsequent GC operations (and therefore will not be updated by such operations)
+                    // but the value will not be reported to subsequent GC operations (and therefore will not be updated
+                    // by such operations)
                     _builder.EmitOpCode(ILOpCode.Conv_u);
                     break;
                 case ConversionKind.ImplicitNullToPointer:
@@ -284,8 +285,10 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
             {
                 // need a static cast here to satisfy verifier
                 // Example: Derived[] can be used in place of Base[] for all purposes except for LDELEMA <Base>
-                //          Even though it would be safe due to run time check, verifier requires that the static type of the array is Base[]
-                //          We do not know why we are casting, so to be safe, lets make the cast explicit. JIT elides such casts.
+                //          Even though it would be safe due to run time check, verifier requires that the static
+                // type of the array is Base[]
+                //          We do not know why we are casting, so to be safe, lets make the cast explicit. JIT
+                // elides such casts.
                 EmitStaticCast(conversion.Type, conversion.Syntax);
             }
 

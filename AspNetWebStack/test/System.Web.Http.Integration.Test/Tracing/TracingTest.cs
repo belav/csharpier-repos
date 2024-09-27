@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -662,13 +663,18 @@ namespace System.Web.Http.ModelBinding
 
             foreach (TraceRecord actualRecord in actualRecords)
             {
-                // Ignore record of a ReflectionTypeLoadException to allow test to succeed in Visual Studio. The record is an
-                // artifact specific to testing in VS. (Attempting to load all types from xunit.runner.visualstudio.testadapter.dll
-                // fails with recent xUnit.net packages. The assembly references Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+                // Ignore record of a ReflectionTypeLoadException to allow test to succeed in Visual Studio. The
+                // record is an
+                // artifact specific to testing in VS. (Attempting to load all types from
+                // xunit.runner.visualstudio.testadapter.dll
+                // fails with recent xUnit.net packages. The assembly references
+                // Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
                 // which is not available with xUnit.net 2.0.x.)
                 //
-                // Similarly, ignore records for the same exception to allow test to succeed when using the xUnit MSBuild runner.
-                // In that case, missing types may come from System.Web and Microsoft.Build.Utilities.v4.0 as well as xunit.runner.msbuild.net452.
+                // Similarly, ignore records for the same exception to allow test to succeed when using the xUnit
+                // MSBuild runner.
+                // In that case, missing types may come from System.Web and Microsoft.Build.Utilities.v4.0 as well
+                // as xunit.runner.msbuild.net452.
                 if (
                     actualRecord.Operation == null
                     && actualRecord.Exception is ReflectionTypeLoadException
@@ -760,13 +766,18 @@ namespace System.Web.Http.ModelBinding
                     && object.Equals(r.Kind, expectedRecord.TraceKind)
                 );
 
-                // Ignore record of a ReflectionTypeLoadException to allow test to succeed in Visual Studio. The record is an
-                // artifact specific to testing in VS. (Attempting to load all types from xunit.runner.visualstudio.testadapter.dll
-                // fails with recent xUnit.net packages. The assembly references Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
+                // Ignore record of a ReflectionTypeLoadException to allow test to succeed in Visual Studio. The
+                // record is an
+                // artifact specific to testing in VS. (Attempting to load all types from
+                // xunit.runner.visualstudio.testadapter.dll
+                // fails with recent xUnit.net packages. The assembly references
+                // Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
                 // which is not available with xUnit.net 2.0.x.)
                 //
-                // Similarly, ignore records for the same exception to allow test to succeed when using the xUnit MSBuild runner.
-                // In that case, missing types may come from System.Web and Microsoft.Build.Utilities.v4.0 as well as xunit.runner.msbuild.net452.
+                // Similarly, ignore records for the same exception to allow test to succeed when using the xUnit
+                // MSBuild runner.
+                // In that case, missing types may come from System.Web and Microsoft.Build.Utilities.v4.0 as well
+                // as xunit.runner.msbuild.net452.
                 var actualRecord = actualRecords.ElementAtOrDefault(traceBeginPos);
                 while (
                     actualRecord != null

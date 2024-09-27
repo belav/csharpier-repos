@@ -110,7 +110,8 @@ namespace MonoTests.System.Data.SqlClient
                 cmd.CommandText = "SalesByCategory";
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                //Stored procedure is declared as "SalesByCategory @CategoryName nvarchar(15), @OrdYear nvarchar(4) = '1998'"
+                //Stored procedure is declared as "SalesByCategory @CategoryName nvarchar(15), @OrdYear nvarchar(4)
+                // = '1998'"
                 //The test declares them in reverse order.
                 cmd.Parameters.Add("@OrdYear", "1996");
                 cmd.Parameters.Add("@CategoryName", "Beverages");

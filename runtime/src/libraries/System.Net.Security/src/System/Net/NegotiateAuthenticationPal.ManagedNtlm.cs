@@ -212,7 +212,8 @@ namespace System.Net
                 public fixed byte Mic[16];
             }
 
-            // Set temp to ConcatenationOf(Responserversion, HiResponserversion, Z(6), Time, ClientChallenge, Z(4), ServerName, Z(4))
+            // Set temp to ConcatenationOf(Responserversion, HiResponserversion, Z(6), Time, ClientChallenge,
+            // Z(4), ServerName, Z(4))
             [StructLayout(LayoutKind.Sequential)]
             private unsafe struct NtChallengeResponse
             {
@@ -403,7 +404,8 @@ namespace System.Net
             }
 
             // Section 3.3.2
-            // Define NTOWFv2(Passwd, User, UserDom) as HMAC_MD5(MD4(UNICODE(Passwd)), UNICODE(ConcatenationOf(Uppercase(User),
+            // Define NTOWFv2(Passwd, User, UserDom) as HMAC_MD5(MD4(UNICODE(Passwd)),
+            // UNICODE(ConcatenationOf(Uppercase(User),
             // UserDom ) ) )
             // EndDefine
             private static void makeNtlm2Hash(
@@ -443,8 +445,10 @@ namespace System.Net
 
             // Section 3.3.2
             //
-            // Set temp to ConcatenationOf(Responserversion, HiResponserversion, Z(6), Time, ClientChallenge, Z(4), ServerName, Z(4))
-            // Set NTProofStr to HMAC_MD5(ResponseKeyNT, ConcatenationOf(CHALLENGE_MESSAGE.ServerChallenge, temp))
+            // Set temp to ConcatenationOf(Responserversion, HiResponserversion, Z(6), Time, ClientChallenge,
+            // Z(4), ServerName, Z(4))
+            // Set NTProofStr to HMAC_MD5(ResponseKeyNT, ConcatenationOf(CHALLENGE_MESSAGE.ServerChallenge,
+            // temp))
             // Set NtChallengeResponse to ConcatenationOf(NTProofStr, temp)
             private unsafe void makeNtlm2ChallengeResponse(
                 DateTime time,

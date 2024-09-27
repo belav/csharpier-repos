@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(kind != ObsoleteDiagnosticKind.Lazy);
             Debug.Assert(kind != ObsoleteDiagnosticKind.LazyPotentiallySuppressed);
 
-            // If this symbol is not obsolete or is in an obsolete context, we don't want to report any diagnostics.
+            // If this symbol is not obsolete or is in an obsolete context, we don't want to report any
+            // diagnostics.
             // Therefore return null.
             return (kind == ObsoleteDiagnosticKind.Diagnostic)
                 ? ObsoleteAttributeHelpers.CreateObsoleteDiagnostic(symbol, _binderFlags)

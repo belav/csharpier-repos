@@ -29,20 +29,29 @@ namespace System.Text.Json.Serialization.Samples
         /// <see cref="JsonDynamicBoolean"/>.
         /// </summary>
         /// <remarks>
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.StartObject"/>, <see cref="JsonDynamicObject"/>
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.StartObject"/>, <see
+        // cref="JsonDynamicObject"/>
         /// is returned which implements <see cref="System.Collections.IDictionary{string, object}"/>.
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.StartArray"/>, <see cref="System.Collections.IList{object}"/>
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.StartArray"/>, <see
+        // cref="System.Collections.IList{object}"/>
         /// is returned which implements <see cref="System.Collections.IList{object}"/>.
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.String"/>, <see cref="JsonDynamicString"/>
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.String"/>, <see
+        // cref="JsonDynamicString"/>
         /// is returned and supports an implicit cast to <see cref="string"/>.
-        /// An explicit cast or assignment to other types, such as <see cref="System.Text.Json.JsonTokenType.DateTime"/>,
+        /// An explicit cast or assignment to other types, such as <see
+        // cref="System.Text.Json.JsonTokenType.DateTime"/>,
         /// is supported provided there is a custom converter for that Type.
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.Number"/>, <see cref="JsonDynamicNumber"/> is returned.
-        /// An explicit cast or assignment is required to the appropriate number type, such as <see cref="decimal"/> or <see cref="long"/>.
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.True"/> and <see cref="System.Text.Json.JsonTokenType.False"/>,
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.Number"/>, <see
+        // cref="JsonDynamicNumber"/> is returned.
+        /// An explicit cast or assignment is required to the appropriate number type, such as <see
+        // cref="decimal"/> or <see cref="long"/>.
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.True"/> and <see
+        // cref="System.Text.Json.JsonTokenType.False"/>,
         /// <see cref="JsonDynamicBool"/> is returned and supports an implicit cast to <see cref="bool"/>.
-        /// An explicit cast or assignment to other types is supported provided there is a custom converter for that type.
-        /// When deserializing <see cref="System.Text.Json.JsonTokenType.Null"/>, <see langword="null"/> is returned.
+        /// An explicit cast or assignment to other types is supported provided there is a custom converter
+        // for that type.
+        /// When deserializing <see cref="System.Text.Json.JsonTokenType.Null"/>, <see langword="null"/> is
+        // returned.
         /// </remarks>
         public static void EnableDynamicTypes(this JsonSerializerOptions options)
         {
@@ -280,7 +289,8 @@ namespace System.Text.Json.Serialization.Samples
 
                 if (!success)
                 {
-                    // Use the raw test which may be recognized by converters such as the Enum converter than can process numbers.
+                    // Use the raw test which may be recognized by converters such as the Enum converter than can
+                    // process numbers.
                     string rawText = jsonElement.GetRawText();
                     result = JsonSerializer.Deserialize($"{rawText}", returnType, Options);
                 }
@@ -515,7 +525,8 @@ namespace System.Text.Json.Serialization.Samples
         }
 
         /// <summary>
-        /// Supports deserialization of all <see cref="object"/>-declared types, supporting <see langword="dynamic"/>.
+        /// Supports deserialization of all <see cref="object"/>-declared types, supporting <see
+        // langword="dynamic"/>.
         /// supports serialization of all <see cref="JsonDynamicType"/>-derived types.
         /// </summary>
         private sealed class DynamicObjectConverter : JsonConverter<object>

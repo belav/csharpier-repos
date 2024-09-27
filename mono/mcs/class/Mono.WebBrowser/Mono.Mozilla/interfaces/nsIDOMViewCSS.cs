@@ -49,7 +49,7 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int getComputedStyle(
             [MarshalAs(UnmanagedType.Interface)] nsIDOMElement elt,
-            /*DOMString*/HandleRef pseudoElt,
+/*DOMString*/HandleRef pseudoElt,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMCSSStyleDeclaration ret
         );
 

@@ -6,7 +6,8 @@ using System.Threading;
 namespace System.Net.Http
 {
     /// <summary>
-    /// Central repository for default values used in http handler settings.  Not all settings are relevant
+    /// Central repository for default values used in http handler settings.  Not all settings are
+    // relevant
     /// to or configurable by all handlers.
     /// </summary>
     internal static partial class HttpHandlerDefaults

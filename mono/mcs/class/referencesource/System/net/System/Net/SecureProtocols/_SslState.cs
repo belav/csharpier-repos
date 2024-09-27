@@ -3,20 +3,20 @@ Copyright (c) 2000 Microsoft Corporation
 
 Module Name:
 
-    _SslState.cs
+_SslState.cs
 
 Abstract:
 
 
 Author:
 
-    Mauro Ottaviani   07-Nov-2001
-    Arthur Bierer     16-Nov-2001
-    Alexei Vopilov    26-Jun-2002
+Mauro Ottaviani   07-Nov-2001
+Arthur Bierer     16-Nov-2001
+Alexei Vopilov    26-Jun-2002
 
 Revision History:
-    22-Aug-2003     Adopted for new Ssl feature design.
-    15-Sept-2003    Implemented concurrent rehanshake
+22-Aug-2003     Adopted for new Ssl feature design.
+15-Sept-2003    Implemented concurrent rehanshake
 
 --*/
 #if MONO_FEATURE_NEW_TLS && SECURITY_DEP
@@ -109,7 +109,8 @@ namespace System.Net.Security
         private readonly EncryptionPolicy _EncryptionPolicy;
 
         //
-        // This .ctor is only for internal TlsStream class, used only from client side ssl and it also has some special requirements.
+        // This .ctor is only for internal TlsStream class, used only from client side ssl and it also has
+        // some special requirements.
         //
         internal SslState(Stream innerStream, bool isHTTP, EncryptionPolicy encryptionPolicy)
             : this(innerStream, null, null, encryptionPolicy)
@@ -696,7 +697,8 @@ namespace System.Net.Security
                 }
                 if (count != 0)
                 {
-                    // This is inefficient yet simple and that should be a rare case of receiving data encrypted with "old" key
+                    // This is inefficient yet simple and that should be a rare case of receiving data encrypted with
+                    // "old" key
                     _QueuedReadData = EnsureBufferSize(
                         _QueuedReadData,
                         _QueuedReadCount,
@@ -740,7 +742,8 @@ namespace System.Net.Security
 
         //
         // This method assumes that a SSPI context is already in a good shape.
-        // For example it is either a fresh context or already authenticated context that needs renegotiation.
+        // For example it is either a fresh context or already authenticated context that needs
+        // renegotiation.
         //
         internal void ProcessAuthentication(LazyAsyncResult lazyResult)
         {
@@ -829,7 +832,8 @@ namespace System.Net.Security
 
             // forcing async mode.  The caller will queue another Read as soon as we return using its preferred
             // calling convention, which will be woken up when the handshake completes.  The callback is just
-            // to capture any SocketErrors that happen during the handshake so they can be surfaced from the Read.
+            // to capture any SocketErrors that happen during the handshake so they can be surfaced from the
+            // Read.
             AsyncProtocolRequest asyncRequest = new AsyncProtocolRequest(
                 new LazyAsyncResult(this, null, new AsyncCallback(RehandshakeCompleteCallback))
             );
@@ -991,7 +995,8 @@ namespace System.Net.Security
                 }
 
                 // Even if we are comleted, there could be a blob for sending.
-                // ONLY for TlsStream we want to delay it if the underlined stream is a NetworkStream that is subject to Nagle algorithm
+                // ONLY for TlsStream we want to delay it if the underlined stream is a NetworkStream that is
+                // subject to Nagle algorithm
                 //
                 if (
                     message.Done
@@ -1831,80 +1836,80 @@ namespace System.Net.Security
         private Framing DetectFraming(byte[] bytes, int length)
         {
             /* PCTv1.0 Hello starts with
-             * RECORD_LENGTH_MSB  (ignore)
-             * RECORD_LENGTH_LSB  (ignore)
-             * PCT1_CLIENT_HELLO  (must be equal)
-             * PCT1_CLIENT_VERSION_MSB (if version greater than PCTv1)
-             * PCT1_CLIENT_VERSION_LSB (if version greater than PCTv1)
-             *
-             * ... PCT hello ...
-             */
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * PCT1_CLIENT_HELLO  (must be equal)
+            * PCT1_CLIENT_VERSION_MSB (if version greater than PCTv1)
+            * PCT1_CLIENT_VERSION_LSB (if version greater than PCTv1)
+            *
+            * ... PCT hello ...
+            */
 
             /* Microsft Unihello starts with
-             * RECORD_LENGTH_MSB  (ignore)
-             * RECORD_LENGTH_LSB  (ignore)
-             * SSL2_CLIENT_HELLO  (must be equal)
-             * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
-             * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
-             *
-             * ... SSLv2 Compatible Hello ...
-             */
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * SSL2_CLIENT_HELLO  (must be equal)
+            * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
+            * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
+            *
+            * ... SSLv2 Compatible Hello ...
+            */
 
             /* SSLv2 CLIENT_HELLO starts with
-             * RECORD_LENGTH_MSB  (ignore)
-             * RECORD_LENGTH_LSB  (ignore)
-             * SSL2_CLIENT_HELLO  (must be equal)
-             * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
-             * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
-             *
-             * ... SSLv2 CLIENT_HELLO ...
-             */
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * SSL2_CLIENT_HELLO  (must be equal)
+            * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
+            * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
+            *
+            * ... SSLv2 CLIENT_HELLO ...
+            */
 
             /* SSLv2 SERVER_HELLO starts with
-             * RECORD_LENGTH_MSB  (ignore)
-             * RECORD_LENGTH_LSB  (ignore)
-             * SSL2_SERVER_HELLO  (must be equal)
-             * SSL2_SESSION_ID_HIT (ignore)
-             * SSL2_CERTIFICATE_TYPE (ignore)
-             * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
-             * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
-             *
-             * ... SSLv2 SERVER_HELLO ...
-             */
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * SSL2_SERVER_HELLO  (must be equal)
+            * SSL2_SESSION_ID_HIT (ignore)
+            * SSL2_CERTIFICATE_TYPE (ignore)
+            * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv2) ( or v3)
+            * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv2) ( or v3)
+            *
+            * ... SSLv2 SERVER_HELLO ...
+            */
 
             /* SSLv3 Type 2 Hello starts with
-              * RECORD_LENGTH_MSB  (ignore)
-              * RECORD_LENGTH_LSB  (ignore)
-              * SSL2_CLIENT_HELLO  (must be equal)
-              * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv3)
-              * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv3)
-              *
-              * ... SSLv2 Compatible Hello ...
-              */
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * SSL2_CLIENT_HELLO  (must be equal)
+            * SSL2_CLIENT_VERSION_MSB (if version greater than SSLv3)
+            * SSL2_CLIENT_VERSION_LSB (if version greater than SSLv3)
+            *
+            * ... SSLv2 Compatible Hello ...
+            */
 
             /* SSLv3 Type 3 Hello starts with
-             * 22 (HANDSHAKE MESSAGE)
-             * VERSION MSB
-             * VERSION LSB
-             * RECORD_LENGTH_MSB  (ignore)
-             * RECORD_LENGTH_LSB  (ignore)
-             * HS TYPE (CLIENT_HELLO)
-             * 3 bytes HS record length
-             * HS Version
-             * HS Version
-             */
+            * 22 (HANDSHAKE MESSAGE)
+            * VERSION MSB
+            * VERSION LSB
+            * RECORD_LENGTH_MSB  (ignore)
+            * RECORD_LENGTH_LSB  (ignore)
+            * HS TYPE (CLIENT_HELLO)
+            * 3 bytes HS record length
+            * HS Version
+            * HS Version
+            */
 
             /* SSLv2 message codes
-             * SSL_MT_ERROR                0
-             * SSL_MT_CLIENT_HELLO         1
-             * SSL_MT_CLIENT_MASTER_KEY    2
-             * SSL_MT_CLIENT_FINISHED      3
-             * SSL_MT_SERVER_HELLO         4
-             * SSL_MT_SERVER_VERIFY        5
-             * SSL_MT_SERVER_FINISHED      6
-             * SSL_MT_REQUEST_CERTIFICATE  7
-             * SSL_MT_CLIENT_CERTIFICATE   8
-             */
+            * SSL_MT_ERROR                0
+            * SSL_MT_CLIENT_HELLO         1
+            * SSL_MT_CLIENT_MASTER_KEY    2
+            * SSL_MT_CLIENT_FINISHED      3
+            * SSL_MT_SERVER_HELLO         4
+            * SSL_MT_SERVER_VERIFY        5
+            * SSL_MT_SERVER_FINISHED      6
+            * SSL_MT_REQUEST_CERTIFICATE  7
+            * SSL_MT_CLIENT_CERTIFICATE   8
+            */
 
             int version = -1;
 
@@ -2125,9 +2130,11 @@ namespace System.Net.Security
                 "SslState::RehandshakeCompleteCallback()|result is not completed!"
             );
 
-            // If the rehandshake succeeded, FinishHandshake has already been called; if there was a SocketException
+            // If the rehandshake succeeded, FinishHandshake has already been called; if there was a
+            // SocketException
             // during the handshake, this gets called directly from FixedSizeReader, and we need to call
-            // FinishHandshake to wake up the Read that triggered this rehandshake so the error gets back to the caller
+            // FinishHandshake to wake up the Read that triggered this rehandshake so the error gets back to the
+            // caller
             Exception exception = lazyAsyncResult.InternalWaitForCompletion() as Exception;
             if (exception != null)
             {
@@ -2148,13 +2155,16 @@ namespace System.Net.Security
                 //    a. They were set back to None by the first call to FinishHandshake, and this will set them to
                 //       None again: a no-op.
                 //
-                //    b. They were set to None by the first call to FinishHandshake, but as soon as the lock was given
-                //       up, another thread took a read/write lock.  Calling FinishHandshake again will set them back
+                //    b. They were set to None by the first call to FinishHandshake, but as soon as the lock was
+                // given
+                //       up, another thread took a read/write lock.  Calling FinishHandshake again will set them
+                // back
                 //       to None, but that's fine because that thread will be throwing _Exception before it actually
                 //       does any reading or writing and setting them back to None in a catch block anyways.
                 //
                 //    c. If there is a Read/Write going on another thread, and the second FinishHandshake clears its
-                //       read/write lock, it's fine because no other Read/Write can look at the lock until the current
+                //       read/write lock, it's fine because no other Read/Write can look at the lock until the
+                // current
                 //       one gives up _SslStream._NestedRead/Write, and no handshake will look at the lock because
                 //       handshakes are only triggered in response to successful reads (which won't happen once
                 //       _Exception is set).

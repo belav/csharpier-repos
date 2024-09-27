@@ -45,7 +45,8 @@ namespace System.Windows.Markup
         /// <summary>
         /// Constructor for the ValueSerializerAttribute
         /// </summary>
-        /// <param name="valueSerializerType">Type of the value serializer being associated with a type or property</param>
+        /// <param name="valueSerializerType">Type of the value serializer being associated with a type or
+        // property</param>
         public ValueSerializerAttribute(Type valueSerializerType)
         {
             _valueSerializerType = valueSerializerType;
@@ -54,7 +55,8 @@ namespace System.Windows.Markup
         /// <summary>
         /// Constructor for the ValueSerializerAttribute
         /// </summary>
-        /// <param name="valueSerializerTypeName">Fully qualified type name of the value serializer being associated with a type or property</param>
+        /// <param name="valueSerializerTypeName">Fully qualified type name of the value serializer being
+        // associated with a type or property</param>
         public ValueSerializerAttribute(string valueSerializerTypeName)
         {
             _valueSerializerTypeName = valueSerializerTypeName;

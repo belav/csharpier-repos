@@ -16,7 +16,8 @@ namespace System.Configuration
 
     /// <devdoc>
     ///     Indicates to the provider what default value to use for this setting when no stored value
-    ///     is found. The value should be encoded into a string and is interpreted based on the SerializeAs
+    ///     is found. The value should be encoded into a string and is interpreted based on the
+    // SerializeAs
     ///     value for this setting. For example, if SerializeAs is Xml, the default value will be
     ///     "stringified" Xml.
     /// </devdoc>

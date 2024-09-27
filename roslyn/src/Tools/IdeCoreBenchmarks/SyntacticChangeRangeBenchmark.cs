@@ -54,7 +54,8 @@ namespace IdeCoreBenchmarks
 
         private SyntaxNode WithSimpleEditAtMiddle()
         {
-            // this will change the switch statement to `mode.kind` instead of `node.kind`.  This should be reuse most
+            // this will change the switch statement to `mode.kind` instead of `node.kind`.  This should be
+            // reuse most
             // of the tree and should result in a very small diff.
             var newText = _text.WithChanges(new TextChange(new TextSpan(_index + 8, 1), "m"));
             var newTree = _tree.WithChangedText(newText);
@@ -64,7 +65,8 @@ namespace IdeCoreBenchmarks
 
         private SyntaxNode WithDestabalizingEditAtMiddle()
         {
-            // this will change the switch statement to a switch expression.  This may have large cascading changes.
+            // this will change the switch statement to a switch expression.  This may have large cascading
+            // changes.
             var newText = _text.WithChanges(new TextChange(new TextSpan(_index, 0), "var v = x "));
             var newTree = _tree.WithChangedText(newText);
             var newRoot = newTree.GetRoot();

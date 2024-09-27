@@ -12,9 +12,11 @@ namespace System.Data.SqlClient
     using System.Text;
 
     /// <summary>
-    /// Encryption key class containing 4 keys. This class is used by SqlAeadAes256CbcHmac256Algorithm and SqlAes256CbcAlgorithm
+    /// Encryption key class containing 4 keys. This class is used by SqlAeadAes256CbcHmac256Algorithm
+    // and SqlAes256CbcAlgorithm
     /// 1) root key - Main key that is used to derive the keys used in the encryption algorithm
-    /// 2) encryption key - A derived key that is used to encrypt the plain text and generate cipher text
+    /// 2) encryption key - A derived key that is used to encrypt the plain text and generate cipher
+    // text
     /// 3) mac_key - A derived key that is used to compute HMAC of the cipher text
     /// 4) iv_key - A derived key that is used to generate a synthetic IV from plain text data.
     /// </summary>
@@ -38,7 +40,8 @@ namespace System.Data.SqlClient
             @"Microsoft SQL Server cell MAC key with encryption algorithm:{0} and key length:{1}";
 
         /// <summary>
-        /// IV Key Salt format. This is used to derive the IV key from the root key. This is only used for Deterministic encryption.
+        /// IV Key Salt format. This is used to derive the IV key from the root key. This is only used for
+        // Deterministic encryption.
         /// </summary>
         private const string _ivKeySaltFormat =
             @"Microsoft SQL Server cell IV key with encryption algorithm:{0} and key length:{1}";

@@ -108,7 +108,8 @@ static class C {
             compilation
                 .GetEmitDiagnostics()
                 .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
                 );
         }
@@ -138,7 +139,8 @@ static class C {
             compilation
                 .GetEmitDiagnostics()
                 .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion)
                 );
         }
@@ -175,7 +177,8 @@ static class C {
             compilation
                 .GetEmitDiagnostics()
                 .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
                     //             case int i: break;
@@ -242,7 +245,8 @@ static class C {
             compilation
                 .GetEmitDiagnostics()
                 .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     // (14,18): error CS0656: Missing compiler required member 'System.Nullable`1.get_HasValue'
                     //             case int i: break;
@@ -1482,7 +1486,8 @@ public class C {
         {
             // Cannot combine the evaluations of name here, since we first check if p is Teacher,
             // and only if that fails check if p is null.
-            // Combining the evaluations would mean first checking if p is null, then evaluating name, then checking if p is Teacher.
+            // Combining the evaluations would mean first checking if p is null, then evaluating name, then
+            // checking if p is Teacher.
             // This would not necessarily be more performant.
             var source =
                 @"using System;
@@ -1691,7 +1696,8 @@ public class C {
         {
             // Cannot combine the evaluations of name here, since we first check if name is MemoryStream,
             // and only if that fails check if name is null.
-            // Combining the evaluations would mean first checking if name is null, then evaluating name, then checking if p is Teacher.
+            // Combining the evaluations would mean first checking if name is null, then evaluating name, then
+            // checking if p is Teacher.
             // This would not necessarily be more performant.
             var source =
                 @"using System;
@@ -3531,7 +3537,8 @@ static class C {
             compilation
                 .GetDiagnostics()
                 .Verify(
-                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '0' is not covered.
                     //     public static bool M(int i) => i switch { 1 => true };
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("0")
@@ -3540,7 +3547,8 @@ static class C {
             compilation
                 .GetEmitDiagnostics()
                 .Verify(
-                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                    // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                    // was found nor was a value for RuntimeMetadataVersion specified through options.
                     Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     // (9,5): error CS0518: Predefined type 'System.Byte' is not defined or imported
                     //     public static bool M(int i) => i switch { 1 => true };
@@ -3595,7 +3603,8 @@ static class C {
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "i switch { 1 => true }")
                         .WithArguments("System.InvalidOperationException", ".ctor")
                         .WithLocation(9, 36),
-                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                    // (9,38): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '0' is not covered.
                     //     public static bool M(int i) => i switch { 1 => true };
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("0")
@@ -4869,7 +4878,9 @@ public static class Program
             var expectedOutput = "correct";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     static async Task Main()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23)
             );
@@ -4905,7 +4916,9 @@ public static class Program
             var expectedOutput = "correct";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                // (7,23): warning CS1998: This async method lacks 'await' operators and will run synchronously.
+                // Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do
+                // CPU-bound work on a background thread.
                 //     static async Task Main()
                 Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "Main").WithLocation(7, 23)
             );
@@ -5191,7 +5204,8 @@ class B : Exception
 ";
             var compilation = CreateCompilation(source, options: TestOptions.ReleaseExe);
             compilation.VerifyDiagnostics(
-                // (12,16): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M2(Exception)' and 'Program.M2(int)'
+                // (12,16): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'Program.M2(Exception)' and 'Program.M2(int)'
                 //         return M2(b switch { false => new A(), true => new B() });
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M2")
                     .WithArguments("Program.M2(System.Exception)", "Program.M2(int)")
@@ -5353,11 +5367,13 @@ public class B
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (5,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (5,9): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [My(1 switch { 1 => 1, _ => 2 })]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }")
                     .WithLocation(5, 9),
-                // (8,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,9): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [My(1 switch { 1 => new A(), _ => new B() })]
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -5505,11 +5521,13 @@ public class B
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (5,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (5,17): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [My(Value = 1 switch { 1 => 1, _ => 2 })]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "1 switch { 1 => 1, _ => 2 }")
                     .WithLocation(5, 17),
-                // (8,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                // (8,17): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                // array creation expression of an attribute parameter type
                 //     [My(Value = 1 switch { 1 => new A(), _ => new B() })]
                 Diagnostic(
                         ErrorCode.ERR_BadAttributeArgument,
@@ -5680,17 +5698,20 @@ public class B
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (5,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
+                // (5,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => 1, _ => 2 })]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
                     .WithArguments("Value")
                     .WithLocation(5, 9),
-                // (8,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
+                // (8,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => new A(), _ => new B() })]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
                     .WithArguments("Value")
                     .WithLocation(8, 9),
-                // (11,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a using directive or an assembly reference?)
+                // (11,9): error CS0246: The type or namespace name 'Value' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //     [My(Value = 1 switch { 1 => 1, _ => string.Empty })]
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Value")
                     .WithArguments("Value")

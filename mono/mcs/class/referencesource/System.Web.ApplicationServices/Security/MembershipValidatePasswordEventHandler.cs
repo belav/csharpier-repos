@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * MembershipValidatePasswordEventHandler class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* MembershipValidatePasswordEventHandler class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.Security
 {
     using System.Runtime.CompilerServices;

@@ -313,7 +313,8 @@ namespace System
             return;
 
             MCPY04:
-            // Copy the first byte. For pending bytes, do an unconditionally copy of the last 2 bytes and return.
+            // Copy the first byte. For pending bytes, do an unconditionally copy of the last 2 bytes and
+            // return.
             Debug.Assert(len < 4);
             if (len == 0)
                 return;
@@ -349,7 +350,8 @@ namespace System
 #endif
 
             // Copy 64-bytes at a time until the remainder is less than 64.
-            // If remainder is greater than 16 bytes, then jump to MCPY00. Otherwise, unconditionally copy the last 16 bytes and return.
+            // If remainder is greater than 16 bytes, then jump to MCPY00. Otherwise, unconditionally copy the
+            // last 16 bytes and return.
             Debug.Assert(len > 64 && len <= MemmoveNativeThreshold);
             nuint n = len >> 6;
 
@@ -531,7 +533,8 @@ namespace System
 #pragma warning restore 8500
         }
 
-        // The maximum block size to for __BulkMoveWithWriteBarrier FCall. This is required to avoid GC starvation.
+        // The maximum block size to for __BulkMoveWithWriteBarrier FCall. This is required to avoid GC
+        // starvation.
 #if DEBUG // Stress the mechanism in debug builds
         private const uint BulkMoveWithWriteBarrierChunk = 0x400;
 #else

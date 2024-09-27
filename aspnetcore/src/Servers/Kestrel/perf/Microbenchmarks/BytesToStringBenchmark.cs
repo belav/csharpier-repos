@@ -256,7 +256,8 @@ public class BytesToStringBenchmark
                 break;
             case BenchmarkTypes.UserAgent:
                 _headerName = HeaderNames.UserAgent;
-                // Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36
+                // Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99
+                // Safari/537.36
                 _asciiBytes = new byte[]
                 {
                     0x4d,
@@ -369,7 +370,8 @@ public class BytesToStringBenchmark
                     0x33,
                     0x36,
                 };
-                // Mozillá/5.0 (Windows NT 10.0; WOW64) áppléWébKit/537.36 (KHTML, liké Gécko) Chromé/54.0.2840.99 Sáfári/537.36
+                // Mozillá/5.0 (Windows NT 10.0; WOW64) áppléWébKit/537.36 (KHTML, liké Gécko) Chromé/54.0.2840.99
+                // Sáfári/537.36
                 _utf8Bytes = new byte[]
                 {
                     0x4d,
@@ -494,7 +496,9 @@ public class BytesToStringBenchmark
                 break;
             case BenchmarkTypes.Cookie:
                 _headerName = HeaderNames.Cookie;
-                // prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442; _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2; acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric
+                // prov=20629ccd-8b0f-e8ef-2935-cd26609fc0bc; __qca=P0-1591065732-1479167353442;
+                // _ga=GA1.2.1298898376.1479167354; _gat=1; sgt=id=9519gfde_3347_4762_8762_df51458c8ec2;
+                // acct=t=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric&s=why-is-%e0%a5%a7%e0%a5%a8%e0%a5%a9-numeric
                 _asciiBytes = new byte[]
                 {
                     0x70,
@@ -756,7 +760,9 @@ public class BytesToStringBenchmark
                     0x69,
                     0x63,
                 };
-                // prov=20629ccd-8b0f-é8éf-2935-cd26609fc0bc; __qcá=P0-1591065732-1479167353442; _gá=Gá1.2.1298898376.1479167354; _gát=1; sgt=id=9519gfdé_3347_4762_8762_df51458c8éc2; ácct=t=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric&s=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric
+                // prov=20629ccd-8b0f-é8éf-2935-cd26609fc0bc; __qcá=P0-1591065732-1479167353442;
+                // _gá=Gá1.2.1298898376.1479167354; _gát=1; sgt=id=9519gfdé_3347_4762_8762_df51458c8éc2;
+                // ácct=t=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric&s=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric
                 _utf8Bytes = new byte[]
                 {
                     0x70,

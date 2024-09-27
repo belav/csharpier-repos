@@ -94,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // The method returns true for superType == subType.
-            // Two different submission type symbols semantically represent a single type, so we should also return true.
+            // Two different submission type symbols semantically represent a single type, so we should also
+            // return true.
             return superType.TypeKind == TypeKind.Submission
                 && subType.TypeKind == TypeKind.Submission;
         }

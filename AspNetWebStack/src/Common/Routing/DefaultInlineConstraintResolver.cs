@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Globalization;
@@ -21,8 +22,10 @@ namespace System.Web.Mvc.Routing
 #endif
 {
     /// <summary>
-    /// The default implementation of <see cref="IInlineConstraintResolver"/>. Resolves constraints by parsing
-    /// a constraint key and constraint arguments, using a map to resolve the constraint type, and calling an
+    /// The default implementation of <see cref="IInlineConstraintResolver"/>. Resolves constraints by
+    // parsing
+    /// a constraint key and constraint arguments, using a map to resolve the constraint type, and
+    // calling an
     /// appropriate constructor for the constraint type.
     /// </summary>
     public class DefaultInlineConstraintResolver : IInlineConstraintResolver

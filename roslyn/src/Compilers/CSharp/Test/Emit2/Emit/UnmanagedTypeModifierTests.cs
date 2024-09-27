@@ -75,7 +75,8 @@ public class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or
+                    // method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
                     //         obj.M2<int>();      // invalid
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
                         .WithArguments("TestRef.M2<T>()", "?", "T", "int")
@@ -154,7 +155,8 @@ public class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or
+                    // method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
                     //         obj.M2<int>();      // invalid
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
                         .WithArguments("TestRef.M2<T>()", "?", "T", "int")
@@ -233,7 +235,8 @@ public class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyDiagnostics(
-                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
+                    // (9,13): error CS0315: The type 'int' cannot be used as type parameter 'T' in the generic type or
+                    // method 'TestRef.M2<T>()'. There is no boxing conversion from 'int' to '?'.
                     //         obj.M2<int>();      // invalid
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M2<int>")
                         .WithArguments("TestRef.M2<T>()", "?", "T", "int")
@@ -404,7 +407,8 @@ class Test<T> where T : unmanaged
 
             CreateEmptyCompilation(code)
                 .VerifyDiagnostics(
-                    // (8,25): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // (8,25): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not
+                    // defined or imported
                     // class Test<T> where T : unmanaged
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
                         .WithArguments("System.Runtime.InteropServices.UnmanagedType")
@@ -430,7 +434,8 @@ class Test
 
             CreateEmptyCompilation(code)
                 .VerifyDiagnostics(
-                    // (10,34): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // (10,34): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not
+                    // defined or imported
                     //     public void M<T>() where T : unmanaged {}
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
                         .WithArguments("System.Runtime.InteropServices.UnmanagedType")
@@ -455,7 +460,8 @@ public delegate void D<T>() where T : unmanaged;";
 
             CreateEmptyCompilation(code)
                 .VerifyDiagnostics(
-                    // (10,39): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // (10,39): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not
+                    // defined or imported
                     // public delegate void D<T>() where T : unmanaged;
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
                         .WithArguments("System.Runtime.InteropServices.UnmanagedType")
@@ -492,7 +498,8 @@ public class Test
 
             CreateEmptyCompilation(code)
                 .VerifyDiagnostics(
-                    // (16,31): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // (16,31): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not
+                    // defined or imported
                     //         void N<T>() where T : unmanaged
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
                         .WithArguments("System.Runtime.InteropServices.UnmanagedType")
@@ -1482,7 +1489,8 @@ public class Test<T> where T : unmanaged
                     references: new[] { ref1, ref2, corlibWithoutUnmanagedTypeRef }
                 )
                 .VerifyDiagnostics(
-                    // (2,32): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not defined or imported
+                    // (2,32): error CS0518: Predefined type 'System.Runtime.InteropServices.UnmanagedType' is not
+                    // defined or imported
                     // public class Test<T> where T : unmanaged
                     Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "unmanaged")
                         .WithArguments("System.Runtime.InteropServices.UnmanagedType")
@@ -1538,12 +1546,15 @@ public class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyDiagnostics(
-                    // (6,23): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
+                    // (6,23): error CS0452: The type 'int' must be a reference type in order to use it as parameter 'T'
+                    // in the generic type or method 'TestRef.M<T>()'
                     //         new TestRef().M<int>();
                     Diagnostic(ErrorCode.ERR_RefConstraintNotSatisfied, "M<int>")
                         .WithArguments("TestRef.M<T>()", "T", "int")
                         .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to
+                    // 'System.ValueType'.
                     //         new TestRef().M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
@@ -1609,12 +1620,15 @@ public class Test
                     Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
                         .WithArguments("T")
                         .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to
+                    // 'System.ValueType'.
                     //         new TestRef().M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
                         .WithLocation(7, 23),
-                    // (7,23): error CS0310: 'string' must be a non-abstract type with a public parameterless constructor in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
+                    // (7,23): error CS0310: 'string' must be a non-abstract type with a public parameterless
+                    // constructor in order to use it as parameter 'T' in the generic type or method 'TestRef.M<T>()'
                     //         new TestRef().M<string>();
                     Diagnostic(ErrorCode.ERR_NewConstraintNotSatisfied, "M<string>")
                         .WithArguments("TestRef.M<T>()", "T", "string")
@@ -1680,7 +1694,9 @@ public class Test
                     Diagnostic(ErrorCode.ERR_BindToBogus, "M<int>")
                         .WithArguments("T")
                         .WithLocation(6, 23),
-                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to 'System.ValueType'.
+                    // (7,23): error CS0311: The type 'string' cannot be used as type parameter 'T' in the generic type
+                    // or method 'TestRef.M<T>()'. There is no implicit reference conversion from 'string' to
+                    // 'System.ValueType'.
                     //         new TestRef().M<string>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M<string>")
                         .WithArguments("TestRef.M<T>()", "System.ValueType", "T", "string")
@@ -1746,7 +1762,9 @@ public class Test
 
             CreateCompilation(code, references: new[] { reference })
                 .VerifyDiagnostics(
-                    // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to 'System.IComparable'.
+                    // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic
+                    // type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to
+                    // 'System.IComparable'.
                     //         new TestRef().M<S1>();
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<S1>")
                         .WithArguments("TestRef.M<T>()", "System.IComparable", "T", "Test.S1")
@@ -1808,7 +1826,9 @@ public class Test
             var c = CreateCompilation(code, references: new[] { reference });
 
             c.VerifyDiagnostics(
-                // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to 'System.IComparable'.
+                // (10,23): error CS0315: The type 'Test.S1' cannot be used as type parameter 'T' in the generic
+                // type or method 'TestRef.M<T>()'. There is no boxing conversion from 'Test.S1' to
+                // 'System.IComparable'.
                 //         new TestRef().M<S1>();
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedValType, "M<S1>")
                     .WithArguments("TestRef.M<T>()", "System.IComparable", "T", "Test.S1")

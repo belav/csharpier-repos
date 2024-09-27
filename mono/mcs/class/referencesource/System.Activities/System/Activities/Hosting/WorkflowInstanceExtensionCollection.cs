@@ -65,7 +65,8 @@ namespace System.Activities.Hosting
                 )
             )
             {
-                // a) filter out the extension Types that were already configured by the host. Note that only "primary" extensions are in play here, not
+                // a) filter out the extension Types that were already configured by the host. Note that only
+                // "primary" extensions are in play here, not
                 // "additional" extensions
                 HashSet<Type> allExtensionTypes = new HashSet<Type>();
                 if (extensionManager != null)
@@ -101,7 +102,8 @@ namespace System.Activities.Hosting
                                 Type existingExtensionProviderType in filteredActivityExtensionProviders.Keys
                             )
                             {
-                                // Use AreReferenceTypesCompatible for performance since we know that all of these must be reference types
+                                // Use AreReferenceTypesCompatible for performance since we know that all of these must be reference
+                                // types
                                 if (
                                     TypeHelper.AreReferenceTypesCompatible(
                                         existingExtensionProviderType,
@@ -128,7 +130,8 @@ namespace System.Activities.Hosting
                                 }
                             }
 
-                            // prune unnecessary extension providers (either superseded by the new extension or by an existing extension that supersedes them both)
+                            // prune unnecessary extension providers (either superseded by the new extension or by an existing
+                            // extension that supersedes them both)
                             if (typesToRemove != null)
                             {
                                 for (int i = 0; i < typesToRemove.Count; i++)
@@ -354,7 +357,9 @@ namespace System.Activities.Hosting
 
             try
             {
-                // when we have support for context.GetExtensions<T>(), then change from early break to ThrowOnMultipleMatches ("There are more than one matched extensions found which is not allowed with GetExtension method call. Please use GetExtensions method instead.")
+                // when we have support for context.GetExtensions<T>(), then change from early break to
+                // ThrowOnMultipleMatches ("There are more than one matched extensions found which is not allowed with
+                // GetExtension method call. Please use GetExtensions method instead.")
                 for (int i = 0; i < this.allSingletonExtensions.Count; i++)
                 {
                     object extension = this.allSingletonExtensions[i];

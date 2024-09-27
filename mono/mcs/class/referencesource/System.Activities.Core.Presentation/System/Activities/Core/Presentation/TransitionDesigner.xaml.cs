@@ -501,7 +501,8 @@ namespace System.Activities.Core.Presentation
                     topmostWFViewElement != null ? topmostWFViewElement.ShowExpanded : false;
                 if (!isAlreadyExpanded)
                 {
-                    // Handling the DragEnter would not only disable Auot-expand but also Auto-surround UI gesture (Bug 202880).
+                    // Handling the DragEnter would not only disable Auot-expand but also Auto-surround UI gesture (Bug
+                    // 202880).
                     // To circumvent this problem, a new method (ShowSpacerHelperOnDraggedItems) is used to show
                     // the spacer directly.
                     presenter.ShowSpacerHelperOnDraggedItems(e);
@@ -687,7 +688,8 @@ namespace System.Activities.Core.Presentation
                         .Collection
                 )
                 {
-                    // to simplify the model, count a source connection as one, regardless of whether it is shared Trigger or not.
+                    // to simplify the model, count a source connection as one, regardless of whether it is shared
+                    // Trigger or not.
                     stateToConnectionMap[stateModelItem]++;
 
                     ModelItem toStateModelItem = transitionModelItem

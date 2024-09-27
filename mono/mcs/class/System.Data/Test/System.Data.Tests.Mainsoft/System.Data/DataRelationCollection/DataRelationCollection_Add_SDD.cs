@@ -43,85 +43,89 @@ namespace tests.system_data_dll.System_Data
 {
 [TestFixture] public class DataRelationCollection_Add_SDD : GHTBase
 {
-    OleDbConnection con;
+OleDbConnection con;
 
-    public void SetUp()
-    {
-        con = new OleDbConnection(GHTUtils.DataProvider.ConnectionString);
-        con.Open();
-    }
+public void SetUp()
+{
+con = new OleDbConnection(GHTUtils.DataProvider.ConnectionString);
+con.Open();
+}
 
-    public void TearDown()
-    {
-        if (con != null)
-        {
-            if (con.State == ConnectionState.Open) con.Close();
-        }
-    }
+public void TearDown()
+{
+if (con != null)
+{
+if (con.State == ConnectionState.Open) con.Close();
+}
+}
 
-    [Test] public void Main()
-    {
-        DataRelationCollection_Add_SDD tc = new DataRelationCollection_Add_SDD();
-        Exception exp = null;
-        try
-        {
-            tc.BeginTest("DataRelationCollection_Add_SDD");
-            tc.SetUp();
-            tc.run();
-            tc.TearDown();
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            tc.EndTest(exp);
-        }
-    }
+[Test] public void Main()
+{
+DataRelationCollection_Add_SDD tc = new DataRelationCollection_Add_SDD();
+Exception exp = null;
+try
+{
+tc.BeginTest("DataRelationCollection_Add_SDD");
+tc.SetUp();
+tc.run();
+tc.TearDown();
+}
+catch(Exception ex)
+{
+exp = ex;
+}
+finally
+{
+tc.EndTest(exp);
+}
+}
 
 
-    public void run()
-    {
-        Exception exp = null;
-        try
-        {
-            BeginCase("DataRelation.Add(name,DataColumn parentColumn,DataColumn childColumn");
-            DataSet contactsDataSet1 = new DataSet();
-            string strbuff = null;
+public void run()
+{
+Exception exp = null;
+try
+{
+BeginCase("DataRelation.Add(name,DataColumn parentColumn,DataColumn childColumn");
+DataSet contactsDataSet1 = new DataSet();
+string strbuff = null;
 
-            OleDbCommand oleDbSelectCommand1 = new OleDbCommand();
-            OleDbDataAdapter cmdCustomers= new OleDbDataAdapter("Select CustomerID,CompanyName,ContactName,ContactTitle,Phone,Address from Customers where CustomerID like 'A%'", con);
-            OleDbDataAdapter cmdOrders = new OleDbDataAdapter("Select CustomerID,OrderID,OrderDate,ShippedDate,ShipAddress,Freight from Orders where CustomerID like 'A%'", con);
-            cmdCustomers.Fill(contactsDataSet1, "Customers");
-            cmdOrders.Fill(contactsDataSet1, "Orders");
+OleDbCommand oleDbSelectCommand1 = new OleDbCommand();
+OleDbDataAdapter cmdCustomers= new OleDbDataAdapter("Select
+CustomerID,CompanyName,ContactName,ContactTitle,Phone,Address from Customers where CustomerID like
+'A%'", con);
+OleDbDataAdapter cmdOrders = new OleDbDataAdapter("Select
+CustomerID,OrderID,OrderDate,ShippedDate,ShipAddress,Freight from Orders where CustomerID like
+'A%'", con);
+cmdCustomers.Fill(contactsDataSet1, "Customers");
+cmdOrders.Fill(contactsDataSet1, "Orders");
 
-            contactsDataSet1.Relations.Add("CustomerID",
-                    contactsDataSet1.Tables["Customers"].Columns["CustomerID"],
-                    contactsDataSet1.Tables["Orders"].Columns["CustomerID"]);
+contactsDataSet1.Relations.Add("CustomerID",
+contactsDataSet1.Tables["Customers"].Columns["CustomerID"],
+contactsDataSet1.Tables["Orders"].Columns["CustomerID"]);
 
-            //' Iterate through the master and child tables
-            foreach (DataRow customerRow in contactsDataSet1.Tables["Customers"].Rows)
-            {
-                foreach (DataRow orderRow in customerRow.GetChildRows("CustomerID"))
-                {
-                    object item = orderRow.ItemArray.GetValue(0);
-                    strbuff = strbuff + item.ToString().Substring(1,1);
-                }
-            }
+//' Iterate through the master and child tables
+foreach (DataRow customerRow in contactsDataSet1.Tables["Customers"].Rows)
+{
+foreach (DataRow orderRow in customerRow.GetChildRows("CustomerID"))
+{
+object item = orderRow.ItemArray.GetValue(0);
+strbuff = strbuff + item.ToString().Substring(1,1);
+}
+}
 
-            Compare(strbuff,"LLLLLLNNNNNNNNNNNRRRRRRRRRRRRR");
-        }
-        catch(Exception ex)
-        {
-            exp = ex;
-        }
-        finally
-        {
-            EndCase(exp);
-            exp = null;
-        }
-    }
+Compare(strbuff,"LLLLLLNNNNNNNNNNNRRRRRRRRRRRRR");
+}
+catch(Exception ex)
+{
+exp = ex;
+}
+finally
+{
+EndCase(exp);
+exp = null;
+}
+}
 }
 }
 */

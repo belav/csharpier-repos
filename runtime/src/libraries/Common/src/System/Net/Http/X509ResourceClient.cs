@@ -107,7 +107,8 @@ namespace System.Net.Http
             try
             {
                 // Use reflection to access System.Net.Http:
-                // Since System.Net.Http.dll explicitly depends on System.Security.Cryptography.X509Certificates.dll,
+                // Since System.Net.Http.dll explicitly depends on
+                // System.Security.Cryptography.X509Certificates.dll,
                 // the latter can't in turn have an explicit dependency on the former.
 
                 // Get the relevant types needed.
@@ -224,7 +225,8 @@ namespace System.Net.Http
                     return null;
                 }
 
-                // Only keep idle connections around briefly, as a compromise between resource leakage and port exhaustion.
+                // Only keep idle connections around briefly, as a compromise between resource leakage and port
+                // exhaustion.
                 const int PooledConnectionIdleTimeoutSeconds = 15;
                 const int MaxRedirections = 10;
 
@@ -234,7 +236,8 @@ namespace System.Net.Http
                 //     AllowAutoRedirect = false
                 // };
                 // var httpClient = new HttpClient(socketsHttpHandler);
-                // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the usage through the lambda method.
+                // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the
+                // usage through the lambda method.
                 object? socketsHttpHandler = socketsHttpHandlerCtor.Invoke(null);
                 pooledConnectionIdleTimeoutProp.SetValue(
                     socketsHttpHandler,
@@ -256,7 +259,8 @@ namespace System.Net.Http
                     // Equivalent of:
                     // HttpRequestMessage requestMessage = new HttpRequestMessage() { RequestUri = new Uri(uri) };
                     // HttpResponseMessage responseMessage = httpClient.Send(requestMessage, cancellationToken);
-                    // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the usage through the lambda method.
+                    // Note: using a ConstructorInfo instead of Activator.CreateInstance, so the ILLinker can see the
+                    // usage through the lambda method.
                     object requestMessage = httpRequestMessageCtor.Invoke(null);
                     requestUriProp.SetValue(requestMessage, uri);
                     object responseMessage;
@@ -418,7 +422,8 @@ namespace System.Net.Http
 
         private static bool IsRedirectStatusCode(int statusCode)
         {
-            // MultipleChoices (300), Moved (301), Found (302), SeeOther (303), TemporaryRedirect (307), PermanentRedirect (308)
+            // MultipleChoices (300), Moved (301), Found (302), SeeOther (303), TemporaryRedirect (307),
+            // PermanentRedirect (308)
             return (statusCode >= 300 && statusCode <= 303)
                 || statusCode == 307
                 || statusCode == 308;

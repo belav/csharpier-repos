@@ -153,11 +153,14 @@ class C
 
             ScriptingTestHelpers.AssertCompilationError(
                 script,
-                // (6,20): error CS0120: An object reference is required for the non-static field, method, or property 'field'
+                // (6,20): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'field'
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "field").WithArguments("field"),
-                // (7,20): error CS0120: An object reference is required for the non-static field, method, or property 'Property'
+                // (7,20): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'Property'
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Property").WithArguments("Property"),
-                // (8,9): error CS0120: An object reference is required for the non-static field, method, or property 'Method()'
+                // (8,9): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'Method()'
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Method").WithArguments("Method()")
             );
         }
@@ -1706,9 +1709,11 @@ d
 
             ScriptingTestHelpers.AssertCompilationError(
                 () => CSharpScript.EvaluateAsync("1", options),
-                // error CS0246: The type or namespace name '?1' could not be found (are you missing a using directive or an assembly reference?)
+                // error CS0246: The type or namespace name '?1' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound).WithArguments("?1"),
-                // error CS0246: The type or namespace name '?2' could not be found (are you missing a using directive or an assembly reference?)
+                // error CS0246: The type or namespace name '?2' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound).WithArguments("?2")
             );
 
@@ -1758,7 +1763,12 @@ d
             }
             catch (CompilationErrorException e)
             {
-                // error CS0400: The type or namespace name 'Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source.InteractiveSessionTests+C`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], Roslyn.Compilers.CSharp.Emit.UnitTests, Version=42.42.42.42, Culture=neutral, PublicKeyToken=fc793a00266884fb' could not be found in the global namespace (are you missing an assembly reference?)
+                // error CS0400: The type or namespace name
+                // 'Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Source.InteractiveSessionTests+C`1[[System.Int32,
+                // mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],
+                // Roslyn.Compilers.CSharp.Emit.UnitTests, Version=42.42.42.42, Culture=neutral,
+                // PublicKeyToken=fc793a00266884fb' could not be found in the global namespace (are you missing an
+                // assembly reference?)
                 Assert.Equal(
                     ErrorCode.ERR_GlobalSingleTypeNameNotFound,
                     (ErrorCode)e.Diagnostics.Single().Code
@@ -1908,7 +1918,8 @@ new List<ArgumentException>()
 
             ScriptingTestHelpers.AssertCompilationError(
                 () => CSharpScript.EvaluateAsync("Z()", globals: c),
-                // (1,1): error CS0122: '<Fully Qualified Name of PrivateClass>.Z()' is inaccessible due to its protection level
+                // (1,1): error CS0122: '<Fully Qualified Name of PrivateClass>.Z()' is inaccessible due to its
+                // protection level
                 Diagnostic(ErrorCode.ERR_BadAccess, "Z")
                     .WithArguments(typeof(PrivateClass).FullName.Replace("+", ".") + ".Z()")
             );
@@ -2006,7 +2017,8 @@ new List<ArgumentException>()
                 .GetCompilation();
 
             scriptCompilation.VerifyDiagnostics(
-                // (1,8): error CS0234: The type or namespace name 'CodeAnalysis' does not exist in the namespace 'Microsoft' (are you missing an assembly reference?)
+                // (1,8): error CS0234: The type or namespace name 'CodeAnalysis' does not exist in the namespace
+                // 'Microsoft' (are you missing an assembly reference?)
                 // nameof(Microsoft.CodeAnalysis.Scripting)
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "Microsoft.CodeAnalysis")
                     .WithArguments("CodeAnalysis", "Microsoft")
@@ -2042,7 +2054,8 @@ new List<ArgumentException>()
 
                     case "Microsoft.CodeAnalysis":
                     case "System.Collections.Immutable":
-                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with <host> alias.
+                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with
+                        // <host> alias.
                         // The script doesn't reference the assemblies explicitly.
                         AssertEx.SetEqual(new[] { "<implicit>", "<host>" }, aliases);
                         break;
@@ -2106,15 +2119,18 @@ new List<ArgumentException>()
                         break;
 
                     case "Microsoft.CodeAnalysis.CSharp":
-                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references these assemblies.
+                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references
+                        // these assemblies.
                         // The script doesn't reference the assembly explicitly.
                         AssertEx.SetEqual(new[] { "<implicit>", "global" }, aliases);
                         break;
 
                     case "Microsoft.CodeAnalysis":
                     case "System.Collections.Immutable":
-                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references these assemblies.
-                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with <host> alias.
+                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references
+                        // these assemblies.
+                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with
+                        // <host> alias.
                         // The script doesn't reference the assemblies explicitly.
                         AssertEx.SetEqual(new[] { "<implicit>", "<host>", "global" }, aliases);
                         break;
@@ -2185,15 +2201,18 @@ typeof(Microsoft.CodeAnalysis.Scripting.Script)
                         break;
 
                     case "Microsoft.CodeAnalysis.CSharp":
-                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references these assemblies.
+                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references
+                        // these assemblies.
                         // The script doesn't reference the assembly explicitly.
                         AssertEx.SetEqual(new[] { "<implicit>", "global" }, aliases);
                         break;
 
                     case "Microsoft.CodeAnalysis":
                     case "System.Collections.Immutable":
-                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references these assemblies.
-                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with <host> alias.
+                        // The script has a recursive reference to Microsoft.CodeAnalysis.CSharp.Scripting, which references
+                        // these assemblies.
+                        // Microsoft.CodeAnalysis.Scripting contains host object and is thus referenced recursively with
+                        // <host> alias.
                         // The script doesn't reference the assemblies explicitly.
                         AssertEx.SetEqual(new[] { "<implicit>", "<host>", "global" }, aliases);
                         break;
@@ -2265,7 +2284,8 @@ return M();
             var script = CSharpScript.Create<bool>(code, globalsType: typeof(F));
             ScriptingTestHelpers.AssertCompilationError(
                 () => script.RunAsync(new F()).Wait(),
-                // (4,9): error CS0120: An object reference is required for the non-static field, method, or property 'InteractiveSessionTests.F.Value'
+                // (4,9): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'InteractiveSessionTests.F.Value'
                 // 				return Value;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Value")
                     .WithArguments(
@@ -2294,7 +2314,8 @@ return M();
             var script = CSharpScript.Create<bool>(code, globalsType: typeof(F));
             ScriptingTestHelpers.AssertCompilationError(
                 () => script.RunAsync(new F()).Wait(),
-                // (7,10): error CS0120: An object reference is required for the non-static field, method, or property 'InteractiveSessionTests.F.Value'
+                // (7,10): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'InteractiveSessionTests.F.Value'
                 // 					return Value;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "Value")
                     .WithArguments(

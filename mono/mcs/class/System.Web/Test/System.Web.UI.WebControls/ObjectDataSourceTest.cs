@@ -697,7 +697,8 @@ namespace MonoTests.System.Web.UI.WebControls
         private static bool updated = false;
         private static bool updating = false;
 
-        // Tests for events Select,Update,Delete and Insert include in Select,Update,Delete and Insert methods tests.
+        // Tests for events Select,Update,Delete and Insert include in Select,Update,Delete and Insert
+        // methods tests.
 
         [Test]
         [Category("NunitWeb")]

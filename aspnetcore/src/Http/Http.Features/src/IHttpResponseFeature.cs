@@ -15,12 +15,14 @@ public interface IHttpResponseFeature
     int StatusCode { get; set; }
 
     /// <summary>
-    /// Gets or sets the reason-phrase as defined in RFC 7230. Note this field is no longer supported by HTTP/2.
+    /// Gets or sets the reason-phrase as defined in RFC 7230. Note this field is no longer supported by
+    // HTTP/2.
     /// </summary>
     string? ReasonPhrase { get; set; }
 
     /// <summary>
-    /// Gets or sets the response headers to send. Headers with multiple values will be emitted as multiple headers.
+    /// Gets or sets the response headers to send. Headers with multiple values will be emitted as
+    // multiple headers.
     /// </summary>
     IHeaderDictionary Headers { get; set; }
 

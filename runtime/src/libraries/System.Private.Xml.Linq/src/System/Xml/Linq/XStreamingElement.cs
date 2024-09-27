@@ -31,7 +31,8 @@ namespace System.Xml.Linq
         /// Creates a <see cref="XStreamingElement"/> node with a given name and content
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
-        /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/> node</param>
+        /// <param name="content">The content to assign to the new <see cref="XStreamingElement"/>
+        // node</param>
         public XStreamingElement(XName name, object? content)
             : this(name)
         {
@@ -42,7 +43,8 @@ namespace System.Xml.Linq
         /// Creates a <see cref="XStreamingElement"/> node with a given name and content
         /// </summary>
         /// <param name="name">The name to assign to the new <see cref="XStreamingElement"/> node</param>
-        /// <param name="content">An array containing content to assign to the new <see cref="XStreamingElement"/> node</param>
+        /// <param name="content">An array containing content to assign to the new <see
+        // cref="XStreamingElement"/> node</param>
         public XStreamingElement(XName name, params object?[] content)
             : this(name)
         {
@@ -108,7 +110,8 @@ namespace System.Xml.Linq
         /// <param name="stream"><see cref="Stream"/> to write to </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(Stream stream, SaveOptions options)
         {
@@ -136,7 +139,8 @@ namespace System.Xml.Linq
         /// <param name="textWriter"><see cref="TextWriter"/> to write to </param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(TextWriter textWriter, SaveOptions options)
         {
@@ -148,7 +152,8 @@ namespace System.Xml.Linq
         }
 
         /// <summary>
-        /// Save the contents of an <see cref="XStreamingElement"/> to an XML writer, not preserving whitespace
+        /// Save the contents of an <see cref="XStreamingElement"/> to an XML writer, not preserving
+        // whitespace
         /// </summary>
         /// <param name="writer"><see cref="XmlWriter"/> to write to </param>
         public void Save(XmlWriter writer)
@@ -175,7 +180,8 @@ namespace System.Xml.Linq
         /// <param name="fileName">Name of file to write content to</param>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the output is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         public void Save(string fileName, SaveOptions options)
         {
@@ -201,7 +207,8 @@ namespace System.Xml.Linq
         /// </summary>
         /// <param name="options">
         /// If SaveOptions.DisableFormatting is enabled the content is not indented.
-        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
+        /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be
+        // removed.
         /// </param>
         /// <returns>An XML string</returns>
         public string ToString(SaveOptions options)

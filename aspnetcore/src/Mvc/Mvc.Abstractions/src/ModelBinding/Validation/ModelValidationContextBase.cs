@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 /// <summary>
-/// A common base class for <see cref="ModelValidationContext"/> and <see cref="ClientModelValidationContext"/>.
+/// A common base class for <see cref="ModelValidationContext"/> and <see
+// cref="ClientModelValidationContext"/>.
 /// </summary>
 public class ModelValidationContextBase
 {
@@ -13,7 +14,8 @@ public class ModelValidationContextBase
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/> for this context.</param>
     /// <param name="modelMetadata">The <see cref="ModelMetadata"/> for this model.</param>
-    /// <param name="metadataProvider">The <see cref="IModelMetadataProvider"/> to be used by this context.</param>
+    /// <param name="metadataProvider">The <see cref="IModelMetadataProvider"/> to be used by this
+    // context.</param>
     public ModelValidationContextBase(
         ActionContext actionContext,
         ModelMetadata modelMetadata,

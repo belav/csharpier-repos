@@ -45,7 +45,8 @@ public class CompositeViewEngine : ICompositeViewEngine
             );
         }
 
-        // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.
+        // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is
+        // successful.
         IEnumerable<string>? searchedLocations = null;
         List<string>? searchedList = null;
         for (var i = 0; i < ViewEngines.Count; i++)
@@ -104,7 +105,8 @@ public class CompositeViewEngine : ICompositeViewEngine
             );
         }
 
-        // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is successful.
+        // Do not allocate in the common cases: ViewEngines contains one entry or initial attempt is
+        // successful.
         IEnumerable<string>? searchedLocations = null;
         List<string>? searchedList = null;
         for (var i = 0; i < ViewEngines.Count; i++)

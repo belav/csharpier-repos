@@ -250,7 +250,8 @@ namespace TypeSystemTests
         }
 
         [Fact]
-        // Test that when a struct is used as a field, we use its instance byte size as the size (ie, treat it
+        // Test that when a struct is used as a field, we use its instance byte size as the size (ie, treat
+        // it
         // as a value type) and not a pointer size.
         public void TestSequentialTypeLayoutStructEmbedded()
         {
@@ -400,9 +401,11 @@ namespace TypeSystemTests
             // MyBool1              1
             // MyBool2              1
             // MyStructWithBool     1 + 3 to align up to the next multiple of 4 after placing a value class
-            //                      4 byte padding to make offset % pointer size == 0 before placing the next value class
+            //                      4 byte padding to make offset % pointer size == 0 before placing the next
+            // value class
             // MyStructWithIntChar  6 + 2 to align up to the next multiple of 4 after placing a value class
-            // MyStructWithChar     2 + 2 to align up to the next multiple of 4 after placing a value class + 4 byte padding to make class size % pointer size == 0
+            // MyStructWithChar     2 + 2 to align up to the next multiple of 4 after placing a value class + 4
+            // byte padding to make class size % pointer size == 0
             // -------------------
             //                  72 (0x48)
             Assert.Equal(0x48, classContainingStructsType.InstanceByteCount.AsInt);

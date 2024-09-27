@@ -10,10 +10,14 @@ namespace System.Threading
 {
     internal sealed partial class PortableThreadPool
     {
-        // Continuations of IO completions are dispatched to the ThreadPool from IO completion poller threads. This avoids
-        // continuations blocking/stalling the IO completion poller threads. Setting UnsafeInlineIOCompletionCallbacks allows
-        // continuations to run directly on the IO completion poller thread, but is inherently unsafe due to the potential for
-        // those threads to become stalled due to blocking. Sometimes, setting this config value may yield better latency. The
+        // Continuations of IO completions are dispatched to the ThreadPool from IO completion poller
+        // threads. This avoids
+        // continuations blocking/stalling the IO completion poller threads. Setting
+        // UnsafeInlineIOCompletionCallbacks allows
+        // continuations to run directly on the IO completion poller thread, but is inherently unsafe due to
+        // the potential for
+        // those threads to become stalled due to blocking. Sometimes, setting this config value may yield
+        // better latency. The
         // config value is named for consistency with SocketAsyncEngine.Unix.cs.
         private static readonly bool UnsafeInlineIOCompletionCallbacks =
             Environment.GetEnvironmentVariable("DOTNET_SYSTEM_NET_SOCKETS_INLINE_COMPLETIONS")
@@ -23,9 +27,12 @@ namespace System.Threading
 
         private static int GetIOCompletionPollerCount()
         {
-            // Named for consistency with SocketAsyncEngine.Unix.cs, this environment variable is checked to override the exact
-            // number of IO completion poller threads to use. See the comment in SocketAsyncEngine.Unix.cs about its potential
-            // uses. For this implementation, the ProcessorsPerIOPollerThread config option below may be preferable as it may be
+            // Named for consistency with SocketAsyncEngine.Unix.cs, this environment variable is checked to
+            // override the exact
+            // number of IO completion poller threads to use. See the comment in SocketAsyncEngine.Unix.cs about
+            // its potential
+            // uses. For this implementation, the ProcessorsPerIOPollerThread config option below may be
+            // preferable as it may be
             // less machine-specific.
             if (
                 uint.TryParse(
@@ -39,7 +46,8 @@ namespace System.Threading
 
             if (UnsafeInlineIOCompletionCallbacks)
             {
-                // In this mode, default to ProcessorCount pollers to ensure that all processors can be utilized if more work
+                // In this mode, default to ProcessorCount pollers to ensure that all processors can be utilized if
+                // more work
                 // happens on the poller threads
                 return Environment.ProcessorCount;
             }
@@ -175,12 +183,18 @@ namespace System.Threading
                     // These threads don't run user code, use a smaller stack size
                     _thread = new Thread(Poll, SmallStackSizeBytes);
 
-                    // Poller threads are typically expected to be few in number and have to compete for time slices with all
-                    // other threads that are scheduled to run. They do only a small amount of work and don't run any user code.
-                    // In situations where frequently, a large number of threads are scheduled to run, a scheduled poller thread
-                    // may be delayed artificially quite a bit. The poller threads are given higher priority than normal to
-                    // mitigate that issue. It's unlikely that these threads would starve a system because in such a situation
-                    // IO completions would stop occurring. Since the number of IO pollers is configurable, avoid having too
+                    // Poller threads are typically expected to be few in number and have to compete for time slices
+                    // with all
+                    // other threads that are scheduled to run. They do only a small amount of work and don't run any
+                    // user code.
+                    // In situations where frequently, a large number of threads are scheduled to run, a scheduled
+                    // poller thread
+                    // may be delayed artificially quite a bit. The poller threads are given higher priority than normal
+                    // to
+                    // mitigate that issue. It's unlikely that these threads would starve a system because in such a
+                    // situation
+                    // IO completions would stop occurring. Since the number of IO pollers is configurable, avoid having
+                    // too
                     // many poller threads at higher priority.
                     if (IOCompletionPollerCount * 4 < Environment.ProcessorCount)
                     {
@@ -197,7 +211,8 @@ namespace System.Threading
                 _thread.IsBackground = true;
                 _thread.Name = ".NET ThreadPool IO";
 
-                // Thread pool threads must start in the default execution context without transferring the context, so
+                // Thread pool threads must start in the default execution context without transferring the context,
+                // so
                 // using UnsafeStart() instead of Start()
                 _thread.UnsafeStart();
             }

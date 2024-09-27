@@ -127,7 +127,8 @@ namespace System.Security
             if (index == -1)
                 index = 0;
 
-            // Search for the string 'mscorlib' in the classname. If we find it, we will conservatively assume it's an mscorlib.dll type and load it.
+            // Search for the string 'mscorlib' in the classname. If we find it, we will conservatively assume
+            // it's an mscorlib.dll type and load it.
             for (int i = index; i < className.Length; i++)
             {
                 if (className[i] == 'm' || className[i] == 'M')

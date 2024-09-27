@@ -484,7 +484,8 @@ namespace MonoTests.System
             Assert.IsFalse(typeof(Array).IsAssignableFrom(gparams[0]), "#45");
             Assert.IsFalse(typeof(Delegate).IsAssignableFrom(gparams[0]), "#46");
 
-            // Arrays of generic parameters and arrays of interfaces, see https://github.com/mono/mono/pull/15749
+            // Arrays of generic parameters and arrays of interfaces, see
+            // https://github.com/mono/mono/pull/15749
             var t = typeof(SampleGeneric<>).GetTypeInfo().GenericTypeParameters[0];
             var ta = t.MakeArrayType();
             var i = typeof(IFace1);
@@ -3731,58 +3732,58 @@ namespace MonoTests.System
             Assert.AreEqual("System.Int32", t.FullName);
         }
 
-        /*
-                [Test]
-                [Category("SRE")]
-                public void MakeGenericType_UserDefinedType ()
-                {
-                    Type ut = new UserType (typeof (int));
-                    Type t = typeof (Foo<>).MakeGenericType (ut);
-                    Assert.IsTrue (t.IsGenericType, "#A1");
-                    Assert.AreEqual (1, t.GetGenericArguments ().Length, "#A2");
-        
-                    Type arg = t.GetGenericArguments () [0];
-                    Assert.IsNotNull (arg, "#B1");
-                    Assert.IsFalse (arg.IsGenericType, "#B2");
-                    Assert.AreEqual (ut, arg, "#B3");
-                }
-        
-                [Test]
-                [Category("SRE")]
-                public void MakeGenericType_NestedUserDefinedType ()
-                {
-                    Type ut = new UserType (new UserType (typeof (int)));
-                    Type t = typeof (Foo<>).MakeGenericType (ut);
-                    Assert.IsTrue (t.IsGenericType, "#A1");
-                    Assert.AreEqual (1, t.GetGenericArguments ().Length, "#A2");
-        
-                    Type arg = t.GetGenericArguments () [0];
-                    Assert.IsNotNull (arg, "#B1");
-                    Assert.IsFalse (arg.IsGenericType, "#B2");
-                    Assert.AreEqual (ut, arg, "#B3");
-                }
-                
-                [Test]
-                [Category("SRE")]
-                public void TestMakeGenericType_UserDefinedType_DotNet20SP1 ()
-                {
-                    Type ut = new UserType(typeof(int));
-                    Type t = typeof(Foo<>).MakeGenericType(ut);
-                    Assert.IsTrue (t.IsGenericType, "#1");
-        
-                    Assert.AreEqual (ut, t.GetGenericArguments()[0], "#2");
-                }
-                
-                [Test]
-                [Category("SRE")]
-                public void MakeGenericType_BadUserType ()
-                {
-                    Type ut = new UserType (null);
-                    Type t = typeof (Foo<>).MakeGenericType (ut);
-                    var g0 = t.GetGenericArguments () [0];
-                    Assert.AreSame (g0, ut, "#1");
-                }
-        */
+/*
+[Test]
+[Category("SRE")]
+public void MakeGenericType_UserDefinedType ()
+{
+Type ut = new UserType (typeof (int));
+Type t = typeof (Foo<>).MakeGenericType (ut);
+Assert.IsTrue (t.IsGenericType, "#A1");
+Assert.AreEqual (1, t.GetGenericArguments ().Length, "#A2");
+
+Type arg = t.GetGenericArguments () [0];
+Assert.IsNotNull (arg, "#B1");
+Assert.IsFalse (arg.IsGenericType, "#B2");
+Assert.AreEqual (ut, arg, "#B3");
+}
+
+[Test]
+[Category("SRE")]
+public void MakeGenericType_NestedUserDefinedType ()
+{
+Type ut = new UserType (new UserType (typeof (int)));
+Type t = typeof (Foo<>).MakeGenericType (ut);
+Assert.IsTrue (t.IsGenericType, "#A1");
+Assert.AreEqual (1, t.GetGenericArguments ().Length, "#A2");
+
+Type arg = t.GetGenericArguments () [0];
+Assert.IsNotNull (arg, "#B1");
+Assert.IsFalse (arg.IsGenericType, "#B2");
+Assert.AreEqual (ut, arg, "#B3");
+}
+
+[Test]
+[Category("SRE")]
+public void TestMakeGenericType_UserDefinedType_DotNet20SP1 ()
+{
+Type ut = new UserType(typeof(int));
+Type t = typeof(Foo<>).MakeGenericType(ut);
+Assert.IsTrue (t.IsGenericType, "#1");
+
+Assert.AreEqual (ut, t.GetGenericArguments()[0], "#2");
+}
+
+[Test]
+[Category("SRE")]
+public void MakeGenericType_BadUserType ()
+{
+Type ut = new UserType (null);
+Type t = typeof (Foo<>).MakeGenericType (ut);
+var g0 = t.GetGenericArguments () [0];
+Assert.AreSame (g0, ut, "#1");
+}
+*/
         [Test]
         public void MakeGenericType_WrongNumOfArguments()
         {

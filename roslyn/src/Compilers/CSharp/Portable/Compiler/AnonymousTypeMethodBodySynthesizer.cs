@@ -134,9 +134,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //  {
                 //      $anonymous$ local = value as $anonymous$;
                 //      return (object)local == this || (local != null
-                //             && System.Collections.Generic.EqualityComparer<T_1>.Default.Equals(this.backingFld_1, local.backingFld_1)
+                //             && System.Collections.Generic.EqualityComparer<T_1>.Default.Equals(this.backingFld_1,
+                // local.backingFld_1)
                 //             ...
-                //             && System.Collections.Generic.EqualityComparer<T_N>.Default.Equals(this.backingFld_N, local.backingFld_N));
+                //             && System.Collections.Generic.EqualityComparer<T_N>.Default.Equals(this.backingFld_N,
+                // local.backingFld_N));
                 //  }
 
                 // Type and type expression
@@ -227,10 +229,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 //                                     + GetFNVHashCode(backingFld_N.Name)
                 //
                 //  {
-                //      return (...((INITIAL_HASH * HASH_FACTOR) + EqualityComparer<T_1>.Default.GetHashCode(this.backingFld_1)) * HASH_FACTOR
-                //                                               + EqualityComparer<T_2>.Default.GetHashCode(this.backingFld_2)) * HASH_FACTOR
+                //      return (...((INITIAL_HASH * HASH_FACTOR) +
+                // EqualityComparer<T_1>.Default.GetHashCode(this.backingFld_1)) * HASH_FACTOR
+                //                                               +
+                // EqualityComparer<T_2>.Default.GetHashCode(this.backingFld_2)) * HASH_FACTOR
                 //                                               ...
-                //                                               + EqualityComparer<T_N>.Default.GetHashCode(this.backingFld_N)
+                //                                               +
+                // EqualityComparer<T_N>.Default.GetHashCode(this.backingFld_N)
                 //  }
                 //
                 // Where GetFNVHashCode is the FNV-1a hash code.

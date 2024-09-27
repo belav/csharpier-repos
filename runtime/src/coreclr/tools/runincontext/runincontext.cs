@@ -378,7 +378,8 @@ public class TestRunner
             }
         }
 
-        //sometimes this happens (no real reason, but it's not a failure, so let's not write a "negative" leak to the output)
+        //sometimes this happens (no real reason, but it's not a failure, so let's not write a "negative"
+        // leak to the output)
         if (currentMemory < startMemory)
         {
             startMemory = currentMemory;

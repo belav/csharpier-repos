@@ -890,7 +890,8 @@ namespace System.Security.Cryptography.X509Certificates
                 }
 
                 //
-                // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property changes get
+                // We use CertAddCertificateLinkToStore to keep a link to the original store, so any property
+                // changes get
                 // applied to the original store. This has a limit of 99 links per cert context however.
                 //
 
@@ -1260,7 +1261,8 @@ namespace System.Security.Cryptography.X509Certificates
 
         //
         // Callback method to find certificates by certificate policy.
-        // This is only recognized in XP platforms. However, passing in an OID value should work on downlevel platforms as well.
+        // This is only recognized in XP platforms. However, passing in an OID value should work on
+        // downlevel platforms as well.
         //
 
 #if FEATURE_CORESYSTEM
@@ -1363,8 +1365,10 @@ namespace System.Security.Cryptography.X509Certificates
 
         //
         // Callback method to find certificates that have a particular Key Usage.
-        // The callback data can be either a string (example: "KeyEncipherment") or a DWORD which can have multiple bits set in it.
-        // If the callback data is a string, we can achieve the effect of a bit union by calling it multiple times, each time
+        // The callback data can be either a string (example: "KeyEncipherment") or a DWORD which can have
+        // multiple bits set in it.
+        // If the callback data is a string, we can achieve the effect of a bit union by calling it multiple
+        // times, each time
         // further restricting the set of selected certificates.
         //
 

@@ -506,12 +506,12 @@ namespace System.Runtime.Remoting.Channels
         {
             return true;
 
-            /*			How can I know if a call is local?!?
-                        
-                        object isLocal = callMsg.Properties ["__isLocalCall"];
-                        if (isLocal == null) return false;
-                        return (bool)isLocal;
-            */
+/*			How can I know if a call is local?!?
+
+object isLocal = callMsg.Properties ["__isLocalCall"];
+if (isLocal == null) return false;
+return (bool)isLocal;
+*/
         }
 
         public static void UnregisterChannel(IChannel chnl)

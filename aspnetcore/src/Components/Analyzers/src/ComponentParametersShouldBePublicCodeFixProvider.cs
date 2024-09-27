@@ -34,7 +34,8 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
 
     public sealed override FixAllProvider GetFixAllProvider()
     {
-        // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more information on Fix All Providers
+        // See https://github.com/dotnet/roslyn/blob/master/docs/analyzers/FixAllProvider.md for more
+        // information on Fix All Providers
         return WellKnownFixAllProviders.BatchFixer;
     }
 
@@ -93,7 +94,8 @@ public class ComponentParametersShouldBePublicCodeFixProvider : CodeFixProvider
                 || modifier.IsKind(SyntaxKind.ProtectedKeyword)
                 || modifier.IsKind(SyntaxKind.InternalKeyword)
                 ||
-                // We also remove public in case the user has written something totally backwards such as private public protected Foo
+                // We also remove public in case the user has written something totally backwards such as private
+                // public protected Foo
                 modifier.IsKind(SyntaxKind.PublicKeyword)
             )
             {

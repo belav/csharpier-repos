@@ -10,7 +10,8 @@ namespace System.Text.Json.Serialization
     /// Supports converting several types by using a factory pattern.
     /// </summary>
     /// <remarks>
-    /// This is useful for converters supporting generics, such as a converter for <see cref="System.Collections.Generic.List{T}"/>.
+    /// This is useful for converters supporting generics, such as a converter for <see
+    // cref="System.Collections.Generic.List{T}"/>.
     /// </remarks>
     public abstract class JsonConverterFactory : JsonConverter
     {
@@ -28,7 +29,8 @@ namespace System.Text.Json.Serialization
         /// <param name="typeToConvert">The <see cref="System.Type"/> being converted.</param>
         /// <param name="options">The <see cref="JsonSerializerOptions"/> being used.</param>
         /// <returns>
-        /// An instance of a <see cref="JsonConverter{T}"/> where T is compatible with <paramref name="typeToConvert"/>.
+        /// An instance of a <see cref="JsonConverter{T}"/> where T is compatible with <paramref
+        // name="typeToConvert"/>.
         /// If <see langword="null"/> is returned, a <see cref="NotSupportedException"/> will be thrown.
         /// </returns>
         public abstract JsonConverter? CreateConverter(

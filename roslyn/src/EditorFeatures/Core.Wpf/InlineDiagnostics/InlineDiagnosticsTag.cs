@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
         }
 
         /// <summary>
-        /// Creates a GraphicsResult object which is the error block based on the geometry and formatting set for the item.
+        /// Creates a GraphicsResult object which is the error block based on the geometry and formatting
+        // set for the item.
         /// </summary>
         public override GraphicsResult GetGraphics(
             IWpfTextView view,
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                     Children = { image, block },
                 },
                 CornerRadius = new CornerRadius(2),
-                // Highlighting lines are 2px buffer. So shift us up by one from the bottom so we feel centered between them.
+                // Highlighting lines are 2px buffer. So shift us up by one from the bottom so we feel centered
+                // between them.
                 Margin = new Thickness(10, top: 0, right: 0, bottom: 1),
                 Padding = new Thickness(1),
             };

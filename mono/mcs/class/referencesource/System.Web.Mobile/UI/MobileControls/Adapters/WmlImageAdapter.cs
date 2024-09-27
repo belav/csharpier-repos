@@ -14,8 +14,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlImageAdapter class.
-     */
+    * WmlImageAdapter class.
+    */
     /// <include file='doc\WmlImageAdapter.uex' path='docs/doc[@for="WmlImageAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

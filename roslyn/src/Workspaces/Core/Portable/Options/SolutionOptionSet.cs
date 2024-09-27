@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Options
         private ImmutableDictionary<OptionKey, object?> _values;
 
         /// <summary>
-        /// Keys of options whose current value stored in <see cref="_values"/> differs from the value originally read from global options.
+        /// Keys of options whose current value stored in <see cref="_values"/> differs from the value
+        // originally read from global options.
         /// </summary>
         private readonly ImmutableHashSet<OptionKey> _changedOptionKeys;
 
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Options
             // Check if the new value is the same as the current value.
             if (Equals(internalValue, currentInternalValue))
             {
-                // Return a cloned option set as the public API 'WithChangedOption' guarantees a new option set is returned.
+                // Return a cloned option set as the public API 'WithChangedOption' guarantees a new option set is
+                // returned.
                 return new SolutionOptionSet(_legacyGlobalOptions, _values, _changedOptionKeys);
             }
 

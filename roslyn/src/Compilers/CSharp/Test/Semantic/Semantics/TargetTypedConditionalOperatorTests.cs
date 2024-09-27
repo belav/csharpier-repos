@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "b ? 1 : 2",
                 "System.Int16",
                 "System.Int32",
-                // (6,26): error CS0266: Cannot implicitly convert type 'int' to 'short'. An explicit conversion exists (are you missing a cast?)
+                // (6,26): error CS0266: Cannot implicitly convert type 'int' to 'short'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         System.Int16 t = b ? 1 : 2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b ? 1 : 2")
                     .WithArguments("int", "short")
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "b ? 0 : 0",
                 "color",
                 "System.Int32",
-                // (6,19): error CS0266: Cannot implicitly convert type 'int' to 'color'. An explicit conversion exists (are you missing a cast?)
+                // (6,19): error CS0266: Cannot implicitly convert type 'int' to 'color'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         color t = b ? 0 : 0;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b ? 0 : 0")
                     .WithArguments("int", "color")
@@ -103,7 +105,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "b ? 1000000 : 2",
                 "System.Int16",
                 "System.Int32",
-                // (6,26): error CS0266: Cannot implicitly convert type 'int' to 'short'. An explicit conversion exists (are you missing a cast?)
+                // (6,26): error CS0266: Cannot implicitly convert type 'int' to 'short'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         System.Int16 t = b ? 1000000 : 2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b ? 1000000 : 2")
                     .WithArguments("int", "short")
@@ -144,7 +147,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 "b ? 1 : 0",
                 "color",
                 "System.Int32",
-                // (6,19): error CS0266: Cannot implicitly convert type 'int' to 'color'. An explicit conversion exists (are you missing a cast?)
+                // (6,19): error CS0266: Cannot implicitly convert type 'int' to 'color'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         color t = b ? 1 : 0;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b ? 1 : 0")
                     .WithArguments("int", "color")
@@ -225,7 +229,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
                     .WithArguments("string", "int")
                     .WithLocation(6, 31),
-                // (6,31): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                // (6,31): error CS1662: Cannot convert lambda expression to intended delegate type because some of
+                // the return types in the block are not implicitly convertible to the delegate return type
                 //         Del t = b ? a=>a : b=>"";
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, @"""""")
                     .WithArguments("lambda expression")
@@ -894,7 +899,9 @@ class Program
                     Diagnostic(ErrorCode.ERR_NoImplicitConv, "(b ? a : 0) + a")
                         .WithArguments("A", "B")
                         .WithLocation(15, 16),
-                    // (15,17): error CS8957: Conditional expression is not valid in language version 7.3 because a common type was not found between 'A' and 'int'. To use a target-typed conversion, upgrade to language version 9.0 or greater.
+                    // (15,17): error CS8957: Conditional expression is not valid in language version 7.3 because a
+                    // common type was not found between 'A' and 'int'. To use a target-typed conversion, upgrade to
+                    // language version 9.0 or greater.
                     //         return (b ? a : 0) + a;
                     Diagnostic(ErrorCode.ERR_NoImplicitConvTargetTypedConditional, "b ? a : 0")
                         .WithArguments("7.3", "A", "int", "9.0")
@@ -979,7 +986,9 @@ class C
 ";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular8);
             comp.VerifyDiagnostics(
-                // (6,18): error CS8957: Conditional expression is not valid in language version 8.0 because a common type was not found between 'int' and '<null>'. To use a target-typed conversion, upgrade to language version 9.0 or greater.
+                // (6,18): error CS8957: Conditional expression is not valid in language version 8.0 because a
+                // common type was not found between 'int' and '<null>'. To use a target-typed conversion, upgrade to
+                // language version 9.0 or greater.
                 //         int? i = b ? 1 : null;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvTargetTypedConditional, "b ? 1 : null")
                     .WithArguments("8.0", "int", "<null>", "9.0")

@@ -195,7 +195,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
         #region Scroll bar properties
 
         /// <summary>
-        /// Gets or sets a flag which indicates whether scroll bar is positioned inside or outside of chart area.
+        /// Gets or sets a flag which indicates whether scroll bar is positioned inside or outside of chart
+        // area.
         /// </summary>
         [
             SRCategory("CategoryAttributeAxisView"),
@@ -2081,7 +2082,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -2096,7 +2098,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {

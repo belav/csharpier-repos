@@ -499,7 +499,8 @@ namespace TypeSystemTests
                     LayoutInt.AlignUp(new LayoutInt(16), LayoutInt.Indeterminate, target)
                 );
 
-            // If we the value is aligned to the maximum supported alignment, we can consider it aligned no matter
+            // If we the value is aligned to the maximum supported alignment, we can consider it aligned no
+            // matter
             // the value of the alignment.
             Assert.Equal(
                 new LayoutInt(target.MaximumAlignment),
@@ -561,7 +562,8 @@ namespace TypeSystemTests
         [Fact]
         public void TestLayoutOfUniversalCanonType()
         {
-            // Assert all of the various layout information about the universal canon type itself, do this for all architectures
+            // Assert all of the various layout information about the universal canon type itself, do this for
+            // all architectures
             TestLayoutOfUniversalCanonTypeOnArchitecture(_contextX86);
             TestLayoutOfUniversalCanonTypeOnArchitecture(_contextX64);
             TestLayoutOfUniversalCanonTypeOnArchitecture(_contextARM);
@@ -785,146 +787,147 @@ namespace TypeSystemTests
             AssertClassIndeterminateSize(context, genOfUL, expectedIndeterminateByteAlignment);
         }
 
-        /* This test exercises universal shared generic layout that is currently unsupported and known to be buggy.
-        [Fact]
-        public void TestClassLayout()
-        {
-            // Tests class layout behavior with universal generics
-            // Tests handling universal base types as well as non-universal base types
+/* This test exercises universal shared generic layout that is currently unsupported and known to be
+buggy.
+[Fact]
+public void TestClassLayout()
+{
+// Tests class layout behavior with universal generics
+// Tests handling universal base types as well as non-universal base types
 
-            InstantiatedType genOfIU;
-            InstantiatedType genOfLU;
-            InstantiatedType genOfUU;
-            InstantiatedType genOfUI;
-            InstantiatedType genOfUL;
+InstantiatedType genOfIU;
+InstantiatedType genOfLU;
+InstantiatedType genOfUU;
+InstantiatedType genOfUI;
+InstantiatedType genOfUL;
 
-            ModuleDesc testModule;
-            TypeSystemContext context;
+ModuleDesc testModule;
+TypeSystemContext context;
 
-            // X64 testing
-            testModule = _testModuleX64;
-            context = _contextX64;
+// X64 testing
+testModule = _testModuleX64;
+context = _contextX64;
 
-            CommonClassLayoutTestBits(testModule,
-                                      context,
-                                      new LayoutInt(8),
-                                      out genOfIU,
-                                      out genOfLU,
-                                      out genOfUU,
-                                      out genOfUI,
-                                      out genOfUL);
+CommonClassLayoutTestBits(testModule,
+context,
+new LayoutInt(8),
+out genOfIU,
+out genOfLU,
+out genOfUU,
+out genOfUI,
+out genOfUL);
 
-            // On x64 first field offset is well known always
-            Assert.Equal(8, genOfIU.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(8, genOfLU.BaseType.GetFields().First().Offset.AsInt);
-            if (context.Target.MaximumAlignment <= 8)
-            {
-                Assert.Equal(8, genOfUU.BaseType.GetFields().First().Offset.AsInt);
-                Assert.Equal(8, genOfUI.BaseType.GetFields().First().Offset.AsInt);
-                Assert.Equal(8, genOfUL.BaseType.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
+// On x64 first field offset is well known always
+Assert.Equal(8, genOfIU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(8, genOfLU.BaseType.GetFields().First().Offset.AsInt);
+if (context.Target.MaximumAlignment <= 8)
+{
+Assert.Equal(8, genOfUU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(8, genOfUI.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(8, genOfUL.BaseType.GetFields().First().Offset.AsInt);
+}
+else
+{
 
-                Assert.Equal(LayoutInt.Indeterminate, genOfUU.BaseType.GetFields().First().Offset);
-                Assert.Equal(LayoutInt.Indeterminate, genOfUI.BaseType.GetFields().First().Offset);
-                Assert.Equal(LayoutInt.Indeterminate, genOfUL.BaseType.GetFields().First().Offset);
-            }
+Assert.Equal(LayoutInt.Indeterminate, genOfUU.BaseType.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUI.BaseType.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUL.BaseType.GetFields().First().Offset);
+}
 
-            Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
-            if (context.Target.MaximumAlignment <= 16)
-            {
-                Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
-                Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
-            }
-            Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
+if (context.Target.MaximumAlignment <= 16)
+{
+Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
+}
+else
+{
+Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
+}
+Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
 
-            // X86 testing
-            testModule = _testModuleX86;
-            context = _contextX86;
+// X86 testing
+testModule = _testModuleX86;
+context = _contextX86;
 
-            CommonClassLayoutTestBits(testModule,
-                                      context,
-                                      new LayoutInt(4),
-                                      out genOfIU,
-                                      out genOfLU,
-                                      out genOfUU,
-                                      out genOfUI,
-                                      out genOfUL);
+CommonClassLayoutTestBits(testModule,
+context,
+new LayoutInt(4),
+out genOfIU,
+out genOfLU,
+out genOfUU,
+out genOfUI,
+out genOfUL);
 
-            Assert.Equal(4, genOfIU.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(4, genOfLU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(4, genOfIU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(4, genOfLU.BaseType.GetFields().First().Offset.AsInt);
 
-            // Like X64, X86 first field location is always 4 bytes from start
-            // This results in 8 byte aligned quantities being aligned at unusual offsets
-            Assert.Equal(4, genOfUU.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(4, genOfUI.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(4, genOfUL.BaseType.GetFields().First().Offset.AsInt);
+// Like X64, X86 first field location is always 4 bytes from start
+// This results in 8 byte aligned quantities being aligned at unusual offsets
+Assert.Equal(4, genOfUU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(4, genOfUI.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(4, genOfUL.BaseType.GetFields().First().Offset.AsInt);
 
-            if (context.Target.MaximumAlignment <= 8)
-            {
-                Assert.Equal(8, genOfIU.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
-                Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
-            }
-            if (context.Target.MaximumAlignment <= 16)
-            {
-                Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
-                Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
-            }
-            Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
+if (context.Target.MaximumAlignment <= 8)
+{
+Assert.Equal(8, genOfIU.GetFields().First().Offset.AsInt);
+}
+else
+{
+Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
+}
+if (context.Target.MaximumAlignment <= 16)
+{
+Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
+}
+else
+{
+Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
+}
+Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
 
-            // ARM testing
-            testModule = _testModuleARM;
-            context = _contextARM;
+// ARM testing
+testModule = _testModuleARM;
+context = _contextARM;
 
-            CommonClassLayoutTestBits(testModule,
-                                      context,
-                                      LayoutInt.Indeterminate,
-                                      out genOfIU,
-                                      out genOfLU,
-                                      out genOfUU,
-                                      out genOfUI,
-                                      out genOfUL);
+CommonClassLayoutTestBits(testModule,
+context,
+LayoutInt.Indeterminate,
+out genOfIU,
+out genOfLU,
+out genOfUU,
+out genOfUI,
+out genOfUL);
 
-            Assert.Equal(4, genOfIU.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(8, genOfLU.BaseType.GetFields().First().Offset.AsInt);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUU.BaseType.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUI.BaseType.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUL.BaseType.GetFields().First().Offset);
+Assert.Equal(4, genOfIU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(8, genOfLU.BaseType.GetFields().First().Offset.AsInt);
+Assert.Equal(LayoutInt.Indeterminate, genOfUU.BaseType.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUI.BaseType.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUL.BaseType.GetFields().First().Offset);
 
-            if (context.Target.MaximumAlignment <= 8)
-            {
-                Assert.Equal(8, genOfIU.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
-                Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
-            }
-            if (context.Target.MaximumAlignment <= 16)
-            {
-                Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
-            }
-            else
-            {
-                Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
-            }
-            Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
-            Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
-        }
-        */
+if (context.Target.MaximumAlignment <= 8)
+{
+Assert.Equal(8, genOfIU.GetFields().First().Offset.AsInt);
+}
+else
+{
+Assert.Equal(LayoutInt.Indeterminate, genOfIU.GetFields().First().Offset);
+}
+if (context.Target.MaximumAlignment <= 16)
+{
+Assert.Equal(16, genOfLU.GetFields().First().Offset.AsInt);
+}
+else
+{
+Assert.Equal(LayoutInt.Indeterminate, genOfLU.GetFields().First().Offset);
+}
+Assert.Equal(LayoutInt.Indeterminate, genOfUU.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUI.GetFields().First().Offset);
+Assert.Equal(LayoutInt.Indeterminate, genOfUL.GetFields().First().Offset);
+}
+*/
     }
 }

@@ -10,13 +10,16 @@ namespace System.Xml.XmlSchemaTests
     public class TC_SchemaSet_NmTokens : TC_SchemaSetBase
     {
         [Theory]
-        // Positive test: should not return any validation error during schema compile then default value is the list of NMTOKEN from enumeration
+        // Positive test: should not return any validation error during schema compile then default value is
+        // the list of NMTOKEN from enumeration
         [InlineData("nmtokens_restriction_multiple_default_values.xsd", false)]
-        // Positive test: should not return any validation error during schema compile then default value is one value from enumeration
+        // Positive test: should not return any validation error during schema compile then default value is
+        // one value from enumeration
         [InlineData("nmtokens_restriction_single_default_value.xsd", false)]
         // Negative test: the default value is NMTOKEN not from enumeration
         [InlineData("nmtokens_restriction_bad_default_value.xsd", true)]
-        // Negative test: the default value is the list of one NMTOKEN from enumeration and NMTOKEN not from enumeration
+        // Negative test: the default value is the list of one NMTOKEN from enumeration and NMTOKEN not from
+        // enumeration
         [InlineData("nmtokens_restriction_bad_multiple_default_values.xsd", true)]
         // Positive test: the attribute has no default value
         [InlineData("nmtokens_restriction_no_default_value.xsd", false)]
@@ -38,13 +41,16 @@ namespace System.Xml.XmlSchemaTests
         }
 
         [Theory]
-        // Positive test: should not return any validation error during schema compile then default value is the list of NMTOKEN from enumeration
+        // Positive test: should not return any validation error during schema compile then default value is
+        // the list of NMTOKEN from enumeration
         [InlineData("nmtokens_restriction_multiple_default_values.xml", false)]
-        // Positive test: should not return any validation error during schema compile then default value is one value from enumeration
+        // Positive test: should not return any validation error during schema compile then default value is
+        // one value from enumeration
         [InlineData("nmtokens_restriction_single_default_value.xml", false)]
         // Negative test: the attribute value is NMTOKEN not from enumeration
         [InlineData("nmtokens_restriction_bad_default_value.xml", true)]
-        // Negative test: the attribute value is the list of one NMTOKEN from enumeration and NMTOKEN not from enumeration
+        // Negative test: the attribute value is the list of one NMTOKEN from enumeration and NMTOKEN not
+        // from enumeration
         [InlineData("nmtokens_restriction_bad_multiple_default_values.xml", true)]
         public void TestValidatedReader(string fileName, bool negative)
         {

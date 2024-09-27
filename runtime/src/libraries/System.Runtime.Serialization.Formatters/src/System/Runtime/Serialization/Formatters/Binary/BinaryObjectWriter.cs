@@ -155,8 +155,10 @@ namespace System.Runtime.Serialization.Formatters.Binary
                         out object?[]? memberData
                     );
 
-                    // Only Binary needs to transmit types for ISerializable because the binary formatter transmits the types in URT format.
-                    // Soap transmits all types as strings, so it is up to the ISerializable object to convert the string back to its URT type
+                    // Only Binary needs to transmit types for ISerializable because the binary formatter transmits the
+                    // types in URT format.
+                    // Soap transmits all types as strings, so it is up to the ISerializable object to convert the
+                    // string back to its URT type
                     if (
                         objectInfo._isSi
                         || CheckTypeFormat(
@@ -1096,7 +1098,8 @@ namespace System.Runtime.Serialization.Formatters.Binary
         private void WriteSerializedStreamHeader(long topId, long headerId) =>
             _serWriter!.WriteSerializationHeader((int)topId, (int)headerId, 1, 0);
 
-        // Transforms a type to the serialized string form. URT Primitive types are converted to XMLData Types
+        // Transforms a type to the serialized string form. URT Primitive types are converted to XMLData
+        // Types
         private NameInfo TypeToNameInfo(
             Type? type,
             WriteObjectInfo? objectInfo,

@@ -10,7 +10,8 @@ using System.Reflection.Metadata.Ecma335;
 namespace System.Reflection.PortableExecutable
 {
     /// <summary>
-    /// An object used to read PE (Portable Executable) and COFF (Common Object File Format) headers from a stream.
+    /// An object used to read PE (Portable Executable) and COFF (Common Object File Format) headers
+    // from a stream.
     /// </summary>
     public sealed class PEHeaders
     {
@@ -34,8 +35,10 @@ namespace System.Reflection.PortableExecutable
         /// <summary>
         /// Reads PE headers from the current location in the stream.
         /// </summary>
-        /// <param name="peStream">Stream containing PE image starting at the stream's current position and ending at the end of the stream.</param>
-        /// <exception cref="BadImageFormatException">The data read from stream have invalid format.</exception>
+        /// <param name="peStream">Stream containing PE image starting at the stream's current position and
+        // ending at the end of the stream.</param>
+        /// <exception cref="BadImageFormatException">The data read from stream have invalid
+        // format.</exception>
         /// <exception cref="IOException">Error reading from the stream.</exception>
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
@@ -45,27 +48,34 @@ namespace System.Reflection.PortableExecutable
         /// <summary>
         /// Reads PE headers from the current location in the stream.
         /// </summary>
-        /// <param name="peStream">Stream containing PE image of the given size starting at its current position.</param>
+        /// <param name="peStream">Stream containing PE image of the given size starting at its current
+        // position.</param>
         /// <param name="size">Size of the PE image.</param>
-        /// <exception cref="BadImageFormatException">The data read from stream have invalid format.</exception>
+        /// <exception cref="BadImageFormatException">The data read from stream have invalid
+        // format.</exception>
         /// <exception cref="IOException">Error reading from the stream.</exception>
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the
+        // stream.</exception>
         public PEHeaders(Stream peStream, int size)
             : this(peStream, size, isLoadedImage: false) { }
 
         /// <summary>
         /// Reads PE headers from the current location in the stream.
         /// </summary>
-        /// <param name="peStream">Stream containing PE image of the given size starting at its current position.</param>
+        /// <param name="peStream">Stream containing PE image of the given size starting at its current
+        // position.</param>
         /// <param name="size">Size of the PE image.</param>
-        /// <param name="isLoadedImage">True if the PE image has been loaded into memory by the OS loader.</param>
-        /// <exception cref="BadImageFormatException">The data read from stream have invalid format.</exception>
+        /// <param name="isLoadedImage">True if the PE image has been loaded into memory by the OS
+        // loader.</param>
+        /// <exception cref="BadImageFormatException">The data read from stream have invalid
+        // format.</exception>
         /// <exception cref="IOException">Error reading from the stream.</exception>
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="peStream"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the stream.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Size is negative or extends past the end of the
+        // stream.</exception>
         public PEHeaders(Stream peStream, int size, bool isLoadedImage)
         {
             if (peStream is null)
@@ -185,7 +195,8 @@ namespace System.Reflection.PortableExecutable
         }
 
         /// <summary>
-        /// Gets the byte offset from the start of the image to the COR header or -1 if the image does not have one.
+        /// Gets the byte offset from the start of the image to the COR header or -1 if the image does not
+        // have one.
         /// </summary>
         public int CorHeaderStartOffset
         {

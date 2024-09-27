@@ -438,46 +438,46 @@ namespace nist_dom
             }
         }
 
-        /*	public static void resetHTMLData()
-            {
-                System.Xml.XmlNode newdoc = originalHTMLDocument(HTML);
-                testdoc = ( System.Xml.XmlDocument) newdoc.CloneNode(true);
-            }
-        */
+/*	public static void resetHTMLData()
+{
+System.Xml.XmlNode newdoc = originalHTMLDocument(HTML);
+testdoc = ( System.Xml.XmlDocument) newdoc.CloneNode(true);
+}
+*/
         public static System.Xml.XmlElement getRootNode()
         {
             return getDOMDocument().DocumentElement;
         }
 
-        /*	public void HTMLNodeObject(string argFirst,int argSecond)
-            {
-            string tagName = argFirst;//arguments[0];
-            //int one = 1;
-            //int two = 2;
-            System.Xml.XmlNodeList nodeList=null;
-        
-            if (tagName==FRAMESET || tagName==FRAME)
-                nodeList = framesetdoc.GetElementsByTagName(tagName);
-            else
-                nodeList = testdoc.GetElementsByTagName(tagName);
-        
-            if (argFirst != "") //if (arguments.length == one)
-                this.node = nodeList.Item(util.FIRST);
-            if (argSecond != -1) //else if (arguments.length == two)
-                this.node = nodeList.Item(argSecond);//arguments[SECOND]);
-            }
-        
-            public System.Xml.XmlNode originalHTMLDocument(string arg)
-            {
-                string tagName = arg;
-                //int one = 1;
-                //int two = 2;
-        
-                System.Xml.XmlNodeList nodeList = originaldoc.GetElementsByTagName(tagName);
-                this.node = nodeList.Item(util.FIRST).CloneNode(true);
-                return this.node;
-            }
-        */
+/*	public void HTMLNodeObject(string argFirst,int argSecond)
+{
+string tagName = argFirst;//arguments[0];
+//int one = 1;
+//int two = 2;
+System.Xml.XmlNodeList nodeList=null;
+
+if (tagName==FRAMESET || tagName==FRAME)
+nodeList = framesetdoc.GetElementsByTagName(tagName);
+else
+nodeList = testdoc.GetElementsByTagName(tagName);
+
+if (argFirst != "") //if (arguments.length == one)
+this.node = nodeList.Item(util.FIRST);
+if (argSecond != -1) //else if (arguments.length == two)
+this.node = nodeList.Item(argSecond);//arguments[SECOND]);
+}
+
+public System.Xml.XmlNode originalHTMLDocument(string arg)
+{
+string tagName = arg;
+//int one = 1;
+//int two = 2;
+
+System.Xml.XmlNodeList nodeList = originaldoc.GetElementsByTagName(tagName);
+this.node = nodeList.Item(util.FIRST).CloneNode(true);
+return this.node;
+}
+*/
 
         //	public string getTableCaption(object table)
         //	{
@@ -510,7 +510,8 @@ namespace nist_dom
             {
                 System.Xml.XmlNodeList list = getSubNodes(parentNode);
                 _node = getElement(getSubNodes(parentNode), argSecond); //arguments[SECOND]);
-                //_node = getElement((System.Xml.XmlNodeList)getSubNodes(parentNode), argSecond);//arguments[SECOND]);
+                //_node = getElement((System.Xml.XmlNodeList)getSubNodes(parentNode),
+                // argSecond);//arguments[SECOND]);
             }
 
             //_attributes = getAttributes(_node);
@@ -580,227 +581,227 @@ namespace nist_dom
             return getDocType().Notations.GetNamedItem(name);
         }
 
-        /*
-                public void specPtr(index)
-                {
-                    Spec = new Object();
-                    Spec['DOMImplementation'] = 'ID-102161490';
-                    Spec['DocumentFragment'] = 'ID-B63ED1A3';
-                    Spec['Document'] = 'i-Document';
-                    Spec['Node'] = 'ID-1950641247';
-                    Spec['NodeList'] = 'ID-536297177';
-                    Spec['NamedNodeMap'] = 'ID-1780488922';
-                    Spec['CharacterData'] = 'ID-FF21A306';
-                    Spec['Attr'] = 'ID-637646024';
-                    Spec['Element'] = 'ID-745549614';
-                    Spec['Text'] = 'ID-1312295772';
-                    Spec['Comment'] = 'ID-1728279322';
-                    Spec['CDATASection'] = 'ID-667469212';
-                    Spec['DocumentType'] = 'ID-412266927';
-                    Spec['Notation'] = 'ID-5431D1B9';
-                    Spec['Entity'] = 'ID-527DCFF2';
-                    Spec['EntityReference'] = 'ID-11C98490';
-                    Spec['ProcessingInstruction'] = 'ID-1004215813';
-                    Spec['HTMLCollection'] = 'ID-75708506';
-                    Spec['HTMLDocument'] = 'ID-26809268';
-                    Spec['HTMLElement'] = 'ID-58190037';
-                    Spec['HTMLHtmlElement'] = 'ID-33759296';
-                    Spec['HTMLHeadElement'] = 'ID-77253168';
-                    Spec['HTMLLinkElement'] = 'ID-35143001';
-                    Spec['HTMLTitleElement'] = 'ID-79243169';
-                    Spec['HTMLMetaElement'] = 'ID-37041454';
-                    Spec['HTMLBaseElement'] = 'ID-73629039';
-                    Spec['HTMLIsIndexElement'] = 'ID-85283003';
-                    Spec['HTMLStyleElement'] = 'ID-16428977';
-                    Spec['HTMLBodyElement'] = 'ID-62018039';
-                    Spec['HTMLFormElement'] = 'ID-40002357';
-                    Spec['HTMLSelectElement'] = 'ID-94282980';
-                    Spec['HTMLOptGroupElement'] = 'ID-38450247';
-                    Spec['HTMLOptionElement'] = 'ID-70901257';
-                    Spec['HTMLInputElement'] = 'ID-6043025';
-                    Spec['HTMLTextAreaElement'] = 'ID-24874179';
-                    Spec['HTMLButtonElement'] = 'ID-34812697';
-                    Spec['HTMLLabelElement'] = 'ID-13691394';
-                    Spec['HTMLFieldSetElement'] = 'ID-7365882';
-                    Spec['HTMLLegendElement'] = 'ID-21482039';
-                    Spec['HTMLUListElement'] = 'ID-86834457';
-                    Spec['HTMLOListElement'] = 'ID-58056027';
-                    Spec['HTMLDListElement'] = 'ID-52368974';
-                    Spec['HTMLDirectoryElement'] = 'ID-71600284';
-                    Spec['HTMLMenuElement'] = 'ID-72509186';
-                    Spec['HTMLLIElement'] = 'ID-74680021';
-                    Spec['HTMLBlockquoteElement'] = 'ID-40703765';
-                    Spec['HTMLDivElement'] = 'ID-22445964';
-                    Spec['HTMLParagraphElement'] = 'ID-84675076';
-                    Spec['HTMLHeadingElement'] = 'ID-43345119';
-                    Spec['HTMLQuoteElement'] = 'ID-70319763';
-                    Spec['HTMLPreElement'] = 'ID-11383425';
-                    Spec['HTMLBRElement'] = 'ID-56836063';
-                    Spec['HTMLBaseFontElement'] = 'ID-32774408';
-                    Spec['HTMLFontElement'] = 'ID-43943847';
-                    Spec['HTMLHRElement'] = 'ID-68228811';
-                    Spec['HTMLModElement'] = 'ID-79359609';
-                    Spec['HTMLAnchorElement'] = 'ID-48250443';
-                    Spec['HTMLImageElement'] = 'ID-17701901';
-                    Spec['HTMLObjectElement'] = 'ID-9893177';
-                    Spec['HTMLParamElement'] = 'ID-64077273';
-                    Spec['HTMLAppletElement'] = 'ID-31006348';
-                    Spec['HTMLMapElement'] = 'ID-94109203';
-                    Spec['HTMLAreaElement'] = 'ID-26019118';
-                    Spec['HTMLScriptElement'] = 'ID-81598695';
-                    Spec['HTMLTableElement'] = 'ID-64060425';
-                    Spec['HTMLTableCaptionElement'] = 'ID-12035137';
-                    Spec['HTMLTableColElement'] = 'ID-84150186';
-                    Spec['HTMLTableSectionElement'] = 'ID-67417573';
-                    Spec['HTMLTableRowElement'] = 'ID-6986576';
-                    Spec['HTMLTableCellElement'] = 'ID-82915075';
-                    Spec['HTMLFrameSetElement'] = 'ID-43829095';
-                    Spec['HTMLFrameElement'] = 'ID-97790553';
-                    Spec['HTMLIFrameElement'] = 'ID-50708718';
-                    return Spec[index];
-                }
-        
-                public void setInfo()
-                {
-                    dWin = self.parent.info;
-                    infodoc = dWin.document;
-        
-                    iform = parent.interfaces.selectInterface;
-                    testInterface = iform.interface.options[iform.interface.selectedIndex].Value;
-        
-                    cform = parent.categories.selectCategory;
-                    testCategory = cform.category.options[cform.category.selectedIndex].Value;
-        
-                    sr_file = testCategory.toLowerCase()+"/"+testInterface+"/Requirements.html";
-                    src_file = testCategory.toLowerCase()+"/"+testInterface+"/"+testInterface+".html";
-                    util_file = "util.html";
-                    core_file = "spec/level-one-core.html";
-                    html_file = "spec/level-one-html.html";
-        
-                    if (testCategory == "HTML")
-                    spec_ref = html_file + "#" + specPtr(testInterface);
-                    else
-                    spec_ref = core_file + "#" + specPtr(testInterface);
-        
-                    infodoc.write("<BODY BGCOLOR=#0000FF LINK=#FFFF00 VLINK=#FFFF00>\n");
-                    infodoc.write("<CENTER>\n");
-                    infodoc.write("<P><P>\n");
-                    infodoc.write("<b><A HREF="+spec_ref+" TARGET=viewer>DOM REC</A></B><BR>\n");
-                    infodoc.write("<b><A HREF="+sr_file+" TARGET=viewer>SR's</A></b><BR>\n");
-                    infodoc.write("<b><A HREF="+src_file+" TARGET=viewer>Source</A></b><BR>\n");
-                    infodoc.write("<b><A HREF="+util_file+" TARGET=viewer>Utility</A></B><BR>\n");
-                    infodoc.write("</CENTER>\n");
-                    infodoc.close();
-                }
-        
-                public void getInterfaces(option)
-                {
-                var Cats = new Object();
-                Cats["Fundamental"] = ['DOMImplementation','Node', 'NodeList',
-                'Document', 'NamedNodeMap', 'CharacterData', 'Attr',
-                'Element', 'Text', 'Comment'];
-        
-                Cats["Extended"]  = ['CDATASection', 'DocumentType', 'Notation', 'Entity',
-                'ProcessingInstruction' ];
-        
-                Cats["HTML"] = [
-                'HTMLAnchorElement',
-                'HTMLAppletElement',
-                'HTMLAreaElement',
-                'HTMLBaseElement',
-                'HTMLBaseFontElement',
-                'HTMLBlockquoteElement',
-                'HTMLBodyElement',
-                'HTMLBRElement',
-                'HTMLButtonElement',
-                'HTMLCollection',
-                'HTMLDirectoryElement',
-                'HTMLDivElement',
-                'HTMLDListElement',
-                'HTMLDocument',
-                'HTMLElement',
-                'HTMLFieldSetElement',
-                'HTMLFontElement',
-                'HTMLFormElement',
-                'HTMLFrameElement',
-                'HTMLFrameSetElement',
-                'HTMLHeadElement',
-                'HTMLHeadingElement',
-                'HTMLHRElement',
-                'HTMLHtmlElement',
-                'HTMLIFrameElement',
-                'HTMLImageElement',
-                'HTMLInputElement',
-                'HTMLIsIndexElement',
-                'HTMLLabelElement',
-                'HTMLLegendElement',
-                'HTMLLIElement',
-                'HTMLLinkElement',
-                'HTMLMapElement',
-                'HTMLMenuElement',
-                'HTMLMetaElement',
-                'HTMLModElement',
-                'HTMLObjectElement',
-                'HTMLOListElement',
-                'HTMLOptGroupElement',
-                'HTMLOptionElement',
-                'HTMLParagraphElement',
-                'HTMLParamElement',
-                'HTMLPreElement',
-                'HTMLQuoteElement',
-                'HTMLScriptElement',
-                'HTMLSelectElement',
-                'HTMLStyleElement',
-                'HTMLTableCaptionElement',
-                'HTMLTableCellElement',
-                'HTMLTableColElement',
-                'HTMLTableElement',
-                'HTMLTableRowElement',
-                'HTMLTableSectionElement',
-                'HTMLTextAreaElement',
-                'HTMLTitleElement',
-                'HTMLUListElement'];
-                return Cats[option];
-                }
-        
-                public void displayCategories()
-                {
-                    cdoc.write("<BODY BGCOLOR=\"#0000FF\" TEXT=\"#FFFF00\">\n");
-                    cdoc.write("<CENTER>\n");
-                    cdoc.write("<IMG SRC=\"pix/nist.gif\" width=100 height=75>\n");
-                    cdoc.write("<P>\n");
-                    cdoc.write("<b>DOM<BR>Categories</b><p>\n");
-                    cdoc.write("<FORM NAME=selectCategory>\n");
-                    cdoc.write("<SELECT NAME=category onClick=displayInterfaces(this.form)>\n");
-                    cdoc.write("<OPTION SELECTED VALUE=Fundamental>Fundamental\n");
-                    cdoc.write("<OPTION VALUE=Extended>Extended\n");
-                    cdoc.write("<OPTION VALUE=HTML>HTML\n");
-                    cdoc.write("</select>\n");
-                    cdoc.write("</form>\n");
-                    cdoc.write("</CENTER>\n");
-                    cdoc.write("</BODY>\n");
-                    cdoc.close();
-                }
-                public void displayInterfaces(form)
-                {
-        
-                    cat = form.category.options[form.category.selectedIndex].Value;
-                    interfaces = getInterfaces(cat);
-        
-                    idoc.write("<BODY BGCOLOR=\"#0000FF\" TEXT=\"#FFFF00\">\n");
-                    idoc.write("<CENTER>\n");
-                    idoc.write("<P>\n");
-                    idoc.write("<b>DOM<BR>Interfaces</b><p>\n");
-                    idoc.write("<FORM NAME=selectInterface>\n");
-                    idoc.write("<SELECT NAME=interface onClick=parent.navig()>\n");
-                    for (i = 0; i < interfaces.length; i++)
-                        idoc.write("<OPTION VALUE="+interfaces[i]+">"+interfaces[i]+"\n");
-                    idoc.write("</select>\n");
-                    idoc.write("</form>\n");
-                    idoc.write("</CENTER>\n");
-                    idoc.write("</BODY>\n");
-                    idoc.close();
-                }
-        */
+/*
+public void specPtr(index)
+{
+Spec = new Object();
+Spec['DOMImplementation'] = 'ID-102161490';
+Spec['DocumentFragment'] = 'ID-B63ED1A3';
+Spec['Document'] = 'i-Document';
+Spec['Node'] = 'ID-1950641247';
+Spec['NodeList'] = 'ID-536297177';
+Spec['NamedNodeMap'] = 'ID-1780488922';
+Spec['CharacterData'] = 'ID-FF21A306';
+Spec['Attr'] = 'ID-637646024';
+Spec['Element'] = 'ID-745549614';
+Spec['Text'] = 'ID-1312295772';
+Spec['Comment'] = 'ID-1728279322';
+Spec['CDATASection'] = 'ID-667469212';
+Spec['DocumentType'] = 'ID-412266927';
+Spec['Notation'] = 'ID-5431D1B9';
+Spec['Entity'] = 'ID-527DCFF2';
+Spec['EntityReference'] = 'ID-11C98490';
+Spec['ProcessingInstruction'] = 'ID-1004215813';
+Spec['HTMLCollection'] = 'ID-75708506';
+Spec['HTMLDocument'] = 'ID-26809268';
+Spec['HTMLElement'] = 'ID-58190037';
+Spec['HTMLHtmlElement'] = 'ID-33759296';
+Spec['HTMLHeadElement'] = 'ID-77253168';
+Spec['HTMLLinkElement'] = 'ID-35143001';
+Spec['HTMLTitleElement'] = 'ID-79243169';
+Spec['HTMLMetaElement'] = 'ID-37041454';
+Spec['HTMLBaseElement'] = 'ID-73629039';
+Spec['HTMLIsIndexElement'] = 'ID-85283003';
+Spec['HTMLStyleElement'] = 'ID-16428977';
+Spec['HTMLBodyElement'] = 'ID-62018039';
+Spec['HTMLFormElement'] = 'ID-40002357';
+Spec['HTMLSelectElement'] = 'ID-94282980';
+Spec['HTMLOptGroupElement'] = 'ID-38450247';
+Spec['HTMLOptionElement'] = 'ID-70901257';
+Spec['HTMLInputElement'] = 'ID-6043025';
+Spec['HTMLTextAreaElement'] = 'ID-24874179';
+Spec['HTMLButtonElement'] = 'ID-34812697';
+Spec['HTMLLabelElement'] = 'ID-13691394';
+Spec['HTMLFieldSetElement'] = 'ID-7365882';
+Spec['HTMLLegendElement'] = 'ID-21482039';
+Spec['HTMLUListElement'] = 'ID-86834457';
+Spec['HTMLOListElement'] = 'ID-58056027';
+Spec['HTMLDListElement'] = 'ID-52368974';
+Spec['HTMLDirectoryElement'] = 'ID-71600284';
+Spec['HTMLMenuElement'] = 'ID-72509186';
+Spec['HTMLLIElement'] = 'ID-74680021';
+Spec['HTMLBlockquoteElement'] = 'ID-40703765';
+Spec['HTMLDivElement'] = 'ID-22445964';
+Spec['HTMLParagraphElement'] = 'ID-84675076';
+Spec['HTMLHeadingElement'] = 'ID-43345119';
+Spec['HTMLQuoteElement'] = 'ID-70319763';
+Spec['HTMLPreElement'] = 'ID-11383425';
+Spec['HTMLBRElement'] = 'ID-56836063';
+Spec['HTMLBaseFontElement'] = 'ID-32774408';
+Spec['HTMLFontElement'] = 'ID-43943847';
+Spec['HTMLHRElement'] = 'ID-68228811';
+Spec['HTMLModElement'] = 'ID-79359609';
+Spec['HTMLAnchorElement'] = 'ID-48250443';
+Spec['HTMLImageElement'] = 'ID-17701901';
+Spec['HTMLObjectElement'] = 'ID-9893177';
+Spec['HTMLParamElement'] = 'ID-64077273';
+Spec['HTMLAppletElement'] = 'ID-31006348';
+Spec['HTMLMapElement'] = 'ID-94109203';
+Spec['HTMLAreaElement'] = 'ID-26019118';
+Spec['HTMLScriptElement'] = 'ID-81598695';
+Spec['HTMLTableElement'] = 'ID-64060425';
+Spec['HTMLTableCaptionElement'] = 'ID-12035137';
+Spec['HTMLTableColElement'] = 'ID-84150186';
+Spec['HTMLTableSectionElement'] = 'ID-67417573';
+Spec['HTMLTableRowElement'] = 'ID-6986576';
+Spec['HTMLTableCellElement'] = 'ID-82915075';
+Spec['HTMLFrameSetElement'] = 'ID-43829095';
+Spec['HTMLFrameElement'] = 'ID-97790553';
+Spec['HTMLIFrameElement'] = 'ID-50708718';
+return Spec[index];
+}
+
+public void setInfo()
+{
+dWin = self.parent.info;
+infodoc = dWin.document;
+
+iform = parent.interfaces.selectInterface;
+testInterface = iform.interface.options[iform.interface.selectedIndex].Value;
+
+cform = parent.categories.selectCategory;
+testCategory = cform.category.options[cform.category.selectedIndex].Value;
+
+sr_file = testCategory.toLowerCase()+"/"+testInterface+"/Requirements.html";
+src_file = testCategory.toLowerCase()+"/"+testInterface+"/"+testInterface+".html";
+util_file = "util.html";
+core_file = "spec/level-one-core.html";
+html_file = "spec/level-one-html.html";
+
+if (testCategory == "HTML")
+spec_ref = html_file + "#" + specPtr(testInterface);
+else
+spec_ref = core_file + "#" + specPtr(testInterface);
+
+infodoc.write("<BODY BGCOLOR=#0000FF LINK=#FFFF00 VLINK=#FFFF00>\n");
+infodoc.write("<CENTER>\n");
+infodoc.write("<P><P>\n");
+infodoc.write("<b><A HREF="+spec_ref+" TARGET=viewer>DOM REC</A></B><BR>\n");
+infodoc.write("<b><A HREF="+sr_file+" TARGET=viewer>SR's</A></b><BR>\n");
+infodoc.write("<b><A HREF="+src_file+" TARGET=viewer>Source</A></b><BR>\n");
+infodoc.write("<b><A HREF="+util_file+" TARGET=viewer>Utility</A></B><BR>\n");
+infodoc.write("</CENTER>\n");
+infodoc.close();
+}
+
+public void getInterfaces(option)
+{
+var Cats = new Object();
+Cats["Fundamental"] = ['DOMImplementation','Node', 'NodeList',
+'Document', 'NamedNodeMap', 'CharacterData', 'Attr',
+'Element', 'Text', 'Comment'];
+
+Cats["Extended"]  = ['CDATASection', 'DocumentType', 'Notation', 'Entity',
+'ProcessingInstruction' ];
+
+Cats["HTML"] = [
+'HTMLAnchorElement',
+'HTMLAppletElement',
+'HTMLAreaElement',
+'HTMLBaseElement',
+'HTMLBaseFontElement',
+'HTMLBlockquoteElement',
+'HTMLBodyElement',
+'HTMLBRElement',
+'HTMLButtonElement',
+'HTMLCollection',
+'HTMLDirectoryElement',
+'HTMLDivElement',
+'HTMLDListElement',
+'HTMLDocument',
+'HTMLElement',
+'HTMLFieldSetElement',
+'HTMLFontElement',
+'HTMLFormElement',
+'HTMLFrameElement',
+'HTMLFrameSetElement',
+'HTMLHeadElement',
+'HTMLHeadingElement',
+'HTMLHRElement',
+'HTMLHtmlElement',
+'HTMLIFrameElement',
+'HTMLImageElement',
+'HTMLInputElement',
+'HTMLIsIndexElement',
+'HTMLLabelElement',
+'HTMLLegendElement',
+'HTMLLIElement',
+'HTMLLinkElement',
+'HTMLMapElement',
+'HTMLMenuElement',
+'HTMLMetaElement',
+'HTMLModElement',
+'HTMLObjectElement',
+'HTMLOListElement',
+'HTMLOptGroupElement',
+'HTMLOptionElement',
+'HTMLParagraphElement',
+'HTMLParamElement',
+'HTMLPreElement',
+'HTMLQuoteElement',
+'HTMLScriptElement',
+'HTMLSelectElement',
+'HTMLStyleElement',
+'HTMLTableCaptionElement',
+'HTMLTableCellElement',
+'HTMLTableColElement',
+'HTMLTableElement',
+'HTMLTableRowElement',
+'HTMLTableSectionElement',
+'HTMLTextAreaElement',
+'HTMLTitleElement',
+'HTMLUListElement'];
+return Cats[option];
+}
+
+public void displayCategories()
+{
+cdoc.write("<BODY BGCOLOR=\"#0000FF\" TEXT=\"#FFFF00\">\n");
+cdoc.write("<CENTER>\n");
+cdoc.write("<IMG SRC=\"pix/nist.gif\" width=100 height=75>\n");
+cdoc.write("<P>\n");
+cdoc.write("<b>DOM<BR>Categories</b><p>\n");
+cdoc.write("<FORM NAME=selectCategory>\n");
+cdoc.write("<SELECT NAME=category onClick=displayInterfaces(this.form)>\n");
+cdoc.write("<OPTION SELECTED VALUE=Fundamental>Fundamental\n");
+cdoc.write("<OPTION VALUE=Extended>Extended\n");
+cdoc.write("<OPTION VALUE=HTML>HTML\n");
+cdoc.write("</select>\n");
+cdoc.write("</form>\n");
+cdoc.write("</CENTER>\n");
+cdoc.write("</BODY>\n");
+cdoc.close();
+}
+public void displayInterfaces(form)
+{
+
+cat = form.category.options[form.category.selectedIndex].Value;
+interfaces = getInterfaces(cat);
+
+idoc.write("<BODY BGCOLOR=\"#0000FF\" TEXT=\"#FFFF00\">\n");
+idoc.write("<CENTER>\n");
+idoc.write("<P>\n");
+idoc.write("<b>DOM<BR>Interfaces</b><p>\n");
+idoc.write("<FORM NAME=selectInterface>\n");
+idoc.write("<SELECT NAME=interface onClick=parent.navig()>\n");
+for (i = 0; i < interfaces.length; i++)
+idoc.write("<OPTION VALUE="+interfaces[i]+">"+interfaces[i]+"\n");
+idoc.write("</select>\n");
+idoc.write("</form>\n");
+idoc.write("</CENTER>\n");
+idoc.write("</BODY>\n");
+idoc.close();
+}
+*/
     } //class
 }

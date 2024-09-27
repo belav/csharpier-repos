@@ -136,7 +136,8 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// Gets a value indicating if the entry can be decompressed
         /// </summary>
         /// <remarks>
-        /// The entry can only be decompressed if the library supports the zip features required to extract it.
+        /// The entry can only be decompressed if the library supports the zip features required to extract
+        // it.
         /// See the <see cref="ZipEntry.Version">ZipEntry Version</see> property for more details.
         /// </remarks>
         public bool CanDecompressEntry
@@ -477,7 +478,8 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// Reads a block of bytes from the current zip entry.
         /// </summary>
         /// <returns>
-        /// The number of bytes read (this may be less than the length requested, even before the end of stream), or 0 on end of stream.
+        /// The number of bytes read (this may be less than the length requested, even before the end of
+        // stream), or 0 on end of stream.
         /// </returns>
         /// <exception name="IOException">
         /// An i/o error occured.

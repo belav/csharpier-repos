@@ -18,11 +18,15 @@ namespace System.Runtime
         }
     }
 
-    //============================================================================================================
-    // Sacrifices cheap servicing of a method body in order to allow unrestricted inlining.  Certain types of
-    // trivial methods (e.g. simple property getters) are automatically attributed by ILCA.EXE during the build.
+    
+    // //============================================================================================================
+    // Sacrifices cheap servicing of a method body in order to allow unrestricted inlining.  Certain
+    // types of
+    // trivial methods (e.g. simple property getters) are automatically attributed by ILCA.EXE during
+    // the build.
     // For other performance critical methods, it should be added manually.
-    //============================================================================================================
+    
+    // //============================================================================================================
 
     [AttributeUsage(
         AttributeTargets.Method | AttributeTargets.Constructor,

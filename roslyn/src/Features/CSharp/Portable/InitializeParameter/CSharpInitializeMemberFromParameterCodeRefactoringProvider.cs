@@ -154,7 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InitializeParameter
         {
             for (int i = 0, n = tupleLeft.Elements.Length; i < n; i++)
             {
-                // rhs tuple has to directly reference the sibling parameter.  lhs has to be a reference to a field/prop in this type.
+                // rhs tuple has to directly reference the sibling parameter.  lhs has to be a reference to a
+                // field/prop in this type.
 
                 if (
                     tupleRight.Elements[i] is IParameterReferenceOperation parameterReference

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlInputText.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlInputText.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -36,25 +36,25 @@ namespace System.Web.UI.HtmlControls
     {
         private static readonly object EventServerChange = new object();
 
-        /*
-         * Creates an intrinsic Html INPUT type=text control.
-         */
+/*
+* Creates an intrinsic Html INPUT type=text control.
+*/
 
         public HtmlInputText()
             : base("text") { }
 
-        /*
-         * Creates an intrinsic Html INPUT type=text control.
-         */
+/*
+* Creates an intrinsic Html INPUT type=text control.
+*/
 
         /// <devdoc>
         /// </devdoc>
         public HtmlInputText(string type)
             : base(type) { }
 
-        /*
-         * The property for the maximum characters allowed.
-         */
+/*
+* The property for the maximum characters allowed.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -79,9 +79,9 @@ namespace System.Web.UI.HtmlControls
 
         //
 
-        /*
-         * The property for the width of the TextBox in characters.
-         */
+/*
+* The property for the width of the TextBox in characters.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -103,9 +103,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["size"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * Value property.
-         */
+/*
+* Value property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -130,9 +130,9 @@ namespace System.Web.UI.HtmlControls
             remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
-        /*
-         * Method used to raise the OnServerChange event.
-         */
+/*
+* Method used to raise the OnServerChange event.
+*/
 
         /// <devdoc>
         /// </devdoc>
@@ -143,9 +143,9 @@ namespace System.Web.UI.HtmlControls
                 handler(this, e);
         }
 
-        /*
-         *
-         */
+/*
+*
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -181,10 +181,10 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method of IPostBackDataHandler interface to process posted data.
-         * InputText process a newly posted value.
-         */
+/*
+* Method of IPostBackDataHandler interface to process posted data.
+* InputText process a newly posted value.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -216,10 +216,10 @@ namespace System.Web.UI.HtmlControls
             return false;
         }
 
-        /*
-         * Method of IPostBackDataHandler interface which is invoked whenever posted data
-         * for a control has changed.  InputText fires an OnServerChange event.
-         */
+/*
+* Method of IPostBackDataHandler interface which is invoked whenever posted data
+* for a control has changed.  InputText fires an OnServerChange event.
+*/
 
         /// <internalonly/>
         /// <devdoc>

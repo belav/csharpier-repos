@@ -1818,7 +1818,8 @@ namespace System.Runtime.Serialization.Json
         static bool IsUnicodeNewlineCharacter(char c)
         {
             // Newline characters in JSON strings need to be encoded on the way out (DevDiv #665974)
-            // See Unicode 6.2, Table 5-1 (http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) for the full list.
+            // See Unicode 6.2, Table 5-1 (http://www.unicode.org/versions/Unicode6.2.0/ch05.pdf]) for the full
+            // list.
 
             // We only care about NEL, LS, and PS, since the other newline characters are all
             // control characters so are already encoded.
@@ -2173,11 +2174,13 @@ namespace System.Runtime.Serialization.Json
         void WriteValue(Array array)
         {
             // This method is called only if WriteValue(object) is called with an array
-            // The contract for XmlWriter.WriteValue(object) requires that this object array be written out as a string.
+            // The contract for XmlWriter.WriteValue(object) requires that this object array be written out as a
+            // string.
             // E.g. WriteValue(new int[] { 1, 2, 3}) should be equivalent to WriteString("1 2 3").
             JsonDataType oldDataType = dataType;
             // Set attribute mode to String because WritePrimitiveValue might write numerical text.
-            //  Calls to methods that write numbers can't be mixed with calls that write quoted text unless the attribute mode is explictly string.
+            //  Calls to methods that write numbers can't be mixed with calls that write quoted text unless the
+            // attribute mode is explictly string.
             dataType = JsonDataType.String;
             StartText();
             for (int i = 0; i < array.Length; i++)

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -40,7 +41,8 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         /// in one location, signalling chainable synchronous completion with the boolean result,
         /// and leveraging PrepareAsyncCompletion for conversion to an AsyncCallback.
         /// </summary>
-        /// <remarks>NOTE: requires that "this" is passed in as the state object to the asynchronous sub-call being used with a completion routine.</remarks>
+        /// <remarks>NOTE: requires that "this" is passed in as the state object to the asynchronous
+        // sub-call being used with a completion routine.</remarks>
         protected delegate bool AsyncCompletion(IAsyncResult result);
 
         public object AsyncState

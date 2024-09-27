@@ -241,7 +241,8 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
             {
                 Assert.Equal(e.Id, a.Id);
 
-                // Note that NTS returns a MultiPoint (which is a subclass of GeometryCollection), whereas SQL Server returns a
+                // Note that NTS returns a MultiPoint (which is a subclass of GeometryCollection), whereas SQL
+                // Server returns a
                 // GeometryCollection.
                 var eCollection = (GeometryCollection)e.Combined;
                 var aCollection = (GeometryCollection)a.Combined;

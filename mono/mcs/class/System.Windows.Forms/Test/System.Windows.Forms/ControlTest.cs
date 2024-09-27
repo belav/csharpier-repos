@@ -1198,8 +1198,8 @@ namespace MonoTests.System.Windows.Forms
 
             Assert.AreEqual(((IWin32Window)c).Handle, c.Handle, "A5");
 
-            /* this part fails on linux because we can't allocate X windows which are 0x0,
-               and the Control bounds directly reflect the size of the X window */
+/* this part fails on linux because we can't allocate X windows which are 0x0,
+and the Control bounds directly reflect the size of the X window */
 
             Assert.IsTrue(c.Bounds.IsEmpty, "A6");
             Assert.IsTrue(c.Size.IsEmpty, "A7");
@@ -3563,7 +3563,7 @@ namespace MonoTests.System.Windows.Forms
         {
             try
             {
-                /* invoked on control_context's thread */
+/* invoked on control_context's thread */
                 delegateCalled = true;
                 f.Dispose();
                 Console.WriteLine("calling Application.Exit");

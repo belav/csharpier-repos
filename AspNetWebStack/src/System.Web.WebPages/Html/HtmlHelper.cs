@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -268,12 +269,15 @@ namespace System.Web.WebPages.Html
         }
 
         /// <summary>
-        /// Creates a dictionary from an object, by adding each public instance property as a key with its associated
-        /// value to the dictionary. It will expose public properties from derived types as well. This is typically used
+        /// Creates a dictionary from an object, by adding each public instance property as a key with its
+        // associated
+        /// value to the dictionary. It will expose public properties from derived types as well. This is
+        // typically used
         /// with objects of an anonymous type.
         /// </summary>
         /// <example>
-        /// <c>new { property_name = "value" }</c> will translate to the entry <c>{ "property_name" , "value" }</c>
+        /// <c>new { property_name = "value" }</c> will translate to the entry <c>{ "property_name" ,
+        // "value" }</c>
         /// in the resulting dictionary.
         /// </example>
         /// <param name="value">The object to be converted.</param>

@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents the elements of a collection property.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
 {
@@ -21,10 +22,14 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     private readonly CoreTypeMapping? _typeMapping;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public RuntimeElementType(
@@ -97,11 +102,13 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     public virtual CoreTypeMapping? FindTypeMapping() => _typeMapping;
 
     /// <summary>
-    ///     Gets the maximum length of data that is allowed in elements of the collection. For example, if the element type is
+    ///     Gets the maximum length of data that is allowed in elements of the collection. For example,
+    // if the element type is
     ///     a <see cref="string" /> then this is the maximum number of characters.
     /// </summary>
     /// <returns>
-    ///     The maximum length, <c>-1</c> if the property has no maximum length, or <see langword="null" /> if the maximum length hasn't been
+    ///     The maximum length, <c>-1</c> if the property has no maximum length, or <see langword="null"
+    // /> if the maximum length hasn't been
     ///     set.
     /// </returns>
     [DebuggerStepThrough]
@@ -109,7 +116,8 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
 
     /// <summary>
     ///     Gets the precision of data that is allowed in elements of the collection.
-    ///     For example, if the element type is a <see cref="decimal" />, then this is the maximum number of digits.
+    ///     For example, if the element type is a <see cref="decimal" />, then this is the maximum
+    // number of digits.
     /// </summary>
     /// <returns>The precision, or <see langword="null" /> if none is defined.</returns>
     [DebuggerStepThrough]
@@ -117,7 +125,8 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
 
     /// <summary>
     ///     Gets the scale of data that is allowed in this elements of the collection.
-    ///     For example, if the element type is a <see cref="decimal" />, then this is the maximum number of decimal places.
+    ///     For example, if the element type is a <see cref="decimal" />, then this is the maximum
+    // number of decimal places.
     /// </summary>
     /// <returns>The scale, or <see langword="null" /> if none is defined.</returns>
     [DebuggerStepThrough]
@@ -145,7 +154,8 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     public virtual ValueComparer? GetValueComparer() => _valueComparer;
 
     /// <summary>
-    ///     Gets the type that the elements of the collection will be converted to before being sent to the database provider.
+    ///     Gets the type that the elements of the collection will be converted to before being sent to
+    // the database provider.
     /// </summary>
     /// <returns>The provider type, or <see langword="null" /> if none has been set.</returns>
     public virtual Type? GetProviderClrType() =>
@@ -155,10 +165,14 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
     public virtual JsonValueReaderWriter? GetJsonValueReaderWriter() => _jsonValueReaderWriter;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual DebugView DebugView =>
         new(
@@ -167,10 +181,14 @@ public class RuntimeElementType : RuntimeAnnotatableBase, IElementType
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public override string ToString() =>
         ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);

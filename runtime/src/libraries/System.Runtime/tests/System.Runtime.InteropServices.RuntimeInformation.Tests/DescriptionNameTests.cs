@@ -68,7 +68,8 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
 
             if (OperatingSystem.IsLinux())
             {
-                // needs to be in a separate method due to Mono issue: https://github.com/dotnet/runtime/issues/77513
+                // needs to be in a separate method due to Mono issue:
+                // https://github.com/dotnet/runtime/issues/77513
                 DumpCGroupInformationToConsole();
             }
 

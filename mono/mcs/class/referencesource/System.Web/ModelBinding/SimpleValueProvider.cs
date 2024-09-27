@@ -4,7 +4,8 @@ namespace System.Web.ModelBinding
 {
     /// <summary>
     /// This value provider supports single key-value lookup.
-    /// SimpleValueProvider itself is unaware of actual look-up mechanism and delegates to child classes using the FetchValue method.
+    /// SimpleValueProvider itself is unaware of actual look-up mechanism and delegates to child classes
+    // using the FetchValue method.
     /// Example simple value providers are ViewStateValueProvider and ControlValueProvider.
     /// </summary>
     public abstract class SimpleValueProvider : IValueProvider

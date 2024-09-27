@@ -152,7 +152,8 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
 
         connection.Transport.Output.Complete();
 
-        // Wait for a short amount of time after completing transport before asserting the server is waiting for the client to finish reading.
+        // Wait for a short amount of time after completing transport before asserting the server is waiting
+        // for the client to finish reading.
         // Actual stream disconnection should happen after the last client read happens.
         await Task.Delay(100);
         Assert.False(
@@ -194,7 +195,8 @@ public class NamedPipeConnectionTests : TestApplicationErrorLoggerLoggedTest
 
         var disposeTask = connection.DisposeAsync();
 
-        // Wait for a short amount of time after completing transport before asserting the server is waiting for the client to finish reading.
+        // Wait for a short amount of time after completing transport before asserting the server is waiting
+        // for the client to finish reading.
         // Actual stream disconnection should happen after the last client read happens.
         await Task.Delay(100);
         Assert.False(

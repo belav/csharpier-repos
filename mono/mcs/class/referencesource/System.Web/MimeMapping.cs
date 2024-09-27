@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*++
-        MimeMapping : This module maps document extensions to Content Mime Type.
-        Copyright (c) 2011 Microsoft Corporation
+MimeMapping : This module maps document extensions to Content Mime Type.
+Copyright (c) 2011 Microsoft Corporation
 --*/
 
 namespace System.Web
@@ -118,7 +118,8 @@ namespace System.Web
             }
         }
 
-        // This can provide fallback mappings if we don't have an actual applicationHost.config from which to read
+        // This can provide fallback mappings if we don't have an actual applicationHost.config from which
+        // to read
         private sealed class MimeMappingDictionaryClassic : MimeMappingDictionaryBase
         {
             protected override void PopulateMappings()

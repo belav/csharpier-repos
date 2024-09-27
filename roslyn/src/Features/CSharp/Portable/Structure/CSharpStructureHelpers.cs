@@ -24,7 +24,8 @@ internal static class CSharpStructureHelpers
 
     private static int GetCollapsibleStart(SyntaxToken firstToken)
     {
-        // Check *this* token to see if it has any trailing comments and use the last one; otherwise, we use the end
+        // Check *this* token to see if it has any trailing comments and use the last one; otherwise, we use
+        // the end
         // of this token.
 
         var lastTrailingCommentOrWhitespaceTrivia =
@@ -99,7 +100,8 @@ internal static class CSharpStructureHelpers
             return default;
         }
 
-        // If the next token is a semicolon, and we aren't in the initializer of a for-loop, use that token as the end.
+        // If the next token is a semicolon, and we aren't in the initializer of a for-loop, use that token
+        // as the end.
 
         var nextToken = lastToken.GetNextToken(includeSkipped: true);
         if (nextToken.Kind() is not SyntaxKind.None and SyntaxKind.SemicolonToken)

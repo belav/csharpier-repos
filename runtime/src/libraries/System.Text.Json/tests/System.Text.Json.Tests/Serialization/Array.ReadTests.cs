@@ -559,7 +559,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithNoSetter()
         {
-            // We replace the contents of this collection; we don't attempt to add items to the existing collection instance.
+            // We replace the contents of this collection; we don't attempt to add items to the existing
+            // collection instance.
             string json = @"{""MyList"":[1,2]}";
             ClassWithPopulatedListAndNoSetter obj =
                 JsonSerializer.Deserialize<ClassWithPopulatedListAndNoSetter>(json);
@@ -574,7 +575,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithPopulatedList()
         {
-            // We replace the contents of this collection; we don't attempt to add items to the existing collection instance.
+            // We replace the contents of this collection; we don't attempt to add items to the existing
+            // collection instance.
             string json = @"{""MyList"":[2,3]}";
             ClassWithPopulatedListAndSetter obj =
                 JsonSerializer.Deserialize<ClassWithPopulatedListAndSetter>(json);

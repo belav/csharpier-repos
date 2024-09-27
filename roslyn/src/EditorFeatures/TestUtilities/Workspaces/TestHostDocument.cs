@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
         private ITextBuffer2? _textBuffer;
 
         /// <summary>
-        /// The <see cref="ITextSnapshot"/> when the buffer was first created, which can be used for tracking changes to the current buffer.
+        /// The <see cref="ITextSnapshot"/> when the buffer was first created, which can be used for
+        // tracking changes to the current buffer.
         /// </summary>
         private ITextSnapshot? _initialTextSnapshot;
         private readonly IReadOnlyList<string>? _folders;
@@ -299,7 +300,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
 
             if (workspace != null)
             {
-                // Open (or reopen) any files that were closed in this call. We do this for all linked copies at once.
+                // Open (or reopen) any files that were closed in this call. We do this for all linked copies at
+                // once.
                 foreach (
                     var linkedId in workspace
                         .CurrentSolution.GetDocumentIdsWithFilePath(FilePath)
@@ -332,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         }
                         else
                         {
-                            // If there is a linked file, we'll start the non-linked one as being the primary context, which some tests depend on.
+                            // If there is a linked file, we'll start the non-linked one as being the primary context, which
+                            // some tests depend on.
                             workspace.OnDocumentOpened(
                                 linkedId,
                                 _textBuffer.AsTextContainer(),

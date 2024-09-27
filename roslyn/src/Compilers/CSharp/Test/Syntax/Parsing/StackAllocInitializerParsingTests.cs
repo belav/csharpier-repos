@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     // class C { void M() { var v = stackalloc int[] { 42 }; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
@@ -77,7 +78,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     // class C { void M() { var v = stackalloc int[1] { 42 }; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
@@ -129,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     // class C { void M() { var v = stackalloc[] { 42 }; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")
@@ -167,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Parsing
 
             CreateCompilation(testWithStatement, parseOptions: TestOptions.Regular7)
                 .VerifyDiagnostics(
-                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use language version 7.3 or greater.
+                    // (1,30): error CS8107: Feature 'stackalloc initializer' is not available in C# 7.0. Please use
+                    // language version 7.3 or greater.
                     // class C { void M() { var v = stackalloc[1] { 42 }; } }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "stackalloc")
                         .WithArguments("stackalloc initializer", "7.3")

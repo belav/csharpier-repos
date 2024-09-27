@@ -7,16 +7,16 @@
 //#define RETRY_ON_ALL_ERRORS
 
 /*
- * EventLogInternal contains most of the logic for interacting with the Windows Event Log.
- * The reason for this class existing (instead of the logic being in EventLog itself) is
- * that we'd like to be able to have the invariant that the Source, MachineName and Log Name
- * don't change across the lifetime of an event log object, but we exposed public setters for
- * these properties.  EventLog holds a reference to an EventLogInternal instance, plumbs all
- * calls to it and replaces it when any of these properites change.
- *
- * Note that EventLogInternal also holds a reference back to the EventLog instnace that is
- * exposing it so it is not prematurely collected.
- */
+* EventLogInternal contains most of the logic for interacting with the Windows Event Log.
+* The reason for this class existing (instead of the logic being in EventLog itself) is
+* that we'd like to be able to have the invariant that the Source, MachineName and Log Name
+* don't change across the lifetime of an event log object, but we exposed public setters for
+* these properties.  EventLog holds a reference to an EventLogInternal instance, plumbs all
+* calls to it and replaces it when any of these properites change.
+*
+* Note that EventLogInternal also holds a reference back to the EventLog instnace that is
+* exposing it so it is not prematurely collected.
+*/
 
 namespace System.Diagnostics
 {
@@ -812,7 +812,8 @@ namespace System.Diagnostics
             );
             if (!success)
             {
-                // Ignore file not found errors.  ClearEventLog seems to try to delete the file where the event log is
+                // Ignore file not found errors.  ClearEventLog seems to try to delete the file where the event log
+                // is
                 // stored.  If it can't find it, it gives an error.
                 int error = Marshal.GetLastWin32Error();
                 if (error != NativeMethods.ERROR_FILE_NOT_FOUND)
@@ -938,7 +939,8 @@ namespace System.Diagnostics
                 int oldest = OldestEntryNumber;
                 int count = EntryCount + oldest;
 
-                // Ensure lastSeenCount is within bounds.  This deals with the case where the event log has been cleared between
+                // Ensure lastSeenCount is within bounds.  This deals with the case where the event log has been
+                // cleared between
                 // notifications.
                 if (lastSeenCount < oldest || lastSeenCount > count)
                 {
@@ -990,8 +992,10 @@ namespace System.Diagnostics
 
             try
             {
-                // if the user cleared the log while we were receiving events, the call to GetEntryWithOldest above could have
-                // thrown an exception and i could be too large.  Make sure we don't set lastSeenCount to something bogus.
+                // if the user cleared the log while we were receiving events, the call to GetEntryWithOldest above
+                // could have
+                // thrown an exception and i could be too large.  Make sure we don't set lastSeenCount to something
+                // bogus.
                 int newCount = EntryCount + OldestEntryNumber;
                 if (i > newCount)
                     lastSeenCount = newCount;
@@ -1383,7 +1387,8 @@ namespace System.Diagnostics
             catch (InvalidOperationException)
             {
                 // This would be common in rapidly spinning EventLog (i.e. logs which are rapidly receiving
-                // new events while discarding old ones in a rolling fashion) or if the EventLog is cleared asynchronously.
+                // new events while discarding old ones in a rolling fashion) or if the EventLog is cleared
+                // asynchronously.
                 //
                 // EventLogEntryCollection heuristics is little bit convoluted due to the inherent ----s.
                 // The enumerator predominantly operates on the index from the last �known� oldest entry
@@ -1697,7 +1702,8 @@ namespace System.Diagnostics
             );
             permission.Demand();
 
-            //Cannot allocate the readHandle if the object has been disposed, since finalization has been suppressed.
+            //Cannot allocate the readHandle if the object has been disposed, since finalization has been
+            // suppressed.
             if (this.boolFlags[Flag_disposed])
                 throw new ObjectDisposedException(GetType().Name);
 
@@ -1749,7 +1755,8 @@ namespace System.Diagnostics
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         private void OpenForWrite(string currentMachineName)
         {
-            //Cannot allocate the writeHandle if the object has been disposed, since finalization has been suppressed.
+            //Cannot allocate the writeHandle if the object has been disposed, since finalization has been
+            // suppressed.
             if (this.boolFlags[Flag_disposed])
                 throw new ObjectDisposedException(GetType().Name);
 
@@ -2123,7 +2130,8 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///    <para>
-        ///       Writes an entry of the specified <see cref='System.Diagnostics.EventLogEntryType'/> to the event log. Valid types are
+        ///       Writes an entry of the specified <see cref='System.Diagnostics.EventLogEntryType'/> to the
+        // event log. Valid types are
         ///    <see langword='Error'/>, <see langword='Warning'/>, <see langword='Information'/>,
         ///    <see langword='Success Audit'/>, and <see langword='Failure Audit'/>.
         ///    </para>
@@ -2163,7 +2171,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>
         ///       Writes an entry of the specified type with the
-        ///       user-defined <paramref name="eventID"/> and <paramref name="category"/> to the event log, and appends binary data to
+        ///       user-defined <paramref name="eventID"/> and <paramref name="category"/> to the event log,
+        // and appends binary data to
         ///       the message. The Event Viewer does not interpret this data; it
         ///       displays raw data only in a combined hexadecimal and text format.
         ///    </para>
@@ -2291,7 +2300,8 @@ namespace System.Diagnostics
                 if (strings[i] == null)
                     strings[i] = String.Empty;
 
-                // make sure the strings aren't too long.  MSDN says each string has a limit of 32k (32768) characters, but
+                // make sure the strings aren't too long.  MSDN says each string has a limit of 32k (32768)
+                // characters, but
                 // experimentation shows that it doesn't like anything larger than 32766
                 if (strings[i].Length > 32766)
                     throw new ArgumentException(SR.GetString(SR.LogEntryTooLong));

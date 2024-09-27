@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Immutable;
@@ -394,7 +395,8 @@ namespace Mono.Linker.Dataflow
                 case IntrinsicId.Assembly_GetFiles:
                 case IntrinsicId.AssemblyName_get_CodeBase:
                 case IntrinsicId.AssemblyName_get_EscapedCodeBase:
-                    // These intrinsics are not interesting for trimmer (they are interesting for AOT and that's why they are recognized)
+                    // These intrinsics are not interesting for trimmer (they are interesting for AOT and that's why
+                    // they are recognized)
                     break;
 
                 //
@@ -409,16 +411,19 @@ namespace Mono.Linker.Dataflow
                             // Note that valueNode can be statically typed in IL as some generic argument type.
                             // For example:
                             //   void Method<T>(T instance) { instance.GetType().... }
-                            // Currently this case will end up with null StaticType - since there's no typedef for the generic argument type.
+                            // Currently this case will end up with null StaticType - since there's no typedef for the generic
+                            // argument type.
                             // But it could be that T is annotated with for example PublicMethods:
                             //   void Method<[DAM(PublicMethods)] T>(T instance) { instance.GetType().GetMethod("Test"); }
                             // In this case it's in theory possible to handle it, by treating the T basically as a base class
-                            // for the actual type of "instance". But the analysis for this would be pretty complicated (as the marking
+                            // for the actual type of "instance". But the analysis for this would be pretty complicated (as the
+                            // marking
                             // has to happen on the callsite, which doesn't know that GetType() will be used...).
                             // For now we're intentionally ignoring this case - it will produce a warning.
                             // The counter example is:
                             //   Method<Base>(new Derived);
-                            // In this case to get correct results, trimmer would have to mark all public methods on Derived. Which
+                            // In this case to get correct results, trimmer would have to mark all public methods on Derived.
+                            // Which
                             // currently it won't do.
 
                             TypeDefinition? staticType = (valueNode as IValueWithStaticType)
@@ -426,7 +431,8 @@ namespace Mono.Linker.Dataflow
                                 ?.Type;
                             if (staticType is null)
                             {
-                                // We don't know anything about the type GetType was called on. Track this as a usual result of a method call without any annotations
+                                // We don't know anything about the type GetType was called on. Track this as a usual result of a
+                                // method call without any annotations
                                 AddReturnValue(
                                     context.Annotations.FlowAnnotations.GetMethodReturnValue(
                                         calledMethodDefinition
@@ -444,7 +450,8 @@ namespace Mono.Linker.Dataflow
                                 // We can allow Object.GetType to be modeled as System.Delegate because we keep all methods
                                 // on delegates anyway so reflection on something this approximation would miss is actually safe.
 
-                                // We can also treat all arrays as "sealed" since it's not legal to derive from Array type (even though it is not sealed itself)
+                                // We can also treat all arrays as "sealed" since it's not legal to derive from Array type (even
+                                // though it is not sealed itself)
 
                                 // We ignore the fact that the type can be annotated (see below for handling of annotated types)
                                 // This means the annotations (if any) won't be applied - instead we rely on the exact knowledge
@@ -483,10 +490,14 @@ namespace Mono.Linker.Dataflow
 
                 // Note about Activator.CreateInstance<T>
                 // There are 2 interesting cases:
-                //  - The generic argument for T is either specific type or annotated - in that case generic instantiation will handle this
-                //    since from .NET 6+ the T is annotated with PublicParameterlessConstructor annotation, so the trimming tools would apply this as for any other method.
-                //  - The generic argument for T is unannotated type - the generic instantiantion handling has a special case for handling PublicParameterlessConstructor requirement
-                //    in such that if the generic argument type has the "new" constraint it will not warn (as it is effectively the same thing semantically).
+                //  - The generic argument for T is either specific type or annotated - in that case generic
+                // instantiation will handle this
+                //    since from .NET 6+ the T is annotated with PublicParameterlessConstructor annotation, so the
+                // trimming tools would apply this as for any other method.
+                //  - The generic argument for T is unannotated type - the generic instantiantion handling has a
+                // special case for handling PublicParameterlessConstructor requirement
+                //    in such that if the generic argument type has the "new" constraint it will not warn (as it is
+                // effectively the same thing semantically).
                 //    For all other cases, the trimming tools would have already produced a warning.
 
                 default:
@@ -501,7 +512,8 @@ namespace Mono.Linker.Dataflow
                 maybeMethodReturnValue
                 ?? (returnsVoid ? MultiValueLattice.Top : annotatedMethodReturnValue);
 
-            // Validate that the return value has the correct annotations as per the method return value annotations
+            // Validate that the return value has the correct annotations as per the method return value
+            // annotations
             if (annotatedMethodReturnValue.DynamicallyAccessedMemberTypes != 0)
             {
                 foreach (var uniqueValue in methodReturnValue.AsEnumerable())
@@ -523,7 +535,8 @@ namespace Mono.Linker.Dataflow
                     else if (uniqueValue is SystemTypeValue)
                     {
                         // SystemTypeValue can fulfill any requirement, so it's always valid
-                        // The requirements will be applied at the point where it's consumed (passed as a method parameter, set as field value, returned from the method)
+                        // The requirements will be applied at the point where it's consumed (passed as a method parameter,
+                        // set as field value, returned from the method)
                     }
                     else
                     {

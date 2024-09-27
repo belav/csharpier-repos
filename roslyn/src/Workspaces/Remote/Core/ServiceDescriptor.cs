@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Remote
     internal sealed class ServiceDescriptor : ServiceJsonRpcDescriptor
     {
         /// <summary>
-        /// Brokered services must be defined in Microsoft.VisualStudio service namespace in order to be considered first party.
+        /// Brokered services must be defined in Microsoft.VisualStudio service namespace in order to be
+        // considered first party.
         /// </summary>
         internal const string ServiceNameTopLevelPrefix = "Microsoft.VisualStudio.";
 

@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             );
             var newRoot = rootEditor.GetChangedRoot();
 
-            // 4. Format the new node so that the inserted braces/blocks would have correct indentation and formatting.
+            // 4. Format the new node so that the inserted braces/blocks would have correct indentation and
+            // formatting.
             var newNodeAfterInsertion = newRoot
                 .GetAnnotatedNodes(s_replacementNodeAnnotation)
                 .Single();
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 .GetAnnotatedNodes(s_replacementNodeAnnotation)
                 .Single();
 
-            // 4. Format the new node so that the inserted braces/blocks would have correct indentation and formatting.
+            // 4. Format the new node so that the inserted braces/blocks would have correct indentation and
+            // formatting.
             var formattedNewRoot = Formatter.Format(
                 newRoot,
                 newNodeAfterInsertion.Span,
@@ -363,7 +365,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             }
 
             // Otherwise, it is just an ending else clause.
-            // if its parent is an ifStatement and the parent of ifStatement is a block, insert the innerStatement after the ifStatement
+            // if its parent is an ifStatement and the parent of ifStatement is a block, insert the
+            // innerStatement after the ifStatement
             // e.g. before:
             // if (true)
             // {
@@ -464,7 +467,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             {
                 var objectCreationNodeContainer = nextToken.Parent;
                 // Replace the old object creation node and add the semicolon token.
-                // Note: need to move the trailing trivia of the objectCreationExpressionNode after the semicolon token
+                // Note: need to move the trailing trivia of the objectCreationExpressionNode after the semicolon
+                // token
                 // e.g.
                 // var l = new Bar() {} // I am some comments
                 // =>
@@ -488,7 +492,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             }
             else
             {
-                // No need to change the semicolon, just return the objectCreationExpression with correct initializer
+                // No need to change the semicolon, just return the objectCreationExpression with correct
+                // initializer
                 return (objectCreationNodeWithCorrectInitializer, baseObjectCreationExpressionNode);
             }
         }
@@ -516,8 +521,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 var typeNode = objectCreationExpressionNode.Type;
                 if (typeNode.IsMissing)
                 {
-                    // There is only 'new' keyword in the object creation expression. Treat it as an ImplicitObjectCreationExpression.
-                    // This could happen because when only type 'new', parser would think it is an ObjectCreationExpression.
+                    // There is only 'new' keyword in the object creation expression. Treat it as an
+                    // ImplicitObjectCreationExpression.
+                    // This could happen because when only type 'new', parser would think it is an
+                    // ObjectCreationExpression.
                     var newKeywordToken = baseObjectCreationExpressionNode.NewKeyword;
                     var newArgumentList = SyntaxFactory
                         .ArgumentList()
@@ -675,7 +682,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             && !WithinBraces(baseTypeDeclarationNode, caretPosition);
 
         /// <summary>
-        /// For method, make sure it has a ParameterList, because later braces would be inserted after the Parameterlist
+        /// For method, make sure it has a ParameterList, because later braces would be inserted after the
+        // Parameterlist
         /// </summary>
         private static bool ShouldAddBraceForBaseMethodDeclaration(
             BaseMethodDeclarationSyntax baseMethodDeclarationNode,
@@ -691,7 +699,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             && !baseMethodDeclarationNode.IsParentKind(SyntaxKind.InterfaceDeclaration);
 
         /// <summary>
-        /// For local Function, make sure it has a ParameterList, because later braces would be inserted after the Parameterlist
+        /// For local Function, make sure it has a ParameterList, because later braces would be inserted
+        // after the Parameterlist
         /// </summary>
         private static bool ShouldAddBraceForLocalFunctionStatement(
             LocalFunctionStatementSyntax localFunctionStatementNode,
@@ -711,7 +720,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         ) => objectCreationExpressionNode.Initializer == null;
 
         /// <summary>
-        /// Add braces for field and event field if they only have one variable, semicolon is missing and don't have readonly keyword
+        /// Add braces for field and event field if they only have one variable, semicolon is missing and
+        // don't have readonly keyword
         /// Example:
         /// public int Bar$$ =>
         /// public int Bar
@@ -777,7 +787,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         }
 
         /// <summary>
-        /// For indexer, switch, try and catch syntax node without braces, if it is the last child of its parent, it would
+        /// For indexer, switch, try and catch syntax node without braces, if it is the last child of its
+        // parent, it would
         /// use its parent's close brace as its own.
         /// Example:
         /// class Bar
@@ -832,7 +843,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         //          tr$$y
         //      }
         // }
-        // In this case, the last close brace of 'void Main()' would be thought as a part of the try statement,
+        // In this case, the last close brace of 'void Main()' would be thought as a part of the try
+        // statement,
         // and the last close brace of 'Bar' would be thought as a part of Main()
         // So for these case, just check if the open brace is missing.
         private static bool ShouldAddBraceForSwitchStatement(
@@ -1143,7 +1155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
 
         /// <summary>
         /// Add braces to the <param name="node"/>.
-        /// For FieldDeclaration and EventFieldDeclaration, it will change them to PropertyDeclaration and EventDeclaration
+        /// For FieldDeclaration and EventFieldDeclaration, it will change them to PropertyDeclaration and
+        // EventDeclaration
         /// </summary>
         private static SyntaxNode WithBraces(
             SyntaxNode node,
@@ -1207,7 +1220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         ) =>
             baseMethodDeclarationNode
                 .WithBody(GetBlockNode(formattingOptions))
-                // When the method declaration with no body is parsed, it has an invisible trailing semicolon. Make sure it is removed.
+                // When the method declaration with no body is parsed, it has an invisible trailing semicolon. Make
+                // sure it is removed.
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None));
 
         /// <summary>
@@ -1219,7 +1233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         ) =>
             localFunctionStatementNode
                 .WithBody(GetBlockNode(formattingOptions))
-                // When the local method declaration with no body is parsed, it has an invisible trailing semicolon. Make sure it is removed.
+                // When the local method declaration with no body is parsed, it has an invisible trailing semicolon.
+                // Make sure it is removed.
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None));
 
         /// <summary>
@@ -1231,11 +1246,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
         ) =>
             accessorDeclarationNode
                 .WithBody(GetBlockNode(formattingOptions))
-                // When the accessor with no body is parsed, it has an invisible trailing semicolon. Make sure it is removed.
+                // When the accessor with no body is parsed, it has an invisible trailing semicolon. Make sure it is
+                // removed.
                 .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.None));
 
         /// <summary>
-        /// Add a block with <param name="extraNodeInsertedBetweenBraces"/> to <param name="embeddedStatementOwner"/>
+        /// Add a block with <param name="extraNodeInsertedBetweenBraces"/> to <param
+        // name="embeddedStatementOwner"/>
         /// </summary>
         private static SyntaxNode AddBlockToEmbeddedStatementOwner(
             SyntaxNode embeddedStatementOwner,

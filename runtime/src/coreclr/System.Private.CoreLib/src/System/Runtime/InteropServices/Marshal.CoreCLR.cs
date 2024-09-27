@@ -220,7 +220,8 @@ namespace System.Runtime.InteropServices
         /// <returns>The last platform invoke error</returns>
         /// <remarks>
         /// The last platform invoke error corresponds to the error set by either the most recent platform
-        /// invoke that was configured to set the last error or a call to <see cref="SetLastPInvokeError(int)" />.
+        /// invoke that was configured to set the last error or a call to <see
+        // cref="SetLastPInvokeError(int)" />.
         /// </remarks>
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern int GetLastPInvokeError();
@@ -463,8 +464,10 @@ namespace System.Runtime.InteropServices
                 throw new NotSupportedException(SR.NotSupported_COM);
             }
 
-            // Note: "throwOnError" is a vacuous parameter. Any errors due to the CLSID not being registered or the server not being found will happen
-            // on the Activator.CreateInstance() call. GetTypeFromCLSID() merely wraps the data in a Type object without any validation.
+            // Note: "throwOnError" is a vacuous parameter. Any errors due to the CLSID not being registered or
+            // the server not being found will happen
+            // on the Activator.CreateInstance() call. GetTypeFromCLSID() merely wraps the data in a Type object
+            // without any validation.
 
             Type? type = null;
             GetTypeFromCLSID(clsid, server, ObjectHandleOnStack.Create(ref type));

@@ -24,7 +24,8 @@ namespace System
         private static string? s_defaultBaseDirectory;
 
         public static string BaseDirectory =>
-            // The value of APP_CONTEXT_BASE_DIRECTORY key has to be a string and it is not allowed to be any other type.
+            // The value of APP_CONTEXT_BASE_DIRECTORY key has to be a string and it is not allowed to be any
+            // other type.
             // Otherwise the caller will get invalid cast exception
             GetData("APP_CONTEXT_BASE_DIRECTORY") as string
             ?? (s_defaultBaseDirectory ??= GetBaseDirectoryCore());
@@ -57,7 +58,8 @@ namespace System
         /// </summary>
         /// <param name="name">The name of the data element</param>
         /// <param name="data">The value of <paramref name="name"/></param>
-        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see langword="null"/></exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="name"/> is <see
+        // langword="null"/></exception>
         public static void SetData(string name, object? data)
         {
             ArgumentNullException.ThrowIfNull(name);
@@ -123,7 +125,8 @@ namespace System
         /// </summary>
         /// <param name="switchName">The name of the switch</param>
         /// <param name="isEnabled">A variable where to place the value of the switch</param>
-        /// <returns>A return value of true represents that the switch was set and <paramref name="isEnabled"/> contains the value of the switch</returns>
+        /// <returns>A return value of true represents that the switch was set and <paramref
+        // name="isEnabled"/> contains the value of the switch</returns>
         public static bool TryGetSwitch(string switchName, out bool isEnabled)
         {
             ArgumentException.ThrowIfNullOrEmpty(switchName);

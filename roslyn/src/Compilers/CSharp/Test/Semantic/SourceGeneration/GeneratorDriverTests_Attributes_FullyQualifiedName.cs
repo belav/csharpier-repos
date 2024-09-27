@@ -51,7 +51,8 @@ public class GeneratorDriverTests_Attributes_FullyQualifiedName : CSharpTestBase
 {
     #region Non-Incremental tests
 
-    // These tests just validate basic correctness of results in different scenarios, without actually validating
+    // These tests just validate basic correctness of results in different scenarios, without actually
+    // validating
     // that the incremental nature of this provider works properly.
 
     [Fact]

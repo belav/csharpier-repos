@@ -186,7 +186,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Properties
 
         /// <summary>
-        /// Gets or sets a flag which indicates whether one of the axis segments should start its scale from zero
+        /// Gets or sets a flag which indicates whether one of the axis segments should start its scale from
+        // zero
         /// when scale break is used.
         /// </summary>
         /// <remarks>

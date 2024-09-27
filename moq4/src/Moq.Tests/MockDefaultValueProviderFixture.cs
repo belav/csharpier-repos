@@ -284,12 +284,12 @@ namespace Moq.Tests
             var ex = Assert.Throws<MockException>(() => mock.Verify());
             Assert.True(ex.IsVerificationError);
 
-            /* Unmerged change from project 'Moq.Tests(net6.0)'
-            Before:
-                    private static object GetDefaultValueForProperty(string propertyName, Mock<IFoo> mock)
-            After:
-                    static object GetDefaultValueForProperty(string propertyName, Mock<IFoo> mock)
-            */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private static object GetDefaultValueForProperty(string propertyName, Mock<IFoo> mock)
+After:
+static object GetDefaultValueForProperty(string propertyName, Mock<IFoo> mock)
+*/
         }
 
         static object GetDefaultValueForProperty(string propertyName, Mock<IFoo> mock)

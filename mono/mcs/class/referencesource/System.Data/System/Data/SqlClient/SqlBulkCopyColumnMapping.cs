@@ -32,7 +32,8 @@ namespace System.Data.SqlClient
         internal int _sourceColumnOrdinal;
 
         // devnote: we don't want the user to detect the columnordinal after WriteToServer call.
-        // _sourceColumnOrdinal(s) will be copied to _internalSourceColumnOrdinal when WriteToServer executes.
+        // _sourceColumnOrdinal(s) will be copied to _internalSourceColumnOrdinal when WriteToServer
+        // executes.
         internal int _internalDestinationColumnOrdinal;
         internal int _internalSourceColumnOrdinal; // -1 indicates an undetermined value
 

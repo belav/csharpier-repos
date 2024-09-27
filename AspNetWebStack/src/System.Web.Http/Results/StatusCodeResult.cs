@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net;
@@ -24,7 +25,8 @@ namespace System.Web.Http.Results
 
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="statusCode">The HTTP status code for the response message.</param>
-        /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
+        /// <param name="controller">The controller from which to obtain the dependencies needed for
+        // execution.</param>
         public StatusCodeResult(HttpStatusCode statusCode, ApiController controller)
             : this(statusCode, new ApiControllerDependencyProvider(controller)) { }
 
@@ -81,8 +83,10 @@ namespace System.Web.Http.Results
 
         /// <summary>Defines a provider for dependencies that are not always directly available.</summary>
         /// <remarks>
-        /// This abstraction supports the unit testing scenario of creating the result without creating a request
-        /// message. (The ApiController provider implementation does lazy evaluation to make that scenario work.)
+        /// This abstraction supports the unit testing scenario of creating the result without creating a
+        // request
+        /// message. (The ApiController provider implementation does lazy evaluation to make that scenario
+        // work.)
         /// </remarks>
         internal interface IDependencyProvider
         {

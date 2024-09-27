@@ -124,7 +124,8 @@ public class ResourcesData
     /// .NET Wasm runtime resources (dotnet.wasm, dotnet.js) etc.
     /// </summary>
     /// <remarks>
-    /// Deprecated in .NET 8, use <see cref="jsModuleWorker"/>, <see cref="jsModuleNative"/>, <see cref="jsModuleRuntime"/>, <see cref="wasmNative"/>, <see cref="wasmSymbols"/>, <see cref="icu"/>.
+    /// Deprecated in .NET 8, use <see cref="jsModuleWorker"/>, <see cref="jsModuleNative"/>, <see
+    // cref="jsModuleRuntime"/>, <see cref="wasmNative"/>, <see cref="wasmSymbols"/>, <see cref="icu"/>.
     /// </remarks>
     [DataMember(EmitDefaultValue = false)]
     public ResourceHashesByNameDictionary runtime { get; set; }
@@ -206,7 +207,8 @@ public class ResourcesData
 
 public enum GlobalizationMode : int
 {
-    // Note that the numeric values are serialized and used in JS code, so don't change them without also updating the JS code
+    // Note that the numeric values are serialized and used in JS code, so don't change them without
+    // also updating the JS code
     // Note that names are serialized as string and used in JS code
 
     /// <summary>

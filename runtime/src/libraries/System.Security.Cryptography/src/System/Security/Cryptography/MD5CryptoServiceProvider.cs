@@ -63,7 +63,8 @@ namespace System.Security.Cryptography
             return _incrementalHash.TryGetHashAndReset(destination, out bytesWritten);
         }
 
-        // The Hash and HashSize properties are not overridden since the correct values are returned from base.
+        // The Hash and HashSize properties are not overridden since the correct values are returned from
+        // base.
 
         protected override void Dispose(bool disposing)
         {

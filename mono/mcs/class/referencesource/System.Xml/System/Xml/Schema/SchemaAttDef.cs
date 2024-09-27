@@ -11,10 +11,10 @@ namespace System.Xml.Schema
     using System.Diagnostics;
 
     /*
-     * This class describes an attribute type and potential values.
-     * This encapsulates the information for one Attdef * in an
-     * Attlist in a DTD as described below:
-     */
+    * This class describes an attribute type and potential values.
+    * This encapsulates the information for one Attdef * in an
+    * Attlist in a DTD as described below:
+    */
     internal sealed class SchemaAttDef : SchemaDeclBase, IDtdDefaultAttributeInfo
     {
         internal enum Reserve

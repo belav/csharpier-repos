@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Rename
 {
     /// <summary>
-    /// Equivalent to <see cref="SymbolicRenameLocations"/> except that references to symbols are kept in a lightweight fashion
+    /// Equivalent to <see cref="SymbolicRenameLocations"/> except that references to symbols are kept
+    // in a lightweight fashion
     /// to avoid expensive rehydration steps as a host and OOP communicate.
     /// </summary>
     internal sealed partial class LightweightRenameLocations
@@ -89,7 +90,8 @@ namespace Microsoft.CodeAnalysis.Rename
         }
 
         /// <summary>
-        /// Find the locations that need to be renamed.  Can cross process boundaries efficiently to do this.
+        /// Find the locations that need to be renamed.  Can cross process boundaries efficiently to do
+        // this.
         /// </summary>
         public static async Task<LightweightRenameLocations> FindRenameLocationsAsync(
             ISymbol symbol,
@@ -154,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Rename
                             );
                         }
 
-                        // TODO: do not fall back to in-proc if client is available (https://github.com/dotnet/roslyn/issues/47557)
+                        // TODO: do not fall back to in-proc if client is available
+                        // (https://github.com/dotnet/roslyn/issues/47557)
                     }
                 }
             }

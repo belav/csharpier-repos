@@ -34,7 +34,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             Contract.Assert(false, "This class is never instantiated");
         }
 
-        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of IEnumerable<T>.
+        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of
+        // IEnumerable<T>.
         [SecurityCritical]
         internal IEnumerator<T> GetEnumerator_Stub<T>()
         {
@@ -42,9 +43,12 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             return new IteratorToEnumeratorAdapter<T>(_this.First());
         }
 
-        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of IEnumerable<T>
-        // and it is possible that the implementation supports IEnumerable<Type>/IEnumerable<string>/IEnumerable<Exception>/
-        // IEnumerable<array>/IEnumerable<delegate> rather than IEnumerable<T> because T is assignable from Type/string/
+        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of
+        // IEnumerable<T>
+        // and it is possible that the implementation supports
+        // IEnumerable<Type>/IEnumerable<string>/IEnumerable<Exception>/
+        // IEnumerable<array>/IEnumerable<delegate> rather than IEnumerable<T> because T is assignable from
+        // Type/string/
         // Exception/array/delegate via co-variance.
         [SecurityCritical]
         internal IEnumerator<T> GetEnumerator_Variance_Stub<T>()
@@ -108,7 +112,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
             }
         }
 
-        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of IEnumerable.
+        // This method is invoked when GetEnumerator is called on a WinRT-backed implementation of
+        // IEnumerable.
         [SecurityCritical]
         internal IEnumerator GetEnumerator_Stub()
         {

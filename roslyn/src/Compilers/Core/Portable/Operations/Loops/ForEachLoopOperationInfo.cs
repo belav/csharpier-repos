@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Operations
         public readonly IMethodSymbol? PatternDisposeMethod;
 
         /// <summary>
-        /// The conversion from the type of the <see cref="CurrentProperty"/> to the <see cref="ElementType"/>.
+        /// The conversion from the type of the <see cref="CurrentProperty"/> to the <see
+        // cref="ElementType"/>.
         /// </summary>
         public readonly IConvertibleConversion CurrentConversion;
 

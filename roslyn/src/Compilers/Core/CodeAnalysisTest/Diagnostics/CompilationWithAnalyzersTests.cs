@@ -102,7 +102,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 .Result;
             Assert.Empty(analysisResult.CompilationDiagnostics);
 
-            // Even though the analyzer registers a symbol action, it should never be invoked because all of its rules are disabled.
+            // Even though the analyzer registers a symbol action, it should never be invoked because all of its
+            // rules are disabled.
             var analyzerTelemetry = compWithAnalyzers
                 .GetAnalyzerTelemetryInfoAsync(analyzer, CancellationToken.None)
                 .Result;
@@ -112,7 +113,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         [Fact, Obsolete(message: "IsDiagnosticAnalyzerSuppressed is an obsolete public API")]
         public void TestIsDiagnosticAnalyzerSuppressedWithExceptionInSupportedDiagnostics()
         {
-            // Verify IsDiagnosticAnalyzerSuppressed does not throw an exception when 'onAnalyzerException' is null.
+            // Verify IsDiagnosticAnalyzerSuppressed does not throw an exception when 'onAnalyzerException' is
+            // null.
             var analyzer = new AnalyzerThatThrowsInSupportedDiagnostics();
             _ = CompilationWithAnalyzers.IsDiagnosticAnalyzerSuppressed(
                 analyzer,

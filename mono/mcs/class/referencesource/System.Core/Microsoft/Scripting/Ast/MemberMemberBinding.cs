@@ -1,17 +1,17 @@
 ﻿/* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Collections.Generic;
@@ -33,8 +33,10 @@ namespace System.Linq.Expressions
     /// Represents initializing members of a member of a newly created object.
     /// </summary>
     /// <remarks>
-    /// Use the <see cref="M:MemberBind"/> factory methods to create a <see cref="MemberMemberBinding"/>.
-    /// The value of the <see cref="P:MemberBinding.BindingType"/> property of a <see cref="MemberMemberBinding"/> object is <see cref="MemberBinding"/>.
+    /// Use the <see cref="M:MemberBind"/> factory methods to create a <see
+    // cref="MemberMemberBinding"/>.
+    /// The value of the <see cref="P:MemberBinding.BindingType"/> property of a <see
+    // cref="MemberMemberBinding"/> object is <see cref="MemberBinding"/>.
     /// </remarks>
     public sealed class MemberMemberBinding : MemberBinding
     {
@@ -62,7 +64,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="bindings">The <see cref="Bindings" /> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public MemberMemberBinding Update(IEnumerable<MemberBinding> bindings)
         {
             if (bindings == Bindings)
@@ -76,11 +79,18 @@ namespace System.Linq.Expressions
     public partial class Expression
     {
         /// <summary>
-        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of members of a field or property.
+        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of
+        // members of a field or property.
         /// </summary>
-        /// <param name="member">The <see cref="MemberInfo"/> to set the <see cref="P:MemberBinding.Member"/> property equal to.</param>
-        /// <param name="bindings">An array of <see cref="MemberBinding"/> objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
-        /// <returns>A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see cref="P:MemberBinding.Member"/> and <see cref="P:MemberMemberBindings.Bindings"/> properties set to the specified values.</returns>
+        /// <param name="member">The <see cref="MemberInfo"/> to set the <see
+        // cref="P:MemberBinding.Member"/> property equal to.</param>
+        /// <param name="bindings">An array of <see cref="MemberBinding"/> objects to use to populate the
+        // <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
+        /// <returns>A <see cref="MemberMemberBinding"/> that has the <see
+        // cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see
+        // cref="P:MemberBinding.Member"/> and <see cref="P:MemberMemberBindings.Bindings"/> properties set
+        // to
+        // the specified values.</returns>
         public static MemberMemberBinding MemberBind(
             MemberInfo member,
             params MemberBinding[] bindings
@@ -92,11 +102,18 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of members of a field or property.
+        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of
+        // members of a field or property.
         /// </summary>
-        /// <param name="member">The <see cref="MemberInfo"/> to set the <see cref="P:MemberBinding.Member"/> property equal to.</param>
-        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/> objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
-        /// <returns>A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see cref="P:MemberBinding.Member"/> and <see cref="P:MemberMemberBindings.Bindings"/> properties set to the specified values.</returns>
+        /// <param name="member">The <see cref="MemberInfo"/> to set the <see
+        // cref="P:MemberBinding.Member"/> property equal to.</param>
+        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/>
+        // objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
+        /// <returns>A <see cref="MemberMemberBinding"/> that has the <see
+        // cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/> and the <see
+        // cref="P:MemberBinding.Member"/> and <see cref="P:MemberMemberBindings.Bindings"/> properties set
+        // to
+        // the specified values.</returns>
         public static MemberMemberBinding MemberBind(
             MemberInfo member,
             IEnumerable<MemberBinding> bindings
@@ -112,13 +129,18 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of members of a member that is accessed by using a property accessor method.
+        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of
+        // members of a member that is accessed by using a property accessor method.
         /// </summary>
-        /// <param name="propertyAccessor">The <see cref="MemberInfo"/> that represents a property accessor method.</param>
-        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/> objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
+        /// <param name="propertyAccessor">The <see cref="MemberInfo"/> that represents a property accessor
+        // method.</param>
+        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/>
+        // objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
         /// <returns>
-        /// A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/>,
-        /// the Member property set to the <see cref="PropertyInfo"/> that represents the property accessed in <paramref name="propertyAccessor"/>,
+        /// A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/>
+        // property equal to <see cref="MemberBinding"/>,
+        /// the Member property set to the <see cref="PropertyInfo"/> that represents the property accessed
+        // in <paramref name="propertyAccessor"/>,
         /// and <see cref="P:MemberMemberBindings.Bindings"/> properties set to the specified values.
         /// </returns>
         public static MemberMemberBinding MemberBind(
@@ -131,13 +153,18 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of members of a member that is accessed by using a property accessor method.
+        /// Creates a <see cref="MemberMemberBinding"/> that represents the recursive initialization of
+        // members of a member that is accessed by using a property accessor method.
         /// </summary>
-        /// <param name="propertyAccessor">The <see cref="MemberInfo"/> that represents a property accessor method.</param>
-        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/> objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
+        /// <param name="propertyAccessor">The <see cref="MemberInfo"/> that represents a property accessor
+        // method.</param>
+        /// <param name="bindings">An <see cref="IEnumerable{T}"/> that contains <see cref="MemberBinding"/>
+        // objects to use to populate the <see cref="P:MemberMemberBindings.Bindings"/> collection.</param>
         /// <returns>
-        /// A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/> property equal to <see cref="MemberBinding"/>,
-        /// the Member property set to the <see cref="PropertyInfo"/> that represents the property accessed in <paramref name="propertyAccessor"/>,
+        /// A <see cref="MemberMemberBinding"/> that has the <see cref="P:MemberBinding.BindingType"/>
+        // property equal to <see cref="MemberBinding"/>,
+        /// the Member property set to the <see cref="PropertyInfo"/> that represents the property accessed
+        // in <paramref name="propertyAccessor"/>,
         /// and <see cref="P:MemberMemberBindings.Bindings"/> properties set to the specified values.
         /// </returns>
         public static MemberMemberBinding MemberBind(

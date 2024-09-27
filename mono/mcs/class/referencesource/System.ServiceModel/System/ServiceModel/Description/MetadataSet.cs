@@ -111,123 +111,140 @@ namespace System.ServiceModel.Description
 
 #pragma warning disable
 
-    /* The Following code is a generated XmlSerializer.  It was created by:
-     *      (*) Removing the IXmlSerializable from MetadataSet
-     *      (*) Changing typeof(WsdlNS.ServiceDescription) and typeof(XsdNS.XmlSchema) to typeof(string) and typeof(int) on the [XmlElement] attribute on
-     *          MetadataSection.Metadata
-     *      (*) running "sgen /a:System.ServiceModel.dll /t:System.ServiceModel.Description.MetadataSet /k" to generate the code
-     *      (*) Revert the above changes.
-     *
-     * and then doing the following to fix it up:
-     *
-     *      (*) Change the classes from public to internal
-     *      (*) Add ProcessOuterElement to MetadataSetSerializer, XmlSerializationReaderMetadataSet, and XmlSerializationWriterMetadataSet
-                       private bool processOuterElement = true;
-     
-                       public bool ProcessOuterElement
-                       {
-                           get { return processOuterElement; }
-                           set { processOuterElement = value; }
-                       }
-     *      (*) Set XmlSerializationWriterMetadataSet.ProcessOuterElement with MetadataSetSerializer.ProcessOuterElement
-     *          in MetadataSetSerializer.Serialize
-     *          ((XmlSerializationWriterMetadataSet)writer).ProcessOuterElement = this.processOuterElement;
-     *
-     *      (*) Set XmlSerializationReaderMetadataSet.ProcessOuterElement with MetadataSetSerializer.ProcessOuterElement
-     *          in MetadataSetSerializer.Deserialize
-     *          ((XmlSerializationReaderMetadataSet)reader).ProcessOuterElement = this.processOuterElement;
-     *      (*) wrap anything in XmlSerializationWriterMetadataSet.Write*_Metadata or
-     *          XmlSerializationWriterMetadataSet.Write*_MetadataSet that outputs the outer
-     *          element with "if(processOuterElement) { ... }"
-     *      (*) Add "!processOuterElement ||" to checks for name and namespace of the outer element
-     *          in XmlSerializationReaderMetadataSet.Read*_Metadata and XmlSerializationReaderMetadataSet.Read*_MetadataSet.
-     *      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change the if clause writing the XmlSchema from
-     *
-     *          o.@Metadata = Reader.ReadElementString();
-     *          to
-                o.@Metadata = System.Xml.Schema.XmlSchema.Read(this.Reader, null);
-                if (this.Reader.NodeType == XmlNodeType.EndElement)
-                    ReadEndElement();
-     *
-     *
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
-     *
-     *          else if (o.@Metadata is global::System.Int32) {
-     *              WriteElementString(@"schema", @"http://www.w3.org/2001/XMLSchema", ((global::System.Int32)o.@Metadata));
-     *          }
-     *          to
-     *
-                else if (o.@Metadata is global::System.Xml.Schema.XmlSchema)
-                {
-                    ((global::System.Xml.Schema.XmlSchema)o.@Metadata).Write(this.Writer);
-                }
-     *
-     *      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change
-     *
-     *          o.@Metadata = Reader.ReadElementString();
-     *          to
-     *          o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(this.Reader);
-     *
-     *
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
-     *
-     *          if (o.@Metadata is global::System.String) {
-     *              WriteElementString(@"definitions", @"http://schemas.xmlsoap.org/wsdl/", ((global::System.String)o.@Metadata));
-     *          }
-     *          to
-     *
-                if (o.@Metadata is global::System.Web.Services.Description.ServiceDescription) {
-                    ((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(this.Writer);
-                }
-     *
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSet add
-     *
-                XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
-                xmlSerializerNamespaces.Add(MetadataStrings.MetadataExchangeStrings.Prefix, MetadataStrings.MetadataExchangeStrings.Namespace);
-                WriteNamespaceDeclarations(xmlSerializerNamespaces);
-     *
-     *          immediately before 'if (needType) WriteXsiType(@"MetadataSet", @"http://schemas.xmlsoap.org/ws/2004/09/mex");'
-     *
-     *      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection replace
-     *          WriteStartElement(n, ns, o, false, null);
-     *          with
-     *
-                XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
-                xmlSerializerNamespaces.Add(string.Empty, string.Empty);
+/* The Following code is a generated XmlSerializer.  It was created by:
+*      (*) Removing the IXmlSerializable from MetadataSet
+*      (*) Changing typeof(WsdlNS.ServiceDescription) and typeof(XsdNS.XmlSchema) to typeof(string)
+and typeof(int) on the [XmlElement] attribute on
+*          MetadataSection.Metadata
+*      (*) running "sgen /a:System.ServiceModel.dll /t:System.ServiceModel.Description.MetadataSet
+/k" to generate the code
+*      (*) Revert the above changes.
+*
+* and then doing the following to fix it up:
+*
+*      (*) Change the classes from public to internal
+*      (*) Add ProcessOuterElement to MetadataSetSerializer, XmlSerializationReaderMetadataSet, and
+XmlSerializationWriterMetadataSet
+private bool processOuterElement = true;
 
-                WriteStartElement(n, ns, o, true, xmlSerializerNamespaces);
-     *
-     *      (*) In XmlSerializationWriterMetadataSet Write*_XmlSchema replace
-     *          WriteStartElement(n, ns, o, false, o.@Namespaces);
-     *          with
-     *          WriteStartElement(n, ns, o, true, o.@Namespaces);
-     *
-     *       (*) Make sure you keep the #pragmas surrounding this block.
-     *
-     *      (*) Make sure to replace all exception throw with standard throw using DiagnosticUtility.ExceptionUtility.ThrowHelperError;
-     *          change:
-     *
-     *          throw CreateUnknownTypeException(*);
-     *          to
-     *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(*));
-     *
-     *          throw CreateUnknownNodeException();
-     *          to
-     *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownNodeException());
-     *
-     *          throw CreateInvalidAnyTypeException(elem);
-     *          to
-     *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidAnyTypeException(elem));
-     *
-     *          throw CreateInvalidEnumValueException(*);
-     *          to
-     *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidEnumValueException(*));
-     *
-     *          throw CreateUnknownConstantException(*);
-     *          to
-     *          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownConstantException(*));
-     *
-     */
+public bool ProcessOuterElement
+{
+get { return processOuterElement; }
+set { processOuterElement = value; }
+}
+*      (*) Set XmlSerializationWriterMetadataSet.ProcessOuterElement with
+MetadataSetSerializer.ProcessOuterElement
+*          in MetadataSetSerializer.Serialize
+*          ((XmlSerializationWriterMetadataSet)writer).ProcessOuterElement =
+this.processOuterElement;
+*
+*      (*) Set XmlSerializationReaderMetadataSet.ProcessOuterElement with
+MetadataSetSerializer.ProcessOuterElement
+*          in MetadataSetSerializer.Deserialize
+*          ((XmlSerializationReaderMetadataSet)reader).ProcessOuterElement =
+this.processOuterElement;
+*      (*) wrap anything in XmlSerializationWriterMetadataSet.Write*_Metadata or
+*          XmlSerializationWriterMetadataSet.Write*_MetadataSet that outputs the outer
+*          element with "if(processOuterElement) { ... }"
+*      (*) Add "!processOuterElement ||" to checks for name and namespace of the outer element
+*          in XmlSerializationReaderMetadataSet.Read*_Metadata and
+XmlSerializationReaderMetadataSet.Read*_MetadataSet.
+*      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change the if clause writing
+the XmlSchema from
+*
+*          o.@Metadata = Reader.ReadElementString();
+*          to
+o.@Metadata = System.Xml.Schema.XmlSchema.Read(this.Reader, null);
+if (this.Reader.NodeType == XmlNodeType.EndElement)
+ReadEndElement();
+*
+*
+*      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
+*
+*          else if (o.@Metadata is global::System.Int32) {
+*              WriteElementString(@"schema", @"http://www.w3.org/2001/XMLSchema",
+((global::System.Int32)o.@Metadata));
+*          }
+*          to
+*
+else if (o.@Metadata is global::System.Xml.Schema.XmlSchema)
+{
+((global::System.Xml.Schema.XmlSchema)o.@Metadata).Write(this.Writer);
+}
+*
+*      (*) In XmlSerializationReaderMetadataSet.Read*_MetadataSection change
+*
+*          o.@Metadata = Reader.ReadElementString();
+*          to
+*          o.@Metadata = System.Web.Services.Description.ServiceDescription.Read(this.Reader);
+*
+*
+*      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection change
+*
+*          if (o.@Metadata is global::System.String) {
+*              WriteElementString(@"definitions", @"http://schemas.xmlsoap.org/wsdl/",
+((global::System.String)o.@Metadata));
+*          }
+*          to
+*
+if (o.@Metadata is global::System.Web.Services.Description.ServiceDescription) {
+((global::System.Web.Services.Description.ServiceDescription)o.@Metadata).Write(this.Writer);
+}
+*
+*      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSet add
+*
+XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
+xmlSerializerNamespaces.Add(MetadataStrings.MetadataExchangeStrings.Prefix,
+MetadataStrings.MetadataExchangeStrings.Namespace);
+WriteNamespaceDeclarations(xmlSerializerNamespaces);
+*
+*          immediately before 'if (needType) WriteXsiType(@"MetadataSet",
+@"http://schemas.xmlsoap.org/ws/2004/09/mex");'
+*
+*      (*) In XmlSerializationWriterMetadataSet Write*_MetadataSection replace
+*          WriteStartElement(n, ns, o, false, null);
+*          with
+*
+XmlSerializerNamespaces xmlSerializerNamespaces = new XmlSerializerNamespaces();
+xmlSerializerNamespaces.Add(string.Empty, string.Empty);
+
+WriteStartElement(n, ns, o, true, xmlSerializerNamespaces);
+*
+*      (*) In XmlSerializationWriterMetadataSet Write*_XmlSchema replace
+*          WriteStartElement(n, ns, o, false, o.@Namespaces);
+*          with
+*          WriteStartElement(n, ns, o, true, o.@Namespaces);
+*
+*       (*) Make sure you keep the #pragmas surrounding this block.
+*
+*      (*) Make sure to replace all exception throw with standard throw using
+DiagnosticUtility.ExceptionUtility.ThrowHelperError;
+*          change:
+*
+*          throw CreateUnknownTypeException(*);
+*          to
+*          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownTypeException(*));
+*
+*          throw CreateUnknownNodeException();
+*          to
+*          throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownNodeException());
+*
+*          throw CreateInvalidAnyTypeException(elem);
+*          to
+*          throw
+DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidAnyTypeException(elem));
+*
+*          throw CreateInvalidEnumValueException(*);
+*          to
+*          throw
+DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateInvalidEnumValueException(*));
+*
+*          throw CreateUnknownConstantException(*);
+*          to
+*          throw
+DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateUnknownConstantException(*));
+*
+*/
 
     internal class XmlSerializationWriterMetadataSet
         : System.Xml.Serialization.XmlSerializationWriter

@@ -13,13 +13,13 @@ namespace System.Globalization
     //  Notes about UmAlQuraCalendar
     //
     ////////////////////////////////////////////////////////////////////////////
-    /*
-    **  Calendar support range:
-    **      Calendar    Minimum     Maximum
-    **      ==========  ==========  ==========
-    **      Gregorian   1900/04/30   2077/11/17
-    **      UmAlQura    1318/01/01   1500/12/30
-    */
+/*
+**  Calendar support range:
+**      Calendar    Minimum     Maximum
+**      ==========  ==========  ==========
+**      Gregorian   1900/04/30   2077/11/17
+**      UmAlQura    1318/01/01   1500/12/30
+*/
 
     [Serializable]
     public class UmAlQuraCalendar : Calendar
@@ -45,9 +45,10 @@ namespace System.Globalization
         {
             short[] rawData = new short[]
             {
-                //These data is taken from Tables/Excel/UmAlQura.xls please make sure that the two places are in sync
-                /*  DaysPerM     GY      GM     GD     D1   D2   D3   D4   D5   D6   D7   D8   D9   D10  D11  D12
-                1318*/0x02EA,
+                //These data is taken from Tables/Excel/UmAlQura.xls please make sure that the two places are in
+                // sync
+/*  DaysPerM     GY      GM     GD     D1   D2   D3   D4   D5   D6   D7   D8   D9   D10  D11  D12
+1318*/0x02EA,
                 1900,
                 4,
                 30, /* 0    1    0    1    0    1    1    1    0    1    0    0    4/30/1900
@@ -972,8 +973,10 @@ namespace System.Globalization
 
             // Direct inline initialization of DateMapping array would produce a lot of code bloat.
 
-            // We take advantage of C# compiler compiles inline initialization of primitive type array into very compact code.
-            // So we start with raw data stored in primitive type array, and initialize the DateMapping out of it
+            // We take advantage of C# compiler compiles inline initialization of primitive type array into very
+            // compact code.
+            // So we start with raw data stored in primitive type array, and initialize the DateMapping out of
+            // it
 
             DateMapping[] mapping = new DateMapping[rawData.Length / 4];
             for (int i = 0; i < mapping.Length; i++)
@@ -1003,21 +1006,22 @@ namespace System.Globalization
             (new DateTime(2077, 11, 16, 23, 59, 59, 999)).Ticks + 9999
         );
 
-        /*=================================GetDefaultInstance==========================
-        **Action: Internal method to provide a default intance of UmAlQuraCalendar.  Used by NLS+ implementation
-        **       and other calendars.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
-        /*
-        internal static Calendar GetDefaultInstance() {
-            if (m_defaultInstance == null) {
-                m_defaultInstance = new UmAlQuraCalendar();
-            }
-            return (m_defaultInstance);
-        }
-        */
+/*=================================GetDefaultInstance==========================
+**Action: Internal method to provide a default intance of UmAlQuraCalendar.  Used by NLS+
+implementation
+**       and other calendars.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
+/*
+internal static Calendar GetDefaultInstance() {
+if (m_defaultInstance == null) {
+m_defaultInstance = new UmAlQuraCalendar();
+}
+return (m_defaultInstance);
+}
+*/
 
 
 
@@ -1064,12 +1068,12 @@ namespace System.Globalization
             }
         }
 
-        /*==========================ConvertHijriToGregorian==========================
-        ** Purpose: convert Hdate(year,month,day) to Gdate(year,month,day)
-        ** Arguments:
-        ** Input: Hijrah  date: year:HijriYear, month:HijriMonth, day:HijriDay
-        ** Output: Gregorian date: year:yg, month:mg, day:dg
-        =========================ConvertHijriToGregorian============================*/
+/*==========================ConvertHijriToGregorian==========================
+** Purpose: convert Hdate(year,month,day) to Gdate(year,month,day)
+** Arguments:
+** Input: Hijrah  date: year:HijriYear, month:HijriMonth, day:HijriDay
+** Output: Gregorian date: year:yg, month:mg, day:dg
+=========================ConvertHijriToGregorian============================*/
         static void ConvertHijriToGregorian(
             int HijriYear,
             int HijriMonth,
@@ -1107,13 +1111,13 @@ namespace System.Globalization
             dg = dt.Day;
         }
 
-        /*=================================GetAbsoluteDateUmAlQura==========================
-        **Action: Gets the Absolute date for the given UmAlQura date.  The absolute date means
-        **       the number of days from January 1st, 1 A.D.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
+/*=================================GetAbsoluteDateUmAlQura==========================
+**Action: Gets the Absolute date for the given UmAlQura date.  The absolute date means
+**       the number of days from January 1st, 1 A.D.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
         static long GetAbsoluteDateUmAlQura(int year, int month, int day)
         {
             //Caller should check the validaty of year, month and day.
@@ -1181,12 +1185,12 @@ namespace System.Globalization
             }
         }
 
-        /*========================ConvertGregorianToHijri============================
-        ** Purpose: convert DateTime to Hdate(year,month,day)
-        ** Arguments:
-        ** Input: DateTime
-        ** Output: Hijrah  date: year:HijriYear, month:HijriMonth, day:HijriDay
-        ============================================================================*/
+/*========================ConvertGregorianToHijri============================
+** Purpose: convert DateTime to Hdate(year,month,day)
+** Arguments:
+** Input: DateTime
+** Output: Hijrah  date: year:HijriYear, month:HijriMonth, day:HijriDay
+============================================================================*/
         static void ConvertGregorianToHijri(
             DateTime time,
             ref int HijriYear,
@@ -1208,7 +1212,8 @@ namespace System.Globalization
                 "Gregorian date is out of range."
             );
 
-            // Find the index where we should start our search by quessing the Hijri year that we will be in HijriYearInfo.
+            // Find the index where we should start our search by quessing the Hijri year that we will be in
+            // HijriYearInfo.
             // A Hijri year is 354 or 355 days.  Use 355 days so that we will search from a lower index.
 
             index = (int)((time.Ticks - minDate.Ticks) / Calendar.TicksPerDay) / 355;
@@ -1242,18 +1247,21 @@ namespace System.Globalization
             HijriYear = yh1;
         }
 
-        /*=================================GetDatePart==========================
-        **Action: Returns a given date part of this <i>DateTime</i>. This method is used
-        **       to compute the year, day-of-year, month, or day part.
-        **Returns:
-        **Arguments:
-        **Exceptions:  ArgumentException if part is incorrect.
-        **Notes:
-        **      First, we get the absolute date (the number of days from January 1st, 1 A.C) for the given ticks.
-        **      Use the formula (((AbsoluteDate - 226894) * 33) / (33 * 365 + 8)) + 1, we can a rough value for the UmAlQura year.
-        **      In order to get the exact UmAlQura year, we compare the exact absolute date for UmAlQuraYear and (UmAlQuraYear + 1).
-        **      From here, we can get the correct UmAlQura year.
-        ============================================================================*/
+/*=================================GetDatePart==========================
+**Action: Returns a given date part of this <i>DateTime</i>. This method is used
+**       to compute the year, day-of-year, month, or day part.
+**Returns:
+**Arguments:
+**Exceptions:  ArgumentException if part is incorrect.
+**Notes:
+**      First, we get the absolute date (the number of days from January 1st, 1 A.C) for the given
+ticks.
+**      Use the formula (((AbsoluteDate - 226894) * 33) / (33 * 365 + 8)) + 1, we can a rough value
+for the UmAlQura year.
+**      In order to get the exact UmAlQura year, we compare the exact absolute date for UmAlQuraYear
+and (UmAlQuraYear + 1).
+**      From here, we can get the correct UmAlQura year.
+============================================================================*/
 
         internal virtual int GetDatePart(DateTime time, int part)
         {
@@ -1401,12 +1409,12 @@ namespace System.Globalization
             return (GetDatePart(time, DatePartDayOfYear));
         }
 
-        /*
-        internal bool CouldBeLeapYear(int year)
-        {
-            return ((((year * 11) + 14) % 30) < 11);
-        }
-        */
+/*
+internal bool CouldBeLeapYear(int year)
+{
+return ((((year * 11) + 14) % 30) < 11);
+}
+*/
 
         // Returns the number of days in the month given by the year and
         // month arguments.
@@ -1569,7 +1577,8 @@ namespace System.Globalization
                 return false;
         }
 
-        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
+        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is
+        // invalid.
         //
 
 
@@ -1655,7 +1664,8 @@ namespace System.Globalization
                 }
                 Contract.EndContractBlock();
                 VerifyWritable();
-                // We allow year 99 to be set so that one can make ToFourDigitYearMax a no-op by setting TwoDigitYearMax to 99.
+                // We allow year 99 to be set so that one can make ToFourDigitYearMax a no-op by setting
+                // TwoDigitYearMax to 99.
                 twoDigitYearMax = value;
             }
         }

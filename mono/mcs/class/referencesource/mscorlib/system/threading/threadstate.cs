@@ -22,9 +22,9 @@ namespace System.Threading
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum ThreadState
     {
-        /*=========================================================================
-        ** Constants for thread states.
-        =========================================================================*/
+/*=========================================================================
+** Constants for thread states.
+=========================================================================*/
         Running = 0,
         StopRequested = 1,
         SuspendRequested = 2,

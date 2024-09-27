@@ -22,7 +22,8 @@ namespace System.Activities.Core.Presentation
 
         protected override void OnModelItemChanged(object newItem)
         {
-            // Make sequence designer always expand by default, but only if the user didnt explicitly specify collapsed or expanded.
+            // Make sequence designer always expand by default, but only if the user didnt explicitly specify
+            // collapsed or expanded.
             ViewStateService viewStateService =
                 this.Context.Services.GetService<ViewStateService>();
             if (viewStateService != null)

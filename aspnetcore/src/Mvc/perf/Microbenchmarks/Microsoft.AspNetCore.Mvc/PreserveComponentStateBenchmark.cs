@@ -48,7 +48,8 @@ public class PreserveComponentStateBenchmark
     // In general, so long as entries don't exceed the buffer limits we are ok.
     // 300 Kb is the upper limit of a reasonable payload for prerendered state
     // The 8386 was selected by serializing 100 weather forecast records as a reference
-    // For regular runs we only enable by default 30 entries and 8386 bytes per entry, which is about 250K of serialized
+    // For regular runs we only enable by default 30 entries and 8386 bytes per entry, which is about
+    // 250K of serialized
     // state on the limit of the accepted payload size budget for critical resources served from a page.
     [Params(
         30 /*, 100*/

@@ -7,11 +7,11 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Xml.Schema
 {
-    /*
-     * This class describes an attribute type and potential values.
-     * This encapsulates the information for one Attdef * in an
-     * Attlist in a DTD as described below:
-     */
+/*
+* This class describes an attribute type and potential values.
+* This encapsulates the information for one Attdef * in an
+* Attlist in a DTD as described below:
+*/
     internal sealed class SchemaAttDef : SchemaDeclBase, IDtdDefaultAttributeInfo
     {
         internal enum Reserve

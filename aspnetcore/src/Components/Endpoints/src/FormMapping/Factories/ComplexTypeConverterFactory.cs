@@ -30,10 +30,12 @@ internal class ComplexTypeConverterFactory(
     }
 
     // We are going to compile a function that maps all the properties for the type.
-    // Beware that the code below is not the actual exact code, just a simplification to understand what is happening at a high level.
+    // Beware that the code below is not the actual exact code, just a simplification to understand what
+    // is happening at a high level.
     // The general flow is as follows. For a type like Address { Street, City, Country, ZipCode }
     // we will generate a function that looks like:
-    // public bool TryRead(ref FormDataReader reader, Type type, FormDataSerializerOptions options, out Address? result, out bool found)
+    // public bool TryRead(ref FormDataReader reader, Type type, FormDataSerializerOptions options, out
+    // Address? result, out bool found)
     // {
     //     bool foundProperty;
     //     bool succeeded = true;
@@ -48,25 +50,29 @@ internal class ComplexTypeConverterFactory(
 
     //     var streetConverter = options.ResolveConverter(typeof(string));
     //     reader.PushPrefix("Street");
-    //     succeeded &= streetConverter.TryRead(ref reader, typeof(string), options, out street, out foundProperty);
+    //     succeeded &= streetConverter.TryRead(ref reader, typeof(string), options, out street, out
+    // foundProperty);
     //     found ||= foundProperty;
     //     reader.PopPrefix("Street");
     //
     //     var cityConverter = options.ResolveConverter(typeof(string));
     //     reader.PushPrefix("City");
-    //     succeeded &= ciryConverter.TryRead(ref reader, typeof(string), options, out street, out foundProperty);
+    //     succeeded &= ciryConverter.TryRead(ref reader, typeof(string), options, out street, out
+    // foundProperty);
     //     found ||= foundProperty;
     //     reader.PopPrefix("City");
     //
     //     var countryConverter = options.ResolveConverter(typeof(string));
     //     reader.PushPrefix("Country");
-    //     succeeded &= countryConverter.TryRead(ref reader, typeof(string), options, out street, out foundProperty);
+    //     succeeded &= countryConverter.TryRead(ref reader, typeof(string), options, out street, out
+    // foundProperty);
     //     found ||= foundProperty;
     //     reader.PopPrefix("Country");
     //
     //     var zipCodeConverter = options.ResolveConverter(typeof(string));
     //     reader.PushPrefix("ZipCode");
-    //     succeeded &= zipCodeConverter.TryRead(ref reader, typeof(string), options, out street, out foundProperty);
+    //     succeeded &= zipCodeConverter.TryRead(ref reader, typeof(string), options, out street, out
+    // foundProperty);
     //     found ||= foundProperty;
     //     reader.PopPrefix("ZipCode");
     //
@@ -87,13 +93,16 @@ internal class ComplexTypeConverterFactory(
     // }
     //
     // The actual blocks above are going to be generated using System.Linq.Expressions.
-    // Instead of resolving the property converters every time, we might consider caching the converters in a dictionary and passing an
+    // Instead of resolving the property converters every time, we might consider caching the converters
+    // in a dictionary and passing an
     // extra parameter to the function with them in it.
     // The final converter is something like
     // internal class CompiledComplexTypeConverter
-    //     (ConverterDelegate<FormDataReader, Type, FormDataSerializerOptions, out object, out bool> converterFunc)
+    //     (ConverterDelegate<FormDataReader, Type, FormDataSerializerOptions, out object, out bool>
+    // converterFunc)
     // {
-    //     public bool TryRead(ref FormDataReader reader, Type type, FormDataSerializerOptions options, out object? result, out bool found)
+    //     public bool TryRead(ref FormDataReader reader, Type type, FormDataSerializerOptions options,
+    // out object? result, out bool found)
     //     {
     //         return converterFunc(ref reader, type, options, out result, out found);
     //     }

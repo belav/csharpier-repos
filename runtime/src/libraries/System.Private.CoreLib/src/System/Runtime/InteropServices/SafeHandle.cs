@@ -15,7 +15,8 @@ namespace System.Runtime.InteropServices
     public abstract partial class SafeHandle : CriticalFinalizerObject, IDisposable
     {
 #if DEBUG && CORECLR
-        /// <summary>Indicates whether debug tracking and logging of SafeHandle finalization is enabled.</summary>
+        /// <summary>Indicates whether debug tracking and logging of SafeHandle finalization is
+        // enabled.</summary>
         private static readonly bool s_logFinalization =
             Environment.GetEnvironmentVariable("DEBUG_SAFEHANDLE_FINALIZATION") == "1";
 
@@ -37,7 +38,8 @@ namespace System.Runtime.InteropServices
         /// <summary>Specifies the handle to be wrapped.</summary>
         protected IntPtr handle;
 
-        /// <summary>Combined ref count and closed/disposed flags (so we can atomically modify them).</summary>
+        /// <summary>Combined ref count and closed/disposed flags (so we can atomically modify
+        // them).</summary>
         private volatile int _state;
 
         /// <summary>Whether we can release this handle.</summary>

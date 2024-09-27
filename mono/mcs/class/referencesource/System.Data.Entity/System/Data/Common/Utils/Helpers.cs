@@ -76,7 +76,8 @@ namespace System.Data.Common.Utils
         /// <typeparam name="TElement">The element type of the arrays</typeparam>
         /// <param name="args">An array that provides the successive elements of the new array</param>
         /// <param name="arg">An instance the provides the first element of the new array</param>
-        /// <returns>A new array containing the specified argument as the first element and the specified successive elements</returns>
+        /// <returns>A new array containing the specified argument as the first element and the specified
+        // successive elements</returns>
         internal static TElement[] Prepend<TElement>(TElement[] args, TElement arg)
         {
             Debug.Assert(args != null, "Ensure 'args' is non-null before calling Prepend");
@@ -98,7 +99,8 @@ namespace System.Data.Common.Utils
         /// </summary>
         /// <typeparam name="TNode">The type of each node in the tree</typeparam>
         /// <param name="nodes">The leaf nodes to combine into an balanced binary tree</param>
-        /// <param name="combinator">A function that produces a new node that is the combination of the two specified argument nodes</param>
+        /// <param name="combinator">A function that produces a new node that is the combination of the two
+        // specified argument nodes</param>
         /// <returns>The single node that is the root of the balanced binary tree</returns>
         internal static TNode BuildBalancedTreeInPlace<TNode>(
             IList<TNode> nodes,
@@ -167,9 +169,13 @@ namespace System.Data.Common.Utils
         /// </summary>
         /// <typeparam name="TNode">The type of each node in the tree structure</typeparam>
         /// <param name="root">The node that represents the root of the tree</param>
-        /// <param name="isLeaf">A function that determines whether or not a given node should be considered a leaf node</param>
-        /// <param name="getImmediateSubNodes">A function that traverses the tree by retrieving the <b>immediate</b> descendants of a (non-leaf) node.</param>
-        /// <returns>An enumerable containing the leaf nodes (as determined by <paramref name="isLeaf"/>) retrieved by traversing the tree from <paramref name="root"/> using <paramref name="getImmediateSubNodes"/>.</returns>
+        /// <param name="isLeaf">A function that determines whether or not a given node should be considered
+        // a leaf node</param>
+        /// <param name="getImmediateSubNodes">A function that traverses the tree by retrieving the
+        // <b>immediate</b> descendants of a (non-leaf) node.</param>
+        /// <returns>An enumerable containing the leaf nodes (as determined by <paramref name="isLeaf"/>)
+        // retrieved by traversing the tree from <paramref name="root"/> using <paramref
+        // name="getImmediateSubNodes"/>.</returns>
         internal static IEnumerable<TNode> GetLeafNodes<TNode>(
             TNode root,
             Func<TNode, bool> isLeaf,

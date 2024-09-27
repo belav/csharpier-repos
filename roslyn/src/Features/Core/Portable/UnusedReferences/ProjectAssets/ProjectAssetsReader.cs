@@ -10,15 +10,19 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
 {
-    // This class will read the dependency heirarchy from the project.assets.json file. The format of this file
-    // is subject to change and in the future this information will be provided by an API.  See https://github.com/dotnet/roslyn/issues/50054
+    // This class will read the dependency heirarchy from the project.assets.json file. The format of
+    // this file
+    // is subject to change and in the future this information will be provided by an API.  See
+    // https://github.com/dotnet/roslyn/issues/50054
     internal static partial class ProjectAssetsReader
     {
-        // NuGet will include entries to keep empty folders from being removed. These entries can be ignored.
+        // NuGet will include entries to keep empty folders from being removed. These entries can be
+        // ignored.
         private const string NuGetEmptyFileName = "_._";
 
         /// <summary>
-        /// Enhances references with the assemblies they bring into the compilation and their dependency hierarchy.
+        /// Enhances references with the assemblies they bring into the compilation and their dependency
+        // hierarchy.
         /// </summary>
         public static ImmutableArray<ReferenceInfo> AddDependencyHierarchies(
             ImmutableArray<ReferenceInfo> projectReferences,
@@ -40,7 +44,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 return ImmutableArray<ReferenceInfo>.Empty;
             }
 
-            // We keep a list of references that were automatically added by SDKs or other sources so that we can ignore them
+            // We keep a list of references that were automatically added by SDKs or other sources so that we
+            // can ignore them
             // since they can't be removed even if they were unused.
             var autoReferences = projectAssets
                 .Project?.Frameworks?.Values.Where(framework => framework.Dependencies != null)
@@ -53,7 +58,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 .ToImmutableHashSet();
             autoReferences ??= ImmutableHashSet<string>.Empty;
 
-            // Targets contain a hashmap of Libraries keyed by `{LibraryName}/{LibraryVersion}` we need to split these keys
+            // Targets contain a hashmap of Libraries keyed by `{LibraryName}/{LibraryVersion}` we need to split
+            // these keys
             // and create a mapping of LibraryName to the complete library key.
             var targetLibraryKeys = projectAssets.Targets.ToImmutableDictionary(
                 t => t.Key,
@@ -105,7 +111,8 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             );
 
             // Since the reference being enhanced was provided by the Project System we should always return an
-            // enhanced reference with its original ItemSpecification. The project assets file typically works with
+            // enhanced reference with its original ItemSpecification. The project assets file typically works
+            // with
             // full paths, however project reference typically are relative. This ensures that when changes are
             // persisted back by the Project System, it will match the specification it is expecting.
             return reference?.WithItemSpecification(referenceInfo.ItemSpecification);

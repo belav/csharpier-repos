@@ -195,7 +195,8 @@ public class PageRemoteAttributeTest
         RouteData routeData
     )
     {
-        // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
+        // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory
+        // instance)
         // through the HttpContext.
         var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 

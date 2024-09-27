@@ -40,17 +40,22 @@ namespace System.Web.Compilation
     ///   each of its subdirectories (recursively) if it finds our assembly and type on the
     ///   machine.
     /// Note: for a normal BuildProvider, the input file is represented by the protected VirtualPath
-    ///   property of the base.  But for this build provider (same as for WebReferencesBuildProvider, the
-    ///   asmx web references build provider), the input is an entire directory, which is still represented
+    ///   property of the base.  But for this build provider (same as for WebReferencesBuildProvider,
+    // the
+    ///   asmx web references build provider), the input is an entire directory, which is still
+    // represented
     ///   by the protected VirtualPath property.
     /// TO DEBUG: The easiest way to debug is to debug the aspnet_compiler.exe command-line tool
     ///   while it compiles a website with a .svcmap file in it.
     ///   As an example, you could debug aspnet_compiler.exe with this command-line to debug
     ///   one of the suites:
     ///
-    ///     /v MiddleService -p {path}\ddsuites\src\vs\vb\IndigoTools\BuildProvider\WCFBuildProvider1\WebSite\MiddleService -c c:\temp\output
+    ///     /v MiddleService -p
+    // {path}\ddsuites\src\vs\vb\IndigoTools\BuildProvider\WCFBuildProvider1\WebSite\MiddleService -c
+    // c:\temp\output
     ///
-    ///   Important: it will only call the build provider if the sources in the website have changed or if you delete
+    ///   Important: it will only call the build provider if the sources in the website have changed or
+    // if you delete
     ///   the deleted output folder's contents.
     ///
     /// Data services (Astoria): in order to support Astoria "data services" we added code
@@ -114,7 +119,8 @@ namespace System.Web.Compilation
                     // In .NET FX 3.5, the ADO.NET Data Service build provider was included as part of the
                     // WCF build provider. In .NET FX 4.0, it is a separate build provider. However, under certain
                     // circumstances (i.e. design time/Visual Studio), we may call the 4.0 version of the build provider
-                    // when we actually want the web site to target .NET FX 3.5, and in that case, we have to emulate the
+                    // when we actually want the web site to target .NET FX 3.5, and in that case, we have to emulate
+                    // the
                     // old behavior.
                     if (BuildManager.TargetFramework.Version.Major < 4)
                     {
@@ -289,7 +295,8 @@ namespace System.Web.Compilation
         {
             foreach (ProxyGenerationError generationError in errors)
             {
-                // NOTE: the ASP.Net framework does not handle an error list, so we only give them the first error message
+                // NOTE: the ASP.Net framework does not handle an error list, so we only give them the first error
+                // message
                 // all warning messages are ignored today
                 //
                 // We treat all error messages from WsdlImport and ProxyGenerator as warning messages
@@ -384,8 +391,10 @@ namespace System.Web.Compilation
         /// By default we treat all error messages from WsdlImporter as warnings,
         /// and they will be ignored if valid code has been generated.
         /// We may hit other errors when we parse the metadata files.
-        /// Those errors (which are usually because of a bad file) will not be ignored, because the user can fix them.
-        /// If the WsdlImporter hasn't generated any code as we expect, we have to consider some of the error messages are fatal.
+        /// Those errors (which are usually because of a bad file) will not be ignored, because the user can
+        // fix them.
+        /// If the WsdlImporter hasn't generated any code as we expect, we have to consider some of the
+        // error messages are fatal.
         /// We collect those messages and report to the user.
         /// </summary>
         /// <param name="referenceDisplayName">The name of the generated reference</param>
@@ -575,7 +584,8 @@ namespace System.Web.Compilation
         }
 
         /// <summary>
-        /// Gets the virtual path to the application's App_WebReferences directory, e.g. "/MyApp/App_WebReferences/"
+        /// Gets the virtual path to the application's App_WebReferences directory, e.g.
+        // "/MyApp/App_WebReferences/"
         /// </summary>
         private static string GetWebRefDirectoryVirtualPath()
         {

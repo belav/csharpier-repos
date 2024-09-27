@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         }
 
         /// <summary>
-        /// Gets the spans to fix by document for the <see cref="FixAllScope"/> for this fix all occurences fix.
+        /// Gets the spans to fix by document for the <see cref="FixAllScope"/> for this fix all occurences
+        // fix.
         /// If no spans are specified, it indicates the entire document needs to be fixed.
         /// </summary>
         internal async Task<

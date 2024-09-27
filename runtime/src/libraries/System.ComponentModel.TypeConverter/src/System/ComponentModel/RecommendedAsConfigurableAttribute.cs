@@ -38,13 +38,17 @@ namespace System.ComponentModel
 
         /// <summary>
         /// Specifies
-        /// that a property can be used as an application setting. This <see langword='static '/>field is read-only.
+        /// that a property can be used as an application setting. This <see langword='static '/>field is
+        // read-only.
         /// </summary>
         public static readonly RecommendedAsConfigurableAttribute Yes =
             new RecommendedAsConfigurableAttribute(true);
 
         /// <summary>
-        /// Specifies the default value for the <see cref='System.ComponentModel.RecommendedAsConfigurableAttribute'/>, which is <see cref='System.ComponentModel.RecommendedAsConfigurableAttribute.No'/>. This <see langword='static '/>field is
+        /// Specifies the default value for the <see
+        // cref='System.ComponentModel.RecommendedAsConfigurableAttribute'/>, which is <see
+        // cref='System.ComponentModel.RecommendedAsConfigurableAttribute.No'/>. This <see langword='static
+        // '/>field is
         /// read-only.
         /// </summary>
         public static readonly RecommendedAsConfigurableAttribute Default = No;

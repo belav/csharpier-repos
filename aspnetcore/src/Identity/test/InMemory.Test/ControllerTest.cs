@@ -32,7 +32,8 @@ public class ControllerTest
             .Returns(Task.FromResult(0))
             .Verifiable();
         // REVIEW: is persistant mocking broken
-        //It.Is<AuthenticationProperties>(v => v.IsPersistent == isPersistent))).Returns(Task.FromResult(0)).Verifiable();
+        //It.Is<AuthenticationProperties>(v => v.IsPersistent ==
+        // isPersistent))).Returns(Task.FromResult(0)).Verifiable();
         var contextAccessor = new Mock<IHttpContextAccessor>();
         contextAccessor.Setup(a => a.HttpContext).Returns(context);
         var services = new ServiceCollection()

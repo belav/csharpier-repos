@@ -6,9 +6,12 @@ using System.Diagnostics;
 namespace System.Globalization
 {
     /// <summary>
-    /// Modern Persian calendar is a solar observation based calendar. Each new year begins on the day when the vernal equinox occurs before noon.
-    /// The epoch is the date of the vernal equinox prior to the epoch of the Islamic calendar (March 19, 622 Julian or March 22, 622 Gregorian)
-    /// There is no Persian year 0. Ordinary years have 365 days. Leap years have 366 days with the last month (Esfand) gaining the extra day.
+    /// Modern Persian calendar is a solar observation based calendar. Each new year begins on the day
+    // when the vernal equinox occurs before noon.
+    /// The epoch is the date of the vernal equinox prior to the epoch of the Islamic calendar (March
+    // 19, 622 Julian or March 22, 622 Gregorian)
+    /// There is no Persian year 0. Ordinary years have 365 days. Leap years have 366 days with the last
+    // month (Esfand) gaining the extra day.
     /// </summary>
     /// <remarks>
     ///  Calendar support range:
@@ -61,7 +64,8 @@ namespace System.Globalization
                 throw new ArgumentOutOfRangeException(null, SR.ArgumentOutOfRange_BadYearMonthDay);
             }
 
-            // day is one based, make 0 based since this will be the number of days we add to beginning of year below
+            // day is one based, make 0 based since this will be the number of days we add to beginning of year
+            // below
             int ordinalDay = DaysInPreviousMonths(month) + day - 1;
             int approximateDaysFromEpochForYearStart = (int)(
                 CalendricalCalculationsHelper.MeanTropicalYearInDays * (year - 1)

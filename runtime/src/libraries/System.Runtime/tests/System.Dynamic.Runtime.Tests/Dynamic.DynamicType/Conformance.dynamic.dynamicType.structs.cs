@@ -8,7 +8,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     // <Title>Structs</Title>
     // <Description>
     //  is by design because of "d.s.Field = 4;" equals as "dynamic d2 = d.s; d2.Field = 4;" and
-    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin value wasn't changed.
+    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin
+    // value wasn't changed.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -64,7 +65,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     // <Title>Structs</Title>
     // <Description>
     //  is by design because of "d.s.Field = 4;" equals as "dynamic d2 = d.s; d2.Field = 4;" and
-    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin value wasn't changed.
+    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin
+    // value wasn't changed.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>
@@ -116,7 +118,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.strcts.strc
     // <Title>Structs</Title>
     // <Description>
     //  is by design because of "d.s.Field = 4;" equals as "dynamic d2 = d.s; d2.Field = 4;" and
-    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin value wasn't changed.
+    // "object d2 = d.s; d2.Field = 4;", the modification occurs on the boxed object, so the origin
+    // value wasn't changed.
     // </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects Status=success></Expects>

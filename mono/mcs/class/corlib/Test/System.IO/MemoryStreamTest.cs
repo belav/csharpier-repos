@@ -284,19 +284,19 @@ namespace MonoTests.System.IO
         {
             byte[] readBytes = new byte[20];
 
-            /* Test simple read */
+/* Test simple read */
             testStream.Read(readBytes, 0, 10);
             VerifyTestData("R1", readBytes, 0, 10);
 
-            /* Seek back to beginning */
+/* Seek back to beginning */
 
             testStream.Seek(0, SeekOrigin.Begin);
 
-            /* Read again, bit more this time */
+/* Read again, bit more this time */
             testStream.Read(readBytes, 0, 20);
             VerifyTestData("R2", readBytes, 0, 20);
 
-            /* Seek to 20 bytes from End */
+/* Seek to 20 bytes from End */
             testStream.Seek(-20, SeekOrigin.End);
             testStream.Read(readBytes, 0, 20);
             VerifyTestData("R3", readBytes, 80, 20);

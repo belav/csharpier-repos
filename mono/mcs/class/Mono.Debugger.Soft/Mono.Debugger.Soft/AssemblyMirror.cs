@@ -149,10 +149,10 @@ namespace Mono.Debugger.Soft
         }
 
 #if ENABLE_CECIL
-        /*
-         * An optional Cecil assembly which could be used to access metadata instead
-         * of reading it from the debuggee.
-         */
+/*
+* An optional Cecil assembly which could be used to access metadata instead
+* of reading it from the debuggee.
+*/
         public AssemblyDefinition Metadata
         {
             get

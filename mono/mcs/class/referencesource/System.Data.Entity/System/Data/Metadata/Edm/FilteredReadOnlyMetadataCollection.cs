@@ -31,7 +31,7 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// Class to filter stuff out from a metadata collection
     /// </summary>
-    /*
+/*
 
 
 */
@@ -43,7 +43,8 @@ namespace System.Data.Metadata.Edm
     {
         #region Constructors
         /// <summary>
-        /// The constructor for constructing a read-only metadata collection to wrap another MetadataCollection.
+        /// The constructor for constructing a read-only metadata collection to wrap another
+        // MetadataCollection.
         /// </summary>
         /// <param name="collection">The metadata collection to wrap</param>
         /// <exception cref="System.ArgumentNullException">Thrown if collection argument is null</exception>
@@ -77,7 +78,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="identity">The identity of the item to search for</param>
         /// <returns>An item from the collection</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is
+        // null</exception>
         /// <exception cref="System.NotSupportedException">Thrown if setter is called</exception>
         public override TDerived this[string identity]
         {
@@ -101,8 +103,10 @@ namespace System.Data.Metadata.Edm
         /// <param name="identity">The identity of the item to search for</param>
         /// <param name="ignoreCase">Whether case is ignore in the search</param>
         /// <returns>An item from the collection</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">Thrown if the Collection does not have an item with the given identity</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">Thrown if the Collection does not have an item with
+        // the given identity</exception>
         public override TDerived GetValue(string identity, bool ignoreCase)
         {
             TBase item = _source.GetValue(identity, ignoreCase);
@@ -119,8 +123,10 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="identity">The identity of the item to check for</param>
         /// <returns>True if the collection contains the item with the given identity</returns>
-        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is null</exception>
-        /// <exception cref="System.ArgumentException">Thrown if identity argument passed in is empty string</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if identity argument passed in is
+        // null</exception>
+        /// <exception cref="System.ArgumentException">Thrown if identity argument passed in is empty
+        // string</exception>
         public override bool Contains(string identity)
         {
             TBase item;

@@ -23,7 +23,7 @@ namespace MonoTests.Microsoft.Build.Tasks
             );
             string junk_file = TestResourceHelper.GetFullPathOfResource("Test/resources/junk.txt");
 
-            /* {Include, LogicalName, DependentUpon, TargetPath} */
+/* {Include, LogicalName, DependentUpon, TargetPath} */
             resx_no_culture_files = new string[,]
             {
                 // With dependent file

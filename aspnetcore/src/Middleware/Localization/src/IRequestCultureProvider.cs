@@ -16,7 +16,8 @@ public interface IRequestCultureProvider
     /// <param name="httpContext">The <see cref="HttpContext"/> for the request.</param>
     /// <returns>
     ///     The determined <see cref="ProviderCultureResult"/>.
-    ///     Returns <c>null</c> if the provider couldn't determine a <see cref="ProviderCultureResult"/>.
+    ///     Returns <c>null</c> if the provider couldn't determine a <see
+    // cref="ProviderCultureResult"/>.
     /// </returns>
     Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext);
 }

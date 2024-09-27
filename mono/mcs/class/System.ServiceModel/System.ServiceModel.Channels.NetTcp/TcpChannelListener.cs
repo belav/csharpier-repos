@@ -226,7 +226,7 @@ namespace System.ServiceModel.Channels.NetTcp
             }
             catch (ObjectDisposedException)
             {
-                /* If an accept fails, just ignore it. Maybe the remote peer disconnected already */
+/* If an accept fails, just ignore it. Maybe the remote peer disconnected already */
             }
             finally
             {
@@ -238,7 +238,7 @@ namespace System.ServiceModel.Channels.NetTcp
                     }
                     catch (ObjectDisposedException)
                     {
-                        /* If this fails, we must have disposed the listener */
+/* If this fails, we must have disposed the listener */
                     }
                 }
             }

@@ -6,7 +6,8 @@ using System.Text;
 using Mono.Cecil;
 
 //
-// This class generates the icall_trampoline_dispatch () function used by the interpreter to call native code on WASM.
+// This class generates the icall_trampoline_dispatch () function used by the interpreter to call
+// native code on WASM.
 // It should be kept in sync with mono_wasm_interp_to_native_trampoline () in the runtime.
 //
 

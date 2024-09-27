@@ -17,7 +17,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-// All methods prefixed with 'Serialized' have locked access through the shared Memoizer. Do not call it from outside the Memoizer's scope.
+// All methods prefixed with 'Serialized' have locked access through the shared Memoizer. Do not
+// call it from outside the Memoizer's scope.
 namespace System.Data.Mapping
 {
     using System.Data.Common.CommandTrees.ExpressionBuilder;
@@ -46,11 +47,13 @@ namespace System.Data.Mapping
             // List of assemblies from which we have loaded views from
             private List<Assembly> m_knownViewGenAssemblies = new List<Assembly>();
 
-            // Indicates whether the views are being fetched from a generated class or they are being generated at the runtime
+            // Indicates whether the views are being fetched from a generated class or they are being generated
+            // at the runtime
             private bool m_generatedViewsMode = true;
 
             /// <summary>
-            /// Caches computation of view generation per <see cref="StorageEntityContainerMapping"/>. Cached value contains both query and update views.
+            /// Caches computation of view generation per <see cref="StorageEntityContainerMapping"/>. Cached
+            // value contains both query and update views.
             /// </summary>
             private readonly Memoizer<
                 EntityContainer,
@@ -58,7 +61,8 @@ namespace System.Data.Mapping
             > m_generatedViewsMemoizer;
 
             /// <summary>
-            /// Caches computation of getting Type-specific Query Views - either by view gen or user-defined input.
+            /// Caches computation of getting Type-specific Query Views - either by view gen or user-defined
+            // input.
             /// </summary>
             private readonly Memoizer<
                 OfTypeQVCacheKey,
@@ -109,7 +113,8 @@ namespace System.Data.Mapping
                     );
 
                 // We get here because memoizer didn't find an entry for the container.
-                // It might happen that the entry with generated views already exists for the counterpart container, so check it first.
+                // It might happen that the entry with generated views already exists for the counterpart container,
+                // so check it first.
                 EntityContainer counterpartContainer =
                     container.DataSpace == DataSpace.CSpace
                         ? entityContainerMap.StorageEntityContainer
@@ -216,9 +221,11 @@ namespace System.Data.Mapping
             }
 
             /// <summary>
-            /// Generates a single query view for a given Extent and type. It is used to generate OfType and OfTypeOnly views.
+            /// Generates a single query view for a given Extent and type. It is used to generate OfType and
+            // OfTypeOnly views.
             /// </summary>
-            /// <param name="includeSubtypes">Whether the view should include extents that are subtypes of the given entity</param>
+            /// <param name="includeSubtypes">Whether the view should include extents that are subtypes of the
+            // given entity</param>
             private bool TryGenerateQueryViewOfType(
                 EntityContainer entityContainer,
                 EntitySetBase entity,
@@ -339,23 +346,31 @@ namespace System.Data.Mapping
             /// string.
             /// There are a series of steps that we go through for discovering a view for an extent.
             /// To start with we assume that we are working with Generated Views. To find out the
-            /// generated view we go to the ObjectItemCollection and see if it is not-null. If the ObjectItemCollection
+            /// generated view we go to the ObjectItemCollection and see if it is not-null. If the
+            // ObjectItemCollection
             /// is non-null, we get the view generation assemblies that it might have cached during the
             /// Object metadata discovery.If there are no view generation assemblies we switch to the
             /// runtime view generation strategy. If there are view generation assemblies, we get the list and
-            /// go through them and see if there are any assemblies that are there from which we have not already loaded
+            /// go through them and see if there are any assemblies that are there from which we have not
+            // already loaded
             /// the views. We collect the views from assemblies that we have not already collected from earlier.
             /// If the ObjectItemCollection is null and we are in the view generation mode, that means that
-            /// the query or update is issued from the Value layer and this is the first time view has been asked for.
+            /// the query or update is issued from the Value layer and this is the first time view has been
+            // asked for.
             /// The compile time view gen for value layer queries will work for very simple scenarios.
-            /// If the users wants to get the performance benefit, they should call MetadataWorkspace.LoadFromAssembly.
-            /// At this point we go through the referenced assemblies of the entry assembly( this wont work for Asp.net
+            /// If the users wants to get the performance benefit, they should call
+            // MetadataWorkspace.LoadFromAssembly.
+            /// At this point we go through the referenced assemblies of the entry assembly( this wont work for
+            // Asp.net
             /// or if the viewgen assembly was not referenced by the executing application).
-            /// and try to see if there were any view gen assemblies. If there are, we collect the views for all extents.
+            /// and try to see if there were any view gen assemblies. If there are, we collect the views for all
+            // extents.
             /// Once we have all the generated views gathered, we try to get the view for the extent passed in.
             /// If we find one we will return it. If we can't find one an exception will be thrown.
-            /// If there were no view gen assemblies either in the ObjectItemCollection or in the list of referenced
-            /// assemblies of calling assembly, we change the mode to runtime view generation and will continue to
+            /// If there were no view gen assemblies either in the ObjectItemCollection or in the list of
+            // referenced
+            /// assemblies of calling assembly, we change the mode to runtime view generation and will continue
+            // to
             /// be in that mode for the rest of the lifetime of the mapping item collection.
             /// </summary>
             internal GeneratedView GetGeneratedView(
@@ -365,7 +380,8 @@ namespace System.Data.Mapping
             )
             {
                 //First check if we have collected a view from user-defined query views
-                //Dont need to worry whether to generate Query view or update viw, because that is relative to the extent.
+                //Dont need to worry whether to generate Query view or update viw, because that is relative to the
+                // extent.
                 GeneratedView view;
 
                 if (TryGetUserDefinedQueryView(extent, out view))
@@ -611,7 +627,8 @@ namespace System.Data.Mapping
                     );
                 }
 
-                // third check, prior to the check, we collect all the views in the entity view container to the dictionary
+                // third check, prior to the check, we collect all the views in the entity view container to the
+                // dictionary
                 // if the views are changed then we will throw exception out
                 if (this.VerifyViewsHaveNotChanged(workspace, entityViewContainer))
                 {
@@ -787,7 +804,8 @@ namespace System.Data.Mapping
                 ItemCollection itemCollection;
                 if (!workspace.TryGetItemCollection(DataSpace.OSpace, out itemCollection))
                 {
-                    //Possible enhancement : Think about achieving the same thing without creating Object Item Collection.
+                    //Possible enhancement : Think about achieving the same thing without creating Object Item
+                    // Collection.
                     objectCollection = new ObjectItemCollection();
                     itemCollection = objectCollection;
                     // The GetEntryAssembly method can return a null reference

@@ -29,8 +29,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly ImportSectionNode _containingImportSection;
 
         /// <summary>
-        /// Import thunks are used to call a runtime-provided helper which fixes up an indirection cell in a particular
-        /// import section. Optionally they may also contain a relocation for a specific indirection cell to fix up.
+        /// Import thunks are used to call a runtime-provided helper which fixes up an indirection cell in a
+        // particular
+        /// import section. Optionally they may also contain a relocation for a specific indirection cell to
+        // fix up.
         /// </summary>
         public ImportThunk(
             NodeFactory factory,

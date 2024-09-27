@@ -42,7 +42,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// It is possible to use <see cref="JsonConverterFactory"/> instances with this property.
         ///
         /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/>, the value of
-        /// <see cref="CustomConverter"/> will be mapped from <see cref="JsonConverterAttribute" /> annotations.
+        /// <see cref="CustomConverter"/> will be mapped from <see cref="JsonConverterAttribute" />
+        // annotations.
         /// </remarks>
         public JsonConverter? CustomConverter
         {
@@ -111,7 +112,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <remarks>
         /// The first parameter denotes the parent object, the second parameter denotes the property value.
         ///
-        /// Setting the predicate to <see langword="null"/> is equivalent to always serializing the property value.
+        /// Setting the predicate to <see langword="null"/> is equivalent to always serializing the property
+        // value.
         ///
         /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/>,
         /// the value of <see cref="JsonIgnoreAttribute.Condition"/> will map to this predicate.
@@ -157,7 +159,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// </exception>
         /// <remarks>
         /// When resolving metadata via <see cref="DefaultJsonTypeInfoResolver"/> this
-        /// will be populated with the underlying <see cref="MemberInfo" /> of the serialized property or field.
+        /// will be populated with the underlying <see cref="MemberInfo" /> of the serialized property or
+        // field.
         ///
         /// Setting a custom attribute provider will have no impact on the contract model,
         /// but serves as metadata for downstream contract modifiers.
@@ -177,12 +180,15 @@ namespace System.Text.Json.Serialization.Metadata
         internal JsonObjectCreationHandling EffectiveObjectCreationHandling { get; private set; }
 
         /// <summary>
-        /// Gets or sets a value indicating if the property or field should be replaced or populated during deserialization.
+        /// Gets or sets a value indicating if the property or field should be replaced or populated during
+        // deserialization.
         /// </summary>
         /// <remarks>
-        /// Initial value for this property is based on the presence of <see cref="JsonObjectCreationHandlingAttribute"/> attribute on the property.
+        /// Initial value for this property is based on the presence of <see
+        // cref="JsonObjectCreationHandlingAttribute"/> attribute on the property.
         /// When <see langword="null"/> effective handling will be resolved based on
-        /// capability of property converter to populate, containing type's <see cref="JsonTypeInfo.PreferredPropertyObjectCreationHandling"/>.
+        /// capability of property converter to populate, containing type's <see
+        // cref="JsonTypeInfo.PreferredPropertyObjectCreationHandling"/>.
         /// and <see cref="JsonSerializerOptions.PreferredObjectCreationHandling"/> value.
         /// </remarks>
         public JsonObjectCreationHandling? ObjectCreationHandling
@@ -220,8 +226,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// The current <see cref="PropertyType"/> is not valid for use with extension data.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this property will be mapped from <see cref="JsonExtensionDataAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this property will be mapped from <see cref="JsonExtensionDataAttribute"/>
+        // annotations.
         /// </remarks>
         public bool IsExtensionData
         {
@@ -250,12 +258,16 @@ namespace System.Text.Json.Serialization.Metadata
         /// The <see cref="JsonPropertyInfo"/> instance has been locked for further modification.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
         /// the value of this property will be mapped from <see cref="JsonRequiredAttribute"/> annotations.
         ///
-        /// For contracts using <see cref="DefaultJsonTypeInfoResolver"/>, properties using the <see langword="required"/> keyword
-        /// will also map to this setting, unless deserialization uses a SetsRequiredMembersAttribute on a constructor that populates all required properties.
-        /// <see langword="required"/> keyword is currently not supported in <see cref="JsonSerializerContext"/> contracts.
+        /// For contracts using <see cref="DefaultJsonTypeInfoResolver"/>, properties using the <see
+        // langword="required"/> keyword
+        /// will also map to this setting, unless deserialization uses a SetsRequiredMembersAttribute on a
+        // constructor that populates all required properties.
+        /// <see langword="required"/> keyword is currently not supported in <see
+        // cref="JsonSerializerContext"/> contracts.
         /// </remarks>
         public bool IsRequired
         {
@@ -530,7 +542,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             if (numberHandlingIsApplicable)
             {
-                // Priority 1: Get handling from attribute on property/field, its parent class type or property type.
+                // Priority 1: Get handling from attribute on property/field, its parent class type or property
+                // type.
                 JsonNumberHandling? handling =
                     NumberHandling ?? ParentTypeInfo.NumberHandling ?? _jsonTypeInfo.NumberHandling;
 
@@ -697,7 +710,8 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         /// <summary>
-        /// Creates a <see cref="JsonPropertyInfo"/> instance whose type matches that of the current property.
+        /// Creates a <see cref="JsonPropertyInfo"/> instance whose type matches that of the current
+        // property.
         /// </summary>
         internal abstract JsonParameterInfo CreateJsonParameterInfo(
             JsonParameterInfoValues parameterInfoValues
@@ -766,7 +780,8 @@ namespace System.Text.Json.Serialization.Metadata
         // There are 3 copies of the property name:
         // 1) Name. The unescaped property name.
         // 2) NameAsUtf8Bytes. The Utf8 version of Name. Used during deserialization for property lookup.
-        // 3) EscapedNameSection. The escaped version of NameAsUtf8Bytes plus the wrapping quotes and a trailing colon. Used during serialization.
+        // 3) EscapedNameSection. The escaped version of NameAsUtf8Bytes plus the wrapping quotes and a
+        // trailing colon. Used during serialization.
 
         /// <summary>
         /// Gets or sets the JSON property name used when serializing the property.
@@ -776,10 +791,13 @@ namespace System.Text.Json.Serialization.Metadata
         /// The <see cref="JsonPropertyInfo"/> instance has been locked for further modification.
         /// </exception>
         /// <remarks>
-        /// The value of <see cref="Name"/> cannot conflict with that of other <see cref="JsonPropertyInfo"/> defined in the declaring <see cref="JsonTypeInfo"/>.
+        /// The value of <see cref="Name"/> cannot conflict with that of other <see
+        // cref="JsonPropertyInfo"/> defined in the declaring <see cref="JsonTypeInfo"/>.
         ///
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value typically reflects the underlying .NET member name, the name derived from <see cref="JsonSerializerOptions.PropertyNamingPolicy" />,
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value typically reflects the underlying .NET member name, the name derived from <see
+        // cref="JsonSerializerOptions.PropertyNamingPolicy" />,
         /// or the value specified in <see cref="JsonPropertyNameAttribute" />.
         /// </remarks>
         public string Name
@@ -815,7 +833,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal byte[] EscapedNameSection { get; set; } = null!;
 
         /// <summary>
-        /// Gets the <see cref="JsonSerializerOptions"/> value associated with the current contract instance.
+        /// Gets the <see cref="JsonSerializerOptions"/> value associated with the current contract
+        // instance.
         /// </summary>
         public JsonSerializerOptions Options { get; }
 
@@ -826,8 +845,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// The <see cref="JsonPropertyInfo"/> instance has been locked for further modification.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this property will be mapped from <see cref="JsonPropertyOrderAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this property will be mapped from <see cref="JsonPropertyOrderAttribute"/>
+        // annotations.
         /// </remarks>
         public int Order
         {
@@ -1021,12 +1042,14 @@ namespace System.Text.Json.Serialization.Metadata
             _ignoreCondition is JsonIgnoreCondition.Always && Get is null && Set is null;
 
         /// <summary>
-        /// Reflects the value of <see cref="HasGetter"/> combined with any additional global ignore policies.
+        /// Reflects the value of <see cref="HasGetter"/> combined with any additional global ignore
+        // policies.
         /// </summary>
         internal bool CanSerialize { get; private set; }
 
         /// <summary>
-        /// Reflects the value of <see cref="HasSetter"/> combined with any additional global ignore policies.
+        /// Reflects the value of <see cref="HasSetter"/> combined with any additional global ignore
+        // policies.
         /// </summary>
         internal bool CanDeserialize { get; private set; }
 
@@ -1036,7 +1059,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal bool CanDeserializeOrPopulate { get; private set; }
 
         /// <summary>
-        /// Relevant to source generated metadata: did the property have the <see cref="JsonIncludeAttribute"/>?
+        /// Relevant to source generated metadata: did the property have the <see
+        // cref="JsonIncludeAttribute"/>?
         /// </summary>
         internal bool SrcGen_HasJsonInclude { get; set; }
 
@@ -1052,8 +1076,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// The <see cref="JsonPropertyInfo"/> instance has been locked for further modification.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this property will be mapped from <see cref="JsonNumberHandlingAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this property will be mapped from <see cref="JsonNumberHandlingAttribute"/>
+        // annotations.
         /// </remarks>
         public JsonNumberHandling? NumberHandling
         {

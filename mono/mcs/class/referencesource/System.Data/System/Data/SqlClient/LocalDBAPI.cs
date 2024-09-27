@@ -53,7 +53,8 @@ namespace System.Data
             s_localDBCreateInstance = null;
         }
 
-        //This is copy of handle that SNI maintains, so we are responsible for freeing it - therefore there we are not using SafeHandle
+        //This is copy of handle that SNI maintains, so we are responsible for freeing it - therefore there
+        // we are not using SafeHandle
         static IntPtr s_userInstanceDLLHandle = IntPtr.Zero;
 
         static object s_dllLock = new object();
@@ -191,7 +192,8 @@ namespace System.Data
 
                             if (functionAddr == IntPtr.Zero)
                             {
-                                // SNI checks for LocalDBFormatMessage during DLL loading, so it is practically impossibe to get this error.
+                                // SNI checks for LocalDBFormatMessage during DLL loading, so it is practically impossibe to get
+                                // this error.
                                 int hResult = Marshal.GetLastWin32Error();
                                 Bid.Trace(
                                     "<sc.LocalDBAPI.LocalDBFormatMessage> GetProcAddress for LocalDBFormatMessage error 0x{%X}",
@@ -459,7 +461,8 @@ namespace System.Data
                     instance: instance
                 );
 
-            // LocalDBCreateInstance is thread- and cross-process safe method, it is OK to call from two threads simultaneously
+            // LocalDBCreateInstance is thread- and cross-process safe method, it is OK to call from two threads
+            // simultaneously
             int hr = LocalDBCreateInstance(instanceInfo.version, instance, flags: 0);
             Bid.Trace(
                 "<sc.LocalDBAPI.CreateLocalDBInstance> Starting creation of instance %ls version %ls",

@@ -46,22 +46,28 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         private readonly IPdbSourceDocumentLogger? _logger = logger;
 
         /// <summary>
-        /// Accessed only in <see cref="GetGeneratedFileAsync"/> and <see cref="CleanupGeneratedFiles"/>, both of which
-        /// are called under a lock in <see cref="MetadataAsSourceFileService"/>.  So this is safe as a plain
+        /// Accessed only in <see cref="GetGeneratedFileAsync"/> and <see cref="CleanupGeneratedFiles"/>,
+        // both of which
+        /// are called under a lock in <see cref="MetadataAsSourceFileService"/>.  So this is safe as a
+        // plain
         /// dictionary.
         /// </summary>
         private readonly Dictionary<string, ProjectId> _assemblyToProjectMap = new();
 
         /// <summary>
-        /// Accessed only in <see cref="GetGeneratedFileAsync"/> and <see cref="CleanupGeneratedFiles"/>, both of which
-        /// are called under a lock in <see cref="MetadataAsSourceFileService"/>.  So this is safe as a plain
+        /// Accessed only in <see cref="GetGeneratedFileAsync"/> and <see cref="CleanupGeneratedFiles"/>,
+        // both of which
+        /// are called under a lock in <see cref="MetadataAsSourceFileService"/>.  So this is safe as a
+        // plain
         /// set.
         /// </summary>
         private readonly HashSet<ProjectId> _sourceLinkEnabledProjects = new();
 
         /// <summary>
-        /// Accessed both in <see cref="GetGeneratedFileAsync"/> and in UI thread operations.  Those should not
-        /// generally run concurrently.  However, to be safe, we make this a concurrent dictionary to be safe to that
+        /// Accessed both in <see cref="GetGeneratedFileAsync"/> and in UI thread operations.  Those should
+        // not
+        /// generally run concurrently.  However, to be safe, we make this a concurrent dictionary to be
+        // safe to that
         /// potentially happening.
         /// </summary>
         private readonly ConcurrentDictionary<string, SourceDocumentInfo> _fileToDocumentInfoMap =
@@ -100,8 +106,10 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 .GetRequiredCompilationAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // The purpose of the logging is to help library authors, so we don't log things like this where something
-            // else has gone wrong, so even though if this check fails we won't be able to show the source, it's not something
+            // The purpose of the logging is to help library authors, so we don't log things like this where
+            // something
+            // else has gone wrong, so even though if this check fails we won't be able to show the source, it's
+            // not something
             // the user or a library author can control, so no log message.
             if (
                 compilation.GetMetadataReference(symbol.ContainingAssembly)
@@ -113,14 +121,16 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
             _logger?.Log(FeaturesResources.Symbol_found_in_assembly_path_0, dllPath);
 
-            // There is no way to go from parameter metadata to its containing method or type, so we need use the symbol API first to
+            // There is no way to go from parameter metadata to its containing method or type, so we need use
+            // the symbol API first to
             // get the method it belongs to.
             var symbolToFind = symbol is IParameterSymbol parameterSymbol
                 ? parameterSymbol.ContainingSymbol
                 : symbol;
             var handle = MetadataTokens.EntityHandle(symbolToFind.MetadataToken);
 
-            // If this is a reference assembly then we won't have the right information available, so try to find
+            // If this is a reference assembly then we won't have the right information available, so try to
+            // find
             // a better DLL, or bail out
             var isReferenceAssembly = MetadataAsSourceHelpers.IsReferenceAssembly(
                 symbol.ContainingAssembly
@@ -137,7 +147,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 {
                     _logger?.Log(FeaturesResources.Symbol_found_in_assembly_path_0, dllPath);
 
-                    // If the original assembly was a reference assembly, we can't trust that the implementation assembly
+                    // If the original assembly was a reference assembly, we can't trust that the implementation
+                    // assembly
                     // we found actually contains the types, so we need to find it, following any type forwards.
 
                     dllPath = _implementationAssemblyLookupService.FollowTypeForwards(
@@ -212,7 +223,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
             ImmutableDictionary<string, string> pdbCompilationOptions;
             ImmutableArray<SourceDocument> sourceDocuments;
-            // We know we have a DLL, call and see if we can find metadata readers for it, and for the PDB (whereever it may be)
+            // We know we have a DLL, call and see if we can find metadata readers for it, and for the PDB
+            // (whereever it may be)
             using (
                 var documentDebugInfoReader = await _pdbFileLocatorService
                     .GetDocumentDebugInfoReaderAsync(
@@ -227,8 +239,10 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 if (documentDebugInfoReader is null)
                     return null;
 
-                // If we don't already have a project for this assembly, we'll need to create one, and we want to use
-                // the same compiler options for it that the DLL was created with. We also want to do that early so we
+                // If we don't already have a project for this assembly, we'll need to create one, and we want to
+                // use
+                // the same compiler options for it that the DLL was created with. We also want to do that early so
+                // we
                 // can dispose files sooner
                 pdbCompilationOptions = documentDebugInfoReader.GetCompilationOptions();
 
@@ -287,7 +301,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
 
             var tempFilePath = Path.Combine(tempPath, projectId.Id.ToString());
-            // Create the directory. It's possible a parallel deletion is happening in another process, so we may have
+            // Create the directory. It's possible a parallel deletion is happening in another process, so we
+            // may have
             // to retry this a few times.
             var loopCount = 0;
             while (!Directory.Exists(tempFilePath))
@@ -299,7 +314,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 IOUtilities.PerformIO(() => Directory.CreateDirectory(tempFilePath));
             }
 
-            // Get text loaders for our documents. We do this here because if we can't load any of the files, then
+            // Get text loaders for our documents. We do this here because if we can't load any of the files,
+            // then
             // we can't provide any results, so there is no point adding a project to the workspace etc.
             var useExtendedTimeout = _sourceLinkEnabledProjects.Contains(projectId);
             var encoding = defaultEncoding ?? Encoding.UTF8;
@@ -335,7 +351,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 navigateProject = metadataWorkspace.CurrentSolution.GetRequiredProject(projectId);
             }
 
-            // If MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync can't find the actual document to navigate to, it will fall back
+            // If MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync can't find the actual document to
+            // navigate to, it will fall back
             // to the document passed in, which we just use the first document for.
             // TODO: Support results from multiple source files: https://github.com/dotnet/roslyn/issues/55834
             var firstDocumentFilePath = sourceFileInfos[0]!.FilePath;
@@ -347,7 +364,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 .GetLocationInGeneratedSourceAsync(symbolId, firstDocument, cancellationToken)
                 .ConfigureAwait(false);
 
-            // In the case of partial classes, finding the location in the generated source may return a location in a different document, so we
+            // In the case of partial classes, finding the location in the generated source may return a
+            // location in a different document, so we
             // have to make sure to look it up again.
             var navigateDocument = navigateProject.GetDocument(navigateLocation.SourceTree);
             Contract.ThrowIfNull(navigateDocument);
@@ -382,7 +400,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         )
         {
             // First we need the language name in order to get the services
-            // TODO: Find language another way for non portable PDBs: https://github.com/dotnet/roslyn/issues/55834
+            // TODO: Find language another way for non portable PDBs:
+            // https://github.com/dotnet/roslyn/issues/55834
             if (
                 !pdbCompilationOptions.TryGetValue(
                     Cci.CompilationOptionNames.Language,
@@ -460,14 +479,16 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                         .WithDesignTimeOnly(true)
                 );
 
-                // If we successfully got something from SourceLink for this project then its nice to wait a bit longer
+                // If we successfully got something from SourceLink for this project then its nice to wait a bit
+                // longer
                 // if the user performs subsequent navigation
                 if (info.FromRemoteLocation)
                 {
                     _sourceLinkEnabledProjects.Add(projectId);
                 }
 
-                // In order to open documents in VS we need to understand the link from temp file to document and its encoding etc.
+                // In order to open documents in VS we need to understand the link from temp file to document and
+                // its encoding etc.
                 _fileToDocumentInfoMap[info.FilePath] = new(
                     documentId,
                     encoding,
@@ -575,7 +596,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
             _assemblyToProjectMap.Clear();
 
-            // The MetadataAsSourceFileService will clean up the entire temp folder so no need to do anything here
+            // The MetadataAsSourceFileService will clean up the entire temp folder so no need to do anything
+            // here
             _fileToDocumentInfoMap.Clear();
             _sourceLinkEnabledProjects.Clear();
             _implementationAssemblyLookupService.Clear();

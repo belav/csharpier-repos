@@ -540,7 +540,8 @@ namespace System.ServiceModel.Diagnostics
 
         static void FailedToLogMessage(Exception e)
         {
-            //If something goes wrong, we do not want to fail the app, just log one event log entry per block of failures
+            //If something goes wrong, we do not want to fail the app, just log one event log entry per block of
+            // failures
             bool shouldLogError = false;
             lock (MessageLogger.syncObject)
             {

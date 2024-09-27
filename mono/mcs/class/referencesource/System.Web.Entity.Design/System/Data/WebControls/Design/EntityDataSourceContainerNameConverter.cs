@@ -24,7 +24,8 @@ namespace System.Web.UI.Design.WebControls
         {
             // We can only get a list of possible DefaultContainerName values if we have:
             //    (1) Connection string so we can load metadata
-            // Even if this value is set, it may not be possible to actually load the metadata, but at least we can try the lookup if requested
+            // Even if this value is set, it may not be possible to actually load the metadata, but at least we
+            // can try the lookup if requested
 
             EntityDataSource entityDataSource = context.Instance as EntityDataSource;
             if (

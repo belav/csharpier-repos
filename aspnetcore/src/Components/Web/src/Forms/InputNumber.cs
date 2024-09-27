@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Components.Forms;
 
 /// <summary>
 /// An input component for editing numeric values.
-/// Supported numeric types are <see cref="int"/>, <see cref="long"/>, <see cref="short"/>, <see cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
+/// Supported numeric types are <see cref="int"/>, <see cref="long"/>, <see cref="short"/>, <see
+// cref="float"/>, <see cref="double"/>, <see cref="decimal"/>.
 /// </summary>
 public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TValue>
     : InputBase<TValue>
@@ -103,7 +104,8 @@ public class InputNumber<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTy
     }
 
     /// <summary>
-    /// Formats the value as a string. Derived classes can override this to determine the formatting used for <c>CurrentValueAsString</c>.
+    /// Formats the value as a string. Derived classes can override this to determine the formatting
+    // used for <c>CurrentValueAsString</c>.
     /// </summary>
     /// <param name="value">The value to format.</param>
     /// <returns>A string representation of the value.</returns>

@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 // updated placeholder method is used instead.
 
                 // TODO: refs are available
-                // Debug.Assert(method.ReturnType.TypeKind == TypeKind.Error); // If byref return types are supported in the future, use method as is.
+                // Debug.Assert(method.ReturnType.TypeKind == TypeKind.Error); // If byref return types are
+                // supported in the future, use method as is.
                 method = new PlaceholderMethodSymbol(
                     method.ContainingType,
                     method.Name,

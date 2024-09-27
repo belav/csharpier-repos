@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Page class definition
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Page class definition
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -22,7 +22,8 @@ namespace System.Web.UI
     using System.Web.Util;
 
     /// <devdoc>
-    ///   <para>The ControlBuilder associated with a UserControl. If you want a custom ControlBuilder for your
+    ///   <para>The ControlBuilder associated with a UserControl. If you want a custom ControlBuilder
+    // for your
     ///     derived UserControl, you should derive it from UserControlControlBuilder.
     ///   </para>
     /// </devdoc>
@@ -146,9 +147,9 @@ namespace System.Web.UI
             get { return Page.Application; }
         }
 
-        /*
-         * Trace context for output of useful information to page during development
-         */
+/*
+* Trace context for output of useful information to page during development
+*/
 
         /// <devdoc>
         /// <para>Indicates the <see cref='System.Web.TraceContext'/> object for the current Web
@@ -196,9 +197,9 @@ namespace System.Web.UI
             get { return Page.Server; }
         }
 
-        /*
-         * Cache intrinsic
-         */
+/*
+* Cache intrinsic
+*/
 
         /// <devdoc>
         /// <para>Retrieves a <see langword='Cache'/>
@@ -251,9 +252,9 @@ namespace System.Web.UI
             get { return Page.Session; }
         }
 
-        /*
-         * Performs intialization of the control required by the designer.
-         */
+/*
+* Performs intialization of the control required by the designer.
+*/
 
         /// <devdoc>
         ///    <para>Performs any initialization of the control that is required by RAD designers.</para>
@@ -290,9 +291,9 @@ namespace System.Web.UI
             base.OnInit(e);
         }
 
-        /*
-         * Called on declarative controls to initialize them correctly
-         */
+/*
+* Called on declarative controls to initialize them correctly
+*/
 
         /// <devdoc>
         /// <para>Initializes the <see langword='UserControl'/> object. Since there are some
@@ -378,9 +379,9 @@ namespace System.Web.UI
             Attributes[name] = value;
         }
 
-        /*
-         * Map virtual path (absolute or relative) to physical path
-         */
+/*
+* Map virtual path (absolute or relative) to physical path
+*/
 
         /// <devdoc>
         ///    <para>Assigns a virtual path, either absolute or relative, to a physical path.</para>
@@ -448,7 +449,8 @@ namespace System.Web.UI
         /// <summary>
         /// Attempts to update the model object from the values provided by given valueProvider.
         /// </summary>
-        /// <returns>True if the model object is updated succesfully with valid values. False otherwise.</returns>
+        /// <returns>True if the model object is updated succesfully with valid values. False
+        // otherwise.</returns>
         public virtual bool TryUpdateModel<TModel>(TModel model)
             where TModel : class
         {
@@ -459,7 +461,8 @@ namespace System.Web.UI
         /// Attempts to update the model object from the values within a databound control. This
         /// must be invoked within the Select/Update/Delete/InsertMethods used for data binding.
         /// </summary>
-        /// <returns>True if the model object is updated succesfully with valid values. False otherwise.</returns>
+        /// <returns>True if the model object is updated succesfully with valid values. False
+        // otherwise.</returns>
         public virtual bool TryUpdateModel<TModel>(TModel model, IValueProvider valueProvider)
             where TModel : class
         {

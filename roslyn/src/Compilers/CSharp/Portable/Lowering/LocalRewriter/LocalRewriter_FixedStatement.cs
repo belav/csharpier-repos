@@ -34,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 localBuilder.Add(pinnedTemp);
 
-                // NOTE: Dev10 nulls out the locals in declaration order (as opposed to "popping" them in reverse order).
+                // NOTE: Dev10 nulls out the locals in declaration order (as opposed to "popping" them in reverse
+                // order).
                 if (pinnedTemp.RefKind == RefKind.None)
                 {
                     // temp = null;
@@ -310,7 +311,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax: declarator,
                 isPinned: true,
                 //NOTE: different from the array and string cases
-                //      RefReadOnly to allow referring to readonly variables. (technically we only "read" through the temp anyways)
+                //      RefReadOnly to allow referring to readonly variables. (technically we only "read" through
+                // the temp anyways)
                 refKind: RefKind.RefReadOnly,
                 kind: SynthesizedLocalKind.FixedReference
             );
@@ -387,7 +389,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 syntax: declarator,
                 isPinned: true,
                 //NOTE: different from the array and string cases
-                //      RefReadOnly to allow referring to readonly variables. (technically we only "read" through the temp anyways)
+                //      RefReadOnly to allow referring to readonly variables. (technically we only "read" through
+                // the temp anyways)
                 refKind: RefKind.RefReadOnly,
                 kind: SynthesizedLocalKind.FixedReference
             );
@@ -464,7 +467,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(nullableBoundTemp is not null);
                     Debug.Assert(nullableTempAssignment is not null);
 
-                    // (nullableTemp = initializer).HasValue ? {temp =ref nullableTemp.GetPinnable(), (int*)&pinnedTemp} : default;
+                    // (nullableTemp = initializer).HasValue ? {temp =ref nullableTemp.GetPinnable(), (int*)&pinnedTemp}
+                    // : default;
                     pinAndGetPtr = RewriteConditionalOperator(
                         initializerSyntax,
                         rewrittenCondition: factory.MakeNullableHasValue(

@@ -458,7 +458,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
 
             var expectedName = descriptor64.GetFeatureDisplayName();
 
-            // The service name couldn't be found. It may need to be added to RemoteWorkspacesResources.resx as FeatureName_{name}
+            // The service name couldn't be found. It may need to be added to RemoteWorkspacesResources.resx as
+            // FeatureName_{name}
             Assert.False(
                 string.IsNullOrEmpty(expectedName),
                 $"Service name for '{serviceInterface.GetType()}' not available."

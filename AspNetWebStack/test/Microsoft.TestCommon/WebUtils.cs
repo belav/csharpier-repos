@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.IO;
 using System.Reflection;
@@ -10,7 +11,8 @@ namespace System.Web.WebPages.TestUtils
     public static class WebUtils
     {
         /// <summary>
-        /// Creates an instance of HttpRuntime and assigns it (using magic) to the singleton instance of HttpRuntime.
+        /// Creates an instance of HttpRuntime and assigns it (using magic) to the singleton instance of
+        // HttpRuntime.
         /// Ensure that the returned value is disposed at the end of the test.
         /// </summary>
         /// <returns>Returns an IDisposable that restores the original HttpRuntime.</returns>
@@ -87,7 +89,8 @@ namespace System.Web.WebPages.TestUtils
 
             protected virtual void Dispose(bool disposing)
             {
-                // If we were disposed by the finalizer it's because the user didn't use a "using" block, so don't do anything!
+                // If we were disposed by the finalizer it's because the user didn't use a "using" block, so don't
+                // do anything!
                 if (disposing)
                 {
                     lock (this)

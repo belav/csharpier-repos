@@ -170,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular
+                    // definition
                     //     A = A,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "A")
                         .WithArguments("E.A")
@@ -189,7 +190,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular
+                    // definition
                     //     A = B + 1,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "A")
                         .WithArguments("E.A")
@@ -209,7 +211,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular
+                    // definition
                     //     A = B | C,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "A")
                         .WithArguments("E.A")
@@ -230,12 +233,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular
+                    // definition
                     //     A = A | B,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "A")
                         .WithArguments("E.A")
                         .WithLocation(3, 5),
-                    // (6,5): error CS0110: The evaluation of the constant value for 'E.D' involves a circular definition
+                    // (6,5): error CS0110: The evaluation of the constant value for 'E.D' involves a circular
+                    // definition
                     //     D = D
                     Diagnostic(ErrorCode.ERR_CircConstValue, "D")
                         .WithArguments("E.D")
@@ -276,12 +281,14 @@ enum F
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.A' involves a circular
+                    // definition
                     //     A = B + F.B,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "A")
                         .WithArguments("E.A")
                         .WithLocation(3, 5),
-                    // (4,5): error CS0110: The evaluation of the constant value for 'E.B' involves a circular definition
+                    // (4,5): error CS0110: The evaluation of the constant value for 'E.B' involves a circular
+                    // definition
                     //     B = A + F.A,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "B")
                         .WithArguments("E.B")
@@ -300,7 +307,8 @@ enum F
             );
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular
+                    // definition
                     //     M0 = M5999 + 1,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
                         .WithArguments("E.M0")
@@ -320,7 +328,8 @@ enum F
             );
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular definition
+                    // (3,5): error CS0110: The evaluation of the constant value for 'E.M0' involves a circular
+                    // definition
                     //     M0 = M1999 + 1,
                     Diagnostic(ErrorCode.ERR_CircConstValue, "M0")
                         .WithArguments("E.M0")
@@ -395,7 +404,9 @@ public class C
 }";
             comp = CreateCompilation(sourceC, references: new[] { refB });
             comp.VerifyDiagnostics(
-                // (5,31): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (5,31): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         const int x = (int)~C.F;
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "F")
                     .WithArguments(
@@ -449,7 +460,9 @@ public class C
                 options: TestOptions.ReleaseExe
             );
             comp.VerifyDiagnostics(
-                // (5,20): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (5,20): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         var x = ~C.F;
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "F")
                     .WithArguments(
@@ -465,7 +478,9 @@ public class C
                 options: TestOptions.DebugExe
             );
             comp.VerifyDiagnostics(
-                // (5,20): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (5,20): error CS0012: The type 'A' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'UseSiteError_sourceA, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         var x = ~C.F;
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "F")
                     .WithArguments(
@@ -481,10 +496,12 @@ public class C
         {
             CreateCompilation("partial public enum E { }")
                 .VerifyDiagnostics(
-                    // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record',
+                    // 'struct', 'interface', or a method return type.
                     // partial public enum E { }
                     Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
-                    // (1,21): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
+                    // (1,21): error CS0267: The 'partial' modifier can only appear immediately before 'class',
+                    // 'record', 'struct', 'interface', or a method return type.
                     // partial public enum E { }
                     Diagnostic(ErrorCode.ERR_PartialMisplaced, "E").WithLocation(1, 21)
                 );

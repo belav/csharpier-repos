@@ -55,7 +55,8 @@ public class PostConfigureNegotiateOptions : IPostConfigureOptions<NegotiateOpti
                     _logger.Deferring();
                 }
             }
-            // Otherwise fail, you shouldn't be using this auth handler on a server that supports integrated auth.
+            // Otherwise fail, you shouldn't be using this auth handler on a server that supports integrated
+            // auth.
             else
             {
                 throw new InvalidOperationException(

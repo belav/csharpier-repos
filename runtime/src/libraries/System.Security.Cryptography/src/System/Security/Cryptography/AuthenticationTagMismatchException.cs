@@ -10,14 +10,16 @@ namespace System.Security.Cryptography
     public sealed class AuthenticationTagMismatchException : CryptographicException
     {
         /// <summary>
-        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with default
+        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with
+        // default
         ///   properties.
         /// </summary>
         public AuthenticationTagMismatchException()
             : base(SR.Cryptography_AuthTagMismatch) { }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with a specified
+        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with
+        // a specified
         ///   error message.
         /// </summary>
         /// <param name="message">
@@ -27,7 +29,8 @@ namespace System.Security.Cryptography
             : base(message) { }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with a specified
+        ///   Initializes a new instance of the <see cref="AuthenticationTagMismatchException" /> class with
+        // a specified
         ///   error message and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="message">
@@ -35,7 +38,8 @@ namespace System.Security.Cryptography
         /// </param>
         /// <param name="inner">
         ///   The exception that is the cause of the current exception. If the parameter is not
-        ///   <see langword="null" />, the current exception is raised in a catch block that handles the inner exception.
+        ///   <see langword="null" />, the current exception is raised in a catch block that handles the
+        // inner exception.
         /// </param>
         public AuthenticationTagMismatchException(string? message, Exception? inner)
             : base(message, inner) { }

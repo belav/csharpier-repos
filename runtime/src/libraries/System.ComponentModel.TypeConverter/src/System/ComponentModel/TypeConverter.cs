@@ -248,14 +248,16 @@ namespace System.ComponentModel
 
         /// <summary>
         /// Gets a value indicating whether changing a value on this object requires a call to
-        /// <see cref='System.ComponentModel.TypeConverter.CreateInstance(IDictionary)'/> to create a new value.
+        /// <see cref='System.ComponentModel.TypeConverter.CreateInstance(IDictionary)'/> to create a new
+        // value.
         /// </summary>
         public bool GetCreateInstanceSupported() => GetCreateInstanceSupported(null);
 
         /// <summary>
         ///
         /// Gets a value indicating whether changing a value on this object requires a call to
-        /// <see cref='System.ComponentModel.TypeConverter.CreateInstance(IDictionary)'/> to create a new value,
+        /// <see cref='System.ComponentModel.TypeConverter.CreateInstance(IDictionary)'/> to create a new
+        // value,
         /// using the specified context.
         ///
         /// </summary>
@@ -400,18 +402,21 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// An <see langword='abstract '/> class that provides properties for objects that do not have properties.
+        /// An <see langword='abstract '/> class that provides properties for objects that do not have
+        // properties.
         /// </summary>
         protected abstract class SimplePropertyDescriptor : PropertyDescriptor
         {
             /// <summary>
-            /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
+            /// Initializes a new instance of the <see
+            // cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
             protected SimplePropertyDescriptor(Type componentType, string name, Type propertyType)
                 : this(componentType, name, propertyType, Array.Empty<Attribute>()) { }
 
             /// <summary>
-            /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
+            /// Initializes a new instance of the <see
+            // cref='System.ComponentModel.TypeConverter.SimplePropertyDescriptor'/> class.
             /// </summary>
             protected SimplePropertyDescriptor(
                 Type componentType,
@@ -497,7 +502,8 @@ namespace System.ComponentModel
 
             /// <summary>
             ///
-            /// Initializes a new instance of the <see cref='System.ComponentModel.TypeConverter.StandardValuesCollection'/> class.
+            /// Initializes a new instance of the <see
+            // cref='System.ComponentModel.TypeConverter.StandardValuesCollection'/> class.
             ///
             /// </summary>
             public StandardValuesCollection(ICollection? values)

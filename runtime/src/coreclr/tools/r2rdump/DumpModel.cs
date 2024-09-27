@@ -44,10 +44,12 @@ namespace R2RDump
         public bool Unwind { get; init; }
 
         /// <summary>
-        /// Try to locate a (reference) assembly based on an AssemblyRef handle using the list of explicit reference assemblies
+        /// Try to locate a (reference) assembly based on an AssemblyRef handle using the list of explicit
+        // reference assemblies
         /// and the list of reference paths passed to R2RDump.
         /// </summary>
-        /// <param name="metadataReader">Containing metadata reader for the assembly reference handle</param>
+        /// <param name="metadataReader">Containing metadata reader for the assembly reference
+        // handle</param>
         /// <param name="assemblyReferenceHandle">Handle representing the assembly reference</param>
         /// <param name="parentFile">Name of assembly from which we're performing the lookup</param>
         /// <returns></returns>

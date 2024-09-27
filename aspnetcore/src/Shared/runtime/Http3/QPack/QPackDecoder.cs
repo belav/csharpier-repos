@@ -155,7 +155,8 @@ namespace System.Net.Http.QPack
         }
 
         /// <summary>
-        /// Reset the decoder state back to its initial value. Resetting state is required when reusing a decoder with multiple
+        /// Reset the decoder state back to its initial value. Resetting state is required when reusing a
+        // decoder with multiple
         /// header frames. For example, decoding a response's headers and trailers.
         /// </summary>
         public void Reset()

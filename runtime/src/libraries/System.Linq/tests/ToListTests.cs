@@ -93,7 +93,8 @@ namespace System.Linq.Tests
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.ToList());
         }
 
-        // Generally the optimal approach. Anything that breaks this should be confirmed as not harming performance.
+        // Generally the optimal approach. Anything that breaks this should be confirmed as not harming
+        // performance.
         [Fact]
         public void ToList_UseCopyToWithICollection()
         {

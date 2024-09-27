@@ -241,7 +241,7 @@ namespace Mono.Debugger.Soft
                     }
                 }
                 if (meta == null)
-                    /* Shouldn't happen */
+/* Shouldn't happen */
                     throw new NotImplementedException();
                 return meta;
             }

@@ -112,7 +112,8 @@ internal static class CompletionOptionsStorage
 
     //Dev16 options
 
-    // Use tri-value so the default state can be used to turn on the feature with experimentation service.
+    // Use tri-value so the default state can be used to turn on the feature with experimentation
+    // service.
     public static readonly PerLanguageOption2<bool?> ShowItemsFromUnimportedNamespaces =
         new(
             "dotnet_show_completion_items_from_unimported_namespaces",

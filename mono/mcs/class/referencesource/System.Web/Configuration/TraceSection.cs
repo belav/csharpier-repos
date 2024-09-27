@@ -15,22 +15,22 @@ namespace System.Web.Configuration
     using System.Text;
     using System.Xml;
 
-    /*         <!--
-        trace Attributes:
-          enabled="[true|false]" - Enable application tracing
-          localOnly="[true|false]" - View trace results from localhost only
-          pageOutput="[true|false]" - Display trace ouput on individual pages
-          requestLimit="[number]" - Number of trace results available in trace.axd
-          traceMode="[SortByTime|SortByCategory]" - Sorts trace result displays based on Time or Category
-        -->
-        <trace
-            enabled="false"
-            localOnly="true"
-            pageOutput="false"
-            requestLimit="10"
-            traceMode="SortByTime"
-        />
- */
+/*         <!--
+trace Attributes:
+enabled="[true|false]" - Enable application tracing
+localOnly="[true|false]" - View trace results from localhost only
+pageOutput="[true|false]" - Display trace ouput on individual pages
+requestLimit="[number]" - Number of trace results available in trace.axd
+traceMode="[SortByTime|SortByCategory]" - Sorts trace result displays based on Time or Category
+-->
+<trace
+enabled="false"
+localOnly="true"
+pageOutput="false"
+requestLimit="10"
+traceMode="SortByTime"
+/>
+*/
 
     public sealed class TraceSection : ConfigurationSection
     {

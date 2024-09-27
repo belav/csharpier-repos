@@ -27,7 +27,8 @@ namespace System.ComponentModel.Tests
             Assert.Throws<ArgumentNullException>(
                 () => converter.ConvertTo(TypeConverterTests.s_context, null, "", null)
             );
-            // This type converter should had thrown ArgumentNullException in ConvertTo, because the destination type is null.");
+            // This type converter should had thrown ArgumentNullException in ConvertTo, because the destination
+            // type is null.");
 
             for (int i = 0; i < data.GetLength(0); i++)
             {

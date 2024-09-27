@@ -19,7 +19,8 @@ public static class ReactDevelopmentServerMiddlewareExtensions
     /// sure not to enable the create-react-app server.
     /// </summary>
     /// <param name="spaBuilder">The <see cref="ISpaBuilder"/>.</param>
-    /// <param name="npmScript">The name of the script in your package.json file that launches the create-react-app server.</param>
+    /// <param name="npmScript">The name of the script in your package.json file that launches the
+    // create-react-app server.</param>
     public static void UseReactDevelopmentServer(this ISpaBuilder spaBuilder, string npmScript)
     {
         ArgumentNullException.ThrowIfNull(spaBuilder);

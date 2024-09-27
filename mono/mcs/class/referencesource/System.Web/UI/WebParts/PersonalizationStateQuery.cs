@@ -32,7 +32,8 @@ namespace System.Web.UI.WebControls.WebParts
         {
             _data = new HybridDictionary(true);
 
-            // VSWhidbey 357097: UserInactiveSinceDate needs to have a default value returned for the indexer property
+            // VSWhidbey 357097: UserInactiveSinceDate needs to have a default value returned for the indexer
+            // property
             _data["UserInactiveSinceDate"] = PersonalizationAdministration.DefaultInactiveSinceDate;
         }
 

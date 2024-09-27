@@ -171,8 +171,10 @@ namespace System
 
             // Not supported atm:
             //string testType2 = typeof(C<,>).DeclaringType.FullName;
-            //var nestedSym2 = c.Assembly.GetTypeByReflectionType(typeof(C<,>.D.E<,>.F<>), includeReferences: true);
-            //Assert.Equal(testType2 + ".C<int, bool>.D.E<double, float>.F<byte>", nestedSym2.ToDisplayString());
+            //var nestedSym2 = c.Assembly.GetTypeByReflectionType(typeof(C<,>.D.E<,>.F<>), includeReferences:
+            // true);
+            //Assert.Equal(testType2 + ".C<int, bool>.D.E<double, float>.F<byte>",
+            // nestedSym2.ToDisplayString());
 
             // Process is defined in System, which isn't referenced:
             var err = c.Assembly.GetTypeByReflectionType(

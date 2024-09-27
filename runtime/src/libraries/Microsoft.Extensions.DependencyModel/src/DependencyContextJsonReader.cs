@@ -49,7 +49,8 @@ namespace Microsoft.Extensions.DependencyModel
             Dispose(true);
         }
 
-        // Borrowed from https://github.com/dotnet/corefx/blob/b8bc4ff80c5f7baa681e8a569d367356957ba78a/src/System.Text.Json/src/System/Text/Json/Document/JsonDocument.Parse.cs#L290-L362
+        // Borrowed from
+        // https://github.com/dotnet/corefx/blob/b8bc4ff80c5f7baa681e8a569d367356957ba78a/src/System.Text.Json/src/System/Text/Json/Document/JsonDocument.Parse.cs#L290-L362
         private static ArraySegment<byte> ReadToEnd(Stream stream)
         {
             int written = 0;

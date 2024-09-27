@@ -10,9 +10,13 @@ using Microsoft.Extensions.Primitives;
 namespace Microsoft.AspNetCore.Routing;
 
 /// <summary>
-/// A builder for defining groups of endpoints with a common prefix that implements both the <see cref="IEndpointRouteBuilder"/>
-/// and <see cref="IEndpointConventionBuilder"/> interfaces. This can be used to add endpoints with the prefix defined by
-/// <see cref="EndpointRouteBuilderExtensions.MapGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder, RoutePattern)"/>
+/// A builder for defining groups of endpoints with a common prefix that implements both the <see
+// cref="IEndpointRouteBuilder"/>
+/// and <see cref="IEndpointConventionBuilder"/> interfaces. This can be used to add endpoints with
+// the prefix defined by
+/// <see
+// cref="EndpointRouteBuilderExtensions.MapGroup(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,
+// RoutePattern)"/>
 /// and to customize those endpoints using conventions.
 /// </summary>
 public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventionBuilder
@@ -131,7 +135,8 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
         )
         {
             var fullPrefix = RoutePatternFactory.Combine(prefix, _routeGroupBuilder._partialPrefix);
-            // Apply conventions passed in from the outer group first so their metadata is added earlier in the list at a lower precedent.
+            // Apply conventions passed in from the outer group first so their metadata is added earlier in the
+            // list at a lower precedent.
             var combinedConventions = RoutePatternFactory.CombineLists(
                 conventions,
                 _routeGroupBuilder._conventions
@@ -164,7 +169,8 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
         private IChangeToken GetCompositeChangeToken()
         {
             // We are not guarding against concurrent RouteGroupBuilder._dataSources mutation.
-            // This is only to avoid double initialization of _compositeDataSource if GetChangeToken() is called concurrently.
+            // This is only to avoid double initialization of _compositeDataSource if GetChangeToken() is called
+            // concurrently.
             lock (_routeGroupBuilder._dataSources)
             {
                 _compositeDataSource ??= new CompositeEndpointDataSource(

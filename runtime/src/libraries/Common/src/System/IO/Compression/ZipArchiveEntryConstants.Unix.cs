@@ -20,7 +20,8 @@ namespace System.IO.Compression
             ) << 16;
 
         /// <summary>
-        /// The default external directory attributes are used to support zip archives on multiple platforms.
+        /// The default external directory attributes are used to support zip archives on multiple
+        // platforms.
         /// Directories on Unix require the execute permissions to get into them.
         /// </summary>
         internal const uint DefaultDirectoryExternalAttributes =

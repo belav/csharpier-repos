@@ -83,7 +83,8 @@ namespace System.Security.Cryptography.Tests
 
         private static readonly byte[][] s_testKeys = new byte[][]
         {
-            // From: https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA3-512.pdf
+            // From:
+            // https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/HMAC_SHA3-512.pdf
             null,
             ByteUtils.HexToByteArray(
                 "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
@@ -193,7 +194,8 @@ namespace System.Security.Cryptography.Tests
         public void HmacSha3_512_Stream_MultipleOf4096()
         {
             // Verfied with:
-            // for _ in {1..1024}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt hexkey:000102030405060708090A0B0C0D0E0F
+            // for _ in {1..1024}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt
+            // hexkey:000102030405060708090A0B0C0D0E0F
             VerifyRepeating(
                 input: "0102030405060708",
                 1024,
@@ -207,7 +209,8 @@ namespace System.Security.Cryptography.Tests
         public void HmacSha3_512_Stream_NotMultipleOf4096()
         {
             // Verfied with:
-            // for _ in {1..1025}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt hexkey:000102030405060708090A0B0C0D0E0F
+            // for _ in {1..1025}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt
+            // hexkey:000102030405060708090A0B0C0D0E0F
             VerifyRepeating(
                 input: "0102030405060708",
                 1025,
@@ -235,7 +238,8 @@ namespace System.Security.Cryptography.Tests
         public async Task HmacSha3_512_Stream_MultipleOf4096_Async()
         {
             // Verfied with:
-            // for _ in {1..1024}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt hexkey:000102030405060708090A0B0C0D0E0F
+            // for _ in {1..1024}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt
+            // hexkey:000102030405060708090A0B0C0D0E0F
             await VerifyRepeatingAsync(
                 input: "0102030405060708",
                 1024,
@@ -249,7 +253,8 @@ namespace System.Security.Cryptography.Tests
         public async Task HmacSha3_512_Stream_NotMultipleOf4096_Async()
         {
             // Verfied with:
-            // for _ in {1..1025}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt hexkey:000102030405060708090A0B0C0D0E0F
+            // for _ in {1..1025}; do echo -n "0102030405060708"; done | openssl sha3-512 -hex -mac HMAC -macopt
+            // hexkey:000102030405060708090A0B0C0D0E0F
             await VerifyRepeatingAsync(
                 input: "0102030405060708",
                 1025,

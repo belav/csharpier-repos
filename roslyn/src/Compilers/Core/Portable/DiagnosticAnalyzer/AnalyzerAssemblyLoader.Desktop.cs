@@ -119,7 +119,8 @@ namespace Microsoft.CodeAnalysis
             catch
             {
                 // In the .NET Framework, if a handler to AssemblyResolve throws an exception, other handlers
-                // are not called. To avoid any bug in our handler breaking other handlers running in the same process
+                // are not called. To avoid any bug in our handler breaking other handlers running in the same
+                // process
                 // we catch exceptions here. We do not expect exceptions to be thrown though.
                 return null;
             }

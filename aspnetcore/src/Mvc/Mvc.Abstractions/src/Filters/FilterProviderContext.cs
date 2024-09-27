@@ -13,7 +13,8 @@ public class FilterProviderContext
     /// </summary>
     /// <param name="actionContext">The <see cref="ActionContext"/>.</param>
     /// <param name="items">
-    /// The <see cref="FilterItem"/>s, initially created from <see cref="FilterDescriptor"/>s or a cache entry.
+    /// The <see cref="FilterItem"/>s, initially created from <see cref="FilterDescriptor"/>s or a cache
+    // entry.
     /// </param>
     public FilterProviderContext(ActionContext actionContext, IList<FilterItem> items)
     {
@@ -30,8 +31,10 @@ public class FilterProviderContext
     public ActionContext ActionContext { get; set; }
 
     /// <summary>
-    /// Gets or sets the <see cref="FilterItem"/>s, initially created from <see cref="FilterDescriptor"/>s or a
-    /// cache entry. <see cref="IFilterProvider"/>s should set <see cref="FilterItem.Filter"/> on existing items or
+    /// Gets or sets the <see cref="FilterItem"/>s, initially created from <see
+    // cref="FilterDescriptor"/>s or a
+    /// cache entry. <see cref="IFilterProvider"/>s should set <see cref="FilterItem.Filter"/> on
+    // existing items or
     /// add new <see cref="FilterItem"/>s to make executable filters available.
     /// </summary>
     public IList<FilterItem> Results { get; set; }

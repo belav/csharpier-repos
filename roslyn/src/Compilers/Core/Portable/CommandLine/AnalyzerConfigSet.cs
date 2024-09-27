@@ -25,21 +25,25 @@ using TreeOptions = System.Collections.Immutable.ImmutableDictionary<
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents a set of <see cref="AnalyzerConfig"/>, and can compute the effective analyzer options for a given source file. This is used to
+    /// Represents a set of <see cref="AnalyzerConfig"/>, and can compute the effective analyzer options
+    // for a given source file. This is used to
     /// collect all the <see cref="AnalyzerConfig"/> files for that would apply to a compilation.
     /// </summary>
     public sealed class AnalyzerConfigSet
     {
         /// <summary>
-        /// The list of <see cref="AnalyzerConfig" />s in this set. This list has been sorted per <see cref="AnalyzerConfig.DirectoryLengthComparer"/>.
-        /// This does not include any of the global configs that were merged into <see cref="_globalConfig"/>.
+        /// The list of <see cref="AnalyzerConfig" />s in this set. This list has been sorted per <see
+        // cref="AnalyzerConfig.DirectoryLengthComparer"/>.
+        /// This does not include any of the global configs that were merged into <see
+        // cref="_globalConfig"/>.
         /// </summary>
         private readonly ImmutableArray<AnalyzerConfig> _analyzerConfigs;
 
         private readonly GlobalAnalyzerConfig _globalConfig;
 
         /// <summary>
-        /// <see cref="SectionNameMatcher"/>s for each section. The entries in the outer array correspond to entries in <see cref="_analyzerConfigs"/>, and each inner array
+        /// <see cref="SectionNameMatcher"/>s for each section. The entries in the outer array correspond to
+        // entries in <see cref="_analyzerConfigs"/>, and each inner array
         /// corresponds to each <see cref="AnalyzerConfig.NamedSections"/>.
         /// </summary>
         private readonly ImmutableArray<ImmutableArray<SectionNameMatcher?>> _analyzerMatchers;
@@ -219,10 +223,12 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns a <see cref="AnalyzerConfigOptionsResult"/> for a source file. This computes which <see cref="AnalyzerConfig"/> rules applies to this file, and correctly applies
+        /// Returns a <see cref="AnalyzerConfigOptionsResult"/> for a source file. This computes which <see
+        // cref="AnalyzerConfig"/> rules applies to this file, and correctly applies
         /// precedence rules if there are multiple rules for the same file.
         /// </summary>
-        /// <param name="sourcePath">The path to a file such as a source file or additional file. Must be non-null.</param>
+        /// <param name="sourcePath">The path to a file such as a source file or additional file. Must be
+        // non-null.</param>
         /// <remarks>This method is safe to call from multiple threads.</remarks>
         public AnalyzerConfigOptionsResult GetOptionsForSourcePath(string sourcePath)
         {
@@ -236,7 +242,8 @@ namespace Microsoft.CodeAnalysis
             var normalizedPath = PathUtilities.NormalizeWithForwardSlash(sourcePath);
             normalizedPath = PathUtilities.ExpandAbsolutePathWithRelativeParts(normalizedPath);
 
-            // If we have a global config, add any sections that match the full path. We can have at most one section since
+            // If we have a global config, add any sections that match the full path. We can have at most one
+            // section since
             // we would have merged them earlier.
             foreach (var section in _globalConfig.NamedSections)
             {
@@ -535,9 +542,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Merge any partial global configs into a single global config, and remove the partial configs
         /// </summary>
-        /// <param name="analyzerConfigs">An <see cref="ArrayBuilder{T}"/> of <see cref="AnalyzerConfig"/> containing a mix of regular and unmerged partial global configs</param>
+        /// <param name="analyzerConfigs">An <see cref="ArrayBuilder{T}"/> of <see cref="AnalyzerConfig"/>
+        // containing a mix of regular and unmerged partial global configs</param>
         /// <param name="diagnostics">Diagnostics produced during merge will be added to this bag</param>
-        /// <returns>A <see cref="GlobalAnalyzerConfig" /> that contains the merged partial configs, or <c>null</c> if there were no partial configs</returns>
+        /// <returns>A <see cref="GlobalAnalyzerConfig" /> that contains the merged partial configs, or
+        // <c>null</c> if there were no partial configs</returns>
         internal static GlobalAnalyzerConfig MergeGlobalConfigs(
             ArrayBuilder<AnalyzerConfig> analyzerConfigs,
             out ImmutableArray<Diagnostic> diagnostics
@@ -611,7 +620,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (IsAbsoluteEditorConfigPath(section.Name))
                     {
-                        // Let's recreate the section with the name unescaped, since we can then properly merge and match it later
+                        // Let's recreate the section with the name unescaped, since we can then properly merge and match it
+                        // later
                         var unescapedSection = new Section(
                             UnescapeSectionName(section.Name),
                             section.Properties
@@ -798,9 +808,11 @@ namespace Microsoft.CodeAnalysis
         /// Represents a combined global analyzer config.
         /// </summary>
         /// <remarks>
-        /// We parse all <see cref="AnalyzerConfig"/>s as individual files, according to the editorconfig spec.
+        /// We parse all <see cref="AnalyzerConfig"/>s as individual files, according to the editorconfig
+        // spec.
         ///
-        /// However, when viewing the configs as an <see cref="AnalyzerConfigSet"/> if multiple files have the
+        /// However, when viewing the configs as an <see cref="AnalyzerConfigSet"/> if multiple files have
+        // the
         /// <c>is_global</c> property set to <c>true</c> we combine those files and treat them as a single
         /// 'logical' global config file. This type represents that combined file.
         /// </remarks>

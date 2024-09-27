@@ -96,7 +96,8 @@ public readonly struct ParameterView
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <param name="parameterName">The name of the parameter.</param>
-    /// <returns>The parameter value if found; otherwise the default value for the specified type.</returns>
+    /// <returns>The parameter value if found; otherwise the default value for the specified
+    // type.</returns>
     public TValue? GetValueOrDefault<TValue>(string parameterName) =>
         GetValueOrDefault<TValue?>(parameterName, default);
 
@@ -106,7 +107,8 @@ public readonly struct ParameterView
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <param name="parameterName">The name of the parameter.</param>
-    /// <param name="defaultValue">The default value to return if no such parameter exists in the collection.</param>
+    /// <param name="defaultValue">The default value to return if no such parameter exists in the
+    // collection.</param>
     /// <returns>The parameter value if found; otherwise <paramref name="defaultValue"/>.</returns>
     public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue) =>
         TryGetValue<TValue>(parameterName, out TValue? result) ? result : defaultValue;
@@ -334,9 +336,11 @@ public readonly struct ParameterView
     }
 
     /// <summary>
-    /// Creates a new <see cref="ParameterView"/> from the given <see cref="IDictionary{TKey, TValue}"/>.
+    /// Creates a new <see cref="ParameterView"/> from the given <see cref="IDictionary{TKey,
+    // TValue}"/>.
     /// </summary>
-    /// <param name="parameters">The <see cref="IDictionary{TKey, TValue}"/> with the parameters.</param>
+    /// <param name="parameters">The <see cref="IDictionary{TKey, TValue}"/> with the
+    // parameters.</param>
     /// <returns>A <see cref="ParameterView"/>.</returns>
     public static ParameterView FromDictionary(IDictionary<string, object?> parameters)
     {
@@ -353,7 +357,8 @@ public readonly struct ParameterView
     /// For each parameter property on <paramref name="target"/>, updates its value to
     /// match the corresponding entry in the <see cref="ParameterView"/>.
     /// </summary>
-    /// <param name="target">An object that has a public writable property matching each parameter's name and type.</param>
+    /// <param name="target">An object that has a public writable property matching each parameter's
+    // name and type.</param>
     public void SetParameterProperties(object target)
     {
         ArgumentNullException.ThrowIfNull(target);
@@ -364,7 +369,8 @@ public readonly struct ParameterView
     /// <summary>
     /// An enumerator that iterates through a <see cref="ParameterView"/>.
     /// </summary>
-    // Note that this intentionally does not implement IEnumerator<>. This is the same pattern as Span<>.Enumerator
+    // Note that this intentionally does not implement IEnumerator<>. This is the same pattern as
+    // Span<>.Enumerator
     // it's valid to foreach over a type that doesn't implement IEnumerator<>.
     public struct Enumerator
     {

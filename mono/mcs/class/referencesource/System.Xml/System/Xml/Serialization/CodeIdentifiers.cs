@@ -71,7 +71,8 @@ namespace System.Xml.Serialization
             list.Clear();
         }
 
-        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.UseCamelCasing"]/*' />
+        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.UseCamelCasing"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -81,7 +82,8 @@ namespace System.Xml.Serialization
             set { camelCase = value; }
         }
 
-        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.MakeRightCase"]/*' />
+        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.MakeRightCase"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -128,7 +130,8 @@ namespace System.Xml.Serialization
             reservedIdentifiers.Add(identifier, identifier);
         }
 
-        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.RemoveReserved"]/*' />
+        /// <include file='doc\CodeIdentifiers.uex' path='docs/doc[@for="CodeIdentifiers.RemoveReserved"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

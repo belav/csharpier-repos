@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// Creates a new <see cref="MemoryDistributedCache"/> instance.
         /// </summary>
         /// <param name="optionsAccessor">The options of the cache.</param>
-        /// <param name="loggerFactory">The logger factory to create <see cref="ILogger"/> used to log messages.</param>
+        /// <param name="loggerFactory">The logger factory to create <see cref="ILogger"/> used to log
+        // messages.</param>
         public MemoryDistributedCache(
             IOptions<MemoryDistributedCacheOptions> optionsAccessor,
             ILoggerFactory loggerFactory
@@ -42,7 +43,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
 
         /// <summary>
-        /// Gets the specified item associated with a key from the <see cref="IMemoryCache"/> as a byte array.
+        /// Gets the specified item associated with a key from the <see cref="IMemoryCache"/> as a byte
+        // array.
         /// </summary>
         /// <param name="key">The key of the item to get.</param>
         /// <returns>The byte array value of the key.</returns>
@@ -54,11 +56,13 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
 
         /// <summary>
-        /// Asynchronously gets the specified item associated with a key from the <see cref="IMemoryCache"/> as a byte array.
+        /// Asynchronously gets the specified item associated with a key from the <see cref="IMemoryCache"/>
+        // as a byte array.
         /// </summary>
         /// <param name="key">The key of the item to get.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>
-        /// <returns>The task for getting the byte array value associated with the specified key from the cache.</returns>
+        /// <returns>The task for getting the byte array value associated with the specified key from the
+        // cache.</returns>
         public Task<byte[]?> GetAsync(
             string key,
             CancellationToken token = default(CancellationToken)
@@ -92,13 +96,15 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
 
         /// <summary>
-        /// Asynchronously sets the specified item associated with a key in the <see cref="IMemoryCache"/> as a byte array.
+        /// Asynchronously sets the specified item associated with a key in the <see cref="IMemoryCache"/>
+        // as a byte array.
         /// </summary>
         /// <param name="key">The key of the item to set.</param>
         /// <param name="value">The byte array value of the item to set.</param>
         /// <param name="options">The cache options for the item to set.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>
-        /// <returns>The task for setting the byte array value associated with the specified key in the cache.</returns>
+        /// <returns>The task for setting the byte array value associated with the specified key in the
+        // cache.</returns>
         public Task SetAsync(
             string key,
             byte[] value,
@@ -126,7 +132,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
 
         /// <summary>
-        /// Asynchronously refreshes the specified item associated with a key from the <see cref="IMemoryCache"/>.
+        /// Asynchronously refreshes the specified item associated with a key from the <see
+        // cref="IMemoryCache"/>.
         /// </summary>
         /// <param name="key">The key of the item to refresh.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>
@@ -151,7 +158,8 @@ namespace Microsoft.Extensions.Caching.Distributed
         }
 
         /// <summary>
-        /// Asynchronously removes the specified item associated with a key from the <see cref="IMemoryCache"/>.
+        /// Asynchronously removes the specified item associated with a key from the <see
+        // cref="IMemoryCache"/>.
         /// </summary>
         /// <param name="key">The key of the item to remove.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>

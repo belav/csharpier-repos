@@ -3,14 +3,14 @@ Copyright (c) 2003 Microsoft Corporation
 
 Module Name:
 
-    AuthenticatedStream.cs
+AuthenticatedStream.cs
 
 Abstract:
 
-    A public contact for a base abstract authenticated stream.
+A public contact for a base abstract authenticated stream.
 
 Author:
-    Alexei Vopilov    Sept 28-2003
+Alexei Vopilov    Sept 28-2003
 
 Revision History:
 

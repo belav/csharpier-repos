@@ -111,9 +111,12 @@ namespace Microsoft.CodeAnalysis.Emit
 
         private int CalculateSyntaxOffsetInPreviousMethod(SyntaxNode node)
         {
-            // Note that syntax offset of a syntax node contained in a lambda body is calculated by the containing top-level method,
-            // not by the lambda method. The offset is thus relative to the top-level method body start. We can thus avoid mapping
-            // the current lambda symbol or body to the corresponding previous lambda symbol or body, which is non-trivial.
+            // Note that syntax offset of a syntax node contained in a lambda body is calculated by the
+            // containing top-level method,
+            // not by the lambda method. The offset is thus relative to the top-level method body start. We can
+            // thus avoid mapping
+            // the current lambda symbol or body to the corresponding previous lambda symbol or body, which is
+            // non-trivial.
             return _previousTopLevelMethod.CalculateLocalSyntaxOffset(
                 _lambdaSyntaxFacts.GetDeclaratorPosition(node),
                 node.SyntaxTree
@@ -234,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Emit
             out int slotIndex
         )
         {
-            // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
+            // The previous method was not a state machine (it is allowed to change non-state machine to a state
+            // machine):
             if (_hoistedLocalSlots == null)
             {
                 slotIndex = -1;
@@ -273,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Emit
             out int slotIndex
         )
         {
-            // The previous method was not a state machine (it is allowed to change non-state machine to a state machine):
+            // The previous method was not a state machine (it is allowed to change non-state machine to a state
+            // machine):
             if (_awaiterMap == null)
             {
                 slotIndex = -1;

@@ -20,7 +20,8 @@ namespace System.Web.Services.Description
         string type;
         string part;
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding.Part"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding.Part"]/*'
+        // />
         [XmlAttribute("part")]
         public string Part
         {
@@ -28,7 +29,8 @@ namespace System.Web.Services.Description
             set { part = value; }
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding.Type"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding.Type"]/*'
+        // />
         [XmlAttribute("type")]
         public string Type
         {
@@ -36,7 +38,8 @@ namespace System.Web.Services.Description
             set { type = value; }
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeContentBinding.Namespace"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeContentBinding.Namespace"]/*' />
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/mime/";
     }
 
@@ -59,7 +62,8 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeMultipartRelatedBinding"]/*' />
+    /// <include file='doc\MimeFormatExtensions.uex'
+    // path='docs/doc[@for="MimeMultipartRelatedBinding"]/*' />
     [XmlFormatExtension(
         "multipartRelated",
         MimeContentBinding.Namespace,
@@ -70,7 +74,8 @@ namespace System.Web.Services.Description
     {
         MimePartCollection parts = new MimePartCollection();
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeMultipartRelatedBinding.Parts"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeMultipartRelatedBinding.Parts"]/*' />
         [XmlElement("part")]
         public MimePartCollection Parts
         {
@@ -102,7 +107,8 @@ namespace System.Web.Services.Description
     /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection"]/*' />
     public sealed class MimePartCollection : CollectionBase
     {
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.this"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.this"]/*'
+        // />
         public MimePart this[int index]
         {
             get { return (MimePart)List[index]; }
@@ -115,31 +121,36 @@ namespace System.Web.Services.Description
             return List.Add(mimePart);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.Insert"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.Insert"]/*'
+        // />
         public void Insert(int index, MimePart mimePart)
         {
             List.Insert(index, mimePart);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.IndexOf"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimePartCollection.IndexOf"]/*' />
         public int IndexOf(MimePart mimePart)
         {
             return List.IndexOf(mimePart);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.Contains"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimePartCollection.Contains"]/*' />
         public bool Contains(MimePart mimePart)
         {
             return List.Contains(mimePart);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.Remove"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.Remove"]/*'
+        // />
         public void Remove(MimePart mimePart)
         {
             List.Remove(mimePart);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.CopyTo"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimePartCollection.CopyTo"]/*'
+        // />
         public void CopyTo(MimePart[] array, int index)
         {
             List.CopyTo(array, index);
@@ -159,10 +170,12 @@ namespace System.Web.Services.Description
     {
         MimeTextMatchCollection matches = new MimeTextMatchCollection();
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextBinding.Namespace"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextBinding.Namespace"]/*'
+        // />
         public const string Namespace = "http://microsoft.com/wsdl/mime/textMatching/";
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextBinding.Matches"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextBinding.Matches"]/*'
+        // />
         [XmlElement("match", typeof(MimeTextMatch))]
         public MimeTextMatchCollection Matches
         {
@@ -237,7 +250,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatch.RepeatsString"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatch.RepeatsString"]/*' />
         [XmlAttribute("repeats"), DefaultValue("1")]
         public string RepeatsString
         {
@@ -264,7 +278,8 @@ namespace System.Web.Services.Description
             set { this.pattern = value; }
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatch.IgnoreCase"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatch.IgnoreCase"]/*'
+        // />
         [XmlAttribute("ignoreCase")]
         public bool IgnoreCase
         {
@@ -280,47 +295,55 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection"]/*' />
+    /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection"]/*'
+    // />
     public sealed class MimeTextMatchCollection : CollectionBase
     {
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.this"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.this"]/*' />
         public MimeTextMatch this[int index]
         {
             get { return (MimeTextMatch)List[index]; }
             set { List[index] = value; }
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.Add"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.Add"]/*' />
         public int Add(MimeTextMatch match)
         {
             return List.Add(match);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.Insert"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.Insert"]/*' />
         public void Insert(int index, MimeTextMatch match)
         {
             List.Insert(index, match);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.IndexOf"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.IndexOf"]/*' />
         public int IndexOf(MimeTextMatch match)
         {
             return List.IndexOf(match);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.Contains"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.Contains"]/*' />
         public bool Contains(MimeTextMatch match)
         {
             return List.Contains(match);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.Remove"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.Remove"]/*' />
         public void Remove(MimeTextMatch match)
         {
             List.Remove(match);
         }
 
-        /// <include file='doc\MimeFormatExtensions.uex' path='docs/doc[@for="MimeTextMatchCollection.CopyTo"]/*' />
+        /// <include file='doc\MimeFormatExtensions.uex'
+        // path='docs/doc[@for="MimeTextMatchCollection.CopyTo"]/*' />
         public void CopyTo(MimeTextMatch[] array, int index)
         {
             List.CopyTo(array, index);

@@ -19,7 +19,8 @@ public class MultiModuleLibrary
     public static bool MethodThatUsesGenerics()
     {
         // Force the existence of a generic dictionary for GenericClass<string>
-        // It's important we only use one canonical method and that method is not used from the consumption EXE.
+        // It's important we only use one canonical method and that method is not used from the consumption
+        // EXE.
         if (GenericClass<string>.IsArrayOfT(null))
             return false;
         if (!GenericClass<string>.IsArrayOfT(new string[0]))

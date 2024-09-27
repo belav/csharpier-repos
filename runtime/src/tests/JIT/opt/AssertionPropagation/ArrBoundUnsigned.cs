@@ -9,8 +9,10 @@ using Xunit;
 
 public class ArrBoundUnsigned
 {
-    // The method names indicate when the array access takes place e.g i_LT_UN_len executes a[i] if (uint)i < (uint)a.len.
-    // If the condition is true and the array index is invalid then an IndexOutOfRangeException is expected.
+    // The method names indicate when the array access takes place e.g i_LT_UN_len executes a[i] if
+    // (uint)i < (uint)a.len.
+    // If the condition is true and the array index is invalid then an IndexOutOfRangeException is
+    // expected.
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     static int i_LT_UN_len(int[] a, int i)

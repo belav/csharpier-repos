@@ -40,7 +40,8 @@ public abstract partial class DiagnosticVerifier
     /// Note: input a DiagnosticResult for each Diagnostic expected
     /// </summary>
     /// <param name="source">A class in the form of a string to run the analyzer on</param>
-    /// <param name="expected"> DiagnosticResults that should appear after the analyzer is run on the source</param>
+    /// <param name="expected"> DiagnosticResults that should appear after the analyzer is run on the
+    // source</param>
     protected void VerifyCSharpDiagnostic(string source, params DiagnosticResult[] expected)
     {
         VerifyDiagnostics(
@@ -56,7 +57,8 @@ public abstract partial class DiagnosticVerifier
     /// Note: input a DiagnosticResult for each Diagnostic expected
     /// </summary>
     /// <param name="source">A class in the form of a string to run the analyzer on</param>
-    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the source</param>
+    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the
+    // source</param>
     protected void VerifyBasicDiagnostic(string source, params DiagnosticResult[] expected)
     {
         VerifyDiagnostics(
@@ -71,8 +73,10 @@ public abstract partial class DiagnosticVerifier
     /// Called to test a C# DiagnosticAnalyzer when applied on the inputted strings as a source
     /// Note: input a DiagnosticResult for each Diagnostic expected
     /// </summary>
-    /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>
-    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
+    /// <param name="sources">An array of strings to create source documents from to run the analyzers
+    // on</param>
+    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the
+    // sources</param>
     protected void VerifyCSharpDiagnostic(string[] sources, params DiagnosticResult[] expected)
     {
         VerifyDiagnostics(sources, LanguageNames.CSharp, GetCSharpDiagnosticAnalyzer(), expected);
@@ -82,8 +86,10 @@ public abstract partial class DiagnosticVerifier
     /// Called to test a VB DiagnosticAnalyzer when applied on the inputted strings as a source
     /// Note: input a DiagnosticResult for each Diagnostic expected
     /// </summary>
-    /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>
-    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
+    /// <param name="sources">An array of strings to create source documents from to run the analyzers
+    // on</param>
+    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the
+    // sources</param>
     protected void VerifyBasicDiagnostic(string[] sources, params DiagnosticResult[] expected)
     {
         VerifyDiagnostics(
@@ -95,13 +101,16 @@ public abstract partial class DiagnosticVerifier
     }
 
     /// <summary>
-    /// General method that gets a collection of actual diagnostics found in the source after the analyzer is run,
+    /// General method that gets a collection of actual diagnostics found in the source after the
+    // analyzer is run,
     /// then verifies each of them.
     /// </summary>
-    /// <param name="sources">An array of strings to create source documents from to run the analyzers on</param>
+    /// <param name="sources">An array of strings to create source documents from to run the analyzers
+    // on</param>
     /// <param name="language">The language of the classes represented by the source strings</param>
     /// <param name="analyzer">The analyzer to be run on the source code</param>
-    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the sources</param>
+    /// <param name="expected">DiagnosticResults that should appear after the analyzer is run on the
+    // sources</param>
     private void VerifyDiagnostics(
         string[] sources,
         string language,
@@ -117,10 +126,13 @@ public abstract partial class DiagnosticVerifier
 
     #region Actual comparisons and verifications
     /// <summary>
-    /// Checks each of the actual Diagnostics found and compares them with the corresponding DiagnosticResult in the array of expected results.
-    /// Diagnostics are considered equal only if the DiagnosticResultLocation, Id, Severity, and Message of the DiagnosticResult match the actual diagnostic.
+    /// Checks each of the actual Diagnostics found and compares them with the corresponding
+    // DiagnosticResult in the array of expected results.
+    /// Diagnostics are considered equal only if the DiagnosticResultLocation, Id, Severity, and Message
+    // of the DiagnosticResult match the actual diagnostic.
     /// </summary>
-    /// <param name="actualResults">The Diagnostics found by the compiler after running the analyzer on the source code</param>
+    /// <param name="actualResults">The Diagnostics found by the compiler after running the analyzer on
+    // the source code</param>
     /// <param name="analyzer">The analyzer that was being run on the sources</param>
     /// <param name="expectedResults">Diagnostic Results that should have appeared in the code</param>
     private static void VerifyDiagnosticResults(
@@ -249,7 +261,8 @@ public abstract partial class DiagnosticVerifier
     }
 
     /// <summary>
-    /// Helper method to VerifyDiagnosticResult that checks the location of a diagnostic and compares it with the location in the expected DiagnosticResult.
+    /// Helper method to VerifyDiagnosticResult that checks the location of a diagnostic and compares it
+    // with the location in the expected DiagnosticResult.
     /// </summary>
     /// <param name="analyzer">The analyzer that was being run on the sources</param>
     /// <param name="diagnostic">The diagnostic that was found in the code</param>

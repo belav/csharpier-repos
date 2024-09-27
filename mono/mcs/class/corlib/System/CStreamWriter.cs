@@ -126,18 +126,18 @@ namespace System.IO
             }
         }
 
-        /*
-                public void WriteKey (ConsoleKeyInfo key)
-                {
-                    lock (this) {
-                        ConsoleKeyInfo copy = new ConsoleKeyInfo (key);
-                        if (driver.IsSpecialKey (copy))
-                            driver.WriteSpecialKey (copy);
-                        else
-                            InternalWriteChar (copy.KeyChar);
-                    }
-                }
-        */
+/*
+public void WriteKey (ConsoleKeyInfo key)
+{
+lock (this) {
+ConsoleKeyInfo copy = new ConsoleKeyInfo (key);
+if (driver.IsSpecialKey (copy))
+driver.WriteSpecialKey (copy);
+else
+InternalWriteChar (copy.KeyChar);
+}
+}
+*/
         public void InternalWriteString(string val)
         {
             try

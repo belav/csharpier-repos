@@ -279,14 +279,16 @@ public class CompositeEndpointDataSourceTest
 
         compositeDataSource.Dispose();
 
-        // Update DynamicEndpointDatasource and ObservableCollection after disposing CompositeEndpointDataSource.
+        // Update DynamicEndpointDatasource and ObservableCollection after disposing
+        // CompositeEndpointDataSource.
         var endpoint4 = CreateEndpoint("/d");
         dataSource1.AddEndpoint(endpoint4);
         var endpoint5 = CreateEndpoint("/d");
         var datasource3 = new DynamicEndpointDataSource(endpoint5);
         observableCollection.Add(datasource3);
 
-        // Token is not changed since the CompositeEndpointDataSource was disposed prior to the last endpoint being added.
+        // Token is not changed since the CompositeEndpointDataSource was disposed prior to the last
+        // endpoint being added.
         Assert.False(changeToken3.HasChanged);
     }
 

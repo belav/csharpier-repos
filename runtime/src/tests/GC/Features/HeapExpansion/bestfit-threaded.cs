@@ -166,19 +166,19 @@ public class Request
         Console.WriteLine("Using random seed: {0}", RandomSeed);
 
         Console.WriteLine("Starting Threads...");
-        /*        Thread[] threads = new Thread[numThreads];
-                for (int i=0; i<threads.Length; i++)
-                {
-                    threads[i] = new Thread(new ThreadStart(delegate{ one_pass r = new one_pass();  }));
-                    threads[i].Start();
-                }
-        
-                Console.WriteLine("Joining Threads...");
-                for (int i=0; i<threads.Length; i++)
-                {
-                    threads[i].Join();
-                }
-        */
+/*        Thread[] threads = new Thread[numThreads];
+for (int i=0; i<threads.Length; i++)
+{
+threads[i] = new Thread(new ThreadStart(delegate{ one_pass r = new one_pass();  }));
+threads[i].Start();
+}
+
+Console.WriteLine("Joining Threads...");
+for (int i=0; i<threads.Length; i++)
+{
+threads[i].Join();
+}
+*/
         new one_pass();
         Console.WriteLine("Test Passed");
         return 100;

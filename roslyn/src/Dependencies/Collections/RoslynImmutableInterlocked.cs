@@ -12,8 +12,10 @@ namespace Microsoft.CodeAnalysis.Collections
     internal static class RoslynImmutableInterlocked
     {
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the list.</typeparam>
         /// <param name="location">
@@ -24,8 +26,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// as it may run multiple times when races occur with other threads.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<T>(
             ref ImmutableSegmentedList<T> location,
@@ -58,22 +62,29 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the list.</typeparam>
-        /// <typeparam name="TArg">The type of argument passed to the <paramref name="transformer"/>.</typeparam>
+        /// <typeparam name="TArg">The type of argument passed to the <paramref
+        // name="transformer"/>.</typeparam>
         /// <param name="location">
         /// The variable or field to be changed, which may be accessed by multiple threads.
         /// </param>
         /// <param name="transformer">
-        /// A function that mutates the value. This function should be side-effect free, as it may run multiple times
+        /// A function that mutates the value. This function should be side-effect free, as it may run
+        // multiple times
         /// when races occur with other threads.</param>
-        /// <param name="transformerArgument">The argument to pass to <paramref name="transformer"/>.</param>
+        /// <param name="transformerArgument">The argument to pass to <paramref
+        // name="transformer"/>.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<T, TArg>(
             ref ImmutableSegmentedList<T> location,
@@ -107,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable list to the specified value and returns the previous
+        /// Assigns a field or variable containing an immutable list to the specified value and returns the
+        // previous
         /// value.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the list.</typeparam>
@@ -126,7 +138,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable list to the specified value if it is currently equal to
+        /// Assigns a field or variable containing an immutable list to the specified value if it is
+        // currently equal to
         /// another specified value. Returns the previous value.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the list.</typeparam>
@@ -148,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable list to the specified value if it is has not yet been
+        /// Assigns a field or variable containing an immutable list to the specified value if it is has not
+        // yet been
         /// initialized.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the list.</typeparam>
@@ -169,8 +183,10 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the set.</typeparam>
         /// <param name="location">
@@ -181,8 +197,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// as it may run multiple times when races occur with other threads.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<T>(
             ref ImmutableSegmentedHashSet<T> location,
@@ -217,22 +235,29 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the set.</typeparam>
-        /// <typeparam name="TArg">The type of argument passed to the <paramref name="transformer"/>.</typeparam>
+        /// <typeparam name="TArg">The type of argument passed to the <paramref
+        // name="transformer"/>.</typeparam>
         /// <param name="location">
         /// The variable or field to be changed, which may be accessed by multiple threads.
         /// </param>
         /// <param name="transformer">
-        /// A function that mutates the value. This function should be side-effect free, as it may run multiple times
+        /// A function that mutates the value. This function should be side-effect free, as it may run
+        // multiple times
         /// when races occur with other threads.</param>
-        /// <param name="transformerArgument">The argument to pass to <paramref name="transformer"/>.</param>
+        /// <param name="transformerArgument">The argument to pass to <paramref
+        // name="transformer"/>.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<T, TArg>(
             ref ImmutableSegmentedHashSet<T> location,
@@ -287,7 +312,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable set to the specified value if it is currently
+        /// Assigns a field or variable containing an immutable set to the specified value if it is
+        // currently
         /// equal to another specified value. Returns the previous value.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the set.</typeparam>
@@ -309,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable set to the specified value if it is has not yet
+        /// Assigns a field or variable containing an immutable set to the specified value if it is has not
+        // yet
         /// been initialized.
         /// </summary>
         /// <typeparam name="T">The type of value stored by the set.</typeparam>
@@ -330,8 +357,10 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of value stored by the dictionary.</typeparam>
@@ -343,8 +372,10 @@ namespace Microsoft.CodeAnalysis.Collections
         /// as it may run multiple times when races occur with other threads.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
@@ -384,23 +415,30 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Mutates a value in-place with optimistic locking transaction semantics via a specified transformation
-        /// function. The transformation is retried as many times as necessary to win the optimistic locking race.
+        /// Mutates a value in-place with optimistic locking transaction semantics via a specified
+        // transformation
+        /// function. The transformation is retried as many times as necessary to win the optimistic locking
+        // race.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
         /// <typeparam name="TValue">The type of value stored by the dictionary.</typeparam>
-        /// <typeparam name="TArg">The type of argument passed to the <paramref name="transformer"/>.</typeparam>
+        /// <typeparam name="TArg">The type of argument passed to the <paramref
+        // name="transformer"/>.</typeparam>
         /// <param name="location">
         /// The variable or field to be changed, which may be accessed by multiple threads.
         /// </param>
         /// <param name="transformer">
-        /// A function that mutates the value. This function should be side-effect free, as it may run multiple times
+        /// A function that mutates the value. This function should be side-effect free, as it may run
+        // multiple times
         /// when races occur with other threads.</param>
-        /// <param name="transformerArgument">The argument to pass to <paramref name="transformer"/>.</param>
+        /// <param name="transformerArgument">The argument to pass to <paramref
+        // name="transformer"/>.</param>
         /// <returns>
         /// <see langword="true"/> if the location's value is changed by applying the result of the
-        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's value remained
-        /// the same because the last invocation of <paramref name="transformer"/> returned the existing value.
+        /// <paramref name="transformer"/> function; otherwise, <see langword="false"/> if the location's
+        // value remained
+        /// the same because the last invocation of <paramref name="transformer"/> returned the existing
+        // value.
         /// </returns>
         public static bool Update<TKey, TValue, TArg>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
@@ -442,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable dictionary to the specified value and returns the
+        /// Assigns a field or variable containing an immutable dictionary to the specified value and
+        // returns the
         /// previous value.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
@@ -463,7 +502,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable dictionary to the specified value if it is currently
+        /// Assigns a field or variable containing an immutable dictionary to the specified value if it is
+        // currently
         /// equal to another specified value. Returns the previous value.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
@@ -489,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Assigns a field or variable containing an immutable dictionary to the specified value if it is has not yet
+        /// Assigns a field or variable containing an immutable dictionary to the specified value if it is
+        // has not yet
         /// been initialized.
         /// </summary>
         /// <typeparam name="TKey">The type of key stored by the dictionary.</typeparam>
@@ -511,7 +552,8 @@ namespace Microsoft.CodeAnalysis.Collections
             ).IsDefault;
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue, TArg}(ref ImmutableDictionary{TKey, TValue}, TKey, Func{TKey, TArg, TValue}, TArg)"/>
+        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue, TArg}(ref
+        // ImmutableDictionary{TKey, TValue}, TKey, Func{TKey, TArg, TValue}, TArg)"/>
         public static TValue GetOrAdd<TKey, TValue, TArg>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -538,7 +580,8 @@ namespace Microsoft.CodeAnalysis.Collections
             return GetOrAdd(ref location, key, value);
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, Func{TKey, TValue})"/>
+        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, Func{TKey, TValue})"/>
         public static TValue GetOrAdd<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -564,7 +607,8 @@ namespace Microsoft.CodeAnalysis.Collections
             return GetOrAdd(ref location, key, value);
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, TValue)"/>
+        /// <inheritdoc cref="ImmutableInterlocked.GetOrAdd{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, TValue)"/>
         public static TValue GetOrAdd<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -603,7 +647,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.AddOrUpdate{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, Func{TKey, TValue}, Func{TKey, TValue, TValue})"/>
+        /// <inheritdoc cref="ImmutableInterlocked.AddOrUpdate{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, Func{TKey, TValue}, Func{TKey, TValue, TValue})"/>
         public static TValue AddOrUpdate<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -653,7 +698,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.AddOrUpdate{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, TValue, Func{TKey, TValue, TValue})"/>
+        /// <inheritdoc cref="ImmutableInterlocked.AddOrUpdate{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, TValue, Func{TKey, TValue, TValue})"/>
         public static TValue AddOrUpdate<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -701,7 +747,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.TryAdd{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, TValue)"/>
+        /// <inheritdoc cref="ImmutableInterlocked.TryAdd{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, TValue)"/>
         public static bool TryAdd<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -738,7 +785,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.TryUpdate{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, TValue, TValue)"/>
+        /// <inheritdoc cref="ImmutableInterlocked.TryUpdate{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, TValue, TValue)"/>
         public static bool TryUpdate<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,
@@ -781,7 +829,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <inheritdoc cref="ImmutableInterlocked.TryRemove{TKey, TValue}(ref ImmutableDictionary{TKey, TValue}, TKey, out TValue)"/>
+        /// <inheritdoc cref="ImmutableInterlocked.TryRemove{TKey, TValue}(ref ImmutableDictionary{TKey,
+        // TValue}, TKey, out TValue)"/>
         public static bool TryRemove<TKey, TValue>(
             ref ImmutableSegmentedDictionary<TKey, TValue> location,
             TKey key,

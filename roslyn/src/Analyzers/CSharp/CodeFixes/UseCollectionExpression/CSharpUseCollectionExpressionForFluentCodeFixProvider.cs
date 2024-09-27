@@ -82,11 +82,16 @@ internal partial class CSharpUseCollectionExpressionForFluentCodeFixProvider
         )
             return;
 
-        // We want to replace `new[] { 1, 2, 3 }.Concat(x).Add(y).ToArray()` with the new collection expression.  To do
-        // this, we go through the following steps.  First, we replace the whole expression with `new(x, y) { 1, 2, 3 }`
-        // (a dummy object creation expression). We then call into our helper which replaces expressions with
-        // collection expressions.  The reason for the dummy object creation expression is that it serves as an actual
-        // node the rewriting code can attach an initializer to, by which it can figure out appropriate wrapping and
+        // We want to replace `new[] { 1, 2, 3 }.Concat(x).Add(y).ToArray()` with the new collection
+        // expression.  To do
+        // this, we go through the following steps.  First, we replace the whole expression with `new(x, y)
+        // { 1, 2, 3 }`
+        // (a dummy object creation expression). We then call into our helper which replaces expressions
+        // with
+        // collection expressions.  The reason for the dummy object creation expression is that it serves as
+        // an actual
+        // node the rewriting code can attach an initializer to, by which it can figure out appropriate
+        // wrapping and
         // indentation for the collection expression elements.
 
         var semanticDocument = await SemanticDocument
@@ -165,7 +170,8 @@ internal partial class CSharpUseCollectionExpressionForFluentCodeFixProvider
 
             using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var nodesAndTokens);
 
-            // Get the first argument.  If it was originally like `Add(arg)` then keep it in that form in `new(arg)`.
+            // Get the first argument.  If it was originally like `Add(arg)` then keep it in that form in
+            // `new(arg)`.
             // However, if it was on it's own line originally, then preserve that in the new form as well.
             AddOriginallyFirstArgument(matches[0].Node);
 
@@ -177,7 +183,8 @@ internal partial class CSharpUseCollectionExpressionForFluentCodeFixProvider
                 var originalArgumentListChildren = argumentList.Arguments.GetWithSeparators();
                 var index = originalArgumentListChildren.IndexOf(argument);
 
-                // if this was not the first argument in its original list.  for example: `.Add(1, 2, 3)`, then add its
+                // if this was not the first argument in its original list.  for example: `.Add(1, 2, 3)`, then add
+                // its
                 // preceding comma as well.  That way we preserve its original relationship in the rewritten code.
                 if (index > 0)
                 {

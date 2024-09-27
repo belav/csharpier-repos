@@ -226,7 +226,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             + "087cbeafa8089685a102030927c1"
         ).HexToByteArray();
 
-        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Unit test dummy credentials.")]
+        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+        // approved. Unit test dummy credentials.")]
         internal const string OracleWalletPassword = "123Wallet";
     }
 }

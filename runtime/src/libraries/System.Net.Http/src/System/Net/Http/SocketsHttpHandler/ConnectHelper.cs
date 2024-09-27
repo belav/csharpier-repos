@@ -63,7 +63,8 @@ namespace System.Net.Http
         )
         {
             // If there's a cert validation callback, and if it came from HttpClientHandler,
-            // wrap the original delegate in order to change the sender to be the request message (expected by HttpClientHandler's delegate).
+            // wrap the original delegate in order to change the sender to be the request message (expected by
+            // HttpClientHandler's delegate).
             RemoteCertificateValidationCallback? callback =
                 sslOptions.RemoteCertificateValidationCallback;
             if (callback != null && callback.Target is CertificateCallbackMapper mapper)
@@ -150,14 +151,17 @@ namespace System.Net.Http
                 );
                 if (request.IsExtendedConnectRequest)
                 {
-                    // Extended connect request is negotiating strictly for ALPN = "h2" because HttpClient is unaware of a possible downgrade.
-                    // At this point, SSL connection for HTTP / 2 failed, and the exception should indicate the reason for the external client / user.
+                    // Extended connect request is negotiating strictly for ALPN = "h2" because HttpClient is unaware of
+                    // a possible downgrade.
+                    // At this point, SSL connection for HTTP / 2 failed, and the exception should indicate the reason
+                    // for the external client / user.
                     ex.Data["HTTP2_ENABLED"] = false;
                 }
                 throw ex;
             }
 
-            // Handle race condition if cancellation happens after SSL auth completes but before the registration is disposed
+            // Handle race condition if cancellation happens after SSL auth completes but before the
+            // registration is disposed
             if (cancellationToken.IsCancellationRequested)
             {
                 sslStream.Dispose();
@@ -233,9 +237,12 @@ namespace System.Net.Http
                     return HttpRequestError.SecureConnectionError;
                 }
 
-                // Resolving a non-existent hostname often leads to EAI_AGAIN/TryAgain on Linux, indicating a non-authoritative failure, eg. timeout.
-                // Getting EAGAIN/TryAgain from a TCP connect() is not possible on Windows or Mac according to the docs and indicates lack of kernel resources on Linux,
-                // which should be a very rare error in practice. As a result, mapping SocketError.TryAgain to HttpRequestError.NameResolutionError
+                // Resolving a non-existent hostname often leads to EAI_AGAIN/TryAgain on Linux, indicating a
+                // non-authoritative failure, eg. timeout.
+                // Getting EAGAIN/TryAgain from a TCP connect() is not possible on Windows or Mac according to the
+                // docs and indicates lack of kernel resources on Linux,
+                // which should be a very rare error in practice. As a result, mapping SocketError.TryAgain to
+                // HttpRequestError.NameResolutionError
                 // leads to a more reliable distinction between NameResolutionError and ConnectionError.
                 if (
                     exception is SocketException socketException

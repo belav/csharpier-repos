@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // 10.14.4.1 The MoveNext method
             // . . .
             // When an exception is thrown and propagated out of the iterator block:
-            // o   Appropriate finally blocks in the iterator body will have been executed by the exception propagation.
+            // o   Appropriate finally blocks in the iterator body will have been executed by the exception
+            // propagation.
             // o   The state of the enumerator object is changed to after.
             // o   The exception propagation continues to the caller of the MoveNext method.
             // . . .

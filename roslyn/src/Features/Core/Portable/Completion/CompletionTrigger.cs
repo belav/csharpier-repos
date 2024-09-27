@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.Completion
     /// The action that triggered completion to start.
     /// </summary>
     /// <remarks>
-    /// NOTE: Roslyn's LSP completion implementation uses this struct. If a new property is added, either:
+    /// NOTE: Roslyn's LSP completion implementation uses this struct. If a new property is added,
+    // either:
     ///     1: The property's type must be serializable
     ///     OR
     ///     2. LSP will need to be updated to not use CompletionTrigger - see
@@ -47,13 +48,15 @@ namespace Microsoft.CodeAnalysis.Completion
         public static readonly CompletionTrigger Invoke = new(CompletionTriggerKind.Invoke);
 
         /// <summary>
-        /// Creates a new instance of a <see cref="CompletionTrigger"/> association with the insertion of a typed character into the document.
+        /// Creates a new instance of a <see cref="CompletionTrigger"/> association with the insertion of a
+        // typed character into the document.
         /// </summary>
         public static CompletionTrigger CreateInsertionTrigger(char insertedCharacter) =>
             new(CompletionTriggerKind.Insertion, insertedCharacter);
 
         /// <summary>
-        /// Creates a new instance of a <see cref="CompletionTrigger"/> association with the deletion of a character from the document.
+        /// Creates a new instance of a <see cref="CompletionTrigger"/> association with the deletion of a
+        // character from the document.
         /// </summary>
         public static CompletionTrigger CreateDeletionTrigger(char deletedCharacter) =>
             new(CompletionTriggerKind.Deletion, deletedCharacter);

@@ -26,7 +26,8 @@ internal enum ModuleUpdateStatus
 
     /// <summary>
     /// Some changes are errors that block rebuild of the module.
-    /// This means that the code is in a broken state that cannot be resolved by restarting the application.
+    /// This means that the code is in a broken state that cannot be resolved by restarting the
+    // application.
     /// </summary>
     Blocked = 3,
 }

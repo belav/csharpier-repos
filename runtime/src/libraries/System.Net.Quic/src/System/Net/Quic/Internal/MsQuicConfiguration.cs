@@ -30,7 +30,8 @@ internal static class MsQuicConfiguration
             flags |= QUIC_CREDENTIAL_FLAGS.USE_SUPPLIED_CREDENTIALS;
         }
 
-        // Find the first certificate with private key, either from selection callback or from a provided collection.
+        // Find the first certificate with private key, either from selection callback or from a provided
+        // collection.
         X509Certificate? certificate = null;
         if (authenticationOptions.LocalCertificateSelectionCallback != null)
         {

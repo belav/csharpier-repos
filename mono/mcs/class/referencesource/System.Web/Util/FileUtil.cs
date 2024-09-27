@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * UrlPath class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* UrlPath class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {
@@ -69,8 +69,8 @@ namespace System.Web.Util
     }
 
     /*
-     * Helper methods relating to file operations
-     */
+    * Helper methods relating to file operations
+    */
     internal class FileUtil
     {
         private FileUtil() { }
@@ -164,8 +164,8 @@ namespace System.Web.Util
         }
 
         /*
-         * Canonicalize the directory, and makes sure it ends with a '\'
-         */
+        * Canonicalize the directory, and makes sure it ends with a '\'
+        */
         internal static string FixUpPhysicalDirectory(string dir)
         {
             if (dir == null)
@@ -270,8 +270,10 @@ namespace System.Web.Util
         {
             bool isSuspicious;
 
-            // DevDiv 340712: GetConfigPathData generates n^2 exceptions where n is number of incorrectly placed '/'
-            // Explicitly prevent frequent exception cases since this method is called a few times per url segment
+            // DevDiv 340712: GetConfigPathData generates n^2 exceptions where n is number of incorrectly placed
+            // '/'
+            // Explicitly prevent frequent exception cases since this method is called a few times per url
+            // segment
             if (
                 (physicalPath != null)
                 && (
@@ -404,8 +406,10 @@ namespace System.Web.Util
         //
         // Given a physical path, determine if it exists, and whether it is a directory or file.
         //
-        // If directoryExistsOnError is set, set exists=true and isDirectory=true if we cannot confirm that the path does not exist.
-        // If fileExistsOnError is set, set exists=true and isDirectory=false if we cannot confirm that the path does not exist.
+        // If directoryExistsOnError is set, set exists=true and isDirectory=true if we cannot confirm that
+        // the path does not exist.
+        // If fileExistsOnError is set, set exists=true and isDirectory=false if we cannot confirm that the
+        // path does not exist.
         //
 
         // this code is called by config that doesn't have AspNetHostingPermission
@@ -534,7 +538,8 @@ namespace System.Web.Util
             get { return _fileAttributesData; }
         }
 
-        // FindFile - given a file name, gets the file attributes and short form (8.3 format) of a file name.
+        // FindFile - given a file name, gets the file attributes and short form (8.3 format) of a file
+        // name.
         static internal int FindFile(string path, out FindFileData data)
         {
             IntPtr hFindFile;
@@ -618,7 +623,8 @@ namespace System.Web.Util
                     + ")"
             );
 #endif
-            // crawl backwards along the subdirectories of fullPath until we get to the specified rootDirectoryPath
+            // crawl backwards along the subdirectories of fullPath until we get to the specified
+            // rootDirectoryPath
             string relativePathLong = String.Empty;
             string relativePathShort = String.Empty;
             string currentParentDir = Path.GetDirectoryName(fullPath);

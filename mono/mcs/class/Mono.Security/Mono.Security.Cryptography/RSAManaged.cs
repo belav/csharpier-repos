@@ -356,7 +356,8 @@ namespace Mono.Security.Cryptography
             isCRTpossible = (privateKey && (dq != null) && (qInv != null));
 
             // check if the public/private keys match
-            // the way the check is made allows a bad D to work if CRT is available (like MS does, see unit tests)
+            // the way the check is made allows a bad D to work if CRT is available (like MS does, see unit
+            // tests)
             if (!privateKey)
                 return;
 

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Http.HttpResults;
 
 /// <summary>
-/// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
+/// An <see cref="IResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect
+// (307),
 /// or Permanent Redirect (308) response with a Location header.
 /// Targets a registered route.
 /// </summary>
@@ -129,7 +130,8 @@ public sealed partial class RedirectToRouteHttpResult : IResult
     public RouteValueDictionary RouteValues { get; }
 
     /// <summary>
-    /// Gets the value that specifies that the redirect should be permanent if true or temporary if false.
+    /// Gets the value that specifies that the redirect should be permanent if true or temporary if
+    // false.
     /// </summary>
     public bool Permanent { get; }
 

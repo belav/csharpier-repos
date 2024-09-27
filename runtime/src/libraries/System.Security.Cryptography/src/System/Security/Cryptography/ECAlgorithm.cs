@@ -26,8 +26,10 @@ namespace System.Security.Cryptography
         };
 
         /// <summary>
-        /// When overridden in a derived class, exports the named or explicit <see cref="ECParameters" /> for an ECCurve.
-        /// If the curve has a name, the Curve property will contain named curve parameters otherwise it will contain explicit parameters.
+        /// When overridden in a derived class, exports the named or explicit <see cref="ECParameters" />
+        // for an ECCurve.
+        /// If the curve has a name, the Curve property will contain named curve parameters otherwise it
+        // will contain explicit parameters.
         /// </summary>
         /// <param name="includePrivateParameters">
         ///   <see langword="true" /> to include private parameters, otherwise, <see langword="false" />.
@@ -42,7 +44,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// When overridden in a derived class, exports the explicit <see cref="ECParameters" /> for an ECCurve.
+        /// When overridden in a derived class, exports the explicit <see cref="ECParameters" /> for an
+        // ECCurve.
         /// </summary>
         /// <param name="includePrivateParameters">
         ///   <see langword="true" /> to include private parameters, otherwise, <see langword="false" />.
@@ -69,7 +72,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// When overridden in a derived class, generates a new public/private keypair for the specified curve.
+        /// When overridden in a derived class, generates a new public/private keypair for the specified
+        // curve.
         /// </summary>
         /// <param name="curve">The curve to use.</param>
         /// <exception cref="NotSupportedException">
@@ -115,7 +119,8 @@ namespace System.Security.Cryptography
         /// </p>
         /// <p>-or-</p>
         /// <p>
-        ///   <paramref name="pbeParameters" /> indicates that <see cref="PbeEncryptionAlgorithm.TripleDes3KeyPkcs12" />
+        ///   <paramref name="pbeParameters" /> indicates that <see
+        // cref="PbeEncryptionAlgorithm.TripleDes3KeyPkcs12" />
         ///   should be used, which requires <see langword="char" />-based passwords.
         /// </p>
         /// </exception>
@@ -319,7 +324,8 @@ namespace System.Security.Cryptography
         /// structure after decrypting with a byte-based password, replacing the
         /// keys for this object.
         /// </summary>
-        /// <param name="passwordBytes">The bytes to use as a password when decrypting the key material.</param>
+        /// <param name="passwordBytes">The bytes to use as a password when decrypting the key
+        // material.</param>
         /// <param name="source">
         /// The bytes of a PKCS#8 EncryptedPrivateKeyInfo structure in the ASN.1-BER encoding.
         /// </param>
@@ -360,12 +366,15 @@ namespace System.Security.Cryptography
         ///   The password bytes are passed directly into the Key Derivation Function (KDF)
         ///   used by the algorithm indicated by the EncryptedPrivateKeyInfo contents.
         ///   This enables compatibility with other systems which use a text encoding
-        ///   other than UTF-8 when processing passwords with PBKDF2 (Password-Based Key Derivation Function 2).
+        ///   other than UTF-8 when processing passwords with PBKDF2 (Password-Based Key Derivation Function
+        // 2).
         /// </p>
         /// <p>
         ///   This method only supports the binary (BER/CER/DER) encoding of EncryptedPrivateKeyInfo.
-        ///   If the value is Base64-encoded, the caller must Base64-decode the contents before calling this method.
-        ///   If the contents are PEM-encoded, <see cref="ImportFromEncryptedPem(ReadOnlySpan{char}, ReadOnlySpan{byte})" />
+        ///   If the value is Base64-encoded, the caller must Base64-decode the contents before calling this
+        // method.
+        ///   If the contents are PEM-encoded, <see cref="ImportFromEncryptedPem(ReadOnlySpan{char},
+        // ReadOnlySpan{byte})" />
         ///   should be used.
         /// </p>
         /// </remarks>
@@ -435,13 +444,16 @@ namespace System.Security.Cryptography
         /// <remarks>
         /// <p>
         ///   When the contents of <paramref name="source" /> indicate an algorithm that uses PBKDF1
-        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function 2),
+        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function
+        // 2),
         ///   the password is converted to bytes via the UTF-8 encoding.
         /// </p>
         /// <p>
         ///   This method only supports the binary (BER/CER/DER) encoding of EncryptedPrivateKeyInfo.
-        ///   If the value is Base64-encoded, the caller must Base64-decode the contents before calling this method.
-        ///   If the contents are PEM-encoded, <see cref="ImportFromEncryptedPem(ReadOnlySpan{char}, ReadOnlySpan{char})" />
+        ///   If the value is Base64-encoded, the caller must Base64-decode the contents before calling this
+        // method.
+        ///   If the contents are PEM-encoded, <see cref="ImportFromEncryptedPem(ReadOnlySpan{char},
+        // ReadOnlySpan{char})" />
         ///   should be used.
         /// </p>
         /// </remarks>
@@ -478,7 +490,8 @@ namespace System.Security.Cryptography
         /// Imports the public/private keypair from a PKCS#8 PrivateKeyInfo structure
         /// after decryption, replacing the keys for this object.
         /// </summary>
-        /// <param name="source">The bytes of a PKCS#8 PrivateKeyInfo structure in the ASN.1-BER encoding.</param>
+        /// <param name="source">The bytes of a PKCS#8 PrivateKeyInfo structure in the ASN.1-BER
+        // encoding.</param>
         /// <param name="bytesRead">
         /// When this method returns, contains a value that indicates the number
         /// of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.
@@ -497,7 +510,8 @@ namespace System.Security.Cryptography
         ///   other than the algorithm represented by this instance.
         /// </p>
         /// <p>-or-</p>
-        /// <p>The contents of <paramref name="source" /> represent the key in a format that is not supported.</p>
+        /// <p>The contents of <paramref name="source" /> represent the key in a format that is not
+        // supported.</p>
         /// <p>-or-</p>
         /// <p>
         ///   The algorithm-specific key import failed.
@@ -505,7 +519,8 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         /// This method only supports the binary (BER/CER/DER) encoding of PrivateKeyInfo.
-        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this method.
+        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this
+        // method.
         /// If the value is PEM-encoded, <see cref="ImportFromPem" /> should be used.
         /// </remarks>
         public override unsafe void ImportPkcs8PrivateKey(
@@ -539,7 +554,8 @@ namespace System.Security.Cryptography
         /// Imports the public key from an X.509 SubjectPublicKeyInfo structure after decryption,
         /// replacing the keys for this object
         /// </summary>
-        /// <param name="source">The bytes of an X.509 SubjectPublicKeyInfo structure in the ASN.1-DER encoding.</param>
+        /// <param name="source">The bytes of an X.509 SubjectPublicKeyInfo structure in the ASN.1-DER
+        // encoding.</param>
         /// <param name="bytesRead">
         /// When this method returns, contains a value that indicates the number
         /// of bytes read from <paramref name="source" />. This parameter is treated as uninitialized.
@@ -559,14 +575,16 @@ namespace System.Security.Cryptography
         /// </p>
         /// <p>-or-</p>
         /// <p>
-        ///   The contents of <paramref name="source" /> represent the key in a format that is not supported.
+        ///   The contents of <paramref name="source" /> represent the key in a format that is not
+        // supported.
         /// </p>
         /// <p>-or-</p>
         /// <p>The algorithm-specific key import failed.</p>
         /// </exception>
         /// <remarks>
         /// This method only supports the binary (DER) encoding of SubjectPublicKeyInfo.
-        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this method.
+        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this
+        // method.
         /// If this value is PEM-encoded, <see cref="ImportFromPem" /> should be used.
         /// </remarks>
         public override void ImportSubjectPublicKeyInfo(
@@ -608,7 +626,8 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         /// This method only supports the binary (BER/CER/DER) encoding of ECPrivateKey.
-        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this method.
+        /// If the value is Base64-encoded, the caller must Base64-decode the contents before calling this
+        // method.
         /// If the value is PEM-encoded, <see cref="ImportFromPem" /> should be used.
         /// </remarks>
         public virtual unsafe void ImportECPrivateKey(ReadOnlySpan<byte> source, out int bytesRead)
@@ -796,8 +815,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses PBKDF1
-        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function 2),
+        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses
+        // PBKDF1
+        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function
+        // 2),
         ///   the password is converted to bytes via the UTF-8 encoding.
         ///   </para>
         ///   <para>

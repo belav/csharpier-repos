@@ -136,7 +136,8 @@ namespace System.Reflection.Tests
                     .s_cctorCallCount
             );
 
-            // Subsequent invocations of the static cctor should not run the cctor at all, as it has already executed
+            // Subsequent invocations of the static cctor should not run the cctor at all, as it has already
+            // executed
             // and running multiple times opens up the possibility of modifying read only static data
             obj = constructors[0].Invoke(null, new object[] { });
             Assert.Null(obj);

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Authentication.Certificate;
 
 /// <summary>
-/// MemoryCache based implementation used to store <see cref="AuthenticateResult"/> results after the certificate has been validated
+/// MemoryCache based implementation used to store <see cref="AuthenticateResult"/> results after
+// the certificate has been validated
 /// </summary>
 public class CertificateValidationCache : ICertificateValidationCache
 {

@@ -31,7 +31,8 @@ namespace System.Net.Http
     /// <summary>Provides a set of connection pools, each for its own endpoint.</summary>
     internal sealed class HttpConnectionPoolManager : IDisposable
     {
-        /// <summary>How frequently an operation should be initiated to clean out old pools and connections in those pools.</summary>
+        /// <summary>How frequently an operation should be initiated to clean out old pools and connections
+        // in those pools.</summary>
         private readonly TimeSpan _cleanPoolTimeout;
 
         /// <summary>The pools, indexed by endpoint.</summary>
@@ -163,8 +164,10 @@ namespace System.Net.Http
 
 #if !ILLUMOS && !SOLARIS
         /// <summary>
-        /// Starts monitoring for network changes. Upon a change, <see cref="HttpConnectionPool.OnNetworkChanged"/> will be
-        /// called for every <see cref="HttpConnectionPool"/> in the <see cref="HttpConnectionPoolManager"/>.
+        /// Starts monitoring for network changes. Upon a change, <see
+        // cref="HttpConnectionPool.OnNetworkChanged"/> will be
+        /// called for every <see cref="HttpConnectionPool"/> in the <see
+        // cref="HttpConnectionPoolManager"/>.
         /// </summary>
         public void StartMonitoringNetworkChanges()
         {
@@ -174,7 +177,8 @@ namespace System.Net.Http
             }
 
             // Monitor network changes to invalidate Alt-Svc headers.
-            // A weak reference is used to avoid NetworkChange.NetworkAddressChanged keeping a non-disposed connection pool alive.
+            // A weak reference is used to avoid NetworkChange.NetworkAddressChanged keeping a non-disposed
+            // connection pool alive.
             NetworkAddressChangedEventHandler networkChangedDelegate;
             { // scope to avoid closure if _networkChangeCleanup != null
                 var poolsRef = new WeakReference<
@@ -244,7 +248,8 @@ namespace System.Net.Http
                 _handler = handler;
             }
 
-            // If user never disposes the HttpClient, use finalizer to remove from NetworkChange.NetworkAddressChanged.
+            // If user never disposes the HttpClient, use finalizer to remove from
+            // NetworkChange.NetworkAddressChanged.
             // _handler will be rooted in NetworkChange, so should be safe to use here.
             ~NetworkChangeCleanup() => NetworkChange.NetworkAddressChanged -= _handler;
 
@@ -632,7 +637,8 @@ namespace System.Net.Http
 #endif
         }
 
-        /// <summary>Sets <see cref="_cleaningTimer"/> and <see cref="_timerIsRunning"/> based on the specified timeout.</summary>
+        /// <summary>Sets <see cref="_cleaningTimer"/> and <see cref="_timerIsRunning"/> based on the
+        // specified timeout.</summary>
         private void SetCleaningTimer(TimeSpan timeout)
         {
             if (_cleaningTimer!.Change(timeout, Timeout.InfiniteTimeSpan))
@@ -641,7 +647,8 @@ namespace System.Net.Http
             }
         }
 
-        /// <summary>Removes unusable connections from each pool, and removes stale pools entirely.</summary>
+        /// <summary>Removes unusable connections from each pool, and removes stale pools
+        // entirely.</summary>
         private void RemoveStalePools()
         {
             Debug.Assert(_cleaningTimer != null);

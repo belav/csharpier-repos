@@ -186,8 +186,10 @@ namespace System.ServiceModel.Channels
             {
                 List<string> tokenList = new List<string>();
 
-                // We may have multiple subprotocol header in the response. We will build up a list with all the subprotocol values.
-                // There might be duplicated ones inside the list, but it doesn't matter since we will always take the first matching value.
+                // We may have multiple subprotocol header in the response. We will build up a list with all the
+                // subprotocol values.
+                // There might be duplicated ones inside the list, but it doesn't matter since we will always take
+                // the first matching value.
                 foreach (string headerValue in clientProtocols)
                 {
                     List<string> protocolList;
@@ -201,7 +203,8 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                // If this method returns true, we should ensure that clientProtocols always contains at least one entry
+                // If this method returns true, we should ensure that clientProtocols always contains at least one
+                // entry
                 if (tokenList.Count == 0)
                 {
                     tokenList.Add(string.Empty);

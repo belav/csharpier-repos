@@ -178,8 +178,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ThrowOnNegativeSizedCollection()
         {
-            // This is an obscure case, and it doesn't much matter what is thrown, as long as is thrown before such
-            // an edge case could cause more obscure damage. A class derived from ReadOnlyCollection is used to catch
+            // This is an obscure case, and it doesn't much matter what is thrown, as long as is thrown before
+            // such
+            // an edge case could cause more obscure damage. A class derived from ReadOnlyCollection is used to
+            // catch
             // assumptions that such a type is safe.
             Assert.ThrowsAny<Exception>(
                 () =>

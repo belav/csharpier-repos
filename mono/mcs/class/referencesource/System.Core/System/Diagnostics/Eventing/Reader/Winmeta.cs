@@ -172,7 +172,8 @@ namespace System.Diagnostics.Eventing.Reader
         AuditSuccess = 0x20000000000000,
 
         /// <summary>
-        /// Incorrect CorrelationHint value mistakenly shipped in .NET 3.5. Don't use: duplicates AuditFailure.
+        /// Incorrect CorrelationHint value mistakenly shipped in .NET 3.5. Don't use: duplicates
+        // AuditFailure.
         /// </summary>
         [Obsolete("Incorrect value: use CorrelationHint2 instead", false)]
         CorrelationHint = 0x10000000000000,

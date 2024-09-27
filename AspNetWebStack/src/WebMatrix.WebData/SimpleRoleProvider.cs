@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -78,10 +79,12 @@ namespace WebMatrix.WebData
         public string UserIdColumn { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for this provider.
+        /// Gets or sets the <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for this
+        // provider.
         /// </summary>
         /// <remarks>
-        /// This value configures whether or not queries for user names normalize the user name to uppercase. See
+        /// This value configures whether or not queries for user names normalize the user name to
+        // uppercase. See
         /// <see cref="WebMatrix.WebData.SimpleMembershipProviderCasingBehavior"/> for a full description.
         /// </remarks>
         public SimpleMembershipProviderCasingBehavior CasingBehavior
@@ -108,7 +111,8 @@ namespace WebMatrix.WebData
         internal DatabaseConnectionInfo ConnectionInfo { get; set; }
         internal bool InitializeCalled { get; set; }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string ApplicationName
         {
             get
@@ -233,7 +237,8 @@ namespace WebMatrix.WebData
             return roleIds;
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             if (!InitializeCalled)
@@ -249,7 +254,8 @@ namespace WebMatrix.WebData
                     List<int> userIds = GetUserIdsFromNames(db, usernames);
                     List<int> roleIds = GetRoleIdsFromNames(db, roleNames);
 
-                    // Generate a INSERT INTO for each userid/rowid combination, where userIds are the first params, and roleIds follow
+                    // Generate a INSERT INTO for each userid/rowid combination, where userIds are the first params, and
+                    // roleIds follow
                     for (int uId = 0; uId < userCount; uId++)
                     {
                         for (int rId = 0; rId < roleCount; rId++)
@@ -286,7 +292,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override void CreateRole(string roleName)
         {
             if (!InitializeCalled)
@@ -321,7 +328,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool DeleteRole(string roleName, bool throwOnPopulatedRole)
         {
             if (!InitializeCalled)
@@ -371,7 +379,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string[] FindUsersInRole(string roleName, string usernameToMatch)
         {
             if (!InitializeCalled)
@@ -407,7 +416,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string[] GetAllRoles()
         {
             if (!InitializeCalled)
@@ -422,7 +432,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string[] GetRolesForUser(string username)
         {
             if (!InitializeCalled)
@@ -462,7 +473,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override string[] GetUsersInRole(string roleName)
         {
             if (!InitializeCalled)
@@ -489,7 +501,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool IsUserInRole(string username, string roleName)
         {
             if (!InitializeCalled)
@@ -517,7 +530,8 @@ namespace WebMatrix.WebData
             }
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override void RemoveUsersFromRoles(string[] usernames, string[] roleNames)
         {
             if (!InitializeCalled)
@@ -599,7 +613,8 @@ namespace WebMatrix.WebData
             return (int)result[0];
         }
 
-        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been initialized
+        // Inherited from RoleProvider ==> Forwarded to previous provider if this provider hasn't been
+        // initialized
         public override bool RoleExists(string roleName)
         {
             if (!InitializeCalled)

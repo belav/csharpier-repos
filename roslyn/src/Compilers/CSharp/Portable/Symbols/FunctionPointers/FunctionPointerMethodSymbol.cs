@@ -89,7 +89,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             break;
 
                         default:
-                            // '{0}' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref readonly'.
+                            // '{0}' is not a valid function pointer return type modifier. Valid modifiers are 'ref' and 'ref
+                            // readonly'.
                             diagnostics.Add(
                                 ErrorCode.ERR_InvalidFuncPointerReturnTypeModifier,
                                 modifier.GetLocation(),
@@ -178,21 +179,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     case SyntaxKind.UnmanagedKeyword:
                         // From the function pointers spec:
-                        // C# recognizes 4 special identifiers that map to specific existing unmanaged CallKinds from ECMA 335.
-                        // In order for this mapping to occur, these identifiers must be specified on their own, with no other
-                        // identifiers, and this requirement is encoded into the spec for unmanaged_calling_conventions. These
+                        // C# recognizes 4 special identifiers that map to specific existing unmanaged CallKinds from ECMA
+                        // 335.
+                        // In order for this mapping to occur, these identifiers must be specified on their own, with no
+                        // other
+                        // identifiers, and this requirement is encoded into the spec for unmanaged_calling_conventions.
+                        // These
                         // identifiers are Cdecl, Thiscall, Stdcall, and Fastcall, which correspond to unmanaged cdecl,
-                        // unmanaged thiscall, unmanaged stdcall, and unmanaged fastcall, respectively. If more than one identifier
-                        // is specified, or the single identifier is not of the specially recognized identifiers, we perform special
+                        // unmanaged thiscall, unmanaged stdcall, and unmanaged fastcall, respectively. If more than one
+                        // identifier
+                        // is specified, or the single identifier is not of the specially recognized identifiers, we perform
+                        // special
                         // name lookup on the identifier with the following rules:
                         //
                         //  * We prepend the identifier with the string CallConv
                         //  * We look only at types defined in the System.Runtime.CompilerServices namespace.
-                        //  * We look only at types defined in the core library of the application, which is the library that defines
+                        //  * We look only at types defined in the core library of the application, which is the library
+                        // that defines
                         //    System.Object and has no dependencies.
                         //
-                        // If lookup succeeds on all of the identifiers specified in an unmanaged_calling_convention, we encode the
-                        // CallKind as unmanaged, and encode each of the resolved types in the set of modopts at the beginning of
+                        // If lookup succeeds on all of the identifiers specified in an unmanaged_calling_convention, we
+                        // encode the
+                        // CallKind as unmanaged, and encode each of the resolved types in the set of modopts at the
+                        // beginning of
                         // the function pointer signature.
 
                         switch (callingConventionSyntax.UnmanagedCallingConventionList)
@@ -224,7 +233,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 };
 
                             case { CallingConventions: { Count: 0 } } unmanagedList:
-                                // Should never be possible from parser-constructed code (parser will always provide at least a missing identifier token),
+                                // Should never be possible from parser-constructed code (parser will always provide at least a
+                                // missing identifier token),
                                 // so diagnostic quality isn't hugely important
                                 if (!unmanagedList.ContainsDiagnostics)
                                 {
@@ -359,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Creates a function pointer method symbol from individual parts. This method should only be used when diagnostics are not needed.
+        /// Creates a function pointer method symbol from individual parts. This method should only be used
+        // when diagnostics are not needed.
         /// This should only be used from testing code.
         /// </summary>
         internal static FunctionPointerMethodSymbol CreateFromPartsForTest(
@@ -386,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Creates a function pointer method symbol from individual parts. This method should only be used when diagnostics are not needed.
+        /// Creates a function pointer method symbol from individual parts. This method should only be used
+        // when diagnostics are not needed.
         /// </summary>
         internal static FunctionPointerMethodSymbol CreateFromParts(
             CallingConvention callingConvention,
@@ -654,7 +666,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Creates a function pointer method symbol from individual parts. This method should only be used when diagnostics are not needed.
+        /// Creates a function pointer method symbol from individual parts. This method should only be used
+        // when diagnostics are not needed.
         /// </summary>
         private FunctionPointerMethodSymbol(
             CallingConvention callingConvention,
@@ -1019,9 +1032,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return false;
             }
 
-            // Calling convention modifiers are considered part of the equality of the function, even if the ignore
-            // custom modifiers bit is set. If the bit is not set, then no need to do anything as it will be compared
-            // with the rest of the modifiers. Order is significant in metadata, but at the type level ordering/duplication
+            // Calling convention modifiers are considered part of the equality of the function, even if the
+            // ignore
+            // custom modifiers bit is set. If the bit is not set, then no need to do anything as it will be
+            // compared
+            // with the rest of the modifiers. Order is significant in metadata, but at the type level
+            // ordering/duplication
             // is not significant for these modifiers
             if (
                 (compareKind & TypeCompareKind.IgnoreCustomModifiersAndArraySizesAndLowerBounds)

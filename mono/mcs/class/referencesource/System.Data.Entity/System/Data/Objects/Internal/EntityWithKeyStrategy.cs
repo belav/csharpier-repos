@@ -13,7 +13,8 @@ using System.Text;
 namespace System.Data.Objects.Internal
 {
     /// <summary>
-    /// Implementor of IEntityKeyStrategy for entities that implement IEntityWithKey.  Getting and setting
+    /// Implementor of IEntityKeyStrategy for entities that implement IEntityWithKey.  Getting and
+    // setting
     /// the key is deferred to the entity itself.
     /// </summary>
     internal sealed class EntityWithKeyStrategy : IEntityKeyStrategy

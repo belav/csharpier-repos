@@ -121,7 +121,8 @@ namespace System.Reflection.Tests
                 }
             );
 
-            // In a single-threaded scenario at least, MetadataLoadContexts shouldn't ask the resolver to bind the same name twice.
+            // In a single-threaded scenario at least, MetadataLoadContexts shouldn't ask the resolver to bind
+            // the same name twice.
             using (MetadataLoadContext lc = new MetadataLoadContext(resolver))
             {
                 Assembly derived = lc.LoadFromByteArray(
@@ -170,7 +171,8 @@ namespace System.Reflection.Tests
         [Fact]
         public static void ResolverFromReferencedAssembliesUsingFullPublicKeyReference()
         {
-            // Ecma-335 allows an assembly reference to specify a full public key rather than the token. Ensure that those references
+            // Ecma-335 allows an assembly reference to specify a full public key rather than the token. Ensure
+            // that those references
             // still hand out usable AssemblyNames to resolve handlers.
 
             AssemblyName assemblyNameReceivedByHandler = null;
@@ -193,12 +195,15 @@ namespace System.Reflection.Tests
                 Assembly a = lc.LoadFromByteArray(TestData.s_AssemblyRefUsingFullPublicKeyImage);
                 Type t = a.GetType("C", throwOnError: true);
 
-                // We expect this next to call to throw since it asks the MetadataLoadContext to resolve [mscorlib]System.Object and our
+                // We expect this next to call to throw since it asks the MetadataLoadContext to resolve
+                // [mscorlib]System.Object and our
                 // resolve handler doesn't return anything for that.
                 Assert.Throws<FileNotFoundException>(() => t.BaseType);
 
-                // But it did get called with a request to resolve "mscorlib" and we got the correct PKT calculated from the PK.
-                // Note that the original PK is not made available (which follows prior precedent with these apis.) It's not like
+                // But it did get called with a request to resolve "mscorlib" and we got the correct PKT calculated
+                // from the PK.
+                // Note that the original PK is not made available (which follows prior precedent with these apis.)
+                // It's not like
                 // anyone binds with the full PK...
                 Assert.NotNull(assemblyNameReceivedByHandler);
                 byte[] expectedPkt = "b77a5c561934e089".HexToByteArray();

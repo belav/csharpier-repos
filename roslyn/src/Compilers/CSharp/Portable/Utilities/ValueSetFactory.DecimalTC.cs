@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private struct DecimalTC : INumericTC<decimal>
         {
-            // These are the smallest nonzero normal mantissa value (in three parts) below which you could use a higher scale.
+            // These are the smallest nonzero normal mantissa value (in three parts) below which you could use a
+            // higher scale.
             // This is the 96-bit representation of ((2^96)-1) / 10;
             private const uint transitionLow = 0x99999999;
             private const uint transitionMid = 0x99999999;

@@ -22,7 +22,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// The interfaces explicitly declared as implemented by this InstantiatedType. Duplicates are not permitted
+        /// The interfaces explicitly declared as implemented by this InstantiatedType. Duplicates are not
+        // permitted
         /// </summary>
         public override DefType[] ExplicitlyImplementedInterfaces
         {

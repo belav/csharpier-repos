@@ -169,7 +169,8 @@ public class Startup
                                     listenOptions.UseHttps(
                                         (stream, clientHelloInfo, state, cancellationToken) =>
                                         {
-                                            // Here you would check the name, select an appropriate cert, and provide a fallback or fail for null names.
+                                            // Here you would check the name, select an appropriate cert, and provide a fallback or fail for
+                                            // null names.
                                             var serverName = clientHelloInfo.ServerName;
                                             if (serverName != null && serverName != "localhost")
                                             {

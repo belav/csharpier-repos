@@ -16,7 +16,8 @@ using System.Threading;
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
     /// <summary>
-    /// Exposes a helper method that allows <code>WindowsRuntimeBuffer : IBuffer, IBufferInternal</code> which is implemented in
+    /// Exposes a helper method that allows <code>WindowsRuntimeBuffer : IBuffer, IBufferInternal</code>
+    // which is implemented in
     /// <code>System.Runtime.WindowsRuntime.dll</code> to call into the VM.
     /// </summary>
     [FriendAccessAllowed]

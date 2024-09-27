@@ -458,7 +458,8 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
             if (destination is TTypeDeclarationSyntax typeDecl)
             {
                 var insertionIndices = GetInsertionIndices(typeDecl, cancellationToken);
-                // We can generate into a containing type as long as there is at least one non-hidden location in it.
+                // We can generate into a containing type as long as there is at least one non-hidden location in
+                // it.
                 if (insertionIndices.Contains(true))
                 {
                     return true;
@@ -608,13 +609,17 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
 
             if (allOccurrences && CanReplace(nodeInCurrent))
             {
-                // Original expression and current node being semantically equivalent isn't enough when the original expression
-                // is a member access via instance reference (either implicit or explicit), the check only ensures that the expression
-                // and current node are both backed by the same member symbol. So in this case, in addition to SemanticEquivalence check,
+                // Original expression and current node being semantically equivalent isn't enough when the original
+                // expression
+                // is a member access via instance reference (either implicit or explicit), the check only ensures
+                // that the expression
+                // and current node are both backed by the same member symbol. So in this case, in addition to
+                // SemanticEquivalence check,
                 // we also check if expression and current node are both instance member access.
                 //
                 // For example, even though the first `c` binds to a field and we are introducing a local for it,
-                // we don't want other references to that field to be replaced as well (i.e. the second `c` in the expression).
+                // we don't want other references to that field to be replaced as well (i.e. the second `c` in the
+                // expression).
                 //
                 //  class C
                 //  {
@@ -647,9 +652,12 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                         return IsInstanceMemberReference(currentOperation);
                     }
 
-                    // If the original expression is within a static local function, further checks are unnecessary since our scope has already been narrowed down to within the local function.
-                    // If the original expression is not within a static local function, we need to further check whether the expression we're comparing against is within a static local
-                    // function. If so, the expression is not a valid match since we cannot refer to instance variables from within static local functions.
+                    // If the original expression is within a static local function, further checks are unnecessary
+                    // since our scope has already been narrowed down to within the local function.
+                    // If the original expression is not within a static local function, we need to further check
+                    // whether the expression we're comparing against is within a static local
+                    // function. If so, the expression is not a valid match since we cannot refer to instance variables
+                    // from within static local functions.
                     if (!IsExpressionInStaticLocalFunction(expressionInOriginal))
                     {
                         return !IsExpressionInStaticLocalFunction(nodeInCurrent);

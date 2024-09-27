@@ -8,7 +8,8 @@ using Xunit.Abstractions;
 
 namespace System.Xml.XslCompiledTransformApiTests
 {
-    //[TestCase(Name = "TemporaryFiles", Desc = "This testcase tests the Temporary Files property on XslCompiledTransform")]
+    //[TestCase(Name = "TemporaryFiles", Desc = "This testcase tests the Temporary Files property on
+    // XslCompiledTransform")]
     [ConditionalClass(
         typeof(PlatformDetection),
         nameof(PlatformDetection.IsReflectionEmitSupported)
@@ -96,7 +97,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             return;
         }
 
-        //[Variation(Desc = "Bug 469775 - XSLT V2 : Exception thrown if xsl:preserve-space/xsl:strip-space is used and input document contains entities", Pri = 2)]
+        //[Variation(Desc = "Bug 469775 - XSLT V2 : Exception thrown if xsl:preserve-space/xsl:strip-space
+        // is used and input document contains entities", Pri = 2)]
         [Fact]
         public void TempFiles2()
         {
@@ -119,7 +121,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             return;
         }
 
-        //[Variation(Desc = "Bug 469770 - XslCompiledTransform failed to load embedded stylesheets when prefixes are defined outside of xsl:stylesheet element", Pri = 2)]
+        //[Variation(Desc = "Bug 469770 - XslCompiledTransform failed to load embedded stylesheets when
+        // prefixes are defined outside of xsl:stylesheet element", Pri = 2)]
         [Fact]
         public void TempFiles3()
         {
@@ -157,7 +160,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             return;
         }
 
-        //[Variation(Desc = "Bug 482971 - XslCompiledTransform cannot output numeric character reference after long output", Pri = 2)]
+        //[Variation(Desc = "Bug 482971 - XslCompiledTransform cannot output numeric character reference
+        // after long output", Pri = 2)]
         [Fact]
         public void TempFiles4()
         {

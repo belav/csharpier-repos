@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     See also <see cref="CreateTableOperation" /> and <see cref="AlterTableOperation" />.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 public abstract class TableOperation : MigrationOperation, ITableMigrationOperation
 {
@@ -18,7 +19,8 @@ public abstract class TableOperation : MigrationOperation, ITableMigrationOperat
     public virtual string Name { get; set; } = null!;
 
     /// <summary>
-    ///     The schema that contains the table, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the table, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 

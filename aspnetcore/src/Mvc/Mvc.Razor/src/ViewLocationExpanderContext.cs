@@ -11,12 +11,14 @@ public class ViewLocationExpanderContext
     /// <summary>
     /// Initializes a new instance of <see cref="ViewLocationExpanderContext"/>.
     /// </summary>
-    /// <param name="actionContext">The <see cref="Mvc.ActionContext"/> for the current executing action.</param>
+    /// <param name="actionContext">The <see cref="Mvc.ActionContext"/> for the current executing
+    // action.</param>
     /// <param name="viewName">The view name.</param>
     /// <param name="controllerName">The controller name.</param>
     /// <param name="areaName">The area name.</param>
     /// <param name="pageName">The page name.</param>
-    /// <param name="isMainPage">Determines if the page being found is the main page for an action.</param>
+    /// <param name="isMainPage">Determines if the page being found is the main page for an
+    // action.</param>
     public ViewLocationExpanderContext(
         ActionContext actionContext,
         string viewName,
@@ -53,8 +55,10 @@ public class ViewLocationExpanderContext
     public string? ControllerName { get; }
 
     /// <summary>
-    /// Gets the page name. This will be the value of the <c>page</c> route value when rendering a Page from the
-    /// Razor Pages framework. This value will be <c>null</c> if rendering a view as the result of a controller.
+    /// Gets the page name. This will be the value of the <c>page</c> route value when rendering a Page
+    // from the
+    /// Razor Pages framework. This value will be <c>null</c> if rendering a view as the result of a
+    // controller.
     /// </summary>
     public string? PageName { get; }
 
@@ -69,7 +73,8 @@ public class ViewLocationExpanderContext
     public bool IsMainPage { get; }
 
     /// <summary>
-    /// Gets or sets the <see cref="IDictionary{TKey, TValue}"/> that is populated with values as part of
+    /// Gets or sets the <see cref="IDictionary{TKey, TValue}"/> that is populated with values as part
+    // of
     /// <see cref="IViewLocationExpander.PopulateValues(ViewLocationExpanderContext)"/>.
     /// </summary>
     public IDictionary<string, string?> Values { get; set; } = default!;

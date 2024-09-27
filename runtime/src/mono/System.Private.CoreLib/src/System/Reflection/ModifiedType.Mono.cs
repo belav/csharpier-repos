@@ -17,7 +17,8 @@ namespace System.Reflection
         ///         delegate* unmanaged[Cdecl]&lt;int&gt; fptrField1;
         ///     3. Both SignatureHolderType and SignatureHolderInfo hold signature information, example:
         ///         volatile delegate* unmanaged[Cdecl]&lt;int&gt; fptrField2;
-        ///     NOTE: In scenario 3) the SignatureHolderInfo has higher priority for retrieving field data (like custom modifiers)
+        ///     NOTE: In scenario 3) the SignatureHolderInfo has higher priority for retrieving field data
+        // (like custom modifiers)
         /// </summary>
         internal struct TypeSignature
         {
@@ -125,9 +126,12 @@ namespace System.Reflection
             return Create(unmodifiedType, typeSignature);
         }
 
-        // If the current unmodifiedType is a function pointer that means that the signature holder for the modified type
-        // (and all its children types) becomes the unmodifiedType. At the same time, if the current or parent unmodified
-        // types are function pointers, then SignatureHolderInfo becomes irrelevant as there is no more dependency on fetching
+        // If the current unmodifiedType is a function pointer that means that the signature holder for the
+        // modified type
+        // (and all its children types) becomes the unmodifiedType. At the same time, if the current or
+        // parent unmodified
+        // types are function pointers, then SignatureHolderInfo becomes irrelevant as there is no more
+        // dependency on fetching
         // custom modifiers from parent's field/param/property info.
         // In all other cases, we pass parent's type signature information down the hierarchy.
         internal Type GetTypeParameter(Type unmodifiedType, int index)

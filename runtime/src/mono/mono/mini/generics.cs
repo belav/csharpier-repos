@@ -677,7 +677,7 @@ class Tests
         int c = ((ICollection<T>)arr).Count;
     }
 
-    /* Test that treating arrays as generic collections works with full-aot */
+/* Test that treating arrays as generic collections works with full-aot */
     public static int test_0_fullaot_array_wrappers()
     {
         GenericsTests[] arr = new GenericsTests[10];
@@ -769,7 +769,7 @@ class Tests
 
     public static int test_0_marshalbyref_call_from_gshared_virt_elim()
     {
-        /* Calling a virtual method from gshared code which is changed to a nonvirt call */
+/* Calling a virtual method from gshared code which is changed to a nonvirt call */
         Class1<object> o = new Class1<object>();
         o.Do(new Class2<object>());
         return 0;
@@ -1274,7 +1274,8 @@ class Tests
         return Volatile.Read(ref foo) == "DEF" ? 0 : 1;
     }
 
-    // FIXME: Doesn't work with --regression as Interlocked.Add(ref long) is only implemented as an intrinsic
+    // FIXME: Doesn't work with --regression as Interlocked.Add(ref long) is only implemented as an
+    // intrinsic
 #if FALSE
 	public static async Task<T> FooAsync<T> (int i, int j) {
 		Task<int> t = new Task<int> (delegate () { Console.WriteLine ("HIT!"); return 0; });

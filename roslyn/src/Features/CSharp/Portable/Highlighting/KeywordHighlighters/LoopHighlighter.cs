@@ -75,7 +75,8 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
         ) => spans.Add(statement.WhileKeyword.Span);
 
         /// <summary>
-        /// Finds all breaks and continues that are a child of this node, and adds the appropriate spans to the spans list.
+        /// Finds all breaks and continues that are a child of this node, and adds the appropriate spans to
+        // the spans list.
         /// </summary>
         private static void HighlightRelatedKeywords(
             SyntaxNode node,

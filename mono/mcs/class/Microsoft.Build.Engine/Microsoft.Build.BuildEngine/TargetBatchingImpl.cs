@@ -144,7 +144,8 @@ namespace Microsoft.Build.BuildEngine
                         // incomplete dependencies.
                         //
                         // E.g.
-                        // <CreateItem Include="$(IntermediateOutputPath)%(_PngImage.LogicalName)" AdditionalMetadata="LogicalName=%(_PngImage.LogicalName)">
+                        // <CreateItem Include="$(IntermediateOutputPath)%(_PngImage.LogicalName)"
+                        // AdditionalMetadata="LogicalName=%(_PngImage.LogicalName)">
                         //		<Output TaskParameter="Include" />
                         // </CreateItem>
                         //

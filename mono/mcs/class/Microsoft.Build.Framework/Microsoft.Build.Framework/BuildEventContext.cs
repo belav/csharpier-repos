@@ -64,7 +64,8 @@ namespace Microsoft.Build.Framework
         public int ProjectContextId { get; private set; }
         public int TaskId { get; private set; }
 
-        // MSDN document says "true if the references are equal, false otherwise." but that doesn't make sense.
+        // MSDN document says "true if the references are equal, false otherwise." but that doesn't make
+        // sense.
         public override bool Equals(object obj)
         {
             var o = obj as BuildEventContext;

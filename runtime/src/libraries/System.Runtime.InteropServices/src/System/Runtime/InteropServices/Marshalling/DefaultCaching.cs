@@ -1,7 +1,8 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Implementations of the COM strategy interfaces defined in Com.cs that we would want to ship (can be internal only if we don't want to allow users to provide their own implementations in v1).
+// Implementations of the COM strategy interfaces defined in Com.cs that we would want to ship (can
+// be internal only if we don't want to allow users to provide their own implementations in v1).
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
@@ -9,7 +10,8 @@ namespace System.Runtime.InteropServices.Marshalling
 {
     internal sealed unsafe class DefaultCaching : IIUnknownCacheStrategy
     {
-        // We limit the concurrency level to 1 writer as we believe this is the most common scenario and limiting the concurrency level
+        // We limit the concurrency level to 1 writer as we believe this is the most common scenario and
+        // limiting the concurrency level
         // significantly reduces memory overhead.
         // We set the default capacity as a decent guess.
         private readonly ConcurrentDictionary<

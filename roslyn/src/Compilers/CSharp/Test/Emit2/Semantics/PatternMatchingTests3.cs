@@ -539,12 +539,15 @@ class Program
                 options: TestOptions.DebugDll
             );
             compilation.VerifyDiagnostics(
-                // (17,18): error CS8347: Cannot use a result of 'Program.RGBColor.RGBColor(Span<int>)' in this context because it may expose variables referenced by parameter 'span' outside of their declaration scope
+                // (17,18): error CS8347: Cannot use a result of 'Program.RGBColor.RGBColor(Span<int>)' in this
+                // context because it may expose variables referenced by parameter 'span' outside of their declaration
+                // scope
                 //             1 => new RGBColor(span),
                 Diagnostic(ErrorCode.ERR_EscapeCall, "new RGBColor(span)")
                     .WithArguments("Program.RGBColor.RGBColor(System.Span<int>)", "span")
                     .WithLocation(17, 18),
-                // (17,31): error CS8352: Cannot use variable 'span' in this context because it may expose referenced variables outside of their declaration scope
+                // (17,31): error CS8352: Cannot use variable 'span' in this context because it may expose
+                // referenced variables outside of their declaration scope
                 //             1 => new RGBColor(span),
                 Diagnostic(ErrorCode.ERR_EscapeVariable, "span")
                     .WithArguments("span")
@@ -569,7 +572,8 @@ class Program
                 options: TestOptions.DebugDll
             );
             compilation.VerifyDiagnostics(
-                // (6,21): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
+                // (6,21): error CS8156: An expression cannot be used in this context because it may not be passed
+                // or returned by reference
                 //         return ref (b switch { true => x, false => y });
                 Diagnostic(
                         ErrorCode.ERR_RefReturnLvalueExpected,
@@ -1399,7 +1403,8 @@ Target->Ultimate
                     parseOptions: TestOptions.Regular7_3
                 )
                 .VerifyDiagnostics(
-                    // (6,29): error CS8370: Feature 'null pointer constant pattern' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (6,29): error CS8370: Feature 'null pointer constant pattern' is not available in C# 7.3. Please
+                    // use language version 8.0 or greater.
                     //     bool M1(int* p) => p is null; // 1
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "null")
                         .WithArguments("null pointer constant pattern", "8.0")
@@ -1408,7 +1413,8 @@ Target->Ultimate
                     //     bool M2(int* p) => p is var _; // 2
                     Diagnostic(ErrorCode.ERR_PointerTypeInPatternMatching, "var _")
                         .WithLocation(7, 29),
-                    // (12,18): error CS8370: Feature 'null pointer constant pattern' is not available in C# 7.3. Please use language version 8.0 or greater.
+                    // (12,18): error CS8370: Feature 'null pointer constant pattern' is not available in C# 7.3. Please
+                    // use language version 8.0 or greater.
                     //             case null: // 3
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "null")
                         .WithArguments("null pointer constant pattern", "8.0")
@@ -1589,12 +1595,14 @@ public static class C {
 }";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (4,19): warning CS8618: Non-nullable field 'o' must contain a non-null value when exiting constructor. Consider declaring the field as nullable.
+                // (4,19): warning CS8618: Non-nullable field 'o' must contain a non-null value when exiting
+                // constructor. Consider declaring the field as nullable.
                 //     static object o;
                 Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "o")
                     .WithArguments("field", "o")
                     .WithLocation(4, 19),
-                // (4,19): warning CS0649: Field 'C.o' is never assigned to, and will always have its default value null
+                // (4,19): warning CS0649: Field 'C.o' is never assigned to, and will always have its default value
+                // null
                 //     static object o;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "o")
                     .WithArguments("C.o", "null")
@@ -1839,12 +1847,14 @@ public static class C {
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
+                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '1' is not covered.
                     //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("1")
                         .WithLocation(5, 41),
-                    // (5,57): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int, decimal>'
+                    // (5,57): error CS1643: Not all code paths return a value in lambda expression of type 'Func<int,
+                    // decimal>'
                     //         var x = ((Func<int, decimal>)(0 switch { 0 => _ => {}}))(0);
                     Diagnostic(ErrorCode.ERR_AnonymousReturnExpected, "=>")
                         .WithArguments("lambda expression", "System.Func<int, decimal>")
@@ -1866,7 +1876,8 @@ public static class C {
 }";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
+                    // (5,41): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '1' is not covered.
                     //         var x = ((Func<int, decimal>)(0 switch { 0 => M }))(0);
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("1")
@@ -1951,12 +1962,14 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (16,33): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and 'B.implicit operator B(A)' when converting from 'A' to 'B'
+                // (16,33): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and
+                // 'B.implicit operator B(A)' when converting from 'A' to 'B'
                 //     (B, B) x = s switch { _ => (new A(), new A()), };
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "new A()")
                     .WithArguments("A.implicit operator B(A)", "B.implicit operator B(A)", "A", "B")
                     .WithLocation(16, 33),
-                // (16,42): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and 'B.implicit operator B(A)' when converting from 'A' to 'B'
+                // (16,42): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and
+                // 'B.implicit operator B(A)' when converting from 'A' to 'B'
                 //     (B, B) x = s switch { _ => (new A(), new A()), };
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "new A()")
                     .WithArguments("A.implicit operator B(A)", "B.implicit operator B(A)", "A", "B")
@@ -1991,7 +2004,8 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (16,29): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and 'B.implicit operator B(A)' when converting from 'A' to 'B'
+                // (16,29): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and
+                // 'B.implicit operator B(A)' when converting from 'A' to 'B'
                 //     var x = i switch { 1 => new A(), _ => new B() };
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "new A()")
                     .WithArguments("A.implicit operator B(A)", "B.implicit operator B(A)", "A", "B")
@@ -2026,7 +2040,8 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (16,27): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and 'B.implicit operator B(A)' when converting from 'A' to 'B'
+                // (16,27): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and
+                // 'B.implicit operator B(A)' when converting from 'A' to 'B'
                 //     B x = i switch { _ => new A() };
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "new A()")
                     .WithArguments("A.implicit operator B(A)", "B.implicit operator B(A)", "A", "B")
@@ -2061,7 +2076,8 @@ class C
 ";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (16,43): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and 'B.implicit operator B(A)' when converting from 'A' to 'B'
+                // (16,43): error CS0457: Ambiguous user defined conversions 'A.implicit operator B(A)' and
+                // 'B.implicit operator B(A)' when converting from 'A' to 'B'
                 //     B x = i switch { _ => i switch { _ => new A() } };
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "new A()")
                     .WithArguments("A.implicit operator B(A)", "B.implicit operator B(A)", "A", "B")
@@ -2091,17 +2107,20 @@ class C
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (8,13): error CS0163: Control cannot fall through from one case label ('case (string str, int[] arr) _:') to another
+                // (8,13): error CS0163: Control cannot fall through from one case label ('case (string str, int[]
+                // arr) _:') to another
                 //             case (string str, int[] arr) _:
                 Diagnostic(ErrorCode.ERR_SwitchFallThrough, "case (string str, int[] arr) _:")
                     .WithArguments("case (string str, int[] arr) _:")
                     .WithLocation(8, 13),
-                // (8,26): error CS0136: A local or parameter named 'str' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (8,26): error CS0136: A local or parameter named 'str' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case (string str, int[] arr) _:
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "str")
                     .WithArguments("str")
                     .WithLocation(8, 26),
-                // (8,37): error CS0136: A local or parameter named 'arr' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (8,37): error CS0136: A local or parameter named 'arr' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case (string str, int[] arr) _:
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "arr")
                     .WithArguments("arr")
@@ -2128,12 +2147,14 @@ class C
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "decimal[] arr")
                     .WithArguments("arr")
                     .WithLocation(9, 40),
-                // (10,26): error CS0136: A local or parameter named 'str' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (10,26): error CS0136: A local or parameter named 'str' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case (string str, decimal[] arr) _:
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "str")
                     .WithArguments("str")
                     .WithLocation(10, 26),
-                // (10,41): error CS0136: A local or parameter named 'arr' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // (10,41): error CS0136: A local or parameter named 'arr' cannot be declared in this scope because
+                // that name is used in an enclosing local scope to define a local or parameter
                 //             case (string str, decimal[] arr) _:
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "arr")
                     .WithArguments("arr")
@@ -2191,7 +2212,8 @@ class C
 ";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (8,13): error CS0163: Control cannot fall through from one case label ('case (string str, int[] arr) _:') to another
+                // (8,13): error CS0163: Control cannot fall through from one case label ('case (string str, int[]
+                // arr) _:') to another
                 //             case (string str, int[] arr) _:
                 Diagnostic(ErrorCode.ERR_SwitchFallThrough, "case (string str, int[] arr) _:")
                     .WithArguments("case (string str, int[] arr) _:")
@@ -2201,12 +2223,15 @@ class C
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "goto case a is (var x1, var x2);")
                     .WithArguments("bool", "(object a, object b)")
                     .WithLocation(9, 17),
-                // (9,32): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
+                // (9,32): error CS1061: 'object' does not contain a definition for 'Deconstruct' and no accessible
+                // extension method 'Deconstruct' accepting a first argument of type 'object' could be found (are you
+                // missing a using directive or an assembly reference?)
                 //                 goto case a is (var x1, var x2);
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "(var x1, var x2)")
                     .WithArguments("object", "Deconstruct")
                     .WithLocation(9, 32),
-                // (9,32): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type 'object', with 2 out parameters and a void return type.
+                // (9,32): error CS8129: No suitable 'Deconstruct' instance or extension method was found for type
+                // 'object', with 2 out parameters and a void return type.
                 //                 goto case a is (var x1, var x2);
                 Diagnostic(ErrorCode.ERR_MissingDeconstruct, "(var x1, var x2)")
                     .WithArguments("object", "2")
@@ -2797,15 +2822,18 @@ class C
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
             compilation.VerifyDiagnostics(
-                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                // (9,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                // case or it is impossible to match.
                 //             case 1L or 2L: Console.Write(2); break;
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, "1L or 2L").WithLocation(9, 18),
-                // (14,15): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                // (14,15): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '0' is not covered.
                 //         _ = o switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("0")
                     .WithLocation(14, 15),
-                // (17,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // (17,13): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+                // of the switch expression or it is impossible to match.
                 //             1L or 2L => 2,
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "1L or 2L").WithLocation(17, 13)
             );
@@ -2957,7 +2985,8 @@ class C
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
             compilation.VerifyDiagnostics(
-                // (14,18): error CS8120: The switch case is unreachable. It has already been handled by a previous case or it is impossible to match.
+                // (14,18): error CS8120: The switch case is unreachable. It has already been handled by a previous
+                // case or it is impossible to match.
                 //             case >= 0m: // error: subsumed
                 Diagnostic(ErrorCode.ERR_SwitchCaseSubsumed, ">= 0m").WithLocation(14, 18)
             );
@@ -3058,10 +3087,12 @@ class C
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
             compilation.VerifyDiagnostics(
-                // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // (7,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+                // the switch expression or it is impossible to match.
                 //         'a'                                    => true, // error 1
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "'a'").WithLocation(7, 9),
-                // (8,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // (8,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of
+                // the switch expression or it is impossible to match.
                 //         > 'k' and < 'o'                        => true, // error 2
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "> 'k' and < 'o'").WithLocation(8, 9)
             );
@@ -3090,7 +3121,8 @@ class C
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
             compilation.VerifyDiagnostics(
-                // (12,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // (12,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+                // of the switch expression or it is impossible to match.
                 //         _ => 7,
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "_").WithLocation(12, 9)
             );
@@ -3326,7 +3358,8 @@ class C
                     else
                     {
                         compilation.VerifyDiagnostics(
-                            // (15,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'E.Five' is not covered.
+                            // (15,28): warning CS8509: The switch expression does not handle all possible values of its input
+                            // type (it is not exhaustive). For example, the pattern 'E.Five' is not covered.
                             //     static int M(E c) => c switch
                             Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                                 .WithArguments("E.Five")
@@ -3394,7 +3427,8 @@ class C
             else
             {
                 compilation.VerifyEmitDiagnostics(
-                    // (15,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'E.Five' is not covered.
+                    // (15,28): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern 'E.Five' is not covered.
                     //     static int M(E c) => c switch
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("E.Five")
@@ -3504,7 +3538,8 @@ class C
                 parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
             );
             compilation.VerifyDiagnostics(
-                // (23,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
+                // (23,9): error CS8510: The pattern is unreachable. It has already been handled by a previous arm
+                // of the switch expression or it is impossible to match.
                 //         _ => 7, // 1
                 Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "_").WithLocation(23, 9)
             );
@@ -6063,7 +6098,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SwitchFallThrough, "case 0:")
                     .WithArguments("case 0:")
                     .WithLocation(8, 13),
-                // (10,13): error CS0163: Control cannot fall through from one case label ('case string s:') to another
+                // (10,13): error CS0163: Control cannot fall through from one case label ('case string s:') to
+                // another
                 //             case string s:
                 Diagnostic(ErrorCode.ERR_SwitchFallThrough, "case string s:")
                     .WithArguments("case string s:")
@@ -6073,7 +6109,8 @@ class C
                 Diagnostic(ErrorCode.ERR_SwitchFallThrough, "case int i:")
                     .WithArguments("case int i:")
                     .WithLocation(12, 13),
-                // (14,13): error CS8070: Control cannot fall out of switch from final case label ('case long l when l != 0:')
+                // (14,13): error CS8070: Control cannot fall out of switch from final case label ('case long l when
+                // l != 0:')
                 //             case long l when l != 0:
                 Diagnostic(ErrorCode.ERR_SwitchFallOut, "case long l when l != 0:")
                     .WithArguments("case long l when l != 0:")
@@ -6524,12 +6561,14 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (7,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                // (7,21): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '0' is not covered.
                 //         var str = x switch // does not handle zero
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("0")
                     .WithLocation(7, 21),
-                // (15,17): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '0' is not covered.
+                // (15,17): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '0' is not covered.
                 //         str = x switch // does not handle zero
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("0")
@@ -6558,7 +6597,8 @@ enum Color { Red, Greed, Blue }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,33): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Greed' is not covered.
+                // (4,33): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Color.Greed' is not covered.
                 //     int M(Color color) => color switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Color.Greed")
@@ -6585,7 +6625,8 @@ enum Color { Red, Greed, Blue }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,33): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered.
+                // (4,33): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered.
                 //     int M(Color color) => color switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Color.Blue")
@@ -6636,7 +6677,9 @@ enum Color { Red, Greed, Blue }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,33): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Color)3' is not covered.
+                // (4,33): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Color)3' is not
+                // covered.
                 //     int M(Color color) => color switch
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -6670,7 +6713,9 @@ enum Color { Red, Greed, Blue }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not covered.
+                // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not
+                // covered.
                 //     int M() => this switch
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -6705,7 +6750,9 @@ enum Color { Red, Greed, Blue }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '{ Color: (Color)3 }' is not covered.
+                // (4,21): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '{ Color: (Color)3 }'
+                // is not covered.
                 //     int M() => this switch
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -6739,7 +6786,9 @@ enum Color { Red, Greed, Blue }
                 targetFramework: TargetFramework.NetCoreApp
             );
             compilation.VerifyDiagnostics(
-                // (4,37): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not covered.
+                // (4,37): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(_, (Color)3)' is not
+                // covered.
                 //     int M(int i, Color c) => (i, c) switch
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -6769,7 +6818,8 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,37): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(false, false)' is not covered.
+                // (4,37): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(false, false)' is not covered.
                 //     int M(bool a, bool b) => (a, b) switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(false, false)")
@@ -6802,27 +6852,32 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,43): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, null)' is not covered.
+                // (4,43): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, null)' is not covered.
                 //     int M(string? a, string? b) => (a, b) switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, null)")
                     .WithLocation(4, 43),
-                // (11,20): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(not null, _)' is not covered.
+                // (11,20): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(not null, _)' is not covered.
                 //         _ = (a, b) switch { (null, _) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(not null, _)")
                     .WithLocation(11, 20),
-                // (12,20): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(not null, not null)' is not covered.
+                // (12,20): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(not null, not null)' is not covered.
                 //         _ = (a, b) switch { (null, _) => 1, (_, null) => 2 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(not null, not null)")
                     .WithLocation(12, 20),
-                // (13,20): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(_, null)' is not covered.
+                // (13,20): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(_, null)' is not covered.
                 //         _ = (a, b) switch { (_, not null) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(_, null)")
                     .WithLocation(13, 20),
-                // (14,20): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, null)' is not covered.
+                // (14,20): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, null)' is not covered.
                 //         _ = (a, b) switch { (_, not null) => 1, (not null, _) => 2 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(null, null)")
@@ -6853,17 +6908,20 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,25): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '> (nint)int.MaxValue' is not covered.
+                // (4,25): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '> (nint)int.MaxValue' is not covered.
                 //     int M1(nint a) => a switch { <= (nint)int.MaxValue => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("> (nint)int.MaxValue")
                     .WithLocation(4, 25),
-                // (5,25): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '< (nint)int.MinValue' is not covered.
+                // (5,25): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '< (nint)int.MinValue' is not covered.
                 //     int M2(nint a) => a switch { >= (nint)int.MinValue => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("< (nint)int.MinValue")
                     .WithLocation(5, 25),
-                // (6,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '> (nuint)uint.MaxValue' is not covered.
+                // (6,26): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '> (nuint)uint.MaxValue' is not covered.
                 //     int M3(nuint a) => a switch { <= (nuint)uint.MaxValue => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("> (nuint)uint.MaxValue")
@@ -6891,33 +6949,43 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'float.NaN' is not covered.
+                // (4,26): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'float.NaN' is not covered.
                 //     int M1(float f) => f switch { < 0 => 1, >= 0 => 2 }; // float.NaN
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("float.NaN")
                     .WithLocation(4, 26),
-                // (5,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'float.NegativeInfinity' is not covered.
-                //     int M2(float f) => f switch { > float.NegativeInfinity => 1, float.NaN => 2 }; // float.NegativeInfinity
+                // (5,26): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'float.NegativeInfinity' is not covered.
+                //     int M2(float f) => f switch { > float.NegativeInfinity => 1, float.NaN => 2 }; //
+                // float.NegativeInfinity
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("float.NegativeInfinity")
                     .WithLocation(5, 26),
-                // (6,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'float.PositiveInfinity' is not covered.
-                //     int M3(float f) => f switch { < float.PositiveInfinity => 1, float.NaN => 2 }; // float.PositiveInfinity
+                // (6,26): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'float.PositiveInfinity' is not covered.
+                //     int M3(float f) => f switch { < float.PositiveInfinity => 1, float.NaN => 2 }; //
+                // float.PositiveInfinity
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("float.PositiveInfinity")
                     .WithLocation(6, 26),
-                // (7,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'double.NaN' is not covered.
+                // (7,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'double.NaN' is not covered.
                 //     int M1(double f) => f switch { < 0 => 1, >= 0 => 2 }; // double.NaN
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("double.NaN")
                     .WithLocation(7, 27),
-                // (8,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'double.NegativeInfinity' is not covered.
-                //     int M2(double f) => f switch { > double.NegativeInfinity => 1, double.NaN => 2 }; // double.NegativeInfinity
+                // (8,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'double.NegativeInfinity' is not covered.
+                //     int M2(double f) => f switch { > double.NegativeInfinity => 1, double.NaN => 2 }; //
+                // double.NegativeInfinity
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("double.NegativeInfinity")
                     .WithLocation(8, 27),
-                // (9,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'double.PositiveInfinity' is not covered.
-                //     int M3(double f) => f switch { < double.PositiveInfinity => 1, double.NaN => 2 }; // double.PositiveInfinity
+                // (9,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'double.PositiveInfinity' is not covered.
+                //     int M3(double f) => f switch { < double.PositiveInfinity => 1, double.NaN => 2 }; //
+                // double.PositiveInfinity
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("double.PositiveInfinity")
                     .WithLocation(9, 27)
@@ -6939,7 +7007,8 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '"B"' is not covered.
+                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '"B"' is not covered.
                 //     int M1(string s) => s switch { "" => 1, "1" => 2, "A" => 3, };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("\"B\"")
@@ -7919,7 +7988,8 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,28): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+                // (4,28): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern 'null' is not covered.
                 //     int M1(string? s) => s switch { string => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("null")
@@ -8069,27 +8139,32 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q(1, 2.5D)' is not covered.
+                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q(1, 2.5D)' is not covered.
                 //     int M1(object o) => o switch { not Q(1, 2.5) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q(1, 2.5D)")
                     .WithLocation(4, 27),
-                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q(1L, 2.5F)' is not covered.
+                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q(1L, 2.5F)' is not covered.
                 //     int M2(object o) => o switch { not Q(1L, 2.5F) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q(1L, 2.5F)")
                     .WithLocation(5, 27),
-                // (6,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q((byte)1, (short)2)' is not covered.
+                // (6,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q((byte)1, (short)2)' is not covered.
                 //     int M3(object o) => o switch { not Q((byte)1, (short)2) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q((byte)1, (short)2)")
                     .WithLocation(6, 27),
-                // (7,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q(1U, 2UL)' is not covered.
+                // (7,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q(1U, 2UL)' is not covered.
                 //     int M4(object o) => o switch { not Q((uint)1, (ulong)2) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q(1U, 2UL)")
                     .WithLocation(7, 27),
-                // (8,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q(1L, (sbyte)2)' is not covered.
+                // (8,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q(1L, (sbyte)2)' is not covered.
                 //     int M5(object o) => o switch { not Q((long)1, (sbyte)2) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q(1L, (sbyte)2)")
@@ -8123,12 +8198,15 @@ interface I
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'I' is not covered.
+                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'I' is not covered.
                 //     int M1(object o) => o switch { not (Q(1, 2.5) or I) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("I")
                     .WithLocation(4, 27),
-                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q(1, 2.5D) and (3, 4, 5) { P1: 1,  P2: 2 }' is not covered.
+                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q(1, 2.5D) and (3, 4, 5) { P1: 1,  P2: 2 }'
+                // is not covered.
                 //     int M2(object o) => o switch { not (Q(1, 2.5) { P1: 1 } and Q(3, 4, 5) { P2: 2 }) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q(1, 2.5D) and (3, 4, 5) { P1: 1,  P2: 2 }")
@@ -8155,12 +8233,14 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,23): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+                // (4,23): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern 'null' is not covered.
                 //     int M1(Q? q) => q switch { not null => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("null")
                     .WithLocation(4, 23),
-                // (5,23): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'not null' is not covered.
+                // (5,23): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'not null' is not covered.
                 //     int M2(Q? q) => q switch { null => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("not null")
@@ -8189,22 +8269,26 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,35): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(1, 2)' is not covered.
+                // (4,35): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(1, 2)' is not covered.
                 //     int M1((int x, int y) t) => t switch { not ((1, _) { y: 2 }) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(1, 2)")
                     .WithLocation(4, 35),
-                // (5,35): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(1, 2)' is not covered.
+                // (5,35): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(1, 2)' is not covered.
                 //     int M2((int x, int y) t) => t switch { not ((1, _) { Item2: 2 }) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(1, 2)")
                     .WithLocation(5, 35),
-                // (6,36): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+                // (6,36): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern 'null' is not covered.
                 //     int M3((int x, int y)? t) => t switch { (_, _) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("null")
                     .WithLocation(6, 36),
-                // (7,36): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'not null' is not covered.
+                // (7,36): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'not null' is not covered.
                 //     int M4((int x, int y)? t) => t switch { not (_, _) => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("not null")
@@ -8233,12 +8317,14 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ P1: 10 }' is not covered.
+                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ P1: 10 }' is not covered.
                 //     int M1(Q q) => q switch { { P1: < 10 } => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ P1: 10 }")
                     .WithLocation(4, 22),
-                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ P1: -100 }' is not covered.
+                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ P1: -100 }' is not covered.
                 //     int M2(Q q) => q switch { { P1: > -100, P2: < int.MaxValue } => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ P1: -100 }")
@@ -8267,12 +8353,14 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ P1: 10 }' is not covered.
+                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ P1: 10 }' is not covered.
                 //     int M1(Q q) => q switch { { P1: < 10 } => 1, null => 2 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ P1: 10 }")
                     .WithLocation(4, 22),
-                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ P1: -100 }' is not covered.
+                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ P1: -100 }' is not covered.
                 //     int M2(Q q) => q switch { { P1: > -100, P2: < int.MaxValue } => 1, null => 2 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ P1: -100 }")
@@ -8299,17 +8387,20 @@ class W { }
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q' is not covered.
+                // (4,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q' is not covered.
                 //     int M1(object o) => o switch { not Q => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q")
                     .WithLocation(4, 27),
-                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Q' is not covered.
+                // (5,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'Q' is not covered.
                 //     int M2(object o) => o switch { not Q and not W => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("Q")
                     .WithLocation(5, 27),
-                // (6,27): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'W' is not covered.
+                // (6,27): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern 'W' is not covered.
                 //     int M3(object o) => o switch { not W and not Q => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("W")
@@ -8337,12 +8428,14 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(1) { }' is not covered.
+                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(1) { }' is not covered.
                 //     int M1(Q q) => q switch { not (1) { } => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(1) { }")
                     .WithLocation(4, 22),
-                // (5,43): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(1) { }' is not covered.
+                // (5,43): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(1) { }' is not covered.
                 //     int M2(System.ValueTuple<int> q) => q switch { not (1) { } => 1 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(1) { }")
@@ -8374,7 +8467,8 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,44): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(false, true, false, true)' is not covered.
+                // (4,44): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(false, true, false, true)' is not covered.
                 //     int M((bool, bool, bool, bool) t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(false, true, false, true)")
@@ -8385,7 +8479,8 @@ class C
         [Fact]
         public void NonexhaustiveEnumDiagnostic_20()
         {
-            // The is an example of a situation which is too complicated for our implementation to produce a precise
+            // The is an example of a situation which is too complicated for our implementation to produce a
+            // precise
             // example pattern that is not covered. We fall back to suggesting the pattern `_` in that case.
             // For situations such as this, that is probably better than producing a precise pattern.
             var source =
@@ -8406,7 +8501,8 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,26): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+                // (4,26): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '_' is not covered.
                 //     int M(string s) => s switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("_")
@@ -8445,7 +8541,9 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ A: false,  B: true,  C: false,  D: true }' is not covered.
+                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ A: false,  B: true,  C: false,  D: true }'
+                // is not covered.
                 //     int M(Q t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ A: false,  B: true,  C: false,  D: true }")
@@ -8484,7 +8582,9 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ A: false,  D: true,  B: true,  C: false }' is not covered.
+                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ A: false,  D: true,  B: true,  C: false }'
+                // is not covered.
                 //     int M(Q t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ A: false,  D: true,  B: true,  C: false }")
@@ -8522,7 +8622,8 @@ static class Extensions
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(0, "A")' is not covered.
+                // (4,21): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(0, "A")' is not covered.
                 //     int M(Q t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments(@"(0, ""A"")")
@@ -8551,12 +8652,14 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(1) { } and (2, 3)' is not covered.
+                // (4,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(1) { } and (2, 3)' is not covered.
                 //     int M1(Q o) => o switch { not ((1) { } and (2, 3)) => 0 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(1) { } and (2, 3)")
                     .WithLocation(4, 22),
-                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(2, 3) and (1) { }' is not covered.
+                // (5,22): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(2, 3) and (1) { }' is not covered.
                 //     int M2(Q o) => o switch { not ((2, 3) and (1) { }) => 0 };
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(2, 3) and (1) { }")
@@ -8582,7 +8685,8 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '"0"' is not covered.
+                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '"0"' is not covered.
                 //     static int M(string s) => s switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments(@"""0""")
@@ -8610,7 +8714,8 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '"20"' is not covered.
+                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '"20"' is not covered.
                 //     static int M(string s) => s switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments(@"""20""")
@@ -8634,7 +8739,8 @@ class Q
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Length: 1 }' is not covered.
+                // (3,33): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ Length: 1 }' is not covered.
                 //     static int M(string s) => s switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ Length: 1 }")
@@ -8687,7 +8793,8 @@ namespace System
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (3,41): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ x: 1,  y: 2,  Extra: 3 }' is not covered.
+                // (3,41): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ x: 1,  y: 2,  Extra: 3 }' is not covered.
                 //     static int M((int x, int y) s) => s switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ x: 1,  y: 2,  Extra: 3 }")
@@ -8720,7 +8827,9 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,44): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(false, true, false, true)' is not covered. However, a pattern with a 'when' clause might successfully match this value.
+                // (4,44): warning CS8846: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(false, true, false, true)' is not covered.
+                // However, a pattern with a 'when' clause might successfully match this value.
 
                 //     int M((bool, bool, bool, bool) t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
@@ -8754,7 +8863,9 @@ class C
                 parseOptions: TestOptions.RegularWithPatternCombinators
             );
             compilation.VerifyDiagnostics(
-                // (4,47): warning CS8847: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(null, true, false, true)' is not covered. However, a pattern with a 'when' clause might successfully match this value.
+                // (4,47): warning CS8847: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(null, true, false, true)' is not covered. However, a pattern
+                // with a 'when' clause might successfully match this value.
                 //     int M((object?, bool, bool, bool) t) => t switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNullWithWhen, "switch")
                     .WithArguments("(null, true, false, true)")
@@ -8793,7 +8904,8 @@ static class Program
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "Color.Red.ToArgb()")
                     .WithArguments("red")
                     .WithLocation(13, 25),
-                // (14,31): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
+                // (14,31): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '_' is not covered.
                 //         return color.ToArgb() switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("_")
@@ -8833,7 +8945,8 @@ static class Program
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "Color.Red.ToArgb()")
                     .WithArguments("red")
                     .WithLocation(13, 25),
-                // (14,31): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '1' is not covered.
+                // (14,31): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '1' is not covered.
                 //         return color.ToArgb() switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("1")
@@ -8911,7 +9024,8 @@ static class Program
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "shape")
                     .WithArguments("shape")
                     .WithLocation(5, 13),
-                // (5,42): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (5,42): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         if (shape is Circle { Radius: >= 100.0 })
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "100.0")
                     .WithArguments("double", type)

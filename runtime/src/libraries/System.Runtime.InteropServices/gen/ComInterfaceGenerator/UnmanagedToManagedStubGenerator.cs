@@ -43,7 +43,8 @@ namespace Microsoft.Interop
                 )
             )
             {
-                // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
+                // If we need a different native return identifier, then recreate the context with the correct
+                // identifier before we generate any code.
                 _context = new NativeToManagedStubCodeContext(
                     ReturnIdentifier,
                     $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"

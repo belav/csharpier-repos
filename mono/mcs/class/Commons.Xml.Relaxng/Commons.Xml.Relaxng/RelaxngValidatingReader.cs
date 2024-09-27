@@ -679,7 +679,8 @@ namespace Commons.Xml.Relaxng
             test1 = memo.StartTagOpenDeriv(test1, reader.LocalName, reader.NamespaceURI);
             if (test1 != null)
                 return test1;
-            // FIXME: JJC derivative algorithm suggests more complicated recovery. We simply treats current "extra" node as "anything".
+            // FIXME: JJC derivative algorithm suggests more complicated recovery. We simply treats current
+            // "extra" node as "anything".
             return new RdpChoice(RdpPattern.Anything, p);
         }
 
@@ -724,12 +725,12 @@ namespace Commons.Xml.Relaxng
                     {
                         // HandleError() is not really useful here since it involves else condition...
                         ts = memo.MixedTextDeriv(ts);
-                        /*if (InvalidNodeFound != null) {
-                            InvalidNodeFound (reader, "Not allowed text node was found.");
-                            ts = vState;
-                            cachedValue = null;
-                        }
-                        else*/
+/*if (InvalidNodeFound != null) {
+InvalidNodeFound (reader, "Not allowed text node was found.");
+ts = vState;
+cachedValue = null;
+}
+else*/
                         ts = TextDeriv(ts, cachedValue, reader);
                     }
                     break;

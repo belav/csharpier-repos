@@ -4,7 +4,9 @@
 namespace System.IO
 {
     /// <devdoc>
-    ///    Provides data for the directory events: <see cref='System.IO.FileSystemWatcher.Changed'/>, <see cref='System.IO.FileSystemWatcher.Created'/>, <see cref='System.IO.FileSystemWatcher.Deleted'/>.
+    ///    Provides data for the directory events: <see cref='System.IO.FileSystemWatcher.Changed'/>,
+    // <see cref='System.IO.FileSystemWatcher.Created'/>, <see
+    // cref='System.IO.FileSystemWatcher.Deleted'/>.
     /// </devdoc>
     public class FileSystemEventArgs : EventArgs
     {

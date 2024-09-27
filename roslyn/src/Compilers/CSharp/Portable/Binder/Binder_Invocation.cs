@@ -17,7 +17,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// This portion of the binder converts an <see cref="ExpressionSyntax"/> into a <see cref="BoundExpression"/>.
+    /// This portion of the binder converts an <see cref="ExpressionSyntax"/> into a <see
+    // cref="BoundExpression"/>.
     /// </summary>
     internal partial class Binder
     {
@@ -87,9 +88,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="diagnostics">Diagnostics.</param>
         /// <param name="typeArgsSyntax">Optional type arguments syntax.</param>
         /// <param name="typeArgs">Optional type arguments.</param>
-        /// <param name="queryClause">The syntax for the query clause generating this invocation expression, if any.</param>
-        /// <param name="allowFieldsAndProperties">True to allow invocation of fields and properties of delegate type. Only methods are allowed otherwise.</param>
-        /// <param name="allowUnexpandedForm">False to prevent selecting a params method in unexpanded form.</param>
+        /// <param name="queryClause">The syntax for the query clause generating this invocation expression,
+        // if any.</param>
+        /// <param name="allowFieldsAndProperties">True to allow invocation of fields and properties of
+        // delegate type. Only methods are allowed otherwise.</param>
+        /// <param name="allowUnexpandedForm">False to prevent selecting a params method in unexpanded
+        // form.</param>
         /// <returns>Synthesized method invocation expression.</returns>
         internal BoundExpression MakeInvocationExpression(
             SyntaxNode node,
@@ -126,7 +130,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 searchExtensionMethodsIfNecessary
             );
 
-            // The other consumers of this helper (await and collection initializers) require the target member to be a method.
+            // The other consumers of this helper (await and collection initializers) require the target member
+            // to be a method.
             if (
                 !allowFieldsAndProperties
                 && (
@@ -557,7 +562,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundMethodGroup methodGroup = (BoundMethodGroup)expression;
                 BoundExpression receiver = methodGroup.ReceiverOpt;
 
-                // receiver is null if we are calling a static method declared on an outer class via its simple name:
+                // receiver is null if we are calling a static method declared on an outer class via its simple
+                // name:
                 if (receiver != null)
                 {
                     switch (receiver.Kind)
@@ -573,14 +579,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                             break;
 
                         case BoundKind.ThisReference:
-                            // Can't call the HasThis method due to EE doing odd things with containing member and its containing type.
+                            // Can't call the HasThis method due to EE doing odd things with containing member and its
+                            // containing type.
                             if (
                                 (InConstructorInitializer || InFieldInitializer)
                                 && receiver.WasCompilerGenerated
                             )
                             {
-                                // Only a static method can be called in a constructor initializer. If we were not in a ctor initializer
-                                // the runtime binder would ignore the receiver, but in a ctor initializer we can't read "this" before
+                                // Only a static method can be called in a constructor initializer. If we were not in a ctor
+                                // initializer
+                                // the runtime binder would ignore the receiver, but in a ctor initializer we can't read "this"
+                                // before
                                 // the base constructor is called. We need to handle this as a type qualified static method call.
                                 // Also applicable to things like field initializers, which run before the ctor initializer.
                                 expression = methodGroup.Update(
@@ -605,9 +614,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         case BoundKind.TypeOrValueExpression:
                             var typeOrValue = (BoundTypeOrValueExpression)receiver;
 
-                            // Unfortunately, the runtime binder doesn't have APIs that would allow us to pass both "type or value".
-                            // Ideally the runtime binder would choose between type and value based on the result of the overload resolution.
-                            // We need to pick one or the other here. Dev11 compiler passes the type only if the value can't be accessed.
+                            // Unfortunately, the runtime binder doesn't have APIs that would allow us to pass both "type or
+                            // value".
+                            // Ideally the runtime binder would choose between type and value based on the result of the
+                            // overload resolution.
+                            // We need to pick one or the other here. Dev11 compiler passes the type only if the value can't be
+                            // accessed.
                             bool inStaticContext;
                             bool useType =
                                 IsInstance(typeOrValue.Data.ValueSymbol)
@@ -765,13 +777,15 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     if (arg.Kind == BoundKind.Lambda || arg.Kind == BoundKind.UnboundLambda)
                     {
-                        // Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
+                        // Cannot use a lambda expression as an argument to a dynamically dispatched operation without first
+                        // casting it to a delegate or expression tree type.
                         Error(diagnostics, ErrorCode.ERR_BadDynamicMethodArgLambda, arg.Syntax);
                         hasErrors = true;
                     }
                     else if (arg.Kind == BoundKind.MethodGroup)
                     {
-                        // Cannot use a method group as an argument to a dynamically dispatched operation. Did you intend to invoke the method?
+                        // Cannot use a method group as an argument to a dynamically dispatched operation. Did you intend to
+                        // invoke the method?
                         Error(diagnostics, ErrorCode.ERR_BadDynamicMethodArgMemgrp, arg.Syntax);
                         hasErrors = true;
                     }
@@ -779,7 +793,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         // Not a great error message, since __arglist is not a type, but it'll do.
 
-                        // error CS1978: Cannot use an expression of type '__arglist' as an argument to a dynamically dispatched operation
+                        // error CS1978: Cannot use an expression of type '__arglist' as an argument to a dynamically
+                        // dispatched operation
                         Error(
                             diagnostics,
                             ErrorCode.ERR_BadDynamicMethodArg,
@@ -792,7 +807,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Lambdas,anonymous methods and method groups are the typeless expressions that
                         // are not usable as dynamic arguments; if we get here then the expression must have a type.
                         Debug.Assert((object)arg.Type != null);
-                        // error CS1978: Cannot use an expression of type 'int*' as an argument to a dynamically dispatched operation
+                        // error CS1978: Cannot use an expression of type 'int*' as an argument to a dynamically dispatched
+                        // operation
 
                         Error(diagnostics, ErrorCode.ERR_BadDynamicMethodArg, arg.Syntax, arg.Type);
                         hasErrors = true;
@@ -833,7 +849,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             diagnostics.Add(node, useSiteInfo);
 
-            // If overload resolution on the "Invoke" method found an applicable candidate, and one of the arguments
+            // If overload resolution on the "Invoke" method found an applicable candidate, and one of the
+            // arguments
             // was dynamic then treat this as a dynamic call.
             if (
                 analyzedArguments.HasDynamicArgument
@@ -959,7 +976,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (resolution.MethodGroup != null)
                     {
-                        // we want to force any unbound lambda arguments to cache an appropriate conversion if possible; see 9448.
+                        // we want to force any unbound lambda arguments to cache an appropriate conversion if possible; see
+                        // 9448.
                         result = BindInvocationExpressionContinued(
                             syntax,
                             expression,
@@ -973,7 +991,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         );
                     }
 
-                    // Since the resolution is non-empty and has no diagnostics, the LookupResultKind in its MethodGroup is uninteresting.
+                    // Since the resolution is non-empty and has no diagnostics, the LookupResultKind in its MethodGroup
+                    // is uninteresting.
                     result = CreateBadCall(
                         syntax,
                         methodGroup,
@@ -1044,10 +1063,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 );
                             }
 
-                            // Note that the runtime binder may consider candidates that haven't passed compile-time final validation
-                            // and an ambiguity error may be reported. Also additional checks are performed in runtime final validation
+                            // Note that the runtime binder may consider candidates that haven't passed compile-time final
+                            // validation
+                            // and an ambiguity error may be reported. Also additional checks are performed in runtime final
+                            // validation
                             // that are not performed at compile-time.
-                            // Only if the set of final applicable candidates is empty we know for sure the call will fail at runtime.
+                            // Only if the set of final applicable candidates is empty we know for sure the call will fail at
+                            // runtime.
                             var finalApplicableCandidates = GetCandidatesPassingFinalValidation(
                                 syntax,
                                 resolution.OverloadResolutionResult,
@@ -1245,11 +1267,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // For F to pass the check, all of the following must hold:
                     //      ...
-                    // * If the type parameters of F were substituted in the step above, their constraints are satisfied.
-                    // * If F is a static method, the method group must have resulted from a simple-name, a member-access through a type,
-                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1).
-                    // * If F is an instance method, the method group must have resulted from a simple-name, a member-access through a variable or value,
-                    //   or a member-access whose receiver can't be classified as a type or value until after overload resolution (see §7.6.4.1).
+                    // * If the type parameters of F were substituted in the step above, their constraints are
+                    // satisfied.
+                    // * If F is a static method, the method group must have resulted from a simple-name, a
+                    // member-access through a type,
+                    //   or a member-access whose receiver can't be classified as a type or value until after overload
+                    // resolution (see §7.6.4.1).
+                    // * If F is an instance method, the method group must have resulted from a simple-name, a
+                    // member-access through a variable or value,
+                    //   or a member-access whose receiver can't be classified as a type or value until after overload
+                    // resolution (see §7.6.4.1).
 
                     if (
                         !MemberGroupFinalValidationAccessibilityChecks(
@@ -1385,7 +1412,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         )
                         {
                             // eg: b = typedReference.Equals(dyn);
-                            // error CS1978: Cannot use an expression of type 'TypedReference' as an argument to a dynamically dispatched operation
+                            // error CS1978: Cannot use an expression of type 'TypedReference' as an argument to a dynamically
+                            // dispatched operation
                             Error(
                                 diagnostics,
                                 ErrorCode.ERR_BadDynamicMethodArg,
@@ -1411,10 +1439,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="methodName">Name of the invoked method.</param>
         /// <param name="result">Overload resolution result for method group executed by caller.</param>
         /// <param name="analyzedArguments">Arguments bound by the caller.</param>
-        /// <param name="methodGroup">Method group if the invocation represents a potentially overloaded member.</param>
+        /// <param name="methodGroup">Method group if the invocation represents a potentially overloaded
+        // member.</param>
         /// <param name="delegateTypeOpt">Delegate type if method group represents a delegate.</param>
         /// <param name="diagnostics">Diagnostics.</param>
-        /// <param name="queryClause">The syntax for the query clause generating this invocation expression, if any.</param>
+        /// <param name="queryClause">The syntax for the query clause generating this invocation expression,
+        // if any.</param>
         /// <returns>BoundCall or error expression representing the invocation.</returns>
         private BoundCall BindInvocationExpressionContinued(
             SyntaxNode node,
@@ -1454,7 +1484,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (analyzedArguments.HasErrors)
                 {
-                    // Errors for arguments have already been reported, except for unbound lambdas and switch expressions.
+                    // Errors for arguments have already been reported, except for unbound lambdas and switch
+                    // expressions.
                     // We report those now.
                     foreach (var argument in analyzedArguments.Arguments)
                     {
@@ -1576,8 +1607,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 diagnostics
             );
 
-            // Note: we specifically want to do final validation (7.6.5.1) without checking delegate compatibility (15.2),
-            // so we're calling MethodGroupFinalValidation directly, rather than via MethodGroupConversionHasErrors.
+            // Note: we specifically want to do final validation (7.6.5.1) without checking delegate
+            // compatibility (15.2),
+            // so we're calling MethodGroupFinalValidation directly, rather than via
+            // MethodGroupConversionHasErrors.
             // Note: final validation wants the receiver that corresponds to the source representation
             // (i.e. the first argument, if invokedAsExtensionMethod).
             var gotError = MemberGroupFinalValidation(
@@ -1598,7 +1631,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // we will have a different receiver if ReplaceTypeOrValueReceiver has unwrapped TypeOrValue
                 if ((object)receiver != receiverArgument)
                 {
-                    // Because the receiver didn't pass through CoerceArguments, we need to apply an appropriate conversion here.
+                    // Because the receiver didn't pass through CoerceArguments, we need to apply an appropriate
+                    // conversion here.
                     Debug.Assert(argsToParams.IsDefault || argsToParams[0] == 0);
                     receiverArgument = CreateConversion(
                         receiver,
@@ -1623,7 +1657,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         analyzedArguments.RefKinds.Count = analyzedArguments.Arguments.Count;
                     }
 
-                    // receiver of a `ref` extension method is a `ref` argument. (and we have checked above that it can be passed as a Ref)
+                    // receiver of a `ref` extension method is a `ref` argument. (and we have checked above that it can
+                    // be passed as a Ref)
                     // we need to adjust the argument refkind as if we had a `ref` modifier in a call.
                     analyzedArguments.RefKinds[0] = RefKind.Ref;
                     CheckFeatureAvailability(
@@ -1634,7 +1669,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 else if (receiverParameter.RefKind == RefKind.In)
                 {
-                    // NB: receiver of an `in` extension method is treated as a `byval` argument, so no changes from the default refkind is needed in that case.
+                    // NB: receiver of an `in` extension method is treated as a `byval` argument, so no changes from the
+                    // default refkind is needed in that case.
                     Debug.Assert(analyzedArguments.RefKind(0) == RefKind.None);
                     CheckFeatureAvailability(
                         receiverArgument.Syntax,
@@ -1647,9 +1683,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             // This will be the receiver of the BoundCall node that we create.
-            // For extension methods, there is no receiver because the receiver in source was actually the first argument.
-            // For instance methods, we may have synthesized an implicit this node.  We'll keep it for the emitter.
-            // For static methods, we may have synthesized a type expression.  It serves no purpose, so we'll drop it.
+            // For extension methods, there is no receiver because the receiver in source was actually the first
+            // argument.
+            // For instance methods, we may have synthesized an implicit this node.  We'll keep it for the
+            // emitter.
+            // For static methods, we may have synthesized a type expression.  It serves no purpose, so we'll
+            // drop it.
             if (
                 invokedAsExtensionMethod
                 || (
@@ -1829,7 +1868,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // for the argument depends on the presence or absence of other attributes. The rules are:
             //
             // * If we're generating a default argument for an attribute, it's a compile error.
-            // * If the parameter is marked as [MarshalAs(Interface)], [MarshalAs(IUnknown)] or [MarshalAs(IDispatch)]
+            // * If the parameter is marked as [MarshalAs(Interface)], [MarshalAs(IUnknown)] or
+            // [MarshalAs(IDispatch)]
             //   then the argument is null.
             // * Otherwise, if the parameter is marked as [IUnknownConstant] then the argument is
             //   new UnknownWrapper(null)
@@ -1840,7 +1880,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? defaultValue = null;
             if (InAttributeArgument)
             {
-                // CS7067: Attribute constructor parameter '{0}' is optional, but no default parameter value was specified.
+                // CS7067: Attribute constructor parameter '{0}' is optional, but no default parameter value was
+                // specified.
                 diagnostics.Add(
                     ErrorCode.ERR_BadAttributeParamDefaultArgument,
                     syntax.Location,
@@ -2148,10 +2189,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // only proceed with binding default arguments if we know there is some parameter that has not been matched by an explicit argument
+            // only proceed with binding default arguments if we know there is some parameter that has not been
+            // matched by an explicit argument
             if (haveDefaultArguments)
             {
-                // In a scenario like `string Prop { get; } = M();`, the containing symbol could be the synthesized field.
+                // In a scenario like `string Prop { get; } = M();`, the containing symbol could be the synthesized
+                // field.
                 // We want to use the associated user-declared symbol instead where possible.
                 var containingMember = InAttributeArgument
                     ? attributedMember
@@ -2266,8 +2309,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 TypeSymbol parameterType = parameter.Type;
                 if (Flags.Includes(BinderFlags.ParameterDefaultValue))
                 {
-                    // This is only expected to occur in recursive error scenarios, for example: `object F(object param = F()) { }`
-                    // We return a non-error expression here to ensure ERR_DefaultValueMustBeConstant (or another appropriate diagnostics) is produced by the caller.
+                    // This is only expected to occur in recursive error scenarios, for example: `object F(object param
+                    // = F()) { }`
+                    // We return a non-error expression here to ensure ERR_DefaultValueMustBeConstant (or another
+                    // appropriate diagnostics) is produced by the caller.
                     return new BoundDefaultExpression(syntax, parameterType)
                     {
                         WasCompilerGenerated = true,
@@ -2413,7 +2458,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         && parameterType.SpecialType == SpecialType.System_Object
                     )
                     {
-                        // error CS1763: '{0}' is of type '{1}'. A default parameter value of a reference type other than string can only be initialized with null
+                        // error CS1763: '{0}' is of type '{1}'. A default parameter value of a reference type other than
+                        // string can only be initialized with null
                         diagnostics.Add(
                             ErrorCode.ERR_NotNullRefDefaultParameter,
                             syntax.Location,
@@ -2442,8 +2488,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         }
                 )
                 {
-                    // Usually, if a default constant value fails to convert to the parameter type, we want an error at the call site.
-                    // For legacy reasons, decimal and DateTime constants are special. If such a constant fails to convert to the parameter type
+                    // Usually, if a default constant value fails to convert to the parameter type, we want an error at
+                    // the call site.
+                    // For legacy reasons, decimal and DateTime constants are special. If such a constant fails to
+                    // convert to the parameter type
                     // then we want to silently replace it with default(ParameterType).
                     defaultValue = new BoundDefaultExpression(syntax, parameterType)
                     {
@@ -2491,7 +2539,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #nullable disable
 
         /// <summary>
-        /// Returns false if an implicit 'this' copy will occur due to an instance member invocation in a readonly member.
+        /// Returns false if an implicit 'this' copy will occur due to an instance member invocation in a
+        // readonly member.
         /// </summary>
         internal bool CheckImplicitThisCopyInReadOnlyMember(
             BoundExpression receiver,
@@ -2499,8 +2548,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             BindingDiagnosticBag diagnostics
         )
         {
-            // For now we are warning only in implicit copy scenarios that are only possible with readonly members.
-            // Eventually we will warn on implicit value copies in more scenarios. See https://github.com/dotnet/roslyn/issues/33968.
+            // For now we are warning only in implicit copy scenarios that are only possible with readonly
+            // members.
+            // Eventually we will warn on implicit value copies in more scenarios. See
+            // https://github.com/dotnet/roslyn/issues/33968.
             if (
                 receiver?.IsEquivalentToThisReference == true
                 && receiver.Type.IsValueType
@@ -2554,12 +2605,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Replace a BoundTypeOrValueExpression with a BoundExpression for either a type (if useType is true)
+        /// Replace a BoundTypeOrValueExpression with a BoundExpression for either a type (if useType is
+        // true)
         /// or a value (if useType is false).  Any other node is bound to its natural type.
         /// </summary>
         /// <remarks>
-        /// Call this once overload resolution has succeeded on the method group of which the BoundTypeOrValueExpression
-        /// is the receiver.  Generally, useType will be true if the chosen method is static and false otherwise.
+        /// Call this once overload resolution has succeeded on the method group of which the
+        // BoundTypeOrValueExpression
+        /// is the receiver.  Generally, useType will be true if the chosen method is static and false
+        // otherwise.
         /// </remarks>
         private BoundExpression ReplaceTypeOrValueReceiver(
             BoundExpression receiver,
@@ -3000,7 +3054,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Absent parameter types to bind the arguments, we simply use the arguments provided for error recovery.
+        /// Absent parameter types to bind the arguments, we simply use the arguments provided for error
+        // recovery.
         /// </summary>
         private ImmutableArray<BoundExpression> BuildArgumentsForErrorRecovery(
             AnalyzedArguments analyzedArguments

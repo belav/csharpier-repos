@@ -21,7 +21,8 @@ using TypeFactory = System.Xml.Xsl.XmlQueryTypeFactory;
 namespace System.Xml.Xsl.IlGen
 {
     /// <summary>
-    /// Creates Msil code for an entire QilExpression graph.  Code is generated in one of two modes: push or
+    /// Creates Msil code for an entire QilExpression graph.  Code is generated in one of two modes:
+    // push or
     /// pull.  In push mode, code is generated to push the values in an iterator to the XmlWriter
     /// interface.  In pull mode, the values in an iterator are stored in a physical location such as
     /// the stack or a local variable by an iterator.  The iterator is passive, and will just wait for
@@ -83,8 +84,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Create IteratorDescriptor for each global value.  This pre-visit is necessary because a global early
-        /// in the list may reference a global later in the list and therefore expect its IteratorDescriptor to already
+        /// Create IteratorDescriptor for each global value.  This pre-visit is necessary because a global
+        // early
+        /// in the list may reference a global later in the list and therefore expect its IteratorDescriptor
+        // to already
         /// be initialized.
         /// </summary>
         private void PrepareGlobalValues(QilList globalIterators)
@@ -121,7 +124,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Visit each global variable or parameter.  Create a IteratorDescriptor for each global value.  Generate code for
+        /// Visit each global variable or parameter.  Create a IteratorDescriptor for each global value.
+        // Generate code for
         /// default values.
         /// </summary>
         private void VisitGlobalValues(QilList globalIterators)
@@ -1265,7 +1269,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code for QilNodeType.Sequence, when sort-merging to retain document order is not necessary.
+        /// Generate code for QilNodeType.Sequence, when sort-merging to retain document order is not
+        // necessary.
         /// </summary>
         private void Sequence(QilList ndSeq)
         {
@@ -1282,7 +1287,8 @@ namespace System.Xml.Xsl.IlGen
                 "This method should only be called if items in list are pulled from a code iterator."
             );
 
-            // Singleton list is a special case if in addition to the singleton there are warnings or errors which should be executed
+            // Singleton list is a special case if in addition to the singleton there are warnings or errors
+            // which should be executed
             if (ndSeq.XmlType.IsSingleton)
             {
                 foreach (QilNode nd in ndSeq)
@@ -1319,7 +1325,8 @@ namespace System.Xml.Xsl.IlGen
                     if (i != 0)
                         _helper.MarkLabel(lblOnEnd);
 
-                    // Create new LabelOnEnd for all but the last iterator, which jumps back to parent iterator when exhausted
+                    // Create new LabelOnEnd for all but the last iterator, which jumps back to parent iterator when
+                    // exhausted
                     if (i == ndSeq.Count - 1)
                         lblOnEnd = _iterCurr.GetLabelNext();
                     else
@@ -1411,7 +1418,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code to combine nodes from two nested iterators using Union, Intersection, or Difference semantics.
+        /// Generate code to combine nodes from two nested iterators using Union, Intersection, or
+        // Difference semantics.
         /// </summary>
         private QilBinary CreateSetIterator(
             QilBinary ndSet,
@@ -1550,7 +1558,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code for QilNodeType.Sum, QilNodeType.Average, QilNodeType.Minimum, and QilNodeType.Maximum.
+        /// Generate code for QilNodeType.Sum, QilNodeType.Average, QilNodeType.Minimum, and
+        // QilNodeType.Maximum.
         /// </summary>
         private QilUnary CreateAggregator(
             QilUnary ndAgg,
@@ -1703,7 +1712,8 @@ namespace System.Xml.Xsl.IlGen
             listStrings = ndStrConcat.Values;
             if (listStrings.NodeType == QilNodeType.Sequence && listStrings.Count < 5)
             {
-                // Faster concat possible only if cardinality can be guaranteed at compile-time and there's no delimiter
+                // Faster concat possible only if cardinality can be guaranteed at compile-time and there's no
+                // delimiter
                 fasterConcat = true;
                 foreach (QilNode ndStr in listStrings)
                 {
@@ -1761,7 +1771,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code to concatenate string values returned by expression "ndStr" using the StringConcat helper class.
+        /// Generate code to concatenate string values returned by expression "ndStr" using the StringConcat
+        // helper class.
         /// </summary>
         private void GenerateConcat(QilNode ndStr, LocalBuilder locStringConcat)
         {
@@ -1801,7 +1812,8 @@ namespace System.Xml.Xsl.IlGen
         /// </summary>
         private void VisitStrParseQName(QilBinary ndParsedTagName, bool preservePrefix)
         {
-            // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
+            // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the
+            // prefix
             if (!preservePrefix)
                 _helper.LoadQueryRuntime();
 
@@ -1832,7 +1844,8 @@ namespace System.Xml.Xsl.IlGen
                         )
                     );
 
-                // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the prefix
+                // If QName prefix should be preserved, then don't create an XmlQualifiedName, which discards the
+                // prefix
                 if (!preservePrefix)
                     _helper.CallParseTagName(GenerateNameType.TagNameAndMappings);
             }
@@ -1944,7 +1957,8 @@ namespace System.Xml.Xsl.IlGen
                     {
                         _helper.CallCompareEquals(code);
 
-                        // If relOp is Eq, then branch to true label or push "true" if Equals function returns true (non-zero)
+                        // If relOp is Eq, then branch to true label or push "true" if Equals function returns true
+                        // (non-zero)
                         // If relOp is Ne, then branch to true label or push "true" if Equals function returns false (zero)
                         ZeroCompare(
                             (relOp == QilNodeType.Eq) ? QilNodeType.Ne : QilNodeType.Eq,
@@ -2120,8 +2134,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// There are a number of path patterns that can be rooted at Filter nodes.  Determine whether one of these patterns
-        /// has been previously matched on "ndFilter".  If so, generate code for the pattern and return true.  Otherwise, just
+        /// There are a number of path patterns that can be rooted at Filter nodes.  Determine whether one
+        // of these patterns
+        /// has been previously matched on "ndFilter".  If so, generate code for the pattern and return
+        // true.  Otherwise, just
         /// return false.
         /// </summary>
         private bool HandleFilterPatterns(QilLoop ndFilter)
@@ -2756,8 +2772,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// There are a number of path patterns that can be rooted at DocOrderDistinct nodes.  Determine whether one of these
-        /// patterns has been previously matched on "ndDod".  If so, generate code for the pattern and return true.  Otherwise,
+        /// There are a number of path patterns that can be rooted at DocOrderDistinct nodes.  Determine
+        // whether one of these
+        /// patterns has been previously matched on "ndDod".  If so, generate code for the pattern and
+        // return true.  Otherwise,
         /// just return false.
         /// </summary>
         private bool HandleDodPatterns(QilUnary ndDod)
@@ -3339,7 +3357,8 @@ namespace System.Xml.Xsl.IlGen
             // Runtime checks must be made in the following cases:
             //   1. Xml state is not known at compile-time, or is illegal
             //   2. Element's namespace must be declared
-            //   3. Element's attributes might be duplicates of one another, or namespaces might follow attributes
+            //   3. Element's attributes might be duplicates of one another, or namespaces might follow
+            // attributes
             callChk =
                 CheckWithinContent(info)
                 || !info.IsNamespaceInScope
@@ -3349,11 +3368,13 @@ namespace System.Xml.Xsl.IlGen
             if (XmlILConstructInfo.Read(ndElem.Right).FinalStates == PossibleXmlStates.Any)
                 callChk = true;
 
-            // If runtime state after EndElement is called is not known, then call XmlQueryOutput.WriteEndElementChk
+            // If runtime state after EndElement is called is not known, then call
+            // XmlQueryOutput.WriteEndElementChk
             if (info.FinalStates == PossibleXmlStates.Any)
                 callChk = true;
 
-            // If WriteStartElementChk will *not* be called, then code must be generated to ensure valid state transitions
+            // If WriteStartElementChk will *not* be called, then code must be generated to ensure valid state
+            // transitions
             if (!callChk)
                 BeforeStartChecks(ndElem);
 
@@ -3364,7 +3385,8 @@ namespace System.Xml.Xsl.IlGen
             // Recursively construct content
             NestedVisit(ndElem.Right);
 
-            // If runtime state is guaranteed to be EnumAttrs, and an element is being constructed, call XmlQueryOutput.StartElementContent
+            // If runtime state is guaranteed to be EnumAttrs, and an element is being constructed, call
+            // XmlQueryOutput.StartElementContent
             if (
                 XmlILConstructInfo.Read(ndElem.Right).FinalStates == PossibleXmlStates.EnumAttrs
                 && !callChk
@@ -3400,7 +3422,8 @@ namespace System.Xml.Xsl.IlGen
             //   2. Attribute's namespace must be declared
             callChk = CheckEnumAttrs(info) || !info.IsNamespaceInScope;
 
-            // If WriteStartAttributeChk will *not* be called, then code must be generated to ensure well-formedness
+            // If WriteStartAttributeChk will *not* be called, then code must be generated to ensure
+            // well-formedness
             // and track namespace scope.
             if (!callChk)
                 BeforeStartChecks(ndAttr);
@@ -3539,7 +3562,8 @@ namespace System.Xml.Xsl.IlGen
                     break;
 
                 default:
-                    // Call XmlQueryOutput.WriteTextBlockChk, XmlQueryOutput.WriteTextBlockNoEntities, or XmlQueryOutput.WriteTextBlock
+                    // Call XmlQueryOutput.WriteTextBlockChk, XmlQueryOutput.WriteTextBlockNoEntities, or
+                    // XmlQueryOutput.WriteTextBlock
                     _helper.CallWriteString(disableOutputEscaping, callChk);
                     break;
             }
@@ -3592,7 +3616,8 @@ namespace System.Xml.Xsl.IlGen
             //   2. Namespaces might be added to element after attributes have already been added
             callChk = CheckEnumAttrs(info) || MightHaveNamespacesAfterAttributes(info);
 
-            // If WriteNamespaceDeclarationChk will *not* be called, then code must be generated to ensure well-formedness
+            // If WriteNamespaceDeclarationChk will *not* be called, then code must be generated to ensure
+            // well-formedness
             // and track namespace scope.
             if (!callChk)
                 BeforeStartChecks(ndNmsp);
@@ -3788,7 +3813,8 @@ namespace System.Xml.Xsl.IlGen
                 return ndIsType;
             }
 
-            // Special Case: Source value is a singleton Node, and we're testing whether it is an Element, Attribute, PI, etc.
+            // Special Case: Source value is a singleton Node, and we're testing whether it is an Element,
+            // Attribute, PI, etc.
             if (MatchesNodeKinds(ndIsType, typDerived, typBase))
                 return ndIsType;
 
@@ -3833,7 +3859,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Faster code can be generated if type test is just a node kind test.  If this special case is detected, then generate code and return true.
+        /// Faster code can be generated if type test is just a node kind test.  If this special case is
+        // detected, then generate code and return true.
         /// Otherwise, return false, and a call to MatchesXmlType will be generated instead.
         /// </summary>
         private bool MatchesNodeKinds(
@@ -3847,16 +3874,19 @@ namespace System.Xml.Xsl.IlGen
             XPathNodeType kindsRuntime;
             int kindsUnion;
 
-            // If not checking whether typDerived is some kind of singleton node, then fallback to MatchesXmlType
+            // If not checking whether typDerived is some kind of singleton node, then fallback to
+            // MatchesXmlType
             if (!typBase.IsNode || !typBase.IsSingleton)
                 return false;
 
-            // If typDerived is not statically guaranteed to be a singleton node (and not an rtf), then fallback to MatchesXmlType
+            // If typDerived is not statically guaranteed to be a singleton node (and not an rtf), then fallback
+            // to MatchesXmlType
             if (!typDerived.IsNode || !typDerived.IsSingleton || !typDerived.IsNotRtf)
                 return false;
 
             // Now we are guaranteed that typDerived is a node, and typBase is a node, so check node kinds
-            // Ensure that typBase is only composed of kind-test prime types (no name-test, no schema-test, etc.)
+            // Ensure that typBase is only composed of kind-test prime types (no name-test, no schema-test,
+            // etc.)
             kinds = XmlNodeKindFlags.None;
             foreach (XmlQueryType typItem in typBase)
             {
@@ -4383,16 +4413,19 @@ namespace System.Xml.Xsl.IlGen
                 }
                 else
                 {
-                    // There is an implicit upcast to the Xml type of the formal argument.  This can change the Clr storage type.
+                    // There is an implicit upcast to the Xml type of the formal argument.  This can change the Clr
+                    // storage type.
                     clrTypeActualArg = GetStorageType(xmlTypeFormalArg);
 
-                    // If the formal Clr type is typeof(object) or if it is not a supertype of the actual Clr type, then call ChangeTypeXsltArgument
+                    // If the formal Clr type is typeof(object) or if it is not a supertype of the actual Clr type, then
+                    // call ChangeTypeXsltArgument
                     if (
                         xmlTypeFormalArg.TypeCode == XmlTypeCode.Item
                         || !clrTypeFormalArg.IsAssignableFrom(clrTypeActualArg)
                     )
                     {
-                        // (clrTypeFormalArg) runtime.ChangeTypeXsltArgument(xmlTypeFormalArg, (object) value, clrTypeFormalArg);
+                        // (clrTypeFormalArg) runtime.ChangeTypeXsltArgument(xmlTypeFormalArg, (object) value,
+                        // clrTypeFormalArg);
                         _helper.LoadQueryRuntime();
                         _helper.LoadInteger(_helper.StaticData.DeclareXmlType(xmlTypeFormalArg));
                         NestedVisitEnsureStack(
@@ -4527,7 +4560,8 @@ namespace System.Xml.Xsl.IlGen
             }
             else
             {
-                // If a conversion could not be found, then convert the source expression to item or item* and try again
+                // If a conversion could not be found, then convert the source expression to item or item* and try
+                // again
                 NestedVisitEnsureStack(ndConv.Source, typeof(XPathItem), !typSrc.IsSingleton);
                 if (
                     !GetXsltConvertMethod(
@@ -4554,7 +4588,8 @@ namespace System.Xml.Xsl.IlGen
 
         /// <summary>
         /// Get the XsltConvert method that converts from "typSrc" to "typDst".  Return false if no
-        /// such method exists.  This conversion matrix should match the one in XsltConvert.ExternalValueToExternalValue.
+        /// such method exists.  This conversion matrix should match the one in
+        // XsltConvert.ExternalValueToExternalValue.
         /// </summary>
         private static bool GetXsltConvertMethod(
             XmlQueryType typSrc,
@@ -4698,7 +4733,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate boiler-plate code to create an Xml iterator that uses an XmlNavigatorFilter to filter items.
+        /// Generate boiler-plate code to create an Xml iterator that uses an XmlNavigatorFilter to filter
+        // items.
         /// </summary>
         /// <remarks>
         ///     Iterator iter;
@@ -4797,7 +4833,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate boiler-plate code that calls MoveNext on a simple Xml iterator.  Iterator should have already been
+        /// Generate boiler-plate code that calls MoveNext on a simple Xml iterator.  Iterator should have
+        // already been
         /// created by calling code.
         /// </summary>
         /// <remarks>
@@ -4831,7 +4868,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate boiler-plate code that calls MoveNext on an Xml iterator that controls a nested iterator.  Iterator should
+        /// Generate boiler-plate code that calls MoveNext on an Xml iterator that controls a nested
+        // iterator.  Iterator should
         /// have already been created by calling code.
         /// </summary>
         /// <remarks>
@@ -5033,8 +5071,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// If the first argument is a constant value that evaluates to zero, then a more optimal instruction sequence
-        /// can be generated that does not have to push the zero onto the stack.  Instead, a Brfalse or Brtrue instruction
+        /// If the first argument is a constant value that evaluates to zero, then a more optimal
+        // instruction sequence
+        /// can be generated that does not have to push the zero onto the stack.  Instead, a Brfalse or
+        // Brtrue instruction
         /// can be used.
         /// </summary>
         private bool TryZeroCompare(QilNodeType relOp, QilNode ndFirst, QilNode ndSecond)
@@ -5131,7 +5171,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// For QilExpression types that map directly to CLR primitive types, the built-in CLR comparison operators can
+        /// For QilExpression types that map directly to CLR primitive types, the built-in CLR comparison
+        // operators can
         /// be used to perform the specified relational operation.
         /// </summary>
         private void ClrCompare(QilNodeType relOp, XmlTypeCode code)
@@ -5330,7 +5371,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Construction within a loop is starting.  If transition from non-Any to Any state occurs, then ensure
+        /// Construction within a loop is starting.  If transition from non-Any to Any state occurs, then
+        // ensure
         /// that runtime state will be set.
         /// </summary>
         private void StartWriterLoop(QilNode nd, out bool hasOnEnd, out Label lblOnEnd)
@@ -5341,7 +5383,8 @@ namespace System.Xml.Xsl.IlGen
             hasOnEnd = false;
             lblOnEnd = default;
 
-            // If loop is not involved in Xml construction, or if loop returns exactly one value, then do nothing
+            // If loop is not involved in Xml construction, or if loop returns exactly one value, then do
+            // nothing
             if (!info.PushToWriterLast || nd.XmlType!.IsSingleton)
                 return;
 
@@ -5355,7 +5398,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Construction within a loop is ending.  If transition from non-Any to Any state occurs, then ensure that
+        /// Construction within a loop is ending.  If transition from non-Any to Any state occurs, then
+        // ensure that
         /// runtime state will be set.
         /// </summary>
         private void EndWriterLoop(QilNode nd, bool hasOnEnd, Label lblOnEnd)
@@ -5408,8 +5452,10 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This method is called before calling any WriteEnd??? method.  It generates code to perform runtime
-        /// construction checks separately.  This should only be called if the XmlQueryOutput::StartElementChk
+        /// This method is called before calling any WriteEnd??? method.  It generates code to perform
+        // runtime
+        /// construction checks separately.  This should only be called if the
+        // XmlQueryOutput::StartElementChk
         /// method will *not* be called.
         /// </summary>
         private void BeforeStartChecks(QilNode ndCtor)
@@ -5439,7 +5485,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// This method is called after calling any WriteEnd??? method.  It generates code to perform runtime
+        /// This method is called after calling any WriteEnd??? method.  It generates code to perform
+        // runtime
         /// construction checks separately.  This should only be called if the XmlQueryOutput::EndElementChk
         /// method will *not* be called.
         /// </summary>
@@ -5453,7 +5500,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Return true if a runtime check needs to be made in order to transition into the WithinContent state.
+        /// Return true if a runtime check needs to be made in order to transition into the WithinContent
+        // state.
         /// </summary>
         private static bool CheckWithinContent(XmlILConstructInfo info)
         {
@@ -5611,7 +5659,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Calls StartNestedIterator(nd) and also sets up the nested iterator to branch to "lblOnEnd" when iteration
+        /// Calls StartNestedIterator(nd) and also sets up the nested iterator to branch to "lblOnEnd" when
+        // iteration
         /// is complete.
         /// </summary>
         private void StartNestedIterator(Label lblOnEnd)
@@ -5660,8 +5709,10 @@ namespace System.Xml.Xsl.IlGen
 
         /// <summary>
         /// Recursively generate code to iterate over the results of the "nd" expression.  If "nd" is pushed
-        /// to the writer, then there are no results.  If "nd" is a singleton expression and isCached is false,
-        /// then generate code to construct the singleton.  Otherwise, cache the sequence in an XmlQuerySequence
+        /// to the writer, then there are no results.  If "nd" is a singleton expression and isCached is
+        // false,
+        /// then generate code to construct the singleton.  Otherwise, cache the sequence in an
+        // XmlQuerySequence
         /// object.  Ensure that all items are converted to the specified "itemStorageType".
         /// </summary>
         private void NestedVisit(QilNode nd, Type itemStorageType, bool isCached)
@@ -5699,7 +5750,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Recursively generate code to iterate over the results of the "nd" expression.  When the expression
+        /// Recursively generate code to iterate over the results of the "nd" expression.  When the
+        // expression
         /// has been fully iterated, it will jump to "lblOnEnd".
         /// </summary>
         private void NestedVisit(QilNode nd, Label lblOnEnd)
@@ -5724,7 +5776,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code for both QilExpression nodes and ensure that each result is pushed onto the IL stack.
+        /// Generate code for both QilExpression nodes and ensure that each result is pushed onto the IL
+        // stack.
         /// </summary>
         private void NestedVisitEnsureStack(QilNode ndLeft, QilNode ndRight)
         {
@@ -5753,7 +5806,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Start a nested iterator in a branching context and recursively generate code for the specified QilExpression node.
+        /// Start a nested iterator in a branching context and recursively generate code for the specified
+        // QilExpression node.
         /// </summary>
         private void NestedVisitWithBranch(QilNode nd, BranchingContext brctxt, Label lblBranch)
         {
@@ -5766,7 +5820,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Generate code for the QilExpression node and ensure that results are fully cached as an XmlQuerySequence.  All results
+        /// Generate code for the QilExpression node and ensure that results are fully cached as an
+        // XmlQuerySequence.  All results
         /// should be converted to "itemStorageType" before being added to the cache.
         /// </summary>
         private void NestedVisitEnsureCache(QilNode nd, Type itemStorageType)
@@ -5794,7 +5849,8 @@ namespace System.Xml.Xsl.IlGen
                 if (_iterCurr.Storage.ItemStorageType == itemStorageType)
                     return;
 
-                // If the cache has navigators in it, or if converting to a cache of navigators, then EnsureItemStorageType
+                // If the cache has navigators in it, or if converting to a cache of navigators, then
+                // EnsureItemStorageType
                 // can directly convert without needing to create a new cache.
                 if (
                     _iterCurr.Storage.ItemStorageType == typeof(XPathNavigator)
@@ -5861,7 +5917,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Returns true if the specified QilExpression node type is *guaranteed* to cache its results in an XmlQuerySequence,
+        /// Returns true if the specified QilExpression node type is *guaranteed* to cache its results in an
+        // XmlQuerySequence,
         /// where items in the cache are stored using the default storage type.
         /// </summary>
         private static bool CachesResult(QilNode nd)

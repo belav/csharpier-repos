@@ -51,7 +51,8 @@ namespace System.SpanTests
             );
 
             // mdarray, custom bounds
-            // there's no baseline way to get a ref to element (10, 20, 30), so we'll deref the result of GetArrayDataReference and compare
+            // there's no baseline way to get a ref to element (10, 20, 30), so we'll deref the result of
+            // GetArrayDataReference and compare
             Array mdArrayCustomBounds = Array.CreateInstance(
                 typeof(int),
                 new[] { 1, 2, 3 },
@@ -94,7 +95,8 @@ namespace System.SpanTests
             int rank
         )
         {
-            // First, compute how much distance there is between the start of the object data and the first element
+            // First, compute how much distance there is between the start of the object data and the first
+            // element
             // of a baseline (non-empty) array.
 
             int[] lowerDims = Enumerable.Range(100, rank).ToArray();
@@ -106,7 +108,8 @@ namespace System.SpanTests
                 ref MemoryMarshal.GetArrayDataReference(baselineArray)
             );
 
-            // Then, perform the same calculation with an empty array of equal rank, and ensure the offsets are identical.
+            // Then, perform the same calculation with an empty array of equal rank, and ensure the offsets are
+            // identical.
 
             lengths = new int[rank]; // = { 0, 0, 0, ... }
 
@@ -125,7 +128,8 @@ namespace System.SpanTests
             string[] strArr = new string[] { "Hello" };
 
             // 'ref object' instead of 'ref string' because GetArrayDataReference skips array variance checks.
-            // We can deref it but we must not write to it unless we know the value being written is also a string.
+            // We can deref it but we must not write to it unless we know the value being written is also a
+            // string.
             ref object refObj = ref MemoryMarshal.GetArrayDataReference<object>(strArr);
 
             Assert.True(Unsafe.AreSame(ref refObj, ref Unsafe.As<string, object>(ref strArr[0])));

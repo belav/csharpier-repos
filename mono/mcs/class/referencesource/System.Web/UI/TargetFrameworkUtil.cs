@@ -11,8 +11,10 @@ using System.Web.Util;
 
 namespace System.Web.UI
 {
-    // Helper class to retrieve filtered members from the target framework type using TargetFrameworkProvider.
-    // We need to be careful not to expose faux/LMR types or memberInfo as they don't work properly when mixed
+    // Helper class to retrieve filtered members from the target framework type using
+    // TargetFrameworkProvider.
+    // We need to be careful not to expose faux/LMR types or memberInfo as they don't work properly when
+    // mixed
     // with their runtime counter parts.
     internal static class TargetFrameworkUtil
     {
@@ -115,13 +117,15 @@ namespace System.Web.UI
         }
 
         /// <summary>
-        /// The DesignerHost is only available within the context of DesignTimeTemplateParser.ParseControl, which is called
+        /// The DesignerHost is only available within the context of DesignTimeTemplateParser.ParseControl,
+        // which is called
         /// from the design view.
         /// </summary>
         internal static IDesignerHost DesignerHost { get; set; }
 
         /// <summary>
-        /// The CBMTypeDescriptionProviderBridge is only available when building using the ClientBuildManager in VS.
+        /// The CBMTypeDescriptionProviderBridge is only available when building using the
+        // ClientBuildManager in VS.
         /// </summary>
         internal static ClientBuildManagerTypeDescriptionProviderBridge CBMTypeDescriptionProviderBridge
         {
@@ -481,7 +485,8 @@ namespace System.Web.UI
         }
 
         /// <summary>
-        /// This method does filtering based on propertyInfo, and should only be used when the TargetFrameworkProvider
+        /// This method does filtering based on propertyInfo, and should only be used when the
+        // TargetFrameworkProvider
         /// is not directly available, for example in the CBM case where it is in another appdomain.
         /// </summary>
         private static PropertyDescriptorCollection GetFilteredPropertyDescriptorCollection(
@@ -551,7 +556,8 @@ namespace System.Web.UI
         }
 
         /// <summary>
-        /// This method does filtering based on eventInfo, and should only be used when the TargetFrameworkProvider
+        /// This method does filtering based on eventInfo, and should only be used when the
+        // TargetFrameworkProvider
         /// is not directly available, for example in the CBM case where it is in another appdomain.
         /// </summary>
         private static EventDescriptorCollection GetFilteredEventDescriptorCollection(

@@ -1239,7 +1239,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             var listenerProvider = GetListenerProvider(workspace.ExportProvider);
 
-            // start an operation that allows an expedited wait to cover the remainder of the delayed operations in the test
+            // start an operation that allows an expedited wait to cover the remainder of the delayed operations
+            // in the test
             var token = listenerProvider
                 .GetListener(FeatureAttribute.SolutionCrawlerLegacy)
                 .BeginAsyncOperation("Test operation");
@@ -1320,7 +1321,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
 
             var listenerProvider = GetListenerProvider(workspace.ExportProvider);
 
-            // start an operation that allows an expedited wait to cover the remainder of the delayed operations in the test
+            // start an operation that allows an expedited wait to cover the remainder of the delayed operations
+            // in the test
             var token = listenerProvider
                 .GetListener(FeatureAttribute.SolutionCrawlerLegacy)
                 .BeginAsyncOperation("Test operation");
@@ -1488,13 +1490,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
             Assert.Equal(expectedDocumentEvents, worker.DocumentIds.Count);
             Assert.Equal(0, worker.InvalidateDocumentIds.Count);
 
-            // Switch from an active source document to an active non-source document and verify no document analysis callbacks
+            // Switch from an active source document to an active non-source document and verify no document
+            // analysis callbacks
             worker = await ExecuteOperationAsync(workspace, w => ClearActiveDocument(w));
             Assert.Equal(0, worker.SyntaxDocumentIds.Count);
             Assert.Equal(0, worker.DocumentIds.Count);
             Assert.Equal(0, worker.InvalidateDocumentIds.Count);
 
-            // Switch from an active non-source document to an active source document and verify document analysis callbacks
+            // Switch from an active non-source document to an active source document and verify document
+            // analysis callbacks
             worker = await ExecuteOperationAsync(workspace, w => MakeDocumentActive(firstDocument));
             Assert.Equal(expectedSyntaxDocumentEvents, worker.SyntaxDocumentIds.Count);
             Assert.Equal(expectedDocumentEvents, worker.DocumentIds.Count);
@@ -2051,7 +2055,8 @@ class C
 
             var listenerProvider = GetListenerProvider(workspace.ExportProvider);
 
-            // start an operation that allows an expedited wait to cover the remainder of the delayed operations in the test
+            // start an operation that allows an expedited wait to cover the remainder of the delayed operations
+            // in the test
             var token = listenerProvider
                 .GetListener(FeatureAttribute.SolutionCrawlerLegacy)
                 .BeginAsyncOperation("Test operation");
@@ -2061,15 +2066,21 @@ class C
 
             // we want to test order items processed by solution crawler.
             // but since everything async, lazy and cancellable, order is not 100% deterministic. an item might
-            // start to be processed, and get cancelled due to newly enqueued item requiring current work to be re-processed
+            // start to be processed, and get cancelled due to newly enqueued item requiring current work to be
+            // re-processed
             // (ex, new file being added).
-            // this behavior is expected in real world, but it makes testing hard. so to make ordering deterministic
+            // this behavior is expected in real world, but it makes testing hard. so to make ordering
+            // deterministic
             // here we first block solution crawler from processing any item using global operation.
-            // and then make sure all delayed work item enqueue to be done through waiters. work item enqueue is async
-            // and delayed since one of responsibility of solution cralwer is aggregating workspace events to fewer
+            // and then make sure all delayed work item enqueue to be done through waiters. work item enqueue is
+            // async
+            // and delayed since one of responsibility of solution cralwer is aggregating workspace events to
+            // fewer
             // work items.
-            // once we are sure everything is stablized, we let solution crawler to process by releasing global operation.
-            // what this test is interested in is the order solution crawler process the pending works. so this should
+            // once we are sure everything is stablized, we let solution crawler to process by releasing global
+            // operation.
+            // what this test is interested in is the order solution crawler process the pending works. so this
+            // should
             // let the test not care about cancellation or work not enqueued yet.
 
             // block solution cralwer from processing.
@@ -2098,7 +2109,8 @@ class C
 
                 // first, wait for first work to be queued.
                 //
-                // since asyncToken doesn't distinguish whether (1) certain event is happened but all processed or (2) it never happened yet,
+                // since asyncToken doesn't distinguish whether (1) certain event is happened but all processed or
+                // (2) it never happened yet,
                 // to check (1), we must wait for first item, and then wait for all items to be processed.
                 await crawlerListener.WaitUntilConditionIsMetAsync(pendingTokens =>
                     pendingTokens.Any(token =>

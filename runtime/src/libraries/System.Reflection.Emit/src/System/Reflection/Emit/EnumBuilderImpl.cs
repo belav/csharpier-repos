@@ -32,7 +32,8 @@ namespace System.Reflection.Emit
                 enclosingType: null
             );
 
-            // Define the underlying field for the enum. It will be a non-static, private field with special name bit set.
+            // Define the underlying field for the enum. It will be a non-static, private field with special
+            // name bit set.
             _underlyingField = _typeBuilder.DefineField(
                 "value__",
                 underlyingType,

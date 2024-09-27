@@ -122,12 +122,14 @@ namespace System.Runtime.ExceptionServices
             get { return m_Exception; }
         }
 
-        // When a framework needs to "Rethrow" an exception on a thread different (but not necessarily so) from
+        // When a framework needs to "Rethrow" an exception on a thread different (but not necessarily so)
+        // from
         // where it was thrown, it should invoke this method against the ExceptionDispatchInfo (EDI)
         // created for the exception in question.
         //
         // This method will restore the original stack trace and bucketing details before throwing
-        // the exception so that it is easy, from debugging standpoint, to understand what really went wrong on
+        // the exception so that it is easy, from debugging standpoint, to understand what really went wrong
+        // on
         // the original thread.
 #if MONO
         [System.Diagnostics.StackTraceHidden]

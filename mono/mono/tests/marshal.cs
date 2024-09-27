@@ -56,7 +56,7 @@ public class Tests
         return d(5) == 6 ? 0 : 1;
     }
 
-    /* Obtain a delegate from a native function pointer */
+/* Obtain a delegate from a native function pointer */
     static int test_0_get_delegate_for_ftnptr_native()
     {
         IntPtr ptr = mono_test_marshal_return_delegate_2();

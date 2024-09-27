@@ -14,15 +14,21 @@ namespace System
 {
     public static class Console
     {
-        // Unlike many other buffer sizes throughout .NET, which often only affect performance, this buffer size has a
-        // functional impact on interactive console apps, where the size of the buffer passed to ReadFile/Console impacts
-        // how many characters the cmd window will allow to be typed as part of a single line. It also does affect perf,
-        // in particular when input is redirected and data may be consumed from a larger source. This 4K default size is the
+        // Unlike many other buffer sizes throughout .NET, which often only affect performance, this buffer
+        // size has a
+        // functional impact on interactive console apps, where the size of the buffer passed to
+        // ReadFile/Console impacts
+        // how many characters the cmd window will allow to be typed as part of a single line. It also does
+        // affect perf,
+        // in particular when input is redirected and data may be consumed from a larger source. This 4K
+        // default size is the
         // same as is currently used by most other environments/languages tried.
         internal const int ReadBufferSize = 4096;
 
-        // There's no visible functional impact to the write buffer size, and as we auto flush on every write,
-        // there's little benefit to having a large buffer.  So we use a smaller buffer size to reduce working set.
+        // There's no visible functional impact to the write buffer size, and as we auto flush on every
+        // write,
+        // there's little benefit to having a large buffer.  So we use a smaller buffer size to reduce
+        // working set.
         private const int WriteBufferSize = 256;
 
         private static readonly object s_syncObject = new object();
@@ -532,7 +538,8 @@ namespace System
         /// <summary>Gets the position of the cursor.</summary>
         /// <returns>The column and row position of the cursor.</returns>
         /// <remarks>
-        /// Columns are numbered from left to right starting at 0. Rows are numbered from top to bottom starting at 0.
+        /// Columns are numbered from left to right starting at 0. Rows are numbered from top to bottom
+        // starting at 0.
         /// </remarks>
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
@@ -803,10 +810,12 @@ namespace System
         }
 
         //
-        // Give a hint to the code generator to not inline the common console methods. The console methods are
+        // Give a hint to the code generator to not inline the common console methods. The console methods
+        // are
         // not performance critical. It is unnecessary code bloat to have them inlined.
         //
-        // Moreover, simple repros for codegen bugs are often console-based. It is tedious to manually filter out
+        // Moreover, simple repros for codegen bugs are often console-based. It is tedious to manually
+        // filter out
         // the inlined console writelines from them.
         //
         [MethodImplAttribute(MethodImplOptions.NoInlining)]

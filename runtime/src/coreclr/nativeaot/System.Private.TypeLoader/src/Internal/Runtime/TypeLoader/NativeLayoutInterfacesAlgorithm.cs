@@ -63,7 +63,8 @@ namespace Internal.Runtime.TypeLoader
             else
                 implementedInterfaces = TypeDesc.EmptyTypes;
 
-            // Note that the order in which the interfaces are added to the list is same as the order in which the MDIL binder adds them.
+            // Note that the order in which the interfaces are added to the list is same as the order in which
+            // the MDIL binder adds them.
             // It is required for correctness
 
             foreach (TypeDesc interfaceType in implementedInterfaces)

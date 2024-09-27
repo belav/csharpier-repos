@@ -15,7 +15,8 @@ namespace System.Web.UI.WebControls
     using System.Web.Util;
 
     /// <devdoc>
-    /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.TableCell'/> control.</para>
+    /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.TableCell'/>
+    // control.</para>
     /// </devdoc>
     public class TableCellControlBuilder : ControlBuilder
     {
@@ -64,7 +65,9 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///     Contains a list of categories associated with the table header (read by screen readers). The categories can be any string values. The categories are rendered as a comma delimited list using the HTML axis attribute.
+        ///     Contains a list of categories associated with the table header (read by screen readers). The
+        // categories can be any string values. The categories are rendered as a comma delimited list using the
+        // HTML axis attribute.
         ///    </para>
         /// </devdoc>
         [

@@ -9,7 +9,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// this hold onto analyzer executor context which will be used later to put context information in analyzer exception if it occurs.
+    /// this hold onto analyzer executor context which will be used later to put context information in
+    // analyzer exception if it occurs.
     /// </summary>
     internal readonly struct AnalysisContextInfo
     {

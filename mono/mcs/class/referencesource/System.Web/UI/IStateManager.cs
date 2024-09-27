@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Interface implemented by objects that support state management.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Interface implemented by objects that support state management.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.UI
 {
     /// <devdoc>
@@ -17,36 +17,36 @@ namespace System.Web.UI
     /// </devdoc>
     public interface IStateManager
     {
-        /*
-         * Return true if tracking state changes.
-         */
+/*
+* Return true if tracking state changes.
+*/
 
         /// <devdoc>
         ///    <para>Determines if state changes are being tracked.</para>
         ///    </devdoc>
         bool IsTrackingViewState { get; }
 
-        /*
-         * Load previously saved state.
-         */
+/*
+* Load previously saved state.
+*/
 
         /// <devdoc>
         ///    <para>Loads the specified control's previously saved state.</para>
         ///    </devdoc>
         void LoadViewState(object state);
 
-        /*
-         * Return object containing state changes.
-         */
+/*
+* Return object containing state changes.
+*/
 
         /// <devdoc>
         ///    <para>Returns the object that contains the state changes.</para>
         ///    </devdoc>
         object SaveViewState();
 
-        /*
-         * Start tracking state changes.
-         */
+/*
+* Start tracking state changes.
+*/
 
         /// <devdoc>
         ///    <para>Instructs the control to start tracking changes in state.</para>

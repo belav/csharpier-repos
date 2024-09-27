@@ -22,8 +22,10 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 /// <summary>
-/// These features/tests Are only supported on newer versions of Windows and IIS. They are not supported
-/// on IIS Express even on the new Windows versions because IIS Express has its own outdated copy of IIS.
+/// These features/tests Are only supported on newer versions of Windows and IIS. They are not
+// supported
+/// on IIS Express even on the new Windows versions because IIS Express has its own outdated copy of
+// IIS.
 /// </summary>
 [Collection(IISHttpsTestSiteCollection.Name)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
@@ -357,7 +359,8 @@ public class Http2TrailerResetTests : FunctionalTestsBase
                     var dataFrame = await h2Connection.ReceiveFrameAsync();
                     Http2Utilities.VerifyDataFrame(dataFrame, 1, endOfStream: true, length: 0);
 
-                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional streams.
+                    // Http.Sys doesn't send a final GoAway unless we ignore the first one and send 200 additional
+                    // streams.
 
                     h2Connection.Logger.LogInformation("Connection stopped.");
                 }

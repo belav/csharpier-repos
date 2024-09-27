@@ -301,7 +301,8 @@ public class FileResultTests : IClassFixture<MvcTestFixture<FilesWebSite.Startup
         Assert.Equal("This is a sample text file", body);
     }
 
-    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET Framework.
+    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET
+    // Framework.
     [Theory]
     [InlineData("", (int)HttpStatusCode.OK, 26)]
     [InlineData("bytes = 0-6", (int)HttpStatusCode.PartialContent, 7)]
@@ -565,7 +566,8 @@ public class FileResultTests : IClassFixture<MvcTestFixture<FilesWebSite.Startup
         Assert.Equal("This is sample text from a stream", body);
     }
 
-    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET Framework.
+    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET
+    // Framework.
     [Theory]
     [InlineData("", (int)HttpStatusCode.OK, 33)]
     [InlineData("bytes = 0-6", (int)HttpStatusCode.PartialContent, 7)]
@@ -816,7 +818,8 @@ public class FileResultTests : IClassFixture<MvcTestFixture<FilesWebSite.Startup
         Assert.Equal("This is a sample text from a binary array", body);
     }
 
-    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET Framework.
+    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET
+    // Framework.
     [Theory]
     [InlineData("", (int)HttpStatusCode.OK, 41)]
     [InlineData("bytes = 0-6", (int)HttpStatusCode.PartialContent, 7)]
@@ -1082,7 +1085,8 @@ public class FileResultTests : IClassFixture<MvcTestFixture<FilesWebSite.Startup
         );
     }
 
-    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET Framework.
+    // Use int for HttpStatusCode data because xUnit cannot serialize a GAC'd enum when running on .NET
+    // Framework.
     [Theory]
     [InlineData("", (int)HttpStatusCode.OK, 38)]
     [InlineData("bytes = 0-6", (int)HttpStatusCode.PartialContent, 7)]

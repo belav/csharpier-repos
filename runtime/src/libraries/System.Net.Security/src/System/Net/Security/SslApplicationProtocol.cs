@@ -18,7 +18,8 @@ namespace System.Net.Security
         private static readonly byte[] s_http2Utf8 = "h2"u8.ToArray();
         private static readonly byte[] s_http11Utf8 = "http/1.1"u8.ToArray();
 
-        // Refer to IANA on ApplicationProtocols: https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+        // Refer to IANA on ApplicationProtocols:
+        // https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
         /// <summary>Defines a <see cref="SslApplicationProtocol"/> instance for HTTP 3.0.</summary>
         public static readonly SslApplicationProtocol Http3 = new SslApplicationProtocol(
             s_http3Utf8,

@@ -16,9 +16,11 @@ namespace Microsoft.DiaSymReader
     /// <summary>
     /// A COM IStream implementation over memory. Supports just enough for DiaSymReader's PDB writing.
     /// Also tuned for performance:
-    /// 1. SetSize (and Seek beyond the length) is very fast and doesn't re-allocate the underlying memory.
+    /// 1. SetSize (and Seek beyond the length) is very fast and doesn't re-allocate the underlying
+    // memory.
     /// 2. Read and Write are optimized to avoid copying (see <see cref="IUnsafeComStream"/>)
-    /// 3. Allocates in chunks instead of a contiguous buffer to avoid re-alloc and copy costs when growing.
+    /// 3. Allocates in chunks instead of a contiguous buffer to avoid re-alloc and copy costs when
+    // growing.
     /// </summary>
     internal sealed unsafe class ComMemoryStream : IUnsafeComStream
     {

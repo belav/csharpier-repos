@@ -29,7 +29,8 @@ namespace System.Linq.Expressions.Interpreter
         public int InstructionIndex;
 
 #if FEATURE_THREAD_ABORT
-        // When a ThreadAbortException is raised from interpreted code this is the first frame that caught it.
+        // When a ThreadAbortException is raised from interpreted code this is the first frame that caught
+        // it.
         // No handlers within this handler re-abort the current thread when left.
         public ExceptionHandler CurrentAbortHandler;
 #endif
@@ -218,7 +219,8 @@ namespace System.Linq.Expressions.Interpreter
             Debug.Assert(_pendingContinuation >= 0);
             RuntimeLabel pendingTarget = Interpreter._labels[_pendingContinuation];
 
-            // the current continuation might have higher priority (continuationIndex is the depth of the current continuation):
+            // the current continuation might have higher priority (continuationIndex is the depth of the
+            // current continuation):
             if (pendingTarget.ContinuationStackDepth < _continuationIndex)
             {
                 RuntimeLabel currentTarget = Interpreter._labels[
@@ -234,7 +236,8 @@ namespace System.Linq.Expressions.Interpreter
                 Data[StackIndex - 1] = _pendingValue;
             }
 
-            // Set the _pendingContinuation and _pendingValue to the default values if we finally gets to the Goto target
+            // Set the _pendingContinuation and _pendingValue to the default values if we finally gets to the
+            // Goto target
             _pendingContinuation = -1;
             _pendingValue = Interpreter.NoValue;
             return pendingTarget.Index - InstructionIndex;
@@ -277,7 +280,8 @@ namespace System.Linq.Expressions.Interpreter
                 return target.Index - InstructionIndex;
             }
 
-            // if we are in the middle of executing jump we forget the previous target and replace it by a new one:
+            // if we are in the middle of executing jump we forget the previous target and replace it by a new
+            // one:
             _pendingContinuation = labelIndex;
             _pendingValue = value;
             return YieldToCurrentContinuation();

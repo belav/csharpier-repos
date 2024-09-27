@@ -28,8 +28,11 @@ namespace System.Diagnostics.PerformanceData
         /// <summary>
         /// CounterSet constructor.
         /// </summary>
-        /// <param name="providerGuid">ProviderGuid identifies the provider application. A provider identified by ProviderGuid could publish several CounterSets defined by different CounterSetGuids</param>
-        /// <param name="counterSetGuid">CounterSetGuid identifies the specific CounterSet. CounterSetGuid should be unique.</param>
+        /// <param name="providerGuid">ProviderGuid identifies the provider application. A provider
+        // identified by ProviderGuid could publish several CounterSets defined by different
+        // CounterSetGuids</param>
+        /// <param name="counterSetGuid">CounterSetGuid identifies the specific CounterSet. CounterSetGuid
+        // should be unique.</param>
         /// <param name="instanceType">One of defined CounterSetInstanceType values</param>
         public CounterSet(
             Guid providerGuid,
@@ -142,7 +145,8 @@ namespace System.Diagnostics.PerformanceData
         /// </summary>
         /// <param name="counterId">CounterId uniquely identifies the counter within CounterSet</param>
         /// <param name="counterType">One of defined CounterType values</param>
-        /// <param name="counterName">This is friendly name to help provider developers as indexer. and it might not match what is displayed in counter consumption applications lie perfmon.</param>
+        /// <param name="counterName">This is friendly name to help provider developers as indexer. and it
+        // might not match what is displayed in counter consumption applications lie perfmon.</param>
         public void AddCounter(int counterId, CounterType counterType, string counterName)
         {
             ArgumentNullException.ThrowIfNull(counterName);
@@ -207,9 +211,11 @@ namespace System.Diagnostics.PerformanceData
         }
 
         /// <summary>
-        /// Create instances of the CounterSet. Created CounterSetInstance identifies active identity and tracks raw counter data for that identity.
+        /// Create instances of the CounterSet. Created CounterSetInstance identifies active identity and
+        // tracks raw counter data for that identity.
         /// </summary>
-        /// <param name="instanceName">Friendly name identifies the instance. InstanceName would be shown in counter consumption applications like perfmon.</param>
+        /// <param name="instanceName">Friendly name identifies the instance. InstanceName would be shown in
+        // counter consumption applications like perfmon.</param>
         /// <returns>CounterSetInstance object</returns>
         public CounterSetInstance CreateCounterSetInstance(string instanceName)
         {

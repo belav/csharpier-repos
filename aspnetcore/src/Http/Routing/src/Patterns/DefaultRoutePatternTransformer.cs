@@ -77,7 +77,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
                 {
                     // Fail: this route has a non-parameter default that doesn't match.
                     //
-                    // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required values: { area = "" }
+                    // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required
+                    // values: { area = "" }
                     return null;
                 }
 
@@ -98,7 +99,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
                 {
                     // Fail: this route as a non-parameter default that is stricter than *any*.
                     //
-                    // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required values: { area = *any* }
+                    // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" } - with required
+                    // values: { area = *any* }
                     return null;
                 }
 
@@ -115,7 +117,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
                 {
                     // Fail: this route has a constraint that failed.
                     //
-                    // Ex: Admin/{controller:regex(Home|Login)}/{action=Index}/{id?} - with required values: { controller = "Store" }
+                    // Ex: Admin/{controller:regex(Home|Login)}/{action=Index}/{id?} - with required values: {
+                    // controller = "Store" }
                     return null;
                 }
 
@@ -129,8 +132,10 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
                 && RouteValueEqualityComparer.Default.Equals(kvp.Value, defaultValue)
             )
             {
-                // 4. Required value corresponds to a matching default value - check to make sure that this value matches
-                // any IRouteConstraint implementations. It's unlikely that this would happen in practice but it doesn't
+                // 4. Required value corresponds to a matching default value - check to make sure that this value
+                // matches
+                // any IRouteConstraint implementations. It's unlikely that this would happen in practice but it
+                // doesn't
                 // hurt for us to check.
                 if (!MatchesConstraints(original, parameter: null, kvp.Key, requiredValues))
                 {
@@ -146,7 +151,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
 
                 // Success: (for this parameter at least)
                 //
-                // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" }- with required values: { area = "Admin", ... }
+                // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" }- with required
+                // values: { area = "Admin", ... }
                 continue;
             }
             else
@@ -154,7 +160,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
                 // Fail: this is a required value for a key that doesn't appear in the templates, or the route
                 // pattern has a different default value for a non-parameter.
                 //
-                // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" }- with required values: { area = "Blog", ... }
+                // Ex: Admin/{controller=Home}/{action=Index}/{id?} defaults: { area = "Admin" }- with required
+                // values: { area = "Blog", ... }
                 // OR (less likely)
                 // Ex: Admin/{controller=Home}/{action=Index}/{id?} with required values: { page = "/Index", ... }
                 return null;
@@ -250,7 +257,8 @@ internal sealed class DefaultRoutePatternTransformer : RoutePatternTransformer
         RoutePatternParameterPart parameter
     )
     {
-        // We know that a parameter can only appear once, so we only need to rewrite one segment and one parameter.
+        // We know that a parameter can only appear once, so we only need to rewrite one segment and one
+        // parameter.
         for (var i = 0; i < segments.Count; i++)
         {
             var segment = segments[i];

@@ -29,12 +29,14 @@ namespace Microsoft.CodeAnalysis.Text
         /// Initializes a new instance of a <see cref="LinePosition"/> with the given line and character.
         /// </summary>
         /// <param name="line">
-        /// The line of the line position. The first line in a file is defined as line 0 (zero based line numbering).
+        /// The line of the line position. The first line in a file is defined as line 0 (zero based line
+        // numbering).
         /// </param>
         /// <param name="character">
         /// The character position in the line.
         /// </param>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="line"/> or <paramref name="character"/> is less than zero. </exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="line"/> or <paramref
+        // name="character"/> is less than zero. </exception>
         public LinePosition(int line, int character)
         {
             if (line < 0)

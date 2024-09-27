@@ -16,7 +16,8 @@ namespace System.Web.UI
     using System.Web.Util;
 
     /// <devdoc>
-    /// Converts a cache duration such as an integer or the text "Infinite" to a cache duration, where "Infinite" implies zero (0).
+    /// Converts a cache duration such as an integer or the text "Infinite" to a cache duration, where
+    // "Infinite" implies zero (0).
     /// </devdoc>
     public class DataSourceCacheDurationConverter : Int32Converter
     {

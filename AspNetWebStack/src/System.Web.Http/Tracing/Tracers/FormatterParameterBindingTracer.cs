@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -18,7 +19,8 @@ namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
     /// Tracer to wrap a <see cref="FormatterParameterBinding"/>.
-    /// Its primary purpose is to intercept binding requests so that it can create tracers for the formatters.
+    /// Its primary purpose is to intercept binding requests so that it can create tracers for the
+    // formatters.
     /// </summary>
     internal class FormatterParameterBindingTracer
         : FormatterParameterBinding,

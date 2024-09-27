@@ -220,7 +220,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ReadECDsaPrivateKey_WindowsPfx(X509KeyStorageFlags keyStorageFlags)
         {
-            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
+            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy
+            // Test Data")]
             using (
                 var cert = new X509Certificate2(
                     TestData.ECDsaP256_DigitalSignature_Pfx_Windows,
@@ -239,7 +240,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ECDsaPrivateKeyProperty_WindowsPfx()
         {
-            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
+            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy
+            // Test Data")]
             using (
                 var cert = new X509Certificate2(
                     TestData.ECDsaP256_DigitalSignature_Pfx_Windows,
@@ -270,7 +272,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ReadECDHPrivateKey_WindowsPfx(X509KeyStorageFlags keyStorageFlags)
         {
-            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
+            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy
+            // Test Data")]
             using (
                 var cert = new X509Certificate2(
                     TestData.EcDhP256_KeyAgree_Pfx_Windows,
@@ -289,7 +292,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ECDHPrivateKeyProperty_WindowsPfx()
         {
-            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
+            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy
+            // Test Data")]
             using (
                 var cert = new X509Certificate2(
                     TestData.EcDhP256_KeyAgree_Pfx_Windows,
@@ -405,7 +409,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [MemberData(nameof(StorageFlags))]
         public static void ReadECDsaPrivateKey_OpenSslPfx(X509KeyStorageFlags keyStorageFlags)
         {
-            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy Test Data")]
+            // [SuppressMessage("Microsoft.Security", "CSCAN0220.DefaultPasswordContexts", Justification="Legacy
+            // Test Data")]
             using (
                 var cert = new X509Certificate2(
                     TestData.ECDsaP256_DigitalSignature_Pfx_OpenSsl,
@@ -666,7 +671,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             return iterationCount <= allowedIterations;
         }
 
-        // This is a horrible way to produce SecureString. SecureString is deprecated and should not be used.
+        // This is a horrible way to produce SecureString. SecureString is deprecated and should not be
+        // used.
         // This is only reasonable because it is a test driver.
         internal static SecureString GetSecureString(string password)
         {

@@ -23,7 +23,8 @@ namespace Castle.DynamicProxy
     using Castle.DynamicProxy.Generators;
 
     /// <summary>
-    ///   Default implementation of <see cref = "IProxyBuilder" /> interface producing in-memory proxy assemblies.
+    ///   Default implementation of <see cref = "IProxyBuilder" /> interface producing in-memory proxy
+    // assemblies.
     /// </summary>
     public class DefaultProxyBuilder : IProxyBuilder
     {
@@ -31,7 +32,8 @@ namespace Castle.DynamicProxy
         private ILogger logger = NullLogger.Instance;
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see cref = "ModuleScope" />.
+        ///   Initializes a new instance of the <see cref = "DefaultProxyBuilder" /> class with new <see
+        // cref = "ModuleScope" />.
         /// </summary>
         public DefaultProxyBuilder()
             : this(new ModuleScope()) { }

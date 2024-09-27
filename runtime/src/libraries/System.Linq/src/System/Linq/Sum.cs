@@ -57,7 +57,8 @@ namespace System.Linq
             )
             {
                 // For cases where the vector may only contain two elements vectorization doesn't add any benefit
-                // due to the expense of overflow checking. This means that architectures where Vector<T> is 128 bit,
+                // due to the expense of overflow checking. This means that architectures where Vector<T> is 128
+                // bit,
                 // such as ARM or Intel without AVX, will only vectorize spans of ints and not longs.
 
                 if (typeof(T) == typeof(long))

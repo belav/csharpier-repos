@@ -393,7 +393,8 @@ public class C : B, I
 {
 }";
 
-            // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect hide-by-name.
+            // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect
+            // hide-by-name.
             CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics();
         }
 
@@ -646,7 +647,8 @@ class Program
             CreateCompilationWithILAndMscorlib40(csharp, il)
                 .VerifyDiagnostics(
                     // (6,17): error CS1501: No overload for method 'this' takes 2 arguments
-                    //         int x = new B()[1, 2]; // This would work if B.Item was not hide-by-name (since A.Item is params)
+                    //         int x = new B()[1, 2]; // This would work if B.Item was not hide-by-name (since A.Item is
+                    // params)
                     Diagnostic(ErrorCode.ERR_BadArgCount, "new B()[1, 2]")
                         .WithArguments("this", "2")
                 );
@@ -788,7 +790,8 @@ public class C : B, I
 {
 }";
 
-            // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect hide-by-name.
+            // NOTE: unlike overload resolution, implicit interface implementation resolution does not respect
+            // hide-by-name.
             CreateCompilationWithILAndMscorlib40(csharp, il).VerifyDiagnostics();
         }
 

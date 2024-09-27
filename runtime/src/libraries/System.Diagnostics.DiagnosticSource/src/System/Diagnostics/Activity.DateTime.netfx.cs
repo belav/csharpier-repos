@@ -52,7 +52,8 @@ namespace System.Diagnostics
         private static Timer InitializeSyncTimer()
         {
             Timer timer;
-            // Don't capture the current ExecutionContext and its AsyncLocals onto the timer causing them to live forever
+            // Don't capture the current ExecutionContext and its AsyncLocals onto the timer causing them to
+            // live forever
             bool restoreFlow = false;
             try
             {

@@ -23,7 +23,8 @@ namespace GenUnicodeProp
         public void AddData(uint codepoint, byte value) => RawData[codepoint] = value;
 
         /// <summary>
-        /// Create the 12:4:4 data table structure after all the codepoint/value pairs are added by using AddData.
+        /// Create the 12:4:4 data table structure after all the codepoint/value pairs are added by using
+        // AddData.
         /// </summary>
         public void GenerateTable(
             string name,

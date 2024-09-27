@@ -84,7 +84,8 @@ namespace System.Runtime.Caching
         )]
         public abstract bool Contains(string key, string regionName = null);
 
-        //The Add overloads are for adding an item without requiring the existing item to be returned.  This was requested for Velocity.
+        //The Add overloads are for adding an item without requiring the existing item to be returned.  This
+        // was requested for Velocity.
         [SuppressMessage(
             "Microsoft.Design",
             "CA1026:DefaultParametersShouldNotBeUsed",

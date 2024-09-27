@@ -61,27 +61,37 @@ public abstract class ErrorBoundaryBase : ComponentBase, IErrorBoundary
     {
         ArgumentNullException.ThrowIfNull(exception);
 
-        // If rendering the error content itself causes an error, then re-rendering on error risks creating an
-        // infinite error loop. Unfortunately it's very hard to distinguish whether the error source is "child content"
-        // or "error content", since the exceptions can be received asynchronously, arbitrarily long after we switched
-        // between normal and errored states. Without creating a very intricate coupling between ErrorBoundaryBase and
+        // If rendering the error content itself causes an error, then re-rendering on error risks creating
+        // an
+        // infinite error loop. Unfortunately it's very hard to distinguish whether the error source is
+        // "child content"
+        // or "error content", since the exceptions can be received asynchronously, arbitrarily long after
+        // we switched
+        // between normal and errored states. Without creating a very intricate coupling between
+        // ErrorBoundaryBase and
         // Renderer internals, the obvious options are either:
         //
-        // [a] Don't re-render if we're already in an error state. This is problematic because the renderer needs to
-        //     discard the error boundary's subtree on every error, in case a custom error boundary fails to do so, and
+        // [a] Don't re-render if we're already in an error state. This is problematic because the renderer
+        // needs to
+        //     discard the error boundary's subtree on every error, in case a custom error boundary fails to
+        // do so, and
         //     hence we'd be left with a blank UI if we didn't re-render.
         // [b] Do re-render each time, and trust the developer not to cause errors from their error content.
         //
-        // As a middle ground, we try to detect excessive numbers of errors arriving in between recoveries, and treat
-        // an excess as fatal. This also helps to expose the case where a child continues to throw (e.g., on a timer),
+        // As a middle ground, we try to detect excessive numbers of errors arriving in between recoveries,
+        // and treat
+        // an excess as fatal. This also helps to expose the case where a child continues to throw (e.g., on
+        // a timer),
         // which would be very inefficient.
         if (++_errorCount > MaximumErrorCount)
         {
             ExceptionDispatchInfo.Capture(exception).Throw();
         }
 
-        // Notify the subclass so it can begin any async operation even before we render, because (for example)
-        // we want logs to be written before rendering in case the rendering throws. But there's no reason to
+        // Notify the subclass so it can begin any async operation even before we render, because (for
+        // example)
+        // we want logs to be written before rendering in case the rendering throws. But there's no reason
+        // to
         // wait for the async operation to complete before we render.
         var onErrorTask = OnErrorAsync(exception);
         if (!onErrorTask.IsCompletedSuccessfully)

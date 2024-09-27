@@ -85,7 +85,8 @@ namespace System.Data
         internal readonly IndexField[] IndexFields;
 
         /// <summary>Allow a user implemented comparision of two DataRow</summary>
-        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will happen</remarks>
+        /// <remarks>User must use correct DataRowVersion in comparison or index corruption will
+        // happen</remarks>
         private readonly System.Comparison<DataRow> _comparison;
 
         private readonly DataViewRowState recordStates;
@@ -125,7 +126,8 @@ namespace System.Data
         )
             : this(table, GetAllFields(table.Columns), comparison, recordStates, rowFilter) { }
 
-        // for the delegate methods, we don't know what the dependent columns are - so all columns are dependent
+        // for the delegate methods, we don't know what the dependent columns are - so all columns are
+        // dependent
         private static IndexField[] GetAllFields(DataColumnCollection columns)
         {
             IndexField[] fields = new IndexField[columns.Count];
@@ -186,7 +188,8 @@ namespace System.Data
             InitRecords(rowFilter);
 
             // do not AddRef in ctor, every caller should be responsible to AddRef it
-            // if caller does not AddRef, it is expected to be a one-time read operation because the index won't be maintained on writes
+            // if caller does not AddRef, it is expected to be a one-time read operation because the index won't
+            // be maintained on writes
         }
 
         public bool Equal(IndexField[] indexDesc, DataViewRowState recordStates, IFilter rowFilter)
@@ -496,7 +499,8 @@ namespace System.Data
             return 0;
         }
 
-        // DeleteRecordFromIndex deletes the given record from index and does not fire any Event. IT SHOULD NOT FIRE EVENT
+        // DeleteRecordFromIndex deletes the given record from index and does not fire any Event. IT SHOULD
+        // NOT FIRE EVENT
         // I added this since I can not use existing DeleteRecord which is not silent operation
         public void DeleteRecordFromIndex(int recordIndex)
         { // this is for expression use, to maintain expression columns's sort , filter etc. do not fire event
@@ -535,7 +539,8 @@ namespace System.Data
         }
 
         // SQLBU 428961: Serious performance issue when creating DataView
-        // this improves performance by allowing DataView to iterating instead of computing for records over index
+        // this improves performance by allowing DataView to iterating instead of computing for records over
+        // index
         // this will also allow Linq over DataSet to enumerate over the index
         // avoid boxing by returning RBTreeEnumerator (a struct) instead of IEnumerator<int>
         public RBTree<int>.RBTreeEnumerator GetEnumerator(int startIndex)
@@ -555,8 +560,10 @@ namespace System.Data
         }
 
         /// <summary>
-        /// When searching by value for a specific record, the DataRow may require backdating to reflect the appropriate state
-        /// otherwise on Delete of a DataRow in the Added state, would result in the <see cref="System.Comparison&lt;DataRow&gt;"/> where the row
+        /// When searching by value for a specific record, the DataRow may require backdating to reflect the
+        // appropriate state
+        /// otherwise on Delete of a DataRow in the Added state, would result in the <see
+        // cref="System.Comparison&lt;DataRow&gt;"/> where the row
         /// reflection record would be in the Detatched instead of Added state.
         /// </summary>
         private int GetIndex(int record, int changeRecord)
@@ -785,7 +792,8 @@ namespace System.Data
         internal delegate int ComparisonBySelector<TKey, TRow>(TKey key, TRow row)
             where TRow : DataRow;
 
-        /// <summary>This method exists for LinqDataView to keep a level of abstraction away from the RBTree</summary>
+        /// <summary>This method exists for LinqDataView to keep a level of abstraction away from the
+        // RBTree</summary>
         internal Range FindRecords<TKey, TRow>(
             ComparisonBySelector<TKey, TRow> comparison,
             TKey key
@@ -858,7 +866,8 @@ namespace System.Data
             return newIncluded - oldIncluded;
         }
 
-        /// <summary>Determine if the record that needs backdating is the newRecord or oldRecord or neither</summary>
+        /// <summary>Determine if the record that needs backdating is the newRecord or oldRecord or
+        // neither</summary>
         private static int GetReplaceAction(DataViewRowState oldState)
         {
             return (
@@ -903,7 +912,8 @@ namespace System.Data
             DataViewRowState states = recordStates;
 
             // SQLBU 428961: Serious performance issue when creating DataView
-            // this improves performance when the is no filter, like with the default view (creating after rows added)
+            // this improves performance when the is no filter, like with the default view (creating after rows
+            // added)
             // we know the records are in the correct order, just append to end, duplicates not possible
             bool append = (0 == IndexFields.Length);
 
@@ -956,7 +966,8 @@ namespace System.Data
             }
         }
 
-        // InsertRecordToIndex inserts the given record to index and does not fire any Event. IT SHOULD NOT FIRE EVENT
+        // InsertRecordToIndex inserts the given record to index and does not fire any Event. IT SHOULD NOT
+        // FIRE EVENT
         // I added this since I can not use existing InsertRecord which is not silent operation
         // it returns the position that record is inserted
         public int InsertRecordToIndex(int record)
@@ -980,7 +991,8 @@ namespace System.Data
             );
 
             // SQLBU 428961: Serious performance issue when creating DataView
-            // this improves performance when the is no filter, like with the default view (creating before rows added)
+            // this improves performance when the is no filter, like with the default view (creating before rows
+            // added)
             // we know can append when the new record is the last row in table, normal insertion pattern
             bool append = false;
             if ((0 == IndexFields.Length) && (null != table))
@@ -1385,7 +1397,8 @@ namespace System.Data
                 _listenerReaderCount++;
                 try
                 {
-                    // protect against listeners growing via Add since new listeners will already have the Notify in progress
+                    // protect against listeners growing via Add since new listeners will already have the Notify in
+                    // progress
                     for (int i = 0; i < count; ++i)
                     {
                         // protect against listener being set to null (instead of being removed)
@@ -1393,7 +1406,8 @@ namespace System.Data
                         if (filter(listener))
                         {
                             // perform the action on each listener
-                            // some actions may throw an exception blocking remaning listeners from being notified (just like events)
+                            // some actions may throw an exception blocking remaning listeners from being notified (just like
+                            // events)
                             action(listener, arg1, arg2, arg3);
                         }
                         else

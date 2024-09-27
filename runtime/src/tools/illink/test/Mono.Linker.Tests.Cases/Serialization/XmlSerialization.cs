@@ -20,10 +20,12 @@ namespace Mono.Linker.Tests.Cases.Serialization
             // We don't model type arrays, so the extra type will not be discovered for serialization.
             new XmlSerializer(typeof(RootType), new Type[] { typeof(ExtraType) });
 
-            // We don't track generic instance typerefs in dataflow, so generic parameters in root types will not be discovered.
+            // We don't track generic instance typerefs in dataflow, so generic parameters in root types will
+            // not be discovered.
             new XmlSerializer(typeof(GenericRootType<GenericRootParameter>));
 
-            // There are no annotations for serialized types, so we can only discover types statically referenced by the direct caller of the serializer ctor.
+            // There are no annotations for serialized types, so we can only discover types statically
+            // referenced by the direct caller of the serializer ctor.
             XmlSerializerHelper(typeof(RootType));
             GenericXmlSerializerHelper<RootType>();
 

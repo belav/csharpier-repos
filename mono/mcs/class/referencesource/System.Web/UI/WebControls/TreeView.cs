@@ -455,7 +455,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets and sets whether the control should try to use client script, if the browser is capable.
+        ///     Gets and sets whether the control should try to use client script, if the browser is
+        // capable.
         /// </devdoc>
         [DefaultValue(true)]
         [WebCategory("Behavior")]
@@ -1183,7 +1184,8 @@ namespace System.Web.UI.WebControls
                     {
                         _baseNodeStyle.ForeColor = ForeColor;
                     }
-                    // Not defaulting to black anymore for not entirely satisfying but reasonable reasons (VSWhidbey 356729)
+                    // Not defaulting to black anymore for not entirely satisfying but reasonable reasons (VSWhidbey
+                    // 356729)
                     if (!ControlStyle.IsSet(System.Web.UI.WebControls.Style.PROP_FONT_UNDERLINE))
                     {
                         _baseNodeStyle.Font.Underline = false;
@@ -1661,8 +1663,10 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Databinds recursively, using the TreeView's Bindings collection, until it reaches a TreeNodeBinding
-        ///     that is PopulateOnDemand or there is no more data.  Optionally ignores the first level's PopulateOnDemand
+        ///     Databinds recursively, using the TreeView's Bindings collection, until it reaches a
+        // TreeNodeBinding
+        ///     that is PopulateOnDemand or there is no more data.  Optionally ignores the first level's
+        // PopulateOnDemand
         ///     to facilitate populating that level
         /// </devdoc>
         private void DataBindRecursive(
@@ -2275,7 +2279,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets the URL for the specified image, properly pathing the image filename depending on which image it is
+        ///     Gets the URL for the specified image, properly pathing the image filename depending on which
+        // image it is
         /// </devdoc>
         internal string GetImageUrl(int index)
         {
@@ -3078,8 +3083,10 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Loads a nodes state from the postback data.  Basically, there are expand state (which may have changed on the client) and
-        ///     check state.  It also fills a dictionary of nodes that were populated on the client (and need to be populated on the server).
+        ///     Loads a nodes state from the postback data.  Basically, there are expand state (which may
+        // have changed on the client) and
+        ///     check state.  It also fills a dictionary of nodes that were populated on the client (and
+        // need to be populated on the server).
         /// </devdoc>
         private void LoadNodeState(
             TreeNode node,
@@ -3340,7 +3347,8 @@ namespace System.Web.UI.WebControls
                         scriptOM.RegisterArrayDeclaration(this, ImageArrayID, "'" + imageUrl + "'");
                     }
 
-                    // Register a hidden field for tracking the selected node and save it in viewstate so we can fire changed events on postback
+                    // Register a hidden field for tracking the selected node and save it in viewstate so we can fire
+                    // changed events on postback
                     string selectedNodeID = String.Empty;
                     if (SelectedNode != null)
                     {
@@ -3378,7 +3386,8 @@ namespace System.Web.UI.WebControls
                     string populateStartupScript = String.Empty;
                     if (PopulateNodesFromClient)
                     {
-                        // Remember the max index of the nodes, so we can properly restore client-populated nodes on postback
+                        // Remember the max index of the nodes, so we can properly restore client-populated nodes on
+                        // postback
                         ViewState["LastIndex"] = index;
 
                         // Register a log for client-populated nodes
@@ -3526,7 +3535,8 @@ namespace System.Web.UI.WebControls
                         + populateStartupScript;
 
                     // Register a startup script that creates a tree data object
-                    // Note: the first line is to prevent Firefox warnings on undeclared identifiers, needed if a user event occurs
+                    // Note: the first line is to prevent Firefox warnings on undeclared identifiers, needed if a user
+                    // event occurs
                     // before all startup scripts have run.
                     scriptOM.RegisterClientScriptBlock(
                         this,
@@ -3880,7 +3890,8 @@ namespace System.Web.UI.WebControls
         /// </devdoc>
         protected override object SaveViewState()
         {
-            // If the tree is invisible (or one of its parents is) and we're in the GET request, we have to remember (VSWhidbey 349279)
+            // If the tree is invisible (or one of its parents is) and we're in the GET request, we have to
+            // remember (VSWhidbey 349279)
             //
 
 
@@ -4183,7 +4194,8 @@ namespace System.Web.UI.WebControls
 
             // Split the eventArgument into pieces
             // The format is (without the spaces):
-            // nodeIndex | lastIndex | databound | parentIsLast | text.length | text datapath.Length | datapath path
+            // nodeIndex | lastIndex | databound | parentIsLast | text.length | text datapath.Length | datapath
+            // path
 
             // The first piece is always the node index
             int startIndex = 0;

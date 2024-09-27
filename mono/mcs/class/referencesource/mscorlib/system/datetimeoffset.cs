@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 namespace System
 {
@@ -27,7 +28,8 @@ namespace System
     //
     //
     // There are theoretically two date times stored, the UTC and the relative local representation
-    // or the 'clock' time. It actually does not matter which is stored in m_dateTime, so it is desirable
+    // or the 'clock' time. It actually does not matter which is stored in m_dateTime, so it is
+    // desirable
     // for most methods to go through the helpers UtcDateTime and ClockDateTime both to abstract this
     // out and for internal readability.
 
@@ -237,8 +239,10 @@ namespace System
 
         // Instance Properties
 
-        // The clock or visible time represented. This is just a wrapper around the internal date because this is
-        // the chosen storage mechanism. Going through this helper is good for readability and maintainability.
+        // The clock or visible time represented. This is just a wrapper around the internal date because
+        // this is
+        // the chosen storage mechanism. Going through this helper is good for readability and
+        // maintainability.
         // This should be used for display but not identity.
         private DateTime ClockDateTime
         {
@@ -556,7 +560,8 @@ namespace System
             //
             // returns true when the ClockDateTime, Kind, and Offset match
             //
-            // currently the Kind should always be Unspecified, but there is always the possibility that a future version
+            // currently the Kind should always be Unspecified, but there is always the possibility that a
+            // future version
             // of DateTimeOffset overloads the Kind field
             //
             return (
@@ -1036,7 +1041,8 @@ namespace System
             }
 
             Contract.EndContractBlock();
-            // RoundtripKind does not make sense for DateTimeOffset; ignore this flag for backward compatibility with DateTime
+            // RoundtripKind does not make sense for DateTimeOffset; ignore this flag for backward compatibility
+            // with DateTime
             style &= ~DateTimeStyles.RoundtripKind;
 
             // AssumeLocal is also ignored as that is what we do by default with DateTimeOffset.Parse

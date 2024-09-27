@@ -110,7 +110,8 @@ namespace Microsoft.CodeAnalysis
         public CompilationOptions? CompilationOptions { get; }
 
         /// <summary>
-        /// The initial parse options for the source code documents in this project, or null if the default options should be used.
+        /// The initial parse options for the source code documents in this project, or null if the default
+        // options should be used.
         /// </summary>
         public ParseOptions? ParseOptions { get; }
 
@@ -601,7 +602,8 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// The name and flavor portions of the project broken out.  For example, the project
             /// <c>Microsoft.CodeAnalysis.Workspace (netcoreapp3.1)</c> would have the name
-            /// <c>Microsoft.CodeAnalysis.Workspace</c> and the flavor <c>netcoreapp3.1</c>.  Values may be null <see
+            /// <c>Microsoft.CodeAnalysis.Workspace</c> and the flavor <c>netcoreapp3.1</c>.  Values may be null
+            // <see
             /// langword="null"/> if the name does not contain a flavor.
             /// </summary>
             public (string? name, string? flavor) NameAndFlavor =>
@@ -718,7 +720,8 @@ namespace Microsoft.CodeAnalysis
                 writer.WriteBoolean(RunAnalyzers);
                 writer.WriteGuid(TelemetryId);
 
-                // TODO: once CompilationOptions, ParseOptions, ProjectReference, MetadataReference, AnalyzerReference supports
+                // TODO: once CompilationOptions, ParseOptions, ProjectReference, MetadataReference,
+                // AnalyzerReference supports
                 //       serialization, we should include those here as well.
             }
 

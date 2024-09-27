@@ -114,7 +114,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Does a type transitively have any fields which are marked with System.Runtime.CompilerServices.UnsafeValueTypeAttribute
+        /// Does a type transitively have any fields which are marked with
+        // System.Runtime.CompilerServices.UnsafeValueTypeAttribute
         /// </summary>
         public bool IsUnsafeValueType
         {
@@ -221,7 +222,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// The number of bytes used by the instance fields of this type and its parent types without padding at the end for alignment/gc.
+        /// The number of bytes used by the instance fields of this type and its parent types without
+        // padding at the end for alignment/gc.
         /// </summary>
         public LayoutInt InstanceByteCountUnaligned
         {
@@ -451,7 +453,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Gets a value indicating whether the type is a homogeneous floating-point or short-vector aggregate.
+        /// Gets a value indicating whether the type is a homogeneous floating-point or short-vector
+        // aggregate.
         /// </summary>
         public bool IsHomogeneousAggregate
         {

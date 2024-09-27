@@ -23,7 +23,8 @@ namespace System.Threading
     /// Provides a slimmed down version of <see cref="ManualResetEvent"/>.
     /// </summary>
     /// <remarks>
-    /// All public and protected members of <see cref="ManualResetEventSlim"/> are thread-safe and may be used
+    /// All public and protected members of <see cref="ManualResetEventSlim"/> are thread-safe and may
+    // be used
     /// concurrently from multiple threads, with the exception of Dispose, which
     /// must only be used when all other operations on the <see cref="ManualResetEventSlim"/> have
     /// completed, and Reset, which should only be used when no other threads are
@@ -42,7 +43,8 @@ namespace System.Threading
         private volatile ManualResetEvent? m_eventObj; // A true Win32 event used for waiting.
 
         // -- State -- //
-        // For a packed word a uint would seem better, but Interlocked.* doesn't support them as uint isn't CLS-compliant.
+        // For a packed word a uint would seem better, but Interlocked.* doesn't support them as uint isn't
+        // CLS-compliant.
         private volatile int m_combinedState; // ie a uint. Used for the state items listed below.
 
         // 1-bit for  signalled state
@@ -152,7 +154,8 @@ namespace System.Threading
                     "NumWaiters should never be less than zero. This indicates an internal error."
                 );
 
-                // it is possible for the max number of waiters to be exceeded via user-code, hence we use a real exception here.
+                // it is possible for the max number of waiters to be exceeded via user-code, hence we use a real
+                // exception here.
                 if (value >= NumWaitersState_MaxValue)
                     throw new InvalidOperationException(
                         SR.Format(
@@ -181,7 +184,8 @@ namespace System.Threading
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>
         /// class with a boolean value indicating whether to set the initial state to signaled.
         /// </summary>
-        /// <param name="initialState">true to set the initial state signaled; false to set the initial state
+        /// <param name="initialState">true to set the initial state signaled; false to set the initial
+        // state
         /// to nonsignaled.</param>
         public ManualResetEventSlim(bool initialState)
         {
@@ -192,10 +196,12 @@ namespace System.Threading
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ManualResetEventSlim"/>
-        /// class with a Boolean value indicating whether to set the initial state to signaled and a specified
+        /// class with a Boolean value indicating whether to set the initial state to signaled and a
+        // specified
         /// spin count.
         /// </summary>
-        /// <param name="initialState">true to set the initial state to signaled; false to set the initial state
+        /// <param name="initialState">true to set the initial state to signaled; false to set the initial
+        // state
         /// to nonsignaled.</param>
         /// <param name="spinCount">The number of spin waits that will occur before falling back to a true
         /// wait.</param>
@@ -291,7 +297,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Sets the state of the event to signaled, which allows one or more threads waiting on the event to
+        /// Sets the state of the event to signaled, which allows one or more threads waiting on the event
+        // to
         /// proceed.
         /// </summary>
         public void Set()
@@ -302,13 +309,15 @@ namespace System.Threading
         /// <summary>
         /// Private helper to actually perform the Set.
         /// </summary>
-        /// <param name="duringCancellation">Indicates whether we are calling Set() during cancellation.</param>
+        /// <param name="duringCancellation">Indicates whether we are calling Set() during
+        // cancellation.</param>
         /// <exception cref="OperationCanceledException">The object has been canceled.</exception>
         private void Set(bool duringCancellation)
         {
             // We need to ensure that IsSet=true does not get reordered past the read of m_eventObj
             // This would be a legal movement according to the .NET memory model.
-            // The code is safe as IsSet involves an Interlocked.CompareExchange which provides a full memory barrier.
+            // The code is safe as IsSet involves an Interlocked.CompareExchange which provides a full memory
+            // barrier.
             IsSet = true;
 
             // If there are waiting threads, we need to pulse them.
@@ -323,8 +332,10 @@ namespace System.Threading
 
             ManualResetEvent? eventObj = m_eventObj;
 
-            // Design-decision: do not set the event if we are in cancellation -> better to deadlock than to wake up waiters incorrectly
-            // It would be preferable to wake up the event and have it throw OCE. This requires MRE to implement cancellation logic
+            // Design-decision: do not set the event if we are in cancellation -> better to deadlock than to
+            // wake up waiters incorrectly
+            // It would be preferable to wake up the event and have it throw OCE. This requires MRE to implement
+            // cancellation logic
 
             if (eventObj != null && !duringCancellation)
             {
@@ -389,7 +400,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the current <see cref="ManualResetEventSlim"/> receives a signal,
+        /// Blocks the current thread until the current <see cref="ManualResetEventSlim"/> receives a
+        // signal,
         /// while observing a <see cref="CancellationToken"/>.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to
@@ -575,7 +587,8 @@ namespace System.Threading
                             // If our token was canceled, we must throw and exit.
                             cancellationToken.ThrowIfCancellationRequested();
 
-                            // update timeout (delays in wait commencement are due to spinning and/or spurious wakeups from other waits being canceled)
+                            // update timeout (delays in wait commencement are due to spinning and/or spurious wakeups from
+                            // other waits being canceled)
                             if (bNeedTimeoutAdjustment)
                             {
                                 realMillisecondsTimeout = TimeoutHelper.UpdateTimeOut(
@@ -586,7 +599,8 @@ namespace System.Threading
                                     return false;
                             }
 
-                            // There is a race condition that Set will fail to see that there are waiters as Set does not take the lock,
+                            // There is a race condition that Set will fail to see that there are waiters as Set does not take
+                            // the lock,
                             // so after updating waiters, we must check IsSet again.
                             // Also, we must ensure there cannot be any reordering of the assignment to Waiters and the
                             // read from IsSet.  This is guaranteed as Waiters{set;} involves an Interlocked.CompareExchange
@@ -615,7 +629,8 @@ namespace System.Threading
                                 Waiters--;
                             }
                             // Now just loop back around, and the right thing will happen.  Either:
-                            //     1. We had a spurious wake-up due to some other wait being canceled via a different cancellationToken (rewait)
+                            //     1. We had a spurious wake-up due to some other wait being canceled via a different
+                            // cancellationToken (rewait)
                             // or  2. the wait was successful. (the loop will break)
                         }
                     }
@@ -645,7 +660,8 @@ namespace System.Threading
         /// <param name="disposing">true to release both managed and unmanaged resources;
         /// false to release only unmanaged resources.</param>
         /// <remarks>
-        /// Unlike most of the members of <see cref="ManualResetEventSlim"/>, <see cref="Dispose(bool)"/> is not
+        /// Unlike most of the members of <see cref="ManualResetEventSlim"/>, <see cref="Dispose(bool)"/> is
+        // not
         /// thread-safe and may not be used concurrently with other members of this instance.
         /// </remarks>
         protected virtual void Dispose(bool disposing)
@@ -712,7 +728,8 @@ namespace System.Threading
             {
                 int oldState = m_combinedState; // cache the old value for testing in CAS
 
-                // Procedure:(1) zero the updateBits.  eg oldState = [11111111] flag= [00111000] newState = [11000111]
+                // Procedure:(1) zero the updateBits.  eg oldState = [11111111] flag= [00111000] newState =
+                // [11000111]
                 //           then (2) map in the newBits. eg [11000111] newBits=00101000, newState=[11101111]
                 int newState = (oldState & ~updateBitsMask) | newBits;
 
@@ -728,8 +745,10 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Private helper method - performs Mask and shift, particular helpful to extract a field from a packed word.
-        /// eg ExtractStatePortionAndShiftRight(0x12345678, 0xFF000000, 24) => 0x12, ie extracting the top 8-bits as a simple integer
+        /// Private helper method - performs Mask and shift, particular helpful to extract a field from a
+        // packed word.
+        /// eg ExtractStatePortionAndShiftRight(0x12345678, 0xFF000000, 24) => 0x12, ie extracting the top
+        // 8-bits as a simple integer
         ///
         /// ?? is there a common place to put this rather than being private to MRES?
         /// </summary>

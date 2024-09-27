@@ -15,7 +15,8 @@ public class RelationalQueryRootProcessor : QueryRootProcessor
     ///     Creates a new instance of the <see cref="RelationalQueryRootProcessor" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this class.</param>
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
     public RelationalQueryRootProcessor(
         QueryTranslationPreprocessorDependencies dependencies,
@@ -28,17 +29,22 @@ public class RelationalQueryRootProcessor : QueryRootProcessor
     }
 
     /// <summary>
-    ///     Indicates that a <see cref="ConstantExpression" /> can be converted to a <see cref="InlineQueryRootExpression" />;
-    ///     the latter will end up in <see cref="RelationalQueryableMethodTranslatingExpressionVisitor.VisitInlineQueryRoot" /> for
+    ///     Indicates that a <see cref="ConstantExpression" /> can be converted to a <see
+    // cref="InlineQueryRootExpression" />;
+    ///     the latter will end up in <see
+    // cref="RelationalQueryableMethodTranslatingExpressionVisitor.VisitInlineQueryRoot" /> for
     ///     translation to a SQL <see cref="ValuesExpression" />.
     /// </summary>
     protected override bool ShouldConvertToInlineQueryRoot(NewArrayExpression newArrayExpression) =>
         true;
 
     /// <summary>
-    ///     Indicates that a <see cref="ParameterExpression" /> can be converted to a <see cref="ParameterQueryRootExpression" />;
-    ///     the latter will end up in <see cref="RelationalQueryableMethodTranslatingExpressionVisitor.TranslatePrimitiveCollection" /> for
-    ///     translation to a provider-specific SQL expansion mechanism, e.g. <c>OPENJSON</c> on SQL Server.
+    ///     Indicates that a <see cref="ParameterExpression" /> can be converted to a <see
+    // cref="ParameterQueryRootExpression" />;
+    ///     the latter will end up in <see
+    // cref="RelationalQueryableMethodTranslatingExpressionVisitor.TranslatePrimitiveCollection" /> for
+    ///     translation to a provider-specific SQL expansion mechanism, e.g. <c>OPENJSON</c> on SQL
+    // Server.
     /// </summary>
     protected override bool ShouldConvertToParameterQueryRoot(
         ParameterExpression constantExpression
@@ -68,7 +74,8 @@ public class RelationalQueryRootProcessor : QueryRootProcessor
     protected override Expression VisitExtension(Expression node) =>
         node switch
         {
-            // We skip FromSqlQueryRootExpression, since that contains the arguments as an object array parameter, and don't want to convert
+            // We skip FromSqlQueryRootExpression, since that contains the arguments as an object array
+            // parameter, and don't want to convert
             // that to a query root
             FromSqlQueryRootExpression e => e,
 

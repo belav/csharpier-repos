@@ -56,8 +56,10 @@ namespace System.Threading
         {
             const int DefaultThreadPoolThreadTimeoutMs = 20 * 1000; // If you change this make sure to change the timeout times in the tests.
 
-            // The amount of time in milliseconds a thread pool thread waits without having done any work before timing out and
-            // exiting. Set to -1 to disable the timeout. Applies to worker threads and wait threads. Also see the
+            // The amount of time in milliseconds a thread pool thread waits without having done any work before
+            // timing out and
+            // exiting. Set to -1 to disable the timeout. Applies to worker threads and wait threads. Also see
+            // the
             // ThreadsToKeepAlive config value for relevant information.
             int timeoutMs = AppContextConfigHelper.GetInt32Config(
                 "System.Threading.ThreadPool.ThreadTimeoutMs",
@@ -71,7 +73,8 @@ namespace System.Threading
         private static object? t_completionCountObject;
 
 #pragma warning disable IDE1006 // Naming Styles
-        // The singleton must be initialized after the static variables above, as the constructor may be dependent on them.
+        // The singleton must be initialized after the static variables above, as the constructor may be
+        // dependent on them.
         // SOS's ThreadPool command depends on this name.
         public static readonly PortableThreadPool ThreadPoolInstance = new PortableThreadPool();
 #pragma warning restore IDE1006 // Naming Styles
@@ -435,7 +438,8 @@ namespace System.Threading
                         // If we're increasing the goal, inject a thread.  If that thread finds work, it will inject
                         // another thread, etc., until nobody finds work or we reach the new goal.
                         //
-                        // If we're reducing the goal, whichever threads notice this first will sleep and timeout themselves.
+                        // If we're reducing the goal, whichever threads notice this first will sleep and timeout
+                        // themselves.
                         //
                         if (newNumThreadsGoal > oldNumThreadsGoal)
                         {
@@ -468,9 +472,12 @@ namespace System.Threading
                 return false;
             }
 
-            // We need to subtract by prior time because Environment.TickCount can wrap around, making a comparison of absolute
-            // times unreliable. Intervals are unsigned to avoid wrapping around on the subtract after enough time elapses, and
-            // this also prevents the initial elapsed interval from being negative due to the prior and next times being
+            // We need to subtract by prior time because Environment.TickCount can wrap around, making a
+            // comparison of absolute
+            // times unreliable. Intervals are unsigned to avoid wrapping around on the subtract after enough
+            // time elapses, and
+            // this also prevents the initial elapsed interval from being negative due to the prior and next
+            // times being
             // initialized to zero.
             int priorTime = Volatile.Read(ref _separated.priorCompletedWorkRequestsTime);
             uint requiredInterval = (uint)(_separated.nextCompletedWorkRequestsTime - priorTime);
@@ -480,28 +487,37 @@ namespace System.Threading
                 return false;
             }
 
-            // Avoid trying to adjust the thread count goal if there are already more threads than the thread count goal.
-            // In that situation, hill climbing must have previously decided to decrease the thread count goal, so let's
-            // wait until the system responds to that change before calling into hill climbing again. This condition should
+            // Avoid trying to adjust the thread count goal if there are already more threads than the thread
+            // count goal.
+            // In that situation, hill climbing must have previously decided to decrease the thread count goal,
+            // so let's
+            // wait until the system responds to that change before calling into hill climbing again. This
+            // condition should
             // be the opposite of the condition in WorkerThread.ShouldStopProcessingWorkNow that causes
-            // threads processing work to stop in response to a decreased thread count goal. The logic here is a bit
-            // different from the original CoreCLR code from which this implementation was ported because in this
-            // implementation there are no retired threads, so only the count of threads processing work is considered.
+            // threads processing work to stop in response to a decreased thread count goal. The logic here is a
+            // bit
+            // different from the original CoreCLR code from which this implementation was ported because in
+            // this
+            // implementation there are no retired threads, so only the count of threads processing work is
+            // considered.
             ThreadCounts counts = _separated.counts;
             if (counts.NumProcessingWork > counts.NumThreadsGoal)
             {
                 return false;
             }
 
-            // Skip hill climbing when there is a pending blocking adjustment. Hill climbing may otherwise bypass the
+            // Skip hill climbing when there is a pending blocking adjustment. Hill climbing may otherwise
+            // bypass the
             // blocking adjustment heuristics and increase the thread count too quickly.
             return _pendingBlockingAdjustment == PendingBlockingAdjustment.None;
         }
 
         internal void RequestWorker()
         {
-            // The order of operations here is important. MaybeAddWorkingWorker() and EnsureRunning() use speculative checks to
-            // do their work and the memory barrier from the interlocked operation is necessary in this case for correctness.
+            // The order of operations here is important. MaybeAddWorkingWorker() and EnsureRunning() use
+            // speculative checks to
+            // do their work and the memory barrier from the interlocked operation is necessary in this case for
+            // correctness.
             Interlocked.Increment(ref _separated.numRequestedWorkers);
             WorkerThread.MaybeAddWorkingWorker(this);
             GateThread.EnsureRunning(this);
@@ -509,9 +525,12 @@ namespace System.Threading
 
         private bool OnGen2GCCallback()
         {
-            // Gen 2 GCs may be very infrequent in some cases. If it becomes an issue, consider updating the memory usage more
-            // frequently. The memory usage is only used for fallback purposes in blocking adjustment, so an artificially higher
-            // memory usage may cause blocking adjustment to fall back to slower adjustments sooner than necessary.
+            // Gen 2 GCs may be very infrequent in some cases. If it becomes an issue, consider updating the
+            // memory usage more
+            // frequently. The memory usage is only used for fallback purposes in blocking adjustment, so an
+            // artificially higher
+            // memory usage may cause blocking adjustment to fall back to slower adjustments sooner than
+            // necessary.
             GCMemoryInfo gcMemoryInfo = GC.GetGCMemoryInfo();
             _memoryLimitBytes = gcMemoryInfo.HighMemoryLoadThresholdBytes;
             _memoryUsageBytes = Math.Min(

@@ -375,7 +375,8 @@ namespace System.Web.Compilation
         /// <summary>
         /// Returns the higher compilerVersion specified in codedom for the case when targeting 2.0/3.5.
         /// Either "v3.5" is returned, or "v2.0" is returned if the compilerVersion
-        /// is anything other that "v3.5". This is because the root web.config has compilerVersion=v4.0. If we
+        /// is anything other that "v3.5". This is because the root web.config has compilerVersion=v4.0. If
+        // we
         /// know that we are compiling for 2.0 or 3.5, then we override the value to 2.0 if it is not 3.5.
         /// </summary>
         private static string GetCompilerVersionFor20Or35()

@@ -30,7 +30,8 @@ namespace System.ServiceModel.Channels
                 );
             }
             // we explicitly allow the case for index = 0, buffer.Length = 0 and count = 0 when it is write
-            // Note that we rely on the last check of count > buffer.Length - index to cover count > 0 && index == buffer.Length case
+            // Note that we rely on the last check of count > buffer.Length - index to cover count > 0 && index
+            // == buffer.Length case
             if (index > buffer.Length || (isRead && index == buffer.Length))
             {
                 throw FxTrace.Exception.ArgumentOutOfRange(

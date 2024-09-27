@@ -55,7 +55,8 @@ namespace System.Data.Mapping
         /// <summary>
         /// Construct a new EdmProperty mapping object
         /// </summary>
-        /// <param name="cdmMember">The PropertyMetadata object that represents the member for which mapping is being specified</param>
+        /// <param name="cdmMember">The PropertyMetadata object that represents the member for which mapping
+        // is being specified</param>
         internal StoragePropertyMapping(EdmProperty cdmMember)
         {
             this.m_cdmMember = cdmMember;

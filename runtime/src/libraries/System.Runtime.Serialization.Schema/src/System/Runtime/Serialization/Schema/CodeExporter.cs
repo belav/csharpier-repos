@@ -1711,7 +1711,8 @@ namespace System.Runtime.Serialization
 
             string dataContractName = GetNameForAttribute(collectionContract.XmlName.Name);
 
-            // If type name is not expected, generate collection type that derives from referenced list type and uses [CollectionDataContract]
+            // If type name is not expected, generate collection type that derives from referenced list type and
+            // uses [CollectionDataContract]
             if (!SupportsGenericTypeReference)
                 throw ExceptionUtil.ThrowHelperError(
                     new InvalidOperationException(
@@ -2023,7 +2024,8 @@ namespace System.Runtime.Serialization
         {
             memberName = GetClrIdentifier(memberName, ImportGlobals.DefaultGeneratedMember);
 
-            // This is only called from Export* methods which have already called GenerateType to fill in this info.
+            // This is only called from Export* methods which have already called GenerateType to fill in this
+            // info.
             Debug.Assert(contractCodeDomInfo.TypeDeclaration != null);
 
             if (memberName == contractCodeDomInfo.TypeDeclaration.Name)
@@ -2166,7 +2168,8 @@ namespace System.Runtime.Serialization
 
         private static void AddImportStatement(string? clrNamespace, CodeNamespace? codeNamespace)
         {
-            // We don't expect these to be null when passed in, but they are usually properties on larger classes which declare their types as nullable and we can't control, so we allow nullable parameters.
+            // We don't expect these to be null when passed in, but they are usually properties on larger
+            // classes which declare their types as nullable and we can't control, so we allow nullable parameters.
             Debug.Assert(clrNamespace != null);
             Debug.Assert(codeNamespace != null);
 
@@ -2563,7 +2566,8 @@ namespace System.Runtime.Serialization
                     ImportGlobals.SerializationInfoFieldName
                 );
                 baseConstructor.Statements.Add(setObjectData);
-                // Special-cased check for vb here since CodeGeneratorOptions does not provide information indicating that VB cannot initialize event member
+                // Special-cased check for vb here since CodeGeneratorOptions does not provide information
+                // indicating that VB cannot initialize event member
                 if (EnableDataBinding && SupportsDeclareEvents && FileExtension != "vb")
                 {
                     baseConstructor.Statements.Add(

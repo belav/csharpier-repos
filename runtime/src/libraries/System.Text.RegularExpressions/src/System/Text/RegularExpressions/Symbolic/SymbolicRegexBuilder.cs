@@ -93,8 +93,10 @@ namespace System.Text.RegularExpressions.Symbolic
         private readonly Dictionary<TSet, SymbolicRegexNode<TSet>> _singletonCache = new();
 
         /// <summary>
-        /// This cache is used in <see cref="SymbolicRegexNode{TSet}.Create"/> to keep all nodes associated with this builder
-        /// unique. This ensures that reference equality can be used for syntactic equality and that all shared subexpressions
+        /// This cache is used in <see cref="SymbolicRegexNode{TSet}.Create"/> to keep all nodes associated
+        // with this builder
+        /// unique. This ensures that reference equality can be used for syntactic equality and that all
+        // shared subexpressions
         /// are maximally shared.
         /// </summary>
         internal readonly Dictionary<NodeCacheKey, SymbolicRegexNode<TSet>> _nodeCache = new();
@@ -149,13 +151,17 @@ namespace System.Text.RegularExpressions.Symbolic
                 && EqualityComparer<SymbolicRegexInfo>.Default.Equals(Info, other.Info);
         }
 
-        // The following dictionaries are used as caches for operations that recurse over the structure of SymbolicRegexNode.
-        // These operations are called potentially on every step of the matching process, and they may do linear work in the
-        // of the pattern in each call. Thus, caching is necessary to avoid a quadratic worst-case over multiple steps of
+        // The following dictionaries are used as caches for operations that recurse over the structure of
+        // SymbolicRegexNode.
+        // These operations are called potentially on every step of the matching process, and they may do
+        // linear work in the
+        // of the pattern in each call. Thus, caching is necessary to avoid a quadratic worst-case over
+        // multiple steps of
         // matching when simplification rules fail to eliminate the portions being walked over.
 
         /// <summary>
-        /// Cache for <see cref="SymbolicRegexNode{TSet}.CreateDerivative(SymbolicRegexBuilder{TSet}, TSet, uint)"/> keyed by:
+        /// Cache for <see cref="SymbolicRegexNode{TSet}.CreateDerivative(SymbolicRegexBuilder{TSet}, TSet,
+        // uint)"/> keyed by:
         ///  -The node to derivate
         ///  -The character or minterm to take the derivative with
         ///  -The surrounding character context
@@ -167,7 +173,9 @@ namespace System.Text.RegularExpressions.Symbolic
         > _derivativeCache = new();
 
         /// <summary>
-        /// Cache for <see cref="SymbolicRegexNode{TSet}.PruneLowerPriorityThanNullability(SymbolicRegexBuilder{TSet}, uint)"/> keyed by:
+        /// Cache for <see
+        // cref="SymbolicRegexNode{TSet}.PruneLowerPriorityThanNullability(SymbolicRegexBuilder{TSet}, uint)"/>
+        // keyed by:
         ///  -The node to prune
         ///  -The surrounding character context
         /// The value is the pruned node.
@@ -178,7 +186,8 @@ namespace System.Text.RegularExpressions.Symbolic
         > _pruneLowerPriorityThanNullabilityCache = new();
 
         /// <summary>
-        /// Cache for <see cref="SymbolicRegexNode{TSet}.Subsumes(SymbolicRegexBuilder{TSet}, SymbolicRegexNode{TSet}, int)"/> keyed by:
+        /// Cache for <see cref="SymbolicRegexNode{TSet}.Subsumes(SymbolicRegexBuilder{TSet},
+        // SymbolicRegexNode{TSet}, int)"/> keyed by:
         ///  -The node R potentially subsuming S
         ///  -The node S potentially being subsumed by R
         /// The value indicates if subsumption is known to hold.
@@ -195,12 +204,14 @@ namespace System.Text.RegularExpressions.Symbolic
             _charSetSolver = charSetSolver;
             _solver = solver;
 
-            // initialized to False but updated later to the actual condition ony if \b or \B occurs anywhere in the regex
+            // initialized to False but updated later to the actual condition ony if \b or \B occurs anywhere in
+            // the regex
             // this implies that if a regex never uses \b or \B then the character context will never
             // update the previous character context to distinguish word and nonword letters
             _wordLetterForBoundariesSet = solver.Empty;
 
-            // initialized to False but updated later to the actual condition of \n only if a line anchor occurs anywhere in the regex
+            // initialized to False but updated later to the actual condition of \n only if a line anchor occurs
+            // anywhere in the regex
             // this implies that if a regex never uses a line anchor then the character context will never
             // update the previous character context to mark that the previous caharcter was \n
             _newLineSet = solver.Empty;
@@ -243,7 +254,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            // Iterate backwards to avoid quadratic rebuilding of the Alternate nodes, which are always simplified to
+            // Iterate backwards to avoid quadratic rebuilding of the Alternate nodes, which are always
+            // simplified to
             // right associative form. Concretely:
             // In (a|(b|c)) | d -> (a|(b|(c|d)) the first argument is not a subtree of the result.
             // In a | (b|(c|d)) -> (a|(b|(c|d)) the second argument is a subtree of the result.
@@ -274,7 +286,8 @@ namespace System.Text.RegularExpressions.Symbolic
             SymbolicRegexNode<TSet> result = Epsilon;
 
             // Iterate through all the nodes concatenating them together in reverse order.
-            // Here the nodes enumeration is already reversed, so reversing it back to the original concatenation order.
+            // Here the nodes enumeration is already reversed, so reversing it back to the original
+            // concatenation order.
             foreach (SymbolicRegexNode<TSet> node in nodes)
             {
                 // If there's a nothing in the list, the whole concatenation can't match, so just return nothing.
@@ -304,7 +317,8 @@ namespace System.Text.RegularExpressions.Symbolic
             int upper = int.MaxValue
         )
         {
-            // If the lower and upper bound are both 1, then the node would be processed once and only once, so we can just return that node.
+            // If the lower and upper bound are both 1, then the node would be processed once and only once, so
+            // we can just return that node.
             if (lower == 1 && upper == 1)
             {
                 return node;
@@ -357,8 +371,10 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Creates a "singleton", which matches a single character.</summary>
         internal SymbolicRegexNode<TSet> CreateSingleton(TSet set)
         {
-            // We maintain a cache of singletons, under the assumption that it's likely the same one/notone/set appears
-            // multiple times in the same pattern.  First consult the cache, and then create a new singleton if one didn't exist.
+            // We maintain a cache of singletons, under the assumption that it's likely the same one/notone/set
+            // appears
+            // multiple times in the same pattern.  First consult the cache, and then create a new singleton if
+            // one didn't exist.
             ref SymbolicRegexNode<TSet>? result = ref CollectionsMarshal.GetValueRefOrAddDefault(
                 _singletonCache,
                 set,

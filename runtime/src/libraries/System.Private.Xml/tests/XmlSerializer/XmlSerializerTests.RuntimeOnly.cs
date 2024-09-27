@@ -3823,7 +3823,8 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_TypeWithIndirectReferencedAssembly()
     {
-        // TypeWithIndirectRef class has a dependency on Task, which is in System.Threading.Tasks, an assembly that's indirectly referenced.
+        // TypeWithIndirectRef class has a dependency on Task, which is in System.Threading.Tasks, an
+        // assembly that's indirectly referenced.
         var value = new DirectRef.TypeWithIndirectRef() { Name = "Foo" };
         var actual = SerializeAndDeserialize(
             value,

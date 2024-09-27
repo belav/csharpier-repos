@@ -26,34 +26,41 @@ namespace System.Reflection.PortableExecutable
         public byte MinorLinkerVersion { get; }
 
         /// <summary>
-        /// The size of the code (text) section, or the sum of all code sections if there are multiple sections.
+        /// The size of the code (text) section, or the sum of all code sections if there are multiple
+        // sections.
         /// </summary>
         public int SizeOfCode { get; }
 
         /// <summary>
-        /// The size of the initialized data section, or the sum of all such sections if there are multiple data sections.
+        /// The size of the initialized data section, or the sum of all such sections if there are multiple
+        // data sections.
         /// </summary>
         public int SizeOfInitializedData { get; }
 
         /// <summary>
-        /// The size of the uninitialized data section (BSS), or the sum of all such sections if there are multiple BSS sections.
+        /// The size of the uninitialized data section (BSS), or the sum of all such sections if there are
+        // multiple BSS sections.
         /// </summary>
         public int SizeOfUninitializedData { get; }
 
         /// <summary>
-        /// The address of the entry point relative to the image base when the PE file is loaded into memory.
-        /// For program images, this is the starting address. For device drivers, this is the address of the initialization function.
+        /// The address of the entry point relative to the image base when the PE file is loaded into
+        // memory.
+        /// For program images, this is the starting address. For device drivers, this is the address of the
+        // initialization function.
         /// An entry point is optional for DLLs. When no entry point is present, this field must be zero.
         /// </summary>
         public int AddressOfEntryPoint { get; }
 
         /// <summary>
-        /// The address that is relative to the image base of the beginning-of-code section when it is loaded into memory.
+        /// The address that is relative to the image base of the beginning-of-code section when it is
+        // loaded into memory.
         /// </summary>
         public int BaseOfCode { get; }
 
         /// <summary>
-        /// The address that is relative to the image base of the beginning-of-data section when it is loaded into memory.
+        /// The address that is relative to the image base of the beginning-of-data section when it is
+        // loaded into memory.
         /// </summary>
         public int BaseOfData { get; }
 
@@ -68,13 +75,15 @@ namespace System.Reflection.PortableExecutable
         public ulong ImageBase { get; }
 
         /// <summary>
-        /// The alignment (in bytes) of sections when they are loaded into memory. It must be greater than or equal to <see cref="FileAlignment"/>.
+        /// The alignment (in bytes) of sections when they are loaded into memory. It must be greater than
+        // or equal to <see cref="FileAlignment"/>.
         /// The default is the page size for the architecture.
         /// </summary>
         public int SectionAlignment { get; }
 
         /// <summary>
-        /// The alignment factor (in bytes) that is used to align the raw data of sections in the image file.
+        /// The alignment factor (in bytes) that is used to align the raw data of sections in the image
+        // file.
         /// The value should be a power of 2 between 512 and 64K, inclusive. The default is 512.
         /// If the <see cref="SectionAlignment"/> is less than the architecture's page size,
         /// then <see cref="FileAlignment"/> must match <see cref="SectionAlignment"/>.
@@ -118,7 +127,8 @@ namespace System.Reflection.PortableExecutable
         public int SizeOfImage { get; }
 
         /// <summary>
-        /// The combined size of an MS DOS stub, PE header, and section headers rounded up to a multiple of FileAlignment.
+        /// The combined size of an MS DOS stub, PE header, and section headers rounded up to a multiple of
+        // FileAlignment.
         /// </summary>
         public int SizeOfHeaders { get; }
 
@@ -157,7 +167,8 @@ namespace System.Reflection.PortableExecutable
         public ulong SizeOfHeapCommit { get; }
 
         /// <summary>
-        /// The number of data-directory entries in the remainder of the <see cref="PEHeader"/>. Each describes a location and size.
+        /// The number of data-directory entries in the remainder of the <see cref="PEHeader"/>. Each
+        // describes a location and size.
         /// </summary>
         public int NumberOfRvaAndSizes { get; }
 

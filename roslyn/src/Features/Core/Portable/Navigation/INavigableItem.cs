@@ -70,8 +70,10 @@ namespace Microsoft.CodeAnalysis.Navigation
                 );
 
             /// <summary>
-            /// Get the <see cref="CodeAnalysis.Document"/> within <paramref name="solution"/> which is referenced by
-            /// this navigable item. The document is required to exist within the solution, e.g. a case where the
+            /// Get the <see cref="CodeAnalysis.Document"/> within <paramref name="solution"/> which is
+            // referenced by
+            /// this navigable item. The document is required to exist within the solution, e.g. a case where
+            // the
             /// navigable item was constructed during a Find Symbols operation on the same solution instance.
             /// </summary>
             internal ValueTask<Document> GetRequiredDocumentAsync(
@@ -86,8 +88,10 @@ namespace Microsoft.CodeAnalysis.Navigation
 
             /// <summary>
             /// Get the <see cref="SourceText"/> of the <see cref="CodeAnalysis.Document"/> within
-            /// <paramref name="solution"/> which is referenced by this navigable item. The document is required to
-            /// exist within the solution, e.g. a case where the navigable item was constructed during a Find Symbols
+            /// <paramref name="solution"/> which is referenced by this navigable item. The document is required
+            // to
+            /// exist within the solution, e.g. a case where the navigable item was constructed during a Find
+            // Symbols
             /// operation on the same solution instance.
             /// </summary>
             internal async ValueTask<SourceText> GetTextAsync(

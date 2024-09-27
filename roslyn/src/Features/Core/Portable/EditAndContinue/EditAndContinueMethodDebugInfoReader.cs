@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     /// </summary>
     internal abstract class EditAndContinueMethodDebugInfoReader
     {
-        // TODO: Remove, the path should match exactly. Workaround for https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1830914.
+        // TODO: Remove, the path should match exactly. Workaround for
+        // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1830914.
         internal static bool IgnoreCaseWhenComparingDocumentNames;
 
         public abstract bool IsPortable { get; }
@@ -243,15 +244,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Creates <see cref="EditAndContinueMethodDebugInfoReader"/> backed by a given <see cref="ISymUnmanagedReader5"/>.
+        /// Creates <see cref="EditAndContinueMethodDebugInfoReader"/> backed by a given <see
+        // cref="ISymUnmanagedReader5"/>.
         /// </summary>
         /// <param name="symReader">SymReader open on a Portable or Windows PDB.</param>
         /// <param name="version">The version of the PDB to read.</param>
         /// <exception cref="ArgumentNullException"><paramref name="symReader"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="version"/> is less than 1.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="version"/> is less than
+        // 1.</exception>
         /// <exception cref="COMException">Error reading debug information.</exception>
         /// <returns>
-        /// The resulting reader does not take ownership of the <paramref name="symReader"/> or the memory it reads.
+        /// The resulting reader does not take ownership of the <paramref name="symReader"/> or the memory
+        // it reads.
         /// </returns>
         /// <remarks>
         /// Automatically detects the underlying PDB format and returns the appropriate reader.
@@ -289,12 +293,14 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         }
 
         /// <summary>
-        /// Creates <see cref="EditAndContinueMethodDebugInfoReader"/> back by a given <see cref="MetadataReader"/>.
+        /// Creates <see cref="EditAndContinueMethodDebugInfoReader"/> back by a given <see
+        // cref="MetadataReader"/>.
         /// </summary>
         /// <param name="pdbReader"><see cref="MetadataReader"/> open on a Portable PDB.</param>
         /// <exception cref="ArgumentNullException"><paramref name="pdbReader"/> is null.</exception>
         /// <returns>
-        /// The resulting reader does not take ownership of the <paramref name="pdbReader"/> or the memory it reads.
+        /// The resulting reader does not take ownership of the <paramref name="pdbReader"/> or the memory
+        // it reads.
         /// </returns>
         public static unsafe EditAndContinueMethodDebugInfoReader Create(
             MetadataReader pdbReader

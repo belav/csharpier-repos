@@ -17,12 +17,17 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Here's an example:
     /// A deconstruction like <c>(int x1, (long x2, long x3)) = deconstructable1</c> with
     /// <c>Deconstructable1.Deconstruct(out int y1, out Deconstructable2 y2)</c> and
-    /// <c>Deconstructable2.Deconstruct(out int z1, out int z2)</c> is represented as 5 DeconstructionInfo nodes.
+    /// <c>Deconstructable2.Deconstruct(out int z1, out int z2)</c> is represented as 5
+    // DeconstructionInfo nodes.
     ///
-    /// The top-level node has a <see cref="Method"/> (Deconstructable1.Deconstruct), no <see cref="Conversion"/>, but has two <see cref="Nested"/> nodes.
-    /// Its first nested node has no <see cref="Method"/>, but has a <see cref="Conversion"/> (Identity).
-    /// Its second nested node has a <see cref="Method"/> (Deconstructable2.Deconstruct), no <see cref="Conversion"/>, and two <see cref="Nested"/> nodes.
-    /// Those last two nested nodes have no <see cref="Method"/>, but each have a <see cref="Conversion"/> (ImplicitNumeric, from int to long).
+    /// The top-level node has a <see cref="Method"/> (Deconstructable1.Deconstruct), no <see
+    // cref="Conversion"/>, but has two <see cref="Nested"/> nodes.
+    /// Its first nested node has no <see cref="Method"/>, but has a <see cref="Conversion"/>
+    // (Identity).
+    /// Its second nested node has a <see cref="Method"/> (Deconstructable2.Deconstruct), no <see
+    // cref="Conversion"/>, and two <see cref="Nested"/> nodes.
+    /// Those last two nested nodes have no <see cref="Method"/>, but each have a <see
+    // cref="Conversion"/> (ImplicitNumeric, from int to long).
     /// </summary>
     public readonly struct DeconstructionInfo
     {

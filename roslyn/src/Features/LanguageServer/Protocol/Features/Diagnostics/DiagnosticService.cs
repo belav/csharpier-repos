@@ -45,8 +45,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
         )
         {
-            // we use registry service rather than doing MEF import since MEF import method can have race issue where
-            // update source gets created before aggregator - diagnostic service - is created and we will lose events fired before
+            // we use registry service rather than doing MEF import since MEF import method can have race issue
+            // where
+            // update source gets created before aggregator - diagnostic service - is created and we will lose
+            // events fired before
             // the aggregator is created.
             _updateSources = ImmutableHashSet<IDiagnosticUpdateSource>.Empty;
 
@@ -476,7 +478,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            // make sure data is from same workspace. project/documentId can be shared between 2 different workspace
+            // make sure data is from same workspace. project/documentId can be shared between 2 different
+            // workspace
             if (workspace != data.Workspace)
             {
                 return false;

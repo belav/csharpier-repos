@@ -1,4 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for license information.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved. See License.txt in the project root for
+// license information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +12,8 @@ using System.Xml;
 namespace System.Json
 {
     /// <summary>
-    /// Represents a JavaScript Object Notation (JSON) primitive type in the common language runtime (CLR).
+    /// Represents a JavaScript Object Notation (JSON) primitive type in the common language runtime
+    // (CLR).
     /// </summary>
     [SuppressMessage(
         "Microsoft.Naming",
@@ -66,13 +68,19 @@ namespace System.Json
         private JsonType jsonType;
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Boolean"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Boolean"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Boolean"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Boolean"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Boolean"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Boolean"/>.</remarks>
+        /// <param name="value">The <see cref="System.Boolean"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Boolean"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Boolean"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Boolean"/>.</remarks>
         public JsonPrimitive(bool value)
         {
             jsonType = JsonType.Boolean;
@@ -80,13 +88,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Byte"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Byte"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Byte"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Byte"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Byte"/>.</remarks>
+        /// <param name="value">The <see cref="System.Byte"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Byte"/> object, the <see cref="System.Json.JsonType"/>
+        // is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Byte"/>.</remarks>
         public JsonPrimitive(byte value)
         {
             jsonType = JsonType.Number;
@@ -94,13 +108,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.SByte"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.SByte"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.SByte"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.SByte"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.SByte"/>.</remarks>
+        /// <param name="value">The <see cref="System.SByte"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.SByte"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.SByte"/>.</remarks>
         [CLSCompliant(false)]
         public JsonPrimitive(sbyte value)
         {
@@ -109,13 +129,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Decimal"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Decimal"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Decimal"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Decimal"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Decimal"/>.</remarks>
+        /// <param name="value">The <see cref="System.Decimal"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Decimal"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Decimal"/>.</remarks>
         public JsonPrimitive(decimal value)
         {
             jsonType = JsonType.Number;
@@ -123,13 +149,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Int16"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Int16"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Int16"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Int16"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Int16"/>.</remarks>
+        /// <param name="value">The <see cref="System.Int16"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Int16"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Int16"/>.</remarks>
         public JsonPrimitive(short value)
         {
             jsonType = JsonType.Number;
@@ -137,13 +169,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.UInt16"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.UInt16"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.UInt16"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.UInt16"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.UInt16"/>.</remarks>
+        /// <param name="value">The <see cref="System.UInt16"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.UInt16"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.UInt16"/>.</remarks>
         [CLSCompliant(false)]
         public JsonPrimitive(ushort value)
         {
@@ -152,13 +190,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Int32"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Int32"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Int32"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Int32"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Int32"/>.</remarks>
+        /// <param name="value">The <see cref="System.Int32"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Int32"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Int32"/>.</remarks>
         public JsonPrimitive(int value)
         {
             jsonType = JsonType.Number;
@@ -166,13 +210,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.UInt32"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.UInt32"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.UInt32"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.UInt32"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.UInt32"/>.</remarks>
+        /// <param name="value">The <see cref="System.UInt32"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.UInt32"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.UInt32"/>.</remarks>
         [CLSCompliant(false)]
         public JsonPrimitive(uint value)
         {
@@ -181,13 +231,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Int64"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Int64"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Int64"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Int64"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Int64"/>.</remarks>
+        /// <param name="value">The <see cref="System.Int64"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Int64"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Int64"/>.</remarks>
         public JsonPrimitive(long value)
         {
             jsonType = JsonType.Number;
@@ -195,13 +251,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.UInt64"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.UInt64"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.UInt64"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.UInt64"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.UInt64"/>.</remarks>
+        /// <param name="value">The <see cref="System.UInt64"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.UInt64"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.UInt64"/>.</remarks>
         [CLSCompliant(false)]
         public JsonPrimitive(ulong value)
         {
@@ -210,13 +272,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Single"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Single"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Single"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Single"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Single"/>.</remarks>
+        /// <param name="value">The <see cref="System.Single"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Single"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Single"/>.</remarks>
         public JsonPrimitive(float value)
         {
             jsonType = JsonType.Number;
@@ -224,13 +292,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Double"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Double"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Double"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Double"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Double"/>.</remarks>
+        /// <param name="value">The <see cref="System.Double"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Double"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.Number"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Double"/>.</remarks>
         public JsonPrimitive(double value)
         {
             jsonType = JsonType.Number;
@@ -238,13 +312,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.String"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.String"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.String"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.String"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.String"/>.</remarks>
+        /// <param name="value">The <see cref="System.String"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.String"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.String"/>.</remarks>
         /// <exception cref="System.ArgumentNullException">value is null.</exception>
         [SuppressMessage(
             "Microsoft.Design",
@@ -263,13 +343,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Char"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Char"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Char"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Char"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Char"/>.</remarks>
+        /// <param name="value">The <see cref="System.Char"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Char"/> object, the <see cref="System.Json.JsonType"/>
+        // is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Char"/>.</remarks>
         public JsonPrimitive(char value)
         {
             jsonType = JsonType.String;
@@ -277,13 +363,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.DateTime"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.DateTime"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.DateTime"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.DateTime"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.DateTime"/>.</remarks>
+        /// <param name="value">The <see cref="System.DateTime"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.DateTime"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.DateTime"/>.</remarks>
         public JsonPrimitive(DateTime value)
         {
             jsonType = JsonType.String;
@@ -291,13 +383,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.DateTimeOffset"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.DateTimeOffset"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.DateTimeOffset"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.DateTimeOffset"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.DateTimeOffset"/>.</remarks>
+        /// <param name="value">The <see cref="System.DateTimeOffset"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.DateTimeOffset"/> object, the <see
+        // cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.DateTimeOffset"/>.</remarks>
         public JsonPrimitive(DateTimeOffset value)
         {
             jsonType = JsonType.String;
@@ -305,13 +403,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Uri"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Uri"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Uri"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Uri"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Uri"/>.</remarks>
+        /// <param name="value">The <see cref="System.Uri"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Uri"/> object, the <see cref="System.Json.JsonType"/>
+        // is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Uri"/>.</remarks>
         /// <exception cref="System.ArgumentNullException">value is null.</exception>
         public JsonPrimitive(Uri value)
         {
@@ -325,13 +429,19 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see cref="System.Guid"/> type.
+        /// Initializes a new instance of a <see cref="System.Json.JsonPrimitive"/> type with a <see
+        // cref="System.Guid"/> type.
         /// </summary>
-        /// <param name="value">The <see cref="System.Guid"/> object that initializes the new instance.</param>
-        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see cref="System.Json.JsonType"/> and the value used to initialize it.
-        /// When initialized with a <see cref="System.Guid"/> object, the <see cref="System.Json.JsonType"/> is a <see cref="F:System.Json.JsonType.String"/>, which can be
-        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to initialize the <see cref="System.Json.JsonPrimitive"/>
-        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see cref="System.Guid"/>.</remarks>
+        /// <param name="value">The <see cref="System.Guid"/> object that initializes the new
+        // instance.</param>
+        /// <remarks>A <see cref="System.Json.JsonPrimitive"/> object stores a <see
+        // cref="System.Json.JsonType"/> and the value used to initialize it.
+        /// When initialized with a <see cref="System.Guid"/> object, the <see cref="System.Json.JsonType"/>
+        // is a <see cref="F:System.Json.JsonType.String"/>, which can be
+        /// recovered using the <see cref="System.Json.JsonPrimitive.JsonType"/> property. The value used to
+        // initialize the <see cref="System.Json.JsonPrimitive"/>
+        /// object can be recovered by casting the <see cref="System.Json.JsonPrimitive"/> to <see
+        // cref="System.Guid"/>.</remarks>
         public JsonPrimitive(Guid value)
         {
             jsonType = JsonType.String;
@@ -376,10 +486,13 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Attempts to create a <see cref="JsonPrimitive"/> instance from the specified <see cref="object"/> value.
+        /// Attempts to create a <see cref="JsonPrimitive"/> instance from the specified <see
+        // cref="object"/> value.
         /// </summary>
-        /// <param name="value">The <see cref="object"/> value to create the <see cref="JsonPrimitive"/> instance.</param>
-        /// <param name="result">The resulting <see cref="JsonPrimitive"/> instance on success, null otherwise.</param>
+        /// <param name="value">The <see cref="object"/> value to create the <see cref="JsonPrimitive"/>
+        // instance.</param>
+        /// <param name="result">The resulting <see cref="JsonPrimitive"/> instance on success, null
+        // otherwise.</param>
         /// <returns>true if the operation is successful, false otherwise.</returns>
         public static bool TryCreate(object value, out JsonPrimitive result)
         {
@@ -447,20 +560,26 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Attempts to convert this <see cref="System.Json.JsonPrimitive"/> instance into an instance of the specified type.
+        /// Attempts to convert this <see cref="System.Json.JsonPrimitive"/> instance into an instance of
+        // the specified type.
         /// </summary>
         /// <param name="type">The type to which the conversion is being performed.</param>
         /// <returns>An object instance initialized with the <see cref="System.Json.JsonValue"/> value
         /// specified if the conversion.</returns>
         /// <exception cref="System.UriFormatException">If T is <see cref="System.Uri"/> and this value does
         /// not represent a valid Uri.</exception>
-        /// <exception cref="OverflowException">If T is a numeric type, and a narrowing conversion would result
-        /// in a loss of data. For example, if this instance holds an <see cref="System.Int32"/> value of 10000,
-        /// and T is <see cref="System.Byte"/>, this operation would throw an <see cref="System.OverflowException"/>
+        /// <exception cref="OverflowException">If T is a numeric type, and a narrowing conversion would
+        // result
+        /// in a loss of data. For example, if this instance holds an <see cref="System.Int32"/> value of
+        // 10000,
+        /// and T is <see cref="System.Byte"/>, this operation would throw an <see
+        // cref="System.OverflowException"/>
         /// because 10000 is outside the range of the <see cref="System.Byte"/> data type.</exception>
-        /// <exception cref="System.FormatException">If the conversion from the string representation of this
+        /// <exception cref="System.FormatException">If the conversion from the string representation of
+        // this
         /// value into another fails because the string is not in the proper format.</exception>
-        /// <exception cref="System.InvalidCastException">If this instance cannot be read as type T.</exception>
+        /// <exception cref="System.InvalidCastException">If this instance cannot be read as type
+        // T.</exception>
         public override object ReadAs(Type type)
         {
             if (type == null)
@@ -520,11 +639,14 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Attempts to convert this <see cref="System.Json.JsonPrimitive"/> instance into an instance of the specified type.
+        /// Attempts to convert this <see cref="System.Json.JsonPrimitive"/> instance into an instance of
+        // the specified type.
         /// </summary>
         /// <param name="type">The type to which the conversion is being performed.</param>
-        /// <param name="value">An object instance to be initialized with this instance or null if the conversion cannot be performed.</param>
-        /// <returns>true if this <see cref="System.Json.JsonPrimitive"/> instance can be read as the specified type; otherwise, false.</returns>
+        /// <param name="value">An object instance to be initialized with this instance or null if the
+        // conversion cannot be performed.</param>
+        /// <returns>true if this <see cref="System.Json.JsonPrimitive"/> instance can be read as the
+        // specified type; otherwise, false.</returns>
         [SuppressMessage(
             "Microsoft.Maintainability",
             "CA1500:VariableNamesShouldNotMatchFieldNames",
@@ -1056,9 +1178,11 @@ namespace System.Json
 
             // The format for the value is given by the following regex:
             // \/Date\((?<milliseconds>\-?\d+)(?<offset>[\+\-]?\d{4})\)\/
-            // where milliseconds is the number of milliseconds since 1970/01/01:00:00:00.000 UTC (the "unix baseline")
+            // where milliseconds is the number of milliseconds since 1970/01/01:00:00:00.000 UTC (the "unix
+            // baseline")
             // and offset is an optional which indicates whether the value is local or UTC.
-            // The actual value of the offset is ignored, since the ticks represent the UTC offset. The value is converted to local time based on that info.
+            // The actual value of the offset is ignored, since the ticks represent the UTC offset. The value is
+            // converted to local time based on that info.
             const string DateTimePrefix = "/Date(";
             const int DateTimePrefixLength = 6;
             const string DateTimeSuffix = ")/";

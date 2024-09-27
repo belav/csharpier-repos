@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             var classificationOptions = _globalOptions.GetClassificationOptions(language);
 
-            // We can pass null for all these parameter values as they're only needed for quick-info content navigation
+            // We can pass null for all these parameter values as they're only needed for quick-info content
+            // navigation
             // and we explicitly calling BuildContentWithoutNavigationActionsAsync.
             var context = document is null
                 ? null

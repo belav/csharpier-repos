@@ -33,8 +33,10 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             CompilerInvocationInfo invocationInfo
         )
         {
-            // We will use a Workspace to simplify the creation of the compilation, but will be careful not to return the Workspace instance from this class.
-            // We will still provide the language services which are used by the generator itself, but we don't tie it to a Workspace object so we can
+            // We will use a Workspace to simplify the creation of the compilation, but will be careful not to
+            // return the Workspace instance from this class.
+            // We will still provide the language services which are used by the generator itself, but we don't
+            // tie it to a Workspace object so we can
             // run this as an in-proc source generator if one day desired.
             var workspace = new AdhocWorkspace(await Composition.CreateHostServicesAsync());
 
@@ -49,7 +51,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 .SplitCommandLineIntoArguments(invocationInfo.Arguments, removeHashComments: false)
                 .ToList();
 
-            // Unfortunately for us there are a few paths that get directly read by the command line parse which we need to remap,
+            // Unfortunately for us there are a few paths that get directly read by the command line parse which
+            // we need to remap,
             // such as /ruleset files. So let's go through and process them now.
             for (var i = 0; i < splitCommandLine.Count; i++)
             {
@@ -161,17 +164,25 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         }
 
         /// <summary>
-        /// Given the JSON description, returns a function that will map paths from the original paths to the current paths.
+        /// Given the JSON description, returns a function that will map paths from the original paths to
+        // the current paths.
         /// </summary>
         /// <remarks>
-        /// The compiler invocation JSON input is allowed to specify a map of file paths. The scenario here is to allow us to
-        /// do LSIF indexing on another machine than an original build might have been done on. For example, say the main build process
-        /// for a repository has the source synchronized to the S:\source1, but we want to do analysis on a different machine which has
-        /// the source in a folder S:\source2. If we have the original compilation command line when it was built under S:\source1, and
-        /// know that any time we see S:\source1 we should actually read the file out of S:\source2, then we analyze on a separate machine.
+        /// The compiler invocation JSON input is allowed to specify a map of file paths. The scenario here
+        // is to allow us to
+        /// do LSIF indexing on another machine than an original build might have been done on. For example,
+        // say the main build process
+        /// for a repository has the source synchronized to the S:\source1, but we want to do analysis on a
+        // different machine which has
+        /// the source in a folder S:\source2. If we have the original compilation command line when it was
+        // built under S:\source1, and
+        /// know that any time we see S:\source1 we should actually read the file out of S:\source2, then we
+        // analyze on a separate machine.
         ///
-        /// This is used to enable some internal-to-Microsoft build environments which have a mechanism to run "analysis" passes like
-        /// the LSIF tool independent from the main build machines, and can restore source and build artifacts to provide the environment
+        /// This is used to enable some internal-to-Microsoft build environments which have a mechanism to
+        // run "analysis" passes like
+        /// the LSIF tool independent from the main build machines, and can restore source and build
+        // artifacts to provide the environment
         /// that is close enough to match the original.
         /// </remarks>
         private static Func<string, string> GetPathMapper(CompilerInvocationInfo invocationInfo)
@@ -203,7 +214,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         )
                     )
                     {
-                        // Trim off any leading \, which would happen if you have a path like C:\Directory\\File.cs with a double slash, and happen to be
+                        // Trim off any leading \, which would happen if you have a path like C:\Directory\\File.cs with a
+                        // double slash, and happen to be
                         // mapping C:\Directory somewhere.
                         var relativePath = unmappedPath[fromWithDirectorySuffix.Length..]
                             .TrimStart('\\');

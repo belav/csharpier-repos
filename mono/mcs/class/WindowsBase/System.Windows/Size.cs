@@ -188,7 +188,7 @@ namespace System.Windows
             }
         }
 
-        /* operators */
+/* operators */
         public static explicit operator Point(Size size)
         {
             return new Point(size.Width, size.Height);

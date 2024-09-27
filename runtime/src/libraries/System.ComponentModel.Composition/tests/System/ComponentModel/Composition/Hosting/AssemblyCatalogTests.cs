@@ -204,9 +204,11 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         //  Test cases for AssemblyCatalog(string codebase) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void Constructor1_ValueAsCodebaseArgument_ShouldSetAssemblyProperty()
@@ -320,9 +322,11 @@ namespace System.ComponentModel.Composition
             Assert.Null(catalog.Origin);
         }
 
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         //  Test cases for AssemblyCatalog(string codebase, ReflectionContext reflectionContext) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
@@ -439,9 +443,12 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
-        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
+        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin)
+        // constructor
+        
+        // //=========================================================================================================================================
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void Constructor3_ValueAsCodebaseArgument_ShouldSetAssemblyProperty()
@@ -557,9 +564,12 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
-        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin, ReflectionContext reflectionContext) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
+        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin,
+        // ReflectionContext reflectionContext) constructor
+        
+        // //=========================================================================================================================================
         [Fact]
         public void Constructor4_ValueAsCodebaseArgument_ShouldSetAssemblyProperty()
         {
@@ -729,9 +739,12 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
-        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
+        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin)
+        // constructor
+        
+        // //=========================================================================================================================================
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void Constructor7_ValueAsAssemblyArgument_ShouldSetAssemblyProperty()
@@ -747,9 +760,11 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         //  Test cases for AssemblyCatalog(Assembly assembly) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         [Fact]
         public void Constructor5_ValueAsAssemblyArgument_ShouldSetAssemblyProperty()
         {
@@ -761,9 +776,12 @@ namespace System.ComponentModel.Composition
             );
         }
 
-        //=========================================================================================================================================
-        //  Test cases for AssemblyCatalog(Assembly assembly, ReflectionContext reflectionContext) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
+        //  Test cases for AssemblyCatalog(Assembly assembly, ReflectionContext reflectionContext)
+        // constructor
+        
+        // //=========================================================================================================================================
         [Fact]
         public void Constructor6_ValueAsAssemblyArgument_ShouldSetAssemblyProperty()
         {
@@ -807,9 +825,12 @@ namespace System.ComponentModel.Composition
             Assert.Null(catalog.Origin);
         }
 
-        //=========================================================================================================================================
-        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin, ReflectionContext reflectionContext) constructor
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
+        //  Test cases for AssemblyCatalog(string codebase, ICompositionElement definitionOrigin,
+        // ReflectionContext reflectionContext) constructor
+        
+        // //=========================================================================================================================================
         [Fact]
         public void Constructor8_ValueAsAssemblyArgument_ShouldSetAssemblyProperty()
         {
@@ -857,9 +878,11 @@ namespace System.ComponentModel.Composition
         }
 #pragma warning restore SYSLIB0012
 
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
         //  Test cases for Assemblies decorated with the CatalogDiscoveryAttribute
-        //=========================================================================================================================================
+        
+        // //=========================================================================================================================================
 
         [Fact]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]

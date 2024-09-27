@@ -201,7 +201,8 @@ internal partial class CSharpRecommendationService
 
             // https://github.com/dotnet/csharplang/blob/main/spec/conversions.md#lifted-conversion-operators
             //
-            // Given a user-defined conversion operator that converts from a non-nullable value type S to a non-nullable
+            // Given a user-defined conversion operator that converts from a non-nullable value type S to a
+            // non-nullable
             // value type T, a lifted conversion operator exists that converts from S? to T?
             static bool IsLiftableConversion(IMethodSymbol method) =>
                 method.ReturnType.IsNonNullableValueType()
@@ -250,7 +251,8 @@ internal partial class CSharpRecommendationService
                 SpecialType.System_Char => s_charConversions,
                 SpecialType.System_Single => s_singleConversions,
                 SpecialType.System_Double => s_doubleConversions,
-                // Decimal intentionally not here as it exposes its conversions as normal methods in the symbol model.
+                // Decimal intentionally not here as it exposes its conversions as normal methods in the symbol
+                // model.
                 _ => null,
             };
 
@@ -321,12 +323,15 @@ internal partial class CSharpRecommendationService
             ArrayBuilder<ISymbol> symbols
         )
         {
+            //
             // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/conversions#explicit-enumeration-conversions
             // Three kinds of conversions are defined in the spec.
             // Suggestion are made for one kind:
-            // * From any enum_type to sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, or decimal.
+            // * From any enum_type to sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double,
+            // or decimal.
             // No suggestion for the other two kinds of conversions:
-            // * From sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, or decimal to any enum_type.
+            // * From sbyte, byte, short, ushort, int, uint, long, ulong, char, float, double, or decimal to any
+            // enum_type.
             // * From any enum_type to any other enum_type.
 
             if (containerWithoutNullable.IsEnumType())

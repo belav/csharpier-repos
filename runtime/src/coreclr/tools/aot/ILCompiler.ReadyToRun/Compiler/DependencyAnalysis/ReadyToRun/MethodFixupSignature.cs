@@ -30,7 +30,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _method = method;
             IsInstantiatingStub = isInstantiatingStub;
 
-            // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
+            // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting
+            // the signature
             CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
                 method.Method.Context;
             compilerContext.EnsureLoadableMethod(method.Method);

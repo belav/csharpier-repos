@@ -16,7 +16,8 @@ public class NameValueHeaderValueTest
     [Fact]
     public void Ctor_NameInvalidFormat_ThrowFormatException()
     {
-        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are allowed.
+        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are
+        // allowed.
         AssertFormatException(" text ", null);
         AssertFormatException("text ", null);
         AssertFormatException(" text", null);
@@ -35,7 +36,8 @@ public class NameValueHeaderValueTest
     [Fact]
     public void Ctor_ValueInvalidFormat_ThrowFormatException()
     {
-        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are allowed.
+        // When adding values using strongly typed objects, no leading/trailing LWS (whitespaces) are
+        // allowed.
         AssertFormatException("text", " token ");
         AssertFormatException("text", "token ");
         AssertFormatException("text", " token");

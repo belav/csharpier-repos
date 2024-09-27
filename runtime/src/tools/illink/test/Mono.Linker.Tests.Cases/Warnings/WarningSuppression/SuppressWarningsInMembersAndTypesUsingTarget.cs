@@ -51,8 +51,10 @@ namespace Mono.Linker.Tests.Cases.Warnings.WarningSuppression
     {
         /// <summary>
         /// This test case checks module level UnconditionalSuppressMessage, primarily using
-        /// System.Linq.Expressions.Expression.(Type type, string methodName, Type[]? typeArguments, params System.Linq.Expressions.Expression[]? arguments)
-        /// which has a RUC attribute but is treated as an intrinsic by the trimmer. The test case also has some member level suppressions and its
+        /// System.Linq.Expressions.Expression.(Type type, string methodName, Type[]? typeArguments, params
+        // System.Linq.Expressions.Expression[]? arguments)
+        /// which has a RUC attribute but is treated as an intrinsic by the trimmer. The test case also has
+        // some member level suppressions and its
         /// own RUC method (the IL2026 suppression in the code is due to this)
         /// </summary>
         public static void Main()

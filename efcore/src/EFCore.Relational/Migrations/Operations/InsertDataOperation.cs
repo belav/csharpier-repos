@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Operations;
 ///     A <see cref="MigrationOperation" /> for inserting seed data into a table.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 /// </remarks>
 [DebuggerDisplay("INSERT INTO {Table}")]
 public class InsertDataOperation : MigrationOperation, ITableMigrationOperation
@@ -18,7 +19,8 @@ public class InsertDataOperation : MigrationOperation, ITableMigrationOperation
     public virtual string Table { get; set; } = null!;
 
     /// <summary>
-    ///     The schema that contains the table, or <see langword="null" /> if the default schema should be used.
+    ///     The schema that contains the table, or <see langword="null" /> if the default schema should
+    // be used.
     /// </summary>
     public virtual string? Schema { get; set; }
 

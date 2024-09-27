@@ -61,10 +61,15 @@ namespace MonoTests.System.Data.OleDb
             );
 
             // ----------- reserved for future versions of the product ---------------
-            //Broken	The connection to the data source is broken. This can occur only after the connection has been opened. A connection in this state may be closed and then re-opened. (This value is reserved for future versions of the product).
-            //Connecting  The connection object is connecting to the data source. (This value is reserved for future versions of the product.) 2
-            //Executing The connection object is executing a command. (This value is reserved for future versions of the product.) 4
-            //Fetching  The connection object is retrieving data. (This value is reserved for future versions of the product.) 8
+            //Broken	The connection to the data source is broken. This can occur only after the connection has
+            // been opened. A connection in this state may be closed and then re-opened. (This value is reserved
+            // for future versions of the product).
+            //Connecting  The connection object is connecting to the data source. (This value is reserved for
+            // future versions of the product.) 2
+            //Executing The connection object is executing a command. (This value is reserved for future
+            // versions of the product.) 4
+            //Fetching  The connection object is retrieving data. (This value is reserved for future versions of
+            // the product.) 8
 
             //-------------- checking only the following: ----------------
             //Closed  The connection is closed.

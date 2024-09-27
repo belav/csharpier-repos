@@ -13,9 +13,9 @@ namespace System.Data.Common
     using System.ComponentModel;
     using System.Data;
 
-    /*
-        public delegate void RowUpdatedEventHandler(object sender, RowUpdatedEventArgs e);
-    */
+/*
+public delegate void RowUpdatedEventHandler(object sender, RowUpdatedEventArgs e);
+*/
 
     public class RowUpdatedEventArgs : System.EventArgs
     {

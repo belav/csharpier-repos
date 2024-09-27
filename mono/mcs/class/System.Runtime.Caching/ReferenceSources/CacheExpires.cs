@@ -1,4 +1,5 @@
-// This file implements the classes ExpiresEntryRef and CacheExpires missing from .NET reference source
+// This file implements the classes ExpiresEntryRef and CacheExpires missing from .NET reference
+// source
 
 using System.Threading;
 

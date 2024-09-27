@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -159,7 +160,8 @@ namespace System.Web.Mvc.Async
                         )
                 );
 
-                // the inner operation might complete synchronously, so all setup work has to be done before this point
+                // the inner operation might complete synchronously, so all setup work has to be done before this
+                // point
                 ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(AsyncMethodInfo);
                 dispatcher.Execute(controllerContext.Controller, parametersArray); // ignore return value from this method
 
@@ -230,7 +232,8 @@ namespace System.Web.Mvc.Async
         {
             if (useCache && GetType() == typeof(ReflectedAsyncActionDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetMethodFilterAttributes(AsyncMethodInfo);
             }
             return base.GetFilterAttributes(useCache);

@@ -35,7 +35,8 @@ namespace Microsoft.SqlServer.Server
         //  valid for SqlDbType.TinyInt
         Byte GetByte(SmiEventSink sink, int ordinal);
 
-        // valid for SqlDbTypes: Binary, VarBinary, Image, Udt, Xml, Char, VarChar, Text, NChar, NVarChar, NText
+        // valid for SqlDbTypes: Binary, VarBinary, Image, Udt, Xml, Char, VarChar, Text, NChar, NVarChar,
+        // NText
         //  (Character type support needed for ExecuteXmlReader handling)
         Int64 GetBytesLength(SmiEventSink sink, int ordinal);
         int GetBytes(

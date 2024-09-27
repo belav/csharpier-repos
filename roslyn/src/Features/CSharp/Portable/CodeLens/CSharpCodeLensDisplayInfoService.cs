@@ -60,7 +60,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeLens
 
                     case SyntaxKind.MultiLineDocumentationCommentTrivia:
                     case SyntaxKind.SingleLineDocumentationCommentTrivia:
-                        // For DocumentationCommentTrivia node, node.Parent is null. Obtain parent through ParentTrivia.Token
+                        // For DocumentationCommentTrivia node, node.Parent is null. Obtain parent through
+                        // ParentTrivia.Token
                         if (node.IsStructuredTrivia)
                         {
                             var structuredTriviaSyntax = (StructuredTriviaSyntax)node;

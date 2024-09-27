@@ -8,9 +8,11 @@ using System.Reflection.Runtime.TypeInfos;
 
 namespace System.Reflection.Runtime.BindingFlagSupport
 {
-    //==========================================================================================================================
+    
+    // //==========================================================================================================================
     // Policies for constructors.
-    //==========================================================================================================================
+    
+    // //==========================================================================================================================
     internal sealed class ConstructorPolicies : MemberPolicies<ConstructorInfo>
     {
         public static readonly ConstructorPolicies Instance = new ConstructorPolicies();
@@ -78,7 +80,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
 
         public sealed override bool OkToIgnoreAmbiguity(ConstructorInfo m1, ConstructorInfo m2)
         {
-            // Constructors are only resolvable using an array of parameter types so this should never be called.
+            // Constructors are only resolvable using an array of parameter types so this should never be
+            // called.
             Debug.Fail("This code path should be unreachable.");
             throw new UnreachableException();
         }

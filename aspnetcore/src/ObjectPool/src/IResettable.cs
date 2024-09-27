@@ -9,9 +9,11 @@ namespace Microsoft.Extensions.ObjectPool;
 public interface IResettable
 {
     /// <summary>
-    /// Reset the object to a neutral state, semantically similar to when the object was first constructed.
+    /// Reset the object to a neutral state, semantically similar to when the object was first
+    // constructed.
     /// </summary>
-    /// <returns><see langword="true" /> if the object was able to reset itself, otherwise <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the object was able to reset itself, otherwise <see
+    // langword="false" />.</returns>
     /// <remarks>
     /// In general, this method is not expected to be thread-safe.
     /// </remarks>

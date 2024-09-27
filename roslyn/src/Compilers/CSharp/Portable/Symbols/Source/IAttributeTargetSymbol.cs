@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Attribute location corresponding to this symbol.
         /// </summary>
         /// <remarks>
-        /// Location of an attribute if an explicit location is not specified via attribute target specification syntax.
+        /// Location of an attribute if an explicit location is not specified via attribute target
+        // specification syntax.
         /// </remarks>
         AttributeLocation DefaultAttributeLocation { get; }
 

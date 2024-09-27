@@ -158,7 +158,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             if (logDelta)
             {
-                // We don't inspect the property value for "Delta" (time of execution) as that value will vary each time.
+                // We don't inspect the property value for "Delta" (time of execution) as that value will vary each
+                // time.
                 AssertEx.Equal(
                     new[]
                     {

@@ -704,10 +704,10 @@ namespace MonoTests.System.Net
                 finally
                 {
                     req.Abort();
-                    /*
-                    using (HttpWebResponse resp = (HttpWebResponse) req.EndGetResponse (ar)) {
-                        resp.Close ();
-                    }*/
+/*
+using (HttpWebResponse resp = (HttpWebResponse) req.EndGetResponse (ar)) {
+resp.Close ();
+}*/
                 }
             }
         }
@@ -936,21 +936,21 @@ namespace MonoTests.System.Net
                 Stream rs;
                 byte[] buffer;
 
-                /*
-                req = (HttpWebRequest) WebRequest.Create (url);
-                req.Method = "POST";
-                req.SendChunked = true;
-                req.Timeout = 1000;
-                req.ReadWriteTimeout = 2000;
-                req.ContentLength = 2;
+/*
+req = (HttpWebRequest) WebRequest.Create (url);
+req.Method = "POST";
+req.SendChunked = true;
+req.Timeout = 1000;
+req.ReadWriteTimeout = 2000;
+req.ContentLength = 2;
 
-                rs = req.GetRequestStream ();
-                rs.WriteByte (0x2c);
+rs = req.GetRequestStream ();
+rs.WriteByte (0x2c);
 
-                buffer = new byte [] { 0x2a, 0x1d };
-                rs.Write (buffer, 0, buffer.Length);
-                req.Abort ();
-                */
+buffer = new byte [] { 0x2a, 0x1d };
+rs.Write (buffer, 0, buffer.Length);
+req.Abort ();
+*/
 
                 req = (HttpWebRequest)WebRequest.Create(url);
                 req.Method = "POST";
@@ -1794,7 +1794,8 @@ namespace MonoTests.System.Net
             while (bytesReceived > 0)
             {
                 ms.Write(buffer, 0, bytesReceived);
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -1832,7 +1833,8 @@ namespace MonoTests.System.Net
             while (bytesReceived > 0)
             {
                 ms.Write(buffer, 0, bytesReceived);
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -1886,7 +1888,8 @@ namespace MonoTests.System.Net
             int bytesReceived = socket.Receive(buffer);
             while (bytesReceived > 0)
             {
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -1942,7 +1945,8 @@ namespace MonoTests.System.Net
             while (bytesReceived > 0)
             {
                 ms.Write(buffer, 0, bytesReceived);
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -1989,7 +1993,8 @@ namespace MonoTests.System.Net
             while (bytesReceived > 0)
             {
                 ms.Write(buffer, 0, bytesReceived);
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -2508,48 +2513,50 @@ namespace MonoTests.System.Net
             Assert.AreEqual(data64KB, received);
         }
 
-        /*
-        Invalid test: it does not work on linux.
-        [pid 30973] send(9, "POST / HTTP/1.1\r\nContent-Length:"..., 89, 0) = 89
-        Abort set
-        [pid 30970] send(16, "HTTP/1.1 200 OK\r\nServer: Mono-HT"..., 133, 0) = 133
-        Calling abort
-        [pid 30970] close(16)                   = 0
-        Closing!!!
-        [pid 30980] send(9, "\213t\326\350\312u\36n\234\351\225L\r\243a\200\226\371\350F\271~oZ\32\270\24\226z4\211\345"..., 65536, 0) = 65536
-        Writing...
-        [pid 30966] close(4)                    = 0
-        OK
-         *
-         The server sideis closed (FD 16) and the send on the client side (FD 9) succeeds.
-        [Test]
-        [Category("NotWorking")]
-        public void WriteServerAborts ()
-        {
-            ManualResetEvent abort = new ManualResetEvent (false);
-            byte [] received = new byte [data64KB.Length];
+/*
+Invalid test: it does not work on linux.
+[pid 30973] send(9, "POST / HTTP/1.1\r\nContent-Length:"..., 89, 0) = 89
+Abort set
+[pid 30970] send(16, "HTTP/1.1 200 OK\r\nServer: Mono-HT"..., 133, 0) = 133
+Calling abort
+[pid 30970] close(16)                   = 0
+Closing!!!
+[pid 30980] send(9,
+"\213t\326\350\312u\36n\234\351\225L\r\243a\200\226\371\350F\271~oZ\32\270\24\226z4\211\345"...,
+65536, 0) = 65536
+Writing...
+[pid 30966] close(4)                    = 0
+OK
+*
+The server sideis closed (FD 16) and the send on the client side (FD 9) succeeds.
+[Test]
+[Category("NotWorking")]
+public void WriteServerAborts ()
+{
+ManualResetEvent abort = new ManualResetEvent (false);
+byte [] received = new byte [data64KB.Length];
 
-            this.DoRequest (
-            (r, c) =>
-            {
-                r.Method = "POST";
-                r.ContentLength = data64KB.Length;
+this.DoRequest (
+(r, c) =>
+{
+r.Method = "POST";
+r.ContentLength = data64KB.Length;
 
-                using (Stream s = r.GetRequestStream()) {
-                    abort.Set();
-                    Thread.Sleep(100);
-                    IOException ex = ExceptionAssert.Throws<IOException> (() => s.Write(data64KB, 0, data64KB.Length));
-                }
+using (Stream s = r.GetRequestStream()) {
+abort.Set();
+Thread.Sleep(100);
+IOException ex = ExceptionAssert.Throws<IOException> (() => s.Write(data64KB, 0, data64KB.Length));
+}
 
-                c.Set();
-            },
-            (c) =>
-            {
-                abort.WaitOne();
-                c.Response.Abort();
-            });
-        }
-        **/
+c.Set();
+},
+(c) =>
+{
+abort.WaitOne();
+c.Response.Abort();
+});
+}
+**/
 
         [Test]
 #if FEATURE_NO_BSD_SOCKETS
@@ -4209,7 +4216,8 @@ namespace MonoTests.System.Net
             while (bytesReceived > 0)
             {
                 ms.Write(buffer, 0, bytesReceived);
-                // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                // We don't check for Content-Length or anything else here, so we give the client a little time to
+                // write
                 // after sending the headers
                 Thread.Sleep(200);
                 if (socket.Available > 0)
@@ -4979,7 +4987,8 @@ namespace MonoTests.System.Net
                         var bytesReceived = socket.Receive(buffer);
                         while (bytesReceived > 0)
                         {
-                            // We don't check for Content-Length or anything else here, so we give the client a little time to write
+                            // We don't check for Content-Length or anything else here, so we give the client a little time to
+                            // write
                             // after sending the headers
                             Thread.Sleep(200);
                             if (socket.Available > 0)

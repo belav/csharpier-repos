@@ -17,7 +17,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         new[] { "Dependencies/AnotherLibraryReferenceImplementation.cs" },
         defines: new[] { "INCLUDE_REFERENCE_IMPL" }
     )]
-    // After compiling the test case we then replace the reference impl with implementation + type forwarder
+    // After compiling the test case we then replace the reference impl with implementation + type
+    // forwarder
     // The used implementation is resolved during marking, causing the unused forwarder to be removed
     [SetupCompileAfter("Implementation.dll", new[] { "Dependencies/ImplementationLibrary.cs" })]
     [SetupCompileAfter(
@@ -25,7 +26,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         new[] { "Dependencies/ForwarderLibrary.cs" },
         references: new[] { "Implementation.dll" }
     )]
-    // The unused implementation may not be resolved until SweepStep updates scopes of the copyused assembly
+    // The unused implementation may not be resolved until SweepStep updates scopes of the copyused
+    // assembly
     [SetupCompileAfter("Unused.dll", new[] { "Dependencies/AnotherLibrary.cs" })]
     [SetupCompileAfter(
         "ForwarderUnused.dll",

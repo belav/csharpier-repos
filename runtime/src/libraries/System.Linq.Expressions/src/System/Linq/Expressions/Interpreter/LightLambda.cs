@@ -309,17 +309,21 @@ namespace System.Linq.Expressions.Interpreter
 
             /*
             try {
-                DynamicMethod dm = new DynamicMethod("FastCtor", typeof(Delegate), new[] { typeof(LightLambda) }, typeof(LightLambda), true);
-                var ilgen = dm.GetILGenerator();
-                ilgen.Emit(OpCodes.Ldarg_0);
-                ilgen.Emit(OpCodes.Ldftn, runMethod.IsGenericMethodDefinition ? runMethod.MakeGenericMethod(paramTypes) : runMethod);
-                ilgen.Emit(OpCodes.Newobj, delegateType.GetConstructor(new[] { typeof(object), typeof(IntPtr) }));
-                ilgen.Emit(OpCodes.Ret);
-                return _runCache[delegateType] = (Func<LightLambda, Delegate>)dm.CreateDelegate(typeof(Func<LightLambda, Delegate>));
+            DynamicMethod dm = new DynamicMethod("FastCtor", typeof(Delegate), new[] { typeof(LightLambda) },
+            typeof(LightLambda), true);
+            var ilgen = dm.GetILGenerator();
+            ilgen.Emit(OpCodes.Ldarg_0);
+            ilgen.Emit(OpCodes.Ldftn, runMethod.IsGenericMethodDefinition ?
+            runMethod.MakeGenericMethod(paramTypes) : runMethod);
+            ilgen.Emit(OpCodes.Newobj, delegateType.GetConstructor(new[] { typeof(object), typeof(IntPtr) }));
+            ilgen.Emit(OpCodes.Ret);
+            return _runCache[delegateType] = (Func<LightLambda,
+            Delegate>)dm.CreateDelegate(typeof(Func<LightLambda, Delegate>));
             } catch (SecurityException) {
             }*/
 
-            // we don't have permission for restricted skip visibility dynamic methods, use the slower Delegate.CreateDelegate.
+            // we don't have permission for restricted skip visibility dynamic methods, use the slower
+            // Delegate.CreateDelegate.
             var targetMethod = runMethod.IsGenericMethodDefinition
                 ? runMethod.MakeGenericMethod(paramTypes)
                 : runMethod;

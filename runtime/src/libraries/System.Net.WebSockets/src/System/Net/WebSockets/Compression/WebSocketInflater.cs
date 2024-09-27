@@ -66,7 +66,8 @@ namespace System.Net.WebSockets.Compression
         /// Initializes the inflater by allocating a buffer so the websocket can receive directly onto it.
         /// </summary>
         /// <param name="payloadLength">the length of the message payload</param>
-        /// <param name="userBufferLength">the length of the buffer where the payload will be inflated</param>
+        /// <param name="userBufferLength">the length of the buffer where the payload will be
+        // inflated</param>
         public void Prepare(long payloadLength, int userBufferLength)
         {
             if (_buffer is not null)
@@ -164,7 +165,8 @@ namespace System.Net.WebSockets.Compression
         /// <summary>
         /// Finishes the decoding by flushing any outstanding data to the output.
         /// </summary>
-        /// <returns>true if the flush completed, false to indicate that there is more outstanding data.</returns>
+        /// <returns>true if the flush completed, false to indicate that there is more outstanding
+        // data.</returns>
         private unsafe bool Finish(Span<byte> output, ref int written)
         {
             Debug.Assert(_stream is not null && _stream.AvailIn == 0);

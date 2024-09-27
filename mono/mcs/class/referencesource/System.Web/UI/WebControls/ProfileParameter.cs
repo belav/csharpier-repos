@@ -22,7 +22,8 @@ namespace System.Web.UI.WebControls
         public ProfileParameter() { }
 
         /// <devdoc>
-        /// Creates an instance of the ProfileParameter class with the specified parameter name and profile property.
+        /// Creates an instance of the ProfileParameter class with the specified parameter name and profile
+        // property.
         /// </devdoc>
         public ProfileParameter(string name, string propertyName)
             : base(name)
@@ -31,7 +32,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the ProfileParameter class with the specified parameter name, type, and profile property.
+        /// Creates an instance of the ProfileParameter class with the specified parameter name, type, and
+        // profile property.
         /// </devdoc>
         public ProfileParameter(string name, TypeCode type, string propertyName)
             : base(name, type)
@@ -40,7 +42,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates an instance of the ProfileParameter class with the specified parameter name, database type, and
+        /// Creates an instance of the ProfileParameter class with the specified parameter name, database
+        // type, and
         /// profile property.
         /// </devdoc>
         public ProfileParameter(string name, DbType dbType, string propertyName)

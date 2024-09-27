@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 
 /// <summary>
-/// Represents options to use when configuring the <see cref="System.Security.Claims.ClaimsPrincipal"/> for a user.
+/// Represents options to use when configuring the <see
+// cref="System.Security.Claims.ClaimsPrincipal"/> for a user.
 /// </summary>
 public class RemoteAuthenticationUserOptions
 {
@@ -24,7 +25,8 @@ public class RemoteAuthenticationUserOptions
     public string? ScopeClaim { get; set; }
 
     /// <summary>
-    /// Gets or sets the value to use for the <see cref="System.Security.Claims.ClaimsIdentity.AuthenticationType"/>.
+    /// Gets or sets the value to use for the <see
+    // cref="System.Security.Claims.ClaimsIdentity.AuthenticationType"/>.
     /// </summary>
     public string? AuthenticationType { get; set; }
 }

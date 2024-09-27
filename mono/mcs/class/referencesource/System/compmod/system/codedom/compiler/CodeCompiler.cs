@@ -559,13 +559,15 @@ namespace System.CodeDom.Compiler
         }
 
         /// <devdoc>
-        /// <para>Processes the specified line from the specified <see cref='System.CodeDom.Compiler.CompilerResults'/> .</para>
+        /// <para>Processes the specified line from the specified <see
+        // cref='System.CodeDom.Compiler.CompilerResults'/> .</para>
         /// </devdoc>
         protected abstract void ProcessCompilerOutputLine(CompilerResults results, string line);
 
         /// <devdoc>
         /// <para>
-        /// Gets the command arguments from the specified <see cref='System.CodeDom.Compiler.CompilerParameters'/>.
+        /// Gets the command arguments from the specified <see
+        // cref='System.CodeDom.Compiler.CompilerParameters'/>.
         /// </para>
         /// </devdoc>
         protected abstract string CmdArgsFromParameters(CompilerParameters options);

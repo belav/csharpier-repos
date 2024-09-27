@@ -231,7 +231,8 @@ public class CascadingParameterTest
         var renderer = new TestRenderer();
         var component = new TestComponent(builder =>
         {
-            // At the outer level, have an unrelated fixed cascading value to show we can deal with combining both types
+            // At the outer level, have an unrelated fixed cascading value to show we can deal with combining
+            // both types
             builder.OpenComponent<CascadingValue<int>>(0);
             builder.AddComponentParameter(1, "Value", 123);
             builder.AddComponentParameter(2, "IsFixed", true);
@@ -793,7 +794,8 @@ public class CascadingParameterTest
         Assert.Equal(3, component.NumRenders);
 
         // Disposing the subscriber does not cause any error
-        // We can't really observe any more than this because disposing is what causes unsubscription, and once you're
+        // We can't really observe any more than this because disposing is what causes unsubscription, and
+        // once you're
         // disposed you're not getting notifications anyway, so the most we can say is there was no error
         await renderer.Dispatcher.InvokeAsync(() => renderer.RemoveRootComponent(componentId));
         await cascadingValueSource.NotifyChangedAsync(

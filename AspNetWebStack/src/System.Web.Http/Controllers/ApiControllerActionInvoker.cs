@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -43,7 +44,8 @@ namespace System.Web.Http.Controllers
                     cancellationToken
                 );
 
-                // This is cached in a local for performance reasons. ReturnType is a virtual property on HttpActionDescriptor,
+                // This is cached in a local for performance reasons. ReturnType is a virtual property on
+                // HttpActionDescriptor,
                 // or else we'd want to cache this as part of that class.
                 bool isDeclaredTypeActionResult = typeof(IHttpActionResult).IsAssignableFrom(
                     actionDescriptor.ReturnType

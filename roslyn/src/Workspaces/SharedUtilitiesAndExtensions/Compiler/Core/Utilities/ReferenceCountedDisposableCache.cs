@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 namespace Roslyn.Utilities
 {
     /// <summary>
-    /// Implements a reference-counted cache, where key/value pairs are associated with a count. When the count of a pair goes to zero,
-    /// the value is evicted. Values can also be explicitly evicted at any time. In that case, any new calls to <see cref="GetOrCreate"/>
-    /// will return a new value, and the existing holders of the evicted value will still dispose it once they're done with it.
+    /// Implements a reference-counted cache, where key/value pairs are associated with a count. When
+    // the count of a pair goes to zero,
+    /// the value is evicted. Values can also be explicitly evicted at any time. In that case, any new
+    // calls to <see cref="GetOrCreate"/>
+    /// will return a new value, and the existing holders of the evicted value will still dispose it
+    // once they're done with it.
     /// </summary>
     internal sealed class ReferenceCountedDisposableCache<TKey, TValue>
         where TValue : class, IDisposable
@@ -76,7 +79,8 @@ namespace Roslyn.Utilities
 
             public void Dispose()
             {
-                // Evict us out of the cache. We already know that cache entry is going to be expired: any further calls on the WeakReference would give nothing,
+                // Evict us out of the cache. We already know that cache entry is going to be expired: any further
+                // calls on the WeakReference would give nothing,
                 // but we don't want to be holding onto the key either.
                 cache.Evict(Key);
 

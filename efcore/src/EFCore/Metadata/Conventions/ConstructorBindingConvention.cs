@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that binds entity type constructor parameters to existing properties and service properties based on their names:
+///     A convention that binds entity type constructor parameters to existing properties and
+// service properties based on their names:
 ///     * [parameter name]
 ///     * [pascal-cased parameter name]
 ///     * _[parameter name]
@@ -15,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     * m_[pascal-cased parameter name]
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class ConstructorBindingConvention : IModelFinalizingConvention
 {

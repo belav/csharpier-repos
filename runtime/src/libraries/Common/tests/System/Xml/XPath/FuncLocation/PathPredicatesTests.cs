@@ -184,7 +184,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Predicate within a predicate - Return all authors with a last-name equal to the first last-name node.
+        /// Predicate within a predicate - Return all authors with a last-name equal to the first last-name
+        // node.
         /// (book/author)[last-name=(/bookstore/book/author)[1]/last-name]
         /// </summary>
         [Theory]
@@ -240,7 +241,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Return all authors with a last-name not equal to the first last-name node. Cascaded predicates using !=
+        /// Return all authors with a last-name not equal to the first last-name node. Cascaded predicates
+        // using !=
         /// book/author[last-name!=(/bookstore/book/author)[1]/last-name]
         /// </summary>
         [Theory]
@@ -295,7 +297,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Cascaded predicates using <= Return all authors with a last name less than or equal to the first author's last-name.
+        /// Cascaded predicates using <= Return all authors with a last name less than or equal to the first
+        // author's last-name.
         /// book/author[last-name<=(/bookstore/book/author[1]/last-name)]
         /// </summary>
         [Theory]
@@ -318,7 +321,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Cascaded predicates using >= Return all authors with a first name greater than or equal to the first author's first-name.
+        /// Cascaded predicates using >= Return all authors with a first name greater than or equal to the
+        // first author's first-name.
         /// book/author[first-name>=(/bookstore/book/author[1]/first-name)]
         /// </summary>
         [Theory]
@@ -341,7 +345,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Cascaded predicates using > - Return all authors with a first-name greater than the first book's title.
+        /// Cascaded predicates using > - Return all authors with a first-name greater than the first book's
+        // title.
         /// book/author[first-name>(/bookstore/book/title)[1]]
         /// </summary>
         [Theory]
@@ -364,7 +369,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Cascaded predicates using < - Return all authors with a first-name less than the first book's title.
+        /// Cascaded predicates using < - Return all authors with a first-name less than the first book's
+        // title.
         /// book/author[first-name<(/bookstore/book/title)[1]]
         /// </summary>
         [Theory]
@@ -387,7 +393,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator = - Return all books with a price of 55.
+        /// Comparing node value to a numeric constant, using operator = - Return all books with a price of
+        // 55.
         /// book[price=55]
         /// </summary>
         [Theory]
@@ -435,7 +442,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator != - Return all authors of books with a price not equal to 55.56.
+        /// Comparing node value to a numeric constant, using operator != - Return all authors of books with
+        // a price not equal to 55.56.
         /// book/author[/bookstore/book/price!=55.56]
         /// </summary>
         [Theory]
@@ -530,7 +538,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator <= - Return all authors of books with a price less than or equal to 10.0001.
+        /// Comparing node value to a numeric constant, using operator <= - Return all authors of books with
+        // a price less than or equal to 10.0001.
         /// book/author[/bookstore/book/price<=10.0001]
         /// </summary>
         [Theory]
@@ -625,7 +634,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator >= - Return all authors of books with a price greater than or equal to .0001.
+        /// Comparing node value to a numeric constant, using operator >= - Return all authors of books with
+        // a price greater than or equal to .0001.
         /// book/author[/bookstore/book/price>=.0001]
         /// </summary>
         [Theory]
@@ -720,7 +730,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator < - Return all authors of books with a price less than 10.0.
+        /// Comparing node value to a numeric constant, using operator < - Return all authors of books with
+        // a price less than 10.0.
         /// book/author[/bookstore/book/price<10.0]
         /// </summary>
         [Theory]
@@ -815,7 +826,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a numeric constant, using operator > - Return all authors of books with a price greater than 55.0.
+        /// Comparing node value to a numeric constant, using operator > - Return all authors of books with
+        // a price greater than 55.0.
         /// book/author[/bookstore/book/price>55.0]
         /// </summary>
         [Theory]
@@ -910,7 +922,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a sting constant, using operator = - Return all book authors with a last-name equal to ""Bob"".
+        /// Comparing node value to a sting constant, using operator = - Return all book authors with a
+        // last-name equal to ""Bob"".
         /// book/author[last-name="Bob"]
         /// </summary>
         [Theory]
@@ -966,7 +979,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a sting constant, using operator != - Return all book authors with a last-name not equal to ""Bob"".
+        /// Comparing node value to a sting constant, using operator != - Return all book authors with a
+        // last-name not equal to ""Bob"".
         /// book/author[last-name!="Bob"]
         /// </summary>
         [Theory]
@@ -1021,7 +1035,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a sting constant, using operator >= - Return all book authors with a last-name greater than or equal to ""Robinson"".
+        /// Comparing node value to a sting constant, using operator >= - Return all book authors with a
+        // last-name greater than or equal to ""Robinson"".
         /// book/author[last-name>="Robinson"]
         /// </summary>
         [Theory]
@@ -1044,7 +1059,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a sting constant, using operator > - Return all book authors with a last-name greater than ""R"".
+        /// Comparing node value to a sting constant, using operator > - Return all book authors with a
+        // last-name greater than ""R"".
         /// book/author[last-name>"R"]
         /// </summary>
         [Theory]
@@ -1067,7 +1083,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Comparing node value to a sting constant, using operator < - Return all book authors with a last-name less than ""Boc"".
+        /// Comparing node value to a sting constant, using operator < - Return all book authors with a
+        // last-name less than ""Boc"".
         /// book/author[last-name<"Boc"]
         /// </summary>
         [Theory]
@@ -4544,7 +4561,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Predicate expression resulting in a number is converted to true, if number is equal to context position.
+        /// Predicate expression resulting in a number is converted to true, if number is equal to context
+        // position.
         /// /bookstore/book[1] [2]
         /// </summary>
         [Theory]
@@ -4966,7 +4984,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Only bookstore should be selected, since its position in nodeset=1 and it is the first child of its parent. No other node's position in the node-set is the same as the number of children of its parent.
+        /// Only bookstore should be selected, since its position in nodeset=1 and it is the first child of
+        // its parent. No other node's position in the node-set is the same as the number of children of its
+        // parent.
         /// //* [position()=count(parent::*/child::*)]
         /// </summary>
         [Theory]
@@ -5407,7 +5427,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// Predicate filters the elements in the node-set at number 8,10,12,55 (these numbers appear as text nodes in the document)
+        /// Predicate filters the elements in the node-set at number 8,10,12,55 (these numbers appear as
+        // text nodes in the document)
         /// //* [position() = //*]
         /// </summary>
         [Theory]
@@ -5459,7 +5480,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Select the first magazine node
-        /// /bookstore/book[7]/preceding::*[ self::magazine and position()=last()-count(//*[self::magazine])+21]
+        /// /bookstore/book[7]/preceding::*[ self::magazine and
+        // position()=last()-count(//*[self::magazine])+21]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -6182,7 +6204,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Select the 2nd and 3rd book nodes in the document
-        /// /bookstore/book[1]/following::* [following-sibling::*[self::magazine] and count(following-sibling::magazine)>5]
+        /// /bookstore/book[1]/following::* [following-sibling::*[self::magazine] and
+        // count(following-sibling::magazine)>5]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -6224,7 +6247,9 @@ namespace XPathTests.FunctionalTests.Location.Paths
 
         /// <summary>
         /// Select the 1st book node
-        /// /bookstore/book[1]/self::* [(following-sibling::*[self::magazine]) and count(following-sibling::magazine)>5 and boolean(preceding-sibling::*)=false()][position()=last() and position()= 1]
+        /// /bookstore/book[1]/self::* [(following-sibling::*[self::magazine]) and
+        // count(following-sibling::magazine)>5 and boolean(preceding-sibling::*)=false()][position()=last()
+        // and position()= 1]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -6686,7 +6711,8 @@ namespace XPathTests.FunctionalTests.Location.Paths
         }
 
         /// <summary>
-        /// /bookstore/book[7]/preceding::*[ self::magazine and position()=last()-count(//*[self::magazine])]
+        /// /bookstore/book[7]/preceding::*[ self::magazine and
+        // position()=last()-count(//*[self::magazine])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]

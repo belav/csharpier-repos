@@ -45,7 +45,8 @@ namespace Roslyn.Compilers.Extension
             var registryParts = localRegistryRoot.Split('\\');
 
             // Is it a valid Hive looks similar to:
-            //  'Software\Microsoft\VisualStudio\14.0'  'Software\Microsoft\VisualStudio\14.0Roslyn'  'Software\Microsoft\VSWinExpress\14.0'
+            //  'Software\Microsoft\VisualStudio\14.0'  'Software\Microsoft\VisualStudio\14.0Roslyn'
+            // 'Software\Microsoft\VSWinExpress\14.0'
             if (registryParts.Length >= 4)
             {
                 var skuName = registryParts[2];
@@ -109,7 +110,8 @@ namespace Roslyn.Compilers.Extension
 </Project>"
             );
 
-            // This targets content we want to be included later since the project file might touch UseSharedCompilation
+            // This targets content we want to be included later since the project file might touch
+            // UseSharedCompilation
             var targetsContent =
                 $@"<?xml version=""1.0"" encoding=""utf-8""?>
 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
@@ -139,7 +141,8 @@ namespace Roslyn.Compilers.Extension
                 targetsContent
             );
 
-            // First we want to ensure any Roslyn files with our hive name that we aren't writing -- this is probably
+            // First we want to ensure any Roslyn files with our hive name that we aren't writing -- this is
+            // probably
             // leftovers from older extensions
             var msbuildDirectory = new DirectoryInfo(
                 await GetMSBuildPathAsync(cancellationToken).ConfigureAwait(true)

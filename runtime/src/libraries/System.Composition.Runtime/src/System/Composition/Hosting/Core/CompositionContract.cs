@@ -28,7 +28,8 @@ namespace System.Composition.Hosting.Core
         /// Construct a <see cref="CompositionContract"/>.
         /// </summary>
         /// <param name="contractType">The type shared between the exporter and importer.</param>
-        /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
+        /// <param name="contractName">Optionally, a name that discriminates this contract from others with
+        // the same type.</param>
         public CompositionContract(Type contractType, string contractName)
             : this(contractType, contractName, null) { }
 
@@ -36,8 +37,10 @@ namespace System.Composition.Hosting.Core
         /// Construct a <see cref="CompositionContract"/>.
         /// </summary>
         /// <param name="contractType">The type shared between the exporter and importer.</param>
-        /// <param name="contractName">Optionally, a name that discriminates this contract from others with the same type.</param>
-        /// <param name="metadataConstraints">Optionally, a non-empty collection of named constraints that apply to the contract.</param>
+        /// <param name="contractName">Optionally, a name that discriminates this contract from others with
+        // the same type.</param>
+        /// <param name="metadataConstraints">Optionally, a non-empty collection of named constraints that
+        // apply to the contract.</param>
         public CompositionContract(
             Type contractType,
             string contractName,
@@ -149,8 +152,10 @@ namespace System.Composition.Hosting.Core
         /// </summary>
         /// <typeparam name="T">The type of the constraint value.</typeparam>
         /// <param name="constraintName">The name of the constraint.</param>
-        /// <param name="constraintValue">The value if it is present and of the correct type, otherwise null.</param>
-        /// <param name="remainingContract">The contract with the constraint removed if present, otherwise null.</param>
+        /// <param name="constraintValue">The value if it is present and of the correct type, otherwise
+        // null.</param>
+        /// <param name="remainingContract">The contract with the constraint removed if present, otherwise
+        // null.</param>
         /// <returns>True if the constraint is present and of the correct type, otherwise false.</returns>
         public bool TryUnwrapMetadataConstraint<T>(
             string constraintName,

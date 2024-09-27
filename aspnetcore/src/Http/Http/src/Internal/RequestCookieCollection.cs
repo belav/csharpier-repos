@@ -70,7 +70,8 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
             return Empty;
         }
 
-        // Do not set the collection capacity based on StringValues.Count, the Cookie header is supposed to be a single combined value.
+        // Do not set the collection capacity based on StringValues.Count, the Cookie header is supposed to
+        // be a single combined value.
         var collection = new RequestCookieCollection();
         var store = collection.Store!;
 
@@ -133,7 +134,8 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
     /// <summary>
     /// Returns an struct enumerator that iterates through a collection without boxing.
     /// </summary>
-    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="Enumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     public Enumerator GetEnumerator()
     {
         if (Store == null || Store.Count == 0)
@@ -148,7 +150,8 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
     /// <summary>
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator{T}" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator<KeyValuePair<string, string>> IEnumerable<
         KeyValuePair<string, string>
     >.GetEnumerator()
@@ -165,7 +168,8 @@ internal sealed class RequestCookieCollection : IRequestCookieCollection
     /// <summary>
     /// Returns an enumerator that iterates through a collection, boxes in non-empty path.
     /// </summary>
-    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the collection.</returns>
+    /// <returns>An <see cref="IEnumerator" /> object that can be used to iterate through the
+    // collection.</returns>
     IEnumerator IEnumerable.GetEnumerator()
     {
         if (Store == null || Store.Count == 0)

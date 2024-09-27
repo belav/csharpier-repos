@@ -92,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         }
 
         /// <summary>
-        /// Returns a navigable location that will take the user to the location there's only destination, or which will
+        /// Returns a navigable location that will take the user to the location there's only destination,
+        // or which will
         /// present all the locations if there are many.
         /// </summary>
         public static async Task<INavigableLocation?> GetStreamingLocationAsync(
@@ -135,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             if (builder is [{ item.SourceSpans.Length: <= 1, location: var location }])
             {
                 // There was only one location to navigate to.  Just directly go to that location. If we're directly
-                // going to a location we need to activate the preview so that focus follows to the new cursor position.
+                // going to a location we need to activate the preview so that focus follows to the new cursor
+                // position.
                 return location;
             }
 

@@ -10,7 +10,8 @@ using Xunit;
 namespace System.Collections.ObjectModel.Tests
 {
     /// <summary>
-    /// Since <see cref="ReadOnlyCollection{T}"/> is just a wrapper base class around an <see cref="IList{T}"/>,
+    /// Since <see cref="ReadOnlyCollection{T}"/> is just a wrapper base class around an <see
+    // cref="IList{T}"/>,
     /// we just verify that the underlying list is what we expect, validate that the calls which
     /// we expect are forwarded to the underlying list, and verify that the exceptions we expect
     /// are thrown.

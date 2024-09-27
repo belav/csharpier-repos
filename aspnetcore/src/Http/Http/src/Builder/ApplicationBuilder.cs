@@ -27,7 +27,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.
     /// </summary>
-    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application services.</param>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application
+    // services.</param>
     public ApplicationBuilder(IServiceProvider serviceProvider)
         : this(serviceProvider, new FeatureCollection()) { }
 
@@ -36,7 +37,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ApplicationBuilder"/>.
     /// </summary>
-    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application services.</param>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> for application
+    // services.</param>
     /// <param name="server">The server instance that hosts the application.</param>
     public ApplicationBuilder(IServiceProvider serviceProvider, object server)
     {
@@ -110,7 +112,8 @@ public partial class ApplicationBuilder : IApplicationBuilder
     /// Adds the middleware to the application request pipeline.
     /// </summary>
     /// <param name="middleware">The middleware.</param>
-    /// <returns>An instance of <see cref="IApplicationBuilder"/> after the operation has completed.</returns>
+    /// <returns>An instance of <see cref="IApplicationBuilder"/> after the operation has
+    // completed.</returns>
     public IApplicationBuilder Use(Func<RequestDelegate, RequestDelegate> middleware)
     {
         _components.Add(middleware);
@@ -161,8 +164,10 @@ public partial class ApplicationBuilder : IApplicationBuilder
     {
         RequestDelegate app = context =>
         {
-            // If we reach the end of the pipeline, but we have an endpoint, then something unexpected has happened.
-            // This could happen if user code sets an endpoint, but they forgot to add the UseEndpoint middleware.
+            // If we reach the end of the pipeline, but we have an endpoint, then something unexpected has
+            // happened.
+            // This could happen if user code sets an endpoint, but they forgot to add the UseEndpoint
+            // middleware.
             var endpoint = context.GetEndpoint();
             var endpointRequestDelegate = endpoint?.RequestDelegate;
             if (endpointRequestDelegate != null)

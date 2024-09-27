@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         ExactLanguageMatch = 0,
 
         /// <summary>
-        /// Exact section match for a language with unknown file patterns. Will always match all files for the given language.
+        /// Exact section match for a language with unknown file patterns. Will always match all files for
+        // the given language.
         /// </summary>
         /// <remarks>
         /// An exact match but with some unknown file patterns also matching
@@ -28,16 +29,19 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         ExactLanguageMatchWithOthers = 1,
 
         /// <summary>
-        /// An exact section match for a language with other known language patterns. Will match all files for the given language as well as other known languages.
+        /// An exact section match for a language with other known language patterns. Will match all files
+        // for the given language as well as other known languages.
         /// </summary>
         /// <remarks>
-        /// Given this pattern [*.{cs,vb}] for C# this is considered a match (since it matches all C# files).
+        /// Given this pattern [*.{cs,vb}] for C# this is considered a match (since it matches all C#
+        // files).
         /// Even though it also matches for Visual Basic.
         /// </remarks>
         AnyLanguageMatch = 2,
 
         /// <summary>
-        /// Matches the file pattern according to the editorconfig specification but is a superset of an exact language match.
+        /// Matches the file pattern according to the editorconfig specification but is a superset of an
+        // exact language match.
         /// </summary>
         /// <remarks>
         /// Patterns such as [*c*] or [*s] would match for C# in this case (being a superset of *.cs)
@@ -45,7 +49,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         SupersetFilePatternMatch = 3,
 
         /// <summary>
-        /// Matches the file pattern according to the editorconfig specification but is a supset of an exact language match.
+        /// Matches the file pattern according to the editorconfig specification but is a supset of an exact
+        // language match.
         /// </summary>
         /// <remarks>
         /// Patterns such as [*.Tests.cs] would match for C# if the file being considered is UnitTests.cs

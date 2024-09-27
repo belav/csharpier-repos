@@ -22,23 +22,23 @@ namespace System.Threading
 
     public sealed partial class Thread
     {
-        /*=========================================================================
-        ** Data accessed from managed code that needs to be defined in
-        ** ThreadBaseObject to maintain alignment between the two classes.
-        ** DON'T CHANGE THESE UNLESS YOU MODIFY ThreadBaseObject in vm\object.h
-        =========================================================================*/
+/*=========================================================================
+** Data accessed from managed code that needs to be defined in
+** ThreadBaseObject to maintain alignment between the two classes.
+** DON'T CHANGE THESE UNLESS YOU MODIFY ThreadBaseObject in vm\object.h
+=========================================================================*/
         internal ExecutionContext? _executionContext; // this call context follows the logical thread
         internal SynchronizationContext? _synchronizationContext; // maintained separately from ExecutionContext
 
         private string? _name;
         private StartHelper? _startHelper;
 
-        /*=========================================================================
-        ** The base implementation of Thread is all native.  The following fields
-        ** should never be used in the C# code.  They are here to define the proper
-        ** space so the thread object may be allocated.  DON'T CHANGE THESE UNLESS
-        ** YOU MODIFY ThreadBaseObject in vm\object.h
-        =========================================================================*/
+/*=========================================================================
+** The base implementation of Thread is all native.  The following fields
+** should never be used in the C# code.  They are here to define the proper
+** space so the thread object may be allocated.  DON'T CHANGE THESE UNLESS
+** YOU MODIFY ThreadBaseObject in vm\object.h
+=========================================================================*/
 #pragma warning disable CA1823, 169 // These fields are not used from managed.
         // IntPtrs need to be together, and before ints, because IntPtrs are 64-bit
         // fields on 64-bit platforms, where they will be sorted together.
@@ -53,9 +53,12 @@ namespace System.Threading
         private int _managedThreadId; // INT32
 #pragma warning restore CA1823, 169
 
-        // This is used for a quick check on thread pool threads after running a work item to determine if the name, background
-        // state, or priority were changed by the work item, and if so to reset it. Other threads may also change some of those,
-        // but those types of changes may race with the reset anyway, so this field doesn't need to be synchronized.
+        // This is used for a quick check on thread pool threads after running a work item to determine if
+        // the name, background
+        // state, or priority were changed by the work item, and if so to reset it. Other threads may also
+        // change some of those,
+        // but those types of changes may race with the reset anyway, so this field doesn't need to be
+        // synchronized.
         private bool _mayNeedResetForThreadPool;
 
         private Thread() { }
@@ -346,13 +349,15 @@ namespace System.Threading
         /// -1 is given as the parameter, no timeout will occur.
         /// </returns>
         /// <exception cref="ArgumentException">if timeout &lt; -1 (Timeout.Infinite)</exception>
-        /// <exception cref="ThreadInterruptedException">if the thread is interrupted while waiting</exception>
+        /// <exception cref="ThreadInterruptedException">if the thread is interrupted while
+        // waiting</exception>
         /// <exception cref="ThreadStateException">if the thread has not been started yet</exception>
         [MethodImpl(MethodImplOptions.InternalCall)]
         public extern bool Join(int millisecondsTimeout);
 
         /// <summary>
-        /// Max value to be passed into <see cref="SpinWait(int)"/> for optimal delaying. This value is normalized to be
+        /// Max value to be passed into <see cref="SpinWait(int)"/> for optimal delaying. This value is
+        // normalized to be
         /// appropriate for the processor.
         /// </summary>
         internal static int OptimalMaxSpinWaitsPerSpinIteration

@@ -33,7 +33,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="expression">The <see cref="Expression"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public MemberAssignment Update(Expression expression)
         {
             if (expression == Expression)
@@ -51,7 +52,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberAssignment"/> binding the specified value to the given member.
         /// </summary>
-        /// <param name="member">The <see cref="MemberInfo"/> for the member which is being assigned to.</param>
+        /// <param name="member">The <see cref="MemberInfo"/> for the member which is being assigned
+        // to.</param>
         /// <param name="expression">The value to be assigned to <paramref name="member"/>.</param>
         /// <returns>The created <see cref="MemberAssignment"/>.</returns>
         public static MemberAssignment Bind(MemberInfo member, Expression expression)
@@ -70,8 +72,10 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberAssignment"/> binding the specified value to the given property.
         /// </summary>
-        /// <param name="propertyAccessor">The <see cref="PropertyInfo"/> for the property which is being assigned to.</param>
-        /// <param name="expression">The value to be assigned to <paramref name="propertyAccessor"/>.</param>
+        /// <param name="propertyAccessor">The <see cref="PropertyInfo"/> for the property which is being
+        // assigned to.</param>
+        /// <param name="expression">The value to be assigned to <paramref
+        // name="propertyAccessor"/>.</param>
         /// <returns>The created <see cref="MemberAssignment"/>.</returns>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
         public static MemberAssignment Bind(MethodInfo propertyAccessor, Expression expression)

@@ -6,7 +6,8 @@ using System.Diagnostics;
 namespace System.Security.Cryptography.Cose
 {
     /// <summary>
-    /// Provides signing information to be used with sign operations in <see cref="CoseSign1Message"/> and <see cref="CoseMultiSignMessage"/>.
+    /// Provides signing information to be used with sign operations in <see cref="CoseSign1Message"/>
+    // and <see cref="CoseMultiSignMessage"/>.
     /// </summary>
     public sealed class CoseSigner
     {
@@ -37,13 +38,19 @@ namespace System.Security.Cryptography.Cose
         /// Initializes a new instance of the <see cref="CoseSigner"/> class.
         /// </summary>
         /// <param name="key">The private key to use for signing.</param>
-        /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value for signing.</param>
-        /// <param name="protectedHeaders">The collection of protected header parameters to append to the message when signing.</param>
-        /// <param name="unprotectedHeaders">The collection of unprotected header parameters to append to the message when signing.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
+        /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value for
+        // signing.</param>
+        /// <param name="protectedHeaders">The collection of protected header parameters to append to the
+        // message when signing.</param>
+        /// <param name="unprotectedHeaders">The collection of unprotected header parameters to append to
+        // the message when signing.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         ///   <para>
-        ///     <paramref name="key"/> is <see cref="RSA"/>, use <see cref="CoseSigner(RSA, RSASignaturePadding, HashAlgorithmName, CoseHeaderMap?, CoseHeaderMap?)"/> to specify a signature padding.
+        ///     <paramref name="key"/> is <see cref="RSA"/>, use <see cref="CoseSigner(RSA,
+        // RSASignaturePadding, HashAlgorithmName, CoseHeaderMap?, CoseHeaderMap?)"/> to specify a signature
+        // padding.
         ///   </para>
         ///   <para>-or-</para>
         ///   <para>
@@ -51,16 +58,21 @@ namespace System.Security.Cryptography.Cose
         ///   </para>
         ///   <para>-or-</para>
         ///   <para>
-        ///     <paramref name="protectedHeaders"/> contains a value with the <see cref="CoseHeaderLabel.Algorithm"/> label, but the value was incorrect based on the <paramref name="key"/> and <paramref name="hashAlgorithm"/>.
+        ///     <paramref name="protectedHeaders"/> contains a value with the <see
+        // cref="CoseHeaderLabel.Algorithm"/> label, but the value was incorrect based on the <paramref
+        // name="key"/> and <paramref name="hashAlgorithm"/>.
         ///   </para>
         ///   <para>-or-</para>
         ///   <para>
-        ///     <paramref name="unprotectedHeaders"/> specifies a value with the <see cref="CoseHeaderLabel.Algorithm"/> label.
+        ///     <paramref name="unprotectedHeaders"/> specifies a value with the <see
+        // cref="CoseHeaderLabel.Algorithm"/> label.
         ///   </para>
         /// </exception>
         /// <remarks>
-        /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the buckets of the content (and only) layer.
-        /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the buckets of the signature layer.
+        /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and
+        // <paramref name="unprotectedHeaders"/> are used as the buckets of the content (and only) layer.
+        /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/>
+        // and <paramref name="unprotectedHeaders"/> are used as the buckets of the signature layer.
         /// </remarks>
         public CoseSigner(
             AsymmetricAlgorithm key,
@@ -89,22 +101,31 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="key">The private key to use for signing.</param>
         /// <param name="signaturePadding">The padding mode to use when signing.</param>
-        /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value for signing.</param>
-        /// <param name="protectedHeaders">The collection of protected header parameters to append to the message when signing.</param>
-        /// <param name="unprotectedHeaders">The collection of unprotected header parameters to append to the message when signing.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see langword="null"/>.</exception>
+        /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value for
+        // signing.</param>
+        /// <param name="protectedHeaders">The collection of protected header parameters to append to the
+        // message when signing.</param>
+        /// <param name="unprotectedHeaders">The collection of unprotected header parameters to append to
+        // the message when signing.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="key"/> is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         ///   <para>
-        ///     <paramref name="protectedHeaders"/> contains a value with the <see cref="CoseHeaderLabel.Algorithm"/> label, but the value was incorrect based on the <paramref name="key"/>, <paramref name="signaturePadding"/> and <paramref name="hashAlgorithm"/>.
+        ///     <paramref name="protectedHeaders"/> contains a value with the <see
+        // cref="CoseHeaderLabel.Algorithm"/> label, but the value was incorrect based on the <paramref
+        // name="key"/>, <paramref name="signaturePadding"/> and <paramref name="hashAlgorithm"/>.
         ///   </para>
         ///   <para>-or-</para>
         ///   <para>
-        ///     <paramref name="unprotectedHeaders"/> specifies a value with the <see cref="CoseHeaderLabel.Algorithm"/> label.
+        ///     <paramref name="unprotectedHeaders"/> specifies a value with the <see
+        // cref="CoseHeaderLabel.Algorithm"/> label.
         ///   </para>
         /// </exception>
         /// <remarks>
-        /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the header parameters of the content layer.
-        /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/> and <paramref name="unprotectedHeaders"/> are used as the header parameters of the signature layer.
+        /// For sign operations in <see cref="CoseSign1Message"/>, <paramref name="protectedHeaders"/> and
+        // <paramref name="unprotectedHeaders"/> are used as the header parameters of the content layer.
+        /// For sign operations in <see cref="CoseMultiSignMessage"/>, <paramref name="protectedHeaders"/>
+        // and <paramref name="unprotectedHeaders"/> are used as the header parameters of the signature layer.
         /// </remarks>
         public CoseSigner(
             RSA key,
@@ -133,17 +154,21 @@ namespace System.Security.Cryptography.Cose
         /// <summary>
         /// Gets the protected header parameters to append to the message when signing.
         /// </summary>
-        /// <value>A collection of protected header parameters to append to the message when signing.</value>
+        /// <value>A collection of protected header parameters to append to the message when
+        // signing.</value>
         public CoseHeaderMap ProtectedHeaders => _protectedHeaders ??= new CoseHeaderMap();
 
         /// <summary>
         /// Gets the unprotected header parameters to append to the message when signing.
         /// </summary>
-        /// <value>A collection of unprotected header parameters to append to the message when signing.</value>
+        /// <value>A collection of unprotected header parameters to append to the message when
+        // signing.</value>
         public CoseHeaderMap UnprotectedHeaders => _unprotectedHeaders ??= new CoseHeaderMap();
 
-        // If we Validate: The caller specified a COSE Algorithm, we will make sure it matches the specified key and hash algorithm.
-        // If we Slip: The caller did not specify a COSE Algorithm, we will write the header for them rather than throw.
+        // If we Validate: The caller specified a COSE Algorithm, we will make sure it matches the specified
+        // key and hash algorithm.
+        // If we Slip: The caller did not specify a COSE Algorithm, we will write the header for them rather
+        // than throw.
         internal int? ValidateOrSlipAlgorithmHeader()
         {
             int algHeaderValue = GetCoseAlgorithmHeader();

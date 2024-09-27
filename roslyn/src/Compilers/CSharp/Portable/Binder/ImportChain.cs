@@ -101,7 +101,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else if (!namespaceOrType.ContainingAssembly.IsLinked)
                     {
-                        // We skip alias imports of embedded types to be consistent with imports of aliased embedded types and with VB.
+                        // We skip alias imports of embedded types to be consistent with imports of aliased embedded types
+                        // and with VB.
                         var typeRef = GetTypeReference(
                             (TypeSymbol)namespaceOrType,
                             nsOrType.UsingDirective,

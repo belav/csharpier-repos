@@ -29,7 +29,8 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     ///
     ///  Metadata:
     ///   - AotArguments: semicolon-separated list of options that will be passed to --aot=
-    ///   - ProcessArguments: semicolon-separated list of options that will be passed to the AOT compiler itself
+    ///   - ProcessArguments: semicolon-separated list of options that will be passed to the AOT
+    // compiler itself
     /// </summary>
     [Required]
     public ITaskItem[] Assemblies { get; set; } = Array.Empty<ITaskItem>();
@@ -83,35 +84,45 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     public bool UseLLVM { get; set; }
 
     /// <summary>
-    /// This instructs the AOT code generator to output certain data constructs into a separate file. This can reduce the executable images some five to twenty percent.
-    /// Developers need to then ship the resulting aotdata as a resource and register a hook to load the data on demand by using the mono_install_load_aot_data_hook() method.
+    /// This instructs the AOT code generator to output certain data constructs into a separate file.
+    // This can reduce the executable images some five to twenty percent.
+    /// Developers need to then ship the resulting aotdata as a resource and register a hook to load the
+    // data on demand by using the mono_install_load_aot_data_hook() method.
     /// Defaults to true.
     /// </summary>
     public bool UseAotDataFile { get; set; } = true;
 
     /// <summary>
-    /// Create an ELF object file (.o) or .s file which can be statically linked into an executable when embedding the mono runtime.
+    /// Create an ELF object file (.o) or .s file which can be statically linked into an executable when
+    // embedding the mono runtime.
     /// Only valid if OutputType is ObjectFile or AsmOnly.
     /// </summary>
     public bool UseStaticLinking { get; set; }
 
     /// <summary>
-    /// When this option is specified, icalls (internal calls made from the standard library into the mono runtime code) are invoked directly instead of going through the operating system symbol lookup operation.
+    /// When this option is specified, icalls (internal calls made from the standard library into the
+    // mono runtime code) are invoked directly instead of going through the operating system symbol lookup
+    // operation.
     /// This requires UseStaticLinking=true.
     /// </summary>
     public bool UseDirectIcalls { get; set; }
 
     /// <summary>
-    /// When this option is specified, P/Invoke methods are invoked directly instead of going through the operating system symbol lookup operation
+    /// When this option is specified, P/Invoke methods are invoked directly instead of going through
+    // the operating system symbol lookup operation
     /// This requires UseStaticLinking=true.
     /// </summary>
     public bool UseDirectPInvoke { get; set; }
 
     /// <summary>
-    /// When this option is specified, the mono aot compiler will generate direct calls for only specified direct pinvokes.
-    /// Specified direct pinvokes can be in the format of 'module' to generate direct calls for all entrypoints in the module,
-    /// or 'module!entrypoint' to generate direct calls for individual entrypoints in a module. 'module' will trump 'module!entrypoint'.
-    /// For a direct call to be generated, the managed code must call the native function through a direct pinvoke, e.g.
+    /// When this option is specified, the mono aot compiler will generate direct calls for only
+    // specified direct pinvokes.
+    /// Specified direct pinvokes can be in the format of 'module' to generate direct calls for all
+    // entrypoints in the module,
+    /// or 'module!entrypoint' to generate direct calls for individual entrypoints in a module. 'module'
+    // will trump 'module!entrypoint'.
+    /// For a direct call to be generated, the managed code must call the native function through a
+    // direct pinvoke, e.g.
     ///
     /// [DllImport("module", EntryPoint="entrypoint")]
     /// public static extern <ret> ManagedName (arg)
@@ -121,17 +132,24 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     /// [DllImport("module")]
     /// public static extern <ret> entrypoint (arg)
     ///
-    /// The native sources must be supplied in the direct pinvoke sources parammeter in the LibraryBuilder to generate a shared library.
-    /// If not using the LibraryBuilder, the native sources must be linked manually in the final executable or library.
-    /// This requires UseStaticLinking=true, can be used in conjunction with DirectPInvokeLists, but is incompatible with UseDirectPInvoke.
+    /// The native sources must be supplied in the direct pinvoke sources parammeter in the
+    // LibraryBuilder to generate a shared library.
+    /// If not using the LibraryBuilder, the native sources must be linked manually in the final
+    // executable or library.
+    /// This requires UseStaticLinking=true, can be used in conjunction with DirectPInvokeLists, but is
+    // incompatible with UseDirectPInvoke.
     /// </summary>
     public ITaskItem[] DirectPInvokes { get; set; } = Array.Empty<ITaskItem>();
 
     /// <summary>
-    /// When this option is specified, the mono aot compiler will generate direct calls for only specified direct pinvokes in the provided files.
-    /// Specified direct pinvokes can be in the format of 'module' to generate direct calls for all entrypoints in the module,
-    /// or 'module!entrypoint' to generate direct calls for individual entrypoints in a module. 'module' will trump 'module!entrypoint'.
-    /// For a direct call to be generated, the managed code must call the native function through a direct pinvoke, e.g.
+    /// When this option is specified, the mono aot compiler will generate direct calls for only
+    // specified direct pinvokes in the provided files.
+    /// Specified direct pinvokes can be in the format of 'module' to generate direct calls for all
+    // entrypoints in the module,
+    /// or 'module!entrypoint' to generate direct calls for individual entrypoints in a module. 'module'
+    // will trump 'module!entrypoint'.
+    /// For a direct call to be generated, the managed code must call the native function through a
+    // direct pinvoke, e.g.
     ///
     /// [DllImport("module", EntryPoint="entrypoint")]
     /// public static extern <ret> ManagedName (arg)
@@ -141,9 +159,12 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     /// [DllImport("module")]
     /// public static extern <ret> entrypoint (arg)
     ///
-    /// The native sources must be supplied in the direct pinvoke sources parammeter in the LibraryBuilder to generate a shared library.
-    /// If not using the LibraryBuilder, the native sources must be linked manually in the final executable or library.
-    /// This requires UseStaticLinking=true, can be used in conjunction with DirectPInvokes, but is incompatible with UseDirectPInvoke.
+    /// The native sources must be supplied in the direct pinvoke sources parammeter in the
+    // LibraryBuilder to generate a shared library.
+    /// If not using the LibraryBuilder, the native sources must be linked manually in the final
+    // executable or library.
+    /// This requires UseStaticLinking=true, can be used in conjunction with DirectPInvokes, but is
+    // incompatible with UseDirectPInvoke.
     /// </summary>
     public ITaskItem[] DirectPInvokeLists { get; set; } = Array.Empty<ITaskItem>();
 
@@ -163,12 +184,14 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     public string? TrimmingEligibleMethodsOutputDirectory { get; set; }
 
     /// <summary>
-    /// File to use for profile-guided optimization, *only* the methods described in the file will be AOT compiled.
+    /// File to use for profile-guided optimization, *only* the methods described in the file will be
+    // AOT compiled.
     /// </summary>
     public string[]? AotProfilePath { get; set; }
 
     /// <summary>
-    /// Mibc file to use for profile-guided optimization, *only* the methods described in the file will be AOT compiled.
+    /// Mibc file to use for profile-guided optimization, *only* the methods described in the file will
+    // be AOT compiled.
     /// </summary>
     public string[] MibcProfilePath { get; set; } = Array.Empty<string>();
 
@@ -178,7 +201,8 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     public string[]? Profilers { get; set; }
 
     /// <summary>
-    /// Generate a file containing mono_aot_register_module() calls for each AOT module which can be compiled into the app embedding mono.
+    /// Generate a file containing mono_aot_register_module() calls for each AOT module which can be
+    // compiled into the app embedding mono.
     /// If set, this implies UseStaticLinking=true.
     /// </summary>
     public string? AotModulesTablePath { get; set; }
@@ -190,32 +214,42 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
     public string? AotModulesTableLanguage { get; set; } = nameof(MonoAotModulesTableLanguage.C);
 
     /// <summary>
-    /// Choose between 'Normal', 'JustInterp', 'Full', 'FullInterp', 'Hybrid', 'LLVMOnly', 'LLVMOnlyInterp'.
-    /// LLVMOnly means to use only LLVM for FullAOT, AOT result will be a LLVM Bitcode file (the cross-compiler must be built with LLVM support)
-    /// The "interp" options ('LLVMOnlyInterp' and 'FullInterp') mean generate necessary support to fall back to interpreter if AOT code is not possible for some methods.
-    /// The difference between 'JustInterp' and 'FullInterp' is that 'FullInterp' will AOT all the methods in the given assemblies, while 'JustInterp' will only AOT the wrappers and trampolines necessary for the runtime to execute the managed methods using the interpreter and to interoperate with P/Invokes and unmanaged callbacks.
+    /// Choose between 'Normal', 'JustInterp', 'Full', 'FullInterp', 'Hybrid', 'LLVMOnly',
+    // 'LLVMOnlyInterp'.
+    /// LLVMOnly means to use only LLVM for FullAOT, AOT result will be a LLVM Bitcode file (the
+    // cross-compiler must be built with LLVM support)
+    /// The "interp" options ('LLVMOnlyInterp' and 'FullInterp') mean generate necessary support to fall
+    // back to interpreter if AOT code is not possible for some methods.
+    /// The difference between 'JustInterp' and 'FullInterp' is that 'FullInterp' will AOT all the
+    // methods in the given assemblies, while 'JustInterp' will only AOT the wrappers and trampolines
+    // necessary for the runtime to execute the managed methods using the interpreter and to interoperate
+    // with P/Invokes and unmanaged callbacks.
     /// </summary>
     public string Mode { get; set; } = nameof(MonoAotMode.Normal);
 
     /// <summary>
     /// Choose between 'ObjectFile', 'AsmOnly', 'Library'
-    /// ObjectFile means the AOT compiler will produce an .o object file, AsmOnly will produce .s assembly code and Library will produce a .so/.dylib/.dll shared library.
+    /// ObjectFile means the AOT compiler will produce an .o object file, AsmOnly will produce .s
+    // assembly code and Library will produce a .so/.dylib/.dll shared library.
     /// </summary>
     public string OutputType { get; set; } = nameof(MonoAotOutputType.ObjectFile);
 
     /// <summary>
     /// Choose between 'Dll', 'Dylib', 'So'. Only valid if OutputType is Library.
-    /// Dll means the AOT compiler will produce a Windows PE .dll file, Dylib means an Apple Mach-O .dylib and So means a Linux/Android ELF .so file.
+    /// Dll means the AOT compiler will produce a Windows PE .dll file, Dylib means an Apple Mach-O
+    // .dylib and So means a Linux/Android ELF .so file.
     /// </summary>
     public string? LibraryFormat { get; set; }
 
     /// <summary>
-    /// Prefix that will be added to the library file name, e.g. to add 'lib' prefix required by some platforms. Only valid if OutputType is Library.
+    /// Prefix that will be added to the library file name, e.g. to add 'lib' prefix required by some
+    // platforms. Only valid if OutputType is Library.
     /// </summary>
     public string LibraryFilePrefix { get; set; } = "";
 
     /// <summary>
-    /// Enables exporting symbols of methods decorated with UnmanagedCallersOnly Attribute containing a specified EntryPoint
+    /// Enables exporting symbols of methods decorated with UnmanagedCallersOnly Attribute containing a
+    // specified EntryPoint
     /// </summary>
     public bool EnableUnmanagedCallersOnlyMethodsExport { get; set; }
 
@@ -583,32 +617,32 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
             if (BuildEngine is IBuildEngine9 be9)
                 allowedParallelism = be9.RequestCores(allowedParallelism);
 
-            /*
-                From: https://github.com/dotnet/runtime/issues/46146#issuecomment-754021690
+/*
+From: https://github.com/dotnet/runtime/issues/46146#issuecomment-754021690
 
-                Stephen Toub:
-                "As such, by default ForEach works on a scheme whereby each
-                thread takes one item each time it goes back to the enumerator,
-                and then after a few times of this upgrades to taking two items
-                each time it goes back to the enumerator, and then four, and
-                then eight, and so on. This amortizes the cost of taking and
-                releasing the lock across multiple items, while still enabling
-                parallelization for enumerables containing just a few items. It
-                does, however, mean that if you've got a case where the body
-                takes a really long time and the work for every item is
-                heterogeneous, you can end up with an imbalance."
+Stephen Toub:
+"As such, by default ForEach works on a scheme whereby each
+thread takes one item each time it goes back to the enumerator,
+and then after a few times of this upgrades to taking two items
+each time it goes back to the enumerator, and then four, and
+then eight, and so on. This amortizes the cost of taking and
+releasing the lock across multiple items, while still enabling
+parallelization for enumerables containing just a few items. It
+does, however, mean that if you've got a case where the body
+takes a really long time and the work for every item is
+heterogeneous, you can end up with an imbalance."
 
-                The time taken by individual compile jobs here can vary a
-                lot, depending on various factors like file size. This can
-                create an imbalance, like mentioned above, and we can end up
-                in a situation where one of the partitions has a job that
-                takes very long to execute, by which time other partitions
-                have completed, so some cores are idle.  But the idle
-                ones won't get any of the remaining jobs, because they are
-                all assigned to that one partition.
+The time taken by individual compile jobs here can vary a
+lot, depending on various factors like file size. This can
+create an imbalance, like mentioned above, and we can end up
+in a situation where one of the partitions has a job that
+takes very long to execute, by which time other partitions
+have completed, so some cores are idle.  But the idle
+ones won't get any of the remaining jobs, because they are
+all assigned to that one partition.
 
-                Instead, we want to use work-stealing so jobs can be run by any partition.
-            */
+Instead, we want to use work-stealing so jobs can be run by any partition.
+*/
             ParallelLoopResult result = Parallel.ForEach(
                 Partitioner.Create(argsList, EnumerablePartitionerOptions.NoBuffering),
                 new ParallelOptions { MaxDegreeOfParallelism = allowedParallelism },

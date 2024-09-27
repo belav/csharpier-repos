@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -67,12 +68,16 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 object instance
             );
 
-            // In IL based tools this is a behavior of the compiler. The attribute on the record declaration parameter
-            // is only propagated to the .ctor constructor parameter. The property and field attributes are applied to the
-            // generated property and field respectively. But none of the attributes is propagated to the Deconstruct method parameters.
+            // In IL based tools this is a behavior of the compiler. The attribute on the record declaration
+            // parameter
+            // is only propagated to the .ctor constructor parameter. The property and field attributes are
+            // applied to the
+            // generated property and field respectively. But none of the attributes is propagated to the
+            // Deconstruct method parameters.
             // For analyzer, this is currently
             // https://github.com/dotnet/linker/issues/3158
-            //   But it's possible that with that fixed there won't be a warning from the analyzer anyway (depends on the implementation)
+            //   But it's possible that with that fixed there won't be a warning from the analyzer anyway
+            // (depends on the implementation)
             [ExpectedWarning("IL2067", ProducedBy = Tool.Trimmer | Tool.NativeAot)]
             static void DeconstructRecordWithAnnotation(TypeAndInstance value)
             {
@@ -114,7 +119,8 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             )
             {
                 // The generated property getter doesn't have the same attributes???
-                // The attributes are only propagated to the generated .ctor - so suppressing the warning the this.type doesn't have the matching annotations
+                // The attributes are only propagated to the generated .ctor - so suppressing the warning the
+                // this.type doesn't have the matching annotations
                 //[UnconditionalSuppressMessage ("", "IL2072")]
                 public void Deconstruct(
                     [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]

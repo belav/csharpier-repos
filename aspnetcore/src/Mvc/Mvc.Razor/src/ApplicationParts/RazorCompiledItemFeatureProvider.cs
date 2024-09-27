@@ -65,7 +65,8 @@ internal sealed class RazorCompiledItemFeatureProvider : IApplicationFeatureProv
 
         foreach (var type in types)
         {
-            // The Razor file has a [RazorCompiledItemMetadata("Identifier", "/Index.cshtml")]. We'll look it up.
+            // The Razor file has a [RazorCompiledItemMetadata("Identifier", "/Index.cshtml")]. We'll look it
+            // up.
             var metadataAttribute = type.GetCustomAttributes<RazorCompiledItemMetadataAttribute>()
                 .FirstOrDefault(a => a.Key == "Identifier");
 

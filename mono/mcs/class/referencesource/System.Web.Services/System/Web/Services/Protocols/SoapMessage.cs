@@ -67,7 +67,8 @@ namespace System.Web.Services.Protocols
             return parameterValues[index];
         }
 
-        /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.GetOutParameterValue"]/*' />
+        /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.GetOutParameterValue"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -140,15 +141,15 @@ namespace System.Web.Services.Protocols
         /// </devdoc>
         public abstract LogicalMethodInfo MethodInfo { get; }
 
-        /*
-        internal abstract SoapReflectedExtension[] Extensions {
-            get;
-        }
+/*
+internal abstract SoapReflectedExtension[] Extensions {
+get;
+}
 
-        internal abstract object[] ExtensionInitializers {
-            get;
-        }
-        */
+internal abstract object[] ExtensionInitializers {
+get;
+}
+*/
 
         /// <include file='doc\SoapMessage.uex' path='docs/doc[@for="SoapMessage.EnsureStage"]/*' />
         /// <devdoc>

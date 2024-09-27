@@ -9,14 +9,16 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 /// <summary>
 /// A context for page filters, used specifically in
 /// <see cref="IPageFilter.OnPageHandlerExecuting(PageHandlerExecutingContext)"/> and
-/// <see cref="IAsyncPageFilter.OnPageHandlerExecutionAsync(PageHandlerExecutingContext, PageHandlerExecutionDelegate)"/>.
+/// <see cref="IAsyncPageFilter.OnPageHandlerExecutionAsync(PageHandlerExecutingContext,
+// PageHandlerExecutionDelegate)"/>.
 /// </summary>
 public class PageHandlerExecutingContext : FilterContext
 {
     /// <summary>
     /// Creates a new instance of <see cref="PageHandlerExecutingContext"/>.
     /// </summary>
-    /// <param name="pageContext">The <see cref="PageContext"/> associated with the current request.</param>
+    /// <param name="pageContext">The <see cref="PageContext"/> associated with the current
+    // request.</param>
     /// <param name="filters">The set of filters associated with the page.</param>
     /// <param name="handlerMethod">The handler method to be invoked, may be null.</param>
     /// <param name="handlerArguments">The arguments to provide to the handler method.</param>
@@ -45,7 +47,8 @@ public class PageHandlerExecutingContext : FilterContext
         (CompiledPageActionDescriptor)base.ActionDescriptor;
 
     /// <summary>
-    /// Gets or sets the <see cref="IActionResult"/> to execute. Setting <see cref="Result"/> to a non-<c>null</c>
+    /// Gets or sets the <see cref="IActionResult"/> to execute. Setting <see cref="Result"/> to a
+    // non-<c>null</c>
     /// value inside a page filter will short-circuit the page and any remaining page filters.
     /// </summary>
     public virtual IActionResult? Result { get; set; }

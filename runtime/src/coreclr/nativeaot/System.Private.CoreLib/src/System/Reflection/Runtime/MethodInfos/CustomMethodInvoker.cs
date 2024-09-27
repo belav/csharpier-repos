@@ -8,7 +8,8 @@ using Internal.Runtime.Augments;
 namespace System.Reflection.Runtime.MethodInfos
 {
     //
-    // Custom invoker for edge case scenarios not handled by the toolchain. Examples: Strings and Nullables.
+    // Custom invoker for edge case scenarios not handled by the toolchain. Examples: Strings and
+    // Nullables.
     //
     internal sealed class CustomMethodInvoker : MethodBaseInvoker
     {
@@ -61,7 +62,8 @@ namespace System.Reflection.Runtime.MethodInfos
             bool wrapInTargetInvocationException
         )
         {
-            // This does not handle optional parameters. None of the methods we use custom invocation for have them.
+            // This does not handle optional parameters. None of the methods we use custom invocation for have
+            // them.
             if (!(thisObject == null && 0 != (_options & InvokerOptions.AllowNullThis)))
                 ValidateThis(thisObject, _thisType.TypeHandle);
 

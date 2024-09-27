@@ -30,7 +30,8 @@ namespace Castle.DynamicProxy.Generators
         /// <summary>
         ///   Initializes a new instance of the <see cref = "CacheKey" /> class.
         /// </summary>
-        /// <param name = "target">Target element. This is either target type or target method for invocation types.</param>
+        /// <param name = "target">Target element. This is either target type or target method for
+        // invocation types.</param>
         /// <param name = "type">The type of the proxy. This is base type for invocation types.</param>
         /// <param name = "interfaces">The interfaces.</param>
         /// <param name = "options">The options.</param>

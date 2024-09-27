@@ -20,7 +20,8 @@ namespace System.Threading
 #endif
 
 #if !(TARGET_BROWSER && FEATURE_WASM_THREADS)
-        // Indicates whether the thread pool should yield the thread from the dispatch loop to the runtime periodically so that
+        // Indicates whether the thread pool should yield the thread from the dispatch loop to the runtime
+        // periodically so that
         // the runtime may use the thread for processing other work.
         internal static bool YieldFromDispatchLoop => false;
 #endif
@@ -145,7 +146,8 @@ namespace System.Threading
         /// Gets the number of thread pool threads that currently exist.
         /// </summary>
         /// <remarks>
-        /// For a thread pool implementation that may have different types of threads, the count includes all types.
+        /// For a thread pool implementation that may have different types of threads, the count includes
+        // all types.
         /// </remarks>
         public static int ThreadCount
         {
@@ -156,7 +158,8 @@ namespace System.Threading
         /// Gets the number of work items that have been processed so far.
         /// </summary>
         /// <remarks>
-        /// For a thread pool implementation that may have different types of work items, the count includes all types.
+        /// For a thread pool implementation that may have different types of work items, the count includes
+        // all types.
         /// </remarks>
         public static long CompletedWorkItemCount
         {

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,10 @@ namespace Mono.Linker
         }
 
         // Traverse the assembly and mark the scopes of discovered type references (but not exported types).
-        // This includes scopes referenced by Cecil TypeReference objects that don't represent rows in the typeref table,
-        // such as references to built-in types, or attribute arguments which encode type references as strings.
+        // This includes scopes referenced by Cecil TypeReference objects that don't represent rows in the
+        // typeref table,
+        // such as references to built-in types, or attribute arguments which encode type references as
+        // strings.
         public virtual void Process()
         {
             if (Visited.Count > 0)

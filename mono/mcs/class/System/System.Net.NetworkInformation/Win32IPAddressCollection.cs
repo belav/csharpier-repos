@@ -79,7 +79,8 @@ namespace System.Net.NetworkInformation
                 a = (Win32_IP_ADAPTER_DNS_SERVER_ADDRESS)
                     Marshal.PtrToStructure(p, typeof(Win32_IP_ADAPTER_DNS_SERVER_ADDRESS));
                 // FIXME: It somehow fails here. Looks like there is something wrong.
-                //if (a.Address.Sockaddr == IntPtr.Zero) throw new Exception ("pointer " + p + " a.length " + a.Address.SockaddrLength);
+                //if (a.Address.Sockaddr == IntPtr.Zero) throw new Exception ("pointer " + p + " a.length " +
+                // a.Address.SockaddrLength);
                 c.InternalAdd(a.Address.GetIPAddress());
             }
             return c;

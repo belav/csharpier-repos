@@ -34,8 +34,10 @@ internal sealed class DynamicViewData : DynamicObject
         }
     }
 
-    // Implementing this function extends the ViewBag contract, supporting or improving some scenarios. For example
-    // having this method improves the debugging experience as it provides the debugger with the list of all
+    // Implementing this function extends the ViewBag contract, supporting or improving some scenarios.
+    // For example
+    // having this method improves the debugging experience as it provides the debugger with the list of
+    // all
     // properties currently defined on the object.
     public override IEnumerable<string> GetDynamicMemberNames()
     {

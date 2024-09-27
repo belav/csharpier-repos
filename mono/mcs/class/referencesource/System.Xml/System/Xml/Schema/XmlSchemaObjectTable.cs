@@ -94,7 +94,8 @@ namespace System.Xml.Schema
             return -1;
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.Count"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex'
+        // path='docs/doc[@for="XmlSchemaObjectTable.Count"]/*' />
         public int Count
         {
             get
@@ -104,13 +105,15 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.Contains"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex'
+        // path='docs/doc[@for="XmlSchemaObjectTable.Contains"]/*' />
         public bool Contains(XmlQualifiedName name)
         {
             return table.ContainsKey(name);
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.this"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.this"]/*'
+        // />
         public XmlSchemaObject this[XmlQualifiedName name]
         {
             get
@@ -124,19 +127,22 @@ namespace System.Xml.Schema
             }
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.Names"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex'
+        // path='docs/doc[@for="XmlSchemaObjectTable.Names"]/*' />
         public ICollection Names
         {
             get { return new NamesCollection(entries, table.Count); }
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.Values"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex'
+        // path='docs/doc[@for="XmlSchemaObjectTable.Values"]/*' />
         public ICollection Values
         {
             get { return new ValuesCollection(entries, table.Count); }
         }
 
-        /// <include file='doc\XmlSchemaObjectTable.uex' path='docs/doc[@for="XmlSchemaObjectTable.GetEnumerator"]/*' />
+        /// <include file='doc\XmlSchemaObjectTable.uex'
+        // path='docs/doc[@for="XmlSchemaObjectTable.GetEnumerator"]/*' />
         public IDictionaryEnumerator GetEnumerator()
         {
             return new XSODictionaryEnumerator(

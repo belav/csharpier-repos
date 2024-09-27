@@ -11,7 +11,8 @@ using System.Linq;
 namespace System.Data
 {
     /// <summary>
-    /// Provides an entry point so that Cast operator call can be intercepted within an extension method.
+    /// Provides an entry point so that Cast operator call can be intercepted within an extension
+    // method.
     /// </summary>
     public abstract class EnumerableRowCollection : IEnumerable
     {
@@ -35,7 +36,8 @@ namespace System.Data
         private readonly IEnumerable<TRow> _enumerableRows;
         private readonly List<Func<TRow, bool>> _listOfPredicates;
 
-        // Stores list of sort expression in the order provided by user. E.g. order by, thenby, thenby descending..
+        // Stores list of sort expression in the order provided by user. E.g. order by, thenby, thenby
+        // descending..
         private readonly SortExpressionBuilder<TRow> _sortExpression;
 
         private readonly Func<TRow, TRow>? _selector;
@@ -56,7 +58,8 @@ namespace System.Data
         }
 
         /// <summary>
-        /// This constructor is used when Select operator is called with output Type other than input row Type.
+        /// This constructor is used when Select operator is called with output Type other than input row
+        // Type.
         /// Basically fail on GetLDV(), but other LINQ operators must work.
         /// </summary>
         internal EnumerableRowCollection(

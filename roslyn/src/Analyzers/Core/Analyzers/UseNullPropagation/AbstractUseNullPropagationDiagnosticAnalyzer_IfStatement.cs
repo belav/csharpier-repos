@@ -62,7 +62,8 @@ internal abstract partial class AbstractUseNullPropagationDiagnosticAnalyzer<
         )
             return;
 
-        // Ok, we have `if (<expr2> == null)` or `if (<expr2> != null)` (or some similar form of that.  `conditionPartToCheck` will be `<expr2>` here.
+        // Ok, we have `if (<expr2> == null)` or `if (<expr2> != null)` (or some similar form of that.
+        // `conditionPartToCheck` will be `<expr2>` here.
         // We only support `if (<expr2> != null)`.  Fail out if we have the alternate form.
         if (isEquals)
             return;

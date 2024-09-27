@@ -19,8 +19,10 @@ public static class DataProtectionCommonExtensions
     /// <summary>
     /// Creates an <see cref="IDataProtector"/> given a list of purposes.
     /// </summary>
-    /// <param name="provider">The <see cref="IDataProtectionProvider"/> from which to generate the purpose chain.</param>
-    /// <param name="purposes">The list of purposes which contribute to the purpose chain. This list must
+    /// <param name="provider">The <see cref="IDataProtectionProvider"/> from which to generate the
+    // purpose chain.</param>
+    /// <param name="purposes">The list of purposes which contribute to the purpose chain. This list
+    // must
     /// contain at least one element, and it may not contain null elements.</param>
     /// <returns>An <see cref="IDataProtector"/> tied to the provided purpose chain.</returns>
     /// <remarks>
@@ -68,9 +70,12 @@ public static class DataProtectionCommonExtensions
     /// <summary>
     /// Creates an <see cref="IDataProtector"/> given a list of purposes.
     /// </summary>
-    /// <param name="provider">The <see cref="IDataProtectionProvider"/> from which to generate the purpose chain.</param>
-    /// <param name="purpose">The primary purpose used to create the <see cref="IDataProtector"/>.</param>
-    /// <param name="subPurposes">An optional list of secondary purposes which contribute to the purpose chain.
+    /// <param name="provider">The <see cref="IDataProtectionProvider"/> from which to generate the
+    // purpose chain.</param>
+    /// <param name="purpose">The primary purpose used to create the <see
+    // cref="IDataProtector"/>.</param>
+    /// <param name="subPurposes">An optional list of secondary purposes which contribute to the purpose
+    // chain.
     /// If this list is provided it cannot contain null elements.</param>
     /// <returns>An <see cref="IDataProtector"/> tied to the provided purpose chain.</returns>
     /// <remarks>
@@ -87,8 +92,10 @@ public static class DataProtectionCommonExtensions
         ArgumentNullThrowHelper.ThrowIfNull(provider);
         ArgumentNullThrowHelper.ThrowIfNull(purpose);
 
-        // The method signature isn't simply CreateProtector(this IDataProtectionProvider, params string[] purposes)
-        // because we don't want the code provider.CreateProtector() [parameterless] to inadvertently compile.
+        // The method signature isn't simply CreateProtector(this IDataProtectionProvider, params string[]
+        // purposes)
+        // because we don't want the code provider.CreateProtector() [parameterless] to inadvertently
+        // compile.
         // The actual signature for this method forces at least one purpose to be provided at the call site.
 
         IDataProtector? protector = provider.CreateProtector(purpose);
@@ -102,9 +109,12 @@ public static class DataProtectionCommonExtensions
     /// <summary>
     /// Retrieves an <see cref="IDataProtectionProvider"/> from an <see cref="IServiceProvider"/>.
     /// </summary>
-    /// <param name="services">The service provider from which to retrieve the <see cref="IDataProtectionProvider"/>.</param>
-    /// <returns>An <see cref="IDataProtectionProvider"/>. This method is guaranteed never to return null.</returns>
-    /// <exception cref="InvalidOperationException">If no <see cref="IDataProtectionProvider"/> service exists in <paramref name="services"/>.</exception>
+    /// <param name="services">The service provider from which to retrieve the <see
+    // cref="IDataProtectionProvider"/>.</param>
+    /// <returns>An <see cref="IDataProtectionProvider"/>. This method is guaranteed never to return
+    // null.</returns>
+    /// <exception cref="InvalidOperationException">If no <see cref="IDataProtectionProvider"/> service
+    // exists in <paramref name="services"/>.</exception>
     public static IDataProtectionProvider GetDataProtectionProvider(this IServiceProvider services)
     {
         ArgumentNullThrowHelper.ThrowIfNull(services);
@@ -125,16 +135,21 @@ public static class DataProtectionCommonExtensions
     }
 
     /// <summary>
-    /// Retrieves an <see cref="IDataProtector"/> from an <see cref="IServiceProvider"/> given a list of purposes.
+    /// Retrieves an <see cref="IDataProtector"/> from an <see cref="IServiceProvider"/> given a list of
+    // purposes.
     /// </summary>
-    /// <param name="services">An <see cref="IServiceProvider"/> which contains the <see cref="IDataProtectionProvider"/>
+    /// <param name="services">An <see cref="IServiceProvider"/> which contains the <see
+    // cref="IDataProtectionProvider"/>
     /// from which to generate the purpose chain.</param>
-    /// <param name="purposes">The list of purposes which contribute to the purpose chain. This list must
+    /// <param name="purposes">The list of purposes which contribute to the purpose chain. This list
+    // must
     /// contain at least one element, and it may not contain null elements.</param>
     /// <returns>An <see cref="IDataProtector"/> tied to the provided purpose chain.</returns>
     /// <remarks>
-    /// This is a convenience method which calls <see cref="GetDataProtectionProvider(IServiceProvider)"/>
-    /// then <see cref="CreateProtector(IDataProtectionProvider, IEnumerable{string})"/>. See those methods'
+    /// This is a convenience method which calls <see
+    // cref="GetDataProtectionProvider(IServiceProvider)"/>
+    /// then <see cref="CreateProtector(IDataProtectionProvider, IEnumerable{string})"/>. See those
+    // methods'
     /// documentation for more information.
     /// </remarks>
     public static IDataProtector GetDataProtector(
@@ -149,17 +164,23 @@ public static class DataProtectionCommonExtensions
     }
 
     /// <summary>
-    /// Retrieves an <see cref="IDataProtector"/> from an <see cref="IServiceProvider"/> given a list of purposes.
+    /// Retrieves an <see cref="IDataProtector"/> from an <see cref="IServiceProvider"/> given a list of
+    // purposes.
     /// </summary>
-    /// <param name="services">An <see cref="IServiceProvider"/> which contains the <see cref="IDataProtectionProvider"/>
+    /// <param name="services">An <see cref="IServiceProvider"/> which contains the <see
+    // cref="IDataProtectionProvider"/>
     /// from which to generate the purpose chain.</param>
-    /// <param name="purpose">The primary purpose used to create the <see cref="IDataProtector"/>.</param>
-    /// <param name="subPurposes">An optional list of secondary purposes which contribute to the purpose chain.
+    /// <param name="purpose">The primary purpose used to create the <see
+    // cref="IDataProtector"/>.</param>
+    /// <param name="subPurposes">An optional list of secondary purposes which contribute to the purpose
+    // chain.
     /// If this list is provided it cannot contain null elements.</param>
     /// <returns>An <see cref="IDataProtector"/> tied to the provided purpose chain.</returns>
     /// <remarks>
-    /// This is a convenience method which calls <see cref="GetDataProtectionProvider(IServiceProvider)"/>
-    /// then <see cref="CreateProtector(IDataProtectionProvider, string, string[])"/>. See those methods'
+    /// This is a convenience method which calls <see
+    // cref="GetDataProtectionProvider(IServiceProvider)"/>
+    /// then <see cref="CreateProtector(IDataProtectionProvider, string, string[])"/>. See those
+    // methods'
     /// documentation for more information.
     /// </remarks>
     public static IDataProtector GetDataProtector(

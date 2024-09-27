@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net;
 using System.Net.Mime;
@@ -9,7 +10,8 @@ using System.Web.Mvc;
 namespace Microsoft.Web.Mvc.Resources
 {
     /// <summary>
-    /// Action result for returning HTTP errors that result from performing operations on resources, including
+    /// Action result for returning HTTP errors that result from performing operations on resources,
+    // including
     /// an optional details in the HTTP body
     /// </summary>
     public class ResourceErrorActionResult : ActionResult

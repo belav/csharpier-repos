@@ -7,7 +7,8 @@ using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
-    // This structure is used to pass context about a type's static class construction state from the runtime
+    // This structure is used to pass context about a type's static class construction state from the
+    // runtime
     // to the classlibrary via the CheckStaticClassConstruction callback. It is permissable for the
     // classlibrary to add its own fields after these for its own use. These must not contain GC
     // references and will be zero initialized.

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Components.RenderTree;
 
 namespace Microsoft.AspNetCore.Components.Analyzers.Tests.TestFiles.ComponentInternalUsageDiagnosticsAnalyzerTest
 {
-    /*MM*/
+/*MM*/
     class UsesRendererAsBaseClass : Renderer
     {
         public UsesRendererAsBaseClass()

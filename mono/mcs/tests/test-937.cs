@@ -1,4 +1,5 @@
-// Compiler options: /noconfig /nostdlib -r:$REF_DIR/Facades/System.Runtime.dll -r:$REF_DIR/mscorlib.dll
+// Compiler options: /noconfig /nostdlib -r:$REF_DIR/Facades/System.Runtime.dll
+// -r:$REF_DIR/mscorlib.dll
 
 using System;
 

@@ -16,7 +16,8 @@ namespace System.IO
     public class InternalBufferOverflowException : SystemException
     {
         /// <devdoc>
-        ///    Initializes a new default instance of the <see cref='System.IO.InternalBufferOverflowException'/> class.
+        ///    Initializes a new default instance of the <see
+        // cref='System.IO.InternalBufferOverflowException'/> class.
         /// </devdoc>
         public InternalBufferOverflowException()
             : base()
@@ -25,7 +26,8 @@ namespace System.IO
         }
 
         /// <devdoc>
-        ///    Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/> class with the error message to be displayed specified.
+        ///    Initializes a new instance of the <see cref='System.IO.InternalBufferOverflowException'/>
+        // class with the error message to be displayed specified.
         /// </devdoc>
         public InternalBufferOverflowException(string? message)
             : base(message)

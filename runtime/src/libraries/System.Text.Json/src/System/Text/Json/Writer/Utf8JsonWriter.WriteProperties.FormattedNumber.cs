@@ -9,7 +9,8 @@ namespace System.Text.Json
     public sealed partial class Utf8JsonWriter
     {
         /// <summary>
-        /// Writes the property name and value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and value (as a JSON number) as part of a name/value pair of a JSON
+        // object.
         /// </summary>
         /// <param name="propertyName">The name of the property to write.</param>
         /// <param name="utf8FormattedNumber">The value to write.</param>
@@ -23,7 +24,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="long"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="long"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         internal void WriteNumber(
@@ -42,7 +44,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Writes the property name and value (as a JSON number) as part of a name/value pair of a JSON object.
+        /// Writes the property name and value (as a JSON number) as part of a name/value pair of a JSON
+        // object.
         /// </summary>
         /// <param name="utf8PropertyName">The UTF-8 encoded name of the property to write..</param>
         /// <param name="utf8FormattedNumber">The value to write.</param>
@@ -56,7 +59,8 @@ namespace System.Text.Json
         /// Thrown if this would result in invalid JSON being written (while validation is enabled).
         /// </exception>
         /// <remarks>
-        /// Writes the <see cref="long"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for example: 32767.
+        /// Writes the <see cref="long"/> using the default <see cref="StandardFormat"/> (that is, 'G'), for
+        // example: 32767.
         /// The property name is escaped before writing.
         /// </remarks>
         internal void WriteNumber(

@@ -13,7 +13,8 @@ namespace Internal.IL.Stubs
     public static class ComparerIntrinsics
     {
         /// <summary>
-        /// Generates a specialized method body for Comparer`1.Create or returns null if no specialized body can be generated.
+        /// Generates a specialized method body for Comparer`1.Create or returns null if no specialized body
+        // can be generated.
         /// </summary>
         public static MethodIL EmitComparerCreate(MethodDesc target)
         {
@@ -21,7 +22,8 @@ namespace Internal.IL.Stubs
         }
 
         /// <summary>
-        /// Generates a specialized method body for EqualityComparer`1.Create or returns null if no specialized body can be generated.
+        /// Generates a specialized method body for EqualityComparer`1.Create or returns null if no
+        // specialized body can be generated.
         /// </summary>
         public static MethodIL EmitEqualityComparerCreate(MethodDesc target)
         {
@@ -41,7 +43,8 @@ namespace Internal.IL.Stubs
         }
 
         /// <summary>
-        /// Gets the concrete type EqualityComparer`1.Create returns or null if it's not known at compile time.
+        /// Gets the concrete type EqualityComparer`1.Create returns or null if it's not known at compile
+        // time.
         /// </summary>
         public static TypeDesc GetEqualityComparerForType(TypeDesc comparand)
         {
@@ -141,7 +144,8 @@ namespace Internal.IL.Stubs
         }
 
         /// <summary>
-        /// Gets the set of template types needed to support loading comparers for the give canonical type at runtime.
+        /// Gets the set of template types needed to support loading comparers for the give canonical type
+        // at runtime.
         /// </summary>
         private static TypeDesc[] GetPotentialComparersForTypeCommon(
             TypeDesc type,
@@ -204,7 +208,8 @@ namespace Internal.IL.Stubs
                 return universalComparers.ToArray();
             }
 
-            // This mirrors exactly what GetUnknownEquatableComparer and GetUnknownComparer (in the class library)
+            // This mirrors exactly what GetUnknownEquatableComparer and GetUnknownComparer (in the class
+            // library)
             // will need at runtime. This is the general purpose code path that can be used to compare
             // anything.
 

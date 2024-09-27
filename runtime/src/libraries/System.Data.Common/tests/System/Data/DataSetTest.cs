@@ -226,11 +226,14 @@ namespace System.Data.Tests
   </xs:element>
 </xs:schema>".ReplaceLineEndings();
 
-            // Some elements in 'expected' above contain differences from original DataSet.WriteXmlSchema() output:
+            // Some elements in 'expected' above contain differences from original DataSet.WriteXmlSchema()
+            // output:
             //
-            // <xs:schema id="test_dataset" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+            // <xs:schema id="test_dataset" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            // xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
             //   <xs:element name="test_dataset" msdata:IsDataSet="true" msdata:Locale="fi-FI">
-            //               <xs:element name="first" msdata:Caption="test" default="test_default_value" minOccurs="0">
+            //               <xs:element name="first" msdata:Caption="test" default="test_default_value"
+            // minOccurs="0">
             //               <xs:element name="second_first" default="default_value" minOccurs="0">
             //     <xs:unique name="second_test_table_Constraint1" msdata:ConstraintName="Constraint1">
 
@@ -347,9 +350,11 @@ namespace System.Data.Tests
   </xs:element>
 </xs:schema>".ReplaceLineEndings();
 
-                // Some elements in 'expected' above contain differences from original DataSet.WriteXmlSchema() output:
+                // Some elements in 'expected' above contain differences from original DataSet.WriteXmlSchema()
+                // output:
                 //
-                // <xs:schema id="Root" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+                // <xs:schema id="Root" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                // xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
                 //               <xs:element name="RegionID" type="xs:string" minOccurs="0" />
                 //               <xs:element name="RegionDescription" type="xs:string" minOccurs="0" />
 
@@ -505,37 +510,38 @@ namespace System.Data.Tests
             ser.Deserialize(new XmlTextReader(xml, XmlNodeType.Document, null));
         }
 
-        /* To be added
-        [Fact]
-        public void WriteDiffReadAutoWriteSchema ()
-        {
-            DataSet ds = new DataSet ();
-            ds.Tables.Add ("Table1");
-            ds.Tables.Add ("Table2");
-            ds.Tables [0].Columns.Add ("Column1_1");
-            ds.Tables [0].Columns.Add ("Column1_2");
-            ds.Tables [0].Columns.Add ("Column1_3");
-            ds.Tables [1].Columns.Add ("Column2_1");
-            ds.Tables [1].Columns.Add ("Column2_2");
-            ds.Tables [1].Columns.Add ("Column2_3");
-            ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
+/* To be added
+[Fact]
+public void WriteDiffReadAutoWriteSchema ()
+{
+DataSet ds = new DataSet ();
+ds.Tables.Add ("Table1");
+ds.Tables.Add ("Table2");
+ds.Tables [0].Columns.Add ("Column1_1");
+ds.Tables [0].Columns.Add ("Column1_2");
+ds.Tables [0].Columns.Add ("Column1_3");
+ds.Tables [1].Columns.Add ("Column2_1");
+ds.Tables [1].Columns.Add ("Column2_2");
+ds.Tables [1].Columns.Add ("Column2_3");
+ds.Tables [0].Rows.Add (new object [] {"ppp", "www", "xxx"});
 
-            // save as diffgram
-            StringWriter sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.DiffGram);
-            string xml = sw.ToString ();
-            string result = new StreamReader ("Test/System.Data/DataSetReadXmlTest1.xml", Encoding.ASCII).ReadToEnd ();
-            Assert.Equal (result, xml);
+// save as diffgram
+StringWriter sw = new StringWriter ();
+ds.WriteXml (sw, XmlWriteMode.DiffGram);
+string xml = sw.ToString ();
+string result = new StreamReader ("Test/System.Data/DataSetReadXmlTest1.xml",
+Encoding.ASCII).ReadToEnd ();
+Assert.Equal (result, xml);
 
-            // load diffgram above
-            ds.ReadXml (new StringReader (sw.ToString ()));
-            sw = new StringWriter ();
-            ds.WriteXml (sw, XmlWriteMode.WriteSchema);
-            xml = sw.ToString ();
-            result = new StreamReader ("Test/System.Data/DataSetReadXmlTest2.xml", Encoding.ASCII).ReadToEnd ();
-            Assert.Equal (result, xml);
-        }
-        */
+// load diffgram above
+ds.ReadXml (new StringReader (sw.ToString ()));
+sw = new StringWriter ();
+ds.WriteXml (sw, XmlWriteMode.WriteSchema);
+xml = sw.ToString ();
+result = new StreamReader ("Test/System.Data/DataSetReadXmlTest2.xml", Encoding.ASCII).ReadToEnd ();
+Assert.Equal (result, xml);
+}
+*/
 
         [Fact]
         public void CloneCopy()

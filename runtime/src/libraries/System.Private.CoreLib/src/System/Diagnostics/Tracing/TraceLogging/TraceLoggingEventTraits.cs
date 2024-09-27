@@ -15,7 +15,7 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         None = 0,
 
-        /* Bits below 0x10000 are available for any use by the provider. */
-        /* Bits at or above 0x10000 are reserved for definition by Microsoft. */
+/* Bits below 0x10000 are available for any use by the provider. */
+/* Bits at or above 0x10000 are reserved for definition by Microsoft. */
     }
 }

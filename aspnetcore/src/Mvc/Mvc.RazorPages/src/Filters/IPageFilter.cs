@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Mvc.Filters;
 
 /// <summary>
-/// A filter that surrounds execution of a page handler method. This filter is executed only when decorated on a
+/// A filter that surrounds execution of a page handler method. This filter is executed only when
+// decorated on a
 /// handler's type and not on individual handler methods.
 /// </summary>
 public interface IPageFilter : IFilterMetadata

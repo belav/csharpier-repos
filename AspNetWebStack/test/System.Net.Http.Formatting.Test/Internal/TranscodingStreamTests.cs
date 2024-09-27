@@ -1,7 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// From https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Text.Encoding/tests/Encoding/TranscodingStreamTests.cs
+// From
+//
+//
+//
+//
+// https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Text.Encoding/tests/Encoding/TranscodingStreamTests.cs
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -473,7 +478,8 @@ namespace System.Text.Tests
 
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back
+            // out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC0); // [ C0 ] is never valid in UTF-8
@@ -490,7 +496,8 @@ namespace System.Text.Tests
             Assert.Equal("[FFFD]", ErrorCheckingAsciiEncoding.GetString(sink.ToArray()));
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD
+            // back out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC2); // [ C2 ] must be followed by [ 80..BF ] in UTF-8
@@ -736,7 +743,8 @@ namespace System.Text.Tests
             );
 
 #if true
-            // Not overriding BeginRead and base Stream's method returns a Task as its IAsyncResult, delaying parameter checks.
+            // Not overriding BeginRead and base Stream's method returns a Task as its IAsyncResult, delaying
+            // parameter checks.
             Assert.ThrowsArgumentNull(
                 () =>
                     transcodingStream.EndRead(transcodingStream.BeginRead(null, 0, 0, null, null)),
@@ -852,7 +860,8 @@ namespace System.Text.Tests
 
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some invalid data into the inner stream, followed by EOF, and ensure we get U+FFFD back
+            // out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC0); // [ C0 ] is never valid in UTF-8
@@ -873,7 +882,8 @@ namespace System.Text.Tests
             Assert.Equal("[FFFD]", ErrorCheckingAsciiEncoding.GetString(sink.ToArray()));
             Assert.Equal(-1, transcodingStream.ReadByte()); // should've reached EOF
 
-            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD back out.
+            // Now put some incomplete data into the inner stream, followed by EOF, and ensure we get U+FFFD
+            // back out.
 
             innerStream.SetLength(0); // reset
             innerStream.WriteByte(0xC2); // [ C2 ] must be followed by [ 80..BF ] in UTF-8
@@ -1169,7 +1179,8 @@ namespace System.Text.Tests
 
             sink.SetLength(0); // reset sink
 
-            // Then test WriteAsync(ROM<byte>, CancellationToken), once with a short string and once with a long string
+            // Then test WriteAsync(ROM<byte>, CancellationToken), once with a short string and once with a long
+            // string
 
             string asciiString = GetVeryLongAsciiString(128);
             byte[] asciiBytesAsUtf8 = Encoding.UTF8.GetBytes(asciiString);
@@ -1500,7 +1511,8 @@ namespace System.Text.Tests
             }
         }
 
-        /// <summary>A custom encoding that's used to roundtrip from bytes to bytes through a string.</summary>
+        /// <summary>A custom encoding that's used to roundtrip from bytes to bytes through a
+        // string.</summary>
         private sealed class IdentityEncoding : Encoding
         {
             public override int GetByteCount(char[] chars, int index, int count) => count;

@@ -200,7 +200,8 @@ namespace Tracing.Tests
 
         private static bool Initialize()
         {
-            // Reflect over System.Private.CoreLib and get the EventPipeEventProvider type and EventActivityIdControl method.
+            // Reflect over System.Private.CoreLib and get the EventPipeEventProvider type and
+            // EventActivityIdControl method.
             Assembly SPC = typeof(System.Diagnostics.Tracing.EventSource).Assembly;
             if (SPC == null)
             {

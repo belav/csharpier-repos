@@ -40,22 +40,22 @@ namespace I18N.CJK
         }
 
         /*
-                // Get the bytes that result from encoding a character buffer.
-                public override int GetBytes(char[] chars, int charIndex, int charCount,
-                                 byte[] bytes, int byteIndex)
-                {
-                    if (chars == null)
-                        throw new ArgumentNullException("chars");
-                    if (bytes == null)
-                        throw new ArgumentNullException("bytes");
-                    if (charIndex < 0 || charIndex > chars.Length)
-                        throw new ArgumentOutOfRangeException("charIndex", Strings.GetString("ArgRange_Array"));
-                    if (charCount < 0 || charIndex + charCount > chars.Length)
-                        throw new ArgumentOutOfRangeException("charCount", Strings.GetString("ArgRange_Array"));
-                    if (byteIndex < 0 || byteIndex > bytes.Length)
-                        throw new ArgumentOutOfRangeException("byteIndex", Strings.GetString("ArgRange_Array"));
-                    return 0; // For subclasses to implement
-                }
+        // Get the bytes that result from encoding a character buffer.
+        public override int GetBytes(char[] chars, int charIndex, int charCount,
+        byte[] bytes, int byteIndex)
+        {
+        if (chars == null)
+        throw new ArgumentNullException("chars");
+        if (bytes == null)
+        throw new ArgumentNullException("bytes");
+        if (charIndex < 0 || charIndex > chars.Length)
+        throw new ArgumentOutOfRangeException("charIndex", Strings.GetString("ArgRange_Array"));
+        if (charCount < 0 || charIndex + charCount > chars.Length)
+        throw new ArgumentOutOfRangeException("charCount", Strings.GetString("ArgRange_Array"));
+        if (byteIndex < 0 || byteIndex > bytes.Length)
+        throw new ArgumentOutOfRangeException("byteIndex", Strings.GetString("ArgRange_Array"));
+        return 0; // For subclasses to implement
+        }
         */
 
         // Get the number of characters needed to decode a byte buffer.

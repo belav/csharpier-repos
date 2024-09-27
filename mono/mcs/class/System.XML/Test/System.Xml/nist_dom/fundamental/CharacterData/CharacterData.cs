@@ -24,23 +24,23 @@ namespace nist_dom.fundamental
     {
         public static int i = 2;
 
-        /*
-                public testResults[] RunTests()
-                {
-                    testResults[] tests = new testResults[] {core0001C(), core0002C(), core0003C(),core0004C(),
-                                                                core0005C(), core0006C(), core0007C(), core0008C(),
-                                                                core0009C(), core0010C(), core0011C(), core0012C(),
-                                                                core0013C(), core0014C(), core0015C(),
-                                                                core0016C(), core0017C(), core0018C(), core0019C(),
-                                                                core0020C(), core0021C(), core0022C(), core0023C(),
-                                                                core0024C(), core0025C(), core0026C(), core0027C(),
-                                                                core0028C(), core0029C(), core0030C(), core0031C(),
-                                                                core0032C(), core0033C(), core0034C(), core0035C(),
-                                                                core0036C()};
-          
-                    return tests;
-                }
-        */
+/*
+public testResults[] RunTests()
+{
+testResults[] tests = new testResults[] {core0001C(), core0002C(), core0003C(),core0004C(),
+core0005C(), core0006C(), core0007C(), core0008C(),
+core0009C(), core0010C(), core0011C(), core0012C(),
+core0013C(), core0014C(), core0015C(),
+core0016C(), core0017C(), core0018C(), core0019C(),
+core0020C(), core0021C(), core0022C(), core0023C(),
+core0024C(), core0025C(), core0026C(), core0027C(),
+core0028C(), core0029C(), core0030C(), core0031C(),
+core0032C(), core0033C(), core0034C(), core0035C(),
+core0036C()};
+
+return tests;
+}
+*/
         //------------------------ test case core-0001C ------------------------
         //
         // Testing feature -  The "data" attribute is the character data that

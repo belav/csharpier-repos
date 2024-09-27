@@ -94,8 +94,10 @@ public class ModelExplorer
     /// <remarks>
     /// <para>
     /// The <see cref="Container"/> will most commonly be set as a result of calling
-    /// <see cref="GetExplorerForProperty(string)"/>. In this case, the returned <see cref="ModelExplorer"/> will
-    /// have it's <see cref="Container"/> set to the instance upon which <see cref="GetExplorerForProperty(string)"/>
+    /// <see cref="GetExplorerForProperty(string)"/>. In this case, the returned <see
+    // cref="ModelExplorer"/> will
+    /// have it's <see cref="Container"/> set to the instance upon which <see
+    // cref="GetExplorerForProperty(string)"/>
     /// was called.
     /// </para>
     /// <para>
@@ -234,7 +236,8 @@ public class ModelExplorer
     }
 
     /// <summary>
-    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or <c>null</c> if
+    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or
+    // <c>null</c> if
     /// the property cannot be found.
     /// </summary>
     /// <param name="name">The property name.</param>
@@ -256,14 +259,16 @@ public class ModelExplorer
     }
 
     /// <summary>
-    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or <c>null</c> if
+    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or
+    // <c>null</c> if
     /// the property cannot be found.
     /// </summary>
     /// <param name="name">The property name.</param>
     /// <param name="modelAccessor">An accessor for the model value.</param>
     /// <returns>A <see cref="ModelExplorer"/>, or <c>null</c>.</returns>
     /// <remarks>
-    /// As this creates a model explorer with a specific model accessor function, the result is not cached.
+    /// As this creates a model explorer with a specific model accessor function, the result is not
+    // cached.
     /// </remarks>
     public ModelExplorer GetExplorerForProperty(string name, Func<object, object> modelAccessor)
     {
@@ -281,7 +286,8 @@ public class ModelExplorer
     }
 
     /// <summary>
-    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or <c>null</c> if
+    /// Gets a <see cref="ModelExplorer"/> for the property with given <paramref name="name"/>, or
+    // <c>null</c> if
     /// the property cannot be found.
     /// </summary>
     /// <param name="name">The property name.</param>
@@ -318,7 +324,8 @@ public class ModelExplorer
     /// in the current <see cref="ModelExplorer"/> instance.
     /// </para>
     /// <para>
-    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
+    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see
+    // cref="Container"/>.
     /// </para>
     /// </remarks>
     public ModelExplorer GetExplorerForExpression(Type modelType, object model)
@@ -343,7 +350,8 @@ public class ModelExplorer
     /// in the current <see cref="ModelExplorer"/> instance.
     /// </para>
     /// <para>
-    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
+    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see
+    // cref="Container"/>.
     /// </para>
     /// </remarks>
     public ModelExplorer GetExplorerForExpression(ModelMetadata metadata, object model)
@@ -367,7 +375,8 @@ public class ModelExplorer
     /// in the current <see cref="ModelExplorer"/> instance.
     /// </para>
     /// <para>
-    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
+    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see
+    // cref="Container"/>.
     /// </para>
     /// </remarks>
     public ModelExplorer GetExplorerForExpression(
@@ -395,7 +404,8 @@ public class ModelExplorer
     /// in the current <see cref="ModelExplorer"/> instance.
     /// </para>
     /// <para>
-    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see cref="Container"/>.
+    /// The returned <see cref="ModelExplorer"/> will have the current instance set as its <see
+    // cref="Container"/>.
     /// </para>
     /// </remarks>
     public ModelExplorer GetExplorerForExpression(

@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Represents a relationship where a foreign key composed of properties on the dependent entity type
+///     Represents a relationship where a foreign key composed of properties on the dependent entity
+// type
 ///     references a corresponding primary or alternate key on the principal entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class RuntimeForeignKey : RuntimeAnnotatableBase, IRuntimeForeignKey
 {
@@ -26,10 +28,14 @@ public class RuntimeForeignKey : RuntimeAnnotatableBase, IRuntimeForeignKey
     private Func<IDependentsMap>? _dependentsMapFactory;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public RuntimeForeignKey(
@@ -66,15 +72,19 @@ public class RuntimeForeignKey : RuntimeAnnotatableBase, IRuntimeForeignKey
     public virtual RuntimeKey PrincipalKey { get; }
 
     /// <summary>
-    ///     Gets the dependent entity type. This may be different from the type that <see cref="Properties" />
-    ///     are defined on when the relationship is defined a derived type in an inheritance hierarchy (since the properties
+    ///     Gets the dependent entity type. This may be different from the type that <see
+    // cref="Properties" />
+    ///     are defined on when the relationship is defined a derived type in an inheritance hierarchy
+    // (since the properties
     ///     may be defined on a base type).
     /// </summary>
     public virtual RuntimeEntityType DeclaringEntityType { get; }
 
     /// <summary>
-    ///     Gets the principal entity type that this relationship targets. This may be different from the type that
-    ///     <see cref="PrincipalKey" /> is defined on when the relationship targets a derived type in an inheritance
+    ///     Gets the principal entity type that this relationship targets. This may be different from
+    // the type that
+    ///     <see cref="PrincipalKey" /> is defined on when the relationship targets a derived type in an
+    // inheritance
     ///     hierarchy (since the key is defined on the base type of the hierarchy).
     /// </summary>
     public virtual RuntimeEntityType PrincipalEntityType { get; }
@@ -86,10 +96,14 @@ public class RuntimeForeignKey : RuntimeAnnotatableBase, IRuntimeForeignKey
     private RuntimeNavigation? PrincipalToDependent { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual void AddNavigation(RuntimeNavigation navigation, bool onDependent)
@@ -105,19 +119,27 @@ public class RuntimeForeignKey : RuntimeAnnotatableBase, IRuntimeForeignKey
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual ISet<RuntimeSkipNavigation>? ReferencingSkipNavigations { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual DebugView DebugView =>

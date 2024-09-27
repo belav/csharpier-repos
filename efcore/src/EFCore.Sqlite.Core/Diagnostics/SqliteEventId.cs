@@ -11,12 +11,15 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure the
+///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure
+// the
 ///         behavior of warnings.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see>, and
-///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see>, and
+///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF
+// Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public static class SqliteEventId
@@ -65,7 +68,8 @@ public static class SqliteEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="EntityTypeSchemaEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="EntityTypeSchemaEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId SchemaConfiguredWarning = MakeValidationId(
@@ -80,7 +84,8 @@ public static class SqliteEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="SequenceEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="SequenceEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId SequenceConfiguredWarning = MakeValidationId(
@@ -88,7 +93,8 @@ public static class SqliteEventId
     );
 
     /// <summary>
-    ///     An entity type has composite key which is configured to use generated values. SQLite does not support generated values
+    ///     An entity type has composite key which is configured to use generated values. SQLite does
+    // not support generated values
     ///     on composite keys.
     /// </summary>
     /// <remarks>
@@ -96,7 +102,8 @@ public static class SqliteEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="KeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="KeyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CompositeKeyWithValueGeneration = MakeValidationId(

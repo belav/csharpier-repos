@@ -26,7 +26,8 @@ namespace Microsoft.Extensions.Primitives
         /// <summary>
         /// Initializes a new instance of the <see cref="InplaceStringBuilder"/> class.
         /// </summary>
-        /// <param name="capacity">The suggested starting size of the <see cref="InplaceStringBuilder"/> instance.</param>
+        /// <param name="capacity">The suggested starting size of the <see cref="InplaceStringBuilder"/>
+        // instance.</param>
         public InplaceStringBuilder(int capacity)
             : this()
         {
@@ -39,7 +40,8 @@ namespace Microsoft.Extensions.Primitives
         }
 
         /// <summary>
-        /// Gets the number of characters that the current <see cref="InplaceStringBuilder"/> object can contain.
+        /// Gets the number of characters that the current <see cref="InplaceStringBuilder"/> object can
+        // contain.
         /// </summary>
         public int Capacity
         {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -24,7 +25,8 @@ namespace System.Web.WebPages
         // Expose the model as dynamic
         private dynamic _model;
 
-        // True if this is a 'top level' page (URL addressable), vs a 'satellite' page like a user control or master
+        // True if this is a 'top level' page (URL addressable), vs a 'satellite' page like a user control
+        // or master
         internal bool TopLevelPage { get; set; }
 
         public override HttpContextBase Context
@@ -86,9 +88,11 @@ namespace System.Web.WebPages
 
         internal void ExecutePageHierarchy(IEnumerable<IWebPageRequestExecutor> executors)
         {
-            // Call all the executors until we find one that wants to handle it. This is used to implement features
+            // Call all the executors until we find one that wants to handle it. This is used to implement
+            // features
             // such as AJAX Page methods without having to bake them into the framework.
-            // Note that we only do this for 'top level' pages, as these are request-level executors that should not run for each user control/master
+            // Note that we only do this for 'top level' pages, as these are request-level executors that should
+            // not run for each user control/master
             if (!TopLevelPage || !executors.Any(executor => executor.Execute(this)))
             {
                 // No executor handled the request, so use normal processing

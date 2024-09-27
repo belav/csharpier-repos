@@ -59,7 +59,8 @@ namespace System.Net.Http.QPack
         // +-------------------------------+
         //
         // Note for this method's implementation of above:
-        // - N is constant 0 here, indicating intermediates (proxies) can compress the header when fordwarding.
+        // - N is constant 0 here, indicating intermediates (proxies) can compress the header when
+        // fordwarding.
         // - T is constant 1 here, indicating a static table reference.
         // - H is constant 0 here, as we do not yet perform Huffman coding.
         public static bool EncodeLiteralHeaderFieldWithStaticNameReference(
@@ -114,7 +115,9 @@ namespace System.Net.Http.QPack
         }
 
         /// <summary>
-        /// Encodes just the name part of a Literal Header Field With Static Name Reference. Must call <see cref="EncodeValueString(string, Encoding?, Span{byte}, out int)"/> after to encode the header's value.
+        /// Encodes just the name part of a Literal Header Field With Static Name Reference. Must call <see
+        // cref="EncodeValueString(string, Encoding?, Span{byte}, out int)"/> after to encode the header's
+        // value.
         /// </summary>
         public static byte[] EncodeLiteralHeaderFieldWithStaticNameReferenceToArray(int index)
         {
@@ -159,7 +162,8 @@ namespace System.Net.Http.QPack
         // +-------------------------------+
         //
         // Note for this method's implementation of above:
-        // - N is constant 0 here, indicating intermediates (proxies) can compress the header when fordwarding.
+        // - N is constant 0 here, indicating intermediates (proxies) can compress the header when
+        // fordwarding.
         // - H is constant 0 here, as we do not yet perform Huffman coding.
         public static bool EncodeLiteralHeaderFieldWithoutNameReference(
             string name,
@@ -206,7 +210,8 @@ namespace System.Net.Http.QPack
         }
 
         /// <summary>
-        /// Encodes a Literal Header Field Without Name Reference, building the value by concatenating a collection of strings with separators.
+        /// Encodes a Literal Header Field Without Name Reference, building the value by concatenating a
+        // collection of strings with separators.
         /// </summary>
         public static bool EncodeLiteralHeaderFieldWithoutNameReference(
             string name,
@@ -255,7 +260,9 @@ namespace System.Net.Http.QPack
         }
 
         /// <summary>
-        /// Encodes just the value part of a Literawl Header Field Without Static Name Reference. Must call <see cref="EncodeValueString(string, Encoding?, Span{byte}, out int)"/> after to encode the header's value.
+        /// Encodes just the value part of a Literawl Header Field Without Static Name Reference. Must call
+        // <see cref="EncodeValueString(string, Encoding?, Span{byte}, out int)"/> after to encode the header's
+        // value.
         /// </summary>
         public static byte[] EncodeLiteralHeaderFieldWithoutNameReferenceToArray(string name)
         {
@@ -362,7 +369,8 @@ namespace System.Net.Http.QPack
 
             if (values.Length == 0)
             {
-                // TODO: this will be called with a string array from HttpHeaderCollection. Can we ever get a 0-length array from that? Assert if not.
+                // TODO: this will be called with a string array from HttpHeaderCollection. Can we ever get a
+                // 0-length array from that? Assert if not.
                 return EncodeValueString(string.Empty, valueEncoding: null, buffer, out length);
             }
 
@@ -481,17 +489,17 @@ namespace System.Net.Http.QPack
             return false;
         }
 
-        /*
-         *     0   1   2   3   4   5   6   7
-               +---+---+---+---+---+---+---+---+
-               |   Required Insert Count (8+)  |
-               +---+---------------------------+
-               | S |      Delta Base (7+)      |
-               +---+---------------------------+
-               |      Compressed Headers     ...
-               +-------------------------------+
-         *
-         */
+/*
+*     0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+|   Required Insert Count (8+)  |
++---+---------------------------+
+| S |      Delta Base (7+)      |
++---+---------------------------+
+|      Compressed Headers     ...
++-------------------------------+
+*
+*/
         private static bool EncodeHeaderBlockPrefix(Span<byte> destination, out int bytesWritten)
         {
             int length;

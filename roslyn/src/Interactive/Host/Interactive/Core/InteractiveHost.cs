@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Interactive
     /// Represents a process that hosts an interactive session.
     /// </summary>
     /// <remarks>
-    /// Handles spawning of the host process and communication between the local callers and the remote session.
+    /// Handles spawning of the host process and communication between the local callers and the remote
+    // session.
     /// </remarks>
     internal sealed partial class InteractiveHost : IDisposable
     {
@@ -29,10 +30,14 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         /// <summary>
         /// Use Unicode encoding for STDOUT and STDERR of the InteractiveHost process.
-        /// Ideally, we would use UTF8 but SetConsoleOutputCP Windows API fails with "Invalid Handle" when Console.OutputEncoding is set to UTF8.
-        /// (issue tracked by https://github.com/dotnet/roslyn/issues/47571, https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1253106)
-        /// Unicode is not ideal since the message printed directly to STDOUT/STDERR from native code that do not encode the output are going to be garbled
-        /// (e.g. messages reported by CLR stack overflow and OOM exception handlers: https://github.com/dotnet/runtime/issues/45503).
+        /// Ideally, we would use UTF8 but SetConsoleOutputCP Windows API fails with "Invalid Handle" when
+        // Console.OutputEncoding is set to UTF8.
+        /// (issue tracked by https://github.com/dotnet/roslyn/issues/47571,
+        // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1253106)
+        /// Unicode is not ideal since the message printed directly to STDOUT/STDERR from native code that
+        // do not encode the output are going to be garbled
+        /// (e.g. messages reported by CLR stack overflow and OOM exception handlers:
+        // https://github.com/dotnet/runtime/issues/45503).
         /// </summary>
         internal static readonly Encoding OutputEncoding = Encoding.Unicode;
 
@@ -63,8 +68,10 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// <remarks>
         /// Test only setting.
         /// True to join output writing threads when the host is being disposed.
-        /// We have to join the threads before each test is finished, otherwise xunit won't be able to unload the AppDomain.
-        /// WARNING: Joining the threads might deadlock if <see cref="Dispose()"/> is executing on the UI thread,
+        /// We have to join the threads before each test is finished, otherwise xunit won't be able to
+        // unload the AppDomain.
+        /// WARNING: Joining the threads might deadlock if <see cref="Dispose()"/> is executing on the UI
+        // thread,
         /// since the threads are dispatching to UI thread to write the output to the editor buffer.
         /// </remarks>
         private readonly bool _joinOutputWritingThreadsOnDisposal;
@@ -120,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         // Dispose may be called anytime.
         public void Dispose()
         {
-            // Run this in background to avoid deadlocking with UIThread operations performing with active outputs.
+            // Run this in background to avoid deadlocking with UIThread operations performing with active
+            // outputs.
             _ = Task.Run(() => SetOutputs(TextWriter.Null, TextWriter.Null));
 
             DisposeRemoteService();

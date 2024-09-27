@@ -35,7 +35,7 @@ public class CacheTagHelperTest
         cache
             .Setup(c =>
                 c.CreateEntry(
-                    /*key*/It.IsAny<string>()
+/*key*/It.IsAny<string>()
                 )
             )
             .Returns((object key) => value.Object)
@@ -64,7 +64,7 @@ public class CacheTagHelperTest
         cache.Verify(
             c =>
                 c.CreateEntry(
-                    /*key*/It.IsAny<string>()
+/*key*/It.IsAny<string>()
                 ),
             Times.Never
         );
@@ -1149,8 +1149,10 @@ public class CacheTagHelperTest
         public void Dispose() => DisposeCallback();
     }
 
-    // Simulates the scenario where a call to CacheTagHelper.ProcessAsync appears immediately after a prior one has assigned
-    // a TaskCancellationSource as an entry. We want to ensure that both calls use the results of the TCS as their output.
+    // Simulates the scenario where a call to CacheTagHelper.ProcessAsync appears immediately after a
+    // prior one has assigned
+    // a TaskCancellationSource as an entry. We want to ensure that both calls use the results of the
+    // TCS as their output.
     private class TestMemoryCache : IMemoryCache
     {
         private const int WaitTimeout = 5000;
@@ -1164,7 +1166,8 @@ public class CacheTagHelperTest
         {
             if (Entry != null)
             {
-                // We're being invoked in the inner "CreateEntry" call where the TCS is replaced by the GetChildContentAsync
+                // We're being invoked in the inner "CreateEntry" call where the TCS is replaced by the
+                // GetChildContentAsync
                 // Task. Wait for the other concurrent Task to grab the TCS before we proceed.
                 Assert.True(ManualResetEvent1.Wait(WaitTimeout));
             }

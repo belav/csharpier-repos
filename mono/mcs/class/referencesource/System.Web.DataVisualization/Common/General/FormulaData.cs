@@ -216,7 +216,8 @@ namespace System.Web.UI.DataVisualization.Charting
         TripleExponentialMovingAverage,
 
         /// <summary>
-        /// Typical price is the average value of daily prices, and can be used as a filter for trend indicators.
+        /// Typical price is the average value of daily prices, and can be used as a filter for trend
+        // indicators.
         /// </summary>
         TypicalPrice,
 
@@ -322,8 +323,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="parameters">Formula parameters</param>
-        /// <param name="inputSeries">Comma separated input data series names and optional X and Y values names.</param>
-        /// <param name="outputSeries">Comma separated output data series names and optional X and Y values names.</param>
+        /// <param name="inputSeries">Comma separated input data series names and optional X and Y values
+        // names.</param>
+        /// <param name="outputSeries">Comma separated output data series names and optional X and Y values
+        // names.</param>
         internal void Formula(
             string formulaName,
             string parameters,
@@ -336,7 +339,8 @@ namespace System.Web.UI.DataVisualization.Charting
             Series[] outSeries;
 
             // Commented out as InsertEmptyDataPoints is currently commented out.
-            // This field is not used anywhere else, but we might need it if we uncomment all ---- code parts in this method. (krisztb 4/29/08)
+            // This field is not used anywhere else, but we might need it if we uncomment all ---- code parts in
+            // this method. (krisztb 4/29/08)
             // True if formulas are statistical
             //bool statisticalFormulas = false;
 
@@ -404,7 +408,8 @@ namespace System.Web.UI.DataVisualization.Charting
                     );
 
                 // Commented out as InsertEmptyDataPoints is currently commented out (see next block).
-                // It set the statisticalFormulas field that was used to test whether to insert empty data points. (krisztb 4/29/08)
+                // It set the statisticalFormulas field that was used to test whether to insert empty data points.
+                // (krisztb 4/29/08)
                 //if( outValues != null )
                 //{
                 //    if (moduleName == SR.FormulaNameStatisticalAnalysis)
@@ -483,7 +488,8 @@ namespace System.Web.UI.DataVisualization.Charting
                 Series inputSeries = inSeries[seriesIndex];
                 Series outputSeries = outSeries[seriesIndex];
 
-                //Depending on whether or not the source series has X Values we need to use two different search algorithms
+                //Depending on whether or not the source series has X Values we need to use two different search
+                // algorithms
                 if (_zeroXValues)
                 { //If we have the empty XValues then the source series should have all the AxisLabels
                     // -- set the indexed series labels source
@@ -497,7 +503,8 @@ namespace System.Web.UI.DataVisualization.Charting
                         if (!String.IsNullOrEmpty(inputPoint.AxisLabel))
                         {
                             //If the Axis label is set we need to find the corresponding point by the X value
-                            //Most probably the points are in the same order so lets first try the corresponding point in the output series
+                            //Most probably the points are in the same order so lets first try the corresponding point in the
+                            // output series
                             if (
                                 outIndex < outputSeries.Points.Count
                                 && inputPoint.XValue == outputSeries.Points[outIndex].XValue
@@ -507,7 +514,8 @@ namespace System.Web.UI.DataVisualization.Charting
                             }
                             else
                             {
-                                //The correspong point has a different x value -> lets go through output series and find the value with the same X
+                                //The correspong point has a different x value -> lets go through output series and find the value
+                                // with the same X
                                 outIndex = 0;
                                 foreach (DataPoint outputPoint in outputSeries.Points)
                                 {
@@ -748,7 +756,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// X values from the first series
         /// </summary>
         /// <param name="inputSeries">Array of Data Series</param>
-        /// <param name="valueIndex">Array with indexes which represent value from data point: 0 = X, 1 = Y, 2 = Y2, 3 = Y3</param>
+        /// <param name="valueIndex">Array with indexes which represent value from data point: 0 = X, 1 = Y,
+        // 2 = Y2, 3 = Y3</param>
         /// <param name="output">Jagged Arrays of doubles</param>
         private void GetDoubleArray(Series[] inputSeries, int[] valueIndex, out double[][] output)
         {
@@ -762,7 +771,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// X values from the first series
         /// </summary>
         /// <param name="inputSeries">Array of Data Series</param>
-        /// <param name="valueIndex">Array with indexes which represent value from data point: 0 = X, 1 = Y, 2 = Y2, 3 = Y3</param>
+        /// <param name="valueIndex">Array with indexes which represent value from data point: 0 = X, 1 = Y,
+        // 2 = Y2, 3 = Y3</param>
         /// <param name="output">Jagged Arrays of doubles</param>
         /// <param name="ignoreZeroX">Ignore Zero X values</param>
         private void GetDoubleArray(
@@ -876,8 +886,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Merge, split or move Y values of the series.
         /// </summary>
-        /// <param name="inputSeries">Comma separated list of input data series names and optional X and Y values names.</param>
-        /// <param name="outputSeries">Comma separated list of output data series names and optional X and Y values names.</param>
+        /// <param name="inputSeries">Comma separated list of input data series names and optional X and Y
+        // values names.</param>
+        /// <param name="outputSeries">Comma separated list of output data series names and optional X and Y
+        // values names.</param>
         public void CopySeriesValues(string inputSeries, string outputSeries)
         {
             if (inputSeries == null)
@@ -1035,18 +1047,19 @@ namespace System.Web.UI.DataVisualization.Charting
             }
         }
 
-        /*
-        /// <summary>
-        /// This method will compare a input matrix with empty data
-        /// points and output matrix without empty data points and
-        /// add empty data points to output matrix according to
-        /// input matrix empty data point positions.
-        /// </summary>
-        /// <param name="input">Matrix With input data</param>
-        /// <param name="inputWithoutEmpty">Matrix without empty data points</param>
-        /// <param name="output">New Matrix with inserted data points</param>
-         */
-        //private void InsertEmptyDataPoints( double [][] input, double [][] inputWithoutEmpty, out double [][] output )
+/*
+/// <summary>
+/// This method will compare a input matrix with empty data
+/// points and output matrix without empty data points and
+/// add empty data points to output matrix according to
+/// input matrix empty data point positions.
+/// </summary>
+/// <param name="input">Matrix With input data</param>
+/// <param name="inputWithoutEmpty">Matrix without empty data points</param>
+/// <param name="output">New Matrix with inserted data points</param>
+*/
+        //private void InsertEmptyDataPoints( double [][] input, double [][] inputWithoutEmpty, out double
+        // [][] output )
         //{
 
 
@@ -1075,75 +1088,75 @@ namespace System.Web.UI.DataVisualization.Charting
         //   - AG
         //
 
-        /*
+/*
 
-        // Input matrix can have only empty rows. If one value
-        // is empty all values from a row have to be empty.
+// Input matrix can have only empty rows. If one value
+// is empty all values from a row have to be empty.
 
-        // Find the number of empty rows
-        int NumberOfEmptyRows = 0;
-        foreach( double val in input[1] )
-        {
-            if( Double.IsNaN( val ) )
-            {
-                NumberOfEmptyRows++;
-            }
-        }
+// Find the number of empty rows
+int NumberOfEmptyRows = 0;
+foreach( double val in input[1] )
+{
+if( Double.IsNaN( val ) )
+{
+NumberOfEmptyRows++;
+}
+}
 
-        if( NumberOfEmptyRows == 0 ||
-            inputWithoutEmpty[0].Length > input[0].Length)
-        {
-            output = inputWithoutEmpty;
-            return;
-        }
+if( NumberOfEmptyRows == 0 ||
+inputWithoutEmpty[0].Length > input[0].Length)
+{
+output = inputWithoutEmpty;
+return;
+}
 
-        output = new double[input.Length][];
-        // Series loop
-        for( int seriesIndex = 0; seriesIndex < input.Length; seriesIndex++ )
-        {
-            int inputPointIndex = 0;
-            int emptyPointIndex = 0;
+output = new double[input.Length][];
+// Series loop
+for( int seriesIndex = 0; seriesIndex < input.Length; seriesIndex++ )
+{
+int inputPointIndex = 0;
+int emptyPointIndex = 0;
 
-            // Skip input index if points are not aligned .
-            while( input[0][inputPointIndex] != inputWithoutEmpty[0][0] && inputPointIndex < input[0].Length )
-            {
-                inputPointIndex++;
-            }
+// Skip input index if points are not aligned .
+while( input[0][inputPointIndex] != inputWithoutEmpty[0][0] && inputPointIndex < input[0].Length )
+{
+inputPointIndex++;
+}
 
-            output[seriesIndex] = new double[inputWithoutEmpty[0].Length + NumberOfEmptyRows - inputPointIndex];
+output[seriesIndex] = new double[inputWithoutEmpty[0].Length + NumberOfEmptyRows - inputPointIndex];
 
-            // Data Point loop
-            for( int pointIndex = 0; pointIndex < output[seriesIndex].Length; pointIndex++ )
-            {
-                if( inputPointIndex < input[0].Length &&
-                    inputPointIndex < input[1].Length )
-                {
-                    // If the point Y value is empty (NaN) insert empty (NaN) for all values.
-                    if( double.IsNaN( input[1][inputPointIndex] ) )
-                    {
-                        output[seriesIndex][pointIndex] = input[seriesIndex][inputPointIndex];
-                        emptyPointIndex--;
-                    }
-                    else if( input[0][inputPointIndex] == inputWithoutEmpty[0][emptyPointIndex] )
-                    {
-                        output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
-                    }
-                    else
-                    {
-                        output[0][pointIndex] = inputWithoutEmpty[0][emptyPointIndex];
-                        output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
-                    }
-                }
-                else
-                {
-                    output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
-                }
+// Data Point loop
+for( int pointIndex = 0; pointIndex < output[seriesIndex].Length; pointIndex++ )
+{
+if( inputPointIndex < input[0].Length &&
+inputPointIndex < input[1].Length )
+{
+// If the point Y value is empty (NaN) insert empty (NaN) for all values.
+if( double.IsNaN( input[1][inputPointIndex] ) )
+{
+output[seriesIndex][pointIndex] = input[seriesIndex][inputPointIndex];
+emptyPointIndex--;
+}
+else if( input[0][inputPointIndex] == inputWithoutEmpty[0][emptyPointIndex] )
+{
+output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
+}
+else
+{
+output[0][pointIndex] = inputWithoutEmpty[0][emptyPointIndex];
+output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
+}
+}
+else
+{
+output[seriesIndex][pointIndex] = inputWithoutEmpty[seriesIndex][emptyPointIndex];
+}
 
-                inputPointIndex++;
-                emptyPointIndex++;
-            }
-        }
-        */
+inputPointIndex++;
+emptyPointIndex++;
+}
+}
+*/
         //}
 
 
@@ -1288,7 +1301,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
-        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values names.</param>
+        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values
+        // names.</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void FinancialFormula(FinancialFormula formulaName, string inputSeries)
         {
@@ -1300,8 +1314,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// specified name.
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
-        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values names.</param>
-        /// <param name="outputSeries">Comma separated list of output series names and optional X and Y values names.</param>
+        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values
+        // names.</param>
+        /// <param name="outputSeries">Comma separated list of output series names and optional X and Y
+        // values names.</param>
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void FinancialFormula(
             FinancialFormula formulaName,
@@ -1318,8 +1334,10 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="formulaName">Formula Name</param>
         /// <param name="parameters">Formula parameters</param>
-        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values names.</param>
-        /// <param name="outputSeries">Comma separated list of output series names and optional X and Y values names.</param>
+        /// <param name="inputSeries">Comma separated list of input series names and optional X and Y values
+        // names.</param>
+        /// <param name="outputSeries">Comma separated list of output series names and optional X and Y
+        // values names.</param>
         public void FinancialFormula(
             FinancialFormula formulaName,
             string parameters,

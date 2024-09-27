@@ -590,7 +590,8 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'C' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'C' to 'int'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         var a = /*<bind>*/args[c]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c")
                     .WithArguments("C", "int")

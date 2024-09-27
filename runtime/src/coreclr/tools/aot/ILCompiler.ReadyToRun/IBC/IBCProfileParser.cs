@@ -96,13 +96,15 @@ namespace ILCompiler.IBC
                     {
                         // TODO Compute RunOnce and RunNever from basic block data
                         scenarioMask = scenarioMaskIfMissing;
-                        /*                        Debug.Assert(fullScenarioMask == 1, "Token entry not owned by one scenario");
-                                                // We have to compute the RunOnceMethod and RunNeverMethod flags.
-                                                entry.Flags = result.GetFlags(entry.Flags, section, entry.Token);
-                                                scenarioMask = defaultScenarioMask;*/
+/*                        Debug.Assert(fullScenarioMask == 1, "Token entry not owned by one
+scenario");
+// We have to compute the RunOnceMethod and RunNeverMethod flags.
+entry.Flags = result.GetFlags(entry.Flags, section, entry.Token);
+scenarioMask = defaultScenarioMask;*/
                     }
 
-                    //                    Debug.Assert(((~fullScenarioMask & scenarioMask) == 0), "Illegal scenarios mask");
+                    //                    Debug.Assert(((~fullScenarioMask & scenarioMask) == 0), "Illegal scenarios
+                    // mask");
 
                     MethodDesc associatedMethod = null;
 
@@ -276,7 +278,8 @@ namespace ILCompiler.IBC
                                     // In all other cases, ZapSig::GetSignatureForTypeHandle writes the owning type signature
                                     // in a "standard" form which always starts with bytes that match the following grammar:
                                     //
-                                    //      [ELEMENT_TYPE_MODULE_ZAPSIG {Index}] [ELEMENT_TYPE_GENERICINST] ELEMENT_TYPE_(CLASS|VALUETYPE) {Token}
+                                    //      [ELEMENT_TYPE_MODULE_ZAPSIG {Index}] [ELEMENT_TYPE_GENERICINST]
+                                    // ELEMENT_TYPE_(CLASS|VALUETYPE) {Token}
                                     //
                                     // IBCMerge only supports the standard form.  Specifically, if the flattened form is
                                     // ever processed, updateParamSig and remapParamSig are unable to reliably determine
@@ -594,7 +597,8 @@ namespace ILCompiler.IBC
             }
         }
 
-        // Load type from IBC ZapSig. Returns null for cases where the type is legally defined, but is not used in R2R image generation
+        // Load type from IBC ZapSig. Returns null for cases where the type is legally defined, but is not
+        // used in R2R image generation
         private TypeDesc GetSigTypeFromIBCZapSig(
             IBCModule ibcModule,
             EcmaModule ecmaModule,
@@ -647,7 +651,8 @@ namespace ILCompiler.IBC
                         return null;
                     return context.CanonType;
                 case CorElementType.ELEMENT_TYPE_MODULE_ZAPSIG:
-                    // If null, then the remote reference is not found. GetSigTypeFromIBCZapSig will search all locations to try and resolve the type
+                    // If null, then the remote reference is not found. GetSigTypeFromIBCZapSig will search all
+                    // locations to try and resolve the type
                     EcmaModule remoteModule = ibcModule.GetModuleFromIndex(
                         sig.ReadCompressedInteger()
                     );

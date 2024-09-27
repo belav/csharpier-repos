@@ -88,7 +88,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -107,7 +108,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -124,7 +126,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -141,7 +144,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -162,7 +166,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f, g };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -183,7 +188,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f, g };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -203,7 +209,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );
@@ -223,7 +230,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var extensions = new List<Lazy<Extension, OrderableMetadata>>() { a, b, c, d, e, f };
 
-            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is detected.
+            // ExtensionOrderer.TestAccessor.CheckForCycles() will throw ArgumentException when cycle is
+            // detected.
             Assert.Throws<ArgumentException>(
                 () => ExtensionOrderer.TestAccessor.CheckForCycles(extensions)
             );

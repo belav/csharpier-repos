@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * This is a potential security exploit. Variance allows a sealed type to be cast to/from another sealed type that is neither it's base class or derived class (which to the JIT makes it look like interfaces or other unsealed types).
- */
+* This is a potential security exploit. Variance allows a sealed type to be cast to/from another
+sealed type that is neither it's base class or derived class (which to the JIT makes it look like
+interfaces or other unsealed types).
+*/
 
 using System;
 using Xunit;

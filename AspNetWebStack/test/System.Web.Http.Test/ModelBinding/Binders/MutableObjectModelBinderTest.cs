@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -468,7 +469,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 new ModelValidationNode(propertyMetadata, "theModel.Name")
             );
 
-            // Attempt to set non-Nullable property to null.  HttpBindRequiredAttribute should not be relevant in this
+            // Attempt to set non-Nullable property to null.  HttpBindRequiredAttribute should not be relevant
+            // in this
             // case because the binding exists.
             propertyMetadata = dto.PropertyMetadata.Single(o => o.PropertyName == "Age");
             dto.Results[propertyMetadata] = new ComplexModelDtoResult(

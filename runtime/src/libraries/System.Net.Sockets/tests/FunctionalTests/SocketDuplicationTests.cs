@@ -336,7 +336,8 @@ namespace System.Net.Sockets.Tests
             Assert.Equal("socketInformation", ex.ParamName);
         }
 
-        // A smaller subset of the tests is being executed against the different Send/Receive implementations of Socket
+        // A smaller subset of the tests is being executed against the different Send/Receive
+        // implementations of Socket
         // to make sure async IO works as expected in all of those cases.
         public abstract class PolymorphicTests<T>
             where T : SocketHelperBase, new()

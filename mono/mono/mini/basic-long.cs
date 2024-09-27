@@ -2,26 +2,26 @@ using System;
 using System.Reflection;
 
 /*
- * Regression tests for the mono JIT.
- *
- * Each test needs to be of the form:
- *
- * public static int test_<result>_<name> ();
- *
- * where <result> is an integer (the value that needs to be returned by
- * the method to make it pass.
- * <name> is a user-displayed name used to identify the test.
- *
- * The tests can be driven in two ways:
- * *) running the program directly: Main() uses reflection to find and invoke
- * 	the test methods (this is useful mostly to check that the tests are correct)
- * *) with the --regression switch of the jit (this is the preferred way since
- * 	all the tests will be run with optimizations on and off)
- *
- * The reflection logic could be moved to a .dll since we need at least another
- * regression test file written in IL code to have better control on how
- * the IL code looks.
- */
+* Regression tests for the mono JIT.
+*
+* Each test needs to be of the form:
+*
+* public static int test_<result>_<name> ();
+*
+* where <result> is an integer (the value that needs to be returned by
+* the method to make it pass.
+* <name> is a user-displayed name used to identify the test.
+*
+* The tests can be driven in two ways:
+* *) running the program directly: Main() uses reflection to find and invoke
+* 	the test methods (this is useful mostly to check that the tests are correct)
+* *) with the --regression switch of the jit (this is the preferred way since
+* 	all the tests will be run with optimizations on and off)
+*
+* The reflection logic could be moved to a .dll since we need at least another
+* regression test file written in IL code to have better control on how
+* the IL code looks.
+*/
 
 #if __MOBILE__
 class LongTests
@@ -370,21 +370,21 @@ class Tests
 
     /*
     public static int test_0_conv_from_r8 () {
-        double b = 2.0;
-        long a = (long)b;
-
-        if (a != 2)
-            return 1;
-        return 0;
+    double b = 2.0;
+    long a = (long)b;
+    
+    if (a != 2)
+    return 1;
+    return 0;
     }
-
+    
     public static int test_0_conv_from_r4 () {
-        float b = 2.0F;
-        long a = (long)b;
-
-        if (a != 2)
-            return 1;
-        return 0;
+    float b = 2.0F;
+    long a = (long)b;
+    
+    if (a != 2)
+    return 1;
+    return 0;
     }
     */
 

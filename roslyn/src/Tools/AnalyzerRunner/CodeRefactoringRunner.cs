@@ -208,7 +208,8 @@ namespace AnalyzerRunner
         {
             if (options.IncrementalAnalyzerNames.Any())
             {
-                // AnalyzerRunner is running for IIncrementalAnalyzer testing. DiagnosticAnalyzer testing is disabled
+                // AnalyzerRunner is running for IIncrementalAnalyzer testing. DiagnosticAnalyzer testing is
+                // disabled
                 // unless /all or /a was used.
                 if (!options.UseAll && options.AnalyzerNames.IsEmpty)
                 {

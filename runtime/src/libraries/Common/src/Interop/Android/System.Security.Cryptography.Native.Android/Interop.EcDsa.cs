@@ -50,12 +50,12 @@ internal static partial class Interop
             return ret;
         }
 
-        /*-
-         * returns
-         *      1: correct signature
-         *      0: incorrect signature
-         *     -1: error
-         */
+/*-
+* returns
+*      1: correct signature
+*      0: incorrect signature
+*     -1: error
+*/
         [LibraryImport(
             Libraries.AndroidCryptoNative,
             EntryPoint = "AndroidCryptoNative_EcDsaVerify"

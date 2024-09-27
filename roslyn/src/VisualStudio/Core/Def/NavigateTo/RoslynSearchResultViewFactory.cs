@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.NavigateTo;
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>
-    /// Implementation of the <see cref="ISearchResultViewFactory"/>.  Responsible for actually producing both the
+    /// Implementation of the <see cref="ISearchResultViewFactory"/>.  Responsible for actually
+    // producing both the
     /// item presented in the search results list, and the async preview for that item.
     /// </summary>
     private sealed class RoslynSearchResultViewFactory : ISearchResultViewFactory
@@ -67,7 +68,8 @@ internal sealed partial class RoslynSearchItemsSourceProvider
             if (result is not RoslynCodeSearchResult roslynResult)
                 return null;
 
-            // Try to map from the document to navigate to, to the project-guid and URI for that document.  If we
+            // Try to map from the document to navigate to, to the project-guid and URI for that document.  If
+            // we
             // fail, don't show any preview for this item.
 
             var document = roslynResult.SearchResult.NavigableItem.Document;

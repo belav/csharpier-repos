@@ -1,5 +1,6 @@
 //
-// LinkedResourceCollectionTest.cs - NUnit Test Cases for System.Net.MailAddress.LinkedResourceCollection
+// LinkedResourceCollectionTest.cs - NUnit Test Cases for
+// System.Net.MailAddress.LinkedResourceCollection
 //
 // Authors:
 //   John Luke (john.luke@gmail.com)

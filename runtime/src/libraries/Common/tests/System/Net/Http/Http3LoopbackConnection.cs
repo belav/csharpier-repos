@@ -45,7 +45,8 @@ namespace System.Net.Test.Common
         private Http3LoopbackStream _currentStream;
 
         // We can't retrieve the stream ID after the stream is disposed, so store it separately
-        // Initialize it to -4 so that the firstInvalidStreamId calculation will work even if we never process a request
+        // Initialize it to -4 so that the firstInvalidStreamId calculation will work even if we never
+        // process a request
         private long _currentStreamId = -4;
 
         private Http3LoopbackStream _inboundControlStream; // Inbound control stream from client
@@ -66,7 +67,8 @@ namespace System.Net.Test.Common
 
         public override async ValueTask DisposeAsync()
         {
-            // Close any remaining request streams (but NOT control streams, as these should not be closed while the connection is open)
+            // Close any remaining request streams (but NOT control streams, as these should not be closed while
+            // the connection is open)
             foreach (Http3LoopbackStream stream in _openStreams.Values)
             {
                 await stream.DisposeAsync().ConfigureAwait(false);
@@ -78,7 +80,8 @@ namespace System.Net.Test.Common
             }
 
             // Dispose the connection
-            // If we already waited for graceful shutdown from the client, then the connection is already closed and this will simply release the handle.
+            // If we already waited for graceful shutdown from the client, then the connection is already closed
+            // and this will simply release the handle.
             // If not, then this will silently abort the connection.
             await _connection.DisposeAsync();
 
@@ -113,7 +116,8 @@ namespace System.Net.Test.Common
         {
             Debug.Assert(stream.CanRead && stream.CanWrite, "Stream must be a request stream.");
 
-            // TODO: QUIC streams can have IDs larger than int.MaxValue; update all our tests to use long rather than int.
+            // TODO: QUIC streams can have IDs larger than int.MaxValue; update all our tests to use long rather
+            // than int.
             return checked((int)stream.Id + 1);
         }
 
@@ -280,7 +284,8 @@ namespace System.Net.Test.Common
 
             // We are about to close the connection, after we send the response.
             // So, send a GOAWAY frame now so the client won't inadvertantly try to reuse the connection.
-            // Note that in HTTP3 (unlike HTTP2) there is no strict ordering between the GOAWAY and the response below;
+            // Note that in HTTP3 (unlike HTTP2) there is no strict ordering between the GOAWAY and the response
+            // below;
             // so the client may race in processing them and we need to handle this.
             await _outboundControlStream.SendGoAwayFrameAsync(stream.StreamId + 4);
 
@@ -305,7 +310,8 @@ namespace System.Net.Test.Common
                     && abortException.ApplicationErrorCode == H3_NO_ERROR
                 )
             {
-                // Client must have closed the connection already because the HttpClientHandler instance was disposed.
+                // Client must have closed the connection already because the HttpClientHandler instance was
+                // disposed.
                 // So nothing to do.
                 return;
             }
@@ -324,7 +330,8 @@ namespace System.Net.Test.Common
             await WaitForClientDisconnectAsync();
         }
 
-        // Wait for the client to close the connection, e.g. after we send a GOAWAY, or after the HttpClient is disposed.
+        // Wait for the client to close the connection, e.g. after we send a GOAWAY, or after the HttpClient
+        // is disposed.
         public async Task WaitForClientDisconnectAsync(bool refuseNewRequests = true)
         {
             while (true)
@@ -357,7 +364,8 @@ namespace System.Net.Test.Common
             }
 
             // The client's control stream should throw QuicConnectionAbortedException, indicating that it was
-            // aborted because the connection was closed (and was not explicitly closed or aborted prior to the connection being closed)
+            // aborted because the connection was closed (and was not explicitly closed or aborted prior to the
+            // connection being closed)
             QuicException ex = await Assert.ThrowsAsync<QuicException>(
                 async () => await _inboundControlStream.ReadFrameAsync()
             );

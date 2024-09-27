@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Collections;
@@ -326,7 +326,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///      IComparer object used for sorting CultureInfos
-        ///      WARNING:  If you change where null is positioned, then you must fix CultureConverter.GetStandardValues!
+        ///      WARNING:  If you change where null is positioned, then you must fix
+        // CultureConverter.GetStandardValues!
         /// </devdoc>
         private class CultureComparer : IComparer
         {
@@ -371,8 +372,10 @@ namespace System.ComponentModel
 
         private static class CultureInfoMapper
         {
-            ///  Dictionary of CultureInfo.DisplayName, CultureInfo.Name for cultures that have changed DisplayName over releases.
-            ///  This is to workaround an issue with CultureInfoConverter that serializes DisplayName (fixing it would introduce breaking changes).
+            ///  Dictionary of CultureInfo.DisplayName, CultureInfo.Name for cultures that have changed
+            // DisplayName over releases.
+            ///  This is to workaround an issue with CultureInfoConverter that serializes DisplayName (fixing it
+            // would introduce breaking changes).
             private static volatile System.Collections.Generic.Dictionary<
                 string,
                 string

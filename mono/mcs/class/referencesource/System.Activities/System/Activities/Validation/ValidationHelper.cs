@@ -106,7 +106,8 @@ namespace System.Activities.Validation
                         );
                     }
                 }
-                //3. If only one overload group was configured, ensure none of the disjoint/overlapping groups have any
+                //3. If only one overload group was configured, ensure none of the disjoint/overlapping groups have
+                // any
                 // required or optional activity arguments set.
                 else if (configuredCount == 1)
                 {
@@ -275,7 +276,8 @@ namespace System.Activities.Validation
             );
         }
 
-        // This method checks if any of the overload groups are equivalent and/or are a subset/superset of another
+        // This method checks if any of the overload groups are equivalent and/or are a subset/superset of
+        // another
         // overload group.  Returns true if there are not any errors.
         static bool ValidateOverloadGroupDefinitions(
             Activity activity,

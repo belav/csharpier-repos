@@ -80,7 +80,8 @@ namespace ILCompiler
     }
 
     /// <summary>
-    /// Represents a non-leaf multifile compilation group where types contained in the group are always fully expanded.
+    /// Represents a non-leaf multifile compilation group where types contained in the group are always
+    // fully expanded.
     /// </summary>
     public class MultiFileSharedCompilationModuleGroup : MultiFileCompilationModuleGroup
     {

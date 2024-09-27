@@ -177,7 +177,8 @@ namespace System.Text.Json
         ///   </para>
         /// </remarks>
         /// <param name="utf8PropertyName">
-        ///   The UTF-8 (with no Byte-Order-Mark (BOM)) representation of the name of the property to return.
+        ///   The UTF-8 (with no Byte-Order-Mark (BOM)) representation of the name of the property to
+        // return.
         /// </param>
         /// <returns>
         ///   A <see cref="JsonElement"/> representing the value of the requested property.
@@ -277,7 +278,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        ///   Looks for a property named <paramref name="utf8PropertyName"/> in the current object, returning
+        ///   Looks for a property named <paramref name="utf8PropertyName"/> in the current object,
+        // returning
         ///   whether or not such a property existed. When the property exists <paramref name="value"/>
         ///   is assigned to the value of that property.
         /// </summary>
@@ -292,7 +294,8 @@ namespace System.Text.Json
         ///   </para>
         /// </remarks>
         /// <param name="utf8PropertyName">
-        ///   The UTF-8 (with no Byte-Order-Mark (BOM)) representation of the name of the property to return.
+        ///   The UTF-8 (with no Byte-Order-Mark (BOM)) representation of the name of the property to
+        // return.
         /// </param>
         /// <param name="value">Receives the value of the located property.</param>
         /// <returns>
@@ -354,7 +357,8 @@ namespace System.Text.Json
         /// </remarks>
         /// <returns>The value of the element as a <see cref="string"/>.</returns>
         /// <exception cref="InvalidOperationException">
-        ///   This value's <see cref="ValueKind"/> is neither <see cref="JsonValueKind.String"/> nor <see cref="JsonValueKind.Null"/>.
+        ///   This value's <see cref="ValueKind"/> is neither <see cref="JsonValueKind.String"/> nor <see
+        // cref="JsonValueKind.Null"/>.
         /// </exception>
         /// <exception cref="ObjectDisposedException">
         ///   The parent <see cref="JsonDocument"/> has been disposed.
@@ -372,10 +376,12 @@ namespace System.Text.Json
         /// </summary>
         /// <param name="value">Receives the value.</param>
         /// <remarks>
-        ///  This method does not create a byte[] representation of values other than base 64 encoded JSON strings.
+        ///  This method does not create a byte[] representation of values other than base 64 encoded JSON
+        // strings.
         /// </remarks>
         /// <returns>
-        ///   <see langword="true"/> if the entire token value is encoded as valid Base64 text and can be successfully decoded to bytes.
+        ///   <see langword="true"/> if the entire token value is encoded as valid Base64 text and can be
+        // successfully decoded to bytes.
         ///   <see langword="false"/> otherwise.
         /// </returns>
         /// <exception cref="InvalidOperationException">
@@ -395,7 +401,8 @@ namespace System.Text.Json
         ///   Gets the value of the element as bytes.
         /// </summary>
         /// <remarks>
-        ///   This method does not create a byte[] representation of values other than Base64 encoded JSON strings.
+        ///   This method does not create a byte[] representation of values other than Base64 encoded JSON
+        // strings.
         /// </remarks>
         /// <returns>The value decode to bytes.</returns>
         /// <exception cref="InvalidOperationException">
@@ -1205,7 +1212,8 @@ namespace System.Text.Json
         ///   This value's <see cref="ValueKind"/> is not <see cref="JsonValueKind.String"/>.
         /// </exception>
         /// <remarks>
-        ///   This method is functionally equal to doing an ordinal comparison of <paramref name="text" /> and
+        ///   This method is functionally equal to doing an ordinal comparison of <paramref name="text" />
+        // and
         ///   the result of calling <see cref="GetString" />, but avoids creating the string instance.
         /// </remarks>
         public bool ValueEquals(string? text)
@@ -1221,7 +1229,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        ///   Compares the text represented by <paramref name="utf8Text" /> to the string value of this element.
+        ///   Compares the text represented by <paramref name="utf8Text" /> to the string value of this
+        // element.
         /// </summary>
         /// <param name="utf8Text">The UTF-8 encoded text to compare against.</param>
         /// <returns>
@@ -1232,8 +1241,10 @@ namespace System.Text.Json
         ///   This value's <see cref="ValueKind"/> is not <see cref="JsonValueKind.String"/>.
         /// </exception>
         /// <remarks>
-        ///   This method is functionally equal to doing an ordinal comparison of the string produced by UTF-8 decoding
-        ///   <paramref name="utf8Text" /> with the result of calling <see cref="GetString" />, but avoids creating the
+        ///   This method is functionally equal to doing an ordinal comparison of the string produced by
+        // UTF-8 decoding
+        ///   <paramref name="utf8Text" /> with the result of calling <see cref="GetString" />, but avoids
+        // creating the
         ///   string instances.
         /// </remarks>
         public bool ValueEquals(ReadOnlySpan<byte> utf8Text)
@@ -1261,7 +1272,8 @@ namespace System.Text.Json
         ///   This value's <see cref="ValueKind"/> is not <see cref="JsonValueKind.String"/>.
         /// </exception>
         /// <remarks>
-        ///   This method is functionally equal to doing an ordinal comparison of <paramref name="text" /> and
+        ///   This method is functionally equal to doing an ordinal comparison of <paramref name="text" />
+        // and
         ///   the result of calling <see cref="GetString" />, but avoids creating the string instance.
         /// </remarks>
         public bool ValueEquals(ReadOnlySpan<char> text)
@@ -1354,7 +1366,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        ///   Get an enumerator to enumerate the properties in the JSON object represented by this JsonElement.
+        ///   Get an enumerator to enumerate the properties in the JSON object represented by this
+        // JsonElement.
         /// </summary>
         /// <returns>
         ///   An enumerator to enumerate the properties in the JSON object represented by this JsonElement.

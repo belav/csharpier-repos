@@ -50,8 +50,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A collection of the local variables that are declared within the region. Note that the region must be
-        /// bounded by a method's body or a field's initializer, so method parameter symbols are never included
+        /// A collection of the local variables that are declared within the region. Note that the region
+        // must be
+        /// bounded by a method's body or a field's initializer, so method parameter symbols are never
+        // included
         /// in the result, but lambda parameters might appear in the result.
         /// </summary>
         public override ImmutableArray<ISymbol> VariablesDeclared
@@ -102,7 +104,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A collection of the local variables for which a value assigned outside the region may be used inside the region.
+        /// A collection of the local variables for which a value assigned outside the region may be used
+        // inside the region.
         /// </summary>
         public override ImmutableArray<ISymbol> DataFlowsIn
         {
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A collection of the local variables for which a value assigned inside the region may be used outside the region.
+        /// A collection of the local variables for which a value assigned inside the region may be used
+        // outside the region.
         /// Note that every reachable assignment to a ref or out variable will be included in the results.
         /// </summary>
         public override ImmutableArray<ISymbol> DataFlowsOut
@@ -381,7 +385,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A collection of the non-constant local variables and parameters that have been referenced in anonymous functions
+        /// A collection of the non-constant local variables and parameters that have been referenced in
+        // anonymous functions
         /// and therefore must be moved to a field of a frame class.
         /// </summary>
         public override ImmutableArray<ISymbol> Captured
@@ -424,7 +429,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A collection of the non-constant local variables and parameters that have had their address (or the address of one
+        /// A collection of the non-constant local variables and parameters that have had their address (or
+        // the address of one
         /// of their fields) taken using the '&amp;' operator.
         /// </summary>
         /// <remarks>
@@ -481,7 +487,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Returns true if and only if analysis was successful.  Analysis can fail if the region does not properly span a single expression,
+        /// Returns true if and only if analysis was successful.  Analysis can fail if the region does not
+        // properly span a single expression,
         /// a single statement, or a contiguous series of statements within the enclosing block.
         /// </summary>
         public sealed override bool Succeeded

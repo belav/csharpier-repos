@@ -4,10 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 /*
- * ProfileAuthenticationOption
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* ProfileAuthenticationOption
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 namespace System.Web.Profile
 {
     public enum ProfileAuthenticationOption

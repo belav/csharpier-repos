@@ -63,7 +63,8 @@ namespace System.Reflection
 
         // m_signature stores the ToString() representation of the member which is sometimes ambiguous.
         // Mulitple overloads of the same methods or properties can identical ToString().
-        // m_signature2 stores the SerializationToString() representation which should be unique for each member.
+        // m_signature2 stores the SerializationToString() representation which should be unique for each
+        // member.
         // It is only written and used by post 4.0 CLR versions.
         private String m_signature;
         private String m_signature2;
@@ -303,7 +304,8 @@ namespace System.Reflection
                                 }
                             }
 
-                            // Handle generic methods specially since the signature match above probably won't work (the candidate
+                            // Handle generic methods specially since the signature match above probably won't work (the
+                            // candidate
                             // method info hasn't been instantiated). If our target method is generic as well we can skip this.
                             if (genericArguments != null && methods[i].IsGenericMethod)
                             {

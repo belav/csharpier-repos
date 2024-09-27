@@ -112,7 +112,8 @@ namespace System.Data.Common.EntitySql
             }
 
             //
-            // Find a candidate overload with the best total rank, remember the candidate and its composite rank.
+            // Find a candidate overload with the best total rank, remember the candidate and its composite
+            // rank.
             //
             TFunctionMetadata bestCandidate = null;
             isAmbiguous = false;
@@ -173,7 +174,8 @@ namespace System.Data.Common.EntitySql
                 Debug.Assert(bestCandidateRank != null);
 
                 //
-                // Search collection of composite ranks to see if there is an overload that would render the best candidate ambiguous
+                // Search collection of composite ranks to see if there is an overload that would render the best
+                // candidate ambiguous
                 //
                 isAmbiguous = ranks.Any(rank =>
                 {
@@ -184,7 +186,8 @@ namespace System.Data.Common.EntitySql
 
                     if (!Object.ReferenceEquals(bestCandidateRank, rank)) // do not compare best cadnidate against itself
                     {
-                        // All individual ranks of the best candidate must equal or better than the ranks of all other candidates,
+                        // All individual ranks of the best candidate must equal or better than the ranks of all other
+                        // candidates,
                         // otherwise we consider it ambigous, even though it has an unambigously best total rank.
                         for (int i = 0; i < rank.Length; ++i)
                         {
@@ -203,7 +206,8 @@ namespace System.Data.Common.EntitySql
         }
 
         /// <summary>
-        /// Check promotability, returns true if argument list is promotable to the overload and overload was successfully ranked, otherwise false.
+        /// Check promotability, returns true if argument list is promotable to the overload and overload
+        // was successfully ranked, otherwise false.
         /// Ranks the overload parameter types against the argument list.
         /// </summary>
         /// <param name="argumentList">list of argument types</param>
@@ -212,7 +216,8 @@ namespace System.Data.Common.EntitySql
         /// <param name="getParameterTypeUsage">TypeUsage getter for the overload parameters</param>
         /// <param name="getParameterMode">ParameterMode getter for the overload parameters</param>
         /// <param name="totalRank">returns total promotion rank of the overload, 0 if no arguments</param>
-        /// <param name="parameterRanks">returns individual promotion ranks of the overload parameters, empty array if no arguments</param>
+        /// <param name="parameterRanks">returns individual promotion ranks of the overload parameters,
+        // empty array if no arguments</param>
         private static bool TryRankFunctionParameters<TFunctionParameterMetadata>(
             IList<TypeUsage> argumentList,
             IList<TypeUsage> flatArgumentList,
@@ -262,7 +267,8 @@ namespace System.Data.Common.EntitySql
                     {
                         //
                         // Even though it is the job of metadata to ensure that the provider manifest is consistent.
-                        // Ensure that if a function is marked as aggregate, then the argument type must be of collection{GivenType}.
+                        // Ensure that if a function is marked as aggregate, then the argument type must be of
+                        // collection{GivenType}.
                         //
                         throw EntityUtil.EntitySqlError(
                             Strings.InvalidArgumentTypeForAggregateFunction
@@ -312,7 +318,8 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// Ranks the <paramref name="fromType"/> -> <paramref name="toType"/> promotion.
         /// Range of values: 0 to negative infinity, with 0 as the best rank (promotion to self).
-        /// <paramref name="fromType"/> must be promotable to <paramref name="toType"/>, otherwise internal error is thrown.
+        /// <paramref name="fromType"/> must be promotable to <paramref name="toType"/>, otherwise internal
+        // error is thrown.
         /// </summary>
         private static int GetPromotionRank(
             TypeUsage fromType,

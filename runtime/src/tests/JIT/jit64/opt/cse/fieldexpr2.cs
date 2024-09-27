@@ -4,14 +4,37 @@
 
 using Xunit;
 
-//((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
-//permutations for  ((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
-//((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
-//(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
-//(((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))+((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))))
-//((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))
-//(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
-//((s.e+((s.a+(s.b*s.c))-(s.c*s.d)))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
+//
+//
+// //((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
+//permutations for
+//
+//
+// ((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
+
+//
+//
+// //((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
+
+//
+//
+// //(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
+
+//
+//
+// //(((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))+((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))))
+
+//
+//
+// //((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))
+
+//
+//
+// //(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
+
+//
+//
+// //((s.e+((s.a+(s.b*s.c))-(s.c*s.d)))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
 //((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))
 //(s.e*((s.a+(s.b*s.c))-(s.c*s.d)))
 //(((s.a+(s.b*s.c))-(s.c*s.d))*s.e)
@@ -85,8 +108,14 @@ using Xunit;
 //((s.a+(s.b*s.c))-(s.c*s.d))
 //(((s.a+(s.b*s.c))-(s.c*s.d))+s.e)
 //(s.e+((s.a+(s.b*s.c))-(s.c*s.d)))
-//(s.e+(((s.a+(s.b*s.c))-(s.c*s.d))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))))
-//(((s.a+(s.b*s.c))-(s.c*s.d))+(s.e+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))))
+
+//
+//
+// //(s.e+(((s.a+(s.b*s.c))-(s.c*s.d))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))))
+
+//
+//
+// //(((s.a+(s.b*s.c))-(s.c*s.d))+(s.e+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))))
 //(((s.a+(s.b*s.c))-(s.c*s.d))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
 //(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+((s.a+(s.b*s.c))-(s.c*s.d)))
 //((s.a+(s.b*s.c))-(s.c*s.d))
@@ -212,8 +241,14 @@ using Xunit;
 //((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))
 //(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+s.e)
 //(s.e+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
-//((s.e+((s.a+(s.b*s.c))-(s.c*s.d)))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
-//(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
+
+//
+//
+// //((s.e+((s.a+(s.b*s.c))-(s.c*s.d)))+((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h))))
+
+//
+//
+// //(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
 //(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))
 //(((s.f+(s.e*s.f))-(s.g*s.h))+s.g)
 //s.g
@@ -239,8 +274,14 @@ using Xunit;
 //((s.f+(s.e*s.f))-(s.g*s.h))
 //(((s.f+(s.e*s.f))-(s.g*s.h))+s.g)
 //(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))
-//(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
-//((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))
+
+//
+//
+// //(((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))
+
+//
+//
+// //((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))
 //((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))
 //((((s.a+s.b)+s.g)-((s.c+s.b)*s.k))*(s.a+((s.h+(s.f+s.g))-(s.p*s.q))))
 //(s.a+((s.h+(s.f+s.g))-(s.p*s.q)))
@@ -323,8 +364,14 @@ using Xunit;
 //(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))
 //((((s.a+s.b)+s.g)-((s.c+s.b)*s.k))*(s.a+((s.h+(s.f+s.g))-(s.p*s.q))))
 //((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))
-//(((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))+((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))))
-//(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
+
+//
+//
+// //(((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k)))+((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h)))))
+
+//
+//
+// //(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
 //(((s.b*s.b)+s.g)-((s.c+s.b)*s.k))
 //((s.b*s.b)+s.g)
 //(s.g+(s.b*s.b))
@@ -350,8 +397,14 @@ using Xunit;
 //((s.c+s.b)*s.k)
 //((s.b*s.b)+s.g)
 //(((s.b*s.b)+s.g)-((s.c+s.b)*s.k))
-//(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
-//((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
+
+//
+//
+// //(((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))
+
+//
+//
+// //((((((s.e*((s.a+(s.b*s.c))-(s.c*s.d)))-((s.f+(s.e*s.f))-(s.g*s.h)))+(s.e+((s.a+(s.b*s.c))-(s.c*s.d))))-(s.g+((s.f+(s.e*s.f))-(s.g*s.h))))+((s.a+((s.h+(s.f+s.g))-(s.p*s.q)))*(((s.a+s.b)+s.g)-((s.c+s.b)*s.k))))-(((s.b*s.b)+s.g)-((s.c+s.b)*s.k)))
 namespace CseTest
 {
     using System;

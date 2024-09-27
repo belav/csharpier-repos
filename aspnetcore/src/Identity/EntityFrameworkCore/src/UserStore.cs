@@ -45,7 +45,8 @@ public class UserStore<TUser> : UserStore<TUser, IdentityRole, DbContext, string
 /// </summary>
 /// <typeparam name="TUser">The type representing a user.</typeparam>
 /// <typeparam name="TRole">The type representing a role.</typeparam>
-/// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
+/// <typeparam name="TContext">The type of the data context class used to access the
+// store.</typeparam>
 public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContext, string>
     where TUser : IdentityUser<string>
     where TRole : IdentityRole<string>
@@ -65,7 +66,8 @@ public class UserStore<TUser, TRole, TContext> : UserStore<TUser, TRole, TContex
 /// </summary>
 /// <typeparam name="TUser">The type representing a user.</typeparam>
 /// <typeparam name="TRole">The type representing a role.</typeparam>
-/// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
+/// <typeparam name="TContext">The type of the data context class used to access the
+// store.</typeparam>
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
 public class UserStore<TUser, TRole, TContext, TKey>
     : UserStore<
@@ -98,7 +100,8 @@ public class UserStore<TUser, TRole, TContext, TKey>
 /// </summary>
 /// <typeparam name="TUser">The type representing a user.</typeparam>
 /// <typeparam name="TRole">The type representing a role.</typeparam>
-/// <typeparam name="TContext">The type of the data context class used to access the store.</typeparam>
+/// <typeparam name="TContext">The type of the data context class used to access the
+// store.</typeparam>
 /// <typeparam name="TKey">The type of the primary key for a role.</typeparam>
 /// <typeparam name="TUserClaim">The type representing a claim.</typeparam>
 /// <typeparam name="TUserRole">The type representing a user role.</typeparam>
@@ -132,7 +135,8 @@ public class UserStore<
     /// Creates a new instance of the store.
     /// </summary>
     /// <param name="context">The context used to access the store.</param>
-    /// <param name="describer">The <see cref="IdentityErrorDescriber"/> used to describe store errors.</param>
+    /// <param name="describer">The <see cref="IdentityErrorDescriber"/> used to describe store
+    // errors.</param>
     public UserStore(TContext context, IdentityErrorDescriber? describer = null)
         : base(describer ?? new IdentityErrorDescriber())
     {
@@ -171,7 +175,8 @@ public class UserStore<
     }
 
     /// <summary>
-    /// Gets or sets a flag indicating if changes should be persisted after CreateAsync, UpdateAsync and DeleteAsync are called.
+    /// Gets or sets a flag indicating if changes should be persisted after CreateAsync, UpdateAsync and
+    // DeleteAsync are called.
     /// </summary>
     /// <value>
     /// True if changes should be automatically persisted, otherwise false.
@@ -179,7 +184,8 @@ public class UserStore<
     public bool AutoSaveChanges { get; set; } = true;
 
     /// <summary>Saves the current store.</summary>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     protected Task SaveChanges(CancellationToken cancellationToken)
     {
@@ -190,8 +196,10 @@ public class UserStore<
     /// Creates the specified <paramref name="user"/> in the user store.
     /// </summary>
     /// <param name="user">The user to create.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the creation operation.</returns>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the creation operation.</returns>
     public override async Task<IdentityResult> CreateAsync(
         TUser user,
         CancellationToken cancellationToken = default(CancellationToken)
@@ -209,8 +217,10 @@ public class UserStore<
     /// Updates the specified <paramref name="user"/> in the user store.
     /// </summary>
     /// <param name="user">The user to update.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the update operation.</returns>
     public override async Task<IdentityResult> UpdateAsync(
         TUser user,
         CancellationToken cancellationToken = default(CancellationToken)
@@ -238,8 +248,10 @@ public class UserStore<
     /// Deletes the specified <paramref name="user"/> from the user store.
     /// </summary>
     /// <param name="user">The user to delete.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see cref="IdentityResult"/> of the update operation.</returns>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
+    /// <returns>The <see cref="Task"/> that represents the asynchronous operation, containing the <see
+    // cref="IdentityResult"/> of the update operation.</returns>
     public override async Task<IdentityResult> DeleteAsync(
         TUser user,
         CancellationToken cancellationToken = default(CancellationToken)
@@ -265,9 +277,11 @@ public class UserStore<
     /// Finds and returns a user, if any, who has the specified <paramref name="userId"/>.
     /// </summary>
     /// <param name="userId">The user ID to search for.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="userId"/> if it exists.
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching
+    // the specified <paramref name="userId"/> if it exists.
     /// </returns>
     public override Task<TUser?> FindByIdAsync(
         string userId,
@@ -284,9 +298,11 @@ public class UserStore<
     /// Finds and returns a user, if any, who has the specified normalized user name.
     /// </summary>
     /// <param name="normalizedUserName">The normalized user name to search for.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching the specified <paramref name="normalizedUserName"/> if it exists.
+    /// The <see cref="Task"/> that represents the asynchronous operation, containing the user matching
+    // the specified <paramref name="normalizedUserName"/> if it exists.
     /// </returns>
     public override Task<TUser?> FindByNameAsync(
         string normalizedUserName,
@@ -314,7 +330,8 @@ public class UserStore<
     /// Return a role with the normalized name if it exists.
     /// </summary>
     /// <param name="normalizedRoleName">The normalized role name.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The role if it exists.</returns>
     protected override Task<TRole?> FindRoleAsync(
         string normalizedRoleName,
@@ -332,7 +349,8 @@ public class UserStore<
     /// </summary>
     /// <param name="userId">The user's id.</param>
     /// <param name="roleId">The role's id.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The user role if it exists.</returns>
     protected override Task<TUserRole?> FindUserRoleAsync(
         TKey userId,
@@ -347,7 +365,8 @@ public class UserStore<
     /// Return a user with the matching userId if it exists.
     /// </summary>
     /// <param name="userId">The user's id.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The user if it exists.</returns>
     protected override Task<TUser?> FindUserAsync(TKey userId, CancellationToken cancellationToken)
     {
@@ -359,8 +378,10 @@ public class UserStore<
     /// </summary>
     /// <param name="userId">The user's id.</param>
     /// <param name="loginProvider">The login provider name.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The user login if it exists.</returns>
     protected override Task<TUserLogin?> FindUserLoginAsync(
         TKey userId,
@@ -382,8 +403,10 @@ public class UserStore<
     /// Return a user login with  provider, providerKey if it exists.
     /// </summary>
     /// <param name="loginProvider">The login provider name.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The user login if it exists.</returns>
     protected override Task<TUserLogin?> FindUserLoginAsync(
         string loginProvider,
@@ -403,7 +426,8 @@ public class UserStore<
     /// </summary>
     /// <param name="user">The user to add the role to.</param>
     /// <param name="normalizedRoleName">The role to add.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override async Task AddToRoleAsync(
         TUser user,
@@ -436,11 +460,13 @@ public class UserStore<
     }
 
     /// <summary>
-    /// Removes the given <paramref name="normalizedRoleName"/> from the specified <paramref name="user"/>.
+    /// Removes the given <paramref name="normalizedRoleName"/> from the specified <paramref
+    // name="user"/>.
     /// </summary>
     /// <param name="user">The user to remove the role from.</param>
     /// <param name="normalizedRoleName">The role to remove.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override async Task RemoveFromRoleAsync(
         TUser user,
@@ -473,8 +499,10 @@ public class UserStore<
     /// Retrieves the roles the specified <paramref name="user"/> is a member of.
     /// </summary>
     /// <param name="user">The user whose roles should be retrieved.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-    /// <returns>A <see cref="Task{TResult}"/> that contains the roles the user is a member of.</returns>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
+    /// <returns>A <see cref="Task{TResult}"/> that contains the roles the user is a member
+    // of.</returns>
     public override async Task<IList<string>> GetRolesAsync(
         TUser user,
         CancellationToken cancellationToken = default(CancellationToken)
@@ -493,13 +521,17 @@ public class UserStore<
     }
 
     /// <summary>
-    /// Returns a flag indicating if the specified user is a member of the give <paramref name="normalizedRoleName"/>.
+    /// Returns a flag indicating if the specified user is a member of the give <paramref
+    // name="normalizedRoleName"/>.
     /// </summary>
     /// <param name="user">The user whose role membership should be checked.</param>
     /// <param name="normalizedRoleName">The role to check membership of</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
-    /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user is a member of the given group. If the
-    /// user is a member of the group the returned value with be true, otherwise it will be false.</returns>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
+    /// <returns>A <see cref="Task{TResult}"/> containing a flag indicating if the specified user is a
+    // member of the given group. If the
+    /// user is a member of the group the returned value with be true, otherwise it will be
+    // false.</returns>
     public override async Task<bool> IsInRoleAsync(
         TUser user,
         string normalizedRoleName,
@@ -526,10 +558,12 @@ public class UserStore<
     }
 
     /// <summary>
-    /// Get the claims associated with the specified <paramref name="user"/> as an asynchronous operation.
+    /// Get the claims associated with the specified <paramref name="user"/> as an asynchronous
+    // operation.
     /// </summary>
     /// <param name="user">The user whose claims should be retrieved.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>A <see cref="Task{TResult}"/> that contains the claims granted to a user.</returns>
     public override async Task<IList<Claim>> GetClaimsAsync(
         TUser user,
@@ -550,7 +584,8 @@ public class UserStore<
     /// </summary>
     /// <param name="user">The user to add the claim to.</param>
     /// <param name="claims">The claim to add to the user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override Task AddClaimsAsync(
         TUser user,
@@ -569,12 +604,14 @@ public class UserStore<
     }
 
     /// <summary>
-    /// Replaces the <paramref name="claim"/> on the specified <paramref name="user"/>, with the <paramref name="newClaim"/>.
+    /// Replaces the <paramref name="claim"/> on the specified <paramref name="user"/>, with the
+    // <paramref name="newClaim"/>.
     /// </summary>
     /// <param name="user">The user to replace the claim on.</param>
     /// <param name="claim">The claim replace.</param>
     /// <param name="newClaim">The new claim replacing the <paramref name="claim"/>.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override async Task ReplaceClaimAsync(
         TUser user,
@@ -607,7 +644,8 @@ public class UserStore<
     /// </summary>
     /// <param name="user">The user to remove the claims from.</param>
     /// <param name="claims">The claim to remove.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override async Task RemoveClaimsAsync(
         TUser user,
@@ -639,7 +677,8 @@ public class UserStore<
     /// </summary>
     /// <param name="user">The user to add the login to.</param>
     /// <param name="login">The login to add to the user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override Task AddLoginAsync(
         TUser user,
@@ -660,8 +699,10 @@ public class UserStore<
     /// </summary>
     /// <param name="user">The user to remove the login from.</param>
     /// <param name="loginProvider">The login to remove from the user.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
     public override async Task RemoveLoginAsync(
         TUser user,
@@ -689,9 +730,11 @@ public class UserStore<
     /// Retrieves the associated logins for the specified <param ref="user"/>.
     /// </summary>
     /// <param name="user">The user whose associated logins to retrieve.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
+    /// The <see cref="Task"/> for the asynchronous operation, containing a list of <see
+    // cref="UserLoginInfo"/> for the specified <paramref name="user"/>, if any.
     /// </returns>
     public override async Task<IList<UserLoginInfo>> GetLoginsAsync(
         TUser user,
@@ -711,11 +754,15 @@ public class UserStore<
     /// <summary>
     /// Retrieves the user associated with the specified login provider and login provider key.
     /// </summary>
-    /// <param name="loginProvider">The login provider who provided the <paramref name="providerKey"/>.</param>
-    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a user.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="loginProvider">The login provider who provided the <paramref
+    // name="providerKey"/>.</param>
+    /// <param name="providerKey">The key provided by the <paramref name="loginProvider"/> to identify a
+    // user.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched the specified login provider and key.
+    /// The <see cref="Task"/> for the asynchronous operation, containing the user, if any which matched
+    // the specified login provider and key.
     /// </returns>
     public override async Task<TUser?> FindByLoginAsync(
         string loginProvider,
@@ -737,9 +784,11 @@ public class UserStore<
     /// Gets the user, if any, associated with the specified, normalized email address.
     /// </summary>
     /// <param name="normalizedEmail">The normalized email address to return the user for.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
-    /// The task object containing the results of the asynchronous lookup operation, the user if any associated with the specified normalized email address.
+    /// The task object containing the results of the asynchronous lookup operation, the user if any
+    // associated with the specified normalized email address.
     /// </returns>
     public override Task<TUser?> FindByEmailAsync(
         string normalizedEmail,
@@ -759,7 +808,8 @@ public class UserStore<
     /// Retrieves all users with the specified claim.
     /// </summary>
     /// <param name="claim">The claim whose users should be retrieved.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
     /// The <see cref="Task"/> contains a list of users, if any, that contain the specified claim.
     /// </returns>
@@ -785,7 +835,8 @@ public class UserStore<
     /// Retrieves all users in the specified role.
     /// </summary>
     /// <param name="normalizedRoleName">The role whose users should be retrieved.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>
     /// The <see cref="Task"/> contains a list of users, if any, that are in the specified role.
     /// </returns>
@@ -819,7 +870,8 @@ public class UserStore<
     /// <param name="user">The token owner.</param>
     /// <param name="loginProvider">The login provider for the token.</param>
     /// <param name="name">The name of the token.</param>
-    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
+    /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate
+    // notifications that the operation should be canceled.</param>
     /// <returns>The user token if it exists.</returns>
     protected override Task<TUserToken?> FindTokenAsync(
         TUser user,

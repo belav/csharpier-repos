@@ -8,11 +8,13 @@ namespace Microsoft.EntityFrameworkCore.Update;
 ///         Represents a mutable conceptual database command to insert/update/delete a row.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
 ///     for more information and examples.
 /// </remarks>
 public interface INonTrackedModificationCommand : IReadOnlyModificationCommand

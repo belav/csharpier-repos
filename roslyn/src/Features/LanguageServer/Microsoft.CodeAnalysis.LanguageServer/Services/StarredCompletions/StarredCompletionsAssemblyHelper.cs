@@ -22,14 +22,16 @@ internal static class StarredCompletionAssemblyHelper
     private const string CompletionHelperClassFullName = "PythiaCSDevKit.CSDevKitCompletionHelper";
     private const string CreateCompletionProviderMethodName = "CreateCompletionProviderAsync";
 
-    // The following fields are only set as a part of the call to InitializeInstance, which is only called once for the lifetime of the process. Thus, it is safe to assume that once
+    // The following fields are only set as a part of the call to InitializeInstance, which is only
+    // called once for the lifetime of the process. Thus, it is safe to assume that once
     // set, they will never change again.
     private static string? s_completionsAssemblyLocation;
     private static ILogger? s_logger;
     private static ServiceBrokerFactory? s_serviceBrokerFactory;
 
     /// <summary>
-    /// A gate to guard the actual creation of <see cref="s_completionProvider"/>. This just prevents us from trying to create the provider more than once; once the field is set it
+    /// A gate to guard the actual creation of <see cref="s_completionProvider"/>. This just prevents us
+    // from trying to create the provider more than once; once the field is set it
     /// won't change again.
     /// </summary>
     private static readonly SemaphoreSlim s_gate = new SemaphoreSlim(initialCount: 1);
@@ -41,20 +43,23 @@ internal static class StarredCompletionAssemblyHelper
     /// </summary>
     /// <param name="completionsAssemblyLocation">Location of dll for starred completion</param>
     /// <param name="loggerFactory">Factory for creating new logger</param>
-    /// <param name="serviceBrokerFactory">Service broker with access to necessary remote services</param>
+    /// <param name="serviceBrokerFactory">Service broker with access to necessary remote
+    // services</param>
     internal static void InitializeInstance(
         string? completionsAssemblyLocation,
         ILoggerFactory loggerFactory,
         ServiceBrokerFactory serviceBrokerFactory
     )
     {
-        // No location provided means it wasn't passed through from C# Dev Kit, so we don't need to initialize anything further
+        // No location provided means it wasn't passed through from C# Dev Kit, so we don't need to
+        // initialize anything further
         if (string.IsNullOrEmpty(completionsAssemblyLocation))
         {
             return;
         }
 
-        // C# Dev Kit must be installed, so we should be able to provide this; however we may not yet have a connection to the Dev Kit service broker, so we need to defer the actual creation
+        // C# Dev Kit must be installed, so we should be able to provide this; however we may not yet have a
+        // connection to the Dev Kit service broker, so we need to defer the actual creation
         // until that point.
         s_completionsAssemblyLocation = completionsAssemblyLocation;
         s_logger = loggerFactory.CreateLogger(typeof(StarredCompletionAssemblyHelper));
@@ -89,11 +94,13 @@ internal static class StarredCompletionAssemblyHelper
         // At this point, we have everything we need to go and create the provider, so let's do it
         using (await s_gate.DisposableWaitAsync(cancellationToken))
         {
-            // Re-check this inside the lock, since we could have had a success between the earlier check and now
+            // Re-check this inside the lock, since we could have had a success between the earlier check and
+            // now
             if (s_completionProvider is CompletionProvider completionProviderInsideLock)
                 return completionProviderInsideLock;
 
-            // Re-check this inside the lock, since we could have had a failure between the earlier check and now
+            // Re-check this inside the lock, since we could have had a failure between the earlier check and
+            // now
             if (s_previousCreationFailed)
                 return null;
 

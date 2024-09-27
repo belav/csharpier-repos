@@ -202,8 +202,10 @@ internal static class PublicOptionFactory
         return (PerLanguageOption<CodeStyleOption<T>>)option.PublicOption;
     }
 
-    // The following are used only to implement equality/ToString of public Option<T> and PerLanguageOption<T> options.
-    // Public options can be instantiated with non-unique config name and thus we need to include default value in the equality
+    // The following are used only to implement equality/ToString of public Option<T> and
+    // PerLanguageOption<T> options.
+    // Public options can be instantiated with non-unique config name and thus we need to include
+    // default value in the equality
     // to avoid collisions among them.
 
     public static string PublicOptionDefinitionToString(this IOption2 option) =>
@@ -215,7 +217,8 @@ internal static class PublicOptionFactory
             x.Definition.ConfigName == y.Definition.ConfigName
             && x.Definition.Group == y.Definition.Group;
 
-        // DefaultValue and Type can differ between different but equivalent implementations of "ICodeStyleOption".
+        // DefaultValue and Type can differ between different but equivalent implementations of
+        // "ICodeStyleOption".
         // So, we skip these fields for equality checks of code style options.
         if (equals && x.DefaultValue is not ICodeStyleOption)
         {

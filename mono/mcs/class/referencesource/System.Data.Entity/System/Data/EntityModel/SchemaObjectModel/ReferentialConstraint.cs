@@ -68,7 +68,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     );
                 }
 
-                // Resolve all the property in the ToProperty attribute. Also checks whether this is nullable or not and
+                // Resolve all the property in the ToProperty attribute. Also checks whether this is nullable or not
+                // and
                 // whether the properties are the keys for the type in the ToRole
                 IsKeyProperty(
                     _dependentRole,
@@ -79,7 +80,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     out isDependentRolePropertiesSubsetofKeyProperties
                 );
 
-                // Resolve all the property in the ToProperty attribute. Also checks whether this is nullable or not and
+                // Resolve all the property in the ToProperty attribute. Also checks whether this is nullable or not
+                // and
                 // whether the properties are the keys for the type in the ToRole
                 IsKeyProperty(
                     _principalRole,
@@ -99,7 +101,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     "There should be some ref properties in Dependent Role"
                 );
 
-                // The properties in the PrincipalRole must be the key of the Entity type referred to by the principal role
+                // The properties in the PrincipalRole must be the key of the Entity type referred to by the
+                // principal role
                 if (!isDependentRoleKeyProperty)
                 {
                     AddError(
@@ -138,7 +141,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     dependentRoleEnd.Multiplicity =
                         dependentRoleEnd.Multiplicity ?? expectedDependentMultiplicity;
 
-                    // Since the FromProperty must be the key of the FromRole, the FromRole cannot be '*' as multiplicity
+                    // Since the FromProperty must be the key of the FromRole, the FromRole cannot be '*' as
+                    // multiplicity
                     // Also the lower bound of multiplicity of FromRole can be zero if and only if all the properties in
                     // ToProperties are nullable
                     // for v2+
@@ -202,7 +206,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                     }
 
                     // If the ToProperties form the key of the type in ToRole, then the upper bound of the multiplicity
-                    // of the ToRole must be '1'. The lower bound must always be zero since there can be entries in the from
+                    // of the ToRole must be '1'. The lower bound must always be zero since there can be entries in the
+                    // from
                     // column which are not related to child columns.
                     if (
                         dependentRoleEnd.Multiplicity == RelationshipMultiplicity.One
@@ -238,7 +243,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                         );
                     }
 
-                    // If the ToProperty is a key property, then the upper bound must be 1 i.e. every parent (from property) can
+                    // If the ToProperty is a key property, then the upper bound must be 1 i.e. every parent (from
+                    // property) can
                     // have exactly one child
                     if (isPrinicipalRoleKeyProperty)
                     {
@@ -254,7 +260,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
                             );
                         }
                     }
-                    // if the ToProperty is not the key, then the upper bound must be many i.e every parent (from property) can
+                    // if the ToProperty is not the key, then the upper bound must be many i.e every parent (from
+                    // property) can
                     // be related to many childs
                     else if (dependentRoleEnd.Multiplicity != RelationshipMultiplicity.Many)
                     {
@@ -329,7 +336,8 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         /// <summary>
         /// Resolves the given property names to the property in the item
-        /// Also checks whether the properties form the key for the given type and whether all the properties are nullable or not
+        /// Also checks whether the properties form the key for the given type and whether all the
+        // properties are nullable or not
         /// </summary>
         /// <param name="roleElement"></param>
         /// <param name="itemType"></param>

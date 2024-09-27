@@ -86,13 +86,15 @@ namespace System.Text.Json.SourceGeneration
         public required bool IsInitOnlySetter { get; init; }
 
         /// <summary>
-        /// Whether the property has a public or internal (only usable when JsonIncludeAttribute is specified)
+        /// Whether the property has a public or internal (only usable when JsonIncludeAttribute is
+        // specified)
         /// getter that can be referenced in generated source code.
         /// </summary>
         public required bool CanUseGetter { get; init; }
 
         /// <summary>
-        /// Whether the property has a public or internal (only usable when JsonIncludeAttribute is specified)
+        /// Whether the property has a public or internal (only usable when JsonIncludeAttribute is
+        // specified)
         /// setter that can be referenced in generated source code.
         /// </summary>
         public required bool CanUseSetter { get; init; }
@@ -118,7 +120,8 @@ namespace System.Text.Json.SourceGeneration
         public required int Order { get; init; }
 
         /// <summary>
-        /// Whether the property has the JsonIncludeAttribute. If so, non-public accessors can be used for (de)serialziation.
+        /// Whether the property has the JsonIncludeAttribute. If so, non-public accessors can be used for
+        // (de)serialziation.
         /// </summary>
         public required bool HasJsonInclude { get; init; }
 

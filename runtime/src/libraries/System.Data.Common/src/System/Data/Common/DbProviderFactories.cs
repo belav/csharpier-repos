@@ -31,8 +31,10 @@ namespace System.Data.Common
             internal string FactoryTypeAssemblyQualifiedName { get; }
 
             /// <summary>
-            /// The cached instance of the type in <see cref="FactoryTypeAssemblyQualifiedName"/>. If null, this registration is seen as a deferred registration
-            /// and <see cref="FactoryTypeAssemblyQualifiedName"/> is checked the first time when this registration is requested through GetFactory().
+            /// The cached instance of the type in <see cref="FactoryTypeAssemblyQualifiedName"/>. If null, this
+            // registration is seen as a deferred registration
+            /// and <see cref="FactoryTypeAssemblyQualifiedName"/> is checked the first time when this
+            // registration is requested through GetFactory().
             /// </summary>
             internal DbProviderFactory? FactoryInstance { get; }
         }
@@ -159,7 +161,8 @@ namespace System.Data.Common
                 nameof(factoryTypeAssemblyQualifiedName)
             );
 
-            // this method performs a deferred registration: the type name specified is checked when the factory is requested for the first time.
+            // this method performs a deferred registration: the type name specified is checked when the factory
+            // is requested for the first time.
             _registeredFactories[providerInvariantName] = new ProviderRegistration(
                 factoryTypeAssemblyQualifiedName,
                 null
@@ -228,7 +231,8 @@ namespace System.Data.Common
             if (toReturn == null)
             {
                 // Deferred registration, do checks now on the type specified and register instance in storage.
-                // Even in the case of throwOnError being false, this will throw when an exception occurs checking the registered type as the user has to be notified the
+                // Even in the case of throwOnError being false, this will throw when an exception occurs checking
+                // the registered type as the user has to be notified the
                 // registration is invalid, even though the registration is there.
                 toReturn = GetFactoryInstance(
                     GetProviderTypeFromTypeName(registration.FactoryTypeAssemblyQualifiedName)

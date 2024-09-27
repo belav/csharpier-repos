@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections;
@@ -14,7 +15,8 @@ using Microsoft.Web.Mvc.Properties;
 namespace Microsoft.Web.Mvc.Controls
 {
     // TODO: Have ListBoxBase class to use with DropDownList and ListBox?
-    // TODO: Do we need a way to explicitly specify the items? And only get the selected value(s) from ViewData?
+    // TODO: Do we need a way to explicitly specify the items? And only get the selected value(s) from
+    // ViewData?
 
     public class DropDownList : MvcControl
     {

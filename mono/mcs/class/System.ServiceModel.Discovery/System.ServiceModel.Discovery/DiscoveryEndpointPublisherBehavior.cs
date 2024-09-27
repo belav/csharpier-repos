@@ -68,8 +68,10 @@ namespace System.ServiceModel.Discovery
             EndpointDispatcher endpointDispatcher
         )
         {
-            // It is applied to the ServiceEndpoints in the ServiceHost which has ServiceDiscoveryBehavior as one of its service behaviors.
-            // That is, this target endpoint is an endpoint in the target service itself, not for "announcement service".
+            // It is applied to the ServiceEndpoints in the ServiceHost which has ServiceDiscoveryBehavior as
+            // one of its service behaviors.
+            // That is, this target endpoint is an endpoint in the target service itself, not for "announcement
+            // service".
             if (endpoint == null)
                 throw new ArgumentNullException("endpoint");
             if (endpointDispatcher == null)

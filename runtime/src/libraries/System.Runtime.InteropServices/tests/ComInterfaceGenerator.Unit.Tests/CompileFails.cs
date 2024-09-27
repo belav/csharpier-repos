@@ -110,7 +110,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                             safeHandleMarshallerDoesNotSupportUnmanagedToManaged,
                             "value"
                         ),
-                    // /0/Test0.cs(13,151): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is not supported by source-generated P/Invokes. The generated source will not handle marshalling of parameter 'inValue'.
+                    // /0/Test0.cs(13,151): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is
+                    // not supported by source-generated P/Invokes. The generated source will not handle marshalling of
+                    // parameter 'inValue'.
                     VerifyComInterfaceGenerator
                         .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
                         .WithLocation(2)
@@ -118,12 +120,16 @@ namespace ComInterfaceGenerator.Unit.Tests
                             safeHandleMarshallerDoesNotSupportUnmanagedToManaged,
                             "inValue"
                         ),
-                    // /0/Test0.cs(13,207): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is not supported by source-generated P/Invokes. The generated source will not handle marshalling of parameter 'refValue'.
+                    // /0/Test0.cs(13,207): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is
+                    // not supported by source-generated P/Invokes. The generated source will not handle marshalling of
+                    // parameter 'refValue'.
                     VerifyComInterfaceGenerator
                         .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
                         .WithLocation(3)
                         .WithArguments(safeHandleMarshallerDoesNotSupportBidirectional, "refValue"),
-                    // /0/Test0.cs(13,264): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is not supported by source-generated P/Invokes. The generated source will not handle marshalling of parameter 'outValue'.
+                    // /0/Test0.cs(13,264): error SYSLIB1051: The type 'Microsoft.Win32.SafeHandles.SafeFileHandle' is
+                    // not supported by source-generated P/Invokes. The generated source will not handle marshalling of
+                    // parameter 'outValue'.
                     VerifyComInterfaceGenerator
                         .Diagnostic(GeneratorDiagnostics.ParameterTypeNotSupportedWithDetails)
                         .WithLocation(4)
@@ -731,7 +737,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             var group = new List<(string, string, DiagnosticResult[], string)>()
             {
                 ("public", "public", emptyDiagnostics, ID()),
-                // Technically we don't support inheriting from a GeneratedComInterface from another assembly, so this should be okay
+                // Technically we don't support inheriting from a GeneratedComInterface from another assembly, so
+                // this should be okay
                 ("public", "internal", emptyDiagnostics, ID()),
                 ("public", "protected", protectedDiagnostic, ID()),
                 ("public", "private", privateDiagnostic, ID()),
@@ -891,7 +898,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .WithArguments("J", "I")
             );
 
-            // The Roslyn SDK doesn't apply the compilation options from CreateCompilationOptions to AdditionalProjects-based projects.
+            // The Roslyn SDK doesn't apply the compilation options from CreateCompilationOptions to
+            // AdditionalProjects-based projects.
             test.SolutionTransforms.Add(
                 (sln, _) =>
                 {

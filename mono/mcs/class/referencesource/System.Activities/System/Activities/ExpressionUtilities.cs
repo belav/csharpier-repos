@@ -1080,7 +1080,8 @@ namespace System.Activities
                         if (this.parent != null)
                         {
                             // Looks like we are trying to set a property on a struct
-                            // Calling SetValue simply sets the property on the local copy of the struct, which is not very helpful
+                            // Calling SetValue simply sets the property on the local copy of the struct, which is not very
+                            // helpful
                             // Since we have a copy, assign it back to the parent
                             this.parent.Value = this.owner;
                         }
@@ -2338,7 +2339,8 @@ namespace System.Activities
         //   * object.ReferenceEquals(info1, info2) is the fastest
         //   * info1.Name == "MethodName" is a close second
         //   * object.ReferenceEquals(info1, type.GetMethod("MethodName")) is very slow by comparison
-        //   * object.ReferenceEquals(info1, genericMethodDefinition.MakeGenericMethod(typeParameter)) is also very
+        //   * object.ReferenceEquals(info1, genericMethodDefinition.MakeGenericMethod(typeParameter)) is
+        // also very
         //     slow by comparison
         static bool TryRewriteMethodCall(
             MethodCallExpression methodCall,
@@ -2380,7 +2382,8 @@ namespace System.Activities
             //
             // ActivityContext
             //    ctx.GetValue<T>(inArg) => ctx.GetValue<T>(inline)  inline = Inline(inArg.RuntimeArgument)
-            //    ctx.GetValue<T>(inOutArg) => ctx.GetValue<T>(inline)  inline = Inline(inOutArg.RuntimeArgument)
+            //    ctx.GetValue<T>(inOutArg) => ctx.GetValue<T>(inline)  inline =
+            // Inline(inOutArg.RuntimeArgument)
             //    ctx.GetValue<T>(outArg) => ctx.GetValue<T>(inline)  inline = Inline(outArg.RuntimeArgument)
             //    ctx.GetValue(arg) => ctx.GetValue<object>(inline)  inline = Inline(arg.RuntimeArgument)
             //    ctx.GetValue(runtimeArg) => ctx.GetValue<object>(inline)
@@ -2404,11 +2407,13 @@ namespace System.Activities
             //
             // InOutArgument<T> : Argument
             //    (new)  arg.Get(ctx) => ctx.GetValue<T>(inline)  inline = Inline(arg.RuntimeArgument)
-            //    (new)  arg.GetLocation<T>(ctx) => ctx.GetLocation<T>(inline)  inline = Inline(arg.RuntimeArgument)
+            //    (new)  arg.GetLocation<T>(ctx) => ctx.GetLocation<T>(inline)  inline =
+            // Inline(arg.RuntimeArgument)
             //
             // OutArgument<T> : Argument
             //    (new)  arg.Get(ctx) => ctx.GetValue<T>(inline)  inline = Inline(arg.RuntimeArgument)
-            //    (new)  arg.GetLocation<T>(ctx) => ctx.GetLocation<T>(inline)  inline = Inline(arg.RuntimeArgument)
+            //    (new)  arg.GetLocation<T>(ctx) => ctx.GetLocation<T>(inline)  inline =
+            // Inline(arg.RuntimeArgument)
             //
             // Variable : LocationReference
             //    ref.Get(ctx) => ctx.GetValue<object>(inline)

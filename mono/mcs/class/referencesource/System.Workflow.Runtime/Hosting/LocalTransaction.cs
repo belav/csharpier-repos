@@ -18,7 +18,8 @@ using System.Transactions;
 namespace System.Workflow.Runtime.Hosting
 {
     /// <summary>
-    /// This class wraps a local transaction (DbTransaction) by implementing IPromotableSinglePhaseNotification:
+    /// This class wraps a local transaction (DbTransaction) by implementing
+    // IPromotableSinglePhaseNotification:
     /// It instantiate a DbTransaction and never allows promotion to a DTC transaction.
     /// </summary>
     internal sealed class LocalTransaction : IPromotableSinglePhaseNotification

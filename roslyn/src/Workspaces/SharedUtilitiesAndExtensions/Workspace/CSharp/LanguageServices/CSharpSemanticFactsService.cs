@@ -64,7 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // Some symbols in the enclosing block could cause conflicts even if they are not available at the location.
+            // Some symbols in the enclosing block could cause conflicts even if they are not available at the
+            // location.
             // E.g. symbols inside if statements / try catch statements.
             var symbolsInBlock = semanticModel.GetExistingSymbols(
                 container,
@@ -77,8 +78,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Walk through the enclosing block symbols, but avoid exploring local functions
             //     a) Visible symbols from the local function would be returned by LookupSymbols
             //        (e.g. location is inside a local function, the local function method name).
-            //     b) Symbols declared inside the local function do not cause collisions with symbols declared outside them, so avoid considering those symbols.
-            // Exclude lambdas as well when the language version is C# 8 or higher because symbols declared inside no longer collide with outer variables.
+            //     b) Symbols declared inside the local function do not cause collisions with symbols declared
+            // outside them, so avoid considering those symbols.
+            // Exclude lambdas as well when the language version is C# 8 or higher because symbols declared
+            // inside no longer collide with outer variables.
             bool ShouldDescendInto(SyntaxNode node)
             {
                 var isLanguageVersionGreaterOrEqualToCSharp8 =

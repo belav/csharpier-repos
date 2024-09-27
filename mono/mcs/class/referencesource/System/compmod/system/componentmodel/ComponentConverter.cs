@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System.Collections;
@@ -27,7 +27,8 @@ namespace System.ComponentModel
     {
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.ComponentConverter'/> class.
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.ComponentConverter'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public ComponentConverter(Type type)

@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.HttpLogging;
 public sealed class HttpLoggingOptions
 {
     /// <summary>
-    /// Fields to log for the Request and Response. Defaults to logging request and response properties and headers.
+    /// Fields to log for the Request and Response. Defaults to logging request and response properties
+    // and headers.
     /// </summary>
     public HttpLoggingFields LoggingFields { get; set; } =
         HttpLoggingFields.RequestPropertiesAndHeaders

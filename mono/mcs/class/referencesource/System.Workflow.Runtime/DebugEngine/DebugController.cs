@@ -292,7 +292,8 @@ namespace System.Workflow.Runtime.DebugEngine
             }
 
             // The preferred order in which ACEs are added to DACLs is
-            // documented here: http://search.msdn.microsoft.com/search/results.aspx?qu=Order+of+ACEs+in+a+DACL&View=msdn&st=b.
+            // documented here:
+            // http://search.msdn.microsoft.com/search/results.aspx?qu=Order+of+ACEs+in+a+DACL&View=msdn&st=b.
             // This routine follows that logic to determine the position of an ACE in the DACL.
             private int FindIndexInDacl(CommonAce newAce, RawAcl dacl)
             {
@@ -351,7 +352,8 @@ namespace System.Workflow.Runtime.DebugEngine
             }
             catch
             {
-                // If we are unable to create the ProgramPublisher, this means that VS does not exist on this machine, so we can't debug.
+                // If we are unable to create the ProgramPublisher, this means that VS does not exist on this
+                // machine, so we can't debug.
                 return;
             }
 
@@ -372,7 +374,8 @@ namespace System.Workflow.Runtime.DebugEngine
         public override object InitializeLifetimeService()
         {
             // We can't use a sponser because VS doesn't like to be attached when the lease renews itself - the
-            // debugee gets an Access Violation and VS freezes. Returning null implies that the proxy shim will be
+            // debugee gets an Access Violation and VS freezes. Returning null implies that the proxy shim will
+            // be
             // deleted only when the App Domain unloads. However, we will have disconnected the shim so no
             // one will be able to attach to it and the same proxy is used everytime a debugger attaches.
             return null;
@@ -407,7 +410,8 @@ namespace System.Workflow.Runtime.DebugEngine
                 isSynchronousAttach = false;
 
                 // Race condition:
-                // During the call to Attach() if Uninitialize() is also called, we should ignore the call to Attach() and
+                // During the call to Attach() if Uninitialize() is also called, we should ignore the call to
+                // Attach() and
                 // just return. The Zombie flag and lock(this) help us recognize the ----.
                 if (this.isZombie)
                     return;
@@ -665,13 +669,17 @@ namespace System.Workflow.Runtime.DebugEngine
 
                     // Race Condition:
                     // We hook up to the AssemblyLoad event, the Schedule events and Instance events handler
-                    // before we iterate over all loaded assemblies. This means that we need to deal with duplicates in the
+                    // before we iterate over all loaded assemblies. This means that we need to deal with duplicates in
+                    // the
                     // debugee.
 
                     // Race Condition:
-                    // Further the order in which we hook up handlers/iterate is important to avoid ----s if the events fire
-                    // before the iterations complete. We need to hook and iterate over the assemblies, then the schedule
-                    // types and finally the instances. This guarantees that we always have all the assemblies when we load
+                    // Further the order in which we hook up handlers/iterate is important to avoid ----s if the events
+                    // fire
+                    // before the iterations complete. We need to hook and iterate over the assemblies, then the
+                    // schedule
+                    // types and finally the instances. This guarantees that we always have all the assemblies when we
+                    // load
                     // schedules types and we always have all the schedule types when we load instances.
 
                     AppDomain.CurrentDomain.AssemblyLoad += OnAssemblyLoad;
@@ -788,11 +796,13 @@ namespace System.Workflow.Runtime.DebugEngine
 
             bool published = this.programPublisher.Publish(this);
 
-            // If the debugger is already attached, then the DE will invoke AttachToConduit() on a separate thread.
+            // If the debugger is already attached, then the DE will invoke AttachToConduit() on a separate
+            // thread.
             // We need to wait for that to happen to prevent new instances being created and causing a ----. See
             // comments in ControllerConduit.ProgramCreated(). However, if the DE never calls AttachToConduit(),
             // and the detaches instead, we set a wait timeout to that of our Attach Timer.
-            // Note that when we publish the program node, if the debugger is attached, isAttached will be set to true
+            // Note that when we publish the program node, if the debugger is attached, isAttached will be set
+            // to true
             // when the debugger calls Attach() on the Program Node!
 
             while (

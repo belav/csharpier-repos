@@ -40,19 +40,19 @@ using System.Text;
 
 namespace MonoTests.System.Security.Cryptography.Pkcs
 {
-    /*
-     *	PKITS home page
-     *	http://csrs.nist.gov/pki/testing/x509paths.html
-     *
-     *	Documentation is available at
-     *	http://csrc.nist.gov/pki/testing/PKITS.pdf
-     *
-     *	Test data is available at
-     *	http://csrc.nist.gov/pki/testing/PKITS_data.zip
-     *
-     *	License information are available at
-     *	http://cio.nist.gov/esd/emaildir/lists/pkits/msg00048.html
-     */
+/*
+*	PKITS home page
+*	http://csrs.nist.gov/pki/testing/x509paths.html
+*
+*	Documentation is available at
+*	http://csrc.nist.gov/pki/testing/PKITS.pdf
+*
+*	Test data is available at
+*	http://csrc.nist.gov/pki/testing/PKITS_data.zip
+*
+*	License information are available at
+*	http://cio.nist.gov/esd/emaildir/lists/pkits/msg00048.html
+*/
 
     [Category("PKITS")]
     public class PkitsTest

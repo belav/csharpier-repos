@@ -12,7 +12,8 @@ using static System.FormattableString;
 namespace GenDefinedCharList
 {
     /// <summary>
-    /// This program outputs the 'UnicodeBlocks.generated.cs' and 'UnicodeBlocksTests.generated.cs' source files.
+    /// This program outputs the 'UnicodeBlocks.generated.cs' and 'UnicodeBlocksTests.generated.cs'
+    // source files.
     /// </summary>
     class Program
     {

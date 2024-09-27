@@ -3,7 +3,9 @@
 // Seed: 10843127860637099968
 // Reduced from 209.2 KiB to 0.3 KiB in 00:04:55
 // Hits JIT assert in Release:
-// Assertion failed '!op1->IsRegOptional() && !op2->IsRegOptional()' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Lowering nodeinfo' (IL size 45; hash 0xade6b36b; FullOpts)
+// Assertion failed '!op1->IsRegOptional() && !op2->IsRegOptional()' in
+// 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'Lowering nodeinfo' (IL size 45; hash
+// 0xade6b36b; FullOpts)
 //
 //     File: D:\a\_work\1\s\src\coreclr\jit\lowerxarch.cpp Line: 5118
 //

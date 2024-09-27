@@ -109,7 +109,8 @@ namespace System.Workflow.ComponentModel
                         true
                     )
                 );
-            // compensation handlers can not contain fault handlers, compensation handler and cancellation handler
+            // compensation handlers can not contain fault handlers, compensation handler and cancellation
+            // handler
             else if (((ISupportAlternateFlow)compensation).AlternateFlowActivities.Count > 0)
                 validationErrors.Add(
                     new ValidationError(

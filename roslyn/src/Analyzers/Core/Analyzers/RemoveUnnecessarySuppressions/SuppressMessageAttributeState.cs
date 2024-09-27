@@ -151,7 +151,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
             else if (targetScope == TargetScope.NamespaceAndDescendants)
             {
-                // TargetSymbolResolver expects the callers to normalize 'NamespaceAndDescendants' and 'Namespace' scopes to 'Namespace' scope.
+                // TargetSymbolResolver expects the callers to normalize 'NamespaceAndDescendants' and 'Namespace'
+                // scopes to 'Namespace' scope.
                 targetScope = TargetScope.Namespace;
             }
 

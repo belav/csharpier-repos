@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.Threading
 {
     using System;
@@ -23,7 +23,8 @@ namespace System.Threading
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Threading.ThreadExceptionEventArgs'/> class.
+        ///       Initializes a new instance of the <see cref='System.Threading.ThreadExceptionEventArgs'/>
+        // class.
         ///    </para>
         /// </devdoc>
         public ThreadExceptionEventArgs(Exception t)

@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Collections/tests/Generic/List/List.Generic.Tests.Find.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -58,9 +60,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindLastIndex(0, null!)); //"Err_858ahia Expected null match to throw ArgumentNullException"
 
-            /******************************************************************************
-            index
-            ******************************************************************************/
+/******************************************************************************
+index
+******************************************************************************/
             //[] Verify index=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindLastIndex(int.MinValue, predicate)
@@ -102,9 +104,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindIndex(0, 0, null!)); //"Err_858ahia Expected null match to throw ArgumentNullException"
 
-            /******************************************************************************
-            index
-            ******************************************************************************/
+/******************************************************************************
+index
+******************************************************************************/
             //[] Verify index=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindIndex(int.MinValue, 0, predicate)
@@ -128,9 +130,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => list.FindIndex(int.MaxValue, 0, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
-            /******************************************************************************
-            count
-            ******************************************************************************/
+/******************************************************************************
+count
+******************************************************************************/
             //[] Verify count=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindIndex(0, int.MinValue, predicate)
@@ -149,9 +151,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => list.FindIndex(0, int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
-            /******************************************************************************
-            index and count
-            ******************************************************************************/
+/******************************************************************************
+index and count
+******************************************************************************/
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
@@ -177,9 +179,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindLastIndex(0, 0, null!)); //"Err_858ahia Expected null match to throw ArgumentNullException"
 
-            /******************************************************************************
-            index
-            ******************************************************************************/
+/******************************************************************************
+index
+******************************************************************************/
             //[] Verify index=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindLastIndex(int.MinValue, 0, predicate)
@@ -208,9 +210,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => list.FindLastIndex(int.MaxValue, 0, predicate)
             ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
-            /******************************************************************************
-            count
-            ******************************************************************************/
+/******************************************************************************
+count
+******************************************************************************/
             //[] Verify count=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindLastIndex(list.Count - 1, int.MinValue, predicate)
@@ -231,9 +233,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 () => list.FindLastIndex(list.Count - 1, int.MaxValue, predicate)
             ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
-            /******************************************************************************
-            index and count
-            ******************************************************************************/
+/******************************************************************************
+index and count
+******************************************************************************/
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
@@ -262,9 +264,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindIndex(0, null!)); //"Err_858ahia Expected null match to throw ArgumentNullException"
 
-            /******************************************************************************
-            index
-            ******************************************************************************/
+/******************************************************************************
+index
+******************************************************************************/
             //[] Verify index=Int32.MinValue
             Assert.Throws<ArgumentOutOfRangeException>(
                 () => list.FindIndex(int.MinValue, predicate)

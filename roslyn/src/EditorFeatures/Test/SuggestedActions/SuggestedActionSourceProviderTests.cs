@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SuggestedActions
         [Fact]
         public void EnsureAttributesMatchData()
         {
-            // Ensure that the list of orderings on this type matches the set we expose in SuggestedActionsSourceProvider.Orderings
+            // Ensure that the list of orderings on this type matches the set we expose in
+            // SuggestedActionsSourceProvider.Orderings
             var attributes = typeof(SuggestedActionsSourceProvider)
                 .GetCustomAttributes(inherit: false)
                 .OfType<SuggestedActionPriorityAttribute>()

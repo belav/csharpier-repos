@@ -135,7 +135,8 @@ internal static class ExpressionMetadataProvider
     /// </param>
     /// <param name="metadataProvider">The <see cref="IModelMetadataProvider"/>.</param>
     /// <returns>
-    /// <see cref="ModelExplorer"/> for named <paramref name="expression"/> in given <paramref name="viewData"/>.
+    /// <see cref="ModelExplorer"/> for named <paramref name="expression"/> in given <paramref
+    // name="viewData"/>.
     /// </returns>
     public static ModelExplorer FromStringExpression(
         string expression,

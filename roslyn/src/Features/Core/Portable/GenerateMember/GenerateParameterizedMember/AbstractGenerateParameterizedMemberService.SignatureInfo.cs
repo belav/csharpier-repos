@@ -227,9 +227,12 @@ namespace Microsoft.CodeAnalysis.GenerateMember.GenerateParameterizedMember
                 var typeArguments = DetermineTypeArguments(cancellationToken);
                 var typeParameters = DetermineTypeParameters(cancellationToken);
 
-                // We use a nullability-ignoring comparer because top-level and nested nullability won't matter. If we are looking to replace
-                // IEnumerable<string> with T, we want to replace IEnumerable<string?> whenever it appears in an argument or return type, partly because
-                // there's no way to represent something like T-with-only-the-inner-thing-nullable. We could leave the entire argument as is, but we're suspecting
+                // We use a nullability-ignoring comparer because top-level and nested nullability won't matter. If
+                // we are looking to replace
+                // IEnumerable<string> with T, we want to replace IEnumerable<string?> whenever it appears in an
+                // argument or return type, partly because
+                // there's no way to represent something like T-with-only-the-inner-thing-nullable. We could leave
+                // the entire argument as is, but we're suspecting
                 // this is closer to the user's desire, even if it might require some tweaking after the fact.
                 var result = new Dictionary<ITypeSymbol, ITypeParameterSymbol>(
                     SymbolEqualityComparer.Default

@@ -27,7 +27,8 @@ namespace System.ServiceModel.XamlIntegration
             {
                 if (!IsQualifiedName(stringValue))
                 {
-                    // We want the name to remain unqualified; we don't want XNameTypeConverter to add the default namespace
+                    // We want the name to remain unqualified; we don't want XNameTypeConverter to add the default
+                    // namespace
                     return XName.Get(stringValue);
                 }
             }

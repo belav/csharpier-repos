@@ -8,13 +8,15 @@ using System.Diagnostics;
 
 namespace System.Runtime.Serialization
 {
-    /// <summary>The structure for holding all of the data needed for object serialization and deserialization.</summary>
+    /// <summary>The structure for holding all of the data needed for object serialization and
+    // deserialization.</summary>
     public sealed partial class SerializationInfo
     {
         private const int DefaultSize = 4;
 
         // Even though we have a dictionary, we're still keeping all the arrays around for back-compat.
-        // Otherwise we may run into potentially breaking behaviors like GetEnumerator() not returning entries in the same order they were added.
+        // Otherwise we may run into potentially breaking behaviors like GetEnumerator() not returning
+        // entries in the same order they were added.
         private string[] _names;
         private object?[] _values;
         private Type[] _types;
@@ -62,7 +64,8 @@ namespace System.Runtime.Serialization
         )
             : this(type, converter)
         {
-            // requireSameTokenInPartialTrust is a vacuous parameter in a platform that does not support partial trust.
+            // requireSameTokenInPartialTrust is a vacuous parameter in a platform that does not support partial
+            // trust.
         }
 
         public string FullTypeName
@@ -272,7 +275,8 @@ namespace System.Runtime.Serialization
         /// BinaryFormatter
         ///
         /// This should not be used by clients: exposing out this functionality would allow children
-        /// to overwrite their parent's values. It is public in order to give other runtime libraries access to it for
+        /// to overwrite their parent's values. It is public in order to give other runtime libraries access
+        // to it for
         /// its ObjectManager implementation, but it should not be exposed out of a contract.
         /// </summary>
         /// <param name="name"> The name of the data to be updated.</param>

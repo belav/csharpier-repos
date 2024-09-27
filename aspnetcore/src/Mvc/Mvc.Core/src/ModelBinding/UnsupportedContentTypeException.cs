@@ -6,7 +6,8 @@
 namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 
 /// <summary>
-/// The <see cref="Exception"/> that is added to model state when a model binder for the body of the request is
+/// The <see cref="Exception"/> that is added to model state when a model binder for the body of the
+// request is
 /// unable to understand the request content type header.
 /// </summary>
 public class UnsupportedContentTypeException : Exception

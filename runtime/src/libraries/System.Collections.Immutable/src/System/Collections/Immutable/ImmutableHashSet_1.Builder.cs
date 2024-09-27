@@ -30,7 +30,8 @@ namespace System.Collections.Immutable
         public sealed class Builder : IReadOnlyCollection<T>, ISet<T>
         {
             /// <summary>
-            /// The root of the binary tree that stores the collection.  Contents are typically not entirely frozen.
+            /// The root of the binary tree that stores the collection.  Contents are typically not entirely
+            // frozen.
             /// </summary>
             private SortedInt32KeyNode<HashBucket> _root = SortedInt32KeyNode<HashBucket>.EmptyNode;
 
@@ -209,7 +210,8 @@ namespace System.Collections.Immutable
             /// Searches the set for a given value and returns the equal value it finds, if any.
             /// </summary>
             /// <param name="equalValue">The value for which to search.</param>
-            /// <param name="actualValue">The value from the set that the search found, or the original value if the search yielded no match.</param>
+            /// <param name="actualValue">The value from the set that the search found, or the original value if
+            // the search yielded no match.</param>
             /// <returns>A value indicating whether the search was successful.</returns>
             public bool TryGetValue(T equalValue, out T actualValue)
             {
@@ -247,9 +249,12 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="item">The object to remove from the <see cref="ICollection{T}"/>.</param>
             /// <returns>
-            /// true if <paramref name="item"/> was successfully removed from the <see cref="ICollection{T}"/>; otherwise, false. This method also returns false if <paramref name="item"/> is not found in the original <see cref="ICollection{T}"/>.
+            /// true if <paramref name="item"/> was successfully removed from the <see cref="ICollection{T}"/>;
+            // otherwise, false. This method also returns false if <paramref name="item"/> is not found in the
+            // original <see cref="ICollection{T}"/>.
             /// </returns>
-            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is read-only.</exception>
+            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is
+            // read-only.</exception>
             public bool Remove(T item)
             {
                 ImmutableHashSet<T>.MutationResult result = ImmutableHashSet<T>.Remove(
@@ -275,7 +280,8 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Removes all items from the <see cref="ICollection{T}"/>.
             /// </summary>
-            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is read-only. </exception>
+            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is read-only.
+            // </exception>
             public void Clear()
             {
                 _count = 0;
@@ -298,7 +304,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains only elements that are also in a specified collection.
+            /// Modifies the current set so that it contains only elements that are also in a specified
+            // collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void IntersectWith(IEnumerable<T> other)
@@ -354,7 +361,8 @@ namespace System.Collections.Immutable
             /// Determines whether the current set overlaps with the specified collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
-            /// <returns>true if the current set and other share at least one common element; otherwise, false.</returns>
+            /// <returns>true if the current set and other share at least one common element; otherwise,
+            // false.</returns>
             public bool Overlaps(IEnumerable<T> other)
             {
                 return ImmutableHashSet<T>.Overlaps(other, this.Origin);
@@ -376,7 +384,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains only elements that are present either in the current set or in the specified collection, but not both.
+            /// Modifies the current set so that it contains only elements that are present either in the
+            // current set or in the specified collection, but not both.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void SymmetricExceptWith(IEnumerable<T> other)
@@ -389,7 +398,8 @@ namespace System.Collections.Immutable
             }
 
             /// <summary>
-            /// Modifies the current set so that it contains all elements that are present in both the current set and in the specified collection.
+            /// Modifies the current set so that it contains all elements that are present in both the current
+            // set and in the specified collection.
             /// </summary>
             /// <param name="other">The collection to compare to the current set.</param>
             public void UnionWith(IEnumerable<T> other)
@@ -409,7 +419,8 @@ namespace System.Collections.Immutable
             /// Adds an item to the <see cref="ICollection{T}"/>.
             /// </summary>
             /// <param name="item">The object to add to the <see cref="ICollection{T}"/>.</param>
-            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is read-only.</exception>
+            /// <exception cref="NotSupportedException">The <see cref="ICollection{T}"/> is
+            // read-only.</exception>
             void ICollection<T>.Add(T item)
             {
                 this.Add(item);

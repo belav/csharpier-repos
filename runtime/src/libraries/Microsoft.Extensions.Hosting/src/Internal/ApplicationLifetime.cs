@@ -59,7 +59,8 @@ namespace Microsoft.Extensions.Hosting.Internal
         public void StopApplication()
         {
             // Lock on CTS to synchronize multiple calls to StopApplication. This guarantees that the first call
-            // to StopApplication and its callbacks run to completion before subsequent calls to StopApplication,
+            // to StopApplication and its callbacks run to completion before subsequent calls to
+            // StopApplication,
             // which will no-op since the first call already requested cancellation, get a chance to execute.
             lock (_stoppingSource)
             {

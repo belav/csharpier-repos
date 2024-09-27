@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 #define IMPROVED_COLLECTION_HASHFUNCTION
@@ -837,23 +837,24 @@ namespace C5
 
             return h;
             /*
-                  The pairs (-1657792980, -1570288808) and (1862883298, -272461342) gives the same
-                  unsequenced hashcode with this hashfunction. The pair was found with code like
-      
-                  HashDictionary<int, int[]> set = new HashDictionary<int, int[]>();
-                  Random rnd = new C5Random(12345);
-                  while (true)
-                  {
-                      int[] a = new int[2];
-                      a[0] = rnd.Next(); a[1] = rnd.Next();
-                      int h = unsequencedhashcode(a);
-                      int[] b = a;
-                      if (set.FindOrAdd(h, ref b))
-                      {
-                          Console.WriteLine("Code {5}, Pair ({1},{2}) number {0} matched other pair ({3},{4})", set.Count, a[0], a[1], b[0], b[1], h);
-                      }
-                  }
-                  */
+            The pairs (-1657792980, -1570288808) and (1862883298, -272461342) gives the same
+            unsequenced hashcode with this hashfunction. The pair was found with code like
+            
+            HashDictionary<int, int[]> set = new HashDictionary<int, int[]>();
+            Random rnd = new C5Random(12345);
+            while (true)
+            {
+            int[] a = new int[2];
+            a[0] = rnd.Next(); a[1] = rnd.Next();
+            int h = unsequencedhashcode(a);
+            int[] b = a;
+            if (set.FindOrAdd(h, ref b))
+            {
+            Console.WriteLine("Code {5}, Pair ({1},{2}) number {0} matched other pair ({3},{4})", set.Count,
+            a[0], a[1], b[0], b[1], h);
+            }
+            }
+            */
 #else
             foreach (T item in items)
 				h ^= itemequalityComparer.GetHashCode(item);
@@ -1409,7 +1410,8 @@ namespace C5
         /// </summary>
         /// <param name="capacity">The initial capacity of the internal array container.
         /// Will be rounded upwards to the nearest power of 2 greater than or equal to 8.</param>
-        /// <param name="itemequalityComparer">The item equalityComparer to use, primarily for item equality</param>
+        /// <param name="itemequalityComparer">The item equalityComparer to use, primarily for item
+        // equality</param>
         protected ArrayBase(int capacity, SCG.IEqualityComparer<T> itemequalityComparer)
             : base(itemequalityComparer)
         {
@@ -1426,7 +1428,8 @@ namespace C5
         /// <summary>
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">If the arguments does not describe a
-        /// valid range in the indexed collection, cf. <see cref="M:C5.CollectionBase`1.checkRange(System.Int32,System.Int32)"/>.</exception>
+        /// valid range in the indexed collection, cf. <see
+        // cref="M:C5.CollectionBase`1.checkRange(System.Int32,System.Int32)"/>.</exception>
         /// <value>The directed collection of items in a specific index interval.</value>
         /// <param name="start">The low index of the interval (inclusive).</param>
         /// <param name="count">The size of the range.</param>
@@ -1570,7 +1573,8 @@ namespace C5
             /// <summary>
             ///
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <value>True if this collection is empty.</value>
             public override bool IsEmpty
             {
@@ -1584,7 +1588,8 @@ namespace C5
             /// <summary>
             ///
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <value>The number of items in the range</value>
             [Tested]
             public override int Count
@@ -1603,7 +1608,8 @@ namespace C5
             /// relevant).
             /// </summary>
             /// <value>A characterization of the speed of the
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <code>Count</code> property in this collection.</value>
             public override Speed CountSpeed
             {
@@ -1617,7 +1623,8 @@ namespace C5
             /// <summary>
             /// Choose some item of this collection.
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <exception cref="NoSuchItemException">if range is empty.</exception>
             /// <returns></returns>
             public override T Choose()
@@ -1631,7 +1638,8 @@ namespace C5
             /// <summary>
             /// Create an enumerator for this range of an array based collection.
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <returns>The enumerator</returns>
             [Tested]
             public override SCG.IEnumerator<T> GetEnumerator()
@@ -1647,7 +1655,8 @@ namespace C5
             /// Create a araay collection range with the same contents as this one, but
             /// opposite enumeration sequence.
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <returns>The mirrored collection.</returns>
             [Tested]
             public override IDirectedCollectionValue<T> Backwards()
@@ -1669,7 +1678,8 @@ namespace C5
             /// <summary>
             /// <code>Forwards</code> if same, else <code>Backwards</code>
             /// </summary>
-            /// <exception cref="CollectionModifiedException">if underlying collection has been modified.</exception>
+            /// <exception cref="CollectionModifiedException">if underlying collection has been
+            // modified.</exception>
             /// <value>The enumeration direction relative to the original collection.</value>
             [Tested]
             public override EnumerationDirection Direction

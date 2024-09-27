@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Host
     internal interface IChecksummedPersistentStorage : IPersistentStorage
     {
         /// <summary>
-        /// <see langword="true"/> if the data we have for the solution with the given <paramref name="name"/> has the
+        /// <see langword="true"/> if the data we have for the solution with the given <paramref
+        // name="name"/> has the
         /// provided <paramref name="checksum"/>.
         /// </summary>
         Task<bool> ChecksumMatchesAsync(
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// <see langword="true"/> if the data we have for the given <paramref name="project"/> with the given <paramref
+        /// <see langword="true"/> if the data we have for the given <paramref name="project"/> with the
+        // given <paramref
         /// name="name"/> has the provided <paramref name="checksum"/>.
         /// </summary>
         Task<bool> ChecksumMatchesAsync(
@@ -34,7 +36,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// <see langword="true"/> if the data we have for the given <paramref name="document"/> with the given <paramref
+        /// <see langword="true"/> if the data we have for the given <paramref name="document"/> with the
+        // given <paramref
         /// name="name"/> has the provided <paramref name="checksum"/>.
         /// </summary>
         Task<bool> ChecksumMatchesAsync(
@@ -58,8 +61,10 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Reads the stream for the solution with the given <paramref name="name"/>.  If <paramref name="checksum"/>
-        /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
+        /// Reads the stream for the solution with the given <paramref name="name"/>.  If <paramref
+        // name="checksum"/>
+        /// is provided, the persisted checksum must match it.  If there is no such stream with that name,
+        // or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
         Task<Stream?> ReadStreamAsync(
@@ -69,8 +74,10 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  If <paramref name="checksum"/>
-        /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
+        /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  If
+        // <paramref name="checksum"/>
+        /// is provided, the persisted checksum must match it.  If there is no such stream with that name,
+        // or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
         Task<Stream?> ReadStreamAsync(
@@ -81,8 +88,10 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  If <paramref name="checksum"/>
-        /// is provided, the persisted checksum must match it.  If there is no such stream with that name, or the
+        /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  If
+        // <paramref name="checksum"/>
+        /// is provided, the persisted checksum must match it.  If there is no such stream with that name,
+        // or the
         /// checksums do not match, then <see langword="null"/> will be returned.
         /// </summary>
         Task<Stream?> ReadStreamAsync(
@@ -107,10 +116,12 @@ namespace Microsoft.CodeAnalysis.Host
 
         /// <summary>
         /// Reads the stream for the solution with the given <paramref name="name"/>.  An optional <paramref
-        /// name="checksum"/> can be provided to store along with the data.  This can be used along with ReadStreamAsync
+        /// name="checksum"/> can be provided to store along with the data.  This can be used along with
+        // ReadStreamAsync
         /// with future reads to ensure the data is only read back if it matches that checksum.
         /// <para>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
@@ -122,11 +133,15 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  An optional
-        /// <paramref name="checksum"/> can be provided to store along with the data.  This can be used along with
-        /// ReadStreamAsync with future reads to ensure the data is only read back if it matches that checksum.
+        /// Reads the stream for the <paramref name="project"/> with the given <paramref name="name"/>.  An
+        // optional
+        /// <paramref name="checksum"/> can be provided to store along with the data.  This can be used
+        // along with
+        /// ReadStreamAsync with future reads to ensure the data is only read back if it matches that
+        // checksum.
         /// <para>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
@@ -139,11 +154,15 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  An optional
-        /// <paramref name="checksum"/> can be provided to store along with the data.  This can be used along with
-        /// ReadStreamAsync with future reads to ensure the data is only read back if it matches that checksum.
+        /// Reads the stream for the <paramref name="document"/> with the given <paramref name="name"/>.  An
+        // optional
+        /// <paramref name="checksum"/> can be provided to store along with the data.  This can be used
+        // along with
+        /// ReadStreamAsync with future reads to ensure the data is only read back if it matches that
+        // checksum.
         /// <para>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </para>
         /// </summary>
@@ -156,7 +175,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
         Task<bool> WriteStreamAsync(
@@ -168,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Host
         );
 
         /// <summary>
-        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.  Subsequent
+        /// Returns <see langword="true"/> if the data was successfully persisted to the storage subsystem.
+        // Subsequent
         /// calls to read the same keys should succeed if called within the same session.
         /// </summary>
         Task<bool> WriteStreamAsync(

@@ -46,7 +46,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
         private readonly AsyncBatchingWorkQueue<ProjectId> _workQueue;
 
         /// <summary>
-        /// Scheduler to run our tasks on.  If we're in the remote host , we'll run all our tasks concurrently.
+        /// Scheduler to run our tasks on.  If we're in the remote host , we'll run all our tasks
+        // concurrently.
         /// Otherwise, we will run them serially using <see cref="s_exclusiveScheduler"/>
         /// </summary>
         private readonly TaskScheduler _scheduler;
@@ -87,8 +88,10 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
                 .Unwrap();
 
         /// <summary>
-        /// Gets the latest computed <see cref="SymbolTreeInfo"/> for the requested <paramref name="reference"/>.
-        /// This may return an index corresponding to a prior version of the reference if it has since changed.
+        /// Gets the latest computed <see cref="SymbolTreeInfo"/> for the requested <paramref
+        // name="reference"/>.
+        /// This may return an index corresponding to a prior version of the reference if it has since
+        // changed.
         /// Another system is responsible for bringing these indices up to date in the background.
         /// </summary>
         public async ValueTask<SymbolTreeInfo?> TryGetPotentiallyStaleMetadataSymbolTreeInfoAsync(
@@ -103,7 +106,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             // Kick off the work to update the data we have for this project.
             _workQueue.AddWork(project.Id);
 
-            // See if the last value produced exactly matches what the caller is asking for.  If so, return that.
+            // See if the last value produced exactly matches what the caller is asking for.  If so, return
+            // that.
             if (_peReferenceToInfo.TryGetValue(reference, out var metadataInfo))
                 return metadataInfo.SymbolTreeInfo;
 
@@ -121,7 +125,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
                     .Select(p => p.Id)
             );
 
-            // attempt to add this item to the map.  But defer to whatever is in the map now if something else beat us to this.
+            // attempt to add this item to the map.  But defer to whatever is in the map now if something else
+            // beat us to this.
             return _peReferenceToInfo
                 .GetOrAdd(reference, new MetadataInfo(info, referencingProjects))
                 .SymbolTreeInfo;
@@ -138,7 +143,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             // Kick off the work to update the data we have for this project.
             _workQueue.AddWork(project.Id);
 
-            // See if the last value produced exactly matches what the caller is asking for.  If so, return that.
+            // See if the last value produced exactly matches what the caller is asking for.  If so, return
+            // that.
             if (_projectIdToInfo.TryGetValue(project.Id, out var projectInfo))
                 return projectInfo.info;
 
@@ -149,7 +155,8 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             if (info is null)
                 return null;
 
-            // attempt to add this item to the map.  But defer to whatever is in the map now if something else beat
+            // attempt to add this item to the map.  But defer to whatever is in the map now if something else
+            // beat
             // us to this.  Don't provide a version here so that the next time we update this data it will get
             // overwritten with the latest computed data.
             return _projectIdToInfo.GetOrAdd(project.Id, (semanticVersion: default, info)).info;
@@ -170,12 +177,14 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
                 if (project is not { SupportsCompilation: true })
                     continue;
 
-                // NOTE: currently we process projects serially.  This is because the same metadata reference might be
+                // NOTE: currently we process projects serially.  This is because the same metadata reference might
+                // be
                 // found in multiple projects and we can't currently process that in parallel.
                 await AnalyzeProjectAsync(project, cancellationToken).ConfigureAwait(false);
             }
 
-            // Now that we've produced all the indices for the projects asked for, also remove any indices for projects
+            // Now that we've produced all the indices for the projects asked for, also remove any indices for
+            // projects
             // no longer in the solution.
             var removedProjectIds = _projectIdToInfo.Keys.Except(solution.ProjectIds).ToArray();
             foreach (var projectId in removedProjectIds)
@@ -194,8 +203,10 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
                 )
             );
 
-            // Add tasks to update the symboltree for all metadata references.  As these are all distinct, they can run
-            // in parallel as we won't be trying to update the associated data for the same reference at the same time.
+            // Add tasks to update the symboltree for all metadata references.  As these are all distinct, they
+            // can run
+            // in parallel as we won't be trying to update the associated data for the same reference at the
+            // same time.
             foreach (
                 var reference in project
                     .MetadataReferences.OfType<PortableExecutableReference>()
@@ -216,10 +227,14 @@ internal sealed partial class SymbolTreeInfoCacheServiceFactory
             CancellationToken cancellationToken
         )
         {
-            // Find the top-level-semantic-version of this project.  We only want to recompute if it has changed. This is
-            // because the symboltree contains the names of the types/namespaces in the project and would not change
-            // if the semantic-version of the project hasn't changed.  We also do not need to check the 'dependent
-            // version'.  As this is just tracking parent/child relationships of namespace/type names for the source
+            // Find the top-level-semantic-version of this project.  We only want to recompute if it has
+            // changed. This is
+            // because the symboltree contains the names of the types/namespaces in the project and would not
+            // change
+            // if the semantic-version of the project hasn't changed.  We also do not need to check the
+            // 'dependent
+            // version'.  As this is just tracking parent/child relationships of namespace/type names for the
+            // source
             // types in this project, this cannot change based on what happens in other projects.
             var semanticVersion = await project
                 .GetSemanticVersionAsync(cancellationToken)

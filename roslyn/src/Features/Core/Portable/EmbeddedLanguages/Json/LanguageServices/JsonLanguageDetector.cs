@@ -59,7 +59,8 @@ internal sealed class JsonLanguageDetector(
     private readonly ISet<INamedTypeSymbol> _typesOfInterest = typesOfInterest;
 
     /// <summary>
-    /// [StringSyntax(Json)] means we're targetting .net, which means we're strict by default if we don't see any
+    /// [StringSyntax(Json)] means we're targetting .net, which means we're strict by default if we
+    // don't see any
     /// options.
     /// </summary>
     protected override JsonOptions GetStringSyntaxDefaultOptions() => JsonOptions.Strict;
@@ -69,9 +70,12 @@ internal sealed class JsonLanguageDetector(
 
     /// <inheritdoc cref="TryParseString(SyntaxToken, SemanticModel, bool, CancellationToken)"/>
     /// <summary>
-    /// If <paramref name="includeProbableStrings"/> is true, then this will also succeed on a string-literal like
-    /// <paramref name="token"/> that strongly appears to have JSON in it.  This allows some features to light up
-    /// automatically on code that is strongly believed to be JSON, but which is not passed to a known JSON api,
+    /// If <paramref name="includeProbableStrings"/> is true, then this will also succeed on a
+    // string-literal like
+    /// <paramref name="token"/> that strongly appears to have JSON in it.  This allows some features to
+    // light up
+    /// automatically on code that is strongly believed to be JSON, but which is not passed to a known
+    // JSON api,
     /// and does not have a comment on it stating it is JSON.
     /// </summary>
     public JsonTree? TryParseString(
@@ -92,9 +96,12 @@ internal sealed class JsonLanguageDetector(
     }
 
     /// <summary>
-    /// Returns <see langword="true"/> if this string-like <paramref name="token"/> is likely a JSON literal.  As
-    /// many simple strings are legal JSON (like <c>0</c>) we require enough structure here to feel confident that
-    /// this truly is JSON.  Currently, this means it must have at least one <c>{ ... }</c> object literal, and that
+    /// Returns <see langword="true"/> if this string-like <paramref name="token"/> is likely a JSON
+    // literal.  As
+    /// many simple strings are legal JSON (like <c>0</c>) we require enough structure here to feel
+    // confident that
+    /// this truly is JSON.  Currently, this means it must have at least one <c>{ ... }</c> object
+    // literal, and that
     /// literal must have at least one <c>"prop": val</c> property in it.
     /// </summary>
     public bool IsProbablyJson(SyntaxToken token, [NotNullWhen(true)] out JsonTree? tree)
@@ -192,7 +199,8 @@ internal sealed class JsonLanguageDetector(
     {
         options = default;
 
-        // look for an argument of the form `new JsonDocumentOptions { AllowTrailingCommas = ..., CommentHandling = ... }`
+        // look for an argument of the form `new JsonDocumentOptions { AllowTrailingCommas = ...,
+        // CommentHandling = ... }`
 
         if (exprType.Name != nameof(JsonDocumentOptions))
             return false;

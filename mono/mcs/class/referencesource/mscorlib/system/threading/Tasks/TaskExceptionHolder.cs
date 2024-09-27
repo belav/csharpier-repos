@@ -57,7 +57,8 @@ namespace System.Threading.Tasks
         /// <summary>An exception that triggered the task to cancel.</summary>
         private ExceptionDispatchInfo m_cancellationException;
 
-        /// <summary>Whether the holder was "observed" and thus doesn't cause finalization behavior.</summary>
+        /// <summary>Whether the holder was "observed" and thus doesn't cause finalization
+        // behavior.</summary>
         private volatile bool m_isHandled;
 
         /// <summary>
@@ -108,9 +109,12 @@ namespace System.Threading.Tasks
         /// </summary>
         ~TaskExceptionHolder()
         {
-            // Raise unhandled exceptions only when we know that neither the process or nor the appdomain is being torn down.
-            // We need to do this filtering because all TaskExceptionHolders will be finalized during shutdown or unload
-            // regardles of reachability of the task (i.e. even if the user code was about to observe the task's exception),
+            // Raise unhandled exceptions only when we know that neither the process or nor the appdomain is
+            // being torn down.
+            // We need to do this filtering because all TaskExceptionHolders will be finalized during shutdown
+            // or unload
+            // regardles of reachability of the task (i.e. even if the user code was about to observe the task's
+            // exception),
             // which can otherwise lead to spurious crashes during shutdown.
             if (
                 m_faultExceptions != null
@@ -169,7 +173,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Gets whether the exception holder is currently storing any exceptions for faults.</summary>
+        /// <summary>Gets whether the exception holder is currently storing any exceptions for
+        // faults.</summary>
         internal bool ContainsFaultList
         {
             get { return m_faultExceptions != null; }
@@ -247,7 +252,8 @@ namespace System.Threading.Tasks
                 m_faultExceptions == null,
                 "Expected SetCancellationException to be called before any faults were added."
             );
-            // Breaking this assumption shouldn't hurt anything here, but it implies something may be wrong elsewhere.
+            // Breaking this assumption shouldn't hurt anything here, but it implies something may be wrong
+            // elsewhere.
             // If this changes, make sure to only conditionally mark as handled below.
 
             // Store the cancellation exception
@@ -282,7 +288,8 @@ namespace System.Threading.Tasks
                 "AddFaultException(): Expected a non-null exceptionObject"
             );
 
-            // Initialize the exceptions list if necessary.  The list should be non-null iff it contains exceptions.
+            // Initialize the exceptions list if necessary.  The list should be non-null iff it contains
+            // exceptions.
             var exceptions = m_faultExceptions;
             if (exceptions == null)
                 m_faultExceptions = exceptions = new List<ExceptionDispatchInfo>(1);
@@ -308,7 +315,8 @@ namespace System.Threading.Tasks
                 }
                 else
                 {
-                    // Handle enumerables of exceptions by capturing each of the contained exceptions into an EDI and storing it
+                    // Handle enumerables of exceptions by capturing each of the contained exceptions into an EDI and
+                    // storing it
                     var exColl = exceptionObject as IEnumerable<Exception>;
                     if (exColl != null)
                     {

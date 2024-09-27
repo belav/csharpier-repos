@@ -74,7 +74,8 @@ namespace System.Data.Mapping
         );
 
         /// <summary>
-        /// Types for which the mapping holds true for not only the type specified but the sub-types of that type as well.
+        /// Types for which the mapping holds true for not only the type specified but the sub-types of that
+        // type as well.
         /// </summary>
         private Dictionary<string, EdmType> m_isOfEntityTypes = new Dictionary<string, EdmType>(
             StringComparer.Ordinal

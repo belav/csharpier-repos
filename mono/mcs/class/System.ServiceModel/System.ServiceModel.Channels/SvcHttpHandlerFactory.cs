@@ -97,9 +97,9 @@ namespace System.ServiceModel.Channels
                 //FIXME: Not caching, as parser.TypeName could be
                 //just typename or fully qualified name
                 service_type = GetTypeFromBinAndConfig(parser.TypeName);
-                /*CachingCompiler.InsertType (
-                    service_type, service_type.Assembly.Location, url,
-                    new CacheItemRemovedCallback (RemovedCallback));*/
+/*CachingCompiler.InsertType (
+service_type, service_type.Assembly.Location, url,
+new CacheItemRemovedCallback (RemovedCallback));*/
             }
             else
             {
@@ -113,9 +113,9 @@ namespace System.ServiceModel.Channels
             if (parser.Factory != null)
             {
                 factory_type = GetTypeFromBinAndConfig(parser.Factory);
-                /*CachingCompiler.InsertType (
-                    factory_type, factory_type.Assembly.Location, url,
-                    new CacheItemRemovedCallback (RemovedCallback));*/
+/*CachingCompiler.InsertType (
+factory_type, factory_type.Assembly.Location, url,
+new CacheItemRemovedCallback (RemovedCallback));*/
             }
         }
 

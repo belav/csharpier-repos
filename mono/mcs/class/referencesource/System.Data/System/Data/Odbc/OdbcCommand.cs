@@ -787,7 +787,8 @@ namespace System.Data.Odbc
                     if (!localReader.IsBehavior(CommandBehavior.SchemaOnly))
                     {
                         // Can't get the KeyInfo after command execution (SQL Server only since it does not support multiple
-                        // results on the same connection). Stored procedures (SP) do not return metadata before actual execution
+                        // results on the same connection). Stored procedures (SP) do not return metadata before actual
+                        // execution
                         // Need to check the column count since the command type may not be set to SP for a SP.
                         if (
                             (

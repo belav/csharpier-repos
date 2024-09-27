@@ -99,7 +99,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         Type,
 
         /// <summary>
-        /// The completion represents a value for Property attribute in Styles. (These are direct DPs on TargetTypes).
+        /// The completion represents a value for Property attribute in Styles. (These are direct DPs on
+        // TargetTypes).
         /// (i.e. "Grid.Background").
         /// </summary>
         PropertyValue,
@@ -111,7 +112,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         AttachedPropertyValue,
 
         /// <summary>
-        /// The completion represents a type  within for Property attribute in Styles. (These are the types that for APs).
+        /// The completion represents a type  within for Property attribute in Styles. (These are the types
+        // that for APs).
         /// (i.e. "Grid.Row").
         /// </summary>
         AttachedPropertyTypePrefix,
@@ -142,12 +144,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion
         NamespaceValue,
 
         /// <summary>
-        /// The completion represents a condition value in a namespace. For instance, xmlns:local="namespace?Completion"
+        /// The completion represents a condition value in a namespace. For instance,
+        // xmlns:local="namespace?Completion"
         /// </summary>
         ConditionValue,
 
         /// <summary>
-        /// The completion represents a conditional argument value in a namespace. For instance, xmlns:local="namespace?Condition(Completion)"
+        /// The completion represents a conditional argument value in a namespace. For instance,
+        // xmlns:local="namespace?Condition(Completion)"
         /// </summary>
         ConditionalArgument,
 

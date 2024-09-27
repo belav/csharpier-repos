@@ -52,15 +52,16 @@ namespace Mono.Security.X509.Extensions
     class NetscapeCertTypeExtension : X509Extension
     {
         /*
-         * bit-0 SSL client - this cert is certified for SSL client authentication use
-         * bit-1 SSL server - this cert is certified for SSL server authentication use
-         * bit-2 S/MIME - this cert is certified for use by clients(New in PR3)
-         * bit-3 Object Signing - this cert is certified for signing objects such as Java applets and plugins(New in PR3)
-         * bit-4 Reserved - this bit is reserved for future use
-         * bit-5 SSL CA - this cert is certified for issuing certs for SSL use
-         * bit-6 S/MIME CA - this cert is certified for issuing certs for S/MIME use(New in PR3)
-         * bit-7 Object Signing CA - this cert is certified for issuing certs for Object Signing(New in PR3)
-         */
+        * bit-0 SSL client - this cert is certified for SSL client authentication use
+        * bit-1 SSL server - this cert is certified for SSL server authentication use
+        * bit-2 S/MIME - this cert is certified for use by clients(New in PR3)
+        * bit-3 Object Signing - this cert is certified for signing objects such as Java applets and
+        plugins(New in PR3)
+        * bit-4 Reserved - this bit is reserved for future use
+        * bit-5 SSL CA - this cert is certified for issuing certs for SSL use
+        * bit-6 S/MIME CA - this cert is certified for issuing certs for S/MIME use(New in PR3)
+        * bit-7 Object Signing CA - this cert is certified for issuing certs for Object Signing(New in PR3)
+        */
 
         // note: because nothing is simple in ASN.1 bits are reversed
         [Flags]
@@ -105,9 +106,9 @@ namespace Mono.Security.X509.Extensions
         }
 
         /*		public CertType Type {
-                    get { return ctbits; }
-                    set { ctbits = value; }
-                }*/
+        get { return ctbits; }
+        set { ctbits = value; }
+        }*/
 
         public bool Support(CertTypes usage)
         {

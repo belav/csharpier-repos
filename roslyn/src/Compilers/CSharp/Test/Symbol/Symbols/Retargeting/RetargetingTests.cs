@@ -777,7 +777,8 @@ public class C<T> where T : int
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (2,29): error CS0701: 'int' is not a valid constraint. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                // (2,29): error CS0701: 'int' is not a valid constraint. A type used as a constraint must be an
+                // interface, a non-sealed class or a type parameter.
                 // public class C<T> where T : int
                 Diagnostic(ErrorCode.ERR_BadBoundType, "int").WithArguments("int")
             );
@@ -1509,7 +1510,8 @@ public class C
                 }
             );
             finalComp.VerifyDiagnostics(
-                // (1,1): error CS8901: 'C.M(int)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
+                // (1,1): error CS8901: 'C.M(int)' is attributed with 'UnmanagedCallersOnly' and cannot be called
+                // directly. Obtain a function pointer to this method.
                 // C.M(1);
                 Diagnostic(
                         ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,
@@ -1619,7 +1621,8 @@ public class C
                 }
             );
             finalComp.VerifyDiagnostics(
-                // (1,1): error CS8901: 'C.M(int)' is attributed with 'UnmanagedCallersOnly' and cannot be called directly. Obtain a function pointer to this method.
+                // (1,1): error CS8901: 'C.M(int)' is attributed with 'UnmanagedCallersOnly' and cannot be called
+                // directly. Obtain a function pointer to this method.
                 // C.M(1);
                 Diagnostic(
                         ErrorCode.ERR_UnmanagedCallersOnlyMethodsCannotBeCalledDirectly,

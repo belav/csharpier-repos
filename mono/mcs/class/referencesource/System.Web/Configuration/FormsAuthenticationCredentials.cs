@@ -5,76 +5,79 @@
 //------------------------------------------------------------------------------
 
 /*****************************************************************************
-     From machine.config
-        <!--
-        authentication Attributes:
-          mode="[Windows|Forms|Passport|None]"
-        -->
-        <authentication mode="Windows">
+From machine.config
+<!--
+authentication Attributes:
+mode="[Windows|Forms|Passport|None]"
+-->
+<authentication mode="Windows">
 
-            <!--
-            forms Attributes:
-              name="[cookie name]" - Name of the cookie used for Forms Authentication
-              loginUrl="[url]" - Url to redirect client to for Authentication
-              protection="[All|None|Encryption|Validation]" - Protection mode for data in cookie
-              timeout="[minutes]" - Duration of time for cookie to be valid (reset on each request)
-              path="/" - Sets the path for the cookie
-              requireSSL="[true|false]" - Should the forms-authentication cookie be sent only over SSL
-              slidingExpiration="[true|false]" - Should the forms-authentication-cookie and ticket be re-issued if they are about to expire
-              defaultUrl="string" - Page to redirect to after login, if none has been specified
-              cookieless="[UseCookies|UseUri|AutoDetect|UseDeviceProfile]" - Use Cookies or the URL path to store the forms authentication ticket
-              domain="string" - Domain of the cookie
-            -->
-            <forms
-                    name=".ASPXAUTH"
-                    loginUrl="login.aspx"
-                    protection="All"
-                    timeout="30"
-                    path="/"
-                    requireSSL="false"
-                    slidingExpiration="true"
-                    defaultUrl="default.aspx"
-                    cookieless="UseDeviceProfile"
-                    enableCrossAppRedirects="false" >
+<!--
+forms Attributes:
+name="[cookie name]" - Name of the cookie used for Forms Authentication
+loginUrl="[url]" - Url to redirect client to for Authentication
+protection="[All|None|Encryption|Validation]" - Protection mode for data in cookie
+timeout="[minutes]" - Duration of time for cookie to be valid (reset on each request)
+path="/" - Sets the path for the cookie
+requireSSL="[true|false]" - Should the forms-authentication cookie be sent only over SSL
+slidingExpiration="[true|false]" - Should the forms-authentication-cookie and ticket be re-issued if
+they are about to expire
+defaultUrl="string" - Page to redirect to after login, if none has been specified
+cookieless="[UseCookies|UseUri|AutoDetect|UseDeviceProfile]" - Use Cookies or the URL path to store
+the forms authentication ticket
+domain="string" - Domain of the cookie
+-->
+<forms
+name=".ASPXAUTH"
+loginUrl="login.aspx"
+protection="All"
+timeout="30"
+path="/"
+requireSSL="false"
+slidingExpiration="true"
+defaultUrl="default.aspx"
+cookieless="UseDeviceProfile"
+enableCrossAppRedirects="false" >
 
-                <!--
-                credentials Attributes:
-                  passwordFormat="[Clear|SHA1|MD5]" - format of user password value stored in <user>
-                -->
-                <credentials passwordFormat="SHA1">
-                        <!-- <user name="UserName" password="password" /> -->
-                </credentials>
+<!--
+credentials Attributes:
+passwordFormat="[Clear|SHA1|MD5]" - format of user password value stored in <user>
+-->
+<credentials passwordFormat="SHA1">
+<!-- <user name="UserName" password="password" /> -->
+</credentials>
 
-            </forms>
+</forms>
 
-            <!--
-            passport Attributes:
-               redirectUrl=["url"] - Specifies the page to redirect to, if the page requires authentication, and the user has not signed on with passport
-            -->
-            <passport redirectUrl="internal" />
+<!--
+passport Attributes:
+redirectUrl=["url"] - Specifies the page to redirect to, if the page requires authentication, and
+the user has not signed on with passport
+-->
+<passport redirectUrl="internal" />
 
-        </authentication>
+</authentication>
 
-        <authentication mode="Windows">
-            <forms
-                    name=".ASPXAUTH"
-                    loginUrl="login.aspx"
-                    protection="All"
-                    timeout="30"
-                    path="/"
-                    requireSSL="false"
-                    slidingExpiration="true"
-                    defaultUrl="default.aspx"
-                    cookieless="UseDeviceProfile"
-                    enableCrossAppRedirects="false" >
+<authentication mode="Windows">
+<forms
+name=".ASPXAUTH"
+loginUrl="login.aspx"
+protection="All"
+timeout="30"
+path="/"
+requireSSL="false"
+slidingExpiration="true"
+defaultUrl="default.aspx"
+cookieless="UseDeviceProfile"
+enableCrossAppRedirects="false" >
 
-                <credentials passwordFormat="SHA1">
-                </credentials>
-            </forms>
-            <passport redirectUrl="internal" />
-        </authentication>
+<credentials passwordFormat="SHA1">
+</credentials>
+</forms>
+<passport redirectUrl="internal" />
+</authentication>
 
-    ******************************************************************************/
+******************************************************************************/
 
 namespace System.Web.Configuration
 {

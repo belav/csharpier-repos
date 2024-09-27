@@ -130,7 +130,7 @@ namespace System.Windows.Forms
                         break;
                     }
                     walk.FireLeave();
-                    /* clear our idea of the active control as we go back up */
+/* clear our idea of the active control as we go back up */
                     if (walk is ContainerControl)
                         ((ContainerControl)walk).active_control = null;
 
@@ -234,15 +234,20 @@ namespace System.Windows.Forms
         // The process of validation happens as described:
         //
         // 	1. Iterate over the nodes in the enter chain (walk down), looking for any node
-        // 	causing validation. If we can't find any, don't validate the current validation chain, but postpone it,
-        // 	saving it in the top_container.pending_validation_chain field, since we need to keep track of it later.
-        // 	If we have a previous pending_validation_chain, add the new nodes, making sure they are not repeated
+        // 	causing validation. If we can't find any, don't validate the current validation chain, but
+        // postpone it,
+        // 	saving it in the top_container.pending_validation_chain field, since we need to keep track of it
+        // later.
+        // 	If we have a previous pending_validation_chain, add the new nodes, making sure they are not
+        // repeated
         // 	(this is computed in ActiveControl and we receive if as the postpone_validation parameter).
         //
-        // 	2. If we found at least one node causing validation in the enter chain, try to validate the elements
+        // 	2. If we found at least one node causing validation in the enter chain, try to validate the
+        // elements
         // 	in pending_validation_chain, if any. Then continue with the ones receives as parameters.
         //
-        // 	3. Return null if all the validation performed successfully, and return the control where the validation
+        // 	3. Return null if all the validation performed successfully, and return the control where the
+        // validation
         // 	failed otherwise.
         //
         private Control PerformValidation(

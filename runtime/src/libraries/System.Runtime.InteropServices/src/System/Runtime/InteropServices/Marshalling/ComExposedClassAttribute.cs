@@ -6,7 +6,8 @@ namespace System.Runtime.InteropServices.Marshalling
     /// <summary>
     /// An attribute to mark this class as a type whose instances should be exposed to COM.
     /// </summary>
-    /// <typeparam name="T">The type that provides information about how to expose the attributed type to COM.</typeparam>
+    /// <typeparam name="T">The type that provides information about how to expose the attributed type
+    // to COM.</typeparam>
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     [CLSCompliant(false)]
     public sealed class ComExposedClassAttribute<T> : Attribute, IComExposedDetails

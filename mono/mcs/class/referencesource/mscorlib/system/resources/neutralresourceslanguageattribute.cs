@@ -19,7 +19,8 @@
 ** NOTE:
 **
 ** This custom attribute is no longer implemented in managed code.  As part of a perf optimization,
-** it is now read in Module::GetNeutralResourcesLanguage, accessed from ManifestBasedResourceGroveler
+** it is now read in Module::GetNeutralResourcesLanguage, accessed from
+ManifestBasedResourceGroveler
 ** through an internal runtime call.
 ===========================================================*/
 

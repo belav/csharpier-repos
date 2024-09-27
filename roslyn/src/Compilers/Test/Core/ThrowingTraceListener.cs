@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis
     //    <trace>
     //      <listeners>
     //        <remove name="Default" />
-    //        <add name="ThrowingTraceListener" type="Microsoft.CodeAnalysis.ThrowingTraceListener, Roslyn.Test.Utilities" />
+    //        <add name="ThrowingTraceListener" type="Microsoft.CodeAnalysis.ThrowingTraceListener,
+    // Roslyn.Test.Utilities" />
     //      </listeners>
     //    </trace>
     //  </system.diagnostics>

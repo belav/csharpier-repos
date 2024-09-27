@@ -40,7 +40,8 @@ namespace System.Activities.Statements
             CompensationToken compensationToken = Target.Get(context);
             Fx.Assert(compensationToken != null, "CompensationToken must be valid");
 
-            // The compensationToken should be a valid one at this point. Ensure its validated in Compensate activity.
+            // The compensationToken should be a valid one at this point. Ensure its validated in Compensate
+            // activity.
             CompensationTokenData tokenData = compensationExtension.Get(
                 compensationToken.CompensationId
             );

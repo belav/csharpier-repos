@@ -272,7 +272,8 @@ namespace System.Activities.XamlIntegration
                     }
                 }
                 //
-                // We were valid when this location was generated so an ID shift occurred (likely due to a dynamic update)
+                // We were valid when this location was generated so an ID shift occurred (likely due to a dynamic
+                // update)
                 // Need to search all of the ICERs for one that can execute this expression.
                 if (FindCompiledExpressionRoot(rootActivity, out compiledExpressionRoot))
                 {

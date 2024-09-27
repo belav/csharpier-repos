@@ -63,13 +63,18 @@ namespace System.Text.RegularExpressions
             Int32.MaxValue - 1
         );
 
-        // InfiniteMatchTimeout specifies that match timeout is switched OFF. It allows for faster code paths
+        // InfiniteMatchTimeout specifies that match timeout is switched OFF. It allows for faster code
+        // paths
         // compared to simply having a very large timeout.
-        // We do not want to ask users to use System.Threading.Timeout.InfiniteTimeSpan as a parameter because:
-        //   (1) We do not want to imply any relation between having using a RegEx timeout and using multi-threading.
-        //   (2) We do not want to require users to take ref to a contract assembly for threading just to use RegEx.
+        // We do not want to ask users to use System.Threading.Timeout.InfiniteTimeSpan as a parameter
+        // because:
+        //   (1) We do not want to imply any relation between having using a RegEx timeout and using
+        // multi-threading.
+        //   (2) We do not want to require users to take ref to a contract assembly for threading just to
+        // use RegEx.
         //       There may in theory be a SKU that has RegEx, but no multithreading.
-        // We create a public Regex.InfiniteMatchTimeout constant, which for consistency uses the save underlying
+        // We create a public Regex.InfiniteMatchTimeout constant, which for consistency uses the save
+        // underlying
         // value as Timeout.InfiniteTimeSpan creating an implementation detail dependency only.
 #if !SILVERLIGHT || FEATURE_NETCORE
 #if !FEATURE_NETCORE
@@ -91,10 +96,13 @@ namespace System.Text.RegularExpressions
         );
 #endif
 
-        // All these protected internal fields in this class really should not be protected. The historic reason
-        // for this is that classes extending Regex that are generated via CompileToAssembly rely on the fact that
+        // All these protected internal fields in this class really should not be protected. The historic
+        // reason
+        // for this is that classes extending Regex that are generated via CompileToAssembly rely on the
+        // fact that
         // these are accessible as protected in order to initialise them in the generated constructor of the
-        // extending class. We should update this initialisation logic to using a protected constructor, but until
+        // extending class. We should update this initialisation logic to using a protected constructor, but
+        // until
         // that is done we stick to the existing pattern however ugly it may be.
 #if !SILVERLIGHT
         [OptionalField(VersionAdded = 2)]
@@ -137,7 +145,8 @@ namespace System.Text.RegularExpressions
         internal Dictionary<Int32, Int32> caps; // if captures are sparse, this is the hashtable capnum->index
         internal Dictionary<String, Int32> capnames; // if named captures are used, this maps names->index
 #else
-        // desktop build still uses non-generic collections for AppCompat with .NET Framework 3.5 pre-compiled assemblies
+        // desktop build still uses non-generic collections for AppCompat with .NET Framework 3.5
+        // pre-compiled assemblies
         protected internal Hashtable caps;
         protected internal Hashtable capnames;
 #endif
@@ -156,16 +165,18 @@ namespace System.Text.RegularExpressions
 
         protected Regex()
         {
-            // If a compiled-to-assembly RegEx was generated using an earlier version, then internalMatchTimeout will be uninitialised.
+            // If a compiled-to-assembly RegEx was generated using an earlier version, then internalMatchTimeout
+            // will be uninitialised.
             // Let's do it here.
-            // In distant future, when RegEx generated using pre Dev11 are not supported any more, we can remove this to aid performance:
+            // In distant future, when RegEx generated using pre Dev11 are not supported any more, we can remove
+            // this to aid performance:
 
             this.internalMatchTimeout = DefaultMatchTimeout;
         }
 
-        /*
-         * Compiles and returns a Regex object corresponding to the given pattern
-         */
+/*
+* Compiles and returns a Regex object corresponding to the given pattern
+*/
         /// <devdoc>
         ///    <para>
         ///       Creates and compiles a regular expression object for the specified regular
@@ -175,10 +186,10 @@ namespace System.Text.RegularExpressions
         public Regex(String pattern)
             : this(pattern, RegexOptions.None, DefaultMatchTimeout, false) { }
 
-        /*
-         * Returns a Regex object corresponding to the given pattern, compiled with
-         * the specified options.
-         */
+/*
+* Returns a Regex object corresponding to the given pattern, compiled with
+* the specified options.
+*/
         /// <devdoc>
         ///    <para>
         ///       Creates and compiles a regular expression object for the
@@ -231,7 +242,8 @@ namespace System.Text.RegularExpressions
 
             ValidateMatchTimeout(matchTimeout);
 
-            // Try to look up this regex in the cache.  We do this regardless of whether useCache is true since there's
+            // Try to look up this regex in the cache.  We do this regardless of whether useCache is true since
+            // there's
             // really no reason not to.
             if ((options & RegexOptions.CultureInvariant) != 0)
                 cultureKey = CultureInfo.InvariantCulture.ToString(); // "English (United States)"
@@ -297,8 +309,8 @@ namespace System.Text.RegularExpressions
 
 #if !SILVERLIGHT
         /*
-         *  ISerializable constructor
-         */
+        *  ISerializable constructor
+        */
         protected Regex(SerializationInfo info, StreamingContext context)
             : this(info.GetString("pattern"), (RegexOptions)info.GetInt32("options"))
         {
@@ -318,8 +330,8 @@ namespace System.Text.RegularExpressions
         }
 
         /*
-         *  ISerializable method
-         */
+        *  ISerializable method
+        */
         /// <internalonly/>
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
         {
@@ -335,7 +347,8 @@ namespace System.Text.RegularExpressions
         /// The valid range is <code>TimeSpan.Zero &lt; matchTimeout &lt;= Regex.MaximumMatchTimeout</code>.
         /// </summary>
         /// <param name="matchTimeout">The timeout value to validate.</param>
-        /// <exception cref="System.ArgumentOutOfRangeException">If the specified timeout is not within a valid range.
+        /// <exception cref="System.ArgumentOutOfRangeException">If the specified timeout is not within a
+        // valid range.
         /// </exception>
 #if !SILVERLIGHT
         protected internal
@@ -358,12 +371,16 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Specifies the default RegEx matching timeout value (i.e. the timeout that will be used if no
         /// explicit timeout is specified).
-        /// The default is queried from the current <code>AppDomain</code> through <code>GetData</code> using
+        /// The default is queried from the current <code>AppDomain</code> through <code>GetData</code>
+        // using
         /// the key specified in <code>Regex.DefaultMatchTimeout_ConfigKeyName</code>. For that key, the
-        /// current <code>AppDomain</code> is expected to either return <code>null</code> or a <code>TimeSpan</code>
+        /// current <code>AppDomain</code> is expected to either return <code>null</code> or a
+        // <code>TimeSpan</code>
         /// value specifying the default timeout within a valid range.
-        /// If the AddDomain's data value for that key is not a <code>TimeSpan</code> value or if it is outside the
-        /// valid range, an exception is thrown which will result in a <code>TypeInitializationException</code> for RegEx.
+        /// If the AddDomain's data value for that key is not a <code>TimeSpan</code> value or if it is
+        // outside the
+        /// valid range, an exception is thrown which will result in a
+        // <code>TypeInitializationException</code> for RegEx.
         /// If the AddDomain's data value for that key is <code>null</code>, a fallback value is returned
         /// (see <code>FallbackDefaultMatchTimeout</code> in code).
         /// </summary>
@@ -404,7 +421,8 @@ namespace System.Text.RegularExpressions
             // Convert default value:
             TimeSpan defaultTimeout = (TimeSpan)defTmOut;
 
-            // If default timeout is outside the valid range, throw. It will result in a TypeInitializationException:
+            // If default timeout is outside the valid range, throw. It will result in a
+            // TypeInitializationException:
             try
             {
                 ValidateMatchTimeout(defaultTimeout);
@@ -437,12 +455,12 @@ namespace System.Text.RegularExpressions
 #endif  // !SILVERLIGHT
 
 #if !SILVERLIGHT && !FULL_AOT_RUNTIME
-        /*
-        * This method is here for perf reasons: if the call to RegexCompiler is NOT in the
-        * Regex constructor, we don't load RegexCompiler and its reflection classes when
-        * instantiating a non-compiled regex
-        * This method is internal virtual so the jit does not inline it.
-        */
+/*
+* This method is here for perf reasons: if the call to RegexCompiler is NOT in the
+* Regex constructor, we don't load RegexCompiler and its reflection classes when
+* instantiating a non-compiled regex
+* This method is internal virtual so the jit does not inline it.
+*/
         [
 #if MONO_FEATURE_CAS
             HostProtection(MayLeakOnAbort = true),
@@ -454,9 +472,9 @@ namespace System.Text.RegularExpressions
         }
 #endif  // !SILVERLIGHT
 
-        /*
-         * Escape metacharacters within the string
-         */
+/*
+* Escape metacharacters within the string
+*/
         /// <devdoc>
         ///    <para>
         ///       Escapes
@@ -477,9 +495,9 @@ namespace System.Text.RegularExpressions
             return RegexParser.Escape(str);
         }
 
-        /*
-         * Unescape character codes within the string
-         */
+/*
+* Unescape character codes within the string
+*/
         /// <devdoc>
         ///    <para>
         ///       Unescapes any escaped characters in the input string.
@@ -601,9 +619,9 @@ namespace System.Text.RegularExpressions
             get { return internalMatchTimeout; }
         }
 
-        /*
-         * True if the regex is leftward
-         */
+/*
+* True if the regex is leftward
+*/
         /// <devdoc>
         ///    <para>
         ///       Indicates whether the regular expression matches from right to
@@ -625,12 +643,12 @@ namespace System.Text.RegularExpressions
             return pattern;
         }
 
-        /*
-         * Returns an array of the group names that are used to capture groups
-         * in the regular expression. Only needed if the regex is not known until
-         * runtime, and one wants to extract captured groups. (Probably unusual,
-         * but supplied for completeness.)
-         */
+/*
+* Returns an array of the group names that are used to capture groups
+* in the regular expression. Only needed if the regex is not known until
+* runtime, and one wants to extract captured groups. (Probably unusual,
+* but supplied for completeness.)
+*/
         /// <devdoc>
         ///    Returns
         ///       the GroupNameCollection for the regular expression. This collection contains the
@@ -660,12 +678,12 @@ namespace System.Text.RegularExpressions
             return result;
         }
 
-        /*
-         * Returns an array of the group numbers that are used to capture groups
-         * in the regular expression. Only needed if the regex is not known until
-         * runtime, and one wants to extract captured groups. (Probably unusual,
-         * but supplied for completeness.)
-         */
+/*
+* Returns an array of the group numbers that are used to capture groups
+* in the regular expression. Only needed if the regex is not known until
+* runtime, and one wants to extract captured groups. (Probably unusual,
+* but supplied for completeness.)
+*/
         /// <devdoc>
         ///    returns
         ///       the integer group number corresponding to a group name.
@@ -698,13 +716,13 @@ namespace System.Text.RegularExpressions
             return result;
         }
 
-        /*
-         * Given a group number, maps it to a group name. Note that nubmered
-         * groups automatically get a group name that is the decimal string
-         * equivalent of its number.
-         *
-         * Returns null if the number is not a recognized group number.
-         */
+/*
+* Given a group number, maps it to a group name. Note that nubmered
+* groups automatically get a group name that is the decimal string
+* equivalent of its number.
+*
+* Returns null if the number is not a recognized group number.
+*/
         /// <devdoc>
         ///    <para>
         ///       Retrieves a group name that corresponds to a group number.
@@ -745,13 +763,13 @@ namespace System.Text.RegularExpressions
             }
         }
 
-        /*
-         * Given a group name, maps it to a group number. Note that nubmered
-         * groups automatically get a group name that is the decimal string
-         * equivalent of its number.
-         *
-         * Returns -1 if the name is not a recognized group name.
-         */
+/*
+* Given a group name, maps it to a group number. Note that nubmered
+* groups automatically get a group name that is the decimal string
+* equivalent of its number.
+*
+* Returns -1 if the name is not a recognized group name.
+*/
         /// <devdoc>
         ///    <para>
         ///       Returns a group number that corresponds to a group name.
@@ -802,9 +820,9 @@ namespace System.Text.RegularExpressions
             return -1;
         }
 
-        /*
-         * Static version of simple IsMatch call
-         */
+/*
+* Static version of simple IsMatch call
+*/
         ///    <devdoc>
         ///       <para>
         ///          Searches the input
@@ -817,9 +835,9 @@ namespace System.Text.RegularExpressions
             return IsMatch(input, pattern, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple IsMatch call
-         */
+/*
+* Static version of simple IsMatch call
+*/
         /// <devdoc>
         ///    <para>
         ///       Searches the input string for one or more occurrences of the text
@@ -847,9 +865,9 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).IsMatch(input);
         }
 
-        /*
-         * Returns true if the regex finds a match within the specified string
-         */
+/*
+* Returns true if the regex finds a match within the specified string
+*/
         /// <devdoc>
         ///    <para>
         ///       Searches the input string for one or
@@ -865,10 +883,10 @@ namespace System.Text.RegularExpressions
             return IsMatch(input, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Returns true if the regex finds a match after the specified position
-         * (proceeding leftward if the regex is leftward and rightward otherwise)
-         */
+/*
+* Returns true if the regex finds a match after the specified position
+* (proceeding leftward if the regex is leftward and rightward otherwise)
+*/
         /// <devdoc>
         ///    <para>
         ///       Searches the input
@@ -884,9 +902,9 @@ namespace System.Text.RegularExpressions
             return (null == Run(true, -1, input, 0, input.Length, startat));
         }
 
-        /*
-         * Static version of simple Match call
-         */
+/*
+* Static version of simple Match call
+*/
         ///    <devdoc>
         ///       <para>
         ///          Searches the input string for one or more occurrences of the text
@@ -898,9 +916,9 @@ namespace System.Text.RegularExpressions
             return Match(input, pattern, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple Match call
-         */
+/*
+* Static version of simple Match call
+*/
         /// <devdoc>
         ///    <para>
         ///       Searches the input string for one or more occurrences of the text
@@ -928,10 +946,10 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).Match(input);
         }
 
-        /*
-         * Finds the first match for the regular expression starting at the beginning
-         * of the string (or at the end of the string if the regex is leftward)
-         */
+/*
+* Finds the first match for the regular expression starting at the beginning
+* of the string (or at the end of the string if the regex is leftward)
+*/
         /// <devdoc>
         ///    <para>
         ///       Matches a regular expression with a string and returns
@@ -946,9 +964,9 @@ namespace System.Text.RegularExpressions
             return Match(input, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Finds the first match, starting at the specified position
-         */
+/*
+* Finds the first match, starting at the specified position
+*/
         /// <devdoc>
         ///    Matches a regular expression with a string and returns
         ///    the precise result as a RegexMatch object.
@@ -961,10 +979,10 @@ namespace System.Text.RegularExpressions
             return Run(false, -1, input, 0, input.Length, startat);
         }
 
-        /*
-         * Finds the first match, restricting the search to the specified interval of
-         * the char array.
-         */
+/*
+* Finds the first match, restricting the search to the specified interval of
+* the char array.
+*/
         /// <devdoc>
         ///    <para>
         ///       Matches a
@@ -987,9 +1005,9 @@ namespace System.Text.RegularExpressions
             );
         }
 
-        /*
-         * Static version of simple Matches call
-         */
+/*
+* Static version of simple Matches call
+*/
         ///    <devdoc>
         ///       <para>
         ///          Returns all the successful matches as if Match were
@@ -1001,9 +1019,9 @@ namespace System.Text.RegularExpressions
             return Matches(input, pattern, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple Matches call
-         */
+/*
+* Static version of simple Matches call
+*/
         /// <devdoc>
         ///    <para>
         ///       Returns all the successful matches as if Match were called iteratively
@@ -1030,10 +1048,10 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).Matches(input);
         }
 
-        /*
-         * Finds the first match for the regular expression starting at the beginning
-         * of the string Enumerator(or at the end of the string if the regex is leftward)
-         */
+/*
+* Finds the first match for the regular expression starting at the beginning
+* of the string Enumerator(or at the end of the string if the regex is leftward)
+*/
         /// <devdoc>
         ///    <para>
         ///       Returns
@@ -1049,9 +1067,9 @@ namespace System.Text.RegularExpressions
             return Matches(input, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Finds the first match, starting at the specified position
-         */
+/*
+* Finds the first match, starting at the specified position
+*/
         /// <devdoc>
         ///    <para>
         ///       Returns
@@ -1067,13 +1085,14 @@ namespace System.Text.RegularExpressions
             return new MatchCollection(this, input, 0, input.Length, startat);
         }
 
-        /*
-         * Static version of simple Replace call
-         */
+/*
+* Static version of simple Replace call
+*/
         /// <devdoc>
         ///    <para>
         ///       Replaces
-        ///          all occurrences of the pattern with the <paramref name="replacement"/> pattern, starting at
+        ///          all occurrences of the pattern with the <paramref name="replacement"/> pattern,
+        // starting at
         ///          the first character in the input string.
         ///       </para>
         ///    </devdoc>
@@ -1082,9 +1101,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, pattern, replacement, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple Replace call
-         */
+/*
+* Static version of simple Replace call
+*/
         /// <devdoc>
         ///    <para>
         ///       Replaces all occurrences of
@@ -1118,13 +1137,14 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).Replace(input, replacement);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///       Replaces all occurrences of
-        ///          the <paramref name="pattern "/> with the <paramref name="replacement"/> pattern, starting at the
+        ///          the <paramref name="pattern "/> with the <paramref name="replacement"/> pattern,
+        // starting at the
         ///          first character in the input string, using the previous patten.
         ///       </para>
         ///    </devdoc>
@@ -1136,9 +1156,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, replacement, -1, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the (previously defined) <paramref name="pattern "/>with the
@@ -1153,9 +1173,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, replacement, count, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the <paramref name="pattern "/>with the recent
@@ -1189,9 +1209,9 @@ namespace System.Text.RegularExpressions
             return repl.Replace(this, input, count, startat);
         }
 
-        /*
-         * Static version of simple Replace call
-         */
+/*
+* Static version of simple Replace call
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the <paramref name="pattern "/>with the
@@ -1204,9 +1224,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, pattern, evaluator, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple Replace call
-         */
+/*
+* Static version of simple Replace call
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the <paramref name="pattern "/>with the recent
@@ -1239,9 +1259,9 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).Replace(input, evaluator);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the <paramref name="pattern "/>with the recent
@@ -1257,9 +1277,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, evaluator, -1, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the <paramref name="pattern "/>with the recent
@@ -1275,9 +1295,9 @@ namespace System.Text.RegularExpressions
             return Replace(input, evaluator, count, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does the replacement
-         */
+/*
+* Does the replacement
+*/
         /// <devdoc>
         ///    <para>
         ///    Replaces all occurrences of the (previouly defined) <paramref name="pattern "/>with
@@ -1293,9 +1313,9 @@ namespace System.Text.RegularExpressions
             return RegexReplacement.Replace(evaluator, this, input, count, startat);
         }
 
-        /*
-         * Static version of simple Split call
-         */
+/*
+* Static version of simple Split call
+*/
         ///    <devdoc>
         ///       <para>
         ///          Splits the <paramref name="input "/>string at the position defined
@@ -1307,12 +1327,13 @@ namespace System.Text.RegularExpressions
             return Split(input, pattern, RegexOptions.None, DefaultMatchTimeout);
         }
 
-        /*
-         * Static version of simple Split call
-         */
+/*
+* Static version of simple Split call
+*/
         /// <devdoc>
         ///    <para>
-        ///       Splits the <paramref name="input "/>string at the position defined by <paramref name="pattern"/>.
+        ///       Splits the <paramref name="input "/>string at the position defined by <paramref
+        // name="pattern"/>.
         ///    </para>
         /// </devdoc>
         public static String[] Split(String input, String pattern, RegexOptions options)
@@ -1335,9 +1356,9 @@ namespace System.Text.RegularExpressions
             return new Regex(pattern, options, matchTimeout, true).Split(input);
         }
 
-        /*
-         * Does a split
-         */
+/*
+* Does a split
+*/
         /// <devdoc>
         ///    <para>
         ///       Splits the <paramref name="input "/>string at the position defined by
@@ -1353,9 +1374,9 @@ namespace System.Text.RegularExpressions
             return Split(input, 0, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does a split
-         */
+/*
+* Does a split
+*/
         /// <devdoc>
         ///    <para>
         ///       Splits the <paramref name="input "/>string at the position defined by a previous
@@ -1370,9 +1391,9 @@ namespace System.Text.RegularExpressions
             return RegexReplacement.Split(this, input, count, UseOptionR() ? input.Length : 0);
         }
 
-        /*
-         * Does a split
-         */
+/*
+* Does a split
+*/
         /// <devdoc>
         ///    <para>
         ///       Splits the <paramref name="input "/>string at the position defined by a previous
@@ -1483,9 +1504,9 @@ namespace System.Text.RegularExpressions
             replref = new SharedReference();
         }
 
-        /*
-         * Internal worker called by all the public APIs
-         */
+/*
+* Internal worker called by all the public APIs
+*/
         internal Match Run(
             bool quick,
             int prevlen,
@@ -1555,9 +1576,9 @@ namespace System.Text.RegularExpressions
             return match;
         }
 
-        /*
-         * Find code cache based on options+pattern
-         */
+/*
+* Find code cache based on options+pattern
+*/
         private static CachedCodeEntry LookupCachedAndUpdate(String key)
         {
             lock (livecode)
@@ -1581,9 +1602,9 @@ namespace System.Text.RegularExpressions
             return null;
         }
 
-        /*
-         * Add current code to the cache
-         */
+/*
+* Add current code to the cache
+*/
         private CachedCodeEntry CacheCode(String key)
         {
             CachedCodeEntry newcached = null;
@@ -1605,7 +1626,8 @@ namespace System.Text.RegularExpressions
                     }
                 }
 
-                // it wasn't in the cache, so we'll add a new one.  Shortcut out for the case where cacheSize is zero.
+                // it wasn't in the cache, so we'll add a new one.  Shortcut out for the case where cacheSize is
+                // zero.
                 if (cacheSize != 0)
                 {
                     newcached = new CachedCodeEntry(
@@ -1629,8 +1651,8 @@ namespace System.Text.RegularExpressions
 
 #if !SILVERLIGHT
         /*
-         * True if the O option was set
-         */
+        * True if the O option was set
+        */
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -1641,7 +1663,7 @@ namespace System.Text.RegularExpressions
 #else
 
 #if MONO
-            /* Mono: Set to false until we investigate  https://bugzilla.xamarin.com/show_bug.cgi?id=25671 */
+/* Mono: Set to false until we investigate  https://bugzilla.xamarin.com/show_bug.cgi?id=25671 */
             return false;
 #else
             return (roptions & RegexOptions.Compiled) != 0;
@@ -1650,9 +1672,9 @@ namespace System.Text.RegularExpressions
         }
 #endif
 
-        /*
-         * True if the L option was set
-         */
+/*
+* True if the L option was set
+*/
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -1667,9 +1689,9 @@ namespace System.Text.RegularExpressions
         }
 
 #if DBG
-        /*
-         * True if the regex has debugging enabled
-         */
+/*
+* True if the regex has debugging enabled
+*/
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
@@ -1681,9 +1703,9 @@ namespace System.Text.RegularExpressions
 #endif
     }
 
-    /*
-     * Callback class
-     */
+/*
+* Callback class
+*/
     /// <devdoc>
     /// </devdoc>
 #if !SILVERLIGHT
@@ -1691,9 +1713,9 @@ namespace System.Text.RegularExpressions
 #endif
     public delegate String MatchEvaluator(Match match);
 
-    /*
-     * Used to cache byte codes or compiled factories
-     */
+/*
+* Used to cache byte codes or compiled factories
+*/
     internal sealed class CachedCodeEntry
     {
         internal string _key;
@@ -1756,22 +1778,22 @@ namespace System.Text.RegularExpressions
 #endif
     }
 
-    /*
-     * Used to cache one exclusive runner reference
-     */
+/*
+* Used to cache one exclusive runner reference
+*/
     internal sealed class ExclusiveReference
     {
         RegexRunner _ref;
         Object _obj;
         int _locked;
 
-        /*
-         * Return an object and grab an exclusive lock.
-         *
-         * If the exclusive lock can't be obtained, null is returned;
-         * if the object can't be returned, the lock is released.
-         *
-         */
+/*
+* Return an object and grab an exclusive lock.
+*
+* If the exclusive lock can't be obtained, null is returned;
+* if the object can't be returned, the lock is released.
+*
+*/
         internal Object Get()
         {
             // try to obtain the lock
@@ -1800,16 +1822,16 @@ namespace System.Text.RegularExpressions
             return null;
         }
 
-        /*
-         * Release an object back to the cache
-         *
-         * If the object is the one that's under lock, the lock
-         * is released.
-         *
-         * If there is no cached object, then the lock is obtained
-         * and the object is placed in the cache.
-         *
-         */
+/*
+* Release an object back to the cache
+*
+* If the object is the one that's under lock, the lock
+* is released.
+*
+* If there is no cached object, then the lock is obtained
+* and the object is placed in the cache.
+*
+*/
         internal void Release(Object obj)
         {
             if (obj == null)
@@ -1846,22 +1868,22 @@ namespace System.Text.RegularExpressions
         }
     }
 
-    /*
-     * Used to cache a weak reference in a threadsafe way
-     */
+/*
+* Used to cache a weak reference in a threadsafe way
+*/
     internal sealed class SharedReference
     {
         WeakReference _ref = new WeakReference(null);
         int _locked;
 
-        /*
-         * Return an object from a weakref, protected by a lock.
-         *
-         * If the exclusive lock can't be obtained, null is returned;
-         *
-         * Note that _ref.Target is referenced only under the protection
-         * of the lock. (Is this necessary?)
-         */
+/*
+* Return an object from a weakref, protected by a lock.
+*
+* If the exclusive lock can't be obtained, null is returned;
+*
+* Note that _ref.Target is referenced only under the protection
+* of the lock. (Is this necessary?)
+*/
         internal Object Get()
         {
             if (0 == Interlocked.Exchange(ref _locked, 1))
@@ -1874,12 +1896,12 @@ namespace System.Text.RegularExpressions
             return null;
         }
 
-        /*
-         * Suggest an object into a weakref, protected by a lock.
-         *
-         * Note that _ref.Target is referenced only under the protection
-         * of the lock. (Is this necessary?)
-         */
+/*
+* Suggest an object into a weakref, protected by a lock.
+*
+* Note that _ref.Target is referenced only under the protection
+* of the lock. (Is this necessary?)
+*/
         internal void Cache(Object obj)
         {
             if (0 == Interlocked.Exchange(ref _locked, 1))

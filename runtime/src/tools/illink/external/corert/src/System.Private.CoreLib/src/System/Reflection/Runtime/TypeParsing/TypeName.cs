@@ -7,7 +7,8 @@ using System.Diagnostics;
 namespace System.Reflection.Runtime.TypeParsing
 {
     //
-    // The TypeName class is the base class for a family of types that represent the nodes in a parse tree for
+    // The TypeName class is the base class for a family of types that represent the nodes in a parse
+    // tree for
     // assembly-qualified type names.
     //
     public abstract class TypeName
@@ -16,7 +17,8 @@ namespace System.Reflection.Runtime.TypeParsing
     }
 
     //
-    // Represents a parse of a type name optionally qualified by an assembly name. If present, the assembly name follows
+    // Represents a parse of a type name optionally qualified by an assembly name. If present, the
+    // assembly name follows
     // a comma following the type name.
     //
     public sealed class AssemblyQualifiedTypeName : TypeName
@@ -52,7 +54,8 @@ namespace System.Reflection.Runtime.TypeParsing
     internal abstract class NamedTypeName : NonQualifiedTypeName { }
 
     //
-    // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
+    // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName
+    // for
     // System.Collections.Generic.IList<> is "System.Collections.Generic.IList`1".
     //
     internal sealed partial class NamespaceTypeName : NamedTypeName
@@ -83,7 +86,8 @@ namespace System.Reflection.Runtime.TypeParsing
     }
 
     //
-    // A nested type. The Name is the simple name of the type (not including any portion of its declaring type name.)
+    // A nested type. The Name is the simple name of the type (not including any portion of its
+    // declaring type name.)
     //
     internal sealed class NestedTypeName : NamedTypeName
     {

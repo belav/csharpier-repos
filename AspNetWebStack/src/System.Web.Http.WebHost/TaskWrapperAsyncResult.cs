@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 namespace System.Web.Http.WebHost
 {
     /// <summary>
-    /// Wraps a <see cref="Task"/>, optionally overriding the State object (since the Task Asynchronous Pattern doesn't normally use it).
+    /// Wraps a <see cref="Task"/>, optionally overriding the State object (since the Task Asynchronous
+    // Pattern doesn't normally use it).
     /// </summary>
     /// <remarks>Class copied from System.Web.Mvc, but with modifications</remarks>
     internal sealed class TaskWrapperAsyncResult : IAsyncResult
@@ -18,7 +20,8 @@ namespace System.Web.Http.WebHost
         /// Initializes a new instance of the <see cref="TaskWrapperAsyncResult"/> class.
         /// </summary>
         /// <param name="task">The <see cref="Task"/> to wrap.</param>
-        /// <param name="asyncState">User-defined object that qualifies or contains information about an asynchronous operation.</param>
+        /// <param name="asyncState">User-defined object that qualifies or contains information about an
+        // asynchronous operation.</param>
         public TaskWrapperAsyncResult(Task task, object asyncState)
         {
             if (task == null)
@@ -31,15 +34,19 @@ namespace System.Web.Http.WebHost
         }
 
         /// <summary>
-        /// Gets a user-defined object that qualifies or contains information about an asynchronous operation.
+        /// Gets a user-defined object that qualifies or contains information about an asynchronous
+        // operation.
         /// </summary>
-        /// <returns>A user-defined object that qualifies or contains information about an asynchronous operation.</returns>
+        /// <returns>A user-defined object that qualifies or contains information about an asynchronous
+        // operation.</returns>
         public object AsyncState { get; private set; }
 
         /// <summary>
-        /// Gets a <see cref="T:System.Threading.WaitHandle"/> that is used to wait for an asynchronous operation to complete.
+        /// Gets a <see cref="T:System.Threading.WaitHandle"/> that is used to wait for an asynchronous
+        // operation to complete.
         /// </summary>
-        /// <returns>A <see cref="T:System.Threading.WaitHandle"/> that is used to wait for an asynchronous operation to complete.</returns>
+        /// <returns>A <see cref="T:System.Threading.WaitHandle"/> that is used to wait for an asynchronous
+        // operation to complete.</returns>
         public WaitHandle AsyncWaitHandle
         {
             get { return ((IAsyncResult)Task).AsyncWaitHandle; }

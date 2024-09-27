@@ -14,7 +14,8 @@ namespace System.Web.UI.WebControls
     using AttributeCollection = System.Web.UI.AttributeCollection;
 
     /// <devdoc>
-    /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.ListItem'/> control.</para>
+    /// <para>Interacts with the parser to build a <see cref='System.Web.UI.WebControls.ListItem'/>
+    // control.</para>
     /// </devdoc>
     public class ListItemControlBuilder : ControlBuilder
     {
@@ -57,25 +58,29 @@ namespace System.Web.UI.WebControls
         private AttributeCollection _attributes;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/>
+        // class.</para>
         /// </devdoc>
         public ListItem()
             : this(null, null) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class with the specified text data.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class
+        // with the specified text data.</para>
         /// </devdoc>
         public ListItem(string text)
             : this(text, null) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class with the specified text data.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class
+        // with the specified text data.</para>
         /// </devdoc>
         public ListItem(string text, string value)
             : this(text, value, true) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class with the
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ListItem'/> class
+        // with the
         ///    specified text and value data.</para>
         /// </devdoc>
         public ListItem(string text, string value, bool enabled)
@@ -213,7 +218,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Creates a <see cref='System.Web.UI.WebControls.ListItem'/> from the specified string.</para>
+        /// <para>Creates a <see cref='System.Web.UI.WebControls.ListItem'/> from the specified
+        // string.</para>
         /// </devdoc>
         public static ListItem FromString(string s)
         {

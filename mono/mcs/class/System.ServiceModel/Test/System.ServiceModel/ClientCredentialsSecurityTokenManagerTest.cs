@@ -269,11 +269,11 @@ namespace MonoTests.System.ServiceModel
                 new CustomBinding(),
                 new BindingParameterCollection()
             );
-            /* it somehow does not cause an error ...
-                        InitiatorServiceModelSecurityTokenRequirement r =
-                            CreateRequirement ();
-                        r.Properties.Remove (SecurityTokenRequirement.KeySizeProperty);
-            */
+/* it somehow does not cause an error ...
+InitiatorServiceModelSecurityTokenRequirement r =
+CreateRequirement ();
+r.Properties.Remove (SecurityTokenRequirement.KeySizeProperty);
+*/
             def_c.CreateSecurityTokenProvider(r);
         }
 

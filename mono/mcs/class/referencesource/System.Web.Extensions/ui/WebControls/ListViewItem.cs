@@ -14,7 +14,8 @@ using System.Web.UI;
 namespace System.Web.UI.WebControls
 {
     [ToolboxItem(false)]
-    // ListViewItem is an IDataItemContainer so that we can have controls that databind in the ListView's InsertItem.
+    // ListViewItem is an IDataItemContainer so that we can have controls that databind in the
+    // ListView's InsertItem.
     public class ListViewItem : Control, INamingContainer, IDataItemContainer
     {
         private ListViewItemType _itemType;

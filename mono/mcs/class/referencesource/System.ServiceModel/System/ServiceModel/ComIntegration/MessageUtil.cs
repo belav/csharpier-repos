@@ -50,10 +50,13 @@ namespace System.ServiceModel.ComIntegration
             return callerIdentity;
         }
 
-        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next version.
-        /*
-        [PermissionSet(SecurityAction.Demand, Unrestricted = true)] // because we call code from a non-APTCA assembly; transactions are not supported in partial trust, so customers should not be broken by this demand
-        */
+        // The demand is not added now (in 4.5), to avoid a breaking change. To be considered in the next
+        // version.
+/*
+[PermissionSet(SecurityAction.Demand, Unrestricted = true)] // because we call code from a non-APTCA
+assembly; transactions are not supported in partial trust, so customers should not be broken by this
+demand
+*/
         public static Transaction GetMessageTransaction(Message message)
         {
             ServiceConfig serviceConfig = new ServiceConfig();

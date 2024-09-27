@@ -43,7 +43,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
         var arrayCreationExpression = (ArrayCreationExpressionSyntax)context.Node;
         var cancellationToken = context.CancellationToken;
 
-        // Don't analyze arrays with initializers here, they're handled in AnalyzeArrayInitializerExpression instead.
+        // Don't analyze arrays with initializers here, they're handled in AnalyzeArrayInitializerExpression
+        // instead.
         if (arrayCreationExpression.Initializer != null)
             return;
 
@@ -99,7 +100,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
         CancellationToken cancellationToken
     )
     {
-        // if we have `new[] { ... }` we have no subsequent matches to add to the collection. All values come
+        // if we have `new[] { ... }` we have no subsequent matches to add to the collection. All values
+        // come
         // from within the initializer.
         if (
             !UseCollectionExpressionHelpers.CanReplaceWithCollectionExpression(
@@ -133,7 +135,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
                 is ArrayCreationExpressionSyntax
                     or ImplicitArrayCreationExpressionSyntax;
 
-        // a naked `{ ... }` can only be converted to a collection expression when in the exact form `x = { ... }`
+        // a naked `{ ... }` can only be converted to a collection expression when in the exact form `x = {
+        // ... }`
         if (!isConcreteOrImplicitArrayCreation && initializer.Parent is not EqualsValueClauseSyntax)
             return;
 
@@ -180,7 +183,8 @@ internal sealed partial class CSharpUseCollectionExpressionForArrayDiagnosticAna
             Debug.Assert(initializer.Parent is EqualsValueClauseSyntax);
             // int[] = { 1, 2, 3 };
             //
-            // In this case, we always have a target type, so it should always be valid to convert this to a collection expression.
+            // In this case, we always have a target type, so it should always be valid to convert this to a
+            // collection expression.
             context.ReportDiagnostic(
                 DiagnosticHelper.Create(
                     Descriptor,

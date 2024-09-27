@@ -25,10 +25,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     private readonly bool _subquery;
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" /> class.
+    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" />
+    // class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this class.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this class.</param>
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
     public RelationalQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
@@ -63,7 +65,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     protected virtual RelationalQueryableMethodTranslatingExpressionVisitorDependencies RelationalDependencies { get; }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" /> class.
+    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" />
+    // class.
     /// </summary>
     /// <param name="parentVisitor">A parent visitor to create subquery visitor for.</param>
     protected RelationalQueryableMethodTranslatingExpressionVisitor(
@@ -101,8 +104,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             // We've finished translating the entire query.
 
-            // If any constant/parameter query roots exist in the query, their columns don't yet have a type mapping.
-            // First, scan the query tree for inferred type mappings (e.g. based on a comparison of those columns to some regular column
+            // If any constant/parameter query roots exist in the query, their columns don't yet have a type
+            // mapping.
+            // First, scan the query tree for inferred type mappings (e.g. based on a comparison of those
+            // columns to some regular column
             // with a type mapping).
             var inferredColumns = new ColumnTypeMappingScanner().Scan(visited);
 
@@ -378,7 +383,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 }
             }
 
-            // For Contains over a collection parameter, if the provider hasn't implemented TranslateCollection (e.g. OPENJSON on SQL
+            // For Contains over a collection parameter, if the provider hasn't implemented TranslateCollection
+            // (e.g. OPENJSON on SQL
             // Server), we need to fall back to the previous IN translation.
             if (
                 method.IsGenericMethod
@@ -411,23 +417,30 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     Translates a parameter or column collection of primitive values. Providers can override this to translate e.g. int[] columns or
-    ///     parameters to a queryable table (OPENJSON on SQL Server, unnest on PostgreSQL...). The default implementation always returns
+    ///     Translates a parameter or column collection of primitive values. Providers can override this
+    // to translate e.g. int[] columns or
+    ///     parameters to a queryable table (OPENJSON on SQL Server, unnest on PostgreSQL...). The
+    // default implementation always returns
     ///     <see langword="null" /> (no translation).
     /// </summary>
     /// <remarks>
-    ///     Inline collections aren't passed to this method; see <see cref="VisitInlineQueryRoot" /> for the translation of inline
+    ///     Inline collections aren't passed to this method; see <see cref="VisitInlineQueryRoot" /> for
+    // the translation of inline
     ///     collections.
     /// </remarks>
-    /// <param name="sqlExpression">The expression to try to translate as a primitive collection expression.</param>
+    /// <param name="sqlExpression">The expression to try to translate as a primitive collection
+    // expression.</param>
     /// <param name="property">
-    ///     If the primitive collection is a property, contains the <see cref="IProperty" /> for that property. Otherwise, the collection
+    ///     If the primitive collection is a property, contains the <see cref="IProperty" /> for that
+    // property. Otherwise, the collection
     ///     represents a parameter, and this contains <see langword="null" />.
     /// </param>
     /// <param name="tableAlias">
-    ///     Provides an alias to be used for the table returned from translation, which will represent the collection.
+    ///     Provides an alias to be used for the table returned from translation, which will represent
+    // the collection.
     /// </param>
-    /// <returns>A <see cref="ShapedQueryExpression" /> if the translation was successful, otherwise <see langword="null" />.</returns>
+    /// <returns>A <see cref="ShapedQueryExpression" /> if the translation was successful, otherwise
+    // <see langword="null" />.</returns>
     protected virtual ShapedQueryExpression? TranslatePrimitiveCollection(
         SqlExpression sqlExpression,
         IProperty? property,
@@ -436,11 +449,14 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
     /// <summary>
     ///     Invoked when LINQ operators are composed over a collection within a JSON document.
-    ///     Transforms the provided <see cref="JsonQueryExpression" /> - representing access to the collection - into a provider-specific
+    ///     Transforms the provided <see cref="JsonQueryExpression" /> - representing access to the
+    // collection - into a provider-specific
     ///     means to expand the JSON array into a relational table/rowset (e.g. SQL Server OPENJSON).
     /// </summary>
-    /// <param name="jsonQueryExpression">The <see cref="JsonQueryExpression" /> referencing the JSON array.</param>
-    /// <returns>A <see cref="ShapedQueryExpression" /> if the translation was successful, otherwise <see langword="null" />.</returns>
+    /// <param name="jsonQueryExpression">The <see cref="JsonQueryExpression" /> referencing the JSON
+    // array.</param>
+    /// <returns>A <see cref="ShapedQueryExpression" /> if the translation was successful, otherwise
+    // <see langword="null" />.</returns>
     protected virtual ShapedQueryExpression? TransformJsonQueryToTable(
         JsonQueryExpression jsonQueryExpression
     )
@@ -469,7 +485,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
         for (var i = 0; i < inlineQueryRootExpression.Values.Count; i++)
         {
-            // Note that we specifically don't apply the default type mapping to the translation, to allow it to get inferred later based
+            // Note that we specifically don't apply the default type mapping to the translation, to allow it to
+            // get inferred later based
             // on usage.
             if (
                 TranslateExpression(
@@ -482,10 +499,13 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 return null;
             }
 
-            // TODO: Poor man's null semantics: in SqlNullabilityProcessor we don't fully handle the nullability of SelectExpression
-            // projections. Whether the SelectExpression's projection is nullable or not is determined here in translation, but at this
+            // TODO: Poor man's null semantics: in SqlNullabilityProcessor we don't fully handle the nullability
+            // of SelectExpression
+            // projections. Whether the SelectExpression's projection is nullable or not is determined here in
+            // translation, but at this
             // point we don't know how to properly calculate nullability (and can't look at parameters).
-            // So for now, we assume the projected column is nullable if we see anything but non-null constants and non-nullable columns.
+            // So for now, we assume the projected column is nullable if we see anything but non-null constants
+            // and non-nullable columns.
             encounteredNull |=
                 translatedValue
                     is not SqlConstantExpression { Value: not null }
@@ -497,7 +517,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     {
                         // Since VALUES may not guarantee row ordering, we add an _ord value by which we'll order.
                         _sqlExpressionFactory.Constant(i, intTypeMapping),
-                        // Note that for the actual value, we must leave the type mapping null to allow it to get inferred later based on usage
+                        // Note that for the actual value, we must leave the type mapping null to allow it to get inferred
+                        // later based on usage
                         translatedValue,
                     }
                 )
@@ -510,7 +531,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             new[] { ValuesOrderingColumnName, ValuesValueColumnName }
         );
 
-        // Note: we leave the element type mapping null, to allow it to get inferred based on queryable operators composed on top.
+        // Note: we leave the element type mapping null, to allow it to get inferred based on queryable
+        // operators composed on top.
         var selectExpression = new SelectExpression(
             valuesExpression,
             ValuesValueColumnName,
@@ -711,7 +733,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         Expression item
     )
     {
-        // Note that we don't apply the default type mapping to the item in order to allow it to be inferred from e.g. the subquery
+        // Note that we don't apply the default type mapping to the item in order to allow it to be inferred
+        // from e.g. the subquery
         // projection on the other side.
         if (
             TranslateExpression(item, applyDefaultTypeMapping: false)
@@ -721,8 +744,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             // If the item can't be translated, we can't translate to an IN expression.
 
-            // We do attempt one thing: if this is a contains over an entity type which has a single key property (non-composite key),
-            // we can project its key property (entity equality/containment) and translate to InExpression over that.
+            // We do attempt one thing: if this is a contains over an entity type which has a single key
+            // property (non-composite key),
+            // we can project its key property (entity equality/containment) and translate to InExpression over
+            // that.
             if (
                 item is StructuralTypeShaperExpression { StructuralType: IEntityType entityType }
                 && entityType.FindPrimaryKey()?.Properties is [var singleKeyProperty]
@@ -742,7 +767,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 );
             }
 
-            // Otherwise, attempt to translate as Any since that passes through Where predicate translation. This will e.g. take care of
+            // Otherwise, attempt to translate as Any since that passes through Where predicate translation.
+            // This will e.g. take care of
             // entity , which e.g. does entity equality/containment for entities with composite keys.
             var anyLambdaParameter = Expression.Parameter(item.Type, "p");
             var anyLambda = Expression.Lambda(
@@ -756,7 +782,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             return TranslateAny(source, anyLambda);
         }
 
-        // Pattern-match Contains over ValuesExpression, translating to simplified 'item IN (1, 2, 3)' with constant elements
+        // Pattern-match Contains over ValuesExpression, translating to simplified 'item IN (1, 2, 3)' with
+        // constant elements
         if (TryExtractBareInlineCollectionValues(source, out var values))
         {
             var inExpression = _sqlExpressionFactory.In(translatedItem, values);
@@ -767,7 +794,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         }
 
         // Translate to IN with a subquery.
-        // Note that because of null semantics, this may get transformed to an EXISTS subquery in SqlNullabilityProcessor.
+        // Note that because of null semantics, this may get transformed to an EXISTS subquery in
+        // SqlNullabilityProcessor.
         var subquery = (SelectExpression)source.QueryExpression;
         if (subquery.Limit == null && subquery.Offset == null)
         {
@@ -1050,7 +1078,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             distinct: true
         );
 
-        // For intersect since result comes from both sides, if one of them is non-nullable then both are non-nullable
+        // For intersect since result comes from both sides, if one of them is non-nullable then both are
+        // non-nullable
         return source1.UpdateShaperExpression(
             MatchShaperNullabilityForSetOperation(
                 source1.ShaperExpression,
@@ -1646,7 +1675,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     Translates <see cref="RelationalQueryableExtensions.ExecuteDelete{TSource}(IQueryable{TSource})" /> method
+    ///     Translates <see
+    // cref="RelationalQueryableExtensions.ExecuteDelete{TSource}(IQueryable{TSource})" /> method
     ///     over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1705,9 +1735,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             return null;
         }
 
-        // First, check if the provider has a native translation for the delete represented by the select expression.
-        // The default relational implementation handles simple, universally-supported cases (i.e. no operators except for predicate).
-        // Providers may override IsValidSelectExpressionForExecuteDelete to add support for more cases via provider-specific DELETE syntax.
+        // First, check if the provider has a native translation for the delete represented by the select
+        // expression.
+        // The default relational implementation handles simple, universally-supported cases (i.e. no
+        // operators except for predicate).
+        // Providers may override IsValidSelectExpressionForExecuteDelete to add support for more cases via
+        // provider-specific DELETE syntax.
         var selectExpression = (SelectExpression)source.QueryExpression;
         if (
             IsValidSelectExpressionForExecuteDelete(
@@ -1765,7 +1798,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         }
 
         // The provider doesn't natively support the delete.
-        // As a fallback, we place the original query in a Contains subquery, which will get translated via the regular entity equality/
+        // As a fallback, we place the original query in a Contains subquery, which will get translated via
+        // the regular entity equality/
         // containment mechanism (InExpression for non-composite keys, Any for composite keys)
         var pk = entityType.FindPrimaryKey();
         if (pk == null)
@@ -1799,7 +1833,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     /// <summary>
     ///     Translates
     ///     <see
-    ///         cref="RelationalQueryableExtensions.ExecuteUpdate{TSource}(IQueryable{TSource}, Expression{Func{SetPropertyCalls{TSource}, SetPropertyCalls{TSource}}})" />
+    ///         cref="RelationalQueryableExtensions.ExecuteUpdate{TSource}(IQueryable{TSource},
+    // Expression{Func{SetPropertyCalls{TSource}, SetPropertyCalls{TSource}}})" />
     ///     method
     ///     over the given source.
     /// </summary>
@@ -1807,7 +1842,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     /// <param name="setPropertyCalls">
     ///     The lambda expression containing
     ///     <see
-    ///         cref="SetPropertyCalls{TSource}.SetProperty{TProperty}(Func{TSource, TProperty}, Func{TSource, TProperty})" />
+    ///         cref="SetPropertyCalls{TSource}.SetProperty{TProperty}(Func{TSource, TProperty},
+    // Func{TSource, TProperty})" />
     ///     statements.
     /// </param>
     /// <returns>The non query after translation.</returns>
@@ -1816,7 +1852,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         LambdaExpression setPropertyCalls
     )
     {
-        // Our source may have IncludeExpressions because of owned entities or auto-include; unwrap these, as they're meaningless for
+        // Our source may have IncludeExpressions because of owned entities or auto-include; unwrap these,
+        // as they're meaningless for
         // ExecuteUpdate's lambdas. Note that we don't currently support updates across tables.
         if (source.ShaperExpression is IncludeExpression includeExpression)
         {
@@ -1842,11 +1879,15 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         }
 
         // Go over the SetProperty calls, and translate the property selectors (left lambda).
-        // The property selectors should get translated to ColumnExpressions (otherwise they' invalid - columns are what we need to update).
-        // All columns must also refer to the same table (since that's how SQL UPDATE works), extract that target table from the translated
+        // The property selectors should get translated to ColumnExpressions (otherwise they' invalid -
+        // columns are what we need to update).
+        // All columns must also refer to the same table (since that's how SQL UPDATE works), extract that
+        // target table from the translated
         // columns and validate that only one table is being referenced.
-        // Note that we don't translate the value expressions in this pass, since if the query is complicated, we may need to do a pushdown
-        // (see PushdownWithPkInnerJoinPredicate below); so we defer translation until we have the final source/select. For the property
+        // Note that we don't translate the value expressions in this pass, since if the query is
+        // complicated, we may need to do a pushdown
+        // (see PushdownWithPkInnerJoinPredicate below); so we defer translation until we have the final
+        // source/select. For the property
         // selectors we need to translate now since we need the table.
         TableExpressionBase? targetTable = null;
         Expression? targetTablePropertySelector = null;
@@ -1896,9 +1937,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             return null;
         }
 
-        // First, check if the provider has a native translation for the update represented by the select expression.
-        // The default relational implementation handles simple, universally-supported cases (i.e. no operators except for predicate).
-        // Providers may override IsValidSelectExpressionForExecuteUpdate to add support for more cases via provider-specific UPDATE syntax.
+        // First, check if the provider has a native translation for the update represented by the select
+        // expression.
+        // The default relational implementation handles simple, universally-supported cases (i.e. no
+        // operators except for predicate).
+        // Providers may override IsValidSelectExpressionForExecuteUpdate to add support for more cases via
+        // provider-specific UPDATE syntax.
         var selectExpression = (SelectExpression)source.QueryExpression;
         return IsValidSelectExpressionForExecuteUpdate(
             selectExpression,
@@ -2020,19 +2064,27 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         NonQueryExpression? PushdownWithPkInnerJoinPredicate()
         {
             // The provider doesn't natively support the update.
-            // As a fallback, we place the original query in a subquery and user an INNER JOIN on the primary key columns.
+            // As a fallback, we place the original query in a subquery and user an INNER JOIN on the primary
+            // key columns.
 
-            // Note that unlike with ExecuteDelete, we cannot use a Contains subquery (which would produce the simpler
-            // WHERE Id IN (SELECT ...) syntax), since we allow projecting out to arbitrary shapes (e.g. anonymous types) before the
+            // Note that unlike with ExecuteDelete, we cannot use a Contains subquery (which would produce the
+            // simpler
+            // WHERE Id IN (SELECT ...) syntax), since we allow projecting out to arbitrary shapes (e.g.
+            // anonymous types) before the
             // ExecuteUpdate.
 
-            // To rewrite the query, we need to know the primary key properties, which requires getting the entity type.
-            // Although there may be several entity types involved, we've already verified that they all map to the same table.
-            // Since we don't support table sharing of multiple entity types with different keys, simply get the entity type and key from
+            // To rewrite the query, we need to know the primary key properties, which requires getting the
+            // entity type.
+            // Although there may be several entity types involved, we've already verified that they all map to
+            // the same table.
+            // Since we don't support table sharing of multiple entity types with different keys, simply get the
+            // entity type and key from
             // the first property selector.
 
-            // The following mechanism for extracting the entity type from property selectors only supports simple member access,
-            // EF.Function, etc. We also unwrap casts to interface/base class (#29618). Note that owned IncludeExpressions have already
+            // The following mechanism for extracting the entity type from property selectors only supports
+            // simple member access,
+            // EF.Function, etc. We also unwrap casts to interface/base class (#29618). Note that owned
+            // IncludeExpressions have already
             // been pruned from the source before remapping the lambda (#28727).
 
             var firstPropertySelector = propertyValueLambdaExpressions[0].PropertySelector;
@@ -2167,7 +2219,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
             tableExpression = (TableExpression)outerSelectExpression.Tables[0];
 
-            // Re-translate the property selectors to get column expressions pointing to the new outer select expression (the original one
+            // Re-translate the property selectors to get column expressions pointing to the new outer select
+            // expression (the original one
             // has been pushed down into a subquery).
             for (var i = 0; i < propertyValueLambdaExpressions.Count; i++)
             {
@@ -2217,24 +2270,30 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     Checks weather the current select expression can be used as-is for executing a delete operation, or whether it must be pushed
+    ///     Checks weather the current select expression can be used as-is for executing a delete
+    // operation, or whether it must be pushed
     ///     down into a subquery.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         By default, only single-table select expressions are supported, and optionally with a predicate.
+    ///         By default, only single-table select expressions are supported, and optionally with a
+    // predicate.
     ///     </para>
     ///     <para>
-    ///         Providers can override this to allow more select expression features to be supported without pushing down into a subquery.
-    ///         When doing this, VisitDelete must also be overridden in the provider's QuerySqlGenerator to add SQL generation support for
+    ///         Providers can override this to allow more select expression features to be supported
+    // without pushing down into a subquery.
+    ///         When doing this, VisitDelete must also be overridden in the provider's QuerySqlGenerator
+    // to add SQL generation support for
     ///         the feature.
     ///     </para>
     /// </remarks>
     /// <param name="selectExpression">The select expression to validate.</param>
-    /// <param name="shaper">The structural type shaper expression on which the delete operation is being applied.</param>
+    /// <param name="shaper">The structural type shaper expression on which the delete operation is
+    // being applied.</param>
     /// <param name="tableExpression">The table expression from which rows are being deleted.</param>
     /// <returns>
-    ///     Returns <see langword="true" /> if the current select expression can be used for delete as-is, <see langword="false" /> otherwise.
+    ///     Returns <see langword="true" /> if the current select expression can be used for delete
+    // as-is, <see langword="false" /> otherwise.
     /// </returns>
     protected virtual bool IsValidSelectExpressionForExecuteDelete(
         SelectExpression selectExpression,
@@ -2264,25 +2323,31 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     Validates if the current select expression can be used for execute update operation or it requires to be joined as a subquery.
+    ///     Validates if the current select expression can be used for execute update operation or it
+    // requires to be joined as a subquery.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         By default, only multi-table select expressions are supported, and optionally with a predicate.
+    ///         By default, only multi-table select expressions are supported, and optionally with a
+    // predicate.
     ///     </para>
     ///     <para>
-    ///         Providers can override this to allow more select expression features to be supported without pushing down into a subquery.
-    ///         When doing this, VisitUpdate must also be overridden in the provider's QuerySqlGenerator to add SQL generation support for
+    ///         Providers can override this to allow more select expression features to be supported
+    // without pushing down into a subquery.
+    ///         When doing this, VisitUpdate must also be overridden in the provider's QuerySqlGenerator
+    // to add SQL generation support for
     ///         the feature.
     ///     </para>
     /// </remarks>
     /// <param name="selectExpression">The select expression to validate.</param>
     /// <param name="targetTable">The target table containing the rows to be updated.</param>
     /// <param name="tableExpression">
-    ///     The table expression corresponding to the provided <paramref name="targetTable" />, containing the rows to be updated.
+    ///     The table expression corresponding to the provided <paramref name="targetTable" />,
+    // containing the rows to be updated.
     /// </param>
     /// <returns>
-    ///     Returns <see langword="true" /> if the current select expression can be used for update as-is, <see langword="false" /> otherwise.
+    ///     Returns <see langword="true" /> if the current select expression can be used for update
+    // as-is, <see langword="false" /> otherwise.
     /// </returns>
     protected virtual bool IsValidSelectExpressionForExecuteUpdate(
         SelectExpression selectExpression,
@@ -2306,7 +2371,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             if (selectExpression.Tables.Count > 1)
             {
-                // If the table we are looking for is the first table, then we need to verify whether we can lift the next table in FROM
+                // If the table we are looking for is the first table, then we need to verify whether we can lift
+                // the next table in FROM
                 // clause
                 if (
                     ReferenceEquals(selectExpression.Tables[0], targetTable)
@@ -2339,9 +2405,11 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     /// </summary>
     /// <param name="expression">An expression to translate.</param>
     /// <param name="applyDefaultTypeMapping">
-    ///     Whether to apply the default type mapping on the top-most element if it has none. Defaults to <see langword="true" />.
+    ///     Whether to apply the default type mapping on the top-most element if it has none. Defaults
+    // to <see langword="true" />.
     /// </param>
-    /// <returns>A <see cref="SqlExpression" /> which is translation of given expression or <see langword="null" />.</returns>
+    /// <returns>A <see cref="SqlExpression" /> which is translation of given expression or <see
+    // langword="null" />.</returns>
     protected virtual SqlExpression? TranslateExpression(
         Expression expression,
         bool applyDefaultTypeMapping = true
@@ -2361,23 +2429,28 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     Translates the given lambda expression for the <see cref="ShapedQueryExpression" /> source into equivalent SQL representation.
+    ///     Translates the given lambda expression for the <see cref="ShapedQueryExpression" /> source
+    // into equivalent SQL representation.
     /// </summary>
-    /// <param name="shapedQueryExpression">A <see cref="ShapedQueryExpression" /> on which the lambda expression is being applied.</param>
+    /// <param name="shapedQueryExpression">A <see cref="ShapedQueryExpression" /> on which the lambda
+    // expression is being applied.</param>
     /// <param name="lambdaExpression">A <see cref="LambdaExpression" /> to translate into SQL.</param>
-    /// <returns>A <see cref="SqlExpression" /> which is translation of given lambda expression or <see langword="null" />.</returns>
+    /// <returns>A <see cref="SqlExpression" /> which is translation of given lambda expression or <see
+    // langword="null" />.</returns>
     protected virtual SqlExpression? TranslateLambdaExpression(
         ShapedQueryExpression shapedQueryExpression,
         LambdaExpression lambdaExpression
     ) => TranslateExpression(RemapLambdaBody(shapedQueryExpression, lambdaExpression));
 
     /// <summary>
-    ///     Invoked at the end of top-level translation, applies inferred type mappings for queryable constants/parameters and verifies that
+    ///     Invoked at the end of top-level translation, applies inferred type mappings for queryable
+    // constants/parameters and verifies that
     ///     all <see cref="SqlExpression" /> have a type mapping.
     /// </summary>
     /// <param name="expression">The query expression to process.</param>
     /// <param name="inferredTypeMappings">
-    ///     Inferred type mappings for queryable constants/parameters collected during translation. These will be applied to the appropriate
+    ///     Inferred type mappings for queryable constants/parameters collected during translation.
+    // These will be applied to the appropriate
     ///     nodes in the tree.
     /// </param>
     protected virtual Expression ApplyInferredTypeMappings(
@@ -2394,19 +2467,24 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         ).Visit(expression);
 
     /// <summary>
-    ///     Determines whether the given <see cref="SelectExpression" /> is ordered, typically because orderings have been added to it.
+    ///     Determines whether the given <see cref="SelectExpression" /> is ordered, typically because
+    // orderings have been added to it.
     /// </summary>
-    /// <param name="selectExpression">The <see cref="SelectExpression" /> to check for ordering.</param>
+    /// <param name="selectExpression">The <see cref="SelectExpression" /> to check for
+    // ordering.</param>
     /// <returns>Whether <paramref name="selectExpression" /> is ordered.</returns>
     protected virtual bool IsOrdered(SelectExpression selectExpression) =>
         selectExpression.Orderings.Count > 0;
 
     /// <summary>
-    ///     Determines whether the given <see cref="SelectExpression" /> is naturally ordered, meaning that any ordering has been added
-    ///     automatically by EF to preserve e.g. the natural ordering of a JSON array, and not because the original LINQ query contained
+    ///     Determines whether the given <see cref="SelectExpression" /> is naturally ordered, meaning
+    // that any ordering has been added
+    ///     automatically by EF to preserve e.g. the natural ordering of a JSON array, and not because
+    // the original LINQ query contained
     ///     an explicit ordering.
     /// </summary>
-    /// <param name="selectExpression">The <see cref="SelectExpression" /> to check for ordering.</param>
+    /// <param name="selectExpression">The <see cref="SelectExpression" /> to check for
+    // ordering.</param>
     /// <returns>Whether <paramref name="selectExpression" /> is ordered.</returns>
     protected virtual bool IsNaturallyOrdered(SelectExpression selectExpression) => false;
 
@@ -3250,8 +3328,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             // Avg/Max/Min case.
             // We always read nullable value
-            // If resultType is nullable then we always return null. Only non-null result shows throwing behavior.
-            // otherwise, if projection.Type is nullable then server result is passed through DefaultIfEmpty, hence we return default
+            // If resultType is nullable then we always return null. Only non-null result shows throwing
+            // behavior.
+            // otherwise, if projection.Type is nullable then server result is passed through DefaultIfEmpty,
+            // hence we return default
             // otherwise, server would return null only if it is empty, and we throw
             var nullableResultType = resultType.MakeNullable();
             shaper = new ProjectionBindingExpression(
@@ -3309,7 +3389,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     )
     {
         var shaperExpression = shapedQueryExpression.ShaperExpression;
-        // No need to check ConvertChecked since this is convert node which we may have added during projection
+        // No need to check ConvertChecked since this is convert node which we may have added during
+        // projection
         if (
             shaperExpression is UnaryExpression { NodeType: ExpressionType.Convert } unaryExpression
             && unaryExpression.Operand.Type.IsNullableType()
@@ -3358,7 +3439,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     Offset: null,
                     // Note that we assume ordering doesn't matter (Contains/Min/Max)
                 }
-            // Make sure that the source projects the column from the ValuesExpression directly, i.e. no projection out with some expression
+            // Make sure that the source projects the column from the ValuesExpression directly, i.e. no
+            // projection out with some expression
             && projection is ColumnExpression projectedColumn
             && projectedColumn.Table == valuesExpression
         )
@@ -3379,24 +3461,31 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     A visitor which scans an expression tree and attempts to find columns for which we were missing type mappings (projected out
+    ///     A visitor which scans an expression tree and attempts to find columns for which we were
+    // missing type mappings (projected out
     ///     of queryable constant/parameter), and those type mappings have been inferred.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         This handles two cases: (1) an untyped column which type-inferred in the regular way, e.g. through comparison to a typed
+    ///         This handles two cases: (1) an untyped column which type-inferred in the regular way,
+    // e.g. through comparison to a typed
     ///         column, and (2) set operations where on side is typed and the other is untyped.
     ///     </para>
     ///     <para>
-    ///         Note that this visitor follows type columns across subquery projections. That is, if a root constant/parameter is buried
-    ///         within subqueries, and somewhere above the column projected out of a subquery is inferred, this is picked up and propagated
+    ///         Note that this visitor follows type columns across subquery projections. That is, if a
+    // root constant/parameter is buried
+    ///         within subqueries, and somewhere above the column projected out of a subquery is
+    // inferred, this is picked up and propagated
     ///         all the way down.
     ///     </para>
     ///     <para>
-    ///         The visitor dose not change the query tree in any way - it only populates the inferred type mappings it identified in
+    ///         The visitor dose not change the query tree in any way - it only populates the inferred
+    // type mappings it identified in
     ///         the given dictionary; actual application of the inferred type mappings happens later in
-    ///         <see cref="RelationalInferredTypeMappingApplier" />. We can't do this in a single pass since untyped roots
-    ///         (e.g. <see cref="ValuesExpression" /> may get visited before the type-inferred column referring to them (e.g. CROSS APPLY,
+    ///         <see cref="RelationalInferredTypeMappingApplier" />. We can't do this in a single pass
+    // since untyped roots
+    ///         (e.g. <see cref="ValuesExpression" /> may get visited before the type-inferred column
+    // referring to them (e.g. CROSS APPLY,
     ///         correlated subquery).
     ///     </para>
     /// </remarks>
@@ -3425,9 +3514,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             switch (node)
             {
-                // A column on a table which was possibly originally untyped (constant/parameter root or a subquery projection of one),
-                // which now does have a type mapping - this would mean in got inferred in the usual manner (comparison with typed column).
-                // Registered the inferred type mapping so it can be later applied back to its table, if it's untyped.
+                // A column on a table which was possibly originally untyped (constant/parameter root or a subquery
+                // projection of one),
+                // which now does have a type mapping - this would mean in got inferred in the usual manner
+                // (comparison with typed column).
+                // Registered the inferred type mapping so it can be later applied back to its table, if it's
+                // untyped.
                 case ColumnExpression { TypeMapping: { } typeMapping } c
                     when WasMaybeOriginallyUntyped(c):
                 {
@@ -3436,7 +3528,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return base.VisitExtension(node);
                 }
 
-                // Similar to the above, but with ScalarSubqueryExpression the inferred type mapping is on the expression itself, while the
+                // Similar to the above, but with ScalarSubqueryExpression the inferred type mapping is on the
+                // expression itself, while the
                 // ColumnExpression we need is on the subquery's projection.
                 case ScalarSubqueryExpression
                 {
@@ -3461,7 +3554,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return base.VisitExtension(node);
                 }
 
-                // For set operations involving a leg with a type mapping (e.g. some column) and a leg without one (queryable constant or
+                // For set operations involving a leg with a type mapping (e.g. some column) and a leg without one
+                // (queryable constant or
                 // parameter), we infer the missing type mapping from the other side.
                 case SetOperationBase
                 {
@@ -3484,7 +3578,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return base.VisitExtension(node);
                 }
 
-                // Record state on the SelectExpression and ProjectionExpression so that we can associate ColumnExpressions to the
+                // Record state on the SelectExpression and ProjectionExpression so that we can associate
+                // ColumnExpressions to the
                 // projections they're in (see below).
                 case SelectExpression selectExpression:
                 {
@@ -3504,9 +3599,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     return visited;
                 }
 
-                // When visiting subqueries, we want to propagate the inferred type mappings from above into the subquery, recursively.
-                // So we record state above to know which subquery and projection we're visiting; when visiting columns inside a projection
-                // which has an inferred type mapping from above, we register the inferred type mapping for that column too.
+                // When visiting subqueries, we want to propagate the inferred type mappings from above into the
+                // subquery, recursively.
+                // So we record state above to know which subquery and projection we're visiting; when visiting
+                // columns inside a projection
+                // which has an inferred type mapping from above, we register the inferred type mapping for that
+                // column too.
                 case ColumnExpression { TypeMapping: null } columnExpression
                     when _currentSelectExpression is not null
                         && _currentProjectionExpression is not null
@@ -3541,7 +3639,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     // TableExpressions are always fully-typed, with type mappings coming from the model
                     TableExpression => false,
 
-                    // FromSqlExpressions always receive the default type mapping for the projected element type - we never need to infer
+                    // FromSqlExpressions always receive the default type mapping for the projected element type - we
+                    // never need to infer
                     // them.
                     FromSqlExpression => false,
 
@@ -3552,8 +3651,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
                     JoinExpressionBase => throw new UnreachableException("Impossible: nested join"),
 
-                    // Any other table expression is considered a root (TableValuedFunctionExpression, ValuesExpression...) which *may* be
-                    // untyped, so we record the possible inference (note that TableValuedFunctionExpression may be typed, or not)
+                    // Any other table expression is considered a root (TableValuedFunctionExpression,
+                    // ValuesExpression...) which *may* be
+                    // untyped, so we record the possible inference (note that TableValuedFunctionExpression may be
+                    // typed, or not)
                     _ => true,
                 };
             }
@@ -3583,8 +3684,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             )
             {
                 // A different type mapping was already inferred for this column - we have a conflict.
-                // Null out the value for the inferred type mapping as an indication of the conflict. If it turns out that we need the
-                // inferred mapping later, during the application phase, we'll throw an exception at that point (not all the inferred type
+                // Null out the value for the inferred type mapping as an indication of the conflict. If it turns
+                // out that we need the
+                // inferred mapping later, during the application phase, we'll throw an exception at that point (not
+                // all the inferred type
                 // mappings here will actually be needed, so we don't want to needlessly throw here).
                 _inferredColumns[(underlyingTable, columnExpression.Name)] = null;
                 return;
@@ -3595,8 +3698,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
     }
 
     /// <summary>
-    ///     A visitor executed at the end of translation, which verifies that all <see cref="SqlExpression" /> nodes have a type mapping,
-    ///     and applies type mappings inferred for queryable constants (VALUES) and parameters (e.g. OPENJSON) back on their root tables.
+    ///     A visitor executed at the end of translation, which verifies that all <see
+    // cref="SqlExpression" /> nodes have a type mapping,
+    ///     and applies type mappings inferred for queryable constants (VALUES) and parameters (e.g.
+    // OPENJSON) back on their root tables.
     /// </summary>
     protected class RelationalInferredTypeMappingApplier : ExpressionVisitor
     {
@@ -3616,7 +3721,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         /// </summary>
         /// <param name="model">The model.</param>
         /// <param name="sqlExpressionFactory">The SQL expression factory.</param>
-        /// <param name="inferredTypeMappings">The inferred type mappings to be applied back on their query roots.</param>
+        /// <param name="inferredTypeMappings">The inferred type mappings to be applied back on their query
+        // roots.</param>
         public RelationalInferredTypeMappingApplier(
             IModel model,
             ISqlExpressionFactory sqlExpressionFactory,
@@ -3639,9 +3745,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         /// <summary>
         ///     Attempts to find an inferred type mapping for the given table column.
         /// </summary>
-        /// <param name="table">The table containing the column for which to find the inferred type mapping.</param>
-        /// <param name="columnName">The name of the column for which to find the inferred type mapping.</param>
-        /// <param name="inferredTypeMapping">The inferred type mapping, or <see langword="null" /> if none could be found.</param>
+        /// <param name="table">The table containing the column for which to find the inferred type
+        // mapping.</param>
+        /// <param name="columnName">The name of the column for which to find the inferred type
+        // mapping.</param>
+        /// <param name="inferredTypeMapping">The inferred type mapping, or <see langword="null" /> if none
+        // could be found.</param>
         /// <returns>Whether an inferred type mapping could be found.</returns>
         protected virtual bool TryGetInferredTypeMapping(
             TableExpressionBase table,
@@ -3651,7 +3760,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         {
             if (_inferredTypeMappings.TryGetValue((table, columnName), out inferredTypeMapping))
             {
-                // The inferred type mapping scanner records a null when two conflicting type mappings were inferred for the same
+                // The inferred type mapping scanner records a null when two conflicting type mappings were inferred
+                // for the same
                 // column.
                 if (inferredTypeMapping is null)
                 {
@@ -3689,9 +3799,11 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
                 // For ValueExpression, apply the inferred type mapping on all constants inside.
                 case ValuesExpression valuesExpression:
-                    // By default, the ValuesExpression also contains an ordering by a synthetic increasing _ord. If the containing
+                    // By default, the ValuesExpression also contains an ordering by a synthetic increasing _ord. If the
+                    // containing
                     // SelectExpression doesn't project it out or require it (limit/offset), strip that out.
-                    // TODO: Strictly-speaking, stripping the ordering doesn't belong in this visitor which is about applying type mappings
+                    // TODO: Strictly-speaking, stripping the ordering doesn't belong in this visitor which is about
+                    // applying type mappings
                     return ApplyTypeMappingsOnValuesExpression(
                         valuesExpression,
                         stripOrdering: _currentSelectExpression is { Limit: null, Offset: null }
@@ -3702,7 +3814,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                             )
                     );
 
-                // SqlExpressions without an inferred type mapping indicates a problem in EF - everything should have been inferred.
+                // SqlExpressions without an inferred type mapping indicates a problem in EF - everything should
+                // have been inferred.
                 // One exception is SqlFragmentExpression, which never has a type mapping.
                 case SqlExpression { TypeMapping: null } sqlExpression
                 and not SqlFragmentExpression
@@ -3722,10 +3835,13 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
         }
 
         /// <summary>
-        ///     Applies the given type mappings to the values projected out by the given <see cref="ValuesExpression" />.
-        ///     As an optimization, it can also strip the first _ord column if it's determined that it isn't needed (most cases).
+        ///     Applies the given type mappings to the values projected out by the given <see
+        // cref="ValuesExpression" />.
+        ///     As an optimization, it can also strip the first _ord column if it's determined that it isn't
+        // needed (most cases).
         /// </summary>
-        /// <param name="valuesExpression">The <see cref="ValuesExpression" /> to apply the mappings to.</param>
+        /// <param name="valuesExpression">The <see cref="ValuesExpression" /> to apply the mappings
+        // to.</param>
         /// <param name="stripOrdering">Whether to strip the <c>_ord</c> column.</param>
         protected virtual ValuesExpression ApplyTypeMappingsOnValuesExpression(
             ValuesExpression valuesExpression,
@@ -3767,7 +3883,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     {
                         value = _sqlExpressionFactory.ApplyTypeMapping(value, inferredTypeMapping);
 
-                        // We currently add explicit conversions on the first row, to ensure that the inferred types are properly typed.
+                        // We currently add explicit conversions on the first row, to ensure that the inferred types are
+                        // properly typed.
                         // See #30605 for removing that when not needed.
                         if (i == 0)
                         {

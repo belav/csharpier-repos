@@ -118,8 +118,10 @@ namespace System.Net
 #endif
         ServerCertValidationCallback certValidationCallback;
 
-        // stores the user provided Host header as Uri. If the user specified a default port explicitly we'll lose
-        // that information when converting the host string to a Uri. _HostHasPort will store that information.
+        // stores the user provided Host header as Uri. If the user specified a default port explicitly
+        // we'll lose
+        // that information when converting the host string to a Uri. _HostHasPort will store that
+        // information.
         bool hostHasPort;
         Uri hostUri;
 
@@ -1278,9 +1280,9 @@ namespace System.Net
             WebOperation ntlm
         )> GetResponseFromData(WebResponseStream stream, CancellationToken cancellationToken)
         {
-            /*
-             * WebConnection has either called SetResponseData() or SetResponseError().
-             */
+/*
+* WebConnection has either called SetResponseData() or SetResponseError().
+*/
 
             var response = new HttpWebResponse(actualUri, method, stream, cookieContainer);
 
@@ -1399,15 +1401,15 @@ namespace System.Net
             string transferEncoding = TransferEncoding;
             if (!sendChunked && transferEncoding != null && transferEncoding.Trim() != "")
             {
-                /*
-                 * The only way we could get here without already catching this in the
-                 * `TransferEncoding` property settor is via HttpClient, which does not
-                 * do strict checking on all headers.
-                 *
-                 * We can remove this check again after switching to the CoreFX version
-                 * of HttpClient.
-                 *
-                 */
+/*
+* The only way we could get here without already catching this in the
+* `TransferEncoding` property settor is via HttpClient, which does not
+* do strict checking on all headers.
+*
+* We can remove this check again after switching to the CoreFX version
+* of HttpClient.
+*
+*/
                 throw new InvalidOperationException(SR.net_needchunked);
             }
 

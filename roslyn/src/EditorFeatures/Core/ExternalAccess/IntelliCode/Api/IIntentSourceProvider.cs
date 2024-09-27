@@ -37,25 +37,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.IntelliCode.Api
     )
     {
         /// <summary>
-        /// The intent name.  <see cref="WellKnownIntents"/> contains all intents roslyn knows how to handle.
+        /// The intent name.  <see cref="WellKnownIntents"/> contains all intents roslyn knows how to
+        // handle.
         /// </summary>
         public string IntentName { get; } =
             intentName ?? throw new ArgumentNullException(nameof(intentName));
 
         /// <summary>
-        /// JSON formatted data specific to the intent that must be deserialized into the appropriate object.
+        /// JSON formatted data specific to the intent that must be deserialized into the appropriate
+        // object.
         /// </summary>
         public string? IntentData { get; } = intentData;
 
         /// <summary>
         /// The text snapshot and selection when <see cref="IIntentSourceProvider.ComputeIntentsAsync"/>
-        /// was called to compute the text edits and against which the resulting text edits will be calculated.
+        /// was called to compute the text edits and against which the resulting text edits will be
+        // calculated.
         /// </summary>
         public SnapshotSpan CurrentSnapshotSpan { get; } = currentSnapshotSpan;
 
         /// <summary>
         /// The text edits that should be applied to the <see cref="CurrentSnapshotSpan"/> to calculate
-        /// a prior text snapshot before the intent happened.  The snapshot is used to calculate the actions.
+        /// a prior text snapshot before the intent happened.  The snapshot is used to calculate the
+        // actions.
         /// </summary>
         public ImmutableArray<TextChange> PriorTextEdits { get; } = textEditsToPrior;
 

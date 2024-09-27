@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
     /// Driver to execute diagnostic analyzers for a given compilation.
-    /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its analysis.
+    /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its
+    // analysis.
     /// </summary>
     internal abstract partial class AnalyzerDriver : IDisposable
     {
@@ -52,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private readonly ConcurrentSet<Suppression>? _programmaticSuppressions;
 
         /// <summary>
-        /// Set of diagnostics that have already been processed for application of programmatic suppressions.
+        /// Set of diagnostics that have already been processed for application of programmatic
+        // suppressions.
         /// </summary>
         private readonly ConcurrentSet<Diagnostic>? _diagnosticsProcessedForProgrammaticSuppressions;
 
@@ -63,8 +65,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         internal readonly bool HasDiagnosticSuppressors;
 
         /// <summary>
-        /// Filtered diagnostic severities in the compilation, i.e. diagnostics with effective severity from this set should not be reported.
-        /// PERF: If all supported diagnostics for an analyzer are from this set, we completely skip executing the analyzer.
+        /// Filtered diagnostic severities in the compilation, i.e. diagnostics with effective severity from
+        // this set should not be reported.
+        /// PERF: If all supported diagnostics for an analyzer are from this set, we completely skip
+        // executing the analyzer.
         /// </summary>
         private readonly SeverityFilter _severityFilter;
 
@@ -119,10 +123,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         >? _lazyPerSymbolAnalyzerActionsCache;
 
         /// <summary>
-        /// Cache of additional analyzer actions to be executed per symbol per analyzer, which are registered in symbol start actions.
+        /// Cache of additional analyzer actions to be executed per symbol per analyzer, which are
+        // registered in symbol start actions.
         /// We cache the tuple:
-        ///   1. myActions: analyzer actions registered in the symbol start actions of containing namespace/type, which are to be executed for this symbol
-        ///   2. childActions: analyzer actions registered in this symbol's start actions, which are to be executed for member symbols.
+        ///   1. myActions: analyzer actions registered in the symbol start actions of containing
+        // namespace/type, which are to be executed for this symbol
+        ///   2. childActions: analyzer actions registered in this symbol's start actions, which are to be
+        // executed for member symbols.
         /// </summary>
         private ConcurrentDictionary<
             (INamespaceOrTypeSymbol, DiagnosticAnalyzer),
@@ -178,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Default analysis mode for generated code.
         /// </summary>
         /// <remarks>
-        /// This mode should always guarantee that analyzer action callbacks are enabled for generated code, i.e. <see cref="GeneratedCodeAnalysisFlags.Analyze"/> is set.
+        /// This mode should always guarantee that analyzer action callbacks are enabled for generated code,
+        // i.e. <see cref="GeneratedCodeAnalysisFlags.Analyze"/> is set.
         /// However, the default diagnostic reporting mode is liable to change in future.
         /// </remarks>
         internal const GeneratedCodeAnalysisFlags DefaultGeneratedCodeAnalysisFlags =
@@ -229,7 +237,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ImmutableHashSet<DiagnosticAnalyzer>? _lazyNonConfigurableAndCustomConfigurableAnalyzers;
 
         /// <summary>
-        /// Set of unsuppressed analyzers that report non-configurable or custom configurable diagnostics that cannot be suppressed with end user configuration.
+        /// Set of unsuppressed analyzers that report non-configurable or custom configurable diagnostics
+        // that cannot be suppressed with end user configuration.
         /// </summary>
         private ImmutableHashSet<DiagnosticAnalyzer> NonConfigurableAndCustomConfigurableAnalyzers
         {
@@ -257,7 +266,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private bool? _lazyTreatAllCodeAsNonGeneratedCode;
 
         /// <summary>
-        /// True if all analyzers need to analyze and report diagnostics in generated code - we can assume all code to be non-generated code.
+        /// True if all analyzers need to analyze and report diagnostics in generated code - we can assume
+        // all code to be non-generated code.
         /// </summary>
         private bool TreatAllCodeAsNonGeneratedCode
         {
@@ -269,14 +279,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// True if no analyzer needs generated code analysis - we can skip all analysis on a generated code symbol/tree.
+        /// True if no analyzer needs generated code analysis - we can skip all analysis on a generated code
+        // symbol/tree.
         /// </summary>
         private bool? _lazyDoNotAnalyzeGeneratedCode;
 
         private ConcurrentDictionary<SyntaxTree, bool>? _lazyGeneratedCodeFilesMap;
 
         /// <summary>
-        /// Lazily populated dictionary indicating whether a source file is a generated code file or not - we populate it lazily to avoid realizing all syntax trees in the compilation upfront.
+        /// Lazily populated dictionary indicating whether a source file is a generated code file or not -
+        // we populate it lazily to avoid realizing all syntax trees in the compilation upfront.
         /// </summary>
         private ConcurrentDictionary<SyntaxTree, bool> GeneratedCodeFilesMap
         {
@@ -327,8 +339,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private ConcurrentSet<string>? _lazySuppressedDiagnosticIdsForUnsuppressedAnalyzers;
 
         /// <summary>
-        /// Lazily populated set of diagnostic IDs which are suppressed for some part of the compilation (tree/folder/entire compilation),
-        /// but the analyzer reporting the diagnostic is itself not suppressed for the entire compilation, i.e. the analyzer
+        /// Lazily populated set of diagnostic IDs which are suppressed for some part of the compilation
+        // (tree/folder/entire compilation),
+        /// but the analyzer reporting the diagnostic is itself not suppressed for the entire compilation,
+        // i.e. the analyzer
         /// belongs to <see cref="UnsuppressedAnalyzers"/>.
         /// </summary>
         private ConcurrentSet<string> SuppressedDiagnosticIdsForUnsuppressedAnalyzers
@@ -355,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Lazily populated dictionary indicating whether a source file has any hidden regions - we populate it lazily to avoid realizing all syntax trees in the compilation upfront.
+        /// Lazily populated dictionary indicating whether a source file has any hidden regions - we
+        // populate it lazily to avoid realizing all syntax trees in the compilation upfront.
         /// </summary>
         private ConcurrentDictionary<SyntaxTree, bool>? _lazyTreesWithHiddenRegionsMap;
 
@@ -376,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         private bool _initializeSucceeded = false;
 
         /// <summary>
-        /// Primary driver task which processes all <see cref="CompilationEventQueue"/> events, runs analyzer actions and signals completion of <see cref="DiagnosticQueue"/> at the end.
+        /// Primary driver task which processes all <see cref="CompilationEventQueue"/> events, runs
+        // analyzer actions and signals completion of <see cref="DiagnosticQueue"/> at the end.
         /// </summary>
         private Task? _lazyPrimaryTask;
 
@@ -417,8 +433,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Create an analyzer driver.
         /// </summary>
         /// <param name="analyzers">The set of analyzers to include in the analysis</param>
-        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for analyzer host's lifetime.</param>
-        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics with effective severity from this set should not be reported.</param>
+        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for analyzer host's
+        // lifetime.</param>
+        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics
+        // with effective severity from this set should not be reported.</param>
         /// <param name="isComment">Delegate to identify if the given trivia is a comment.</param>
         protected AnalyzerDriver(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
@@ -798,7 +816,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns true if all analyzers need to analyze and report diagnostics in generated code - we can assume all code to be non-generated code.
+        /// Returns true if all analyzers need to analyze and report diagnostics in generated code - we can
+        // assume all code to be non-generated code.
         /// </summary>
         private static bool ComputeShouldTreatAllCodeAsNonGeneratedCode(
             ImmutableHashSet<DiagnosticAnalyzer> analyzers,
@@ -872,7 +891,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="eventQueue">Compilation events to analyze.</param>
         /// <param name="analysisScope">Scope of analysis.</param>
         /// <param name="cancellationToken">Cancellation token to abort analysis.</param>
-        /// <remarks>Driver must be initialized before invoking this method, i.e. <see cref="Initialize(AnalyzerExecutor, DiagnosticQueue, CompilationData, AnalysisScope, ConcurrentSet{string}, CancellationToken)"/> method must have been invoked and <see cref="WhenInitializedTask"/> must be non-null.</remarks>
+        /// <remarks>Driver must be initialized before invoking this method, i.e. <see
+        // cref="Initialize(AnalyzerExecutor, DiagnosticQueue, CompilationData, AnalysisScope,
+        // ConcurrentSet{string}, CancellationToken)"/> method must have been invoked and <see
+        // cref="WhenInitializedTask"/> must be non-null.</remarks>
         internal async Task AttachQueueAndProcessAllEventsAsync(
             AsyncQueue<CompilationEvent> eventQueue,
             AnalysisScope analysisScope,
@@ -904,13 +926,18 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Attaches event queue to the driver and start processing all events pertaining to the given analysis scope.
+        /// Attaches event queue to the driver and start processing all events pertaining to the given
+        // analysis scope.
         /// </summary>
         /// <param name="eventQueue">Compilation events to analyze.</param>
         /// <param name="analysisScope">Scope of analysis.</param>
-        /// <param name="usingPrePopulatedEventQueue">Boolean flag indicating whether we should only process the already populated events or wait for <see cref="CompilationCompletedEvent"/>.</param>
+        /// <param name="usingPrePopulatedEventQueue">Boolean flag indicating whether we should only process
+        // the already populated events or wait for <see cref="CompilationCompletedEvent"/>.</param>
         /// <param name="cancellationToken">Cancellation token to abort analysis.</param>
-        /// <remarks>Driver must be initialized before invoking this method, i.e. <see cref="Initialize(AnalyzerExecutor, DiagnosticQueue, CompilationData, AnalysisScope, ConcurrentSet{string}, CancellationToken)"/> method must have been invoked and <see cref="WhenInitializedTask"/> must be non-null.</remarks>
+        /// <remarks>Driver must be initialized before invoking this method, i.e. <see
+        // cref="Initialize(AnalyzerExecutor, DiagnosticQueue, CompilationData, AnalysisScope,
+        // ConcurrentSet{string}, CancellationToken)"/> method must have been invoked and <see
+        // cref="WhenInitializedTask"/> must be non-null.</remarks>
         internal void AttachQueueAndStartProcessingEvents(
             AsyncQueue<CompilationEvent> eventQueue,
             AnalysisScope analysisScope,
@@ -983,7 +1010,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     )
                     .ConfigureAwait(false);
 
-                // If not using pre-populated event queue (batch mode), then verify all symbol end actions were processed.
+                // If not using pre-populated event queue (batch mode), then verify all symbol end actions were
+                // processed.
                 if (!usingPrePopulatedEventQueue)
                 {
                     AnalyzerManager.VerifyAllSymbolEndActionsExecuted();
@@ -1009,7 +1037,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             var diagnostic = AnalyzerExecutor.CreateDriverExceptionDiagnostic(innerException);
 
             // Just pick the first analyzer from the scope for the onAnalyzerException callback.
-            // The exception diagnostic's message and description will not include the analyzer, but explicitly state its a driver exception.
+            // The exception diagnostic's message and description will not include the analyzer, but explicitly
+            // state its a driver exception.
             var analyzer = analyzers[0];
 
             analyzerExecutor.OnAnalyzerException(
@@ -1069,7 +1098,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             if (analysisScope.IsSingleFileAnalysis && !analysisScope.IsSyntacticSingleFileAnalysis)
             {
-                // For partial analysis, only execute additional file actions if performing syntactic single file analysis.
+                // For partial analysis, only execute additional file actions if performing syntactic single file
+                // analysis.
                 return;
             }
 
@@ -1104,16 +1134,22 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="compilation">The compilation to which the new driver should be attached.</param>
         /// <param name="analyzers">The set of analyzers to include in the analysis.</param>
         /// <param name="options">Options that are passed to analyzers.</param>
-        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for the lifetime of analyzer host.</param>
-        /// <param name="addExceptionDiagnostic">Delegate to add diagnostics generated for exceptions from third party analyzers.</param>
-        /// <param name="reportAnalyzer">Report additional information related to analyzers, such as analyzer execution time.</param>
-        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics with effective severity from this set should not be reported.</param>
-        /// <param name="trackSuppressedDiagnosticIds">Track diagnostic ids which are suppressed through options.</param>
+        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for the lifetime of analyzer
+        // host.</param>
+        /// <param name="addExceptionDiagnostic">Delegate to add diagnostics generated for exceptions from
+        // third party analyzers.</param>
+        /// <param name="reportAnalyzer">Report additional information related to analyzers, such as
+        // analyzer execution time.</param>
+        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics
+        // with effective severity from this set should not be reported.</param>
+        /// <param name="trackSuppressedDiagnosticIds">Track diagnostic ids which are suppressed through
+        // options.</param>
         /// <param name="newCompilation">The new compilation with the analyzer driver attached.</param>
         /// <param name="cancellationToken">A cancellation token that can be used to abort analysis.</param>
         /// <returns>A newly created analyzer driver</returns>
         /// <remarks>
-        /// Note that since a compilation is immutable, the act of creating a driver and attaching it produces
+        /// Note that since a compilation is immutable, the act of creating a driver and attaching it
+        // produces
         /// a new compilation. Any further actions on the compilation should use the new compilation.
         /// </remarks>
         public static AnalyzerDriver CreateAndAttachToCompilation(
@@ -1210,8 +1246,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Returns all diagnostics computed by the analyzers since the last time this was invoked.
-        /// If <see cref="CompilationEventQueue"/> has been completed with all compilation events, then it waits for
-        /// <see cref="WhenCompletedTask"/> task for the driver to finish processing all events and generate remaining analyzer diagnostics.
+        /// If <see cref="CompilationEventQueue"/> has been completed with all compilation events, then it
+        // waits for
+        /// <see cref="WhenCompletedTask"/> task for the driver to finish processing all events and generate
+        // remaining analyzer diagnostics.
         /// </summary>
         public async Task<ImmutableArray<Diagnostic>> GetDiagnosticsAsync(
             Compilation compilation,
@@ -1250,7 +1288,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         /// <summary>
         /// Returns an array of  <see cref="DiagnosticDescriptor"/>s for all <see cref="Analyzers"/>
-        /// along with <see cref="DiagnosticDescriptorErrorLoggerInfo"/> to be logged by the <see cref="ErrorLogger"/>.
+        /// along with <see cref="DiagnosticDescriptorErrorLoggerInfo"/> to be logged by the <see
+        // cref="ErrorLogger"/>.
         /// </summary>
         public ImmutableArray<(
             DiagnosticDescriptor Descriptor,
@@ -1481,7 +1520,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 // We do not allow analyzer based suppressions for following category of diagnostics:
                 //  1. Diagnostics which are already suppressed in source via pragma/suppress message attribute.
-                //  2. Diagnostics explicitly tagged as not configurable by analyzer authors - this includes compiler error diagnostics.
+                //  2. Diagnostics explicitly tagged as not configurable by analyzer authors - this includes
+                // compiler error diagnostics.
                 //  3. Diagnostics which are marked as error by default by diagnostic authors.
                 var suppressableDiagnostics = reportedDiagnostics.Where(d =>
                     !d.IsSuppressed
@@ -1537,7 +1577,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
             finally
             {
-                // Mark the reported diagnostics as processed for programmatic suppressions to avoid duplicate callbacks to suppressors for same diagnostics.
+                // Mark the reported diagnostics as processed for programmatic suppressions to avoid duplicate
+                // callbacks to suppressors for same diagnostics.
                 _diagnosticsProcessedForProgrammaticSuppressions.AddRange(reportedDiagnostics);
             }
 
@@ -1738,7 +1779,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             for (var i = 0; i < diagnostics.Length; i++)
             {
 #if DEBUG
-                // We should have ignored diagnostics with invalid locations and reported analyzer exception diagnostic for the same.
+                // We should have ignored diagnostics with invalid locations and reported analyzer exception
+                // diagnostic for the same.
                 DiagnosticAnalysisContextHelpers.VerifyDiagnosticLocationsInCompilation(
                     diagnostics[i],
                     compilation
@@ -1992,7 +2034,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (NonConfigurableAndCustomConfigurableAnalyzers.Contains(analyzer))
                 {
-                    // Analyzers reporting non-configurable or custom configurable diagnostics cannot be suppressed as user configuration is ignored for these analyzers.
+                    // Analyzers reporting non-configurable or custom configurable diagnostics cannot be suppressed as
+                    // user configuration is ignored for these analyzers.
                     continue;
                 }
 
@@ -2004,7 +2047,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 )
                 {
                     // SymbolStart/End analyzers and CompilationStart/End analyzers that analyze generated code
-                    // cannot have any of their callbacks suppressed as they need to analyze the entire compilation for correctness.
+                    // cannot have any of their callbacks suppressed as they need to analyze the entire compilation for
+                    // correctness.
                     continue;
                 }
 
@@ -2193,7 +2237,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 if (analysisScope.ConcurrentAnalysis)
                 {
-                    // Kick off worker tasks to process all compilation events (except the compilation end event) in parallel.
+                    // Kick off worker tasks to process all compilation events (except the compilation end event) in
+                    // parallel.
                     // Compilation end event must be processed after all other events.
 
                     var workerCount = prePopulatedEventQueue
@@ -2203,7 +2248,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     var workerTasks = new Task<CompilationCompletedEvent?>[workerCount];
                     for (int i = 0; i < workerCount; i++)
                     {
-                        // Create separate worker tasks to process all compilation events - we do not want to process any events on the main thread.
+                        // Create separate worker tasks to process all compilation events - we do not want to process any
+                        // events on the main thread.
                         workerTasks[i] = Task.Run(
                             async () =>
                                 await ProcessCompilationEventsCoreAsync(
@@ -2338,7 +2384,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         }
                     }
 
-                    // Don't process the compilation completed event as other worker threads might still be processing other compilation events.
+                    // Don't process the compilation completed event as other worker threads might still be processing
+                    // other compilation events.
                     // The caller will wait for all workers to complete and finally process this event.
                     if (compilationEvent is CompilationCompletedEvent compilationCompletedEvent)
                     {
@@ -2417,9 +2464,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
                 case CompilationUnitCompletedEvent compilationUnitCompletedEvent
                     when !compilationUnitCompletedEvent.FilterSpan.HasValue:
-                    // Clear the semantic model cache only if we have completed analysis for the entire compilation unit,
-                    // i.e. the event has a null filter span. Compilation unit completed event with a non-null filter span
-                    // indicates a synthesized event for partial analysis of the tree and we avoid clearing the semantic model cache for that case.
+                    // Clear the semantic model cache only if we have completed analysis for the entire compilation
+                    // unit,
+                    // i.e. the event has a null filter span. Compilation unit completed event with a non-null filter
+                    // span
+                    // indicates a synthesized event for partial analysis of the tree and we avoid clearing the semantic
+                    // model cache for that case.
                     SemanticModelProvider.ClearCache(
                         compilationUnitCompletedEvent.CompilationUnit,
                         compilationUnitCompletedEvent.Compilation
@@ -2535,10 +2585,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Tries to execute symbol action, symbol start/end actions and declaration actions for the given symbol.
+        /// Tries to execute symbol action, symbol start/end actions and declaration actions for the given
+        // symbol.
         /// </summary>
         /// <returns>
-        /// <see cref="EventProcessedState"/> indicating the current state of processing of the given compilation event.
+        /// <see cref="EventProcessedState"/> indicating the current state of processing of the given
+        // compilation event.
         /// </returns>
         [PerformanceSensitive(
             "https://developercommunity.visualstudio.com/content/problem/805524/ctrl-suggestions-are-very-slow-and-produce-gatheri.html",
@@ -3054,7 +3106,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // executing just a single analyzer (IDE open file analysis).
             if (analysisScope.Analyzers.Length == this.Analyzers.Length)
             {
-                // We are executing all analyzers, so at least one analyzer in analysis scope must have a symbol start action.
+                // We are executing all analyzers, so at least one analyzer in analysis scope must have a symbol
+                // start action.
                 return true;
             }
             else if (analysisScope.Analyzers.Length == 1)
@@ -3072,7 +3125,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            // Slow check when we are executing more than one analyzer, but it is still a strict subset of all analyzers.
+            // Slow check when we are executing more than one analyzer, but it is still a strict subset of all
+            // analyzers.
             var symbolStartAnalyzers = PooledHashSet<DiagnosticAnalyzer>.GetInstance();
             try
             {
@@ -3202,7 +3256,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 CancellationToken cancellationToken
             )
             {
-                // Compute additional inherited actions for this symbol by running the containing symbol's start actions.
+                // Compute additional inherited actions for this symbol by running the containing symbol's start
+                // actions.
                 var inheritedActions = await getInheritedActionsAsync(
                         driver,
                         symbol,
@@ -3255,9 +3310,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         .ConfigureAwait(false);
                     if (!containerActions.IsEmpty)
                     {
-                        // Don't inherit actions for nested type and namespace from its containing type and namespace respectively.
+                        // Don't inherit actions for nested type and namespace from its containing type and namespace
+                        // respectively.
                         // However, note that we bail out **after** computing container's per-symbol actions above.
-                        // This is done to ensure that we have executed symbol started actions for the container before our start actions are executed.
+                        // This is done to ensure that we have executed symbol started actions for the container before our
+                        // start actions are executed.
                         if (symbol.ContainingSymbol.Kind != symbol.Kind)
                         {
                             // Don't inherit the symbol start and symbol end actions.
@@ -3342,7 +3399,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     .ConfigureAwait(false);
                 if (!isConcurrent)
                 {
-                    // Non-concurrent analyzers need their action callbacks from the analyzer driver to be guarded by a gate.
+                    // Non-concurrent analyzers need their action callbacks from the analyzer driver to be guarded by a
+                    // gate.
                     var gate = new SemaphoreSlim(initialCount: 1);
                     builder.Add(analyzer, gate);
                 }
@@ -3463,7 +3521,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
         }
 
-        // Location is in generated code if either the containing tree is a generated code file OR if it is a hidden source location.
+        // Location is in generated code if either the containing tree is a generated code file OR if it is
+        // a hidden source location.
         protected bool IsGeneratedOrHiddenCodeLocation(
             SyntaxTree syntaxTree,
             TextSpan span,
@@ -3527,7 +3586,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         }
 
         /// <summary>
-        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through options.
+        /// Returns true if all the diagnostics that can be produced by this analyzer are suppressed through
+        // options.
         /// </summary>
         internal static bool IsDiagnosticAnalyzerSuppressed(
             DiagnosticAnalyzer analyzer,
@@ -3563,7 +3623,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
     /// <summary>
     /// Driver to execute diagnostic analyzers for a given compilation.
-    /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its analysis.
+    /// It uses a <see cref="AsyncQueue{TElement}"/> of <see cref="CompilationEvent"/>s to drive its
+    // analysis.
     /// </summary>
     internal partial class AnalyzerDriver<TLanguageKindEnum> : AnalyzerDriver
         where TLanguageKindEnum : struct
@@ -3575,9 +3636,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// Create an analyzer driver.
         /// </summary>
         /// <param name="analyzers">The set of analyzers to include in the analysis</param>
-        /// <param name="getKind">A delegate that returns the language-specific kind for a given syntax node</param>
-        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for the lifetime of analyzer host.</param>
-        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics with effective severity from this set should not be reported.</param>
+        /// <param name="getKind">A delegate that returns the language-specific kind for a given syntax
+        // node</param>
+        /// <param name="analyzerManager">AnalyzerManager to manage analyzers for the lifetime of analyzer
+        // host.</param>
+        /// <param name="severityFilter">Filtered diagnostic severities in the compilation, i.e. diagnostics
+        // with effective severity from this set should not be reported.</param>
         /// <param name="isComment">Delegate to identify if the given trivia is a comment.</param>
         internal AnalyzerDriver(
             ImmutableArray<DiagnosticAnalyzer> analyzers,
@@ -3870,7 +3934,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 // Execute stateless syntax node actions.
                 executeNodeActions();
 
-                // Execute actions in executable code: code block actions, operation actions and operation block actions.
+                // Execute actions in executable code: code block actions, operation actions and operation block
+                // actions.
                 executeExecutableCodeActions();
             }
 
@@ -4134,8 +4199,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     // We further filter out the operation to analyze based on analysis scope if we are performing
                     // partial analysis of the declaration, i.e. analyzing a sub-span within the declaration span,
                     // and additionally the analyzer has not registered any operation block start actions. In case the
-                    // analyzer has registered operation block start actions, we need to make callbacks for all operations
-                    // in the operation block to ensure the analyzer can correctly report operation block end diagnostics.
+                    // analyzer has registered operation block start actions, we need to make callbacks for all
+                    // operations
+                    // in the operation block to ensure the analyzer can correctly report operation block end
+                    // diagnostics.
                     var filteredOperationsToAnalyze =
                         declarationAnalysisData.IsPartialAnalysis
                         && !groupedActionsForAnalyzer.HasOperationBlockStartActions
@@ -4295,7 +4362,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     // Might be:
                     // (1) A field declaration statement with multiple fields declared.
                     //     If so, we execute syntax node analysis for entire field declaration (and its descendants)
-                    //     if we processing the first field and skip syntax actions for remaining fields in the declaration.
+                    //     if we processing the first field and skip syntax actions for remaining fields in the
+                    // declaration.
                     // (2) A namespace declaration statement with qualified name "namespace A.B { }"
                     if (IsEquivalentSymbol(declaredSymbol, declInNode.DeclaredSymbol))
                     {
@@ -4307,7 +4375,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         return;
                     }
 
-                    // Compute the topmost node representing the syntax declaration for the member that needs to be skipped.
+                    // Compute the topmost node representing the syntax declaration for the member that needs to be
+                    // skipped.
                     var declarationNodeToSkip = declInNode.DeclaredNode;
                     var declaredSymbolOfDeclInNode =
                         declInNode.DeclaredSymbol
@@ -4361,7 +4430,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            // GetSymbolInfo(name syntax) for "A" in "namespace A.B { }" sometimes returns a symbol which doesn't match
+            // GetSymbolInfo(name syntax) for "A" in "namespace A.B { }" sometimes returns a symbol which
+            // doesn't match
             // the symbol declared in the compilation. So we do an equivalence check for such namespace symbols.
             return otherSymbol != null
                 && declaredSymbol.Kind == SymbolKind.Namespace
@@ -4404,10 +4474,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     // Special handling for IMethodBodyOperation and IConstructorBodyOperation.
                     // These are newly added root operation nodes for C# method and constructor bodies.
                     // However, to avoid a breaking change for existing operation block analyzers,
-                    // we have decided to retain the current behavior of making operation block callbacks with the contained
+                    // we have decided to retain the current behavior of making operation block callbacks with the
+                    // contained
                     // method body and/or constructor initializer operation nodes.
-                    // Hence we detect here if the operation block is parented by IMethodBodyOperation or IConstructorBodyOperation and
-                    // add them to 'operationsToAnalyze' so that analyzers that explicitly register for these operation kinds
+                    // Hence we detect here if the operation block is parented by IMethodBodyOperation or
+                    // IConstructorBodyOperation and
+                    // add them to 'operationsToAnalyze' so that analyzers that explicitly register for these operation
+                    // kinds
                     // can get callbacks for these nodes.
                     if (operationBlock.Parent != null)
                     {
@@ -4420,7 +4493,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 break;
 
                             case OperationKind.ExpressionStatement:
-                                // For constructor initializer, we generate an IInvocationOperation with an implicit IExpressionStatementOperation parent.
+                                // For constructor initializer, we generate an IInvocationOperation with an implicit
+                                // IExpressionStatementOperation parent.
                                 Debug.Assert(operationBlock.Kind == OperationKind.Invocation);
                                 Debug.Assert(operationBlock.Parent.IsImplicit);
                                 Debug.Assert(

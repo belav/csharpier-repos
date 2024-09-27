@@ -9,6 +9,7 @@
 // Portions (C) 2003 Motus Technologies Inc. (http://www.motus.com)
 //
 // Based on "DigestAuthenticationModule.cs". Original source code available at
+//
 // http://www.rassoc.com/gregr/weblog/stories/2002/07/09/webServicesSecurityHttpDigestAuthenticationWithoutActiveDirectory.html
 //
 

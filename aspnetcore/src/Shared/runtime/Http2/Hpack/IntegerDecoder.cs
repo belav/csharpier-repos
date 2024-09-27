@@ -61,7 +61,8 @@ namespace System.Net.Http.HPack
         /// <param name="result">
         /// If decoded successfully, contains the decoded integer.
         /// </param>
-        /// <returns>If the integer has been fully decoded, true. Otherwise, false -- <see cref="TryDecode(byte, out int)"/> must be called on subsequent bytes.</returns>
+        /// <returns>If the integer has been fully decoded, true. Otherwise, false -- <see
+        // cref="TryDecode(byte, out int)"/> must be called on subsequent bytes.</returns>
         public bool TryDecode(byte b, out int result)
         {
             // Check if shifting b by _m would result in > 31 bits.

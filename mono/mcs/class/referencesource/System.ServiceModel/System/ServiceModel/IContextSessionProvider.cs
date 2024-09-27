@@ -8,6 +8,7 @@ namespace System.ServiceModel
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    // CSD Dev Framework#417: marker interface for IServiceBehaviors/Bindings that support context at the "app layer"
+    // CSD Dev Framework#417: marker interface for IServiceBehaviors/Bindings that support context at
+    // the "app layer"
     interface IContextSessionProvider { }
 }

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Base class for browser capabilities object: just a read-only dictionary
- * holder that supports Init()
- *
- *
+* Base class for browser capabilities object: just a read-only dictionary
+* holder that supports Init()
+*
+*
 
 
 */
@@ -31,8 +31,8 @@ namespace System.Web.Configuration
     using Debug = System.Web.Util.Debug;
 
     /*
-     * Abstract base class for Capabilities
-     */
+    * Abstract base class for Capabilities
+    */
     public class HttpCapabilitiesBase : IFilterResolutionService
     {
 #if !DONTUSEFACTORYGENERATOR
@@ -178,8 +178,8 @@ namespace System.Web.Configuration
         }
 
         /*
-         * A Capabilities object is just a read-only dictionary
-         */
+        * A Capabilities object is just a read-only dictionary
+        */
         /// <devdoc>
         ///       <para>Allows access to individual dictionary values.</para>
         ///    </devdoc>
@@ -231,16 +231,16 @@ namespace System.Web.Configuration
         }
 
         /*
-         * It provides an overridable Init method
-         */
+        * It provides an overridable Init method
+        */
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
         protected virtual void Init() { }
 
         /*
-         * The actual initializer sets up Item[] before calling Init()
-         */
+        * The actual initializer sets up Item[] before calling Init()
+        */
 
         internal void InitInternal(HttpBrowserCapabilities browserCaps)
         {

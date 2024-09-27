@@ -21,7 +21,8 @@ namespace System.ServiceModel.Security
     using System.Threading;
     using System.Xml;
 
-    // Please use 'sdv //depot/devdiv/private/indigo_xws/ndp/indigo/src/ServiceModel/System/ServiceModel/Security/SecuritySessionListenerFactory.cs'
+    // Please use 'sdv
+    // //depot/devdiv/private/indigo_xws/ndp/indigo/src/ServiceModel/System/ServiceModel/Security/SecuritySessionListenerFactory.cs'
     // to see version history before the file was renamed
     // This class is named Settings since the only public APIs are for
     // settings; however, this class also manages all functionality
@@ -1741,7 +1742,8 @@ namespace System.ServiceModel.Security
                     );
                 }
                 // the incoming token's key should have been issued within keyRenewalPeriod time in the past
-                // if not, send back a renewal fault. However if this is a session close message then its ok to not require the client
+                // if not, send back a renewal fault. However if this is a session close message then its ok to not
+                // require the client
                 // to renew the key in order to send the close.
                 if (
                     incomingToken.KeyExpirationTime < DateTime.UtcNow
@@ -2266,7 +2268,8 @@ namespace System.ServiceModel.Security
                                 GetLocalUri()
                             );
                             this.isInputClosed = true;
-                            // OnCloseResponseMessageReceived is responsible for closing the message and requestContext if required.
+                            // OnCloseResponseMessageReceived is responsible for closing the message and requestContext if
+                            // required.
                             this.OnCloseResponseMessageReceived(
                                 requestContext,
                                 message,
@@ -2618,7 +2621,8 @@ namespace System.ServiceModel.Security
                 );
             }
 
-            // SendCloseResponse closes the message and underlying context if the operation completes successfully
+            // SendCloseResponse closes the message and underlying context if the operation completes
+            // successfully
             protected void SendCloseResponse(
                 RequestContext requestContext,
                 Message closeResponse,
@@ -2644,7 +2648,8 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            // BeginSendCloseResponse closes the message and underlying context if the operation completes successfully
+            // BeginSendCloseResponse closes the message and underlying context if the operation completes
+            // successfully
             internal IAsyncResult BeginSendCloseResponse(
                 RequestContext requestContext,
                 Message closeResponse,
@@ -2675,7 +2680,8 @@ namespace System.ServiceModel.Security
                 return new CompletedAsyncResult(callback, state);
             }
 
-            // EndSendCloseResponse closes the message and underlying context if the operation completes successfully
+            // EndSendCloseResponse closes the message and underlying context if the operation completes
+            // successfully
             internal void EndSendCloseResponse(IAsyncResult result)
             {
                 if (result is CompletedAsyncResult)

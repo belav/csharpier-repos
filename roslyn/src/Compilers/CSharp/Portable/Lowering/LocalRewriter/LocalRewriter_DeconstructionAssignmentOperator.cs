@@ -25,14 +25,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// The left represents a tree of L-values. The structure of right can be missing parts of the tree on the left.
-        /// The conversion holds nested conversions and deconstruction information, which matches the tree from the left,
-        /// and it provides the information to fill in the missing parts of the tree from the right and convert it to
+        /// The left represents a tree of L-values. The structure of right can be missing parts of the tree
+        // on the left.
+        /// The conversion holds nested conversions and deconstruction information, which matches the tree
+        // from the left,
+        /// and it provides the information to fill in the missing parts of the tree from the right and
+        // convert it to
         /// the tree from the left.
         ///
         /// A bound sequence is returned which has different phases of side-effects:
-        /// - the initialization phase includes side-effects from the left, followed by evaluations of the right
-        /// - the deconstruction phase includes all the invocations of Deconstruct methods and tuple element accesses below a Deconstruct call
+        /// - the initialization phase includes side-effects from the left, followed by evaluations of the
+        // right
+        /// - the deconstruction phase includes all the invocations of Deconstruct methods and tuple element
+        // accesses below a Deconstruct call
         /// - the conversion phase
         /// - the assignment phase
         /// </summary>
@@ -171,10 +176,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     right
                         is { Kind: BoundKind.ConvertedTupleLiteral }
                             or BoundConversion { Operand.Kind: BoundKind.ConvertedTupleLiteral }
-                    // - at least one element in the RHS is actually stored to a temp. i.e. it is not a constant expression.
+                    // - at least one element in the RHS is actually stored to a temp. i.e. it is not a constant
+                    // expression.
                     && effects.init.Any()
                     // - all variables on the LHS are unique, by-value, and are locals or parameters.
-                    //     - Note that this could be expanded into fields of non-nullable value types at some point, but we decided not to invest in that at this time.
+                    //     - Note that this could be expanded into fields of non-nullable value types at some point, but
+                    // we decided not to invest in that at this time.
                     && canReorderTargetAssignments(lhsTargets, ref visitedSymbols)
                 )
                 {
@@ -189,7 +196,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // b = temp2;
                     // c = temp3;
 
-                    // As an optimization, ensure that assignments from temps to targets happen in the reverse order of effects:
+                    // As an optimization, ensure that assignments from temps to targets happen in the reverse order of
+                    // effects:
                     // temp1 = x;
                     // temp2 = y;
                     // temp3 = z;
@@ -197,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // b = temp2;
                     // a = temp1;
 
-                    // This makes it more likely that the stack optimizer pass will be able to eliminate the temps and replace them with stack push/pops.
+                    // This makes it more likely that the stack optimizer pass will be able to eliminate the temps and
+                    // replace them with stack push/pops.
                     effects.assignments.ReverseContents();
                 }
 
@@ -268,10 +277,13 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// This method recurses through leftTargets, right and conversion at the same time.
-        /// As it does, it collects side-effects into the proper buckets (init, deconstructions, conversions, assignments).
+        /// As it does, it collects side-effects into the proper buckets (init, deconstructions,
+        // conversions, assignments).
         ///
-        /// The side-effects from the right initially go into the init bucket. But once we started drilling into a Deconstruct
-        /// invocation, subsequent side-effects from the right go into the deconstructions bucket (otherwise they would
+        /// The side-effects from the right initially go into the init bucket. But once we started drilling
+        // into a Deconstruct
+        /// invocation, subsequent side-effects from the right go into the deconstructions bucket (otherwise
+        // they would
         /// be evaluated out of order).
         /// </summary>
         private BoundExpression? ApplyDeconstructionConversion(
@@ -470,7 +482,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             return kind == BoundKind.TupleLiteral || kind == BoundKind.ConvertedTupleLiteral;
         }
 
-        // This returns accessors and may create a temp for the tuple, but will not create temps for the tuple elements.
+        // This returns accessors and may create a temp for the tuple, but will not create temps for the
+        // tuple elements.
         private ImmutableArray<BoundExpression> AccessTupleFields(
             BoundExpression expression,
             ArrayBuilder<LocalSymbol> temps,
@@ -585,7 +598,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="arg">The argument to evaluate early.</param>
         /// <param name="effects">A store of the argument into a temp, if necessary, is added here.</param>
         /// <param name="temps">Any generated temps are added here.</param>
-        /// <returns>An expression evaluating the argument later (e.g. reading the temp), including a possible deferred user-defined conversion.</returns>
+        /// <returns>An expression evaluating the argument later (e.g. reading the temp), including a
+        // possible deferred user-defined conversion.</returns>
         private BoundExpression EvaluateSideEffectingArgumentToTemp(
             BoundExpression arg,
             ArrayBuilder<BoundExpression> effects,

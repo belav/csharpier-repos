@@ -16,7 +16,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.CSharp.Test.Utilities
 {
     /// <summary>
-    /// Represents the source code used for a C# test. Allows us to have single helpers that enable all the different ways
+    /// Represents the source code used for a C# test. Allows us to have single helpers that enable all
+    // the different ways
     /// we typically provide source in testing.
     /// </summary>
     public readonly struct CSharpTestSource

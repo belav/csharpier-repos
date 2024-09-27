@@ -20,7 +20,8 @@ internal static unsafe class SP800_108_CTR_HMACSHA512Extensions
     {
         var cbCombinedContext = checked((uint)contextHeader.Length + cbContext);
 
-        // Try allocating the combined context on the stack to avoid temporary managed objects; only fall back to heap if buffers are too large.
+        // Try allocating the combined context on the stack to avoid temporary managed objects; only fall
+        // back to heap if buffers are too large.
         byte[]? heapAllocatedCombinedContext =
             (cbCombinedContext > Constants.MAX_STACKALLOC_BYTES)
                 ? new byte[cbCombinedContext]

@@ -11,7 +11,8 @@ using System.Xml.XPath;
 namespace System.Xml.Schema
 {
     /// <summary>
-    /// This class contains a (CLR Object, XmlType) pair that represents an instance of an Xml atomic value.
+    /// This class contains a (CLR Object, XmlType) pair that represents an instance of an Xml atomic
+    // value.
     /// It is optimized to avoid boxing.
     /// </summary>
     public sealed class XmlAtomicValue : XPathItem, ICloneable

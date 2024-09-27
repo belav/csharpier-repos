@@ -75,7 +75,8 @@ namespace System.Data.SqlTypes
 
             int cchRequiredSize = GetFullPathName(path, buffer.Capacity, buffer, IntPtr.Zero);
 
-            // if our buffer was smaller than required, GetFullPathName will succeed and return us the required buffer size with null
+            // if our buffer was smaller than required, GetFullPathName will succeed and return us the required
+            // buffer size with null
             if (cchRequiredSize > buffer.Capacity)
             {
                 // we have to reallocate and retry
@@ -90,10 +91,13 @@ namespace System.Data.SqlTypes
                 if (lastError == 0)
                 {
                     // we found that in some cases GetFullPathName fail but does not set the last error value
-                    // for example, it happens when the path provided to it is longer than 32K: return value is 0 (failure)
-                    // but GetLastError was zero too so we raised Win32Exception saying "The operation completed successfully".
+                    // for example, it happens when the path provided to it is longer than 32K: return value is 0
+                    // (failure)
+                    // but GetLastError was zero too so we raised Win32Exception saying "The operation completed
+                    // successfully".
                     // To raise proper "path too long" failure, check the length before calling this API.
-                    // For other (yet unknown cases), we will throw InvalidPath message since we do not know what exactly happened
+                    // For other (yet unknown cases), we will throw InvalidPath message since we do not know what
+                    // exactly happened
                     throw ADP.Argument(Res.GetString(Res.SqlFileStream_InvalidPath), "path");
                 }
                 else
@@ -135,7 +139,8 @@ namespace System.Data.SqlTypes
         private static extern bool SetThreadErrorMode(uint newMode, out uint oldMode);
 
         /// <summary>
-        /// this method uses thread-safe version of SetErrorMode on Windows 7/Windows Server 2008 R2 operating systems.
+        /// this method uses thread-safe version of SetErrorMode on Windows 7/Windows Server 2008 R2
+        // operating systems.
         /// </summary>
         [ResourceExposure(ResourceScope.Process)] // None on Windows7 / Windows Server 2008 R2 or later
         [ResourceConsumption(ResourceScope.Process)]

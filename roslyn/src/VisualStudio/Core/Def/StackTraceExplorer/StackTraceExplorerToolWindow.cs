@@ -201,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             // Return OLECMDERR_E_UNKNOWNGROUP if we don't handle the command
-            // see https://docs.microsoft.com/en-us/windows/win32/api/docobj/nf-docobj-iolecommandtarget-exec#return-value
+            // see
+            // https://docs.microsoft.com/en-us/windows/win32/api/docobj/nf-docobj-iolecommandtarget-exec#return-value
             return -2147221244;
         }
     }

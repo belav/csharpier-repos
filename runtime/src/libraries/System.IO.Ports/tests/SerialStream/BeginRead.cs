@@ -227,7 +227,8 @@ namespace System.IO.Ports.Tests
 
                 com2.Write(new byte[numRndBytesToRead], 0, numRndBytesToRead);
 
-                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not gauarentee that
+                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not
+                // gauarentee that
                 // the code calling the callback has finished it's processing
                 IAsyncResult callbackReadAsyncResult = callbackHandler.ReadAsyncResult;
 
@@ -288,7 +289,8 @@ namespace System.IO.Ports.Tests
 
                 com2.Write(new byte[numRndBytesToRead], 0, numRndBytesToRead);
 
-                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not gauarentee that
+                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not
+                // gauarentee that
                 // the code calling the callback has finished it's processing
                 IAsyncResult callbackReadAsyncResult = callbackHandler.ReadAsyncResult;
 
@@ -348,7 +350,8 @@ namespace System.IO.Ports.Tests
 
                 com2.Write(new byte[numRndBytesToRead], 0, numRndBytesToRead);
 
-                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not gauarentee that
+                // callbackHandler.ReadAsyncResult  guarantees that the callback has been calledhowever it does not
+                // gauarentee that
                 // the code calling the callback has finished it's processing
                 IAsyncResult callbackReadAsyncResult = callbackHandler.ReadAsyncResult;
 

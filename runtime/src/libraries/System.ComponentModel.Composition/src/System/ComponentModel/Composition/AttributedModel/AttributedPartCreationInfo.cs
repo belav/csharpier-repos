@@ -244,8 +244,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         private void DiscoverExportsAndImports()
         {
             // NOTE : in most cases both of these will be null or not null at the same time
-            // the only situation when that is not the case is when there was a failure during the previous discovery
-            // and one of them ended up not being set. In that case we will force the discovery again so that the same exception is thrown.
+            // the only situation when that is not the case is when there was a failure during the previous
+            // discovery
+            // and one of them ended up not being set. In that case we will force the discovery again so that
+            // the same exception is thrown.
             if ((_exports != null) && (_imports != null))
             {
                 return;

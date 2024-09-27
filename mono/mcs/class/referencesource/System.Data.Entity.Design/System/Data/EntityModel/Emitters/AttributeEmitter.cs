@@ -145,10 +145,12 @@ namespace System.Data.EntityModel.Emitters
         }
 
         /// <summary>
-        /// Shared code for adding a EdmTypeAttribute derived attribute including parameters to a type or property
+        /// Shared code for adding a EdmTypeAttribute derived attribute including parameters to a type or
+        // property
         /// </summary>
         /// <param name="attributeName">Unqualified name of the attribute</param>
-        /// <param name="type">The type or property type of the code that is having the attribute attached.</param>
+        /// <param name="type">The type or property type of the code that is having the attribute
+        // attached.</param>
         /// <param name="member">The type declaration to add the attribues to.</param>
         public void EmitSchemaTypeAttribute(
             string attributeName,
@@ -217,9 +219,12 @@ namespace System.Data.EntityModel.Emitters
         //
         //
         // Emit
-        //     [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator", "4.0.0.0")]
         //
-        // this allows FxCop to skip analysis of these methods and types, it should not be applied to partial types, only the
+        // [global::System.CodeDom.Compiler.GeneratedCode("System.Data.Entity.Design.EntityClassGenerator",
+        // "4.0.0.0")]
+        //
+        // this allows FxCop to skip analysis of these methods and types, it should not be applied to
+        // partial types, only the
         // generated members of partial types
         //
         CodeAttributeDeclaration _GeneratedCodeAttribute;
@@ -296,7 +301,8 @@ namespace System.Data.EntityModel.Emitters
                 );
                 propertyDecl.CustomAttributes.Add(attribute);
 
-                // Have CodeDOM serialization set the properties on the ComplexObject, not the ComplexObject instance.
+                // Have CodeDOM serialization set the properties on the ComplexObject, not the ComplexObject
+                // instance.
                 attribute = EmitSimpleAttribute(
                     "System.ComponentModel.DesignerSerializationVisibility"
                 );
@@ -318,11 +324,16 @@ namespace System.Data.EntityModel.Emitters
 
                 if (!MetadataUtil.IsCollectionType(emitter.Item.TypeUsage.EdmType))
                 {
-                    // Non-collection complex properties also need additional serialization attributes to force them to be explicitly serialized if they are null
-                    // If this is omitted, null complex properties do not get explicitly set to null during deserialization, which causes
-                    // them to be lazily constructed once the property is accessed after the entity is deserialized. If the property is
-                    // actually null during serialiation, that means the user has explicitly set it, so we need to maintain that during serialization.
-                    // This doesn't apply to collection types because they aren't lazily constructed and don't need this extra information.
+                    // Non-collection complex properties also need additional serialization attributes to force them to
+                    // be explicitly serialized if they are null
+                    // If this is omitted, null complex properties do not get explicitly set to null during
+                    // deserialization, which causes
+                    // them to be lazily constructed once the property is accessed after the entity is deserialized. If
+                    // the property is
+                    // actually null during serialiation, that means the user has explicitly set it, so we need to
+                    // maintain that during serialization.
+                    // This doesn't apply to collection types because they aren't lazily constructed and don't need this
+                    // extra information.
                     attribute = EmitSimpleAttribute("System.Xml.Serialization.XmlElement");
                     AttributeEmitter.AddNamedAttributeArguments(attribute, "IsNullable", true);
                     propertyDecl.CustomAttributes.Add(attribute);

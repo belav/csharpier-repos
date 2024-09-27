@@ -57,7 +57,8 @@ namespace Roslyn.Utilities
         private BlobBuildingStream()
         {
             // NOTE: We pool the wrapping BlobBuildingStream, but not individual chunks.
-            // The first chunk will be reused, but any further chunks will be freed when we're done building blob.
+            // The first chunk will be reused, but any further chunks will be freed when we're done building
+            // blob.
             _builder = new BlobBuilder(ChunkSize);
         }
 

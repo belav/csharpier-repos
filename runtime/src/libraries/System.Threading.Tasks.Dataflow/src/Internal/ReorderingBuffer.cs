@@ -22,13 +22,15 @@ namespace System.Threading.Tasks.Dataflow.Internal
     /// <summary>Base interface for reordering buffers.</summary>
     internal interface IReorderingBuffer
     {
-        /// <summary>Informs the reordering buffer not to expect the message with the specified id.</summary>
+        /// <summary>Informs the reordering buffer not to expect the message with the specified
+        // id.</summary>
         /// <param name="id">The id of the message to be ignored.</param>
         void IgnoreItem(long id);
     }
 
     /// <summary>Provides a buffer that reorders items according to their incoming IDs.</summary>
-    /// <typeparam name="TOutput">Specifies the type of data stored in the items being reordered.</typeparam>
+    /// <typeparam name="TOutput">Specifies the type of data stored in the items being
+    // reordered.</typeparam>
     /// <remarks>
     /// This type expects the first item to be ID==0 and for all subsequent items
     /// to increase IDs sequentially.
@@ -40,7 +42,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>The source that owns this reordering buffer.</summary>
         private readonly object _owningSource;
 
-        /// <summary>A reordering buffer used when parallelism is employed and items may be completed out-of-order.</summary>
+        /// <summary>A reordering buffer used when parallelism is employed and items may be completed
+        // out-of-order.</summary>
         /// <remarks>Also serves as the sync object to protect the contents of this class.</remarks>
         private readonly Dictionary<long, KeyValuePair<bool, TOutput>> _reorderingBuffer =
             new Dictionary<long, KeyValuePair<bool, TOutput>>();
@@ -51,7 +54,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>The ID of the next item that should be released from the reordering buffer.</summary>
         private long _nextReorderedIdToOutput;
 
-        /// <summary>Gets the object used to synchronize all access to the reordering buffer's internals.</summary>
+        /// <summary>Gets the object used to synchronize all access to the reordering buffer's
+        // internals.</summary>
         private object ValueLock
         {
             get { return _reorderingBuffer; }
@@ -59,7 +63,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Initializes the reordering buffer.</summary>
         /// <param name="owningSource">The source that owns this reordering buffer.</param>
-        /// <param name="outputAction">The action to invoke when the next in-order item is available to be output.</param>
+        /// <param name="outputAction">The action to invoke when the next in-order item is available to be
+        // output.</param>
         internal ReorderingBuffer(object owningSource, Action<object, TOutput> outputAction)
         {
             // Validate and store internal arguments
@@ -75,7 +80,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>Stores the next item as it completes processing.</summary>
         /// <param name="id">The ID of the item.</param>
         /// <param name="item">The completed item.</param>
-        /// <param name="itemIsValid">Specifies whether the item is valid (true) or just a placeholder (false).</param>
+        /// <param name="itemIsValid">Specifies whether the item is valid (true) or just a placeholder
+        // (false).</param>
         internal void AddItem(long id, TOutput? item, bool itemIsValid)
         {
             Debug.Assert(
@@ -163,14 +169,16 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
         }
 
-        /// <summary>Informs the reordering buffer not to expect the message with the specified id.</summary>
+        /// <summary>Informs the reordering buffer not to expect the message with the specified
+        // id.</summary>
         /// <param name="id">The id of the message to be ignored.</param>
         public void IgnoreItem(long id)
         {
             AddItem(id, default(TOutput)!, itemIsValid: false);
         }
 
-        /// <summary>Outputs the item.  The item must have already been confirmed to have the next ID.</summary>
+        /// <summary>Outputs the item.  The item must have already been confirmed to have the next
+        // ID.</summary>
         /// <param name="theNextItem">The item to output.</param>
         /// <param name="itemIsValid">Whether the item is valid.</param>
         private void OutputNextItem(TOutput? theNextItem, bool itemIsValid)

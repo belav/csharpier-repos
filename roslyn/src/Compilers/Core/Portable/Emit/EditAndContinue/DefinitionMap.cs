@@ -78,9 +78,12 @@ namespace Microsoft.CodeAnalysis.Emit
                 // which would not happen if the lambdas were named methods.
 
                 // TODO (bug https://github.com/dotnet/roslyn/issues/2504)
-                // Note that in some cases an Insert might also need to map syntax. For example, a new constructor added
-                // to a class that has field/property initializers with lambdas. These lambdas get "copied" into the constructor
-                // (assuming it doesn't have "this" constructor initializer) and thus their generated names need to be preserved.
+                // Note that in some cases an Insert might also need to map syntax. For example, a new constructor
+                // added
+                // to a class that has field/property initializers with lambdas. These lambdas get "copied" into the
+                // constructor
+                // (assuming it doesn't have "this" constructor initializer) and thus their generated names need to
+                // be preserved.
 
                 if (edit.Kind == SemanticEditKind.Update && edit.SyntaxMap != null)
                 {
@@ -180,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Emit
         /// Returns method handle of a method symbol from the immediately preceding generation.
         /// </summary>
         /// <remarks>
-        /// The method may have been defined in any preceding generation but <paramref name="oldMethod"/> symbol must be mapped to
+        /// The method may have been defined in any preceding generation but <paramref name="oldMethod"/>
+        // symbol must be mapped to
         /// the immediately preceding one.
         /// </remarks>
         public MethodDefinitionHandle GetPreviousMethodHandle(
@@ -337,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
 
                 // All types that AddedOrChangedMethodInfo refers to have been mapped to the previous generation.
-                // Therefore we don't need to fall back to metadata if we don't find the type reference, like we do in DefinitionMap.MapReference.
+                // Therefore we don't need to fall back to metadata if we don't find the type reference, like we do
+                // in DefinitionMap.MapReference.
                 symbolMap = SourceToPreviousSymbolMatcher;
             }
             else
@@ -393,7 +398,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 {
                     // Method is async/iterator kickoff method.
 
-                    // Use local slots stored in CDI (encLocalSlotMap) to calculate map of local variables hoisted to fields of the state machine.
+                    // Use local slots stored in CDI (encLocalSlotMap) to calculate map of local variables hoisted to
+                    // fields of the state machine.
                     var localSlotDebugInfo = debugInfo.LocalSlots.NullToEmpty();
                     GetStateMachineFieldMapFromMetadata(
                         stateMachineType,
@@ -412,13 +418,19 @@ namespace Microsoft.CodeAnalysis.Emit
                 }
                 else
                 {
-                    // If the current method is async/iterator then either the previous method wasn't declared as async/iterator and it's updated to be one,
-                    // or it was but is not marked by the corresponding state machine attribute because it was missing in the compilation.
-                    // In the later case we need to report an error since we don't known how to map to the previous state machine.
+                    // If the current method is async/iterator then either the previous method wasn't declared as
+                    // async/iterator and it's updated to be one,
+                    // or it was but is not marked by the corresponding state machine attribute because it was missing
+                    // in the compilation.
+                    // In the later case we need to report an error since we don't known how to map to the previous
+                    // state machine.
 
-                    // The IDE already checked that the attribute type is present in the base compilation, but didn't validate that it is well-formed.
-                    // We don't have the base compilation to directly query for the attribute, only the source compilation.
-                    // But since constructor signatures can't be updated during EnC we can just check the current compilation.
+                    // The IDE already checked that the attribute type is present in the base compilation, but didn't
+                    // validate that it is well-formed.
+                    // We don't have the base compilation to directly query for the attribute, only the source
+                    // compilation.
+                    // But since constructor signatures can't be updated during EnC we can just check the current
+                    // compilation.
 
                     if (method.IsAsync)
                     {
@@ -453,7 +465,8 @@ namespace Microsoft.CodeAnalysis.Emit
                         }
                     }
 
-                    // Calculate local slot mapping for the current method (might be the MoveNext method of a state machine).
+                    // Calculate local slot mapping for the current method (might be the MoveNext method of a state
+                    // machine).
 
                     try
                     {
@@ -653,7 +666,8 @@ namespace Microsoft.CodeAnalysis.Emit
                         )
                     )
                     {
-                        // If we are in a display class that is specific to a method the original method id is already incorporated to the name of the display class,
+                        // If we are in a display class that is specific to a method the original method id is already
+                        // incorporated to the name of the display class,
                         // so members do not have it in their name and only have the entity id.
 
                         var suffixSpan = memberName.AsSpan(suffixIndex);
@@ -719,10 +733,12 @@ namespace Microsoft.CodeAnalysis.Emit
         }
 
         /// <summary>
-        /// Enumerates method symbols synthesized for the body of a given <paramref name="oldMethod"/> in the previous generation that are not synthesized for the current method body (if any).
+        /// Enumerates method symbols synthesized for the body of a given <paramref name="oldMethod"/> in
+        // the previous generation that are not synthesized for the current method body (if any).
         /// </summary>
         /// <param name="oldMethod">Method from the previous generation.</param>
-        /// <param name="currentLambdas">Lambdas generated to the current version of the method. This includes both lambdas mapped to previous ones and newly introduced lambdas.</param>
+        /// <param name="currentLambdas">Lambdas generated to the current version of the method. This
+        // includes both lambdas mapped to previous ones and newly introduced lambdas.</param>
         public IEnumerable<IMethodSymbolInternal> GetDeletedSynthesizedMethods(
             IMethodSymbolInternal oldMethod,
             ImmutableArray<LambdaDebugInfo> currentLambdas
@@ -738,7 +754,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 )
             )
             {
-                // If a method has been added or updated then all synthesized members it produced are stored on the baseline.
+                // If a method has been added or updated then all synthesized members it produced are stored on the
+                // baseline.
                 // This includes all lambdas regardless of whether they were mapped to previous generation or not.
                 if (
                     !addedOrChangedMethod.LambdaDebugInfo.IsDefaultOrEmpty

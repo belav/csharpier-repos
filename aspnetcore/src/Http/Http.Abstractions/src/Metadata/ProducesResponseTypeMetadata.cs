@@ -19,7 +19,8 @@ public sealed class ProducesResponseTypeMetadata : IProducesResponseTypeMetadata
     /// Initializes an instance of <see cref="ProducesResponseTypeMetadata"/>.
     /// </summary>
     /// <param name="statusCode">The HTTP response status code.</param>
-    /// <param name="type">The <see cref="Type"/> of object that is going to be written in the response.</param>
+    /// <param name="type">The <see cref="Type"/> of object that is going to be written in the
+    // response.</param>
     /// <param name="contentTypes">Content types supported by the response.</param>
     public ProducesResponseTypeMetadata(
         int statusCode,

@@ -129,7 +129,8 @@ namespace Internal.Cryptography.Pal.Windows
         }
 
         //
-        // The methods in this class have some pretty terrifying contracts with each other regarding the lifetimes of the pointers they hand around so we'll encapsulate them in a nested class so that
+        // The methods in this class have some pretty terrifying contracts with each other regarding the
+        // lifetimes of the pointers they hand around so we'll encapsulate them in a nested class so that
         // only the top level method is accessible to everyone else.
         //
         private static class EncodeHelpers
@@ -144,12 +145,15 @@ namespace Internal.Cryptography.Pal.Windows
             {
                 using (HeapBlockRetainer hb = new HeapBlockRetainer())
                 {
-                    // Deep copy the CmsRecipients (and especially their underlying X509Certificate2 objects). This will prevent malicious callers from altering them or disposing them while we're performing
+                    // Deep copy the CmsRecipients (and especially their underlying X509Certificate2 objects). This will
+                    // prevent malicious callers from altering them or disposing them while we're performing
                     // unsafe memory crawling inside them.
                     recipients = recipients.DeepCopy();
 
-                    // We must keep all the certificates inside recipients alive until the call to CryptMsgOpenToEncode() finishes. The CMSG_ENVELOPED_ENCODE_INFO* structure we passed to it
-                    // contains direct pointers to memory owned by the CERT_INFO memory block whose lifetime is that of the certificate.
+                    // We must keep all the certificates inside recipients alive until the call to
+                    // CryptMsgOpenToEncode() finishes. The CMSG_ENVELOPED_ENCODE_INFO* structure we passed to it
+                    // contains direct pointers to memory owned by the CERT_INFO memory block whose lifetime is that of
+                    // the certificate.
                     hb.KeepAlive(recipients);
                     unsafe
                     {
@@ -182,7 +186,8 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static unsafe CMSG_ENVELOPED_ENCODE_INFO* CreateCmsEnvelopedEncodeInfo(
                 CmsRecipientCollection recipients,
@@ -203,8 +208,12 @@ namespace Internal.Cryptography.Pal.Windows
                     algorithmOidValue
                 );
 
-                // .NET Framework compat: Though it seems like we could copy over the contents of contentEncryptionAlgorithm.Parameters, that property is for retrieving information from decoded Cms's only, and it
-                // massages the raw data so it wouldn't be usable here anyway. To hammer home that fact, the EncryptedCms constructor rather rudely forces contentEncryptionAlgorithm.Parameters to be the empty array.
+                // .NET Framework compat: Though it seems like we could copy over the contents of
+                // contentEncryptionAlgorithm.Parameters, that property is for retrieving information from decoded
+                // Cms's only, and it
+                // massages the raw data so it wouldn't be usable here anyway. To hammer home that fact, the
+                // EncryptedCms constructor rather rudely forces contentEncryptionAlgorithm.Parameters to be the empty
+                // array.
                 pEnvelopedEncodeInfo->ContentEncryptionAlgorithm.Parameters.cbData = 0;
                 pEnvelopedEncodeInfo->ContentEncryptionAlgorithm.Parameters.pbData = IntPtr.Zero;
 
@@ -284,7 +293,8 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static CMSG_RECIPIENT_ENCODE_INFO EncodeRecipientInfo(
                 CmsRecipient recipient,
@@ -327,17 +337,20 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static unsafe CMSG_KEY_TRANS_RECIPIENT_ENCODE_INFO* EncodeKeyTransRecipientInfo(
                 CmsRecipient recipient,
                 HeapBlockRetainer hb
             )
             {
-                // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers
+                // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of
+                // this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers
                 // and embed pointers to them in the memory block we return. Yes, this code is scary.
                 //
-                // (The use of SafeCertContextHandle here is about using a consistent pattern to get the CERT_CONTEXT (rather than the ugly (CERT_CONTEXT*)(recipient.Certificate.Handle) pattern.)
+                // (The use of SafeCertContextHandle here is about using a consistent pattern to get the
+                // CERT_CONTEXT (rather than the ugly (CERT_CONTEXT*)(recipient.Certificate.Handle) pattern.)
                 // It's not about keeping the context alive.)
                 using (
                     SafeCertContextHandle hCertContext =
@@ -461,7 +474,8 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static unsafe CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO* EncodeKeyAgreeRecipientInfo(
                 CmsRecipient recipient,
@@ -469,8 +483,10 @@ namespace Internal.Cryptography.Pal.Windows
                 HeapBlockRetainer hb
             )
             {
-                // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers without
-                // bringing in all the SafeCertContextHandle machinery, and embed pointers to them in the memory block we return. Yes, this code is scary.
+                // "recipient" is a deep-cloned CmsRecipient object whose lifetime this class controls. Because of
+                // this, we can pull out the CERT_CONTEXT* and CERT_INFO* pointers without
+                // bringing in all the SafeCertContextHandle machinery, and embed pointers to them in the memory
+                // block we return. Yes, this code is scary.
                 using (
                     SafeCertContextHandle hCertContext =
                         recipient.Certificate.CreateCertContextHandle()
@@ -551,7 +567,8 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static unsafe CERT_ID EncodeRecipientId(
                 CmsRecipient recipient,
@@ -585,7 +602,8 @@ namespace Internal.Cryptography.Pal.Windows
                     }
 
                     default:
-                        // The public contract for CmsRecipient guarantees that SubjectKeyIdentifier and IssuerAndSerialNumber are the only two possibilities.
+                        // The public contract for CmsRecipient guarantees that SubjectKeyIdentifier and
+                        // IssuerAndSerialNumber are the only two possibilities.
                         Debug.Fail($"Unexpected SubjectIdentifierType: {type}");
                         throw new NotSupportedException(
                             SR.Format(SR.Cryptography_Cms_Invalid_Subject_Identifier_Type, type)
@@ -596,7 +614,8 @@ namespace Internal.Cryptography.Pal.Windows
             }
 
             //
-            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks it may point to) is that of "hb".
+            // This returns an allocated native memory block. Its lifetime (and that of any allocated subblocks
+            // it may point to) is that of "hb".
             //
             private static IntPtr GenerateEncryptionAuxInfoIfNeeded(
                 AlgorithmIdentifier contentEncryptionAlgorithm,
@@ -617,8 +636,10 @@ namespace Internal.Cryptography.Pal.Windows
                     pRc2AuxInfo->dwBitLen = contentEncryptionAlgorithm.KeyLength;
                     if (pRc2AuxInfo->dwBitLen == 0)
                     {
-                        // .NET Framework compat: If the caller didn't set the KeyLength property, set dwBitLength to the maxmium key length supported by RC2/RC4. The .NET Framework queries CAPI for this but
-                        // since that requires us to use a prohibited api (CryptAcquireContext), we'll just hardcode what CAPI returns for RC2 and RC4.
+                        // .NET Framework compat: If the caller didn't set the KeyLength property, set dwBitLength to the
+                        // maxmium key length supported by RC2/RC4. The .NET Framework queries CAPI for this but
+                        // since that requires us to use a prohibited api (CryptAcquireContext), we'll just hardcode what
+                        // CAPI returns for RC2 and RC4.
                         pRc2AuxInfo->dwBitLen = KeyLengths.DefaultKeyLengthForRc2AndRc4;
                     }
                     return (IntPtr)pRc2AuxInfo;

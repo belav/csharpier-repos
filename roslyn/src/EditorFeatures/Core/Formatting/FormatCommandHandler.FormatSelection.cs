@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
                 // make behavior same as dev12.
                 // make sure we set selection back and set caret position at the end of selection
-                // we can delete this code once razor side fixes a bug where it depends on this behavior (dev12) on formatting.
+                // we can delete this code once razor side fixes a bug where it depends on this behavior (dev12) on
+                // formatting.
                 var currentSelection = selection[0]
                     .TranslateTo(
                         args.SubjectBuffer.CurrentSnapshot,

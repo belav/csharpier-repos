@@ -90,9 +90,9 @@ namespace System.Web.UI.HtmlControls
             set { _defaultFocus = value; }
         }
 
-        /*
-         * Encode Type property.
-         */
+/*
+* Encode Type property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -116,9 +116,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["enctype"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Method property.
-         */
+/*
+* Method property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -142,9 +142,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["method"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Name property.
-         */
+/*
+* Name property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -167,7 +167,8 @@ namespace System.Web.UI.HtmlControls
         }
 
         /// <devdov>
-        /// If true, forces controls disabled on the client to submit their values (thus preserving their previous postback state)
+        /// If true, forces controls disabled on the client to submit their values (thus preserving their
+        // previous postback state)
         /// </devdoc>
         [WebCategory("Behavior"), DefaultValue(false)]
         public virtual bool SubmitDisabledControls
@@ -176,9 +177,9 @@ namespace System.Web.UI.HtmlControls
             set { _submitDisabledControls = value; }
         }
 
-        /*
-         * Target property.
-         */
+/*
+* Target property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -267,7 +268,8 @@ namespace System.Web.UI.HtmlControls
 
         private string GetActionAttribute()
         {
-            // If the Action property is nonempty, we use it instead of the current page.  This allows the developer
+            // If the Action property is nonempty, we use it instead of the current page.  This allows the
+            // developer
             // to support scenarios like PathInfo, UrlMapping, etc. (DevDiv Bugs 164390)
             string actionProperty = Action;
             if (!String.IsNullOrEmpty(actionProperty))
@@ -280,10 +282,12 @@ namespace System.Web.UI.HtmlControls
 
             // ASURT 15075/11054/59970: always set the action to the current page.
             // DevDiv Servicing 215795/Dev10 567580: The IIS URL Rewrite module and other rewrite
-            // scenarios need the postback action to be the original URL.  Note however, if Server.Transfer/Execute
+            // scenarios need the postback action to be the original URL.  Note however, if
+            // Server.Transfer/Execute
             // is used, the action will be set to the transferred/executed page, that is, the value of
             // CurrentExecutionFilePathObject.  This is because of ASURT 59970 and the document attached to
-            // that bug, which indirectly states that things should behave this way when Transfer/Execute is used.
+            // that bug, which indirectly states that things should behave this way when Transfer/Execute is
+            // used.
             if (Context.ServerExecuteDepth == 0)
             {
                 // There hasn't been any Server.Transfer or RewritePath.
@@ -325,13 +329,15 @@ namespace System.Web.UI.HtmlControls
                 action = "./";
             }
 
-            // Dev11 177096: The action may be empty if the RawUrl does not point to a file (for e.g. http://localhost:8080/) but is never null.
+            // Dev11 177096: The action may be empty if the RawUrl does not point to a file (for e.g.
+            // http://localhost:8080/) but is never null.
             // Empty action values work fine since the form does not emit the action attribute.
             Debug.Assert(action != null);
 
             string queryString = Page.ClientQueryString;
             // ASURT 15355: Don't lose the query string if there is one.
-            // In scriptless mobile HTML, we prepend __EVENTTARGET, et. al. to the query string.  These have to be
+            // In scriptless mobile HTML, we prepend __EVENTTARGET, et. al. to the query string.  These have to
+            // be
             // removed from the form action.  Use new HttpValueCollection to leverage ToString(bool encoded).
             if (!String.IsNullOrEmpty(queryString))
             {
@@ -430,7 +436,8 @@ namespace System.Web.UI.HtmlControls
                 {
                     if (Attributes["onsubmit"] != null)
                     {
-                        // If there was an onsubmit on the form, register it as an onsubmit statement and remove it from the attribute collection
+                        // If there was an onsubmit on the form, register it as an onsubmit statement and remove it from the
+                        // attribute collection
                         string formOnSubmit = Attributes["onsubmit"];
                         if (formOnSubmit.Length > 0)
                         {

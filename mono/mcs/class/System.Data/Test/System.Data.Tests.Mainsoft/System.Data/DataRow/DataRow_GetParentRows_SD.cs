@@ -192,20 +192,22 @@ namespace tests.system_data_dll.System_Data
                 exp = null;
             }
 
-            /* .Net don't work as expected
-                    try
-                    {
-                        //Check DataRowVersion.Proposed
-                        base.BeginCase("Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed");
-                        drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
-                        //drArrExcepted = dtParent.Select("ParentId=" + drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
-            
-                        drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
-                        base.Compare( drArrResult, drArrExcepted);
-                    }
-                    catch(Exception ex)	{exp = ex;}
-                    finally	{EndCase(exp); exp = null;}
-            */
+/* .Net don't work as expected
+try
+{
+//Check DataRowVersion.Proposed
+base.BeginCase("Teting: DataRow.GetParentRows_D_D ,DataRowVersion.Proposed");
+drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedCurrent);
+//drArrExcepted = dtParent.Select("ParentId=" +
+drParent["ParentId"],"",DataViewRowState.ModifiedOriginal );
+
+drArrResult = drChild.GetParentRows("Parent-Child",DataRowVersion.Proposed  );
+base.Compare( drArrResult, drArrExcepted);
+}
+catch(Exception ex)	{exp = ex;}
+finally	{EndCase(exp); exp = null;}
+*/
         }
 
         private void CheckRowVersion(DataRow dr)

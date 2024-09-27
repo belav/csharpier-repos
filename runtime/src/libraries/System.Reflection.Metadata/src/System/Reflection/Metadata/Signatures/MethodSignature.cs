@@ -8,12 +8,14 @@ namespace System.Reflection.Metadata
 {
     /// <summary>
     /// Represents a method (definition, reference, or standalone) or property signature.
-    /// In the case of properties, the signature matches that of a getter with a distinguishing <see cref="SignatureHeader"/>.
+    /// In the case of properties, the signature matches that of a getter with a distinguishing <see
+    // cref="SignatureHeader"/>.
     /// </summary>
     public readonly struct MethodSignature<TType>
     {
         /// <summary>
-        /// Represents the information in the leading byte of the signature (kind, calling convention, flags).
+        /// Represents the information in the leading byte of the signature (kind, calling convention,
+        // flags).
         /// </summary>
         public SignatureHeader Header { get; }
 
@@ -23,8 +25,10 @@ namespace System.Reflection.Metadata
         public TType ReturnType { get; }
 
         /// <summary>
-        /// Gets the number of parameters that are required. Will be equal to the length <see cref="ParameterTypes"/> of
-        /// unless this signature represents the standalone call site of a vararg method, in which case the entries
+        /// Gets the number of parameters that are required. Will be equal to the length <see
+        // cref="ParameterTypes"/> of
+        /// unless this signature represents the standalone call site of a vararg method, in which case the
+        // entries
         /// extra entries in <see cref="ParameterTypes"/> are the types used for the optional parameters.
         /// </summary>
         public int RequiredParameterCount { get; }

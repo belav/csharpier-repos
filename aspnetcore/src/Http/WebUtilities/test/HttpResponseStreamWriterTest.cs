@@ -739,7 +739,8 @@ public class HttpResponseStreamWriterTest
     )
     {
         // Arrange
-        // Here "𐐀" (called Deseret Long I) actually represents 2 characters. Try to make this character split across
+        // Here "𐐀" (called Deseret Long I) actually represents 2 characters. Try to make this character
+        // split across
         // the boundary
         var content = new string('a', characterSize - 1) + "𐐀";
         var stream = new TestMemoryStream();

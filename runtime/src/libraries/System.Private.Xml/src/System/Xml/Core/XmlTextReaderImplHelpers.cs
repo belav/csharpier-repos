@@ -216,8 +216,10 @@ namespace System.Xml
 
             Uri? IDtdParserAdapter.BaseUri
             {
-                // SxS: DtdParserProxy_BaseUri property on the reader may expose machine scope resources. This property
-                // is just returning the value of the other property, so it may expose machine scope resource as well.
+                // SxS: DtdParserProxy_BaseUri property on the reader may expose machine scope resources. This
+                // property
+                // is just returning the value of the other property, so it may expose machine scope resource as
+                // well.
                 get { return _reader.DtdParserProxy_BaseUri; }
             }
 
@@ -389,7 +391,8 @@ namespace System.Xml
             internal string? nameWPrefix;
 
             // value:
-            // value == null -> the value is kept in the 'chars' buffer starting at valueStartPos and valueLength long
+            // value == null -> the value is kept in the 'chars' buffer starting at valueStartPos and
+            // valueLength long
             private string? _value;
             private char[]? _chars;
             private int _valueStartPos;

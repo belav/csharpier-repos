@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Formats the whitespace in a document.
         /// </summary>
         /// <param name="document">The document to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the document's workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the document's workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted document.</returns>
         public static Task<Document> FormatAsync(
@@ -76,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="document">The document to format.</param>
         /// <param name="span">The span of the document's text to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the document's workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the document's workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted document.</returns>
         public static Task<Document> FormatAsync(
@@ -114,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="document">The document to format.</param>
         /// <param name="spans">The spans of the document's text to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the document's workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the document's workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted document.</returns>
         public static async Task<Document> FormatAsync(
@@ -168,8 +171,10 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Formats the whitespace in areas of a document corresponding to annotated nodes.
         /// </summary>
         /// <param name="document">The document to format.</param>
-        /// <param name="annotation">The annotation used to find on nodes to identify spans to format.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the document's workspace will be used.</param>
+        /// <param name="annotation">The annotation used to find on nodes to identify spans to
+        // format.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the document's workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted document.</returns>
         public static Task<Document> FormatAsync(
@@ -253,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="annotation">The annotation used to find nodes to identify spans to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -328,7 +334,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -367,7 +374,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="span">The span within the node's full span to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -408,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="spans">The spans within the node's full span to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The formatted tree's root node.</returns>
         public static SyntaxNode Format(
@@ -517,7 +526,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The changes necessary to format the tree.</returns>
         public static IList<TextChange> GetFormattedTextChanges(
@@ -556,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="span">The span within the node's full span to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The changes necessary to format the tree.</returns>
         public static IList<TextChange> GetFormattedTextChanges(
@@ -597,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// <param name="node">The root node of a syntax tree to format.</param>
         /// <param name="spans">The spans within the node's full span to format.</param>
         /// <param name="workspace">A workspace used to give the formatting context.</param>
-        /// <param name="options">An optional set of formatting options. If these options are not supplied the current set of options from the workspace will be used.</param>
+        /// <param name="options">An optional set of formatting options. If these options are not supplied
+        // the current set of options from the workspace will be used.</param>
         /// <param name="cancellationToken">An optional cancellation token.</param>
         /// <returns>The changes necessary to format the tree.</returns>
         public static IList<TextChange> GetFormattedTextChanges(
@@ -720,7 +732,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// </summary>
         /// <param name="document">The document to organize.</param>
         /// <param name="cancellationToken">The cancellation token that the operation will observe.</param>
-        /// <returns>The document with organized imports. If the language does not support organizing imports, or if no changes were made, this method returns <paramref name="document"/>.</returns>
+        /// <returns>The document with organized imports. If the language does not support organizing
+        // imports, or if no changes were made, this method returns <paramref name="document"/>.</returns>
         public static async Task<Document> OrganizeImportsAsync(
             Document document,
             CancellationToken cancellationToken = default

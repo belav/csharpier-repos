@@ -170,7 +170,8 @@ namespace System.Net
         // The SSL certificate contains errors.
         public const int WININET_E_SEC_CERT_ERRORS = unchecked((int)0x80072F17);
 
-        // It was not possible to connect to the revocation server or a definitive response could not be obtained.
+        // It was not possible to connect to the revocation server or a definitive response could not be
+        // obtained.
         public const int WININET_E_SEC_CERT_REV_FAILED = unchecked((int)0x80072F19);
 
         // The requested header was not found
@@ -224,7 +225,8 @@ namespace System.Net
         // The supplied certificate has been revoked
         public const int WININET_E_SEC_CERT_REVOKED = unchecked((int)0x80072F8A);
 
-        // The Dialup failed because file sharing was turned on and a failure was requested if security check was needed
+        // The Dialup failed because file sharing was turned on and a failure was requested if security
+        // check was needed
         public const int WININET_E_FAILED_DUETOSECURITYCHECK = unchecked((int)0x80072F8B);
 
         // Initialization of the WinINet API has not occurred

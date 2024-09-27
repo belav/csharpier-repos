@@ -72,7 +72,8 @@ public class TestClass
 
         int a = Dummy1();
 
-        // Call an instance method. This gets the value number for 'this' into the 'curSsaNames' in copyprop.
+        // Call an instance method. This gets the value number for 'this' into the 'curSsaNames' in
+        // copyprop.
         // Also, pass it a bunch of parameters to increase the register pressure here.
         Dummy2(a, 2, 3, 4);
 

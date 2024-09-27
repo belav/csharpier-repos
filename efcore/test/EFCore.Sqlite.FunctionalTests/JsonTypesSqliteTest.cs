@@ -129,7 +129,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_DateTime_JSON_values(string value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_DateTime_JSON_values_sqlite instead.
     }
 
@@ -146,7 +147,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_DateTimeOffset_JSON_values(string value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_DateTimeOffset_JSON_values_sqlite instead.
     }
 
@@ -173,7 +175,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_decimal_JSON_values(decimal value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_decimal_JSON_values_sqlite instead.
     }
 
@@ -194,7 +197,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_GUID_JSON_values(Guid value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_GUID_JSON_values_sqlite instead.
     }
 
@@ -216,7 +220,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_nullable_binary_JSON_values(string? value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_nullable_binary_JSON_values_sqlite instead.
     }
 
@@ -240,7 +245,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_nullable_DateTime_JSON_values(string? value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_nullable_DateTime_JSON_values_sqlite instead.
     }
 
@@ -266,7 +272,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
         string json
     )
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_nullable_DateTimeOffset_JSON_values_sqlite instead.
     }
 
@@ -296,7 +303,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_nullable_decimal_JSON_values(string? value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_nullable_decimal_JSON_values_sqlite instead.
     }
 
@@ -321,7 +329,8 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
 
     public override void Can_read_write_nullable_GUID_JSON_values(string? value, string json)
     {
-        // Cannot override since the base test contains [InlineData] attributes which still apply, and which contain data we need
+        // Cannot override since the base test contains [InlineData] attributes which still apply, and which
+        // contain data we need
         // to override. See Can_read_write_nullable_GUID_JSON_values_sqlite instead.
     }
 

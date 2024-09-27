@@ -13,7 +13,8 @@ namespace System.Web.UI.WebControls
     using System.Web.UI;
 
     /// <devdoc>
-    /// <para>Specifies the <see cref='System.Web.UI.WebControls.DataGrid'/> pager style for the control. This class cannot be inherited.</para>
+    /// <para>Specifies the <see cref='System.Web.UI.WebControls.DataGrid'/> pager style for the
+    // control. This class cannot be inherited.</para>
     /// </devdoc>
     public sealed class DataGridPagerStyle : TableItemStyle
     {
@@ -266,7 +267,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the data grid pager style from the specified <see cref='System.Web.UI.WebControls.Style'/>.</para>
+        /// <para>Copies the data grid pager style from the specified <see
+        // cref='System.Web.UI.WebControls.Style'/>.</para>
         /// </devdoc>
         public override void CopyFrom(Style s)
         {
@@ -295,7 +297,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Merges the data grid pager style from the specified <see cref='System.Web.UI.WebControls.Style'/>.</para>
+        /// <para>Merges the data grid pager style from the specified <see
+        // cref='System.Web.UI.WebControls.Style'/>.</para>
         /// </devdoc>
         public override void MergeWith(Style s)
         {

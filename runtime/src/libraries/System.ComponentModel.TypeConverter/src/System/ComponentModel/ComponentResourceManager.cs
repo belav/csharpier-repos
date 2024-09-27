@@ -26,7 +26,8 @@ namespace System.ComponentModel
             : base(t) { }
 
         /// <summary>
-        /// The culture of the main assembly's neutral resources. If someone is asking for this culture's resources,
+        /// The culture of the main assembly's neutral resources. If someone is asking for this culture's
+        // resources,
         /// we don't need to walk up the parent chain.
         /// </summary>
         private CultureInfo? NeutralResourcesCulture
@@ -56,7 +57,8 @@ namespace System.ComponentModel
         /// <summary>
         /// This method examines all the resources for the provided culture.
         /// When it finds a resource with a key in the format of
-        /// &quot;[objectName].[property name]&quot; or &quot;[objectName]-[property name]&quot; it will apply that resource's value
+        /// &quot;[objectName].[property name]&quot; or &quot;[objectName]-[property name]&quot; it will
+        // apply that resource's value
         /// to the corresponding property on the object. If there is no matching
         /// property the resource will be ignored.
         /// </summary>

@@ -105,10 +105,14 @@ namespace System.Web.UI.WebControls
         {
             get
             {
-                // We don't necessarily know if the data source can get the total row count until after the SelectMethod has
-                // been executed (e.g. it might return a DataSet). If the SelectCountMethod is set, we can definitely
-                // get the count. However, if it is not, we can only get the row count from the Selected data if it was not
-                // paged by the user's object, and it happened to be a DataView, DataSet, DataTable, ICollection, or object.
+                // We don't necessarily know if the data source can get the total row count until after the
+                // SelectMethod has
+                // been executed (e.g. it might return a DataSet). If the SelectCountMethod is set, we can
+                // definitely
+                // get the count. However, if it is not, we can only get the row count from the Selected data if it
+                // was not
+                // paged by the user's object, and it happened to be a DataView, DataSet, DataTable, ICollection, or
+                // object.
                 return ((SelectCountMethod.Length > 0) || (!EnablePaging));
             }
         }
@@ -207,7 +211,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        // Collection of parameters used when calling the DeleteMethod. These parameters are merged with the parameters provided by data-bound controls.
+        // Collection of parameters used when calling the DeleteMethod. These parameters are merged with the
+        // parameters provided by data-bound controls.
 
         /// </devdoc>
         public ParameterCollection DeleteParameters
@@ -242,7 +247,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Filter expression used when Select() is called. Filtering is only available when the SelectMethod returns a DataSet or a DataTable.
+        /// Filter expression used when Select() is called. Filtering is only available when the
+        // SelectMethod returns a DataSet or a DataTable.
         /// </devdoc>
         public string FilterExpression
         {
@@ -265,7 +271,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Collection of parameters used in the FilterExpression property. Filtering is only available when the SelectMethod returns a DataSet or a DataTable.
+        /// Collection of parameters used in the FilterExpression property. Filtering is only available when
+        // the SelectMethod returns a DataSet or a DataTable.
         /// </devdoc>
         public ParameterCollection FilterParameters
         {
@@ -305,7 +312,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Collection of values used when calling the InsertMethod. These parameters are merged with the parameters provided by data-bound controls.
+        /// Collection of values used when calling the InsertMethod. These parameters are merged with the
+        // parameters provided by data-bound controls.
         /// </devdoc>
         public ParameterCollection InsertParameters
         {
@@ -536,7 +544,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Collection of parameters and values used when calling the UpdateMethod. These parameters are merged with the parameters provided by data-bound controls.
+        /// Collection of parameters and values used when calling the UpdateMethod. These parameters are
+        // merged with the parameters provided by data-bound controls.
         /// </devdoc>
         public ParameterCollection UpdateParameters
         {
@@ -915,7 +924,8 @@ namespace System.Web.UI.WebControls
             }
             else
             {
-                // The result is neither a DataView, DataSet, DataTable, nor an IEnumerable, so we just wrap it in an IEnumerable
+                // The result is neither a DataView, DataSet, DataTable, nor an IEnumerable, so we just wrap it in
+                // an IEnumerable
                 if (arguments.RetrieveTotalRowCount && SelectCountMethod.Length == 0)
                 {
                     arguments.TotalRowCount = 1;
@@ -1313,7 +1323,8 @@ namespace System.Web.UI.WebControls
                 return null;
             }
 
-            // Create a copy of mergedParameters for queryRowCount that doesn't get all the Select, Sort, paging parameters
+            // Create a copy of mergedParameters for queryRowCount that doesn't get all the Select, Sort, paging
+            // parameters
             OrderedDictionary queryRowCountParameters = new OrderedDictionary(
                 mergedParameters.Count
             );
@@ -1740,7 +1751,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Extracts the values of all output (out and ref) parameters given a list of parameters and their respective values.
+        /// Extracts the values of all output (out and ref) parameters given a list of parameters and their
+        // respective values.
         /// </devdoc>
         private IDictionary GetOutputParameters(ParameterInfo[] parameters, object[] values)
         {
@@ -1981,7 +1993,8 @@ namespace System.Web.UI.WebControls
             // -1 - indicates no confidence - no appropriate methods have been found at all
             // 0 - indicates low confidence - only parameter names match
             // 1 - indicates medium confidence - parameter names match, method is DataObjectMethod
-            // 2 - indicates high confidence - parameter names match, method is DataObjectMethod, is default method
+            // 2 - indicates high confidence - parameter names match, method is DataObjectMethod, is default
+            // method
             int highestConfidence = -1;
             bool confidenceConflict = false; // Indicates that there is more than one method at the current highest confidence level
 
@@ -2230,7 +2243,8 @@ namespace System.Web.UI.WebControls
                 }
             }
 
-            // Call the method and if an exception is thrown, hold on to it to let the page developer attempt to handle it
+            // Call the method and if an exception is thrown, hold on to it to let the page developer attempt to
+            // handle it
             object returnValue = null;
             int affectedRows = -1;
 

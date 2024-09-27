@@ -14,7 +14,8 @@ namespace System.Data.Common
     using System.Diagnostics;
 
     /// <summary>
-    /// EntityRecordInfo class providing a simple way to access both the type information and the column information.
+    /// EntityRecordInfo class providing a simple way to access both the type information and the column
+    // information.
     /// </summary>
     public class EntityRecordInfo : DataRecordInfo
     {

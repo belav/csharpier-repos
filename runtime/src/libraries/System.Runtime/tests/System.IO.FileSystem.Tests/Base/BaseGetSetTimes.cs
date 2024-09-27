@@ -33,7 +33,8 @@ namespace System.IO.Tests
 
         protected abstract T CreateSymlink(string path, string pathToTarget);
 
-        // When the item is a link, indicates whether the .NET API will get/set the link itself, or its target.
+        // When the item is a link, indicates whether the .NET API will get/set the link itself, or its
+        // target.
         protected virtual bool ApiTargetsLink => true;
 
         protected T CreateSymlinkToItem(T item)
@@ -45,7 +46,8 @@ namespace System.IO.Tests
 
         protected abstract string GetItemPath(T item);
 
-        // requiresRoundtripping defines whether to convert DateTimeFormat 'a' to 'b' and then back to 'a' to verify the DateTimeFormat-conversion
+        // requiresRoundtripping defines whether to convert DateTimeFormat 'a' to 'b' and then back to 'a'
+        // to verify the DateTimeFormat-conversion
         public abstract IEnumerable<TimeFunction> TimeFunctions(bool requiresRoundtripping = false);
 
         public class TimeFunction : Tuple<SetTime, GetTime, DateTimeKind>

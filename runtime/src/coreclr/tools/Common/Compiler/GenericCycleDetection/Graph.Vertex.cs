@@ -10,7 +10,8 @@ namespace ILCompiler
         private sealed partial class Graph<P>
         {
             /// <summary>
-            /// Gets or creates the canonical Vertex object for this payload value. Payload equality is defined by its Object.Equals() override. Vertex equality
+            /// Gets or creates the canonical Vertex object for this payload value. Payload equality is defined
+            // by its Object.Equals() override. Vertex equality
             /// is determined by reference equality.
             /// </summary>
             private Vertex GetVertex(P payload)
@@ -61,7 +62,8 @@ namespace ILCompiler
                 }
 
                 /// <summary>
-                /// If true, we have established that this vertex is part of a cycle in which at least one edge is flagged (abbreviated as "flagged cycle"
+                /// If true, we have established that this vertex is part of a cycle in which at least one edge is
+                // flagged (abbreviated as "flagged cycle"
                 ///   in the interests of brevity.)
                 /// If false, we have not yet established (but may yet establish) this fact.
                 /// </summary>

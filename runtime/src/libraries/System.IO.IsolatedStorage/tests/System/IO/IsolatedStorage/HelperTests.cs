@@ -18,8 +18,10 @@ namespace System.IO.IsolatedStorage.Tests
             Assert.NotNull(identity);
             Assert.NotNull(hash);
 
-            // We lie about the identity type when creating the folder structure as we're emulating the Evidence types
-            // we don't have available in .NET Standard. We don't serialize the actual identity object, so the desktop
+            // We lie about the identity type when creating the folder structure as we're emulating the Evidence
+            // types
+            // we don't have available in .NET Standard. We don't serialize the actual identity object, so the
+            // desktop
             // implementation will work with locations built off the hash.
             if (identity.GetType() == typeof(Uri))
             {

@@ -1270,7 +1270,8 @@ namespace System.Net
                 }
             }
 
-            // If no content encoding listed in the ContentType HTTP header, or no Content-Type header present, then
+            // If no content encoding listed in the ContentType HTTP header, or no Content-Type header present,
+            // then
             // check for a byte-order-mark (BOM) in the data to figure out encoding.
             if (enc == null)
             {

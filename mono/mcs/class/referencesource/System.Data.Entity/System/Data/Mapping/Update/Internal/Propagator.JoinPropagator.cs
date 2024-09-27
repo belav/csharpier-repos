@@ -17,8 +17,10 @@ using System.Linq;
 
 namespace System.Data.Mapping.Update.Internal
 {
-    // We use CompositeKey on both sides of the dictionary because it is used both to identify rows that should be
-    // joined (the Key part) and to carry context about the rows being joined (e.g. which components of the row
+    // We use CompositeKey on both sides of the dictionary because it is used both to identify rows that
+    // should be
+    // joined (the Key part) and to carry context about the rows being joined (e.g. which components of
+    // the row
     // correspond to the join key).
     using JoinDictionary = Dictionary<CompositeKey, Tuple<CompositeKey, PropagatorResult>>;
 
@@ -26,13 +28,15 @@ namespace System.Data.Mapping.Update.Internal
     {
         /// <summary>
         /// Performs join propagation. The basic strategy is to identify changes (inserts, deletes)
-        /// on either side of the join that are related according to the join criteria. Support is restricted
+        /// on either side of the join that are related according to the join criteria. Support is
+        // restricted
         /// to conjunctions of equality predicates of the form <c>left property == right property</c>.
         /// When a group of related changes is identified, rules are applied based on the existence of
         /// different components (e.g., a left insert + right insert).
         /// </summary>
         /// <remarks>
-        /// The joins handled by this class are degenerate in the sense that a row in the 'left' input always
+        /// The joins handled by this class are degenerate in the sense that a row in the 'left' input
+        // always
         /// joins with at most one row in the 'right' input. The restrictions that allow for this assumption
         /// are described in the update design spec (see 'Level 5 Optimization').
         /// </remarks>
@@ -85,7 +89,8 @@ namespace System.Data.Mapping.Update.Internal
                     m_deleteRules = s_leftOuterJoinDeleteRules;
                 }
 
-                // Figure out key selectors involved in the equi-join (if it isn't an equi-join, we don't support it)
+                // Figure out key selectors involved in the equi-join (if it isn't an equi-join, we don't support
+                // it)
                 JoinConditionVisitor.GetKeySelectors(
                     node.JoinCondition,
                     out m_leftKeySelectors,
@@ -104,11 +109,11 @@ namespace System.Data.Mapping.Update.Internal
 
             #region Fields
             #region Propagation rules
-            /**
-             * These static dictionaries are initialized by the static constructor for this class.
-             * They describe for each combination of input elements (the key) propagation rules, which
-             * are expressions over the input expressions.
-             * */
+/**
+* These static dictionaries are initialized by the static constructor for this class.
+* They describe for each combination of input elements (the key) propagation rules, which
+* are expressions over the input expressions.
+* */
             private static readonly Dictionary<Ops, Ops> s_innerJoinInsertRules;
             private static readonly Dictionary<Ops, Ops> s_innerJoinDeleteRules;
             private static readonly Dictionary<Ops, Ops> s_leftOuterJoinInsertRules;
@@ -275,10 +280,14 @@ namespace System.Data.Mapping.Update.Internal
             /// Initializes propagation rules for a specific input combination.
             /// </summary>
             /// <param name="input">Describes the elements available in the input</param>
-            /// <param name="joinInsert">Describes the rule for inserts when the operator is an inner join</param>
-            /// <param name="joinDelete">Describes the rule for deletes when the operator is an inner join</param>
-            /// <param name="lojInsert">Describes the rule for inserts when the operator is a left outer join</param>
-            /// <param name="lojDelete">Describes the rule for deletes when the operator is a left outer join</param>
+            /// <param name="joinInsert">Describes the rule for inserts when the operator is an inner
+            // join</param>
+            /// <param name="joinDelete">Describes the rule for deletes when the operator is an inner
+            // join</param>
+            /// <param name="lojInsert">Describes the rule for inserts when the operator is a left outer
+            // join</param>
+            /// <param name="lojDelete">Describes the rule for deletes when the operator is a left outer
+            // join</param>
             private static void InitializeRule(
                 Ops input,
                 Ops joinInsert,

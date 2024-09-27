@@ -377,7 +377,8 @@ public class WebcilConverter
 
     // Make a new set of debug directory entries that
     // have their data pointers adjusted to be relative to the start of the webcil file.
-    // This is necessary because the debug directory entires in the PE file are relative to the start of the PE file,
+    // This is necessary because the debug directory entires in the PE file are relative to the start of
+    // the PE file,
     // and a PE header is bigger than a webcil header.
     private ImmutableArray<DebugDirectoryEntry> FixupDebugDirectoryEntries(
         PEFileInfo peInfo,
@@ -402,7 +403,8 @@ public class WebcilConverter
             }
             else
             {
-                // the "DataPointer" field is a file offset in the PE file, adjust the entry wit the corresponding offset in the Webcil file
+                // the "DataPointer" field is a file offset in the PE file, adjust the entry wit the corresponding
+                // offset in the Webcil file
                 var newDataPointer = entry.DataPointer - dataPointerAdjustment;
                 newEntry = new DebugDirectoryEntry(
                     entry.Stamp,

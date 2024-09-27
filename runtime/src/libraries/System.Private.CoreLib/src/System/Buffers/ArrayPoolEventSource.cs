@@ -29,7 +29,8 @@ namespace System.Buffers
             /// <summary>The requested buffer size was too large to be pooled.</summary>
             OverMaximumSize,
 
-            /// <summary>The pool has already allocated for pooling as many buffers of a particular size as it's allowed.</summary>
+            /// <summary>The pool has already allocated for pooling as many buffers of a particular size as it's
+            // allowed.</summary>
             PoolExhausted,
         }
 
@@ -43,7 +44,8 @@ namespace System.Buffers
             OverMaximumSize,
         }
 
-        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating the default constructor
+        // Parameterized constructor to block initialization and ensure the EventSourceGenerator is creating
+        // the default constructor
         // as you can't make a constructor partial.
         private ArrayPoolEventSource(int _) { }
 
@@ -129,7 +131,8 @@ namespace System.Buffers
         /// <summary>
         /// Event raised when we attempt to free a buffer due to inactivity or memory pressure (by no longer
         /// referencing it). It is possible (although not commmon) this buffer could be rented as we attempt
-        /// to free it. A rent event before or after this event for the same ID, is a rare, but expected case.
+        /// to free it. A rent event before or after this event for the same ID, is a rare, but expected
+        // case.
         /// </summary>
         [Event(4, Level = EventLevel.Informational)]
         internal void BufferTrimmed(int bufferId, int bufferSize, int poolId) =>

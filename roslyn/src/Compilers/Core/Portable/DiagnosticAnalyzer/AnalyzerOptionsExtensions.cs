@@ -79,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 tree
             );
 
-            // If user has explicitly configured default severity for the diagnostic category, that should be respected.
+            // If user has explicitly configured default severity for the diagnostic category, that should be
+            // respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
             var categoryBasedKey = GetCategoryBasedDotnetAnalyzerDiagnosticSeverityKey(
                 descriptor.Category
@@ -99,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
+            // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that
+            // should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
             if (
                 analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)

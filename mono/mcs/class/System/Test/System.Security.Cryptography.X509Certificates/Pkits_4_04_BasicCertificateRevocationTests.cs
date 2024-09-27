@@ -34,18 +34,18 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography.X509Certificates
 {
-    /*
-     * Notes
-     *
-     * [MS/XP][!RFC3280] Unknown critical extensions results in
-     * RevocationStatusUnknown instead of Revoked - even if the CRL
-     * list the certificate serial number as revoked!
-     *
-     * [MS/XP][!RFC3280] Doesn't support having different keys for
-     * signing certificates and CRL.
-     *
-     * See PkitsTest.cs for more details
-     */
+/*
+* Notes
+*
+* [MS/XP][!RFC3280] Unknown critical extensions results in
+* RevocationStatusUnknown instead of Revoked - even if the CRL
+* list the certificate serial number as revoked!
+*
+* [MS/XP][!RFC3280] Doesn't support having different keys for
+* signing certificates and CRL.
+*
+* See PkitsTest.cs for more details
+*/
 
     [TestFixture]
     [Category("PKITS")]

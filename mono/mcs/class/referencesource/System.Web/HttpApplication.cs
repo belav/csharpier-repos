@@ -180,7 +180,8 @@ namespace System.Web
         // the custom global.asax derivation constructor to register event handlers
         private string _currentModuleCollectionKey = HttpApplicationFactory.applicationFileName;
 
-        // module config is read once per app domain and used to initialize the per-instance _moduleContainers array
+        // module config is read once per app domain and used to initialize the per-instance
+        // _moduleContainers array
         private static List<ModuleConfigurationInfo> _moduleConfigInfo;
 
         // this is the per instance list that contains the events for each module
@@ -189,7 +190,8 @@ namespace System.Web
         // Byte array to be used by HttpRequest.GetEntireRawContent. Windows OS Bug 1632921
         private byte[] _entityBuffer;
 
-        // Counts the number of code paths consuming this HttpApplication instance. When the counter hits zero,
+        // Counts the number of code paths consuming this HttpApplication instance. When the counter hits
+        // zero,
         // it is safe to release this HttpApplication instance back into the HttpApplication pool.
         // This counter can be null if we're not using the new Task-friendly code paths.
         internal CountdownTask ApplicationInstanceConsumersCounter;
@@ -244,7 +246,8 @@ namespace System.Web
                 && _initInternalCompleted
             )
             {
-                // throw if we're using the integrated pipeline and both InitSpecial and InitInternal have completed.
+                // throw if we're using the integrated pipeline and both InitSpecial and InitInternal have
+                // completed.
                 throw new InvalidOperationException(SR.GetString(SR.Event_Binding_Disallowed));
             }
         }
@@ -346,9 +349,11 @@ namespace System.Web
 
         // Provides fixed size reusable buffers per request
         // Benefit:
-        //   1) Eliminates global locks - access to HttpApplication instance is lock free and no concurrent access is expected (by design).
+        //   1) Eliminates global locks - access to HttpApplication instance is lock free and no concurrent
+        // access is expected (by design).
         //      36+ cores show really bad spin lock characteristics for short locks.
-        //   2) Better lifetime dynamics - Buffers increase/decrease as HttpApplication instances grow/shrink on demand.
+        //   2) Better lifetime dynamics - Buffers increase/decrease as HttpApplication instances
+        // grow/shrink on demand.
         internal IAllocatorProvider AllocatorProvider
         {
             get
@@ -616,9 +621,12 @@ namespace System.Web
             Monitor.Exit(_stepManager);
         }
 
-        // Some frameworks built on top of the integrated pipeline call Flush() on background thread which will trigger nested
-        // RQ_SEND_RESPONSE notification and replace the old context.NotificationContext with the new context.NotificationContext.
-        // In order to maintain proper synchronization logic at the time when the completion callback is called we need to make sure
+        // Some frameworks built on top of the integrated pipeline call Flush() on background thread which
+        // will trigger nested
+        // RQ_SEND_RESPONSE notification and replace the old context.NotificationContext with the new
+        // context.NotificationContext.
+        // In order to maintain proper synchronization logic at the time when the completion callback is
+        // called we need to make sure
         // we access the original context.NotificationContext (and don't touch the nested one).
         // It will make sure that we read the correct NotificationContext
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1414,10 +1422,14 @@ namespace System.Web
             remove { Events.RemoveHandler(EventErrorRecorded, value); }
         }
 
-        // Dev10 902404: a new HttpApplication.RequestCompleted event raised when the managed objects associated with
-        // the request are being released.  It allows modules to cleanup resources after all managed modules and handlers
-        // have executed.  This may occur before the native processing of the request has completed; for example, before
-        // the final response bytes have been sent to the client.  The HttpContext is not available during this event
+        // Dev10 902404: a new HttpApplication.RequestCompleted event raised when the managed objects
+        // associated with
+        // the request are being released.  It allows modules to cleanup resources after all managed modules
+        // and handlers
+        // have executed.  This may occur before the native processing of the request has completed; for
+        // example, before
+        // the final response bytes have been sent to the client.  The HttpContext is not available during
+        // this event
         // because it has already been released.
         public event EventHandler RequestCompleted
         {
@@ -2043,7 +2055,8 @@ namespace System.Web
                 string vpath = path.VirtualPathString;
 
                 // If we're using app config, modify vpath by appending the path after the last slash
-                // to the app's virtual path.  This will force IIS IHttpContext::MapHandler to use app configuration.
+                // to the app's virtual path.  This will force IIS IHttpContext::MapHandler to use app
+                // configuration.
                 if (useAppConfig)
                 {
                     int index = vpath.LastIndexOf('/');
@@ -2621,10 +2634,12 @@ namespace System.Web
                     _initContext.ApplicationInstance = this;
                 }
 
-                // if we're doing integrated pipeline wireup, then appContext is non-null and we need to init modules and register event subscriptions with IIS
+                // if we're doing integrated pipeline wireup, then appContext is non-null and we need to init
+                // modules and register event subscriptions with IIS
                 if (appContext != IntPtr.Zero)
                 {
-                    // 1694356: app_offline.htm and <httpRuntime enabled=/> require that we make this check here for integrated mode
+                    // 1694356: app_offline.htm and <httpRuntime enabled=/> require that we make this check here for
+                    // integrated mode
                     using (new ApplicationImpersonationContext())
                     {
                         HttpRuntime.CheckApplicationEnabled();
@@ -2651,7 +2666,8 @@ namespace System.Web
                     }
                 }
 
-                // if we're doing integrated pipeline wireup, then appContext is non-null and we need to register the application (global.asax) event handlers
+                // if we're doing integrated pipeline wireup, then appContext is non-null and we need to register
+                // the application (global.asax) event handlers
                 if (appContext != IntPtr.Zero)
                 {
                     if (_appPostNotifications != 0 || _appRequestNotifications != 0)
@@ -3168,8 +3184,8 @@ namespace System.Web
         }
 
         /*
-         * Execute single step catching exceptions in a fancy way (see below)
-         */
+        * Execute single step catching exceptions in a fancy way (see below)
+        */
         internal Exception ExecuteStep(IExecutionStep step, ref bool completedSynchronously)
         {
             Exception error = null;
@@ -3277,8 +3293,8 @@ namespace System.Web
         }
 
         /*
-         * Resume execution of the app steps
-         */
+        * Resume execution of the app steps
+        */
 
         private void ResumeStepsFromThreadPoolThread(Exception error)
         {
@@ -3305,8 +3321,8 @@ namespace System.Web
         }
 
         /*
-         * Add error to the context fire OnError on first error
-         */
+        * Add error to the context fire OnError on first error
+        */
         private void RecordError(Exception error)
         {
             bool firstError = true;
@@ -3447,7 +3463,8 @@ namespace System.Web
                 HookupEventHandlersForApplicationAndModules(handlers);
             }
 
-            // 1643363: Breaking Change: ASP.Net v2.0: Application_OnStart is called after Module.Init (Integarted mode)
+            // 1643363: Breaking Change: ASP.Net v2.0: Application_OnStart is called after Module.Init
+            // (Integarted mode)
             HttpApplicationFactory.EnsureAppStartCalledForIntegratedMode(context, this);
 
             // Call Init on HttpApplication derived class ("global.asax")
@@ -3803,8 +3820,8 @@ namespace System.Web
         }
 
         /*
-         * Recycle all handlers mapped during the request processing
-         */
+        * Recycle all handlers mapped during the request processing
+        */
         private void RecycleHandlers()
         {
             if (_handlerRecycleList != null)
@@ -3819,9 +3836,9 @@ namespace System.Web
         }
 
         /*
-         * Special exception to cancel module execution (not really an exception)
-         * used in Response.End and when cancelling requests
-         */
+        * Special exception to cancel module execution (not really an exception)
+        * used in Response.End and when cancelling requests
+        */
         internal class CancelModuleException
         {
             private bool _timeout;
@@ -4360,7 +4377,8 @@ namespace System.Web
             {
                 _application = app;
                 // Instrument the beginHandler method if AppVerifier is enabled.
-                // If AppVerifier not enabled, we just get back the original delegate to beginHandler uninstrumented.
+                // If AppVerifier not enabled, we just get back the original delegate to beginHandler
+                // uninstrumented.
                 _beginHandler = AppVerifier.WrapBeginMethod(_application, beginHandler);
                 _endHandler = endHandler;
                 _state = state;
@@ -4636,7 +4654,8 @@ namespace System.Web
                     );
                     if (!handlerExists)
                     {
-                        // WOS 1973590: When RewritePath is used with missing handler in Integrated Mode,an empty response 200 is returned instead of 404
+                        // WOS 1973590: When RewritePath is used with missing handler in Integrated Mode,an empty response
+                        // 200 is returned instead of 404
                         throw new HttpException(
                             404,
                             SR.GetString(
@@ -4951,7 +4970,8 @@ namespace System.Web
                     _handler = asyncHandler;
 
                     // Instrument the BeginProcessRequest method if AppVerifier is enabled.
-                    // If AppVerifier not enabled, we just get back the original delegate to BeginProcessRequest uninstrumented.
+                    // If AppVerifier not enabled, we just get back the original delegate to BeginProcessRequest
+                    // uninstrumented.
                     var beginProcessRequestDelegate = AppVerifier.WrapBeginMethod<HttpContext>(
                         _application,
                         asyncHandler.BeginProcessRequest
@@ -5022,9 +5042,12 @@ namespace System.Web
                     // disable async operations
                     //_application.SyncContext.Disable();
 
-                    // VSWhidbey 268772 - If a synchronous handler internally kicks off an asynchronous operation and waits (blocking) for that
-                    // operation to complete, the handler will deadlock since the asynchronous operation can't come back to the appropriate
-                    // thread to perform the completion. The solution below was only meant to be temporary but was accidentally left in the product
+                    // VSWhidbey 268772 - If a synchronous handler internally kicks off an asynchronous operation and
+                    // waits (blocking) for that
+                    // operation to complete, the handler will deadlock since the asynchronous operation can't come back
+                    // to the appropriate
+                    // thread to perform the completion. The solution below was only meant to be temporary but was
+                    // accidentally left in the product
                     // for v2.0 RTM, so it's now legacy behavior and cannot be changed.
                     context.SyncContext.SetSyncCaller();
 
@@ -5094,7 +5117,8 @@ namespace System.Web
                         context.Response.GetCookiesNoCreate()
                     );
 
-                    // If this is a WebSocket request, mark as transitioned so that asynchronous events (like SendRequest)
+                    // If this is a WebSocket request, mark as transitioned so that asynchronous events (like
+                    // SendRequest)
                     // don't execute. We also need to mark ourselves as not having completed synchronously so that the
                     // pipeline unwinds back to ProcessRequestNotification. That method special-cases WebSocket handlers
                     // and cleans up the HttpContext / HttpApplication eagerly.
@@ -5132,7 +5156,8 @@ namespace System.Web
                 }
                 finally
                 {
-                    // if this is the UpdateCache notification, then disable the LogRequest notification (which handles the error case)
+                    // if this is the UpdateCache notification, then disable the LogRequest notification (which handles
+                    // the error case)
                     if (
                         HttpRuntime.UseIntegratedPipeline
                         && (
@@ -5160,7 +5185,8 @@ namespace System.Web
             }
         }
 
-        // integrated pipeline execution step for RaiseOnPreSendRequestHeaders and RaiseOnPreSendRequestContent
+        // integrated pipeline execution step for RaiseOnPreSendRequestHeaders and
+        // RaiseOnPreSendRequestContent
         internal class SendResponseExecutionStep : IExecutionStep
         {
             private HttpApplication _application;
@@ -5352,7 +5378,8 @@ namespace System.Web
                 _requestCompleted = false;
             }
 
-            // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey 609188)
+            // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey
+            // 609188)
             [System.Diagnostics.DebuggerStepperBoundaryAttribute]
             internal override void ResumeSteps(Exception error)
             {
@@ -5462,7 +5489,8 @@ namespace System.Web
                             {
                                 if (appCompleted)
                                 {
-                                    // need to raise OnRequestCompleted while within the ThreadContext so that things like User, CurrentCulture, etc. are available
+                                    // need to raise OnRequestCompleted while within the ThreadContext so that things like User,
+                                    // CurrentCulture, etc. are available
                                     context.RaiseOnRequestCompleted();
                                 }
 
@@ -5484,7 +5512,8 @@ namespace System.Web
 
                     if (appCompleted)
                     {
-                        // need to raise OnPipelineCompleted outside of the ThreadContext so that HttpContext.Current, User, etc. are unavailable
+                        // need to raise OnPipelineCompleted outside of the ThreadContext so that HttpContext.Current, User,
+                        // etc. are unavailable
                         context.RaiseOnPipelineCompleted();
 
                         // unroot context (async app operations ended)
@@ -5594,7 +5623,8 @@ namespace System.Web
             // PipelineStepManager::ResumeSteps
             // called from IIS7 (on IIS thread) via BeginProcessRequestNotification
             // or from an async completion (on CLR thread) via HttpApplication::ResumeStepsFromThreadPoolThread
-            // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey 609188)
+            // This attribute prevents undesirable 'just-my-code' debugging behavior (VSWhidbey 404406/VSWhidbey
+            // 609188)
             [System.Diagnostics.DebuggerStepperBoundaryAttribute]
             internal override void ResumeSteps(Exception error)
             {
@@ -5620,7 +5650,8 @@ namespace System.Web
 
                 using (context.RootedObjects.WithinTraceBlock())
                 {
-                    // DevDiv Bugs 187441: IIS7 Integrated Mode: Problem flushing Response from background threads in IIS7 integrated mode
+                    // DevDiv Bugs 187441: IIS7 Integrated Mode: Problem flushing Response from background threads in
+                    // IIS7 integrated mode
                     if (!isReEntry) // currently we only re-enter for SendResponse
                     {
                         syncContext.AssociateWithCurrentThread();
@@ -5635,21 +5666,30 @@ namespace System.Web
                         bool locked = false;
                         try
                         {
-                            // As a performance optimization, ASP.NET uses the IIS IHttpContext::IndicateCompletion function to continue executing notifications
-                            // on a thread that is associated with the AppDomain.  This is done by calling IndicateCompletion from within the AppDomain, instead
-                            // of returning to native code.  This technique can only be used for notifications that complete synchronously.
+                            // As a performance optimization, ASP.NET uses the IIS IHttpContext::IndicateCompletion function to
+                            // continue executing notifications
+                            // on a thread that is associated with the AppDomain.  This is done by calling IndicateCompletion
+                            // from within the AppDomain, instead
+                            // of returning to native code.  This technique can only be used for notifications that complete
+                            // synchronously.
 
-                            // There are two cases where notifications happen on a thread that has an initialized ThreadContext, and therefore does not need
-                            // to call ThreadContext.OnThreadEnter.  These include SendResponse notifications and notifications that occur within a call to
-                            // IndicateCompletion.  Note that SendResponse notifications occur on-demand, i.e., they happen when another notification triggers
+                            // There are two cases where notifications happen on a thread that has an initialized ThreadContext,
+                            // and therefore does not need
+                            // to call ThreadContext.OnThreadEnter.  These include SendResponse notifications and notifications
+                            // that occur within a call to
+                            // IndicateCompletion.  Note that SendResponse notifications occur on-demand, i.e., they happen when
+                            // another notification triggers
                             // a SendResponse, at which point it blocks until the SendResponse notification completes.
 
                             if (!isReEntry)
                             { // currently we only re-enter for SendResponse
                                 // DevDiv 482614 (Sharepoint Bug 3137123)
-                                // Async completion or SendResponse can happen on a background thread while the thread that called IndicateCompletion has not unwound yet
-                                // Therefore (InIndicateCompletion == true) is not a sufficient evidence that we can use the ThreadContext stored in IndicateCompletionContext
-                                // To avoid using other thread's ThreadContext we use IndicateCompletionContext only if ThreadInsideIndicateCompletion is indeed our thread
+                                // Async completion or SendResponse can happen on a background thread while the thread that called
+                                // IndicateCompletion has not unwound yet
+                                // Therefore (InIndicateCompletion == true) is not a sufficient evidence that we can use the
+                                // ThreadContext stored in IndicateCompletionContext
+                                // To avoid using other thread's ThreadContext we use IndicateCompletionContext only if
+                                // ThreadInsideIndicateCompletion is indeed our thread
                                 if (
                                     context.InIndicateCompletion
                                     && context.ThreadInsideIndicateCompletion
@@ -5716,12 +5756,16 @@ namespace System.Web
                                     && syncContext.PendingCompletion(_resumeStepsWaitCallback)
                                 )
                                 {
-                                    // Background flushes may trigger RQ_SEND_RESPONSE notifications which will set new context.NotificationContext
-                                    // Synchronize access to context.NotificationContext to make sure we update the correct NotificationContext instance
+                                    // Background flushes may trigger RQ_SEND_RESPONSE notifications which will set new
+                                    // context.NotificationContext
+                                    // Synchronize access to context.NotificationContext to make sure we update the correct
+                                    // NotificationContext instance
                                     _application.AcquireNotifcationContextLock(ref locked);
 
-                                    // Since the step completed asynchronously, this thread must return RequestNotificationStatus.Pending to IIS,
-                                    // and the async completion of this step must call IIS7WorkerRequest::PostCompletion.  The async completion of
+                                    // Since the step completed asynchronously, this thread must return
+                                    // RequestNotificationStatus.Pending to IIS,
+                                    // and the async completion of this step must call IIS7WorkerRequest::PostCompletion.  The async
+                                    // completion of
                                     // this step will call ResumeSteps again.
                                     context.NotificationContext.PendingAsyncCompletion = true;
                                     break;
@@ -5836,8 +5880,10 @@ namespace System.Web
 
                                 if (!stepCompletedSynchronously)
                                 {
-                                    // Since the step completed asynchronously, this thread must return RequestNotificationStatus.Pending to IIS,
-                                    // and the async completion of this step must call IIS7WorkerRequest::PostCompletion.  The async completion of
+                                    // Since the step completed asynchronously, this thread must return
+                                    // RequestNotificationStatus.Pending to IIS,
+                                    // and the async completion of this step must call IIS7WorkerRequest::PostCompletion.  The async
+                                    // completion of
                                     // this step will call ResumeSteps again.
                                     //context.AcquireNotifcationContextLockBeforeUnwind();
                                     _application.AcquireNotifcationContextLock(ref locked);
@@ -5865,12 +5911,16 @@ namespace System.Web
                                         // this is a sync completion on an IIS thread
                                         threadContext.Synchronize();
                                         // Note for DevDiv 482614 fix:
-                                        // If this threadContext is from IndicateCompletionContext (e.g. this thread called IndicateCompletion)
+                                        // If this threadContext is from IndicateCompletionContext (e.g. this thread called
+                                        // IndicateCompletion)
                                         // then we continue reusing this thread and only undo impersonation before unwinding back to IIS.
                                         //
-                                        // If this threadContext was created while another thread was and still is in IndicateCompletion call
-                                        // (e.g. sync or async flush on a background thread from native code, not managed since isReEnty==false)
-                                        // then we can not reuse this thread and this threadContext will be cleaned before we leave ResumeSteps
+                                        // If this threadContext was created while another thread was and still is in IndicateCompletion
+                                        // call
+                                        // (e.g. sync or async flush on a background thread from native code, not managed since
+                                        // isReEnty==false)
+                                        // then we can not reuse this thread and this threadContext will be cleaned before we leave
+                                        // ResumeSteps
                                         // (because needToDisassociateThreadContext was set to true when we created this threadContext)
 
                                         //always undo impersonation so that the token is removed before returning to IIS (DDB 156421)
@@ -5921,7 +5971,8 @@ namespace System.Web
                                     // This thread created a new ThreadContext if it did not call IndicateCompletion yet or if there was
                                     // another thread already in IndicateCompletion (a background flush from native code or a completion
                                     // on another thread). In either case if currently there is no thread in IndicateCompletion
-                                    // then we can reuse this thread and its threadContext and call IndicateCompletion on the current thread.
+                                    // then we can reuse this thread and its threadContext and call IndicateCompletion on the current
+                                    // thread.
                                     // In this case we will not disassociate this threadContext now
                                     needToDisassociateThreadContext = false;
                                     //always undo impersonation so that the token is removed before returning to IIS (DDB 156421)
@@ -5934,7 +5985,8 @@ namespace System.Web
                                         "needToDisassociateThreadContext MUST BE true"
                                     );
                                     // We're not in a call to IndicateCompletion.  We're either returning pending or
-                                    // we're in an async completion, and therefore we must clean-up the thread state. Impersonation is reverted
+                                    // we're in an async completion, and therefore we must clean-up the thread state. Impersonation is
+                                    // reverted
                                     threadContext.DisassociateFromCurrentThread();
                                     // remember to not disassociate again
                                     needToDisassociateThreadContext = false;
@@ -6075,7 +6127,8 @@ namespace System.Web
                         mustCallEndHandler = true;
                     }
 
-                    // Otherwise, this is an asynchronous completion, and the callback hasn't yet been invoked or hasn't fully completed.
+                    // Otherwise, this is an asynchronous completion, and the callback hasn't yet been invoked or hasn't
+                    // fully completed.
                     // We'll let the thread that invokes the callback call the End* method.
                 }
                 else
@@ -6086,12 +6139,14 @@ namespace System.Web
                     );
 
                     // The operation completed, and the callback already invoked the End* method.
-                    // The only thing we need to do is to report to our caller that the operation completed synchronously
+                    // The only thing we need to do is to report to our caller that the operation completed
+                    // synchronously
                     // (so that ResumeSteps runs on this thread) and to observe any exceptions that occurred.
                     operationCompleted = true;
                 }
 
-                // Interlocked performs a volatile read; if RethrowExceptionIfNecessary() is called after RegisterBeginUnwound(),
+                // Interlocked performs a volatile read; if RethrowExceptionIfNecessary() is called after
+                // RegisterBeginUnwound(),
                 // the thread will see the correct value for the _error field.
             }
 

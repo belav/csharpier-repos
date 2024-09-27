@@ -241,10 +241,10 @@ namespace System.Xml.Xsl.XsltOld
             _container = null;
         }
 
-        /*
-         * Execute
-         *  return values: true - pop, false - nothing
-         */
+/*
+* Execute
+*  return values: true - pop, false - nothing
+*/
         [MemberNotNullWhen(false, nameof(_action))]
         internal bool Execute(Processor processor)
         {

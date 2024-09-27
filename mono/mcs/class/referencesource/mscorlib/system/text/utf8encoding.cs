@@ -10,7 +10,8 @@
 // The code of all worker functions in this file is written twice: Once as as a slow loop, and the
 // second time as a fast loop. The slow loops handles all special cases, throws exceptions, etc.
 // The fast loops attempts to blaze through as fast as possible with optimistic range checks,
-// processing multiple characters at a time, and falling back to the slow loop for all special cases.
+// processing multiple characters at a time, and falling back to the slow loop for all special
+// cases.
 
 // This define can be used to turn off the fast loops. Useful for finding whether
 // the problem is fastloop-specific.
@@ -29,7 +30,8 @@ namespace System.Text
     // optimized for the lower 127 ASCII characters.  It's an efficient way
     // of encoding US English in an internationalizable way.
     //
-    // Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be confused.
+    // Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be
+    // confused.
     //
     // The UTF-8 byte order mark is simply the Unicode byte order mark
     // (0xFEFF) written in UTF-8 (0xEF 0xBB 0xBF).  The byte order mark is
@@ -40,18 +42,18 @@ namespace System.Text
     [System.Runtime.InteropServices.ComVisible(true)]
     public class UTF8Encoding : Encoding
     {
-        /*
-            bytes   bits    UTF-8 representation
-            -----   ----    -----------------------------------
-            1        7      0vvvvvvv
-            2       11      110vvvvv 10vvvvvv
-            3       16      1110vvvv 10vvvvvv 10vvvvvv
-            4       21      11110vvv 10vvvvvv 10vvvvvv 10vvvvvv
-            -----   ----    -----------------------------------
+/*
+bytes   bits    UTF-8 representation
+-----   ----    -----------------------------------
+1        7      0vvvvvvv
+2       11      110vvvvv 10vvvvvv
+3       16      1110vvvv 10vvvvvv 10vvvvvv
+4       21      11110vvv 10vvvvvv 10vvvvvv 10vvvvvv
+-----   ----    -----------------------------------
 
-            Surrogate:
-            Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
-         */
+Surrogate:
+Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
+*/
 
         private const int UTF8_CODEPAGE = 65001;
 
@@ -795,7 +797,8 @@ namespace System.Text
 
                 // To compute the upper bound, assume that all characters are ASCII characters at this point,
                 //  the boundary will be decreased for every non-ASCII character we encounter
-                // Also, we need 3 + 4 chars reserve for the unrolled ansi decoding loop and for decoding of surrogates
+                // Also, we need 3 + 4 chars reserve for the unrolled ansi decoding loop and for decoding of
+                // surrogates
                 char* pStop = pSrc + availableChars - (3 + 4);
 
                 while (pSrc < pStop)
@@ -1789,7 +1792,8 @@ namespace System.Text
 
                 // To compute the upper bound, assume that all characters are ASCII characters at this point,
                 //  the boundary will be decreased for every non-ASCII character we encounter
-                // Also, we need 7 chars reserve for the unrolled ansi decoding loop and for decoding of multibyte sequences
+                // Also, we need 7 chars reserve for the unrolled ansi decoding loop and for decoding of multibyte
+                // sequences
                 byte* pStop = pSrc + availableBytes - 7;
 
                 while (pSrc < pStop)
@@ -2044,7 +2048,8 @@ namespace System.Text
                 ch = decoder.bits;
 
                 // Shouldn't have anything in fallback buffer for GetChars
-                // (don't have to check m_throwOnOverflow for chars, we always use all or none so always should be empty)
+                // (don't have to check m_throwOnOverflow for chars, we always use all or none so always should be
+                // empty)
                 Contract.Assert(
                     !decoder.InternalHasFallbackBuffer || decoder.FallbackBuffer.Remaining == 0,
                     "[UTF8Encoding.GetChars]Expected empty fallback buffer at start"
@@ -2127,7 +2132,8 @@ namespace System.Text
                 // ready to punch
 
                 // surrogate in shortest form?
-                // Might be possible to get rid of this?  Already did non-shortest check for 4-byte sequence when reading 2nd byte?
+                // Might be possible to get rid of this?  Already did non-shortest check for 4-byte sequence when
+                // reading 2nd byte?
                 if ((ch & (SupplimentarySeq | 0x1F0000)) > SupplimentarySeq)
                 {
                     // let the range check for the second char throw the exception
@@ -2340,7 +2346,8 @@ namespace System.Text
 
                 // To compute the upper bound, assume that all characters are ASCII characters at this point,
                 //  the boundary will be decreased for every non-ASCII character we encounter
-                // Also, we need 7 chars reserve for the unrolled ansi decoding loop and for decoding of multibyte sequences
+                // Also, we need 7 chars reserve for the unrolled ansi decoding loop and for decoding of multibyte
+                // sequences
                 char* pStop = pTarget + availableBytes - 7;
 
                 while (pTarget < pStop)
@@ -2831,7 +2838,8 @@ namespace System.Text
                 );
             Contract.EndContractBlock();
 
-            // Figure out our length, 1 char per input byte + 1 char if 1st byte is last byte of 4 byte surrogate pair
+            // Figure out our length, 1 char per input byte + 1 char if 1st byte is last byte of 4 byte
+            // surrogate pair
             long charCount = ((long)byteCount + 1);
 
             // Non-shortest form would fall back, so get max count from fallback.
@@ -2868,7 +2876,8 @@ namespace System.Text
             {
                 return (emitUTF8Identifier == that.emitUTF8Identifier)
                     &&
-                    //                       (isThrowException == that.isThrowException) && // Same as encoder/decoderfallbacks being exception
+                    //                       (isThrowException == that.isThrowException) && // Same as
+                    // encoder/decoderfallbacks being exception
                     (EncoderFallback.Equals(that.EncoderFallback))
                     && (DecoderFallback.Equals(that.DecoderFallback));
             }

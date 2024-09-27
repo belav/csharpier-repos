@@ -154,10 +154,13 @@ namespace System.ServiceModel.Dispatcher
 
     /// <summary>
     /// We'll use our own class to store QNames instead of XmlQualifiedName because:
-    /// 1. Our is a struct. No allocations required. We have to dynamically create QNames in several places and
+    /// 1. Our is a struct. No allocations required. We have to dynamically create QNames in several
+    // places and
     /// and don't want to do allocations
-    /// 2. Our equality tests are frequently faster. XmlQualifiedName implements .Equal with the assumption that
-    /// strings are atomized using a shared name table, which in the case of arbitrary object graphs, they almost
+    /// 2. Our equality tests are frequently faster. XmlQualifiedName implements .Equal with the
+    // assumption that
+    /// strings are atomized using a shared name table, which in the case of arbitrary object graphs,
+    // they almost
     /// never will be.
     /// </summary>
     internal struct NodeQName
@@ -244,7 +247,8 @@ namespace System.ServiceModel.Dispatcher
         }
 
         /// <summary>
-        /// If this qname's strings are == to the constants defined in NodeQName, replace the strings with the
+        /// If this qname's strings are == to the constants defined in NodeQName, replace the strings with
+        // the
         /// constants
         /// </summary>
 #if NO
@@ -610,7 +614,7 @@ namespace System.ServiceModel.Dispatcher
     {
         /*
         Conversions
-
+        
         The following EXACTLY follow the XPath 1.0 spec. Some conversions may seem ----/inefficient, but
         we prefer to adhere to the spec and shall leave them be unless performance becomes an issue.
         */
@@ -645,7 +649,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal static double Double(string val)
         {
-            // XPath does not convert numbers the same way .NET does. A string preceeded by + is actually converted
+            // XPath does not convert numbers the same way .NET does. A string preceeded by + is actually
+            // converted
             // to NAN! Go figure..  Anyway, we have to do this manually.
             val = val.TrimStart();
             if (val.Length > 0 && val[0] != '+')
@@ -1009,7 +1014,8 @@ namespace System.ServiceModel.Dispatcher
         internal static double Round(double val)
         {
             // Math.Round does bankers rounding, which is IEEE 754, section 4.
-            // If a is halfway between two whole numbers, one of which by definition is even and the other odd, then
+            // If a is halfway between two whole numbers, one of which by definition is even and the other odd,
+            // then
             // the even number is returned. Thus Round(3.5) == Round(4.5) == 4.0
             // XPath has different rules.. which is Math.Floor(a + 0.5)... with two exceptions (see below)
             // The round function returns the number that is closest to the argument and that is an integer.
@@ -1019,8 +1025,10 @@ namespace System.ServiceModel.Dispatcher
             // If the argument is negative infinity, then negative infinity is returned.
             // If the argument is positive zero, then positive zero is returned.
             // If the argument is negative zero, then negative zero is returned.
-            // If the argument is less than zero, but greater than or equal to -0.5, then negative zero is returned.
-            // For these last two cases, the result of calling the round function is not the same as the result of
+            // If the argument is less than zero, but greater than or equal to -0.5, then negative zero is
+            // returned.
+            // For these last two cases, the result of calling the round function is not the same as the result
+            // of
             // adding 0.5 and then calling the floor function.
             // Note: .NET has no positive or negative zero... so we give up and use Math.Round...
             // For all other cases, we use Floor to Round...

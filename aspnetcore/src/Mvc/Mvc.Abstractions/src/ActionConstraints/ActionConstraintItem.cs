@@ -31,7 +31,8 @@ public class ActionConstraintItem
     public IActionConstraintMetadata Metadata { get; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether or not <see cref="Constraint"/> can be reused across requests.
+    /// Gets or sets a value indicating whether or not <see cref="Constraint"/> can be reused across
+    // requests.
     /// </summary>
     public bool IsReusable { get; set; }
 }

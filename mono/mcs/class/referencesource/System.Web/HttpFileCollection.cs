@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Collection of posted files for the request intrinsic
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Collection of posted files for the request intrinsic
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -44,12 +44,14 @@ namespace System.Web
         internal HttpFileCollection()
             : base(StringComparer.InvariantCultureIgnoreCase) { }
 
-        // This copy constructor is used by the granular request validation feature. Since these collections are immutable
+        // This copy constructor is used by the granular request validation feature. Since these collections
+        // are immutable
         // once created, it's ok for us to have two collections containing the same data.
         internal HttpFileCollection(HttpFileCollection col)
             : this()
         {
-            // We explicitly don't copy validation-related fields, as we want the copy to "reset" validation state.
+            // We explicitly don't copy validation-related fields, as we want the copy to "reset" validation
+            // state.
 
             // Copy the file references from the original collection into this instance
             for (int i = 0; i < col.Count; i++)

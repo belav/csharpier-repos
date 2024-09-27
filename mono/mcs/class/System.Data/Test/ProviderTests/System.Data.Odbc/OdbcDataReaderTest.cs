@@ -1173,7 +1173,7 @@ namespace MonoTests.System.Data.Connected.Odbc
                 reader = cmd.ExecuteReader();
                 reader.Close();
 
-                /* FIXME: we don't support output/return parameters */
+/* FIXME: we don't support output/return parameters */
                 if (!RunningOnMono)
                 {
                     Assert.IsTrue(((int)(age.Value)) > 0, "#1");

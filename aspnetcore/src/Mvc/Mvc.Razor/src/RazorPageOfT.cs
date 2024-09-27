@@ -7,7 +7,8 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace Microsoft.AspNetCore.Mvc.Razor;
 
 /// <summary>
-/// Represents the properties and methods that are needed in order to render a view that uses Razor syntax.
+/// Represents the properties and methods that are needed in order to render a view that uses Razor
+// syntax.
 /// </summary>
 /// <typeparam name="TModel">The type of the view data model.</typeparam>
 public abstract class RazorPage<TModel> : RazorPage

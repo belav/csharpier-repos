@@ -9,7 +9,8 @@ namespace System.Reflection.Runtime.MethodInfos
     internal static partial class CustomMethodMapper
     {
         //
-        // String constructors require special casing down the stack, being the only variable-sized objects created via a constructor.
+        // String constructors require special casing down the stack, being the only variable-sized objects
+        // created via a constructor.
         //
         private static class StringActions
         {

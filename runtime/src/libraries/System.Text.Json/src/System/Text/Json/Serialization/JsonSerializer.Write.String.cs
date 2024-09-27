@@ -22,8 +22,10 @@ namespace System.Text.Json
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
         /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
-        /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes{TValue}(TValue, JsonSerializerOptions?)"/>
-        /// and <see cref="SerializeAsync{TValue}(IO.Stream, TValue, JsonSerializerOptions?, Threading.CancellationToken)"/>.
+        /// encoding since the implementation internally uses UTF-8. See also <see
+        // cref="SerializeToUtf8Bytes{TValue}(TValue, JsonSerializerOptions?)"/>
+        /// and <see cref="SerializeAsync{TValue}(IO.Stream, TValue, JsonSerializerOptions?,
+        // Threading.CancellationToken)"/>.
         /// </remarks>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
@@ -51,8 +53,10 @@ namespace System.Text.Json
         /// <paramref name="inputType"/> is <see langword="null"/>.
         /// </exception>
         /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
-        /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes(object?, Type, JsonSerializerOptions?)"/>
-        /// and <see cref="SerializeAsync(IO.Stream, object?, Type, JsonSerializerOptions?, Threading.CancellationToken)"/>.
+        /// encoding since the implementation internally uses UTF-8. See also <see
+        // cref="SerializeToUtf8Bytes(object?, Type, JsonSerializerOptions?)"/>
+        /// and <see cref="SerializeAsync(IO.Stream, object?, Type, JsonSerializerOptions?,
+        // Threading.CancellationToken)"/>.
         /// </remarks>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
@@ -78,8 +82,10 @@ namespace System.Text.Json
         /// <paramref name="jsonTypeInfo"/> is <see langword="null"/>.
         /// </exception>
         /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
-        /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes{TValue}(TValue, JsonTypeInfo{TValue})"/>
-        /// and <see cref="SerializeAsync{TValue}(IO.Stream, TValue, JsonTypeInfo{TValue}, Threading.CancellationToken)"/>.
+        /// encoding since the implementation internally uses UTF-8. See also <see
+        // cref="SerializeToUtf8Bytes{TValue}(TValue, JsonTypeInfo{TValue})"/>
+        /// and <see cref="SerializeAsync{TValue}(IO.Stream, TValue, JsonTypeInfo{TValue},
+        // Threading.CancellationToken)"/>.
         /// </remarks>
         public static string Serialize<TValue>(TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
         {
@@ -105,7 +111,8 @@ namespace System.Text.Json
         /// <paramref name="value"/> does not match the type of <paramref name="jsonTypeInfo"/>.
         /// </exception>
         /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
-        /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes(object?, JsonTypeInfo)"/>
+        /// encoding since the implementation internally uses UTF-8. See also <see
+        // cref="SerializeToUtf8Bytes(object?, JsonTypeInfo)"/>
         /// and <see cref="SerializeAsync(IO.Stream, object?, JsonTypeInfo, Threading.CancellationToken)"/>.
         /// </remarks>
         public static string Serialize(object? value, JsonTypeInfo jsonTypeInfo)
@@ -138,8 +145,10 @@ namespace System.Text.Json
         /// <paramref name="inputType"/> or <paramref name="context"/> is <see langword="null"/>.
         /// </exception>
         /// <remarks>Using a <see cref="string"/> is not as efficient as using UTF-8
-        /// encoding since the implementation internally uses UTF-8. See also <see cref="SerializeToUtf8Bytes(object?, Type, JsonSerializerContext)"/>
-        /// and <see cref="SerializeAsync(IO.Stream, object?, Type, JsonSerializerContext, Threading.CancellationToken)"/>.
+        /// encoding since the implementation internally uses UTF-8. See also <see
+        // cref="SerializeToUtf8Bytes(object?, Type, JsonSerializerContext)"/>
+        /// and <see cref="SerializeAsync(IO.Stream, object?, Type, JsonSerializerContext,
+        // Threading.CancellationToken)"/>.
         /// </remarks>
         public static string Serialize(object? value, Type inputType, JsonSerializerContext context)
         {

@@ -73,7 +73,8 @@ namespace System.Diagnostics
         static readonly string[] empty = new string[0];
 
         /// <devdoc>
-        ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>
+        ///     Default constructor.  At least the <see
+        // cref='System.Diagnostics.ProcessStartInfo.FileName'/>
         ///     property must be set before starting the process.
         /// </devdoc>
         public ProcessStartInfo() { }
@@ -120,7 +121,8 @@ namespace System.Diagnostics
         /// <devdoc>
         ///    <para>
         ///       Specifies the verb to use when opening the filename. For example, the "print"
-        ///       verb will print a document specified using <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>.
+        ///       verb will print a document specified using <see
+        // cref='System.Diagnostics.ProcessStartInfo.FileName'/>.
         ///       Each file extension has it's own set of verbs, which can be obtained using the
         ///    <see cref='System.Diagnostics.ProcessStartInfo.Verbs'/> property.
         ///       The default verb can be specified using "".
@@ -516,11 +518,15 @@ namespace System.Diagnostics
 
         /// <devdoc>
         ///     Sets or returns the window handle to use for the error dialog that is shown
-        ///     when a process can not be started.  If <see cref='System.Diagnostics.ProcessStartInfo.ErrorDialog'/>
+        ///     when a process can not be started.  If <see
+        // cref='System.Diagnostics.ProcessStartInfo.ErrorDialog'/>
         ///     is true, this specifies the parent window for the dialog that is shown.  It is
         ///     useful to specify a parent in order to keep the dialog in front of the application.
         /// </devdoc>
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [
+            Browsable(false),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+        ]
         public IntPtr ErrorDialogParentHandle
         {
             get { return errorDialogParentHandle; }

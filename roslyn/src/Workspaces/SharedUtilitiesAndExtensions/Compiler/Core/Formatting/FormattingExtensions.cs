@@ -447,7 +447,8 @@ namespace Microsoft.CodeAnalysis.Formatting
             //   if (conditionLine1
             //     conditionLine2)
             //
-            // Adjustments may be requested for conditionLine2 in cases where the anchor for relative indentation is the
+            // Adjustments may be requested for conditionLine2 in cases where the anchor for relative
+            // indentation is the
             // first token of the containing statement (in this case, the 'if' token).
             if (
                 headerFacts.IsOnIfStatementHeader(

@@ -462,7 +462,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GenerateConstructorFrom
         public async Task TestDelegatingConstructorWithNullabilityDifferences()
         {
             // For this test we have a problem: the existing constructor has different nullability than
-            // the underlying field. We will still offer to use the delegating constructor even though it has a nullability issue
+            // the underlying field. We will still offer to use the delegating constructor even though it has a
+            // nullability issue
             // the user can then easily fix. If they don't want that, they can also just use the first option.
             await TestInRegularAndScriptAsync(
                 """

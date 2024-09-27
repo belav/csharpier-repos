@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -14,7 +14,8 @@ namespace Mono.Data.Sqlite
     using System.Runtime.InteropServices;
 
     /// <summary>
-    /// This class implements SQLiteBase completely, and is the guts of the code that interop's SQLite with .NET
+    /// This class implements SQLiteBase completely, and is the guts of the code that interop's SQLite
+    // with .NET
     /// </summary>
     internal class SQLite3 : SQLiteBase
     {
@@ -940,7 +941,8 @@ namespace Mono.Data.Sqlite
 
             if (n == 0)
             {
-                // sqlite3_create_function_v2 will call 'destroy_callback' if it fails, so we need to recreate the gchandle here.
+                // sqlite3_create_function_v2 will call 'destroy_callback' if it fails, so we need to recreate the
+                // gchandle here.
                 user_data = GCHandle.ToIntPtr(GCHandle.Alloc(data));
                 n = UnsafeNativeMethods.sqlite3_create_function_v2(
                     _sql,
@@ -1402,7 +1404,8 @@ namespace Mono.Data.Sqlite
         /// </summary>
         /// <param name="stmt">The statement being step()'d through</param>
         /// <param name="index">The column index to retrieve</param>
-        /// <param name="typ">The type of data contained in the column.  If Uninitialized, this function will retrieve the datatype information.</param>
+        /// <param name="typ">The type of data contained in the column.  If Uninitialized, this function
+        // will retrieve the datatype information.</param>
         /// <returns>Returns the data in the column</returns>
         internal override object GetValue(SqliteStatement stmt, int index, SQLiteType typ)
         {

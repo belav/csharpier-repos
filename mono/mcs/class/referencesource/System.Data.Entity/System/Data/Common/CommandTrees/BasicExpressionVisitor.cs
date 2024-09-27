@@ -72,7 +72,8 @@ namespace System.Data.Common.CommandTrees
         }
 
         /// <summary>
-        /// Convenience method indicating that the grouping keys of a <see cref="DbGroupByExpression"/> have been visited and the aggregates are now about to be visited.
+        /// Convenience method indicating that the grouping keys of a <see cref="DbGroupByExpression"/> have
+        // been visited and the aggregates are now about to be visited.
         /// </summary>
         /// <param name="binding">The DbGroupExpressionBinding of the DbGroupByExpression</param>
         protected virtual void VisitGroupExpressionBindingMid(DbGroupExpressionBinding binding) { }
@@ -84,7 +85,8 @@ namespace System.Data.Common.CommandTrees
         protected virtual void VisitGroupExpressionBindingPost(DbGroupExpressionBinding binding) { }
 
         /// <summary>
-        /// Convenience method indicating that the body of a Lambda <see cref="DbFunctionExpression"/> is now about to be visited.
+        /// Convenience method indicating that the body of a Lambda <see cref="DbFunctionExpression"/> is
+        // now about to be visited.
         /// </summary>
         /// <param name="lambda">The DbLambda that is about to be visited</param>
         /// <exception cref="ArgumentNullException"><paramref name="lambda"/> is null</exception>
@@ -110,12 +112,14 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public virtual void VisitExpression(DbExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression").Accept(this);
         }
 
         /// <summary>
-        /// Convenience method to visit each <see cref="DbExpression"/> in the given list, if the list is non-null.
+        /// Convenience method to visit each <see cref="DbExpression"/> in the given list, if the list is
+        // non-null.
         /// </summary>
         /// <param name="expressionList">The list of expressions to visit.</param>
         /// <exception cref="ArgumentNullException"><paramref name="expressionList"/> is null</exception>
@@ -149,7 +153,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="aggregate"/> is null</exception>
         public virtual void VisitAggregate(DbAggregate aggregate)
         {
-            // #433613: PreSharp warning 56506: Parameter 'aggregate' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'aggregate' to this public method must be validated: A
+            // null-dereference can occur here.
             VisitExpressionList(EntityUtil.CheckArgumentNull(aggregate, "aggregate").Arguments);
         }
 
@@ -177,10 +182,12 @@ namespace System.Data.Common.CommandTrees
         /// </summary>
         /// <param name="expression">The expression</param>
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
-        /// <exception cref="NotSupportedException">Always thrown if this method is called, since it indicates that <paramref name="expression"/> is of an unsupported type</exception>
+        /// <exception cref="NotSupportedException">Always thrown if this method is called, since it
+        // indicates that <paramref name="expression"/> is of an unsupported type</exception>
         public override void Visit(DbExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             throw EntityUtil.NotSupported(
@@ -197,7 +204,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbConstantExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
         }
 
@@ -208,7 +216,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbNullExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
         }
 
@@ -219,7 +228,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbVariableReferenceExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
         }
 
@@ -230,7 +240,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbParameterReferenceExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
         }
 
@@ -241,7 +252,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbFunctionExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionList(expression.Arguments);
@@ -254,7 +266,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbLambdaExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionList(expression.Arguments);
@@ -272,7 +285,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(MethodExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             if (expression.Instance != null)
@@ -290,7 +304,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbPropertyExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             if (expression.Instance != null)
@@ -316,7 +331,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbLikeExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpression(expression.Argument);
@@ -331,7 +347,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbLimitExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpression(expression.Argument);
@@ -495,7 +512,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbCaseExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionList(expression.When);
@@ -510,7 +528,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbNewInstanceExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
             VisitExpressionList(expression.Arguments);
             if (expression.HasRelatedEntityReferences)
@@ -540,7 +559,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbRelationshipNavigationExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             VisitExpression(
                 EntityUtil.CheckArgumentNull(expression, "expression").NavigationSource
             );
@@ -583,7 +603,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbScanExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
         }
 
@@ -594,7 +615,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbFilterExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);
@@ -609,7 +631,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbProjectExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);
@@ -624,7 +647,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbCrossJoinExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             foreach (DbExpressionBinding b in expression.Inputs)
@@ -645,7 +669,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbJoinExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Left);
@@ -664,12 +689,14 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbApplyExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);
 
-            // #433613: PreSharp warning 56506: Parameter 'expression.Apply' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression.Apply' to this public method must be
+            // validated: A null-dereference can occur here.
             if (expression.Apply != null)
             {
                 VisitExpression(expression.Apply.Expression);
@@ -685,7 +712,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbGroupByExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitGroupExpressionBindingPre(expression.Input);
@@ -702,7 +730,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbSkipExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);
@@ -721,7 +750,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbSortExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);
@@ -739,7 +769,8 @@ namespace System.Data.Common.CommandTrees
         /// <exception cref="ArgumentNullException"><paramref name="expression"/> is null</exception>
         public override void Visit(DbQuantifierExpression expression)
         {
-            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated: A null-dereference can occur here.
+            // #433613: PreSharp warning 56506: Parameter 'expression' to this public method must be validated:
+            // A null-dereference can occur here.
             EntityUtil.CheckArgumentNull(expression, "expression");
 
             VisitExpressionBindingPre(expression.Input);

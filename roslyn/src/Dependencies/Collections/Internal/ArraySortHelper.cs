@@ -3,9 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
+//
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/ArraySortHelper.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -466,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             return ~lo;
         }
 
-        /// <summary>Swaps the values in the two references if the first is greater than the second.</summary>
+        /// <summary>Swaps the values in the two references if the first is greater than the
+        // second.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void SwapIfGreater(ref T i, ref T j)
         {
@@ -476,7 +481,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             }
         }
 
-        /// <summary>Swaps the values in the two references, regardless of whether the two references are the same.</summary>
+        /// <summary>Swaps the values in the two references, regardless of whether the two references are
+        // the same.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void Swap(ref T i, ref T j)
         {
@@ -538,7 +544,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         {
             Debug.Assert(keys.Length >= SegmentedArrayHelper.IntrosortSizeThreshold);
 
-            // Use median-of-three to select a pivot. Grab a reference to the 0th, Length-1th, and Length/2th elements, and sort them.
+            // Use median-of-three to select a pivot. Grab a reference to the 0th, Length-1th, and Length/2th
+            // elements, and sort them.
             int zeroIndex = 0;
             int lastIndex = keys.Length - 1;
             int middleIndex = (keys.Length - 1) >> 1;
@@ -665,13 +672,18 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         // - These methods exist for use in sorting, where the additional operations present in
-        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial overhead,
+        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial
+        // overhead,
         //   in particular for floating point where the CompareTo methods need to factor in NaNs.
-        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting routines
-        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being sorted
+        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting
+        // routines
+        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being
+        // sorted
         //   by moving them all to the front first and then sorting the rest.
-        // - The `? true : false` is to work-around poor codegen: https://github.com/dotnet/runtime/issues/37904#issuecomment-644180265.
-        // - These are duplicated here rather than being on a helper type due to current limitations around generic inlining.
+        // - The `? true : false` is to work-around poor codegen:
+        // https://github.com/dotnet/runtime/issues/37904#issuecomment-644180265.
+        // - These are duplicated here rather than being on a helper type due to current limitations around
+        // generic inlining.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref T left, ref T right)
@@ -1342,13 +1354,18 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         // - These methods exist for use in sorting, where the additional operations present in
-        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial overhead,
+        //   the CompareTo methods that would otherwise be used on these primitives add non-trivial
+        // overhead,
         //   in particular for floating point where the CompareTo methods need to factor in NaNs.
-        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting routines
-        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being sorted
+        // - The floating-point comparisons here assume no NaNs, which is valid only because the sorting
+        // routines
+        //   themselves special-case NaN with a pre-pass that ensures none are present in the values being
+        // sorted
         //   by moving them all to the front first and then sorting the rest.
-        // - The `? true : false` is to work-around poor codegen: https://github.com/dotnet/runtime/issues/37904#issuecomment-644180265.
-        // - These are duplicated here rather than being on a helper type due to current limitations around generic inlining.
+        // - The `? true : false` is to work-around poor codegen:
+        // https://github.com/dotnet/runtime/issues/37904#issuecomment-644180265.
+        // - These are duplicated here rather than being on a helper type due to current limitations around
+        // generic inlining.
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // compiles to a single comparison or method call
         private static bool LessThan(ref TKey left, ref TKey right)
@@ -1530,7 +1547,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
             value |= value >> 08;
             value |= value >> 16;
 
-            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds check
+            // uint.MaxValue >> 27 is always in range [0 - 31] so we use Unsafe.AddByteOffset to avoid bounds
+            // check
             return Unsafe.AddByteOffset(
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),

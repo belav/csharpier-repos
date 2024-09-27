@@ -18,7 +18,8 @@ namespace System.IO.Hashing
         public static bool IsSupported =>
             Pclmulqdq.IsSupported || (Aes.IsSupported && AdvSimd.IsSupported);
 
-        // Performs carryless multiplication of the upper pairs of source and constants and the lower pairs of source and constants,
+        // Performs carryless multiplication of the upper pairs of source and constants and the lower pairs
+        // of source and constants,
         // then folds them into target using carryless addition.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector128<ulong> FoldPolynomialPair(

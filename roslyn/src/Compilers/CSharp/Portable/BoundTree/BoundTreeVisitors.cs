@@ -272,7 +272,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// We should be intentional about behavior of derived classes regarding guarding against stack overflow.
+        /// We should be intentional about behavior of derived classes regarding guarding against stack
+        // overflow.
         /// </summary>
         protected abstract BoundExpression? VisitExpressionWithoutStackGuard(BoundExpression node);
 #nullable disable

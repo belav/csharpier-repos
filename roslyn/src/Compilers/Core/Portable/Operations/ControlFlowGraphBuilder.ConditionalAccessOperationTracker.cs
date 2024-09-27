@@ -14,9 +14,12 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         private readonly struct ConditionalAccessOperationTracker
         {
             /// <summary>
-            /// Represents the stack <see cref="IConditionalAccessOperation.Operation"/>s of a tree of conditional accesses. The top of the stack is the
-            /// deepest node, and except in error conditions it should contain a <see cref="IConditionalAccessInstanceOperation"/> that will be visited
-            /// when visiting this node. This is the basic recursion that ensures that the operations are visited at the correct time.
+            /// Represents the stack <see cref="IConditionalAccessOperation.Operation"/>s of a tree of
+            // conditional accesses. The top of the stack is the
+            /// deepest node, and except in error conditions it should contain a <see
+            // cref="IConditionalAccessInstanceOperation"/> that will be visited
+            /// when visiting this node. This is the basic recursion that ensures that the operations are
+            // visited at the correct time.
             /// </summary>
             public readonly ArrayBuilder<IOperation>? Operations;
 

@@ -14,7 +14,8 @@ namespace Internal.Runtime.TypeLoader
     public static class TypeSystemContextFactory
     {
         // Cache the most recent instance of TypeSystemContext in a weak handle, and reuse it if possible
-        // This allows us to avoid recreating the type resolution context again and again, but still allows it to go away once the types are no longer being built
+        // This allows us to avoid recreating the type resolution context again and again, but still allows
+        // it to go away once the types are no longer being built
         private static GCHandle s_cachedContext = GCHandle.Alloc(null, GCHandleType.Weak);
 
         private static Lock s_lock = new Lock();

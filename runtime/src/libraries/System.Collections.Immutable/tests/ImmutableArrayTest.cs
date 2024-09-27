@@ -209,7 +209,8 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void CreateEnumerableElementType()
         {
-            // Create should not have the same semantics as CreateRange, except for arrays, span and readonlySpan.
+            // Create should not have the same semantics as CreateRange, except for arrays, span and
+            // readonlySpan.
             // If you pass in an IEnumerable<T> to Create, you should get an
             // ImmutableArray<IEnumerable<T>>. However, if you pass a T[] in, you should get
             // a ImmutableArray<T>.
@@ -3106,7 +3107,8 @@ namespace System.Collections.Immutable.Tests
                 new DelegateEqualityComparer<object>(objectEquals: (x, y) => true),
             };
 
-            // The comparers here must not consider two arrays structurally equal if the default comparer doesn't.
+            // The comparers here must not consider two arrays structurally equal if the default comparer
+            // doesn't.
             var pessimisticComparers = new IEqualityComparer[]
             {
                 EqualityComparer<int>.Default,
@@ -3175,9 +3177,12 @@ namespace System.Collections.Immutable.Tests
 
         public static IEnumerable<object[]> IStructuralEquatableEqualsNullComparerData()
         {
-            // Unlike other methods on ImmutableArray, null comparers are invalid inputs for IStructuralEquatable.Equals.
-            // However, it will not throw for a null comparer if the array is default and `other` is an ImmutableArray, or
-            // if Array's IStructuralEquatable.Equals implementation (which it calls under the cover) short-circuits before
+            // Unlike other methods on ImmutableArray, null comparers are invalid inputs for
+            // IStructuralEquatable.Equals.
+            // However, it will not throw for a null comparer if the array is default and `other` is an
+            // ImmutableArray, or
+            // if Array's IStructuralEquatable.Equals implementation (which it calls under the cover)
+            // short-circuits before
             // trying to use the comparer.
 
             yield return new object[] { s_emptyDefault, s_emptyDefault, null, true };
@@ -3272,7 +3277,8 @@ namespace System.Collections.Immutable.Tests
                 SharedComparers<int>().OfType<IComparer>(),
                 comparer =>
                 {
-                    // Default ImmutableArrays are always considered the same as other default ImmutableArrays, no matter
+                    // Default ImmutableArrays are always considered the same as other default ImmutableArrays, no
+                    // matter
                     // what the comparer is. (Even if the comparer is null.)
                     Assert.Equal(
                         0,
@@ -3297,7 +3303,8 @@ namespace System.Collections.Immutable.Tests
                 comparers,
                 comparer =>
                 {
-                    // CompareTo should throw if the arrays are of different lengths. The default ImmutableArray is considered to have
+                    // CompareTo should throw if the arrays are of different lengths. The default ImmutableArray is
+                    // considered to have
                     // a different length from every other array, including empty ones.
                     AssertExtensions.Throws<ArgumentException>(
                         "other",
@@ -3466,7 +3473,8 @@ namespace System.Collections.Immutable.Tests
             yield return new object[] { s_empty, s_empty, Comparer<int>.Default, 0 };
             yield return new object[] { s_empty, s_empty, Comparer<object>.Default, 0 };
 
-            // Normally, a null comparer is an invalid input. However, if both comparands are default ImmutableArrays
+            // Normally, a null comparer is an invalid input. However, if both comparands are default
+            // ImmutableArrays
             // then CompareTo will short-circuit before it validates the comparer.
             yield return new object[] { null, null, null, 0 };
         }
@@ -3611,10 +3619,13 @@ namespace System.Collections.Immutable.Tests
         public void AddThreadSafety()
         {
             // Note the point of this thread-safety test is *not* to test the thread-safety of the test itself.
-            // This test has a known issue where the two threads will stomp on each others updates, but that's not the point.
-            // The point is that ImmutableArray`1.Add should *never* throw. But if it reads its own T[] field more than once,
+            // This test has a known issue where the two threads will stomp on each others updates, but that's
+            // not the point.
+            // The point is that ImmutableArray`1.Add should *never* throw. But if it reads its own T[] field
+            // more than once,
             // it *can* throw because the field can be replaced with an array of another length.
-            // In fact, much worse can happen where we corrupt data if we are for example copying data out of the array
+            // In fact, much worse can happen where we corrupt data if we are for example copying data out of
+            // the array
             // in (for example) a CopyTo method and we read from the field more than once.
             // Also noteworthy: this method only tests the thread-safety of the Add method.
             // While it proves the general point, any method that reads 'this' more than once is vulnerable.
@@ -3724,7 +3735,8 @@ namespace System.Collections.Immutable.Tests
         }
 
         /// <summary>
-        /// Wraps an enumerable in an iterator, so that it does not implement interfaces such as <see cref="IList{T}"/>.
+        /// Wraps an enumerable in an iterator, so that it does not implement interfaces such as <see
+        // cref="IList{T}"/>.
         /// </summary>
         /// <typeparam name="T">The element type.</typeparam>
         /// <param name="source">The source enumerable.</param>
@@ -3747,10 +3759,12 @@ namespace System.Collections.Immutable.Tests
             //
             // There is no documented way of doing this so this helper is inherently fragile.
             //
-            // The prior version of this used Reflection to get at the private "array" field directly. This will not work on .NET Native
+            // The prior version of this used Reflection to get at the private "array" field directly. This will
+            // not work on .NET Native
             // due to the prohibition on internal framework Reflection.
             //
-            // This alternate method is despicable but ImmutableArray`1 has a documented contract of being exactly one reference-type field in size
+            // This alternate method is despicable but ImmutableArray`1 has a documented contract of being
+            // exactly one reference-type field in size
             // (for example, ImmutableInterlocked depends on it.)
             //
             // That leaves precious few candidates for which field is the "array" field...

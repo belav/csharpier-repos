@@ -32,7 +32,8 @@ namespace System.Text.Json.Serialization.Tests
             // Use local options to avoid obtaining already cached metadata from the default options.
             var options = new JsonSerializerOptions();
 
-            // Verify the test class has >64 properties since that is a threshold for using the fallback dictionary.
+            // Verify the test class has >64 properties since that is a threshold for using the fallback
+            // dictionary.
             Assert.True(
                 typeof(SimpleTestClass)
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -185,8 +186,10 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializer.Deserialize<SimpleTestClass>(json, options);
         }
 
-        // Use a common options instance to encourage additional metadata collisions across types. Also since
-        // this options is not the default options instance the tests will not use previously cached metadata.
+        // Use a common options instance to encourage additional metadata collisions across types. Also
+        // since
+        // this options is not the default options instance the tests will not use previously cached
+        // metadata.
         private static JsonSerializerOptions s_options = new JsonSerializerOptions
         {
             IncludeFields = true,

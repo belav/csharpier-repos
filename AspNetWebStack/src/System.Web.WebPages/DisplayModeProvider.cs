@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace System.Web.WebPages
 
         internal DisplayModeProvider()
         {
-            // The type is a psuedo-singleton. A user would gain nothing from constructing it since we won't use anything but DisplayModeProvider.Instance internally.
+            // The type is a psuedo-singleton. A user would gain nothing from constructing it since we won't use
+            // anything but DisplayModeProvider.Instance internally.
         }
 
         /// <summary>
@@ -96,8 +98,10 @@ namespace System.Web.WebPages
         }
 
         /// <summary>
-        /// Returns DisplayInfo from the first IDisplayMode in Modes that can handle the given request and locate the virtual path.
-        /// If currentDisplayMode is not null and RequireConsistentDisplayMode is set to true the search for DisplayInfo will only
+        /// Returns DisplayInfo from the first IDisplayMode in Modes that can handle the given request and
+        // locate the virtual path.
+        /// If currentDisplayMode is not null and RequireConsistentDisplayMode is set to true the search for
+        // DisplayInfo will only
         /// start with the currentDisplayMode.
         /// </summary>
         public DisplayInfo GetDisplayInfoForVirtualPath(

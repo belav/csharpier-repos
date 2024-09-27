@@ -15,7 +15,9 @@ public static class JSInProcessObjectReferenceExtensions
     /// Invokes the specified JavaScript function synchronously.
     /// </summary>
     /// <param name="jsObjectReference">The <see cref="IJSInProcessObjectReference"/>.</param>
-    /// <param name="identifier">An identifier for the function to invoke. For example, the value <c>"someScope.someFunction"</c> will invoke the function <c>someScope.someFunction</c> on the target instance.</param>
+    /// <param name="identifier">An identifier for the function to invoke. For example, the value
+    // <c>"someScope.someFunction"</c> will invoke the function <c>someScope.someFunction</c> on the target
+    // instance.</param>
     /// <param name="args">JSON-serializable arguments.</param>
     [UnconditionalSuppressMessage(
         "ReflectionAnalysis",

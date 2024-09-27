@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using Facebook;
@@ -29,7 +30,8 @@ namespace Microsoft.AspNet.Facebook.Providers
         }
 
         /// <summary>
-        /// Creates a <see cref="FacebookClient"/> with AppId and AppSecret that uses Json.NET for serialization and deserialization.
+        /// Creates a <see cref="FacebookClient"/> with AppId and AppSecret that uses Json.NET for
+        // serialization and deserialization.
         /// Does not have an access token associated with it by default.
         /// </summary>
         /// <returns>The <see cref="FacebookClient"/> instance.</returns>

@@ -678,7 +678,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Clone and entitize an HtmlNode. This will affect attribute values and nodes' text. It will also entitize all child nodes.
+        /// Clone and entitize an HtmlNode. This will affect attribute values and nodes' text. It will also
+        // entitize all child nodes.
         /// </summary>
         /// <param name="node">The node to entitize.</param>
         /// <returns>An entitized cloned node.</returns>
@@ -720,7 +721,8 @@ namespace HtmlAgilityPack
         /// Replace characters above 127 by entities.
         /// </summary>
         /// <param name="text">The source text.</param>
-        /// <param name="useNames">If set to false, the function will not use known entities name. Default is true.</param>
+        /// <param name="useNames">If set to false, the function will not use known entities name. Default
+        // is true.</param>
         /// <returns>The result text.</returns>
         public static string Entitize(string text, bool useNames)
         {
@@ -731,8 +733,10 @@ namespace HtmlAgilityPack
         /// Replace characters above 127 by entities.
         /// </summary>
         /// <param name="text">The source text.</param>
-        /// <param name="useNames">If set to false, the function will not use known entities name. Default is true.</param>
-        /// <param name="entitizeQuotAmpAndLtGt">If set to true, the [quote], [ampersand], [lower than] and [greather than] characters will be entitized.</param>
+        /// <param name="useNames">If set to false, the function will not use known entities name. Default
+        // is true.</param>
+        /// <param name="entitizeQuotAmpAndLtGt">If set to true, the [quote], [ampersand], [lower than] and
+        // [greather than] characters will be entitized.</param>
         /// <returns>The result text</returns>
         public static string Entitize(string text, bool useNames, bool entitizeQuotAmpAndLtGt)
         //		_entityValue.Add("quot", 34);	// quotation mark = APL quote, U+0022 ISOnum

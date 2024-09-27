@@ -9,7 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// An <see cref="ActionResult"/> that returns a Found (302), Moved Permanently (301), Temporary Redirect (307),
+/// An <see cref="ActionResult"/> that returns a Found (302), Moved Permanently (301), Temporary
+// Redirect (307),
 /// or Permanent Redirect (308) response with a Location header.
 /// Targets a registered route.
 /// </summary>
@@ -38,7 +39,8 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
     public RedirectToRouteResult(string? routeName, object? routeValues, bool permanent)
         : this(routeName, routeValues, permanent, fragment: null) { }
 
@@ -48,8 +50,10 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     public RedirectToRouteResult(
         string? routeName,
         object? routeValues,
@@ -74,7 +78,8 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     public RedirectToRouteResult(
         string? routeName,
@@ -90,8 +95,10 @@ public class RedirectToRouteResult : ActionResult, IKeepTempDataResult
     /// </summary>
     /// <param name="routeName">The name of the route.</param>
     /// <param name="routeValues">The parameters for the route.</param>
-    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a temporary redirect is used (302).</param>
-    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
+    /// <param name="permanent">If set to true, makes the redirect permanent (301). Otherwise a
+    // temporary redirect is used (302).</param>
+    /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent
+    // redirect (308) preserve the initial request method.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     public RedirectToRouteResult(
         string? routeName,

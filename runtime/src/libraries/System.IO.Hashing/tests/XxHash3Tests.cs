@@ -28,7 +28,8 @@ namespace System.IO.Hashing.Tests
         {
             byte[] destination = new byte[8];
 
-            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands of cases.
+            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands
+            // of cases.
             foreach ((ulong Hash, long Seed, string Ascii) test in TestCases())
             {
                 byte[] input = Encoding.ASCII.GetBytes(test.Ascii);
@@ -104,7 +105,8 @@ namespace System.IO.Hashing.Tests
             byte[] destination = new byte[8],
                 destination2 = new byte[8];
 
-            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands of cases.
+            // Run each test case.  This doesn't use a Theory to avoid bloating the xunit output with thousands
+            // of cases.
             foreach ((ulong Hash, long Seed, string Ascii) test in TestCases().OrderBy(t => t.Seed))
             {
                 // Validate the seeded constructor as well as the unseeded constructor if the seed is 0.

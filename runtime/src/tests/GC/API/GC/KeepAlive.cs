@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * Tests GC.KeepAlive(obj), where obj is the Object reference whose
- * finalizer you don't want called until after the call to KeepAlive.
- *
- * Changes:
- *   -Added Dummy2 object whose finalizer should get called for comparison
- *
- * Notes:
- *   - passes with DOTNET_jitminops set*
- *   - passes with DOTNET_gcstress = 0,1,2,3,4
- *   - passes in debug mode
- */
+* Tests GC.KeepAlive(obj), where obj is the Object reference whose
+* finalizer you don't want called until after the call to KeepAlive.
+*
+* Changes:
+*   -Added Dummy2 object whose finalizer should get called for comparison
+*
+* Notes:
+*   - passes with DOTNET_jitminops set*
+*   - passes with DOTNET_gcstress = 0,1,2,3,4
+*   - passes in debug mode
+*/
 
 using System;
 using System.Runtime.CompilerServices;

@@ -160,7 +160,8 @@ namespace System.Xml.XslTransformApiTests
         }
     }
 
-    //[TestCase(Name = "Same instance testing: XsltArgList - GetExtensionObject", Desc = "GetExtensionObject test cases")]
+    //[TestCase(Name = "Same instance testing: XsltArgList - GetExtensionObject", Desc =
+    // "GetExtensionObject test cases")]
     public class CSameInstanceXsltArgumentListGetExtnObject : CSameInstanceXsltArgTestCase
     {
         private ITestOutputHelper _output;

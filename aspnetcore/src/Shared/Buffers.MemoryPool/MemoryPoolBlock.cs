@@ -20,7 +20,8 @@ internal sealed class MemoryPoolBlock : IMemoryOwner<byte>
     }
 
     /// <summary>
-    /// Back-reference to the memory pool which this block was allocated from. It may only be returned to this pool.
+    /// Back-reference to the memory pool which this block was allocated from. It may only be returned
+    // to this pool.
     /// </summary>
     public PinnedBlockMemoryPool Pool { get; }
 

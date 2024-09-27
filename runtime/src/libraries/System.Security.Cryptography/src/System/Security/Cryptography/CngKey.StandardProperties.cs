@@ -161,7 +161,8 @@ namespace System.Security.Cryptography
 
         /// <summary>
         ///     The name of the key, null if it is ephemeral. We can only detect ephemeral keys created by
-        ///     the CLR. Other ephemeral keys, such as those imported by handle, will get a CryptographicException
+        ///     the CLR. Other ephemeral keys, such as those imported by handle, will get a
+        // CryptographicException
         ///     if they read this property.
         /// </summary>
         public string? KeyName
@@ -246,7 +247,8 @@ namespace System.Security.Cryptography
                             switch (curve)
                             {
                                 // nistP192 and nistP224 don't have named curve accelerators but we can handle them.
-                                // These string values match the names in https://learn.microsoft.com/en-us/windows/win32/seccng/cng-named-elliptic-curves
+                                // These string values match the names in
+                                // https://learn.microsoft.com/en-us/windows/win32/seccng/cng-named-elliptic-curves
                                 case "nistP192":
                                     return 192;
                                 case "nistP224":
@@ -363,7 +365,8 @@ namespace System.Security.Cryptography
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS || numBytesNeeded == 0)
                     {
-                        // No UI policy set. Our defined behavior is to return a non-null CngUIPolicy always, so set the UI policy components to the default values.
+                        // No UI policy set. Our defined behavior is to return a non-null CngUIPolicy always, so set the UI
+                        // policy components to the default values.
                         uiProtectionLevel = CngUIProtectionLevels.None;
                         friendlyName = null;
                         description = null;
@@ -371,14 +374,18 @@ namespace System.Security.Cryptography
                     }
                     else
                     {
-                        // The returned property must be at least the size of NCRYPT_UI_POLICY (plus the extra size of the UI policy strings if any.)
-                        // If by any chance, a rogue provider passed us something smaller, fail-fast now rather risk dereferencing "pointers" that were actually
+                        // The returned property must be at least the size of NCRYPT_UI_POLICY (plus the extra size of the
+                        // UI policy strings if any.)
+                        // If by any chance, a rogue provider passed us something smaller, fail-fast now rather risk
+                        // dereferencing "pointers" that were actually
                         // constructed from memory garbage.
                         if (numBytesNeeded < sizeof(NCRYPT_UI_POLICY))
                             throw ErrorCode.E_FAIL.ToCryptographicException();
 
-                        // ! We must keep this byte array pinned until NCryptGetProperty() has returned *and* we've marshaled all of the inner native strings into managed String
-                        // ! objects. Otherwise, a badly timed GC will move the native strings in memory and invalidate the pointers to them before we dereference them.
+                        // ! We must keep this byte array pinned until NCryptGetProperty() has returned *and* we've
+                        // marshaled all of the inner native strings into managed String
+                        // ! objects. Otherwise, a badly timed GC will move the native strings in memory and invalidate the
+                        // pointers to them before we dereference them.
                         byte[] ncryptUiPolicyAndStrings = new byte[numBytesNeeded];
                         fixed (byte* pNcryptUiPolicyAndStrings = &ncryptUiPolicyAndStrings[0])
                         {

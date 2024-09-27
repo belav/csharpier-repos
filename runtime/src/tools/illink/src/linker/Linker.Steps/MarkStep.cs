@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 //
 // MarkStep.cs
@@ -541,8 +542,10 @@ namespace Mono.Linker.Steps
                 new MessageOrigin((ICustomAttributeProvider?)null)
             );
 
-            // Beware: this works on loaded assemblies, not marked assemblies, so it should not be tied to marking.
-            // We could further optimize this to only iterate through assemblies if the last mark iteration loaded
+            // Beware: this works on loaded assemblies, not marked assemblies, so it should not be tied to
+            // marking.
+            // We could further optimize this to only iterate through assemblies if the last mark iteration
+            // loaded
             // a new assembly, since this is the only way that the set we need to consider could have changed.
             var assembliesToCheck = scanReferences
                 ? Context.GetReferencedAssemblies().ToArray()
@@ -693,21 +696,26 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Handles marking of interface implementations, and the marking of methods that implement interfaces
+        /// Handles marking of interface implementations, and the marking of methods that implement
+        // interfaces
         /// once ILLink knows whether a type is instantiated or relevant to variant casting,
         /// and after interfaces and interface methods have been marked.
         /// </summary>
         void ProcessMarkedTypesWithInterfaces()
         {
-            // We may mark an interface type later on.  Which means we need to reprocess any time with one or more interface implementations that have not been marked
-            // and if an interface type is found to be marked and implementation is not marked, then we need to mark that implementation
+            // We may mark an interface type later on.  Which means we need to reprocess any time with one or
+            // more interface implementations that have not been marked
+            // and if an interface type is found to be marked and implementation is not marked, then we need to
+            // mark that implementation
 
-            // copy the data to avoid modified while enumerating error potential, which can happen under certain conditions.
+            // copy the data to avoid modified while enumerating error potential, which can happen under certain
+            // conditions.
             var typesWithInterfaces = _typesWithInterfaces.ToArray();
 
             foreach ((var type, var scope) in typesWithInterfaces)
             {
-                // Exception, types that have not been flagged as instantiated yet.  These types may not need their interfaces even if the
+                // Exception, types that have not been flagged as instantiated yet.  These types may not need their
+                // interfaces even if the
                 // interface type is marked
                 // UnusedInterfaces optimization is turned off mark all interface implementations
                 bool unusedInterfacesOptimizationEnabled = Context.IsOptimizationEnabled(
@@ -765,7 +773,8 @@ namespace Mono.Linker.Steps
 
         void DiscoverDynamicCastableImplementationInterfaces()
         {
-            // We could potentially avoid loading all references here: https://github.com/dotnet/linker/issues/1788
+            // We could potentially avoid loading all references here:
+            // https://github.com/dotnet/linker/issues/1788
             foreach (var assembly in Context.GetReferencedAssemblies().ToArray())
             {
                 switch (Annotations.GetAction(assembly))
@@ -805,8 +814,10 @@ namespace Mono.Linker.Steps
         {
             DiscoverDynamicCastableImplementationInterfaces();
 
-            // We may mark an interface type later on.  Which means we need to reprocess any time with one or more interface implementations that have not been marked
-            // and if an interface type is found to be marked and implementation is not marked, then we need to mark that implementation
+            // We may mark an interface type later on.  Which means we need to reprocess any time with one or
+            // more interface implementations that have not been marked
+            // and if an interface type is found to be marked and implementation is not marked, then we need to
+            // mark that implementation
 
             for (int i = 0; i < _dynamicInterfaceCastableImplementationTypes.Count; i++)
             {
@@ -825,7 +836,8 @@ namespace Mono.Linker.Steps
                 {
                     if (Annotations.IsMarked(iface.InterfaceType))
                     {
-                        // We only need to mark the type definition because ILLink will ensure that all marked implemented interfaces and used method implementations
+                        // We only need to mark the type definition because ILLink will ensure that all marked implemented
+                        // interfaces and used method implementations
                         // will be marked on this type as well.
                         MarkType(
                             type,
@@ -876,7 +888,8 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Returns true if the Override in <paramref name="overrideInformation"/> should be marked because it is needed by the base method.
+        /// Returns true if the Override in <paramref name="overrideInformation"/> should be marked because
+        // it is needed by the base method.
         /// Does not take into account if the base method is in a preserved scope.
         /// Assumes the base method is marked or comes from a preserved scope.
         /// </summary>
@@ -910,7 +923,8 @@ namespace Mono.Linker.Steps
                 return true;
 
             // Direct overrides of marked abstract ov.Overrides must be marked or we get invalid IL.
-            // Overrides further in the hierarchy will override the direct override (which will be implemented by the above rule), so we don't need to worry about invalid IL.
+            // Overrides further in the hierarchy will override the direct override (which will be implemented
+            // by the above rule), so we don't need to worry about invalid IL.
             if (overrideInformation.Base.IsAbstract)
                 return true;
 
@@ -918,7 +932,8 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Marks the Override of <paramref name="overrideInformation"/> with the correct reason. Should be called when <see cref="ShouldMarkOverrideForBase(OverrideInformation, bool)"/> returns true.
+        /// Marks the Override of <paramref name="overrideInformation"/> with the correct reason. Should be
+        // called when <see cref="ShouldMarkOverrideForBase(OverrideInformation, bool)"/> returns true.
         /// </summary>
         // TODO: Take into account a base method in preserved scope
         void MarkOverrideForBaseMethod(OverrideInformation overrideInformation)
@@ -976,8 +991,10 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Returns true if <paramref name="type"/> implements <paramref name="interfaceType"/> and the interface implementation is marked,
-        /// or if any marked interface implementations on <paramref name="type"/> are interfaces that implement <paramref name="interfaceType"/> and that interface implementation is marked
+        /// Returns true if <paramref name="type"/> implements <paramref name="interfaceType"/> and the
+        // interface implementation is marked,
+        /// or if any marked interface implementations on <paramref name="type"/> are interfaces that
+        // implement <paramref name="interfaceType"/> and that interface implementation is marked
         /// </summary>
         bool IsInterfaceImplementationMarkedRecursively(
             TypeDefinition type,
@@ -1627,7 +1644,8 @@ namespace Mono.Linker.Steps
             if (!ShouldMarkCustomAttribute(app.Attribute, app.Provider))
                 return false;
 
-            // If an attribute's module has not been marked after processing all types in all assemblies and the attribute itself has not been marked,
+            // If an attribute's module has not been marked after processing all types in all assemblies and the
+            // attribute itself has not been marked,
             // then surely nothing is using this attribute and there is no need to mark it
             if (
                 !Annotations.IsMarked(resolvedConstructor.Module)
@@ -2003,7 +2021,8 @@ namespace Mono.Linker.Steps
             protected override void ProcessExtra()
             {
                 // Also mark the scopes of metadata typeref rows to cover any not discovered by the traversal.
-                // This can happen when the compiler emits typerefs into IL which aren't strictly necessary per ECMA 335.
+                // This can happen when the compiler emits typerefs into IL which aren't strictly necessary per ECMA
+                // 335.
                 foreach (TypeReference typeReference in assembly.MainModule.GetTypeReferences())
                 {
                     if (!Visited!.Add(typeReference))
@@ -2309,10 +2328,14 @@ namespace Mono.Linker.Steps
                 }
             }
 
-            // Warn on reflection access to compiler-generated methods, if the method isn't already unsafe to access via reflection
-            // due to annotations. For the annotation-based warnings, we skip virtual overrides since those will produce warnings on
-            // the base, but for unannotated compiler-generated methods this is not the case, so we must produce these warnings even
-            // for virtual overrides. This ensures that we include the unannotated MoveNext state machine method. Lambdas and local
+            // Warn on reflection access to compiler-generated methods, if the method isn't already unsafe to
+            // access via reflection
+            // due to annotations. For the annotation-based warnings, we skip virtual overrides since those will
+            // produce warnings on
+            // the base, but for unannotated compiler-generated methods this is not the case, so we must produce
+            // these warnings even
+            // for virtual overrides. This ensures that we include the unannotated MoveNext state machine
+            // method. Lambdas and local
             // functions should never be virtual overrides in the first place.
             bool isCoveredByAnnotations =
                 isReflectionAccessCoveredByRUC || isReflectionAccessCoveredByDAM;
@@ -2406,10 +2429,14 @@ namespace Mono.Linker.Steps
                 );
             }
 
-            // Warn on reflection access to compiler-generated methods, if the method isn't already unsafe to access via reflection
-            // due to annotations. For the annotation-based warnings, we skip virtual overrides since those will produce warnings on
-            // the base, but for unannotated compiler-generated methods this is not the case, so we must produce these warnings even
-            // for virtual overrides. This ensures that we include the unannotated MoveNext state machine method. Lambdas and local
+            // Warn on reflection access to compiler-generated methods, if the method isn't already unsafe to
+            // access via reflection
+            // due to annotations. For the annotation-based warnings, we skip virtual overrides since those will
+            // produce warnings on
+            // the base, but for unannotated compiler-generated methods this is not the case, so we must produce
+            // these warnings even
+            // for virtual overrides. This ensures that we include the unannotated MoveNext state machine
+            // method. Lambdas and local
             // functions should never be virtual overrides in the first place.
             bool isCoveredByAnnotations =
                 isReflectionAccessCoveredByRUC || isReflectionAccessCoveredByDAM;
@@ -2466,7 +2493,8 @@ namespace Mono.Linker.Steps
             if (CheckProcessed(field))
                 return;
 
-            // Use the original scope for marking the declaring type - it provides better warning message location
+            // Use the original scope for marking the declaring type - it provides better warning message
+            // location
             MarkType(field.DeclaringType, new DependencyInfo(DependencyKind.DeclaringType, field));
 
             using var fieldScope = ScopeStack.PushScope(new MessageOrigin(field));
@@ -2522,7 +2550,8 @@ namespace Mono.Linker.Steps
             bool isCoveredByAnnotations
         )
         {
-            // No need to warn if it's already covered by the Requires attribute or explicit annotations on the field.
+            // No need to warn if it's already covered by the Requires attribute or explicit annotations on the
+            // field.
             if (isCoveredByAnnotations)
                 return false;
 
@@ -2639,7 +2668,8 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Returns true if the assembly of the <paramref name="scope"></paramref> is not set to link (i.e. action=copy is set for that assembly)
+        /// Returns true if the assembly of the <paramref name="scope"></paramref> is not set to link (i.e.
+        // action=copy is set for that assembly)
         /// </summary>
         protected virtual bool IgnoreScope(IMetadataScope scope)
         {
@@ -2702,9 +2732,12 @@ namespace Mono.Linker.Steps
             in MessageOrigin origin
         )
         {
-            // If a type is visible to reflection, we need to stop doing optimization that could cause observable difference
-            // in reflection APIs. This includes APIs like MakeGenericType (where variant castability of the produced type
-            // could be incorrect) or IsAssignableFrom (where assignability of unconstructed types might change).
+            // If a type is visible to reflection, we need to stop doing optimization that could cause
+            // observable difference
+            // in reflection APIs. This includes APIs like MakeGenericType (where variant castability of the
+            // produced type
+            // could be incorrect) or IsAssignableFrom (where assignability of unconstructed types might
+            // change).
             Annotations.MarkRelevantToVariantCasting(definition);
 
             Annotations.MarkReflectionUsed(definition);
@@ -2743,9 +2776,11 @@ namespace Mono.Linker.Steps
             in MessageOrigin origin
         )
         {
-            // Marking the property itself actually doesn't keep it (it only marks its attributes and records the dependency), we have to mark the methods on it
+            // Marking the property itself actually doesn't keep it (it only marks its attributes and records
+            // the dependency), we have to mark the methods on it
             MarkProperty(property, reason);
-            // We don't track PropertyInfo, so we can't tell if any accessor is needed by the app, so include them both.
+            // We don't track PropertyInfo, so we can't tell if any accessor is needed by the app, so include
+            // them both.
             // With better tracking it might be possible to be more precise here: dotnet/linker/issues/1948
             MarkMethodIfNotNull(property.GetMethod, reason, origin);
             MarkMethodIfNotNull(property.SetMethod, reason, origin);
@@ -2838,10 +2873,13 @@ namespace Mono.Linker.Steps
 
             if (Annotations.HasLinkerAttribute<RemoveAttributeInstancesAttribute>(type))
             {
-                // Don't warn about references from the removed attribute itself (for example the .ctor on the attribute
+                // Don't warn about references from the removed attribute itself (for example the .ctor on the
+                // attribute
                 // will call MarkType on the attribute type itself).
-                // If for some reason we do keep the attribute type (could be because of previous reference which would cause IL2045
-                // or because of a copy assembly with a reference and so on) then we should not spam the warnings due to the type itself.
+                // If for some reason we do keep the attribute type (could be because of previous reference which
+                // would cause IL2045
+                // or because of a copy assembly with a reference and so on) then we should not spam the warnings
+                // due to the type itself.
                 if (
                     !(
                         reason.Source is IMemberDefinition sourceMemberDefinition
@@ -2950,30 +2988,42 @@ namespace Mono.Linker.Steps
 
             MarkGenericParameterProvider(type);
 
-            // There are a number of markings we can defer until later when we know it's possible a reference type could be instantiated
-            // For example, if no instance of a type exist, then we don't need to mark the interfaces on that type -- Note this is not true for static interfaces
+            // There are a number of markings we can defer until later when we know it's possible a reference
+            // type could be instantiated
+            // For example, if no instance of a type exist, then we don't need to mark the interfaces on that
+            // type -- Note this is not true for static interfaces
             // However, for some other types there is no benefit to deferring
             if (type.IsInterface)
             {
-                // There's no benefit to deferring processing of an interface type until we know a type implementing that interface is marked
+                // There's no benefit to deferring processing of an interface type until we know a type implementing
+                // that interface is marked
                 MarkRequirementsForInstantiatedTypes(type);
             }
             else if (type.IsValueType)
             {
-                // Note : Technically interfaces could be removed from value types in some of the same cases as reference types, however, it's harder to know when
-                // a value type instance could exist.  You'd have to track initobj and maybe locals types.  Going to punt for now.
+                // Note : Technically interfaces could be removed from value types in some of the same cases as
+                // reference types, however, it's harder to know when
+                // a value type instance could exist.  You'd have to track initobj and maybe locals types.  Going to
+                // punt for now.
                 MarkRequirementsForInstantiatedTypes(type);
             }
             else if (IsFullyPreserved(type))
             {
                 // Here for a couple reasons:
-                // * Edge case to cover a scenario where a type has preserve all, implements interfaces, but does not have any instance ctors.
-                //    Normally TypePreserve.All would cause an instance ctor to be marked and that would in turn lead to MarkInterfaceImplementations being called
-                //    Without an instance ctor, MarkInterfaceImplementations is not called and then TypePreserve.All isn't truly respected.
-                // * If an assembly has the action Copy and had ResolveFromAssemblyStep ran for the assembly, then InitializeType will have led us here
-                //    When the entire assembly is preserved, then all interfaces, base, etc will be preserved on the type, so we need to make sure
-                //    all of these types are marked.  For example, if an interface implementation is of a type in another assembly that is linked,
-                //    and there are no other usages of that interface type, then we need to make sure the interface type is still marked because
+                // * Edge case to cover a scenario where a type has preserve all, implements interfaces, but does
+                // not have any instance ctors.
+                //    Normally TypePreserve.All would cause an instance ctor to be marked and that would in turn
+                // lead to MarkInterfaceImplementations being called
+                //    Without an instance ctor, MarkInterfaceImplementations is not called and then TypePreserve.All
+                // isn't truly respected.
+                // * If an assembly has the action Copy and had ResolveFromAssemblyStep ran for the assembly, then
+                // InitializeType will have led us here
+                //    When the entire assembly is preserved, then all interfaces, base, etc will be preserved on the
+                // type, so we need to make sure
+                //    all of these types are marked.  For example, if an interface implementation is of a type in
+                // another assembly that is linked,
+                //    and there are no other usages of that interface type, then we need to make sure the interface
+                // type is still marked because
                 //    this type is going to retain the interface implementation
                 MarkRequirementsForInstantiatedTypes(type);
             }
@@ -2982,13 +3032,15 @@ namespace Mono.Linker.Steps
                 MarkRequirementsForInstantiatedTypes(type);
             }
 
-            // Save for later once we know which interfaces are marked and then determine which interface implementations and methods to keep
+            // Save for later once we know which interfaces are marked and then determine which interface
+            // implementations and methods to keep
             if (type.HasInterfaces)
                 _typesWithInterfaces.Add((type, ScopeStack.CurrentScope));
 
             if (type.HasMethods)
             {
-                // TODO: MarkMethodIfNeededByBaseMethod should include logic for IsMethodNeededByTypeDueToPreservedScope: https://github.com/dotnet/linker/issues/3090
+                // TODO: MarkMethodIfNeededByBaseMethod should include logic for
+                // IsMethodNeededByTypeDueToPreservedScope: https://github.com/dotnet/linker/issues/3090
                 foreach (var method in type.Methods)
                 {
                     MarkMethodIfNeededByBaseMethod(method);
@@ -3239,9 +3291,11 @@ namespace Mono.Linker.Steps
                 {
                     string methodName = realMatch.Substring(0, realMatch.Length - 2);
 
-                    // It's a call to a method on some member.  Handling this scenario robustly would be complicated and a decent bit of work.
+                    // It's a call to a method on some member.  Handling this scenario robustly would be complicated and
+                    // a decent bit of work.
                     //
-                    // We could implement support for this at some point, but for now it's important to make sure at least we don't crash trying to find some
+                    // We could implement support for this at some point, but for now it's important to make sure at
+                    // least we don't crash trying to find some
                     // method on the current type when it exists on some other type
                     if (methodName.Contains('.'))
                         continue;
@@ -3540,13 +3594,18 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Returns true if any of the base methods of the <paramref name="method"/> passed is in an assembly that is not trimmed (i.e. action != trim).
-        /// Meant to be used to determine whether methods should be marked regardless of whether it is instantiated or not.
+        /// Returns true if any of the base methods of the <paramref name="method"/> passed is in an
+        // assembly that is not trimmed (i.e. action != trim).
+        /// Meant to be used to determine whether methods should be marked regardless of whether it is
+        // instantiated or not.
         /// </summary>
         /// <remarks>
-        /// When the unusedinterfaces optimization is on, this is used to mark methods that override an abstract method from a non-link assembly and must be kept.
-        /// When the unusedinterfaces optimization is off, this will do the same as when on but will also mark interface methods from interfaces defined in a non-link assembly.
-        /// If the containing type is instantiated, the caller should also use <see cref="IsMethodNeededByInstantiatedTypeDueToPreservedScope (MethodDefinition)" />
+        /// When the unusedinterfaces optimization is on, this is used to mark methods that override an
+        // abstract method from a non-link assembly and must be kept.
+        /// When the unusedinterfaces optimization is off, this will do the same as when on but will also
+        // mark interface methods from interfaces defined in a non-link assembly.
+        /// If the containing type is instantiated, the caller should also use <see
+        // cref="IsMethodNeededByInstantiatedTypeDueToPreservedScope (MethodDefinition)" />
         /// </remarks>
         bool IsMethodNeededByTypeDueToPreservedScope(MethodDefinition method)
         {
@@ -3562,7 +3621,8 @@ namespace Mono.Linker.Steps
 
             foreach (OverrideInformation ov in base_list)
             {
-                // Skip interface methods, they will be captured later by IsInterfaceImplementationMethodNeededByTypeDueToInterface
+                // Skip interface methods, they will be captured later by
+                // IsInterfaceImplementationMethodNeededByTypeDueToInterface
                 if (ov.Base.DeclaringType.IsInterface)
                     continue;
 
@@ -3574,7 +3634,8 @@ namespace Mono.Linker.Steps
 
                 // If the type is marked, we need to keep overrides of abstract members defined in assemblies
                 // that are copied to keep the IL valid.
-                // However, if the base method is a non-abstract virtual (has an implementation on the base type), then we don't need to keep the override
+                // However, if the base method is a non-abstract virtual (has an implementation on the base type),
+                // then we don't need to keep the override
                 // until the type could be instantiated
                 if (!ov.Base.IsAbstract)
                     continue;
@@ -3586,7 +3647,8 @@ namespace Mono.Linker.Steps
         }
 
         /// <summary>
-        /// Returns true if the override method is required due to the interface that the base method is declared on. See doc at <see href="docs/methods-kept-by-interface.md"/> for explanation of logic.
+        /// Returns true if the override method is required due to the interface that the base method is
+        // declared on. See doc at <see href="docs/methods-kept-by-interface.md"/> for explanation of logic.
         /// </summary>
         bool IsInterfaceImplementationMethodNeededByTypeDueToInterface(
             OverrideInformation overrideInformation
@@ -3604,7 +3666,8 @@ namespace Mono.Linker.Steps
                 return false;
 
             // If the interface implementation is not marked, do not mark the implementation method
-            // A type that doesn't implement the interface isn't required to have methods that implement the interface.
+            // A type that doesn't implement the interface isn't required to have methods that implement the
+            // interface.
             InterfaceImplementation? iface = overrideInformation.MatchingInterfaceImplementation;
             if (
                 !(
@@ -3617,8 +3680,10 @@ namespace Mono.Linker.Steps
             )
                 return false;
 
-            // If the interface method is not marked and the interface doesn't come from a preserved scope, do not mark the implementation method
-            // Unmarked interface methods from link assemblies will be removed so the implementing method does not need to be kept.
+            // If the interface method is not marked and the interface doesn't come from a preserved scope, do
+            // not mark the implementation method
+            // Unmarked interface methods from link assemblies will be removed so the implementing method does
+            // not need to be kept.
             if (!Annotations.IsMarked(@base) && !IgnoreScope(@base.DeclaringType.Scope))
                 return false;
 
@@ -3627,8 +3692,10 @@ namespace Mono.Linker.Steps
             if (@base.IsAbstract)
                 return true;
 
-            // If the method is static and the implementing type is relevant to variant casting, mark the implementation method.
-            // A static method may only be called through a constrained call if the type is relevant to variant casting.
+            // If the method is static and the implementing type is relevant to variant casting, mark the
+            // implementation method.
+            // A static method may only be called through a constrained call if the type is relevant to variant
+            // casting.
             if (@base.IsStatic)
                 return Annotations.IsRelevantToVariantCasting(method.DeclaringType)
                     || IgnoreScope(@base.DeclaringType.Scope);
@@ -3798,8 +3865,10 @@ namespace Mono.Linker.Steps
         {
             switch (td.Name)
             {
-                // These types are created from native code which means we are unable to track when they are instantiated
-                // Since these are such foundational types, let's take the easy route and just always assume an instance of one of these
+                // These types are created from native code which means we are unable to track when they are
+                // instantiated
+                // Since these are such foundational types, let's take the easy route and just always assume an
+                // instance of one of these
                 // could exist
                 case "Delegate":
                 case "MulticastDelegate":
@@ -4116,13 +4185,15 @@ namespace Mono.Linker.Steps
                     && field.Name.EndsWith(">k__BackingField", StringComparison.Ordinal)
                 )
                 {
-                    // We can't reliably construct the expected property name from the backing field name for all compilers
+                    // We can't reliably construct the expected property name from the backing field name for all
+                    // compilers
                     // because csc shortens the name of the backing field in some cases
                     // For example:
                     // Field Name = <IFoo<int>.Bar>k__BackingField
                     // Property Name = IFoo<System.Int32>.Bar
                     //
-                    // instead we will search the properties and find the one that makes use of the current backing field
+                    // instead we will search the properties and find the one that makes use of the current backing
+                    // field
                     var propertyDefinition = SearchPropertiesForMatchingFieldDefinition(field);
                     if (propertyDefinition != null && !Annotations.IsMarked(propertyDefinition))
                         continue;
@@ -4268,7 +4339,8 @@ namespace Mono.Linker.Steps
             bool isCoveredByAnnotations
         )
         {
-            // No need to warn if it's already covered by the Requires attribute or explicit annotations on the method.
+            // No need to warn if it's already covered by the Requires attribute or explicit annotations on the
+            // method.
             if (isCoveredByAnnotations)
                 return false;
 
@@ -4279,7 +4351,8 @@ namespace Mono.Linker.Steps
                 return false;
 
             // Warn only if it has potential dataflow issues, as approximated by our check to see if it requires
-            // the reflection scanner. Checking this will also mark direct dependencies of the method body, if it
+            // the reflection scanner. Checking this will also mark direct dependencies of the method body, if
+            // it
             // hasn't been marked already. A cache ensures this only happens once for the method, whether or not
             // it is accessed via reflection.
             return CheckRequiresReflectionMethodBodyScanner(Context.GetMethodIL(method));
@@ -4291,8 +4364,10 @@ namespace Mono.Linker.Steps
             in MessageOrigin origin
         )
         {
-            // There are only two ways to get there such that the origin isn't the same as the top of the scopestack.
-            // - For DAM on type, the current scope is the caller of GetType, while the origin is the type itself.
+            // There are only two ways to get there such that the origin isn't the same as the top of the
+            // scopestack.
+            // - For DAM on type, the current scope is the caller of GetType, while the origin is the type
+            // itself.
             // - For warnings produced inside compiler-generated code, the current scope is the user code that
             //   owns the compiler-generated code, while the origin is the compiler-generated code.
             // In either case any warnings produced here should use the origin instead of the scopestack.
@@ -4345,15 +4420,18 @@ namespace Mono.Linker.Steps
                 case DependencyKind.MethodForInstantiatedType:
                 case DependencyKind.VirtualNeededDueToPreservedScope:
 
-                // Used when marked because the member must be kept for the type to function (for example explicit layout,
-                // or because the type is included as a whole for some other reasons). This alone should not act as a base
+                // Used when marked because the member must be kept for the type to function (for example explicit
+                // layout,
+                // or because the type is included as a whole for some other reasons). This alone should not act as
+                // a base
                 // for raising a warning.
                 // Note that "include whole type" due to dynamic access is handled specifically in MarkEntireType
                 // and the DependencyKind in that case will be one of the dynamic acccess kinds and not MemberOfType
                 // since in those cases the warnings are desirable (potential access through reflection).
                 case DependencyKind.MemberOfType:
 
-                // Used when marking a cctor because a type or field is kept. This should not warn because we already warn
+                // Used when marking a cctor because a type or field is kept. This should not warn because we
+                // already warn
                 // on access to members of the type which could trigger the cctor.
                 case DependencyKind.CctorForType:
                 case DependencyKind.CctorForField:
@@ -4379,7 +4457,8 @@ namespace Mono.Linker.Steps
 
                 default:
                     // All other cases have the potential of us missing a warning if we don't report it
-                    // It is possible that in some cases we may report the same warning twice, but that's better than not reporting it.
+                    // It is possible that in some cases we may report the same warning twice, but that's better than
+                    // not reporting it.
                     ReportWarningsForReflectionAccess(origin, method, dependencyKind);
                     break;
             }
@@ -4541,7 +4620,8 @@ namespace Mono.Linker.Steps
             if (method.HasOverrides)
             {
                 var assembly = Context.Resolve(method.DeclaringType.Scope);
-                // If this method is in a Copy, CopyUsed, or Save assembly, .overrides won't get swept and we need to keep all of them
+                // If this method is in a Copy, CopyUsed, or Save assembly, .overrides won't get swept and we need
+                // to keep all of them
                 bool markAllOverrides =
                     assembly != null
                     && Annotations.GetAction(assembly)
@@ -4550,9 +4630,12 @@ namespace Mono.Linker.Steps
                             or AssemblyAction.Save;
                 foreach (MethodReference @base in method.Overrides)
                 {
-                    // Method implementing a static interface method will have an override to it - note instance methods usually don't unless they're explicit.
-                    // Calling the implementation method directly has no impact on the interface, and as such it should not mark the interface or its method.
-                    // Only if the interface method is referenced, then all the methods which implemented must be kept, but not the other way round.
+                    // Method implementing a static interface method will have an override to it - note instance methods
+                    // usually don't unless they're explicit.
+                    // Calling the implementation method directly has no impact on the interface, and as such it should
+                    // not mark the interface or its method.
+                    // Only if the interface method is referenced, then all the methods which implemented must be kept,
+                    // but not the other way round.
                     if (
                         !markAllOverrides
                         && Context.Resolve(@base) is MethodDefinition baseDefinition
@@ -4651,7 +4734,8 @@ namespace Mono.Linker.Steps
         {
             switch (parentDependencyKind)
             {
-                // If the member is marked due to descriptor or similar, propagate the original reason to suppress some warnings correctly
+                // If the member is marked due to descriptor or similar, propagate the original reason to suppress
+                // some warnings correctly
                 case DependencyKind.AlreadyMarked:
                 case DependencyKind.TypePreserve:
                 case DependencyKind.PreservedMethod:
@@ -4892,9 +4976,11 @@ namespace Mono.Linker.Steps
 
             foreach (OverrideInformation ov in base_methods)
             {
-                // We should add all interface base methods to _virtual_methods for virtual override annotation validation
+                // We should add all interface base methods to _virtual_methods for virtual override annotation
+                // validation
                 // Interfaces from preserved scope will be missed if we don't add them here
-                // This will produce warnings for all interface methods and virtual methods regardless of whether the interface, interface implementation, or interface method is kept or not.
+                // This will produce warnings for all interface methods and virtual methods regardless of whether
+                // the interface, interface implementation, or interface method is kept or not.
                 if (ov.Base.DeclaringType.IsInterface && !method.DeclaringType.IsInterface)
                 {
                     // These are all virtual, no need to check IsVirtual before adding to list
@@ -4955,7 +5041,8 @@ namespace Mono.Linker.Steps
 
             if (method.HasThis && !method.DeclaringType.IsImport)
             {
-                // This is probably Mono-specific. One can't have InternalCall or P/invoke instance methods in CoreCLR or .NET.
+                // This is probably Mono-specific. One can't have InternalCall or P/invoke instance methods in
+                // CoreCLR or .NET.
                 MarkFields(
                     method.DeclaringType,
                     includeStaticFields,
@@ -5159,9 +5246,11 @@ namespace Mono.Linker.Steps
             return false;
         }
 
-        // Keep the return value of this method in sync with that of CheckRequiresReflectionMethodBodyScanner.
+        // Keep the return value of this method in sync with that of
+        // CheckRequiresReflectionMethodBodyScanner.
         // It computes the same value, while also marking as it goes, as an optimization.
-        // This should only be called behind a check to IsProcessed for the method or corresponding user method,
+        // This should only be called behind a check to IsProcessed for the method or corresponding user
+        // method,
         // to avoid recursion.
         bool MarkAndCheckRequiresReflectionMethodBodyScanner(MethodIL methodIL)
         {
@@ -5248,8 +5337,10 @@ namespace Mono.Linker.Steps
 
         void MarkInterfacesNeededByBodyStack(MethodIL methodIL)
         {
-            // If a type could be on the stack in the body and an interface it implements could be on the stack on the body
-            // then we need to mark that interface implementation.  When this occurs it is not safe to remove the interface implementation from the type
+            // If a type could be on the stack in the body and an interface it implements could be on the stack
+            // on the body
+            // then we need to mark that interface implementation.  When this occurs it is not safe to remove
+            // the interface implementation from the type
             // even if the type is never instantiated
             var implementations = new InterfacesOnStackScanner(Context).GetReferencedInterfaces(
                 methodIL
@@ -5270,7 +5361,8 @@ namespace Mono.Linker.Steps
                 Code.Stfld
                 or Code.Stsfld
                 or
-                // Field address loads (as those can be used to store values to annotated field and thus must be checked)
+                // Field address loads (as those can be used to store values to annotated field and thus must be
+                // checked)
                 Code.Ldflda
                 or Code.Ldsflda =>
                     ReflectionMethodBodyScanner.RequiresReflectionMethodBodyScannerForAccess(
@@ -5457,7 +5549,8 @@ namespace Mono.Linker.Steps
 
             using var localScope = origin.HasValue ? ScopeStack.PushScope(origin.Value) : null;
 
-            // Blame the type that has the interfaceimpl, expecting the type itself to get marked for other reasons.
+            // Blame the type that has the interfaceimpl, expecting the type itself to get marked for other
+            // reasons.
             MarkCustomAttributes(iface, new DependencyInfo(DependencyKind.CustomAttribute, iface));
             // Blame the interface type on the interfaceimpl itself.
             MarkType(
@@ -5482,7 +5575,8 @@ namespace Mono.Linker.Steps
         }
 
         //
-        // Tries to mark additional dependencies used in reflection like calls (e.g. typeof (MyClass).GetField ("fname"))
+        // Tries to mark additional dependencies used in reflection like calls (e.g. typeof
+        // (MyClass).GetField ("fname"))
         //
         protected virtual void MarkReflectionLikeDependencies(
             MethodIL methodIL,
@@ -5492,9 +5586,11 @@ namespace Mono.Linker.Steps
             Debug.Assert(
                 !CompilerGeneratedState.IsNestedFunctionOrStateMachineMember(methodIL.Method)
             );
-            // requiresReflectionMethodBodyScanner tells us whether the method body itself requires a dataflow scan.
+            // requiresReflectionMethodBodyScanner tells us whether the method body itself requires a dataflow
+            // scan.
 
-            // If the method body owns any compiler-generated code, we might still need to do a scan of it together with
+            // If the method body owns any compiler-generated code, we might still need to do a scan of it
+            // together with
             // all of the compiler-generated code it owns, so first check any compiler-generated callees.
             if (
                 Context.CompilerGeneratedState.TryGetCompilerGeneratedCalleesForUserMethod(

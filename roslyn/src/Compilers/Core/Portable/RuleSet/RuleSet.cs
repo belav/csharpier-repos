@@ -314,8 +314,10 @@ namespace Microsoft.CodeAnalysis
 
 #nullable enable
         /// <summary>
-        /// Parses the ruleset file at the given <paramref name="rulesetFileFullPath"/> and returns the following diagnostic options from the parsed file:
-        /// 1) A map of <paramref name="specificDiagnosticOptions"/> from rule ID to <see cref="ReportDiagnostic"/> option.
+        /// Parses the ruleset file at the given <paramref name="rulesetFileFullPath"/> and returns the
+        // following diagnostic options from the parsed file:
+        /// 1) A map of <paramref name="specificDiagnosticOptions"/> from rule ID to <see
+        // cref="ReportDiagnostic"/> option.
         /// 2) A global <see cref="ReportDiagnostic"/> option for all rules in the ruleset file.
         /// </summary>
         public static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(

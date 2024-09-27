@@ -741,10 +741,12 @@ namespace System.Windows.Forms
             bool includeColors
         )
         {
-            /*
-             * System.InvalidOperationException :: The cell has no associated System.Windows.Forms.DataGridView, or the cell's System.Windows.Forms.DataGridViewCell.ColumnIndex is less than 0.
-             * System.ArgumentOutOfRangeException :: rowIndex is less than 0, or greater than or equal to the number of rows in the parent System.Windows.Forms.DataGridView.
-             * */
+/*
+* System.InvalidOperationException :: The cell has no associated System.Windows.Forms.DataGridView,
+or the cell's System.Windows.Forms.DataGridViewCell.ColumnIndex is less than 0.
+* System.ArgumentOutOfRangeException :: rowIndex is less than 0, or greater than or equal to the
+number of rows in the parent System.Windows.Forms.DataGridView.
+* */
 
             if (DataGridView == null)
                 throw new InvalidOperationException(

@@ -190,7 +190,8 @@ public class UnixDomainSocketsTest : TestApplicationErrorLoggerLoggedTest
                 await host.StartAsync().DefaultTimeout();
 
                 // https://github.com/dotnet/corefx/issues/5999
-                // .NET Core HttpClient does not support unix sockets, it's difficult to parse raw response data. below is a little hacky way.
+                // .NET Core HttpClient does not support unix sockets, it's difficult to parse raw response data.
+                // below is a little hacky way.
                 using (
                     var socket = new Socket(
                         AddressFamily.Unix,

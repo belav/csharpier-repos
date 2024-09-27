@@ -20,15 +20,18 @@ namespace Microsoft.CodeAnalysis.Remote
     {
         static SolutionAssetCache()
         {
-            // CRITICAL: The size SharedStopwatch is the size of a TimeSpan (which itself is the size of a long).  This
-            // allows stopwatches to be atomically overwritten, without a concern for torn writes, as long as we're
+            // CRITICAL: The size SharedStopwatch is the size of a TimeSpan (which itself is the size of a
+            // long).  This
+            // allows stopwatches to be atomically overwritten, without a concern for torn writes, as long as
+            // we're
             // running on 64bit machines.  Make sure this value doesn't change as that will cause these current
             // consumers to be invalid.
             RoslynDebug.Assert(Marshal.SizeOf(typeof(SharedStopwatch)) == 8);
         }
 
         /// <summary>
-        /// Workspace we are associated with.  When we purge items from teh cache, we will avoid any items associated
+        /// Workspace we are associated with.  When we purge items from teh cache, we will avoid any items
+        // associated
         /// with the items in its 'CurrentSolution'.
         /// </summary>
         private readonly RemoteWorkspace? _remoteWorkspace;
@@ -129,11 +132,16 @@ namespace Microsoft.CodeAnalysis.Remote
             // Stopwatch wraps a TimeSpan (which is only 64bits) (asserted in our shared constructor). so this
             // assignment can be done safely without a concern for torn writes on 64 systems.
             //
-            // Note: on 32 bit systems there could be an issue here both with a torn write/read or torn write/write. We
-            // think that's probably ok as a torn read only leads to suboptimal behavior (dropping something early, or
-            // keeping something around till the next purge), and a torn write should likely still lead to reasonable
-            // data being written as both writers will likely still write something reasonable once both writes go
-            // through.  e.g. if you have a writer writing 1234-5678 and one writing 1235-0000, then getting 1235-5678
+            // Note: on 32 bit systems there could be an issue here both with a torn write/read or torn
+            // write/write. We
+            // think that's probably ok as a torn read only leads to suboptimal behavior (dropping something
+            // early, or
+            // keeping something around till the next purge), and a torn write should likely still lead to
+            // reasonable
+            // data being written as both writers will likely still write something reasonable once both writes
+            // go
+            // through.  e.g. if you have a writer writing 1234-5678 and one writing 1235-0000, then getting
+            // 1235-5678
             // or 1234-0000 is still fine as a final outcome.
             entry.Stopwatch = SharedStopwatch.StartNew();
         }
@@ -191,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Remote
 
             using (Logger.LogBlock(FunctionId.AssetStorage_CleanAssets, cancellationToken))
             {
-                // Ensure that if our remote workspace has a current solution, that we don't purge any items associated
+                // Ensure that if our remote workspace has a current solution, that we don't purge any items
+                // associated
                 // with that solution.
                 PooledHashSet<Checksum>? pinnedChecksums = null;
                 try

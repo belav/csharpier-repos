@@ -919,7 +919,8 @@ namespace System.ServiceModel.Description
             );
         }
 
-        // This method should only return null when endpointConfiguration is specified on the ChannelEndpointElement and no ChannelEndpointElement matching the
+        // This method should only return null when endpointConfiguration is specified on the
+        // ChannelEndpointElement and no ChannelEndpointElement matching the
         // endpointConfiguration name is found.  All other error conditions should throw.
         [Fx.Tag.SecurityNote(
             Critical = "Handles config objects, which should not be leaked.",
@@ -1101,7 +1102,8 @@ namespace System.ServiceModel.Description
         )
         {
             // copy channelEndpointElement so that it can potentially be modified by the StandardEndpointElement
-            // the properties collection of the instance seviceEndpointElement created by System.Configuration is read-only.
+            // the properties collection of the instance seviceEndpointElement created by System.Configuration
+            // is read-only.
             // keeping original serviceEndpointElement so that its context can be used for the lookups.
             ChannelEndpointElement channelEndpointElementCopy = new ChannelEndpointElement();
             channelEndpointElementCopy.Copy(channelEndpointElement);
@@ -1365,8 +1367,10 @@ namespace System.ServiceModel.Description
         )
         {
             // copy serviceEndpointElement so that it can potentially be modified by the StandardEndpointElement
-            // the properties collection of the instance seviceEndpointElement created by System.Configuration is read-only.
-            // keeping original serviceEndpointElement so that its context can be used to lookup endpoint behaviors.
+            // the properties collection of the instance seviceEndpointElement created by System.Configuration
+            // is read-only.
+            // keeping original serviceEndpointElement so that its context can be used to lookup endpoint
+            // behaviors.
             ServiceEndpointElement serviceEndpointElementCopy = new ServiceEndpointElement();
             serviceEndpointElementCopy.Copy(serviceEndpointElement);
 
@@ -1600,7 +1604,8 @@ namespace System.ServiceModel.Description
             }
         }
 
-        // This method should only return null when bindingConfiguration is specified on the BindingElement and no BindingElement matching the
+        // This method should only return null when bindingConfiguration is specified on the BindingElement
+        // and no BindingElement matching the
         // bindingConfiguration name is found.  All other error conditions should throw.
         [Fx.Tag.SecurityNote(
             Critical = "Handles config objects, which should not be leaked.",
@@ -1923,7 +1928,8 @@ namespace System.ServiceModel.Description
                 // A standard endpoint should not be returned in the case of useChannelElementKind = false.
                 // This is because useChannelElementKind = false only when this method is called by
                 // LoadChannelBehaviors (the overload that takes a ServiceEndpoint and a string(configurationName)).
-                // LoadChannelBehaviors is called for the purposes of applying channel behaviors to a newly created service endpoint.
+                // LoadChannelBehaviors is called for the purposes of applying channel behaviors to a newly created
+                // service endpoint.
                 // In the case of standard endpoints, the service endpoints are already fully configured.
                 // Reapplying behaviors would not only be redundant but may cause exceptions to be thrown.
 

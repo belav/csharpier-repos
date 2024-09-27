@@ -20,13 +20,15 @@ namespace System.Buffers
 
         /// <summary>
         /// Gets the <see cref="Memory{Byte}"/> which represents this native memory.
-        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="Memory{Byte}"/>.
+        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see
+        // cref="Memory{Byte}"/>.
         /// </summary>
         public abstract Memory<T> Memory { get; }
 
         /// <summary>
         /// Gets the <see cref="Span{Byte}"/> which represents this native memory.
-        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="Span{Byte}"/>.
+        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see
+        // cref="Span{Byte}"/>.
         /// </summary>
         public abstract Span<T> Span { get; }
 
@@ -51,21 +53,24 @@ namespace System.Buffers
 
         /// <summary>
         /// Gets the <see cref="Span{Byte}"/> which represents this native memory.
-        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="Span{Byte}"/>.
+        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see
+        // cref="Span{Byte}"/>.
         /// </summary>
         public static implicit operator Span<T>(BoundedMemory<T> boundedMemory) =>
             boundedMemory.Span;
 
         /// <summary>
         /// Gets the <see cref="ReadOnlySpan{Byte}"/> which represents this native memory.
-        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="ReadOnlySpan{Byte}"/>.
+        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see
+        // cref="ReadOnlySpan{Byte}"/>.
         /// </summary>
         public static implicit operator ReadOnlySpan<T>(BoundedMemory<T> boundedMemory) =>
             boundedMemory.Span;
 
         /// <summary>
         /// Gets a reference to the element at the specified index.
-        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the reference.
+        /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the
+        // reference.
         /// </summary>
         public ref T this[int index] => ref Span[index];
     }

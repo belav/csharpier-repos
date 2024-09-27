@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     Converts <see cref="DateTime" /> to and from arrays of bytes.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class DateTimeOffsetToBytesConverter : ValueConverter<DateTimeOffset, byte[]>
 {
@@ -19,7 +20,8 @@ public class DateTimeOffsetToBytesConverter : ValueConverter<DateTimeOffset, byt
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public DateTimeOffsetToBytesConverter()
         : this(null) { }
@@ -28,10 +30,12 @@ public class DateTimeOffsetToBytesConverter : ValueConverter<DateTimeOffset, byt
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     public DateTimeOffsetToBytesConverter(ConverterMappingHints? mappingHints)
@@ -49,10 +53,14 @@ public class DateTimeOffsetToBytesConverter : ValueConverter<DateTimeOffset, byt
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static byte[] ToBytes(DateTimeOffset value)
@@ -63,10 +71,14 @@ public class DateTimeOffsetToBytesConverter : ValueConverter<DateTimeOffset, byt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static DateTimeOffset FromBytes(byte[] bytes)

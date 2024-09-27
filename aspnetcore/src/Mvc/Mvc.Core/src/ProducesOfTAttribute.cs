@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <inheritdoc />
-/// <typeparam name="T">The <see cref="Type"/> of object that is going to be written in the response.</typeparam>
+/// <typeparam name="T">The <see cref="Type"/> of object that is going to be written in the
+// response.</typeparam>
 /// <remarks>
 /// This is a derived generic variant of the <see cref="ProducesAttribute"/>.
 /// Ensure that only one instance of either attribute is provided on the target.

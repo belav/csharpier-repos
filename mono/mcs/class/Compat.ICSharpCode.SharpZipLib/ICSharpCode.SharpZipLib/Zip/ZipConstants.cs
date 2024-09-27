@@ -115,7 +115,8 @@ namespace ICSharpCode.SharpZipLib.Zip
 
         static int defaultCodePage = 0; // 0 gives default code page, set it to whatever you like or alternatively alter it via property at runtime for more flexibility
 
-        // Some care for compatability purposes is required as you can specify unicode code pages here.... if this way of working seems ok
+        // Some care for compatability purposes is required as you can specify unicode code pages here....
+        // if this way of working seems ok
         // then some protection may be added to make the interface a bit more robust perhaps.
 
         public static int DefaultCodePage

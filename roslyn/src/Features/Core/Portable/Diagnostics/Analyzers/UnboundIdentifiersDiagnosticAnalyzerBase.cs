@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
     /// See https://github.com/dotnet/roslyn/issues/7536.  IDE should not be analyzing and reporting
     /// compiler diagnostics for normal constructs.  However, the compiler does not report issues
     /// for incomplete members.  That means that if you just have `public DateTime` that that is counted
-    /// as an incomplete member where no binding happens at all.  This means that features like 'add import'
+    /// as an incomplete member where no binding happens at all.  This means that features like 'add
+    // import'
     /// won't work here to offer to add `using System;` if that is all that is written.
     /// <para>
     /// This definitely needs to be fixed at the compiler layer.  However, until that happens, this is
@@ -37,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.AddImport
         protected abstract ImmutableArray<TLanguageKindEnum> SyntaxKindsOfInterest { get; }
         protected abstract bool IsNameOf(SyntaxNode node);
 
-        // High priority as we need to know about unbound identifiers so that we can run add-using to fix them.
+        // High priority as we need to know about unbound identifiers so that we can run add-using to fix
+        // them.
         public bool IsHighPriority => true;
 
         public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>

@@ -508,7 +508,8 @@ public partial class HttpConnectionTests
                     ),
                     async (connection) =>
                     {
-                        // We aggregate failures that happen when we start the transport. The operation canceled exception will
+                        // We aggregate failures that happen when we start the transport. The operation canceled exception
+                        // will
                         // be an inner exception.
                         var ex = await Assert
                             .ThrowsAsync<AggregateException>(

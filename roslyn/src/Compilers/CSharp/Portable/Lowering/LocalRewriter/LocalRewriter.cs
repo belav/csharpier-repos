@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private ArrayBuilder<LocalSymbol>? _additionalLocals;
 
         /// <summary>
-        /// The original body of the current lambda or local function body, or null if not currently lowering a lambda.
+        /// The original body of the current lambda or local function body, or null if not currently
+        // lowering a lambda.
         /// </summary>
         private BoundBlock? _currentLambdaBody;
 
@@ -184,7 +185,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (localRewriter._needsSpilling && !loweredStatement.HasErrors)
                 {
-                    // Move spill sequences to a top-level statement. This handles "lifting" await and the switch expression.
+                    // Move spill sequences to a top-level statement. This handles "lifting" await and the switch
+                    // expression.
                     var spilledStatement = SpillSequenceSpiller.Rewrite(
                         loweredStatement,
                         method,
@@ -316,7 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If you *really* need to change the type, consider using an indirect method
             // like compound assignment does (extra flag only passed when it is an expression
             // statement means that this constraint is not violated).
-            // Dynamic type will be erased in emit phase. It is considered equivalent to Object in lowered bound trees.
+            // Dynamic type will be erased in emit phase. It is considered equivalent to Object in lowered bound
+            // trees.
             // Unused deconstructions are lowered to produce a return value that isn't a tuple type.
             Debug.Assert(
                 visited == null
@@ -660,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             OutDeconstructVarPendingInference node
         )
         {
-            // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive past that stage
+            // OutDeconstructVarPendingInference nodes are only used within initial binding, but don't survive
+            // past that stage
             throw ExceptionUtilities.Unreachable();
         }
 
@@ -668,7 +672,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             DeconstructionVariablePendingInference node
         )
         {
-            // DeconstructionVariablePendingInference nodes are only used within initial binding, but don't survive past that stage
+            // DeconstructionVariablePendingInference nodes are only used within initial binding, but don't
+            // survive past that stage
             throw ExceptionUtilities.Unreachable();
         }
 
@@ -743,8 +748,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
-        /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember, out MethodSymbol, bool)"/> instead!
+        /// This function provides a false sense of security, it is likely going to surprise you when the
+        // requested member is missing.
+        /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember,
+        // out MethodSymbol, bool)"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
         private MethodSymbol UnsafeGetSpecialTypeMethod(
@@ -756,8 +763,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// This function provides a false sense of security, it is likely going to surprise you when the requested member is missing.
-        /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember, CSharpCompilation, BindingDiagnosticBag, out MethodSymbol, bool)"/> instead!
+        /// This function provides a false sense of security, it is likely going to surprise you when the
+        // requested member is missing.
+        /// Recommendation: Do not use, use <see cref="TryGetSpecialTypeMethod(SyntaxNode, SpecialMember,
+        // CSharpCompilation, BindingDiagnosticBag, out MethodSymbol, bool)"/> instead!
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
         private static MethodSymbol UnsafeGetSpecialTypeMethod(
@@ -1155,15 +1164,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         // There are three situations in which the language permits passing rvalues by reference.
-        // (technically there are 5, but we can ignore COM and dynamic here, since that results in byval semantics regardless of the parameter ref kind)
+        // (technically there are 5, but we can ignore COM and dynamic here, since that results in byval
+        // semantics regardless of the parameter ref kind)
         //
         // #1: Receiver of a struct/generic method call.
         //
         // The language only requires that receivers of method calls must be readable (RValues are ok).
         //
         // However the underlying implementation passes receivers of struct methods by reference.
-        // In such situations it may be possible for the call to cause or observe writes to the receiver variable.
-        // As a result it is not valid to replace receiver variable with a reference to it or the other way around.
+        // In such situations it may be possible for the call to cause or observe writes to the receiver
+        // variable.
+        // As a result it is not valid to replace receiver variable with a reference to it or the other way
+        // around.
         //
         // Example1:
         //        static int x = 123;
@@ -1198,7 +1210,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         // #2: Ordinary byval argument passed to an "in" parameter.
         //
         // The language only requires that ordinary byval arguments must be readable (RValues are ok).
-        // However if the target parameter is an "in" parameter, the underlying implementation passes by reference.
+        // However if the target parameter is an "in" parameter, the underlying implementation passes by
+        // reference.
         //
         // Example:
         //        static int x = 123;
@@ -1216,14 +1229,19 @@ namespace Microsoft.CodeAnalysis.CSharp
         //            Console.WriteLine(y);
         //        }
         //
-        // #3: Ordinary byval interpolated string expression passed to a "ref" interpolated string handler value type.
+        // #3: Ordinary byval interpolated string expression passed to a "ref" interpolated string handler
+        // value type.
         //
-        // Interpolated string expressions passed to a builder type are lowered into a handler form. When the handler type
-        // is a value type (struct, or type parameter constrained to struct (though the latter will fail to bind today because
-        // there's no constructor)), the final handler instance type is passed by reference if the parameter is by reference.
+        // Interpolated string expressions passed to a builder type are lowered into a handler form. When
+        // the handler type
+        // is a value type (struct, or type parameter constrained to struct (though the latter will fail to
+        // bind today because
+        // there's no constructor)), the final handler instance type is passed by reference if the parameter
+        // is by reference.
         //
         // Example:
-        //        M($""); // Language lowers this to a sequence of creating CustomHandler, appending all values, and evaluating to the builder
+        //        M($""); // Language lowers this to a sequence of creating CustomHandler, appending all
+        // values, and evaluating to the builder
         //        static void M(ref CustomHandler c) { }
         //
         // NB: The readonliness is not considered here.
@@ -1253,7 +1271,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.DeconstructValuePlaceholder:
                     // we will consider that placeholder always represents a temp local
-                    // the assumption should be confirmed or changed when https://github.com/dotnet/roslyn/issues/24160 is fixed
+                    // the assumption should be confirmed or changed when https://github.com/dotnet/roslyn/issues/24160
+                    // is fixed
                     return true;
 
                 case BoundKind.InterpolatedStringArgumentPlaceholder:

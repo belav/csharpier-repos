@@ -217,14 +217,19 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Reads a line of characters asynchronously from the current string and returns the data as a string.
+        /// Reads a line of characters asynchronously from the current string and returns the data as a
+        // string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A value task that represents the asynchronous read operation. The value of the <c>TResult</c>
-        /// parameter contains the next line from the string reader, or is <see langword="null" /> if all of the characters have been read.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <returns>A value task that represents the asynchronous read operation. The value of the
+        // <c>TResult</c>
+        /// parameter contains the next line from the string reader, or is <see langword="null" /> if all of
+        // the characters have been read.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is
+        // larger than <see cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The string reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <example>
         /// The following example shows how to read one line at a time from a string asynchronously.
         /// <code lang="C#">
@@ -255,14 +260,18 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Reads all characters from the current position to the end of the string asynchronously and returns them as a single string.
+        /// Reads all characters from the current position to the end of the string asynchronously and
+        // returns them as a single string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c> parameter contains
+        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c>
+        // parameter contains
         /// a string with the characters from the current position to the end of the string.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see
+        // cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The string reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <example>
         /// The following example shows how to read an entire string asynchronously.
         /// <code lang="C#">

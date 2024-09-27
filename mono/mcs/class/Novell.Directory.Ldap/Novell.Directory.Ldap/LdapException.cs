@@ -88,7 +88,8 @@ namespace Novell.Directory.Ldap
     /// <tr><td> 8</td><td>{@link #STRONG_AUTH_REQUIRED} (strongAuthRequired) </td></tr>
     /// <tr><td> 10</td><td>{@link #REFERRAL} (referral) </td></tr>
     /// <tr><td> 11</td><td>{@link #ADMIN_LIMIT_EXCEEDED} (adminLimitExceeded) </td></tr>
-    /// <tr><td> 12</td><td>{@link #UNAVAILABLE_CRITICAL_EXTENSION} (unavailableCriticalExtension) </td></tr>
+    /// <tr><td> 12</td><td>{@link #UNAVAILABLE_CRITICAL_EXTENSION} (unavailableCriticalExtension)
+    // </td></tr>
     /// <tr><td> 13</td><td>{@link #CONFIDENTIALITY_REQUIRED} (confidentialityRequired) </td></tr>
     /// <tr><td> 14</td><td>{@link #SASL_BIND_IN_PROGRESS} (saslBindInProgress) </td></tr>
     /// <tr><td> 16</td><td>{@link #NO_SUCH_ATTRIBUTE} (noSuchAttribute) </td></tr>
@@ -102,7 +103,8 @@ namespace Novell.Directory.Ldap
     /// <tr><td> 34</td><td>{@link #INVALID_DN_SYNTAX} (invalidDNSyntax) </td></tr>
     /// <tr><td> 35</td><td>{@link #IS_LEAF} (isLeaf) </td></tr>
     /// <tr><td> 36</td><td>{@link #ALIAS_DEREFERENCING_PROBLEM} (aliasDereferencingProblem) </td></tr>
-    /// <tr><td> 48</td><td>{@link #INAPPROPRIATE_AUTHENTICATION} (inappropriateAuthentication) </td></tr>
+    /// <tr><td> 48</td><td>{@link #INAPPROPRIATE_AUTHENTICATION} (inappropriateAuthentication)
+    // </td></tr>
     /// <tr><td> 49</td><td>{@link #INVALID_CREDENTIALS} (invalidCredentials) </td></tr>
     /// <tr><td> 50</td><td>{@link #INSUFFICIENT_ACCESS_RIGHTS} (insufficientAccessRights) </td></tr>
     /// <tr><td> 51</td><td>{@link #BUSY} (busy) </td></tr>
@@ -220,15 +222,15 @@ namespace Novell.Directory.Ldap
             get { return resultCodeToString(); }
         }
 
-        /*	public override System.String Message
-            {
-                get
-                {
-                    return resultCodeToString();
-                }
-                
-            }
-        */
+/*	public override System.String Message
+{
+get
+{
+return resultCodeToString();
+}
+
+}
+*/
         // The Result Code
         private int resultCode = 0;
 
@@ -762,10 +764,10 @@ namespace Novell.Directory.Ldap
         /// </summary>
         public const int SSL_PROVIDER_NOT_FOUND = 114;
 
-        /*
-        * Note: Error strings have been pulled out into
-        * ResultCodeMessages.properties
-        */
+/*
+* Note: Error strings have been pulled out into
+* ResultCodeMessages.properties
+*/
 
         /// <summary> Constructs a default exception with no specific error information.</summary>
         public LdapException()
@@ -1037,7 +1039,7 @@ namespace Novell.Directory.Ldap
         /// <param name="matchedDN">     The maximal subset of a specified DN which could
         /// be matched by the server on a search operation.
         /// </param>
-        /* package */
+/* package */
         internal LdapException(
             System.String messageOrKey,
             System.Object[] arguments,
@@ -1137,7 +1139,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="exception">The name of the exception class
         /// </param>
-        /* package */
+/* package */
         internal virtual System.String getExceptionString(System.String exception)
         {
             System.String tmsg;

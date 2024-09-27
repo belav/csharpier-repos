@@ -209,11 +209,14 @@ namespace System
         /// Specifies that a garbage collection notification should be raised when conditions are favorable
         /// for a full garbage collection and when the collection has been completed.
         /// </summary>
-        /// <param name="maxGenerationThreshold">A number between 1 and 99 that specifies when the notification
+        /// <param name="maxGenerationThreshold">A number between 1 and 99 that specifies when the
+        // notification
         /// should be raised based on the objects allocated in Gen 2.</param>
-        /// <param name="largeObjectHeapThreshold">A number between 1 and 99 that specifies when the notification
+        /// <param name="largeObjectHeapThreshold">A number between 1 and 99 that specifies when the
+        // notification
         /// should be raised based on the objects allocated in the large object heap.</param>
-        /// <exception cref="ArgumentOutOfRangeException">If either of the two arguments are not between 1 and 99</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If either of the two arguments are not between 1
+        // and 99</exception>
         /// <exception cref="InvalidOperationException">If Concurrent GC is enabled</exception>"
         public static void RegisterForFullGCNotification(
             int maxGenerationThreshold,
@@ -499,8 +502,10 @@ namespace System
         /// Exits the current no GC region.
         /// </summary>
         /// <exception cref="InvalidOperationException">If the GC is not in a no GC region</exception>
-        /// <exception cref="InvalidOperationException">If the no GC region was exited due to an induced GC</exception>
-        /// <exception cref="InvalidOperationException">If the no GC region was exited due to memory allocations
+        /// <exception cref="InvalidOperationException">If the no GC region was exited due to an induced
+        // GC</exception>
+        /// <exception cref="InvalidOperationException">If the no GC region was exited due to memory
+        // allocations
         /// exceeding the amount given to <see cref="TryStartNoGCRegion(long)"/></exception>
         public static void EndNoGCRegion()
         {
@@ -764,10 +769,13 @@ namespace System
         }
 
         /// <summary>
-        /// Gets the Configurations used by the Garbage Collector. The value of these configurations used don't necessarily have to be the same as the ones that are passed by the user.
-        /// For example for the "GCHeapCount" configuration, if the user supplies a value higher than the number of CPUs, the configuration that will be used is that of the number of CPUs.
+        /// Gets the Configurations used by the Garbage Collector. The value of these configurations used
+        // don't necessarily have to be the same as the ones that are passed by the user.
+        /// For example for the "GCHeapCount" configuration, if the user supplies a value higher than the
+        // number of CPUs, the configuration that will be used is that of the number of CPUs.
         /// </summary>
-        /// <returns> A Read Only Dictionary with configuration names and values of the configuration as the keys and values of the dictionary, respectively.</returns>
+        /// <returns> A Read Only Dictionary with configuration names and values of the configuration as the
+        // keys and values of the dictionary, respectively.</returns>
         public static unsafe IReadOnlyDictionary<string, object> GetConfigurationVariables()
         {
             GCConfigurationContext context = new GCConfigurationContext
@@ -854,12 +862,14 @@ namespace System
         }
 
         /// <summary>Gets garbage collection memory information.</summary>
-        /// <returns>An object that contains information about the garbage collector's memory usage.</returns>
+        /// <returns>An object that contains information about the garbage collector's memory
+        // usage.</returns>
         public static GCMemoryInfo GetGCMemoryInfo() => GetGCMemoryInfo(GCKind.Any);
 
         /// <summary>Gets garbage collection memory information.</summary>
         /// <param name="kind">The kind of collection for which to retrieve memory information.</param>
-        /// <returns>An object that contains information about the garbage collector's memory usage.</returns>
+        /// <returns>An object that contains information about the garbage collector's memory
+        // usage.</returns>
         public static GCMemoryInfo GetGCMemoryInfo(GCKind kind)
         {
             if ((kind < GCKind.Any) || (kind > GCKind.Background))

@@ -318,23 +318,24 @@ namespace MonoTests.System.ServiceModel.Channels
                     x.WriteNode(r2, false);
             }
 
-            /*
-            // Seems like there is some attribute order differences
-            // in XmlDictionaryReader or XmlWriter, so don't compare
-            // XML in raw strings.
+/*
+// Seems like there is some attribute order differences
+// in XmlDictionaryReader or XmlWriter, so don't compare
+// XML in raw strings.
 
-            StringWriter sw = new StringWriter ();
-            XmlWriterSettings settings = new XmlWriterSettings ();
-            settings.OmitXmlDeclaration = true;
-            settings.ConformanceLevel = ConformanceLevel.Fragment;
-            XmlWriter w = XmlWriter.Create (sw, settings);
-            Assert.AreEqual (ReadState.Interactive, r.ReadState, "#1-1");
-            Assert.AreEqual (XmlNodeType.Element, r.NodeType, "#1-2");
-            while (!r.EOF)
-                w.WriteNode (r, false);
-            w.Flush ();
-            Assert.AreEqual ("<Action a:mustUnderstand=\"1\" xmlns=\"http://www.w3.org/2005/08/addressing\" xmlns:a=\"http://www.w3.org/2003/05/soap-envelope\">test</Action>", sw.ToString (), "#2");
-            */
+StringWriter sw = new StringWriter ();
+XmlWriterSettings settings = new XmlWriterSettings ();
+settings.OmitXmlDeclaration = true;
+settings.ConformanceLevel = ConformanceLevel.Fragment;
+XmlWriter w = XmlWriter.Create (sw, settings);
+Assert.AreEqual (ReadState.Interactive, r.ReadState, "#1-1");
+Assert.AreEqual (XmlNodeType.Element, r.NodeType, "#1-2");
+while (!r.EOF)
+w.WriteNode (r, false);
+w.Flush ();
+Assert.AreEqual ("<Action a:mustUnderstand=\"1\" xmlns=\"http://www.w3.org/2005/08/addressing\"
+xmlns:a=\"http://www.w3.org/2003/05/soap-envelope\">test</Action>", sw.ToString (), "#2");
+*/
             Assert.AreEqual(ReadState.Interactive, r.ReadState, "#1-1");
             Assert.AreEqual(XmlNodeType.Element, r.NodeType, "#1-2");
             Assert.AreEqual("Action", r.LocalName, "#1-3");

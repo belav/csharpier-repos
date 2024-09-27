@@ -35,13 +35,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlFormAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.Control"]/*'
+        // />
         public new Form Control
         {
             get { return base.Control as Form; }
         }
 
-        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.Render"]/*'
+        // />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             // Note: <head>, <body> rendered by page adapter, as in HTML case.
@@ -353,7 +355,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         /////////////////////////////////////////////////////////////////////////
         //  PAGINATION SUPPORT
         /////////////////////////////////////////////////////////////////////////
-        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.RenderPager"]/*' />
+        /// <include file='doc\XhtmlBasicFormAdapter.uex'
+        // path='docs/doc[@for="XhtmlFormAdapter.RenderPager"]/*' />
         protected virtual void RenderPager(XhtmlMobileTextWriter writer)
         {
             PagerStyle pagerStyle = Control.PagerStyle;
@@ -434,7 +437,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             }
         }
 
-        /// <include file='doc\XhtmlBasicFormAdapter.uex' path='docs/doc[@for="XhtmlFormAdapter.RenderPagerTag"]/*' />
+        /// <include file='doc\XhtmlBasicFormAdapter.uex'
+        // path='docs/doc[@for="XhtmlFormAdapter.RenderPagerTag"]/*' />
         protected virtual void RenderPagerTag(
             XhtmlMobileTextWriter writer,
             int pageToNavigate,

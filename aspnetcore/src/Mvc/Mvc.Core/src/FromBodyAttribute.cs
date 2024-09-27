@@ -28,12 +28,15 @@ public class FromBodyAttribute
     /// input as valid.
     /// </summary>
     /// <remarks>
-    /// The default behavior is to use framework defaults as configured by <see cref="MvcOptions.AllowEmptyInputInBodyModelBinding"/>.
-    /// Specifying <see cref="EmptyBodyBehavior.Allow"/> or <see cref="EmptyBodyBehavior.Disallow" /> will override the framework defaults.
+    /// The default behavior is to use framework defaults as configured by <see
+    // cref="MvcOptions.AllowEmptyInputInBodyModelBinding"/>.
+    /// Specifying <see cref="EmptyBodyBehavior.Allow"/> or <see cref="EmptyBodyBehavior.Disallow" />
+    // will override the framework defaults.
     /// </remarks>
     public EmptyBodyBehavior EmptyBodyBehavior { get; set; }
 
-    // Since the default behavior is to reject empty bodies if MvcOptions.AllowEmptyInputInBodyModelBinding is not configured,
+    // Since the default behavior is to reject empty bodies if
+    // MvcOptions.AllowEmptyInputInBodyModelBinding is not configured,
     // we'll consider EmptyBodyBehavior.Default the same as EmptyBodyBehavior.Disallow.
     bool IFromBodyMetadata.AllowEmpty => EmptyBodyBehavior == EmptyBodyBehavior.Allow;
 }

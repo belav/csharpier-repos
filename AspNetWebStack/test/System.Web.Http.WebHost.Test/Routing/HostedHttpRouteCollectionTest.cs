@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -374,7 +375,8 @@ namespace System.Web.Http.WebHost.Routing
             );
 
             // Assert
-            // Altough it contains the ignore route, GetVirtualPath from the ignored route will always return null.
+            // Altough it contains the ignore route, GetVirtualPath from the ignored route will always return
+            // null.
             Assert.Equal(1, collection.Count);
             Assert.Null(httpvPathData);
         }

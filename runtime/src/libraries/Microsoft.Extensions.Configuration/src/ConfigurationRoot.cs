@@ -23,7 +23,8 @@ namespace Microsoft.Extensions.Configuration
         /// <summary>
         /// Initializes a Configuration root with a list of providers.
         /// </summary>
-        /// <param name="providers">The <see cref="IConfigurationProvider"/>s for this configuration.</param>
+        /// <param name="providers">The <see cref="IConfigurationProvider"/>s for this
+        // configuration.</param>
         public ConfigurationRoot(IList<IConfigurationProvider> providers)
         {
             ThrowHelper.ThrowIfNull(providers);
@@ -61,7 +62,8 @@ namespace Microsoft.Extensions.Configuration
             this.GetChildrenImplementation(null);
 
         /// <summary>
-        /// Returns a <see cref="IChangeToken"/> that can be used to observe when this configuration is reloaded.
+        /// Returns a <see cref="IChangeToken"/> that can be used to observe when this configuration is
+        // reloaded.
         /// </summary>
         /// <returns>The <see cref="IChangeToken"/>.</returns>
         public IChangeToken GetReloadToken() => _changeToken;
@@ -72,7 +74,8 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="key">The key of the configuration section.</param>
         /// <returns>The <see cref="IConfigurationSection"/>.</returns>
         /// <remarks>
-        ///     This method will never return <c>null</c>. If no matching sub-section is found with the specified key,
+        ///     This method will never return <c>null</c>. If no matching sub-section is found with the
+        // specified key,
         ///     an empty <see cref="IConfigurationSection"/> will be returned.
         /// </remarks>
         public IConfigurationSection GetSection(string key) => new ConfigurationSection(this, key);

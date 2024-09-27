@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         Represents a connection with a relational database.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -22,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -37,26 +39,30 @@ public interface IRelationalConnection
     string? ConnectionString { get; set; }
 
     /// <summary>
-    ///     Gets or sets the underlying <see cref="System.Data.Common.DbConnection" /> used to connect to the database.
+    ///     Gets or sets the underlying <see cref="System.Data.Common.DbConnection" /> used to connect
+    // to the database.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         The connection can only be changed when the existing connection, if any, is not open.
     ///     </para>
     ///     <para>
-    ///         Note that the connection must be disposed by application code since it was not created by Entity Framework.
+    ///         Note that the connection must be disposed by application code since it was not created
+    // by Entity Framework.
     ///     </para>
     /// </remarks>
     [AllowNull]
     DbConnection DbConnection { get; set; }
 
     /// <summary>
-    ///     Sets the underlying <see cref="System.Data.Common.DbConnection" /> used to connect to the database.
+    ///     Sets the underlying <see cref="System.Data.Common.DbConnection" /> used to connect to the
+    // database.
     /// </summary>
     /// <param name="value">The connection object.</param>
     /// <param name="contextOwnsConnection">
     ///     If <see langword="true" />, then EF will take ownership of the connection and will
-    ///     dispose it in the same way it would dispose a connection created by EF. If <see langword="false" />, then the caller still
+    ///     dispose it in the same way it would dispose a connection created by EF. If <see
+    // langword="false" />, then the caller still
     ///     owns the connection and is responsible for its disposal.
     /// </param>
     /// <remarks>
@@ -84,35 +90,42 @@ public interface IRelationalConnection
     /// <summary>
     ///     Opens the connection to the database.
     /// </summary>
-    /// <param name="errorsExpected">Indicate if the connection errors are expected and should be logged as debug message.</param>
-    /// <returns><see langword="true" /> if the underlying connection was actually opened; <see langword="false" /> otherwise.</returns>
+    /// <param name="errorsExpected">Indicate if the connection errors are expected and should be logged
+    // as debug message.</param>
+    /// <returns><see langword="true" /> if the underlying connection was actually opened; <see
+    // langword="false" /> otherwise.</returns>
     bool Open(bool errorsExpected = false);
 
     /// <summary>
     ///     Asynchronously opens the connection to the database.
     /// </summary>
-    /// <param name="errorsExpected">Indicate if the connection errors are expected and should be logged as debug message.</param>
+    /// <param name="errorsExpected">Indicate if the connection errors are expected and should be logged
+    // as debug message.</param>
     /// <param name="cancellationToken">
     ///     A <see cref="CancellationToken" /> to observe while waiting for the task to complete.
     /// </param>
     /// <returns>
-    ///     A task that represents the asynchronous operation, with a value of <see langword="true" /> if the connection
+    ///     A task that represents the asynchronous operation, with a value of <see langword="true" />
+    // if the connection
     ///     was actually opened.
     /// </returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     Task<bool> OpenAsync(CancellationToken cancellationToken, bool errorsExpected = false);
 
     /// <summary>
     ///     Closes the connection to the database.
     /// </summary>
-    /// <returns><see langword="true" /> if the underlying connection was actually closed; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if the underlying connection was actually closed; <see
+    // langword="false" /> otherwise.</returns>
     bool Close();
 
     /// <summary>
     ///     Closes the connection to the database.
     /// </summary>
     /// <returns>
-    ///     A task that represents the asynchronous operation, with a value of <see langword="true" /> if the connection
+    ///     A task that represents the asynchronous operation, with a value of <see langword="true" />
+    // if the connection
     ///     was actually closed.
     /// </returns>
     Task<bool> CloseAsync();

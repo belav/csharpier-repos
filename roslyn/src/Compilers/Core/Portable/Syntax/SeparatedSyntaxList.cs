@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The absolute span of the list elements in characters, including the leading and trailing trivia of the first and last elements.
+        /// The absolute span of the list elements in characters, including the leading and trailing trivia
+        // of the first and last elements.
         /// </summary>
         public TextSpan FullSpan
         {
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The absolute span of the list elements in characters, not including the leading and trailing trivia of the first and last elements.
+        /// The absolute span of the list elements in characters, not including the leading and trailing
+        // trivia of the first and last elements.
         /// </summary>
         public TextSpan Span
         {
@@ -152,7 +154,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns the string representation of the nodes in this list including separators but not including
+        /// Returns the string representation of the nodes in this list including separators but not
+        // including
         /// the first node's leading trivia and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
@@ -169,7 +172,8 @@ namespace Microsoft.CodeAnalysis
         /// the first node's leading trivia, and the last node or token's trailing trivia.
         /// </summary>
         /// <returns>
-        /// The full string representation of the nodes in this list including separators including separators,
+        /// The full string representation of the nodes in this list including separators including
+        // separators,
         /// the first node's leading trivia, and the last node or token's trailing trivia.
         /// </returns>
         public string ToFullString()

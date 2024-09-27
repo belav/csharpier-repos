@@ -6,7 +6,8 @@ using System.Net.Http;
 namespace Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 /// <summary>
-/// Extension methods for configuring an instance of <see cref="HttpRequestMessage"/> with browser-specific options.
+/// Extension methods for configuring an instance of <see cref="HttpRequestMessage"/> with
+// browser-specific options.
 /// </summary>
 public static class WebAssemblyHttpRequestMessageExtensions
 {
@@ -125,11 +126,13 @@ public static class WebAssemblyHttpRequestMessageExtensions
     /// Configures a value for the HTTP request.
     /// </summary>
     /// <param name="requestMessage">The <see cref="HttpRequestMessage"/>.</param>
-    /// <param name="name">The name of the option, which should correspond to a key defined on <see href="https://fetch.spec.whatwg.org/#requestinit"/>.</param>
+    /// <param name="name">The name of the option, which should correspond to a key defined on <see
+    // href="https://fetch.spec.whatwg.org/#requestinit"/>.</param>
     /// <param name="value">The value, which must be JSON-serializable.</param>
     /// <returns>The <see cref="HttpRequestMessage"/>.</returns>
     /// <remarks>
-    /// See <see href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch"/>.
+    /// See <see
+    // href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch"/>.
     /// </remarks>
     public static HttpRequestMessage SetBrowserRequestOption(
         this HttpRequestMessage requestMessage,
@@ -159,7 +162,8 @@ public static class WebAssemblyHttpRequestMessageExtensions
     /// Configures streaming request for the HTTP request.
     /// </summary>
     /// <param name="requestMessage">The <see cref="HttpRequestMessage"/>.</param>
-    /// <param name="streamingEnabled"><see langword="true"/> if streaming is enabled; otherwise <see langword="false"/>.</param>
+    /// <param name="streamingEnabled"><see langword="true"/> if streaming is enabled; otherwise <see
+    // langword="false"/>.</param>
     /// <returns>The <see cref="HttpRequestMessage"/>.</returns>
     /// <remarks>
     /// This API is only effective when the browser HTTP Fetch supports request streaming.
@@ -182,7 +186,8 @@ public static class WebAssemblyHttpRequestMessageExtensions
     /// Configures streaming response for the HTTP request.
     /// </summary>
     /// <param name="requestMessage">The <see cref="HttpRequestMessage"/>.</param>
-    /// <param name="streamingEnabled"><see langword="true"/> if streaming is enabled; otherwise <see langword="false"/>.</param>
+    /// <param name="streamingEnabled"><see langword="true"/> if streaming is enabled; otherwise <see
+    // langword="false"/>.</param>
     /// <returns>The <see cref="HttpRequestMessage"/>.</returns>
     /// <remarks>
     /// This API is only effective when the browser HTTP Fetch supports response streaming.

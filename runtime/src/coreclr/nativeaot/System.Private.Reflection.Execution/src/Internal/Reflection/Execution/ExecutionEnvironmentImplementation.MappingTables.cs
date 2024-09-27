@@ -21,15 +21,24 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    //==========================================================================================================
+    //
+    //
+    //
+    // //==========================================================================================================
     // These ExecutionEnvironment entrypoints provide access to the NUTC-generated blob information that
     // enables Reflection invoke and tie-ins to native Type artifacts.
     //
-    // - Except when otherwise noted, ExecutionEnvironment methods use the "TryGet*" pattern rather than throwing exceptions.
+    // - Except when otherwise noted, ExecutionEnvironment methods use the "TryGet*" pattern rather than
+    // throwing exceptions.
     //
-    // - All methods on this class must be multi-thread-safe. Reflection can and does invoke them on different threads with no synchronization of its own.
+    // - All methods on this class must be multi-thread-safe. Reflection can and does invoke them on
+    // different threads with no synchronization of its own.
     //
-    //==========================================================================================================
+
+    //
+    //
+    //
+    // //==========================================================================================================
     internal sealed partial class ExecutionEnvironmentImplementation : ExecutionEnvironment
     {
         private static RuntimeTypeHandle GetTypeDefinition(RuntimeTypeHandle typeHandle)
@@ -81,8 +90,10 @@ namespace Internal.Reflection.Execution
         }
 
         /// <summary>
-        /// Return the metadata handle for a TypeDef if the pay-for-policy enabled this type as browsable. This is used to obtain name and other information for types
-        /// obtained via typeof() or Object.GetType(). This can include generic types (not to be confused with generic instances).
+        /// Return the metadata handle for a TypeDef if the pay-for-policy enabled this type as browsable.
+        // This is used to obtain name and other information for types
+        /// obtained via typeof() or Object.GetType(). This can include generic types (not to be confused
+        // with generic instances).
         ///
         /// Preconditions:
         ///    runtimeTypeHandle is a typedef (not a constructed type such as an array or generic instance.)
@@ -107,14 +118,18 @@ namespace Internal.Reflection.Execution
         }
 
         /// <summary>
-        /// Return the RuntimeTypeHandle for the named type described in metadata. This is used to implement the Create and Invoke
+        /// Return the RuntimeTypeHandle for the named type described in metadata. This is used to implement
+        // the Create and Invoke
         /// apis for types.
         ///
         /// Preconditions:
-        ///    metadataReader + typeDefHandle  - a valid metadata reader + typeDefinitionHandle where "metadataReader" is one
-        ///                                      of the metadata readers returned by ExecutionEnvironment.MetadataReaders.
+        ///    metadataReader + typeDefHandle  - a valid metadata reader + typeDefinitionHandle where
+        // "metadataReader" is one
+        ///                                      of the metadata readers returned by
+        // ExecutionEnvironment.MetadataReaders.
         ///
-        /// Note: Although this method has a "bool" return value like the other mapping table accessors, the Project N pay-for-play design
+        /// Note: Although this method has a "bool" return value like the other mapping table accessors, the
+        // Project N pay-for-play design
         /// guarantees that any type enabled for metadata also has a RuntimeTypeHandle underneath.
         /// </summary>
         /// <param name="qTypeDefinition">TypeDef handle for the type to look up</param>
@@ -131,7 +146,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E[], if the pay for play policy denotes E[] as browsable. This is used to
+        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E[], if the pay for
+        // play policy denotes E[] as browsable. This is used to
         // implement Array.CreateInstance().
         //
         // Preconditions:
@@ -161,7 +177,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E[,,], if the pay for policy denotes E[,,] as browsable. This is used to
+        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E[,,], if the pay
+        // for policy denotes E[,,] as browsable. This is used to
         // implement Type.MakeArrayType(Type, int).
         //
         // Preconditions:
@@ -197,7 +214,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E*, if the pay-for-play policy denotes E* as browsable. This is used to
+        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E*, if the
+        // pay-for-play policy denotes E* as browsable. This is used to
         // ensure that "typeof(E*)" and "typeof(E).MakePointerType()" returns the same Type object.
         //
         // Preconditions:
@@ -230,7 +248,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E&, if the pay-for-play policy denotes E& as browsable. This is used to
+        // Given a RuntimeTypeHandle for any type E, return a RuntimeTypeHandle for type E&, if the
+        // pay-for-play policy denotes E& as browsable. This is used to
         // ensure that "typeof(E&)" and "typeof(E).MakeByRefType()" returns the same Type object.
         //
         // Preconditions:
@@ -248,8 +267,10 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // Given a RuntimeTypeHandle for a generic type G and a set of RuntimeTypeHandles T1, T2.., return the RuntimeTypeHandle for the generic
-        // instance G<T1,T2...> if the pay-for-play policy denotes G<T1,T2...> as browsable. This is used to implement Type.MakeGenericType().
+        // Given a RuntimeTypeHandle for a generic type G and a set of RuntimeTypeHandles T1, T2.., return
+        // the RuntimeTypeHandle for the generic
+        // instance G<T1,T2...> if the pay-for-play policy denotes G<T1,T2...> as browsable. This is used to
+        // implement Type.MakeGenericType().
         //
         // Preconditions:
         //      runtimeTypeDefinitionHandle is a valid RuntimeTypeHandle for a generic type.
@@ -296,8 +317,10 @@ namespace Internal.Reflection.Execution
             );
         }
 
-        // Given a RuntimeTypeHandle for a generic type G and a set of RuntimeTypeHandles T1, T2.., return the RuntimeTypeHandle for the generic
-        // instance G<T1,T2...> if the pay-for-play policy denotes G<T1,T2...> as browsable. This is used to implement Type.MakeGenericType().
+        // Given a RuntimeTypeHandle for a generic type G and a set of RuntimeTypeHandles T1, T2.., return
+        // the RuntimeTypeHandle for the generic
+        // instance G<T1,T2...> if the pay-for-play policy denotes G<T1,T2...> as browsable. This is used to
+        // implement Type.MakeGenericType().
         //
         // Preconditions:
         //      runtimeTypeDefinitionHandle is a valid RuntimeTypeHandle for a generic type.
@@ -328,8 +351,10 @@ namespace Internal.Reflection.Execution
                 genericMethodTypeArgumentHandles
             );
 
-            // Validate constraints first. This is potentially useless work if the method already exists, but it prevents bad
-            // inputs to reach the type loader (we don't have support to e.g. represent pointer types within the type loader)
+            // Validate constraints first. This is potentially useless work if the method already exists, but it
+            // prevents bad
+            // inputs to reach the type loader (we don't have support to e.g. represent pointer types within the
+            // type loader)
             if (
                 genericMethodTypeArgumentHandles != null
                 && genericMethodTypeArgumentHandles.Length > 0
@@ -343,10 +368,12 @@ namespace Internal.Reflection.Execution
             MethodInvokeInfo methodInvokeInfo;
 #if GENERICS_FORCE_USG
             // Stress mode to force the usage of universal canonical method targets for reflection invokes.
-            // It is recommended to use "/SharedGenericsMode GenerateAllUniversalGenerics" NUTC command line argument when
+            // It is recommended to use "/SharedGenericsMode GenerateAllUniversalGenerics" NUTC command line
+            // argument when
             // compiling the application in order to effectively use the GENERICS_FORCE_USG mode.
 
-            // If we are just trying to invoke a non-generic method on a non-generic type, we won't force the universal lookup
+            // If we are just trying to invoke a non-generic method on a non-generic type, we won't force the
+            // universal lookup
             if (
                 !RuntimeAugments.IsGenericType(declaringTypeHandle)
                 && (
@@ -381,8 +408,10 @@ namespace Internal.Reflection.Execution
                 CanonicalFormKind.Specific
             );
 
-            // If we failed to get a MethodInvokeInfo for an exact method, or a canonically equivalent method, check if there is a universal canonically
-            // equivalent entry that could be used (it will be much slower, and require a calling convention converter)
+            // If we failed to get a MethodInvokeInfo for an exact method, or a canonically equivalent method,
+            // check if there is a universal canonically
+            // equivalent entry that could be used (it will be much slower, and require a calling convention
+            // converter)
             methodInvokeInfo ??= TryGetMethodInvokeInfo(
                 declaringTypeHandle,
                 methodHandle,
@@ -484,7 +513,8 @@ namespace Internal.Reflection.Execution
         /// </summary>
         /// <param name="declaringTypeHandle">Runtime handle of declaring type for the method</param>
         /// <param name="methodHandle">Handle of method to look up</param>
-        /// <param name="genericMethodTypeArgumentHandles">Runtime handles of generic method arguments</param>
+        /// <param name="genericMethodTypeArgumentHandles">Runtime handles of generic method
+        // arguments</param>
         /// <param name="methodInfo">MethodInfo of method to look up</param>
         /// <param name="methodSignatureComparer">Helper structure used for comparing signatures</param>
         /// <param name="canonFormKind">Requested canon form</param>
@@ -574,8 +604,10 @@ namespace Internal.Reflection.Execution
             // class Base<T> { void Frob() { } }
             // class Derived<T> : Base<T> { }
             // Let's pick Base<object>, Derived<object> as the template.
-            // Now if someone calls TryGetMethodForOriginalLdFtnResult with a pointer to the Frob method and a RuntimeTypeHandle
-            // of the Derived<string> object instance, we are expected to return the metadata handle for Frob with *Base*<string>
+            // Now if someone calls TryGetMethodForOriginalLdFtnResult with a pointer to the Frob method and a
+            // RuntimeTypeHandle
+            // of the Derived<string> object instance, we are expected to return the metadata handle for Frob
+            // with *Base*<string>
             // as the declaring type. The table obviously only has an entry for Frob with Base<object>.
 
             // This method needs to return "true" and "Base<string>" for cases like this.
@@ -674,7 +706,8 @@ namespace Internal.Reflection.Execution
                 )
                     return false;
 
-                // binarySearchIndex now contains the index of the start of a range of matching function pointers and offsets
+                // binarySearchIndex now contains the index of the start of a range of matching function pointers
+                // and offsets
                 firstParserOffsetIndex = binarySearchIndex;
                 lastParserOffsetIndex = binarySearchIndex;
                 while (
@@ -998,7 +1031,8 @@ namespace Internal.Reflection.Execution
 
             InvokeTableFlags entryFlags = (InvokeTableFlags)entryParser.GetUnsigned();
 
-            // If the passed in method was a fat function pointer, but the entry in the mapping table doesn't need
+            // If the passed in method was a fat function pointer, but the entry in the mapping table doesn't
+            // need
             // an instantiation argument (or the other way around), trivially reject it.
             if (
                 !forStartAddress
@@ -1267,7 +1301,8 @@ namespace Internal.Reflection.Execution
                         }
                         else
                         {
-                            // The fieldAccessMetadata.Cookie value points directly to the field's data. We'll use that as the 'staticsBase'
+                            // The fieldAccessMetadata.Cookie value points directly to the field's data. We'll use that as the
+                            // 'staticsBase'
                             // and just use a field offset of zero.
                             fieldOffset = 0;
                             staticsBase = fieldAccessMetadata.Cookie;
@@ -1314,7 +1349,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // This resolves RuntimeMethodHandles for methods declared on non-generic types (declaringTypeHandle is an output of this method.)
+        // This resolves RuntimeMethodHandles for methods declared on non-generic types (declaringTypeHandle
+        // is an output of this method.)
         //
         public sealed override unsafe bool TryGetMethodFromHandle(
             RuntimeMethodHandle runtimeMethodHandle,
@@ -1343,7 +1379,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // This resolves RuntimeMethodHandles for methods declared on generic types (declaringTypeHandle is an input of this method.)
+        // This resolves RuntimeMethodHandles for methods declared on generic types (declaringTypeHandle is
+        // an input of this method.)
         //
         public sealed override bool TryGetMethodFromHandleAndType(
             RuntimeMethodHandle runtimeMethodHandle,
@@ -1361,7 +1398,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // This resolves RuntimeFieldHandles for fields declared on non-generic types (declaringTypeHandle is an output of this method.)
+        // This resolves RuntimeFieldHandles for fields declared on non-generic types (declaringTypeHandle
+        // is an output of this method.)
         //
         public sealed override unsafe bool TryGetFieldFromHandle(
             RuntimeFieldHandle runtimeFieldHandle,
@@ -1404,7 +1442,8 @@ namespace Internal.Reflection.Execution
         }
 
         //
-        // This resolves RuntimeFieldHandles for fields declared on generic types (declaringTypeHandle is an input of this method.)
+        // This resolves RuntimeFieldHandles for fields declared on generic types (declaringTypeHandle is an
+        // input of this method.)
         //
         public sealed override bool TryGetFieldFromHandleAndType(
             RuntimeFieldHandle runtimeFieldHandle,

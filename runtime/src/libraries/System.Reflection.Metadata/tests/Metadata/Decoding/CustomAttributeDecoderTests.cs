@@ -111,7 +111,8 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
                         default:
                             // TODO: https://github.com/dotnet/runtime/issues/73593
-                            // This method only tests first 3 attriubtes because the complete test 'TestCustomAttributeDecoderUsingReflection' fails on mono
+                            // This method only tests first 3 attriubtes because the complete test
+                            // 'TestCustomAttributeDecoderUsingReflection' fails on mono
                             // Leaving this hard coded test only for mono, until the issue fixed on mono
                             break;
                     }
@@ -546,9 +547,11 @@ namespace System.Reflection.Metadata.Decoding.Tests
         [Test(true)]
         [Test(false)]
         [Test(typeof(string))]
-        /* [Test(SByteEnum.Value)] // The FullName is (System.Reflection.Metadata.Decoding.Tests.CustomAttributeDecoderTests+SByteEnum)
+        /* [Test(SByteEnum.Value)] // The FullName is
+        (System.Reflection.Metadata.Decoding.Tests.CustomAttributeDecoderTests+SByteEnum)
         [Test(Int16Enum.Value)] // but some enums '+' is replaced with '/' and causing inconsistency
-        [Test(Int32Enum.Value)] // Updaated https://github.com/dotnet/runtime/issues/16552 to resolve this scenario later
+        [Test(Int32Enum.Value)] // Updaated https://github.com/dotnet/runtime/issues/16552 to resolve this
+        scenario later
         [Test(Int64Enum.Value)]
         [Test(ByteEnum.Value)]
         [Test(UInt16Enum.Value)]

@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         /// PKCS #1 v1.5.
         /// </summary>
         /// <remarks>
-        /// This mode corresponds to the RSAES-PKCS1-v1_5 encryption scheme described in the PKCS #1 RSA Encryption Standard.
+        /// This mode corresponds to the RSAES-PKCS1-v1_5 encryption scheme described in the PKCS #1 RSA
+        // Encryption Standard.
         /// It is supported for compatibility with existing applications.
         /// </remarks>
         Pkcs1,
@@ -21,7 +22,8 @@ namespace System.Security.Cryptography
         /// Optimal Asymmetric Encryption Padding.
         /// </summary>
         /// <remarks>
-        /// This mode corresponds to the RSAES-OEAP encryption scheme described in the PKCS #1 RSA Encryption Standard.
+        /// This mode corresponds to the RSAES-OEAP encryption scheme described in the PKCS #1 RSA
+        // Encryption Standard.
         /// It is recommended for new applications.
         /// </remarks>
         Oaep,

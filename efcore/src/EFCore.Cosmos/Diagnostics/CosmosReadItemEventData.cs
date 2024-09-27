@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics;
 ///     A <see cref="DiagnosticSource" /> event payload class for Cosmos read-item events.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 /// </remarks>
 public class CosmosReadItemEventData : EventData
 {
@@ -19,7 +20,8 @@ public class CosmosReadItemEventData : EventData
     /// <param name="resourceId">The ID of the resource being read.</param>
     /// <param name="containerId">The ID of the Cosmos container being queried.</param>
     /// <param name="partitionKey">The key of the Cosmos partition that the query is using.</param>
-    /// <param name="logSensitiveData">Indicates whether the application allows logging of sensitive data.</param>
+    /// <param name="logSensitiveData">Indicates whether the application allows logging of sensitive
+    // data.</param>
     public CosmosReadItemEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,

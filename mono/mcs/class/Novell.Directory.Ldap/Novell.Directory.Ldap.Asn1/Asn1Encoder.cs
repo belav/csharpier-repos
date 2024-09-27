@@ -51,7 +51,7 @@ namespace Novell.Directory.Ldap.Asn1
     /// </summary>
     public interface Asn1Encoder : System.Runtime.Serialization.ISerializable
     {
-        /* Encoders for ASN.1 simple types */
+/* Encoders for ASN.1 simple types */
 
         /// <summary> Encode an Asn1Boolean directly into the provided output stream.
         ///
@@ -80,11 +80,11 @@ namespace Novell.Directory.Ldap.Asn1
         /// </param>
         void encode(Asn1Numeric n, System.IO.Stream out_Renamed);
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1Real directly to a stream.
-        * public void encode(Asn1Real r, OutputStream out)
-        * throws IOException;
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1Real directly to a stream.
+* public void encode(Asn1Real r, OutputStream out)
+* throws IOException;
+*/
 
         /// <summary> Encode an Asn1Null directly to a stream.
         ///
@@ -97,11 +97,11 @@ namespace Novell.Directory.Ldap.Asn1
         /// </param>
         void encode(Asn1Null n, System.IO.Stream out_Renamed);
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1BitString directly to a stream.
-        * public void encode(Asn1BitString bs, OutputStream out)
-        * throws IOException;
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1BitString directly to a stream.
+* public void encode(Asn1BitString bs, OutputStream out)
+* throws IOException;
+*/
 
         /// <summary> Encode an Asn1OctetString directly to a stream.
         ///
@@ -114,20 +114,20 @@ namespace Novell.Directory.Ldap.Asn1
         /// </param>
         void encode(Asn1OctetString os, System.IO.Stream out_Renamed);
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1ObjectIdentifier directly to a stream.
-        * public void encode(Asn1ObjectIdentifier oi, OutputStream out)
-        * throws IOException;
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1ObjectIdentifier directly to a stream.
+* public void encode(Asn1ObjectIdentifier oi, OutputStream out)
+* throws IOException;
+*/
 
-        /* Asn1 TYPE NOT YET SUPPORTED
-        * Encode an Asn1CharacterString directly to a stream.
-        * public void encode(Asn1CharacterString cs, OutputStream out)
-        * throws IOException;
-        */
+/* Asn1 TYPE NOT YET SUPPORTED
+* Encode an Asn1CharacterString directly to a stream.
+* public void encode(Asn1CharacterString cs, OutputStream out)
+* throws IOException;
+*/
 
-        /* Encoder for ASN.1 structured types
-        */
+/* Encoder for ASN.1 structured types
+*/
 
         /// <summary> Encode an Asn1Structured directly to a stream.
         ///
@@ -151,11 +151,11 @@ namespace Novell.Directory.Ldap.Asn1
         /// </param>
         void encode(Asn1Tagged t, System.IO.Stream out_Renamed);
 
-        /* Encoders for ASN.1 useful types
-        */
+/* Encoders for ASN.1 useful types
+*/
 
-        /* Encoder for ASN.1 Identifier
-        */
+/* Encoder for ASN.1 Identifier
+*/
 
         /// <summary> Encode an Asn1Identifier directly to a stream.
         ///

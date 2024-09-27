@@ -32,7 +32,8 @@ namespace System.ServiceModel.Channels
         // The original RequestContext that was created by the ChannelHandler
         public BufferedRequestContext RequestContext { get; private set; }
 
-        // The 'Manual Concurrency' notification which allows higher layers to notify the dispatcher of an event
+        // The 'Manual Concurrency' notification which allows higher layers to notify the dispatcher of an
+        // event
         // e.g. The event associated with re-pumping the above buffered RequestContext again
         internal IInvokeReceivedNotification Notification { get; private set; }
 
@@ -42,8 +43,10 @@ namespace System.ServiceModel.Channels
                 operationContext.IncomingMessageProperties[
                     ChannelHandler.MessageBufferPropertyName
                 ];
-            // cannot remove the MessageBufferProperty from messageProperties because it causes the message buffer associated with the property
-            // to be disposed of.  Assigning null to the property has the same effect, so we assign dummyMessageBuffer to the property.
+            // cannot remove the MessageBufferProperty from messageProperties because it causes the message
+            // buffer associated with the property
+            // to be disposed of.  Assigning null to the property has the same effect, so we assign
+            // dummyMessageBuffer to the property.
             operationContext.IncomingMessageProperties[ChannelHandler.MessageBufferPropertyName] =
                 dummyMessageBuffer;
         }
@@ -52,7 +55,8 @@ namespace System.ServiceModel.Channels
         {
             Message requestMessage = this.messageBuffer.CreateMessage();
             // re-injecting the MessageBufferProperty here so that it can be reused by the dispatch layer
-            // (ChannelHandler.DispatchAndReleasePump to be specific) instead of recreating the buffer for replay.
+            // (ChannelHandler.DispatchAndReleasePump to be specific) instead of recreating the buffer for
+            // replay.
             requestMessage.Properties[ChannelHandler.MessageBufferPropertyName] =
                 this.messageBuffer;
             this.RequestContext.ReInitialize(requestMessage);

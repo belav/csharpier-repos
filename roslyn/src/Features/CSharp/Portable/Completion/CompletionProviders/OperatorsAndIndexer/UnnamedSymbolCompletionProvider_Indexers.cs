@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             );
         }
 
-        // Remove the dot, but leave the ? if one is there.  Place the caret one space back so it is between the braces.
+        // Remove the dot, but leave the ? if one is there.  Place the caret one space back so it is between
+        // the braces.
         private static Task<CompletionChange> GetIndexerChangeAsync(
             Document document,
             CompletionItem item,

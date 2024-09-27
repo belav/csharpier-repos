@@ -9,7 +9,8 @@ namespace System.Reflection.Context.Tests
 {
     public class CustomPropertyInfoTests
     {
-        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only context.
+        // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only
+        // context.
         private readonly PropertyInfo _customProperty;
 
         public CustomPropertyInfoTests()

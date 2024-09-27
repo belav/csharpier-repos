@@ -193,10 +193,14 @@ namespace System.ServiceModel.Activities.Configuration
             ServiceEndpointElement serviceEndpointElement
         )
         {
-            // Override serviceEndpointElement.Address with this.Address when serviceEndpointElement.Address == null.
-            // This condition (serviceEndpointElement.Address == null) should only be true when used with the SqlWorkflowInstanceStoreBehavior.
-            // Setting the address here so that ConfigLoader is able to set the EndpointAddress correctly, especially when this.Address is
-            // a relative address and can only be made absolute using the baseAddresses configured on the serviceHost.
+            // Override serviceEndpointElement.Address with this.Address when serviceEndpointElement.Address ==
+            // null.
+            // This condition (serviceEndpointElement.Address == null) should only be true when used with the
+            // SqlWorkflowInstanceStoreBehavior.
+            // Setting the address here so that ConfigLoader is able to set the EndpointAddress correctly,
+            // especially when this.Address is
+            // a relative address and can only be made absolute using the baseAddresses configured on the
+            // serviceHost.
 
             // Server side address inference goes by the following order:
             // 1. ServiceEndpointElement.Address if it is not-null and non-default

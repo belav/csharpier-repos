@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The ASP.NET runtime services
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* The ASP.NET runtime services
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.Hosting
 {
@@ -144,12 +144,12 @@ namespace System.Web.Hosting
             StopProcessing();
         }
 
-        /*
-         * Process one ISAPI request
-         *
-         * @param ecb ECB
-         * @param useProcessModel flag set to true when out-of-process
-         */
+/*
+* Process one ISAPI request
+*
+* @param ecb ECB
+* @param useProcessModel flag set to true when out-of-process
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

@@ -22,7 +22,8 @@ namespace System.Reflection.Runtime.General
 {
     internal static partial class Helpers
     {
-        // This helper helps reduce the temptation to write "h == default(RuntimeTypeHandle)" which causes boxing.
+        // This helper helps reduce the temptation to write "h == default(RuntimeTypeHandle)" which causes
+        // boxing.
         public static bool IsNull(this RuntimeTypeHandle h)
         {
             return h.Equals(default(RuntimeTypeHandle));
@@ -169,7 +170,8 @@ namespace System.Reflection.Runtime.General
                 );
             if (invokeMethod == null)
             {
-                // No Invoke method found. Since delegate types are compiler constructed, the most likely cause is missing metadata rather than
+                // No Invoke method found. Since delegate types are compiler constructed, the most likely cause is
+                // missing metadata rather than
                 // a missing Invoke method.
                 throw ReflectionCoreExecution.ExecutionEnvironment.CreateMissingMetadataException(
                     delegateType.ToType()
@@ -193,8 +195,10 @@ namespace System.Reflection.Runtime.General
             return new BinderBundle(binder, cultureInfo);
         }
 
-        // Helper for ICustomAttributeProvider.GetCustomAttributes(). The result of this helper is returned directly to apps
-        // so it must always return a newly allocated array. Unlike most of the newer custom attribute apis, the attribute type
+        // Helper for ICustomAttributeProvider.GetCustomAttributes(). The result of this helper is returned
+        // directly to apps
+        // so it must always return a newly allocated array. Unlike most of the newer custom attribute apis,
+        // the attribute type
         // need not derive from System.Attribute. (In particular, it can be an interface or System.Object.)
         [UnconditionalSuppressMessage(
             "AotAnalysis",
@@ -213,8 +217,10 @@ namespace System.Reflection.Runtime.General
                 attributes.Add(instantiatedAttribute);
             }
 
-            // This is here for desktop compatibility. ICustomAttribute.GetCustomAttributes() normally returns an array of the
-            // exact attribute type requested except in two cases: when the passed in type is an open type and when
+            // This is here for desktop compatibility. ICustomAttribute.GetCustomAttributes() normally returns
+            // an array of the
+            // exact attribute type requested except in two cases: when the passed in type is an open type and
+            // when
             // it is a value type. In these two cases, it returns an array of type Object[].
             bool useObjectArray =
                 actualElementType.ContainsGenericParameters || actualElementType.IsValueType;
@@ -287,7 +293,8 @@ namespace System.Reflection.Runtime.General
 
         private static object? GetDefaultValue(IEnumerable<CustomAttributeData> customAttributes)
         {
-            // we first look for a CustomConstantAttribute, but we will save the first occurrence of DecimalConstantAttribute
+            // we first look for a CustomConstantAttribute, but we will save the first occurrence of
+            // DecimalConstantAttribute
             // so we don't go through all custom attributes again
             CustomAttributeData? firstDecimalConstantAttributeData = null;
             foreach (CustomAttributeData attributeData in customAttributes)
@@ -330,10 +337,12 @@ namespace System.Reflection.Runtime.General
         {
             // The resolution of default value is done by following these rules:
             // 1. For RawDefaultValue, we pick the first custom attribute holding the constant value
-            //  in the following order: DecimalConstantAttribute, DateTimeConstantAttribute, CustomConstantAttribute
+            //  in the following order: DecimalConstantAttribute, DateTimeConstantAttribute,
+            // CustomConstantAttribute
             // 2. For DefaultValue, we first look for CustomConstantAttribute and pick the first occurrence.
             //  If none is found, then we repeat the same process searching for DecimalConstantAttribute.
-            // IMPORTANT: Please note that there is a subtle difference in order custom attributes are inspected for
+            // IMPORTANT: Please note that there is a subtle difference in order custom attributes are inspected
+            // for
             //  RawDefaultValue and DefaultValue.
             object? resolvedValue = raw
                 ? GetRawDefaultValue(customAttributes)

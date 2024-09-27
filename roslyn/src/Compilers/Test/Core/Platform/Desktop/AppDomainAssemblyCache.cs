@@ -18,7 +18,8 @@ using Roslyn.Test.Utilities;
 namespace Roslyn.Test.Utilities.Desktop
 {
     /// <summary>
-    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded into it.
+    /// This is a singleton per AppDomain which manages all of the assemblies which were ever loaded
+    // into it.
     /// </summary>
     internal sealed class AppDomainAssemblyCache
     {
@@ -106,10 +107,13 @@ namespace Roslyn.Test.Utilities.Desktop
         private void OnAssemblyLoad(Assembly assembly)
         {
             // We need to add loaded assemblies to the cache in order to avoid loading them twice.
-            // This is not just optimization. CLR isn't able to load the same assembly from multiple "locations".
+            // This is not just optimization. CLR isn't able to load the same assembly from multiple
+            // "locations".
             // Location for byte[] assemblies is the location of the assembly that invokes Assembly.Load.
-            // PE verifier invokes load directly for the assembly being verified. If this assembly is also a dependency
-            // of another assembly we verify our AssemblyResolve is invoked. If we didn't reuse the assembly already loaded
+            // PE verifier invokes load directly for the assembly being verified. If this assembly is also a
+            // dependency
+            // of another assembly we verify our AssemblyResolve is invoked. If we didn't reuse the assembly
+            // already loaded
             // by PE verifier we would get an error from Assembly.Load.
             var cache = assembly.ReflectionOnly ? _reflectionOnlyAssemblyCache : _assemblyCache;
 

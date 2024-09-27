@@ -101,8 +101,10 @@ namespace System.Collections.Immutable
         /// <param name="list">The list to search.</param>
         /// <param name="oldValue">The element to replace.</param>
         /// <param name="newValue">The element to replace the old element with.</param>
-        /// <returns>The new list -- even if the value being replaced is equal to the new value for that position.</returns>
-        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the list.</exception>
+        /// <returns>The new list -- even if the value being replaced is equal to the new value for that
+        // position.</returns>
+        /// <exception cref="ArgumentException">Thrown when the old value does not exist in the
+        // list.</exception>
         public static IImmutableList<T> Replace<T>(
             this IImmutableList<T> list,
             T oldValue,
@@ -118,7 +120,8 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <param name="list">The list to search.</param>
         /// <param name="value">The value to remove.</param>
-        /// <returns>A new list with the element removed, or this list if the element is not in this list.</returns>
+        /// <returns>A new list with the element removed, or this list if the element is not in this
+        // list.</returns>
         public static IImmutableList<T> Remove<T>(this IImmutableList<T> list, T value)
         {
             Requires.NotNull(list, nameof(list));

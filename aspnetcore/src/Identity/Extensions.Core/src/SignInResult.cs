@@ -32,13 +32,16 @@ public class SignInResult
     /// <summary>
     /// Returns a flag indication whether the user attempting to sign-in is not allowed to sign-in.
     /// </summary>
-    /// <value>True if the user attempting to sign-in is not allowed to sign-in, otherwise false.</value>
+    /// <value>True if the user attempting to sign-in is not allowed to sign-in, otherwise
+    // false.</value>
     public bool IsNotAllowed { get; protected set; }
 
     /// <summary>
-    /// Returns a flag indication whether the user attempting to sign-in requires two factor authentication.
+    /// Returns a flag indication whether the user attempting to sign-in requires two factor
+    // authentication.
     /// </summary>
-    /// <value>True if the user attempting to sign-in requires two factor authentication, otherwise false.</value>
+    /// <value>True if the user attempting to sign-in requires two factor authentication, otherwise
+    // false.</value>
     public bool RequiresTwoFactor { get; protected set; }
 
     /// <summary>
@@ -78,9 +81,11 @@ public class SignInResult
     public static SignInResult TwoFactorRequired => _twoFactorRequired;
 
     /// <summary>
-    /// Converts the value of the current <see cref="SignInResult"/> object to its equivalent string representation.
+    /// Converts the value of the current <see cref="SignInResult"/> object to its equivalent string
+    // representation.
     /// </summary>
-    /// <returns>A string representation of value of the current <see cref="SignInResult"/> object.</returns>
+    /// <returns>A string representation of value of the current <see cref="SignInResult"/>
+    // object.</returns>
     public override string ToString()
     {
         return IsLockedOut ? "LockedOut"

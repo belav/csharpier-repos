@@ -55,7 +55,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int newURI(
-            /*AUTF8String*/HandleRef aSpec,
+/*AUTF8String*/HandleRef aSpec,
             [MarshalAs(UnmanagedType.LPStr)] string aOriginCharset,
             [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
             [MarshalAs(UnmanagedType.Interface)] out nsIURI ret

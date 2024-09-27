@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Bind the switch statement, reporting in the process any switch labels that are subsumed by previous cases.
+        /// Bind the switch statement, reporting in the process any switch labels that are subsumed by
+        // previous cases.
         /// </summary>
         internal override BoundStatement BindSwitchStatementCore(
             SwitchStatementSyntax node,

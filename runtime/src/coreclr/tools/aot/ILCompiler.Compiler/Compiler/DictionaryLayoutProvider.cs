@@ -15,7 +15,8 @@ namespace ILCompiler
     }
 
     /// <summary>
-    /// Provides dictionary layout information that collects data during the compilation to build a dictionary layout
+    /// Provides dictionary layout information that collects data during the compilation to build a
+    // dictionary layout
     /// for a type or method on demand.
     /// </summary>
     public sealed class LazyDictionaryLayoutProvider : DictionaryLayoutProvider

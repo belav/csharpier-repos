@@ -38,8 +38,10 @@ namespace System.Web.UI.WebControls
     {
         public CompleteWizardStep() { }
 
-        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that CompleteWizardStep is always set to the Complete value of
-        // the WizardStepType enumeration. Attempting to set the StepType property to a different value will result in an InvalidOperationException.
+        // MSDN: The StepType property overrides the WizardStepBase.StepType property to ensure that
+        // CompleteWizardStep is always set to the Complete value of
+        // the WizardStepType enumeration. Attempting to set the StepType property to a different value will
+        // result in an InvalidOperationException.
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Filterable(false)]
         [Browsable(false)]

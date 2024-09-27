@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
             // Ensure that the copy always goes through all other handlers.
             nextCommandHandler();
 
-            // Always try to store our data to the clipboard (if we have access to the clipboard service).  Even if we
+            // Always try to store our data to the clipboard (if we have access to the clipboard service).  Even
+            // if we
             // didn't capture any useful data, we want to store that to blow away any prior stored data we have.
             copyPasteService?.TrySetClipboardData(KeyAndVersion, dataToStore ?? "");
         }
@@ -111,8 +112,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.StringCopyPaste
 
             var spans = textView.Selection.GetSnapshotSpansOnBuffer(subjectBuffer);
 
-            // We only support smart copy/paste when a single selection is copied (and a single selection is pasted
-            // over).  This vastly simplifies the logic we need, and it means we don't have to try to reimplement the
+            // We only support smart copy/paste when a single selection is copied (and a single selection is
+            // pasted
+            // over).  This vastly simplifies the logic we need, and it means we don't have to try to
+            // reimplement the
             // editor logic for what it means when you are copying X selections and pasting over Y selections.
             if (spans.Count != 1)
                 return default;

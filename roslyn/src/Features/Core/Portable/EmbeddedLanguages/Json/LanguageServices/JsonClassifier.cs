@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             var semanticModel = context.SemanticModel;
             var detector = JsonLanguageDetector.GetOrCreate(semanticModel.Compilation, info);
 
-            // We do support json classification in strings that look very likely to be json, even if we aren't 100%
+            // We do support json classification in strings that look very likely to be json, even if we aren't
+            // 100%
             // certain if it truly is json.
             var tree = detector.TryParseString(
                 token,
@@ -224,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
             public void Visit(JsonCommaValueNode node)
             {
                 // Already handled when we recurse in AddTokenClassifications.  Specifically, commas show up both as
-                // nodes (with tokens in them) in error recovery scenarios, and also just as tokens in a separated list.
+                // nodes (with tokens in them) in error recovery scenarios, and also just as tokens in a separated
+                // list.
                 // So, to handle both, we just handle the token case in AddTokenClassifications.
             }
         }

@@ -426,8 +426,10 @@ namespace MonoTests.System.Data.OleDb
 #if !JAVA
             if (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle)
             {
-                //In .NET there is a bug when calling a SP with multiple REFCURSORS, the workaround is to use OracleClient and not OleDb.
-                //In GH we are not bug complient in this issue, because there is no workaround (We do not support the OracleClient namespace.
+                //In .NET there is a bug when calling a SP with multiple REFCURSORS, the workaround is to use
+                // OracleClient and not OleDb.
+                //In GH we are not bug complient in this issue, because there is no workaround (We do not support
+                // the OracleClient namespace.
                 this.Log("Not testing multi result set Oracle on .NET");
                 return;
             }

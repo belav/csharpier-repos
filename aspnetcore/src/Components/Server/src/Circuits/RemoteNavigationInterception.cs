@@ -27,7 +27,8 @@ internal sealed class RemoteNavigationInterception : INavigationInterception
     {
         if (!HasAttachedJSRuntime)
         {
-            // We should generally never get here in the ordinary case. Router will only call this API once pre-rendering is complete.
+            // We should generally never get here in the ordinary case. Router will only call this API once
+            // pre-rendering is complete.
             // This would guard any unusual usage of this API.
             throw new InvalidOperationException(
                 "Navigation commands can not be issued at this time. This is because the component is being "

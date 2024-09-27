@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
         {
-            // TODO: the editor currently seems to store both lower-cased keys and original casing, the comparer is case-sensitive
+            // TODO: the editor currently seems to store both lower-cased keys and original casing, the comparer
+            // is case-sensitive
             // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1556206
 
             if (_configOptions.TryGetValue(key.ToLowerInvariant(), out var objectValue))

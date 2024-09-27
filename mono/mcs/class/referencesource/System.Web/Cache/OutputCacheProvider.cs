@@ -11,7 +11,8 @@ namespace System.Web.Caching
         // Returns the specified entry, or null if it does not exist.
         public abstract Object Get(String key);
 
-        // Inserts the specified entry into the cache if it does not already exist, otherwise returns the existing entry.
+        // Inserts the specified entry into the cache if it does not already exist, otherwise returns the
+        // existing entry.
         public abstract Object Add(String key, Object entry, DateTime utcExpiry);
 
         // Inserts the specified entry into the cache, overwriting an existing entry if present.

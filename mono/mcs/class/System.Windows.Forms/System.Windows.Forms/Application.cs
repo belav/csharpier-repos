@@ -693,7 +693,8 @@ namespace System.Windows.Forms
 
         public static ApartmentState OleRequired()
         {
-            //throw new NotImplementedException("OLE Not supported by this System.Windows.Forms implementation");
+            //throw new NotImplementedException("OLE Not supported by this System.Windows.Forms
+            // implementation");
             return ApartmentState.Unknown;
         }
 
@@ -702,8 +703,8 @@ namespace System.Windows.Forms
             if (MWFThread.Current.HandlingException)
             {
                 /* we're already handling an exception and we got
-                   another one?  print it out and exit, this means
-                   we've got a runtime/SWF bug. */
+                another one?  print it out and exit, this means
+                we've got a runtime/SWF bug. */
                 Console.WriteLine(t);
                 // Don't use Application.Exit here, since it may cause a stack overflow
                 // in certain cases. It's however hard to reproduce since it seems to
@@ -857,11 +858,13 @@ namespace System.Windows.Forms
             thread = MWFThread.Current;
 
             /*
-             * There is a NotWorking test for this, but since we are using this method both for Form.ShowDialog as for ApplicationContexts we'll
-             * fail on nested ShowDialogs, so disable the check for the moment.
-             */
+            * There is a NotWorking test for this, but since we are using this method both for Form.ShowDialog
+            as for ApplicationContexts we'll
+            * fail on nested ShowDialogs, so disable the check for the moment.
+            */
             //if (thread.MessageLoop) {
-            //        throw new InvalidOperationException ("Starting a second message loop on a single thread is not a valid operation. Use Form.ShowDialog instead.");
+            //        throw new InvalidOperationException ("Starting a second message loop on a single thread is
+            // not a valid operation. Use Form.ShowDialog instead.");
             //}
 
             msg = new MSG();
@@ -878,7 +881,8 @@ namespace System.Windows.Forms
                 context.MainForm.context = context;
                 context.MainForm.closing = false;
                 context.MainForm.Visible = true; // Cannot use Show() or scaling gets confused by menus
-                // XXX the above line can be used to close the form. another problem with our handling of Show/Activate.
+                // XXX the above line can be used to close the form. another problem with our handling of
+                // Show/Activate.
                 if (context.MainForm != null)
                     context.MainForm.Activate();
             }
@@ -1047,7 +1051,8 @@ namespace System.Windows.Forms
                         break;
                 }
 
-                // If our Form doesn't have a handle anymore, it means it was destroyed and we need to *wait* for WM_QUIT.
+                // If our Form doesn't have a handle anymore, it means it was destroyed and we need to *wait* for
+                // WM_QUIT.
                 if ((context.MainForm != null) && (!context.MainForm.IsHandleCreated))
                     continue;
 

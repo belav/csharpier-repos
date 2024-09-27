@@ -19,7 +19,8 @@ namespace System.Data.OleDb
         // maintain an AddRef which is also the lifetime of this class instance
         private readonly UnsafeNativeMethods.IDataInitializeGetDataSource? DangerousIDataInitializeGetDataSource;
 
-        // DataLinks (the unknown parameter) is created via Activator.CreateInstance outside of the SafeHandle
+        // DataLinks (the unknown parameter) is created via Activator.CreateInstance outside of the
+        // SafeHandle
         internal OleDbServicesWrapper(object? unknown)
             : base()
         {
@@ -354,8 +355,10 @@ namespace System.Data.OleDb
         // the CreateSession call will ask directly for the optional IDBCreateCommand
         // otherwise it is the first call or known that IDBCreateCommand isn't supported
 
-        // we cache the DangerousIDBCreateCommandCreateCommand (expecting base.handle to be IDBCreateCommand)
-        // since we maintain an AddRef on IDBCreateCommand it is safe to use the delegate without rechecking its function pointer
+        // we cache the DangerousIDBCreateCommandCreateCommand (expecting base.handle to be
+        // IDBCreateCommand)
+        // since we maintain an AddRef on IDBCreateCommand it is safe to use the delegate without rechecking
+        // its function pointer
         private UnsafeNativeMethods.IDBCreateCommandCreateCommand? DangerousIDBCreateCommandCreateCommand;
 
         public SessionWrapper()
@@ -372,13 +375,20 @@ namespace System.Data.OleDb
             // caching the fact if we have queried for IDBCreateCommand or not
             // the command object is not supported by all providers, they would use IOpenRowset
             // added extra if condition
-            // If constr.HaveQueriedForCreateCommand is false, this is the first time through this method and we need to set up the cache for sure.
-            // If two threads try to set the cache at the same time, everything should be okay. There can be multiple delegates that point to the same unmanaged function.
-            // If constr.HaveQueriedForCreateCommand is true, we have already tried to query for IDBCreateCommand on a previous call to this method, but based on that alone,
-            //     we don't know if another thread set the flag, or if the provider really doesn't support commands.
-            // If constr.HaveQueriedForCreateCommand is true and constr.DangerousIDBCreateCommandCreateCommand is not null, that means that another thread has set it after we
-            //     determined we needed to call QueryInterfaceIDBCreateCommand -- otherwise we would have called VerifyIDBCreateCommand instead
-            // In that case, we still need to set our local DangerousIDBCreateCommandCreateCommand, so we want to go through the if block even though the cache has been set on constr already
+            // If constr.HaveQueriedForCreateCommand is false, this is the first time through this method and we
+            // need to set up the cache for sure.
+            // If two threads try to set the cache at the same time, everything should be okay. There can be
+            // multiple delegates that point to the same unmanaged function.
+            // If constr.HaveQueriedForCreateCommand is true, we have already tried to query for
+            // IDBCreateCommand on a previous call to this method, but based on that alone,
+            //     we don't know if another thread set the flag, or if the provider really doesn't support
+            // commands.
+            // If constr.HaveQueriedForCreateCommand is true and constr.DangerousIDBCreateCommandCreateCommand
+            // is not null, that means that another thread has set it after we
+            //     determined we needed to call QueryInterfaceIDBCreateCommand -- otherwise we would have called
+            // VerifyIDBCreateCommand instead
+            // In that case, we still need to set our local DangerousIDBCreateCommandCreateCommand, so we want
+            // to go through the if block even though the cache has been set on constr already
             if (
                 !constr.HaveQueriedForCreateCommand
                 || (null != constr.DangerousIDBCreateCommandCreateCommand)
@@ -433,7 +443,9 @@ namespace System.Data.OleDb
                     }
                 }
             }
-            //else if constr.HaveQueriedForCreateCommand is true and constr.DangerousIDBCreateCommandCreateCommand is still null, it means that this provider doesn't support commands
+            //else if constr.HaveQueriedForCreateCommand is true and
+            // constr.DangerousIDBCreateCommandCreateCommand is still null, it means that this provider doesn't
+            // support commands
         }
 
         internal void VerifyIDBCreateCommand(OleDbConnectionString constr)

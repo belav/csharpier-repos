@@ -31,7 +31,9 @@ namespace Castle.Services.Logging.Log4netIntegration
         /// <summary>
         ///   Initializes a new instance of the <see cref="ExtendedLog4netFactory" /> class.
         /// </summary>
-        /// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net assuming it will happen externally. Useful if you're using another framework that wants to take over configuration of log4net. </param>
+        /// <param name="configuredExternally"> If <c>true</c> . Skips the initialization of log4net
+        // assuming it will happen externally. Useful if you're using another framework that wants to take over
+        // configuration of log4net. </param>
         public ExtendedLog4netFactory(bool configuredExternally)
         {
             if (configuredExternally)

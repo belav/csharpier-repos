@@ -56,7 +56,8 @@ namespace System.Reflection.PortableExecutable.Tests
             //
             //     Time Type        Size RVA  Pointer
             // -------------- - ------------------------
-            // 5670C4E6 cv           11C 0000230C      50C Format: RSDS, { 0C426227-31E6-4EC2-BD5F-712C4D96C0AB}, 1, C:\Temp\Debug.pdb
+            // 5670C4E6 cv           11C 0000230C      50C Format: RSDS, {
+            // 0C426227-31E6-4EC2-BD5F-712C4D96C0AB}, 1, C:\Temp\Debug.pdb
 
             var cvEntry = reader.ReadDebugDirectory().Single();
             Assert.Equal(DebugDirectoryEntryType.CodeView, cvEntry.Type);
@@ -99,7 +100,8 @@ namespace System.Reflection.PortableExecutable.Tests
             //
             //       Time Type        Size      RVA  Pointer
             //   -------- ------- -------- -------- --------
-            //   D2FC74D3 cv            32 00002338      538    Format: RSDS, {814C578F-7676-0263-4F8A-2D3E8528EAF1}, 1, C:\Temp\Deterministic.pdb
+            //   D2FC74D3 cv            32 00002338      538    Format: RSDS,
+            // {814C578F-7676-0263-4F8A-2D3E8528EAF1}, 1, C:\Temp\Deterministic.pdb
             //   00000000 repro          0 00000000        0
 
             var entries = reader.ReadDebugDirectory();

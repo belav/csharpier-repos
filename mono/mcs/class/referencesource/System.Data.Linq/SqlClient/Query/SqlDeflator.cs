@@ -171,9 +171,11 @@ namespace System.Data.Linq.SqlClient
                         bool safeToRemove =
                             !saveForceReferenceAll
                             && !this.referenceMap.ContainsKey(c)
-                            // don't remove anything from a distinct select (except maybe a literal value) since it would change the meaning of the comparison
+                            // don't remove anything from a distinct select (except maybe a literal value) since it would change
+                            // the meaning of the comparison
                             && !select.IsDistinct
-                            // don't remove an aggregate expression that may be the only expression that forces the grouping (since it would change the cardinality of the results)
+                            // don't remove an aggregate expression that may be the only expression that forces the grouping
+                            // (since it would change the cardinality of the results)
                             && !(
                                 select.GroupBy.Count == 0
                                 && this.aggregateChecker.HasAggregates(c.Expression)

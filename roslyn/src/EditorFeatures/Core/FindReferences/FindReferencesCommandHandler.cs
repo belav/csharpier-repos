@@ -136,8 +136,10 @@ namespace Microsoft.CodeAnalysis.FindReferences
                     nameof(StreamingFindReferencesAsync)
                 );
 
-                // Let the presented know we're starting a search.  It will give us back the context object that the FAR
-                // service will push results into. This operation is not externally cancellable.  Instead, the find refs
+                // Let the presented know we're starting a search.  It will give us back the context object that the
+                // FAR
+                // service will push results into. This operation is not externally cancellable.  Instead, the find
+                // refs
                 // window will cancel it if another request is made to use it.
                 var (context, cancellationToken) = presenter.StartSearchWithCustomColumns(
                     EditorFeaturesResources.Find_References,

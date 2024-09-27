@@ -275,7 +275,8 @@ public class HttpsTests : LoggedTest
                             );
                         }
 
-                        // Assert.Equal(tlsFeature.Protocol, tlsCopy.Protocol); // These don't directly match because the native and managed enums use different values.
+                        // Assert.Equal(tlsFeature.Protocol, tlsCopy.Protocol); // These don't directly match because the
+                        // native and managed enums use different values.
                         Assert.Equal((uint)tlsFeature.CipherAlgorithm, tlsCopy.CipherType);
                         Assert.Equal(tlsFeature.CipherStrength, (int)tlsCopy.CipherStrength);
                         Assert.Equal((uint)tlsFeature.HashAlgorithm, tlsCopy.HashType);

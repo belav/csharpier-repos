@@ -571,7 +571,8 @@ namespace System.Net
                 }
                 if (m_LeftToWrite == 0)
                 {
-                    // in this case we already passed 0 as the flag, so we don't need to call HttpSendResponseEntityBody() when we Close()
+                    // in this case we already passed 0 as the flag, so we don't need to call
+                    // HttpSendResponseEntityBody() when we Close()
                     m_Closed = true;
                 }
             }
@@ -957,7 +958,8 @@ namespace System.Net
                 }
                 else
                 {
-                    // if we sent headers and body together, numBytes will be the total, but we need to only account for the data
+                    // if we sent headers and body together, numBytes will be the total, but we need to only account for
+                    // the data
                     // result = numBytes;
                     if (asyncResult.m_DataChunks == null)
                     {

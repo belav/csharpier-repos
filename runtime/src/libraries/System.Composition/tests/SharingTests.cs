@@ -454,7 +454,8 @@ namespace System.Composition.UnitTests
 
         /// <summary>
         /// Class which is nonShared has an exportFactory in it for a shared part.
-        /// Two instances of the root class are created , the part created using export factory should not be shared
+        /// Two instances of the root class are created , the part created using export factory should not
+        // be shared
         /// </summary>
         [Fact]
         public void ClassWithNonSharedExportFactoryCreatesSharedInstances()

@@ -6,54 +6,54 @@ using System.Linq.Expressions;
 
 namespace Moq.Language.Flow
 {
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-        internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    After:
-        sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
+After:
+sealed class WhenPhrase<T> : ISetupConditionResult<T>
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-        internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    After:
-        sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
+After:
+sealed class WhenPhrase<T> : ISetupConditionResult<T>
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-        internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    After:
-        sealed class WhenPhrase<T> : ISetupConditionResult<T>
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+internal sealed class WhenPhrase<T> : ISetupConditionResult<T>
+After:
+sealed class WhenPhrase<T> : ISetupConditionResult<T>
+*/
     sealed class WhenPhrase<T> : ISetupConditionResult<T>
         where T : class
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private Mock<T> mock;
-            private Condition condition;
-    After:
-            Mock<T> mock;
-            Condition condition;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private Mock<T> mock;
+private Condition condition;
+After:
+Mock<T> mock;
+Condition condition;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private Mock<T> mock;
-            private Condition condition;
-    After:
-            Mock<T> mock;
-            Condition condition;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private Mock<T> mock;
+private Condition condition;
+After:
+Mock<T> mock;
+Condition condition;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private Mock<T> mock;
-            private Condition condition;
-    After:
-            Mock<T> mock;
-            Condition condition;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private Mock<T> mock;
+private Condition condition;
+After:
+Mock<T> mock;
+Condition condition;
+*/
     {
         Mock<T> mock;
         Condition condition;

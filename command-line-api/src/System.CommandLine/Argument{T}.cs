@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.CommandLine.Parsing;
@@ -16,7 +17,8 @@ namespace System.CommandLine
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        /// <param name="name">The name of the argument. It's not used for parsing, only when displaying Help or creating parse errors.</param>>
+        /// <param name="name">The name of the argument. It's not used for parsing, only when displaying
+        // Help or creating parse errors.</param>>
         public CliArgument(string name)
             : base(name) { }
 
@@ -86,7 +88,8 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// Configures the argument to accept only the specified values, and to suggest them as command line completions.
+        /// Configures the argument to accept only the specified values, and to suggest them as command line
+        // completions.
         /// </summary>
         /// <param name="values">The values that are allowed for the argument.</param>
         public void AcceptOnlyFromAmong(params string[] values)
@@ -132,6 +135,8 @@ namespace System.CommandLine
                     var token = result.Tokens[i];
 
                     // File class no longer check invalid character
+                    //
+                    //
                     // https://blogs.msdn.microsoft.com/jeremykuhne/2018/03/09/custom-directory-enumeration-in-net-core-2-1/
                     var invalidCharactersIndex = token.Value.IndexOfAny(invalidPathChars);
 
@@ -150,7 +155,8 @@ namespace System.CommandLine
         /// <summary>
         /// Configures the argument to accept only values representing legal file names.
         /// </summary>
-        /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
+        /// <remarks>A parse error will result, for example, if file path separators are found in the parsed
+        // value.</remarks>
         public void AcceptLegalFileNamesOnly()
         {
             Validators.Add(static result =>

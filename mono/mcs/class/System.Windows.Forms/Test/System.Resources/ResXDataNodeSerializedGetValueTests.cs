@@ -93,7 +93,8 @@ namespace MonoTests.System.Resources
 
             // get value passing null params
             object val = returnedNode.GetValue((ITypeResolutionService)null);
-            // AssertHelper.IsNotInstanceOfType (typeof (serializable), val, "#A5"); this would fail as subclasses are id-ed as instances of parents
+            // AssertHelper.IsNotInstanceOfType (typeof (serializable), val, "#A5"); this would fail as
+            // subclasses are id-ed as instances of parents
             Assert.IsInstanceOfType(typeof(serializableSubClass), val, "#A4");
         }
 
@@ -131,7 +132,8 @@ namespace MonoTests.System.Resources
         {
             ResXDataNode node = GetNodeFromResXReader(serializedResXSOAP);
             Assert.IsNotNull(node, "#A1");
-            // hard coded assembly name value refers to that generated under 2.0 prefix, so use compatible available class
+            // hard coded assembly name value refers to that generated under 2.0 prefix, so use compatible
+            // available class
             object val = node.GetValue(new ReturnSerializableSubClassITRS());
             Assert.AreEqual("name=aname;value=avalue", val.ToString(), "#A2");
         }

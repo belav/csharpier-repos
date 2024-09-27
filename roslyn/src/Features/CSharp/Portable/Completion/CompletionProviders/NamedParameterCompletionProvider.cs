@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                     return;
                 }
 
-                // Consider refining this logic to mandate completion with an argument name, if preceded by an out-of-position name
+                // Consider refining this logic to mandate completion with an argument name, if preceded by an
+                // out-of-position name
                 // See https://github.com/dotnet/roslyn/issues/20657
                 var languageVersion = document.Project.ParseOptions!.LanguageVersion();
                 if (
@@ -418,8 +419,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return Task.FromResult<TextChange?>(
                 new TextChange(
                     selectedItem.Span,
-                    // Insert extra colon if committing with '(' only: "method(parameter:(" is preferred to "method(parameter(".
-                    // In all other cases, do not add extra colon. Note that colon is already added if committing with ':'.
+                    // Insert extra colon if committing with '(' only: "method(parameter:(" is preferred to
+                    // "method(parameter(".
+                    // In all other cases, do not add extra colon. Note that colon is already added if committing with
+                    // ':'.
                     ch == '('
                         ? selectedItem.GetEntireDisplayText()
                         : selectedItem.DisplayText

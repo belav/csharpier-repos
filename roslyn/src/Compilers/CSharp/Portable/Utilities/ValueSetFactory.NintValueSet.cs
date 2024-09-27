@@ -29,17 +29,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly IValueSet<int> _values;
 
             /// <summary>
-            /// A value of type nint may, in a 64-bit runtime, take on values less than <see cref="System.Int32.MinValue"/>.
-            /// A value set representing values of type nint groups them all together, so that it is not possible to
-            /// distinguish one such value from another.  The flag <see cref="_hasSmall"/> is true when the set is considered
+            /// A value of type nint may, in a 64-bit runtime, take on values less than <see
+            // cref="System.Int32.MinValue"/>.
+            /// A value set representing values of type nint groups them all together, so that it is not
+            // possible to
+            /// distinguish one such value from another.  The flag <see cref="_hasSmall"/> is true when the set
+            // is considered
             /// to contain all values less than <see cref="System.Int32.MinValue"/> (if any).
             /// </summary>
             private readonly bool _hasSmall;
 
             /// <summary>
-            /// A value of type nint may, in a 64-bit runtime, take on values greater than <see cref="System.Int32.MaxValue"/>.
-            /// A value set representing values of type nint groups them all together, so that it is not possible to
-            /// distinguish one such value from another.  The flag <see cref="_hasLarge"/> is true when the set is considered
+            /// A value of type nint may, in a 64-bit runtime, take on values greater than <see
+            // cref="System.Int32.MaxValue"/>.
+            /// A value set representing values of type nint groups them all together, so that it is not
+            // possible to
+            /// distinguish one such value from another.  The flag <see cref="_hasLarge"/> is true when the set
+            // is considered
             /// to contain all values greater than <see cref="System.Int32.MaxValue"/> (if any).
             /// </summary>
             private readonly bool _hasLarge;

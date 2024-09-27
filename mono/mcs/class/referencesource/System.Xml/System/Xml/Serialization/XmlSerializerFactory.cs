@@ -29,7 +29,8 @@ namespace System.Xml.Serialization
     {
         static TempAssemblyCache cache = new TempAssemblyCache();
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -44,7 +45,8 @@ namespace System.Xml.Serialization
             return CreateSerializer(type, overrides, extraTypes, root, defaultNamespace, null);
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer2"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -53,7 +55,8 @@ namespace System.Xml.Serialization
             return CreateSerializer(type, null, new Type[0], root, null, null);
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer3"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -62,7 +65,8 @@ namespace System.Xml.Serialization
             return CreateSerializer(type, null, extraTypes, null, null, null);
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer4"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer4"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -71,7 +75,8 @@ namespace System.Xml.Serialization
             return CreateSerializer(type, overrides, new Type[0], null, null, null);
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer5"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer5"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -81,7 +86,8 @@ namespace System.Xml.Serialization
             return (XmlSerializer)tempAssembly.Contract.TypedSerializers[xmlTypeMapping.Key];
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer6"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer6"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -90,7 +96,8 @@ namespace System.Xml.Serialization
             return CreateSerializer(type, (string)null);
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer1"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -163,7 +170,8 @@ namespace System.Xml.Serialization
 #pragma warning restore 618
         }
 
-        /// <include file='doc\XmlSerializerFactory.uex' path='docs/doc[@for="XmlSerializerFactory.CreateSerializer7"]/*' />
+        /// <include file='doc\XmlSerializerFactory.uex'
+        // path='docs/doc[@for="XmlSerializerFactory.CreateSerializer7"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

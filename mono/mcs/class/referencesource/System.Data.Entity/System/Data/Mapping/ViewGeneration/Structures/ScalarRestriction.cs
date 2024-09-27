@@ -25,13 +25,15 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
     /// <summary>
     /// A class that denotes the boolean expression: "scalarVar in values".
-    /// See the comments in <see cref="MemberRestriction"/> for complete and incomplete restriction objects.
+    /// See the comments in <see cref="MemberRestriction"/> for complete and incomplete restriction
+    // objects.
     /// </summary>
     internal class ScalarRestriction : MemberRestriction
     {
         #region Constructors
         /// <summary>
-        /// Creates a scalar member restriction with the meaning "<paramref name="member"/> = <paramref name="value"/>".
+        /// Creates a scalar member restriction with the meaning "<paramref name="member"/> = <paramref
+        // name="value"/>".
         /// This constructor is used for creating discriminator type conditions.
         /// </summary>
         internal ScalarRestriction(MemberPath member, Constant value)
@@ -44,7 +46,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         }
 
         /// <summary>
-        /// Creates a scalar member restriction with the meaning "<paramref name="member"/> in <paramref name="values"/>".
+        /// Creates a scalar member restriction with the meaning "<paramref name="member"/> in <paramref
+        // name="values"/>".
         /// </summary>
         internal ScalarRestriction(
             MemberPath member,
@@ -54,7 +57,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             : base(new MemberProjectedSlot(member), values, possibleValues) { }
 
         /// <summary>
-        /// Creates a scalar member restriction with the meaning "<paramref name="slot"/> in <paramref name="domain"/>".
+        /// Creates a scalar member restriction with the meaning "<paramref name="slot"/> in <paramref
+        // name="domain"/>".
         /// </summary>
         internal ScalarRestriction(MemberProjectedSlot slot, Domain domain)
             : base(slot, domain) { }
@@ -365,7 +369,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             {
                 // 1. Generate "var in domain"
                 // 2. If var is not nullable, append "... and var is not null".
-                //    This is needed for boolean _from variables that must never evaluate to null because view generation assumes 2-valued boolean logic.
+                //    This is needed for boolean _from variables that must never evaluate to null because view
+                // generation assumes 2-valued boolean logic.
                 // 3. If domain contains null, prepend "var is null or ...".
                 //
                 // A complete generation pattern:
@@ -386,7 +391,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
                     domainValues.Remove(Constant.Null);
                 }
 
-                // Constraint counter-example could contain undefined cellconstant. E.g for booleans (for int its optimized out due to negated constants)
+                // Constraint counter-example could contain undefined cellconstant. E.g for booleans (for int its
+                // optimized out due to negated constants)
                 // we want to treat undefined as nulls.
                 if (domainValues.Contains(Constant.Undefined))
                 {

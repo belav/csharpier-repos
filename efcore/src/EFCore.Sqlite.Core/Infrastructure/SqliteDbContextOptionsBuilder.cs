@@ -12,12 +12,15 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     <para>
 ///         Instances of this class are returned from a call to
 ///         <see
-///             cref="SqliteDbContextOptionsBuilderExtensions.UseSqlite(DbContextOptionsBuilder, string, System.Action{SqliteDbContextOptionsBuilder})" />
+///             cref="SqliteDbContextOptionsBuilderExtensions.UseSqlite(DbContextOptionsBuilder,
+// string, System.Action{SqliteDbContextOptionsBuilder})" />
 ///         and it is not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see>, and
-///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-dbcontext-options">Using
+// DbContextOptions</see>, and
+///         <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF
+// Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public class SqliteDbContextOptionsBuilder

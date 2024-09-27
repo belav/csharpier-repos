@@ -145,8 +145,10 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
             IEnumerable<DocumentId> initialDocuments
         )
         {
-            // we can't distinguish locals and non locals from build diagnostics nor determine right snapshot version for the build.
-            // so we put everything in as semantic local with default version. this lets us to replace those to live diagnostics when needed easily.
+            // we can't distinguish locals and non locals from build diagnostics nor determine right snapshot
+            // version for the build.
+            // so we put everything in as semantic local with default version. this lets us to replace those to
+            // live diagnostics when needed easily.
             var version = VersionStamp.Default;
 
             var documentIds = ImmutableHashSet.CreateBuilder<DocumentId>();
@@ -394,7 +396,8 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
         {
             foreach (var documentId in map.Keys)
             {
-                // TryGetSourceGeneratedDocumentForAlreadyGeneratedId is being used here for a debug-only assertion. The
+                // TryGetSourceGeneratedDocumentForAlreadyGeneratedId is being used here for a debug-only assertion.
+                // The
                 // assertion is claiming that the document in which the diagnostic appears is known to exist in the
                 // project. This requires the source generators already have run.
                 var textDocument =

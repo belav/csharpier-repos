@@ -2402,7 +2402,8 @@ public class Goo
                 ),
             };
 
-            // The pattern matcher should match 'VisibleMethod' to both 'VisibleMethod' and 'VisibleMethod_Not', except that
+            // The pattern matcher should match 'VisibleMethod' to both 'VisibleMethod' and 'VisibleMethod_Not',
+            // except that
             // the _Not method is declared in a generated file.
             VerifyNavigateToResultItems(expectedItems, items);
         }

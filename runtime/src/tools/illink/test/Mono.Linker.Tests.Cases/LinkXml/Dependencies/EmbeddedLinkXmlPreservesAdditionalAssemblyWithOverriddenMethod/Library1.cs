@@ -6,7 +6,8 @@
     }
 
     /// <summary>
-    /// This is here to confirm that derived types in the same assembly as the embedded resource are correctly taken into
+    /// This is here to confirm that derived types in the same assembly as the embedded resource are
+    // correctly taken into
     /// consideration
     /// </summary>
     public class Library1Secondary : Base

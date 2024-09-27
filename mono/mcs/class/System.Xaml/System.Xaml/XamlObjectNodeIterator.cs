@@ -80,7 +80,8 @@ namespace System.Xaml
             return obj == null ? XamlLanguage.Null : ctx.GetXamlType(obj.GetType());
         }
 
-        // returns StartObject, StartMember, Value, EndMember and EndObject. (NamespaceDeclaration is not included)
+        // returns StartObject, StartMember, Value, EndMember and EndObject. (NamespaceDeclaration is not
+        // included)
         public IEnumerable<XamlNodeInfo> GetNodes()
         {
             var xobj = new XamlObject(GetType(root), root);
@@ -100,7 +101,8 @@ namespace System.Xaml
             bool partOfPositionalParameters
         )
         {
-            // collection items: each item is exposed as a standalone object that has StartObject, EndObject and contents.
+            // collection items: each item is exposed as a standalone object that has StartObject, EndObject and
+            // contents.
             if (xm == XamlLanguage.Items)
             {
                 foreach (var xn in GetItemsNodes(xm, xobj))
@@ -121,7 +123,9 @@ namespace System.Xaml
                 yield break;
             }
 
-            // PositionalParameters: items are from constructor arguments, written as Value node sequentially. Note that not all of them are in simple string value. Also, null values are not written as NullExtension
+            // PositionalParameters: items are from constructor arguments, written as Value node sequentially.
+            // Note that not all of them are in simple string value. Also, null values are not written as
+            // NullExtension
             if (xm == XamlLanguage.PositionalParameters)
             {
                 foreach (var argm in xobj.Type.GetSortedConstructorArguments())
@@ -245,7 +249,8 @@ namespace System.Xaml
                     }
                     else
                     {
-                        // The object appeared in the xaml tree for the first time. So we store the reference with a unique name so that it could be referenced later.
+                        // The object appeared in the xaml tree for the first time. So we store the reference with a unique
+                        // name so that it could be referenced later.
                         refName = GetReferenceName(xobj);
                         if (NameResolver.IsCollectingReferences && NameResolver.Contains(refName))
                             throw new InvalidOperationException(
@@ -259,7 +264,8 @@ namespace System.Xaml
                     }
                 }
                 yield return new XamlNodeInfo(XamlNodeType.StartObject, xobj);
-                // If this object is referenced and there is no [RuntimeNameProperty] member, then return Name property in addition.
+                // If this object is referenced and there is no [RuntimeNameProperty] member, then return Name
+                // property in addition.
                 if (val != null && xobj.Type.GetAliasedProperty(XamlLanguage.Name) == null)
                 {
                     string name = NameResolver.GetReferencedName(val);
@@ -342,7 +348,8 @@ namespace System.Xaml
                 // XamlLanguage.Items does not show up if the content is empty.
                 if (xce.Current.Member == XamlLanguage.Items)
                 {
-                    // FIXME: this is nasty, but this name resolution is the only side effect of this iteration model. Save-Restore procedure is required.
+                    // FIXME: this is nasty, but this name resolution is the only side effect of this iteration model.
+                    // Save-Restore procedure is required.
                     NameResolver.Save();
                     try
                     {
@@ -359,7 +366,8 @@ namespace System.Xaml
                     }
                 }
 
-                // Other collections as well, but needs different iteration (as nodes contain GetObject and EndObject).
+                // Other collections as well, but needs different iteration (as nodes contain GetObject and
+                // EndObject).
                 if (
                     !xce.Current.Member.IsWritePublic
                     && xce.Current.Member.Type != null
@@ -367,7 +375,8 @@ namespace System.Xaml
                 )
                 {
                     var e = GetNodes(xce.Current.Member, xce.Current.Value).GetEnumerator();
-                    // FIXME: this is nasty, but this name resolution is the only side effect of this iteration model. Save-Restore procedure is required.
+                    // FIXME: this is nasty, but this name resolution is the only side effect of this iteration model.
+                    // Save-Restore procedure is required.
                     NameResolver.Save();
                     try
                     {
@@ -417,8 +426,10 @@ namespace System.Xaml
                 {
                     // Key member is written *inside* the item object.
                     //
-                    // It is messy, but Key and Value are *sorted*. In most cases Key goes first, but for example PositionalParameters comes first.
-                    // To achieve this behavior, we compare XamlLanguage.Key and value's Member and returns in order. It's all nasty hack, but at least it could be achieved like this!
+                    // It is messy, but Key and Value are *sorted*. In most cases Key goes first, but for example
+                    // PositionalParameters comes first.
+                    // To achieve this behavior, we compare XamlLanguage.Key and value's Member and returns in order.
+                    // It's all nasty hack, but at least it could be achieved like this!
 
                     var en = GetNodes(null, xiobj).ToArray();
                     yield return en[0]; // StartObject
@@ -504,7 +515,8 @@ namespace System.Xaml
                 else if (xn.NodeType == XamlNodeType.StartMember)
                 {
                     var xm = xn.Member.Member;
-                    // This filtering is done as a black list so far. There does not seem to be any usable property on XamlDirective.
+                    // This filtering is done as a black list so far. There does not seem to be any usable property on
+                    // XamlDirective.
                     if (
                         xm == XamlLanguage.Items
                         || xm == XamlLanguage.PositionalParameters

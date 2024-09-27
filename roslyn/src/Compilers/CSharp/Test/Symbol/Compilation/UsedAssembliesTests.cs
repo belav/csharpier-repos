@@ -602,7 +602,8 @@ public interface I1
             var parseOptions = TestOptions.Regular.WithNoRefSafetyRulesAttribute();
             var comp1 = CreateEmptyCompilation(source, parseOptions: parseOptions);
             comp1.VerifyEmitDiagnostics(
-                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
+                // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object
+                // was found nor was a value for RuntimeMetadataVersion specified through options.
                 Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
             );
 
@@ -1962,7 +1963,8 @@ public class C2
             AssertUsedAssemblyReferences(
                 source2,
                 references: new[] { comp0Ref, comp1Ref },
-                // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'C0.M1(string, string)' and 'C1.M1(string, string)'
+                // (7,11): error CS0121: The call is ambiguous between the following methods or properties:
+                // 'C0.M1(string, string)' and 'C1.M1(string, string)'
                 //         x.M1("b");
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
                     .WithArguments("C0.M1(string, string)", "C1.M1(string, string)")
@@ -2026,7 +2028,9 @@ public class C3
 
             var expected1 = new DiagnosticDescription[]
             {
-                // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add a reference to assembly 'MethodReference_05_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'MethodReference_05_0, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         x.M1("b");
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "x.M1")
                     .WithArguments(
@@ -2113,7 +2117,8 @@ public interface C0
 
             var expected2 = new DiagnosticDescription[]
             {
-                // (7,9): error CS1748: Cannot find the interop type that matches the embedded interop type 'C0'. Are you missing an assembly reference?
+                // (7,9): error CS1748: Cannot find the interop type that matches the embedded interop type 'C0'.
+                // Are you missing an assembly reference?
                 //         x.M1("b");
                 Diagnostic(ErrorCode.ERR_NoCanonicalView, "x.M1")
                     .WithArguments("C0")
@@ -2311,7 +2316,9 @@ public class C3
             AssertUsedAssemblyReferences(
                 source3,
                 references: new[] { comp1Ref, comp2Ref },
-                // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add a reference to assembly 'MethodReference_07_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (7,9): error CS0012: The type 'C0' is defined in an assembly that is not referenced. You must add
+                // a reference to assembly 'MethodReference_07_0, Version=0.0.0.0, Culture=neutral,
+                // PublicKeyToken=null'.
                 //         new C2().M1(x);
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "new C2().M1")
                     .WithArguments(
@@ -5491,7 +5498,8 @@ class C2
                     // using N1.N2;
                     Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;")
                         .WithLocation(1001, 1),
-                    // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1001,7): error CS0246: The type or namespace name 'N1' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // using N1.N2;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
                         .WithArguments("N1")
@@ -5817,7 +5825,8 @@ class C2
                     // using static N1.N2.E0;
                     Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;")
                         .WithLocation(1001, 1),
-                    // (1001,14): error CS0246: The type or namespace name 'N1' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1001,14): error CS0246: The type or namespace name 'N1' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // using static N1.N2.E0;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
                         .WithArguments("N1")
@@ -5920,7 +5929,8 @@ class C2
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
                 )
                 .VerifyDiagnostics(
-                    // (2,7): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,7): error CS0246: The type or namespace name 'global' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // using global;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
                         .WithArguments("global")
@@ -5943,7 +5953,8 @@ class C2
                     parseOptions: TestOptions.Regular.WithDocumentationMode(DocumentationMode.None)
                 )
                 .VerifyDiagnostics(
-                    // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a using directive or an assembly reference?)
+                    // (2,16): error CS0246: The type or namespace name 'global' could not be found (are you missing a
+                    // using directive or an assembly reference?)
                     // using @alias = global;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "global")
                         .WithArguments("global")
@@ -6353,7 +6364,8 @@ public class C2
             AssertUsedAssemblyReferences(
                 source2,
                 references,
-                // (6,12): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (6,12): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language;
+                // try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         C1.P1[0] = null;
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6374,7 +6386,8 @@ public class C3
             AssertUsedAssemblyReferences(
                 source3,
                 references,
-                // (6,16): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (6,16): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language;
+                // try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = C1.P1[0];
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6401,7 +6414,8 @@ public class C2
                 // using static C1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
                     .WithLocation(1001, 1),
-                // (2005,9): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (2005,9): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the
+                // language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         P1[0] = null;
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6428,7 +6442,8 @@ public class C3
                 // using static C1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
                     .WithLocation(1001, 1),
-                // (2005,13): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (2005,13): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the
+                // language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = P1[0];
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6449,7 +6464,8 @@ public class C3
             AssertUsedAssemblyReferences(
                 source6,
                 references,
-                // (6,23): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (6,23): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language;
+                // try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = nameof(C1.P1);
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6476,7 +6492,8 @@ public class C2
                 // using static C1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
                     .WithLocation(1001, 1),
-                // (2005,20): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
+                // (2005,20): error CS1545: Property, indexer, or event 'C1.P1[int]' is not supported by the
+                // language; try directly calling accessor methods 'C1.get_P1(int)' or 'C1.set_P1(int, C0)'
                 //         _ = nameof(P1);
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P1")
                     .WithArguments("C1.P1[int]", "C1.get_P1(int)", "C1.set_P1(int, C0)")
@@ -6497,7 +6514,8 @@ public class C3
             AssertUsedAssemblyReferences(
                 source8,
                 references,
-                // (6,23): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
+                // (6,23): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the language;
+                // try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
                 //         _ = nameof(C1.P2);
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2")
                     .WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)")
@@ -6524,7 +6542,8 @@ public class C2
                 // using static C1;
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static C1;")
                     .WithLocation(1001, 1),
-                // (2005,20): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the language; try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
+                // (2005,20): error CS1545: Property, indexer, or event 'C1.P2[int]' is not supported by the
+                // language; try directly calling accessor methods 'C1.get_P2(int)' or 'C1.set_P2(int, C0)'
                 //         _ = nameof(P2);
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P2")
                     .WithArguments("C1.P2[int]", "C1.get_P2(int)", "C1.set_P2(int, C0)")
@@ -6964,7 +6983,8 @@ public class C2
 
             CreateCompilation(source2, references: new[] { comp0Ref, comp1RefWithAlias })
                 .VerifyDiagnostics(
-                    // (8,29): error CS0234: The type or namespace name 'C0' does not exist in the namespace 'Alias0' (are you missing an assembly reference?)
+                    // (8,29): error CS0234: The type or namespace name 'C0' does not exist in the namespace 'Alias0'
+                    // (are you missing an assembly reference?)
                     //         var x = new Alias0::C0();
                     Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "C0")
                         .WithArguments("C0", "Alias0")

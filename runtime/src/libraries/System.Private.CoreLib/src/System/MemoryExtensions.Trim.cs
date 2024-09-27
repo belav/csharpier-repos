@@ -204,7 +204,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static Memory<T> Trim<T>(this Memory<T> memory, ReadOnlySpan<T> trimElements)
             where T : IEquatable<T>?
         {
@@ -230,7 +231,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static Memory<T> TrimStart<T>(this Memory<T> memory, ReadOnlySpan<T> trimElements)
             where T : IEquatable<T>?
         {
@@ -253,7 +255,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static Memory<T> TrimEnd<T>(this Memory<T> memory, ReadOnlySpan<T> trimElements)
             where T : IEquatable<T>?
         {
@@ -276,7 +279,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static ReadOnlyMemory<T> Trim<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
@@ -305,7 +309,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static ReadOnlyMemory<T> TrimStart<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
@@ -331,7 +336,8 @@ namespace System
         /// </summary>
         /// <param name="memory">The source memory from which the elements are removed.</param>
         /// <param name="trimElements">The span which contains the set of elements to remove.</param>
-        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned unaltered.</remarks>
+        /// <remarks>If <paramref name="trimElements"/> is empty, the memory is returned
+        // unaltered.</remarks>
         public static ReadOnlyMemory<T> TrimEnd<T>(
             this ReadOnlyMemory<T> memory,
             ReadOnlySpan<T> trimElements
@@ -750,7 +756,8 @@ namespace System
         /// </summary>
         /// <param name="span">The source span from which the characters are removed.</param>
         /// <param name="trimChars">The span which contains the set of characters to remove.</param>
-        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed instead.</remarks>
+        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed
+        // instead.</remarks>
         public static ReadOnlySpan<char> Trim(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> trimChars
@@ -762,7 +769,8 @@ namespace System
         /// </summary>
         /// <param name="span">The source span from which the characters are removed.</param>
         /// <param name="trimChars">The span which contains the set of characters to remove.</param>
-        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed instead.</remarks>
+        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed
+        // instead.</remarks>
         public static ReadOnlySpan<char> TrimStart(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> trimChars
@@ -798,7 +806,8 @@ namespace System
         /// </summary>
         /// <param name="span">The source span from which the characters are removed.</param>
         /// <param name="trimChars">The span which contains the set of characters to remove.</param>
-        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed instead.</remarks>
+        /// <remarks>If <paramref name="trimChars"/> is empty, white-space characters are removed
+        // instead.</remarks>
         public static ReadOnlySpan<char> TrimEnd(
             this ReadOnlySpan<char> span,
             ReadOnlySpan<char> trimChars

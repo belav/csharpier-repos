@@ -236,7 +236,7 @@ public class Tests
         IntPtr p2 = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ByValTStrStruct)));
         Marshal.StructureToPtr(s, p2, false);
 
-        /* Check that the ByValTStr is initialized correctly */
+/* Check that the ByValTStr is initialized correctly */
         for (int i = 0; i < 4; ++i)
             if (Marshal.ReadByte(p2, i) != 0)
                 return 31;
@@ -248,7 +248,7 @@ public class Tests
 
         ByValTStrStruct s2 = (ByValTStrStruct)Marshal.PtrToStructure(p2, typeof(ByValTStrStruct));
 
-        /* The fourth char is lost because of null-termination */
+/* The fourth char is lost because of null-termination */
         if (s2.s1 != "ABC")
             return 32;
 
@@ -275,7 +275,7 @@ public class Tests
         IntPtr p2 = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(ByValWStrStruct)));
         Marshal.StructureToPtr(s, p2, false);
 
-        /* Check that the ByValWStr is initialized correctly */
+/* Check that the ByValWStr is initialized correctly */
         for (int i = 0; i < 8; ++i)
             if (Marshal.ReadByte(p2, i) != 0)
                 return 31;
@@ -287,7 +287,7 @@ public class Tests
 
         ByValWStrStruct s2 = (ByValWStrStruct)Marshal.PtrToStructure(p2, typeof(ByValWStrStruct));
 
-        /* The fourth char is lost because of null-termination */
+/* The fourth char is lost because of null-termination */
         if (s2.s1 != "ABC")
             return 32;
 
@@ -312,7 +312,8 @@ public class Tests
         return 0;
     }
 
-    // Check that the 'Pack' directive on a struct changes the min alignment of the struct as well (#12110)
+    // Check that the 'Pack' directive on a struct changes the min alignment of the struct as well
+    // (#12110)
     public static int test_0_struct_pack()
     {
         if (Marshal.OffsetOf(typeof(PackStruct2), "s") != new IntPtr(1))

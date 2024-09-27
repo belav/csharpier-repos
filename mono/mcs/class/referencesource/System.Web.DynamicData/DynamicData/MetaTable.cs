@@ -67,7 +67,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Name of table coming from the property on the data context. E.g. the value is "Products" for a table that is part of
+        /// Name of table coming from the property on the data context. E.g. the value is "Products" for a
+        // table that is part of
         /// the NorthwindDataContext.Products collection.
         /// </summary>
         public string DataContextPropertyName
@@ -84,8 +85,10 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Returns the column being used for display values when entries in this table are used as parents in foreign key relationships.
-        /// Which column to use can be specified using DisplayColumnAttribute. If the attribute is not present, the following heuristic is used:
+        /// Returns the column being used for display values when entries in this table are used as parents
+        // in foreign key relationships.
+        /// Which column to use can be specified using DisplayColumnAttribute. If the attribute is not
+        // present, the following heuristic is used:
         /// 1. First non-PK string column
         /// 2. First PK string column
         /// 3. First PK non-string column
@@ -109,7 +112,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the string to be user-friendly string representing this table. Defaults to the value of the Name property.
+        /// Gets the string to be user-friendly string representing this table. Defaults to the value of the
+        // Name property.
         /// Can be customized using DisplayNameAttribute.
         /// </summary>
         [SuppressMessage(
@@ -131,7 +135,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Get a comma separated list of foreign key names.  This is useful to set the IncludePaths on an EntityDataSource
+        /// Get a comma separated list of foreign key names.  This is useful to set the IncludePaths on an
+        // EntityDataSource
         /// </summary>
         public string ForeignKeyColumnsNames
         {
@@ -222,7 +227,8 @@ namespace System.Web.DynamicData
         public MetaModel Model { get; private set; }
 
         /// <summary>
-        /// Unique name of table. This name is unique within a given data context. (e.g. "MyCustomName_Products")
+        /// Unique name of table. This name is unique within a given data context. (e.g.
+        // "MyCustomName_Products")
         /// </summary>
         public string Name { get; private set; }
 
@@ -284,7 +290,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the column used as the sorting column when used FK relationships. Defaults to the same column that is returned by DisplayColumn.
+        /// Gets the column used as the sorting column when used FK relationships. Defaults to the same
+        // column that is returned by DisplayColumn.
         /// Can be customized using options on DisplayColumnAttribute.
         /// </summary>
         public virtual MetaColumn SortColumn
@@ -330,7 +337,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Returns true if the entries in this column are meant to be sorted in a descending order when used as parents in a FK relationship.
+        /// Returns true if the entries in this column are meant to be sorted in a descending order when
+        // used as parents in a FK relationship.
         /// Can be declared using options on DisplayColumnAttribute
         /// </summary>
         [SuppressMessage(
@@ -464,7 +472,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Instantiate a data context that this table belongs to. Uses the instatiotion method specified when the context was registered.
+        /// Instantiate a data context that this table belongs to. Uses the instatiotion method specified
+        // when the context was registered.
         /// </summary>
         /// <returns></returns>
         public virtual object CreateContext()
@@ -482,7 +491,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the action path for the given row (to get primary key values for query string filters, etc.)
+        /// Gets the action path for the given row (to get primary key values for query string filters,
+        // etc.)
         /// </summary>
         /// <param name="action"></param>
         /// <param name="row">the instance of the row</param>
@@ -494,7 +504,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the action path for the given row (to get primary key values for query string filters, etc.)
+        /// Gets the action path for the given row (to get primary key values for query string filters,
+        // etc.)
         /// </summary>
         /// <param name="action"></param>
         /// <param name="row">the instance of the row</param>
@@ -515,7 +526,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the action path for the current table and the passed in action. Also, include all the passed in
+        /// Gets the action path for the current table and the passed in action. Also, include all the
+        // passed in
         /// route values in the path
         /// </summary>
         /// <returns></returns>
@@ -546,7 +558,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Use the passed in path and append to it query string parameters for the passed in primary key values
+        /// Use the passed in path and append to it query string parameters for the passed in primary key
+        // values
         /// </summary>
         public string GetActionPath(string action, IList<object> primaryKeyValues, string path)
         {
@@ -695,9 +708,12 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Gets the value to be used as the display string for an instance of a row of this table when used in FK relationships.
-        /// If the row is null, returns an empty string. If the entity class has an overidden ToString() method, returns the result
-        /// of that method. Otherwise, returns the ToString representation of the value of the display column (as returned by the DisplayColumn
+        /// Gets the value to be used as the display string for an instance of a row of this table when used
+        // in FK relationships.
+        /// If the row is null, returns an empty string. If the entity class has an overidden ToString()
+        // method, returns the result
+        /// of that method. Otherwise, returns the ToString representation of the value of the display
+        // column (as returned by the DisplayColumn
         /// property) for the given row.
         /// </summary>
         /// <param name="row">the instance of the row</param>
@@ -812,7 +828,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Get the IQueryable for the entity type represented by this table (i.e. IQueryable of Product). Retrieves it from a new context
+        /// Get the IQueryable for the entity type represented by this table (i.e. IQueryable of Product).
+        // Retrieves it from a new context
         /// instantiated using the CreateContext().
         /// </summary>
         /// <returns></returns>
@@ -822,7 +839,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Get the IQueryable for the entity type represented by this table (i.e. IQueryable of Product). Retrieves it from the provided
+        /// Get the IQueryable for the entity type represented by this table (i.e. IQueryable of Product).
+        // Retrieves it from the provided
         /// context instance, or instantiates a new context using the CreateContext().
         /// </summary>
         /// <param name="context"></param>
@@ -873,15 +891,18 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Returns an enumeration of columns that are to be displayed in a scaffolded context. By default all columns with the Scaffold
+        /// Returns an enumeration of columns that are to be displayed in a scaffolded context. By default
+        // all columns with the Scaffold
         /// property set to true are included, with the exception of:
         /// <ul>
-        /// <li>Long-string columns (IsLongString property set to true) when the inListControl flag is true</li>
+        /// <li>Long-string columns (IsLongString property set to true) when the inListControl flag is
+        // true</li>
         /// <li>Children columns when mode is equal to Insert</li>
         /// </ul>
         /// </summary>
         /// <param name="mode">The mode, such as ReadOnly, Edit, or Insert.</param>
-        /// <param name="inListControl">A flag indicating if the table is being displayed as an individual entity or as part of list-grid.</param>
+        /// <param name="inListControl">A flag indicating if the table is being displayed as an individual
+        // entity or as part of list-grid.</param>
         /// <returns></returns>
         public virtual IEnumerable<MetaColumn> GetScaffoldColumns(
             DataBoundControlMode mode,
@@ -1072,8 +1093,10 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Resets cached table metadata (i.e. information coming from attributes) as well as metadata of all columns.
-        /// The metadata cache will be rebuilt the next time any metadata-derived information gets requested.
+        /// Resets cached table metadata (i.e. information coming from attributes) as well as metadata of
+        // all columns.
+        /// The metadata cache will be rebuilt the next time any metadata-derived information gets
+        // requested.
         /// </summary>
         public void ResetMetadata()
         {
@@ -1238,7 +1261,8 @@ namespace System.Web.DynamicData
 
         IEnumerable<IMetaColumn> IMetaTable.GetFilteredColumns()
         {
-            // We can remove the of type when we get rid of the Vnext solution since interface covariance support
+            // We can remove the of type when we get rid of the Vnext solution since interface covariance
+            // support
             // was only added in 4.0
             return GetFilteredColumns().OfType<IMetaColumn>();
         }
@@ -1248,7 +1272,8 @@ namespace System.Web.DynamicData
             ContainerType containerType
         )
         {
-            // We can remove the of type when we get rid of the Vnext solution since interface covariance support
+            // We can remove the of type when we get rid of the Vnext solution since interface covariance
+            // support
             // was only added in 4.0
             return GetScaffoldColumns(mode, containerType).OfType<IMetaColumn>();
         }

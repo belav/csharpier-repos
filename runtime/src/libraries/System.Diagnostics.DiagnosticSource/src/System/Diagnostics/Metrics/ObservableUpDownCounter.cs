@@ -6,12 +6,15 @@ using System.Collections.Generic;
 namespace System.Diagnostics.Metrics
 {
     /// <summary>
-    /// ObservableUpDownCounter is a metrics observable Instrument which reports increasing or decreasing value(s) when the instrument is being observed.
+    /// ObservableUpDownCounter is a metrics observable Instrument which reports increasing or
+    // decreasing value(s) when the instrument is being observed.
     /// e.g. the process heap size or the approximate number of items in a lock-free circular buffer.
     /// Use Meter.CreateObservableUpDownCounter methods to create an ObservableUpDownCounter object.
     /// </summary>
     /// <remarks>
-    /// This class supports only the following generic parameter types: <see cref="byte" />, <see cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double" />, and <see cref="decimal" />
+    /// This class supports only the following generic parameter types: <see cref="byte" />, <see
+    // cref="short" />, <see cref="int" />, <see cref="long" />, <see cref="float" />, <see cref="double"
+    // />, and <see cref="decimal" />
     /// </remarks>
     public sealed class ObservableUpDownCounter<T> : ObservableInstrument<T>
         where T : struct

@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="kind">The image kind - assembly or module.</param>
         /// <param name="aliases">Assembly aliases. Can't be set for a module.</param>
-        /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the referencing compilation. Must be false for a module.</param>
+        /// <param name="embedInteropTypes">True to embed interop types from the referenced assembly to the
+        // referencing compilation. Must be false for a module.</param>
         public MetadataReferenceProperties(
             MetadataImageKind kind = MetadataImageKind.Assembly,
             ImmutableArray<string> aliases = default,
@@ -126,9 +127,11 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns <see cref="MetadataReferenceProperties"/> with <see cref="EmbedInteropTypes"/> set to specified value.
+        /// Returns <see cref="MetadataReferenceProperties"/> with <see cref="EmbedInteropTypes"/> set to
+        // specified value.
         /// </summary>
-        /// <exception cref="ArgumentException"><see cref="Kind"/> is <see cref="MetadataImageKind.Module"/>, as interop types can't be embedded from modules.</exception>
+        /// <exception cref="ArgumentException"><see cref="Kind"/> is <see
+        // cref="MetadataImageKind.Module"/>, as interop types can't be embedded from modules.</exception>
         public MetadataReferenceProperties WithEmbedInteropTypes(bool embedInteropTypes)
         {
             return new MetadataReferenceProperties(
@@ -140,7 +143,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns <see cref="MetadataReferenceProperties"/> with <see cref="HasRecursiveAliases"/> set to specified value.
+        /// Returns <see cref="MetadataReferenceProperties"/> with <see cref="HasRecursiveAliases"/> set to
+        // specified value.
         /// </summary>
         internal MetadataReferenceProperties WithRecursiveAliases(bool value)
         {
@@ -156,7 +160,8 @@ namespace Microsoft.CodeAnalysis
         /// Alias that represents a global declaration space.
         /// </summary>
         /// <remarks>
-        /// Namespaces in references whose <see cref="Aliases"/> contain <see cref="GlobalAlias"/> are available in global declaration space.
+        /// Namespaces in references whose <see cref="Aliases"/> contain <see cref="GlobalAlias"/> are
+        // available in global declaration space.
         /// </remarks>
         public static string GlobalAlias => "global";
 
@@ -170,18 +175,21 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                // Simplify usage - we can't avoid the _aliases field being null but we can always return empty array here:
+                // Simplify usage - we can't avoid the _aliases field being null but we can always return empty
+                // array here:
                 return _aliases.NullToEmpty();
             }
         }
 
         /// <summary>
-        /// True if interop types defined in the referenced metadata should be embedded into the compilation referencing the metadata.
+        /// True if interop types defined in the referenced metadata should be embedded into the compilation
+        // referencing the metadata.
         /// </summary>
         public bool EmbedInteropTypes => _embedInteropTypes;
 
         /// <summary>
-        /// True to apply <see cref="Aliases"/> recursively on the target assembly and on all its transitive dependencies.
+        /// True to apply <see cref="Aliases"/> recursively on the target assembly and on all its transitive
+        // dependencies.
         /// False to apply <see cref="Aliases"/> only on the target assembly.
         /// </summary>
         internal bool HasRecursiveAliases { get; private set; }

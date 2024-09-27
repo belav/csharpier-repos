@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 /// </summary>
 internal sealed class DateHeaderValueManager : IHeartbeatHandler
 {
-    // This uses C# compiler's ability to refer to static data directly. For more information see https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
+    // This uses C# compiler's ability to refer to static data directly. For more information see
+    // https://vcsjones.dev/2019/02/01/csharp-readonly-span-bytes-static
     private static ReadOnlySpan<byte> DatePreambleBytes => "\r\nDate: "u8;
 
     public TimeProvider _timeProvider;
@@ -25,7 +26,8 @@ internal sealed class DateHeaderValueManager : IHeartbeatHandler
     }
 
     /// <summary>
-    /// Returns a value representing the current server date/time for use in the HTTP "Date" response header
+    /// Returns a value representing the current server date/time for use in the HTTP "Date" response
+    // header
     /// in accordance with http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.18
     /// </summary>
     /// <returns>The value in string and byte[] format.</returns>

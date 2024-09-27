@@ -163,7 +163,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             // regular case.
-            // start token can't be end of file token and start token must be before end token if it's not the same token.
+            // start token can't be end of file token and start token must be before end token if it's not the
+            // same token.
             return root.FullSpan.End == startToken.SpanStart
                 || startToken.FullSpan.End > endToken.FullSpan.Start;
         }
@@ -300,17 +301,22 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         /// <summary>
-        /// this will create a span that includes its trailing trivia of its previous token and leading trivia of its next token
-        /// for example, for code such as "class A { int ...", if given tokens are "A" and "{", this will return span [] of "class[ A { ]int ..."
-        /// which included trailing trivia of "class" which is previous token of "A", and leading trivia of "int" which is next token of "{"
+        /// this will create a span that includes its trailing trivia of its previous token and leading
+        // trivia of its next token
+        /// for example, for code such as "class A { int ...", if given tokens are "A" and "{", this will
+        // return span [] of "class[ A { ]int ..."
+        /// which included trailing trivia of "class" which is previous token of "A", and leading trivia of
+        // "int" which is next token of "{"
         /// </summary>
         public static TextSpan GetSpanIncludingTrailingAndLeadingTriviaOfAdjacentTokens(
             SyntaxToken startToken,
             SyntaxToken endToken
         )
         {
-            // most of cases we can just ask previous and next token to create the span, but in some corner cases such as omitted token case,
-            // those navigation function doesn't work, so we have to explore the tree ourselves to create correct span
+            // most of cases we can just ask previous and next token to create the span, but in some corner
+            // cases such as omitted token case,
+            // those navigation function doesn't work, so we have to explore the tree ourselves to create
+            // correct span
             var startPosition = GetStartPositionOfSpan(startToken);
             var endPosition = GetEndPositionOfSpan(endToken);
 

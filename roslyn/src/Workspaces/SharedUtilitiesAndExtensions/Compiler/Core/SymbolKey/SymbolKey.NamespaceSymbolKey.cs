@@ -73,7 +73,8 @@ namespace Microsoft.CodeAnalysis
                     _ => throw ExceptionUtilities.UnexpectedValue(containerKind),
                 };
 
-                // Namespaces are never parented by types, so there can be no contextual type to resolve our container.
+                // Namespaces are never parented by types, so there can be no contextual type to resolve our
+                // container.
                 var containingSymbolResolution = reader.ReadSymbolKey(
                     containingContextualSymbol,
                     out var containingSymbolFailureReason

@@ -188,7 +188,8 @@ class D
                     parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp2)
                 )
                 .VerifyDiagnostics(
-                    // (6,9): error CS8023: Feature 'implicitly typed local variable' is not available in C# 2. Please use language version 3 or greater.
+                    // (6,9): error CS8023: Feature 'implicitly typed local variable' is not available in C# 2. Please
+                    // use language version 3 or greater.
                     //         var v = 1;
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion2, "var")
                         .WithArguments("implicitly typed local variable", "3")

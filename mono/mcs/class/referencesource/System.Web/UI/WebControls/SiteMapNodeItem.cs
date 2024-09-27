@@ -21,7 +21,8 @@ namespace System.Web.UI.WebControls
         private SiteMapNode _siteMapNode;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.SiteMapNodeItem'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.SiteMapNodeItem'/>
+        // class.</para>
         /// </devdoc>
         public SiteMapNodeItem(int itemIndex, SiteMapNodeItemType itemType)
         {
@@ -47,7 +48,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the type of the item in the <see cref='System.Web.UI.WebControls.DataList'/>.</para>
+        /// <para>Indicates the type of the item in the <see
+        // cref='System.Web.UI.WebControls.DataList'/>.</para>
         /// </devdoc>
         public virtual SiteMapNodeItemType ItemType
         {

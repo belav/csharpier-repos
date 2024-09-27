@@ -19,7 +19,8 @@ namespace System.Web.WebSockets
     [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
     internal sealed class WebSocketPipe : IWebSocketPipe
     {
-        // Managed representation (bindable as an anonymous delegate) of work that can be called by the thunk
+        // Managed representation (bindable as an anonymous delegate) of work that can be called by the
+        // thunk
         private delegate void CompletionCallback(
             int hrError,
             int cbIO,
@@ -65,10 +66,12 @@ namespace System.Web.WebSockets
         {
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            // The buffer will be read from asynchronously by unmanaged code, so we require that it remain pinned
+            // The buffer will be read from asynchronously by unmanaged code, so we require that it remain
+            // pinned
             PinnedArraySegment<byte> pinnedBuffer = new PinnedArraySegment<byte>(buffer);
 
-            // Callback will always be called (since it is responsible for cleanup), even if completed synchronously
+            // Callback will always be called (since it is responsible for cleanup), even if completed
+            // synchronously
             CompletionCallback callback = (hrError, cbIO, fUtf8Encoded, fFinalFragment, fClose) =>
             {
                 try
@@ -131,7 +134,8 @@ namespace System.Web.WebSockets
         {
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            // Callback will always be called (since it is responsible for cleanup), even if completed synchronously
+            // Callback will always be called (since it is responsible for cleanup), even if completed
+            // synchronously
             CompletionCallback callback = (hrError, cbIO, fUtf8Encoded, fFinalFragment, fClose) =>
             {
                 try
@@ -178,10 +182,12 @@ namespace System.Web.WebSockets
             TaskCompletionSource<WebSocketReceiveResult> tcs =
                 new TaskCompletionSource<WebSocketReceiveResult>();
 
-            // The buffer will be written to asynchronously by unmanaged code, so we require that it remain pinned
+            // The buffer will be written to asynchronously by unmanaged code, so we require that it remain
+            // pinned
             PinnedArraySegment<byte> pinnedBuffer = new PinnedArraySegment<byte>(buffer);
 
-            // Callback will always be called (since it is responsible for cleanup), even if completed synchronously
+            // Callback will always be called (since it is responsible for cleanup), even if completed
+            // synchronously
             CompletionCallback callback = (hrError, cbIO, fUtf8Encoded, fFinalFragment, fClose) =>
             {
                 try
@@ -311,7 +317,8 @@ namespace System.Web.WebSockets
             _context.CloseTcpConnection();
         }
 
-        // This thunk dispatches to the appropriate instance continuation when an asynchronous event completes
+        // This thunk dispatches to the appropriate instance continuation when an asynchronous event
+        // completes
         private static void AsyncCallbackThunk(
             int hrError,
             IntPtr pvCompletionContext,
@@ -321,7 +328,8 @@ namespace System.Web.WebSockets
             bool fClose
         )
         {
-            // Calling UnrootObject also makes the callback and everything it references eligible for garbage collection
+            // Calling UnrootObject also makes the callback and everything it references eligible for garbage
+            // collection
             CompletionCallback callback = (CompletionCallback)
                 GCUtil.UnrootObject(pvCompletionContext);
             callback(hrError, cbIO, fUtf8Encoded, fFinalFragment, fClose);

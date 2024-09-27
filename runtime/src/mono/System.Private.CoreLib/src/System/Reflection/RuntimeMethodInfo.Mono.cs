@@ -381,12 +381,12 @@ namespace System.Reflection
             }
         }
 
-        /*
-         * InternalInvoke() receives the parameters correctly converted by the
-         * binder to match the types of the method signature.
-         * The exc argument is used to capture exceptions thrown by the icall.
-         * Exceptions thrown by the called method propagate normally.
-         */
+/*
+* InternalInvoke() receives the parameters correctly converted by the
+* binder to match the types of the method signature.
+* The exc argument is used to capture exceptions thrown by the icall.
+* Exceptions thrown by the called method propagate normally.
+*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern object? InternalInvoke(object? obj, IntPtr* args, out Exception? exc);
 
@@ -449,7 +449,7 @@ namespace System.Reflection
         {
             int count = 0;
 
-            /* MS.NET doesn't report MethodImplAttribute */
+/* MS.NET doesn't report MethodImplAttribute */
 
             MonoMethodInfo info = MonoMethodInfo.GetMethodInfo(mhandle);
             if ((info.iattrs & MethodImplAttributes.PreserveSig) != 0)
@@ -554,7 +554,7 @@ namespace System.Reflection
         {
             int count = 0;
 
-            /* MS.NET doesn't report MethodImplAttribute */
+/* MS.NET doesn't report MethodImplAttribute */
 
             MonoMethodInfo info = MonoMethodInfo.GetMethodInfo(mhandle);
             if ((info.iattrs & MethodImplAttributes.PreserveSig) != 0)
@@ -671,7 +671,7 @@ namespace System.Reflection
                     SR.Format(SR.Arg_NotGenericMethodDefinition, this)
                 );
 
-            /*FIXME add GetGenericArgumentsLength() internal vcall to speed this up*/
+/*FIXME add GetGenericArgumentsLength() internal vcall to speed this up*/
             if (GetGenericArguments().Length != methodInstantiation.Length)
                 throw new ArgumentException(
                     SR.Format(
@@ -867,10 +867,10 @@ namespace System.Reflection
             InvokeClassConstructor(new QCallTypeHandle(ref type));
         }
 
-        /*
-         * InternalInvoke() receives the parameters correctly converted by the binder
-         * to match the types of the method signature.
-         */
+/*
+* InternalInvoke() receives the parameters correctly converted by the binder
+* to match the types of the method signature.
+*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern object InternalInvoke(object? obj, IntPtr* args, out Exception? exc);
 

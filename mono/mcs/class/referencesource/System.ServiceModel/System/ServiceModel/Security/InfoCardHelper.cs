@@ -43,7 +43,8 @@ namespace System.ServiceModel.Security
         static Uri selfIssuerUri;
 
         // Summary:
-        //  If interactive support is requested and an IssuedSecurityTokenParameters is specified this method
+        //  If interactive support is requested and an IssuedSecurityTokenParameters is specified this
+        // method
         //  will return an instance of an InfoCardTokenProvider.
         //  Otherwise this method defers to the base implementation.
         //
@@ -87,7 +88,8 @@ namespace System.ServiceModel.Security
                 || !clientCredentialsTokenManager.IsIssuedSecurityTokenRequirement(tokenRequirement)
             )
             {
-                //IDT.TraceDebug("ICARDTOKPROV: Non Issued SecurityToken requirement submitted to InfoCardClientCredentialsSecurityTokenManager:\n{0}", tokenRequirement);
+                //IDT.TraceDebug("ICARDTOKPROV: Non Issued SecurityToken requirement submitted to
+                // InfoCardClientCredentialsSecurityTokenManager:\n{0}", tokenRequirement);
                 //IDT.TraceDebug("ICARDTOKPROV: Defering to the base class to create the token provider");
             }
             else
@@ -315,7 +317,8 @@ namespace System.ServiceModel.Security
 
         //
         // Summary:
-        //  Checks the policy chain to determine which target and issuer in the chain the InfoCard system should be invoked with.
+        //  Checks the policy chain to determine which target and issuer in the chain the InfoCard system
+        // should be invoked with.
         //
         //  Cases:
         //
@@ -343,7 +346,8 @@ namespace System.ServiceModel.Security
         {
             relyingPartyIssuer = null;
 
-            //IDT.TraceDebug("ICARDTOKPROV: Attempting to identify the relying party requiring infocard support.");
+            //IDT.TraceDebug("ICARDTOKPROV: Attempting to identify the relying party requiring infocard
+            // support.");
 
             if (0 == chain.Length)
             {
@@ -477,7 +481,8 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                // create a federation token provider and add an internal client credentials shim that contains the chain
+                // create a federation token provider and add an internal client credentials shim that contains the
+                // chain
                 IssuedSecurityTokenProvider federationTokenProvider = (IssuedSecurityTokenProvider)
                     clientCredentialsTokenManager.CreateSecurityTokenProvider(
                         tokenRequirement,
@@ -605,7 +610,8 @@ namespace System.ServiceModel.Security
         }
 
         // Summary:
-        //  Searches a security binding element for a single IssuedSecurityTokenParameters.  This method will throw an
+        //  Searches a security binding element for a single IssuedSecurityTokenParameters.  This method
+        // will throw an
         //  argument exception if more than one is found.
         //
         // Parameters:
@@ -624,7 +630,8 @@ namespace System.ServiceModel.Security
             }
 
             //
-            // This object can have a value assigned to it exactly once.  After one assignment of a non-null value
+            // This object can have a value assigned to it exactly once.  After one assignment of a non-null
+            // value
             // any other non-null assignment will cause the object to throw an argument excaption.
             //
             ThrowOnMultipleAssignment<IssuedSecurityTokenParameters> issuedTokenParameters =
@@ -727,7 +734,8 @@ namespace System.ServiceModel.Security
 
             //
             // Parameters:
-            //  errorString  - If Value gets assigned to more than once an argument exception will be thrown with this
+            //  errorString  - If Value gets assigned to more than once an argument exception will be thrown
+            // with this
             //                 string as the Exception string.
             //
             public ThrowOnMultipleAssignment(string errorString)
@@ -783,11 +791,15 @@ namespace System.ServiceModel.Security
 
         //
         // Summary:
-        //  This class knows how to walk a chain of IssuedSecurityTokenParameters and figure out at what point
+        //  This class knows how to walk a chain of IssuedSecurityTokenParameters and figure out at what
+        // point
         //  in the chain the InfoCard system should be invoked.  The idea is to identify the single most
-        //  appropriate place in the referral chain to involve user selection(if at all) . This decision is affected
-        //  by the previously established relationships that the user has with some issuers. Some issuers may have
-        //  issued "InfoCards" to the user allowing them to choose which collection of claims should be used to generate
+        //  appropriate place in the referral chain to involve user selection(if at all) . This decision is
+        // affected
+        //  by the previously established relationships that the user has with some issuers. Some issuers
+        // may have
+        //  issued "InfoCards" to the user allowing them to choose which collection of claims should be used
+        // to generate
         //  a token for the relying party.
         //
         //  When asked for a token provider this class will return a FederatedServiceTokenProvider for

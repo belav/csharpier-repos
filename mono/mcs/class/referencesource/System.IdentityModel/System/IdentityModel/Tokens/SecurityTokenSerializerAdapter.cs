@@ -18,8 +18,10 @@ using System.Xml;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// This class derives from System.IdentityModel.Selectors.SecurityTokenSerializer and wraps a collection of SecurityTokenHandlers.
-    /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if no token handler
+    /// This class derives from System.IdentityModel.Selectors.SecurityTokenSerializer and wraps a
+    // collection of SecurityTokenHandlers.
+    /// Any call to this serilaizer is delegated to the token handler and delegated to the base class if
+    // no token handler
     /// is registered to handle this particular token or KeyIdentifier.
     /// </summary>
     class SecurityTokenSerializerAdapter : SecurityTokenSerializer
@@ -30,7 +32,8 @@ namespace System.IdentityModel.Tokens
         /// Initializes an instance of <see cref="SecurityTokenSerializerAdapter"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollection">
-        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollection" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// </param>
         public SecurityTokenSerializerAdapter(
             SecurityTokenHandlerCollection securityTokenHandlerCollection
@@ -101,7 +104,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">XmlWriter to write to.</param>
         /// <param name="token">The SecurityToken to serializer.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'token' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'writer' or 'token' is
+        // null.</exception>
         protected override void WriteTokenCore(XmlWriter writer, SecurityToken token)
         {
             _securityTokenHandlers.WriteToken(writer, token);
@@ -127,10 +131,12 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads an SecurityKeyIdentifier from a XML stream.
         /// </summary>
-        /// <param name="reader">An XML reader positioned at an SecurityKeyIdentifier (ds: KeyInfo) as defined in 'http://www.w3.org/TR/xmldsig-core'.</param>
+        /// <param name="reader">An XML reader positioned at an SecurityKeyIdentifier (ds: KeyInfo) as
+        // defined in 'http://www.w3.org/TR/xmldsig-core'.</param>
         /// <returns>SecurityKeyIdentifier.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned at KeyInfo element.</exception>
+        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned
+        // at KeyInfo element.</exception>
         protected override SecurityKeyIdentifier ReadKeyIdentifierCore(XmlReader reader)
         {
             if (reader == null)
@@ -201,7 +207,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="keyIdentifierClause">SecurityKeyIdentifierClause to be checked.</param>
         /// <returns>'True' if the SecurityTokenKeyIdentifierClause can be written.</returns>
-        /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'keyIdentifierClause' is
+        // null.</exception>
         protected override bool CanWriteKeyIdentifierClauseCore(
             SecurityKeyIdentifierClause keyIdentifierClause
         )

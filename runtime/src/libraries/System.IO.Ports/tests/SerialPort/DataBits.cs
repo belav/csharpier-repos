@@ -16,7 +16,8 @@ namespace System.IO.Ports.Tests
         private const int DEFAULT_BYTE_SIZE = 512;
 
         //If the percentage difference between the expected time to transfer with the specified dataBits
-        //and the actual time found through Stopwatch is greater then 5% then the DataBits value was not correctly
+        //and the actual time found through Stopwatch is greater then 5% then the DataBits value was not
+        // correctly
         //set and the testcase fails.
         private const double MAX_ACCEPTABLE_PERCENTAGE_DIFFERENCE = .05;
 

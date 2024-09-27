@@ -14,7 +14,8 @@ namespace System.Collections.Concurrent
     /// </summary>
     /// <typeparam name="T">Specifies the type of elements in the queue.</typeparam>
     /// <remarks>
-    /// All public and protected members of <see cref="ConcurrentQueue{T}"/> are thread-safe and may be used
+    /// All public and protected members of <see cref="ConcurrentQueue{T}"/> are thread-safe and may be
+    // used
     /// concurrently from multiple threads.
     /// </remarks>
     [DebuggerDisplay("Count = {Count}")]
@@ -50,7 +51,8 @@ namespace System.Collections.Concurrent
         private const int MaxSegmentLength = 1024 * 1024;
 
         /// <summary>
-        /// Lock used to protect cross-segment operations, including any updates to <see cref="_tail"/> or <see cref="_head"/>
+        /// Lock used to protect cross-segment operations, including any updates to <see cref="_tail"/> or
+        // <see cref="_head"/>
         /// and any operations that need to get a consistent view of them.
         /// </summary>
         private readonly object _crossSegmentLock;
@@ -71,13 +73,15 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ConcurrentQueue{T}"/> class that contains elements copied
+        /// Initializes a new instance of the <see cref="ConcurrentQueue{T}"/> class that contains elements
+        // copied
         /// from the specified collection.
         /// </summary>
         /// <param name="collection">
         /// The collection whose elements are copied to the new <see cref="ConcurrentQueue{T}"/>.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> argument is null.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> argument is
+        // null.</exception>
         public ConcurrentQueue(IEnumerable<T> collection)
         {
             if (collection == null)
@@ -119,7 +123,8 @@ namespace System.Collections.Concurrent
         /// elements copied from the <see cref="ConcurrentQueue{T}"/>. <paramref name="array"/> must have
         /// zero-based indexing.
         /// </param>
-        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying begins.</param>
+        /// <param name="index">The zero-based index in <paramref name="array"/> at which copying
+        // begins.</param>
         /// <exception cref="ArgumentNullException"><paramref name="array"/> is a null reference (Nothing in
         /// Visual Basic).</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="index"/> is less than
@@ -180,7 +185,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>
-        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the collection.</returns>
+        /// <returns>An <see cref="IEnumerator"/> that can be used to iterate through the
+        // collection.</returns>
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<T>)this).GetEnumerator();
 
         /// <summary>
@@ -220,9 +226,11 @@ namespace System.Collections.Concurrent
         /// <value>true if the <see cref="ConcurrentQueue{T}"/> is empty; otherwise, false.</value>
         /// <remarks>
         /// For determining whether the collection contains any items, use of this property is recommended
-        /// rather than retrieving the number of items from the <see cref="Count"/> property and comparing it
+        /// rather than retrieving the number of items from the <see cref="Count"/> property and comparing
+        // it
         /// to 0.  However, as this collection is intended to be accessed concurrently, it may be the case
-        /// that another thread will modify the collection after <see cref="IsEmpty"/> returns, thus invalidating
+        /// that another thread will modify the collection after <see cref="IsEmpty"/> returns, thus
+        // invalidating
         /// the result.
         /// </remarks>
         public bool IsEmpty =>
@@ -231,8 +239,10 @@ namespace System.Collections.Concurrent
             // TryPeek(out T) or Count == 0 to check whether any elements are in the queue.
             !TryPeek(out _, resultUsed: false);
 
-        /// <summary>Copies the elements stored in the <see cref="ConcurrentQueue{T}"/> to a new array.</summary>
-        /// <returns>A new array containing a snapshot of elements copied from the <see cref="ConcurrentQueue{T}"/>.</returns>
+        /// <summary>Copies the elements stored in the <see cref="ConcurrentQueue{T}"/> to a new
+        // array.</summary>
+        /// <returns>A new array containing a snapshot of elements copied from the <see
+        // cref="ConcurrentQueue{T}"/>.</returns>
         public T[] ToArray()
         {
             // Snap the current contents for enumeration.
@@ -324,12 +334,15 @@ namespace System.Collections.Concurrent
                     else
                     {
                         // There were more than two segments in the queue.  Fall back to taking the cross-segment lock,
-                        // which will ensure that the head and tail segments we read are stable (since the lock is needed to change them);
-                        // for the two-segment case above, we can simply rely on subsequent comparisons, but for the two+ case, we need
+                        // which will ensure that the head and tail segments we read are stable (since the lock is needed to
+                        // change them);
+                        // for the two-segment case above, we can simply rely on subsequent comparisons, but for the two+
+                        // case, we need
                         // to be able to trust the internal segments between the head and tail.
                         lock (_crossSegmentLock)
                         {
-                            // Now that we hold the lock, re-read the previously captured head and tail segments and head positions.
+                            // Now that we hold the lock, re-read the previously captured head and tail segments and head
+                            // positions.
                             // If either has changed, start over.
                             if (head == _head && tail == _tail)
                             {
@@ -345,7 +358,8 @@ namespace System.Collections.Concurrent
                                 )
                                 {
                                     // We got stable values for the head and tail segments, so we can just compute the sizes
-                                    // based on those and add them. Note that this and the below additions to count may overflow: previous
+                                    // based on those and add them. Note that this and the below additions to count may overflow:
+                                    // previous
                                     // implementations allowed that, so we don't check, either, and it is theoretically possible for the
                                     // queue to store more than int.MaxValue items.
                                     int count =
@@ -384,7 +398,8 @@ namespace System.Collections.Concurrent
             }
         }
 
-        /// <summary>Computes the number of items in a segment based on a fixed head and tail in that segment.</summary>
+        /// <summary>Computes the number of items in a segment based on a fixed head and tail in that
+        // segment.</summary>
         private static int GetCount(ConcurrentQueueSegment<T> s, int head, int tail)
         {
             if (head != tail && head != tail - s.FreezeOffset)
@@ -521,7 +536,8 @@ namespace System.Collections.Concurrent
             Debug.Assert(count == i - index);
         }
 
-        /// <summary>Returns an enumerator that iterates through the <see cref="ConcurrentQueue{T}"/>.</summary>
+        /// <summary>Returns an enumerator that iterates through the <see
+        // cref="ConcurrentQueue{T}"/>.</summary>
         /// <returns>An enumerator for the contents of the <see
         /// cref="ConcurrentQueue{T}"/>.</returns>
         /// <remarks>
@@ -581,7 +597,8 @@ namespace System.Collections.Concurrent
             }
         }
 
-        /// <summary>Gets the item stored in the <paramref name="i"/>th entry in <paramref name="segment"/>.</summary>
+        /// <summary>Gets the item stored in the <paramref name="i"/>th entry in <paramref
+        // name="segment"/>.</summary>
         private static T GetItemWhenAvailable(ConcurrentQueueSegment<T> segment, int i)
         {
             Debug.Assert(segment._preservedForObservation);
@@ -683,7 +700,8 @@ namespace System.Collections.Concurrent
         /// <summary>Adds an object to the end of the <see cref="ConcurrentQueue{T}"/>.</summary>
         /// <param name="item">
         /// The object to add to the end of the <see cref="ConcurrentQueue{T}"/>.
-        /// The value can be a null reference (<see langword="Nothing" /> in Visual Basic) for reference types.
+        /// The value can be a null reference (<see langword="Nothing" /> in Visual Basic) for reference
+        // types.
         /// </param>
         public void Enqueue(T item)
         {
@@ -746,7 +764,8 @@ namespace System.Collections.Concurrent
         /// cref="ConcurrentQueue{T}"/>.
         /// </summary>
         /// <param name="result">
-        /// When this method returns, if the operation was successful, <paramref name="result"/> contains the
+        /// When this method returns, if the operation was successful, <paramref name="result"/> contains
+        // the
         /// object removed. If no object was available to be removed, the value is unspecified.
         /// </param>
         /// <returns>
@@ -841,7 +860,8 @@ namespace System.Collections.Concurrent
 
         /// <summary>Attempts to retrieve the value for the first element in the queue.</summary>
         /// <param name="result">The value of the first element, if found.</param>
-        /// <param name="resultUsed">true if the result is needed; otherwise false if only the true/false outcome is needed.</param>
+        /// <param name="resultUsed">true if the result is needed; otherwise false if only the true/false
+        // outcome is needed.</param>
         /// <returns>true if an element was found; otherwise, false.</returns>
         private bool TryPeek([MaybeNullWhen(false)] out T result, bool resultUsed)
         {

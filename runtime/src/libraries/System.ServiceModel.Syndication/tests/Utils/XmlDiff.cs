@@ -621,7 +621,8 @@ namespace System.ServiceModel.Syndication.Tests
             return DiffType.Success;
         }
 
-        // This function writes the result in XML format so that it can be used by other applications to display the diff
+        // This function writes the result in XML format so that it can be used by other applications to
+        // display the diff
         private void WriteResult(XmlDiffNode sourceNode, XmlDiffNode targetNode, DiffType result)
         {
             if (DontWriteAnythingToOutput)
@@ -729,7 +730,8 @@ namespace System.ServiceModel.Syndication.Tests
             }
         }
 
-        // This is a helper function for WriteResult.  It gets the Xml representation of the different node we wants
+        // This is a helper function for WriteResult.  It gets the Xml representation of the different node
+        // we wants
         // to write out and all it's children.
         private string GetNodeText(XmlDiffNode diffNode, DiffType result)
         {
@@ -781,7 +783,8 @@ namespace System.ServiceModel.Syndication.Tests
             return text;
         }
 
-        // This function is used to compare the attributes of an element node according to the options set by the user.
+        // This function is used to compare the attributes of an element node according to the options set
+        // by the user.
         private bool CompareAttributes(XmlDiffElement sourceElem, XmlDiffElement targetElem)
         {
             Debug.Assert(sourceElem != null);

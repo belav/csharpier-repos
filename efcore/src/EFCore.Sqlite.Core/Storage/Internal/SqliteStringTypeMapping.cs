@@ -8,18 +8,26 @@ using Microsoft.EntityFrameworkCore.Storage.Json;
 namespace Microsoft.EntityFrameworkCore.Sqlite.Storage.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqliteStringTypeMapping : StringTypeMapping
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public static new SqliteStringTypeMapping Default { get; } =
         new(SqliteTypeMappingSource.TextTypeName);
@@ -29,8 +37,10 @@ public class SqliteStringTypeMapping : StringTypeMapping
     /// </summary>
     /// <param name="storeType">The name of the database type.</param>
     /// <param name="dbType">The <see cref="DbType" /> to be used.</param>
-    /// <param name="unicode">A value indicating whether the type should handle Unicode data or not.</param>
-    /// <param name="size">The size of data the property is configured to store, or null if no size is configured.</param>
+    /// <param name="unicode">A value indicating whether the type should handle Unicode data or
+    // not.</param>
+    /// <param name="size">The size of data the property is configured to store, or null if no size is
+    // configured.</param>
     public SqliteStringTypeMapping(
         string storeType,
         DbType? dbType = null,
@@ -67,10 +77,14 @@ public class SqliteStringTypeMapping : StringTypeMapping
         new SqliteStringTypeMapping(parameters);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override string GenerateNonNullSqlLiteral(object value)
     {

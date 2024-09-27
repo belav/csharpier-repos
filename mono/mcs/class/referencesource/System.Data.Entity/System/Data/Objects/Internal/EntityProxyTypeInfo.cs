@@ -264,13 +264,15 @@ namespace System.Data.Objects.Internal
         #region Wrapper on the Proxy
 
         /// <summary>
-        /// Set the proxy object's private entity wrapper field value to the specified entity wrapper object.
+        /// Set the proxy object's private entity wrapper field value to the specified entity wrapper
+        // object.
         /// The proxy object (representing the wrapped entity) is retrieved from the wrapper itself.
         /// </summary>
         /// <param name="wrapper">Wrapper object to be referenced by the proxy.</param>
         /// <returns>
         /// The supplied entity wrapper.
-        /// This is done so that this method can be more easily composed within lambda expressions (such as in the materializer).
+        /// This is done so that this method can be more easily composed within lambda expressions (such as
+        // in the materializer).
         /// </returns>
         internal IEntityWrapper SetEntityWrapper(IEntityWrapper wrapper)
         {

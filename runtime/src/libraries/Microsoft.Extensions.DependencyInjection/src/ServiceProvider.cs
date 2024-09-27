@@ -66,7 +66,8 @@ namespace Microsoft.Extensions.DependencyInjection
             ServiceProviderOptions options
         )
         {
-            // note that Root needs to be set before calling GetEngine(), because the engine may need to access Root
+            // note that Root needs to be set before calling GetEngine(), because the engine may need to access
+            // Root
             Root = new ServiceProviderEngineScope(this, isRootScope: true);
             _engine = GetEngine();
             _createServiceAccessor = CreateServiceAccessor;

@@ -251,7 +251,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                 {
                     var containingType = stack[i];
 
-                    // ACASEY: I explored the type in the debugger and couldn't find the arity stored/exposed separately.
+                    // ACASEY: I explored the type in the debugger and couldn't find the arity stored/exposed
+                    // separately.
                     int arity = hasTypeArguments
                         ? containingType.GetGenericArguments().Length - typeArgumentOffset
                         : 0;
@@ -367,30 +368,39 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         }
 
         /// <summary>
-        /// Append the name of the type and its type arguments.  Do not append the type's containing type or namespace.
+        /// Append the name of the type and its type arguments.  Do not append the type's containing type or
+        // namespace.
         /// </summary>
         /// <param name="builder">Builder to which the name will be appended.</param>
         /// <param name="type">Type, the name of which will be appended.</param>
-        /// <param name="dynamicFlags">Flags indicating which occurrences of &quot;object&quot; need to be replaced by &quot;dynamic&quot;.</param>
+        /// <param name="dynamicFlags">Flags indicating which occurrences of &quot;object&quot; need to be
+        // replaced by &quot;dynamic&quot;.</param>
         /// <param name="dynamicFlagIndex">Current index into <paramref name="dynamicFlags"/>.</param>
         /// <param name="tupleElementNames">Non-default tuple names.</param>
         /// <param name="tupleElementIndex">Current index into <paramref name="tupleElementNames"/>.</param>
-        /// <param name="escapeKeywordIdentifiers">True if identifiers that are also keywords should be prefixed with '@'.</param>
+        /// <param name="escapeKeywordIdentifiers">True if identifiers that are also keywords should be
+        // prefixed with '@'.</param>
         /// <param name="typeArguments">
-        /// The type arguments of the type passed to <see cref="AppendQualifiedTypeNameInternal"/>, which might be nested
-        /// within <paramref name="type"/>.  In the Reflection/LMR object model, all type arguments are passed to the
-        /// most nested type.  To get back to the C# model, we have to propagate them out to containing types.
+        /// The type arguments of the type passed to <see cref="AppendQualifiedTypeNameInternal"/>, which
+        // might be nested
+        /// within <paramref name="type"/>.  In the Reflection/LMR object model, all type arguments are
+        // passed to the
+        /// most nested type.  To get back to the C# model, we have to propagate them out to containing
+        // types.
         /// </param>
         /// <param name="typeArgumentOffset">
-        /// The first position in <paramref name="typeArguments"/> that is a type argument to <paramref name="type"/>,
+        /// The first position in <paramref name="typeArguments"/> that is a type argument to <paramref
+        // name="type"/>,
         /// from a C# perspective.
         /// </param>
         /// <param name="arity">
         /// The number of type parameters of <paramref name="type"/>, from a C# perspective.
         /// </param>
-        /// <param name="sawInvalidIdentifier">True if the name includes an invalid identifier (see <see cref="IsValidIdentifier"/>); false otherwise.</param>
+        /// <param name="sawInvalidIdentifier">True if the name includes an invalid identifier (see <see
+        // cref="IsValidIdentifier"/>); false otherwise.</param>
         /// <remarks>
-        /// We're passing the full array plus bounds, rather than a tailored array, to avoid creating a lot of short-lived
+        /// We're passing the full array plus bounds, rather than a tailored array, to avoid creating a lot
+        // of short-lived
         /// temporary arrays.
         /// </remarks>
         private void AppendUnqualifiedTypeName(

@@ -33,7 +33,8 @@ internal sealed class DynamicHPackEncoder
         _maxHeaderTableSize = maxHeaderTableSize;
         Head = new EncoderHeaderEntry();
         Head.Initialize(-1, string.Empty, string.Empty, 0, int.MaxValue, null);
-        // Bucket count balances memory usage and the expected low number of headers (constrained by the header table size).
+        // Bucket count balances memory usage and the expected low number of headers (constrained by the
+        // header table size).
         // Performance with different bucket counts hasn't been measured in detail.
         _headerBuckets = new EncoderHeaderEntry[16];
         _hashMask = (byte)(_headerBuckets.Length - 1);

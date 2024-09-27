@@ -57,7 +57,8 @@ namespace System.Linq.Expressions.Interpreter
             if (!CanCreateArbitraryDelegates)
                 return new MethodInfoCallInstruction(info, argumentCount);
 
-            // This code should be unreachable in AOT. The analyzer currently doesn't understand feature switches
+            // This code should be unreachable in AOT. The analyzer currently doesn't understand feature
+            // switches
 #pragma warning disable IL3050
             if (!info.IsStatic && info.DeclaringType!.IsValueType)
             {

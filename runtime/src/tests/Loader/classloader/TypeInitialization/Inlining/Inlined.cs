@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// test that .cctor of NotInlined and Inlined (class/struct) is called when Foo.Meth_In and Foo_Meth_NotIn is invoked.
+// test that .cctor of NotInlined and Inlined (class/struct) is called when Foo.Meth_In and
+// Foo_Meth_NotIn is invoked.
 
 using System;
 using System.IO;

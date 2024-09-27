@@ -6,9 +6,12 @@ using System.Collections.Concurrent;
 namespace System.Threading.Tasks
 {
     //
-    // TaskReplicator runs a delegate inside of one or more Tasks, concurrently.  The idea is to exploit "available"
-    // parallelism, where "available" is determined by the TaskScheduler.  We always keep one Task queued to
-    // the scheduler, and if it starts running we queue another one, etc., up to some (potentially) user-defined
+    // TaskReplicator runs a delegate inside of one or more Tasks, concurrently.  The idea is to exploit
+    // "available"
+    // parallelism, where "available" is determined by the TaskScheduler.  We always keep one Task
+    // queued to
+    // the scheduler, and if it starts running we queue another one, etc., up to some (potentially)
+    // user-defined
     // limit.
     //
     internal sealed class TaskReplicator
@@ -194,8 +197,10 @@ namespace System.Threading.Tasks
 
         private static int GenerateCooperativeMultitaskingTaskTimeout()
         {
-            // This logic ensures that we have a diversity of timeouts in the range [100 ms, 100 + 50 * ProcessorCount ms) across worker tasks.
-            // Otherwise all workers will try to timeout at precisely the same point, which is bad if the work is just about to finish.
+            // This logic ensures that we have a diversity of timeouts in the range [100 ms, 100 + 50 *
+            // ProcessorCount ms) across worker tasks.
+            // Otherwise all workers will try to timeout at precisely the same point, which is bad if the work
+            // is just about to finish.
             // These 100/50 values are somewhat arbitrary.
             return 100 + Random.Shared.Next(0, 50 * Environment.ProcessorCount);
         }

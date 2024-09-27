@@ -382,7 +382,8 @@ namespace System.Net.Http
                 )
             )
             {
-                // Hack to pass the timeout to the HttpWebRequest that's created by MonoWebRequestHandler; all other handlers ignore this.
+                // Hack to pass the timeout to the HttpWebRequest that's created by MonoWebRequestHandler; all other
+                // handlers ignore this.
                 if (handler is HttpClientHandler clientHandler)
                     clientHandler.SetWebRequestTimeout(timeout);
                 lcts.CancelAfter(timeout);

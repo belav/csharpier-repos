@@ -102,8 +102,10 @@ public partial class RazorViewEngine : IRazorViewEngine
     /// <param name="key">The route key to lookup.</param>
     /// <returns>The value corresponding to the key.</returns>
     /// <remarks>
-    /// The casing of a route value in <see cref="ActionContext.RouteData"/> is determined by the client.
-    /// This making constructing paths for view locations in a case sensitive file system unreliable. Using the
+    /// The casing of a route value in <see cref="ActionContext.RouteData"/> is determined by the
+    // client.
+    /// This making constructing paths for view locations in a case sensitive file system unreliable.
+    // Using the
     /// <see cref="Abstractions.ActionDescriptor.RouteValues"/> to get route values
     /// produces consistently cased results.
     /// </remarks>
@@ -531,7 +533,8 @@ public partial class RazorViewEngine : IRazorViewEngine
     {
         Debug.Assert(!string.IsNullOrEmpty(name));
 
-        // Though ./ViewName looks like a relative path, framework searches for that view using view locations.
+        // Though ./ViewName looks like a relative path, framework searches for that view using view
+        // locations.
         return name.EndsWith(ViewExtension, StringComparison.OrdinalIgnoreCase);
     }
 

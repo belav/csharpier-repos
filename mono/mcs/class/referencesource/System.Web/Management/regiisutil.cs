@@ -73,7 +73,8 @@ namespace System.Web.Management
         const int WATValueForms = 5;
         const int WATValueWindows = 6;
 
-        // Note: this name has to match the name used in System.Configuration.RsaProtectedConfigurationProvider
+        // Note: this name has to match the name used in
+        // System.Configuration.RsaProtectedConfigurationProvider
         const string DefaultRsaKeyContainerName = "NetFrameworkConfigurationKey";
 
         const string NewLine = "\n\r";

@@ -34,7 +34,8 @@ namespace System.Workflow.Runtime
             );
 
         // The static method GetTransientBatch is used by this property to retrieve the WorkBatch.
-        // GetTransientBatch is defined in this class but if the workflow is running under a V2.0 Interop environment,
+        // GetTransientBatch is defined in this class but if the workflow is running under a V2.0 Interop
+        // environment,
         // it forwards the call to the Interop activity.
         internal readonly static DependencyProperty TransientBatchProperty =
             DependencyProperty.RegisterAttached(
@@ -2552,9 +2553,9 @@ namespace System.Workflow.Runtime
                             // the scheduler lock and starts running.  By the time the user Resume request
                             // gets the scheduler lock the instance is often done (the AbortBat test case scenario)
                             // Balinder is attempting a fix to separate rehydration from resuming execution.
-                            /*if (!this.IsInstanceValid)
-                                throw new InvalidOperationException(ExecutionStringManager.WorkflowNotValid);
-                             */
+/*if (!this.IsInstanceValid)
+throw new InvalidOperationException(ExecutionStringManager.WorkflowNotValid);
+*/
                             using (new ServiceEnvironment(this.rootActivity))
                             {
                                 this.ResumeOnIdle(true);
@@ -2671,8 +2672,10 @@ namespace System.Workflow.Runtime
                 tranOpts
             );
             // Can switch back to using TransactionCompletionHandler once VS562627 is fixed
-            // transaction.TransactionCompleted += new TransactionCompletedEventHandler(TransactionCompletionHandler);
-            //transaction.EnlistVolatile(new TransactionNotificationEnlistment(this, transaction, atomicActivity), EnlistmentOptions.None);
+            // transaction.TransactionCompleted += new
+            // TransactionCompletedEventHandler(TransactionCompletionHandler);
+            //transaction.EnlistVolatile(new TransactionNotificationEnlistment(this, transaction,
+            // atomicActivity), EnlistmentOptions.None);
             transactionalProperties.Transaction = transaction;
             WorkflowTrace.Runtime.TraceEvent(
                 TraceEventType.Information,
@@ -2710,7 +2713,8 @@ namespace System.Workflow.Runtime
         {
             // Validates the assumption that only one atomic activity in execution at a time
             //Debug.Assert((atomicActivity == this.currentAtomicActivity),
-            //    "Activity context " + atomicActivity.Name + " different from currentAtomicActivity " + this.currentAtomicActivity.Name);
+            //    "Activity context " + atomicActivity.Name + " different from currentAtomicActivity " +
+            // this.currentAtomicActivity.Name);
 
             // Cleanup work following a transaction commit or Rollback
             TransactionalProperties transactionalProperties = (TransactionalProperties)
@@ -2936,10 +2940,13 @@ namespace System.Workflow.Runtime
                     != TransactionProcessState.AbortProcessed
                 )
                 {
-                    // If TransactionState is not already AbortProcessed, Set it to AbortProcessed as we have raised exception for it already
+                    // If TransactionState is not already AbortProcessed, Set it to AbortProcessed as we have raised
+                    // exception for it already
                     // Possible call paths for which it's not already AbortProcessed:
-                    // TransactionState == Aborted if due to transaction failure notified through TransactionCompletionHandler
-                    // TransactionState == Ok if Called from external exception raising (e.g. a throw activity in Atomic context)
+                    // TransactionState == Aborted if due to transaction failure notified through
+                    // TransactionCompletionHandler
+                    // TransactionState == Ok if Called from external exception raising (e.g. a throw activity in Atomic
+                    // context)
                     transactionalProperties.TransactionState =
                         TransactionProcessState.AbortProcessed;
                 }
@@ -2990,112 +2997,117 @@ namespace System.Workflow.Runtime
         }
 
         #region VolatileEnlistment for Transaction Completion Notification
-        /*
-         * Leaving this class in place as we will need it for the flow through tx story in V2
-        class TransactionNotificationEnlistment : IEnlistmentNotification, IActivityEventListener<EventArgs>
-        {
-            WorkflowExecutor workflowExecutor;
-            Transaction transaction;
-            Activity atomicActivity;
-            internal TransactionNotificationEnlistment(WorkflowExecutor exec, Transaction tx, Activity atomicActivity)
-            {
-                this.workflowExecutor = exec;
-                this.transaction = tx;
-                this.atomicActivity = atomicActivity;
-            }
+/*
+* Leaving this class in place as we will need it for the flow through tx story in V2
+class TransactionNotificationEnlistment : IEnlistmentNotification, IActivityEventListener<EventArgs>
+{
+WorkflowExecutor workflowExecutor;
+Transaction transaction;
+Activity atomicActivity;
+internal TransactionNotificationEnlistment(WorkflowExecutor exec, Transaction tx, Activity
+atomicActivity)
+{
+this.workflowExecutor = exec;
+this.transaction = tx;
+this.atomicActivity = atomicActivity;
+}
 
-            #region IEnlistmentNotification Members
+#region IEnlistmentNotification Members
 
-            void IEnlistmentNotification.Commit(Enlistment enlistment)
-            {
-                enlistment.Done();
-            }
+void IEnlistmentNotification.Commit(Enlistment enlistment)
+{
+enlistment.Done();
+}
 
-            void IEnlistmentNotification.InDoubt(Enlistment enlistment)
-            {
-                enlistment.Done();
-            }
+void IEnlistmentNotification.InDoubt(Enlistment enlistment)
+{
+enlistment.Done();
+}
 
-            void IEnlistmentNotification.Prepare(PreparingEnlistment preparingEnlistment)
-            {
-                preparingEnlistment.Prepared();
-            }
+void IEnlistmentNotification.Prepare(PreparingEnlistment preparingEnlistment)
+{
+preparingEnlistment.Prepared();
+}
 
-            void IEnlistmentNotification.Rollback(Enlistment enlistment)
-            {
-                //
-                // Currently this method isn't used.
-                // The problem is that we must acquire the sched lock in order to schedule
-                // an item.  While we wait trying to acquire the lock the transaction is held open.
-                // If the instance is idle we acquire the lock right away and this works fine.
-                // However is we have items to run we'll check the transaction, find that it is aborted
-                // and start exception handling.  During the entire exception handling process the transaction
-                // and the associated connections will be held open.  This is not good.
-                // Post V1 we need scheduler changes to allow us to safely asynchronously schedule work
-                // without taking the scheduler lock.
-                enlistment.Done();
-                //
-                // ensure transaction timeout/abort is processed in case of a
-                // blocked activity inside a transactional scope
-                ScheduleTransactionTimeout();
-            }
+void IEnlistmentNotification.Rollback(Enlistment enlistment)
+{
+//
+// Currently this method isn't used.
+// The problem is that we must acquire the sched lock in order to schedule
+// an item.  While we wait trying to acquire the lock the transaction is held open.
+// If the instance is idle we acquire the lock right away and this works fine.
+// However is we have items to run we'll check the transaction, find that it is aborted
+// and start exception handling.  During the entire exception handling process the transaction
+// and the associated connections will be held open.  This is not good.
+// Post V1 we need scheduler changes to allow us to safely asynchronously schedule work
+// without taking the scheduler lock.
+enlistment.Done();
+//
+// ensure transaction timeout/abort is processed in case of a
+// blocked activity inside a transactional scope
+ScheduleTransactionTimeout();
+}
 
-            private void ScheduleTransactionTimeout()
-            {
-                try
-                {
-                    //
-                    // We're going to check executor state and possibly enqueue a workitem
-                    // Must take the scheduleExecutor lock
-                    using (this.workflowExecutor._schedulerLock.Enter())
-                    {
-                        if (!this.workflowExecutor.IsInstanceValid)
-                            return;
+private void ScheduleTransactionTimeout()
+{
+try
+{
+//
+// We're going to check executor state and possibly enqueue a workitem
+// Must take the scheduleExecutor lock
+using (this.workflowExecutor._schedulerLock.Enter())
+{
+if (!this.workflowExecutor.IsInstanceValid)
+return;
 
-                        // If the exception has already been taken care of, ignore this abort notification
-                        Activity curAtomicActivity = this.workflowExecutor.currentAtomicActivity;
-                        if ((curAtomicActivity != null)&&(curAtomicActivity==atomicActivity))
-                        {
-                            TransactionalProperties transactionalProperties = (TransactionalProperties)curAtomicActivity.GetValue(TransactionalPropertiesProperty);
-                            if ((transactionalProperties.Transaction == this.transaction) &&
-                                (transactionalProperties.TransactionState != TransactionProcessState.AbortProcessed))
-                            {
-                                transactionalProperties.TransactionState = TransactionProcessState.Aborted;
+// If the exception has already been taken care of, ignore this abort notification
+Activity curAtomicActivity = this.workflowExecutor.currentAtomicActivity;
+if ((curAtomicActivity != null)&&(curAtomicActivity==atomicActivity))
+{
+TransactionalProperties transactionalProperties =
+(TransactionalProperties)curAtomicActivity.GetValue(TransactionalPropertiesProperty);
+if ((transactionalProperties.Transaction == this.transaction) &&
+(transactionalProperties.TransactionState != TransactionProcessState.AbortProcessed))
+{
+transactionalProperties.TransactionState = TransactionProcessState.Aborted;
 
-                                using (this.workflowExecutor.MessageDeliveryLock.Enter())
-                                {
-                                    using (new ServiceEnvironment(this.workflowExecutor.RootActivity))
-                                    {
-                                        using (this.workflowExecutor.SetCurrentActivity(curAtomicActivity))
-                                        {
-                                            //
-                                            // This will schedule (async) a work item to cancel the tx scope activity
-                                            // However this item will never get run - we always check if the
-                                            // tx has aborted prior to running any items so this is really
-                                            // just a "wake up" notification to the scheduler.
-                                            Activity contextActivity = ContextActivityUtils.ContextActivity(curAtomicActivity);
-                                            ActivityExecutorDelegateInfo<EventArgs> dummyCallback = new ActivityExecutorDelegateInfo<EventArgs>(this, contextActivity, true);
-                                            dummyCallback.InvokeDelegate(contextActivity, EventArgs.Empty, false);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 0, "AbortNotificationEnlistment: instanceId: {0} failed to process ScheduleTransactionTimeout with exception {1} ", this.workflowExecutor.this.InstanceIdString, e.Message);
-                }
-            }
+using (this.workflowExecutor.MessageDeliveryLock.Enter())
+{
+using (new ServiceEnvironment(this.workflowExecutor.RootActivity))
+{
+using (this.workflowExecutor.SetCurrentActivity(curAtomicActivity))
+{
+//
+// This will schedule (async) a work item to cancel the tx scope activity
+// However this item will never get run - we always check if the
+// tx has aborted prior to running any items so this is really
+// just a "wake up" notification to the scheduler.
+Activity contextActivity = ContextActivityUtils.ContextActivity(curAtomicActivity);
+ActivityExecutorDelegateInfo<EventArgs> dummyCallback = new
+ActivityExecutorDelegateInfo<EventArgs>(this, contextActivity, true);
+dummyCallback.InvokeDelegate(contextActivity, EventArgs.Empty, false);
+}
+}
+}
+}
+}
+}
+}
+catch (Exception e)
+{
+WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 0, "AbortNotificationEnlistment: instanceId:
+{0} failed to process ScheduleTransactionTimeout with exception {1} ",
+this.workflowExecutor.this.InstanceIdString, e.Message);
+}
+}
 
-            void IActivityEventListener<EventArgs>.OnEvent(object sender, EventArgs e)
-            {
-                // this will never be invoked since Scheduler will process the transaction aborted request
-            }
+void IActivityEventListener<EventArgs>.OnEvent(object sender, EventArgs e)
+{
+// this will never be invoked since Scheduler will process the transaction aborted request
+}
 
-            #endregion
-        }*/
+#endregion
+}*/
         #endregion VolatileEnlistment for AbortNotification
 
         internal static bool CheckAndProcessTransactionAborted(
@@ -3359,7 +3371,9 @@ namespace System.Workflow.Runtime
         internal void ApplyWorkflowChanges(WorkflowChanges workflowChanges)
         {
             // Accessing InstanceId is not thread safe here!
-            //WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "Workflow Runtime: WorkflowExecutor: Got a dynamic update request from outside for instance {0}", this.InstanceIdString);
+            //WorkflowTrace.Runtime.TraceEvent(TraceEventType.Information, 0, "Workflow Runtime:
+            // WorkflowExecutor: Got a dynamic update request from outside for instance {0}",
+            // this.InstanceIdString);
             DiagnosticStackTrace("dynamic update request");
 
             // check arguments
@@ -3986,7 +4000,8 @@ namespace System.Workflow.Runtime
         }
         #endregion
 
-        // GetTransientBatch is defined in this class but if the workflow is running under a V2.0 Interop environment,
+        // GetTransientBatch is defined in this class but if the workflow is running under a V2.0 Interop
+        // environment,
         // it calls the Interop activity to get the Batch collection.
         private static object GetTransientBatch(DependencyObject dependencyObject)
         {

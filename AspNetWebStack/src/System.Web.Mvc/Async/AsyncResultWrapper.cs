@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -104,7 +105,8 @@ namespace System.Web.Mvc.Async
         {
             // Frequently called, so use static delegates
 
-            // Inline delegates that take a generic argument from a generic method don't get cached by the compiler so use a field from a static generic class
+            // Inline delegates that take a generic argument from a generic method don't get cached by the
+            // compiler so use a field from a static generic class
             BeginInvokeDelegate<TState> beginDelegate =
                 CachedDelegates<TState>.CompletedBeginInvoke;
 

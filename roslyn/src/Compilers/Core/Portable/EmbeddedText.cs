@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis
         /// The path to the file to embed.
         /// </summary>
         /// <remarks>See remarks of <see cref="SyntaxTree.FilePath"/></remarks>
-        /// <remarks>Empty file paths are disallowed, as the debugger finds source by looking up files by their name (and then verifying their signature)</remarks>
+        /// <remarks>Empty file paths are disallowed, as the debugger finds source by looking up files by
+        // their name (and then verifying their signature)</remarks>
         public string FilePath { get; }
 
         /// <summary>
@@ -139,7 +140,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="filePath">The file path (pre-normalization) to use in the PDB.</param>
         /// <param name="stream">The stream.</param>
-        /// <param name="checksumAlgorithm">Hash algorithm to use to calculate checksum of the text that's saved to PDB.</param>
+        /// <param name="checksumAlgorithm">Hash algorithm to use to calculate checksum of the text that's
+        // saved to PDB.</param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="filePath" /> is null.
         /// <paramref name="stream"/> is null.
@@ -187,7 +189,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="filePath">The file path (pre-normalization) to use in the PDB.</param>
         /// <param name="bytes">The bytes.</param>
-        /// <param name="checksumAlgorithm">Hash algorithm to use to calculate checksum of the text that's saved to PDB.</param>
+        /// <param name="checksumAlgorithm">Hash algorithm to use to calculate checksum of the text that's
+        // saved to PDB.</param>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="bytes"/> is default-initialized.
         /// <paramref name="filePath" /> is null.

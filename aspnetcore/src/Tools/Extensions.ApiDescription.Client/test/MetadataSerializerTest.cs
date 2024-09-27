@@ -10,16 +10,21 @@ using Xunit;
 
 namespace Microsoft.Extensions.ApiDescription.Client;
 
-// ItemSpec values always have '\\' converted to '/' on input when running on non-Windows. It is not possible to
-// retrieve the original (unconverted) item spec value. In other respects, item spec values are treated identically
+// ItemSpec values always have '\\' converted to '/' on input when running on non-Windows. It is not
+// possible to
+// retrieve the original (unconverted) item spec value. In other respects, item spec values are
+// treated identically
 // to custom metadata values.
 //
-// ITaskItem members aka the implicitly-implemented methods and properties in TaskItem expect _escaped_ values on
-// input and return _literal_ values. This includes TaskItem constructors and CloneCustomMetadata() (which returns
+// ITaskItem members aka the implicitly-implemented methods and properties in TaskItem expect
+// _escaped_ values on
+// input and return _literal_ values. This includes TaskItem constructors and CloneCustomMetadata()
+// (which returns
 // a new dictionary containing literal values). TaskItem stores all values in their escaped form.
 //
 // Added ITaskItem2 members e.g. CloneCustomMetadataEscaped(), GetMetadataValueEscaped(...) and
-// EvaluatedIncludeEscaped return escaped values. Of all TaskItem methods, only SetMetadataValueLiteral(...)
+// EvaluatedIncludeEscaped return escaped values. Of all TaskItem methods, only
+// SetMetadataValueLiteral(...)
 // accepts a literal input value.
 //
 // Metadata names are never escaped.

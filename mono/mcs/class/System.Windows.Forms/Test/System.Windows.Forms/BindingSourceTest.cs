@@ -1245,7 +1245,9 @@ namespace MonoTests.System.Windows.Forms.DataBinding
 
         [Test]
         [ExpectedException(typeof(InvalidOperationException))]
-        // "AddNew cannot be called on the 'System.String' type.  This type does not have a public default constructor.  You can call AddNew on the 'System.String' type if you set AllowNew=true and handle the AddingNew event."
+        // "AddNew cannot be called on the 'System.String' type.  This type does not have a public default
+        // constructor.  You can call AddNew on the 'System.String' type if you set AllowNew=true and handle
+        // the AddingNew event."
         public void AddNew_Invalid()
         {
             BindingSource source = new BindingSource();

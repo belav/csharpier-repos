@@ -20,11 +20,14 @@ namespace Microsoft.AspNetCore.Builder;
 public static class RazorComponentsEndpointRouteBuilderExtensions
 {
     /// <summary>
-    /// Maps the page components defined in the specified <typeparamref name="TRootComponent"/> to the given assembly
-    /// and renders the component specified by <typeparamref name="TRootComponent"/> when the route matches.
+    /// Maps the page components defined in the specified <typeparamref name="TRootComponent"/> to the
+    // given assembly
+    /// and renders the component specified by <typeparamref name="TRootComponent"/> when the route
+    // matches.
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
-    /// <returns>An <see cref="RazorComponentsEndpointConventionBuilder"/> that can be used to further configure the API.</returns>
+    /// <returns>An <see cref="RazorComponentsEndpointConventionBuilder"/> that can be used to further
+    // configure the API.</returns>
     public static RazorComponentsEndpointConventionBuilder MapRazorComponents<
         [DynamicallyAccessedMembers(Component)] TRootComponent
     >(this IEndpointRouteBuilder endpoints)
@@ -67,7 +70,8 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
         blazorEndpoint.Add((builder) => ((RouteEndpointBuilder)builder).Order = int.MinValue);
 
 #if DEBUG
-        // We only need to serve the sourcemap when working on the framework, not in the distributed packages
+        // We only need to serve the sourcemap when working on the framework, not in the distributed
+        // packages
         endpoints
             .Map("/_framework/blazor.web.js.map", app.Build())
             .WithDisplayName("Blazor web static files sourcemap")

@@ -11,23 +11,27 @@ namespace Microsoft.AspNetCore.SignalR;
 public static class HubClientsExtensions
 {
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connection.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connection.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(this IHubClients<T> hubClients, string excludedConnectionId1)
     {
         return hubClients.AllExcept(new[] { excludedConnectionId1 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -38,13 +42,15 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -58,14 +64,16 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -86,7 +94,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
@@ -94,7 +103,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -117,7 +127,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
@@ -126,7 +137,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -151,7 +163,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
@@ -161,7 +174,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
     /// <param name="excludedConnectionId7">The seventh connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -188,7 +202,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
@@ -199,7 +214,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
     /// <param name="excludedConnectionId7">The seventh connection to exclude.</param>
     /// <param name="excludedConnectionId8">The eighth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         string excludedConnectionId1,
@@ -228,11 +244,13 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to
+    // the hub excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="excludedConnectionIds">The connection IDs to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T AllExcept<T>(
         this IHubClients<T> hubClients,
         IEnumerable<string> excludedConnectionIds
@@ -242,23 +260,27 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(this IHubClients<T> hubClients, string connection1)
     {
         return hubClients.Clients(new[] { connection1 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
     /// <param name="connection2">The second connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -269,13 +291,15 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
     /// <param name="connection2">The second connection to include.</param>
     /// <param name="connection3">The third connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -287,14 +311,16 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
     /// <param name="connection2">The second connection to include.</param>
     /// <param name="connection3">The third connection to include.</param>
     /// <param name="connection4">The fourth connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -307,7 +333,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
@@ -315,7 +342,8 @@ public static class HubClientsExtensions
     /// <param name="connection3">The third connection to include.</param>
     /// <param name="connection4">The fourth connection to include.</param>
     /// <param name="connection5">The fifth connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -331,7 +359,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
@@ -340,7 +369,8 @@ public static class HubClientsExtensions
     /// <param name="connection4">The fourth connection to include.</param>
     /// <param name="connection5">The fifth connection to include.</param>
     /// <param name="connection6">The sixth connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -357,7 +387,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
@@ -367,7 +398,8 @@ public static class HubClientsExtensions
     /// <param name="connection5">The fifth connection to include.</param>
     /// <param name="connection6">The sixth connection to include.</param>
     /// <param name="connection7">The seventh connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -394,7 +426,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connection1">The first connection to include.</param>
@@ -405,7 +438,8 @@ public static class HubClientsExtensions
     /// <param name="connection6">The sixth connection to include.</param>
     /// <param name="connection7">The seventh connection to include.</param>
     /// <param name="connection8">The eighth connection to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(
         this IHubClients<T> hubClients,
         string connection1,
@@ -434,47 +468,55 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on the specified
+    // connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="connectionIds">The connection IDs.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Clients<T>(this IHubClients<T> hubClients, IEnumerable<string> connectionIds)
     {
         return hubClients.Clients(connectionIds.ToList());
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(this IHubClients<T> hubClients, string group1)
     {
         return hubClients.Groups(new[] { group1 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
     /// <param name="group2">The second group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(this IHubClients<T> hubClients, string group1, string group2)
     {
         return hubClients.Groups(new[] { group1, group2 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
     /// <param name="group2">The second group to include.</param>
     /// <param name="group3">The third group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -486,14 +528,16 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
     /// <param name="group2">The second group to include.</param>
     /// <param name="group3">The third group to include.</param>
     /// <param name="group4">The fourth group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -506,7 +550,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
@@ -514,7 +559,8 @@ public static class HubClientsExtensions
     /// <param name="group3">The third group to include.</param>
     /// <param name="group4">The fourth group to include.</param>
     /// <param name="group5">The fifth group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -528,7 +574,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
@@ -537,7 +584,8 @@ public static class HubClientsExtensions
     /// <param name="group4">The fourth group to include.</param>
     /// <param name="group5">The fifth group to include.</param>
     /// <param name="group6">The sixth group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -552,7 +600,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
@@ -562,7 +611,8 @@ public static class HubClientsExtensions
     /// <param name="group5">The fifth group to include.</param>
     /// <param name="group6">The sixth group to include.</param>
     /// <param name="group7">The seventh group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -578,7 +628,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="group1">The first group to include.</param>
@@ -589,7 +640,8 @@ public static class HubClientsExtensions
     /// <param name="group6">The sixth group to include.</param>
     /// <param name="group7">The seventh group to include.</param>
     /// <param name="group8">The eighth group to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(
         this IHubClients<T> hubClients,
         string group1,
@@ -608,23 +660,27 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of the specified groups.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in all of
+    // the specified groups.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupNames">The group names.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Groups<T>(this IHubClients<T> hubClients, IEnumerable<string> groupNames)
     {
         return hubClients.Groups(groupNames.ToList());
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -635,13 +691,15 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -656,14 +714,16 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
     /// <param name="excludedConnectionId1">The first connection to exclude.</param>
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -679,7 +739,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
@@ -687,7 +748,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId2">The second connection to exclude.</param>
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -710,7 +772,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
@@ -719,7 +782,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId3">The third connection to exclude.</param>
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -744,7 +808,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
@@ -754,7 +819,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId4">The fourth connection to exclude.</param>
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -781,7 +847,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
@@ -792,7 +859,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId5">The fifth connection to exclude.</param>
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
     /// <param name="excludedConnectionId7">The seventh connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -821,7 +889,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
@@ -833,7 +902,8 @@ public static class HubClientsExtensions
     /// <param name="excludedConnectionId6">The sixth connection to exclude.</param>
     /// <param name="excludedConnectionId7">The seventh connection to exclude.</param>
     /// <param name="excludedConnectionId8">The eighth connection to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -864,12 +934,14 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the specified group excluding the specified connections.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections in the
+    // specified group excluding the specified connections.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="groupName">The group name.</param>
     /// <param name="excludedConnectionIds">The connection IDs to exclude.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T GroupExcept<T>(
         this IHubClients<T> hubClients,
         string groupName,
@@ -880,36 +952,42 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(this IHubClients<T> hubClients, string user1)
     {
         return hubClients.Users(new[] { user1 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
     /// <param name="user2">The second user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(this IHubClients<T> hubClients, string user1, string user2)
     {
         return hubClients.Users(new[] { user1, user2 });
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
     /// <param name="user2">The second user to include.</param>
     /// <param name="user3">The third user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -921,14 +999,16 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
     /// <param name="user2">The second user to include.</param>
     /// <param name="user3">The third user to include.</param>
     /// <param name="user4">The fourth user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -941,7 +1021,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
@@ -949,7 +1030,8 @@ public static class HubClientsExtensions
     /// <param name="user3">The third user to include.</param>
     /// <param name="user4">The fourth user to include.</param>
     /// <param name="user5">The fifth user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -963,7 +1045,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
@@ -972,7 +1055,8 @@ public static class HubClientsExtensions
     /// <param name="user4">The fourth user to include.</param>
     /// <param name="user5">The fifth user to include.</param>
     /// <param name="user6">The sixth user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -987,7 +1071,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
@@ -997,7 +1082,8 @@ public static class HubClientsExtensions
     /// <param name="user5">The fifth user to include.</param>
     /// <param name="user6">The sixth user to include.</param>
     /// <param name="user7">The seventh user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -1013,7 +1099,8 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="user1">The first user to include.</param>
@@ -1024,7 +1111,8 @@ public static class HubClientsExtensions
     /// <param name="user6">The sixth user to include.</param>
     /// <param name="user7">The seventh user to include.</param>
     /// <param name="user8">The eighth user to include.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(
         this IHubClients<T> hubClients,
         string user1,
@@ -1041,11 +1129,13 @@ public static class HubClientsExtensions
     }
 
     /// <summary>
-    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections associated with all of the specified users.
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all connections
+    // associated with all of the specified users.
     /// </summary>
     /// <param name="hubClients">The abstraction that provides access to connections.</param>
     /// <param name="userIds">The user IDs.</param>
-    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the clients.</returns>
+    /// <returns>A <typeparamref name="T" /> representing the methods that can be invoked on the
+    // clients.</returns>
     public static T Users<T>(this IHubClients<T> hubClients, IEnumerable<string> userIds)
     {
         return hubClients.Users(userIds.ToList());

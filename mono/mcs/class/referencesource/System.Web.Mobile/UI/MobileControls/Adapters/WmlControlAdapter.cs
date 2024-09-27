@@ -21,10 +21,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlControlAdapter base class contains wml specific methods.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlControlAdapter base class contains wml specific methods.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -39,13 +39,15 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class WmlControlAdapter : System.Web.UI.MobileControls.Adapters.ControlAdapter
     {
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.PageAdapter"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.PageAdapter"]/*' />
         protected WmlPageAdapter PageAdapter
         {
             get { return ((WmlPageAdapter)Page.Adapter); }
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.FormAdapter"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.FormAdapter"]/*' />
         protected WmlFormAdapter FormAdapter
         {
             get { return (WmlFormAdapter)Control.Form.Adapter; }
@@ -63,7 +65,8 @@ namespace System.Web.UI.MobileControls.Adapters
             RenderChildren(writer);
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderLink"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderLink"]/*'
+        // />
         protected void RenderLink(
             WmlMobileTextWriter writer,
             String targetUrl,
@@ -79,7 +82,8 @@ namespace System.Web.UI.MobileControls.Adapters
             RenderEndLink(writer, targetUrl, breakAfter);
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderBeginLink"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.RenderBeginLink"]/*' />
         protected void RenderBeginLink(
             WmlMobileTextWriter writer,
             String targetUrl,
@@ -179,7 +183,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderEndLink"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.RenderEndLink"]/*' />
         protected void RenderEndLink(WmlMobileTextWriter writer, String targetUrl, bool breakAfter)
         {
             String postback = DeterminePostBack(targetUrl);
@@ -200,7 +205,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.DeterminePostBack"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.DeterminePostBack"]/*' />
         protected String DeterminePostBack(String target)
         {
             String postback = null;
@@ -226,7 +232,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return postback;
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderSubmitEvent"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.RenderSubmitEvent"]/*' />
         protected void RenderSubmitEvent(
             WmlMobileTextWriter writer,
             String softkeyLabel,
@@ -245,7 +252,8 @@ namespace System.Web.UI.MobileControls.Adapters
             );
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent"]/*' />
         protected void RenderPostBackEvent(
             WmlMobileTextWriter writer,
             String argument,
@@ -266,7 +274,8 @@ namespace System.Web.UI.MobileControls.Adapters
             );
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent1"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.RenderPostBackEvent1"]/*' />
         protected void RenderPostBackEvent(
             WmlMobileTextWriter writer,
             String argument,
@@ -306,7 +315,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.RenderEndPostBack(Control.UniqueID, argument, postBackType, true, breakAfter);
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.GetPostBackValue"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.GetPostBackValue"]/*' />
         protected virtual String GetPostBackValue()
         {
             return null;
@@ -324,10 +334,12 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal const int NotSecondaryUIInit = -1; // For initialization of private consts in derived classes.
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.NotSecondaryUI"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.NotSecondaryUI"]/*' />
         protected static readonly int NotSecondaryUI = NotSecondaryUIInit;
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.SecondaryUIMode"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.SecondaryUIMode"]/*' />
         protected int SecondaryUIMode
         {
             get
@@ -344,13 +356,15 @@ namespace System.Web.UI.MobileControls.Adapters
             set { ((WmlFormAdapter)Control.Form.Adapter).SetSecondaryUIMode(Control, value); }
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.ExitSecondaryUIMode"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.ExitSecondaryUIMode"]/*' />
         protected void ExitSecondaryUIMode()
         {
             SecondaryUIMode = NotSecondaryUI;
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.LoadAdapterState"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.LoadAdapterState"]/*' />
         public override void LoadAdapterState(Object state)
         {
             if (state != null)
@@ -359,7 +373,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlControlAdapter.uex' path='docs/doc[@for="WmlControlAdapter.SaveAdapterState"]/*' />
+        /// <include file='doc\WmlControlAdapter.uex'
+        // path='docs/doc[@for="WmlControlAdapter.SaveAdapterState"]/*' />
         public override Object SaveAdapterState()
         {
             int mode = SecondaryUIMode;

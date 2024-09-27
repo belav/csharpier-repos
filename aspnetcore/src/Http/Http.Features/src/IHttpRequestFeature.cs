@@ -43,14 +43,16 @@ public interface IHttpRequestFeature
     /// The value may be <see cref="string.Empty"/> if <see cref="PathBase"/> contains the full path,
     /// or for 'OPTIONS *' requests.
     /// The path is fully decoded by the server except for '%2F', which would decode to '/' and
-    /// change the meaning of the path segments. '%2F' can only be replaced after splitting the path into segments.
+    /// change the meaning of the path segments. '%2F' can only be replaced after splitting the path
+    // into segments.
     /// </para>
     /// </summary>
     string Path { get; set; }
 
     /// <summary>
     /// Gets or sets the query portion of the request-target as defined in RFC 7230. The value
-    /// may be <see cref="string.Empty" />. If not empty then the leading '?' will be included. The value
+    /// may be <see cref="string.Empty" />. If not empty then the leading '?' will be included. The
+    // value
     /// is in its original form, without un-escaping.
     /// </summary>
     string QueryString { get; set; }

@@ -1,10 +1,10 @@
 // #define ARCH_32
 
 /* This is _NOT_ set by Xamarin.iOS. We can enable it in order to make sure
- * methods are intrinsified (by throwing NotImplementedException), but some
- * methods aren't intrinsified by JIT/interp. For example, conversion to
- * decimal. Therefore JIT/interp should fall back to managed implementation.
- */
+* methods are intrinsified (by throwing NotImplementedException), but some
+* methods aren't intrinsified by JIT/interp. For example, conversion to
+* decimal. Therefore JIT/interp should fall back to managed implementation.
+*/
 // #define NINT_JIT_OPTIMIZED
 
 using System;
@@ -470,7 +470,12 @@ public class BuiltinTests
         return 0;
     }
 
-    /* resembles https://github.com/xamarin/xamarin-macios/blob/bc492585d137d8c3d3a2ffc827db3cdaae3cc869/tests/monotouch-test/Foundation/MutableDataTest.cs#L62-L89 */
+    /* resembles
+    
+    
+    
+    https://github.com/xamarin/xamarin-macios/blob/bc492585d137d8c3d3a2ffc827db3cdaae3cc869/tests/monotouch-test/Foundation/MutableDataTest.cs#L62-L89
+    */
     static int test_0_nint_maxintcmp()
     {
         /* does not work on 32bit */

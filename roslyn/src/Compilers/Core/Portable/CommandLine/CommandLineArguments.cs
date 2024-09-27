@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis
         internal bool IsScriptRunner { get; set; }
 
         /// <summary>
-        /// Drop to an interactive loop. If a script is specified in <see cref="SourceFiles"/> executes the script first.
+        /// Drop to an interactive loop. If a script is specified in <see cref="SourceFiles"/> executes the
+        // script first.
         /// </summary>
         public bool InteractiveMode { get; internal set; }
 
@@ -124,7 +125,8 @@ namespace Microsoft.CodeAnalysis
         public string? DocumentationPath { get; internal set; }
 
         /// <summary>
-        /// Absolute path of the directory to place generated files in, or <c>null</c> to not emit any generated files.
+        /// Absolute path of the directory to place generated files in, or <c>null</c> to not emit any
+        // generated files.
         /// </summary>
         public string? GeneratedFilesOutputDirectory { get; internal set; }
 
@@ -186,7 +188,8 @@ namespace Microsoft.CodeAnalysis
         public bool ReportAnalyzer { get; internal set; }
 
         /// <summary>
-        /// Report additional information related to InternalsVisibleToAttributes for all assemblies the compiler sees in this compilation.
+        /// Report additional information related to InternalsVisibleToAttributes for all assemblies the
+        // compiler sees in this compilation.
         /// </summary>
         public bool ReportInternalsVisibleToAttributes { get; internal set; }
 
@@ -258,7 +261,8 @@ namespace Microsoft.CodeAnalysis
         public SourceHashAlgorithm ChecksumAlgorithm { get; internal set; }
 
         /// <summary>
-        /// Arguments following a script file or separator "--". Null if the command line parser is not interactive.
+        /// Arguments following a script file or separator "--". Null if the command line parser is not
+        // interactive.
         /// </summary>
         public ImmutableArray<string> ScriptArguments { get; internal set; }
 
@@ -272,12 +276,14 @@ namespace Microsoft.CodeAnalysis
         public ImmutableArray<CommandLineSourceFile> SourceFiles { get; internal set; }
 
         /// <summary>
-        /// Full path of a log of file paths accessed by the compiler, or null if file logging should be suppressed.
+        /// Full path of a log of file paths accessed by the compiler, or null if file logging should be
+        // suppressed.
         /// </summary>
         /// <remarks>
         /// Two log files will be created:
         /// One with path <see cref="TouchedFilesPath"/> and extension ".read" logging the files read,
-        /// and second with path <see cref="TouchedFilesPath"/> and extension ".write" logging the files written to during compilation.
+        /// and second with path <see cref="TouchedFilesPath"/> and extension ".write" logging the files
+        // written to during compilation.
         /// </remarks>
         public string? TouchedFilesPath { get; internal set; }
 
@@ -318,12 +324,16 @@ namespace Microsoft.CodeAnalysis
         internal CommandLineArguments() { }
 
         /// <summary>
-        /// Returns a full path of the file that the compiler will generate the assembly to if compilation succeeds.
+        /// Returns a full path of the file that the compiler will generate the assembly to if compilation
+        // succeeds.
         /// </summary>
         /// <remarks>
-        /// The method takes <paramref name="outputFileName"/> rather than using the value of <see cref="OutputFileName"/>
-        /// since the latter might be unspecified, in which case actual output path can't be determined for C# command line
-        /// without creating a compilation and finding an entry point. VB does not allow <see cref="OutputFileName"/> to
+        /// The method takes <paramref name="outputFileName"/> rather than using the value of <see
+        // cref="OutputFileName"/>
+        /// since the latter might be unspecified, in which case actual output path can't be determined for
+        // C# command line
+        /// without creating a compilation and finding an entry point. VB does not allow <see
+        // cref="OutputFileName"/> to
         /// be unspecified.
         /// </remarks>
         public string GetOutputFilePath(string outputFileName)
@@ -341,9 +351,12 @@ namespace Microsoft.CodeAnalysis
         /// if <see cref="EmitPdbFile"/> is true and the compilation succeeds.
         /// </summary>
         /// <remarks>
-        /// The method takes <paramref name="outputFileName"/> rather than using the value of <see cref="OutputFileName"/>
-        /// since the latter might be unspecified, in which case actual output path can't be determined for C# command line
-        /// without creating a compilation and finding an entry point. VB does not allow <see cref="OutputFileName"/> to
+        /// The method takes <paramref name="outputFileName"/> rather than using the value of <see
+        // cref="OutputFileName"/>
+        /// since the latter might be unspecified, in which case actual output path can't be determined for
+        // C# command line
+        /// without creating a compilation and finding an entry point. VB does not allow <see
+        // cref="OutputFileName"/> to
         /// be unspecified.
         /// </remarks>
         public string GetPdbFilePath(string outputFileName)
@@ -358,7 +371,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if the PDB is generated to a PDB file, as opposed to embedded to the output binary and not generated at all.
+        /// Returns true if the PDB is generated to a PDB file, as opposed to embedded to the output binary
+        // and not generated at all.
         /// </summary>
         public bool EmitPdbFile =>
             EmitPdb && EmitOptions.DebugInformationFormat != DebugInformationFormat.Embedded;
@@ -366,10 +380,13 @@ namespace Microsoft.CodeAnalysis
         #region Metadata References
 
         /// <summary>
-        /// Resolves metadata references stored in <see cref="MetadataReferences"/> using given file resolver and metadata provider.
+        /// Resolves metadata references stored in <see cref="MetadataReferences"/> using given file
+        // resolver and metadata provider.
         /// </summary>
-        /// <param name="metadataResolver"><see cref="MetadataReferenceResolver"/> to use for assembly name and relative path resolution.</param>
-        /// <returns>Yields resolved metadata references or <see cref="UnresolvedMetadataReference"/>.</returns>
+        /// <param name="metadataResolver"><see cref="MetadataReferenceResolver"/> to use for assembly name
+        // and relative path resolution.</param>
+        /// <returns>Yields resolved metadata references or <see
+        // cref="UnresolvedMetadataReference"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="metadataResolver"/> is null.</exception>
         public IEnumerable<MetadataReference> ResolveMetadataReferences(
             MetadataReferenceResolver metadataResolver
@@ -388,8 +405,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Resolves metadata references stored in <see cref="MetadataReferences"/> using given file resolver and metadata provider.
-        /// If a non-null diagnostic bag <paramref name="diagnosticsOpt"/> is provided, it catches exceptions that may be generated while reading the metadata file and
+        /// Resolves metadata references stored in <see cref="MetadataReferences"/> using given file
+        // resolver and metadata provider.
+        /// If a non-null diagnostic bag <paramref name="diagnosticsOpt"/> is provided, it catches
+        // exceptions that may be generated while reading the metadata file and
         /// reports appropriate diagnostics.
         /// Otherwise, if <paramref name="diagnosticsOpt"/> is null, the exceptions are unhandled.
         /// </summary>
@@ -509,10 +528,12 @@ namespace Microsoft.CodeAnalysis
         #region Analyzer References
 
         /// <summary>
-        /// Resolves analyzer references stored in <see cref="AnalyzerReferences"/> using given file resolver.
+        /// Resolves analyzer references stored in <see cref="AnalyzerReferences"/> using given file
+        // resolver.
         /// </summary>
         /// <param name="analyzerLoader">Load an assembly from a file path</param>
-        /// <returns>Yields resolved <see cref="AnalyzerFileReference"/> or <see cref="UnresolvedAnalyzerReference"/>.</returns>
+        /// <returns>Yields resolved <see cref="AnalyzerFileReference"/> or <see
+        // cref="UnresolvedAnalyzerReference"/>.</returns>
         public IEnumerable<AnalyzerReference> ResolveAnalyzerReferences(
             IAnalyzerAssemblyLoader analyzerLoader
         )
@@ -592,7 +613,8 @@ namespace Microsoft.CodeAnalysis
                         return;
                 }
 
-                // Filter this diagnostic based on the compilation options so that /nowarn and /warnaserror etc. take effect.
+                // Filter this diagnostic based on the compilation options so that /nowarn and /warnaserror etc.
+                // take effect.
                 diagnostic = messageProvider.FilterDiagnosticInfo(diagnostic, compilationOptions);
 
                 if (diagnostic != null)
@@ -619,7 +641,8 @@ namespace Microsoft.CodeAnalysis
                     else
                     {
                         // https://github.com/dotnet/roslyn/issues/63856
-                        //diagnostics.Add(new DiagnosticInfo(messageProvider, messageProvider.WRN_DuplicateAnalyzerReference, reference.FilePath));
+                        //diagnostics.Add(new DiagnosticInfo(messageProvider,
+                        // messageProvider.WRN_DuplicateAnalyzerReference, reference.FilePath));
                     }
                 }
                 else

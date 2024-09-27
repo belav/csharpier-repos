@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             }
             else if (container is CompilationUnitSyntax)
             {
-                // A compilation unit as container means user want to move all its members from global to some namespace.
+                // A compilation unit as container means user want to move all its members from global to some
+                // namespace.
                 // We use an empty span to indicate this case.
                 containerSpan = default;
             }
@@ -104,15 +105,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         }
 
         /// <summary>
-        /// Try to get a new node to replace given node, which is a reference to a top-level type declared inside the namespace to be changed.
-        /// If this reference is the right side of a qualified name, the new node returned would be the entire qualified name. Depends on
-        /// whether <paramref name="newNamespaceParts"/> is provided, the name in the new node might be qualified with this new namespace instead.
+        /// Try to get a new node to replace given node, which is a reference to a top-level type declared
+        // inside the namespace to be changed.
+        /// If this reference is the right side of a qualified name, the new node returned would be the
+        // entire qualified name. Depends on
+        /// whether <paramref name="newNamespaceParts"/> is provided, the name in the new node might be
+        // qualified with this new namespace instead.
         /// </summary>
-        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which is calculated based on results from
+        /// <param name="reference">A reference to a type declared inside the namespace to be changed, which
+        // is calculated based on results from
         /// `SymbolFinder.FindReferencesAsync`.</param>
-        /// <param name="newNamespaceParts">If specified, and the reference is qualified with namespace, the namespace part of original reference
+        /// <param name="newNamespaceParts">If specified, and the reference is qualified with namespace, the
+        // namespace part of original reference
         /// will be replaced with given namespace in the new node.</param>
-        /// <param name="oldNode">The node to be replaced. This might be an ancestor of original reference.</param>
+        /// <param name="oldNode">The node to be replaced. This might be an ancestor of original
+        // reference.</param>
         /// <param name="newNode">The replacement node.</param>
         public override bool TryGetReplacementReferenceSyntax(
             SyntaxNode reference,
@@ -130,20 +137,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
 
             // A few different cases are handled here:
             //
-            // 1. When the reference is not qualified (i.e. just a simple name), then there's nothing need to be done.
+            // 1. When the reference is not qualified (i.e. just a simple name), then there's nothing need to be
+            // done.
             //    And both old and new will point to the original reference.
             //
-            // 2. When the new namespace is not specified, we don't need to change the qualified part of reference.
+            // 2. When the new namespace is not specified, we don't need to change the qualified part of
+            // reference.
             //    Both old and new will point to the qualified reference.
             //
-            // 3. When the new namespace is "", i.e. we are moving type referenced by name here to global namespace.
+            // 3. When the new namespace is "", i.e. we are moving type referenced by name here to global
+            // namespace.
             //    As a result, we need replace qualified reference with the simple name.
             //
-            // 4. When the namespace is specified and not "", i.e. we are moving referenced type to a different non-global
-            //    namespace. We need to replace the qualified reference with a new qualified reference (which is qualified
+            // 4. When the namespace is specified and not "", i.e. we are moving referenced type to a different
+            // non-global
+            //    namespace. We need to replace the qualified reference with a new qualified reference (which is
+            // qualified
             //    with new namespace.)
             //
-            // Note that qualified type name can appear in QualifiedNameSyntax or MemberAccessSyntax, so we need to handle both cases.
+            // Note that qualified type name can appear in QualifiedNameSyntax or MemberAccessSyntax, so we need
+            // to handle both cases.
 
             if (syntaxFacts.IsRightOfQualifiedName(nameRef))
             {
@@ -217,8 +230,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                 // This is the case where the reference is the right most part of a qualified name in `cref`.
                 // for example, `<see cref="Foo.Baz.Bar"/>` and `<see cref="SomeAlias::Foo.Baz.Bar"/>`.
                 // This is the form of `cref` we need to handle as a spacial case when changing namespace name or
-                // changing namespace from non-global to global, other cases in these 2 scenarios can be handled in the
-                // same way we handle non cref references, for example, `<see cref="SomeAlias::Foo"/>` and `<see cref="Foo"/>`.
+                // changing namespace from non-global to global, other cases in these 2 scenarios can be handled in
+                // the
+                // same way we handle non cref references, for example, `<see cref="SomeAlias::Foo"/>` and `<see
+                // cref="Foo"/>`.
 
                 var container = qualifiedCref.Container;
                 var aliasQualifier = GetAliasQualifier(container);
@@ -239,7 +254,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
                 }
                 else
                 {
-                    // if the new namespace is not global, then we just need to change the container in `QualifiedCrefSyntax`,
+                    // if the new namespace is not global, then we just need to change the container in
+                    // `QualifiedCrefSyntax`,
                     // which is just a regular namespace node, no cref node involve here.
                     oldNode = container;
                     newNode = CreateNamespaceAsQualifiedName(
@@ -268,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
             if (IsGlobalNamespace(newNamespaceParts))
             {
                 // If new namespace is "", then name will be declared in global namespace.
-                // We will replace qualified reference with simple name qualified with alias (global if it's not alias qualified)
+                // We will replace qualified reference with simple name qualified with alias (global if it's not
+                // alias qualified)
                 var aliasNode =
                     aliasQualifier?.ToIdentifierName()
                     ?? SyntaxFactory.IdentifierName(SyntaxFactory.Token(SyntaxKind.GlobalKeyword));
@@ -405,15 +422,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeNamespace
         }
 
         /// <summary>
-        /// For the node specified by <paramref name="span"/> to be applicable container, it must be a namespace
-        /// declaration or a compilation unit, contain no partial declarations and meet the following additional
+        /// For the node specified by <paramref name="span"/> to be applicable container, it must be a
+        // namespace
+        /// declaration or a compilation unit, contain no partial declarations and meet the following
+        // additional
         /// requirements:
         ///
         /// - If a namespace declaration:
         ///    1. It doesn't contain or is nested in other namespace declarations
         ///    2. The name of the namespace is valid (i.e. no errors)
         ///
-        /// - If a compilation unit (i.e. <paramref name="span"/> is empty), there must be no namespace declaration
+        /// - If a compilation unit (i.e. <paramref name="span"/> is empty), there must be no namespace
+        // declaration
         ///   inside (i.e. all members are declared in global namespace)
         /// </summary>
         protected override async Task<SyntaxNode?> TryGetApplicableContainerFromSpanAsync(

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +18,8 @@ using Moq;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// A test class for common <see cref="MediaTypeFormatter"/> functionality across multiple implementations.
+    /// A test class for common <see cref="MediaTypeFormatter"/> functionality across multiple
+    // implementations.
     /// </summary>
     /// <typeparam name="TFormatter">The type of formatter under test.</typeparam>
     public abstract class MediaTypeFormatterTestBase<TFormatter>
@@ -451,7 +453,8 @@ namespace System.Net.Http.Formatting
             formatter.Verify();
         }
 
-        // Remove this suppression once we pick up an xunit.analyzers package containing the xnuit/xunit#1466 fix.
+        // Remove this suppression once we pick up an xunit.analyzers package containing the
+        // xnuit/xunit#1466 fix.
 #pragma warning disable xUnit1013 // Public method should be marked as test
         [Theory]
         [TestDataSet(typeof(HttpTestData), "ReadAndWriteCorrectCharacterEncoding")]

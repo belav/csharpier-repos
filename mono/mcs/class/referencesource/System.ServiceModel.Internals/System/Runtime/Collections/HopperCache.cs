@@ -11,39 +11,60 @@ namespace System.Runtime.Collections
 
     // This cache works like a MruCache, but operates loosely and without locks in the mainline path.
     //
-    // It consists of three 'hoppers', which are Hashtables (chosen for their nice threading characteristics - reading
-    // doesn't require a lock).  Items enter the cache in the second hopper.  On lookups, cache hits result in the
-    // cache entry being promoted to the first hopper.  When the first hopper is full, the third hopper is dropped,
-    // and the first and second hoppers are shifted down, leaving an empty first hopper.  If the second hopper is
-    // full when a new cache entry is added, the third hopper is dropped, the second hopper is shifted down, and a
+    // It consists of three 'hoppers', which are Hashtables (chosen for their nice threading
+    // characteristics - reading
+    // doesn't require a lock).  Items enter the cache in the second hopper.  On lookups, cache hits
+    // result in the
+    // cache entry being promoted to the first hopper.  When the first hopper is full, the third hopper
+    // is dropped,
+    // and the first and second hoppers are shifted down, leaving an empty first hopper.  If the second
+    // hopper is
+    // full when a new cache entry is added, the third hopper is dropped, the second hopper is shifted
+    // down, and a
     // new second hopper is slotted in to become the new item entrypoint.
     //
-    // Items can only be added and looked up.  There's no way to remove an item besides through attrition.
+    // Items can only be added and looked up.  There's no way to remove an item besides through
+    // attrition.
     //
-    // This cache has a built-in concept of weakly-referenced items (which can be enabled or disabled in the
-    // constructor).  It needs this concept since the caller of the cache can't remove dead cache items itself.
+    // This cache has a built-in concept of weakly-referenced items (which can be enabled or disabled in
+    // the
+    // constructor).  It needs this concept since the caller of the cache can't remove dead cache items
+    // itself.
     // A weak HopperCache will simply ignore dead entries.
     //
-    // This structure allows cache lookups to be almost lock-free.  The only time the first hopper is written to
-    // is when a cache entry is promoted.  Promoting a cache entry is not critical - it's ok to skip a promotion.
-    // Only one promotion is allowed at a time.  If a second is attempted, it is skipped.  This allows promotions
+    // This structure allows cache lookups to be almost lock-free.  The only time the first hopper is
+    // written to
+    // is when a cache entry is promoted.  Promoting a cache entry is not critical - it's ok to skip a
+    // promotion.
+    // Only one promotion is allowed at a time.  If a second is attempted, it is skipped.  This allows
+    // promotions
     // to be synchronized with just an Interlocked call.
     //
-    // New cache entries go into the second hopper, which requires a lock, as does shifting the hoppers down.
+    // New cache entries go into the second hopper, which requires a lock, as does shifting the hoppers
+    // down.
     //
-    // The hopperSize parameter determines the size of the first hopper.  When it reaches this size, the hoppers
-    // are shifted.  The second hopper is allowed to grow to twice this size.  This is because it needs room to get
-    // new cache entries into the system, and the second hopper typically starts out 'full'.  Entries are never added
+    // The hopperSize parameter determines the size of the first hopper.  When it reaches this size, the
+    // hoppers
+    // are shifted.  The second hopper is allowed to grow to twice this size.  This is because it needs
+    // room to get
+    // new cache entries into the system, and the second hopper typically starts out 'full'.  Entries
+    // are never added
     // directly to the third hopper.
     //
-    // It's a error on the part of the caller to add the same key to the cache again if it's already in the cache
+    // It's a error on the part of the caller to add the same key to the cache again if it's already in
+    // the cache
     // with a different value.  The new value will not necessarily overwrite the old value.
     //
-    // If a cache entry is about to be promoted from the third hopper, and in the mean time the third hopper has been
-    // shifted away, an intervening GetValue for the same key might return null, even though the item is still in
-    // the cache and a later GetValue might find it.  So it's very important never to add the same key to the cache
-    // with two different values, even if GetValue returns null for the key in-between the first add and the second.
-    // (If this particular behavior is a problem, it may be possible to tighten up, but it's not necessary for the
+    // If a cache entry is about to be promoted from the third hopper, and in the mean time the third
+    // hopper has been
+    // shifted away, an intervening GetValue for the same key might return null, even though the item is
+    // still in
+    // the cache and a later GetValue might find it.  So it's very important never to add the same key
+    // to the cache
+    // with two different values, even if GetValue returns null for the key in-between the first add and
+    // the second.
+    // (If this particular behavior is a problem, it may be possible to tighten up, but it's not
+    // necessary for the
     // current use of HopperCache - UriPrefixTable.)
     class HopperCache
     {
@@ -107,7 +128,8 @@ namespace System.Runtime.Collections
             }
         }
 
-        // Calls to GetValue do not need to be synchronized, but the object used to synchronize the Add calls
+        // Calls to GetValue do not need to be synchronized, but the object used to synchronize the Add
+        // calls
         // must be passed in.  It's sometimes used.
         public object GetValue(object syncObject, object key)
         {

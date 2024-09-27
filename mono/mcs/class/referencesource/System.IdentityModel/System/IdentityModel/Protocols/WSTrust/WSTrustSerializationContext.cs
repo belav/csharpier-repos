@@ -28,7 +28,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <summary>
         /// Initializes an instance of <see cref="WSTrustSerializationContext"/>
         /// </summary>
-        /// <param name="securityTokenHandlerCollectionManager">The security token handler collection manager.</param>
+        /// <param name="securityTokenHandlerCollectionManager">The security token handler collection
+        // manager.</param>
         public WSTrustSerializationContext(
             SecurityTokenHandlerCollectionManager securityTokenHandlerCollectionManager
         )
@@ -42,7 +43,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Initializes an instance of <see cref="WSTrustSerializationContext"/>
         /// </summary>
         /// <param name="securityTokenHandlerCollectionManager">
-        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// The <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </param>
         /// <param name="securityTokenResolver">
@@ -86,7 +88,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references found in most
+        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references
+        // found in most
         /// elements of WS-Trust messages.
         /// </summary>
         public SecurityTokenResolver TokenResolver
@@ -96,7 +99,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references found in the
+        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references
+        // found in the
         /// UseKey element of RST messages as well as the RenewTarget element found in RST messages.
         /// </summary>
         public SecurityTokenResolver UseKeyTokenResolver
@@ -106,7 +110,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see cref="SecurityTokenHandler" />
+        /// Gets or sets the <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of <see
+        // cref="SecurityTokenHandler" />
         /// objects used for serializing and validating tokens found in WS-Trust messages.
         /// </summary>
         public SecurityTokenHandlerCollectionManager SecurityTokenHandlerCollectionManager

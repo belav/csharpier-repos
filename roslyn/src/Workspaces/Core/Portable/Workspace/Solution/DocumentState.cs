@@ -367,7 +367,8 @@ namespace Microsoft.CodeAnalysis
             SourceText newText
         )
         {
-            // ** currently, it doesn't do any text based quick check. we can add them later if current logic is not performant enough for typing case.
+            // ** currently, it doesn't do any text based quick check. we can add them later if current logic is
+            // not performant enough for typing case.
             var change = newText.GetEncompassingTextChangeRange(oldText);
             if (change == default)
             {
@@ -486,10 +487,12 @@ namespace Microsoft.CodeAnalysis
 
             AsyncLazy<TreeAndVersion>? newTreeSource = null;
 
-            // Optimization: if we are only changing preprocessor directives, and we've already parsed the existing tree
+            // Optimization: if we are only changing preprocessor directives, and we've already parsed the
+            // existing tree
             // and it didn't have any, we can avoid a reparse since the tree will be parsed the same.
             //
-            // We only need to care about `#if` directives as those are the only sorts of directives that can affect how
+            // We only need to care about `#if` directives as those are the only sorts of directives that can
+            // affect how
             // a tree is parsed.
             if (
                 onlyPreprocessorDirectiveChange
@@ -557,7 +560,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         // TODO: https://github.com/dotnet/roslyn/issues/37125
-        // if FilePath is null, then this will change the name of the underlying tree, but we aren't producing a new tree in that case.
+        // if FilePath is null, then this will change the name of the underlying tree, but we aren't
+        // producing a new tree in that case.
         public DocumentState UpdateName(string name) =>
             UpdateAttributes(Attributes.With(name: name));
 
@@ -584,7 +588,8 @@ namespace Microsoft.CodeAnalysis
             var newAttributes = Attributes.With(filePath: filePath);
             Debug.Assert(newAttributes != Attributes);
 
-            // TODO: it's overkill to fully reparse the tree if we had the tree already; all we have to do is update the
+            // TODO: it's overkill to fully reparse the tree if we had the tree already; all we have to do is
+            // update the
             // file path and diagnostic options for that tree.
             var newTreeSource = SupportsSyntaxTree
                 ? CreateLazyFullyParsedTree(
@@ -676,7 +681,8 @@ namespace Microsoft.CodeAnalysis
 
             if (TryGetSyntaxTree(out var priorTree))
             {
-                // this is most likely available since UpdateTree is normally called after modifying the existing tree.
+                // this is most likely available since UpdateTree is normally called after modifying the existing
+                // tree.
                 encoding = priorTree.Encoding;
             }
             else if (TryGetText(out var priorText))
@@ -734,7 +740,8 @@ namespace Microsoft.CodeAnalysis
                     newRoot
                 );
 
-                // its okay to use a strong cached AsyncLazy here because the compiler layer SyntaxTree will also keep the text alive once its built.
+                // its okay to use a strong cached AsyncLazy here because the compiler layer SyntaxTree will also
+                // keep the text alive once its built.
                 var lazyTextAndVersion = new TreeTextSource(
                     new AsyncLazy<SourceText>(tree.GetTextAsync, tree.GetText),
                     textVersion

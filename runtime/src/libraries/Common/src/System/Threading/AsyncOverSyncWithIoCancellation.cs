@@ -11,7 +11,8 @@ using Microsoft.Win32.SafeHandles;
 namespace System.Threading
 {
     /// <summary>
-    /// Helper for performing asynchronous I/O on Windows implemented as queueing a work item that performs synchronous I/O, complete with cancellation support.
+    /// Helper for performing asynchronous I/O on Windows implemented as queueing a work item that
+    // performs synchronous I/O, complete with cancellation support.
     /// </summary>
     internal sealed class AsyncOverSyncWithIoCancellation
     {
@@ -26,18 +27,22 @@ namespace System.Threading
         private static AsyncOverSyncWithIoCancellation? t_instance;
 
         /// <summary>The OS handle of the thread performing the I/O.</summary>
-        /// <remarks>This is stored as part of the object's construction because the objects are thread affinitized.</remarks>
+        /// <remarks>This is stored as part of the object's construction because the objects are thread
+        // affinitized.</remarks>
         private readonly SafeThreadHandle? _threadHandle;
 
         /// <summary>Whether the call to CancellationToken.UnsafeRegister completed.</summary>
         private bool _finishedCancellationRegistration;
 
-        /// <summary>Whether the I/O operation has finished (successfully or unsuccessfully) and is requesting cancellation attempts stop.</summary>
+        /// <summary>Whether the I/O operation has finished (successfully or unsuccessfully) and is
+        // requesting cancellation attempts stop.</summary>
         private bool _continueTryingToCancel;
 
         /// <summary>
-        /// A task that may be checked after the <see cref="CancellationTokenRegistration"/> has been disposed.  If it's null at that point,
-        /// the callback wasn't and will never be invoked.  If it's non-null, its completion represents the completion of the asynchronous callback.
+        /// A task that may be checked after the <see cref="CancellationTokenRegistration"/> has been
+        // disposed.  If it's null at that point,
+        /// the callback wasn't and will never be invoked.  If it's non-null, its completion represents the
+        // completion of the asynchronous callback.
         /// </summary>
         private Task? _callbackCompleted;
 
@@ -81,12 +86,16 @@ namespace System.Threading
         /// <typeparam name="TState">The type of the state passed to <paramref name="action"/>.</typeparam>
         /// <param name="action">The action to invoke asynchronously.</param>
         /// <param name="state">The state to pass to the action.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to register with to cancel the synchronous I/O performed by <paramref name="action"/>.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to register with to cancel
+        // the synchronous I/O performed by <paramref name="action"/>.</param>
         /// <returns>A <see cref="ValueTask"/> that represents the asynchronous operation.</returns>
         /// <remarks>
-        /// The implementation will queue the invocation of the <paramref name="action"/> to the thread pool, with
-        /// the returned <see cref="ValueTask"/> representing its completion.  If the <paramref name="cancellationToken"/> has
-        /// cancellation requested, the implementation will attempt to use CancelSynchronousIo to cancel any I/O being
+        /// The implementation will queue the invocation of the <paramref name="action"/> to the thread
+        // pool, with
+        /// the returned <see cref="ValueTask"/> representing its completion.  If the <paramref
+        // name="cancellationToken"/> has
+        /// cancellation requested, the implementation will attempt to use CancelSynchronousIo to cancel any
+        // I/O being
         /// performed by the function.
         /// </remarks>
         [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder))]
@@ -96,13 +105,18 @@ namespace System.Threading
             CancellationToken cancellationToken
         )
         {
-            // Queue the work to complete asynchronously. Logically, this is just queueing a work item to the thread pool.
-            // We use a ForceYielding awaiter in combination with the PoolingAsyncValueTaskMethodBuilder to reduce allocation.
+            // Queue the work to complete asynchronously. Logically, this is just queueing a work item to the
+            // thread pool.
+            // We use a ForceYielding awaiter in combination with the PoolingAsyncValueTaskMethodBuilder to
+            // reduce allocation.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            // Register for cancellation, perform the work, and clean up. Even though we're in an async method, awaits _must not_ be used
-            // after this point, or else the I/O cancellation could both not work and negatively interact with I/O on another thread.
-            // The func _must_ be invoked on the same thread that invoked RegisterCancellation, with no intervening work.
+            // Register for cancellation, perform the work, and clean up. Even though we're in an async method,
+            // awaits _must not_ be used
+            // after this point, or else the I/O cancellation could both not work and negatively interact with
+            // I/O on another thread.
+            // The func _must_ be invoked on the same thread that invoked RegisterCancellation, with no
+            // intervening work.
             SyncAsyncWorkItemRegistration reg = RegisterCancellation(cancellationToken);
             try
             {
@@ -126,12 +140,16 @@ namespace System.Threading
         /// <typeparam name="TResult">The type of the result from <paramref name="func"/>.</typeparam>
         /// <param name="func">The function to invoke asynchronously.</param>
         /// <param name="state">The state to pass to the function.</param>
-        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to register with to cancel the synchronous I/O performed by <paramref name="func"/>.</param>
+        /// <param name="cancellationToken">The <see cref="CancellationToken"/> to register with to cancel
+        // the synchronous I/O performed by <paramref name="func"/>.</param>
         /// <returns>A <see cref="ValueTask"/> that represents the asynchronous operation.</returns>
         /// <remarks>
-        /// The implementation will queue the invocation of the <paramref name="func"/> to the thread pool, with
-        /// the returned <see cref="ValueTask"/> representing its completion.  If the <paramref name="cancellationToken"/> has
-        /// cancellation requested, the implementation will attempt to use CancelSynchronousIo to cancel any I/O being
+        /// The implementation will queue the invocation of the <paramref name="func"/> to the thread pool,
+        // with
+        /// the returned <see cref="ValueTask"/> representing its completion.  If the <paramref
+        // name="cancellationToken"/> has
+        /// cancellation requested, the implementation will attempt to use CancelSynchronousIo to cancel any
+        // I/O being
         /// performed by the function.
         /// </remarks>
         [AsyncMethodBuilder(typeof(PoolingAsyncValueTaskMethodBuilder<>))]
@@ -141,13 +159,18 @@ namespace System.Threading
             CancellationToken cancellationToken
         )
         {
-            // Queue the work to complete asynchronously. Logically, this is just queueing a work item to the thread pool.
-            // We use a ForceYielding awaiter in combination with the PoolingAsyncValueTaskMethodBuilder to reduce allocation.
+            // Queue the work to complete asynchronously. Logically, this is just queueing a work item to the
+            // thread pool.
+            // We use a ForceYielding awaiter in combination with the PoolingAsyncValueTaskMethodBuilder to
+            // reduce allocation.
             await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
 
-            // Register for cancellation, perform the work, and clean up. Even though we're in an async method, awaits _must not_ be used
-            // after this point, or else the I/O cancellation could both not work and negatively interact with I/O on another thread.
-            // The func _must_ be invoked on the same thread that invoked RegisterCancellation, with no intervening work.
+            // Register for cancellation, perform the work, and clean up. Even though we're in an async method,
+            // awaits _must not_ be used
+            // after this point, or else the I/O cancellation could both not work and negatively interact with
+            // I/O on another thread.
+            // The func _must_ be invoked on the same thread that invoked RegisterCancellation, with no
+            // intervening work.
             SyncAsyncWorkItemRegistration reg = RegisterCancellation(cancellationToken);
             try
             {
@@ -166,7 +189,8 @@ namespace System.Threading
             }
         }
 
-        /// <summary>Translates an <see cref="OperationCanceledException"/> that's not associated with the relevant <see cref="CancellationToken"/> to one that is.</summary>
+        /// <summary>Translates an <see cref="OperationCanceledException"/> that's not associated with the
+        // relevant <see cref="CancellationToken"/> to one that is.</summary>
         private static OperationCanceledException CreateAppropriateCancellationException(
             CancellationToken cancellationToken,
             OperationCanceledException originalOce
@@ -188,14 +212,21 @@ namespace System.Threading
             return newOce;
         }
 
-        /// <summary>The struct IDisposable returned from RegisterCancellation in order to clean up after the registration.</summary>
+        /// <summary>The struct IDisposable returned from RegisterCancellation in order to clean up after
+        // the registration.</summary>
         /// <remarks>
-        /// This does not implement IAsyncDisposable, even though async disposal could await both cancellation registration disposal
-        /// and the callback completion.  By only supporting synchronous disposal, we can ensure that all relevant work happens
-        /// on the calling thread, which in turn allows us to use a per-thread singleton that avoids allocation in the most
-        /// common case (an operation being performed with a cancelable token).  The benefit of async disposal would be that _if_
-        /// cancellation occurred while the operation was in progress, we could avoid blocking the disposing thread until the
-        /// cancellation request completes.  However, this is a rare case, and even when it occurs, it's expected to be very fast,
+        /// This does not implement IAsyncDisposable, even though async disposal could await both
+        // cancellation registration disposal
+        /// and the callback completion.  By only supporting synchronous disposal, we can ensure that all
+        // relevant work happens
+        /// on the calling thread, which in turn allows us to use a per-thread singleton that avoids
+        // allocation in the most
+        /// common case (an operation being performed with a cancelable token).  The benefit of async
+        // disposal would be that _if_
+        /// cancellation occurred while the operation was in progress, we could avoid blocking the disposing
+        // thread until the
+        /// cancellation request completes.  However, this is a rare case, and even when it occurs, it's
+        // expected to be very fast,
         /// and in general should be completed by the time we even get to the disposal itself.
         /// </remarks>
         private struct SyncAsyncWorkItemRegistration : IDisposable
@@ -203,7 +234,8 @@ namespace System.Threading
             public AsyncOverSyncWithIoCancellation WorkItem;
             public CancellationTokenRegistration CancellationRegistration;
 
-            /// <summary>Waits for any pending cancellation callback to complete and cleans up resources.</summary>
+            /// <summary>Waits for any pending cancellation callback to complete and cleans up
+            // resources.</summary>
             public void Dispose()
             {
                 if (WorkItem is null)
@@ -227,7 +259,8 @@ namespace System.Threading
         }
 
         /// <summary>Registers for cancellation with the specified token.</summary>
-        /// <remarks>Upon cancellation being requested, the implementation will attempt to CancelSynchronousIo for the thread calling RegisterCancellation.</remarks>
+        /// <remarks>Upon cancellation being requested, the implementation will attempt to
+        // CancelSynchronousIo for the thread calling RegisterCancellation.</remarks>
         private static SyncAsyncWorkItemRegistration RegisterCancellation(
             CancellationToken cancellationToken
         )

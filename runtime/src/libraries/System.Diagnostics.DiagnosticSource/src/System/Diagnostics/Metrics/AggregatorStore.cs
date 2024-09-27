@@ -10,40 +10,63 @@ using System.Threading;
 namespace System.Diagnostics.Metrics
 {
     /// <summary>
-    /// AggregatorStore is a high performance map from an unordered list of labels (KeyValuePairs) to an instance of TAggregator
+    /// AggregatorStore is a high performance map from an unordered list of labels (KeyValuePairs) to an
+    // instance of TAggregator
     /// </summary>
     /// <typeparam name="TAggregator">The type of Aggregator returned by the store</typeparam>
     //
-    // This is implemented as a two level Dictionary lookup with a number of optimizations applied. The conceptual lookup is:
+    // This is implemented as a two level Dictionary lookup with a number of optimizations applied. The
+    // conceptual lookup is:
     // 1. Sort ReadOnlySpan<KeyValuePair<string,object?>> by the key names
-    // 2. Split ReadOnlySpan<KeyValuePair<string,object?>> into ReadOnlySpan<string> and ReadOnlySpan<object?>
+    // 2. Split ReadOnlySpan<KeyValuePair<string,object?>> into ReadOnlySpan<string> and
+    // ReadOnlySpan<object?>
     // 3. LabelNameDictionary.Lookup(ReadOnlySpan<string>) -> ConcurrentDictionary
     // 4. ConcurrentDictionary.Lookup(ReadOnlySpan<object?>) -> TAggregator
     //
     // There are several things we are optimizing for:
-    //   - CPU instructions per lookup: In the common case the key portion of the KeyValuePairs is unchanged between requests
-    //   and they are given in the same order. This means we can cache the 2nd level concurrent dictionary and the permutation that
-    //   will sort the labels as long as we determine the keys are unchanged from the previous request. The first time a new set of
-    //   keys is observed we call into LabelInstructionCompiler.Create which will determine the canonical sort order, do the 1st level
-    //   lookup, and then return a new _cachedLookupFunc. Invoking _cachedLookupFunc confirms the keys match what was previously
-    //   observed, re-orders the values with the cached permutation and performs the 2nd level lookup against the cached 2nd level
-    //   Dictionary. If we wanted to get really fancy we could have that compiler generate IL that would be JIT compiled, but right now
-    //   LabelInstructionCompiler simply creates a managed data structure (LabelInstructionInterpreter) that encodes the permutation
-    //   in an array of LabelInstructions and the 2nd level dictionary in another field. LabelInstructionInterpreter.GetAggregator
-    //   re-orders the values with a for loop and then does the lookup. Depending on ratio between fast-path and slow-path invocations
-    //   it may also not be a win to further pessimize the slow-path (JIT compilation is expensive) to squeeze yet more cycles out of
+    //   - CPU instructions per lookup: In the common case the key portion of the KeyValuePairs is
+    // unchanged between requests
+    //   and they are given in the same order. This means we can cache the 2nd level concurrent
+    // dictionary and the permutation that
+    //   will sort the labels as long as we determine the keys are unchanged from the previous request.
+    // The first time a new set of
+    //   keys is observed we call into LabelInstructionCompiler.Create which will determine the
+    // canonical sort order, do the 1st level
+    //   lookup, and then return a new _cachedLookupFunc. Invoking _cachedLookupFunc confirms the keys
+    // match what was previously
+    //   observed, re-orders the values with the cached permutation and performs the 2nd level lookup
+    // against the cached 2nd level
+    //   Dictionary. If we wanted to get really fancy we could have that compiler generate IL that would
+    // be JIT compiled, but right now
+    //   LabelInstructionCompiler simply creates a managed data structure (LabelInstructionInterpreter)
+    // that encodes the permutation
+    //   in an array of LabelInstructions and the 2nd level dictionary in another field.
+    // LabelInstructionInterpreter.GetAggregator
+    //   re-orders the values with a for loop and then does the lookup. Depending on ratio between
+    // fast-path and slow-path invocations
+    //   it may also not be a win to further pessimize the slow-path (JIT compilation is expensive) to
+    // squeeze yet more cycles out of
     //   the fast path.
-    //   - Allocations per lookup: Any lookup of 3 or fewer labels on the above fast path is allocation free. We have separate
-    //   dictionaries depending on the number of labels in the list and the dictionary keys are structures representing fixed size
+    //   - Allocations per lookup: Any lookup of 3 or fewer labels on the above fast path is allocation
+    // free. We have separate
+    //   dictionaries depending on the number of labels in the list and the dictionary keys are
+    // structures representing fixed size
     //   lists of strings or objects. For example with two labels the lookup is done in a
-    //   FixedSizeLabelNameDictionary<StringSequence2, ConcurrentDictionary<ObjectSequence2, TAggregator>>
-    //   Above 3 labels we have StringSequenceMany and ObjectSequenceMany which wraps an underlying string[] or object?[] respectively.
+    //   FixedSizeLabelNameDictionary<StringSequence2, ConcurrentDictionary<ObjectSequence2,
+    // TAggregator>>
+    //   Above 3 labels we have StringSequenceMany and ObjectSequenceMany which wraps an underlying
+    // string[] or object?[] respectively.
     //   Doing a lookup with those types will need to do allocations for those arrays.
-    //   - Total memory footprint per-store: We have a store for every instrument we are tracking and an entry in the 2nd level
-    //   dictionary for every label set. This can add up to a lot of entries. Splitting the label sets into keys and values means we
-    //   only need to store each unique key list once (as the key of the 1st level dictionary). It is common for all labelsets on an
-    //   instrument to have the same keys so this can be a sizable savings. We also use a union to store the 1st level dictionaries
-    //   for different label set sizes because most instruments always specify labelsets with the same number of labels (most likely
+    //   - Total memory footprint per-store: We have a store for every instrument we are tracking and an
+    // entry in the 2nd level
+    //   dictionary for every label set. This can add up to a lot of entries. Splitting the label sets
+    // into keys and values means we
+    //   only need to store each unique key list once (as the key of the 1st level dictionary). It is
+    // common for all labelsets on an
+    //   instrument to have the same keys so this can be a sizable savings. We also use a union to store
+    // the 1st level dictionaries
+    //   for different label set sizes because most instruments always specify labelsets with the same
+    // number of labels (most likely
     //   zero).
     [System.Security.SecuritySafeCritical] // using SecurityCritical type ReadOnlySpan
     internal struct AggregatorStore<TAggregator>
@@ -55,8 +78,10 @@ namespace System.Diagnostics.Metrics
         // FixedSizeLabelNameDictionary<StringSequence1, ConcurrentDictionary<ObjectSequence1, TAggregator>>
         // FixedSizeLabelNameDictionary<StringSequence2, ConcurrentDictionary<ObjectSequence2, TAggregator>>
         // FixedSizeLabelNameDictionary<StringSequence3, ConcurrentDictionary<ObjectSequence3, TAggregator>>
-        // FixedSizeLabelNameDictionary<StringSequenceMany, ConcurrentDictionary<ObjectSequenceMany, TAggregator>>
-        // MultiSizeLabelNameDictionary<TAggregator> - this is used when we need to store more than one of the above union items
+        // FixedSizeLabelNameDictionary<StringSequenceMany, ConcurrentDictionary<ObjectSequenceMany,
+        // TAggregator>>
+        // MultiSizeLabelNameDictionary<TAggregator> - this is used when we need to store more than one of
+        // the above union items
         private volatile object? _stateUnion;
         private volatile AggregatorLookupFunc<TAggregator>? _cachedLookupFunc;
         private readonly Func<TAggregator?> _createAggregatorFunc;

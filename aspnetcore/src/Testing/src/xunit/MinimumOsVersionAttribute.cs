@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.InternalTesting;
 
 /// <summary>
 /// Skips a test if the OS is the given type (Windows) and the OS version is less than specified.
-/// E.g. Specifying Window 10.0 skips on Win 8, but not on Linux. Combine with OSSkipConditionAttribute as needed.
+/// E.g. Specifying Window 10.0 skips on Win 8, but not on Linux. Combine with
+// OSSkipConditionAttribute as needed.
 /// </summary>
 [AttributeUsage(
     AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
@@ -45,7 +46,8 @@ public class MinimumOSVersionAttribute : Attribute, ITestCondition
         _currentOS = currentOS;
         _currentVersion = currentVersion;
 
-        // Do not skip other OS's, Use OSSkipConditionAttribute or a separate MinimumOSVersionAttribute for that.
+        // Do not skip other OS's, Use OSSkipConditionAttribute or a separate MinimumOSVersionAttribute for
+        // that.
         _skip = _targetOS == _currentOS && _minVersion > _currentVersion;
         SkipReason = $"This test requires {_targetOS} {_minVersion} or later.";
     }

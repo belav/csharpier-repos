@@ -85,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (symbol is IMethodSymbol { MethodKind: MethodKind.Conversion })
                     {
-                        // The token may be part of a larger name (for example, `int` in `public static operator int[](Goo g);`.
+                        // The token may be part of a larger name (for example, `int` in `public static operator int[](Goo
+                        // g);`.
                         // So check if the symbol's location encompasses the span of the token we're asking about.
                         if (
                             symbol.Locations.Any(
@@ -104,11 +105,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return symbol;
                     }
 
-                    // We found some symbol, but it defined something else. We're not going to have a higher node defining _another_ symbol with this token, so we can stop now.
+                    // We found some symbol, but it defined something else. We're not going to have a higher node
+                    // defining _another_ symbol with this token, so we can stop now.
                     return null;
                 }
 
-                // If we hit an executable statement syntax and didn't find anything yet, we can just stop now -- anything higher would be a member declaration which won't be defined by something inside a statement.
+                // If we hit an executable statement syntax and didn't find anything yet, we can just stop now --
+                // anything higher would be a member declaration which won't be defined by something inside a
+                // statement.
                 if (CSharpSyntaxFacts.Instance.IsExecutableStatement(ancestor))
                     return null;
             }
@@ -446,8 +450,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Returns the best symbols found that the provided token binds to.  This is similar to <see
-        /// cref="ModelExtensions.GetSymbolInfo(SemanticModel, SyntaxNode, CancellationToken)"/>, but sometimes employs
-        /// heuristics to provide a better result for tokens that users conceptually think bind to things, but which the
+        /// cref="ModelExtensions.GetSymbolInfo(SemanticModel, SyntaxNode, CancellationToken)"/>, but
+        // sometimes employs
+        /// heuristics to provide a better result for tokens that users conceptually think bind to things,
+        // but which the
         /// compiler does not necessarily return results for.
         /// </summary>
         private static ImmutableArray<ISymbol> GetSymbolInfo(

@@ -140,7 +140,8 @@ namespace System.Data.Mapping.Update.Internal
 
         /// <summary>
         /// Requires: record must have correct type for this metadata instance.
-        /// Populates a new <see cref="PropagatorResult"/> object representing a member of a record matching the
+        /// Populates a new <see cref="PropagatorResult"/> object representing a member of a record matching
+        // the
         /// type of this extractor. Given a record and a member, this method wraps the value of the member
         /// in a PropagatorResult. This operation can be performed efficiently by this class, which knows
         /// important stuff about the type being extracted.
@@ -150,8 +151,10 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="currentValues">Indicates whether we are reading current or original values.</param>
         /// <param name="key">Entity key for the state entry. Must be set for entity records.</param>
         /// <param name="ordinal">Ordinal of Member for which to retrieve a value.</param>
-        /// modified (must be ordinally aligned with the type). Null indicates all members are modified.</param>
-        /// <param name="modifiedPropertiesBehavior">Indicates how to determine whether a property is modified.</param>
+        /// modified (must be ordinally aligned with the type). Null indicates all members are
+        // modified.</param>
+        /// <param name="modifiedPropertiesBehavior">Indicates how to determine whether a property is
+        // modified.</param>
         /// <returns>Propagator result describing this member value.</returns>
         internal PropagatorResult RetrieveMember(
             IEntityStateEntry stateEntry,
@@ -399,12 +402,16 @@ namespace System.Data.Mapping.Update.Internal
         /// Converts a record to a propagator result
         /// </summary>
         /// <param name="stateEntry">state manager entry containing the record</param>
-        /// <param name="isModified">Indicates whether the root element is modified (i.e., whether the type has changed)</param>
+        /// <param name="isModified">Indicates whether the root element is modified (i.e., whether the type
+        // has changed)</param>
         /// <param name="record">Record to convert</param>
-        /// <param name="useCurrentValues">Indicates whether we are retrieving current or original values.</param>
-        /// <param name="translator">Translator for session context; registers new metadata for the record type if none
+        /// <param name="useCurrentValues">Indicates whether we are retrieving current or original
+        // values.</param>
+        /// <param name="translator">Translator for session context; registers new metadata for the record
+        // type if none
         /// exists</param>
-        /// <param name="modifiedPropertiesBehavior">Indicates how to determine whether a property is modified.</param>
+        /// <param name="modifiedPropertiesBehavior">Indicates how to determine whether a property is
+        // modified.</param>
         /// <returns>Result corresponding to the given record</returns>
         internal static PropagatorResult ExtractResultFromRecord(
             IEntityStateEntry stateEntry,

@@ -45,9 +45,9 @@ namespace MonoTests.System.Configuration.Provider
         [Test]
         public void Properties()
         {
-            /* simulate what should happen with the following <provider> line:
-               <provider name="FooProvider" description="Provider for foos" />
-             */
+/* simulate what should happen with the following <provider> line:
+<provider name="FooProvider" description="Provider for foos" />
+*/
 
             NameValueCollection extra_attrs = new NameValueCollection();
             extra_attrs.Add("description", "Provider for foos");
@@ -59,8 +59,8 @@ namespace MonoTests.System.Configuration.Provider
             Assert.AreEqual("FooProvider", test.Name, "A1");
             Assert.AreEqual("Provider for foos", test.Description, "A2");
 
-            /* simulate what should happen with the following <provider> line:
-               <provider name="FooProvider" /> */
+/* simulate what should happen with the following <provider> line:
+<provider name="FooProvider" /> */
 
             extra_attrs = new NameValueCollection();
             test = new TestProviderBase();

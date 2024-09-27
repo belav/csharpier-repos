@@ -91,7 +91,8 @@ namespace System.Activities.Statements
 
             if (this.CompletionCondition != null && updateContext.GetValue(this.hasCompleted))
             {
-                // when CompletionCondition exists, schedule newly added branches only if "hasCompleted" variable evaluates to false
+                // when CompletionCondition exists, schedule newly added branches only if "hasCompleted" variable
+                // evaluates to false
                 return;
             }
 

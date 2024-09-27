@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             bool forAnalyzer
         )
         {
-            // We only have to check if the first member is a global statement.  Global statements following anything
+            // We only have to check if the first member is a global statement.  Global statements following
+            // anything
             // else is not legal.
             if (!root.IsTopLevelProgram())
                 return false;
@@ -48,8 +49,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             var analyzerDisabled = option.Notification.Severity == ReportDiagnostic.Suppress;
             var forRefactoring = !forAnalyzer;
 
-            // If the user likes Program.Main, then we offer to convert to Program.Main from the diagnostic analyzer.
-            // If the user prefers Top-level-statements then we offer to use Program.Main from the refactoring provider.
+            // If the user likes Program.Main, then we offer to convert to Program.Main from the diagnostic
+            // analyzer.
+            // If the user prefers Top-level-statements then we offer to use Program.Main from the refactoring
+            // provider.
             // If the analyzer is disabled completely, the refactoring is enabled in both directions.
             var canOffer =
                 userPrefersProgramMain == forAnalyzer || (forRefactoring && analyzerDisabled);
@@ -61,8 +64,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
             bool isHidden
         )
         {
-            // if the diagnostic is hidden, show it anywhere from the top of the file through the end of the last global
-            // statement.  That way the user can make the change anywhere in teh top level code.  Otherwise, just put
+            // if the diagnostic is hidden, show it anywhere from the top of the file through the end of the
+            // last global
+            // statement.  That way the user can make the change anywhere in teh top level code.  Otherwise,
+            // just put
             // the diagnostic on the start of the first global statement.
             if (!isHidden)
                 return root
@@ -71,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ConvertProgram
                     .GetFirstToken()
                     .GetLocation();
 
-            // note: the legal start has to come after any #pragma directives.  We don't want this to be suppressed, but
+            // note: the legal start has to come after any #pragma directives.  We don't want this to be
+            // suppressed, but
             // then have the span of the diagnostic end up outside the suppression.
             var lastPragma = root.GetFirstToken()
                 .LeadingTrivia.LastOrDefault(t =>

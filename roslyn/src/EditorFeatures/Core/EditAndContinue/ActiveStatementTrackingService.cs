@@ -254,7 +254,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                     foreach (var id in openDocumentIds)
                     {
-                        // active statements may be in any document kind (#line may in theory map to analyzer config as well, no need to exclude it):
+                        // active statements may be in any document kind (#line may in theory map to analyzer config as
+                        // well, no need to exclude it):
                         documents.Add(
                             await solution
                                 .GetTextDocumentAsync(id, cancellationToken)
@@ -269,7 +270,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             var document = documents[i];
                             if (document?.FilePath == null)
                             {
-                                // Document has been deleted, doesn't have a path or is an open design-time document (which does not exist in the compile-time solution)
+                                // Document has been deleted, doesn't have a path or is an open design-time document (which does not
+                                // exist in the compile-time solution)
                                 continue;
                             }
 
@@ -370,7 +372,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             /// <summary>
-            /// Returns location of the tracking spans in the specified <see cref="Document"/> snapshot (#line target document).
+            /// Returns location of the tracking spans in the specified <see cref="Document"/> snapshot (#line
+            // target document).
             /// </summary>
             /// <returns>Empty array if tracking spans are not available for the document.</returns>
             public async ValueTask<ImmutableArray<ActiveStatementSpan>> GetSpansAsync(
@@ -421,7 +424,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             }
 
             /// <summary>
-            /// Updates tracking spans with the latest positions of all active statements in the specified document snapshot (#line target document) and returns them.
+            /// Updates tracking spans with the latest positions of all active statements in the specified
+            // document snapshot (#line target document) and returns them.
             /// </summary>
             internal async ValueTask<
                 ImmutableArray<ActiveStatementTrackingSpan>
@@ -462,7 +466,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                         if (activeStatementSpans.IsEmpty)
                         {
-                            // Unable to determine the latest positions of active statements for the document snapshot (the document is out-of-sync).
+                            // Unable to determine the latest positions of active statements for the document snapshot (the
+                            // document is out-of-sync).
                             // Return the current tracking spans.
                             return oldSpans.NullToEmpty();
                         }

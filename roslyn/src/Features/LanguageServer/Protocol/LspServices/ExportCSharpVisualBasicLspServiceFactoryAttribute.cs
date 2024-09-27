@@ -11,7 +11,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 /// <summary>
-/// Defines an easy to use subclass for <see cref="ExportLspServiceFactoryAttribute"/> with the roslyn languages contract name.
+/// Defines an easy to use subclass for <see cref="ExportLspServiceFactoryAttribute"/> with the
+// roslyn languages contract name.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false), MetadataAttribute]
 internal class ExportCSharpVisualBasicLspServiceFactoryAttribute : ExportLspServiceFactoryAttribute

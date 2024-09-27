@@ -55,9 +55,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// The kind of namespace: Module, Assembly or Compilation.
-        /// Module namespaces contain only members from the containing module that share the same namespace name.
-        /// Assembly namespaces contain members for all modules in the containing assembly that share the same namespace name.
-        /// Compilation namespaces contain all members, from source or referenced metadata (assemblies and modules) that share the same namespace name.
+        /// Module namespaces contain only members from the containing module that share the same namespace
+        // name.
+        /// Assembly namespaces contain members for all modules in the containing assembly that share the
+        // same namespace name.
+        /// Compilation namespaces contain all members, from source or referenced metadata (assemblies and
+        // modules) that share the same namespace name.
         /// </summary>
         public NamespaceKind NamespaceKind
         {
@@ -191,7 +194,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData ObsoleteAttributeData
         {

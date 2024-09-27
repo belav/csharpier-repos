@@ -64,7 +64,8 @@ namespace Internal.TypeSystem
             for (int typeIndex = 0; typeIndex < _wellKnownTypes.Length; typeIndex++)
             {
                 // Require System.Object to be present as a minimal sanity check.
-                // The set of required well-known types is not strictly defined since different .NET profiles implement different subsets.
+                // The set of required well-known types is not strictly defined since different .NET profiles
+                // implement different subsets.
                 MetadataType type = systemModule.GetType(
                     "System",
                     s_wellKnownTypeNames[typeIndex],

@@ -21,18 +21,24 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
     using System.Text;
 
     /// <summary>
-    /// Uses query rewriting to determine the case statements, top-level WHERE clause, and the "used views"
+    /// Uses query rewriting to determine the case statements, top-level WHERE clause, and the "used
+    // views"
     /// for a given type to be generated.
     ///
-    /// Step 1: Method "EnsureIsFullyMapped" goes through the (C) schema metadata and checks whether the query for each
+    /// Step 1: Method "EnsureIsFullyMapped" goes through the (C) schema metadata and checks whether the
+    // query for each
     ///         entity shape can be rewritten from the C fragment queries.
-    ///         This step tracks the "used views" which will later be passed to "basic view generation" (i.e., creation of the FOJ/LOJ/IJ/Union relational expressions)
-    /// Step 2: GetCaseStatements constructs the required case statements and the top-level WHERE clause.
+    ///         This step tracks the "used views" which will later be passed to "basic view generation"
+    // (i.e., creation of the FOJ/LOJ/IJ/Union relational expressions)
+    /// Step 2: GetCaseStatements constructs the required case statements and the top-level WHERE
+    // clause.
     ///         This may add some extra views to "used views".
     ///         Now we know what views are used overall.
     /// Step 3: We remap _from variables to new _from variables that are renumbered for used views.
-    ///         This is done to comply with the numbering scheme in the old algorithm - and to produce more readable views.
-    /// Step 4: From the constructed relational expression (OpCellTree), we can tell whether a top-level WHERE clause is needed or not.
+    ///         This is done to comply with the numbering scheme in the old algorithm - and to produce
+    // more readable views.
+    /// Step 4: From the constructed relational expression (OpCellTree), we can tell whether a top-level
+    // WHERE clause is needed or not.
     ///         (Usually, it's needed only in certain cases for OfType() views.)
     /// </summary>
     internal class QueryRewriter
@@ -260,7 +266,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
         // NULL/default and NOT(...) values in cell constant domains for update views may be unused.
         // If we don't detect that and remove them, we can suboptimal (but still correct) update views.
-        // (For example, SProducts1 in NotNullCorrect.msl has an unused constant NOT("Camera", NULL), which results in a gratuitous join.
+        // (For example, SProducts1 in NotNullCorrect.msl has an unused constant NOT("Camera", NULL), which
+        // results in a gratuitous join.
         // That join could be eliminated due to 1:1 association on C side).
         // To determine that a constant is unused, we first try to obtain the S-side rewriting for it.
         // If that succeeds, we unfold C-queries, i.e., create OpCellTree for found rewritings,
@@ -344,7 +351,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 );
                 _domainMap.UpdateConditionMemberDomain(currentPath, newDomain);
                 // Update the WHERE clauses of all fragment queries
-                // Since these are pointers to the respective WHERE clauses in S-side cell queries, those get updated automatically
+                // Since these are pointers to the respective WHERE clauses in S-side cell queries, those get
+                // updated automatically
                 foreach (FragmentQuery query in _fragmentQueries)
                 {
                     query.Condition.FixDomainMap(_domainMap);
@@ -487,7 +495,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     domainAddedWhereClause
                 );
 
-                // first check whether we can recover instances of this type - don't care about the attributes - to produce a helpful error message
+                // first check whether we can recover instances of this type - don't care about the attributes - to
+                // produce a helpful error message
                 Tile<FragmentQuery> rewriting;
                 if (
                     false
@@ -540,7 +549,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     {
                         // we are enumerating types
                         EdmType edmType = typeConstant.EdmType;
-                        // If can recover the type, make sure can get all the necessary attributes (key is included for EntityTypes)
+                        // If can recover the type, make sure can get all the necessary attributes (key is included for
+                        // EntityTypes)
 
                         List<MemberPath> nonConditionalAttributes = GetNonConditionalScalarMembers(
                                 edmType,
@@ -1069,7 +1079,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         private List<LeftCellWrapper> RemapFromVariables()
         {
             List<LeftCellWrapper> usedCells = new List<LeftCellWrapper>();
-            // remap CellIdBooleans appearing in WHEN clauses and in topLevelWhereClause so the first used cell = 0, second = 1, etc.
+            // remap CellIdBooleans appearing in WHEN clauses and in topLevelWhereClause so the first used cell
+            // = 0, second = 1, etc.
             // This ordering is exploited in CQL generation
             int newNumber = 0;
             Dictionary<BoolLiteral, BoolLiteral> literalRemap = new Dictionary<
@@ -1448,8 +1459,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             // Step 1:
             // Determine connected and directly/indirectly connected variables
             // Directly connected variables: those that appear in query's WHERE clause
-            // Indirectly connected variables: directly connected variables + variables in all views that contain directly connected variables
-            // Disconnected variables: those that appear in some view's WHERE clause but are not indirectly connected
+            // Indirectly connected variables: directly connected variables + variables in all views that
+            // contain directly connected variables
+            // Disconnected variables: those that appear in some view's WHERE clause but are not indirectly
+            // connected
             Set<MemberPath> connectedVariables = GetVariables(query);
 
             // Step 2:
@@ -1458,16 +1471,20 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
             // Otherwise:
             //   If isRelaxed == false:
             //       Take a union of all views. If it yields True, than assume that True-view is available.
-            //       Later, try to pick a smaller subset (instead of all views) once we know that attributes are needed
+            //       Later, try to pick a smaller subset (instead of all views) once we know that attributes are
+            // needed
             //   If isRelaxed == true:
-            //       Discard all views that don't contain connected variables; assume that True-view is available
+            //       Discard all views that don't contain connected variables; assume that True-view is
+            // available
             Tile<FragmentQuery> unionOfConnectedViews = null;
             List<Tile<FragmentQuery>> connectedViews = new List<Tile<FragmentQuery>>();
             Tile<FragmentQuery> firstTrueView = null;
             foreach (Tile<FragmentQuery> tile in _views)
             {
-                // notice: this is a syntactic check. We assume that if the variable is not present in the condition,
-                // its value is unrestricted (which in general may not be true because the KB may have e.g., X=1 => Y=1,
+                // notice: this is a syntactic check. We assume that if the variable is not present in the
+                // condition,
+                // its value is unrestricted (which in general may not be true because the KB may have e.g., X=1 =>
+                // Y=1,
                 // so even if condition on Y is absent, the view would still be relevant
                 if (GetVariables(tile.Query).Overlaps(connectedVariables))
                 {
@@ -1513,8 +1530,10 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 
             // Step 3:
             // For each indirectly-connected variable x:
-            // Union all views that contain x. The condition on x must disappear, i.e., union must imply that x is in Domain(x)
-            // That is, the union must be equivalent to the expression in which all conditions on x have been eliminated.
+            // Union all views that contain x. The condition on x must disappear, i.e., union must imply that x
+            // is in Domain(x)
+            // That is, the union must be equivalent to the expression in which all conditions on x have been
+            // eliminated.
             // If that's not the case (i.e., can't get rid of x), remove all these views from consideration.
 
             return _views;
@@ -1551,7 +1570,8 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     return usedViews;
                 }
             }
-            // now we either found the rewriting or we can just take all views because we are in relaxed mode for update views
+            // now we either found the rewriting or we can just take all views because we are in relaxed mode
+            // for update views
             Debug.Fail("Shouldn't happen");
             return usedViews;
         }

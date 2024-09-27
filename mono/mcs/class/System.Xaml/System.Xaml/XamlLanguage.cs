@@ -39,7 +39,8 @@ namespace System.Xaml
         public const string Xml1998Namespace = "http://www.w3.org/XML/1998/namespace";
         internal const string Xmlns2000Namespace = "http://www.w3.org/2000/xmlns/";
 
-        // FIXME: I'm not sure if these "special names" should be resolved like this. I couldn't find any rule so far.
+        // FIXME: I'm not sure if these "special names" should be resolved like this. I couldn't find any
+        // rule so far.
         internal static readonly SpecialTypeNameList SpecialNames;
 
         internal class SpecialTypeNameList : List<SpecialTypeName>

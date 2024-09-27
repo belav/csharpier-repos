@@ -162,12 +162,14 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
             ISyntaxFactsService syntaxFacts
         )
         {
-            // Need to special case for highlighting of method types because they are also "contained" within a method,
+            // Need to special case for highlighting of method types because they are also "contained" within a
+            // method,
             // but it does not make sense to introduce a parameter in that case.
             if (syntaxFacts.IsInNamespaceOrTypeContext(expression))
                 return false;
 
-            // Need to special case for expressions whose direct parent is a MemberAccessExpression since they will
+            // Need to special case for expressions whose direct parent is a MemberAccessExpression since they
+            // will
             // never introduce a parameter that makes sense in that case.
             if (syntaxFacts.IsNameOfAnyMemberAccessExpression(expression))
                 return false;
@@ -183,7 +185,8 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
 
         /// <summary>
         /// Creates new code actions for each introduce parameter possibility.
-        /// Does not create actions for overloads/trampoline if there are optional parameters or if the methodSymbol
+        /// Does not create actions for overloads/trampoline if there are optional parameters or if the
+        // methodSymbol
         /// is a constructor.
         /// </summary>
         private async Task<(

@@ -188,7 +188,8 @@ namespace System.Management.Tests
                 );
                 Assert.Equal(NewNamespace, targetNamespace["Name"]);
 
-                // If any of the steps below fail it is likely that the new namespace was not deleted, likely it will have to
+                // If any of the steps below fail it is likely that the new namespace was not deleted, likely it
+                // will have to
                 // be deleted via a tool like wbemtest.
                 targetNamespace.Delete();
                 ManagementException managementException = Assert.Throws<ManagementException>(

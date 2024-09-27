@@ -267,7 +267,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "TEST" + @"[\p{Pf}\p{Po}]", ex.Message);
             Assert.Null(ex.ParamName);
         }
@@ -1316,7 +1317,9 @@ namespace System.Data.Tests
             Assert.Equal(al.ToArray(), drSelect);
 
             //-------------------------------------------------------------
-            //If a column name contains one of the above characters,(ex. #\/=><+-*%&|^'" and so on) the name must be wrapped in brackets. For example to use a column named "Column#" in an expression, you would write "[Column#]":
+            //If a column name contains one of the above characters,(ex. #\/=><+-*%&|^'" and so on) the name
+            // must be wrapped in brackets. For example to use a column named "Column#" in an expression, you would
+            // write "[Column#]":
             al.Clear();
             foreach (DataRow dr in dt.Rows)
                 if ((int)dr["Column#"] <= 0)
@@ -1381,15 +1384,15 @@ namespace System.Data.Tests
             drSelect = dt.Select("SubString(Trim(String1),1,2) = '1-'");
             Assert.Equal(al.ToArray(), drSelect);
             //-------------------------------------------------------------
-            /*
-            al.Clear();
-            foreach (DataRow dr in ds.Tables[0].Rows)
-                if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
-                    al.Add(dr);
-                // Select_S - IsNull(ParentBool,true)
-                drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
-                Assert.Equal (al.ToArray(), drSelect);
-            */
+/*
+al.Clear();
+foreach (DataRow dr in ds.Tables[0].Rows)
+if (dr.IsNull("ParentBool") || (bool)dr["ParentBool"])
+al.Add(dr);
+// Select_S - IsNull(ParentBool,true)
+drSelect = ds.Tables[0].Select("IsNull(ParentBool,true) ");
+Assert.Equal (al.ToArray(), drSelect);
+*/
             //-------------------------------------------------------------
             al.Clear();
             // Select_S - Relation not exists, Exception
@@ -1608,7 +1611,8 @@ namespace System.Data.Tests
             Assert.NotNull(ex.Message);
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
-            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
+            // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector
+            // https://www.compart.com/en/unicode/category/Po
             Assert.Matches(@"[\p{Pi}\p{Po}]" + "ParentId" + @"[\p{Pf}\p{Po}]", ex.Message);
 
             DataTable dt1 = DataProvider.CreateUniqueConstraint();
@@ -2122,14 +2126,14 @@ namespace System.Data.Tests
             // shud be the exception raised when schema is merged?
             // ms.net throws a nullreference exception.
             // If any data is merged, exception is anyways raised.
-            /*
-            table1.PrimaryKey = new DataColumn[] {table1.Columns[0]};
-            table3 = table1.Clone ();
-            try {
-                table3.Merge(table2);
+/*
+table1.PrimaryKey = new DataColumn[] {table1.Columns[0]};
+table3 = table1.Clone ();
+try {
+table3.Merge(table2);
 Assert.Fail();
-            } catch (DataException e) {}
-            */
+} catch (DataException e) {}
+*/
 
             table3.Merge(table2, false, MissingSchemaAction.Ignore);
             table1.PrimaryKey = null;

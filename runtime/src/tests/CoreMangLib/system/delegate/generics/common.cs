@@ -1,9 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-//@TODO - API level testing for generics, particulary with multicast invocation lists and co/contra variant generics
+//@TODO - API level testing for generics, particulary with multicast invocation lists and co/contra
+// variant generics
 //@TODO - Vary the return type
 
-//Disable warnings about unused fields, they exist only to pad the size of the structs/objects to stress the stub types, we don't care that they aren't used.
+//Disable warnings about unused fields, they exist only to pad the size of the structs/objects to
+// stress the stub types, we don't care that they aren't used.
 #pragma warning disable 649
 #pragma warning disable 169
 using System;
@@ -337,29 +339,29 @@ interface Equality
 
 /*
 class EQClass : Equality{
-    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-    long value;
+double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+long value;
 
-    public EQClass(long l){
-        value = l;
-    }
+public EQClass(long l){
+value = l;
+}
 
-    public bool Equals(long l){
-        return (value==l);
-    }
+public bool Equals(long l){
+return (value==l);
+}
 }
 
 class EQStruct : Equality{
-    double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
-    long value;
+double f1,f2,f3,f4,f5,f6,f7,f8,f9,f10;
+long value;
 
-    public EQStruct(long l){
-        value = l;
-    }
+public EQStruct(long l){
+value = l;
+}
 
-    public bool Equals(long l){
-        return (value==l);
-    }
+public bool Equals(long l){
+return (value==l);
+}
 }
 */
 class EQClass<T> : Equality

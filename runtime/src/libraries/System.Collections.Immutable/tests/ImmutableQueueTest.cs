@@ -209,7 +209,8 @@ namespace System.Collections.Immutable.Tests
                     .Equals(ImmutableQueue<int>.Empty.Enqueue(3).Enqueue(5))
             );
 
-            // Also be sure to compare equality of partially dequeued queues since that moves data to different fields.
+            // Also be sure to compare equality of partially dequeued queues since that moves data to different
+            // fields.
             Assert.False(
                 ImmutableQueue<int>
                     .Empty.Enqueue(3)

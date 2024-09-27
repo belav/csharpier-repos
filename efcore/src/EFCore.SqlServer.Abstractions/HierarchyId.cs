@@ -17,13 +17,15 @@ public class HierarchyId : IComparable<HierarchyId>
     private readonly SqlHierarchyId _value;
 
     /// <summary>
-    ///     Initializes a new instance of the<see cref="HierarchyId" /> class. Equivalent to <see cref="GetRoot" />.
+    ///     Initializes a new instance of the<see cref="HierarchyId" /> class. Equivalent to <see
+    // cref="GetRoot" />.
     /// </summary>
     public HierarchyId()
         : this(SqlHierarchyId.GetRoot()) { }
 
     /// <summary>
-    ///     Initializes a new instance of the<see cref="HierarchyId" /> class. Equivalent to <see cref="Parse" />.
+    ///     Initializes a new instance of the<see cref="HierarchyId" /> class. Equivalent to <see
+    // cref="Parse" />.
     /// </summary>
     /// <param name="value">The string representation of the node.</param>
     public HierarchyId(string value)
@@ -50,7 +52,8 @@ public class HierarchyId : IComparable<HierarchyId>
     public static HierarchyId GetRoot() => ((HierarchyId?)SqlHierarchyId.GetRoot())!;
 
     /// <summary>
-    ///     Converts the canonical string representation of a node to a <see cref="HierarchyId" /> value.
+    ///     Converts the canonical string representation of a node to a <see cref="HierarchyId" />
+    // value.
     /// </summary>
     /// <param name="input">The string representation of a node.</param>
     /// <returns>A <see cref="HierarchyId" /> value.</returns>
@@ -71,7 +74,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="n">The number of levels to ascend in the hierarchy.</param>
     /// <returns>
-    ///     A <see cref="HierarchyId" /> value representing the <paramref name="n" />th ancestor of this node or null if <paramref name="n" />
+    ///     A <see cref="HierarchyId" /> value representing the <paramref name="n" />th ancestor of this
+    // node or null if <paramref name="n" />
     ///     is greater than <see cref="GetLevel" />.
     /// </returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="n" /> is negative.</exception>
@@ -80,12 +84,14 @@ public class HierarchyId : IComparable<HierarchyId>
     /// <summary>
     ///     Gets a value for a new descendant node that is greater than <paramref name="child" />.
     /// </summary>
-    /// <param name="child">The lower bound. Use the last descendant to ensure the new value doesn't conflict with existing children. Can be null.</param>
+    /// <param name="child">The lower bound. Use the last descendant to ensure the new value doesn't
+    // conflict with existing children. Can be null.</param>
     /// <returns>A new <see cref="HierarchyId" /> value.</returns>
     public virtual HierarchyId GetDescendant(HierarchyId? child) => GetDescendant(child, null);
 
     /// <summary>
-    ///     Gets a value for a new descendant node that is greater than <paramref name="child1" /> and less than <paramref name="child2" />. Use to
+    ///     Gets a value for a new descendant node that is greater than <paramref name="child1" /> and
+    // less than <paramref name="child2" />. Use to
     ///     insert a new node between two existing children.
     /// </summary>
     /// <param name="child1">The lower bound.</param>
@@ -104,12 +110,15 @@ public class HierarchyId : IComparable<HierarchyId>
     public virtual short GetLevel() => (short)_value.GetLevel();
 
     /// <summary>
-    ///     Gets a value representing the location of a new node that has a path from <paramref name="newRoot" /> equal to the path from
+    ///     Gets a value representing the location of a new node that has a path from <paramref
+    // name="newRoot" /> equal to the path from
     ///     <paramref name="oldRoot" /> to this, effectively moving this to the new location.
     /// </summary>
-    /// <param name="oldRoot">An ancestor of this node specifying the endpoint of the path segment to be moved.</param>
+    /// <param name="oldRoot">An ancestor of this node specifying the endpoint of the path segment to be
+    // moved.</param>
     /// <param name="newRoot">The node that represents the new ancestor.</param>
-    /// <returns>A <see cref="HierarchyId" /> value or null if <paramref name="oldRoot" /> or <paramref name="newRoot" /> is null.</returns>
+    /// <returns>A <see cref="HierarchyId" /> value or null if <paramref name="oldRoot" /> or <paramref
+    // name="newRoot" /> is null.</returns>
     public virtual HierarchyId? GetReparentedValue(HierarchyId? oldRoot, HierarchyId? newRoot) =>
         (HierarchyId?)_value.GetReparentedValue(oldRoot, newRoot);
 
@@ -117,7 +126,8 @@ public class HierarchyId : IComparable<HierarchyId>
     ///     Gets a value indicating whether this node is a descendant of <paramref name="parent" />.
     /// </summary>
     /// <param name="parent">The parent to test against.</param>
-    /// <returns>True if this node is in the sub-tree rooted at <paramref name="parent" />; otherwise false.</returns>
+    /// <returns>True if this node is in the sub-tree rooted at <paramref name="parent" />; otherwise
+    // false.</returns>
     public virtual bool IsDescendantOf(HierarchyId? parent) => _value.IsDescendantOf(parent).IsTrue;
 
     /// <summary>
@@ -131,7 +141,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> and <paramref name="hid2" /> are equal; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> and <paramref name="hid2" /> are equal; otherwise,
+    // false.</returns>
     public static bool operator ==(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) == 0;
 
@@ -140,7 +151,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> and <paramref name="hid2" /> are unequal; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> and <paramref name="hid2" /> are unequal; otherwise,
+    // false.</returns>
     public static bool operator !=(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) != 0;
 
@@ -149,7 +161,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> is less than <paramref name="hid2" />; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> is less than <paramref name="hid2" />; otherwise,
+    // false.</returns>
     public static bool operator <(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) < 0;
 
@@ -158,7 +171,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> is greater than <paramref name="hid2" />; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> is greater than <paramref name="hid2" />; otherwise,
+    // false.</returns>
     public static bool operator >(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) > 0;
 
@@ -167,7 +181,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> is less than or equal to <paramref name="hid2" />; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> is less than or equal to <paramref name="hid2" />;
+    // otherwise, false.</returns>
     public static bool operator <=(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) <= 0;
 
@@ -176,7 +191,8 @@ public class HierarchyId : IComparable<HierarchyId>
     /// </summary>
     /// <param name="hid1">The first node to compare.</param>
     /// <param name="hid2">The second node to compare.</param>
-    /// <returns>True if <paramref name="hid1" /> is greater than or equal to <paramref name="hid2" />; otherwise, false.</returns>
+    /// <returns>True if <paramref name="hid1" /> is greater than or equal to <paramref name="hid2" />;
+    // otherwise, false.</returns>
     public static bool operator >=(HierarchyId? hid1, HierarchyId? hid2) =>
         ((SqlHierarchyId)hid1).CompareTo(hid2) >= 0;
 

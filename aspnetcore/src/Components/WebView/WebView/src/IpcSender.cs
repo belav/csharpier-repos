@@ -8,7 +8,8 @@ using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebView;
 
-// Handles communication between the component abstractions (Renderer, NavigationManager, JSInterop, etc.)
+// Handles communication between the component abstractions (Renderer, NavigationManager, JSInterop,
+// etc.)
 // and the underlying transport channel
 internal sealed class IpcSender
 {

@@ -9,21 +9,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
 public interface IPropertyParameterBindingFactory
 {
     /// <summary>
-    ///     Finds a <see cref="ParameterBinding" /> specifically for an <see cref="IPropertyBase" /> in the model.
+    ///     Finds a <see cref="ParameterBinding" /> specifically for an <see cref="IPropertyBase" /> in
+    // the model.
     /// </summary>
-    /// <param name="entityType">The entity type on which the <see cref="IPropertyBase" /> is defined.</param>
+    /// <param name="entityType">The entity type on which the <see cref="IPropertyBase" /> is
+    // defined.</param>
     /// <param name="parameterType">The parameter name.</param>
     /// <param name="parameterName">The parameter type.</param>
     /// <returns>The parameter binding, or <see langword="null" /> if none was found.</returns>
@@ -34,9 +40,11 @@ public interface IPropertyParameterBindingFactory
     );
 
     /// <summary>
-    ///     Finds a <see cref="ParameterBinding" /> specifically for an <see cref="IPropertyBase" /> in the model.
+    ///     Finds a <see cref="ParameterBinding" /> specifically for an <see cref="IPropertyBase" /> in
+    // the model.
     /// </summary>
-    /// <param name="complexType">The complex type on which the <see cref="IPropertyBase" /> is defined.</param>
+    /// <param name="complexType">The complex type on which the <see cref="IPropertyBase" /> is
+    // defined.</param>
     /// <param name="parameterType">The parameter name.</param>
     /// <param name="parameterName">The parameter type.</param>
     /// <returns>The parameter binding, or <see langword="null" /> if none was found.</returns>

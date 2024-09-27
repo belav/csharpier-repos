@@ -13,7 +13,8 @@ using System.Data.Metadata.Edm;
 namespace System.Data.Common.CommandTrees
 {
     /// <summary>
-    /// The expression visitor pattern abstract base class that should be implemented by visitors that return a result value of a specific type.
+    /// The expression visitor pattern abstract base class that should be implemented by visitors that
+    // return a result value of a specific type.
     /// </summary>
     /// <typeparam name="TResultType">The type of the result value produced by the visitor.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(

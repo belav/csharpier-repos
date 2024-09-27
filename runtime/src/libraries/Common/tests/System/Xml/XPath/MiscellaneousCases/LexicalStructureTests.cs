@@ -14,7 +14,9 @@ namespace XPathTests.FunctionalTests
     public static partial class LexicalStructureTests
     {
         /// <summary>
-        /// Expression with intervening whitespace after node type. If the character following an NCName (possibly after intervening ExprWhitespace) is (, then the token must be recognized as a NodeType or a FunctionName
+        /// Expression with intervening whitespace after node type. If the character following an NCName
+        // (possibly after intervening ExprWhitespace) is (, then the token must be recognized as a NodeType or
+        // a FunctionName
         /// node     (Utils.NavigatorKind kind)
         /// </summary>
         [Theory]

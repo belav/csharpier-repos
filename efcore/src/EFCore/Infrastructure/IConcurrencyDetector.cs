@@ -4,7 +4,8 @@
 namespace Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>
-///     Used by EF internal code and database providers to detect concurrent access to non-thread-safe
+///     Used by EF internal code and database providers to detect concurrent access to
+// non-thread-safe
 ///     resources.
 /// </summary>
 /// <remarks>
@@ -15,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///         The implementation does not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>

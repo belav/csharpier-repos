@@ -167,8 +167,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        // on the serverside, the ContractName is set during ContractInference and is used for retrieving the
-        // correct CorrelationQueryBehavior. ContractName on the Serverside can thus be different from what is
+        // on the serverside, the ContractName is set during ContractInference and is used for retrieving
+        // the
+        // correct CorrelationQueryBehavior. ContractName on the Serverside can thus be different from what
+        // is
         // set on the OM
         public XName ServiceContractName { get; set; }
 
@@ -186,9 +188,11 @@ namespace System.ServiceModel.Activities
             get { return Trace.CorrelationManager.ActivityId; }
         }
 
-        // we cache the ServiceEndpoint for perf reasons so that we can retrieve endpointaddress, contract etc without
+        // we cache the ServiceEndpoint for perf reasons so that we can retrieve endpointaddress, contract
+        // etc without
         // creating a new ServiceEndpoint each time
-        // Note that we should not pass the cachedServiceEndpoint to the ChannelFactory, as we need to have a
+        // Note that we should not pass the cachedServiceEndpoint to the ChannelFactory, as we need to have
+        // a
         // distinct instance per-Factory.
         ServiceEndpoint GetCachedServiceEndpoint()
         {
@@ -269,7 +273,8 @@ namespace System.ServiceModel.Activities
                     );
                 }
             }
-            // Get ServiceEndpoint will be called only on the client side, hence if endpoint is null, we will try to load the config with
+            // Get ServiceEndpoint will be called only on the client side, hence if endpoint is null, we will
+            // try to load the config with
             // endpointConfigurationName.
             // endpointConfigurationName = null will be translated to endpointConfigurationName = String.Empty
             else
@@ -283,7 +288,8 @@ namespace System.ServiceModel.Activities
             }
 
             // if the cachedContract is null, verify if TransactionFlow is accounted for in the contract
-            // if cachedContract is not null, we can skip this since the contract should be fixed for the workflow definition
+            // if cachedContract is not null, we can skip this since the contract should be fixed for the
+            // workflow definition
             if (ensureTransactionFlow)
             {
                 EnsureTransactionFlowOnContract(ref result);
@@ -325,7 +331,8 @@ namespace System.ServiceModel.Activities
                     correlationQueryBehavior.CorrelationQueries.Add(this.CorrelationQuery);
                 }
 
-                //add ReplyCorrelationQueries from ReceiveReply (there could be multiple ReceiveReplies for a Send and hence the collection
+                //add ReplyCorrelationQueries from ReceiveReply (there could be multiple ReceiveReplies for a Send
+                // and hence the collection
                 foreach (CorrelationQuery query in this.ReplyCorrelationQueries)
                 {
                     // Filter out duplicate CorrelationQueries in the collection.
@@ -403,7 +410,8 @@ namespace System.ServiceModel.Activities
             ContractDescription cd;
 
             // When channel cache is disabled or when operation uses message contract,
-            // we use the fully inferred description; otherwise, we use a fixed description to increase channel cache hits
+            // we use the fully inferred description; otherwise, we use a fixed description to increase channel
+            // cache hits
 
             if (!this.Parent.ChannelCacheEnabled || this.Parent.OperationUsesMessageContract)
             {
@@ -1120,8 +1128,10 @@ namespace System.ServiceModel.Activities
                 .WorkflowOperationContext
                 .OperationContext;
 
-            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity
-            // e.g. distributed compensation activity will add this so that they can convert an execution property
+            // now that we have our op-context, invoke the callback that user might have added in the AEC in the
+            // previous activity
+            // e.g. distributed compensation activity will add this so that they can convert an execution
+            // property
             // to an message properties, as will Transaction Flow
             instance.ProcessMessagePropertyCallbacks();
 
@@ -1165,8 +1175,10 @@ namespace System.ServiceModel.Activities
                         )
                         {
                             // Contextchannel is the only channel participating in correlation
-                            // Since we already have the instance id, we don't have to wait for the context channel to call us back to initialize
-                            // the correlation - InstanceId can be retrieved directly from ContextMessageProperty through Operation context.
+                            // Since we already have the instance id, we don't have to wait for the context channel to call us
+                            // back to initialize
+                            // the correlation - InstanceId can be retrieved directly from ContextMessageProperty through
+                            // Operation context.
                             ContextMessageProperty contextProperties = null;
                             if (
                                 ContextMessageProperty.TryGet(
@@ -1210,7 +1222,8 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            // For exception case: Always call WorkflowOperationContext.SendFault to either send back the fault in the request/reply case
+            // For exception case: Always call WorkflowOperationContext.SendFault to either send back the fault
+            // in the request/reply case
             // or make sure the error handler extension gets a chance to handle this fault;
             if (instance.ResponseContext.Exception != null)
             {
@@ -1496,8 +1509,10 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                // Create a bookmark to complete the callback, this is to ensure that the InstanceKey does get saved in the PPD
-                // by the time the bookmark is resumed. The instancekey is not getting  saved in the PPD  till workflow gets to
+                // Create a bookmark to complete the callback, this is to ensure that the InstanceKey does get saved
+                // in the PPD
+                // by the time the bookmark is resumed. The instancekey is not getting  saved in the PPD  till
+                // workflow gets to
                 // the next idle state.
                 //
                 Bookmark completeCorrelationBookmark = context.CreateBookmark(
@@ -1560,10 +1575,12 @@ namespace System.ServiceModel.Activities
             Fx.Assert(instance.CacheExtension != null, "channelCacheExtension must exist.");
 
             // Send.ChannelCacheEnabled must be set before we call CreateEndpointAddress
-            // because CreateEndpointAddress will cache description and description resolution depends on the value of ChannelCacheEnabled
+            // because CreateEndpointAddress will cache description and description resolution depends on the
+            // value of ChannelCacheEnabled
             this.Parent.InitializeChannelCacheEnabledSetting(instance.CacheExtension);
 
-            // if there is a correlatesWith handle with callbackcontext(Durable Duplex case), use the callback address and context from
+            // if there is a correlatesWith handle with callbackcontext(Durable Duplex case), use the callback
+            // address and context from
             // there. The handle could be an explicit 'CorrelatesWith' handle or an ambient handle.
             if (instance.CorrelatesWith != null)
             {
@@ -1571,7 +1588,8 @@ namespace System.ServiceModel.Activities
                 {
                     instance.CorrelationCallbackContext = instance.CorrelatesWith.CallbackContext;
 
-                    // construct EndpointAdress based on the ListenAddress from callback and the identity and headers from Endpoint or from Config
+                    // construct EndpointAdress based on the ListenAddress from callback and the identity and headers
+                    // from Endpoint or from Config
                     instance.EndpointAddress = CreateEndpointAddressFromCallback(
                         instance.CorrelationCallbackContext.ListenAddress.ToEndpointAddress()
                     );
@@ -1582,7 +1600,8 @@ namespace System.ServiceModel.Activities
                     instance.CorrelationContext = instance.CorrelatesWith.Context;
                 }
             }
-            // Request  is always of Type Message. Message Argument will be set by Send<T> using the appropriate formatter
+            // Request  is always of Type Message. Message Argument will be set by Send<T> using the appropriate
+            // formatter
             instance.RequestOrReply = this.Message.Get(context);
 
             if (instance.EndpointAddress == null)
@@ -1599,7 +1618,8 @@ namespace System.ServiceModel.Activities
             }
 
             // Configname to be used for the FactoryCacheKey,
-            // if endpoint is defined, we use the settings from endpoint and ignore the endpointConfigurationName
+            // if endpoint is defined, we use the settings from endpoint and ignore the
+            // endpointConfigurationName
             // if endpoint is not defined we use the endpointConfigurationName
             string configName = (this.Endpoint != null) ? null : this.EndpointConfigurationName;
 
@@ -1679,7 +1699,8 @@ namespace System.ServiceModel.Activities
             ChannelFactoryReference newFactoryReference = null;
             if (cacheItem == null)
             {
-                // nothing in our cache, we'll have to setup a new factory reference, which ClientSendAsyncResult will open asynchronously
+                // nothing in our cache, we'll have to setup a new factory reference, which ClientSendAsyncResult
+                // will open asynchronously
                 ServiceEndpoint targetEndpoint = this.CreateServiceEndpoint();
                 // create a new ChannelFactoryReference that holds the channelfactory and a cache for its channels,
                 // cache settings are based on the channelcachesettings provided through the extension
@@ -1743,8 +1764,10 @@ namespace System.ServiceModel.Activities
             instance.OperationContext =
                 (contextChannel == null) ? null : new OperationContext(contextChannel);
 
-            // Retrieve the CorrelationQueryBehavior from the serviceEndpoint that we used for ChannelFactoryCreation
-            // we later look for CorrelationQueryBehavior.SendNames which actually gets initialized during ChannelFactory creation
+            // Retrieve the CorrelationQueryBehavior from the serviceEndpoint that we used for
+            // ChannelFactoryCreation
+            // we later look for CorrelationQueryBehavior.SendNames which actually gets initialized during
+            // ChannelFactory creation
             //
             CorrelationQueryBehavior correlationQueryBehavior = instance
                 .FactoryReference
@@ -1756,12 +1779,15 @@ namespace System.ServiceModel.Activities
                 instance.RegisterCorrelationBehavior(correlationQueryBehavior);
             }
 
-            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity
-            // e.g. distributed compensation activity will add this so that they can convert an execution property
+            // now that we have our op-context, invoke the callback that user might have added in the AEC in the
+            // previous activity
+            // e.g. distributed compensation activity will add this so that they can convert an execution
+            // property
             // to an message properties, as will Transaction Flow
             instance.ProcessMessagePropertyCallbacks();
 
-            // Add the ContextMessage Property if either CallBackContextMessageProperty or ContextMessageProperty is set
+            // Add the ContextMessage Property if either CallBackContextMessageProperty or
+            // ContextMessageProperty is set
             // if both are set validate that the context is the same in both of them
             ContextMessageProperty contextMessageProperty = null;
             if (instance.CorrelationCallbackContext != null && instance.CorrelationContext != null)
@@ -1804,12 +1830,17 @@ namespace System.ServiceModel.Activities
             }
 
             // Add callback context Message property with instance id.
-            // If binding contains ContextBindingElement with listenaddress set, the callback context message property will flow on the wire
+            // If binding contains ContextBindingElement with listenaddress set, the callback context message
+            // property will flow on the wire
 
-            // Pull the instanceId from the CorrelationHandle, if it is already initialized, else create a new GUID.
-            // we want to send the callback context only for the first message and when there is a FollowingContextCorrelation defined ( i.e., we are expecting a
-            // receive message back) or when there is an ambienthandle and the handle is not initalized. We will never use CorrelatesWith handle to initialize
-            // FollowingContext, since CorrelatesWith on the client side should always be used for a following correlation
+            // Pull the instanceId from the CorrelationHandle, if it is already initialized, else create a new
+            // GUID.
+            // we want to send the callback context only for the first message and when there is a
+            // FollowingContextCorrelation defined ( i.e., we are expecting a
+            // receive message back) or when there is an ambienthandle and the handle is not initalized. We will
+            // never use CorrelatesWith handle to initialize
+            // FollowingContext, since CorrelatesWith on the client side should always be used for a following
+            // correlation
             String contextValue;
             CorrelationHandle followingContextHandle =
                 instance.ContextBasedCorrelationHandle != null
@@ -1824,7 +1855,8 @@ namespace System.ServiceModel.Activities
                 )
             )
             {
-                // we are creating a new GUID for the context. As a practice,we don't want to send the WorkflowInstanceId over the wire
+                // we are creating a new GUID for the context. As a practice,we don't want to send the
+                // WorkflowInstanceId over the wire
                 contextValue = Guid.NewGuid().ToString();
                 Dictionary<string, string> contextValues = new Dictionary<string, string>(1)
                 {
@@ -1892,9 +1924,11 @@ namespace System.ServiceModel.Activities
             {
                 // first setup the key-based correlations, pass in the Correlation Initialiers and the AmbientHandle
                 // for associating the keys.
-                // For content based correlation, we will never initalize correlation with a selectHandle.It has to be either specified in a CorrelationInitalizer
+                // For content based correlation, we will never initalize correlation with a selectHandle.It has to
+                // be either specified in a CorrelationInitalizer
                 // or should be an ambient handle
-                // For contextbased correlation, selecthandle will be callbackHandle in case of Send and contextHandle in case of sendReply
+                // For contextbased correlation, selecthandle will be callbackHandle in case of Send and
+                // contextHandle in case of sendReply
                 instance.RequestOrReply = MessagingActivityHelper.InitializeCorrelationHandles(
                     context,
                     instance.ContextBasedCorrelationHandle,
@@ -2147,7 +2181,8 @@ namespace System.ServiceModel.Activities
                 Transaction currentTransactionContext;
                 Guid ambientActivityId;
 
-                //This is used to create a blocking dependent clone to synchronize the transaction commit processing with the completion of the aborting clone
+                //This is used to create a blocking dependent clone to synchronize the transaction commit processing
+                // with the completion of the aborting clone
                 //that is created in this async result.
                 DependentTransaction dependentClone;
 
@@ -2234,7 +2269,8 @@ namespace System.ServiceModel.Activities
                         {
                             if (asyncSend)
                             {
-                                //If there is a transaction that we could be flowing out then we create this blocking clone to sync with the commit processing.
+                                //If there is a transaction that we could be flowing out then we create this blocking clone to sync
+                                // with the commit processing.
                                 if (this.currentTransactionContext != null)
                                 {
                                     this.dependentClone =
@@ -2294,7 +2330,8 @@ namespace System.ServiceModel.Activities
 
                         if (result != null && result.CompletedSynchronously)
                         {
-                            //if we are done synchronously, we need to complete a blocking dependent clone if we created one (asyncSend case)
+                            //if we are done synchronously, we need to complete a blocking dependent clone if we created one
+                            // (asyncSend case)
                             if (this.dependentClone != null)
                             {
                                 this.dependentClone.Complete();
@@ -2746,7 +2783,8 @@ namespace System.ServiceModel.Activities
                     (parent.CorrelatesWith == null) ? null : parent.CorrelatesWith.Get(context);
                 if (correlatesWith != null && !correlatesWith.IsInitalized())
                 {
-                    // if send or sendReply has a correlatesWith, it should always be initialized with either content or with callbackcontext, context or
+                    // if send or sendReply has a correlatesWith, it should always be initialized with either content or
+                    // with callbackcontext, context or
                     // ResponseContext
                     throw FxTrace.Exception.AsError(
                         new ValidationException(
@@ -2841,7 +2879,8 @@ namespace System.ServiceModel.Activities
                         );
                     }
 
-                    // Contract inference logic should validate that the Receive and Following send do not have conflicting data(e.g., OperationName)
+                    // Contract inference logic should validate that the Receive and Following send do not have
+                    // conflicting data(e.g., OperationName)
 
                     this.ResponseContext = responseContext;
 
@@ -3239,7 +3278,8 @@ namespace System.ServiceModel.Activities
             public SendMessageInstance Instance { get; set; }
         }
 
-        // Represents an item in our object cache. Stores a ChannelFactory and an associated pool of channels
+        // Represents an item in our object cache. Stores a ChannelFactory and an associated pool of
+        // channels
         internal sealed class ChannelFactoryReference : IDisposable
         {
             static AsyncCallback onDisposeCommunicationObject = Fx.ThunkCallback(
@@ -3253,7 +3293,8 @@ namespace System.ServiceModel.Activities
             CorrelationQueryBehavior correlationQueryBehavior;
             Func<Pool<IChannel>> createChannelCacheItem;
 
-            // Aborting a channel that is in the middle of closing can cause an ObjectDisposedException in the Close.
+            // Aborting a channel that is in the middle of closing can cause an ObjectDisposedException in the
+            // Close.
             // We need to prevent DisposeCommunicationObject(ChannelFactory) from racing with a call to
             // DisposeCommunicationObject()on an individual channel.
             // This lock will be used to synchronize calls into DisposeCommunicationObject method.
@@ -3546,7 +3587,8 @@ namespace System.ServiceModel.Activities
                 catch (ObjectDisposedException)
                 {
                     // expected,
-                    // ObjectDisposedException may be thrown if you try to abort ClientSecurityDuplexSessionChannel that is in the middle of closing.
+                    // ObjectDisposedException may be thrown if you try to abort ClientSecurityDuplexSessionChannel that
+                    // is in the middle of closing.
                     // we'll abort
                 }
                 finally
@@ -3650,7 +3692,8 @@ namespace System.ServiceModel.Activities
                     return false;
                 }
 
-                // (3) OperationContract.IsOneWay to decide if the ChannelFactory needs to be of type RequestChannel or OutputChannel
+                // (3) OperationContract.IsOneWay to decide if the ChannelFactory needs to be of type RequestChannel
+                // or OutputChannel
                 if (this.IsOperationContractOneWay != other.IsOperationContractOneWay)
                 {
                     return false;
@@ -3786,7 +3829,8 @@ namespace System.ServiceModel.Activities
                 {
                     return left.Count == 0;
                 }
-                // This check ensures that the lists have the same contents, but does not verify that they have the same
+                // This check ensures that the lists have the same contents, but does not verify that they have the
+                // same
                 // quantity of each item if they are duplicates.
                 return left.Count == right.Count
                     && left.All(leftItem => right.Any(rightItem => equals(leftItem, rightItem)))

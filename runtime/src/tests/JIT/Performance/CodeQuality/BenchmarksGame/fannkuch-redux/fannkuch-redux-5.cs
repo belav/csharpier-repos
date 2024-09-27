@@ -3,15 +3,16 @@
 
 // Adapted from fannkuch-redux C# .NET Core #5 program
 // http://benchmarksgame.alioth.debian.org/u64q/program.php?test=fannkuchredux&lang=csharpcore&id=5
-// aka (as of 2017-09-01) rev 1.6 of https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/fannkuchredux/fannkuchredux.csharp-5.csharp?root=benchmarksgame&view=log
+// aka (as of 2017-09-01) rev 1.6 of
+// https://alioth.debian.org/scm/viewvc.php/benchmarksgame/bench/fannkuchredux/fannkuchredux.csharp-5.csharp?root=benchmarksgame&view=log
 // Best-scoring C# .NET Core version as of 2017-09-01
 
 /* The Computer Language Benchmarks Game
-   http://benchmarksgame.alioth.debian.org/
+http://benchmarksgame.alioth.debian.org/
 
-   contributed by Isaac Gouy, transliterated from Oleg Mazurov's Java program
-   concurrency fix and minor improvements by Peperud
-   parallel and small optimisations by Anthony Lloyd
+contributed by Isaac Gouy, transliterated from Oleg Mazurov's Java program
+concurrency fix and minor improvements by Peperud
+parallel and small optimisations by Anthony Lloyd
 */
 
 using System;

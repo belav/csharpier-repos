@@ -9,7 +9,8 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 /// <summary>
-/// A context for <see cref="OpenIdConnectEvents.UserInformationReceived(UserInformationReceivedContext)"/>.
+/// A context for <see
+// cref="OpenIdConnectEvents.UserInformationReceived(UserInformationReceivedContext)"/>.
 /// </summary>
 public class UserInformationReceivedContext : RemoteAuthenticationContext<OpenIdConnectOptions>
 {

@@ -681,7 +681,8 @@ namespace System.Activities.DynamicUpdate
         internal struct UpdatedActivity
         {
             // This can be true even if Map & MapEntry are null, if a parent ID changed.
-            // It can also be false even when Map & MapEntry are non-null, if the update didn't produce an ID shift.
+            // It can also be false even when Map & MapEntry are non-null, if the update didn't produce an ID
+            // shift.
             public bool IdChanged;
 
             public QualifiedId NewId;

@@ -22,7 +22,8 @@ public class ConnectionBuilder : IConnectionBuilder
     /// <summary>
     /// Initializes a new instance of <see cref="ConnectionBuilder"/>.
     /// </summary>
-    /// <param name="applicationServices">The application services <see cref="IServiceProvider"/>.</param>
+    /// <param name="applicationServices">The application services <see
+    // cref="IServiceProvider"/>.</param>
     public ConnectionBuilder(IServiceProvider applicationServices)
     {
         ApplicationServices = applicationServices;

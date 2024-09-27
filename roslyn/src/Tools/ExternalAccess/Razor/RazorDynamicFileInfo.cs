@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     /// provides info on the given file
     ///
     /// this will be used to provide dynamic content such as generated content from cshtml to workspace
-    /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components such as razor for cshtml
+    /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components
+    // such as razor for cshtml
     /// </summary>
     internal sealed class RazorDynamicFileInfo
     {
@@ -48,7 +49,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         public IRazorDocumentServiceProvider DocumentServiceProvider { get; }
 
         /// <summary>
-        /// Constructs a new <see cref="DocumentInfo"/> from an existing <see cref="DocumentInfo"/> but with updated
+        /// Constructs a new <see cref="DocumentInfo"/> from an existing <see cref="DocumentInfo"/> but with
+        // updated
         /// text loader and document service provider coming from this instance.
         /// </summary>
         public DocumentInfo ToUpdatedDocumentInfo(DocumentInfo existingDocumentInfo)

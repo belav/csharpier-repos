@@ -10,12 +10,15 @@ namespace Microsoft.AspNetCore.HttpLogging;
 /// The context used for <see cref="IHttpLoggingInterceptor"/>.
 /// </summary>
 /// <remarks>
-/// Settings will be pre-initialized with the relevant values from <see cref="HttpLoggingOptions" /> and updated with endpoint specific
+/// Settings will be pre-initialized with the relevant values from <see cref="HttpLoggingOptions" />
+// and updated with endpoint specific
 /// values from <see cref="HttpLoggingAttribute"/> or
-/// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder, HttpLoggingFields, int?, int?)" />.
+/// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder,
+// HttpLoggingFields, int?, int?)" />.
 /// All settings can be modified per request. All settings will carry over from
 /// <see cref="IHttpLoggingInterceptor.OnRequestAsync(HttpLoggingInterceptorContext)"/>
-/// to <see cref="IHttpLoggingInterceptor.OnResponseAsync(HttpLoggingInterceptorContext)"/> except the <see cref="Parameters"/>
+/// to <see cref="IHttpLoggingInterceptor.OnResponseAsync(HttpLoggingInterceptorContext)"/> except
+// the <see cref="Parameters"/>
 /// which are cleared after logging the request.
 /// </remarks>
 public sealed class HttpLoggingInterceptorContext
@@ -33,7 +36,8 @@ public sealed class HttpLoggingInterceptorContext
         get =>
             _httpContext ?? throw new InvalidOperationException("HttpContext was not initialized.");
         // Public for 3rd party testing of interceptors.
-        // We'd make this a required constructor/init parameter but ObjectPool requires a parameterless constructor.
+        // We'd make this a required constructor/init parameter but ObjectPool requires a parameterless
+        // constructor.
         set => _httpContext = value ?? throw new ArgumentNullException(nameof(value));
     }
 
@@ -43,7 +47,8 @@ public sealed class HttpLoggingInterceptorContext
     /// <remarks>
     /// This is pre-populated with the value from <see cref="HttpLoggingOptions.LoggingFields"/>,
     /// <see cref="HttpLoggingAttribute.LoggingFields"/>, or
-    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder, HttpLoggingFields, int?, int?)"/>.
+    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder,
+    // HttpLoggingFields, int?, int?)"/>.
     /// </remarks>
     public HttpLoggingFields LoggingFields { get; set; }
 
@@ -53,7 +58,8 @@ public sealed class HttpLoggingInterceptorContext
     /// <remarks>
     /// This is pre-populated with the value from <see cref="HttpLoggingOptions.RequestBodyLogLimit"/>,
     /// <see cref="HttpLoggingAttribute.RequestBodyLogLimit"/>, or
-    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder, HttpLoggingFields, int?, int?)"/>.
+    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder,
+    // HttpLoggingFields, int?, int?)"/>.
     /// </remarks>
     public int RequestBodyLogLimit { get; set; }
 
@@ -63,7 +69,8 @@ public sealed class HttpLoggingInterceptorContext
     /// <remarks>
     /// This is pre-populated with the value from <see cref="HttpLoggingOptions.ResponseBodyLogLimit"/>,
     /// <see cref="HttpLoggingAttribute.ResponseBodyLogLimit"/>, or
-    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder, HttpLoggingFields, int?, int?)"/>.
+    /// <see cref="HttpLoggingEndpointConventionBuilderExtensions.WithHttpLogging{TBuilder}(TBuilder,
+    // HttpLoggingFields, int?, int?)"/>.
     /// </remarks>
     public int ResponseBodyLogLimit { get; set; }
 
@@ -72,12 +79,15 @@ public sealed class HttpLoggingInterceptorContext
     internal List<KeyValuePair<string, object?>> InternalParameters { get; set; } = new();
 
     /// <summary>
-    /// Gets a list of parameters that will be logged as part of the request or response. Values specified in <see cref="LoggingFields"/>
-    /// will be added automatically after all interceptors run. All values are cleared after logging the request.
+    /// Gets a list of parameters that will be logged as part of the request or response. Values
+    // specified in <see cref="LoggingFields"/>
+    /// will be added automatically after all interceptors run. All values are cleared after logging the
+    // request.
     /// All other relevant settings will carry over to the response.
     /// </summary>
     /// <remarks>
-    /// If <see cref="HttpLoggingOptions.CombineLogs"/> is enabled, the parameters will be logged as part of the combined log.
+    /// If <see cref="HttpLoggingOptions.CombineLogs"/> is enabled, the parameters will be logged as
+    // part of the combined log.
     /// </remarks>
     public IList<KeyValuePair<string, object?>> Parameters => InternalParameters;
 

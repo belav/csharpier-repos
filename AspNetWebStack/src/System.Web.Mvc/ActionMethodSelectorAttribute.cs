@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Reflection;
 
@@ -13,7 +14,8 @@ namespace System.Web.Mvc
         /// </summary>
         /// <param name="controllerContext">The controller context.</param>
         /// <param name="methodInfo">Information about the action method.</param>
-        /// <returns><see langword="true"/> if the action method selection is valid for the specified controller context; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the action method selection is valid for the specified
+        // controller context; otherwise, <see langword="false"/>.</returns>
         public abstract bool IsValidForRequest(
             ControllerContext controllerContext,
             MethodInfo methodInfo

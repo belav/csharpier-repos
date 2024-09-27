@@ -4,7 +4,8 @@
 namespace System.Globalization
 {
     /// <summary>
-    /// Korean calendar is based on the Gregorian calendar.  And the year is an offset to Gregorian calendar.
+    /// Korean calendar is based on the Gregorian calendar.  And the year is an offset to Gregorian
+    // calendar.
     /// That is,
     ///      Korean year = Gregorian year + 2333.  So 2000/01/01 A.D. is Korean 4333/01/01
     ///

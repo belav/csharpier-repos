@@ -120,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,46): error CS7034: The specified version string '1.*' does not conform to the required format - major[.minor[.build[.revision]]]
+                // (1,46): error CS7034: The specified version string '1.*' does not conform to the required format
+                // - major[.minor[.build[.revision]]]
                 // [assembly: System.Reflection.AssemblyVersion("1.*")] public class C {}
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat, @"""1.*""")
                     .WithArguments("1.*")
@@ -130,7 +131,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             s = @"[assembly: System.Reflection.AssemblyVersion(""-1"")] public class C {}";
             other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,46): error CS7034: The specified version string '-1' does not conform to the required format - major[.minor[.build[.revision]]]
+                // (1,46): error CS7034: The specified version string '-1' does not conform to the required format -
+                // major[.minor[.build[.revision]]]
                 // [assembly: System.Reflection.AssemblyVersion("-1")] public class C {}
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat, @"""-1""")
                     .WithArguments("-1")
@@ -148,7 +150,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: TestOptions.ReleaseDll.WithDeterministic(true)
             );
             comp.VerifyDiagnostics(
-                // (1,46): error CS8357: The specified version string '1.1.1.*' contains wildcards, which are not compatible with determinism. Either remove wildcards from the version string, or disable determinism for this compilation
+                // (1,46): error CS8357: The specified version string '1.1.1.*' contains wildcards, which are not
+                // compatible with determinism. Either remove wildcards from the version string, or disable determinism
+                // for this compilation
                 // [assembly: System.Reflection.AssemblyVersion("1.1.1.*")]
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormatDeterministic, @"""1.1.1.*""")
                     .WithArguments("1.1.1.*")
@@ -166,7 +170,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: TestOptions.ReleaseDll.WithDeterministic(true)
             );
             comp.VerifyDiagnostics(
-                // (1,46): error CS7034: The specified version string '<null>' does not conform to the required format - major[.minor[.build[.revision]]]
+                // (1,46): error CS7034: The specified version string '<null>' does not conform to the required
+                // format - major[.minor[.build[.revision]]]
                 // [assembly: System.Reflection.AssemblyVersion(null)]
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat, "null")
                     .WithArguments("<null>")
@@ -218,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,50): warning CS7035: The specified version string '1.2.*' does not conform to the recommended format - major.minor.build.revision
+                // (1,50): warning CS7035: The specified version string '1.2.*' does not conform to the recommended
+                // format - major.minor.build.revision
                 // [assembly: System.Reflection.AssemblyFileVersion("1.2.*")] public class C {}
                 Diagnostic(ErrorCode.WRN_InvalidVersionFormat, @"""1.2.*""")
                     .WithArguments("1.2.*")
@@ -242,7 +248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,50): warning CS7035: The specified version string '<null>' does not conform to the recommended format - major.minor.build.revision
+                // (1,50): warning CS7035: The specified version string '<null>' does not conform to the recommended
+                // format - major.minor.build.revision
                 // [assembly: System.Reflection.AssemblyFileVersion(null)] public class C {}
                 Diagnostic(ErrorCode.WRN_InvalidVersionFormat, "null")
                     .WithArguments("<null>")
@@ -258,7 +265,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,50): warning CS7035: The specified version string '1.65536' does not conform to the recommended format - major.minor.build.revision
+                // (1,50): warning CS7035: The specified version string '1.65536' does not conform to the
+                // recommended format - major.minor.build.revision
                 // [assembly: System.Reflection.AssemblyFileVersion("1.65536")] public class C {}
                 Diagnostic(ErrorCode.WRN_InvalidVersionFormat, @"""1.65536""")
                     .WithArguments("1.65536")
@@ -288,7 +296,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,63): error CS7058: The specified version string '1.2.3.A' does not conform to the required format - major.minor.build.revision (without wildcards)
+                // (1,63): error CS7058: The specified version string '1.2.3.A' does not conform to the required
+                // format - major.minor.build.revision (without wildcards)
                 // [assembly: System.Resources.SatelliteContractVersionAttribute("1.2.3.A")] public class C {}
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat2, @"""1.2.3.A""")
                     .WithArguments("1.2.3.A")
@@ -300,7 +309,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             other = CreateCompilation(s, options: TestOptions.ReleaseDll);
             other.VerifyDiagnostics(
-                // (1,63): error CS7058: The specified version string '1.2.*' does not conform to the required format - major.minor.build.revision (without wildcards)
+                // (1,63): error CS7058: The specified version string '1.2.*' does not conform to the required
+                // format - major.minor.build.revision (without wildcards)
                 // [assembly: System.Resources.SatelliteContractVersionAttribute("1.2.*")] public class C {}
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat2, @"""1.2.*""")
                     .WithArguments("1.2.*")
@@ -322,7 +332,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var other = CreateCompilation(s);
             other.VerifyDiagnostics(
-                // (1,63): error CS7058: The specified version string '<null>' does not conform to the required format - major.minor.build.revision (without wildcards)
+                // (1,63): error CS7058: The specified version string '<null>' does not conform to the required
+                // format - major.minor.build.revision (without wildcards)
                 // [assembly: System.Resources.SatelliteContractVersionAttribute(null)] public class C {}
                 Diagnostic(ErrorCode.ERR_InvalidVersionFormat2, "null")
                     .WithArguments("<null>")
@@ -443,7 +454,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var comp = CreateCompilation(s, options: TestOptions.ReleaseExe);
             comp.VerifyDiagnostics(
                 // (1,46): error CS7059: Executables cannot be satellite assemblies; culture should always be empty
-                // [assembly: System.Reflection.AssemblyCulture("pt-BR")] public class C {  static void Main() { }  }
+                // [assembly: System.Reflection.AssemblyCulture("pt-BR")] public class C {  static void Main() { }
+                // }
                 Diagnostic(ErrorCode.ERR_InvalidAssemblyCultureForExe, @"""pt-BR""")
                     .WithLocation(1, 46)
             );
@@ -544,7 +556,8 @@ public class en_US
 
             CompileAndVerify(compilation)
                 .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has
+                    // different culture setting of 'de'.
                     Diagnostic(ErrorCode.WRN_RefCultureMismatch)
                         .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
                 );
@@ -561,7 +574,8 @@ public class en_US
 
             CompileAndVerify(compilation, verify: Verification.Skipped)
                 .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has
+                    // different culture setting of 'de'.
                     Diagnostic(ErrorCode.WRN_RefCultureMismatch)
                         .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
                 );
@@ -674,7 +688,8 @@ public class @neutral
 
             CompileAndVerify(compilation)
                 .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has
+                    // different culture setting of 'de'.
                     Diagnostic(ErrorCode.WRN_RefCultureMismatch)
                         .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
                 );
@@ -691,7 +706,8 @@ public class @neutral
 
             CompileAndVerify(compilation, verify: Verification.Skipped)
                 .VerifyDiagnostics(
-                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has different culture setting of 'de'.
+                    // warning CS8009: Referenced assembly 'de, Version=0.0.0.0, Culture=de, PublicKeyToken=null' has
+                    // different culture setting of 'de'.
                     Diagnostic(ErrorCode.WRN_RefCultureMismatch)
                         .WithArguments("de, Version=0.0.0.0, Culture=de, PublicKeyToken=null", "de")
                 );
@@ -1726,7 +1742,8 @@ public class C {}
             string s = @"[assembly: System.Reflection.AssemblyFlags(12345)] public class C {} ";
 
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038). [token:0x20000001]
+            // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038).
+            // [token:0x20000001]
             VerifyAssemblyTable(
                 comp,
                 r =>
@@ -1736,7 +1753,9 @@ public class C {}
             );
 
             comp.VerifyDiagnostics(
-                // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
+                // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is
+                // obsolete: 'This constructor has been deprecated. Please use
+                // AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
                 // [assembly: System.Reflection.AssemblyFlags(12345)] public class C {}
                 Diagnostic(
                         ErrorCode.WRN_DeprecatedSymbolStr,
@@ -1755,7 +1774,8 @@ public class C {}
             string s = @"[assembly: System.Reflection.AssemblyFlags(12345U)] public class C {} ";
 
             var comp = CreateCompilation(s, options: TestOptions.ReleaseDll);
-            // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038). [token:0x20000001]
+            // Both native & Roslyn PEVerifier fail: [MD]: Error: Invalid Assembly flags (0x3038).
+            // [token:0x20000001]
             VerifyAssemblyTable(
                 comp,
                 r =>
@@ -1765,7 +1785,9 @@ public class C {}
             );
 
             comp.VerifyDiagnostics(
-                // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is obsolete: 'This constructor has been deprecated. Please use AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
+                // (1,12): warning CS0618: 'System.Reflection.AssemblyFlagsAttribute.AssemblyFlagsAttribute(int)' is
+                // obsolete: 'This constructor has been deprecated. Please use
+                // AssemblyFlagsAttribute(AssemblyNameFlags) instead. http://go.microsoft.com/fwlink/?linkid=14202'
                 // [assembly: System.Reflection.AssemblyFlags(12345)] public class C {}
                 Diagnostic(
                         ErrorCode.WRN_DeprecatedSymbolStr,
@@ -1902,7 +1924,8 @@ public class C {}
                 compilation,
                 symbolValidator: module =>
                 {
-                    // We should get only unique netmodule/assembly attributes here, duplicate ones should not be emitted.
+                    // We should get only unique netmodule/assembly attributes here, duplicate ones should not be
+                    // emitted.
                     var expectedEmittedAttrsCount =
                         expectedSrcAttrCount - expectedDuplicateAttrCount;
 
@@ -2442,7 +2465,8 @@ public class C {}
             );
             var diagnostics = compilation.GetDiagnostics();
             compilation.VerifyDiagnostics(
-                // error CS7061: Duplicate 'UserDefinedAssemblyAttrNoAllowMultipleAttribute' attribute in 'Test.netmodule'
+                // error CS7061: Duplicate 'UserDefinedAssemblyAttrNoAllowMultipleAttribute' attribute in
+                // 'Test.netmodule'
                 Diagnostic(ErrorCode.ERR_DuplicateAttributeInNetModule)
                     .WithArguments(
                         "UserDefinedAssemblyAttrNoAllowMultipleAttribute",
@@ -2475,7 +2499,8 @@ public class C {}
                 references: new[] { netmodule1Ref, netmodule2Ref }
             );
             compilation.VerifyDiagnostics(
-                // error CS7061: Duplicate 'UserDefinedAssemblyAttrNoAllowMultipleAttribute' attribute in 'Test.netmodule'
+                // error CS7061: Duplicate 'UserDefinedAssemblyAttrNoAllowMultipleAttribute' attribute in
+                // 'Test.netmodule'
                 Diagnostic(ErrorCode.ERR_DuplicateAttributeInNetModule)
                     .WithArguments(
                         "UserDefinedAssemblyAttrNoAllowMultipleAttribute",
@@ -2888,7 +2913,9 @@ class Program
                 options: TestOptions.ReleaseDll
             );
             appCompilation.VerifyDiagnostics(
-                // error CS0012: The type 'ExtensionAttribute' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'.
+                // error CS0012: The type 'ExtensionAttribute' is defined in an assembly that is not referenced. You
+                // must add a reference to assembly 'System.Core, Version=4.0.0.0, Culture=neutral,
+                // PublicKeyToken=b77a5c561934e089'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef)
                     .WithArguments(
                         "System.Runtime.CompilerServices.ExtensionAttribute",
@@ -3041,7 +3068,8 @@ public class C { }
         [Fact, WorkItem(546460, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546460")]
         public void RuntimeCompatibilityAttribute_False()
         {
-            // the attribute suppresses WRN_UnreachableGeneralCatch since catch {} can catch an object not derived from Exception
+            // the attribute suppresses WRN_UnreachableGeneralCatch since catch {} can catch an object not
+            // derived from Exception
 
             string source =
                 @"
@@ -3083,7 +3111,8 @@ class C
 ";
             CreateCompilation(source)
                 .VerifyDiagnostics(
-                    // (12,9): warning CS1058: A previous catch clause already catches all exceptions. All non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
+                    // (12,9): warning CS1058: A previous catch clause already catches all exceptions. All
+                    // non-exceptions thrown will be wrapped in a System.Runtime.CompilerServices.RuntimeWrappedException.
                     Diagnostic(ErrorCode.WRN_UnreachableGeneralCatch, "catch")
                 );
         }
@@ -3498,7 +3527,8 @@ public class C { }
                     }
                 )
                 .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
+                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module
+                    // 'M1.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
                         .WithArguments(
                             "System.Reflection.AssemblyDescriptionAttribute",
@@ -3555,13 +3585,15 @@ public class C { }
                     }
                 )
                 .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
+                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module
+                    // 'M2.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
                         .WithArguments(
                             "System.Reflection.AssemblyDescriptionAttribute",
                             "M2.netmodule"
                         ),
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M1.netmodule' is overridden.
+                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module
+                    // 'M1.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
                         .WithArguments(
                             "System.Reflection.AssemblyDescriptionAttribute",
@@ -3618,7 +3650,8 @@ public class C { }
                     }
                 )
                 .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module 'M2.netmodule' is overridden.
+                    // warning CS7090: Attribute 'System.Reflection.AssemblyDescriptionAttribute' from .NET module
+                    // 'M2.netmodule' is overridden.
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
                         .WithArguments(
                             "System.Reflection.AssemblyDescriptionAttribute",
@@ -3665,7 +3698,8 @@ public class C { }
                     }
                 )
                 .VerifyDiagnostics(
-                    // warning CS7090: Attribute 'System.Reflection.AssemblyFileVersionAttribute' from module 'M1.netmodule' will be ignored in favor of the instance appearing in source
+                    // warning CS7090: Attribute 'System.Reflection.AssemblyFileVersionAttribute' from module
+                    // 'M1.netmodule' will be ignored in favor of the instance appearing in source
                     Diagnostic(ErrorCode.WRN_AssemblyAttributeFromModuleIsOverridden)
                         .WithArguments(
                             "System.Reflection.AssemblyFileVersionAttribute",
@@ -3760,7 +3794,8 @@ public class A1 : System.Attribute
             );
 
             comp2.VerifyEmitDiagnostics(
-                // error CS0012: The type 'A1' is defined in an assembly that is not referenced. You must add a reference to assembly 'A1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // error CS0012: The type 'A1' is defined in an assembly that is not referenced. You must add a
+                // reference to assembly 'A1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef)
                     .WithArguments(
                         "A1",
@@ -3867,7 +3902,8 @@ public class A1 : System.Attribute
             );
 
             comp2.VerifyEmitDiagnostics(
-                // error CS0012: The type 'C1' is defined in an assembly that is not referenced. You must add a reference to assembly 'A1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // error CS0012: The type 'C1' is defined in an assembly that is not referenced. You must add a
+                // reference to assembly 'A1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 Diagnostic(ErrorCode.ERR_NoTypeDef)
                     .WithArguments(
                         "C1",

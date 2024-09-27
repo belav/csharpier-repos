@@ -131,7 +131,8 @@ namespace System.ComponentModel
 
         /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.AddingNew"]/*' />
         /// <devdoc>
-        ///     Event that allows a custom item to be provided as the new item added to the list by AddNew().
+        ///     Event that allows a custom item to be provided as the new item added to the list by
+        // AddNew().
         /// </devdoc>
         public event AddingNewEventHandler AddingNew
         {
@@ -201,7 +202,8 @@ namespace System.ComponentModel
             }
         }
 
-        /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.RaiseListChangedEvents"]/* />
+        /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.RaiseListChangedEvents"]/*
+        // />
         public bool RaiseListChangedEvents
         {
             get { return this.raiseListChangedEvents; }
@@ -244,7 +246,8 @@ namespace System.ComponentModel
         #region Collection<T> overrides
 
         // Collection<T> funnels all list changes through the four virtual methods below.
-        // We override these so that we can commit any pending new item and fire the proper ListChanged events.
+        // We override these so that we can commit any pending new item and fire the proper ListChanged
+        // events.
 
         protected override void ClearItems()
         {
@@ -348,10 +351,14 @@ namespace System.ComponentModel
         /// <devdoc>
         ///     Adds a new item to the list. Calls <see cref='AddNewCore'> to create and add the item.
         ///
-        ///     Add operations are cancellable via the <see cref='ICancelAddNew'> interface. The position of the
-        ///     new item is tracked until the add operation is either cancelled by a call to <see cref='CancelNew'>,
-        ///     explicitly commited by a call to <see cref='EndNew'>, or implicitly commmited some other operation
-        ///     that changes the contents of the list (such as an Insert or Remove). When an add operation is
+        ///     Add operations are cancellable via the <see cref='ICancelAddNew'> interface. The position of
+        // the
+        ///     new item is tracked until the add operation is either cancelled by a call to <see
+        // cref='CancelNew'>,
+        ///     explicitly commited by a call to <see cref='EndNew'>, or implicitly commmited some other
+        // operation
+        ///     that changes the contents of the list (such as an Insert or Remove). When an add operation
+        // is
         ///     cancelled, the new item is removed from the list.
         /// </devdoc>
         public T AddNew()
@@ -415,13 +422,15 @@ namespace System.ComponentModel
         {
             get
             {
-                //If the user set AllowNew, return what they set.  If we have a default constructor, allowNew will be
+                //If the user set AllowNew, return what they set.  If we have a default constructor, allowNew will
+                // be
                 //true and we should just return true.
                 if (userSetAllowNew || allowNew)
                 {
                     return this.allowNew;
                 }
-                //Even if the item doesn't have a default constructor, the user can hook AddingNew to provide an item.
+                //Even if the item doesn't have a default constructor, the user can hook AddingNew to provide an
+                // item.
                 //If there's a handler for this, we should allow new.
                 return AddingNewHandled;
             }
@@ -439,7 +448,7 @@ namespace System.ComponentModel
             }
         }
 
-        /* private */bool IBindingList.AllowNew
+/* private */bool IBindingList.AllowNew
         {
             get { return AllowNew; }
         }
@@ -460,7 +469,7 @@ namespace System.ComponentModel
             }
         }
 
-        /* private */bool IBindingList.AllowEdit
+/* private */bool IBindingList.AllowEdit
         {
             get { return AllowEdit; }
         }
@@ -481,7 +490,7 @@ namespace System.ComponentModel
             }
         }
 
-        /* private */bool IBindingList.AllowRemove
+/* private */bool IBindingList.AllowRemove
         {
             get { return AllowRemove; }
         }
@@ -694,7 +703,8 @@ namespace System.ComponentModel
 
         #region IRaiseItemChangedEvents interface
 
-        /// <include file='doc\BindingList.uex' path='docs/doc[@for="BindingList.RaisesItemChangedEvents"]/*' />
+        /// <include file='doc\BindingList.uex'
+        // path='docs/doc[@for="BindingList.RaisesItemChangedEvents"]/*' />
         /// <devdoc>
         ///     Returns false to indicate that BindingList<T> does NOT raise ListChanged events
         ///     of type ItemChanged as a result of property changes on individual list items

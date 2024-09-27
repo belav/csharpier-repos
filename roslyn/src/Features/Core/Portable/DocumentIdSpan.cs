@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis;
 
 /// <summary>
 /// Lightweight analog to <see cref="DocumentSpan"/> that should be used in features that care about
-/// pointing at a particular location in a <see cref="Document"/> but do not want to root a potentially
+/// pointing at a particular location in a <see cref="Document"/> but do not want to root a
+// potentially
 /// very stale <see cref="Solution"/> snapshot that may keep around a lot of memory in a host.
 /// </summary>
 [DataContract]

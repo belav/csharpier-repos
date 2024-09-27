@@ -33,7 +33,8 @@ public class ApplicationModel : IPropertyModel, IFilterModel, IApiExplorerModel
     /// for ApiExplorer that apply to all actions unless overridden by
     /// <see cref="ControllerModel.ApiExplorer"/> or <see cref="ActionModel.ApiExplorer"/>.
     ///
-    /// If using <see cref="ApplicationModel.ApiExplorer"/> to set <see cref="ApiExplorerModel.IsVisible"/> to
+    /// If using <see cref="ApplicationModel.ApiExplorer"/> to set <see
+    // cref="ApiExplorerModel.IsVisible"/> to
     /// <c>true</c>, this setting will only be honored for actions which use attribute routing.
     /// </remarks>
     public ApiExplorerModel ApiExplorer { get; set; }

@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             _projectAccessor = new ProjectAccessor(this);
             _documentAccessor = new DocumentAccessor(this);
 
-            // This assignment violates the declared non-nullability of _connectionPool, but the caller ensures that
+            // This assignment violates the declared non-nullability of _connectionPool, but the caller ensures
+            // that
             // the constructed object is only used if the nullability post-conditions are met.
             _connectionPool = connectionPoolService.TryOpenDatabase(
                 databaseFile,
@@ -174,12 +175,16 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             // Also, WAL allows for relaxed ("normal") "synchronous" mode, see below.
             connection.ExecuteCommand("pragma journal_mode=wal", throwOnError: false);
 
-            // Set "synchronous" mode to "normal" instead of default "full" to reduce the amount of buffer flushing syscalls,
+            // Set "synchronous" mode to "normal" instead of default "full" to reduce the amount of buffer
+            // flushing syscalls,
             // significantly reducing both the blocked time and the amount of context switches.
             // When coupled with WAL, this (according to https://sqlite.org/pragma.html#pragma_synchronous and
-            // https://www.sqlite.org/wal.html#performance_considerations) is unlikely to significantly affect durability,
-            // while significantly increasing performance, because buffer flushing is done for each checkpoint, instead of each
-            // transaction. While some writes can be lost, they are never reordered, and higher layers will recover from that.
+            // https://www.sqlite.org/wal.html#performance_considerations) is unlikely to significantly affect
+            // durability,
+            // while significantly increasing performance, because buffer flushing is done for each checkpoint,
+            // instead of each
+            // transaction. While some writes can be lost, they are never reordered, and higher layers will
+            // recover from that.
             connection.ExecuteCommand("pragma synchronous=normal", throwOnError: false);
 
             // First, create all string tables in the main on-disk db.  These tables
@@ -205,9 +210,12 @@ namespace Microsoft.CodeAnalysis.SQLite.v2
             EnsureTables(connection, Database.Main);
             EnsureTables(connection, Database.WriteCache);
 
-            // Bulk load all the existing string/id pairs in the DB at once.  In a solution like roslyn, there are
-            // roughly 20k of these strings.  Doing it as 20k individual reads adds more than a second of work time
-            // reading in all the data.  This allows for a single query that can efficiently have the DB just stream the
+            // Bulk load all the existing string/id pairs in the DB at once.  In a solution like roslyn, there
+            // are
+            // roughly 20k of these strings.  Doing it as 20k individual reads adds more than a second of work
+            // time
+            // reading in all the data.  This allows for a single query that can efficiently have the DB just
+            // stream the
             // pages from disk and bulk read those in the cursor the query uses.
             LoadExistingStringIds(connection);
 

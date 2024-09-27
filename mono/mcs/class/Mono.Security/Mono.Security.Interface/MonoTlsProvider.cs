@@ -33,13 +33,13 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Mono.Security.Interface
 {
-    /*
-     * Unfortunately, we can't use the public definitions from System.dll here, so we need to
-     * copy these.
-     *
-     * The @MonoRemoteCertificateValidationCallback also has an additional 'targetHost' argument.
-     *
-     */
+/*
+* Unfortunately, we can't use the public definitions from System.dll here, so we need to
+* copy these.
+*
+* The @MonoRemoteCertificateValidationCallback also has an additional 'targetHost' argument.
+*
+*/
 
     [Flags]
     public enum MonoSslPolicyErrors
@@ -86,30 +86,30 @@ namespace Mono.Security.Interface
 
         #region SslStream
 
-        /*
-         * This section abstracts the @SslStream class.
-         *
-         */
+/*
+* This section abstracts the @SslStream class.
+*
+*/
 
         public abstract bool SupportsSslStream { get; }
 
-        /*
-         * Does this provider support IMonoSslStream.GetConnectionInfo() ?
-         */
+/*
+* Does this provider support IMonoSslStream.GetConnectionInfo() ?
+*/
         public abstract bool SupportsConnectionInfo { get; }
 
-        /*
-         * Whether or not this TLS Provider supports Mono-specific extensions
-         * (via @MonoTlsSettings).
-         */
+/*
+* Whether or not this TLS Provider supports Mono-specific extensions
+* (via @MonoTlsSettings).
+*/
         public abstract bool SupportsMonoExtensions { get; }
 
         public abstract SslProtocols SupportedProtocols { get; }
 
-        /*
-         * Obtain a @IMonoSslStream instance.
-         *
-         */
+/*
+* Obtain a @IMonoSslStream instance.
+*
+*/
         public abstract IMonoSslStream CreateSslStream(
             Stream innerStream,
             bool leaveInnerStreamOpen,

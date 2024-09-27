@@ -10,7 +10,8 @@ using System.Text;
 using System.Threading;
 
 // We need to target netstandard2.0, so keep using ref for MemoryMarshal.Write
-// CS9191: The 'ref' modifier for argument 2 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
+// CS9191: The 'ref' modifier for argument 2 corresponding to 'in' parameter is equivalent to 'in'.
+// Consider using 'in' instead.
 #pragma warning disable CS9191
 
 namespace WbemClient_v1 { }
@@ -1520,7 +1521,7 @@ namespace System.Management
     }
 
     [GuidAttribute("9AE62877-7544-4BB0-AA26-A13824659ED6")]
-    /*[ComConversionLossAttribute]*/
+/*[ComConversionLossAttribute]*/
     [InterfaceTypeAttribute(0x0001)]
     [ComImport]
     internal interface IWbemPathKeyList
@@ -2216,8 +2217,10 @@ namespace System.Management
                 // Wait for someone who wants us to create an object
                 evtGo.WaitOne();
 
-                // get requests from the request queue. Since two Set within short time on evtGo can wake this thread only once
-                // workerthread should check until we empty all the results. Even if we consume the request that is not set,
+                // get requests from the request queue. Since two Set within short time on evtGo can wake this
+                // thread only once
+                // workerthread should check until we empty all the results. Even if we consume the request that is
+                // not set,
                 // workerthread will wake up one more time unnecessarily and do nothing
                 while (true)
                 {
@@ -2347,14 +2350,20 @@ namespace System.Management
     }
 
     /// <summary>
-    /// The ThreadDispatch class allows clients to very easily spawn a thread, specify a worker delegate to be called from the
-    /// spawned thread and wait until thread finishes work. This is important in cases where a new thread needs to be spawned but
-    /// the main thread has to wait until the spawned thread finishes. As an example of this, in WMI we spawn MTA threads and create
+    /// The ThreadDispatch class allows clients to very easily spawn a thread, specify a worker delegate
+    // to be called from the
+    /// spawned thread and wait until thread finishes work. This is important in cases where a new
+    // thread needs to be spawned but
+    /// the main thread has to wait until the spawned thread finishes. As an example of this, in WMI we
+    // spawn MTA threads and create
     /// various objects in these threads to make sure we avoid marshaling cost.
-    /// If the worker thread returns a value it is stored in the ThreadDispatch object and accessible to clients via the Result property.
-    /// Also, any exception thrown is propagated from worker thread to main thread (by rethrowing orinal exception):
+    /// If the worker thread returns a value it is stored in the ThreadDispatch object and accessible to
+    // clients via the Result property.
+    /// Also, any exception thrown is propagated from worker thread to main thread (by rethrowing orinal
+    // exception):
     ///
-    ///     ThreadDispatch disp = new ThreadDispatch ( new ThreadDispatch.ThreadWorkerMethod  ( Class1.Func ) ) ;
+    ///     ThreadDispatch disp = new ThreadDispatch ( new ThreadDispatch.ThreadWorkerMethod  (
+    // Class1.Func ) ) ;
     ///     disp.Start ( ) ;
     ///
     /// Four different delegate types are supported:
@@ -2391,7 +2400,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// [Get/Set] The parameter to be used by worker thread. This will typically be a 'this' reference for access to instance members.
+        /// [Get/Set] The parameter to be used by worker thread. This will typically be a 'this' reference
+        // for access to instance members.
         /// </summary>
         public object Parameter
         {
@@ -2438,7 +2448,8 @@ namespace System.Management
         public delegate object ThreadWorkerMethodWithReturnAndParam(object param);
 
         /// <summary>
-        /// Delegate declaration representing signature of worker method with no return value and no parameter
+        /// Delegate declaration representing signature of worker method with no return value and no
+        // parameter
         /// </summary>
         public delegate void ThreadWorkerMethod();
 
@@ -2506,7 +2517,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Starts the thread execution and waits for thread to finish. If an exception occurs in the worker method
+        /// Starts the thread execution and waits for thread to finish. If an exception occurs in the worker
+        // method
         /// this method rethrows the exception.
         /// </summary>
         public void Start()
@@ -2522,7 +2534,8 @@ namespace System.Management
 
         #region Private methods
         /// <summary>
-        /// Initializes the ThreadDispatch instance with initial values. Note that this constructor is private to avoid
+        /// Initializes the ThreadDispatch instance with initial values. Note that this constructor is
+        // private to avoid
         /// declaring instances without specifying at least a worker delegate instance.
         /// </summary>
         private ThreadDispatch()
@@ -2624,7 +2637,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Starts the execution of the thread and waits until the threadFinished event is signaled before continuing
+        /// Starts the execution of the thread and waits until the threadFinished event is signaled before
+        // continuing
         /// </summary>
         private void DispatchThread()
         {
@@ -2633,7 +2647,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and captures any
+        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and
+        // captures any
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point has no parameter and no return value.
         /// </summary>
@@ -2650,7 +2665,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and captures any
+        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and
+        // captures any
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point takes a parameter and no return value.
         /// </summary>
@@ -2668,7 +2684,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and captures any
+        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and
+        // captures any
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point has no parameter but does return a value.
         /// </summary>
@@ -2686,7 +2703,8 @@ namespace System.Management
         }
 
         /// <summary>
-        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and captures any
+        /// Entry point for the newly created thread. This method is wrapped in a try/catch block and
+        // captures any
         /// exceptions thrown from the worker method and re-throws the exception.
         /// The worker method for this thread entry point has a parameter and return value.
         /// </summary>

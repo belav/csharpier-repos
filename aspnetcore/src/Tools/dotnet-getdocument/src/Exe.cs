@@ -47,7 +47,9 @@ internal static class Exe
             }
         }
 
-        // Follow precedent set in Razor integration tests and ensure process events and output are complete.
+        // Follow precedent set in Razor integration tests and ensure process events and output are
+        // complete.
+        //
         // https://github.com/aspnet/Razor/blob/d719920fdcc7d1db3a6f74cd5404d66fa098f057/test/Microsoft.NET.Sdk.Razor.Test/IntegrationTests/MSBuildProcessManager.cs#L91-L102
         // Timeout is double how long the inside man waits for the IDocumentProcessor to wrap up.
         if (!process.WaitForExit((int)(TimeSpan.FromMinutes(2).TotalMilliseconds)))

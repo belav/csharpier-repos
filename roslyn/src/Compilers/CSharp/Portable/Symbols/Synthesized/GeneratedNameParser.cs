@@ -275,7 +275,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         );
 
         /// <remarks>
-        /// This method will work with either unmangled or mangled type names as input, but it does not remove any arity suffix if present.
+        /// This method will work with either unmangled or mangled type names as input, but it does not
+        // remove any arity suffix if present.
         /// </remarks>
         internal static bool TryParseFileTypeName(
             string generatedName,

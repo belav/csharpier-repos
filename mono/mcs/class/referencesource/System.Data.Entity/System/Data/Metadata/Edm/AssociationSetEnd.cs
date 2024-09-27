@@ -24,8 +24,10 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="entitySet">Entity set that this end refers to</param>
         /// <param name="parentSet">The association set which this belongs to</param>
-        /// <param name="endMember">The end member of the association set which this is an instance of</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if either the role,entitySet, parentSet or endMember arguments are null </exception>
+        /// <param name="endMember">The end member of the association set which this is an instance
+        // of</param>
+        /// <exception cref="System.ArgumentNullException">Thrown if either the role,entitySet, parentSet or
+        // endMember arguments are null </exception>
         internal AssociationSetEnd(
             EntitySet entitySet,
             AssociationSet parentSet,
@@ -56,8 +58,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// The parent association set for this AssociationSetEnd.
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is null </exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the AssociationSetEnd instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is
+        // null </exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the
+        // AssociationSetEnd instance is in ReadOnly state</exception>
         [MetadataProperty(BuiltInTypeKind.AssociationSet, false)]
         public AssociationSet ParentAssociationSet
         {
@@ -67,8 +71,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// The EndMember which this AssociationSetEnd corresponds to.
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is null </exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the AssociationSetEnd instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is
+        // null </exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the
+        // AssociationSetEnd instance is in ReadOnly state</exception>
         [MetadataProperty(BuiltInTypeKind.AssociationEndMember, false)]
         public AssociationEndMember CorrespondingAssociationEndMember
         {
@@ -87,8 +93,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Name of the end role
         /// </summary>
-        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is null </exception>
-        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the AssociationSetEnd instance is in ReadOnly state</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if the value passed in for the setter is
+        // null </exception>
+        /// <exception cref="System.InvalidOperationException">Thrown if Setter is called when the
+        // AssociationSetEnd instance is in ReadOnly state</exception>
         [MetadataProperty(PrimitiveTypeKind.String, false)]
         [Obsolete("This property is going away, please use the Name property instead")]
         public string Role

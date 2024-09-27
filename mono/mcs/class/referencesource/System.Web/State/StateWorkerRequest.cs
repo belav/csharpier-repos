@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * StateHttpWorkerRequest
- *
- * Copyright (c) 1998-1999, Microsoft Corporation
- *
- */
+* StateHttpWorkerRequest
+*
+* Copyright (c) 1998-1999, Microsoft Corporation
+*
+*/
 
 namespace System.Web.SessionState
 {
@@ -23,7 +23,8 @@ namespace System.Web.SessionState
 
     class StateHttpWorkerRequest : HttpWorkerRequest
     {
-        /* long enough to hold the string representation of an IPv4 or IPv6 address; keep in sync with tracker.cxx */
+        /* long enough to hold the string representation of an IPv4 or IPv6 address; keep in sync with
+        tracker.cxx */
         private const int ADDRESS_LENGTH_MAX = 64;
 
         IntPtr _tracker;
@@ -232,8 +233,8 @@ namespace System.Web.SessionState
         public override string MapPath(string virtualPath)
         {
             /*
-             * Physical and virtual are identical to state server.
-             */
+            * Physical and virtual are identical to state server.
+            */
             return virtualPath;
         }
 
@@ -422,8 +423,8 @@ namespace System.Web.SessionState
         {
             Debug.Assert(!_sent);
             /*
-             * Do nothing - we append the content-length in STWNDSendResponse.
-             */
+            * Do nothing - we append the content-length in STWNDSendResponse.
+            */
         }
 
         public override bool HeadersSent()
@@ -460,9 +461,9 @@ namespace System.Web.SessionState
         public override void SendResponseFromMemory(byte[] data, int length)
         {
             /*
-             * The only content besides error message text is the pointer
-             * to the state item in unmanaged memory.
-             */
+            * The only content besides error message text is the pointer
+            * to the state item in unmanaged memory.
+            */
             if (_statusCode == 200)
             {
                 Debug.Assert(_unmanagedState == IntPtr.Zero, "_unmanagedState == 0");

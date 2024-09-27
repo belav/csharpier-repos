@@ -8,9 +8,11 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Diagnostics.Tracing
 {
     /// <summary>
-    /// EventPayload class holds the list of parameters and their corresponding values for user defined types passed to
+    /// EventPayload class holds the list of parameters and their corresponding values for user defined
+    // types passed to
     /// EventSource APIs.
-    /// Preserving the order of the elements as they were found inside user defined types is the most important characteristic of this class.
+    /// Preserving the order of the elements as they were found inside user defined types is the most
+    // important characteristic of this class.
     /// </summary>
     internal sealed class EventPayload : IDictionary<string, object?>
     {

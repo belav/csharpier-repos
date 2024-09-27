@@ -42,7 +42,8 @@ namespace Microsoft.Interop
                 )
             );
 
-        /// <inheritdoc cref="SR.InvalidAttributedMethodContainingTypeMissingModifiersMessageLibraryImport"/>
+        /// <inheritdoc
+        // cref="SR.InvalidAttributedMethodContainingTypeMissingModifiersMessageLibraryImport"/>
         public static readonly DiagnosticDescriptor InvalidAttributedMethodContainingTypeMissingModifiers =
             DiagnosticDescriptorHelper.Create(
                 Ids.InvalidLibraryImportAttributeUsage,
@@ -344,7 +345,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Report diagnostic for configuration that cannot be forwarded to <see cref="DllImportAttribute" />
+        /// Report diagnostic for configuration that cannot be forwarded to <see cref="DllImportAttribute"
+        // />
         /// </summary>
         /// <param name="method">Method with the configuration that cannot be forwarded</param>
         /// <param name="name">Configuration name</param>

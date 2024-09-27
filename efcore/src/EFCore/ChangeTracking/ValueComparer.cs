@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// <summary>
 ///     Specifies custom value snapshotting and comparison for
 ///     CLR types that cannot be compared with <see cref="object.Equals(object, object)" />
-///     and/or need a deep/structural copy when taking a snapshot. For example, arrays of primitive types
+///     and/or need a deep/structural copy when taking a snapshot. For example, arrays of primitive
+// types
 ///     will require both if mutation is to be detected.
 /// </summary>
 /// <remarks>
@@ -20,7 +21,8 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         reference.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-value-comparers">EF Core value comparers</see>
+// for more information and examples.
 ///     </para>
 /// </remarks>
 public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<object>
@@ -53,10 +55,14 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     )!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected static readonly MethodInfo HashCodeAddMethod = typeof(ValueComparer).GetRuntimeMethod(
@@ -65,10 +71,14 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     )!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected static readonly MethodInfo ToHashCodeMethod = typeof(HashCode).GetRuntimeMethod(
@@ -77,10 +87,14 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     )!;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected static readonly Expression<Func<bool, bool>> BoolIdentity;
@@ -124,7 +138,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     /// </summary>
     /// <param name="left">The first instance.</param>
     /// <param name="right">The second instance.</param>
-    /// <returns><see langword="true" /> if they are equal; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they are equal; <see langword="false" />
+    // otherwise.</returns>
     public new abstract bool Equals(object? left, object? right);
 
     /// <summary>
@@ -170,7 +185,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     public virtual LambdaExpression SnapshotExpression { get; }
 
     /// <summary>
-    ///     Takes <see cref="EqualsExpression" /> and replaces the two parameters with the given expressions,
+    ///     Takes <see cref="EqualsExpression" /> and replaces the two parameters with the given
+    // expressions,
     ///     returning the transformed body.
     /// </summary>
     /// <param name="leftExpression">The new left expression.</param>
@@ -194,7 +210,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     }
 
     /// <summary>
-    ///     Takes the <see cref="HashCodeExpression" /> and replaces the parameter with the given expression,
+    ///     Takes the <see cref="HashCodeExpression" /> and replaces the parameter with the given
+    // expression,
     ///     returning the transformed body.
     /// </summary>
     /// <param name="expression">The new expression.</param>
@@ -211,7 +228,8 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     }
 
     /// <summary>
-    ///     Takes the <see cref="SnapshotExpression" /> and replaces the parameter with the given expression,
+    ///     Takes the <see cref="SnapshotExpression" /> and replaces the parameter with the given
+    // expression,
     ///     returning the transformed body.
     /// </summary>
     /// <param name="expression">The new expression.</param>
@@ -228,10 +246,14 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public static HashCode Add(HashCode hash, int code)
@@ -375,8 +397,10 @@ public abstract class ValueComparer : IEqualityComparer, IEqualityComparer<objec
                 new[] { typeof(DateTimeOffset) }
             )!;
 
-        // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in time but with different
-        // time zone offsets. This comparer uses EqualsExact, which considers such DateTimeOffset as non-equal.
+        // In .NET, two DateTimeOffset instances are considered equal if they represent the same point in
+        // time but with different
+        // time zone offsets. This comparer uses EqualsExact, which considers such DateTimeOffset as
+        // non-equal.
         public DefaultDateTimeOffsetValueComparer(bool favorStructuralComparisons)
             : base((v1, v2) => v1.EqualsExact(v2), favorStructuralComparisons) { }
 

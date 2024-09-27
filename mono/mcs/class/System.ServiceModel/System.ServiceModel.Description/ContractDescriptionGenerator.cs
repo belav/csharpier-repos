@@ -201,9 +201,12 @@ namespace System.ServiceModel.Description
                     possibleInterfaces.Add(node.Key);
                 }
             }
-            // For this purpose a contract is a set of interfaces. it is necessary to find the interface representative of rest of the set. It will be assignable to all of
-            // the others but can only be assigned to by itself. This will give it  count of ! in its slot in the interfaceGraph. To be a valid set there can be only one with a count of one
-            // in its slot.  More results in InvalidOperation exceptioni with ambigours error message, less means that the interface we want is the one passed in by the parameter given
+            // For this purpose a contract is a set of interfaces. it is necessary to find the interface
+            // representative of rest of the set. It will be assignable to all of
+            // the others but can only be assigned to by itself. This will give it  count of ! in its slot in
+            // the interfaceGraph. To be a valid set there can be only one with a count of one
+            // in its slot.  More results in InvalidOperation exceptioni with ambigours error message, less
+            // means that the interface we want is the one passed in by the parameter given
             // and by returning null we give the callign method permission to use it..
             switch (possibleInterfaces.Count())
             {
@@ -283,14 +286,14 @@ namespace System.ServiceModel.Description
                 cd.ProtectionLevel = sca.ProtectionLevel;
 
             /*
-             * Calling `FillOperationsForInterface(cd, X, null, false)' followed by
-             * `FillOperationsForInterface(cd, X, Y, false)' would attempt to populate
-             * the behavior list for 'X' twice (bug #6187).
-             *
-             * Therefor, we manually iterate over the list of interfaces here instead of
-             * using ContractDescription.GetInheritedContracts().
-             *
-             */
+            * Calling `FillOperationsForInterface(cd, X, null, false)' followed by
+            * `FillOperationsForInterface(cd, X, Y, false)' would attempt to populate
+            * the behavior list for 'X' twice (bug #6187).
+            *
+            * Therefor, we manually iterate over the list of interfaces here instead of
+            * using ContractDescription.GetInheritedContracts().
+            *
+            */
 
             var inherited = new Collection<ContractDescription>();
             var interfaces = cd.ContractType.GetInterfaces().Where(t => t != givenContractType);
@@ -326,7 +329,8 @@ namespace System.ServiceModel.Description
             // FIXME: enable this when I found where this check is needed.
             /*
             if (cd.Operations.Count == 0)
-                throw new InvalidOperationException (String.Format ("The service contract type {0} has no operation. At least one operation must exist.", contractType));
+            throw new InvalidOperationException (String.Format ("The service contract type {0} has no operation.
+            At least one operation must exist.", contractType));
             */
             return cd;
         }

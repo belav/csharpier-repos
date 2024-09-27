@@ -153,7 +153,8 @@ namespace System.Data.Linq
         }
 
         // Not implementing finalizer here because there are no unmanaged resources
-        // to release. See http://msdnwiki.microsoft.com/en-us/mtpswiki/12afb1ea-3a17-4a3f-a1f0-fcdb853e2359.aspx
+        // to release. See
+        // http://msdnwiki.microsoft.com/en-us/mtpswiki/12afb1ea-3a17-4a3f-a1f0-fcdb853e2359.aspx
 
         // The bulk of the clean-up code is implemented in Dispose(bool)
         protected virtual void Dispose(bool disposing)
@@ -580,8 +581,10 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Submits one or more commands to the database reflecting the changes made to the retreived entities.
-        /// If a transaction is not already specified one will be created for the duration of this operation.
+        /// Submits one or more commands to the database reflecting the changes made to the retreived
+        // entities.
+        /// If a transaction is not already specified one will be created for the duration of this
+        // operation.
         /// If a change conflict is encountered a ChangeConflictException will be thrown.
         /// </summary>
         public void SubmitChanges()
@@ -591,8 +594,10 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Submits one or more commands to the database reflecting the changes made to the retreived entities.
-        /// If a transaction is not already specified one will be created for the duration of this operation.
+        /// Submits one or more commands to the database reflecting the changes made to the retreived
+        // entities.
+        /// If a transaction is not already specified one will be created for the duration of this
+        // operation.
         /// If a change conflict is encountered a ChangeConflictException will be thrown.
         /// You can override this method to implement common conflict resolution behaviors.
         /// </summary>
@@ -962,7 +967,8 @@ namespace System.Data.Linq
         /// <param name="instance">The instance the method is being called on.</param>
         /// <param name="methodInfo">The reflection MethodInfo for the method to invoke.</param>
         /// <param name="parameters">The parameters for the method call.</param>
-        /// <returns>The result of the method call. Use this type's ReturnValue property to access the actual return value.</returns>
+        /// <returns>The result of the method call. Use this type's ReturnValue property to access the
+        // actual return value.</returns>
         internal protected IExecuteResult ExecuteMethodCall(
             object instance,
             MethodInfo methodInfo,
@@ -1209,7 +1215,8 @@ namespace System.Data.Linq
 
         /// <summary>
         /// This list of change conflicts produced by the last call to SubmitChanges.  Use this collection
-        /// to resolve conflicts after catching a ChangeConflictException and before calling SubmitChanges again.
+        /// to resolve conflicts after catching a ChangeConflictException and before calling SubmitChanges
+        // again.
         /// </summary>
         public ChangeConflictCollection ChangeConflicts
         {
@@ -1222,7 +1229,8 @@ namespace System.Data.Linq
     }
 
     /// <summary>
-    /// Defines behavior for implementations of IQueryable that allow modifications to the membership of the resulting set.
+    /// Defines behavior for implementations of IQueryable that allow modifications to the membership of
+    // the resulting set.
     /// </summary>
     /// <typeparam name="TEntity">Type of entities returned from the queryable.</typeparam>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -1234,7 +1242,8 @@ namespace System.Data.Linq
     {
         /// <summary>
         /// Notify the set that an object representing a new entity should be added to the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of
+        // the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be added.</param>
@@ -1242,7 +1251,8 @@ namespace System.Data.Linq
 
         /// <summary>
         /// Notify the set that an object representing a new entity should be added to the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of
+        // the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be attached.</param>
@@ -1250,11 +1260,13 @@ namespace System.Data.Linq
 
         /// <summary>
         /// Notify the set that an object representing an entity should be removed from the set.
-        /// Depending on the implementation, the change to the set may not be visible in an enumeration of the set
+        /// Depending on the implementation, the change to the set may not be visible in an enumeration of
+        // the set
         /// until changes to that set have been persisted in some manner.
         /// </summary>
         /// <param name="entity">Entity object to be removed.</param>
-        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the set.</exception>
+        /// <exception cref="InvalidOperationException">Throws if the specified object is not in the
+        // set.</exception>
         void DeleteOnSubmit(TEntity entity);
     }
 
@@ -1312,7 +1324,8 @@ namespace System.Data.Linq
         void Attach(object entity, bool asModified);
 
         /// <summary>
-        /// Attaches an entity to the DataContext in either a modified or unmodified state by specifying both the entity
+        /// Attaches an entity to the DataContext in either a modified or unmodified state by specifying
+        // both the entity
         /// and its original state. Other entities accessible from this
         /// entity are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
@@ -1332,8 +1345,10 @@ namespace System.Data.Linq
         void AttachAll(IEnumerable entities);
 
         /// <summary>
-        /// Attaches all entities of a collection to the DataContext in either a modified or unmodified state.
-        /// If attaching as modified, the entity must either declare a version member or must not participate in update conflict checking.
+        /// Attaches all entities of a collection to the DataContext in either a modified or unmodified
+        // state.
+        /// If attaching as modified, the entity must either declare a version member or must not
+        // participate in update conflict checking.
         /// Other entities accessible from these
         /// entities are attached as unmodified but may subsequently be transitioned to other
         /// states by performing table operations on them individually.
@@ -1343,14 +1358,16 @@ namespace System.Data.Linq
         void AttachAll(IEnumerable entities, bool asModified);
 
         /// <summary>
-        /// Puts an entity from this table into a 'pending delete' state.  The removed entity will not be observed
+        /// Puts an entity from this table into a 'pending delete' state.  The removed entity will not be
+        // observed
         /// missing from query results until after SubmitChanges() has been called.
         /// </summary>
         /// <param name="entity">The entity to remove.</param>
         void DeleteOnSubmit(object entity);
 
         /// <summary>
-        /// Puts all entities from the collection 'entities' into a 'pending delete' state.  The removed entities will
+        /// Puts all entities from the collection 'entities' into a 'pending delete' state.  The removed
+        // entities will
         /// not be observed missing from the query results until after SubmitChanges() is called.
         /// </summary>
         /// <param name="entities"></param>
@@ -1379,7 +1396,8 @@ namespace System.Data.Linq
 
     /// <summary>
     /// Table is a collection of persistent entities. It always contains the set of entities currently
-    /// persisted in the database. Use it as a source of queries and to add/insert and remove/delete entities.
+    /// persisted in the database. Use it as a source of queries and to add/insert and remove/delete
+    // entities.
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     [SuppressMessage(
@@ -1654,7 +1672,8 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Puts an entity from this table into a 'pending delete' state.  The removed entity will not be observed
+        /// Puts an entity from this table into a 'pending delete' state.  The removed entity will not be
+        // observed
         /// missing from query results until after SubmitChanges() has been called.
         /// </summary>
         /// <param name="item"></param>
@@ -1700,7 +1719,8 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Puts all entities from the collection 'entities' into a 'pending delete' state.  The removed entities will
+        /// Puts all entities from the collection 'entities' into a 'pending delete' state.  The removed
+        // entities will
         /// not be observed missing from the query results until after SubmitChanges() is called.
         /// </summary>
         /// <param name="entities"></param>
@@ -1769,8 +1789,10 @@ namespace System.Data.Linq
 
         /// <summary>
         /// Attaches an entity to the DataContext in either a modified or unmodified state.
-        /// If attaching as modified, the entity must either declare a version member or must not participate in update conflict checking.
-        /// Deferred loading is not enabled. Other entities accessible from this entity are not automatically attached.
+        /// If attaching as modified, the entity must either declare a version member or must not
+        // participate in update conflict checking.
+        /// Deferred loading is not enabled. Other entities accessible from this entity are not
+        // automatically attached.
         /// </summary>
         /// <param name="entity"></param>
         /// <param name="asModified"></param>
@@ -1838,7 +1860,8 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Attaches an entity to the DataContext in either a modified or unmodified state by specifying both the entity
+        /// Attaches an entity to the DataContext in either a modified or unmodified state by specifying
+        // both the entity
         /// and its original state.
         /// </summary>
         /// <param name="entity">The entity to attach.</param>
@@ -1937,9 +1960,12 @@ namespace System.Data.Linq
         }
 
         /// <summary>
-        /// Attaches all entities of a collection to the DataContext in either a modified or unmodified state.
-        /// If attaching as modified, the entity must either declare a version member or must not participate in update conflict checking.
-        /// Deferred loading is not enabled.  Other entities accessible from these entities are not automatically attached.
+        /// Attaches all entities of a collection to the DataContext in either a modified or unmodified
+        // state.
+        /// If attaching as modified, the entity must either declare a version member or must not
+        // participate in update conflict checking.
+        /// Deferred loading is not enabled.  Other entities accessible from these entities are not
+        // automatically attached.
         /// </summary>
         /// <param name="entities">The collection of entities.</param>
         /// <param name="asModified">True if the entities are to be attach as modified.</param>

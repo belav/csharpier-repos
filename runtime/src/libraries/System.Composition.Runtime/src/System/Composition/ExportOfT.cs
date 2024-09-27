@@ -16,7 +16,8 @@ namespace System.Composition
         /// Construct an Export.
         /// </summary>
         /// <param name="value">The value of the export.</param>
-        /// <param name="disposeAction">An action that releases resources associated with the export.</param>
+        /// <param name="disposeAction">An action that releases resources associated with the
+        // export.</param>
         public Export(T value, Action disposeAction)
         {
             Value = value;

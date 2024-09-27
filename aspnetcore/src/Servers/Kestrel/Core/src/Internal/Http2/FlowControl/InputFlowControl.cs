@@ -122,7 +122,8 @@ internal sealed class InputFlowControl
 
             _flow.Abort();
 
-            // Tell caller to return connection window space consumed by this stream. Even if window updates have
+            // Tell caller to return connection window space consumed by this stream. Even if window updates
+            // have
             // been disabled at the stream level, connection-level window updates may still be necessary.
             return _initialWindowSize - _flow.Available;
         }

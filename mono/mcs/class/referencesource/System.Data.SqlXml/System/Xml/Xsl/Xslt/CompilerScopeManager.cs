@@ -64,7 +64,8 @@ namespace System.Xml.Xsl.Xslt
 
         public CompilerScopeManager()
         {
-            // The prefix 'xml' is by definition bound to the namespace name http://www.w3.org/XML/1998/namespace
+            // The prefix 'xml' is by definition bound to the namespace name
+            // http://www.w3.org/XML/1998/namespace
             records[0].flags = ScopeFlags.NsDecl;
             records[0].ncName = "xml";
             records[0].nsUri = XmlReservedNs.NsXml;
@@ -222,7 +223,8 @@ namespace System.Xml.Xsl.Xslt
             AddRecord(ScopeFlags.Variable, varName.LocalName, varName.NamespaceUri, value);
         }
 
-        // Since the prefix might be redefined in an inner scope, we search in descending order in [to, from]
+        // Since the prefix might be redefined in an inner scope, we search in descending order in [to,
+        // from]
         // If interval is empty (from < to), the function returns null.
         private string LookupNamespace(string prefix, int from, int to)
         {

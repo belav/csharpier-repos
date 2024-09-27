@@ -117,7 +117,8 @@ namespace System
         private static int _blockLongPaths;
 
         /// <summary>
-        /// Throw PathTooLongException for paths greater than MAX_PATH or directories greater than 248 (as per CreateDirectory Win32 limitations)
+        /// Throw PathTooLongException for paths greater than MAX_PATH or directories greater than 248 (as
+        // per CreateDirectory Win32 limitations)
         /// </summary>
         public static bool BlockLongPaths
         {
@@ -134,7 +135,8 @@ namespace System
         private static int _cloneActor;
 
         /// <summary>
-        /// When copying a ClaimsIdentity.Actor this switch controls whether ClaimsIdentity.Actor should be set as a reference or the result of Actor.Clone()
+        /// When copying a ClaimsIdentity.Actor this switch controls whether ClaimsIdentity.Actor should be
+        // set as a reference or the result of Actor.Clone()
         /// </summary>
         public static bool SetActorAsReferenceWhenCopyingClaimsIdentity
         {

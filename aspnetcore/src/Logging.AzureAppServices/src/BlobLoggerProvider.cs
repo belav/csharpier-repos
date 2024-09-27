@@ -14,7 +14,8 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.Extensions.Logging.AzureAppServices;
 
 /// <summary>
-/// The <see cref="ILoggerProvider"/> implementation that stores messages by appending them to Azure Blob in batches.
+/// The <see cref="ILoggerProvider"/> implementation that stores messages by appending them to Azure
+// Blob in batches.
 /// </summary>
 [ProviderAlias("AzureAppServicesBlob")]
 public class BlobLoggerProvider : BatchingLoggerProvider

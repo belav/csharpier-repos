@@ -604,7 +604,8 @@ namespace MonoTests.System.Web.DynamicData
             templatePath = ftf.GetFieldTemplateVirtualPath(mc, DataBoundControlMode.ReadOnly, null);
             Assert.AreEqual(ftf.TemplateFolderVirtualPath + "Children.ascx", templatePath, "#A3");
 
-            // When MetaColumn.DataTypeAttribute is not null (which will always be the case for string columns), column type is ignored
+            // When MetaColumn.DataTypeAttribute is not null (which will always be the case for string columns),
+            // column type is ignored
             mc = t.GetColumn("ForeignKeyColumn1");
             Assert.AreEqual(typeof(MetaForeignKeyColumn), mc.GetType(), "#B1");
             Assert.IsNotNull(mc.DataTypeAttribute, "#B1-1");

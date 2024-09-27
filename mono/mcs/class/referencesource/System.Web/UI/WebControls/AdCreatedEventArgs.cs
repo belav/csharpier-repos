@@ -33,7 +33,8 @@ namespace System.Web.UI.WebControls
         private Unit height;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.AdCreatedEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.AdCreatedEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public AdCreatedEventArgs(IDictionary adProperties)
@@ -102,7 +103,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para> Specifies the image that will be rendered in the <see cref='System.Web.UI.WebControls.AdRotator'/>.</para>
+        /// <para> Specifies the image that will be rendered in the <see
+        // cref='System.Web.UI.WebControls.AdRotator'/>.</para>
         /// </devdoc>
         public string ImageUrl
         {

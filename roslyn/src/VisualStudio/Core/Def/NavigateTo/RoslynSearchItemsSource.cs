@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.NavigateTo;
 internal sealed partial class RoslynSearchItemsSourceProvider
 {
     /// <summary>
-    /// Roslyn implementation of <see cref="ISearchItemsSource"/>.  This is the type actually responsible for
-    /// calling into the underlying <see cref="NavigateToSearcher"/> and marshalling the results over to the ui.
+    /// Roslyn implementation of <see cref="ISearchItemsSource"/>.  This is the type actually
+    // responsible for
+    /// calling into the underlying <see cref="NavigateToSearcher"/> and marshalling the results over to
+    // the ui.
     /// </summary>
     private sealed class RoslynSearchItemsSource : CodeSearchItemsSourceBase
     {

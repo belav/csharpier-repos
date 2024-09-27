@@ -26,7 +26,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     privat C[]? F;
 }",
-                // (3,13): error CS0650: Bad array declarator: To declare a managed array the rank specifier precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword before the field type.
+                // (3,13): error CS0650: Bad array declarator: To declare a managed array the rank specifier
+                // precedes the variable's identifier. To declare a fixed size buffer field, use the fixed keyword
+                // before the field type.
                 //     privat C[]? F;
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[]").WithLocation(3, 13),
                 // (3,15): error CS1003: Syntax error, ',' expected
@@ -767,7 +769,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             CreateCompilation(test, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // switch (e) { case T[] t: break; }
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion8,
@@ -780,7 +783,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "e")
                         .WithArguments("e")
                         .WithLocation(1, 9),
-                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     // switch (e) { case T[] t: break; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T")
                         .WithArguments("T")
@@ -846,7 +850,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             CreateCompilation(test, parseOptions: TestOptions.Regular8)
                 .VerifyDiagnostics(
-                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,1): error CS8400: Feature 'top-level statements' is not available in C# 8.0. Please use
+                    // language version 9.0 or greater.
                     // switch (e) { case T[]? t: break; }
                     Diagnostic(
                             ErrorCode.ERR_FeatureNotAvailableInVersion8,
@@ -859,12 +864,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     Diagnostic(ErrorCode.ERR_NameNotInContext, "e")
                         .WithArguments("e")
                         .WithLocation(1, 9),
-                    // (1,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language version 9.0 or greater.
+                    // (1,19): error CS8400: Feature 'type pattern' is not available in C# 8.0. Please use language
+                    // version 9.0 or greater.
                     // switch (e) { case T[]? t: break; }
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "T[]")
                         .WithArguments("type pattern", "9.0")
                         .WithLocation(1, 19),
-                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using directive or an assembly reference?)
+                    // (1,19): error CS0246: The type or namespace name 'T' could not be found (are you missing a using
+                    // directive or an assembly reference?)
                     // switch (e) { case T[]? t: break; }
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "T")
                         .WithArguments("T")

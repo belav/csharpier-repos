@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a type in the model.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
 {
@@ -30,7 +31,8 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     ///     Gets a property on the given type. Returns <see langword="null" /> if no property is found.
     /// </summary>
     /// <remarks>
-    ///     This API only finds scalar properties and does not find navigation, complex or service properties.
+    ///     This API only finds scalar properties and does not find navigation, complex or service
+    // properties.
     /// </remarks>
     /// <param name="memberInfo">The member on the CLR type.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
@@ -38,20 +40,24 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
         (IProperty?)((IReadOnlyTypeBase)this).FindProperty(memberInfo);
 
     /// <summary>
-    ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
+    ///     Gets the property with a given name. Returns <see langword="null" /> if no property with the
+    // given name is defined.
     /// </summary>
     /// <remarks>
-    ///     This API only finds scalar properties and does not find navigation, complex or service properties.
+    ///     This API only finds scalar properties and does not find navigation, complex or service
+    // properties.
     /// </remarks>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
     new IProperty? FindProperty(string name);
 
     /// <summary>
-    ///     Finds matching properties on the given type. Returns <see langword="null" /> if any property is not found.
+    ///     Finds matching properties on the given type. Returns <see langword="null" /> if any property
+    // is not found.
     /// </summary>
     /// <remarks>
-    ///     This API only finds scalar properties and does not find navigation, complex or service properties.
+    ///     This API only finds scalar properties and does not find navigation, complex or service
+    // properties.
     /// </remarks>
     /// <param name="propertyNames">The property names.</param>
     /// <returns>The properties, or <see langword="null" /> if any property is not found.</returns>
@@ -62,7 +68,8 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     ///     Gets a property with the given name.
     /// </summary>
     /// <remarks>
-    ///     This API only finds scalar properties and does not find navigation, complex or service properties.
+    ///     This API only finds scalar properties and does not find navigation, complex or service
+    // properties.
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property.</returns>
@@ -83,7 +90,8 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     /// </summary>
     /// <remarks>
     ///     This method does not return properties declared on base types.
-    ///     It is useful when iterating over all types to avoid processing the same property more than once.
+    ///     It is useful when iterating over all types to avoid processing the same property more than
+    // once.
     ///     Use <see cref="GetProperties" /> to also return properties declared on base types.
     /// </remarks>
     /// <returns>Declared non-navigation properties.</returns>
@@ -105,26 +113,31 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     ///     Gets the properties defined on this type.
     /// </summary>
     /// <remarks>
-    ///     This API only returns scalar properties and does not return navigation, complex or service properties.
+    ///     This API only returns scalar properties and does not return navigation, complex or service
+    // properties.
     /// </remarks>
     /// <returns>The properties defined on this type.</returns>
     new IEnumerable<IProperty> GetProperties();
 
     /// <summary>
-    ///     Gets the complex property with a given name. Returns <see langword="null" /> if no property with the given name is defined.
+    ///     Gets the complex property with a given name. Returns <see langword="null" /> if no property
+    // with the given name is defined.
     /// </summary>
     /// <remarks>
-    ///     This API only finds complex properties and does not find navigation, scalar or service properties.
+    ///     This API only finds complex properties and does not find navigation, scalar or service
+    // properties.
     /// </remarks>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
     new IComplexProperty? FindComplexProperty(string name);
 
     /// <summary>
-    ///     Gets a complex property with the given member info. Returns <see langword="null" /> if no property is found.
+    ///     Gets a complex property with the given member info. Returns <see langword="null" /> if no
+    // property is found.
     /// </summary>
     /// <remarks>
-    ///     This API only finds complex properties and does not find navigation, scalar or service properties.
+    ///     This API only finds complex properties and does not find navigation, scalar or service
+    // properties.
     /// </remarks>
     /// <param name="memberInfo">The member on the entity class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
@@ -136,7 +149,8 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     ///     Does not return properties defined on a base type.
     /// </summary>
     /// <remarks>
-    ///     This API only finds complex properties and does not find navigation, scalar or service properties.
+    ///     This API only finds complex properties and does not find navigation, scalar or service
+    // properties.
     /// </remarks>
     /// <param name="name">The property name.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
@@ -147,7 +161,8 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     ///     Gets the complex properties defined on this entity type.
     /// </summary>
     /// <remarks>
-    ///     This API only returns complex properties and does not find navigation, scalar or service properties.
+    ///     This API only returns complex properties and does not find navigation, scalar or service
+    // properties.
     /// </remarks>
     /// <returns>The complex properties defined on this entity type.</returns>
     new IEnumerable<IComplexProperty> GetComplexProperties();
@@ -183,10 +198,12 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     new IEnumerable<IPropertyBase> GetDeclaredMembers();
 
     /// <summary>
-    ///     Gets the member with the given name. Returns <see langword="null" /> if no member with the given name is defined.
+    ///     Gets the member with the given name. Returns <see langword="null" /> if no member with the
+    // given name is defined.
     /// </summary>
     /// <remarks>
-    ///     This API only finds scalar properties and does not find navigation, complex or service properties.
+    ///     This API only finds scalar properties and does not find navigation, complex or service
+    // properties.
     /// </remarks>
     /// <param name="name">The name of the property.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
@@ -205,19 +222,22 @@ public interface ITypeBase : IReadOnlyTypeBase, IAnnotatable
     IEnumerable<IPropertyBase> GetSnapshottableMembers();
 
     /// <summary>
-    ///     Returns all properties that implement <see cref="IProperty" />, including those on complex types.
+    ///     Returns all properties that implement <see cref="IProperty" />, including those on complex
+    // types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IProperty> GetFlattenedProperties();
 
     /// <summary>
-    ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on complex types.
+    ///     Returns all properties that implement <see cref="IComplexProperty" />, including those on
+    // complex types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IComplexProperty> GetFlattenedComplexProperties();
 
     /// <summary>
-    ///     Returns all declared properties that implement <see cref="IProperty" />, including those on complex types.
+    ///     Returns all declared properties that implement <see cref="IProperty" />, including those on
+    // complex types.
     /// </summary>
     /// <returns>The properties.</returns>
     IEnumerable<IProperty> GetFlattenedDeclaredProperties();

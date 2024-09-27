@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.Collections.Concurrent;
@@ -38,8 +39,10 @@ namespace Microsoft.AspNet.Facebook
         public string AppNamespace { get; set; }
 
         /// <summary>
-        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
-        /// redirect to when the user did not grant the required permissions. If value is not set it will result in a redirection
+        /// Gets or sets the URL path that the <see
+        // cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
+        /// redirect to when the user did not grant the required permissions. If value is not set it will
+        // result in a redirection
         /// to Facebook's home page.
         /// </summary>
         public string AuthorizationRedirectPath
@@ -53,8 +56,10 @@ namespace Microsoft.AspNet.Facebook
         }
 
         /// <summary>
-        /// Gets or sets the URL path that the <see cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
-        /// redirect to when the we determine that we are unable to create cookies. If value is not set it will result in a
+        /// Gets or sets the URL path that the <see
+        // cref="Microsoft.AspNet.Facebook.Authorization.FacebookAuthorizeFilter"/> will
+        /// redirect to when the we determine that we are unable to create cookies. If value is not set it
+        // will result in a
         /// redirection to Facebook's home page.
         /// </summary>
         public string CannotCreateCookieRedirectPath

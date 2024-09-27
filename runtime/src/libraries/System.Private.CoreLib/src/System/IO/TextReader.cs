@@ -203,14 +203,20 @@ namespace System.IO
         /// Reads a line of characters asynchronously and returns the data as a string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A value task that represents the asynchronous read operation. The value of the <c>TResult</c>
-        /// parameter contains the next line from the text reader, or is <see langword="null" /> if all of the characters have been read.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <returns>A value task that represents the asynchronous read operation. The value of the
+        // <c>TResult</c>
+        /// parameter contains the next line from the text reader, or is <see langword="null" /> if all of
+        // the characters have been read.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is
+        // larger than <see cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The text reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <remarks>
-        /// <para>The <see cref="TextReader"/> class is an abstract class. Therefore, you do not instantiate it in
-        /// your code. For an example of using the <see cref="ReadLineAsync(CancellationToken)"/> method, see the
+        /// <para>The <see cref="TextReader"/> class is an abstract class. Therefore, you do not instantiate
+        // it in
+        /// your code. For an example of using the <see cref="ReadLineAsync(CancellationToken)"/> method,
+        // see the
         /// <see cref="StreamReader.ReadLineAsync(CancellationToken)"/> method.</para>
         /// <para>If the current <see cref="TextReader"/> represents the standard input stream returned by
         /// the <c>Console.In</c> property, the <see cref="ReadLineAsync(CancellationToken)"/> method
@@ -231,17 +237,23 @@ namespace System.IO
         public virtual Task<string> ReadToEndAsync() => ReadToEndAsync(default);
 
         /// <summary>
-        /// Reads all characters from the current position to the end of the text reader asynchronously and returns them as one string.
+        /// Reads all characters from the current position to the end of the text reader asynchronously and
+        // returns them as one string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c> parameter contains
+        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c>
+        // parameter contains
         /// a string with the characters from the current position to the end of the text reader.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see
+        // cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The text reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <remarks>
-        /// <para>The <see cref="TextReader"/> class is an abstract class. Therefore, you do not instantiate it in
-        /// your code. For an example of using the <see cref="ReadToEndAsync(CancellationToken)"/> method, see the
+        /// <para>The <see cref="TextReader"/> class is an abstract class. Therefore, you do not instantiate
+        // it in
+        /// your code. For an example of using the <see cref="ReadToEndAsync(CancellationToken)"/> method,
+        // see the
         /// <see cref="StreamReader.ReadToEndAsync(CancellationToken)"/> method.</para>
         /// </remarks>
         public virtual async Task<string> ReadToEndAsync(CancellationToken cancellationToken)

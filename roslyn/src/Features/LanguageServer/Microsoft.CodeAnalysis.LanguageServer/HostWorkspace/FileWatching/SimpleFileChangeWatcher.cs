@@ -9,11 +9,13 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.FileWatching;
 
 /// <summary>
-/// A trivial implementation of <see cref="IFileChangeWatcher" /> that is built atop the framework <see cref="FileSystemWatcher" />. This is used if we can't
+/// A trivial implementation of <see cref="IFileChangeWatcher" /> that is built atop the framework
+// <see cref="FileSystemWatcher" />. This is used if we can't
 /// use the LSP one.
 /// </summary>
 /// <remarks>
-/// This implementation is not remotely efficient, but is available as a fallback implementation. If this needs to regularly be used, then this should get some improvements.
+/// This implementation is not remotely efficient, but is available as a fallback implementation. If
+// this needs to regularly be used, then this should get some improvements.
 /// </remarks>
 internal sealed class SimpleFileChangeWatcher : IFileChangeWatcher
 {
@@ -44,9 +46,12 @@ internal sealed class SimpleFileChangeWatcher : IFileChangeWatcher
 
             foreach (var watchedDirectory in watchedDirectories)
             {
-                // If the directory doesn't exist, we can't create a watcher for changes inside of it. In this case, we'll just skip this as a directory
-                // to watch; any requests for a watch within that directory will still create a one-off watcher for that specific file. That's not likely
-                // to be an issue in practice: directories that are missing would be things like global reference directories -- if it's not there, we
+                // If the directory doesn't exist, we can't create a watcher for changes inside of it. In this case,
+                // we'll just skip this as a directory
+                // to watch; any requests for a watch within that directory will still create a one-off watcher for
+                // that specific file. That's not likely
+                // to be an issue in practice: directories that are missing would be things like global reference
+                // directories -- if it's not there, we
                 // probably won't ever see a watch for a file under there later anyways.
                 if (Directory.Exists(watchedDirectory.Path))
                 {
@@ -111,7 +116,8 @@ internal sealed class SimpleFileChangeWatcher : IFileChangeWatcher
             {
                 _context = context;
 
-                // We always must create a watch on an entire directory, so create that, filtered to the single file name
+                // We always must create a watch on an entire directory, so create that, filtered to the single file
+                // name
                 var directoryPath = Path.GetDirectoryName(filePath)!;
 
                 // TODO: support missing directories properly

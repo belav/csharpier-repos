@@ -113,7 +113,8 @@ namespace System.Transactions.Tests
                     }
                 }
 
-                // Doesn't really matter what we specify for EnlistmentOutcome here. This is an SPC, so Phase2 won't happen for this enlistment.
+                // Doesn't really matter what we specify for EnlistmentOutcome here. This is an SPC, so Phase2 won't
+                // happen for this enlistment.
                 TestSinglePhaseEnlistment durable = new TestSinglePhaseEnlistment(
                     Phase1Vote.Prepared,
                     singlePhaseVote,

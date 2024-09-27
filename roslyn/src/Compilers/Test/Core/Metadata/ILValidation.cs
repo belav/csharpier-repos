@@ -384,7 +384,8 @@ namespace Roslyn.Test.Utilities
 
         /// <summary>
         /// Returns "method" element with a specified token.
-        /// <see cref="PdbToXmlOptions.IncludeTokens"/> must be set to include "token" attributes in "method" elements.
+        /// <see cref="PdbToXmlOptions.IncludeTokens"/> must be set to include "token" attributes in
+        // "method" elements.
         /// </summary>
         public static XElement GetMethodElement(XElement document, int methodToken) =>
             (

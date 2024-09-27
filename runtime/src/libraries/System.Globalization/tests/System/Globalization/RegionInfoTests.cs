@@ -84,7 +84,8 @@ namespace System.Globalization.Tests
 
                     CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("ja-JP");
 
-                    // Changing the current culture shouldn't affect the default current region as we get it from Windows settings.
+                    // Changing the current culture shouldn't affect the default current region as we get it from
+                    // Windows settings.
                     Assert.Equal(
                         ri.TwoLetterISORegionName,
                         RegionInfo.CurrentRegion.TwoLetterISORegionName
@@ -94,7 +95,8 @@ namespace System.Globalization.Tests
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        // We are testing with "no" as it match a neutral culture name. We want ensure this not conflict with region name.
+        // We are testing with "no" as it match a neutral culture name. We want ensure this not conflict
+        // with region name.
         [InlineData("no")]
         [InlineData("No")]
         [InlineData("NO")]
@@ -104,8 +106,10 @@ namespace System.Globalization.Tests
                 .Invoke(
                     name =>
                     {
-                        // It is important to do this test in the following order because we have internal cache for regions.
-                        // creating the region with the original input name should be the first to do to ensure not cached before.
+                        // It is important to do this test in the following order because we have internal cache for
+                        // regions.
+                        // creating the region with the original input name should be the first to do to ensure not cached
+                        // before.
                         string resultedName = new RegionInfo(name).Name;
                         string expectedName = new RegionInfo(name.ToUpperInvariant()).Name;
                         Assert.Equal(expectedName, resultedName);
@@ -364,9 +368,12 @@ namespace System.Globalization.Tests
         [Fact]
         public void ValidateThrowingWhenUsingCustomUnspecifiedLcid()
         {
-            // When trying to create RegionInfo using Lcid, we call LcidToLocaleName to map the Lcid to the culture name.
-            // LOCALE_CUSTOM_UNSPECIFIED (0x1000) is considered invalid Lcid to create cultures with. Sometimes Windows can
-            // map which is wrong. This happen if we enumerate the cultures before trying to create the RegionInfo object.
+            // When trying to create RegionInfo using Lcid, we call LcidToLocaleName to map the Lcid to the
+            // culture name.
+            // LOCALE_CUSTOM_UNSPECIFIED (0x1000) is considered invalid Lcid to create cultures with. Sometimes
+            // Windows can
+            // map which is wrong. This happen if we enumerate the cultures before trying to create the
+            // RegionInfo object.
             // This test is to ensure we'll not allow this creation in .NET.
 
             CultureInfo[] cultures = CultureInfo.GetCultures(CultureTypes.SpecificCultures);

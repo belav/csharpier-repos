@@ -11,10 +11,12 @@ namespace Microsoft.EntityFrameworkCore;
 /// <remarks>
 ///     <para>
 ///         This identifier is primarily intended as a correlation ID for logging and debugging such
-///         that it is easy to identify that multiple events are using the same or different context instances.
+///         that it is easy to identify that multiple events are using the same or different context
+// instances.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-dbcontext">DbContext lifetime, configuration, and initialization</see>
+///         See <see href="https://aka.ms/efcore-docs-dbcontext">DbContext lifetime, configuration,
+// and initialization</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -24,14 +26,16 @@ public readonly struct DbContextId
     ///     Compares this ID to another ID to see if they represent the same leased context.
     /// </summary>
     /// <param name="other">The other ID.</param>
-    /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they represent the same leased context; <see
+    // langword="false" /> otherwise.</returns>
     public bool Equals(DbContextId other) => InstanceId == other.InstanceId && Lease == other.Lease;
 
     /// <summary>
     ///     Compares this ID to another ID to see if they represent the same leased context.
     /// </summary>
     /// <param name="obj">The other ID.</param>
-    /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they represent the same leased context; <see
+    // langword="false" /> otherwise.</returns>
     public override bool Equals(object? obj) => obj is DbContextId other && Equals(other);
 
     /// <summary>
@@ -45,7 +49,8 @@ public readonly struct DbContextId
     /// </summary>
     /// <param name="left">The first ID.</param>
     /// <param name="right">The second ID.</param>
-    /// <returns><see langword="true" /> if they represent the same leased context; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they represent the same leased context; <see
+    // langword="false" /> otherwise.</returns>
     public static bool operator ==(DbContextId left, DbContextId right) => left.Equals(right);
 
     /// <summary>
@@ -53,14 +58,17 @@ public readonly struct DbContextId
     /// </summary>
     /// <param name="left">The first ID.</param>
     /// <param name="right">The second ID.</param>
-    /// <returns><see langword="true" /> if they represent different leased contexts; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if they represent different leased contexts; <see
+    // langword="false" /> otherwise.</returns>
     public static bool operator !=(DbContextId left, DbContextId right) => !left.Equals(right);
 
     /// <summary>
-    ///     Creates a new <see cref="DbContextId" /> with the given <see cref="InstanceId" /> and lease number.
+    ///     Creates a new <see cref="DbContextId" /> with the given <see cref="InstanceId" /> and lease
+    // number.
     /// </summary>
     /// <param name="id">A unique identifier for the <see cref="DbContext" /> being used.</param>
-    /// <param name="lease">A number indicating whether this is the first, second, third, etc. lease of this instance.</param>
+    /// <param name="lease">A number indicating whether this is the first, second, third, etc. lease of
+    // this instance.</param>
     public DbContextId(Guid id, int lease)
     {
         InstanceId = id;
@@ -77,7 +85,8 @@ public readonly struct DbContextId
     public Guid InstanceId { get; }
 
     /// <summary>
-    ///     A number that is incremented each time this particular <see cref="DbContext" /> instance is leased
+    ///     A number that is incremented each time this particular <see cref="DbContext" /> instance is
+    // leased
     ///     from the context pool.
     /// </summary>
     /// <remarks>

@@ -88,8 +88,10 @@ public class RazorComponentEndpointsStartup<TRootComponent>
         app.Use(
             (HttpContext context, Func<Task> next) =>
             {
-                // Completely insecure fake auth system with no password for tests. Do not do anything like this in real apps.
-                // It accepts a query parameter 'username' and then sets or deletes a cookie to hold that, and supplies a principal
+                // Completely insecure fake auth system with no password for tests. Do not do anything like this in
+                // real apps.
+                // It accepts a query parameter 'username' and then sets or deletes a cookie to hold that, and
+                // supplies a principal
                 // using this username (taken either from the cookie or query param).
                 const string cookieKey = "fake_username";
                 context.Request.Cookies.TryGetValue(cookieKey, out var username);
@@ -127,7 +129,8 @@ public class RazorComponentEndpointsStartup<TRootComponent>
 
     private static void MapEnhancedNavigationEndpoints(IEndpointRouteBuilder endpoints)
     {
-        // Used when testing that enhanced nav can show non-HTML responses (which it does by doing a full navigation)
+        // Used when testing that enhanced nav can show non-HTML responses (which it does by doing a full
+        // navigation)
         endpoints.Map("/nav/non-html-response", () => "Hello, this is plain text");
 
         // Used when testing that enhanced nav displays content even if the response is an error status code
@@ -148,8 +151,10 @@ public class RazorComponentEndpointsStartup<TRootComponent>
             "/nav/list-headers",
             async (HttpRequest request, HttpResponse response) =>
             {
-                // We have to accept enanced nav explicitly since the test is checking what headers are sent for enhanced nav requests
-                // Otherwise, the client will retry as a non-enhanced-nav request and the UI won't show the enhanced nav headers
+                // We have to accept enanced nav explicitly since the test is checking what headers are sent for
+                // enhanced nav requests
+                // Otherwise, the client will retry as a non-enhanced-nav request and the UI won't show the enhanced
+                // nav headers
                 response.Headers.Add("blazor-enhanced-nav", "allow");
 
                 response.ContentType = "text/html";

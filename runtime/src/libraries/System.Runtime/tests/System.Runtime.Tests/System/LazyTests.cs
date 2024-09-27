@@ -188,7 +188,8 @@ namespace System.Tests
         }
 
         //
-        // Do not use [Theory]. XUnit argument formatter can invoke the lazy.Value property underneath you and ruin the assumptions
+        // Do not use [Theory]. XUnit argument formatter can invoke the lazy.Value property underneath you
+        // and ruin the assumptions
         // made by the test.
         //
         [Fact]

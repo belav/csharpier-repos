@@ -3,7 +3,8 @@
 
 // Test probing of large stack frames.
 //
-// The JIT generates probes of large frames to ensure that each stack page is touched in sequence, and
+// The JIT generates probes of large frames to ensure that each stack page is touched in sequence,
+// and
 // none are skipped. This allows the OS to incrementally commit stack pages.
 //
 // The JIT generates different code sequences for different cases, typically:
@@ -11,7 +12,8 @@
 //    2-3 pages
 //    >= 3 pages
 //
-// Big frame sizes are accomplished with local structs that have very large explicit layout field offset.
+// Big frame sizes are accomplished with local structs that have very large explicit layout field
+// offset.
 //
 // Note that OS page sizes are typically 0x1000 (4096) bytes, but could be bigger.
 

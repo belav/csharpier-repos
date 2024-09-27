@@ -344,7 +344,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         }
 
         /// <summary>
-        /// Analyzes the assignment expression and rejects a given declaration if it is unsuitable for implicit typing.
+        /// Analyzes the assignment expression and rejects a given declaration if it is unsuitable for
+        // implicit typing.
         /// </summary>
         /// <returns>
         /// false, if implicit typing cannot be used.
@@ -420,9 +421,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 return false;
             }
 
-            // Get the conversion that occurred between the expression's type and type implied by the expression's context
+            // Get the conversion that occurred between the expression's type and type implied by the
+            // expression's context
             // and filter out implicit conversions. If an implicit conversion (other than identity) exists
-            // and if we're replacing the declaration with 'var' we'd be changing the semantics by inferring type of
+            // and if we're replacing the declaration with 'var' we'd be changing the semantics by inferring
+            // type of
             // initializer expression and thereby losing the conversion.
             var conversion = semanticModel.GetConversion(expression, cancellationToken);
             if (conversion.IsIdentity)

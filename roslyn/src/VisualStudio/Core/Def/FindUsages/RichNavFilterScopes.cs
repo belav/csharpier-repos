@@ -160,7 +160,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
             if (entry.TryGetValue(StandardTableKeyNames.ItemOrigin, out ItemOrigin entryOrigin))
                 return entryOrigin <= _targetOrigin;
 
-            // For backwards compatibility, consider items without ItemOrigin to be ItemOrigin.Exact (always matched)
+            // For backwards compatibility, consider items without ItemOrigin to be ItemOrigin.Exact (always
+            // matched)
             return true;
         }
     }

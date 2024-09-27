@@ -40,7 +40,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
 
         /// <summary>
         /// More than one non-virtual member with this name exists in the type hierarchy.
-        /// The ResultProvider should include the declaring type of this member in the member name to disambiguate.
+        /// The ResultProvider should include the declaring type of this member in the member name to
+        // disambiguate.
         /// </summary>
         IncludeTypeInMemberName = 1 << 3,
 
@@ -73,7 +74,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         public readonly bool IsFavorite;
 
         /// <summary>
-        /// Exists to correctly order fields with the same name from different types in the inheritance hierarchy.
+        /// Exists to correctly order fields with the same name from different types in the inheritance
+        // hierarchy.
         /// </summary>
         private readonly int _inheritanceLevel;
 

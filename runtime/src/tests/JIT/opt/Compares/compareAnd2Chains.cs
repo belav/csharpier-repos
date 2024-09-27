@@ -268,7 +268,7 @@ public class ComparisonTestAnd2Chains
         consume<uint>(a1, a2);
     }
 
-    /* If/Else conditions that consume. */
+/* If/Else conditions that consume. */
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Theory]

@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore;
 ///     An exception that is thrown when an error is encountered while saving to the database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for
+// more information and examples.
 /// </remarks>
 [Serializable]
 public class DbUpdateException : Exception
@@ -89,7 +90,8 @@ public class DbUpdateException : Exception
     }
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized form.
+    ///     Initializes a new instance of the <see cref="DbUpdateException" /> class from a serialized
+    // form.
     /// </summary>
     /// <param name="info">The serialization info.</param>
     /// <param name="context">The streaming context being used.</param>
@@ -100,7 +102,8 @@ public class DbUpdateException : Exception
         : base(info, context) { }
 
     /// <summary>
-    ///     Gets the entries that were involved in the error. Typically this is a single entry, but in some cases it
+    ///     Gets the entries that were involved in the error. Typically this is a single entry, but in
+    // some cases it
     ///     may be zero or multiple entries.
     /// </summary>
     public virtual IReadOnlyList<EntityEntry> Entries => _entries ??= new List<EntityEntry>();

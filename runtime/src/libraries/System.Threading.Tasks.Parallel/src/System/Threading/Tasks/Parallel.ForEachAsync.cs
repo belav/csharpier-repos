@@ -13,10 +13,13 @@ namespace System.Threading.Tasks
         /// <summary>Executes a for loop in which iterations may run in parallel.</summary>
         /// <param name="fromInclusive">The start index, inclusive.</param>
         /// <param name="toExclusive">The end index, exclusive.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see
+        // langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForAsync<T>(
             T fromInclusive,
             T toExclusive,
@@ -43,11 +46,15 @@ namespace System.Threading.Tasks
         /// <summary>Executes a for loop in which iterations may run in parallel.</summary>
         /// <param name="fromInclusive">The start index, inclusive.</param>
         /// <param name="toExclusive">The end index, exclusive.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see
+        // langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForAsync<T>(
             T fromInclusive,
             T toExclusive,
@@ -76,10 +83,13 @@ namespace System.Threading.Tasks
         /// <param name="fromInclusive">The start index, inclusive.</param>
         /// <param name="toExclusive">The end index, exclusive.</param>
         /// <param name="parallelOptions">An object that configures the behavior of this operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see
+        // langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForAsync<T>(
             T fromInclusive,
             T toExclusive,
@@ -105,15 +115,20 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="T">The type of the data in the source.</typeparam>
         /// <param name="fromInclusive">The start index, inclusive.</param>
         /// <param name="toExclusive">The end index, exclusive.</param>
-        /// <param name="dop">The degree of parallelism, or the number of operations to allow to run in parallel.</param>
+        /// <param name="dop">The degree of parallelism, or the number of operations to allow to run in
+        // parallel.</param>
         /// <param name="scheduler">The task scheduler on which all code should execute.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="body"/> argument is <see
+        // langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
         private static Task ForAsync<T>(
             T fromInclusive,
@@ -202,7 +217,8 @@ namespace System.Threading.Tasks
                     while (!state.Cancellation.IsCancellationRequested)
                     {
                         // Get the next element from the enumerator. For some types, we can get the next element with just
-                        // interlocked operations, avoiding the need to take a lock.  For other types, we need to take a lock.
+                        // interlocked operations, avoiding the need to take a lock.  For other types, we need to take a
+                        // lock.
                         T element;
                         if (Interlockable())
                         {
@@ -243,9 +259,12 @@ namespace System.Threading.Tasks
 
                         // If the remaining dop allows it and we've not yet queued the next worker, do so now.  We wait
                         // until after we've grabbed an item from the enumerator to a) avoid unnecessary contention on the
-                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each worker
-                        // is responsible only for creating the next worker, which in turn means there can't be any contention
-                        // on creating workers (though it's possible one worker could be executing while we're creating the next).
+                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each
+                        // worker
+                        // is responsible only for creating the next worker, which in turn means there can't be any
+                        // contention
+                        // on creating workers (though it's possible one worker could be executing while we're creating the
+                        // next).
                         if (!launchedNext)
                         {
                             launchedNext = true;
@@ -297,13 +316,17 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An enumerable data source.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForEachAsync<TSource>(
             IEnumerable<TSource> source,
             Func<TSource, CancellationToken, ValueTask> body
@@ -321,14 +344,19 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An enumerable data source.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForEachAsync<TSource>(
             IEnumerable<TSource> source,
             CancellationToken cancellationToken,
@@ -347,12 +375,15 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An enumerable data source.</param>
         /// <param name="parallelOptions">An object that configures the behavior of this operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
         public static Task ForEachAsync<TSource>(
             IEnumerable<TSource> source,
@@ -373,14 +404,18 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An enumerable data source.</param>
         /// <param name="dop">A integer indicating how many operations to allow to run in parallel.</param>
         /// <param name="scheduler">The task scheduler on which all code should execute.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The<paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The<paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
         private static Task ForEachAsync<TSource>(
             IEnumerable<TSource> source,
@@ -412,7 +447,8 @@ namespace System.Threading.Tasks
                     // Continue to loop while there are more elements to be processed.
                     while (!state.Cancellation.IsCancellationRequested)
                     {
-                        // Get the next element from the enumerator.  This requires asynchronously locking around MoveNext/Current.
+                        // Get the next element from the enumerator.  This requires asynchronously locking around
+                        // MoveNext/Current.
                         TSource element;
                         await state.AcquireLock();
                         try
@@ -435,9 +471,12 @@ namespace System.Threading.Tasks
 
                         // If the remaining dop allows it and we've not yet queued the next worker, do so now.  We wait
                         // until after we've grabbed an item from the enumerator to a) avoid unnecessary contention on the
-                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each worker
-                        // is responsible only for creating the next worker, which in turn means there can't be any contention
-                        // on creating workers (though it's possible one worker could be executing while we're creating the next).
+                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each
+                        // worker
+                        // is responsible only for creating the next worker, which in turn means there can't be any
+                        // contention
+                        // on creating workers (though it's possible one worker could be executing while we're creating the
+                        // next).
                         if (!launchedNext)
                         {
                             launchedNext = true;
@@ -497,13 +536,17 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An asynchronous enumerable data source.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForEachAsync<TSource>(
             IAsyncEnumerable<TSource> source,
             Func<TSource, CancellationToken, ValueTask> body
@@ -521,14 +564,19 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An asynchronous enumerable data source.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
-        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations in parallel.</remarks>
+        /// <remarks>The operation will execute at most <see cref="Environment.ProcessorCount"/> operations
+        // in parallel.</remarks>
         public static Task ForEachAsync<TSource>(
             IAsyncEnumerable<TSource> source,
             CancellationToken cancellationToken,
@@ -547,12 +595,15 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An asynchronous enumerable data source.</param>
         /// <param name="parallelOptions">An object that configures the behavior of this operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
         public static Task ForEachAsync<TSource>(
             IAsyncEnumerable<TSource> source,
@@ -573,14 +624,18 @@ namespace System.Threading.Tasks
             );
         }
 
-        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which iterations may run in parallel.</summary>
+        /// <summary>Executes a for each operation on an <see cref="IAsyncEnumerable{TSource}"/> in which
+        // iterations may run in parallel.</summary>
         /// <typeparam name="TSource">The type of the data in the source.</typeparam>
         /// <param name="source">An asynchronous enumerable data source.</param>
         /// <param name="dop">A integer indicating how many operations to allow to run in parallel.</param>
         /// <param name="scheduler">The task scheduler on which all code should execute.</param>
-        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each operation.</param>
-        /// <param name="body">An asynchronous delegate that is invoked once per element in the data source.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref name="body"/> argument is <see langword="null"/>.</exception>
+        /// <param name="cancellationToken">A cancellation token that may be used to cancel the for each
+        // operation.</param>
+        /// <param name="body">An asynchronous delegate that is invoked once per element in the data
+        // source.</param>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> argument or <paramref
+        // name="body"/> argument is <see langword="null"/>.</exception>
         /// <returns>A task that represents the entire for each operation.</returns>
         private static Task ForEachAsync<TSource>(
             IAsyncEnumerable<TSource> source,
@@ -612,7 +667,8 @@ namespace System.Threading.Tasks
                     // Continue to loop while there are more elements to be processed.
                     while (!state.Cancellation.IsCancellationRequested)
                     {
-                        // Get the next element from the enumerator.  This requires asynchronously locking around MoveNextAsync/Current.
+                        // Get the next element from the enumerator.  This requires asynchronously locking around
+                        // MoveNextAsync/Current.
                         TSource element;
                         await state.AcquireLock();
                         try
@@ -635,9 +691,12 @@ namespace System.Threading.Tasks
 
                         // If the remaining dop allows it and we've not yet queued the next worker, do so now.  We wait
                         // until after we've grabbed an item from the enumerator to a) avoid unnecessary contention on the
-                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each worker
-                        // is responsible only for creating the next worker, which in turn means there can't be any contention
-                        // on creating workers (though it's possible one worker could be executing while we're creating the next).
+                        // serialized resource, and b) avoid queueing another work if there aren't any more items.  Each
+                        // worker
+                        // is responsible only for creating the next worker, which in turn means there can't be any
+                        // contention
+                        // on creating workers (though it's possible one worker could be executing while we're creating the
+                        // next).
                         if (!launchedNext)
                         {
                             launchedNext = true;
@@ -697,10 +756,12 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Gets the default degree of parallelism to use when none is explicitly provided.</summary>
+        /// <summary>Gets the default degree of parallelism to use when none is explicitly
+        // provided.</summary>
         private static int DefaultDegreeOfParallelism => Environment.ProcessorCount;
 
-        /// <summary>Stores the state associated with a ForEachAsync operation, shared between all its workers.</summary>
+        /// <summary>Stores the state associated with a ForEachAsync operation, shared between all its
+        // workers.</summary>
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private abstract class ForEachAsyncState<TSource>
             : TaskCompletionSource,
@@ -716,21 +777,25 @@ namespace System.Threading.Tasks
             /// The delegate to invoke on each worker to run the enumerator processing loop.
             /// </summary>
             /// <remarks>
-            /// This could have been an action rather than a func, but it returns a task so that the task body is an async Task
-            /// method rather than async void, even though the worker body catches all exceptions and the returned Task is ignored.
+            /// This could have been an action rather than a func, but it returns a task so that the task body
+            // is an async Task
+            /// method rather than async void, even though the worker body catches all exceptions and the
+            // returned Task is ignored.
             /// </remarks>
             private readonly Func<object, Task> _taskBody;
 
             /// <summary>The <see cref="TaskScheduler"/> on which all work should be performed.</summary>
             private readonly TaskScheduler _scheduler;
 
-            /// <summary>The <see cref="ExecutionContext"/> present at the time of the ForEachAsync invocation.  This is only used if on the default scheduler.</summary>
+            /// <summary>The <see cref="ExecutionContext"/> present at the time of the ForEachAsync invocation.
+            // This is only used if on the default scheduler.</summary>
             private readonly ExecutionContext? _executionContext;
 
             /// <summary>Semaphore used to provide exclusive access to the enumerator.</summary>
             private readonly SemaphoreSlim? _lock;
 
-            /// <summary>The number of outstanding workers.  When this hits 0, the operation has completed.</summary>
+            /// <summary>The number of outstanding workers.  When this hits 0, the operation has
+            // completed.</summary>
             private int _completionRefCount;
 
             /// <summary>Any exceptions incurred during execution.</summary>
@@ -772,7 +837,8 @@ namespace System.Threading.Tasks
                 );
             }
 
-            /// <summary>Queues another worker if allowed by the remaining degree of parallelism permitted.</summary>
+            /// <summary>Queues another worker if allowed by the remaining degree of parallelism
+            // permitted.</summary>
             /// <remarks>This is not thread-safe and must only be invoked by one worker at a time.</remarks>
             public void QueueWorkerIfDopAvailable()
             {
@@ -780,12 +846,18 @@ namespace System.Threading.Tasks
                 {
                     _remainingDop--;
 
-                    // Queue the invocation of the worker/task body.  Note that we explicitly do not pass a cancellation token here,
-                    // as the task body is what's responsible for completing the ForEachAsync task, for decrementing the reference count
-                    // on pending tasks, and for cleaning up state.  If a token were passed to StartNew (which simply serves to stop the
-                    // task from starting to execute if it hasn't yet by the time cancellation is requested), all of that logic could be
-                    // skipped, and bad things could ensue, e.g. deadlocks, leaks, etc.  Also note that we need to increment the pending
-                    // work item ref count prior to queueing the worker in order to avoid race conditions that could lead to temporarily
+                    // Queue the invocation of the worker/task body.  Note that we explicitly do not pass a cancellation
+                    // token here,
+                    // as the task body is what's responsible for completing the ForEachAsync task, for decrementing the
+                    // reference count
+                    // on pending tasks, and for cleaning up state.  If a token were passed to StartNew (which simply
+                    // serves to stop the
+                    // task from starting to execute if it hasn't yet by the time cancellation is requested), all of
+                    // that logic could be
+                    // skipped, and bad things could ensue, e.g. deadlocks, leaks, etc.  Also note that we need to
+                    // increment the pending
+                    // work item ref count prior to queueing the worker in order to avoid race conditions that could
+                    // lead to temporarily
                     // and erroneously bouncing at zero, which would trigger completion too early.
                     Interlocked.Increment(ref _completionRefCount);
                     if (_scheduler == TaskScheduler.Default)
@@ -816,13 +888,20 @@ namespace System.Threading.Tasks
             /// <summary>Asynchronously acquires exclusive access to the enumerator.</summary>
             public Task AcquireLock()
             {
-                // We explicitly don't pass this.Cancellation to WaitAsync.  Doing so adds overhead, and it isn't actually
-                // necessary. All of the operations that monitor the lock are part of the same ForEachAsync operation, and the Task
-                // returned from ForEachAsync can't complete until all of the constituent operations have completed, including whoever
-                // holds the lock while this worker is waiting on the lock.  Thus, the lock will need to be released for the overall
-                // operation to complete.  Passing the token would allow the overall operation to potentially complete a bit faster in
-                // the face of cancellation, in exchange for making it a bit slower / more overhead in the common case of cancellation
-                // not being requested.  We want to optimize for the latter.  This also then avoids an exception throw / catch when
+                // We explicitly don't pass this.Cancellation to WaitAsync.  Doing so adds overhead, and it isn't
+                // actually
+                // necessary. All of the operations that monitor the lock are part of the same ForEachAsync
+                // operation, and the Task
+                // returned from ForEachAsync can't complete until all of the constituent operations have completed,
+                // including whoever
+                // holds the lock while this worker is waiting on the lock.  Thus, the lock will need to be released
+                // for the overall
+                // operation to complete.  Passing the token would allow the overall operation to potentially
+                // complete a bit faster in
+                // the face of cancellation, in exchange for making it a bit slower / more overhead in the common
+                // case of cancellation
+                // not being requested.  We want to optimize for the latter.  This also then avoids an exception
+                // throw / catch when
                 // cancellation is requested.
                 Debug.Assert(_lock is not null, "Should only be invoked when _lock is non-null");
                 return _lock.WaitAsync(CancellationToken.None);
@@ -835,7 +914,8 @@ namespace System.Threading.Tasks
                 _lock.Release();
             }
 
-            /// <summary>Stores an exception and triggers cancellation in order to alert all workers to stop as soon as possible.</summary>
+            /// <summary>Stores an exception and triggers cancellation in order to alert all workers to stop as
+            // soon as possible.</summary>
             /// <param name="e">The exception.</param>
             public void RecordException(Exception e)
             {
@@ -894,7 +974,8 @@ namespace System.Threading.Tasks
                 Debug.Assert(taskSet, "Complete should only be called once.");
             }
 
-            /// <summary>Executes the task body using the <see cref="ExecutionContext"/> captured when ForEachAsync was invoked.</summary>
+            /// <summary>Executes the task body using the <see cref="ExecutionContext"/> captured when
+            // ForEachAsync was invoked.</summary>
             void IThreadPoolWorkItem.Execute()
             {
                 Debug.Assert(
@@ -917,7 +998,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Stores the state associated with an IEnumerable ForEachAsync operation, shared between all its workers.</summary>
+        /// <summary>Stores the state associated with an IEnumerable ForEachAsync operation, shared between
+        // all its workers.</summary>
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private sealed class SyncForEachAsyncState<TSource>
             : ForEachAsyncState<TSource>,
@@ -947,7 +1029,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Stores the state associated with an IAsyncEnumerable ForEachAsync operation, shared between all its workers.</summary>
+        /// <summary>Stores the state associated with an IAsyncEnumerable ForEachAsync operation, shared
+        // between all its workers.</summary>
         /// <typeparam name="TSource">Specifies the type of data being enumerated.</typeparam>
         private sealed class AsyncForEachAsyncState<TSource>
             : ForEachAsyncState<TSource>,
@@ -977,7 +1060,8 @@ namespace System.Threading.Tasks
             }
         }
 
-        /// <summary>Stores the state associated with an IAsyncEnumerable ForEachAsync operation, shared between all its workers.</summary>
+        /// <summary>Stores the state associated with an IAsyncEnumerable ForEachAsync operation, shared
+        // between all its workers.</summary>
         /// <typeparam name="T">Specifies the type of data being enumerated.</typeparam>
         private sealed class ForEachState<T> : ForEachAsyncState<T>, IDisposable
         {

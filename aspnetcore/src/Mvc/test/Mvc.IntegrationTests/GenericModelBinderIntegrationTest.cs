@@ -219,7 +219,8 @@ public class GenericModelBinderIntegrationTest
         Assert.True(modelState.IsValid);
     }
 
-    // Similar to the GenericModelBinder_BindsCollection_ElementTypeUsesGreedyModelBinder_WithPrefix_Success
+    // Similar to the
+    // GenericModelBinder_BindsCollection_ElementTypeUsesGreedyModelBinder_WithPrefix_Success
     // scenario but mis-configured. Model using a BindingSource for which no ModelBinder is enabled.
     [Fact]
     public async Task GenericModelBinder_BindsCollection_ElementTypeUsesGreedyBindingSource_WithPrefix_NullElement()

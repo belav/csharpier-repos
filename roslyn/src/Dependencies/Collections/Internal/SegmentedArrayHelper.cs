@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         {
             return Unsafe.SizeOf<T>() switch
             {
-                // Hard code common values since not all versions of the .NET JIT support reducing this computation to a
+                // Hard code common values since not all versions of the .NET JIT support reducing this computation
+                // to a
                 // constant value at runtime. Values are validated against the reference implementation in
                 // CalculateSegmentSize in unit tests.
                 4 => 16384,
@@ -45,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         {
             return Unsafe.SizeOf<T>() switch
             {
-                // Hard code common values since not all versions of the .NET JIT support reducing this computation to a
+                // Hard code common values since not all versions of the .NET JIT support reducing this computation
+                // to a
                 // constant value at runtime. Values are validated against the reference implementation in
                 // CalculateSegmentSize in unit tests.
                 4 => 14,
@@ -69,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         {
             return Unsafe.SizeOf<T>() switch
             {
-                // Hard code common values since not all versions of the .NET JIT support reducing this computation to a
+                // Hard code common values since not all versions of the .NET JIT support reducing this computation
+                // to a
                 // constant value at runtime. Values are validated against the reference implementation in
                 // CalculateSegmentSize in unit tests.
                 4 => 16383,
@@ -89,7 +92,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         /// <summary>
-        /// Calculates the maximum number of elements of size <paramref name="elementSize"/> which can fit into an array
+        /// Calculates the maximum number of elements of size <paramref name="elementSize"/> which can fit
+        // into an array
         /// which has the following characteristics:
         /// <list type="bullet">
         /// <item><description>The array can be allocated in the small object heap.</description></item>
@@ -101,6 +105,8 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static int CalculateSegmentSize(int elementSize)
         {
             // Default Large Object Heap size threshold
+            //
+            //
             // https://github.com/dotnet/runtime/blob/c9d69e38d0e54bea5d188593ef6c3b30139f3ab1/src/coreclr/src/gc/gc.h#L111
             const int Threshold = 85000;
 
@@ -120,10 +126,13 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         /// <summary>
-        /// Calculates a shift which can be applied to an absolute index to get the page index within a segmented array.
+        /// Calculates a shift which can be applied to an absolute index to get the page index within a
+        // segmented array.
         /// </summary>
-        /// <param name="segmentSize">The number of elements in each page of the segmented array. Must be a power of 2.</param>
-        /// <returns>The shift to apply to the absolute index to get the page index within a segmented array.</returns>
+        /// <param name="segmentSize">The number of elements in each page of the segmented array. Must be a
+        // power of 2.</param>
+        /// <returns>The shift to apply to the absolute index to get the page index within a segmented
+        // array.</returns>
         private static int CalculateSegmentShift(int segmentSize)
         {
             var segmentShift = 0;
@@ -136,11 +145,14 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         }
 
         /// <summary>
-        /// Calculates a mask, which can be applied to an absolute index to get the index within a page of a segmented
+        /// Calculates a mask, which can be applied to an absolute index to get the index within a page of a
+        // segmented
         /// array.
         /// </summary>
-        /// <param name="segmentSize">The number of elements in each page of the segmented array. Must be a power of 2.</param>
-        /// <returns>The bit mask to obtain the index within a page from an absolute index within a segmented array.</returns>
+        /// <param name="segmentSize">The number of elements in each page of the segmented array. Must be a
+        // power of 2.</param>
+        /// <returns>The bit mask to obtain the index within a page from an absolute index within a
+        // segmented array.</returns>
         private static int CalculateOffsetMask(int segmentSize)
         {
             Debug.Assert(
@@ -163,6 +175,7 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
         private static int InlineCalculateSegmentShift(int elementSize)
         {
             // Default Large Object Heap size threshold
+            //
             // https://github.com/dotnet/runtime/blob/c9d69e38d0e54bea5d188593ef6c3b30139f3ab1/src/coreclr/src/gc/gc.h#L111
             const uint Threshold = 85000;
             return System.Numerics.BitOperations.Log2(

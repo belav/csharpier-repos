@@ -2,7 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 //
-// This file is a line by line port of callingconvention.h from the CLR with the intention that we may wish to merge
+// This file is a line by line port of callingconvention.h from the CLR with the intention that we
+// may wish to merge
 // changes from the CLR in at a later time. As such, the normal coding conventions are ignored.
 //
 
@@ -39,8 +40,10 @@
 #error Unknown architecture!
 #endif
 
-// Provides an abstraction over platform specific calling conventions (specifically, the calling convention
-// utilized by the JIT on that platform). The caller enumerates each argument of a signature in turn, and is
+// Provides an abstraction over platform specific calling conventions (specifically, the calling
+// convention
+// utilized by the JIT on that platform). The caller enumerates each argument of a signature in
+// turn, and is
 // provided with information mapping that argument into registers and/or stack locations.
 
 using System;
@@ -211,7 +214,8 @@ namespace Internal.Runtime
         }
     }
 
-    // This struct isn't used by x86, but exists for compatibility with the definition of the CallDescrData struct
+    // This struct isn't used by x86, but exists for compatibility with the definition of the
+    // CallDescrData struct
     struct FloatArgumentRegisters { }
 #pragma warning restore 0169, 0649
 
@@ -323,7 +327,8 @@ namespace Internal.Runtime
 #endif
 
     //
-    // TransitionBlock is layout of stack frame of method call, saved argument registers and saved callee saved registers. Even though not
+    // TransitionBlock is layout of stack frame of method call, saved argument registers and saved
+    // callee saved registers. Even though not
     // all fields are used all the time, we use uniform form for simplicity.
     //
     internal struct TransitionBlock
@@ -433,7 +438,8 @@ namespace Internal.Runtime
 #endif
 #pragma warning restore 0169, 0649
 
-        // The transition block should define everything pushed by callee. The code assumes in number of places that
+        // The transition block should define everything pushed by callee. The code assumes in number of
+        // places that
         // end of the transition block is caller's stack pointer.
 
         public static unsafe byte GetOffsetOfArgs()

@@ -208,7 +208,8 @@ namespace Microsoft.AspNetCore.SignalR.Tests
         {
             var serviceCollection = new ServiceCollection();
 
-            // null is special when the default options setup runs, so we set to null to verify that our options run after the default
+            // null is special when the default options setup runs, so we set to null to verify that our options
+            // run after the default
             // setup runs
             serviceCollection.AddSignalR(options =>
             {

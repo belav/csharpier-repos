@@ -12,7 +12,8 @@ namespace System.Reflection
     //  - Immutable, unlike the public AssemblyName
     //  - Has a useful Equals() override, unlike the public AssemblyName.
     //
-    // We use this as our internal interchange type and only convert to and from the public AssemblyName class at public boundaries.
+    // We use this as our internal interchange type and only convert to and from the public AssemblyName
+    // class at public boundaries.
     //
     public sealed class RuntimeAssemblyName : IEquatable<RuntimeAssemblyName>
     {
@@ -67,8 +68,10 @@ namespace System.Reflection
         // Optional public key (if Flags.PublicKey == true) or public key token.
         public byte[]? PublicKeyOrToken { get; }
 
-        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use as keys in a cache
-        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding rules or
+        // Equality - this compares every bit of data in the RuntimeAssemblyName which is acceptable for use
+        // as keys in a cache
+        // where semantic duplication is permissible. This method is *not* meant to define ref->def binding
+        // rules or
         // assembly binding unification rules.
         public bool Equals(RuntimeAssemblyName? other)
         {
@@ -132,7 +135,8 @@ namespace System.Reflection
         }
 
         //
-        // Converts an RuntimeAssemblyName to a freshly allocated AssemblyName with no data aliasing to any other object.
+        // Converts an RuntimeAssemblyName to a freshly allocated AssemblyName with no data aliasing to any
+        // other object.
         //
         public AssemblyName ToAssemblyName()
         {
@@ -142,7 +146,8 @@ namespace System.Reflection
         }
 
         //
-        // Copies a RuntimeAssemblyName into a freshly allocated AssemblyName with no data aliasing to any other object.
+        // Copies a RuntimeAssemblyName into a freshly allocated AssemblyName with no data aliasing to any
+        // other object.
         //
         public void CopyToAssemblyName(AssemblyName blank)
         {
@@ -152,8 +157,10 @@ namespace System.Reflection
             if (this.CultureName != null)
                 blank.CultureName = this.CultureName;
 
-            // Our "Flags" contain both the classic flags and the ProcessorArchitecture + ContentType bits. The public AssemblyName has separate properties for
-            // these. The setters for these properties quietly mask out any bits intended for the other one, so we needn't do that ourselves..
+            // Our "Flags" contain both the classic flags and the ProcessorArchitecture + ContentType bits. The
+            // public AssemblyName has separate properties for
+            // these. The setters for these properties quietly mask out any bits intended for the other one, so
+            // we needn't do that ourselves..
             blank.Flags = ExtractAssemblyNameFlags(this.Flags);
             blank.ContentType = ExtractAssemblyContentType(this.Flags);
 #pragma warning disable SYSLIB0037 // AssemblyName.ProcessorArchitecture is obsolete
@@ -162,7 +169,8 @@ namespace System.Reflection
 
             if (this.PublicKeyOrToken != null)
             {
-                // We must not hand out our own copy of the PKT to AssemblyName as AssemblyName is amazingly trusting and gives untrusted callers
+                // We must not hand out our own copy of the PKT to AssemblyName as AssemblyName is amazingly
+                // trusting and gives untrusted callers
                 // full freedom to scribble on its PKT array. (As do we but we only have trusted callers!)
                 var pkCopy = (byte[])this.PublicKeyOrToken.Clone();
 

@@ -169,7 +169,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             }
             else
             {
-                // Same automation name can't be set for control for accessibility purpose. So add the line number info.
+                // Same automation name can't be set for control for accessibility purpose. So add the line number
+                // info.
                 var automationName = string.Format(
                     ServicesVSResources.Multiple_members_are_inherited_on_line_0,
                     tag.LineNumber

@@ -193,7 +193,8 @@ namespace System.DirectoryServices.AccountManagement
                     } while (needToRepeat);
                 }
 
-                // These are values whose insertion has completed, but after we already loaded the ResultSet from the store.
+                // These are values whose insertion has completed, but after we already loaded the ResultSet from
+                // the store.
                 if (_currentMode == CurrentEnumeratorMode.InsertedValuesCompleted)
                 {
                     GlobalDebug.WriteLineIf(
@@ -317,7 +318,8 @@ namespace System.DirectoryServices.AccountManagement
 
         private Principal _current;
 
-        // Remember: these are references to objects held by the PrincipalCollection class from which we came.
+        // Remember: these are references to objects held by the PrincipalCollection class from which we
+        // came.
         // We don't own these, and shouldn't Dispose the ResultSet.
         //
         // SYNCHRONIZATION
@@ -362,7 +364,8 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        // When this enumerator was constructed, to detect changes made to the PrincipalCollection after it was constructed
+        // When this enumerator was constructed, to detect changes made to the PrincipalCollection after it
+        // was constructed
         private readonly DateTime _creationTime = DateTime.UtcNow;
 
         private readonly PrincipalCollection _memberCollection;

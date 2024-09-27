@@ -12,8 +12,10 @@ namespace System.Diagnostics
     using System.Security.Permissions;
     using Microsoft.Win32;
 
-    // All of this code was ported to native and this implementation is no longer used.  It is not meant to be accessed directly.
-    // This code was no longer maintained, and it accessed the same shared memory that the new code accessed.  To be certain there
+    // All of this code was ported to native and this implementation is no longer used.  It is not meant
+    // to be accessed directly.
+    // This code was no longer maintained, and it accessed the same shared memory that the new code
+    // accessed.  To be certain there
     // are no security holes and no serious bugs, we have removed all of the real code.
 
 

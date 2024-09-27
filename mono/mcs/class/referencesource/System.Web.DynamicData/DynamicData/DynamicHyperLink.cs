@@ -15,16 +15,23 @@ using System.Web.UI.WebControls;
 namespace System.Web.DynamicData
 {
     /// <summary>
-    /// <para>A control that displays links to table actions based on routing rules. It will not generate links for actions that are not
-    /// allowed by the routing rules. It can work in 3 modes: explicit, databinding to MetaTable, or databinding to a data row.</para>
-    /// <para>Databinding to MetaTable allows for creating links to actions for a collection of MetaTable objects (such as in the Default.aspx
+    /// <para>A control that displays links to table actions based on routing rules. It will not
+    // generate links for actions that are not
+    /// allowed by the routing rules. It can work in 3 modes: explicit, databinding to MetaTable, or
+    // databinding to a data row.</para>
+    /// <para>Databinding to MetaTable allows for creating links to actions for a collection of
+    // MetaTable objects (such as in the Default.aspx
     /// page in the project templates)</para>
-    /// <para>Databinding to a data row allows for creating links to actions for data rows retrieved from a database. These are usually used with
+    /// <para>Databinding to a data row allows for creating links to actions for data rows retrieved
+    // from a database. These are usually used with
     /// Edit and Details actions.</para>
-    /// <para>Explicit mode allows for links to non-item-specific actions (like List and Insert) and is achieved by properly setting
-    /// ContextTypeName, Table, and Action properties. This is done in the PreRender phase if the NavigateUrl property is null (i.e. it has not
+    /// <para>Explicit mode allows for links to non-item-specific actions (like List and Insert) and is
+    // achieved by properly setting
+    /// ContextTypeName, Table, and Action properties. This is done in the PreRender phase if the
+    // NavigateUrl property is null (i.e. it has not
     /// been set explicitly or did not get set in one of the databinding scenarios.)</para>
-    /// <para>Extra route parameters can be provided by declaring expando attributes on the controls markup.</para>
+    /// <para>Extra route parameters can be provided by declaring expando attributes on the controls
+    // markup.</para>
     /// </summary>
     [SuppressMessage(
         "Microsoft.Naming",

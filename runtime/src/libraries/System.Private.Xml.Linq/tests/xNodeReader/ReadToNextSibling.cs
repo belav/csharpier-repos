@@ -203,9 +203,12 @@ namespace CoreXml.Test.XLinq
                     DataReader.Dispose();
                 }
 
-                //[Variation("Read to next sibling with same names 1", Priority = 1, Params = new object[] { "NNS", "<root><a att='1'/><a att='2'/><a att='3'/></root>" })]
-                //[Variation("Read on next sibling with same names 2", Priority = 1, Params = new object[] { "DNS", "<root xmlns='a'><a att='1'/><a att='2'/><a att='3'/></root>" })]
-                //[Variation("Read on next sibling with same names 3", Priority = 1, Params = new object[] { "NS", "<root xmlns:a='a'><a:a att='1'/><a:a att='2'/><a:a att='3'/></root>" })]
+                //[Variation("Read to next sibling with same names 1", Priority = 1, Params = new object[] { "NNS",
+                // "<root><a att='1'/><a att='2'/><a att='3'/></root>" })]
+                //[Variation("Read on next sibling with same names 2", Priority = 1, Params = new object[] { "DNS",
+                // "<root xmlns='a'><a att='1'/><a att='2'/><a att='3'/></root>" })]
+                //[Variation("Read on next sibling with same names 3", Priority = 1, Params = new object[] { "NS",
+                // "<root xmlns:a='a'><a:a att='1'/><a:a att='2'/><a:a att='3'/></root>" })]
                 public void v3()
                 {
                     string type = Variation.Params[0].ToString();
@@ -278,7 +281,8 @@ namespace CoreXml.Test.XLinq
                     DataReader.Dispose();
                 }
 
-                //[Variation("Positioning on a level and try to find the name which is on a level higher", Priority = 1)]
+                //[Variation("Positioning on a level and try to find the name which is on a level higher", Priority
+                // = 1)]
                 public void v5()
                 {
                     XmlReader DataReader = GetReader(new StringReader(_xmlStr));

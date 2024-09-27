@@ -124,7 +124,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             public static void TestNameAndType()
             {
-                // Currently trimming tools doesn't analyze the Type[] parameter and thus it marks all methods with the name and matching binding flags (public in this case)
+                // Currently trimming tools doesn't analyze the Type[] parameter and thus it marks all methods with
+                // the name and matching binding flags (public in this case)
                 var method = typeof(GetMethod_Name_Types).GetMethod(
                     "OnlyCalledViaReflection",
                     new Type[] { }
@@ -260,13 +261,18 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             public static void TestUnknownNullBindingFlags(BindingFlags bindingFlags)
             {
-                // The case here is a pattern which trimming tools don't recognize (unlike the test case above, which passes a recognized
-                // method parameter with unknown value). Unrecognized patterns are internally represented as unknown values which are passed
-                // around as nulls in some cases. So there's a potential risk of hitting a nullref. The test here is to validate that
+                // The case here is a pattern which trimming tools don't recognize (unlike the test case above,
+                // which passes a recognized
+                // method parameter with unknown value). Unrecognized patterns are internally represented as unknown
+                // values which are passed
+                // around as nulls in some cases. So there's a potential risk of hitting a nullref. The test here is
+                // to validate that
                 // trimming tools can accept such value for binding flags.
-                // The semantic is exactly the same as above, that is unknown value and thus all methods should be marked.
+                // The semantic is exactly the same as above, that is unknown value and thus all methods should be
+                // marked.
 
-                // One way to produce unrecognized pattern is to use some bitfield arithmetics - trimming tools currently don't do constexpr evaluation
+                // One way to produce unrecognized pattern is to use some bitfield arithmetics - trimming tools
+                // currently don't do constexpr evaluation
                 // and then store it in a local.
                 var bf = bindingFlags | BindingFlags.Static;
 
@@ -336,13 +342,15 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             public static void TestUnknownNameAndWrongBindingFlags(string name)
             {
-                // The binding flags like this will not return any methods (it's a valid call, but never returns anything)
+                // The binding flags like this will not return any methods (it's a valid call, but never returns
+                // anything)
                 // So it's OK to not mark any method due to this.
                 typeof(UnknownNameAndWrongBindingFlags).GetMethod(name, BindingFlags.Static);
             }
         }
 
-        // GetMethod(string name, BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[] modifiers)
+        // GetMethod(string name, BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[]
+        // modifiers)
         [Kept]
         class GetMethod_Name_BindingAttr_Binder_Types_Modifiers
         {
@@ -382,7 +390,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
         }
 
-        // GetMethod(string name, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        // GetMethod(string name, BindingFlags bindingAttr, Binder binder, CallingConventions
+        // callConvention, Type[] types, ParameterModifier[] modifiers)
         [Kept]
         class GetMethod_Name_BindingAttr_Binder_CallConvention_Types_Modifiers
         {
@@ -540,7 +549,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
         }
 
-        // GetMethod(string name, int genericParameterCount, BindingFlags bindingAttr, Binder binder, Type[] types, ParameterModifier[] modifiers)
+        // GetMethod(string name, int genericParameterCount, BindingFlags bindingAttr, Binder binder, Type[]
+        // types, ParameterModifier[] modifiers)
         [Kept]
         class GetMethod_Name_GenericParameterCount_BindingAttr_Binder_Types_Modifiers
         {
@@ -623,7 +633,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             }
         }
 
-        // GetMethod(string name, int genericParameterCount, BindingFlags bindingAttr, Binder binder, CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
+        // GetMethod(string name, int genericParameterCount, BindingFlags bindingAttr, Binder binder,
+        // CallingConventions callConvention, Type[] types, ParameterModifier[] modifiers)
         [Kept]
         class GetMethod_Name_GenericParameterCount_BindingAttr_Binder_CallConvention_Types_Modifiers
         {

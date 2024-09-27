@@ -68,7 +68,8 @@ namespace System.Reflection.Tests
 
         void AssertSameEqualAndHashCodeEqual(object o1, object o2)
         {
-            // When cache not cleared the references of the same members are Same and Equal, and Hashcodes Equal.
+            // When cache not cleared the references of the same members are Same and Equal, and Hashcodes
+            // Equal.
             Assert.NotNull(o1);
             Assert.NotNull(o2);
             Assert.Same(o1, o2);
@@ -151,7 +152,8 @@ namespace System.Reflection.Tests
         private static void AssertNotSameSameButEqualAndHashCodeEqual(object o1, object o2)
         {
             // After the cache cleared the references of the same members will be Not Same.
-            // But they should be evaluated as Equal so that there were no issue using the same member after hot reload.
+            // But they should be evaluated as Equal so that there were no issue using the same member after hot
+            // reload.
             // And the member HashCode before and after hot reload should produce the same result.
 
             Assert.NotNull(o1);

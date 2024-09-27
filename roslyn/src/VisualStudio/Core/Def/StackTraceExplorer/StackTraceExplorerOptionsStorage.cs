@@ -9,7 +9,8 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
     internal sealed class StackTraceExplorerOptionsStorage
     {
         /// <summary>
-        /// Used to determine if a user focusing VS should look at the clipboard for a callstack and automatically
+        /// Used to determine if a user focusing VS should look at the clipboard for a callstack and
+        // automatically
         /// open the tool window with the callstack inserted
         /// </summary>
         public static readonly Option2<bool> OpenOnFocus =

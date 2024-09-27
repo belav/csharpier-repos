@@ -958,7 +958,8 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     // Regression test:
                     // Regex treating Devanagari matra characters as matching "\b"
-                    // Unicode characters in the "Mark, NonSpacing" Category, U+0902=Devanagari sign anusvara, U+0947=Devanagri vowel sign E
+                    // Unicode characters in the "Mark, NonSpacing" Category, U+0902=Devanagari sign anusvara,
+                    // U+0947=Devanagri vowel sign E
                     string boldInput =
                         "\u092f\u0939 \u0915\u0930 \u0935\u0939 \u0915\u0930\u0947\u0902 \u0939\u0948\u0964";
                     string boldExpected =
@@ -1086,7 +1087,8 @@ namespace System.Text.RegularExpressions.Tests
         {
             // Regression test carried over from above to NonBacktracking mode:
             // Regex treating Devanagari matra characters as matching "\b"
-            // Unicode characters in the "Mark, NonSpacing" Category, U+0902=Devanagari sign anusvara, U+0947=Devanagri vowel sign E
+            // Unicode characters in the "Mark, NonSpacing" Category, U+0902=Devanagari sign anusvara,
+            // U+0947=Devanagri vowel sign E
             string boldInput =
                 "\u092f\u0939 \u0915\u0930 \u0935\u0939 \u0915\u0930\u0947\u0902 \u0939\u0948\u0964";
             string boldExpected =

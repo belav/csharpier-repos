@@ -83,7 +83,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var voidType = TypeWithAnnotations.Create(
                 binder.GetSpecialType(SpecialType.System_Void, diagnostics, syntax)
             );
-            // https://github.com/dotnet/roslyn/issues/30079: Should the 'object', IAsyncResult and AsyncCallback parameters be considered nullable or not nullable?
+            // https://github.com/dotnet/roslyn/issues/30079: Should the 'object', IAsyncResult and
+            // AsyncCallback parameters be considered nullable or not nullable?
             var objectType = TypeWithAnnotations.Create(
                 binder.GetSpecialType(SpecialType.System_Object, diagnostics, syntax)
             );

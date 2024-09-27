@@ -7,7 +7,8 @@ namespace System.Net.Http
 {
     internal static partial class SR
     {
-        // The resource generator used in AspNetCore does not create this method. This file fills in that functional gap
+        // The resource generator used in AspNetCore does not create this method. This file fills in that
+        // functional gap
         // so we don't have to modify the shared source.
         internal static string Format(string resourceFormat, params object[] args)
         {

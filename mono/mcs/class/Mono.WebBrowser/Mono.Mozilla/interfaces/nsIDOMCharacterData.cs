@@ -137,8 +137,8 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int isSupported(
-            /*DOMString*/HandleRef feature,
-            /*DOMString*/HandleRef version,
+/*DOMString*/HandleRef feature,
+/*DOMString*/HandleRef version,
             out bool ret
         );
 
@@ -200,14 +200,14 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int appendData(
-            /*DOMString*/HandleRef arg
+/*DOMString*/HandleRef arg
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int insertData(
             uint offset,
-            /*DOMString*/HandleRef arg
+/*DOMString*/HandleRef arg
         );
 
         [PreserveSigAttribute]
@@ -219,7 +219,7 @@ namespace Mono.Mozilla
         int replaceData(
             uint offset,
             uint count,
-            /*DOMString*/HandleRef arg
+/*DOMString*/HandleRef arg
         );
 
         #endregion

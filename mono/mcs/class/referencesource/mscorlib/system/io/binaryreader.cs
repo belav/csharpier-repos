@@ -608,7 +608,8 @@ namespace System.IO
                 return EmptyArray<Char>.Value;
             }
 
-            // SafeCritical: we own the chars buffer, and therefore can guarantee that the index and count are valid
+            // SafeCritical: we own the chars buffer, and therefore can guarantee that the index and count are
+            // valid
             char[] chars = new char[count];
             int n = InternalReadChars(chars, 0, count);
             if (n != count)

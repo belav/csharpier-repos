@@ -271,7 +271,8 @@ namespace System.Text
         public bool MustFlush => _mustFlush;
 
         /// <summary>
-        /// States whether a call to <see cref="Encoding.GetBytes(char*, int, byte*, int, EncoderNLS)"/> must first drain data on this <see cref="EncoderNLS"/> instance.
+        /// States whether a call to <see cref="Encoding.GetBytes(char*, int, byte*, int, EncoderNLS)"/>
+        // must first drain data on this <see cref="EncoderNLS"/> instance.
         /// </summary>
         internal bool HasLeftoverData =>
             _charLeftOver != default

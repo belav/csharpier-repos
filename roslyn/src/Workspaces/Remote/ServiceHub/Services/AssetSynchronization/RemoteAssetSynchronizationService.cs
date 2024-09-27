@@ -13,8 +13,10 @@ using RoslynLogger = Microsoft.CodeAnalysis.Internal.Log.Logger;
 namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
-    /// This service is used by the SolutionChecksumUpdater to proactively update the solution snapshot in the
-    /// out-of-process workspace. We do this to limit the amount of time required to synchronize a solution over after
+    /// This service is used by the SolutionChecksumUpdater to proactively update the solution snapshot
+    // in the
+    /// out-of-process workspace. We do this to limit the amount of time required to synchronize a
+    // solution over after
     /// an edit once a feature is asking for a snapshot.
     /// </summary>
     internal sealed class RemoteAssetSynchronizationService
@@ -151,7 +153,8 @@ namespace Microsoft.CodeAnalysis.Remote
                         }
 
                         // check checksum whether it is there.
-                        // since we lazily synchronize whole solution (SynchronizePrimaryWorkspaceAsync) when things are idle,
+                        // since we lazily synchronize whole solution (SynchronizePrimaryWorkspaceAsync) when things are
+                        // idle,
                         // soon or later this will get hit even if text changes got out of sync due to issues in VS side
                         // such as file is first opened and there is no SourceText in memory yet.
                         if (

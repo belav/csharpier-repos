@@ -423,7 +423,8 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
                 // Use FragmentQuery's attributes instead of LeftCellWrapper's original attributes in the comparison
                 // since the former might have got extended to include all attributes whose value is determined
-                // by the WHERE clause (e.g., if we have WHERE ProductName='Camera' we can assume ProductName is projected)
+                // by the WHERE clause (e.g., if we have WHERE ProductName='Camera' we can assume ProductName is
+                // projected)
 
                 if (x.FragmentQuery.Attributes.Count > y.FragmentQuery.Attributes.Count)
                 {

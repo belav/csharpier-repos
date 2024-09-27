@@ -124,7 +124,8 @@ namespace System.Collections.Specialized
             return true;
         }
 
-        // Do a binary search on the character array at the specific position and constrict the ranges appropriately.
+        // Do a binary search on the character array at the specific position and constrict the ranges
+        // appropriately.
         private static bool FindCharacter(
             string[] array,
             char value,

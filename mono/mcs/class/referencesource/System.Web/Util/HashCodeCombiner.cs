@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HashCodeCombiner class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* HashCodeCombiner class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {
@@ -19,9 +19,9 @@ namespace System.Web.Util
     using System.Text;
     using System.Web.Security.Cryptography;
 
-    /*
-     * Class used to combine several hashcodes into a single hashcode
-     */
+/*
+* Class used to combine several hashcodes into a single hashcode
+*/
     internal class HashCodeCombiner
     {
         private long _combinedHash;

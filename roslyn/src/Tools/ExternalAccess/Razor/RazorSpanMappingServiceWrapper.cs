@@ -41,8 +41,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             var diffService =
                 newDocument.Project.Solution.Services.GetRequiredService<IDocumentTextDifferencingService>();
 
-            // This is a hack that finds a minimal diff. It's not the ideal algorithm but should cover most scenarios. In the future,
-            // we should improve this algorithm - see https://github.com/dotnet/roslyn/issues/53346 for additional details.
+            // This is a hack that finds a minimal diff. It's not the ideal algorithm but should cover most
+            // scenarios. In the future,
+            // we should improve this algorithm - see https://github.com/dotnet/roslyn/issues/53346 for
+            // additional details.
             var textChanges = await diffService
                 .GetTextChangesAsync(oldDocument, newDocument, cancellationToken)
                 .ConfigureAwait(false);

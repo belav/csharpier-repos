@@ -22,7 +22,8 @@ namespace System.Diagnostics
         /// Producers may pass additional details to the consumer in the payload.
         /// </summary>
         /// <param name="activity">Activity to be started</param>
-        /// <param name="args">An object that represent the value being passed as a payload for the event.</param>
+        /// <param name="args">An object that represent the value being passed as a payload for the
+        // event.</param>
         /// <returns>Started Activity for convenient chaining</returns>
         /// <seealso cref="Activity"/>
         [RequiresUnreferencedCode(WriteRequiresUnreferencedCode)]
@@ -48,7 +49,8 @@ namespace System.Diagnostics
         /// Producers may pass additional details to the consumer in the payload.
         /// </summary>
         /// <param name="activity">Activity to be stopped</param>
-        /// <param name="args">An object that represent the value being passed as a payload for the event.</param>
+        /// <param name="args">An object that represent the value being passed as a payload for the
+        // event.</param>
         /// <seealso cref="Activity"/>
         [RequiresUnreferencedCode(WriteRequiresUnreferencedCode)]
         public void StopActivity(Activity activity, object? args)
@@ -144,10 +146,14 @@ namespace System.Diagnostics
         }
 
         /// <summary>
-        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null indicates that some events are
-        /// uninteresting can be skipped for efficiency.  You can also supply an 'onActivityImport' and 'onActivityExport'
-        /// methods that should be called when providers are 'importing' or 'exporting' activities from outside the
-        /// process (e.g. from Http Requests).   These are called right after importing (exporting) the activity and
+        /// Add a subscriber (Observer).  If the isEnabled parameter is non-null indicates that some events
+        // are
+        /// uninteresting can be skipped for efficiency.  You can also supply an 'onActivityImport' and
+        // 'onActivityExport'
+        /// methods that should be called when providers are 'importing' or 'exporting' activities from
+        // outside the
+        /// process (e.g. from Http Requests).   These are called right after importing (exporting) the
+        // activity and
         /// can be used to modify the activity (or outgoing request) to add policy.
         /// </summary>
         public virtual IDisposable Subscribe(

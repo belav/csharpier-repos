@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
 {
     /// <summary>
     /// Essentially this is a wrapper around another AssemblySymbol that is responsible for retargeting
-    /// symbols from one assembly to another. It can retarget symbols for multiple assemblies at the same time.
+    /// symbols from one assembly to another. It can retarget symbols for multiple assemblies at the
+    // same time.
     ///
-    /// For example, compilation C1 references v1 of Lib.dll and compilation C2 references C1 and v2 of Lib.dll.
+    /// For example, compilation C1 references v1 of Lib.dll and compilation C2 references C1 and v2 of
+    // Lib.dll.
     /// In this case, in context of C2, all types from v1 of Lib.dll leaking through C1 (through method
     /// signatures, etc.) must be retargeted to the types from v2 of Lib.dll. This is what
     /// RetargetingAssemblySymbol is responsible for. In the example above, modules in C2 do not
@@ -33,9 +35,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Retargeting
     ///
     /// Here is how retargeting is implemented in general:
     /// - Symbols from underlying assembly are substituted with retargeting symbols.
-    /// - Symbols from referenced assemblies that can be reused as is (i.e. doesn't have to be retargeted) are
+    /// - Symbols from referenced assemblies that can be reused as is (i.e. doesn't have to be
+    // retargeted) are
     ///   used as is.
-    /// - Symbols from referenced assemblies that must be retargeted are substituted with result of retargeting.
+    /// - Symbols from referenced assemblies that must be retargeted are substituted with result of
+    // retargeting.
     /// </summary>
     internal sealed class RetargetingAssemblySymbol : NonMissingAssemblySymbol
     {

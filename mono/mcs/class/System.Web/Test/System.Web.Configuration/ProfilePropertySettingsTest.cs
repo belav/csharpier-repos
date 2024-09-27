@@ -83,9 +83,12 @@ namespace MonoTests.System.Web.Configuration
                 f = true;
             }
             Assert.IsTrue(f, "A1");
-            //			f = false; try { p.Name = "1Hi"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A2");
-            //			f = false; try { p.Name = "Hi$"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
-            //			f = false; try { p.Name = "12345"; } catch (ConfigurationErrorsException e) { f = true; } Assert.IsTrue (f, "A3");
+            //			f = false; try { p.Name = "1Hi"; } catch (ConfigurationErrorsException e) { f = true; }
+            // Assert.IsTrue (f, "A2");
+            //			f = false; try { p.Name = "Hi$"; } catch (ConfigurationErrorsException e) { f = true; }
+            // Assert.IsTrue (f, "A3");
+            //			f = false; try { p.Name = "12345"; } catch (ConfigurationErrorsException e) { f = true; }
+            // Assert.IsTrue (f, "A3");
         }
     }
 }

@@ -370,7 +370,8 @@ throw e;",
         {
             var script = CSharpScript.Create("X + Y", globalsType: typeof(Globals));
 
-            //  The globals of type 'System.Object' is not assignable to 'Microsoft.CodeAnalysis.CSharp.Scripting.Test.ScriptTests+Globals'
+            //  The globals of type 'System.Object' is not assignable to
+            // 'Microsoft.CodeAnalysis.CSharp.Scripting.Test.ScriptTests+Globals'
             await Assert.ThrowsAsync<ArgumentException>(
                 "globals",
                 () => script.RunAsync(new object())

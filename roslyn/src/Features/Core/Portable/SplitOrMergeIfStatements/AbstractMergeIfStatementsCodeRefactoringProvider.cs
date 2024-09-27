@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IReadOnlyList<SyntaxNode> statements
         )
         {
-            // If our statements only contain a single block, walk down the block and any subsequent nested blocks
+            // If our statements only contain a single block, walk down the block and any subsequent nested
+            // blocks
             // to get the real statements inside.
 
             while (statements.Count == 1 && blockFacts.IsScopeBlock(statements[0]))
@@ -163,7 +164,8 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
             IReadOnlyList<SyntaxNode> statements
         )
         {
-            // If our statements are inside a block, walk up the block and any subsequent nested blocks that contain
+            // If our statements are inside a block, walk up the block and any subsequent nested blocks that
+            // contain
             // no other statements to get the topmost block. The last check is necessary to make sure we stop
             // walking upwards if there are other statements next to our current block:
             // {

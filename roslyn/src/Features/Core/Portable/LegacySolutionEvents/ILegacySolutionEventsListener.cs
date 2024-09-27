@@ -9,8 +9,10 @@ using Microsoft.CodeAnalysis.Host;
 namespace Microsoft.CodeAnalysis.LegacySolutionEvents
 {
     /// <summary>
-    /// This is a legacy api intended only for existing SolutionCrawler partners to continue to function (albeit with
-    /// ownership of that crawling task now belonging to the partner team, not roslyn).  It should not be used for any
+    /// This is a legacy api intended only for existing SolutionCrawler partners to continue to function
+    // (albeit with
+    /// ownership of that crawling task now belonging to the partner team, not roslyn).  It should not
+    // be used for any
     /// new services.
     /// </summary>
     internal interface ILegacySolutionEventsListener

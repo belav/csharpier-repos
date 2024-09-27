@@ -5,11 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * The class is used internally to handle post-cache substitution mechanism in
- * AdRotator.
- *
- * Copyright (c) 2002 Microsoft Corporation
- */
+* The class is used internally to handle post-cache substitution mechanism in
+* AdRotator.
+*
+* Copyright (c) 2002 Microsoft Corporation
+*/
 namespace System.Web.UI.WebControls
 {
     using System.Globalization;

@@ -101,8 +101,10 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             this.InitialLineColumn = GetInitialLineColumn();
 
-            // "Spaces" holds either space counts between two tokens if two are on same line or indentation of token2 if
-            // two are on different line. but actual "Indentation" of the line could be different than "Spaces" if there is
+            // "Spaces" holds either space counts between two tokens if two are on same line or indentation of
+            // token2 if
+            // two are on different line. but actual "Indentation" of the line could be different than "Spaces"
+            // if there is
             // noisy trivia before token2 on the same line.
             // this.indentation indicates that trivia's indentation
             //
@@ -210,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Formatting
         );
 
         /// <summary>
-        /// format the given trivia at the line column position and put text change result to the changes list
+        /// format the given trivia at the line column position and put text change result to the changes
+        // list
         /// </summary>
         protected abstract LineColumnDelta Format(
             LineColumn lineColumn,
@@ -566,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         /// <summary>
         /// if the given trivia is the very first or the last trivia between two normal tokens and
-        /// if the trivia is structured trivia, get one token that belongs to the structured trivia and one belongs to the normal token stream
+        /// if the trivia is structured trivia, get one token that belongs to the structured trivia and one
+        // belongs to the normal token stream
         /// </summary>
         private void GetTokensAtEdgeOfStructureTrivia(
             SyntaxTrivia trivia1,
@@ -774,7 +778,8 @@ namespace Microsoft.CodeAnalysis.Formatting
 
         /// <summary>
         /// return 0 or 1 based on line column of the trivia1's end point
-        /// this is based on our structured trivia's implementation detail that some structured trivia can have
+        /// this is based on our structured trivia's implementation detail that some structured trivia can
+        // have
         /// one new line at the end of the trivia
         /// </summary>
         private static int GetTrailingLinesAtEndOfTrivia1(LineColumn lineColumnAfterTrivia1) =>

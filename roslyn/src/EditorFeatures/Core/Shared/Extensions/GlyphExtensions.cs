@@ -25,8 +25,10 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             // VS for mac cannot refer to ImageMoniker
             // so we need to expose ImageId instead of ImageMoniker here
             // and expose ImageMoniker in the EditorFeatures.wpf.dll
-            // The use of constants here is okay because the compiler inlines their values, so no runtime reference is needed.
-            // There are tests in src\EditorFeatures\Test\AssemblyReferenceTests.cs to ensure we don't regress that.
+            // The use of constants here is okay because the compiler inlines their values, so no runtime
+            // reference is needed.
+            // There are tests in src\EditorFeatures\Test\AssemblyReferenceTests.cs to ensure we don't regress
+            // that.
             switch (glyph)
             {
                 case Glyph.None:

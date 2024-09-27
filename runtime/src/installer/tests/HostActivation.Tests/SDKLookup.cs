@@ -115,7 +115,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             );
 
             // Specified SDK version: 9999.3.4-global-dummy
-            // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600, 9999.3.4-global.dummy (empty)
+            // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600,
+            // 9999.3.4-global.dummy (empty)
             // Expected: 9999.3.5-dummy from exe dir
             RunTest()
                 .Should()
@@ -129,7 +130,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             AddAvailableSdkVersions("9999.3.4-global-dummy");
 
             // Specified SDK version: 9999.3.4-global-dummy
-            // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600, 9999.3.4-global-dummy
+            // Exe: 9999.4.1, 9999.3.4-dummy, 9999.3.3, 9999.3.4, 9999.3.5-dummy, 9999.3.600,
+            // 9999.3.4-global-dummy
             // Expected: 9999.3.4-global-dummy from exe dir
             RunTest()
                 .Should()
@@ -204,7 +206,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             AddAvailableSdkVersions("9999.3.399", "9999.3.399-dummy", "9999.3.400");
 
             // Specified SDK version: 9999.3.304-global-dummy
-            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400
+            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399,
+            // 9999.3.399-dummy, 9999.3.400
             // Expected: 9999.3.399 from exe dir
             RunTest()
                 .Should()
@@ -215,7 +218,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             AddAvailableSdkVersions("9999.3.2400", "9999.3.3004");
 
             // Specified SDK version: 9999.3.304-global-dummy
-            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004
+            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399,
+            // 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004
             // Expected: 9999.3.399 from exe dir
             RunTest()
                 .Should()
@@ -226,7 +230,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             AddAvailableSdkVersions("9999.3.304-global-dummy");
 
             // Specified SDK version: 9999.3.304-global-dummy
-            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399, 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004, 9999.3.304-global-dummy
+            // Exe: 9999.3.57, 9999.3.4-dummy, 9999.3.300, 9999.7.304-global-dummy, 9999.3.304, 9999.3.399,
+            // 9999.3.399-dummy, 9999.3.400, 9999.3.2400, 9999.3.3004, 9999.3.304-global-dummy
             // Expected: 9999.3.304-global-dummy from exe dir
             RunTest()
                 .Should()
@@ -336,7 +341,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // Specified SDK version: none
             // Cwd: 10000.0.0                 --> should not be picked
-            // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80, 9999.0.5500000
+            // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80,
+            // 9999.0.5500000
             // Expected: 9999.0.5500000 from exe dir
             RunTest()
                 .Should()
@@ -351,7 +357,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // Specified SDK version: none
             // Cwd: 10000.0.0                 --> should not be picked
-            // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80, 9999.0.5500000, 9999.0.52000000
+            // Exe: 9999.0.0, 9999.0.3-dummy.9, 9999.0.3-dummy.10, 9999.0.3, 9999.0.100, 9999.0.80,
+            // 9999.0.5500000, 9999.0.52000000
             // Expected: 9999.0.52000000 from exe dir
             RunTest()
                 .Should()

@@ -502,7 +502,8 @@ namespace NAMESPACE
         {
             try
             {
-                // use this to help validate this code path is only used after the following permission has been previously demanded in the current codepath
+                // use this to help validate this code path is only used after the following permission has been
+                // previously demanded in the current codepath
                 CONNECTIONOBJECTNAME.ExecutePermission.Demand();
             }
             catch (System.Security.SecurityException)

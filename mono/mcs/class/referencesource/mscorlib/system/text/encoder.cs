@@ -89,13 +89,18 @@ namespace System.Text
 
         // Reset the Encoder
         //
-        // Normally if we call GetBytes() and an error is thrown we don't change the state of the encoder.  This
-        // would allow the caller to correct the error condition and try again (such as if they need a bigger buffer.)
+        // Normally if we call GetBytes() and an error is thrown we don't change the state of the encoder.
+        // This
+        // would allow the caller to correct the error condition and try again (such as if they need a
+        // bigger buffer.)
         //
-        // If the caller doesn't want to try again after GetBytes() throws an error, then they need to call Reset().
+        // If the caller doesn't want to try again after GetBytes() throws an error, then they need to call
+        // Reset().
         //
-        // Virtual implimentation has to call GetBytes with flush and a big enough buffer to clear a 0 char string
-        // We avoid GetMaxByteCount() because a) we can't call the base encoder and b) it might be really big.
+        // Virtual implimentation has to call GetBytes with flush and a big enough buffer to clear a 0 char
+        // string
+        // We avoid GetMaxByteCount() because a) we can't call the base encoder and b) it might be really
+        // big.
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual void Reset()
         {
@@ -258,7 +263,8 @@ namespace System.Text
         //
         // Note that if all of the input chars are not consumed, then we'll do a /2, which means
         // that its likely that we didn't consume as many chars as we could have.  For some
-        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
+        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger
+        // stream)
         [System.Runtime.InteropServices.ComVisible(false)]
         public virtual void Convert(
             char[] chars,
@@ -339,7 +345,8 @@ namespace System.Text
         //
         // Note that if all of the input chars are not consumed, then we'll do a /2, which means
         // that its likely that we didn't consume as many chars as we could have.  For some
-        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger stream)
+        // applications this could be slow.  (Like trying to exactly fill an output buffer from a bigger
+        // stream)
         [System.Security.SecurityCritical] // auto-generated
         [CLSCompliant(false)]
         [System.Runtime.InteropServices.ComVisible(false)]

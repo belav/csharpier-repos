@@ -23,7 +23,8 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // Implements IKeyedItem.Key.
         //
-        // Produce the key. This is a high-traffic property and is called while the hash table's lock is held. Thus, it should
+        // Produce the key. This is a high-traffic property and is called while the hash table's lock is
+        // held. Thus, it should
         // return a precomputed stored value and refrain from invoking other methods.
         //
         public UnificationKey Key

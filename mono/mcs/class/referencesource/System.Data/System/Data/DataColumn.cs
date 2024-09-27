@@ -75,7 +75,8 @@ namespace System.Data
         // state
         private DataStorage _storage;
 
-        /// <summary>represents current value to return, usage pattern is .get_Current then MoveAfter</summary>
+        /// <summary>represents current value to return, usage pattern is .get_Current then
+        // MoveAfter</summary>
         private AutoIncrementValue autoInc;
 
         //
@@ -171,7 +172,8 @@ namespace System.Data
 
             if ((null != expr) && (0 < expr.Length))
             {
-                // @perfnote: its a performance hit to set Expression to the empty str when we know it will come out null
+                // @perfnote: its a performance hit to set Expression to the empty str when we know it will come out
+                // null
                 this.Expression = expr;
             }
             this.columnMapping = type;
@@ -250,7 +252,8 @@ namespace System.Data
         /// <devdoc>
         ///    <para>
         ///       Gets or
-        ///       sets a value indicating whether the column automatically increments the value of the column for new
+        ///       sets a value indicating whether the column automatically increments the value of the
+        // column for new
         ///       rows added to the table.
         ///    </para>
         /// </devdoc>
@@ -361,7 +364,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the increment used by a column with its <see cref='System.Data.DataColumn.AutoIncrement'/>
+        ///       Gets or sets the increment used by a column with its <see
+        // cref='System.Data.DataColumn.AutoIncrement'/>
         ///       property set to <see langword='true'/>
         ///       .
         ///    </para>
@@ -429,7 +433,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Gets a value indicating whether the <see cref='System.Data.DataColumn.Caption'/> has been explicitly set.
+        ///       Gets a value indicating whether the <see cref='System.Data.DataColumn.Caption'/> has been
+        // explicitly set.
         ///    </para>
         /// </devdoc>
         private bool ShouldSerializeCaption()
@@ -439,7 +444,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the name of the column within the <see cref='System.Data.DataColumnCollection'/>.
+        ///       Gets or sets the name of the column within the <see
+        // cref='System.Data.DataColumnCollection'/>.
         ///    </para>
         /// </devdoc>
         [
@@ -571,8 +577,10 @@ namespace System.Data
 
         // Return the field value as a string. If the field value is NULL, then NULL is return.
         // If the column type is string and it's value is empty, then the empty string is returned.
-        // If the column type is not string, or the column type is string and the value is not empty string, then a non-empty string is returned
-        // This method does not throw any formatting exceptions, since we can always format the field value to a string.
+        // If the column type is not string, or the column type is string and the value is not empty string,
+        // then a non-empty string is returned
+        // This method does not throw any formatting exceptions, since we can always format the field value
+        // to a string.
         internal string GetColumnValueAsString(DataRow row, DataRowVersion version)
         {
             object objValue = this[row.GetRecordFromVersion(version)];
@@ -646,7 +654,8 @@ namespace System.Data
                         throw ExprException.UnsupportedDataType(value);
                     }
 
-                    // If the DefualtValue is different from the Column DataType, we will coerce the value to the DataType
+                    // If the DefualtValue is different from the Column DataType, we will coerce the value to the
+                    // DataType
                     if (!DefaultValueIsNull)
                     {
                         try
@@ -851,7 +860,8 @@ namespace System.Data
                     object newDefaultValue = (value == null) ? DBNull.Value : value;
                     if (newDefaultValue != DBNull.Value && DataType != typeof(Object))
                     {
-                        // If the DefualtValue is different from the Column DataType, we will coerce the value to the DataType
+                        // If the DefualtValue is different from the Column DataType, we will coerce the value to the
+                        // DataType
                         try
                         {
                             newDefaultValue = SqlConvert.ChangeTypeForDefaultValue(
@@ -1473,7 +1483,8 @@ namespace System.Data
                     DataRow dr = GetDataRow(record);
                     if (dr != null)
                     {
-                        // at initialization time (datatable.NewRow(), we would fill the storage with default value, but at that time we wont have datarow)
+                        // at initialization time (datatable.NewRow(), we would fill the storage with default value, but at
+                        // that time we wont have datarow)
                         dr.LastChangedColumn = this;
                     }
                 }
@@ -1516,7 +1527,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets a value indicating whether the values in each row of the column must be unique.
+        ///       Gets or sets a value indicating whether the values in each row of the column must be
+        // unique.
         ///    </para>
         /// </devdoc>
         [
@@ -1624,7 +1636,8 @@ namespace System.Data
             set
             {
                 simpleType = value;
-                // there is a change, since we are supporting hierarchy(bacause of Names Simple Type) old check (just one leel base check) is wrong
+                // there is a change, since we are supporting hierarchy(bacause of Names Simple Type) old check
+                // (just one leel base check) is wrong
                 if (value != null && value.CanHaveMaxLength())
                     maxLength = simpleType.MaxLength; // this is temp solution, since we dont let simple content to have
                 //maxlength set but for simple type we want to set it, after coming to decision about it , we should
@@ -1845,7 +1858,8 @@ namespace System.Data
             _storage.Copy(srcRecordNo, dstRecordNo);
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         internal DataColumn Clone()
         {

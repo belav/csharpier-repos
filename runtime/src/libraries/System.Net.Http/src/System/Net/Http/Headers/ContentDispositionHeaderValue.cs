@@ -318,7 +318,8 @@ namespace System.Net.Http.Headers
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(dispositionType, parameterName);
 
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             int dispositionTypeLength = GetDispositionTypeExpressionLength(
                 dispositionType,
                 0,

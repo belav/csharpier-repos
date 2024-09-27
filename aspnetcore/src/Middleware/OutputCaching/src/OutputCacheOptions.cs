@@ -17,17 +17,20 @@ public class OutputCacheOptions
 
     /// <summary>
     /// The largest cacheable size for the response body in bytes. The default is set to 64 MB.
-    /// If the response body exceeds this limit, it will not be cached by the <see cref="OutputCacheMiddleware"/>.
+    /// If the response body exceeds this limit, it will not be cached by the <see
+    // cref="OutputCacheMiddleware"/>.
     /// </summary>
     public long MaximumBodySize { get; set; } = 64 * 1024 * 1024;
 
     /// <summary>
-    /// The duration a response is cached when no specific value is defined by a policy. The default is set to 60 seconds.
+    /// The duration a response is cached when no specific value is defined by a policy. The default is
+    // set to 60 seconds.
     /// </summary>
     public TimeSpan DefaultExpirationTimeSpan { get; set; } = TimeSpan.FromSeconds(60);
 
     /// <summary>
-    /// <c>true</c> if request paths are case-sensitive; otherwise <c>false</c>. The default is to treat paths as case-insensitive.
+    /// <c>true</c> if request paths are case-sensitive; otherwise <c>false</c>. The default is to treat
+    // paths as case-insensitive.
     /// </summary>
     public bool UseCaseSensitivePaths { get; set; }
 

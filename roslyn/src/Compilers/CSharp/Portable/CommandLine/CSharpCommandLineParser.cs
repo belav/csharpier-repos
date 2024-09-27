@@ -54,8 +54,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="args">A collection of strings representing the command line arguments.</param>
         /// <param name="baseDirectory">The base directory used for qualifying file locations.</param>
-        /// <param name="sdkDirectory">The directory to search for mscorlib, or null if not available.</param>
-        /// <param name="additionalReferenceDirectories">A string representing additional reference paths.</param>
+        /// <param name="sdkDirectory">The directory to search for mscorlib, or null if not
+        // available.</param>
+        /// <param name="additionalReferenceDirectories">A string representing additional reference
+        // paths.</param>
         /// <returns>a commandlinearguments object representing the parsed command line.</returns>
         public new CSharpCommandLineArguments Parse(
             IEnumerable<string> args,
@@ -158,7 +160,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             string? ruleSetPath = null;
             bool reportIVTs = false;
 
-            // Process ruleset files first so that diagnostic severity settings specified on the command line via
+            // Process ruleset files first so that diagnostic severity settings specified on the command line
+            // via
             // /nowarn and /warnaserror can override diagnostic severity settings specified in the ruleset file.
             if (!IsScriptCommandLineParser)
             {
@@ -229,11 +232,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 string? value;
                 string? valueMemoryString() => valueMemory is { } m ? m.Span.ToString() : null;
 
-                // The main 'switch' for argument handling forces an allocation of the option name field. For the most
-                // common options we special case the handling below to avoid this allocation as it can contribute significantly
+                // The main 'switch' for argument handling forces an allocation of the option name field. For the
+                // most
+                // common options we special case the handling below to avoid this allocation as it can contribute
+                // significantly
                 // to parsing allocations.
                 //
-                // When we allow for switching on Span<char> this can be undone as the name 'switch' will be allocation free
+                // When we allow for switching on Span<char> this can be undone as the name 'switch' will be
+                // allocation free
                 // https://github.com/dotnet/roslyn/pull/44388
                 if (IsOptionName("r", "reference", nameMemory))
                 {
@@ -260,8 +266,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else if (value.StartsWith("0", StringComparison.Ordinal))
                     {
-                        // This error was added in 7.1 to stop parsing versions as ints (behaviour in previous Roslyn compilers), and explicitly
-                        // treat them as identifiers (behaviour in native compiler). This error helps users identify that breaking change.
+                        // This error was added in 7.1 to stop parsing versions as ints (behaviour in previous Roslyn
+                        // compilers), and explicitly
+                        // treat them as identifiers (behaviour in native compiler). This error helps users identify that
+                        // breaking change.
                         AddDiagnostic(
                             diagnostics,
                             ErrorCode.ERR_LanguageVersionCannotHaveLeadingZeroes,
@@ -332,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             // When a features value like "InterceptorsPreviewNamespaces=NS1;NS2" is provided,
                             // the build system will quote it so that splitting doesn't occur in the wrong layer.
-                            // We need to unquote here so that subsequent layers can properly identify the feature name and value.
+                            // We need to unquote here so that subsequent layers can properly identify the feature name and
+                            // value.
                             features.Add(value.Unquote());
                         }
                         continue;
@@ -888,7 +897,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             string? unquoted = RemoveQuotesAndSlashes(valueMemory);
                             if (RoslynString.IsNullOrEmpty(unquoted))
                             {
-                                // CONSIDER: This diagnostic exactly matches dev11, but it would be simpler (and more consistent with /out)
+                                // CONSIDER: This diagnostic exactly matches dev11, but it would be simpler (and more consistent
+                                // with /out)
                                 // if we just let the next case handle /doc:"".
                                 AddDiagnostic(
                                     diagnostics,
@@ -925,7 +935,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             else
                             {
                                 // NOTE(tomat): Dev10 used to report CS1541: ERR_CantIncludeDirectory if the path was a directory.
-                                // Since we now support /referencePaths option we would need to search them to see if the resolved path is a directory.
+                                // Since we now support /referencePaths option we would need to search them to see if the resolved
+                                // path is a directory.
                                 // An error will be reported by the assembly manager anyways.
                                 metadataReferences.AddRange(
                                     ParseSeparatedPaths(value)
@@ -1150,7 +1161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 generalDiagnosticOption = ReportDiagnostic.Error;
 
-                                // Reset specific warnaserror options (since last /warnaserror flag on the command line always wins),
+                                // Reset specific warnaserror options (since last /warnaserror flag on the command line always
+                                // wins),
                                 // and bump warnings to errors.
                                 warnAsErrors.Clear();
                                 foreach (var key in diagnosticOptions.Keys)
@@ -1183,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 generalDiagnosticOption = ReportDiagnostic.Default;
 
-                                // Clear specific warnaserror options (since last /warnaserror flag on the command line always wins).
+                                // Clear specific warnaserror options (since last /warnaserror flag on the command line always
+                                // wins).
                                 warnAsErrors.Clear();
 
                                 continue;
@@ -1313,7 +1326,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // MSDN: In case both /keyfile and /keycontainer are specified (either by command line option or by
                             // MSDN: custom attribute) in the same compilation, the compiler will first try the key container.
                             // MSDN: If that succeeds, then the assembly is signed with the information in the key container.
-                            // MSDN: If the compiler does not find the key container, it will try the file specified with /keyfile.
+                            // MSDN: If the compiler does not find the key container, it will try the file specified with
+                            // /keyfile.
                             // MSDN: If that succeeds, the assembly is signed with the information in the key file and the key
                             // MSDN: information will be installed in the key container (similar to sn -i) so that on the next
                             // MSDN: compilation, the key container will be valid.
@@ -1339,7 +1353,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // MSDN: In case both /keyfile and /keycontainer are specified (either by command line option or by
                             // MSDN: custom attribute) in the same compilation, the compiler will first try the key container.
                             // MSDN: If that succeeds, then the assembly is signed with the information in the key container.
-                            // MSDN: If the compiler does not find the key container, it will try the file specified with /keyfile.
+                            // MSDN: If the compiler does not find the key container, it will try the file specified with
+                            // /keyfile.
                             // MSDN: If that succeeds, the assembly is signed with the information in the key file and the key
                             // MSDN: information will be installed in the key container (similar to sn -i) so that on the next
                             // MSDN: compilation, the key container will be valid.
@@ -2215,7 +2230,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // libpath
             builder.AddRange(libPaths);
 
-            // csi adds paths of the response file(s) to the search paths, so that we can initialize the script environment
+            // csi adds paths of the response file(s) to the search paths, so that we can initialize the script
+            // environment
             // with references relative to csi.exe (e.g. System.ValueTuple.dll).
             if (responsePathsOpt != null)
             {
@@ -2478,7 +2494,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 pathCount++;
 
                 // NOTE(tomat): Dev10 used to report CS1541: ERR_CantIncludeDirectory if the path was a directory.
-                // Since we now support /referencePaths option we would need to search them to see if the resolved path is a directory.
+                // Since we now support /referencePaths option we would need to search them to see if the resolved
+                // path is a directory.
 
                 var aliases =
                     (alias != null) ? ImmutableArray.Create(alias) : ImmutableArray<string>.Empty;
@@ -2771,7 +2788,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Diagnostic for the errorCode added if the warningOptions does not mention suppressed for the errorCode.
+        /// Diagnostic for the errorCode added if the warningOptions does not mention suppressed for the
+        // errorCode.
         /// </summary>
         private static void AddDiagnostic(
             IList<Diagnostic> diagnostics,

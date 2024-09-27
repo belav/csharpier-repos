@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,8 @@ using System.Web.Routing;
 namespace System.Web.Mvc.Routing
 {
     /// <summary>
-    /// Obsolete, use <see cref="System.Web.Mvc.Routing.RouteFactoryAttribute"/> to customize generated attribute
+    /// Obsolete, use <see cref="System.Web.Mvc.Routing.RouteFactoryAttribute"/> to customize generated
+    // attribute
     /// routes.
     /// </summary>
     [Obsolete(
@@ -19,7 +21,8 @@ namespace System.Web.Mvc.Routing
     public class RouteBuilder
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RouteBuilder" /> class using the default inline constraint resolver.
+        /// Initializes a new instance of the <see cref="RouteBuilder" /> class using the default inline
+        // constraint resolver.
         /// </summary>
         public RouteBuilder()
             : this(new DefaultInlineConstraintResolver()) { }
@@ -27,7 +30,8 @@ namespace System.Web.Mvc.Routing
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteBuilder" /> class.
         /// </summary>
-        /// <param name="constraintResolver">The <see cref="IInlineConstraintResolver"/> to use for resolving inline constraints.</param>
+        /// <param name="constraintResolver">The <see cref="IInlineConstraintResolver"/> to use for
+        // resolving inline constraints.</param>
         public RouteBuilder(IInlineConstraintResolver constraintResolver)
         {
             if (constraintResolver == null)
@@ -44,7 +48,8 @@ namespace System.Web.Mvc.Routing
         /// Builds an <see cref="Route"/> for a particular controller.
         /// </summary>
         /// <param name="routeTemplate">The tokenized route template for the route.</param>
-        /// <param name="controllerDescriptor">The controller the route attribute has been applied on.</param>
+        /// <param name="controllerDescriptor">The controller the route attribute has been applied
+        // on.</param>
         /// <returns>The generated <see cref="Route"/>.</returns>
         public Route BuildDirectRoute(
             string routeTemplate,
@@ -109,7 +114,8 @@ namespace System.Web.Mvc.Routing
         /// Builds an <see cref="Route"/> for a particular action.
         /// </summary>
         /// <param name="routeTemplate">The tokenized route template for the route.</param>
-        /// <param name="allowedMethods">The HTTP methods supported by the route. A null value specify that all possible methods are supported.</param>
+        /// <param name="allowedMethods">The HTTP methods supported by the route. A null value specify that
+        // all possible methods are supported.</param>
         /// <param name="controllerName">The name of the associated controller.</param>
         /// <param name="actionName">The name of the associated action.</param>
         /// <param name="targetMethod">The method that the route attribute has been applied on.</param>
@@ -151,7 +157,8 @@ namespace System.Web.Mvc.Routing
                 string[] array = allowedMethods.ToArray();
                 if (array.Length > 0)
                 {
-                    // Current method constraint implementation is inefficient since it matches before running the constraint.
+                    // Current method constraint implementation is inefficient since it matches before running the
+                    // constraint.
                     // Consider checking the HTTP method first in a custom route as a performance optimization.
                     constraints.Add("httpMethod", new HttpMethodConstraint(array));
                 }

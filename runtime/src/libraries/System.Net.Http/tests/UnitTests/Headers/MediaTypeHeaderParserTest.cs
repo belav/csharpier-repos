@@ -69,7 +69,8 @@ namespace System.Net.Http.Tests
             MediaTypeHeaderValue expected = new MediaTypeHeaderValue("text/plain");
             CheckValidParsedValue("text/plain", 0, expected, 10, false);
 
-            // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+            // We don't have to test all possible input strings, since most of the pieces are handled by other
+            // parsers.
             // The purpose of this test is to verify that these other parsers are combined correctly to build a
             // media-type parser.
             expected.CharSet = "utf-8";
@@ -91,13 +92,16 @@ namespace System.Net.Http.Tests
             CheckValidParsedValue(null, 0, null, 0, true);
             CheckValidParsedValue("  ,,", 0, null, 4, true);
 
-            // Note that even if the whole string is invalid, the first media-type value is valid. When the parser
-            // gets called again using the result-index (13), then it fails: I.e. we have 1 valid media-type and an
+            // Note that even if the whole string is invalid, the first media-type value is valid. When the
+            // parser
+            // gets called again using the result-index (13), then it fails: I.e. we have 1 valid media-type and
+            // an
             // invalid one.
             CheckValidParsedValue("text/plain , invalid", 0, expected, 13, true);
             CheckValidParsedValue("text/plain , \r\n", 0, expected, 13, true);
 
-            // We don't have to test all possible input strings, since most of the pieces are handled by other parsers.
+            // We don't have to test all possible input strings, since most of the pieces are handled by other
+            // parsers.
             // The purpose of this test is to verify that these other parsers are combined correctly to build a
             // media-type parser.
             expected.CharSet = "utf-8";

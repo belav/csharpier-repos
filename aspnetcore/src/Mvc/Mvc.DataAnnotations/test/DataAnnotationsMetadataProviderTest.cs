@@ -489,7 +489,8 @@ public class DataAnnotationsMetadataProviderTest
         Assert.Equal("name from resources", context.DisplayMetadata.DisplayName());
     }
 
-    // This is IMPORTANT. Product code needs to use GetDescription() instead of .Description. It's easy to regress.
+    // This is IMPORTANT. Product code needs to use GetDescription() instead of .Description. It's easy
+    // to regress.
     [Fact]
     public void CreateDisplayMetadata_DisplayAttribute_DescriptionFromResources_WithLocalizer()
     {
@@ -524,7 +525,8 @@ public class DataAnnotationsMetadataProviderTest
         Assert.Equal("description from resources", context.DisplayMetadata.Description());
     }
 
-    // This is IMPORTANT. Product code needs to use GetDescription() instead of .Description. It's easy to regress.
+    // This is IMPORTANT. Product code needs to use GetDescription() instead of .Description. It's easy
+    // to regress.
     [Fact]
     public void CreateDisplayMetadata_DisplayAttribute_DescriptionFromResources_NullLocalizer()
     {
@@ -553,7 +555,8 @@ public class DataAnnotationsMetadataProviderTest
         Assert.Equal("description from resources", context.DisplayMetadata.Description());
     }
 
-    // This is IMPORTANT. Product code needs to use GetPrompt() instead of .Prompt. It's easy to regress.
+    // This is IMPORTANT. Product code needs to use GetPrompt() instead of .Prompt. It's easy to
+    // regress.
     [Fact]
     public void CreateDisplayMetadata_DisplayAttribute_PromptFromResources_WithLocalizer()
     {
@@ -588,7 +591,8 @@ public class DataAnnotationsMetadataProviderTest
         Assert.Equal("prompt from resources", context.DisplayMetadata.Placeholder());
     }
 
-    // This is IMPORTANT. Product code needs to use GetPrompt() instead of .Prompt. It's easy to regress.
+    // This is IMPORTANT. Product code needs to use GetPrompt() instead of .Prompt. It's easy to
+    // regress.
     [Fact]
     public void CreateDisplayMetadata_DisplayAttribute_PromptFromResources_NullLocalizer()
     {
@@ -2066,7 +2070,8 @@ public class DataAnnotationsMetadataProviderTest
         var result = DataAnnotationsMetadataProvider.IsRequired(context);
 
         // Assert
-        // While we'd like for result to be 'true', we don't have a very good way of actually calculating it correctly.
+        // While we'd like for result to be 'true', we don't have a very good way of actually calculating it
+        // correctly.
         // This test is primarily here to document the behavior.
         Assert.False(result);
     }

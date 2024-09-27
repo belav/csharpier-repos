@@ -10,11 +10,11 @@ namespace System.Web.Security.Cryptography
     using System.IO;
     using System.Security.Cryptography;
 
-    /******************************************************************
-    * !! WARNING !!                                                  *
-    * This class contains cryptographic code. If you make changes to *
-    * this class, please have it reviewed by the appropriate people. *
-    ******************************************************************/
+/******************************************************************
+* !! WARNING !!                                                  *
+* This class contains cryptographic code. If you make changes to *
+* this class, please have it reviewed by the appropriate people. *
+******************************************************************/
 
     // Uses .NET Framework classes to encrypt (SymmetricAlgorithm) and sign (KeyedHashAlgorithm) data.
     //
@@ -28,7 +28,8 @@ namespace System.Web.Security.Cryptography
     // INPUT: protectedData
     // OUTPUT: clearData
     // ALGORITHM:
-    //   1) Assume protectedData := IV || Enc(Kenc, IV, clearData) || Sign(Kval, IV || Enc(Kenc, IV, clearData))
+    //   1) Assume protectedData := IV || Enc(Kenc, IV, clearData) || Sign(Kval, IV || Enc(Kenc, IV,
+    // clearData))
     //   2) Validate the signature over the payload and strip it from the end
     //   3) Strip off the IV from the beginning of the payload
     //   4) Decrypt what remains of the payload, and return it as clearData
@@ -55,7 +56,8 @@ namespace System.Web.Security.Cryptography
 
         public byte[] Protect(byte[] clearData)
         {
-            // The entire operation is wrapped in a 'checked' block because any overflows should be treated as failures.
+            // The entire operation is wrapped in a 'checked' block because any overflows should be treated as
+            // failures.
             checked
             {
                 // These SymmetricAlgorithm instances are single-use; we wrap it in a 'using' block.
@@ -146,7 +148,8 @@ namespace System.Web.Security.Cryptography
 
         public byte[] Unprotect(byte[] protectedData)
         {
-            // The entire operation is wrapped in a 'checked' block because any overflows should be treated as failures.
+            // The entire operation is wrapped in a 'checked' block because any overflows should be treated as
+            // failures.
             checked
             {
                 // We want to check that the input is in the form:

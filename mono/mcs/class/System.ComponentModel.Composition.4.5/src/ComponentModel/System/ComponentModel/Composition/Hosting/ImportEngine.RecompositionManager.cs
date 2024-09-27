@@ -16,7 +16,8 @@ namespace System.ComponentModel.Composition.Hosting
     {
         /// <summary>
         ///     Used by the <see cref="ImportEngine"/> to effiecently store and retrieve the list of parts
-        ///     that will be affected by changes to exports. This allows the <see cref="ImportEngine"/> to properly
+        ///     that will be affected by changes to exports. This allows the <see cref="ImportEngine"/> to
+        // properly
         ///     block breaking changes and also recompose imports as appropriate.
         /// </summary>
         private class RecompositionManager

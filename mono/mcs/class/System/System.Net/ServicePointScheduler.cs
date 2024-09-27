@@ -202,13 +202,13 @@ namespace System.Net
                     }
 
                     /*
-                     * We discard the `taskList` at this point as it is only used to wake us up.
-                     *
-                     * The `WebCompletionSource<T>` assigns its `CurrentResult` property prior
-                     * to completing the `Task` instance, so whenever a task is finished we will
-                     * also get a non-null `CurrentResult`.
-                     *
-                     */
+                    * We discard the `taskList` at this point as it is only used to wake us up.
+                    *
+                    * The `WebCompletionSource<T>` assigns its `CurrentResult` property prior
+                    * to completing the `Task` instance, so whenever a task is finished we will
+                    * also get a non-null `CurrentResult`.
+                    *
+                    */
                     for (int i = 0; i < operationArray.Length; i++)
                     {
                         var item = operationArray[i];
@@ -227,10 +227,10 @@ namespace System.Net
                     }
 
                     /*
-                     * This needs to be called after we deal with pending completions to
-                     * ensure that connections are properly recognized as being idle.
-                     *
-                     */
+                    * This needs to be called after we deal with pending completions to
+                    * ensure that connections are properly recognized as being idle.
+                    *
+                    */
                     Debug($"MAIN LOOP #3: runMaster={runMaster}");
                     if (runMaster)
                         RunSchedulerIteration();
@@ -686,6 +686,8 @@ namespace System.Net
             }
         }
 
+        //
+        //
         // https://blogs.msdn.microsoft.com/pfxteam/2012/02/11/building-async-coordination-primitives-part-1-asyncmanualresetevent/
         class AsyncManualResetEvent
         {

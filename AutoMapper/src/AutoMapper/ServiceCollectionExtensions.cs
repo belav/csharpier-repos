@@ -10,15 +10,27 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
 /// <summary>
-/// Extensions to scan for AutoMapper classes and register the configuration, mapping, and extensions with the service collection:
+/// Extensions to scan for AutoMapper classes and register the configuration, mapping, and
+// extensions with the service collection:
 /// <list type="bullet">
-/// <item> Finds <see cref="Profile"/> classes and initializes a new <see cref="MapperConfiguration" />,</item>
-/// <item> Scans for <see cref="ITypeConverter{TSource,TDestination}"/>, <see cref="IValueResolver{TSource,TDestination,TDestMember}"/>, <see cref="IMemberValueResolver{TSource,TDestination,TSourceMember,TDestMember}" /> and <see cref="IMappingAction{TSource,TDestination}"/> implementations and registers them as <see cref="ServiceLifetime.Transient"/>, </item>
-/// <item> Registers <see cref="IConfigurationProvider"/> as <see cref="ServiceLifetime.Singleton"/>, and</item>
-/// <item> Registers <see cref="IMapper"/> as a configurable <see cref="ServiceLifetime"/> (default is <see cref="ServiceLifetime.Transient"/>)</item>
+/// <item> Finds <see cref="Profile"/> classes and initializes a new <see cref="MapperConfiguration"
+// />,</item>
+/// <item> Scans for <see cref="ITypeConverter{TSource,TDestination}"/>, <see
+// cref="IValueResolver{TSource,TDestination,TDestMember}"/>, <see
+// cref="IMemberValueResolver{TSource,TDestination,TSourceMember,TDestMember}" /> and <see
+// cref="IMappingAction{TSource,TDestination}"/> implementations and registers them as <see
+// cref="ServiceLifetime.Transient"/>, </item>
+/// <item> Registers <see cref="IConfigurationProvider"/> as <see
+// cref="ServiceLifetime.Singleton"/>, and</item>
+/// <item> Registers <see cref="IMapper"/> as a configurable <see cref="ServiceLifetime"/> (default
+// is <see cref="ServiceLifetime.Transient"/>)</item>
 /// </list>
-/// After calling AddAutoMapper you can resolve an <see cref="IMapper" /> instance from a scoped service provider, or as a dependency
-/// To use <see cref="AutoMapper.QueryableExtensions.Extensions.ProjectTo{TDestination}(IQueryable,IConfigurationProvider, System.Linq.Expressions.Expression{System.Func{TDestination, object}}[])" /> you can resolve the <see cref="IConfigurationProvider"/> instance directly for from an <see cref="IMapper" /> instance.
+/// After calling AddAutoMapper you can resolve an <see cref="IMapper" /> instance from a scoped
+// service provider, or as a dependency
+/// To use <see
+// cref="AutoMapper.QueryableExtensions.Extensions.ProjectTo{TDestination}(IQueryable,IConfigurationProvider,
+// System.Linq.Expressions.Expression{System.Func{TDestination, object}}[])" /> you can resolve the
+// <see cref="IConfigurationProvider"/> instance directly for from an <see cref="IMapper" /> instance.
 /// </summary>
 public static class ServiceCollectionExtensions
 {

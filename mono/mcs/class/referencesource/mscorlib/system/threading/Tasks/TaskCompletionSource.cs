@@ -28,19 +28,25 @@ using System.Threading;
 namespace System.Threading.Tasks
 {
     /// <summary>
-    /// Represents the producer side of a <see cref="T:System.Threading.Tasks.Task{TResult}"/> unbound to a
+    /// Represents the producer side of a <see cref="T:System.Threading.Tasks.Task{TResult}"/> unbound
+    // to a
     /// delegate, providing access to the consumer side through the <see cref="Task"/> property.
     /// </summary>
     /// <remarks>
     /// <para>
     /// It is often the case that a <see cref="T:System.Threading.Tasks.Task{TResult}"/> is desired to
     /// represent another asynchronous operation.
-    /// <see cref="TaskCompletionSource{TResult}">TaskCompletionSource</see> is provided for this purpose. It enables
-    /// the creation of a task that can be handed out to consumers, and those consumers can use the members
-    /// of the task as they would any other. However, unlike most tasks, the state of a task created by a
-    /// TaskCompletionSource is controlled explicitly by the methods on TaskCompletionSource. This enables the
+    /// <see cref="TaskCompletionSource{TResult}">TaskCompletionSource</see> is provided for this
+    // purpose. It enables
+    /// the creation of a task that can be handed out to consumers, and those consumers can use the
+    // members
+    /// of the task as they would any other. However, unlike most tasks, the state of a task created by
+    // a
+    /// TaskCompletionSource is controlled explicitly by the methods on TaskCompletionSource. This
+    // enables the
     /// completion of the external asynchronous operation to be propagated to the underlying Task. The
-    /// separation also ensures that consumers are not able to transition the state without access to the
+    /// separation also ensures that consumers are not able to transition the state without access to
+    // the
     /// corresponding TaskCompletionSource.
     /// </para>
     /// <para>
@@ -115,7 +121,8 @@ namespace System.Threading.Tasks
         /// This property enables a consumer access to the <see
         /// cref="T:System.Threading.Tasks.Task{TResult}"/> that is controlled by this instance.
         /// The <see cref="SetResult"/>, <see cref="SetException(System.Exception)"/>,
-        /// <see cref="SetException(System.Collections.Generic.IEnumerable{System.Exception})"/>, and <see cref="SetCanceled"/>
+        /// <see cref="SetException(System.Collections.Generic.IEnumerable{System.Exception})"/>, and <see
+        // cref="SetCanceled"/>
         /// methods (and their "Try" variants) on this instance all result in the relevant state
         /// transitions on this underlying Task.
         /// </remarks>
@@ -125,7 +132,8 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>Spins until the underlying task is completed.</summary>
-        /// <remarks>This should only be called if the task is in the process of being completed by another thread.</remarks>
+        /// <remarks>This should only be called if the task is in the process of being completed by another
+        // thread.</remarks>
         private void SpinUntilCompleted()
         {
             // Spin wait until the completion is finalized by another thread.
@@ -150,8 +158,10 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </remarks>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exception"/> argument is null.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exception"/> argument is
+        // null.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public bool TrySetException(Exception exception)
         {
             if (exception == null)
@@ -179,10 +189,14 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </remarks>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exceptions"/> argument is null.</exception>
-        /// <exception cref="T:System.ArgumentException">There are one or more null elements in <paramref name="exceptions"/>.</exception>
-        /// <exception cref="T:System.ArgumentException">The <paramref name="exceptions"/> collection is empty.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exceptions"/> argument is
+        // null.</exception>
+        /// <exception cref="T:System.ArgumentException">There are one or more null elements in <paramref
+        // name="exceptions"/>.</exception>
+        /// <exception cref="T:System.ArgumentException">The <paramref name="exceptions"/> collection is
+        // empty.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public bool TrySetException(IEnumerable<Exception> exceptions)
         {
             if (exceptions == null)
@@ -216,9 +230,11 @@ namespace System.Threading.Tasks
         }
 
         /// <summary>Attempts to transition the underlying task to the faulted state.</summary>
-        /// <param name="exceptions">The collection of exception dispatch infos to bind to this task.</param>
+        /// <param name="exceptions">The collection of exception dispatch infos to bind to this
+        // task.</param>
         /// <returns>True if the operation was successful; otherwise, false.</returns>
-        /// <remarks>Unlike the public methods, this method doesn't currently validate that its arguments are correct.</remarks>
+        /// <remarks>Unlike the public methods, this method doesn't currently validate that its arguments
+        // are correct.</remarks>
         internal bool TrySetException(IEnumerable<ExceptionDispatchInfo> exceptions)
         {
             Contract.Assert(exceptions != null);
@@ -241,7 +257,8 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="exception">The exception to bind to this <see
         /// cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exception"/> argument is null.</exception>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exception"/> argument is
+        // null.</exception>
         /// <exception cref="T:System.InvalidOperationException">
         /// The underlying <see cref="T:System.Threading.Tasks.Task{TResult}"/> is already in one
         /// of the three final states:
@@ -249,7 +266,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public void SetException(Exception exception)
         {
             if (exception == null)
@@ -271,8 +289,10 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="exceptions">The collection of exceptions to bind to this <see
         /// cref="T:System.Threading.Tasks.Task{TResult}"/>.</param>
-        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exceptions"/> argument is null.</exception>
-        /// <exception cref="T:System.ArgumentException">There are one or more null elements in <paramref name="exceptions"/>.</exception>
+        /// <exception cref="T:System.ArgumentNullException">The <paramref name="exceptions"/> argument is
+        // null.</exception>
+        /// <exception cref="T:System.ArgumentException">There are one or more null elements in <paramref
+        // name="exceptions"/>.</exception>
         /// <exception cref="T:System.InvalidOperationException">
         /// The underlying <see cref="T:System.Threading.Tasks.Task{TResult}"/> is already in one
         /// of the three final states:
@@ -280,7 +300,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public void SetException(IEnumerable<Exception> exceptions)
         {
             if (!TrySetException(exceptions))
@@ -307,7 +328,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </remarks>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public bool TrySetResult(TResult result)
         {
             bool rval = m_task.TrySetResult(result);
@@ -331,7 +353,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public void SetResult(TResult result)
         {
             if (!TrySetResult(result))
@@ -354,7 +377,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </remarks>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public bool TrySetCanceled()
         {
             return TrySetCanceled(default(CancellationToken));
@@ -382,7 +406,8 @@ namespace System.Threading.Tasks
         /// <see cref="System.Threading.Tasks.TaskStatus.Faulted">Faulted</see>, or
         /// <see cref="System.Threading.Tasks.TaskStatus.Canceled">Canceled</see>.
         /// </exception>
-        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The <see cref="Task"/> was
+        // disposed.</exception>
         public void SetCanceled()
         {
             if (!TrySetCanceled())

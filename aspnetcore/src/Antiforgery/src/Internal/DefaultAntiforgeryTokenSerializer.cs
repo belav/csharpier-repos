@@ -74,18 +74,18 @@ internal sealed class DefaultAntiforgeryTokenSerializer : IAntiforgeryTokenSeria
         );
     }
 
-    /* The serialized format of the anti-XSRF token is as follows:
-     * Version: 1 byte integer
-     * SecurityToken: 16 byte binary blob
-     * IsCookieToken: 1 byte Boolean
-     * [if IsCookieToken != true]
-     *   +- IsClaimsBased: 1 byte Boolean
-     *   |  [if IsClaimsBased = true]
-     *   |    `- ClaimUid: 32 byte binary blob
-     *   |  [if IsClaimsBased = false]
-     *   |    `- Username: UTF-8 string with 7-bit integer length prefix
-     *   `- AdditionalData: UTF-8 string with 7-bit integer length prefix
-     */
+/* The serialized format of the anti-XSRF token is as follows:
+* Version: 1 byte integer
+* SecurityToken: 16 byte binary blob
+* IsCookieToken: 1 byte Boolean
+* [if IsCookieToken != true]
+*   +- IsClaimsBased: 1 byte Boolean
+*   |  [if IsClaimsBased = true]
+*   |    `- ClaimUid: 32 byte binary blob
+*   |  [if IsClaimsBased = false]
+*   |    `- Username: UTF-8 string with 7-bit integer length prefix
+*   `- AdditionalData: UTF-8 string with 7-bit integer length prefix
+*/
     private static AntiforgeryToken? Deserialize(BinaryReader reader)
     {
         // we can only consume tokens of the same serialized version that we generate

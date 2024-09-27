@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 namespace System.CommandLine.Completions
 {
@@ -8,14 +9,18 @@ namespace System.CommandLine.Completions
     /// </summary>
     public class CompletionItem : IEquatable<CompletionItem>
     {
-        // reference: https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_completion
+        // reference:
+        // https://microsoft.github.io/language-server-protocol/specifications/lsp/3.17/specification/#textDocument_completion
         internal const string KindKeyword = "Keyword";
         internal const string KindValue = "Value";
 
-        /// <param name="label">The label value, which is the text displayed to users and, unless <paramref name="insertText"/> is set, is also used to populate the <see cref="InsertText"/> property.</param>
+        /// <param name="label">The label value, which is the text displayed to users and, unless <paramref
+        // name="insertText"/> is set, is also used to populate the <see cref="InsertText"/> property.</param>
         /// <param name="kind">The kind of completion item.</param>
-        /// <param name="sortText">The value used to sort the completion item in a list. If this is not provided, then <paramref name="label"/>  is used.</param>
-        /// <param name="insertText">The text to be inserted by this completion item. If this is not provided, then <paramref name="label"/>  is used.</param>
+        /// <param name="sortText">The value used to sort the completion item in a list. If this is not
+        // provided, then <paramref name="label"/>  is used.</param>
+        /// <param name="insertText">The text to be inserted by this completion item. If this is not
+        // provided, then <paramref name="label"/>  is used.</param>
         /// <param name="documentation">Documentation about the completion item.</param>
         /// <param name="detail">Additional details regarding the completion item.</param>
         public CompletionItem(

@@ -4,7 +4,8 @@
 using System.Runtime.CompilerServices;
 using Xunit;
 
-// On ARM32 the following has S0 passed in two registers, which requires passing 3 bytes in the last register.
+// On ARM32 the following has S0 passed in two registers, which requires passing 3 bytes in the last
+// register.
 // We cannot do that in a single load from an arbitrary source and must copy it to a local first.
 
 public struct S0

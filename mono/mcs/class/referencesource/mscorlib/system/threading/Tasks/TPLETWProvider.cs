@@ -66,7 +66,8 @@ namespace System.Threading.Tasks
         /// </summary>
         public static TplEtwProvider Log = new TplEtwProvider();
 
-        /// <summary>Prevent external instantiation.  All logging should go through the Log instance.</summary>
+        /// <summary>Prevent external instantiation.  All logging should go through the Log
+        // instance.</summary>
         private TplEtwProvider() { }
 
         /// <summary>Type of a fork/join operation.</summary>
@@ -167,12 +168,14 @@ namespace System.Threading.Tasks
             public const EventKeywords TasksSetActivityIds = (EventKeywords)0x10000;
 
             /// <summary>
-            /// Relatively Verbose logging meant for debugging the Task library itself. Will probably be removed in the future
+            /// Relatively Verbose logging meant for debugging the Task library itself. Will probably be removed
+            // in the future
             /// </summary>
             public const EventKeywords Debug = (EventKeywords)0x20000;
 
             /// <summary>
-            /// Relatively Verbose logging meant for debugging the Task library itself.  Will probably be removed in the future
+            /// Relatively Verbose logging meant for debugging the Task library itself.  Will probably be
+            // removed in the future
             /// </summary>
             public const EventKeywords DebugActivityId = (EventKeywords)0x40000;
         }
@@ -319,8 +322,10 @@ namespace System.Threading.Tasks
             if (IsEnabled() && IsEnabled(EventLevel.Informational, Keywords.Parallel))
             {
                 // There is no explicit WriteEvent() overload matching this event's fields.
-                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an object allocation every time this event is fired.
-                // To prevent that problem we will call WriteEventCore(), which works with a stack based EventData array populated with the event fields
+                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an object
+                // allocation every time this event is fired.
+                // To prevent that problem we will call WriteEventCore(), which works with a stack based EventData
+                // array populated with the event fields
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[4];
@@ -366,8 +371,10 @@ namespace System.Threading.Tasks
             if (IsEnabled() && IsEnabled(EventLevel.Informational, Keywords.Parallel))
             {
                 // There is no explicit WriteEvent() overload matching this event's fields.
-                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an object allocation every time this event is fired.
-                // To prevent that problem we will call WriteEventCore(), which works with a stack based EventData array populated with the event fields
+                // Therefore calling WriteEvent() would hit the "params" overload, which leads to an object
+                // allocation every time this event is fired.
+                // To prevent that problem we will call WriteEventCore(), which works with a stack based EventData
+                // array populated with the event fields
                 unsafe
                 {
                     EventData* eventPayload = stackalloc EventData[5];
@@ -628,8 +635,10 @@ namespace System.Threading.Tasks
         /// <param name="OriginatingTaskID">The task ID.</param>
         /// <param name="TaskID">The task ID.</param>
         /// <param name="Behavior">Configured behavior for the wait.</param>
-        /// <param name="ContinueWithTaskID">If known, if 'TaskID' has a 'continueWith' task, mention give its ID here.
-        ///      0 means unknown.   This allows better visualization of the common sequential chaining case.</param>
+        /// <param name="ContinueWithTaskID">If known, if 'TaskID' has a 'continueWith' task, mention give
+        // its ID here.
+        ///      0 means unknown.   This allows better visualization of the common sequential chaining
+        // case.</param>
         /// </summary>
         [SecuritySafeCritical]
         [Event(

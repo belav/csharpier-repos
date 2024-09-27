@@ -10,7 +10,8 @@ namespace Microsoft.Net.Http.Headers;
 /// <summary>
 /// Represents a byte range in a Range header value.
 /// <para>
-/// The <see cref="RangeItemHeaderValue"/> class provides support for a byte range in a <c>Range</c> as defined
+/// The <see cref="RangeItemHeaderValue"/> class provides support for a byte range in a <c>Range</c>
+// as defined
 /// in <see href="https://tools.ietf.org/html/rfc2616">RFC 2616</see>.
 /// </para>
 /// </summary>
@@ -99,7 +100,8 @@ public class RangeItemHeaderValue
         return _from.GetValueOrDefault().GetHashCode() ^ _to.GetValueOrDefault().GetHashCode();
     }
 
-    // Returns the length of a range list. E.g. "1-2, 3-4, 5-6" adds 3 ranges to 'rangeCollection'. Note that empty
+    // Returns the length of a range list. E.g. "1-2, 3-4, 5-6" adds 3 ranges to 'rangeCollection'. Note
+    // that empty
     // list segments are allowed, e.g. ",1-2, , 3-4,,".
     internal static int GetRangeItemListLength(
         StringSegment input,

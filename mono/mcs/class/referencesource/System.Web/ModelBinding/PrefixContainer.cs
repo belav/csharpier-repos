@@ -5,8 +5,10 @@
     using System.Linq;
 
     /// <summary>
-    /// This is a container for prefix values. It normalizes all the values into dotted-form and then stores
-    /// them in a sorted array. All queries for prefixes are also normalized to dotted-form, and searches
+    /// This is a container for prefix values. It normalizes all the values into dotted-form and then
+    // stores
+    /// them in a sorted array. All queries for prefixes are also normalized to dotted-form, and
+    // searches
     /// for ContainsPrefix are done with a binary search.
     /// </summary>
     internal sealed class PrefixContainer

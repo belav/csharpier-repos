@@ -42,7 +42,8 @@ internal sealed class TimerAwaitable : IDisposable, ICriticalNotifyCompletion
 
                 if (_timer == null)
                 {
-                    // This fixes the cycle by using a WeakReference to the state object. The object graph now looks like this:
+                    // This fixes the cycle by using a WeakReference to the state object. The object graph now looks
+                    // like this:
                     // Timer -> TimerHolder -> TimerQueueTimer -> WeakReference<TimerAwaitable> -> Timer -> ...
                     // If TimerAwaitable falls out of scope, the timer should be released.
                     _timer = NonCapturingTimer.Create(

@@ -10,11 +10,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     an end of the relationship with a collection that contains instances of another entity type.
 /// </summary>
 /// <remarks>
-///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" />
+// API
 ///     and it is not designed to be directly constructed in your application code.
 /// </remarks>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 /// <typeparam name="TEntity">The entity type to be configured.</typeparam>
 /// <typeparam name="TRelatedEntity">The entity type that this relationship targets.</typeparam>
@@ -26,10 +28,14 @@ public class CollectionNavigationBuilder<
     where TRelatedEntity : class
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public CollectionNavigationBuilder(
@@ -68,7 +74,8 @@ public class CollectionNavigationBuilder<
     /// </remarks>
     /// <param name="navigationExpression">
     ///     A lambda expression representing the reference navigation property on the other end of this
-    ///     relationship (<c>post => post.Blog</c>). If no property is specified, the relationship will be
+    ///     relationship (<c>post => post.Blog</c>). If no property is specified, the relationship will
+    // be
     ///     configured without a navigation property on the other end of the relationship.
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
@@ -85,7 +92,8 @@ public class CollectionNavigationBuilder<
     ///     Configures this as a many-to-many relationship.
     /// </summary>
     /// <param name="navigationName">
-    ///     The name of the collection navigation property on the other end of this relationship. Can be <see langword="null" /> to
+    ///     The name of the collection navigation property on the other end of this relationship. Can be
+    // <see langword="null" /> to
     ///     create a unidirectional relationship.
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>

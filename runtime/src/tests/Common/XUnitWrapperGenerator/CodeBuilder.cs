@@ -107,7 +107,8 @@ public class CodeBuilder
     }
 
     /// <summary>
-    ///     Pop an indent level (and restore the indent level to before the last call to <see cref="PushIndent" />).
+    ///     Pop an indent level (and restore the indent level to before the last call to <see
+    // cref="PushIndent" />).
     /// </summary>
     public void PopIndent()
     {
@@ -167,24 +168,28 @@ public class CodeBuilder
     /// <summary>
     ///     Append the given code.  The currently active indentation level is applied at newlines.
     /// </summary>
-    /// <exception cref="System.ArgumentException">Thrown when a line already contains leading whitespace</exception>
+    /// <exception cref="System.ArgumentException">Thrown when a line already contains leading
+    // whitespace</exception>
     /// <param name="code">The code to append.</param>
     public void Append(string code) => Append(code, allowLeadingWhiteSpace: false);
 
     /// <summary>
-    ///     Append the given, already-indented code.  The currently active indentation level is also applied at newlines.
+    ///     Append the given, already-indented code.  The currently active indentation level is also
+    // applied at newlines.
     /// </summary>
     /// <param name="code">The code to append.</param>
     public void AppendIndented(string code) => Append(code, allowLeadingWhiteSpace: true);
 
     /// <summary>
-    ///     Append the given, already-indented code.  The currently active indentation level is also applied at newlines.
+    ///     Append the given, already-indented code.  The currently active indentation level is also
+    // applied at newlines.
     /// </summary>
     /// <param name="code">The code to append.</param>
     public void Append(CodeBuilder code) => AppendIndented(code.GetCode());
 
     /// <summary>
-    ///     Append the given code followed by a line terminator.  The currently active indentation level is applied at newlines.
+    ///     Append the given code followed by a line terminator.  The currently active indentation level
+    // is applied at newlines.
     /// </summary>
     /// <param name="codeLine">The line to append.</param>
     public void AppendLine(string codeLine)
@@ -236,7 +241,8 @@ public class CodeBuilder
     ///     Creates a new <see cref="IndentationContext"/>.
     /// </summary>
     /// <param name="introduction">
-    ///     String to add before the braces and indentation context.  If non-empty, then a new line will be
+    ///     String to add before the braces and indentation context.  If non-empty, then a new line will
+    // be
     ///     appended after it.
     /// </param>
     /// <param name="additionalIndent">Number of indentation levels to add.</param>

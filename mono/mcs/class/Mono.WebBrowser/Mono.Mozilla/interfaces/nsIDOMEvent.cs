@@ -79,7 +79,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int initEvent(
-            /*DOMString*/HandleRef eventTypeArg,
+/*DOMString*/HandleRef eventTypeArg,
             bool canBubbleArg,
             bool cancelableArg
         );

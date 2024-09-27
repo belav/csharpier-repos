@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         internal delegate MefHostServices CreationHook(IEnumerable<Assembly> assemblies);
 
         /// <summary>
-        /// This delegate allows test code to override the behavior of <see cref="Create(IEnumerable{Assembly})"/>.
+        /// This delegate allows test code to override the behavior of <see
+        // cref="Create(IEnumerable{Assembly})"/>.
         /// </summary>
         /// <seealso cref="TestAccessor.HookServiceCreation"/>
         private static CreationHook s_creationHook;
@@ -113,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             }
         }
 
-        // Used to build a MEF composition using the main workspaces assemblies and the known VisualBasic/CSharp workspace assemblies.
+        // Used to build a MEF composition using the main workspaces assemblies and the known
+        // VisualBasic/CSharp workspace assemblies.
         // updated: includes feature assemblies since they now have public API's.
         private static readonly string[] s_defaultAssemblyNames =
         [

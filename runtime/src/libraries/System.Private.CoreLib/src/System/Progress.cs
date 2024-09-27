@@ -19,7 +19,8 @@ namespace System
     /// </remarks>
     public class Progress<T> : IProgress<T>
     {
-        /// <summary>The synchronization context captured upon construction.  This will never be null.</summary>
+        /// <summary>The synchronization context captured upon construction.  This will never be
+        // null.</summary>
         private readonly SynchronizationContext _synchronizationContext;
 
         /// <summary>The handler specified to the constructor.  This may be null.</summary>
@@ -47,7 +48,8 @@ namespace System
         /// the <see cref="Progress{T}"/> at construction, it's possible that this handler instance
         /// could be invoked concurrently with itself.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is null (<see langword="Nothing" /> in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is null (<see
+        // langword="Nothing" /> in Visual Basic).</exception>
         public Progress(Action<T> handler)
             : this()
         {

@@ -31,7 +31,8 @@ namespace System.Xml.Serialization
             Soap.Encoding
         );
 
-        /// <include file='doc\SoapSchemaExporter.uex' path='docs/doc[@for="SoapSchemaExporter.SoapSchemaExporter"]/*' />
+        /// <include file='doc\SoapSchemaExporter.uex'
+        // path='docs/doc[@for="SoapSchemaExporter.SoapSchemaExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -40,7 +41,8 @@ namespace System.Xml.Serialization
             this.schemas = schemas;
         }
 
-        /// <include file='doc\SoapSchemaExporter.uex' path='docs/doc[@for="SoapSchemaExporter.ExportTypeMapping"]/*' />
+        /// <include file='doc\SoapSchemaExporter.uex'
+        // path='docs/doc[@for="SoapSchemaExporter.ExportTypeMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -50,7 +52,8 @@ namespace System.Xml.Serialization
             ExportTypeMapping(xmlTypeMapping.Mapping, null);
         }
 
-        /// <include file='doc\SoapSchemaExporter.uex' path='docs/doc[@for="SoapSchemaExporter.ExportMembersMapping"]/*' />
+        /// <include file='doc\SoapSchemaExporter.uex'
+        // path='docs/doc[@for="SoapSchemaExporter.ExportMembersMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -59,7 +62,8 @@ namespace System.Xml.Serialization
             ExportMembersMapping(xmlMembersMapping, false);
         }
 
-        /// <include file='doc\SoapSchemaExporter.uex' path='docs/doc[@for="SoapSchemaExporter.ExportMembersMapping1"]/*' />
+        /// <include file='doc\SoapSchemaExporter.uex'
+        // path='docs/doc[@for="SoapSchemaExporter.ExportMembersMapping1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

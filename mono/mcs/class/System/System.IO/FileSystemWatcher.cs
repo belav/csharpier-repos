@@ -182,7 +182,7 @@ namespace System.IO
 
         #region Properties
 
-        /* If this is enabled, we Pulse this instance */
+/* If this is enabled, we Pulse this instance */
         internal bool Waiting
         {
             get { return waiting; }
@@ -677,13 +677,13 @@ namespace System.IO
 
         #endregion // Events and Delegates
 
-        /* 0 -> not supported	*/
-        /* 1 -> windows		*/
-        /* 2 -> FAM		*/
-        /* 3 -> Kevent		*/
-        /* 4 -> gamin		*/
-        /* 5 -> inotify		*/
-        /* 6 -> CoreFX		*/
+/* 0 -> not supported	*/
+/* 1 -> windows		*/
+/* 2 -> FAM		*/
+/* 3 -> Kevent		*/
+/* 4 -> gamin		*/
+/* 5 -> inotify		*/
+/* 6 -> CoreFX		*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         static extern int InternalSupportsFSW();
     }

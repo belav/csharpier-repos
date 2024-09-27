@@ -15,7 +15,8 @@ namespace System.Text
         public abstract Encoding? GetEncoding(string name);
         public abstract Encoding? GetEncoding(int codepage);
 
-        // GetEncoding should return either valid encoding or null. shouldn't throw any exception except on null name
+        // GetEncoding should return either valid encoding or null. shouldn't throw any exception except on
+        // null name
         public virtual Encoding? GetEncoding(
             string name,
             EncoderFallback encoderFallback,
@@ -56,8 +57,10 @@ namespace System.Text
         {
             ArgumentNullException.ThrowIfNull(provider);
 
-            // Few providers are added in a typical app (typically just CodePagesEncodingProvider.Instance), and when they are,
-            // they're generally not added concurrently.  So use an optimistic concurrency scheme rather than paying for a lock
+            // Few providers are added in a typical app (typically just CodePagesEncodingProvider.Instance), and
+            // when they are,
+            // they're generally not added concurrently.  So use an optimistic concurrency scheme rather than
+            // paying for a lock
             // object allocation on the startup path.
 
             if (

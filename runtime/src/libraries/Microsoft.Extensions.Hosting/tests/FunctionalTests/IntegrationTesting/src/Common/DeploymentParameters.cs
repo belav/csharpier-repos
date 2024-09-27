@@ -42,7 +42,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
         /// <summary>
         /// Creates an instance of <see cref="DeploymentParameters"/>.
         /// </summary>
-        /// <param name="applicationPath">Source code location of the target location to be deployed.</param>
+        /// <param name="applicationPath">Source code location of the target location to be
+        // deployed.</param>
         /// <param name="runtimeFlavor">Flavor of the clr to run against.</param>
         /// <param name="runtimeArchitecture">Architecture of the runtime to be used.</param>
         public DeploymentParameters(

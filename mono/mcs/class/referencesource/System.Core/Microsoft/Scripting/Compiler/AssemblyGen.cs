@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 using System;
 using System.Collections.Generic;
@@ -147,8 +147,10 @@ namespace System.Linq.Expressions.Compiler
             sb.Append(index);
 
             // There is a bug in Reflection.Emit that leads to
-            // Unhandled Exception: System.Runtime.InteropServices.COMException (0x80131130): Record not found on lookup.
-            // if there is any of the characters []*&+,\ in the type name and a method defined on the type is called.
+            // Unhandled Exception: System.Runtime.InteropServices.COMException (0x80131130): Record not found
+            // on lookup.
+            // if there is any of the characters []*&+,\ in the type name and a method defined on the type is
+            // called.
             sb.Replace('+', '_')
                 .Replace('[', '_')
                 .Replace(']', '_')

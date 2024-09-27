@@ -273,13 +273,15 @@ namespace System.Runtime.Serialization.Json
 
         public override bool IsStartObject(XmlReader reader)
         {
-            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in IsStartObject
+            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in
+            // IsStartObject
             return IsStartObjectHandleExceptions(new JsonReaderDelegator(reader));
         }
 
         public override bool IsStartObject(XmlDictionaryReader reader)
         {
-            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in IsStartObject
+            // No need to pass in DateTimeFormat to JsonReaderDelegator: no DateTimes will be read in
+            // IsStartObject
             return IsStartObjectHandleExceptions(new JsonReaderDelegator(reader));
         }
 
@@ -325,13 +327,15 @@ namespace System.Runtime.Serialization.Json
 
         public override void WriteEndObject(XmlWriter writer)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end
+            // object
             WriteEndObjectHandleExceptions(new JsonWriterDelegator(writer));
         }
 
         public override void WriteEndObject(XmlDictionaryWriter writer)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in end
+            // object
             WriteEndObjectHandleExceptions(new JsonWriterDelegator(writer));
         }
 
@@ -381,13 +385,15 @@ namespace System.Runtime.Serialization.Json
 
         public override void WriteStartObject(XmlWriter writer, object graph)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start
+            // object
             WriteStartObjectHandleExceptions(new JsonWriterDelegator(writer), graph);
         }
 
         public override void WriteStartObject(XmlDictionaryWriter writer, object graph)
         {
-            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start object
+            // No need to pass in DateTimeFormat to JsonWriterDelegator: no DateTimes will be written in start
+            // object
             WriteStartObjectHandleExceptions(new JsonWriterDelegator(writer), graph);
         }
 

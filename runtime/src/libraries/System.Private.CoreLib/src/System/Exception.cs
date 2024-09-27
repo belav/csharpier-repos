@@ -279,8 +279,10 @@ namespace System
                 return; // early-exit
             }
 
-            // Store the current stack trace into the "remote" stack trace, which was originally introduced to support
-            // remoting of exceptions cross app-domain boundaries, and is thus concatenated into Exception.StackTrace
+            // Store the current stack trace into the "remote" stack trace, which was originally introduced to
+            // support
+            // remoting of exceptions cross app-domain boundaries, and is thus concatenated into
+            // Exception.StackTrace
             // when it's retrieved.
             var sb = new StringBuilder(256);
             new StackTrace(fNeedFileInfo: true).ToString(
@@ -298,7 +300,8 @@ namespace System
                 return; // early-exit
             }
 
-            // Store the provided text into the "remote" stack trace, following the same format SetCurrentStackTrace
+            // Store the provided text into the "remote" stack trace, following the same format
+            // SetCurrentStackTrace
             // would have generated.
             _remoteStackTraceString =
                 stackTrace

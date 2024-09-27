@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         // normalized absolute path
         private readonly string _baseDirectory;
 
-        // Normalized absolute path to a directory where assemblies are copied. Must contain nothing but shadow-copied assemblies.
+        // Normalized absolute path to a directory where assemblies are copied. Must contain nothing but
+        // shadow-copied assemblies.
         // Internal for testing.
         internal string ShadowCopyDirectory;
 
@@ -48,12 +49,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         }
 
         // Cache for files that are shadow-copied:
-        // (original path, last write timestamp) -> (public shadow copy, private metadata instance that owns the PE image)
+        // (original path, last write timestamp) -> (public shadow copy, private metadata instance that owns
+        // the PE image)
         private readonly Dictionary<FileKey, CacheEntry<MetadataShadowCopy>> _shadowCopies =
             new Dictionary<FileKey, CacheEntry<MetadataShadowCopy>>();
 
         // Cache for files that are not shadow-copied:
-        // (path, last write timestamp) -> (public metadata, private metadata instance that owns the PE image)
+        // (path, last write timestamp) -> (public metadata, private metadata instance that owns the PE
+        // image)
         private readonly Dictionary<FileKey, CacheEntry<Metadata>> _noShadowCopyCache =
             new Dictionary<FileKey, CacheEntry<Metadata>>();
 
@@ -67,9 +70,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// </summary>
         /// <param name="directory">The directory to use to store file copies.</param>
         /// <param name="noShadowCopyDirectories">Directories to exclude from shadow-copying.</param>
-        /// <param name="documentationCommentsCulture">Culture of documentation comments to copy. If not specified no doc comment files are going to be copied.</param>
+        /// <param name="documentationCommentsCulture">Culture of documentation comments to copy. If not
+        // specified no doc comment files are going to be copied.</param>
         /// <exception cref="ArgumentNullException"><paramref name="directory"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="directory"/> is not an absolute path.</exception>
+        /// <exception cref="ArgumentException"><paramref name="directory"/> is not an absolute
+        // path.</exception>
         public MetadataShadowCopyProvider(
             string directory = null,
             IEnumerable<string> noShadowCopyDirectories = null,
@@ -128,11 +133,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         }
 
         /// <summary>
-        /// Determine whether given path is under the shadow-copy directory managed by this shadow-copy provider.
+        /// Determine whether given path is under the shadow-copy directory managed by this shadow-copy
+        // provider.
         /// </summary>
         /// <param name="fullPath">Absolute path.</param>
         /// <exception cref="ArgumentNullException"><paramref name="fullPath"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fullPath"/> is not an absolute path.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fullPath"/> is not an absolute
+        // path.</exception>
         public bool IsShadowCopy(string fullPath)
         {
             RequireAbsolutePath(fullPath, nameof(fullPath));
@@ -234,10 +241,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <summary>
         /// Gets or creates metadata for specified file path.
         /// </summary>
-        /// <param name="fullPath">Full path to an assembly manifest module file or a standalone module file.</param>
+        /// <param name="fullPath">Full path to an assembly manifest module file or a standalone module
+        // file.</param>
         /// <param name="kind">Metadata kind (assembly or module).</param>
         /// <returns>Metadata for the specified file.</returns>
-        /// <exception cref="IOException">Error reading file <paramref name="fullPath"/>. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="IOException">Error reading file <paramref name="fullPath"/>. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         public Metadata GetMetadata(string fullPath, MetadataImageKind kind)
         {
             if (NeedsShadowCopy(fullPath))
@@ -287,15 +296,19 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// <summary>
         /// Gets or creates a copy of specified assembly or standalone module.
         /// </summary>
-        /// <param name="fullPath">Full path to an assembly manifest module file or a standalone module file.</param>
+        /// <param name="fullPath">Full path to an assembly manifest module file or a standalone module
+        // file.</param>
         /// <param name="kind">Metadata kind (assembly or module).</param>
         /// <returns>
-        /// Copy of the specified file, or null if the file doesn't need a copy (<see cref="NeedsShadowCopy"/>).
+        /// Copy of the specified file, or null if the file doesn't need a copy (<see
+        // cref="NeedsShadowCopy"/>).
         /// Returns the same object if called multiple times with the same path.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="fullPath"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="fullPath"/> is not an absolute path.</exception>
-        /// <exception cref="IOException">Error reading file <paramref name="fullPath"/>. See <see cref="Exception.InnerException"/> for details.</exception>
+        /// <exception cref="ArgumentException"><paramref name="fullPath"/> is not an absolute
+        // path.</exception>
+        /// <exception cref="IOException">Error reading file <paramref name="fullPath"/>. See <see
+        // cref="Exception.InnerException"/> for details.</exception>
         public MetadataShadowCopy GetMetadataShadowCopy(string fullPath, MetadataImageKind kind)
         {
             return NeedsShadowCopy(fullPath) ? GetMetadataShadowCopyNoCheck(fullPath, kind) : null;
@@ -376,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// </summary>
         /// <param name="originalPath">Full path.</param>
         /// <exception cref="ArgumentNullException"><paramref name="originalPath"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="originalPath"/> is not an absolute path.</exception>
+        /// <exception cref="ArgumentException"><paramref name="originalPath"/> is not an absolute
+        // path.</exception>
         /// <remarks>
         /// Doesn't affect files that have already been shadow-copied.
         /// </remarks>

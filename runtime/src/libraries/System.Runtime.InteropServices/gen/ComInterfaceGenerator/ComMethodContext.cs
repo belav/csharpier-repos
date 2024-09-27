@@ -15,13 +15,16 @@ namespace Microsoft.Interop
 {
     /// <summary>
     /// Represents a method, its declaring interface, and its index in the interface's vtable.
-    /// This type contains all information necessary to generate the corresponding methods in the ComInterfaceGenerator
+    /// This type contains all information necessary to generate the corresponding methods in the
+    // ComInterfaceGenerator
     /// </summary>
     internal sealed class ComMethodContext : IEquatable<ComMethodContext>
     {
         /// <summary>
-        /// A partially constructed <see cref="ComMethodContext"/> that does not have a <see cref="IncrementalMethodStubGenerationContext"/> generated for it yet.
-        /// <see cref="Builder"/> can be constructed without a reference to an ISymbol, whereas the <see cref="IncrementalMethodStubGenerationContext"/> requires an ISymbol
+        /// A partially constructed <see cref="ComMethodContext"/> that does not have a <see
+        // cref="IncrementalMethodStubGenerationContext"/> generated for it yet.
+        /// <see cref="Builder"/> can be constructed without a reference to an ISymbol, whereas the <see
+        // cref="IncrementalMethodStubGenerationContext"/> requires an ISymbol
         /// </summary>
         /// <param name="OriginalDeclaringInterface">
         /// The interface that originally declared the method in user code
@@ -47,7 +50,8 @@ namespace Microsoft.Interop
         private readonly State _state;
 
         /// <summary>
-        /// Construct a full method context from the <paramref name="builder"/>, context, and additional information.
+        /// Construct a full method context from the <paramref name="builder"/>, context, and additional
+        // information.
         /// </summary>
         /// <param name="builder">The partially constructed context</param>
         /// <param name="owningInterface">The final owning interface of this method context</param>
@@ -217,7 +221,8 @@ namespace Microsoft.Interop
         }
 
         /// <summary>
-        /// Returns a flat list of <see cref="Builder"/> and its owning interface that represents all declared methods and inherited methods.
+        /// Returns a flat list of <see cref="Builder"/> and its owning interface that represents all
+        // declared methods and inherited methods.
         /// Guarantees the output will be sorted by order of interface input order, then by vtable order.
         /// </summary>
         public static List<(
@@ -232,8 +237,10 @@ namespace Microsoft.Interop
         )
         {
             // Optimization : This step technically only needs a single interface inheritance hierarchy.
-            // We can calculate all inheritance chains in a previous step and only pass a single inheritance chain to this method.
-            // This way, when a single method changes, we would only need to recalculate this for the inheritance chain in which that method exists.
+            // We can calculate all inheritance chains in a previous step and only pass a single inheritance
+            // chain to this method.
+            // This way, when a single method changes, we would only need to recalculate this for the
+            // inheritance chain in which that method exists.
 
             var ifaceToDeclaredMethodsMap = ifaceAndDeclaredMethods.ToDictionary(
                 static pair => pair.Item1,
@@ -252,7 +259,8 @@ namespace Microsoft.Interop
             return accumulator;
 
             /// <summary>
-            /// Adds methods to a cache and returns inherited and declared methods for the interface in vtable order
+            /// Adds methods to a cache and returns inherited and declared methods for the interface in vtable
+            // order
             /// </summary>
             ImmutableArray<Builder> AddMethods(
                 ComInterfaceContext iface,

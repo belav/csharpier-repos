@@ -65,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             _currentElement += (int)celt;
 
-            // If we've advanced past the end, move back. We return S_FALSE only in this case. If we simply move *to*
+            // If we've advanced past the end, move back. We return S_FALSE only in this case. If we simply move
+            // *to*
             // the end, we actually do want to return S_OK.
             if (_currentElement > _codeBlocks.Count)
             {

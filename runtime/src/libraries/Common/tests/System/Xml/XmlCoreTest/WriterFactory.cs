@@ -12,10 +12,10 @@ using OLEDB.Test.ModuleCore;
 
 namespace XmlCoreTest.Common
 {
-    /*
-     * Helper class used by all test frameworks to create an instance of XmlWriter
-     * Supports the following writer types
-     */
+/*
+* Helper class used by all test frameworks to create an instance of XmlWriter
+* Supports the following writer types
+*/
     [Flags]
     public enum WriterType
     {

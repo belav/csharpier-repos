@@ -292,7 +292,8 @@ namespace DebuggerTests
                 }
             );
 
-            //await StepAndCheck (StepKind.Over, "dotnet://debugger-test.dll/debugger-test.cs", 81, 2, "OuterMethod", times: 2);
+            //await StepAndCheck (StepKind.Over, "dotnet://debugger-test.dll/debugger-test.cs", 81, 2,
+            // "OuterMethod", times: 2);
 
             // step into InnerMethod2
             await StepAndCheck(

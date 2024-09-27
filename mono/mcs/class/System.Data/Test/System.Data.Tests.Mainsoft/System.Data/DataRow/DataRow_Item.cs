@@ -181,21 +181,21 @@ namespace tests.system_data_dll.System_Data
             //	testMore();
         }
 
-        /*public void testMore()
-        {
-            try
-            {
-                DataTable dt = DataProvider.CreateParentDataTable();
-                dt.Rows[0].BeginEdit();
-                dt.Rows[0][0] = 10;
-                dt.Rows[0].EndEdit();
-                dt.AcceptChanges();
-                
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }*/
+/*public void testMore()
+{
+try
+{
+DataTable dt = DataProvider.CreateParentDataTable();
+dt.Rows[0].BeginEdit();
+dt.Rows[0][0] = 10;
+dt.Rows[0].EndEdit();
+dt.AcceptChanges();
+
+}
+catch (Exception ex)
+{
+throw ex;
+}
+}*/
     }
 }

@@ -48,8 +48,10 @@ namespace System.Threading
             );
 
             //
-            // The Win32 thread pool implementation of ThreadPoolBoundHandle does not permit reuse of NativeOverlapped
-            // pointers without freeing them and allocating new a new one.  We need to ensure that code using the CLR
+            // The Win32 thread pool implementation of ThreadPoolBoundHandle does not permit reuse of
+            // NativeOverlapped
+            // pointers without freeing them and allocating new a new one.  We need to ensure that code using
+            // the CLR
             // ThreadPool implementation follows those rules.
             //
             if (overlapped._completed)

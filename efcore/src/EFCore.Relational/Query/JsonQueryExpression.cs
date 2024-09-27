@@ -7,10 +7,12 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <summary>
 ///     <para>
-///         An expression representing an entity or a collection of entities mapped to a JSON column and the path to access it.
+///         An expression representing an entity or a collection of entities mapped to a JSON column
+// and the path to access it.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -21,9 +23,11 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="entityType">An entity type being represented by this expression.</param>
     /// <param name="jsonColumn">A column containing JSON value.</param>
-    /// <param name="keyPropertyMap">A map of key properties and columns they map to in the database.</param>
+    /// <param name="keyPropertyMap">A map of key properties and columns they map to in the
+    // database.</param>
     /// <param name="type">A type of the element represented by this expression.</param>
-    /// <param name="collection">A value indicating whether this expression represents a collection or not.</param>
+    /// <param name="collection">A value indicating whether this expression represents a collection or
+    // not.</param>
     public JsonQueryExpression(
         IEntityType entityType,
         ColumnExpression jsonColumn,
@@ -78,7 +82,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     public virtual bool IsCollection { get; }
 
     /// <summary>
-    ///     The list of path segments leading to the entity from the root of the JSON stored in the column.
+    ///     The list of path segments leading to the entity from the root of the JSON stored in the
+    // column.
     /// </summary>
     public virtual IReadOnlyList<PathSegment> Path { get; }
 
@@ -88,10 +93,14 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     public virtual bool IsNullable { get; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual IReadOnlyDictionary<IProperty, ColumnExpression> KeyPropertyMap { get; }
@@ -190,7 +199,8 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     }
 
     /// <summary>
-    ///     Binds a collection element access with this JSON query expression to get the SQL representation.
+    ///     Binds a collection element access with this JSON query expression to get the SQL
+    // representation.
     /// </summary>
     /// <param name="collectionIndexExpression">The collection index to bind.</param>
     public virtual JsonQueryExpression BindCollectionElement(
@@ -264,12 +274,14 @@ public class JsonQueryExpression : Expression, IPrintableExpression
     }
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="jsonColumn">The <see cref="JsonColumn" /> property of the result.</param>
     /// <param name="keyPropertyMap">The map of key properties and columns they map to.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual JsonQueryExpression Update(
         ColumnExpression jsonColumn,
         IReadOnlyDictionary<IProperty, ColumnExpression> keyPropertyMap

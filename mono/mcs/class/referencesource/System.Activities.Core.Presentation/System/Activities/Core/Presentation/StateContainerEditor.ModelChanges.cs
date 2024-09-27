@@ -449,8 +449,10 @@ namespace System.Activities.Core.Presentation
 
         void StoreConnectorLocationViewState(Connector connector, bool isUndoableViewState)
         {
-            //This method will be called whenever the FreeFormPanel raises a location changed event on a connector.
-            //Such location changed events are a result of changes already committed in the UI. Hence we do not want to react to such view state changes.
+            //This method will be called whenever the FreeFormPanel raises a location changed event on a
+            // connector.
+            //Such location changed events are a result of changes already committed in the UI. Hence we do not
+            // want to react to such view state changes.
             //Using internalViewStateChange flag for that purpose.
             this.internalViewStateChange = true;
             this.StoreConnectorLocationViewState(
@@ -461,8 +463,10 @@ namespace System.Activities.Core.Presentation
             this.internalViewStateChange = false;
         }
 
-        // While adding an new StateContainer inside an outer StateContainer, the outter StateContainer size might change.
-        // InsertState would recursively stores the outer containers before the insertion happens, and capture the size within a single EditingScope to facilitate Undo.
+        // While adding an new StateContainer inside an outer StateContainer, the outter StateContainer size
+        // might change.
+        // InsertState would recursively stores the outer containers before the insertion happens, and
+        // capture the size within a single EditingScope to facilitate Undo.
         ModelItem InsertState(Object droppedObject)
         {
             ModelItem droppedModelItem = null;
@@ -486,7 +490,8 @@ namespace System.Activities.Core.Presentation
             return droppedModelItem;
         }
 
-        // Recursively store the current StateContainerHeight and StateContainerWidth of the target StateContainer and its ancestors to the current editing scope,
+        // Recursively store the current StateContainerHeight and StateContainerWidth of the target
+        // StateContainer and its ancestors to the current editing scope,
         // up to the StateMachine instance.
         internal void StoreShapeSizeWithUndoRecursively(ModelItem modelItem)
         {

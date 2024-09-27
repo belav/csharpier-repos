@@ -205,12 +205,15 @@ namespace Microsoft.CodeAnalysis.CSharp.InlineHints
             SyntaxNodeOrToken normalSpan
         )
         {
-            // If we're showing this because the normal option is on, then place the hint prior to the node being marked.
+            // If we're showing this because the normal option is on, then place the hint prior to the node
+            // being marked.
             if (normalOption)
                 return new TextSpan(normalSpan.SpanStart, 0);
 
-            // Otherwise, we're showing because the user explicitly asked to see all hints.  In that case, overwrite the
-            // provided span (i.e. overwrite 'var' with 'int') as this provides a cleaner view while the user is in this
+            // Otherwise, we're showing because the user explicitly asked to see all hints.  In that case,
+            // overwrite the
+            // provided span (i.e. overwrite 'var' with 'int') as this provides a cleaner view while the user is
+            // in this
             // mode.
             Contract.ThrowIfFalse(displayAllOverride);
             return displayAllSpan.Span;

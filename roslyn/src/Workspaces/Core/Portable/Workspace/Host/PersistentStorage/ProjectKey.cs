@@ -9,8 +9,10 @@ namespace Microsoft.CodeAnalysis.Storage
 {
     /// <summary>
     /// Handle that can be used with <see cref="IChecksummedPersistentStorage"/> to read data for a
-    /// <see cref="Project"/> without needing to have the entire <see cref="Project"/> snapshot available.
-    /// This is useful for cases where acquiring an entire snapshot might be expensive (for example, during
+    /// <see cref="Project"/> without needing to have the entire <see cref="Project"/> snapshot
+    // available.
+    /// This is useful for cases where acquiring an entire snapshot might be expensive (for example,
+    // during
     /// solution load), but querying the data is still desired.
     /// </summary>
     [DataContract]

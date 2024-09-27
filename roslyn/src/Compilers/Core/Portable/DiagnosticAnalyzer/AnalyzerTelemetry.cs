@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
 {
     /// <summary>
-    /// Contains telemetry info for a specific analyzer, such as count of registered actions, the total execution time, etc.
+    /// Contains telemetry info for a specific analyzer, such as count of registered actions, the total
+    // execution time, etc.
     /// </summary>
     [DataContract]
     public sealed class AnalyzerTelemetryInfo
@@ -118,7 +119,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
         /// <summary>
         /// Count of registered suppression actions.
         /// This is the same as count of <see cref="DiagnosticSuppressor"/>s as each suppressor
-        /// has a single suppression action, i.e. <see cref="DiagnosticSuppressor.ReportSuppressions(SuppressionAnalysisContext)"/>.
+        /// has a single suppression action, i.e. <see
+        // cref="DiagnosticSuppressor.ReportSuppressions(SuppressionAnalysisContext)"/>.
         /// </summary>
         [DataMember(Order = 17)]
         public int SuppressionActionsCount { get; set; }
@@ -169,7 +171,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.Telemetry
         }
 
         /// <summary>
-        /// Create telemetry info for a specific analyzer, such as count of registered actions, the total execution time, etc.
+        /// Create telemetry info for a specific analyzer, such as count of registered actions, the total
+        // execution time, etc.
         /// </summary>
         public AnalyzerTelemetryInfo() { }
     }

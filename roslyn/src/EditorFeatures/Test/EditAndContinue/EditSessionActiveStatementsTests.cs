@@ -665,7 +665,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 sourceTextV1.Lines.GetLinePositionSpan(exceptionSpans[3][1])
             );
 
-            // Assume that the following edits have been made to F3 and F4 and set up non-remappable regions mapping
+            // Assume that the following edits have been made to F3 and F4 and set up non-remappable regions
+            // mapping
             // from the pre-remap spans of AS:2 and AS:3 to their current location.
             var initialNonRemappableRegions = new Dictionary<
                 ManagedMethodId,
@@ -786,7 +787,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             // Assume 2 more updates:
             //   F2: Move 'try' one line up (a new non-remappable entries will be added)
-            //   F4: Insert 2 new lines before the first 'try' (an existing non-remappable entries will be updated)
+            //   F4: Insert 2 new lines before the first 'try' (an existing non-remappable entries will be
+            // updated)
             var newActiveStatementsInChangedDocuments = ImmutableArray.Create(
                 new DocumentActiveStatementChanges(
                     oldSpans: oldActiveStatements,
@@ -820,7 +822,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 out var exceptionRegionUpdates
             );
 
-            // Note: Since no method have been remapped yet all the following spans are in their pre-remap locations:
+            // Note: Since no method have been remapped yet all the following spans are in their pre-remap
+            // locations:
             AssertEx.Equal(
                 new[]
                 {

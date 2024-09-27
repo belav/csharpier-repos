@@ -68,8 +68,10 @@ namespace System.Web.WebSockets
         // RFC 6455, Sec. 5.5:
         // All control frames MUST be 125 bytes or less in length and MUST NOT be fragmented.
         //
-        // When a CLOSE frame is sent, it has an optional payload that consists of a 2-byte status code followed by a
-        // UTF8-encoded string. This string must therefore be no greater than 123 bytes (after UTF8-encoding) in length.
+        // When a CLOSE frame is sent, it has an optional payload that consists of a 2-byte status code
+        // followed by a
+        // UTF8-encoded string. This string must therefore be no greater than 123 bytes (after
+        // UTF8-encoding) in length.
         private const int _maxCloseMessageByteCount = 123;
 
         // represents no-op tasks or asynchronous operations
@@ -123,7 +125,8 @@ namespace System.Web.WebSockets
                 WebSocketCloseStatus closeStatus = _closeStatus;
                 if (closeStatus == CLOSE_STATUS_NOT_SET)
                 {
-                    // no close status (not even Unspecified) to report to the caller; most likely reason is connection hasn't been closed
+                    // no close status (not even Unspecified) to report to the caller; most likely reason is connection
+                    // hasn't been closed
                     return null;
                 }
                 else
@@ -289,8 +292,10 @@ namespace System.Web.WebSockets
                 // -- STATE INITIALIZATION --
                 // Performed within lock
 
-                // State transitions are handled automatically by the CloseOutputAsyncImpl / ReceiveAsyncImpl methods
-                // These methods don't need to perform validation since this method has already performed it (if necessary)
+                // State transitions are handled automatically by the CloseOutputAsyncImpl / ReceiveAsyncImpl
+                // methods
+                // These methods don't need to perform validation since this method has already performed it (if
+                // necessary)
                 if (_sendState != ChannelState.Closed)
                 {
                     sendCloseTaskFunc = CloseOutputAsyncImpl(
@@ -322,7 +327,8 @@ namespace System.Web.WebSockets
             // once initialization is complete, the implementation can run truly asynchronously
             return async () =>
             {
-                // By kicking off both tasks in parallel before awaiting either one, we have full-duplex communication
+                // By kicking off both tasks in parallel before awaiting either one, we have full-duplex
+                // communication
                 Task sendCloseTask = (sendCloseTaskFunc != null) ? sendCloseTaskFunc() : null;
                 Task<WebSocketReceiveResult> receiveCloseTask =
                     (receiveCloseTaskFunc != null) ? receiveCloseTaskFunc() : null;
@@ -616,9 +622,11 @@ namespace System.Web.WebSockets
         )
         {
             // We do three checks here:
-            // - RFC 6455, Sec. 5.5.1: Close status is 16-bit unsigned integer, so we need to make sure it is within the range 0x0000 - 0xffff.
+            // - RFC 6455, Sec. 5.5.1: Close status is 16-bit unsigned integer, so we need to make sure it is
+            // within the range 0x0000 - 0xffff.
             // - RFC 6455, Sec. 7.4.2: 0 - 999 is an invalid value for the close status.
-            // - RFC 6455, Sec. 7.4.1: 1004, 1006, 1010, 1015 are invalid status codes for the server to send to the client.
+            // - RFC 6455, Sec. 7.4.1: 1004, 1006, 1010, 1015 are invalid status codes for the server to send to
+            // the client.
             if (
                 closeStatus < (WebSocketCloseStatus)1000
                 || closeStatus > (WebSocketCloseStatus)UInt16.MaxValue
@@ -633,7 +641,8 @@ namespace System.Web.WebSockets
 
             if (closeStatus == WebSocketCloseStatus.Empty)
             {
-                // Fix Bug : 312472, we would like to allow empty strings to be passed to our APIs when status code is 1005.
+                // Fix Bug : 312472, we would like to allow empty strings to be passed to our APIs when status code
+                // is 1005.
                 // Since WSPC requires the statusDescription to be null, we convert.
                 if (statusDescription == String.Empty)
                 {
@@ -756,8 +765,10 @@ namespace System.Web.WebSockets
             {
                 try
                 {
-                    // If cancellation is requested, honor it immediately. This is the same kind of optimization done throughout
-                    // the rest of the framework, e.g. as in FileStream.ReadAsync. Our finally block will be responsible for
+                    // If cancellation is requested, honor it immediately. This is the same kind of optimization done
+                    // throughout
+                    // the rest of the framework, e.g. as in FileStream.ReadAsync. Our finally block will be responsible
+                    // for
                     // throwing the actual exception which results in the Task being canceled.
                     if (cancellationToken.IsCancellationRequested)
                     {
@@ -776,7 +787,8 @@ namespace System.Web.WebSockets
                     }
 
                     // The 'await' keyword may cause an exception to be observed (rethrown)
-                    // We call only thread-safe methods so don't need to spend the time to come back to the SynchronizationContext
+                    // We call only thread-safe methods so don't need to spend the time to come back to the
+                    // SynchronizationContext
                     return await task.ConfigureAwait(continueOnCapturedContext: false);
                 }
                 finally
@@ -795,7 +807,8 @@ namespace System.Web.WebSockets
             catch
             {
                 // Something went wrong while communicating on the pipe - mark faulted and observe exception.
-                // Benign ---- - Abort might be called both by the CancellationTokenRegistration and by the line below.
+                // Benign ---- - Abort might be called both by the CancellationTokenRegistration and by the line
+                // below.
                 Abort(throwIfDisposed: false);
                 throw;
             }

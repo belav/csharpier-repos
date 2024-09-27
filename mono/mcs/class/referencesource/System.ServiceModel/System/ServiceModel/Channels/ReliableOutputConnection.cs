@@ -428,7 +428,8 @@ namespace System.ServiceModel.Channels
                             null
                         )
                     );
-                // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
+                // else - RM does not fault the channel based on a timeout exception trying to add a sequenced
+                // message to the window.
 
                 throw;
             }
@@ -765,7 +766,8 @@ namespace System.ServiceModel.Channels
                                 null
                             )
                         );
-                    // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
+                    // else - RM does not fault the channel based on a timeout exception trying to add a sequenced
+                    // message to the window.
 
                     throw;
                 }
@@ -845,7 +847,8 @@ namespace System.ServiceModel.Channels
                                 null
                             )
                         );
-                    // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
+                    // else - RM does not fault the channel based on a timeout exception trying to add a sequenced
+                    // message to the window.
 
                     throw;
                 }

@@ -72,10 +72,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         ///  * For each constraint of T that is a class-type C, R contains type C' which is constructed
         ///    from C by replacing all occurrences of dynamic with object.
         /// The reason is that the CLR doesn't support operations on generic parameters that would be needed
-        /// to work with these types. For example, ldelem instruction requires the receiver to be a specific array,
+        /// to work with these types. For example, ldelem instruction requires the receiver to be a specific
+        // array,
         /// not a type parameter constrained to be an array.
         ///
-        /// When computing the deduced type we don't perform this abstraction. We keep the original constraint T.
+        /// When computing the deduced type we don't perform this abstraction. We keep the original
+        // constraint T.
         /// Deduced base type is used to check that consistency rules are satisfied.
         /// </summary>
         public readonly TypeSymbol DeducedBaseType;

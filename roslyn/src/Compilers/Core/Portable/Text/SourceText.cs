@@ -116,13 +116,15 @@ namespace Microsoft.CodeAnalysis.Text
         /// Encoding of the file that the <paramref name="text"/> was read from or is going to be saved to.
         /// <c>null</c> if the encoding is unspecified.
         /// If the encoding is not specified the resulting <see cref="SourceText"/> isn't debuggable.
-        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/> shall be used as a default.
+        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/>
+        // shall be used as a default.
         /// </param>
         /// <param name="checksumAlgorithm">
         /// Hash algorithm to use to calculate checksum of the text that's saved to PDB.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="text"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not supported.</exception>
+        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not
+        // supported.</exception>
         public static SourceText From(
             string text,
             Encoding? encoding = null,
@@ -143,16 +145,19 @@ namespace Microsoft.CodeAnalysis.Text
         /// <param name="reader">TextReader</param>
         /// <param name="length">length of content from <paramref name="reader"/></param>
         /// <param name="encoding">
-        /// Encoding of the file that the <paramref name="reader"/> was read from or is going to be saved to.
+        /// Encoding of the file that the <paramref name="reader"/> was read from or is going to be saved
+        // to.
         /// <c>null</c> if the encoding is unspecified.
         /// If the encoding is not specified the resulting <see cref="SourceText"/> isn't debuggable.
-        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/> shall be used as a default.
+        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/>
+        // shall be used as a default.
         /// </param>
         /// <param name="checksumAlgorithm">
         /// Hash algorithm to use to calculate checksum of the text that's saved to PDB.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="reader"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not supported.</exception>
+        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not
+        // supported.</exception>
         public static SourceText From(
             TextReader reader,
             int length,
@@ -197,14 +202,17 @@ namespace Microsoft.CodeAnalysis.Text
         /// </param>
         /// <param name="throwIfBinaryDetected">If the decoded text contains at least two consecutive NUL
         /// characters, then an <see cref="InvalidDataException"/> is thrown.</param>
-        /// <param name="canBeEmbedded">True if the text can be passed to <see cref="EmbeddedText.FromSource"/> and be embedded in a PDB.</param>
+        /// <param name="canBeEmbedded">True if the text can be passed to <see
+        // cref="EmbeddedText.FromSource"/> and be embedded in a PDB.</param>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> is null.</exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="stream"/> doesn't support reading or seeking.
         /// <paramref name="checksumAlgorithm"/> is not supported.
         /// </exception>
-        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing decoder as a fallback</exception>
-        /// <exception cref="InvalidDataException">Two consecutive NUL characters were detected in the decoded text and <paramref name="throwIfBinaryDetected"/> was true.</exception>
+        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing
+        // decoder as a fallback</exception>
+        /// <exception cref="InvalidDataException">Two consecutive NUL characters were detected in the
+        // decoded text and <paramref name="throwIfBinaryDetected"/> was true.</exception>
         /// <exception cref="IOException">An I/O error occurs.</exception>
         /// <remarks>Reads from the beginning of the stream. Leaves the stream open.</remarks>
         public static SourceText From(
@@ -253,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Text
                 throw new InvalidDataException();
             }
 
-            // We must compute the checksum and embedded text blob now while we still have the original bytes in hand.
+            // We must compute the checksum and embedded text blob now while we still have the original bytes in
+            // hand.
             // We cannot re-encode to obtain checksum and blob as the encoding is not guaranteed to round-trip.
             var checksum = CalculateChecksum(stream, checksumAlgorithm);
             var embeddedTextBlob = canBeEmbedded
@@ -295,12 +304,17 @@ namespace Microsoft.CodeAnalysis.Text
         /// <param name="throwIfBinaryDetected">If the decoded text contains at least two consecutive NUL
         /// characters, then an <see cref="InvalidDataException"/> is thrown.</param>
         /// <returns>The decoded text.</returns>
-        /// <param name="canBeEmbedded">True if the text can be passed to <see cref="EmbeddedText.FromSource"/> and be embedded in a PDB.</param>
+        /// <param name="canBeEmbedded">True if the text can be passed to <see
+        // cref="EmbeddedText.FromSource"/> and be embedded in a PDB.</param>
         /// <exception cref="ArgumentNullException">The <paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="length"/> is negative or longer than the <paramref name="buffer"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not supported.</exception>
-        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing decoder as a fallback</exception>
-        /// <exception cref="InvalidDataException">Two consecutive NUL characters were detected in the decoded text and <paramref name="throwIfBinaryDetected"/> was true.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The <paramref name="length"/> is negative or
+        // longer than the <paramref name="buffer"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not
+        // supported.</exception>
+        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing
+        // decoder as a fallback</exception>
+        /// <exception cref="InvalidDataException">Two consecutive NUL characters were detected in the
+        // decoded text and <paramref name="throwIfBinaryDetected"/> was true.</exception>
         public static SourceText From(
             byte[] buffer,
             int length,
@@ -328,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Text
                 throw new InvalidDataException();
             }
 
-            // We must compute the checksum and embedded text blob now while we still have the original bytes in hand.
+            // We must compute the checksum and embedded text blob now while we still have the original bytes in
+            // hand.
             // We cannot re-encode to obtain checksum and blob as the encoding is not guaranteed to round-trip.
             var checksum = CalculateChecksum(buffer, 0, length, checksumAlgorithm);
             var embeddedTextBlob = canBeEmbedded
@@ -341,10 +356,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// Decode text from a stream.
         /// </summary>
         /// <param name="stream">The stream containing encoded text.</param>
-        /// <param name="encoding">The encoding to use if an encoding cannot be determined from the byte order mark.</param>
+        /// <param name="encoding">The encoding to use if an encoding cannot be determined from the byte
+        // order mark.</param>
         /// <param name="actualEncoding">The actual encoding used.</param>
         /// <returns>The decoded text.</returns>
-        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing decoder as a fallback</exception>
+        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing
+        // decoder as a fallback</exception>
         private static string Decode(Stream stream, Encoding encoding, out Encoding actualEncoding)
         {
             RoslynDebug.Assert(stream != null);
@@ -392,10 +409,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <param name="buffer">The byte array containing encoded text.</param>
         /// <param name="length">The count of valid bytes in <paramref name="buffer"/>.</param>
-        /// <param name="encoding">The encoding to use if an encoding cannot be determined from the byte order mark.</param>
+        /// <param name="encoding">The encoding to use if an encoding cannot be determined from the byte
+        // order mark.</param>
         /// <param name="actualEncoding">The actual encoding used.</param>
         /// <returns>The decoded text.</returns>
-        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing decoder as a fallback</exception>
+        /// <exception cref="DecoderFallbackException">If the given encoding is set to use a throwing
+        // decoder as a fallback</exception>
         private static string Decode(
             byte[] buffer,
             int length,
@@ -421,7 +440,8 @@ namespace Microsoft.CodeAnalysis.Text
         internal static bool IsBinary(ReadOnlySpan<char> text)
         {
 #if NETCOREAPP
-            // On .NET Core, Contains has an optimized vectorized implementation, much faster than a custom loop.
+            // On .NET Core, Contains has an optimized vectorized implementation, much faster than a custom
+            // loop.
             return text.Contains("\0\0", StringComparison.Ordinal);
 #else
             // PERF: We can advance two chars at a time unless we find a NUL.
@@ -460,7 +480,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// </summary>
         /// <remarks>
         /// If the encoding is not specified the source isn't debuggable.
-        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/> shall be used as a default.
+        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/>
+        // shall be used as a default.
         /// </remarks>
         public abstract Encoding? Encoding { get; }
 
@@ -492,8 +513,10 @@ namespace Microsoft.CodeAnalysis.Text
         /// Indicates whether this source text can be embedded in the PDB.
         /// </summary>
         /// <remarks>
-        /// If this text was constructed via <see cref="From(byte[], int, Encoding, SourceHashAlgorithm, bool, bool)"/> or
-        /// <see cref="From(Stream, Encoding, SourceHashAlgorithm, bool, bool)"/>, then the canBeEmbedded arg must have
+        /// If this text was constructed via <see cref="From(byte[], int, Encoding, SourceHashAlgorithm,
+        // bool, bool)"/> or
+        /// <see cref="From(Stream, Encoding, SourceHashAlgorithm, bool, bool)"/>, then the canBeEmbedded
+        // arg must have
         /// been true.
         ///
         /// Otherwise, <see cref="Encoding" /> must be non-null.
@@ -596,7 +619,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Returns a <see cref="SourceText"/> that has the contents of this text including and after the start position.
+        /// Returns a <see cref="SourceText"/> that has the contents of this text including and after the
+        // start position.
         /// </summary>
         public SourceText GetSubText(int start)
         {
@@ -659,24 +683,35 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Cryptographic checksum determined by <see cref="ChecksumAlgorithm"/>.  Computed using the original bytes
-        /// that were used to produce this <see cref="SourceText"/> (if any of the <c>From</c> methods were used that
-        /// take a <c>byte[]</c> or <see cref="Stream"/>).  Otherwise, computed by writing this <see cref="SourceText"/>
-        /// back to a <see cref="Stream"/> (using the provided <see cref="Encoding"/>), and computing the hash off of
+        /// Cryptographic checksum determined by <see cref="ChecksumAlgorithm"/>.  Computed using the
+        // original bytes
+        /// that were used to produce this <see cref="SourceText"/> (if any of the <c>From</c> methods were
+        // used that
+        /// take a <c>byte[]</c> or <see cref="Stream"/>).  Otherwise, computed by writing this <see
+        // cref="SourceText"/>
+        /// back to a <see cref="Stream"/> (using the provided <see cref="Encoding"/>), and computing the
+        // hash off of
         /// that.
         /// </summary>
         /// <remarks>
-        /// Two different <see cref="SourceText"/> instances with the same content (see <see cref="ContentEquals"/>) may
-        /// have different results for this method.  This is because different originating bytes may end up with the
-        /// same final content.  For example, a utf8 stream with a byte-order-mark will produce the same contents as a
-        /// utf8 stream without one.  However, these preamble bytes will be part of the checksum, leading to different
+        /// Two different <see cref="SourceText"/> instances with the same content (see <see
+        // cref="ContentEquals"/>) may
+        /// have different results for this method.  This is because different originating bytes may end up
+        // with the
+        /// same final content.  For example, a utf8 stream with a byte-order-mark will produce the same
+        // contents as a
+        /// utf8 stream without one.  However, these preamble bytes will be part of the checksum, leading to
+        // different
         /// results.
         /// <para/>
-        /// Similarly, two different <see cref="SourceText"/> instances with <em>different</em> contents can have the
-        /// same checksum in <em>normal</em> scenarios.  This is because the use of the <see cref="Encoding"/> can lead
+        /// Similarly, two different <see cref="SourceText"/> instances with <em>different</em> contents can
+        // have the
+        /// same checksum in <em>normal</em> scenarios.  This is because the use of the <see
+        // cref="Encoding"/> can lead
         /// to different characters being mapped to the same sequence of <em>encoded</em> bytes.
         /// <para/>
-        /// As such, this function should only be used by clients who need to know the exact SHA hash from the original
+        /// As such, this function should only be used by clients who need to know the exact SHA hash from
+        // the original
         /// content bytes, and for no other purposes.
         /// </remarks>
         public ImmutableArray<byte> GetChecksum()
@@ -696,15 +731,21 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Produces a hash of this <see cref="SourceText"/> based solely on the contents it contains.  Two different
-        /// <see cref="SourceText"/> instances that are <see cref="ContentEquals"/> will have the same content hash. Two
-        /// instances of <see cref="SourceText"/> with different content are virtually certain to not have the same
-        /// hash.  This hash can be used for fingerprinting of text instances, but does not provide cryptographic
+        /// Produces a hash of this <see cref="SourceText"/> based solely on the contents it contains.  Two
+        // different
+        /// <see cref="SourceText"/> instances that are <see cref="ContentEquals"/> will have the same
+        // content hash. Two
+        /// instances of <see cref="SourceText"/> with different content are virtually certain to not have
+        // the same
+        /// hash.  This hash can be used for fingerprinting of text instances, but does not provide
+        // cryptographic
         /// guarantees.
         /// </summary>
         /// <remarks>
-        /// This hash is safe to use across platforms and across processes, as long as the same version of Roslyn is
-        /// used in all those locations.  As such, it is safe to use as a fast proxy for comparing text instances in
+        /// This hash is safe to use across platforms and across processes, as long as the same version of
+        // Roslyn is
+        /// used in all those locations.  As such, it is safe to use as a fast proxy for comparing text
+        // instances in
         /// different memory spaces.  Different versions of Roslyn may produce different content hashes.
         /// </remarks>
         public ImmutableArray<byte> GetContentHash()
@@ -745,7 +786,8 @@ namespace Microsoft.CodeAnalysis.Text
                         hash.Append(MemoryMarshal.AsBytes(charBuffer.AsSpan(0, charsToCopy)));
                     }
 
-                    // Switch this to ImmutableCollectionsMarshal.AsImmutableArray(hash.GetHashAndReset()) when we move to S.C.I v8.
+                    // Switch this to ImmutableCollectionsMarshal.AsImmutableArray(hash.GetHashAndReset()) when we move
+                    // to S.C.I v8.
                     Span<byte> destination = stackalloc byte[128 / 8];
                     hash.GetHashAndReset(destination);
                     return destination.ToImmutableArray();
@@ -802,7 +844,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// <summary>
         /// Gets a string containing the characters in specified span.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException">When given span is outside of the text range.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When given span is outside of the text
+        // range.</exception>
         public virtual string ToString(TextSpan span)
         {
             CheckSubSpan(span);
@@ -946,10 +989,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// Constructs a new SourceText from this text with the specified changes.
         /// </summary>
         /// <remarks>
-        /// Changes do not have to be in sorted order.  However, <see cref="WithChanges(IEnumerable{TextChange})"/> will
+        /// Changes do not have to be in sorted order.  However, <see
+        // cref="WithChanges(IEnumerable{TextChange})"/> will
         /// perform better if they are.
         /// </remarks>
-        /// <exception cref="ArgumentException">If any changes are not in bounds of this <see cref="SourceText"/>.</exception>
+        /// <exception cref="ArgumentException">If any changes are not in bounds of this <see
+        // cref="SourceText"/>.</exception>
         /// <exception cref="ArgumentException">If any changes overlap other changes.</exception>
         public SourceText WithChanges(params TextChange[] changes)
         {
@@ -1060,7 +1105,8 @@ namespace Microsoft.CodeAnalysis.Text
         /// Called from <see cref="Lines"/> to initialize the <see cref="TextLineCollection"/>. Thereafter,
         /// the collection is cached.
         /// </summary>
-        /// <returns>A new <see cref="TextLineCollection"/> representing the individual text lines.</returns>
+        /// <returns>A new <see cref="TextLineCollection"/> representing the individual text
+        // lines.</returns>
         protected virtual TextLineCollection GetLinesCore()
         {
             return new LineInfo(this, ParseLineStarts());
@@ -1251,13 +1297,18 @@ namespace Microsoft.CodeAnalysis.Text
             }
 
             // Content hashing provides strong enough guarantees (see
-            // https://github.com/Cyan4973/xxHash/wiki/Collision-ratio-comparison#testing-128-bit-hashes-) to be certain
+            // https://github.com/Cyan4973/xxHash/wiki/Collision-ratio-comparison#testing-128-bit-hashes-) to be
+            // certain
             // about content equality based solely on hash equality.
             //
-            // DO NOT examine '_lazyChecksum' in this method.  Checksums (as opposed to hashes) do not provide the same
-            // guarantee.  Indeed, due to the user of lossy encodings, it's easily possible to have source texts with
-            // different contents that produce the same checksums.  As an example, the Encoding.ASCII encoding maps many
-            // System.Char values down to the ascii `?` character, leading to easy collisions at the checksum level.
+            // DO NOT examine '_lazyChecksum' in this method.  Checksums (as opposed to hashes) do not provide
+            // the same
+            // guarantee.  Indeed, due to the user of lossy encodings, it's easily possible to have source texts
+            // with
+            // different contents that produce the same checksums.  As an example, the Encoding.ASCII encoding
+            // maps many
+            // System.Char values down to the ascii `?` character, leading to easy collisions at the checksum
+            // level.
 
             var leftContentHash = _lazyContentHash;
             var rightContentHash = other._lazyContentHash;
@@ -1268,7 +1319,8 @@ namespace Microsoft.CodeAnalysis.Text
         }
 
         /// <summary>
-        /// Implements equality comparison of the content of two different instances of <see cref="SourceText"/>.
+        /// Implements equality comparison of the content of two different instances of <see
+        // cref="SourceText"/>.
         /// </summary>
         protected virtual bool ContentEqualsImpl(SourceText other)
         {

@@ -16,7 +16,8 @@ namespace System.Data
 
 #if !COREFX
     /// <devdoc>
-    ///    <para>DEV: The exception that is throwing from strong typed DataSet when user access to DBNull value.</para>
+    ///    <para>DEV: The exception that is throwing from strong typed DataSet when user access to
+    // DBNull value.</para>
     /// </devdoc>
     [Serializable]
     public class StrongTypingException : DataException
@@ -51,7 +52,8 @@ namespace System.Data
 #endif
 
     /// <devdoc>
-    ///    <para>DEV: The exception that is throwing in generating strong typed DataSet when name conflict happens.</para>
+    ///    <para>DEV: The exception that is throwing in generating strong typed DataSet when name
+    // conflict happens.</para>
     /// </devdoc>
     [Serializable]
     public class TypedDataSetGeneratorException : DataException

@@ -265,7 +265,8 @@ namespace Microsoft.CodeAnalysis.UseNullPropagation
             }
 
             // If there's leading trivia on the original inner statement, then combine that with the leading
-            // trivia on the if-statement.  We'll need to add a formatting annotation so that the leading comments
+            // trivia on the if-statement.  We'll need to add a formatting annotation so that the leading
+            // comments
             // are put in the right location.
             if (newWhenTrueStatement.GetLeadingTrivia().Any(syntaxFacts.IsRegularComment))
             {

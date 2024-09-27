@@ -65,7 +65,8 @@ public partial class PartialViewResultExecutor
     /// <summary>
     /// Attempts to find the <see cref="IView"/> associated with <paramref name="viewResult"/>.
     /// </summary>
-    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current
+    // request.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="ViewEngineResult"/>.</returns>
     public virtual ViewEngineResult FindView(
@@ -141,7 +142,8 @@ public partial class PartialViewResultExecutor
     /// <summary>
     /// Executes the <see cref="IView"/> asynchronously.
     /// </summary>
-    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current request.</param>
+    /// <param name="actionContext">The <see cref="ActionContext"/> associated with the current
+    // request.</param>
     /// <param name="view">The <see cref="IView"/>.</param>
     /// <param name="viewResult">The <see cref="PartialViewResult"/>.</param>
     /// <returns>A <see cref="Task"/> which will complete when view execution is completed.</returns>

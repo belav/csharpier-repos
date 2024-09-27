@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 namespace System.Web.Razor
 {
@@ -41,10 +42,12 @@ namespace System.Web.Razor
         }
 
         /// <summary>
-        /// Returns a result indicating that this state has no output and the machine should immediately invoke the specified state
+        /// Returns a result indicating that this state has no output and the machine should immediately
+        // invoke the specified state
         /// </summary>
         /// <remarks>
-        /// By returning no output, the state machine will invoke the next state immediately, before returning
+        /// By returning no output, the state machine will invoke the next state immediately, before
+        // returning
         /// controller to the caller of <see cref="Turn"/>
         /// </remarks>
         protected StateResult Transition(State newState)
@@ -62,10 +65,12 @@ namespace System.Web.Razor
         }
 
         /// <summary>
-        /// Returns a result indicating that this state has no output and the machine should remain in this state
+        /// Returns a result indicating that this state has no output and the machine should remain in this
+        // state
         /// </summary>
         /// <remarks>
-        /// By returning no output, the state machine will re-invoke the current state again before returning
+        /// By returning no output, the state machine will re-invoke the current state again before
+        // returning
         /// controller to the caller of <see cref="Turn"/>
         /// </remarks>
         protected StateResult Stay()

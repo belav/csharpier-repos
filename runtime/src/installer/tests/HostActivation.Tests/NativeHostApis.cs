@@ -446,7 +446,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var f = new SdkResolutionFixture(sharedTestState);
 
             // Multi-level lookup is completely disabled on 7+
-            // The test runs the API with the dotnet root directory set to a location which doesn't have any SDKs or frameworks
+            // The test runs the API with the dotnet root directory set to a location which doesn't have any
+            // SDKs or frameworks
             using (TestOnlyProductBehavior.Enable(f.Dotnet.GreatestVersionHostFxrFilePath))
             {
                 // We pass f.WorkingDir so that we don't resolve dotnet_dir to the global installation
@@ -494,7 +495,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         new[] { "hostfxr_get_dotnet_environment_info", f.WorkingDir }
                     )
                     .EnvironmentVariable("TEST_MULTILEVEL_LOOKUP_PROGRAM_FILES", f.ProgramFiles)
-                    // Test with a self-registered path the same as ProgramFiles, with a trailing slash.  Expect this to be de-duped
+                    // Test with a self-registered path the same as ProgramFiles, with a trailing slash.  Expect this to
+                    // be de-duped
                     .EnvironmentVariable(
                         "TEST_MULTILEVEL_LOOKUP_SELF_REGISTERED",
                         Path.Combine(f.ProgramFiles, "dotnet") + Path.DirectorySeparatorChar

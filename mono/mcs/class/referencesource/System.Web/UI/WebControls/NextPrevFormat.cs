@@ -8,7 +8,8 @@ namespace System.Web.UI.WebControls
 {
     /// <devdoc>
     ///    <para> Specifies the display format of the month on the Previous Month
-    ///       and Next Month buttons within the <see cref='System.Web.UI.WebControls.Calendar'/> control.</para>
+    ///       and Next Month buttons within the <see cref='System.Web.UI.WebControls.Calendar'/>
+    // control.</para>
     /// </devdoc>
     public enum NextPrevFormat
     {

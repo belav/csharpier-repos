@@ -11,7 +11,8 @@ namespace System.Reflection.Metadata
         public MethodDefinitionHandle EntryPoint { get; }
 
         /// <summary>
-        /// Gets the offset (in bytes) from the start of the metadata blob to the start of the <see cref="Id"/> blob.
+        /// Gets the offset (in bytes) from the start of the metadata blob to the start of the <see
+        // cref="Id"/> blob.
         /// </summary>
         public int IdStartOffset { get; }
 

@@ -30,10 +30,12 @@ namespace System.Xml.Schema
         XmlSchemaObject sourceSchemaObject;
 
         // message != null for V1 exceptions deserialized in Whidbey
-        // message == null for V2 or higher exceptions; the exception message is stored on the base class (Exception._message)
+        // message == null for V2 or higher exceptions; the exception message is stored on the base class
+        // (Exception._message)
         string message;
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException5"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException5"]/*' />
         protected XmlSchemaException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
@@ -60,12 +62,14 @@ namespace System.Xml.Schema
             }
             else
             {
-                // deserializing V2 or higher exception -> exception message is serialized by the base class (Exception._message)
+                // deserializing V2 or higher exception -> exception message is serialized by the base class
+                // (Exception._message)
                 message = null;
             }
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.GetObjectData"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.GetObjectData"]/*' />
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -78,11 +82,13 @@ namespace System.Xml.Schema
             info.AddValue("version", "2.0");
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException1"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException1"]/*' />
         public XmlSchemaException()
             : this(null) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException2"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException2"]/*' />
         public XmlSchemaException(String message)
             : this(message, ((Exception)null), 0, 0)
         {
@@ -94,11 +100,13 @@ namespace System.Xml.Schema
 #endif
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException0"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException0"]/*' />
         public XmlSchemaException(String message, Exception innerException)
             : this(message, innerException, 0, 0) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
         public XmlSchemaException(
             String message,
             Exception innerException,
@@ -201,32 +209,37 @@ namespace System.Xml.Schema
             get { return args; }
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.SourceUri"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.SourceUri"]/*' />
         public string SourceUri
         {
             get { return this.sourceUri; }
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.LineNumber"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.LineNumber"]/*' />
         public int LineNumber
         {
             get { return this.lineNumber; }
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.LinePosition"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.LinePosition"]/*' />
         public int LinePosition
         {
             get { return this.linePosition; }
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.SourceObject"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.SourceObject"]/*' />
         public XmlSchemaObject SourceSchemaObject
         {
             get { return this.sourceSchemaObject; }
         }
 
-        /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string will clash with public constructor that takes in a message
-            return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
+        /*internal static XmlSchemaException Create(string res) { //Since internal overload with res string
+        will clash with public constructor that takes in a message
+        return new XmlSchemaException(res, (string[])null, null, null, 0, 0, null);
         }*/
 
         internal void SetSource(string sourceUri, int lineNumber, int linePosition)

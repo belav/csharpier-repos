@@ -2794,56 +2794,58 @@ namespace MonoTests.System.Data.Connected
             /*
             behavior = CommandBehavior.SingleResult | CommandBehavior.SequentialAccess;
             using (IDataReader reader = cmd.ExecuteReader (behavior)) {
-                Assert.IsTrue (reader.Read (), "#E1");
-
-                long totalsize = reader.GetBytes (0, 0, null, 0, 0);
-
-                int bufferIndex = 3;
-                long ret = 0L;
-                byte [] val = new byte [totalsize + bufferIndex];
-                for (int i = 0; i < val.Length; i++)
-                    val [i] = 0x0a;
-                ret = reader.GetBytes (0, 1L, val, bufferIndex, (int) (totalsize - 2));
-                Assert.AreEqual (3, ret, "#E2");
-                Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#E3");
-                try {
-                    reader.GetBytes (0, 3L, val, 1, 2);
-                    Assert.Fail ("#E4");
-                } catch (InvalidOperationException ex) {
-                    // Invalid GetBytes attempt at dataIndex '3'.
-                    // With CommandBehavior.SequentialAccess, you
-                    // may only read from dataIndex '4' or greater
-                    Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#E5");
-                    Assert.IsNull (ex.InnerException, "#E6");
-                    Assert.IsNotNull (ex.Message, "#E7");
-                    Assert.IsTrue (ex.Message.IndexOf ("CommandBehavior.SequentialAccess") != -1, "#E8:" + ex.Message);
-                    Assert.IsTrue (ex.Message.IndexOf ("'" + 3L.ToString (CultureInfo.InvariantCulture) + "'") != -1, "#E9:" + ex.Message);
-                    Assert.IsTrue (ex.Message.IndexOf ("'" + 4L.ToString (CultureInfo.InvariantCulture) + "'") != -1, "#E10:" + ex.Message);
-                }
-
-                ret = reader.GetBytes (0, 4L, val, bufferIndex + 4, 2);
-                Assert.AreEqual (1, ret, "#E11");
-                Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x22 }, val, "#E12");
+            Assert.IsTrue (reader.Read (), "#E1");
+            
+            long totalsize = reader.GetBytes (0, 0, null, 0, 0);
+            
+            int bufferIndex = 3;
+            long ret = 0L;
+            byte [] val = new byte [totalsize + bufferIndex];
+            for (int i = 0; i < val.Length; i++)
+            val [i] = 0x0a;
+            ret = reader.GetBytes (0, 1L, val, bufferIndex, (int) (totalsize - 2));
+            Assert.AreEqual (3, ret, "#E2");
+            Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#E3");
+            try {
+            reader.GetBytes (0, 3L, val, 1, 2);
+            Assert.Fail ("#E4");
+            } catch (InvalidOperationException ex) {
+            // Invalid GetBytes attempt at dataIndex '3'.
+            // With CommandBehavior.SequentialAccess, you
+            // may only read from dataIndex '4' or greater
+            Assert.AreEqual (typeof (InvalidOperationException), ex.GetType (), "#E5");
+            Assert.IsNull (ex.InnerException, "#E6");
+            Assert.IsNotNull (ex.Message, "#E7");
+            Assert.IsTrue (ex.Message.IndexOf ("CommandBehavior.SequentialAccess") != -1, "#E8:" + ex.Message);
+            Assert.IsTrue (ex.Message.IndexOf ("'" + 3L.ToString (CultureInfo.InvariantCulture) + "'") != -1,
+            "#E9:" + ex.Message);
+            Assert.IsTrue (ex.Message.IndexOf ("'" + 4L.ToString (CultureInfo.InvariantCulture) + "'") != -1,
+            "#E10:" + ex.Message);
             }
-
+            
+            ret = reader.GetBytes (0, 4L, val, bufferIndex + 4, 2);
+            Assert.AreEqual (1, ret, "#E11");
+            Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x22 }, val, "#E12");
+            }
+            
             //Console.WriteLine ("GetBytes - fifth_executereader");
             behavior = CommandBehavior.SingleResult;
             using (IDataReader reader = cmd.ExecuteReader (behavior)) {
-                Assert.IsTrue (reader.Read (), "#F1");
-
-                long totalsize = reader.GetBytes (0, 0, null, 0, 0);
-
-                int bufferIndex = 3;
-                long ret = 0L;
-                byte [] val = new byte [totalsize + bufferIndex];
-                for (int i = 0; i < val.Length; i++)
-                    val [i] = 0x0a;
-                ret = reader.GetBytes (0, 1L, val, bufferIndex, (int) (totalsize - 2));
-                Assert.AreEqual (3, ret, "#F2");
-                Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#F3");
-                ret = reader.GetBytes (0, 3L, val, 1, 2);
-                Assert.AreEqual (2, ret, "#F4");
-                Assert.AreEqual (new byte [] { 0x0a, 0x44, 0x22, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#F5");
+            Assert.IsTrue (reader.Read (), "#F1");
+            
+            long totalsize = reader.GetBytes (0, 0, null, 0, 0);
+            
+            int bufferIndex = 3;
+            long ret = 0L;
+            byte [] val = new byte [totalsize + bufferIndex];
+            for (int i = 0; i < val.Length; i++)
+            val [i] = 0x0a;
+            ret = reader.GetBytes (0, 1L, val, bufferIndex, (int) (totalsize - 2));
+            Assert.AreEqual (3, ret, "#F2");
+            Assert.AreEqual (new byte [] { 0x0a, 0x0a, 0x0a, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#F3");
+            ret = reader.GetBytes (0, 3L, val, 1, 2);
+            Assert.AreEqual (2, ret, "#F4");
+            Assert.AreEqual (new byte [] { 0x0a, 0x44, 0x22, 0x56, 0x00, 0x44, 0x0a, 0x0a }, val, "#F5");
             }
             */
         }

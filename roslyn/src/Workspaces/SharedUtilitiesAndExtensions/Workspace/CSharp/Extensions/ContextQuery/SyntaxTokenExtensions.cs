@@ -544,7 +544,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
 
                     // var( |
                     // var(expr, |
-                    // Those are more likely to be deconstruction-declarations being typed than invocations a method "var"
+                    // Those are more likely to be deconstruction-declarations being typed than invocations a method
+                    // "var"
                     if (
                         targetToken.Parent.IsParentKind(SyntaxKind.InvocationExpression)
                         && !targetToken.IsInvocationOfVarExpression()

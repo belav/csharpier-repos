@@ -14,12 +14,15 @@ using System.Threading;
 namespace System
 {
     //
-    // DateTime uses TimeZoneInfo under the hood for IsDaylightSavingTime, IsAmbiguousTime, and GetUtcOffset.
-    // These TimeZoneInfo APIs can throw ArgumentException when an Invalid-Time is passed in.  To avoid this
+    // DateTime uses TimeZoneInfo under the hood for IsDaylightSavingTime, IsAmbiguousTime, and
+    // GetUtcOffset.
+    // These TimeZoneInfo APIs can throw ArgumentException when an Invalid-Time is passed in.  To avoid
+    // this
     // unwanted behavior in DateTime public APIs, DateTime internally passes the
     // TimeZoneInfoOptions.NoThrowOnInvalidTime flag to internal TimeZoneInfo APIs.
     //
-    // In the future we can consider exposing similar options on the public TimeZoneInfo APIs if there is enough
+    // In the future we can consider exposing similar options on the public TimeZoneInfo APIs if there
+    // is enough
     // demand for this alternate behavior.
     //
     [Flags]
@@ -56,7 +59,8 @@ namespace System
         private readonly bool _supportsDaylightSavingTime;
         private readonly AdjustmentRule[]? _adjustmentRules;
 
-        // As we support IANA and Windows IDs, it is possible we create equivalent zone objects which differ only in the IDs.
+        // As we support IANA and Windows IDs, it is possible we create equivalent zone objects which differ
+        // only in the IDs.
         private List<TimeZoneInfo>? _equivalentZones;
 
         // constants for TimeZoneInfo.Local and TimeZoneInfo.Utc
@@ -67,10 +71,13 @@ namespace System
         private static CachedData s_cachedData = new CachedData();
 
         //
-        // All cached data are encapsulated in a helper class to allow consistent view even when the data are refreshed using ClearCachedData()
+        // All cached data are encapsulated in a helper class to allow consistent view even when the data
+        // are refreshed using ClearCachedData()
         //
-        // For example, TimeZoneInfo.Local can be cleared by another thread calling TimeZoneInfo.ClearCachedData. Without the consistent snapshot,
-        // there is a chance that the internal ConvertTime calls will throw since 'source' won't be reference equal to the new TimeZoneInfo.Local.
+        // For example, TimeZoneInfo.Local can be cleared by another thread calling
+        // TimeZoneInfo.ClearCachedData. Without the consistent snapshot,
+        // there is a chance that the internal ConvertTime calls will throw since 'source' won't be
+        // reference equal to the new TimeZoneInfo.Local.
         //
         private sealed partial class CachedData
         {
@@ -142,7 +149,8 @@ namespace System
             public bool _allSystemTimeZonesRead;
         }
 
-        // used by GetUtcOffsetFromUtc (DateTime.Now, DateTime.ToLocalTime) for max/min whole-day range checks
+        // used by GetUtcOffsetFromUtc (DateTime.Now, DateTime.ToLocalTime) for max/min whole-day range
+        // checks
         private static readonly DateTime s_maxDateOnly = new DateTime(9999, 12, 31);
         private static readonly DateTime s_minDateOnly = new DateTime(1, 1, 2);
 
@@ -442,9 +450,12 @@ namespace System
                 //
                 // Consider the invalid PST time "2007-03-11T02:00:00.0000000-08:00"
                 //
-                // By directly calling GetUtcOffset instead of converting to UTC and then calling GetUtcOffsetFromUtc
-                // the correct invalid offset of "-08:00" is returned.  In the normal case of converting to UTC as an
-                // interim-step, the invalid time is adjusted into a *valid* UTC time which causes a change in output:
+                // By directly calling GetUtcOffset instead of converting to UTC and then calling
+                // GetUtcOffsetFromUtc
+                // the correct invalid offset of "-08:00" is returned.  In the normal case of converting to UTC as
+                // an
+                // interim-step, the invalid time is adjusted into a *valid* UTC time which causes a change in
+                // output:
                 //
                 // 1) invalid PST time "2007-03-11T02:00:00.0000000-08:00"
                 // 2) converted to UTC "2007-03-11T10:00:00.0000000Z"
@@ -726,7 +737,8 @@ namespace System
         /// </summary>
         /// <param name="id">Time zone name.</param>
         /// <param name="timeZoneInfo">A valid retrieved <see cref="TimeZoneInfo"/> or <c>null</c>.</param>
-        /// <returns><c>true</c> if the <see cref="TimeZoneInfo"/> object was successfully retrieved, <c>false</c> otherwise.</returns>
+        /// <returns><c>true</c> if the <see cref="TimeZoneInfo"/> object was successfully retrieved,
+        // <c>false</c> otherwise.</returns>
         public static bool TryFindSystemTimeZoneById(
             string id,
             [NotNullWhenAttribute(true)] out TimeZoneInfo? timeZoneInfo
@@ -738,8 +750,10 @@ namespace System
         /// SystemTimeZones cache in working order.
         ///
         /// This function will either return:
-        /// <c>TimeZoneInfoResult.Success</c> and a valid <see cref="TimeZoneInfo"/>instance and <c>null</c> Exception or
-        /// <c>TimeZoneInfoResult.TimeZoneNotFoundException</c> and <c>null</c> <see cref="TimeZoneInfo"/> and Exception (can be null) or
+        /// <c>TimeZoneInfoResult.Success</c> and a valid <see cref="TimeZoneInfo"/>instance and <c>null</c>
+        // Exception or
+        /// <c>TimeZoneInfoResult.TimeZoneNotFoundException</c> and <c>null</c> <see cref="TimeZoneInfo"/>
+        // and Exception (can be null) or
         /// other <c>TimeZoneInfoResult</c> and <c>null</c> <see cref="TimeZoneInfo"/> and valid Exception.
         /// </summary>
         private static TimeZoneInfoResult TryFindSystemTimeZoneById(
@@ -789,7 +803,8 @@ namespace System
             )
             {
                 // TimeZoneInfo.Local can be cleared by another thread calling TimeZoneInfo.ClearCachedData.
-                // Take snapshot of cached data to guarantee this method will not be impacted by the ClearCachedData call.
+                // Take snapshot of cached data to guarantee this method will not be impacted by the ClearCachedData
+                // call.
                 // Without the snapshot, there is a chance that ConvertTime will throw since 'source' won't
                 // be reference equal to the new TimeZoneInfo.Local
                 //
@@ -1002,7 +1017,8 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the value of a DateTime object from Coordinated Universal Time (UTC) to the destinationTimeZone.
+        /// Converts the value of a DateTime object from Coordinated Universal Time (UTC) to the
+        // destinationTimeZone.
         /// </summary>
         public static DateTime ConvertTimeFromUtc(
             DateTime dateTime,
@@ -1098,12 +1114,16 @@ namespace System
             GetSystemTimeZones(skipSorting: false);
 
         /// <summary>
-        /// Returns a <see cref="ReadOnlyCollection{TimeZoneInfo}"/> containing all valid TimeZone's from the local machine.
+        /// Returns a <see cref="ReadOnlyCollection{TimeZoneInfo}"/> containing all valid TimeZone's from
+        // the local machine.
         /// This method does *not* throw TimeZoneNotFoundException or InvalidTimeZoneException.
         /// </summary>
-        /// <param name="skipSorting">If true, The collection returned may not necessarily be sorted.</param>
-        /// <remarks>By setting the skipSorting parameter to true, the method will attempt to avoid sorting the returned collection.
-        /// This option can be beneficial when the caller does not require a sorted list and aims to enhance the performance. </remarks>
+        /// <param name="skipSorting">If true, The collection returned may not necessarily be
+        // sorted.</param>
+        /// <remarks>By setting the skipSorting parameter to true, the method will attempt to avoid sorting
+        // the returned collection.
+        /// This option can be beneficial when the caller does not require a sorted list and aims to enhance
+        // the performance. </remarks>
         public static ReadOnlyCollection<TimeZoneInfo> GetSystemTimeZones(bool skipSorting)
         {
             CachedData cachedData = s_cachedData;
@@ -1138,7 +1158,8 @@ namespace System
                                 array,
                                 static (x, y) =>
                                 {
-                                    // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time control panel
+                                    // sort by BaseUtcOffset first and by DisplayName second - this is similar to the Windows Date/Time
+                                    // control panel
                                     int comparison = x.BaseUtcOffset.CompareTo(y.BaseUtcOffset);
                                     return comparison == 0
                                         ? string.CompareOrdinal(x.DisplayName, y.DisplayName)
@@ -1146,8 +1167,10 @@ namespace System
                                 }
                             );
 
-                            // Always reset _readOnlyUnsortedSystemTimeZones even if it was initialized before. This prevents the need to maintain two separate cache lists in memory
-                            // and guarantees that if _readOnlySystemTimeZones is initialized, _readOnlyUnsortedSystemTimeZones is also initialized.
+                            // Always reset _readOnlyUnsortedSystemTimeZones even if it was initialized before. This prevents
+                            // the need to maintain two separate cache lists in memory
+                            // and guarantees that if _readOnlySystemTimeZones is initialized, _readOnlyUnsortedSystemTimeZones
+                            // is also initialized.
                             cachedData._readOnlySystemTimeZones =
                                 cachedData._readOnlyUnsortedSystemTimeZones =
                                     new ReadOnlyCollection<TimeZoneInfo>(array);
@@ -1346,7 +1369,8 @@ namespace System
         /// Tries to convert an IANA time zone ID to a Windows ID.
         /// </summary>
         /// <param name="ianaId">The IANA time zone ID.</param>
-        /// <param name="windowsId">String object holding the Windows ID which resulted from the IANA ID conversion.</param>
+        /// <param name="windowsId">String object holding the Windows ID which resulted from the IANA ID
+        // conversion.</param>
         /// <returns>True if the ID conversion succeeded, false otherwise.</returns>
         public static unsafe bool TryConvertIanaIdToWindowsId(
             string ianaId,
@@ -1357,7 +1381,8 @@ namespace System
         /// Tries to convert a Windows time zone ID to an IANA ID.
         /// </summary>
         /// <param name="windowsId">The Windows time zone ID.</param>
-        /// <param name="ianaId">String object holding the IANA ID which resulted from the Windows ID conversion.</param>
+        /// <param name="ianaId">String object holding the IANA ID which resulted from the Windows ID
+        // conversion.</param>
         /// <returns>True if the ID conversion succeeded, false otherwise.</returns>
         public static bool TryConvertWindowsIdToIanaId(
             string windowsId,
@@ -1369,7 +1394,8 @@ namespace System
         /// </summary>
         /// <param name="windowsId">The Windows time zone ID.</param>
         /// <param name="region">The ISO 3166 code for the country/region.</param>
-        /// <param name="ianaId">String object holding the IANA ID which resulted from the Windows ID conversion.</param>
+        /// <param name="ianaId">String object holding the IANA ID which resulted from the Windows ID
+        // conversion.</param>
         /// <returns>True if the ID conversion succeeded, false otherwise.</returns>
         public static unsafe bool TryConvertWindowsIdToIanaId(
             string windowsId,
@@ -1524,7 +1550,8 @@ namespace System
                 DateTime dateTimeToCompare = dateTimeisUtc
                     ? dateTime
                     :
-                    // use the previous rule to compute the dateTimeToCompare, since the time daylight savings "switches"
+                    // use the previous rule to compute the dateTimeToCompare, since the time daylight savings
+                    // "switches"
                     // is based on the previous rule's offset
                     ConvertToUtc(
                         dateTime,
@@ -1648,7 +1675,8 @@ namespace System
                 // the DateStart and DateEnd are UTC times that represent when daylight savings time changes.
                 // Convert the UTC times into adjusted time zone times.
 
-                // use the previous rule to calculate the startTime, since the DST change happens w.r.t. the previous rule
+                // use the previous rule to calculate the startTime, since the DST change happens w.r.t. the
+                // previous rule
                 AdjustmentRule previousRule = GetPreviousAdjustmentRule(rule, ruleIndex);
                 startTime = ConvertFromUtc(
                     rule.DateStart,
@@ -1733,7 +1761,8 @@ namespace System
             if (isDst && time.Kind == DateTimeKind.Local)
             {
                 // For normal time zones, the ambiguous hour is the last hour of daylight saving when you wind the
-                // clock back. It is theoretically possible to have a positive delta, (which would really be daylight
+                // clock back. It is theoretically possible to have a positive delta, (which would really be
+                // daylight
                 // reduction time), where you would have to wind the clock back in the begnning.
                 if (GetIsAmbiguousTime(time, rule, daylightTime))
                 {
@@ -1755,7 +1784,8 @@ namespace System
         {
             if (rule.NoDaylightTransitions)
             {
-                // use the previous rule to calculate the startTime, since the DST change happens w.r.t. the previous rule
+                // use the previous rule to calculate the startTime, since the DST change happens w.r.t. the
+                // previous rule
                 AdjustmentRule previousRule = GetPreviousAdjustmentRule(rule, ruleIndex);
                 return baseUtcOffset + previousRule.BaseUtcOffsetDelta + previousRule.DaylightDelta;
             }
@@ -1804,13 +1834,19 @@ namespace System
             // The start and end times represent the range of universal times that are in DST for that year.
             // Within that there is an ambiguous hour, usually right at the end, but at the beginning in
             // the unusual case of a negative daylight savings delta.
-            // We need to handle the case if the current rule has daylight saving end by the end of year. If so, we need to check if next year starts with daylight saving on
+            // We need to handle the case if the current rule has daylight saving end by the end of year. If so,
+            // we need to check if next year starts with daylight saving on
             // and get the actual daylight saving end time. Here is example for such case:
-            //      Converting the UTC datetime "12/31/2011 8:00:00 PM" to "(UTC+03:00) Moscow, St. Petersburg, Volgograd (RTZ 2)" zone.
-            //      In 2011 the daylight saving will go through the end of the year. If we use the end of 2011 as the daylight saving end,
-            //      that will fail the conversion because the UTC time +4 hours (3 hours for the zone UTC offset and 1 hour for daylight saving) will move us to the next year "1/1/2012 12:00 AM",
-            //      checking against the end of 2011 will tell we are not in daylight saving which is wrong and the conversion will be off by one hour.
-            // Note we handle the similar case when rule year start with daylight saving and previous year end with daylight saving.
+            //      Converting the UTC datetime "12/31/2011 8:00:00 PM" to "(UTC+03:00) Moscow, St. Petersburg,
+            // Volgograd (RTZ 2)" zone.
+            //      In 2011 the daylight saving will go through the end of the year. If we use the end of 2011
+            // as the daylight saving end,
+            //      that will fail the conversion because the UTC time +4 hours (3 hours for the zone UTC offset
+            // and 1 hour for daylight saving) will move us to the next year "1/1/2012 12:00 AM",
+            //      checking against the end of 2011 will tell we are not in daylight saving which is wrong and
+            // the conversion will be off by one hour.
+            // Note we handle the similar case when rule year start with daylight saving and previous year end
+            // with daylight saving.
 
             bool ignoreYearAdjustment = false;
             TimeSpan dstStartOffset = zone.GetDaylightSavingsStartOffsetFromUtc(
@@ -1932,7 +1968,8 @@ namespace System
             return isDst;
         }
 
-        // This method checks if a specific year start with DST, if so, will get when the DST ends that year and return true.
+        // This method checks if a specific year start with DST, if so, will get when the DST ends that year
+        // and return true.
         // Otherwise will return false.
         private static bool TryGetEndOfDstIfYearStartWithDst(
             int nextYear,
@@ -1988,14 +2025,16 @@ namespace System
             nextdaylightTime = zone.GetDaylightTime(nextYear, nextYearRule, nextYearRuleIndex);
 
             // Check if we are dealing with a southern sphere time zone.
-            // If the rule specifies the DST end as of Jan 1st, 12:00 AM that means the year will end with DST on
+            // If the rule specifies the DST end as of Jan 1st, 12:00 AM that means the year will end with DST
+            // on
             // but also means the year not started with DST as we already checked that before.
             if (
                 nextdaylightTime.End < nextdaylightTime.Start
                 && !nextYearRule.IsEndDateMarkerForEndOfYear()
             )
             {
-                // It is the Southern sphere time zone. The year is started with DST on. Use the DST end to get the when DST ends that year.
+                // It is the Southern sphere time zone. The year is started with DST on. Use the DST end to get the
+                // when DST ends that year.
                 dstEnd =
                     nextdaylightTime.End
                     - utc
@@ -2009,7 +2048,8 @@ namespace System
             return false;
         }
 
-        // This method checks if a specific year end with DST, if so, will get when the DST starts that year and return true.
+        // This method checks if a specific year end with DST, if so, will get when the DST starts that year
+        // and return true.
         // Otherwise will return false.
         private static bool TryGetStartOfDstIfYearEndWithDst(
             int previousYear,
@@ -2036,7 +2076,8 @@ namespace System
                 previousYearRuleIndex
             );
 
-            // If the rule is specifying that the year ends with DST on or DST starts after it ends for the year (i.e. it is in the Southern hemisphere), calculate the time DST started
+            // If the rule is specifying that the year ends with DST on or DST starts after it ends for the year
+            // (i.e. it is in the Southern hemisphere), calculate the time DST started
             if (
                 previousYearRule.IsEndDateMarkerForEndOfYear()
                 || previousDaylightTime.Start > previousDaylightTime.End
@@ -2058,7 +2099,8 @@ namespace System
             AdjustmentRule rule
         )
         {
-            // NoDaylightTransitions AdjustmentRules should never get their year adjusted since they adjust the offset for the
+            // NoDaylightTransitions AdjustmentRules should never get their year adjusted since they adjust the
+            // offset for the
             // entire time period - which may be for multiple years
             if (!ignoreYearAdjustment && !rule.NoDaylightTransitions)
             {
@@ -2080,7 +2122,8 @@ namespace System
 
             if (startTime > endTime)
             {
-                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the beginning of next year.
+                // In southern hemisphere, the daylight saving time starts later in the year, and ends in the
+                // beginning of next year.
                 // Note, the summer in the southern hemisphere begins late in the year.
                 return time < endTime || time >= startTime;
             }
@@ -2122,7 +2165,8 @@ namespace System
             DateTime startAmbiguousTime;
             DateTime endAmbiguousTime;
 
-            // if at DST start we transition forward in time then there is an ambiguous time range at the DST end
+            // if at DST start we transition forward in time then there is an ambiguous time range at the DST
+            // end
             if (rule.DaylightDelta > TimeSpan.Zero)
             {
                 if (rule.IsEndDateMarkerForEndOfYear())
@@ -2200,7 +2244,8 @@ namespace System
             DateTime startInvalidTime;
             DateTime endInvalidTime;
 
-            // if at DST start we transition forward in time then there is an ambiguous time range at the DST end
+            // if at DST start we transition forward in time then there is an ambiguous time range at the DST
+            // end
             if (rule.DaylightDelta < TimeSpan.Zero)
             {
                 // if the year ends with daylight saving on then there cannot be any time-hole's in that year.
@@ -2284,14 +2329,16 @@ namespace System
 
         /// <summary>
         /// Helper function that calculates the UTC offset for a UTC-dateTime in a timeZone.
-        /// This function assumes that the dateTime is represented in UTC and has *not* already been converted into the timeZone.
+        /// This function assumes that the dateTime is represented in UTC and has *not* already been
+        // converted into the timeZone.
         /// </summary>
         private static TimeSpan GetUtcOffsetFromUtc(DateTime time, TimeZoneInfo zone) =>
             GetUtcOffsetFromUtc(time, zone, out _);
 
         /// <summary>
         /// Helper function that calculates the UTC offset for a UTC-dateTime in a timeZone.
-        /// This function assumes that the dateTime is represented in UTC and has *not* already been converted into the timeZone.
+        /// This function assumes that the dateTime is represented in UTC and has *not* already been
+        // converted into the timeZone.
         /// </summary>
         private static TimeSpan GetUtcOffsetFromUtc(
             DateTime time,
@@ -2301,7 +2348,8 @@ namespace System
 
         /// <summary>
         /// Helper function that calculates the UTC offset for a UTC-dateTime in a timeZone.
-        /// This function assumes that the dateTime is represented in UTC and has *not* already been converted into the timeZone.
+        /// This function assumes that the dateTime is represented in UTC and has *not* already been
+        // converted into the timeZone.
         /// </summary>
         internal static TimeSpan GetUtcOffsetFromUtc(
             DateTime time,
@@ -2339,8 +2387,10 @@ namespace System
                     "If GetAdjustmentRuleForTime returned an AdjustmentRule, ruleIndex should also be set."
                 );
 
-                // As we get the associated rule using the adjusted targetTime, we should use the adjusted year (targetTime.Year) too as after adding the baseOffset,
-                // sometimes the year value can change if the input datetime was very close to the beginning or the end of the year. Examples of such cases:
+                // As we get the associated rule using the adjusted targetTime, we should use the adjusted year
+                // (targetTime.Year) too as after adding the baseOffset,
+                // sometimes the year value can change if the input datetime was very close to the beginning or the
+                // end of the year. Examples of such cases:
                 //      Libya Standard Time when used with the date 2011-12-31T23:59:59.9999999Z
                 //      "W. Australia Standard Time" used with date 2005-12-31T23:59:00.0000000Z
                 DateTime targetTime = time + baseOffset;
@@ -2598,11 +2648,16 @@ namespace System
             }
 
             // Fall back to reading from the local machine when the cache is not fully populated.
-            // On UNIX, there may be some tzfiles that aren't in the zones.tab file, and thus aren't returned from GetSystemTimeZones().
-            // If a caller asks for one of these zones before calling GetSystemTimeZones(), the time zone is returned successfully. But if
-            // GetSystemTimeZones() is called first, FindSystemTimeZoneById will throw TimeZoneNotFoundException, which is inconsistent.
-            // To fix this, when 'alwaysFallbackToLocalMachine' is true, even if _allSystemTimeZonesRead is true, try reading the tzfile
-            // from disk, but don't add the time zone to the list returned from GetSystemTimeZones(). These time zones will only be
+            // On UNIX, there may be some tzfiles that aren't in the zones.tab file, and thus aren't returned
+            // from GetSystemTimeZones().
+            // If a caller asks for one of these zones before calling GetSystemTimeZones(), the time zone is
+            // returned successfully. But if
+            // GetSystemTimeZones() is called first, FindSystemTimeZoneById will throw
+            // TimeZoneNotFoundException, which is inconsistent.
+            // To fix this, when 'alwaysFallbackToLocalMachine' is true, even if _allSystemTimeZonesRead is
+            // true, try reading the tzfile
+            // from disk, but don't add the time zone to the list returned from GetSystemTimeZones(). These time
+            // zones will only be
             // available if asked for directly.
             if (!cachedData._allSystemTimeZonesRead || alwaysFallbackToLocalMachine)
             {

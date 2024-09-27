@@ -16,13 +16,15 @@ public class BasicBlazorHybridTest
     public void Run()
     {
         // Note: This test produces *a lot* of debug output to aid when debugging failures. The only output
-        // that is necessary for the functioning of this test is the "Test passed" at the end of this method.
+        // that is necessary for the functioning of this test is the "Test passed" at the end of this
+        // method.
 
         Console.WriteLine($"Current directory: {Environment.CurrentDirectory}");
         Console.WriteLine($"Current assembly: {typeof(Program).Assembly.Location}");
         var thisProgramDir = Path.GetDirectoryName(typeof(Program).Assembly.Location);
 
-        // Add correct runtime sub-folder to PATH to ensure native files are discovered (this is supposed to happen automatically, but somehow it doesn't...)
+        // Add correct runtime sub-folder to PATH to ensure native files are discovered (this is supposed to
+        // happen automatically, but somehow it doesn't...)
         var newNativePath = Path.Combine(
             thisProgramDir,
             "runtimes",
@@ -186,7 +188,8 @@ public class BasicBlazorHybridTest
             Console.WriteLine($"Exception while running window: {ex}");
         }
 
-        // This line is what's required for the test to be considered as passed. The xUnit test in WebViewManagerE2ETests checks
+        // This line is what's required for the test to be considered as passed. The xUnit test in
+        // WebViewManagerE2ETests checks
         // that this reports success and that decides if the test is pass/fail.
         Console.WriteLine($"Test passed? {testPassed}");
     }

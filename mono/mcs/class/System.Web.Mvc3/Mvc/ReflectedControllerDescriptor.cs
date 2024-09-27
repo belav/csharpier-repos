@@ -81,7 +81,8 @@
         {
             if (useCache && GetType() == typeof(ReflectedControllerDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetTypeFilterAttributes(ControllerType);
             }
             return base.GetFilterAttributes(useCache);

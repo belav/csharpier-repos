@@ -84,7 +84,8 @@ namespace System.Windows.Forms
         {
             get
             {
-                // Accessing a System.Windows.Forms.DataGridViewRow with this indexer causes the row to become unshared.
+                // Accessing a System.Windows.Forms.DataGridViewRow with this indexer causes the row to become
+                // unshared.
                 // To keep the row shared, use the System.Windows.Forms.DataGridViewRowCollection.SharedRow method.
                 // For more information, see Best Practices for Scaling the Windows Forms DataGridView Control.
                 DataGridViewRow row = (DataGridViewRow)list[index];

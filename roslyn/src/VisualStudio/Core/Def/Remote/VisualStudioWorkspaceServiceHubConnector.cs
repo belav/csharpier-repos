@@ -19,7 +19,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
 {
     /// <summary>
     /// Connects <see cref="VisualStudioWorkspace"/> to the ServiceHub services.
-    /// Launches ServiceHub if it is not running yet and starts services that push information from <see cref="VisualStudioWorkspace"/> to the ServiceHub process.
+    /// Launches ServiceHub if it is not running yet and starts services that push information from <see
+    // cref="VisualStudioWorkspace"/> to the ServiceHub process.
     /// </summary>
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
     internal sealed class VisualStudioWorkspaceServiceHubConnector
@@ -61,7 +62,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
                 _disposalCancellationSource.Token
             );
 
-            // start launching remote process, so that the first service that needs it doesn't need to wait for it:
+            // start launching remote process, so that the first service that needs it doesn't need to wait for
+            // it:
             var service = workspace.Services.GetRequiredService<IRemoteHostClientProvider>();
             _remoteClientInitializationTask = service.TryGetRemoteHostClientAsync(
                 _disposalCancellationSource.Token

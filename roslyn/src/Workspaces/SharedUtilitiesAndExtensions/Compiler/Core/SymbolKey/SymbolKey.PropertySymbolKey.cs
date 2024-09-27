@@ -41,11 +41,14 @@ namespace Microsoft.CodeAnalysis
                 );
                 using var result = PooledArrayBuilder<IPropertySymbol>.GetInstance();
 
-                // For each property that we look at, we'll have to resolve the parameter list and return type in the
-                // context of that method.  This makes sure we can attempt to resolve the parameter list types against
+                // For each property that we look at, we'll have to resolve the parameter list and return type in
+                // the
+                // context of that method.  This makes sure we can attempt to resolve the parameter list types
+                // against
                 // error types in the property we're currently looking at.
                 //
-                // Because of this, we keep track of where we are in the reader.  Before resolving every parameter list,
+                // Because of this, we keep track of where we are in the reader.  Before resolving every parameter
+                // list,
                 // we'll mark which method we're on and we'll rewind to this point.
                 var beforeParametersPosition = reader.Position;
 

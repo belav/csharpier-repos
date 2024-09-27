@@ -245,7 +245,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_16()
         {
             ////
-            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression, List<string> terms)
+            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression,
+            // List<string> terms)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -259,7 +260,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_17()
         {
-            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression, List<string> terms)
+            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression,
+            // List<string> terms)
             ////         {
             //// ^
             var tree = GetTree();
@@ -697,7 +699,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_37()
         {
             ////
-            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression,
+            // IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -711,7 +714,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_38()
         {
-            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectExpressionTerms(int position, ExpressionSyntax expression,
+            // IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -1251,7 +1255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_67()
         {
             ////                     // Constants can make up a valid term, but we don't consider them valid
-            ////                     // terms themselves (since we don't want them to show up in the autos window
+            ////                     // terms themselves (since we don't want them to show up in the autos
+            // window
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1276,7 +1281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_68()
         {
-            ////                     // terms themselves (since we don't want them to show up in the autos window
+            ////                     // terms themselves (since we don't want them to show up in the autos
+            // window
             ////                     // on their own).
             //// ^
             var tree = GetTree();
@@ -1407,7 +1413,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_74()
         {
             ////                     // For a cast, just add the nested expression.  Note: this is technically
-            ////                     // unsafe as the cast *may* have side effects.  However, in practice this is
+            ////                     // unsafe as the cast *may* have side effects.  However, in practice this
+            // is
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1433,7 +1440,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_75()
         {
-            ////                     // unsafe as the cast *may* have side effects.  However, in practice this is
+            ////                     // unsafe as the cast *may* have side effects.  However, in practice this
+            // is
             ////                     // extremely rare, so we allow for this since it's ok in the common case.
             //// ^
             var tree = GetTree();
@@ -1461,7 +1469,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_76()
         {
             ////                     // extremely rare, so we allow for this since it's ok in the common case.
-            ////                     CollectExpressionTerms(position, ((CastExpressionSyntax)expression).Expression, terms, ref expressionType);
+            ////                     CollectExpressionTerms(position,
+            // ((CastExpressionSyntax)expression).Expression, terms, ref expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1487,7 +1496,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_77()
         {
-            ////                     CollectExpressionTerms(position, ((CastExpressionSyntax)expression).Expression, terms, ref expressionType);
+            ////                     CollectExpressionTerms(position,
+            // ((CastExpressionSyntax)expression).Expression, terms, ref expressionType);
             ////                     return;
             //// ^
             var tree = GetTree();
@@ -1562,7 +1572,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_81()
         {
             ////                 case SyntaxKind.PointerMemberAccessExpression:
-            ////                     CollectMemberAccessExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectMemberAccessExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1588,7 +1599,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_82()
         {
-            ////                     CollectMemberAccessExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectMemberAccessExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                     return;
             //// ^
             var tree = GetTree();
@@ -1647,7 +1659,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_85()
         {
             ////                 case SyntaxKind.ObjectCreationExpression:
-            ////                     CollectObjectCreationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectObjectCreationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1673,7 +1686,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_86()
         {
-            ////                     CollectObjectCreationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectObjectCreationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                     return;
             //// ^
             var tree = GetTree();
@@ -1732,7 +1746,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_89()
         {
             ////                 case SyntaxKind.ArrayCreationExpression:
-            ////                     CollectArrayCreationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectArrayCreationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1758,7 +1773,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_90()
         {
-            ////                     CollectArrayCreationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectArrayCreationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                     return;
             //// ^
             var tree = GetTree();
@@ -1817,7 +1833,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_93()
         {
             ////                 case SyntaxKind.InvocationExpression:
-            ////                     CollectInvocationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectInvocationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -1843,7 +1860,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_94()
         {
-            ////                     CollectInvocationExpressionTerms(position, expression, terms, ref expressionType);
+            ////                     CollectInvocationExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                     return;
             //// ^
             var tree = GetTree();
@@ -1997,7 +2015,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_102()
         {
             ////             {
-            ////                 CollectPrefixUnaryExpressionTerms(position, expression, terms, ref expressionType);
+            ////                 CollectPrefixUnaryExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -2023,7 +2042,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_103()
         {
-            ////                 CollectPrefixUnaryExpressionTerms(position, expression, terms, ref expressionType);
+            ////                 CollectPrefixUnaryExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                 return;
             //// ^
             var tree = GetTree();
@@ -2129,7 +2149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_108()
         {
             ////             {
-            ////                 CollectPostfixUnaryExpressionTerms(position, expression, terms, ref expressionType);
+            ////                 CollectPostfixUnaryExpressionTerms(position, expression, terms, ref
+            // expressionType);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -2155,7 +2176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_109()
         {
-            ////                 CollectPostfixUnaryExpressionTerms(position, expression, terms, ref expressionType);
+            ////                 CollectPostfixUnaryExpressionTerms(position, expression, terms, ref
+            // expressionType);
             ////                 return;
             //// ^
             var tree = GetTree();
@@ -2405,7 +2427,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_121()
         {
             ////
-            ////         private static void CollectMemberAccessExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectMemberAccessExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -2419,7 +2442,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_122()
         {
-            ////         private static void CollectMemberAccessExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectMemberAccessExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -3335,7 +3359,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_154()
         {
             ////
-            ////         private static void CollectObjectCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectObjectCreationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -3349,7 +3374,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_155()
         {
-            ////         private static void CollectObjectCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectObjectCreationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -3598,7 +3624,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_165()
         {
             ////                 var flags = ExpressionType.Invalid;
-            ////                 CollectArgumentTerms(position, objectionCreation.ArgumentList, terms, ref flags);
+            ////                 CollectArgumentTerms(position, objectionCreation.ArgumentList, terms, ref
+            // flags);
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -3626,7 +3653,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_166()
         {
-            ////                 CollectArgumentTerms(position, objectionCreation.ArgumentList, terms, ref flags);
+            ////                 CollectArgumentTerms(position, objectionCreation.ArgumentList, terms, ref
+            // flags);
             ////
             //// ^
             var tree = GetTree();
@@ -3874,7 +3902,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_176()
         {
             ////
-            ////         private static void CollectArrayCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectArrayCreationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -3888,7 +3917,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_177()
         {
-            ////         private static void CollectArrayCreationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectArrayCreationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -4041,7 +4071,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_184()
         {
             ////                 var flags = ExpressionType.Invalid;
-            ////                 arrayCreation.Initializer.Expressions.Do(e => CollectExpressionTerms(position, e, terms, ref flags));
+            ////                 arrayCreation.Initializer.Expressions.Do(e => CollectExpressionTerms(position,
+            // e, terms, ref flags));
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -4065,7 +4096,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_185()
         {
-            ////                 arrayCreation.Initializer.Expressions.Do(e => CollectExpressionTerms(position, e, terms, ref flags));
+            ////                 arrayCreation.Initializer.Expressions.Do(e => CollectExpressionTerms(position,
+            // e, terms, ref flags));
             ////
             //// ^
             var tree = GetTree();
@@ -4373,7 +4405,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_199()
         {
             ////
-            ////         private static void CollectInvocationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectInvocationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -4387,7 +4420,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_200()
         {
-            ////         private static void CollectInvocationExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectInvocationExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -4485,7 +4519,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_204()
         {
             ////             expressionType = ExpressionType.Invalid;
-            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags =
+            // ExpressionType.Invalid;
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -4510,7 +4545,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_205()
         {
-            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags =
+            // ExpressionType.Invalid;
             ////
             //// ^
             var tree = GetTree();
@@ -4886,7 +4922,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_219()
         {
             ////
-            ////         private static void CollectPrefixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectPrefixUnaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -4900,7 +4937,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_220()
         {
-            ////         private static void CollectPrefixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectPrefixUnaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -5270,7 +5308,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_234()
         {
             ////
-            ////             if (expression.MatchesKind(SyntaxKind.LogicalNotExpression, SyntaxKind.BitwiseNotExpression, SyntaxKind.NegateExpression, SyntaxKind.PlusExpression))
+            ////             if (expression.MatchesKind(SyntaxKind.LogicalNotExpression,
+            // SyntaxKind.BitwiseNotExpression, SyntaxKind.NegateExpression, SyntaxKind.PlusExpression))
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -5303,7 +5342,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_235()
         {
-            ////             if (expression.MatchesKind(SyntaxKind.LogicalNotExpression, SyntaxKind.BitwiseNotExpression, SyntaxKind.NegateExpression, SyntaxKind.PlusExpression))
+            ////             if (expression.MatchesKind(SyntaxKind.LogicalNotExpression,
+            // SyntaxKind.BitwiseNotExpression, SyntaxKind.NegateExpression, SyntaxKind.PlusExpression))
             ////             {
             //// ^
             var tree = GetTree();
@@ -5464,7 +5504,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_241()
         {
             ////
-            ////         private static void CollectPostfixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectPostfixUnaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -5478,7 +5519,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_242()
         {
-            ////         private static void CollectPostfixUnaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectPostfixUnaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -5930,7 +5972,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_260()
         {
             ////
-            ////         private static void CollectBinaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectBinaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -5944,7 +5987,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_261()
         {
-            ////         private static void CollectBinaryExpressionTerms(int position, ExpressionSyntax expression, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectBinaryExpressionTerms(int position, ExpressionSyntax
+            // expression, IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -5961,7 +6005,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_262()
         {
             ////         {
-            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags =
+            // ExpressionType.Invalid;
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -5989,7 +6034,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_263()
         {
-            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags = ExpressionType.Invalid;
+            ////             ExpressionType leftFlags = ExpressionType.Invalid, rightFlags =
+            // ExpressionType.Invalid;
             ////
             //// ^
             var tree = GetTree();
@@ -6861,7 +6907,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_314()
         {
             ////
-            ////         private static void CollectArgumentTerms(int position, ArgumentListSyntax argumentList, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectArgumentTerms(int position, ArgumentListSyntax argumentList,
+            // IList<string> terms, ref ExpressionType expressionType)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -6875,7 +6922,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_315()
         {
-            ////         private static void CollectArgumentTerms(int position, ArgumentListSyntax argumentList, IList<string> terms, ref ExpressionType expressionType)
+            ////         private static void CollectArgumentTerms(int position, ArgumentListSyntax argumentList,
+            // IList<string> terms, ref ExpressionType expressionType)
             ////         {
             //// ^
             var tree = GetTree();
@@ -7213,7 +7261,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_330()
         {
             ////
-            ////                 validExpr &= (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
+            ////                 validExpr &= (flags & ExpressionType.ValidExpression) ==
+            // ExpressionType.ValidExpression;
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -7242,7 +7291,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_331()
         {
-            ////                 validExpr &= (flags & ExpressionType.ValidExpression) == ExpressionType.ValidExpression;
+            ////                 validExpr &= (flags & ExpressionType.ValidExpression) ==
+            // ExpressionType.ValidExpression;
             ////             }
             //// ^
             var tree = GetTree();
@@ -7418,7 +7468,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         public void TestAtStartOfLine_338()
         {
             ////
-            ////         private static void CollectVariableTerms(int position, SeparatedSyntaxList<VariableDeclaratorSyntax> declarators, List<string> terms)
+            ////         private static void CollectVariableTerms(int position,
+            // SeparatedSyntaxList<VariableDeclaratorSyntax> declarators, List<string> terms)
             //// ^
             var tree = GetTree();
             var terms = CSharpProximityExpressionsService.GetProximityExpressions(
@@ -7432,7 +7483,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
         [Fact]
         public void TestAtStartOfLine_339()
         {
-            ////         private static void CollectVariableTerms(int position, SeparatedSyntaxList<VariableDeclaratorSyntax> declarators, List<string> terms)
+            ////         private static void CollectVariableTerms(int position,
+            // SeparatedSyntaxList<VariableDeclaratorSyntax> declarators, List<string> terms)
             ////         {
             //// ^
             var tree = GetTree();

@@ -14,7 +14,8 @@ public abstract class ModelMetadataProvider : IModelMetadataProvider
     /// Supplies metadata describing the properties of a <see cref="Type"/>.
     /// </summary>
     /// <param name="modelType">The <see cref="Type"/>.</param>
-    /// <returns>A set of <see cref="ModelMetadata"/> instances describing properties of the <see cref="Type"/>.</returns>
+    /// <returns>A set of <see cref="ModelMetadata"/> instances describing properties of the <see
+    // cref="Type"/>.</returns>
     public abstract IEnumerable<ModelMetadata> GetMetadataForProperties(Type modelType);
 
     /// <summary>
@@ -28,7 +29,8 @@ public abstract class ModelMetadataProvider : IModelMetadataProvider
     /// Supplies metadata describing a parameter.
     /// </summary>
     /// <param name="parameter">The <see cref="ParameterInfo"/>.</param>
-    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="parameter"/>.</returns>
+    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref
+    // name="parameter"/>.</returns>
     public abstract ModelMetadata GetMetadataForParameter(ParameterInfo parameter);
 
     /// <summary>
@@ -36,7 +38,8 @@ public abstract class ModelMetadataProvider : IModelMetadataProvider
     /// </summary>
     /// <param name="parameter">The <see cref="ParameterInfo"/></param>
     /// <param name="modelType">The actual model type.</param>
-    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="parameter"/>.</returns>
+    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref
+    // name="parameter"/>.</returns>
     public virtual ModelMetadata GetMetadataForParameter(ParameterInfo parameter, Type modelType)
     {
         throw new NotSupportedException();
@@ -47,7 +50,8 @@ public abstract class ModelMetadataProvider : IModelMetadataProvider
     /// </summary>
     /// <param name="propertyInfo">The <see cref="PropertyInfo"/>.</param>
     /// <param name="modelType">The actual model type.</param>
-    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="propertyInfo"/>.</returns>
+    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref
+    // name="propertyInfo"/>.</returns>
     public virtual ModelMetadata GetMetadataForProperty(PropertyInfo propertyInfo, Type modelType)
     {
         throw new NotSupportedException();
@@ -58,7 +62,8 @@ public abstract class ModelMetadataProvider : IModelMetadataProvider
     /// </summary>
     /// <param name="constructor">The <see cref="ConstructorInfo"/>.</param>
     /// <param name="modelType">The type declaring the constructor.</param>
-    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref name="constructor"/>.</returns>
+    /// <returns>A <see cref="ModelMetadata"/> instance describing the <paramref
+    // name="constructor"/>.</returns>
     public virtual ModelMetadata GetMetadataForConstructor(
         ConstructorInfo constructor,
         Type modelType

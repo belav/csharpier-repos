@@ -4,11 +4,14 @@
 namespace Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 
 /// <summary>
-///     A simple model for a database foreign key constraint used when reverse engineering an existing database.
+///     A simple model for a database foreign key constraint used when reverse engineering an
+// existing database.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an existing database</see>, and
-///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time services</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-scaffolding">Reverse engineering (scaffolding) an
+// existing database</see>, and
+///     <see href="https://aka.ms/efcore-docs-design-time-services">EF Core design-time
+// services</see> for more information and examples.
 /// </remarks>
 public class DatabaseForeignKey : Annotatable
 {
@@ -28,7 +31,8 @@ public class DatabaseForeignKey : Annotatable
     public virtual IList<DatabaseColumn> Columns { get; } = new List<DatabaseColumn>();
 
     /// <summary>
-    ///     The ordered list of columns in the <see cref="PrincipalTable" /> to which the <see cref="Columns" />
+    ///     The ordered list of columns in the <see cref="PrincipalTable" /> to which the <see
+    // cref="Columns" />
     ///     of the foreign key are constrained.
     /// </summary>
     public virtual IList<DatabaseColumn> PrincipalColumns { get; } = new List<DatabaseColumn>();

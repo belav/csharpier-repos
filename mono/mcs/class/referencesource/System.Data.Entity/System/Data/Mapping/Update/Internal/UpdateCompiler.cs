@@ -106,7 +106,8 @@ namespace System.Data.Mapping.Update.Internal
             TableChangeProcessor processor
         )
         {
-            // If we're updating a row, the row may not need to be touched (e.g., no concurrency validation required)
+            // If we're updating a row, the row may not need to be touched (e.g., no concurrency validation
+            // required)
             bool rowMustBeTouched = false;
 
             DbExpressionBinding target = GetTarget(processor);
@@ -264,7 +265,8 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="insertMode">Determines whether key columns and 'preserve' columns are
         /// omitted from the list.</param>
         /// <param name="outputIdentifiers">Dictionary listing server generated identifiers.</param>
-        /// <param name="returning">DbExpression describing result projection for server generated values.</param>
+        /// <param name="returning">DbExpression describing result projection for server generated
+        // values.</param>
         /// <param name="rowMustBeTouched">Indicates whether the row must be touched
         /// because it produces a value (e.g. computed)</param>
         /// <returns>Column value pairs.</returns>
@@ -565,7 +567,8 @@ namespace System.Data.Mapping.Update.Internal
             return predicate;
         }
 
-        // Effects: given a "clause" in the form of a property/value pair, produces an equality expression. If the
+        // Effects: given a "clause" in the form of a property/value pair, produces an equality expression.
+        // If the
         // value is null, creates an IsNull expression
         // Requires: all arguments are set
         private DbExpression GenerateEqualityExpression(
@@ -621,14 +624,19 @@ namespace System.Data.Mapping.Update.Internal
             }
             else
             {
-                // At this point we have already done any needed type checking and we potentially translated the type
-                // of the property to the SSpace (the property parameter is a property in the SSpace). However the value
-                // is here is a CSpace value. As a result it does not have to match the type of the property in SSpace.
+                // At this point we have already done any needed type checking and we potentially translated the
+                // type
+                // of the property to the SSpace (the property parameter is a property in the SSpace). However the
+                // value
+                // is here is a CSpace value. As a result it does not have to match the type of the property in
+                // SSpace.
                 // Two cases here are:
                 // - the type in CSpace does not exactly match the type in the SSpace (but is promotable)
-                // - the type in CSpace is enum type and in this case it never matches the type in SSpace where enum type
+                // - the type in CSpace is enum type and in this case it never matches the type in SSpace where enum
+                // type
                 //   does not exist
-                // Since the types have already been checked it is safe just to convert the value from CSpace to the type
+                // Since the types have already been checked it is safe just to convert the value from CSpace to the
+                // type
                 // from SSpace.
 
                 Debug.Assert(

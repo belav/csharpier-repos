@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.ComponentModel
 {
@@ -22,7 +22,8 @@ namespace System.ComponentModel
     /// <devdoc>
     ///    <para>The exception that is thrown for a Win32 error code.</para>
     /// </devdoc>
-    // Code already shipped - safe to place link demand on derived class constructor when base doesn't have it - Suppress message.
+    // Code already shipped - safe to place link demand on derived class constructor when base doesn't
+    // have it - Suppress message.
     [HostProtection(SharedState = true)]
     [System.Diagnostics.CodeAnalysis.SuppressMessage(
         "Microsoft.Security",
@@ -39,7 +40,8 @@ namespace System.ComponentModel
         private readonly int nativeErrorCode;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the last Win32 error
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class
+        // with the last Win32 error
         ///    that occured.</para>
         /// </devdoc>
         [SecurityPermission(
@@ -50,7 +52,8 @@ namespace System.ComponentModel
             : this(Marshal.GetLastWin32Error()) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error.</para>
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class
+        // with the specified error.</para>
         /// </devdoc>
         [SecurityPermission(
             SecurityAction.LinkDemand,
@@ -60,7 +63,8 @@ namespace System.ComponentModel
             : this(error, GetErrorMessage(error)) { }
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class with the specified error and the
+        /// <para>Initializes a new instance of the <see cref='System.ComponentModel.Win32Exception'/> class
+        // with the specified error and the
         ///    specified detailed description.</para>
         /// </devdoc>
         [SecurityPermission(
@@ -161,14 +165,18 @@ namespace System.ComponentModel
         //
         // So the API can only be used in one of these two ways.
         // a. You pass a buffer of appropriate size and get the resource.
-        // b. Windows creates a buffer and passes the address back and the onus of releasing the bugffer lies on the caller.
+        // b. Windows creates a buffer and passes the address back and the onus of releasing the bugffer
+        // lies on the caller.
         //
         // Since the error code is coming from the user, it is not possible to know the size in advance.
-        // Unfortunately we can't use option b. since the buffer can only be freed using LocalFree and it is a private API on onecore.
-        // Also, using option b is ugly for the manged code and could cause memory leak in situations where freeing is unsuccessful.
+        // Unfortunately we can't use option b. since the buffer can only be freed using LocalFree and it is
+        // a private API on onecore.
+        // Also, using option b is ugly for the manged code and could cause memory leak in situations where
+        // freeing is unsuccessful.
         //
         // As a result we use the following approach.
-        // We initially call the API with a buffer size of 256 and then gradually increase the size in case of failure until we reach the max allowed size of 65K bytes.
+        // We initially call the API with a buffer size of 256 and then gradually increase the size in case
+        // of failure until we reach the max allowed size of 65K bytes.
 
         private const int MaxAllowedBufferSize = 65 * 1024;
 
@@ -188,12 +196,14 @@ namespace System.ComponentModel
                 }
             } while (sb.Capacity < MaxAllowedBufferSize);
 
-            // If you come here then a size as large as 65K is also not sufficient and so we give the generic errorMsg.
+            // If you come here then a size as large as 65K is also not sufficient and so we give the generic
+            // errorMsg.
             return "Unknown error (0x" + Convert.ToString(error, 16) + ")";
         }
 #endif
 
-        // Even though all we're exposing is the nativeErrorCode (which is also available via public property)
+        // Even though all we're exposing is the nativeErrorCode (which is also available via public
+        // property)
         // it's not a bad idea to have this in place.  Later, if more fields are added to this exception,
         // we won't need to worry about accidentaly exposing them through this interface.
         [SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter = true)]

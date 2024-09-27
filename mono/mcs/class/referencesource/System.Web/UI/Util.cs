@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements various utility functions used by the template code
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements various utility functions used by the template code
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -233,9 +233,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a reader which holds the contents of a file.  If a configPath is passed
-         * in, try to get an encoding for it
-         */
+        * Return a reader which holds the contents of a file.  If a configPath is passed
+        * in, try to get an encoding for it
+        */
         internal /*public*/
         static StreamReader ReaderFromFile(string filename, VirtualPath configPath)
         {
@@ -279,8 +279,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Attempt to delete a file, but don't throw if it can't be done
-         */
+        * Attempt to delete a file, but don't throw if it can't be done
+        */
         internal static void DeleteFileNoException(string path)
         {
             Debug.Assert(File.Exists(path), path);
@@ -298,8 +298,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return true if the directory exists and is not empty.
-         */
+        * Return true if the directory exists and is not empty.
+        */
         internal static bool IsNonEmptyDirectory(string dir)
         {
             // Does it exist
@@ -320,8 +320,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return true if string is a valid simple file name (with no path or wild cards)
-         */
+        * Return true if string is a valid simple file name (with no path or wild cards)
+        */
         private static char[] invalidFileNameChars = new char[] { '/', '\\', '?', '*', ':' };
 
         internal static bool IsValidFileName(string fileName)
@@ -338,8 +338,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Replace all invalid chars in a filename by underscores.
-         */
+        * Replace all invalid chars in a filename by underscores.
+        */
         internal static string MakeValidFileName(string fileName)
         {
             // If it's already valid, nothing to do
@@ -359,8 +359,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return true if the current user has write access to the directory
-         */
+        * Return true if the current user has write access to the directory
+        */
         internal static bool HasWriteAccessToDirectory(string dir)
         {
             // If it doesn't even exist (or we can't determine that it does), return false
@@ -408,7 +408,8 @@ namespace System.Web.UI
             string location = (string)
                 RuntimeConfig.GetAppConfig().WebControls["clientScriptsLocation"];
 
-            // If there is a formatter, as there will be for the default machine.config, insert the assembly name and version.
+            // If there is a formatter, as there will be for the default machine.config, insert the assembly
+            // name and version.
             if (location.IndexOf("{0}", StringComparison.Ordinal) >= 0)
             {
                 string assembly = "system_web";
@@ -424,9 +425,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a reader which holds the contents of a file.  If a configPath is passed
-         * in, try to get a encoding for it
-         */
+        * Return a reader which holds the contents of a file.  If a configPath is passed
+        * in, try to get a encoding for it
+        */
         internal /*public*/
         static StreamReader ReaderFromStream(Stream stream, VirtualPath configPath)
         {
@@ -444,8 +445,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a String which holds the contents of a file
-         */
+        * Return a String which holds the contents of a file
+        */
         internal /*public*/
         static String StringFromVirtualPath(VirtualPath virtualPath)
         {
@@ -458,8 +459,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a String which holds the contents of a file
-         */
+        * Return a String which holds the contents of a file
+        */
         internal /*public*/
         static String StringFromFile(string path)
         {
@@ -468,8 +469,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a String which holds the contents of a file with specific encoding.
-         */
+        * Return a String which holds the contents of a file with specific encoding.
+        */
         internal /*public*/
         static String StringFromFile(string path, ref Encoding encoding)
         {
@@ -497,9 +498,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a String which holds the contents of a file, or null if the file
-         * doesn't exist.
-         */
+        * Return a String which holds the contents of a file, or null if the file
+        * doesn't exist.
+        */
         internal /*public*/
         static String StringFromFileIfExists(string path)
         {
@@ -510,9 +511,9 @@ namespace System.Web.UI
         }
 
         /*
-         * If the file doesn't exist, do nothing.  If it does try to delete it if possible.
-         * If that fails, rename it with by appending a .delete extension to it
-         */
+        * If the file doesn't exist, do nothing.  If it does try to delete it if possible.
+        * If that fails, rename it with by appending a .delete extension to it
+        */
         internal static void RemoveOrRenameFile(string filename)
         {
             FileInfo fi = new FileInfo(filename);
@@ -520,9 +521,9 @@ namespace System.Web.UI
         }
 
         /*
-         * If the file doesn't exist, do nothing.  If it does try to delete it if possible.
-         * If that fails, rename it with by appending a .delete extension to it
-         */
+        * If the file doesn't exist, do nothing.  If it does try to delete it if possible.
+        * If that fails, rename it with by appending a .delete extension to it
+        */
         internal static bool RemoveOrRenameFile(FileInfo f)
         {
             try
@@ -561,8 +562,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Clears a file's readonly attribute if it has one
-         */
+        * Clears a file's readonly attribute if it has one
+        */
         internal static void ClearReadOnlyAttribute(string path)
         {
             FileAttributes attribs = File.GetAttributes(path);
@@ -675,9 +676,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Calls Invoke on a MethodInfo.  If an exception happens during the
-         * method call, catch it and throw it back.
-         */
+        * Calls Invoke on a MethodInfo.  If an exception happens during the
+        * method call, catch it and throw it back.
+        */
         internal static object InvokeMethod(MethodInfo methodInfo, object obj, object[] parameters)
         {
             try
@@ -691,9 +692,9 @@ namespace System.Web.UI
         }
 
         /*
-         * If the passed in Type has a non-private field with the passed in name,
-         * return the field's Type.
-         */
+        * If the passed in Type has a non-private field with the passed in name,
+        * return the field's Type.
+        */
         internal static Type GetNonPrivateFieldType(Type classType, string fieldName)
         {
             FieldInfo fieldInfo = classType.GetField(
@@ -711,9 +712,9 @@ namespace System.Web.UI
         }
 
         /*
-         * If the passed in Type has a non-private property with the passed in name,
-         * return the property's Type.
-         */
+        * If the passed in Type has a non-private property with the passed in name,
+        * return the property's Type.
+        */
         internal static Type GetNonPrivatePropertyType(Type classType, string propName)
         {
             PropertyInfo propInfo = null;
@@ -752,9 +753,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Checks whether the property has a TemplateInstanceAttribute, and returns true if
-         * its value is TemplateInstance.Multiple.
-         */
+        * Checks whether the property has a TemplateInstanceAttribute, and returns true if
+        * its value is TemplateInstance.Multiple.
+        */
         internal static bool IsMultiInstanceTemplateProperty(PropertyInfo pInfo)
         {
             object[] instanceAttrs = pInfo.GetCustomAttributes(
@@ -773,9 +774,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return the first key of the dictionary as a string.  Throws if it's
-         * empty or if the key is not a string.
-         */
+        * Return the first key of the dictionary as a string.  Throws if it's
+        * empty or if the key is not a string.
+        */
         private static string FirstDictionaryKey(IDictionary dict)
         {
             IDictionaryEnumerator e = dict.GetEnumerator();
@@ -784,9 +785,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Get a value from a dictionary, and remove it from the dictionary if
-         * it exists.
-         */
+        * Get a value from a dictionary, and remove it from the dictionary if
+        * it exists.
+        */
         private static string GetAndRemove(IDictionary dict, string key)
         {
             string val = (string)dict[key];
@@ -799,11 +800,11 @@ namespace System.Web.UI
         }
 
         /*
-         * Get a value from a dictionary, and remove it from the dictionary if
-         * it exists.  Throw an exception if the value is a whitespace string.
-         * However, don't complain about null, which simply means the value is not
-         * in the dictionary.
-         */
+        * Get a value from a dictionary, and remove it from the dictionary if
+        * it exists.  Throw an exception if the value is a whitespace string.
+        * However, don't complain about null, which simply means the value is not
+        * in the dictionary.
+        */
         internal static string GetAndRemoveNonEmptyAttribute(
             IDictionary directives,
             string key,
@@ -882,8 +883,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Parse a DeviceName:AttribName string into its components
-         */
+        * Parse a DeviceName:AttribName string into its components
+        */
         internal const char DeviceFilterSeparator = ':';
         internal const string XmlnsAttribute = "xmlns:";
 
@@ -948,9 +949,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Same as GetAndRemoveNonEmptyAttribute, but make sure the value does not
-         * contain any whitespace characters.
-         */
+        * Same as GetAndRemoveNonEmptyAttribute, but make sure the value does not
+        * contain any whitespace characters.
+        */
         internal static string GetAndRemoveNonEmptyNoSpaceAttribute(
             IDictionary directives,
             string key,
@@ -985,9 +986,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Same as GetAndRemoveNonEmptyNoSpaceAttribute, but make sure the value is a
-         * valid language identifier
-         */
+        * Same as GetAndRemoveNonEmptyNoSpaceAttribute, but make sure the value is a
+        * valid language identifier
+        */
         internal static string GetAndRemoveNonEmptyIdentifierAttribute(
             IDictionary directives,
             string key,
@@ -1076,13 +1077,13 @@ namespace System.Web.UI
         }
 
         /*
-         * Get a string value from a dictionary, and convert it to bool.  Throw an
-         * exception if it's not a valid bool string.
-         * However, don't complain about null, which simply means the value is not
-         * in the dictionary.
-         * The value is returned through a REF param (unchanged if null)
-         * Return value: true if attrib exists, false otherwise
-         */
+        * Get a string value from a dictionary, and convert it to bool.  Throw an
+        * exception if it's not a valid bool string.
+        * However, don't complain about null, which simply means the value is not
+        * in the dictionary.
+        * The value is returned through a REF param (unchanged if null)
+        * Return value: true if attrib exists, false otherwise
+        */
         internal static bool GetAndRemoveBooleanAttribute(
             IDictionary directives,
             string key,
@@ -1112,13 +1113,13 @@ namespace System.Web.UI
         }
 
         /*
-         * Get a string value from a dictionary, and convert it to integer.  Throw an
-         * exception if it's not a valid positive integer string.
-         * However, don't complain about null, which simply means the value is not
-         * in the dictionary.
-         * The value is returned through a REF param (unchanged if null)
-         * Return value: true if attrib exists, false otherwise
-         */
+        * Get a string value from a dictionary, and convert it to integer.  Throw an
+        * exception if it's not a valid positive integer string.
+        * However, don't complain about null, which simply means the value is not
+        * in the dictionary.
+        * The value is returned through a REF param (unchanged if null)
+        * Return value: true if attrib exists, false otherwise
+        */
         internal static bool GetAndRemoveNonNegativeIntegerAttribute(
             IDictionary directives,
             string key,
@@ -1255,16 +1256,16 @@ namespace System.Web.UI
         }
 
         /*
-         * Return true iff the string is made of all white space characters
-         */
+        * Return true iff the string is made of all white space characters
+        */
         internal static bool IsWhiteSpaceString(string s)
         {
             return (s.Trim().Length == 0);
         }
 
         /*
-         * Return true iff the string contains some white space characters
-         */
+        * Return true iff the string contains some white space characters
+        */
         internal static bool ContainsWhiteSpace(string s)
         {
             for (int i = s.Length - 1; i >= 0; i--)
@@ -1277,8 +1278,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return the index of the first non whitespace char.  -1 if none found.
-         */
+        * Return the index of the first non whitespace char.  -1 if none found.
+        */
         internal static int FirstNonWhiteSpaceIndex(string s)
         {
             for (int i = 0; i < s.Length; i++)
@@ -1291,18 +1292,18 @@ namespace System.Web.UI
         }
 
         /*
-         * Return true iff the string holds the value "true" (case insensitive).
-         * Checks for null.
-         */
+        * Return true iff the string holds the value "true" (case insensitive).
+        * Checks for null.
+        */
         internal static bool IsTrueString(string s)
         {
             return s != null && (StringUtil.EqualsIgnoreCase(s, "true"));
         }
 
         /*
-         * Return true iff the string holds the value "false" (case insensitive)
-         * Checks for null.
-         */
+        * Return true iff the string holds the value "false" (case insensitive)
+        * Checks for null.
+        */
         internal static bool IsFalseString(string s)
         {
             return s != null && (StringUtil.EqualsIgnoreCase(s, "false"));
@@ -1314,8 +1315,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a full type name from a namespace (could be empty) and a type name
-         */
+        * Return a full type name from a namespace (could be empty) and a type name
+        */
         internal static string MakeFullTypeName(string ns, string typeName)
         {
             if (String.IsNullOrEmpty(ns))
@@ -1325,9 +1326,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a valid type name from a string by changing any character
-         * that's not a letter or a digit to an '_'.
-         */
+        * Return a valid type name from a string by changing any character
+        * that's not a letter or a digit to an '_'.
+        */
         internal static string MakeValidTypeNameFromString(string s)
         {
             StringBuilder sb = new StringBuilder();
@@ -1348,11 +1349,11 @@ namespace System.Web.UI
         }
 
         /*
-         * Extract a namespace and typename from a virtualPath
-         * We use all but the last two chunks as the namespace
-         * e.g. Aaa.Bbb.Ccc.Wsdl will use the "Aaa.Bbb" namespace, and Ccc as the type.
-         * chunksToIgnore is the number of ending chunks to ignore (e.g. 1 for the extension)
-         */
+        * Extract a namespace and typename from a virtualPath
+        * We use all but the last two chunks as the namespace
+        * e.g. Aaa.Bbb.Ccc.Wsdl will use the "Aaa.Bbb" namespace, and Ccc as the type.
+        * chunksToIgnore is the number of ending chunks to ignore (e.g. 1 for the extension)
+        */
         internal static string GetNamespaceAndTypeNameFromVirtualPath(
             VirtualPath virtualPath,
             int chunksToIgnore,
@@ -1391,8 +1392,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Same as GetNamespaceAndTypeNameFromVirtualPath, but ignore the type name
-         */
+        * Same as GetNamespaceAndTypeNameFromVirtualPath, but ignore the type name
+        */
         internal static string GetNamespaceFromVirtualPath(VirtualPath virtualPath)
         {
             string typeName;
@@ -1400,8 +1401,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Return a standard path from a file:// url
-         */
+        * Return a standard path from a file:// url
+        */
         internal static string FilePathFromFileUrl(string url)
         {
             //
@@ -1411,8 +1412,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Checks whether the passed in string is a valid culture name.
-         */
+        * Checks whether the passed in string is a valid culture name.
+        */
         internal static bool IsCultureName(string s)
         {
             if (String.IsNullOrEmpty(s))
@@ -1440,9 +1441,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return the culture name for a file (e.g. "fr" or "fr-fr").
-         * If no culture applies, return null.
-         */
+        * Return the culture name for a file (e.g. "fr" or "fr-fr").
+        * If no culture applies, return null.
+        */
         internal static string GetCultureName(string virtualPath)
         {
             if (virtualPath == null)
@@ -1472,17 +1473,17 @@ namespace System.Web.UI
         }
 
         /*
-         * Returns true if the type string contains an assembly specification
-         */
+        * Returns true if the type string contains an assembly specification
+        */
         internal static bool TypeNameContainsAssembly(string typeName)
         {
             return CommaIndexInTypeName(typeName) > 0;
         }
 
         /*
-         * Returns the index of the comma separating the type from the assembly, or
-         * -1 of there is no assembly
-         */
+        * Returns the index of the comma separating the type from the assembly, or
+        * -1 of there is no assembly
+        */
         internal static int CommaIndexInTypeName(string typeName)
         {
             // Look for the last comma
@@ -1510,17 +1511,17 @@ namespace System.Web.UI
         }
 
         /*
-         * Return the full path (non shadow copied) to the assembly that
-         * the given type lives in.
-         */
+        * Return the full path (non shadow copied) to the assembly that
+        * the given type lives in.
+        */
         internal static string GetAssemblyPathFromType(Type t)
         {
             return Util.FilePathFromFileUrl(t.Assembly.EscapedCodeBase);
         }
 
         /*
-         * Same as GetAssemblyPathFromType, but with path safety check
-         */
+        * Same as GetAssemblyPathFromType, but with path safety check
+        */
         internal static string GetAssemblySafePathFromType(Type t)
         {
             return HttpRuntime.GetSafePath(GetAssemblyPathFromType(t));
@@ -1546,10 +1547,10 @@ namespace System.Web.UI
         }
 
         /*
-         * Check if the passed in type is for a late bound COM object.  This
-         * is what we would get when calling Type.GetTypeFromProgID() on a progid
-         * that has not been tlbimp'ed.
-         */
+        * Check if the passed in type is for a late bound COM object.  This
+        * is what we would get when calling Type.GetTypeFromProgID() on a progid
+        * that has not been tlbimp'ed.
+        */
         internal static bool IsLateBoundComClassicType(Type t)
         {
             //
@@ -1559,8 +1560,8 @@ namespace System.Web.UI
         }
 
         /*
-         * Get the path to the (shadow copied) DLL behind an assembly
-         */
+        * Get the path to the (shadow copied) DLL behind an assembly
+        */
         [FileIOPermission(SecurityAction.Assert, AllFiles = FileIOPermissionAccess.PathDiscovery)]
         internal static string GetAssemblyCodeBase(Assembly assembly)
         {
@@ -1573,11 +1574,11 @@ namespace System.Web.UI
         }
 
         /*
-         * Add the full path to the assembly to the string collection if it's not already there.
-         * This method uses the path to the target reference assembly for framework assemblies.
-         * If an assembly exists only in a higher version framework, it will be skipped and NOT
-         * added to the list.
-         */
+        * Add the full path to the assembly to the string collection if it's not already there.
+        * This method uses the path to the target reference assembly for framework assemblies.
+        * If an assembly exists only in a higher version framework, it will be skipped and NOT
+        * added to the list.
+        */
         internal static void AddAssemblyToStringCollection(
             Assembly assembly,
             StringCollection toList
@@ -1585,7 +1586,8 @@ namespace System.Web.UI
         {
             string assemblyPath = null;
 
-            //Skip adding Mscorlib for versions from 4.0 as that is added by CodeDomProvider (because of CoreAssemblyFileName switch).
+            //Skip adding Mscorlib for versions from 4.0 as that is added by CodeDomProvider (because of
+            // CoreAssemblyFileName switch).
             if (
                 BuildManagerHost.InClientBuildManager
                 && !MultiTargetingUtil.IsTargetFramework20
@@ -1631,9 +1633,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Add the full path to all the assemblies to the string collection if they're not already there.
-         * This method uses the path to the target reference assembly for framework assemblies.
-         */
+        * Add the full path to all the assemblies to the string collection if they're not already there.
+        * This method uses the path to the target reference assembly for framework assemblies.
+        */
         internal static void AddAssembliesToStringCollection(
             ICollection fromList,
             StringCollection toList
@@ -1650,9 +1652,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return an AssemblySet which contains all the assemblies that
-         * are referenced by the input assembly
-         */
+        * Return an AssemblySet which contains all the assemblies that
+        * are referenced by the input assembly
+        */
         internal static AssemblySet GetReferencedAssemblies(Assembly a)
         {
             AssemblySet referencedAssemblies = new AssemblySet();
@@ -1673,9 +1675,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Return an assembly name from the name of an assembly dll.
-         * Basically, it strips the extension.
-         */
+        * Return an assembly name from the name of an assembly dll.
+        * Basically, it strips the extension.
+        */
         internal static string GetAssemblyNameFromFileName(string fileName)
         {
             // Strip the .dll extension if any
@@ -1686,9 +1688,9 @@ namespace System.Web.UI
         }
 
         /*
-         * Look for a type by name in a collection of assemblies.  If it exists in multiple assemblies,
-         * throw an error.
-         */
+        * Look for a type by name in a collection of assemblies.  If it exists in multiple assemblies,
+        * throw an error.
+        */
         // Assert reflection in order to call assembly.GetType()
         [ReflectionPermission(SecurityAction.Assert, Flags = ReflectionPermissionFlag.MemberAccess)]
         internal static Type GetTypeFromAssemblies(

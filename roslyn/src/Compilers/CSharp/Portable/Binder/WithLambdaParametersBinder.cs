@@ -157,7 +157,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case SymbolKind.Parameter:
                 case SymbolKind.Local:
-                    // Error: A local or parameter named '{0}' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    // Error: A local or parameter named '{0}' cannot be declared in this scope because that name is
+                    // used in an enclosing local scope to define a local or parameter
                     diagnostics.Add(ErrorCode.ERR_LocalIllegallyOverrides, newLocation, name);
                     return true;
 

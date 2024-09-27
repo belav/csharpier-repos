@@ -28,22 +28,27 @@ namespace System.Threading
     {
         #region Private Fields
 
-        // The semaphore count, initialized in the constructor to the initial value, every release call increments it
+        // The semaphore count, initialized in the constructor to the initial value, every release call
+        // increments it
         // and every wait call decrements it as long as its value is positive otherwise the wait will block.
         // Its value must be between the maximum semaphore value and zero
         private volatile int m_currentCount;
 
-        // The maximum semaphore value, it is initialized to Int.MaxValue if the client didn't specify it. it is used
+        // The maximum semaphore value, it is initialized to Int.MaxValue if the client didn't specify it.
+        // it is used
         // to check if the count exceeded the maximum value or not.
         private readonly int m_maxCount;
 
-        // The number of synchronously waiting threads, it is set to zero in the constructor and increments before blocking the
-        // threading and decrements it back after that. It is used as flag for the release call to know if there are
+        // The number of synchronously waiting threads, it is set to zero in the constructor and increments
+        // before blocking the
+        // threading and decrements it back after that. It is used as flag for the release call to know if
+        // there are
         // waiting threads in the monitor or not.
         private int m_waitCount;
 
         /// <summary>
-        /// This is used to help prevent waking more waiters than necessary. It's not perfect and sometimes more waiters than
+        /// This is used to help prevent waking more waiters than necessary. It's not perfect and sometimes
+        // more waiters than
         /// necessary may still be woken, see <see cref="WaitUntilCountOrTimeout"/>.
         /// </summary>
         private int m_countOfWaitersPulsedToWake;
@@ -52,7 +57,8 @@ namespace System.Threading
         // Boolean value indicates whether the instance has been disposed.
         private readonly StrongBox<bool> m_lockObjAndDisposed;
 
-        // Act as the semaphore wait handle, it's lazily initialized if needed, the first WaitHandle call initialize it
+        // Act as the semaphore wait handle, it's lazily initialized if needed, the first WaitHandle call
+        // initialize it
         // and wait an release sets and resets it respectively as long as it is not null
         private volatile ManualResetEvent? m_waitHandle;
 
@@ -248,7 +254,8 @@ namespace System.Threading
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="timeout"/> is a negative
         /// number other than -1 milliseconds, which represents an infinite time-out -or- timeout is greater
         /// than <see cref="int.MaxValue"/>.</exception>
-        /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was canceled.</exception>
+        /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was
+        // canceled.</exception>
         [UnsupportedOSPlatform("browser")]
         public bool Wait(TimeSpan timeout, CancellationToken cancellationToken)
         {
@@ -288,13 +295,17 @@ namespace System.Threading
         /// using a 32-bit signed integer to measure the time interval,
         /// while observing a <see cref="CancellationToken"/>.
         /// </summary>
-        /// <param name="millisecondsTimeout">The number of milliseconds to wait, or <see cref="Timeout.Infinite"/>(-1) to
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait, or <see
+        // cref="Timeout.Infinite"/>(-1) to
         /// wait indefinitely.</param>
         /// <param name="cancellationToken">The <see cref="CancellationToken"/> to observe.</param>
-        /// <returns>true if the current thread successfully entered the <see cref="SemaphoreSlim"/>; otherwise, false.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <returns>true if the current thread successfully entered the <see cref="SemaphoreSlim"/>;
+        // otherwise, false.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.</exception>
-        /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was canceled.</exception>
+        /// <exception cref="OperationCanceledException"><paramref name="cancellationToken"/> was
+        // canceled.</exception>
         [UnsupportedOSPlatform("browser")]
         public bool Wait(int millisecondsTimeout, CancellationToken cancellationToken)
         {
@@ -340,8 +351,10 @@ namespace System.Threading
                 // to Monitor.Enter()'s spinwaiting has shown measurable perf gains in test scenarios.
                 if (m_currentCount == 0)
                 {
-                    // Monitor.Enter followed by Monitor.Wait is much more expensive than waiting on an event as it involves another
-                    // spin, contention, etc. The usual number of spin iterations that would otherwise be used here is increased to
+                    // Monitor.Enter followed by Monitor.Wait is much more expensive than waiting on an event as it
+                    // involves another
+                    // spin, contention, etc. The usual number of spin iterations that would otherwise be used here is
+                    // increased to
                     // lessen that extra expense of doing a proper wait.
                     int spinCount = SpinWait.SpinCountforSpinBeforeWait * 4;
 
@@ -486,11 +499,16 @@ namespace System.Threading
                 // ** the actual wait **
                 bool waitSuccessful = Monitor.Wait(m_lockObjAndDisposed, remainingWaitMilliseconds);
 
-                // This waiter has woken up and this needs to be reflected in the count of waiters pulsed to wake. Since we
-                // don't have thread-specific pulse state, there is not enough information to tell whether this thread woke up
-                // because it was pulsed. For instance, this thread may have timed out and may have been waiting to reacquire
-                // the lock before returning from Monitor.Wait, in which case we don't know whether this thread got pulsed. So
-                // in any woken case, decrement the count if possible. As such, timeouts could cause more waiters to wake than
+                // This waiter has woken up and this needs to be reflected in the count of waiters pulsed to wake.
+                // Since we
+                // don't have thread-specific pulse state, there is not enough information to tell whether this
+                // thread woke up
+                // because it was pulsed. For instance, this thread may have timed out and may have been waiting to
+                // reacquire
+                // the lock before returning from Monitor.Wait, in which case we don't know whether this thread got
+                // pulsed. So
+                // in any woken case, decrement the count if possible. As such, timeouts could cause more waiters to
+                // wake than
                 // necessary.
                 if (m_countOfWaitersPulsedToWake != 0)
                 {
@@ -544,7 +562,8 @@ namespace System.Threading
         /// </returns>
         /// <exception cref="ObjectDisposedException">The current instance has already been
         /// disposed.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.
         /// </exception>
         public Task<bool> WaitAsync(int millisecondsTimeout)
@@ -628,7 +647,8 @@ namespace System.Threading
         /// </returns>
         /// <exception cref="ObjectDisposedException">The current instance has already been
         /// disposed.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.
         /// </exception>
         public Task<bool> WaitAsync(int millisecondsTimeout, CancellationToken cancellationToken)
@@ -722,7 +742,8 @@ namespace System.Threading
             Debug.Assert(task is not null, "Expected non-null task");
             Debug.Assert(Monitor.IsEntered(m_lockObjAndDisposed), "Requires the lock be held");
 
-            // Is the task in the list?  To be in the list, either it's the head or it has a predecessor that's in the list.
+            // Is the task in the list?  To be in the list, either it's the head or it has a predecessor that's
+            // in the list.
             bool wasInList = m_asyncHead == task || task.Prev is not null;
 
             // Remove it from the linked list
@@ -770,8 +791,10 @@ namespace System.Threading
 
             if (cancellationToken.IsCancellationRequested)
             {
-                // If we might be running as part of a cancellation callback, force the completion to be asynchronous
-                // so as to maintain semantics similar to when no token is passed (neither Release nor Cancel would invoke
+                // If we might be running as part of a cancellation callback, force the completion to be
+                // asynchronous
+                // so as to maintain semantics similar to when no token is passed (neither Release nor Cancel would
+                // invoke
                 // continuations off of this task).
                 await Task.CompletedTask.ConfigureAwait(ConfigureAwaitOptions.ForceYielding);
             }
@@ -840,7 +863,8 @@ namespace System.Threading
 
             lock (m_lockObjAndDisposed)
             {
-                // Read the m_currentCount into a local variable to avoid unnecessary volatile accesses inside the lock.
+                // Read the m_currentCount into a local variable to avoid unnecessary volatile accesses inside the
+                // lock.
                 int currentCount = m_currentCount;
                 returnCount = currentCount;
 
@@ -853,7 +877,8 @@ namespace System.Threading
                 // Increment the count by the actual release count
                 currentCount += releaseCount;
 
-                // Signal to any synchronous waiters, taking into account how many waiters have previously been pulsed to wake
+                // Signal to any synchronous waiters, taking into account how many waiters have previously been
+                // pulsed to wake
                 // but have not yet woken
                 int waitCount = m_waitCount;
                 Debug.Assert(m_countOfWaitersPulsedToWake <= waitCount);
@@ -861,9 +886,12 @@ namespace System.Threading
                     Math.Min(currentCount, waitCount) - m_countOfWaitersPulsedToWake;
                 if (waitersToNotify > 0)
                 {
-                    // Ideally, limiting to a maximum of releaseCount would not be necessary and could be an assert instead, but
-                    // since WaitUntilCountOrTimeout() does not have enough information to tell whether a woken thread was
-                    // pulsed, it's possible for m_countOfWaitersPulsedToWake to be less than the number of threads that have
+                    // Ideally, limiting to a maximum of releaseCount would not be necessary and could be an assert
+                    // instead, but
+                    // since WaitUntilCountOrTimeout() does not have enough information to tell whether a woken thread
+                    // was
+                    // pulsed, it's possible for m_countOfWaitersPulsedToWake to be less than the number of threads that
+                    // have
                     // actually been pulsed to wake.
                     if (waitersToNotify > releaseCount)
                     {

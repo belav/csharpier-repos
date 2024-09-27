@@ -61,7 +61,8 @@ namespace System.Data.Mapping.Update.Internal
                 /// </remarks>
                 /// <param name="placeholder">Placeholder to clone</param>
                 /// <param name="key">Key to substitute</param>
-                /// <param name="placeholderKey">Key elements in the placeholder (ordinally aligned with 'key')</param>
+                /// <param name="placeholderKey">Key elements in the placeholder (ordinally aligned with
+                // 'key')</param>
                 /// <param name="mode">Mode of operation.</param>
                 /// <param name="translator">Translator context.</param>
                 /// <returns>Cloned placeholder with key values</returns>

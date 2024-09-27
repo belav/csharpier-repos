@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
     {
         #region EditAndContinueMethodDebugInformation inspection
 
-        // Helpers that allow tests in IDE layers to inspect internals of EditAndContinueMethodDebugInformation without having IVT to the compiler.
+        // Helpers that allow tests in IDE layers to inspect internals of
+        // EditAndContinueMethodDebugInformation without having IVT to the compiler.
 
         public static int GetMethodOrdinal(this EditAndContinueMethodDebugInformation debugInfo) =>
             debugInfo.MethodOrdinal;

@@ -24,20 +24,20 @@ namespace nist_dom.fundamental
     {
         public static int i = 2;
 
-        /*
-                public testResults[] RunTests()
-                {
-                    testResults[] tests = new testResults[] {core0001D(), core0002D(), core0003D(), core0004D(),
-                                                                core0005D(), core0006D(), core0007D(), core0008D(),
-                                                                core0009D(), core0010D(), core0011D(), core0012D(),
-                                                                core0013D(), core0014D(), core0015D(),
-                                                                core0019D(), core0020D(),
-                                                                core0021D(), core0022D(), core0023D(), core0024D(),
-                                                                core0025D()};
-          
-                    return tests;
-                }
-        */
+/*
+public testResults[] RunTests()
+{
+testResults[] tests = new testResults[] {core0001D(), core0002D(), core0003D(), core0004D(),
+core0005D(), core0006D(), core0007D(), core0008D(),
+core0009D(), core0010D(), core0011D(), core0012D(),
+core0013D(), core0014D(), core0015D(),
+core0019D(), core0020D(),
+core0021D(), core0022D(), core0023D(), core0024D(),
+core0025D()};
+
+return tests;
+}
+*/
 
 
         //------------------------ test case core-0001T ------------------------

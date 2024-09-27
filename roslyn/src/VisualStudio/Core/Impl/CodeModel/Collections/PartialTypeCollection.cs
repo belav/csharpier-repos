@@ -34,11 +34,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         private ImmutableArray<EnvDTE.CodeElement> GetParts()
         {
-            // Retrieving the parts is potentially very expensive because it can force multiple FileCodeModels to be instantiated.
-            // Here, we cache the result to avoid having to perform these calculations each time GetParts() is called.
-            // This *could* be an issue because it means that a PartialTypeCollection will not necessarily reflect the
-            // current state of the user's code. However, because a new PartialTypeCollection is created every time the Parts
-            // property is accessed on CodeClass, CodeStruct or CodeInterface, consumers would hit this behavior rarely.
+            // Retrieving the parts is potentially very expensive because it can force multiple FileCodeModels
+            // to be instantiated.
+            // Here, we cache the result to avoid having to perform these calculations each time GetParts() is
+            // called.
+            // This *could* be an issue because it means that a PartialTypeCollection will not necessarily
+            // reflect the
+            // current state of the user's code. However, because a new PartialTypeCollection is created every
+            // time the Parts
+            // property is accessed on CodeClass, CodeStruct or CodeInterface, consumers would hit this behavior
+            // rarely.
             if (_parts == null)
             {
                 var partsBuilder = ArrayBuilder<EnvDTE.CodeElement>.GetInstance();

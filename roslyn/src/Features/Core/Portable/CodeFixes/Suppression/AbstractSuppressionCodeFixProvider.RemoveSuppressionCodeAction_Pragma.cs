@@ -37,7 +37,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 )
                 {
                     // We need to normalize the leading trivia on start token to account for
-                    // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
+                    // the trailing trivia on its previous token (and similarly normalize trailing trivia for end
+                    // token).
                     PragmaHelpers.NormalizeTriviaOnTokens(
                         fixer,
                         ref document,
@@ -119,8 +120,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         )
                     )
                     {
-                        // Verify if there is no other trivia before the start token would again cause this diagnostic to be suppressed.
-                        // If invalidated, then we just toggle existing pragma enable and disable directives before and start of the line.
+                        // Verify if there is no other trivia before the start token would again cause this diagnostic to be
+                        // suppressed.
+                        // If invalidated, then we just toggle existing pragma enable and disable directives before and
+                        // start of the line.
                         // If not, then we just remove the existing pragma trivia surrounding the line.
                         toggle = await IsDiagnosticSuppressedBeforeLeadingPragmaAsync(
                                 indexOfLeadingPragmaDisableToRemove,
@@ -238,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                         {
                             if (hasMultipleIds)
                             {
-                                // Handle only simple cases where we have a single pragma directive with single ID matching ours in the trivia.
+                                // Handle only simple cases where we have a single pragma directive with single ID matching ours in
+                                // the trivia.
                                 return false;
                             }
 

@@ -2385,7 +2385,8 @@ namespace System.Globalization.Tests
         public void TestCasing()
         {
             // This test verifies that the casing table in the invariant globalization mode.
-            // The casing table is what we generate from the Unicode data files, and implemented in the CharUnicodeInfo.cs file.
+            // The casing table is what we generate from the Unicode data files, and implemented in the
+            // CharUnicodeInfo.cs file.
 
             TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
 
@@ -2414,7 +2415,8 @@ namespace System.Globalization.Tests
                     );
                 }
 
-                // String comparisons has been done using ToUpper method, it is possible the lowercased character can be mapped to a different character when it is upper cased.
+                // String comparisons has been done using ToUpper method, it is possible the lowercased character
+                // can be mapped to a different character when it is upper cased.
                 if (ch != lower && textInfo.ToUpper(lower) == ch)
                 {
                     string lowerString = lower.ToString();

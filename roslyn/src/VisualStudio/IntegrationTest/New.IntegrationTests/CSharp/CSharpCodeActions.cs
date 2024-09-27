@@ -133,7 +133,8 @@ class Program
                 HangMitigatingCancellationToken
             );
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
                 var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
@@ -152,7 +153,8 @@ class Program
                 );
             }
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
                 var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
@@ -303,11 +305,13 @@ class C
                 HangMitigatingCancellationToken
             );
 
-            /*
-             * The first portion of this test adds a .editorconfig file to configure the analyzer behavior, and verifies
-             * that diagnostics appear automatically in response to the newly-created file. A fix all operation is
-             * applied, and the result is verified against the expected outcome for the .editorconfig style.
-             */
+/*
+* The first portion of this test adds a .editorconfig file to configure the analyzer behavior, and
+verifies
+* that diagnostics appear automatically in response to the newly-created file. A fix all operation
+is
+* applied, and the result is verified against the expected outcome for the .editorconfig style.
+*/
 
             MarkupTestFile.GetSpans(markup, out _, out var _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
@@ -361,12 +365,14 @@ csharp_style_expression_bodied_properties = true:warning
                 await TestServices.Editor.GetTextAsync(HangMitigatingCancellationToken)
             );
 
-            /*
-             * The second portion of this test modifier the existing .editorconfig file to configure the analyzer to the
-             * opposite style of the initial configuration, and verifies that diagnostics update automatically in
-             * response to the changes. A fix all operation is applied, and the result is verified against the expected
-             * outcome for the modified .editorconfig style.
-             */
+/*
+* The second portion of this test modifier the existing .editorconfig file to configure the analyzer
+to the
+* opposite style of the initial configuration, and verifies that diagnostics update automatically in
+* response to the changes. A fix all operation is applied, and the result is verified against the
+expected
+* outcome for the modified .editorconfig style.
+*/
 
             await TestServices.SolutionExplorer.SetFileContentsAsync(
                 ProjectName,
@@ -525,8 +531,10 @@ class D
             );
 
             // Verify that a Fix All in Document in the generated file still does nothing.
-            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
-            // The current behavior is observable; any change to this behavior should be part of an intentional design
+            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the
+            // design.
+            // The current behavior is observable; any change to this behavior should be part of an intentional
+            // design
             // change.
             await TestServices.Editor.MoveCaretAsync(
                 generatedSourcePosition,
@@ -614,9 +622,12 @@ class D
                 HangMitigatingCancellationToken
             );
 
-            // Verify that applying a Fix All operation does not change generated file, but does change other files.
-            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the design.
-            // The current behavior is observable; any change to this behavior should be part of an intentional design
+            // Verify that applying a Fix All operation does not change generated file, but does change other
+            // files.
+            // ⚠ This is a statement of the current behavior, and not a claim regarding correctness of the
+            // design.
+            // The current behavior is observable; any change to this behavior should be part of an intentional
+            // design
             // change.
             MarkupTestFile.GetPosition(markup, out var expectedText, out int _);
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
@@ -707,7 +718,8 @@ public class P2 { }",
                 HangMitigatingCancellationToken
             );
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
                 var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
@@ -1058,7 +1070,8 @@ class C
             // Apply configuration severity fix to change CS0168 to be an error.
             await SetUpEditorAsync(markup, HangMitigatingCancellationToken);
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using (
                 var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
@@ -1976,7 +1989,8 @@ public class Program
                 HangMitigatingCancellationToken
             );
 
-            // Suspend file change notification during code action application, since spurious file change notifications
+            // Suspend file change notification during code action application, since spurious file change
+            // notifications
             // can cause silent failure to apply the code action if they occur within this block.
             await using var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
                 HangMitigatingCancellationToken

@@ -378,7 +378,8 @@ namespace System.Net.Sockets.Tests
             SocketServer server = null;
             int port = 0;
 
-            // PortBlocker creates a temporary socket of the opposite AddressFamily in the background, so parallel tests won't attempt
+            // PortBlocker creates a temporary socket of the opposite AddressFamily in the background, so
+            // parallel tests won't attempt
             // to create their listener sockets on the same port.
             // This should prevent 'server' from accepting DualMode connections of unrelated tests.
             using PortBlocker blocker = new PortBlocker(() =>
@@ -1328,7 +1329,8 @@ namespace System.Net.Sockets.Tests
         [Fact] // Base case
         public async Task Socket_ReceiveFromV4IPEndPointFromV4Client_Throws()
         {
-            // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use InterNetworkV6 instead."
+            // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use
+            // InterNetworkV6 instead."
             using Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp);
             socket.DualMode = false;
 
@@ -1384,7 +1386,8 @@ namespace System.Net.Sockets.Tests
 
         [Fact]
         // Binds to a specific port on 'connectTo' which on Unix may already be in use
-        // Also expected behavior is different on OSX and Linux (ArgumentException instead of SocketException)
+        // Also expected behavior is different on OSX and Linux (ArgumentException instead of
+        // SocketException)
         [PlatformSpecific(TestPlatforms.Windows)]
         public Task ReceiveFromV4BoundToSpecificV6_NotReceived() =>
             ReceiveFrom_Failure_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
@@ -1532,7 +1535,8 @@ namespace System.Net.Sockets.Tests
         }
 
         [Fact] // Base case
-        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use InterNetworkV6 instead."
+        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use
+        // InterNetworkV6 instead."
         public void Socket_ReceiveMessageFromV4IPEndPointFromV4Client_Throws()
         {
             using (Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp))
@@ -1817,9 +1821,12 @@ namespace System.Net.Sockets.Tests
                         // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.receivemessagefrom
                         // "...the returned IPPacketInformation object will only be valid for packets which arrive at the
                         // local computer after the socket option has been set. If a socket is sent packets between when
-                        // it is bound to a local endpoint (explicitly by the Bind method or implicitly by one of the Connect,
-                        // ConnectAsync, SendTo, or SendToAsync methods) and its first call to the ReceiveMessageFrom method,
-                        // calls to ReceiveMessageFrom method will return invalid IPPacketInformation objects for these packets."
+                        // it is bound to a local endpoint (explicitly by the Bind method or implicitly by one of the
+                        // Connect,
+                        // ConnectAsync, SendTo, or SendToAsync methods) and its first call to the ReceiveMessageFrom
+                        // method,
+                        // calls to ReceiveMessageFrom method will return invalid IPPacketInformation objects for these
+                        // packets."
                         received = serverSocket.ReceiveMessageFrom(
                             new byte[1],
                             0,
@@ -1832,7 +1839,8 @@ namespace System.Net.Sockets.Tests
                 }
                 else
                 {
-                    // *nix may throw either a SocketException or ArgumentException in this case, depending on how the IP stack
+                    // *nix may throw either a SocketException or ArgumentException in this case, depending on how the
+                    // IP stack
                     // behaves w.r.t. dual-mode sockets bound to IPv6-specific addresses.
                     Assert.ThrowsAny<Exception>(() =>
                     {
@@ -1878,7 +1886,8 @@ namespace System.Net.Sockets.Tests
         }
 
         [Fact]
-        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use InterNetworkV6 instead."
+        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use
+        // InterNetworkV6 instead."
         public void Socket_BeginReceiveMessageFromV4IPEndPointFromV4Client_Throws()
         {
             using (Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp))
@@ -2144,7 +2153,8 @@ namespace System.Net.Sockets.Tests
         }
 
         [Fact]
-        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use InterNetworkV6 instead."
+        // "The supplied EndPoint of AddressFamily InterNetwork is not valid for this Socket, use
+        // InterNetworkV6 instead."
         public void Socket_ReceiveMessageFromAsyncV4IPEndPointFromV4Client_Throws()
         {
             using (Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp))
@@ -2406,7 +2416,8 @@ namespace System.Net.Sockets.Tests
 
     public class DualModeBase
     {
-        // Ports 8 and 8887 are unassigned as per https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
+        // Ports 8 and 8887 are unassigned as per
+        // https://www.iana.org/assignments/service-names-port-numbers/service-names-port-numbers.txt
         internal const int UnusedPort = 8;
         protected const int UnusedBindablePort = 8887;
 

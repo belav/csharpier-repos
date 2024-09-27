@@ -84,7 +84,7 @@ namespace System.Windows.Forms
             internal GdkColorStruct black;
             internal GdkColorStruct white;
 
-            /* TODO: There is more stuff that we will add when we need it*/
+/* TODO: There is more stuff that we will add when we need it*/
         }
 
         private enum Desktop

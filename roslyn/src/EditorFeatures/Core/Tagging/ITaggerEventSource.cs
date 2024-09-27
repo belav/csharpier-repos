@@ -9,9 +9,11 @@ using System;
 namespace Microsoft.CodeAnalysis.Editor.Tagging
 {
     /// <summary>
-    /// The events that the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> listens to, to know when
+    /// The events that the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> listens to, to know
+    // when
     /// to request more tags.  For example, an <see cref="ITaggerEventSource"/> may listen to text
-    /// buffer changes, and can tell the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> that it needs
+    /// buffer changes, and can tell the <see cref="AbstractAsynchronousTaggerProvider{TTag}"/> that it
+    // needs
     /// to recompute tags.
     /// </summary>
     internal interface ITaggerEventSource
@@ -30,13 +32,16 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         void Disconnect();
 
         /// <summary>
-        /// Pauses this event source and prevents it from firing the <see cref="Changed"/> event. Can be called many
-        /// times (but subsequence calls have no impact if already paused).  Must be called on the UI thread.
+        /// Pauses this event source and prevents it from firing the <see cref="Changed"/> event. Can be
+        // called many
+        /// times (but subsequence calls have no impact if already paused).  Must be called on the UI
+        // thread.
         /// </summary>
         void Pause();
 
         /// <summary>
-        /// Resumes this event source and allows firing the <see cref="Changed"/> event. Can be called many times (but
+        /// Resumes this event source and allows firing the <see cref="Changed"/> event. Can be called many
+        // times (but
         /// subsequence calls have no impact if already resumed).  Must be called on the UI thread.
         /// </summary>
         void Resume();

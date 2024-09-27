@@ -207,13 +207,17 @@ namespace System.Data.EntityModel.Emitters
                 if (referenceProperty)
                 {
                     // get
-                    //     return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName");
+                    //     return
+                    // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName",
+                    // "TargetRoleName");
                     getReturnExpression = getMethod;
 
                     // set
                     // if (value != null)
                     // {
-                    //    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TTargetEntity>"CSpaceQualifiedRelationshipName", "TargetRoleName", value);
+                    //
+                    // ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TTargetEntity>"CSpaceQualifiedRelationshipName",
+                    // "TargetRoleName", value);
                     // }
 
                     CodeMethodReferenceExpression initReferenceMethod =
@@ -262,24 +266,32 @@ namespace System.Data.EntityModel.Emitters
                         new CodePropertyReferenceExpression(getMethod, ValuePropertyName);
 
                     // get
-                    //     return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName").Value;
+                    //     return
+                    // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName",
+                    // "TargetRoleName").Value;
                     getReturnExpression = valueProperty;
 
                     // set
-                    //     ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName").Value = value;
+                    //
+                    // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TTargetEntity>("CSpaceQualifiedRelationshipName",
+                    // "TargetRoleName").Value = value;
                     property.SetStatements.Add(new CodeAssignStatement(valueProperty, valueRef));
                 }
             }
             else
             {
                 // get
-                //     return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TTargetEntity>("CSpaceQualifiedRelationshipName", "TargetRoleName");
+                //     return
+                // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TTargetEntity>("CSpaceQualifiedRelationshipName",
+                // "TargetRoleName");
                 getReturnExpression = getMethod;
 
                 // set
                 // if (value != null)
                 // {
-                //    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TTargetEntity>"CSpaceQualifiedRelationshipName", "TargetRoleName", value);
+                //
+                // ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TTargetEntity>"CSpaceQualifiedRelationshipName",
+                // "TargetRoleName", value);
                 // }
                 CodeExpression valueRef = new CodePropertySetValueReferenceExpression();
 
@@ -427,9 +439,13 @@ namespace System.Data.EntityModel.Emitters
         /// <returns>Expression to invoke the appropriate method</returns>
         private CodeMethodInvokeExpression EmitGetMethod(RelationshipEndMember target)
         {
-            // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TargetType>("CSpaceQualifiedRelationshipName", "TargetRoleName");
+            //
+            // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TargetType>("CSpaceQualifiedRelationshipName",
+            // "TargetRoleName");
             // or
-            // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TargetType>("CSpaceQualifiedRelationshipName", "TargetRoleName");
+            //
+            // ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TargetType>("CSpaceQualifiedRelationshipName",
+            // "TargetRoleName");
 
             CodeMethodReferenceExpression getMethod = new CodeMethodReferenceExpression();
             if (target.RelationshipMultiplicity != RelationshipMultiplicity.Many)

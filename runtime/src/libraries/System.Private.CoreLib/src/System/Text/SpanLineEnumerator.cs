@@ -7,7 +7,8 @@ namespace System.Text
     /// Enumerates the lines of a <see cref="ReadOnlySpan{Char}"/>.
     /// </summary>
     /// <remarks>
-    /// To get an instance of this type, use <see cref="MemoryExtensions.EnumerateLines(ReadOnlySpan{char})"/>.
+    /// To get an instance of this type, use <see
+    // cref="MemoryExtensions.EnumerateLines(ReadOnlySpan{char})"/>.
     /// </remarks>
     public ref struct SpanLineEnumerator
     {

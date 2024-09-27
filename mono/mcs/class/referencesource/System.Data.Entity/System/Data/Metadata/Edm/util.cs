@@ -22,7 +22,8 @@ namespace System.Data.Metadata.Edm
     {
         #region Methods
         /// <summary>
-        /// Throws an appropriate exception if the given item is a readonly, used when an attempt is made to change
+        /// Throws an appropriate exception if the given item is a readonly, used when an attempt is made to
+        // change
         /// a property
         /// </summary>
         /// <param name="item">The item whose readonly is being tested</param>

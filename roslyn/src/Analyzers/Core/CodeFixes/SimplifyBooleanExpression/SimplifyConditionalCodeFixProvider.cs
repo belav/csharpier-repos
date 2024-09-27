@@ -63,8 +63,10 @@ namespace Microsoft.CodeAnalysis.SimplifyBooleanExpression
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            // Walk the diagnostics in descending position order so that we process innermost conditionals before
-            // outermost ones. Also, use ApplyExpressionLevelSemanticEditsAsync so that we can appropriately understand
+            // Walk the diagnostics in descending position order so that we process innermost conditionals
+            // before
+            // outermost ones. Also, use ApplyExpressionLevelSemanticEditsAsync so that we can appropriately
+            // understand
             // the semantics of conditional nodes if we changed what was inside of them.
 
             await editor

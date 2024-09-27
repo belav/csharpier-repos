@@ -42,7 +42,8 @@ namespace Roslyn.Test.Utilities.TestGenerators
     }
 
     /// <summary>
-    /// A generator that produces diagnostics against existng source trees, rather than generating new content.
+    /// A generator that produces diagnostics against existng source trees, rather than generating new
+    // content.
     /// </summary>
     internal class DiagnosticProducingGenerator : ISourceGenerator
     {

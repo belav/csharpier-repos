@@ -4,7 +4,8 @@
 namespace Internal.TypeSystem
 {
     /// <summary>
-    /// Type with metadata available that is equivalent to a TypeDef record in an ECMA 335 metadata stream.
+    /// Type with metadata available that is equivalent to a TypeDef record in an ECMA 335 metadata
+    // stream.
     /// A class, an interface, or a value type.
     /// </summary>
     public abstract partial class DefType

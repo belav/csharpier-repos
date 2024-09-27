@@ -1836,7 +1836,8 @@ using System.Windows.Markup;
 )]
 
 // System.WorkflowServices.dll is an APTCA, Level1 assembly.
-// The following FxCop security violations are suppressed in order to reduce risk, and to maintain the same exact security characteristics of the same assembly shipped in Dev10.
+// The following FxCop security violations are suppressed in order to reduce risk, and to maintain
+// the same exact security characteristics of the same assembly shipped in Dev10.
 [module: SuppressMessage(
     "Microsoft.Security",
     "CA2140:TransparentMethodsMustNotReferenceCriticalCodeFxCopRule",

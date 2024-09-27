@@ -9,17 +9,21 @@ using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
 {
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////
     //
     //                                    **** WARNING ****
     //
-    // A large portion of the logic present in this file is duplicated in ndp\rh\src\rtm\system\runtime\typecast.cs
+    // A large portion of the logic present in this file is duplicated in
+    // ndp\rh\src\rtm\system\runtime\typecast.cs
     //
     //                                    **** WARNING ****
     //
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    // /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // This is not a general purpose type comparison facility. It is limited to what constraint validation needs.
+    // This is not a general purpose type comparison facility. It is limited to what constraint
+    // validation needs.
     internal static partial class ConstraintValidator
     {
         [UnconditionalSuppressMessage(
@@ -116,7 +120,8 @@ namespace Internal.Reflection.Execution
                             )
                         )
                         {
-                            // We have checked that the interface type definition matches above. The checks are ordered differently
+                            // We have checked that the interface type definition matches above. The checks are ordered
+                            // differently
                             // here compared with rtm\system\runtime\typecast.cs version because of TypeInfo does not let us do
                             // the HasGenericVariance optimization.
                             return true;
@@ -154,10 +159,12 @@ namespace Internal.Reflection.Execution
             return false;
         }
 
-        // Compare two sets of generic type parameters to see if they're assignment compatible taking generic
+        // Compare two sets of generic type parameters to see if they're assignment compatible taking
+        // generic
         // variance into account. It's assumed they've already had their type definition matched (which
         // implies their arities are the same as well). The fForceCovariance argument tells the method to
-        // override the defined variance of each parameter and instead assume it is covariant. This is used to
+        // override the defined variance of each parameter and instead assume it is covariant. This is used
+        // to
         // implement covariant array interfaces.
         private static bool TypeParametersAreCompatible(
             Type[] pSourceInstantiation,
@@ -258,7 +265,8 @@ namespace Internal.Reflection.Execution
 
         //
         // Determines if a value of the source type can be assigned to a location of the target type.
-        // It does not handle IDynamicInterfaceCastable, and cannot since we do not have an actual object instance here.
+        // It does not handle IDynamicInterfaceCastable, and cannot since we do not have an actual object
+        // instance here.
         // This routine assumes that the source type is boxed, i.e. a value type source is presumed to be
         // compatible with Object and ValueType and an enum source is additionally compatible with Enum.
         //

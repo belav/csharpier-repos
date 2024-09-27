@@ -326,7 +326,8 @@ namespace System.Security.Cryptography.Csp.Tests
         {
             using (var rsa = new RSACryptoServiceProvider())
             {
-                // Verify that Unix shims and Windows Csp both throws the same exception when large Exponent imported
+                // Verify that Unix shims and Windows Csp both throws the same exception when large Exponent
+                // imported
                 Assert.ThrowsAny<CryptographicException>(
                     () => rsa.ImportParameters(TestData.RsaBigExponentParams)
                 );

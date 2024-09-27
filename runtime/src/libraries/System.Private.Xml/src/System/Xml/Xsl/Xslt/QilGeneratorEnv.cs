@@ -37,7 +37,8 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // -------------------------------- IXPathEnvironment --------------------------------
-        // IXPathEnvironment represents static context (namespaces, focus) and most naturaly implemented by QilGenerator itself
+        // IXPathEnvironment represents static context (namespaces, focus) and most naturaly implemented by
+        // QilGenerator itself
         //                        $var current() key()
         // */@select or */@test     +     +       +
         // template/@match          -     -       +
@@ -221,10 +222,10 @@ namespace System.Xml.Xsl.Xslt
                             args.Count
                         );
                         return _f.InvokeMsStringCompare(
-                            /*x:      */_f.ConvertToString(args[0]),
-                            /*y:      */_f.ConvertToString(args[1]),
-                            /*lang:   */2 < args.Count ? _f.ConvertToString(args[2]) : _f.String(string.Empty),
-                            /*options:*/3 < args.Count ? _f.ConvertToString(args[3]) : _f.String(string.Empty)
+/*x:      */_f.ConvertToString(args[0]),
+/*y:      */_f.ConvertToString(args[1]),
+/*lang:   */2 < args.Count ? _f.ConvertToString(args[2]) : _f.String(string.Empty),
+/*options:*/3 < args.Count ? _f.ConvertToString(args[3]) : _f.String(string.Empty)
                         );
                     }
                     else if (name == "utc")
@@ -248,10 +249,10 @@ namespace System.Xml.Xsl.Xslt
                             args.Count
                         );
                         return _f.InvokeMsFormatDateTime(
-                            /*datetime:*/_f.ConvertToString(args[0]),
-                            /*format:  */1 < args.Count ? _f.ConvertToString(args[1]) : _f.String(string.Empty),
-                            /*lang:    */2 < args.Count ? _f.ConvertToString(args[2]) : _f.String(string.Empty),
-                            /*isDate:  */_f.Boolean(name == "format-date")
+/*datetime:*/_f.ConvertToString(args[0]),
+/*format:  */1 < args.Count ? _f.ConvertToString(args[1]) : _f.String(string.Empty),
+/*lang:    */2 < args.Count ? _f.ConvertToString(args[2]) : _f.String(string.Empty),
+/*isDate:  */_f.Boolean(name == "format-date")
                         );
                     }
                     else if (name == "local-name")

@@ -320,7 +320,8 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
         );
 
     /// <summary>
-    ///     Given a syntax node, pattern matches some known types and returns a narrowed-down node for the type syntax which
+    ///     Given a syntax node, pattern matches some known types and returns a narrowed-down node for
+    // the type syntax which
     ///     should be reported in diagnostics.
     /// </summary>
     private static SyntaxNode NarrowDownSyntax(SyntaxNode syntax) =>

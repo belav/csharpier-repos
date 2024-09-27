@@ -47,17 +47,20 @@ namespace Microsoft.CodeAnalysis.Completion
             );
 
         /// <summary>
-        /// Rules that modify the set of characters that can be typed to filter the list of completion items.
+        /// Rules that modify the set of characters that can be typed to filter the list of completion
+        // items.
         /// </summary>
         public ImmutableArray<CharacterSetModificationRule> FilterCharacterRules { get; }
 
         /// <summary>
-        /// Rules that modify the set of characters that can be typed to cause the selected item to be committed.
+        /// Rules that modify the set of characters that can be typed to cause the selected item to be
+        // committed.
         /// </summary>
         public ImmutableArray<CharacterSetModificationRule> CommitCharacterRules { get; }
 
         /// <summary>
-        /// A rule about whether the enter key is passed through to the editor after the selected item has been committed.
+        /// A rule about whether the enter key is passed through to the editor after the selected item has
+        // been committed.
         /// </summary>
         public EnterKeyRule EnterKeyRule { get; }
 
@@ -97,11 +100,16 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Creates a new <see cref="CompletionItemRules"/> instance.
         /// </summary>
-        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of completion items.</param>
-        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be committed.</param>
-        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor after the selected item has been committed.</param>
-        /// <param name="formatOnCommit">True if the modified text should be formatted automatically.</param>
-        /// <param name="matchPriority">True if the related completion item should be initially selected.</param>
+        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of
+        // completion items.</param>
+        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be
+        // committed.</param>
+        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor
+        // after the selected item has been committed.</param>
+        /// <param name="formatOnCommit">True if the modified text should be formatted
+        // automatically.</param>
+        /// <param name="matchPriority">True if the related completion item should be initially
+        // selected.</param>
         /// <returns></returns>
         public static CompletionItemRules Create(
             ImmutableArray<CharacterSetModificationRule> filterCharacterRules,
@@ -124,12 +132,18 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Creates a new <see cref="CompletionItemRules"/> instance.
         /// </summary>
-        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of completion items.</param>
-        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be committed.</param>
-        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor after the selected item has been committed.</param>
-        /// <param name="formatOnCommit">True if the modified text should be formatted automatically.</param>
-        /// <param name="matchPriority">True if the related completion item should be initially selected.</param>
-        /// <param name="selectionBehavior">How this item should be selected if no text has been typed after the completion list is brought up.</param>
+        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of
+        // completion items.</param>
+        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be
+        // committed.</param>
+        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor
+        // after the selected item has been committed.</param>
+        /// <param name="formatOnCommit">True if the modified text should be formatted
+        // automatically.</param>
+        /// <param name="matchPriority">True if the related completion item should be initially
+        // selected.</param>
+        /// <param name="selectionBehavior">How this item should be selected if no text has been typed after
+        // the completion list is brought up.</param>
         /// <returns></returns>
         public static CompletionItemRules Create(
             ImmutableArray<CharacterSetModificationRule> filterCharacterRules = default,
@@ -168,11 +182,16 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Creates a new <see cref="CompletionItemRules"/> instance--internal for TypeScript.
         /// </summary>
-        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of completion items.</param>
-        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be committed.</param>
-        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor after the selected item has been committed.</param>
-        /// <param name="formatOnCommit">True if the modified text should be formatted automatically.</param>
-        /// <param name="preselect">True if the related completion item should be initially selected.</param>
+        /// <param name="filterCharacterRules">Rules about which keys typed are used to filter the list of
+        // completion items.</param>
+        /// <param name="commitCharacterRules">Rules about which keys typed caused the completion item to be
+        // committed.</param>
+        /// <param name="enterKeyRule">Rule about whether the enter key is passed through to the editor
+        // after the selected item has been committed.</param>
+        /// <param name="formatOnCommit">True if the modified text should be formatted
+        // automatically.</param>
+        /// <param name="preselect">True if the related completion item should be initially
+        // selected.</param>
         /// <returns></returns>
         internal static CompletionItemRules Create(
             ImmutableArray<CharacterSetModificationRule> filterCharacterRules,
@@ -237,7 +256,8 @@ namespace Microsoft.CodeAnalysis.Completion
         }
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="FilterCharacterRules"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see
+        // cref="FilterCharacterRules"/> property changed.
         /// </summary>
         public CompletionItemRules WithFilterCharacterRules(
             ImmutableArray<CharacterSetModificationRule> filterCharacterRules
@@ -250,32 +270,37 @@ namespace Microsoft.CodeAnalysis.Completion
             With(commitRules: ImmutableArray.Create(rule));
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="CommitCharacterRules"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see
+        // cref="CommitCharacterRules"/> property changed.
         /// </summary>
         public CompletionItemRules WithCommitCharacterRules(
             ImmutableArray<CharacterSetModificationRule> commitCharacterRules
         ) => With(commitRules: commitCharacterRules);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="EnterKeyRule"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="EnterKeyRule"/>
+        // property changed.
         /// </summary>
         public CompletionItemRules WithEnterKeyRule(EnterKeyRule enterKeyRule) =>
             With(enterKeyRule: enterKeyRule);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="FormatOnCommit"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="FormatOnCommit"/>
+        // property changed.
         /// </summary>
         public CompletionItemRules WithFormatOnCommit(bool formatOnCommit) =>
             With(formatOnCommit: formatOnCommit);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="MatchPriority"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="MatchPriority"/>
+        // property changed.
         /// </summary>
         public CompletionItemRules WithMatchPriority(int matchPriority) =>
             With(matchPriority: matchPriority);
 
         /// <summary>
-        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see cref="SelectionBehavior"/> property changed.
+        /// Creates a copy of this <see cref="CompletionItemRules"/> with the <see
+        // cref="SelectionBehavior"/> property changed.
         /// </summary>
         public CompletionItemRules WithSelectionBehavior(
             CompletionItemSelectionBehavior selectionBehavior

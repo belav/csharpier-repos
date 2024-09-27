@@ -9,7 +9,8 @@
 //
 // <OWNER>Microsoft</OWNER>
 //
-// A lightweight semahore class that contains the basic semaphore functions plus some useful functions like interrupt
+// A lightweight semahore class that contains the basic semaphore functions plus some useful
+// functions like interrupt
 // and wait handle exposing to allow waiting on multiple semaphores.
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
@@ -49,24 +50,30 @@ namespace System.Threading
     {
         #region Private Fields
 
-        // The semaphore count, initialized in the constructor to the initial value, every release call incremetns it
+        // The semaphore count, initialized in the constructor to the initial value, every release call
+        // incremetns it
         // and every wait call decrements it as long as its value is positive otherwise the wait will block.
         // Its value must be between the maximum semaphore value and zero
         private volatile int m_currentCount;
 
-        // The maximum semaphore value, it is initialized to Int.MaxValue if the client didn't specify it. it is used
+        // The maximum semaphore value, it is initialized to Int.MaxValue if the client didn't specify it.
+        // it is used
         // to check if the count excceeded the maxi value or not.
         private readonly int m_maxCount;
 
-        // The number of synchronously waiting threads, it is set to zero in the constructor and increments before blocking the
-        // threading and decrements it back after that. It is used as flag for the release call to know if there are
+        // The number of synchronously waiting threads, it is set to zero in the constructor and increments
+        // before blocking the
+        // threading and decrements it back after that. It is used as flag for the release call to know if
+        // there are
         // waiting threads in the monitor or not.
         private volatile int m_waitCount;
 
-        // Dummy object used to in lock statements to protect the semaphore count, wait handle and cancelation
+        // Dummy object used to in lock statements to protect the semaphore count, wait handle and
+        // cancelation
         private object m_lockObj;
 
-        // Act as the semaphore wait handle, it's lazily initialized if needed, the first WaitHandle call initialize it
+        // Act as the semaphore wait handle, it's lazily initialized if needed, the first WaitHandle call
+        // initialize it
         // and wait an release sets and resets it respectively as long as it is not null
         private volatile ManualResetEvent m_waitHandle;
 
@@ -254,7 +261,8 @@ namespace System.Threading
         /// cref="T:System.TimeSpan"/> to measure the time interval.
         /// </summary>
         /// <param name="timeout">A <see cref="System.TimeSpan"/> that represents the number of milliseconds
-        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait indefinitely.
+        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait
+        // indefinitely.
         /// </param>
         /// <returns>true if the current thread successfully entered the <see cref="SemaphoreSlim"/>;
         /// otherwise, false.</returns>
@@ -284,7 +292,8 @@ namespace System.Threading
         /// cref="T:System.Threading.CancellationToken"/>.
         /// </summary>
         /// <param name="timeout">A <see cref="System.TimeSpan"/> that represents the number of milliseconds
-        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait indefinitely.
+        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait
+        // indefinitely.
         /// </param>
         /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to
         /// observe.</param>
@@ -293,7 +302,8 @@ namespace System.Threading
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="timeout"/> is a negative
         /// number other than -1 milliseconds, which represents an infinite time-out -or- timeout is greater
         /// than <see cref="System.Int32.MaxValue"/>.</exception>
-        /// <exception cref="System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled.</exception>
+        /// <exception cref="System.OperationCanceledException"><paramref name="cancellationToken"/> was
+        // canceled.</exception>
         public bool Wait(TimeSpan timeout, CancellationToken cancellationToken)
         {
             // Validate the timeout
@@ -331,13 +341,18 @@ namespace System.Threading
         /// using a 32-bit signed integer to measure the time interval,
         /// while observing a <see cref="T:System.Threading.CancellationToken"/>.
         /// </summary>
-        /// <param name="millisecondsTimeout">The number of milliseconds to wait, or <see cref="Timeout.Infinite"/>(-1) to
+        /// <param name="millisecondsTimeout">The number of milliseconds to wait, or <see
+        // cref="Timeout.Infinite"/>(-1) to
         /// wait indefinitely.</param>
-        /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe.</param>
-        /// <returns>true if the current thread successfully entered the <see cref="SemaphoreSlim"/>; otherwise, false.</returns>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to
+        // observe.</param>
+        /// <returns>true if the current thread successfully entered the <see cref="SemaphoreSlim"/>;
+        // otherwise, false.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.</exception>
-        /// <exception cref="System.OperationCanceledException"><paramref name="cancellationToken"/> was canceled.</exception>
+        /// <exception cref="System.OperationCanceledException"><paramref name="cancellationToken"/> was
+        // canceled.</exception>
         public bool Wait(int millisecondsTimeout, CancellationToken cancellationToken)
         {
             CheckDispose();
@@ -573,7 +588,8 @@ namespace System.Threading
         /// </returns>
         /// <exception cref="T:System.ObjectDisposedException">The current instance has already been
         /// disposed.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.
         /// </exception>
         public Task<bool> WaitAsync(int millisecondsTimeout)
@@ -588,7 +604,8 @@ namespace System.Threading
         /// </summary>
         /// <param name="timeout">
         /// A <see cref="System.TimeSpan"/> that represents the number of milliseconds
-        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait indefinitely.
+        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait
+        // indefinitely.
         /// </param>
         /// <param name="cancellationToken">
         /// The <see cref="T:System.Threading.CancellationToken"/> token to observe.
@@ -615,7 +632,8 @@ namespace System.Threading
         /// </summary>
         /// <param name="timeout">
         /// A <see cref="System.TimeSpan"/> that represents the number of milliseconds
-        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait indefinitely.
+        /// to wait, or a <see cref="System.TimeSpan"/> that represents -1 milliseconds to wait
+        // indefinitely.
         /// </param>
         /// <returns>
         /// A task that will complete with a result of true if the current thread successfully entered
@@ -650,14 +668,16 @@ namespace System.Threading
         /// <param name="millisecondsTimeout">
         /// The number of milliseconds to wait, or <see cref="Timeout.Infinite"/>(-1) to wait indefinitely.
         /// </param>
-        /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to observe.</param>
+        /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to
+        // observe.</param>
         /// <returns>
         /// A task that will complete with a result of true if the current thread successfully entered
         /// the <see cref="SemaphoreSlim"/>, otherwise with a result of false.
         /// </returns>
         /// <exception cref="T:System.ObjectDisposedException">The current instance has already been
         /// disposed.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a negative number other than -1,
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="millisecondsTimeout"/> is a
+        // negative number other than -1,
         /// which represents an infinite time-out.
         /// </exception>
         public Task<bool> WaitAsync(int millisecondsTimeout, CancellationToken cancellationToken)
@@ -749,7 +769,8 @@ namespace System.Threading
             Contract.Requires(task != null, "Expected non-null task");
             Contract.Assert(Monitor.IsEntered(m_lockObj), "Requires the lock be held");
 
-            // Is the task in the list?  To be in the list, either it's the head or it has a predecessor that's in the list.
+            // Is the task in the list?  To be in the list, either it's the head or it has a predecessor that's
+            // in the list.
             bool wasInList = m_asyncHead == task || task.Prev != null;
 
             // Remove it from the linked list
@@ -870,7 +891,8 @@ namespace System.Threading
 
             lock (m_lockObj)
             {
-                // Read the m_currentCount into a local variable to avoid unnecessary volatile accesses inside the lock.
+                // Read the m_currentCount into a local variable to avoid unnecessary volatile accesses inside the
+                // lock.
                 int currentCount = m_currentCount;
                 returnCount = currentCount;
 
@@ -957,7 +979,8 @@ namespace System.Threading
 
         /// <summary>
         /// When overridden in a derived class, releases the unmanaged resources used by the
-        /// <see cref="T:System.Threading.ManualResetEventSlim"/>, and optionally releases the managed resources.
+        /// <see cref="T:System.Threading.ManualResetEventSlim"/>, and optionally releases the managed
+        // resources.
         /// </summary>
         /// <param name="disposing">true to release both managed and unmanaged resources;
         /// false to release only unmanaged resources.</param>

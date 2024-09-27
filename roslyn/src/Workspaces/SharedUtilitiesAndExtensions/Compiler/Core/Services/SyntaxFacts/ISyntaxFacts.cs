@@ -16,34 +16,50 @@ using Microsoft.CodeAnalysis.Editing;
 namespace Microsoft.CodeAnalysis.LanguageService
 {
     /// <summary>
-    /// Contains helpers to allow features and other algorithms to run over C# and Visual Basic code in a uniform fashion.
-    /// It should be thought of a generalized way to apply type-pattern-matching and syntax-deconstruction in a uniform
+    /// Contains helpers to allow features and other algorithms to run over C# and Visual Basic code in
+    // a uniform fashion.
+    /// It should be thought of a generalized way to apply type-pattern-matching and
+    // syntax-deconstruction in a uniform
     /// fashion over the languages. Helpers in this type should only be one of the following forms:
     /// <list type="bullet">
     /// <item>
-    /// 'IsXXX' where 'XXX' exactly matches one of the same named syntax (node, token, trivia, list, etc.) constructs that
-    /// both C# and VB have. For example 'IsSimpleName' to correspond to C# and VB's SimpleNameSyntax node.  These 'checking'
-    /// methods should never fail.  For non leaf node types this should be implemented as a typecheck ('is' in C#, 'typeof ... is'
-    /// in VB).  For leaf nodes, this should be implemented by deffering to <see cref="ISyntaxKinds"/> to check against the
+    /// 'IsXXX' where 'XXX' exactly matches one of the same named syntax (node, token, trivia, list,
+    // etc.) constructs that
+    /// both C# and VB have. For example 'IsSimpleName' to correspond to C# and VB's SimpleNameSyntax
+    // node.  These 'checking'
+    /// methods should never fail.  For non leaf node types this should be implemented as a typecheck
+    // ('is' in C#, 'typeof ... is'
+    /// in VB).  For leaf nodes, this should be implemented by deffering to <see cref="ISyntaxKinds"/>
+    // to check against the
     /// raw kind of the node.
     /// </item>
     /// <item>
-    /// 'GetPartsOfXXX(SyntaxNode node, out SyntaxNode/SyntaxToken part1, ...)' where 'XXX' one of the same named Syntax constructs
-    /// that both C# and VB have, and where the returned parts correspond to the members those nodes have in common across the
-    /// languages.  For example 'GetPartsOfQualifiedName(SyntaxNode node, out SyntaxNode left, out SyntaxToken dotToken, out SyntaxNode right)'
-    /// VB.  These functions should throw if passed a node that the corresponding 'IsXXX' did not return <see langword="true"/> for.
-    /// For nodes that only have a single child, 'GetPartsOfXXX' is not not needed and can be replaced with the easier to use
+    /// 'GetPartsOfXXX(SyntaxNode node, out SyntaxNode/SyntaxToken part1, ...)' where 'XXX' one of the
+    // same named Syntax constructs
+    /// that both C# and VB have, and where the returned parts correspond to the members those nodes
+    // have in common across the
+    /// languages.  For example 'GetPartsOfQualifiedName(SyntaxNode node, out SyntaxNode left, out
+    // SyntaxToken dotToken, out SyntaxNode right)'
+    /// VB.  These functions should throw if passed a node that the corresponding 'IsXXX' did not return
+    // <see langword="true"/> for.
+    /// For nodes that only have a single child, 'GetPartsOfXXX' is not not needed and can be replaced
+    // with the easier to use
     /// 'GetXXXOfYYY' to get that single child.
     /// </item>
     /// <item>
-    /// 'GetXxxOfYYY' where 'XXX' matches the name of a property on a 'YYY' syntax construct that both C# and VB have.  For
-    /// example 'GetExpressionOfMemberAccessExpression' corresponding to MemberAccessExpressionsyntax.Expression in both C# and
-    /// VB.  These functions should throw if passed a node that the corresponding 'IsYYY' did not return <see langword="true"/> for.
-    /// For nodes that only have a single child, these functions can stay here.  For nodes with multiple children, these should migrate
+    /// 'GetXxxOfYYY' where 'XXX' matches the name of a property on a 'YYY' syntax construct that both
+    // C# and VB have.  For
+    /// example 'GetExpressionOfMemberAccessExpression' corresponding to
+    // MemberAccessExpressionsyntax.Expression in both C# and
+    /// VB.  These functions should throw if passed a node that the corresponding 'IsYYY' did not return
+    // <see langword="true"/> for.
+    /// For nodes that only have a single child, these functions can stay here.  For nodes with multiple
+    // children, these should migrate
     /// to <see cref="ISyntaxFactsExtensions"/> and be built off of 'GetPartsOfXXX'.
     /// </item>
     /// <item>
-    /// Absolutely trivial questions that relate to syntax and can be asked sensibly of each language.  For example,
+    /// Absolutely trivial questions that relate to syntax and can be asked sensibly of each language.
+    // For example,
     /// if certain constructs (like 'patterns') are supported in that language or not.
     /// </item>
     /// </list>
@@ -52,37 +68,53 @@ namespace Microsoft.CodeAnalysis.LanguageService
     ///
     /// <list type="bullet">
     /// <item>
-    /// Functions that attempt to blur the lines between similar constructs in the same language.  For example, a QualifiedName
-    /// is not the same as a MemberAccessExpression (despite A.B being representable as either depending on context).
-    /// Features that need to handle both should make it clear that they are doing so, showing that they're doing the right
-    /// thing for the contexts each can arise in (for the above example in 'type' vs 'expression' contexts).
+    /// Functions that attempt to blur the lines between similar constructs in the same language.  For
+    // example, a QualifiedName
+    /// is not the same as a MemberAccessExpression (despite A.B being representable as either depending
+    // on context).
+    /// Features that need to handle both should make it clear that they are doing so, showing that
+    // they're doing the right
+    /// thing for the contexts each can arise in (for the above example in 'type' vs 'expression'
+    // contexts).
     /// </item>
     /// <item>
-    /// Functions which are effectively specific to a single feature are are just trying to find a place to place complex
-    /// feature logic in a place such that it can run over VB or C#.  For example, a function to determine if a position
-    /// is on the 'header' of a node.  a 'header' is a not a well defined syntax concept that can be trivially asked of
-    /// nodes in either language.  It is an excapsulation of a feature (or set of features) level idea that should be in
+    /// Functions which are effectively specific to a single feature are are just trying to find a place
+    // to place complex
+    /// feature logic in a place such that it can run over VB or C#.  For example, a function to
+    // determine if a position
+    /// is on the 'header' of a node.  a 'header' is a not a well defined syntax concept that can be
+    // trivially asked of
+    /// nodes in either language.  It is an excapsulation of a feature (or set of features) level idea
+    // that should be in
     /// its own dedicated service.
     /// </item>
     /// <item>
-    /// Functions that mutate or update syntax constructs for example 'WithXXX'.  These should be on SyntaxGenerator or
+    /// Functions that mutate or update syntax constructs for example 'WithXXX'.  These should be on
+    // SyntaxGenerator or
     /// some other feature specific service.
     /// </item>
     /// <item>
-    /// Functions that a single item when one language may allow for multiple.  For example 'GetIdentifierOfVariableDeclarator'.
-    /// In VB a VariableDeclarator can itself have several names, so calling code must be written to check for that and handle
-    /// it apropriately.  Functions like this make it seem like that doesn't need to be considered, easily allowing for bugs
+    /// Functions that a single item when one language may allow for multiple.  For example
+    // 'GetIdentifierOfVariableDeclarator'.
+    /// In VB a VariableDeclarator can itself have several names, so calling code must be written to
+    // check for that and handle
+    /// it apropriately.  Functions like this make it seem like that doesn't need to be considered,
+    // easily allowing for bugs
     /// to creep in.
     /// </item>
     /// <item>
-    /// Abbreviating or otherwise changing the names that C# and VB share here.  For example use 'ObjectCreationExpression'
-    /// not 'ObjectCreation'.  This prevents accidental duplication and keeps consistency with all members.
+    /// Abbreviating or otherwise changing the names that C# and VB share here.  For example use
+    // 'ObjectCreationExpression'
+    /// not 'ObjectCreation'.  This prevents accidental duplication and keeps consistency with all
+    // members.
     /// </item>
     /// </list>
     /// </summary>
     /// <remarks>
-    /// Many helpers in this type currently violate the above 'dos' and 'do nots'.  They should be removed and either
-    /// inlined directly into the feature that needs if (if only a single feature), or moved into a dedicated service
+    /// Many helpers in this type currently violate the above 'dos' and 'do nots'.  They should be
+    // removed and either
+    /// inlined directly into the feature that needs if (if only a single feature), or moved into a
+    // dedicated service
     /// for that purpose if needed by multiple features.
     /// </remarks>
     internal interface ISyntaxFacts
@@ -267,7 +299,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
         ///     1) new With { .a = 1, .b = .a      .a refers to the anonymous type
         ///     2) With obj : .m                   .m refers to the obj type
         ///     3) new T() With { .a = 1, .b = .a  'a refers to the T type
-        /// If `allowImplicitTarget` is set to true, the returned node will be set to approperiate node, otherwise, it will return null.
+        /// If `allowImplicitTarget` is set to true, the returned node will be set to approperiate node,
+        // otherwise, it will return null.
         /// This parameter has no affect on C# node.
         /// </param>
         SyntaxNode? GetLeftSideOfDot(SyntaxNode? node, bool allowImplicitTarget = false);
@@ -288,19 +321,27 @@ namespace Microsoft.CodeAnalysis.LanguageService
         SyntaxNode? GetStandaloneExpression(SyntaxNode? node);
 
         /// <summary>
-        /// Call on the `.y` part of a `x?.y` to get the entire `x?.y` conditional access expression.  This also works
-        /// when there are multiple chained conditional accesses.  For example, calling this on '.y' or '.z' in
-        /// `x?.y?.z` will both return the full `x?.y?.z` node.  This can be used to effectively get 'out' of the RHS of
-        /// a conditional access, and commonly represents the full standalone expression that can be operated on
+        /// Call on the `.y` part of a `x?.y` to get the entire `x?.y` conditional access expression.  This
+        // also works
+        /// when there are multiple chained conditional accesses.  For example, calling this on '.y' or '.z'
+        // in
+        /// `x?.y?.z` will both return the full `x?.y?.z` node.  This can be used to effectively get 'out'
+        // of the RHS of
+        /// a conditional access, and commonly represents the full standalone expression that can be
+        // operated on
         /// atomically.
         /// </summary>
         SyntaxNode? GetRootConditionalAccessExpression(SyntaxNode? node);
 
         /// <summary>
-        /// Returns the expression node the member is being accessed off of.  If <paramref name="allowImplicitTarget"/>
-        /// is <see langword="false"/>, this will be the node directly to the left of the dot-token.  If <paramref name="allowImplicitTarget"/>
-        /// is <see langword="true"/>, then this can return another node in the tree that the member will be accessed
-        /// off of.  For example, in VB, if you have a member-access-expression of the form ".Length" then this
+        /// Returns the expression node the member is being accessed off of.  If <paramref
+        // name="allowImplicitTarget"/>
+        /// is <see langword="false"/>, this will be the node directly to the left of the dot-token.  If
+        // <paramref name="allowImplicitTarget"/>
+        /// is <see langword="true"/>, then this can return another node in the tree that the member will be
+        // accessed
+        /// off of.  For example, in VB, if you have a member-access-expression of the form ".Length" then
+        // this
         /// may return the expression in the surrounding With-statement.
         /// </summary>
         SyntaxNode? GetExpressionOfMemberAccessExpression(
@@ -482,17 +523,22 @@ namespace Microsoft.CodeAnalysis.LanguageService
         );
 
         /// <summary>
-        /// Given a <see cref="SyntaxNode"/>, return the <see cref="TextSpan"/> representing the span of the member body
-        /// it is contained within. This <see cref="TextSpan"/> is used to determine whether speculative binding should be
-        /// used in performance-critical typing scenarios. Note: if this method fails to find a relevant span, it returns
+        /// Given a <see cref="SyntaxNode"/>, return the <see cref="TextSpan"/> representing the span of the
+        // member body
+        /// it is contained within. This <see cref="TextSpan"/> is used to determine whether speculative
+        // binding should be
+        /// used in performance-critical typing scenarios. Note: if this method fails to find a relevant
+        // span, it returns
         /// an empty <see cref="TextSpan"/> at position 0.
         /// </summary>
         // Violation.  This is a feature level API.
         TextSpan GetMemberBodySpanForSpeculativeBinding(SyntaxNode node);
 
         /// <summary>
-        /// Returns the parent node that binds to the symbols that the IDE prefers for features like Quick Info and Find
-        /// All References. For example, if the token is part of the type of an object creation, the parenting object
+        /// Returns the parent node that binds to the symbols that the IDE prefers for features like Quick
+        // Info and Find
+        /// All References. For example, if the token is part of the type of an object creation, the
+        // parenting object
         /// creation expression is returned so that binding will return constructor symbols.
         /// </summary>
         // Violation.  This is a feature level API.
@@ -505,14 +551,16 @@ namespace Microsoft.CodeAnalysis.LanguageService
         );
 
         /// <summary>
-        /// Given a <see cref="SyntaxNode"/>, that represents and argument return the string representation of
+        /// Given a <see cref="SyntaxNode"/>, that represents and argument return the string representation
+        // of
         /// that arguments name.
         /// </summary>
         // Violation.  This is a feature level API.
         string GetNameForArgument(SyntaxNode? argument);
 
         /// <summary>
-        /// Given a <see cref="SyntaxNode"/>, that represents an attribute argument return the string representation of
+        /// Given a <see cref="SyntaxNode"/>, that represents an attribute argument return the string
+        // representation of
         /// that arguments name.
         /// </summary>
         // Violation.  This is a feature level API.
@@ -734,8 +782,10 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
         #region GetXXXOfYYYMembers
 
-        // note: this is only for nodes that have a single child nodes.  If a node has multiple child nodes, then
-        // ISyntaxFacts should have a GetPartsOfXXX helper instead, and GetXXXOfYYY should be built off of that
+        // note: this is only for nodes that have a single child nodes.  If a node has multiple child nodes,
+        // then
+        // ISyntaxFacts should have a GetPartsOfXXX helper instead, and GetXXXOfYYY should be built off of
+        // that
         // inside ISyntaxFactsExtensions
 
         SyntaxNode GetArgumentListOfImplicitElementAccess(SyntaxNode node);

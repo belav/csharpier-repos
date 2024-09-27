@@ -72,7 +72,8 @@ namespace System.Workflow.ComponentModel.Compiler
                     parent = parent.Parent;
                 }
 
-                // check that an activity with PersistOnClose/SupportsTransaction/ICompensatableActivity attribute is not nested inside the transaction scope
+                // check that an activity with PersistOnClose/SupportsTransaction/ICompensatableActivity attribute
+                // is not nested inside the transaction scope
                 Queue<Activity> nestedEnabledActivities = new Queue<Activity>(
                     Helpers.GetAllEnabledActivities((CompositeActivity)activity)
                 );

@@ -1412,12 +1412,16 @@ namespace System.Numerics
         /// bytes, using the fewest number of bytes possible. If the value is zero,
         /// outputs one byte whose element is 0x00.
         /// </summary>
-        /// <param name="destination">The destination span to which the resulting bytes should be written.</param>
-        /// <param name="bytesWritten">The number of bytes written to <paramref name="destination"/>.</param>
+        /// <param name="destination">The destination span to which the resulting bytes should be
+        // written.</param>
+        /// <param name="bytesWritten">The number of bytes written to <paramref
+        // name="destination"/>.</param>
         /// <param name="isUnsigned">Whether or not an unsigned encoding is to be used</param>
         /// <param name="isBigEndian">Whether or not to write the bytes in a big-endian byte order</param>
-        /// <returns>true if the bytes fit in <paramref name="destination"/>; false if not all bytes could be written due to lack of space.</returns>
-        /// <exception cref="OverflowException">If <paramref name="isUnsigned"/> is <c>true</c> and <see cref="Sign"/> is negative.</exception>
+        /// <returns>true if the bytes fit in <paramref name="destination"/>; false if not all bytes could
+        // be written due to lack of space.</returns>
+        /// <exception cref="OverflowException">If <paramref name="isUnsigned"/> is <c>true</c> and <see
+        // cref="Sign"/> is negative.</exception>
         public bool TryWriteBytes(
             Span<byte> destination,
             out int bytesWritten,
@@ -1459,7 +1463,8 @@ namespace System.Numerics
                 ) != null;
         }
 
-        /// <summary>Gets the number of bytes that will be output by <see cref="ToByteArray(bool, bool)"/> and <see cref="TryWriteBytes(Span{byte}, out int, bool, bool)"/>.</summary>
+        /// <summary>Gets the number of bytes that will be output by <see cref="ToByteArray(bool, bool)"/>
+        // and <see cref="TryWriteBytes(Span{byte}, out int, bool, bool)"/>.</summary>
         /// <returns>The number of bytes.</returns>
         public int GetByteCount(bool isUnsigned = false)
         {
@@ -1476,7 +1481,8 @@ namespace System.Numerics
             return count;
         }
 
-        /// <summary>Mode used to enable sharing <see cref="TryGetBytes(GetBytesMode, Span{byte}, bool, bool, ref int)"/> for multiple purposes.</summary>
+        /// <summary>Mode used to enable sharing <see cref="TryGetBytes(GetBytesMode, Span{byte}, bool,
+        // bool, ref int)"/> for multiple purposes.</summary>
         private enum GetBytesMode
         {
             AllocateArray,
@@ -1484,22 +1490,30 @@ namespace System.Numerics
             Span,
         }
 
-        /// <summary>Shared logic for <see cref="ToByteArray(bool, bool)"/>, <see cref="TryWriteBytes(Span{byte}, out int, bool, bool)"/>, and <see cref="GetByteCount"/>.</summary>
+        /// <summary>Shared logic for <see cref="ToByteArray(bool, bool)"/>, <see
+        // cref="TryWriteBytes(Span{byte}, out int, bool, bool)"/>, and <see cref="GetByteCount"/>.</summary>
         /// <param name="mode">Which entry point is being used.</param>
-        /// <param name="destination">The destination span, if mode is <see cref="GetBytesMode.Span"/>.</param>
-        /// <param name="isUnsigned">True to never write a padding byte, false to write it if the high bit is set.</param>
-        /// <param name="isBigEndian">True for big endian byte ordering, false for little endian byte ordering.</param>
+        /// <param name="destination">The destination span, if mode is <see
+        // cref="GetBytesMode.Span"/>.</param>
+        /// <param name="isUnsigned">True to never write a padding byte, false to write it if the high bit
+        // is set.</param>
+        /// <param name="isBigEndian">True for big endian byte ordering, false for little endian byte
+        // ordering.</param>
         /// <param name="bytesWritten">
         /// If <paramref name="mode"/>==<see cref="GetBytesMode.AllocateArray"/>, ignored.
-        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Count"/>, the number of bytes that would be written.
-        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Span"/>, the number of bytes written to the span or that would be written if it were long enough.
+        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Count"/>, the number of bytes that would be
+        // written.
+        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Span"/>, the number of bytes written to the
+        // span or that would be written if it were long enough.
         /// </param>
         /// <returns>
         /// If <paramref name="mode"/>==<see cref="GetBytesMode.AllocateArray"/>, the result array.
         /// If <paramref name="mode"/>==<see cref="GetBytesMode.Count"/>, null.
-        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Span"/>, non-null if the span was long enough, null if there wasn't enough room.
+        /// If <paramref name="mode"/>==<see cref="GetBytesMode.Span"/>, non-null if the span was long
+        // enough, null if there wasn't enough room.
         /// </returns>
-        /// <exception cref="OverflowException">If <paramref name="isUnsigned"/> is <c>true</c> and <see cref="Sign"/> is negative.</exception>
+        /// <exception cref="OverflowException">If <paramref name="isUnsigned"/> is <c>true</c> and <see
+        // cref="Sign"/> is negative.</exception>
         private byte[]? TryGetBytes(
             GetBytesMode mode,
             Span<byte> destination,
@@ -1797,7 +1811,8 @@ namespace System.Numerics
                     return ToString();
                 }
 
-                // Estimate the value x as `L * 2^n`, while L is the value of high bits, and n is the length of low bits
+                // Estimate the value x as `L * 2^n`, while L is the value of high bits, and n is the length of low
+                // bits
                 // Represent L as `k * 10^i`, then `x = L * 2^n = k * 10^(i + (n * log10(2)))`
                 // Let `m = n * log10(2)`, the final result would be `x = (k * 10^(m - [m])) * 10^(i+[m])`
 
@@ -1821,7 +1836,8 @@ namespace System.Numerics
                 }
 
                 // The digits can be incorrect because of floating point errors and estimation in Log and Exp
-                // Keep some digits in the significand. 8 is arbitrarily chosen, about half of the precision of double
+                // Keep some digits in the significand. 8 is arbitrarily chosen, about half of the precision of
+                // double
                 significand = Math.Round(significand, 8);
 
                 if (significand >= 10.0)
@@ -2084,7 +2100,8 @@ namespace System.Numerics
 
             // The maximum exponent for doubles is 1023, which corresponds to a uint bit length of 32.
             // All BigIntegers with bits[] longer than 32 evaluate to Double.Infinity (or NegativeInfinity).
-            // Cases where the exponent is between 1024 and 1035 are handled in NumericsHelpers.GetDoubleFromParts.
+            // Cases where the exponent is between 1024 and 1035 are handled in
+            // NumericsHelpers.GetDoubleFromParts.
             const int InfinityLength = 1024 / kcbitUint;
 
             if (length > InfinityLength)
@@ -2859,10 +2876,12 @@ namespace System.Numerics
                 NumericsHelpers.DangerousMakeTwosComplement(xd); // Mutates xd
 
                 // For a shift of N x 32 bit,
-                // We check for a special case where its sign bit could be outside the uint array after 2's complement conversion.
+                // We check for a special case where its sign bit could be outside the uint array after 2's
+                // complement conversion.
                 // For example given [0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF], its 2's complement is [0x01, 0x00, 0x00]
                 // After a 32 bit right shift, it becomes [0x00, 0x00] which is [0x00, 0x00] when converted back.
-                // The expected result is [0x00, 0x00, 0xFFFFFFFF] (2's complement) or [0x00, 0x00, 0x01] when converted back
+                // The expected result is [0x00, 0x00, 0xFFFFFFFF] (2's complement) or [0x00, 0x00, 0x01] when
+                // converted back
                 // If the 2's component's last element is a 0, we will track the sign externally
                 trackSignBit = smallShift == 0 && xd[xd.Length - 1] == 0;
             }
@@ -3357,10 +3376,14 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Gets the number of bits required for shortest two's complement representation of the current instance without the sign bit.
+        /// Gets the number of bits required for shortest two's complement representation of the current
+        // instance without the sign bit.
         /// </summary>
-        /// <returns>The minimum non-negative number of bits in two's complement notation without the sign bit.</returns>
-        /// <remarks>This method returns 0 iff the value of current object is equal to <see cref="Zero"/> or <see cref="MinusOne"/>. For positive integers the return value is equal to the ordinary binary representation string length.</remarks>
+        /// <returns>The minimum non-negative number of bits in two's complement notation without the sign
+        // bit.</returns>
+        /// <remarks>This method returns 0 iff the value of current object is equal to <see cref="Zero"/> or
+        // <see cref="MinusOne"/>. For positive integers the return value is equal to the ordinary binary
+        // representation string length.</remarks>
         public long GetBitLength()
         {
             AssertValid();
@@ -3836,7 +3859,8 @@ namespace System.Numerics
 
             ulong result = 0;
 
-            // Both positive values and their two's-complement negative representation will share the same TrailingZeroCount,
+            // Both positive values and their two's-complement negative representation will share the same
+            // TrailingZeroCount,
             // so the sign of value does not matter and both cases can be handled in the same way
 
             uint part = value._bits[0];
@@ -3852,7 +3876,8 @@ namespace System.Numerics
             return result;
         }
 
-        /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadBigEndian(ReadOnlySpan{byte}, bool, out TSelf)" />
+        /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadBigEndian(ReadOnlySpan{byte}, bool, out TSelf)"
+        // />
         static bool IBinaryInteger<BigInteger>.TryReadBigEndian(
             ReadOnlySpan<byte> source,
             bool isUnsigned,
@@ -3863,7 +3888,8 @@ namespace System.Numerics
             return true;
         }
 
-        /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadLittleEndian(ReadOnlySpan{byte}, bool, out TSelf)" />
+        /// <inheritdoc cref="IBinaryInteger{TSelf}.TryReadLittleEndian(ReadOnlySpan{byte}, bool, out
+        // TSelf)" />
         static bool IBinaryInteger<BigInteger>.TryReadLittleEndian(
             ReadOnlySpan<byte> source,
             bool isUnsigned,
@@ -5641,7 +5667,8 @@ namespace System.Numerics
         // IShiftOperators
         //
 
-        /// <inheritdoc cref="IShiftOperators{TSelf, TOther, TResult}.op_UnsignedRightShift(TSelf, TOther)" />
+        /// <inheritdoc cref="IShiftOperators{TSelf, TOther, TResult}.op_UnsignedRightShift(TSelf, TOther)"
+        // />
         public static BigInteger operator >>>(BigInteger value, int shiftAmount)
         {
             value.AssertValid();
@@ -5743,7 +5770,8 @@ namespace System.Numerics
         public static BigInteger Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
             Parse(s, NumberStyles.Integer, provider);
 
-        /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
+        /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out
+        // TSelf)" />
         public static bool TryParse(
             ReadOnlySpan<char> s,
             IFormatProvider? provider,

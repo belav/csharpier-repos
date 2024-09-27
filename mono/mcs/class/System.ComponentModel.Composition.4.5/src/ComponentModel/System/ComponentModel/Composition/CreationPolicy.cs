@@ -14,10 +14,12 @@ namespace System.ComponentModel.Composition
     public enum CreationPolicy : int
     {
         /// <summary>
-        /// Let the <see cref="CompositionContainer"/> choose the most appropriate <see cref="CreationPolicy"/>
+        /// Let the <see cref="CompositionContainer"/> choose the most appropriate <see
+        // cref="CreationPolicy"/>
         /// for the part given the current context. This is the default <see cref="CreationPolicy"/>, with
         /// the <see cref="CompositionContainer"/> choosing <see cref="CreationPolicy.Shared"/> by default
-        /// unless the <see cref="ComposablePart"/> or importer requests <see cref="CreationPolicy.NonShared"/>.
+        /// unless the <see cref="ComposablePart"/> or importer requests <see
+        // cref="CreationPolicy.NonShared"/>.
         /// </summary>
         Any = 0,
 
@@ -34,7 +36,8 @@ namespace System.ComponentModel.Composition
         NonShared = 2,
 
         /// <summary>
-        /// Each new non-shared instance of the part is created by a new <see cref="CompositionContainer"/> for every requestor.  Shared instances of the parts dependencies
+        /// Each new non-shared instance of the part is created by a new <see cref="CompositionContainer"/>
+        // for every requestor.  Shared instances of the parts dependencies
         /// are unique to this instance.
         /// For this release can only be applied to imports of type  <see cref="ExportFactory<T>"/>
         /// </summary>

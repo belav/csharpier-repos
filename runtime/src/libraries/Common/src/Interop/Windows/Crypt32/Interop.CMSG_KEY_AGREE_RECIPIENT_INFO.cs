@@ -14,7 +14,8 @@ internal static partial class Interop
             internal int dwVersion;
             internal CMsgKeyAgreeOriginatorChoice dwOriginatorChoice;
 
-            // union based on dwOriginatorChoice. use OriginatorCertId or OriginatorPublicKeyInfo property instead.
+            // union based on dwOriginatorChoice. use OriginatorCertId or OriginatorPublicKeyInfo property
+            // instead.
             private CMSG_KEY_AGREE_RECIPIENT_INFO_ORIGINATOR_UNION Originator; // Do NOT add an underscore - this name still maps to a C++ Win32 header definition.
 
             internal DATA_BLOB UserKeyingMaterial;

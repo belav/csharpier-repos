@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
         public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
             DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 
-        // We need to analyze generated code to get callbacks for read/writes to non-generated members in generated code.
+        // We need to analyze generated code to get callbacks for read/writes to non-generated members in
+        // generated code.
         protected override GeneratedCodeAnalysisFlags GeneratedCodeAnalysisFlags =>
             GeneratedCodeAnalysisFlags.Analyze;
 
@@ -57,8 +58,10 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
             context.RegisterCompilationStartAction(context =>
             {
                 // State map for fields:
-                //  'isCandidate' : Indicates whether the field is a candidate to be made readonly based on it's options.
-                //  'written'     : Indicates if there are any writes to the field outside the constructor and field initializer.
+                //  'isCandidate' : Indicates whether the field is a candidate to be made readonly based on it's
+                // options.
+                //  'written'     : Indicates if there are any writes to the field outside the constructor and field
+                // initializer.
                 var fieldStateMap =
                     new ConcurrentDictionary<IFieldSymbol, (bool isCandidate, bool written)>();
 
@@ -87,7 +90,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             OperationKind.FieldReference
                         );
 
-                        // Can't allow changing the fields to readonly if the struct overwrites itself.  e.g. `this = default;`
+                        // Can't allow changing the fields to readonly if the struct overwrites itself.  e.g. `this =
+                        // default;`
                         var writesToThis = false;
                         context.RegisterSyntaxNodeAction(
                             context =>
@@ -139,11 +143,13 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                         operationContext.CancellationToken
                     );
 
-                    // Ignore fields that are not candidates or have already been written outside the constructor/field initializer.
+                    // Ignore fields that are not candidates or have already been written outside the constructor/field
+                    // initializer.
                     if (!isCandidate || written)
                         return;
 
-                    // Check if this is a field write outside constructor and field initializer, and update field state accordingly.
+                    // Check if this is a field write outside constructor and field initializer, and update field state
+                    // accordingly.
                     if (!IsFieldWrite(fieldReference, operationContext.ContainingSymbol))
                         return;
 
@@ -152,7 +158,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
 
                 void OnSymbolEnd(SymbolAnalysisContext symbolEndContext)
                 {
-                    // Report diagnostics for candidate fields that are not written outside constructor and field initializer.
+                    // Report diagnostics for candidate fields that are not written outside constructor and field
+                    // initializer.
                     var members = ((INamedTypeSymbol)symbolEndContext.Symbol).GetMembers();
                     foreach (var member in members)
                     {
@@ -273,7 +280,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                             );
                 }
 
-                // Method to update the field state for a candidate field written outside constructor and field initializer.
+                // Method to update the field state for a candidate field written outside constructor and field
+                // initializer.
                 void UpdateFieldStateOnWrite(IFieldSymbol field)
                 {
                     Debug.Assert(
@@ -377,7 +385,8 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
                 return false;
 
             // Writes to fields inside constructor are ignored, except for the below cases:
-            //  1. Instance reference of an instance field being written is not the instance being initialized by the constructor.
+            //  1. Instance reference of an instance field being written is not the instance being initialized
+            // by the constructor.
             //  2. Field is being written inside a lambda or local function.
 
             // Check if we are in the constructor of the containing type of the written field.
@@ -396,7 +405,9 @@ namespace Microsoft.CodeAnalysis.MakeFieldReadonly
             // type and field-reference-containing type must be the same (not just their OriginalDefinition
             // types).
             //
+            //
             // https://github.com/dotnet/roslyn/blob/8770fb62a36157ed4ca38a16a0283d27321a01a7/src/Compilers/CSharp/Portable/Binder/Binder.ValueChecks.cs#L1201-L1203
+            //
             // https//github.com/dotnet/roslyn/blob/93d3aa1a2cf1790b1a0fe2d120f00987d50445c0/src/Compilers/VisualBasic/Portable/Binding/Binder_Expressions.vb#L1868-L1871
             if (!field.ContainingType.Equals(owningSymbol.ContainingType))
                 return true;

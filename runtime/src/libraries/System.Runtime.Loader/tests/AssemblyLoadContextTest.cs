@@ -25,7 +25,8 @@ namespace System.Runtime.Loader.Tests
             );
             Assert.Equal(expectedName.FullName, actualAsmName.FullName);
 
-            // Verify that the AssemblyName returned by GetAssemblyName can be used to load an assembly. System.Runtime would
+            // Verify that the AssemblyName returned by GetAssemblyName can be used to load an assembly.
+            // System.Runtime would
             // already be loaded, but this is just verifying it does not throw some other unexpected exception.
             var asm = Assembly.Load(actualAsmName);
             Assert.NotNull(asm);
@@ -154,7 +155,8 @@ namespace System.Runtime.Loader.Tests
             var asmName = typeof(System.Linq.Enumerable).Assembly.GetName();
             var loadContext = new AssemblyLoadContext("FallbackToDefaultContextTest");
 
-            // This should not have any special handlers, so it should just find the version in the default context
+            // This should not have any special handlers, so it should just find the version in the default
+            // context
             var asm = loadContext.LoadFromAssemblyName(asmName);
             Assert.NotNull(asm);
             var loadedContext = AssemblyLoadContext.GetLoadContext(asm);

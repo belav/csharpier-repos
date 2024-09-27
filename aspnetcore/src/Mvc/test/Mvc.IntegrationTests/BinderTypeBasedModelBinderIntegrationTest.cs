@@ -127,9 +127,11 @@ public class BinderTypeBasedModelBinderIntegrationTest
         get { return new TheoryData<BindingInfo> { null, new BindingInfo() }; }
     }
 
-    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action parameter's
+    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action
+    // parameter's
     // type. This should behave identically to such an attribute on an action parameter. (Tests such as
-    // BindParameter_WithData_WithPrefix_GetsBound cover associating [ModelBinder] with an action parameter.)
+    // BindParameter_WithData_WithPrefix_GetsBound cover associating [ModelBinder] with an action
+    // parameter.)
     //
     // This is a regression test for aspnet/Mvc#4652 and aspnet/Mvc#7595
     [Theory]
@@ -186,8 +188,10 @@ public class BinderTypeBasedModelBinderIntegrationTest
         public string Street { get; set; }
     }
 
-    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with a property in the type
-    // hierarchy of an action parameter. (Tests such as BindProperty_WithData_EmptyPrefix_GetsBound cover
+    // Make sure the metadata is honored when a [ModelBinder] attribute is associated with a property in
+    // the type
+    // hierarchy of an action parameter. (Tests such as BindProperty_WithData_EmptyPrefix_GetsBound
+    // cover
     // associating [ModelBinder] with a class somewhere in the type hierarchy of an action parameter.)
     [Theory]
     [MemberData(nameof(NullAndEmptyBindingInfo))]

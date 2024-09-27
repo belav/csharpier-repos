@@ -4,6 +4,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+
+
+
 /************************************************************************************************************/
 
 
@@ -65,7 +68,8 @@ namespace System.Web.Compilation
 
         internal const string UpdatableInheritReplacementToken = "__ASPNET_INHERITS";
 
-        // Name of the temporary subdirectory under the codegen folder for buildproviders to generate embedded resource files.
+        // Name of the temporary subdirectory under the codegen folder for buildproviders to generate
+        // embedded resource files.
         private const string CodegenResourceDirectoryName = "ResX";
 
         private static System.Security.Cryptography.RNGCryptoServiceProvider _rng =
@@ -337,10 +341,10 @@ namespace System.Web.Compilation
             s_dynamicallyAddedReferencedAssembly.Add(assembly);
         }
 
-        /*
-         * Return the list of assemblies that a compilation needs to reference for a given
-         * config minus the top-level assemblies indexed later than removeIndex
-         */
+/*
+* Return the list of assemblies that a compilation needs to reference for a given
+* config minus the top-level assemblies indexed later than removeIndex
+*/
         internal static ICollection GetReferencedAssemblies(
             CompilationSection compConfig,
             int removeIndex
@@ -429,11 +433,11 @@ namespace System.Web.Compilation
             return referencedAssemblies;
         }
 
-        /*
-         * Return the list of assemblies that all page compilations need to reference. This includes
-         * config assemblies (<assemblies> section), bin assemblies and assemblies built from the
-         * app App_Code and other top level folders.
-         */
+/*
+* Return the list of assemblies that all page compilations need to reference. This includes
+* config assemblies (<assemblies> section), bin assemblies and assemblies built from the
+* app App_Code and other top level folders.
+*/
 
         /// <devdoc>
         /// Returns the assemblies referenced at the root application level of the current appF
@@ -448,7 +452,8 @@ namespace System.Web.Compilation
         }
 
         /// <summary>
-        /// Specifies a string representing a dependency that the BuildManager factors when determining if a clean build is required.
+        /// Specifies a string representing a dependency that the BuildManager factors when determining if a
+        // clean build is required.
         /// </summary>
         /// <param name="dependency">String representation of a dependency.</param>
         public static void AddCompilationDependency(string dependency)
@@ -464,9 +469,9 @@ namespace System.Web.Compilation
             _theBuildManager._preAppStartHashCodeCombiner.AddObject(dependency);
         }
 
-        /*
-         * Perform initialization work that should only be done once (per app domain).
-         */
+/*
+* Perform initialization work that should only be done once (per app domain).
+*/
         private void Initialize()
         {
             Debug.Assert(_caches == null);
@@ -537,9 +542,9 @@ namespace System.Web.Compilation
             LoadLicensesAssemblyIfExists();
         }
 
-        /*
-         * Init code used when we are running a non-precompiled app
-         */
+/*
+* Init code used when we are running a non-precompiled app
+*/
         private void RegularAppRuntimeModeInitialize()
         {
             //
@@ -555,9 +560,9 @@ namespace System.Web.Compilation
             _caches = new BuildResultCache[] { _memoryCache, _codeGenCache };
         }
 
-        /*
-         * Init code used when we are running a precompiled app
-         */
+/*
+* Init code used when we are running a precompiled app
+*/
         private void PrecompiledAppRuntimeModeInitialize()
         {
             //
@@ -580,9 +585,9 @@ namespace System.Web.Compilation
             _caches = new BuildResultCache[] { _memoryCache, preCompCache, _codeGenCache };
         }
 
-        /*
-         * Init code used when we are precompiling an app
-         */
+/*
+* Init code used when we are precompiling an app
+*/
         private void PrecompilationModeInitialize()
         {
             // We are precompiling an app
@@ -639,7 +644,8 @@ namespace System.Web.Compilation
                 return;
             }
 
-            // If a PortableCompilationOutputSnapshotsType has been configured but failed to be loaded, let it throw
+            // If a PortableCompilationOutputSnapshotsType has been configured but failed to be loaded, let it
+            // throw
             Type t = Type.GetType(AppSettings.PortableCompilationOutputSnapshotType, true);
             object[] args = new Object[]
             {
@@ -675,10 +681,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Check if the top level files are up to date, and cleanup the codegendir
-         * if they are not.
-         */
+/*
+* Check if the top level files are up to date, and cleanup the codegendir
+* if they are not.
+*/
         private long CheckTopLevelFilesUpToDateInternal(long cachedHash)
         {
             Debug.Trace("BuildManager", "specialFilesCombinedHash=" + cachedHash);
@@ -747,7 +753,8 @@ namespace System.Web.Compilation
 
             // In optimized compilation mode, we don't clean out all the compilations just because a top level
             // file changes.  Instead, we let already compiled pages run against the newer top level binaries.
-            // In can be incorrect in some cases (e.g. return type of method changes from int to short), which is
+            // In can be incorrect in some cases (e.g. return type of method changes from int to short), which
+            // is
             // why the optimization is optional
             if (!OptimizeCompilations)
             {
@@ -810,7 +817,8 @@ namespace System.Web.Compilation
                 // Grab the compilation mutex, since this method accesses the codegen files
                 CompilationLock.GetLock(ref gotLock);
 
-                // After pre app start methods have executed, the second hash value should match the current value in the hash code combiner.
+                // After pre app start methods have executed, the second hash value should match the current value
+                // in the hash code combiner.
                 CheckCodeGenFiles(currentHash.Item2, cachedTopLevelFilesHash.Item2);
 
                 if (!cachedTopLevelFilesHash.Equals(currentHash))
@@ -887,9 +895,9 @@ namespace System.Web.Compilation
             HttpRuntime.ShutdownAppDomain(ApplicationShutdownReason.BuildManagerChange, message);
         }
 
-        /*
-         * Check if an assembly name is reserved for a special purpose
-         */
+/*
+* Check if an assembly name is reserved for a special purpose
+*/
         internal static bool IsReservedAssemblyName(string assemblyName)
         {
             if (
@@ -997,9 +1005,11 @@ namespace System.Web.Compilation
 
                 if (methods == null)
                 {
-                    // In case of ctlr-f5 scenario, two processes (VS and IisExpress) will start compilation simultaneously.
+                    // In case of ctlr-f5 scenario, two processes (VS and IisExpress) will start compilation
+                    // simultaneously.
                     // GetPreStartInitMethodsFromReferencedAssemblies() will load all referenced assemblies
-                    // If shallow copy is enabled, one process may fail due race condition in copying assemblies (DevDiv bug 501777)
+                    // If shallow copy is enabled, one process may fail due race condition in copying assemblies (DevDiv
+                    // bug 501777)
                     // to fix it, put GetPreStartInitMethodsFromReferencedAssemblies() under the global lock
                     bool gotLock = false;
                     try
@@ -1083,7 +1093,8 @@ namespace System.Web.Compilation
         }
 
         /// <summary>
-        /// Load the cached list of assemblies containing pre app start methods. Since this is a cache we never throw from it.
+        /// Load the cached list of assemblies containing pre app start methods. Since this is a cache we
+        // never throw from it.
         /// </summary>
         internal static ICollection<Assembly> LoadCachedPreAppStartAssemblies(
             string preStartInitListPath
@@ -1091,7 +1102,8 @@ namespace System.Web.Compilation
         {
             try
             {
-                // Force the enumerable to be saved to a list so that any issues with loading assemblies get caught here.
+                // Force the enumerable to be saved to a list so that any issues with loading assemblies get caught
+                // here.
                 ISet<string> assemblyList = GetPreStartInitAssembliesFromFile(preStartInitListPath);
                 if (assemblyList == null)
                 {
@@ -1128,7 +1140,8 @@ namespace System.Web.Compilation
         {
             // Remove dupes
             var methodsToExecute = methods.Distinct();
-            // We want to execute PreApplicationStartmethods in a deterministic order. We'll use a sorted sequence of fully qualified type names and method names.
+            // We want to execute PreApplicationStartmethods in a deterministic order. We'll use a sorted
+            // sequence of fully qualified type names and method names.
             methodsToExecute = methodsToExecute
                 .OrderBy(
                     m => m.DeclaringType.AssemblyQualifiedName,
@@ -1181,7 +1194,8 @@ namespace System.Web.Compilation
         /// Resolves pre application start methods from the assemblies specified.
         /// </summary>
         /// <param name="assemblies">The list of assemblies to look for methods in.</param>
-        /// <param name="buildingFromCache">Flag that determines if we are rebuilding methods from cache.</param>
+        /// <param name="buildingFromCache">Flag that determines if we are rebuilding methods from
+        // cache.</param>
         internal static ICollection<MethodInfo> GetPreStartInitMethodsFromAssemblyCollection(
             IEnumerable<Assembly> assemblies,
             bool buildingFromCache
@@ -1201,14 +1215,17 @@ namespace System.Web.Compilation
                 }
                 catch
                 {
-                    // GetCustomAttributes invokes the constructors of the attributes, so it is possible that they might throw unexpected exceptions.
+                    // GetCustomAttributes invokes the constructors of the attributes, so it is possible that they might
+                    // throw unexpected exceptions.
                     // (Dev10 bug 831981)
                 }
 
                 if (attributes == null || !attributes.Any())
                 {
-                    // When rebuilding methods from cache every assembly specified must have one or more PreApplicationStartMethod attributes.
-                    // If one of them doesn't, the cache might be stale. We'll force it to retry it with the list of assemblies currently loaded into the AppDomain.
+                    // When rebuilding methods from cache every assembly specified must have one or more
+                    // PreApplicationStartMethod attributes.
+                    // If one of them doesn't, the cache might be stale. We'll force it to retry it with the list of
+                    // assemblies currently loaded into the AppDomain.
                     if (buildingFromCache)
                     {
                         return null;
@@ -1261,7 +1278,8 @@ namespace System.Web.Compilation
             MethodInfo method = null;
             if (type.IsPublic)
             {
-                // Verify that type is public to avoid allowing internal code execution. This implementation will not match
+                // Verify that type is public to avoid allowing internal code execution. This implementation will
+                // not match
                 // nested public types.
                 method = type.GetMethod(
                     methodName,
@@ -1638,7 +1656,8 @@ namespace System.Web.Compilation
 
             // Append a random token to it.
 
-            // However, don't do this when precompiling for deployment since, we want the name to be more predictable (DevDiv 36625)
+            // However, don't do this when precompiling for deployment since, we want the name to be more
+            // predictable (DevDiv 36625)
             if (PrecompilingForDeployment)
                 return baseName;
 
@@ -1656,17 +1675,17 @@ namespace System.Web.Compilation
             return GetCacheKeyFromVirtualPath(virtualPath);
         }
 
-        /*
-         * Look for a type by name in the top level and config assemblies
-         */
+/*
+* Look for a type by name in the top level and config assemblies
+*/
         public static Type GetType(string typeName, bool throwOnError)
         {
             return GetType(typeName, throwOnError, false);
         }
 
-        /*
-         * Look for a type by name in the top level and config assemblies
-         */
+/*
+* Look for a type by name in the top level and config assemblies
+*/
         public static Type GetType(string typeName, bool throwOnError, bool ignoreCase)
         {
             // If it contains an assembly name, just call Type.GetType().  Do this before even trying
@@ -1734,9 +1753,9 @@ namespace System.Web.Compilation
             return type;
         }
 
-        /*
-        * Simple wrapper to get the Assemblies
-        */
+/*
+* Simple wrapper to get the Assemblies
+*/
         private static IEnumerable<Assembly> GetAssembliesForAppLevel()
         {
             CompilationSection compilationConfiguration = MTConfigUtil.GetCompilationAppConfig();
@@ -1756,9 +1775,9 @@ namespace System.Web.Compilation
                 .Distinct();
         }
 
-        /*
-         * Gets a type from one of the code assemblies
-         */
+/*
+* Gets a type from one of the code assemblies
+*/
         internal static Type GetTypeFromCodeAssembly(string typeName, bool ignoreCase)
         {
             // No code assembly: return
@@ -1906,12 +1925,12 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Returns a single hash code that represents the state of the built object for
-         * the passed in virtualPath.  If it isn't already built, don't build it, but just
-         * return 0.  This can be used to determine the validity of output cache that
-         * has been persisted to disk.
-         */
+/*
+* Returns a single hash code that represents the state of the built object for
+* the passed in virtualPath.  If it isn't already built, don't build it, but just
+* return 0.  This can be used to determine the validity of output cache that
+* has been persisted to disk.
+*/
         internal static long GetBuildResultHashCodeIfCached(HttpContext context, string virtualPath)
         {
             BuildResult result = GetVPathBuildResult(
@@ -1981,10 +2000,10 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Calls either GetVPathBuildResultWithNoAssert or GetVPathBuildResultWithAssert,
-         * depending on whether there is any point in asserting.
-         */
+/*
+* Calls either GetVPathBuildResultWithNoAssert or GetVPathBuildResultWithAssert,
+* depending on whether there is any point in asserting.
+*/
         internal static BuildResult GetVPathBuildResult(
             HttpContext context,
             VirtualPath virtualPath,
@@ -2041,9 +2060,9 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Same as GetVPathBuildResultWithNoAssert, but with an Unrestricted Assert.
-         */
+/*
+* Same as GetVPathBuildResultWithNoAssert, but with an Unrestricted Assert.
+*/
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
         internal static BuildResult GetVPathBuildResultWithAssert(
             HttpContext context,
@@ -2827,9 +2846,9 @@ namespace System.Web.Compilation
         }
 
 #if OLD
-        /*
-         * Rewrite the virtualPath if appropriate, in order to support ghosting
-         */
+/*
+* Rewrite the virtualPath if appropriate, in order to support ghosting
+*/
         private static void GetGhostedVirtualPath(ref string virtualPath)
         {
             VirtualPathProvider virtualPathProvider = HostingEnvironment.VirtualPathProvider;
@@ -2878,10 +2897,10 @@ namespace System.Web.Compilation
             return GetCacheKeyFromVirtualPath(virtualPath, out keyFromVPP);
         }
 
-        /*
-         * Same as GetCacheKeyFromVirtualPathInternal, but caches the cache keys
-         * for performance, since creating them is expensive (VSWhidbey 146540)
-         */
+/*
+* Same as GetCacheKeyFromVirtualPathInternal, but caches the cache keys
+* for performance, since creating them is expensive (VSWhidbey 146540)
+*/
         static SimpleRecyclingCache _keyCache = new SimpleRecyclingCache();
 
         private static string GetCacheKeyFromVirtualPath(
@@ -2919,20 +2938,21 @@ namespace System.Web.Compilation
             return key;
         }
 
-        /*
-         * Generate a unique cache key from a virtual path.  e.g. for "/approot/sub1/sub2/foo.aspx"
-         * the key could be "foo.aspx.ccdf220e", where ccdf220e is a hash code from
-         * the dir "sub1/sub2".
-         */
+/*
+* Generate a unique cache key from a virtual path.  e.g. for "/approot/sub1/sub2/foo.aspx"
+* the key could be "foo.aspx.ccdf220e", where ccdf220e is a hash code from
+* the dir "sub1/sub2".
+*/
         private static string GetCacheKeyFromVirtualPathInternal(VirtualPath virtualPath)
         {
             // We want the key to be app independent (for precompilation), so we
             // change the virtual path to be app relative
 
-            /* Disable assertion since global theme needs to compile theme files in different vroot.
-            Debug.Assert(StringUtil.VirtualPathStartsWithAppPath(virtualPath),
-                String.Format("VPath {0} is outside the application: {1}", virtualPath, HttpRuntime.AppDomainAppVirtualPath));
-            */
+/* Disable assertion since global theme needs to compile theme files in different vroot.
+Debug.Assert(StringUtil.VirtualPathStartsWithAppPath(virtualPath),
+String.Format("VPath {0} is outside the application: {1}", virtualPath,
+HttpRuntime.AppDomainAppVirtualPath));
+*/
             string virtualPathString = virtualPath.AppRelativeVirtualPathString.ToLowerInvariant();
             virtualPathString = UrlPath.RemoveSlashFromPathIfNeeded(virtualPathString);
 
@@ -3188,7 +3208,8 @@ namespace System.Web.Compilation
                 _caches[i].CacheBuildResult(cacheKey, result, hashCode, utcStart);
             }
 
-            // If we find that it's no longer valid after caching it, remove it from the cache (VSWhidbey 578372)
+            // If we find that it's no longer valid after caching it, remove it from the cache (VSWhidbey
+            // 578372)
             if (!TimeStampChecker.CheckFilesStillValid(cacheKey, result.VirtualPathDependencies))
             {
                 _memoryCache.RemoveAssemblyAndCleanupDependencies(
@@ -3514,9 +3535,9 @@ namespace System.Web.Compilation
             return true;
         }
 
-        /*
-         * Are we precompiling the app for deployment (as opposed to in-place)
-         */
+/*
+* Are we precompiling the app for deployment (as opposed to in-place)
+*/
         internal static bool PrecompilingForDeployment
         {
             get { return (_theBuildManager._precompTargetPhysicalDir != null); }
@@ -3768,10 +3789,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Recursively copy all the static files from the source directory to the
-         * target directory of the precompilation
-         */
+/*
+* Recursively copy all the static files from the source directory to the
+* target directory of the precompilation
+*/
         private void CopyStaticFilesRecursive(
             VirtualDirectory sourceVdir,
             string destPhysicalDir,
@@ -3852,10 +3873,10 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Copy all the assemblies from the codegen dir into the bin directory of the
-         * target precompiled app.
-         */
+/*
+* Copy all the assemblies from the codegen dir into the bin directory of the
+* target precompiled app.
+*/
         private void CopyCompiledAssembliesToDestinationBin(string fromDir, string toDir)
         {
             bool createdDirectory = false;
@@ -3922,7 +3943,8 @@ namespace System.Web.Compilation
                 //
                 string sourcePhysicalPath = HostingEnvironment.MapPathInternal(vfile.VirtualPath);
 
-                // The file could already exist with updatable precompilation, since we would create the modified file
+                // The file could already exist with updatable precompilation, since we would create the modified
+                // file
                 // earlier during processing of a code beside page.
                 if (File.Exists(destPhysicalPath))
                 {
@@ -4311,7 +4333,8 @@ namespace System.Web.Compilation
 
         /// <summary>
         /// Returns the target framework moniker for the current web site. For framework versions less than
-        /// 4.0, it will either be 3.0 or 3.5. 2.0 and 3.0 have similar web.config, so we use 3.0 to allow 3.0
+        /// 4.0, it will either be 3.0 or 3.5. 2.0 and 3.0 have similar web.config, so we use 3.0 to allow
+        // 3.0
         /// web sites to reference 3.0 assemblies.
         /// </summary>
         public static FrameworkName TargetFramework
@@ -4384,7 +4407,8 @@ namespace System.Web.Compilation
         }
 
         /// <summary>
-        /// Temporary subdirectory under the codegen folder for buildproviders to generate embedded resource files.
+        /// Temporary subdirectory under the codegen folder for buildproviders to generate embedded resource
+        // files.
         /// </summary>
         internal static string CodegenResourceDir
         {
@@ -4439,7 +4463,8 @@ namespace System.Web.Compilation
         {
             string path = Path.Combine(UserCachePath, fileName);
 
-            // Make sure that the full path's directory is exactly the User Cache folder. This prevents creating files in any other folders
+            // Make sure that the full path's directory is exactly the User Cache folder. This prevents creating
+            // files in any other folders
             if (Path.GetDirectoryName(path) != UserCachePath)
             {
                 throw new ArgumentException();

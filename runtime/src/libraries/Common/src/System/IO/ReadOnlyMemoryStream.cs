@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace System.IO
 {
-    /// <summary>Provides a <see cref="Stream"/> for the contents of a <see cref="ReadOnlyMemory{Byte}"/>.</summary>
+    /// <summary>Provides a <see cref="Stream"/> for the contents of a <see
+    // cref="ReadOnlyMemory{Byte}"/>.</summary>
     internal sealed class ReadOnlyMemoryStream : Stream
     {
         private ReadOnlyMemory<byte> _content;

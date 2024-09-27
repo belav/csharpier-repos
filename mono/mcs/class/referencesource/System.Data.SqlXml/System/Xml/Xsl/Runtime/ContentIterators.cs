@@ -15,7 +15,8 @@ using System.Xml.XPath;
 namespace System.Xml.Xsl.Runtime
 {
     /// <summary>
-    /// Iterate over all child content nodes (this is different from the QIL Content operator, which iterates over content + attributes).
+    /// Iterate over all child content nodes (this is different from the QIL Content operator, which
+    // iterates over content + attributes).
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct ContentIterator
@@ -78,7 +79,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position the iterator on the next child element with a matching name.  Return true if such a child exists and
+        /// Position the iterator on the next child element with a matching name.  Return true if such a
+        // child exists and
         /// set Current property.  Otherwise, return false (Current property is undefined).
         /// </summary>
         public bool MoveNext()
@@ -124,7 +126,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position the iterator on the next child content node with a matching node kind.  Return true if such a child
+        /// Position the iterator on the next child content node with a matching node kind.  Return true if
+        // such a child
         /// exists and set Current property.  Otherwise, return false (Current property is undefined).
         /// </summary>
         public bool MoveNext()
@@ -218,7 +221,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Pop the top namespace from the stack and save it as navCurrent.  If there are no more namespaces, return false.
+        /// Pop the top namespace from the stack and save it as navCurrent.  If there are no more
+        // namespaces, return false.
         /// </summary>
         public bool MoveNext()
         {
@@ -257,7 +261,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position the iterator on the next child content node with a matching node kind.  Return true if such a child
+        /// Position the iterator on the next child content node with a matching node kind.  Return true if
+        // such a child
         /// exists and set Current property.  Otherwise, return false (Current property is undefined).
         /// </summary>
         public bool MoveNext()
@@ -280,21 +285,28 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// Iterate over child content nodes or following-sibling nodes.  Maintain document order by using a stack.  Input
-    /// nodes are assumed to be in document order, but can contain one another (ContentIterator doesn't allow this).
+    /// Iterate over child content nodes or following-sibling nodes.  Maintain document order by using a
+    // stack.  Input
+    /// nodes are assumed to be in document order, but can contain one another (ContentIterator doesn't
+    // allow this).
     /// </summary>
     /// <remarks>
-    /// 1. Assume that the list I of input nodes is in document order, with no duplicates.  There are N nodes in list I.
-    /// 2. For each node in list I, derive a list of nodes consisting of matching children or following-sibling nodes.
+    /// 1. Assume that the list I of input nodes is in document order, with no duplicates.  There are N
+    // nodes in list I.
+    /// 2. For each node in list I, derive a list of nodes consisting of matching children or
+    // following-sibling nodes.
     /// Call these lists S(1)...S(N).
     /// 3. Let F be the first node in any list S(X), where X >= 1 and X < N
-    /// 4. There exists exactly one contiguous sequence of lists S(Y)...S(Z), where Y > X and Z <= N, such that the lists
+    /// 4. There exists exactly one contiguous sequence of lists S(Y)...S(Z), where Y > X and Z <= N,
+    // such that the lists
     /// S(X+1)...S(N) can be partitioned into these three groups:
     /// a. 1st group (S(X+1)...S(Y-1)) -- All nodes in these lists precede F in document order
     /// b. 2nd group (S(Y)...S(Z)) -- All nodes in these lists are duplicates of nodes in list S(X)
     /// c. 3rd group (> S(Z)) -- All nodes in these lists succeed F in document order
-    /// 5. Given #4, node F can be returned once all nodes in the 1st group have been returned.  Lists S(Y)...S(Z) can be
-    /// discarded.  And only a single node in the 3rd group need be generated in order to guarantee that all nodes in
+    /// 5. Given #4, node F can be returned once all nodes in the 1st group have been returned.  Lists
+    // S(Y)...S(Z) can be
+    /// discarded.  And only a single node in the 3rd group need be generated in order to guarantee that
+    // all nodes in
     /// the 1st and 2nd groups have already been generated.
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Never)]
@@ -315,7 +327,8 @@ namespace System.Xml.Xsl.Runtime
         };
 
         /// <summary>
-        /// Initialize the ContentMergeIterator (merge multiple sets of content nodes in document order and remove duplicates).
+        /// Initialize the ContentMergeIterator (merge multiple sets of content nodes in document order and
+        // remove duplicates).
         /// </summary>
         public void Create(XmlNavigatorFilter filter)
         {
@@ -325,9 +338,12 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes if there are
-        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node needs to be
-        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next node in the
+        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes
+        // if there are
+        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node
+        // needs to be
+        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next
+        // node in the
         /// iteration.
         /// </summary>
         public IteratorResult MoveNext(XPathNavigator input)
@@ -336,9 +352,12 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes if there are
-        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node needs to be
-        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next node in the
+        /// Position this iterator to the next content or sibling node.  Return IteratorResult.NoMoreNodes
+        // if there are
+        /// no more content or sibling nodes.  Return IteratorResult.NeedInputNode if the next input node
+        // needs to be
+        /// fetched first.  Return IteratorResult.HaveCurrent if the Current property is set to the next
+        // node in the
         /// iteration.
         /// </summary>
         internal IteratorResult MoveNext(XPathNavigator input, bool isContent)
@@ -432,7 +451,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Return the current result navigator.  This is only defined after MoveNext() has returned IteratorResult.HaveCurrentNode.
+        /// Return the current result navigator.  This is only defined after MoveNext() has returned
+        // IteratorResult.HaveCurrentNode.
         /// </summary>
         public XPathNavigator Current
         {

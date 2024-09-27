@@ -34,7 +34,8 @@ namespace System.Composition.Convention
         /// derive from (or implement) the specified type.
         /// </summary>
         /// <typeparam name="T">The type from which matching types derive.</typeparam>
-        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the rule.</returns>
+        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the
+        // rule.</returns>
         public PartConventionBuilder<T> ForTypesDerivedFrom<T>()
         {
             var partBuilder = new PartConventionBuilder<T>((t) => IsDescendentOf(t, typeof(T)));
@@ -64,7 +65,8 @@ namespace System.Composition.Convention
         /// Define a rule that will apply to the types <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type to which the rule applies.</typeparam>
-        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the rule.</returns>
+        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the
+        // rule.</returns>
         public PartConventionBuilder<T> ForType<T>()
         {
             var partBuilder = new PartConventionBuilder<T>((t) => t == typeof(T));
@@ -95,7 +97,8 @@ namespace System.Composition.Convention
         /// </summary>
         /// <param name="typeFilter">A predicate that selects matching types.</param>
         /// <typeparam name="T">The type to which the rule applies.</typeparam>
-        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the rule.</returns>
+        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the
+        // rule.</returns>
         public PartConventionBuilder<T> ForTypesMatching<T>(Predicate<Type> typeFilter)
         {
             if (typeFilter is null)
@@ -113,7 +116,8 @@ namespace System.Composition.Convention
         /// match the supplied predicate.
         /// </summary>
         /// <param name="typeFilter">A predicate that selects matching types.</param>
-        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the rule.</returns>
+        /// <returns>A <see cref="PartConventionBuilder{T}"/> that must be used to specify the
+        // rule.</returns>
         public PartConventionBuilder ForTypesMatching(Predicate<Type> typeFilter)
         {
             if (typeFilter is null)
@@ -260,7 +264,8 @@ namespace System.Composition.Convention
                             }
                         }
 
-                        // We will have updated all of the MemberInfos by now so lets reload cachedAttributes with the current store
+                        // We will have updated all of the MemberInfos by now so lets reload cachedAttributes with the
+                        // current store
                         _memberInfos.TryGetValue(memberInfo, out cachedAttributes);
                     }
                     finally
@@ -342,7 +347,8 @@ namespace System.Composition.Convention
         /// <summary>
         /// Provide the list of attributes applied to the specified parameter.
         /// </summary>
-        /// <param name="reflectedType">The reflectedType the type used to retrieve the parameterInfo.</param>
+        /// <param name="reflectedType">The reflectedType the type used to retrieve the
+        // parameterInfo.</param>
         /// <param name="parameter">The parameter to supply attributes for.</param>
         /// <returns>The list of applied attributes.</returns>
         public override IEnumerable<Attribute> GetCustomAttributes(

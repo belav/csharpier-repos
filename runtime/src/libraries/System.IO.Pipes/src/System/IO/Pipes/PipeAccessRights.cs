@@ -10,12 +10,15 @@ namespace System.IO.Pipes
         ReadData = 0x000001,
         WriteData = 0x000002,
 
-        // Note that all client named pipes require ReadAttributes access even if the user does not specify it.
-        // (This is because CreateFile slaps on the requirement before calling NTCreateFile (at least in WinXP SP2)).
+        // Note that all client named pipes require ReadAttributes access even if the user does not specify
+        // it.
+        // (This is because CreateFile slaps on the requirement before calling NTCreateFile (at least in
+        // WinXP SP2)).
         ReadAttributes = 0x000080,
         WriteAttributes = 0x000100,
 
-        // These aren't really needed since there is no operation that requires this access, but they are left here
+        // These aren't really needed since there is no operation that requires this access, but they are
+        // left here
         // so that people can specify ACLs that others can open by specifying a PipeDirection rather than a
         // PipeAccessRights (PipeDirection.In/Out maps to GENERIC_READ/WRITE access).
         ReadExtendedAttributes = 0x000008,
@@ -50,8 +53,11 @@ namespace System.IO.Pipes
         ReadWrite = Read | Write,
 
         // These are somewhat similar to what you get if you use PipeDirection:
-        //In                           = ReadData | ReadAttributes | ReadExtendedAttributes | ReadPermissions,
-        //Out                          = WriteData | WriteAttributes | WriteExtendedAttributes | ChangePermissions | CreateNewInstance | ReadAttributes, // NOTE: Not sure if ReadAttributes should really be here
+        //In                           = ReadData | ReadAttributes | ReadExtendedAttributes |
+        // ReadPermissions,
+        //Out                          = WriteData | WriteAttributes | WriteExtendedAttributes |
+        // ChangePermissions | CreateNewInstance | ReadAttributes, // NOTE: Not sure if ReadAttributes should
+        // really be here
         //InOut                        = In | Out,
 
         AccessSystemSecurity = 0x01000000, // Allow changes to SACL.

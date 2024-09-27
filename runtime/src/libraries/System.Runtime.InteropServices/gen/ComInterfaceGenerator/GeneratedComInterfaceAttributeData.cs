@@ -9,8 +9,10 @@ using Microsoft.CodeAnalysis;
 namespace Microsoft.Interop
 {
     /// <summary>
-    /// Contains the data related to a GeneratedComInterfaceAttribute, without references to Roslyn symbols.
-    /// See <seealso cref="GeneratedComInterfaceCompilationData"/> for a type with a reference to the StringMarshallingCustomType
+    /// Contains the data related to a GeneratedComInterfaceAttribute, without references to Roslyn
+    // symbols.
+    /// See <seealso cref="GeneratedComInterfaceCompilationData"/> for a type with a reference to the
+    // StringMarshallingCustomType
     /// </summary>
     internal sealed record GeneratedComInterfaceData : InteropAttributeData
     {
@@ -35,8 +37,10 @@ namespace Microsoft.Interop
     }
 
     /// <summary>
-    /// Contains the data related to a GeneratedComInterfaceAttribute, with references to Roslyn symbols.
-    /// Use <seealso cref="GeneratedComInterfaceData"/> instead when using for incremental compilation state to avoid keeping a compilation alive
+    /// Contains the data related to a GeneratedComInterfaceAttribute, with references to Roslyn
+    // symbols.
+    /// Use <seealso cref="GeneratedComInterfaceData"/> instead when using for incremental compilation
+    // state to avoid keeping a compilation alive
     /// </summary>
     internal sealed record GeneratedComInterfaceCompilationData : InteropAttributeCompilationData
     {

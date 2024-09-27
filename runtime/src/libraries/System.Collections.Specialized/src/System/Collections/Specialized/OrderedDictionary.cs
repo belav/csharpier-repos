@@ -450,7 +450,8 @@ namespace System.Collections.Specialized
         #endregion
 
         /// <devdoc>
-        /// OrderedDictionaryEnumerator works just like any other IDictionaryEnumerator, but it retrieves DictionaryEntries
+        /// OrderedDictionaryEnumerator works just like any other IDictionaryEnumerator, but it retrieves
+        // DictionaryEntries
         /// in the order by index.
         /// </devdoc>
         private sealed class OrderedDictionaryEnumerator : IDictionaryEnumerator
@@ -545,7 +546,8 @@ namespace System.Collections.Specialized
 
         /// <devdoc>
         /// OrderedDictionaryKeyValueCollection implements IList for the Values and Keys properties
-        /// that is "live"- it will reflect changes to the OrderedDictionary on the collection made after the getter
+        /// that is "live"- it will reflect changes to the OrderedDictionary on the collection made after
+        // the getter
         /// was called.
         /// </devdoc>
         private sealed class OrderedDictionaryKeyValueCollection : IList

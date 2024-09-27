@@ -4,11 +4,13 @@
 namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 /// <summary>
-///     Converts <typeparamref name="TModel" /> to and from <typeparamref name="TProvider" /> using simple casts from one type
+///     Converts <typeparamref name="TModel" /> to and from <typeparamref name="TProvider" /> using
+// simple casts from one type
 ///     to the other.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvider>
 {
@@ -39,7 +41,8 @@ public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvi
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public CastingConverter()
         : this(null) { }
@@ -48,7 +51,8 @@ public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvi
     ///     Creates a new instance of this converter.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public CastingConverter(ConverterMappingHints? mappingHints)
         : base(

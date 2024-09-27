@@ -7,22 +7,27 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
+
+
 /*****************************************************************************************************
 Rules for Multiple Nested Parent, enforce following constraints
 
 1) At all times, only 1(ONE) FK can be NON-Null in a row.
 2) NULL FK values are not associated with PARENT(x), even if if PK is NULL in Parent
 3) Enforce <rule 1> when
-        a) Any FK value is changed
-        b) A relation created that result in Multiple Nested Child
+a) Any FK value is changed
+b) A relation created that result in Multiple Nested Child
 
 WriteXml
 
 1) WriteXml will throw if <rule 1> is violated
-2) if NON-Null FK has parentRow (boolean check) print as Nested, else it will get written as normal row
+2) if NON-Null FK has parentRow (boolean check) print as Nested, else it will get written as normal
+row
 
 additional notes:
 We decided to enforce the rule 1 just if Xml being persisted
+
+
 ******************************************************************************************************/
 
 namespace System.Data
@@ -78,7 +83,8 @@ namespace System.Data
         internal bool nested = false;
 
         /// <devdoc>
-        /// this stores whether the the relationship should make sure that KeyConstraints and ForeignKeyConstraints
+        /// this stores whether the the relationship should make sure that KeyConstraints and
+        // ForeignKeyConstraints
         /// exist when added to the ConstraintsCollections of the table.
         /// </devdoc>
         internal bool createConstraints;
@@ -92,7 +98,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name,
+        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name,
         ///       parent, and child columns.
         ///    </para>
         /// </devdoc>
@@ -101,7 +108,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, parent, and child columns, and
+        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name, parent, and child columns, and
         ///       value to create constraints.
         ///    </para>
         /// </devdoc>
@@ -130,7 +138,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name
+        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name
         ///       and matched arrays of parent and child columns.
         ///    </para>
         /// </devdoc>
@@ -143,7 +152,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the specified name, matched arrays of parent
+        ///       Initializes a new instance of the <see cref='System.Data.DataRelation'/> class using the
+        // specified name, matched arrays of parent
         ///       and child columns, and value to create constraints.
         ///    </para>
         /// </devdoc>
@@ -177,7 +187,8 @@ namespace System.Data
             this.parentTableName = parentTableName;
             this.childTableName = childTableName;
             this.nested = nested;
-            // DataRelation(relationName, parentTableName, null, childTableName, null, parentColumnNames, childColumnNames, nested)
+            // DataRelation(relationName, parentTableName, null, childTableName, null, parentColumnNames,
+            // childColumnNames, nested)
         }
 
         [Browsable(false)]
@@ -625,13 +636,14 @@ namespace System.Data
         }
 
         /********************
-          The Namespace of a table nested inside multiple parents can be
-          1. Explicitly specified
-          2. Inherited from Parent Table
-          3. Empty (Form = unqualified case)
-          However, Schema does not allow (3) to be a global element and multiple nested child has to be a global element.
-          Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
-         ********************/
+        The Namespace of a table nested inside multiple parents can be
+        1. Explicitly specified
+        2. Inherited from Parent Table
+        3. Empty (Form = unqualified case)
+        However, Schema does not allow (3) to be a global element and multiple nested child has to be a
+        global element.
+        Therefore we'll reduce case (3) to (2) if all parents have same namespace else throw.
+        ********************/
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a value indicating whether relations are nested.
@@ -888,7 +900,8 @@ namespace System.Data
             remove { onPropertyChangingDelegate -= value; }
         }
 
-        // If we're not in a dataSet relations collection, we need to verify on every property get that we're
+        // If we're not in a dataSet relations collection, we need to verify on every property get that
+        // we're
         // still a good relation object.
         internal void CheckState()
         {

@@ -113,7 +113,8 @@ namespace System.Text.Encodings.Web
             if ((lengthInBytes & 4) != 0)
             {
                 // Read 4 bytes at a time into a single 128-bit vector.
-                // Same logic as the 16-byte case, but we only care about the low nibble of the final pmovmskb value.
+                // Same logic as the 16-byte case, but we only care about the low nibble of the final pmovmskb
+                // value.
                 // Everything except the low nibble of pmovksmb contains garbage and must be discarded.
 
                 var packed = Sse2.LoadScalarVector128(

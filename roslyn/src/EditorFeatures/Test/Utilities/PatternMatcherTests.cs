@@ -74,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
         [Fact]
         public void BreakIntoCharacterParts_NumberPrefixedIdentifier()
         {
-            // 42Bar is not a valid identifier in either C# or VB, but it is entirely conceivable the user might be
+            // 42Bar is not a valid identifier in either C# or VB, but it is entirely conceivable the user might
+            // be
             // typing it trying to do a substring match
             VerifyBreakIntoCharacterParts("42Bar", "42", "Bar");
         }

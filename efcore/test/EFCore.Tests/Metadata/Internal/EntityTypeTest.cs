@@ -3747,7 +3747,8 @@ public partial class EntityTypeTest
     // ApplicationVersion   = ApplicationVersion
     // Attitude`            = ApplicationVersion.Attitude#Attitude
     // FirstTest`           = Application.Attitude#Attitude.FirstTest#FirstTest
-    // SpecialistStaff`     = ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff
+    // SpecialistStaff`     =
+    // ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff
     //
     // Rejection            = Rejection
     // FirstTest``          = Rejection.FirstTest#FirstTest

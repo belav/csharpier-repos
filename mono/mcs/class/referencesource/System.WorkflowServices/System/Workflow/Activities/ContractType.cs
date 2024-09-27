@@ -775,8 +775,11 @@ namespace System.Workflow.Activities
 
                 //        foreach (T memberInfo in baseMembers)
                 //        {
-                //            // We should not return private members from base classes. Note: Generics requires us to use "as".
-                //            if ((memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate) || (memberInfo is MethodBase && (memberInfo as MethodBase).IsPrivate) || (memberInfo is Type && (memberInfo as Type).IsNestedPrivate))
+                //            // We should not return private members from base classes. Note: Generics requires us
+                // to use "as".
+                //            if ((memberInfo is FieldInfo && (memberInfo as FieldInfo).IsPrivate) || (memberInfo is
+                // MethodBase && (memberInfo as MethodBase).IsPrivate) || (memberInfo is Type && (memberInfo as
+                // Type).IsNestedPrivate))
                 //            {
                 //                continue;
                 //            }

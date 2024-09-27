@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -208,7 +209,8 @@ namespace System.Net.Http.Formatting
     // Helpers for performing consistency checks with the serializers.
     class SerializerConsistencyHepers
     {
-        // Exercise the various serialization paths to verify that the default serializers behave consistently.
+        // Exercise the various serialization paths to verify that the default serializers behave
+        // consistently.
         public static Task TestAsync(object source)
         {
             Type tSource = source.GetType();
@@ -222,12 +224,15 @@ namespace System.Net.Http.Formatting
             return TestAsync(source, tSource, tSource);
         }
 
-        // tSourceWrite - the type we use for the initial write.  This can be specific, and a 1-way serializable type (eg, a linq expression).
-        // tSourceRead - the type that we read back as. This should be more general because we need to instantiate it.
+        // tSourceWrite - the type we use for the initial write.  This can be specific, and a 1-way
+        // serializable type (eg, a linq expression).
+        // tSourceRead - the type that we read back as. This should be more general because we need to
+        // instantiate it.
         public static async Task TestAsync(object source, Type tSourceWrite, Type tSourceRead)
         {
             // Apply consistency chceks. This interleaves the results between the formatters.
-            // It doesn't actually matter specifically what the formatter does, it just matters that they're consistent.
+            // It doesn't actually matter specifically what the formatter does, it just matters that they're
+            // consistent.
             // This will test various transitions between C#->JSON, JSON->C#, C#->XML, and XML->C#.
             // We can't compare C# objects, but we can compare the textual representation from XML and JSON.
             MediaTypeFormatter xmlFormatter = new MediaTypeFormatterCollection().XmlFormatter;

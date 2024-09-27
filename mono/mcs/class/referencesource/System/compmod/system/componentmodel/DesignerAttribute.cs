@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -34,7 +34,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the name of the type that
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/>
+        // class using the name of the type that
         ///       provides design-time services.
         ///    </para>
         /// </devdoc>
@@ -51,7 +52,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the type that provides
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/>
+        // class using the type that provides
         ///       design-time services.
         ///    </para>
         /// </devdoc>
@@ -63,7 +65,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the designer type and the
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/>
+        // class using the designer type and the
         ///       base class for the designer.
         ///    </para>
         /// </devdoc>
@@ -80,7 +83,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class, using the name of the designer
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/>
+        // class, using the name of the designer
         ///       class and the base class for the designer.
         ///    </para>
         /// </devdoc>
@@ -97,7 +101,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/> class using the types of the designer and
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.DesignerAttribute'/>
+        // class using the types of the designer and
         ///       designer base class.
         ///    </para>
         /// </devdoc>

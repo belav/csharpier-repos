@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
                 || currentToken.Parent is StructuredTriviaSyntax
             )
             {
-                // this doesn't take care of all cases where tokens belong to structured trivia. this is only for cases we care
+                // this doesn't take care of all cases where tokens belong to structured trivia. this is only for
+                // cases we care
                 if (
                     previousToken.Kind() == SyntaxKind.HashToken
                     && SyntaxFacts.IsPreprocessorKeyword(currentToken.Kind())

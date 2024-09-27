@@ -50,7 +50,8 @@ namespace System.Web.UI.WebControls
             : base() { }
 
         /// <devdoc>
-        /// Creates a new instance of AccessDataSource with a specified connection string and select command.
+        /// Creates a new instance of AccessDataSource with a specified connection string and select
+        // command.
         /// </devdoc>
         public AccessDataSource(string dataFile, string selectCommand)
             : base()
@@ -80,7 +81,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Gets the connection string for the AccessDataSource. This property is auto-generated and cannot be set.
+        /// Gets the connection string for the AccessDataSource. This property is auto-generated and cannot
+        // be set.
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string ConnectionString
@@ -180,7 +182,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Gets/sets the ADO.net managed provider name. This property is restricted to the OLE DB provider and cannot be set.
+        /// Gets/sets the ADO.net managed provider name. This property is restricted to the OLE DB provider
+        // and cannot be set.
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string ProviderName
@@ -195,7 +198,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// A semi-colon delimited string indicating which databases to use for the dependency in the format "database1:table1;database2:table2".
+        /// A semi-colon delimited string indicating which databases to use for the dependency in the format
+        // "database1:table1;database2:table2".
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string SqlCacheDependency
@@ -226,7 +230,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// Creates a connection string for an Access database connection.
-        /// The JET or ACE provider is used based on the DataFile extension, and the filename, username, password, and
+        /// The JET or ACE provider is used based on the DataFile extension, and the filename, username,
+        // password, and
         /// share mode are are set.
         /// </devdoc>
         private string CreateConnectionString()
@@ -307,9 +312,9 @@ namespace System.Web.UI.WebControls
             base.SaveDataToCache(startRowIndex, maximumRows, data, dependency);
         }
 
-        /*internal override void SaveTotalRowCountToCache(int totalRowCount) {
-            AddCacheFileDependency();
-            base.SaveTotalRowCountToCache(totalRowCount);
-        }*/
+/*internal override void SaveTotalRowCountToCache(int totalRowCount) {
+AddCacheFileDependency();
+base.SaveTotalRowCountToCache(totalRowCount);
+}*/
     }
 }

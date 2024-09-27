@@ -13,7 +13,8 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
 {
     /// <summary>
-    /// Factory to create a project context for a new Workspace project that can be initialized on a background thread.
+    /// Factory to create a project context for a new Workspace project that can be initialized on a
+    // background thread.
     /// </summary>
     internal interface IWorkspaceProjectContextFactory
     {
@@ -27,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// <param name="projectUniqueName">Unique name for the project.</param>
         /// <param name="projectFilePath">Full path to the project file for the project.</param>
         /// <param name="projectGuid">Project guid.</param>
-        /// <param name="hierarchy">The IVsHierarchy for the project; this is used to track linked files across multiple projects when determining contexts.</param>
+        /// <param name="hierarchy">The IVsHierarchy for the project; this is used to track linked files
+        // across multiple projects when determining contexts.</param>
         /// <param name="binOutputPath">Initial project binary output path.</param>
         [Obsolete]
         Task<IWorkspaceProjectContext> CreateProjectContextAsync(
@@ -54,8 +56,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// to match this project's original name.
         /// </param>
         /// <param name="data">Provides access to msbuild evaluation data for the project.</param>
-        /// <param name="hostObject">The IVsHierarchy for the project; this is used to track linked files across multiple projects when determining contexts.</param>
-        /// <exception cref="InvalidOperationException">A required property or item is not present in <see cref="EvaluationData"/> or has invalid value.</exception>
+        /// <param name="hostObject">The IVsHierarchy for the project; this is used to track linked files
+        // across multiple projects when determining contexts.</param>
+        /// <exception cref="InvalidOperationException">A required property or item is not present in <see
+        // cref="EvaluationData"/> or has invalid value.</exception>
         Task<IWorkspaceProjectContext> CreateProjectContextAsync(
             Guid id,
             string uniqueName,
@@ -66,12 +70,15 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         );
 
         /// <summary>
-        /// Names of msbuild properties whose values <see cref="CreateProjectContextAsync(Guid, string, string, EvaluationData, object?, CancellationToken)"/> will receive via <see cref="EvaluationData"/>.
+        /// Names of msbuild properties whose values <see cref="CreateProjectContextAsync(Guid, string,
+        // string, EvaluationData, object?, CancellationToken)"/> will receive via <see
+        // cref="EvaluationData"/>.
         /// </summary>
         ImmutableArray<string> EvaluationPropertyNames { get; }
 
         /// <summary>
-        /// Names of msbuild items whose values <see cref="CreateProjectContextAsync(Guid, string, string, EvaluationData, object?, CancellationToken)"/> will receive via <see cref="EvaluationData"/>.
+        /// Names of msbuild items whose values <see cref="CreateProjectContextAsync(Guid, string, string,
+        // EvaluationData, object?, CancellationToken)"/> will receive via <see cref="EvaluationData"/>.
         /// </summary>
         ImmutableArray<string> EvaluationItemNames { get; }
     }
@@ -85,7 +92,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// Returns empty string if the property is not set.
         /// </returns>
         /// <exception cref="InvalidProjectDataException">
-        /// The <paramref name="name"/> is not listed in <see cref="IWorkspaceProjectContextFactory.EvaluationPropertyNames"/>
+        /// The <paramref name="name"/> is not listed in <see
+        // cref="IWorkspaceProjectContextFactory.EvaluationPropertyNames"/>
         /// </exception>
         public abstract string GetPropertyValue(string name);
 
@@ -96,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
         /// Returns empty array if the items are not set.
         /// </returns>
         /// <exception cref="InvalidProjectDataException">
-        /// The <paramref name="name"/> is not listed in <see cref="IWorkspaceProjectContextFactory.EvaluationItemNames"/>
+        /// The <paramref name="name"/> is not listed in <see
+        // cref="IWorkspaceProjectContextFactory.EvaluationItemNames"/>
         /// </exception>
         public virtual ImmutableArray<string> GetItemValues(string name) =>
             ImmutableArray<string>.Empty;

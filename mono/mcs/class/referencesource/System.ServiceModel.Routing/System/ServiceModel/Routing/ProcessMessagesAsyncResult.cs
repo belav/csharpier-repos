@@ -587,7 +587,8 @@ namespace System.ServiceModel.Routing
                 );
                 if (canRetry && !this.abortedRetry)
                 {
-                    //No session and ReceiveContext or non transactional, retry the message 1 time (before moving to backup)
+                    //No session and ReceiveContext or non transactional, retry the message 1 time (before moving to
+                    // backup)
                     this.abortedRetry = true;
                     this.ResetState();
                     return true;
@@ -610,7 +611,8 @@ namespace System.ServiceModel.Routing
                 // The service may have been stopped and restarted without the routing service knowledge.
                 // When we try to use a cached channel to the service, the channel can fault due to this exception
                 // The faulted channel gets cleaned up and we retry one more time only when service has backup
-                // If there is no backup, we do not retry since we do not create a buffered message to prevent performance degradation
+                // If there is no backup, we do not retry since we do not create a buffered message to prevent
+                // performance degradation
                 if (!this.abortedRetry && (sendOperation.AlternateEndpointCount > 0))
                 {
                     this.abortedRetry = true;
@@ -639,7 +641,8 @@ namespace System.ServiceModel.Routing
                 // store this exception for when we complete, but continue any multicasting
                 this.service.SessionException = e;
 
-                // Mark the SendOperation as 'Sent' because there's no more work we can do (non-tx and no more backups)
+                // Mark the SendOperation as 'Sent' because there's no more work we can do (non-tx and no more
+                // backups)
                 sendOperation.TransmitSucceeded(null);
 
                 if (this.channelExtension.HasSession)

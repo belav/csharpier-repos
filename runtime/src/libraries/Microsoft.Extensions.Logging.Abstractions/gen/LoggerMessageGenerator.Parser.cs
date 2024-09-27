@@ -90,7 +90,8 @@ namespace Microsoft.Extensions.Logging.Generators
                 var eventIds = new HashSet<int>();
                 var eventNames = new HashSet<string>();
 
-                // we enumerate by syntax tree, to minimize the need to instantiate semantic models (since they're expensive)
+                // we enumerate by syntax tree, to minimize the need to instantiate semantic models (since they're
+                // expensive)
                 foreach (
                     IGrouping<SyntaxTree, ClassDeclarationSyntax> group in classes.GroupBy(x =>
                         x.SyntaxTree
@@ -624,7 +625,8 @@ namespace Microsoft.Extensions.Logging.Generators
 
                                         if (paramName[0] == '_')
                                         {
-                                            // can't have logging method parameter names that start with _ since that can lead to conflicting symbol names
+                                            // can't have logging method parameter names that start with _ since that can lead to conflicting
+                                            // symbol names
                                             // because all generated symbols start with _
                                             Diag(
                                                 DiagnosticDescriptors.InvalidLoggingMethodParameterName,
@@ -1011,7 +1013,8 @@ namespace Microsoft.Extensions.Logging.Generators
             /// </summary>
             /// <remarks> The search skips any sequences of {{ or }}.</remarks>
             /// <example>{{prefix{{{Argument}}}suffix}}</example>
-            /// <returns>The zero-based index position of the first occurrence of the searched brace; -1 if the searched brace was not found; -2 if the wrong brace was found.</returns>
+            /// <returns>The zero-based index position of the first occurrence of the searched brace; -1 if the
+            // searched brace was not found; -2 if the wrong brace was found.</returns>
             private static int FindBraceIndex(
                 string message,
                 char searchedBrace,
@@ -1132,7 +1135,8 @@ namespace Microsoft.Extensions.Logging.Generators
             public bool IsLogLevel;
             public bool IsEnumerable;
 
-            // A parameter flagged as IsTemplateParameter is not going to be taken care of specially as an argument to ILogger.Log
+            // A parameter flagged as IsTemplateParameter is not going to be taken care of specially as an
+            // argument to ILogger.Log
             // but instead is supposed to be taken as a parameter for the template.
             public bool IsTemplateParameter => !IsLogger && !IsException && !IsLogLevel;
         }

@@ -147,7 +147,8 @@ namespace Interop
             [MarshalAs(UnmanagedType.LPWStr)] string v3
         );
         void CurrencyParameter([In, MarshalAs(UnmanagedType.Currency)] decimal v1);
-        // int MixedAttrMethod([In] [ComAliasName(stdole.OLE_COLOR)]uint v1, [In][Out][MarshalAs(UnmanagedType.I4)] ref int v2);
+        // int MixedAttrMethod([In] [ComAliasName(stdole.OLE_COLOR)]uint v1,
+        // [In][Out][MarshalAs(UnmanagedType.I4)] ref int v2);
     }
 
     [

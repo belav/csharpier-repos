@@ -28,8 +28,10 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// Wait until workspace is fully loaded
         ///
-        /// unfortunately, some hosts, such as VS, use services (ex, IVsOperationProgressStatusService) that require UI thread to let project system to proceed to next stages.
-        /// what that means is that this method should only be used with either await or JTF.Run, it should be never used with Task.Wait otherwise, it can
+        /// unfortunately, some hosts, such as VS, use services (ex, IVsOperationProgressStatusService) that
+        // require UI thread to let project system to proceed to next stages.
+        /// what that means is that this method should only be used with either await or JTF.Run, it should
+        // be never used with Task.Wait otherwise, it can
         /// deadlock
         /// </summary>
         Task WaitUntilFullyLoadedAsync(CancellationToken cancellationToken);
@@ -37,9 +39,12 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// Indicates whether workspace is fully loaded
         /// <para>
-        /// Unfortunately, some hosts, such as VS, use services (ex, IVsOperationProgressStatusService) that require UI
-        /// thread to let project system to proceed to next stages. what that means is that this method should only be
-        /// used with either await or JTF.Run, it should be never used with Task.Wait otherwise, it can deadlock.
+        /// Unfortunately, some hosts, such as VS, use services (ex, IVsOperationProgressStatusService) that
+        // require UI
+        /// thread to let project system to proceed to next stages. what that means is that this method
+        // should only be
+        /// used with either await or JTF.Run, it should be never used with Task.Wait otherwise, it can
+        // deadlock.
         /// </para>
         /// </summary>
         Task<bool> IsFullyLoadedAsync(CancellationToken cancellationToken);

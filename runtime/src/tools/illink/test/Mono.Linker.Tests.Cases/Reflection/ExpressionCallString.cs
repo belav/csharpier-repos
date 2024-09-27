@@ -56,7 +56,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
             {
                 Expression.Call(typeof(PublicMethods), nameof(PublicStaticMethod), Type.EmptyTypes);
 
-                // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
+                // This should not mark anything, but it should also not warn (it should fail at runtime to find the
+                // method as well)
                 Expression.Call(
                     typeof(PublicMethods),
                     nameof(PublicInstanceMethod),
@@ -90,7 +91,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     Type.EmptyTypes
                 );
 
-                // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
+                // This should not mark anything, but it should also not warn (it should fail at runtime to find the
+                // method as well)
                 Expression.Call(
                     typeof(ProtectedMethods),
                     nameof(ProtectedInstanceMethod),
@@ -124,7 +126,8 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     Type.EmptyTypes
                 );
 
-                // This should not mark anything, but it should also not warn (it should fail at runtime to find the method as well)
+                // This should not mark anything, but it should also not warn (it should fail at runtime to find the
+                // method as well)
                 Expression.Call(
                     typeof(PrivateMethods),
                     nameof(PrivateInstanceMethod),
@@ -277,8 +280,10 @@ namespace Mono.Linker.Tests.Cases.Reflection
             [Kept]
             static void TestWithNoTypeParameters()
             {
-                // ILLink should not warn even if the type parameters don't match since the target method has no requirements
-                // the fact that the reflection API may fail in this case is not something ILLink should worry about.
+                // ILLink should not warn even if the type parameters don't match since the target method has no
+                // requirements
+                // the fact that the reflection API may fail in this case is not something ILLink should worry
+                // about.
                 Expression.Call(
                     typeof(TestGenericMethods),
                     nameof(GenericMethodCalledAsNonGeneric),

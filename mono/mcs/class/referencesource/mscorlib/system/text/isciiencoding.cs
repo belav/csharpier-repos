@@ -24,7 +24,8 @@ namespace System.Text
     // ASCII range to provide ASCII compatibility.
     //
     // IsAlwaysNormalized() isn't overridden
-    // We don't override IsAlwaysNormalized() because it is false for all forms (like base implimentation)
+    // We don't override IsAlwaysNormalized() because it is false for all forms (like base
+    // implimentation)
     //      Forms C & KC have things like 0933 + 093C == composed 0934, so they aren't normalized
     //      Forms D & KD have things like 0934, which decomposes to 0933 + 093C, so not normal.
     //      Form IDNA has the above problems plus case mapping, so false (like most encodings)
@@ -141,7 +142,8 @@ namespace System.Text
             if (EncoderFallback.MaxCharCount > 1)
                 byteCount *= EncoderFallback.MaxCharCount;
 
-            // 4 Time input because 1st input could require code page change and also that char could require 2 code points
+            // 4 Time input because 1st input could require code page change and also that char could require 2
+            // code points
             byteCount *= 4;
 
             if (byteCount > 0x7fffffff)
@@ -794,7 +796,8 @@ namespace System.Text
             // of last ATR, LastNoNextNukta and LastDevenagariExt.
             if (decoder == null || decoder.MustFlush)
             {
-                // If these fail (because of Convert with insufficient buffer), then they'll turn off MustFlush as well.
+                // If these fail (because of Convert with insufficient buffer), then they'll turn off MustFlush as
+                // well.
                 if (bLastATR)
                 {
                     // Have to add ATR fallback
@@ -908,7 +911,8 @@ namespace System.Text
             }
 
             // Warning: If you're decoding mixed encoding files or something, this could be confusing
-            //          We don't always force back to base encoding mapping, so if you reset where do you restart?
+            //          We don't always force back to base encoding mapping, so if you reset where do you
+            // restart?
             public override void Reset()
             {
                 bLastVirama = false;
@@ -918,7 +922,8 @@ namespace System.Text
             }
 
             // Anything left in our encoder?
-            // Encoder not only has to get rid of left over characters, but it has to switch back to the current code page.
+            // Encoder not only has to get rid of left over characters, but it has to switch back to the current
+            // code page.
             internal override bool HasState
             {
                 get
@@ -950,7 +955,8 @@ namespace System.Text
             }
 
             // Warning: If you're decoding mixed encoding files or something, this could be confusing
-            //          We don't always force back to base encoding mapping, so if you reset where do you restart?
+            //          We don't always force back to base encoding mapping, so if you reset where do you
+            // restart?
             public override void Reset()
             {
                 bLastATR = false;

@@ -286,7 +286,8 @@ internal sealed class ExceptionHandlerMiddlewareImpl
     {
         context.Response.Clear();
 
-        // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we need to reset
+        // An endpoint may have already been set. Since we're going to re-invoke the middleware pipeline we
+        // need to reset
         // the endpoint and route values to ensure things are re-calculated.
         context.SetEndpoint(endpoint: null);
         var routeValuesFeature = context.Features.Get<IRouteValuesFeature>();

@@ -40,8 +40,10 @@ namespace Internal.Runtime.InteropServices
         }
 
         // The call to `LoadInMemoryAssemblyInContextImpl` will produce a warning IL2026.
-        // It is intentionally left in the product, so developers get a warning when trimming an app which enabled `Internal.Runtime.InteropServices.InMemoryAssemblyLoader.IsSupported`.
-        // For runtime build the warning is suppressed in the ILLink.Suppressions.LibraryBuild.xml, but we only want to suppress it if the feature is enabled (IsSupported is true).
+        // It is intentionally left in the product, so developers get a warning when trimming an app which
+        // enabled `Internal.Runtime.InteropServices.InMemoryAssemblyLoader.IsSupported`.
+        // For runtime build the warning is suppressed in the ILLink.Suppressions.LibraryBuild.xml, but we
+        // only want to suppress it if the feature is enabled (IsSupported is true).
         // The call is extracted into a separate method which is the sole target of the suppression.
         private static unsafe void LoadInMemoryAssemblyInContextWhenSupported(
             IntPtr moduleHandle,
@@ -54,7 +56,8 @@ namespace Internal.Runtime.InteropServices
         }
 
         /// <summary>
-        /// Loads into an assembly that has already been loaded into memory by the OS loader as a native module
+        /// Loads into an assembly that has already been loaded into memory by the OS loader as a native
+        // module
         /// into the specified load context.
         /// </summary>
         /// <param name="moduleHandle">The native module handle for the assembly.</param>
@@ -98,8 +101,10 @@ namespace Internal.Runtime.InteropServices
             if (assemblyPathString == null)
                 throw new ArgumentOutOfRangeException(nameof(assemblyPath));
 
-            // We don't cache the ALCs or resolvers here since each IJW assembly will call this method at most once
-            // (the load process rewrites the stubs that call here to call the actual methods they're supposed to)
+            // We don't cache the ALCs or resolvers here since each IJW assembly will call this method at most
+            // once
+            // (the load process rewrites the stubs that call here to call the actual methods they're supposed
+            // to)
             if (alc is null)
             {
                 alc = new IsolatedComponentLoadContext(assemblyPathString);

@@ -17,7 +17,8 @@ namespace System.Xml.Xsl.Qil
     /// </summary>
     /// <remarks>
     /// Don't construct QIL nodes directly; instead, use the <see cref="QilFactory">QilFactory</see>.
-    /// This base internal class is not abstract and may be instantiated in some cases (for example, true/false boolean literals).
+    /// This base internal class is not abstract and may be instantiated in some cases (for example,
+    // true/false boolean literals).
     /// </remarks>
     internal class QilNode : IList<QilNode>
     {

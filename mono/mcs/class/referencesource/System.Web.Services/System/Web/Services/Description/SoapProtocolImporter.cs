@@ -354,7 +354,8 @@ namespace System.Web.Services.Description
         ArrayList codeClasses = new ArrayList();
         static TypedDataSetSchemaImporterExtension typedDataSetSchemaImporterExtension;
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.ProtocolName"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.ProtocolName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -363,7 +364,8 @@ namespace System.Web.Services.Description
             get { return "Soap"; }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.SoapBinding"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.SoapBinding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -372,7 +374,8 @@ namespace System.Web.Services.Description
             get { return soapBinding; }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.SoapImporter"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.SoapImporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -381,7 +384,8 @@ namespace System.Web.Services.Description
             get { return soapImporter; }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.XmlImporter"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.XmlImporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -390,7 +394,8 @@ namespace System.Web.Services.Description
             get { return xmlImporter; }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.XmlExporter"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.XmlExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -399,7 +404,8 @@ namespace System.Web.Services.Description
             get { return xmlExporter; }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.SoapExporter"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.SoapExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -420,7 +426,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.BeginNamespace"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.BeginNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -478,13 +485,15 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.EndNamespace"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.EndNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         protected override void EndNamespace()
         {
-            // need to preprocess all exported schemas to make sure that IXmlSerializable schemas are Merged and the resulting set is valid
+            // need to preprocess all exported schemas to make sure that IXmlSerializable schemas are Merged and
+            // the resulting set is valid
             ConcreteSchemas.Compile(null, false);
 
             foreach (GlobalSoapHeader soapHeader in headers.Values)
@@ -523,7 +532,8 @@ namespace System.Web.Services.Description
             CodeGenerator.ValidateIdentifiers(CodeNamespace);
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.IsBindingSupported"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.IsBindingSupported"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -560,7 +570,8 @@ namespace System.Web.Services.Description
             return null;
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.BeginClass"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.BeginClass"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -652,7 +663,8 @@ namespace System.Web.Services.Description
             return codeClass;
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.EndClass"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.EndClass"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -663,7 +675,8 @@ namespace System.Web.Services.Description
             soapBinding = null;
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.IsOperationFlowSupported"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.IsOperationFlowSupported"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -942,7 +955,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.GenerateMethod"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.GenerateMethod"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1602,7 +1616,8 @@ namespace System.Web.Services.Description
 
                     if (ExportContext[methodKey] == null)
                     {
-                        // public delegate void xxxCompletedEventHandler(object sender, System.ComponentModel.AsyncCompletedEventArgs args);
+                        // public delegate void xxxCompletedEventHandler(object sender,
+                        // System.ComponentModel.AsyncCompletedEventArgs args);
                         WebCodeGenerator.AddDelegate(
                             ExtraCodeClasses,
                             delegateInfo.handlerType,
@@ -1747,7 +1762,8 @@ namespace System.Web.Services.Description
             invokeParams[1] = new CodeArrayCreateExpression(typeof(object).FullName, values);
         }
 
-        // returns false if we didn't like the message -- otherwise caller is safe to use body binding and binding style
+        // returns false if we didn't like the message -- otherwise caller is safe to use body binding and
+        // binding style
         bool CheckMessageStyles(
             string messageName,
             MessagePart[] parts,
@@ -1871,7 +1887,8 @@ namespace System.Web.Services.Description
             return false;
         }
 
-        /// <include file='doc\SoapProtocolImporter.uex' path='docs/doc[@for="SoapProtocolImporter.IsSoapEncodingPresent"]/*' />
+        /// <include file='doc\SoapProtocolImporter.uex'
+        // path='docs/doc[@for="SoapProtocolImporter.IsSoapEncodingPresent"]/*' />
         /// <internalonly/>
         protected virtual bool IsSoapEncodingPresent(string uriList)
         {

@@ -173,7 +173,8 @@ public class ResponseResetTests
         resetReceived.SetResult();
     }
 
-    // TODO: Reset after CompleteAsync - Not sure how to surface this. CompleteAsync hasn't been implemented yet anyways.
+    // TODO: Reset after CompleteAsync - Not sure how to surface this. CompleteAsync hasn't been
+    // implemented yet anyways.
 
     private Task<IHost> CreateHost(RequestDelegate appDelegate)
     {

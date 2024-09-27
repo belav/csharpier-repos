@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     /// <summary>
-    /// The exception that is thrown when a method requires the caller to own the lock on a given Monitor, and the method is invoked by a caller that does not own that lock.
+    /// The exception that is thrown when a method requires the caller to own the lock on a given
+    // Monitor, and the method is invoked by a caller that does not own that lock.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

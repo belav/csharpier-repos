@@ -13,12 +13,12 @@ namespace Mono.Debugger.Soft
         Location location;
         StackFrameFlags flags;
 
-        /*
-         * FIXME: Decide on the way to request/handle debugging information:
-         * - request the info in bulk for all frames/on demand for individual frames
-         * - request the info from the runtime/request only the il offset, and compute
-         *   everything else based on this info using the method debug info.
-         */
+/*
+* FIXME: Decide on the way to request/handle debugging information:
+* - request the info in bulk for all frames/on demand for individual frames
+* - request the info from the runtime/request only the il offset, and compute
+*   everything else based on this info using the method debug info.
+*/
 
         internal StackFrame(
             VirtualMachine vm,
@@ -154,10 +154,10 @@ namespace Mono.Debugger.Soft
             get { return (flags & StackFrameFlags.DEBUGGER_INVOKE) != 0; }
         }
 
-        /*
-         * Whenever this frame transitions to native code. The method associated
-         * with the frame is either an InternalCall or a pinvoke method.
-         */
+/*
+* Whenever this frame transitions to native code. The method associated
+* with the frame is either an InternalCall or a pinvoke method.
+*/
         public bool IsNativeTransition
         {
             get { return (flags & StackFrameFlags.NATIVE_TRANSITION) != 0; }

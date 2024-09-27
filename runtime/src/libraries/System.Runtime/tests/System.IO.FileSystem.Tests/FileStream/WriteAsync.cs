@@ -187,11 +187,13 @@ namespace System.IO.Tests
                 await WriteAsync(fs, TestBuffer, 0, 2);
                 Assert.True(fs.Length == 8);
 
-                // Overflow buffer with amount that could fit in a buffer; should trigger a flush, with additional I/O
+                // Overflow buffer with amount that could fit in a buffer; should trigger a flush, with additional
+                // I/O
                 await WriteAsync(fs, TestBuffer, 0, 2);
                 Assert.True(fs.Length == 10);
 
-                // Overflow buffer with amount that couldn't fit in a buffer; shouldn't be anything to flush, just an additional I/O
+                // Overflow buffer with amount that couldn't fit in a buffer; shouldn't be anything to flush, just
+                // an additional I/O
                 await WriteAsync(fs, TestBuffer, 0, 4);
                 Assert.True(fs.Length == 14);
             }
@@ -403,7 +405,8 @@ namespace System.IO.Tests
             Random rand = new Random();
             DateTime testStartTime = DateTime.UtcNow;
 
-            // Generate data to write (NOTE: Randomizing this is important as some file systems may optimize writing 0s)
+            // Generate data to write (NOTE: Randomizing this is important as some file systems may optimize
+            // writing 0s)
             byte[] dataToWrite = new byte[MaximumWriteSize];
             rand.NextBytes(dataToWrite);
 

@@ -107,7 +107,8 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (10,21): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (10,21): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         new C(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
@@ -204,7 +205,8 @@ public class C
                 references: new[] { TestMetadata.Net40.SystemCore }
             );
             comp.VerifyDiagnostics(
-                // (14,19): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (14,19): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         c.M(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
@@ -244,12 +246,14 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (16,26): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (16,26): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         c.e.Invoke(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
                     .WithLocation(16, 26),
-                // (17,19): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (17,19): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         c.e(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
@@ -284,7 +288,8 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (7,21): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (7,21): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         local(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
@@ -327,12 +332,14 @@ class C
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (19,21): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (19,21): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         _ = c[a: 1, 2];
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
                     .WithLocation(19, 21),
-                // (20,17): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (20,17): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         c[a: 3, 4] = 5;
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "4")
                     .WithArguments("7.2")
@@ -368,17 +375,20 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_2);
             comp.VerifyDiagnostics(
-                // (16,23): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed argument
+                // (16,23): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed
+                // argument
                 //         var c = new C(b: 1, 2);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "b")
                     .WithArguments("b")
                     .WithLocation(16, 23),
-                // (17,15): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed argument
+                // (17,15): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed
+                // argument
                 //         _ = c[b: 1, 2];
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "b")
                     .WithArguments("b")
                     .WithLocation(17, 15),
-                // (18,15): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed argument
+                // (18,15): error CS8322: Named argument 'b' is used out-of-position but is followed by an unnamed
+                // argument
                 //         local(b: 1, 2);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "b")
                     .WithArguments("b")
@@ -445,7 +455,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (10,14): error CS1744: Named argument 'first' specifies a parameter for which a positional argument has already been given
+                // (10,14): error CS1744: Named argument 'first' specifies a parameter for which a positional
+                // argument has already been given
                 //         M(1, first: 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "first")
                     .WithArguments("first")
@@ -512,7 +523,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (10,11): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed argument
+                // (10,11): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(c: 1, 2);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "c")
                     .WithArguments("c")
@@ -581,7 +593,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,14): error CS1744: Named argument 'x' specifies a parameter for which a positional argument has already been given
+                // (9,14): error CS1744: Named argument 'x' specifies a parameter for which a positional argument
+                // has already been given
                 //         M(1, x: 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "x")
                     .WithArguments("x")
@@ -674,12 +687,14 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (9,23): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (9,23): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         M(x: 1, x: 2, 3);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "3")
                     .WithArguments("7.2")
                     .WithLocation(9, 23),
-                // (9,17): error CS8323: Named argument 'x' is used out-of-position but is followed by an unnamed argument
+                // (9,17): error CS8323: Named argument 'x' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(x: 1, x: 2, 3);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "x")
                     .WithArguments("x")
@@ -711,7 +726,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,11): error CS8321: Named argument 'y' is used out-of-position but is followed by an unnamed argument
+                // (9,11): error CS8321: Named argument 'y' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(y: 1, 2);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "y")
                     .WithArguments("y")
@@ -836,7 +852,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,11): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed argument
+                // (11,11): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(c: valueC, valueB);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "c")
                     .WithArguments("c")
@@ -965,7 +982,8 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_2);
             comp.VerifyDiagnostics(
-                // (7,19): error CS8323: Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation.
+                // (7,19): error CS8323: Named argument specifications must appear after all fixed arguments have
+                // been specified in a dynamic invocation.
                 //         d.M(a: 1, 2);
                 Diagnostic(
                         ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
@@ -976,7 +994,8 @@ class C
 
             var comp2 = CreateCompilation(source, parseOptions: TestOptions.Regular7);
             comp2.VerifyDiagnostics(
-                // (7,19): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (7,19): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 //         d.M(a: 1, 2);
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "2")
                     .WithArguments("7.2")
@@ -1000,12 +1019,14 @@ class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_2);
             comp.VerifyDiagnostics(
-                // (7,9): error CS8108: Cannot pass argument with dynamic type to params parameter 'y' of local function 'local'.
+                // (7,9): error CS8108: Cannot pass argument with dynamic type to params parameter 'y' of local
+                // function 'local'.
                 //         local(x: 1, d);
                 Diagnostic(ErrorCode.ERR_DynamicLocalFunctionParamsParameter, "local(x: 1, d)")
                     .WithArguments("y", "local")
                     .WithLocation(7, 9),
-                // (7,21): error CS8323: Named argument specifications must appear after all fixed arguments have been specified in a dynamic invocation.
+                // (7,21): error CS8323: Named argument specifications must appear after all fixed arguments have
+                // been specified in a dynamic invocation.
                 //         local(x: 1, d);
                 Diagnostic(
                         ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgumentInDynamicInvocation,
@@ -1057,7 +1078,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (9,11): error CS8321: Named argument 'b' is used out-of-position but is followed by an unnamed argument
+                // (9,11): error CS8321: Named argument 'b' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(b: 2, 3, 4);
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "b")
                     .WithArguments("b")
@@ -1110,7 +1132,8 @@ public class C
                 // (12,38): error CS1016: Named attribute argument expected
                 // [MyAttribute(condition: true, P = 1, 42)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentExpected, "42").WithLocation(12, 38),
-                // (13,18): error CS1744: Named argument 'condition' specifies a parameter for which a positional argument has already been given
+                // (13,18): error CS1744: Named argument 'condition' specifies a parameter for which a positional
+                // argument has already been given
                 // [MyAttribute(42, condition: true)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "condition")
                     .WithArguments("condition")
@@ -1150,7 +1173,8 @@ public class C
 }";
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular7_1);
             comp.VerifyDiagnostics(
-                // (11,31): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (11,31): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 // [MyAttribute(condition: true, 42)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "42")
                     .WithArguments("7.2")
@@ -1158,12 +1182,14 @@ public class C
                 // (12,38): error CS1016: Named attribute argument expected
                 // [MyAttribute(condition: true, P = 1, 42)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentExpected, "42").WithLocation(12, 38),
-                // (12,38): error CS1738: Named argument specifications must appear after all fixed arguments have been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
+                // (12,38): error CS1738: Named argument specifications must appear after all fixed arguments have
+                // been specified. Please use language version 7.2 or greater to allow non-trailing named arguments.
                 // [MyAttribute(condition: true, P = 1, 42)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentSpecificationBeforeFixedArgument, "42")
                     .WithArguments("7.2")
                     .WithLocation(12, 38),
-                // (13,18): error CS1744: Named argument 'condition' specifies a parameter for which a positional argument has already been given
+                // (13,18): error CS1744: Named argument 'condition' specifies a parameter for which a positional
+                // argument has already been given
                 // [MyAttribute(42, condition: true)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentUsedInPositional, "condition")
                     .WithArguments("condition")
@@ -1192,7 +1218,8 @@ public class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (11,14): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed argument
+                // (11,14): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed
+                // argument
                 // [MyAttribute(c:3, 2)]
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "c")
                     .WithArguments("c")
@@ -1203,7 +1230,8 @@ public class C
                 // (12,24): error CS1016: Named attribute argument expected
                 // [MyAttribute(P=1, c:3, 2)]
                 Diagnostic(ErrorCode.ERR_NamedArgumentExpected, "2").WithLocation(12, 24),
-                // (12,19): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed argument
+                // (12,19): error CS8321: Named argument 'c' is used out-of-position but is followed by an unnamed
+                // argument
                 // [MyAttribute(P=1, c:3, 2)]
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "c")
                     .WithArguments("c")
@@ -1306,7 +1334,8 @@ class C
 }";
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (6,11): error CS8322: Named argument 'y' is used out-of-position but is followed by an unnamed argument
+                // (6,11): error CS8322: Named argument 'y' is used out-of-position but is followed by an unnamed
+                // argument
                 //         M(y: 1, x: 2, __arglist(3));
                 Diagnostic(ErrorCode.ERR_BadNonTrailingNamedArgument, "y")
                     .WithArguments("y")

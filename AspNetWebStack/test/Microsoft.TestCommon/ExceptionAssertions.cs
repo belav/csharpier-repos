@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System;
 using System.ComponentModel;
@@ -26,7 +27,8 @@ namespace Microsoft.TestCommon
         /// <typeparam name="T">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static new T Throws<T>(Action testCode)
             where T : Exception
         {
@@ -40,7 +42,8 @@ namespace Microsoft.TestCommon
         /// <typeparam name="T">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static new T Throws<T>(Func<object> testCode)
             where T : Exception
         {
@@ -53,7 +56,8 @@ namespace Microsoft.TestCommon
         /// <param name="exceptionType">The type of the exception expected to be thrown</param>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static new Exception Throws(Type exceptionType, Action testCode)
         {
             Exception exception = RecordException(testCode);
@@ -67,7 +71,8 @@ namespace Microsoft.TestCommon
         /// <param name="exceptionType">The type of the exception expected to be thrown</param>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static new Exception Throws(Type exceptionType, Func<object> testCode)
         {
             return Throws(
@@ -84,9 +89,11 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static TException Throws<TException>(Action testCode, bool allowDerivedExceptions)
             where TException : Exception
         {
@@ -122,9 +129,11 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static TException Throws<TException>(
             Func<object> testCode,
             bool allowDerivedExceptions
@@ -147,9 +156,11 @@ namespace Microsoft.TestCommon
         /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="exceptionMessage">The exception message to verify</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static TException Throws<TException>(
             Action testCode,
             string exceptionMessage,
@@ -169,9 +180,11 @@ namespace Microsoft.TestCommon
         /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="exceptionMessage">The exception message to verify</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static TException Throws<TException>(
             Func<object> testCode,
             string exceptionMessage,
@@ -190,13 +203,16 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentException"/> (or optionally any exception which derives from it).
+        /// Verifies that the code throws an <see cref="ArgumentException"/> (or optionally any exception
+        // which derives from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsArgument(
             Action testCode,
             string paramName,
@@ -218,7 +234,8 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested.</param>
         /// <param name="paramName">The name of the parameter that should throw the exception.</param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static async Task<ArgumentException> ThrowsArgumentAsync(
             Func<Task> testCode,
             string paramName
@@ -234,14 +251,17 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentException"/> (or optionally any exception which derives from it).
+        /// Verifies that the code throws an <see cref="ArgumentException"/> (or optionally any exception
+        // which derives from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <param name="exceptionMessage">The exception message to verify</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsArgument(
             Action testCode,
             string paramName,
@@ -266,8 +286,10 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested.</param>
         /// <param name="paramName">The name of the parameter that should throw the exception.</param>
-        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected message).</param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected
+        // message).</param>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static async Task<ArgumentException> ThrowsArgumentAsync(
             Func<Task> testCode,
             string paramName,
@@ -281,13 +303,16 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an ArgumentException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an ArgumentException (or optionally any exception which derives
+        // from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsArgument(
             Func<object> testCode,
             string paramName,
@@ -305,12 +330,14 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an ArgumentNullException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an ArgumentNullException (or optionally any exception which
+        // derives from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentNullException ThrowsArgumentNull(Action testCode, string paramName)
         {
             var ex = Throws<ArgumentNullException>(testCode, allowDerivedExceptions: false);
@@ -328,7 +355,8 @@ namespace Microsoft.TestCommon
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested.</param>
         /// <param name="paramName">The name of the parameter that should throw the exception.</param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static async Task<ArgumentNullException> ThrowsArgumentNullAsync(
             Func<Task> testCode,
             string paramName
@@ -344,13 +372,15 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an ArgumentNullException with the expected message that indicates that the value cannot
+        /// Verifies that the code throws an ArgumentNullException with the expected message that indicates
+        // that the value cannot
         /// be null or empty.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsArgumentNullOrEmpty(Action testCode, string paramName)
         {
             return Throws<ArgumentException>(
@@ -361,13 +391,15 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an ArgumentNullException with the expected message that indicates that the value cannot
+        /// Verifies that the code throws an ArgumentNullException with the expected message that indicates
+        // that the value cannot
         /// be null or empty string.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsArgumentNullOrEmptyString(
             Action testCode,
             string paramName
@@ -382,15 +414,18 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an ArgumentOutOfRangeException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an ArgumentOutOfRangeException (or optionally any exception which
+        // derives from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <param name="exceptionMessage">The exception message to verify</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <param name="actualValue">The actual value provided</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentOutOfRangeException ThrowsArgumentOutOfRange(
             Action testCode,
             string paramName,
@@ -427,13 +462,16 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the <paramref name="testCode"/> throws an <see cref="ArgumentOutOfRangeException"/>.
+        /// Verifies that the <paramref name="testCode"/> throws an <see
+        // cref="ArgumentOutOfRangeException"/>.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested.</param>
         /// <param name="paramName">The name of the parameter that should throw the exception.</param>
-        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected message).</param>
+        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected
+        // message).</param>
         /// <param name="actualValue">The actual value passed in for <paramref name="paramName"/>.</param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static async Task<ArgumentOutOfRangeException> ThrowsArgumentOutOfRangeAsync(
             Func<Task> testCode,
             string paramName,
@@ -468,7 +506,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected message that indicates that
+        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected
+        // message that indicates that
         /// the value must be greater than the given <paramref name="value"/>.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
@@ -476,7 +515,8 @@ namespace Microsoft.TestCommon
         /// <param name="actualValue">The actual value provided.</param>
         /// <param name="value">The expected limit value.</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentOutOfRangeException ThrowsArgumentGreaterThan(
             Action testCode,
             string paramName,
@@ -498,14 +538,16 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected message that indicates that
+        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected
+        // message that indicates that
         /// the value must be greater than or equal to the given value.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <param name="value">The expected limit value.</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentOutOfRangeException ThrowsArgumentGreaterThanOrEqualTo(
             Action testCode,
             string paramName,
@@ -527,13 +569,15 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the <paramref name="testCode"/> throws an <see cref="ArgumentOutOfRangeException"/>.
+        /// Verifies that the <paramref name="testCode"/> throws an <see
+        // cref="ArgumentOutOfRangeException"/>.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested.</param>
         /// <param name="paramName">The name of the parameter that should throw the exception.</param>
         /// <param name="value">The minimum allowed value for <paramref name="paramName"/>.</param>
         /// <param name="actualValue">The actual value passed in for <paramref name="paramName"/>.</param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static Task<ArgumentOutOfRangeException> ThrowsArgumentGreaterThanOrEqualToAsync(
             Func<Task> testCode,
             string paramName,
@@ -554,7 +598,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected message that indicates that
+        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected
+        // message that indicates that
         /// the value must be less than the given <paramref name="maxValue"/>.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
@@ -562,7 +607,8 @@ namespace Microsoft.TestCommon
         /// <param name="actualValue">The actual value provided.</param>
         /// <param name="maxValue">The expected limit value.</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentOutOfRangeException ThrowsArgumentLessThan(
             Action testCode,
             string paramName,
@@ -584,7 +630,8 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected message that indicates that
+        /// Verifies that the code throws an <see cref="ArgumentOutOfRangeException"/> with the expected
+        // message that indicates that
         /// the value must be less than or equal to the given <paramref name="maxValue"/>.
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
@@ -592,7 +639,8 @@ namespace Microsoft.TestCommon
         /// <param name="actualValue">The actual value provided.</param>
         /// <param name="maxValue">The expected limit value.</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentOutOfRangeException ThrowsArgumentLessThanOrEqualTo(
             Action testCode,
             string paramName,
@@ -615,14 +663,17 @@ namespace Microsoft.TestCommon
 
 #if !NETCOREAPP
         /// <summary>
-        /// Verifies that the code throws an HttpException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an HttpException (or optionally any exception which derives from
+        // it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="exceptionMessage">The exception message to verify</param>
         /// <param name="httpCode">The expected HTTP status code of the exception</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static HttpException ThrowsHttpException(
             Action testCode,
             string exceptionMessage,
@@ -637,15 +688,18 @@ namespace Microsoft.TestCommon
 #endif
 
         /// <summary>
-        /// Verifies that the code throws an InvalidEnumArgumentException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an InvalidEnumArgumentException (or optionally any exception which
+        // derives from it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="paramName">The name of the parameter that should throw the exception</param>
         /// <param name="invalidValue">The expected invalid value that should appear in the message</param>
         /// <param name="enumType">The type of the enumeration</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ArgumentException ThrowsInvalidEnumArgument(
             Action testCode,
             string paramName,
@@ -675,13 +729,16 @@ namespace Microsoft.TestCommon
         }
 
         /// <summary>
-        /// Verifies that the code throws an HttpException (or optionally any exception which derives from it).
+        /// Verifies that the code throws an HttpException (or optionally any exception which derives from
+        // it).
         /// </summary>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <param name="objectName">The name of the object that was dispose</param>
-        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException; pass false, otherwise</param>
+        /// <param name="allowDerivedExceptions">Pass true to allow exceptions which derive from TException;
+        // pass false, otherwise</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         public static ObjectDisposedException ThrowsObjectDisposed(
             Action testCode,
             string objectName,
@@ -704,9 +761,11 @@ namespace Microsoft.TestCommon
         /// <typeparam name="TException">The type of the exception expected to be thrown</typeparam>
         /// <param name="testCode">A delegate to the code to be tested</param>
         /// <returns>The exception that was thrown, when successful</returns>
-        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception of the incorrect type is thrown</exception>
+        /// <exception cref="ThrowsException">Thrown when an exception was not thrown, or when an exception
+        // of the incorrect type is thrown</exception>
         /// <remarks>
-        /// Unlike other Throws* methods, this method does not enforce running the exception delegate with a known Thread Culture.
+        /// Unlike other Throws* methods, this method does not enforce running the exception delegate with a
+        // known Thread Culture.
         /// </remarks>
         public static new async Task<TException> ThrowsAsync<TException>(Func<Task> testCode)
             where TException : Exception
@@ -714,8 +773,10 @@ namespace Microsoft.TestCommon
             Exception exception = null;
             try
             {
-                // The 'testCode' Task might execute asynchronously in a different thread making it hard to enforce the thread culture.
-                // The correct way to verify exception messages in such a scenario would be to run the task synchronously inside of a
+                // The 'testCode' Task might execute asynchronously in a different thread making it hard to enforce
+                // the thread culture.
+                // The correct way to verify exception messages in such a scenario would be to run the task
+                // synchronously inside of a
                 // culture enforced block.
                 await testCode();
             }
@@ -730,15 +791,20 @@ namespace Microsoft.TestCommon
         /// <summary>
         /// Verifies that the <paramref name="testCode"/> throws a <typeparamref name="TException"/>.
         /// </summary>
-        /// <typeparam name="TException">The type of <see cref="Exception"/> expected to be thrown.</typeparam>
+        /// <typeparam name="TException">The type of <see cref="Exception"/> expected to be
+        // thrown.</typeparam>
         /// <param name="testCode">A delegate to the code to be tested.</param>
-        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected message).</param>
+        /// <param name="exceptionMessage">The exception message to verify (or a portion of the expected
+        // message).</param>
         /// <param name="partialMatch">
-        /// If <paramref name="exceptionMessage"/> is <c>null</c>, ignores this parameter. Otherwise if this parameter
-        /// is <c>true</c>, verifies the exception message contains <paramref name="exceptionMessage"/>. Otherwise,
+        /// If <paramref name="exceptionMessage"/> is <c>null</c>, ignores this parameter. Otherwise if this
+        // parameter
+        /// is <c>true</c>, verifies the exception message contains <paramref name="exceptionMessage"/>.
+        // Otherwise,
         /// verifies the exception message exactly matches <paramref name="exceptionMessage"/>.
         /// </param>
-        /// <returns>A <see cref="Task"/> that on completion returns the exception that was thrown.</returns>
+        /// <returns>A <see cref="Task"/> that on completion returns the exception that was
+        // thrown.</returns>
         public static async Task<TException> ThrowsAsync<TException>(
             Func<Task> testCode,
             string exceptionMessage,

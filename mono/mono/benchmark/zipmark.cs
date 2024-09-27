@@ -213,40 +213,40 @@ namespace NZlib.Compression
         /// </summary>
         public static int DEFLATED = 8;
 
-        /*
-        * The Deflater can do the following state transitions:
-            *
-            * (1) -> INIT_STATE   ----> INIT_FINISHING_STATE ---.
-            *        /  | (2)      (5)                         |
-            *       /   v          (5)                         |
-            *   (3)| SETDICT_STATE ---> SETDICT_FINISHING_STATE |(3)
-            *       \   | (3)                 |        ,-------'
-            *        |  |                     | (3)   /
-            *        v  v          (5)        v      v
-            * (1) -> BUSY_STATE   ----> FINISHING_STATE
-            *                                | (6)
-            *                                v
-            *                           FINISHED_STATE
-            *    \_____________________________________/
-            *          | (7)
-            *          v
-            *        CLOSED_STATE
-            *
-            * (1) If we should produce a header we start in INIT_STATE, otherwise
-            *     we start in BUSY_STATE.
-            * (2) A dictionary may be set only when we are in INIT_STATE, then
-            *     we change the state as indicated.
-            * (3) Whether a dictionary is set or not, on the first call of deflate
-            *     we change to BUSY_STATE.
-            * (4) -- intentionally left blank -- :)
-            * (5) FINISHING_STATE is entered, when flush() is called to indicate that
-            *     there is no more INPUT.  There are also states indicating, that
-            *     the header wasn't written yet.
-            * (6) FINISHED_STATE is entered, when everything has been flushed to the
-            *     internal pending output buffer.
-            * (7) At any time (7)
-            *
-            */
+/*
+* The Deflater can do the following state transitions:
+*
+* (1) -> INIT_STATE   ----> INIT_FINISHING_STATE ---.
+*        /  | (2)      (5)                         |
+*       /   v          (5)                         |
+*   (3)| SETDICT_STATE ---> SETDICT_FINISHING_STATE |(3)
+*       \   | (3)                 |        ,-------'
+*        |  |                     | (3)   /
+*        v  v          (5)        v      v
+* (1) -> BUSY_STATE   ----> FINISHING_STATE
+*                                | (6)
+*                                v
+*                           FINISHED_STATE
+*    \_____________________________________/
+*          | (7)
+*          v
+*        CLOSED_STATE
+*
+* (1) If we should produce a header we start in INIT_STATE, otherwise
+*     we start in BUSY_STATE.
+* (2) A dictionary may be set only when we are in INIT_STATE, then
+*     we change the state as indicated.
+* (3) Whether a dictionary is set or not, on the first call of deflate
+*     we change to BUSY_STATE.
+* (4) -- intentionally left blank -- :)
+* (5) FINISHING_STATE is entered, when flush() is called to indicate that
+*     there is no more INPUT.  There are also states indicating, that
+*     the header wasn't written yet.
+* (6) FINISHED_STATE is entered, when everything has been flushed to the
+*     internal pending output buffer.
+* (7) At any time (7)
+*
+*/
 
         private static int IS_SETDICT = 0x01;
         private static int IS_FLUSHING = 0x04;
@@ -562,7 +562,7 @@ namespace NZlib.Compression
 
             if (state < BUSY_STATE)
             {
-                /* output header */
+/* output header */
                 int header = (DEFLATED + ((DeflaterConstants.MAX_WBITS - 8) << 4)) << 8;
                 int level_flags = (level - 1) >> 1;
                 if (level_flags < 0 || level_flags > 3)
@@ -572,7 +572,7 @@ namespace NZlib.Compression
                 header |= level_flags << 6;
                 if ((state & IS_SETDICT) != 0)
                 {
-                    /* Dictionary was set */
+/* Dictionary was set */
                     header |= DeflaterConstants.PRESET_DICT;
                 }
                 header += 31 - (header % 31);
@@ -605,23 +605,23 @@ namespace NZlib.Compression
                 {
                     if (state == BUSY_STATE)
                     {
-                        /* We need more input now */
+/* We need more input now */
                         return origLength - length;
                     }
                     else if (state == FLUSHING_STATE)
                     {
                         if (level != NO_COMPRESSION)
                         {
-                            /* We have to supply some lookahead.  8 bit lookahead
-                             * are needed by the zlib inflater, and we must fill
-                             * the next byte, so that all bits are flushed.
-                             */
+/* We have to supply some lookahead.  8 bit lookahead
+* are needed by the zlib inflater, and we must fill
+* the next byte, so that all bits are flushed.
+*/
                             int neededbits = 8 + ((-pending.BitCount) & 7);
                             while (neededbits > 0)
                             {
-                                /* write a static tree block consisting solely of
-                                 * an EOF:
-                                 */
+/* write a static tree block consisting solely of
+* an EOF:
+*/
                                 pending.WriteBits(2, 10);
                                 neededbits -= 10;
                             }
@@ -631,7 +631,7 @@ namespace NZlib.Compression
                     else if (state == FINISHING_STATE)
                     {
                         pending.AlignToByte();
-                        /* We have completed the stream */
+/* We have completed the stream */
                         if (!noHeader)
                         {
                             int adler = engine.Adler;
@@ -808,9 +808,9 @@ namespace NZlib.Compression
             head = new short[HASH_SIZE];
             prev = new short[WSIZE];
 
-            /* We start at index 1, to avoid a implementation deficiency, that
-            * we cannot build a repeat pattern at index 0.
-            */
+/* We start at index 1, to avoid a implementation deficiency, that
+* we cannot build a repeat pattern at index 0.
+*/
             blockStart = strstart = 1;
         }
 
@@ -945,9 +945,9 @@ namespace NZlib.Compression
             {
                 int more = 2 * WSIZE - lookahead - strstart;
 
-                /* If the window is almost full and there is insufficient lookahead,
-                * move the upper half to the lower one to make room in the upper half.
-                */
+/* If the window is almost full and there is insufficient lookahead,
+* move the upper half to the lower one to make room in the upper half.
+*/
                 if (strstart >= WSIZE + MAX_DIST)
                 {
                     System.Array.Copy(window, WSIZE, window, 0, WSIZE);
@@ -955,9 +955,9 @@ namespace NZlib.Compression
                     strstart -= WSIZE;
                     blockStart -= WSIZE;
 
-                    /* Slide the hash table (could be avoided with 32 bit values
-                     * at the expense of memory usage).
-                     */
+/* Slide the hash table (could be avoided with 32 bit values
+* at the expense of memory usage).
+*/
                     for (int i = 0; i < HASH_SIZE; i++)
                     {
                         int m = head[i];
@@ -1000,15 +1000,15 @@ namespace NZlib.Compression
             byte scan_end1 = window[best_end - 1];
             byte scan_end = window[best_end];
 
-            /* Do not waste too much time if we already have a good match: */
+/* Do not waste too much time if we already have a good match: */
             if (best_len >= this.goodLength)
             {
                 chainLength >>= 2;
             }
 
-            /* Do not look for matches beyond the end of the input. This is necessary
-            * to make deflate deterministic.
-            */
+/* Do not look for matches beyond the end of the input. This is necessary
+* to make deflate deterministic.
+*/
             if (niceLength > lookahead)
             {
                 niceLength = lookahead;
@@ -1038,9 +1038,9 @@ namespace NZlib.Compression
                 match = curMatch + 2;
                 scan += 2;
 
-                /* We check for insufficient lookahead only every 8th comparison;
-                * the 256th check will be made at strstart+258.
-                */
+/* We check for insufficient lookahead only every 8th comparison;
+* the 256th check will be made at strstart+258.
+*/
                 while (
                     window[++scan] == window[++match]
                     && window[++scan] == window[++match]
@@ -1155,7 +1155,7 @@ namespace NZlib.Compression
             {
                 if (lookahead == 0)
                 {
-                    /* We are flushing everything */
+/* We are flushing everything */
                     huffman.FlushBlock(window, blockStart, strstart - blockStart, finish);
                     blockStart = strstart;
                     return false;
@@ -1170,7 +1170,7 @@ namespace NZlib.Compression
                     && FindLongestMatch(hashHead)
                 )
                 {
-                    /* longestMatch sets matchStart and matchLen */
+/* longestMatch sets matchStart and matchLen */
                     //					if (DeflaterConstants.DEBUGGING) {
                     //						for (int i = 0 ; i < matchLen; i++) {
                     //							if (window[strstart+i] != window[matchStart + i]) {
@@ -1204,7 +1204,7 @@ namespace NZlib.Compression
                 }
                 else
                 {
-                    /* No match found */
+/* No match found */
                     huffman.TallyLit(window[strstart] & 0xff);
                     ++strstart;
                     --lookahead;
@@ -1238,7 +1238,7 @@ namespace NZlib.Compression
                     }
                     prevAvailable = false;
 
-                    /* We are flushing everything */
+/* We are flushing everything */
                     if (DeflaterConstants.DEBUGGING && !flush)
                     {
                         throw new Exception("Not flushing, but no lookahead");
@@ -1260,9 +1260,9 @@ namespace NZlib.Compression
                         && FindLongestMatch(hashHead)
                     )
                     {
-                        /* longestMatch sets matchStart and matchLen */
+/* longestMatch sets matchStart and matchLen */
 
-                        /* Discard match if too small and too far away */
+/* Discard match if too small and too far away */
                         if (
                             matchLen <= 5
                             && (
@@ -1276,7 +1276,7 @@ namespace NZlib.Compression
                     }
                 }
 
-                /* previous match was better */
+/* previous match was better */
                 if (prevLen >= MIN_MATCH && matchLen <= prevLen)
                 {
                     //					if (DeflaterConstants.DEBUGGING) {
@@ -1366,9 +1366,9 @@ namespace NZlib.Compression
 
             int end = off + len;
 
-            /* We want to throw an ArrayIndexOutOfBoundsException early.  The
-            * check is very tricky: it also handles integer wrap around.
-            */
+/* We want to throw an ArrayIndexOutOfBoundsException early.  The
+* check is very tricky: it also handles integer wrap around.
+*/
             if (0 > off || off > end || end > buf.Length)
             {
                 throw new ArgumentOutOfRangeException();
@@ -1543,7 +1543,8 @@ namespace NZlib.Compression
                     if (bits > 0)
                     {
                         //						if (DeflaterConstants.DEBUGGING) {
-                        //								Console.WriteLine("codes["+i+"] = rev(" + nextCode[bits-1]+")," // HACK : Integer.toHexString(
+                        //								Console.WriteLine("codes["+i+"] = rev(" + nextCode[bits-1]+")," // HACK :
+                        // Integer.toHexString(
                         //								                  +bits);
                         //						}
                         codes[i] = BitReverse(nextCode[bits - 1]);
@@ -1564,7 +1565,7 @@ namespace NZlib.Compression
                     bl_counts[i] = 0;
                 }
 
-                /* First calculate optimal bit lengths */
+/* First calculate optimal bit lengths */
                 int[] lengths = new int[numNodes];
                 lengths[numNodes - 1] = 0;
 
@@ -1582,7 +1583,7 @@ namespace NZlib.Compression
                     }
                     else
                     {
-                        /* A leaf node */
+/* A leaf node */
                         int bitLength = lengths[i];
                         bl_counts[bitLength - 1]++;
                         this.length[childs[2 * i]] = (byte)lengths[i];
@@ -1605,13 +1606,13 @@ namespace NZlib.Compression
                 int incrBitLen = maxLength - 1;
                 do
                 {
-                    /* Find the first bit length which could increase: */
+/* Find the first bit length which could increase: */
                     while (bl_counts[--incrBitLen] == 0)
                         ;
 
-                    /* Move this node one down and remove a corresponding
-                    * amount of overflow nodes.
-                    */
+/* Move this node one down and remove a corresponding
+* amount of overflow nodes.
+*/
                     do
                     {
                         bl_counts[incrBitLen]--;
@@ -1620,20 +1621,20 @@ namespace NZlib.Compression
                     } while (overflow > 0 && incrBitLen < maxLength - 1);
                 } while (overflow > 0);
 
-                /* We may have overshot above.  Move some nodes from maxLength to
-                * maxLength-1 in that case.
-                */
+/* We may have overshot above.  Move some nodes from maxLength to
+* maxLength-1 in that case.
+*/
                 bl_counts[maxLength - 1] += overflow;
                 bl_counts[maxLength - 2] -= overflow;
 
-                /* Now recompute all bit lengths, scanning in increasing
-                * frequency.  It is simpler to reconstruct all lengths instead of
-                * fixing only the wrong ones. This idea is taken from 'ar'
-                * written by Haruhiko Okumura.
-                *
-                * The nodes were inserted with decreasing frequency into the childs
-                * array.
-                */
+/* Now recompute all bit lengths, scanning in increasing
+* frequency.  It is simpler to reconstruct all lengths instead of
+* fixing only the wrong ones. This idea is taken from 'ar'
+* written by Haruhiko Okumura.
+*
+* The nodes were inserted with decreasing frequency into the childs
+* array.
+*/
                 int nodePtr = 2 * numLeafs;
                 for (int bits = maxLength; bits != 0; bits--)
                 {
@@ -1643,7 +1644,7 @@ namespace NZlib.Compression
                         int childPtr = 2 * childs[nodePtr++];
                         if (childs[childPtr + 1] == -1)
                         {
-                            /* We found another leaf */
+/* We found another leaf */
                             length[childs[childPtr]] = (byte)bits;
                             n--;
                         }
@@ -1662,14 +1663,14 @@ namespace NZlib.Compression
             {
                 int numSymbols = freqs.Length;
 
-                /* heap is a priority queue, sorted by frequency, least frequent
-                * nodes first.  The heap is a binary tree, with the property, that
-                * the parent node is smaller than both child nodes.  This assures
-                * that the smallest node is the first parent.
-                *
-                * The binary tree is encoded in an array:  0 is root node and
-                * the nodes 2*n+1, 2*n+2 are the child nodes of node n.
-                */
+/* heap is a priority queue, sorted by frequency, least frequent
+* nodes first.  The heap is a binary tree, with the property, that
+* the parent node is smaller than both child nodes.  This assures
+* that the smallest node is the first parent.
+*
+* The binary tree is encoded in an array:  0 is root node and
+* the nodes 2*n+1, 2*n+2 are the child nodes of node n.
+*/
                 int[] heap = new int[numSymbols];
                 int heapLen = 0;
                 int maxCode = 0;
@@ -1678,7 +1679,7 @@ namespace NZlib.Compression
                     int freq = freqs[n];
                     if (freq != 0)
                     {
-                        /* Insert n into heap */
+/* Insert n into heap */
                         int pos = heapLen++;
                         int ppos;
                         while (pos > 0 && freqs[heap[ppos = (pos - 1) / 2]] > freq)
@@ -1692,11 +1693,11 @@ namespace NZlib.Compression
                     }
                 }
 
-                /* We could encode a single literal with 0 bits but then we
-                * don't see the literals.  Therefore we force at least two
-                * literals to avoid this case.  We don't care about order in
-                * this case, both literals get a 1 bit code.
-                */
+/* We could encode a single literal with 0 bits but then we
+* don't see the literals.  Therefore we force at least two
+* literals to avoid this case.  We don't care about order in
+* this case, both literals get a 1 bit code.
+*/
                 while (heapLen < 2)
                 {
                     int node = maxCode < 2 ? ++maxCode : 0;
@@ -1718,15 +1719,15 @@ namespace NZlib.Compression
                     heap[i] = i;
                 }
 
-                /* Construct the Huffman tree by repeatedly combining the least two
-                * frequent nodes.
-                */
+/* Construct the Huffman tree by repeatedly combining the least two
+* frequent nodes.
+*/
                 do
                 {
                     int first = heap[0];
                     int last = heap[--heapLen];
 
-                    /* Propagate the hole to the leafs of the heap */
+/* Propagate the hole to the leafs of the heap */
                     int ppos = 0;
                     int path = 1;
                     while (path < heapLen)
@@ -1741,9 +1742,9 @@ namespace NZlib.Compression
                         path = path * 2 + 1;
                     }
 
-                    /* Now propagate the last element down along path.  Normally
-                    * it shouldn't go too deep.
-                    */
+/* Now propagate the last element down along path.  Normally
+* it shouldn't go too deep.
+*/
                     int lastVal = values[last];
                     while ((path = ppos) > 0 && values[heap[ppos = (path - 1) / 2]] > lastVal)
                     {
@@ -1753,14 +1754,14 @@ namespace NZlib.Compression
 
                     int second = heap[0];
 
-                    /* Create a new node father of first and second */
+/* Create a new node father of first and second */
                     last = numNodes++;
                     childs[2 * last] = first;
                     childs[2 * last + 1] = second;
                     int mindepth = Math.Min(values[first] & 0xff, values[second] & 0xff);
                     values[last] = lastVal = values[first] + values[second] - mindepth + 1;
 
-                    /* Again, propagate the hole to the leafs */
+/* Again, propagate the hole to the leafs */
                     ppos = 0;
                     path = 1;
                     while (path < heapLen)
@@ -1775,7 +1776,7 @@ namespace NZlib.Compression
                         path = ppos * 2 + 1;
                     }
 
-                    /* Now propagate the new element down along path */
+/* Now propagate the new element down along path */
                     while ((path = ppos) > 0 && values[heap[ppos = (path - 1) / 2]] > lastVal)
                     {
                         heap[path] = heap[ppos];
@@ -1953,8 +1954,8 @@ namespace NZlib.Compression
 
         static DeflaterHuffman()
         {
-            /* See RFC 1951 3.2.6 */
-            /* Literal codes */
+/* See RFC 1951 3.2.6 */
+/* Literal codes */
             staticLCodes = new short[LITERAL_NUM];
             staticLLength = new byte[LITERAL_NUM];
             int i = 0;
@@ -1979,7 +1980,7 @@ namespace NZlib.Compression
                 staticLLength[i++] = 8;
             }
 
-            /* Distant codes */
+/* Distant codes */
             staticDCodes = new short[DIST_NUM];
             staticDLength = new byte[DIST_NUM];
             for (i = 0; i < DIST_NUM; i++)
@@ -2130,15 +2131,15 @@ namespace NZlib.Compression
         {
             literalTree.freqs[EOF_SYMBOL]++;
 
-            /* Build trees */
+/* Build trees */
             literalTree.BuildTree();
             distTree.BuildTree();
 
-            /* Calculate bitlen frequency */
+/* Calculate bitlen frequency */
             literalTree.CalcBLFreq(blTree);
             distTree.CalcBLFreq(blTree);
 
-            /* Build bitlen tree */
+/* Build bitlen tree */
             blTree.BuildTree();
 
             int blTreeCodes = 4;
@@ -2168,13 +2169,13 @@ namespace NZlib.Compression
             }
             if (opt_len >= static_len)
             {
-                /* Force static trees */
+/* Force static trees */
                 opt_len = static_len;
             }
 
             if (stored_offset >= 0 && stored_len + 4 < opt_len >> 3)
             {
-                /* Store Block */
+/* Store Block */
                 //				if (DeflaterConstants.DEBUGGING) {
                 //					Console.WriteLine("Storing, since " + stored_len + " < " + opt_len
                 //					                  + " <= " + static_len);
@@ -2183,7 +2184,7 @@ namespace NZlib.Compression
             }
             else if (opt_len == static_len)
             {
-                /* Encode with static tree */
+/* Encode with static tree */
                 pending.WriteBits((DeflaterConstants.STATIC_TREES << 1) + (lastBlock ? 1 : 0), 3);
                 literalTree.SetStaticCodes(staticLCodes, staticLLength);
                 distTree.SetStaticCodes(staticDCodes, staticDLength);
@@ -2192,7 +2193,7 @@ namespace NZlib.Compression
             }
             else
             {
-                /* Encode with dynamic tree */
+/* Encode with dynamic tree */
                 pending.WriteBits((DeflaterConstants.DYN_TREES << 1) + (lastBlock ? 1 : 0), 3);
                 SendAllTrees(blTreeCodes);
                 CompressBlock();
@@ -2563,7 +2564,7 @@ namespace NZlib.Compression
                 return false;
             }
             input.DropBits(16);
-            /* The header is written in "wrong" byte order */
+/* The header is written in "wrong" byte order */
             header = ((header << 8) | (header >> 8)) & 0xffff;
             if (header % 31 != 0)
             {
@@ -2575,12 +2576,12 @@ namespace NZlib.Compression
                 throw new FormatException("Compression Method unknown");
             }
 
-            /* Maximum size of the backwards window in bits.
-            * We currently ignore this, but we could use it to make the
-            * inflater window more space efficient. On the other hand the
-            * full window (15 bits) is needed most times, anyway.
-            int max_wbits = ((header & 0x7000) >> 12) + 8;
-            */
+/* Maximum size of the backwards window in bits.
+* We currently ignore this, but we could use it to make the
+* inflater window more space efficient. On the other hand the
+* full window (15 bits) is needed most times, anyway.
+int max_wbits = ((header & 0x7000) >> 12) + 8;
+*/
 
             if ((header & 0x0020) == 0)
             { // Dictionary flag?
@@ -2635,7 +2636,7 @@ namespace NZlib.Compression
                 switch (mode)
                 {
                     case DECODE_HUFFMAN:
-                        /* This is the inner loop so it is optimized a bit */
+/* This is the inner loop so it is optimized a bit */
                         while (((symbol = litlenTree.GetSymbol(input)) & ~0xff) == 0)
                         {
                             outputWindow.Write(symbol);
@@ -2652,7 +2653,7 @@ namespace NZlib.Compression
                             }
                             else
                             {
-                                /* symbol == 256: end of block */
+/* symbol == 256: end of block */
                                 distTree = null;
                                 litlenTree = null;
                                 mode = DECODE_BLOCKS;
@@ -3047,13 +3048,13 @@ namespace NZlib.Compression
             {
                 if (mode != DECODE_CHKSUM)
                 {
-                    /* Don't give away any output, if we are waiting for the
-                    * checksum in the input stream.
-                    *
-                    * With this trick we have always:
-                    *   needsInput() and not finished()
-                    *   implies more output can be produced.
-                    */
+/* Don't give away any output, if we are waiting for the
+* checksum in the input stream.
+*
+* With this trick we have always:
+*   needsInput() and not finished()
+*   implies more output can be produced.
+*/
                     more = outputWindow.CopyOutput(buf, off, len);
                     adler.Update(buf, off, more);
                     off += more;
@@ -3526,7 +3527,7 @@ namespace NZlib.Compression
                 code += blCount[bits] << (16 - bits);
                 if (bits >= 10)
                 {
-                    /* We need an extra table for bit lengths >= 10. */
+/* We need an extra table for bit lengths >= 10. */
                     int start = nextCode[bits] & 0x1ff80;
                     int end = code & 0x1ff80;
                     treeSize += (end - start) >> (16 - bits);
@@ -3536,9 +3537,9 @@ namespace NZlib.Compression
             {
                 throw new Exception("Code lengths don't add up properly.");
             }
-            /* Now create and fill the extra tables from longest to shortest
-            * bit len.  This way the sub trees will be aligned.
-            */
+/* Now create and fill the extra tables from longest to shortest
+* bit len.  This way the sub trees will be aligned.
+*/
             tree = new short[treeSize];
             int treePtr = 512;
             for (int bits = MAX_BITLEN; bits >= 10; bits--)
@@ -4473,8 +4474,8 @@ namespace NZlib.Streams
                 }
                 else
                 {
-                    /* We have to copy manually, since the repeat pattern overlaps.
-                    */
+/* We have to copy manually, since the repeat pattern overlaps.
+*/
                     while (len-- > 0)
                     {
                         window[window_end++] = window[rep_start++];
@@ -4716,7 +4717,7 @@ namespace NZlib.Streams
             }
             if ((bits_in_buffer & 7) != 0)
             {
-                /* bits_in_buffer may only be 0 or 8 */
+/* bits_in_buffer may only be 0 or 8 */
                 throw new InvalidOperationException("Bit buffer is not aligned!");
             }
 
@@ -4744,7 +4745,7 @@ namespace NZlib.Streams
 
             if (((window_start - window_end) & 1) != 0)
             {
-                /* We always want an even number of bytes in input, see peekBits */
+/* We always want an even number of bytes in input, see peekBits */
                 buffer = (uint)(window[window_start++] & 0xff);
                 bits_in_buffer = 8;
             }
@@ -4767,9 +4768,9 @@ namespace NZlib.Streams
 
             int end = off + len;
 
-            /* We want to throw an ArrayIndexOutOfBoundsException early.  The
-            * check is very tricky: it also handles integer wrap around.
-            */
+/* We want to throw an ArrayIndexOutOfBoundsException early.  The
+* check is very tricky: it also handles integer wrap around.
+*/
             if (0 > off || off > end || end > buf.Length)
             {
                 throw new ArgumentOutOfRangeException();
@@ -4777,7 +4778,7 @@ namespace NZlib.Streams
 
             if ((len & 1) != 0)
             {
-                /* We always want an even number of bytes in input, see peekBits */
+/* We always want an even number of bytes in input, see peekBits */
                 buffer |= (uint)((buf[off++] & 0xff) << bits_in_buffer);
                 bits_in_buffer += 8;
             }

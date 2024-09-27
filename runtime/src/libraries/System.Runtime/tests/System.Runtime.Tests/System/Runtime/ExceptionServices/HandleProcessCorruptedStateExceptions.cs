@@ -44,7 +44,8 @@ namespace System.Runtime.ExceptionServices.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Feature Corrupting Exceptions not present for Linux
         public static void ProcessExit_Called()
         {
-            // We expect the launched process to crash; don't let it write the resulting AV message to the console.
+            // We expect the launched process to crash; don't let it write the resulting AV message to the
+            // console.
             var psi = new ProcessStartInfo()
             {
                 RedirectStandardError = true,

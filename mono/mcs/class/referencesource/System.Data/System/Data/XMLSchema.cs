@@ -238,7 +238,8 @@ namespace System.Data
                     schemaTypes[type.QualifiedName] = type;
 
                     // Webdata 92054 if we have a User Defined simple type, cache it so later we may need for mapping
-                    // meanwhile more convinient solution would be to directly use schemaTypes, but it would be more complex to handle
+                    // meanwhile more convinient solution would be to directly use schemaTypes, but it would be more
+                    // complex to handle
                     XmlSchemaSimpleType xmlSimpleType = (item as XmlSchemaSimpleType);
                     if (xmlSimpleType != null)
                     {
@@ -250,7 +251,8 @@ namespace System.Data
                         udSimpleTypes[type.QualifiedName.ToString()] = xmlSimpleType;
                         DataColumn dc = (DataColumn)
                             existingSimpleTypeMap[type.QualifiedName.ToString()];
-                        // Assumption is that our simple type qualified name ihas the same output as XmlSchemaSimpleType type.QualifiedName.ToString()
+                        // Assumption is that our simple type qualified name ihas the same output as XmlSchemaSimpleType
+                        // type.QualifiedName.ToString()
                         SimpleType tmpSimpleType = (dc != null) ? dc.SimpleType : null;
                         //
                         if (tmpSimpleType != null)
@@ -793,7 +795,8 @@ namespace System.Data
                     )
                     {
                         existingSimpleTypeMap[dc.SimpleType.SimpleTypeQualifiedName] = dc;
-                        //                        existingSimpleTypeMap[dc.SimpleType.SimpleTypeQualifiedName] = dc.SimpleType;
+                        //                        existingSimpleTypeMap[dc.SimpleType.SimpleTypeQualifiedName] =
+                        // dc.SimpleType;
                     }
                 }
             }
@@ -818,8 +821,10 @@ namespace System.Data
                 }
                 // we should not write it also
                 setRootNStoDataSet = true;
-                //incase of Root is not mapped to DataSet and is mapped to DataTable instead; to be backward compatable
-                // we need to set the Namespace of Root to DataSet's namespace also(it would be NS of First DataTable in collection)
+                //incase of Root is not mapped to DataSet and is mapped to DataTable instead; to be backward
+                // compatable
+                // we need to set the Namespace of Root to DataSet's namespace also(it would be NS of First
+                // DataTable in collection)
             }
 
             List<XmlQualifiedName> qnames = new List<XmlQualifiedName>();
@@ -891,7 +896,8 @@ namespace System.Data
                 HandleRelations(annotation, false);
             }
 
-            //just add Expressions, at this point and if ColumnExpressions.Count > 0, this.expressions should not be null
+            //just add Expressions, at this point and if ColumnExpressions.Count > 0, this.expressions should
+            // not be null
             for (int i = 0; i < ColumnExpressions.Count; i++)
             {
                 DataColumn dc = ((DataColumn)(ColumnExpressions[i]));
@@ -931,7 +937,8 @@ namespace System.Data
 
             ds.fIsSchemaLoading = false; //reactivate column computations
 
-            //for backward compatability; we need to set NS of Root Element to DataSet, if root already does not mapped to dataSet
+            //for backward compatability; we need to set NS of Root Element to DataSet, if root already does not
+            // mapped to dataSet
             if (setRootNStoDataSet)
             {
                 if (ds.Tables.Count > 0)
@@ -1169,12 +1176,12 @@ namespace System.Data
 
             if (ct.ContentModel != null)
             {
-                /*
-                HandleParticle(ct.CompiledParticle, table, tableChildren, isBase);
-                foreach (XmlSchemaAttribute s in ct.Attributes){
-                    HandleAttributeColumn(s, table, isBase);
-                }
-                */
+/*
+HandleParticle(ct.CompiledParticle, table, tableChildren, isBase);
+foreach (XmlSchemaAttribute s in ct.Attributes){
+HandleAttributeColumn(s, table, isBase);
+}
+*/
 
 
                 if (ct.ContentModel is XmlSchemaComplexContent)
@@ -1434,16 +1441,16 @@ namespace System.Data
             return value;
         }
 
-        /*
-        <key name="fk">
-            <selector>../Customers</selector>
-            <field>ID</field>
-        </key>
-        <keyref refer="fk">
-            <selector>.</selector>
-            <field>CustID</field>
-        </keyref>
-        */
+/*
+<key name="fk">
+<selector>../Customers</selector>
+<field>ID</field>
+</key>
+<keyref refer="fk">
+<selector>.</selector>
+<field>CustID</field>
+</keyref>
+*/
 
         internal static AcceptRejectRule TranslateAcceptRejectRule(string strRule)
         {
@@ -1667,10 +1674,10 @@ namespace System.Data
 
 
 
-            /*            if (table!=null) {
-                            throw ExceptionBuilder.DuplicateDeclaration(typeName);
-                        }
-            */
+/*            if (table!=null) {
+throw ExceptionBuilder.DuplicateDeclaration(typeName);
+}
+*/
             if (!FromInference && table != null)
             {
                 throw ExceptionBuilder.DuplicateDeclaration(typeName);
@@ -1782,7 +1789,8 @@ namespace System.Data
             return instanceName;
         }
 
-        // Sequences of handling Elements, Attributes and Text-only column should be the same as in InferXmlSchema
+        // Sequences of handling Elements, Attributes and Text-only column should be the same as in
+        // InferXmlSchema
         internal DataTable InstantiateTable(
             XmlSchemaElement node,
             XmlSchemaComplexType typeNode,
@@ -1799,8 +1807,10 @@ namespace System.Data
 
             table = _ds.Tables.GetTable(XmlConvert.DecodeName(typeName), _TableUri);
             // TOD: Do not do this fix
-            //            if (table == null && node.RefName.IsEmpty && !IsTopLevelElement(node) && _TableUri != null && _TableUri.Length > 0) {
-            //                _TableUri = null;    // it means form="qualified", so child element inherits namespace. Microsoft
+            //            if (table == null && node.RefName.IsEmpty && !IsTopLevelElement(node) && _TableUri !=
+            // null && _TableUri.Length > 0) {
+            //                _TableUri = null;    // it means form="qualified", so child element inherits
+            // namespace. Microsoft
             //            }
 
             if (!FromInference || (FromInference && table == null))
@@ -1877,11 +1887,11 @@ namespace System.Data
             for (int i = 0; i < table.Columns.Count; i++)
                 table.Columns[i].SetOrdinalInternal(i);
 
-            /*
-                        if (xmlContent == XmlContent.Mixed) {
-                            string textColumn = GenUniqueColumnName(table.TableName+ "_Text", table);
-                            table.XmlText = new DataColumn(textColumn, typeof(string), null, MappingType.Text);
-                        } */
+/*
+if (xmlContent == XmlContent.Mixed) {
+string textColumn = GenUniqueColumnName(table.TableName+ "_Text", table);
+table.XmlText = new DataColumn(textColumn, typeof(string), null, MappingType.Text);
+} */
 
             SetProperties(table, node.UnhandledAttributes);
             SetExtProperties(table, node.UnhandledAttributes);
@@ -1901,14 +1911,14 @@ namespace System.Data
                             || GetTableNamespace(key) == null
                         )
                             HandleConstraint(key);
-                        /*                     if (GetTableNamespace(key) != null) {
-                                                    if (GetTableNamespace(key) == table.Namespace)
-                                                        HandleConstraint(key);
-                                                }
-                                                else {
-                                                    HandleConstraint(key);
-                                                }
-                        */
+/*                     if (GetTableNamespace(key) != null) {
+if (GetTableNamespace(key) == table.Namespace)
+HandleConstraint(key);
+}
+else {
+HandleConstraint(key);
+}
+*/
                     }
                 }
             }
@@ -1991,7 +2001,8 @@ namespace System.Data
                 // foreign key in the child table
                 DataColumn childKey = _tableChild.AddForeignKey(parentKey);
 
-                // when we add  unique key, we do set prefix; but for Fk we do not do . So for backward compatability
+                // when we add  unique key, we do set prefix; but for Fk we do not do . So for backward
+                // compatability
                 if (this.FromInference)
                     childKey.Prefix = _tableChild.Prefix;
                 //                    childKey.Prefix = GetPrefix(childKey.Namespace);
@@ -2149,13 +2160,13 @@ namespace System.Data
             return nt.type;
         }
 
-        /*  later we may need such a function
-                private Boolean IsUDSimpleType(string qname) {
-                    if (udSimpleTypes == null)
-                        return false;
-                    return (udSimpleTypes.Contains(qname));
-                }
-        */
+/*  later we may need such a function
+private Boolean IsUDSimpleType(string qname) {
+if (udSimpleTypes == null)
+return false;
+return (udSimpleTypes.Contains(qname));
+}
+*/
         internal static Boolean IsXsdType(string name)
         {
 #if DEBUG
@@ -2342,7 +2353,8 @@ namespace System.Data
                 ColumnExpressions.Add(column);
             }
 
-            // Update XSD type to point to simple types actual namespace instead of normalized default namespace in case of remoting
+            // Update XSD type to point to simple types actual namespace instead of normalized default namespace
+            // in case of remoting
             if (xsdType != null && xsdType.Name != null && xsdType.Name.Length > 0)
             {
                 if (XSDSchema.GetMsdataAttribute(typeNode, Keywords.TARGETNAMESPACE) != null)
@@ -2572,7 +2584,8 @@ namespace System.Data
                     // throw eception if same column is being aded with different mapping
                     if (column.ColumnMapping != MappingType.Attribute)
                         throw ExceptionBuilder.ColumnTypeConflict(column.ColumnName);
-                    // in previous inference , if we have incoming column with different NS, we think as different column and
+                    // in previous inference , if we have incoming column with different NS, we think as different
+                    // column and
                     //while adding , since there is no NS concept for datacolumn, we used to throw exception
                     // simulate the same behavior.
                     if (
@@ -2706,7 +2719,8 @@ namespace System.Data
                 //
                 XmlSchemaSimpleType simpleTypeNode = typeNode as XmlSchemaSimpleType;
                 xsdType = new SimpleType(simpleTypeNode);
-                // ((XmlSchemaSimpleType)typeNode).Name != null && ((XmlSchemaSimpleType)typeNode).Name.Length != 0 check is for annonymos simple type,
+                // ((XmlSchemaSimpleType)typeNode).Name != null && ((XmlSchemaSimpleType)typeNode).Name.Length != 0
+                // check is for annonymos simple type,
                 // it should be  user defined  Named  simple type
                 if (
                     ((XmlSchemaSimpleType)typeNode).Name != null
@@ -2788,7 +2802,8 @@ namespace System.Data
                 { // for backward compatability with old inference
                     if (column.ColumnMapping != MappingType.Element)
                         throw ExceptionBuilder.ColumnTypeConflict(column.ColumnName);
-                    // in previous inference , if we have incoming column with different NS, we think as different column and
+                    // in previous inference , if we have incoming column with different NS, we think as different
+                    // column and
                     //while adding , since there is no NS concept for datacolumn, we used to throw exception
                     // simulate the same behavior.
                     if (
@@ -2827,7 +2842,8 @@ namespace System.Data
                 ColumnExpressions.Add(column);
             }
 
-            // Update XSD type to point to simple types actual namespace instead of normalized default namespace in case of remoting
+            // Update XSD type to point to simple types actual namespace instead of normalized default namespace
+            // in case of remoting
             if (xsdType != null && xsdType.Name != null && xsdType.Name.Length > 0)
             {
                 if (XSDSchema.GetMsdataAttribute(typeNode, Keywords.TARGETNAMESPACE) != null)
@@ -3007,7 +3023,8 @@ namespace System.Data
                                 {
                                     isComplexTypeOrValidElementType = true;
                                 }
-                                //                          bool isComplexTypeOrValidElementType = (node.ElementType != null || !(((XmlSchemaElement)el).SchemaType is XmlSchemaComplexType));
+                                //                          bool isComplexTypeOrValidElementType = (node.ElementType != null ||
+                                // !(((XmlSchemaElement)el).SchemaType is XmlSchemaComplexType));
                                 if (
                                     (((XmlSchemaElement)el).MaxOccurs != Decimal.One)
                                     && (!isComplexTypeOrValidElementType)

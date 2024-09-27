@@ -15,9 +15,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
         internal static readonly TimeSpan ConnectTimeout = TimeSpan.FromSeconds(30);
 
         /// <summary>
-        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref name="endpoint"/>.
+        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref
+        // name="endpoint"/>.
         /// </summary>
-        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime instance.</param>
+        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime
+        // instance.</param>
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <returns>An <see cref="IpcMessage"/> that is the response message.</returns>
         public static IpcMessage SendMessage(IpcEndpoint endpoint, IpcMessage message)
@@ -27,11 +29,14 @@ namespace Microsoft.Diagnostics.NETCore.Client
         }
 
         /// <summary>
-        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref name="endpoint"/>.
+        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref
+        // name="endpoint"/>.
         /// </summary>
-        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime instance.</param>
+        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime
+        // instance.</param>
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
-        /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation stream.</returns>
+        /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation
+        // stream.</returns>
         public static IpcResponse SendMessageGetContinuation(
             IpcEndpoint endpoint,
             IpcMessage message
@@ -55,9 +60,11 @@ namespace Microsoft.Diagnostics.NETCore.Client
         }
 
         /// <summary>
-        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref name="endpoint"/>.
+        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref
+        // name="endpoint"/>.
         /// </summary>
-        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime instance.</param>
+        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime
+        // instance.</param>
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>An <see cref="IpcMessage"/> that is the response message.</returns>
@@ -77,12 +84,15 @@ namespace Microsoft.Diagnostics.NETCore.Client
         }
 
         /// <summary>
-        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref name="endpoint"/>.
+        /// Sends a single DiagnosticsIpc Message to the dotnet process associated with the <paramref
+        // name="endpoint"/>.
         /// </summary>
-        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime instance.</param>
+        /// <param name="endpoint">An endpoint that provides a diagnostics connection to a runtime
+        // instance.</param>
         /// <param name="message">The DiagnosticsIpc Message to be sent</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation stream.</returns>
+        /// <returns>An <see cref="IpcResponse"/> containing the response message and continuation
+        // stream.</returns>
         public static async Task<IpcResponse> SendMessageGetContinuationAsync(
             IpcEndpoint endpoint,
             IpcMessage message,

@@ -243,7 +243,8 @@ namespace System.Security.Cryptography
 
                 ht.Add("Rijndael", RijndaelManagedType);
                 ht.Add("System.Security.Cryptography.Rijndael", RijndaelManagedType);
-                // Rijndael is the default symmetric cipher because (a) it's the strongest and (b) we know we have an implementation everywhere
+                // Rijndael is the default symmetric cipher because (a) it's the strongest and (b) we know we have
+                // an implementation everywhere
                 ht.Add("System.Security.Cryptography.SymmetricAlgorithm", RijndaelManagedType);
 
                 ht.Add("AES", AesCryptoServiceProviderType);
@@ -340,21 +341,31 @@ namespace System.Security.Cryptography
                 // Type HMACRIPEMD160Type = typeof(System.Security.Cryptography.HMACRIPEMD160);
                 // Type MAC3DESType = typeof(System.Security.Cryptography.MACTripleDES);
                 // Type DSASignatureDescriptionType = typeof(System.Security.Cryptography.DSASignatureDescription);
-                // Type RSAPKCS1SHA1SignatureDescriptionType = typeof(System.Security.Cryptography.RSAPKCS1SHA1SignatureDescription);
-                // Type RSAPKCS1SHA256SignatureDescriptionType = typeof(System.Security.Cryptography.RSAPKCS1SHA256SignatureDescription);
-                // Type RSAPKCS1SHA384SignatureDescriptionType = typeof(System.Security.Cryptography.RSAPKCS1SHA384SignatureDescription);
-                // Type RSAPKCS1SHA512SignatureDescriptionType = typeof(System.Security.Cryptography.RSAPKCS1SHA512SignatureDescription);
-                // string RIPEMD160ManagedType = "System.Security.Cryptography.RIPEMD160Managed" + AssemblyName_Encoding;
-                // string ECDiffieHellmanCngType = "System.Security.Cryptography.ECDiffieHellmanCng, " + AssemblyName_Cng;
+                // Type RSAPKCS1SHA1SignatureDescriptionType =
+                // typeof(System.Security.Cryptography.RSAPKCS1SHA1SignatureDescription);
+                // Type RSAPKCS1SHA256SignatureDescriptionType =
+                // typeof(System.Security.Cryptography.RSAPKCS1SHA256SignatureDescription);
+                // Type RSAPKCS1SHA384SignatureDescriptionType =
+                // typeof(System.Security.Cryptography.RSAPKCS1SHA384SignatureDescription);
+                // Type RSAPKCS1SHA512SignatureDescriptionType =
+                // typeof(System.Security.Cryptography.RSAPKCS1SHA512SignatureDescription);
+                // string RIPEMD160ManagedType = "System.Security.Cryptography.RIPEMD160Managed" +
+                // AssemblyName_Encoding;
+                // string ECDiffieHellmanCngType = "System.Security.Cryptography.ECDiffieHellmanCng, " +
+                // AssemblyName_Cng;
                 // string MD5CngType = "System.Security.Cryptography.MD5Cng, " + AssemblyName_Cng;
                 // string SHA1CngType = "System.Security.Cryptography.SHA1Cng, " + AssemblyName_Cng;
                 // string SHA256CngType = "System.Security.Cryptography.SHA256Cng, " + AssemblyName_Cng;
                 // string SHA384CngType = "System.Security.Cryptography.SHA384Cng, " + AssemblyName_Cng;
                 // string SHA512CngType = "System.Security.Cryptography.SHA512Cng, " + AssemblyName_Cng;
-                // string SHA256CryptoServiceProviderType = "System.Security.Cryptography.SHA256CryptoServiceProvider, " + AssemblyName_Csp;
-                // string SHA384CryptoSerivceProviderType = "System.Security.Cryptography.SHA384CryptoServiceProvider, " + AssemblyName_Csp;
-                // string SHA512CryptoServiceProviderType = "System.Security.Cryptography.SHA512CryptoServiceProvider, " + AssemblyName_Csp;
-                // string DpapiDataProtectorType = "System.Security.Cryptography.DpapiDataProtector, " + AssemblyRef.SystemSecurity;
+                // string SHA256CryptoServiceProviderType =
+                // "System.Security.Cryptography.SHA256CryptoServiceProvider, " + AssemblyName_Csp;
+                // string SHA384CryptoSerivceProviderType =
+                // "System.Security.Cryptography.SHA384CryptoServiceProvider, " + AssemblyName_Csp;
+                // string SHA512CryptoServiceProviderType =
+                // "System.Security.Cryptography.SHA512CryptoServiceProvider, " + AssemblyName_Csp;
+                // string DpapiDataProtectorType = "System.Security.Cryptography.DpapiDataProtector, " +
+                // AssemblyRef.SystemSecurity;
             }
         }
 #endif
@@ -404,7 +415,8 @@ namespace System.Security.Cryptography
             switch (name)
             {
 #pragma warning disable SYSLIB0021 // Obsolete: derived cryptographic types
-                // hardcode mapping for SHA* and HMAC* algorithm names from https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptoconfig?view=net-5.0#remarks
+                // hardcode mapping for SHA* and HMAC* algorithm names from
+                // https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptoconfig?view=net-5.0#remarks
                 case "SHA":
                 case "SHA1":
                 case "System.Security.Cryptography.SHA1":
@@ -535,7 +547,8 @@ namespace System.Security.Cryptography
                     out object? state
                 ) as ConstructorInfo;
 
-            // Check for ctor we don't like (non-existent, delegate or decorated with declarative linktime demand).
+            // Check for ctor we don't like (non-existent, delegate or decorated with declarative linktime
+            // demand).
             if (rci == null || typeof(Delegate).IsAssignableFrom(rci.DeclaringType))
             {
                 return null;
@@ -680,7 +693,8 @@ namespace System.Security.Cryptography
 #if !BROWSER
         private static void EncodeSingleOidNum(uint value, byte[]? destination, ref int index)
         {
-            // Write directly to destination starting at index, and update index based on how many bytes written.
+            // Write directly to destination starting at index, and update index based on how many bytes
+            // written.
             // If destination is null, just return updated index.
             if (unchecked((int)value) < 0x80)
             {

@@ -231,7 +231,8 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         /// <summary>
         /// Gets or sets the SecondaryParameters inside the RequestSecurityToken message.
-        /// This represents the information for which the requestor is not the orginator. The STS MAY choose to use values found here.
+        /// This represents the information for which the requestor is not the orginator. The STS MAY choose
+        // to use values found here.
         /// </summary>
         public RequestSecurityToken SecondaryParameters
         {

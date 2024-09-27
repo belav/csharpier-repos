@@ -3,9 +3,9 @@
 
 /*************************** Left Leaning Red-Black Tree *************************************
 
- * An Implementation of Left Leaning Red Black trees based on
-        Robert Sedgewick's paper:
-          http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
+* An Implementation of Left Leaning Red Black trees based on
+Robert Sedgewick's paper:
+http://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf
 **********************************************************************************************/
 
 

@@ -18,16 +18,19 @@ namespace Microsoft.CodeAnalysis
         public string[] Languages { get; }
 
         /// <summary>
-        /// Attribute constructor used to specify the attached class is a source generator that provides CSharp sources.
+        /// Attribute constructor used to specify the attached class is a source generator that provides
+        // CSharp sources.
         /// </summary>
         public GeneratorAttribute()
             : this(LanguageNames.CSharp) { }
 
         /// <summary>
-        /// Attribute constructor used to specify the attached class is a source generator and indicate which language(s) it supports.
+        /// Attribute constructor used to specify the attached class is a source generator and indicate
+        // which language(s) it supports.
         /// </summary>
         /// <param name="firstLanguage">One language to which the generator applies.</param>
-        /// <param name="additionalLanguages">Additional languages to which the generator applies. See <see cref="LanguageNames"/>.</param>
+        /// <param name="additionalLanguages">Additional languages to which the generator applies. See <see
+        // cref="LanguageNames"/>.</param>
         public GeneratorAttribute(string firstLanguage, params string[] additionalLanguages)
         {
             if (firstLanguage == null)

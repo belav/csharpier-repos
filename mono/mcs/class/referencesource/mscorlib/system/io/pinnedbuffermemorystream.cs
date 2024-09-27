@@ -26,7 +26,8 @@ namespace System.IO
         private byte[] _array;
         private GCHandle _pinningHandle;
 
-        // The new inheritance model requires a Critical default ctor since base (UnmanagedMemoryStream) has one
+        // The new inheritance model requires a Critical default ctor since base (UnmanagedMemoryStream) has
+        // one
         [System.Security.SecurityCritical]
         private PinnedBufferMemoryStream()
             : base() { }

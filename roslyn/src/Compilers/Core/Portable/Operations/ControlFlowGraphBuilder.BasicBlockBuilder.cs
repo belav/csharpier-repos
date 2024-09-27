@@ -271,7 +271,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                     }
                 }
 
-                // Order predecessors by source ordinal and conditional first to ensure deterministic predecessor ordering.
+                // Order predecessors by source ordinal and conditional first to ensure deterministic predecessor
+                // ordering.
                 branches.Sort(
                     (x, y) =>
                     {

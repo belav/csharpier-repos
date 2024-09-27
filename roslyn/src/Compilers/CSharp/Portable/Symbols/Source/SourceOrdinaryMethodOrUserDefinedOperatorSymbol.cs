@@ -156,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (ExplicitInterfaceType is not null)
             {
-                //do this last so that it can assume the method symbol is constructed (except for ExplicitInterfaceImplementation)
+                //do this last so that it can assume the method symbol is constructed (except for
+                // ExplicitInterfaceImplementation)
                 overriddenOrExplicitlyImplementedMethod = FindExplicitlyImplementedMethod(
                     diagnostics
                 );

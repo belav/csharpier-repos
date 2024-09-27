@@ -193,15 +193,23 @@ namespace System.Net.PeerToPeer
         }
 
         // <SecurityKernel Critical="True" Ring="0">
-        // <SatisfiesLinkDemand Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+        // <SatisfiesLinkDemand
+        // Name="WaitHandle.get_SafeWaitHandle():Microsoft.Win32.SafeHandles.SafeWaitHandle" />
         // <SatisfiesLinkDemand Name="SafeHandle.get_IsInvalid():System.Boolean" />
         // <SatisfiesLinkDemand Name="SafeHandle.get_IsClosed():System.Boolean" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerPnrpStartResolve(System.String,System.String,System.UInt32,Microsoft.Win32.SafeHandles.SafeWaitHandle,System.Net.PeerToPeer.SafePeerNameEndResolve&):System.Int32" />
-        // <ReferencesCritical Name="Method: EndPointInfoAvailableCallback(Object, Boolean):Void" Ring="1" />
+        // <CallsSuppressUnmanagedCode
+        //
+        // Name="UnsafeP2PNativeMethods.PeerPnrpStartResolve(System.String,System.String,System.UInt32,Microsoft.Win32.SafeHandles.SafeWaitHandle,System.Net.PeerToPeer.SafePeerNameEndResolve&):System.Int32"
+        // />
+        // <ReferencesCritical Name="Method: EndPointInfoAvailableCallback(Object, Boolean):Void" Ring="1"
+        // />
         // <ReferencesCritical Name="Field: m_SafePeerNameEndResolve" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        //
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         internal void StartAsyncResolve()
@@ -274,13 +282,20 @@ namespace System.Net.PeerToPeer
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
         // <SatisfiesLinkDemand Name="Marshal.ReadIntPtr(System.IntPtr):System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.SizeOf(System.Type):System.Int32" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerPnrpGetEndpoint(System.IntPtr,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        //
+        // Name="UnsafeP2PNativeMethods.PeerPnrpGetEndpoint(System.IntPtr,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local shEndPointInfo of type: SafePeerData" Ring="1" />
         // <ReferencesCritical Name="Field: m_SafePeerNameEndResolve" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        //
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public void EndPointInfoAvailableCallback(object state, bool timedOut)
@@ -614,7 +629,8 @@ namespace System.Net.PeerToPeer
 
         /// <summary>
         /// When an event handler is hooked up or removed, we demand the permissions.
-        /// In partial trust cases, this will avoid the security risk of just hooking up an existing instance
+        /// In partial trust cases, this will avoid the security risk of just hooking up an existing
+        // instance
         /// of the PeerNameResolver and then receiving all notification of
         /// in resolution that is happening
         /// </summary>
@@ -636,7 +652,8 @@ namespace System.Net.PeerToPeer
 
         /// <summary>
         /// When an event handler is hooked up or removed, we demand the permissions.
-        /// In partial trust cases, this will avoid the security risk of just hooking up an existing instance
+        /// In partial trust cases, this will avoid the security risk of just hooking up an existing
+        // instance
         /// of the PeerNameResolver and then receiving all notification of
         /// in resolution that is happening
         /// </summary>
@@ -703,14 +720,21 @@ namespace System.Net.PeerToPeer
         // <UsesUnsafeCode Name="Method: IntPtr.op_Explicit(System.IntPtr):System.Void*" />
         // <SatisfiesLinkDemand Name="SafeHandle.DangerousGetHandle():System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.PtrToStringUni(System.IntPtr):System.String" />
-        // <SatisfiesLinkDemand Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
+        // <SatisfiesLinkDemand
+        // Name="Marshal.Copy(System.IntPtr,System.Byte[],System.Int32,System.Int32):System.Void" />
         // <SatisfiesLinkDemand Name="Marshal.ReadIntPtr(System.IntPtr):System.IntPtr" />
         // <SatisfiesLinkDemand Name="Marshal.SizeOf(System.Type):System.Int32" />
         // <SatisfiesLinkDemand Name="SafeHandle.Dispose():System.Void" />
-        // <CallsSuppressUnmanagedCode Name="UnsafeP2PNativeMethods.PeerPnrpResolve(System.String,System.String,System.UInt32&,System.Net.PeerToPeer.SafePeerData&):System.Int32" />
+        // <CallsSuppressUnmanagedCode
+        //
+        // Name="UnsafeP2PNativeMethods.PeerPnrpResolve(System.String,System.String,System.UInt32&,System.Net.PeerToPeer.SafePeerData&):System.Int32"
+        // />
         // <ReferencesCritical Name="Local shEndPointInfoArray of type: SafePeerData" Ring="1" />
         // <ReferencesCritical Name="Method: UnsafeP2PNativeMethods.PnrpStartup():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException" Ring="1" />
+        // <ReferencesCritical Name="Method:
+        //
+        // PeerToPeerException.CreateFromHr(System.String,System.Int32):System.Net.PeerToPeer.PeerToPeerException"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         public PeerNameRecordCollection Resolve(PeerName peerName, Cloud cloud, int maxRecords)
@@ -894,7 +918,8 @@ namespace System.Net.PeerToPeer
 
         // <SecurityKernel Critical="True" Ring="1">
         // <ReferencesCritical Name="Method: UnsafeP2PNativeMethods.PnrpStartup():System.Void" Ring="1" />
-        // <ReferencesCritical Name="Method: PeerNameResolverHelper.StartAsyncResolve():System.Void" Ring="1" />
+        // <ReferencesCritical Name="Method: PeerNameResolverHelper.StartAsyncResolve():System.Void"
+        // Ring="1" />
         // </SecurityKernel>
         [System.Security.SecurityCritical]
         [HostProtection(ExternalThreading = true)]

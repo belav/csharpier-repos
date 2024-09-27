@@ -38,11 +38,14 @@ public class RequestSizeLimitAttribute
     /// </summary>
     /// <remarks>
     /// <para>
-    /// Filters are executed in an ordering determined by an ascending sort of the <see cref="Order"/> property.
+    /// Filters are executed in an ordering determined by an ascending sort of the <see cref="Order"/>
+    // property.
     /// </para>
     /// <para>
-    /// The default Order for this attribute is 900 because it must run before ValidateAntiForgeryTokenAttribute and
-    /// after any filter which does authentication or login in order to allow them to behave as expected (ie Unauthenticated or Redirect instead of 400).
+    /// The default Order for this attribute is 900 because it must run before
+    // ValidateAntiForgeryTokenAttribute and
+    /// after any filter which does authentication or login in order to allow them to behave as expected
+    // (ie Unauthenticated or Redirect instead of 400).
     /// </para>
     /// <para>
     /// Look at <see cref="IOrderedFilter.Order"/> for more detailed info.

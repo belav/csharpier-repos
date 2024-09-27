@@ -1336,7 +1336,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Assume that an object reference is on the IL stack.  Change the static Clr type from "clrTypeSrc" to "clrTypeDst"
+        /// Assume that an object reference is on the IL stack.  Change the static Clr type from
+        // "clrTypeSrc" to "clrTypeDst"
         /// </summary>
         public void TreatAs(Type clrTypeSrc, Type clrTypeDst)
         {
@@ -2034,7 +2035,9 @@ namespace System.Xml.Xsl.IlGen
             // 2. The runtime enforces a rule that BP sequence points can only appear at zero stack depth,
             //    or if a NOP instruction is placed before them.  We guarantee this by always emitting a Nop
             //    before every sequence point.
-            //    <spec>http://devdiv/Documents/Whidbey/CLR/CurrentSpecs/Debugging%20and%20Profiling/JIT-Determined%20Sequence%20Points.doc</spec>
+            //
+            //
+            // <spec>http://devdiv/Documents/Whidbey/CLR/CurrentSpecs/Debugging%20and%20Profiling/JIT-Determined%20Sequence%20Points.doc</spec>
             Emit(OpCodes.Nop);
             MarkSequencePoint(sourceInfo);
         }
@@ -2042,7 +2045,8 @@ namespace System.Xml.Xsl.IlGen
         private string? _lastUriString;
         private string? _lastFileName;
 
-        // SQLBUDT 278010: debugger does not work with network paths in uri format, like file://server/share/dir/file
+        // SQLBUDT 278010: debugger does not work with network paths in uri format, like
+        // file://server/share/dir/file
         private string GetFileName(ISourceLineInfo sourceInfo)
         {
             string uriString = sourceInfo.Uri!;
@@ -2091,7 +2095,8 @@ namespace System.Xml.Xsl.IlGen
             }
 #endif
             //ISymbolDocumentWriter symDoc = this.module.AddSourceDocument(sourceFile);
-            //this.ilgen.MarkSequencePoint(symDoc, sourceInfo.Start.Line, sourceInfo.Start.Pos, sourceInfo.End.Line, sourceInfo.End.Pos);
+            //this.ilgen.MarkSequencePoint(symDoc, sourceInfo.Start.Line, sourceInfo.Start.Pos,
+            // sourceInfo.End.Line, sourceInfo.End.Pos);
             _lastSourceInfo = sourceInfo;
         }
 
@@ -2271,13 +2276,15 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Unconditional branch opcodes (OpCode.Br, OpCode.Br_S) can lead to unverifiable code in the following cases:
+        /// Unconditional branch opcodes (OpCode.Br, OpCode.Br_S) can lead to unverifiable code in the
+        // following cases:
         ///
         ///   # DEAD CODE CASE
         ///     ldc_i4  1       # Stack depth == 1
         ///     br      Label2
         ///   Label1:
-        ///     nop             # Dead code, so IL rules assume stack depth == 0.  This causes a verification error,
+        ///     nop             # Dead code, so IL rules assume stack depth == 0.  This causes a
+        // verification error,
         ///                     # since next instruction has depth == 1
         ///   Label2:
         ///     pop             # Stack depth == 1
@@ -2287,7 +2294,8 @@ namespace System.Xml.Xsl.IlGen
         ///     ldc_i4  1       # Stack depth == 1
         ///     br      Label2
         ///   Label1:
-        ///     nop             # Not dead code, but since branch comes from below, IL rules assume stack depth = 0.
+        ///     nop             # Not dead code, but since branch comes from below, IL rules assume stack
+        // depth = 0.
         ///                     # This causes a verification error, since next instruction has depth == 1
         ///   Label2:
         ///     pop             # Stack depth == 1
@@ -2297,14 +2305,18 @@ namespace System.Xml.Xsl.IlGen
         ///
         /// This method works around the above limitations by using Brtrue or Brfalse in the following way:
         ///
-        ///     ldc_i4  1       # Since this test is always true, this is a way of creating a path to the code that
+        ///     ldc_i4  1       # Since this test is always true, this is a way of creating a path to the
+        // code that
         ///     brtrue  Label   # follows the brtrue instruction.
         ///
-        ///     ldc_i4  1       # Since this test is always false, this is a way of creating a path to the code that
+        ///     ldc_i4  1       # Since this test is always false, this is a way of creating a path to the
+        // code that
         ///     brfalse Label   # starts at Label.
         ///
-        /// 1. If opcode == Brtrue or Brtrue_S, then 1 will be pushed and brtrue instruction will be generated.
-        /// 2. If opcode == Brfalse or Brfalse_S, then 1 will be pushed and brfalse instruction will be generated.
+        /// 1. If opcode == Brtrue or Brtrue_S, then 1 will be pushed and brtrue instruction will be
+        // generated.
+        /// 2. If opcode == Brfalse or Brfalse_S, then 1 will be pushed and brfalse instruction will be
+        // generated.
         /// 3. If opcode == Br or Br_S, then a br instruction will be generated.
         /// </summary>
         public void EmitUnconditionalBranch(OpCode opcode, Label lblTarget)

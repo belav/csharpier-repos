@@ -124,12 +124,12 @@ namespace System.Windows.Forms
             );
             toolbar.ButtonClick += new ToolBarButtonClickEventHandler(OnClickToolBarButton);
 
-            /* print button */
+/* print button */
             print.ImageIndex = 0;
             print.Tag = 0;
             print.ToolTipText = "Print";
 
-            /* magnify dropdown */
+/* magnify dropdown */
             zoom.ImageIndex = 1;
             zoom.Tag = 1;
             zoom.ToolTipText = "Zoom";
@@ -159,10 +159,10 @@ namespace System.Windows.Forms
             mi = mag_menu.MenuItems.Add("10%", new EventHandler(OnClickPageMagnifierItem));
             mi.RadioCheck = true;
 
-            /* separator */
+/* separator */
             separator1.Style = ToolBarButtonStyle.Separator;
 
-            /* n-up icons */
+/* n-up icons */
             one_page.ImageIndex = 2;
             one_page.Tag = 2;
             one_page.ToolTipText = "One page";
@@ -183,17 +183,17 @@ namespace System.Windows.Forms
             six_page.Tag = 6;
             six_page.ToolTipText = "Six pages";
 
-            /* separator */
+/* separator */
             separator2.Style = ToolBarButtonStyle.Separator;
 
-            /* Page label */
+/* Page label */
             label.Text = "Page";
             label.TabStop = false;
             label.Size = new Size(50, 18);
             label.TextAlign = ContentAlignment.MiddleLeft;
             label.Dock = DockStyle.Right;
 
-            /* the page number updown */
+/* the page number updown */
             pageUpDown.Dock = DockStyle.Right;
             pageUpDown.TextAlign = HorizontalAlignment.Right;
             pageUpDown.DecimalPlaces = 0;
@@ -206,7 +206,7 @@ namespace System.Windows.Forms
             //			pageUpDown.Location = new Point(568, 0);
             pageUpDown.ValueChanged += new EventHandler(OnPageUpDownValueChanged);
 
-            /* close button */
+/* close button */
             close.Location = new Point(196, 2);
             close.Size = new Size(50, 20);
             close.TabIndex = 0;
@@ -218,7 +218,8 @@ namespace System.Windows.Forms
             toolbar.Controls.Add(pageUpDown);
             toolbar.Controls.Add(close);
 
-            //			close.Location = new Point (b.Rectangle.X + b.Rectangle.Width, toolbar.Height / 2 - close.Height / 2);
+            //			close.Location = new Point (b.Rectangle.X + b.Rectangle.Width, toolbar.Height / 2 -
+            // close.Height / 2);
             //			MinimumSize = new Size (close.Location.X + close.Width + label.Width + pageUpDown.Width, 220);
 
             return toolbar;

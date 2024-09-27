@@ -38,10 +38,12 @@ namespace System.Threading
     public class CountdownEvent : IDisposable
     {
         // CountdownEvent is a simple synchronization primitive used for fork/join parallelism. We create a
-        // latch with a count of N; threads then signal the latch, which decrements N by 1; other threads can
+        // latch with a count of N; threads then signal the latch, which decrements N by 1; other threads
+        // can
         // wait on the latch at any point; when the latch count reaches 0, all threads are woken and
         // subsequent waiters return without waiting. The implementation internally lazily creates a true
-        // Win32 event as needed. We also use some amount of spinning on MP machines before falling back to a
+        // Win32 event as needed. We also use some amount of spinning on MP machines before falling back to
+        // a
         // wait.
 
         private int m_initialCount; // The original # of signals the latch was instantiated with.
@@ -122,11 +124,14 @@ namespace System.Threading
         /// <summary>
         /// Gets a <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be set.
         /// </summary>
-        /// <value>A <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be set.</value>
-        /// <exception cref="T:System.ObjectDisposedException">The current instance has already been disposed.</exception>
+        /// <value>A <see cref="T:System.Threading.WaitHandle"/> that is used to wait for the event to be
+        // set.</value>
+        /// <exception cref="T:System.ObjectDisposedException">The current instance has already been
+        // disposed.</exception>
         /// <remarks>
         /// <see cref="WaitHandle"/> should only be used if it's needed for integration with code bases
-        /// that rely on having a WaitHandle.  If all that's needed is to wait for the <see cref="CountdownEvent"/>
+        /// that rely on having a WaitHandle.  If all that's needed is to wait for the <see
+        // cref="CountdownEvent"/>
         /// to be set, the <see cref="Wait()"/> method should be preferred.
         /// </remarks>
         public WaitHandle WaitHandle
@@ -139,7 +144,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Releases all resources used by the current instance of <see cref="T:System.Threading.CountdownEvent"/>.
+        /// Releases all resources used by the current instance of <see
+        // cref="T:System.Threading.CountdownEvent"/>.
         /// </summary>
         /// <remarks>
         /// Unlike most of the members of <see cref="CountdownEvent"/>, <see cref="Dispose()"/> is not
@@ -206,7 +212,8 @@ namespace System.Threading
             }
             else if (newCount < 0)
             {
-                //if the count is decremented below zero, then throw, it's OK to keep the count negative, and we shouldn't set the event here
+                //if the count is decremented below zero, then throw, it's OK to keep the count negative, and we
+                // shouldn't set the event here
                 //because there was a thread already which decremented it to zero and set the event
                 throw new InvalidOperationException(
                     Environment.GetResourceString("CountdownEvent_Decrement_BelowZero")
@@ -255,7 +262,8 @@ namespace System.Threading
                     );
                 }
 
-                // This disables the "CS0420: a reference to a volatile field will not be treated as volatile" warning
+                // This disables the "CS0420: a reference to a volatile field will not be treated as volatile"
+                // warning
                 // for this statement.  This warning is clearly senseless for Interlocked operations.
 #pragma warning disable 0420
                 if (
@@ -301,7 +309,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Attempts to increment the <see cref="T:System.Threading.CountdownEvent"/>'s current count by one.
+        /// Attempts to increment the <see cref="T:System.Threading.CountdownEvent"/>'s current count by
+        // one.
         /// </summary>
         /// <returns>true if the increment succeeded; otherwise, false. If <see cref="CurrentCount"/> is
         /// already at zero. this will return false.</returns>
@@ -319,7 +328,8 @@ namespace System.Threading
         /// value.
         /// </summary>
         /// <param name="signalCount">The value by which to increase <see cref="CurrentCount"/>.</param>
-        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="signalCount"/> is less than
+        /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="signalCount"/> is less
+        // than
         /// 0.</exception>
         /// <exception cref="T:System.InvalidOperationException">The current instance is already
         /// set.</exception>
@@ -379,7 +389,8 @@ namespace System.Threading
                     );
                 }
 
-                // This disables the "CS0420: a reference to a volatile field will not be treated as volatile" warning
+                // This disables the "CS0420: a reference to a volatile field will not be treated as volatile"
+                // warning
                 // for this statement.  This warning is clearly senseless for Interlocked operations.
 #pragma warning disable 0420
                 if (
@@ -426,7 +437,8 @@ namespace System.Threading
         /// </remarks>
         /// <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="count"/> is
         /// less than 0.</exception>
-        /// <exception cref="T:System.ObjectDisposedException">The current instance has alread been disposed.</exception>
+        /// <exception cref="T:System.ObjectDisposedException">The current instance has alread been
+        // disposed.</exception>
         public void Reset(int count)
         {
             ThrowIfDisposed();
@@ -464,7 +476,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, while
+        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set,
+        // while
         /// observing a <see cref="T:System.Threading.CancellationToken"/>.
         /// </summary>
         /// <param name="cancellationToken">The <see cref="T:System.Threading.CancellationToken"/> to
@@ -476,7 +489,8 @@ namespace System.Threading
         /// is canceled during the wait operation, an <see cref="T:System.OperationCanceledException"/>
         /// will be thrown.
         /// </remarks>
-        /// <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> has been
+        /// <exception cref="T:System.OperationCanceledException"><paramref name="cancellationToken"/> has
+        // been
         /// canceled.</exception>
         /// <exception cref="T:System.ObjectDisposedException">The current instance has already been
         /// disposed.</exception>
@@ -486,7 +500,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, using a
+        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set,
+        // using a
         /// <see cref="T:System.TimeSpan"/> to measure the time interval.
         /// </summary>
         /// <param name="timeout">A <see cref="T:System.TimeSpan"/> that represents the number of
@@ -511,7 +526,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, using
+        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set,
+        // using
         /// a <see cref="T:System.TimeSpan"/> to measure the time interval, while observing a
         /// <see cref="T:System.Threading.CancellationToken"/>.
         /// </summary>
@@ -541,7 +557,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, using a
+        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set,
+        // using a
         /// 32-bit signed integer to measure the time interval.
         /// </summary>
         /// <param name="millisecondsTimeout">The number of milliseconds to wait, or <see
@@ -558,7 +575,8 @@ namespace System.Threading
         }
 
         /// <summary>
-        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set, using a
+        /// Blocks the current thread until the <see cref="T:System.Threading.CountdownEvent"/> is set,
+        // using a
         /// 32-bit signed integer to measure the time interval, while observing a
         /// <see cref="T:System.Threading.CancellationToken"/>.
         /// </summary>

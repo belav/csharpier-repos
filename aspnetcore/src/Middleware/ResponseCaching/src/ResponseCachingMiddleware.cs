@@ -39,10 +39,12 @@ public class ResponseCachingMiddleware
     /// <summary>
     /// Creates a new <see cref="ResponseCachingMiddleware"/>.
     /// </summary>
-    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
+    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the
+    // pipeline.</param>
     /// <param name="options">The options for this middleware.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used for logging.</param>
-    /// <param name="poolProvider">The <see cref="ObjectPoolProvider"/> used for creating <see cref="ObjectPool"/> instances.</param>
+    /// <param name="poolProvider">The <see cref="ObjectPoolProvider"/> used for creating <see
+    // cref="ObjectPool"/> instances.</param>
     public ResponseCachingMiddleware(
         RequestDelegate next,
         IOptions<ResponseCachingOptions> options,
@@ -89,7 +91,8 @@ public class ResponseCachingMiddleware
     /// Invokes the logic of the middleware.
     /// </summary>
     /// <param name="httpContext">The <see cref="HttpContext"/>.</param>
-    /// <returns>A <see cref="Task"/> that completes when the middleware has completed processing.</returns>
+    /// <returns>A <see cref="Task"/> that completes when the middleware has completed
+    // processing.</returns>
     public async Task Invoke(HttpContext httpContext)
     {
         var context = new ResponseCachingContext(httpContext, _logger);
@@ -113,7 +116,8 @@ public class ResponseCachingMiddleware
                 {
                     await _next(httpContext);
 
-                    // If there was no response body, check the response headers now. We can cache things like redirects.
+                    // If there was no response body, check the response headers now. We can cache things like
+                    // redirects.
                     StartResponse(context);
 
                     // Finalize the cache entry
@@ -128,7 +132,8 @@ public class ResponseCachingMiddleware
             }
         }
 
-        // Response should not be captured but add IResponseCachingFeature which may be required when the response is generated
+        // Response should not be captured but add IResponseCachingFeature which may be required when the
+        // response is generated
         AddResponseCachingFeature(httpContext);
 
         try
@@ -263,7 +268,8 @@ public class ResponseCachingMiddleware
     /// Finalize cache headers.
     /// </summary>
     /// <param name="context"></param>
-    /// <returns><c>true</c> if a vary by entry needs to be stored in the cache; otherwise <c>false</c>.</returns>
+    /// <returns><c>true</c> if a vary by entry needs to be stored in the cache; otherwise
+    // <c>false</c>.</returns>
     private bool OnFinalizeCacheHeaders(ResponseCachingContext context)
     {
         if (_policyProvider.IsResponseCacheable(context))
@@ -418,7 +424,8 @@ public class ResponseCachingMiddleware
     /// Mark the response as started and set the response time if no response was started yet.
     /// </summary>
     /// <param name="context"></param>
-    /// <returns><c>true</c> if the response was not started before this call; otherwise <c>false</c>.</returns>
+    /// <returns><c>true</c> if the response was not started before this call; otherwise
+    // <c>false</c>.</returns>
     private bool OnStartResponse(ResponseCachingContext context)
     {
         if (!context.ResponseStarted)

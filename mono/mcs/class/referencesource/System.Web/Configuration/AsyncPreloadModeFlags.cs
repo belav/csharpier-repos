@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * AsyncPreloadModeFlags preloads the request entity for form posts.
- *
- * Copyright (c) 2010 Microsoft Corporation
- */
+* AsyncPreloadModeFlags preloads the request entity for form posts.
+*
+* Copyright (c) 2010 Microsoft Corporation
+*/
 
 namespace System.Web.Configuration
 {

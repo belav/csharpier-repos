@@ -301,12 +301,15 @@ namespace System
         }
 
         /// <summary>
-        /// Creates a new <see cref="Uri"/> using the specified <see cref="string"/> instance and <see cref="UriCreationOptions"/>.
+        /// Creates a new <see cref="Uri"/> using the specified <see cref="string"/> instance and <see
+        // cref="UriCreationOptions"/>.
         /// </summary>
         /// <param name="uriString">The string representation of the <see cref="Uri"/>.</param>
-        /// <param name="creationOptions">Options that control how the <seealso cref="Uri"/> is created and behaves.</param>
+        /// <param name="creationOptions">Options that control how the <seealso cref="Uri"/> is created and
+        // behaves.</param>
         /// <param name="result">The constructed <see cref="Uri"/>.</param>
-        /// <returns><see langword="true"/> if the <see cref="Uri"/> was successfully created; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the <see cref="Uri"/> was successfully created; otherwise,
+        // <see langword="false"/>.</returns>
         public static bool TryCreate(
             [NotNullWhen(true), StringSyntax(StringSyntaxAttribute.Uri)] string? uriString,
             in UriCreationOptions creationOptions,
@@ -621,7 +624,8 @@ namespace System
                 }
 
                 // (3) or is an absolute Uri that misses a slash before path "file://c:/dir/file"
-                // Note that for this check to be more general we assert that if Path is non empty and if it requires a first slash
+                // Note that for this check to be more general we assert that if Path is non empty and if it
+                // requires a first slash
                 // (which looks absent) then the method has to fail.
                 // Today it's only possible for a Dos like path, i.e. file://c:/bla would fail below check.
                 if (InFact(Flags.FirstSlashAbsent) && _info.Offset.Query > _info.Offset.Path)
@@ -690,7 +694,8 @@ namespace System
                 }
             }
             //
-            // May be scheme, host, port or path need some canonicalization but still the uri string is found to be a
+            // May be scheme, host, port or path need some canonicalization but still the uri string is found to
+            // be a
             // "well formed" one
             //
             return true;
@@ -728,7 +733,8 @@ namespace System
         }
 
         // Where stringToEscape is intended to be a completely unescaped URI string.
-        // This method will escape any character that is not a reserved or unreserved character, including percent signs.
+        // This method will escape any character that is not a reserved or unreserved character, including
+        // percent signs.
         [Obsolete(
             Obsoletions.EscapeUriStringMessage,
             DiagnosticId = Obsoletions.EscapeUriStringDiagId,
@@ -742,7 +748,8 @@ namespace System
             );
 
         // Where stringToEscape is intended to be URI data, but not an entire URI.
-        // This method will escape any character that is not an unreserved character, including percent signs.
+        // This method will escape any character that is not an unreserved character, including percent
+        // signs.
         public static string EscapeDataString(string stringToEscape) =>
             UriHelper.EscapeString(
                 stringToEscape,
@@ -850,7 +857,8 @@ namespace System
         }
 
         //
-        // Resolves into either baseUri or relativeUri according to conditions OR if not possible it uses newUriString
+        // Resolves into either baseUri or relativeUri according to conditions OR if not possible it uses
+        // newUriString
         // to  return combined URI strings from both Uris
         // otherwise if e != null on output the operation has failed
         //
@@ -959,7 +967,8 @@ namespace System
                     newUriString = baseUri.Scheme + prefix + relativeStr;
                     return null;
                 }
-                // If we are here then input like "http://host/path/" + "C:\x" will produce the result  http://host/path/c:/x
+                // If we are here then input like "http://host/path/" + "C:\x" will produce the result
+                // http://host/path/c:/x
             }
 
             GetCombinedString(baseUri, relativeStr, userEscaped, ref newUriString);

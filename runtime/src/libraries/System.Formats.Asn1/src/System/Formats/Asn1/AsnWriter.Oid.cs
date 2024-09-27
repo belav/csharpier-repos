@@ -14,7 +14,8 @@ namespace System.Formats.Asn1
         ///   Write an Object Identifier with a specified tag.
         /// </summary>
         /// <param name="oidValue">The object identifier to write.</param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 6).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 6).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but
@@ -43,7 +44,8 @@ namespace System.Formats.Asn1
         ///   Write an Object Identifier with a specified tag.
         /// </summary>
         /// <param name="oidValue">The object identifier to write.</param>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 6).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 6).</param>
         /// <exception cref="ArgumentException">
         ///   <paramref name="tag"/>.<see cref="Asn1Tag.TagClass"/> is
         ///   <see cref="TagClass.Universal"/>, but

@@ -66,8 +66,10 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Buffers.MemoryManager<>)
 )]
-//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute (typeof (System.Buffers.ReadOnlySpanAction<,>))]
-//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute (typeof (System.Buffers.SpanAction<,>))]
+//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute (typeof
+// (System.Buffers.ReadOnlySpanAction<,>))]
+//[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute (typeof
+// (System.Buffers.SpanAction<,>))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.CharEnumerator))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
     typeof(System.Collections.Generic.KeyValuePair)

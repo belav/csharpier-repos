@@ -21,7 +21,8 @@ public partial class ThreadPoolBoundHandleTests
             () => PreAllocatedOverlapped.UnsafeCreate(null, new object(), new byte[256])
         );
 
-        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
+        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor
+        // failed.
         GC.Collect();
         GC.WaitForPendingFinalizers();
     }
@@ -72,7 +73,8 @@ public partial class ThreadPoolBoundHandleTests
                 )
         );
 
-        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
+        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor
+        // failed.
         GC.Collect();
         GC.WaitForPendingFinalizers();
     }
@@ -126,7 +128,8 @@ public partial class ThreadPoolBoundHandleTests
             () => PreAllocatedOverlapped.UnsafeCreate((_, __, ___) => { }, new object(), array)
         );
 
-        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor failed.
+        // Make sure the PreAllocatedOverlapped finalizer does the right thing in the case where the .ctor
+        // failed.
         GC.Collect();
         GC.WaitForPendingFinalizers();
     }

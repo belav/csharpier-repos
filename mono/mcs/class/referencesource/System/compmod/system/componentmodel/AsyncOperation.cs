@@ -44,7 +44,8 @@ namespace System.ComponentModel
             get { return userSuppliedState; }
         }
 
-        /// <include file='doc\AsyncOperation.uex' path='docs/doc[@for="AsyncOperation.SynchronizationContext"]/*' />
+        /// <include file='doc\AsyncOperation.uex'
+        // path='docs/doc[@for="AsyncOperation.SynchronizationContext"]/*' />
         public SynchronizationContext SynchronizationContext
         {
             get { return syncContext; }

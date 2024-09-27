@@ -1406,8 +1406,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
         await host.StopAsync().DefaultTimeout();
     }
 
-    // Settings_HeaderTableSize_CanBeReduced_Client - The client uses the default 4k HPACK dynamic table size and it cannot be changed.
-    // Nor does Kestrel yet support sending dynamic table updates, so there's nothing to test here. https://github.com/dotnet/aspnetcore/issues/4715
+    // Settings_HeaderTableSize_CanBeReduced_Client - The client uses the default 4k HPACK dynamic table
+    // size and it cannot be changed.
+    // Nor does Kestrel yet support sending dynamic table updates, so there's nothing to test here.
+    // https://github.com/dotnet/aspnetcore/issues/4715
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]
@@ -1467,8 +1469,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
         }
 
         // SKIP: https://github.com/dotnet/aspnetcore/issues/17842
-        // The client initially issues all 10 requests before receiving the settings, has 5 refused (after receiving the settings),
-        // waits for the first 5 to finish, retries the refused 5, and in the end each request completes successfully despite the logged errors.
+        // The client initially issues all 10 requests before receiving the settings, has 5 refused (after
+        // receiving the settings),
+        // waits for the first 5 to finish, retries the refused 5, and in the end each request completes
+        // successfully despite the logged errors.
         // Assert.Empty(TestSink.Writes.Where(context => context.Message.Contains("HTTP/2 stream error")));
 
         await host.StopAsync().DefaultTimeout();
@@ -1534,14 +1538,17 @@ public class HttpClientHttp2InteropTests : LoggedTest
         }
 
         // SKIP: https://github.com/dotnet/aspnetcore/issues/17842
-        // The client initially issues all 10 requests before receiving the settings, has 5 refused (after receiving the settings),
-        // waits for the first 5 to finish, retries the refused 5, and in the end each request completes successfully despite the logged errors.
+        // The client initially issues all 10 requests before receiving the settings, has 5 refused (after
+        // receiving the settings),
+        // waits for the first 5 to finish, retries the refused 5, and in the end each request completes
+        // successfully despite the logged errors.
         // Assert.Empty(TestSink.Writes.Where(context => context.Message.Contains("HTTP/2 stream error")));
 
         await host.StopAsync().DefaultTimeout();
     }
 
-    // Settings_MaxConcurrentStreams_Client - Neither client or server support Push, nothing to test in this direction.
+    // Settings_MaxConcurrentStreams_Client - Neither client or server support Push, nothing to test in
+    // this direction.
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]
@@ -1572,8 +1579,10 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal("Hello World", await response.Content.ReadAsStringAsync());
 
         // SKIP: The client does not take advantage of a larger allowed frame size.
+        //
         // https://github.com/dotnet/runtime/blob/48a78bfa13e9c710851690621fc2c0fe1637802c/src/libraries/System.Net.Http/src/System/Net/Http/SocketsHttpHandler/Http2Connection.cs#L483-L488
-        // Assert.Single(TestSink.Writes.Where(context => context.Message.Contains("received DATA frame for stream ID 1 with length 18432 and flags NONE")));
+        // Assert.Single(TestSink.Writes.Where(context => context.Message.Contains("received DATA frame for
+        // stream ID 1 with length 18432 and flags NONE")));
 
         await host.StopAsync().DefaultTimeout();
     }
@@ -1656,7 +1665,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
         await host.StopAsync().DefaultTimeout();
     }
 
-    // Settings_InitialWindowSize_Lower_Server - Kestrel does not support lowering the InitialStreamWindowSize below the spec default 64kb.
+    // Settings_InitialWindowSize_Lower_Server - Kestrel does not support lowering the
+    // InitialStreamWindowSize below the spec default 64kb.
     // Settings_InitialWindowSize_Lower_Client - Not configurable.
 
     [Theory]
@@ -1808,7 +1818,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
     // ConnectionWindowSize_Client - impractical
     // The spec default connection window is 64kb - 1 but the client default is 64Mb (not configurable).
-    // The client restricts streams to 64kb - 1 so we would need to issue 64 * 1024 requests to stress the connection window limit.
+    // The client restricts streams to 64kb - 1 so we would need to issue 64 * 1024 requests to stress
+    // the connection window limit.
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]

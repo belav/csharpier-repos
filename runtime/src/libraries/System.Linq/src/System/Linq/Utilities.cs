@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Linq
 {
     /// <summary>
-    /// Contains helper methods for System.Linq. Please put enumerable-related methods in <see cref="EnumerableHelpers"/>.
+    /// Contains helper methods for System.Linq. Please put enumerable-related methods in <see
+    // cref="EnumerableHelpers"/>.
     /// </summary>
     internal static class Utilities
     {

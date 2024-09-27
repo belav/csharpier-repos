@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 public class HttpMethodActionConstraint : IActionConstraint
 {
     /// <summary>
-    /// The <see cref="IActionConstraint.Order" /> value used by <see cref="HttpMethodActionConstraint" />.
+    /// The <see cref="IActionConstraint.Order" /> value used by <see cref="HttpMethodActionConstraint"
+    // />.
     /// </summary>
     public static readonly int HttpMethodConstraintOrder = 100;
 
@@ -48,7 +49,8 @@ public class HttpMethodActionConstraint : IActionConstraint
     }
 
     /// <summary>
-    /// Gets the list of allowed HTTP methods. Will return an empty list if all HTTP methods are allowed.
+    /// Gets the list of allowed HTTP methods. Will return an empty list if all HTTP methods are
+    // allowed.
     /// </summary>
     public IEnumerable<string> HttpMethods => _httpMethods;
 

@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
 
             /// <summary>
             /// Lists compiler attributes that we want to remove.
-            /// The TupleElementNames attribute is compiler generated (it is used for naming tuple element names).
+            /// The TupleElementNames attribute is compiler generated (it is used for naming tuple element
+            // names).
             /// We never want to place it in source code.
             /// Same thing for the Dynamic attribute.
             /// </summary>

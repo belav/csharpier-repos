@@ -164,7 +164,8 @@ namespace System.Buffers
                 // A == 1 && B == 1 means SequenceType.String
                 if (typeof(T) == typeof(char) && endIndex < 0)
                 {
-                    // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
+                    // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex &
+                    // ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
                     return (ReadOnlyMemory<T>)
                         (object)
                             ((string)startObject).AsMemory(
@@ -253,7 +254,8 @@ namespace System.Buffers
                 if (typeof(T) == typeof(char) && endIndex < 0)
                 {
                     var memory = (ReadOnlyMemory<T>)(object)((string)startObject).AsMemory();
-                    // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex & ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
+                    // No need to remove the FlagBitMask since (endIndex - startIndex) == (endIndex &
+                    // ReadOnlySequence.IndexBitMask) - (startIndex & ReadOnlySequence.IndexBitMask)
                     return memory.Span.Slice(
                         startIndex & ReadOnlySequence.IndexBitMask,
                         endIndex - startIndex
@@ -465,7 +467,8 @@ namespace System.Buffers
             else
             {
                 // Multi-Segment Sequence
-                // This optimization works because we know sliceStartIndex, sliceEndIndex, startIndex, and endIndex are all >= 0
+                // This optimization works because we know sliceStartIndex, sliceEndIndex, startIndex, and endIndex
+                // are all >= 0
                 Debug.Assert(sliceStartIndex >= 0 && startIndex >= 0 && endIndex >= 0);
 
                 ulong sliceStartRange = sliceStartIndex;

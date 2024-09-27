@@ -10,10 +10,13 @@ using static System.HexConverter;
 
 namespace System.Net.Http.Headers
 {
-    /// <summary>Represents a media type used in a Content-Type header as defined in the RFC 2616.</summary>
+    /// <summary>Represents a media type used in a Content-Type header as defined in the RFC
+    // 2616.</summary>
     /// <remarks>
-    /// The <see cref="MediaTypeHeaderValue"/> class provides support for the media type used in a Content-Type header
-    /// as defined in RFC 2616 by the IETF. An example of a media-type would be "text/plain; charset=iso-8859-5".
+    /// The <see cref="MediaTypeHeaderValue"/> class provides support for the media type used in a
+    // Content-Type header
+    /// as defined in RFC 2616 by the IETF. An example of a media-type would be "text/plain;
+    // charset=iso-8859-5".
     /// </remarks>
     public class MediaTypeHeaderValue : ICloneable
     {
@@ -83,7 +86,8 @@ namespace System.Net.Http.Headers
         internal MediaTypeHeaderValue() { }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
-        /// <param name="source">A <see cref="MediaTypeHeaderValue"/> object used to initialize the new instance.</param>
+        /// <param name="source">A <see cref="MediaTypeHeaderValue"/> object used to initialize the new
+        // instance.</param>
         protected MediaTypeHeaderValue(MediaTypeHeaderValue source)
         {
             Debug.Assert(source != null);
@@ -93,12 +97,14 @@ namespace System.Net.Http.Headers
         }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
-        /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>
+        /// <param name="mediaType">The source represented as a string to initialize the new
+        // instance.</param>
         public MediaTypeHeaderValue(string mediaType)
             : this(mediaType, charSet: null) { }
 
         /// <summary>Initializes a new instance of the <see cref="MediaTypeHeaderValue"/> class.</summary>
-        /// <param name="mediaType">The source represented as a string to initialize the new instance.</param>
+        /// <param name="mediaType">The source represented as a string to initialize the new
+        // instance.</param>
         /// <param name="charSet">The value to use for the character set.</param>
         public MediaTypeHeaderValue(string mediaType, string? charSet)
         {
@@ -111,7 +117,8 @@ namespace System.Net.Http.Headers
             }
         }
 
-        /// <summary>Returns a string that represents the current <see cref="MediaTypeHeaderValue"/> object.</summary>
+        /// <summary>Returns a string that represents the current <see cref="MediaTypeHeaderValue"/>
+        // object.</summary>
         /// <returns>A string that represents the current object.</returns>
         public override string ToString()
         {
@@ -126,9 +133,11 @@ namespace System.Net.Http.Headers
             return StringBuilderCache.GetStringAndRelease(sb);
         }
 
-        /// <summary>Determines whether the specified <see cref="object"/> is equal to the current <see cref="MediaTypeHeaderValue"/> object.</summary>
+        /// <summary>Determines whether the specified <see cref="object"/> is equal to the current <see
+        // cref="MediaTypeHeaderValue"/> object.</summary>
         /// <param name="obj">The object to compare with the current object.</param>
-        /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the specified <see cref="object"/> is equal to the current
+        // object; otherwise, <see langword="false"/>.</returns>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is MediaTypeHeaderValue other
             && string.Equals(_mediaType, other._mediaType, StringComparison.OrdinalIgnoreCase)
@@ -137,8 +146,10 @@ namespace System.Net.Http.Headers
         /// <summary>Serves as a hash function for an <see cref="MediaTypeHeaderValue"/> object.</summary>
         /// <returns>A hash code for the current object.</returns>
         /// <remarks>
-        /// A hash code is a numeric value that is used to identify an object during equality testing. It can also serve as an index for an object in a collection.
-        /// The GetHashCode method is suitable for use in hashing algorithms and data structures such as a hash table.
+        /// A hash code is a numeric value that is used to identify an object during equality testing. It
+        // can also serve as an index for an object in a collection.
+        /// The GetHashCode method is suitable for use in hashing algorithms and data structures such as a
+        // hash table.
         /// </remarks>
         public override int GetHashCode()
         {
@@ -150,8 +161,10 @@ namespace System.Net.Http.Headers
         /// <summary>Converts a string to an <see cref="MediaTypeHeaderValue"/> instance.</summary>
         /// <param name="input">A string that represents media type header value information.</param>
         /// <returns>A <see cref="MediaTypeHeaderValue"/> instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="input"/> is a <see langword="null"/> reference.</exception>
-        /// <exception cref="FormatException"><parmref name="input"/> is not valid media type header value information.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="input"/> is a <see langword="null"/>
+        // reference.</exception>
+        /// <exception cref="FormatException"><parmref name="input"/> is not valid media type header value
+        // information.</exception>
         public static MediaTypeHeaderValue Parse(string input)
         {
             int index = 0;
@@ -159,10 +172,12 @@ namespace System.Net.Http.Headers
                 MediaTypeHeaderParser.SingleValueParser.ParseValue(input, null, ref index);
         }
 
-        /// <summary>Determines whether a string is valid <see cref="MediaTypeHeaderValue"/> information.</summary>
+        /// <summary>Determines whether a string is valid <see cref="MediaTypeHeaderValue"/>
+        // information.</summary>
         /// <param name="input">The string to validate.</param>
         /// <param name="parsedValue">The <see cref="MediaTypeHeaderValue"/> version of the string.</param>
-        /// <returns><see langword="true"/> if input is valid <see cref="MediaTypeHeaderValue"/> information; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if input is valid <see cref="MediaTypeHeaderValue"/>
+        // information; otherwise, <see langword="false"/>.</returns>
         public static bool TryParse(
             [NotNullWhen(true)] string? input,
             [NotNullWhen(true)] out MediaTypeHeaderValue? parsedValue
@@ -279,7 +294,8 @@ namespace System.Net.Http.Headers
             current++; // skip delimiter.
             current += HttpRuleParser.GetWhitespaceLength(input, current);
 
-            // Parse the subtype, i.e. <subtype> in media type string "<type>/<subtype>; param1=value1; param2=value2"
+            // Parse the subtype, i.e. <subtype> in media type string "<type>/<subtype>; param1=value1;
+            // param2=value2"
             int subtypeLength = HttpRuleParser.GetTokenLength(input, current);
 
             if (subtypeLength == 0)
@@ -287,7 +303,8 @@ namespace System.Net.Http.Headers
                 return 0;
             }
 
-            // If there is no whitespace between <type> and <subtype> in <type>/<subtype> get the media type using
+            // If there is no whitespace between <type> and <subtype> in <type>/<subtype> get the media type
+            // using
             // one Substring call. Otherwise get substrings for <type> and <subtype> and combine them.
             int mediaTypeLength = current + subtypeLength - startIndex;
             if (typeLength + subtypeLength + 1 == mediaTypeLength)
@@ -313,7 +330,8 @@ namespace System.Net.Http.Headers
         {
             ArgumentException.ThrowIfNullOrWhiteSpace(mediaType, parameterName);
 
-            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
+            // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are
+            // allowed.
             // Also no LWS between type and subtype are allowed.
             int mediaTypeLength = GetMediaTypeExpressionLength(
                 mediaType,

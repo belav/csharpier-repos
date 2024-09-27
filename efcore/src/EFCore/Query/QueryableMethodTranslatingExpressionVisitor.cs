@@ -10,13 +10,16 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         A class that translates queryable methods in a query.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVisitor
 {
@@ -24,7 +27,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     private readonly EntityShaperNullableMarkingExpressionVisitor _entityShaperNullableMarkingExpressionVisitor;
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" /> class.
+    ///     Creates a new instance of the <see cref="QueryableMethodTranslatingExpressionVisitor" />
+    // class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
@@ -63,7 +67,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     {
         var translated = Visit(expression);
 
-        // Note that we only throw if a specific node is recognized as untranslatable; we need to otherwise not throw in order to allow
+        // Note that we only throw if a specific node is recognized as untranslatable; we need to otherwise
+        // not throw in order to allow
         // for client evaluation.
         if (
             translated == QueryCompilationContext.NotTranslatedExpression
@@ -123,7 +128,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     {
         if (extensionExpression is QueryRootExpression queryRootExpression)
         {
-            // This requires exact type match on query root to avoid processing query roots derived from EntityQueryRootExpression, e.g.
+            // This requires exact type match on query root to avoid processing query roots derived from
+            // EntityQueryRootExpression, e.g.
             // SQL Server TemporalQueryRootExpression.
             if (queryRootExpression.GetType() == typeof(EntityQueryRootExpression))
             {
@@ -877,7 +883,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     }
 
     /// <summary>
-    ///     Creates a visitor customized to translate a subquery through <see cref="TranslateSubquery(Expression)" />.
+    ///     Creates a visitor customized to translate a subquery through <see
+    // cref="TranslateSubquery(Expression)" />.
     /// </summary>
     /// <returns>A visitor to translate subquery.</returns>
     protected abstract QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor();
@@ -890,7 +897,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     protected abstract ShapedQueryExpression CreateShapedQueryExpression(IEntityType entityType);
 
     /// <summary>
-    ///     Translates <see cref="Queryable.All{TSource}(IQueryable{TSource}, Expression{Func{TSource,bool}})" /> method over the given source.
+    ///     Translates <see cref="Queryable.All{TSource}(IQueryable{TSource},
+    // Expression{Func{TSource,bool}})" /> method over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
@@ -901,7 +909,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Any{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Any{TSource}(IQueryable{TSource})" /> method and other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
@@ -912,7 +921,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Average(IQueryable{decimal})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Average(IQueryable{decimal})" /> method and other overloads
+    // over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="selector">The selector supplied in the call.</param>
@@ -936,7 +946,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Concat{TSource}(IQueryable{TSource}, IEnumerable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Concat{TSource}(IQueryable{TSource}, IEnumerable{TSource})"
+    // /> method over the given source.
     /// </summary>
     /// <param name="source1">The shaped query on which the operator is applied.</param>
     /// <param name="source2">The other source to perform concat.</param>
@@ -947,7 +958,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Contains{TSource}(IQueryable{TSource}, TSource)" /> method over the given source.
+    ///     Translates <see cref="Queryable.Contains{TSource}(IQueryable{TSource}, TSource)" /> method
+    // over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="item">The item to search for.</param>
@@ -958,7 +970,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Count{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Count{TSource}(IQueryable{TSource})" /> method and other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
@@ -969,7 +982,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.DefaultIfEmpty{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.DefaultIfEmpty{TSource}(IQueryable{TSource})" /> method and
+    // other overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="defaultValue">The default value to use.</param>
@@ -980,7 +994,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Distinct{TSource}(IQueryable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Distinct{TSource}(IQueryable{TSource})" /> method over the
+    // given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <returns>The shaped query after translation.</returns>
@@ -988,11 +1003,13 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
 
     /// <summary>
     ///     Translates <see cref="Queryable.ElementAt{TSource}(IQueryable{TSource}, int)" /> method or
-    ///     <see cref="Queryable.ElementAtOrDefault{TSource}(IQueryable{TSource}, int)" /> over the given source.
+    ///     <see cref="Queryable.ElementAtOrDefault{TSource}(IQueryable{TSource}, int)" /> over the
+    // given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="index">The index of the element.</param>
-    /// <param name="returnDefault">A value indicating whether default should be returned or throw.</param>
+    /// <param name="returnDefault">A value indicating whether default should be returned or
+    // throw.</param>
     /// <returns>The shaped query after translation.</returns>
     protected abstract ShapedQueryExpression? TranslateElementAtOrDefault(
         ShapedQueryExpression source,
@@ -1001,7 +1018,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Except{TSource}(IQueryable{TSource}, IEnumerable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Except{TSource}(IQueryable{TSource}, IEnumerable{TSource})"
+    // /> method over the given source.
     /// </summary>
     /// <param name="source1">The shaped query on which the operator is applied.</param>
     /// <param name="source2">The other source to perform except with.</param>
@@ -1013,12 +1031,14 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
 
     /// <summary>
     ///     Translates <see cref="Queryable.First{TSource}(IQueryable{TSource})" /> method or
-    ///     <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource})" /> and their other overloads over the given source.
+    ///     <see cref="Queryable.FirstOrDefault{TSource}(IQueryable{TSource})" /> and their other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
     /// <param name="returnType">The return type of result.</param>
-    /// <param name="returnDefault">A value indicating whether default should be returned or throw.</param>
+    /// <param name="returnDefault">A value indicating whether default should be returned or
+    // throw.</param>
     /// <returns>The shaped query after translation.</returns>
     protected abstract ShapedQueryExpression? TranslateFirstOrDefault(
         ShapedQueryExpression source,
@@ -1028,7 +1048,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.GroupBy{TSource, TKey}(IQueryable{TSource}, Expression{Func{TSource, TKey}})" /> method and
+    ///     Translates <see cref="Queryable.GroupBy{TSource, TKey}(IQueryable{TSource},
+    // Expression{Func{TSource, TKey}})" /> method and
     ///     other overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1046,7 +1067,9 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     /// <summary>
     ///     Translates
     ///     <see
-    ///         cref="Queryable.GroupJoin{TOuter, TInner, TKey, TResult}(IQueryable{TOuter}, IEnumerable{TInner}, Expression{Func{TOuter, TKey}}, Expression{Func{TInner, TKey}}, Expression{Func{TOuter, IEnumerable{TInner}, TResult}})" />
+    ///         cref="Queryable.GroupJoin{TOuter, TInner, TKey, TResult}(IQueryable{TOuter},
+    // IEnumerable{TInner}, Expression{Func{TOuter, TKey}}, Expression{Func{TInner, TKey}},
+    // Expression{Func{TOuter, IEnumerable{TInner}, TResult}})" />
     ///     method over the given source.
     /// </summary>
     /// <param name="outer">The shaped query on which the operator is applied.</param>
@@ -1064,7 +1087,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Intersect{TSource}(IQueryable{TSource}, IEnumerable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Intersect{TSource}(IQueryable{TSource},
+    // IEnumerable{TSource})" /> method over the given source.
     /// </summary>
     /// <param name="source1">The shaped query on which the operator is applied.</param>
     /// <param name="source2">The other source to perform intersect with.</param>
@@ -1077,7 +1101,9 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     /// <summary>
     ///     Translates
     ///     <see
-    ///         cref="Queryable.Join{TOuter, TInner, TKey, TResult}(IQueryable{TOuter}, IEnumerable{TInner}, Expression{Func{TOuter, TKey}}, Expression{Func{TInner, TKey}}, Expression{Func{TOuter, TInner, TResult}})" />
+    ///         cref="Queryable.Join{TOuter, TInner, TKey, TResult}(IQueryable{TOuter},
+    // IEnumerable{TInner}, Expression{Func{TOuter, TKey}}, Expression{Func{TInner, TKey}},
+    // Expression{Func{TOuter, TInner, TResult}})" />
     ///     method over the given source.
     /// </summary>
     /// <param name="outer">The shaped query on which the operator is applied.</param>
@@ -1098,7 +1124,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     ///     Translates LeftJoin over the given source.
     /// </summary>
     /// <remarks>
-    ///     Certain patterns of GroupJoin-DefaultIfEmpty-SelectMany represents a left join in database. We identify such pattern
+    ///     Certain patterns of GroupJoin-DefaultIfEmpty-SelectMany represents a left join in database.
+    // We identify such pattern
     ///     in advance and convert it to join like syntax.
     /// </remarks>
     /// <param name="outer">The shaped query on which the operator is applied.</param>
@@ -1117,12 +1144,14 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
 
     /// <summary>
     ///     Translates <see cref="Queryable.Last{TSource}(IQueryable{TSource})" /> method or
-    ///     <see cref="Queryable.LastOrDefault{TSource}(IQueryable{TSource})" /> and their other overloads over the given source.
+    ///     <see cref="Queryable.LastOrDefault{TSource}(IQueryable{TSource})" /> and their other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
     /// <param name="returnType">The return type of result.</param>
-    /// <param name="returnDefault">A value indicating whether default should be returned or throw.</param>
+    /// <param name="returnDefault">A value indicating whether default should be returned or
+    // throw.</param>
     /// <returns>The shaped query after translation.</returns>
     protected abstract ShapedQueryExpression? TranslateLastOrDefault(
         ShapedQueryExpression source,
@@ -1132,7 +1161,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.LongCount{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.LongCount{TSource}(IQueryable{TSource})" /> method and other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
@@ -1143,7 +1173,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Max{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Max{TSource}(IQueryable{TSource})" /> method and other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="selector">The selector supplied in the call.</param>
@@ -1156,7 +1187,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Min{TSource}(IQueryable{TSource})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Min{TSource}(IQueryable{TSource})" /> method and other
+    // overloads over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="selector">The selector supplied in the call.</param>
@@ -1169,7 +1201,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.OfType{TResult}(IQueryable)" /> method over the given source.
+    ///     Translates <see cref="Queryable.OfType{TResult}(IQueryable)" /> method over the given
+    // source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="resultType">The type of result which is being filtered with.</param>
@@ -1180,8 +1213,10 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.OrderBy{TSource, TKey}(IQueryable{TSource}, Expression{Func{TSource, TKey}})" /> or
-    ///     <see cref="Queryable.OrderByDescending{TSource, TKey}(IQueryable{TSource}, Expression{Func{TSource, TKey}})" /> method
+    ///     Translates <see cref="Queryable.OrderBy{TSource, TKey}(IQueryable{TSource},
+    // Expression{Func{TSource, TKey}})" /> or
+    ///     <see cref="Queryable.OrderByDescending{TSource, TKey}(IQueryable{TSource},
+    // Expression{Func{TSource, TKey}})" /> method
     ///     over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1195,14 +1230,16 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Reverse{TSource}(IQueryable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Reverse{TSource}(IQueryable{TSource})" /> method over the
+    // given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <returns>The shaped query after translation.</returns>
     protected abstract ShapedQueryExpression? TranslateReverse(ShapedQueryExpression source);
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Select{TSource, TResult}(IQueryable{TSource}, Expression{Func{TSource, TResult}})" /> method over the
+    ///     Translates <see cref="Queryable.Select{TSource, TResult}(IQueryable{TSource},
+    // Expression{Func{TSource, TResult}})" /> method over the
     ///     given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1216,7 +1253,9 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     /// <summary>
     ///     Translates
     ///     <see
-    ///         cref="Queryable.SelectMany{TSource, TCollection, TResult}(IQueryable{TSource}, Expression{Func{TSource, IEnumerable{TCollection}}}, Expression{Func{TSource, TCollection, TResult}})" />
+    ///         cref="Queryable.SelectMany{TSource, TCollection, TResult}(IQueryable{TSource},
+    // Expression{Func{TSource, IEnumerable{TCollection}}}, Expression{Func{TSource, TCollection,
+    // TResult}})" />
     ///     method over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1230,7 +1269,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.SelectMany{TSource, TResult}(IQueryable{TSource}, Expression{Func{TSource, IEnumerable{TResult}}})" />
+    ///     Translates <see cref="Queryable.SelectMany{TSource, TResult}(IQueryable{TSource},
+    // Expression{Func{TSource, IEnumerable{TResult}}})" />
     ///     method over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1249,7 +1289,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>
     /// <param name="returnType">The return type of result.</param>
-    /// <param name="returnDefault">A value indicating whether default should be returned or throw.</param>
+    /// <param name="returnDefault">A value indicating whether default should be returned or
+    // throw.</param>
     /// <returns>The shaped query after translation.</returns>
     protected abstract ShapedQueryExpression? TranslateSingleOrDefault(
         ShapedQueryExpression source,
@@ -1259,7 +1300,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Skip{TSource}(IQueryable{TSource}, int)" /> method over the given source.
+    ///     Translates <see cref="Queryable.Skip{TSource}(IQueryable{TSource}, int)" /> method over the
+    // given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="count">The count supplied in the call.</param>
@@ -1270,7 +1312,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.SkipWhile{TSource}(IQueryable{TSource}, Expression{Func{TSource, bool}})" /> method over the given
+    ///     Translates <see cref="Queryable.SkipWhile{TSource}(IQueryable{TSource},
+    // Expression{Func{TSource, bool}})" /> method over the given
     ///     source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1282,7 +1325,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Sum(IQueryable{decimal})" /> method and other overloads over the given source.
+    ///     Translates <see cref="Queryable.Sum(IQueryable{decimal})" /> method and other overloads over
+    // the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="selector">The selector supplied in the call.</param>
@@ -1295,7 +1339,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Take{TSource}(IQueryable{TSource}, int)" /> method over the given source.
+    ///     Translates <see cref="Queryable.Take{TSource}(IQueryable{TSource}, int)" /> method over the
+    // given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="count">The count supplied in the call.</param>
@@ -1306,7 +1351,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.TakeWhile{TSource}(IQueryable{TSource}, Expression{Func{TSource, bool}})" /> method over the given
+    ///     Translates <see cref="Queryable.TakeWhile{TSource}(IQueryable{TSource},
+    // Expression{Func{TSource, bool}})" /> method over the given
     ///     source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1318,8 +1364,10 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.ThenBy{TSource, TKey}(IOrderedQueryable{TSource}, Expression{Func{TSource, TKey}})" /> or
-    ///     <see cref="Queryable.ThenByDescending{TSource, TKey}(IOrderedQueryable{TSource}, Expression{Func{TSource, TKey}})" /> method
+    ///     Translates <see cref="Queryable.ThenBy{TSource, TKey}(IOrderedQueryable{TSource},
+    // Expression{Func{TSource, TKey}})" /> or
+    ///     <see cref="Queryable.ThenByDescending{TSource, TKey}(IOrderedQueryable{TSource},
+    // Expression{Func{TSource, TKey}})" /> method
     ///     over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
@@ -1333,7 +1381,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Union{TSource}(IQueryable{TSource}, IEnumerable{TSource})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Union{TSource}(IQueryable{TSource}, IEnumerable{TSource})"
+    // /> method over the given source.
     /// </summary>
     /// <param name="source1">The shaped query on which the operator is applied.</param>
     /// <param name="source2">The other source to perform union with.</param>
@@ -1344,7 +1393,8 @@ public abstract class QueryableMethodTranslatingExpressionVisitor : ExpressionVi
     );
 
     /// <summary>
-    ///     Translates <see cref="Queryable.Where{TSource}(IQueryable{TSource}, Expression{Func{TSource, bool}})" /> method over the given source.
+    ///     Translates <see cref="Queryable.Where{TSource}(IQueryable{TSource}, Expression{Func{TSource,
+    // bool}})" /> method over the given source.
     /// </summary>
     /// <param name="source">The shaped query on which the operator is applied.</param>
     /// <param name="predicate">The predicate supplied in the call.</param>

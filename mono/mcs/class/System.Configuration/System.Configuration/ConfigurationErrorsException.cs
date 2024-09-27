@@ -38,7 +38,7 @@ using System.Xml;
 
 namespace System.Configuration
 {
-    /* disable the obsolete warnings about ConfigurationException */
+/* disable the obsolete warnings about ConfigurationException */
 #pragma warning disable 618
 
     [Serializable]

@@ -25,7 +25,8 @@ namespace System.Globalization
             }
             else
             {
-                // In the invariant mode, all string comparisons are done as ordinal so when generating the sort keys we generate it according to this fact
+                // In the invariant mode, all string comparisons are done as ordinal so when generating the sort
+                // keys we generate it according to this fact
                 keyData = new byte[source.Length * sizeof(char)];
 
                 if ((options & (CompareOptions.IgnoreCase | CompareOptions.OrdinalIgnoreCase)) != 0)

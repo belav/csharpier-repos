@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * IHttpModule interface
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* IHttpModule interface
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -27,7 +27,8 @@ namespace System.Web
         void Init(HttpApplication context);
 
         /// <devdoc>
-        ///    <para>Invoked by ASP.NET to enable a module to perform any final cleanup work prior to tear-down.</para>
+        ///    <para>Invoked by ASP.NET to enable a module to perform any final cleanup work prior to
+        // tear-down.</para>
         /// </devdoc>
         void Dispose();
     }

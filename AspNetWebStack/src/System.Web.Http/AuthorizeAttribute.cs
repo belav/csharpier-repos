@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -16,7 +17,8 @@ namespace System.Web.Http
     /// <summary>
     /// An authorization filter that verifies the request's <see cref="IPrincipal"/>.
     /// </summary>
-    /// <remarks>You can declare multiple of these attributes per action. You can also use <see cref="AllowAnonymousAttribute"/>
+    /// <remarks>You can declare multiple of these attributes per action. You can also use <see
+    // cref="AllowAnonymousAttribute"/>
     /// to disable authorization for a specific action.</remarks>
     [SuppressMessage(
         "Microsoft.Performance",
@@ -45,7 +47,8 @@ namespace System.Web.Http
         /// <value>
         /// The roles string.
         /// </value>
-        /// <remarks>Multiple role names can be specified using the comma character as a separator.</remarks>
+        /// <remarks>Multiple role names can be specified using the comma character as a
+        // separator.</remarks>
         public string Roles
         {
             get { return _roles ?? String.Empty; }
@@ -71,7 +74,8 @@ namespace System.Web.Http
         /// <value>
         /// The users string.
         /// </value>
-        /// <remarks>Multiple role names can be specified using the comma character as a separator.</remarks>
+        /// <remarks>Multiple role names can be specified using the comma character as a
+        // separator.</remarks>
         public string Users
         {
             get { return _users ?? String.Empty; }
@@ -83,9 +87,12 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Determines whether access for this particular request is authorized. This method uses the user <see cref="IPrincipal"/>
-        /// returned via <see cref="HttpRequestContext.Principal"/>. Authorization is denied if the user is not authenticated,
-        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is not in any of the authorized
+        /// Determines whether access for this particular request is authorized. This method uses the user
+        // <see cref="IPrincipal"/>
+        /// returned via <see cref="HttpRequestContext.Principal"/>. Authorization is denied if the user is
+        // not authenticated,
+        /// the user is not in the authorized group of <see cref="Users"/> (if defined), or if the user is
+        // not in any of the authorized
         /// <see cref="Roles"/> (if defined).
         /// </summary>
         /// <param name="actionContext">The context.</param>
@@ -124,12 +131,15 @@ namespace System.Web.Http
         /// returned via <see cref="HttpRequestContext.Principal"/>. Authorization is denied if
         /// - the request is not associated with any user.
         /// - the user is not authenticated,
-        /// - the user is authenticated but is not in the authorized group of <see cref="Users"/> (if defined), or if the user
+        /// - the user is authenticated but is not in the authorized group of <see cref="Users"/> (if
+        // defined), or if the user
         /// is not in any of the authorized <see cref="Roles"/> (if defined).
         ///
-        /// If authorization is denied then this method will invoke <see cref="HandleUnauthorizedRequest(HttpActionContext)"/> to process the unauthorized request.
+        /// If authorization is denied then this method will invoke <see
+        // cref="HandleUnauthorizedRequest(HttpActionContext)"/> to process the unauthorized request.
         /// </summary>
-        /// <remarks>You can use <see cref="AllowAnonymousAttribute"/> to cause authorization checks to be skipped for a particular
+        /// <remarks>You can use <see cref="AllowAnonymousAttribute"/> to cause authorization checks to be
+        // skipped for a particular
         /// action or controller.</remarks>
         /// <seealso cref="IsAuthorized(HttpActionContext)" />
         /// <param name="actionContext">The context.</param>
@@ -153,8 +163,10 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Processes requests that fail authorization. This default implementation creates a new response with the
-        /// Unauthorized status code. Override this method to provide your own handling for unauthorized requests.
+        /// Processes requests that fail authorization. This default implementation creates a new response
+        // with the
+        /// Unauthorized status code. Override this method to provide your own handling for unauthorized
+        // requests.
         /// </summary>
         /// <param name="actionContext">The context.</param>
         protected virtual void HandleUnauthorizedRequest(HttpActionContext actionContext)

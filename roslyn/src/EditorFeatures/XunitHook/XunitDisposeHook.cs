@@ -34,8 +34,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 if (appDomainManagerType is null)
                     continue;
 
-                // AppDomainManager_AppDomain.Dispose() calls AppDomain.Unload(), which is unfortunately not reliable
-                // when the test creates STA COM objects. Since this call to Unload() only occurs at the end of testing
+                // AppDomainManager_AppDomain.Dispose() calls AppDomain.Unload(), which is unfortunately not
+                // reliable
+                // when the test creates STA COM objects. Since this call to Unload() only occurs at the end of
+                // testing
                 // (immediately before the process is going to close anyway), we can simply hot-patch the executable
                 // code in Dispose() to return without taking any action.
                 //

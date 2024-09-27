@@ -38,8 +38,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Returns a non-null <see cref="SyntaxTree"/> that owns this node.
         /// If this node was created with an explicit non-null <see cref="SyntaxTree"/>, returns that tree.
-        /// Otherwise, if this node has a non-null parent, then returns the parent's <see cref="SyntaxTree"/>.
-        /// Otherwise, returns a newly created <see cref="SyntaxTree"/> rooted at this node, preserving this node's reference identity.
+        /// Otherwise, if this node has a non-null parent, then returns the parent's <see
+        // cref="SyntaxTree"/>.
+        /// Otherwise, returns a newly created <see cref="SyntaxTree"/> rooted at this node, preserving this
+        // node's reference identity.
         /// </summary>
         internal new SyntaxTree SyntaxTree
         {
@@ -318,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="includeZeroWidth">True if zero width tokens should be included, false by
         /// default.</param>
-        /// <param name="includeSkipped">True if skipped tokens should be included, false by default.</param>
+        /// <param name="includeSkipped">True if skipped tokens should be included, false by
+        // default.</param>
         /// <param name="includeDirectives">True if directives should be included, false by default.</param>
         /// <param name="includeDocumentationComments">True if documentation comments should be
         /// included, false by default.</param>
@@ -341,9 +344,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Gets the first token of the tree rooted by this node.
         /// </summary>
-        /// <param name="predicate">Only tokens for which this predicate returns true are included.  Pass null to include
+        /// <param name="predicate">Only tokens for which this predicate returns true are included.  Pass
+        // null to include
         /// all tokens.</param>
-        /// <param name="stepInto">Steps into trivia if this is not null.  Only trivia for which this delegate returns
+        /// <param name="stepInto">Steps into trivia if this is not null.  Only trivia for which this
+        // delegate returns
         /// true are included.</param>
         /// <returns></returns>
         internal SyntaxToken GetFirstToken(
@@ -359,7 +364,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="includeZeroWidth">True if zero width tokens should be included, false by
         /// default.</param>
-        /// <param name="includeSkipped">True if skipped tokens should be included, false by default.</param>
+        /// <param name="includeSkipped">True if skipped tokens should be included, false by
+        // default.</param>
         /// <param name="includeDirectives">True if directives should be included, false by default.</param>
         /// <param name="includeDocumentationComments">True if documentation comments should be
         /// included, false by default.</param>

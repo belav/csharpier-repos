@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         void CleanupGeneratedFiles(MetadataAsSourceWorkspace workspace);
 
         /// <summary>
-        /// Called when the file returned from <see cref="GetGeneratedFileAsync"/> needs to be added to the workspace,
+        /// Called when the file returned from <see cref="GetGeneratedFileAsync"/> needs to be added to the
+        // workspace,
         /// to be opened.  Will be called on the main thread of the workspace host.
         /// </summary>
         bool TryAddDocumentToWorkspace(
@@ -43,13 +44,15 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         );
 
         /// <summary>
-        /// Called when the file is being closed, and so needs to be removed from the workspace.  Will be called on the
+        /// Called when the file is being closed, and so needs to be removed from the workspace.  Will be
+        // called on the
         /// main thread of the workspace host.
         /// </summary>
         bool TryRemoveDocumentFromWorkspace(MetadataAsSourceWorkspace workspace, string filePath);
 
         /// <summary>
-        /// Called to determine if the file should be collapsed by default when opened for the first time.  Will be
+        /// Called to determine if the file should be collapsed by default when opened for the first time.
+        // Will be
         /// called on the main thread of the workspace host.
         /// </summary>
         bool ShouldCollapseOnOpen(
@@ -59,7 +62,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         );
 
         /// <summary>
-        /// Maps from a document to its project for the purposes of symbol mapping via <see cref="ISymbolMappingService"/>
+        /// Maps from a document to its project for the purposes of symbol mapping via <see
+        // cref="ISymbolMappingService"/>
         /// </summary>
         Project? MapDocument(Document document);
     }

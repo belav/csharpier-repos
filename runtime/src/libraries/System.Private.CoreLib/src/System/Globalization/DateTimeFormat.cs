@@ -12,114 +12,137 @@ using System.Text;
 
 namespace System
 {
-    /*
-     Customized format patterns:
-     P.S. Format in the table below is the internal number format used to display the pattern.
+/*
+Customized format patterns:
+P.S. Format in the table below is the internal number format used to display the pattern.
 
-     Patterns   Format      Description                           Example
-     =========  ==========  ===================================== ========
-        "h"     "0"         hour (12-hour clock)w/o leading zero  3
-        "hh"    "00"        hour (12-hour clock)with leading zero 03
-        "hh*"   "00"        hour (12-hour clock)with leading zero 03
+Patterns   Format      Description                           Example
+=========  ==========  ===================================== ========
+"h"     "0"         hour (12-hour clock)w/o leading zero  3
+"hh"    "00"        hour (12-hour clock)with leading zero 03
+"hh*"   "00"        hour (12-hour clock)with leading zero 03
 
-        "H"     "0"         hour (24-hour clock)w/o leading zero  8
-        "HH"    "00"        hour (24-hour clock)with leading zero 08
-        "HH*"   "00"        hour (24-hour clock)                  08
+"H"     "0"         hour (24-hour clock)w/o leading zero  8
+"HH"    "00"        hour (24-hour clock)with leading zero 08
+"HH*"   "00"        hour (24-hour clock)                  08
 
-        "m"     "0"         minute w/o leading zero
-        "mm"    "00"        minute with leading zero
-        "mm*"   "00"        minute with leading zero
+"m"     "0"         minute w/o leading zero
+"mm"    "00"        minute with leading zero
+"mm*"   "00"        minute with leading zero
 
-        "s"     "0"         second w/o leading zero
-        "ss"    "00"        second with leading zero
-        "ss*"   "00"        second with leading zero
+"s"     "0"         second w/o leading zero
+"ss"    "00"        second with leading zero
+"ss*"   "00"        second with leading zero
 
-        "f"     "0"         second fraction (1 digit)
-        "ff"    "00"        second fraction (2 digit)
-        "fff"   "000"       second fraction (3 digit)
-        "ffff"  "0000"      second fraction (4 digit)
-        "fffff" "00000"         second fraction (5 digit)
-        "ffffff"    "000000"    second fraction (6 digit)
-        "fffffff"   "0000000"   second fraction (7 digit)
+"f"     "0"         second fraction (1 digit)
+"ff"    "00"        second fraction (2 digit)
+"fff"   "000"       second fraction (3 digit)
+"ffff"  "0000"      second fraction (4 digit)
+"fffff" "00000"         second fraction (5 digit)
+"ffffff"    "000000"    second fraction (6 digit)
+"fffffff"   "0000000"   second fraction (7 digit)
 
-        "F"     "0"         second fraction (up to 1 digit)
-        "FF"    "00"        second fraction (up to 2 digit)
-        "FFF"   "000"       second fraction (up to 3 digit)
-        "FFFF"  "0000"      second fraction (up to 4 digit)
-        "FFFFF" "00000"         second fraction (up to 5 digit)
-        "FFFFFF"    "000000"    second fraction (up to 6 digit)
-        "FFFFFFF"   "0000000"   second fraction (up to 7 digit)
+"F"     "0"         second fraction (up to 1 digit)
+"FF"    "00"        second fraction (up to 2 digit)
+"FFF"   "000"       second fraction (up to 3 digit)
+"FFFF"  "0000"      second fraction (up to 4 digit)
+"FFFFF" "00000"         second fraction (up to 5 digit)
+"FFFFFF"    "000000"    second fraction (up to 6 digit)
+"FFFFFFF"   "0000000"   second fraction (up to 7 digit)
 
-        "t"                 first character of AM/PM designator   A
-        "tt"                AM/PM designator                      AM
-        "tt*"               AM/PM designator                      PM
+"t"                 first character of AM/PM designator   A
+"tt"                AM/PM designator                      AM
+"tt*"               AM/PM designator                      PM
 
-        "d"     "0"         day w/o leading zero                  1
-        "dd"    "00"        day with leading zero                 01
-        "ddd"               short weekday name (abbreviation)     Mon
-        "dddd"              full weekday name                     Monday
-        "dddd*"             full weekday name                     Monday
+"d"     "0"         day w/o leading zero                  1
+"dd"    "00"        day with leading zero                 01
+"ddd"               short weekday name (abbreviation)     Mon
+"dddd"              full weekday name                     Monday
+"dddd*"             full weekday name                     Monday
 
 
-        "M"     "0"         month w/o leading zero                2
-        "MM"    "00"        month with leading zero               02
-        "MMM"               short month name (abbreviation)       Feb
-        "MMMM"              full month name                       February
-        "MMMM*"             full month name                       February
+"M"     "0"         month w/o leading zero                2
+"MM"    "00"        month with leading zero               02
+"MMM"               short month name (abbreviation)       Feb
+"MMMM"              full month name                       February
+"MMMM*"             full month name                       February
 
-        "y"     "0"         two digit year (year % 100) w/o leading zero           0
-        "yy"    "00"        two digit year (year % 100) with leading zero          00
-        "yyy"   "D3"        year                                  2000
-        "yyyy"  "D4"        year                                  2000
-        "yyyyy" "D5"        year                                  2000
-        ...
+"y"     "0"         two digit year (year % 100) w/o leading zero           0
+"yy"    "00"        two digit year (year % 100) with leading zero          00
+"yyy"   "D3"        year                                  2000
+"yyyy"  "D4"        year                                  2000
+"yyyyy" "D5"        year                                  2000
+...
 
-        "z"     "+0;-0"     timezone offset w/o leading zero      -8
-        "zz"    "+00;-00"   timezone offset with leading zero     -08
-        "zzz"      "+00;-00" for hour offset, "00" for minute offset  full timezone offset   -07:30
-        "zzz*"  "+00;-00" for hour offset, "00" for minute offset   full timezone offset   -08:00
+"z"     "+0;-0"     timezone offset w/o leading zero      -8
+"zz"    "+00;-00"   timezone offset with leading zero     -08
+"zzz"      "+00;-00" for hour offset, "00" for minute offset  full timezone offset   -07:30
+"zzz*"  "+00;-00" for hour offset, "00" for minute offset   full timezone offset   -08:00
 
-        "K"    -Local       "zzz", e.g. -08:00
-               -Utc         "'Z'", representing UTC
-               -Unspecified ""
-               -DateTimeOffset      "zzzzz" e.g -07:30:15
+"K"    -Local       "zzz", e.g. -08:00
+-Utc         "'Z'", representing UTC
+-Unspecified ""
+-DateTimeOffset      "zzzzz" e.g -07:30:15
 
-        "g*"                the current era name                  A.D.
+"g*"                the current era name                  A.D.
 
-        ":"                 time separator                        : -- DEPRECATED - Insert separator directly into pattern (eg: "H.mm.ss")
-        "/"                 date separator                        /-- DEPRECATED - Insert separator directly into pattern (eg: "M-dd-yyyy")
-        "'"                 quoted string                         'ABC' will insert ABC into the formatted string.
-        '"'                 quoted string                         "ABC" will insert ABC into the formatted string.
-        "%"                 used to quote a single pattern characters      E.g.The format character "%y" is to print two digit year.
-        "\"                 escaped character                     E.g. '\d' insert the character 'd' into the format string.
-        other characters    insert the character into the format string.
+":"                 time separator                        : -- DEPRECATED - Insert separator
+directly into pattern (eg: "H.mm.ss")
+"/"                 date separator                        /-- DEPRECATED - Insert separator directly
+into pattern (eg: "M-dd-yyyy")
+"'"                 quoted string                         'ABC' will insert ABC into the formatted
+string.
+'"'                 quoted string                         "ABC" will insert ABC into the formatted
+string.
+"%"                 used to quote a single pattern characters      E.g.The format character "%y" is
+to print two digit year.
+"\"                 escaped character                     E.g. '\d' insert the character 'd' into
+the format string.
+other characters    insert the character into the format string.
 
-    Pre-defined format characters:
-        (U) to indicate Universal time is used.
-        (G) to indicate Gregorian calendar is used.
+Pre-defined format characters:
+(U) to indicate Universal time is used.
+(G) to indicate Gregorian calendar is used.
 
-        Format              Description                             Real format                             Example
-        =========           =================================       ======================                  =======================
-        "d"                 short date                              culture-specific                        10/31/1999
-        "D"                 long data                               culture-specific                        Sunday, October 31, 1999
-        "f"                 full date (long date + short time)      culture-specific                        Sunday, October 31, 1999 2:00 AM
-        "F"                 full date (long date + long time)       culture-specific                        Sunday, October 31, 1999 2:00:00 AM
-        "g"                 general date (short date + short time)  culture-specific                        10/31/1999 2:00 AM
-        "G"                 general date (short date + long time)   culture-specific                        10/31/1999 2:00:00 AM
-        "m"/"M"             Month/Day date                          culture-specific                        October 31
-(G)     "o"/"O"             Round Trip XML                          "yyyy-MM-ddTHH:mm:ss.fffffffK"          1999-10-31 02:00:00.0000000Z
-(G)     "r"/"R"             RFC 1123 date,                          "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"   Sun, 31 Oct 1999 10:00:00 GMT
-(G)     "s"                 Sortable format, based on ISO 8601.     "yyyy-MM-dd'T'HH:mm:ss"                 1999-10-31T02:00:00
-                                                                    ('T' for local time)
-        "t"                 short time                              culture-specific                        2:00 AM
-        "T"                 long time                               culture-specific                        2:00:00 AM
-(G)     "u"                 Universal time with sortable format,    "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"        1999-10-31 10:00:00Z
-                            based on ISO 8601.
-(U)     "U"                 Universal time with full                culture-specific                        Sunday, October 31, 1999 10:00:00 AM
-                            (long date + long time) format
-                            "y"/"Y"             Year/Month day                          culture-specific                        October, 1999
+Format              Description                             Real format
+Example
+=========           =================================       ======================
+=======================
+"d"                 short date                              culture-specific
+10/31/1999
+"D"                 long data                               culture-specific
+Sunday, October 31, 1999
+"f"                 full date (long date + short time)      culture-specific
+Sunday, October 31, 1999 2:00 AM
+"F"                 full date (long date + long time)       culture-specific
+Sunday, October 31, 1999 2:00:00 AM
+"g"                 general date (short date + short time)  culture-specific
+10/31/1999 2:00 AM
+"G"                 general date (short date + long time)   culture-specific
+10/31/1999 2:00:00 AM
+"m"/"M"             Month/Day date                          culture-specific
+October 31
+(G)     "o"/"O"             Round Trip XML                          "yyyy-MM-ddTHH:mm:ss.fffffffK"
+1999-10-31 02:00:00.0000000Z
+(G)     "r"/"R"             RFC 1123 date,                          "ddd, dd MMM yyyy HH':'mm':'ss
+'GMT'"   Sun, 31 Oct 1999 10:00:00 GMT
+(G)     "s"                 Sortable format, based on ISO 8601.     "yyyy-MM-dd'T'HH:mm:ss"
+1999-10-31T02:00:00
+('T' for local time)
+"t"                 short time                              culture-specific
+2:00 AM
+"T"                 long time                               culture-specific
+2:00:00 AM
+(G)     "u"                 Universal time with sortable format,    "yyyy'-'MM'-'dd HH':'mm':'ss'Z'"
+1999-10-31 10:00:00Z
+based on ISO 8601.
+(U)     "U"                 Universal time with full                culture-specific
+Sunday, October 31, 1999 10:00:00 AM
+(long date + long time) format
+"y"/"Y"             Year/Month day                          culture-specific
+October, 1999
 
-    */
+*/
 
     // This class contains only static members and does not require the serializable attribute.
     internal static class DateTimeFormat
@@ -161,12 +184,14 @@ namespace System
             "0000000",
         };
 
-        /// <summary>Format the positive integer value to a string and prefix with assigned length of leading zero.</summary>
+        /// <summary>Format the positive integer value to a string and prefix with assigned length of
+        // leading zero.</summary>
         /// <typeparam name="TChar">The type of the character.</typeparam>
         /// <param name="outputBuffer">The buffer into which to write the digits.</param>
         /// <param name="value">The value to format</param>
         /// <param name="minimumLength">
-        /// The minimum length for formatted number. If the number of digits in the value is less than this length, it will be padded with leading zeros.
+        /// The minimum length for formatted number. If the number of digits in the value is less than this
+        // length, it will be padded with leading zeros.
         /// </param>
         internal static unsafe void FormatDigits<TChar>(
             ref ValueListBuilder<TChar> outputBuffer,
@@ -253,22 +278,24 @@ namespace System
         //  Exceptions: None.
         //
 
-        /* Note:
-            If DTFI is using Hebrew calendar, GetMonthName()/GetAbbreviatedMonthName() will return month names like this:
-            1   Hebrew 1st Month
-            2   Hebrew 2nd Month
-            ..  ...
-            6   Hebrew 6th Month
-            7   Hebrew 6th Month II (used only in a leap year)
-            8   Hebrew 7th Month
-            9   Hebrew 8th Month
-            10  Hebrew 9th Month
-            11  Hebrew 10th Month
-            12  Hebrew 11th Month
-            13  Hebrew 12th Month
+/* Note:
+If DTFI is using Hebrew calendar, GetMonthName()/GetAbbreviatedMonthName() will return month names
+like this:
+1   Hebrew 1st Month
+2   Hebrew 2nd Month
+..  ...
+6   Hebrew 6th Month
+7   Hebrew 6th Month II (used only in a leap year)
+8   Hebrew 7th Month
+9   Hebrew 8th Month
+10  Hebrew 9th Month
+11  Hebrew 10th Month
+12  Hebrew 11th Month
+13  Hebrew 12th Month
 
-            Therefore, if we are in a regular year, we have to increment the month name if month is greater or equal to 7.
-        */
+Therefore, if we are in a regular year, we have to increment the month name if month is greater or
+equal to 7.
+*/
         private static string FormatHebrewMonthName(
             DateTime time,
             int month,
@@ -382,7 +409,8 @@ namespace System
         //  Arguments:
         //      format      The format string to be scanned.
         //      index       Where we should start the scanning.  This is generally where "M" starts.
-        //      tokenLen    The len of the current pattern character.  This indicates how many "M" that we have.
+        //      tokenLen    The len of the current pattern character.  This indicates how many "M" that we
+        // have.
         //      patternToMatch  The pattern that we want to search. This generally uses "d"
         //
         private static bool IsUseGenitiveForm(
@@ -699,8 +727,10 @@ namespace System
                             )
                         )
                         {
-                            // We are formatting a Japanese date with year equals 1 and the year number is followed by the year sign \u5e74
-                            // In Japanese dates, the first year in the era is not formatted as a number 1 instead it is formatted as \u5143 which means
+                            // We are formatting a Japanese date with year equals 1 and the year number is followed by the year
+                            // sign \u5e74
+                            // In Japanese dates, the first year in the era is not formatted as a number 1 instead it is
+                            // formatted as \u5143 which means
                             // first or beginning of the era.
                             AppendChar(ref result, DateTimeFormatInfo.JapaneseEraStart[0]);
                         }
@@ -1313,16 +1343,21 @@ namespace System
             );
             if (success)
             {
-                // The reference inside of the builder is still the destination.  That means the builder didn't need to grow to beyond
-                // the space in the destination, which means the formatting operation was successful and fully wrote the data to
+                // The reference inside of the builder is still the destination.  That means the builder didn't need
+                // to grow to beyond
+                // the space in the destination, which means the formatting operation was successful and fully wrote
+                // the data to
                 // the destination.  All we need to do now is store how much was written.
                 charsWritten = vlb.Length;
             }
             else
             {
-                // The reference inside of the builder is no longer the destination.  That means the builder needed to grow beyond
-                // the builder.  However, it's possible it grew unnecessarily, e.g. when formatting a fraction it might grow but then
-                // realize it didn't need to write any data and remove a preceding period. As such, we need to try to copy the data
+                // The reference inside of the builder is no longer the destination.  That means the builder needed
+                // to grow beyond
+                // the builder.  However, it's possible it grew unnecessarily, e.g. when formatting a fraction it
+                // might grow but then
+                // realize it didn't need to write any data and remove a preceding period. As such, we need to try
+                // to copy the data
                 // just in case it does actually fit.
                 success = vlb.TryCopyTo(destination, out charsWritten);
             }
@@ -1330,7 +1365,8 @@ namespace System
             return success;
         }
 
-        /// <summary>Check whether this DateTime needs to be treated specially as time-only for formatting purposes.</summary>
+        /// <summary>Check whether this DateTime needs to be treated specially as time-only for formatting
+        // purposes.</summary>
         /// <remarks>This is only relevant when no format is specified.</remarks>
         private static bool IsTimeOnlySpecialCase(DateTime dateTime, DateTimeFormatInfo dtfi) =>
             // If the time is less than 1 day, consider it as time of day. This is a workaround for VB,
@@ -1352,7 +1388,8 @@ namespace System
                     or CalendarId.UMALQURA
                     or CalendarId.PERSIAN;
 
-        /// <summary>For handling the "U" format, update the DateTime and DateTimeFormatInfo appropriately.</summary>
+        /// <summary>For handling the "U" format, update the DateTime and DateTimeFormatInfo
+        // appropriately.</summary>
         private static void PrepareFormatU(
             ref DateTime dateTime,
             ref DateTimeFormatInfo dtfi,
@@ -1671,7 +1708,8 @@ namespace System
         //   012345678901234567890123456789012
         //   ---------------------------------
         //   2017-06-12T05:30:45.7680000-07:00
-        //   2017-06-12T05:30:45.7680000Z           (Z is short for "+00:00" but also distinguishes DateTimeKind.Utc from DateTimeKind.Local)
+        //   2017-06-12T05:30:45.7680000Z           (Z is short for "+00:00" but also distinguishes
+        // DateTimeKind.Utc from DateTimeKind.Local)
         //   2017-06-12T05:30:45.7680000            (interpreted as local time wrt to current time zone)
         internal static unsafe bool TryFormatO<TChar>(
             DateTime dateTime,

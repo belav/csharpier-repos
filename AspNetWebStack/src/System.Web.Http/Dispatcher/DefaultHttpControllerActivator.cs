@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.Contracts;
 using System.Net.Http;
@@ -12,10 +13,13 @@ namespace System.Web.Http.Dispatcher
 {
     /// <summary>
     /// Default implementation of an <see cref="IHttpControllerActivator"/>.
-    /// A different implementation can be registered via the <see cref="T:System.Web.Http.Services.DependencyResolver"/>.
+    /// A different implementation can be registered via the <see
+    // cref="T:System.Web.Http.Services.DependencyResolver"/>.
     /// We optimize for the case where we have an <see cref="Controllers.ApiControllerActionInvoker"/>
-    /// instance per <see cref="HttpControllerDescriptor"/> instance but can support cases where there are
-    /// many <see cref="HttpControllerDescriptor"/> instances for one <see cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/>
+    /// instance per <see cref="HttpControllerDescriptor"/> instance but can support cases where there
+    // are
+    /// many <see cref="HttpControllerDescriptor"/> instances for one <see
+    // cref="System.Web.Http.Controllers.ApiControllerActionInvoker"/>
     /// as well. In the latter case the lookup is slightly slower because it goes through the
     /// <see cref="P:HttpControllerDescriptor.Properties"/> dictionary.
     /// </summary>
@@ -25,7 +29,8 @@ namespace System.Web.Http.Dispatcher
         private object _cacheKey = new object();
 
         /// <summary>
-        /// Creates the <see cref="IHttpController"/> specified by <paramref name="controllerType"/> using the given <paramref name="request"/>
+        /// Creates the <see cref="IHttpController"/> specified by <paramref name="controllerType"/> using
+        // the given <paramref name="request"/>
         /// </summary>
         /// <param name="request">The request message.</param>
         /// <param name="controllerType">Type of the controller.</param>
@@ -84,7 +89,8 @@ namespace System.Web.Http.Dispatcher
                 }
                 else
                 {
-                    // If the key doesn't match then lookup/create delegate in the HttpControllerDescriptor.Properties for
+                    // If the key doesn't match then lookup/create delegate in the HttpControllerDescriptor.Properties
+                    // for
                     // that HttpControllerDescriptor instance
                     object value;
                     if (controllerDescriptor.Properties.TryGetValue(_cacheKey, out value))

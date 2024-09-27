@@ -143,7 +143,8 @@ namespace Microsoft.Cci
                 : result;
         }
 
-        //when comparing a string vs ordinal, the string should always be less than the ordinal. Per the spec,
+        //when comparing a string vs ordinal, the string should always be less than the ordinal. Per the
+        // spec,
         //entries identified by string must precede those identified by ordinal.
         private static int CompareResourceIdentifiers(
             int xOrdinal,
@@ -256,7 +257,8 @@ namespace Microsoft.Cci
 
             var dataWriter = new BlobBuilder();
 
-            //'dataWriter' is where opaque resource data goes as well as strings that are used as type or name identifiers
+            //'dataWriter' is where opaque resource data goes as well as strings that are used as type or name
+            // identifiers
             WriteDirectory(
                 typeDirectory,
                 builder,

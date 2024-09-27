@@ -237,7 +237,8 @@ namespace DelegateTest
                 delctor.starkWork = new booldelegate(testinstance.StartWork_Bool);
                 combineImpl += (booldelegate)delctor.starkWork;
                 sFlagAdd = c_StartWork;
-                //The invocation list can contain duplicate entries; that is, entries that refer to the same method on the same object.
+                //The invocation list can contain duplicate entries; that is, entries that refer to the same method
+                // on the same object.
                 combineImpl += (booldelegate)delctor.starkWork;
                 sFlagAdd += sFlagAdd;
             }

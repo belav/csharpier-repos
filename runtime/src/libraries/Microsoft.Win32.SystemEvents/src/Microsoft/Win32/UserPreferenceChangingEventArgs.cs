@@ -6,14 +6,16 @@ using System;
 namespace Microsoft.Win32
 {
     /// <devdoc>
-    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.UserPreferenceChanging'/> event.</para>
+    /// <para>Provides data for the <see cref='Microsoft.Win32.SystemEvents.UserPreferenceChanging'/>
+    // event.</para>
     /// </devdoc>
     public class UserPreferenceChangingEventArgs : EventArgs
     {
         private readonly UserPreferenceCategory _category;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='Microsoft.Win32.UserPreferenceChangingEventArgs'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='Microsoft.Win32.UserPreferenceChangingEventArgs'/> class.</para>
         /// </devdoc>
         public UserPreferenceChangingEventArgs(UserPreferenceCategory category)
         {

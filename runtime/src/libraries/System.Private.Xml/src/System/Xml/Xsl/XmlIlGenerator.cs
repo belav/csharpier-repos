@@ -34,18 +34,26 @@ namespace System.Xml.Xsl
     ///     private static ... UserMethodN(XmlQueryRuntime runtime, ...);
     /// }
     ///
-    /// XmlILGenerator incorporates a number of different technologies in order to generate efficient code that avoids caching
+    /// XmlILGenerator incorporates a number of different technologies in order to generate efficient
+    // code that avoids caching
     /// large result sets in memory:
     ///
-    /// 1. Code Iterators - Query results are computed using a set of composable, interlocking iterators that alone perform a
-    /// simple task, but together execute complex queries.  The iterators are actually little blocks of code
-    /// that are connected to each other using a series of jumps.  Because each iterator is not instantiated
-    /// as a separate object, the number of objects and number of function calls is kept to a minimum during
-    /// execution.  Also, large result sets are often computed incrementally, with each iterator performing one step in a
+    /// 1. Code Iterators - Query results are computed using a set of composable, interlocking iterators
+    // that alone perform a
+    /// simple task, but together execute complex queries.  The iterators are actually little blocks of
+    // code
+    /// that are connected to each other using a series of jumps.  Because each iterator is not
+    // instantiated
+    /// as a separate object, the number of objects and number of function calls is kept to a minimum
+    // during
+    /// execution.  Also, large result sets are often computed incrementally, with each iterator
+    // performing one step in a
     /// pipeline of sequence items.
     ///
-    /// 2. Analyzers - During code generation, QilToMsil traverses the semantic tree representation of the query (QIL) several times.
-    /// As visits to each node in the tree start and end, various Analyzers are invoked.  These Analyzers incrementally
+    /// 2. Analyzers - During code generation, QilToMsil traverses the semantic tree representation of
+    // the query (QIL) several times.
+    /// As visits to each node in the tree start and end, various Analyzers are invoked.  These
+    // Analyzers incrementally
     /// collect and store information that is later used to generate faster and smaller code.
     /// </remarks>
     [RequiresDynamicCode("Creates DynamicMethods")]
@@ -63,10 +71,13 @@ namespace System.Xml.Xsl
         public XmlILGenerator() { }
 
         /// <summary>
-        /// Given the logical query plan (QilExpression) generate a physical query plan (MSIL) that can be executed.
+        /// Given the logical query plan (QilExpression) generate a physical query plan (MSIL) that can be
+        // executed.
         /// </summary>
-        // SxS Note: The way the trace file names are created (hardcoded) is NOT SxS safe. However the files are
-        // created only for internal tracing purposes. In addition XmlILTrace class is not compiled into retail
+        // SxS Note: The way the trace file names are created (hardcoded) is NOT SxS safe. However the files
+        // are
+        // created only for internal tracing purposes. In addition XmlILTrace class is not compiled into
+        // retail
         // builds. As a result it is fine to suppress the FxCop SxS warning.
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
@@ -201,8 +212,10 @@ namespace System.Xml.Xsl
         }
 
         /// <summary>
-        /// Create MethodBuilder metadata for the specified QilExpression function.  Annotate ndFunc with the
-        /// MethodBuilder.  Also, each QilExpression argument type should be converted to a corresponding Clr type.
+        /// Create MethodBuilder metadata for the specified QilExpression function.  Annotate ndFunc with
+        // the
+        /// MethodBuilder.  Also, each QilExpression argument type should be converted to a corresponding
+        // Clr type.
         /// Each argument QilExpression node should be annotated with the resulting ParameterBuilder.
         /// </summary>
         private void CreateFunctionMetadata(IList<QilNode> funcList)

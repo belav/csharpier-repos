@@ -44,12 +44,12 @@ namespace MonoTests.System.Configuration
         {
             ExeConfigurationFileMap map = new ExeConfigurationFileMap();
 
-            /* defaults */
+/* defaults */
             Assert.AreEqual("", map.ExeConfigFilename, "A1");
             Assert.AreEqual("", map.LocalUserConfigFilename, "A2");
             Assert.AreEqual("", map.RoamingUserConfigFilename, "A2");
 
-            /* setter */
+/* setter */
             map.ExeConfigFilename = "foo";
             Assert.AreEqual("foo", map.ExeConfigFilename, "A3");
             map.LocalUserConfigFilename = "bar";
@@ -57,7 +57,7 @@ namespace MonoTests.System.Configuration
             map.RoamingUserConfigFilename = "baz";
             Assert.AreEqual("baz", map.RoamingUserConfigFilename, "A5");
 
-            /* null setter */
+/* null setter */
             map.ExeConfigFilename = null;
             Assert.IsNull(map.ExeConfigFilename, "A6");
             map.LocalUserConfigFilename = null;

@@ -54,10 +54,12 @@ namespace System.ServiceModel.Dispatcher
                                 }
                             }
 
-                            //Set the IsUsercreated flag to false for singleton mode even in cases when users create their own runtime.
+                            //Set the IsUsercreated flag to false for singleton mode even in cases when users create their own
+                            // runtime.
                             instanceContext.IsUserCreated = false;
 
-                            //Delay assigning the potentially newly created InstanceContext (till after its opened) to this.Singleton
+                            //Delay assigning the potentially newly created InstanceContext (till after its opened) to
+                            // this.Singleton
                             //to ensure that it is opened only once.
                             this.singleton = instanceContext;
                         }

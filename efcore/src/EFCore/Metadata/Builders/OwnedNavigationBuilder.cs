@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Provides a simple API for configuring a navigation to an owned entity type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuilder>
 {
@@ -18,10 +19,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     private EntityType _dependentEntityType;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public OwnedNavigationBuilder(IMutableForeignKey ownership)
@@ -47,10 +52,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
             : _dependentEntityType = Builder.Metadata.DeclaringEntityType;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder Builder
@@ -70,10 +79,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual T UpdateBuilder<T>(Func<T> configure)
@@ -105,12 +118,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     public virtual IMutableEntityType OwnedEntityType => DependentEntityType;
 
     /// <summary>
-    ///     Adds or updates an annotation on the owned entity type. If an annotation with the key specified in
+    ///     Adds or updates an annotation on the owned entity type. If an annotation with the key
+    // specified in
     ///     <paramref name="annotation" /> already exists its value will be updated.
     /// </summary>
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual OwnedNavigationBuilder HasAnnotation(string annotation, object? value)
     {
         Check.NotEmpty(annotation, nameof(annotation));
@@ -166,7 +181,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <remarks>
     ///     When adding a new property, if a property with the same name exists in the entity class
     ///     then it will be added to the model. If no property exists in the entity class, then
-    ///     a new shadow state property will be added. A shadow state property is one that does not have a
+    ///     a new shadow state property will be added. A shadow state property is one that does not have
+    // a
     ///     corresponding property in the entity class. The current value for the property is stored in
     ///     the <see cref="ChangeTracker" /> rather than being stored in instances of the entity class.
     /// </remarks>
@@ -194,7 +210,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <remarks>
     ///     When adding a new property, if a property with the same name exists in the entity class
     ///     then it will be added to the model. If no property exists in the entity class, then
-    ///     a new shadow state property will be added. A shadow state property is one that does not have a
+    ///     a new shadow state property will be added. A shadow state property is one that does not have
+    // a
     ///     corresponding property in the entity class. The current value for the property is stored in
     ///     the <see cref="ChangeTracker" /> rather than being stored in instances of the entity class.
     /// </remarks>
@@ -213,7 +230,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         );
 
     /// <summary>
-    ///     Returns an object that can be used to configure a property of the owned type where that property represents
+    ///     Returns an object that can be used to configure a property of the owned type where that
+    // property represents
     ///     a collection of primitive values, such as strings or integers.
     ///     If no property with the given name exists, then a new property will be added.
     /// </summary>
@@ -238,14 +256,16 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         );
 
     /// <summary>
-    ///     Returns an object that can be used to configure a property of the owned type where that property represents
+    ///     Returns an object that can be used to configure a property of the owned type where that
+    // property represents
     ///     a collection of primitive values, such as strings or integers.
     ///     If no property with the given name exists, then a new property will be added.
     /// </summary>
     /// <remarks>
     ///     When adding a new property, if a property with the same name exists in the entity class
     ///     then it will be added to the model. If no property exists in the entity class, then
-    ///     a new shadow state property will be added. A shadow state property is one that does not have a
+    ///     a new shadow state property will be added. A shadow state property is one that does not have
+    // a
     ///     corresponding property in the entity class. The current value for the property is stored in
     ///     the <see cref="ChangeTracker" /> rather than being stored in instances of the entity class.
     /// </remarks>
@@ -269,14 +289,16 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         );
 
     /// <summary>
-    ///     Returns an object that can be used to configure a property of the owned type where that property represents
+    ///     Returns an object that can be used to configure a property of the owned type where that
+    // property represents
     ///     a collection of primitive values, such as strings or integers.
     ///     If no property with the given name exists, then a new property will be added.
     /// </summary>
     /// <remarks>
     ///     When adding a new property, if a property with the same name exists in the entity class
     ///     then it will be added to the model. If no property exists in the entity class, then
-    ///     a new shadow state property will be added. A shadow state property is one that does not have a
+    ///     a new shadow state property will be added. A shadow state property is one that does not have
+    // a
     ///     corresponding property in the entity class. The current value for the property is stored in
     ///     the <see cref="ChangeTracker" /> rather than being stored in instances of the entity class.
     /// </remarks>
@@ -303,7 +325,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     Indexer properties are stored in the entity using
-    ///     <see href="https://docs.microsoft.com/dotnet/csharp/programming-guide/indexers/">an indexer</see>
+    ///     <see href="https://docs.microsoft.com/dotnet/csharp/programming-guide/indexers/">an
+    // indexer</see>
     ///     supplying the provided property name.
     /// </remarks>
     /// <typeparam name="TProperty">The type of the property to be configured.</typeparam>
@@ -328,7 +351,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     Indexer properties are stored in the entity using
-    ///     <see href="https://docs.microsoft.com/dotnet/csharp/programming-guide/indexers/">an indexer</see>
+    ///     <see href="https://docs.microsoft.com/dotnet/csharp/programming-guide/indexers/">an
+    // indexer</see>
     ///     supplying the provided property name.
     /// </remarks>
     /// <param name="propertyType">The type of the property to be configured.</param>
@@ -367,7 +391,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
         );
 
     /// <summary>
-    ///     Excludes the given property from the entity type. This method is typically used to remove properties
+    ///     Excludes the given property from the entity type. This method is typically used to remove
+    // properties
     ///     or navigations from the owned entity type that were added by convention.
     /// </summary>
     /// <param name="propertyName">The name of the property to be removed from the entity type.</param>
@@ -432,12 +457,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -446,7 +473,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsOne(string ownedTypeName, string navigationName) =>
@@ -461,12 +489,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -476,7 +506,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="ownedType">The CLR type of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsOne(
@@ -499,12 +530,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -513,7 +546,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedType">The entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsOne(
@@ -535,12 +569,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -549,7 +585,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <param name="buildAction">An action that performs configuration of the relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
@@ -576,12 +613,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -591,7 +630,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="ownedType">The CLR type of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <param name="buildAction">An action that performs configuration of the relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
@@ -620,12 +660,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -634,7 +676,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedType">The entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <param name="buildAction">An action that performs configuration of the relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
@@ -683,12 +726,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -697,7 +742,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(string ownedTypeName, string navigationName) =>
@@ -711,12 +757,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -726,7 +774,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="ownedType">The CLR type of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(
@@ -748,12 +797,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -762,7 +813,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedType">The entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the owned type and the relationship.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(
@@ -783,12 +835,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -797,9 +851,11 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
-    /// <param name="buildAction">An action that performs configuration of the owned type and the relationship.</param>
+    /// <param name="buildAction">An action that performs configuration of the owned type and the
+    // relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(
         string ownedTypeName,
@@ -823,12 +879,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -838,9 +896,11 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// <param name="ownedTypeName">The name of the entity type that this relationship targets.</param>
     /// <param name="ownedType">The CLR type of the entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
-    /// <param name="buildAction">An action that performs configuration of the owned type and the relationship.</param>
+    /// <param name="buildAction">An action that performs configuration of the owned type and the
+    // relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(
         string ownedTypeName,
@@ -868,12 +928,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         The target entity type for each ownership relationship is treated as a different entity type
+    ///         The target entity type for each ownership relationship is treated as a different entity
+    // type
     ///         even if the navigation is of the same type. Configuration of the target entity type
     ///         isn't applied to the target entity type of other ownership relationships.
     ///     </para>
     ///     <para>
-    ///         Most operations on an owned entity require accessing it through the owner entity using the corresponding navigation.
+    ///         Most operations on an owned entity require accessing it through the owner entity using
+    // the corresponding navigation.
     ///     </para>
     ///     <para>
     ///         After calling this method, you should chain a call to
@@ -882,9 +944,11 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="ownedType">The entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
-    /// <param name="buildAction">An action that performs configuration of the owned type and the relationship.</param>
+    /// <param name="buildAction">An action that performs configuration of the owned type and the
+    // relationship.</param>
     /// <returns>An object that can be used to configure the entity type.</returns>
     public virtual OwnedNavigationBuilder OwnsMany(
         [DynamicallyAccessedMembers(IEntityType.DynamicallyAccessedMemberTypes)] Type ownedType,
@@ -944,10 +1008,13 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     ///         produce a valid relationship.
     ///     </para>
     /// </remarks>
-    /// <param name="relatedTypeName">The name of the entity type that this relationship targets.</param>
+    /// <param name="relatedTypeName">The name of the entity type that this relationship
+    // targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship. If
-    ///     no property is specified, the relationship will be configured without a navigation property on this
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship. If
+    ///     no property is specified, the relationship will be configured without a navigation property
+    // on this
     ///     end.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
@@ -992,7 +1059,8 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     ///     </para>
     /// </remarks>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship.
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
     [RequiresUnreferencedCode("Use an overload that accepts a type")]
@@ -1028,8 +1096,10 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </remarks>
     /// <param name="relatedType">The entity type that this relationship targets.</param>
     /// <param name="navigationName">
-    ///     The name of the reference navigation property on this entity type that represents the relationship. If
-    ///     no property is specified, the relationship will be configured without a navigation property on this
+    ///     The name of the reference navigation property on this entity type that represents the
+    // relationship. If
+    ///     no property is specified, the relationship will be configured without a navigation property
+    // on this
     ///     end.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
@@ -1059,10 +1129,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual EntityType FindRelatedEntityType(
@@ -1104,10 +1178,14 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual EntityType FindRelatedEntityType(
@@ -1150,10 +1228,12 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
 
     /// <summary>
     ///     Configures the <see cref="ChangeTrackingStrategy" /> to be used for this entity type.
-    ///     This strategy indicates how the context detects changes to properties for an instance of the entity type.
+    ///     This strategy indicates how the context detects changes to properties for an instance of the
+    // entity type.
     /// </summary>
     /// <param name="changeTrackingStrategy">The change tracking strategy to be used.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual OwnedNavigationBuilder HasChangeTrackingStrategy(
         ChangeTrackingStrategy changeTrackingStrategy
     )
@@ -1171,18 +1251,24 @@ public class OwnedNavigationBuilder : IInfrastructure<IConventionEntityTypeBuild
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         By default, the backing field, if one is found by convention or has been specified, is used when
+    ///         By default, the backing field, if one is found by convention or has been specified, is
+    // used when
     ///         new objects are constructed, typically when entities are queried from the database.
-    ///         Properties are used for all other accesses.  Calling this method will change that behavior
-    ///         for all properties of this entity type as described in the <see cref="PropertyAccessMode" /> enum.
+    ///         Properties are used for all other accesses.  Calling this method will change that
+    // behavior
+    ///         for all properties of this entity type as described in the <see
+    // cref="PropertyAccessMode" /> enum.
     ///     </para>
     ///     <para>
-    ///         Calling this method overrides for all properties of this entity type any access mode that was
+    ///         Calling this method overrides for all properties of this entity type any access mode
+    // that was
     ///         set on the model.
     ///     </para>
     /// </remarks>
-    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for properties of this entity type.</param>
-    /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
+    /// <param name="propertyAccessMode">The <see cref="PropertyAccessMode" /> to use for properties of
+    // this entity type.</param>
+    /// <returns>The same builder instance so that multiple configuration calls can be
+    // chained.</returns>
     public virtual OwnedNavigationBuilder UsePropertyAccessMode(
         PropertyAccessMode propertyAccessMode
     )

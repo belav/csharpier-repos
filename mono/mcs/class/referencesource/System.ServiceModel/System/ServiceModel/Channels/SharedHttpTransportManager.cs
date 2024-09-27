@@ -41,10 +41,14 @@ namespace System.ServiceModel.Channels
             this.maxPendingAccepts = channelListener.MaxPendingAccepts;
         }
 
-        // We are NOT checking the RequestInitializationTimeout here since the HttpChannelListener should be handle them
-        // individually. However, some of the scenarios might be impacted, e.g., if we have one endpoint with high RequestInitializationTimeout
-        // and the other is just normal, the first endpoint might be occupying all the receiving loops, then the requests to the normal endpoint
-        // will experience timeout issues. The mitigation for this issue is that customers should be able to increase the MaxPendingAccepts number.
+        // We are NOT checking the RequestInitializationTimeout here since the HttpChannelListener should be
+        // handle them
+        // individually. However, some of the scenarios might be impacted, e.g., if we have one endpoint
+        // with high RequestInitializationTimeout
+        // and the other is just normal, the first endpoint might be occupying all the receiving loops, then
+        // the requests to the normal endpoint
+        // will experience timeout issues. The mitigation for this issue is that customers should be able to
+        // increase the MaxPendingAccepts number.
         internal override bool IsCompatible(HttpChannelListener channelListener)
         {
             if (channelListener.InheritBaseAddressSettings)
@@ -244,8 +248,10 @@ namespace System.ServiceModel.Channels
                     this.Fault(unexpectedException);
                 }
 
-                // NormalHttpPipeline calls HttpListener.BeginGetContext() by itself (via its dequeuedCallback) in the short-circuit case
-                // when there was no error processing the inboud request (see the comments in the NormalHttpPipeline.Close() for details).
+                // NormalHttpPipeline calls HttpListener.BeginGetContext() by itself (via its dequeuedCallback) in
+                // the short-circuit case
+                // when there was no error processing the inboud request (see the comments in the
+                // NormalHttpPipeline.Close() for details).
                 if (!enqueued) // onMessageDequeued will handle this in the enqueued case
                 {
                     // Continue the loop with the async result if it completed synchronously.

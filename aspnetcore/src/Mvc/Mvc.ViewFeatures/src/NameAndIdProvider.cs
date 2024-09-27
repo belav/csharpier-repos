@@ -13,14 +13,17 @@ internal static class NameAndIdProvider
     private static readonly object PreviousNameAndIdKey = typeof(PreviousNameAndId);
 
     /// <summary>
-    /// Returns a valid HTML 4.01 "id" attribute value for an element with the given <paramref name="fullName"/>.
+    /// Returns a valid HTML 4.01 "id" attribute value for an element with the given <paramref
+    // name="fullName"/>.
     /// </summary>
     /// <param name="viewContext">A <see cref="ViewContext"/> instance for the current scope.</param>
     /// <param name="fullName">
-    /// The fully-qualified expression name, ignoring the current model. Also the original HTML element name.
+    /// The fully-qualified expression name, ignoring the current model. Also the original HTML element
+    // name.
     /// </param>
     /// <param name="invalidCharReplacement">
-    /// The <see cref="string"/> (normally a single <see cref="char"/>) to substitute for invalid characters in
+    /// The <see cref="string"/> (normally a single <see cref="char"/>) to substitute for invalid
+    // characters in
     /// <paramref name="fullName"/>.
     /// </param>
     /// <returns>
@@ -77,17 +80,21 @@ internal static class NameAndIdProvider
     }
 
     /// <summary>
-    /// Adds a valid HTML 4.01 "id" attribute for an element with the given <paramref name="fullName"/>. Does
+    /// Adds a valid HTML 4.01 "id" attribute for an element with the given <paramref name="fullName"/>.
+    // Does
     /// nothing if <see cref="TagBuilder.Attributes"/> already contains an "id" attribute or the
     /// <paramref name="fullName"/> is <c>null</c> or empty.
     /// </summary>
     /// <param name="viewContext">A <see cref="ViewContext"/> instance for the current scope.</param>
-    /// <param name="tagBuilder">A <see cref="TagBuilder"/> instance that will contain the "id" attribute.</param>
+    /// <param name="tagBuilder">A <see cref="TagBuilder"/> instance that will contain the "id"
+    // attribute.</param>
     /// <param name="fullName">
-    /// The fully-qualified expression name, ignoring the current model. Also the original HTML element name.
+    /// The fully-qualified expression name, ignoring the current model. Also the original HTML element
+    // name.
     /// </param>
     /// <param name="invalidCharReplacement">
-    /// The <see cref="string"/> (normally a single <see cref="char"/>) to substitute for invalid characters in
+    /// The <see cref="string"/> (normally a single <see cref="char"/>) to substitute for invalid
+    // characters in
     /// <paramref name="fullName"/>.
     /// </param>
     /// <remarks>
@@ -130,7 +137,8 @@ internal static class NameAndIdProvider
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <returns>Fully-qualified expression name for <paramref name="expression"/>.</returns>
     /// <remarks>
-    /// Similar to <see cref="TemplateInfo.GetFullHtmlFieldName"/> but caches value for repeated invocations.
+    /// Similar to <see cref="TemplateInfo.GetFullHtmlFieldName"/> but caches value for repeated
+    // invocations.
     /// </remarks>
     public static string GetFullHtmlFieldName(ViewContext viewContext, string expression)
     {
@@ -186,7 +194,8 @@ internal static class NameAndIdProvider
 
     private sealed class PreviousNameAndId
     {
-        // Cached ambient input for NameAndIdProvider.GetFullHtmlFieldName(). TemplateInfo.HtmlFieldPrefix may
+        // Cached ambient input for NameAndIdProvider.GetFullHtmlFieldName(). TemplateInfo.HtmlFieldPrefix
+        // may
         // change during the lifetime of a ViewContext.
         public string HtmlFieldPrefix { get; set; }
 
@@ -197,7 +206,8 @@ internal static class NameAndIdProvider
         public string OutputFullName { get; set; }
 
         // Cached input for NameAndIdProvider.CreateSanitizedId(). Since IHtmlHelper.GenerateIdFromName() is
-        // available to all, there is no guarantee this is equal to OutputFullName when CreateSanitizedId() is
+        // available to all, there is no guarantee this is equal to OutputFullName when CreateSanitizedId()
+        // is
         // called.
         public string FullName { get; set; }
 

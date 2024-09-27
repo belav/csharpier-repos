@@ -37,7 +37,8 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 #endif
 
 /// <summary>
-/// These are HTTP/2 tests that work on both IIS and Express. See Http2TrailerResetTests for IIS specific tests
+/// These are HTTP/2 tests that work on both IIS and Express. See Http2TrailerResetTests for IIS
+// specific tests
 /// with newer functionality.
 /// </summary>
 [Collection(IISHttpsTestSiteCollection.Name)]

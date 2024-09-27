@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 .ConfigureAwait(false);
             return GetSpans();
 
-            // Broken into its own method as it uses a ref-struct, which isn't allowed with the async call above.
+            // Broken into its own method as it uses a ref-struct, which isn't allowed with the async call
+            // above.
             ImmutableArray<SpellCheckSpan> GetSpans()
             {
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
@@ -134,17 +135,23 @@ namespace Microsoft.CodeAnalysis.SpellCheck
 
             private void AddStringSpans(SyntaxToken token, bool canContainEscapes)
             {
-                // Don't bother with strings that are in error.  This is both because we can't properly break them into
-                // pieces, and also because a string in error often may be grabbing more of the file than intended, and
-                // we don't want to start spell checking normal code that is caught up in the middle of being edited.
+                // Don't bother with strings that are in error.  This is both because we can't properly break them
+                // into
+                // pieces, and also because a string in error often may be grabbing more of the file than intended,
+                // and
+                // we don't want to start spell checking normal code that is caught up in the middle of being
+                // edited.
                 if (token.ContainsDiagnostics)
                     return;
 
-                // First, see if there's actually the presence of an escape character in the string token.  If not, we
-                // can just provide the entire string as-is to the caller to spell check since there's no escapes for
+                // First, see if there's actually the presence of an escape character in the string token.  If not,
+                // we
+                // can just provide the entire string as-is to the caller to spell check since there's no escapes
+                // for
                 // them to be confused by.
                 //
-                // Note: .Text on a string token is non-allocating.  It is captured at the time of token creation and
+                // Note: .Text on a string token is non-allocating.  It is captured at the time of token creation
+                // and
                 // held by the token.
                 var escapeChar = _spellCheckSpanService._escapeCharacter;
                 if (
@@ -168,8 +175,10 @@ namespace Microsoft.CodeAnalysis.SpellCheck
                 if (virtualChars.IsDefaultOrEmpty)
                     return;
 
-                // find the sequences of letters in a row that should be spell checked. if any part of that sequence is
-                // an escaped character (like `\u0065`) then filter that out.  The platform won't be able to understand
+                // find the sequences of letters in a row that should be spell checked. if any part of that sequence
+                // is
+                // an escaped character (like `\u0065`) then filter that out.  The platform won't be able to
+                // understand
                 // this word and will report bogus spell checking mistakes.
                 var currentCharIndex = 0;
                 while (currentCharIndex < virtualChars.Length)
@@ -236,7 +245,8 @@ namespace Microsoft.CodeAnalysis.SpellCheck
 
             private void TryAddSpanForIdentifier(SyntaxToken token)
             {
-                // Leverage syntactic classification which already has to determine if an identifier token is the name of
+                // Leverage syntactic classification which already has to determine if an identifier token is the
+                // name of
                 // some construct.
                 var classification = _classifier.GetSyntacticClassificationForIdentifier(token);
                 switch (classification)

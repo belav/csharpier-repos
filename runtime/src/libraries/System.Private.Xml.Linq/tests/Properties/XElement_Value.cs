@@ -24,11 +24,16 @@ namespace CoreXml.Test.XLinq
                 private EventsHelper _eHelper;
                 private bool _runWithEvents;
 
-                //[Variation(Priority = 0, Desc = "XElement - same name", Params = new object[] { "<element>value</element>", "element" })]
-                //[Variation(Priority = 0, Desc = "XElement - different name", Params = new object[] { "<element>value</element>", "newElement" })]
-                //[Variation(Priority = 0, Desc = "XElement - name with namespace", Params = new object[] { "<element>value</element>", "{a}newElement" })]
-                //[Variation(Priority = 0, Desc = "XElement - name with xml namespace", Params = new object[] { "<element>value</element>", "{http://www.w3.org/XML/1998/namespace}newElement" })]
-                //[Variation(Priority = 0, Desc = "XElement - element with namespace", Params = new object[] { "<p:element xmlns:p='mynamespace'><p:child>value</p:child></p:element>", "{a}newElement" })]
+                //[Variation(Priority = 0, Desc = "XElement - same name", Params = new object[] {
+                // "<element>value</element>", "element" })]
+                //[Variation(Priority = 0, Desc = "XElement - different name", Params = new object[] {
+                // "<element>value</element>", "newElement" })]
+                //[Variation(Priority = 0, Desc = "XElement - name with namespace", Params = new object[] {
+                // "<element>value</element>", "{a}newElement" })]
+                //[Variation(Priority = 0, Desc = "XElement - name with xml namespace", Params = new object[] {
+                // "<element>value</element>", "{http://www.w3.org/XML/1998/namespace}newElement" })]
+                //[Variation(Priority = 0, Desc = "XElement - element with namespace", Params = new object[] {
+                // "<p:element xmlns:p='mynamespace'><p:child>value</p:child></p:element>", "{a}newElement" })]
                 public void ValidVariation()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -50,9 +55,12 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Priority = 0, Desc = "XElement - space character name", Params = new object[] { "<element>value</element>", " " })]
-                //[Variation(Priority = 0, Desc = "XElement - empty string name", Params = new object[] { "<element>value</element>", "" })]
-                //[Variation(Priority = 0, Desc = "XElement - null name", Params = new object[] { "<element>value</element>", null })]
+                //[Variation(Priority = 0, Desc = "XElement - space character name", Params = new object[] {
+                // "<element>value</element>", " " })]
+                //[Variation(Priority = 0, Desc = "XElement - empty string name", Params = new object[] {
+                // "<element>value</element>", "" })]
+                //[Variation(Priority = 0, Desc = "XElement - null name", Params = new object[] {
+                // "<element>value</element>", null })]
                 public void InValidVariation()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -203,14 +211,22 @@ namespace CoreXml.Test.XLinq
                 //  ~ text nodes in mixed content
                 //  ~ whitespace nodes
 
-                //[Variation(Priority = 0, Desc = "GET: Mixed content", Params = new object[] { "<X>t0<A>t1<B/><B xmlns='a'><![CDATA[t2]]></B><C>t3</C></A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Mixed content - empty CDATA", Params = new object[] { "<X>t0<A>t1<B/><B xmlns='a'><![CDATA[]]></B><C>t3</C></A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Mixed content - empty XText", Params = new object[] { "<X>t0<A>t1<B/><B xmlns='a'><![CDATA[]]></B><C></C></A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Mixed content - whitespace", Params = new object[] { "<X>t0<A>t1\n<B/><B xmlns='a'>\t<![CDATA[]]> </B>\n<C></C></A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Mixed content - no text nodes", Params = new object[] { "<X>t0<A Id='a0'><B/><B xmlns='a'><?Pi c?></B><!--commm--><C></C></A>t00</X>" })]
-                //[Variation(Priority = 0, Desc = "GET: Empty string node", Params = new object[] { "<X>t0<A></A>t00</X>" })]
-                //[Variation(Priority = 0, Desc = "GET: Empty string node", Params = new object[] { "<X>t0<A/>t00</X>" })]
-                //[Variation(Priority = 0, Desc = "GET: String content", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
+                //[Variation(Priority = 0, Desc = "GET: Mixed content", Params = new object[] { "<X>t0<A>t1<B/><B
+                // xmlns='a'><![CDATA[t2]]></B><C>t3</C></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Mixed content - empty CDATA", Params = new object[] {
+                // "<X>t0<A>t1<B/><B xmlns='a'><![CDATA[]]></B><C>t3</C></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Mixed content - empty XText", Params = new object[] {
+                // "<X>t0<A>t1<B/><B xmlns='a'><![CDATA[]]></B><C></C></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Mixed content - whitespace", Params = new object[] {
+                // "<X>t0<A>t1\n<B/><B xmlns='a'>\t<![CDATA[]]> </B>\n<C></C></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Mixed content - no text nodes", Params = new object[] {
+                // "<X>t0<A Id='a0'><B/><B xmlns='a'><?Pi c?></B><!--commm--><C></C></A>t00</X>" })]
+                //[Variation(Priority = 0, Desc = "GET: Empty string node", Params = new object[] {
+                // "<X>t0<A></A>t00</X>" })]
+                //[Variation(Priority = 0, Desc = "GET: Empty string node", Params = new object[] {
+                // "<X>t0<A/>t00</X>" })]
+                //[Variation(Priority = 0, Desc = "GET: String content", Params = new object[] {
+                // "<X>t0<A>truck</A>t00</X>" })]
                 public void SmokeTest()
                 {
                     // We don't need get value to be executed for events
@@ -249,8 +265,10 @@ namespace CoreXml.Test.XLinq
                 //          ~ non text node
                 //          ~ set value on subnodes
 
-                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes II.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck<p:Y/></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes I.", Params = new object[] {
+                // "<X>t0<A>truck</A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes II.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck<p:Y/></A>t00</X>" })]
                 public void APIModified1()
                 {
                     // We don't need get value to be executed for events
@@ -264,7 +282,8 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, CalculateValue(e), "Value");
                 }
 
-                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes III.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Adjacent text nodes III.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>" })]
                 public void APIModified2()
                 {
                     // We don't need get value to be executed for events
@@ -278,8 +297,10 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, CalculateValue(e), "Value");
                 }
 
-                //[Variation(Priority = 1, Desc = "GET: Concatenated text I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>" })]
-                //[Variation(Priority = 1, Desc = "GET: Concatenated text II.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck<p:Y/></A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Concatenated text I.", Params = new object[] {
+                // "<X>t0<A>truck</A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Concatenated text II.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck<p:Y/></A>t00</X>" })]
                 public void APIModified3()
                 {
                     // We don't need get value to be executed for events
@@ -293,7 +314,8 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(e.Value, CalculateValue(e), "Value");
                 }
 
-                //[Variation(Priority = 1, Desc = "GET: Removed node.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>" })]
+                //[Variation(Priority = 1, Desc = "GET: Removed node.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>" })]
                 public void APIModified4()
                 {
                     // We don't need get value to be executed for events
@@ -321,12 +343,18 @@ namespace CoreXml.Test.XLinq
                 //      ~ just text/CDATA node
                 //      ~ mixed content
 
-                //[Variation(Priority = 0, Desc = "SET: Empty element, String content", Params = new object[] { "<X>t0<A/>t00</X>", "\nt1 " })]
-                //[Variation(Priority = 1, Desc = "SET: Empty element, Empty string content", Params = new object[] { "<X>t0<A/>t00</X>", "" })]
-                //[Variation(Priority = 1, Desc = "SET: Empty string content, String content", Params = new object[] { "<X>t0<A></A>t00</X>", "\nt1 " })]
-                //[Variation(Priority = 1, Desc = "SET: Empty string content, Empty string content", Params = new object[] { "<X>t0<A></A>t00</X>", "" })]
-                //[Variation(Priority = 1, Desc = "SET: String content, String content", Params = new object[] { "<X>t0<A>orig</A>t00</X>", "\nt1 " })]
-                //[Variation(Priority = 1, Desc = "SET: String content, Empty string content", Params = new object[] { "<X>t0<A>orig</A>t00</X>", "" })]
+                //[Variation(Priority = 0, Desc = "SET: Empty element, String content", Params = new object[] {
+                // "<X>t0<A/>t00</X>", "\nt1 " })]
+                //[Variation(Priority = 1, Desc = "SET: Empty element, Empty string content", Params = new object[]
+                // { "<X>t0<A/>t00</X>", "" })]
+                //[Variation(Priority = 1, Desc = "SET: Empty string content, String content", Params = new object[]
+                // { "<X>t0<A></A>t00</X>", "\nt1 " })]
+                //[Variation(Priority = 1, Desc = "SET: Empty string content, Empty string content", Params = new
+                // object[] { "<X>t0<A></A>t00</X>", "" })]
+                //[Variation(Priority = 1, Desc = "SET: String content, String content", Params = new object[] {
+                // "<X>t0<A>orig</A>t00</X>", "\nt1 " })]
+                //[Variation(Priority = 1, Desc = "SET: String content, Empty string content", Params = new object[]
+                // { "<X>t0<A>orig</A>t00</X>", "" })]
                 public void Value_Set()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -345,14 +373,22 @@ namespace CoreXml.Test.XLinq
                     TestLog.Compare(!e.IsEmpty, "!e.IsEmpty");
                 }
 
-                //[Variation(Priority = 1, Desc = "SET:  XText content, Empty string content", Params = new object[] { "<X>t0<A xml:space='preserve'>orig</A>t00</X>", "" })]
-                //[Variation(Priority = 1, Desc = "SET:  XText content, string content", Params = new object[] { "<X>t0<A>orig</A>t00</X>", "\tt1 " })]
-                //[Variation(Priority = 1, Desc = "SET:  CDATA content, Empty string content", Params = new object[] { "<X>t0<A><![CDATA[cdata]]></A>t00</X>", "" })]
-                //[Variation(Priority = 1, Desc = "SET:  CDATA content, string content", Params = new object[] { "<X>t0<A><![CDATA[cdata]]></A>t00</X>", "\tt1 " })]
-                //[Variation(Priority = 1, Desc = "SET:  Mixed content, Empty string content", Params = new object[] { "<X>t0<A xmlns:p='p'>t1<p:Y/></A>t00</X>", "" })]
-                //[Variation(Priority = 0, Desc = "SET:  Mixed content, string content", Params = new object[] { "<X>t0<A is='is'><![CDATA[cdata]]>orig<C/><!--comment--></A>t00</X>", "\tt1 " })]
-                //[Variation(Priority = 1, Desc = "SET:  Mixed content (comment only), string content", Params = new object[] { "<X>t0<A is='is'><!--comment--></A>t00</X>", "\tt1 " })]
-                //[Variation(Priority = 1, Desc = "SET:  Mixed content (PI only), string content", Params = new object[] { "<X>t0<A is='is'><?PI aaa?></A>t00</X>", "\tt1 " })]
+                //[Variation(Priority = 1, Desc = "SET:  XText content, Empty string content", Params = new object[]
+                // { "<X>t0<A xml:space='preserve'>orig</A>t00</X>", "" })]
+                //[Variation(Priority = 1, Desc = "SET:  XText content, string content", Params = new object[] {
+                // "<X>t0<A>orig</A>t00</X>", "\tt1 " })]
+                //[Variation(Priority = 1, Desc = "SET:  CDATA content, Empty string content", Params = new object[]
+                // { "<X>t0<A><![CDATA[cdata]]></A>t00</X>", "" })]
+                //[Variation(Priority = 1, Desc = "SET:  CDATA content, string content", Params = new object[] {
+                // "<X>t0<A><![CDATA[cdata]]></A>t00</X>", "\tt1 " })]
+                //[Variation(Priority = 1, Desc = "SET:  Mixed content, Empty string content", Params = new object[]
+                // { "<X>t0<A xmlns:p='p'>t1<p:Y/></A>t00</X>", "" })]
+                //[Variation(Priority = 0, Desc = "SET:  Mixed content, string content", Params = new object[] {
+                // "<X>t0<A is='is'><![CDATA[cdata]]>orig<C/><!--comment--></A>t00</X>", "\tt1 " })]
+                //[Variation(Priority = 1, Desc = "SET:  Mixed content (comment only), string content", Params = new
+                // object[] { "<X>t0<A is='is'><!--comment--></A>t00</X>", "\tt1 " })]
+                //[Variation(Priority = 1, Desc = "SET:  Mixed content (PI only), string content", Params = new
+                // object[] { "<X>t0<A is='is'><?PI aaa?></A>t00</X>", "\tt1 " })]
                 public void Value_Set_WithNodes()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -382,8 +418,10 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>", "tn\n" })]
-                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes II.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck<p:Y/></A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes I.", Params = new object[] {
+                // "<X>t0<A>truck</A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes II.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck<p:Y/></A>t00</X>", "tn\n" })]
                 public void set_APIModified1()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -415,7 +453,8 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes III.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Adjacent text nodes III.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
                 public void set_APIModified2()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -447,8 +486,10 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Priority = 2, Desc = "SET: Concatenated text I.", Params = new object[] { "<X>t0<A>truck</A>t00</X>", "tn\n" })]
-                //[Variation(Priority = 2, Desc = "SET: Concatenated text II.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck<p:Y/></A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Concatenated text I.", Params = new object[] {
+                // "<X>t0<A>truck</A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Concatenated text II.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck<p:Y/></A>t00</X>", "tn\n" })]
                 public void set_APIModified3()
                 {
                     _runWithEvents = (bool)Params[0];
@@ -480,7 +521,8 @@ namespace CoreXml.Test.XLinq
                     );
                 }
 
-                //[Variation(Priority = 2, Desc = "SET: Removed node.", Params = new object[] { "<X>t0<A xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
+                //[Variation(Priority = 2, Desc = "SET: Removed node.", Params = new object[] { "<X>t0<A
+                // xmlns:p='p'>truck\n<p:Y/>\nhello</A>t00</X>", "tn\n" })]
                 public void set_APIModified4()
                 {
                     _runWithEvents = (bool)Params[0];

@@ -2997,7 +2997,8 @@ option1 = value6",
 
             var globalConfig = AnalyzerConfigSet.MergeGlobalConfigs(configs, out var diagnostics);
 
-            // we don't report config1, 2, 5, or 6, because they didn't conflict: 3 + 4 overrode them, but then themselves were conflicting
+            // we don't report config1, 2, 5, or 6, because they didn't conflict: 3 + 4 overrode them, but then
+            // themselves were conflicting
             diagnostics.Verify(
                 Diagnostic("MultipleGlobalAnalyzerKeys")
                     .WithArguments("option1", "Global Section", "/.globalconfig3, /.globalconfig4")

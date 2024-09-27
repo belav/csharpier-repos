@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlInputCheckBox.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlInputCheckBox.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -35,19 +35,20 @@ namespace System.Web.UI.HtmlControls
     {
         private static readonly object EventServerChange = new object();
 
-        /*
-         *  Creates an intrinsic Html INPUT type=checkbox control.
-         */
+/*
+*  Creates an intrinsic Html INPUT type=checkbox control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputCheckBox'/> class.</para>
+        /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlInputCheckBox'/>
+        // class.</para>
         /// </devdoc>
         public HtmlInputCheckBox()
             : base("checkbox") { }
 
-        /*
-         * Checked property.
-         */
+/*
+* Checked property.
+*/
 
         /// <devdoc>
         ///    <para>Gets or sets a value indicating whether the checkbox is
@@ -75,10 +76,10 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-        * Adds an event handler for the OnServerChange event.
-        *  value: New handler to install for this event.
-        */
+/*
+* Adds an event handler for the OnServerChange event.
+*  value: New handler to install for this event.
+*/
 
         /// <devdoc>
         ///    <para>Occurs when </para>
@@ -90,9 +91,9 @@ namespace System.Web.UI.HtmlControls
             remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
-        /*
-         * This method is invoked just prior to rendering.
-         */
+/*
+* This method is invoked just prior to rendering.
+*/
 
         /// <internalonly/>
         /// <devdoc>
@@ -116,9 +117,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method used to raise the OnServerChange event.
-         */
+/*
+* Method used to raise the OnServerChange event.
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -131,10 +132,10 @@ namespace System.Web.UI.HtmlControls
                 handler(this, e);
         }
 
-        /*
-         * Method of IPostBackDataHandler interface to process posted data.
-         * Checkbox determines the posted Checked state.
-         */
+/*
+* Method of IPostBackDataHandler interface to process posted data.
+* Checkbox determines the posted Checked state.
+*/
 
         /// <internalonly/>
         bool IPostBackDataHandler.LoadPostData(
@@ -171,11 +172,11 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Method of IPostBackDataHandler interface which is invoked whenever
-         * posted data for a control has changed.  RadioButton fires an
-         * OnServerChange event.
-         */
+/*
+* Method of IPostBackDataHandler interface which is invoked whenever
+* posted data for a control has changed.  RadioButton fires an
+* OnServerChange event.
+*/
 
         /// <internalonly/>
         void IPostBackDataHandler.RaisePostDataChangedEvent()

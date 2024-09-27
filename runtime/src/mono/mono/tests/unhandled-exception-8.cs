@@ -5,7 +5,7 @@ class CustomException : Exception { }
 
 class Driver
 {
-    /* expected exit code: 255 */
+/* expected exit code: 255 */
     public static void Main()
     {
         if (Environment.GetEnvironmentVariable("TEST_UNHANDLED_EXCEPTION_HANDLER") != null)

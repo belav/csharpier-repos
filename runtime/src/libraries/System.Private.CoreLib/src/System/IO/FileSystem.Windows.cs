@@ -77,7 +77,8 @@ namespace System.IO
 
                 if (errorCode != Interop.Errors.ERROR_FILE_EXISTS)
                 {
-                    // For a number of error codes (sharing violation, path not found, etc) we don't know if the problem was with
+                    // For a number of error codes (sharing violation, path not found, etc) we don't know if the problem
+                    // was with
                     // the source or dest file.  Try reading the source file.
                     using (
                         SafeFileHandle handle = Interop.Kernel32.CreateFile(
@@ -254,7 +255,8 @@ namespace System.IO
                         destFullPath
                     );
 
-                // This check was originally put in for Win9x (unfortunately without special casing it to be for Win9x only). We can't change the NT codepath now for backcomp reasons.
+                // This check was originally put in for Win9x (unfortunately without special casing it to be for
+                // Win9x only). We can't change the NT codepath now for backcomp reasons.
                 if (errorCode == Interop.Errors.ERROR_ACCESS_DENIED) // WinNT throws IOException. This check is for Win9x. We can't change it for backcomp.
                     throw new IOException(
                         SR.Format(SR.UnauthorizedAccess_IODenied_Path, sourceFullPath),
@@ -328,9 +330,11 @@ namespace System.IO
             }
 
             Interop.Kernel32.WIN32_FIND_DATA findData = default;
-            // FindFirstFile($path) (used by GetFindData) fails with ACCESS_DENIED when user has no ListDirectory rights
+            // FindFirstFile($path) (used by GetFindData) fails with ACCESS_DENIED when user has no
+            // ListDirectory rights
             // but FindFirstFile($path/*") (used by RemoveDirectoryRecursive) works fine in such scenario.
-            // So we ignore it here and let RemoveDirectoryRecursive throw if FindFirstFile($path/*") fails with ACCESS_DENIED.
+            // So we ignore it here and let RemoveDirectoryRecursive throw if FindFirstFile($path/*") fails with
+            // ACCESS_DENIED.
             GetFindData(fullPath, isDirectory: true, ignoreAccessDenied: true, ref findData);
             if (IsNameSurrogateReparsePoint(ref findData))
             {
@@ -600,7 +604,8 @@ namespace System.IO
             }
         }
 
-        // Default values indicate "no change". Use defaults so that we don't force callsites to be aware of the default values
+        // Default values indicate "no change". Use defaults so that we don't force callsites to be aware of
+        // the default values
         private static void SetFileTime(
             string fullPath,
             bool asDirectory,
@@ -720,7 +725,8 @@ namespace System.IO
         /// <summary>
         /// Gets reparse point information associated to <paramref name="linkPath"/>.
         /// </summary>
-        /// <returns>The immediate link target, absolute or relative or null if the file is not a supported link.</returns>
+        /// <returns>The immediate link target, absolute or relative or null if the file is not a supported
+        // link.</returns>
         internal static unsafe string? GetImmediateLinkTarget(
             string linkPath,
             bool isDirectory,
@@ -797,7 +803,8 @@ namespace System.IO
                 Debug.Assert(success);
 
                 // We always use SubstituteName(Offset|Length) instead of PrintName(Offset|Length),
-                // the latter is just the display name of the reparse point and it can show something completely unrelated to the target.
+                // the latter is just the display name of the reparse point and it can show something completely
+                // unrelated to the target.
 
                 if (
                     rbSymlink.ReparseTag == Interop.Kernel32.IOReparseOptions.IO_REPARSE_TAG_SYMLINK
@@ -908,7 +915,8 @@ namespace System.IO
             if (handle.IsInvalid)
             {
                 // If the handle fails because it is unreachable, is because the link was broken.
-                // We need to fallback to manually traverse the links and return the target of the last resolved link.
+                // We need to fallback to manually traverse the links and return the target of the last resolved
+                // link.
                 int error = Marshal.GetLastPInvokeError();
                 if (IsPathUnreachableError(error))
                 {
@@ -924,8 +932,10 @@ namespace System.IO
             {
                 uint result = GetFinalPathNameByHandle(handle, buffer);
 
-                // If the function fails because lpszFilePath is too small to hold the string plus the terminating null character,
-                // the return value is the required buffer size, in TCHARs. This value includes the size of the terminating null character.
+                // If the function fails because lpszFilePath is too small to hold the string plus the terminating
+                // null character,
+                // the return value is the required buffer size, in TCHARs. This value includes the size of the
+                // terminating null character.
                 if (result > buffer.Length)
                 {
                     char[] toReturn = buffer;
@@ -942,7 +952,8 @@ namespace System.IO
                 }
 
                 Debug.Assert(PathInternal.IsExtended(new string(buffer, 0, (int)result).AsSpan()));
-                // GetFinalPathNameByHandle always returns with extended DOS prefix even if the link target was created without one.
+                // GetFinalPathNameByHandle always returns with extended DOS prefix even if the link target was
+                // created without one.
                 // While this does not interfere with correct behavior, it might be unexpected.
                 // Hence we trim it if the passed-in path to the link wasn't extended.
                 int start = PathInternal.IsExtended(linkPath.AsSpan()) ? 0 : 4;
@@ -968,8 +979,10 @@ namespace System.IO
 
             string? GetFinalLinkTargetSlow(string linkPath)
             {
-                // Since all these paths will be passed to CreateFile, which takes a string anyway, it is pointless to use span.
-                // I am not sure if it's possible to change CreateFile's param to ROS<char> and avoid all these allocations.
+                // Since all these paths will be passed to CreateFile, which takes a string anyway, it is pointless
+                // to use span.
+                // I am not sure if it's possible to change CreateFile's param to ROS<char> and avoid all these
+                // allocations.
 
                 // We don't throw on error since we already did all the proper validations before.
                 string? current = GetImmediateLinkTarget(

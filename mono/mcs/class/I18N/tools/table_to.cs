@@ -1,8 +1,8 @@
 /**
- * Create a table from Unicode to CHARSET.
- *
- * @author Bruno Haible
- */
+* Create a table from Unicode to CHARSET.
+*
+* @author Bruno Haible
+*/
 
 using System; /* String, Console */
 using System.Text; /* Encoding */

@@ -58,9 +58,12 @@ namespace System.IO.Pipes
                 );
             }
 
-            // We don't have a good way to enforce maxNumberOfServerInstances across processes; we only factor it in
-            // for streams created in this process.  Between processes, we behave similarly to maxNumberOfServerInstances == 1,
-            // in that the second process to come along and create a stream will find the pipe already in existence and will fail.
+            // We don't have a good way to enforce maxNumberOfServerInstances across processes; we only factor
+            // it in
+            // for streams created in this process.  Between processes, we behave similarly to
+            // maxNumberOfServerInstances == 1,
+            // in that the second process to come along and create a stream will find the pipe already in
+            // existence and will fail.
             _instance = SharedServer.Get(
                 GetPipePath(".", pipeName),
                 (maxNumberOfServerInstances == MaxAllowedServerInstances)
@@ -282,7 +285,8 @@ namespace System.IO.Pipes
             }
         }
 
-        /// <summary>Shared resources for NamedPipeServerStreams in the same process created for the same path.</summary>
+        /// <summary>Shared resources for NamedPipeServerStreams in the same process created for the same
+        // path.</summary>
         private sealed class SharedServer
         {
             /// <summary>Path to shared instance mapping.</summary>
@@ -295,7 +299,8 @@ namespace System.IO.Pipes
             /// <summary>Gets the shared socket used to accept connections.</summary>
             internal Socket ListeningSocket { get; }
 
-            /// <summary>The maximum number of server streams allowed to use this instance concurrently.</summary>
+            /// <summary>The maximum number of server streams allowed to use this instance
+            // concurrently.</summary>
             private readonly int _maxCount;
 
             /// <summary>The concurrent number of concurrent streams using this instance.</summary>

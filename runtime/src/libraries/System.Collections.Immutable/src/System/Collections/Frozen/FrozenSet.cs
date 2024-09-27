@@ -16,7 +16,8 @@ namespace System.Collections.Frozen
     {
         /// <summary>Creates a <see cref="FrozenSet{T}"/> with the specified values.</summary>
         /// <param name="source">The values to use to populate the set.</param>
-        /// <param name="comparer">The comparer implementation to use to compare values for equality. If null, <see cref="EqualityComparer{T}.Default"/> is used.</param>
+        /// <param name="comparer">The comparer implementation to use to compare values for equality. If
+        // null, <see cref="EqualityComparer{T}.Default"/> is used.</param>
         /// <typeparam name="T">The type of the values in the set.</typeparam>
         /// <returns>A frozen set.</returns>
         public static FrozenSet<T> ToFrozenSet<T>(
@@ -26,7 +27,9 @@ namespace System.Collections.Frozen
             GetExistingFrozenOrNewSet(source, comparer, out HashSet<T>? newSet)
             ?? CreateFromSet(newSet!);
 
-        /// <summary>Extracts from the source either an existing <see cref="FrozenSet{T}"/> instance or a <see cref="HashSet{T}"/> containing the values and the specified <paramref name="comparer"/>.</summary>
+        /// <summary>Extracts from the source either an existing <see cref="FrozenSet{T}"/> instance or a
+        // <see cref="HashSet{T}"/> containing the values and the specified <paramref
+        // name="comparer"/>.</summary>
         private static FrozenSet<T>? GetExistingFrozenOrNewSet<T>(
             IEnumerable<T> source,
             IEqualityComparer<T>? comparer,
@@ -69,8 +72,10 @@ namespace System.Collections.Frozen
 
             IEqualityComparer<T> comparer = source.Comparer;
 
-            // Optimize for value types when the default comparer is being used. In such a case, the implementation
-            // may use {Equality}Comparer<T>.Default.Compare/Equals/GetHashCode directly, with generic specialization enabling
+            // Optimize for value types when the default comparer is being used. In such a case, the
+            // implementation
+            // may use {Equality}Comparer<T>.Default.Compare/Equals/GetHashCode directly, with generic
+            // specialization enabling
             // the Equals/GetHashCode methods to be devirtualized and possibly inlined.
             if (typeof(T).IsValueType && ReferenceEquals(comparer, EqualityComparer<T>.Default))
             {
@@ -84,14 +89,16 @@ namespace System.Collections.Frozen
                             (object)new SmallValueTypeComparableFrozenSet<T>(source);
                     }
 
-                    // Otherwise, use an implementation optimized for a small number of value types using the default comparer.
+                    // Otherwise, use an implementation optimized for a small number of value types using the default
+                    // comparer.
                     return (FrozenSet<T>)
                         (object)new SmallValueTypeDefaultComparerFrozenSet<T>(source);
                 }
 
                 // Use a hash-based implementation.
 
-                // For Int32 values, we can reuse the item storage as the hash storage, saving on space and extra indirection.
+                // For Int32 values, we can reuse the item storage as the hash storage, saving on space and extra
+                // indirection.
                 if (typeof(T) == typeof(int))
                 {
                     return (FrozenSet<T>)(object)new Int32FrozenSet((HashSet<int>)(object)source);
@@ -122,7 +129,8 @@ namespace System.Collections.Frozen
                 var entries = new string[stringValues.Count];
                 stringValues.CopyTo(entries);
 
-                // Calculate the minimum and maximum lengths of the strings in the set. Several of the analyses need this.
+                // Calculate the minimum and maximum lengths of the strings in the set. Several of the analyses need
+                // this.
                 int minLength = int.MaxValue,
                     maxLength = 0;
                 foreach (string s in entries)
@@ -134,7 +142,8 @@ namespace System.Collections.Frozen
                 }
                 Debug.Assert(minLength >= 0 && maxLength >= minLength);
 
-                // Try to create an implementation that uses length buckets, where each bucket contains up to only a few strings of the same length.
+                // Try to create an implementation that uses length buckets, where each bucket contains up to only a
+                // few strings of the same length.
                 FrozenSet<string>? frozenSet =
                     LengthBucketsFrozenSet.CreateLengthBucketsFrozenSetIfAppropriate(
                         entries,
@@ -147,7 +156,8 @@ namespace System.Collections.Frozen
                     return (FrozenSet<T>)(object)frozenSet;
                 }
 
-                // Analyze the values for unique substrings and create an implementation that minimizes the cost of hashing keys.
+                // Analyze the values for unique substrings and create an implementation that minimizes the cost of
+                // hashing keys.
                 KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(
                     entries,
                     ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase),
@@ -275,7 +285,8 @@ namespace System.Collections.Frozen
                 return (FrozenSet<T>)(object)frozenSet;
             }
 
-            // Optimize for very small numbers of items by using a specialized implementation that just does a linear search.
+            // Optimize for very small numbers of items by using a specialized implementation that just does a
+            // linear search.
             if (source.Count <= Constants.MaxItemsInSmallFrozenCollection)
             {
                 // use the specialized set for low item counts
@@ -287,14 +298,17 @@ namespace System.Collections.Frozen
         }
     }
 
-    /// <summary>Provides an immutable, read-only set optimized for fast lookup and enumeration.</summary>
+    /// <summary>Provides an immutable, read-only set optimized for fast lookup and
+    // enumeration.</summary>
     /// <typeparam name="T">The type of the values in this set.</typeparam>
     /// <remarks>
     /// <see cref="FrozenSet{T}"/> is immutable and is optimized for situations where a set
     /// is created very infrequently but is used very frequently at run-time. It has a relatively high
     /// cost to create but provides excellent lookup performance. Thus, it is ideal for cases
-    /// where a set is created once, potentially at the startup of an application, and is used throughout
-    /// the remainder of the life of the application. <see cref="FrozenSet{T}"/> should only be initialized
+    /// where a set is created once, potentially at the startup of an application, and is used
+    // throughout
+    /// the remainder of the life of the application. <see cref="FrozenSet{T}"/> should only be
+    // initialized
     /// with trusted elements, as the details of the elements impacts construction time.
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableEnumerableDebuggerProxy<>))]
@@ -331,9 +345,12 @@ namespace System.Collections.Frozen
         /// <inheritdoc cref="Count" />
         private protected abstract int CountCore { get; }
 
-        /// <summary>Copies the values in the set to an array, starting at the specified <paramref name="destinationIndex"/>.</summary>
-        /// <param name="destination">The array that is the destination of the values copied from the set.</param>
-        /// <param name="destinationIndex">The zero-based index in <paramref name="destination"/> at which copying begins.</param>
+        /// <summary>Copies the values in the set to an array, starting at the specified <paramref
+        // name="destinationIndex"/>.</summary>
+        /// <param name="destination">The array that is the destination of the values copied from the
+        // set.</param>
+        /// <param name="destinationIndex">The zero-based index in <paramref name="destination"/> at which
+        // copying begins.</param>
         public void CopyTo(T[] destination, int destinationIndex)
         {
             ThrowHelper.ThrowIfNull(destination);
@@ -341,7 +358,8 @@ namespace System.Collections.Frozen
         }
 
         /// <summary>Copies the values in the set to a span.</summary>
-        /// <param name="destination">The span that is the destination of the values copied from the set.</param>
+        /// <param name="destination">The span that is the destination of the values copied from the
+        // set.</param>
         public void CopyTo(Span<T> destination) => Items.AsSpan().CopyTo(destination);
 
         /// <inheritdoc />
@@ -367,12 +385,15 @@ namespace System.Collections.Frozen
 
         /// <summary>Determines whether the set contains the specified element.</summary>
         /// <param name="item">The element to locate.</param>
-        /// <returns><see langword="true"/> if the set contains the specified element; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the set contains the specified element; otherwise, <see
+        // langword="false"/>.</returns>
         public bool Contains(T item) => FindItemIndex(item) >= 0;
 
-        /// <summary>Searches the set for a given value and returns the equal value it finds, if any.</summary>
+        /// <summary>Searches the set for a given value and returns the equal value it finds, if
+        // any.</summary>
         /// <param name="equalValue">The value to search for.</param>
-        /// <param name="actualValue">The value from the set that the search found, or the default value of T when the search yielded no match.</param>
+        /// <param name="actualValue">The value from the set that the search found, or the default value of
+        // T when the search yielded no match.</param>
         /// <returns>A value indicating whether the search was successful.</returns>
         public bool TryGetValue(T equalValue, [MaybeNullWhen(false)] out T actualValue)
         {

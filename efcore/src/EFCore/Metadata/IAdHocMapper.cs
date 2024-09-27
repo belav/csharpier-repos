@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 public interface IAdHocMapper
 {
     /// <summary>
-    ///     Gets the ad-hoc entity type mapped for the given CLR type, or creates the mapping and returns it if it does not exist.
+    ///     Gets the ad-hoc entity type mapped for the given CLR type, or creates the mapping and
+    // returns it if it does not exist.
     /// </summary>
     /// <param name="clrType">The type for which the entity type will be returned.</param>
     /// <returns>The ad-hoc entity type.</returns>

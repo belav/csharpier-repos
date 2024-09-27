@@ -22,7 +22,8 @@ namespace System.Web.Services.Discovery
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
 
-    /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol"]/*' />
+    /// <include file='doc\DiscoveryClientProtocol.uex'
+    // path='docs/doc[@for="DiscoveryClientProtocol"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -36,7 +37,8 @@ namespace System.Web.Services.Discovery
         private ArrayList additionalInformation = new ArrayList();
         private DiscoveryExceptionDictionary errors = new DiscoveryExceptionDictionary();
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.DiscoveryClientProtocol"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.DiscoveryClientProtocol"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -46,7 +48,8 @@ namespace System.Web.Services.Discovery
         internal DiscoveryClientProtocol(HttpWebClientProtocol protocol)
             : base(protocol) { }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.AdditionalInformation"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.AdditionalInformation"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -55,7 +58,8 @@ namespace System.Web.Services.Discovery
             get { return additionalInformation; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.Documents"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.Documents"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -64,7 +68,8 @@ namespace System.Web.Services.Discovery
             get { return documents; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.Errors"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.Errors"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -73,7 +78,8 @@ namespace System.Web.Services.Discovery
             get { return errors; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.References"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.References"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -82,7 +88,8 @@ namespace System.Web.Services.Discovery
             get { return references; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.References"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.References"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -91,7 +98,8 @@ namespace System.Web.Services.Discovery
             get { return inlinedSchemas; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.Discover"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.Discover"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -111,7 +119,8 @@ namespace System.Web.Services.Discovery
             return docRef.Document;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.DiscoverAny"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.DiscoverAny"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -258,7 +267,8 @@ namespace System.Web.Services.Discovery
             return doc;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.Download"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.Download"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -269,7 +279,8 @@ namespace System.Web.Services.Discovery
             return Download(ref url, ref contentType);
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.Download1"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.Download1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -363,7 +374,8 @@ namespace System.Web.Services.Discovery
             }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.LoadExternals"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.LoadExternals"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// <internalonly/>
@@ -415,7 +427,8 @@ namespace System.Web.Services.Discovery
             return path;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.ReadAll"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.ReadAll"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -488,7 +501,8 @@ namespace System.Web.Services.Discovery
             return results.Results;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.ResolveAll"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.ResolveAll"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -566,7 +580,8 @@ namespace System.Web.Services.Discovery
             FixupReferences();
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.ResolveOneLevel"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.ResolveOneLevel"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -642,7 +657,8 @@ namespace System.Web.Services.Discovery
             return fullPath;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.WriteAll"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientProtocol.WriteAll"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -724,7 +740,8 @@ namespace System.Web.Services.Discovery
         {
             private DiscoveryClientResultCollection results = new DiscoveryClientResultCollection();
 
-            /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientProtocol.DiscoveryClientResultsFile.Results"]/*' />
+            /// <include file='doc\DiscoveryClientProtocol.uex'
+            // path='docs/doc[@for="DiscoveryClientProtocol.DiscoveryClientResultsFile.Results"]/*' />
             /// <devdoc>
             ///    <para>[To be supplied.]</para>
             /// </devdoc>
@@ -735,13 +752,15 @@ namespace System.Web.Services.Discovery
         }
     }
 
-    /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResultCollection"]/*' />
+    /// <include file='doc\DiscoveryClientProtocol.uex'
+    // path='docs/doc[@for="DiscoveryClientResultCollection"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public sealed class DiscoveryClientResultCollection : CollectionBase
     {
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResultCollection.this"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResultCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -751,7 +770,8 @@ namespace System.Web.Services.Discovery
             set { List[i] = value; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResultCollection.Add"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResultCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -760,7 +780,8 @@ namespace System.Web.Services.Discovery
             return List.Add(value);
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResultCollection.Contains"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResultCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -769,7 +790,8 @@ namespace System.Web.Services.Discovery
             return List.Contains(value);
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResultCollection.Remove"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResultCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -779,7 +801,8 @@ namespace System.Web.Services.Discovery
         }
     }
 
-    /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult"]/*' />
+    /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -789,13 +812,15 @@ namespace System.Web.Services.Discovery
         string url;
         string filename;
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult.DiscoveryClientResult"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResult.DiscoveryClientResult"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public DiscoveryClientResult() { }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult.DiscoveryClientResult1"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResult.DiscoveryClientResult1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -806,7 +831,8 @@ namespace System.Web.Services.Discovery
             this.filename = filename;
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult.ReferenceTypeName"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResult.ReferenceTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -817,7 +843,8 @@ namespace System.Web.Services.Discovery
             set { referenceTypeName = value; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult.Url"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResult.Url"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -828,7 +855,8 @@ namespace System.Web.Services.Discovery
             set { url = value; }
         }
 
-        /// <include file='doc\DiscoveryClientProtocol.uex' path='docs/doc[@for="DiscoveryClientResult.Filename"]/*' />
+        /// <include file='doc\DiscoveryClientProtocol.uex'
+        // path='docs/doc[@for="DiscoveryClientResult.Filename"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -302,7 +303,8 @@ namespace ILLink.Tasks
                 }
                 else if (def.StartsWith("DEFINE_METHOD("))
                 {
-                    // E.g., DEFINE_METHOD(APP_DOMAIN,           ON_ASSEMBLY_LOAD,       OnAssemblyLoadEvent,        IM_Assembly_RetVoid)
+                    // E.g., DEFINE_METHOD(APP_DOMAIN,           ON_ASSEMBLY_LOAD,       OnAssemblyLoadEvent,
+                    // IM_Assembly_RetVoid)
                     string methodName = defElements[3]; // OnAssemblyLoadEvent
                     classId = defElements[1]; // APP_DOMAIN
                     AddMethod(methodName, classId, null, null, currentFeatureSwitch);
@@ -311,15 +313,18 @@ namespace ILLink.Tasks
                     def.StartsWith("DEFINE_PROPERTY(") || def.StartsWith("DEFINE_STATIC_PROPERTY(")
                 )
                 {
-                    // E.g., DEFINE_PROPERTY(ARRAY,              LENGTH,                 Length,                     Int)
-                    // or    DEFINE_STATIC_PROPERTY(THREAD,      CURRENT_THREAD,         CurrentThread,              Thread)
+                    // E.g., DEFINE_PROPERTY(ARRAY,              LENGTH,                 Length,
+                    // Int)
+                    // or    DEFINE_STATIC_PROPERTY(THREAD,      CURRENT_THREAD,         CurrentThread,
+                    // Thread)
                     string propertyName = defElements[3]; // Length or CurrentThread
                     classId = defElements[1]; // ARRAY or THREAD
                     AddMethod("get_" + propertyName, classId, null, null, currentFeatureSwitch);
                 }
                 else if (def.StartsWith("DEFINE_SET_PROPERTY("))
                 {
-                    // E.g., DEFINE_SET_PROPERTY(THREAD,         UI_CULTURE,             CurrentUICulture,           CultureInfo)
+                    // E.g., DEFINE_SET_PROPERTY(THREAD,         UI_CULTURE,             CurrentUICulture,
+                    // CultureInfo)
                     string propertyName = defElements[3]; // CurrentUICulture
                     classId = defElements[1]; // THREAD
                     AddMethod("get_" + propertyName, classId, null, null, currentFeatureSwitch);
@@ -338,7 +343,8 @@ namespace ILLink.Tasks
                 if (defineTracker.ProcessLine(def) || !defineTracker.IsActiveSection)
                     continue;
 
-                // E.g., TYPEINFO(ELEMENT_TYPE_VOID,         "System", "Void",          0,              TYPE_GC_NONE,   false,  true,   false,  false,  false) // 0x01
+                // E.g., TYPEINFO(ELEMENT_TYPE_VOID,         "System", "Void",          0,
+                // TYPE_GC_NONE,   false,  true,   false,  false,  false) // 0x01
                 if (def.StartsWith("TYPEINFO("))
                 {
                     char[] separators = { ',', '(', ')', '"', ' ', '\t' };
@@ -364,7 +370,8 @@ namespace ILLink.Tasks
                 if (defineTracker.ProcessLine(def) || !defineTracker.IsActiveSection)
                     continue;
 
-                // E.g., DEFINE_EXCEPTION(g_InteropNS,          MarshalDirectiveException,      false,  COR_E_MARSHALDIRECTIVE)
+                // E.g., DEFINE_EXCEPTION(g_InteropNS,          MarshalDirectiveException,      false,
+                // COR_E_MARSHALDIRECTIVE)
                 if (def.StartsWith("DEFINE_EXCEPTION("))
                 {
                     char[] separators = { ',', '(', ')', ' ', '\t' };
@@ -404,7 +411,9 @@ namespace ILLink.Tasks
                     if (members.Count == 0)
                         continue;
 
-                    // <assembly fullname="System.Private.CoreLib" feature="System.Diagnostics.Tracing.EventSource.IsSupported" featurevalue="true" featuredefault="true">
+                    // <assembly fullname="System.Private.CoreLib"
+                    // feature="System.Diagnostics.Tracing.EventSource.IsSupported" featurevalue="true"
+                    // featuredefault="true">
                     XmlNode featureAssemblyNode = doc.CreateElement("assembly");
                     XmlAttribute featureAssemblyFullName = doc.CreateAttribute("fullname");
                     featureAssemblyFullName.Value = "System.Private.CoreLib";

@@ -254,9 +254,12 @@ namespace System.Security.Cryptography
                 Interop.Advapi32.CryptAcquireContextFlags.CRYPT_MACHINE_KEYSET;
 
             int ret = S_OK;
-            // Specifying both verify context (for an ephemeral key) and machine keyset (for a persisted machine key)
-            // does not make sense.  Additionally, Windows is beginning to lock down against uses of MACHINE_KEYSET
-            // (for instance in the app container), even if verify context is present.   Therefore, if we're using
+            // Specifying both verify context (for an ephemeral key) and machine keyset (for a persisted machine
+            // key)
+            // does not make sense.  Additionally, Windows is beginning to lock down against uses of
+            // MACHINE_KEYSET
+            // (for instance in the app container), even if verify context is present.   Therefore, if we're
+            // using
             // an ephemeral key, strip out MACHINE_KEYSET from the flags.
             if (
                 ((flags & VerifyContextFlag) == VerifyContextFlag)
@@ -982,7 +985,8 @@ namespace System.Security.Cryptography
             {
                 parameters.KeyNumber = (int)KeyNumber.Exchange;
             }
-            // If no key container was specified and UseDefaultKeyContainer is not used, then use CRYPT_VERIFYCONTEXT
+            // If no key container was specified and UseDefaultKeyContainer is not used, then use
+            // CRYPT_VERIFYCONTEXT
             // to generate an ephemeral key
             randomKeyContainer = IsFlagBitSet(
                 (uint)parameters.Flags,
@@ -1132,10 +1136,12 @@ namespace System.Security.Cryptography
         //    ohRetDecryptedKey - [out] decrypted key
         //
         // Notes:
-        //    pbEncryptedKey is byte-reversed from the format that CAPI expects. This is for compatibility with
+        //    pbEncryptedKey is byte-reversed from the format that CAPI expects. This is for compatibility
+        // with
         //    previous CLR versions and other RSA implementations.
         //
-        //    This method is the target of the System.Security.Cryptography.RSACryptoServiceProvider.DecryptKey QCall
+        //    This method is the target of the
+        // System.Security.Cryptography.RSACryptoServiceProvider.DecryptKey QCall
         //
 
         // static
@@ -1172,7 +1178,8 @@ namespace System.Security.Cryptography
                 // If we're using OAEP mode and we received an NTE_BAD_FLAGS error, then OAEP is not supported on
                 // this platform (XP+ only).  Throw a generic cryptographic exception if we failed to decrypt OAEP
                 // padded data in order to prevent a chosen ciphertext attack.  We will allow NTE_BAD_KEY out, since
-                // that error does not relate to the padding.  Otherwise just throw a cryptographic exception based on
+                // that error does not relate to the padding.  Otherwise just throw a cryptographic exception based
+                // on
                 // the error code.
                 if (
                     (uint)((uint)dwFlags & (uint)Interop.Advapi32.CryptDecryptFlags.CRYPT_OAEP)
@@ -1212,7 +1219,8 @@ namespace System.Security.Cryptography
         //    ohRetEncryptedKey - [out] byte array holding the encrypted key
         //
         // Notes:
-        //    The returned value in ohRetEncryptedKey is byte-reversed from the version CAPI gives us.  This is for
+        //    The returned value in ohRetEncryptedKey is byte-reversed from the version CAPI gives us.  This
+        // is for
         //    compatibility with previous releases of the CLR and other RSA implementations.
         //
         internal static void EncryptKey(
@@ -1245,13 +1253,15 @@ namespace System.Security.Cryptography
                 throw GetErrorCode().ToCryptographicException();
             }
             // pbData is an in/out buffer for CryptEncrypt. allocate space for the encrypted key, and copy the
-            // plaintext key into that space.  Since encrypted keys will have padding applied, the size of the encrypted
+            // plaintext key into that space.  Since encrypted keys will have padding applied, the size of the
+            // encrypted
             // key should always be larger than the plaintext key, so use that to determine the buffer size.
             Debug.Assert(cbEncryptedKey >= cbKey);
             pbEncryptedKey = new byte[cbEncryptedKey];
             Buffer.BlockCopy(pbKey, 0, pbEncryptedKey, 0, cbKey);
 
-            // Encrypt for real - the last parameter is the total size of the in/out buffer, while the second to last
+            // Encrypt for real - the last parameter is the total size of the in/out buffer, while the second to
+            // last
             // parameter specifies the size of the plaintext to encrypt.
             if (
                 !Interop.Advapi32.CryptEncrypt(
@@ -1298,14 +1308,17 @@ namespace System.Security.Cryptography
                 throw GetErrorCode().ToCryptographicException();
             }
 
-            // encryptedData is an in/out buffer for CryptEncrypt. Allocate space for the encrypted data, and copy the
-            // plaintext data into that space.  Since encrypted data will have padding applied, the size of the encrypted
+            // encryptedData is an in/out buffer for CryptEncrypt. Allocate space for the encrypted data, and
+            // copy the
+            // plaintext data into that space.  Since encrypted data will have padding applied, the size of the
+            // encrypted
             // data should always be larger than the plaintext key, so use that to determine the buffer size.
             Debug.Assert(cbEncryptedData >= input.Length);
             var encryptedData = new byte[cbEncryptedData];
             input.CopyTo(encryptedData);
 
-            // Encrypt for real - the last parameter is the total size of the in/out buffer, while the second to last
+            // Encrypt for real - the last parameter is the total size of the in/out buffer, while the second to
+            // last
             // parameter specifies the size of the plaintext to encrypt.
             int encryptedDataLength = input.Length;
             if (
@@ -1481,7 +1494,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Helper for signing and verifications that accept a string/Type/HashAlgorithm to specify a hashing algorithm.
+        /// Helper for signing and verifications that accept a string/Type/HashAlgorithm to specify a
+        // hashing algorithm.
         /// </summary>
         public static int ObjToHashAlgId(object hashAlg)
         {
@@ -1536,7 +1550,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        /// Helper for signing and verifications that accept a string/Type/HashAlgorithm to specify a hashing algorithm.
+        /// Helper for signing and verifications that accept a string/Type/HashAlgorithm to specify a
+        // hashing algorithm.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Security",

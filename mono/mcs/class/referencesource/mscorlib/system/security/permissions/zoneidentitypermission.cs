@@ -45,11 +45,13 @@ namespace System.Security.Permissions
         private uint m_zones;
 
 #if FEATURE_REMOTING
-        // This field will be populated only for non X-AD scenarios where we create a XML-ised string of the Permission
+        // This field will be populated only for non X-AD scenarios where we create a XML-ised string of the
+        // Permission
         [OptionalField(VersionAdded = 2)]
         private String m_serializedPermission;
 
-        //  This field is legacy info from v1.x and is never used in v2.0 and beyond: purely for serialization purposes
+        //  This field is legacy info from v1.x and is never used in v2.0 and beyond: purely for
+        // serialization purposes
         private SecurityZone m_zone = SecurityZone.NoZone;
 
         [OnDeserialized]

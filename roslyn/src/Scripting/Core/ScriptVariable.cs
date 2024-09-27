@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Scripting
         /// The value of the variable after running the script.
         /// </summary>
         /// <exception cref="InvalidOperationException">Variable is read-only or a constant.</exception>
-        /// <exception cref="ArgumentException">The type of the specified <paramref name="value"/> isn't assignable to the type of the variable.</exception>
+        /// <exception cref="ArgumentException">The type of the specified <paramref name="value"/> isn't
+        // assignable to the type of the variable.</exception>
         public object Value
         {
             get { return _field.GetValue(_instance); }

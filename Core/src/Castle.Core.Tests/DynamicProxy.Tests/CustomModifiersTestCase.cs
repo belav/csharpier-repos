@@ -318,7 +318,8 @@ namespace Castle.DynamicProxy.Tests
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
             // {
-            //     .method public hidebysig newslot abstract virtual instance void Foo(int32 modopt(<modopt1>) modopt(<modopt2>) arg) cil managed { }
+            //     .method public hidebysig newslot abstract virtual instance void Foo(int32 modopt(<modopt1>)
+            // modopt(<modopt2>) arg) cil managed { }
             // }
             //
             // The C++/CLI equivalent would look like this (but note that only some modopts
@@ -371,7 +372,8 @@ namespace Castle.DynamicProxy.Tests
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
             // {
-            //     .method public hidebysig newslot abstract virtual instance void Foo(int32 modreq(<modreq1>) modreq(<modreq2>) arg) cil managed { }
+            //     .method public hidebysig newslot abstract virtual instance void Foo(int32 modreq(<modreq1>)
+            // modreq(<modreq2>) arg) cil managed { }
             // }
 
             typeName += "_AsModreqOnParamType";
@@ -417,7 +419,8 @@ namespace Castle.DynamicProxy.Tests
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
             // {
-            //     .method public hidebysig newslot abstract virtual instance int32 modopt(<modopt1>) modopt(<modopt2>) Foo() cil managed { }
+            //     .method public hidebysig newslot abstract virtual instance int32 modopt(<modopt1>)
+            // modopt(<modopt2>) Foo() cil managed { }
             // }
             //
             // The C++/CLI equivalent would look like this (but note that only some modopts
@@ -470,7 +473,8 @@ namespace Castle.DynamicProxy.Tests
             //
             // .class interface public abstract auto ansi beforefieldinit <typeName>
             // {
-            //     .method public hidebysig newslot abstract virtual instance int32 modreq(<modreq1>) modreq(<modreq2>) Foo() cil managed { }
+            //     .method public hidebysig newslot abstract virtual instance int32 modreq(<modreq1>)
+            // modreq(<modreq2>) Foo() cil managed { }
             // }
 
             typeName += "_AsModreqOnReturnType";

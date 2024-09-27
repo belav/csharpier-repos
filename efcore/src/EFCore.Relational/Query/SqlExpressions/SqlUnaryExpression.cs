@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents an unary operation in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -32,7 +33,8 @@ public class SqlUnaryExpression : SqlExpression
     /// <param name="operatorType">The operator to apply.</param>
     /// <param name="operand">An expression on which operator is applied.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlUnaryExpression(
         ExpressionType operatorType,
         SqlExpression operand,
@@ -70,11 +72,13 @@ public class SqlUnaryExpression : SqlExpression
         Update((SqlExpression)visitor.Visit(Operand));
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="operand">The <see cref="Operand" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual SqlUnaryExpression Update(SqlExpression operand) =>
         operand != Operand
             ? new SqlUnaryExpression(OperatorType, operand, Type, TypeMapping)

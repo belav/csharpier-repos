@@ -15,7 +15,8 @@ namespace System.IdentityModel.Selectors
     //
     // Summary:
     //  This is the managed representation of the native POLICY_ELEMENT struct.  This internal version
-    //  knows how to Marshal itself and manages the native memory associated with a marshaled POLICY_ELEMENT.
+    //  knows how to Marshal itself and manages the native memory associated with a marshaled
+    // POLICY_ELEMENT.
     //
     internal class InternalPolicyElement : IDisposable
     {
@@ -51,7 +52,8 @@ namespace System.IdentityModel.Selectors
         //  Marshals the PolicyElement to it's native format.
         //
         // Parameters:
-        //  ptr  - A pointer to native memory in which to place the native format of the PolicyElement.  Must be
+        //  ptr  - A pointer to native memory in which to place the native format of the PolicyElement.
+        // Must be
         //         a buffer atleast as large as this.Size.
         //
         public void DoMarshal(IntPtr ptr)

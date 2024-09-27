@@ -26,7 +26,8 @@ namespace MonoTests.System.Runtime.Serialization
             // xml2 : when it is *appropriately* serialized
             // xml3 : mixed, d4p1:activeuser comes first
             // xml4 : mixed, d4p1:activeuser comes second
-            // (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over urn:foo activeuser.)
+            // (Note that d4p1:activeuser is the actual element to be deserialized which takes precedence over
+            // urn:foo activeuser.)
 
             string xml =
                 @"

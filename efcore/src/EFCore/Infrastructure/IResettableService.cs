@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///         different uses of the same <see cref="DbContext" /> in different pools.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -22,7 +23,8 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///         The implementations do not need to be thread-safe.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -36,8 +38,10 @@ public interface IResettableService
     /// <summary>
     ///     Resets the service so that it can be used from the pool.
     /// </summary>
-    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for
+    // the task to complete.</param>
     /// <returns>A task that represents the asynchronous operation.</returns>
-    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
+    /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is
+    // canceled.</exception>
     Task ResetStateAsync(CancellationToken cancellationToken = default);
 }

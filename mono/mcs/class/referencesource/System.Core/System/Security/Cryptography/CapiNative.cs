@@ -798,7 +798,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///     Get information about a CSP. This should only be used for calls where the returned information
+        ///     Get information about a CSP. This should only be used for calls where the returned
+        // information
         ///     is in the form of a structure.
         /// </summary>
         [System.Security.SecurityCritical]

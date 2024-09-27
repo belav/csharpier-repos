@@ -17,7 +17,8 @@ namespace System.Web.UI.Design.MobileControls
     )]
     public interface IMobileDesigner
     {
-        /// <include file='doc\IMobileDesigner.uex' path='docs/doc[@for="IMobileDesigner.UpdateRendering"]/*' />
+        /// <include file='doc\IMobileDesigner.uex'
+        // path='docs/doc[@for="IMobileDesigner.UpdateRendering"]/*' />
         void UpdateRendering();
     }
 }

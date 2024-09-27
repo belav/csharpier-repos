@@ -126,7 +126,8 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be
+                // used as a statement
                 //         /*<bind>*/Action a = () => 1;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 36),
             };
@@ -248,7 +249,8 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be
+                // used as a statement
                 //         Action a = /*<bind>*/(Action)(() => 1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 45),
             };
@@ -877,7 +879,9 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1061: 'object' does not contain a definition for 'M1' and no extension method 'M1' accepting a first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
+                // CS1061: 'object' does not contain a definition for 'M1' and no extension method 'M1' accepting a
+                // first argument of type 'object' could be found (are you missing a using directive or an assembly
+                // reference?)
                 //         Action a = /*<bind>*/(Action)o.M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M1")
                     .WithArguments("object", "M1")
@@ -1132,7 +1136,8 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be
+                // used as a statement
                 //         Action a = /*<bind>*/new Action(() => 1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 47),
             };
@@ -1327,7 +1332,8 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,41): error CS0176: Member 'Program.M1()' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(7,41): error CS0176: Member 'Program.M1()' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         Action a = /*<bind>*/new Action(this.M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.M1")
                     .WithArguments("Program.M1()")
@@ -1708,7 +1714,8 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
+                // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be
+                // used as a statement
                 //         Action a = /*<bind>*/new Action((Action)(() => 1))/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 56),
             };

@@ -70,7 +70,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int cArcs;
 
             // Add the top level semantic interpretation tag
-            // This should be set as the first symbol in the symbol string blog since it must hold on a 16 bits value.
+            // This should be set as the first symbol in the symbol string blog since it must hold on a 16 bits
+            // value.
             int semanticInterpretationGlobals = 0;
             if (_globalTags.Count > 0)
             {
@@ -307,8 +308,10 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             // SAPI does not properly handle a rule marked as Import and TopLevel/Active/Root.
-            // - To maintain maximal backwards compatibility, if a rule is marked as Import, we will unmark TopLevel/Active/Root.
-            // - This changes the behavior when application tries to activate this rule.  However, given that it is already
+            // - To maintain maximal backwards compatibility, if a rule is marked as Import, we will unmark
+            // TopLevel/Active/Root.
+            // - This changes the behavior when application tries to activate this rule.  However, given that it
+            // is already
             //   broken/fragile, we believe it is better to change the behavior.
             if (
                 (attributes & SPCFGRULEATTRIBUTES.SPRAF_Import) != 0
@@ -593,7 +596,8 @@ namespace System.Speech.Internal.SrgsCompiler
 
                     if (srcToState != null)
                     {
-                        // - If not found, clone a new DestToState, add SrcToState.DestToState to SrcToDestHash, and add SrcToState to CloneStack.
+                        // - If not found, clone a new DestToState, add SrcToState.DestToState to SrcToDestHash, and add
+                        // SrcToState to CloneStack.
                         if (!SrcToDestHash.TryGetValue(srcToState, out destToState))
                         {
                             destToState = CreateNewState(srcToState.Rule);
@@ -820,7 +824,8 @@ namespace System.Speech.Internal.SrgsCompiler
         }
 
         /// <summary>
-        /// Set the path from which relative grammar imports are calculated. As specified by xml:base / meta base
+        /// Set the path from which relative grammar imports are calculated. As specified by xml:base / meta
+        // base
         /// Null or empty string will clear any existing base path.
         /// </summary>
         internal void SetBasePath(string sBasePath)

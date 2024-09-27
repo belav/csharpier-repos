@@ -15,7 +15,8 @@ internal partial struct VirtualCharSequence
 {
     /// <summary>
     /// Abstraction over a contiguous chunk of <see cref="VirtualChar"/>s.  This
-    /// is used so we can expose <see cref="VirtualChar"/>s over an <see cref="ImmutableArray{VirtualChar}"/>
+    /// is used so we can expose <see cref="VirtualChar"/>s over an <see
+    // cref="ImmutableArray{VirtualChar}"/>
     /// or over a <see cref="string"/>.  The latter is especially useful for reducing
     /// memory usage in common cases of string tokens without escapes.
     /// </summary>
@@ -119,7 +120,8 @@ internal partial struct VirtualCharSequence
         /// <summary>
         /// The underlying string that we're returning virtual chars from.  Note:
         /// this will commonly include things like quote characters.  Clients who
-        /// do not want that should then ask for an appropriate <see cref="VirtualCharSequence.GetSubSequence"/>
+        /// do not want that should then ask for an appropriate <see
+        // cref="VirtualCharSequence.GetSubSequence"/>
         /// back that does not include those characters.
         /// </summary>
         private readonly string _underlyingData;

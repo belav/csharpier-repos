@@ -122,7 +122,8 @@ namespace System.Net.NetworkInformation
 
 #pragma warning disable 618
             // Disable warning about obsolete property. We could use GetAddressBytes but that allocates.
-            // IPv4 multicast address starts with 1110 bits so mask rest and test if we get correct value e.g. 0xe0.
+            // IPv4 multicast address starts with 1110 bits so mask rest and test if we get correct value e.g.
+            // 0xe0.
             if (
                 NeedsConnect
                 && !ep.Address.IsIPv6Multicast
@@ -308,9 +309,12 @@ namespace System.Net.NetworkInformation
                         2 * (MaxIpHeaderLengthInBytes + IcmpHeaderLengthInBytes) + buffer.Length
                     ];
 
-                    // Read from the socket in a loop. We may receive messages that are not echo replies, or that are not in response
-                    // to the echo request we just sent. We need to filter such messages out, and continue reading until our timeout.
-                    // For example, when pinging the local host, we need to filter out our own echo requests that the socket reads.
+                    // Read from the socket in a loop. We may receive messages that are not echo replies, or that are
+                    // not in response
+                    // to the echo request we just sent. We need to filter such messages out, and continue reading until
+                    // our timeout.
+                    // For example, when pinging the local host, we need to filter out our own echo requests that the
+                    // socket reads.
                     long startingTimestamp = Stopwatch.GetTimestamp();
                     while (Stopwatch.GetElapsedTime(startingTimestamp).TotalMilliseconds < timeout)
                     {
@@ -379,9 +383,12 @@ namespace System.Net.NetworkInformation
                     2 * (MaxIpHeaderLengthInBytes + IcmpHeaderLengthInBytes) + buffer.Length
                 ];
 
-                // Read from the socket in a loop. We may receive messages that are not echo replies, or that are not in response
-                // to the echo request we just sent. We need to filter such messages out, and continue reading until our timeout.
-                // For example, when pinging the local host, we need to filter out our own echo requests that the socket reads.
+                // Read from the socket in a loop. We may receive messages that are not echo replies, or that are
+                // not in response
+                // to the echo request we just sent. We need to filter such messages out, and continue reading until
+                // our timeout.
+                // For example, when pinging the local host, we need to filter out our own echo requests that the
+                // socket reads.
                 long startingTimestamp = Stopwatch.GetTimestamp();
                 while (!timeoutOrCancellationToken.IsCancellationRequested)
                 {
@@ -433,7 +440,8 @@ namespace System.Net.NetworkInformation
         )
         {
             // Documentation indicates that you should only pay attention to the IPStatus value when
-            // its value is not "Success", but the rest of these values match that of the Windows implementation.
+            // its value is not "Success", but the rest of these values match that of the Windows
+            // implementation.
             return new PingReply(
                 address ?? new IPAddress(0),
                 null,

@@ -108,11 +108,13 @@ namespace System.Text
             }
 
             // At this point, the buffer length wasn't enough to perform a vectorized search, or we did perform
-            // a vectorized search and encountered non-Latin-1 data. In either case go down a non-vectorized code
+            // a vectorized search and encountered non-Latin-1 data. In either case go down a non-vectorized
+            // code
             // path to drain any remaining Latin-1 chars.
             //
             // We're going to perform unaligned reads, so prefer 32-bit reads instead of 64-bit reads.
-            // This also allows us to perform more optimized bit twiddling tricks to count the number of Latin-1 chars.
+            // This also allows us to perform more optimized bit twiddling tricks to count the number of Latin-1
+            // chars.
 
             uint currentUInt32;
 
@@ -470,11 +472,13 @@ namespace System.Text
 
             FoundNonLatin1DataInCurrentMask:
 
-            // See comment earlier in the method accounting for the 0x8000 and 0x0080 bits set after the WORD-sized operations.
+            // See comment earlier in the method accounting for the 0x8000 and 0x0080 bits set after the
+            // WORD-sized operations.
 
             currentMask &= NonLatin1DataSeenMask;
 
-            // Now, the mask contains - from the LSB - a 0b00 pair for each Latin-1 char we saw, and a 0b10 pair for each non-Latin-1 char.
+            // Now, the mask contains - from the LSB - a 0b00 pair for each Latin-1 char we saw, and a 0b10 pair
+            // for each non-Latin-1 char.
             //
             // (Keep endianness in mind in the below examples.)
             // A non-Latin-1 char followed by two Latin-1 chars is 0b..._00_00_10. (tzcnt = 1)
@@ -482,7 +486,8 @@ namespace System.Text
             // Two Latin-1 chars followed by a non-Latin-1 char is 0b..._10_00_00. (tzcnt = 5)
             //
             // This means tzcnt = 2 * numLeadingLatin1Chars + 1. We can conveniently take advantage of the fact
-            // that the 2x multiplier already matches the char* stride length, then just subtract 1 at the end to
+            // that the 2x multiplier already matches the char* stride length, then just subtract 1 at the end
+            // to
             // compute the correct final ending pointer value.
 
             Debug.Assert(currentMask != 0, "Shouldn't be here unless we see non-Latin-1 data.");
@@ -584,7 +589,8 @@ namespace System.Text
             }
 
             // WORD drain
-            // This is the final drain; there's no need for a BYTE drain since our elemental type is 16-bit char.
+            // This is the final drain; there's no need for a BYTE drain since our elemental type is 16-bit
+            // char.
 
             if ((bufferLength & 1) != 0)
             {
@@ -598,8 +604,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Copies as many Latin-1 characters (U+0000..U+00FF) as possible from <paramref name="pUtf16Buffer"/>
-        /// to <paramref name="pLatin1Buffer"/>, stopping when the first non-Latin-1 character is encountered
+        /// Copies as many Latin-1 characters (U+0000..U+00FF) as possible from <paramref
+        // name="pUtf16Buffer"/>
+        /// to <paramref name="pLatin1Buffer"/>, stopping when the first non-Latin-1 character is
+        // encountered
         /// or once <paramref name="elementCount"/> elements have been converted. Returns the total number
         /// of elements that were able to be converted.
         /// </summary>
@@ -631,7 +639,8 @@ namespace System.Text
                 {
                     // Since there's overhead to setting up the vectorized code path, we only want to
                     // call into it after a quick probe to ensure the next immediate characters really are Latin-1.
-                    // If we see non-Latin-1 data, we'll jump immediately to the draining logic at the end of the method.
+                    // If we see non-Latin-1 data, we'll jump immediately to the draining logic at the end of the
+                    // method.
 
                     if (IntPtr.Size >= 8)
                     {
@@ -669,7 +678,8 @@ namespace System.Text
                 {
                     // Since there's overhead to setting up the vectorized code path, we only want to
                     // call into it after a quick probe to ensure the next immediate characters really are Latin-1.
-                    // If we see non-Latin-1 data, we'll jump immediately to the draining logic at the end of the method.
+                    // If we see non-Latin-1 data, we'll jump immediately to the draining logic at the end of the
+                    // method.
 
                     if (IntPtr.Size >= 8)
                     {
@@ -1079,7 +1089,8 @@ namespace System.Text
 
             Finish:
 
-            // There might be some Latin-1 data left over. That's fine - we'll let our caller handle the final drain.
+            // There might be some Latin-1 data left over. That's fine - we'll let our caller handle the final
+            // drain.
             return currentOffsetInElements;
 
             FoundNonLatin1DataInLoop:
@@ -1110,7 +1121,8 @@ namespace System.Text
                 }
             }
 
-            // First part was all Latin-1, narrow and aligned write. Note we're only filling in the low half of the vector.
+            // First part was all Latin-1, narrow and aligned write. Note we're only filling in the low half of
+            // the vector.
             latin1Vector = Sse2.PackUnsignedSaturate(utf16VectorFirst, utf16VectorFirst);
 
             Debug.Assert(
@@ -1128,8 +1140,10 @@ namespace System.Text
         }
 
         /// <summary>
-        /// Copies Latin-1 (narrow character) data from <paramref name="pLatin1Buffer"/> to the UTF-16 (wide character)
-        /// buffer <paramref name="pUtf16Buffer"/>, widening data while copying. <paramref name="elementCount"/>
+        /// Copies Latin-1 (narrow character) data from <paramref name="pLatin1Buffer"/> to the UTF-16 (wide
+        // character)
+        /// buffer <paramref name="pUtf16Buffer"/>, widening data while copying. <paramref
+        // name="elementCount"/>
         /// specifies the element count of both the source and destination buffers.
         /// </summary>
         public static unsafe void WidenLatin1ToUtf16(
@@ -1269,7 +1283,8 @@ namespace System.Text
 
                     if ((remaining & 1) != 0)
                     {
-                        // 1 or 3 bytes were left over (and since '1' doesn't go down this branch, we know it was actually '3')
+                        // 1 or 3 bytes were left over (and since '1' doesn't go down this branch, we know it was actually
+                        // '3')
                         pUtf16Buffer[currentOffset + 2] = (char)pLatin1Buffer[currentOffset + 2];
                     }
                 }

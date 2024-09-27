@@ -32,10 +32,10 @@ namespace System.Text
             decoderFallback = DecoderFallback.ReplacementFallback;
         }
 
-        /*
-         * GetByteCount - Each Latin-1 char narrows to exactly one byte,
-         * but fallback mechanism must be consulted for non-Latin-1 chars.
-         */
+/*
+* GetByteCount - Each Latin-1 char narrows to exactly one byte,
+* but fallback mechanism must be consulted for non-Latin-1 chars.
+*/
 
         public override unsafe int GetByteCount(char* chars, int count)
         {
@@ -114,7 +114,8 @@ namespace System.Text
         private unsafe int GetByteCountCommon(char* pChars, int charCount)
         {
             // Common helper method for all non-EncoderNLS entry points to GetByteCount.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -194,10 +195,10 @@ namespace System.Text
             return (int)byteCount;
         }
 
-        /*
-         * GetBytes - Each Latin-1 char narrows to exactly one byte,
-         * but fallback mechanism must be consulted for non-Latin-1 chars.
-         */
+/*
+* GetBytes - Each Latin-1 char narrows to exactly one byte,
+* but fallback mechanism must be consulted for non-Latin-1 chars.
+*/
 
         public override unsafe int GetBytes(char* chars, int charCount, byte* bytes, int byteCount)
         {
@@ -379,7 +380,8 @@ namespace System.Text
         )
         {
             // Common helper method for all non-EncoderNLS entry points to GetBytes.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -444,10 +446,10 @@ namespace System.Text
             return bytesWritten;
         }
 
-        /*
-         * GetCharCount - Each byte widens to exactly one char, preserving count.
-         * We never consult the fallback mechanism during decoding.
-         */
+/*
+* GetCharCount - Each byte widens to exactly one char, preserving count.
+* We never consult the fallback mechanism during decoding.
+*/
 
         public override unsafe int GetCharCount(byte* bytes, int count)
         {
@@ -541,10 +543,10 @@ namespace System.Text
             return byteCount;
         }
 
-        /*
-         * GetChars - Each byte widens to exactly one char, preserving count.
-         * We never consult the fallback mechanism during decoding.
-         */
+/*
+* GetChars - Each byte widens to exactly one char, preserving count.
+* We never consult the fallback mechanism during decoding.
+*/
 
         public override unsafe int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
         {
@@ -581,7 +583,8 @@ namespace System.Text
                 return Array.Empty<char>();
             }
 
-            // Since we're going to fill the entire char[] buffer, we could consider GC.AllocateUninitializedArray.
+            // Since we're going to fill the entire char[] buffer, we could consider
+            // GC.AllocateUninitializedArray.
 
             char[] chars = new char[bytes.Length];
 
@@ -674,7 +677,8 @@ namespace System.Text
                 );
             }
 
-            // Since we're going to fill the entire char[] buffer, we could consider GC.AllocateUninitializedArray.
+            // Since we're going to fill the entire char[] buffer, we could consider
+            // GC.AllocateUninitializedArray.
 
             char[] chars = new char[count];
 
@@ -774,7 +778,8 @@ namespace System.Text
         private unsafe int GetCharsCommon(byte* pBytes, int byteCount, char* pChars, int charCount)
         {
             // Common helper method for all non-DecoderNLS entry points to GetChars.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -910,7 +915,8 @@ namespace System.Text
         {
             // Latin-1 contains precomposed characters, so normal for Form C.
             // Since some are composed, not normal for D & KD.
-            // Also some letters like 0x00A8 (spacing diarisis) have compatibility decompositions, so false for KD & KC.
+            // Also some letters like 0x00A8 (spacing diarisis) have compatibility decompositions, so false for
+            // KD & KC.
 
             // Only true for form C.
             return form == NormalizationForm.FormC;

@@ -98,10 +98,12 @@ namespace System.Net.Http
             _clientCertificateOptions = ClientCertificateOption.Automatic;
         }
 
-        /// <summary>Creates a copy of the settings but with some values normalized to suit the implementation.</summary>
+        /// <summary>Creates a copy of the settings but with some values normalized to suit the
+        // implementation.</summary>
         public HttpConnectionSettings CloneAndNormalize()
         {
-            // Force creation of the cookie container if needed, so the original and clone share the same instance.
+            // Force creation of the cookie container if needed, so the original and clone share the same
+            // instance.
             if (_useCookies && _cookieContainer == null)
             {
                 _cookieContainer = new CookieContainer();

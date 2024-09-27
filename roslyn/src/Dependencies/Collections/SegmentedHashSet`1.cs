@@ -3,9 +3,13 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
+//
+//
 // https://github.com/dotnet/runtime/blob/v5.0.7/src/libraries/System.Private.CoreLib/src/System/Collections/Generic/HashSet.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -60,7 +64,8 @@ namespace Microsoft.CodeAnalysis.Collections
         private readonly IEqualityComparer<T>? _comparer;
 #else
         /// <summary>
-        /// <see cref="EqualityComparer{T}.Default"/> doesn't devirtualize on .NET Framework, so we always ensure
+        /// <see cref="EqualityComparer{T}.Default"/> doesn't devirtualize on .NET Framework, so we always
+        // ensure
         /// <see cref="_comparer"/> is initialized to a non-<see langword="null"/> value.
         /// </summary>
         private readonly IEqualityComparer<T> _comparer;
@@ -79,7 +84,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
 #if !NETCOREAPP
-            // .NET Framework doesn't support devirtualization, so we always initialize comparer to a non-null value
+            // .NET Framework doesn't support devirtualization, so we always initialize comparer to a non-null
+            // value
             _comparer ??= EqualityComparer<T>.Default;
 #endif
         }
@@ -108,7 +114,8 @@ namespace Microsoft.CodeAnalysis.Collections
             else
             {
                 // To avoid excess resizes, first set size based on collection's count. The collection may
-                // contain duplicates, so call TrimExcess if resulting SegmentedHashSet is larger than the threshold.
+                // contain duplicates, so call TrimExcess if resulting SegmentedHashSet is larger than the
+                // threshold.
                 if (collection is ICollection<T> coll)
                 {
                     var count = coll.Count;
@@ -141,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Initializes the SegmentedHashSet from another SegmentedHashSet with the same element type and equality comparer.</summary>
+        /// <summary>Initializes the SegmentedHashSet from another SegmentedHashSet with the same element
+        // type and equality comparer.</summary>
         private void ConstructFrom(SegmentedHashSet<T> source)
         {
             if (source.Count == 0)
@@ -205,12 +213,16 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Determines whether the <see cref="SegmentedHashSet{T}"/> contains the specified element.</summary>
-        /// <param name="item">The element to locate in the <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object contains the specified element; otherwise, false.</returns>
+        /// <summary>Determines whether the <see cref="SegmentedHashSet{T}"/> contains the specified
+        // element.</summary>
+        /// <param name="item">The element to locate in the <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object contains the specified element;
+        // otherwise, false.</returns>
         public bool Contains(T item) => FindItemIndex(item) >= 0;
 
-        /// <summary>Gets the index of the item in <see cref="_entries"/>, or -1 if it's not in the set.</summary>
+        /// <summary>Gets the index of the item in <see cref="_entries"/>, or -1 if it's not in the
+        // set.</summary>
         private int FindItemIndex(T item)
         {
             var buckets = _buckets;
@@ -251,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Collections
                     }
                     else
                     {
-                        // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize (https://github.com/dotnet/runtime/issues/10050),
+                        // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize
+                        // (https://github.com/dotnet/runtime/issues/10050),
                         // so cache in a local rather than get EqualityComparer per loop iteration.
                         var defaultComparer = EqualityComparer<T>.Default;
                         var i = GetBucketRef(hashCode) - 1; // Value in _buckets is 1-based
@@ -302,7 +315,8 @@ namespace Microsoft.CodeAnalysis.Collections
             return -1;
         }
 
-        /// <summary>Gets a reference to the specified hashcode's bucket, containing an index into <see cref="_entries"/>.</summary>
+        /// <summary>Gets a reference to the specified hashcode's bucket, containing an index into <see
+        // cref="_entries"/>.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private ref int GetBucketRef(int hashCode)
         {
@@ -403,12 +417,15 @@ namespace Microsoft.CodeAnalysis.Collections
 
         /// <summary>Adds the specified element to the <see cref="SegmentedHashSet{T}"/>.</summary>
         /// <param name="item">The element to add to the set.</param>
-        /// <returns>true if the element is added to the <see cref="SegmentedHashSet{T}"/> object; false if the element is already present.</returns>
+        /// <returns>true if the element is added to the <see cref="SegmentedHashSet{T}"/> object; false if
+        // the element is already present.</returns>
         public bool Add(T item) => AddIfNotPresent(item, out _);
 
-        /// <summary>Searches the set for a given value and returns the equal value it finds, if any.</summary>
+        /// <summary>Searches the set for a given value and returns the equal value it finds, if
+        // any.</summary>
         /// <param name="equalValue">The value to search for.</param>
-        /// <param name="actualValue">The value from the set that the search found, or the default value of <typeparamref name="T"/> when the search yielded no match.</param>
+        /// <param name="actualValue">The value from the set that the search found, or the default value of
+        // <typeparamref name="T"/> when the search yielded no match.</param>
         /// <returns>A value indicating whether the search was successful.</returns>
         /// <remarks>
         /// This can be useful when you want to reuse a previously stored reference instead of
@@ -432,8 +449,10 @@ namespace Microsoft.CodeAnalysis.Collections
             return false;
         }
 
-        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain all elements that are present in itself, the specified collection, or both.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
+        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain all elements
+        // that are present in itself, the specified collection, or both.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
         public void UnionWith(IEnumerable<T> other)
         {
             if (other == null)
@@ -447,8 +466,10 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain only elements that are present in that object and in the specified collection.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
+        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain only elements
+        // that are present in that object and in the specified collection.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
         public void IntersectWith(IEnumerable<T> other)
         {
             if (other == null)
@@ -487,8 +508,10 @@ namespace Microsoft.CodeAnalysis.Collections
             IntersectWithEnumerable(other);
         }
 
-        /// <summary>Removes all elements in the specified collection from the current <see cref="SegmentedHashSet{T}"/> object.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
+        /// <summary>Removes all elements in the specified collection from the current <see
+        // cref="SegmentedHashSet{T}"/> object.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
         public void ExceptWith(IEnumerable<T> other)
         {
             if (other == null)
@@ -516,8 +539,10 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain only elements that are present either in that object or in the specified collection, but not both.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
+        /// <summary>Modifies the current <see cref="SegmentedHashSet{T}"/> object to contain only elements
+        // that are present either in that object or in the specified collection, but not both.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
         public void SymmetricExceptWith(IEnumerable<T> other)
         {
             if (other == null)
@@ -557,9 +582,12 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a subset of the specified collection.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a subset of <paramref name="other"/>; otherwise, false.</returns>
+        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a subset of the
+        // specified collection.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a subset of <paramref
+        // name="other"/>; otherwise, false.</returns>
         public bool IsSubsetOf(IEnumerable<T> other)
         {
             if (other == null)
@@ -599,9 +627,12 @@ namespace Microsoft.CodeAnalysis.Collections
             return uniqueCount == Count && unfoundCount >= 0;
         }
 
-        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper subset of the specified collection.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a proper subset of <paramref name="other"/>; otherwise, false.</returns>
+        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper subset of the
+        // specified collection.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a proper subset of <paramref
+        // name="other"/>; otherwise, false.</returns>
         public bool IsProperSubsetOf(IEnumerable<T> other)
         {
             if (other == null)
@@ -653,9 +684,12 @@ namespace Microsoft.CodeAnalysis.Collections
             return uniqueCount == Count && unfoundCount > 0;
         }
 
-        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper superset of the specified collection.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a superset of <paramref name="other"/>; otherwise, false.</returns>
+        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper superset of
+        // the specified collection.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a superset of <paramref
+        // name="other"/>; otherwise, false.</returns>
         public bool IsSupersetOf(IEnumerable<T> other)
         {
             if (other == null)
@@ -692,9 +726,12 @@ namespace Microsoft.CodeAnalysis.Collections
             return ContainsAllElements(other);
         }
 
-        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper superset of the specified collection.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a proper superset of <paramref name="other"/>; otherwise, false.</returns>
+        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object is a proper superset of
+        // the specified collection.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is a proper superset of <paramref
+        // name="other"/>; otherwise, false.</returns>
         public bool IsProperSupersetOf(IEnumerable<T> other)
         {
             if (other == null)
@@ -741,9 +778,12 @@ namespace Microsoft.CodeAnalysis.Collections
             return uniqueCount < Count && unfoundCount == 0;
         }
 
-        /// <summary>Determines whether the current <see cref="SegmentedHashSet{T}"/> object and a specified collection share common elements.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object and <paramref name="other"/> share at least one common element; otherwise, false.</returns>
+        /// <summary>Determines whether the current <see cref="SegmentedHashSet{T}"/> object and a specified
+        // collection share common elements.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object and <paramref name="other"/> share
+        // at least one common element; otherwise, false.</returns>
         public bool Overlaps(IEnumerable<T> other)
         {
             if (other == null)
@@ -773,9 +813,12 @@ namespace Microsoft.CodeAnalysis.Collections
             return false;
         }
 
-        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object and the specified collection contain the same elements.</summary>
-        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/> object.</param>
-        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is equal to <paramref name="other"/>; otherwise, false.</returns>
+        /// <summary>Determines whether a <see cref="SegmentedHashSet{T}"/> object and the specified
+        // collection contain the same elements.</summary>
+        /// <param name="other">The collection to compare to the current <see cref="SegmentedHashSet{T}"/>
+        // object.</param>
+        /// <returns>true if the <see cref="SegmentedHashSet{T}"/> object is equal to <paramref
+        // name="other"/>; otherwise, false.</returns>
         public bool SetEquals(IEnumerable<T> other)
         {
             if (other == null)
@@ -828,7 +871,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         public void CopyTo(T[] array) => CopyTo(array, 0, Count);
 
-        /// <summary>Copies the elements of a <see cref="SegmentedHashSet{T}"/> object to an array, starting at the specified array index.</summary>
+        /// <summary>Copies the elements of a <see cref="SegmentedHashSet{T}"/> object to an array, starting
+        // at the specified array index.</summary>
         /// <param name="array">The destination array.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         public void CopyTo(T[] array, int arrayIndex) => CopyTo(array, arrayIndex, Count);
@@ -880,7 +924,8 @@ namespace Microsoft.CodeAnalysis.Collections
             }
         }
 
-        /// <summary>Removes all elements that match the conditions defined by the specified predicate from a <see cref="SegmentedHashSet{T}"/> collection.</summary>
+        /// <summary>Removes all elements that match the conditions defined by the specified predicate from
+        // a <see cref="SegmentedHashSet{T}"/> collection.</summary>
         public int RemoveWhere(Predicate<T> match)
         {
             if (match == null)
@@ -911,13 +956,15 @@ namespace Microsoft.CodeAnalysis.Collections
             return numRemoved;
         }
 
-        /// <summary>Gets the <see cref="IEqualityComparer"/> object that is used to determine equality for the values in the set.</summary>
+        /// <summary>Gets the <see cref="IEqualityComparer"/> object that is used to determine equality for
+        // the values in the set.</summary>
         public IEqualityComparer<T> Comparer
         {
             get { return _comparer ?? EqualityComparer<T>.Default; }
         }
 
-        /// <summary>Ensures that this hash set can hold the specified number of elements without growing.</summary>
+        /// <summary>Ensures that this hash set can hold the specified number of elements without
+        // growing.</summary>
         public int EnsureCapacity(int capacity)
         {
             if (capacity < 0)
@@ -953,7 +1000,8 @@ namespace Microsoft.CodeAnalysis.Collections
             var count = _count;
             SegmentedArray.Copy(_entries, entries, count);
 
-            // Assign member variables after both arrays allocated to guard against corruption from OOM if second fails
+            // Assign member variables after both arrays allocated to guard against corruption from OOM if
+            // second fails
             _buckets = new SegmentedArray<int>(newSize);
             _fastModMultiplier = HashHelpers.GetFastModMultiplier((uint)newSize);
             for (var i = 0; i < count; i++)
@@ -971,7 +1019,8 @@ namespace Microsoft.CodeAnalysis.Collections
         }
 
         /// <summary>
-        /// Sets the capacity of a <see cref="SegmentedHashSet{T}"/> object to the actual number of elements it contains,
+        /// Sets the capacity of a <see cref="SegmentedHashSet{T}"/> object to the actual number of elements
+        // it contains,
         /// rounded up to a nearby, implementation-specific value.
         /// </summary>
         public void TrimExcess()
@@ -1013,7 +1062,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         #region Helper methods
 
-        /// <summary>Returns an <see cref="IEqualityComparer"/> object that can be used for equality testing of a <see cref="SegmentedHashSet{T}"/> object.</summary>
+        /// <summary>Returns an <see cref="IEqualityComparer"/> object that can be used for equality testing
+        // of a <see cref="SegmentedHashSet{T}"/> object.</summary>
         public static IEqualityComparer<SegmentedHashSet<T>> CreateSetComparer() =>
             new SegmentedHashSetEqualityComparer<T>();
 
@@ -1027,7 +1077,8 @@ namespace Microsoft.CodeAnalysis.Collections
             var buckets = new SegmentedArray<int>(size);
             var entries = new SegmentedArray<Entry>(size);
 
-            // Assign member variables after both arrays are allocated to guard against corruption from OOM if second fails.
+            // Assign member variables after both arrays are allocated to guard against corruption from OOM if
+            // second fails.
             _freeList = -1;
             _buckets = buckets;
             _entries = entries;
@@ -1039,7 +1090,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <summary>Adds the specified element to the set if it's not already contained.</summary>
         /// <param name="value">The element to add to the set.</param>
         /// <param name="location">The index into <see cref="_entries"/> of the element.</param>
-        /// <returns>true if the element is added to the <see cref="SegmentedHashSet{T}"/> object; false if the element is already present.</returns>
+        /// <returns>true if the element is added to the <see cref="SegmentedHashSet{T}"/> object; false if
+        // the element is already present.</returns>
         private bool AddIfNotPresent(T value, out int location)
         {
             if (_buckets.Length == 0)
@@ -1088,7 +1140,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 }
                 else
                 {
-                    // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize (https://github.com/dotnet/runtime/issues/10050),
+                    // Object type: Shared Generic, EqualityComparer<TValue>.Default won't devirtualize
+                    // (https://github.com/dotnet/runtime/issues/10050),
                     // so cache in a local rather than get EqualityComparer per loop iteration.
                     var defaultComparer = EqualityComparer<T>.Default;
                     while (i >= 0)
@@ -1371,7 +1424,8 @@ namespace Microsoft.CodeAnalysis.Collections
 
         /// <summary>
         /// Determines counts that can be used to determine equality, subset, and superset. This
-        /// is only used when other is an IEnumerable and not a SegmentedHashSet. If other is a SegmentedHashSet
+        /// is only used when other is an IEnumerable and not a SegmentedHashSet. If other is a
+        // SegmentedHashSet
         /// these properties can be checked faster without use of marking because we can assume
         /// other has no duplicates.
         ///
@@ -1470,8 +1524,10 @@ namespace Microsoft.CodeAnalysis.Collections
 
             /// <summary>
             /// 0-based index of next entry in chain: -1 means end of chain
-            /// also encodes whether this entry _itself_ is part of the free list by changing sign and subtracting 3,
-            /// so -2 means end of free list, -3 means index 0 but on free list, -4 means index 1 but on free list, etc.
+            /// also encodes whether this entry _itself_ is part of the free list by changing sign and
+            // subtracting 3,
+            /// so -2 means end of free list, -3 means index 0 but on free list, -4 means index 1 but on free
+            // list, etc.
             /// </summary>
             public int _next;
             public T _value;

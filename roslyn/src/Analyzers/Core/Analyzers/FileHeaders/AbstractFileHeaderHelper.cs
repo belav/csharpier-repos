@@ -150,7 +150,8 @@ namespace Microsoft.CodeAnalysis.FileHeaders
         /// </summary>
         /// <param name="triviaList">The trivia list to process.</param>
         /// <typeparam name="T">The type of the trivia list.</typeparam>
-        /// <returns>The index where the non-whitespace starts, or -1 if there is no non-whitespace trivia.</returns>
+        /// <returns>The index where the non-whitespace starts, or -1 if there is no non-whitespace
+        // trivia.</returns>
         private int IndexOfFirstNonWhitespaceTrivia<T>(T triviaList)
             where T : IReadOnlyList<SyntaxTrivia>
         {

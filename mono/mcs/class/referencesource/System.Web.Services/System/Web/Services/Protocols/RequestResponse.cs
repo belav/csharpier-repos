@@ -23,18 +23,18 @@ namespace System.Web.Services.Protocols
     {
         private RequestResponseUtils() { }
 
-        /*
-        internal static string UTF8StreamToString(Stream stream) {
-            long position = 0;
-            if (stream.CanSeek)
-                position = stream.Position;
-            StreamReader reader = new StreamReader(stream, new System.Text.UTF8Encoding());
-            string result = reader.ReadToEnd();
-            if (stream.CanSeek)
-                stream.Position = position;
-            return result;
-        }
-        */
+/*
+internal static string UTF8StreamToString(Stream stream) {
+long position = 0;
+if (stream.CanSeek)
+position = stream.Position;
+StreamReader reader = new StreamReader(stream, new System.Text.UTF8Encoding());
+string result = reader.ReadToEnd();
+if (stream.CanSeek)
+stream.Position = position;
+return result;
+}
+*/
 
         //
 

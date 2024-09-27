@@ -9,7 +9,8 @@ using System;
 namespace Roslyn.Test.Utilities
 {
     /// <summary>
-    /// Indicates a <see cref="WpfFactAttribute"/> test which is essential to product quality and cannot be skipped.
+    /// Indicates a <see cref="WpfFactAttribute"/> test which is essential to product quality and cannot
+    // be skipped.
     /// </summary>
     public class CriticalWpfFactAttribute : WpfFactAttribute
     {

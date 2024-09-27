@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// which the given ISymbol is or is a part of into the given document
         /// </summary>
         /// <param name="document">The document to generate source into</param>
-        /// <param name="symbolCompilation">The <see cref="Compilation"/> in which <paramref name="symbol"/> is resolved.</param>
+        /// <param name="symbolCompilation">The <see cref="Compilation"/> in which <paramref name="symbol"/>
+        // is resolved.</param>
         /// <param name="symbol">The symbol to generate source for</param>
         /// <param name="options">Options to use to generate and format the code.</param>
         /// <param name="cancellationToken">To cancel document operations</param>

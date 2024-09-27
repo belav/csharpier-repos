@@ -6,7 +6,8 @@
 namespace System.Web.UI
 {
     /// <devdoc>
-    ///    <para>Represents a control used to render text that can be changed by the browser user.</para>
+    ///    <para>Represents a control used to render text that can be changed by the browser
+    // user.</para>
     /// </devdoc>
     public interface IEditableTextControl : ITextControl
     {

@@ -194,10 +194,12 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// the resulting transform to the specified region of the output byte array.
         /// </summary>
         /// <param name="inputBuffer">The input for which to compute the transform.</param>
-        /// <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+        /// <param name="inputOffset">The offset into the input byte array from which to begin using
+        // data.</param>
         /// <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
         /// <param name="outputBuffer">The output to which to write the transform.</param>
-        /// <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+        /// <param name="outputOffset">The offset into the output byte array from which to begin writing
+        // data.</param>
         /// <returns>The number of bytes written.</returns>
         public int TransformBlock(
             byte[] inputBuffer,
@@ -298,10 +300,12 @@ namespace ICSharpCode.SharpZipLib.Encryption
         /// the resulting transform to the specified region of the output byte array.
         /// </summary>
         /// <param name="inputBuffer">The input for which to compute the transform.</param>
-        /// <param name="inputOffset">The offset into the input byte array from which to begin using data.</param>
+        /// <param name="inputOffset">The offset into the input byte array from which to begin using
+        // data.</param>
         /// <param name="inputCount">The number of bytes in the input byte array to use as data.</param>
         /// <param name="outputBuffer">The output to which to write the transform.</param>
-        /// <param name="outputOffset">The offset into the output byte array from which to begin writing data.</param>
+        /// <param name="outputOffset">The offset into the output byte array from which to begin writing
+        // data.</param>
         /// <returns>The number of bytes written.</returns>
         public int TransformBlock(
             byte[] inputBuffer,

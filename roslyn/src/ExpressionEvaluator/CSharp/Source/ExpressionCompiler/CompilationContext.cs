@@ -1469,7 +1469,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             InContainerBinder binder
         )
         {
-            // We make a first pass to extract all of the extern aliases because other imports may depend on them.
+            // We make a first pass to extract all of the extern aliases because other imports may depend on
+            // them.
             var externsBuilder = ArrayBuilder<AliasAndExternAliasDirective>.GetInstance();
             foreach (var importRecord in importRecords)
             {
@@ -1569,8 +1570,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
                         if (!SyntaxHelpers.TryParseDottedName(namespaceName, out _))
                         {
-                            // DevDiv #999086: Some previous version of VS apparently generated type aliases as "UA{alias} T{alias-qualified type name}".
-                            // Neither Roslyn nor Dev12 parses such imports.  However, Roslyn discards them, rather than interpreting them as "UA{alias}"
+                            // DevDiv #999086: Some previous version of VS apparently generated type aliases as "UA{alias}
+                            // T{alias-qualified type name}".
+                            // Neither Roslyn nor Dev12 parses such imports.  However, Roslyn discards them, rather than
+                            // interpreting them as "UA{alias}"
                             // (which will rarely work and never be correct).
                             Debug.WriteLine(
                                 $"Import record '{importRecord}' has syntactically invalid target '{importRecord.TargetString}'"
@@ -1837,7 +1840,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var parameterNamesInOrder = ArrayBuilder<string>.GetInstance();
             // For version before .NET 4.5, we cannot find the sourceMethod properly:
             // The source method coincides with the original method in the case.
-            // Therefore, for iterators and async state machines, we have to get parameters from the containingType.
+            // Therefore, for iterators and async state machines, we have to get parameters from the
+            // containingType.
             // This does not guarantee the proper order of parameters.
             if (isIteratorOrAsyncMethod && method == sourceMethod)
             {
@@ -1961,7 +1965,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             displayClassTypes.Free();
 
             // This is a special handling for async MoveNext method.
-            // Parameters are not declared by it, and, therefore, display variables corresponding to them will be those declared outside.
+            // Parameters are not declared by it, and, therefore, display variables corresponding to them will
+            // be those declared outside.
             bool parametersAreOutside =
                 currentFrame.ParameterCount == 0 && !parameterNamesInOrder.IsEmpty;
 
@@ -2007,7 +2012,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 displayClassVariableNamesOutsideInOrderBuilder
             );
 
-            // ExtendBinderChain will place Primary Constructor parameters added below below InContainerBinder, rather than above it.
+            // ExtendBinderChain will place Primary Constructor parameters added below below InContainerBinder,
+            // rather than above it.
             // However, since they are captured, they were not shadowed by any member at compile time.
             // In theory, a shadowing member could be added into a base class after the build,
             // but it is probably fine to shadow that member in EE. The member could still be accessed
@@ -2403,8 +2409,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         != GeneratedNameKind.LambdaDisplayClass
                 )
                 {
-                    // In async lambdas, the hoisted "this" field in the state machine type will point to the display class instance, if there is one.
-                    // In such cases, we want to add the display class "this" to the map instead (or nothing, if it lacks one).
+                    // In async lambdas, the hoisted "this" field in the state machine type will point to the display
+                    // class instance, if there is one.
+                    // In such cases, we want to add the display class "this" to the map instead (or nothing, if it
+                    // lacks one).
                     displayClassVariableNamesInOrderBuilder.Add(variableName);
                     displayClassVariablesBuilder.Add(
                         variableName,

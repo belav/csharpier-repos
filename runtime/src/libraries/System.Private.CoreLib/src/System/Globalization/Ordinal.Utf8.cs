@@ -73,7 +73,8 @@ namespace System.Globalization
             int lengthB
         )
         {
-            // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal comparison
+            // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal
+            // comparison
 
             ReadOnlySpan<byte> spanA = MemoryMarshal.CreateReadOnlySpan(ref strA, lengthA);
             ReadOnlySpan<byte> spanB = MemoryMarshal.CreateReadOnlySpan(ref strB, lengthB);
@@ -109,7 +110,8 @@ namespace System.Globalization
                     !spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB))
                 )
                 {
-                    // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail immediately
+                    // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail
+                    // immediately
                     return false;
                 }
 
@@ -373,7 +375,8 @@ namespace System.Globalization
             return lengthA == lengthB;
 
             NonAscii32:
-            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
+            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we
+            // return false
             if (
                 Utf8Utility.AllBytesInUInt32AreAscii(valueAu32)
                 || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32)
@@ -385,7 +388,8 @@ namespace System.Globalization
 
 #if TARGET_64BIT
             NonAscii64:
-            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
+            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we
+            // return false
             if (
                 Utf8Utility.AllBytesInUInt64AreAscii(valueAu64)
                 || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64)
@@ -464,7 +468,8 @@ namespace System.Globalization
             int prefixLength
         )
         {
-            // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal comparison
+            // NLS/ICU doesn't provide native UTF-8 support so we need to do our own corresponding ordinal
+            // comparison
 
             ReadOnlySpan<byte> spanA = MemoryMarshal.CreateReadOnlySpan(ref source, sourceLength);
             ReadOnlySpan<byte> spanB = MemoryMarshal.CreateReadOnlySpan(ref prefix, prefixLength);
@@ -500,7 +505,8 @@ namespace System.Globalization
                     !spanA.Slice(0, bytesConsumedA).SequenceEqual(spanB.Slice(0, bytesConsumedB))
                 )
                 {
-                    // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail immediately
+                    // OperationStatus match, but bytesConsumed or the sequence of bytes consumed do not; fail
+                    // immediately
                     return false;
                 }
 
@@ -778,7 +784,8 @@ namespace System.Globalization
             return prefixLength <= sourceLength;
 
             NonAscii32:
-            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
+            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we
+            // return false
             if (
                 Utf8Utility.AllBytesInUInt32AreAscii(valueAu32)
                 || Utf8Utility.AllBytesInUInt32AreAscii(valueBu32)
@@ -790,7 +797,8 @@ namespace System.Globalization
 
 #if TARGET_64BIT
             NonAscii64:
-            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we return false
+            // Both values have to be non-ASCII to use the slow fallback, in case if one of them is not we
+            // return false
             if (
                 Utf8Utility.AllBytesInUInt64AreAscii(valueAu64)
                 || Utf8Utility.AllBytesInUInt64AreAscii(valueBu64)

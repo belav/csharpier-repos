@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implements the ASP.NET template parser
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Implements the ASP.NET template parser
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -35,9 +35,9 @@ namespace System.Web.UI
     using System.Web.Util;
     using HttpException = System.Web.HttpException;
 
-    /*
-     * Parser for .aspx files
-     */
+/*
+* Parser for .aspx files
+*/
 
     /// <internalonly/>
     /// <devdoc>
@@ -127,9 +127,9 @@ namespace System.Web.UI
             flags[validateRequest] = true;
         }
 
-        /*
-         * Compile an .aspx file into a Page object
-         */
+/*
+* Compile an .aspx file into a Page object
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -831,9 +831,9 @@ namespace System.Web.UI
             get { return defaultDirectiveName; }
         }
 
-        /*
-         * Process the contents of the <%@ OutputCache ... %> directive
-         */
+/*
+* Process the contents of the <%@ OutputCache ... %> directive
+*/
         internal override void ProcessOutputCacheDirective(
             string directiveName,
             IDictionary directive

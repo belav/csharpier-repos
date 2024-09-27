@@ -26,7 +26,8 @@ namespace System.ServiceModel.Routing
                 );
             }
 
-            //The Exception contract for ICommunicationObject.Abort is to never throw, anything else is a fatal error.
+            //The Exception contract for ICommunicationObject.Abort is to never throw, anything else is a fatal
+            // error.
             commObj.Abort();
         }
 

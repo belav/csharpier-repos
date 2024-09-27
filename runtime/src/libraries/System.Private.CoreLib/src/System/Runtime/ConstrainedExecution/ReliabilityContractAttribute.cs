@@ -4,7 +4,8 @@
 namespace System.Runtime.ConstrainedExecution
 {
     /// <summary>
-    /// Defines a contract for reliability between the author of some code, and the developers who have a dependency on that code.
+    /// Defines a contract for reliability between the author of some code, and the developers who have
+    // a dependency on that code.
     /// </summary>
     [Obsolete(
         Obsoletions.ConstrainedExecutionRegionMessage,

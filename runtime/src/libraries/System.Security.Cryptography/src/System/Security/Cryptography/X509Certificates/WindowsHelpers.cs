@@ -13,9 +13,12 @@ namespace Internal.Cryptography
     internal static partial class Helpers
     {
         /// <summary>
-        /// Convert each Oid's value to an ASCII string, then create an unmanaged array of "numOids" LPSTR pointers, one for each Oid.
-        /// "numOids" is the number of LPSTR pointers. This is normally the same as oids.Count, except in the case where a malicious caller
-        /// appends to the OidCollection while this method is in progress. In such a case, this method guarantees only that this won't create
+        /// Convert each Oid's value to an ASCII string, then create an unmanaged array of "numOids" LPSTR
+        // pointers, one for each Oid.
+        /// "numOids" is the number of LPSTR pointers. This is normally the same as oids.Count, except in
+        // the case where a malicious caller
+        /// appends to the OidCollection while this method is in progress. In such a case, this method
+        // guarantees only that this won't create
         /// an unmanaged buffer overflow condition.
         /// </summary>
         public static SafeHandle ToLpstrArray(this OidCollection? oids, out int numOids)

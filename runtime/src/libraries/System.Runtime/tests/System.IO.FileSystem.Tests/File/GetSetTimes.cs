@@ -79,9 +79,11 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Linux)]
         public async Task CreationTimeSet_GetReturnsExpected_WhenNotInFuture()
         {
-            // On Linux, we synthesize CreationTime from the oldest of status changed time (ctime) and write time (mtime).
+            // On Linux, we synthesize CreationTime from the oldest of status changed time (ctime) and write
+            // time (mtime).
             // Changing the CreationTime, updates mtime and causes ctime to change to the current time.
-            // When setting CreationTime to a value that isn't in the future, getting the CreationTime should return the same value.
+            // When setting CreationTime to a value that isn't in the future, getting the CreationTime should
+            // return the same value.
 
             string path = GetTestFilePath();
             File.WriteAllText(path, "");
@@ -185,7 +187,8 @@ namespace System.IO.Tests
             Assert.Equal(ticks, dateTime.Ticks);
         }
 
-        // Linux kernels no longer have long max date time support. Discussed in https://github.com/dotnet/runtime/issues/43166.
+        // Linux kernels no longer have long max date time support. Discussed in
+        // https://github.com/dotnet/runtime/issues/43166.
         [PlatformSpecific(~TestPlatforms.Linux)]
         [ConditionalFact(nameof(SupportsLongMaxDateTime))]
         public void SetDateTimeMax()

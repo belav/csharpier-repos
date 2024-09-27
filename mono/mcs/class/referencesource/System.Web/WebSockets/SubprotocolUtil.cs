@@ -96,7 +96,8 @@ namespace System.Web.WebSockets
             }
         }
 
-        // Returns a list of preferred subprotocols by parsing an incoming header value, or null if the incoming header was improperly formatted.
+        // Returns a list of preferred subprotocols by parsing an incoming header value, or null if the
+        // incoming header was improperly formatted.
         public static List<string> ParseHeader(string headerValue)
         {
             if (headerValue == null)

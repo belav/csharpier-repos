@@ -18,7 +18,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
 {
     using Configuration = System.Net.Test.Common.Configuration;
 
-    // Note:  Disposing the HttpClient object automatically disposes the handler within. So, it is not necessary
+    // Note:  Disposing the HttpClient object automatically disposes the handler within. So, it is not
+    // necessary
     // to separately Dispose (or have a 'using' statement) for the handler.
     public class WinHttpHandlerTest
     {
@@ -236,7 +237,8 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
         )]
         public async Task SendAsync_MultipleHttp2ConnectionsEnabled_CreateAdditionalConnections()
         {
-            // Warm up thread pool because the full .NET Framework calls synchronous Stream.Read() and we need to delay those calls thus threads will get blocked.
+            // Warm up thread pool because the full .NET Framework calls synchronous Stream.Read() and we need
+            // to delay those calls thus threads will get blocked.
             ThreadPool.GetMinThreads(out _, out int completionPortThreads);
             ThreadPool.SetMinThreads(401, completionPortThreads);
             using var handler = new WinHttpHandler();

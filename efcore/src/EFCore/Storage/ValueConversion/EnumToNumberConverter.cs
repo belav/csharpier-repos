@@ -7,7 +7,8 @@ namespace Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 ///     Converts enum values to and from their underlying numeric representation.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+// for more information and examples.
 /// </remarks>
 public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumber>
     where TEnum : struct, Enum
@@ -31,7 +32,8 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     ///     Creates a new instance of this converter. This converter preserves order.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     public EnumToNumberConverter()
         : this(null) { }
@@ -40,10 +42,12 @@ public class EnumToNumberConverter<TEnum, TNumber> : ValueConverter<TEnum, TNumb
     ///     Creates a new instance of this converter. This converter preserves order.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
+    ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see>
+    // for more information and examples.
     /// </remarks>
     /// <param name="mappingHints">
-    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with appropriate
+    ///     Hints that can be used by the <see cref="ITypeMappingSource" /> to create data types with
+    // appropriate
     ///     facets for the converted data.
     /// </param>
     public EnumToNumberConverter(ConverterMappingHints? mappingHints)

@@ -32,9 +32,12 @@ internal abstract class MemberBody : DeclarationBody
     public abstract IEnumerable<SyntaxToken>? GetActiveTokens();
 
     /// <summary>
-    /// Finds an active statement at given span within this body and the corresponding partner statement in
-    /// <paramref name="partnerDeclarationBody"/>, if specified. Only called with <paramref name="partnerDeclarationBody"/> when
-    /// the body does not have any non-trivial changes and thus the correpsonding active statement is always found in the partner body.
+    /// Finds an active statement at given span within this body and the corresponding partner statement
+    // in
+    /// <paramref name="partnerDeclarationBody"/>, if specified. Only called with <paramref
+    // name="partnerDeclarationBody"/> when
+    /// the body does not have any non-trivial changes and thus the correpsonding active statement is
+    // always found in the partner body.
     /// </summary>
     public abstract SyntaxNode FindStatementAndPartner(
         TextSpan span,

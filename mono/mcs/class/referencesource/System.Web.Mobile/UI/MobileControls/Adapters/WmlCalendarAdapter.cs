@@ -26,12 +26,12 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlCalendarAdapter provides the wml device functionality for Calendar
-     * control.  It is using secondary UI support to provide internal screens
-     * to allow the user to pick or enter a date.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlCalendarAdapter provides the wml device functionality for Calendar
+    * control.  It is using secondary UI support to provide internal screens
+    * to allow the user to pick or enter a date.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -87,13 +87,15 @@ namespace System.Web.UI.MobileControls.Adapters
         private const String DaySeparator = " - ";
         private const String Space = " ";
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.Control"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.Control"]/*'
+        // />
         protected new Calendar Control
         {
             get { return (Calendar)base.Control; }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnInit"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnInit"]/*'
+        // />
         public override void OnInit(EventArgs e)
         {
             ListCommandEventHandler listCommandEventHandler;
@@ -158,7 +160,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnLoad"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnLoad"]/*'
+        // />
         public override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
@@ -182,7 +185,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.LoadAdapterState"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex'
+        // path='docs/doc[@for="WmlCalendarAdapter.LoadAdapterState"]/*' />
         public override void LoadAdapterState(Object state)
         {
             if (state != null)
@@ -229,7 +233,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.SaveAdapterState"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex'
+        // path='docs/doc[@for="WmlCalendarAdapter.SaveAdapterState"]/*' />
         public override Object SaveAdapterState()
         {
             DateTime visibleDate = Control.VisibleDate;
@@ -275,7 +280,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.OnPreRender"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex'
+        // path='docs/doc[@for="WmlCalendarAdapter.OnPreRender"]/*' />
         public override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
@@ -336,7 +342,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.Render"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.Render"]/*'
+        // />
         public override void Render(WmlMobileTextWriter writer)
         {
             ArrayList arr;
@@ -622,7 +629,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.ExitStyle(Style);
         }
 
-        /// <include file='doc\WmlCalendarAdapter.uex' path='docs/doc[@for="WmlCalendarAdapter.HandlePostBackEvent"]/*' />
+        /// <include file='doc\WmlCalendarAdapter.uex'
+        // path='docs/doc[@for="WmlCalendarAdapter.HandlePostBackEvent"]/*' />
         public override bool HandlePostBackEvent(String eventArgument)
         {
             // This is mainly to capture the option picked by the user on

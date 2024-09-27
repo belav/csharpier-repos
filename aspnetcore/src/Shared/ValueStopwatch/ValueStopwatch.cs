@@ -26,7 +26,8 @@ internal struct ValueStopwatch
 
     public TimeSpan GetElapsedTime()
     {
-        // Start timestamp can't be zero in an initialized ValueStopwatch. It would have to be literally the first thing executed when the machine boots to be 0.
+        // Start timestamp can't be zero in an initialized ValueStopwatch. It would have to be literally the
+        // first thing executed when the machine boots to be 0.
         // So it being 0 is a clear indication of default(ValueStopwatch)
         if (!IsActive)
         {

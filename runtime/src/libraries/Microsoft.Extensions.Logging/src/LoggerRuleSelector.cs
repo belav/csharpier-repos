@@ -19,7 +19,8 @@ namespace Microsoft.Extensions.Logging
             minLevel = options.MinLevel;
 
             // Filter rule selection:
-            // 1. Select rules for current logger type, if there is none, select ones without logger type specified
+            // 1. Select rules for current logger type, if there is none, select ones without logger type
+            // specified
             // 2. Select rules with longest matching categories
             // 3. If there nothing matched by category take all rules without category
             // 3. If there is only one rule use it's level and filter

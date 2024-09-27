@@ -214,7 +214,8 @@ public sealed class EndpointMetadataCollection : IReadOnlyList<object>
         }
 
         /// <summary>
-        /// Sets the enumerator to its initial position, which is before the first element in the collection.
+        /// Sets the enumerator to its initial position, which is before the first element in the
+        // collection.
         /// </summary>
         public void Reset()
         {

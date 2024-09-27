@@ -54,7 +54,8 @@ namespace System.Web.Services.Protocols
             Soap.Namespace
         );
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.VersionMismatchFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex'
+        // path='docs/doc[@for="SoapException.VersionMismatchFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -63,7 +64,8 @@ namespace System.Web.Services.Protocols
             Soap.Namespace
         );
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.MustUnderstandFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex'
+        // path='docs/doc[@for="SoapException.MustUnderstandFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -72,37 +74,43 @@ namespace System.Web.Services.Protocols
             Soap.Namespace
         );
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.DetailElementName"]/*' />
+        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.DetailElementName"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        // NOTE, Microsoft: The SOAP 1.1 is unclear on whether the detail element can or should be qualified.
+        // NOTE, Microsoft: The SOAP 1.1 is unclear on whether the detail element can or should be
+        // qualified.
         // Based on consensus about the intent, we will not qualify it.
         public static readonly XmlQualifiedName DetailElementName = new XmlQualifiedName(
             Soap.Element.FaultDetail,
             ""
         );
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsServerFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsServerFaultCode"]/*'
+        // />
         public static bool IsServerFaultCode(XmlQualifiedName code)
         {
             return code == ServerFaultCode || code == Soap12FaultCodes.ReceiverFaultCode;
         }
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsClientFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsClientFaultCode"]/*'
+        // />
         public static bool IsClientFaultCode(XmlQualifiedName code)
         {
             return code == ClientFaultCode || code == Soap12FaultCodes.SenderFaultCode;
         }
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsVersionMismatchFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex'
+        // path='docs/doc[@for="SoapException.IsVersionMismatchFaultCode"]/*' />
         public static bool IsVersionMismatchFaultCode(XmlQualifiedName code)
         {
             return code == VersionMismatchFaultCode
                 || code == Soap12FaultCodes.VersionMismatchFaultCode;
         }
 
-        /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsMustUnderstandFaultCode"]/*' />
+        /// <include file='doc\SoapException.uex'
+        // path='docs/doc[@for="SoapException.IsMustUnderstandFaultCode"]/*' />
         public static bool IsMustUnderstandFaultCode(XmlQualifiedName code)
         {
             return code == MustUnderstandFaultCode
@@ -115,8 +123,12 @@ namespace System.Web.Services.Protocols
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException"]/*' />
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to
-        /// <paramref name="code"/> and <see cref='System.Web.Services.Protocols.SoapException.Actor'/> to <paramref name="actor"/>.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.Services.Protocols.SoapException'/> class, setting <see
+        // cref='System.Exception.Message'/> to <paramref name="message"/>, <see
+        // cref='System.Web.Services.Protocols.SoapException.Code'/> to
+        /// <paramref name="code"/> and <see cref='System.Web.Services.Protocols.SoapException.Actor'/> to
+        // <paramref name="actor"/>.</para>
         /// </devdoc>
         public SoapException(string message, XmlQualifiedName code, string actor)
             : base(message)
@@ -127,10 +139,14 @@ namespace System.Web.Services.Protocols
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException1"]/*' />
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
-        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code,
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.Services.Protocols.SoapException'/> class, setting <see
+        // cref='System.Exception.Message'/> to
+        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to
+        // <paramref name="code,
         ///    "/><see cref='System.Web.Services.Protocols.SoapException.Actor'/> to <paramref name="actor
-        ///    "/>and <see cref='System.Exception.InnerException'/> to <paramref name="innerException"/> .</para>
+        ///    "/>and <see cref='System.Exception.InnerException'/> to <paramref name="innerException"/>
+        // .</para>
         /// </devdoc>
         public SoapException(
             string message,
@@ -146,7 +162,9 @@ namespace System.Web.Services.Protocols
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException2"]/*' />
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.Services.Protocols.SoapException'/> class, setting <see
+        // cref='System.Exception.Message'/> to
         /// <paramref name="message "/>and<paramref name=" "/>
         /// <see cref='System.Web.Services.Protocols.SoapException.Code'/>
         /// to <paramref name="code"/>.</para>
@@ -159,8 +177,11 @@ namespace System.Web.Services.Protocols
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException3"]/*' />
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
-        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code "/>and
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.Services.Protocols.SoapException'/> class, setting <see
+        // cref='System.Exception.Message'/> to
+        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to
+        // <paramref name="code "/>and
         /// <see cref='System.Exception.InnerException'/>
         /// to <paramref name="innerException"/>.</para>
         /// </devdoc>
@@ -349,7 +370,8 @@ namespace System.Web.Services.Protocols
             get { return subCode; }
         }
 
-        // helper function that allows us to pass dummy subCodes around but clear them before they get to the user
+        // helper function that allows us to pass dummy subCodes around but clear them before they get to
+        // the user
         internal void ClearSubCode()
         {
             if (subCode != null)

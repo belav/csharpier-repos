@@ -176,7 +176,8 @@ namespace System.ServiceModel
         public void ReleaseServiceInstance()
         {
             instance_manager.ReleaseServiceInstance(this, implementation);
-            // This does NOT dispose the instance implementation. See DispatrchRuntimeTest.TestInstanceBehavior2 (which never reports "Dispose").
+            // This does NOT dispose the instance implementation. See DispatrchRuntimeTest.TestInstanceBehavior2
+            // (which never reports "Dispose").
             implementation = null;
         }
 

@@ -69,10 +69,12 @@ internal sealed class RoutePatternMatcher
         //
         // For most segment-types, we only really need to any work on one of the two passes.
         //
-        // On the first pass, we're just looking to see if there's anything that would disqualify us from matching.
+        // On the first pass, we're just looking to see if there's anything that would disqualify us from
+        // matching.
         // The most common case would be a literal segment that doesn't match.
         //
-        // On the second pass, we're almost certainly going to match the URL, so go ahead and allocate the 'values'
+        // On the second pass, we're almost certainly going to match the URL, so go ahead and allocate the
+        // 'values'
         // and start capturing strings.
         foreach (var stringSegment in pathTokenizer)
         {
@@ -165,7 +167,8 @@ internal sealed class RoutePatternMatcher
 
         for (; i < RoutePattern.PathSegments.Count; i++)
         {
-            // We've matched the request path so far, but still have remaining route segments. We already know these
+            // We've matched the request path so far, but still have remaining route segments. We already know
+            // these
             // are simple parameters that either have a default, or don't need to produce a value.
             var pathSegment = RoutePattern.PathSegments[i];
             Debug.Assert(pathSegment != null);
@@ -523,10 +526,14 @@ internal sealed class RoutePatternMatcher
             indexOfLastSegmentUsed--;
         }
 
-        // If the last subsegment is a parameter, it's OK that we didn't parse all the way to the left extent of
-        // the string since the parameter will have consumed all the remaining text anyway. If the last subsegment
-        // is a literal then we *must* have consumed the entire text in that literal. Otherwise we end up matching
-        // the route "Foo" to the request URI "somethingFoo". Thus we have to check that we parsed the *entire*
+        // If the last subsegment is a parameter, it's OK that we didn't parse all the way to the left
+        // extent of
+        // the string since the parameter will have consumed all the remaining text anyway. If the last
+        // subsegment
+        // is a literal then we *must* have consumed the entire text in that literal. Otherwise we end up
+        // matching
+        // the route "Foo" to the request URI "somethingFoo". Thus we have to check that we parsed the
+        // *entire*
         // request URI in order for it to be a match.
         // This check is related to the check we do earlier in this function for LiteralSubsegments.
         if (lastIndex == 0 || routeSegment.Parts[0].IsParameter)

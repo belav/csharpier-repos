@@ -69,7 +69,8 @@ public class B279085
         }
 
         // The bug was a malformed GCDesc for an array of generic valuetypes.
-        // The code that follows will crash when trying to access the Second property if the GCDesc was wrong (gc collects it).
+        // The code that follows will crash when trying to access the Second property if the GCDesc was
+        // wrong (gc collects it).
 
         for (int i = 0; i < pairs.Length; i++)
         {

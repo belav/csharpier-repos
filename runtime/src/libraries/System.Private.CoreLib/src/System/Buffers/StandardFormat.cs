@@ -7,13 +7,15 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Buffers
 {
     /// <summary>
-    /// Represents a standard formatting string without using an actual String. A StandardFormat consists of a character (such as 'G', 'D' or 'X')
+    /// Represents a standard formatting string without using an actual String. A StandardFormat
+    // consists of a character (such as 'G', 'D' or 'X')
     /// and an optional precision ranging from 0..99, or the special value NoPrecision.
     /// </summary>
     public readonly struct StandardFormat : IEquatable<StandardFormat>
     {
         /// <summary>
-        /// Precision values for format that don't use a precision, or for when the precision is to be unspecified.
+        /// Precision values for format that don't use a precision, or for when the precision is to be
+        // unspecified.
         /// </summary>
         public const byte NoPrecision = byte.MaxValue;
 
@@ -52,7 +54,8 @@ namespace System.Buffers
         /// Create a StandardFormat.
         /// </summary>
         /// <param name="symbol">A type-specific formatting character such as 'G', 'D' or 'X'</param>
-        /// <param name="precision">An optional precision ranging from 0..9 or the special value NoPrecision (the default)</param>
+        /// <param name="precision">An optional precision ranging from 0..9 or the special value NoPrecision
+        // (the default)</param>
         public StandardFormat(char symbol, byte precision = NoPrecision)
         {
             if (precision != NoPrecision && precision > MaxPrecision)
@@ -89,7 +92,8 @@ namespace System.Buffers
         ) => format == null ? default : Parse(format.AsSpan());
 
         /// <summary>
-        /// Tries to convert a <see cref="ReadOnlySpan{Char}"/> into a StandardFormat. A return value indicates whether the conversion succeeded or failed.
+        /// Tries to convert a <see cref="ReadOnlySpan{Char}"/> into a StandardFormat. A return value
+        // indicates whether the conversion succeeded or failed.
         /// </summary>
         public static bool TryParse(
             [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format,

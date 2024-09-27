@@ -312,7 +312,8 @@ namespace System.Globalization
                         nuint lastIndexWhereCanReadTwoChars = (uint)source.Length - 2;
                         do
                         {
-                            // See the comments in ChangeCaseCommon<TConversion>(ROS<char>, Span<char>) for a full explanation of the below code.
+                            // See the comments in ChangeCaseCommon<TConversion>(ROS<char>, Span<char>) for a full explanation
+                            // of the below code.
 
                             uint tempValue = Unsafe.ReadUnaligned<uint>(pSource + currIdx);
                             if (!Utf16Utility.AllCharsInUInt32AreAscii(tempValue))
@@ -356,7 +357,8 @@ namespace System.Globalization
                     AsciiMustChangeCase:
                     {
                         // We reached ASCII data that requires a case change.
-                        // This will necessarily allocate a new string, but let's try to stay within the managed (non-localization tables)
+                        // This will necessarily allocate a new string, but let's try to stay within the managed
+                        // (non-localization tables)
                         // conversion code path if we can.
 
                         string result = string.FastAllocateString(source.Length); // changing case uses simple folding: doesn't change UTF-16 code unit count
@@ -379,7 +381,8 @@ namespace System.Globalization
 
                 NotAscii:
                 {
-                    // We reached non-ASCII data *or* the requested culture doesn't map ASCII data the same way as the invariant culture.
+                    // We reached non-ASCII data *or* the requested culture doesn't map ASCII data the same way as the
+                    // invariant culture.
                     // In either case we need to fall back to the localization tables.
 
                     string result = string.FastAllocateString(source.Length); // changing case uses simple folding: doesn't change UTF-16 code unit count
@@ -563,15 +566,22 @@ namespace System.Globalization
         }
 
         /// <summary>
-        /// Titlecasing refers to a casing practice wherein the first letter of a word is an uppercase letter
+        /// Titlecasing refers to a casing practice wherein the first letter of a word is an uppercase
+        // letter
         /// and the rest of the letters are lowercase.  The choice of which words to titlecase in headings
-        /// and titles is dependent on language and local conventions.  For example, "The Merry Wives of Windor"
-        /// is the appropriate titlecasing of that play's name in English, with the word "of" not titlecased.
-        /// In German, however, the title is "Die lustigen Weiber von Windsor," and both "lustigen" and "von"
-        /// are not titlecased.  In French even fewer words are titlecased: "Les joyeuses commeres de Windsor."
+        /// and titles is dependent on language and local conventions.  For example, "The Merry Wives of
+        // Windor"
+        /// is the appropriate titlecasing of that play's name in English, with the word "of" not
+        // titlecased.
+        /// In German, however, the title is "Die lustigen Weiber von Windsor," and both "lustigen" and
+        // "von"
+        /// are not titlecased.  In French even fewer words are titlecased: "Les joyeuses commeres de
+        // Windsor."
         ///
-        /// Moreover, the determination of what actually constitutes a word is language dependent, and this can
-        /// influence which letter or letters of a "word" are uppercased when titlecasing strings.  For example
+        /// Moreover, the determination of what actually constitutes a word is language dependent, and this
+        // can
+        /// influence which letter or letters of a "word" are uppercased when titlecasing strings.  For
+        // example
         /// "l'arbre" is considered two words in French, whereas "can't" is considered one word in English.
         /// </summary>
         public unsafe string ToTitleCase(string str)
@@ -817,65 +827,65 @@ namespace System.Globalization
         // When we find a starting letter, the following array decides if a category should be
         // considered as word separator or not.
         private const int c_wordSeparatorMask =
-            /* false */(0 << 0)
+/* false */(0 << 0)
             | // UppercaseLetter = 0,
-            /* false */(0 << 1)
+/* false */(0 << 1)
             | // LowercaseLetter = 1,
-            /* false */(0 << 2)
+/* false */(0 << 2)
             | // TitlecaseLetter = 2,
-            /* false */(0 << 3)
+/* false */(0 << 3)
             | // ModifierLetter = 3,
-            /* false */(0 << 4)
+/* false */(0 << 4)
             | // OtherLetter = 4,
-            /* false */(0 << 5)
+/* false */(0 << 5)
             | // NonSpacingMark = 5,
-            /* false */(0 << 6)
+/* false */(0 << 6)
             | // SpacingCombiningMark = 6,
-            /* false */(0 << 7)
+/* false */(0 << 7)
             | // EnclosingMark = 7,
-            /* false */(0 << 8)
+/* false */(0 << 8)
             | // DecimalDigitNumber = 8,
-            /* false */(0 << 9)
+/* false */(0 << 9)
             | // LetterNumber = 9,
-            /* false */(0 << 10)
+/* false */(0 << 10)
             | // OtherNumber = 10,
-            /* true  */(1 << 11)
+/* true  */(1 << 11)
             | // SpaceSeparator = 11,
-            /* true  */(1 << 12)
+/* true  */(1 << 12)
             | // LineSeparator = 12,
-            /* true  */(1 << 13)
+/* true  */(1 << 13)
             | // ParagraphSeparator = 13,
-            /* true  */(1 << 14)
+/* true  */(1 << 14)
             | // Control = 14,
-            /* true  */(1 << 15)
+/* true  */(1 << 15)
             | // Format = 15,
-            /* false */(0 << 16)
+/* false */(0 << 16)
             | // Surrogate = 16,
-            /* false */(0 << 17)
+/* false */(0 << 17)
             | // PrivateUse = 17,
-            /* true  */(1 << 18)
+/* true  */(1 << 18)
             | // ConnectorPunctuation = 18,
-            /* true  */(1 << 19)
+/* true  */(1 << 19)
             | // DashPunctuation = 19,
-            /* true  */(1 << 20)
+/* true  */(1 << 20)
             | // OpenPunctuation = 20,
-            /* true  */(1 << 21)
+/* true  */(1 << 21)
             | // ClosePunctuation = 21,
-            /* true  */(1 << 22)
+/* true  */(1 << 22)
             | // InitialQuotePunctuation = 22,
-            /* true  */(1 << 23)
+/* true  */(1 << 23)
             | // FinalQuotePunctuation = 23,
-            /* true  */(1 << 24)
+/* true  */(1 << 24)
             | // OtherPunctuation = 24,
-            /* true  */(1 << 25)
+/* true  */(1 << 25)
             | // MathSymbol = 25,
-            /* true  */(1 << 26)
+/* true  */(1 << 26)
             | // CurrencySymbol = 26,
-            /* true  */(1 << 27)
+/* true  */(1 << 27)
             | // ModifierSymbol = 27,
-            /* true  */(1 << 28)
+/* true  */(1 << 28)
             | // OtherSymbol = 28,
-            /* false */(0 << 29); // OtherNotAssigned = 29;
+/* false */(0 << 29); // OtherNotAssigned = 29;
 
         private static bool IsWordSeparator(UnicodeCategory category)
         {

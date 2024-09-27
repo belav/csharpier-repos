@@ -29,7 +29,8 @@ namespace System.Data.Common.Internal.Materialization
         private static readonly Func<Shaper, bool> AlwaysTrue = s => true;
 
         /// <summary>
-        /// Function of shaper that returns false; one default case used when there is no explicit predicate.
+        /// Function of shaper that returns false; one default case used when there is no explicit
+        // predicate.
         /// </summary>
         private static readonly Func<Shaper, bool> AlwaysFalse = s => false;
 
@@ -77,7 +78,8 @@ namespace System.Data.Common.Internal.Materialization
         /// <summary>
         /// Indicates whether this coordinator can be managed by a simple enumerator. A simple enumerator
         /// returns a single element per row, so the following conditions disqualify the enumerator:
-        /// nested collections, data discriminators (not all rows have data), keys (not all rows have new data).
+        /// nested collections, data discriminators (not all rows have data), keys (not all rows have new
+        // data).
         /// </summary>
         internal readonly bool IsSimple;
 
@@ -107,7 +109,8 @@ namespace System.Data.Common.Internal.Materialization
             // figure out if there are any nested coordinators
             this.IsLeafResult = 0 == nestedCoordinators.Length;
 
-            // if there is no explicit 'has data' discriminator, it means all rows contain data for the coordinator
+            // if there is no explicit 'has data' discriminator, it means all rows contain data for the
+            // coordinator
             if (hasData == null)
             {
                 this.HasData = AlwaysTrue;
@@ -156,7 +159,8 @@ namespace System.Data.Common.Internal.Materialization
                     recordStateFactories
                 );
 
-            // Determines whether this coordinator can be handled by a 'simple' enumerator. See IsSimple for details.
+            // Determines whether this coordinator can be handled by a 'simple' enumerator. See IsSimple for
+            // details.
             this.IsSimple = IsLeafResult && null == checkKeys && null == hasData;
         }
 
@@ -236,8 +240,10 @@ namespace System.Data.Common.Internal.Materialization
                 recordStateFactories
             )
         {
-            // If we are in a case where a wrapped entity is available, then use it; otherwise use the raw element.
-            // However, in both cases, use the raw element for the error handling case where what we care about is
+            // If we are in a case where a wrapped entity is available, then use it; otherwise use the raw
+            // element.
+            // However, in both cases, use the raw element for the error handling case where what we care about
+            // is
             // getting the appropriate exception message.
             if (typeof(IEntityWrapper).IsAssignableFrom(element.Type))
             {

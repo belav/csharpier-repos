@@ -3083,13 +3083,13 @@ namespace MonoTests.System.Windows.Forms
                 dt.Format = DateTimePickerFormat.Custom;
                 dt.Value = new DateTime(2007, 2, 8, 15, 30, 45, 60);
 
-                /*
-                 * This is really weird and necessary, otherwise the tests won't succeed on windows.
-                 * other strings that can be used here: "a", "dddd", " ddd", "'a'", "'d'" + a probably a lot more.
-                 * seems like the first non-literal must be ddd and cannot be an empty string
-                 * Without this everytime a "y" or "yy" comes first in the format, it will always show as
-                 * a 4-digit string if this is not done.
-                 */
+/*
+* This is really weird and necessary, otherwise the tests won't succeed on windows.
+* other strings that can be used here: "a", "dddd", " ddd", "'a'", "'d'" + a probably a lot more.
+* seems like the first non-literal must be ddd and cannot be an empty string
+* Without this everytime a "y" or "yy" comes first in the format, it will always show as
+* a 4-digit string if this is not done.
+*/
                 if (Type.GetType("Mono.Runtime") == null)
                 {
                     // Only do this for MS, not implemented in Mono.

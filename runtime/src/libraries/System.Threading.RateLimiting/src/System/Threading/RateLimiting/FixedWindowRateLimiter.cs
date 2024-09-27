@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 namespace System.Threading.RateLimiting
 {
     /// <summary>
-    /// <see cref="RateLimiter"/> implementation that refreshes allowed permits in a window periodically.
+    /// <see cref="RateLimiter"/> implementation that refreshes allowed permits in a window
+    // periodically.
     /// </summary>
     public sealed class FixedWindowRateLimiter : ReplenishingRateLimiter
     {
@@ -48,7 +49,8 @@ namespace System.Threading.RateLimiting
         /// <summary>
         /// Initializes the <see cref="FixedWindowRateLimiter"/>.
         /// </summary>
-        /// <param name="options">Options to specify the behavior of the <see cref="FixedWindowRateLimiter"/>.</param>
+        /// <param name="options">Options to specify the behavior of the <see
+        // cref="FixedWindowRateLimiter"/>.</param>
         public FixedWindowRateLimiter(FixedWindowRateLimiterOptions options)
         {
             if (options is null)
@@ -127,7 +129,8 @@ namespace System.Threading.RateLimiting
             if (permitCount == 0 && !_disposed)
             {
                 // Check if the requests are permitted in a window
-                // Requests will be allowed if the total served request is less than the max allowed requests (permit limit).
+                // Requests will be allowed if the total served request is less than the max allowed requests
+                // (permit limit).
                 if (_permitCount > 0)
                 {
                     Interlocked.Increment(ref _successfulLeasesCount);
@@ -251,13 +254,15 @@ namespace System.Threading.RateLimiting
                 if (permitCount == 0)
                 {
                     Interlocked.Increment(ref _successfulLeasesCount);
-                    // Edge case where the check before the lock showed 0 available permit counters but when we got the lock, some permits were now available
+                    // Edge case where the check before the lock showed 0 available permit counters but when we got the
+                    // lock, some permits were now available
                     lease = SuccessfulLease;
                     return true;
                 }
 
                 // a. If there are no items queued we can lease
-                // b. If there are items queued but the processing order is newest first, then we can lease the incoming request since it is the newest
+                // b. If there are items queued but the processing order is newest first, then we can lease the
+                // incoming request since it is the newest
                 if (
                     _queueCount == 0
                     || (
@@ -283,7 +288,8 @@ namespace System.Threading.RateLimiting
         /// Attempts to replenish request counters in the window.
         /// </summary>
         /// <returns>
-        /// False if <see cref="FixedWindowRateLimiterOptions.AutoReplenishment"/> is enabled, otherwise true.
+        /// False if <see cref="FixedWindowRateLimiterOptions.AutoReplenishment"/> is enabled, otherwise
+        // true.
         /// Does not reflect if counters were replenished.
         /// </returns>
         public override bool TryReplenish()
@@ -347,7 +353,8 @@ namespace System.Threading.RateLimiting
                             ? _queue.PeekHead()
                             : _queue.PeekTail();
 
-                    // Request was handled already, either via cancellation or being kicked from the queue due to a newer request being queued.
+                    // Request was handled already, either via cancellation or being kicked from the queue due to a
+                    // newer request being queued.
                     // We just need to remove the item and let the next queued item be considered for completion.
                     if (nextPendingRequest.Task.IsCompleted)
                     {

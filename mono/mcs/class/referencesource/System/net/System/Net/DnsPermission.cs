@@ -89,7 +89,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Returns the logical union between two <see cref='System.Net.DnsPermission'/> instances.</para>
+        /// <para>Returns the logical union between two <see cref='System.Net.DnsPermission'/>
+        // instances.</para>
         /// </devdoc>
         public override IPermission Union(IPermission target)
         {
@@ -107,7 +108,8 @@ namespace System.Net
         }
 
         /// <devdoc>
-        /// <para>Returns the logical intersection between two <see cref='System.Net.DnsPermission'/> instances.</para>
+        /// <para>Returns the logical intersection between two <see cref='System.Net.DnsPermission'/>
+        // instances.</para>
         /// </devdoc>
         public override IPermission Intersect(IPermission target)
         {

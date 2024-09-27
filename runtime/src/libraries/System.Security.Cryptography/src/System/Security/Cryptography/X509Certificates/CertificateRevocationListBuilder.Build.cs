@@ -147,8 +147,10 @@ namespace System.Security.Cryptography.X509Certificates
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
 
             // Check the Basic Constraints and Key Usage extensions to help identify inappropriate certificates.
-            // Note that this is not a security check. The system library backing X509Chain will use these same criteria
-            // to determine if the CRL is valid; and a user can easily call the X509SignatureGenerator overload to
+            // Note that this is not a security check. The system library backing X509Chain will use these same
+            // criteria
+            // to determine if the CRL is valid; and a user can easily call the X509SignatureGenerator overload
+            // to
             // bypass this validation.  We're simply helping them at signing time understand that they've
             // chosen the wrong cert.
             var basicConstraints = (X509BasicConstraintsExtension?)

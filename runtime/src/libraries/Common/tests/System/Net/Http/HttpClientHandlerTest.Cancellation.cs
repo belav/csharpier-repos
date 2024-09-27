@@ -611,7 +611,8 @@ namespace System.Net.Http.Functional.Tests
 
         public static IEnumerable<object[]> PostAsync_Cancel_CancellationTokenPassedToContent_MemberData()
         {
-            // Note: For HTTP2, the actual token will be a linked token and will not be an exact match for the original token.
+            // Note: For HTTP2, the actual token will be a linked token and will not be an exact match for the
+            // original token.
             // Verify that it behaves as expected by cancelling it and validating that cancellation propagates.
 
             // StreamContent
@@ -742,8 +743,10 @@ namespace System.Net.Http.Functional.Tests
             {
                 return;
             }
-            // Skipping test for a sync scenario because DelegateStream drops the original cancellationToken when it calls Read/Write methods.
-            // As a result, ReadAsyncFunc receives default in cancellationToken, which will never get signaled through the cancellationTokenSource.
+            // Skipping test for a sync scenario because DelegateStream drops the original cancellationToken
+            // when it calls Read/Write methods.
+            // As a result, ReadAsyncFunc receives default in cancellationToken, which will never get signaled
+            // through the cancellationTokenSource.
             if (!TestAsync)
             {
                 return;

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Net.Http.Headers;
@@ -8,7 +9,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting
 {
     /// <summary>
-    /// Extensions for adding <see cref="MediaTypeMapping"/> items to a <see cref="MediaTypeFormatter"/>.
+    /// Extensions for adding <see cref="MediaTypeMapping"/> items to a <see
+    // cref="MediaTypeFormatter"/>.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public static class MediaTypeFormatterExtensions
@@ -18,11 +20,13 @@ namespace System.Net.Http.Formatting
         /// so that it associates the <paramref name="mediaType"/> with <see cref="Uri"/>s containing
         /// a specific query parameter and value.
         /// </summary>
-        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="QueryStringMapping"/> item.</param>
+        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see
+        // cref="QueryStringMapping"/> item.</param>
         /// <param name="queryStringParameterName">The name of the query parameter.</param>
         /// <param name="queryStringParameterValue">The value assigned to that query parameter.</param>
         /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate
-        /// with a <see cref="Uri"/> containing a query string matching <paramref name="queryStringParameterName"/>
+        /// with a <see cref="Uri"/> containing a query string matching <paramref
+        // name="queryStringParameterName"/>
         /// and <paramref name="queryStringParameterValue"/>.</param>
         public static void AddQueryStringMapping(
             this MediaTypeFormatter formatter,
@@ -49,11 +53,13 @@ namespace System.Net.Http.Formatting
         /// so that it associates the <paramref name="mediaType"/> with <see cref="Uri"/>s containing
         /// a specific query parameter and value.
         /// </summary>
-        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="QueryStringMapping"/> item.</param>
+        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see
+        // cref="QueryStringMapping"/> item.</param>
         /// <param name="queryStringParameterName">The name of the query parameter.</param>
         /// <param name="queryStringParameterValue">The value assigned to that query parameter.</param>
         /// <param name="mediaType">The media type to associate
-        /// with a <see cref="Uri"/> containing a query string matching <paramref name="queryStringParameterName"/>
+        /// with a <see cref="Uri"/> containing a query string matching <paramref
+        // name="queryStringParameterName"/>
         /// and <paramref name="queryStringParameterValue"/>.</param>
         public static void AddQueryStringMapping(
             this MediaTypeFormatter formatter,
@@ -80,16 +86,21 @@ namespace System.Net.Http.Formatting
         /// so that it associates the <paramref name="mediaType"/> with a specific HTTP request header field
         /// with a specific value.
         /// </summary>
-        /// <remarks><see cref="RequestHeaderMapping"/> checks header fields associated with <see cref="M:HttpRequestMessage.Headers"/> for a match. It does
-        /// not check header fields associated with <see cref="M:HttpResponseMessage.Headers"/> or <see cref="M:HttpContent.Headers"/> instances.</remarks>
-        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="MediaTypeMapping"/> item.</param>
+        /// <remarks><see cref="RequestHeaderMapping"/> checks header fields associated with <see
+        // cref="M:HttpRequestMessage.Headers"/> for a match. It does
+        /// not check header fields associated with <see cref="M:HttpResponseMessage.Headers"/> or <see
+        // cref="M:HttpContent.Headers"/> instances.</remarks>
+        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see
+        // cref="MediaTypeMapping"/> item.</param>
         /// <param name="headerName">Name of the header to match.</param>
         /// <param name="headerValue">The header value to match.</param>
-        /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref name="headerValue"/>.</param>
+        /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref
+        // name="headerValue"/>.</param>
         /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is
         /// considered a match if it matches a substring of the actual header value.</param>
         /// <param name="mediaType">The <see cref="MediaTypeHeaderValue"/> to associate
-        /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref name="headerName"/>
+        /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref
+        // name="headerName"/>
         /// and a value matching <paramref name="headerValue"/>.</param>
         public static void AddRequestHeaderMapping(
             this MediaTypeFormatter formatter,
@@ -120,16 +131,21 @@ namespace System.Net.Http.Formatting
         /// so that it associates the <paramref name="mediaType"/> with a specific HTTP request header field
         /// with a specific value.
         /// </summary>
-        /// <remarks><see cref="RequestHeaderMapping"/> checks header fields associated with <see cref="M:HttpRequestMessage.Headers"/> for a match. It does
-        /// not check header fields associated with <see cref="M:HttpResponseMessage.Headers"/> or <see cref="M:HttpContent.Headers"/> instances.</remarks>
-        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see cref="MediaTypeMapping"/> item.</param>
+        /// <remarks><see cref="RequestHeaderMapping"/> checks header fields associated with <see
+        // cref="M:HttpRequestMessage.Headers"/> for a match. It does
+        /// not check header fields associated with <see cref="M:HttpResponseMessage.Headers"/> or <see
+        // cref="M:HttpContent.Headers"/> instances.</remarks>
+        /// <param name="formatter">The <see cref="MediaTypeFormatter"/> to receive the new <see
+        // cref="MediaTypeMapping"/> item.</param>
         /// <param name="headerName">Name of the header to match.</param>
         /// <param name="headerValue">The header value to match.</param>
-        /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref name="headerValue"/>.</param>
+        /// <param name="valueComparison">The <see cref="StringComparison"/> to use when matching <paramref
+        // name="headerValue"/>.</param>
         /// <param name="isValueSubstring">if set to <c>true</c> then <paramref name="headerValue"/> is
         /// considered a match if it matches a substring of the actual header value.</param>
         /// <param name="mediaType">The media type to associate
-        /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref name="headerName"/>
+        /// with a <see cref="M:HttpRequestMessage.Header"/> entry with a name matching <paramref
+        // name="headerName"/>
         /// and a value matching <paramref name="headerValue"/>.</param>
         public static void AddRequestHeaderMapping(
             this MediaTypeFormatter formatter,

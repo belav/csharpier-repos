@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.IO;
 using System.Text;
@@ -12,7 +13,8 @@ namespace System.CommandLine.IO
     public static class StandardStreamWriter
     {
         /// <summary>
-        /// Creates a <see cref="TextWriter"/> that writes to the specified <see cref="IStandardStreamWriter"/>.
+        /// Creates a <see cref="TextWriter"/> that writes to the specified <see
+        // cref="IStandardStreamWriter"/>.
         /// </summary>
         public static TextWriter CreateTextWriter(this IStandardStreamWriter writer)
         {
@@ -25,7 +27,8 @@ namespace System.CommandLine.IO
         }
 
         /// <summary>
-        /// Creates a <see cref="IStandardStreamWriter"/> that writes to the specified <see cref="TextWriter"/>.
+        /// Creates a <see cref="IStandardStreamWriter"/> that writes to the specified <see
+        // cref="TextWriter"/>.
         /// </summary>
         public static IStandardStreamWriter Create(TextWriter writer)
         {

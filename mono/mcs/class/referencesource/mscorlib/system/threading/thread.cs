@@ -147,11 +147,11 @@ namespace System.Threading
 #endif
     {
 #if !MONO
-        /*=========================================================================
-        ** Data accessed from managed code that needs to be defined in
-        ** ThreadBaseObject to maintain alignment between the two classes.
-        ** DON'T CHANGE THESE UNLESS YOU MODIFY ThreadBaseObject in vm\object.h
-        =========================================================================*/
+/*=========================================================================
+** Data accessed from managed code that needs to be defined in
+** ThreadBaseObject to maintain alignment between the two classes.
+** DON'T CHANGE THESE UNLESS YOU MODIFY ThreadBaseObject in vm\object.h
+=========================================================================*/
 #if FEATURE_REMOTING
         private Context m_Context;
 #endif
@@ -167,12 +167,12 @@ namespace System.Threading
 #endif
         private Object m_ThreadStartArg;
 
-        /*=========================================================================
-        ** The base implementation of Thread is all native.  The following fields
-        ** should never be used in the C# code.  They are here to define the proper
-        ** space so the thread object may be allocated.  DON'T CHANGE THESE UNLESS
-        ** YOU MODIFY ThreadBaseObject in vm\object.h
-        =========================================================================*/
+/*=========================================================================
+** The base implementation of Thread is all native.  The following fields
+** should never be used in the C# code.  They are here to define the proper
+** space so the thread object may be allocated.  DON'T CHANGE THESE UNLESS
+** YOU MODIFY ThreadBaseObject in vm\object.h
+=========================================================================*/
 #pragma warning disable 169
 #pragma warning disable 414  // These fields are not used from managed.
         // IntPtrs need to be together, and before ints, because IntPtrs are 64-bit
@@ -323,8 +323,10 @@ namespace System.Threading
         {
             IntPtr thread = DONT_USE_InternalThread;
 
-            // This should never happen under normal circumstances. m_assembly is always assigned before it is handed out to the user.
-            // There are ways how to create an unitialized objects through remoting, etc. Avoid AVing in the EE by throwing a nice
+            // This should never happen under normal circumstances. m_assembly is always assigned before it is
+            // handed out to the user.
+            // There are ways how to create an unitialized objects through remoting, etc. Avoid AVing in the EE
+            // by throwing a nice
             // exception here.
             if (thread.IsNull())
                 throw new ArgumentException(
@@ -388,7 +390,8 @@ namespace System.Threading
             // if it's not already bound.
             if (m_Delegate != null)
             {
-                // If we reach here with a null delegate, something is broken. But we'll let the StartInternal method take care of
+                // If we reach here with a null delegate, something is broken. But we'll let the StartInternal
+                // method take care of
                 // reporting an error. Just make sure we dont try to dereference a null delegate.
                 ThreadHelper t = (ThreadHelper)(m_Delegate.Target);
 #if !NETCORE
@@ -427,7 +430,8 @@ namespace System.Threading
         }
 #endif
 
-        // note: please don't access this directly from mscorlib.  Use GetMutableExecutionContext or GetExecutionContextReader instead.
+        // note: please don't access this directly from mscorlib.  Use GetMutableExecutionContext or
+        // GetExecutionContextReader instead.
         public ExecutionContext ExecutionContext
         {
             [SecuritySafeCritical]
@@ -546,21 +550,21 @@ namespace System.Threading
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern IntPtr InternalGetCurrentThread();
 
-        /*=========================================================================
-        ** Raises a ThreadAbortException in the thread, which usually
-        ** results in the thread's death. The ThreadAbortException is a special
-        ** exception that is not catchable. The finally clauses of all try
-        ** statements will be executed before the thread dies. This includes the
-        ** finally that a thread might be executing at the moment the Abort is raised.
-        ** The thread is not stopped immediately--you must Join on the
-        ** thread to guarantee it has stopped.
-        ** It is possible for a thread to do an unbounded amount of computation in
-        ** the finally's and thus indefinitely delay the threads death.
-        ** If Abort() is called on a thread that has not been started, the thread
-        ** will abort when Start() is called.
-        ** If Abort is called twice on the same thread, a DuplicateThreadAbort
-        ** exception is thrown.
-        =========================================================================*/
+/*=========================================================================
+** Raises a ThreadAbortException in the thread, which usually
+** results in the thread's death. The ThreadAbortException is a special
+** exception that is not catchable. The finally clauses of all try
+** statements will be executed before the thread dies. This includes the
+** finally that a thread might be executing at the moment the Abort is raised.
+** The thread is not stopped immediately--you must Join on the
+** thread to guarantee it has stopped.
+** It is possible for a thread to do an unbounded amount of computation in
+** the finally's and thus indefinitely delay the threads death.
+** If Abort() is called on a thread that has not been started, the thread
+** will abort when Start() is called.
+** If Abort is called twice on the same thread, a DuplicateThreadAbort
+** exception is thrown.
+=========================================================================*/
 
 #if !FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -628,7 +632,7 @@ namespace System.Threading
         /*=========================================================================
         ** Resets a thread abort.
         ** Should be called by trusted code only
-          =========================================================================*/
+        =========================================================================*/
 #if !MONO
         [System.Security.SecuritySafeCritical] // auto-generated
         [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
@@ -709,11 +713,11 @@ namespace System.Threading
 #endif
 
 #if !FEATURE_CORECLR || MONO
-        /*=========================================================================
-        ** Interrupts a thread that is inside a Wait(), Sleep() or Join().  If that
-        ** thread is not currently blocked in that manner, it will be interrupted
-        ** when it next begins to block.
-        =========================================================================*/
+/*=========================================================================
+** Interrupts a thread that is inside a Wait(), Sleep() or Join().  If that
+** thread is not currently blocked in that manner, it will be interrupted
+** when it next begins to block.
+=========================================================================*/
 #if !MONO
         [System.Security.SecuritySafeCritical] // auto-generated
         [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
@@ -764,9 +768,9 @@ namespace System.Threading
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void SetPriorityNative(int priority);
 #if !MONO
-        /*=========================================================================
-        ** Returns true if the thread has been started and is not dead.
-        =========================================================================*/
+/*=========================================================================
+** Returns true if the thread has been started and is not dead.
+=========================================================================*/
         public extern bool IsAlive
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -774,9 +778,9 @@ namespace System.Threading
             get;
         }
 
-        /*=========================================================================
-        ** Returns true if the thread is a threadpool thread.
-        =========================================================================*/
+/*=========================================================================
+** Returns true if the thread is a threadpool thread.
+=========================================================================*/
         public extern bool IsThreadPoolThread
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -885,9 +889,9 @@ namespace System.Threading
         }
 
 #if !MONO
-        /* wait for a length of time proportial to 'iterations'.  Each iteration is should
-           only take a few machine instructions.  Calling this API is preferable to coding
-           a explict busy loop because the hardware can be informed that it is busy waiting. */
+/* wait for a length of time proportial to 'iterations'.  Each iteration is should
+only take a few machine instructions.  Calling this API is preferable to coding
+a explict busy loop because the hardware can be informed that it is busy waiting. */
 
         [System.Security.SecurityCritical] // auto-generated
         [
@@ -1004,18 +1008,18 @@ namespace System.Threading
         [SuppressUnmanagedCodeSecurity]
         private static extern ulong GetProcessDefaultStackSize();
 
-        /*=========================================================================
-        ** PRIVATE Sets the IThreadable interface for the thread. Assumes that
-        ** start != null.
-        =========================================================================*/
+/*=========================================================================
+** PRIVATE Sets the IThreadable interface for the thread. Assumes that
+** start != null.
+=========================================================================*/
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void SetStart(Delegate start, int maxStackSize);
 
-        /*=========================================================================
-        ** Clean up the thread when it goes away.
-        =========================================================================*/
+/*=========================================================================
+** Clean up the thread when it goes away.
+=========================================================================*/
         [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         ~Thread()
@@ -1038,12 +1042,12 @@ namespace System.Threading
         public extern void DisableComObjectEagerCleanup();
 #endif //FEATURE_COMINTEROP
 
-        /*=========================================================================
-        ** Return whether or not this thread is a background thread.  Background
-        ** threads do not affect when the Execution Engine shuts down.
-        **
-        ** Exceptions: ThreadStateException if the thread is dead.
-        =========================================================================*/
+/*=========================================================================
+** Return whether or not this thread is a background thread.  Background
+** threads do not affect when the Execution Engine shuts down.
+**
+** Exceptions: ThreadStateException if the thread is dead.
+=========================================================================*/
         public bool IsBackground
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1067,10 +1071,10 @@ namespace System.Threading
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void SetBackgroundNative(bool isBackground);
 
-        /*=========================================================================
-        ** Return the thread state as a consistent set of bits.  This is more
-        ** general then IsAlive or IsBackground.
-        =========================================================================*/
+/*=========================================================================
+** Return the thread state as a consistent set of bits.  This is more
+** general then IsAlive or IsBackground.
+=========================================================================*/
         public ThreadState ThreadState
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1083,13 +1087,13 @@ namespace System.Threading
         private extern int GetThreadStateNative();
 
 #if FEATURE_COMINTEROP_APARTMENT_SUPPORT
-        /*=========================================================================
-        ** An unstarted thread can be marked to indicate that it will host a
-        ** single-threaded or multi-threaded apartment.
-        **
-        ** Exceptions: ArgumentException if state is not a valid apartment state
-        **             (ApartmentSTA or ApartmentMTA).
-        =========================================================================*/
+/*=========================================================================
+** An unstarted thread can be marked to indicate that it will host a
+** single-threaded or multi-threaded apartment.
+**
+** Exceptions: ArgumentException if state is not a valid apartment state
+**             (ApartmentSTA or ApartmentMTA).
+=========================================================================*/
         [Obsolete(
             "The ApartmentState property has been deprecated.  Use GetApartmentState, SetApartmentState or TrySetApartmentState instead.",
             false
@@ -1221,7 +1225,8 @@ namespace System.Threading
         }
 
         /*=========================================================================
-        ** Retrieves the value from the specified slot on the current thread, for that thread's current domain.
+        ** Retrieves the value from the specified slot on the current thread, for that thread's current
+        domain.
         =========================================================================*/
 #if !MONO
         [HostProtection(SharedState = true, ExternalThreading = true)]
@@ -1241,7 +1246,8 @@ namespace System.Threading
         }
 
         /*=========================================================================
-        ** Sets the data in the specified slot on the currently running thread, for that thread's current domain.
+        ** Sets the data in the specified slot on the currently running thread, for that thread's current
+        domain.
         =========================================================================*/
 #if !MONO
         [HostProtection(SharedState = true, ExternalThreading = true)]
@@ -1367,10 +1373,13 @@ namespace System.Threading
                 if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
                 {
                     //
-                    // NetCF had a bug where Thread.Current{UI}Culture would set the culture for every thread in the process.
-                    // This was because they stored the value in a regular static field (NetCF has no support for ThreadStatic fields).
+                    // NetCF had a bug where Thread.Current{UI}Culture would set the culture for every thread in the
+                    // process.
+                    // This was because they stored the value in a regular static field (NetCF has no support for
+                    // ThreadStatic fields).
                     // Some apps depend on the broken behavior. We will emulate this behavior by redirecting setters to
-                    // DefaultThreadCurrentUICulture. (Note that this property did not existed in NetCF and so it is fine to piggy back
+                    // DefaultThreadCurrentUICulture. (Note that this property did not existed in NetCF and so it is
+                    // fine to piggy back
                     // on it for the quirk.)
                     //
                     CultureInfo.SetCurrentUICultureQuirk(value);
@@ -1584,12 +1593,12 @@ namespace System.Threading
 
 #if !MONO
 
-        /*=============================================================*/
+/*=============================================================*/
 
-        /*======================================================================
-        **  Current thread context is stored in a slot in the thread local store
-        **  CurrentContext gets the Context from the slot.
-        ======================================================================*/
+/*======================================================================
+**  Current thread context is stored in a slot in the thread local store
+**  CurrentContext gets the Context from the slot.
+======================================================================*/
 #if FEATURE_REMOTING
         public static Context CurrentContext
         {
@@ -1682,9 +1691,9 @@ namespace System.Threading
         }
 #endif // FEATURE_REMOTING
 
-        /*======================================================================
-        ** Returns the current domain in which current thread is running.
-        ======================================================================*/
+/*======================================================================
+** Returns the current domain in which current thread is running.
+======================================================================*/
 
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
@@ -1715,9 +1724,9 @@ namespace System.Threading
             return ad;
         }
 
-        /*
-         *  This returns a unique id to identify an appdomain.
-         */
+/*
+*  This returns a unique id to identify an appdomain.
+*/
         public static int GetDomainID()
         {
             return GetDomain().GetId();
@@ -1780,9 +1789,9 @@ namespace System.Threading
             set { SetAbortReason(value); }
         }
 
-        /*
-         *  This marks the beginning of a critical code region.
-         */
+/*
+*  This marks the beginning of a critical code region.
+*/
         [System.Security.SecuritySafeCritical] // auto-generated
         [HostProtection(Synchronization = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -1790,9 +1799,9 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static extern void BeginCriticalRegion();
 
-        /*
-         *  This marks the end of a critical code region.
-         */
+/*
+*  This marks the end of a critical code region.
+*/
         [System.Security.SecuritySafeCritical] // auto-generated
         [HostProtection(Synchronization = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.None)]
@@ -1800,29 +1809,29 @@ namespace System.Threading
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public static extern void EndCriticalRegion();
 
-        /*
-         *  This marks the beginning of a code region that requires thread affinity.
-         */
+/*
+*  This marks the beginning of a code region that requires thread affinity.
+*/
         [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static extern void BeginThreadAffinity();
 
-        /*
-         *  This marks the end of a code region that requires thread affinity.
-         */
+/*
+*  This marks the end of a code region that requires thread affinity.
+*/
         [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public static extern void EndThreadAffinity();
 
-        /*=========================================================================
-        ** Volatile Read & Write and MemoryBarrier methods.
-        ** Provides the ability to read and write values ensuring that the values
-        ** are read/written each time they are accessed.
-        =========================================================================*/
+/*=========================================================================
+** Volatile Read & Write and MemoryBarrier methods.
+** Provides the ability to read and write values ensuring that the values
+** are read/written each time they are accessed.
+=========================================================================*/
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // disable optimizations
         public static byte VolatileRead(ref byte address)

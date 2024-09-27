@@ -9,10 +9,14 @@ namespace System.Workflow.ComponentModel.Serialization
     using System.ComponentModel.Design.Serialization;
     using System.Workflow.ComponentModel.Compiler;
 
-    // This serializer will serialize any ICollection<String> object into code statements that constructs the collection.
-    // The default serializer serializes the collection as resource because ICollection<String> is serializable.
-    // We originally add this serializer to deal with the SynchronizationHandles property on SynchronizationScopeActivity.
-    // It was a problem because this serializer will be invoked for any property of ICollection<String> type.  Now I've
+    // This serializer will serialize any ICollection<String> object into code statements that
+    // constructs the collection.
+    // The default serializer serializes the collection as resource because ICollection<String> is
+    // serializable.
+    // We originally add this serializer to deal with the SynchronizationHandles property on
+    // SynchronizationScopeActivity.
+    // It was a problem because this serializer will be invoked for any property of ICollection<String>
+    // type.  Now I've
     // made this generic enough to be used by any such properties.
     internal sealed class SynchronizationHandlesCodeDomSerializer : CodeDomSerializer
     {

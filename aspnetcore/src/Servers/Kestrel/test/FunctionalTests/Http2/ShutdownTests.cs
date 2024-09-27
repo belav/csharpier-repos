@@ -94,10 +94,15 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
             )
         )
         {
-            // HttpClient sends PING frames even if you disable them so that it can dynamically adjust the HTTP/2 window size.
-            // It sends 4 PINGs to do this, and they sent after receiving data, so we send and receive 5 times to make sure the PINGs are done.
+            // HttpClient sends PING frames even if you disable them so that it can dynamically adjust the
+            // HTTP/2 window size.
+            // It sends 4 PINGs to do this, and they sent after receiving data, so we send and receive 5 times
+            // to make sure the PINGs are done.
+            //
+            //
             // https://github.com/dotnet/runtime/blob/a590cb4cfb9f1a66c043476695fd0e79835842eb/src/libraries/System.Net.Http/src/System/Net/Http/SocketsHttpHandler/Http2StreamWindowManager.cs#L165
-            // We care because responding with a PING ack when the client is disposing can cause a ConnectionReset log instead of ConnectionReadFin
+            // We care because responding with a PING ack when the client is disposing can cause a
+            // ConnectionReset log instead of ConnectionReadFin
             // which would hang the test.
             for (var i = 0; i < 5; i++)
             {
@@ -238,8 +243,10 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
             Assert.False(requestTask.IsCompleted);
             await requestStarted.Task.DefaultTimeout();
 
-            // Wait for the graceful shutdown log before canceling the token passed to StopAsync and triggering an ungraceful shutdown.
-            // Otherwise, graceful shutdown might be skipped causing there to be no corresponding log. https://github.com/dotnet/aspnetcore/issues/6556
+            // Wait for the graceful shutdown log before canceling the token passed to StopAsync and triggering
+            // an ungraceful shutdown.
+            // Otherwise, graceful shutdown might be skipped causing there to be no corresponding log.
+            // https://github.com/dotnet/aspnetcore/issues/6556
             var closingMessageTask = WaitForLogMessage(m => m.Message.Contains("is closing."))
                 .DefaultTimeout();
 

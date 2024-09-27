@@ -476,7 +476,8 @@ namespace System.IdentityModel.Metadata
         )
         {
             //
-            // Extensibility point: Based on the xsiType, overriden implementations have the ability to read the RoleDescriptor
+            // Extensibility point: Based on the xsiType, overriden implementations have the ability to read the
+            // RoleDescriptor
             // attributes from a (##other) namespace and add the Role Descriptors to the entityDescriptor
             //
             if (reader == null)
@@ -497,7 +498,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">XML reader.</param>
         /// <returns>The display claim.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
-        /// <exception cref="MetadataSerializationException">Thrown if the XML is not well-formed.</exception>
+        /// <exception cref="MetadataSerializationException">Thrown if the XML is not
+        // well-formed.</exception>
         protected virtual DisplayClaim ReadDisplayClaim(XmlReader reader)
         {
             if (reader == null)
@@ -599,7 +601,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="tokenResolver">The security token resolver.</param>
         /// <returns>The entities descriptor.</returns>
         /// <exception cref="ArgumentNullException">The parameter reader is null.</exception>
-        /// <exception cref="MetadataSerializationException">Thrown if the XML is not well-formed.</exception>
+        /// <exception cref="MetadataSerializationException">Thrown if the XML is not
+        // well-formed.</exception>
         protected virtual EntitiesDescriptor ReadEntitiesDescriptor(
             XmlReader reader,
             SecurityTokenResolver tokenResolver
@@ -613,7 +616,8 @@ namespace System.IdentityModel.Metadata
             EntitiesDescriptor resultEntityGroup = CreateEntitiesDescriptorInstance();
 
             //
-            // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and tokenResolver
+            // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and
+            // tokenResolver
             //
             EnvelopedSignatureReader envelopeReader = new EnvelopedSignatureReader(
                 reader,
@@ -721,27 +725,32 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// Gets or sets the validation mode of the X509 certificate that is used to sign the metadata document.
+        /// Gets or sets the validation mode of the X509 certificate that is used to sign the metadata
+        // document.
         /// </summary>
         public X509CertificateValidationMode CertificateValidationMode { get; set; }
 
         /// <summary>
-        /// Gets or sets the revocation mode of the X509 certificate that is used to sign the metadata document.
+        /// Gets or sets the revocation mode of the X509 certificate that is used to sign the metadata
+        // document.
         /// </summary>
         public X509RevocationMode RevocationMode { get; set; }
 
         /// <summary>
-        /// Gets or sets the trusted store location of the X509 certificate that is used to sign the metadata document.
+        /// Gets or sets the trusted store location of the X509 certificate that is used to sign the
+        // metadata document.
         /// </summary>
         public StoreLocation TrustedStoreLocation { get; set; }
 
         /// <summary>
-        /// Gets or sets the certificate validator of the X509 certificate that is used to sign the metadata document.
+        /// Gets or sets the certificate validator of the X509 certificate that is used to sign the metadata
+        // document.
         /// </summary>
         public X509CertificateValidator CertificateValidator { get; set; }
 
         /// <summary>
-        /// Gets the list of trusted issuer that this serializer instance trusts to sign the metadata docuemnt.
+        /// Gets the list of trusted issuer that this serializer instance trusts to sign the metadata
+        // docuemnt.
         /// </summary>
         public List<string> TrustedIssuers
         {
@@ -751,8 +760,10 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Validates the signing credential of the metadata document.
         /// </summary>
-        /// <param name="signingCredentials">The signing credential used to sign the metadata document.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="signingCredentials"/> is null.</exception>
+        /// <param name="signingCredentials">The signing credential used to sign the metadata
+        // document.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="signingCredentials"/> is
+        // null.</exception>
         protected virtual void ValidateSigningCredential(SigningCredentials signingCredentials)
         {
             if (signingCredentials == null)
@@ -789,8 +800,10 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// Validates the certificate that signed the metadata document against the TrustedIssuers. This method is invoked by the ValidateSigningCredential method.
-        /// By default, this method does not perform any validation. Provide your own implementation to perform trusted issuer validation.
+        /// Validates the certificate that signed the metadata document against the TrustedIssuers. This
+        // method is invoked by the ValidateSigningCredential method.
+        /// By default, this method does not perform any validation. Provide your own implementation to
+        // perform trusted issuer validation.
         /// </summary>
         /// <param name="signingCertificate">The signing certificate.</param>
         protected virtual void ValidateIssuer(X509Certificate2 signingCertificate)
@@ -800,8 +813,10 @@ namespace System.IdentityModel.Metadata
 
         /// <summary>
         /// Gets the <see cref="X509Certificate2"/> instance created from the <paramref name="ski"/>.
-        /// By default, this method only supports <see cref="X509RawDataKeyIdentifierClause"/>. Override this method
-        /// to support other key identifier clauses. This method is invoked by the ValidateSigningCredential method.
+        /// By default, this method only supports <see cref="X509RawDataKeyIdentifierClause"/>. Override
+        // this method
+        /// to support other key identifier clauses. This method is invoked by the ValidateSigningCredential
+        // method.
         /// </summary>
         /// <param name="ski">The security key identifier instance.</param>
         /// <returns>An <see cref="X509Certificate2"/> instance.</returns>
@@ -845,7 +860,8 @@ namespace System.IdentityModel.Metadata
             EntityDescriptor resultEntity = CreateEntityDescriptorInstance();
 
             //
-            // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and tokenResolver
+            // There may be embedded signed XML elements. So we need to plumb the SecurityTokenSerializer and
+            // tokenResolver
             // IDFX
 
             EnvelopedSignatureReader reader = new EnvelopedSignatureReader(
@@ -1600,7 +1616,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <param name="tokenResolver">The security token resolver.</param>
         /// <returns>MetadataBase</returns>
-        /// <exception cref="ArgumentNullException">The parameter reader or tokenReolver is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter reader or tokenReolver is
+        // null.</exception>
         protected virtual MetadataBase ReadMetadataCore(
             XmlReader reader,
             SecurityTokenResolver tokenResolver
@@ -1810,7 +1827,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="reader">The xml reader</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.ProtocolsSupported is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // reader/roleDescriptor/roleDescriptor.ProtocolsSupported is null.</exception>
         protected virtual void ReadRoleDescriptorAttributes(
             XmlReader reader,
             RoleDescriptor roleDescriptor
@@ -1917,7 +1935,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
         /// <returns>True if read.</returns>
-        /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.Contacts/rolDescriptor.Keys is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // reader/roleDescriptor/roleDescriptor.Contacts/rolDescriptor.Keys is null.</exception>
         protected virtual bool ReadRoleDescriptorElement(
             XmlReader reader,
             RoleDescriptor roleDescriptor
@@ -2328,7 +2347,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="reader">The xml reader.</param>
         /// <param name="roleDescriptor">The web service descriptor.</param>
         /// <returns>True if read.</returns>
-        /// <exception cref="ArgumentNullException">The parameter reader/roleDescriptor/roleDescriptor.TargetScopes/roleDescriptor.TargetScopes/roleDescriptor.TokenTypesOffered
+        /// <exception cref="ArgumentNullException">The parameter
+        // reader/roleDescriptor/roleDescriptor.TargetScopes/roleDescriptor.TargetScopes/roleDescriptor.TokenTypesOffered
         /// is null.</exception>
         public virtual bool ReadWebServiceDescriptorElement(
             XmlReader reader,
@@ -2544,7 +2564,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="appService">The application service descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/appService/appService.Endpoint/aappService.PassiveRequestorEndpoints is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/appService/appService.Endpoint/aappService.PassiveRequestorEndpoints is null.</exception>
         protected virtual void WriteApplicationServiceDescriptor(
             XmlWriter writer,
             ApplicationServiceDescriptor appService
@@ -2631,7 +2652,9 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="contactPerson">The contact person.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/contactPerson/contactPerson.EmaillAddresses/contactPerson.TelephoneNumbers is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/contactPerson/contactPerson.EmaillAddresses/contactPerson.TelephoneNumbers is
+        // null.</exception>
         protected virtual void WriteContactPerson(XmlWriter writer, ContactPerson contactPerson)
         {
             if (writer == null)
@@ -2757,7 +2780,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="endpoint">The endpoint.</param>
         /// <param name="element">The xml qualified name element.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/endpoint/element is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter writer/endpoint/element is
+        // null.</exception>
         protected virtual void WriteProtocolEndpoint(
             XmlWriter writer,
             ProtocolEndpoint endpoint,
@@ -2909,7 +2933,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="inputWriter">The <see cref="XmlWriter"/> to use.</param>
         /// <param name="entitiesDescriptor">The entities descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter inputWriter/entitiesDescriptor/entitiesDescriptor.ChildEntities/entitiesDescriptor.ChildEntityGroups
+        /// <exception cref="ArgumentNullException">The parameter
+        // inputWriter/entitiesDescriptor/entitiesDescriptor.ChildEntities/entitiesDescriptor.ChildEntityGroups
         /// is null.</exception>
         protected virtual void WriteEntitiesDescriptor(
             XmlWriter inputWriter,
@@ -3038,7 +3063,9 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="inputWriter">The xml writer.</param>
         /// <param name="entityDescriptor">The entity descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter inputWriter/entityDescriptor/entityDescriptor.Contacts/entityDescriptor.RoleDescriptors is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // inputWriter/entityDescriptor/entityDescriptor.Contacts/entityDescriptor.RoleDescriptors is
+        // null.</exception>
         protected virtual void WriteEntityDescriptor(
             XmlWriter inputWriter,
             EntityDescriptor entityDescriptor
@@ -3186,7 +3213,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="identityProviderSingleSignOnDescriptor">The idpsso descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/idpssoDescriptor/idpssoDescriptor.SupportedAttributes/idpssoDescriptor.SingleSignOnServices
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/idpssoDescriptor/idpssoDescriptor.SupportedAttributes/idpssoDescriptor.SingleSignOnServices
         /// is null.</exception>
         protected virtual void WriteIdentityProviderSingleSignOnDescriptor(
             XmlWriter writer,
@@ -3297,7 +3325,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="indexedEP">The indexed endpoint.</param>
         /// <param name="element">The xml qualified element.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/indexedEP/element is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter writer/indexedEP/element is
+        // null.</exception>
         protected virtual void WriteIndexedProtocolEndpoint(
             XmlWriter writer,
             IndexedProtocolEndpoint indexedEP,
@@ -3493,7 +3522,8 @@ namespace System.IdentityModel.Metadata
         /// <param name="writer">The xml writer.</param>
         /// <param name="name">The localized name.</param>
         /// <param name="element">The xml qualified name.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/name/element/name.Name is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter writer/name/element/name.Name is
+        // null.</exception>
         protected virtual void WriteLocalizedName(
             XmlWriter writer,
             LocalizedName name,
@@ -3792,7 +3822,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/roleDescriptor/roleDescriptor.ProtocolsSupporeted is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/roleDescriptor/roleDescriptor.ProtocolsSupporeted is null.</exception>
         protected virtual void WriteRoleDescriptorAttributes(
             XmlWriter writer,
             RoleDescriptor roleDescriptor
@@ -3877,7 +3908,8 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="writer">The xml writer.</param>
         /// <param name="roleDescriptor">The role descriptor.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/roleDescriptor/roleDescriptor.Contacts/roleDescriptor.Keys is null.</exception>
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/roleDescriptor/roleDescriptor.Contacts/roleDescriptor.Keys is null.</exception>
         protected virtual void WriteRoleDescriptorElements(
             XmlWriter writer,
             RoleDescriptor roleDescriptor
@@ -3932,8 +3964,10 @@ namespace System.IdentityModel.Metadata
         /// Writes a security token service descriptor.
         /// </summary>
         /// <param name="writer">The xml writer.</param>
-        /// <param name="securityTokenServiceDescriptor">The <see cref="SecurityTokenServiceDescriptor"/>.</param>
-        /// <exception cref="ArgumentNullException">The parameter writer/securityTokenServiceDescriptor/securityTokenServiceDescriptor.Endpoint/
+        /// <param name="securityTokenServiceDescriptor">The <see
+        // cref="SecurityTokenServiceDescriptor"/>.</param>
+        /// <exception cref="ArgumentNullException">The parameter
+        // writer/securityTokenServiceDescriptor/securityTokenServiceDescriptor.Endpoint/
         /// securityTokenServiceDescriptor.PassiveRequestorEndpoints is null.</exception>
         protected virtual void WriteSecurityTokenServiceDescriptor(
             XmlWriter writer,

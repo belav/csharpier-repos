@@ -8,7 +8,8 @@ using Microsoft.Extensions.Internal;
 namespace Microsoft.Extensions.Logging
 {
     /// <summary>
-    /// Delegates to a new <see cref="ILogger"/> instance using the full name of the given type, created by the
+    /// Delegates to a new <see cref="ILogger"/> instance using the full name of the given type, created
+    // by the
     /// provided <see cref="ILoggerFactory"/>.
     /// </summary>
     /// <typeparam name="T">The type.</typeparam>

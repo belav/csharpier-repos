@@ -460,7 +460,8 @@ namespace System.Speech.Internal.SrgsCompiler
             int ullStartOffset = (int)pFH.pszWords;
 
             //Check the word offset
-            //See stringblob implementation. pFH.cchWords * sizeof(WCHAR) isn't exactly the serialized size, but it is close and must be less than the serialized size
+            //See stringblob implementation. pFH.cchWords * sizeof(WCHAR) isn't exactly the serialized size, but
+            // it is close and must be less than the serialized size
             CheckSetOffsets(
                 pFH.pszWords,
                 pFH.cchWords * Helpers._sizeOfChar,

@@ -12,10 +12,10 @@ namespace Bug
             }
         }
 
-        /*internal static partial class Bar
-        {
-            internal static bool A () { return true; }
-        }*/
+/*internal static partial class Bar
+{
+internal static bool A () { return true; }
+}*/
     }
 
     partial class GL
@@ -28,8 +28,8 @@ namespace Bug
 
         internal partial class Core { }
 
-        /*partial class Bar
-        {
-        }*/
+/*partial class Bar
+{
+}*/
     }
 }

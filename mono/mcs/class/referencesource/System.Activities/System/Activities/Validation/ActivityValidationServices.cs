@@ -199,7 +199,8 @@ namespace System.Activities.Validation
                                     );
                                 }
                             }
-                            // The ValidateArguments will validate Required in-args and hence not duplicating that validation if the key is not found.
+                            // The ValidateArguments will validate Required in-args and hence not duplicating that validation if
+                            // the key is not found.
 
                             break;
                         }
@@ -747,8 +748,10 @@ namespace System.Activities.Validation
                         if (childActivity.Activity.HasNonEmptySubtree)
                         {
                             this.expressionRoot = childActivity.Activity;
-                            // Back-compat: In Dev10 we always used ProcessActivityTreeOptions.FullCachingOptions here, and ignored this.options.
-                            // So we need to continue to do that, unless the new Dev11 flag SkipRootConfigurationValidation is passed.
+                            // Back-compat: In Dev10 we always used ProcessActivityTreeOptions.FullCachingOptions here, and
+                            // ignored this.options.
+                            // So we need to continue to do that, unless the new Dev11 flag SkipRootConfigurationValidation is
+                            // passed.
                             ProcessActivityTreeOptions options =
                                 this.options.SkipRootConfigurationValidation
                                     ? this.options

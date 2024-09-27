@@ -133,17 +133,17 @@ namespace MonoTests.System.Resources.Tools
         [Test]
         public void ResourceNamesDuplicate_NETBUG()
         {
-            /*
-             * DUPES CHECK HAPPENS AFTER VerifyResourceName called which changed eg.
-             *   language keywords have _ appended to start
-             *   string.emtpy converted to _
-             *   various chars replaced
-             * .net inconsistency:
-             * if keys contain multiple single char names made up of invalid chars
-             * which are converted to _, sometimes none are used and all are returned
-             * in unmatchables, while other times one is used, and other times
-             * none are used but one is still missing from unmatchables like in this case
-            */
+/*
+* DUPES CHECK HAPPENS AFTER VerifyResourceName called which changed eg.
+*   language keywords have _ appended to start
+*   string.emtpy converted to _
+*   various chars replaced
+* .net inconsistency:
+* if keys contain multiple single char names made up of invalid chars
+* which are converted to _, sometimes none are used and all are returned
+* in unmatchables, while other times one is used, and other times
+* none are used but one is still missing from unmatchables like in this case
+*/
             Dictionary<string, object> testResources = new Dictionary<string, object>();
             string[] unmatchables;
 
@@ -176,12 +176,12 @@ namespace MonoTests.System.Resources.Tools
         [Test]
         public void ResourceNamesDuplicate()
         {
-            /*
-             * DUPES CHECK HAPPENS AFTER VerifyResourceName called which changed eg.
-             *   language keywords have _ appended to start
-             *   string.emtpy converted to _
-             *   various chars replaced
-            */
+/*
+* DUPES CHECK HAPPENS AFTER VerifyResourceName called which changed eg.
+*   language keywords have _ appended to start
+*   string.emtpy converted to _
+*   various chars replaced
+*/
             Dictionary<string, object> testResources = new Dictionary<string, object>();
             string[] unmatchables;
 

@@ -146,7 +146,7 @@ namespace MonoTests.System.Web.UI.WebControls
             }
         }
 
-        /* Segfaults on ms runtime */
+/* Segfaults on ms runtime */
         [Test]
         public void Render()
         {

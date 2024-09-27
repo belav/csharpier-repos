@@ -1256,10 +1256,14 @@ namespace System.Xml.Tests
             return TEST_FAIL;
         }
 
-        //[Variation("ReadContentAsBinHex on an xmlns attribute", Param = "<foo xmlns='default'> <bar > id='1'/> </foo>")]
-        //[Variation("ReadContentAsBinHex on an xmlns:k attribute", Param = "<k:foo xmlns:k='default'> <k:bar id='1'/> </k:foo>")]
-        //[Variation("ReadContentAsBinHex on an xml:space attribute", Param = "<foo xml:space='default'> <bar > id='1'/> </foo>")]
-        //[Variation("ReadContentAsBinHex on an xml:lang attribute", Param = "<foo xml:lang='default'> <bar > id='1'/> </foo>")]
+        //[Variation("ReadContentAsBinHex on an xmlns attribute", Param = "<foo xmlns='default'> <bar >
+        // id='1'/> </foo>")]
+        //[Variation("ReadContentAsBinHex on an xmlns:k attribute", Param = "<k:foo xmlns:k='default'>
+        // <k:bar id='1'/> </k:foo>")]
+        //[Variation("ReadContentAsBinHex on an xml:space attribute", Param = "<foo xml:space='default'>
+        // <bar > id='1'/> </foo>")]
+        //[Variation("ReadContentAsBinHex on an xml:lang attribute", Param = "<foo xml:lang='default'> <bar
+        // > id='1'/> </foo>")]
         public int TestBinHex_34()
         {
             string xml = (string)CurVariation.Param;

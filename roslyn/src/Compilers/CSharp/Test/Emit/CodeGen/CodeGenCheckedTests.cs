@@ -2460,19 +2460,22 @@ class Program
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
                 // (9,81): error CS0220: The operation overflows at compile time in checked mode
-                //         d1 = unchecked(delegate (int i) { r1 = int.MaxValue + 1; return checked(int.MaxValue + 1); });
+                //         d1 = unchecked(delegate (int i) { r1 = int.MaxValue + 1; return checked(int.MaxValue +
+                // 1); });
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (11,45): error CS0220: The operation overflows at compile time in checked mode
                 //         d1 = unchecked(i => 0 + 0 + checked(int.MaxValue + 1));
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (12,86): error CS0220: The operation overflows at compile time in checked mode
-                //         d1 = unchecked(d1 = delegate (int i) { r1 = int.MaxValue + 1; return checked(int.MaxValue + 1); });
+                //         d1 = unchecked(d1 = delegate (int i) { r1 = int.MaxValue + 1; return checked(int.MaxValue
+                // + 1); });
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (14,50): error CS0220: The operation overflows at compile time in checked mode
                 //         d1 = unchecked(d1 = i => 0 + 0 + checked(int.MaxValue + 1));
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (15,88): error CS0220: The operation overflows at compile time in checked mode
-                //         d1 = unchecked(new D1(delegate (int i) { r1 = int.MaxValue + 1; return checked(int.MaxValue + 1); }));
+                //         d1 = unchecked(new D1(delegate (int i) { r1 = int.MaxValue + 1; return
+                // checked(int.MaxValue + 1); }));
                 Diagnostic(ErrorCode.ERR_CheckedOverflow, "int.MaxValue + 1"),
                 // (17,52): error CS0220: The operation overflows at compile time in checked mode
                 //         d1 = unchecked(new D1(i => 0 + 0 + checked(int.MaxValue + 1)));

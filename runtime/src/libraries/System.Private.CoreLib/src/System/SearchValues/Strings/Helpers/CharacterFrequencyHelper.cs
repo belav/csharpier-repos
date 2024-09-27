@@ -8,6 +8,7 @@ namespace System.Buffers
     internal static class CharacterFrequencyHelper
     {
         // Same as RegexPrefixAnalyzer.Frequency.
+        //
         // https://github.com/dotnet/runtime/blob/a355d5f7db162714ee19533ca55074aa2cbd8a8c/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexPrefixAnalyzer.cs#L956C43-L956C53
         public static ReadOnlySpan<float> AsciiFrequency =>
             [

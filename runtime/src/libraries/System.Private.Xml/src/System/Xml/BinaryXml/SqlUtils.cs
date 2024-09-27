@@ -748,7 +748,8 @@ namespace System.Xml
             long timeTicks = GetKatmaiTimeTicks(data, ref offset);
             long dateTicks = GetKatmaiDateTicks(data, ref offset);
             long zoneTicks = GetKatmaiTimeZoneTicks(data, offset);
-            // The DATETIMEOFFSET values are serialized in UTC, but DateTimeOffset takes adjusted time -> we need to add zoneTicks
+            // The DATETIMEOFFSET values are serialized in UTC, but DateTimeOffset takes adjusted time -> we
+            // need to add zoneTicks
             DateTimeOffset dto = new DateTimeOffset(
                 dateTicks + timeTicks + zoneTicks,
                 new TimeSpan(zoneTicks)

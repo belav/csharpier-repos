@@ -171,7 +171,8 @@ namespace System.Web.DynamicData.ModelProviders
         public virtual bool IsCustomProperty { get; protected set; }
 
         /// <summary>
-        /// If the column represents and association with anther table, this returns the association information.
+        /// If the column represents and association with anther table, this returns the association
+        // information.
         /// Otherwise, null is returned.
         /// </summary>
         public virtual AssociationProvider Association { get; protected set; }

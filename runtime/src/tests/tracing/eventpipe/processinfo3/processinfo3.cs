@@ -82,8 +82,10 @@ namespace Tracing.Tests.ProcessInfoValidation
 
             string normalizedCommandLine = sb.ToString().Trim();
 
-            // Tests are run out of /tmp on Mac and linux, but on Mac /tmp is actually a symlink that points to /private/tmp.
-            // This isn't represented in the output from FileInfo.FullName unfortunately, so we'll fake that completion in that case.
+            // Tests are run out of /tmp on Mac and linux, but on Mac /tmp is actually a symlink that points to
+            // /private/tmp.
+            // This isn't represented in the output from FileInfo.FullName unfortunately, so we'll fake that
+            // completion in that case.
             if (
                 RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
                 && normalizedCommandLine.StartsWith("/tmp/")
@@ -193,7 +195,8 @@ namespace Tracing.Tests.ProcessInfoValidation
                 && !OperatingSystem.IsTvOS()
             )
             {
-                // The following logic is tailored to this specific test where the cmdline _should_ look like the following:
+                // The following logic is tailored to this specific test where the cmdline _should_ look like the
+                // following:
                 // /path/to/corerun /path/to/processinfo.dll
                 // or
                 // "C:\path\to\CoreRun.exe" C:\path\to\processinfo.dll

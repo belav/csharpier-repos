@@ -12,26 +12,34 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Scalar properties use the derived class <see cref="PropertyEntry" />, reference navigation
-///         properties use the derived class <see cref="ReferenceEntry" />, and collection navigation
+///         Scalar properties use the derived class <see cref="PropertyEntry" />, reference
+// navigation
+///         properties use the derived class <see cref="ReferenceEntry" />, and collection
+// navigation
 ///         properties use the derived class <see cref="CollectionEntry" />.
 ///     </para>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ChangeTracker" /> API and it is
+///         Instances of this class are returned from methods when using the <see
+// cref="ChangeTracker" /> API and it is
 ///         not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+// EF Core</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
 public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected MemberEntry(InternalEntityEntry internalEntry, IPropertyBase metadata)
@@ -41,10 +49,14 @@ public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalEntityEntry InternalEntry { get; }
@@ -62,24 +74,29 @@ public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
     ///         be updated in the database  when <see cref="DbContext.SaveChanges()" /> is called.
     ///     </para>
     ///     <para>
-    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///         See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in
+    // EF Core</see> for more information and
     ///         examples.
     ///     </para>
     /// </remarks>
     public abstract bool IsModified { get; set; }
 
     /// <summary>
-    ///     Gets the metadata that describes the facets of this property and how it maps to the database.
+    ///     Gets the metadata that describes the facets of this property and how it maps to the
+    // database.
     /// </summary>
     public virtual IPropertyBase Metadata { get; }
 
     /// <summary>
-    ///     Gets or sets the value currently assigned to this property. If the current value is set using this property,
-    ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is not required
+    ///     Gets or sets the value currently assigned to this property. If the current value is set
+    // using this property,
+    ///     the change tracker is aware of the change and <see cref="ChangeTracker.DetectChanges" /> is
+    // not required
     ///     for the context to detect the change.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     public virtual object? CurrentValue
@@ -92,17 +109,22 @@ public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
     ///     The <see cref="EntityEntry" /> to which this member belongs.
     /// </summary>
     /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF Core</see> for more information and
+    ///     See <see href="https://aka.ms/efcore-docs-entity-entries">Accessing tracked entities in EF
+    // Core</see> for more information and
     ///     examples.
     /// </remarks>
     /// <value> An entry for the entity that owns this member. </value>
     public virtual EntityEntry EntityEntry => new(InternalEntry);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     InternalEntityEntry IInfrastructure<InternalEntityEntry>.Instance => InternalEntry;
@@ -120,7 +142,8 @@ public abstract class MemberEntry : IInfrastructure<InternalEntityEntry>
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public override bool Equals(object? obj) => base.Equals(obj);
 

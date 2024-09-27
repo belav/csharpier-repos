@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     A convention that configures the properties of non-nullable types as required.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class NonNullableReferencePropertyConvention
     : NonNullableConventionBase,
@@ -44,7 +45,8 @@ public class NonNullableReferencePropertyConvention
                 propertyBuilder.IsRequired(true);
             }
 
-            // If there's an element type, this is a primitive collection; check and apply the element's nullability as well.
+            // If there's an element type, this is a primitive collection; check and apply the element's
+            // nullability as well.
             if (
                 propertyBuilder.Metadata.GetElementType() is IConventionElementType elementType
                 && nullabilityInfo

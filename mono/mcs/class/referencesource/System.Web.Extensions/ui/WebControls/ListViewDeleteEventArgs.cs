@@ -23,7 +23,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets the int argument to the command posted to the <see cref='System.Web.UI.WebControls.ListView'/>. This property is read-only.</para>
+        /// <para>Gets the int argument to the command posted to the <see
+        // cref='System.Web.UI.WebControls.ListView'/>. This property is read-only.</para>
         /// </devdoc>
         public int ItemIndex
         {
@@ -46,7 +47,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is read-only.</para>
+        /// <para>Gets a OrderedDictionary to populate with updated row values.  This property is
+        // read-only.</para>
         /// </devdoc>
         public IOrderedDictionary Values
         {

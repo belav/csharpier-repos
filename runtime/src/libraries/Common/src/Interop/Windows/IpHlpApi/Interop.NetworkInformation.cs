@@ -191,9 +191,9 @@ internal static partial class Interop
             internal uint dhcpv6ClientDuidLength;
             internal uint dhcpV6Iaid;
 
-            /* Windows 2008 +
-                  PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
-             * */
+/* Windows 2008 +
+PIP_ADAPTER_DNS_SUFFIX             FirstDnsSuffix;
+* */
         }
 
         internal enum InterfaceConnectionType : int

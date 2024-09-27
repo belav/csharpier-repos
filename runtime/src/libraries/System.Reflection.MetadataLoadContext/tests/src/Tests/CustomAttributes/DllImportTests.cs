@@ -240,7 +240,8 @@ namespace System.Reflection.Tests
             Assert.Equal(m1.ArraySubType, m2.ArraySubType);
             Assert.Equal(m1.IidParameterIndex, m2.IidParameterIndex);
             Assert.Equal(m1.MarshalCookie, m2.MarshalCookie);
-            // The assembly identity of the serialized marshal type depends on which contracts the test assembly is built against.
+            // The assembly identity of the serialized marshal type depends on which contracts the test assembly
+            // is built against.
             Assert.Equal(
                 m1.MarshalType.RemoveAssemblyQualification(),
                 m2.MarshalType.RemoveAssemblyQualification()

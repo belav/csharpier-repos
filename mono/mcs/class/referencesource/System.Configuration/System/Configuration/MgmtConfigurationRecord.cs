@@ -2031,7 +2031,8 @@ namespace System.Configuration
                             // 1. The section should not be declared at this level.  Reasons:
                             //      i. The section is originally not declared at this level, or
                             //      ii. The user calls SectionInformation.ForceDeclaration(false)
-                            // 2. It's not machine.config.  Otherwise we must declare it even if the user called ForceDeclaration(false)
+                            // 2. It's not machine.config.  Otherwise we must declare it even if the user called
+                            // ForceDeclaration(false)
                             // 3. It's already declared higher up.
                             // 4. It's not valid in the current Target Framework version
                             if (
@@ -2188,7 +2189,8 @@ namespace System.Configuration
 
                     // Add this section declaration if:
                     // 1. The section is not declared locally (otherwise it's handled above)
-                    // 2. SectionInformation.IsDeclared is true (i.e. user called SectionInformation.ForceDeclaration(true))
+                    // 2. SectionInformation.IsDeclared is true (i.e. user called
+                    // SectionInformation.ForceDeclaration(true))
                     if (configSection.SectionInformation.IsDeclared)
                     {
                         Debug.Assert(
@@ -2281,7 +2283,8 @@ namespace System.Configuration
 
             // We will use IsSameForLocation tag so that we flag modes that cant go into the same location tag
             // as different. If we don't do that it will appear like the mode was not changed which will
-            // case conflict later when determining if the section is moved ( when writing the new config updates )
+            // case conflict later when determining if the section is moved ( when writing the new config
+            // updates )
 
             return (
                     !OverrideModeSetting.CanUseSameLocationTag(
@@ -2458,8 +2461,10 @@ namespace System.Configuration
                                     // Note: we won't use RawXml if saveMode == Full because Full means we want to
                                     // write all properties, and RawXml may not have all properties.
 
-                                    // 'System.Windows.Forms.ApplicationConfiguration' is declared as an implicit section. Saving this section definition without declaration in machine .config file is causing IIS
-                                    // and "wcfservice' project creation failed. See bug #297811 for more details. Following fix exclude this section empty definition in the machine.config while saving it.
+                                    // 'System.Windows.Forms.ApplicationConfiguration' is declared as an implicit section. Saving this
+                                    // section definition without declaration in machine .config file is causing IIS
+                                    // and "wcfservice' project creation failed. See bug #297811 for more details. Following fix exclude
+                                    // this section empty definition in the machine.config while saving it.
                                     if (
                                         String.Equals(
                                             configSection.SectionInformation.Name,
@@ -2565,7 +2570,8 @@ namespace System.Configuration
                                             );
 
                                             // VsWhidbey 495120: The config host is responsible for encrypting a section, but it is the job of
-                                            // System.Configuration to format an encrypted section during write (and to detect an encrypted section during read.)
+                                            // System.Configuration to format an encrypted section during write (and to detect an encrypted
+                                            // section during read.)
                                             updatedXml =
                                                 ProtectedConfigurationSection.FormatEncryptedSection(
                                                     encryptedSection,

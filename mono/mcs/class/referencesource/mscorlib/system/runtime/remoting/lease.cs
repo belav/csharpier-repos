@@ -305,7 +305,8 @@ namespace System.Runtime.Remoting.Lifetime
             return sponsorId;
         }
 
-        // Convert from the local representative of the sponsor to either the MarshalByRefObject or local object
+        // Convert from the local representative of the sponsor to either the MarshalByRefObject or local
+        // object
         [System.Security.SecurityCritical] // auto-generated
         private ISponsor GetSponsorFromId(Object sponsorId)
         {
@@ -688,7 +689,8 @@ namespace System.Runtime.Remoting.Lifetime
                 leaseTime = renewTime;
                 state = LeaseState.Active;
             }
-            //BCLDebug.Trace("REMOTE","Lease ",id," AddTime renewalSpan ",renewalSpan," current Time ",now," old leaseTime ",oldLeaseTime," new leaseTime ",leaseTime," state ",((Enum)state).ToString());
+            //BCLDebug.Trace("REMOTE","Lease ",id," AddTime renewalSpan ",renewalSpan," current Time ",now," old
+            // leaseTime ",oldLeaseTime," new leaseTime ",leaseTime," state ",((Enum)state).ToString());
         }
 
         [Serializable]

@@ -31,7 +31,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="namespaceName">namespace of the entity type</param>
         /// <param name="version">version of the entity type</param>
         /// <param name="dataSpace">dataspace in which the EntityType belongs to</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version
+        // arguments are null</exception>
         internal EntityType(string name, string namespaceName, DataSpace dataSpace)
             : base(name, namespaceName, dataSpace) { }
 
@@ -41,7 +42,8 @@ namespace System.Data.Metadata.Edm
         /// <param name="dataSpace">dataspace in which the EntityType belongs to</param>
         /// <param name="members">members of the entity type [property and navigational property]</param>
         /// <param name="keyMemberNames">key members for the type</param>
-        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version arguments are null</exception>
+        /// <exception cref="System.ArgumentNullException">Thrown if either name, namespace or version
+        // arguments are null</exception>
         internal EntityType(
             string name,
             string namespaceName,
@@ -59,7 +61,8 @@ namespace System.Data.Metadata.Edm
             //--- second add the key members
             if (null != keyMemberNames)
             {
-                //Validation should make sure that base type of this type does not have keymembers when this type has keymembers.
+                //Validation should make sure that base type of this type does not have keymembers when this type
+                // has keymembers.
                 CheckAndAddKeyMembers(keyMemberNames);
             }
         }
@@ -336,7 +339,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Creates an SHA256 hash of a description of all the metadata relevant to the creation of a proxy type
+        /// Creates an SHA256 hash of a description of all the metadata relevant to the creation of a proxy
+        // type
         /// for this entity type.
         /// </summary>
         private string BuildEntityTypeHash()

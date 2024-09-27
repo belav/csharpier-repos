@@ -542,7 +542,8 @@ static unsafe class C
     }
 }
 ";
-            // PEVerify: [ : C::Main][mdToken=0x6000002][offset 0x00000002][found Native Int][expected unmanaged pointer] Unexpected type on the stack.
+            // PEVerify: [ : C::Main][mdToken=0x6000002][offset 0x00000002][found Native Int][expected unmanaged
+            // pointer] Unexpected type on the stack.
             CompileAndVerify(
                     text,
                     parseOptions: TestOptions.Regular.WithLanguageVersion(

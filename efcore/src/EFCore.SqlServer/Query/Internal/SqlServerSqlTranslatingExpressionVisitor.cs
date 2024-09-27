@@ -10,10 +10,14 @@ using ExpressionExtensions = Microsoft.EntityFrameworkCore.Query.ExpressionExten
 namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExpressionVisitor
 {
@@ -67,10 +71,14 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     private const string LikeEscapeString = "\\";
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public SqlServerSqlTranslatingExpressionVisitor(
         RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
@@ -84,10 +92,14 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitBinary(BinaryExpression binaryExpression)
     {
@@ -135,10 +147,14 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitUnary(UnaryExpression unaryExpression)
     {
@@ -172,10 +188,14 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
@@ -269,7 +289,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
             {
                 case SqlConstantExpression patternConstant:
                 {
-                    // The pattern is constant. Aside from null and empty string, we escape all special characters (%, _, \) and send a
+                    // The pattern is constant. Aside from null and empty string, we escape all special characters (%,
+                    // _, \) and send a
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
@@ -278,9 +299,11 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                             _sqlExpressionFactory.Constant(null, stringTypeMapping)
                         ),
 
-                        // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for empty patterns.
+                        // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for
+                        // empty patterns.
                         // Return % which always matches instead.
-                        // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
+                        // Note that we don't just return a true constant, since null strings shouldn't match even an empty
+                        // string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
                         "" => _sqlExpressionFactory.Like(
                             translatedInstance,
@@ -339,7 +362,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                         StringComparison.Ordinal
                     ):
                 {
-                    // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE pattern, where
+                    // The pattern is a parameter, register a runtime parameter that will contain the rewritten LIKE
+                    // pattern, where
                     // all special characters have been escaped.
                     var lambda = Expression.Lambda(
                         Expression.Call(
@@ -370,14 +394,17 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
                 }
 
                 default:
-                    // The pattern is a column or a complex expression; the possible special characters in the pattern cannot be escaped,
+                    // The pattern is a column or a complex expression; the possible special characters in the pattern
+                    // cannot be escaped,
                     // preventing us from translating to LIKE.
                     translation = methodType switch
                     {
                         // For StartsWith/EndsWith, use LEFT or RIGHT instead to extract substring and compare:
                         // WHERE instance IS NOT NULL AND pattern IS NOT NULL AND LEFT(instance, LEN(pattern)) = pattern
-                        // This is less efficient than LIKE (i.e. StartsWith does an index scan instead of seek), but we have no choice.
-                        // Note that we compensate for the case where both the instance and the pattern are null (null.StartsWith(null)); a
+                        // This is less efficient than LIKE (i.e. StartsWith does an index scan instead of seek), but we
+                        // have no choice.
+                        // Note that we compensate for the case where both the instance and the pattern are null
+                        // (null.StartsWith(null)); a
                         // simple equality would yield true in that case, but we want false. We technically
                         StartsEndsWithContains.StartsWith or StartsEndsWithContains.EndsWith =>
                             _sqlExpressionFactory.AndAlso(
@@ -455,7 +482,8 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
         {
             null => null,
 
-            // In .NET, all strings start/end with the empty string, but SQL LIKE return false for empty patterns.
+            // In .NET, all strings start/end with the empty string, but SQL LIKE return false for empty
+            // patterns.
             // Return % which always matches instead.
             "" => "%",
 
@@ -478,18 +506,26 @@ public class SqlServerSqlTranslatingExpressionVisitor : RelationalSqlTranslating
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     private static bool IsLikeWildChar(char c) => c is '%' or '_' or '['; // See https://docs.microsoft.com/en-us/sql/t-sql/language-elements/like-transact-sql
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     private static string EscapeLikePattern(string pattern)
     {

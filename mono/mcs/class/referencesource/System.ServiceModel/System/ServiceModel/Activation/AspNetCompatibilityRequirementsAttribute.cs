@@ -14,7 +14,8 @@ namespace System.ServiceModel.Activation
     public sealed class AspNetCompatibilityRequirementsAttribute : Attribute, IServiceBehavior
     {
         // AppCompat: The default has been changed in 4.5 to Allowed so that fewer people need to change it.
-        // For deployment compat purposes, apps targeting 4.0 should behave the same as if 4.5 was not installed.
+        // For deployment compat purposes, apps targeting 4.0 should behave the same as if 4.5 was not
+        // installed.
         AspNetCompatibilityRequirementsMode requirementsMode =
             OSEnvironmentHelper.IsApplicationTargeting45
                 ? AspNetCompatibilityRequirementsMode.Allowed

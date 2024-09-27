@@ -45,7 +45,8 @@ public class TestStructs
         public int f; // Overlaps with c in CastFromStruct
     }
 
-    // our src local var has to be an implicit byref, otherwise we won't try to recover struct handle from it.
+    // our src local var has to be an implicit byref, otherwise we won't try to recover struct handle
+    // from it.
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void UnsafeCastFromAPrimitiveStructFieldToStruct(
         CastFromStruct20 impByRefStruct20,

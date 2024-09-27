@@ -12,8 +12,10 @@ public class Runtime_70466
         Problem(1, 0);
     }
 
-    // This method is carefully crafted such that we end up with an unused ARR_ADDR node by rationalization
-    // time, of which the child operand will need to be explicitly marked "unused value" for LIR purposes.
+    // This method is carefully crafted such that we end up with an unused ARR_ADDR node by
+    // rationalization
+    // time, of which the child operand will need to be explicitly marked "unused value" for LIR
+    // purposes.
     //
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static void Problem(byte b, int idx)

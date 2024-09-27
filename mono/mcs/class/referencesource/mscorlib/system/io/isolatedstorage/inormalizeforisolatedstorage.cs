@@ -4,21 +4,21 @@
 //
 // ==--==
 /*============================================================
- *
- * Class:  INormalizeForIsolatedStorage
+*
+* Class:  INormalizeForIsolatedStorage
 //
 // <OWNER>kimhamil</OWNER>
- *
- * <EMAIL>Author: Shajan Dasan</EMAIL>
- *
- * Purpose: Evidence types can optionaly implement this interface.
- *          IsolatedStorage calls Normalize method before evidence
- *          is serialized. The Normalize method should return a copy
- *          of the evidence instance if any of it's fields is changed.
- *
- * Date:  Oct 17, 2000
- *
- ===========================================================*/
+*
+* <EMAIL>Author: Shajan Dasan</EMAIL>
+*
+* Purpose: Evidence types can optionaly implement this interface.
+*          IsolatedStorage calls Normalize method before evidence
+*          is serialized. The Normalize method should return a copy
+*          of the evidence instance if any of it's fields is changed.
+*
+* Date:  Oct 17, 2000
+*
+===========================================================*/
 namespace System.IO.IsolatedStorage
 {
     using System;

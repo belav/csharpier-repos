@@ -4,7 +4,7 @@ using System.Threading;
 
 class T
 {
-    /* each thread will create n domains */
+/* each thread will create n domains */
     static int threads = 5;
     static int domains = 100;
     static int allocs = 1000;

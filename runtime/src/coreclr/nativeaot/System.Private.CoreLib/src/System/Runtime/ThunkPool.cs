@@ -11,8 +11,10 @@
 //         The first data value is called the thunk's 'context', and the second value is
 //         the thunk's jump target typically.
 //
-// Without FEATURE_RX_THUNKS, thunks are allocated by mapping a thunks template into memory. The template
-// consists of a number of pairs of sections called thunk blocks (typically 8 pairs per mapping). Each pair
+// Without FEATURE_RX_THUNKS, thunks are allocated by mapping a thunks template into memory. The
+// template
+// consists of a number of pairs of sections called thunk blocks (typically 8 pairs per mapping).
+// Each pair
 // has 2 page-long sections (4096 bytes):
 //      1- The first section has RX permissions, and contains the thunk stubs (lea's + jmp's),
 //         and the thunk common stubs.
@@ -20,18 +22,25 @@
 //         The last pointer-sized block in this section is special: it stores the address of
 //         the common stub that each thunk stub will jump to (the jump instruction in each thunk
 //         jumps to the address stored in that block). Therefore, whenever a new thunks template
-//         gets mapped into memory, the value of that last pointer cell in the data section is updated
+//         gets mapped into memory, the value of that last pointer cell in the data section is
+// updated
 //         to the common stub address passed in by the caller
 //
-// With FEATURE_RX_THUNKS, thunks are created by allocating new virtual memory space, where the first half of
-// that space is filled with thunk stubs, and gets RX permissions, and the second half is for the thunks data,
+// With FEATURE_RX_THUNKS, thunks are created by allocating new virtual memory space, where the
+// first half of
+// that space is filled with thunk stubs, and gets RX permissions, and the second half is for the
+// thunks data,
 // and gets RW permissions. The thunk stubs and data blocks are not grouped in pairs:
-// all the thunk stubs blocks are groupped at the beginning of the allocated virtual memory space, and all the
+// all the thunk stubs blocks are groupped at the beginning of the allocated virtual memory space,
+// and all the
 // thunk data blocks are groupped in the second half of the virtual space.
 //
-// Available thunks are tracked using a linked list. The first cell in the data block of each thunk is
-// used as the nodes of the linked list. The cell will point to the data block of the next available thunk,
-// if one is available, or point to null. When thunks are freed, they are added to the beginning of the list.
+// Available thunks are tracked using a linked list. The first cell in the data block of each thunk
+// is
+// used as the nodes of the linked list. The cell will point to the data block of the next available
+// thunk,
+// if one is available, or point to null. When thunks are freed, they are added to the beginning of
+// the list.
 //
 
 using System.Diagnostics;
@@ -98,10 +107,12 @@ namespace System.Runtime
             {
                 IntPtr thunkDataBlock = RuntimeImports.RhpGetThunkDataBlockAddress(thunkStubsBlock);
 
-                // Address of the first thunk data cell should be at the beginning of the thunks data block (page-aligned)
+                // Address of the first thunk data cell should be at the beginning of the thunks data block
+                // (page-aligned)
                 Debug.Assert(((nuint)(nint)thunkDataBlock % Constants.ThunkBlockSize) == 0);
 
-                // Update the last pointer value in the thunks data section with the value of the common stub address
+                // Update the last pointer value in the thunks data section with the value of the common stub
+                // address
                 *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) =
                     commonStubAddress;
                 Debug.Assert(
@@ -160,10 +171,12 @@ namespace System.Runtime
             {
                 IntPtr thunkDataBlock = RuntimeImports.RhpGetThunkDataBlockAddress(thunkStubsBlock);
 
-                // Address of the first thunk data cell should be at the beginning of the thunks data block (page-aligned)
+                // Address of the first thunk data cell should be at the beginning of the thunks data block
+                // (page-aligned)
                 Debug.Assert(((nuint)(nint)thunkDataBlock % Constants.ThunkBlockSize) == 0);
 
-                // Update the last pointer value in the thunks data section with the value of the common stub address
+                // Update the last pointer value in the thunks data section with the value of the common stub
+                // address
                 *(IntPtr*)(thunkDataBlock + (int)(Constants.ThunkBlockSize - IntPtr.Size)) =
                     _commonStubAddress;
                 Debug.Assert(
@@ -397,7 +410,8 @@ namespace System.Runtime
                 }
 
                 // Each mapping consists of multiple blocks of thunk stubs/data pairs. Keep track of those
-                // so that we do not create a new mapping until all blocks in the sections we just mapped are consumed
+                // so that we do not create a new mapping until all blocks in the sections we just mapped are
+                // consumed
                 IntPtr currentThunksBlock = nextThunksBlock;
                 int thunkBlockSize = RuntimeImports.RhpGetThunkBlockSize();
                 for (int i = 0; i < Constants.NumThunkBlocksPerMapping; i++)

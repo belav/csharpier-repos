@@ -38,7 +38,8 @@ public class DataAnnotationsValidator : ComponentBase, IDisposable
     {
         if (CurrentEditContext != _originalEditContext)
         {
-            // While we could support this, there's no known use case presently. Since InputBase doesn't support it,
+            // While we could support this, there's no known use case presently. Since InputBase doesn't support
+            // it,
             // it's more understandable to have the same restriction.
             throw new InvalidOperationException(
                 $"{GetType()} does not support changing the "

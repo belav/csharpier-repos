@@ -37,7 +37,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
         Debug.Assert(fieldsOrProperties.Length >= 1);
         Debug.Assert(parameters.Length == fieldsOrProperties.Length);
 
-        // Process each param+field/prop in order.  Apply the pair to the document getting the updated document.
+        // Process each param+field/prop in order.  Apply the pair to the document getting the updated
+        // document.
         // Then find all the current data in that updated document and move onto the next pair.
 
         var root = await document
@@ -89,8 +90,10 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
 
         return currentSolution;
 
-        // Intentionally static so that we do not capture outer state.  This function is called in a loop with a fresh
-        // fork of the solution after each change that has been made.  This ensures we don't accidentally refer to the
+        // Intentionally static so that we do not capture outer state.  This function is called in a loop
+        // with a fresh
+        // fork of the solution after each change that has been made.  This ensures we don't accidentally
+        // refer to the
         // original state in any way.
 
         static async Task<Solution> AddSingleMemberAsync(
@@ -117,7 +120,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                 .ConfigureAwait(false);
             var codeGenerator = document.GetRequiredLanguageService<ICodeGenerationService>();
 
-            // We're assigning the parameter to a new field/prop .  Convert all existing references to this primary
+            // We're assigning the parameter to a new field/prop .  Convert all existing references to this
+            // primary
             // constructor parameter (within this type) to refer to the field/prop now instead.
             await UpdateParameterReferencesAsync(
                     solutionEditor,
@@ -249,8 +253,10 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                 .GetDocumentEditorAsync(group.Key.Id, cancellationToken)
                 .ConfigureAwait(false);
 
-            // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked symbol is
-            // allowed to report the entire set of references it think it is compatible with.  So ensure we're hitting
+            // We may hit a location multiple times due to how we do FAR for linked symbols, but each linked
+            // symbol is
+            // allowed to report the entire set of references it think it is compatible with.  So ensure we're
+            // hitting
             // each location only once.
             foreach (
                 var location in group.Distinct(LinkedFileReferenceLocationEqualityComparer.Instance)
@@ -290,7 +296,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
         var solutionEditor = new SolutionEditor(solution);
         var initializer = EqualsValueClause(IdentifierName(parameter.Name.EscapeIdentifier()));
 
-        // We're assigning the parameter to a field/prop.  Convert all existing references to this primary constructor
+        // We're assigning the parameter to a field/prop.  Convert all existing references to this primary
+        // constructor
         // parameter (within this type) to refer to the field/prop now instead.
         await UpdateParameterReferencesAsync(
                 solutionEditor,
@@ -326,7 +333,8 @@ internal sealed partial class CSharpInitializeMemberFromPrimaryConstructorParame
                         .GetDocumentEditorAsync(editingDocument.Id, cancellationToken)
                         .ConfigureAwait(false);
 
-                    // If the user had a property that has 'throw NotImplementedException' in it, then remove those throws.
+                    // If the user had a property that has 'throw NotImplementedException' in it, then remove those
+                    // throws.
                     var newPropertyDeclaration = isThrowNotImplementedProperty
                         ? RemoveThrowNotImplemented(propertyDeclaration)
                         : propertyDeclaration;

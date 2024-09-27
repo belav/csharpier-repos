@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Host
     }
 
     /// <summary>
-    /// this mode shows intention not actual behavior. it is up to implementation how to interpret the intention.
+    /// this mode shows intention not actual behavior. it is up to implementation how to interpret the
+    // intention.
     /// </summary>
     internal enum ExcerptMode
     {
@@ -69,14 +70,16 @@ namespace Microsoft.CodeAnalysis.Host
         /// <summary>
         /// <see cref="Document"/> this excerpt is from
         ///
-        /// should be same document in <see cref="IDocumentExcerptService.TryExcerptAsync(Document, TextSpan, ExcerptMode, ClassificationOptions, CancellationToken)" />
+        /// should be same document in <see cref="IDocumentExcerptService.TryExcerptAsync(Document,
+        // TextSpan, ExcerptMode, ClassificationOptions, CancellationToken)" />
         /// </summary>
         public readonly Document Document = document;
 
         /// <summary>
         /// span on <see cref="Document"/> this excerpt is from
         ///
-        /// should be same text span in <see cref="IDocumentExcerptService.TryExcerptAsync(Document, TextSpan, ExcerptMode, ClassificationOptions, CancellationToken)" />
+        /// should be same text span in <see cref="IDocumentExcerptService.TryExcerptAsync(Document,
+        // TextSpan, ExcerptMode, ClassificationOptions, CancellationToken)" />
         /// </summary>
         public readonly TextSpan Span = span;
     }

@@ -29,7 +29,8 @@ namespace Microsoft.Extensions.Options
         public void Clear() => _cache.Clear();
 
         /// <summary>
-        /// Gets a named options instance, or adds a new instance created with <paramref name="createOptions"/>.
+        /// Gets a named options instance, or adds a new instance created with <paramref
+        // name="createOptions"/>.
         /// </summary>
         /// <param name="name">The name of the options instance.</param>
         /// <param name="createOptions">The func used to create the new instance.</param>
@@ -64,7 +65,8 @@ namespace Microsoft.Extensions.Options
         )
         {
             // For compatibility, fall back to public GetOrAdd() if we're in a derived class.
-            // For simplicity, we do the same for older frameworks that don't support the factoryArgument overload of GetOrAdd().
+            // For simplicity, we do the same for older frameworks that don't support the factoryArgument
+            // overload of GetOrAdd().
 #if NET || NETSTANDARD2_1
             if (GetType() != typeof(OptionsCache<TOptions>))
 #endif

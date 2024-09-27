@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says that if we should simplify the Generic Name which has the type argument inferred
+        /// This option says that if we should simplify the Generic Name which has the type argument
+        // inferred
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static Option<bool> PreferImplicitTypeInference { get; } =
@@ -72,7 +73,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says if we should simplify from Derived types to Base types in Static Member Accesses
+        /// This option says if we should simplify from Derived types to Base types in Static Member
+        // Accesses
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static Option<bool> AllowSimplificationToBaseType { get; } =
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says if we should simplify away the <see langword="this"/> or <see langword="Me"/> in member access expressions.
+        /// This option says if we should simplify away the <see langword="this"/> or <see langword="Me"/>
+        // in member access expressions.
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> QualifyMemberAccessWithThisOrMe { get; } =
@@ -94,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>. in field access expressions.
+        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>.
+        // in field access expressions.
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> QualifyFieldAccess { get; } =
@@ -105,21 +109,24 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>. in property access expressions.
+        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>.
+        // in property access expressions.
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> QualifyPropertyAccess { get; } =
             new("SimplificationOptions", "QualifyPropertyAccess", defaultValue: false);
 
         /// <summary>
-        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>. in method access expressions.
+        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>.
+        // in method access expressions.
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> QualifyMethodAccess { get; } =
             new("SimplificationOptions", "QualifyMethodAccess", defaultValue: false);
 
         /// <summary>
-        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>. in event access expressions.
+        /// This option says if we should simplify away the <see langword="this"/>. or <see langword="Me"/>.
+        // in event access expressions.
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> QualifyEventAccess { get; } =
@@ -137,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Simplification
             );
 
         /// <summary>
-        /// This option says if we should prefer keyword for Intrinsic Predefined Types in Member Access Expression
+        /// This option says if we should prefer keyword for Intrinsic Predefined Types in Member Access
+        // Expression
         /// </summary>
         [Obsolete("This option is no longer used")]
         public static PerLanguageOption<bool> PreferIntrinsicPredefinedTypeKeywordInMemberAccess { get; } =

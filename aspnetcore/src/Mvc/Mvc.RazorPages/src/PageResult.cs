@@ -39,12 +39,15 @@ public class PageResult : ActionResult
 
     /// <summary>
     /// Requests the service of
-    /// <see cref="M:Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageResultExecutor.ExecuteAsync(PageContext,PageResult)" />
+    /// <see
+    // cref="M:Microsoft.AspNetCore.Mvc.RazorPages.Infrastructure.PageResultExecutor.ExecuteAsync(PageContext,PageResult)"
+    // />
     /// to process itself in the given <paramref name="context" />.
     /// </summary>
     /// <param name="context">A <see cref="T:Microsoft.AspNetCore.Mvc.RazorPages.PageContext" />
     /// associated with the current request for a Razor page.</param >
-    /// <returns >A <see cref="T:System.Threading.Tasks.Task" /> which will complete when page execution is completed.</returns >
+    /// <returns >A <see cref="T:System.Threading.Tasks.Task" /> which will complete when page execution
+    // is completed.</returns >
     /// <exception cref="T:System.ArgumentException">The parameter <paramref name="context" /> was not a
     /// <see cref="T:Microsoft.AspNetCore.Mvc.RazorPages.PageContext" /></exception >
     public override Task ExecuteResultAsync(ActionContext context)

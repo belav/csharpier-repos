@@ -38,20 +38,25 @@ namespace System.IO.Tests
         /// <summary>Gets the name of the int bufferSize argument to CopyTo{Async}.</summary>
         protected virtual string CopyToBufferSizeName => "bufferSize";
 
-        /// <summary>Gets the type of exception thrown when an invalid IAsyncResult is passed to an EndRead/Write method.</summary>
+        /// <summary>Gets the type of exception thrown when an invalid IAsyncResult is passed to an
+        // EndRead/Write method.</summary>
         protected virtual Type InvalidIAsyncResultExceptionType => typeof(ArgumentException);
 
-        /// <summary>Gets the type of exception thrown when a read or write operation is unsupported.</summary>
+        /// <summary>Gets the type of exception thrown when a read or write operation is
+        // unsupported.</summary>
         protected virtual Type UnsupportedReadWriteExceptionType => typeof(NotSupportedException);
 
-        /// <summary>Gets the type of exception thrown when a CopyTo{Async} operation is unsupported.</summary>
+        /// <summary>Gets the type of exception thrown when a CopyTo{Async} operation is
+        // unsupported.</summary>
         protected virtual Type UnsupportedCopyExceptionType => typeof(NotSupportedException);
 
-        /// <summary>Gets the type of exception thrown when setting a Read/WriteTimeout is unsupported.</summary>
+        /// <summary>Gets the type of exception thrown when setting a Read/WriteTimeout is
+        // unsupported.</summary>
         protected virtual Type UnsupportedTimeoutExceptionType => typeof(InvalidOperationException);
 
         /// <summary>
-        /// Gets the type of exception thrown when an operation is invoked concurrently erroneously, or null if no exception
+        /// Gets the type of exception thrown when an operation is invoked concurrently erroneously, or null
+        // if no exception
         /// is thrown (either because it's fully supported or not supported and non-deterministic).
         /// </summary>
         protected virtual Type UnsupportedConcurrentExceptionType =>
@@ -63,19 +68,23 @@ namespace System.IO.Tests
         /// <summary>Gets whether the stream is expected to support timeouts.</summary>
         protected virtual bool CanTimeout => false;
 
-        /// <summary>Gets whether it's expected for the Position property to be usable even if CanSeek is false.</summary>
+        /// <summary>Gets whether it's expected for the Position property to be usable even if CanSeek is
+        // false.</summary>
         protected virtual bool CanGetPositionWhenCanSeekIsFalse => false;
 
         /// <summary>Gets whether read/write operations fully support cancellation.</summary>
         protected virtual bool FullyCancelableOperations => true;
 
-        /// <summary>Gets whether a read operation will always try to fill the full buffer provided.</summary>
+        /// <summary>Gets whether a read operation will always try to fill the full buffer
+        // provided.</summary>
         protected virtual bool ReadsReadUntilSizeOrEof => true;
 
-        /// <summary>Gets whether the stream's CanRead/Write/etc properties are expected to return false once the stream is disposed.</summary>
+        /// <summary>Gets whether the stream's CanRead/Write/etc properties are expected to return false
+        // once the stream is disposed.</summary>
         protected virtual bool CansReturnFalseAfterDispose => true;
 
-        /// <summary>Gets whether the Stream may be used for additional operations after a read is canceled.</summary>
+        /// <summary>Gets whether the Stream may be used for additional operations after a read is
+        // canceled.</summary>
         protected virtual bool UsableAfterCanceledReads => true;
         protected virtual bool CanSetLength => CanSeek;
         protected virtual bool CanSetLengthGreaterThanCapacity => CanSetLength;
@@ -101,7 +110,8 @@ namespace System.IO.Tests
             /// <summary>EndRead(BeginRead(..., null, null)) / EndWrite(BeginWrite(..., null, null))</summary>
             SyncAPM,
 
-            /// <summary>Task.Factory.FromAsync(s.BeginRead, s.EndRead, ...) / Task.Factory.FromAsync(s.BeginWrite, s.EndWrite, ...)</summary>
+            /// <summary>Task.Factory.FromAsync(s.BeginRead, s.EndRead, ...) /
+            // Task.Factory.FromAsync(s.BeginWrite, s.EndWrite, ...)</summary>
             AsyncAPM,
         }
 
@@ -1037,8 +1047,10 @@ namespace System.IO.Tests
 
             void ValidateDisposedException(Exception e, bool successAllowed = false)
             {
-                // Behavior when disposed is inconsistent, and isn't specified by the Stream contract: types aren't supposed to be used
-                // after they're disposed.  So, at least until we decide to be more strict, these tests are very liberal in what they except.
+                // Behavior when disposed is inconsistent, and isn't specified by the Stream contract: types aren't
+                // supposed to be used
+                // after they're disposed.  So, at least until we decide to be more strict, these tests are very
+                // liberal in what they except.
                 Assert.True(
                     (e is null && successAllowed)
                         || e is ObjectDisposedException
@@ -2205,33 +2217,41 @@ namespace System.IO.Tests
         }
     }
 
-    /// <summary>Base class providing tests for two streams connected to each other such that writing to one is readable from the other, and vice versa.</summary>
+    /// <summary>Base class providing tests for two streams connected to each other such that writing to
+    // one is readable from the other, and vice versa.</summary>
     public abstract class ConnectedStreamConformanceTests : StreamConformanceTests
     {
-        /// <summary>Gets whether ValueTasks returned from Read/WriteAsync methods are expected to be consumable only once.</summary>
+        /// <summary>Gets whether ValueTasks returned from Read/WriteAsync methods are expected to be
+        // consumable only once.</summary>
         protected virtual bool ReadWriteValueTasksProtectSingleConsumption => false;
 
-        /// <summary>Gets whether writes on a connected stream are expected to fail immediately after a reader is disposed.</summary>
+        /// <summary>Gets whether writes on a connected stream are expected to fail immediately after a
+        // reader is disposed.</summary>
         protected virtual bool BrokenPipePropagatedImmediately => false;
 
-        /// <summary>Gets the amount of data a writer is able to buffer before blocking subsequent writes, or -1 if there's no such limit known.</summary>
+        /// <summary>Gets the amount of data a writer is able to buffer before blocking subsequent writes,
+        // or -1 if there's no such limit known.</summary>
         protected virtual int BufferedSize => -1;
 
         /// <summary>
-        /// Gets whether the stream requires Flush{Async} to be called in order to send written data to the underlying destination.
+        /// Gets whether the stream requires Flush{Async} to be called in order to send written data to the
+        // underlying destination.
         /// </summary>
         protected virtual bool FlushRequiredToWriteData => true;
 
         /// <summary>
-        /// Gets whether the stream guarantees that all data written to it will be flushed as part of Flush{Async}.
+        /// Gets whether the stream guarantees that all data written to it will be flushed as part of
+        // Flush{Async}.
         /// </summary>
         protected virtual bool FlushGuaranteesAllDataWritten => true;
 
-        /// <summary>Gets whether reads for a count of 0 bytes block if no bytes are available to read.</summary>
+        /// <summary>Gets whether reads for a count of 0 bytes block if no bytes are available to
+        // read.</summary>
         protected virtual bool BlocksOnZeroByteReads => false;
 
         /// <summary>
-        /// Gets whether an otherwise bidirectional stream does not support reading/writing concurrently, e.g. due to a semaphore in the base implementation.
+        /// Gets whether an otherwise bidirectional stream does not support reading/writing concurrently,
+        // e.g. due to a semaphore in the base implementation.
         /// </summary>
         protected virtual bool SupportsConcurrentBidirectionalUse => true;
 
@@ -3742,7 +3762,8 @@ namespace System.IO.Tests
         protected virtual bool SupportsLeaveOpen => true;
 
         /// <summary>
-        /// Indicates whether the stream will issue a zero byte read on the underlying stream when a user performs
+        /// Indicates whether the stream will issue a zero byte read on the underlying stream when a user
+        // performs
         /// a zero byte read and no data is currently available to return to the user.
         /// </summary>
         protected virtual bool ZeroByteReadPerformsZeroByteReadOnUnderlyingStream => false;
@@ -3962,7 +3983,8 @@ namespace System.IO.Tests
             }
 
             // This is the data we will send across the connected streams. We assume this data will both
-            // (a) produce at least two readable bytes, so we can unblock the reader and read a single byte without clearing its buffer; and
+            // (a) produce at least two readable bytes, so we can unblock the reader and read a single byte
+            // without clearing its buffer; and
             // (b) produce no more than 1K of readable bytes, so we can clear the reader buffer below.
             // If this isn't the case for some Stream(s), we can modify the data or parameterize it per Stream.
             byte[] data = "hello world"u8.ToArray();
@@ -3997,7 +4019,8 @@ namespace System.IO.Tests
                     await writeable.FlushAsync();
                 }
 
-                // Reader should be unblocked, and we should have issued a zero byte read against the underlying stream as part of unblocking.
+                // Reader should be unblocked, and we should have issued a zero byte read against the underlying
+                // stream as part of unblocking.
                 int bytesRead = await zeroByteRead;
                 Assert.Equal(0, bytesRead);
 
@@ -4009,7 +4032,8 @@ namespace System.IO.Tests
                 bytesRead = await readTask;
                 Assert.Equal(1, bytesRead);
 
-                // Issue zero byte read against wrapper stream. Since there is still data available, this should complete immediately and not do another zero-byte read.
+                // Issue zero byte read against wrapper stream. Since there is still data available, this should
+                // complete immediately and not do another zero-byte read.
                 readTask = ReadAsync(mode, readable, Array.Empty<byte>(), 0, 0);
                 Assert.True(readTask.IsCompleted);
                 Assert.Equal(0, await readTask);

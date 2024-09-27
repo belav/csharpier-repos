@@ -934,8 +934,10 @@ namespace System.Text.Tests
         }
 
         /// <summary>
-        /// Returns a <see cref="ReadOnlySequence{T}"/> consisting of <paramref name="dataToRepeat"/> repeated <paramref name="repetitionCount"/> times.
-        /// This can be used to produce a sequence consisting of billions of elements while consuming a fraction of that memory.
+        /// Returns a <see cref="ReadOnlySequence{T}"/> consisting of <paramref name="dataToRepeat"/>
+        // repeated <paramref name="repetitionCount"/> times.
+        /// This can be used to produce a sequence consisting of billions of elements while consuming a
+        // fraction of that memory.
         /// </summary>
         /// <returns></returns>
         private static ReadOnlySequence<T> GetLargeRepeatingReadOnlySequence<T>(
@@ -983,7 +985,8 @@ namespace System.Text.Tests
         }
 
         /// <summary>
-        /// An <see cref="IBufferWriter{T}"/> that validates that the data written to it consists of 'knownGoodData' repeated indefinitely.
+        /// An <see cref="IBufferWriter{T}"/> that validates that the data written to it consists of
+        // 'knownGoodData' repeated indefinitely.
         /// </summary>
         private class RepeatingValidatingBufferWriter<T> : IBufferWriter<T>
             where T : unmanaged, IEquatable<T>

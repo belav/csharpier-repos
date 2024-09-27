@@ -299,7 +299,8 @@ internal abstract class ActionMethodExecutor
         )
         {
             // Async method returning Task<IActionResult>
-            // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to Task<IActionResult>.
+            // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to
+            // Task<IActionResult>.
             var returnValue = executor.Execute(controller, arguments);
             var actionResult = await (Task<IActionResult>)returnValue!;
             EnsureActionResultNotNull(executor, actionResult);
@@ -316,7 +317,8 @@ internal abstract class ActionMethodExecutor
             var arguments = (object[])invocationContext.Arguments;
 
             // Async method returning Task<IActionResult>
-            // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to Task<IActionResult>.
+            // Avoid extra allocations by calling Execute rather than ExecuteAsync and casting to
+            // Task<IActionResult>.
             var returnValue = executor.Execute(controller, arguments);
             var actionResult = await (Task<IActionResult>)returnValue!;
             EnsureActionResultNotNull(executor, actionResult);

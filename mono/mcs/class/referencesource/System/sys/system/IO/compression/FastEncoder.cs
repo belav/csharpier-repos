@@ -63,7 +63,8 @@ namespace System.IO.Compression
             WriteEndOfBlock(output);
         }
 
-        // maxBytesToCopy limits the number of bytes we can copy from input. Set to any value < 1 if no limit
+        // maxBytesToCopy limits the number of bytes we can copy from input. Set to any value < 1 if no
+        // limit
         private void GetCompressedOutput(
             DeflateInput input,
             OutputBuffer output,

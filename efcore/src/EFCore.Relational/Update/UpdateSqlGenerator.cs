@@ -8,21 +8,27 @@ namespace Microsoft.EntityFrameworkCore.Update;
 
 /// <summary>
 ///     <para>
-///         A base class for the <see cref="IUpdateSqlGenerator" /> service that is typically inherited from by database providers.
-///         The implementation uses a SQL RETURNING clause to retrieve any database-generated values or for concurrency checking.
+///         A base class for the <see cref="IUpdateSqlGenerator" /> service that is typically
+// inherited from by database providers.
+///         The implementation uses a SQL RETURNING clause to retrieve any database-generated values
+// or for concurrency checking.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers; it is generally not used in application code.
+///         This type is typically used by database providers; it is generally not used in
+// application code.
 ///     </para>
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance is used by many
-///         <see cref="DbContext" /> instances. The implementation must be thread-safe. This service cannot depend on services registered
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance is used by many
+///         <see cref="DbContext" /> instances. The implementation must be thread-safe. This service
+// cannot depend on services registered
 ///         as <see cref="ServiceLifetime.Scoped" />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see> for more
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see> for more
 ///         information and examples.
 ///     </para>
 /// </remarks>
@@ -69,13 +75,15 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     ) => AppendInsertOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
-    ///     Appends SQL for inserting a row to the commands being built, via an INSERT containing an optional RETURNING clause to retrieve
+    ///     Appends SQL for inserting a row to the commands being built, via an INSERT containing an
+    // optional RETURNING clause to retrieve
     ///     any database-generated values.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     public virtual ResultSetMapping AppendInsertReturningOperation(
         StringBuilder commandStringBuilder,
@@ -122,13 +130,15 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     ) => AppendUpdateOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
-    ///     Appends SQL for updating a row to the commands being built, via an UPDATE containing an RETURNING clause to retrieve any
+    ///     Appends SQL for updating a row to the commands being built, via an UPDATE containing an
+    // RETURNING clause to retrieve any
     ///     database-generated values or for concurrency checking.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     protected virtual ResultSetMapping AppendUpdateReturningOperation(
         StringBuilder commandStringBuilder,
@@ -186,12 +196,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     ) => AppendDeleteOperation(commandStringBuilder, command, commandPosition, out _);
 
     /// <summary>
-    ///     Appends SQL for deleting a row to the commands being built, via a DELETE containing a RETURNING clause for concurrency checking.
+    ///     Appends SQL for deleting a row to the commands being built, via a DELETE containing a
+    // RETURNING clause for concurrency checking.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="command">The command that represents the delete operation.</param>
     /// <param name="commandPosition">The ordinal of this command in the batch.</param>
-    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a transaction to work correctly.</param>
+    /// <param name="requiresTransaction">Returns whether the SQL appended must be executed in a
+    // transaction to work correctly.</param>
     /// <returns>The <see cref="ResultSetMapping" /> for the command.</returns>
     protected virtual ResultSetMapping AppendDeleteReturningOperation(
         StringBuilder commandStringBuilder,
@@ -223,7 +235,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="writeOperations">The operations with the values to insert for each column.</param>
     /// <param name="readOperations">The operations for column values to be read back.</param>
     protected virtual void AppendInsertCommand(
@@ -246,11 +259,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="writeOperations">The operations for each column.</param>
     /// <param name="readOperations">The operations for column values to be read back.</param>
-    /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for the update.</param>
-    /// <param name="appendReturningOneClause">Whether to append an additional constant of 1 to be read back.</param>
+    /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for
+    // the update.</param>
+    /// <param name="appendReturningOneClause">Whether to append an additional constant of 1 to be read
+    // back.</param>
     protected virtual void AppendUpdateCommand(
         StringBuilder commandStringBuilder,
         string name,
@@ -276,10 +292,13 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="readOperations">The operations for column values to be read back.</param>
-    /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for the delete.</param>
-    /// <param name="appendReturningOneClause">Whether to append an additional constant of 1 to be read back.</param>
+    /// <param name="conditionOperations">The operations used to generate the <c>WHERE</c> clause for
+    // the delete.</param>
+    /// <param name="appendReturningOneClause">Whether to append an additional constant of 1 to be read
+    // back.</param>
     protected virtual void AppendDeleteCommand(
         StringBuilder commandStringBuilder,
         string name,
@@ -304,7 +323,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="operations">The operations representing the data to be inserted.</param>
     protected virtual void AppendInsertCommandHeader(
         StringBuilder commandStringBuilder,
@@ -334,7 +354,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     protected virtual void AppendDeleteCommandHeader(
         StringBuilder commandStringBuilder,
         string name,
@@ -350,7 +371,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="operations">The operations representing the data to be updated.</param>
     protected virtual void AppendUpdateCommandHeader(
         StringBuilder commandStringBuilder,
@@ -377,13 +399,15 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     }
 
     /// <summary>
-    ///     Appends a SQL fragment representing the value that is assigned to a column which is being updated.
+    ///     Appends a SQL fragment representing the value that is assigned to a column which is being
+    // updated.
     /// </summary>
     /// <param name="updateSqlGeneratorHelper">The update sql generator helper.</param>
     /// <param name="columnModification">The operation representing the data to be updated.</param>
     /// <param name="stringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     protected virtual void AppendUpdateColumnValue(
         ISqlGenerationHelper updateSqlGeneratorHelper,
         IColumnModification columnModification,
@@ -522,7 +546,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="name">The name of the table.</param>
-    /// <param name="schema">The table schema, or <see langword="null" /> to use the default schema.</param>
+    /// <param name="schema">The table schema, or <see langword="null" /> to use the default
+    // schema.</param>
     /// <param name="operations">The operations for which there are values.</param>
     protected virtual void AppendValues(
         StringBuilder commandStringBuilder,
@@ -629,7 +654,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
     /// <param name="columnModification">The column for which the condition is being generated.</param>
     /// <param name="useOriginalValue">
-    ///     If <see langword="true" />, then the original value will be used in the condition, otherwise the current value will be used.
+    ///     If <see langword="true" />, then the original value will be used in the condition, otherwise
+    // the current value will be used.
     /// </param>
     protected virtual void AppendWhereCondition(
         StringBuilder commandStringBuilder,
@@ -720,7 +746,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     ///     Appends the literal value for <paramref name="modification" /> to the command being built by
     ///     <paramref name="commandStringBuilder" />.
     /// </summary>
-    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
+    /// <param name="commandStringBuilder">The builder to which the SQL fragment should be
+    // appended.</param>
     /// <param name="modification">The column modification whose literal should get appended.</param>
     /// <param name="tableName">The table name of the column, used when an exception is thrown.</param>
     /// <param name="schema">The schema of the column, used when an exception is thrown.</param>

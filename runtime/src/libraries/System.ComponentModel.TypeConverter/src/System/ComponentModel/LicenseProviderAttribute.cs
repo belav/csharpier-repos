@@ -13,7 +13,8 @@ namespace System.ComponentModel
     public sealed class LicenseProviderAttribute : Attribute
     {
         /// <summary>
-        /// Specifies the default value, which is no provider. This <see langword='static '/>field is read-only.
+        /// Specifies the default value, which is no provider. This <see langword='static '/>field is
+        // read-only.
         /// </summary>
         public static readonly LicenseProviderAttribute Default = new LicenseProviderAttribute();
 
@@ -24,14 +25,16 @@ namespace System.ComponentModel
         private readonly string? _licenseProviderName;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class without a license
+        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/>
+        // class without a license
         /// provider.
         /// </summary>
         public LicenseProviderAttribute()
             : this((string?)null) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class with
+        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/>
+        // class with
         /// the specified type.
         /// </summary>
         public LicenseProviderAttribute(
@@ -45,7 +48,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/> class with
+        /// Initializes a new instance of the <see cref='System.ComponentModel.LicenseProviderAttribute'/>
+        // class with
         /// the specified type of license provider.
         /// </summary>
         public LicenseProviderAttribute(
@@ -78,7 +82,8 @@ namespace System.ComponentModel
         /// This defines a unique ID for this attribute type. It is used
         /// by filtering algorithms to identify two attributes that are
         /// the same type. For most attributes, this just returns the
-        /// Type instance for the attribute. LicenseProviderAttribute overrides this to include the type name and the
+        /// Type instance for the attribute. LicenseProviderAttribute overrides this to include the type
+        // name and the
         /// provider type name.
         /// </summary>
         public override object TypeId

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
     public static partial class VisualBasicCodeRefactoringVerifier<TCodeRefactoring>
         where TCodeRefactoring : CodeRefactoringProvider, new()
     {
-        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest, TVerifier}.VerifyRefactoringAsync(string, string)"/>
+        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest,
+        // TVerifier}.VerifyRefactoringAsync(string, string)"/>
         public static Task VerifyRefactoringAsync(string source, string fixedSource)
         {
             return VerifyRefactoringAsync(
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             );
         }
 
-        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest, TVerifier}.VerifyRefactoringAsync(string, DiagnosticResult, string)"/>
+        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest,
+        // TVerifier}.VerifyRefactoringAsync(string, DiagnosticResult, string)"/>
         public static Task VerifyRefactoringAsync(
             string source,
             DiagnosticResult expected,
@@ -32,7 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             return VerifyRefactoringAsync(source, [expected], fixedSource);
         }
 
-        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest, TVerifier}.VerifyRefactoringAsync(string, DiagnosticResult[], string)"/>
+        /// <inheritdoc cref="CodeRefactoringVerifier{TCodeRefactoring, TTest,
+        // TVerifier}.VerifyRefactoringAsync(string, DiagnosticResult[], string)"/>
         public static Task VerifyRefactoringAsync(
             string source,
             DiagnosticResult[] expected,

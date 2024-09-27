@@ -55,7 +55,7 @@ namespace MonoTests.System.Web.Security
 
             pwd = Membership.GeneratePassword(5, 1);
             Assert.AreEqual(5, pwd.Length, "A2");
-            /* count up the non-alphanumeric characters in the string */
+/* count up the non-alphanumeric characters in the string */
             count = 0;
             for (i = 0; i < pwd.Length; i++)
                 if (!Char.IsLetterOrDigit(pwd, i))

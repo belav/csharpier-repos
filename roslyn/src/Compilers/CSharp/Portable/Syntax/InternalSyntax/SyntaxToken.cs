@@ -320,7 +320,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// <summary>
         /// Returns the string representation of this token, not including its leading and trailing trivia.
         /// </summary>
-        /// <returns>The string representation of this token, not including its leading and trailing trivia.</returns>
+        /// <returns>The string representation of this token, not including its leading and trailing
+        // trivia.</returns>
         /// <remarks>The length of the returned string is always the same as Span.Length</remarks>
         public override string ToString()
         {

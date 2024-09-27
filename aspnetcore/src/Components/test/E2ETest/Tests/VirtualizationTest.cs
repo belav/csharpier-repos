@@ -507,7 +507,8 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         dataSetLengthSelector.SelectByText("100000");
         Browser.Equal(100000, dataSetLengthLastRendered);
 
-        // See that the old data is still visible, because the scroll position is preserved as a pixel count,
+        // See that the old data is still visible, because the scroll position is preserved as a pixel
+        // count,
         // not a scroll percentage
         Browser.True(() => GetPeopleNames(container).Contains("Person 1000"));
     }
@@ -548,7 +549,8 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
 
         // Now make the dataset much shorter
         // We should automatically have the scroll position reduced to the new maximum
-        // Because the new data set is *so much* shorter than the previous one, if bug #37245 were still here,
+        // Because the new data set is *so much* shorter than the previous one, if bug #37245 were still
+        // here,
         // this would take over 30 minutes so the test would fail
         dataSetLengthSelector.SelectByText("25");
         Browser.Equal(25, dataSetLengthLastRendered);

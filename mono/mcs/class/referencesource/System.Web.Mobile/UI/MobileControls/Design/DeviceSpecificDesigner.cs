@@ -280,7 +280,8 @@ namespace System.Web.UI.Design.MobileControls
             {
                 _isDuplicate = isDuplicate;
                 SetTemplateVerbsDirty();
-                // MessageBox.Show("TreatAsDuplicate: Changing status of " + _ds.Site.Name + " to _isDuplicate=" + _isDuplicate.ToString());
+                // MessageBox.Show("TreatAsDuplicate: Changing status of " + _ds.Site.Name + " to _isDuplicate=" +
+                // _isDuplicate.ToString());
             }
             UpdateDesignTimeHtml();
         }

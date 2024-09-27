@@ -192,7 +192,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (_binder.InParameterDefaultValue || _binder.InAttributeArgument)
             {
-                // We don't consider when we're in default parameter values or attributes to avoid cycles. This is an error scenario,
+                // We don't consider when we're in default parameter values or attributes to avoid cycles. This is
+                // an error scenario,
                 // so we don't care if we accidentally miss a parameter being applicable.
                 return Conversion.NoConversion;
             }
@@ -662,15 +663,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 ParameterSymbol parameter = p;
 
-                // In ExpressionBinder::BindGrpConversion, the native compiler substitutes object in place of dynamic.  This is
-                // necessary because conversions from expressions of type dynamic always succeed, whereas conversions from the
-                // type generally fail (modulo identity conversions).  This is not reflected in the C# 4 spec, but will be
+                // In ExpressionBinder::BindGrpConversion, the native compiler substitutes object in place of
+                // dynamic.  This is
+                // necessary because conversions from expressions of type dynamic always succeed, whereas
+                // conversions from the
+                // type generally fail (modulo identity conversions).  This is not reflected in the C# 4 spec, but
+                // will be
                 // incorporated going forward.  See DevDiv #742345 for additional details.
-                // NOTE: Dev11 does a deep substitution (e.g. C<C<C<dynamic>>> -> C<C<C<object>>>), but that seems redundant.
+                // NOTE: Dev11 does a deep substitution (e.g. C<C<C<dynamic>>> -> C<C<C<object>>>), but that seems
+                // redundant.
                 if (parameter.Type.IsDynamic())
                 {
-                    // If we don't have System.Object, then we'll get an error type, which will cause overload resolution to fail,
-                    // which will cause some error to be reported.  That's sufficient (i.e. no need to specifically report its absence here).
+                    // If we don't have System.Object, then we'll get an error type, which will cause overload
+                    // resolution to fail,
+                    // which will cause some error to be reported.  That's sufficient (i.e. no need to specifically
+                    // report its absence here).
                     parameter = new SignatureOnlyParameterSymbol(
                         TypeWithAnnotations.Create(
                             compilation.GetSpecialType(SpecialType.System_Object),

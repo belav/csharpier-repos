@@ -144,7 +144,8 @@ namespace SourceGenerators.Tests
         }
 
         /// <summary>
-        /// Looks for /*N+*/ and /*-N*/ markers in a string and creates a TextSpan containing the enclosed text.
+        /// Looks for /*N+*/ and /*-N*/ markers in a string and creates a TextSpan containing the enclosed
+        // text.
         /// </summary>
         public static TextSpan MakeSpan(string text, int spanNum)
         {

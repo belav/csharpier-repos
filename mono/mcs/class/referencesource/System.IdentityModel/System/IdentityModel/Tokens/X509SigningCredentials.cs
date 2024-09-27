@@ -88,12 +88,17 @@ namespace System.IdentityModel.Tokens
 #endif
 
         /// <summary>
-        /// Constructor for X509SigningCredentials based on an x509 certificate and the security key identifier to be used.
+        /// Constructor for X509SigningCredentials based on an x509 certificate and the security key
+        // identifier to be used.
         /// <remarks>
-        /// Note that the key identifier clause types supported by Windows Communication Foundation for generating a security key identifier that
-        /// references an X509SecurityToken are X509SubjectKeyIdentifierClause, X509ThumbprintKeyIdentifierClause, X509IssuerSerialKeyIdentifierClause,
-        /// and X509RawDataKeyIdentifierClause. However, in order to enable custom scenarios, this constructor does not perform any validation on
-        /// the clause types that were used to generate the security key identifier supplied in the <paramref name="ski"/> parameter.
+        /// Note that the key identifier clause types supported by Windows Communication Foundation for
+        // generating a security key identifier that
+        /// references an X509SecurityToken are X509SubjectKeyIdentifierClause,
+        // X509ThumbprintKeyIdentifierClause, X509IssuerSerialKeyIdentifierClause,
+        /// and X509RawDataKeyIdentifierClause. However, in order to enable custom scenarios, this
+        // constructor does not perform any validation on
+        /// the clause types that were used to generate the security key identifier supplied in the
+        // <paramref name="ski"/> parameter.
         /// </remarks>
         /// </summary>
         /// <param name="certificate">The x509 certificate.</param>
@@ -107,12 +112,17 @@ namespace System.IdentityModel.Tokens
             ) { }
 
         /// <summary>
-        /// Constructor for X509SigningCredentials based on an x509 certificate and the security key identifier to be used.
+        /// Constructor for X509SigningCredentials based on an x509 certificate and the security key
+        // identifier to be used.
         /// <remarks>
-        /// Note that the key identifier clause types supported by Windows Communication Foundation for generating a security key identifier that
-        /// references an X509SecurityToken are X509SubjectKeyIdentifierClause, X509ThumbprintKeyIdentifierClause, X509IssuerSerialKeyIdentifierClause,
-        /// and X509RawDataKeyIdentifierClause. However, in order to enable custom scenarios, this constructor does not perform any validation on
-        /// the clause types that were used to generate the security key identifier supplied in the <paramref name="ski"/> parameter.
+        /// Note that the key identifier clause types supported by Windows Communication Foundation for
+        // generating a security key identifier that
+        /// references an X509SecurityToken are X509SubjectKeyIdentifierClause,
+        // X509ThumbprintKeyIdentifierClause, X509IssuerSerialKeyIdentifierClause,
+        /// and X509RawDataKeyIdentifierClause. However, in order to enable custom scenarios, this
+        // constructor does not perform any validation on
+        /// the clause types that were used to generate the security key identifier supplied in the
+        // <paramref name="ski"/> parameter.
         /// </remarks>
         /// </summary>
         /// <param name="certificate">The x509 certificate.</param>
@@ -128,8 +138,10 @@ namespace System.IdentityModel.Tokens
             : this(new X509SecurityToken(certificate), ski, signatureAlgorithm, digestAlgorithm) { }
 
         /// <summary>
-        /// Constructor for X509SigningCredentials based on an x509 token and the security key identifier to be used.
-        /// It uses the token's public key, its default asymmetric signature algorithm and the specified security key identifier
+        /// Constructor for X509SigningCredentials based on an x509 token and the security key identifier to
+        // be used.
+        /// It uses the token's public key, its default asymmetric signature algorithm and the specified
+        // security key identifier
         /// </summary>
         /// <param name="token">The x509 security token.</param>
         /// <param name="ski">The security key identifier to be used.</param>

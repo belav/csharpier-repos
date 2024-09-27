@@ -9,7 +9,8 @@ namespace System.Xml.Schema
 {
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaSimpleTypeUnion.uex' path='docs/doc[@for="XmlSchemaSimpleTypeUnion"]/*' />
+    /// <include file='doc\XmlSchemaSimpleTypeUnion.uex'
+    // path='docs/doc[@for="XmlSchemaSimpleTypeUnion"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -19,7 +20,8 @@ namespace System.Xml.Schema
         XmlQualifiedName[] memberTypes;
         XmlSchemaSimpleType[] baseMemberTypes; // Compiled
 
-        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex' path='docs/doc[@for="XmlSchemaSimpleTypeUnion.BaseTypes"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeUnion.BaseTypes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -29,7 +31,8 @@ namespace System.Xml.Schema
             get { return baseTypes; }
         }
 
-        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex' path='docs/doc[@for="XmlSchemaSimpleTypeUnion.MemberTypes"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeUnion.MemberTypes"]/*' />
         [XmlAttribute("memberTypes")]
         public XmlQualifiedName[] MemberTypes
         {
@@ -38,7 +41,8 @@ namespace System.Xml.Schema
         }
 
         //Compiled Information
-        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex' path='docs/doc[@for="XmlSchemaSimpleTypeUnion.BaseMemberTypes"]/*' />
+        /// <include file='doc\XmlSchemaSimpleTypeUnion.uex'
+        // path='docs/doc[@for="XmlSchemaSimpleTypeUnion.BaseMemberTypes"]/*' />
         [XmlIgnore]
         public XmlSchemaSimpleType[] BaseMemberTypes
         {

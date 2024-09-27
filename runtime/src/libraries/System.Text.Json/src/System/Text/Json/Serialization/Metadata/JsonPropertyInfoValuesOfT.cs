@@ -8,12 +8,14 @@ namespace System.Text.Json.Serialization.Metadata
     /// <summary>
     /// Provides serialization metadata about a property or field.
     /// </summary>
-    /// <typeparam name="T">The type to convert of the <see cref="JsonConverter{T}"/> for the property.</typeparam>
+    /// <typeparam name="T">The type to convert of the <see cref="JsonConverter{T}"/> for the
+    // property.</typeparam>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public sealed class JsonPropertyInfoValues<T>
     {
         /// <summary>
-        /// If <see langword="true"/>, indicates that the member is a property, otherwise indicates the member is a field.
+        /// If <see langword="true"/>, indicates that the member is a property, otherwise indicates the
+        // member is a field.
         /// </summary>
         public bool IsProperty { get; init; }
 
@@ -38,7 +40,8 @@ namespace System.Text.Json.Serialization.Metadata
         public JsonTypeInfo PropertyTypeInfo { get; init; } = null!;
 
         /// <summary>
-        /// A <see cref="JsonConverter"/> for the property or field, specified by <see cref="JsonConverterAttribute"/>.
+        /// A <see cref="JsonConverter"/> for the property or field, specified by <see
+        // cref="JsonConverterAttribute"/>.
         /// </summary>
         public JsonConverter<T>? Converter { get; init; }
 
@@ -68,7 +71,8 @@ namespace System.Text.Json.Serialization.Metadata
         public bool IsExtensionData { get; init; }
 
         /// <summary>
-        /// If the property or field is a number, specifies how it should processed when serializing and deserializing.
+        /// If the property or field is a number, specifies how it should processed when serializing and
+        // deserializing.
         /// </summary>
         public JsonNumberHandling? NumberHandling { get; init; }
 
@@ -78,7 +82,8 @@ namespace System.Text.Json.Serialization.Metadata
         public string PropertyName { get; init; } = null!;
 
         /// <summary>
-        /// The name to be used when processing the property or field, specified by <see cref="JsonPropertyNameAttribute"/>.
+        /// The name to be used when processing the property or field, specified by <see
+        // cref="JsonPropertyNameAttribute"/>.
         /// </summary>
         public string? JsonPropertyName { get; init; }
     }

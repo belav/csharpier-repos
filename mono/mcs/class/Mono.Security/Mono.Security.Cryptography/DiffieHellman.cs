@@ -77,7 +77,8 @@ namespace Mono.Security.Cryptography
         /// <summary>
         /// When overridden in a derived class, exports the <see cref="DHParameters"/>.
         /// </summary>
-        /// <param name="includePrivate"><b>true</b> to include private parameters; otherwise, <b>false</b>.</param>
+        /// <param name="includePrivate"><b>true</b> to include private parameters; otherwise,
+        // <b>false</b>.</param>
         /// <returns>The parameters for Diffie-Hellman.</returns>
         public abstract DHParameters ExportParameters(bool includePrivate);
 
@@ -99,7 +100,8 @@ namespace Mono.Security.Cryptography
         /// Reconstructs a <see cref="DiffieHellman"/> object from an XML string.
         /// </summary>
         /// <param name="xmlString">The XML string to use to reconstruct the DiffieHellman object.</param>
-        /// <exception cref="CryptographicException">One of the values in the XML string is invalid.</exception>
+        /// <exception cref="CryptographicException">One of the values in the XML string is
+        // invalid.</exception>
         public override void FromXmlString(string xmlString)
         {
             if (xmlString == null)
@@ -130,9 +132,11 @@ namespace Mono.Security.Cryptography
         }
 
         /// <summary>
-        /// Creates and returns an XML string representation of the current <see cref="DiffieHellman"/> object.
+        /// Creates and returns an XML string representation of the current <see cref="DiffieHellman"/>
+        // object.
         /// </summary>
-        /// <param name="includePrivateParameters"><b>true</b> to include private parameters; otherwise, <b>false</b>.</param>
+        /// <param name="includePrivateParameters"><b>true</b> to include private parameters; otherwise,
+        // <b>false</b>.</param>
         /// <returns>An XML string encoding of the current DiffieHellman object.</returns>
         public override string ToXmlString(bool includePrivateParameters)
         {

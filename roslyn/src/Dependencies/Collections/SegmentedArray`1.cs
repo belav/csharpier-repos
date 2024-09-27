@@ -12,8 +12,10 @@ using Microsoft.CodeAnalysis.Collections.Internal;
 namespace Microsoft.CodeAnalysis.Collections
 {
     /// <summary>
-    /// Defines a fixed-size collection with the same API surface and behavior as an "SZArray", which is a
-    /// single-dimensional zero-based array commonly represented in C# as <c>T[]</c>. The implementation of this
+    /// Defines a fixed-size collection with the same API surface and behavior as an "SZArray", which is
+    // a
+    /// single-dimensional zero-based array commonly represented in C# as <c>T[]</c>. The implementation
+    // of this
     /// collection uses segmented arrays to avoid placing objects on the Large Object Heap.
     /// </summary>
     /// <typeparam name="T">The type of elements stored in the array.</typeparam>
@@ -30,11 +32,15 @@ namespace Microsoft.CodeAnalysis.Collections
         /// The number of elements in each page of the segmented array of type <typeparamref name="T"/>.
         /// </summary>
         /// <remarks>
-        /// <para>The segment size is calculated according to <see cref="Unsafe.SizeOf{T}"/>, performs the IL operation
-        /// defined by <see cref="OpCodes.Sizeof"/>. ECMA-335 defines this operation with the following note:</para>
+        /// <para>The segment size is calculated according to <see cref="Unsafe.SizeOf{T}"/>, performs the
+        // IL operation
+        /// defined by <see cref="OpCodes.Sizeof"/>. ECMA-335 defines this operation with the following
+        // note:</para>
         ///
-        /// <para><c>sizeof</c> returns the total size that would be occupied by each element in an array of this type –
-        /// including any padding the implementation chooses to add. Specifically, array elements lie <c>sizeof</c>
+        /// <para><c>sizeof</c> returns the total size that would be occupied by each element in an array of
+        // this type –
+        /// including any padding the implementation chooses to add. Specifically, array elements lie
+        // <c>sizeof</c>
         /// bytes apart.</para>
         /// </remarks>
         private static int SegmentSize
@@ -81,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Collections
                     _items[i] = new T[SegmentSize];
                 }
 
-                // Make sure the last page only contains the number of elements required for the desired length. This
+                // Make sure the last page only contains the number of elements required for the desired length.
+                // This
                 // collection is not resizeable so any additional padding would be a waste of space.
                 //
                 // Avoid using (length & s_offsetMask) because it doesn't handle a last page size of s_segmentSize.
@@ -192,6 +199,8 @@ namespace Microsoft.CodeAnalysis.Collections
         void IList.Clear()
         {
             // Matches System.Array
+            //
+            //
             // https://github.com/dotnet/runtime/blob/e0ec035994179e8ebd6ccf081711ee11d4c5491b/src/libraries/System.Private.CoreLib/src/System/Array.cs#L279-L282
             foreach (IList list in _items)
             {
@@ -297,6 +306,8 @@ namespace Microsoft.CodeAnalysis.Collections
                 return 1;
 
             // Matches System.Array
+            //
+            //
             // https://github.com/dotnet/runtime/blob/e0ec035994179e8ebd6ccf081711ee11d4c5491b/src/libraries/System.Private.CoreLib/src/System/Array.cs#L320-L323
             if (other is not SegmentedArray<T> o || Length != o.Length)
             {
@@ -344,6 +355,8 @@ namespace Microsoft.CodeAnalysis.Collections
             _ = comparer ?? throw new ArgumentNullException(nameof(comparer));
 
             // Matches System.Array
+            //
+            //
             // https://github.com/dotnet/runtime/blob/e0ec035994179e8ebd6ccf081711ee11d4c5491b/src/libraries/System.Private.CoreLib/src/System/Array.cs#L380-L383
             var ret = 0;
             for (var i = Length >= 8 ? Length - 8 : 0; i < Length; i++)

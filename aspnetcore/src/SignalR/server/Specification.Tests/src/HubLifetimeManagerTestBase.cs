@@ -9,14 +9,16 @@ using Xunit;
 namespace Microsoft.AspNetCore.SignalR.Specification.Tests;
 
 /// <summary>
-/// Base test class for lifetime manager implementations. Nothing specific to scale-out for these tests.
+/// Base test class for lifetime manager implementations. Nothing specific to scale-out for these
+// tests.
 /// </summary>
 /// <typeparam name="THub">The type of the <see cref="Hub"/>.</typeparam>
 public abstract class HubLifetimeManagerTestsBase<THub>
     where THub : Hub
 {
     /// <summary>
-    /// This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead.
+    /// This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in
+    // tests instead.
     /// </summary>
     [Obsolete(
         "This API is obsolete and will be removed in a future version. Use CreateNewHubLifetimeManager in tests instead."
@@ -321,7 +323,8 @@ public abstract class HubLifetimeManagerTestsBase<THub>
                 ex.Message
             );
 
-            // Internal state for invocation isn't affected by wrong client, check that we can still complete the invocation
+            // Internal state for invocation isn't affected by wrong client, check that we can still complete
+            // the invocation
             await manager
                 .SetConnectionResultAsync(
                     connection1.ConnectionId,
@@ -476,7 +479,8 @@ public abstract class HubLifetimeManagerTestsBase<THub>
 
             await Assert.ThrowsAsync<HubException>(() => invoke1).DefaultTimeout();
 
-            // Noop, just checking that it doesn't throw. This could be caused by an inflight response from a client while the server cancels the token
+            // Noop, just checking that it doesn't throw. This could be caused by an inflight response from a
+            // client while the server cancels the token
             await manager1.SetConnectionResultAsync(
                 connection1.ConnectionId,
                 CompletionMessage.WithResult(invocation1.InvocationId, 1)

@@ -104,11 +104,11 @@ namespace Mono.Xml.XPath2
 
         public abstract SequenceType StaticType { get; }
 
-        /** <summary>
-            This is the core part of ExprSingle. It is
-            generally used to evaluate expression and returns
-            XPathItem sequence (iterator). The result is unordered
-        */
+/** <summary>
+This is the core part of ExprSingle. It is
+generally used to evaluate expression and returns
+XPathItem sequence (iterator). The result is unordered
+*/
         public abstract XPathSequence Evaluate(XPathSequence iter);
 
         public virtual XPathSequence EvaluateOrdered(XPathSequence iter)
@@ -1022,10 +1022,10 @@ namespace Mono.Xml.XPath2
             );
         }
 
-        /*
-            - compiler -
-            return leftExprBool (context) || rightExprBool (context);
-        */
+/*
+- compiler -
+return leftExprBool (context) || rightExprBool (context);
+*/
         #endregion
     }
 
@@ -1060,10 +1060,10 @@ namespace Mono.Xml.XPath2
             );
         }
 
-        /*
-            - compiler -
-            return leftExprBool (context) && rightExprBool (context);
-        */
+/*
+- compiler -
+return leftExprBool (context) && rightExprBool (context);
+*/
         #endregion
     }
 
@@ -1118,15 +1118,15 @@ namespace Mono.Xml.XPath2
             set { expr = value; }
         }
 
-        /*
-                public XmlTypeCode TypeCode {
-                    get { return typeCode; }
-                }
-        
-                public bool Optional {
-                    get { return optional; }
-                }
-        */
+/*
+public XmlTypeCode TypeCode {
+get { return typeCode; }
+}
+
+public bool Optional {
+get { return optional; }
+}
+*/
         internal SequenceType TargetType
         {
             get { return targetType; }
@@ -2069,25 +2069,25 @@ namespace Mono.Xml.XPath2
         #endregion
     }
 
-    /*
-        // predicates == exprsequence list == list of list of exprsingle
-        internal class PredicateList : CollectionBase
-        {
-            public void Add (ExprSequence expr)
-            {
-                List.Add (expr);
-            }
-    
-            public void Insert (int pos, ExprSequence expr)
-            {
-                List.Insert (pos, expr);
-            }
-    
-            public ExprSequence this [int i] {
-                get { return (ExprSequence) List [i]; }
-            }
-        }
-    */
+/*
+// predicates == exprsequence list == list of list of exprsingle
+internal class PredicateList : CollectionBase
+{
+public void Add (ExprSequence expr)
+{
+List.Add (expr);
+}
+
+public void Insert (int pos, ExprSequence expr)
+{
+List.Insert (pos, expr);
+}
+
+public ExprSequence this [int i] {
+get { return (ExprSequence) List [i]; }
+}
+}
+*/
 
     internal class XPath2NodeTest
     {
@@ -2301,7 +2301,8 @@ namespace Mono.Xml.XPath2
         public override XPathSequence Evaluate(XPathSequence iter)
         {
             XPathSequence variable = iter.Context.ResolveVariable(VariableName);
-            // FIXME: if Evaluate() accepts XPathSequence, then XPathSequence must be public class (to make IXPath2Variable public).
+            // FIXME: if Evaluate() accepts XPathSequence, then XPathSequence must be public class (to make
+            // IXPath2Variable public).
             return variable;
         }
         #endregion
@@ -2408,64 +2409,64 @@ namespace Mono.Xml.XPath2
         }
 
         #region CompileAndEvaluate
-        /*
-        internal static DefaultFunctionCall Create (
-            XmlQualifiedName name,
-            ExprSingle [] args,
-            XQueryStaticContext ctx)
-        {
-            switch (name.Namespace) {
-            case XQueryFunction.Namespace:
-                switch (name.Name) {
-                case "node-name":
-                    return new FnNodeNameCall (ctx, args);
-                case "nilled":
-                    return new FnNilledCall (ctx, args);
-                case "string":
-                    return new FnStringCall (ctx, args);
-                case "data":
-                    return new FnDataCall (ctx, args);
-                case "base-uri":
-                    return new FnBaseUriCall (ctx, args);
-                case "document-uri":
-                    return new FnDocumentUriCall (ctx, args);
-                case "error":
-                    return new FnErrorCall (ctx, args);
-                case "trace":
-                    return new FnTraceCall (ctx, args);
-                case "abs":
-                    return new FnAbsCall (ctx, args);
-                case "ceiling":
-                    return new FnCeilingCall (ctx, args);
-                case "floor":
-                    return new FnFloorCall (ctx, args);
-                case "round":
-                    return new FnRoundCall (ctx, args);
-                case "round-half-to-even":
-                    return new FnRoundHalfToEvenCall (ctx, args);
-                case "codepoints-to-string":
-                    return new FnCodepointsToStringCall (ctx, args);
-                case "string-to-codepoints":
-                    return new FnStringCallToCodepointsCall (ctx, args);
-                }
-                goto default;
-            case InternalPool.XdtNamespace:
-            case XmlSchema.Namespace:
-                XmlSchemaType type = XmlSchemaType.GetBuiltInSimpleType (name);
-                if (type != null)
-                    return new AtomicConstructorCall (ctx, SequenceType.Create (type, Occurence.One), args);
-                type = XmlSchemaType.GetBuiltInComplexType (name);
-                if (type == null)
-                    goto default;
-                return null;
-            default:
-                XQueryFunction func = ctx.CompileContext.InEffectFunctions [name];
-                if (func != null)
-                    return new CustomFunctionCallExpression (ctx, args, func);
-                return null;
-            }
-        }
-        */
+/*
+internal static DefaultFunctionCall Create (
+XmlQualifiedName name,
+ExprSingle [] args,
+XQueryStaticContext ctx)
+{
+switch (name.Namespace) {
+case XQueryFunction.Namespace:
+switch (name.Name) {
+case "node-name":
+return new FnNodeNameCall (ctx, args);
+case "nilled":
+return new FnNilledCall (ctx, args);
+case "string":
+return new FnStringCall (ctx, args);
+case "data":
+return new FnDataCall (ctx, args);
+case "base-uri":
+return new FnBaseUriCall (ctx, args);
+case "document-uri":
+return new FnDocumentUriCall (ctx, args);
+case "error":
+return new FnErrorCall (ctx, args);
+case "trace":
+return new FnTraceCall (ctx, args);
+case "abs":
+return new FnAbsCall (ctx, args);
+case "ceiling":
+return new FnCeilingCall (ctx, args);
+case "floor":
+return new FnFloorCall (ctx, args);
+case "round":
+return new FnRoundCall (ctx, args);
+case "round-half-to-even":
+return new FnRoundHalfToEvenCall (ctx, args);
+case "codepoints-to-string":
+return new FnCodepointsToStringCall (ctx, args);
+case "string-to-codepoints":
+return new FnStringCallToCodepointsCall (ctx, args);
+}
+goto default;
+case InternalPool.XdtNamespace:
+case XmlSchema.Namespace:
+XmlSchemaType type = XmlSchemaType.GetBuiltInSimpleType (name);
+if (type != null)
+return new AtomicConstructorCall (ctx, SequenceType.Create (type, Occurence.One), args);
+type = XmlSchemaType.GetBuiltInComplexType (name);
+if (type == null)
+goto default;
+return null;
+default:
+XQueryFunction func = ctx.CompileContext.InEffectFunctions [name];
+if (func != null)
+return new CustomFunctionCallExpression (ctx, args, func);
+return null;
+}
+}
+*/
 
         internal void CheckArguments(XQueryASTCompiler compiler)
         {
@@ -2534,55 +2535,55 @@ namespace Mono.Xml.XPath2
         #endregion
     }
 
-    /*
-    #region CompileAndEvaluate
-    
-        // It is instantiated per function call expression.
-        // (e.g. the example below contains 4 FunctionCallExpression instances:
-        // "replace(node-name (node-before(/*)), 'foo', node-name($var))"
-        internal class CustomFunctionCallExpr : FunctionCallExprBase
-        {
-            public CustomFunctionCallExpr (ExprSequence args, XQueryFunction function)
-                : base (function.Name, args)
-            {
-                this.function = function;
-            }
-    
-            XQueryFunction function;
-    
-            public XQueryFunction Function {
-                get { return function; }
-            }
-    
-            public override int MinArgs {
-                get { return function.MinArgs; }
-            }
-    
-            public override int MaxArgs {
-                get { return function.MaxArgs; }
-            }
-    
-            public override SequenceType StaticType {
-                get { return function.ReturnType; }
-            }
-    
-            internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
-            {
-                CheckArguments (compiler);
-                for (int i = 0; i < Args.Count; i++)
-                    Args [i] = Args [i].Compile (compiler);
-                return this;
-            }
-    
-            public override XPathSequence Evaluate (XPathSequence iter)
-            {
-                return Function.Evaluate (iter, Args);
-            }
-    
-            // FIXME: add all overrides that delegates to XQueryFunction
-        }
-    #endregion
-    */
+/*
+#region CompileAndEvaluate
+
+// It is instantiated per function call expression.
+// (e.g. the example below contains 4 FunctionCallExpression instances:
+// "replace(node-name (node-before(/*)), 'foo', node-name($var))"
+internal class CustomFunctionCallExpr : FunctionCallExprBase
+{
+public CustomFunctionCallExpr (ExprSequence args, XQueryFunction function)
+: base (function.Name, args)
+{
+this.function = function;
+}
+
+XQueryFunction function;
+
+public XQueryFunction Function {
+get { return function; }
+}
+
+public override int MinArgs {
+get { return function.MinArgs; }
+}
+
+public override int MaxArgs {
+get { return function.MaxArgs; }
+}
+
+public override SequenceType StaticType {
+get { return function.ReturnType; }
+}
+
+internal override ExprSingle CompileCore (XQueryASTCompiler compiler)
+{
+CheckArguments (compiler);
+for (int i = 0; i < Args.Count; i++)
+Args [i] = Args [i].Compile (compiler);
+return this;
+}
+
+public override XPathSequence Evaluate (XPathSequence iter)
+{
+return Function.Evaluate (iter, Args);
+}
+
+// FIXME: add all overrides that delegates to XQueryFunction
+}
+#endregion
+*/
 
     // Ordered / Unordered
     internal class OrderSpecifiedExpr : ExprSingle

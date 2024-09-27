@@ -48,7 +48,8 @@ namespace System.IO.Tests
         [Theory, MemberData(nameof(PathsWithInvalidCharacters))]
         public void PathWithInvalidCharactersAsPath_ReturnsFalse(string invalidPath)
         {
-            // Checks that errors aren't thrown when calling Exists() on paths with impossible to create characters
+            // Checks that errors aren't thrown when calling Exists() on paths with impossible to create
+            // characters
             char[] trimmed =
             {
                 (char)0x9,

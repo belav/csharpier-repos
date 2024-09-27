@@ -13,9 +13,12 @@ public class AuthenticationTicket
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationTicket"/> class
     /// </summary>
-    /// <param name="principal">the <see cref="ClaimsPrincipal"/> that represents the authenticated user.</param>
-    /// <param name="properties">additional properties that can be consumed by the user or runtime.</param>
-    /// <param name="authenticationScheme">the authentication scheme that was responsible for this ticket.</param>
+    /// <param name="principal">the <see cref="ClaimsPrincipal"/> that represents the authenticated
+    // user.</param>
+    /// <param name="properties">additional properties that can be consumed by the user or
+    // runtime.</param>
+    /// <param name="authenticationScheme">the authentication scheme that was responsible for this
+    // ticket.</param>
     public AuthenticationTicket(
         ClaimsPrincipal principal,
         AuthenticationProperties? properties,
@@ -32,8 +35,10 @@ public class AuthenticationTicket
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationTicket"/> class
     /// </summary>
-    /// <param name="principal">the <see cref="ClaimsPrincipal"/> that represents the authenticated user.</param>
-    /// <param name="authenticationScheme">the authentication scheme that was responsible for this ticket.</param>
+    /// <param name="principal">the <see cref="ClaimsPrincipal"/> that represents the authenticated
+    // user.</param>
+    /// <param name="authenticationScheme">the authentication scheme that was responsible for this
+    // ticket.</param>
     public AuthenticationTicket(ClaimsPrincipal principal, string authenticationScheme)
         : this(principal, properties: null, authenticationScheme: authenticationScheme) { }
 
@@ -56,7 +61,8 @@ public class AuthenticationTicket
     /// Returns a copy of the ticket.
     /// </summary>
     /// <remarks>
-    /// The method clones the <see cref="Principal"/> by calling <see cref="ClaimsIdentity.Clone"/> on each of the <see cref="ClaimsPrincipal.Identities"/>.
+    /// The method clones the <see cref="Principal"/> by calling <see cref="ClaimsIdentity.Clone"/> on
+    // each of the <see cref="ClaimsPrincipal.Identities"/>.
     /// </remarks>
     /// <returns>A copy of the ticket</returns>
     public AuthenticationTicket Clone()

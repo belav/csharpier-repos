@@ -298,7 +298,7 @@ namespace System.Web.Security
             if (passwordAnswer != null)
                 passwordAnswer = passwordAnswer.Trim();
 
-            /* some initial validation */
+/* some initial validation */
             if (
                 username == null
                 || username.Length == 0
@@ -360,8 +360,8 @@ namespace System.Web.Security
             if (providerUserKey == null)
                 providerUserKey = Guid.NewGuid();
 
-            /* encode our password/answer using the
-             * "passwordFormat" configuration option */
+/* encode our password/answer using the
+* "passwordFormat" configuration option */
             string passwordSalt = "";
 
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
@@ -373,8 +373,8 @@ namespace System.Web.Security
             if (RequiresQuestionAndAnswer)
                 passwordAnswer = EncodePassword(passwordAnswer, PasswordFormat, passwordSalt);
 
-            /* make sure the hashed/encrypted password and
-             * answer are still under 128 characters. */
+/* make sure the hashed/encrypted password and
+* answer are still under 128 characters. */
             if (password.Length > 128)
             {
                 status = MembershipCreateStatus.InvalidPassword;
@@ -960,7 +960,7 @@ namespace System.Web.Security
             );
             OnValidatingPassword(args);
 
-            /* if we're canceled.. */
+/* if we're canceled.. */
             if (args.Cancel)
             {
                 if (args.FailureInformation == null)
@@ -1011,7 +1011,7 @@ namespace System.Web.Security
 
             userIsOnlineTimeWindow = section.UserIsOnlineTimeWindow;
 
-            /* we can't support password retrieval with hashed passwords */
+/* we can't support password retrieval with hashed passwords */
             if (passwordFormat == MembershipPasswordFormat.Hashed && enablePasswordRetrieval)
                 throw new ProviderException(
                     "password retrieval cannot be used with hashed passwords"
@@ -1296,7 +1296,7 @@ namespace System.Web.Security
             if (pi == null)
                 return null;
 
-            /* do the actual validation */
+/* do the actual validation */
             string user_password = EncodePassword(password, pi.PasswordFormat, pi.PasswordSalt);
 
             if (user_password != pi.Password)
@@ -1386,7 +1386,8 @@ namespace System.Web.Security
                     using (HashAlgorithm hash = HashAlgorithm.Create(alg_type))
                     {
                         // for compatibility (with 2.0) we'll allow MD5 and SHA1 not to map to HMACMD5 and HMACSHA1
-                        // but that won't work with new (4.0) algorithms, like HMACSHA256|384|512 or custom, won't work without using the key
+                        // but that won't work with new (4.0) algorithms, like HMACSHA256|384|512 or custom, won't work
+                        // without using the key
                         KeyedHashAlgorithm kha = (hash as KeyedHashAlgorithm);
                         if (kha != null)
                             kha.Key = MachineKeySection.Config.GetValidationKey();
@@ -1404,7 +1405,7 @@ namespace System.Web.Security
 
                     return Convert.ToBase64String(EncryptPassword(buf));
                 default:
-                    /* not reached.. */
+/* not reached.. */
                     return null;
             }
         }
@@ -1422,7 +1423,7 @@ namespace System.Web.Security
                         DecryptPassword(Convert.FromBase64String(password))
                     );
                 default:
-                    /* not reached.. */
+/* not reached.. */
                     return null;
             }
         }

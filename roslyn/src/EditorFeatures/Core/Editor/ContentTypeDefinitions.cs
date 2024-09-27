@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.ContentTypes
     internal static class ContentTypeDefinitions
     {
         /// <summary>
-        /// Definition of a content type that is a base definition for all content types supported by Roslyn.
+        /// Definition of a content type that is a base definition for all content types supported by
+        // Roslyn.
         /// </summary>
         [Export]
         [Name(ContentTypeNames.RoslynContentType)]

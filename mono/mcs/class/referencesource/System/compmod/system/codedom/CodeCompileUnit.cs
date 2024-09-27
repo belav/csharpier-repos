@@ -55,9 +55,11 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Gets the collection of assemblies. Most code generators will not need this, but the Managed
+        ///       Gets the collection of assemblies. Most code generators will not need this, but the
+        // Managed
         ///       extensions for C++ code generator and
-        ///       other very low level code generators will need to do a more complete compilation. If both this
+        ///       other very low level code generators will need to do a more complete compilation. If both
+        // this
         ///       and the compiler assemblies are specified, the compiler assemblies should win.
         ///    </para>
         /// </devdoc>

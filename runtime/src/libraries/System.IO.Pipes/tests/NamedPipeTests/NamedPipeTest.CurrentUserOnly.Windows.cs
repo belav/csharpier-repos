@@ -13,7 +13,8 @@ using Xunit;
 
 namespace System.IO.Pipes.Tests
 {
-    // Class to be used as xUnit fixture to avoid creating the user, an relatively slow operation (couple of seconds), multiple times.
+    // Class to be used as xUnit fixture to avoid creating the user, an relatively slow operation
+    // (couple of seconds), multiple times.
     public class TestAccountImpersonator : IDisposable
     {
         private const string TestAccountName = "CorFxTst0uZa"; // Random suffix to avoid matching any other account by accident, but const to avoid leaking it.
@@ -109,12 +110,14 @@ namespace System.IO.Pipes.Tests
                 }
                 catch (InvalidOperationException)
                 {
-                    // TODO: Investigate, it always throw this exception with "Can't delete object already deleted", but it actually deletes it.
+                    // TODO: Investigate, it always throw this exception with "Can't delete object already deleted", but
+                    // it actually deletes it.
                 }
             }
         }
 
-        // This method asserts if it impersonates the current identity, i.e.: it ensures that an actual impersonation happens
+        // This method asserts if it impersonates the current identity, i.e.: it ensures that an actual
+        // impersonation happens
         public void RunImpersonated(Action action)
         {
             using (WindowsIdentity serverIdentity = WindowsIdentity.GetCurrent())
@@ -271,7 +274,8 @@ namespace System.IO.Pipes.Tests
                     && clientDirection == PipeDirection.In
                 )
                 {
-                    // When CurrentUserOnly is only on client side and asks for ReadOnly access, the connection is not rejected
+                    // When CurrentUserOnly is only on client side and asks for ReadOnly access, the connection is not
+                    // rejected
                     // but we get the UnauthorizedAccessException on the client regardless.
                     Assert.True(serverTask.Wait(TimeSpan.FromSeconds(10)));
                     Assert.True(serverTask.IsCompletedSuccessfully);

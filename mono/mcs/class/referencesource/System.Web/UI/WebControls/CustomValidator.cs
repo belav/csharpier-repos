@@ -74,7 +74,8 @@ namespace System.Web.UI.WebControls
 
         /// <internalonly/>
         /// <devdoc>
-        /// <para>Adds the properties of the <see cref='System.Web.UI.WebControls.CustomValidator'/> control to the
+        /// <para>Adds the properties of the <see cref='System.Web.UI.WebControls.CustomValidator'/> control
+        // to the
         ///    output stream for rendering on the client.</para>
         /// </devdoc>
         protected override void AddAttributesToRender(HtmlTextWriter writer)
@@ -159,7 +160,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>Raises the
-        ///    <see langword='ServerValidate'/> event for the <see cref='System.Web.UI.WebControls.CustomValidator'/>.</para>
+        ///    <see langword='ServerValidate'/> event for the <see
+        // cref='System.Web.UI.WebControls.CustomValidator'/>.</para>
         /// </devdoc>
         protected virtual bool OnServerValidate(string value)
         {

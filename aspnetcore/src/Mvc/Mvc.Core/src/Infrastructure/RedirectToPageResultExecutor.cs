@@ -9,7 +9,8 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
 /// <summary>
-/// A <see cref="IActionResultExecutor{RedirectToPageResult}"/> for <see cref="RedirectToPageResult"/>.
+/// A <see cref="IActionResultExecutor{RedirectToPageResult}"/> for <see
+// cref="RedirectToPageResult"/>.
 /// </summary>
 public partial class RedirectToPageResultExecutor : IActionResultExecutor<RedirectToPageResult>
 {

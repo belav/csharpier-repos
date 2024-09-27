@@ -4,7 +4,8 @@
 
     /// <summary>
     /// This attribute is the base class for all the value provider attributes that can be specified on
-    /// method parameters to be able to get values from alternate sources like Form, QueryString, ViewState.
+    /// method parameters to be able to get values from alternate sources like Form, QueryString,
+    // ViewState.
     /// </summary>
     public abstract class ValueProviderSourceAttribute
         : Attribute,

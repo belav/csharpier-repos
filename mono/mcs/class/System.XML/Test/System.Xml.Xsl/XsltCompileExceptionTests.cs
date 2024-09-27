@@ -118,7 +118,8 @@ namespace MonoTests.System.Xml.Xsl
             Assert.IsNotNull(xe.Message, "#B3");
             Assert.IsTrue(xe.Message.Length > 0, "#B4");
             // exact us-english error message
-            // Assert.AreEqual ("XSLT compile error at (1,0). See InnerException for details.", xe.Message, "#B5-US-ENGLISH");
+            // Assert.AreEqual ("XSLT compile error at (1,0). See InnerException for details.", xe.Message,
+            // "#B5-US-ENGLISH");
             Assert.IsTrue(xe.Message.IndexOf("(1,0).") != -1, "#B5");
             Assert.IsNull(xe.SourceUri, "#B6");
             Assert.AreSame(cause, xe.InnerException, "#B7");
@@ -163,7 +164,8 @@ namespace MonoTests.System.Xml.Xsl
             Assert.IsNotNull(xe.Message, "#E3");
             Assert.IsTrue(xe.Message.Length > 0, "#E4");
             // exact us-english error message
-            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(1,0). See InnerException for details.", xe.Message, "#E5-US-ENGLISH");
+            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(1,0). See InnerException for
+            // details.", xe.Message, "#E5-US-ENGLISH");
             Assert.IsTrue(xe.Message.IndexOf("http://local/test.xsl(1,0)") != -1, "#E5");
             Assert.AreSame(sourceUri, xe.SourceUri, "#E6");
             Assert.AreSame(cause, xe.InnerException, "#E7");
@@ -193,7 +195,8 @@ namespace MonoTests.System.Xml.Xsl
             Assert.IsNotNull(xe.Message, "#G3");
             Assert.IsTrue(xe.Message.Length > 0, "#G4");
             // exact us-english error message
-            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(1,2). See InnerException for details.", xe.Message, "#G5-US-ENGLISH");
+            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(1,2). See InnerException for
+            // details.", xe.Message, "#G5-US-ENGLISH");
             Assert.IsTrue(xe.Message.IndexOf("http://local/test.xsl(1,2)") != -1, "#G5");
             Assert.AreSame(sourceUri, xe.SourceUri, "#G5");
             Assert.AreSame(cause, xe.InnerException, "#G6");
@@ -208,7 +211,8 @@ namespace MonoTests.System.Xml.Xsl
             Assert.IsNotNull(xe.Message, "#H3");
             Assert.IsTrue(xe.Message.Length > 0, "#H4");
             // exact us-english error message
-            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(3,4). See InnerException for details.", xe.Message, "#H5-US-ENGLISH");
+            // Assert.AreEqual ("XSLT compile error at http://local/test.xsl(3,4). See InnerException for
+            // details.", xe.Message, "#H5-US-ENGLISH");
             Assert.IsTrue(xe.Message.IndexOf("http://local/test.xsl(3,4)") != -1, "#H5");
             Assert.AreSame(sourceUri, xe.SourceUri, "#H6");
             Assert.IsNull(xe.InnerException, "#H7");

@@ -170,7 +170,8 @@ public static class HttpMethods
     }
 
     /// <summary>
-    ///  Returns the equivalent static instance, or the original instance if none match. This conversion is optional but allows for performance optimizations when comparing method values elsewhere.
+    ///  Returns the equivalent static instance, or the original instance if none match. This conversion
+    // is optional but allows for performance optimizations when comparing method values elsewhere.
     /// </summary>
     /// <param name="method"></param>
     /// <returns></returns>

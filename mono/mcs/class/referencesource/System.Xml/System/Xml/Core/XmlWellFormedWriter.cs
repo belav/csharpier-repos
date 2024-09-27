@@ -212,7 +212,11 @@ namespace System.Xml
 
         private static readonly State[] StateTableDocument =
         {
-            //                         State.Start           State.TopLevel   State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
+            //                         State.Start           State.TopLevel   State.Document     State.Element
+            // State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle
+            // State.Attribute,
+            // State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,
+            // State.RootLevelB64Attr   State.AfterRootLevelAttr, // 16
             /* Token.StartDocument  */State.Document,
             State.Error,
             State.Error,
@@ -457,7 +461,11 @@ namespace System.Xml
 
         private static readonly State[] StateTableAuto =
         {
-            //                         State.Start           State.TopLevel       State.Document     State.Element          State.Content     State.B64Content      State.B64Attribute   State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,  State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,  State.AfterRootLevelAttr  // 16
+            //                         State.Start           State.TopLevel       State.Document
+            // State.Element          State.Content     State.B64Content      State.B64Attribute
+            // State.AfterRootEle    State.Attribute,      State.SpecialAttr,   State.EndDocument,
+            // State.RootLevelAttr,      State.RootLevelSpecAttr,  State.RootLevelB64Attr,
+            // State.AfterRootLevelAttr  // 16
             /* Token.StartDocument  */State.Document,
             State.Error,
             State.Error,
@@ -1434,7 +1442,8 @@ namespace System.Xml
                     text = string.Empty;
                 }
 
-                // xml declaration is a special case (not a processing instruction, but we allow WriteProcessingInstruction as a convenience)
+                // xml declaration is a special case (not a processing instruction, but we allow
+                // WriteProcessingInstruction as a convenience)
                 if (
                     name.Length == 3
                     && string.Compare(name, "xml", StringComparison.OrdinalIgnoreCase) == 0
@@ -2205,7 +2214,8 @@ namespace System.Xml
             Debug.Assert(stateTable == StateTableAuto);
         }
 
-        // PushNamespaceImplicit is called when a prefix/namespace pair is used in an element name, attribute name or some other qualified name.
+        // PushNamespaceImplicit is called when a prefix/namespace pair is used in an element name,
+        // attribute name or some other qualified name.
         private void PushNamespaceImplicit(string prefix, string ns)
         {
             NamespaceKind kind;
@@ -2233,7 +2243,8 @@ namespace System.Xml
                 // The prefix is defined but in a different scope
                 else
                 {
-                    // existing declaration is special one (xml, xmlns) -> validate that the new one is the same and can be declared
+                    // existing declaration is special one (xml, xmlns) -> validate that the new one is the same and can
+                    // be declared
                     if (nsStack[existingNsIndex].kind == NamespaceKind.Special)
                     {
                         if (prefix == "xml")
@@ -2295,7 +2306,8 @@ namespace System.Xml
         }
 
         // PushNamespaceExplicit is called when a namespace declaration is written out;
-        // It returs true if the namespace declaration should we written out, false if it should be omited (if OmitDuplicateNamespaceDeclarations is true)
+        // It returs true if the namespace declaration should we written out, false if it should be omited
+        // (if OmitDuplicateNamespaceDeclarations is true)
         private bool PushNamespaceExplicit(string prefix, string ns)
         {
             bool writeItOut = true;

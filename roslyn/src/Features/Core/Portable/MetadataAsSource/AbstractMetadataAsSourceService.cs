@@ -136,7 +136,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// instead of the path.
         /// </summary>
         /// <param name="document">The document to generate source into</param>
-        /// <param name="symbolCompilation">The <see cref="Compilation"/> in which symbol is resolved.</param>
+        /// <param name="symbolCompilation">The <see cref="Compilation"/> in which symbol is
+        // resolved.</param>
         /// <param name="symbol">The symbol to generate source for</param>
         /// <param name="cancellationToken">To cancel document operations</param>
         /// <returns>The updated document</returns>

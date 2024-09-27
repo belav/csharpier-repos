@@ -10,10 +10,13 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.VisualStudio.IntegrationTest.Setup;
 
-/// <summary>This class causes a crash if an exception is encountered inside lightbulb extension points such as code fixes and code refactorings.</summary>
+/// <summary>This class causes a crash if an exception is encountered inside lightbulb extension
+// points such as code fixes and code refactorings.</summary>
 /// <remarks>
-/// This class is exported as a workspace service with layer: <see cref="ServiceLayer.Host"/>. This ensures that TestExtensionManager
-/// is preferred over EditorLayerExtensionManager (which has layer: <see cref="ServiceLayer.Editor"/>) when running VS integration tests.
+/// This class is exported as a workspace service with layer: <see cref="ServiceLayer.Host"/>. This
+// ensures that TestExtensionManager
+/// is preferred over EditorLayerExtensionManager (which has layer: <see
+// cref="ServiceLayer.Editor"/>) when running VS integration tests.
 /// </remarks>
 [Shared, ExportWorkspaceService(typeof(IExtensionManager), ServiceLayer.Host)]
 [method: ImportingConstructor]

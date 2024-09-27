@@ -904,7 +904,11 @@ namespace System
                 Environment.Exit(58);
         }
 #else
-        // largely inspired by https://github.com/dotnet/corefx/blob/be8d2ce3964968cec9322a64211e37682085db70/src/System.Console/src/System/ConsolePal.WinRT.cs, because it's a similar platform where a console might not be available
+        // largely inspired by
+        //
+        //
+        // https://github.com/dotnet/corefx/blob/be8d2ce3964968cec9322a64211e37682085db70/src/System.Console/src/System/ConsolePal.WinRT.cs,
+        // because it's a similar platform where a console might not be available
 
         // provide simply color tracking that allows round-tripping
         internal const ConsoleColor UnknownColor = (ConsoleColor)(-1);

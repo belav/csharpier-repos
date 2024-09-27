@@ -10,34 +10,50 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
 {
     /// <summary>
-    /// <see cref="VirtualChar"/> provides a uniform view of a language's string token characters regardless if they
-    /// were written raw in source, or are the production of a language escape sequence.  For example, in C#, in a
-    /// normal <c>""</c> string a <c>Tab</c> character can be written either as the raw tab character (value <c>9</c> in
-    /// ASCII),  or as <c>\t</c>.  The format is a single character in the source, while the latter is two characters
-    /// (<c>\</c> and <c>t</c>).  <see cref="VirtualChar"/> will represent both, providing the raw <see cref="char"/>
-    /// value of <c>9</c> as well as what <see cref="TextSpan"/> in the original <see cref="SourceText"/> they occupied.
+    /// <see cref="VirtualChar"/> provides a uniform view of a language's string token characters
+    // regardless if they
+    /// were written raw in source, or are the production of a language escape sequence.  For example,
+    // in C#, in a
+    /// normal <c>""</c> string a <c>Tab</c> character can be written either as the raw tab character
+    // (value <c>9</c> in
+    /// ASCII),  or as <c>\t</c>.  The format is a single character in the source, while the latter is
+    // two characters
+    /// (<c>\</c> and <c>t</c>).  <see cref="VirtualChar"/> will represent both, providing the raw <see
+    // cref="char"/>
+    /// value of <c>9</c> as well as what <see cref="TextSpan"/> in the original <see
+    // cref="SourceText"/> they occupied.
     /// </summary>
     /// <remarks>
-    /// A core consumer of this system is the Regex parser.  That parser wants to work over an array of characters,
-    /// however this array of characters is not the same as the array of characters a user types into a string in C# or
-    /// VB. For example In C# someone may write: @"\z".  This should appear to the user the same as if they wrote "\\z"
-    /// and the same as "\\\u007a".  However, as these all have wildly different presentations for the user, there needs
-    /// to be a way to map back the characters it sees ( '\' and 'z' ) back to the  ranges of characters the user wrote.
+    /// A core consumer of this system is the Regex parser.  That parser wants to work over an array of
+    // characters,
+    /// however this array of characters is not the same as the array of characters a user types into a
+    // string in C# or
+    /// VB. For example In C# someone may write: @"\z".  This should appear to the user the same as if
+    // they wrote "\\z"
+    /// and the same as "\\\u007a".  However, as these all have wildly different presentations for the
+    // user, there needs
+    /// to be a way to map back the characters it sees ( '\' and 'z' ) back to the  ranges of characters
+    // the user wrote.
     /// </remarks>
     internal readonly record struct VirtualChar : IComparable<VirtualChar>, IComparable<char>
     {
         /// <summary>
-        /// The value of this <see cref="VirtualChar"/> as a <see cref="Rune"/> if such a representation is possible.
-        /// <see cref="Rune"/>s can represent Unicode codepoints that can appear in a <see cref="string"/> except for
-        /// unpaired surrogates.  If an unpaired high or low surrogate character is present, this value will be <see
+        /// The value of this <see cref="VirtualChar"/> as a <see cref="Rune"/> if such a representation is
+        // possible.
+        /// <see cref="Rune"/>s can represent Unicode codepoints that can appear in a <see cref="string"/>
+        // except for
+        /// unpaired surrogates.  If an unpaired high or low surrogate character is present, this value will
+        // be <see
         /// cref="Rune.ReplacementChar"/>.  The value of this character can be retrieved from
         /// <see cref="SurrogateChar"/>.
         /// </summary>
         public readonly Rune Rune;
 
         /// <summary>
-        /// The unpaired high or low surrogate character that was encountered that could not be represented in <see
-        /// cref="Rune"/>.  If <see cref="Rune"/> is not <see cref="Rune.ReplacementChar"/>, this will be <c>0</c>.
+        /// The unpaired high or low surrogate character that was encountered that could not be represented
+        // in <see
+        /// cref="Rune"/>.  If <see cref="Rune"/> is not <see cref="Rune.ReplacementChar"/>, this will be
+        // <c>0</c>.
         /// </summary>
         public readonly char SurrogateChar;
 
@@ -48,15 +64,18 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         public readonly TextSpan Span;
 
         /// <summary>
-        /// Creates a new <see cref="VirtualChar"/> from the provided <paramref name="rune"/>.  This operation cannot
+        /// Creates a new <see cref="VirtualChar"/> from the provided <paramref name="rune"/>.  This
+        // operation cannot
         /// fail.
         /// </summary>
         public static VirtualChar Create(Rune rune, TextSpan span) =>
             new(rune, surrogateChar: default, span);
 
         /// <summary>
-        /// Creates a new <see cref="VirtualChar"/> from an unpaired high or low surrogate character.  This will throw
-        /// if <paramref name="surrogateChar"/> is not actually a surrogate character. The resultant <see cref="Rune"/>
+        /// Creates a new <see cref="VirtualChar"/> from an unpaired high or low surrogate character.  This
+        // will throw
+        /// if <paramref name="surrogateChar"/> is not actually a surrogate character. The resultant <see
+        // cref="Rune"/>
         /// value will be <see cref="Rune.ReplacementChar"/>.
         /// </summary>
         public static VirtualChar Create(char surrogateChar, TextSpan span)
@@ -83,8 +102,10 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.VirtualChars
         }
 
         /// <summary>
-        /// Retrieves the scaler value of this character as an <see cref="int"/>.  If this is an unpaired surrogate
-        /// character, this will be the value of that surrogate.  Otherwise, this will be the value of our <see
+        /// Retrieves the scaler value of this character as an <see cref="int"/>.  If this is an unpaired
+        // surrogate
+        /// character, this will be the value of that surrogate.  Otherwise, this will be the value of our
+        // <see
         /// cref="Rune"/>.
         /// </summary>
         public int Value => SurrogateChar != 0 ? SurrogateChar : Rune.Value;

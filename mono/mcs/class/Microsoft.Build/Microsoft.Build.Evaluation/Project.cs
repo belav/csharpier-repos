@@ -260,12 +260,14 @@ namespace Microsoft.Build.Evaluation
 
         void ProcessXml()
         {
-            // this needs to be initialized here (regardless of that items won't be evaluated at property evaluation;
+            // this needs to be initialized here (regardless of that items won't be evaluated at property
+            // evaluation;
             // Conditions could incorrectly reference items and lack of this list causes NRE.
             all_evaluated_items = new List<ProjectItem>();
 
             // property evaluation happens couple of times.
-            // At first step, all non-imported properties are evaluated TOO, WHILE those properties are being evaluated.
+            // At first step, all non-imported properties are evaluated TOO, WHILE those properties are being
+            // evaluated.
             // This means, Include and IncludeGroup elements with Condition attribute MAY contain references to
             // properties and they will be expanded.
             var elements = EvaluatePropertiesAndImportsAndChooses(Xml.Children).ToArray(); // ToArray(): to not lazily evaluate elements.

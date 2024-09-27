@@ -15,7 +15,8 @@ namespace Microsoft.Extensions.DependencyInjection;
 public static class OAuthExtensions
 {
     /// <summary>
-    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
+    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // authentication scheme.
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
@@ -32,7 +33,8 @@ public static class OAuthExtensions
         );
 
     /// <summary>
-    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
+    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // authentication scheme.
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
@@ -52,7 +54,8 @@ public static class OAuthExtensions
         );
 
     /// <summary>
-    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
+    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // authentication scheme.
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
@@ -75,7 +78,8 @@ public static class OAuthExtensions
         );
 
     /// <summary>
-    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified authentication scheme.
+    /// Adds OAuth 2.0 based authentication to <see cref="AuthenticationBuilder"/> using the specified
+    // authentication scheme.
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>

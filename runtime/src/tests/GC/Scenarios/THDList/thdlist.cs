@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /**
- * Description:
- *      Mainly stresses the GC by creating n threads each manipulating its own local Linked List.
- *      Each thread in turn adds and deletes thousands of nodes from the linked list.
- */
+* Description:
+*      Mainly stresses the GC by creating n threads each manipulating its own local Linked List.
+*      Each thread in turn adds and deletes thousands of nodes from the linked list.
+*/
 
 
 namespace ThdList

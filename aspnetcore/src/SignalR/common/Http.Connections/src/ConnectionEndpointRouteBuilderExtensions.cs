@@ -12,7 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Builder;
 
 /// <summary>
-/// Extension methods on <see cref="IEndpointRouteBuilder"/> that add routes for <see cref="ConnectionHandler"/>s.
+/// Extension methods on <see cref="IEndpointRouteBuilder"/> that add routes for <see
+// cref="ConnectionHandler"/>s.
 /// </summary>
 public static class ConnectionEndpointRouteBuilderExtensions
 {
@@ -24,7 +25,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
     /// <param name="configure">A callback to configure the connection.</param>
-    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static ConnectionEndpointRouteBuilder MapConnections(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
@@ -37,7 +39,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <typeparam name="TConnectionHandler">The <see cref="ConnectionHandler"/> type.</typeparam>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
-    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern
@@ -54,7 +57,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/> to add the route to.</param>
     /// <param name="pattern">The route pattern.</param>
     /// <param name="configureOptions">A callback to configure dispatcher options.</param>
-    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static ConnectionEndpointRouteBuilder MapConnectionHandler<TConnectionHandler>(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,
@@ -95,7 +99,8 @@ public static class ConnectionEndpointRouteBuilderExtensions
     /// <param name="pattern">The route pattern.</param>
     /// <param name="options">Options used to configure the connection.</param>
     /// <param name="configure">A callback to configure the connection.</param>
-    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the connections.</returns>
+    /// <returns>An <see cref="ConnectionEndpointRouteBuilder"/> for endpoints associated with the
+    // connections.</returns>
     public static ConnectionEndpointRouteBuilder MapConnections(
         this IEndpointRouteBuilder endpoints,
         [StringSyntax("Route")] string pattern,

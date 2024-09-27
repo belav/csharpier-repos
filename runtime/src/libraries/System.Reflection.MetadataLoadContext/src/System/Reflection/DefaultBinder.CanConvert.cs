@@ -42,11 +42,11 @@ namespace System
 
         private static readonly Primitives[] s_primitiveConversions = new Primitives[]
         {
-            /* Empty    */0, // not primitive
-            /* Object   */0, // not primitive
-            /* DBNull   */0, // not exposed.
-            /* Boolean  */Primitives.Boolean,
-            /* Char     */Primitives.Char
+/* Empty    */0, // not primitive
+/* Object   */0, // not primitive
+/* DBNull   */0, // not exposed.
+/* Boolean  */Primitives.Boolean,
+/* Char     */Primitives.Char
                 | Primitives.UInt16
                 | Primitives.UInt32
                 | Primitives.Int32
@@ -54,13 +54,13 @@ namespace System
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* SByte    */Primitives.SByte
+/* SByte    */Primitives.SByte
                 | Primitives.Int16
                 | Primitives.Int32
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* Byte     */Primitives.Byte
+/* Byte     */Primitives.Byte
                 | Primitives.Char
                 | Primitives.UInt16
                 | Primitives.Int16
@@ -70,32 +70,32 @@ namespace System
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* Int16    */Primitives.Int16
+/* Int16    */Primitives.Int16
                 | Primitives.Int32
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* UInt16   */Primitives.UInt16
+/* UInt16   */Primitives.UInt16
                 | Primitives.UInt32
                 | Primitives.Int32
                 | Primitives.UInt64
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* Int32    */Primitives.Int32 | Primitives.Int64 | Primitives.Single | Primitives.Double,
-            /* UInt32   */Primitives.UInt32
+/* Int32    */Primitives.Int32 | Primitives.Int64 | Primitives.Single | Primitives.Double,
+/* UInt32   */Primitives.UInt32
                 | Primitives.UInt64
                 | Primitives.Int64
                 | Primitives.Single
                 | Primitives.Double,
-            /* Int64    */Primitives.Int64 | Primitives.Single | Primitives.Double,
-            /* UInt64   */Primitives.UInt64 | Primitives.Single | Primitives.Double,
-            /* Single   */Primitives.Single | Primitives.Double,
-            /* Double   */Primitives.Double,
-            /* Decimal  */Primitives.Decimal,
-            /* DateTime */Primitives.DateTime,
-            /* [Unused] */0,
-            /* String   */Primitives.String,
+/* Int64    */Primitives.Int64 | Primitives.Single | Primitives.Double,
+/* UInt64   */Primitives.UInt64 | Primitives.Single | Primitives.Double,
+/* Single   */Primitives.Single | Primitives.Double,
+/* Double   */Primitives.Double,
+/* Decimal  */Primitives.Decimal,
+/* DateTime */Primitives.DateTime,
+/* [Unused] */0,
+/* String   */Primitives.String,
         };
     }
 }

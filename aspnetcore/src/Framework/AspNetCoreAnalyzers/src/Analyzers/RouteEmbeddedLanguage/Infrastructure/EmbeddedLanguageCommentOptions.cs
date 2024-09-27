@@ -8,13 +8,16 @@ using System.Reflection;
 
 namespace Microsoft.AspNetCore.Analyzers.RouteEmbeddedLanguage.Infrastructure;
 
-// Copied from https://github.com/dotnet/roslyn/blob/9fee6f5461baae5152c956c3c3024ca15b85feb9/src/Features/Core/Portable/EmbeddedLanguages/EmbeddedLanguageCommentOptions.cs
+// Copied from
+// https://github.com/dotnet/roslyn/blob/9fee6f5461baae5152c956c3c3024ca15b85feb9/src/Features/Core/Portable/EmbeddedLanguages/EmbeddedLanguageCommentOptions.cs
 
 /// <summary>
 /// Helps match patterns of the form: language=name,option1,option2,option3
 /// <para/>
-/// All matching is case insensitive, with spaces allowed between the punctuation. Option values will be or'ed
-/// together to produce final options value.  If an unknown option is encountered, processing will stop with
+/// All matching is case insensitive, with spaces allowed between the punctuation. Option values
+// will be or'ed
+/// together to produce final options value.  If an unknown option is encountered, processing will
+// stop with
 /// whatever value has accumulated so far.
 /// <para/>
 /// Option names are the values from the TOptions enum.

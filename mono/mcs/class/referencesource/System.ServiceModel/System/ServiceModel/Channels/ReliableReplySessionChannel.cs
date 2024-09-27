@@ -1202,10 +1202,13 @@ namespace System.ServiceModel.Channels
         //      for the request is unknown. Any transport request referencing this reliable request
         //      (by means of the sequence number) must be held until the outcome becomes known.
         // 2. Known and Processed: A ReliableRequestContext exists in the requestTable and the outcome for
-        //      for the request is known. The ReliableRequestContext holds that outcome. Any transport requests
+        //      for the request is known. The ReliableRequestContext holds that outcome. Any transport
+        // requests
         //      referening this reliable request must send the response dictated by the outcome.
-        // 3. Unknown: No ReliableRequestContext exists in the requestTable for the referenced reliable request.
-        //      In this case a new ReliableRequestContext is added to the requestTable to await some outcome.
+        // 3. Unknown: No ReliableRequestContext exists in the requestTable for the referenced reliable
+        // request.
+        //      In this case a new ReliableRequestContext is added to the requestTable to await some
+        // outcome.
         //
         // There are 4 possible outcomes for a reliable request:
         //  a. It is captured and the user replies. Transport replies are then copies of the user's reply.

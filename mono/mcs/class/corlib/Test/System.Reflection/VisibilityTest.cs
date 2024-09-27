@@ -52,7 +52,8 @@ namespace MonoTests.System.Reflection.VisibilityTypes
         {
             var types = typeof(VisibilityTests).Assembly.GetExportedTypes();
 
-            // Test visibility means that the class is public by applying and on the 'public' visibility of the nested items.
+            // Test visibility means that the class is public by applying and on the 'public' visibility of the
+            // nested items.
             DoesNotContain(types, typeof(InternalClass));
             Contains(types, typeof(PublicClass));
 

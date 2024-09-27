@@ -107,7 +107,8 @@ namespace System.ServiceModel.Activities
         [DefaultValue(null)]
         public ReceiveContent Content { get; set; }
 
-        // Internally, we should always use InternalContent since this property may have default content that we added
+        // Internally, we should always use InternalContent since this property may have default content
+        // that we added
         internal ReceiveContent InternalContent
         {
             get { return this.Content ?? ReceiveContent.DefaultReceiveContent; }
@@ -129,12 +130,14 @@ namespace System.ServiceModel.Activities
 
         // Allows the action for the message to be specified by the user/designer.
         // If not set, the value is constructed from the Name of the activity.
-        // If specified on the Send side of a message, the Receive side needs to have the same value in order
+        // If specified on the Send side of a message, the Receive side needs to have the same value in
+        // order
         // for the message to be delivered correctly.
         [DefaultValue(null)]
         public string Action { get; set; }
 
-        // If true, a new workflow instance is created to process the message. If false, an existing workflow
+        // If true, a new workflow instance is created to process the message. If false, an existing
+        // workflow
         // instance is determined based on correlations.
         [DefaultValue(false)]
         public bool CanCreateInstance { get; set; }
@@ -151,7 +154,8 @@ namespace System.ServiceModel.Activities
         public string OperationName { get; set; }
 
         // The protection level for the message.
-        // If ValueType or Value.Expression.ExpressionType is MessageContract, the MessageContract definition may have additional settings.
+        // If ValueType or Value.Expression.ExpressionType is MessageContract, the MessageContract
+        // definition may have additional settings.
         // Default if this is not specified is Sign.
         [DefaultValue(null)]
         public ProtectionLevel? ProtectionLevel { get; set; }
@@ -314,14 +318,16 @@ namespace System.ServiceModel.Activities
         {
             if (this.IsInvalidContentChangeFrom(((Receive)originalActivity).InternalContent))
             {
-                // Due to technical limitation, we don't currently support changing from untyped MessageContent to typed MessageContent or ParametersContent and vice versa.
+                // Due to technical limitation, we don't currently support changing from untyped MessageContent to
+                // typed MessageContent or ParametersContent and vice versa.
                 metadata.DisallowUpdateInsideThisActivity(SR.ReceiveContentChanged);
             }
             else if (
                 this.HasCorrelationsChanged(((Receive)originalActivity).CorrelationInitializers)
             )
             {
-                // we don't currently support changing CorrelationInitializers collection of Receive due to technical limitation.
+                // we don't currently support changing CorrelationInitializers collection of Receive due to
+                // technical limitation.
                 // This change could be detected and blocked for update by the runtime, but we check this early
                 // so that we can provide more meaningful error message.
                 metadata.DisallowUpdateInsideThisActivity(
@@ -424,7 +430,8 @@ namespace System.ServiceModel.Activities
 
             // perf optimization if the receive is two way, null out the NoPersistHandle,
             // this optimization allows us not to access AEC in InternalReceiveMessage->Execute to null out the
-            // NoPersistHandle in case of two-way. With this optimization, we just assert in InternalReceiveMessage
+            // NoPersistHandle in case of two-way. With this optimization, we just assert in
+            // InternalReceiveMessage
             if (!this.internalReceive.IsOneWay)
             {
                 this.internalReceive.NoPersistHandle = null;

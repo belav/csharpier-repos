@@ -16,7 +16,8 @@ internal class PageComponentInfo
     /// <summary>
     /// Initializes a new instance of <see cref="PageComponentInfo"/>.
     /// </summary>
-    /// <param name="displayName">The name for the page. Used for logging and debug purposes across the system.</param>
+    /// <param name="displayName">The name for the page. Used for logging and debug purposes across the
+    // system.</param>
     /// <param name="type">The page <see cref="System.Type"/>.</param>
     /// <param name="route">The see list of routes for the page.</param>
     /// <param name="metadata">The page metadata.</param>

@@ -4,10 +4,12 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures the delete behavior based on the <see cref="DeleteBehaviorAttribute" /> applied on the property.
+///     A convention that configures the delete behavior based on the <see
+// cref="DeleteBehaviorAttribute" /> applied on the property.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class DeleteBehaviorAttributeConvention
     : PropertyAttributeConventionBase<DeleteBehaviorAttribute>,

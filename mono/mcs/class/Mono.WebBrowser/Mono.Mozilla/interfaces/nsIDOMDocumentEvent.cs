@@ -41,7 +41,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int createEvent(
-            /*DOMString*/HandleRef eventType,
+/*DOMString*/HandleRef eventType,
             [MarshalAs(UnmanagedType.Interface)] out nsIDOMEvent ret
         );
 

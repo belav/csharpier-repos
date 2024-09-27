@@ -21,12 +21,14 @@ public class InterpPgoTests : WasmTemplateTestBase
         : base(output, buildContext) { }
 
     [Theory]
-    // Interpreter PGO is not meaningful to enable in debug builds - tiering is inactive there so all methods
+    // Interpreter PGO is not meaningful to enable in debug builds - tiering is inactive there so all
+    // methods
     //  would get added to the PGO table instead of just hot ones.
     [InlineData("Release")]
     public async Task FirstRunGeneratesTableAndSecondRunLoadsIt(string config)
     {
-        // We need to invoke Greeting enough times to cause BCL code to tier so we can exercise interpreter PGO
+        // We need to invoke Greeting enough times to cause BCL code to tier so we can exercise interpreter
+        // PGO
         // Invoking it too many times makes the test meaningfully slower.
         const int iterationCount = 70;
 

@@ -664,7 +664,8 @@ namespace Newtonsoft.Json.Serialization
                     bool createdFromNonDefaultCreator = false;
                     JsonObjectContract objectContract = (JsonObjectContract)contract;
                     object targetObject;
-                    // check that if type name handling is being used that the existing value is compatible with the specified type
+                    // check that if type name handling is being used that the existing value is compatible with the
+                    // specified type
                     if (
                         existingValue != null
                         && (
@@ -1755,7 +1756,8 @@ namespace Newtonsoft.Json.Serialization
                 return true;
             }
 
-            // test tokenType here because null might not be convertible to some types, e.g. ignoring null when applied to DateTime
+            // test tokenType here because null might not be convertible to some types, e.g. ignoring null when
+            // applied to DateTime
             if (
                 tokenType == JsonToken.Null
                 && ResolvedNullValueHandling(containerContract as JsonObjectContract, property)
@@ -1766,7 +1768,8 @@ namespace Newtonsoft.Json.Serialization
                 return true;
             }
 
-            // test tokenType here because default value might not be convertible to actual type, e.g. default of "" for DateTime
+            // test tokenType here because default value might not be convertible to actual type, e.g. default
+            // of "" for DateTime
             if (
                 HasFlag(
                     property.DefaultValueHandling.GetValueOrDefault(
@@ -2815,7 +2818,8 @@ namespace Newtonsoft.Json.Serialization
                 AddReference(reader, id, createdObject);
             }
 
-            // these are together because OnDeserializing takes an object but for an ISerializable the object is fully created in the constructor
+            // these are together because OnDeserializing takes an object but for an ISerializable the object is
+            // fully created in the constructor
             OnDeserializing(reader, contract, createdObject);
             OnDeserialized(reader, contract, createdObject);
 
@@ -3083,7 +3087,8 @@ namespace Newtonsoft.Json.Serialization
         {
             ValidationUtils.ArgumentNotNull(creator, nameof(creator));
 
-            // only need to keep a track of properties' presence if they are required or a value should be defaulted if missing
+            // only need to keep a track of properties' presence if they are required or a value should be
+            // defaulted if missing
             bool trackPresence = (
                 contract.HasRequiredOrDefaultValueProperties
                 || HasFlag(Serializer._defaultValueHandling, DefaultValueHandling.Populate)
@@ -3724,7 +3729,8 @@ namespace Newtonsoft.Json.Serialization
         {
             OnDeserializing(reader, contract, newObject);
 
-            // only need to keep a track of properties' presence if they are required or a value should be defaulted if missing
+            // only need to keep a track of properties' presence if they are required or a value should be
+            // defaulted if missing
             Dictionary<JsonProperty, PropertyPresence>? propertiesPresence =
                 (
                     contract.HasRequiredOrDefaultValueProperties

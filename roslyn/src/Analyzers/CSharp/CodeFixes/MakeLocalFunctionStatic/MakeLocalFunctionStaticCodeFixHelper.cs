@@ -202,7 +202,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
                 }
             }
 
-            // If we captured 'this', then we have to go through and rewrite all usages of it to @this.  Note that
+            // If we captured 'this', then we have to go through and rewrite all usages of it to @this.  Note
+            // that
             // 'this' may be used explicitly or implicitly.
             if (thisParameter != null)
             {
@@ -314,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeLocalFunctionStatic
             );
 
         /// <summary>
-        /// Creates a new parameter symbol paired with the original captured symbol for each captured variables.
+        /// Creates a new parameter symbol paired with the original captured symbol for each captured
+        // variables.
         /// </summary>
         private static ImmutableArray<(
             IParameterSymbol symbol,

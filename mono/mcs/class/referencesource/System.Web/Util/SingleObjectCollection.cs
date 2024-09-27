@@ -5,18 +5,18 @@
 //------------------------------------------------------------------------------
 
 /*
- * SingleObjectCollection class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* SingleObjectCollection class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.Util
 {
     using System.Collections;
 
-    /*
-     * Fast implementation of a collection with a single object
-     */
+/*
+* Fast implementation of a collection with a single object
+*/
     internal class SingleObjectCollection : ICollection
     {
         private class SingleObjectEnumerator : IEnumerator

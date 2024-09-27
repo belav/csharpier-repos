@@ -22,8 +22,10 @@ internal static partial class Interop
             /// </summary>
             public IntPtr Information;
 
-            // This isn't an actual Windows type, it is a union within IO_STATUS_BLOCK. We *have* to separate it out as
-            // the size of IntPtr varies by architecture and we can't specify the size at compile time to offset the
+            // This isn't an actual Windows type, it is a union within IO_STATUS_BLOCK. We *have* to separate it
+            // out as
+            // the size of IntPtr varies by architecture and we can't specify the size at compile time to offset
+            // the
             // Information pointer in the status block.
             [StructLayout(LayoutKind.Explicit)]
             public struct IO_STATUS

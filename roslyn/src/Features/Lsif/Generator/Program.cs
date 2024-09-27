@@ -390,7 +390,8 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                     $"Generation for {project.FilePath} completed in {generationStopwatch.Elapsed.ToDisplayString()}."
                 );
 
-                // Remove the project from the workspace; we reuse the same workspace object to ensure that some workspace-level services (like the IMetadataService
+                // Remove the project from the workspace; we reuse the same workspace object to ensure that some
+                // workspace-level services (like the IMetadataService
                 // or IDocumentationProviderService) are kept around allowing their caches to be reused.
                 workspace.OnProjectRemoved(project.Id);
             }

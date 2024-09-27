@@ -189,7 +189,8 @@ namespace System.Speech.Internal.SapiInterop
     #region Structure
 
     /// Note:   This structure doesn't exist in SAPI.idl but is related to SPPHRASEALT.
-    ///         We use it to map memory contained in the serialized result (instead of reading sequentially)
+    ///         We use it to map memory contained in the serialized result (instead of reading
+    // sequentially)
     [StructLayout(LayoutKind.Sequential)]
     internal class SPSERIALIZEDPHRASEALT
     {
@@ -357,7 +358,8 @@ namespace System.Speech.Internal.SapiInterop
             ValidateOffsetAndLength(ulDriverDataOffset, ulDriverDataSize);
         }
 
-        // Duplicate all the fields of SPRESULTHEADER_Sapi51 - Marshal.PtrToStructure seems to need these to be defined again.
+        // Duplicate all the fields of SPRESULTHEADER_Sapi51 - Marshal.PtrToStructure seems to need these to
+        // be defined again.
         internal uint ulSerializedSize;
         internal uint cbHeaderSize;
         internal Guid clsidEngine;
@@ -387,7 +389,8 @@ namespace System.Speech.Internal.SapiInterop
         }
 
         internal uint fAlphabet;
-        // Not present in SAPI 5.1 results; on SAPI 5.without IPA this is set to zero, with IPA it will indicate
+        // Not present in SAPI 5.1 results; on SAPI 5.without IPA this is set to zero, with IPA it will
+        // indicate
         // the alphabet of pronunciations the result
     }
 
@@ -629,7 +632,8 @@ namespace System.Speech.Internal.SapiInterop
             SREnginePrivateDataOffset = source.SREnginePrivateDataOffset;
         }
 
-        // Duplicate all the fields of SPSERIALIZEDPHRASE_Sapi51 - Marshal.PtrToStructure seems to need these to be defined again.
+        // Duplicate all the fields of SPSERIALIZEDPHRASE_Sapi51 - Marshal.PtrToStructure seems to need
+        // these to be defined again.
         internal uint ulSerializedSize;
         internal uint cbSize;
         internal ushort LangID;

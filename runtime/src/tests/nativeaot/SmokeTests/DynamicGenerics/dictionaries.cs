@@ -1350,10 +1350,14 @@ namespace CtorDict
     }
 
     // TODO once we support instantiations over non-reference type arguments : Test with :
-    //      enums(short) and valuetype that has alignment requirement <= 4, with finalizer          (to test usage of the NewFinalizable helper)
-    //      enums(short) and valuetype that has alignment requirement <= 4, without finalizer       (to test usage of the NewFast helper)
-    //      enums(long) and valuetype that has alignment requirement > 4, with finalizer            (to test usage of the NewFinalizableAlign8 helper)
-    //      enums(long) and valuetype that has alignment requirement > 4, without finalizer         (to test usage of the NewFastMisalign helper)
+    //      enums(short) and valuetype that has alignment requirement <= 4, with finalizer          (to
+    // test usage of the NewFinalizable helper)
+    //      enums(short) and valuetype that has alignment requirement <= 4, without finalizer       (to
+    // test usage of the NewFast helper)
+    //      enums(long) and valuetype that has alignment requirement > 4, with finalizer            (to
+    // test usage of the NewFinalizableAlign8 helper)
+    //      enums(long) and valuetype that has alignment requirement > 4, without finalizer         (to
+    // test usage of the NewFastMisalign helper)
 
 
 
@@ -1998,7 +2002,8 @@ namespace ExistingInstantiations
                     f.Frob1<object>();
                     f.Frob2<object>();
 
-                    // Type loader context should have type "MyIntWrapper[]" loaded with a valid runtime type handle (due to previous GVM call).
+                    // Type loader context should have type "MyIntWrapper[]" loaded with a valid runtime type handle
+                    // (due to previous GVM call).
                     // Note: MyIntWrapper[] is statically compiled, not dynamically created.
                     var mi1 = typeof(IFrobber)
                         .GetTypeInfo()
@@ -2013,9 +2018,11 @@ namespace ExistingInstantiations
                         GC.WaitForPendingFinalizers();
                     }
 
-                    // Starting with a clean type loader context, we should be able to find the instantiation "Foo<MyIntWrapper[], T>" created from the call to Frob1
+                    // Starting with a clean type loader context, we should be able to find the instantiation
+                    // "Foo<MyIntWrapper[], T>" created from the call to Frob1
                     // and we should not recreate it.
-                    // Note: clean type loader context has no way to know the runtime type handle of MyIntWrapper[] when trying to search for the type handle for
+                    // Note: clean type loader context has no way to know the runtime type handle of MyIntWrapper[] when
+                    // trying to search for the type handle for
                     // "Foo<MyIntWrapper[], T>"
                     var mi2 = typeof(IFrobber)
                         .GetTypeInfo()

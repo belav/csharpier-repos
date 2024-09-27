@@ -4,11 +4,14 @@
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Describes the binding of a <see cref="DbContext" />, which may or may not also have and associated
-///     <see cref="IServiceProperty" />, to a parameter in a constructor, factory method, or similar.
+///     Describes the binding of a <see cref="DbContext" />, which may or may not also have and
+// associated
+///     <see cref="IServiceProperty" />, to a parameter in a constructor, factory method, or
+// similar.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and examples.
 /// </remarks>
 public class ContextParameterBinding : ServiceParameterBinding
 {
@@ -16,7 +19,8 @@ public class ContextParameterBinding : ServiceParameterBinding
     ///     Creates a new <see cref="ServiceParameterBinding" /> instance for the given service type.
     /// </summary>
     /// <param name="contextType">The <see cref="DbContext" /> CLR type.</param>
-    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
+    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see
+    // langword="null" />.</param>
     public ContextParameterBinding(Type contextType, params IPropertyBase[]? serviceProperties)
         : base(contextType, contextType, serviceProperties) { }
 
@@ -24,8 +28,10 @@ public class ContextParameterBinding : ServiceParameterBinding
     ///     Creates an expression tree representing the binding of the value of a property from a
     ///     materialization expression to a parameter of the constructor, factory method, etc.
     /// </summary>
-    /// <param name="materializationExpression">The expression representing the materialization context.</param>
-    /// <param name="bindingInfoExpression">The expression representing the <see cref="ParameterBindingInfo" /> constant.</param>
+    /// <param name="materializationExpression">The expression representing the materialization
+    // context.</param>
+    /// <param name="bindingInfoExpression">The expression representing the <see
+    // cref="ParameterBindingInfo" /> constant.</param>
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(
         Expression materializationExpression,

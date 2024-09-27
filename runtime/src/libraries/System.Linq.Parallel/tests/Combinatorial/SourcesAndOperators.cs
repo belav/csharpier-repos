@@ -31,7 +31,8 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<Labeled<Operation>> UnorderedRangeSources()
         {
-            // The difference between this and the existing sources is more control is needed over the range creation.
+            // The difference between this and the existing sources is more control is needed over the range
+            // creation.
             // Specifically, start/count won't be known until the nesting level is resolved at runtime.
             yield return Label(
                 "ParallelEnumerable.Range",
@@ -55,8 +56,10 @@ namespace System.Linq.Parallel.Tests
                     Partitioner.Create(Enumerable.Range(start, count).ToArray()).AsParallel()
             );
 
-            // PLINQ doesn't currently have any special code paths for readonly collections.  If it ever does, this should be uncommented.
-            // yield return Label("ReadOnlyCollection", (start, count, ignore) => new System.Collections.ReadOnlyCollection<int>(Enumerable.Range(start, count).ToList()).AsParallel());
+            // PLINQ doesn't currently have any special code paths for readonly collections.  If it ever does,
+            // this should be uncommented.
+            // yield return Label("ReadOnlyCollection", (start, count, ignore) => new
+            // System.Collections.ReadOnlyCollection<int>(Enumerable.Range(start, count).ToList()).AsParallel());
         }
 
         public static IEnumerable<Labeled<Operation>> RangeSources()
@@ -912,7 +915,8 @@ namespace System.Linq.Parallel.Tests
                     other(start, count / 2).Concat(source(start + count / 2, count / 2 + count % 2))
             );
 
-            // Comparator needs to cover _source_ size, as which of two "equal" items is returned is undefined for unordered collections.
+            // Comparator needs to cover _source_ size, as which of two "equal" items is returned is undefined
+            // for unordered collections.
             yield return Label(
                 "Except-Right:" + label,
                 (start, count, source) =>
@@ -1021,7 +1025,8 @@ namespace System.Linq.Parallel.Tests
                         )
             );
 
-            // When both sources are unordered any element can be matched to any other, so a different check is required.
+            // When both sources are unordered any element can be matched to any other, so a different check is
+            // required.
             yield return Label(
                 "Zip-Unordered-Right:" + label,
                 (start, count, source) =>
@@ -1057,7 +1062,8 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (Labeled<Operation> source in RangeSources())
             {
-                // Each binary can work differently, depending on which of the two source queries (or both) is ordered.
+                // Each binary can work differently, depending on which of the two source queries (or both) is
+                // ordered.
 
                 // For most, only the ordering of the first query is important
                 foreach (
@@ -1085,7 +1091,8 @@ namespace System.Linq.Parallel.Tests
                     yield return new object[] { source, operation };
                 }
 
-                // Zip is the same as Concat, but has a special check for matching indices (as compared to unordered)
+                // Zip is the same as Concat, but has a special check for matching indices (as compared to
+                // unordered)
                 foreach (
                     Labeled<Operation> operation in new[]
                     {

@@ -152,7 +152,8 @@
                         )
                 );
 
-                // the inner operation might complete synchronously, so all setup work has to be done before this point
+                // the inner operation might complete synchronously, so all setup work has to be done before this
+                // point
                 ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(AsyncMethodInfo);
                 dispatcher.Execute(controllerContext.Controller, parametersArray); // ignore return value from this method
 
@@ -219,7 +220,8 @@
         {
             if (useCache && GetType() == typeof(ReflectedAsyncActionDescriptor))
             {
-                // Do not look at cache in types derived from this type because they might incorrectly implement GetCustomAttributes
+                // Do not look at cache in types derived from this type because they might incorrectly implement
+                // GetCustomAttributes
                 return ReflectedAttributeCache.GetMethodFilterAttributes(AsyncMethodInfo);
             }
             return base.GetFilterAttributes(useCache);

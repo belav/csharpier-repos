@@ -64,7 +64,8 @@ namespace HtmlAgilityPack
 
         /// <summary>
         /// Gets a collection of flags that define specific behaviors for specific element nodes.
-        /// The table contains a DictionaryEntry list with the lowercase tag name as the Key, and a combination of HtmlElementFlags as the Value.
+        /// The table contains a DictionaryEntry list with the lowercase tag name as the Key, and a
+        // combination of HtmlElementFlags as the Value.
         /// </summary>
         public static Hashtable ElementsFlags;
 
@@ -109,7 +110,8 @@ namespace HtmlAgilityPack
 
             // tag whose closing tag is equivalent to open tag:
             // <p>bla</p>bla will be transformed into <p>bla</p>bla
-            // <p>bla<p>bla will be transformed into <p>bla<p>bla and not <p>bla></p><p>bla</p> or <p>bla<p>bla</p></p>
+            // <p>bla<p>bla will be transformed into <p>bla<p>bla and not <p>bla></p><p>bla</p> or
+            // <p>bla<p>bla</p></p>
             //<br> see above
             ElementsFlags.Add("br", HtmlElementFlag.Empty | HtmlElementFlag.Closed);
             ElementsFlags.Add("p", HtmlElementFlag.Empty | HtmlElementFlag.Closed);
@@ -311,7 +313,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Gets or sets the value of the 'id' HTML attribute. The document must have been parsed using the OptionUseIdAttribute set to true.
+        /// Gets or sets the value of the 'id' HTML attribute. The document must have been parsed using the
+        // OptionUseIdAttribute set to true.
         /// </summary>
         public string Id
         {
@@ -559,7 +562,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Creates a new XPathNavigator object for navigating this HTML node.
         /// </summary>
-        /// <returns>An XPathNavigator object. The XPathNavigator is positioned on the node from which the method was called. It is not positioned on the root of the document.</returns>
+        /// <returns>An XPathNavigator object. The XPathNavigator is positioned on the node from which the
+        // method was called. It is not positioned on the root of the document.</returns>
         public XPathNavigator CreateNavigator()
         {
             return new HtmlNodeNavigator(_ownerdocument, this);
@@ -573,7 +577,8 @@ namespace HtmlAgilityPack
         /// Determines if an element node can be kept overlapped.
         /// </summary>
         /// <param name="name">The name of the element node to check. May not be <c>null</c>.</param>
-        /// <returns>true if the name is the name of an element node that can be kept overlapped, <c>false</c> otherwise.</returns>
+        /// <returns>true if the name is the name of an element node that can be kept overlapped,
+        // <c>false</c> otherwise.</returns>
         public static bool CanOverlapElement(string name)
         {
             if (name == null)
@@ -816,7 +821,8 @@ namespace HtmlAgilityPack
         /// Creates a duplicate of the node and changes its name at the same time.
         /// </summary>
         /// <param name="newName">The new name of the cloned node. May not be null.</param>
-        /// <param name="deep">true to recursively clone the subtree under the specified node; false to clone only the node itself.</param>
+        /// <param name="deep">true to recursively clone the subtree under the specified node; false to
+        // clone only the node itself.</param>
         /// <returns>The cloned node.</returns>
         public HtmlNode CloneNode(string newName, bool deep)
         {
@@ -833,7 +839,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Creates a duplicate of the node.
         /// </summary>
-        /// <param name="deep">true to recursively clone the subtree under the specified node; false to clone only the node itself.</param>
+        /// <param name="deep">true to recursively clone the subtree under the specified node; false to
+        // clone only the node itself.</param>
         /// <returns>The cloned node.</returns>
         public HtmlNode CloneNode(bool deep)
         {
@@ -903,7 +910,8 @@ namespace HtmlAgilityPack
         /// Creates a duplicate of the node.
         /// </summary>
         /// <param name="node">The node to duplicate. May not be <c>null</c>.</param>
-        /// <param name="deep">true to recursively clone the subtree under the specified node, false to clone only the node itself.</param>
+        /// <param name="deep">true to recursively clone the subtree under the specified node, false to
+        // clone only the node itself.</param>
         public void CopyFrom(HtmlNode node, bool deep)
         {
             if (node == null)
@@ -1043,7 +1051,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the default value will be returned.
+        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the
+        // default value will be returned.
         /// </summary>
         /// <param name="name">The name of the attribute to get. May not be <c>null</c>.</param>
         /// <param name="def">The default value to return if not found.</param>
@@ -1068,7 +1077,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the default value will be returned.
+        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the
+        // default value will be returned.
         /// </summary>
         /// <param name="name">The name of the attribute to get. May not be <c>null</c>.</param>
         /// <param name="def">The default value to return if not found.</param>
@@ -1100,7 +1110,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the default value will be returned.
+        /// Helper method to get the value of an attribute of this node. If the attribute is not found, the
+        // default value will be returned.
         /// </summary>
         /// <param name="name">The name of the attribute to get. May not be <c>null</c>.</param>
         /// <param name="def">The default value to return if not found.</param>
@@ -1135,7 +1146,8 @@ namespace HtmlAgilityPack
         /// Inserts the specified node immediately after the specified reference node.
         /// </summary>
         /// <param name="newChild">The node to insert. May not be <c>null</c>.</param>
-        /// <param name="refChild">The node that is the reference node. The newNode is placed after the refNode.</param>
+        /// <param name="refChild">The node that is the reference node. The newNode is placed after the
+        // refNode.</param>
         /// <returns>The node being inserted.</returns>
         public HtmlNode InsertAfter(HtmlNode newChild, HtmlNode refChild)
         {
@@ -1178,7 +1190,8 @@ namespace HtmlAgilityPack
         /// Inserts the specified node immediately before the specified reference node.
         /// </summary>
         /// <param name="newChild">The node to insert. May not be <c>null</c>.</param>
-        /// <param name="refChild">The node that is the reference node. The newChild is placed before this node.</param>
+        /// <param name="refChild">The node that is the reference node. The newChild is placed before this
+        // node.</param>
         /// <returns>The node being inserted.</returns>
         public HtmlNode InsertBefore(HtmlNode newChild, HtmlNode refChild)
         {
@@ -1345,7 +1358,8 @@ namespace HtmlAgilityPack
         /// Removes the specified child node.
         /// </summary>
         /// <param name="oldChild">The node being removed. May not be <c>null</c>.</param>
-        /// <param name="keepGrandChildren">true to keep grand children of the node, false otherwise.</param>
+        /// <param name="keepGrandChildren">true to keep grand children of the node, false
+        // otherwise.</param>
         /// <returns>The node removed.</returns>
         public HtmlNode RemoveChild(HtmlNode oldChild, bool keepGrandChildren)
         {
@@ -1415,7 +1429,8 @@ namespace HtmlAgilityPack
         /// Selects a list of nodes matching the <see cref="XPath"/> expression.
         /// </summary>
         /// <param name="xpath">The XPath expression.</param>
-        /// <returns>An <see cref="HtmlNodeCollection"/> containing a collection of nodes matching the <see cref="XPath"/> query, or <c>null</c> if no node matched the XPath expression.</returns>
+        /// <returns>An <see cref="HtmlNodeCollection"/> containing a collection of nodes matching the <see
+        // cref="XPath"/> query, or <c>null</c> if no node matched the XPath expression.</returns>
         public HtmlNodeCollection SelectNodes(string xpath)
         {
             HtmlNodeCollection list = new HtmlNodeCollection(null);
@@ -1438,7 +1453,8 @@ namespace HtmlAgilityPack
         /// Selects the first XmlNode that matches the XPath expression.
         /// </summary>
         /// <param name="xpath">The XPath expression. May not be null.</param>
-        /// <returns>The first <see cref="HtmlNode"/> that matches the XPath query or a null reference if no matching node was found.</returns>
+        /// <returns>The first <see cref="HtmlNode"/> that matches the XPath query or a null reference if no
+        // matching node was found.</returns>
         public HtmlNode SelectSingleNode(string xpath)
         {
             if (xpath == null)
@@ -1458,7 +1474,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Helper method to set the value of an attribute of this node. If the attribute is not found, it will be created automatically.
+        /// Helper method to set the value of an attribute of this node. If the attribute is not found, it
+        // will be created automatically.
         /// </summary>
         /// <param name="name">The name of the attribute to set. May not be null.</param>
         /// <param name="value">The value for the attribute.</param>

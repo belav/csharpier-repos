@@ -76,7 +76,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         }
 
         /// <summary>
-        /// Inserts new lines into the text at the position indicated by /*insert<paramref name="marker"/>[{number-of-lines-to-insert}]*/.
+        /// Inserts new lines into the text at the position indicated by /*insert<paramref
+        // name="marker"/>[{number-of-lines-to-insert}]*/.
         /// </summary>
         public static string InsertNewLines(string src, string marker)
         {

@@ -74,21 +74,21 @@ namespace MonoTests.System.Windows.Forms
             style.Left = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
 
-        /*
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException2 () {
-            Control.RightToLeft = true;
-            style.Left = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-        }
+/*
+[Test]
+[ExpectedException(typeof(ArgumentException))]
+public void TestLeftArgumentException2 () {
+Control.RightToLeft = true;
+style.Left = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestLeftArgumentException3 () {
-            Control.RightToLeft = true;
-            style.Left = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
-        }
-        */
+[Test]
+[ExpectedException(typeof(ArgumentException))]
+public void TestLeftArgumentException3 () {
+Control.RightToLeft = true;
+style.Left = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
+}
+*/
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]
@@ -104,21 +104,21 @@ namespace MonoTests.System.Windows.Forms
             style.Right = DataGridViewAdvancedCellBorderStyle.NotSet;
         }
 
-        /*
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException2 () {
-            Control.RightToLeft = false;
-            style.Right = DataGridViewAdvancedCellBorderStyle.InsetDouble;
-        }
+/*
+[Test]
+[ExpectedException(typeof(ArgumentException))]
+public void TestRightArgumentException2 () {
+Control.RightToLeft = false;
+style.Right = DataGridViewAdvancedCellBorderStyle.InsetDouble;
+}
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void TestRightArgumentException3 () {
-            Control.RightToLeft = false;
-            style.Right = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
-        }
-        */
+[Test]
+[ExpectedException(typeof(ArgumentException))]
+public void TestRightArgumentException3 () {
+Control.RightToLeft = false;
+style.Right = DataGridViewAdvancedCellBorderStyle.OutsetDouble;
+}
+*/
 
         [Test]
         [ExpectedException(typeof(InvalidEnumArgumentException))]

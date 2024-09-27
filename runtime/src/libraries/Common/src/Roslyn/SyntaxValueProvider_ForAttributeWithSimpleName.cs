@@ -19,7 +19,8 @@ internal static partial class SyntaxValueProviderExtensions
     // Normal class as Runtime does not seem to support records currently.
 
     /// <summary>
-    /// Information computed about a particular tree.  Cached so we don't repeatedly recompute this important
+    /// Information computed about a particular tree.  Cached so we don't repeatedly recompute this
+    // important
     /// information each time the incremental pipeline is rerun.
     /// </summary>
     private sealed class SyntaxTreeInfo : IEquatable<SyntaxTreeInfo>
@@ -47,12 +48,18 @@ internal static partial class SyntaxValueProviderExtensions
     }
 
     /// <summary>
-    /// Caching of syntax-tree to the info we've computed about it.  Used because compilations will have thousands of
-    /// trees, and the incremental pipeline will get called back for *all* of them each time a compilation changes.  We
-    /// do not want to continually recompute this data over and over again each time that happens given that normally
-    /// only one tree will be different.  We also do not want to create an IncrementalValuesProvider that yield this
-    /// information as that will mean we have a node in the tree that scales with the number of *all syntax trees*, not
-    /// the number of *relevant syntax trees*. This can lead to huge memory churn keeping track of a high number of
+    /// Caching of syntax-tree to the info we've computed about it.  Used because compilations will have
+    // thousands of
+    /// trees, and the incremental pipeline will get called back for *all* of them each time a
+    // compilation changes.  We
+    /// do not want to continually recompute this data over and over again each time that happens given
+    // that normally
+    /// only one tree will be different.  We also do not want to create an IncrementalValuesProvider
+    // that yield this
+    /// information as that will mean we have a node in the tree that scales with the number of *all
+    // syntax trees*, not
+    /// the number of *relevant syntax trees*. This can lead to huge memory churn keeping track of a
+    // high number of
     /// trees, most of which are not going to be relevant.
     /// </summary>
     private static readonly ConditionalWeakTable<SyntaxTree, SyntaxTreeInfo> s_treeToInfo =
@@ -65,12 +72,16 @@ internal static partial class SyntaxValueProviderExtensions
 #endif
 
     /// <summary>
-    /// Returns all syntax nodes of that match <paramref name="predicate"/> if that node has an attribute on it that
-    /// could possibly bind to the provided <paramref name="simpleName"/>. <paramref name="simpleName"/> should be the
-    /// simple, non-qualified, name of the attribute, including the <c>Attribute</c> suffix, and not containing any
+    /// Returns all syntax nodes of that match <paramref name="predicate"/> if that node has an
+    // attribute on it that
+    /// could possibly bind to the provided <paramref name="simpleName"/>. <paramref name="simpleName"/>
+    // should be the
+    /// simple, non-qualified, name of the attribute, including the <c>Attribute</c> suffix, and not
+    // containing any
     /// generics, containing types, or namespaces.  For example <c>CLSCompliantAttribute</c> for <see
     /// cref="System.CLSCompliantAttribute"/>.
-    /// <para/> This provider understands <see langword="using"/> (<c>Import</c> in Visual Basic) aliases and will find
+    /// <para/> This provider understands <see langword="using"/> (<c>Import</c> in Visual Basic)
+    // aliases and will find
     /// matches even when the attribute references an alias name.  For example, given:
     /// <code>
     /// using XAttribute = System.CLSCompliantAttribute;
@@ -78,11 +89,13 @@ internal static partial class SyntaxValueProviderExtensions
     /// class C { }
     /// </code>
     /// Then
-    /// <c>context.SyntaxProvider.CreateSyntaxProviderForAttribute(nameof(CLSCompliantAttribute), (node, c) => node is ClassDeclarationSyntax)</c>
+    /// <c>context.SyntaxProvider.CreateSyntaxProviderForAttribute(nameof(CLSCompliantAttribute), (node,
+    // c) => node is ClassDeclarationSyntax)</c>
     /// will find the <c>C</c> class.
     /// </summary>
     /// <remarks>
-    /// Note: a 'Values'-provider of arrays are returned.  Each array provides all the matching nodes from a single <see
+    /// Note: a 'Values'-provider of arrays are returned.  Each array provides all the matching nodes
+    // from a single <see
     /// cref="SyntaxTree"/>.
     /// </remarks>
     public static IncrementalValuesProvider<(
@@ -97,35 +110,40 @@ internal static partial class SyntaxValueProviderExtensions
     {
         var syntaxHelper = CSharpSyntaxHelper.Instance;
 
-        // Create a provider over all the syntax trees in the compilation.  This is better than CreateSyntaxProvider as
-        // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when another tree is
+        // Create a provider over all the syntax trees in the compilation.  This is better than
+        // CreateSyntaxProvider as
+        // using SyntaxTrees is purely syntax and will not update the incremental node for a tree when
+        // another tree is
         // changed. CreateSyntaxProvider will have to rerun all incremental nodes since it passes along the
-        // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the compilation).
+        // SemanticModel, and that model is updated whenever any tree changes (since it is tied to the
+        // compilation).
         var syntaxTreesProvider = context.CompilationProvider.SelectMany(
             (compilation, cancellationToken) =>
                 compilation
                     .SyntaxTrees.Select(tree => GetTreeInfo(tree, syntaxHelper, cancellationToken))
                     .Where(info => info.ContainsGlobalAliases || info.ContainsAttributeList)
         )
-        /*.WithTrackingName("compilationUnit_ForAttribute")*/;
+/*.WithTrackingName("compilationUnit_ForAttribute")*/;
 
-        // Create a provider that provides (and updates) the global aliases for any particular file when it is edited.
+        // Create a provider that provides (and updates) the global aliases for any particular file when it
+        // is edited.
         var individualFileGlobalAliasesProvider = syntaxTreesProvider
             .Where(info => info.ContainsGlobalAliases)
             .Select(
                 (info, cancellationToken) =>
                     getGlobalAliasesInCompilationUnit(info.Tree.GetRoot(cancellationToken))
             )
-        /*.WithTrackingName("individualFileGlobalAliases_ForAttribute")*/;
+/*.WithTrackingName("individualFileGlobalAliases_ForAttribute")*/;
 
-        // Create an aggregated view of all global aliases across all files.  This should only update when an individual
+        // Create an aggregated view of all global aliases across all files.  This should only update when
+        // an individual
         // file changes its global aliases or a file is added / removed from the compilation
         var collectedGlobalAliasesProvider = individualFileGlobalAliasesProvider
             .Collect()
             .WithComparer(
                 ImmutableArrayValueComparer<GlobalAliases>.Instance
             )
-        /*.WithTrackingName("collectedGlobalAliases_ForAttribute")*/;
+/*.WithTrackingName("collectedGlobalAliases_ForAttribute")*/;
 
         var allUpGlobalAliasesProvider = collectedGlobalAliasesProvider.Select(
             static (arrays, _) =>
@@ -133,7 +151,7 @@ internal static partial class SyntaxValueProviderExtensions
                     arrays.SelectMany(a => a.AliasAndSymbolNames).ToImmutableArray()
                 )
         )
-        /*.WithTrackingName("allUpGlobalAliases_ForAttribute")*/;
+/*.WithTrackingName("allUpGlobalAliases_ForAttribute")*/;
 
 #if false
 
@@ -156,14 +174,15 @@ internal static partial class SyntaxValueProviderExtensions
 
 #endif
 
-        // Combine the two providers so that we reanalyze every file if the global aliases change, or we reanalyze a
+        // Combine the two providers so that we reanalyze every file if the global aliases change, or we
+        // reanalyze a
         // particular file when it's compilation unit changes.
         var syntaxTreeAndGlobalAliasesProvider = syntaxTreesProvider
             .Where(info => info.ContainsAttributeList)
             .Combine(
                 allUpGlobalAliasesProvider
             )
-        /*.WithTrackingName("compilationUnitAndGlobalAliases_ForAttribute")*/;
+/*.WithTrackingName("compilationUnitAndGlobalAliases_ForAttribute")*/;
 
         // For each pair of compilation unit + global aliases, walk the compilation unit
         var result = syntaxTreeAndGlobalAliasesProvider
@@ -184,7 +203,7 @@ internal static partial class SyntaxValueProviderExtensions
             .Where(tuple =>
                 tuple.Item2.Length > 0
             )
-        /*.WithTrackingName("result_ForAttribute")*/;
+/*.WithTrackingName("result_ForAttribute")*/;
 
         return result;
 
@@ -240,13 +259,16 @@ internal static partial class SyntaxValueProviderExtensions
             ? StringComparison.Ordinal
             : StringComparison.OrdinalIgnoreCase;
 
-        // As we walk down the compilation unit and nested namespaces, we may encounter additional using aliases local
-        // to this file. Keep track of them so we can determine if they would allow an attribute in code to bind to the
+        // As we walk down the compilation unit and nested namespaces, we may encounter additional using
+        // aliases local
+        // to this file. Keep track of them so we can determine if they would allow an attribute in code to
+        // bind to the
         // attribute being searched for.
         var localAliases = new Aliases(Span<(string, string)>.Empty);
         var nameHasAttributeSuffix = name.HasAttributeSuffix(isCaseSensitive);
 
-        // Used to ensure that as we recurse through alias names to see if they could bind to attributeName that we
+        // Used to ensure that as we recurse through alias names to see if they could bind to attributeName
+        // that we
         // don't get into cycles.
 
         var seenNames = new ValueListBuilder<string>(Span<string>.Empty);
@@ -352,7 +374,8 @@ internal static partial class SyntaxValueProviderExtensions
                 ref attributeTargets
             );
 
-            // after recursing into this namespace, dump any local aliases we added from this namespace decl itself.
+            // after recursing into this namespace, dump any local aliases we added from this namespace decl
+            // itself.
             localAliases.Length = localAliasCount;
         }
 
@@ -419,7 +442,8 @@ internal static partial class SyntaxValueProviderExtensions
                     }
                     else
                     {
-                        // For any other node, just keep recursing deeper to see if we can find an attribute. Note: we cannot
+                        // For any other node, just keep recursing deeper to see if we can find an attribute. Note: we
+                        // cannot
                         // terminate the search anywhere as attributes may be found on things like local functions, and that
                         // means having to dive deep into statements and expressions.
                         var childNodesAndTokens = node.ChildNodesAndTokens();
@@ -483,10 +507,12 @@ internal static partial class SyntaxValueProviderExtensions
                     return true;
             }
 
-            // Otherwise, keep searching through aliases.  Check that this is the first time seeing this name so we
+            // Otherwise, keep searching through aliases.  Check that this is the first time seeing this name so
+            // we
             // don't infinite recurse in error code where aliases reference each other.
             //
-            // note: as we recurse up the aliases, we do not want to add the attribute suffix anymore.  aliases must
+            // note: as we recurse up the aliases, we do not want to add the attribute suffix anymore.  aliases
+            // must
             // reference the actual real name of the symbol they are aliasing.
             foreach (var seenName in seenNames.AsSpan())
             {

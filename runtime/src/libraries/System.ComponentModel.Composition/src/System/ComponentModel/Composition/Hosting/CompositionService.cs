@@ -67,7 +67,8 @@ namespace System.ComponentModel.Composition.Hosting
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
-            // Delegates are cool there is no concern if you try to remove an item from them and they don't exist
+            // Delegates are cool there is no concern if you try to remove an item from them and they don't
+            // exist
             if (_notifyCatalog != null)
             {
                 _notifyCatalog.Changing -= OnCatalogChanging;

@@ -672,7 +672,8 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         return XPathResultType.NodeSet;
                     }
-                    // Microsoft: It be better to check that type is realy object and otherwise return XPathResultType.Error
+                    // Microsoft: It be better to check that type is realy object and otherwise return
+                    // XPathResultType.Error
                     return XPathResultType.Any;
                 case TypeCode.DateTime:
                     return XPathResultType.Error;
@@ -701,17 +702,27 @@ namespace System.Xml.Xsl.XsltOld
         }
 
         // + IXsltContextFunction
-        //   + XsltFunctionImpl             func. name,       min/max args,      return type                args types
+        //   + XsltFunctionImpl             func. name,       min/max args,      return type
+        // args types
         //       FuncCurrent            "current"              0   0         XPathResultType.NodeSet   { }
-        //       FuncUnEntityUri        "unparsed-entity-uri"  1   1         XPathResultType.String    { XPathResultType.String  }
-        //       FuncGenerateId         "generate-id"          0   1         XPathResultType.String    { XPathResultType.NodeSet }
-        //       FuncSystemProp         "system-property"      1   1         XPathResultType.String    { XPathResultType.String  }
-        //       FuncElementAvailable   "element-available"    1   1         XPathResultType.Boolean   { XPathResultType.String  }
-        //       FuncFunctionAvailable  "function-available"   1   1         XPathResultType.Boolean   { XPathResultType.String  }
-        //       FuncDocument           "document"             1   2         XPathResultType.NodeSet   { XPathResultType.Any    , XPathResultType.NodeSet }
-        //       FuncKey                "key"                  2   2         XPathResultType.NodeSet   { XPathResultType.String , XPathResultType.Any     }
-        //       FuncFormatNumber       "format-number"        2   3         XPathResultType.String    { XPathResultType.Number , XPathResultType.String, XPathResultType.String }
-        //       FuncNodeSet            "msxsl:node-set"       1   1         XPathResultType.NodeSet   { XPathResultType.Navigator }
+        //       FuncUnEntityUri        "unparsed-entity-uri"  1   1         XPathResultType.String    {
+        // XPathResultType.String  }
+        //       FuncGenerateId         "generate-id"          0   1         XPathResultType.String    {
+        // XPathResultType.NodeSet }
+        //       FuncSystemProp         "system-property"      1   1         XPathResultType.String    {
+        // XPathResultType.String  }
+        //       FuncElementAvailable   "element-available"    1   1         XPathResultType.Boolean   {
+        // XPathResultType.String  }
+        //       FuncFunctionAvailable  "function-available"   1   1         XPathResultType.Boolean   {
+        // XPathResultType.String  }
+        //       FuncDocument           "document"             1   2         XPathResultType.NodeSet   {
+        // XPathResultType.Any    , XPathResultType.NodeSet }
+        //       FuncKey                "key"                  2   2         XPathResultType.NodeSet   {
+        // XPathResultType.String , XPathResultType.Any     }
+        //       FuncFormatNumber       "format-number"        2   3         XPathResultType.String    {
+        // XPathResultType.Number , XPathResultType.String, XPathResultType.String }
+        //       FuncNodeSet            "msxsl:node-set"       1   1         XPathResultType.NodeSet   {
+        // XPathResultType.Navigator }
         //       FuncExtension
         //
         private abstract class XsltFunctionImpl : IXsltContextFunction
@@ -860,7 +871,8 @@ namespace System.Xml.Xsl.XsltOld
                 switch (xt)
                 {
                     case XPathResultType.String:
-                        // Unfortunetely XPathResultType.String == XPathResultType.Navigator (This is wrong but cant be changed in Everett)
+                        // Unfortunetely XPathResultType.String == XPathResultType.Navigator (This is wrong but cant be
+                        // changed in Everett)
                         // Fortunetely we have typeCode hare so let's discriminate by typeCode
                         if (typeCode == TypeCode.String)
                         {
@@ -1030,7 +1042,8 @@ namespace System.Xml.Xsl.XsltOld
                     new XPathResultType[] { XPathResultType.Any, XPathResultType.NodeSet }
                 ) { }
 
-            // SxS: This method uses resource names read from source document and does not expose any resources to the caller.
+            // SxS: This method uses resource names read from source document and does not expose any resources
+            // to the caller.
             // It's OK to suppress the SxS warning.
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
             [ResourceExposure(ResourceScope.None)]
@@ -1051,7 +1064,8 @@ namespace System.Xml.Xsl.XsltOld
                     else
                     {
                         // http://www.w3.org/1999/11/REC-xslt-19991116-errata (E14):
-                        // It is an error if the second argument node-set is empty and the URI reference is relative; the XSLT processor may signal the error;
+                        // It is an error if the second argument node-set is empty and the URI reference is relative; the
+                        // XSLT processor may signal the error;
                         // if it does not signal an error, it must recover by returning an empty node-set.
                         baseUri = string.Empty; // call to Document will fail if args[0] is reletive.
                     }

@@ -22,7 +22,8 @@ public static class GoogleDefaults
     /// The default endpoint used to perform Google authentication.
     /// </summary>
     /// <remarks>
-    /// For more details about this endpoint, see <see href="https://developers.google.com/identity/protocols/oauth2/web-server#httprest"/>.
+    /// For more details about this endpoint, see <see
+    // href="https://developers.google.com/identity/protocols/oauth2/web-server#httprest"/>.
     /// </remarks>
     public static readonly string AuthorizationEndpoint =
         "https://accounts.google.com/o/oauth2/v2/auth";

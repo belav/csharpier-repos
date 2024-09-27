@@ -4,7 +4,8 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     The <see cref="DiagnosticSource" /> event payload for events that reference a Migrations column operation.
+///     The <see cref="DiagnosticSource" /> event payload for events that reference a Migrations
+// column operation.
 /// </summary>
 public class MigrationColumnOperationEventData : EventData
 {

@@ -366,7 +366,8 @@ namespace MonoTests.I18N
                 0x30,
                 0x30,
             };
-            // FIXME: some codepages do have U+00AC (logical not sign) or U+20AC (euro sign), we need to adapt the tests
+            // FIXME: some codepages do have U+00AC (logical not sign) or U+20AC (euro sign), we need to adapt
+            // the tests
             // Assert.AreEqual (expected, bytes);
 
             bytes = e.GetBytes("1\u04d92");

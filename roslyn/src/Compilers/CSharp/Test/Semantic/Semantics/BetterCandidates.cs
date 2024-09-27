@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             );
         }
 
-        //When a method group contains both instance and static members, we discard the instance members if invoked with a static receiver.
+        //When a method group contains both instance and static members, we discard the instance members if
+        // invoked with a static receiver.
         [Fact]
         public void TestStaticReceiver01()
         {
@@ -74,7 +75,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         Program.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -88,7 +90,8 @@ class B {}
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver01()
         {
@@ -108,7 +111,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (6,11): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         p.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -122,7 +126,8 @@ class B {}
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver02()
         {
@@ -146,7 +151,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (10,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (10,14): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         this.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -160,7 +166,8 @@ class B {}
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver02b()
         {
@@ -187,7 +194,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (15,14): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (15,14): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         base.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -201,7 +209,8 @@ class B {}
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver03()
         {
@@ -227,7 +236,8 @@ class MyCollection : System.Collections.IEnumerable
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,28): error CS0121: The call is ambiguous between the following methods or properties: 'MyCollection.Add(A)' and 'MyCollection.Add(B)'
+                    // (5,28): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'MyCollection.Add(A)' and 'MyCollection.Add(B)'
                     //         new MyCollection { null };
                     Diagnostic(ErrorCode.ERR_AmbigCall, "null")
                         .WithArguments("MyCollection.Add(A)", "MyCollection.Add(B)")
@@ -241,7 +251,8 @@ class MyCollection : System.Collections.IEnumerable
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver04()
         {
@@ -281,7 +292,8 @@ class MyEnumerator : System.Collections.IEnumerator
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,27): warning CS0279: 'MyCollection' does not implement the 'collection' pattern. 'MyCollection.GetEnumerator()' is not a public instance or extension method.
+                    // (6,27): warning CS0279: 'MyCollection' does not implement the 'collection' pattern.
+                    // 'MyCollection.GetEnumerator()' is not a public instance or extension method.
                     //         foreach (var q in c) { }
                     Diagnostic(ErrorCode.WRN_PatternNotPublicOrNotInstance, "c")
                         .WithArguments("MyCollection", "collection", "MyCollection.GetEnumerator()")
@@ -295,7 +307,8 @@ class MyEnumerator : System.Collections.IEnumerator
             CompileAndVerify(compilation, expectedOutput: "12");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver05()
         {
@@ -330,12 +343,15 @@ class MyEnumerator
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
+                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the
+                    // same parameter types
                     //     public static bool MoveNext() => throw null;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext")
                         .WithArguments("MoveNext", "MyEnumerator")
                         .WithLocation(26, 24),
-                    // (6,27): error CS0202: foreach requires that the return type 'MyEnumerator' of 'MyCollection.GetEnumerator()' must have a suitable public 'MoveNext' method and public 'Current' property
+                    // (6,27): error CS0202: foreach requires that the return type 'MyEnumerator' of
+                    // 'MyCollection.GetEnumerator()' must have a suitable public 'MoveNext' method and public 'Current'
+                    // property
                     //         foreach (var q in c) { }
                     Diagnostic(ErrorCode.ERR_BadGetEnumerator, "c")
                         .WithArguments("MyEnumerator", "MyCollection.GetEnumerator()")
@@ -346,7 +362,8 @@ class MyEnumerator
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the same parameter types
+                    // (26,24): error CS0111: Type 'MyEnumerator' already defines a member called 'MoveNext' with the
+                    // same parameter types
                     //     public static bool MoveNext() => throw null;
                     Diagnostic(ErrorCode.ERR_MemberAlreadyExists, "MoveNext")
                         .WithArguments("MoveNext", "MyEnumerator")
@@ -354,7 +371,8 @@ class MyEnumerator
                 );
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver06()
         {
@@ -376,7 +394,9 @@ class MyDeconstructable
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,26): error CS0121: The call is ambiguous between the following methods or properties: 'MyDeconstructable.Deconstruct(out int, out int)' and 'MyDeconstructable.Deconstruct(out long, out long)'
+                    // (6,26): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'MyDeconstructable.Deconstruct(out int, out int)' and 'MyDeconstructable.Deconstruct(out long, out
+                    // long)'
                     //         (var a, var b) = o;
                     Diagnostic(ErrorCode.ERR_AmbigCall, "o")
                         .WithArguments(
@@ -409,7 +429,8 @@ class MyDeconstructable
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver07()
         {
@@ -450,7 +471,8 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
+                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter
+                    // method
                     //         var z = await x;
                     Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x")
                         .WithArguments("MyTask<int>")
@@ -461,7 +483,8 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter method
+                    // (9,17): error CS1986: 'await' requires that the type MyTask<int> have a suitable GetAwaiter
+                    // method
                     //         var z = await x;
                     Diagnostic(ErrorCode.ERR_BadAwaitArg, "await x")
                         .WithArguments("MyTask<int>")
@@ -469,7 +492,8 @@ public class MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCom
                 );
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver08()
         {
@@ -510,7 +534,8 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance
+                    // reference; qualify it with a type name instead
                     //         var z = await x;
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x")
                         .WithArguments("MyTaskAwaiter<int>.GetResult()")
@@ -521,7 +546,8 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance reference; qualify it with a type name instead
+                    // (9,17): error CS0176: Member 'MyTaskAwaiter<int>.GetResult()' cannot be accessed with an instance
+                    // reference; qualify it with a type name instead
                     //         var z = await x;
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "await x")
                         .WithArguments("MyTaskAwaiter<int>.GetResult()")
@@ -529,7 +555,8 @@ public struct MyTaskAwaiter<TResult> : System.Runtime.CompilerServices.INotifyCo
                 );
         }
 
-        //When a method group contains both instance and static members, we discard the static members if invoked with an instance receiver.
+        //When a method group contains both instance and static members, we discard the static members if
+        // invoked with an instance receiver.
         [Fact]
         public void TestInstanceReceiver09()
         {
@@ -560,7 +587,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,35): error CS1940: Multiple implementations of the query pattern were found for source type 'Q'.  Ambiguous call to 'Select'.
+                    // (6,35): error CS1940: Multiple implementations of the query pattern were found for source type
+                    // 'Q'.  Ambiguous call to 'Select'.
                     //         var q = from x in new Q() select x;
                     Diagnostic(ErrorCode.ERR_QueryMultipleProviders, "select x")
                         .WithArguments("Q", "Select")
@@ -594,7 +622,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -629,7 +658,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (9,13): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (9,13): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //     int X = M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -665,7 +695,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (7,29): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (7,29): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //     public Program() : this(M(null)) {}
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -702,7 +733,8 @@ public class MyAttribute : System.Attribute
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //     [My(M(null))]
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -710,7 +742,8 @@ public class MyAttribute : System.Attribute
                 );
             CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,9): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
+                    // (6,9): error CS0182: An attribute argument must be a constant expression, typeof expression or
+                    // array creation expression of an attribute parameter type
                     //     [My(M(null))]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M(null)").WithLocation(6, 9)
                 );
@@ -735,7 +768,8 @@ public class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //     public void Q(int x = M(null))
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -743,7 +777,8 @@ public class B {}
                 );
             CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,27): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //     public void Q(int x = M(null))
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -751,7 +786,8 @@ public class B {}
                 );
         }
 
-        //When a method group contains no receiver, we include both static and instance members in an other-than-static context. i.e. discard nothing.
+        //When a method group contains no receiver, we include both static and instance members in an
+        // other-than-static context. i.e. discard nothing.
         [Fact]
         public void TestInstanceContext01()
         {
@@ -771,7 +807,8 @@ public class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -779,7 +816,8 @@ public class B {}
                 );
             CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -787,7 +825,8 @@ public class B {}
                 );
         }
 
-        //When a method group receiver is ambiguously an instance or type due to a color-color situation, we include both instance and static candidates.
+        //When a method group receiver is ambiguously an instance or type due to a color-color situation, we
+        // include both instance and static candidates.
         [Fact]
         public void TestAmbiguousContext01()
         {
@@ -808,7 +847,8 @@ public class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
+                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Color.M(A)' and 'Color.M(B)'
                     //         Color.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Color.M(A)", "Color.M(B)")
@@ -816,7 +856,8 @@ public class B {}
                 );
             CreateCompilationWithBetterCandidates(source, options: TestOptions.ReleaseDll)
                 .VerifyDiagnostics(
-                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties: 'Color.M(A)' and 'Color.M(B)'
+                    // (6,15): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Color.M(A)' and 'Color.M(B)'
                     //         Color.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Color.M(A)", "Color.M(B)")
@@ -824,7 +865,8 @@ public class B {}
                 );
         }
 
-        //When a method group contains some generic methods whose type parameters do not satisfy their constraints, these members are removed from the candidate set.
+        //When a method group contains some generic methods whose type parameters do not satisfy their
+        // constraints, these members are removed from the candidate set.
         [Fact]
         public void TestConstraintFailed01()
         {
@@ -844,7 +886,8 @@ public class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
+                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                    // method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
                     //         M(new A(), 0);
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M")
                         .WithArguments("Program.M<T>(T, int)", "B", "T", "A")
@@ -858,8 +901,10 @@ public class B {}
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //When a method group contains some generic methods whose type parameters do not satisfy their constraints, these members are removed from the candidate set.
-        // Test that this permits overload resolution to use type parameter constraints "as a tie-breaker" to guide overload resolution.
+        //When a method group contains some generic methods whose type parameters do not satisfy their
+        // constraints, these members are removed from the candidate set.
+        // Test that this permits overload resolution to use type parameter constraints "as a tie-breaker"
+        // to guide overload resolution.
         [Fact]
         public void TestConstraintFailed02()
         {
@@ -881,12 +926,14 @@ public class X {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
                     //         M(new A(), null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)")
                         .WithLocation(5, 9),
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M<T>(T, B)' and 'Program.M<T>(T, X)'
                     //         M(new B(), null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, X)")
@@ -900,7 +947,8 @@ public class X {}
             CompileAndVerify(compilation, expectedOutput: "struct class ");
         }
 
-        //For a method group conversion, candidate methods whose return type doesn't match up with the delegate's return type are removed from the set.
+        //For a method group conversion, candidate methods whose return type doesn't match up with the
+        // delegate's return type are removed from the set.
         [Fact]
         public void TestReturnTypeMismatch01()
         {
@@ -926,7 +974,8 @@ class B {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(D1)' and 'Program.M(D2)'
                     //         M(Q);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(D1)", "Program.M(D2)")
@@ -940,7 +989,8 @@ class B {}
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //For a method group conversion, candidate methods whose return ref kind doesn't match up with the delegate's return ref kind are removed from the set.
+        //For a method group conversion, candidate methods whose return ref kind doesn't match up with the
+        // delegate's return ref kind are removed from the set.
         [Fact]
         public void TestReturnRefMismatch01()
         {
@@ -963,7 +1013,8 @@ delegate ref int D2();
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(D1)' and 'Program.M(D2)'
                     //         M(Q);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(D1)", "Program.M(D2)")
@@ -977,7 +1028,8 @@ delegate ref int D2();
             CompileAndVerify(compilation, expectedOutput: "2");
         }
 
-        //For a method group conversion, candidate methods whose return ref kind doesn't match up with the delegate's return ref kind are removed from the set.
+        //For a method group conversion, candidate methods whose return ref kind doesn't match up with the
+        // delegate's return ref kind are removed from the set.
         [Fact]
         public void TestReturnRefMismatch02()
         {
@@ -1000,7 +1052,8 @@ delegate ref int D2();
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    // (6,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(D1)' and 'Program.M(D2)'
                     //         M(Q);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(D1)", "Program.M(D2)")
@@ -1014,7 +1067,8 @@ delegate ref int D2();
             CompileAndVerify(compilation, expectedOutput: "1");
         }
 
-        //For a method group conversion, candidate methods whose return type doesn't match up with the delegate's return type are removed from the set.
+        //For a method group conversion, candidate methods whose return type doesn't match up with the
+        // delegate's return type are removed from the set.
         [Fact]
         public void TestReturnTypeMismatch02()
         {
@@ -1047,7 +1101,8 @@ namespace System.Runtime.CompilerServices
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(D1)' and 'Program.M(D2)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(D1)' and 'Program.M(D2)'
                     //         M(new Z().Q);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(D1)", "Program.M(D2)")
@@ -1063,7 +1118,8 @@ namespace System.Runtime.CompilerServices
         }
 
         // Test suggested by @VSadov
-        // 1) one candidate is generic, but candidate fails constraints, while another overload requires a conversion. Used to be an error, second should be picked now.
+        // 1) one candidate is generic, but candidate fails constraints, while another overload requires a
+        // conversion. Used to be an error, second should be picked now.
         [Fact]
         public void TestConstraintFailed03()
         {
@@ -1084,7 +1140,8 @@ public class C { public static implicit operator C(A a) => null; }
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
+                    // (5,9): error CS0311: The type 'A' cannot be used as type parameter 'T' in the generic type or
+                    // method 'Program.M<T>(T, int)'. There is no implicit reference conversion from 'A' to 'B'.
                     //         M(new A(), 0);
                     Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "M")
                         .WithArguments("Program.M<T>(T, int)", "B", "T", "A")
@@ -1099,7 +1156,8 @@ public class C { public static implicit operator C(A a) => null; }
         }
 
         // Test suggested by @VSadov
-        // 2) one candidate is generic without constraints, but we pass a ref-struct to it, which cannot be a generic type arg, another candidate requires a conversion and now works.
+        // 2) one candidate is generic without constraints, but we pass a ref-struct to it, which cannot be
+        // a generic type arg, another candidate requires a conversion and now works.
         [Fact]
         public void TestConstraintFailed04()
         {
@@ -1134,7 +1192,8 @@ public class C { public static implicit operator C(A a) => null; }
         }
 
         // Test suggested by @VSadov
-        // 3) one candidate is generic without constraints, but we pass a pointer to it, which cannot be a generic type arg, another candidate requires a conversion and now works.
+        // 3) one candidate is generic without constraints, but we pass a pointer to it, which cannot be a
+        // generic type arg, another candidate requires a conversion and now works.
         [Fact]
         public void TestConstraintFailed05()
         {
@@ -1229,12 +1288,14 @@ End Class
                     options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
                 )
                 .VerifyDiagnostics(
-                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'C.P[A]'
                     //         o = D.P[null];
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
                         .WithArguments("C.P[A]")
                         .WithLocation(13, 13),
-                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'C.P[A]'
                     //         D.P[null] = o;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
                         .WithArguments("C.P[A]")
@@ -1246,12 +1307,14 @@ End Class
                     options: TestOptions.ReleaseExe.WithAllowUnsafe(true)
                 )
                 .VerifyDiagnostics(
-                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    // (13,13): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'C.P[A]'
                     //         o = D.P[null];
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
                         .WithArguments("C.P[A]")
                         .WithLocation(13, 13),
-                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or property 'C.P[A]'
+                    // (14,9): error CS0120: An object reference is required for the non-static field, method, or
+                    // property 'C.P[A]'
                     //         D.P[null] = o;
                     Diagnostic(ErrorCode.ERR_ObjectRequired, "D.P[null]")
                         .WithArguments("C.P[A]")
@@ -1291,27 +1354,32 @@ class D {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         Program.M(null); // two static candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
                         .WithLocation(6, 17),
-                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         p.M(null);       // two instance candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
                         .WithLocation(7, 11),
-                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);         // two static candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
                         .WithLocation(8, 9),
-                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);         // four candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
                         .WithLocation(13, 9),
-                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         Program.M(null); // four candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -1322,27 +1390,32 @@ class D {}
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
+                    // (6,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(C)'
                     //         Program.M(null); // two static candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(C)")
                         .WithLocation(6, 17),
-                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(B)' and 'Program.M(D)'
+                    // (7,11): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(B)' and 'Program.M(D)'
                     //         p.M(null);       // two instance candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(B)", "Program.M(D)")
                         .WithLocation(7, 11),
-                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(C)'
+                    // (8,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(C)'
                     //         M(null);         // two static candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(C)")
                         .WithLocation(8, 9),
-                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (13,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         M(null);         // four candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
                         .WithLocation(13, 9),
-                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M(A)' and 'Program.M(B)'
+                    // (14,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M(A)' and 'Program.M(B)'
                     //         Program.M(null); // four candidates
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M(A)", "Program.M(B)")
@@ -1482,7 +1555,8 @@ class Constraint {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, A)' and 'Program.M<T>(T, B)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M<T>(T, A)' and 'Program.M<T>(T, B)'
                     //         M(1, null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M<T>(T, A)", "Program.M<T>(T, B)")
@@ -1493,7 +1567,8 @@ class Constraint {}
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties: 'Program.M<T>(T, B)' and 'Program.M<T>(T, D)'
+                    // (5,9): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.M<T>(T, B)' and 'Program.M<T>(T, D)'
                     //         M(1, null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Program.M<T>(T, B)", "Program.M<T>(T, D)")
@@ -1556,7 +1631,8 @@ public static class Extensions
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, A)' and 'Extensions.M<T>(T, B)'
+                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Extensions.M<T>(T, A)' and 'Extensions.M<T>(T, B)'
                     //         1.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Extensions.M<T>(T, A)", "Extensions.M<T>(T, B)")
@@ -1567,7 +1643,8 @@ public static class Extensions
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties: 'Extensions.M<T>(T, B)' and 'Extensions.M<T>(T, D)'
+                    // (5,11): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Extensions.M<T>(T, B)' and 'Extensions.M<T>(T, D)'
                     //         1.M(null);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                         .WithArguments("Extensions.M<T>(T, B)", "Extensions.M<T>(T, D)")
@@ -1635,7 +1712,8 @@ interface IZ: IQ, IW, IX, IY {}
 ";
             CreateCompilationWithoutBetterCandidates(source, options: TestOptions.ReleaseExe)
                 .VerifyDiagnostics(
-                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IW)'
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.Argument(IQ)' and 'Program.Argument(IW)'
                     //         Invoked(Argument);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "Argument")
                         .WithArguments("Program.Argument(IQ)", "Program.Argument(IW)")
@@ -1646,7 +1724,8 @@ interface IZ: IQ, IW, IX, IY {}
                     options: TestOptions.ReleaseExe
                 )
                 .VerifyDiagnostics(
-                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties: 'Program.Argument(IQ)' and 'Program.Argument(IX)'
+                    // (5,17): error CS0121: The call is ambiguous between the following methods or properties:
+                    // 'Program.Argument(IQ)' and 'Program.Argument(IX)'
                     //         Invoked(Argument);
                     Diagnostic(ErrorCode.ERR_AmbigCall, "Argument")
                         .WithArguments("Program.Argument(IQ)", "Program.Argument(IX)")

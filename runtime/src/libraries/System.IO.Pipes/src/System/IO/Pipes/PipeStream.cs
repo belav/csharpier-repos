@@ -111,7 +111,8 @@ namespace System.IO.Pipes
         }
 
         // Once a PipeStream has a handle ready, it should call this method to set up the PipeStream.  If
-        // the pipe is in a connected state already, it should also set the IsConnected (protected) property.
+        // the pipe is in a connected state already, it should also set the IsConnected (protected)
+        // property.
         // This method may also be called to uninitialize a handle, setting it to null.
         protected void InitializeHandle(SafePipeHandle? handle, bool isExposed, bool isAsync)
         {
@@ -152,7 +153,8 @@ namespace System.IO.Pipes
         {
             CheckWriteOperations();
 
-            // Does nothing on PipeStreams.  We cannot call Interop.FlushFileBuffers here because we can deadlock
+            // Does nothing on PipeStreams.  We cannot call Interop.FlushFileBuffers here because we can
+            // deadlock
             // if the other end of the pipe is no longer interested in reading from the pipe.
         }
 

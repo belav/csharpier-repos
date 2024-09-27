@@ -11,7 +11,8 @@ namespace System.Web.Services
     using System.Runtime.InteropServices;
     using System.Web.Services.Protocols;
 
-    /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute"]/*' />
+    /// <include file='doc\WebServiceBindingAttribute.uex'
+    // path='docs/doc[@for="WebServiceBindingAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -24,13 +25,15 @@ namespace System.Web.Services
         WsiProfiles claims = WsiProfiles.None;
         bool emitClaims;
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public WebServiceBindingAttribute() { }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute1"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -39,7 +42,8 @@ namespace System.Web.Services
             this.name = name;
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute2"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -49,7 +53,8 @@ namespace System.Web.Services
             this.ns = ns;
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute3"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.WebServiceBindingAttribute3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -60,7 +65,8 @@ namespace System.Web.Services
             this.location = location;
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.ConformsTo"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.ConformsTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -70,7 +76,8 @@ namespace System.Web.Services
             set { claims = value; }
         }
 
-        /// <include file='doc\WebServiceAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.EmitConformanceClaims"]/*' />
+        /// <include file='doc\WebServiceAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.EmitConformanceClaims"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -80,7 +87,8 @@ namespace System.Web.Services
             set { emitClaims = value; }
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.Location"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.Location"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -90,7 +98,8 @@ namespace System.Web.Services
             set { location = value; }
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.Name"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.Name"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -100,7 +109,8 @@ namespace System.Web.Services
             set { name = value; }
         }
 
-        /// <include file='doc\WebServiceBindingAttribute.uex' path='docs/doc[@for="WebServiceBindingAttribute.Namespace"]/*' />
+        /// <include file='doc\WebServiceBindingAttribute.uex'
+        // path='docs/doc[@for="WebServiceBindingAttribute.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

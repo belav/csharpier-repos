@@ -22,8 +22,10 @@ namespace System.Data.Common.CommandTrees
     /// Describes a binding for an expression. Conceptually similar to a foreach loop
     /// in C#. The DbExpression property defines the collection being iterated over,
     /// while the Var property provides a means to reference the current element
-    /// of the collection during the iteration. DbExpressionBinding is used to describe the set arguments
-    /// to relational expressions such as <see cref="DbFilterExpression"/>, <see cref="DbProjectExpression"/>
+    /// of the collection during the iteration. DbExpressionBinding is used to describe the set
+    // arguments
+    /// to relational expressions such as <see cref="DbFilterExpression"/>, <see
+    // cref="DbProjectExpression"/>
     /// and <see cref="DbJoinExpression"/>.
     /// </summary>
     /// <seealso cref="DbExpression"/>
@@ -83,7 +85,8 @@ namespace System.Data.Common.CommandTrees
     /// <summary>
     /// Defines the binding for the input set to a <see cref="DbGroupByExpression"/>.
     /// In addition to the properties of <see cref="DbExpressionBinding"/>, DbGroupExpressionBinding
-    /// also provides access to the group element via the <seealso cref="GroupVariable"/> variable reference
+    /// also provides access to the group element via the <seealso cref="GroupVariable"/> variable
+    // reference
     /// and to the group aggregate via the <seealso cref="GroupAggregate"/> property.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage(

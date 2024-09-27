@@ -69,7 +69,8 @@ namespace Microsoft.CodeAnalysis.InlineHints
                 ),
             };
 
-        // Note: inlay hints is the term used in LSP, we Want to use the LSP name when communicate with the LSP client.
+        // Note: inlay hints is the term used in LSP, we Want to use the LSP name when communicate with the
+        // LSP client.
         private static readonly OptionGroup s_inlayHintOptionGroup =
             new(name: "inlay_hints", description: "");
 

@@ -24,7 +24,8 @@ using Microsoft.VisualStudio.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMargin
 {
     /// <summary>
-    /// Manager controls all the glyphs of Inheritance Margin in <see cref="InheritanceMarginViewMargin"/>.
+    /// Manager controls all the glyphs of Inheritance Margin in <see
+    // cref="InheritanceMarginViewMargin"/>.
     /// </summary>
     internal partial class InheritanceGlyphManager : ForegroundThreadAffinitizedObject, IDisposable
     {
@@ -129,7 +130,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         }
 
         /// <summary>
-        /// Remove the glyphs that are no long visible or covered by the <paramref name="newOrReformattedLines"/>.
+        /// Remove the glyphs that are no long visible or covered by the <paramref
+        // name="newOrReformattedLines"/>.
         /// Refresh all the other the existing glyphs with the <paramref name="snapshot"/>.
         /// It should only be called by UI thread because UI elements are manipulated by this method.
         /// </summary>
@@ -191,7 +193,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     && span.Start == lastLine.EndIncludingLineBreak
                 )
                 {
-                    // As a special case, if the last line ends at the end of the buffer and the span starts at the end of the buffer
+                    // As a special case, if the last line ends at the end of the buffer and the span starts at the end
+                    // of the buffer
                     // as well, treat is as crossing the last line in the buffer.
                     return lastLine;
                 }
@@ -207,8 +210,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 return 1;
             }
 
-            // EndIncludingLineBreak usually equals the start of next line (the exclusion is if this is the last line, which will be handled separately),
-            // and we always prefer to use the line start, so still return -1 when value == line.EndIncludingLineBreak.
+            // EndIncludingLineBreak usually equals the start of next line (the exclusion is if this is the last
+            // line, which will be handled separately),
+            // and we always prefer to use the line start, so still return -1 when value ==
+            // line.EndIncludingLineBreak.
             if (value >= line.EndIncludingLineBreak)
             {
                 return -1;

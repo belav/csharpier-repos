@@ -8,7 +8,8 @@ namespace System.Net.Http
 {
     internal sealed class HttpAuthority : IEquatable<HttpAuthority>
     {
-        // ALPN Protocol Name should also be part of an authority, but we are special-casing for HTTP/3, so this can be assumed to be "H3".
+        // ALPN Protocol Name should also be part of an authority, but we are special-casing for HTTP/3, so
+        // this can be assumed to be "H3".
         // public string AlpnProtocolName { get; }
 
         public string IdnHost { get; }
@@ -19,7 +20,8 @@ namespace System.Net.Http
         {
             Debug.Assert(host != null);
 
-            // This is very rarely called, but could be optimized to avoid the URI-specific stuff by bringing in DomainNameHelpers from System.Private.Uri.
+            // This is very rarely called, but could be optimized to avoid the URI-specific stuff by bringing in
+            // DomainNameHelpers from System.Private.Uri.
             var builder = new UriBuilder(Uri.UriSchemeHttp, host, port);
             Uri uri = builder.Uri;
 

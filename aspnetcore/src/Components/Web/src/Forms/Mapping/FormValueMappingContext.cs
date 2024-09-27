@@ -33,7 +33,8 @@ public sealed class FormValueMappingContext
     public string AcceptMappingScopeName { get; }
 
     /// <summary>
-    /// If set, indicates that the mapping should only receive values if the incoming form matches this name. If null, the mapping should receive data from any form in the mapping scope.
+    /// If set, indicates that the mapping should only receive values if the incoming form matches this
+    // name. If null, the mapping should receive data from any form in the mapping scope.
     /// </summary>
     public string? AcceptFormName { get; }
 
@@ -70,7 +71,8 @@ public sealed class FormValueMappingContext
     /// Sets the result of the mapping operation.
     /// </summary>
     /// <param name="result">The result of the mapping operation.</param>
-    /// <exception cref="InvalidOperationException">Thrown if the result has already been set.</exception>
+    /// <exception cref="InvalidOperationException">Thrown if the result has already been
+    // set.</exception>
     public void SetResult(object? result)
     {
         if (_resultSet)

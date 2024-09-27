@@ -20,7 +20,8 @@ using System.Reflection.Runtime.MethodInfos.EcmaFormat;
 namespace Internal.Reflection.Core.Execution
 {
     //
-    // This singleton class acts as an entrypoint from System.Private.Reflection.Execution to System.Private.Reflection.Core.
+    // This singleton class acts as an entrypoint from System.Private.Reflection.Execution to
+    // System.Private.Reflection.Core.
     //
     [CLSCompliant(false)]
     public static class ExecutionDomain

@@ -30,7 +30,8 @@ namespace Internal.Cryptography.Pal.Windows
             List<RecipientInfo> recipientInfos = new List<RecipientInfo>(numRecipients);
             for (int index = 0; index < numRecipients; index++)
             {
-                // Do not dispose this safehandle. The RecipientInfoPal objects we create hold on to these and they get freed through garbage collection.
+                // Do not dispose this safehandle. The RecipientInfoPal objects we create hold on to these and they
+                // get freed through garbage collection.
                 SafeHandle pCmsgCmsRecipientInfoMemory = hCryptMsg.GetMsgParamAsMemory(
                     CryptMsgParamType.CMSG_CMS_RECIPIENT_INFO_PARAM,
                     index

@@ -548,7 +548,8 @@ namespace System.Data.OleDb
 
                     // since cancel is allowed to occur at anytime we can't check the connection status
                     // since if it returns as closed then the connection will close causing the reader to close
-                    // and that would introduce the possilbility of one thread reading and one thread closing at the same time
+                    // and that would introduce the possilbility of one thread reading and one thread closing at the
+                    // same time
                     ProcessResultsNoReset(hr); // MDAC 72667
                 }
                 else
@@ -1567,8 +1568,10 @@ namespace System.Data.OleDb
                     {
                         if (hr < 0)
                         {
-                            // VSDD 621427: OLEDB Data Reader masks provider specific errors by raising "Internal .Net Framework Data Provider error 30."
-                            // DBPropSet c-tor will register the exception and it will be raised at GetPropertySet call in case of failure
+                            // VSDD 621427: OLEDB Data Reader masks provider specific errors by raising "Internal .Net Framework
+                            // Data Provider error 30."
+                            // DBPropSet c-tor will register the exception and it will be raised at GetPropertySet call in case
+                            // of failure
                             SafeNativeMethods.Wrapper.ClearErrorInfo();
                         }
                         dbprops = propset.GetPropertySet(0, out propertySet);

@@ -9,21 +9,27 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 /// <summary>
 ///     <para>
 ///         The base class for non-relational type mapping source. Non-relational providers
-///         should derive from this class and override <see cref="O:TypeMappingSourceBase.FindMapping" />
+///         should derive from this class and override <see
+// cref="O:TypeMappingSourceBase.FindMapping" />
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -48,7 +54,8 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
     /// </summary>
     /// <remarks>
     ///     The mapping info is populated with as much information about the required type mapping as
-    ///     is available. Use all the information necessary to create the best mapping. Return <see langword="null" />
+    ///     is available. Use all the information necessary to create the best mapping. Return <see
+    // langword="null" />
     ///     if no mapping is available.
     /// </remarks>
     /// <param name="mappingInfo">The mapping info to use to create the mapping.</param>
@@ -104,7 +111,8 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
     public abstract CoreTypeMapping? FindMapping(Type type);
 
     /// <summary>
-    ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration into the account.
+    ///     Finds the type mapping for a given <see cref="Type" />, taking pre-convention configuration
+    // into the account.
     /// </summary>
     /// <remarks>
     ///     Note: Only call this method if there is no <see cref="IProperty" />,
@@ -139,7 +147,8 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
     /// <param name="elementMapping">The type mapping for elements of the collection.</param>
     /// <param name="elementComparer">The element comparer.</param>
     /// <param name="collectionReaderWriter">The reader/writer for the collection.</param>
-    /// <returns><see langword="true" /> if a collection mapping was found; <see langword="false" /> otherwise.</returns>
+    /// <returns><see langword="true" /> if a collection mapping was found; <see langword="false" />
+    // otherwise.</returns>
     protected virtual bool TryFindJsonCollectionMapping(
         TypeMappingInfo mappingInfo,
         Type modelClrType,

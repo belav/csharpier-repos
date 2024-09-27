@@ -63,7 +63,8 @@ namespace MonoTests.System.Data.OracleClient
             con.Open();
 
             //Currently not running on Oracle/DB2: .Net-Failed, GH:Pass
-            //not runnig on postgres because "The 'current catalog' property is not supported by the 'Mainsoft.JDBC.OLEDB.1' provider."
+            //not runnig on postgres because "The 'current catalog' property is not supported by the
+            // 'Mainsoft.JDBC.OLEDB.1' provider."
             if (
                 ConnectedDataProvider.GetDbType(con) != DataBaseServer.Oracle
                 && ConnectedDataProvider.GetDbType(con) != DataBaseServer.DB2

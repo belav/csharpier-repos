@@ -63,7 +63,8 @@ namespace System.ConfigurationTests
             Theory,
             // ConfigurationManager types roll forward
             // ConfigurationManager isn't part of the shared framework and potentially app-local.
-            // https://github.com/dotnet/runtime/issues/12376#issuecomment-479670104 explains why testing the type roll forward behavior doesn't work in such cases.
+            // https://github.com/dotnet/runtime/issues/12376#issuecomment-479670104 explains why testing the
+            // type roll forward behavior doesn't work in such cases.
             InlineData(
                 "System.Configuration.UserSettingsGroup, System.Configuration.ConfigurationManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51",
                 typeof(UserSettingsGroup)

@@ -20,7 +20,8 @@ public static class WebAssemblyRazorComponentsBuilderExtensions
     /// Adds services to support rendering interactive WebAssembly components.
     /// </summary>
     /// <param name="builder">The <see cref="IRazorComponentsBuilder"/>.</param>
-    /// <returns>An <see cref="IRazorComponentsBuilder"/> that can be used to further customize the configuration.</returns>
+    /// <returns>An <see cref="IRazorComponentsBuilder"/> that can be used to further customize the
+    // configuration.</returns>
     public static IRazorComponentsBuilder AddInteractiveWebAssemblyComponents(
         this IRazorComponentsBuilder builder
     )

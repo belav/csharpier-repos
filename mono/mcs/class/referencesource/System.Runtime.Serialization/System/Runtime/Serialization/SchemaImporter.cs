@@ -998,7 +998,8 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                //Value type can be used by both nillable and non-nillable elements but reference type cannot be used by non nillable elements
+                //Value type can be used by both nillable and non-nillable elements but reference type cannot be
+                // used by non nillable elements
                 xmlDataContract.IsValueType = true;
                 xmlDataContract.IsTypeDefinedOnImport = false;
                 xmlDataContract.HasRoot = true;
@@ -1623,7 +1624,8 @@ namespace System.Runtime.Serialization
 
             dataContract.IsReference = isReference;
 
-            // CheckIfCollection has already checked if sequence contains exactly one item with maxOccurs="unbounded" or maxOccurs > 1
+            // CheckIfCollection has already checked if sequence contains exactly one item with
+            // maxOccurs="unbounded" or maxOccurs > 1
             XmlSchemaElement element = (XmlSchemaElement)rootSequence.Items[0];
 
             dataContract.IsItemTypeNullable = element.IsNillable;

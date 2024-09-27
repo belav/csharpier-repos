@@ -74,10 +74,13 @@ namespace System.Security.Cryptography.Xml.Tests
         private static string dsaY =
             "LnrxxRGLYeV2XLtK3SYz8RQHlHFZYrtznDZyMotuRfO5uC5YODhSFyLXvb1qB3WeGtF4h3Eo4KzHgMgfN2ZMlffxFRhJgTtH3ctbL8lfQoDkjeiPPnYGhspdJxr0tyZmiy0gkjJG3vwHYrLnvZWx9Wm/unqiOlGBPNuxJ+hOeP8=";
 
-        //private static string dsaJ = "9RhE5TycDtdEIXxS3HfxFyXYgpy81zY5lVjwD6E9JP37MWEi80BlX6ab1YPm6xYSEoqReMPP9RgGiW6DuACpgI7+8vgCr4i/7VhzModJAA56PwvTu6UMt9xxKU/fT672v8ucREkMWoc7lEey";
+        //private static string dsaJ =
+        // "9RhE5TycDtdEIXxS3HfxFyXYgpy81zY5lVjwD6E9JP37MWEi80BlX6ab1YPm6xYSEoqReMPP9RgGiW6DuACpgI7+8vgCr4i/7VhzModJAA56PwvTu6UMt9xxKU/fT672v8ucREkMWoc7lEey";
         //private static string dsaSeed = "HxW3N4RHWVgqDQKuGg7iJTUTiCs=";
         //private static string dsaPgenCounter = "Asw=";
-        // private static string xmlDSA = "<DSAKeyValue><P>" + dsaP + "</P><Q>" + dsaQ + "</Q><G>" + dsaG + "</G><Y>" + dsaY + "</Y><J>" + dsaJ + "</J><Seed>" + dsaSeed + "</Seed><PgenCounter>" + dsaPgenCounter + "</PgenCounter></DSAKeyValue>";
+        // private static string xmlDSA = "<DSAKeyValue><P>" + dsaP + "</P><Q>" + dsaQ + "</Q><G>" + dsaG +
+        // "</G><Y>" + dsaY + "</Y><J>" + dsaJ + "</J><Seed>" + dsaSeed + "</Seed><PgenCounter>" +
+        // dsaPgenCounter + "</PgenCounter></DSAKeyValue>";
         private static string xmlDSA =
             "<DSAKeyValue><P>"
             + dsaP

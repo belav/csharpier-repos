@@ -29,7 +29,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeReferenceCollection'/> based on another <see cref='System.CodeDom.CodeTypeReferenceCollection'/>.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeReferenceCollection'/>
+        // based on another <see cref='System.CodeDom.CodeTypeReferenceCollection'/>.
         ///    </para>
         /// </devdoc>
         public CodeTypeReferenceCollection(CodeTypeReferenceCollection value)
@@ -39,7 +40,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeReferenceCollection'/> containing any array of <see cref='System.CodeDom.CodeTypeReference'/> objects.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeTypeReferenceCollection'/>
+        // containing any array of <see cref='System.CodeDom.CodeTypeReference'/> objects.
         ///    </para>
         /// </devdoc>
         public CodeTypeReferenceCollection(CodeTypeReference[] value)
@@ -48,7 +50,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Represents the entry at the specified index of the <see cref='System.CodeDom.CodeTypeReference'/>.</para>
+        /// <para>Represents the entry at the specified index of the <see
+        // cref='System.CodeDom.CodeTypeReference'/>.</para>
         /// </devdoc>
         public CodeTypeReference this[int index]
         {
@@ -82,7 +85,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the elements of an array to the end of the <see cref='System.CodeDom.CodeTypeReferenceCollection'/>.</para>
+        /// <para>Copies the elements of an array to the end of the <see
+        // cref='System.CodeDom.CodeTypeReferenceCollection'/>.</para>
         /// </devdoc>
         public void AddRange(CodeTypeReference[] value)
         {
@@ -98,7 +102,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///     <para>
-        ///       Adds the contents of another <see cref='System.CodeDom.CodeTypeReferenceCollection'/> to the end of the collection.
+        ///       Adds the contents of another <see cref='System.CodeDom.CodeTypeReferenceCollection'/> to
+        // the end of the collection.
         ///    </para>
         /// </devdoc>
         public void AddRange(CodeTypeReferenceCollection value)
@@ -116,7 +121,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         /// <para>Gets a value indicating whether the
-        ///    <see cref='System.CodeDom.CodeTypeReferenceCollection'/> contains the specified <see cref='System.CodeDom.CodeTypeReference'/>.</para>
+        ///    <see cref='System.CodeDom.CodeTypeReferenceCollection'/> contains the specified <see
+        // cref='System.CodeDom.CodeTypeReference'/>.</para>
         /// </devdoc>
         public bool Contains(CodeTypeReference value)
         {
@@ -124,7 +130,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.CodeDom.CodeTypeReferenceCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the
+        /// <para>Copies the <see cref='System.CodeDom.CodeTypeReferenceCollection'/> values to a
+        // one-dimensional <see cref='System.Array'/> instance at the
         ///    specified index.</para>
         /// </devdoc>
         public void CopyTo(CodeTypeReference[] array, int index)
@@ -142,7 +149,8 @@ namespace System.CodeDom
         }
 
         /// <devdoc>
-        /// <para>Inserts a <see cref='System.CodeDom.CodeTypeReference'/> into the <see cref='System.CodeDom.CodeTypeReferenceCollection'/> at the specified index.</para>
+        /// <para>Inserts a <see cref='System.CodeDom.CodeTypeReference'/> into the <see
+        // cref='System.CodeDom.CodeTypeReferenceCollection'/> at the specified index.</para>
         /// </devdoc>
         public void Insert(int index, CodeTypeReference value)
         {

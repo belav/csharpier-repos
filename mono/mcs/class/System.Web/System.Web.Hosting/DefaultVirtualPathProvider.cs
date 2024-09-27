@@ -40,13 +40,13 @@ namespace System.Web.Hosting
 
         protected override void Initialize() { }
 
-        /*
-         * No need to override this, it seems
-        public override string CombineVirtualPaths (string basePath, string relativePath)
-        {
-            return VirtualPathUtility.Combine (basePath, relativePath);
-        }
-        */
+/*
+* No need to override this, it seems
+public override string CombineVirtualPaths (string basePath, string relativePath)
+{
+return VirtualPathUtility.Combine (basePath, relativePath);
+}
+*/
 
         public override bool DirectoryExists(string virtualDir)
         {

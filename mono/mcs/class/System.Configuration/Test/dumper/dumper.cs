@@ -1,12 +1,14 @@
 /*
 ** 1. compile using:
-**    gmcs dumper.cs -r:System.dll -r:System.Web.dll -r:System.Web.Services.dll -r:System.Configuration.dll
+**    gmcs dumper.cs -r:System.dll -r:System.Web.dll -r:System.Web.Services.dll
+-r:System.Configuration.dll
 **
 ** 2. run it on windows:
 **    > dumper.exe > dumper.out.microsoft
 **
 ** 3. transfer that file to linux and do:
-**    $ dos2unix dumper.out.microsoft && sort dumper.out.microsoft > foo && mv foo dumper.out.microsoft
+**    $ dos2unix dumper.out.microsoft && sort dumper.out.microsoft > foo && mv foo
+dumper.out.microsoft
 **
 ** 4. run dumper on linux:
 **    $ mono dumper.exe > dumper.out.linux && sort dumper.out.linux > foo && mv foo dumper.out.linux
@@ -129,19 +131,20 @@ public class Dumper
         new UrlMapping("~/url", "~/mappedUrl"), /* UrlMapping uses a callback validator to validate the url(s) */
         new UrlMappingsSection(),
         new VirtualDirectoryMappingCollection(),
-        //		new VirtualDirectoryMapping ("\\phys\\dir", true),  /* PhysicalDirectory seems to validate its input without using a Validator (decorator, anyway..)*/
+        //		new VirtualDirectoryMapping ("\\phys\\dir", true),  /* PhysicalDirectory seems to validate its
+        // input without using a Validator (decorator, anyway..)*/
         new WebControlsSection(),
         new WebPartsPersonalizationAuthorization(),
         new WebPartsPersonalization(),
         new WebPartsSection(),
         new XhtmlConformanceSection(),
-        /* System.Configuration stuff */
+/* System.Configuration stuff */
         new AppSettingsSection(),
         new IgnoreSection(),
         new ConnectionStringSettings(),
         new ConnectionStringSettingsCollection(),
         new ProtectedProviderSettings(),
-        /* System.Web.Services stuff */
+/* System.Web.Services stuff */
         new DiagnosticsElement(),
         new ProtocolElementCollection(),
         new ProtocolElement(),
@@ -155,7 +158,7 @@ public class Dumper
         new WsiProfilesElementCollection(),
         new WsiProfilesElement(),
 
-        /* System.Net stuff */
+/* System.Net stuff */
         //new AuthenticationModuleElement (),
         //new AuthenticationModuleElementCollection (),
         //new AuthenticationModulesSection (),

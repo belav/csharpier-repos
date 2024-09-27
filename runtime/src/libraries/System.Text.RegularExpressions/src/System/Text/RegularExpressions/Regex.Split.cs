@@ -18,7 +18,8 @@ namespace System.Text.RegularExpressions
         ) => RegexCache.GetOrAdd(pattern).Split(input);
 
         /// <summary>
-        /// Splits the <paramref name="input "/>string at the position defined by <paramref name="pattern"/>.
+        /// Splits the <paramref name="input "/>string at the position defined by <paramref
+        // name="pattern"/>.
         /// </summary>
         public static string[] Split(
             string input,

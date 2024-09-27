@@ -232,7 +232,8 @@ internal abstract partial class ResourceInvoker
         // of context or result other than throwing.
         var scope = Scope.Invoker;
 
-        // The `state` is used for internal state handling during transitions between states. In practice this
+        // The `state` is used for internal state handling during transitions between states. In practice
+        // this
         // means storing a filter instance in `state` and then retrieving it in the next state.
         var state = (object?)null;
 
@@ -718,7 +719,8 @@ internal abstract partial class ResourceInvoker
                 var filter = (IAsyncExceptionFilter)state;
                 var exceptionContext = _exceptionContext;
 
-                // When we get here we're 'unwinding' the stack of exception filters. If we have an unhandled exception,
+                // When we get here we're 'unwinding' the stack of exception filters. If we have an unhandled
+                // exception,
                 // we'll call the filter. Otherwise there's nothing to do.
                 if (exceptionContext?.Exception != null && !exceptionContext.ExceptionHandled)
                 {
@@ -787,7 +789,8 @@ internal abstract partial class ResourceInvoker
                 var filter = (IExceptionFilter)state;
                 var exceptionContext = _exceptionContext;
 
-                // When we get here we're 'unwinding' the stack of exception filters. If we have an unhandled exception,
+                // When we get here we're 'unwinding' the stack of exception filters. If we have an unhandled
+                // exception,
                 // we'll call the filter. Otherwise there's nothing to do.
                 if (exceptionContext?.Exception != null && !exceptionContext.ExceptionHandled)
                 {

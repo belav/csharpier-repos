@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages;
 public interface IPageModelFactoryProvider
 {
     /// <summary>
-    /// Creates a factory for producing models for Razor Pages given the specified <see cref="PageContext"/>.
+    /// Creates a factory for producing models for Razor Pages given the specified <see
+    // cref="PageContext"/>.
     /// </summary>
     /// <param name="descriptor">The <see cref="CompiledPageActionDescriptor"/>.</param>
     /// <returns>The Razor Page model factory.</returns>

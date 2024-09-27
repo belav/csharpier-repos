@@ -143,7 +143,8 @@ public class OwinExtensionTests
         });
         await builder.Build().Invoke(context);
 
-        // Dictionary contains context but does not contain "websocket.Accept" or "websocket.AcceptAlt" keys.
+        // Dictionary contains context but does not contain "websocket.Accept" or "websocket.AcceptAlt"
+        // keys.
         Assert.NotNull(environment);
         var value = Assert
             .Single(

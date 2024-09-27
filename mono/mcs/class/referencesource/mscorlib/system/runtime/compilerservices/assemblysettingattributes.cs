@@ -11,19 +11,19 @@ namespace System.Runtime.CompilerServices
     using System;
     using System.Runtime.InteropServices;
 
-    /*
-    NGenHint is not supported in Whidbey
+/*
+NGenHint is not supported in Whidbey
 
-    [Serializable]
-    public enum NGenHint
-    {
-        Default             = 0x0000, // No preference specified
-        
-        Eager               = 0x0001, // NGen at install time
-        Lazy                = 0x0002, // NGen after install time
-        Never               = 0x0003, // Assembly should not be ngened
-    }
-    */
+[Serializable]
+public enum NGenHint
+{
+Default             = 0x0000, // No preference specified
+
+Eager               = 0x0001, // NGen at install time
+Lazy                = 0x0002, // NGen after install time
+Never               = 0x0003, // Assembly should not be ngened
+}
+*/
 
     [Serializable]
     public enum LoadHint

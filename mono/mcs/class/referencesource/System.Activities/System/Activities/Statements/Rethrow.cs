@@ -107,7 +107,8 @@ namespace System.Activities.Statements
                 // }
                 // Notice that the chain of Activities is TryCatch->Sequence->Rethrow
                 // We want to validate that Rethrow is in the catch block of TryCatch
-                // We walk up the parent chain until we find TryCatch.  Then we check if one the catch handlers points to Sequence(the previous activity in the tree)
+                // We walk up the parent chain until we find TryCatch.  Then we check if one the catch handlers
+                // points to Sequence(the previous activity in the tree)
                 foreach (Activity parent in parentChain)
                 {
                     // Rethrow is only allowed under the public children of a TryCatch activity.

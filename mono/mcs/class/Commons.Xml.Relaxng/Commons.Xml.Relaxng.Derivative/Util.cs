@@ -144,13 +144,13 @@ namespace Commons.Xml.Relaxng.Derivative
             return p.Nullable;
         }
 
-        /*
-        // childDeriv :: Context -> Pattern -> ChildNode -> Pattern
-        internal static RdpPattern ChildDeriv (RdpContext ctx, RdpPattern p, RdpChildNode child)
-        {
-            return p.ChildDeriv (child);
-        }
-        */
+/*
+// childDeriv :: Context -> Pattern -> ChildNode -> Pattern
+internal static RdpPattern ChildDeriv (RdpContext ctx, RdpPattern p, RdpChildNode child)
+{
+return p.ChildDeriv (child);
+}
+*/
 
         // textDeriv :: Context -> Pattern -> String -> Pattern
         internal static RdpPattern TextDeriv(XmlReader reader, RdpPattern p, string s)
@@ -231,14 +231,14 @@ namespace Commons.Xml.Relaxng.Derivative
             return pattern.StartTagOpenDeriv(name, ns);
         }
 
-        /*
-        // attsDeriv :: Context -> Pattern -> [AttributeNode] -> Pattern
-        // [implemented in RdpPattern]
-        internal static RdpPattern AttsDeriv (RdpPattern p, RdpAttributes attributes)
-        {
-            return p.AttsDeriv (attributes);
-        }
-        */
+/*
+// attsDeriv :: Context -> Pattern -> [AttributeNode] -> Pattern
+// [implemented in RdpPattern]
+internal static RdpPattern AttsDeriv (RdpPattern p, RdpAttributes attributes)
+{
+return p.AttsDeriv (attributes);
+}
+*/
 
         // attDeriv :: Context -> Pattern -> AttributeNode -> Pattern
         // [all implemented]

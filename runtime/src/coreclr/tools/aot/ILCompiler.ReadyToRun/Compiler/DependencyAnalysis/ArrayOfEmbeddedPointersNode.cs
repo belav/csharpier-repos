@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis
         private string _startSymbolMangledName;
 
         /// <summary>
-        /// Provides a callback mechanism for notification when an EmbeddedPointerIndirectionNode is marked and added to the
+        /// Provides a callback mechanism for notification when an EmbeddedPointerIndirectionNode is marked
+        // and added to the
         /// parent ArrayOfEmbeddedPointersNode's internal list
         /// </summary>
         public delegate void OnMarkedDelegate(

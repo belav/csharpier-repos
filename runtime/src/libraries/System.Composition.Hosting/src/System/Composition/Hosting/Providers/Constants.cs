@@ -4,7 +4,8 @@
 namespace System.Composition.Hosting.Providers
 {
     /// <summary>
-    /// Metadata keys used to tie programming model entities into their back-end hosting implementations.
+    /// Metadata keys used to tie programming model entities into their back-end hosting
+    // implementations.
     /// </summary>
     internal static class Constants
     {

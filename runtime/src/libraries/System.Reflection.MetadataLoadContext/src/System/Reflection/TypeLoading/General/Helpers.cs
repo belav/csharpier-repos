@@ -29,7 +29,8 @@ namespace System.Reflection.TypeLoading
             if (original.Length == 0)
                 return Array.Empty<T>();
 
-            // We want to return the exact type of T[] even if "original" is a type of T2[] (due to array variance.)
+            // We want to return the exact type of T[] even if "original" is a type of T2[] (due to array
+            // variance.)
             // The arrays produced by this helper are usually passed directly to app code.
             T[] copy = new T[original.Length];
             Array.Copy(
@@ -45,7 +46,8 @@ namespace System.Reflection.TypeLoading
         [return: NotNullIfNotNull(nameof(original))]
         // Converts an array of modified types to unmodified types when unmodified are requested.
         // This prevents inconsistencies such as allowing modifiers to be returned.
-        // This doesn't affect performance since we need to clone arrays anyway before returning to the caller.
+        // This doesn't affect performance since we need to clone arrays anyway before returning to the
+        // caller.
         public static Type[]? CloneArrayToUnmodifiedTypes(this Type[]? original)
         {
             if (original == null)
@@ -79,8 +81,10 @@ namespace System.Reflection.TypeLoading
             if (accessor.IsPrivate)
                 return null;
 
-            // If the accessor is virtual, .NET Framework tries to look for a overriding member starting from ReflectedType - a situation
-            // which probably isn't expressible in any known language. Detecting overrides veers into vtable-building business which
+            // If the accessor is virtual, .NET Framework tries to look for a overriding member starting from
+            // ReflectedType - a situation
+            // which probably isn't expressible in any known language. Detecting overrides veers into
+            // vtable-building business which
             // is something this library tries to avoid. If anyone ever cares about this, welcome to fix.
 
             return accessor;
@@ -153,8 +157,10 @@ namespace System.Reflection.TypeLoading
                 {
                     if (identifier[i] == '\\')
                     {
-                        // If we have a trailing '\\', the framework somehow messed up escaping the original identifier. Since that's
-                        // unlikely to happen and unactionable, we'll just let the next line IndexOutOfRange if that happens.
+                        // If we have a trailing '\\', the framework somehow messed up escaping the original identifier.
+                        // Since that's
+                        // unlikely to happen and unactionable, we'll just let the next line IndexOutOfRange if that
+                        // happens.
                         i++;
                     }
                     sbUnescapedName.Append(identifier[i]);
@@ -165,7 +171,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// For AssemblyReferences, convert "unspecified" components from the ECMA format (0xffff) to the in-memory System.Version format (0xffffffff).
+        /// For AssemblyReferences, convert "unspecified" components from the ECMA format (0xffff) to the
+        // in-memory System.Version format (0xffffffff).
         /// </summary>
         public static Version? AdjustForUnspecifiedVersionComponents(this Version v)
         {
@@ -187,9 +194,12 @@ namespace System.Reflection.TypeLoading
 
         public static byte[]? ComputePublicKeyToken(this byte[] pkt)
         {
-            // @TODO - https://github.com/dotnet/corefxlab/issues/2447 - This is not the best way to compute the PKT as AssemblyName
-            // throws if the PK isn't a valid PK blob. That's not something we should block a metadata inspection tool for so we
-            // should compute the PKT ourselves as soon as we can convince the libraries analyzers to let us use SHA1.
+            // @TODO - https://github.com/dotnet/corefxlab/issues/2447 - This is not the best way to compute the
+            // PKT as AssemblyName
+            // throws if the PK isn't a valid PK blob. That's not something we should block a metadata
+            // inspection tool for so we
+            // should compute the PKT ourselves as soon as we can convince the libraries analyzers to let us use
+            // SHA1.
             AssemblyName an = new AssemblyName();
             an.SetPublicKey(pkt);
             return an.GetPublicKeyToken();
@@ -234,8 +244,10 @@ namespace System.Reflection.TypeLoading
         //
         // Rejoin a namespace and type name back into a full name.
         //
-        // Note that for a top level type, the namespace is string.Empty, *not* null (as Reflection surfaces it.)
-        // This is a concession to the fact that MetadataReader's fast String equal methods don't accept null.
+        // Note that for a top level type, the namespace is string.Empty, *not* null (as Reflection surfaces
+        // it.)
+        // This is a concession to the fact that MetadataReader's fast String equal methods don't accept
+        // null.
         //
         public static string AppendTypeName(this string ns, string name)
         {
@@ -294,7 +306,8 @@ namespace System.Reflection.TypeLoading
             if (other is null)
                 throw new ArgumentNullException(nameof(other));
 
-            // Ensure that "other" is one of our MemberInfo objects. Do this check before calling any methods on it!
+            // Ensure that "other" is one of our MemberInfo objects. Do this check before calling any methods on
+            // it!
             if (!(other is M))
                 return false;
 
@@ -316,7 +329,8 @@ namespace System.Reflection.TypeLoading
         {
             if (!name.TypeNameContainsTypeParserMetacharacters())
             {
-                // Fast-path: the type contains none of the parser metacharacters nor the escape character. Just treat as plain old type name.
+                // Fast-path: the type contains none of the parser metacharacters nor the escape character. Just
+                // treat as plain old type name.
                 name.SplitTypeName(out string ns, out string simpleName);
                 RoType? type = defaultAssembly.GetTypeCore(
                     ns,
@@ -392,7 +406,8 @@ namespace System.Reflection.TypeLoading
         }
 
         //
-        // Converts an AssemblyName to a RoAssemblyName that is free from any future mutations on the AssemblyName.
+        // Converts an AssemblyName to a RoAssemblyName that is free from any future mutations on the
+        // AssemblyName.
         //
         public static RoAssemblyName ToRoAssemblyName(this AssemblyName assemblyName)
         {
@@ -433,7 +448,8 @@ namespace System.Reflection.TypeLoading
 
         // Guards ToString() implementations. Sample usage:
         //
-        //    public sealed override string ToString() => Loader.GetDisposedString() ?? <your real ToString() code>;"
+        //    public sealed override string ToString() => Loader.GetDisposedString() ?? <your real
+        // ToString() code>;"
         //
         public static string? GetDisposedString(this MetadataLoadContext loader) =>
             loader.IsDisposed ? SR.MetadataLoadContextDisposed : null;

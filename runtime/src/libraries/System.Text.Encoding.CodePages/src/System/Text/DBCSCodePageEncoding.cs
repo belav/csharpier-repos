@@ -58,11 +58,13 @@ namespace System.Text
 
         // MBCS data section:
         //
-        // We treat each multibyte pattern as 2 bytes in our table.  If it's a single byte, then the high byte
+        // We treat each multibyte pattern as 2 bytes in our table.  If it's a single byte, then the high
+        // byte
         // for that position will be 0.  When the table is loaded, leading bytes are flagged with 0xFFFE, so
         // when reading the table look up with each byte.  If the result is 0xFFFE, then use 2 bytes to read
         // further data.  FFFF is a special value indicating that the Unicode code is the same as the
-        // character code (this helps us support code points < 0x20).  FFFD is used as replacement character.
+        // character code (this helps us support code points < 0x20).  FFFD is used as replacement
+        // character.
         //
         // Normal table:
         // WCHAR*     -  Starting with MB code point 0.
@@ -124,8 +126,10 @@ namespace System.Text
                     "[DBCSCodePageEncoding.LoadManagedCodePage]Expected 0x3f (?) as unknown byte character"
                 );
 
-                // Get our mapped section (bytes to allocate = 2 bytes per 65536 Unicode chars + 2 bytes per 65536 DBCS chars)
-                // Plus 4 byte to remember CP # when done loading it. (Don't want to get IA64 or anything out of alignment)
+                // Get our mapped section (bytes to allocate = 2 bytes per 65536 Unicode chars + 2 bytes per 65536
+                // DBCS chars)
+                // Plus 4 byte to remember CP # when done loading it. (Don't want to get IA64 or anything out of
+                // alignment)
                 int sizeToAllocate = 65536 * 2 * 2 + 4 + iExtraBytes;
                 byte* pNativeMemory = GetNativeMemory(sizeToAllocate);
                 Unsafe.InitBlockUnaligned(pNativeMemory, 0, (uint)sizeToAllocate);
@@ -1216,7 +1220,8 @@ namespace System.Text
                 }
             }
 
-            // We already stuck it in encoder if necessary, but we have to clear cases where nothing new got into decoder
+            // We already stuck it in encoder if necessary, but we have to clear cases where nothing new got
+            // into decoder
             if (decoder != null)
             {
                 // Clear it in case of MustFlush
@@ -1276,10 +1281,12 @@ namespace System.Text
                     SR.ArgumentOutOfRange_NeedNonNegNum
                 );
 
-            // DBCS is pretty much the same, but could have hanging high byte making extra ? and fallback for unknown
+            // DBCS is pretty much the same, but could have hanging high byte making extra ? and fallback for
+            // unknown
             long charCount = ((long)byteCount + 1);
 
-            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be longer.
+            // 1 to 1 for most characters.  Only surrogates with fallbacks have less, unknown fallbacks could be
+            // longer.
             if (DecoderFallback.MaxCharCount > 1)
                 charCount *= DecoderFallback.MaxCharCount;
 

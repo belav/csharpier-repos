@@ -30,19 +30,22 @@ namespace Microsoft.CodeAnalysis
         public readonly LanguageServices LanguageServices;
 
         /// <summary>
-        /// The documents in this project. They are sorted by <see cref="DocumentId.Id"/> to provide a stable sort for
+        /// The documents in this project. They are sorted by <see cref="DocumentId.Id"/> to provide a
+        // stable sort for
         /// <see cref="GetChecksumAsync(CancellationToken)"/>.
         /// </summary>
         public readonly TextDocumentStates<DocumentState> DocumentStates;
 
         /// <summary>
-        /// The additional documents in this project. They are sorted by <see cref="DocumentId.Id"/> to provide a stable sort for
+        /// The additional documents in this project. They are sorted by <see cref="DocumentId.Id"/> to
+        // provide a stable sort for
         /// <see cref="GetChecksumAsync(CancellationToken)"/>.
         /// </summary>
         public readonly TextDocumentStates<AdditionalDocumentState> AdditionalDocumentStates;
 
         /// <summary>
-        /// The analyzer config documents in this project.  They are sorted by <see cref="DocumentId.Id"/> to provide a stable sort for
+        /// The analyzer config documents in this project.  They are sorted by <see cref="DocumentId.Id"/>
+        // to provide a stable sort for
         /// <see cref="GetChecksumAsync(CancellationToken)"/>.
         /// </summary>
         public readonly TextDocumentStates<AnalyzerConfigDocumentState> AnalyzerConfigDocumentStates;
@@ -84,8 +87,10 @@ namespace Microsoft.CodeAnalysis
             _lazyLatestDocumentTopLevelChangeVersion = lazyLatestDocumentTopLevelChangeVersion;
             _lazyAnalyzerConfigOptions = lazyAnalyzerConfigSet;
 
-            // ownership of information on document has moved to project state. clear out documentInfo the state is
-            // holding on. otherwise, these information will be held onto unnecessarily by projectInfo even after
+            // ownership of information on document has moved to project state. clear out documentInfo the state
+            // is
+            // holding on. otherwise, these information will be held onto unnecessarily by projectInfo even
+            // after
             // the info has changed by DocumentState.
             _projectInfo = ClearAllDocumentsFromProjectInfo(projectInfo);
 
@@ -104,7 +109,8 @@ namespace Microsoft.CodeAnalysis
                 projectInfoFixed.Attributes.ChecksumAlgorithm
             );
 
-            // We need to compute our AnalyerConfigDocumentStates first, since we use those to produce our DocumentStates
+            // We need to compute our AnalyerConfigDocumentStates first, since we use those to produce our
+            // DocumentStates
             AnalyzerConfigDocumentStates = new TextDocumentStates<AnalyzerConfigDocumentState>(
                 projectInfoFixed.AnalyzerConfigDocuments,
                 info => new AnalyzerConfigDocumentState(
@@ -154,10 +160,13 @@ namespace Microsoft.CodeAnalysis
                 )
             );
 
-            // ownership of information on document has moved to project state. clear out documentInfo the state is
-            // holding on. otherwise, these information will be held onto unnecessarily by projectInfo even after
+            // ownership of information on document has moved to project state. clear out documentInfo the state
+            // is
+            // holding on. otherwise, these information will be held onto unnecessarily by projectInfo even
+            // after
             // the info has changed by DocumentState.
-            // we hold onto the info so that we don't need to duplicate all information info already has in the state
+            // we hold onto the info so that we don't need to duplicate all information info already has in the
+            // state
             _projectInfo = ClearAllDocumentsFromProjectInfo(projectInfoFixed);
 
             _lazyChecksums = AsyncLazy.Create(ComputeChecksumsAsync);
@@ -364,9 +373,12 @@ namespace Microsoft.CodeAnalysis
             }
 
             // We need to find the analyzer config options at the root of the project.
-            // Currently, there is no compiler API to query analyzer config options for a directory in a language agnostic fashion.
-            // So, we use a dummy language-specific file name appended to the project directory to query analyzer config options.
-            // NIL character is invalid in paths so it will never match any pattern in editorconfig, but editorconfig parsing allows it.
+            // Currently, there is no compiler API to query analyzer config options for a directory in a
+            // language agnostic fashion.
+            // So, we use a dummy language-specific file name appended to the project directory to query
+            // analyzer config options.
+            // NIL character is invalid in paths so it will never match any pattern in editorconfig, but
+            // editorconfig parsing allows it.
             // TODO: https://github.com/dotnet/roslyn/issues/61217
 
             var projectDirectory = PathUtilities.GetDirectoryName(_projectInfo.FilePath);
@@ -451,7 +463,8 @@ namespace Microsoft.CodeAnalysis
 
             public override AnalyzerConfigOptions GetOptions(AdditionalText textFile)
             {
-                // TODO: correctly find the file path, since it looks like we give this the document's .Name under the covers if we don't have one
+                // TODO: correctly find the file path, since it looks like we give this the document's .Name under
+                // the covers if we don't have one
                 return GetOptionsForSourcePath(GetCache(), textFile.Path);
             }
 
@@ -467,7 +480,8 @@ namespace Microsoft.CodeAnalysis
                     return documentState.FilePath;
                 }
 
-                // We need to work out path to this document. Documents may not have a "real" file path if they're something created
+                // We need to work out path to this document. Documents may not have a "real" file path if they're
+                // something created
                 // as a part of a code action, but haven't been written to disk yet.
 
                 var projectFilePath = projectState.FilePath;
@@ -491,7 +505,8 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Provides editorconfig options for Razor design-time documents.
-        /// Razor does not support editorconfig options but has custom settings for a few formatting options whose values
+        /// Razor does not support editorconfig options but has custom settings for a few formatting options
+        // whose values
         /// are only available in-proc and the same for all Razor design-time documents.
         /// This type emulates these options as analyzer config options.
         /// </summary>
@@ -651,10 +666,14 @@ namespace Microsoft.CodeAnalysis
                 .GetValueAsync(cancellationToken)
                 .ConfigureAwait(false);
 
-            // This is unfortunate, however the impact of this is that *any* change to our project-state version will
-            // cause us to think the semantic version of the project has changed.  Thus, any change to a project property
-            // that does *not* flow into the compiler still makes us think the semantic version has changed.  This is
-            // likely to not be too much of an issue as these changes should be rare, and it's better to be conservative
+            // This is unfortunate, however the impact of this is that *any* change to our project-state version
+            // will
+            // cause us to think the semantic version of the project has changed.  Thus, any change to a project
+            // property
+            // that does *not* flow into the compiler still makes us think the semantic version has changed.
+            // This is
+            // likely to not be too much of an issue as these changes should be rare, and it's better to be
+            // conservative
             // and assume there was a change than to wrongly presume there was not.
             return docVersion.GetNewerVersion(this.Version);
         }
@@ -919,7 +938,8 @@ namespace Microsoft.CodeAnalysis
         /// Determines whether <see cref="ProjectReferences"/> contains a reference to a specified project.
         /// </summary>
         /// <param name="projectId">The target project of the reference.</param>
-        /// <returns><see langword="true"/> if this project references <paramref name="projectId"/>; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if this project references <paramref name="projectId"/>;
+        // otherwise, <see langword="false"/>.</returns>
         public bool ContainsReferenceToProject(ProjectId projectId)
         {
             foreach (var projectReference in ProjectReferences)
@@ -1076,7 +1096,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState RemoveDocuments(ImmutableArray<DocumentId> documentIds)
         {
-            // We create a new CachingAnalyzerConfigSet for the new snapshot to avoid holding onto cached information
+            // We create a new CachingAnalyzerConfigSet for the new snapshot to avoid holding onto cached
+            // information
             // for removed documents.
             return With(
                 projectInfo: ProjectInfo.WithVersion(Version.GetNewerVersion()),
@@ -1106,7 +1127,8 @@ namespace Microsoft.CodeAnalysis
 
         public ProjectState RemoveAllDocuments()
         {
-            // We create a new CachingAnalyzerConfigSet for the new snapshot to avoid holding onto cached information
+            // We create a new CachingAnalyzerConfigSet for the new snapshot to avoid holding onto cached
+            // information
             // for removed documents.
             return With(
                 projectInfo: ProjectInfo.WithVersion(Version.GetNewerVersion()),

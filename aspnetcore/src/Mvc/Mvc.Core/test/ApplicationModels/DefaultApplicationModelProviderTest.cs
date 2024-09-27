@@ -1434,7 +1434,8 @@ public class DefaultApplicationModelProviderTest
         var model = Assert.Single(context.Result.Controllers);
         var action = Assert.Single(model.Actions);
 
-        // Make sure that the Dispose method is from the derived controller and not the base 'Controller' type
+        // Make sure that the Dispose method is from the derived controller and not the base 'Controller'
+        // type
         Assert.Equal(typeInfo, action.ActionMethod.DeclaringType.GetTypeInfo());
     }
 
@@ -1533,7 +1534,8 @@ public class DefaultApplicationModelProviderTest
     [Fact]
     public void CreatePropertyModel_DoesNotApplyBindingInfoToPropertiesOnBaseType()
     {
-        // This test ensures that applying BindPropertyAttribute on a user defined type does not cause properties on
+        // This test ensures that applying BindPropertyAttribute on a user defined type does not cause
+        // properties on
         // Controller \ ControllerBase to be treated as model bound.
         // Arrange
         var derivedPropertyInfo = typeof(UserController).GetProperty(

@@ -37,13 +37,15 @@ namespace System.Threading
         // While we cannot know the ideal amount of wait needed before making a successfull attempt,
         // the exponential backoff will generally be not more than 2X worse than the perfect guess and
         // will do a lot less attempts than an simple retry. On multiprocessor machine fruitless attempts
-        // will cause unnecessary sharing of the contended state which may make modifying the state more expensive.
+        // will cause unnecessary sharing of the contended state which may make modifying the state more
+        // expensive.
         // To protect against degenerate cases we will cap the per-iteration wait to 1024 spinwaits.
         //
         private const uint MaxExponentialBackoffBits = 10;
 
         //
-        // This lock is unfair and permits acquiring a contended lock by a nonwaiter in the presence of waiters.
+        // This lock is unfair and permits acquiring a contended lock by a nonwaiter in the presence of
+        // waiters.
         // It is possible for one thread to keep holding the lock long enough that waiters go to sleep and
         // then release and reacquire fast enough that waiters have no chance to get the lock.
         // In extreme cases one thread could keep retaking the lock starving everybody else.
@@ -63,7 +65,8 @@ namespace System.Threading
         //
         // bit 0: True if the lock is held, false otherwise.
         //
-        // bit 1: True if we've set the event to wake a waiting thread.  The waiter resets this to false when it
+        // bit 1: True if we've set the event to wake a waiting thread.  The waiter resets this to false
+        // when it
         //        wakes up.  This avoids the overhead of setting the event multiple times.
         //
         // bit 2: True if nonwaiters must not get ahead of waiters when acquiring a contended lock.
@@ -230,7 +233,8 @@ namespace System.Threading
 
             if (_spinLimit == SpinningNotInitialized)
             {
-                // Use RhGetProcessCpuCount directly to avoid Environment.ProcessorCount->ClassConstructorRunner->Lock->Environment.ProcessorCount cycle
+                // Use RhGetProcessCpuCount directly to avoid
+                // Environment.ProcessorCount->ClassConstructorRunner->Lock->Environment.ProcessorCount cycle
                 if (s_processorCount == 0)
                     s_processorCount = RuntimeImports.RhGetProcessCpuCount();
 
@@ -256,9 +260,12 @@ namespace System.Threading
                 while (true)
                 {
                     //
-                    // Try to grab the lock.  We may take the lock here even if there are existing waiters.  This creates the possibility
-                    // of starvation of waiters, but it also prevents lock convoys and preempted waiters from destroying perf.
-                    // However, if we do not see _wakeWatchDog cleared for long enough, we go into YieldToWaiters mode to ensure some
+                    // Try to grab the lock.  We may take the lock here even if there are existing waiters.  This
+                    // creates the possibility
+                    // of starvation of waiters, but it also prevents lock convoys and preempted waiters from destroying
+                    // perf.
+                    // However, if we do not see _wakeWatchDog cleared for long enough, we go into YieldToWaiters mode
+                    // to ensure some
                     // waiter progress.
                     //
                     int oldState = _state;

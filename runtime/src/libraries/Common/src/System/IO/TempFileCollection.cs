@@ -225,7 +225,8 @@ namespace System.IO.Internal
                 }
             }
 
-            // if we created a temp directory, delete it and clear the basePath, so a new directory will be created for the next request.
+            // if we created a temp directory, delete it and clear the basePath, so a new directory will be
+            // created for the next request.
             if (_createdTempDirectory && allFilesDeleted)
             {
                 try

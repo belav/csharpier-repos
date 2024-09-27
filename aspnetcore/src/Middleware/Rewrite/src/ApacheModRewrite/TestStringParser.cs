@@ -27,7 +27,8 @@ internal sealed class TestStringParser
     /// /var/www/%{REQUEST_URI}
     /// %1
     /// $1</param>
-    /// <returns>A new <see cref="Pattern"/>, containing a list of <see cref="PatternSegment"/></returns>
+    /// <returns>A new <see cref="Pattern"/>, containing a list of <see
+    // cref="PatternSegment"/></returns>
     /// http://httpd.apache.org/docs/current/mod/mod_rewrite.html
     public static Pattern Parse(string testString)
     {
@@ -98,7 +99,8 @@ internal sealed class TestStringParser
     /// Next() is called, it will be on the character immediately after the condition parameter.
     /// </summary>
     /// <param name="context">The ParserContext</param>
-    /// <param name="results">The List of results which the new condition parameter will be added.</param>
+    /// <param name="results">The List of results which the new condition parameter will be
+    // added.</param>
     /// <returns>true </returns>
     private static void ParseConditionParameter(
         ParserContext context,
@@ -161,7 +163,8 @@ internal sealed class TestStringParser
     }
 
     /// <summary>
-    /// Parse a string literal in the test string. Continues capturing until the start of a new variable type.
+    /// Parse a string literal in the test string. Continues capturing until the start of a new variable
+    // type.
     /// </summary>
     /// <param name="context"></param>
     /// <param name="results"></param>

@@ -1,6 +1,6 @@
 /*
- * Test explicit numeric conversions.
- */
+* Test explicit numeric conversions.
+*/
 
 using System;
 

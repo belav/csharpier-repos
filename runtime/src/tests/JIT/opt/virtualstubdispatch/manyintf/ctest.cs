@@ -309,4 +309,6 @@ namespace VirtFunc
         }
     }
 }
-// csc /r:itest1.dll,itest2.dll,itest3.dll,itest4.dll,itest5.dll,itest6.dll,itest7.dll,itest8.dll,itest9.dll,itest10.dll ctest.cs
+// csc
+// /r:itest1.dll,itest2.dll,itest3.dll,itest4.dll,itest5.dll,itest6.dll,itest7.dll,itest8.dll,itest9.dll,itest10.dll
+// ctest.cs

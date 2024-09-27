@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -71,7 +72,8 @@ namespace System.Web.Http
         /// <param name="name">The name of the route to map.</param>
         /// <param name="routeTemplate">The route template for the route.</param>
         /// <param name="defaults">An object that contains default route values.</param>
-        /// <param name="constraints">A set of expressions that specify values for <paramref name="routeTemplate"/>.</param>
+        /// <param name="constraints">A set of expressions that specify values for <paramref
+        // name="routeTemplate"/>.</param>
         /// <returns>A reference to the mapped route.</returns>
         public static IHttpRoute MapHttpRoute(
             this HttpRouteCollection routes,
@@ -85,13 +87,15 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Maps the specified route template and sets default route values, constraints, and end-point message handler.
+        /// Maps the specified route template and sets default route values, constraints, and end-point
+        // message handler.
         /// </summary>
         /// <param name="routes">A collection of routes for the application.</param>
         /// <param name="name">The name of the route to map.</param>
         /// <param name="routeTemplate">The route template for the route.</param>
         /// <param name="defaults">An object that contains default route values.</param>
-        /// <param name="constraints">A set of expressions that specify values for <paramref name="routeTemplate"/>.</param>
+        /// <param name="constraints">A set of expressions that specify values for <paramref
+        // name="routeTemplate"/>.</param>
         /// <param name="handler">The handler to which the request will be dispatched.</param>
         /// <returns>A reference to the mapped route.</returns>
         public static IHttpRoute MapHttpRoute(
@@ -129,7 +133,8 @@ namespace System.Web.Http
         /// <param name="routes">A collection of routes for the application.</param>
         /// <param name="routeName">The name of the route to map.</param>
         /// <param name="routeTemplate">The route template for the route.</param>
-        /// <param name="batchHandler">The <see cref="HttpBatchHandler"/> for handling batch requests.</param>
+        /// <param name="batchHandler">The <see cref="HttpBatchHandler"/> for handling batch
+        // requests.</param>
         [SuppressMessage(
             "Microsoft.Design",
             "CA1011:ConsiderPassingBaseTypesAsParameters",
@@ -172,7 +177,8 @@ namespace System.Web.Http
         /// <param name="routes">A collection of routes for the application.</param>
         /// <param name="routeName">The name of the route to ignore.</param>
         /// <param name="routeTemplate">The route template for the route.</param>
-        /// <param name="constraints">A set of expressions that specify values for <paramref name="routeTemplate"/>.</param>
+        /// <param name="constraints">A set of expressions that specify values for <paramref
+        // name="routeTemplate"/>.</param>
         [SuppressMessage(
             "Microsoft.Reliability",
             "CA2000:DisposeObjectsBeforeLosingScope",

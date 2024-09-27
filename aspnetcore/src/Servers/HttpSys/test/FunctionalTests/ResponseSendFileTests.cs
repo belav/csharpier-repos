@@ -759,7 +759,8 @@ public class ResponseSendFileTests : LoggedTest
 
                     try
                     {
-                        // Note Response.SendFileAsync uses RequestAborted by default. This can cause the response to be disposed
+                        // Note Response.SendFileAsync uses RequestAborted by default. This can cause the response to be
+                        // disposed
                         // before it throws an IOException, but there's a race depending on when the disconnect is noticed.
                         // Passing our own token to skip that.
                         using var cts = new CancellationTokenSource();
@@ -888,7 +889,8 @@ public class ResponseSendFileTests : LoggedTest
                 out var address,
                 async httpContext =>
                 {
-                    // Note Response.SendFileAsync uses RequestAborted by default. This can cause the response to be disposed
+                    // Note Response.SendFileAsync uses RequestAborted by default. This can cause the response to be
+                    // disposed
                     // before it throws an IOException, but there's a race depending on when the disconnect is noticed.
                     // Passing our own token to skip that.
                     using var cts = new CancellationTokenSource();

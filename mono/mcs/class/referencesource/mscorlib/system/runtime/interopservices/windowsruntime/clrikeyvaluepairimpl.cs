@@ -13,7 +13,8 @@ using System.Diagnostics.Contracts;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
-    // Provides access to a System.Collections.Generic.KeyValuePair<K, V> via the IKeyValuePair<K, V> WinRT interface.
+    // Provides access to a System.Collections.Generic.KeyValuePair<K, V> via the IKeyValuePair<K, V>
+    // WinRT interface.
     internal sealed class CLRIKeyValuePairImpl<K, V> : IKeyValuePair<K, V>
     {
         private readonly KeyValuePair<K, V> _pair;

@@ -42,7 +42,8 @@ public class CookieBuilder
     public virtual string? Domain { get; set; }
 
     /// <summary>
-    /// Indicates whether a cookie is inaccessible by client-side script. The default value is <c>false</c>
+    /// Indicates whether a cookie is inaccessible by client-side script. The default value is
+    // <c>false</c>
     /// but specific components may use a different value.
     /// </summary>
     /// <remarks>
@@ -51,7 +52,8 @@ public class CookieBuilder
     public virtual bool HttpOnly { get; set; }
 
     /// <summary>
-    /// The SameSite attribute of the cookie. The default value is <see cref="SameSiteMode.Unspecified"/>
+    /// The SameSite attribute of the cookie. The default value is <see
+    // cref="SameSiteMode.Unspecified"/>
     /// but specific components may use a different value.
     /// </summary>
     /// <remarks>
@@ -61,7 +63,8 @@ public class CookieBuilder
 
     /// <summary>
     /// The policy that will be used to determine <see cref="CookieOptions.Secure"/>.
-    /// This is determined from the <see cref="HttpContext"/> passed to <see cref="Build(HttpContext, DateTimeOffset)"/>.
+    /// This is determined from the <see cref="HttpContext"/> passed to <see cref="Build(HttpContext,
+    // DateTimeOffset)"/>.
     /// </summary>
     public virtual CookieSecurePolicy SecurePolicy { get; set; }
 
@@ -98,10 +101,12 @@ public class CookieBuilder
     public CookieOptions Build(HttpContext context) => Build(context, DateTimeOffset.Now);
 
     /// <summary>
-    /// Creates the cookie options from the given <paramref name="context"/> with an expiration based on <paramref name="expiresFrom"/> and <see cref="Expiration"/>.
+    /// Creates the cookie options from the given <paramref name="context"/> with an expiration based on
+    // <paramref name="expiresFrom"/> and <see cref="Expiration"/>.
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/>.</param>
-    /// <param name="expiresFrom">The time to use as the base for computing <see cref="CookieOptions.Expires" />.</param>
+    /// <param name="expiresFrom">The time to use as the base for computing <see
+    // cref="CookieOptions.Expires" />.</param>
     /// <returns>The cookie options.</returns>
     public virtual CookieOptions Build(HttpContext context, DateTimeOffset expiresFrom)
     {

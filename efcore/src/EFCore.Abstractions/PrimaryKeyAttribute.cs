@@ -12,12 +12,15 @@ namespace Microsoft.EntityFrameworkCore;
 /// <remarks>
 ///     <para>
 ///         This attribute can be used for both keys made up of a
-///         single property, and for composite keys made up of multiple properties. <see cref="KeyAttribute" />
-///         can be used instead for single-property keys, in which case the behavior is identical. If both attributes are used, then
+///         single property, and for composite keys made up of multiple properties. <see
+// cref="KeyAttribute" />
+///         can be used instead for single-property keys, in which case the behavior is identical.
+// If both attributes are used, then
 ///         this attribute takes precedence.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
@@ -28,7 +31,8 @@ public sealed class PrimaryKeyAttribute : Attribute
     ///     Initializes a new instance of the <see cref="PrimaryKeyAttribute" /> class.
     /// </summary>
     /// <param name="propertyName">The first (or only) property in the primary key.</param>
-    /// <param name="additionalPropertyNames">The additional properties which constitute the primary key, if any, in order.</param>
+    /// <param name="additionalPropertyNames">The additional properties which constitute the primary
+    // key, if any, in order.</param>
     public PrimaryKeyAttribute(string propertyName, params string[] additionalPropertyNames)
     {
         Check.NotEmpty(propertyName, nameof(propertyName));

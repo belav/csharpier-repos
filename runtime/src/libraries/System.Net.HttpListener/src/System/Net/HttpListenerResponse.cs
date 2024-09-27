@@ -159,7 +159,8 @@ namespace System.Net
                 CheckDisposed();
                 ArgumentNullException.ThrowIfNull(value);
 
-                // Need to verify the status description doesn't contain any control characters except HT.  We mask off the high
+                // Need to verify the status description doesn't contain any control characters except HT.  We mask
+                // off the high
                 // byte since that's how it's encoded.
                 for (int i = 0; i < value.Length; i++)
                 {

@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Remote
             _callback = callback;
         }
 
-        // TODO: Use generic IRemoteOptionsCallback<TOptions> once https://github.com/microsoft/vs-streamjsonrpc/issues/789 is fixed
+        // TODO: Use generic IRemoteOptionsCallback<TOptions> once
+        // https://github.com/microsoft/vs-streamjsonrpc/issues/789 is fixed
         private CodeCleanupOptionsProvider GetClientOptionsProvider(
             RemoteServiceCallbackId callbackId
         ) =>

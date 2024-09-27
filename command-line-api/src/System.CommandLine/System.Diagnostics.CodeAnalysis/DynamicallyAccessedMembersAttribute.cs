@@ -1,4 +1,5 @@
-﻿// adapted from: https://github.com/dotnet/aspnetcore/blob/404d81767784552b0a148cb8c437332ebe726ae9/src/Shared/CodeAnalysis/DynamicallyAccessedMembersAttribute.cs#L29
+﻿// adapted from:
+// https://github.com/dotnet/aspnetcore/blob/404d81767784552b0a148cb8c437332ebe726ae9/src/Shared/CodeAnalysis/DynamicallyAccessedMembersAttribute.cs#L29
 
 #if !NET6_0_OR_GREATER
 // Licensed to the .NET Foundation under one or more agreements.
@@ -21,7 +22,8 @@ namespace System.Diagnostics.CodeAnalysis
     ///
     /// If the attribute is applied to a method it's treated as a special case and it implies
     /// the attribute should be applied to the "this" parameter of the method. As such the attribute
-    /// should only be used on instance methods of types assignable to System.Type (or string, but no methods
+    /// should only be used on instance methods of types assignable to System.Type (or string, but no
+    // methods
     /// will use it there).
     /// </remarks>
     [AttributeUsage(

@@ -95,18 +95,21 @@ public class MulticastDelegateGetInvocationList
 
             // Hack: I don't know how to iterater through the invocation list to verify the invocation order
             // is correct. I have to hard code the desired invocation order
-            //if (invocationList[0].Method.Name != "GetCurrentProcessId" ||    ***** MikeRou 8/3: Method's getter is not supported
+            //if (invocationList[0].Method.Name != "GetCurrentProcessId" ||    ***** MikeRou 8/3: Method's
+            // getter is not supported
             //     invocationList[1].Method.Name != "TestVoidParameterValueStaticCallback" ||
             //     invocationList[2].Method.Name != "TestVoidParameterValueCallback")
             //{
-            //    TestLibrary.TestFramework.LogError("004", "Invocation order of the returned invocation list is wrong");
+            //    TestLibrary.TestFramework.LogError("004", "Invocation order of the returned invocation list is
+            // wrong");
             //    retVal = false;
             //}
 
             // Test the invocation list can be invoked
             for (int i = 0; i < invocationList.Length; ++i)
             {
-                // invocationList[i].Method.Invoke(invocationList[i].Target, null); ***** MikeRou 8/3: Method's getter is not supported
+                // invocationList[i].Method.Invoke(invocationList[i].Target, null); ***** MikeRou 8/3: Method's
+                // getter is not supported
             }
         }
         catch (Exception e)

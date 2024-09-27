@@ -129,7 +129,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 if (!removeOnly)
                 {
-                    // We will compute the new read only regions to be all spans that are not currently in an editable span
+                    // We will compute the new read only regions to be all spans that are not currently in an editable
+                    // span
                     var editableSpans = GetEditableSpansForSnapshot(_subjectBuffer.CurrentSnapshot);
                     var entireBufferSpan =
                         _subjectBuffer.CurrentSnapshot.GetSnapshotSpanCollection();
@@ -223,8 +224,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 using (new SelectionTracking(this))
                 {
-                    // Revert any previous edits in case we're removing spans.  Undo conflict resolution as well to avoid
-                    // handling the various edge cases where a tracking span might not map to the right span in the current snapshot
+                    // Revert any previous edits in case we're removing spans.  Undo conflict resolution as well to
+                    // avoid
+                    // handling the various edge cases where a tracking span might not map to the right span in the
+                    // current snapshot
                     _session.UndoManager.UndoTemporaryEdits(_subjectBuffer, disconnect: false);
 
                     _referenceSpanToLinkedRenameSpanMap.Clear();
@@ -439,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         .WaitAndGetResult(cancellationToken);
 
                     // TODO: why does the following line stop responding when uncommented?
-                    // newDocument.GetTextChangesAsync(this.baseDocuments.Single(d => d.Id == newDocument.Id), cancellationToken).WaitAndGetResult(cancellationToken).Reverse();
+                    // newDocument.GetTextChangesAsync(this.baseDocuments.Single(d => d.Id == newDocument.Id),
+                    // cancellationToken).WaitAndGetResult(cancellationToken).Reverse();
 
                     _session.UndoManager.CreateConflictResolutionUndoTransaction(
                         _subjectBuffer,
@@ -460,7 +464,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         }
                     );
 
-                    // 2. We want to update referenceSpanToLinkedRenameSpanMap where spans were affected by conflict resolution.
+                    // 2. We want to update referenceSpanToLinkedRenameSpanMap where spans were affected by conflict
+                    // resolution.
                     // We also need to add the remaining document edits to conflictResolutionRenameTrackingSpans
                     // so they get classified/tagged correctly in the editor.
                     _conflictResolutionRenameTrackingSpans.Clear();

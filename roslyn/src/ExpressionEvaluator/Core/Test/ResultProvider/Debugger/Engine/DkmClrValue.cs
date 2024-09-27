@@ -142,7 +142,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation.ClrCompilation
 
         internal static object GetHostObjectValue(Type lmrType, object rawValue)
         {
-            // NOTE: This is just a "for testing purposes" approximation of what the real DkmClrValue.HostObjectValue
+            // NOTE: This is just a "for testing purposes" approximation of what the real
+            // DkmClrValue.HostObjectValue
             //       will return.  We will need to update this implementation to match the real behavior we add
             //       specialized support for additional types.
             var typeCode = Metadata.Type.GetTypeCode(lmrType);

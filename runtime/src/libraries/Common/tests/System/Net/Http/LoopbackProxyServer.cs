@@ -16,8 +16,10 @@ using System.Threading.Tasks;
 namespace System.Net.Test.Common
 {
     /// <summary>
-    /// Provides a test-only HTTP proxy. Handles multiple connections/requests and CONNECT tunneling for HTTPS
-    /// endpoints. Provides simulated proxy authentication for Basic, Digest, NTLM, and Negotiate schemes by
+    /// Provides a test-only HTTP proxy. Handles multiple connections/requests and CONNECT tunneling for
+    // HTTPS
+    /// endpoints. Provides simulated proxy authentication for Basic, Digest, NTLM, and Negotiate
+    // schemes by
     /// checking only for a 'Proxy-Authorization' request header.
     /// </summary>
     public sealed class LoopbackProxyServer : IDisposable
@@ -301,7 +303,8 @@ namespace System.Net.Test.Common
 
             await Task.WhenAll(new[] { clientCopyTask, serverCopyTask }).ConfigureAwait(false);
 
-            /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted errors.</summary>
+            /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted
+            // errors.</summary>
             void HandleExceptions(Exception ex)
             {
                 SocketError sockErr =

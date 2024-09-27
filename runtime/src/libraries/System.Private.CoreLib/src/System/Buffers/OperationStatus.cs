@@ -21,14 +21,18 @@ namespace System.Buffers
         DestinationTooSmall,
 
         /// <summary>
-        /// The input is partially processed, up to the last valid chunk of the input that could be consumed.
-        /// The caller can stitch the remaining unprocessed input with more data, slice the buffers appropriately, and retry.
+        /// The input is partially processed, up to the last valid chunk of the input that could be
+        // consumed.
+        /// The caller can stitch the remaining unprocessed input with more data, slice the buffers
+        // appropriately, and retry.
         /// </summary>
         NeedMoreData,
 
         /// <summary>
-        /// The input contained invalid bytes which could not be processed. If the input is partially processed,
-        /// the destination contains the partial result. This guarantees that no additional data appended to the input
+        /// The input contained invalid bytes which could not be processed. If the input is partially
+        // processed,
+        /// the destination contains the partial result. This guarantees that no additional data appended to
+        // the input
         /// will make the invalid sequence valid.
         /// </summary>
         InvalidData,

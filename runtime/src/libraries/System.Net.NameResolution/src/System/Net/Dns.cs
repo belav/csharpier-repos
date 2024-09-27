@@ -64,9 +64,11 @@ namespace System.Net
         /// Resolves a host name or IP address to an <see cref="IPHostEntry"/> instance.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="family">The address family for which IPs should be retrieved. If <see cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
+        /// <param name="family">The address family for which IPs should be retrieved. If <see
+        // cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
         /// <returns>
-        /// An <see cref="IPHostEntry"/> instance that contains the address information about the host specified in <paramref name="hostNameOrAddress"/>.
+        /// An <see cref="IPHostEntry"/> instance that contains the address information about the host
+        // specified in <paramref name="hostNameOrAddress"/>.
         /// </returns>
         public static IPHostEntry GetHostEntry(string hostNameOrAddress, AddressFamily family)
         {
@@ -102,13 +104,17 @@ namespace System.Net
             GetHostEntryAsync(hostNameOrAddress, AddressFamily.Unspecified, CancellationToken.None);
 
         /// <summary>
-        /// Resolves a host name or IP address to an <see cref="IPHostEntry"/> instance as an asynchronous operation.
+        /// Resolves a host name or IP address to an <see cref="IPHostEntry"/> instance as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous operation should be canceled.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous
+        // operation should be canceled.</param>
         /// <returns>
-        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/> property on the task object returns
-        /// an <see cref="IPHostEntry"/> instance that contains the address information about the host specified in <paramref name="hostNameOrAddress"/>.
+        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/>
+        // property on the task object returns
+        /// an <see cref="IPHostEntry"/> instance that contains the address information about the host
+        // specified in <paramref name="hostNameOrAddress"/>.
         /// </returns>
         public static Task<IPHostEntry> GetHostEntryAsync(
             string hostNameOrAddress,
@@ -116,14 +122,19 @@ namespace System.Net
         ) => GetHostEntryAsync(hostNameOrAddress, AddressFamily.Unspecified, cancellationToken);
 
         /// <summary>
-        /// Resolves a host name or IP address to an <see cref="IPHostEntry"/> instance as an asynchronous operation.
+        /// Resolves a host name or IP address to an <see cref="IPHostEntry"/> instance as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="family">The address family for which IPs should be retrieved. If <see cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous operation should be canceled.</param>
+        /// <param name="family">The address family for which IPs should be retrieved. If <see
+        // cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous
+        // operation should be canceled.</param>
         /// <returns>
-        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/> property on the task object returns
-        /// an <see cref="IPHostEntry"/> instance that contains the address information about the host specified in <paramref name="hostNameOrAddress"/>.
+        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/>
+        // property on the task object returns
+        /// an <see cref="IPHostEntry"/> instance that contains the address information about the host
+        // specified in <paramref name="hostNameOrAddress"/>.
         /// </returns>
         public static Task<IPHostEntry> GetHostEntryAsync(
             string hostNameOrAddress,
@@ -251,9 +262,11 @@ namespace System.Net
         /// Returns the Internet Protocol (IP) addresses for the specified host.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="family">The address family for which IPs should be retrieved. If <see cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
+        /// <param name="family">The address family for which IPs should be retrieved. If <see
+        // cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
         /// <returns>
-        /// An array of type <see cref="IPAddress"/> that holds the IP addresses for the host that is specified by the <paramref name="hostNameOrAddress"/> parameter.
+        /// An array of type <see cref="IPAddress"/> that holds the IP addresses for the host that is
+        // specified by the <paramref name="hostNameOrAddress"/> parameter.
         /// </returns>
         public static IPAddress[] GetHostAddresses(string hostNameOrAddress, AddressFamily family)
         {
@@ -297,13 +310,17 @@ namespace System.Net
                 );
 
         /// <summary>
-        /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous operation.
+        /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous operation should be canceled.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous
+        // operation should be canceled.</param>
         /// <returns>
-        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/> property on the task object returns an array of
-        /// type <see cref="IPAddress"/> that holds the IP addresses for the host that is specified by the <paramref name="hostNameOrAddress"/> parameter.
+        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/>
+        // property on the task object returns an array of
+        /// type <see cref="IPAddress"/> that holds the IP addresses for the host that is specified by the
+        // <paramref name="hostNameOrAddress"/> parameter.
         /// </returns>
         public static Task<IPAddress[]> GetHostAddressesAsync(
             string hostNameOrAddress,
@@ -320,14 +337,19 @@ namespace System.Net
                 );
 
         /// <summary>
-        /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous operation.
+        /// Returns the Internet Protocol (IP) addresses for the specified host as an asynchronous
+        // operation.
         /// </summary>
         /// <param name="hostNameOrAddress">The host name or IP address to resolve.</param>
-        /// <param name="family">The address family for which IPs should be retrieved. If <see cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
-        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous operation should be canceled.</param>
+        /// <param name="family">The address family for which IPs should be retrieved. If <see
+        // cref="AddressFamily.Unspecified"/>, retrieve all IPs regardless of address family.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used to signal the asynchronous
+        // operation should be canceled.</param>
         /// <returns>
-        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/> property on the task object returns an array of
-        /// type <see cref="IPAddress"/> that holds the IP addresses for the host that is specified by the <paramref name="hostNameOrAddress"/> parameter.
+        /// The task object representing the asynchronous operation. The <see cref="Task{TResult}.Result"/>
+        // property on the task object returns an array of
+        /// type <see cref="IPAddress"/> that holds the IP addresses for the host that is specified by the
+        // <paramref name="hostNameOrAddress"/> parameter.
         /// </returns>
         public static Task<IPAddress[]> GetHostAddressesAsync(
             string hostNameOrAddress,
@@ -732,7 +754,8 @@ namespace System.Net
                     cancellationToken
                 );
 
-        // If hostName is an IPString and justReturnParsedIP==true then no reverse lookup will be attempted, but the original address is returned.
+        // If hostName is an IPString and justReturnParsedIP==true then no reverse lookup will be attempted,
+        // but the original address is returned.
         private static Task GetHostEntryOrAddressesCoreAsync(
             string hostName,
             bool justReturnParsedIp,
@@ -1001,13 +1024,20 @@ namespace System.Net
 
         /// <summary>Queue the function to be invoked asynchronously.</summary>
         /// <remarks>
-        /// Since this is doing synchronous work on a thread pool thread, we want to limit how many threads end up being
-        /// blocked.  We could employ a semaphore to limit overall usage, but a common case is that DNS requests are made
-        /// for only a handful of endpoints, and a reasonable compromise is to ensure that requests for a given host are
-        /// serialized.  Once the data for that host is cached locally by the OS, the subsequent requests should all complete
-        /// very quickly, and if the head-of-line request is taking a long time due to the connection to the server, we won't
-        /// block lots of threads all getting data for that one host.  We also still want to issue the request to the OS, rather
-        /// than having all concurrent requests for the same host share the exact same task, so that any shuffling of the results
+        /// Since this is doing synchronous work on a thread pool thread, we want to limit how many threads
+        // end up being
+        /// blocked.  We could employ a semaphore to limit overall usage, but a common case is that DNS
+        // requests are made
+        /// for only a handful of endpoints, and a reasonable compromise is to ensure that requests for a
+        // given host are
+        /// serialized.  Once the data for that host is cached locally by the OS, the subsequent requests
+        // should all complete
+        /// very quickly, and if the head-of-line request is taking a long time due to the connection to the
+        // server, we won't
+        /// block lots of threads all getting data for that one host.  We also still want to issue the
+        // request to the OS, rather
+        /// than having all concurrent requests for the same host share the exact same task, so that any
+        // shuffling of the results
         /// by the OS to enable round robin is still perceived.
         /// </remarks>
         private static Task<TResult> RunAsync<TResult>(
@@ -1026,7 +1056,8 @@ namespace System.Net
                 s_tasks.TryGetValue(key, out Task? prevTask);
                 prevTask ??= Task.CompletedTask;
 
-                // Invoke the function in a queued work item when the previous task completes. Note that some callers expect the
+                // Invoke the function in a queued work item when the previous task completes. Note that some
+                // callers expect the
                 // returned task to have the key as the task's AsyncState.
                 task = prevTask.ContinueWith(
                     delegate
@@ -1038,8 +1069,10 @@ namespace System.Net
                         }
                         finally
                         {
-                            // When the work is done, remove this key/task pair from the dictionary if this is still the current task.
-                            // Because the work item is created and stored into both the local and the dictionary while the lock is
+                            // When the work is done, remove this key/task pair from the dictionary if this is still the current
+                            // task.
+                            // Because the work item is created and stored into both the local and the dictionary while the lock
+                            // is
                             // held, and since we take the same lock here, inside this lock it's guaranteed to see the changes
                             // made by the call site.
                             lock (s_tasks)
@@ -1056,7 +1089,8 @@ namespace System.Net
                     TaskScheduler.Default
                 );
 
-                // If it's possible the task may end up getting canceled, it won't have a chance to remove itself from
+                // If it's possible the task may end up getting canceled, it won't have a chance to remove itself
+                // from
                 // the dictionary if it is canceled, so use a separate continuation to do so.
                 if (cancellationToken.CanBeCanceled)
                 {

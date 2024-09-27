@@ -19,7 +19,8 @@ internal static partial class Interop
         }
 
         /// <summary>
-        /// Notifies the OS kernel that the specified file will be accessed in a particular way soon; this allows the kernel to
+        /// Notifies the OS kernel that the specified file will be accessed in a particular way soon; this
+        // allows the kernel to
         /// potentially optimize the access pattern of the file.
         /// </summary>
         /// <param name="fd">The file descriptor of the file</param>

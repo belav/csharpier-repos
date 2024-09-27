@@ -14,8 +14,10 @@ namespace System
         /// Disables validation and normalization of the Path and Query.
         /// No transformations of the URI past the Authority will take place.
         /// <see cref="Uri"/> instances created with this option do not support <see cref="Uri.Fragment"/>s.
-        /// <see cref="Uri.GetComponents(UriComponents, UriFormat)"/> may not be used for <see cref="UriComponents.Path"/> or <see cref="UriComponents.Query"/>.
-        /// Be aware that disabling canonicalization also means that reserved characters will not be escaped,
+        /// <see cref="Uri.GetComponents(UriComponents, UriFormat)"/> may not be used for <see
+        // cref="UriComponents.Path"/> or <see cref="UriComponents.Query"/>.
+        /// Be aware that disabling canonicalization also means that reserved characters will not be
+        // escaped,
         /// which may corrupt the HTTP request and makes the application subject to request smuggling.
         /// Only set this option if you have ensured that the URI string is already sanitized.
         /// </summary>

@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents a scalar property of a structural type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IProperty : IReadOnlyProperty, IPropertyBase
 {
@@ -32,19 +33,22 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     ///     Finds the first principal property that the given property is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
-    /// <returns>The first associated principal property, or <see langword="null" /> if none exists.</returns>
+    /// <returns>The first associated principal property, or <see langword="null" /> if none
+    // exists.</returns>
     new IProperty? FindFirstPrincipal() =>
         (IProperty?)((IReadOnlyProperty)this).FindFirstPrincipal();
 
     /// <summary>
-    ///     Finds the list of principal properties including the given property that the given property is constrained by
+    ///     Finds the list of principal properties including the given property that the given property
+    // is constrained by
     ///     if the given property is part of a foreign key.
     /// </summary>
     /// <returns>The list of all associated principal properties including the given property.</returns>
     new IReadOnlyList<IProperty> GetPrincipals() => GetPrincipals<IProperty>();
 
     /// <summary>
-    ///     Gets all foreign keys that use this property (including composite foreign keys in which this property
+    ///     Gets all foreign keys that use this property (including composite foreign keys in which this
+    // property
     ///     is included).
     /// </summary>
     /// <returns>
@@ -62,17 +66,20 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     new IEnumerable<IIndex> GetContainingIndexes();
 
     /// <summary>
-    ///     Gets the primary key that uses this property (including a composite primary key in which this property
+    ///     Gets the primary key that uses this property (including a composite primary key in which
+    // this property
     ///     is included).
     /// </summary>
     /// <returns>
-    ///     The primary that use this property, or <see langword="null" /> if it is not part of the primary key.
+    ///     The primary that use this property, or <see langword="null" /> if it is not part of the
+    // primary key.
     /// </returns>
     new IKey? FindContainingPrimaryKey() =>
         (IKey?)((IReadOnlyProperty)this).FindContainingPrimaryKey();
 
     /// <summary>
-    ///     Gets all primary or alternate keys that use this property (including composite keys in which this property
+    ///     Gets all primary or alternate keys that use this property (including composite keys in which
+    // this property
     ///     is included).
     /// </summary>
     /// <returns>
@@ -81,7 +88,8 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     new IEnumerable<IKey> GetContainingKeys();
 
     /// <summary>
-    ///     Gets a <see cref="IComparer{T}" /> for comparing values in tracked <see cref="IUpdateEntry" /> entries.
+    ///     Gets a <see cref="IComparer{T}" /> for comparing values in tracked <see cref="IUpdateEntry"
+    // /> entries.
     /// </summary>
     /// <returns>The comparer.</returns>
     IComparer<IUpdateEntry> GetCurrentValueComparer();
@@ -105,7 +113,8 @@ public interface IProperty : IReadOnlyProperty, IPropertyBase
     new ValueComparer GetProviderValueComparer();
 
     /// <summary>
-    ///     Gets the configuration for elements of the primitive collection represented by this property.
+    ///     Gets the configuration for elements of the primitive collection represented by this
+    // property.
     /// </summary>
     /// <returns>The configuration for the elements.</returns>
     new IElementType? GetElementType();

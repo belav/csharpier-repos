@@ -225,7 +225,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 "
             );
 
-            // Linked configuration isn't supported by fusion when reading portability elements (see CreateAssemblyConfigCookie)
+            // Linked configuration isn't supported by fusion when reading portability elements (see
+            // CreateAssemblyConfigCookie)
             AssertIsEnabled(appConfig1.Path, platform: false, nonPlatform: true);
         }
 

@@ -386,7 +386,8 @@ namespace System
             var comp = CreateCompilation(source, assemblyName: "comp");
             comp.VerifyDiagnostics();
             comp.VerifyEmitDiagnostics(
-                // (2,32): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
+                // (2,32): error CS8128: Member 'Rest' was not found on type 'ValueTuple<T1, T2, T3, T4, T5, T6, T7,
+                // TRest>' from assembly 'comp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 // (_, _, _, _, _, _, _, int x) = tuple;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeMemberNotFoundInAssembly, "tuple")
                     .WithArguments(
@@ -421,8 +422,11 @@ namespace System
 
             var comp = CreateCompilation(source, targetFramework: TargetFramework.NetCoreApp);
             comp.VerifyDiagnostics(
-                // (3,67): error CS0535: 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' does not implement interface member 'IEquatable<(T1, T2, T3, T4, T5, T6, T7, TRest)>.Equals((T1, T2, T3, T4, T5, T6, T7, TRest))'
-                //     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> : System.IEquatable<(T1, T2, T3, T4, T5, T6, T7, TRest)> where TRest : struct
+                // (3,67): error CS0535: 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>' does not implement
+                // interface member 'IEquatable<(T1, T2, T3, T4, T5, T6, T7, TRest)>.Equals((T1, T2, T3, T4, T5, T6,
+                // T7, TRest))'
+                //     public struct ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> : System.IEquatable<(T1, T2, T3,
+                // T4, T5, T6, T7, TRest)> where TRest : struct
                 Diagnostic(
                         ErrorCode.ERR_UnimplementedInterfaceMember,
                         "System.IEquatable<(T1, T2, T3, T4, T5, T6, T7, TRest)>"
@@ -432,7 +436,8 @@ namespace System
                         "System.IEquatable<(T1, T2, T3, T4, T5, T6, T7, TRest)>.Equals((T1, T2, T3, T4, T5, T6, T7, TRest))"
                     )
                     .WithLocation(3, 67),
-                // (13,16): error CS0540: 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.ITuple.this[int]': containing type does not implement interface 'ITuple'
+                // (13,16): error CS0540: 'ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>.ITuple.this[int]':
+                // containing type does not implement interface 'ITuple'
                 //         object System.Runtime.CompilerServices.ITuple.this[int index] => throw null;
                 Diagnostic(
                         ErrorCode.ERR_ClassDoesntImplementInterface,

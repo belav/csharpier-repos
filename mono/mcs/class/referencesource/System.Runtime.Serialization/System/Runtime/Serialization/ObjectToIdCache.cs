@@ -129,12 +129,15 @@ namespace System.Runtime.Serialization
                     return;
                 }
                 int nextStartPosition = ComputeStartPosition(m_objs[next]);
-                // If we wrapped while placing an object, then it must be that the start position wasn't wrapped to begin with
+                // If we wrapped while placing an object, then it must be that the start position wasn't wrapped to
+                // begin with
                 bool isNextStartPositionWrapped = next < position && !m_isWrapped[next];
                 bool isLastVacantPositionWrapped = lastVacantPosition < position;
 
-                // We want to avoid moving objects in the cache if the next bucket position is wrapped, but the last vacant position isn't
-                // and we want to make sure to move objects in the cache when the last vacant position is wrapped but the next bucket position isn't
+                // We want to avoid moving objects in the cache if the next bucket position is wrapped, but the last
+                // vacant position isn't
+                // and we want to make sure to move objects in the cache when the last vacant position is wrapped
+                // but the next bucket position isn't
                 if (
                     (
                         nextStartPosition <= lastVacantPosition
@@ -144,7 +147,8 @@ namespace System.Runtime.Serialization
                 {
                     m_objs[lastVacantPosition] = m_objs[next];
                     m_ids[lastVacantPosition] = m_ids[next];
-                    // A wrapped object might become unwrapped if it moves from the front of the array to the end of the array
+                    // A wrapped object might become unwrapped if it moves from the front of the array to the end of the
+                    // array
                     m_isWrapped[lastVacantPosition] =
                         m_isWrapped[next] && next > lastVacantPosition;
                     lastVacantPosition = next;

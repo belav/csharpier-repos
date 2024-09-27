@@ -20,11 +20,11 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile List class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile List class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\List.uex' path='docs/doc[@for="List"]/*' />
     [
         ControlBuilderAttribute(typeof(ListControlBuilder)),

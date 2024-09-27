@@ -51,11 +51,13 @@ namespace System.Net.Mime
 
         // NOTE: See RFC 2822 for more detail.  By default, every value in the array is false and only
         // those values which are allowed in that particular set are then set to true.  The numbers
-        // annotating each definition below are the range of ASCII values which are allowed in that definition.
+        // annotating each definition below are the range of ASCII values which are allowed in that
+        // definition.
 
         private static bool[] CreateCharactersAllowedInAtoms()
         {
-            // atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "/" / "=" / "?" / "^" / "_" / "`" / "{" / "|" / "}" / "~"
+            // atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "'" / "*" / "+" / "-" / "/" / "=" / "?" /
+            // "^" / "_" / "`" / "{" / "|" / "}" / "~"
             var atext = new bool[128];
             for (int i = '0'; i <= '9'; i++)
             {

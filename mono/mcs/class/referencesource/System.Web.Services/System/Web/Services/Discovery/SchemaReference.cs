@@ -36,13 +36,15 @@ namespace System.Web.Services.Discovery
         private string reference;
         private string targetNamespace;
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.SchemaReference"]/*' />
+        /// <include file='doc\SchemaReference.uex'
+        // path='docs/doc[@for="SchemaReference.SchemaReference"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SchemaReference() { }
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.SchemaReference1"]/*' />
+        /// <include file='doc\SchemaReference.uex'
+        // path='docs/doc[@for="SchemaReference.SchemaReference1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -62,7 +64,8 @@ namespace System.Web.Services.Discovery
             set { reference = value; }
         }
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.TargetNamespace"]/*' />
+        /// <include file='doc\SchemaReference.uex'
+        // path='docs/doc[@for="SchemaReference.TargetNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -145,7 +148,8 @@ namespace System.Web.Services.Discovery
             }
         }
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.WriteDocument"]/*' />
+        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.WriteDocument"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -154,7 +158,8 @@ namespace System.Web.Services.Discovery
             ((XmlSchema)document).Write(new StreamWriter(stream, new UTF8Encoding(false)));
         }
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.ReadDocument"]/*' />
+        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.ReadDocument"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -165,7 +170,8 @@ namespace System.Web.Services.Discovery
             return XmlSchema.Read(reader, null);
         }
 
-        /// <include file='doc\SchemaReference.uex' path='docs/doc[@for="SchemaReference.DefaultFilename"]/*' />
+        /// <include file='doc\SchemaReference.uex'
+        // path='docs/doc[@for="SchemaReference.DefaultFilename"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

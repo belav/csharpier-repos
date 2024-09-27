@@ -70,9 +70,12 @@ namespace System.IO.MemoryMappedFiles
         /// <param name="size">The requested size.</param>
         /// <param name="offset">The requested offset.</param>
         /// <param name="allocationGranularity">The allowed granularity for size and offset.</param>
-        /// <param name="newSize">The shifted size based on the <paramref name="allocationGranularity"/>.</param>
-        /// <param name="extraMemNeeded">The amount <paramref name="newSize"/> and <paramref name="newOffset"/> were shifted.</param>
-        /// <param name="newOffset">The shifted offset based on the <paramref name="allocationGranularity"/>.</param>
+        /// <param name="newSize">The shifted size based on the <paramref
+        // name="allocationGranularity"/>.</param>
+        /// <param name="extraMemNeeded">The amount <paramref name="newSize"/> and <paramref
+        // name="newOffset"/> were shifted.</param>
+        /// <param name="newOffset">The shifted offset based on the <paramref
+        // name="allocationGranularity"/>.</param>
         private static void ValidateSizeAndOffset(
             long size,
             long offset,
@@ -86,7 +89,8 @@ namespace System.IO.MemoryMappedFiles
             Debug.Assert(offset >= 0);
             Debug.Assert(allocationGranularity > 0);
 
-            // Determine how much extra memory needs to be allocated to align on the size of allocationGranularity.
+            // Determine how much extra memory needs to be allocated to align on the size of
+            // allocationGranularity.
             // The newOffset is then moved down by that amount, and the newSize is increased by that amount.
 
             extraMemNeeded = offset % allocationGranularity;

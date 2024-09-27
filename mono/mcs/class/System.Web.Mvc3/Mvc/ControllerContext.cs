@@ -6,10 +6,14 @@
     using System.Web.Mvc.Html;
     using System.Web.Routing;
 
-    // Though many of the properties on ControllerContext and its subclassed types are virtual, there are still sealed
-    // properties (like ControllerContext.RequestContext, ActionExecutingContext.Result, etc.). If these properties
-    // were virtual, a mocking framework might override them with incorrect behavior (property getters would return
-    // null, property setters would be no-ops). By sealing these properties, we are forcing them to have the default
+    // Though many of the properties on ControllerContext and its subclassed types are virtual, there
+    // are still sealed
+    // properties (like ControllerContext.RequestContext, ActionExecutingContext.Result, etc.). If these
+    // properties
+    // were virtual, a mocking framework might override them with incorrect behavior (property getters
+    // would return
+    // null, property setters would be no-ops). By sealing these properties, we are forcing them to have
+    // the default
     // "get or store a value" semantics that they were intended to have.
 
     public class ControllerContext
@@ -23,7 +27,8 @@
         // parameterless constructor used for mocking
         public ControllerContext() { }
 
-        // copy constructor - allows for subclassed types to take an existing ControllerContext as a parameter
+        // copy constructor - allows for subclassed types to take an existing ControllerContext as a
+        // parameter
         // and we'll automatically set the appropriate properties
         [SuppressMessage(
             "Microsoft.Usage",
@@ -110,7 +115,8 @@
             {
                 if (_requestContext == null)
                 {
-                    // still need explicit calls to constructors since the property getters are virtual and might return null
+                    // still need explicit calls to constructors since the property getters are virtual and might return
+                    // null
                     HttpContextBase httpContext = HttpContext ?? new EmptyHttpContext();
                     RouteData routeData = RouteData ?? new RouteData();
 

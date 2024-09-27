@@ -17,7 +17,8 @@ public class MockTimeProvider : TimeProvider
 
     public MockTimeProvider()
     {
-        // Use a random DateTimeOffset to ensure tests that incorrectly use the current DateTimeOffset fail always instead of only rarely.
+        // Use a random DateTimeOffset to ensure tests that incorrectly use the current DateTimeOffset fail
+        // always instead of only rarely.
         var tenYears = TimeSpan.FromDays(365 * 10).Ticks;
         _utcTicks = DateTimeOffset.UtcNow.Ticks + Random.Shared.NextInt64(-tenYears, tenYears);
         // Timestamps often measure system uptime.

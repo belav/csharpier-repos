@@ -142,8 +142,10 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
 
         foreach (var subdir in contents.Where(info => info.IsDirectory))
         {
-            // Collect directory metadata in a try...catch in case the file is deleted while we're getting the data.
-            // The metadata is retrieved prior to calling AppendFormat so if it throws, we won't have written a row
+            // Collect directory metadata in a try...catch in case the file is deleted while we're getting the
+            // data.
+            // The metadata is retrieved prior to calling AppendFormat so if it throws, we won't have written a
+            // row
             // to the table.
             try
             {
@@ -180,7 +182,8 @@ public class HtmlDirectoryFormatter : IDirectoryFormatter
         foreach (var file in contents.Where(info => !info.IsDirectory))
         {
             // Collect file metadata in a try...catch in case the file is deleted while we're getting the data.
-            // The metadata is retrieved prior to calling AppendFormat so if it throws, we won't have written a row
+            // The metadata is retrieved prior to calling AppendFormat so if it throws, we won't have written a
+            // row
             // to the table.
             try
             {

@@ -33,7 +33,8 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         // Implements IKeyedItem.Key.
         //
-        // Produce the key. This is a high-traffic property and is called while the hash table's lock is held. Thus, it should
+        // Produce the key. This is a high-traffic property and is called while the hash table's lock is
+        // held. Thus, it should
         // return a precomputed stored value and refrain from invoking other methods.
         //
         public UnificationKey Key
@@ -147,17 +148,23 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the anchoring typedef that declares the members that this type wants returned by the Declared*** properties.
-        // The Declared*** properties will project the anchoring typedef's members by overriding their DeclaringType property with "this"
+        // Returns the anchoring typedef that declares the members that this type wants returned by the
+        // Declared*** properties.
+        // The Declared*** properties will project the anchoring typedef's members by overriding their
+        // DeclaringType property with "this"
         // and substituting the value of this.TypeContext into any generic parameters.
         //
         // Default implementation returns null which causes the Declared*** properties to return no members.
         //
-        // Note that this does not apply to DeclaredNestedTypes. Nested types and their containers have completely separate generic instantiation environments
-        // (despite what C# might lead you to think.) Constructed generic types return the exact same same nested types that its generic type definition does
-        // - i.e. their DeclaringTypes refer back to the generic type definition, not the constructed generic type.)
+        // Note that this does not apply to DeclaredNestedTypes. Nested types and their containers have
+        // completely separate generic instantiation environments
+        // (despite what C# might lead you to think.) Constructed generic types return the exact same same
+        // nested types that its generic type definition does
+        // - i.e. their DeclaringTypes refer back to the generic type definition, not the constructed
+        // generic type.)
         //
-        // Note also that we cannot use this anchoring concept for base types because of generic parameters. Generic parameters return
+        // Note also that we cannot use this anchoring concept for base types because of generic parameters.
+        // Generic parameters return
         // baseclass and interfaces based on its constraints.
         //
         internal sealed override RuntimeNamedTypeInfo AnchoringTypeDefinitionForDeclaredMembers
@@ -191,7 +198,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null, which causes BaseType to return null.
+        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null,
+        // which causes BaseType to return null.
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
@@ -199,7 +207,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces will take care of the transitive closure and
+        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces
+        // will take care of the transitive closure and
         // insertion of the TypeContext.
         //
         internal sealed override QTypeDefRefOrSpec[] TypeRefDefOrSpecsForDirectlyImplementedInterfaces
@@ -211,7 +220,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the generic parameter substitutions to use when enumerating declared members, base class and implemented interfaces.
+        // Returns the generic parameter substitutions to use when enumerating declared members, base class
+        // and implemented interfaces.
         //
         internal sealed override TypeContext TypeContext
         {

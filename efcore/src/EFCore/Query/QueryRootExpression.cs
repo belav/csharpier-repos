@@ -8,18 +8,22 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         An expression that represents a query root in query expression.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public abstract class QueryRootExpression : Expression, IPrintableExpression
 {
     /// <summary>
-    ///     Creates a new instance of the <see cref="QueryRootExpression" /> class with associated query provider.
+    ///     Creates a new instance of the <see cref="QueryRootExpression" /> class with associated query
+    // provider.
     /// </summary>
     /// <param name="asyncQueryProvider">The query provider associated with this query root.</param>
     /// <param name="elementType">The element type this query root represents.</param>
@@ -31,7 +35,8 @@ public abstract class QueryRootExpression : Expression, IPrintableExpression
     }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class without any query provider.
+    ///     Creates a new instance of the <see cref="EntityQueryRootExpression" /> class without any
+    // query provider.
     /// </summary>
     /// <param name="elementType">The element type this query root represents.</param>
     protected QueryRootExpression(Type elementType)
@@ -69,7 +74,8 @@ public abstract class QueryRootExpression : Expression, IPrintableExpression
     protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
-    ///     Creates a printable string representation of the given expression using <see cref="ExpressionPrinter" />.
+    ///     Creates a printable string representation of the given expression using <see
+    // cref="ExpressionPrinter" />.
     /// </summary>
     /// <param name="expressionPrinter">The expression printer to use.</param>
     protected abstract void Print(ExpressionPrinter expressionPrinter);

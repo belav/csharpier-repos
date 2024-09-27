@@ -60,7 +60,8 @@ namespace System.Linq
                         goto default;
                     default:
                         // At this stage, _state starts from 2 + the count. _state - 3 represents the current index into the
-                        // buffer. It is continuously decremented until it hits 2, which means that we've run out of items to
+                        // buffer. It is continuously decremented until it hits 2, which means that we've run out of items
+                        // to
                         // yield and should return false.
                         int index = _state - 3;
                         if (index != -1)

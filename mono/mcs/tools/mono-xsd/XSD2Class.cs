@@ -31,33 +31,33 @@ using Microsoft.CSharp;
 
 namespace Commons.Xml.XSD2ClassLib
 {
-    /*
-    public class Driver
-    {
-        public static void Main (string [] args)
-        {
-            if (args.Length < 1) {
-                Console.WriteLine ("usage: xsd2class [filename]");
-                return;
-            }
-            XmlTextReader xtr = new XmlTextReader (args [0]);
+/*
+public class Driver
+{
+public static void Main (string [] args)
+{
+if (args.Length < 1) {
+Console.WriteLine ("usage: xsd2class [filename]");
+return;
+}
+XmlTextReader xtr = new XmlTextReader (args [0]);
 //			xtr.XmlResolver = null;
-            ValidationEventHandler errorHandler = new ValidationEventHandler (OnValidationError);
-            XmlSchema xs = XmlSchema.Read (xtr, errorHandler);
-            xs.Compile (errorHandler);
-            XmlSchemas schemas = new XmlSchemas ();
-            schemas.Add (xs);
-            new XSD2Class ().Generate (schemas);
-        }
+ValidationEventHandler errorHandler = new ValidationEventHandler (OnValidationError);
+XmlSchema xs = XmlSchema.Read (xtr, errorHandler);
+xs.Compile (errorHandler);
+XmlSchemas schemas = new XmlSchemas ();
+schemas.Add (xs);
+new XSD2Class ().Generate (schemas);
+}
 
-        static void OnValidationError (object o, ValidationEventArgs e)
-        {
-            // Hey... is it sane doing !?
-            Console.WriteLine (e.Exception.ToString ());
-        }
+static void OnValidationError (object o, ValidationEventArgs e)
+{
+// Hey... is it sane doing !?
+Console.WriteLine (e.Exception.ToString ());
+}
 
-    }
-    */
+}
+*/
 
     public class XSD2Class
     {

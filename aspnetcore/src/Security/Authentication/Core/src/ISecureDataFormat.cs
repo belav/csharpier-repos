@@ -32,7 +32,8 @@ public interface ISecureDataFormat<TData>
     TData? Unprotect(string? protectedText);
 
     /// <summary>
-    /// Unprotects the specified <paramref name="protectedText"/> using the specified <paramref name="purpose"/>.
+    /// Unprotects the specified <paramref name="protectedText"/> using the specified <paramref
+    // name="purpose"/>.
     /// </summary>
     /// <param name="protectedText">The data protected value.</param>
     /// <param name="purpose">The purpose.</param>

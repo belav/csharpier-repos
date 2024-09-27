@@ -110,7 +110,8 @@ internal class WellKnownTypes
             return types[0];
         }
 
-        // Multiple types match the name. This is most likely caused by someone reusing the namespace + type name in their apps or libraries.
+        // Multiple types match the name. This is most likely caused by someone reusing the namespace + type
+        // name in their apps or libraries.
         // Workaround this situation by prioritizing types in System and Microsoft assemblies.
         foreach (var type in types)
         {

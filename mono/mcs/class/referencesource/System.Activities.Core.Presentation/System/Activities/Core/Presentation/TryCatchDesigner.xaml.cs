@@ -546,7 +546,8 @@ namespace System.Activities.Core.Presentation
             this.typePresenter = tp;
             this.typePresenter.Filter = this.ExceptionTypeFilter;
             this.typePresenter.MostRecentlyUsedTypes = MostRecentlyUsedTypes;
-            //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an Unloaded event.
+            //UnRegistering because of 137896: Inside tab control multiple Loaded events happen without an
+            // Unloaded event.
             this.typePresenter.TypeBrowserClosed -= OnTypePresenterTypeBrowserClosed;
             this.typePresenter.TypeBrowserClosed += OnTypePresenterTypeBrowserClosed;
         }

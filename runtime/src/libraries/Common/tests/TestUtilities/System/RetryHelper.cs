@@ -18,11 +18,14 @@ namespace System
         private static readonly bool s_debug =
             Environment.GetEnvironmentVariable("DEBUG_RETRYHELPER") == "1";
 
-        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref name="maxAttempts"/> times.</summary>
+        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref
+        // name="maxAttempts"/> times.</summary>
         /// <param name="maxAttempts">The maximum number of times to invoke <paramref name="test"/>.</param>
         /// <param name="test">The test to invoke.</param>
-        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait before the next attempt.  It's passed the number of iterations attempted.</param>
-        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception will trigger a retry.</param>
+        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait
+        // before the next attempt.  It's passed the number of iterations attempted.</param>
+        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception
+        // will trigger a retry.</param>
         public static void Execute(
             Action test,
             int maxAttempts = 5,
@@ -75,11 +78,14 @@ namespace System
             }
         }
 
-        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref name="maxAttempts"/> times.</summary>
+        /// <summary>Executes the <paramref name="test"/> action up to a maximum of <paramref
+        // name="maxAttempts"/> times.</summary>
         /// <param name="maxAttempts">The maximum number of times to invoke <paramref name="test"/>.</param>
         /// <param name="test">The test to invoke.</param>
-        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait before the next attempt.  It's passed the number of iterations attempted.</param>
-        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception will trigger a retry.</param>
+        /// <param name="backoffFunc">After a failure, invoked to determine how many milliseconds to wait
+        // before the next attempt.  It's passed the number of iterations attempted.</param>
+        /// <param name="retryWhen">Invoked to select the exceptions to retry on. If not set, any exception
+        // will trigger a retry.</param>
         public static async Task ExecuteAsync(
             Func<Task> test,
             int maxAttempts = 5,

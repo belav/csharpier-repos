@@ -72,9 +72,12 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
                 _createdView.Close();
                 _createdView = null;
 
-                // If a projection buffer has a source span from another buffer, the projection buffer is held alive by the other buffer too.
-                // This means that a one-off projection buffer created for a tooltip would be kept alive as long as the underlying file
-                // is still open. Removing the source spans from the projection buffer ensures the projection buffer can be GC'ed.
+                // If a projection buffer has a source span from another buffer, the projection buffer is held alive
+                // by the other buffer too.
+                // This means that a one-off projection buffer created for a tooltip would be kept alive as long as
+                // the underlying file
+                // is still open. Removing the source spans from the projection buffer ensures the projection buffer
+                // can be GC'ed.
                 if (_createdTextBuffer is IProjectionBuffer projectionBuffer)
                 {
                     projectionBuffer.DeleteSpans(0, projectionBuffer.CurrentSnapshot.SpanCount);

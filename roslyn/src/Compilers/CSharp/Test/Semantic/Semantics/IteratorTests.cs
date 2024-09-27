@@ -83,7 +83,8 @@ class Test
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (7,22): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (7,22): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         yield return 1.1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1.1")
                     .WithArguments("double", "int")
@@ -108,7 +109,8 @@ class Test
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (8,44): error CS1621: The yield statement cannot be used inside an anonymous method or lambda expression
+                // (8,44): error CS1621: The yield statement cannot be used inside an anonymous method or lambda
+                // expression
                 //         Func<IEnumerable<int>> i = () => { yield break; };
                 Diagnostic(ErrorCode.ERR_YieldInAnonMeth, "yield").WithLocation(8, 44)
             );
@@ -544,7 +546,8 @@ class Test<TKey, TValue>
 }";
             var comp = CreateCompilationWithMscorlib45(text);
             comp.VerifyDiagnostics(
-                // (8,53): error CS1503: Argument 1: cannot convert from 'System.Collections.Generic.KeyValuePair<TKey, TValue>' to 'TKey'
+                // (8,53): error CS1503: Argument 1: cannot convert from
+                // 'System.Collections.Generic.KeyValuePair<TKey, TValue>' to 'TKey'
                 //         yield return new KeyValuePair<TKey, TValue>(kvp, kvp.Value);
                 Diagnostic(ErrorCode.ERR_BadArgType, "kvp")
                     .WithArguments(

@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 parseOptions: TestOptions.Regular8
             );
             comp.VerifyDiagnostics(
-                // (4,5): error CS8400: Feature 'function pointers' is not available in C# 8.0. Please use language version 9.0 or greater.
+                // (4,5): error CS8400: Feature 'function pointers' is not available in C# 8.0. Please use language
+                // version 9.0 or greater.
                 //     delegate*<void> f;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "delegate")
                     .WithArguments("function pointers", "9.0")
@@ -82,12 +83,14 @@ using s = delegate*<void>;";
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,11): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,11): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using s = delegate*<void>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "delegate*<void>")
                     .WithArguments("using type alias", "12.0")
                     .WithLocation(2, 11),
-                // (2,7): warning CS8981: The type name 's' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 's' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using s = delegate*<void>;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "s")
                     .WithArguments("s")
@@ -103,7 +106,8 @@ using s = delegate*<void>;";
                 // (2,11): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 // using s = delegate*<void>;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "delegate*").WithLocation(2, 11),
-                // (2,7): warning CS8981: The type name 's' only contains lower-cased ascii characters. Such names may become reserved for the language.
+                // (2,7): warning CS8981: The type name 's' only contains lower-cased ascii characters. Such names
+                // may become reserved for the language.
                 // using s = delegate*<void>;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "s")
                     .WithArguments("s")
@@ -129,7 +133,8 @@ using unsafe S = delegate*<void>;";
             );
 
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe S = delegate*<void>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -216,7 +221,8 @@ using unsafe S = System.Collections.Generic.List<delegate*<void>[]>;";
                 parseOptions: TestOptions.Regular11
             );
             comp.VerifyDiagnostics(
-                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language version 12.0 or greater.
+                // (2,7): error CS9058: Feature 'using type alias' is not available in C# 11.0. Please use language
+                // version 12.0 or greater.
                 // using unsafe S = System.Collections.Generic.List<delegate*<void>[]>;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "unsafe")
                     .WithArguments("using type alias", "12.0")
@@ -739,17 +745,21 @@ struct S {}"
                 //     public static implicit operator delegate*<void>(A a) => throw null;
                 Diagnostic(ErrorCode.ERR_ConversionNotInvolvingContainedType, "delegate*<void>")
                     .WithLocation(9, 37),
-                // (12,31): error CS0266: Cannot implicitly convert type 'int' to 'delegate*<void>'. An explicit conversion exists (are you missing a cast?)
+                // (12,31): error CS0266: Cannot implicitly convert type 'int' to 'delegate*<void>'. An explicit
+                // conversion exists (are you missing a cast?)
                 //         delegate*<void> ptr = i; // Missing explicit cast
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i")
                     .WithArguments("int", "delegate*<void>")
                     .WithLocation(12, 31),
-                // (13,13): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (13,13): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'int'. An explicit
+                // conversion exists (are you missing a cast?)
                 //         i = ptr;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "ptr")
                     .WithArguments("delegate*<void>", "int")
                     .WithLocation(13, 13),
-                // (14,15): error CS0457: Ambiguous user defined conversions 'C.implicit operator delegate*<void>(A)' and 'A.implicit operator delegate*<void>(A)' when converting from 'C' to 'delegate*<void>'
+                // (14,15): error CS0457: Ambiguous user defined conversions 'C.implicit operator
+                // delegate*<void>(A)' and 'A.implicit operator delegate*<void>(A)' when converting from 'C' to
+                // 'delegate*<void>'
                 //         ptr = c; // Ambiguous user-defined conversion
                 Diagnostic(ErrorCode.ERR_AmbigUDConv, "c")
                     .WithArguments(
@@ -1025,7 +1035,8 @@ unsafe readonly struct S
             );
 
             comp.VerifyDiagnostics(
-                // (8,45): error CS0266: Cannot implicitly convert type 'S' to 'delegate*<int*, void>'. An explicit conversion exists (are you missing a cast?)
+                // (8,45): error CS0266: Cannot implicitly convert type 'S' to 'delegate*<int*, void>'. An explicit
+                // conversion exists (are you missing a cast?)
                 //         /*<bind>*/delegate*<int*, void> _ = new S()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new S()")
                     .WithArguments("S", "delegate*<int*, void>")
@@ -1364,12 +1375,14 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,40): error CS0266: Cannot implicitly convert type 'delegate*<string, string, void>' to 'delegate*<string, void>'. An explicit conversion exists (are you missing a cast?)
+                // (6,40): error CS0266: Cannot implicitly convert type 'delegate*<string, string, void>' to
+                // 'delegate*<string, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<string, void> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<string, string, void>", "delegate*<string, void>")
                     .WithLocation(6, 40),
-                // (7,56): error CS0266: Cannot implicitly convert type 'delegate*<string, string, void>' to 'delegate*<string, string, string, void>'. An explicit conversion exists (are you missing a cast?)
+                // (7,56): error CS0266: Cannot implicitly convert type 'delegate*<string, string, void>' to
+                // 'delegate*<string, string, string, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<string, string, string, void> ptr2 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments(
@@ -1448,42 +1461,50 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,43): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to 'delegate*<in object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (6,43): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to
+                // 'delegate*<in object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<in object, void> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref object, void>", "delegate*<in object, void>")
                     .WithLocation(6, 43),
-                // (7,40): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to 'delegate*<object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (7,40): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to
+                // 'delegate*<object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<object, void> ptr2 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref object, void>", "delegate*<object, void>")
                     .WithLocation(7, 40),
-                // (8,44): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to 'delegate*<ref string, void>'. An explicit conversion exists (are you missing a cast?)
+                // (8,44): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to
+                // 'delegate*<ref string, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<ref string, void> ptr3 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref object, void>", "delegate*<ref string, void>")
                     .WithLocation(8, 44),
-                // (9,44): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to 'delegate*<out object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (9,44): error CS0266: Cannot implicitly convert type 'delegate*<ref object, void>' to
+                // 'delegate*<out object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<out object, void> ptr4 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref object, void>", "delegate*<out object, void>")
                     .WithLocation(9, 44),
-                // (10,43): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to 'delegate*<in object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (10,43): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to
+                // 'delegate*<in object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<in object, void> ptr5 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments("delegate*<out object, void>", "delegate*<in object, void>")
                     .WithLocation(10, 43),
-                // (11,40): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to 'delegate*<object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (11,40): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to
+                // 'delegate*<object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<object, void> ptr6 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments("delegate*<out object, void>", "delegate*<object, void>")
                     .WithLocation(11, 40),
-                // (12,44): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to 'delegate*<ref object, void>'. An explicit conversion exists (are you missing a cast?)
+                // (12,44): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to
+                // 'delegate*<ref object, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<ref object, void> ptr7 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments("delegate*<out object, void>", "delegate*<ref object, void>")
                     .WithLocation(12, 44),
-                // (13,44): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to 'delegate*<out string, void>'. An explicit conversion exists (are you missing a cast?)
+                // (13,44): error CS0266: Cannot implicitly convert type 'delegate*<out object, void>' to
+                // 'delegate*<out string, void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<out string, void> ptr8 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments("delegate*<out object, void>", "delegate*<out string, void>")
@@ -1669,17 +1690,20 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,47): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to 'delegate*<ref readonly string>'. An explicit conversion exists (are you missing a cast?)
+                // (6,47): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to 'delegate*<ref
+                // readonly string>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<ref readonly string> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref string>", "delegate*<ref readonly string>")
                     .WithLocation(6, 47),
-                // (7,34): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to 'delegate*<string>'. An explicit conversion exists (are you missing a cast?)
+                // (7,34): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to
+                // 'delegate*<string>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<string> ptr2 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref string>", "delegate*<string>")
                     .WithLocation(7, 34),
-                // (8,34): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to 'delegate*<object>'. An explicit conversion exists (are you missing a cast?)
+                // (8,34): error CS0266: Cannot implicitly convert type 'delegate*<ref string>' to
+                // 'delegate*<object>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<object> ptr3 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<ref string>", "delegate*<object>")
@@ -1776,22 +1800,27 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,49): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate* unmanaged[Cdecl]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (6,49): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate*
+                // unmanaged[Cdecl]<void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate* unmanaged[Cdecl]<void> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<void>", "delegate* unmanaged[Cdecl]<void>")
                     .WithLocation(6, 49),
-                // (7,52): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate* unmanaged[Thiscall]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (7,52): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate*
+                // unmanaged[Thiscall]<void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate* unmanaged[Thiscall]<void> ptr2 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<void>", "delegate* unmanaged[Thiscall]<void>")
                     .WithLocation(7, 52),
-                // (8,51): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate* unmanaged[Stdcall]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (8,51): error CS0266: Cannot implicitly convert type 'delegate*<void>' to 'delegate*
+                // unmanaged[Stdcall]<void>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate* unmanaged[Stdcall]<void> ptr3 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<void>", "delegate* unmanaged[Stdcall]<void>")
                     .WithLocation(8, 51),
-                // (9,52): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall, Stdcall]<void>' to 'delegate* unmanaged[Thiscall]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (9,52): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall,
+                // Stdcall]<void>' to 'delegate* unmanaged[Thiscall]<void>'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         delegate* unmanaged[Thiscall]<void> ptr4 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments(
@@ -1799,7 +1828,9 @@ unsafe class C
                         "delegate* unmanaged[Thiscall]<void>"
                     )
                     .WithLocation(9, 52),
-                // (10,51): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall, Stdcall]<void>' to 'delegate* unmanaged[Stdcall]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (10,51): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall,
+                // Stdcall]<void>' to 'delegate* unmanaged[Stdcall]<void>'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         delegate* unmanaged[Stdcall]<void> ptr5 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments(
@@ -1807,7 +1838,9 @@ unsafe class C
                         "delegate* unmanaged[Stdcall]<void>"
                     )
                     .WithLocation(10, 51),
-                // (11,59): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall, Stdcall]<void>' to 'delegate* unmanaged[Thiscall, Cdecl]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (11,59): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall,
+                // Stdcall]<void>' to 'delegate* unmanaged[Thiscall, Cdecl]<void>'. An explicit conversion exists (are
+                // you missing a cast?)
                 //         delegate* unmanaged[Thiscall, Cdecl]<void> ptr6 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments(
@@ -1815,7 +1848,9 @@ unsafe class C
                         "delegate* unmanaged[Thiscall, Cdecl]<void>"
                     )
                     .WithLocation(11, 59),
-                // (12,58): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall, Stdcall]<void>' to 'delegate* unmanaged[Cdecl, Stdcall]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (12,58): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall,
+                // Stdcall]<void>' to 'delegate* unmanaged[Cdecl, Stdcall]<void>'. An explicit conversion exists (are
+                // you missing a cast?)
                 //         delegate* unmanaged[Cdecl, Stdcall]<void> ptr7 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments(
@@ -1823,7 +1858,9 @@ unsafe class C
                         "delegate* unmanaged[Cdecl, Stdcall]<void>"
                     )
                     .WithLocation(12, 58),
-                // (13,68): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall, Stdcall]<void>' to 'delegate* unmanaged[Thiscall, Stdcall, Cdecl]<void>'. An explicit conversion exists (are you missing a cast?)
+                // (13,68): error CS0266: Cannot implicitly convert type 'delegate* unmanaged[Thiscall,
+                // Stdcall]<void>' to 'delegate* unmanaged[Thiscall, Stdcall, Cdecl]<void>'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         delegate* unmanaged[Thiscall, Stdcall, Cdecl]<void> ptr8 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments(
@@ -2011,12 +2048,14 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,42): error CS0266: Cannot implicitly convert type 'delegate*<int, object>' to 'delegate*<object, string>'. An explicit conversion exists (are you missing a cast?)
+                // (6,42): error CS0266: Cannot implicitly convert type 'delegate*<int, object>' to
+                // 'delegate*<object, string>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<object, string> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<int, object>", "delegate*<object, string>")
                     .WithLocation(6, 42),
-                // (7,39): error CS0266: Cannot implicitly convert type 'delegate*<int, object>' to 'delegate*<int, string>'. An explicit conversion exists (are you missing a cast?)
+                // (7,39): error CS0266: Cannot implicitly convert type 'delegate*<int, object>' to 'delegate*<int,
+                // string>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<int, string> ptr2 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments("delegate*<int, object>", "delegate*<int, string>")
@@ -2087,7 +2126,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,57): error CS0266: Cannot implicitly convert type 'delegate*<delegate*<object, void>, void>' to 'delegate*<delegate*<string, void>, void>'. An explicit conversion exists (are you missing a cast?)
+                // (6,57): error CS0266: Cannot implicitly convert type 'delegate*<delegate*<object, void>, void>'
+                // to 'delegate*<delegate*<string, void>, void>'. An explicit conversion exists (are you missing a
+                // cast?)
                 //         delegate*<delegate*<string, void>, void> ptr1 = param1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param1")
                     .WithArguments(
@@ -2095,7 +2136,8 @@ unsafe class C
                         "delegate*<delegate*<string, void>, void>"
                     )
                     .WithLocation(6, 57),
-                // (7,45): error CS0266: Cannot implicitly convert type 'delegate*<delegate*<object>>' to 'delegate*<delegate*<string>>'. An explicit conversion exists (are you missing a cast?)
+                // (7,45): error CS0266: Cannot implicitly convert type 'delegate*<delegate*<object>>' to
+                // 'delegate*<delegate*<string>>'. An explicit conversion exists (are you missing a cast?)
                 //         delegate*<delegate*<string>> ptr2 = param2;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "param2")
                     .WithArguments("delegate*<delegate*<object>>", "delegate*<delegate*<string>>")
@@ -2224,7 +2266,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T, void>, delegate*<T, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T, void>, delegate*<T,
+                // void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(delegate*<T, void>, delegate*<T, void>)")
@@ -2266,7 +2309,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T, void>, void>, delegate*<delegate*<T, void>, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T, void>, void>,
+                // delegate*<delegate*<T, void>, void>)' cannot be inferred from the usage. Try specifying the type
+                // arguments explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments(
@@ -2310,7 +2355,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T>, void>, delegate*<delegate*<T>, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T>, void>,
+                // delegate*<delegate*<T>, void>)' cannot be inferred from the usage. Try specifying the type arguments
+                // explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments(
@@ -2350,7 +2397,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (9,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T, void>, delegate*<T, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (9,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T, void>, delegate*<T,
+                // void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         M1(p1, p2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(delegate*<T, void>, delegate*<T, void>)")
@@ -2432,7 +2480,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T>, delegate*<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T>, delegate*<T>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(delegate*<T>, delegate*<T>)")
@@ -2474,7 +2523,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T, void>>, delegate*<delegate*<T, void>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T, void>>,
+                // delegate*<delegate*<T, void>>)' cannot be inferred from the usage. Try specifying the type arguments
+                // explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments(
@@ -2518,7 +2569,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T>>, delegate*<delegate*<T>>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<delegate*<T>>,
+                // delegate*<delegate*<T>>)' cannot be inferred from the usage. Try specifying the type arguments
+                // explicitly.
                 //         M1(p3, p4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(delegate*<delegate*<T>>, delegate*<delegate*<T>>)")
@@ -2556,7 +2609,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (9,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T>, delegate*<T>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (9,9): error CS0411: The type arguments for method 'C.M1<T>(delegate*<T>, delegate*<T>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //         M1(p1, p2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "M1")
                     .WithArguments("C.M1<T>(delegate*<T>, delegate*<T>)")
@@ -2859,7 +2913,8 @@ unsafe class C<T> where T : delegate*<void> {}"
             );
 
             comp.VerifyDiagnostics(
-                // (2,29): error CS0706: Invalid constraint type. A type used as a constraint must be an interface, a non-sealed class or a type parameter.
+                // (2,29): error CS0706: Invalid constraint type. A type used as a constraint must be an interface,
+                // a non-sealed class or a type parameter.
                 // unsafe class C<T> where T : delegate*<void> {}
                 Diagnostic(ErrorCode.ERR_BadConstraintType, "delegate*<void>").WithLocation(2, 29)
             );
@@ -2932,12 +2987,14 @@ unsafe class D : C<delegate*<void>>
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "SubstitutedStatic2")
                     .WithArguments("delegate*<string, void>")
                     .WithLocation(17, 9),
-                // (18,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (18,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr3);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("D.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(18, 9),
-                // (19,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (19,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("D.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
@@ -2952,12 +3009,14 @@ unsafe class D : C<delegate*<void>>
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "SubstitutedStatic2")
                     .WithArguments("delegate*<object>")
                     .WithLocation(26, 9),
-                // (27,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (27,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr5, ptr7);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("D.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(27, 9),
-                // (28,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (28,9): error CS0411: The type arguments for method 'D.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr5, ptr8);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("D.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
@@ -3016,12 +3075,14 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (10,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (10,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(10, 9),
-                // (15,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (15,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr3, ptr4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
@@ -3084,32 +3145,38 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (11,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (11,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(11, 9),
-                // (12,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (12,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr3);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(12, 9),
-                // (13,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (13,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr1, ptr4);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(13, 9),
-                // (19,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (19,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr5, ptr6);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(19, 9),
-                // (20,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (20,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr5, ptr7);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
                     .WithLocation(20, 9),
-                // (21,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic, TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (21,9): error CS0411: The type arguments for method 'C.SubstitutedStatic2<TStatic>(TStatic,
+                // TStatic)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //         SubstitutedStatic2(ptr5, ptr8);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "SubstitutedStatic2")
                     .WithArguments("C.SubstitutedStatic2<TStatic>(TStatic, TStatic)")
@@ -3242,17 +3309,21 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (10,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>[]' and 'delegate*<ref string, void>[]'
+                // (10,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>[]' and 'delegate*<ref string, void>[]'
                 //         _ = b ? ptr1 : ptr2;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr2")
                     .WithArguments("delegate*<string, void>[]", "delegate*<ref string, void>[]")
                     .WithLocation(10, 13),
-                // (11,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>[]' and 'delegate*<int, void>[]'
+                // (11,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>[]' and 'delegate*<int, void>[]'
                 //         _ = b ? ptr1 : ptr3;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr3")
                     .WithArguments("delegate*<string, void>[]", "delegate*<int, void>[]")
                     .WithLocation(11, 13),
-                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>[]' and 'delegate* unmanaged[Cdecl]<string, void>[]'
+                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>[]' and 'delegate* unmanaged[Cdecl]<string,
+                // void>[]'
                 //         _ = b ? ptr1 : ptr4;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr4")
                     .WithArguments(
@@ -3260,17 +3331,20 @@ unsafe class C
                         "delegate* unmanaged[Cdecl]<string, void>[]"
                     )
                     .WithLocation(12, 13),
-                // (18,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>[]' and 'delegate*<ref string>[]'
+                // (18,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>[]' and 'delegate*<ref string>[]'
                 //         _ = b ? ptr5 : ptr6;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr6")
                     .WithArguments("delegate*<string>[]", "delegate*<ref string>[]")
                     .WithLocation(18, 13),
-                // (19,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>[]' and 'delegate*<int>[]'
+                // (19,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>[]' and 'delegate*<int>[]'
                 //         _ = b ? ptr5 : ptr7;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr7")
                     .WithArguments("delegate*<string>[]", "delegate*<int>[]")
                     .WithLocation(19, 13),
-                // (20,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>[]' and 'delegate* unmanaged[Cdecl]<string>[]'
+                // (20,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>[]' and 'delegate* unmanaged[Cdecl]<string>[]'
                 //         _ = b ? ptr5 : ptr8;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr8")
                     .WithArguments("delegate*<string>[]", "delegate* unmanaged[Cdecl]<string>[]")
@@ -3352,32 +3426,38 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>' and 'delegate*<ref string>'
+                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>' and 'delegate*<ref string>'
                 //         _ = b ? ptr1 : ptr3;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr3")
                     .WithArguments("delegate*<string>", "delegate*<ref string>")
                     .WithLocation(12, 13),
-                // (13,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>' and 'delegate*<ref string?>'
+                // (13,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>' and 'delegate*<ref string?>'
                 //         _ = b ? ptr1 : ptr4;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr4")
                     .WithArguments("delegate*<string>", "delegate*<ref string?>")
                     .WithLocation(13, 13),
-                // (14,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?>' doesn't match target type 'delegate*<ref string>'.
+                // (14,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?>'
+                // doesn't match target type 'delegate*<ref string>'.
                 //         _ = b ? ptr3 : ptr4;
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "ptr4")
                     .WithArguments("delegate*<ref string?>", "delegate*<ref string>")
                     .WithLocation(14, 24),
-                // (21,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>' and 'delegate*<ref string>'
+                // (21,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>' and 'delegate*<ref string>'
                 //         _ = b ? ptr5 : ptr7;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr7")
                     .WithArguments("delegate*<string>", "delegate*<ref string>")
                     .WithLocation(21, 13),
-                // (22,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string>' and 'delegate*<ref string?>'
+                // (22,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string>' and 'delegate*<ref string?>'
                 //         _ = b ? ptr5 : ptr8;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr8")
                     .WithArguments("delegate*<string>", "delegate*<ref string?>")
                     .WithLocation(22, 13),
-                // (23,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?>' doesn't match target type 'delegate*<ref string>'.
+                // (23,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?>'
+                // doesn't match target type 'delegate*<ref string>'.
                 //         _ = b ? ptr7 : ptr8;
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "ptr8")
                     .WithArguments("delegate*<ref string?>", "delegate*<ref string>")
@@ -3440,32 +3520,38 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string, void>'
+                // (12,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string, void>'
                 //         _ = b ? ptr1 : ptr3;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr3")
                     .WithArguments("delegate*<string, void>", "delegate*<ref string, void>")
                     .WithLocation(12, 13),
-                // (13,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string?, void>'
+                // (13,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string?, void>'
                 //         _ = b ? ptr1 : ptr4;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr1 : ptr4")
                     .WithArguments("delegate*<string, void>", "delegate*<ref string?, void>")
                     .WithLocation(13, 13),
-                // (14,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?, void>' doesn't match target type 'delegate*<ref string, void>'.
+                // (14,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?,
+                // void>' doesn't match target type 'delegate*<ref string, void>'.
                 //         _ = b ? ptr3 : ptr4;
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "ptr4")
                     .WithArguments("delegate*<ref string?, void>", "delegate*<ref string, void>")
                     .WithLocation(14, 24),
-                // (21,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string, void>'
+                // (21,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string, void>'
                 //         _ = b ? ptr5 : ptr7;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr7")
                     .WithArguments("delegate*<string, void>", "delegate*<ref string, void>")
                     .WithLocation(21, 13),
-                // (22,13): error CS0173: Type of conditional expression cannot be determined because there is no implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string?, void>'
+                // (22,13): error CS0173: Type of conditional expression cannot be determined because there is no
+                // implicit conversion between 'delegate*<string, void>' and 'delegate*<ref string?, void>'
                 //         _ = b ? ptr5 : ptr8;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? ptr5 : ptr8")
                     .WithArguments("delegate*<string, void>", "delegate*<ref string?, void>")
                     .WithLocation(22, 13),
-                // (23,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?, void>' doesn't match target type 'delegate*<ref string, void>'.
+                // (23,24): warning CS8619: Nullability of reference types in value of type 'delegate*<ref string?,
+                // void>' doesn't match target type 'delegate*<ref string, void>'.
                 //         _ = b ? ptr7 : ptr8;
                 Diagnostic(ErrorCode.WRN_NullabilityMismatchInAssignment, "ptr8")
                     .WithArguments("delegate*<ref string?, void>", "delegate*<ref string, void>")
@@ -3580,13 +3666,18 @@ unsafe
                 options: TestOptions.UnsafeReleaseExe
             );
 
-            // It might seem like this should have the same behavior as FunctionPointerInferenceInParameter. However, this is not how method group resolution works.
-            // We don't look at return types when resolving a method group, which means that we can't use T2 to narrow down the candidates. We therefore can't
-            // find any information about T1, and resolution fails. FunctionPointerInferenceInParameter, on the other hand, has a bound for T1: int. That bound
-            // is then used as an input to method group resolution, and we can narrow down to string converter(int v). The return type of that method can then be
+            // It might seem like this should have the same behavior as FunctionPointerInferenceInParameter.
+            // However, this is not how method group resolution works.
+            // We don't look at return types when resolving a method group, which means that we can't use T2 to
+            // narrow down the candidates. We therefore can't
+            // find any information about T1, and resolution fails. FunctionPointerInferenceInParameter, on the
+            // other hand, has a bound for T1: int. That bound
+            // is then used as an input to method group resolution, and we can narrow down to string
+            // converter(int v). The return type of that method can then be
             // used as a bound to infer T2.
             comp.VerifyDiagnostics(
-                // (4,5): error CS0411: The type arguments for method 'Test<T1, T2>(T2, delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (4,5): error CS0411: The type arguments for method 'Test<T1, T2>(T2, delegate*<T1, T2>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(0, &converter);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(T2, delegate*<T1, T2>)")
@@ -3620,12 +3711,14 @@ unsafe
             );
 
             comp.VerifyDiagnostics(
-                // (4,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (4,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, delegate*<T1, T2>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(string.Empty, converter);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1, T2>(T1, delegate*<T1, T2>)")
                     .WithLocation(4, 5),
-                // (5,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, delegate*<T1, T2>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test2(0, converter);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test2")
                     .WithArguments("Test2<T1, T2>(T2, delegate*<T1, T2>)")
@@ -3659,22 +3752,26 @@ unsafe
             );
 
             comp.VerifyDiagnostics(
-                // (4,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (4,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, delegate*<T1, T2>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(string.Empty, v => 0);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1, T2>(T1, delegate*<T1, T2>)")
                     .WithLocation(4, 5),
-                // (5,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, delegate*<T1, T2>)' cannot
+                // be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test2(0, v => 0);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test2")
                     .WithArguments("Test2<T1, T2>(T2, delegate*<T1, T2>)")
                     .WithLocation(5, 5),
-                // (6,40): error CS1660: Cannot convert lambda expression to type 'delegate*<string, int>' because it is not a delegate type
+                // (6,40): error CS1660: Cannot convert lambda expression to type 'delegate*<string, int>' because
+                // it is not a delegate type
                 //     Test1<string, int>(string.Empty, v => 0);
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "delegate*<string, int>")
                     .WithLocation(6, 40),
-                // (7,29): error CS1660: Cannot convert lambda expression to type 'delegate*<string, int>' because it is not a delegate type
+                // (7,29): error CS1660: Cannot convert lambda expression to type 'delegate*<string, int>' because
+                // it is not a delegate type
                 //     Test2<string, int>(0, v => 0);
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "delegate*<string, int>")
@@ -3704,12 +3801,14 @@ unsafe
             );
 
             comp.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, Func<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test1<T1, T2>(T1, Func<T1, T2>)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(string.Empty, &converter);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1, T2>(T1, System.Func<T1, T2>)")
                     .WithLocation(5, 5),
-                // (6,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, Func<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (6,5): error CS0411: The type arguments for method 'Test2<T1, T2>(T2, Func<T1, T2>)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test2(0, &converter);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test2")
                     .WithArguments("Test2<T1, T2>(T2, System.Func<T1, T2>)")
@@ -3749,12 +3848,14 @@ unsafe
             );
 
             comp.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test1<T1>(delegate* unmanaged<T1, void>[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test1<T1>(delegate* unmanaged<T1, void>[])'
+                // cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(ptr1);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1>(delegate* unmanaged<T1, void>[])")
                     .WithLocation(5, 5),
-                // (6,19): error CS1503: Argument 1: cannot convert from 'delegate*<string, void>[]' to 'delegate* unmanaged<string, void>[]'
+                // (6,19): error CS1503: Argument 1: cannot convert from 'delegate*<string, void>[]' to 'delegate*
+                // unmanaged<string, void>[]'
                 //     Test1<string>(ptr1);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr1")
                     .WithArguments(
@@ -3763,12 +3864,14 @@ unsafe
                         "delegate* unmanaged<string, void>[]"
                     )
                     .WithLocation(6, 19),
-                // (8,5): error CS0411: The type arguments for method 'Test1<T1>(delegate* unmanaged<T1, void>[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (8,5): error CS0411: The type arguments for method 'Test1<T1>(delegate* unmanaged<T1, void>[])'
+                // cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1>(delegate* unmanaged<T1, void>[])")
                     .WithLocation(8, 5),
-                // (9,19): error CS1503: Argument 1: cannot convert from 'delegate* unmanaged[Cdecl, Stdcall]<string, void>[]' to 'delegate* unmanaged<string, void>[]'
+                // (9,19): error CS1503: Argument 1: cannot convert from 'delegate* unmanaged[Cdecl,
+                // Stdcall]<string, void>[]' to 'delegate* unmanaged<string, void>[]'
                 //     Test1<string>(ptr2);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr2")
                     .WithArguments(
@@ -3801,12 +3904,14 @@ unsafe
             );
 
             comp.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test1<T1, T2>(delegate*<T1, T2>[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test1<T1, T2>(delegate*<T1, T2>[])' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(ptr1);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1, T2>(delegate*<T1, T2>[])")
                     .WithLocation(5, 5),
-                // (6,27): error CS1503: Argument 1: cannot convert from 'delegate*<ref string, string>[]' to 'delegate*<string, string>[]'
+                // (6,27): error CS1503: Argument 1: cannot convert from 'delegate*<ref string, string>[]' to
+                // 'delegate*<string, string>[]'
                 //     Test1<string, string>(ptr1);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr1")
                     .WithArguments(
@@ -3815,12 +3920,14 @@ unsafe
                         "delegate*<string, string>[]"
                     )
                     .WithLocation(6, 27),
-                // (8,5): error CS0411: The type arguments for method 'Test1<T1, T2>(delegate*<T1, T2>[])' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (8,5): error CS0411: The type arguments for method 'Test1<T1, T2>(delegate*<T1, T2>[])' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test1(ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test1")
                     .WithArguments("Test1<T1, T2>(delegate*<T1, T2>[])")
                     .WithLocation(8, 5),
-                // (9,27): error CS1503: Argument 1: cannot convert from 'delegate*<string, ref string>[]' to 'delegate*<string, string>[]'
+                // (9,27): error CS1503: Argument 1: cannot convert from 'delegate*<string, ref string>[]' to
+                // 'delegate*<string, string>[]'
                 //     Test1<string, string>(ptr2);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr2")
                     .WithArguments(
@@ -3895,12 +4002,14 @@ unsafe
             );
 
             verifier.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate* unmanaged[Cdecl]<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate* unmanaged[Cdecl]<T1,
+                // T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(ptr);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(delegate* unmanaged[Cdecl]<T1, T2>)")
                     .WithLocation(5, 5),
-                // (6,23): error CS1503: Argument 1: cannot convert from 'delegate*<int, string>' to 'delegate* unmanaged[Cdecl]<int, string>'
+                // (6,23): error CS1503: Argument 1: cannot convert from 'delegate*<int, string>' to 'delegate*
+                // unmanaged[Cdecl]<int, string>'
                 //     Test<int, string>(ptr);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr")
                     .WithArguments(
@@ -3933,12 +4042,14 @@ unsafe
             );
 
             verifier.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<T1, T2>)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(ptr1);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(delegate*<T1, T2>)")
                     .WithLocation(5, 5),
-                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<ref string, string>' to 'delegate*<string, string>'
+                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<ref string, string>' to
+                // 'delegate*<string, string>'
                 //     Test<string, string>(ptr1);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr1")
                     .WithArguments(
@@ -3947,12 +4058,14 @@ unsafe
                         "delegate*<string, string>"
                     )
                     .WithLocation(6, 26),
-                // (8,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<T1, T2>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (8,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<T1, T2>)' cannot be
+                // inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(delegate*<T1, T2>)")
                     .WithLocation(8, 5),
-                // (9,26): error CS1503: Argument 1: cannot convert from 'delegate*<string, ref string>' to 'delegate*<string, string>'
+                // (9,26): error CS1503: Argument 1: cannot convert from 'delegate*<string, ref string>' to
+                // 'delegate*<string, string>'
                 //     Test<string, string>(ptr2);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr2")
                     .WithArguments(
@@ -3982,14 +4095,17 @@ unsafe
             );
 
             verifier.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate* unmanaged[Cdecl]<T1, T2>, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate*
+                // unmanaged[Cdecl]<T1, T2>, void>)' cannot be inferred from the usage. Try specifying the type
+                // arguments explicitly.
                 //     Test(ptr);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments(
                         "Test<T1, T2>(delegate*<delegate* unmanaged[Cdecl]<T1, T2>, void>)"
                     )
                     .WithLocation(5, 5),
-                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<string, string>, void>' to 'delegate*<delegate* unmanaged[Cdecl]<string, string>, void>'
+                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<string, string>,
+                // void>' to 'delegate*<delegate* unmanaged[Cdecl]<string, string>, void>'
                 //     Test<string, string>(ptr);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr")
                     .WithArguments(
@@ -4022,12 +4138,14 @@ unsafe
             );
 
             verifier.VerifyDiagnostics(
-                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate*<T1, T2>, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (5,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate*<T1, T2>,
+                // void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(ptr1);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(delegate*<delegate*<T1, T2>, void>)")
                     .WithLocation(5, 5),
-                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<ref string, string>, void>' to 'delegate*<delegate*<string, string>, void>'
+                // (6,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<ref string, string>,
+                // void>' to 'delegate*<delegate*<string, string>, void>'
                 //     Test<string, string>(ptr1);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr1")
                     .WithArguments(
@@ -4036,12 +4154,14 @@ unsafe
                         "delegate*<delegate*<string, string>, void>"
                     )
                     .WithLocation(6, 26),
-                // (8,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate*<T1, T2>, void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
+                // (8,5): error CS0411: The type arguments for method 'Test<T1, T2>(delegate*<delegate*<T1, T2>,
+                // void>)' cannot be inferred from the usage. Try specifying the type arguments explicitly.
                 //     Test(ptr2);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Test")
                     .WithArguments("Test<T1, T2>(delegate*<delegate*<T1, T2>, void>)")
                     .WithLocation(8, 5),
-                // (9,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<string, ref string>, void>' to 'delegate*<delegate*<string, string>, void>'
+                // (9,26): error CS1503: Argument 1: cannot convert from 'delegate*<delegate*<string, ref string>,
+                // void>' to 'delegate*<delegate*<string, string>, void>'
                 //     Test<string, string>(ptr2);
                 Diagnostic(ErrorCode.ERR_BadArgType, "ptr2")
                     .WithArguments(
@@ -4091,7 +4211,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,13): error CS1978: Cannot use an expression of type 'delegate*<void>' as an argument to a dynamically dispatched operation.
+                // (6,13): error CS1978: Cannot use an expression of type 'delegate*<void>' as an argument to a
+                // dynamically dispatched operation.
                 //         d.M(ptr);
                 Diagnostic(ErrorCode.ERR_BadDynamicMethodArg, "ptr")
                     .WithArguments("delegate*<void>")
@@ -4484,7 +4605,8 @@ IIsPatternOperation (OperationKind.IsPattern, Type: System.Boolean) (Syntax: 'pt
                 parseOptions: TestOptions.Regular7_3
             );
             comp.VerifyDiagnostics(
-                // (7,9): error CS8370: Feature 'function pointers' is not available in C# 7.3. Please use language version 9.0 or greater.
+                // (7,9): error CS8370: Feature 'function pointers' is not available in C# 7.3. Please use language
+                // version 9.0 or greater.
                 //         delegate*<void> ptr = null;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "delegate")
                     .WithArguments("function pointers", "9.0")
@@ -4781,7 +4903,8 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (7,32): error CS8789: The type of a local declared in a fixed statement cannot be a function pointer type.
+                // (7,32): error CS8789: The type of a local declared in a fixed statement cannot be a function
+                // pointer type.
                 //         fixed (delegate*<void> ptr = &M)
                 Diagnostic(ErrorCode.ERR_CannotUseFunctionPointerAsFixedLocal, "ptr = &M")
                     .WithLocation(7, 32)
@@ -4828,17 +4951,20 @@ class E<T> where T : struct {}
                 Diagnostic(ErrorCode.ERR_ReturnTypeIsStaticClass, "S")
                     .WithArguments("S")
                     .WithLocation(6, 27),
-                // (6,30): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('C')
+                // (6,30): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('C')
                 //     void M1(delegate*<C*, S> ptr) {}
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr")
                     .WithArguments("C")
                     .WithLocation(6, 30),
-                // (8,32): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
+                // (8,32): error CS8377: The type 'T' must be a non-nullable value type, along with all fields at
+                // any level of nesting, in order to use it as parameter 'T' in the generic type or method 'D<T>'
                 //     void M3<T>(delegate*<D<T>> ptr) {}
                 Diagnostic(ErrorCode.ERR_UnmanagedConstraintNotSatisfied, "ptr")
                     .WithArguments("D<T>", "T", "T")
                     .WithLocation(8, 32),
-                // (9,32): error CS0453: The type 'T' must be a non-nullable value type in order to use it as parameter 'T' in the generic type or method 'E<T>'
+                // (9,32): error CS0453: The type 'T' must be a non-nullable value type in order to use it as
+                // parameter 'T' in the generic type or method 'E<T>'
                 //     void M4<T>(delegate*<E<T>> ptr) {}
                 Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "ptr")
                     .WithArguments("E<T>", "T", "T")
@@ -5132,7 +5258,9 @@ unsafe class C
             );
 
             comp.VerifyDiagnostics(
-                // (6,23): error CS1061: 'delegate*<void>' does not contain a definition for 'ToString' and no accessible extension method 'ToString' accepting a first argument of type 'delegate*<void>' could be found (are you missing a using directive or an assembly reference?)
+                // (6,23): error CS1061: 'delegate*<void>' does not contain a definition for 'ToString' and no
+                // accessible extension method 'ToString' accepting a first argument of type 'delegate*<void>' could be
+                // found (are you missing a using directive or an assembly reference?)
                 //         /*<bind>*/ptr.ToString()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "ToString")
                     .WithArguments("delegate*<void>", "ToString")
@@ -5236,7 +5364,8 @@ unsafe class C
 
             var semanticInfo = model.GetSemanticInfoSummary(parameterDecls[1]);
 
-            // Calling GetTypeInfo on `__arglist` returns null, so attempting to verify the individual parameters would fail
+            // Calling GetTypeInfo on `__arglist` returns null, so attempting to verify the individual
+            // parameters would fail
             Assert.Equal("delegate*<__arglist, void>", parameterDecls[1].ToString());
             Assert.Equal("delegate*<?, System.Void>", semanticInfo.Type.ToTestDisplayString());
             Assert.Equal(
@@ -5359,7 +5488,8 @@ unsafe static class C
                 Diagnostic(ErrorCode.ERR_MethodArgCantBeRefAny, "ref ArgIterator")
                     .WithArguments("System.ArgIterator")
                     .WithLocation(5, 35),
-                // (5,52): error CS1599: The return type of a method, delegate, or function pointer cannot be 'System.ArgIterator'
+                // (5,52): error CS1599: The return type of a method, delegate, or function pointer cannot be
+                // 'System.ArgIterator'
                 //     static delegate*<ArgIterator, ref ArgIterator, ArgIterator> Ptr;
                 Diagnostic(ErrorCode.ERR_MethodReturnCantBeRefAny, "ArgIterator")
                     .WithArguments("System.ArgIterator")

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -153,7 +154,8 @@ namespace System.Web.Http.Routing
                 }
             }
 
-            // Add all remaining default values from the route to the list of values we will use for URI generation
+            // Add all remaining default values from the route to the list of values we will use for URI
+            // generation
             ForEachParameter(
                 PathSegments,
                 delegate(PathParameterSubsegment parameterSubsegment)
@@ -272,7 +274,8 @@ namespace System.Web.Http.Routing
                             return null;
                         }
 
-                        // Append any pending literals to the URI (without the trailing slash) and prevent any future appends
+                        // Append any pending literals to the URI (without the trailing slash) and prevent any future
+                        // appends
                         uri.Append(pendingParts.ToString(0, pendingParts.Length - 1));
                         pendingParts.Length = 0;
                         blockAllUriAppends = true;
@@ -445,7 +448,8 @@ namespace System.Web.Http.Routing
                 }
             }
 
-            // Encode the URI before we append the query string, otherwise we would double encode the query string
+            // Encode the URI before we append the query string, otherwise we would double encode the query
+            // string
             StringBuilder encodedUri = new StringBuilder();
             encodedUri.Append(UriEncode(uri.ToString()));
             uri = encodedUri;
@@ -756,7 +760,8 @@ namespace System.Web.Http.Routing
         {
             if (String.IsNullOrEmpty(requestPathSegment))
             {
-                // If there's no data to parse, we must have exactly one parameter segment and no other segments - otherwise no match
+                // If there's no data to parse, we must have exactly one parameter segment and no other segments -
+                // otherwise no match
 
                 if (routeSegment.Subsegments.Count > 1)
                 {
@@ -787,7 +792,8 @@ namespace System.Web.Http.Routing
                 }
             }
 
-            // Optimize for the common case where there is only one subsegment in the segment - either a parameter or a literal
+            // Optimize for the common case where there is only one subsegment in the segment - either a
+            // parameter or a literal
             if (routeSegment.Subsegments.Count == 1)
             {
                 return MatchSingleContentPathSegment(
@@ -939,10 +945,14 @@ namespace System.Web.Http.Routing
                 indexOfLastSegmentUsed--;
             }
 
-            // If the last subsegment is a parameter, it's OK that we didn't parse all the way to the left extent of
-            // the string since the parameter will have consumed all the remaining text anyway. If the last subsegment
-            // is a literal then we *must* have consumed the entire text in that literal. Otherwise we end up matching
-            // the route "Foo" to the request URI "somethingFoo". Thus we have to check that we parsed the *entire*
+            // If the last subsegment is a parameter, it's OK that we didn't parse all the way to the left
+            // extent of
+            // the string since the parameter will have consumed all the remaining text anyway. If the last
+            // subsegment
+            // is a literal then we *must* have consumed the entire text in that literal. Otherwise we end up
+            // matching
+            // the route "Foo" to the request URI "somethingFoo". Thus we have to check that we parsed the
+            // *entire*
             // request URI in order for it to be a match.
             // This check is related to the check we do earlier in this function for LiteralSubsegments.
             return (lastIndex == 0) || (routeSegment.Subsegments[0] is PathParameterSubsegment);

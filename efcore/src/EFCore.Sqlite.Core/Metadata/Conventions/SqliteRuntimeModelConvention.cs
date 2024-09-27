@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-sqlite">Accessing SQLite databases with EF Core</see>
+// for more information and examples.
 /// </remarks>
 public class SqliteRuntimeModelConvention : RelationalRuntimeModelConvention
 {
@@ -18,7 +19,8 @@ public class SqliteRuntimeModelConvention : RelationalRuntimeModelConvention
     ///     Creates a new instance of <see cref="SqliteRuntimeModelConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public SqliteRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies

@@ -1158,7 +1158,8 @@ else if (b)
         public async Task SplitNotIntoSeparateStatementsIfControlFlowContinues1()
         {
             // Even though there are no statements inside, we still can't split this into separate statements
-            // because it would change the semantics from short-circuiting to always evaluating the second condition,
+            // because it would change the semantics from short-circuiting to always evaluating the second
+            // condition,
             // breaking code like 'if (a == null || a.InstanceMethod())'.
             await TestInRegularAndScriptAsync(
                 @"class C

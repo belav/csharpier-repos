@@ -595,7 +595,8 @@ namespace System.ServiceModel
 
             ConfigLoader configLoader = new ConfigLoader(GetContractResolver(implementedContracts));
 
-            // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+            // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from
+            // ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
             LoadConfigurationSectionInternal(
                 configLoader,
                 this.Description,
@@ -1245,8 +1246,10 @@ namespace System.ServiceModel
                 return;
             }
 
-            //Exit immediately when not hosted in IIS or if VirtualPathExtension is not set. VirtualPathExtension is used as a flag to indicate whether a ServiceHost
-            // is webhosted (WsDualHttpBinding-ChannelFactory is using HttpListener instead of IIS even when running in IIS)
+            //Exit immediately when not hosted in IIS or if VirtualPathExtension is not set.
+            // VirtualPathExtension is used as a flag to indicate whether a ServiceHost
+            // is webhosted (WsDualHttpBinding-ChannelFactory is using HttpListener instead of IIS even when
+            // running in IIS)
             if (!AspNetEnvironment.Enabled || this.Extensions.Find<VirtualPathExtension>() == null)
             {
                 return;
@@ -2232,7 +2235,8 @@ namespace System.ServiceModel
             }
         }
 
-        // Run static Configure method on service type if it exists, else load configuration from Web.config/App.config
+        // Run static Configure method on service type if it exists, else load configuration from
+        // Web.config/App.config
         protected override void ApplyConfiguration()
         {
             // Load from static Configure method if it exists with the right signature
@@ -2264,7 +2268,8 @@ namespace System.ServiceModel
             base.ApplyConfiguration();
         }
 
-        // Find the Configure method with the required signature, closest to serviceType in the type hierarchy
+        // Find the Configure method with the required signature, closest to serviceType in the type
+        // hierarchy
         static MethodInfo GetConfigureMethod(Type serviceType)
         {
             // Use recursion instead of BindingFlags.FlattenHierarchy because we require return type to be void
@@ -2320,7 +2325,8 @@ namespace System.ServiceModel
                 GetContractResolver(this.ImplementedContracts)
             );
 
-            // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
+            // Call the overload of LoadConfigurationSectionInternal which looks up the serviceElement from
+            // ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None)
             LoadConfigurationSectionExceptHostInternal(
                 configLoader,
                 this.Description,
@@ -2347,7 +2353,9 @@ namespace System.ServiceModel
                 GetContractResolver(this.ImplementedContracts)
             );
 
-            // Look up the serviceElement explicitly on configuration, then call the overload of LoadConfigurationSectionInternal that loads the rest of the config from the same configuration as serviceElement
+            // Look up the serviceElement explicitly on configuration, then call the overload of
+            // LoadConfigurationSectionInternal that loads the rest of the config from the same configuration as
+            // serviceElement
             ServicesSection servicesSection = (ServicesSection)
                 configuration.GetSection(ConfigurationStrings.ServicesSectionPath);
             ServiceElement serviceElement = configLoader.LookupService(

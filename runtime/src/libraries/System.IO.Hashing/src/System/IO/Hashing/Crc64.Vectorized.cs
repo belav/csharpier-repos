@@ -56,11 +56,15 @@ namespace System.IO.Hashing
             VectorHelper.IsSupported && source.Length >= Vector128<byte>.Count;
 
         // Processes the bytes in source in 128 byte chunks using intrinsics, followed by processing 16
-        // byte chunks, and then processing remaining bytes individually. Requires at least 16 bytes of data.
+        // byte chunks, and then processing remaining bytes individually. Requires at least 16 bytes of
+        // data.
         // Requires little endian byte order and support for PCLMULQDQ intrinsics on Intel architecture
-        // or AES and AdvSimd intrinsics on ARM architecture. Based on the algorithm put forth in the Intel paper
-        // "Fast CRC Computation for Generic Polynomials Using PCLMULQDQ Instruction" in December, 2009 and the
+        // or AES and AdvSimd intrinsics on ARM architecture. Based on the algorithm put forth in the Intel
+        // paper
+        // "Fast CRC Computation for Generic Polynomials Using PCLMULQDQ Instruction" in December, 2009 and
+        // the
         // Intel reference implementation.
+        //
         // https://github.com/intel/isa-l/blob/33a2d9484595c2d6516c920ce39a694c144ddf69/crc/crc64_ecma_norm_by8.asm
         private static ulong UpdateVectorized(ulong crc, ReadOnlySpan<byte> source)
         {
@@ -90,7 +94,8 @@ namespace System.IO.Hashing
                 length -= Vector128<byte>.Count * 8;
 
                 // Load and XOR the initial CRC value
-                // CRC value does not need to be byte-reflected, but it needs to be moved to the high part of the register.
+                // CRC value does not need to be byte-reflected, but it needs to be moved to the high part of the
+                // register.
                 // because data will be byte-reflected and will align with initial crc at correct place.
                 x0 ^= ShiftLowerToUpper(Vector128.CreateScalar(crc));
 
@@ -168,7 +173,8 @@ namespace System.IO.Hashing
                 x7 = LoadFromSource(ref srcRef, 0);
 
                 // Load and XOR the initial CRC value
-                // CRC value does not need to be byte-reflected, but it needs to be moved to the high part of the register.
+                // CRC value does not need to be byte-reflected, but it needs to be moved to the high part of the
+                // register.
                 // because the data will be byte-reflected and will align with initial crc at correct place.
                 x7 ^= ShiftLowerToUpper(Vector128.CreateScalar(crc));
 

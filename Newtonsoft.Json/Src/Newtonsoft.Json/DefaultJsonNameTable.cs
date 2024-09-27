@@ -33,7 +33,8 @@ namespace Newtonsoft.Json
     /// </summary>
     public class DefaultJsonNameTable : JsonNameTable
     {
-        // used to defeat hashtable DoS attack where someone passes in lots of strings that hash to the same hash code
+        // used to defeat hashtable DoS attack where someone passes in lots of strings that hash to the same
+        // hash code
         private static readonly int HashCodeRandomizer;
 
         private int _count;
@@ -54,12 +55,15 @@ namespace Newtonsoft.Json
         }
 
         /// <summary>
-        /// Gets a string containing the same characters as the specified range of characters in the given array.
+        /// Gets a string containing the same characters as the specified range of characters in the given
+        // array.
         /// </summary>
         /// <param name="key">The character array containing the name to find.</param>
-        /// <param name="start">The zero-based index into the array specifying the first character of the name.</param>
+        /// <param name="start">The zero-based index into the array specifying the first character of the
+        // name.</param>
         /// <param name="length">The number of characters in the name.</param>
-        /// <returns>A string containing the same characters as the specified range of characters in the given array.</returns>
+        /// <returns>A string containing the same characters as the specified range of characters in the
+        // given array.</returns>
         public override string? Get(char[] key, int start, int length)
         {
             if (length == 0)
@@ -78,7 +82,8 @@ namespace Newtonsoft.Json
             hashCode -= hashCode >> 11;
             hashCode -= hashCode >> 5;
 
-            // make sure index is evaluated before accessing _entries, otherwise potential race condition causing IndexOutOfRangeException
+            // make sure index is evaluated before accessing _entries, otherwise potential race condition
+            // causing IndexOutOfRangeException
 #if NET20 || NET35 || NET40
             int mask = Thread.VolatileRead(ref _mask);
 #else

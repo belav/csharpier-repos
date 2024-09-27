@@ -160,7 +160,8 @@ namespace System.Security.Cryptography.Xml
                     }
                     else
                     {
-                        // SelectSingleNode throws an exception for xmldecl PI for example, so we will just ignore those exceptions
+                        // SelectSingleNode throws an exception for xmldecl PI for example, so we will just ignore those
+                        // exceptions
                         try
                         {
                             // Find the nearest signature ancestor tag

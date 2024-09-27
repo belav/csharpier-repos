@@ -615,7 +615,8 @@ F()
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (7,9): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
+                // (7,9): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the
+                // language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "b[y]")
                     .WithArguments(
                         "IB.this[ref int]",
@@ -623,7 +624,8 @@ F()
                         "IB.set_P(ref int, int)"
                     )
                     .WithLocation(7, 9),
-                // (7,16): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
+                // (7,16): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the
+                // language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "b[x]")
                     .WithArguments(
                         "IB.this[ref int]",
@@ -631,7 +633,8 @@ F()
                         "IB.set_P(ref int, int)"
                     )
                     .WithLocation(7, 16),
-                // (8,9): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
+                // (8,9): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the
+                // language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "b[ref y]")
                     .WithArguments(
                         "IB.this[ref int]",
@@ -639,7 +642,8 @@ F()
                         "IB.set_P(ref int, int)"
                     )
                     .WithLocation(8, 9),
-                // (8,20): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
+                // (8,20): error CS1545: Property, indexer, or event 'IB.this[ref int]' is not supported by the
+                // language; try directly calling accessor methods 'IB.get_P(ref int)' or 'IB.set_P(ref int, int)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "b[ref x]")
                     .WithArguments(
                         "IB.this[ref int]",
@@ -925,11 +929,15 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,11): error CS1061: 'A' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                // (6,11): error CS1061: 'A' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'A' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("A", "P")
                     .WithLocation(6, 11),
-                // (6,20): error CS1061: 'A' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                // (6,20): error CS1061: 'A' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'A' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("A", "P")
                     .WithLocation(6, 20),
@@ -1245,7 +1253,9 @@ class B
                     Diagnostic(ErrorCode.ERR_BadIndexLHS, "a.P[1]")
                         .WithArguments("object")
                         .WithLocation(14, 13),
-                    // (16,15): error CS1061: 'A' does not contain a definition for 'R' and no extension method 'R' accepting a first argument of type 'A' could be found (are you missing a using directive or an assembly reference?)
+                    // (16,15): error CS1061: 'A' does not contain a definition for 'R' and no extension method 'R'
+                    // accepting a first argument of type 'A' could be found (are you missing a using directive or an
+                    // assembly reference?)
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "R")
                         .WithArguments("A", "R")
                         .WithLocation(16, 15)
@@ -1328,19 +1338,23 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,13): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language; try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
+                // (6,13): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A.P[int]", "A.get_P(int)", "A.set_P(int, object)")
                     .WithLocation(6, 13),
-                // (7,9): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language; try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
+                // (7,9): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language; try
+                // directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A.P[int]", "A.get_P(int)", "A.set_P(int, object)")
                     .WithLocation(7, 9),
-                // (8,18): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language; try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
+                // (8,18): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A.P[int]", "A.get_P(int)", "A.set_P(int, object)")
                     .WithLocation(8, 18),
-                // (9,11): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language; try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
+                // (9,11): error CS1545: Property, indexer, or event 'A.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A.get_P(int)' or 'A.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A.P[int]", "A.get_P(int)", "A.set_P(int, object)")
                     .WithLocation(9, 11)
@@ -1380,11 +1394,13 @@ End Interface";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (5,11): error CS1545: Property, indexer, or event 'IA.P[object]' is not supported by the language; try directly calling accessor methods 'IA.get_P(object)' or 'IA.set_P(object, object)'
+                // (5,11): error CS1545: Property, indexer, or event 'IA.P[object]' is not supported by the
+                // language; try directly calling accessor methods 'IA.get_P(object)' or 'IA.set_P(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("IA.P[object]", "IA.get_P(object)", "IA.set_P(object, object)")
                     .WithLocation(5, 11),
-                // (5,23): error CS1545: Property, indexer, or event 'IA.Q[object]' is not supported by the language; try directly calling accessor methods 'IA.get_Q(object)' or 'IA.set_Q(object, object)'
+                // (5,23): error CS1545: Property, indexer, or event 'IA.Q[object]' is not supported by the
+                // language; try directly calling accessor methods 'IA.get_Q(object)' or 'IA.set_Q(object, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "Q")
                     .WithArguments("IA.Q[object]", "IA.get_Q(object)", "IA.set_Q(object, object)")
                     .WithLocation(5, 23)
@@ -1678,7 +1694,8 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (5,17): error CS7036: There is no argument given that corresponds to the required parameter 'y' of 'B.Q[object, object]'
+                // (5,17): error CS7036: There is no argument given that corresponds to the required parameter 'y'
+                // of 'B.Q[object, object]'
                 //         var o = b.Q[0];
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "b.Q[0]")
                     .WithArguments("y", "B.Q[object, object]")
@@ -1896,19 +1913,27 @@ B2.set_P(6, ...)
 }";
             var compilation4 = CreateCompilation(source4, new[] { reference1, reference2 });
             compilation4.VerifyDiagnostics(
-                // (6,11): error CS1061: 'A2' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'A2' could be found (are you missing a using directive or an assembly reference?)
+                // (6,11): error CS1061: 'A2' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'A2' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("A2", "P")
                     .WithLocation(6, 11),
-                // (6,20): error CS1061: 'A2' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'A2' could be found (are you missing a using directive or an assembly reference?)
+                // (6,20): error CS1061: 'A2' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'A2' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("A2", "P")
                     .WithLocation(6, 20),
-                // (8,11): error CS1061: 'B2' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'B2' could be found (are you missing a using directive or an assembly reference?)
+                // (8,11): error CS1061: 'B2' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'B2' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("B2", "P")
                     .WithLocation(8, 11),
-                // (8,20): error CS1061: 'B2' does not contain a definition for 'P' and no extension method 'P' accepting a first argument of type 'B2' could be found (are you missing a using directive or an assembly reference?)
+                // (8,20): error CS1061: 'B2' does not contain a definition for 'P' and no extension method 'P'
+                // accepting a first argument of type 'B2' could be found (are you missing a using directive or an
+                // assembly reference?)
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "P")
                     .WithArguments("B2", "P")
                     .WithLocation(8, 20)
@@ -2025,19 +2050,23 @@ class C
 }";
             var compilation3 = CreateCompilation(source3, new[] { reference1 });
             compilation3.VerifyDiagnostics(
-                // (13,21): warning CS0108: 'B2.get_P(int)' hides inherited member 'A1.get_P(int)'. Use the new keyword if hiding was intended.
+                // (13,21): warning CS0108: 'B2.get_P(int)' hides inherited member 'A1.get_P(int)'. Use the new
+                // keyword if hiding was intended.
                 Diagnostic(ErrorCode.WRN_NewRequired, "get_P")
                     .WithArguments("B2.get_P(int)", "A1.get_P(int)")
                     .WithLocation(13, 21),
-                // (14,19): warning CS0108: 'B2.set_P(int, object)' hides inherited member 'A1.set_P(int, object)'. Use the new keyword if hiding was intended.
+                // (14,19): warning CS0108: 'B2.set_P(int, object)' hides inherited member 'A1.set_P(int, object)'.
+                // Use the new keyword if hiding was intended.
                 Diagnostic(ErrorCode.WRN_NewRequired, "set_P")
                     .WithArguments("B2.set_P(int, object)", "A1.set_P(int, object)")
                     .WithLocation(14, 19),
-                // (25,12): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language; try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, object)'
+                // (25,12): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A1.P[int]", "A1.get_P(int)", "A1.set_P(int, object)")
                     .WithLocation(25, 12),
-                // (25,22): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language; try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, object)'
+                // (25,22): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, object)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A1.P[int]", "A1.get_P(int)", "A1.set_P(int, object)")
                     .WithLocation(25, 22)
@@ -2073,7 +2102,8 @@ End Interface";
                 Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "a.P[null]")
                     .WithArguments("IA.P[object]")
                     .WithLocation(5, 9),
-                // (6,21): error CS0154: The property or indexer 'IA.Q[object]' cannot be used in this context because it lacks the get accessor
+                // (6,21): error CS0154: The property or indexer 'IA.Q[object]' cannot be used in this context
+                // because it lacks the get accessor
                 Diagnostic(ErrorCode.ERR_PropertyLacksGet, "a.Q[null]")
                     .WithArguments("IA.Q[object]")
                     .WithLocation(6, 21)
@@ -2235,11 +2265,13 @@ End Class";
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,23): error CS0200: Property or indexer 'A.P1[int, int]' cannot be assigned to -- it is read only
+                // (6,23): error CS0200: Property or indexer 'A.P1[int, int]' cannot be assigned to -- it is read
+                // only
                 Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "P1")
                     .WithArguments("A.P1[int, int]")
                     .WithLocation(6, 23),
-                // (7,23): error CS1918: Members of property 'A.P2[int]' of type 'S' cannot be assigned with an object initializer because it is of a value type
+                // (7,23): error CS1918: Members of property 'A.P2[int]' of type 'S' cannot be assigned with an
+                // object initializer because it is of a value type
                 Diagnostic(ErrorCode.ERR_ValueTypePropertyInObjectInitializer, "P2")
                     .WithArguments("A.P2[int]", "S")
                     .WithLocation(7, 23),
@@ -2298,7 +2330,8 @@ class B
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (1,5): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language; try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, int)'
+                // (1,5): error CS1545: Property, indexer, or event 'A1.P[int]' is not supported by the language;
+                // try directly calling accessor methods 'A1.get_P(int)' or 'A1.set_P(int, int)'
                 Diagnostic(ErrorCode.ERR_BindToBogusProp2, "P")
                     .WithArguments("A1.P[int]", "A1.get_P(int)", "A1.set_P(int, int)")
                     .WithLocation(1, 5)
@@ -2340,7 +2373,8 @@ class C
 }";
             var compilation2 = CreateCompilation(source2, new[] { reference1 });
             compilation2.VerifyDiagnostics(
-                // (6,30): error CS1955: Non-invocable member 'IEnumerableOfA.Select[System.Func<IA, object>]' cannot be used like a method.
+                // (6,30): error CS1955: Non-invocable member 'IEnumerableOfA.Select[System.Func<IA, object>]'
+                // cannot be used like a method.
                 Diagnostic(ErrorCode.ERR_NonInvocableMemberCalled, "select o.P")
                     .WithArguments("IEnumerableOfA.Select[System.Func<IA, object>]")
             );
@@ -2479,10 +2513,10 @@ P1(5).get
 
             compilation2.VerifyDiagnostics();
 
-            /*
-             * Intentionally not validating IL as it is just going to show the same generated code as
-             * many of the other tests.  the run results are far more  interesting
-             */
+/*
+* Intentionally not validating IL as it is just going to show the same generated code as
+* many of the other tests.  the run results are far more  interesting
+*/
         }
 
         [ClrOnlyFact]
@@ -2564,10 +2598,10 @@ P1(2).get
 
             compilation2.VerifyDiagnostics();
 
-            /*
-             * Intentionally not validating IL as it is just going to show the same generated code as
-             * many of the other tests.  the run results are far more  interesting
-             */
+/*
+* Intentionally not validating IL as it is just going to show the same generated code as
+* many of the other tests.  the run results are far more  interesting
+*/
         }
 
         [ClrOnlyFact]
@@ -2736,7 +2770,8 @@ class D : CodeModule
                 parseOptions: TestOptions.Regular10
             );
             comp.VerifyDiagnostics(
-                // (4,7): error CS0535: 'C' does not implement interface member 'Microsoft.Vbe.Interop._CodeModule.ProcOfLine[int, out Microsoft.Vbe.Interop.vbext_ProcKind].get'
+                // (4,7): error CS0535: 'C' does not implement interface member
+                // 'Microsoft.Vbe.Interop._CodeModule.ProcOfLine[int, out Microsoft.Vbe.Interop.vbext_ProcKind].get'
                 // class C : CodeModule
                 Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "CodeModule")
                     .WithArguments(

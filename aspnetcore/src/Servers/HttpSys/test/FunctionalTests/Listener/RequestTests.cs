@@ -161,7 +161,8 @@ public class RequestTests
     [InlineData("/base/ball", @"/base/%5cball//path1//path2", @"/base/\ball", "//path1//path2")]
     [InlineData("/base/ball", @"/base/%5Cball//path1//path2", @"/base/\ball", "//path1//path2")]
     [InlineData("/base/ball", @"/base/call/../ball//path1//path2", @"/base/ball", "//path1//path2")]
-    // The results should be "/base/ball", "//path1//path2", but Http.Sys collapses the "//" before the "../"
+    // The results should be "/base/ball", "//path1//path2", but Http.Sys collapses the "//" before the
+    // "../"
     // and we don't have a good way of emulating that.
     [InlineData(
         "/base/ball",

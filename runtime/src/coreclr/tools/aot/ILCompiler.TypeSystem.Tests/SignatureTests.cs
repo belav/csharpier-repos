@@ -160,8 +160,10 @@ namespace TypeSystemTests
         [Fact]
         public void TestSignatureMatchesForArrayShapeDetails_HandlingOfCasesWhichDoNotNeedEmbeddeSignatureData()
         {
-            // Test that ensure the typical case (where the loBounds is 0, and the hibounds is unspecified) doesn't produce an
-            // EmbeddedSignatureData, but that other cases do. This isn't a complete test as ilasm won't actually properly generate the metadata for many of these cases
+            // Test that ensure the typical case (where the loBounds is 0, and the hibounds is unspecified)
+            // doesn't produce an
+            // EmbeddedSignatureData, but that other cases do. This isn't a complete test as ilasm won't
+            // actually properly generate the metadata for many of these cases
             MetadataType modOptTester = _testModule.GetType("", "ModOptTester");
             MethodSignature methodWithModOpt = modOptTester
                 .GetMethods()
@@ -241,7 +243,8 @@ namespace TypeSystemTests
 
             lookupContext.CreateModuleForSimpleName("Lookup", peStream);
 
-            // Use generated assembly to trigger a load through the token created above and verify that it loads correctly
+            // Use generated assembly to trigger a load through the token created above and verify that it loads
+            // correctly
             var ilLookupModule = (EcmaModule)lookupContext.GetModuleForSimpleName("Lookup");
             MethodDesc method4 = ilLookupModule.GetMethod(token);
 
@@ -271,7 +274,8 @@ namespace TypeSystemTests
             lookupContext.SetSystemModule(systemModule);
             lookupContext.CreateModuleForSimpleName("Lookup", peStream);
 
-            // Use generated assembly to trigger a load through the token created above and verify that it loads correctly
+            // Use generated assembly to trigger a load through the token created above and verify that it loads
+            // correctly
             var ilLookupModule = (EcmaModule)lookupContext.GetModuleForSimpleName("Lookup");
             TypeDesc int32ArrayFromLookup = ilLookupModule.GetType(token);
             var typeInLookupContext = lookupContext
@@ -307,7 +311,8 @@ namespace TypeSystemTests
 
             lookupContext.CreateModuleForSimpleName("Lookup", peStream);
 
-            // Use generated assembly to trigger a load through the token created above and verify that it loads correctly
+            // Use generated assembly to trigger a load through the token created above and verify that it loads
+            // correctly
             var ilLookupModule = (EcmaModule)lookupContext.GetModuleForSimpleName("Lookup");
             FieldDesc fieldFound = ilLookupModule.GetField(token);
 

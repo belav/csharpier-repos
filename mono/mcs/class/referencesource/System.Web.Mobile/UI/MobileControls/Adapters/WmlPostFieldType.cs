@@ -20,10 +20,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * WmlPostFieldType enumeration.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * WmlPostFieldType enumeration.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
 
     /// <include file='doc\WmlPostFieldType.uex' path='docs/doc[@for="WmlPostFieldType"]/*' />
     [Obsolete(

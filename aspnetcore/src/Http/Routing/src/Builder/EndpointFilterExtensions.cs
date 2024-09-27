@@ -18,7 +18,8 @@ public static class EndpointFilterExtensions
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="filter">The <see cref="IEndpointFilter"/> to register.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static TBuilder AddEndpointFilter<TBuilder>(
         this TBuilder builder,
         IEndpointFilter filter
@@ -31,10 +32,13 @@ public static class EndpointFilterExtensions
     /// <summary>
     /// Registers a filter of type <typeparamref name="TFilterType"/> onto the route handler.
     /// </summary>
-    /// <typeparam name="TBuilder">The type of the <see cref="IEndpointConventionBuilder"/> to configure.</typeparam>
-    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to register.</typeparam>
+    /// <typeparam name="TBuilder">The type of the <see cref="IEndpointConventionBuilder"/> to
+    // configure.</typeparam>
+    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to
+    // register.</typeparam>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static TBuilder AddEndpointFilter<
         TBuilder,
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
@@ -42,7 +46,8 @@ public static class EndpointFilterExtensions
         where TBuilder : IEndpointConventionBuilder
         where TFilterType : IEndpointFilter
     {
-        // We call `CreateFactory` twice here since the `CreateFactory` API does not support optional arguments.
+        // We call `CreateFactory` twice here since the `CreateFactory` API does not support optional
+        // arguments.
         // See https://github.com/dotnet/runtime/issues/67309 for more info.
         ObjectFactory filterFactory;
         try
@@ -75,30 +80,36 @@ public static class EndpointFilterExtensions
     /// <summary>
     /// Registers a filter of type <typeparamref name="TFilterType"/> onto the route handler.
     /// </summary>
-    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to register.</typeparam>
+    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to
+    // register.</typeparam>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static RouteHandlerBuilder AddEndpointFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
     >(this RouteHandlerBuilder builder)
         where TFilterType : IEndpointFilter
     {
-        // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
+        // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so
+        // you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteHandlerBuilder, TFilterType>();
     }
 
     /// <summary>
     /// Registers a filter of type <typeparamref name="TFilterType"/> onto the route handler.
     /// </summary>
-    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to register.</typeparam>
+    /// <typeparam name="TFilterType">The type of the <see cref="IEndpointFilter"/> to
+    // register.</typeparam>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static RouteGroupBuilder AddEndpointFilter<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TFilterType
     >(this RouteGroupBuilder builder)
         where TFilterType : IEndpointFilter
     {
-        // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so you don't have to specify both arguments most the time.
+        // We have a RouteHandlerBuiler and GroupRouteBuilder-specific AddFilter methods for convenience so
+        // you don't have to specify both arguments most the time.
         return builder.AddEndpointFilter<RouteGroupBuilder, TFilterType>();
     }
 
@@ -107,7 +118,8 @@ public static class EndpointFilterExtensions
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="routeHandlerFilter">A method representing the core logic of the filter.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static TBuilder AddEndpointFilter<TBuilder>(
         this TBuilder builder,
         Func<
@@ -128,7 +140,8 @@ public static class EndpointFilterExtensions
     /// </summary>
     /// <param name="builder">The <see cref="RouteHandlerBuilder"/>.</param>
     /// <param name="filterFactory">A method representing the logic for constructing the filter.</param>
-    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route handler.</returns>
+    /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the route
+    // handler.</returns>
     public static TBuilder AddEndpointFilterFactory<TBuilder>(
         this TBuilder builder,
         Func<

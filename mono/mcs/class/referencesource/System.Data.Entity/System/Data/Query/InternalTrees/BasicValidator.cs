@@ -388,7 +388,8 @@ namespace System.Data.Query.InternalTrees
             // Aconrad 9/21/06 - temporarily removing check here
             //  because the assert wrongly fails in some cases where the types are promotable,
             //  but the facets are not.  Put this back when that issue is solved.
-            // Assert(TypeSemantics.IsEquivalentOrPromotableTo(n.Child0.Op.Type, op.Type), "Illegal SoftCastOp: Cannot promote input type {0} to target type {1}", n.Child0.Op.Type.Identity, op.Type.Identity);
+            // Assert(TypeSemantics.IsEquivalentOrPromotableTo(n.Child0.Op.Type, op.Type), "Illegal SoftCastOp:
+            // Cannot promote input type {0} to target type {1}", n.Child0.Op.Type.Identity, op.Type.Identity);
         }
 
         public override void Visit(NavigateOp op, Node n)

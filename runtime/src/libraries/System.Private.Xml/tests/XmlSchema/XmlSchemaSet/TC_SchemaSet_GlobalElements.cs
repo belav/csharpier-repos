@@ -56,11 +56,14 @@ namespace System.Xml.XmlSchemaTests
         }
 
         // params is a pair of the following info: (namaespace, e2 e2) two schemas are made from this info
-        //[Variation(Desc = "v2.1 - GlobalElements with set with two schemas, both without NS", Params = new object[] { "", "e1", "e2", "", "e3", "e4" })]
+        //[Variation(Desc = "v2.1 - GlobalElements with set with two schemas, both without NS", Params = new
+        // object[] { "", "e1", "e2", "", "e3", "e4" })]
         [InlineData("", "e1", "e2", "", "e3", "e4")]
-        //[Variation(Desc = "v2.2 - GlobalElements with set with two schemas, one without NS one with NS", Params = new object[] { "a", "e1", "e2", "", "e3", "e4" })]
+        //[Variation(Desc = "v2.2 - GlobalElements with set with two schemas, one without NS one with NS",
+        // Params = new object[] { "a", "e1", "e2", "", "e3", "e4" })]
         [InlineData("a", "e1", "e2", "", "e3", "e4")]
-        //[Variation(Desc = "v2.2 - GlobalElements with set with two schemas, both with NS", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4" })]
+        //[Variation(Desc = "v2.2 - GlobalElements with set with two schemas, both with NS", Params = new
+        // object[] { "a", "e1", "e2", "b", "e3", "e4" })]
         [InlineData("a", "e1", "e2", "b", "e3", "e4")]
         [Theory]
         public void v2(
@@ -128,21 +131,29 @@ namespace System.Xml.XmlSchemaTests
         }
 
         // params is a pair of the following info: (namaespace, e1 e2)*, doCompile?
-        //[Variation(Desc = "v3.1 - GlobalElements with a set having schema (nons) to another set with schema(nons)", Params = new object[] { "", "e1", "e2", "", "e3", "e4", true })]
+        //[Variation(Desc = "v3.1 - GlobalElements with a set having schema (nons) to another set with
+        // schema(nons)", Params = new object[] { "", "e1", "e2", "", "e3", "e4", true })]
         [InlineData("", "e1", "e2", "", "e3", "e4", true)]
-        //[Variation(Desc = "v3.2 - GlobalElements with a set having schema (ns) to another set with schema(nons)", Params = new object[] { "a", "e1", "e2", "", "e3", "e4", true })]
+        //[Variation(Desc = "v3.2 - GlobalElements with a set having schema (ns) to another set with
+        // schema(nons)", Params = new object[] { "a", "e1", "e2", "", "e3", "e4", true })]
         [InlineData("a", "e1", "e2", "", "e3", "e4", true)]
-        //[Variation(Desc = "v3.3 - GlobalElements with a set having schema (nons) to another set with schema(ns)", Params = new object[] { "", "e1", "e2", "a", "e3", "e4", true })]
+        //[Variation(Desc = "v3.3 - GlobalElements with a set having schema (nons) to another set with
+        // schema(ns)", Params = new object[] { "", "e1", "e2", "a", "e3", "e4", true })]
         [InlineData("", "e1", "e2", "a", "e3", "e4", true)]
-        //[Variation(Desc = "v3.4 - GlobalElements with a set having schema (ns) to another set with schema(ns)", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4", true })]
+        //[Variation(Desc = "v3.4 - GlobalElements with a set having schema (ns) to another set with
+        // schema(ns)", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4", true })]
         [InlineData("a", "e1", "e2", "b", "e3", "e4", true)]
-        //[Variation(Desc = "v3.5 - GlobalElements with a set having schema (nons) to another set with schema(nons), no compile", Params = new object[] { "", "e1", "e2", "", "e3", "e4", false })]
+        //[Variation(Desc = "v3.5 - GlobalElements with a set having schema (nons) to another set with
+        // schema(nons), no compile", Params = new object[] { "", "e1", "e2", "", "e3", "e4", false })]
         [InlineData("", "e1", "e2", "", "e3", "e4", false)]
-        //[Variation(Desc = "v3.6 - GlobalElements with a set having schema (ns) to another set with schema(nons), no compile", Params = new object[] { "a", "e1", "e2", "", "e3", "e4", false })]
+        //[Variation(Desc = "v3.6 - GlobalElements with a set having schema (ns) to another set with
+        // schema(nons), no compile", Params = new object[] { "a", "e1", "e2", "", "e3", "e4", false })]
         [InlineData("a", "e1", "e2", "", "e3", "e4", false)]
-        //[Variation(Desc = "v3.7 - GlobalElements with a set having schema (nons) to another set with schema(ns), no compile", Params = new object[] { "", "e1", "e2", "a", "e3", "e4", false })]
+        //[Variation(Desc = "v3.7 - GlobalElements with a set having schema (nons) to another set with
+        // schema(ns), no compile", Params = new object[] { "", "e1", "e2", "a", "e3", "e4", false })]
         [InlineData("", "e1", "e2", "a", "e3", "e4", false)]
-        //[Variation(Desc = "v3.8 - GlobalElements with a set having schema (ns) to another set with schema(ns), no compile", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4", false })]
+        //[Variation(Desc = "v3.8 - GlobalElements with a set having schema (ns) to another set with
+        // schema(ns), no compile", Params = new object[] { "a", "e1", "e2", "b", "e3", "e4", false })]
         [InlineData("a", "e1", "e2", "b", "e3", "e4", false)]
         [Theory]
         public void v3(
@@ -219,9 +230,11 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v4.1 - GlobalElements with set having one which imports another, remove one", Priority = 1, Params = new object[] { "import_v1_a.xsd", "ns-a", "e1", "", "e2" })]
+        //[Variation(Desc = "v4.1 - GlobalElements with set having one which imports another, remove one",
+        // Priority = 1, Params = new object[] { "import_v1_a.xsd", "ns-a", "e1", "", "e2" })]
         [InlineData("import_v1_a.xsd", "ns-a", "e1", "", "e2")]
-        //[Variation(Desc = "v4.2 - GlobalElements with set having one which imports another, remove one", Priority = 1, Params = new object[] { "import_v2_a.xsd", "ns-a", "e1", "ns-b", "e2" })]
+        //[Variation(Desc = "v4.2 - GlobalElements with set having one which imports another, remove one",
+        // Priority = 1, Params = new object[] { "import_v2_a.xsd", "ns-a", "e1", "ns-b", "e2" })]
         [InlineData("import_v2_a.xsd", "ns-a", "e1", "ns-b", "e2")]
         [Theory]
         public void v4(object param0, object param1, object param2, object param3, object param4)
@@ -271,9 +284,13 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v5.1 - GlobalElements with set having one which imports another, then removerecursive", Priority = 1, Params = new object[] { "import_v1_a.xsd", "ns-a", "e1", "", "e2" })]
+        //[Variation(Desc = "v5.1 - GlobalElements with set having one which imports another, then
+        // removerecursive", Priority = 1, Params = new object[] { "import_v1_a.xsd", "ns-a", "e1", "", "e2"
+        // })]
         [InlineData("import_v1_a.xsd", "ns-a", "e1", "", "e2")]
-        //[Variation(Desc = "v5.2 - GlobalElements with set having one which imports another, then removerecursive", Priority = 1, Params = new object[] { "import_v2_a.xsd", "ns-a", "e1", "ns-b", "e2" })]
+        //[Variation(Desc = "v5.2 - GlobalElements with set having one which imports another, then
+        // removerecursive", Priority = 1, Params = new object[] { "import_v2_a.xsd", "ns-a", "e1", "ns-b",
+        // "e2" })]
         [InlineData("import_v2_a.xsd", "ns-a", "e1", "ns-b", "e2")]
         [Theory]
         public void v5(object param0, object param1, object param2, object param3, object param4)
@@ -318,7 +335,8 @@ namespace System.Xml.XmlSchemaTests
             return;
         }
 
-        //[Variation(Desc = "v6 - GlobalElements with set with two schemas, second schema will fail to compile, no elements from it should be added", Params = new object[] { "", "e1", "e2" })]
+        //[Variation(Desc = "v6 - GlobalElements with set with two schemas, second schema will fail to
+        // compile, no elements from it should be added", Params = new object[] { "", "e1", "e2" })]
         [InlineData("", "e1", "e2")]
         [Theory]
         public void v6(object param0, object param1, object param2)

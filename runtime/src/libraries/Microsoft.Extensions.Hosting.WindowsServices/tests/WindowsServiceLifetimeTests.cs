@@ -278,7 +278,8 @@ namespace Microsoft.Extensions.Hosting
                 var statusEx = serviceTester.QueryServiceStatusEx();
                 var serviceProcess = Process.GetProcessById(statusEx.dwProcessId);
 
-                // Give a chance for all asynchronous "started" events to be raised, these happen after the service status changes to started
+                // Give a chance for all asynchronous "started" events to be raised, these happen after the service
+                // status changes to started
                 Thread.Sleep(1000);
 
                 serviceTester.Stop();

@@ -42,8 +42,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
     private IDuplexPipe? _transport;
 
-    // Used for reconnect (when enabled) to determine if the close was ungraceful or not, reconnect only happens on ungraceful disconnect
-    // The assumption is that a graceful close was triggered purposefully by either the client or server and a reconnect shouldn't occur
+    // Used for reconnect (when enabled) to determine if the close was ungraceful or not, reconnect only
+    // happens on ungraceful disconnect
+    // The assumption is that a graceful close was triggered purposefully by either the client or server
+    // and a reconnect shouldn't occur
     private bool _gracefulClose;
     private Func<PipeWriter, Task>? _notifyOnReconnect;
 
@@ -86,7 +88,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 
         _closeTimeout = _httpConnectionOptions.CloseTimeout;
 
-        // We were given an updated delegate from the HttpConnection and we are updating what we have in httpOptions
+        // We were given an updated delegate from the HttpConnection and we are updating what we have in
+        // httpOptions
         // options itself is copied object of user's options
         _httpConnectionOptions.AccessTokenProvider = accessTokenProvider;
 
@@ -116,8 +119,13 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
             );
 #endif
 
-            // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
-            // See: https://github.com/aspnet/Security/blob/ff9f145a8e89c9756ea12ff10c6d47f2f7eb345f/src/Microsoft.AspNetCore.Authentication.Cookies/Events/CookieAuthenticationEvents.cs#L42
+            // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status
+            // code
+            // See:
+            //
+            //
+            //
+            // https://github.com/aspnet/Security/blob/ff9f145a8e89c9756ea12ff10c6d47f2f7eb345f/src/Microsoft.AspNetCore.Authentication.Cookies/Events/CookieAuthenticationEvents.cs#L42
             webSocket.Options.SetRequestHeader("X-Requested-With", "XMLHttpRequest");
         }
 
@@ -159,7 +167,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                 if (context.Options.Credentials != null)
                 {
                     webSocket.Options.Credentials = context.Options.Credentials;
-                    // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to HTTP/1.1 in that case
+                    // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to
+                    // HTTP/1.1 in that case
                     // https://github.com/dotnet/runtime/issues/1582
 #if NET7_0_OR_GREATER
                     allowHttp2 = false;
@@ -180,7 +189,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                         .Value;
                     if (context.Options.UseDefaultCredentials.Value)
                     {
-                        // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to HTTP/1.1 in that case
+                        // Negotiate Auth isn't supported over HTTP/2 and HttpClient does not gracefully fallback to
+                        // HTTP/1.1 in that case
                         // https://github.com/dotnet/runtime/issues/1582
 #if NET7_0_OR_GREATER
                         allowHttp2 = false;
@@ -193,7 +203,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 #if NET7_0_OR_GREATER
                 if (webSocket.Options.HttpVersion >= HttpVersion.Version20 && allowHttp2)
                 {
-                    // Reset options we set on the users' behalf since they are already on the HttpClient that we're passing to ConnectAsync
+                    // Reset options we set on the users' behalf since they are already on the HttpClient that we're
+                    // passing to ConnectAsync
                     // And ConnectAsync will throw if these options are set on the ClientWebSocketOptions
                     if (ReferenceEquals(webSocket.Options.Cookies, context.Options.Cookies))
                     {
@@ -274,13 +285,15 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 #endif
         )
         {
-            // Apply access token logic when using HTTP/1.1 because we don't use the AccessTokenHttpMessageHandler via HttpClient unless the user specifies HTTP/2.0 or higher
+            // Apply access token logic when using HTTP/1.1 because we don't use the
+            // AccessTokenHttpMessageHandler via HttpClient unless the user specifies HTTP/2.0 or higher
             var accessToken = await _httpConnectionOptions
                 .AccessTokenProvider()
                 .ConfigureAwait(false);
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
-                // We can't use request headers in the browser, so instead append the token as a query string in that case
+                // We can't use request headers in the browser, so instead append the token as a query string in
+                // that case
                 if (OperatingSystem.IsBrowser())
                 {
                     var accessTokenEncoded = UrlEncoder.Default.Encode(accessToken);
@@ -298,7 +311,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         {
 #if NET7_0_OR_GREATER
             // Only share the HttpClient if the user opts-in to HTTP/2 (or higher)
-            // This is because there is some non-obvious behavior changes when passing in an invoker to ConnectAsync
+            // This is because there is some non-obvious behavior changes when passing in an invoker to
+            // ConnectAsync
             // and there isn't really any benefit to sharing the HttpClient in HTTP/1.1
             if (webSocket.Options.HttpVersion > HttpVersion.Version11)
             {
@@ -380,6 +394,10 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         }
 
         // TODO: Handle TCP connection errors
+        //
+        //
+        //
+        //
         // https://github.com/SignalR/SignalR/blob/1fba14fa3437e24c204dfaf8a18db3fce8acad3c/src/Microsoft.AspNet.SignalR.Core/Owin/WebSockets/WebSocketHandler.cs#L248-L251
         Running = ProcessSocketAsync(_webSocket, url, isReconnect);
     }
@@ -524,7 +542,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 #endif
                 var memory = _application.Output.GetMemory();
 #if NETSTANDARD2_1 || NETCOREAPP
-                // Because we checked the CloseStatus from the 0 byte read above, we don't need to check again after reading
+                // Because we checked the CloseStatus from the 0 byte read above, we don't need to check again after
+                // reading
                 var receiveResult = await socket
                     .ReceiveAsync(memory, _stopCts.Token)
                     .ConfigureAwait(false);
@@ -539,7 +558,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
 #else
 #error TFMs need to be updated
 #endif
-                // Need to check again for netstandard2.1 because a close can happen between a 0-byte read and the actual read
+                // Need to check again for netstandard2.1 because a close can happen between a 0-byte read and the
+                // actual read
                 if (receiveResult.MessageType == WebSocketMessageType.Close)
                 {
                     _gracefulClose = true;
@@ -691,7 +711,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
                     }
                     else
                     {
-                        // WebSocket in the browser doesn't have an equivalent to CloseOutputAsync, it just calls CloseAsync and logs a warning
+                        // WebSocket in the browser doesn't have an equivalent to CloseOutputAsync, it just calls CloseAsync
+                        // and logs a warning
                         // So let's just call CloseAsync to avoid the warning
                         await socket
                             .CloseAsync(
@@ -777,7 +798,8 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
         catch (Exception ex)
         {
             Log.TransportStopped(_logger, ex);
-            // exceptions have been handled in the Running task continuation by closing the channel with the exception
+            // exceptions have been handled in the Running task continuation by closing the channel with the
+            // exception
             return;
         }
         finally
@@ -793,9 +815,11 @@ internal sealed partial class WebSocketsTransport : ITransport, IStatefulReconne
     {
         lock (this)
         {
-            // Lock and check _useStatefulReconnect, we want to swap the Pipe completely before DisableReconnect returns if there is contention there.
+            // Lock and check _useStatefulReconnect, we want to swap the Pipe completely before DisableReconnect
+            // returns if there is contention there.
             // The calling code will start completing the transport after DisableReconnect
-            // so we want to avoid any possibility of the new Pipe staying alive or even worse a new WebSocket connection being open when the transport
+            // so we want to avoid any possibility of the new Pipe staying alive or even worse a new WebSocket
+            // connection being open when the transport
             // might think it's closed.
             if (_useStatefulReconnect == false)
             {

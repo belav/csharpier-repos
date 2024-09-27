@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true, signifiying that you can call the open and close document APIs to add the document into the open document list.
+        /// Returns true, signifiying that you can call the open and close document APIs to add the document
+        // into the open document list.
         /// </summary>
         public override bool CanOpenDocuments => true;
 

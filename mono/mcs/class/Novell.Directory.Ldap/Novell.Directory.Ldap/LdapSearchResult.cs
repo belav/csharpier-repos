@@ -90,7 +90,7 @@ namespace Novell.Directory.Ldap
         /// </summary>
         /// <param name="message">The RfcLdapMessage with a search result.
         /// </param>
-        /*package*/
+/*package*/
         internal LdapSearchResult(RfcLdapMessage message)
             : base(message)
         {

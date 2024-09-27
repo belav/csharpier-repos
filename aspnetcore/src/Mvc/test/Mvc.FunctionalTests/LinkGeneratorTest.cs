@@ -96,7 +96,8 @@ public class LinkGeneratorTest
         Assert.Equal("/Admin/LG3/SomeAction", responseContent);
     }
 
-    // This will fallback to the non-area route because the calling code relies on ambient values, but doesn't pass
+    // This will fallback to the non-area route because the calling code relies on ambient values, but
+    // doesn't pass
     // the HttpContext.
     [Fact]
     public async Task GetPathByAction_FailsToGenerateLinkInsideArea()

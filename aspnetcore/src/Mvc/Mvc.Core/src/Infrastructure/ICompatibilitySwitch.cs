@@ -27,8 +27,10 @@ public interface ICompatibilitySwitch
     /// Gets or set the value associated with the compatibility switch.
     /// </summary>
     /// <remarks>
-    /// Setting the switch value using <see cref="Value"/> will not set <see cref="IsValueSet"/> to <c>true</c>.
-    /// This should be used by the compatibility infrastructure when <see cref="IsValueSet"/> is <c>false</c>
+    /// Setting the switch value using <see cref="Value"/> will not set <see cref="IsValueSet"/> to
+    // <c>true</c>.
+    /// This should be used by the compatibility infrastructure when <see cref="IsValueSet"/> is
+    // <c>false</c>
     /// to apply a compatibility value based on <see cref="CompatibilityVersion"/>.
     /// </remarks>
     object Value { get; set; }

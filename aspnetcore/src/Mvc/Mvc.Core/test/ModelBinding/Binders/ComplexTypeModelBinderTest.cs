@@ -923,7 +923,8 @@ public class ComplexTypeModelBinderTest
 
         var binder = CreateBinder(bindingContext.ModelMetadata);
 
-        // Attempt to set non-Nullable property to null. BindRequiredAttribute should not be relevant in this
+        // Attempt to set non-Nullable property to null. BindRequiredAttribute should not be relevant in
+        // this
         // case because the property did have a result.
         var property = GetMetadataForProperty(model.GetType(), nameof(ModelWithBindRequired.Age));
         binder.Results[property] = ModelBindingResult.Success(model: null);

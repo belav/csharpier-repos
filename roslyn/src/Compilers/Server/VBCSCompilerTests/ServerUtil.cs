@@ -135,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         /// </summary>
         internal async Task WaitForServerAsync()
         {
-            // The contract of this function is that it will return once the server has started.  Spin here until
+            // The contract of this function is that it will return once the server has started.  Spin here
+            // until
             // we can verify the server has started or simply failed to start.
             var mutexName = BuildServerConnection.GetServerMutexName(PipeName);
             while (

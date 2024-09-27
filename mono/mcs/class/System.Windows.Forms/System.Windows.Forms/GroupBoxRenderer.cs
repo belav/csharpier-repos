@@ -165,9 +165,12 @@ namespace System.Windows.Forms
             }
             else
             {
-                // MS has a pretty big bug when rendering the non-visual styles group box.  Instead of using the height
-                // part of the bounds as height, they use it as the bottom, so the boxes are drawn in completely different
-                // places.  Rather than emulate this bug, we do it correctly.  After googling for a while, I don't think
+                // MS has a pretty big bug when rendering the non-visual styles group box.  Instead of using the
+                // height
+                // part of the bounds as height, they use it as the bottom, so the boxes are drawn in completely
+                // different
+                // places.  Rather than emulate this bug, we do it correctly.  After googling for a while, I don't
+                // think
                 // anyone has ever actually used this class for anything, so it should be fine.  :)
                 Rectangle new_bounds = new Rectangle(
                     bounds.Left,

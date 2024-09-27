@@ -12,8 +12,10 @@ namespace Microsoft.EntityFrameworkCore;
 public static class SqlServerEntityTypeMappingFragmentExtensions
 {
     /// <summary>
-    ///     Returns a value indicating whether to use the SQL OUTPUT clause when saving changes to the associated table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     Returns a value indicating whether to use the SQL OUTPUT clause when saving changes to the
+    // associated table.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <param name="fragment">The entity type mapping fragment.</param>
     /// <returns>The configured value.</returns>
@@ -23,7 +25,8 @@ public static class SqlServerEntityTypeMappingFragmentExtensions
 
     /// <summary>
     ///     Sets whether to use the SQL OUTPUT clause when saving changes to the associated table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <param name="fragment">The entity type mapping fragment.</param>
     /// <param name="useSqlOutputClause">The value to set.</param>
@@ -34,11 +37,13 @@ public static class SqlServerEntityTypeMappingFragmentExtensions
 
     /// <summary>
     ///     Sets whether to use the SQL OUTPUT clause when saving changes to the associated table.
-    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with triggers.
+    ///     The OUTPUT clause is incompatible with certain SQL Server features, such as tables with
+    // triggers.
     /// </summary>
     /// <param name="fragment">The entity type mapping fragment.</param>
     /// <param name="useSqlOutputClause">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? UseSqlOutputClause(
         this IConventionEntityTypeMappingFragment fragment,
@@ -55,7 +60,8 @@ public static class SqlServerEntityTypeMappingFragmentExtensions
                 ?.Value;
 
     /// <summary>
-    ///     Gets the configuration source for the setting whether to use the SQL OUTPUT clause when saving changes to the associated table.
+    ///     Gets the configuration source for the setting whether to use the SQL OUTPUT clause when
+    // saving changes to the associated table.
     /// </summary>
     /// <param name="fragment">The entity type mapping fragment.</param>
     /// <returns>The configuration source for the configured value.</returns>

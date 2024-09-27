@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer;
 /// Exports an <see cref="ILspServiceFactory"/> that is used by LSP server instances
 /// to create new instances of the <see cref="ILspService"/> each time an LSP server is started.
 ///
-/// The services created by the <see cref="ILspServiceFactory"/> are disposed of by <see cref="LspServices"/>
+/// The services created by the <see cref="ILspServiceFactory"/> are disposed of by <see
+// cref="LspServices"/>
 /// when the LSP server instance shuts down.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false), MetadataAttribute]
@@ -31,7 +32,8 @@ internal class ExportLspServiceFactoryAttribute : ExportAttribute
     public WellKnownLspServerKinds ServerKind { get; }
 
     /// <summary>
-    /// Services MEF exported as <see cref="ILspServiceFactory"/> are statefull as <see cref="LspServices"/>
+    /// Services MEF exported as <see cref="ILspServiceFactory"/> are statefull as <see
+    // cref="LspServices"/>
     /// creates a new instance for each server instance.
     /// </summary>
     public bool IsStateless { get; } = false;

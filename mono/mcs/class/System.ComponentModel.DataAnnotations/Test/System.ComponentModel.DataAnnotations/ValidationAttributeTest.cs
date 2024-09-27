@@ -404,12 +404,17 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
             Assert.Throws<NotImplementedException>(
                 () =>
                 {
-                    // It calls IsValid (object, validationContext) which throws the NIEX, but when that overload is called directly, there's
+                    // It calls IsValid (object, validationContext) which throws the NIEX, but when that overload is
+                    // called directly, there's
                     // no exception.
                     //
-                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
+                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value,
+                    // ValidationContext validationContext)
                     // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value)
-                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object() in C:\Users\grendel\Documents\Visual Studio 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line 450
+                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object() in
+                    // C:\Users\grendel\Documents\Visual Studio
+                    // 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line
+                    // 450
                     attr.IsValid(null);
                 },
                 "#A1-1"
@@ -473,14 +478,29 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 {
                     // Thrown from the IsValid (object, ValidationContext) overload!
                     //
-                    // MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object_ValidationContext_02:
-                    // System.NotImplementedException : IsValid(object value) has not been implemented by this class.  The preferred entry point is GetValidationResult() and classes should override IsValid(object value, ValidationContext context).
                     //
-                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
-                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidateSomethingAttribute.IsValid(Object value) in C:\Users\grendel\Documents\Visual Studio 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line 639
-                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value, ValidationContext validationContext)
-                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidateSomethingAttribute.IsValid(Object value) in C:\Users\grendel\Documents\Visual Studio 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line 639
-                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object_ValidationContext_02() in C:\Users\grendel\Documents\Visual Studio 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line 514
+                    // MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object_ValidationContext_02:
+                    // System.NotImplementedException : IsValid(object value) has not been implemented by this class.
+                    // The preferred entry point is GetValidationResult() and classes should override IsValid(object value,
+                    // ValidationContext context).
+                    //
+                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value,
+                    // ValidationContext validationContext)
+                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidateSomethingAttribute.IsValid(Object
+                    // value) in C:\Users\grendel\Documents\Visual Studio
+                    // 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line
+                    // 639
+                    // at System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(Object value,
+                    // ValidationContext validationContext)
+                    // at MonoTests.System.ComponentModel.DataAnnotations.ValidateSomethingAttribute.IsValid(Object
+                    // value) in C:\Users\grendel\Documents\Visual Studio
+                    // 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line
+                    // 639
+                    // at
+                    // MonoTests.System.ComponentModel.DataAnnotations.ValidationAttributeTest.IsValid_Object_ValidationContext_02()
+                    // in C:\Users\grendel\Documents\Visual Studio
+                    // 2010\Projects\System.Web.Test\System.Web.Test\System.ComponentModel.DataAnnotations\ValidationAttributeTest.cs:line
+                    // 514
                     attr.IsValid("stuff");
                 },
                 "#A1"

@@ -19,9 +19,12 @@ namespace Microsoft.CodeAnalysis.MSBuild.Rpc;
 /// Implements the server side of the RPC channel used to communicate with the build host.
 /// </summary>
 /// <remarks>
-/// The RPC system implemented here is pretty close to something like JSON-RPC; however since we need the Build Host to be usable in Source Build
-/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable in Source Build. Thus existing solutions like StreamJsonRpc
-/// are out. If at some point there is a standard RPC mechanism exposed in .NET or Source Build, we should delete this and use that instead.
+/// The RPC system implemented here is pretty close to something like JSON-RPC; however since we
+// need the Build Host to be usable in Source Build
+/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable
+// in Source Build. Thus existing solutions like StreamJsonRpc
+/// are out. If at some point there is a standard RPC mechanism exposed in .NET or Source Build, we
+// should delete this and use that instead.
 /// </remarks>
 internal sealed class RpcServer
 {
@@ -42,7 +45,8 @@ internal sealed class RpcServer
 
     public int AddTarget(object rpcTarget)
     {
-        // Loop until we successfully have a new index for this; practically we don't expect this to ever collide, since that'd mean we'd have
+        // Loop until we successfully have a new index for this; practically we don't expect this to ever
+        // collide, since that'd mean we'd have
         // billions of long lived projects, but...
         while (true)
         {
@@ -53,7 +57,8 @@ internal sealed class RpcServer
     }
 
     /// <summary>
-    /// Runs the server, waiting for responses. The task is completed when the receiving stream closes (and thus no more requests can come in), or
+    /// Runs the server, waiting for responses. The task is completed when the receiving stream closes
+    // (and thus no more requests can come in), or
     /// <see cref="Shutdown"/> is called.
     /// </summary>
     public async Task RunAsync()
@@ -83,8 +88,10 @@ internal sealed class RpcServer
 
             var runningTask = Task.Run(() => ProcessRequestAsync(request));
 
-            // We'll add this task to the list of running tasks, and then create a continuation to remove it from the list again; this ensures
-            // that we won't try to remove it before it was added in case the task completed by the time we got here.
+            // We'll add this task to the list of running tasks, and then create a continuation to remove it
+            // from the list again; this ensures
+            // that we won't try to remove it before it was added in case the task completed by the time we got
+            // here.
             runningTasks.Add(runningTask);
             _ = runningTask.ContinueWith(
                 _ => Contract.ThrowIfFalse(runningTasks.Remove(runningTask)),
@@ -94,12 +101,19 @@ internal sealed class RpcServer
             );
         }
 
-        // Wait until all outstanding requests are processed; we however first must copy this into a list safely
-        // since the collection might get modified while we're calling Task.WhenAll. The problem is (as of this writing)
-        // ConcurrentSet implements ICollection, and all the common helpers like EnumerableExtension.ToArray(), ToList(),
-        // etc. all have an optimization where if the IEnumerable implements ICollection, the helpers ask for the count
-        // and pre-allocate an array. But if the collection then gets smaller, the array is never resized and so you'll end
-        // up with nulls. See the comment at https://github.com/dotnet/runtime/blob/46c8a668eb4bbc66d9eb988d2988ecc84074be10/src/libraries/Common/src/System/Collections/Generic/EnumerableHelpers.cs#L29-L34
+        // Wait until all outstanding requests are processed; we however first must copy this into a list
+        // safely
+        // since the collection might get modified while we're calling Task.WhenAll. The problem is (as of
+        // this writing)
+        // ConcurrentSet implements ICollection, and all the common helpers like
+        // EnumerableExtension.ToArray(), ToList(),
+        // etc. all have an optimization where if the IEnumerable implements ICollection, the helpers ask
+        // for the count
+        // and pre-allocate an array. But if the collection then gets smaller, the array is never resized
+        // and so you'll end
+        // up with nulls. See the comment at
+        //
+        // https://github.com/dotnet/runtime/blob/46c8a668eb4bbc66d9eb988d2988ecc84074be10/src/libraries/Common/src/System/Collections/Generic/EnumerableHelpers.cs#L29-L34
         // for example of this concern.
         var remainingTasks = new List<Task>(capacity: runningTasks.Count);
         foreach (var task in runningTasks)
@@ -149,8 +163,10 @@ internal sealed class RpcServer
 
             for (var i = 0; i < methodParameters.Length; i++)
             {
-                // If the method we're calling accepts a cancellation token, we wouldn't have passed that, so add in a CancellationToken.None here. Although we could
-                // remove the cancellation from the underlying method, this keeps that support around should we need it.
+                // If the method we're calling accepts a cancellation token, we wouldn't have passed that, so add in
+                // a CancellationToken.None here. Although we could
+                // remove the cancellation from the underlying method, this keeps that support around should we need
+                // it.
                 if (i == methodParameters.Length - 1 && lastParameterIsCancellationToken)
                     arguments[i] = CancellationToken.None;
                 else
@@ -165,8 +181,10 @@ internal sealed class RpcServer
             {
                 await task.ConfigureAwait(false);
 
-                // If it's actually a Task<T> then get the result; we're looking at the declared return type because in some cases a method might
-                // return a Task<T> under the covers as a workaround for the lack of TaskCompletionSource on .NET Framework but we don't want to see
+                // If it's actually a Task<T> then get the result; we're looking at the declared return type because
+                // in some cases a method might
+                // return a Task<T> under the covers as a workaround for the lack of TaskCompletionSource on .NET
+                // Framework but we don't want to see
                 // that workaround since the result isn't intended to be seen.
                 if (method.ReturnType.IsConstructedGenericType)
                 {
@@ -203,7 +221,8 @@ internal sealed class RpcServer
         );
 
 #if DEBUG
-        // Assert we didn't put a newline in this, since if we did the receiving side won't know how to parse it
+        // Assert we didn't put a newline in this, since if we did the receiving side won't know how to
+        // parse it
         Contract.ThrowIfTrue(responseJson.Contains("\r") || responseJson.Contains("\n"));
 #endif
         using (await _sendingStreamSemaphore.DisposableWaitAsync().ConfigureAwait(false))

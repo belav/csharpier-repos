@@ -107,7 +107,8 @@ namespace System.Text.Json.Serialization.Tests
                 //Struct as array element (same as struct being root).
                 ImmutableArray.Create(employee);
 
-            // Regardless of using preserve, do not emit $id to value types; that is why we compare against default.
+            // Regardless of using preserve, do not emit $id to value types; that is why we compare against
+            // default.
             string actual = await Serializer.SerializeWrapper(array, s_serializerOptionsPreserve);
             string expected = await Serializer.SerializeWrapper(array);
 
@@ -237,7 +238,8 @@ namespace System.Text.Json.Serialization.Tests
             List<ClassIncorrectHashCode> listCopy = await Serializer.DeserializeWrapper<
                 List<ClassIncorrectHashCode>
             >(json, s_serializerOptionsPreserve);
-            // Make sure that our DefaultReferenceResolver calls the ReferenceEqualityComparer that implements RuntimeHelpers.GetHashCode, and never object.GetHashCode,
+            // Make sure that our DefaultReferenceResolver calls the ReferenceEqualityComparer that implements
+            // RuntimeHelpers.GetHashCode, and never object.GetHashCode,
             // otherwise objects would not be correctly identified when searching for them in the dictionary.
             Assert.Same(listCopy[0], listCopy[1]);
         }

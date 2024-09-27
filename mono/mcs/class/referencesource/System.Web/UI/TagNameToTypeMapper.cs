@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Base Control factory implementation
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Base Control factory implementation
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -38,10 +38,10 @@ namespace System.Web.UI
     /// </devdoc>
     internal interface ITagNameToTypeMapper
     {
-        /*
-         * Return the Type of the control that should handle a tag with the
-         * passed in properties.
-         */
+/*
+* Return the Type of the control that should handle a tag with the
+* passed in properties.
+*/
 
         /// <devdoc>
         ///    <para>Retrieves the .NET Framework type that should process
@@ -144,7 +144,8 @@ namespace System.Web.UI
             // If we're in the designer, check the WebFormsReferenceManager and ITypeResolutionService first.
             if (_parser.FInDesigner && (_parser.DesignerHost != null))
             {
-                // If we are in the DesignTimeThemes Host, we can't actually go down this code path, let the TypeResolutionService try instead
+                // If we are in the DesignTimeThemes Host, we can't actually go down this code path, let the
+                // TypeResolutionService try instead
                 if (_parser.DesignerHost.RootComponent != null)
                 {
                     WebFormsRootDesigner rootDesigner =
@@ -187,7 +188,8 @@ namespace System.Web.UI
             if (!HostingEnvironment.IsHosted)
                 return null;
 
-            // If the assembly was not specified, look for the type in the code assemblies (including sub code assemblies)
+            // If the assembly was not specified, look for the type in the code assemblies (including sub code
+            // assemblies)
             return BuildManager.GetTypeFromCodeAssembly(
                 typeName,
                 true /*ignoreCase*/
@@ -239,7 +241,8 @@ namespace System.Web.UI
             }
 
             // DevDiv 168561
-            // If we cannot find the type, we make a second pass and allow exceptions to be thrown so that we can
+            // If we cannot find the type, we make a second pass and allow exceptions to be thrown so that we
+            // can
             // track the actual failure.
             if (foundType == null)
             {
@@ -501,10 +504,10 @@ namespace System.Web.UI
             RegisterTag(ucRegisterEntry.TagPrefix + ":" + ucRegisterEntry.TagName, type);
         }
 
-        /*
-         * Check if the tagName can be handled by a user control register directive.
-         * If so, process the directive and return true.
-         */
+/*
+* Check if the tagName can be handled by a user control register directive.
+* If so, process the directive and return true.
+*/
         private bool TryUserControlRegisterDirectives(string tagName)
         {
             if (_userControlRegisterEntries == null)
@@ -554,10 +557,10 @@ namespace System.Web.UI
             return true;
         }
 
-        /*
-         * Check if the tagName can be handled by a namespace register directive.
-         * If so, process the directive and return true.
-         */
+/*
+* Check if the tagName can be handled by a namespace register directive.
+* If so, process the directive and return true.
+*/
         private bool TryNamespaceRegisterDirectives(string prefix)
         {
             if (_tagNamespaceRegisterEntries == null)

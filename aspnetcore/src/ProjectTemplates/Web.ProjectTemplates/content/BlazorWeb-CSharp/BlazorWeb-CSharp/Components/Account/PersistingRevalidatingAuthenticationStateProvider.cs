@@ -11,9 +11,12 @@ using Microsoft.Extensions.Options;
 
 namespace BlazorWeb_CSharp.Components.Account;
 
-// This is a server-side AuthenticationStateProvider that revalidates the security stamp for the connected user
-// every 30 minutes an interactive circuit is connected. It also uses PersistentComponentState to flow the
-// authentication state to the client which is then fixed for the lifetime of the WebAssembly application.
+// This is a server-side AuthenticationStateProvider that revalidates the security stamp for the
+// connected user
+// every 30 minutes an interactive circuit is connected. It also uses PersistentComponentState to
+// flow the
+// authentication state to the client which is then fixed for the lifetime of the WebAssembly
+// application.
 internal sealed class PersistingRevalidatingAuthenticationStateProvider
     : RevalidatingServerAuthenticationStateProvider
 {

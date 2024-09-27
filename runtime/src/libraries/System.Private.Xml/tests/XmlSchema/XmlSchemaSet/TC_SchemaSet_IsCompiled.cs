@@ -28,7 +28,8 @@ namespace System.Xml.XmlSchemaTests
         }
 
         //-----------------------------------------------------------------------------------
-        //[Variation(Desc = "v2 - IsCompiled, add one, Compile, IsCompiled, add one IsCompiled", Priority = 0)]
+        //[Variation(Desc = "v2 - IsCompiled, add one, Compile, IsCompiled, add one IsCompiled", Priority =
+        // 0)]
         [Fact]
         public void v2()
         {

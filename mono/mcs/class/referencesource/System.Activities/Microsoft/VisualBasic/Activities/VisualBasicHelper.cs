@@ -35,7 +35,8 @@ namespace Microsoft.VisualBasic.Activities
         }
 
         // the following assemblies are provided to the compiler by default
-        // items are public so the decompiler knows which assemblies it doesn't need to reference for interfaces
+        // items are public so the decompiler knows which assemblies it doesn't need to reference for
+        // interfaces
         public static readonly HashSet<Assembly> DefaultReferencedAssemblies = new HashSet<Assembly>
         {
             typeof(int).Assembly, // mscorlib
@@ -104,7 +105,8 @@ namespace Microsoft.VisualBasic.Activities
         {
             if (HostedCompilerCache == null)
             {
-                // we don't want to newup a Dictionary everytime GetCachedHostedCompiler is called only to find out the cache is already initialized.
+                // we don't want to newup a Dictionary everytime GetCachedHostedCompiler is called only to find out
+                // the cache is already initialized.
                 Interlocked.CompareExchange(
                     ref HostedCompilerCache,
                     new Dictionary<HashSet<Assembly>, HostedCompilerWrapper>(
@@ -167,7 +169,8 @@ namespace Microsoft.VisualBasic.Activities
         LocationReferenceEnvironment environment;
         CodeActivityPublicEnvironmentAccessor? publicAccessor;
 
-        // this is a flag to differentiate the cached short-cut Rewrite from the normal post-compilation Rewrite
+        // this is a flag to differentiate the cached short-cut Rewrite from the normal post-compilation
+        // Rewrite
         bool isShortCutRewrite = false;
 
         public VisualBasicHelper(
@@ -386,7 +389,8 @@ namespace Microsoft.VisualBasic.Activities
                 }
 
                 // if we are here, then that means the shortcut Rewrite failed.
-                // we don't want to see too many of vb expressions in this pass since we just wasted Rewrite time for no good.
+                // we don't want to see too many of vb expressions in this pass since we just wasted Rewrite time
+                // for no good.
             }
 
             VisualBasicScriptAndTypeScope scriptAndTypeScope = new VisualBasicScriptAndTypeScope(
@@ -569,7 +573,8 @@ namespace Microsoft.VisualBasic.Activities
                 }
 
                 // if we are here, then that means the shortcut Rewrite failed.
-                // we don't want to see too many of vb expressions in this pass since we just wasted Rewrite time for no good.
+                // we don't want to see too many of vb expressions in this pass since we just wasted Rewrite time
+                // for no good.
 
                 if (this.publicAccessor != null)
                 {
@@ -813,7 +818,8 @@ namespace Microsoft.VisualBasic.Activities
             return false;
         }
 
-        // Returning null indicates the cached LambdaExpression used here doesn't coincide with current LocationReferenceEnvironment.
+        // Returning null indicates the cached LambdaExpression used here doesn't coincide with current
+        // LocationReferenceEnvironment.
         // Null return value causes the process to rewind and start from HostedCompiler.CompileExpression().
         Expression Rewrite(
             Expression expression,
@@ -1039,7 +1045,8 @@ namespace Microsoft.VisualBasic.Activities
                         {
                             //
                             // variable(LocationReference) resolution process
-                            // Note that the non-shortcut compilation pass always gaurantees successful variable resolution here.
+                            // Note that the non-shortcut compilation pass always gaurantees successful variable resolution
+                            // here.
                             //
                             findMatch = delegateFindFirstLocationReferenceMatch;
                         }
@@ -1809,8 +1816,10 @@ namespace Microsoft.VisualBasic.Activities
             return null;
         }
 
-        // this is a place holder for LambdaExpression(raw Expression Tree) that is to be stored in the cache
-        // this wrapper is necessary because HopperCache requires that once you already have a key along with its associated value in the cache
+        // this is a place holder for LambdaExpression(raw Expression Tree) that is to be stored in the
+        // cache
+        // this wrapper is necessary because HopperCache requires that once you already have a key along
+        // with its associated value in the cache
         // you cannot add the same key with a different value.
         class RawTreeCacheValueWrapper
         {

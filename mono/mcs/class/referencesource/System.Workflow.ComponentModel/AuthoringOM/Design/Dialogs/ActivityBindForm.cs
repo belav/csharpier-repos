@@ -110,7 +110,8 @@ namespace System.Workflow.ComponentModel.Design
             //this.memberTypes.Images.SetKeyName(22, "Index_Protected");
             //this.memberTypes.Images.SetKeyName(23, "Index_Private");
 
-            //preload custom properties before getting type from the type provider (as it would refresh the types)
+            //preload custom properties before getting type from the type provider (as it would refresh the
+            // types)
             this.properties = CustomActivityDesignerHelper.GetCustomProperties(context);
         }
 
@@ -150,7 +151,8 @@ namespace System.Workflow.ComponentModel.Design
 
             if (this.boundType != null)
             {
-                //lets get the same type through the type provider (otherwise this type may mismatch with the one obtained from the design time types)
+                //lets get the same type through the type provider (otherwise this type may mismatch with the one
+                // obtained from the design time types)
                 ITypeProvider typeProvider =
                     this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
                 if (typeProvider != null)
@@ -179,7 +181,8 @@ namespace System.Workflow.ComponentModel.Design
             this.workflowOutline.ExpandRootNode();
 
             //now we need to select the activity/path which was previously set
-            //NOTE: we would have to expand all nodes on the way to make doc outline control populate their children
+            //NOTE: we would have to expand all nodes on the way to make doc outline control populate their
+            // children
             Activity activity = PropertyDescriptorUtils.GetComponent(context) as Activity;
             if (activity == null)
             {
@@ -265,7 +268,8 @@ namespace System.Workflow.ComponentModel.Design
             }
 
             Type parsedPropertyType = member.PropertyType;
-            //lets get the same type through the type provider (otherwise this type may mismatch with the one obtained from the design time types)
+            //lets get the same type through the type provider (otherwise this type may mismatch with the one
+            // obtained from the design time types)
             ITypeProvider typeProvider =
                 this.serviceProvider.GetService(typeof(ITypeProvider)) as ITypeProvider;
             if (typeProvider != null && parsedPropertyType != null)
@@ -584,7 +588,8 @@ namespace System.Workflow.ComponentModel.Design
         }
         #endregion
 
-        //given activity and current path, process all immediate children properties of the selected property
+        //given activity and current path, process all immediate children properties of the selected
+        // property
         private PathInfo[] ProcessPaths(Type activityType, PathInfo topProperty)
         {
             List<PathInfo> paths = new List<PathInfo>();
@@ -688,7 +693,8 @@ namespace System.Workflow.ComponentModel.Design
 
         private string GetIndexerString(Type indexType)
         {
-            //The primitive types are Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Char, Double, and Single.
+            //The primitive types are Boolean, Byte, SByte, Int16, UInt16, Int32, UInt32, Int64, UInt64, Char,
+            // Double, and Single.
             object defaultIndexerInstance = null;
             if (IsTypePrimitive(indexType))
             {
@@ -776,13 +782,15 @@ namespace System.Workflow.ComponentModel.Design
                 //    Activity activity = this.workflowOutline.SelectedActivity;
                 //    if(getterMethod != null && typeToGetPropertiesOn == activity.GetType())
                 //    {
-                //        WorkflowParameterBindingCollection collection = getterMethod.Invoke(activity, null) as WorkflowParameterBindingCollection;
+                //        WorkflowParameterBindingCollection collection = getterMethod.Invoke(activity, null) as
+                // WorkflowParameterBindingCollection;
                 //        if (collection != null)
                 //        {
                 //            foreach (WorkflowParameterBinding parameterBinding in collection)
                 //            {
                 //                //note that the currentPath is always empty
-                //                paths.Add(new PathInfo(property.Name + "[\"" + parameterBinding.ParameterName + "\"].Value", typeof(object)));
+                //                paths.Add(new PathInfo(property.Name + "[\"" + parameterBinding.ParameterName +
+                // "\"].Value", typeof(object)));
                 //            }
                 //        }
                 //    }
@@ -859,7 +867,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            //we will populate events only if the target type is event (since it is always going to be the last valid entry in the path)
+            //we will populate events only if the target type is event (since it is always going to be the last
+            // valid entry in the path)
             if (this.boundType.IsSubclassOf(typeof(Delegate))) //System.MulticastDelegate ???
             {
                 foreach (
@@ -1225,7 +1234,8 @@ namespace System.Workflow.ComponentModel.Design
                 MemberActivityBindTreeNode memberNode = e.Node as MemberActivityBindTreeNode;
 
                 bool incorrectChange = false;
-                //sanity check (member name has not been changed, still have opening/closing square brackets, same number of commas)
+                //sanity check (member name has not been changed, still have opening/closing square brackets, same
+                // number of commas)
                 if (
                     newLabel.IndexOf("[", StringComparison.Ordinal) == -1
                     || !newLabel.EndsWith("]", StringComparison.Ordinal)
@@ -1431,7 +1441,8 @@ namespace System.Workflow.ComponentModel.Design
                         for (int i = 0; i < pathInfoList.Count; i++)
                         {
                             //there are several options here - it could be a regular property, an array or an indexer property
-                            //we'd do couple attempts at trying to find the right node (taking into account the fact that indexes could be changed by the user)
+                            //we'd do couple attempts at trying to find the right node (taking into account the fact that
+                            // indexes could be changed by the user)
 
                             PathInfo currentPathInfo = pathInfoList[i];
                             MemberActivityBindTreeNode matchingChildNode = null;

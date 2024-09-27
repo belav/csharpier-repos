@@ -50,15 +50,16 @@ class Program
 // Below is the code generated from the following XSD:
 /*
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
-        <xs:element name="TASK">
-                <xs:complexType>
-                        <xs:choice>
-                                <xs:element name="OptionA"/>
-                                <xs:element name="OptionB"/>
-                        </xs:choice>
-                </xs:complexType>
-        </xs:element>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+attributeFormDefault="unqualified">
+<xs:element name="TASK">
+<xs:complexType>
+<xs:choice>
+<xs:element name="OptionA"/>
+<xs:element name="OptionB"/>
+</xs:choice>
+</xs:complexType>
+</xs:element>
 </xs:schema>
 */
 

@@ -19,8 +19,10 @@ internal static class ServerComponentSerializationSettings
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         };
 
-    // This setting is not configurable, but realistically we don't expect an app to take more than 30 seconds from when
-    // it got rendered to when the circuit got started, and having an expiration on the serialized server-components helps
+    // This setting is not configurable, but realistically we don't expect an app to take more than 30
+    // seconds from when
+    // it got rendered to when the circuit got started, and having an expiration on the serialized
+    // server-components helps
     // prevent old payloads from being replayed.
     public static readonly TimeSpan DataExpiration = TimeSpan.FromMinutes(5);
 }

@@ -24,7 +24,8 @@ namespace System.Data.Mapping.ViewGeneration.CqlGeneration
     {
         #region Constructor
         /// <summary>
-        /// Creates a union block with SELECT (<paramref name="slotInfos"/>), FROM (<paramref name="children"/>), WHERE (true), AS (<paramref name="blockAliasNum"/>).
+        /// Creates a union block with SELECT (<paramref name="slotInfos"/>), FROM (<paramref
+        // name="children"/>), WHERE (true), AS (<paramref name="blockAliasNum"/>).
         /// </summary>
         internal UnionCqlBlock(
             SlotInfo[] slotInfos,

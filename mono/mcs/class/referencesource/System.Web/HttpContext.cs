@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HttpContext class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* HttpContext class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -167,8 +167,10 @@ namespace System.Web
         internal volatile Thread ThreadInsideIndicateCompletion = null;
 
         // This field is a surrogate for the HttpContext object itself. Our HostExecutionContextManager
-        // shouldn't capture a reference to the HttpContext itself since these references could be long-lived,
-        // e.g. if they're captured by a call to ThreadPool.QueueUserWorkItem or a Timer. This would cause the
+        // shouldn't capture a reference to the HttpContext itself since these references could be
+        // long-lived,
+        // e.g. if they're captured by a call to ThreadPool.QueueUserWorkItem or a Timer. This would cause
+        // the
         // associated HttpContext object graph to be long-lived, which would negatively affect performance.
         // Instead we capture a reference to this 'Id' object, which allows the HostExecutionContextManager
         // to compare the original captured HttpContext with the current HttpContext without actually
@@ -179,10 +181,14 @@ namespace System.Web
         // synchronization context (for EAP / TAP models)
         private AspNetSynchronizationContextBase _syncContext;
 
-        // This field doesn't need to be volatile since it will only ever be written to by a single thread, and when that thread
-        // later reads the field it will be guaranteed non-null. We don't care what other threads see, since it will never be
-        // equal to Thread.CurrentThread for them regardless of whether those threads are seeing the latest value of this field.
-        // This field should not be marked [DoNotReset] since we want it to be cleared when WebSocket processing begins.
+        // This field doesn't need to be volatile since it will only ever be written to by a single thread,
+        // and when that thread
+        // later reads the field it will be guaranteed non-null. We don't care what other threads see, since
+        // it will never be
+        // equal to Thread.CurrentThread for them regardless of whether those threads are seeing the latest
+        // value of this field.
+        // This field should not be marked [DoNotReset] since we want it to be cleared when WebSocket
+        // processing begins.
         internal Thread _threadWhichStartedWebSocketTransition;
 
         // WebSocket state
@@ -361,8 +367,10 @@ namespace System.Web
                 );
             }
 
-            // DevDiv #384514: Task<T> doesn't work correctly using the legacy SynchronizationContext setting. Since
-            // WebSockets operation requires correct Task<T> behavior, we should forbid using the feature when legacy
+            // DevDiv #384514: Task<T> doesn't work correctly using the legacy SynchronizationContext setting.
+            // Since
+            // WebSockets operation requires correct Task<T> behavior, we should forbid using the feature when
+            // legacy
             // mode is enabled.
             SynchronizationContextUtil.ValidateModeForWebSockets();
 
@@ -441,7 +449,8 @@ namespace System.Web
                     || !incomingProtocols.Contains(subprotocol, StringComparer.Ordinal)
                 )
                 {
-                    // The caller requested a subprotocol that wasn't in the list of accepted protocols coming from the client.
+                    // The caller requested a subprotocol that wasn't in the list of accepted protocols coming from the
+                    // client.
                     // This is disallowed by the WebSockets protocol spec, Sec. 5.2.2 (#2).
                     throw new ArgumentException(
                         SR.GetString(SR.WebSockets_SubProtocolCannotBeNegotiated, subprotocol),
@@ -498,7 +507,8 @@ namespace System.Web
             get { return _threadWhichStartedWebSocketTransition == Thread.CurrentThread; }
         }
 
-        // helper that throws an exception if we have transitioned the current request to a WebSocket request
+        // helper that throws an exception if we have transitioned the current request to a WebSocket
+        // request
         internal void EnsureHasNotTransitionedToWebSocket()
         {
             if (HasWebSocketRequestTransitionCompleted)
@@ -718,7 +728,8 @@ namespace System.Web
 
         //
         //  Root / unroot for the duration of async operation
-        //  These are only used for the classic pipeline. The integrated pipeline uses a different rooting mechanism.
+        //  These are only used for the classic pipeline. The integrated pipeline uses a different rooting
+        // mechanism.
         //
 
         private IntPtr _rootedPtr;
@@ -748,8 +759,10 @@ namespace System.Web
             }
         }
 
-        // This is a virtual event which occurs when the HTTP part of this request is winding down, e.g. after EndRequest
-        // but before the WebSockets pipeline kicks in. The HttpContext is still available for inspection and is provided
+        // This is a virtual event which occurs when the HTTP part of this request is winding down, e.g.
+        // after EndRequest
+        // but before the WebSockets pipeline kicks in. The HttpContext is still available for inspection
+        // and is provided
         // as a parameter to the supplied callback.
         [SuppressMessage(
             "Microsoft.Design",
@@ -786,8 +799,10 @@ namespace System.Web
             }
         }
 
-        // Allows an object's Dispose() method to be called when the pipeline part of this request is completed, e.g.
-        // after both the HTTP part and the WebSockets loop have completed. The HttpContext is not available for
+        // Allows an object's Dispose() method to be called when the pipeline part of this request is
+        // completed, e.g.
+        // after both the HTTP part and the WebSockets loop have completed. The HttpContext is not available
+        // for
         // inspection, and HttpContext.Current will be null.
         [SuppressMessage(
             "Microsoft.Security",
@@ -924,7 +939,8 @@ namespace System.Web
             set
             {
                 // For integrated pipeline, once this is set to a non-null value, it can only be set to null.
-                // The setter should never have been made public.  It probably happened in 1.0, before it was possible
+                // The setter should never have been made public.  It probably happened in 1.0, before it was
+                // possible
                 // to have getter and setter with different accessibility.
                 if (_isIntegratedPipeline && _appInstance != null && value != null)
                 {
@@ -1184,7 +1200,8 @@ namespace System.Web
         /// <devdoc>
         ///    <para>
         ///       Retrieves a key-value collection that can be used to
-        ///       build up and share data between an <see cref='System.Web.IHttpModule'/> and an <see cref='System.Web.IHttpHandler'/>
+        ///       build up and share data between an <see cref='System.Web.IHttpModule'/> and an <see
+        // cref='System.Web.IHttpHandler'/>
         ///       during a
         ///       request.
         ///    </para>
@@ -1202,7 +1219,8 @@ namespace System.Web
 
         /// <devdoc>
         ///    <para>
-        ///       Gets a reference to the <see cref='System.Web.SessionState'/> instance for the current request.
+        ///       Gets a reference to the <see cref='System.Web.SessionState'/> instance for the current
+        // request.
         ///    </para>
         /// </devdoc>
         public HttpSessionState Session
@@ -1681,7 +1699,8 @@ namespace System.Web
         }
 
         /// <summary>
-        /// Gets a reference to the System.Web.Instrumentation.PageInstrumentationService instance for this request. Guaranteed not to be null (barring private reflection magic).
+        /// Gets a reference to the System.Web.Instrumentation.PageInstrumentationService instance for this
+        // request. Guaranteed not to be null (barring private reflection magic).
         /// </summary>
         public PageInstrumentationService PageInstrumentation
         {
@@ -1695,11 +1714,11 @@ namespace System.Web
             }
         }
 
-        /*
-         * The virtual path used to get config settings.  This allows the user
-         * to specify a non default config path, without having to pass it to every
-         * configuration call.
-         */
+/*
+* The virtual path used to get config settings.  This allows the user
+* to specify a non default config path, without having to pass it to every
+* configuration call.
+*/
         internal VirtualPath ConfigurationPath
         {
             get
@@ -1782,9 +1801,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Uses the Config system to get the specified configuraiton
-         */
+/*
+* Uses the Config system to get the specified configuraiton
+*/
         [Obsolete(
             "The recommended alternative is System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection in System.Web.dll. http://go.microsoft.com/fwlink/?linkid=14202"
         )]
@@ -1828,9 +1847,9 @@ namespace System.Web
             RewritePath(path, true);
         }
 
-        /*
-         * Called by the URL rewrite module to modify the path for downstream modules
-         */
+/*
+* Called by the URL rewrite module to modify the path for downstream modules
+*/
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
@@ -2014,28 +2033,38 @@ namespace System.Web
         }
 
         /// <summary>
-        /// Determines whether the ASP.NET runtime calls Thread.Abort() on the thread servicing this request when
+        /// Determines whether the ASP.NET runtime calls Thread.Abort() on the thread servicing this request
+        // when
         /// the request times out. Default value is 'true'.
         /// </summary>
         /// <remarks>
-        /// Handlers and modules that are using Request.TimedOutToken to implement cooperative cancellation may
-        /// wish to disable the rude Thread.Abort behavior that ASP.NET has historically performed when a request
-        /// times out. This can help developers make sure that their g----ful cancellation + cleanup routines
+        /// Handlers and modules that are using Request.TimedOutToken to implement cooperative cancellation
+        // may
+        /// wish to disable the rude Thread.Abort behavior that ASP.NET has historically performed when a
+        // request
+        /// times out. This can help developers make sure that their g----ful cancellation + cleanup
+        // routines
         /// will run without interruption by ASP.NET.
         ///
-        /// The rules for determining when a thread is aborted are somewhat complicated, so applications shouldn't
+        /// The rules for determining when a thread is aborted are somewhat complicated, so applications
+        // shouldn't
         /// try to depend on them. Currently, the behavior is:
         ///
-        /// - The thread will be aborted at some point after Request.TimedOutToken is canceled. The abort might not
-        ///   occur immediately afterward, as the "should Thread.Abort" timer is separate from the "should signal
+        /// - The thread will be aborted at some point after Request.TimedOutToken is canceled. The abort
+        // might not
+        ///   occur immediately afterward, as the "should Thread.Abort" timer is separate from the "should
+        // signal
         ///   the CancellationToken" timer.
         ///
         /// - We generally don't abort threads that are processing async modules or handlers. There are some
-        ///   exceptions. E.g., during certain parts of the lifecycle for async WebForms pages, the thread can be
+        ///   exceptions. E.g., during certain parts of the lifecycle for async WebForms pages, the thread
+        // can be
         ///   a candidate to be aborted when a timeout occurs.
         ///
-        /// If a developer sets this property to 'false', ASP.NET will not automatically display a "Request timed
-        /// out" YSOD when a timeout occurs. If this happens the application is responsible for setting the response
+        /// If a developer sets this property to 'false', ASP.NET will not automatically display a "Request
+        // timed
+        /// out" YSOD when a timeout occurs. If this happens the application is responsible for setting the
+        // response
         /// content appropriately.
         /// </remarks>
         public bool ThreadAbortOnTimeout
@@ -2082,29 +2111,29 @@ namespace System.Web
             set { _timeoutLink = value; }
         }
 
-        /*
+/*
 
-        Notes on the following 5 functions:
+Notes on the following 5 functions:
 
-        Execution can be cancelled only during certain periods, when inside the catch
-        block for ThreadAbortException.  These periods are marked with the value of
-        _timeoutState of 1.
+Execution can be cancelled only during certain periods, when inside the catch
+block for ThreadAbortException.  These periods are marked with the value of
+_timeoutState of 1.
 
-        There is potential [rare] race condition when the timeout thread would call
-        thread.abort but the execution logic in the meantime escapes the catch block.
-        To avoid such race conditions _timeoutState of -1 (cancelled) is introduced.
-        The timeout thread sets _timeoutState to -1 before thread abort and the
-        unwinding logic just waits for the exception in this case. The wait cannot
-        be done in EndCancellablePeriod because the function is call from inside of
-        a finally block and thus would wait indefinetely. That's why another function
-        WaitForExceptionIfCancelled had been added.
+There is potential [rare] race condition when the timeout thread would call
+thread.abort but the execution logic in the meantime escapes the catch block.
+To avoid such race conditions _timeoutState of -1 (cancelled) is introduced.
+The timeout thread sets _timeoutState to -1 before thread abort and the
+unwinding logic just waits for the exception in this case. The wait cannot
+be done in EndCancellablePeriod because the function is call from inside of
+a finally block and thus would wait indefinetely. That's why another function
+WaitForExceptionIfCancelled had been added.
 
-        Originally _timeoutStartTime was set in BeginCancellablePeriod. However, that means
-        we'll call UtcNow everytime we call ExecuteStep, which is too expensive. So to save
-        CPU time we created a new method SetStartTime() which is called by the caller of
-        ExecuteStep.
+Originally _timeoutStartTime was set in BeginCancellablePeriod. However, that means
+we'll call UtcNow everytime we call ExecuteStep, which is too expensive. So to save
+CPU time we created a new method SetStartTime() which is called by the caller of
+ExecuteStep.
 
-        */
+*/
 
         internal void BeginCancellablePeriod()
         {
@@ -2519,7 +2548,8 @@ namespace System.Web
                     return true;
                 }
 
-                // if this notification is after AuthenticateRequest and not a SendResponse notification, use impersonation
+                // if this notification is after AuthenticateRequest and not a SendResponse notification, use
+                // impersonation
                 return (
                     (
                         (
@@ -2766,7 +2796,8 @@ namespace System.Web
             {
                 if (!HasWebSocketRequestTransitionStarted)
                 {
-                    // Items is also used by AspNetWebSocketContext and should only be cleared if we're not transitioning to WebSockets
+                    // Items is also used by AspNetWebSocketContext and should only be cleared if we're not
+                    // transitioning to WebSockets
                     _items = null;
                 }
                 _syncContext = null;
@@ -2781,9 +2812,12 @@ namespace System.Web
             TransitionToWebSocketState(WebSocketTransitionState.TransitionCompleted);
         }
 
-        // This is much stronger than just ClearReferences; it tries to free absolutely as much memory as possible.
-        // Some necessary items (like _wr, etc.) are preserved. The reason we want to modify this particular instance
-        // in-place rather than create a new instance is that it is likely that references to this object still exist,
+        // This is much stronger than just ClearReferences; it tries to free absolutely as much memory as
+        // possible.
+        // Some necessary items (like _wr, etc.) are preserved. The reason we want to modify this particular
+        // instance
+        // in-place rather than create a new instance is that it is likely that references to this object
+        // still exist,
         // and we don't want the existence of those references to cause memory leaks.
         private void ClearReferencesForWebSocketProcessing()
         {
@@ -2796,7 +2830,8 @@ namespace System.Web
             _request.ClearReferencesForWebSocketProcessing(); // also clean up the HttpRequest instance
             if (response != null)
             {
-                // HttpResponse is off-limits, but it is possible that the developer accidentally maintained a reference
+                // HttpResponse is off-limits, but it is possible that the developer accidentally maintained a
+                // reference
                 // to it, e.g. via a closure. We'll release the HttpResponse's references to all its data to prevent
                 // this from causing memory problems.
                 ReflectionUtil.Reset(response);

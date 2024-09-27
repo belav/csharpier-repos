@@ -75,7 +75,8 @@ namespace System.Web.UI.Design.WebControls
             _containerNameComboBox.Location = new Point(13, top + 3);
             _containerNameComboBox.Size = new Size(502, 21);
 
-            // if any controls are added, top should be reset to _containerNameComboBox.Bottom before adding them here
+            // if any controls are added, top should be reset to _containerNameComboBox.Bottom before adding
+            // them here
         }
 
         private void InitializeTabIndexes()
@@ -149,21 +150,24 @@ namespace System.Web.UI.Design.WebControls
                     }
                 }
             }
-            // else it's being unchecked, so that means another radio button is being checked and that handler will take care of updating the state
+            // else it's being unchecked, so that means another radio button is being checked and that handler
+            // will take care of updating the state
         }
 
         private void OnConnectionStringTextBox_TextChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
             {
-                // If we aren't already in edit mode, move to it that we will know we need to reload metadata if it's needed later
+                // If we aren't already in edit mode, move to it that we will know we need to reload metadata if
+                // it's needed later
                 if (!_connectionInEdit)
                 {
                     EnterConnectionEditMode();
                 }
 
                 // Update the state of the flag that tracks if there is anything in this TextBox.
-                // This will cause the Next button to be disabled if all of the text is removed from the box, otherwise it is enabled
+                // This will cause the Next button to be disabled if all of the text is removed from the box,
+                // otherwise it is enabled
                 _configureObjectContext.SelectConnectionStringHasValue(
                     !String.IsNullOrEmpty(_connectionStringTextBox.Text)
                 );
@@ -200,7 +204,8 @@ namespace System.Web.UI.Design.WebControls
                         VerifyConnectionString();
                     }
                 }
-                // else it's being unchecked, so that means another radio button is being checked and that handler will take care of updating the state
+                // else it's being unchecked, so that means another radio button is being checked and that handler
+                // will take care of updating the state
             }
         }
 
@@ -255,7 +260,8 @@ namespace System.Web.UI.Design.WebControls
         }
 
         /// <summary>
-        /// Verify the selected connection string and load the metadata for it if it is successfully verified
+        /// Verify the selected connection string and load the metadata for it if it is successfully
+        // verified
         /// </summary>
         /// <returns>True if the metadata was successfully loaded from the connection string</returns>
         private bool VerifyConnectionString()
@@ -283,7 +289,8 @@ namespace System.Web.UI.Design.WebControls
                     }
                     else
                     {
-                        // Make a builder item out of the specified connection string. This will do some basic verification on the string.
+                        // Make a builder item out of the specified connection string. This will do some basic verification
+                        // on the string.
                         selectedConnection =
                             _configureObjectContext.GetEntityConnectionStringBuilderItem(
                                 _connectionStringTextBox.Text
@@ -321,8 +328,10 @@ namespace System.Web.UI.Design.WebControls
                         }
                     }
 
-                    // Leave connection edit mode regardless of whether the metadata was loaded or not, because there is no need to keep trying
-                    // to validated it over and over again unless the user makes a change that puts it back into edit mode again
+                    // Leave connection edit mode regardless of whether the metadata was loaded or not, because there is
+                    // no need to keep trying
+                    // to validated it over and over again unless the user makes a change that puts it back into edit
+                    // mode again
                     LeaveConnectionEditMode();
                 }
 
@@ -358,8 +367,10 @@ namespace System.Web.UI.Design.WebControls
         #endregion
 
         #region Methods for setting control values
-        // Expects that the specified builder item is a named connection already in the list, is a full connection string, or is empty
-        // If empty, the default is to select the named connection option and don't select anything in the list
+        // Expects that the specified builder item is a named connection already in the list, is a full
+        // connection string, or is empty
+        // If empty, the default is to select the named connection option and don't select anything in the
+        // list
         internal void SetConnectionString(EntityConnectionStringBuilderItem connStrBuilderItem)
         {
             Debug.Assert(connStrBuilderItem != null, "expected non-null connStrBuilderItem");
@@ -418,7 +429,8 @@ namespace System.Web.UI.Design.WebControls
         /// Expects that selectedContainer is already in the ComboBox list, or should be null
         /// </summary>
         /// <param name="selectedContainer"></param>
-        /// <param name="initialLoad">If this is the initial load, we want to suppress events so that the change does
+        /// <param name="initialLoad">If this is the initial load, we want to suppress events so that the
+        // change does
         /// not cause additional work in panels that listen to the container name changed event</param>
         internal void SetSelectedContainerName(
             EntityDataSourceContainerNameItem selectedContainer,

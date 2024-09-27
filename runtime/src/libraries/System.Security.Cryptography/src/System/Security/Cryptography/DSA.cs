@@ -85,7 +85,8 @@ namespace System.Security.Cryptography
             }
         }
 
-        // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature and
+        // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature
+        // and
         // VerifySignature do not need the HashAlgorithmName value, only SignData and VerifyData do.
         public abstract byte[] CreateSignature(byte[] rgbHash);
 
@@ -115,7 +116,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Computes the hash value of the specified data and signs it using the specified signature format.
+        ///   Computes the hash value of the specified data and signs it using the specified signature
+        // format.
         /// </summary>
         /// <param name="data">The data to sign.</param>
         /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value.</param>
@@ -130,7 +132,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="signatureFormat"/> is not a known format.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or signing operation.
@@ -172,7 +175,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Computes the hash value of the specified data and signs it using the specified signature format.
+        ///   Computes the hash value of the specified data and signs it using the specified signature
+        // format.
         /// </summary>
         /// <param name="data">The data to sign.</param>
         /// <param name="offset">The offset into <paramref name="data"/> at which to begin hashing.</param>
@@ -202,7 +206,8 @@ namespace System.Security.Cryptography
         ///   beyond the upper bound of <paramref name="data"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or signing operation.
@@ -235,7 +240,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Computes the hash value of the specified data and signs it using the specified signature format.
+        ///   Computes the hash value of the specified data and signs it using the specified signature
+        // format.
         /// </summary>
         /// <param name="data">The data to sign.</param>
         /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value.</param>
@@ -284,7 +290,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Computes the hash value of the specified data and signs it using the specified signature format.
+        ///   Computes the hash value of the specified data and signs it using the specified signature
+        // format.
         /// </summary>
         /// <param name="data">The data to sign.</param>
         /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value.</param>
@@ -299,7 +306,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="signatureFormat"/> is not a known format.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or signing operation.
@@ -319,7 +327,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///   Computes the hash value of the specified data and signs it using the specified signature format.
+        ///   Computes the hash value of the specified data and signs it using the specified signature
+        // format.
         /// </summary>
         /// <param name="data">The data to sign.</param>
         /// <param name="hashAlgorithm">The hash algorithm to use to create the hash value.</param>
@@ -374,13 +383,16 @@ namespace System.Security.Cryptography
         ///   Verifies that a digital signature is valid for the provided data.
         /// </summary>
         /// <param name="data">An array that contains the signed data.</param>
-        /// <param name="offset">The starting index of the signed portion of <paramref name="data"/>.</param>
+        /// <param name="offset">The starting index of the signed portion of <paramref
+        // name="data"/>.</param>
         /// <param name="count">The number of bytes in <paramref name="data"/> that were signed.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="data"/> or <paramref name="signature"/> is <see langword="null"/>.
@@ -402,7 +414,8 @@ namespace System.Security.Cryptography
         ///   beyond the upper bound of <paramref name="data"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
@@ -530,7 +543,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="destination"/>. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the signature;
+        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the
+        // signature;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
@@ -564,7 +578,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="destination"/>. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the signature;
+        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the
+        // signature;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="CryptographicException">
@@ -655,14 +670,16 @@ namespace System.Security.Cryptography
         ///   <paramref name="destination"/>. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the signature;
+        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the
+        // signature;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="signatureFormat"/> is not a known format.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the signing operation.
@@ -701,7 +718,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="destination"/>. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the signature;
+        ///   <see langword="true"/> if <paramref name="destination"/> is big enough to receive the
+        // signature;
         ///   otherwise, <see langword="false"/>.
         /// </returns>
         /// <exception cref="CryptographicException">
@@ -742,10 +760,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="data">The signed data.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="data"/> or <paramref name="signature"/> is <see langword="null"/>.
@@ -754,7 +774,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="signatureFormat"/> is not a known format.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
@@ -780,10 +801,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="data">The signed data.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="data"/> or <paramref name="signature"/> is <see langword="null"/>.
@@ -792,7 +815,8 @@ namespace System.Security.Cryptography
         ///   <paramref name="signatureFormat"/> is not a known format.
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see cref="HashAlgorithmName.Name"/>.
+        ///   <paramref name="hashAlgorithm"/> has a <see langword="null"/> or empty <see
+        // cref="HashAlgorithmName.Name"/>.
         /// </exception>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
@@ -818,10 +842,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="data">The signed data.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
@@ -842,10 +868,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="data">The signed data.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="signatureFormat"/> is not a known format.
@@ -872,10 +900,12 @@ namespace System.Security.Cryptography
         /// </summary>
         /// <param name="data">The signed data.</param>
         /// <param name="signature">The signature to verify.</param>
-        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification process.</param>
+        /// <param name="hashAlgorithm">The hash algorithm used to hash the data for the verification
+        // process.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the hashing or verification operation.
@@ -900,7 +930,8 @@ namespace System.Security.Cryptography
         /// <param name="rgbSignature">The signature to verify.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="rgbSignature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="rgbHash"/> or <paramref name="rgbSignature"/> is <see langword="null"/>.
@@ -938,7 +969,8 @@ namespace System.Security.Cryptography
         /// <param name="signature">The signature to verify.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="ArgumentOutOfRangeException">
         ///   <paramref name="signatureFormat"/> is not a known format.
@@ -965,7 +997,8 @@ namespace System.Security.Cryptography
         /// <param name="signature">The signature to verify.</param>
         /// <param name="signatureFormat">The encoding format for <paramref name="signature"/>.</param>
         /// <returns>
-        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if the digital signature is valid for the provided data; otherwise,
+        // <see langword="false"/>.
         /// </returns>
         /// <exception cref="CryptographicException">
         ///   An error occurred in the verification operation.
@@ -1341,8 +1374,10 @@ namespace System.Security.Cryptography
         /// </exception>
         /// <remarks>
         ///   <para>
-        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses PBKDF1
-        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function 2),
+        ///   When the base-64 decoded contents of <paramref name="input" /> indicate an algorithm that uses
+        // PBKDF1
+        ///   (Password-Based Key Derivation Function 1) or PBKDF2 (Password-Based Key Derivation Function
+        // 2),
         ///   the password is converted to bytes via the UTF-8 encoding.
         ///   </para>
         ///   <para>

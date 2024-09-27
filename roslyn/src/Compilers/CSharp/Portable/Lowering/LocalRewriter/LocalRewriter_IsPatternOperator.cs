@@ -37,10 +37,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else if (IsFailureNode(decisionDag.RootNode, node.WhenFalseLabel))
             {
-                // If the given pattern always fails due to a constant input (see comments on BoundDecisionDag.SimplifyDecisionDagIfConstantInput),
-                // we build a linear test sequence with the whenTrue and whenFalse labels swapped and then negate the result, to keep the result a constant.
-                // Note that the positive case will be handled by canProduceLinearSequence above, however, we avoid to produce a full inverted linear sequence here
-                // because we may be able to generate better code for a sequence of `or` patterns, using a switch dispatch, for example, which is done in the general rewriter.
+                // If the given pattern always fails due to a constant input (see comments on
+                // BoundDecisionDag.SimplifyDecisionDagIfConstantInput),
+                // we build a linear test sequence with the whenTrue and whenFalse labels swapped and then negate
+                // the result, to keep the result a constant.
+                // Note that the positive case will be handled by canProduceLinearSequence above, however, we avoid
+                // to produce a full inverted linear sequence here
+                // because we may be able to generate better code for a sequence of `or` patterns, using a switch
+                // dispatch, for example, which is done in the general rewriter.
                 negated = !negated;
                 var isPatternRewriter = new IsPatternExpressionLinearLocalRewriter(node, this);
                 result = isPatternRewriter.LowerIsPatternAsLinearTestSequence(
@@ -53,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                // We need to lower a generalized dag, so we produce a label for the true and false branches and assign to a temporary containing the result.
+                // We need to lower a generalized dag, so we produce a label for the true and false branches and
+                // assign to a temporary containing the result.
                 var isPatternRewriter = new IsPatternExpressionGeneralLocalRewriter(
                     node.Syntax,
                     this
@@ -105,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// A local rewriter for lowering an is-pattern expression.  This handles the general case by lowering
+        /// A local rewriter for lowering an is-pattern expression.  This handles the general case by
+        // lowering
         /// the decision dag, and returning a "true" or "false" value as the result at the end.
         /// </summary>
         private sealed class IsPatternExpressionGeneralLocalRewriter : DecisionDagRewriter
@@ -193,7 +199,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             private readonly ArrayBuilder<BoundExpression> _sideEffectBuilder;
 
             /// <summary>
-            /// Accumulates conjuncts (conditions that must all be true) for the translation. When a conjunct is added,
+            /// Accumulates conjuncts (conditions that must all be true) for the translation. When a conjunct is
+            // added,
             /// elements of the _sideEffectBuilder, if any, should be added as part of a sequence expression for
             /// the conjunct being added.
             /// </summary>
@@ -291,7 +298,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Translate an is-pattern expression into a sequence of tests separated by the control-flow-and operator.
+            /// Translate an is-pattern expression into a sequence of tests separated by the control-flow-and
+            // operator.
             /// </summary>
             private BoundExpression ProduceLinearTestSequence(
                 BoundDecisionDagNode node,

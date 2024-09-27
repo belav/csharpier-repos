@@ -11,7 +11,8 @@ using Internal;
 namespace System.Collections.Concurrent
 {
     /// <summary>
-    /// Provides a producer/consumer queue safe to be used by only one producer and one consumer concurrently.
+    /// Provides a producer/consumer queue safe to be used by only one producer and one consumer
+    // concurrently.
     /// </summary>
     /// <typeparam name="T">Specifies the type of data contained in the queue.</typeparam>
     [DebuggerDisplay("Count = {Count}")]
@@ -26,30 +27,49 @@ namespace System.Collections.Concurrent
         // by one producer thread and one consumer thread. SPSCQueue does not work correctly when used by
         // multiple producer threads concurrently or multiple consumer threads concurrently.
         //
-        // SPSCQueue is based on segments that behave like circular buffers. Each circular buffer is represented
-        // as an array with two indexes: _first and _last. _first is the index of the array slot for the consumer
-        // to read next, and _last is the slot for the producer to write next. The circular buffer is empty when
+        // SPSCQueue is based on segments that behave like circular buffers. Each circular buffer is
+        // represented
+        // as an array with two indexes: _first and _last. _first is the index of the array slot for the
+        // consumer
+        // to read next, and _last is the slot for the producer to write next. The circular buffer is empty
+        // when
         // (_first == _last), and full when ((_last+1) % _array.Length == _first).
         //
-        // Since _first is only ever modified by the consumer thread and _last by the producer, the two indices can
-        // be updated without interlocked operations. As long as the queue size fits inside a single circular buffer,
-        // enqueues and dequeues simply advance the corresponding indices around the circular buffer. If an enqueue finds
-        // that there is no room in the existing buffer, however, a new circular buffer is allocated that is twice as big
-        // as the old buffer. From then on, the producer will insert values into the new buffer. The consumer will first
+        // Since _first is only ever modified by the consumer thread and _last by the producer, the two
+        // indices can
+        // be updated without interlocked operations. As long as the queue size fits inside a single
+        // circular buffer,
+        // enqueues and dequeues simply advance the corresponding indices around the circular buffer. If an
+        // enqueue finds
+        // that there is no room in the existing buffer, however, a new circular buffer is allocated that is
+        // twice as big
+        // as the old buffer. From then on, the producer will insert values into the new buffer. The
+        // consumer will first
         // empty out the old buffer and only then follow the producer into the new (larger) buffer.
         //
-        // As described above, the enqueue operation on the fast path only modifies the _first field of the current segment.
-        // However, it also needs to read _last in order to verify that there is room in the current segment. Similarly, the
-        // dequeue operation on the fast path only needs to modify _last, but also needs to read _first to verify that the
-        // queue is non-empty. This results in true cache line sharing between the producer and the consumer.
+        // As described above, the enqueue operation on the fast path only modifies the _first field of the
+        // current segment.
+        // However, it also needs to read _last in order to verify that there is room in the current
+        // segment. Similarly, the
+        // dequeue operation on the fast path only needs to modify _last, but also needs to read _first to
+        // verify that the
+        // queue is non-empty. This results in true cache line sharing between the producer and the
+        // consumer.
         //
-        // The cache line sharing issue can be mitigating by having a possibly stale copy of _first that is owned by the producer,
-        // and a possibly stale copy of _last that is owned by the consumer. So, the consumer state is described using
-        // (_first, _lastCopy) and the producer state using (_firstCopy, _last). The consumer state is separated from
-        // the producer state by padding, which allows fast-path enqueues and dequeues from hitting shared cache lines.
-        // _lastCopy is the consumer's copy of _last. Whenever the consumer can tell that there is room in the buffer
-        // simply by observing _lastCopy, the consumer thread does not need to read _last and thus encounter a cache miss. Only
-        // when the buffer appears to be empty will the consumer refresh _lastCopy from _last. _firstCopy is used by the producer
+        // The cache line sharing issue can be mitigating by having a possibly stale copy of _first that is
+        // owned by the producer,
+        // and a possibly stale copy of _last that is owned by the consumer. So, the consumer state is
+        // described using
+        // (_first, _lastCopy) and the producer state using (_firstCopy, _last). The consumer state is
+        // separated from
+        // the producer state by padding, which allows fast-path enqueues and dequeues from hitting shared
+        // cache lines.
+        // _lastCopy is the consumer's copy of _last. Whenever the consumer can tell that there is room in
+        // the buffer
+        // simply by observing _lastCopy, the consumer thread does not need to read _last and thus encounter
+        // a cache miss. Only
+        // when the buffer appears to be empty will the consumer refresh _lastCopy from _last. _firstCopy is
+        // used by the producer
         // in the same way to avoid reading _first on the hot path.
 
         /// <summary>The initial size to use for segments (in number of elements).</summary>
@@ -187,7 +207,8 @@ namespace System.Collections.Concurrent
         /// <summary>Attempts to dequeue an item from the queue.</summary>
         /// <param name="segment">The segment from which the item was dequeued.</param>
         /// <param name="array">The array from <paramref name="segment"/>.</param>
-        /// <param name="peek">true if this is only a peek operation; false if the item should be dequeued.</param>
+        /// <param name="peek">true if this is only a peek operation; false if the item should be
+        // dequeued.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
         private bool TryDequeueSlow(
@@ -233,7 +254,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
-        /// <param name="predicate">The predicate that must return true for the item to be dequeued.  If null, all items implicitly return true.</param>
+        /// <param name="predicate">The predicate that must return true for the item to be dequeued.  If
+        // null, all items implicitly return true.</param>
         /// <param name="result">The dequeued item.</param>
         /// <returns>true if an item could be dequeued; otherwise, false.</returns>
         public bool TryDequeueIf(Predicate<T>? predicate, [MaybeNullWhen(false)] out T result)
@@ -262,7 +284,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>Attempts to dequeue an item from the queue.</summary>
-        /// <param name="predicate">The predicate that must return true for the item to be dequeued.  If null, all items implicitly return true.</param>
+        /// <param name="predicate">The predicate that must return true for the item to be dequeued.  If
+        // null, all items implicitly return true.</param>
         /// <param name="array">The array from which the item was dequeued.</param>
         /// <param name="segment">The segment from which the item was dequeued.</param>
         /// <param name="result">The dequeued item.</param>
@@ -342,7 +365,8 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>Gets an enumerable for the collection.</summary>
-        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the collection.</remarks>
+        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the
+        // collection.</remarks>
         public IEnumerator<T> GetEnumerator()
         {
             for (Segment? segment = _head; segment != null; segment = segment._next)
@@ -359,14 +383,16 @@ namespace System.Collections.Concurrent
         }
 
         /// <summary>Gets an enumerable for the collection.</summary>
-        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the collection.</remarks>
+        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the
+        // collection.</remarks>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
 
         /// <summary>Gets the number of items in the collection.</summary>
-        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the collection.</remarks>
+        /// <remarks>This method is not safe to use concurrently with any other members that may mutate the
+        // collection.</remarks>
         public int Count
         {
             get
@@ -393,7 +419,8 @@ namespace System.Collections.Concurrent
             }
         }
 
-        /// <summary>A thread-safe way to get the number of items in the collection. May synchronize access by locking the provided synchronization object.</summary>
+        /// <summary>A thread-safe way to get the number of items in the collection. May synchronize access
+        // by locking the provided synchronization object.</summary>
         /// <remarks>The Count is not thread safe, so we need to acquire the lock.</remarks>
         int IProducerConsumerQueue<T>.GetCountSafe(object syncObj)
         {

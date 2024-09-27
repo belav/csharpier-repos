@@ -74,10 +74,12 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             return query;
         }
 
-        // Override this method to create a query instance and set properties not inherited by derived classes
+        // Override this method to create a query instance and set properties not inherited by derived
+        // classes
         protected abstract TrackingQuery NewTrackingQuery();
 
-        // Override this method to set the properties that a derived class may inherit calling the base method
+        // Override this method to set the properties that a derived class may inherit calling the base
+        // method
         protected virtual void UpdateTrackingQuery(TrackingQuery trackingQuery)
         {
             foreach (AnnotationElement annotation in this.Annotations)

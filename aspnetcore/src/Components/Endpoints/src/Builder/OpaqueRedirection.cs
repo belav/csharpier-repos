@@ -15,19 +15,25 @@ namespace Microsoft.AspNetCore.Components.Endpoints;
 
 internal partial class OpaqueRedirection
 {
-    // During streaming SSR, a component may try to perform a redirection. Since the response has already started
-    // this can only work if we communicate the redirection back via some command that can get handled by JS,
-    // rather than a true 301/302/etc. But we don't want to disclose the redirection target URL to JS because that
-    // info would not normally be available, e.g., when using 'fetch'. So we data-protect the URL and round trip
+    // During streaming SSR, a component may try to perform a redirection. Since the response has
+    // already started
+    // this can only work if we communicate the redirection back via some command that can get handled
+    // by JS,
+    // rather than a true 301/302/etc. But we don't want to disclose the redirection target URL to JS
+    // because that
+    // info would not normally be available, e.g., when using 'fetch'. So we data-protect the URL and
+    // round trip
     // through a special endpoint that can issue a true redirection.
     //
     // The same is used during enhanced navigation if it happens to go to a Blazor endpoint that calls
     // NavigationManager.NavigateTo, for the same reasons.
     //
-    // However, if enhanced navigation goes to a non-Blazor endpoint, the server won't do anything special and just
+    // However, if enhanced navigation goes to a non-Blazor endpoint, the server won't do anything
+    // special and just
     // returns a regular 301/302/etc. To handle this,
     //
-    //  - If it's redirected to an internal URL, the browser will just follow the redirection automatically
+    //  - If it's redirected to an internal URL, the browser will just follow the redirection
+    // automatically
     //    and client-side code will then:
     //    - Check if it went to a Blazor endpoint, and if so, simply update the client-side URL to match
     //    - Or if it's a non-Blazor endpoint, behaves like "external URL" below

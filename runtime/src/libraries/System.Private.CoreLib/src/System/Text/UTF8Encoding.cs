@@ -7,7 +7,8 @@
 // The code of all worker functions in this file is written twice: Once as a slow loop, and the
 // second time as a fast loop. The slow loops handles all special cases, throws exceptions, etc.
 // The fast loops attempts to blaze through as fast as possible with optimistic range checks,
-// processing multiple characters at a time, and falling back to the slow loop for all special cases.
+// processing multiple characters at a time, and falling back to the slow loop for all special
+// cases.
 
 using System.Buffers;
 using System.Diagnostics;
@@ -23,7 +24,8 @@ namespace System.Text
     // optimized for the lower 127 ASCII characters.  It's an efficient way
     // of encoding US English in an internationalizable way.
     //
-    // Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be confused.
+    // Don't override IsAlwaysNormalized because it is just a Unicode Transformation and could be
+    // confused.
     //
     // The UTF-8 byte order mark is simply the Unicode byte order mark
     // (0xFEFF) written in UTF-8 (0xEF 0xBB 0xBF).  The byte order mark is
@@ -32,18 +34,18 @@ namespace System.Text
 
     public partial class UTF8Encoding : Encoding
     {
-        /*
-            bytes   bits    UTF-8 representation
-            -----   ----    -----------------------------------
-            1        7      0vvvvvvv
-            2       11      110vvvvv 10vvvvvv
-            3       16      1110vvvv 10vvvvvv 10vvvvvv
-            4       21      11110vvv 10vvvvvv 10vvvvvv 10vvvvvv
-            -----   ----    -----------------------------------
+/*
+bytes   bits    UTF-8 representation
+-----   ----    -----------------------------------
+1        7      0vvvvvvv
+2       11      110vvvvv 10vvvvvv
+3       16      1110vvvv 10vvvvvv 10vvvvvv
+4       21      11110vvv 10vvvvvv 10vvvvvv 10vvvvvv
+-----   ----    -----------------------------------
 
-            Surrogate:
-            Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
-        */
+Surrogate:
+Real Unicode value = (HighSurrogate - 0xD800) * 0x400 + (LowSurrogate - 0xDC00) + 0x10000
+*/
 
         private const int UTF8_CODEPAGE = 65001;
 
@@ -208,7 +210,8 @@ namespace System.Text
         private unsafe int GetByteCountCommon(char* pChars, int charCount)
         {
             // Common helper method for all non-EncoderNLS entry points to GetByteCount.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -476,7 +479,8 @@ namespace System.Text
         )
         {
             // Common helper method for all non-EncoderNLS entry points to GetBytes.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(charCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -766,7 +770,8 @@ namespace System.Text
         )
         {
             // Common helper method for all non-DecoderNLS entry points to GetChars.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(
@@ -948,7 +953,8 @@ namespace System.Text
         private unsafe int GetCharCountCommon(byte* pBytes, int byteCount)
         {
             // Common helper method for all non-DecoderNLS entry points to GetCharCount.
-            // A modification of this method should be copied in to each of the supported encodings: ASCII, UTF8, UTF16, UTF32.
+            // A modification of this method should be copied in to each of the supported encodings: ASCII,
+            // UTF8, UTF16, UTF32.
 
             Debug.Assert(byteCount >= 0, "Caller shouldn't specify negative length buffer.");
             Debug.Assert(

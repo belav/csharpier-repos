@@ -92,9 +92,9 @@ namespace Mono.Security.Cryptography
 
         protected override void HashCore(byte[] array, int ibStart, int cbSize)
         {
-            /* Compute number of bytes mod 64 */
+/* Compute number of bytes mod 64 */
             int index = (int)((count[0] >> 3) & 0x3F);
-            /* Update number of bits */
+/* Update number of bits */
             count[0] += (uint)(cbSize << 3);
             if (count[0] < (cbSize << 3))
                 count[1]++;
@@ -102,7 +102,7 @@ namespace Mono.Security.Cryptography
 
             int partLen = 64 - index;
             int i = 0;
-            /* Transform as many times as possible. */
+/* Transform as many times as possible. */
             if (cbSize >= partLen)
             {
                 //MD4_memcpy((POINTER)&context->buffer[index], (POINTER)input, partLen);
@@ -118,26 +118,26 @@ namespace Mono.Security.Cryptography
                 index = 0;
             }
 
-            /* Buffer remaining input */
+/* Buffer remaining input */
             //MD4_memcpy ((POINTER)&context->buffer[index], (POINTER)&input[i], inputLen-i);
             Buffer.BlockCopy(array, ibStart + i, buffer, index, (cbSize - i));
         }
 
         protected override byte[] HashFinal()
         {
-            /* Save number of bits */
+/* Save number of bits */
             byte[] bits = new byte[8];
             Encode(bits, count);
 
-            /* Pad out to 56 mod 64. */
+/* Pad out to 56 mod 64. */
             uint index = ((count[0] >> 3) & 0x3f);
             int padLen = (int)((index < 56) ? (56 - index) : (120 - index));
             HashCore(Padding(padLen), 0, padLen);
 
-            /* Append length (before padding) */
+/* Append length (before padding) */
             HashCore(bits, 0, 8);
 
-            /* Store state in digest */
+/* Store state in digest */
             Encode(digest, state);
 
             // Zeroize sensitive information.
@@ -159,7 +159,7 @@ namespace Mono.Security.Cryptography
             return null;
         }
 
-        /* F, G and H are basic MD4 functions. */
+/* F, G and H are basic MD4 functions. */
         private uint F(uint x, uint y, uint z)
         {
             return (uint)(((x) & (y)) | ((~x) & (z)));
@@ -175,14 +175,14 @@ namespace Mono.Security.Cryptography
             return (uint)((x) ^ (y) ^ (z));
         }
 
-        /* ROTATE_LEFT rotates x left n bits. */
+/* ROTATE_LEFT rotates x left n bits. */
         private uint ROL(uint x, byte n)
         {
             return (uint)(((x) << (n)) | ((x) >> (32 - (n))));
         }
 
-        /* FF, GG and HH are transformations for rounds 1, 2 and 3 */
-        /* Rotation is separate from addition to prevent recomputation */
+/* FF, GG and HH are transformations for rounds 1, 2 and 3 */
+/* Rotation is separate from addition to prevent recomputation */
         private void FF(ref uint a, uint b, uint c, uint d, uint x, byte s)
         {
             a += F(b, c, d) + x;
@@ -231,7 +231,7 @@ namespace Mono.Security.Cryptography
 
             Decode(x, block, index);
 
-            /* Round 1 */
+/* Round 1 */
             FF(ref a, b, c, d, x[0], S11); /* 1 */
             FF(ref d, a, b, c, x[1], S12); /* 2 */
             FF(ref c, d, a, b, x[2], S13); /* 3 */
@@ -249,7 +249,7 @@ namespace Mono.Security.Cryptography
             FF(ref c, d, a, b, x[14], S13); /* 15 */
             FF(ref b, c, d, a, x[15], S14); /* 16 */
 
-            /* Round 2 */
+/* Round 2 */
             GG(ref a, b, c, d, x[0], S21); /* 17 */
             GG(ref d, a, b, c, x[4], S22); /* 18 */
             GG(ref c, d, a, b, x[8], S23); /* 19 */

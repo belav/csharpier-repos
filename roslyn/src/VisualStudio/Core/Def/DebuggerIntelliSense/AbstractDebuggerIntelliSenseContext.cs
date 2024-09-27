@@ -250,7 +250,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                 _workspace.OpenDocument(link, _projectionBuffer.AsTextContainer());
             }
 
-            // Start getting the compilation so the PartialSolution will be ready when the user starts typing in the window
+            // Start getting the compilation so the PartialSolution will be ready when the user starts typing in
+            // the window
             document.Project.GetCompilationAsync(System.Threading.CancellationToken.None);
 
             _textView.TextBuffer.ChangeContentType(_contentType, null);

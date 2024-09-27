@@ -22,8 +22,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Structure
             CancellationToken cancellationToken
         )
         {
-            // In metadata as source we want to treat documentation comments slightly differently, and collapse them
-            // to just "..." in front of the decalaration they're attached to. That happens in CSharpStructureHelper.CollectCommentBlockSpans
+            // In metadata as source we want to treat documentation comments slightly differently, and collapse
+            // them
+            // to just "..." in front of the decalaration they're attached to. That happens in
+            // CSharpStructureHelper.CollectCommentBlockSpans
             // so we don't need to do anything here
             if (options.IsMetadataAsSource)
             {

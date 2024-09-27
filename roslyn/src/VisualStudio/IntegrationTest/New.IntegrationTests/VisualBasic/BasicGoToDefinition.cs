@@ -122,8 +122,10 @@ End Class",
                 navigateToObjectBrowser
             );
 
-            // We want to make sure that if navigationToObjectBrowserEnabled = false we are navigating to a source representation; we will disable
-            // decompiled sources and embedded sources so that way the type of source (and contents within) are stable.
+            // We want to make sure that if navigationToObjectBrowserEnabled = false we are navigating to a
+            // source representation; we will disable
+            // decompiled sources and embedded sources so that way the type of source (and contents within) are
+            // stable.
             globalOptions.SetGlobalOption(
                 MetadataAsSourceOptionsStorage.NavigateToDecompiledSources,
                 false

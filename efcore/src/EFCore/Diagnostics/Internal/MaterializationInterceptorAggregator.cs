@@ -4,16 +4,21 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class MaterializationInterceptorAggregator
     : InterceptorAggregator<IMaterializationInterceptor>
 {
     /// <summary>
-    ///     Must be implemented by the inheriting type to create a single interceptor from the given list.
+    ///     Must be implemented by the inheriting type to create a single interceptor from the given
+    // list.
     /// </summary>
     /// <param name="interceptors">The interceptors to combine.</param>
     /// <returns>The combined interceptor.</returns>

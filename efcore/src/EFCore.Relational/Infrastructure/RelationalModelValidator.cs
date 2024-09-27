@@ -13,12 +13,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -28,7 +32,8 @@ public class RelationalModelValidator : ModelValidator
     ///     Creates a new instance of <see cref="RelationalModelValidator" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this service.</param>
-    /// <param name="relationalDependencies">Parameter object containing relational dependencies for this service.</param>
+    /// <param name="relationalDependencies">Parameter object containing relational dependencies for
+    // this service.</param>
     public RelationalModelValidator(
         ModelValidatorDependencies dependencies,
         RelationalModelValidatorDependencies relationalDependencies
@@ -1888,11 +1893,13 @@ public class RelationalModelValidator : ModelValidator
     }
 
     /// <summary>
-    ///     Returns the object that is used as the default value for the column the property is mapped to.
+    ///     Returns the object that is used as the default value for the column the property is mapped
+    // to.
     /// </summary>
     /// <param name="property">The property to get the default value for.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The object that is used as the default value for the column the property is mapped to.</returns>
+    /// <returns>The object that is used as the default value for the column the property is mapped
+    // to.</returns>
     protected virtual object? GetDefaultColumnValue(
         IProperty property,
         in StoreObjectIdentifier storeObject
@@ -3016,7 +3023,8 @@ public class RelationalModelValidator : ModelValidator
     }
 
     /// <summary>
-    ///     Validates that the properties of any one index are all mapped to columns on at least one common table.
+    ///     Validates that the properties of any one index are all mapped to columns on at least one
+    // common table.
     /// </summary>
     /// <param name="model">The model to validate.</param>
     /// <param name="logger">The logger to use.</param>
@@ -3473,7 +3481,8 @@ public class RelationalModelValidator : ModelValidator
     }
 
     /// <summary>
-    ///     Throws an <see cref="InvalidOperationException" /> with a message containing provider-specific information, when
+    ///     Throws an <see cref="InvalidOperationException" /> with a message containing
+    // provider-specific information, when
     ///     available, indicating possible reasons why the property cannot be mapped.
     /// </summary>
     /// <param name="propertyType">The property CLR type.</param>

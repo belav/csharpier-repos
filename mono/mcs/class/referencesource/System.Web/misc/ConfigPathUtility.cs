@@ -143,7 +143,8 @@ namespace System.Configuration
         }
 #endif
 
-        // Avoid unused code warning in System.Configuration by including functions in assembly-specific #defines
+        // Avoid unused code warning in System.Configuration by including functions in assembly-specific
+        // #defines
 #if CONFIGPATHUTILITY_SYSTEMWEB
         static internal string GetParent(string configPath)
         {

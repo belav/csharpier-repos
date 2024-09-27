@@ -54,8 +54,8 @@ namespace Novell.Directory.Ldap.Asn1
             TAG
         );
 
-        /* Constructors for Asn1SequenceOf
-        */
+/* Constructors for Asn1SequenceOf
+*/
 
         /// <summary> Constructs an Asn1SequenceOf object with no actual
         /// Asn1Objects in it. Assumes a default size of 5 elements.
@@ -114,8 +114,8 @@ namespace Novell.Directory.Ldap.Asn1
             return;
         }
 
-        /* Asn1SequenceOf specific methods
-        */
+/* Asn1SequenceOf specific methods
+*/
 
         /// <summary> Returns a String representation of this Asn1SequenceOf object</summary>
         [CLSCompliantAttribute(false)]

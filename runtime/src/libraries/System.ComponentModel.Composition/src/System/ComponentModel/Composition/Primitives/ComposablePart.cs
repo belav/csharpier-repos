@@ -138,14 +138,16 @@ namespace System.ComponentModel.Composition.Primitives
         ///     property on the <see cref="ComposablePart"/>.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        ///     One or more pre-requisite imports, indicated by <see cref="ImportDefinition.IsPrerequisite"/>,
+        ///     One or more pre-requisite imports, indicated by <see
+        // cref="ImportDefinition.IsPrerequisite"/>,
         ///     have not been set.
         /// </exception>
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="ComposablePart"/> has been disposed of.
         /// </exception>
         /// <exception cref="ComposablePartException">
-        ///     An error occurred getting the exported value described by the <see cref="ExportDefinition"/>.
+        ///     An error occurred getting the exported value described by the <see
+        // cref="ExportDefinition"/>.
         /// </exception>
         public abstract object? GetExportedValue(ExportDefinition definition);
 

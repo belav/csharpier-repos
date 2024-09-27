@@ -12,7 +12,9 @@ namespace System.Formats.Tar
     /// <summary>
     /// Abstract class that represents a tar entry from an archive.
     /// </summary>
-    /// <remarks>All the properties exposed by this class are supported by the <see cref="TarEntryFormat.V7"/>, <see cref="TarEntryFormat.Ustar"/>, <see cref="TarEntryFormat.Pax"/> and <see cref="TarEntryFormat.Gnu"/> formats.</remarks>
+    /// <remarks>All the properties exposed by this class are supported by the <see
+    // cref="TarEntryFormat.V7"/>, <see cref="TarEntryFormat.Ustar"/>, <see cref="TarEntryFormat.Pax"/> and
+    // <see cref="TarEntryFormat.Gnu"/> formats.</remarks>
     public abstract partial class TarEntry
     {
         internal TarHeader _header;
@@ -81,7 +83,8 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// The checksum of all the fields in this entry. The value is non-zero either when the entry is read from an existing archive, or after the entry is written to a new archive.
+        /// The checksum of all the fields in this entry. The value is non-zero either when the entry is
+        // read from an existing archive, or after the entry is written to a new archive.
         /// </summary>
         public int Checksum => _header._checksum;
 
@@ -106,10 +109,12 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// A timestamps that represents the last time the contents of the file represented by this entry were modified.
+        /// A timestamps that represents the last time the contents of the file represented by this entry
+        // were modified.
         /// </summary>
         /// <remarks>In Unix platforms, this timestamp is commonly known as <c>mtime</c>.</remarks>
-        /// <exception cref="ArgumentOutOfRangeException">The specified value is larger than <see cref="DateTimeOffset.UnixEpoch"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The specified value is larger than <see
+        // cref="DateTimeOffset.UnixEpoch"/>.</exception>
         public DateTimeOffset ModificationTime
         {
             get => _header._mTime;
@@ -121,17 +126,25 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// When the <see cref="EntryType"/> indicates an entry that can contain data, this property returns the length in bytes of such data.
+        /// When the <see cref="EntryType"/> indicates an entry that can contain data, this property returns
+        // the length in bytes of such data.
         /// </summary>
-        /// <remarks>The entry type that commonly contains data is <see cref="TarEntryType.RegularFile"/> (or <see cref="TarEntryType.V7RegularFile"/> in the <see cref="TarEntryFormat.V7"/> format). Other uncommon entry types that can also contain data are: <see cref="TarEntryType.ContiguousFile"/>, <see cref="TarEntryType.DirectoryList"/>, <see cref="TarEntryType.MultiVolume"/> and <see cref="TarEntryType.SparseFile"/>.</remarks>
+        /// <remarks>The entry type that commonly contains data is <see cref="TarEntryType.RegularFile"/>
+        // (or <see cref="TarEntryType.V7RegularFile"/> in the <see cref="TarEntryFormat.V7"/> format). Other
+        // uncommon entry types that can also contain data are: <see cref="TarEntryType.ContiguousFile"/>, <see
+        // cref="TarEntryType.DirectoryList"/>, <see cref="TarEntryType.MultiVolume"/> and <see
+        // cref="TarEntryType.SparseFile"/>.</remarks>
         public long Length =>
             _header._dataStream != null ? _header._dataStream.Length : _header._size;
 
         /// <summary>
-        /// When the <see cref="EntryType"/> indicates a <see cref="TarEntryType.SymbolicLink"/> or a <see cref="TarEntryType.HardLink"/>, this property returns the link target path of such link.
+        /// When the <see cref="EntryType"/> indicates a <see cref="TarEntryType.SymbolicLink"/> or a <see
+        // cref="TarEntryType.HardLink"/>, this property returns the link target path of such link.
         /// </summary>
-        /// <exception cref="InvalidOperationException">The entry type is not <see cref="TarEntryType.HardLink"/> or <see cref="TarEntryType.SymbolicLink"/>.</exception>
-        /// <exception cref="ArgumentNullException">The specified value is <see langword="null"/>.</exception>
+        /// <exception cref="InvalidOperationException">The entry type is not <see
+        // cref="TarEntryType.HardLink"/> or <see cref="TarEntryType.SymbolicLink"/>.</exception>
+        /// <exception cref="ArgumentNullException">The specified value is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException">The specified value is empty.</exception>
         public string LinkName
         {
@@ -192,25 +205,39 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// Extracts the current file or directory to the filesystem. Symbolic links and hard links are not extracted.
+        /// Extracts the current file or directory to the filesystem. Symbolic links and hard links are not
+        // extracted.
         /// </summary>
         /// <param name="destinationFileName">The path to the destination file.</param>
-        /// <param name="overwrite"><see langword="true"/> if this method should overwrite any existing filesystem object located in the <paramref name="destinationFileName"/> path; <see langword="false"/> to prevent overwriting.</param>
-        /// <remarks><para>Files of type <see cref="TarEntryType.BlockDevice"/>, <see cref="TarEntryType.CharacterDevice"/> or <see cref="TarEntryType.Fifo"/> can only be extracted in Unix platforms.</para>
-        /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see cref="TarEntryType.CharacterDevice"/> to disk.</para>
-        /// <para>Symbolic links can be recreated using <see cref="File.CreateSymbolicLink(string, string)"/>, <see cref="Directory.CreateSymbolicLink(string, string)"/> or <see cref="FileSystemInfo.CreateAsSymbolicLink(string)"/>.</para>
-        /// <para>Hard links can only be extracted when using <see cref="TarFile.ExtractToDirectory(Stream, string, bool)"/> or <see cref="TarFile.ExtractToDirectory(string, string, bool)"/>.</para></remarks>
-        /// <exception cref="ArgumentNullException"><paramref name="destinationFileName"/> is <see langword="null"/>.</exception>
+        /// <param name="overwrite"><see langword="true"/> if this method should overwrite any existing
+        // filesystem object located in the <paramref name="destinationFileName"/> path; <see
+        // langword="false"/> to prevent overwriting.</param>
+        /// <remarks><para>Files of type <see cref="TarEntryType.BlockDevice"/>, <see
+        // cref="TarEntryType.CharacterDevice"/> or <see cref="TarEntryType.Fifo"/> can only be extracted in
+        // Unix platforms.</para>
+        /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see
+        // cref="TarEntryType.CharacterDevice"/> to disk.</para>
+        /// <para>Symbolic links can be recreated using <see cref="File.CreateSymbolicLink(string,
+        // string)"/>, <see cref="Directory.CreateSymbolicLink(string, string)"/> or <see
+        // cref="FileSystemInfo.CreateAsSymbolicLink(string)"/>.</para>
+        /// <para>Hard links can only be extracted when using <see cref="TarFile.ExtractToDirectory(Stream,
+        // string, bool)"/> or <see cref="TarFile.ExtractToDirectory(string, string, bool)"/>.</para></remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="destinationFileName"/> is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="destinationFileName"/> is empty.</exception>
-        /// <exception cref="IOException"><para>The parent directory of <paramref name="destinationFileName"/> does not exist.</para>
+        /// <exception cref="IOException"><para>The parent directory of <paramref
+        // name="destinationFileName"/> does not exist.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="overwrite"/> is <see langword="false"/> and a file already exists in <paramref name="destinationFileName"/>.</para>
+        /// <para><paramref name="overwrite"/> is <see langword="false"/> and a file already exists in
+        // <paramref name="destinationFileName"/>.</para>
         /// <para>-or-</para>
         /// <para>A directory exists with the same name as <paramref name="destinationFileName"/>.</para>
         /// <para>-or-</para>
         /// <para>An I/O problem occurred.</para></exception>
-        /// <exception cref="InvalidOperationException">Attempted to extract a symbolic link, a hard link or an unsupported entry type.</exception>
-        /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient permissions.</exception>
+        /// <exception cref="InvalidOperationException">Attempted to extract a symbolic link, a hard link or
+        // an unsupported entry type.</exception>
+        /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient
+        // permissions.</exception>
         public void ExtractToFile(string destinationFileName, bool overwrite)
         {
             ArgumentException.ThrowIfNullOrEmpty(destinationFileName);
@@ -232,22 +259,33 @@ namespace System.Formats.Tar
         /// Asynchronously extracts the current entry to the filesystem.
         /// </summary>
         /// <param name="destinationFileName">The path to the destination file.</param>
-        /// <param name="overwrite"><see langword="true"/> if this method should overwrite any existing filesystem object located in the <paramref name="destinationFileName"/> path; <see langword="false"/> to prevent overwriting.</param>
-        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+        /// <param name="overwrite"><see langword="true"/> if this method should overwrite any existing
+        // filesystem object located in the <paramref name="destinationFileName"/> path; <see
+        // langword="false"/> to prevent overwriting.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+        // value is <see cref="CancellationToken.None" />.</param>
         /// <returns>A task that represents the asynchronous extraction operation.</returns>
-        /// <remarks><para>Files of type <see cref="TarEntryType.BlockDevice"/>, <see cref="TarEntryType.CharacterDevice"/> or <see cref="TarEntryType.Fifo"/> can only be extracted in Unix platforms.</para>
-        /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see cref="TarEntryType.CharacterDevice"/> to disk.</para></remarks>
-        /// <exception cref="ArgumentNullException"><paramref name="destinationFileName"/> is <see langword="null"/>.</exception>
+        /// <remarks><para>Files of type <see cref="TarEntryType.BlockDevice"/>, <see
+        // cref="TarEntryType.CharacterDevice"/> or <see cref="TarEntryType.Fifo"/> can only be extracted in
+        // Unix platforms.</para>
+        /// <para>Elevation is required to extract a <see cref="TarEntryType.BlockDevice"/> or <see
+        // cref="TarEntryType.CharacterDevice"/> to disk.</para></remarks>
+        /// <exception cref="ArgumentNullException"><paramref name="destinationFileName"/> is <see
+        // langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="destinationFileName"/> is empty.</exception>
-        /// <exception cref="IOException"><para>The parent directory of <paramref name="destinationFileName"/> does not exist.</para>
+        /// <exception cref="IOException"><para>The parent directory of <paramref
+        // name="destinationFileName"/> does not exist.</para>
         /// <para>-or-</para>
-        /// <para><paramref name="overwrite"/> is <see langword="false"/> and a file already exists in <paramref name="destinationFileName"/>.</para>
+        /// <para><paramref name="overwrite"/> is <see langword="false"/> and a file already exists in
+        // <paramref name="destinationFileName"/>.</para>
         /// <para>-or-</para>
         /// <para>A directory exists with the same name as <paramref name="destinationFileName"/>.</para>
         /// <para>-or-</para>
         /// <para>An I/O problem occurred.</para></exception>
-        /// <exception cref="InvalidOperationException">Attempted to extract an unsupported entry type.</exception>
-        /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient permissions.</exception>
+        /// <exception cref="InvalidOperationException">Attempted to extract an unsupported entry
+        // type.</exception>
+        /// <exception cref="UnauthorizedAccessException">Operation not permitted due to insufficient
+        // permissions.</exception>
         public Task ExtractToFileAsync(
             string destinationFileName,
             bool overwrite,
@@ -281,12 +319,21 @@ namespace System.Formats.Tar
         }
 
         /// <summary>
-        /// The data section of this entry. If the <see cref="EntryType"/> does not support containing data, then returns <see langword="null"/>.
+        /// The data section of this entry. If the <see cref="EntryType"/> does not support containing data,
+        // then returns <see langword="null"/>.
         /// </summary>
         /// <value><para>Gets a stream that represents the data section of this entry.</para>
-        /// <para>Sets a new stream that represents the data section, if it makes sense for the <see cref="EntryType"/> to contain data; if a stream already existed, the old stream gets disposed before substituting it with the new stream. Setting a <see langword="null"/> stream is allowed.</para></value>
-        /// <remarks>If you write data to this data stream, make sure to rewind it to the desired start position before writing this entry into an archive using <see cref="TarWriter.WriteEntry(TarEntry)"/>.</remarks>
-        /// <exception cref="InvalidOperationException">Setting a data section is not supported because the <see cref="EntryType"/> is not <see cref="TarEntryType.RegularFile"/> (or <see cref="TarEntryType.V7RegularFile"/> for an archive of <see cref="TarEntryFormat.V7"/> format).</exception>
+        /// <para>Sets a new stream that represents the data section, if it makes sense for the <see
+        // cref="EntryType"/> to contain data; if a stream already existed, the old stream gets disposed before
+        // substituting it with the new stream. Setting a <see langword="null"/> stream is
+        // allowed.</para></value>
+        /// <remarks>If you write data to this data stream, make sure to rewind it to the desired start
+        // position before writing this entry into an archive using <see
+        // cref="TarWriter.WriteEntry(TarEntry)"/>.</remarks>
+        /// <exception cref="InvalidOperationException">Setting a data section is not supported because the
+        // <see cref="EntryType"/> is not <see cref="TarEntryType.RegularFile"/> (or <see
+        // cref="TarEntryType.V7RegularFile"/> for an archive of <see cref="TarEntryFormat.V7"/>
+        // format).</exception>
         /// <exception cref="ArgumentException">Cannot set an unreadable stream.</exception>
         /// <exception cref="IOException">An I/O problem occurred.</exception>
         public Stream? DataStream
@@ -409,7 +456,8 @@ namespace System.Formats.Tar
             }
         }
 
-        // Gets the sanitized paths for the file destination and link target paths to be used when extracting relative to a directory.
+        // Gets the sanitized paths for the file destination and link target paths to be used when
+        // extracting relative to a directory.
         private (string, string?) GetDestinationAndLinkPaths(string destinationDirectoryPath)
         {
             Debug.Assert(!string.IsNullOrEmpty(destinationDirectoryPath));
@@ -431,7 +479,8 @@ namespace System.Formats.Tar
             if (EntryType is TarEntryType.SymbolicLink)
             {
                 // LinkName is an absolute path, or path relative to the fileDestinationPath directory.
-                // We don't check if the LinkName is empty. In that case, creation of the link will fail because link targets can't be empty.
+                // We don't check if the LinkName is empty. In that case, creation of the link will fail because
+                // link targets can't be empty.
                 string linkName = ArchivingUtils.SanitizeEntryFilePath(
                     LinkName,
                     preserveDriveRoot: true
@@ -458,7 +507,8 @@ namespace System.Formats.Tar
             else if (EntryType is TarEntryType.HardLink)
             {
                 // LinkName is path relative to the destinationDirectoryPath.
-                // We don't check if the LinkName is empty. In that case, creation of the link will fail because a hard link can't target a directory.
+                // We don't check if the LinkName is empty. In that case, creation of the link will fail because a
+                // hard link can't target a directory.
                 string linkName = ArchivingUtils.SanitizeEntryFilePath(
                     LinkName,
                     preserveDriveRoot: false
@@ -484,7 +534,8 @@ namespace System.Formats.Tar
             return (fileDestinationPath, linkTargetPath);
         }
 
-        // Returns the full destination path if the path is the destinationDirectory or a subpath. Otherwise, returns null.
+        // Returns the full destination path if the path is the destinationDirectory or a subpath.
+        // Otherwise, returns null.
         private static string? GetFullDestinationPath(
             string destinationDirectoryFullPath,
             string qualifiedPath
@@ -658,7 +709,8 @@ namespace System.Formats.Tar
         }
 
         // Extracts the current entry as a regular file into the specified destination.
-        // The assumption is that at this point there is no preexisting file or directory in that destination.
+        // The assumption is that at this point there is no preexisting file or directory in that
+        // destination.
         private void ExtractAsRegularFile(string destinationFileName)
         {
             Debug.Assert(!Path.Exists(destinationFileName));
@@ -679,7 +731,8 @@ namespace System.Formats.Tar
         }
 
         // Asynchronously extracts the current entry as a regular file into the specified destination.
-        // The assumption is that at this point there is no preexisting file or directory in that destination.
+        // The assumption is that at this point there is no preexisting file or directory in that
+        // destination.
         private async Task ExtractAsRegularFileAsync(
             string destinationFileName,
             CancellationToken cancellationToken
@@ -717,7 +770,8 @@ namespace System.Formats.Tar
             }
             catch
             {
-                // Some OSes like Android might not support setting the last write time, the extraction should not fail because of that
+                // Some OSes like Android might not support setting the last write time, the extraction should not
+                // fail because of that
             }
         }
 

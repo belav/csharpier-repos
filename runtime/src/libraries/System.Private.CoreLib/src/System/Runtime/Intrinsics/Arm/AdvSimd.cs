@@ -31,123 +31,153 @@ namespace System.Runtime.Intrinsics.Arm
         //     /// float32x2_t vmla_f32 (float32x2_t a, float32x2_t b, float32x2_t c)
         //     ///   A32: VMLA.F32 Dd, Dn, Dm
         //     /// </summary>
-        //     public static Vector64<float> MultiplyAdd(Vector64<float> addend, Vector64<float> left, Vector64<float> right) => MultiplyAdd(addend, left, right);
+        //     public static Vector64<float> MultiplyAdd(Vector64<float> addend, Vector64<float> left,
+        // Vector64<float> right) => MultiplyAdd(addend, left, right);
         //
         //     /// <summary>
         //     /// float32x4_t vmlaq_f32 (float32x4_t a, float32x4_t b, float32x4_t c)
         //     ///   A32: VMLA.F32 Qd, Qn, Qm
         //     /// </summary>
-        //     public static Vector128<float> MultiplyAdd(Vector128<float> addend, Vector128<float> left, Vector128<float> right) => MultiplyAdd(addend, left, right);
+        //     public static Vector128<float> MultiplyAdd(Vector128<float> addend, Vector128<float> left,
+        // Vector128<float> right) => MultiplyAdd(addend, left, right);
         //
         //     /// <summary>
         //     /// float32x2_t vmla_n_f32 (float32x2_t a, float32x2_t b, float32_t c)
         //     ///   A32: VMLA.F32 Dd, Dn, Dm[0]
         //     /// </summary>
-        //     public static Vector64<float> MultiplyAddByScalar(Vector64<float> addend, Vector64<float> left, Vector64<float> right) => MultiplyAddByScalar(addend, left, right);
+        //     public static Vector64<float> MultiplyAddByScalar(Vector64<float> addend, Vector64<float>
+        // left, Vector64<float> right) => MultiplyAddByScalar(addend, left, right);
         //
         //     /// <summary>
         //     /// float32x4_t vmlaq_n_f32 (float32x4_t a, float32x4_t b, float32_t c)
         //     ///   A32: VMLA.F32 Qd, Qn, Dm[0]
         //     /// </summary>
-        //     public static Vector128<float> MultiplyAddByScalar(Vector128<float> addend, Vector128<float> left, Vector64<float> right) => MultiplyAddByScalar(addend, left, right);
+        //     public static Vector128<float> MultiplyAddByScalar(Vector128<float> addend, Vector128<float>
+        // left, Vector64<float> right) => MultiplyAddByScalar(addend, left, right);
         //
         //     /// <summary>
         //     /// float32x2_t vmla_lane_f32 (float32x2_t a, float32x2_t b, float32x2_t v, const int lane)
         //     ///   A32: VMLA.F32 Dd, Dn, Dm[lane]
         //     /// </summary>
-        //     public static Vector64<float> MultiplyAddBySelectedScalar(Vector64<float> addend, Vector64<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
+        //     public static Vector64<float> MultiplyAddBySelectedScalar(Vector64<float> addend,
+        // Vector64<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) =>
+        // MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x2_t vmla_laneq_f32 (float32x2_t a, float32x2_t b, float32x4_t v, const int lane)
         //     ///   A32: VMLA.F32 Dd, Dn, Dm[lane]
         //     /// </summary>
-        //     public static Vector64<float> MultiplyAddBySelectedScalar(Vector64<float> addend, Vector64<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex) => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
+        //     public static Vector64<float> MultiplyAddBySelectedScalar(Vector64<float> addend,
+        // Vector64<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex)
+        // => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x4_t vmlaq_lane_f32 (float32x4_t a, float32x4_t b, float32x2_t v, const int lane)
         //     ///   A32: VMLA.F32 Qd, Qn, Dm[lane]
         //     /// </summary>
-        //     public static Vector128<float> MultiplyAddBySelectedScalar(Vector128<float> addend, Vector128<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
+        //     public static Vector128<float> MultiplyAddBySelectedScalar(Vector128<float> addend,
+        // Vector128<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex)
+        // => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x4_t vmlaq_laneq_f32 (float32x4_t a, float32x4_t b, float32x4_t v, const int lane)
         //     ///   A32: VMLA.F32 Qd, Qn, Dm[lane]
         //     /// </summary>
-        //     public static Vector128<float> MultiplyAddBySelectedScalar(Vector128<float> addend, Vector128<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex) => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
+        //     public static Vector128<float> MultiplyAddBySelectedScalar(Vector128<float> addend,
+        // Vector128<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex)
+        // => MultiplyAddBySelectedScalar(addend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float64x1_t vmla_f64 (float64x1_t a, float64x1_t b, float64x1_t c)
         //     ///   A32: VMLA.F64 Dd, Dn, Dm
         //     /// </summary>
-        //     public static Vector64<double> MultiplyAddScalar(Vector64<double> addend, Vector64<double> left, Vector64<double> right) => MultiplyAddScalar(addend, left, right);
+        //     public static Vector64<double> MultiplyAddScalar(Vector64<double> addend, Vector64<double>
+        // left, Vector64<double> right) => MultiplyAddScalar(addend, left, right);
         //
         //     /// <summary>
         //     /// float32_t vmlas_f32 (float32_t a, float32_t b, float32_t c)
         //     ///   A32: VMLA.F32 Sd, Sn, Sm
-        //     /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        //     /// The above native signature does not exist. We provide this additional overload for
+        // consistency with the other scalar APIs.
         //     /// </summary>
-        //     public static Vector64<float> MultiplyAddScalar(Vector64<float> addend, Vector64<float> left, Vector64<float> right) => MultiplyAddScalar(addend, left, right);
+        //     public static Vector64<float> MultiplyAddScalar(Vector64<float> addend, Vector64<float> left,
+        // Vector64<float> right) => MultiplyAddScalar(addend, left, right);
         //
         //     /// <summary>
         //     /// float32x2_t vmls_f32 (float32x2_t a, float32x2_t b, float32x2_t c)
         //     ///   A32: VMLS.F32 Dd, Dn, Dm
         //     /// </summary>
-        //     public static Vector64<float> MultiplySubtract(Vector64<float> minuend, Vector64<float> left, Vector64<float> right) => MultiplySubtract(minuend, left, right);
+        //     public static Vector64<float> MultiplySubtract(Vector64<float> minuend, Vector64<float> left,
+        // Vector64<float> right) => MultiplySubtract(minuend, left, right);
         //
         //     /// <summary>
         //     /// float32x4_t vmlsq_f32 (float32x4_t a, float32x4_t b, float32x4_t c)
         //     ///   A32: VMLS.F32 Qd, Qn, Qm
         //     /// </summary>
-        //     public static Vector128<float> MultiplySubtract(Vector128<float> minuend, Vector128<float> left, Vector128<float> right) => MultiplySubtract(minuend, left, right);
+        //     public static Vector128<float> MultiplySubtract(Vector128<float> minuend, Vector128<float>
+        // left, Vector128<float> right) => MultiplySubtract(minuend, left, right);
         //
         //     /// <summary>
         //     /// float32x2_t vmls_n_f32 (float32x2_t a, float32x2_t b, float32_t c)
         //     ///   A32: VMLS.F32 Dd, Dn, Dm[0]
         //     /// </summary>
-        //     public static Vector64<float> MultiplySubtractByScalar(Vector64<float> minuend, Vector64<float> left, Vector64<float> right) => MultiplySubtractByScalar(minuend, left, right);
+        //     public static Vector64<float> MultiplySubtractByScalar(Vector64<float> minuend,
+        // Vector64<float> left, Vector64<float> right) => MultiplySubtractByScalar(minuend, left, right);
         //
         //     /// <summary>
         //     /// float32x4_t vmlsq_n_f32 (float32x4_t a, float32x4_t b, float32_t c)
         //     ///   A32: VMLS.F32 Qd, Qn, Dm[0]
         //     /// </summary>
-        //     public static Vector128<float> MultiplySubtractByScalar(Vector128<float> minuend, Vector128<float> left, Vector64<float> right) => MultiplySubtractByScalar(minuend, left, right);
+        //     public static Vector128<float> MultiplySubtractByScalar(Vector128<float> minuend,
+        // Vector128<float> left, Vector64<float> right) => MultiplySubtractByScalar(minuend, left, right);
         //
         //     /// <summary>
         //     /// float32x2_t vmls_lane_f32 (float32x2_t a, float32x2_t b, float32x2_t v, const int lane)
         //     ///   A32: VMLS.F32 Dd, Dn, Dm[lane]
         //     /// </summary>
-        //     public static Vector64<float> MultiplySubtractBySelectedScalar(Vector64<float> minuend, Vector64<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
+        //     public static Vector64<float> MultiplySubtractBySelectedScalar(Vector64<float> minuend,
+        // Vector64<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) =>
+        // MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x2_t vmls_laneq_f32 (float32x2_t a, float32x2_t b, float32x4_t v, const int lane)
         //     ///   A32: VMLS.F32 Dd, Dn, Dm[lane]
         //     /// </summary>
-        //     public static Vector64<float> MultiplySubtractBySelectedScalar(Vector64<float> minuend, Vector64<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex) => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
+        //     public static Vector64<float> MultiplySubtractBySelectedScalar(Vector64<float> minuend,
+        // Vector64<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex)
+        // => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x4_t vmlsq_lane_f32 (float32x4_t a, float32x4_t b, float32x2_t v, const int lane)
         //     ///   A32: VMLS.F32 Qd, Qn, Dm[lane]
         //     /// </summary>
-        //     public static Vector128<float> MultiplySubtractBySelectedScalar(Vector128<float> minuend, Vector128<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex) => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
+        //     public static Vector128<float> MultiplySubtractBySelectedScalar(Vector128<float> minuend,
+        // Vector128<float> left, Vector64<float> right, [ConstantExpected(Max = (byte)(1))] byte rightIndex)
+        // => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float32x4_t vmlsq_laneq_f32 (float32x4_t a, float32x4_t b, float32x4_t v, const int lane)
         //     ///   A32: VMLS.F32 Qd, Qn, Dm[lane]
         //     /// </summary>
-        //     public static Vector128<float> MultiplySubtractBySelectedScalar(Vector128<float> minuend, Vector128<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex) => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
+        //     public static Vector128<float> MultiplySubtractBySelectedScalar(Vector128<float> minuend,
+        // Vector128<float> left, Vector128<float> right, [ConstantExpected(Max = (byte)(3))] byte rightIndex)
+        // => MultiplySubtractBySelectedScalar(minuend, left, right, rightIndex);
         //
         //     /// <summary>
         //     /// float64x1_t vmls_f64 (float64x1_t a, float64x1_t b, float64x1_t c)
         //     ///   A32: VMLS.F64 Dd, Dn, Dm
         //     /// </summary>
-        //     public static Vector64<double> MultiplySubtractScalar(Vector64<double> minuend, Vector64<double> left, Vector64<double> right) => MultiplySubtractScalar(minuend, left, right);
+        //     public static Vector64<double> MultiplySubtractScalar(Vector64<double> minuend,
+        // Vector64<double> left, Vector64<double> right) => MultiplySubtractScalar(minuend, left, right);
         //
         //     /// <summary>
         //     /// float32_t vmlss_f32 (float32_t a, float32_t b, float32_t c)
         //     ///   A32: VMLS.F32 Sd, Sn, Sm
-        //     /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        //     /// The above native signature does not exist. We provide this additional overload for
+        // consistency with the other scalar APIs.
         //     /// </summary>
-        //     public static Vector64<float> MultiplySubtractScalar(Vector64<float> minuend, Vector64<float> left, Vector64<float> right) => MultiplySubtractScalar(minuend, left, right);
+        //     public static Vector64<float> MultiplySubtractScalar(Vector64<float> minuend, Vector64<float>
+        // left, Vector64<float> right) => MultiplySubtractScalar(minuend, left, right);
         // }
 
         [Intrinsic]
@@ -1164,7 +1194,8 @@ namespace System.Runtime.Intrinsics.Arm
             /// <summary>
             /// uint64x2_t vtstq_f64 (float64x2_t a, float64x2_t b)
             ///   A64: CMTST Vd.2D, Vn.2D, Vm.2D
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other scalar APIs.
             /// </summary>
             public static Vector128<double> CompareTest(
                 Vector128<double> left,
@@ -1192,7 +1223,8 @@ namespace System.Runtime.Intrinsics.Arm
             /// <summary>
             /// uint64x1_t vtst_f64 (float64x1_t a, float64x1_t b)
             ///   A64: CMTST Dd, Dn, Dm
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other scalar APIs.
             /// </summary>
             public static Vector64<double> CompareTestScalar(
                 Vector64<double> left,
@@ -4009,7 +4041,8 @@ namespace System.Runtime.Intrinsics.Arm
             /// <summary>
             /// float32_t vmaxs_f32 (float32_t a, float32_t b)
             ///   A64: FMAX Sd, Sn, Sm
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other scalar APIs.
             /// </summary>
             public static Vector64<float> MaxScalar(Vector64<float> left, Vector64<float> right) =>
                 MaxScalar(left, right);
@@ -4240,7 +4273,8 @@ namespace System.Runtime.Intrinsics.Arm
             /// <summary>
             /// float32_t vmins_f32 (float32_t a, float32_t b)
             ///   A64: FMIN Sd, Sn, Sm
-            /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+            /// The above native signature does not exist. We provide this additional overload for consistency
+            // with the other scalar APIs.
             /// </summary>
             public static Vector64<float> MinScalar(Vector64<float> left, Vector64<float> right) =>
                 MinScalar(left, right);
@@ -7942,7 +7976,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vabss_f32 (float32_t a)
         ///   A32: VABS.F32 Sd, Sm
         ///   A64: FABS Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> AbsScalar(Vector64<float> value) => AbsScalar(value);
 
@@ -9352,7 +9387,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vadds_f32 (float32_t a, float32_t b)
         ///   A32: VADD.F32 Sd, Sn, Sm
         ///   A64: FADD Sd, Sn, Sm
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> AddScalar(Vector64<float> left, Vector64<float> right) =>
             AddScalar(left, right);
@@ -9609,7 +9645,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vand_f64 (float64x1_t a, float64x1_t b)
         ///   A32: VAND Dd, Dn, Dm
         ///   A64: AND Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> And(Vector64<double> left, Vector64<double> right) =>
             And(left, right);
@@ -9650,7 +9687,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t vand_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VAND Dd, Dn, Dm
         ///   A64: AND Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> And(Vector64<float> left, Vector64<float> right) =>
             And(left, right);
@@ -9691,7 +9729,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t vandq_f64 (float64x2_t a, float64x2_t b)
         ///   A32: VAND Qd, Qn, Qm
         ///   A64: AND Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> And(Vector128<double> left, Vector128<double> right) =>
             And(left, right);
@@ -9732,7 +9771,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t vandq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VAND Qd, Qn, Qm
         ///   A64: AND Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> And(Vector128<float> left, Vector128<float> right) =>
             And(left, right);
@@ -9773,7 +9813,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vbic_f64 (float64x1_t a, float64x1_t b)
         ///   A32: VBIC Dd, Dn, Dm
         ///   A64: BIC Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> BitwiseClear(
             Vector64<double> value,
@@ -9816,7 +9857,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t vbic_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VBIC Dd, Dn, Dm
         ///   A64: BIC Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> BitwiseClear(Vector64<float> value, Vector64<float> mask) =>
             BitwiseClear(value, mask);
@@ -9859,7 +9901,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t vbicq_f64 (float64x2_t a, float64x2_t b)
         ///   A32: VBIC Qd, Qn, Qm
         ///   A64: BIC Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> BitwiseClear(
             Vector128<double> value,
@@ -9906,7 +9949,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t vbicq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VBIC Qd, Qn, Qm
         ///   A64: BIC Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> BitwiseClear(
             Vector128<float> value,
@@ -10187,7 +10231,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndps_f32 (float32_t a)
         ///   A32: VRINTP.F32 Sd, Sm
         ///   A64: FRINTP Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> CeilingScalar(Vector64<float> value) => CeilingScalar(value);
 
@@ -10899,7 +10944,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// uint32x2_t vtst_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VTST.32 Dd, Dn, Dm
         ///   A64: CMTST Vd.2S, Vn.2S, Vm.2S
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> CompareTest(Vector64<float> left, Vector64<float> right) =>
             CompareTest(left, right);
@@ -10956,7 +11002,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// uint32x4_t vtstq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VTST.32 Qd, Qn, Qm
         ///   A64: CMTST Vd.4S, Vn.4S, Vm.4S
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> CompareTest(Vector128<float> left, Vector128<float> right) =>
             CompareTest(left, right);
@@ -11292,7 +11339,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vdivs_f32 (float32_t a, float32_t b)
         ///   A32: VDIV.F32 Sd, Sn, Sm
         ///   A64: FDIV Sd, Sn, Sm
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> DivideScalar(Vector64<float> left, Vector64<float> right) =>
             DivideScalar(left, right);
@@ -12339,7 +12387,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndms_f32 (float32_t a)
         ///   A32: VRINTM.F32 Sd, Sm
         ///   A64: FRINTM Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> FloorScalar(Vector64<float> value) => FloorScalar(value);
 
@@ -12601,7 +12650,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vfnma_f64 (float64x1_t a, float64x1_t b, float64x1_t c)
         ///   A32: VFNMA.F64 Dd, Dn, Dm
         ///   A64: FNMADD Dd, Dn, Dm, Da
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> FusedMultiplyAddNegatedScalar(
             Vector64<double> addend,
@@ -12613,7 +12663,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vfnmas_f32 (float32_t a, float32_t b, float32_t c)
         ///   A32: VFNMA.F32 Sd, Sn, Sm
         ///   A64: FNMADD Sd, Sn, Sm, Sa
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> FusedMultiplyAddNegatedScalar(
             Vector64<float> addend,
@@ -12636,7 +12687,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vfmas_f32 (float32_t a, float32_t b, float32_t c)
         ///   A32: VFMA.F32 Sd, Sn, Sm
         ///   A64: FMADD Sd, Sn, Sm, Sa
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> FusedMultiplyAddScalar(
             Vector64<float> addend,
@@ -12670,7 +12722,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vfnms_f64 (float64x1_t a, float64x1_t b, float64x1_t c)
         ///   A32: VFNMS.F64 Dd, Dn, Dm
         ///   A64: FNMSUB Dd, Dn, Dm, Da
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> FusedMultiplySubtractNegatedScalar(
             Vector64<double> minuend,
@@ -12682,7 +12735,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vfnmss_f32 (float32_t a, float32_t b, float32_t c)
         ///   A32: VFNMS.F32 Sd, Sn, Sm
         ///   A64: FNMSUB Sd, Sn, Sm, Sa
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> FusedMultiplySubtractNegatedScalar(
             Vector64<float> minuend,
@@ -12705,7 +12759,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vfmss_f32 (float32_t a, float32_t b, float32_t c)
         ///   A32: VFMS.F32 Sd, Sn, Sm
         ///   A64: FMSUB Sd, Sn, Sm, Sa
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> FusedMultiplySubtractScalar(
             Vector64<float> minuend,
@@ -17239,7 +17294,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vmuls_f32 (float32_t a, float32_t b)
         ///   A32: VMUL.F32 Sd, Sn, Sm
         ///   A64: FMUL Sd, Sn, Sm
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> MultiplyScalar(Vector64<float> left, Vector64<float> right) =>
             MultiplyScalar(left, right);
@@ -18175,7 +18231,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vnegs_f32 (float32_t a)
         ///   A32: VNEG.F32 Sd, Sm
         ///   A64: FNEG Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> NegateScalar(Vector64<float> value) => NegateScalar(value);
 
@@ -18190,7 +18247,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vmvn_f64 (float64x1_t a)
         ///   A32: VMVN Dd, Dm
         ///   A64: MVN Vd.8B, Vn.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> Not(Vector64<double> value) => Not(value);
 
@@ -18226,7 +18284,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t vmvn_f32 (float32x2_t a)
         ///   A32: VMVN Dd, Dm
         ///   A64: MVN Vd.8B, Vn.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> Not(Vector64<float> value) => Not(value);
 
@@ -18262,7 +18321,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t vmvnq_f64 (float64x2_t a)
         ///   A32: VMVN Qd, Qm
         ///   A64: MVN Vd.16B, Vn.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> Not(Vector128<double> value) => Not(value);
 
@@ -18298,7 +18358,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t vmvnq_f32 (float32x4_t a)
         ///   A32: VMVN Qd, Qm
         ///   A64: MVN Vd.16B, Vn.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> Not(Vector128<float> value) => Not(value);
 
@@ -18335,7 +18396,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vorr_f64 (float64x1_t a, float64x1_t b)
         ///   A32: VORR Dd, Dn, Dm
         ///   A64: ORR Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> Or(Vector64<double> left, Vector64<double> right) =>
             Or(left, right);
@@ -18375,7 +18437,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t vorr_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VORR Dd, Dn, Dm
         ///   A64: ORR Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> Or(Vector64<float> left, Vector64<float> right) =>
             Or(left, right);
@@ -18416,7 +18479,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t vorrq_f64 (float64x2_t a, float64x2_t b)
         ///   A32: VORR Qd, Qn, Qm
         ///   A64: ORR Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> Or(Vector128<double> left, Vector128<double> right) =>
             Or(left, right);
@@ -18457,7 +18521,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t vorrq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VORR Qd, Qn, Qm
         ///   A64: ORR Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> Or(Vector128<float> left, Vector128<float> right) =>
             Or(left, right);
@@ -18498,7 +18563,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t vorn_f64 (float64x1_t a, float64x1_t b)
         ///   A32: VORN Dd, Dn, Dm
         ///   A64: ORN Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> OrNot(Vector64<double> left, Vector64<double> right) =>
             OrNot(left, right);
@@ -18539,7 +18605,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t vorn_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VORN Dd, Dn, Dm
         ///   A64: ORN Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> OrNot(Vector64<float> left, Vector64<float> right) =>
             OrNot(left, right);
@@ -18580,7 +18647,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t vornq_f64 (float64x2_t a, float64x2_t b)
         ///   A32: VORN Qd, Qn, Qm
         ///   A64: ORN Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> OrNot(Vector128<double> left, Vector128<double> right) =>
             OrNot(left, right);
@@ -18621,7 +18689,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t vornq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VORN Qd, Qn, Qm
         ///   A64: ORN Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> OrNot(Vector128<float> left, Vector128<float> right) =>
             OrNot(left, right);
@@ -19079,7 +19148,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndas_f32 (float32_t a)
         ///   A32: VRINTA.F32 Sd, Sm
         ///   A64: FRINTA Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> RoundAwayFromZeroScalar(Vector64<float> value) =>
             RoundAwayFromZeroScalar(value);
@@ -19112,7 +19182,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndns_f32 (float32_t a)
         ///   A32: VRINTN.F32 Sd, Sm
         ///   A64: FRINTN Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> RoundToNearestScalar(Vector64<float> value) =>
             RoundToNearestScalar(value);
@@ -19145,7 +19216,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndms_f32 (float32_t a)
         ///   A32: VRINTM.F32 Sd, Sm
         ///   A64: FRINTM Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> RoundToNegativeInfinityScalar(Vector64<float> value) =>
             RoundToNegativeInfinityScalar(value);
@@ -19178,7 +19250,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrndps_f32 (float32_t a)
         ///   A32: VRINTP.F32 Sd, Sm
         ///   A64: FRINTP Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> RoundToPositiveInfinityScalar(Vector64<float> value) =>
             RoundToPositiveInfinityScalar(value);
@@ -19209,7 +19282,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vrnds_f32 (float32_t a)
         ///   A32: VRINTZ.F32 Sd, Sm
         ///   A64: FRINTZ Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> RoundToZeroScalar(Vector64<float> value) =>
             RoundToZeroScalar(value);
@@ -22835,7 +22909,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vsqrts_f32 (float32_t a)
         ///   A32: VSQRT.F32 Sd, Sm
         ///   A64: FSQRT Sd, Sn
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> SqrtScalar(Vector64<float> value) => SqrtScalar(value);
 
@@ -24370,7 +24445,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32_t vsubs_f32 (float32_t a, float32_t b)
         ///   A32: VSUB.F32 Sd, Sn, Sm
         ///   A64: FSUB Sd, Sn, Sm
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> SubtractScalar(Vector64<float> left, Vector64<float> right) =>
             SubtractScalar(left, right);
@@ -24791,7 +24867,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x1_t veor_f64 (float64x1_t a, float64x1_t b)
         ///   A32: VEOR Dd, Dn, Dm
         ///   A64: EOR Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<double> Xor(Vector64<double> left, Vector64<double> right) =>
             Xor(left, right);
@@ -24832,7 +24909,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x2_t veor_f32 (float32x2_t a, float32x2_t b)
         ///   A32: VEOR Dd, Dn, Dm
         ///   A64: EOR Vd.8B, Vn.8B, Vm.8B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector64<float> Xor(Vector64<float> left, Vector64<float> right) =>
             Xor(left, right);
@@ -24873,7 +24951,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float64x2_t veorq_f64 (float64x2_t a, float64x2_t b)
         ///   A32: VEOR Qd, Qn, Qm
         ///   A64: EOR Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<double> Xor(Vector128<double> left, Vector128<double> right) =>
             Xor(left, right);
@@ -24914,7 +24993,8 @@ namespace System.Runtime.Intrinsics.Arm
         /// float32x4_t veorq_f32 (float32x4_t a, float32x4_t b)
         ///   A32: VEOR Qd, Qn, Qm
         ///   A64: EOR Vd.16B, Vn.16B, Vm.16B
-        /// The above native signature does not exist. We provide this additional overload for consistency with the other scalar APIs.
+        /// The above native signature does not exist. We provide this additional overload for consistency
+        // with the other scalar APIs.
         /// </summary>
         public static Vector128<float> Xor(Vector128<float> left, Vector128<float> right) =>
             Xor(left, right);

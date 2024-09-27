@@ -261,7 +261,8 @@ namespace System.Data.Tests.SqlTypes
 
             Assert.Equal(bytes[5], binary[5]);
 
-            // verify that changing the byte[] that was passed in also changes the value in the SqlBinary instance
+            // verify that changing the byte[] that was passed in also changes the value in the SqlBinary
+            // instance
             bytes[5] = 0xFF;
             Assert.Equal(bytes[5], binary[5]);
 

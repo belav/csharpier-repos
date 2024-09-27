@@ -161,12 +161,17 @@ namespace System.Configuration
         // ConfigurationExceptions that didn't used to happen in Whidbey and thus break existing deployed
         // applications.
         //
-        // Now this method will determine if it is running in a client application or a web scenario (ASP.NET).
-        // If in a web scenario this code must still use System.Configuration to read config as the web scenario
-        // has a hierarchy of config files that only System.Configuration can practically discover and parse.
-        // In a client scenario this code will now use System.Xml.XmlReader to parse machine and app config files.
+        // Now this method will determine if it is running in a client application or a web scenario
+        // (ASP.NET).
+        // If in a web scenario this code must still use System.Configuration to read config as the web
+        // scenario
+        // has a hierarchy of config files that only System.Configuration can practically discover and
+        // parse.
+        // In a client scenario this code will now use System.Xml.XmlReader to parse machine and app config
+        // files.
         //
-        // The default output of this method if it encounters invalid or non-existent Uri config is the original
+        // The default output of this method if it encounters invalid or non-existent Uri config is the
+        // original
         // Whidbey settings (no IDN support, no IRI support, and escaped dots and slashes are unescaped).
         //
         [SuppressMessage(

@@ -12,7 +12,8 @@ public abstract class TempDataSerializer
     /// Deserializes <paramref name="unprotectedData"/> to a <see cref="IDictionary{TKey, TValue}"/>
     /// used to initialize an instance of <see cref="ITempDataDictionary"/>.
     /// </summary>
-    /// <param name="unprotectedData">Serialized representation of <see cref="ITempDataDictionary"/>.</param>
+    /// <param name="unprotectedData">Serialized representation of <see
+    // cref="ITempDataDictionary"/>.</param>
     /// <returns>The deserialized <see cref="IDictionary{TKey, TValue}"/>.</returns>
     public abstract IDictionary<string, object> Deserialize(byte[] unprotectedData);
 
@@ -30,6 +31,7 @@ public abstract class TempDataSerializer
     /// </para>
     /// </summary>
     /// <param name="type">The <see cref="Type"/>.</param>
-    /// <returns><see langword="true"/> if the serializer supports serializing <paramref name="type"/>, otherwise <see langword="false"/>.</returns>
+    /// <returns><see langword="true"/> if the serializer supports serializing <paramref name="type"/>,
+    // otherwise <see langword="false"/>.</returns>
     public virtual bool CanSerializeType(Type type) => true;
 }

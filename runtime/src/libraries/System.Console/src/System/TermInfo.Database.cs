@@ -308,10 +308,12 @@ internal static partial class TermInfo
             return i % 2 == 1 ? i + 1 : i;
         }
 
-        /// <summary>Read a 16-bit or 32-bit value from the buffer starting at the specified position.</summary>
+        /// <summary>Read a 16-bit or 32-bit value from the buffer starting at the specified
+        // position.</summary>
         /// <param name="buffer">The buffer from which to read.</param>
         /// <param name="pos">The position at which to read.</param>
-        /// <param name="readAs32Bit">Whether or not to read value as 32-bit. Will read as 16-bit if set to false.</param>
+        /// <param name="readAs32Bit">Whether or not to read value as 32-bit. Will read as 16-bit if set to
+        // false.</param>
         /// <returns>The value read.</returns>
         private static int ReadInt(byte[] buffer, int pos, bool readAs32Bit) =>
             readAs32Bit ? ReadInt32(buffer, pos) : ReadInt16(buffer, pos);

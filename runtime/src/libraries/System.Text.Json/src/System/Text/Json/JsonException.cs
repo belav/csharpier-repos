@@ -7,7 +7,8 @@ using System.Runtime.Serialization;
 namespace System.Text.Json
 {
     /// <summary>
-    /// Defines a custom exception object that is thrown when invalid JSON text is encountered, when the defined maximum depth is passed,
+    /// Defines a custom exception object that is thrown when invalid JSON text is encountered, when the
+    // defined maximum depth is passed,
     /// or the JSON text is not compatible with the type of a property on an object.
     /// </summary>
     [Serializable]
@@ -20,12 +21,15 @@ namespace System.Text.Json
         /// Creates a new exception object to relay error information to the user.
         /// </summary>
         /// <param name="message">The context specific error message.</param>
-        /// <param name="lineNumber">The line number at which the invalid JSON was encountered (starting at 0) when deserializing.</param>
-        /// <param name="bytePositionInLine">The byte count within the current line where the invalid JSON was encountered (starting at 0).</param>
+        /// <param name="lineNumber">The line number at which the invalid JSON was encountered (starting at
+        // 0) when deserializing.</param>
+        /// <param name="bytePositionInLine">The byte count within the current line where the invalid JSON
+        // was encountered (starting at 0).</param>
         /// <param name="path">The path where the invalid JSON was encountered.</param>
         /// <param name="innerException">The exception that caused the current exception.</param>
         /// <remarks>
-        /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code units) and not characters or scalars.
+        /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code
+        // units) and not characters or scalars.
         /// </remarks>
         public JsonException(
             string? message,
@@ -47,10 +51,13 @@ namespace System.Text.Json
         /// </summary>
         /// <param name="message">The context specific error message.</param>
         /// <param name="path">The path where the invalid JSON was encountered.</param>
-        /// <param name="lineNumber">The line number at which the invalid JSON was encountered (starting at 0) when deserializing.</param>
-        /// <param name="bytePositionInLine">The byte count within the current line where the invalid JSON was encountered (starting at 0).</param>
+        /// <param name="lineNumber">The line number at which the invalid JSON was encountered (starting at
+        // 0) when deserializing.</param>
+        /// <param name="bytePositionInLine">The byte count within the current line where the invalid JSON
+        // was encountered (starting at 0).</param>
         /// <remarks>
-        /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code units) and not characters or scalars.
+        /// Note that the <paramref name="bytePositionInLine"/> counts the number of bytes (i.e. UTF-8 code
+        // units) and not characters or scalars.
         /// </remarks>
         public JsonException(
             string? message,
@@ -96,8 +103,10 @@ namespace System.Text.Json
         /// <summary>
         /// Creates a new exception object with serialized data.
         /// </summary>
-        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data
+        // about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information
+        // about the source or destination.</param>
         /// <exception cref="ArgumentNullException">
         /// Thrown when <paramref name="info"/> is <see langword="null" />.
         /// </exception>
@@ -126,8 +135,10 @@ namespace System.Text.Json
         /// <summary>
         ///  Sets the <see cref="SerializationInfo"/> with information about the exception.
         /// </summary>
-        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data about the exception being thrown.</param>
-        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information about the source or destination.</param>
+        /// <param name="info">The <see cref="SerializationInfo"/> that holds the serialized object data
+        // about the exception being thrown.</param>
+        /// <param name="context">The <see cref="StreamingContext"/> that contains contextual information
+        // about the source or destination.</param>
 #if NET8_0_OR_GREATER
         [Obsolete(
             Obsoletions.LegacyFormatterImplMessage,

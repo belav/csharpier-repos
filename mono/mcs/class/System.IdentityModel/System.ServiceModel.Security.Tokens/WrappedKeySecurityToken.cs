@@ -152,26 +152,26 @@ namespace System.ServiceModel.Security.Tokens
         [MonoTODO]
         public override bool CanCreateKeyIdentifierClause<T>()
         {
-            /*
-            foreach (SecurityKeyIdentifierClause k in WrappingTokenReference) {
-                Type t = k.GetType ();
-                if (t == typeof (T) || t.IsSubclassOf (typeof (T)))
-                    return true;
-            }
-            */
+/*
+foreach (SecurityKeyIdentifierClause k in WrappingTokenReference) {
+Type t = k.GetType ();
+if (t == typeof (T) || t.IsSubclassOf (typeof (T)))
+return true;
+}
+*/
             return false;
         }
 
         [MonoTODO]
         public override T CreateKeyIdentifierClause<T>()
         {
-            /*
-            foreach (SecurityKeyIdentifierClause k in WrappingTokenReference) {
-                Type t = k.GetType ();
-                if (t == typeof (T) || t.IsSubclassOf (typeof (T)))
-                    return (T) k;
-            }
-            */
+/*
+foreach (SecurityKeyIdentifierClause k in WrappingTokenReference) {
+Type t = k.GetType ();
+if (t == typeof (T) || t.IsSubclassOf (typeof (T)))
+return (T) k;
+}
+*/
             throw new NotSupportedException(
                 String.Format("WrappedKeySecurityToken cannot create '{0}'", typeof(T))
             );

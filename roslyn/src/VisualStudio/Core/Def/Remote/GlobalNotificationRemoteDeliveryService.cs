@@ -80,8 +80,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         {
             lock (_globalNotificationsGate)
             {
-                // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once the task gets canceled or fails.
-                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails.
+                // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once
+                // the task gets canceled or fails.
+                // The cancellation happens only when VS is shutting down. The task might fail if communication with
+                // OOP fails.
                 // Once that happens there is not point in sending more notifications to the remote service.
 
                 _globalNotificationsTask = _globalNotificationsTask.SafeContinueWithFromAsync(
@@ -127,8 +129,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         {
             lock (_globalNotificationsGate)
             {
-                // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once the task gets canceled or fails.
-                // The cancellation happens only when VS is shutting down. The task might fail if communication with OOP fails.
+                // Pass TaskContinuationOptions.OnlyOnRanToCompletion to avoid delivering further notifications once
+                // the task gets canceled or fails.
+                // The cancellation happens only when VS is shutting down. The task might fail if communication with
+                // OOP fails.
                 // Once that happens there is not point in sending more notifications to the remote service.
 
                 _globalNotificationsTask = _globalNotificationsTask.SafeContinueWithFromAsync(

@@ -212,8 +212,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.TypeInferrer
         [Fact]
         public async Task TestCoalesceWithErrorType()
         {
-            // We could be smart and infer this as an ErrorType?, but in the #nullable disable case we don't know if this is intended to be
-            // a struct (where the question mark is legal) or a class (where it isn't). We'll thus avoid sticking question marks in this case.
+            // We could be smart and infer this as an ErrorType?, but in the #nullable disable case we don't
+            // know if this is intended to be
+            // a struct (where the question mark is legal) or a class (where it isn't). We'll thus avoid
+            // sticking question marks in this case.
             // https://github.com/dotnet/roslyn/issues/37852 tracks fixing this is a much fancier way.
             await TestInMethodAsync(
                 """
@@ -3389,7 +3391,8 @@ class C
                     }
                 }
                 """;
-            // In position mode, we are inferring that the thing to the right is an object, because it's being assigned to a local of type object.
+            // In position mode, we are inferring that the thing to the right is an object, because it's being
+            // assigned to a local of type object.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
             await TestAsync(
                 text,
@@ -3411,7 +3414,8 @@ class C
                     }
                 }
                 """;
-            // In position mode, we are inferring that the thing to the right is an object, because it's being assigned to a local of type object.
+            // In position mode, we are inferring that the thing to the right is an object, because it's being
+            // assigned to a local of type object.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
             await TestAsync(
                 text,
@@ -3433,7 +3437,8 @@ class C
                     }
                 }
                 """;
-            // In position mode, we are inferring that the thing to the right is an object, because it's to the right of the first ??
+            // In position mode, we are inferring that the thing to the right is an object, because it's to the
+            // right of the first ??
             // and thus must be the same type as the object being assigned to.
             // In node mode, we are inferring the node is an object? because it's to the left of the ??.
             await TestAsync(

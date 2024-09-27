@@ -20,7 +20,8 @@ internal static class ResponseContentTypeHelper
     /// <remarks>
     /// The user supplied content type is not modified and is used as is. For example, if user
     /// sets the content type to be "text/plain" without any encoding, then the default content type's
-    /// encoding is used to write the response and the ContentType header is set to be "text/plain" without any
+    /// encoding is used to write the response and the ContentType header is set to be "text/plain"
+    // without any
     /// "charset" information.
     /// </remarks>
     public static void ResolveContentTypeAndEncoding(

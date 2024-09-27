@@ -52,8 +52,10 @@ public class WsFederationHandler
         : base(options, logger, encoder) { }
 
     /// <summary>
-    /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
-    /// If it is not provided a default instance is supplied which does nothing when the methods are called.
+    /// The handler calls methods on the events which give the application control at certain points
+    // where processing is occurring.
+    /// If it is not provided a default instance is supplied which does nothing when the methods are
+    // called.
     /// </summary>
     protected new WsFederationEvents Events
     {
@@ -170,7 +172,8 @@ public class WsFederationHandler
         WsFederationMessage? wsFederationMessage = null;
         AuthenticationProperties? properties = null;
 
-        // assumption: if the ContentType is "application/x-www-form-urlencoded" it should be safe to read as it is small.
+        // assumption: if the ContentType is "application/x-www-form-urlencoded" it should be safe to read
+        // as it is small.
         if (
             HttpMethods.IsPost(Request.Method)
             && !string.IsNullOrEmpty(Request.ContentType)
@@ -184,7 +187,8 @@ public class WsFederationHandler
         {
             var form = await Request.ReadFormAsync(Context.RequestAborted);
 
-            // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
+            // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain
+            // null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
             wsFederationMessage = new WsFederationMessage(
                 form.Select(pair => new KeyValuePair<string, string[]>(
@@ -485,8 +489,10 @@ public class WsFederationHandler
 
     private void RequestRefresh(Exception exception)
     {
-        // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the notification.
-        // Refreshing on SecurityTokenSignatureKeyNotFound may be redundant if Last-Known-Good is enabled, it won't do much harm, most likely will be a nop.
+        // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also
+        // request a refresh in the notification.
+        // Refreshing on SecurityTokenSignatureKeyNotFound may be redundant if Last-Known-Good is enabled,
+        // it won't do much harm, most likely will be a nop.
         if (
             Options.RefreshOnIssuerKeyNotFound
             && exception is SecurityTokenSignatureKeyNotFoundException
@@ -563,7 +569,8 @@ public class WsFederationHandler
     /// <returns></returns>
     protected virtual async Task<bool> HandleRemoteSignOutAsync()
     {
-        // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain null elements.
+        // ToArray handles the StringValues.IsNullOrEmpty case. We assume non-empty Value does not contain
+        // null elements.
 #pragma warning disable CS8620 // Argument cannot be used for parameter due to differences in the nullability of reference types.
         var message = new WsFederationMessage(
             Request.Query.Select(pair => new KeyValuePair<string, string[]>(

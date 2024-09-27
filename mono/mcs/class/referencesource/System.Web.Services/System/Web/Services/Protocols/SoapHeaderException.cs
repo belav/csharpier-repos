@@ -23,17 +23,20 @@ namespace System.Web.Services.Protocols
     [Serializable]
     public class SoapHeaderException : SoapException
     {
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException6"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException6"]/*' />
         public SoapHeaderException() { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapHeaderException(string message, XmlQualifiedName code, string actor)
             : base(message, code, actor) { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException1"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -45,21 +48,24 @@ namespace System.Web.Services.Protocols
         )
             : base(message, code, actor, innerException) { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException2"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapHeaderException(string message, XmlQualifiedName code)
             : base(message, code) { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException3"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException3"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapHeaderException(string message, XmlQualifiedName code, Exception innerException)
             : base(message, code, innerException) { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException4"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException4"]/*' />
         public SoapHeaderException(
             string message,
             XmlQualifiedName code,
@@ -70,7 +76,8 @@ namespace System.Web.Services.Protocols
         )
             : base(message, code, actor, role, null, null, subCode, innerException) { }
 
-        /// <include file='doc\SoapHeaderException.uex' path='docs/doc[@for="SoapHeaderException.SoapHeaderException5"]/*' />
+        /// <include file='doc\SoapHeaderException.uex'
+        // path='docs/doc[@for="SoapHeaderException.SoapHeaderException5"]/*' />
         public SoapHeaderException(
             string message,
             XmlQualifiedName code,

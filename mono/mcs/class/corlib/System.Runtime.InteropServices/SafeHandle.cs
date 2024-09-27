@@ -46,7 +46,8 @@
 
 //
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 // Files:
 //  - mscorlib/system/runtime/interopservices/safehandle.cs
@@ -72,12 +73,12 @@ namespace System.Runtime.InteropServices
             Disposed = 0x00000002,
         }
 
-        /*
-         * This should only be called for cases when you know for a fact that
-         * your handle is invalid and you want to record that information.
-         * An example is calling a syscall and getting back ERROR_INVALID_HANDLE.
-         * This method will normally leak handles!
-         */
+/*
+* This should only be called for cases when you know for a fact that
+* your handle is invalid and you want to record that information.
+* An example is calling a syscall and getting back ERROR_INVALID_HANDLE.
+* This method will normally leak handles!
+*/
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public void SetHandleAsInvalid()
         {
@@ -99,21 +100,21 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        /*
-         * Add a reason why this handle should not be relinquished (i.e. have
-         * ReleaseHandle called on it). This method has dangerous in the name since
-         * it must always be used carefully (e.g. called within a CER) to avoid
-         * leakage of the handle. It returns a boolean indicating whether the
-         * increment was actually performed to make it easy for program logic to
-         * back out in failure cases (i.e. is a call to DangerousRelease needed).
-         * It is passed back via a ref parameter rather than as a direct return so
-         * that callers need not worry about the atomicity of calling the routine
-         * and assigning the return value to a variable (the variable should be
-         * explicitly set to false prior to the call). The only failure cases are
-         * when the method is interrupted prior to processing by a thread abort or
-         * when the handle has already been (or is in the process of being)
-         * released.
-         */
+/*
+* Add a reason why this handle should not be relinquished (i.e. have
+* ReleaseHandle called on it). This method has dangerous in the name since
+* it must always be used carefully (e.g. called within a CER) to avoid
+* leakage of the handle. It returns a boolean indicating whether the
+* increment was actually performed to make it easy for program logic to
+* back out in failure cases (i.e. is a call to DangerousRelease needed).
+* It is passed back via a ref parameter rather than as a direct return so
+* that callers need not worry about the atomicity of calling the routine
+* and assigning the return value to a variable (the variable should be
+* explicitly set to false prior to the call). The only failure cases are
+* when the method is interrupted prior to processing by a thread abort or
+* when the handle has already been (or is in the process of being)
+* released.
+*/
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
         public void DangerousAddRef(ref bool success)
         {
@@ -142,17 +143,17 @@ namespace System.Runtime.InteropServices
             }
         }
 
-        /*
-         * Partner to DangerousAddRef. This should always be successful when used in
-         * a correct manner (i.e. matching a successful DangerousAddRef and called
-         * from a region such as a CER where a thread abort cannot interrupt
-         * processing). In the same way that unbalanced DangerousAddRef calls can
-         * cause resource leakage, unbalanced DangerousRelease calls may cause
-         * invalid handle states to become visible to other threads. This
-         * constitutes a potential security hole (via handle recycling) as well as a
-         * correctness problem -- so don't ever expose Dangerous* calls out to
-         * untrusted code.
-         */
+/*
+* Partner to DangerousAddRef. This should always be successful when used in
+* a correct manner (i.e. matching a successful DangerousAddRef and called
+* from a region such as a CER where a thread abort cannot interrupt
+* processing). In the same way that unbalanced DangerousAddRef calls can
+* cause resource leakage, unbalanced DangerousRelease calls may cause
+* invalid handle states to become visible to other threads. This
+* constitutes a potential security hole (via handle recycling) as well as a
+* correctness problem -- so don't ever expose Dangerous* calls out to
+* untrusted code.
+*/
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         public void DangerousRelease()
         {
@@ -185,33 +186,33 @@ namespace System.Runtime.InteropServices
                 int old_state,
                     new_state;
 
-                /* See AddRef above for the design of the synchronization here. Basically we
-                 * will try to decrement the current ref count and, if that would take us to
-                 * zero refs, set the closed state on the handle as well. */
+/* See AddRef above for the design of the synchronization here. Basically we
+* will try to decrement the current ref count and, if that would take us to
+* zero refs, set the closed state on the handle as well. */
                 bool perform_release = false;
 
                 do
                 {
                     old_state = _state;
 
-                    /* If this is a Dispose operation we have additional requirements (to
-                     * ensure that Dispose happens at most once as the comments in AddRef
-                     * detail). We must check that the dispose bit is not set in the old
-                     * state and, in the case of successful state update, leave the disposed
-                     * bit set. Silently do nothing if Dispose has already been called
-                     * (because we advertise that as a semantic of Dispose). */
+/* If this is a Dispose operation we have additional requirements (to
+* ensure that Dispose happens at most once as the comments in AddRef
+* detail). We must check that the dispose bit is not set in the old
+* state and, in the case of successful state update, leave the disposed
+* bit set. Silently do nothing if Dispose has already been called
+* (because we advertise that as a semantic of Dispose). */
                     if (dispose && (old_state & (int)State.Disposed) != 0)
                     {
-                        /* we cannot use `return` in a finally block, so we have to ensure
-                         * that we are not releasing the handle */
+/* we cannot use `return` in a finally block, so we have to ensure
+* that we are not releasing the handle */
                         perform_release = false;
                         break;
                     }
 
-                    /* We should never see a ref count of zero (that would imply we have
-                     * unbalanced AddRef and Releases). (We might see a closed state before
-                     * hitting zero though -- that can happen if SetHandleAsInvalid is
-                     * used). */
+/* We should never see a ref count of zero (that would imply we have
+* unbalanced AddRef and Releases). (We might see a closed state before
+* hitting zero though -- that can happen if SetHandleAsInvalid is
+* used). */
                     if ((old_state & RefCount_Mask) == 0)
                         throw new ObjectDisposedException(null, "Safe handle has been closed");
 

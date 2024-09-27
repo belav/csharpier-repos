@@ -26,7 +26,8 @@ namespace System.Web.Services.Protocols
         SoapHeaderDirection direction = SoapHeaderDirection.In;
         bool required = true;
 
-        /// <include file='doc\SoapHeaderAttribute.uex' path='docs/doc[@for="SoapHeaderAttribute.SoapHeaderAttribute"]/*' />
+        /// <include file='doc\SoapHeaderAttribute.uex'
+        // path='docs/doc[@for="SoapHeaderAttribute.SoapHeaderAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -35,7 +36,8 @@ namespace System.Web.Services.Protocols
             this.memberName = memberName;
         }
 
-        /// <include file='doc\SoapHeaderAttribute.uex' path='docs/doc[@for="SoapHeaderAttribute.MemberName"]/*' />
+        /// <include file='doc\SoapHeaderAttribute.uex'
+        // path='docs/doc[@for="SoapHeaderAttribute.MemberName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -45,7 +47,8 @@ namespace System.Web.Services.Protocols
             set { memberName = value; }
         }
 
-        /// <include file='doc\SoapHeaderAttribute.uex' path='docs/doc[@for="SoapHeaderAttribute.Direction"]/*' />
+        /// <include file='doc\SoapHeaderAttribute.uex'
+        // path='docs/doc[@for="SoapHeaderAttribute.Direction"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -55,7 +58,8 @@ namespace System.Web.Services.Protocols
             set { direction = value; }
         }
 
-        /// <include file='doc\SoapHeaderAttribute.uex' path='docs/doc[@for="SoapHeaderAttribute.Required"]/*' />
+        /// <include file='doc\SoapHeaderAttribute.uex'
+        // path='docs/doc[@for="SoapHeaderAttribute.Required"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

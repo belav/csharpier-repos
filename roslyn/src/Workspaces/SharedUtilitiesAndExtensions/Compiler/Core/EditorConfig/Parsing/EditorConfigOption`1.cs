@@ -7,7 +7,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 {
     /// <summary>
-    /// An abstraction over an editorconfig option that reprsents some type <typeparamref name="T"/> and the span in which that option was defined.
+    /// An abstraction over an editorconfig option that reprsents some type <typeparamref name="T"/> and
+    // the span in which that option was defined.
     /// </summary>
     internal record class EditorConfigOption<T>(Section Section, TextSpan? Span, T Value)
         : EditorConfigOption(Section, Span)

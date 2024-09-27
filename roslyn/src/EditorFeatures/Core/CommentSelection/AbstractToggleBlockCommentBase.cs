@@ -205,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             CommentSelectionInfo commentInfo
         )
         {
-            // If the selection is just a caret, try and uncomment blocks on the same line with only whitespace on the line.
+            // If the selection is just a caret, try and uncomment blocks on the same line with only whitespace
+            // on the line.
             if (
                 blockCommentSelection.SelectedSpan.IsEmpty
                 && blockCommentSelection.TryGetBlockCommentOnSameLine(
@@ -348,7 +349,8 @@ namespace Microsoft.CodeAnalysis.CommentSelection
             var endsWithCommentMarker = blockCommentSelection.EndsWithAnyBlockCommentMarker(
                 commentInfo
             );
-            // If the start is commented (and not a comment marker), close the current comment and open a new one.
+            // If the start is commented (and not a comment marker), close the current comment and open a new
+            // one.
             if (
                 blockCommentSelection.IsLocationCommented(selectedSpan.Start)
                 && !startsWithCommentMarker
@@ -521,8 +523,10 @@ namespace Microsoft.CodeAnalysis.CommentSelection
 
             /// <summary>
             /// Tries to get a block comment on the same line.  There are two cases:
-            ///     1.  The caret is preceding a block comment on the same line, with only whitespace before the comment.
-            ///     2.  The caret is following a block comment on the same line, with only whitespace after the comment.
+            ///     1.  The caret is preceding a block comment on the same line, with only whitespace before the
+            // comment.
+            ///     2.  The caret is following a block comment on the same line, with only whitespace after the
+            // comment.
             /// </summary>
             public bool TryGetBlockCommentOnSameLine(
                 ImmutableArray<TextSpan> allBlockComments,

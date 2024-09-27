@@ -121,7 +121,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
             IDictionary = compilation.GetBestTypeByMetadataName(typeof(IDictionary));
 
             // Used to construct concrete type symbols for generic types, given their type parameters.
-            // These concrete types are used to generating instantiation and casting logic in the emitted binding code.
+            // These concrete types are used to generating instantiation and casting logic in the emitted
+            // binding code.
             Dictionary = compilation.GetBestTypeByMetadataName(typeof(Dictionary<,>));
             GenericICollection = compilation.GetSpecialType(
                 SpecialType.System_Collections_Generic_ICollection_T

@@ -1101,8 +1101,10 @@ namespace System.ServiceModel.Channels
                 }
                 catch (ObjectDisposedException ex)
                 {
-                    // if Close ----s with the async Receive, it is possible that SafeHandle will throw ObjectDisposedException
-                    // the behavior should be same as if operation was just cancelled (the channel will return no message)
+                    // if Close ----s with the async Receive, it is possible that SafeHandle will throw
+                    // ObjectDisposedException
+                    // the behavior should be same as if operation was just cancelled (the channel will return no
+                    // message)
                     MsmqDiagnostics.ExpectedException(ex);
                     error = UnsafeNativeMethods.MQ_ERROR_OPERATION_CANCELLED;
                 }

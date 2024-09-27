@@ -12,18 +12,23 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// A set of utilities for converting from a decimal floating-point literal string to its IEEE float
-    /// or double representation, which considers all digits significant and correctly rounds according to
-    /// the IEEE round-to-nearest-ties-to-even mode. This code does not support a leading sign character,
+    /// or double representation, which considers all digits significant and correctly rounds according
+    // to
+    /// the IEEE round-to-nearest-ties-to-even mode. This code does not support a leading sign
+    // character,
     /// as that is not part of the C# or VB floating-point literal lexical syntax.
     ///
     /// If you change this code, please run the set of long-running random tests in the solution
-    /// RandomRealParserTests.sln. That solution is not included in Roslyn.sln as it is Windows-specific.
+    /// RandomRealParserTests.sln. That solution is not included in Roslyn.sln as it is
+    // Windows-specific.
     /// </summary>
     internal static class RealParser
     {
         /// <summary>
-        /// Try parsing a correctly-formatted double floating-point literal into the nearest representable double
-        /// using IEEE round-to-nearest-ties-to-even rounding mode. Behavior is not defined for inputs that are
+        /// Try parsing a correctly-formatted double floating-point literal into the nearest representable
+        // double
+        /// using IEEE round-to-nearest-ties-to-even rounding mode. Behavior is not defined for inputs that
+        // are
         /// not valid C# floating-point literals.
         /// </summary>
         /// <param name="s">The decimal floating-point constant's string</param>
@@ -40,8 +45,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Try parsing a correctly-formatted float floating-point literal into the nearest representable float
-        /// using IEEE round-to-nearest-ties-to-even rounding mode. Behavior is not defined for inputs that are
+        /// Try parsing a correctly-formatted float floating-point literal into the nearest representable
+        // float
+        /// using IEEE round-to-nearest-ties-to-even rounding mode. Behavior is not defined for inputs that
+        // are
         /// not valid C# floating-point literals.
         /// </summary>
         /// <param name="s">The float floating-point constant's string</param>
@@ -620,14 +627,17 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// This function is part of the fast track for integer floating point strings.
-        /// It takes an integer stored as an array of bytes (lsb first) and converts the value into its FloatingType
+        /// It takes an integer stored as an array of bytes (lsb first) and converts the value into its
+        // FloatingType
         /// representation, storing the bits into "result".  If the value is not
         /// representable, +/-infinity is stored and overflow is reported (since this
         /// function only deals with integers, underflow is impossible).
         /// </summary>
         /// <param name="integerValueAsBytes">the bits of the integer, least significant bits first</param>
-        /// <param name="integerBitsOfPrecision">the number of bits of precision in integerValueAsBytes</param>
-        /// <param name="hasNonzeroFractionalPart">whether there are nonzero digits after the decimal</param>
+        /// <param name="integerBitsOfPrecision">the number of bits of precision in
+        // integerValueAsBytes</param>
+        /// <param name="hasNonzeroFractionalPart">whether there are nonzero digits after the
+        // decimal</param>
         /// <param name="type">the kind of real number to build</param>
         /// <param name="result">the result</param>
         /// <returns>An indicator of the kind of result</returns>
@@ -758,7 +768,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="value">The value to shift</param>
         /// <param name="shift">The amount of shift</param>
-        /// <param name="hasZeroTail">Whether there are any less significant nonzero bits in the value</param>
+        /// <param name="hasZeroTail">Whether there are any less significant nonzero bits in the
+        // value</param>
         /// <returns></returns>
         private static ulong RightShiftWithRounding(ulong value, int shift, bool hasZeroTail)
         {
@@ -797,7 +808,8 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="lsbBit">the least-significant bit of the representable value</param>
         /// <param name="roundBit">the bit following the least-significant bit</param>
-        /// <param name="hasTailBits">true if there are any (less significant) bits set following roundBit</param>
+        /// <param name="hasTailBits">true if there are any (less significant) bits set following
+        // roundBit</param>
         /// <returns></returns>
         private static bool ShouldRoundUp(bool lsbBit, bool roundBit, bool hasTailBits)
         {
@@ -813,7 +825,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Multiply a BigInteger by the given power of two.
         /// </summary>
-        /// <param name="number">The BigInteger to multiply by a power of two and replace with the product</param>
+        /// <param name="number">The BigInteger to multiply by a power of two and replace with the
+        // product</param>
         /// <param name="shift">The power of two to multiply it by</param>
         private static void ShiftLeft(ref BigInteger number, uint shift)
         {
@@ -824,7 +837,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Multiply a BigInteger by the given power of ten.
         /// </summary>
-        /// <param name="number">The BigInteger to multiply by a power of ten and replace with the product</param>
+        /// <param name="number">The BigInteger to multiply by a power of ten and replace with the
+        // product</param>
         /// <param name="power">The power of ten to multiply it by</param>
         private static void MultiplyByPowerOfTen(ref BigInteger number, uint power)
         {

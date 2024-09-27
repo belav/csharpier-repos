@@ -22,7 +22,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Contract.ThrowIfFalse(commandCount == 1);
             Contract.ThrowIfFalse(prgCmds.Length == 1);
 
-            // TODO: We'll need to extend the command handler interfaces at some point when we have commands that
+            // TODO: We'll need to extend the command handler interfaces at some point when we have commands
+            // that
             // require enabling/disabling at some point.  For now, we just enable the few that we care about.
             if (pguidCmdGroup == VSConstants.VsStd14)
             {

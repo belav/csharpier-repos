@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -102,7 +103,8 @@ namespace System.Web.Mvc
             if (baseViewPage == null)
             {
                 // TODO : review if this check is even necessary.
-                // When this method is called by the framework parentPage should already be an instance of WebViewPage
+                // When this method is called by the framework parentPage should already be an instance of
+                // WebViewPage
                 // Need to review what happens if this method gets called in Plan9 pointing at an MVC view
                 throw new InvalidOperationException(
                     String.Format(

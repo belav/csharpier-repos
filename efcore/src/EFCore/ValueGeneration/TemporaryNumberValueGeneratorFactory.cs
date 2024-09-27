@@ -10,12 +10,15 @@ namespace Microsoft.EntityFrameworkCore.ValueGeneration;
 ///     for the numeric type of the property.
 /// </summary>
 /// <remarks>
-///     Types supported are: <see cref="int" />, <see cref="long" />, <see cref="short" />, <see cref="byte" />,
-///     <see cref="char" />, <see cref="ulong" />, <see cref="uint" />, <see cref="ushort" />, <see cref="sbyte" />,
+///     Types supported are: <see cref="int" />, <see cref="long" />, <see cref="short" />, <see
+// cref="byte" />,
+///     <see cref="char" />, <see cref="ulong" />, <see cref="uint" />, <see cref="ushort" />, <see
+// cref="sbyte" />,
 ///     <see cref="decimal" />, <see cref="float" />, <see cref="double" />
 /// </remarks>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-value-generation">EF Core value generation</see>
+// for more information and examples.
 /// </remarks>
 public class TemporaryNumberValueGeneratorFactory : ValueGeneratorFactory
 {

@@ -19,7 +19,8 @@ namespace System.Runtime.InteropServices
         public PosixSignal Signal { get; internal set; }
 
         /// <summary>
-        /// Gets or sets a value that indicates whether to cancel the default handling of the signal. The default is <see langword="false"/>.
+        /// Gets or sets a value that indicates whether to cancel the default handling of the signal. The
+        // default is <see langword="false"/>.
         /// </summary>
         public bool Cancel { get; set; }
     }

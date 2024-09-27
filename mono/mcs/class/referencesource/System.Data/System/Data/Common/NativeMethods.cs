@@ -44,7 +44,7 @@ namespace System.Data.Common
             [Obsolete("not used", true)]
             [PreserveSig]
             int GetOptionsObject(
-            /*deleted parameter signature*/);
+/*deleted parameter signature*/);
 
             void JoinTransaction(
                 [In, MarshalAs(UnmanagedType.Interface)] object punkTransactionCoord,

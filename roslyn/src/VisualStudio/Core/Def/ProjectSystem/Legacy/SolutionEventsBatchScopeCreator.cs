@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.Legacy
 {
     /// <summary>
-    /// Creates batch scopes for projects based on IVsSolutionEvents. This is useful for projects types that don't otherwise have
+    /// Creates batch scopes for projects based on IVsSolutionEvents. This is useful for projects types
+    // that don't otherwise have
     /// good batching concepts.
     /// </summary>
     /// <remarks>All members of this class are affinitized to the UI thread.</remarks>
@@ -125,8 +126,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
             var solution = (IVsSolution)_serviceProvider.GetService(typeof(SVsSolution));
 
-            // We never unsubscribe from these, so we just throw out the cookie. We could consider unsubscribing if/when all our
-            // projects are unloaded, but it seems fairly unnecessary -- it'd only be useful if somebody closed one solution but then
+            // We never unsubscribe from these, so we just throw out the cookie. We could consider unsubscribing
+            // if/when all our
+            // projects are unloaded, but it seems fairly unnecessary -- it'd only be useful if somebody closed
+            // one solution but then
             // opened other solutions in entirely different languages from there.
             if (
                 ErrorHandler.Succeeded(
@@ -137,7 +140,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 _isSubscribedToSolutionEvents = true;
             }
 
-            // It's possible that we're loading after the solution has already fully loaded, so see if we missed the event
+            // It's possible that we're loading after the solution has already fully loaded, so see if we missed
+            // the event
             var shellMonitorSelection = (IVsMonitorSelection)
                 _serviceProvider.GetService(typeof(SVsShellMonitorSelection));
 
@@ -199,7 +203,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
                 return;
             }
 
-            // If we don't have any scopes left, then there is no reason to be subscribed to Running Document Table events, because
+            // If we don't have any scopes left, then there is no reason to be subscribed to Running Document
+            // Table events, because
             // there won't be any scopes to complete.
             if (_fullSolutionLoadScopes.Count > 0)
             {
@@ -326,7 +331,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             {
                 _runningDocumentTable.GetDocumentHierarchyItem(docCookie, out var hierarchy, out _);
 
-                // Some document is being opened in this project; we need to ensure the project is fully updated so any requests
+                // Some document is being opened in this project; we need to ensure the project is fully updated so
+                // any requests
                 // for CodeModel or the workspace are successful.
                 _scopeCreator.StopTrackingAllProjectsMatchingHierarchy(hierarchy);
 

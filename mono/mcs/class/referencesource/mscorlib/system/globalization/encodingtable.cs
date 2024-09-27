@@ -29,7 +29,8 @@ namespace System.Globalization
         //calling the native GetNumEncodingItems().
         private static int lastEncodingItem = GetNumEncodingItems() - 1;
 
-        //This number is the size of the code page table.  Its generated when we walk the table the first time.
+        //This number is the size of the code page table.  Its generated when we walk the table the first
+        // time.
         private static volatile int lastCodePageItem;
 
         //

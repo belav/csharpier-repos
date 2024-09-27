@@ -14,7 +14,8 @@ using System.Xml.Schema;
 namespace System.Xml
 {
     // Concrete implementation of XmlRawWriter interface that serializes text events as encoded
-    // text.  All other non-text events are ignored.  The general-purpose TextEncodedRawTextWriter uses the
+    // text.  All other non-text events are ignored.  The general-purpose TextEncodedRawTextWriter uses
+    // the
     // Encoder class to output to any encoding.  The TextUtf8RawTextWriter class combined the encoding
     // operation with serialization in order to achieve better performance.
     // </summary>

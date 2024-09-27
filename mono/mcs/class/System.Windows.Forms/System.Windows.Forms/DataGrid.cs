@@ -52,8 +52,8 @@ namespace System.Windows.Forms
 
         public int height;
 
-        /* this needs to be a property so that the Autosize
-         * example from the Windows.Forms FAQ will work */
+/* this needs to be a property so that the Autosize
+* example from the Windows.Forms FAQ will work */
         public int Height
         {
             get { return height; }
@@ -204,7 +204,7 @@ namespace System.Windows.Forms
         }
 
         #region	Local Variables
-        /* cached theme defaults */
+/* cached theme defaults */
         static readonly Color def_background_color = ThemeEngine.Current.DataGridBackgroundColor;
         static readonly Color def_caption_backcolor = ThemeEngine.Current.DataGridCaptionBackColor;
         static readonly Color def_caption_forecolor = ThemeEngine.Current.DataGridCaptionForeColor;
@@ -215,7 +215,7 @@ namespace System.Windows.Forms
             .Current
             .DataGridParentRowsForeColor;
 
-        /* colors */
+/* colors */
         // XXX this needs addressing. Control.background_color should not be internal.
         new Color background_color;
         Color caption_backcolor;
@@ -223,7 +223,7 @@ namespace System.Windows.Forms
         Color parent_rows_backcolor;
         Color parent_rows_forecolor;
 
-        /* flags to determine which areas of the datagrid are shown */
+/* flags to determine which areas of the datagrid are shown */
         bool caption_visible;
         bool parent_rows_visible;
 
@@ -233,12 +233,12 @@ namespace System.Windows.Forms
         DataGridTableStyle grid_style;
         DataGridTableStyle current_style;
 
-        /* selection */
+/* selection */
         DataGridCell current_cell;
         Hashtable selected_rows;
         int selection_start; // used for range selection
 
-        /* layout/rendering */
+/* layout/rendering */
         bool allow_navigation;
         int first_visible_row;
         int first_visible_column;
@@ -260,7 +260,7 @@ namespace System.Windows.Forms
         internal bool parent_rows_button_mouseover;
         internal bool parent_rows_button_active;
 
-        /* databinding */
+/* databinding */
         object datasource;
         string datamember;
         CurrencyManager list_manager;
@@ -268,22 +268,23 @@ namespace System.Windows.Forms
         bool _readonly;
         DataGridRelationshipRow[] rows;
 
-        /* column resize fields */
+/* column resize fields */
         bool column_resize_active;
         int resize_column_x;
         int resize_column_width_delta;
         int resize_column;
 
-        /* row resize fields */
+/* row resize fields */
         bool row_resize_active;
         int resize_row_y;
         int resize_row_height_delta;
         int resize_row;
 
-        /* used to make sure we don't endlessly recurse calling set_CurrentCell and OnListManagerPositionChanged */
+/* used to make sure we don't endlessly recurse calling set_CurrentCell and
+OnListManagerPositionChanged */
         bool from_positionchanged_handler;
 
-        /* editing state */
+/* editing state */
         bool cursor_in_add_row;
         bool add_row_changed;
         internal bool is_editing; // Current cell is edit mode
@@ -544,14 +545,14 @@ namespace System.Windows.Forms
                     throw new Exception("CurrentCell cannot be set at this time.");
                 }
 
-                /* Even if we are on the same cell, we could need to actually start edition */
+/* Even if we are on the same cell, we could need to actually start edition */
                 if (current_cell.Equals(value) && is_editing)
                 {
                     setting_current_cell = false;
                     return;
                 }
 
-                /* make sure the new cell fits in the correct bounds for [row,column] */
+/* make sure the new cell fits in the correct bounds for [row,column] */
                 if (ReadOnly && value.RowNumber > RowsCount - 1)
                     value.RowNumber = RowsCount - 1;
                 else if (value.RowNumber > RowsCount)
@@ -562,7 +563,7 @@ namespace System.Windows.Forms
                             ? 0
                             : CurrentTableStyle.GridColumnStyles.Count - 1;
 
-                /* now make sure we don't go negative */
+/* now make sure we don't go negative */
                 if (value.RowNumber < 0)
                     value.RowNumber = 0;
                 if (value.ColumnNumber < 0)
@@ -1182,7 +1183,7 @@ namespace System.Windows.Forms
 
             CurrentCell = new DataGridCell(rowNumber, column);
 
-            /* force editing of CurrentCell if we aren't already editing */
+/* force editing of CurrentCell if we aren't already editing */
             Edit();
 
             return true;
@@ -1229,7 +1230,7 @@ namespace System.Windows.Forms
             rows[row].RelationHeight = 0;
             ResumeLayout(false);
 
-            /* XX need to redraw from @row down */
+/* XX need to redraw from @row down */
             CalcAreasAndInvalidate();
         }
 
@@ -1336,7 +1337,7 @@ namespace System.Windows.Forms
             rows[row].height += rows[row].relation_area.Height;
             rows[row].RelationHeight = rows[row].relation_area.Height;
 
-            /* XX need to redraw from @row down */
+/* XX need to redraw from @row down */
             CalcAreasAndInvalidate();
         }
 
@@ -1497,7 +1498,7 @@ namespace System.Windows.Forms
                     }
                     else if (CurrentTableStyle.HasRelations)
                     {
-                        /* XXX this needs checking against MS somehow... */
+/* XXX this needs checking against MS somehow... */
                         if (x < rows[row].relation_area.X + rows[row].relation_area.Width)
                             return new HitTestInfo(
                                 row,
@@ -1682,16 +1683,16 @@ namespace System.Windows.Forms
         {
             base.OnKeyDown(ke);
 
-            /*if (ProcessGridKey (ke) == true)
-                ke.Handled = true;
+/*if (ProcessGridKey (ke) == true)
+ke.Handled = true;
 
-            // TODO: we probably don't need this check,
-            // since current_cell wouldn't have been set
-            // to something invalid
-            if (CurrentTableStyle.GridColumnStyles.Count > 0) {
-                CurrentTableStyle.GridColumnStyles[current_cell.ColumnNumber].OnKeyDown
-                    (ke, current_cell.RowNumber, current_cell.ColumnNumber);
-            }*/
+// TODO: we probably don't need this check,
+// since current_cell wouldn't have been set
+// to something invalid
+if (CurrentTableStyle.GridColumnStyles.Count > 0) {
+CurrentTableStyle.GridColumnStyles[current_cell.ColumnNumber].OnKeyDown
+(ke, current_cell.RowNumber, current_cell.ColumnNumber);
+}*/
         }
 
         protected override void OnKeyPress(KeyPressEventArgs kpe)
@@ -1742,7 +1743,7 @@ namespace System.Windows.Forms
                             - rows[testinfo.Row].RelationHeight;
                         if (relation_area.Contains(e.X, e.Y))
                         {
-                            /* the click happened in the relation area, navigate to the new table */
+/* the click happened in the relation area, navigate to the new table */
                             int relative = e.Y - relation_area.Y;
                             NavigateTo(
                                 testinfo.Row,
@@ -1775,7 +1776,7 @@ namespace System.Windows.Forms
                     {
                         if (e.X > row_headers_area.X + row_headers_area.Width / 2)
                         {
-                            /* it's in the +/- space */
+/* it's in the +/- space */
                             if (IsExpanded(testinfo.Row))
                                 Collapse(testinfo.Row);
                             else
@@ -1917,29 +1918,29 @@ namespace System.Windows.Forms
 
             if (column_resize_active)
             {
-                /* erase the old line */
+/* erase the old line */
                 DrawResizeLineVert(resize_column_x + resize_column_width_delta);
 
                 resize_column_width_delta = e.X - resize_column_x;
 
-                /* draw the new line */
+/* draw the new line */
                 DrawResizeLineVert(resize_column_x + resize_column_width_delta);
                 return;
             }
             else if (row_resize_active)
             {
-                /* erase the old line */
+/* erase the old line */
                 DrawResizeLineHoriz(resize_row_y + resize_row_height_delta);
 
                 resize_row_height_delta = e.Y - resize_row_y;
 
-                /* draw the new line */
+/* draw the new line */
                 DrawResizeLineHoriz(resize_row_y + resize_row_height_delta);
                 return;
             }
             else
             {
-                /* determine the cursor to use */
+/* determine the cursor to use */
                 HitTestInfo testinfo;
                 testinfo = HitTest(e.X, e.Y);
 
@@ -2079,7 +2080,7 @@ namespace System.Windows.Forms
 
                 if (e.Delta > 0)
                 {
-                    /* left */
+/* left */
                     pixels = Math.Max(
                         horiz_scrollbar.Minimum,
                         horiz_scrollbar.Value - horiz_scrollbar.LargeChange
@@ -2087,7 +2088,7 @@ namespace System.Windows.Forms
                 }
                 else
                 {
-                    /* right */
+/* right */
                     pixels = Math.Min(
                         horiz_scrollbar.Maximum - horiz_scrollbar.LargeChange + 1,
                         horiz_scrollbar.Value + horiz_scrollbar.LargeChange
@@ -2104,7 +2105,7 @@ namespace System.Windows.Forms
 
                 if (e.Delta > 0)
                 {
-                    /* up */
+/* up */
                     pixels = Math.Max(
                         vert_scrollbar.Minimum,
                         vert_scrollbar.Value - vert_scrollbar.LargeChange
@@ -2112,7 +2113,7 @@ namespace System.Windows.Forms
                 }
                 else
                 {
-                    /* down */
+/* down */
                     pixels = Math.Min(
                         vert_scrollbar.Maximum - vert_scrollbar.LargeChange + 1,
                         vert_scrollbar.Value + vert_scrollbar.LargeChange
@@ -2748,10 +2749,10 @@ namespace System.Windows.Forms
         {
             CurrencyManager old_lm = list_manager;
 
-            /* we need this bool flag to work around a
-             * problem with OnBindingContextChanged.  once
-             * that stuff works properly, remove this
-             * hack */
+/* we need this bool flag to work around a
+* problem with OnBindingContextChanged.  once
+* that stuff works properly, remove this
+* hack */
             if (in_setdatasource)
                 return;
             in_setdatasource = true;
@@ -2777,7 +2778,7 @@ namespace System.Windows.Forms
 
             list_manager = null;
 
-            /* create the new list manager */
+/* create the new list manager */
             if (BindingContext != null && datasource != null)
                 list_manager = (CurrencyManager)BindingContext[datasource, datamember];
 
@@ -2788,9 +2789,9 @@ namespace System.Windows.Forms
             {
                 BindColumns();
 
-                /* reset first_visible_row to 0 here before
-                 * doing anything that'll requires us to
-                 * figure out if we need a scrollbar. */
+/* reset first_visible_row to 0 here before
+* doing anything that'll requires us to
+* figure out if we need a scrollbar. */
                 vert_scrollbar.Value = 0;
                 horiz_scrollbar.Value = 0;
                 first_visible_row = 0;
@@ -3143,10 +3144,10 @@ namespace System.Windows.Forms
                 rows_area.Width += RowHeaderWidth;
             }
 
-            /* scroll the window */
+/* scroll the window */
             XplatUI.ScrollWindow(Handle, rows_area, 0, pixels, false);
 
-            /* if the row is still */
+/* if the row is still */
             if (
                 CurrentRow >= first_visible_row
                 && CurrentRow < first_visible_row + visible_row_count
@@ -3442,7 +3443,8 @@ namespace System.Windows.Forms
 
                     if (width >= cells_area.Width)
                         return new_col + 1;
-                    //return new_col < CurrentTableStyle.GridColumnStyles.Count ? new_col + 1 : CurrentTableStyle.GridColumnStyles.Count;
+                    //return new_col < CurrentTableStyle.GridColumnStyles.Count ? new_col + 1 :
+                    // CurrentTableStyle.GridColumnStyles.Count;
                 }
                 return 0;
             }
@@ -3459,13 +3461,13 @@ namespace System.Windows.Forms
             if (!IsHandleCreated) // Delay calculations until the handle is created
                 return;
 
-            /* make sure we don't happen to end up in this method again */
+/* make sure we don't happen to end up in this method again */
             if (in_calc_grid_areas)
                 return;
 
             in_calc_grid_areas = true;
 
-            /* Order is important. E.g. row headers max. height depends on caption */
+/* Order is important. E.g. row headers max. height depends on caption */
             horiz_pixeloffset = 0;
             CalcCaption();
             CalcParentRows();
@@ -3479,7 +3481,7 @@ namespace System.Windows.Forms
             bool needHoriz = false;
             bool needVert = false;
 
-            /* figure out which scrollbars we need, and what the visible areas are */
+/* figure out which scrollbars we need, and what the visible areas are */
             int visible_cells_width = cells_area.Width;
             int visible_cells_height = cells_area.Height;
             int allrows = RowsCount;
@@ -3487,8 +3489,8 @@ namespace System.Windows.Forms
             if (ShowEditRow && RowsCount > 0)
                 allrows++;
 
-            /* use a loop to iteratively calculate whether
-             * we need horiz/vert scrollbars. */
+/* use a loop to iteratively calculate whether
+* we need horiz/vert scrollbars. */
             for (int i = 0; i < 3; i++)
             {
                 if (needVert)

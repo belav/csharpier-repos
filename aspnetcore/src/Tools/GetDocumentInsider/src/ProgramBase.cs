@@ -35,7 +35,8 @@ internal abstract class ProgramBase
     {
         try
         {
-            // AllowArgumentSeparator and continueAfterUnexpectedArg are ignored when !throwOnUnexpectedArg _except_
+            // AllowArgumentSeparator and continueAfterUnexpectedArg are ignored when !throwOnUnexpectedArg
+            // _except_
             // AllowArgumentSeparator=true changes the help text (ignoring throwOnUnexpectedArg).
             var app = new CommandLineApplication(
                 throwOnUnexpectedArg,

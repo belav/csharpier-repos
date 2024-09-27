@@ -1521,7 +1521,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         idProperty.GetMappedStoreObjects(StoreObjectType.Table)
                     );
 
-                    // Derived principal entity types are mapped to different tables, so the constraint is not enforceable
+                    // Derived principal entity types are mapped to different tables, so the constraint is not
+                    // enforceable
                     Assert.Empty(orderCustomerFk.GetMappedConstraints());
 
                     Assert.Null(orderCustomerFk.GetConstraintName());

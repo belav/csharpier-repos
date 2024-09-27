@@ -328,7 +328,8 @@ namespace System.Linq.Expressions.Tests
                     }
                 }
 
-                // >>> From any nullable-type to any interface-type implemented by the underlying type of the nullable-type.
+                // >>> From any nullable-type to any interface-type implemented by the underlying type of the
+                // nullable-type.
                 foreach (
                     var o in new object[]
                     {
@@ -412,7 +413,8 @@ namespace System.Linq.Expressions.Tests
                     }
                 }
 
-                // >>> From any interface-type to any nullable-type whose underlying type implements the interface-type.
+                // >>> From any interface-type to any nullable-type whose underlying type implements the
+                // interface-type.
                 foreach (var o in new object[] { 1, DayOfWeek.Monday, new TimeSpan(3, 14, 15) })
                 {
                     Type t = o.GetType();

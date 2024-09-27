@@ -151,7 +151,8 @@ GROUP BY [p].[Group]
         );
     }
 
-    // SQL Server returns a CurvePolygon, https://github.com/NetTopologySuite/NetTopologySuite.IO.SqlServerBytes/issues/18
+    // SQL Server returns a CurvePolygon,
+    // https://github.com/NetTopologySuite/NetTopologySuite.IO.SqlServerBytes/issues/18
     public override async Task EnvelopeCombine_aggregate(bool async) =>
         await Assert.ThrowsAsync<ParseException>(() => base.EnvelopeCombine_aggregate(async));
 

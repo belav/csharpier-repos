@@ -56,10 +56,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 threadingContext.DisposalToken
             );
 
-            // Note: this ends up always listening for workspace events, even if we have no active 'live' queries that
-            // need updating.  But this should basically be practically no cost.  The queue just holds a single item
-            // indicating a change happened.  And when UpdateExistingQueriesAsync fires, it will just see that there are
-            // no live queries and immediately return.  So it's just simple to do things this way instead of trying to
+            // Note: this ends up always listening for workspace events, even if we have no active 'live'
+            // queries that
+            // need updating.  But this should basically be practically no cost.  The queue just holds a single
+            // item
+            // indicating a change happened.  And when UpdateExistingQueriesAsync fires, it will just see that
+            // there are
+            // no live queries and immediately return.  So it's just simple to do things this way instead of
+            // trying to
             // have state management where we try to decide if we should listen or not.
             _workspace.WorkspaceChanged += (_, _) => _updateQueue.AddWork();
         }
@@ -78,8 +82,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 await PopulateContextGraphAsync(solution, context, graphQueries, disposalToken)
                     .ConfigureAwait(false);
 
-                // If this context would like to be continuously updated with live changes to this query, then add the
-                // tracked query to our tracking list, keeping it alive as long as those is keeping the context alive.
+                // If this context would like to be continuously updated with live changes to this query, then add
+                // the
+                // tracked query to our tracking list, keeping it alive as long as those is keeping the context
+                // alive.
                 if (context.TrackChanges)
                 {
                     lock (_gate)
@@ -110,7 +116,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     .SelectAsArray(t => (context: t.context.GetTarget(), t.queries))
                     .WhereAsArray(t => t.context != null)!;
 
-                // Next, clear out any context that are now no longer alive (or have been canceled).  We no longer care
+                // Next, clear out any context that are now no longer alive (or have been canceled).  We no longer
+                // care
                 // about these.
                 _trackedQueries = _trackedQueries.RemoveAll(t =>
                 {
@@ -193,7 +200,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             }
             catch (OperationCanceledException)
             {
-                // Don't bubble this cancellation outwards.  The queue's cancellation token is mixed with the context's
+                // Don't bubble this cancellation outwards.  The queue's cancellation token is mixed with the
+                // context's
                 // token to make a final token that controls the work we do above.  We don't want any of the wrong
                 // cancellations leaking outwards.
             }

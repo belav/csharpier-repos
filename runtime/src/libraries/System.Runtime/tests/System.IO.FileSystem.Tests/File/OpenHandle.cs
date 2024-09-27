@@ -119,7 +119,8 @@ namespace System.IO.Tests
             {
                 Assert.Equal((options & FileOptions.Asynchronous) != 0, handle.IsAsync);
 
-                // the following code exercises the code path where we don't know FileOptions used for opening the handle
+                // the following code exercises the code path where we don't know FileOptions used for opening the
+                // handle
                 // and instead we ask the OS about it
                 if (OperatingSystem.IsWindows()) // async file handles are a Windows concept
                 {

@@ -577,11 +577,14 @@ namespace DbLinq.Vendor.Implementation
 
         /// <summary>
         /// It should return a int with de difference in milliseconds between two dates.
-        /// It is used in a lot of tasks, ie: operations of timespams ej: timespam.Minutes or timespam.TotalMinutes
+        /// It is used in a lot of tasks, ie: operations of timespams ej: timespam.Minutes or
+        // timespam.TotalMinutes
         /// </summary>
         /// <remarks>
-        /// In the implementation you should pay atention in overflows inside the database engine, since a difference of dates in milliseconds
-        /// maybe deliver a very big integer int. Ie: sqlServer provider  has to do some tricks with castings for implementing such requeriments.
+        /// In the implementation you should pay atention in overflows inside the database engine, since a
+        // difference of dates in milliseconds
+        /// maybe deliver a very big integer int. Ie: sqlServer provider  has to do some tricks with
+        // castings for implementing such requeriments.
         /// </remarks>
         /// <param name="dateA"></param>
         /// <param name="dateB"></param>
@@ -637,13 +640,18 @@ namespace DbLinq.Vendor.Implementation
         }
 
         /// <summary>
-        /// This function should return the first index of the string 'searchString' in a string 'baseString' but starting in 'the startIndex' index . This can be a problem since most of database
-        /// engines doesn't have such overload of SUBSTR, the base implementation do it in a pretty complex with the goal of be most generic syntax as possible using a set of primitives(SUBSTRING(X,X,X) and STRPOS(X,X),+ , *).
+        /// This function should return the first index of the string 'searchString' in a string
+        // 'baseString' but starting in 'the startIndex' index . This can be a problem since most of database
+        /// engines doesn't have such overload of SUBSTR, the base implementation do it in a pretty complex
+        // with the goal of be most generic syntax as possible using a set of primitives(SUBSTRING(X,X,X) and
+        // STRPOS(X,X),+ , *).
         /// This function is usually used in others methods of this sqlprovider.
         /// </summary>
         /// <remarks>
-        /// In the impleementation you should pay atention that in some database engines the indexes of arrays or strings are shifted one unit.
-        /// ie: in .NET stringExpression.Substring(2,2) should be translated as SUBSTRING (stringExpression, 3 , 2) since the first element in sqlserver in a SqlStatement has index=1
+        /// In the impleementation you should pay atention that in some database engines the indexes of
+        // arrays or strings are shifted one unit.
+        /// ie: in .NET stringExpression.Substring(2,2) should be translated as SUBSTRING (stringExpression,
+        // 3 , 2) since the first element in sqlserver in a SqlStatement has index=1
         protected virtual SqlStatement GetLiteralStringIndexOf(
             SqlStatement baseString,
             SqlStatement searchString,

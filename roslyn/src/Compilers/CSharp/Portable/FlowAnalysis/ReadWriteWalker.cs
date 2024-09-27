@@ -14,7 +14,8 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// A region analysis walker that records reads and writes of all variables, both inside and outside the region.
+    /// A region analysis walker that records reads and writes of all variables, both inside and outside
+    // the region.
     /// </summary>
     internal class ReadWriteWalker : AbstractRegionDataFlowPass
     {
@@ -160,7 +161,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Note that a variable is read.
         /// </summary>
         /// <param name="variable">The variable</param>
-        /// <param name="rangeVariableUnderlyingParameter">If variable.Kind is RangeVariable, its underlying lambda parameter. Else null.</param>
+        /// <param name="rangeVariableUnderlyingParameter">If variable.Kind is RangeVariable, its underlying
+        // lambda parameter. Else null.</param>
         protected override void NoteRead(
             Symbol variable,
             ParameterSymbol rangeVariableUnderlyingParameter = null

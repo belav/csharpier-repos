@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity;
 public class SecurityStampValidatorOptions
 {
     /// <summary>
-    /// Gets or sets the <see cref="TimeSpan"/> after which security stamps are re-validated. Defaults to 30 minutes.
+    /// Gets or sets the <see cref="TimeSpan"/> after which security stamps are re-validated. Defaults
+    // to 30 minutes.
     /// </summary>
     /// <value>
     /// The <see cref="TimeSpan"/> after which security stamps are re-validated.
@@ -17,7 +18,8 @@ public class SecurityStampValidatorOptions
     public TimeSpan ValidationInterval { get; set; } = TimeSpan.FromMinutes(30);
 
     /// <summary>
-    /// Invoked when the default security stamp validator replaces the user's ClaimsPrincipal in the cookie.
+    /// Invoked when the default security stamp validator replaces the user's ClaimsPrincipal in the
+    // cookie.
     /// </summary>
     public Func<SecurityStampRefreshingPrincipalContext, Task>? OnRefreshingPrincipal { get; set; }
 

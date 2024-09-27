@@ -166,7 +166,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
             return OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, type);
         }
 
-        // On CoreCLR/Desktop, we do not attempt to resolve the target virtual method based on the type of the 'this' pointer.
+        // On CoreCLR/Desktop, we do not attempt to resolve the target virtual method based on the type of
+        // the 'this' pointer.
         // For compatibility reasons, we'll do the same here.
         public sealed override IntPtr LdFtnResult
         {

@@ -71,7 +71,8 @@ namespace System.Data.Entity.Design.SsdlGenerator
         }
 
         /// <summary>
-        /// Constructs a new instance RelationshipDetailDataTable with a given SerializationInfo and StreamingContext
+        /// Constructs a new instance RelationshipDetailDataTable with a given SerializationInfo and
+        // StreamingContext
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>

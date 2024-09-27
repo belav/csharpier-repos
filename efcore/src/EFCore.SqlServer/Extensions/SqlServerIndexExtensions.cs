@@ -10,8 +10,10 @@ namespace Microsoft.EntityFrameworkCore;
 ///     Index extension methods for SQL Server-specific metadata.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see>, and
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public static class SqlServerIndexExtensions
@@ -62,7 +64,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="value">The value to set.</param>
     /// <param name="index">The index.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsClustered(
         this IConventionIndex index,
@@ -87,7 +90,8 @@ public static class SqlServerIndexExtensions
     ///     Returns included property names, or <see langword="null" /> if they have not been specified.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>The included property names, or <see langword="null" /> if they have not been specified.</returns>
+    /// <returns>The included property names, or <see langword="null" /> if they have not been
+    // specified.</returns>
     public static IReadOnlyList<string>? GetIncludeProperties(this IReadOnlyIndex index) =>
         (index is RuntimeIndex)
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
@@ -98,7 +102,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
-    /// <returns>The included property names, or <see langword="null" /> if they have not been specified.</returns>
+    /// <returns>The included property names, or <see langword="null" /> if they have not been
+    // specified.</returns>
     public static IReadOnlyList<string>? GetIncludeProperties(
         this IReadOnlyIndex index,
         in StoreObjectIdentifier storeObject
@@ -133,7 +138,8 @@ public static class SqlServerIndexExtensions
     ///     Sets included property names.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <param name="properties">The value to set.</param>
     /// <returns>The configured property names.</returns>
     public static IReadOnlyList<string>? SetIncludeProperties(
@@ -204,7 +210,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="createdOnline">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetIsCreatedOnline(
         this IConventionIndex index,
@@ -285,7 +292,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="fillFactor">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static int? SetFillFactor(
         this IConventionIndex index,
@@ -308,7 +316,8 @@ public static class SqlServerIndexExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for whether the index uses the fill factor.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for whether the index uses the fill factor.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for whether the index uses the fill
+    // factor.</returns>
     public static ConfigurationSource? GetFillFactorConfigurationSource(
         this IConventionIndex index
     ) => index.FindAnnotation(SqlServerAnnotationNames.FillFactor)?.GetConfigurationSource();
@@ -362,7 +371,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="sortInTempDb">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static bool? SetSortInTempDb(
         this IConventionIndex index,
@@ -382,7 +392,8 @@ public static class SqlServerIndexExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for whether the index is sorted in tempdb.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for whether the index is sorted in tempdb.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for whether the index is sorted in
+    // tempdb.</returns>
     public static ConfigurationSource? GetSortInTempDbConfigurationSource(
         this IConventionIndex index
     ) => index.FindAnnotation(SqlServerAnnotationNames.SortInTempDb)?.GetConfigurationSource();
@@ -438,7 +449,8 @@ public static class SqlServerIndexExtensions
     /// </summary>
     /// <param name="index">The index.</param>
     /// <param name="dataCompression">The value to set.</param>
-    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
+    /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data
+    // annotation.</param>
     /// <returns>The configured value.</returns>
     public static DataCompressionType? SetDataCompression(
         this IConventionIndex index,
@@ -458,7 +470,8 @@ public static class SqlServerIndexExtensions
     ///     Returns the <see cref="ConfigurationSource" /> for the data compression the index uses.
     /// </summary>
     /// <param name="index">The index.</param>
-    /// <returns>The <see cref="ConfigurationSource" /> for the data compression the index uses.</returns>
+    /// <returns>The <see cref="ConfigurationSource" /> for the data compression the index
+    // uses.</returns>
     public static ConfigurationSource? GetDataCompressionConfigurationSource(
         this IConventionIndex index
     ) => index.FindAnnotation(SqlServerAnnotationNames.DataCompression)?.GetConfigurationSource();

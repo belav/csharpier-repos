@@ -317,7 +317,8 @@ namespace Microsoft.Interop
             {
                 (string managedIdentifier, _) = context.GetIdentifiers(info);
 
-                // <marshaller>.FromManaged(<managedIdentifier>, stackalloc <bufferElementType>[<marshallerType>.BufferSize]);
+                // <marshaller>.FromManaged(<managedIdentifier>, stackalloc
+                // <bufferElementType>[<marshallerType>.BufferSize]);
                 yield return MethodInvocationStatement(
                     IdentifierName(
                         context.GetAdditionalIdentifier(
@@ -479,7 +480,8 @@ namespace Microsoft.Interop
     }
 
     /// <summary>
-    /// Marshaller that enables support for marshalling elements of a collection via a native type that implements the LinearCollection marshalling spec.
+    /// Marshaller that enables support for marshalling elements of a collection via a native type that
+    // implements the LinearCollection marshalling spec.
     /// </summary>
     internal sealed class StatefulLinearCollectionMarshalling : ICustomTypeMarshallingStrategy
     {
@@ -512,7 +514,8 @@ namespace Microsoft.Interop
             StubCodeContext context
         )
         {
-            // We don't have anything to cleanup specifically related to this value, just the elements. We let the element marshaller decide whether to cleanup in callee or caller cleanup stage
+            // We don't have anything to cleanup specifically related to this value, just the elements. We let
+            // the element marshaller decide whether to cleanup in callee or caller cleanup stage
             if (!_cleanupElements)
                 yield break;
 
@@ -532,7 +535,8 @@ namespace Microsoft.Interop
             StubCodeContext context
         )
         {
-            // We don't have anything to cleanup specifically related to this value, just the elements. We let the element marshaller decide whether to cleanup in callee or caller cleanup stage
+            // We don't have anything to cleanup specifically related to this value, just the elements. We let
+            // the element marshaller decide whether to cleanup in callee or caller cleanup stage
             if (!_cleanupElements)
                 yield break;
 
@@ -573,8 +577,10 @@ namespace Microsoft.Interop
                 && info.ByValueContentsMarshalKind == ByValueContentsMarshalKind.Out
             )
             {
-                // If the parameter is marshalled by-value [Out], then we don't marshal the contents of the collection.
-                // We do clear the span, so that if the invoke target doesn't fill it, we aren't left with undefined content.
+                // If the parameter is marshalled by-value [Out], then we don't marshal the contents of the
+                // collection.
+                // We do clear the span, so that if the invoke target doesn't fill it, we aren't left with undefined
+                // content.
                 yield return _elementsMarshalling.GenerateClearUnmanagedDestination(info, context);
 
                 yield break;
@@ -585,7 +591,8 @@ namespace Microsoft.Interop
                 && info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.Out)
             )
             {
-                // If the parameter is marshalled by-value [Out] or [In, Out], then we need to unmarshal the contents of the collection
+                // If the parameter is marshalled by-value [Out] or [In, Out], then we need to unmarshal the
+                // contents of the collection
                 // into the passed-in collection value.
                 yield return _elementsMarshalling.GenerateUnmanagedToManagedByValueOutMarshalStatement(
                     info,
@@ -646,7 +653,8 @@ namespace Microsoft.Interop
             {
                 yield return elementsSetup;
             }
-            // Use the numElements local to ensure the compiler doesn't give errors for using an uninitialized variable.
+            // Use the numElements local to ensure the compiler doesn't give errors for using an uninitialized
+            // variable.
             // The value may be used in cleanup before it has been initialized, so this is not safe.
             yield return MarshallerHelpers.SkipInitOrDefaultInit(
                 new TypePositionInfo(SpecialTypeInfo.Int32, NoMarshallingInfo.Instance)
@@ -668,7 +676,8 @@ namespace Microsoft.Interop
                 && info.ByValueContentsMarshalKind.HasFlag(ByValueContentsMarshalKind.Out)
             )
             {
-                // If the parameter is marshalled by-value [Out] or [In, Out], then we need to unmarshal the contents of the collection
+                // If the parameter is marshalled by-value [Out] or [In, Out], then we need to unmarshal the
+                // contents of the collection
                 // into the passed-in collection value.
                 yield return _elementsMarshalling.GenerateManagedToUnmanagedByValueOutUnmarshalStatement(
                     info,
@@ -683,8 +692,10 @@ namespace Microsoft.Interop
                 && info.ByValueContentsMarshalKind == ByValueContentsMarshalKind.Out
             )
             {
-                // If the parameter is marshalled by-value [Out], then we don't marshal the contents of the collection.
-                // We do clear the span, so that if the invoke target doesn't fill it, we aren't left with undefined content.
+                // If the parameter is marshalled by-value [Out], then we don't marshal the contents of the
+                // collection.
+                // We do clear the span, so that if the invoke target doesn't fill it, we aren't left with undefined
+                // content.
                 yield return _elementsMarshalling.GenerateClearManagedValuesDestination(
                     info,
                     context

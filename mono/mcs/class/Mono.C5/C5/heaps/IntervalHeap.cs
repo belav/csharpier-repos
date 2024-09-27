@@ -1,22 +1,22 @@
 /*
- Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
- 
- The above copyright notice and this permission notice shall be included in
- all copies or substantial portions of the Software.
- 
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
+Copyright (c) 2003-2006 Niels Kokholm and Peter Sestoft
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 */
 
 using System;
@@ -765,7 +765,8 @@ namespace C5
         /// <summary>
         /// Get or set the item corresponding to a handle.
         /// </summary>
-        /// <exception cref="InvalidPriorityQueueHandleException">if the handle is invalid for this queue</exception>
+        /// <exception cref="InvalidPriorityQueueHandleException">if the handle is invalid for this
+        // queue</exception>
         /// <param name="handle">The reference into the heap</param>
         /// <returns></returns>
         [Tested]
@@ -786,7 +787,8 @@ namespace C5
         /// Check safely if a handle is valid for this queue and if so, report the corresponding queue item.
         /// </summary>
         /// <param name="handle">The handle to check</param>
-        /// <param name="item">If the handle is valid this will contain the corresponding item on output.</param>
+        /// <param name="item">If the handle is valid this will contain the corresponding item on
+        // output.</param>
         /// <returns>True if the handle is valid.</returns>
         public bool Find(IPriorityQueueHandle<T> handle, out T item)
         {
@@ -850,7 +852,8 @@ namespace C5
         /// Delete an item with a handle from a priority queue.
         /// </summary>
         /// <exception cref="InvalidPriorityQueueHandleException">if the handle is invalid</exception>
-        /// <param name="handle">The handle for the item. The handle will be invalidated, but reusable.</param>
+        /// <param name="handle">The handle for the item. The handle will be invalidated, but
+        // reusable.</param>
         /// <returns>The deleted item</returns>
         [Tested]
         public T Delete(IPriorityQueueHandle<T> handle)

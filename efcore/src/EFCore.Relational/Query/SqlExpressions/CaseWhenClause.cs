@@ -8,7 +8,8 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An object that represents a WHEN...THEN... construct in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -17,7 +18,8 @@ public class CaseWhenClause
     /// <summary>
     ///     Creates a new instance of the <see cref="CaseWhenClause" /> class.
     /// </summary>
-    /// <param name="test">A value to compare with <see cref="CaseExpression.Operand" /> or condition to evaluate.</param>
+    /// <param name="test">A value to compare with <see cref="CaseExpression.Operand" /> or condition to
+    // evaluate.</param>
     /// <param name="result">A value to return if test succeeds.</param>
     public CaseWhenClause(SqlExpression test, SqlExpression result)
     {
@@ -26,7 +28,8 @@ public class CaseWhenClause
     }
 
     /// <summary>
-    ///     The value to compare with <see cref="CaseExpression.Operand" /> or the condition to evaluate.
+    ///     The value to compare with <see cref="CaseExpression.Operand" /> or the condition to
+    // evaluate.
     /// </summary>
     public virtual SqlExpression Test { get; }
 

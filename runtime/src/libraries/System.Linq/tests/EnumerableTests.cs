@@ -257,7 +257,8 @@ namespace System.Linq.Tests
         }
 
         /// <summary>
-        /// A test enumerator that throws an InvalidOperationException when invoking Current after MoveNext has been called exactly once.
+        /// A test enumerator that throws an InvalidOperationException when invoking Current after MoveNext
+        // has been called exactly once.
         /// </summary>
         protected class ThrowsOnCurrentEnumerator : TestEnumerator
         {
@@ -276,7 +277,8 @@ namespace System.Linq.Tests
         }
 
         /// <summary>
-        /// A test enumerator that throws an InvalidOperationException when invoking MoveNext after MoveNext has been called exactly once.
+        /// A test enumerator that throws an InvalidOperationException when invoking MoveNext after MoveNext
+        // has been called exactly once.
         /// </summary>
         protected class ThrowsOnMoveNext : TestEnumerator
         {
@@ -293,7 +295,8 @@ namespace System.Linq.Tests
         }
 
         /// <summary>
-        /// A test enumerator that throws an InvalidOperationException when GetEnumerator is called for the first time.
+        /// A test enumerator that throws an InvalidOperationException when GetEnumerator is called for the
+        // first time.
         /// </summary>
         protected class ThrowsOnGetEnumerator : TestEnumerator
         {

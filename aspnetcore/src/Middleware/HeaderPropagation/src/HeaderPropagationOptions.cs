@@ -15,7 +15,8 @@ public class HeaderPropagationOptions
     /// <remarks>
     /// Entries in <see cref="Headers"/> are processed in order while capturing headers inside
     /// <see cref="HeaderPropagationMiddleware"/>. This can cause an earlier entry to take precedence
-    /// over a later entry if they have the same <see cref="HeaderPropagationEntry.CapturedHeaderName"/>.
+    /// over a later entry if they have the same <see
+    // cref="HeaderPropagationEntry.CapturedHeaderName"/>.
     /// </remarks>
     public HeaderPropagationEntryCollection Headers { get; set; } =
         new HeaderPropagationEntryCollection();

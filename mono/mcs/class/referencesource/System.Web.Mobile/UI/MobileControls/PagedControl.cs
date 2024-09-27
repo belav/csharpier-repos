@@ -15,12 +15,12 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Paged control. Abstract control class inherited by all classes
-     * that are internally paginated.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Paged control. Abstract control class inherited by all classes
+* that are internally paginated.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
     /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl"]/*' />
     [AspNetHostingPermission(
@@ -164,7 +164,8 @@ namespace System.Web.UI.MobileControls
             get { return ControlPager.DefaultWeight; }
         }
 
-        /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.FirstVisibleItemIndex"]/*' />
+        /// <include file='doc\PagedControl.uex'
+        // path='docs/doc[@for="PagedControl.FirstVisibleItemIndex"]/*' />
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int FirstVisibleItemIndex
         {
@@ -276,7 +277,8 @@ namespace System.Web.UI.MobileControls
             return true;
         }
 
-        /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.SavePrivateViewState"]/*' />
+        /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.SavePrivateViewState"]/*'
+        // />
         protected override Object SavePrivateViewState()
         {
             // If the base state is non-null, we always return a Pair with the base state as the
@@ -301,7 +303,8 @@ namespace System.Web.UI.MobileControls
             return null;
         }
 
-        /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.LoadPrivateViewState"]/*' />
+        /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.LoadPrivateViewState"]/*'
+        // />
         protected override void LoadPrivateViewState(Object state)
         {
             Debug.Assert(

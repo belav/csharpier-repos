@@ -68,7 +68,7 @@ class T
             Thread t = new Thread(new ThreadStart(worker));
             t.Start();
         }
-        /* for good measure */
+/* for good measure */
         worker();
     }
 }

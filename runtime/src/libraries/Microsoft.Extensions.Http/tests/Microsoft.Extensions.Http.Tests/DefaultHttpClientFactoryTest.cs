@@ -431,7 +431,8 @@ namespace Microsoft.Extensions.Http
             Assert.True(factory.CleanupTimerStarted.IsSet, "Cleanup timer started");
 
             // We need to make sure that the outer handler actually gets GCed, so drop our references to it.
-            // This is important because the factory relies on this possibility for correctness. We need to ensure that
+            // This is important because the factory relies on this possibility for correctness. We need to
+            // ensure that
             // the factory isn't keeping any references.
             kvp = default;
             client1 = null;
@@ -508,7 +509,8 @@ namespace Microsoft.Extensions.Http
             var cleanupEntry = Assert.Single(factory._expiredHandlers);
             Assert.True(factory.CleanupTimerStarted.IsSet, "Cleanup timer started");
 
-            // Nulling out the references to the internal state of the factory since they wouldn't exist in the non-test
+            // Nulling out the references to the internal state of the factory since they wouldn't exist in the
+            // non-test
             // scenario. We're holding on the client to prevent disposal - like a real use case.
             lock (this)
             {
@@ -520,7 +522,8 @@ namespace Microsoft.Extensions.Http
             // the handler from being disposed if it was still rooted.
             Assert.Empty(factory.ActiveEntryState);
 
-            // Act - 1 - Run a cleanup cycle, this will not dispose the handler, because the client is still live.
+            // Act - 1 - Run a cleanup cycle, this will not dispose the handler, because the client is still
+            // live.
             factory.CleanupTimer_Tick();
 
             // Assert
@@ -529,7 +532,8 @@ namespace Microsoft.Extensions.Http
             Assert.True(factory.CleanupTimerStarted.IsSet, "Cleanup timer started");
 
             // We need to make sure that the outer handler actually gets GCed, so drop our references to it.
-            // This is important because the factory relies on this possibility for correctness. We need to ensure that
+            // This is important because the factory relies on this possibility for correctness. We need to
+            // ensure that
             // the factory isn't keeping any references.
             lock (this)
             {

@@ -21,7 +21,8 @@ namespace System.ComponentModel
     /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager"]/*' />
     /// <devdoc>
     ///    <para>Provides properties and methods to add a license
-    ///       to a component and to manage a <see cref='System.ComponentModel.LicenseProvider'/>. This class cannot be inherited.</para>
+    ///       to a component and to manage a <see cref='System.ComponentModel.LicenseProvider'/>. This
+    // class cannot be inherited.</para>
     /// </devdoc>
     [HostProtection(ExternalProcessMgmt = true)]
     public sealed class LicenseManager
@@ -38,10 +39,12 @@ namespace System.ComponentModel
         //
         private LicenseManager() { }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.CurrentContext"]/*' />
+        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.CurrentContext"]/*'
+        // />
         /// <devdoc>
         ///    <para>
-        ///       Gets or sets the current <see cref='System.ComponentModel.LicenseContext'/> which specifies when the licensed object can be
+        ///       Gets or sets the current <see cref='System.ComponentModel.LicenseContext'/> which
+        // specifies when the licensed object can be
         ///       used.
         ///    </para>
         /// </devdoc>
@@ -79,7 +82,8 @@ namespace System.ComponentModel
         /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.UsageMode"]/*' />
         /// <devdoc>
         /// <para>Gets the <see cref='System.ComponentModel.LicenseUsageMode'/> that
-        ///    specifies when the licensed object can be used, for the <see cref='System.ComponentModel.LicenseManager.CurrentContext'/>.</para>
+        ///    specifies when the licensed object can be used, for the <see
+        // cref='System.ComponentModel.LicenseManager.CurrentContext'/>.</para>
         /// </devdoc>
         public static LicenseUsageMode UsageMode
         {
@@ -116,7 +120,8 @@ namespace System.ComponentModel
             }
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.CreateWithContext"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.CreateWithContext"]/*' />
         /// <devdoc>
         ///    <para>Creates an instance of the specified type, using
         ///       creationContext
@@ -127,7 +132,8 @@ namespace System.ComponentModel
             return CreateWithContext(type, creationContext, new object[0]);
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.CreateWithContext1"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.CreateWithContext1"]/*' />
         /// <devdoc>
         ///    <para>Creates an instance of the specified type with the
         ///       specified arguments, using creationContext as the context in which the licensed
@@ -167,7 +173,8 @@ namespace System.ComponentModel
             return created;
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.GetCachedNoLicenseProvider"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.GetCachedNoLicenseProvider"]/*' />
         /// <devdoc>
         ///     Determines if type was actually cached to have _no_ provider,
         ///     as opposed to not being cached.
@@ -181,7 +188,8 @@ namespace System.ComponentModel
             return false;
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.GetCachedProvider"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.GetCachedProvider"]/*' />
         /// <devdoc>
         ///     Retrieves a cached instance of the provider associated with the
         ///     specified type.
@@ -195,7 +203,8 @@ namespace System.ComponentModel
             return null;
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.GetCachedProviderInstance"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.GetCachedProviderInstance"]/*' />
         /// <devdoc>
         ///     Retrieves a cached instance of the provider of the specified
         ///     type.
@@ -210,7 +219,8 @@ namespace System.ComponentModel
             return null;
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.GetLicenseInteropHelperType"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.GetLicenseInteropHelperType"]/*' />
         /// <devdoc>
         ///     Retrieves the typehandle of the interop helper
         /// </devdoc>
@@ -260,7 +270,8 @@ namespace System.ComponentModel
         /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.IsValid1"]/*' />
         /// <devdoc>
         ///    <para>Determines if a valid license can be granted for the
-        ///       specified instance of the type. This method creates a valid <see cref='System.ComponentModel.License'/>. </para>
+        ///       specified instance of the type. This method creates a valid <see
+        // cref='System.ComponentModel.License'/>. </para>
         /// </devdoc>
         public static bool IsValid(Type type, object instance, out License license)
         {
@@ -297,7 +308,8 @@ namespace System.ComponentModel
             }
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.ValidateInternal"]/*' />
+        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.ValidateInternal"]/*'
+        // />
         /// <devdoc>
         ///     Internal validation helper.
         /// </devdoc>
@@ -319,7 +331,8 @@ namespace System.ComponentModel
             );
         }
 
-        /// <include file='doc\LicenseManager.uex' path='docs/doc[@for="LicenseManager.ValidateInternalRecursive"]/*' />
+        /// <include file='doc\LicenseManager.uex'
+        // path='docs/doc[@for="LicenseManager.ValidateInternalRecursive"]/*' />
         /// <devdoc>
         ///     Since we want to walk up the entire inheritance change, when not
         ///     give an instance, we need another helper method to walk up

@@ -7,12 +7,14 @@ using Microsoft.EntityFrameworkCore.Internal;
 namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
-///     Describes the binding from a method on an EF internal dependency injection service, which may or may not
+///     Describes the binding from a method on an EF internal dependency injection service, which
+// may or may not
 ///     also have and associated <see cref="IServiceProperty" />, to a parameter in a constructor,
 ///     factory method, or similar.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with constructors</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-constructor-binding">Entity types with
+// constructors</see> for more information and examples.
 /// </remarks>
 public class DependencyInjectionMethodParameterBinding : DependencyInjectionParameterBinding
 {
@@ -35,13 +37,15 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
     private Func<MaterializationContext, IEntityType, object, object>? _serviceDelegate;
 
     /// <summary>
-    ///     Creates a new <see cref="DependencyInjectionParameterBinding" /> instance for the given method
+    ///     Creates a new <see cref="DependencyInjectionParameterBinding" /> instance for the given
+    // method
     ///     of the given service type.
     /// </summary>
     /// <param name="parameterType">The parameter CLR type.</param>
     /// <param name="serviceType">The service CLR types, as resolved from dependency injection</param>
     /// <param name="method">The method of the service to bind to.</param>
-    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
+    /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see
+    // langword="null" />.</param>
     public DependencyInjectionMethodParameterBinding(
         Type parameterType,
         Type serviceType,

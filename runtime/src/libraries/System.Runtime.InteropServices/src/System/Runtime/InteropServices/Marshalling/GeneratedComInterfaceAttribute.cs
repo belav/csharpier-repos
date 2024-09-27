@@ -4,7 +4,8 @@
 namespace System.Runtime.InteropServices.Marshalling
 {
     /// <summary>
-    /// Specifies that the attributed type is a COM interface and that the source generator should generate code for it.
+    /// Specifies that the attributed type is a COM interface and that the source generator should
+    // generate code for it.
     /// </summary>
     [AttributeUsage(AttributeTargets.Interface)]
     public class GeneratedComInterfaceAttribute : Attribute
@@ -20,8 +21,10 @@ namespace System.Runtime.InteropServices.Marshalling
 
         /// <summary>
         /// Gets or sets how to marshal string arguments to all methods on the interface.
-        /// If the attributed interface inherits from another interface with <see cref="GeneratedComInterfaceAttribute"/>,
-        /// it must have the same values for <see cref="StringMarshalling"/> and <see cref="StringMarshallingCustomType"/>.
+        /// If the attributed interface inherits from another interface with <see
+        // cref="GeneratedComInterfaceAttribute"/>,
+        /// it must have the same values for <see cref="StringMarshalling"/> and <see
+        // cref="StringMarshallingCustomType"/>.
         /// </summary>
         /// <remarks>
         /// If this field is set to a value other than <see cref="StringMarshalling.Custom" />,
@@ -30,9 +33,12 @@ namespace System.Runtime.InteropServices.Marshalling
         public StringMarshalling StringMarshalling { get; set; }
 
         /// <summary>
-        /// Gets or sets the <see cref="Type"/> used to control how string arguments are marshalled for all methods on the interface.
-        /// If the attributed interface inherits from another interface with <see cref="GeneratedComInterfaceAttribute"/>,
-        /// it must have the same values for <see cref="StringMarshalling"/> and <see cref="StringMarshallingCustomType"/>.
+        /// Gets or sets the <see cref="Type"/> used to control how string arguments are marshalled for all
+        // methods on the interface.
+        /// If the attributed interface inherits from another interface with <see
+        // cref="GeneratedComInterfaceAttribute"/>,
+        /// it must have the same values for <see cref="StringMarshalling"/> and <see
+        // cref="StringMarshallingCustomType"/>.
         /// </summary>
         /// <remarks>
         /// If this field is specified, <see cref="StringMarshalling" /> must not be specified

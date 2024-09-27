@@ -27,7 +27,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
             IAsyncCompletionBroker asyncCompletionBroker
         )
         {
-            // Store the listener provider, but delay accessing the listener itself since tracking could still be
+            // Store the listener provider, but delay accessing the listener itself since tracking could still
+            // be
             // disabled during the initialization sequence for integration tests.
             _asynchronousOperationListenerProvider = asynchronousOperationListenerProvider;
             _asyncCompletionBroker = asyncCompletionBroker;
@@ -60,7 +61,8 @@ namespace Microsoft.VisualStudio.IntegrationTest.Setup
                 async () =>
                 {
                     // AsyncCompletion might fire multiple ItemsUpdated events per keystroke typed, which means
-                    // we could see the first ItemsUpdated event even though items don't change (but computation finished).
+                    // we could see the first ItemsUpdated event even though items don't change (but computation
+                    // finished).
                     // If test attempts to assert state after seeing first event it would cause flakiness.
                     // Use SelectedItemProvider to wait for all pending work to be completed.
                     var item = await (

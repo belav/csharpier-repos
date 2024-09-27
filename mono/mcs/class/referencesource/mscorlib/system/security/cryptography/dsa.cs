@@ -73,7 +73,8 @@ namespace System.Security.Cryptography
             return (DSA)CryptoConfig.CreateFromName(algName);
         }
 
-        // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature and
+        // DSA does not encode the algorithm identifier into the signature blob, therefore CreateSignature
+        // and
         // VerifySignature do not need the HashAlgorithmName value, only SignData and VerifyData do.
         abstract public byte[] CreateSignature(byte[] rgbHash);
 
@@ -322,25 +323,25 @@ namespace System.Security.Cryptography
         public override String ToXmlString(bool includePrivateParameters)
         {
             // From the XMLDSIG spec, RFC 3075, Section 6.4.1, a DSAKeyValue looks like this:
-            /*
-               <element name="DSAKeyValue">
-                 <complexType>
-                   <sequence>
-                     <sequence>
-                       <element name="P" type="ds:CryptoBinary"/>
-                       <element name="Q" type="ds:CryptoBinary"/>
-                       <element name="G" type="ds:CryptoBinary"/>
-                       <element name="Y" type="ds:CryptoBinary"/>
-                       <element name="J" type="ds:CryptoBinary" minOccurs="0"/>
-                     </sequence>
-                     <sequence minOccurs="0">
-                       <element name="Seed" type="ds:CryptoBinary"/>
-                       <element name="PgenCounter" type="ds:CryptoBinary"/>
-                     </sequence>
-                   </sequence>
-                 </complexType>
-               </element>
-            */
+/*
+<element name="DSAKeyValue">
+<complexType>
+<sequence>
+<sequence>
+<element name="P" type="ds:CryptoBinary"/>
+<element name="Q" type="ds:CryptoBinary"/>
+<element name="G" type="ds:CryptoBinary"/>
+<element name="Y" type="ds:CryptoBinary"/>
+<element name="J" type="ds:CryptoBinary" minOccurs="0"/>
+</sequence>
+<sequence minOccurs="0">
+<element name="Seed" type="ds:CryptoBinary"/>
+<element name="PgenCounter" type="ds:CryptoBinary"/>
+</sequence>
+</sequence>
+</complexType>
+</element>
+*/
             // we extend appropriately for private component X
             DSAParameters dsaParams = this.ExportParameters(includePrivateParameters);
             StringBuilder sb = new StringBuilder();

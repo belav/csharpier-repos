@@ -39,7 +39,8 @@ namespace System.Web.DynamicData
         public string Action { get; set; }
 
         /// <summary>
-        /// The ViewName is the name of the page used to handle the request. If omitted, it defaults to the Action name.
+        /// The ViewName is the name of the page used to handle the request. If omitted, it defaults to the
+        // Action name.
         /// </summary>
         public string ViewName { get; set; }
 
@@ -111,7 +112,8 @@ namespace System.Web.DynamicData
             //
             AddQueryStringParamsToRouteData(httpContext, routeData);
 
-            // Check if the route values match an existing table and if they can be served by a scaffolded or custom page
+            // Check if the route values match an existing table and if they can be served by a scaffolded or
+            // custom page
             if (!VerifyRouteValues(routeData.Values))
                 return null;
 
@@ -167,7 +169,8 @@ namespace System.Web.DynamicData
             if (virtualPathData == null)
                 return null;
 
-            // Check if the route values match an existing table and if they can be served by a scaffolded or custom page
+            // Check if the route values match an existing table and if they can be served by a scaffolded or
+            // custom page
             if (VerifyRouteValues(values))
             {
                 return virtualPathData;

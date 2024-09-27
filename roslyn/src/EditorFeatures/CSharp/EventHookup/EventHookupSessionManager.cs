@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.EventHookup
                 )
             )
             {
-                // Create a tooltip presenter that stays alive, even when the user types, without tracking the mouse.
+                // Create a tooltip presenter that stays alive, even when the user types, without tracking the
+                // mouse.
                 _toolTipPresenter = _toolTipService.CreatePresenter(
                     analyzedSession.TextView,
                     new ToolTipParameters(trackMouse: false, ignoreBufferChange: true)

@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * Test reading localloc variable from catch block.
- */
+* Test reading localloc variable from catch block.
+*/
 
 using System;
 using LocallocTesting;

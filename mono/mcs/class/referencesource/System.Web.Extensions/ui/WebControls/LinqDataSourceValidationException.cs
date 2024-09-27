@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-// NOTE: Suppress messages for CA2126 and CA2114 work around FxCop bugs that are resolved in the latest FxCop release.
+// NOTE: Suppress messages for CA2126 and CA2114 work around FxCop bugs that are resolved in the
+// latest FxCop release.
 namespace System.Web.UI.WebControls
 {
     using System;

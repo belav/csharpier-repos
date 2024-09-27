@@ -389,8 +389,8 @@ namespace MonoTests.System.Runtime.Serialization
 
             Assert.AreEqual(4, ccu.Namespaces[0].Types.Count, "#i43");
 
-            /* ns : myns.echo
-             * Messages */
+/* ns : myns.echo
+* Messages */
             Dictionary<string, string> args = new Dictionary<string, string>();
             args.Add("msg", "System.String");
             args.Add("num", "System.Int32");
@@ -411,7 +411,7 @@ namespace MonoTests.System.Runtime.Serialization
             args.Add("DoubleItResult", "System.String");
             CheckDC(ccu.Namespaces[0].Types[3], "DoubleItResponse", args, "#i47");
 
-            /* ns: "" */
+/* ns: "" */
             args.Clear();
             args.Add("foo", "System.String");
             CheckDC(ccu.Namespaces[1].Types[0], "dc", args, "#i48");
@@ -512,7 +512,8 @@ namespace MonoTests.System.Runtime.Serialization
             return sw.ToString();
         }
 
-        // FIXME: this set of tests need further assertion in each test case. Right now it just checks if things import or fail just fine.
+        // FIXME: this set of tests need further assertion in each test case. Right now it just checks if
+        // things import or fail just fine.
 
         [Test]
         public void ImportTestX0()
@@ -826,7 +827,7 @@ namespace MonoTests.System.Runtime.Serialization
             );
         }
 
-        /* Helper methods */
+/* Helper methods */
         private void CheckDC(
             CodeTypeDeclaration type,
             string name,

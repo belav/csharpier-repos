@@ -26,14 +26,16 @@ namespace System.ServiceModel.Security
     {
         //
         // NOTE: The properties on this class are designed to facilitate ease of use of the component and
-        //       to reduce the complexity of the constructors. The base class already gifts us with 8 constructor
+        //       to reduce the complexity of the constructors. The base class already gifts us with 8
+        // constructor
         //       overloads.
         //
         //       Therefore, it is advisable that the fields *not* be used unless absolutely required.
         //
 
         /// <summary>
-        /// These fields represent the property values that are "locked down" once the first channel is created.
+        /// These fields represent the property values that are "locked down" once the first channel is
+        // created.
         /// </summary>
         class WSTrustChannelLockedProperties
         {
@@ -51,13 +53,15 @@ namespace System.ServiceModel.Security
         WSTrustChannelLockedProperties _lockedProperties;
 
         //
-        // The TrustVersion property can be set to an instance of TrustVersion.WSTrust13 or TrustVersion.WSTrustFeb2005
+        // The TrustVersion property can be set to an instance of TrustVersion.WSTrust13 or
+        // TrustVersion.WSTrustFeb2005
         // to generate the built-in serializers for these trust namespaces.
         //
         TrustVersion _trustVersion;
 
         //
-        // These fields contain the values used to construct the WSTrustSerializationContext used by the channels
+        // These fields contain the values used to construct the WSTrustSerializationContext used by the
+        // channels
         // we generate.
         //
         // _securityTokenResolver and _useKeyTokenResolver imply special behavior if they are null; however,
@@ -81,7 +85,8 @@ namespace System.ServiceModel.Security
             : base() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified endpoint
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified
+        // endpoint
         /// configuration name.
         /// </summary>
         /// <param name="endpointConfigurationName">The configuration name used for the endpoint.</param>
@@ -91,23 +96,28 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class.
         /// </summary>
-        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
+        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the
+        // factory</param>
         public WSTrustChannelFactory(Binding binding)
             : base(binding) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified endpoint.
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified
+        // endpoint.
         /// </summary>
-        /// <param name="endpoint">The <see cref="ServiceEndpoint" />for the channels produced by the factory.</param>
+        /// <param name="endpoint">The <see cref="ServiceEndpoint" />for the channels produced by the
+        // factory.</param>
         public WSTrustChannelFactory(ServiceEndpoint endpoint)
             : base(endpoint) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class associated with a specified
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class associated with a
+        // specified
         /// name for the endpoint configuration and remote address.
         /// </summary>
         /// <param name="endpointConfigurationName">The configuration name used for the endpoint.</param>
-        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
+        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the
+        // service.</param>
         public WSTrustChannelFactory(
             string endpointConfigurationName,
             EndpointAddress remoteAddress
@@ -115,20 +125,26 @@ namespace System.ServiceModel.Security
             : base(endpointConfigurationName, remoteAddress) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified binding
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified
+        // binding
         /// and endpoint address.
         /// </summary>
-        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
-        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
+        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the
+        // factory</param>
+        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the
+        // service.</param>
         public WSTrustChannelFactory(Binding binding, EndpointAddress remoteAddress)
             : base(binding, remoteAddress) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified binding
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified
+        // binding
         /// and remote address.
         /// </summary>
-        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
-        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
+        /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the
+        // factory</param>
+        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the
+        // service.</param>
         public WSTrustChannelFactory(Binding binding, string remoteAddress)
             : base(binding, remoteAddress) { }
 
@@ -136,10 +152,13 @@ namespace System.ServiceModel.Security
         /// Gets or sets the version of WS-Trust the created channels will use for serializing messages.
         /// </summary>
         /// <remarks>
-        /// <para>If this property is not set, created channels will use the <see cref="TrustVersion" /> set on any
-        /// <see cref="SecurityBindingElement" /> found on the channel factory's Endpoint object if one exists.
+        /// <para>If this property is not set, created channels will use the <see cref="TrustVersion" /> set
+        // on any
+        /// <see cref="SecurityBindingElement" /> found on the channel factory's Endpoint object if one
+        // exists.
         /// </para>
-        /// <para>This class will not support changing the value of this property after a channel is created.</para>
+        /// <para>This class will not support changing the value of this property after a channel is
+        // created.</para>
         /// </remarks>
         public TrustVersion TrustVersion
         {
@@ -161,7 +180,8 @@ namespace System.ServiceModel.Security
 
         /// <summary>
         /// Gets or sets the <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of
-        /// <see cref="SecurityTokenHandler" /> objects used by created channels for serializing and validating
+        /// <see cref="SecurityTokenHandler" /> objects used by created channels for serializing and
+        // validating
         /// tokens found in  WS-Trust messages.
         /// </summary>
         /// <remarks>
@@ -191,13 +211,15 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references found in most
+        /// Gets or sets the <see cref="SecurityTokenResolver"/> used to resolve security token references
+        // found in most
         /// elements of WS-Trust messages.
         /// </summary>
         /// <remarks>
         /// <para>
         /// If this property is not set created channels will use the ClientCertificate set on the factory's
-        /// Endpoint's ClientCredentials behavior to create a resolver. If no such certificate is found, an empty
+        /// Endpoint's ClientCredentials behavior to create a resolver. If no such certificate is found, an
+        // empty
         /// resolver is used.
         /// </para>
         /// <para>
@@ -258,7 +280,8 @@ namespace System.ServiceModel.Security
         /// <remarks>
         /// <para>
         /// If this property is not set, either <see cref="WSTrust13RequestSerializer" /> or
-        /// <see cref="WSTrustFeb2005RequestSerializer" /> will be used. The serializer will correspond to the
+        /// <see cref="WSTrustFeb2005RequestSerializer" /> will be used. The serializer will correspond to
+        // the
         /// version of WS-Trust indicated by the <see cref="TrustVersion" /> property.
         /// </para>
         /// <para>
@@ -284,12 +307,14 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Gets or sets the WSTrustResponseSerializer to use for serializing RequestSecurityTokensResponse messages.
+        /// Gets or sets the WSTrustResponseSerializer to use for serializing RequestSecurityTokensResponse
+        // messages.
         /// </summary>
         /// <remarks>
         /// <para>
         /// If this property is not set, either <see cref="WSTrust13ResponseSerializer" /> or
-        /// <see cref="WSTrustFeb2005ResponseSerializer" /> will be used. The serializer will correspond to the
+        /// <see cref="WSTrustFeb2005ResponseSerializer" /> will be used. The serializer will correspond to
+        // the
         /// version of WS-Trust indicated by the <see cref="TrustVersion" /> property.
         /// </para>
         /// <para>
@@ -318,8 +343,10 @@ namespace System.ServiceModel.Security
         /// Creates a <see cref="WSTrustChannel" /> that is used to send messages to a service at a specific
         /// endpoint address through a specified transport address.
         /// </summary>
-        /// <param name="address">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
-        /// <param name="via">The <see cref="Uri" /> that contains the transport address to which the channel sends messages.</param>
+        /// <param name="address">The <see cref="EndpointAddress" /> that provides the location of the
+        // service.</param>
+        /// <param name="via">The <see cref="Uri" /> that contains the transport address to which the
+        // channel sends messages.</param>
         /// <returns></returns>
         public override IWSTrustChannelContract CreateChannel(EndpointAddress address, Uri via)
         {
@@ -343,13 +370,16 @@ namespace System.ServiceModel.Security
         /// receiving messages.</param>
         /// <param name="trustVersion">The version of WS-Trust that should be used.</param>
         /// <param name="context">
-        /// The <see cref="WSTrustSerializationContext" /> that should be used to serialize WS-Trust messages.
+        /// The <see cref="WSTrustSerializationContext" /> that should be used to serialize WS-Trust
+        // messages.
         /// </param>
         /// <param name="requestSerializer">
-        /// The <see cref="WSTrustRequestSerializer" /> that should be used to serialize WS-Trust request messages.
+        /// The <see cref="WSTrustRequestSerializer" /> that should be used to serialize WS-Trust request
+        // messages.
         /// </param>
         /// <param name="responseSerializer">
-        /// The <see cref="WSTrustResponseSerializer" /> that should be used to serialize WS-Trust response messages.
+        /// The <see cref="WSTrustResponseSerializer" /> that should be used to serialize WS-Trust response
+        // messages.
         /// </param>
         /// <returns></returns>
         protected virtual WSTrustChannel CreateTrustChannel(
@@ -465,7 +495,8 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Creates a <see cref="WSTrustSerializationContext" /> used by <see cref="WSTrustChannel" /> objects created
+        /// Creates a <see cref="WSTrustSerializationContext" /> used by <see cref="WSTrustChannel" />
+        // objects created
         /// by this factory.
         /// </summary>
         /// <remarks>

@@ -114,7 +114,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// It is not suitable to call this method on a <see cref="OverriddenOrHiddenMembersResult"/> object
-        /// associated with a member within substituted type, <see cref="GetOverriddenMember(Symbol, Symbol)"/>
+        /// associated with a member within substituted type, <see cref="GetOverriddenMember(Symbol,
+        // Symbol)"/>
         /// should be used instead.
         /// </summary>
         internal Symbol GetOverriddenMember()

@@ -1,8 +1,8 @@
 using System;
 
 /*
- * Register allocator tests.
- */
+* Register allocator tests.
+*/
 
 public class Tests
 {

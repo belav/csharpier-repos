@@ -1276,7 +1276,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// transformed angle should be used. This method transforms angles.
         /// </summary>
         /// <param name="angle">Not transformed angle</param>
-        /// <param name="correction">Correction of bounding rectangle (change between width and height)</param>
+        /// <param name="correction">Correction of bounding rectangle (change between width and
+        // height)</param>
         /// <returns>Transformed angle</returns>
         private float AngleCorrection(float angle, double correction)
         {
@@ -1343,7 +1344,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
         /// <param name="lineSegmentType">AxisName of line segment. Used for step lines and splines.</param>
         /// <param name="thinBorders">Thin border will be drawn on specified sides.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Draw3DPolygon(
             ChartArea area,
             Matrix3D matrix,
@@ -1573,7 +1575,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="points">Array of points.</param>
         /// <param name="tension">Line tension.</param>
         /// <param name="flatten">Flatten result path.</param>
-        /// <param name="translateCoordinates">Indicates that points coordinates should be translated.</param>
+        /// <param name="translateCoordinates">Indicates that points coordinates should be
+        // translated.</param>
         /// <param name="yValueIndex">Index of the Y value to use.</param>
         /// <returns>Spline path.</returns>
         internal GraphicsPath GetSplineFlattenPath(
@@ -1780,7 +1783,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="multiSeries">Multiple series are drawn at the same time.</param>
         /// <param name="yValueIndex">Index of the Y value to use.</param>
         /// <param name="clipInsideArea">Surface should be clipped inside plotting area.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Draw3DSplineSurface(
             ChartArea area,
             Matrix3D matrix,
@@ -2001,7 +2005,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="multiSeries">Multiple series are drawn at the same time.</param>
         /// <param name="yValueIndex">Index of the Y value to use.</param>
         /// <param name="clipInsideArea">Surface should be clipped inside plotting area.</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Draw3DSurface(
             ChartArea area,
             Matrix3D matrix,
@@ -2896,9 +2901,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="points">Array of all points.</param>
         /// <param name="firstPoint">First point.</param>
         /// <param name="secondPoint">Second point.</param>
-        /// <param name="multiSeries">Indicates that multiple series are painted at the same time (stacked or side-by-side).</param>
+        /// <param name="multiSeries">Indicates that multiple series are painted at the same time (stacked
+        // or side-by-side).</param>
         /// <param name="lineSegmentType">Returns line segment type.</param>
-        /// <returns>Function retrns 0, 1 or 2. 0 - Do not draw surface, 1 - draw on the back, 2 - draw in front.</returns>
+        /// <returns>Function retrns 0, 1 or 2. 0 - Do not draw surface, 1 - draw on the back, 2 - draw in
+        // front.</returns>
         static internal int ShouldDrawLineChartSurface(
             ChartArea area,
             bool reversedSeriesOrder,
@@ -3310,7 +3317,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="borderWidth">Border Width</param>
         /// <param name="borderDashStyle">Border Style</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Fill3DRectangle(
             RectangleF position,
             float positionZ,
@@ -3360,7 +3368,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="barDrawingStyle">Bar drawing style.</param>
         /// <param name="veticalOrientation">Defines if bar is vertical or horizontal.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Fill3DRectangle(
             RectangleF position,
             float positionZ,
@@ -4151,7 +4160,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="shadowColor">Marker shadow color.</param>
         /// <param name="imageScaleRect">Rectangle to which marker image should be scaled.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to ElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to ElementPath, otherwise
+        // Null.</returns>
         internal GraphicsPath DrawMarker3D(
             Matrix3D matrix,
             LightStyle lightStyle,
@@ -4744,7 +4754,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="borderDashStyle">Border Style</param>
         /// <param name="veticalOrientation">Defines if bar is vertical or horizontal.</param>
         /// <param name="operationType">AxisName of operation Drawing, Calculating Path or Both</param>
-        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath, otherwise Null.</returns>
+        /// <returns>Returns elemnt shape path if operationType parameter is set to CalcElementPath,
+        // otherwise Null.</returns>
         internal GraphicsPath Fill3DRectangleAsCylinder(
             RectangleF position,
             float positionZ,

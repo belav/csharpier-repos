@@ -11,7 +11,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Host.Mef
 {
     /// <summary>
-    /// MEF metadata class used for finding <see cref="IWorkspaceService"/> and <see cref="IWorkspaceServiceFactory"/> exports.
+    /// MEF metadata class used for finding <see cref="IWorkspaceService"/> and <see
+    // cref="IWorkspaceServiceFactory"/> exports.
     /// </summary>
     internal class WorkspaceServiceMetadata
     {

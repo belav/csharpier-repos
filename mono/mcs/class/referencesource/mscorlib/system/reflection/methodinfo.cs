@@ -432,8 +432,10 @@ namespace System.Reflection
             // Serialization uses ToString to resolve MethodInfo overloads.
             StringBuilder sbName = new StringBuilder(Name);
 
-            // serialization == true: use unambiguous (except for assembly name) type names to distinguish between overloads.
-            // serialization == false: use basic format to maintain backward compatibility of MethodInfo.ToString().
+            // serialization == true: use unambiguous (except for assembly name) type names to distinguish
+            // between overloads.
+            // serialization == false: use basic format to maintain backward compatibility of
+            // MethodInfo.ToString().
             TypeNameFormatFlags format = serialization
                 ? TypeNameFormatFlags.FormatSerialization
                 : TypeNameFormatFlags.FormatBasic;
@@ -477,7 +479,8 @@ namespace System.Reflection
             get { return m_bindingFlags; }
         }
 
-        // Differs from MethodHandle in that it will return a valid handle even for reflection only loaded types
+        // Differs from MethodHandle in that it will return a valid handle even for reflection only loaded
+        // types
         internal RuntimeMethodHandle GetMethodHandle()
         {
             return new RuntimeMethodHandle(this);
@@ -974,9 +977,12 @@ namespace System.Reflection
 
             INVOCATION_FLAGS invocationFlags = InvocationFlags;
 
-            // INVOCATION_FLAGS_CONTAINS_STACK_POINTERS means that the struct (either the declaring type or the return type)
-            // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These structs cannot
-            // be boxed and thus cannot be invoked through reflection which only deals with boxed value type objects.
+            // INVOCATION_FLAGS_CONTAINS_STACK_POINTERS means that the struct (either the declaring type or the
+            // return type)
+            // contains pointers that point to the stack. This is either a ByRef or a TypedReference. These
+            // structs cannot
+            // be boxed and thus cannot be invoked through reflection which only deals with boxed value type
+            // objects.
             if (
                 (
                     invocationFlags
@@ -988,7 +994,8 @@ namespace System.Reflection
             )
                 ThrowNoInvokeException();
 
-            // check basic method consistency. This call will throw if there are problems in the target/method relationship
+            // check basic method consistency. This call will throw if there are problems in the target/method
+            // relationship
             CheckConsistency(obj);
 
             if (formalCount != actualCount)

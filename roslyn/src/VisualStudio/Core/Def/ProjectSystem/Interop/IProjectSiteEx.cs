@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
         /// <summary>
         /// Allows the project system to pass along property values not covered by the
         /// compiler's command line arguments.
-        /// See <see cref="LanguageServices.ProjectSystem.IWorkspaceProjectContext.SetProperty(string, string)"/>
+        /// See <see cref="LanguageServices.ProjectSystem.IWorkspaceProjectContext.SetProperty(string,
+        // string)"/>
         /// for the corresponding method for CPS-based projects.
         /// </summary>
         void SetProperty(

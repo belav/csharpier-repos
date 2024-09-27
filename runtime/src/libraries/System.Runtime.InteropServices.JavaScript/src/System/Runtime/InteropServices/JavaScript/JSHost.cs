@@ -15,7 +15,10 @@ namespace System.Runtime.InteropServices.JavaScript
     public static partial class JSHost
     {
         /// <summary>
-        /// Returns a proxy for the <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/globalThis">globalThis</see> JavaScript host object.
+        /// Returns a proxy for the <see
+        //
+        // href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/globalThis">globalThis</see>
+        // JavaScript host object.
         /// </summary>
         public static JSObject GlobalThis
         {
@@ -43,10 +46,15 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         /// <summary>
-        /// Downloads and instantiates an ES6 module from the provided URL, via the JavaScript host's <see href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import">dynamic import API</see>.
-        /// If a module with the provided <paramref name="moduleName" /> has previously been instantiated, it will be returned instead.
+        /// Downloads and instantiates an ES6 module from the provided URL, via the JavaScript host's <see
+        // href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/import">dynamic
+        // import
+        // API</see>.
+        /// If a module with the provided <paramref name="moduleName" /> has previously been instantiated,
+        // it will be returned instead.
         /// </summary>
-        /// <param name="moduleName">Globally unique identifier of the ES6 module, which is used by <see cref="JSImportAttribute(string, string)"/>.</param>
+        /// <param name="moduleName">Globally unique identifier of the ES6 module, which is used by <see
+        // cref="JSImportAttribute(string, string)"/>.</param>
         /// <param name="moduleUrl">The location of the module file.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A proxy for the JavaScript object that contains the module's exports.</returns>

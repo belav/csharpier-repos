@@ -21,30 +21,36 @@ namespace System.Xml.Schema
     {
         private Object sourceNodeObject;
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException5"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException5"]/*' />
         protected XmlSchemaValidationException(SerializationInfo info, StreamingContext context)
             : base(info, context) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.GetObjectData"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.GetObjectData"]/*' />
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException1"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException1"]/*' />
         public XmlSchemaValidationException()
             : base(null) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException2"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException2"]/*' />
         public XmlSchemaValidationException(String message)
             : base(message, ((Exception)null), 0, 0) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException0"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException0"]/*' />
         public XmlSchemaValidationException(String message, Exception innerException)
             : base(message, innerException, 0, 0) { }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.XmlSchemaException3"]/*' />
         public XmlSchemaValidationException(
             String message,
             Exception innerException,
@@ -126,7 +132,8 @@ namespace System.Xml.Schema
             this.sourceNodeObject = sourceNode;
         }
 
-        /// <include file='doc\XmlSchemaException.uex' path='docs/doc[@for="XmlSchemaException.SourceUri"]/*' />
+        /// <include file='doc\XmlSchemaException.uex'
+        // path='docs/doc[@for="XmlSchemaException.SourceUri"]/*' />
         public Object SourceObject
         {
             get { return this.sourceNodeObject; }

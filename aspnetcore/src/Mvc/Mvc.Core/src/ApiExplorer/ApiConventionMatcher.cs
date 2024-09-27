@@ -55,7 +55,8 @@ internal static class ApiConventionMatcher
                 }
             }
 
-            // Ensure convention has at least as many parameters as the method. params convention argument are handled
+            // Ensure convention has at least as many parameters as the method. params convention argument are
+            // handled
             // inside the for loop.
             return methodParameters.Length == conventionMethodParameters.Length;
         }

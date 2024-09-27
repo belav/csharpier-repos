@@ -1033,23 +1033,23 @@ namespace MonoTests.System
         public void GetUtcOffsetAtDSTBoundary()
         {
             /*
-             * Getting a definitive list of timezones which do or don't observe Daylight
-             * Savings is difficult (can't say America's or USA definitively) and lengthy see
-             *
-             * http://en.wikipedia.org/wiki/Daylight_saving_time_by_country
-             *
-             * as a good starting point for a list.
-             *
-             * The following are SOME of the timezones/regions which do support daylight savings.
-             *
-             * Pacific/Auckland
-             * Pacific/Sydney
-             * USA (EST, CST, MST, PST, AKST) note this does not cover all states or regions
-             * Europe/London (GMT)
-             * CET (member states of the European Union)
-             *
-             * This test should work in all the above timezones
-             */
+            * Getting a definitive list of timezones which do or don't observe Daylight
+            * Savings is difficult (can't say America's or USA definitively) and lengthy see
+            *
+            * http://en.wikipedia.org/wiki/Daylight_saving_time_by_country
+            *
+            * as a good starting point for a list.
+            *
+            * The following are SOME of the timezones/regions which do support daylight savings.
+            *
+            * Pacific/Auckland
+            * Pacific/Sydney
+            * USA (EST, CST, MST, PST, AKST) note this does not cover all states or regions
+            * Europe/London (GMT)
+            * CET (member states of the European Union)
+            *
+            * This test should work in all the above timezones
+            */
 
 
             TimeZone tz = TimeZone.CurrentTimeZone;

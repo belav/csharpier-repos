@@ -9,10 +9,14 @@ using System.Threading;
 
 namespace System.Net.WebSockets
 {
-    // This class helps to abstract the internal WebSocket buffer, which is used to interact with the native WebSocket
-    // protocol component (WSPC). It helps to shield the details of the layout and the involved pointer arithmetic.
-    // The internal WebSocket buffer also contains a segment, which is used by the WebSocketBase class to buffer
-    // payload (parsed by WSPC already) for the application, if the application requested fewer bytes than the
+    // This class helps to abstract the internal WebSocket buffer, which is used to interact with the
+    // native WebSocket
+    // protocol component (WSPC). It helps to shield the details of the layout and the involved pointer
+    // arithmetic.
+    // The internal WebSocket buffer also contains a segment, which is used by the WebSocketBase class
+    // to buffer
+    // payload (parsed by WSPC already) for the application, if the application requested fewer bytes
+    // than the
     // WSPC returned. The internal buffer is pinned for the whole lifetime if this class.
     // LAYOUT:
     // | Native buffer              | PayloadReceiveBuffer | PropertyBuffer |
@@ -28,7 +32,8 @@ namespace System.Net.WebSockets
 
         private readonly int _receiveBufferSize;
 
-        // Indicates the range of the pinned byte[] that can be used by the WSPC (nativeBuffer + pinnedSendBuffer)
+        // Indicates the range of the pinned byte[] that can be used by the WSPC (nativeBuffer +
+        // pinnedSendBuffer)
         private readonly long _startAddress;
         private readonly long _endAddress;
         private GCHandle _gcHandle;
@@ -206,7 +211,8 @@ namespace System.Net.WebSockets
             return properties;
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         internal void PinSendBuffer(ArraySegment<byte> payload, out bool bufferHasBeenPinned)
         {
             bufferHasBeenPinned = false;
@@ -232,13 +238,15 @@ namespace System.Net.WebSockets
             _pinnedSendBufferEndAddress = _pinnedSendBufferStartAddress + _pinnedSendBuffer.Count;
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         internal IntPtr ConvertPinnedSendPayloadToNative(ArraySegment<byte> payload)
         {
             return ConvertPinnedSendPayloadToNative(payload.Array!, payload.Offset, payload.Count);
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         internal IntPtr ConvertPinnedSendPayloadToNative(byte[] buffer, int offset, int count)
         {
             if (!IsPinnedSendPayloadBuffer(buffer, offset, count))
@@ -261,7 +269,8 @@ namespace System.Net.WebSockets
             return new IntPtr(_pinnedSendBufferStartAddress + offset - _pinnedSendBuffer.Offset);
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         internal ArraySegment<byte> ConvertPinnedSendPayloadFromNative(
             Interop.WebSocket.Buffer buffer,
             WebSocketProtocolComponent.BufferType bufferType
@@ -298,7 +307,8 @@ namespace System.Net.WebSockets
             );
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         private bool IsPinnedSendPayloadBuffer(byte[] buffer, int offset, int count)
         {
             if (_sendBufferState != SendBufferState.SendPayloadSpecified)
@@ -311,7 +321,8 @@ namespace System.Net.WebSockets
                 && offset + count <= _pinnedSendBuffer.Offset + _pinnedSendBuffer.Count;
         }
 
-        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send operation
+        // This method is not thread safe. It must only be called after enforcing at most 1 outstanding send
+        // operation
         internal bool IsPinnedSendPayloadBuffer(
             Interop.WebSocket.Buffer buffer,
             WebSocketProtocolComponent.BufferType bufferType

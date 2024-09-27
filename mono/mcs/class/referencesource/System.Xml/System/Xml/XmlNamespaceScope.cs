@@ -19,7 +19,8 @@ namespace System.Xml
         /// </devdoc>
         All,
 
-        /// <include file='doc\XmlNamespaceScope.uex' path='docs/doc[@for="XmlNamespaceScope.ExcludeXml"]/*' />
+        /// <include file='doc\XmlNamespaceScope.uex' path='docs/doc[@for="XmlNamespaceScope.ExcludeXml"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

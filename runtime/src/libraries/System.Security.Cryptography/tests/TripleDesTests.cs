@@ -116,7 +116,7 @@ namespace System.Security.Cryptography.Tests
 
                 tripleDes.Key = new byte[]
                 {
-                    /* k1 */0,
+/* k1 */0,
                     1,
                     2,
                     3,
@@ -124,7 +124,7 @@ namespace System.Security.Cryptography.Tests
                     5,
                     6,
                     7,
-                    /* k2 */0,
+/* k2 */0,
                     0,
                     0,
                     2,
@@ -132,7 +132,7 @@ namespace System.Security.Cryptography.Tests
                     6,
                     0,
                     1,
-                    /* k3 */0,
+/* k3 */0,
                     1,
                     2,
                     3,

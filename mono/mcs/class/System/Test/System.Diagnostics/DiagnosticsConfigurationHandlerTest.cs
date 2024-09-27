@@ -25,11 +25,11 @@ namespace MonoTests.System.Diagnostics
     {
         private const string XmlFormat = "{0}";
 
-        /*
-        "<system.diagnostics>" +
-        "{0}" +
-        "</system.diagnostics>";
-         */
+/*
+"<system.diagnostics>" +
+"{0}" +
+"</system.diagnostics>";
+*/
 
         private DiagnosticsConfigurationHandler handler = new DiagnosticsConfigurationHandler();
 

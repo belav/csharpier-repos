@@ -8,7 +8,8 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
-    /// For nodes that can generate an <see cref="IInvalidOperation"/>, this allows the Lazy implementation
+    /// For nodes that can generate an <see cref="IInvalidOperation"/>, this allows the Lazy
+    // implementation
     /// to get the children of this node on demand.
     /// </summary>
     internal interface IBoundInvalidNode

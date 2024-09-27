@@ -5,7 +5,8 @@ namespace System.Xml
 {
     // Element           => StartElement Attribute* Content EndElement
     //                    | StartElement Attribute* Text // Text must be WithEndElement
-    //                    | Array StartElement Attribute* EndElement type MB32(Count) byte[Count * sizeof(type)]
+    //                    | Array StartElement Attribute* EndElement type MB32(Count) byte[Count *
+    // sizeof(type)]
 
     // StartElement      => ShortElementNode Name(LocalName)
     //                    | ElementNode Name(Prefix) Name(LocalName)
@@ -45,8 +46,10 @@ namespace System.Xml
     //                    | DecimalTextNode Decimal
     //                    | DateTimeTextNode DateTime
     //                    | StartListNode Text* EndListNode // Restriction: Cannot nest ListNode
-    //                    | UniqueIdTextNode byte[16]       // byte[16] is a Guid (from Guid.ToBinary()) (urn:uuid:xxxx-xxxx-xxx)
-    //                    | GuidTextNode byte[16]           // byte[16] is a Guid (from Guid.ToBinary()) (xxxx-xxxx-xxx)
+    //                    | UniqueIdTextNode byte[16]       // byte[16] is a Guid (from Guid.ToBinary())
+    // (urn:uuid:xxxx-xxxx-xxx)
+    //                    | GuidTextNode byte[16]           // byte[16] is a Guid (from Guid.ToBinary())
+    // (xxxx-xxxx-xxx)
     //                    | TimeSpanNode Int64
     //                    | UInt64TextNode UInt64
     //                    | BoolTextNode Int8
@@ -66,14 +69,17 @@ namespace System.Xml
     // MB32(x:x<0x80)    => byte(x)
 
 
-    // In order to help differentiate text from binary (where someone mixes up format and implementation) we overlay binary
-    // nodes that are illegal to start a document with text characters that are legal to start a document.  Specifically these values are:
+    // In order to help differentiate text from binary (where someone mixes up format and
+    // implementation) we overlay binary
+    // nodes that are illegal to start a document with text characters that are legal to start a
+    // document.  Specifically these values are:
     // ' ' = 32
     // '\t' = 9
     // '\n' = 10
     // '\r' = 13
     // '<' = 60
-    // The attribute nodes (MinAttribute to MaxAttribute) overlay all of these values and are invalid as the first byte of the document
+    // The attribute nodes (MinAttribute to MaxAttribute) overlay all of these values and are invalid as
+    // the first byte of the document
 
     enum XmlBinaryNodeType
     {

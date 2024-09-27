@@ -44,7 +44,8 @@ namespace Microsoft.Internal
 
             if (method.IsGenericMethod)
             {
-                // Check type arguments, for example if we're passed 'Activator.CreateInstance<SomeMefInternalType>()'
+                // Check type arguments, for example if we're passed
+                // 'Activator.CreateInstance<SomeMefInternalType>()'
                 foreach (Type typeArgument in method.GetGenericArguments())
                 {
                     if (!typeArgument.IsVisible)

@@ -8,7 +8,8 @@ namespace System.Linq.Parallel.Tests
 {
     public static class MinTests
     {
-        // Get a set of ranges from 0 to each count, with an extra parameter for a minimum where each item is negated (-x).
+        // Get a set of ranges from 0 to each count, with an extra parameter for a minimum where each item
+        // is negated (-x).
         public static IEnumerable<object[]> MinData(int[] counts)
         {
             counts = counts.DefaultIfEmpty(Sources.OuterLoopCount).ToArray();

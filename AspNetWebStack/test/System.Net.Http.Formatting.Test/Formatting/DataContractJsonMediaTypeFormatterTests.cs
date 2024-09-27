@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.IO;
@@ -88,7 +89,8 @@ namespace System.Net.Http.Formatting
             bool isSerializable = IsTypeSerializableWithJsonSerializer(variationType, testData);
             bool canSupport = formatter.CanReadTypeProxy(variationType);
 
-            // If we don't agree, we assert only if the DCJ serializer says it cannot support something we think it should
+            // If we don't agree, we assert only if the DCJ serializer says it cannot support something we think
+            // it should
             Assert.False(
                 isSerializable != canSupport && isSerializable,
                 String.Format("CanReadType returned wrong value for '{0}'.", variationType)

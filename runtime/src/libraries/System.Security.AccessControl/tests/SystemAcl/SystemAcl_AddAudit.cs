@@ -519,7 +519,8 @@ namespace System.Security.AccessControl.Tests
                 }
             );
 
-            //Case 8, Container, but InheritanceFlags is None, but PropagationFlags is NoPropagateInherit | InheritOnly
+            //Case 8, Container, but InheritanceFlags is None, but PropagationFlags is NoPropagateInherit |
+            // InheritOnly
             AssertExtensions.Throws<ArgumentException>(
                 "propagationFlags",
                 () =>
@@ -550,7 +551,8 @@ namespace System.Security.AccessControl.Tests
             propagationFlags = 3;
             rawAcl = new RawAcl(0, 1);
             systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-            //79 = AceFlags.SuccessfulAccess | AceFlags.ObjectInherit |AceFlags.ContainerInherit | AceFlags.NoPropagateInherit | AceFlags.InheritOnly
+            //79 = AceFlags.SuccessfulAccess | AceFlags.ObjectInherit |AceFlags.ContainerInherit |
+            // AceFlags.NoPropagateInherit | AceFlags.InheritOnly
             gAce = new CommonAce(
                 (AceFlags)79,
                 AceQualifier.SystemAudit,

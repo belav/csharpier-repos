@@ -301,7 +301,8 @@ namespace MonoTests.System.Data.Utils
         }
 
         /// <summary>
-        /// Marks this testcase as success, but logs the reason for skipping regardless of _logOnSuccess value.
+        /// Marks this testcase as success, but logs the reason for skipping regardless of _logOnSuccess
+        // value.
         /// </summary>
         /// <param name="message">The reason for skipping the test.</param>
         protected void Skip(string message)

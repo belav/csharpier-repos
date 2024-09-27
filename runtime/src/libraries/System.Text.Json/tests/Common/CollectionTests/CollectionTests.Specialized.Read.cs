@@ -38,7 +38,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task Read_SpecializedCollection_Throws()
         {
-            // Add method for this collection only accepts strings, even though it only implements IList which usually
+            // Add method for this collection only accepts strings, even though it only implements IList which
+            // usually
             // indicates that the element type is typeof(object).
             await Assert.ThrowsAsync<InvalidCastException>(
                 async () => await Serializer.DeserializeWrapper<StringCollection>(@"[""1"", ""2""]")
@@ -57,7 +58,8 @@ namespace System.Text.Json.Serialization.Tests
                 async () => await Serializer.DeserializeWrapper<HybridDictionary>(@"{1:""value""}")
             );
 
-            // Runtime type in this case is IOrderedDictionary (we don't replace with concrete type), which we can't instantiate.
+            // Runtime type in this case is IOrderedDictionary (we don't replace with concrete type), which we
+            // can't instantiate.
             await Assert.ThrowsAsync<NotSupportedException>(
                 async () =>
                     await Serializer.DeserializeWrapper<IOrderedDictionary>(

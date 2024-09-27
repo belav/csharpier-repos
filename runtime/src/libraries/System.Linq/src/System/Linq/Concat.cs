@@ -89,10 +89,14 @@ namespace System.Linq
         /// <typeparam name="TSource">The type of the source enumerables.</typeparam>
         /// <remarks>
         /// To handle chains of >= 3 sources, we chain the <see cref="Concat"/> iterators together and allow
-        /// <see cref="GetEnumerable"/> to fetch enumerables from the previous sources.  This means that rather
-        /// than each <see cref="System.Collections.IEnumerator.MoveNext"/> and <see cref="IEnumerator{T}.Current"/> calls having to traverse all of the previous
-        /// sources, we only have to traverse all of the previous sources once per chained enumerable.  An alternative
-        /// would be to use an array to store all of the enumerables, but this has a much better memory profile and
+        /// <see cref="GetEnumerable"/> to fetch enumerables from the previous sources.  This means that
+        // rather
+        /// than each <see cref="System.Collections.IEnumerator.MoveNext"/> and <see
+        // cref="IEnumerator{T}.Current"/> calls having to traverse all of the previous
+        /// sources, we only have to traverse all of the previous sources once per chained enumerable.  An
+        // alternative
+        /// would be to use an array to store all of the enumerables, but this has a much better memory
+        // profile and
         /// without much additional run-time cost.
         /// </remarks>
         private sealed partial class ConcatNIterator<TSource> : ConcatIterator<TSource>
@@ -113,7 +117,8 @@ namespace System.Linq
             private readonly int _headIndex;
 
             /// <summary>
-            /// <c>true</c> if all sources this iterator concatenates implement <see cref="ICollection{TSource}"/>;
+            /// <c>true</c> if all sources this iterator concatenates implement <see
+            // cref="ICollection{TSource}"/>;
             /// otherwise, <c>false</c>.
             /// </summary>
             /// <remarks>
@@ -129,7 +134,8 @@ namespace System.Linq
             /// <param name="head">The source associated with this iterator.</param>
             /// <param name="headIndex">The logical index associated with this iterator.</param>
             /// <param name="hasOnlyCollections">
-            /// <c>true</c> if all sources this iterator concatenates implement <see cref="ICollection{TSource}"/>;
+            /// <c>true</c> if all sources this iterator concatenates implement <see
+            // cref="ICollection{TSource}"/>;
             /// otherwise, <c>false</c>.
             /// </param>
             internal ConcatNIterator(

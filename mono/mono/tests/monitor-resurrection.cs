@@ -32,7 +32,7 @@ public class Foo
         {
             reference = new Foo();
 
-            /* Allocate a MonoThreadsSync for the object */
+/* Allocate a MonoThreadsSync for the object */
             EnterMonitor(reference);
             ExitMonitor(reference);
             reference = null;
@@ -45,21 +45,21 @@ public class Foo
 
     public static int Main()
     {
-        /* Allocate an object down the stack so it doesn't get pinned */
+/* Allocate an object down the stack so it doesn't get pinned */
         typeof(Foo).GetMethod("CreateFoo").Invoke(null, new object[] { 100 });
 
         Console.WriteLine(".");
 
-        /* resurrect obj */
+/* resurrect obj */
         GC.Collect();
         GC.WaitForPendingFinalizers();
 
-        /* Allocate MonoThreadsSyncs for another thread that are locked */
+/* Allocate MonoThreadsSyncs for another thread that are locked */
         Thread t = new Thread(new ThreadStart(resurrect.Func));
         t.Start();
         t.Join();
 
-        /* Make sure that none of the other structures overlap with the original one */
+/* Make sure that none of the other structures overlap with the original one */
         Monitor.Enter(resurrect);
         return 0;
     }
@@ -69,7 +69,7 @@ public class Foo
         for (int i = 0; i < 100; i++)
         {
             Foo foo = new Foo();
-            /* Make sure these are not collected */
+/* Make sure these are not collected */
             list.Add(foo);
 
             EnterMonitor(foo);

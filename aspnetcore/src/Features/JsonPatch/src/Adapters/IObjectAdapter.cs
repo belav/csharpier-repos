@@ -15,10 +15,12 @@ public interface IObjectAdapter
     /// document, into the target array at the specified valid index, or to a target object at
     /// the specified location.
     ///
-    /// When adding to arrays, the specified index MUST NOT be greater than the number of elements in the array.
+    /// When adding to arrays, the specified index MUST NOT be greater than the number of elements in
+    // the array.
     /// To append the value to the array, the index of "-" character is used (see [RFC6901]).
     ///
-    /// When adding to an object, if an object member does not already exist, a new member is added to the object at the
+    /// When adding to an object, if an object member does not already exist, a new member is added to
+    // the object at the
     /// specified location or if an object member does exist, that member's value is replaced.
     ///
     /// The operation object MUST contain a "value" member whose content

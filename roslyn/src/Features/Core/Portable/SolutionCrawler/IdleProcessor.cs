@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
         private SharedStopwatch _timeSinceLastAccess = SharedStopwatch.StartNew();
 
         /// <summary>
-        /// Whether or not this processor is paused.  As long as it is paused, it will not start executing new work,
+        /// Whether or not this processor is paused.  As long as it is paused, it will not start executing
+        // new work,
         /// even if <see cref="BackOffTimeSpan"/> has been met.
         /// </summary>
         private bool _isPaused_doNotAccessDirectly;
@@ -91,7 +92,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 OnPaused();
         }
 
-        /// <returns><see langword="true"/> if the delay compeleted normally; otherwise, <see langword="false"/> if the
+        /// <returns><see langword="true"/> if the delay compeleted normally; otherwise, <see
+        // langword="false"/> if the
         /// delay completed due to a request to expedite the delay.</returns>
         protected async Task<bool> WaitForIdleAsync(IExpeditableDelaySource expeditableDelaySource)
         {
@@ -150,7 +152,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                 }
                 catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e))
                 {
-                    // In case any error happen during the execution, don't exit the loop and continue to work on the next item.
+                    // In case any error happen during the execution, don't exit the loop and continue to work on the
+                    // next item.
                 }
             }
         }

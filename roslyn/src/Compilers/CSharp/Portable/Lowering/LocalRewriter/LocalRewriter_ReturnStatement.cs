@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // properties have sequence points.
             // We also add sequence points for the implicit "return" statement at the end of the method body
             // (added by FlowAnalysisPass.AppendImplicitReturn). Implicitly added return for async method
-            // does not need sequence points added here since it would be done later (presumably during Async rewrite).
+            // does not need sequence points added here since it would be done later (presumably during Async
+            // rewrite).
             if (
                 this.Instrument
                 && (

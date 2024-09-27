@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Lean representation of response data
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* Lean representation of response data
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {

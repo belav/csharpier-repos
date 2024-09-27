@@ -35,7 +35,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         }
 
         /// <summary>
-        /// Gets CLR types that are used as the content of <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/>.
+        /// Gets CLR types that are used as the content of <see cref="HttpRequestMessage"/> or <see
+        // cref="HttpResponseMessage"/>.
         /// </summary>
         public IDictionary<HelpPageSampleKey, Type> ActualHttpMessageTypes { get; internal set; }
 
@@ -50,7 +51,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         public IDictionary<Type, object> SampleObjects { get; internal set; }
 
         /// <summary>
-        /// Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+        /// Gets factories for the objects that the supported formatters will serialize as samples.
+        // Processed in order,
         /// stopping when the factory successfully returns a non-<see langref="null"/> object.
         /// </summary>
         /// <remarks>
@@ -92,7 +94,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         /// Gets the request or response body samples.
         /// </summary>
         /// <param name="api">The <see cref="ApiDescription"/>.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a
+        // response.</param>
         /// <returns>The samples keyed by media type.</returns>
         public virtual IDictionary<MediaTypeHeaderValue, object> GetSample(
             ApiDescription api,
@@ -129,8 +132,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 samples.Add(actionSample.Key.MediaType, WrapSampleIfString(actionSample.Value));
             }
 
-            // Do the sample generation based on formatters only if an action doesn't return an HttpResponseMessage.
-            // Here we cannot rely on formatters because we don't know what's in the HttpResponseMessage, it might not even use formatters.
+            // Do the sample generation based on formatters only if an action doesn't return an
+            // HttpResponseMessage.
+            // Here we cannot rely on formatters because we don't know what's in the HttpResponseMessage, it
+            // might not even use formatters.
             if (type != null && !typeof(HttpResponseMessage).IsAssignableFrom(type))
             {
                 object sampleObject = GetSampleObject(type);
@@ -179,7 +184,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         /// <param name="type">The CLR type.</param>
         /// <param name="formatter">The formatter.</param>
         /// <param name="mediaType">The media type.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+        /// <param name="sampleDirection">The value indicating whether the sample is for a request or for a
+        // response.</param>
         /// <returns>The sample that matches the parameters.</returns>
         public virtual object GetActionSample(
             string controllerName,
@@ -193,8 +199,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         {
             object sample;
 
-            // First, try to get the sample provided for the specified mediaType, sampleDirection, controllerName, actionName and parameterNames.
-            // If not found, try to get the sample provided for the specified mediaType, sampleDirection, controllerName and actionName regardless of the parameterNames.
+            // First, try to get the sample provided for the specified mediaType, sampleDirection,
+            // controllerName, actionName and parameterNames.
+            // If not found, try to get the sample provided for the specified mediaType, sampleDirection,
+            // controllerName and actionName regardless of the parameterNames.
             // If still not found, try to get the sample provided for the specified mediaType and type.
             // Finally, try to get the sample provided for the specified mediaType.
             if (
@@ -230,8 +238,10 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
 
         /// <summary>
         /// Gets the sample object that will be serialized by the formatters.
-        /// First, it will look at the <see cref="SampleObjects"/>. If no sample object is found, it will try to create
-        /// one using <see cref="DefaultSampleObjectFactory"/> (which wraps an <see cref="ObjectGenerator"/>) and other
+        /// First, it will look at the <see cref="SampleObjects"/>. If no sample object is found, it will
+        // try to create
+        /// one using <see cref="DefaultSampleObjectFactory"/> (which wraps an <see
+        // cref="ObjectGenerator"/>) and other
         /// factories in <see cref="SampleObjectFactories"/>.
         /// </summary>
         /// <param name="type">The type.</param>
@@ -276,7 +286,8 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         }
 
         /// <summary>
-        /// Resolves the actual type of <see cref="System.Net.Http.ObjectContent{T}"/> passed to the <see cref="System.Net.Http.HttpRequestMessage"/> in an action.
+        /// Resolves the actual type of <see cref="System.Net.Http.ObjectContent{T}"/> passed to the <see
+        // cref="System.Net.Http.HttpRequestMessage"/> in an action.
         /// </summary>
         /// <param name="api">The <see cref="ApiDescription"/>.</param>
         /// <returns>The type.</returns>
@@ -297,13 +308,15 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
         }
 
         /// <summary>
-        /// Resolves the type of the action parameter or return value when <see cref="HttpRequestMessage"/> or <see cref="HttpResponseMessage"/> is used.
+        /// Resolves the type of the action parameter or return value when <see cref="HttpRequestMessage"/>
+        // or <see cref="HttpResponseMessage"/> is used.
         /// </summary>
         /// <param name="api">The <see cref="ApiDescription"/>.</param>
         /// <param name="controllerName">Name of the controller.</param>
         /// <param name="actionName">Name of the action.</param>
         /// <param name="parameterNames">The parameter names.</param>
-        /// <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+        /// <param name="sampleDirection">The value indicating whether the sample is for a request or a
+        // response.</param>
         /// <param name="formatters">The formatters.</param>
         [SuppressMessage(
             "Microsoft.Design",

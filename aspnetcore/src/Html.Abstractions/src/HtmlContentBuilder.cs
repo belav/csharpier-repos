@@ -34,7 +34,8 @@ public class HtmlContentBuilder : IHtmlContentBuilder
     /// Creates a new <see cref="HtmlContentBuilder"/> with the given list of entries.
     /// </summary>
     /// <param name="entries">
-    /// The list of entries. The <see cref="HtmlContentBuilder"/> will use this list without making a copy.
+    /// The list of entries. The <see cref="HtmlContentBuilder"/> will use this list without making a
+    // copy.
     /// </param>
     public HtmlContentBuilder(IList<object> entries)
     {

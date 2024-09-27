@@ -71,7 +71,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Creates a new instance of SqlDataSource with a specified provider name, connection string, and select command.
+        /// Creates a new instance of SqlDataSource with a specified provider name, connection string, and
+        // select command.
         /// </devdoc>
         public SqlDataSource(string providerName, string connectionString, string selectCommand)
             : this(connectionString, selectCommand)
@@ -96,7 +97,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The duration, in seconds, of the expiration. The expiration policy is specified by the CacheExpirationPolicy property.
+        /// The duration, in seconds, of the expiration. The expiration policy is specified by the
+        // CacheExpirationPolicy property.
         /// </devdoc>
         [
             DefaultValue(DataSourceCache.Infinite),
@@ -111,7 +113,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The expiration policy of the cache. The duration for the expiration is specified by the CacheDuration property.
+        /// The expiration policy of the cache. The duration for the expiration is specified by the
+        // CacheDuration property.
         /// </devdoc>
         [
             DefaultValue(DataSourceCacheExpiry.Absolute),
@@ -140,7 +143,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Indicates whether the Select operation will be cancelled if the value of any of the SelectParameters is null.
+        /// Indicates whether the Select operation will be cancelled if the value of any of the
+        // SelectParameters is null.
         /// </devdoc>
         [
             DefaultValue(true),
@@ -420,22 +424,23 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The command to execute when Select is called on the SqlDataSourceView, requesting the total number of rows.
+        /// The command to execute when Select is called on the SqlDataSourceView, requesting the total
+        // number of rows.
         /// </devdoc>
-        /* Commented out until we add paging support back into SqlDataSource
-        [
-        DefaultValue(""),
-        WebCategory("Data"),
-        WebSysDescription(SR.SqlDataSource_SelectCountCommand),
-        ]
-        public string SelectCountCommand {
-            get {
-                return GetView().SelectCountCommand;
-            }
-            set {
-                GetView().SelectCountCommand = value;
-            }
-        }*/
+/* Commented out until we add paging support back into SqlDataSource
+[
+DefaultValue(""),
+WebCategory("Data"),
+WebSysDescription(SR.SqlDataSource_SelectCountCommand),
+]
+public string SelectCountCommand {
+get {
+return GetView().SelectCountCommand;
+}
+set {
+GetView().SelectCountCommand = value;
+}
+}*/
 
 
         /// <devdoc>
@@ -494,7 +499,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// A semi-colon delimited string indicating which databases to use for the dependency in the format "database1:table1;database2:table2".
+        /// A semi-colon delimited string indicating which databases to use for the dependency in the format
+        // "database1:table1;database2:table2".
         /// </devdoc>
         [
             DefaultValue(""),
@@ -814,7 +820,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Deletes rows from the data source using the parameters specified in the DeleteParameters collection.
+        /// Deletes rows from the data source using the parameters specified in the DeleteParameters
+        // collection.
         /// </devdoc>
         public int Delete()
         {
@@ -822,7 +829,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Gets the DbProviderFactory associated with the provider type specified in the ProviderName property.
+        /// Gets the DbProviderFactory associated with the provider type specified in the ProviderName
+        // property.
         /// If no provider is specified, the System.Data.SqlClient factory is used.
         /// </devdoc>
         protected virtual DbProviderFactory GetDbProviderFactory()
@@ -920,7 +928,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Returns an ICollection of the names of all the views. In this case there is only one view called "Table".
+        /// Returns an ICollection of the names of all the views. In this case there is only one view called
+        // "Table".
         /// </devdoc>
         protected override ICollection GetViewNames()
         {
@@ -952,7 +961,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// Event handler for the Page's LoadComplete event.
-        /// Updates the parameters' values to possibly raise a DataSourceChanged event, causing bound controls to re-databind.
+        /// Updates the parameters' values to possibly raise a DataSourceChanged event, causing bound
+        // controls to re-databind.
         /// </devdoc>
         private void LoadCompleteEventHandler(object sender, EventArgs e)
         {
@@ -1043,10 +1053,10 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Saves the total row count to cache.
         /// </devdoc>
-        /*internal virtual void SaveTotalRowCountToCache(int totalRowCount) {
-            string key = CreateMasterCacheKey();
-            Cache.SaveDataToCache(key, totalRowCount);
-        }*/
+/*internal virtual void SaveTotalRowCountToCache(int totalRowCount) {
+string key = CreateMasterCacheKey();
+Cache.SaveDataToCache(key, totalRowCount);
+}*/
 
         /// <devdoc>
         /// Saves view state.
@@ -1074,7 +1084,8 @@ namespace System.Web.UI.WebControls
         /// Returns all the rows of the datasource.
         /// Parameters are taken from the Parameters property collection.
         /// If SqlDataSourceMode is set to DataSet then a DataView is returned.
-        /// If SqlDataSourceMode is set to DataReader then a DataReader is returned, and it must be closed when done.
+        /// If SqlDataSourceMode is set to DataReader then a DataReader is returned, and it must be closed
+        // when done.
         /// </devdoc>
         public IEnumerable Select(DataSourceSelectArguments arguments)
         {
@@ -1095,7 +1106,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// Updates rows matching the parameters specified in the UpdateParameters collection with new values specified the UpdateValues collection.
+        /// Updates rows matching the parameters specified in the UpdateParameters collection with new
+        // values specified the UpdateValues collection.
         /// </devdoc>
         public int Update()
         {

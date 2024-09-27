@@ -29,7 +29,8 @@ internal class ProjectLoadTelemetryReporter(
     /// <summary>
     /// This is designed to report project telemetry in an extremely similar way to O#
     /// so that we are able to compare data accurately.
-    /// See https://github.com/OmniSharp/omnisharp-roslyn/blob/b2e64c6006beed49460f063117793f42ab2a8a5c/src/OmniSharp.MSBuild/ProjectLoadListener.cs#L36
+    /// See
+    // https://github.com/OmniSharp/omnisharp-roslyn/blob/b2e64c6006beed49460f063117793f42ab2a8a5c/src/OmniSharp.MSBuild/ProjectLoadListener.cs#L36
     /// </summary>
     public async Task ReportProjectLoadTelemetryAsync(
         Dictionary<
@@ -52,7 +53,8 @@ internal class ProjectLoadTelemetryReporter(
                 return;
             }
 
-            // Arbitrarily pick the first.  This is an existing problem with the telemetry event where we report multiple target frameworks
+            // Arbitrarily pick the first.  This is an existing problem with the telemetry event where we report
+            // multiple target frameworks
             // but only the data from one of the sets of possible outputkinds / references / content / etc.
             var firstInfo = projectFileInfos.First();
             var projectFileInfo = firstInfo.Key;
@@ -89,7 +91,8 @@ internal class ProjectLoadTelemetryReporter(
         }
         catch (Exception ex)
         {
-            // Don't fail project loading because we failed to report telemetry.  Just log a warning and move on.
+            // Don't fail project loading because we failed to report telemetry.  Just log a warning and move
+            // on.
             _logger.LogWarning($"Failed to get project telemetry data: {ex.ToString()}");
         }
     }
@@ -150,7 +153,8 @@ internal class ProjectLoadTelemetryReporter(
 
     /// <summary>
     /// This reads the solution file project id or hashes the contents+path
-    /// Matches O# implementation - https://github.com/OmniSharp/omnisharp-roslyn/blob/master/src/OmniSharp.MSBuild/ProjectLoadListener.cs#L88
+    /// Matches O# implementation -
+    // https://github.com/OmniSharp/omnisharp-roslyn/blob/master/src/OmniSharp.MSBuild/ProjectLoadListener.cs#L88
     /// </summary>
     private static async Task<string> GetProjectIdAsync(ProjectToLoad projectToLoad)
     {

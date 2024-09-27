@@ -40,7 +40,8 @@ namespace System.Web.UI.WebControls
         private const string _getDesignTimeStaticHtml = "GetDesignTimeStaticHtml";
         private const string _getDesignTimeDynamicHtml = "GetDesignTimeDynamicHtml";
 
-        // static readonly instead of const to be able to change it in the future without breaking existing client code
+        // static readonly instead of const to be able to change it in the future without breaking existing
+        // client code
         public static readonly string MenuItemClickCommandName = "Click";
 
         private static readonly object _menuItemClickedEvent = new object();
@@ -2365,7 +2366,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        ///     Gets the URL for the specified image, properly pathing the image filename depending on which image it is
+        ///     Gets the URL for the specified image, properly pathing the image filename depending on which
+        // image it is
         /// </devdoc>
         internal string GetImageUrl(int index)
         {
@@ -2542,7 +2544,8 @@ namespace System.Web.UI.WebControls
                 {
                     _rootMenuItemStyle.ForeColor = ForeColor;
                 }
-                // Not defaulting to black anymore for not entirely satisfying but reasonable reasons (VSWhidbey 356729)
+                // Not defaulting to black anymore for not entirely satisfying but reasonable reasons (VSWhidbey
+                // 356729)
                 if (!ControlStyle.IsSet(System.Web.UI.WebControls.Style.PROP_FONT_UNDERLINE))
                 {
                     _rootMenuItemStyle.Font.Underline = false;

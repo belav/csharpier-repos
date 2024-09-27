@@ -54,7 +54,8 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="root">The root.</param>
             /// <param name="equalityComparer">The equality comparer.</param>
-            /// <param name="hashBucketEqualityComparer">The equality comparer to use when checking for <see cref="HashBucket"/> equality.</param>
+            /// <param name="hashBucketEqualityComparer">The equality comparer to use when checking for <see
+            // cref="HashBucket"/> equality.</param>
             /// <param name="count">The count.</param>
             internal MutationInput(
                 SortedInt32KeyNode<HashBucket> root,

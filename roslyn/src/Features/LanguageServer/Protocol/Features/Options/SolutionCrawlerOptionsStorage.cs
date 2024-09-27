@@ -68,7 +68,8 @@ internal static class SolutionCrawlerOptionsStorage
         );
 
     /// <summary>
-    /// Enables forced <see cref="BackgroundAnalysisScope.Minimal"/> scope when low VM is detected to improve performance.
+    /// Enables forced <see cref="BackgroundAnalysisScope.Minimal"/> scope when low VM is detected to
+    // improve performance.
     /// </summary>
     public static bool LowMemoryForcedMinimalBackgroundAnalysis = false;
 
@@ -76,7 +77,8 @@ internal static class SolutionCrawlerOptionsStorage
     /// <para>Gets the effective background analysis scope for the current solution.</para>
     ///
     /// <para>Gets the solution-specific analysis scope set through
-    /// <see cref="SolutionBackgroundAnalysisScopeOption"/>, or the default analysis scope if no solution-specific
+    /// <see cref="SolutionBackgroundAnalysisScopeOption"/>, or the default analysis scope if no
+    // solution-specific
     /// scope is set.</para>
     /// </summary>
     public static BackgroundAnalysisScope GetBackgroundAnalysisScope(
@@ -97,7 +99,8 @@ internal static class SolutionCrawlerOptionsStorage
     /// <para>Gets the effective background compiler analysis scope for the current solution.</para>
     ///
     /// <para>Gets the solution-specific analysis scope set through
-    /// <see cref="SolutionBackgroundAnalysisScopeOption"/>, or the default compiler analysis scope if no
+    /// <see cref="SolutionBackgroundAnalysisScopeOption"/>, or the default compiler analysis scope if
+    // no
     /// solution-specific scope is set.</para>
     /// </summary>
     public static CompilerDiagnosticsScope GetBackgroundCompilerAnalysisScope(

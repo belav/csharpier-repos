@@ -2,7 +2,8 @@
 // from corefx src/System.Runtime/tests/System/Decimal.cs to NUnit
 //
 // Copyright (c) Microsoft. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 // Copyright 2015 Xamarin Inc
 //
 
@@ -1089,7 +1090,8 @@ namespace MonoTests.System
             Assert.AreEqual(-dbl, Decimal.ToDouble((Decimal)(-dbl)));
 
             dbl = Int64.MaxValue;
-            // Need to pass in the Int64.MaxValue to ToDouble and not dbl because the conversion to double is a little lossy and we want precision
+            // Need to pass in the Int64.MaxValue to ToDouble and not dbl because the conversion to double is a
+            // little lossy and we want precision
             Assert.AreEqual(dbl, Decimal.ToDouble((Decimal)Int64.MaxValue));
             Assert.AreEqual(-dbl, Decimal.ToDouble((Decimal)(-Int64.MaxValue)));
         }

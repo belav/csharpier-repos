@@ -187,12 +187,12 @@ namespace System.Net.PeerToPeer.Collaboration
     //
     //
 
-    /*
-        typedef struct peer_presence_info_tag {
-            PEER_PRESENCE_STATUS            status;
-            PWSTR                           pwzDescriptiveText;
-        } PEER_PRESENCE_INFO
-    */
+/*
+typedef struct peer_presence_info_tag {
+PEER_PRESENCE_STATUS            status;
+PWSTR                           pwzDescriptiveText;
+} PEER_PRESENCE_INFO
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_PRESENCE_INFO
@@ -202,18 +202,18 @@ namespace System.Net.PeerToPeer.Collaboration
     }
 
     //
-    /*
-        typedef struct sockaddr_in6 {
-            ADDRESS_FAMILY sin6_family; // AF_INET6.
-            USHORT sin6_port;           // Transport level port number.
-            ULONG  sin6_flowinfo;       // IPv6 flow information.
-            IN6_ADDR sin6_addr;         // IPv6 address.
-            union {
-                ULONG sin6_scope_id;     // Set of interfaces for a scope.
-                SCOPE_ID sin6_scope_struct;
-            };
-        } SOCKADDR_IN6_LH
-    */
+/*
+typedef struct sockaddr_in6 {
+ADDRESS_FAMILY sin6_family; // AF_INET6.
+USHORT sin6_port;           // Transport level port number.
+ULONG  sin6_flowinfo;       // IPv6 flow information.
+IN6_ADDR sin6_addr;         // IPv6 address.
+union {
+ULONG sin6_scope_id;     // Set of interfaces for a scope.
+SCOPE_ID sin6_scope_struct;
+};
+} SOCKADDR_IN6_LH
+*/
     [StructLayout(LayoutKind.Sequential)]
     internal struct SOCKADDR_IN6
     {
@@ -239,12 +239,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal uint sin6_scope_id;
     }
 
-    /*
-        typedef struct peer_address_tag {
-            DWORD                   dwSize;
-            SOCKADDR_IN6            sin6;
-        } PEER_ADDRESS
-    */
+/*
+typedef struct peer_address_tag {
+DWORD                   dwSize;
+SOCKADDR_IN6            sin6;
+} PEER_ADDRESS
+*/
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
     internal struct PEER_ADDRESS
@@ -253,12 +253,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal SOCKADDR_IN6 sin6;
     }
 
-    /*
-        typedef struct peer_endpoint_tag {
-            PEER_ADDRESS                address;
-            PWSTR                       pwzEndpointName;
-        } PEER_ENDPOINT
-    */
+/*
+typedef struct peer_endpoint_tag {
+PEER_ADDRESS                address;
+PWSTR                       pwzEndpointName;
+} PEER_ENDPOINT
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_ENDPOINT
@@ -267,12 +267,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pwzEndpointName;
     }
 
-    /*
-        typedef struct peer_data_tag {
-            ULONG cbData;
-            PBYTE pbData;
-        } PEER_DATA
-    */
+/*
+typedef struct peer_data_tag {
+ULONG cbData;
+PBYTE pbData;
+} PEER_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_DATA
@@ -282,14 +282,14 @@ namespace System.Net.PeerToPeer.Collaboration
     }
 
     // for Guid
-    /*
-        typedef struct _GUID {
-            unsigned long  Data1;
-            unsigned short Data2;
-            unsigned short Data3;
-            unsigned char  Data4[ 8 ];
-        } GUID;
-    */
+/*
+typedef struct _GUID {
+unsigned long  Data1;
+unsigned short Data2;
+unsigned short Data3;
+unsigned char  Data4[ 8 ];
+} GUID;
+*/
 
     [StructLayout(
         LayoutKind.Sequential /*, Pack=1*/
@@ -309,13 +309,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal byte data11;
     }
 
-    /*
-        typedef struct peer_object_tag {
-            GUID            id;
-            PEER_DATA       data;
-            DWORD           dwPublicationScope;
-        } PEER_OBJECT
-    */
+/*
+typedef struct peer_object_tag {
+GUID            id;
+PEER_DATA       data;
+DWORD           dwPublicationScope;
+} PEER_OBJECT
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_OBJECT
@@ -325,13 +325,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal uint dwPublicationScope;
     }
 
-    /*
-        typedef struct peer_application_tag {
-        GUID            id;
-        PEER_DATA       data;
-        PWSTR           pwzDescription;
-        } PEER_APPLICATION
-    */
+/*
+typedef struct peer_application_tag {
+GUID            id;
+PEER_DATA       data;
+PWSTR           pwzDescription;
+} PEER_APPLICATION
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APPLICATION
@@ -341,14 +341,14 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pwzDescription;
     }
 
-    /*
-        typedef struct peer_application_registration_info_tag {
-        PEER_APPLICATION            application;
-        PWSTR                       pwzApplicationToLaunch;
-        PWSTR                       pwzApplicationArguments;
-        DWORD                       dwPublicationScope;
-        } PEER_APPLICATION_REGISTRATION_INFO
-     */
+/*
+typedef struct peer_application_registration_info_tag {
+PEER_APPLICATION            application;
+PWSTR                       pwzApplicationToLaunch;
+PWSTR                       pwzApplicationArguments;
+DWORD                       dwPublicationScope;
+} PEER_APPLICATION_REGISTRATION_INFO
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APPLICATION_REGISTRATION_INFO
@@ -359,18 +359,18 @@ namespace System.Net.PeerToPeer.Collaboration
         internal uint dwPublicationScope;
     }
 
-    /*
-        typedef struct peer_contact_tag
-        {
-            PWSTR                               pwzPeerName;
-            PWSTR                               pwzNickName;
-            PWSTR                               pwzDisplayName;
-            PWSTR                               pwzEmailAddress;
-            BOOL                                fWatch;
-            PEER_WATCH_PERMISSION               WatcherPermissions;
-            PEER_DATA                           credentials;
-        } PEER_CONTACT
-    */
+/*
+typedef struct peer_contact_tag
+{
+PWSTR                               pwzPeerName;
+PWSTR                               pwzNickName;
+PWSTR                               pwzDisplayName;
+PWSTR                               pwzEmailAddress;
+BOOL                                fWatch;
+PEER_WATCH_PERMISSION               WatcherPermissions;
+PEER_DATA                           credentials;
+} PEER_CONTACT
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_CONTACT
@@ -384,13 +384,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal PEER_DATA credentials;
     }
 
-    /*
-        typedef struct peer_people_near_me_tag {
-            PWSTR                       pwzNickName;
-            PEER_ENDPOINT               endpoint;
-            GUID                        id;
-        } PEER_PEOPLE_NEAR_ME
-    */
+/*
+typedef struct peer_people_near_me_tag {
+PWSTR                       pwzNickName;
+PEER_ENDPOINT               endpoint;
+GUID                        id;
+} PEER_PEOPLE_NEAR_ME
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_PEOPLE_NEAR_ME
@@ -400,13 +400,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal GUID id;
     }
 
-    /*
-        typedef struct peer_invitation_tag {
-            GUID                applicationId;
-            PEER_DATA           applicationData;
-            PWSTR               pwzMessage;
-        } PEER_INVITATION
-    */
+/*
+typedef struct peer_invitation_tag {
+GUID                applicationId;
+PEER_DATA           applicationData;
+PWSTR               pwzMessage;
+} PEER_INVITATION
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_INVITATION
@@ -416,13 +416,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal string pwzMessage;
     }
 
-    /*
-        typedef struct peer_invitation_response_tag {
-            PEER_INVITATION_RESPONSE_TYPE   action;
-            PWSTR                           pwzMessage;
-            HRESULT                         hrExtendedInfo;
-        } PEER_INVITATION_RESPONSE
-    */
+/*
+typedef struct peer_invitation_response_tag {
+PEER_INVITATION_RESPONSE_TYPE   action;
+PWSTR                           pwzMessage;
+HRESULT                         hrExtendedInfo;
+} PEER_INVITATION_RESPONSE
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_INVITATION_RESPONSE
@@ -432,13 +432,13 @@ namespace System.Net.PeerToPeer.Collaboration
         internal uint hrExtendedInfo;
     }
 
-    /*
-        typedef struct peer_app_launch_info_tag {
-            PPEER_CONTACT               pContact;
-            PPEER_ENDPOINT              pEndpoint;
-            PPEER_INVITATION            pInvitation;
-        } PEER_APP_LAUNCH_INFO
-    */
+/*
+typedef struct peer_app_launch_info_tag {
+PPEER_CONTACT               pContact;
+PPEER_ENDPOINT              pEndpoint;
+PPEER_INVITATION            pInvitation;
+} PEER_APP_LAUNCH_INFO
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_APP_LAUNCH_INFO
@@ -448,15 +448,15 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pInvitation;
     }
 
-    /*
-        typedef struct peer_collab_event_registration_tag {
-            PEER_COLLAB_EVENT_TYPE     eventType;
-            #ifdef MIDL_PASS
-            [unique]
-            #endif
-            GUID                        * pInstance;
-        } PEER_COLLAB_EVENT_REGISTRATION
-    */
+/*
+typedef struct peer_collab_event_registration_tag {
+PEER_COLLAB_EVENT_TYPE     eventType;
+#ifdef MIDL_PASS
+[unique]
+#endif
+GUID                        * pInstance;
+} PEER_COLLAB_EVENT_REGISTRATION
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_COLLAB_EVENT_REGISTRATION
@@ -465,12 +465,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pInstance;
     }
 
-    /*
-        typedef struct peer_event_watchlist_changed_data_tag {
-            PPEER_CONTACT           pContact;
-            PEER_CHANGE_TYPE        changeType;
-        } PEER_EVENT_WATCHLIST_CHANGED_DATA
-    */
+/*
+typedef struct peer_event_watchlist_changed_data_tag {
+PPEER_CONTACT           pContact;
+PEER_CHANGE_TYPE        changeType;
+} PEER_EVENT_WATCHLIST_CHANGED_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_WATCHLIST_CHANGED_DATA
@@ -479,14 +479,14 @@ namespace System.Net.PeerToPeer.Collaboration
         internal PeerChangeType changeType;
     }
 
-    /*
-        typedef struct peer_event_presence_changed_data_tag {
-            PPEER_CONTACT           pContact;
-            PPEER_ENDPOINT          pEndpoint;
-            PEER_CHANGE_TYPE        changeType;
-            PPEER_PRESENCE_INFO     pPresenceInfo;
-        } PEER_EVENT_PRESENCE_CHANGED_DATA
-    */
+/*
+typedef struct peer_event_presence_changed_data_tag {
+PPEER_CONTACT           pContact;
+PPEER_ENDPOINT          pEndpoint;
+PEER_CHANGE_TYPE        changeType;
+PPEER_PRESENCE_INFO     pPresenceInfo;
+} PEER_EVENT_PRESENCE_CHANGED_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_PRESENCE_CHANGED_DATA
@@ -497,14 +497,14 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pPresenceInfo;
     }
 
-    /*
-        typedef struct peer_event_application_changed_data_tag {
-            PPEER_CONTACT           pContact;
-            PPEER_ENDPOINT          pEndpoint;
-            PEER_CHANGE_TYPE        changeType;
-            PPEER_APPLICATION       pApplication;
-        } PEER_EVENT_APPLICATION_CHANGED_DATA
-    */
+/*
+typedef struct peer_event_application_changed_data_tag {
+PPEER_CONTACT           pContact;
+PPEER_ENDPOINT          pEndpoint;
+PEER_CHANGE_TYPE        changeType;
+PPEER_APPLICATION       pApplication;
+} PEER_EVENT_APPLICATION_CHANGED_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_APPLICATION_CHANGED_DATA
@@ -515,14 +515,14 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pApplication;
     }
 
-    /*
-        typedef struct peer_event_object_changed_data_tag {
-            PPEER_CONTACT           pContact;
-            PPEER_ENDPOINT          pEndpoint;
-            PEER_CHANGE_TYPE        changeType;
-            PPEER_OBJECT            pObject;
-        } PEER_EVENT_OBJECT_CHANGED_DATA
-    */
+/*
+typedef struct peer_event_object_changed_data_tag {
+PPEER_CONTACT           pContact;
+PPEER_ENDPOINT          pEndpoint;
+PEER_CHANGE_TYPE        changeType;
+PPEER_OBJECT            pObject;
+} PEER_EVENT_OBJECT_CHANGED_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_OBJECT_CHANGED_DATA
@@ -533,12 +533,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pObject;
     }
 
-    /*
-        typedef struct peer_event_endpoint_changed_data_tag {
-            PPEER_CONTACT           pContact;
-            PPEER_ENDPOINT          pEndpoint;
-        } PEER_EVENT_ENDPOINT_CHANGED_DATA
-    */
+/*
+typedef struct peer_event_endpoint_changed_data_tag {
+PPEER_CONTACT           pContact;
+PPEER_ENDPOINT          pEndpoint;
+} PEER_EVENT_ENDPOINT_CHANGED_DATA
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_ENDPOINT_CHANGED_DATA
@@ -547,12 +547,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pEndPoint;
     }
 
-    /*
-        typedef struct peer_event_people_near_me_changed_data_tag {
-            PEER_CHANGE_TYPE        changeType;
-            PPEER_PEOPLE_NEAR_ME    pPeopleNearMe;
-        } PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA, *PPEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA;
-    */
+/*
+typedef struct peer_event_people_near_me_changed_data_tag {
+PEER_CHANGE_TYPE        changeType;
+PPEER_PEOPLE_NEAR_ME    pPeopleNearMe;
+} PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA, *PPEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA;
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA
@@ -561,12 +561,12 @@ namespace System.Net.PeerToPeer.Collaboration
         internal IntPtr pPeopleNearMe;
     }
 
-    /*
-        typedef struct peer_event_request_status_changed_data_tag {
-            PPEER_ENDPOINT          pEndpoint;
-            HRESULT                 hrChange;
-        } PEER_EVENT_REQUEST_STATUS_CHANGED_DATA, *PPEER_EVENT_REQUEST_STATUS_CHANGED_DATA;
-    */
+/*
+typedef struct peer_event_request_status_changed_data_tag {
+PPEER_ENDPOINT          pEndpoint;
+HRESULT                 hrChange;
+} PEER_EVENT_REQUEST_STATUS_CHANGED_DATA, *PPEER_EVENT_REQUEST_STATUS_CHANGED_DATA;
+*/
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal struct PEER_EVENT_REQUEST_STATUS_CHANGED_DATA
@@ -575,20 +575,20 @@ namespace System.Net.PeerToPeer.Collaboration
         internal int hrChange;
     }
 
-    /*
-        typedef struct peer_collab_event_data_tag {
-            PEER_COLLAB_EVENT_TYPE                     eventType;
-            union {
-                PEER_EVENT_WATCHLIST_CHANGED_DATA                   watchListChangedData;
-                PEER_EVENT_PRESENCE_CHANGED_DATA                    presenceChangedData;
-                PEER_EVENT_APPLICATION_CHANGED_DATA                 applicationChangedData;
-                PEER_EVENT_OBJECT_CHANGED_DATA                      objectChangedData;
-                PEER_EVENT_ENDPOINT_CHANGED_DATA                    endpointChangedData;
-                PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA              peopleNearMeChangedData;
-                PEER_EVENT_REQUEST_STATUS_CHANGED_DATA              requestStatusChangedData;
-            };
-        } PEER_COLLAB_EVENT_DATA, *PPEER_COLLAB_EVENT_DATA;
-    */
+/*
+typedef struct peer_collab_event_data_tag {
+PEER_COLLAB_EVENT_TYPE                     eventType;
+union {
+PEER_EVENT_WATCHLIST_CHANGED_DATA                   watchListChangedData;
+PEER_EVENT_PRESENCE_CHANGED_DATA                    presenceChangedData;
+PEER_EVENT_APPLICATION_CHANGED_DATA                 applicationChangedData;
+PEER_EVENT_OBJECT_CHANGED_DATA                      objectChangedData;
+PEER_EVENT_ENDPOINT_CHANGED_DATA                    endpointChangedData;
+PEER_EVENT_PEOPLE_NEAR_ME_CHANGED_DATA              peopleNearMeChangedData;
+PEER_EVENT_REQUEST_STATUS_CHANGED_DATA              requestStatusChangedData;
+};
+} PEER_COLLAB_EVENT_DATA, *PPEER_COLLAB_EVENT_DATA;
+*/
 
     //
     // We have two different structures and one has explicit layout to be able to

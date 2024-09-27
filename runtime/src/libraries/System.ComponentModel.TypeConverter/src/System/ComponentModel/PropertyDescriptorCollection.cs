@@ -31,7 +31,8 @@ namespace System.ComponentModel
         private readonly object _internalSyncObject = new object();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.PropertyDescriptorCollection'/>
+        /// Initializes a new instance of the <see
+        // cref='System.ComponentModel.PropertyDescriptorCollection'/>
         /// class.
         /// </summary>
         public PropertyDescriptorCollection(PropertyDescriptor[]? properties)
@@ -292,7 +293,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Sorts the members of this PropertyDescriptorCollection, using the default sort for this collection,
+        /// Sorts the members of this PropertyDescriptorCollection, using the default sort for this
+        // collection,
         /// which is usually alphabetical.
         /// </summary>
         public virtual PropertyDescriptorCollection Sort()
@@ -319,7 +321,8 @@ namespace System.ComponentModel
         }
 
         /// <summary>
-        /// Sorts the members of this PropertyDescriptorCollection, using the specified IComparer to compare,
+        /// Sorts the members of this PropertyDescriptorCollection, using the specified IComparer to
+        // compare,
         /// the PropertyDescriptors contained in the collection.
         /// </summary>
         public virtual PropertyDescriptorCollection Sort(IComparer? comparer)

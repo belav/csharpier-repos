@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
@@ -50,7 +51,8 @@ namespace System.Web.Http
         }
 
         /// <summary>
-        /// Performs configuration for <see cref="GlobalConfiguration.Configuration"/> and ensures that it is
+        /// Performs configuration for <see cref="GlobalConfiguration.Configuration"/> and ensures that it
+        // is
         /// initialized.
         /// </summary>
         /// <param name="configurationCallback">The callback that will perform the configuration.</param>

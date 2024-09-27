@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Components.QuickGrid.Infrastructure;
 
 /// <summary>
 /// Represents a subscriber that may be subscribe to an <see cref="EventCallbackSubscribable{T}"/>.
-/// The subscription can move between <see cref="EventCallbackSubscribable{T}"/> instances over time,
+/// The subscription can move between <see cref="EventCallbackSubscribable{T}"/> instances over
+// time,
 /// and automatically unsubscribes from earlier <see cref="EventCallbackSubscribable{T}"/> instances
 /// whenever it moves to a new one.
 /// </summary>
@@ -20,10 +21,12 @@ internal sealed class EventCallbackSubscriber<T> : IDisposable
     }
 
     /// <summary>
-    /// Creates a subscription on the <paramref name="subscribable"/>, or moves any existing subscription to it
+    /// Creates a subscription on the <paramref name="subscribable"/>, or moves any existing
+    // subscription to it
     /// by first unsubscribing from the previous <see cref="EventCallbackSubscribable{T}"/>.
     ///
-    /// If the supplied <paramref name="subscribable"/> is null, no new subscription will be created, but any
+    /// If the supplied <paramref name="subscribable"/> is null, no new subscription will be created,
+    // but any
     /// existing one will still be unsubscribed.
     /// </summary>
     /// <param name="subscribable"></param>

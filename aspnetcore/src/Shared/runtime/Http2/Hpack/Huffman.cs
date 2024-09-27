@@ -544,7 +544,8 @@ namespace System.Net.Http.HPack
         {
             // Decoding lookup tree is a tree of 8 bit lookup tables stored in
             // one dimensional array of ushort to reduce allocations.
-            // First 256 ushort is lookup table with index 0, next 256 ushort is lookup table with index 1, etc...
+            // First 256 ushort is lookup table with index 0, next 256 ushort is lookup table with index 1,
+            // etc...
             // lookup_value = [(lookup_table_index << 8) + lookup_index]
 
             // lookup_index is next 8 bits of huffman code, if there is less than 8 bits in source.
@@ -570,15 +571,18 @@ namespace System.Net.Http.HPack
             // for next n bits of huffman code.
             // 0 in 'next lookup table index' is considered as decoding error - invalid huffman code
 
-            // Because HPack uses static huffman code defined in RFC https://httpwg.org/specs/rfc7541.html#huffman.code
-            // it is guaranteed that for this huffman code generated decoding lookup tree MUST consist of exactly 15 lookup tables
+            // Because HPack uses static huffman code defined in RFC
+            // https://httpwg.org/specs/rfc7541.html#huffman.code
+            // it is guaranteed that for this huffman code generated decoding lookup tree MUST consist of
+            // exactly 15 lookup tables
             var decodingTree = new ushort[15 * 256];
 
             ReadOnlySpan<uint> encodingTableCodes = EncodingTableCodes;
             ReadOnlySpan<byte> encodingTableBitLengths = EncodingTableBitLengths;
 
             int allocatedLookupTableIndex = 0;
-            // Create traverse path for all 0..256 octets, 256 is EOS, see: http://httpwg.org/specs/rfc7541.html#rfc.section.5.2
+            // Create traverse path for all 0..256 octets, 256 is EOS, see:
+            // http://httpwg.org/specs/rfc7541.html#rfc.section.5.2
             for (int octet = 0; octet <= 256; octet++)
             {
                 uint code = encodingTableCodes[octet];
@@ -612,7 +616,8 @@ namespace System.Net.Http.HPack
                                 // EOS (in our case 256) have special meaning in HPack static huffman code
                                 // see: http://httpwg.org/specs/rfc7541.html#rfc.section.5.2
                                 // > A Huffman-encoded string literal containing the EOS symbol MUST be treated as a decoding error.
-                                // To force decoding error we store 0 as 'next lookup table index' which MUST be treated as decoding error.
+                                // To force decoding error we store 0 as 'next lookup table index' which MUST be treated as decoding
+                                // error.
 
                                 // Invalid huffman code - EOS
                                 // +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
@@ -636,13 +641,16 @@ namespace System.Net.Http.HPack
                     }
                     else
                     {
-                        // More than 8 bits left in huffman code means that we need to traverse to another lookup table for next 8 bits
+                        // More than 8 bits left in huffman code means that we need to traverse to another lookup table for
+                        // next 8 bits
                         ushort lookupValue = decodingTree[
                             (lookupTableIndex << 8) + indexInLookupTable
                         ];
 
-                        // Because next_lookup_table_index can not be 0, as 0 is index of root table, default value of array element
-                        // means that we have not initialized it yet => lookup table MUST be allocated and its index assigned to that lookup value
+                        // Because next_lookup_table_index can not be 0, as 0 is index of root table, default value of array
+                        // element
+                        // means that we have not initialized it yet => lookup table MUST be allocated and its index
+                        // assigned to that lookup value
                         // +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
                         // | 1 |   next_lookup_table_index |            not_used           |
                         // +---+---------------------------+-------------------------------+
@@ -672,7 +680,8 @@ namespace System.Net.Http.HPack
         /// Decodes a Huffman encoded string from a byte array.
         /// </summary>
         /// <param name="src">The source byte array containing the encoded data.</param>
-        /// <param name="dstArray">The destination byte array to store the decoded data.  This may grow if its size is insufficient.</param>
+        /// <param name="dstArray">The destination byte array to store the decoded data.  This may grow if
+        // its size is insufficient.</param>
         /// <returns>The number of decoded symbols.</returns>
         public static int Decode(ReadOnlySpan<byte> src, ref byte[] dstArray)
         {
@@ -755,7 +764,8 @@ namespace System.Net.Http.HPack
                 Debug.Assert(bitsInAcc < 8);
 
                 // Check for correct EOS, which is padding with ones till end of byte
-                // when we STARTED new huffman code in last 8 bits (lookupTableIndex was reset to 0 -> root lookup table).
+                // when we STARTED new huffman code in last 8 bits (lookupTableIndex was reset to 0 -> root lookup
+                // table).
                 if (lookupTableIndex == 0)
                 {
                     // Check if all remaining bits are ones.
@@ -782,7 +792,8 @@ namespace System.Net.Http.HPack
 
                     if (bitsInAcc < 0)
                     {
-                        // Last looked up code had more bits than was left in accumulator which indicated invalid or incomplete source
+                        // Last looked up code had more bits than was left in accumulator which indicated invalid or
+                        // incomplete source
                         throw new HuffmanDecodingException(SR.net_http_hpack_huffman_decode_failed);
                     }
 

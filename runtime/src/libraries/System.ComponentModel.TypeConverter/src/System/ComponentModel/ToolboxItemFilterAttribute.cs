@@ -68,13 +68,15 @@ namespace System.ComponentModel
         public string FilterString { get; }
 
         /// <summary>
-        /// Retrieves the filter type for this attribute. The filter type determines how the filter string should
+        /// Retrieves the filter type for this attribute. The filter type determines how the filter string
+        // should
         /// be applied.
         /// </summary>
         public ToolboxItemFilterType FilterType { get; }
 
         /// <summary>
-        /// The unique identifier for this attribute. All ToolboxItemFilterAttributes with the same filter string
+        /// The unique identifier for this attribute. All ToolboxItemFilterAttributes with the same filter
+        // string
         /// are considered the same, so they return the same TypeId.
         /// </summary>
         public override object TypeId => _typeId ??= GetType().FullName + FilterString;

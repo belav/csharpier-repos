@@ -185,7 +185,8 @@ namespace System.ComponentModel.Composition
         {
             if (errorsCount > 1 && pathCount > 1)
             {
-                // The composition produced multiple composition errors, with {0} root causes. The root causes are provided below.
+                // The composition produced multiple composition errors, with {0} root causes. The root causes are
+                // provided below.
                 writer.AppendFormat(
                     CultureInfo.CurrentCulture,
                     Strings.CompositionException_MultipleErrorsWithMultiplePaths,
@@ -194,7 +195,8 @@ namespace System.ComponentModel.Composition
             }
             else if (errorsCount == 1 && pathCount > 1)
             {
-                // The composition produced a single composition error, with {0} root causes. The root causes are provided below.
+                // The composition produced a single composition error, with {0} root causes. The root causes are
+                // provided below.
                 writer.AppendFormat(
                     CultureInfo.CurrentCulture,
                     Strings.CompositionException_SingleErrorWithMultiplePaths,

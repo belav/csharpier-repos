@@ -17,7 +17,8 @@ namespace System.Data.Mapping
 {
     /// <summary>
     /// Mapping metadata for Conditional property mapping on a type.
-    /// Condition Property Mapping specifies a Condition either on the C side property or S side property.
+    /// Condition Property Mapping specifies a Condition either on the C side property or S side
+    // property.
     /// </summary>
     /// <example>
     /// For Example if conceptually you could represent the CS MSL file as following

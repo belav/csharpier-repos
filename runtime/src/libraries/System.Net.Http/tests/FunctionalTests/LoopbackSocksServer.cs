@@ -271,7 +271,8 @@ namespace System.Net.Http.Functional.Tests
 
             await Task.WhenAll(new[] { clientCopyTask, serverCopyTask }).ConfigureAwait(false);
 
-            /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted errors.</summary>
+            /// <summary>Closes sockets to cause both tasks to end, and eats connection reset/aborted
+            // errors.</summary>
             void HandleExceptions(Exception ex)
             {
                 SocketError sockErr =

@@ -87,7 +87,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             ///     - Type suffixes in VB                          goo$ => goo
             ///     - Qualified names from complexification        A.goo => goo
             ///     - Optional Attribute suffixes                  XAttribute => X
-            ///         Careful here:                              XAttribute => XAttribute if renamesymbol is XAttributeAttribute
+            ///         Careful here:                              XAttribute => XAttribute if renamesymbol is
+            // XAttributeAttribute
             ///     - Compiler-generated EventHandler suffix       XEventHandler => X
             ///     - Compiler-generated get_ and set_ prefixes    get_X => X
             /// </summary>

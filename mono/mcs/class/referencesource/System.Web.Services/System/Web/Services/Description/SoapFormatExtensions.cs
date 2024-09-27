@@ -21,7 +21,8 @@ namespace System.Web.Services.Description
         /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBinding.Namespace"]/*' />
         public const string Namespace = "http://schemas.xmlsoap.org/wsdl/soap/";
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBinding.HttpTransport"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBinding.HttpTransport"]/*'
+        // />
         public const string HttpTransport = "http://schemas.xmlsoap.org/soap/http";
 
         /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBinding.Transport"]/*' />
@@ -40,7 +41,8 @@ namespace System.Web.Services.Description
             set { style = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapFormatExtensions.Schema"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapFormatExtensions.Schema"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -60,11 +62,13 @@ namespace System.Web.Services.Description
     /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBindingStyle"]/*' />
     public enum SoapBindingStyle
     {
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBindingStyle.Default"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBindingStyle.Default"]/*'
+        // />
         [XmlIgnore]
         Default,
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBindingStyle.Document"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBindingStyle.Document"]/*'
+        // />
         [XmlEnum("document")]
         Document,
 
@@ -80,7 +84,8 @@ namespace System.Web.Services.Description
         string soapAction;
         SoapBindingStyle style;
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapOperationBinding.SoapAction"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapOperationBinding.SoapAction"]/*' />
         [XmlAttribute("soapAction")]
         public string SoapAction
         {
@@ -88,7 +93,8 @@ namespace System.Web.Services.Description
             set { soapAction = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapOperationBinding.Style"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapOperationBinding.Style"]/*' />
         [XmlAttribute("style"), DefaultValue(SoapBindingStyle.Default)]
         public SoapBindingStyle Style
         {
@@ -120,7 +126,8 @@ namespace System.Web.Services.Description
             set { use = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBodyBinding.Namespace"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBodyBinding.Namespace"]/*'
+        // />
         [XmlAttribute("namespace"), DefaultValue("")]
         public string Namespace
         {
@@ -128,7 +135,8 @@ namespace System.Web.Services.Description
             set { ns = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBodyBinding.Encoding"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBodyBinding.Encoding"]/*'
+        // />
         [XmlAttribute("encodingStyle"), DefaultValue("")]
         public string Encoding
         {
@@ -136,7 +144,8 @@ namespace System.Web.Services.Description
             set { encoding = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapBodyBinding.PartsString"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapBodyBinding.PartsString"]/*' />
         [XmlAttribute("parts")]
         public string PartsString
         {
@@ -212,7 +221,8 @@ namespace System.Web.Services.Description
             set { name = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapFaultBinding.Namespace"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapFaultBinding.Namespace"]/*' />
         [XmlAttribute("namespace")]
         public string Namespace
         {
@@ -220,7 +230,8 @@ namespace System.Web.Services.Description
             set { ns = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapFaultBinding.Encoding"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapFaultBinding.Encoding"]/*'
+        // />
         [XmlAttribute("encodingStyle"), DefaultValue("")]
         public string Encoding
         {
@@ -246,7 +257,8 @@ namespace System.Web.Services.Description
         bool mapToProperty;
         SoapHeaderFaultBinding fault;
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.MapToProperty"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderBinding.MapToProperty"]/*' />
         [XmlIgnore]
         public bool MapToProperty
         {
@@ -254,7 +266,8 @@ namespace System.Web.Services.Description
             set { mapToProperty = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Message"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Message"]/*'
+        // />
         [XmlAttribute("message")]
         public XmlQualifiedName Message
         {
@@ -278,7 +291,8 @@ namespace System.Web.Services.Description
             set { use = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Encoding"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderBinding.Encoding"]/*' />
         [XmlAttribute("encodingStyle"), DefaultValue("")]
         public string Encoding
         {
@@ -286,7 +300,8 @@ namespace System.Web.Services.Description
             set { encoding = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Namespace"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderBinding.Namespace"]/*' />
         [XmlAttribute("namespace"), DefaultValue("")]
         public string Namespace
         {
@@ -294,7 +309,8 @@ namespace System.Web.Services.Description
             set { ns = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Fault"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderBinding.Fault"]/*'
+        // />
         [XmlElement("headerfault")]
         public SoapHeaderFaultBinding Fault
         {
@@ -312,7 +328,8 @@ namespace System.Web.Services.Description
         string encoding;
         string ns;
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderFaultBinding.Message"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderFaultBinding.Message"]/*' />
         [XmlAttribute("message")]
         public XmlQualifiedName Message
         {
@@ -320,7 +337,8 @@ namespace System.Web.Services.Description
             set { message = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderFaultBinding.Part"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderFaultBinding.Part"]/*' />
         [XmlAttribute("part")]
         public string Part
         {
@@ -328,7 +346,8 @@ namespace System.Web.Services.Description
             set { part = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderFaultBinding.Use"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderFaultBinding.Use"]/*' />
         [XmlAttribute("use"), DefaultValue(SoapBindingUse.Default)]
         public SoapBindingUse Use
         {
@@ -336,7 +355,8 @@ namespace System.Web.Services.Description
             set { use = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderFaultBinding.Encoding"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderFaultBinding.Encoding"]/*' />
         [XmlAttribute("encodingStyle"), DefaultValue("")]
         public string Encoding
         {
@@ -344,7 +364,8 @@ namespace System.Web.Services.Description
             set { encoding = value; }
         }
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapHeaderFaultBinding.Namespace"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapHeaderFaultBinding.Namespace"]/*' />
         [XmlAttribute("namespace"), DefaultValue("")]
         public string Namespace
         {
@@ -359,7 +380,8 @@ namespace System.Web.Services.Description
     {
         string location;
 
-        /// <include file='doc\SoapFormatExtensions.uex' path='docs/doc[@for="SoapAddressBinding.Location"]/*' />
+        /// <include file='doc\SoapFormatExtensions.uex'
+        // path='docs/doc[@for="SoapAddressBinding.Location"]/*' />
         [XmlAttribute("location")]
         public string Location
         {

@@ -245,7 +245,8 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var actions = new Actions(Browser).DragAndDrop(input, target);
 
         actions.Perform();
-        // drop doesn't reliably trigger in Selenium. But it's sufficient to determine "any" drag event works
+        // drop doesn't reliably trigger in Selenium. But it's sufficient to determine "any" drag event
+        // works
         Browser.True(() => output.Text.StartsWith("dragstart,", StringComparison.Ordinal));
     }
 
@@ -313,7 +314,8 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // up for a bit it doesn't cause typing to lose keystrokes. But when running server-side, this
         // shows that network latency doesn't cause keystrokes to be lost even if:
         // [1] By the time a keystroke event arrives, the event handler ID has since changed
-        // [2] We have the situation described under "the problem" at https://github.com/dotnet/aspnetcore/issues/8204#issuecomment-493986702
+        // [2] We have the situation described under "the problem" at
+        // https://github.com/dotnet/aspnetcore/issues/8204#issuecomment-493986702
 
         Browser.MountTestComponent<LaggyTypingComponent>();
 
@@ -357,7 +359,8 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         element.Click();
 
         // It's no use observing that the log is still empty, since maybe the UI just hasn't updated yet
-        // To be sure that the preceding action has no effect, we need to trigger a different action that does have an effect
+        // To be sure that the preceding action has no effect, we need to trigger a different action that
+        // does have an effect
         Browser.Exists(By.Id("enabled-button")).Click();
         Browser.Equal("Got event on enabled button", () => eventLog.GetAttribute("value"));
     }

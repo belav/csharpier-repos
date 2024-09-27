@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -75,8 +76,10 @@ namespace Mono.Linker.Tests.Cases.DataFlow
                 derivedType.BaseType.RequiresAll();
             }
 
-            // This is a very special case - normally there's basically no way to "new up" a Type instance via the "new" operator.
-            // The trimming tools and analyzer see an unknown value and thus warns that it doesn't fulfill the All annotation.
+            // This is a very special case - normally there's basically no way to "new up" a Type instance via
+            // the "new" operator.
+            // The trimming tools and analyzer see an unknown value and thus warns that it doesn't fulfill the
+            // All annotation.
             [ExpectedWarning("IL2062", nameof(TestAllPropagated))]
             public static void Test()
             {

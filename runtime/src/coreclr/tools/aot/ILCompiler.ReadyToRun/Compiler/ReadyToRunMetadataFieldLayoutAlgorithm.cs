@@ -31,7 +31,8 @@ namespace ILCompiler
         private ModuleFieldLayoutMap _moduleFieldLayoutMap;
 
         /// <summary>
-        /// Compilation module group is used to identify which types extend beyond the current version bubble.
+        /// Compilation module group is used to identify which types extend beyond the current version
+        // bubble.
         /// </summary>
         private ReadyToRunCompilationModuleGroupBase _compilationGroup;
 
@@ -185,7 +186,9 @@ namespace ILCompiler
                     if (typeDef.GetGenericParameters().Count != 0)
                     {
                         // Generic types are exempt from the static field layout algorithm, see
-                        // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L931">this check</a>.
+                        // <a
+                        // href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L931">this
+                        // check</a>.
                         continue;
                     }
 
@@ -206,8 +209,11 @@ namespace ILCompiler
                             ) == FieldAttributes.Static
                         )
                         {
-                            // Static RVA fields are included when approximating offsets and sizes for the module field layout, see
-                            // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L939">this loop</a>.
+                            // Static RVA fields are included when approximating offsets and sizes for the module field layout,
+                            // see
+                            // <a
+                            // href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L939">this
+                            // loop</a>.
 
                             int index = (
                                 IsFieldThreadStatic(in fieldDef, module.MetadataReader)
@@ -366,7 +372,8 @@ namespace ILCompiler
                     )
                     {
                         // Allocate pessimistic non-GC area for cross-module fields as that's what CoreCLR does
-                        // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
+                        // <a
+                        // href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
                         alignment = TargetDetails.MaximumPrimitiveSize;
                         size = TargetDetails.MaximumPrimitiveSize;
                         isGcBoxedField = true;
@@ -478,7 +485,8 @@ namespace ILCompiler
                         )
                         {
                             // Allocate pessimistic non-GC area for cross-module fields as that's what CoreCLR does
-                            // <a href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
+                            // <a
+                            // href="https://github.com/dotnet/runtime/blob/17154bd7b8f21d6d8d6fca71b89d7dcb705ec32b/src/coreclr/vm/ceeload.cpp#L1006">here</a>
                             alignment = TargetDetails.MaximumPrimitiveSize;
                             size = TargetDetails.MaximumPrimitiveSize;
                             isGcBoxedField = true;
@@ -798,7 +806,8 @@ namespace ILCompiler
             }
 
             /// <summary>
-            /// Try to locate the ThreadStatic custom attribute on the field (much like EcmaField.cs does in the method InitializeFieldFlags).
+            /// Try to locate the ThreadStatic custom attribute on the field (much like EcmaField.cs does in the
+            // method InitializeFieldFlags).
             /// </summary>
             /// <param name="fieldDef">Field definition</param>
             /// <param name="metadataReader">Metadata reader for the module</param>
@@ -818,7 +827,8 @@ namespace ILCompiler
             }
 
             /// <summary>
-            /// Try to locate the IsByRefLike attribute on the type (much like EcmaType does in ComputeTypeFlags).
+            /// Try to locate the IsByRefLike attribute on the type (much like EcmaType does in
+            // ComputeTypeFlags).
             /// </summary>
             /// <param name="typeDefHandle">Handle to the field type to analyze</param>
             /// <param name="metadataReader">Metadata reader for the active module</param>
@@ -841,7 +851,8 @@ namespace ILCompiler
             }
 
             /// <summary>
-            /// Partially decode field signature to obtain CorElementType and optionally the type handle for VALUETYPE fields.
+            /// Partially decode field signature to obtain CorElementType and optionally the type handle for
+            // VALUETYPE fields.
             /// </summary>
             /// <param name="fieldDef">Metadata field definition</param>
             /// <param name="metadataReader">Metadata reader for the active module</param>
@@ -878,7 +889,8 @@ namespace ILCompiler
             /// Extract element type from a field signature after skipping various modifiers.
             /// </summary>
             /// <param name="signature">Signature byte array</param>
-            /// <param name="index">On input, index into the signature array. Gets modified to point after the element type on return.</param>
+            /// <param name="index">On input, index into the signature array. Gets modified to point after the
+            // element type on return.</param>
             /// <returns></returns>
             private static CorElementType ReadElementType(ref BlobReader signature)
             {
@@ -1040,7 +1052,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// This method decides whether the type needs aligned base offset in order to have layout resilient to
+        /// This method decides whether the type needs aligned base offset in order to have layout resilient
+        // to
         /// base class layout changes.
         /// </summary>
         protected override void AlignBaseOffsetIfNecessary(

@@ -180,9 +180,12 @@ namespace ObjectStackAllocation
                 expectedAllocationKind
             );
 
-            // The object is currently allocated on the stack when this method is jitted and on the heap when it's R2R-compiled.
-            // The reason is that we always do the type check via helper in R2R mode, which blocks stack allocation.
-            // We don't have to use a helper in this case (even for R2R), https://github.com/dotnet/runtime/issues/11850 tracks fixing that.
+            // The object is currently allocated on the stack when this method is jitted and on the heap when
+            // it's R2R-compiled.
+            // The reason is that we always do the type check via helper in R2R mode, which blocks stack
+            // allocation.
+            // We don't have to use a helper in this case (even for R2R),
+            // https://github.com/dotnet/runtime/issues/11850 tracks fixing that.
             CallTestAndVerifyAllocation(
                 AllocateSimpleClassAndCheckTypeNoHelper,
                 1,
@@ -397,14 +400,17 @@ namespace ObjectStackAllocation
             SimpleClassWithGCField c4 = (f2 == 0) ? c2 : c1;
 
             // c1 doesn't have to be reported to GC (but can be conservatively reported as an interior pointer)
-            // c1.o should be reported to GC as a normal pointer (but can be conservatively reported as an interior pointer)
-            // c2 should be reported to GC as a normal pointer (but can be conservatively reported as an interior pointer)
+            // c1.o should be reported to GC as a normal pointer (but can be conservatively reported as an
+            // interior pointer)
+            // c2 should be reported to GC as a normal pointer (but can be conservatively reported as an
+            // interior pointer)
             // c3 and c4 must be reported as interior pointers
             GC.Collect();
 
             // This assignment doesn't need a write barrier but may conservatively use a checked barrier
             c1.o = str1;
-            // This assignment should optimally use a normal write barrier but may conservatively use a checked barrier
+            // This assignment should optimally use a normal write barrier but may conservatively use a checked
+            // barrier
             c2.o = str2;
             // These assignments require a checked write barrier
             c3.o = str3;

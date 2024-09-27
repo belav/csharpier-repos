@@ -50,7 +50,8 @@ namespace System.Collections.Concurrent.Tests
         }
 
         /// <summary>
-        /// BlockingCollection throws InvalidOperationException when calling CompleteAdding even after adding and taking all elements
+        /// BlockingCollection throws InvalidOperationException when calling CompleteAdding even after
+        // adding and taking all elements
         /// </summary>
         /// <returns></returns>
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -94,7 +95,8 @@ namespace System.Collections.Concurrent.Tests
             const int noOfProducers = 1;
             const int noOfConsumers = 7;
             const int noOfItemsToProduce = 3;
-            //Console.WriteLine("Producer: {0}, Consumer: {1}, Items: {2}", noOfProducers, noOfConsumers, noOfItemsToProduce);
+            //Console.WriteLine("Producer: {0}, Consumer: {1}, Items: {2}", noOfProducers, noOfConsumers,
+            // noOfItemsToProduce);
 
             BlockingCollection<long> m_BlockingQueueUnderTest = new BlockingCollection<long>(
                 new ConcurrentQueue<long>()
@@ -239,12 +241,15 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        /// <summary>Adds "numOfAdds" elements to the BlockingCollection and then Takes "numOfTakes" elements and
-        /// checks that the count is as expected, the elements removed matched those added and verifies the return
+        /// <summary>Adds "numOfAdds" elements to the BlockingCollection and then Takes "numOfTakes"
+        // elements and
+        /// checks that the count is as expected, the elements removed matched those added and verifies the
+        // return
         /// values of TryAdd() and TryTake().</summary>
         /// <param name="numOfAdds">The number of elements to add to the BlockingCollection.</param>
         /// <param name="numOfTakes">The number of elements to Take from the BlockingCollection.</param>
-        /// <param name="boundedCapacity">The bounded capacity of the BlockingCollection, -1 is unbounded.</param>
+        /// <param name="boundedCapacity">The bounded capacity of the BlockingCollection, -1 is
+        // unbounded.</param>
         [Theory]
         [InlineData(1, 1, -1)]
         [InlineData(5, 3, 1)]
@@ -317,7 +322,8 @@ namespace System.Collections.Concurrent.Tests
             VerifyElementsAreMembersOfSequence(sortedElementsInCollection, 0, expectedCount - 1);
         }
 
-        /// <summary>Launch threads/2 producers and threads/2 consumers then make sure that all elements produced
+        /// <summary>Launch threads/2 producers and threads/2 consumers then make sure that all elements
+        // produced
         /// are consumed by consumers with no element lost nor consumed more than once.</summary>
         /// <param name="threads">Total number of producer and consumer threads.</param>
         /// <param name="numOfElementsPerThread">Number of elements to Add/Take per thread.</param>
@@ -526,7 +532,8 @@ namespace System.Collections.Concurrent.Tests
             });
         }
 
-        /// <summary>Validates GetEnumerator and makes sure that BlockingCollection.GetEnumerator() produces the
+        /// <summary>Validates GetEnumerator and makes sure that BlockingCollection.GetEnumerator() produces
+        // the
         /// same results as IConcurrentCollection.GetEnumerator().</summary>
         /// <returns>True if test succeeded, false otherwise.</returns>
         [Fact]
@@ -568,7 +575,8 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        /// <summary>Validates GetConsumingEnumerator and makes sure that BlockingCollection.GetConsumingEnumerator()
+        /// <summary>Validates GetConsumingEnumerator and makes sure that
+        // BlockingCollection.GetConsumingEnumerator()
         /// produces the same results as if call Take in a loop.</summary>
         /// <returns>True if test succeeded, false otherwise.</returns>
         [Fact]
@@ -618,9 +626,12 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        /// <summary>Validates that after CompleteAdding() is called, future calls to Add will throw exceptions, calls
-        /// to Take will not block waiting for more input, and calls to MoveNext on the enumerator returned from GetEnumerator
-        /// on the enumerable returned from GetConsumingEnumerable will return false when the collection's count reaches 0.</summary>
+        /// <summary>Validates that after CompleteAdding() is called, future calls to Add will throw
+        // exceptions, calls
+        /// to Take will not block waiting for more input, and calls to MoveNext on the enumerator returned
+        // from GetEnumerator
+        /// on the enumerable returned from GetConsumingEnumerable will return false when the collection's
+        // count reaches 0.</summary>
         /// <returns>True if test succeeded, false otherwise.</returns>
         [Fact]
         public static void Test7_CompleteAdding()
@@ -709,8 +720,10 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        /// <summary>Validates that BlockingCollection.CopyTo() produces same results as IConcurrentCollection.CopyTo().</summary>
-        /// <param name="indexOfInsertion">The zero-based index in the array at which copying begins.</param>
+        /// <summary>Validates that BlockingCollection.CopyTo() produces same results as
+        // IConcurrentCollection.CopyTo().</summary>
+        /// <param name="indexOfInsertion">The zero-based index in the array at which copying
+        // begins.</param>
         [Theory]
         [InlineData(0)]
         [InlineData(8)]
@@ -767,7 +780,8 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(-1, blockingCollection.BoundedCapacity);
         }
 
-        /// <summary>Validates BlockingCollection.IsCompleted and BlockingCollection.AddingIsCompleted.</summary>
+        /// <summary>Validates BlockingCollection.IsCompleted and
+        // BlockingCollection.AddingIsCompleted.</summary>
         /// <returns>True if test succeeded, false otherwise.</returns>
         [Fact]
         public static void Test12_IsCompleted_AddingIsCompleted()
@@ -836,15 +850,19 @@ namespace System.Collections.Concurrent.Tests
             );
         }
 
-        /// <summary>Initializes an array of blocking collections such that all are full except one in case of Adds and
+        /// <summary>Initializes an array of blocking collections such that all are full except one in case
+        // of Adds and
         /// all are empty except one (the same blocking collection) in case of Takes.
-        /// Adds "numOfAdds" elements to the BlockingCollection and then takes "numOfTakes" elements and checks
-        /// that the count is as expected, the elements taken matched those added and verifies the return values of
+        /// Adds "numOfAdds" elements to the BlockingCollection and then takes "numOfTakes" elements and
+        // checks
+        /// that the count is as expected, the elements taken matched those added and verifies the return
+        // values of
         /// TryAdd() and TryTake().</summary>
         /// <param name="numOfAdds">Number of elements to add.</param>
         /// <param name="numOfTakes">Number of elements to take.</param>
         /// <param name="numOfBlockingCollections">Length of BlockingCollections array.</param>
-        /// <param name="indexOfBlockingCollectionUnderTest">Index of the BlockingCollection that will accept the operations.</param>
+        /// <param name="indexOfBlockingCollectionUnderTest">Index of the BlockingCollection that will
+        // accept the operations.</param>
         /// <param name="boundedCapacity">The bounded capacity of the BlockingCollection under test.</param>
         [Theory]
         [InlineData(1, 1, 16, 0, -1)]
@@ -895,7 +913,8 @@ namespace System.Collections.Concurrent.Tests
             );
         }
 
-        /// <summary>Launch threads/2 producers and threads/2 consumers then makes sure that all elements produced
+        /// <summary>Launch threads/2 producers and threads/2 consumers then makes sure that all elements
+        // produced
         /// are consumed by consumers with no element lost nor consumed more than once.</summary>
         /// <param name="threads">Total number of producer and consumer threads.</param>
         /// <param name="numOfElementsPerThread">Number of elements to Add/Take per thread.</param>
@@ -1239,7 +1258,8 @@ namespace System.Collections.Concurrent.Tests
                 () => BlockingCollection<int>.TryTakeFromAny(null, out item)
             );
 
-            // new behavior for TakeFromAny after Dev10, to throw ArgumentException if all the collections are completed,
+            // new behavior for TakeFromAny after Dev10, to throw ArgumentException if all the collections are
+            // completed,
             // however TryTakeFromAny will return false
             for (int i = 0; i < NUM_OF_COLLECTIONS; ++i)
             {
@@ -1355,18 +1375,23 @@ namespace System.Collections.Concurrent.Tests
 
         #region Helper Methods / Classes
 
-        /// <summary>Initializes an array of blocking collections (if its not null) such that all are full except one in case
+        /// <summary>Initializes an array of blocking collections (if its not null) such that all are full
+        // except one in case
         /// of Adds and all are empty except one (the same blocking collection) in case of Takes.
-        /// Adds "numOfAdds" elements to the BlockingCollection and then takes "numOfTakes" elements and checks
-        /// that the count is as expected, the elements taken matched those added and verifies the return values of
+        /// Adds "numOfAdds" elements to the BlockingCollection and then takes "numOfTakes" elements and
+        // checks
+        /// that the count is as expected, the elements taken matched those added and verifies the return
+        // values of
         /// TryAdd() and TryTake().</summary>
         /// <param name="numOfAdds">Number of elements to Add.</param>
         /// <param name="numOfTakes">Number of elements to Take.</param>
         /// <param name="boundedCapacity">The bounded capacity of the BlockingCollection under test.</param>
         /// <param name="blockingCollection">The blocking collection under test.</param>
-        /// <param name="blockingCollections">The array of blocking collections under test. Null if this method should use TryAdd/Take
+        /// <param name="blockingCollections">The array of blocking collections under test. Null if this
+        // method should use TryAdd/Take
         /// and not AddToAny/TakeFromAny.</param>
-        /// <param name="indexOfBlockingCollectionUnderTest">Index of the BlockingCollection that will accept the operations.</param>
+        /// <param name="indexOfBlockingCollectionUnderTest">Index of the BlockingCollection that will
+        // accept the operations.</param>
         /// <returns>True if test succeeds, false otherwise.</returns>
         private static void AddAnyTakeAny(
             int numOfAdds,
@@ -1497,7 +1522,8 @@ namespace System.Collections.Concurrent.Tests
             expectedCount = (expectedCount < 0) ? 0 : expectedCount;
             Assert.Equal(expectedCount, blockingCollection.Count);
 
-            //Test the new behavior of TryTakeFromAny after Dev10 to return false if all collections are completed, this is the same as before
+            //Test the new behavior of TryTakeFromAny after Dev10 to return false if all collections are
+            // completed, this is the same as before
             // except it was throwing when the timeout is -1, now will return false immediately
 
             var collectionsArray = new[]
@@ -1566,7 +1592,8 @@ namespace System.Collections.Concurrent.Tests
             return blockingCollections;
         }
 
-        /// <summary>Verifies that the elements in sortedElementsInCollection are a sequence from start to end.</summary>
+        /// <summary>Verifies that the elements in sortedElementsInCollection are a sequence from start to
+        // end.</summary>
         /// <param name="sortedElementsInCollection">The enumerable containing the elements.</param>
         /// <param name="start">The start of the sequence.</param>
         /// <param name="end">The end of the sequence.</param>
@@ -1582,7 +1609,8 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(end, current - 1);
         }
 
-        /// <summary>This is a Stack implementing IConcurrentCollection to be used in the tests of BlockingCollection.</summary>
+        /// <summary>This is a Stack implementing IConcurrentCollection to be used in the tests of
+        // BlockingCollection.</summary>
         /// <typeparam name="T">The type of elements stored in the stack.</typeparam>
         private class ConcurrentStackCollection<T> : IProducerConsumerCollection<T>
         {

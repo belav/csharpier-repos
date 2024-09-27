@@ -25,7 +25,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
     internal sealed class TargetRegistry<T>
     {
         /// <summary>
-        /// Information about a registered target. This class represents a self-sufficient node in a linked list.
+        /// Information about a registered target. This class represents a self-sufficient node in a linked
+        // list.
         /// </summary>
         internal sealed class LinkedTargetInfo
         {
@@ -69,14 +70,17 @@ namespace System.Threading.Tasks.Dataflow.Internal
         /// <summary>A mapping of targets to information about them.</summary>
         private readonly Dictionary<ITargetBlock<T>, LinkedTargetInfo> _targetInformation;
 
-        /// <summary>The first node of an ordered list of targets. Messages should be offered to targets starting from First and following Next.</summary>
+        /// <summary>The first node of an ordered list of targets. Messages should be offered to targets
+        // starting from First and following Next.</summary>
         private LinkedTargetInfo? _firstTarget;
 
-        /// <summary>The last node of the ordered list of targets. This field is used purely as a perf optimization to avoid traversing the list for each Add.</summary>
+        /// <summary>The last node of the ordered list of targets. This field is used purely as a perf
+        // optimization to avoid traversing the list for each Add.</summary>
         private LinkedTargetInfo? _lastTarget;
 
         /// <summary>Number of links with positive RemainingMessages counters.
-        /// This is an optimization that allows us to skip dictionary lookup when this counter is 0.</summary>
+        /// This is an optimization that allows us to skip dictionary lookup when this counter is
+        // 0.</summary>
         private int _linksWithRemainingMessages;
 
         /// <summary>Initializes the registry.</summary>
@@ -102,7 +106,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             );
             Debug.Assert(linkOptions != null, "The link options must not be null.");
 
-            // If the target already exists in the registry, replace it with a new NopLinkPropagator to maintain uniqueness
+            // If the target already exists in the registry, replace it with a new NopLinkPropagator to maintain
+            // uniqueness
             if (_targetInformation.TryGetValue(target, out _))
                 target = new NopLinkPropagator(_owningSource, target);
 
@@ -202,7 +207,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                         etwLog.DataflowBlockUnlinking(_owningSource, target);
                     }
                 }
-                // If the target is to stay and we are counting the remaining messages for this link, decrement the counter
+                // If the target is to stay and we are counting the remaining messages for this link, decrement the
+                // counter
                 else if (node.RemainingMessages > 0)
                 {
                     Debug.Assert(
@@ -214,7 +220,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
             }
         }
 
-        /// <summary>Clears the target registry entry points while allowing subsequent traversals of the linked list.</summary>
+        /// <summary>Clears the target registry entry points while allowing subsequent traversals of the
+        // linked list.</summary>
         internal LinkedTargetInfo? ClearEntryPoints()
         {
             // Save _firstTarget so we can return it
@@ -395,7 +402,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 _target = target;
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
             DataflowMessageStatus ITargetBlock<T>.OfferMessage(
                 DataflowMessageHeader messageHeader,
                 T messageValue,
@@ -410,7 +418,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 return _target.OfferMessage(messageHeader, messageValue, this, consumeToAccept);
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Sources/Member[@name="ConsumeMessage"]/*' />
             T? ISourceBlock<T>.ConsumeMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target,
@@ -420,7 +429,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 return _owningSource.ConsumeMessage(messageHeader, this, out messageConsumed);
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Sources/Member[@name="ReserveMessage"]/*' />
             bool ISourceBlock<T>.ReserveMessage(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
@@ -429,7 +439,8 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 return _owningSource.ReserveMessage(messageHeader, this);
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Sources/Member[@name="ReleaseReservation"]/*' />
             void ISourceBlock<T>.ReleaseReservation(
                 DataflowMessageHeader messageHeader,
                 ITargetBlock<T> target
@@ -438,25 +449,29 @@ namespace System.Threading.Tasks.Dataflow.Internal
                 _owningSource.ReleaseReservation(messageHeader, this);
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
             Task IDataflowBlock.Completion
             {
                 get { return _owningSource.Completion; }
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
             void IDataflowBlock.Complete()
             {
                 _target.Complete();
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
             void IDataflowBlock.Fault(Exception exception)
             {
                 _target.Fault(exception);
             }
 
-            /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
+            /// <include file='XmlDocs/CommonXmlDocComments.xml'
+            // path='CommonXmlDocComments/Sources/Member[@name="LinkTo"]/*' />
             IDisposable ISourceBlock<T>.LinkTo(
                 ITargetBlock<T> target,
                 DataflowLinkOptions linkOptions

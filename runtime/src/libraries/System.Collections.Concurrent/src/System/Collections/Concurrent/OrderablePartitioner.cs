@@ -21,23 +21,30 @@ namespace System.Collections.Concurrent
     /// <typeparam name="TSource">Type of the elements in the collection.</typeparam>
     /// <remarks>
     /// <para>
-    /// Each element in each partition has an integer index associated with it, which determines the relative
+    /// Each element in each partition has an integer index associated with it, which determines the
+    // relative
     /// order of that element against elements in other partitions.
     /// </para>
     /// <para>
     /// Inheritors of <see cref="OrderablePartitioner{TSource}"/> must adhere to the following rules:
     /// <ol>
-    /// <li>All indices must be unique, such that there may not be duplicate indices. If all indices are not
+    /// <li>All indices must be unique, such that there may not be duplicate indices. If all indices are
+    // not
     /// unique, the output ordering may be scrambled.</li>
-    /// <li>All indices must be non-negative. If any indices are negative, consumers of the implementation
+    /// <li>All indices must be non-negative. If any indices are negative, consumers of the
+    // implementation
     /// may throw exceptions.</li>
     /// <li><see cref="GetPartitions"/> and <see cref="GetOrderablePartitions"/> should throw a
-    /// <see cref="System.ArgumentOutOfRangeException"/> if the requested partition count is less than or
+    /// <see cref="System.ArgumentOutOfRangeException"/> if the requested partition count is less than
+    // or
     /// equal to zero.</li>
-    /// <li><see cref="GetPartitions"/> and <see cref="GetOrderablePartitions"/> should always return a number
-    /// of enumerables equal to the requested partition count. If the partitioner runs out of data and cannot
+    /// <li><see cref="GetPartitions"/> and <see cref="GetOrderablePartitions"/> should always return a
+    // number
+    /// of enumerables equal to the requested partition count. If the partitioner runs out of data and
+    // cannot
     /// create as many partitions as requested, an empty enumerator should be returned for each of the
-    /// remaining partitions. If this rule is not followed, consumers of the implementation may throw a <see
+    /// remaining partitions. If this rule is not followed, consumers of the implementation may throw a
+    // <see
     /// cref="System.InvalidOperationException"/>.</li>
     /// <li><see cref="GetPartitions"/>, <see cref="GetOrderablePartitions"/>,
     /// <see cref="GetDynamicPartitions"/>, and <see cref="GetOrderableDynamicPartitions"/>
@@ -45,15 +52,20 @@ namespace System.Collections.Concurrent
     /// <see cref="System.InvalidOperationException"/>.</li>
     /// <li><see cref="GetPartitions"/>, <see cref="GetOrderablePartitions"/>,
     /// <see cref="GetDynamicPartitions"/>, and <see cref="GetOrderableDynamicPartitions"/>
-    /// should always return partitions that can fully and uniquely enumerate the input data source. All of
-    /// the data and only the data contained in the input source should be enumerated, with no duplication
+    /// should always return partitions that can fully and uniquely enumerate the input data source. All
+    // of
+    /// the data and only the data contained in the input source should be enumerated, with no
+    // duplication
     /// that was not already in the input, unless specifically required by the particular partitioner's
     /// design. If this is not followed, the output ordering may be scrambled.</li>
-    /// <li>If <see cref="KeysOrderedInEachPartition"/> returns true, each partition must return elements
+    /// <li>If <see cref="KeysOrderedInEachPartition"/> returns true, each partition must return
+    // elements
     /// with increasing key indices.</li>
-    /// <li>If <see cref="KeysOrderedAcrossPartitions"/> returns true, all the keys in partition numbered N
+    /// <li>If <see cref="KeysOrderedAcrossPartitions"/> returns true, all the keys in partition
+    // numbered N
     /// must be larger than all the keys in partition numbered N-1.</li>
-    /// <li>If <see cref="KeysNormalized"/> returns true, all indices must be monotonically increasing from
+    /// <li>If <see cref="KeysNormalized"/> returns true, all indices must be monotonically increasing
+    // from
     /// 0, though not necessarily within a single partition.</li>
     /// </ol>
     /// </para>
@@ -76,7 +88,8 @@ namespace System.Collections.Concurrent
         /// </param>
         /// <param name="keysNormalized">
         /// Indicates whether keys are normalized. If true, all order keys are distinct
-        /// integers in the range [0 .. numberOfElements-1]. If false, order keys must still be distinct, but
+        /// integers in the range [0 .. numberOfElements-1]. If false, order keys must still be distinct,
+        // but
         /// only their relative order is considered, not their absolute values.
         /// </param>
         protected OrderablePartitioner(
@@ -116,13 +129,15 @@ namespace System.Collections.Concurrent
         /// object creates another partition over the sequence.
         /// </para>
         /// <para>
-        /// Each partition is represented as an enumerator over key-value pairs. The value in the pair is the element
+        /// Each partition is represented as an enumerator over key-value pairs. The value in the pair is
+        // the element
         /// itself, and the key is an integer which determines the relative ordering of this element against
         /// other elements.
         /// </para>
         /// <para>
         /// The <see cref="GetOrderableDynamicPartitions"/> method is only supported if the <see
-        /// cref="System.Collections.Concurrent.Partitioner{TSource}.SupportsDynamicPartitions">SupportsDynamicPartitions</see>
+        ///
+        // cref="System.Collections.Concurrent.Partitioner{TSource}.SupportsDynamicPartitions">SupportsDynamicPartitions</see>
         /// property returns true.
         /// </para>
         /// </remarks>
@@ -163,7 +178,8 @@ namespace System.Collections.Concurrent
         /// Partitions the underlying collection into the given number of ordered partitions.
         /// </summary>
         /// <remarks>
-        /// The default implementation provides the same behavior as <see cref="GetOrderablePartitions"/> except
+        /// The default implementation provides the same behavior as <see cref="GetOrderablePartitions"/>
+        // except
         /// that the returned set of partitions does not provide the keys for the elements.
         /// </remarks>
         /// <param name="partitionCount">The number of partitions to create.</param>
@@ -200,7 +216,8 @@ namespace System.Collections.Concurrent
         /// object creates another partition over the sequence.
         /// </para>
         /// <para>
-        /// The default implementation provides the same behavior as <see cref="GetOrderableDynamicPartitions"/> except
+        /// The default implementation provides the same behavior as <see
+        // cref="GetOrderableDynamicPartitions"/> except
         /// that the returned set of partitions does not provide the keys for the elements.
         /// </para>
         /// <para>

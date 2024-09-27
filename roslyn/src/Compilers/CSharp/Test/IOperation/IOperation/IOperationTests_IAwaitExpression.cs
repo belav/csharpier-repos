@@ -183,7 +183,9 @@ IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await i')
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS1061: 'int' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter' accepting a first argument of type 'int' could be found (are you missing a using directive or an assembly reference?)
+                // CS1061: 'int' does not contain a definition for 'GetAwaiter' and no extension method 'GetAwaiter'
+                // accepting a first argument of type 'int' could be found (are you missing a using directive or an
+                // assembly reference?)
                 //         /*<bind>*/await i/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "await i")
                     .WithArguments("int", "GetAwaiter")
@@ -269,12 +271,14 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0246: The type or namespace name 'await' could not be found (are you missing a using directive or an assembly reference?)
+                // CS0246: The type or namespace name 'await' could not be found (are you missing a using directive
+                // or an assembly reference?)
                 //         /*<bind>*/await t;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "await")
                     .WithArguments("await")
                     .WithLocation(9, 19),
-                // CS0136: A local or parameter named 't' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                // CS0136: A local or parameter named 't' cannot be declared in this scope because that name is used
+                // in an enclosing local scope to define a local or parameter
                 //         /*<bind>*/await t;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "t")
                     .WithArguments("t")
@@ -319,12 +323,14 @@ class C
 ";
             var expectedDiagnostics = new[]
             {
-                // file.cs(24,32): error CS0234: The type or namespace name 'ValueTask<>' does not exist in the namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
+                // file.cs(24,32): error CS0234: The type or namespace name 'ValueTask<>' does not exist in the
+                // namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
                 //         System.Threading.Tasks.ValueTask<bool> MoveNextAsync();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask<bool>")
                     .WithArguments("ValueTask<>", "System.Threading.Tasks")
                     .WithLocation(24, 32),
-                // file.cs(32,32): error CS0234: The type or namespace name 'ValueTask' does not exist in the namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
+                // file.cs(32,32): error CS0234: The type or namespace name 'ValueTask' does not exist in the
+                // namespace 'System.Threading.Tasks' (are you missing an assembly reference?)
                 //         System.Threading.Tasks.ValueTask DisposeAsync();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask")
                     .WithArguments("ValueTask", "System.Threading.Tasks")

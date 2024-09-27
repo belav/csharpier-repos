@@ -35,12 +35,14 @@ namespace System.Data.OleDb
         // A SafeHandle is used instead of a RCW because we need to fake the CLR into not marshalling
 
         // OLE DB Services is marked apartment thread, but it actually supports/requires free-threading.
-        // However the CLR doesn't know this and attempts to marshal the interfaces back to their original context.
+        // However the CLR doesn't know this and attempts to marshal the interfaces back to their original
+        // context.
         // But the OLE DB doesn't marshal very well if at all.  Our workaround is based on the fact
         // OLE DB is free-threaded and allows the workaround.
 
         // Creating DataSource/Session would requiring marshalling DataLins to its original context
-        // and has a severe performance impact (when working with transactions), hence our workaround to not Marshal.
+        // and has a severe performance impact (when working with transactions), hence our workaround to not
+        // Marshal.
 
         // Creating a Command would requiring marshalling Session to its original context and
         // actually doesn't work correctly, without our workaround you must execute the command in
@@ -48,7 +50,8 @@ namespace System.Data.OleDb
         // an open OleDbConnection.
 
         // We don't do extra work at this time to allow the DataReader to be used in a different context
-        // from which the command was executed in.  See WebData 64320, IRowset.GetNextRows will throw InvalidCastException
+        // from which the command was executed in.  See WebData 64320, IRowset.GetNextRows will throw
+        // InvalidCastException
 
         // In V1.0, we worked around the performance impact of creating a DataSource/Session using
         // WrapIUnknownWithComObject which creates a new RCW without searching for existing RCW
@@ -123,7 +126,8 @@ namespace System.Data.OleDb
                     _sessionwrp = new SessionWrapper();
 
                     // From the DataSource object, will call IDBInitialize.Initialize & IDBCreateSession.CreateSession
-                    // We always need both called so we use a single call for a single DangerousAddRef/DangerousRelease pair.
+                    // We always need both called so we use a single call for a single DangerousAddRef/DangerousRelease
+                    // pair.
                     OleDbHResult hr = _datasrcwrp.InitializeAndCreateSession(
                         constr,
                         ref _sessionwrp
@@ -210,8 +214,10 @@ namespace System.Data.OleDb
             }
         }
 
-        // grouping the native OLE DB casts togther by required interfaces and optional interfaces, connection then session
-        // want these to be methods, not properties otherwise they appear in VS7 managed debugger which attempts to evaluate them
+        // grouping the native OLE DB casts togther by required interfaces and optional interfaces,
+        // connection then session
+        // want these to be methods, not properties otherwise they appear in VS7 managed debugger which
+        // attempts to evaluate them
 
         // required interface, safe cast
         internal IDBPropertiesWrapper IDBProperties()
@@ -436,8 +442,10 @@ namespace System.Data.OleDb
                     {
                         if (hr < 0)
                         {
-                            // VSDD 621427: OLEDB Data Reader masks provider specific errors by raising "Internal .Net Framework Data Provider error 30."
-                            // DBPropSet c-tor will register the exception and it will be raised at GetPropertySet call in case of failure
+                            // VSDD 621427: OLEDB Data Reader masks provider specific errors by raising "Internal .Net Framework
+                            // Data Provider error 30."
+                            // DBPropSet c-tor will register the exception and it will be raised at GetPropertySet call in case
+                            // of failure
                             SafeNativeMethods.Wrapper.ClearErrorInfo();
                         }
                         dbprops = propset.GetPropertySet(0, out propertySet);
@@ -490,7 +498,10 @@ namespace System.Data.OleDb
                     )
                 )
                 {
-                    // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
+                    // All literals were either invalid or unsupported. The provider allocates memory for
+                    // *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE.
+                    // The
+                    // consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
                         long offset = literalInfo.ToInt64();
@@ -633,7 +644,10 @@ namespace System.Data.OleDb
                     )
                 )
                 {
-                    // All literals were either invalid or unsupported. The provider allocates memory for *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE. The consumer frees this memory when it no longer needs the information.
+                    // All literals were either invalid or unsupported. The provider allocates memory for
+                    // *prgLiteralInfo and sets the value of the fSupported element in all of the structures to FALSE.
+                    // The
+                    // consumer frees this memory when it no longer needs the information.
                     if (OleDbHResult.DB_E_ERRORSOCCURRED != hr)
                     {
                         if (

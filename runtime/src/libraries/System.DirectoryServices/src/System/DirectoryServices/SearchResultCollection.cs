@@ -11,7 +11,8 @@ namespace System.DirectoryServices
 {
     /// <devdoc>
     /// Contains the instances of <see cref='System.DirectoryServices.SearchResult'/> returned during a
-    /// query to the Active Directory hierarchy through <see cref='System.DirectoryServices.DirectorySearcher'/>.
+    /// query to the Active Directory hierarchy through <see
+    // cref='System.DirectoryServices.DirectorySearcher'/>.
     /// </devdoc>
     public class SearchResultCollection : MarshalByRefObject, ICollection, IEnumerable, IDisposable
     {
@@ -92,7 +93,8 @@ namespace System.DirectoryServices
         }
 
         /// <devdoc>
-        /// Gets a read-only collection of the properties  specified on <see cref='System.DirectoryServices.DirectorySearcher'/> before the
+        /// Gets a read-only collection of the properties  specified on <see
+        // cref='System.DirectoryServices.DirectorySearcher'/> before the
         /// search was executed.
         /// </devdoc>
         public string[] PropertiesLoaded { get; }

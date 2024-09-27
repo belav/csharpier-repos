@@ -21,7 +21,8 @@ namespace System.Data.Objects.ELinq
     ///
     /// becomes the expression
     ///
-    ///     Equal(MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x, y, False), 0)
+    ///     Equal(MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x,
+    // y, False), 0)
     ///
     /// which is normalized to
     ///
@@ -299,7 +300,8 @@ namespace System.Data.Objects.ELinq
                 )
                 {
                     // CODE(VB): x = y; where x and y are strings, a part of the expression looks like:
-                    // ORIGINAL: MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x, y, False)
+                    // ORIGINAL: MethodCallExpression(Microsoft.VisualBasic.CompilerServices.Operators.CompareString(x,
+                    // y, False)
                     // NORMALIZED: see CreateCompareExpression method
                     return CreateCompareExpression(m.Arguments[0], m.Arguments[1]);
                 }
@@ -322,7 +324,8 @@ namespace System.Data.Objects.ELinq
                 // check for instance Equals method
                 if (m.Method.Name == "Equals" && m.Arguments.Count > 0)
                 {
-                    // type-specific Equals method on spatial types becomes a call to the 'STEquals' spatial canonical function, so should remain in the expression tree.
+                    // type-specific Equals method on spatial types becomes a call to the 'STEquals' spatial canonical
+                    // function, so should remain in the expression tree.
                     Type parameterType = m.Method.GetParameters()[0].ParameterType;
                     if (
                         parameterType != typeof(System.Data.Spatial.DbGeography)
@@ -435,11 +438,13 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Determines whether the given call expression has a 'predicate' argument (e.g. Where(source, predicate))
+        /// Determines whether the given call expression has a 'predicate' argument (e.g. Where(source,
+        // predicate))
         /// and returns the ordinal for the predicate.
         /// </summary>
         /// <remarks>
-        /// Obviously this method will need to be replaced if we ever encounter a method with multiple predicates.
+        /// Obviously this method will need to be replaced if we ever encounter a method with multiple
+        // predicates.
         /// </remarks>
         private static bool HasPredicateArgument(
             MethodCallExpression callExpression,
@@ -489,8 +494,10 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Determines whether the given expression of the form Lambda(Coalesce(left, Constant(false)), ...), a pattern
-        /// introduced by the VB compiler for predicate arguments. Returns the 'normalized' version of the expression
+        /// Determines whether the given expression of the form Lambda(Coalesce(left, Constant(false)),
+        // ...), a pattern
+        /// introduced by the VB compiler for predicate arguments. Returns the 'normalized' version of the
+        // expression
         /// Lambda((bool)left, ...)
         /// </summary>
         private static bool TryMatchCoalescePattern(
@@ -550,7 +557,8 @@ namespace System.Data.Objects.ELinq
             );
 
         /// <summary>
-        /// This method exists solely to support creation of valid relational operator LINQ expressions that are not natively supported
+        /// This method exists solely to support creation of valid relational operator LINQ expressions that
+        // are not natively supported
         /// by the CLR (e.g. String > String). This method must not be invoked.
         /// </summary>
         private static bool RelationalOperatorPlaceholder<TLeft, TRight>(TLeft left, TRight right)
@@ -579,7 +587,8 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Try to create an operator relating 'left' and 'right' using the given operator. If the given operator
+        /// Try to create an operator relating 'left' and 'right' using the given operator. If the given
+        // operator
         /// does not define a known relation, returns false.
         /// </summary>
         private static bool TryCreateRelationalOperator(
@@ -660,8 +669,10 @@ namespace System.Data.Objects.ELinq
         /// NORMALIZED: Condition(Equal(left, right), 0, Condition(left > right, 1, -1))
         ///
         /// Why is this an improvement? We know how to evaluate Condition in the store, but we don't
-        /// know how to evaluate MethodCallExpression... Where the CompareTo appears within a larger expression,
-        /// e.g. left.CompareTo(right) > 0, we can further simplify to left > right (we register the "ComparePattern"
+        /// know how to evaluate MethodCallExpression... Where the CompareTo appears within a larger
+        // expression,
+        /// e.g. left.CompareTo(right) > 0, we can further simplify to left > right (we register the
+        // "ComparePattern"
         /// to make this possible).
         /// </summary>
         private Expression CreateCompareExpression(Expression left, Expression right)

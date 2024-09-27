@@ -91,8 +91,10 @@ namespace System.Net.Http.Functional.Tests
                 true,
             };
 
-            // These cases fail on WinHttpHandler because of a behavior in WinHttp that causes requests to be duplicated
-            // when the digest header has certain parameters. See https://github.com/dotnet/runtime/issues/25644 for details.
+            // These cases fail on WinHttpHandler because of a behavior in WinHttp that causes requests to be
+            // duplicated
+            // when the digest header has certain parameters. See https://github.com/dotnet/runtime/issues/25644
+            // for details.
             if (!IsWinHttpHandler)
             {
                 // Timeouts on WinHttpHandler
@@ -105,7 +107,8 @@ namespace System.Net.Http.Functional.Tests
             }
 
             // These cases fail to authenticate on SocketsHttpHandler, but succeed on the other handlers.
-            // they are all invalid as per the RFC, so failing is the expected behavior. See https://github.com/dotnet/runtime/issues/25645 for details.
+            // they are all invalid as per the RFC, so failing is the expected behavior. See
+            // https://github.com/dotnet/runtime/issues/25645 for details.
             if (!IsWinHttpHandler)
             {
                 // Timeouts on WinHttpHandler
@@ -816,7 +819,8 @@ namespace System.Net.Http.Functional.Tests
         public async Task Proxy_DomainJoinedProxyServerUsesKerberos_Success(Uri server)
         {
             // We skip the test unless it is running on a Windows client machine. That is because only Windows
-            // automatically registers an SPN for HTTP/<hostname> of the machine. This will enable Kerberos to properly
+            // automatically registers an SPN for HTTP/<hostname> of the machine. This will enable Kerberos to
+            // properly
             // work with the loopback proxy server.
             if (!PlatformDetection.IsWindows || !PlatformDetection.IsNotWindowsNanoServer)
             {
@@ -1041,7 +1045,8 @@ namespace System.Net.Http.Functional.Tests
                     }
                     catch (OperationCanceledException)
                     {
-                        // On Linux the GSSAPI NTLM provider may try to continue with the authentication, so go along with it
+                        // On Linux the GSSAPI NTLM provider may try to continue with the authentication, so go along with
+                        // it
                         requestData = await connection.ReadRequestDataAsync();
                         authHeaderValue = requestData.GetSingleHeaderValue("Authorization");
                         Assert.Contains("NTLM", authHeaderValue);

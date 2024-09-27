@@ -16,26 +16,26 @@ namespace Mono.Debugger.Soft
         Line = 1,
     }
 
-    /*
-     * Filter which kinds of methods to skip during single stepping
-     */
+/*
+* Filter which kinds of methods to skip during single stepping
+*/
     [Flags]
     public enum StepFilter
     {
         None = 0,
         StaticCtor = 1,
 
-        /* Since protocol version 2.20 */
-        /* Methods which have the [DebuggerHidden] attribute */
-        /* Before protocol version 2.26, this includes [DebuggerStepThrough] as well */
+/* Since protocol version 2.20 */
+/* Methods which have the [DebuggerHidden] attribute */
+/* Before protocol version 2.26, this includes [DebuggerStepThrough] as well */
         DebuggerHidden = 2,
 
-        /* Since protocol version 2.26 */
-        /* Methods which have the [DebuggerStepThrough] attribute */
+/* Since protocol version 2.26 */
+/* Methods which have the [DebuggerStepThrough] attribute */
         DebuggerStepThrough = 4,
 
-        /* Since protocol version 2.30 */
-        /* Methods which have the [DebuggerNonUserCode] attribute */
+/* Since protocol version 2.30 */
+/* Methods which have the [DebuggerNonUserCode] attribute */
         DebuggerNonUserCode = 8,
     }
 

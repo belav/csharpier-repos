@@ -50,8 +50,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Overload resolution for Y * / - % < > <= >= X
             private static readonly BinaryOperatorKind[,] s_arithmetic =
             {
-                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
-                /*  obj */{
+                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec
+                // bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
+/*  obj */{
                     ERR,
                     ERR,
                     ERR,
@@ -85,7 +86,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  str */{
+/*  str */{
                     ERR,
                     ERR,
                     ERR,
@@ -119,7 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* bool */{
+/* bool */{
                     ERR,
                     ERR,
                     ERR,
@@ -153,7 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  chr */{
+/*  chr */{
                     ERR,
                     ERR,
                     ERR,
@@ -187,7 +188,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i08 */{
+/*  i08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -221,7 +222,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i16 */{
+/*  i16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -255,7 +256,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i32 */{
+/*  i32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -289,7 +290,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i64 */{
+/*  i64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -323,7 +324,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u08 */{
+/*  u08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -357,7 +358,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u16 */{
+/*  u16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -391,7 +392,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u32 */{
+/*  u32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -425,7 +426,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u64 */{
+/*  u64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -459,7 +460,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* nint */{
+/* nint */{
                     ERR,
                     ERR,
                     ERR,
@@ -493,7 +494,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint */{
+/*nuint */{
                     ERR,
                     ERR,
                     ERR,
@@ -527,7 +528,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  r32 */{
+/*  r32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -561,7 +562,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /*  r64 */{
+/*  r64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -595,7 +596,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /*  dec */{
+/*  dec */{
                     ERR,
                     ERR,
                     ERR,
@@ -629,7 +630,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     LDC,
                 },
-                /*bool? */{
+/*bool? */{
                     ERR,
                     ERR,
                     ERR,
@@ -663,7 +664,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* chr? */{
+/* chr? */{
                     ERR,
                     ERR,
                     ERR,
@@ -697,7 +698,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i08? */{
+/* i08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -731,7 +732,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i16? */{
+/* i16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -765,7 +766,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i32? */{
+/* i32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -799,7 +800,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i64? */{
+/* i64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -833,7 +834,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u08? */{
+/* u08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -867,7 +868,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u16? */{
+/* u16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -901,7 +902,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u32? */{
+/* u32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -935,7 +936,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u64? */{
+/* u64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -969,7 +970,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nint? */{
+/*nint? */{
                     ERR,
                     ERR,
                     ERR,
@@ -1003,7 +1004,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint?*/{
+/*nuint?*/{
                     ERR,
                     ERR,
                     ERR,
@@ -1037,7 +1038,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* r32? */{
+/* r32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -1071,7 +1072,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /* r64? */{
+/* r64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -1105,7 +1106,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /* dec? */{
+/* dec? */{
                     ERR,
                     ERR,
                     ERR,
@@ -1144,8 +1145,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Overload resolution for Y + X
             private static readonly BinaryOperatorKind[,] s_addition =
             {
-                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
-                /*  obj */{
+                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec
+                // bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
+/*  obj */{
                     ERR,
                     OSC,
                     ERR,
@@ -1179,7 +1181,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  str */{
+/*  str */{
                     SOC,
                     STR,
                     SOC,
@@ -1213,7 +1215,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     SOC,
                     SOC,
                 },
-                /* bool */{
+/* bool */{
                     ERR,
                     OSC,
                     ERR,
@@ -1247,177 +1249,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  chr */{
-                    ERR,
-                    OSC,
-                    ERR,
-                    INT,
-                    INT,
-                    INT,
-                    INT,
-                    LNG,
-                    INT,
-                    INT,
-                    UIN,
-                    ULG,
-                    NIN,
-                    NUI,
-                    FLT,
-                    DBL,
-                    DEC,
-                    ERR,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LLG,
-                    LIN,
-                    LIN,
-                    LUN,
-                    LUL,
-                    LNI,
-                    LNU,
-                    LFL,
-                    LDB,
-                    LDC,
-                },
-                /*  i08 */{
-                    ERR,
-                    OSC,
-                    ERR,
-                    INT,
-                    INT,
-                    INT,
-                    INT,
-                    LNG,
-                    INT,
-                    INT,
-                    LNG,
-                    ERR,
-                    NIN,
-                    ERR,
-                    FLT,
-                    DBL,
-                    DEC,
-                    ERR,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LLG,
-                    LIN,
-                    LIN,
-                    LLG,
-                    ERR,
-                    LNI,
-                    ERR,
-                    LFL,
-                    LDB,
-                    LDC,
-                },
-                /*  i16 */{
-                    ERR,
-                    OSC,
-                    ERR,
-                    INT,
-                    INT,
-                    INT,
-                    INT,
-                    LNG,
-                    INT,
-                    INT,
-                    LNG,
-                    ERR,
-                    NIN,
-                    ERR,
-                    FLT,
-                    DBL,
-                    DEC,
-                    ERR,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LLG,
-                    LIN,
-                    LIN,
-                    LLG,
-                    ERR,
-                    LNI,
-                    ERR,
-                    LFL,
-                    LDB,
-                    LDC,
-                },
-                /*  i32 */{
-                    ERR,
-                    OSC,
-                    ERR,
-                    INT,
-                    INT,
-                    INT,
-                    INT,
-                    LNG,
-                    INT,
-                    INT,
-                    LNG,
-                    ERR,
-                    NIN,
-                    ERR,
-                    FLT,
-                    DBL,
-                    DEC,
-                    ERR,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LIN,
-                    LLG,
-                    LIN,
-                    LIN,
-                    LLG,
-                    ERR,
-                    LNI,
-                    ERR,
-                    LFL,
-                    LDB,
-                    LDC,
-                },
-                /*  i64 */{
-                    ERR,
-                    OSC,
-                    ERR,
-                    LNG,
-                    LNG,
-                    LNG,
-                    LNG,
-                    LNG,
-                    LNG,
-                    LNG,
-                    LNG,
-                    ERR,
-                    LNG,
-                    ERR,
-                    FLT,
-                    DBL,
-                    DEC,
-                    ERR,
-                    LLG,
-                    LLG,
-                    LLG,
-                    LLG,
-                    LLG,
-                    LLG,
-                    LLG,
-                    LLG,
-                    ERR,
-                    LLG,
-                    ERR,
-                    LFL,
-                    LDB,
-                    LDC,
-                },
-                /*  u08 */{
+/*  chr */{
                     ERR,
                     OSC,
                     ERR,
@@ -1451,7 +1283,143 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u16 */{
+/*  i08 */{
+                    ERR,
+                    OSC,
+                    ERR,
+                    INT,
+                    INT,
+                    INT,
+                    INT,
+                    LNG,
+                    INT,
+                    INT,
+                    LNG,
+                    ERR,
+                    NIN,
+                    ERR,
+                    FLT,
+                    DBL,
+                    DEC,
+                    ERR,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LLG,
+                    LIN,
+                    LIN,
+                    LLG,
+                    ERR,
+                    LNI,
+                    ERR,
+                    LFL,
+                    LDB,
+                    LDC,
+                },
+/*  i16 */{
+                    ERR,
+                    OSC,
+                    ERR,
+                    INT,
+                    INT,
+                    INT,
+                    INT,
+                    LNG,
+                    INT,
+                    INT,
+                    LNG,
+                    ERR,
+                    NIN,
+                    ERR,
+                    FLT,
+                    DBL,
+                    DEC,
+                    ERR,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LLG,
+                    LIN,
+                    LIN,
+                    LLG,
+                    ERR,
+                    LNI,
+                    ERR,
+                    LFL,
+                    LDB,
+                    LDC,
+                },
+/*  i32 */{
+                    ERR,
+                    OSC,
+                    ERR,
+                    INT,
+                    INT,
+                    INT,
+                    INT,
+                    LNG,
+                    INT,
+                    INT,
+                    LNG,
+                    ERR,
+                    NIN,
+                    ERR,
+                    FLT,
+                    DBL,
+                    DEC,
+                    ERR,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LLG,
+                    LIN,
+                    LIN,
+                    LLG,
+                    ERR,
+                    LNI,
+                    ERR,
+                    LFL,
+                    LDB,
+                    LDC,
+                },
+/*  i64 */{
+                    ERR,
+                    OSC,
+                    ERR,
+                    LNG,
+                    LNG,
+                    LNG,
+                    LNG,
+                    LNG,
+                    LNG,
+                    LNG,
+                    LNG,
+                    ERR,
+                    LNG,
+                    ERR,
+                    FLT,
+                    DBL,
+                    DEC,
+                    ERR,
+                    LLG,
+                    LLG,
+                    LLG,
+                    LLG,
+                    LLG,
+                    LLG,
+                    LLG,
+                    LLG,
+                    ERR,
+                    LLG,
+                    ERR,
+                    LFL,
+                    LDB,
+                    LDC,
+                },
+/*  u08 */{
                     ERR,
                     OSC,
                     ERR,
@@ -1485,7 +1453,41 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u32 */{
+/*  u16 */{
+                    ERR,
+                    OSC,
+                    ERR,
+                    INT,
+                    INT,
+                    INT,
+                    INT,
+                    LNG,
+                    INT,
+                    INT,
+                    UIN,
+                    ULG,
+                    NIN,
+                    NUI,
+                    FLT,
+                    DBL,
+                    DEC,
+                    ERR,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LIN,
+                    LLG,
+                    LIN,
+                    LIN,
+                    LUN,
+                    LUL,
+                    LNI,
+                    LNU,
+                    LFL,
+                    LDB,
+                    LDC,
+                },
+/*  u32 */{
                     ERR,
                     OSC,
                     ERR,
@@ -1519,7 +1521,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u64 */{
+/*  u64 */{
                     ERR,
                     OSC,
                     ERR,
@@ -1553,7 +1555,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* nint */{
+/* nint */{
                     ERR,
                     OSC,
                     ERR,
@@ -1587,7 +1589,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint */{
+/*nuint */{
                     ERR,
                     OSC,
                     ERR,
@@ -1621,7 +1623,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  r32 */{
+/*  r32 */{
                     ERR,
                     OSC,
                     ERR,
@@ -1655,7 +1657,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /*  r64 */{
+/*  r64 */{
                     ERR,
                     OSC,
                     ERR,
@@ -1689,7 +1691,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /*  dec */{
+/*  dec */{
                     ERR,
                     OSC,
                     ERR,
@@ -1723,7 +1725,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     LDC,
                 },
-                /*bool? */{
+/*bool? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1757,7 +1759,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* chr? */{
+/* chr? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1791,7 +1793,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i08? */{
+/* i08? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1825,7 +1827,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i16? */{
+/* i16? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1859,7 +1861,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i32? */{
+/* i32? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1893,7 +1895,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i64? */{
+/* i64? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1927,7 +1929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u08? */{
+/* u08? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1961,7 +1963,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u16? */{
+/* u16? */{
                     ERR,
                     OSC,
                     ERR,
@@ -1995,7 +1997,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u32? */{
+/* u32? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2029,7 +2031,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u64? */{
+/* u64? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2063,7 +2065,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nint? */{
+/*nint? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2097,7 +2099,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint?*/{
+/*nuint?*/{
                     ERR,
                     OSC,
                     ERR,
@@ -2131,7 +2133,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* r32? */{
+/* r32? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2165,7 +2167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /* r64? */{
+/* r64? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2199,7 +2201,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     ERR,
                 },
-                /* dec? */{
+/* dec? */{
                     ERR,
                     OSC,
                     ERR,
@@ -2238,8 +2240,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Overload resolution for Y << >> >>> X
             private static readonly BinaryOperatorKind[,] s_shift =
             {
-                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
-                /*  obj */{
+                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec
+                // bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
+/*  obj */{
                     ERR,
                     ERR,
                     ERR,
@@ -2273,7 +2276,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  str */{
+/*  str */{
                     ERR,
                     ERR,
                     ERR,
@@ -2307,7 +2310,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* bool */{
+/* bool */{
                     ERR,
                     ERR,
                     ERR,
@@ -2341,7 +2344,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  chr */{
+/*  chr */{
                     ERR,
                     ERR,
                     ERR,
@@ -2375,7 +2378,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i08 */{
+/*  i08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2409,7 +2412,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i16 */{
+/*  i16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2443,7 +2446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i32 */{
+/*  i32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2477,7 +2480,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i64 */{
+/*  i64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2511,7 +2514,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u08 */{
+/*  u08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2545,7 +2548,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u16 */{
+/*  u16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2579,7 +2582,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u32 */{
+/*  u32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2613,7 +2616,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u64 */{
+/*  u64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2647,7 +2650,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* nint */{
+/* nint */{
                     ERR,
                     ERR,
                     ERR,
@@ -2681,7 +2684,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nuint */{
+/*nuint */{
                     ERR,
                     ERR,
                     ERR,
@@ -2715,7 +2718,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  r32 */{
+/*  r32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2749,7 +2752,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  r64 */{
+/*  r64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -2783,7 +2786,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  dec */{
+/*  dec */{
                     ERR,
                     ERR,
                     ERR,
@@ -2817,7 +2820,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*bool? */{
+/*bool? */{
                     ERR,
                     ERR,
                     ERR,
@@ -2851,7 +2854,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* chr? */{
+/* chr? */{
                     ERR,
                     ERR,
                     ERR,
@@ -2885,7 +2888,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i08? */{
+/* i08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -2919,7 +2922,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i16? */{
+/* i16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -2953,7 +2956,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i32? */{
+/* i32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -2987,7 +2990,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i64? */{
+/* i64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3021,7 +3024,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u08? */{
+/* u08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3055,7 +3058,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u16? */{
+/* u16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3089,7 +3092,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u32? */{
+/* u32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3123,7 +3126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u64? */{
+/* u64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3157,7 +3160,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nint? */{
+/*nint? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3191,7 +3194,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nuint?*/{
+/*nuint?*/{
                     ERR,
                     ERR,
                     ERR,
@@ -3225,7 +3228,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* r32? */{
+/* r32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3259,7 +3262,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* r64? */{
+/* r64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3293,7 +3296,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* dec? */{
+/* dec? */{
                     ERR,
                     ERR,
                     ERR,
@@ -3330,14 +3333,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             };
 
             // Overload resolution for Y == != X
-            // Note that these are the overload resolution rules; overload resolution might pick an invalid operator.
-            // For example, overload resolution on object == decimal chooses the object/object overload, which then
-            // is not legal because decimal must be a reference type. But we don't know to give that error *until*
+            // Note that these are the overload resolution rules; overload resolution might pick an invalid
+            // operator.
+            // For example, overload resolution on object == decimal chooses the object/object overload, which
+            // then
+            // is not legal because decimal must be a reference type. But we don't know to give that error
+            // *until*
             // overload resolution has chosen the reference equality operator.
             private static readonly BinaryOperatorKind[,] s_equality =
             {
-                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
-                /*  obj */{
+                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec
+                // bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
+/*  obj */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3371,7 +3378,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OBJ,
                     OBJ,
                 },
-                /*  str */{
+/*  str */{
                     OBJ,
                     STR,
                     OBJ,
@@ -3405,7 +3412,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OBJ,
                     OBJ,
                 },
-                /* bool */{
+/* bool */{
                     OBJ,
                     OBJ,
                     BOL,
@@ -3439,7 +3446,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OBJ,
                     OBJ,
                 },
-                /*  chr */{
+/*  chr */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3473,7 +3480,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i08 */{
+/*  i08 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3507,7 +3514,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i16 */{
+/*  i16 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3541,7 +3548,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i32 */{
+/*  i32 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3575,7 +3582,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  i64 */{
+/*  i64 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3609,7 +3616,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u08 */{
+/*  u08 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3643,7 +3650,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u16 */{
+/*  u16 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3677,7 +3684,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u32 */{
+/*  u32 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3711,7 +3718,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  u64 */{
+/*  u64 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3745,7 +3752,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* nint */{
+/* nint */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3779,7 +3786,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint */{
+/*nuint */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3813,7 +3820,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*  r32 */{
+/*  r32 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3847,7 +3854,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     OBJ,
                 },
-                /*  r64 */{
+/*  r64 */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3881,7 +3888,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     OBJ,
                 },
-                /*  dec */{
+/*  dec */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3915,7 +3922,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OBJ,
                     LDC,
                 },
-                /*bool? */{
+/*bool? */{
                     OBJ,
                     OBJ,
                     LBL,
@@ -3949,7 +3956,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OBJ,
                     OBJ,
                 },
-                /* chr? */{
+/* chr? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -3983,7 +3990,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i08? */{
+/* i08? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4017,7 +4024,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i16? */{
+/* i16? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4051,7 +4058,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i32? */{
+/* i32? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4085,7 +4092,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* i64? */{
+/* i64? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4119,7 +4126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u08? */{
+/* u08? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4153,7 +4160,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u16? */{
+/* u16? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4187,7 +4194,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u32? */{
+/* u32? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4221,7 +4228,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* u64? */{
+/* u64? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4255,7 +4262,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nint? */{
+/*nint? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4289,7 +4296,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /*nuint?*/{
+/*nuint?*/{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4323,7 +4330,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     LDC,
                 },
-                /* r32? */{
+/* r32? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4357,7 +4364,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     OBJ,
                 },
-                /* r64? */{
+/* r64? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4391,7 +4398,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LDB,
                     OBJ,
                 },
-                /* dec? */{
+/* dec? */{
                     OBJ,
                     OBJ,
                     OBJ,
@@ -4430,8 +4437,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Overload resolution for Y | & ^ || && X
             private static readonly BinaryOperatorKind[,] s_logical =
             {
-                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
-                /*  obj */{
+                //          obj  str  bool chr  i08  i16  i32  i64  u08  u16  u32  u64 nint nuint r32  r64  dec
+                // bool? chr? i08? i16? i32? i64? u08? u16? u32? u64?nint?nuint?r32? r64? dec?
+/*  obj */{
                     ERR,
                     ERR,
                     ERR,
@@ -4465,7 +4473,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  str */{
+/*  str */{
                     ERR,
                     ERR,
                     ERR,
@@ -4499,7 +4507,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* bool */{
+/* bool */{
                     ERR,
                     ERR,
                     BOL,
@@ -4533,7 +4541,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  chr */{
+/*  chr */{
                     ERR,
                     ERR,
                     ERR,
@@ -4567,7 +4575,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i08 */{
+/*  i08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4601,7 +4609,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i16 */{
+/*  i16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4635,7 +4643,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i32 */{
+/*  i32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4669,7 +4677,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  i64 */{
+/*  i64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4703,7 +4711,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u08 */{
+/*  u08 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4737,7 +4745,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u16 */{
+/*  u16 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4771,7 +4779,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u32 */{
+/*  u32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4805,7 +4813,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  u64 */{
+/*  u64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4839,7 +4847,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* nint */{
+/* nint */{
                     ERR,
                     ERR,
                     ERR,
@@ -4873,7 +4881,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nuint */{
+/*nuint */{
                     ERR,
                     ERR,
                     ERR,
@@ -4907,7 +4915,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  r32 */{
+/*  r32 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4941,7 +4949,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  r64 */{
+/*  r64 */{
                     ERR,
                     ERR,
                     ERR,
@@ -4975,7 +4983,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*  dec */{
+/*  dec */{
                     ERR,
                     ERR,
                     ERR,
@@ -5009,7 +5017,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*bool? */{
+/*bool? */{
                     ERR,
                     ERR,
                     LBL,
@@ -5043,7 +5051,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* chr? */{
+/* chr? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5077,7 +5085,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i08? */{
+/* i08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5111,7 +5119,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i16? */{
+/* i16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5145,7 +5153,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i32? */{
+/* i32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5179,7 +5187,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* i64? */{
+/* i64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5213,7 +5221,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u08? */{
+/* u08? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5247,7 +5255,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u16? */{
+/* u16? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5281,7 +5289,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u32? */{
+/* u32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5315,7 +5323,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* u64? */{
+/* u64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5349,7 +5357,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nint? */{
+/*nint? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5383,7 +5391,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /*nuint?*/{
+/*nuint?*/{
                     ERR,
                     ERR,
                     ERR,
@@ -5417,7 +5425,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* r32? */{
+/* r32? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5451,7 +5459,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* r64? */{
+/* r64? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5485,7 +5493,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ERR,
                     ERR,
                 },
-                /* dec? */{
+/* dec? */{
                     ERR,
                     ERR,
                     ERR,
@@ -5523,23 +5531,23 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             private static readonly BinaryOperatorKind[][,] s_opkind =
             {
-                /* *   */s_arithmetic,
-                /* +   */s_addition,
-                /* -   */s_arithmetic,
-                /* /   */s_arithmetic,
-                /* %   */s_arithmetic,
-                /* >>  */s_shift,
-                /* <<  */s_shift,
-                /* ==  */s_equality,
-                /* !=  */s_equality,
-                /* >   */s_arithmetic,
-                /* <   */s_arithmetic,
-                /* >=  */s_arithmetic,
-                /* <=  */s_arithmetic,
-                /* &   */s_logical,
-                /* |   */s_logical,
-                /* ^   */s_logical,
-                /* >>> */s_shift,
+/* *   */s_arithmetic,
+/* +   */s_addition,
+/* -   */s_arithmetic,
+/* /   */s_arithmetic,
+/* %   */s_arithmetic,
+/* >>  */s_shift,
+/* <<  */s_shift,
+/* ==  */s_equality,
+/* !=  */s_equality,
+/* >   */s_arithmetic,
+/* <   */s_arithmetic,
+/* >=  */s_arithmetic,
+/* <=  */s_arithmetic,
+/* &   */s_logical,
+/* |   */s_logical,
+/* ^   */s_logical,
+/* >>> */s_shift,
             };
 
             public static BinaryOperatorKind OpKind(

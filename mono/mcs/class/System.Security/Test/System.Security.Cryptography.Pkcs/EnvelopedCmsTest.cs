@@ -2745,13 +2745,13 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
         }
 
         /*		[Test]
-                [ExpectedException (typeof (ArgumentNullException))]
-                public void DecryptX509CertificateExCollectionNull ()
-                {
-                    EnvelopedPkcs7 ep = new EnvelopedPkcs7 ();
-                    RecipientInfo ri =
-                    ep.Decrypt (ri, null);
-                }*/
+        [ExpectedException (typeof (ArgumentNullException))]
+        public void DecryptX509CertificateExCollectionNull ()
+        {
+        EnvelopedPkcs7 ep = new EnvelopedPkcs7 ();
+        RecipientInfo ri =
+        ep.Decrypt (ri, null);
+        }*/
 
         private void RoundTrip(byte[] encoded)
         {

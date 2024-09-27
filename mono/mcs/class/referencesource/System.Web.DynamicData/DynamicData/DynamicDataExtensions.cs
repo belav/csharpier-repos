@@ -426,10 +426,12 @@ namespace System.Web.DynamicData
 
         /// <summary>
         /// Apply potential HTML encoding and formatting to a string that needs to be displayed
-        /// This logic is mostly copied from BoundField.FormatDataValue, but omits the old Whidbey behavior path
+        /// This logic is mostly copied from BoundField.FormatDataValue, but omits the old Whidbey behavior
+        // path
         /// </summary>
         /// <param name="fieldValue">The value that should be formatted</param>
-        /// <param name="formattingOptions">The IFieldFormattingOptions to use. This is useful when using options different from the column's</param>
+        /// <param name="formattingOptions">The IFieldFormattingOptions to use. This is useful when using
+        // options different from the column's</param>
         /// <returns>the formatted value</returns>
         public static string FormatValue(
             this IFieldFormattingOptions formattingOptions,
@@ -444,7 +446,8 @@ namespace System.Web.DynamicData
                 string formatting = formattingOptions.DataFormatString;
                 int dataValueStringLength = dataValueString.Length;
 
-                // If the result is still empty and ConvertEmptyStringToNull=true, replace the value with the NullDisplayText
+                // If the result is still empty and ConvertEmptyStringToNull=true, replace the value with the
+                // NullDisplayText
                 if (dataValueStringLength == 0 && formattingOptions.ConvertEmptyStringToNull)
                 {
                     dataValueString = formattingOptions.NullDisplayText;
@@ -535,8 +538,10 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// If this column represents an enumeration type, this method returns that type. The caloumn can represent
-        /// an enumeration type if the underlying type is an enum, or if it is decoareted with EnumDataTypeAttribute.
+        /// If this column represents an enumeration type, this method returns that type. The caloumn can
+        // represent
+        /// an enumeration type if the underlying type is an enum, or if it is decoareted with
+        // EnumDataTypeAttribute.
         /// If this column does not represent an enum, this method returns null.
         /// </summary>
         /// <param name="column"></param>

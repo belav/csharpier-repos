@@ -16,7 +16,8 @@ namespace Internal.TypeSystem
         /// </summary>
         /// <param name="instantiation">Instantiation to canonicalize.</param>
         /// <param name="kind">The type of canonicalization to apply.</param>
-        /// <param name="changed">True if the returned instantiation is different from '<paramref name="instantiation"/>'.</param>
+        /// <param name="changed">True if the returned instantiation is different from '<paramref
+        // name="instantiation"/>'.</param>
         public static Instantiation ConvertInstantiationToCanonForm(
             Instantiation instantiation,
             CanonicalFormKind kind,
@@ -28,7 +29,8 @@ namespace Internal.TypeSystem
             CanonicalFormKind currentKind = kind;
             CanonicalFormKind startLoopKind;
 
-            // This logic is wrapped in a loop because we might potentially need to restart canonicalization if the policy
+            // This logic is wrapped in a loop because we might potentially need to restart canonicalization if
+            // the policy
             // changes due to one of the instantiation arguments already being universally canonical.
             do
             {

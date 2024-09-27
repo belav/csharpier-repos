@@ -63,7 +63,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     _nameTable
                 );
 
-                // in certain scenario, KCC returns some failure records that we need to process it first before returning
+                // in certain scenario, KCC returns some failure records that we need to process it first before
+                // returning
                 if (managedFailure.LastErrorCode == 0)
                 {
                     // we change the error code to some generic one

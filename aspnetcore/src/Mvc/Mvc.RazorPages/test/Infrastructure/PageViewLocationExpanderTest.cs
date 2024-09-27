@@ -42,7 +42,8 @@ public class PageViewLocationExpanderTest
     [Fact]
     public void ExpandLocations_NoOp_ForNonPageWithPageName()
     {
-        // Verifies the fix for https://github.com/aspnet/Mvc/issues/6660. This ensures that when PageViewLocationExpander is called
+        // Verifies the fix for https://github.com/aspnet/Mvc/issues/6660. This ensures that when
+        // PageViewLocationExpander is called
         // from a non-Razor Page with a route value for "
         // Arrange
         var context = CreateContext(pageName: "test");

@@ -193,8 +193,10 @@ namespace System.IO.Pipes
                     pipeSecurity.SetOwner(identifier);
                 }
 
-                // PipeOptions.CurrentUserOnly is special since it doesn't match directly to a corresponding Win32 valid flag.
-                // Remove it, while keeping others untouched since historically this has been used as a way to pass flags to CreateNamedPipe
+                // PipeOptions.CurrentUserOnly is special since it doesn't match directly to a corresponding Win32
+                // valid flag.
+                // Remove it, while keeping others untouched since historically this has been used as a way to pass
+                // flags to CreateNamedPipe
                 // that were not defined in the enumeration.
                 options &= ~PipeOptions.CurrentUserOnly;
             }
@@ -255,10 +257,12 @@ namespace System.IO.Pipes
             }
         }
 
-        // This will wait until the client calls Connect().  If we return from this method, we guarantee that
+        // This will wait until the client calls Connect().  If we return from this method, we guarantee
+        // that
         // the client has returned from its Connect call.   The client may have done so before this method
         // was called (but not before this server is been created, or, if we were servicing another client,
-        // not before we called Disconnect), in which case, there may be some buffer already in the pipe waiting
+        // not before we called Disconnect), in which case, there may be some buffer already in the pipe
+        // waiting
         // for us to read.  See NamedPipeClientStream.Connect for more information.
         public void WaitForConnection()
         {

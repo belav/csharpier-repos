@@ -96,8 +96,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         /// </summary>
         private sealed class LatestDiagnosticsForSpanGetter
         {
-            // PERF: Cache the last Project and corresponding CompilationWithAnalyzers used to compute analyzer diagnostics for span.
-            //       This is now required as async lightbulb will query and execute different priority buckets of analyzers with multiple
+            // PERF: Cache the last Project and corresponding CompilationWithAnalyzers used to compute analyzer
+            // diagnostics for span.
+            //       This is now required as async lightbulb will query and execute different priority buckets
+            // of analyzers with multiple
             //       calls, and we want to reuse CompilationWithAnalyzers instance if possible.
             private static readonly WeakReference<ProjectAndCompilationWithAnalyzers?> _lastProjectAndCompilationWithAnalyzers =
                 new(null);
@@ -160,7 +162,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     document.Project
                 );
 
-                // Note that some callers, such as diagnostic tagger, might pass in a range equal to the entire document span.
+                // Note that some callers, such as diagnostic tagger, might pass in a range equal to the entire
+                // document span.
                 // We clear out range for such cases as we are computing full document diagnostics.
                 if (range == new TextSpan(0, text.Length))
                     range = null;
@@ -317,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 {
                     var containsFullResult = true;
 
-                    // Try to get cached diagnostics, and also compute non-cached state sets that need diagnostic computation.
+                    // Try to get cached diagnostics, and also compute non-cached state sets that need diagnostic
+                    // computation.
                     using var _1 = ArrayBuilder<AnalyzerWithState>.GetInstance(
                         out var syntaxAnalyzers
                     );
@@ -560,7 +564,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             }
 
             /// <summary>
-            /// Returns <see langword="true"/> if we were able to add the cached diagnostics and we do not need to compute them fresh.
+            /// Returns <see langword="true"/> if we were able to add the cached diagnostics and we do not need
+            // to compute them fresh.
             /// </summary>
             private async Task<bool> TryAddCachedDocumentDiagnosticsAsync(
                 DiagnosticAnalyzer analyzer,
@@ -615,7 +620,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 {
                     Debug.Assert(_priorityProvider.MatchesPriority(analyzerWithState.Analyzer));
 
-                    // Check if this is an expensive analyzer that needs to be de-prioritized to a lower priority bucket.
+                    // Check if this is an expensive analyzer that needs to be de-prioritized to a lower priority
+                    // bucket.
                     // If so, we skip this analyzer from execution in the current priority bucket.
                     // We will subsequently execute this analyzer in the lower priority bucket.
                     if (
@@ -701,12 +707,15 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     DocumentAnalysisData existingData
                 )
                 {
-                    // PERF: In order to improve lightbulb performance, we perform de-prioritization optimization for certain analyzers
-                    // that moves the analyzer to a lower priority bucket. However, to ensure that de-prioritization happens for very rare cases,
+                    // PERF: In order to improve lightbulb performance, we perform de-prioritization optimization for
+                    // certain analyzers
+                    // that moves the analyzer to a lower priority bucket. However, to ensure that de-prioritization
+                    // happens for very rare cases,
                     // we only perform this optimizations when following conditions are met:
                     //  1. We are performing semantic span-based analysis.
                     //  2. We are processing 'CodeActionRequestPriority.Normal' priority request.
-                    //  3. Analyzer registers certain actions that are known to lead to high performance impact due to its broad analysis scope,
+                    //  3. Analyzer registers certain actions that are known to lead to high performance impact due to
+                    // its broad analysis scope,
                     //     such as SymbolStart/End actions and SemanticModel actions.
                     //  4. Analyzer did not report a diagnostic on the same line in prior document snapshot.
 
@@ -723,7 +732,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     Debug.Assert(span.Value.Length < _text.Length);
 
                     // Condition 3.
-                    // Check if this is a candidate analyzer that can be de-prioritized into a lower priority bucket based on registered actions.
+                    // Check if this is a candidate analyzer that can be de-prioritized into a lower priority bucket
+                    // based on registered actions.
                     if (
                         !await IsCandidateForDeprioritizationBasedOnRegisteredActionsAsync(analyzer)
                             .ConfigureAwait(false)
@@ -733,13 +743,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     }
 
                     // Condition 4.
-                    // We do not want to de-prioritize this analyzer if it reported a diagnostic on a prior document snapshot,
+                    // We do not want to de-prioritize this analyzer if it reported a diagnostic on a prior document
+                    // snapshot,
                     // such that diagnostic's start/end lines intersect the current analysis span's start/end lines.
-                    // If an analyzer reported such a diagnostic, it is highly likely that the user intends to invoke the code fix
-                    // for this diagnostic. Additionally, it is also highly likely that this analyzer will report a diagnostic
-                    // on the current snapshot. So, we deem this as an important analyzer that should not be de-prioritized here.
-                    // Note that we only perform this analysis if the prior document, whose existingData is cached, had same number
-                    // of source lines as the current document snapshot. Otherwise, the start/end lines comparison across
+                    // If an analyzer reported such a diagnostic, it is highly likely that the user intends to invoke
+                    // the code fix
+                    // for this diagnostic. Additionally, it is also highly likely that this analyzer will report a
+                    // diagnostic
+                    // on the current snapshot. So, we deem this as an important analyzer that should not be
+                    // de-prioritized here.
+                    // Note that we only perform this analysis if the prior document, whose existingData is cached, had
+                    // same number
+                    // of source lines as the current document snapshot. Otherwise, the start/end lines comparison
+                    // across
                     // snapshots is not meaningful.
                     if (existingData.LineCount == _text.Lines.Count && !existingData.Items.IsEmpty)
                     {
@@ -765,10 +781,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         }
                     }
 
-                    // 'LightbulbSkipExecutingDeprioritizedAnalyzers' option determines if we want to execute this analyzer
+                    // 'LightbulbSkipExecutingDeprioritizedAnalyzers' option determines if we want to execute this
+                    // analyzer
                     // in low priority bucket or skip it completely. If the option is not set, track the de-prioritized
                     // analyzer to be executed in low priority bucket.
-                    // Note that 'AddDeprioritizedAnalyzerWithLowPriority' call below mutates the state in the provider to
+                    // Note that 'AddDeprioritizedAnalyzerWithLowPriority' call below mutates the state in the provider
+                    // to
                     // track this analyzer. This ensures that when the owner of this provider calls us back to execute
                     // the low priority bucket, we can still get back to this analyzer and execute it that time.
                     if (
@@ -784,16 +802,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 // Returns true if this is an analyzer that is a candidate to be de-prioritized to
                 // 'CodeActionRequestPriority.Low' priority for improvement in analyzer
                 // execution performance for priority buckets above 'Low' priority.
-                // Based on performance measurements, currently only analyzers which register SymbolStart/End actions
+                // Based on performance measurements, currently only analyzers which register SymbolStart/End
+                // actions
                 // or SemanticModel actions are considered candidates to be de-prioritized. However, these semantics
                 // could be changed in future based on performance measurements.
                 async Task<bool> IsCandidateForDeprioritizationBasedOnRegisteredActionsAsync(
                     DiagnosticAnalyzer analyzer
                 )
                 {
-                    // We deprioritize SymbolStart/End and SemanticModel analyzers from 'Normal' to 'Low' priority bucket,
+                    // We deprioritize SymbolStart/End and SemanticModel analyzers from 'Normal' to 'Low' priority
+                    // bucket,
                     // as these are computationally more expensive.
-                    // Note that we never de-prioritize compiler analyzer, even though it registers a SemanticModel action.
+                    // Note that we never de-prioritize compiler analyzer, even though it registers a SemanticModel
+                    // action.
                     if (
                         _compilationWithAnalyzers == null
                         || analyzer.IsWorkspaceDiagnosticAnalyzer()

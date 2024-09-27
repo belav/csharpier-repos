@@ -827,8 +827,10 @@ namespace System.Xml.Serialization
                     | TypeFlags.XmlEncodingNotRequired
                     | TypeFlags.HasDefaultConstructor
             );
-            // NOTE, Microsoft: byte[] can also be used to mean array of bytes. That datatype is not a primitive, so we
-            // can't use the AmbiguousDataType mechanism. To get an array of bytes in literal XML, apply [XmlArray] or
+            // NOTE, Microsoft: byte[] can also be used to mean array of bytes. That datatype is not a
+            // primitive, so we
+            // can't use the AmbiguousDataType mechanism. To get an array of bytes in literal XML, apply
+            // [XmlArray] or
             // [XmlArrayItem].
 
             XmlSchemaPatternFacet guidPattern = new XmlSchemaPatternFacet();
@@ -1642,7 +1644,8 @@ namespace System.Xml.Serialization
                     arrayElementType = GetEnumeratorElementType(type, ref flags);
                     kind = TypeKind.Enumerable;
 
-                    // GetEnumeratorElementType checks for the security attributes on the GetEnumerator(), Add() methods and Current property,
+                    // GetEnumeratorElementType checks for the security attributes on the GetEnumerator(), Add() methods
+                    // and Current property,
                     // we need to check the MoveNext() and ctor methods for the security attribues
                     flags |= GetConstructorFlags(type, ref exception);
                 }
@@ -1713,13 +1716,14 @@ namespace System.Xml.Serialization
         }
 
         //
-        /*
-        static string GetHash(string str) {
-            MD5 md5 = MD5.Create();
-            string hash = Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(str)), 0, 6).Replace("+", "_P").Replace("/", "_S");
-            return hash;
-        }
-        */
+/*
+static string GetHash(string str) {
+MD5 md5 = MD5.Create();
+string hash = Convert.ToBase64String(md5.ComputeHash(Encoding.UTF8.GetBytes(str)), 0,
+6).Replace("+", "_P").Replace("/", "_S");
+return hash;
+}
+*/
 
         //
         internal static string TypeName(Type t)
@@ -1747,12 +1751,12 @@ namespace System.Xml.Serialization
                     ns.Append(arguments[i].Namespace);
                 }
                 //
-                /*
-                if (ns.Length > 0) {
-                    typeName.Append("_");
-                    typeName.Append(GetHash(ns.ToString()));
-                }
-                */
+/*
+if (ns.Length > 0) {
+typeName.Append("_");
+typeName.Append(GetHash(ns.ToString()));
+}
+*/
                 return typeName.ToString();
             }
             return t.Name;
@@ -1891,13 +1895,17 @@ namespace System.Xml.Serialization
                     ].CheckSpecifiedMemberInfo;
             }
 
-            // The scenario here is that user has one base class A and one derived class B and wants to serialize/deserialize an object of B.
-            // There's one virtual property defined in A and overrided by B. Without the replacing logic below, the code generated will always
+            // The scenario here is that user has one base class A and one derived class B and wants to
+            // serialize/deserialize an object of B.
+            // There's one virtual property defined in A and overrided by B. Without the replacing logic below,
+            // the code generated will always
             // try to access the property defined in A, rather than B.
             // The logic here is to:
-            // 1) Check current members inside memberInfos dictionary and figure out whether there's any override or new properties defined in the derived class.
+            // 1) Check current members inside memberInfos dictionary and figure out whether there's any
+            // override or new properties defined in the derived class.
             //    If so, replace the one on the base class with the one on the derived class.
-            // 2) Do the same thing for the memberMapping array. Note that we need to create a new copy of MemberMapping object since the old one could still be referenced
+            // 2) Do the same thing for the memberMapping array. Note that we need to create a new copy of
+            // MemberMapping object since the old one could still be referenced
             //    by the StructMapping of the baseclass, so updating it directly could lead to other issues.
             Dictionary<string, MemberInfo> replaceList = null;
             MemberInfo replacedInfo = null;
@@ -1953,7 +1961,8 @@ namespace System.Xml.Serialization
                     {
                         if (info.Name == memberInfoToBeReplaced.Name)
                         {
-                            // we have a new modifier situation: property names are the same but the declaring types are different
+                            // we have a new modifier situation: property names are the same but the declaring types are
+                            // different
                             replacedInfo = info;
                             if (replacedInfo != memberInfoToBeReplaced)
                             {

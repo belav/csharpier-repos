@@ -14,12 +14,17 @@ namespace System.ServiceModel.Channels
     using System.Text;
 
     /// <summary>
-    /// The HttpHeadersWebHeaderCollection is an implementation of the <see cref="WebHeaderCollection"/> class
-    /// that uses the HttpHeader collections on an <see cref="HttpRequestMessage"/> or an <see cref="HttpResponseMessage"/>
-    /// instance to hold the header data instead of the traditional <see cref="NameValueCollection"/> of the
+    /// The HttpHeadersWebHeaderCollection is an implementation of the <see cref="WebHeaderCollection"/>
+    // class
+    /// that uses the HttpHeader collections on an <see cref="HttpRequestMessage"/> or an <see
+    // cref="HttpResponseMessage"/>
+    /// instance to hold the header data instead of the traditional <see cref="NameValueCollection"/> of
+    // the
     /// <see cref="WebHeaderCollection"/>.  This is because the <see cref="HttpRequestMessage"/> or
-    /// <see cref="HttpResponseMessage"/> is the true data structure holding the HTTP information of the request/response
-    /// being processed and we want to avoid copying header information between the <see cref="HttpRequestMessage"/> or
+    /// <see cref="HttpResponseMessage"/> is the true data structure holding the HTTP information of the
+    // request/response
+    /// being processed and we want to avoid copying header information between the <see
+    // cref="HttpRequestMessage"/> or
     /// <see cref="HttpResponseMessage"/> and a <see cref="NameValueCollection"/>.
     /// </summary>
     internal class HttpHeadersWebHeaderCollection : WebHeaderCollection

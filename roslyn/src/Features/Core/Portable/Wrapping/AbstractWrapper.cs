@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Wrapping
 {
     /// <summary>
-    /// Common implementation of all <see cref="ISyntaxWrapper"/>.  This type takes care of a lot of common logic for
+    /// Common implementation of all <see cref="ISyntaxWrapper"/>.  This type takes care of a lot of
+    // common logic for
     /// all of them, including:
     ///
     /// 1. Keeping track of code action invocations, allowing code actions to then be prioritized on

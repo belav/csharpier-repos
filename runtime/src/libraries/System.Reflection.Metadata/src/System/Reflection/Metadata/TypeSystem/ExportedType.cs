@@ -49,7 +49,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// Full name of the namespace where the target type, or nil if the type is nested or defined in a root namespace.
+        /// Full name of the namespace where the target type, or nil if the type is nested or defined in a
+        // root namespace.
         /// </summary>
         public StringHandle Namespace
         {
@@ -57,13 +58,15 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// The definition handle of the namespace where the target type is defined, or nil if the type is nested or defined in a root namespace.
+        /// The definition handle of the namespace where the target type is defined, or nil if the type is
+        // nested or defined in a root namespace.
         /// </summary>
         public NamespaceDefinitionHandle NamespaceDefinition
         {
             get
             {
-                // NOTE: NamespaceDefinitionHandle currently relies on never having virtual values. If this ever gets projected
+                // NOTE: NamespaceDefinitionHandle currently relies on never having virtual values. If this ever
+                // gets projected
                 //       to a virtual namespace name, then that assumption will need to be removed.
                 return reader.ExportedTypeTable.GetTypeNamespace(rowId);
             }
@@ -74,9 +77,12 @@ namespace System.Reflection.Metadata
         /// </summary>
         /// <returns>
         /// <list type="bullet">
-        /// <item><description><see cref="AssemblyFileHandle"/> representing another module in the assembly.</description></item>
-        /// <item><description><see cref="AssemblyReferenceHandle"/> representing another assembly if <see cref="IsForwarder"/> is true.</description></item>
-        /// <item><description><see cref="ExportedTypeHandle"/> representing the declaring exported type in which this was is nested.</description></item>
+        /// <item><description><see cref="AssemblyFileHandle"/> representing another module in the
+        // assembly.</description></item>
+        /// <item><description><see cref="AssemblyReferenceHandle"/> representing another assembly if <see
+        // cref="IsForwarder"/> is true.</description></item>
+        /// <item><description><see cref="ExportedTypeHandle"/> representing the declaring exported type in
+        // which this was is nested.</description></item>
         /// </list>
         /// </returns>
         public EntityHandle Implementation

@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Mono.Debugger.Soft
 {
-    /*
-     * Represents a value of a primitive type in the debuggee
-     */
+/*
+* Represents a value of a primitive type in the debuggee
+*/
     public class PrimitiveValue : Value
     {
         object value;

@@ -4,17 +4,17 @@
 //
 // ==--==
 /*============================================================
- *
- * Class:  IsolatedStorageException
+*
+* Class:  IsolatedStorageException
 //
 // <OWNER>Microsoft</OWNER>
- *
- *
- * Purpose: The exceptions in IsolatedStorage
- *
- * Date:  Feb 15, 2000
- *
- ===========================================================*/
+*
+*
+* Purpose: The exceptions in IsolatedStorage
+*
+* Date:  Feb 15, 2000
+*
+===========================================================*/
 namespace System.IO.IsolatedStorage
 {
     using System;

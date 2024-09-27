@@ -20,7 +20,8 @@ using System.Globalization;
 namespace System.Data.SqlClient.SqlGen
 {
     /// <summary>
-    /// Rewrites an expression tree to make it suitable for translation to SQL appropriate for SQL Server 2000
+    /// Rewrites an expression tree to make it suitable for translation to SQL appropriate for SQL
+    // Server 2000
     /// In particular, it replaces expressions that are not directly supported on SQL Server 2000
     /// with alternative translations. The following expressions are translated:
     /// <list type="bullet">
@@ -37,7 +38,8 @@ namespace System.Data.SqlClient.SqlGen
         #region Entry Point
         /// <summary>
         /// The only entry point.
-        /// Rewrites the given tree by replacing expressions that are not directly supported on SQL Server 2000
+        /// Rewrites the given tree by replacing expressions that are not directly supported on SQL Server
+        // 2000
         /// with alterntive translations.
         /// </summary>
         /// <param name="originalTree">The tree to rewrite</param>
@@ -68,7 +70,9 @@ namespace System.Data.SqlClient.SqlGen
 
         #region DbExpressionVisitor<DbExpression> Members
         /// <summary>
-        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
+        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind
+        // expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string
+        // sortExpressionsBindingVariableName)"/>
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
@@ -82,7 +86,9 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
+        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind
+        // expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string
+        // sortExpressionsBindingVariableName)"/>
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
@@ -108,15 +114,19 @@ namespace System.Data.SqlClient.SqlGen
         ///     ) AS Y
         /// ORDER BY sk1, sk2, ...
         ///
-        /// Here, input refers to the input of the <see cref="DbSkipExpression"/>, and count to the count property of the <see cref="DbSkipExpression"/>.
-        /// The implementation of EXCEPT is non-duplicate eliminating, and does equality comparison only over the
+        /// Here, input refers to the input of the <see cref="DbSkipExpression"/>, and count to the count
+        // property of the <see cref="DbSkipExpression"/>.
+        /// The implementation of EXCEPT is non-duplicate eliminating, and does equality comparison only
+        // over the
         /// equality comparable columns of the input.
         ///
         /// This corresponds to the following expression tree:
         ///
         /// SORT
         ///  |
-        /// NON-DISTINCT EXCEPT  (specially translated, <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
+        /// NON-DISTINCT EXCEPT  (specially translated, <see cref="TransformIntersectOrExcept(DbExpression
+        // left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression>
+        // sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
         ///  |
         ///  | - Left:  clone of input
         ///  | - Right:
@@ -175,8 +185,11 @@ namespace System.Data.SqlClient.SqlGen
         #region DbExpressionVisitor<DbExpression> Member Helpers
 
         /// <summary>
-        /// This method is invoked when tranforming <see cref="DbIntersectExpression"/> and <see cref="DbExceptExpression"/> by doing comparison over all input columns.
-        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
+        /// This method is invoked when tranforming <see cref="DbIntersectExpression"/> and <see
+        // cref="DbExceptExpression"/> by doing comparison over all input columns.
+        /// <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind
+        // expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string
+        // sortExpressionsBindingVariableName)"/>
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -192,7 +205,8 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// This method is used for translating <see cref="DbIntersectExpression"/> and <see cref="DbExceptExpression"/>,
+        /// This method is used for translating <see cref="DbIntersectExpression"/> and <see
+        // cref="DbExceptExpression"/>,
         /// and for translating the "Except" part of <see cref="DbSkipExpression"/>.
         /// into the follwoing expression:
         ///
@@ -215,13 +229,17 @@ namespace System.Data.SqlClient.SqlGen
         ///
         /// Here, A corresponds to right and B to left.
         /// (NOT) is present when transforming Except
-        /// for the purpose of translating <see cref="DbExceptExpression"/> or <see cref="DbSkipExpression"/>.
+        /// for the purpose of translating <see cref="DbExceptExpression"/> or <see
+        // cref="DbSkipExpression"/>.
         /// (DISTINCT) is present when transforming for the purpose of translating
         /// <see cref="DbExceptExpression"/> or <see cref="DbIntersectExpression"/>.
         ///
-        /// For <see cref="DbSkipExpression"/>, the input to ANY is caped with project which projects out only
-        /// the columns represented in the sortExpressionsOverLeft list and only these are used in the predicate.
-        /// This is because we want to support skip over input with non-equal comarable columns and we have no way to recognize these.
+        /// For <see cref="DbSkipExpression"/>, the input to ANY is caped with project which projects out
+        // only
+        /// the columns represented in the sortExpressionsOverLeft list and only these are used in the
+        // predicate.
+        /// This is because we want to support skip over input with non-equal comarable columns and we have
+        // no way to recognize these.
         /// </summary>
         /// <param name="left"></param>
         /// <param name="right"></param>
@@ -253,9 +271,11 @@ namespace System.Data.SqlClient.SqlGen
             FlattenProperties(leftInputBinding.Variable, leftFlattenedProperties);
             FlattenProperties(rightInputBinding.Variable, rightFlattenedProperties);
 
-            //For Skip, we need to ignore any columns that are not in the original sort list. We can recognize these by comparing the left flattened properties and
+            //For Skip, we need to ignore any columns that are not in the original sort list. We can recognize
+            // these by comparing the left flattened properties and
             // the properties in the list sortExpressionsOverLeft
-            // If any such columns exist, we need to add an additional project, to keep the rest of the columns from being projected, as if any among these
+            // If any such columns exist, we need to add an additional project, to keep the rest of the columns
+            // from being projected, as if any among these
             // are non equal comparable, SQL Server 2000 throws.
             if (expressionKind == DbExpressionKind.Skip)
             {
@@ -378,11 +398,16 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Helper method for <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
-        /// Removes all pairs of property expressions from list1 and list2, for which the property expression in list1
+        /// Helper method for <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right,
+        // DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string
+        // sortExpressionsBindingVariableName)"/>
+        /// Removes all pairs of property expressions from list1 and list2, for which the property
+        // expression in list1
         /// does not have a 'matching' property expression in list2.
-        /// The lists list1 and list2 are known to not create duplicate, and the purpose of the sortList is just for this method.
-        /// Thus, to optimize the match process, we remove the seen property expressions from the sort list in <see cref="HasMatchInList"/>
+        /// The lists list1 and list2 are known to not create duplicate, and the purpose of the sortList is
+        // just for this method.
+        /// Thus, to optimize the match process, we remove the seen property expressions from the sort list
+        // in <see cref="HasMatchInList"/>
         /// when iterating both list simultaneously.
         /// </summary>
         /// <param name="list1"></param>
@@ -459,8 +484,10 @@ namespace System.Data.SqlClient.SqlGen
         /// <summary>
         /// Determines whether two expressions match.
         /// They match if they are  of the shape
-        ///   expr1 -> DbPropertyExpression(... (DbPropertyExpression(DbVariableReferenceExpression(expr1BindingVariableName), nameX), ..., name1)
-        ///   expr1 -> DbPropertyExpression(... (DbPropertyExpression(DbVariableReferenceExpression(expr2BindingVariableName), nameX), ..., name1),
+        ///   expr1 -> DbPropertyExpression(...
+        // (DbPropertyExpression(DbVariableReferenceExpression(expr1BindingVariableName), nameX), ..., name1)
+        ///   expr1 -> DbPropertyExpression(...
+        // (DbPropertyExpression(DbVariableReferenceExpression(expr2BindingVariableName), nameX), ..., name1),
         ///
         /// i.e. if they only differ in the name of the binding.
         /// </summary>
@@ -514,13 +541,17 @@ namespace System.Data.SqlClient.SqlGen
         }
 
         /// <summary>
-        /// Helper method for <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right, DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string sortExpressionsBindingVariableName)"/>
-        /// Creates a <see cref="DbProjectExpression"/> over the given inputBinding that projects out the given flattenedProperties.
+        /// Helper method for <see cref="TransformIntersectOrExcept(DbExpression left, DbExpression right,
+        // DbExpressionKind expressionKind, IList<DbPropertyExpression> sortExpressionsOverLeft, string
+        // sortExpressionsBindingVariableName)"/>
+        /// Creates a <see cref="DbProjectExpression"/> over the given inputBinding that projects out the
+        // given flattenedProperties.
         /// and updates the flattenedProperties to be over the newly created project.
         /// </summary>
         /// <param name="inputBinding"></param>
         /// <param name="flattenedProperties"></param>
-        /// <returns>An <see cref="DbExpressionBinding"/> over the newly created <see cref="DbProjectExpression"/></returns>
+        /// <returns>An <see cref="DbExpressionBinding"/> over the newly created <see
+        // cref="DbProjectExpression"/></returns>
         private DbExpressionBinding CapWithProject(
             DbExpressionBinding inputBinding,
             IList<DbPropertyExpression> flattenedProperties

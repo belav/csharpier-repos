@@ -79,7 +79,8 @@ internal abstract class AbstractVSTypeScriptRequestHandler<TRequestType, TRespon
 internal record struct TypeScriptRequestContext(Solution? Solution, Document? Document);
 
 /// <summary>
-/// Custom type containing information in a <see cref="VSProjectContext"/> to avoid coupling LSP protocol versions.
+/// Custom type containing information in a <see cref="VSProjectContext"/> to avoid coupling LSP
+// protocol versions.
 /// </summary>
 internal record struct TypeScriptTextDocumentIdentifier(Uri Uri, string? ProjectId);
 

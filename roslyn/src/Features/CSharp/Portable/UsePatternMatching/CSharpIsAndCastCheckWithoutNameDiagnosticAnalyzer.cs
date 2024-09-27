@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UsePatternMatching
 {
     /// <summary>
     /// DiagnosticAnalyzer that looks for is-tests and cast-expressions, and offers to convert them
-    /// to use patterns.  i.e. if the user has <c>obj is TestFile &amp;&amp; ((TestFile)obj).Name == "Test"</c>
+    /// to use patterns.  i.e. if the user has <c>obj is TestFile &amp;&amp; ((TestFile)obj).Name ==
+    // "Test"</c>
     /// it will offer to convert that <c>obj is TestFile file &amp;&amp; file.Name == "Test"</c>.
     ///
     /// Complements <see cref="CSharpIsAndCastCheckDiagnosticAnalyzer"/> (which does the same,

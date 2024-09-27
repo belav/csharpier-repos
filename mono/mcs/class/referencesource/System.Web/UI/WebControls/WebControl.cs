@@ -45,7 +45,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Web.UI.WebControls.WebControl'/> class and renders
+        ///       Initializes a new instance of the <see cref='System.Web.UI.WebControls.WebControl'/> class
+        // and renders
         ///       it as a SPAN tag.
         ///    </para>
         /// </devdoc>
@@ -62,7 +63,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Web.UI.WebControls.WebControl'/> class and renders
+        ///       Initializes a new instance of the <see cref='System.Web.UI.WebControls.WebControl'/> class
+        // and renders
         ///       it as the specified tag.
         ///    </para>
         /// </devdoc>
@@ -515,7 +517,8 @@ namespace System.Web.UI.WebControls
             {
                 if (tagName == null && TagKey != HtmlTextWriterTag.Unknown)
                 {
-                    // perf: this enum.format wasn't changed to a switch because the TagKey is normally used, not the TagName.
+                    // perf: this enum.format wasn't changed to a switch because the TagKey is normally used, not the
+                    // TagName.
                     tagName = Enum.Format(typeof(HtmlTextWriterTag), TagKey, "G")
                         .ToLower(CultureInfo.InvariantCulture);
                 }
@@ -692,7 +695,10 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Copies the <see cref='System.Web.UI.WebControls.WebControl.AccessKey'/>, <see cref='System.Web.UI.WebControls.WebControl.Enabled'/>, ToolTip, <see cref='System.Web.UI.WebControls.WebControl.TabIndex'/>, and <see cref='System.Web.UI.WebControls.WebControl.Attributes'/> properties onto the
+        /// <para>Copies the <see cref='System.Web.UI.WebControls.WebControl.AccessKey'/>, <see
+        // cref='System.Web.UI.WebControls.WebControl.Enabled'/>, ToolTip, <see
+        // cref='System.Web.UI.WebControls.WebControl.TabIndex'/>, and <see
+        // cref='System.Web.UI.WebControls.WebControl.Attributes'/> properties onto the
         ///    Web control from the specified source control.</para>
         /// </devdoc>
         public void CopyBaseAttributes(WebControl controlSrc)

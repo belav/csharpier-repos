@@ -10,7 +10,8 @@ namespace System.Web.UI.WebControls
 
     /// <devdoc>
     ///    <para>Provides data for the
-    ///    <see langword='ServerValidate'/> event of the <see cref='System.Web.UI.WebControls.CustomValidator'/> .</para>
+    ///    <see langword='ServerValidate'/> event of the <see
+    // cref='System.Web.UI.WebControls.CustomValidator'/> .</para>
     /// </devdoc>
     public class ServerValidateEventArgs : EventArgs
     {
@@ -18,7 +19,8 @@ namespace System.Web.UI.WebControls
         private string value;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ServerValidateEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.ServerValidateEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public ServerValidateEventArgs(string value, bool isValid)

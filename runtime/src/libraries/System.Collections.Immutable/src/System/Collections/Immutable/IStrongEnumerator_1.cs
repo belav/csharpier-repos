@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace System.Collections.Immutable
 {
     /// <summary>
-    /// An <see cref="IEnumerator{T}"/>-like interface that does not derive from <see cref="IDisposable"/>.
+    /// An <see cref="IEnumerator{T}"/>-like interface that does not derive from <see
+    // cref="IDisposable"/>.
     /// </summary>
     /// <typeparam name="T">The type of value to be enumerated.</typeparam>
     /// <remarks>

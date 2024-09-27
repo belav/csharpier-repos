@@ -447,7 +447,8 @@ namespace System.Net
         // This constructor is for a general (non-HTTP) authentication handshake using SSPI
         // Works for both client and server sides.
         //
-        // Security: we may need to impersonate on user behalf as to temporarily restore original thread token.
+        // Security: we may need to impersonate on user behalf as to temporarily restore original thread
+        // token.
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlPrincipal)]
         internal NTAuthentication(
             bool isServer,
@@ -543,7 +544,8 @@ namespace System.Net
         }
 
         //
-        // This overload does not attmept to impersonate because the caller either did it already or the original thread context is still preserved
+        // This overload does not attmept to impersonate because the caller either did it already or the
+        // original thread context is still preserved
         //
         internal NTAuthentication(
             bool isServer,
@@ -743,7 +745,8 @@ namespace System.Net
 
                 string domain = credential.InternalGetDomain();
                 // ATTN:
-                // NetworkCredential class does not differentiate between null and "" but SSPI packages treat these cases differently
+                // NetworkCredential class does not differentiate between null and "" but SSPI packages treat these
+                // cases differently
                 // For NTLM we want to keep "" for Wdigest.Dll we should use null.
                 AuthIdentity authIdentity = new AuthIdentity(
                     username,
@@ -1070,7 +1073,8 @@ namespace System.Net
 
             // the return value from SSPI will tell us correctly if the
             // handshake is over or not: http://msdn.microsoft.com/library/psdk/secspi/sspiref_67p0.htm
-            // we also have to consider the case in which SSPI formed a new context, in this case we're done as well.
+            // we also have to consider the case in which SSPI formed a new context, in this case we're done as
+            // well.
             if (statusCode == SecurityStatus.OK)
             {
                 // we're sucessfully done
@@ -1111,7 +1115,8 @@ namespace System.Net
             return outSecurityBuffer.token;
         }
 
-        // for Server side (IIS 6.0) see: \\netindex\Sources\inetsrv\iis\iisrearc\iisplus\ulw3\digestprovider.cxx
+        // for Server side (IIS 6.0) see:
+        // \\netindex\Sources\inetsrv\iis\iisrearc\iisplus\ulw3\digestprovider.cxx
         // for Client side (HTTP.SYS) see: \\netindex\Sources\net\http\sys\ucauth.c
         internal string GetOutgoingDigestBlob(
             string incomingBlob,

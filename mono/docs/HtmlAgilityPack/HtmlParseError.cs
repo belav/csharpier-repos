@@ -81,7 +81,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Gets the absolute stream position of this error in the document, relative to the start of the document.
+        /// Gets the absolute stream position of this error in the document, relative to the start of the
+        // document.
         /// </summary>
         public int StreamPosition
         {

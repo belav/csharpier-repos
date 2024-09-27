@@ -16,7 +16,8 @@ namespace Moq.Language
         /// Specifies the event that will be raised
         /// when the setup is met.
         /// </summary>
-        /// <param name="eventExpression">An expression that represents an event attach or detach action.</param>
+        /// <param name="eventExpression">An expression that represents an event attach or detach
+        // action.</param>
         /// <param name="args">The event arguments to pass for the raised event.</param>
         /// <example>
         /// The following example shows how to raise an event when
@@ -34,7 +35,8 @@ namespace Moq.Language
         /// Specifies the event that will be raised
         /// when the setup is matched.
         /// </summary>
-        /// <param name="eventExpression">An expression that represents an event attach or detach action.</param>
+        /// <param name="eventExpression">An expression that represents an event attach or detach
+        // action.</param>
         /// <param name="func">A function that will build the <see cref="EventArgs"/>
         /// to pass when raising the event.</param>
         /// <seealso cref="Raises(Action{T}, EventArgs)"/>
@@ -44,8 +46,10 @@ namespace Moq.Language
         /// Specifies the custom event that will be raised
         /// when the setup is matched.
         /// </summary>
-        /// <param name="eventExpression">An expression that represents an event attach or detach action.</param>
-        /// <param name="args">The arguments to pass to the custom delegate (non EventHandler-compatible).</param>
+        /// <param name="eventExpression">An expression that represents an event attach or detach
+        // action.</param>
+        /// <param name="args">The arguments to pass to the custom delegate (non
+        // EventHandler-compatible).</param>
         IVerifies Raises(Action<T> eventExpression, params object[] args);
     }
 }

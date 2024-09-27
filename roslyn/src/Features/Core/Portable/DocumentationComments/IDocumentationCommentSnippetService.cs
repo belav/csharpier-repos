@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
     internal interface IDocumentationCommentSnippetService : ILanguageService
     {
         /// <summary>
-        /// A single character string indicating what the comment character is for the documentation comments
+        /// A single character string indicating what the comment character is for the documentation
+        // comments
         /// </summary>
         string DocumentationCommentCharacter { get; }
 

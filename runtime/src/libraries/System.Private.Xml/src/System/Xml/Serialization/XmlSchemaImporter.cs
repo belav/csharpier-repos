@@ -67,7 +67,8 @@ namespace System.Xml.Serialization
             {
                 if (element.Mapping is ArrayMapping)
                 {
-                    // in the case of the ArrayMapping we can use the top-level StructMapping, because it does not have base base type
+                    // in the case of the ArrayMapping we can use the top-level StructMapping, because it does not have
+                    // base base type
                     element.Mapping = ((ArrayMapping)element.Mapping).TopLevelMapping;
                     MakeDerived((StructMapping)element.Mapping!, baseType, baseTypeCanBeIndirect);
                 }
@@ -134,7 +135,8 @@ namespace System.Xml.Serialization
             {
                 if (accessor.Mapping is ArrayMapping)
                 {
-                    // in the case of the ArrayMapping we can use the top-level StructMapping, because it does not have base base type
+                    // in the case of the ArrayMapping we can use the top-level StructMapping, because it does not have
+                    // base base type
                     accessor.Mapping = ((ArrayMapping)accessor.Mapping).TopLevelMapping;
                     MakeDerived((StructMapping)accessor.Mapping!, baseType, baseTypeCanBeIndirect);
                 }
@@ -1904,7 +1906,8 @@ namespace System.Xml.Serialization
 
             ImportedMappings[type] = arrayMapping;
             Scope.AddTypeMapping(arrayMapping);
-            // for the array-like mappings we need to create a struct mapping for the case when it referenced by the top-level element
+            // for the array-like mappings we need to create a struct mapping for the case when it referenced by
+            // the top-level element
             arrayMapping.TopLevelMapping = ImportStructType(type, ns, identifier, null, true);
             arrayMapping.TopLevelMapping.ReferencedByTopLevelElement = true;
             if (!string.IsNullOrEmpty(type.Name))
@@ -2515,7 +2518,8 @@ namespace System.Xml.Serialization
             enumMapping.Constants = (ConstantMapping[])constants.ToArray(typeof(ConstantMapping));
             if (isList && enumMapping.Constants.Length > 63)
             {
-                // if we have 64+ flag constants we cannot map the type to long enum, we will use string mapping instead.
+                // if we have 64+ flag constants we cannot map the type to long enum, we will use string mapping
+                // instead.
                 mapping = GetDefaultMapping(
                     TypeFlags.CanBeElementValue
                         | TypeFlags.CanBeTextValue

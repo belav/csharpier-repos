@@ -277,9 +277,9 @@ namespace Mono.Net.Security
             return totalRead;
         }
 
-        /*
-         * This will operate on the internal buffers and never block.
-         */
+/*
+* This will operate on the internal buffers and never block.
+*/
         protected abstract AsyncOperationStatus Run(AsyncOperationStatus status);
 
         public override string ToString()

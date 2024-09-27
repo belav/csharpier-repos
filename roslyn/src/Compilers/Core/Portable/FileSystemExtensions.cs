@@ -21,10 +21,13 @@ namespace Microsoft.CodeAnalysis
         /// <param name="pdbPath">Path of the file to which the compilation's debug info will be written.
         /// Also embedded in the output file.  Null to forego PDB generation.
         /// </param>
-        /// <param name="xmlDocPath">Path of the file to which the compilation's XML documentation will be written.  Null to forego XML generation.</param>
-        /// <param name="win32ResourcesPath">Path of the file from which the compilation's Win32 resources will be read (in RES format).
+        /// <param name="xmlDocPath">Path of the file to which the compilation's XML documentation will be
+        // written.  Null to forego XML generation.</param>
+        /// <param name="win32ResourcesPath">Path of the file from which the compilation's Win32 resources
+        // will be read (in RES format).
         /// Null to indicate that there are none.</param>
-        /// <param name="manifestResources">List of the compilation's managed resources.  Null to indicate that there are none.</param>
+        /// <param name="manifestResources">List of the compilation's managed resources.  Null to indicate
+        // that there are none.</param>
         /// <param name="cancellationToken">To cancel the emit process.</param>
         /// <exception cref="ArgumentNullException">Compilation or path is null.</exception>
         /// <exception cref="ArgumentException">Path is empty or invalid.</exception>

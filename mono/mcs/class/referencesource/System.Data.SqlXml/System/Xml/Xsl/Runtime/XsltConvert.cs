@@ -19,11 +19,14 @@ namespace System.Xml.Xsl.Runtime
 
     /// <summary>
     /// Contains conversion routines used by Xslt.  These conversions fall into several categories:
-    ///   1. Internal type to internal type: These are conversions from one of the five Xslt types to another
+    ///   1. Internal type to internal type: These are conversions from one of the five Xslt types to
+    // another
     ///      of the five types.
-    ///   2. External type to internal type: These are conversions from any of the Xsd types to one of the five
+    ///   2. External type to internal type: These are conversions from any of the Xsd types to one of
+    // the five
     ///      Xslt types.
-    ///   3. Internal type to external type: These are conversions from one of the five Xslt types to any of
+    ///   3. Internal type to external type: These are conversions from one of the five Xslt types to
+    // any of
     ///      of the Xsd types.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]

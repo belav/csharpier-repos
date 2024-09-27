@@ -284,7 +284,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
             private bool IsInitPropertyAccessorNameConflict(SyntaxToken token) =>
                 token.IsKind(SyntaxKind.InitKeyword)
-                // using "set" here is intentional. The compiler generates set_PropName for both set and init accessors.
+                // using "set" here is intentional. The compiler generates set_PropName for both set and init
+                // accessors.
                 && IsNameConflictWithProperty("set", token.Parent as AccessorDeclarationSyntax);
 
             private bool IsNameConflictWithProperty(
@@ -443,7 +444,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                             }
                         }
 
-                        // This is a conflicting namespace declaration token. Even if the rename results in conflict with this namespace
+                        // This is a conflicting namespace declaration token. Even if the rename results in conflict with
+                        // this namespace
                         // conflict is not shown for the namespace so we are tracking this token
                         if (
                             !isRenameLocation
@@ -765,10 +767,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                     }
                 }
 
-                // TODO: we can't use escaped unicode characters in xml doc comments, so we need to pass the valuetext as text as well.
+                // TODO: we can't use escaped unicode characters in xml doc comments, so we need to pass the
+                // valuetext as text as well.
                 // <param name="\u... is invalid.
 
-                // if it's an attribute name we don't mess with the escaping because it might change overload resolution
+                // if it's an attribute name we don't mess with the escaping because it might change overload
+                // resolution
                 newToken =
                     _isVerbatim || (isAttributeName && oldToken.IsVerbatimIdentifier())
                         ? newToken.CopyAnnotationsTo(
@@ -1161,8 +1165,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                     );
 
                     // we allow renaming overrides of VB property accessors with parameters in C#.
-                    // VB has a special rule that properties are not allowed to have the same name as any of the parameters.
-                    // Because this declaration in C# affects the property declaration in VB, we need to check this VB rule here in C#.
+                    // VB has a special rule that properties are not allowed to have the same name as any of the
+                    // parameters.
+                    // Because this declaration in C# affects the property declaration in VB, we need to check this VB
+                    // rule here in C#.
                     var properties = new List<ISymbol>();
                     foreach (var referencedSymbol in referencedSymbols)
                     {
@@ -1185,7 +1191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 }
                 else if (renamedSymbol.Kind == SymbolKind.Alias)
                 {
-                    // in C# there can only be one using with the same alias name in the same block (top of file of namespace).
+                    // in C# there can only be one using with the same alias name in the same block (top of file of
+                    // namespace).
                     // It's ok to redefine the alias in different blocks.
                     var location = renamedSymbol.Locations.Single();
                     var tree = location.SourceTree;
@@ -1493,7 +1500,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                             else if (symbol.Name == "GetEnumerator")
                             {
                                 // we are a bit pessimistic here.
-                                // To be sure we would need to check if the returned type is having a MoveNext and Current as required by foreach
+                                // To be sure we would need to check if the returned type is having a MoveNext and Current as
+                                // required by foreach
                                 if (!method.ReturnsVoid && !method.Parameters.Any())
                                 {
                                     return ImmutableArray.Create(originalDeclarationLocation);
@@ -1581,7 +1589,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
         /// <summary>
         /// Gets the top most enclosing statement or CrefSyntax as target to call MakeExplicit on.
-        /// It's either the enclosing statement, or if this statement is inside of a lambda expression, the enclosing
+        /// It's either the enclosing statement, or if this statement is inside of a lambda expression, the
+        // enclosing
         /// statement of this lambda.
         /// </summary>
         /// <param name="token">The token to get the complexification target for.</param>
@@ -1659,7 +1668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                 return attributeSyntax;
             }
 
-            // there seems to be no statement above this one. Let's see if we can at least get an SimpleNameSyntax
+            // there seems to be no statement above this one. Let's see if we can at least get an
+            // SimpleNameSyntax
             return enclosingStatement
                 ?? enclosingNameMemberCrefOrnull
                 ?? token.GetAncestors(n => n is SimpleNameSyntax).FirstOrDefault();
@@ -1698,9 +1708,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
 
         /// <summary>
         /// Gets the semantic model for the given node.
-        /// If the node belongs to the syntax tree of the original semantic model, then returns originalSemanticModel.
+        /// If the node belongs to the syntax tree of the original semantic model, then returns
+        // originalSemanticModel.
         /// Otherwise, returns a speculative model.
-        /// The assumption for the later case is that span start position of the given node in it's syntax tree is same as
+        /// The assumption for the later case is that span start position of the given node in it's syntax
+        // tree is same as
         /// the span start of the original node in the original syntax tree.
         /// </summary>
         public static SemanticModel? GetSemanticModelForNode(

@@ -15,7 +15,8 @@ using ReferenceEqualityComparer = Roslyn.Utilities.ReferenceEqualityComparer;
 namespace Microsoft.CodeAnalysis.CSharp;
 
 /// <summary>
-/// This type helps rewrite the delegate creations that target static method groups to use a cached instance of delegate.
+/// This type helps rewrite the delegate creations that target static method groups to use a cached
+// instance of delegate.
 /// </summary>
 internal sealed class DelegateCacheRewriter
 {
@@ -93,7 +94,8 @@ internal sealed class DelegateCacheRewriter
         //       }
         //   }
         //
-        // In the above case, only one cached delegate is necessary, and it could be assigned to the container 'owned' by LF1.
+        // In the above case, only one cached delegate is necessary, and it could be assigned to the
+        // container 'owned' by LF1.
 
         if (
             !TryGetOwnerFunction(
@@ -160,7 +162,8 @@ internal sealed class DelegateCacheRewriter
             //       static object Target<V>() => default(T);
             //   }
             //
-            // Therefore, without too much analysis, we select the closest generic enclosing function as the cache container owner.
+            // Therefore, without too much analysis, we select the closest generic enclosing function as the
+            // cache container owner.
 
             for (
                 Symbol? enclosingSymbol = currentFunction;
@@ -182,7 +185,8 @@ internal sealed class DelegateCacheRewriter
         // @AlekseyTs: It is Ok to create delegates for other method kinds as well.
         // @jcouv: We'd likely want to pay attention to this code if this happens.
         // What we really cared above was,
-        // - "Are there any type parameters from the target method that we cannot discover simply from it's signature?"
+        // - "Are there any type parameters from the target method that we cannot discover simply from it's
+        // signature?"
         // As of C# 10, we only observe local functions could potentially answer yes, so we used that.
         // If this is hit, feel free to change but please also add tests.
         Debug.Assert(targetMethod.MethodKind == MethodKind.Ordinary);

@@ -182,37 +182,38 @@ namespace Microsoft.Test.ModuleCore
 
             //Xml Spec Format:
             //    Example:
-            /*
-                <TestModule Name="Functional" Created="10 October 2001" Modified="10 October 2001" Version="1">
-                <-- Owner type is an enum, "test", "dev" or "pm" -->
-                <Owner Alias="YourAlias" Type="test"/>
-                <Description>XQuery conformance tests</Description>
-                    <Data filePath="\\webxtest\wdtest\managed\..." DBName="Northwind" Anything="whatever you want to be global">
-                        <!--My global data -->
-                        <xml>http://webdata/data/mytest/test.xml</xml>
-                        <xsd>http://webdata/data/mytest/test.xsd</xsd>
-                    </Data>
-                    <TestCase name="FLWR Expressions">
-                           <Description>Tests for FLWR expressions</description>
-                        <Variation id="1" Implemented="true" Priority="2">
-                            <Description>Simple 1 FLWR expression</description>
-                            <FilterCriteria>
-                                            <!-- Recommended place for filter criteria -->
-                                            <Os>NT</Os>
-                                            <Language>English</Language>
-                            </FilterCriteria>
-                            <Data >
-                                            <!-- Override global data -->
-                                            <xml>http://webdata/data/mytest/specialptest.xml</xml>
-                            </Data>
-                            <SoapData>
-                                            <!-- Additional data for SOAP tests -->
-                                            <wsdl>http://webdata/data/mytest/test.wsdl</wsdl>
-                            </SoapData>
-                        </Variation>
-                        </TestCase>
-                </TestModule>
-            */
+/*
+<TestModule Name="Functional" Created="10 October 2001" Modified="10 October 2001" Version="1">
+<-- Owner type is an enum, "test", "dev" or "pm" -->
+<Owner Alias="YourAlias" Type="test"/>
+<Description>XQuery conformance tests</Description>
+<Data filePath="\\webxtest\wdtest\managed\..." DBName="Northwind" Anything="whatever you want to be
+global">
+<!--My global data -->
+<xml>http://webdata/data/mytest/test.xml</xml>
+<xsd>http://webdata/data/mytest/test.xsd</xsd>
+</Data>
+<TestCase name="FLWR Expressions">
+<Description>Tests for FLWR expressions</description>
+<Variation id="1" Implemented="true" Priority="2">
+<Description>Simple 1 FLWR expression</description>
+<FilterCriteria>
+<!-- Recommended place for filter criteria -->
+<Os>NT</Os>
+<Language>English</Language>
+</FilterCriteria>
+<Data >
+<!-- Override global data -->
+<xml>http://webdata/data/mytest/specialptest.xml</xml>
+</Data>
+<SoapData>
+<!-- Additional data for SOAP tests -->
+<wsdl>http://webdata/data/mytest/test.wsdl</wsdl>
+</SoapData>
+</Variation>
+</TestCase>
+</TestModule>
+*/
 
             //Create the document
             pxmldoc = new CXmlDocument();

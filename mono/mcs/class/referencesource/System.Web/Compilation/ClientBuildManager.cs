@@ -4,6 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+
 /************************************************************************************************************/
 
 
@@ -144,26 +145,26 @@ namespace System.Web.Compilation
 
         private const string IISExpressPrefix = "/IISExpress/";
 
-        /*
-         * Creates an instance of the ClientBuildManager.
-         * appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
-         * virtualPath is the virtual path to the app root. It can be anything (e.g. "/dummy"),
-         *      but ideally it should match the path later given to Cassini, in order for
-         *      compilation that happens here to be reused there.
-         */
+/*
+* Creates an instance of the ClientBuildManager.
+* appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
+* virtualPath is the virtual path to the app root. It can be anything (e.g. "/dummy"),
+*      but ideally it should match the path later given to Cassini, in order for
+*      compilation that happens here to be reused there.
+*/
 
         public ClientBuildManager(string appVirtualDir, string appPhysicalSourceDir)
             : this(appVirtualDir, appPhysicalSourceDir, appPhysicalTargetDir: null, parameter: null)
         { }
 
-        /*
-         * Creates an instance of the PrecompilationManager.
-         * appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
-         * appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
-         *      but ideally it should match the path later given to Cassini, in order for
-         *      compilation that happens here to be reused there.
-         * appPhysicalTargetDir is the directory where the precompiled site is placed
-         */
+/*
+* Creates an instance of the PrecompilationManager.
+* appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
+* appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
+*      but ideally it should match the path later given to Cassini, in order for
+*      compilation that happens here to be reused there.
+* appPhysicalTargetDir is the directory where the precompiled site is placed
+*/
         public ClientBuildManager(
             string appVirtualDir,
             string appPhysicalSourceDir,
@@ -171,15 +172,15 @@ namespace System.Web.Compilation
         )
             : this(appVirtualDir, appPhysicalSourceDir, appPhysicalTargetDir, parameter: null) { }
 
-        /*
-         * Creates an instance of the PrecompilationManager.
-         * appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
-         * appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
-         *      but ideally it should match the path later given to Cassini, in order for
-         *      compilation that happens here to be reused there.
-         * appPhysicalTargetDir is the directory where the precompiled site is placed
-         * flags determines the behavior of the precompilation
-         */
+/*
+* Creates an instance of the PrecompilationManager.
+* appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
+* appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
+*      but ideally it should match the path later given to Cassini, in order for
+*      compilation that happens here to be reused there.
+* appPhysicalTargetDir is the directory where the precompiled site is placed
+* flags determines the behavior of the precompilation
+*/
         public ClientBuildManager(
             string appVirtualDir,
             string appPhysicalSourceDir,
@@ -194,16 +195,16 @@ namespace System.Web.Compilation
                 typeDescriptionProvider: null
             ) { }
 
-        /*
-         * Creates an instance of the PrecompilationManager.
-         * appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
-         * appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
-         *      but ideally it should match the path later given to Cassini, in order for
-         *      compilation that happens here to be reused there.
-         * appPhysicalTargetDir is the directory where the precompiled site is placed
-         * typeDescriptionProvider is the provider used for retrieving type
-         * information for multi-targeting
-         */
+/*
+* Creates an instance of the PrecompilationManager.
+* appPhysicalSourceDir points to the physical root of the application (e.g "c:\myapp")
+* appVirtualDir is the virtual path to the app root. It can be anything (e.g. "/dummy"),
+*      but ideally it should match the path later given to Cassini, in order for
+*      compilation that happens here to be reused there.
+* appPhysicalTargetDir is the directory where the precompiled site is placed
+* typeDescriptionProvider is the provider used for retrieving type
+* information for multi-targeting
+*/
         public ClientBuildManager(
             string appVirtualDir,
             string appPhysicalSourceDir,
@@ -264,9 +265,9 @@ namespace System.Web.Compilation
             Initialize(VirtualPath.CreateNonRelative(appVirtualDir), appPhysicalSourceDir);
         }
 
-        /*
-         * returns the codegendir used by runtime appdomain
-         */
+/*
+* returns the codegendir used by runtime appdomain
+*/
         public string CodeGenDir
         {
             get
@@ -281,18 +282,18 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Indicates whether the host is created.
-         */
+/*
+* Indicates whether the host is created.
+*/
 
         public bool IsHostCreated
         {
             get { return _host != null; }
         }
 
-        /*
-         * Create an object in the runtime appdomain
-         */
+/*
+* Create an object in the runtime appdomain
+*/
 
         public IRegisteredObject CreateObject(Type type, bool failIfExists)
         {
@@ -317,9 +318,9 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Return the list of directories that would cause appdomain shutdown.
-         */
+/*
+* Return the list of directories that would cause appdomain shutdown.
+*/
         public string[] GetAppDomainShutdownDirectories()
         {
             Debug.Trace("CBM", "GetAppDomainShutdownDirectories");
@@ -327,9 +328,9 @@ namespace System.Web.Compilation
             return FileChangesMonitor.s_dirsToMonitor;
         }
 
-        /*
-         * Makes sure that all the top level files are compiled (code, global.asax, ...)
-         */
+/*
+* Makes sure that all the top level files are compiled (code, global.asax, ...)
+*/
 
         public void CompileApplicationDependencies()
         {
@@ -349,11 +350,11 @@ namespace System.Web.Compilation
             return _host.GetBrowserDefinitions();
         }
 
-        /*
-         * Returns the physical path of the generated file corresponding to the virtual directory.
-         * Note the virtualPath needs to use this format:
-         * "/[appname]/App_WebReferences/{[subDir]/}"
-         */
+/*
+* Returns the physical path of the generated file corresponding to the virtual directory.
+* Note the virtualPath needs to use this format:
+* "/[appname]/App_WebReferences/{[subDir]/}"
+*/
         public string GetGeneratedSourceFile(string virtualPath)
         {
             Debug.Trace("CBM", "GetGeneratedSourceFile " + virtualPath);
@@ -368,10 +369,10 @@ namespace System.Web.Compilation
             return _host.GetGeneratedSourceFile(VirtualPath.CreateTrailingSlash(virtualPath));
         }
 
-        /*
-        * Returns the virtual path of the corresponding generated file.
-        * Note the filepath needs to be a full path.
-        */
+/*
+* Returns the virtual path of the corresponding generated file.
+* Note the filepath needs to be a full path.
+*/
         public string GetGeneratedFileVirtualPath(string filePath)
         {
             Debug.Trace("CBM", "GetGeneratedFileVirtualPath " + filePath);
@@ -386,9 +387,10 @@ namespace System.Web.Compilation
             return _host.GetGeneratedFileVirtualPath(filePath);
         }
 
-        /*
-         * Returns an array of the virtual paths to all the code directories in the app thru the hosted appdomain
-         */
+/*
+* Returns an array of the virtual paths to all the code directories in the app thru the hosted
+appdomain
+*/
 
         public string[] GetVirtualCodeDirectories()
         {
@@ -399,9 +401,9 @@ namespace System.Web.Compilation
             return _host.GetVirtualCodeDirectories();
         }
 
-        /*
-         * Returns an array of the assemblies defined in the bin and assembly reference config section
-         */
+/*
+* Returns an array of the assemblies defined in the bin and assembly reference config section
+*/
 
         public String[] GetTopLevelAssemblyReferences(string virtualPath)
         {
@@ -417,11 +419,11 @@ namespace System.Web.Compilation
             return _host.GetTopLevelAssemblyReferences(VirtualPath.Create(virtualPath));
         }
 
-        /*
-         * Returns the compiler type and parameters that need to be used to build
-         * a given code directory.  Also, returns the directory containing all the code
-         * files generated from non-code files in the code directory (e.g. wsdl files)
-         */
+/*
+* Returns the compiler type and parameters that need to be used to build
+* a given code directory.  Also, returns the directory containing all the code
+* files generated from non-code files in the code directory (e.g. wsdl files)
+*/
 
         public void GetCodeDirectoryInformation(
             string virtualCodeDir,
@@ -449,10 +451,10 @@ namespace System.Web.Compilation
             Debug.Trace("CBM", "GetCodeDirectoryInformation " + virtualCodeDir + " end");
         }
 
-        /*
-         * Returns the compiler type and parameters that need to be used to build
-         * a given file.
-         */
+/*
+* Returns the compiler type and parameters that need to be used to build
+* a given file.
+*/
 
         public void GetCompilerParameters(
             string virtualPath,
@@ -476,9 +478,9 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Returns the codedom tree and the compiler type/param for a given file.
-         */
+/*
+* Returns the codedom tree and the compiler type/param for a given file.
+*/
 
         public CodeCompileUnit GenerateCodeCompileUnit(
             string virtualPath,
@@ -546,9 +548,9 @@ namespace System.Web.Compilation
             );
         }
 
-        /*
-         * Returns the compiled type for an input file
-         */
+/*
+* Returns the compiled type for an input file
+*/
 
         public Type GetCompiledType(string virtualPath)
         {
@@ -573,9 +575,9 @@ namespace System.Web.Compilation
             return t;
         }
 
-        /*
-         * Compile a file
-         */
+/*
+* Compile a file
+*/
         public void CompileFile(string virtualPath)
         {
             CompileFile(virtualPath, null);
@@ -606,9 +608,9 @@ namespace System.Web.Compilation
             }
         }
 
-        /*
-         * Indicates whether an assembly is a code assembly.
-         */
+/*
+* Indicates whether an assembly is a code assembly.
+*/
         public bool IsCodeAssembly(string assemblyName)
         {
             Debug.Trace("CBM", "IsCodeAssembly " + assemblyName);
@@ -641,17 +643,17 @@ namespace System.Web.Compilation
             return false;
         }
 
-        /*
-         * Precompile an application
-         */
+/*
+* Precompile an application
+*/
         public void PrecompileApplication()
         {
             PrecompileApplication(null);
         }
 
-        /*
-         * Precompile an application with callback support
-         */
+/*
+* Precompile an application with callback support
+*/
         public void PrecompileApplication(ClientBuildManagerCallback callback)
         {
             PrecompileApplication(callback, false);
@@ -950,9 +952,9 @@ namespace System.Web.Compilation
         BuildManagerHostUnloadEventArgs e
     );
 
-    /*
-     * Type of the entries in the table returned by GenerateCodeCompileUnit
-     */
+/*
+* Type of the entries in the table returned by GenerateCodeCompileUnit
+*/
 
     [Serializable]
     public sealed class LinePragmaCodeInfo

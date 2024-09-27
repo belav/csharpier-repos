@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     is a non-nullable reference type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public abstract class NonNullableConventionBase : IModelFinalizingConvention
 {
@@ -36,7 +37,8 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
     /// <param name="modelBuilder">The model builder used to build the model.</param>
     /// <param name="memberInfo">The member info.</param>
     /// <param name="nullabilityInfo">
-    ///     The nullability info for the <paramref name="memberInfo" />, or <see langword="null" /> if it does not represent a valid reference
+    ///     The nullability info for the <paramref name="memberInfo" />, or <see langword="null" /> if
+    // it does not represent a valid reference
     ///     type.
     /// </param>
     /// <returns><see langword="true" /> if the member type is a non-nullable reference type.</returns>

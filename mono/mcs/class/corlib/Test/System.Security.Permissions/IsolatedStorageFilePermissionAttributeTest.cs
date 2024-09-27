@@ -1,5 +1,6 @@
 //
-// IsolatedStorageFilePermissionAttributeTest.cs - NUnit Test Cases for IsolatedStorageFilePermissionAttribute
+// IsolatedStorageFilePermissionAttributeTest.cs - NUnit Test Cases for
+// IsolatedStorageFilePermissionAttribute
 //
 // Author:
 //	Sebastien Pouliot  <sebastien@ximian.com>

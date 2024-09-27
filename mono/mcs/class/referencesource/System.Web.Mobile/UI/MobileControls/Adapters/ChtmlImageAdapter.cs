@@ -16,8 +16,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * ChtmlImageAdapter class.
-     */
+    * ChtmlImageAdapter class.
+    */
     /// <include file='doc\ChtmlImageAdapter.uex' path='docs/doc[@for="ChtmlImageAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -32,7 +32,8 @@ namespace System.Web.UI.MobileControls.Adapters
     )]
     public class ChtmlImageAdapter : HtmlImageAdapter
     {
-        /// <include file='doc\ChtmlImageAdapter.uex' path='docs/doc[@for="ChtmlImageAdapter.RenderImage"]/*' />
+        /// <include file='doc\ChtmlImageAdapter.uex'
+        // path='docs/doc[@for="ChtmlImageAdapter.RenderImage"]/*' />
         protected internal override void RenderImage(HtmlMobileTextWriter writer)
         {
             String source = Control.ImageUrl;
@@ -104,7 +105,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return i;
         }
 
-        /// <include file='doc\ChtmlImageAdapter.uex' path='docs/doc[@for="ChtmlImageAdapter.AddAttributes"]/*' />
+        /// <include file='doc\ChtmlImageAdapter.uex'
+        // path='docs/doc[@for="ChtmlImageAdapter.AddAttributes"]/*' />
         protected override void AddAttributes(HtmlMobileTextWriter writer)
         {
             AddAccesskeyAttribute(writer);

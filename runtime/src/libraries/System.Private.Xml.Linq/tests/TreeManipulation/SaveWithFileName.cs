@@ -234,7 +234,8 @@ namespace XLinqTests
             XElement baby = child.Element("baby");
             XNode text = baby.FirstNode;
 
-            // Verify that without annotation the output gets indented and the duplicate ns decls are not removed
+            // Verify that without annotation the output gets indented and the duplicate ns decls are not
+            // removed
             if (testXElement)
             {
                 Assert.Equal(
@@ -244,7 +245,8 @@ namespace XLinqTests
             }
 
             // Now add annotation to the leaf element node
-            // Even though it's in effect the output should stay the same (as there is only one namespace decl and mixed content).
+            // Even though it's in effect the output should stay the same (as there is only one namespace decl
+            // and mixed content).
             baby.AddAnnotation(so);
 
             if (testXElement)
@@ -269,7 +271,8 @@ namespace XLinqTests
                 );
             }
 
-            // And now add the annotation to the root and remove it from the child to test that we can correctly skip over a node
+            // And now add the annotation to the root and remove it from the child to test that we can correctly
+            // skip over a node
             root.AddAnnotation(so);
             child.RemoveAnnotations(typeof(SaveOptions));
 

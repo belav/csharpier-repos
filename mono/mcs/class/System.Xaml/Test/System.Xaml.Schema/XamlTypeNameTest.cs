@@ -251,7 +251,8 @@ namespace MonoTests.System.Xaml.Schema
             Assert.AreEqual("b:Bar, c:Baz", XamlTypeName.ToString(n.TypeArguments, lookup), "#2");
         }
 
-        // This test shows that MarkupExtension names are not replaced at XamlTypeName.ToString(), while XamlXmlWriter writes like "x:Null".
+        // This test shows that MarkupExtension names are not replaced at XamlTypeName.ToString(), while
+        // XamlXmlWriter writes like "x:Null".
         [Test]
         public void ToStringNamespaceLookup2()
         {

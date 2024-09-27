@@ -76,7 +76,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The duration, in seconds, of the expiration. The expiration policy is specified by the CacheExpirationPolicy property.
+        /// The duration, in seconds, of the expiration. The expiration policy is specified by the
+        // CacheExpirationPolicy property.
         /// </devdoc>
         [
             DefaultValue(DataSourceCache.Infinite),
@@ -91,7 +92,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// The expiration policy of the cache. The duration for the expiration is specified by the CacheDuration property.
+        /// The expiration policy of the cache. The duration for the expiration is specified by the
+        // CacheDuration property.
         /// </devdoc>
         [
             DefaultValue(DataSourceCacheExpiry.Absolute),
@@ -691,7 +693,8 @@ namespace System.Web.UI.WebControls
                 _disallowChanges = true;
 
                 // Check if transform is specified.
-                // If there is a transform, load the data, then the transform, and get an XmlReader from the transformation.
+                // If there is a transform, load the data, then the transform, and get an XmlReader from the
+                // transformation.
                 transformReader = GetReader(TransformFile, Transform, out transformCacheDependency);
                 if (transformReader != null)
                 {

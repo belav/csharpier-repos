@@ -216,7 +216,7 @@ namespace MonoTests.Mono.Unix
         {
             if (!TestHelper.CanUseRealTimeSignals())
                 return;
-            /*this number is a guestimate, but it's ok*/
+/*this number is a guestimate, but it's ok*/
             for (int i = 1; i < 10; ++i)
             {
                 RealTimeSignum rts = new RealTimeSignum(i);
@@ -252,7 +252,7 @@ namespace MonoTests.Mono.Unix
         {
             if (!TestHelper.CanUseRealTimeSignals())
                 return;
-            /*this number is a guestimate, but it's ok*/
+/*this number is a guestimate, but it's ok*/
             for (int i = 1; i < 10; ++i)
             {
                 RealTimeSignum rts = new RealTimeSignum(i);

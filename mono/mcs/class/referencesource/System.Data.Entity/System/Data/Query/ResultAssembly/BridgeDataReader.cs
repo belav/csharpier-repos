@@ -685,7 +685,8 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        /// <exception cref="NotSupportedException">GetProviderSpecificFieldType is not supported at this time</exception>
+        /// <exception cref="NotSupportedException">GetProviderSpecificFieldType is not supported at this
+        // time</exception>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         public override Type GetProviderSpecificFieldType(int ordinal)
         {
@@ -733,7 +734,8 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="ordinal"></param>
         /// <returns></returns>
-        /// <exception cref="NotSupportedException">GetProviderSpecificValue is not supported at this time</exception>
+        /// <exception cref="NotSupportedException">GetProviderSpecificValue is not supported at this
+        // time</exception>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         public override object GetProviderSpecificValue(int ordinal)
         {
@@ -745,7 +747,8 @@ namespace System.Data.Query.ResultAssembly
         /// </summary>
         /// <param name="values"></param>
         /// <returns></returns>
-        /// <exception cref="NotSupportedException">GetProviderSpecificValues is not supported at this time</exception>
+        /// <exception cref="NotSupportedException">GetProviderSpecificValues is not supported at this
+        // time</exception>
         [EditorBrowsableAttribute(EditorBrowsableState.Never)]
         public override int GetProviderSpecificValues(object[] values)
         {

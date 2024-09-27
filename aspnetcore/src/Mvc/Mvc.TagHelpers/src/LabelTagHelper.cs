@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.Razor.TagHelpers;
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
 
 /// <summary>
-/// <see cref="ITagHelper"/> implementation targeting &lt;label&gt; elements with an <c>asp-for</c> attribute.
+/// <see cref="ITagHelper"/> implementation targeting &lt;label&gt; elements with an <c>asp-for</c>
+// attribute.
 /// </summary>
 [HtmlTargetElement("label", Attributes = ForAttributeName)]
 public class LabelTagHelper : TagHelper
@@ -35,7 +36,8 @@ public class LabelTagHelper : TagHelper
     public ViewContext ViewContext { get; set; }
 
     /// <summary>
-    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see cref="LabelTagHelper"/>'s output.
+    /// Gets the <see cref="IHtmlGenerator"/> used to generate the <see cref="LabelTagHelper"/>'s
+    // output.
     /// </summary>
     protected IHtmlGenerator Generator { get; }
 

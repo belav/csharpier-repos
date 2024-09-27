@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis.Api
     {
         /// <summary>
         /// Gets a list of the diagnostics that are provided by this service.
-        /// If the given <paramref name="hierarchyOpt"/> is non-null and corresponds to an existing project in the workspace, then gets the diagnostics for the project.
+        /// If the given <paramref name="hierarchyOpt"/> is non-null and corresponds to an existing project
+        // in the workspace, then gets the diagnostics for the project.
         /// Otherwise, returns the global set of diagnostics enabled for the workspace.
         /// </summary>
         /// <returns>A mapping from analyzer name to the diagnostics produced by that analyzer</returns>
@@ -25,7 +26,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis.Api
         );
 
         /// <summary>
-        /// Runs all the applicable NuGet and VSIX diagnostic analyzers for the given project OR current solution in background and updates the error list.
+        /// Runs all the applicable NuGet and VSIX diagnostic analyzers for the given project OR current
+        // solution in background and updates the error list.
         /// </summary>
         /// <param name="hierarchyOpt">
         /// If non-null hierarchy for a project, then analyzers are run on the project.

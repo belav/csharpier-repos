@@ -38,16 +38,17 @@ namespace Mono.Security.X509
     // References:
     // 1.	Information technology - Open Systems Interconnection - The Directory: Models
     //	http://www.itu.int/rec/recommendation.asp?type=items&lang=e&parent=T-REC-X.501-200102-I
-    // 2.	RFC2253: Lightweight Directory Access Protocol (v3): UTF-8 String Representation of Distinguished Names
+    // 2.	RFC2253: Lightweight Directory Access Protocol (v3): UTF-8 String Representation of
+    // Distinguished Names
     //	http://www.ietf.org/rfc/rfc2253.txt
 
     /*
-     * Name ::= CHOICE { RDNSequence }
-     *
-     * RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
-     *
-     * RelativeDistinguishedName ::= SET OF AttributeTypeAndValue
-     */
+    * Name ::= CHOICE { RDNSequence }
+    *
+    * RDNSequence ::= SEQUENCE OF RelativeDistinguishedName
+    *
+    * RelativeDistinguishedName ::= SET OF AttributeTypeAndValue
+    */
 #if INSIDE_CORLIB || INSIDE_SYSTEM
     internal
 #else
@@ -207,7 +208,9 @@ namespace Mono.Security.X509
                 // in some cases we must quote (") the value
                 // Note: this doesn't seems to conform to RFC2253
                 // Set of characters that need quoting is taken from s_quoteNeedingChars
-                // in corefx/src/System.Security.Cryptography.X509Certificates/src/Internal/Cryptography/Pal.Unix/X500NameEncoder.cs
+                // in
+                //
+                // corefx/src/System.Security.Cryptography.X509Certificates/src/Internal/Cryptography/Pal.Unix/X500NameEncoder.cs
                 char[] specials = { ',', '+', '"', '=', '<', '>', ';', '#', '\n' };
                 if (quotes)
                 {

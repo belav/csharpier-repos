@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols.SymbolTree
             public readonly SymbolTreeInfo SymbolTreeInfo;
 
             /// <summary>
-            /// The set of projects that are referencing this metadata-index.  When this becomes empty we can dump the
+            /// The set of projects that are referencing this metadata-index.  When this becomes empty we can
+            // dump the
             /// index from memory.
             /// </summary>
             /// <remarks>

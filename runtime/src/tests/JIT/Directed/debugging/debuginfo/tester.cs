@@ -108,12 +108,15 @@ public unsafe class DebugInfoTest
                 string name =
                     $"[{meth.DeclaringType.Assembly.GetName().Name}]{meth.DeclaringType.FullName}.{meth.Name}";
 
-                // If DebuggableAttribute is saying that the assembly must be debuggable, then verify debug mappings.
+                // If DebuggableAttribute is saying that the assembly must be debuggable, then verify debug
+                // mappings.
                 // Otherwise verify release mappings.
                 // This may seem a little strange since we do not use the tier at all -- however, we expect debug
-                // to never tier and in release, we expect the release mappings to be the "least common denominator",
+                // to never tier and in release, we expect the release mappings to be the "least common
+                // denominator",
                 // i.e. tier0 and tier1 mappings should both be a superset.
-                // Note that tier0 and MinOptJitted differs in mappings generated exactly due to DebuggableAttribute.
+                // Note that tier0 and MinOptJitted differs in mappings generated exactly due to
+                // DebuggableAttribute.
                 DebuggableAttribute debuggableAttrib =
                     meth.DeclaringType.Assembly.GetCustomAttribute<DebuggableAttribute>();
                 bool debuggableMappings =

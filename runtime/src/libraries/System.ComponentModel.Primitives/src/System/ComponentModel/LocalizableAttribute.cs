@@ -12,7 +12,8 @@ namespace System.ComponentModel
     public sealed class LocalizableAttribute : Attribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref='System.ComponentModel.LocalizableAttribute'/> class.
+        /// Initializes a new instance of the <see cref='System.ComponentModel.LocalizableAttribute'/>
+        // class.
         /// </summary>
         public LocalizableAttribute(bool isLocalizable)
         {
@@ -37,7 +38,8 @@ namespace System.ComponentModel
         public static readonly LocalizableAttribute No = new LocalizableAttribute(false);
 
         /// <summary>
-        /// Specifies the default value, which is <see cref='System.ComponentModel.LocalizableAttribute.No'/>,
+        /// Specifies the default value, which is <see
+        // cref='System.ComponentModel.LocalizableAttribute.No'/>,
         /// that is a property should not be localized.
         /// This <see langword='static'/> field is read-only.
         /// </summary>

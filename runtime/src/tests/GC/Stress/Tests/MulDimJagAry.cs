@@ -4,17 +4,18 @@
 
 using System;
 
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 namespace DefaultNamespace
 {
-    /*************************************************************/
-    /* test: MulDimJagAry.cs
-    /* Purpose: Test GC with Multiple dimentions array
-    /* Coverage: int[][], Object[][], Object[][][], Variant[][][],
-    /*           take Mul_Dimention array as function argument.
-    /*************************************************************/
+/*************************************************************/
+/* test: MulDimJagAry.cs
+/* Purpose: Test GC with Multiple dimentions array
+/* Coverage: int[][], Object[][], Object[][][], Variant[][][],
+/*           take Mul_Dimention array as function argument.
+/*************************************************************/
 
 
     internal class MulDimJagAry

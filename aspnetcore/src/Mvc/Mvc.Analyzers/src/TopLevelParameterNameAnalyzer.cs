@@ -160,11 +160,15 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
 
     private static bool IsComplexType(ITypeSymbol type)
     {
-        // This analyzer should not apply to simple types. In MVC, a simple type is any type that has a type converter that returns true for TypeConverter.CanConvertFrom(typeof(string)).
-        // Unfortunately there isn't a Roslyn way of determining if a TypeConverter exists for a given symbol or if the converter allows string conversions.
+        // This analyzer should not apply to simple types. In MVC, a simple type is any type that has a type
+        // converter that returns true for TypeConverter.CanConvertFrom(typeof(string)).
+        // Unfortunately there isn't a Roslyn way of determining if a TypeConverter exists for a given
+        // symbol or if the converter allows string conversions.
+        //
         // https://github.com/dotnet/corefx/blob/v3.0.0-preview8.19405.3/src/System.ComponentModel.TypeConverter/src/System/ComponentModel/ReflectTypeDescriptionProvider.cs#L103-L141
         // provides a list of types that have built-in converters.
-        // We'll use a simpler heuristic in the analyzer: A type is simple if it's a value type or if it's in the "System.*" namespace hierarchy.
+        // We'll use a simpler heuristic in the analyzer: A type is simple if it's a value type or if it's
+        // in the "System.*" namespace hierarchy.
 
         var @namespace = type.ContainingNamespace?.ToString();
         if (@namespace != null)
@@ -190,7 +194,8 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
                 ? "Prefix"
                 : "Name";
 
-            // All of the built-in attributes (FromQueryAttribute, ModelBinderAttribute etc) only support setting the name via
+            // All of the built-in attributes (FromQueryAttribute, ModelBinderAttribute etc) only support
+            // setting the name via
             // a property. We'll ignore constructor values.
             for (var i = 0; i < attribute.NamedArguments.Length; i++)
             {

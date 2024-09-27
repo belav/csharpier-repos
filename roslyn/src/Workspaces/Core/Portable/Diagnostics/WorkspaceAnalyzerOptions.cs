@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
     /// Analyzer options with workspace.
-    /// These are used to fetch the workspace options by our internal analyzers (e.g. simplification analyzer).
+    /// These are used to fetch the workspace options by our internal analyzers (e.g. simplification
+    // analyzer).
     /// </summary>
     internal sealed class WorkspaceAnalyzerOptions(
         AnalyzerOptions options,

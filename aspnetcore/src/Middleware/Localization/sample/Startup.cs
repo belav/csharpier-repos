@@ -32,7 +32,8 @@ public class Startup
                 .AddSupportedCultures(supportedCultures)
                 .AddSupportedUICultures(supportedCultures)
                 .SetDefaultCulture(supportedCultures[0])
-        // Optionally create an app-specific provider with just a delegate, e.g. look up user preference from DB.
+        // Optionally create an app-specific provider with just a delegate, e.g. look up user preference
+        // from DB.
         //.AddRequestCultureProvider(new CustomRequestCultureProvider(async context =>
         //{
 

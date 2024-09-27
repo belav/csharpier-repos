@@ -82,12 +82,12 @@ namespace MonoTests.System.ServiceModel.Syndication
             Assert.IsNotNull(feed.Items, "#1");
             feed.Items = new SyndicationItem[] { new SyndicationItem() };
             Assert.IsTrue(feed.Items.GetEnumerator().MoveNext(), "#2");
-            /*
-            feed.Items = null;
-            // even after setting null, it autofills a collection.
-            Assert.IsNotNull (feed.Items, "#3");
-            Assert.IsFalse (feed.Items.GetEnumerator ().MoveNext (), "#4"); // make sure we reset it
-            */
+/*
+feed.Items = null;
+// even after setting null, it autofills a collection.
+Assert.IsNotNull (feed.Items, "#3");
+Assert.IsFalse (feed.Items.GetEnumerator ().MoveNext (), "#4"); // make sure we reset it
+*/
         }
 
         [Test]

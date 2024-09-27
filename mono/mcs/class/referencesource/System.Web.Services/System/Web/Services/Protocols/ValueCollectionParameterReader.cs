@@ -16,7 +16,8 @@ namespace System.Web.Services.Protocols
     using System.Web.Services;
     using System.Xml.Serialization;
 
-    /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader"]/*' />
+    /// <include file='doc\ValueCollectionParameterReader.uex'
+    // path='docs/doc[@for="ValueCollectionParameterReader"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -24,7 +25,8 @@ namespace System.Web.Services.Protocols
     {
         ParameterInfo[] paramInfos;
 
-        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.Initialize"]/*' />
+        /// <include file='doc\ValueCollectionParameterReader.uex'
+        // path='docs/doc[@for="ValueCollectionParameterReader.Initialize"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -33,7 +35,8 @@ namespace System.Web.Services.Protocols
             paramInfos = (ParameterInfo[])o;
         }
 
-        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.GetInitializer"]/*' />
+        /// <include file='doc\ValueCollectionParameterReader.uex'
+        // path='docs/doc[@for="ValueCollectionParameterReader.GetInitializer"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -44,7 +47,8 @@ namespace System.Web.Services.Protocols
             return methodInfo.InParameters;
         }
 
-        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.Read"]/*' />
+        /// <include file='doc\ValueCollectionParameterReader.uex'
+        // path='docs/doc[@for="ValueCollectionParameterReader.Read"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -79,7 +83,8 @@ namespace System.Web.Services.Protocols
             return parameters;
         }
 
-        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.IsSupported"]/*' />
+        /// <include file='doc\ValueCollectionParameterReader.uex'
+        // path='docs/doc[@for="ValueCollectionParameterReader.IsSupported"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -94,7 +99,8 @@ namespace System.Web.Services.Protocols
             return true;
         }
 
-        /// <include file='doc\ValueCollectionParameterReader.uex' path='docs/doc[@for="ValueCollectionParameterReader.IsSupported1"]/*' />
+        /// <include file='doc\ValueCollectionParameterReader.uex'
+        // path='docs/doc[@for="ValueCollectionParameterReader.IsSupported1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

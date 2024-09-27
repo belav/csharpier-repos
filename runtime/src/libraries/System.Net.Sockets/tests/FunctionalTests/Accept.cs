@@ -583,7 +583,8 @@ namespace System.Net.Sockets.Tests
                     // Wait for the internal AcceptAsync Task to complete with the exception.
                     await Task.Delay(30);
 
-                    // Ensure that the internal TaskExceptionHolder is finalized and the exception published to UnobservedTaskException.
+                    // Ensure that the internal TaskExceptionHolder is finalized and the exception published to
+                    // UnobservedTaskException.
                     GC.Collect();
                     GC.WaitForPendingFinalizers();
 

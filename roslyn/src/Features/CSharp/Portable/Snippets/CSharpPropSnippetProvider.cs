@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
         )
         {
             // Having a property with `set` accessor in a readonly struct leads to a compiler error.
-            // So if user executes snippet inside a readonly struct the right thing to do is to not generate `set` accessor at all
+            // So if user executes snippet inside a readonly struct the right thing to do is to not generate
+            // `set` accessor at all
             if (
                 syntaxContext.ContainingTypeDeclaration is StructDeclarationSyntax structDeclaration
                 && structDeclaration.Modifiers.Any(SyntaxKind.ReadOnlyKeyword)

@@ -82,7 +82,7 @@ MSCORWKS! WKS::GCHeap::Alloc + 0x11D (0x5db4619d)
 MSCORWKS! Alloc + 0x13A (0x5d9c90b8)
 MSCORWKS! FastAllocatePrimitiveArray + 0x21B (0x5d9c9da2)
 MSCORWKS! JIT_NewArr1 + 0x2CF (0x5d9d5155)
-    File: f:\pd7\ndp\clr\src\vm\gc.cpp, Line: 12792 Image:
+File: f:\pd7\ndp\clr\src\vm\gc.cpp, Line: 12792 Image:
 D:\temp\424916.exe
 
 
@@ -92,7 +92,7 @@ gen0 initial size: 4MB
 (at time of assert, gen0 is ~8KB)
 
 Assert failure(PID 2172 [0x0000087c], Thread: 3668 [0xe54]): !"Can't allocate if
- no free space"
+no free space"
 
 MSCORWKS! WKS::gc_heap::allocate_in_expanded_heap + 0x276 (0x5db32ede)
 MSCORWKS! WKS::gc_heap::realloc_plug + 0x1B5 (0x5db36a16)
@@ -104,7 +104,7 @@ MSCORWKS! WKS::gc_heap::garbage_collect + 0x3FE (0x5db44ee7)
 MSCORWKS! WKS::GCHeap::GarbageCollectGeneration + 0x23D (0x5db45162)
 MSCORWKS! WKS::GCHeap::GarbageCollectTry + 0x38 (0x5db4627e)
 MSCORWKS! WKS::GCHeap::GarbageCollect + 0x3B (0x5db462bd)
-    File: f:\pd7\ndp\clr\src\vm\gc.cpp, Line: 7490 Image:
+File: f:\pd7\ndp\clr\src\vm\gc.cpp, Line: 7490 Image:
 D:\temp\424916.exe
 
 */

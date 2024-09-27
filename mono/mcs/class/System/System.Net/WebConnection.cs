@@ -183,16 +183,16 @@ namespace System.Net
                     {
                         operation.ThrowIfDisposed(cancellationToken);
 
-                        /*
-                         * Socket.Tasks.cs from CoreFX introduces a new internal
-                         * BeginConnect(EndPoint) overload, which will replace
-                         * the one we're using from SocketTaskExtensions.cs.
-                         *
-                         * Our implementation of Socket.BeginConnect() does not
-                         * invoke the callback when the request failed synchronously.
-                         *
-                         * Explicitly use our implementation from SocketTaskExtensions.cs here.
-                         */
+/*
+* Socket.Tasks.cs from CoreFX introduces a new internal
+* BeginConnect(EndPoint) overload, which will replace
+* the one we're using from SocketTaskExtensions.cs.
+*
+* Our implementation of Socket.BeginConnect() does not
+* invoke the callback when the request failed synchronously.
+*
+* Explicitly use our implementation from SocketTaskExtensions.cs here.
+*/
                         await Task
                             .Factory.FromAsync(
                                 (targetEndPoint, callback, state) =>

@@ -518,7 +518,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     StringComparers.MetadataKeyNames
                 );
 
-                // Get the newly re-qualified name of the generic contract and the subset of applicable types from the specialization
+                // Get the newly re-qualified name of the generic contract and the subset of applicable types from
+                // the specialization
                 metadata[CompositionConstants.GenericContractMetadataName] =
                     GenericServices.GetGenericName(
                         originalImport.ContractName,

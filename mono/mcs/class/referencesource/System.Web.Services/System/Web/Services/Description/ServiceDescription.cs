@@ -32,7 +32,8 @@ namespace System.Web.Services.Description
     [XmlFormatExtensionPoint("Extensions")]
     public sealed class ServiceDescription : NamedItem
     {
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Namespace"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Namespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -71,7 +72,8 @@ namespace System.Web.Services.Description
             );
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.RetrievalUrl"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.RetrievalUrl"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -87,7 +89,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.ServiceDescriptions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.ServiceDescriptions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -97,7 +100,8 @@ namespace System.Web.Services.Description
             get { return parent; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -112,7 +116,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Imports"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Imports"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -148,7 +153,8 @@ namespace System.Web.Services.Description
             return Types.HasItems();
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Messages"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Messages"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -163,7 +169,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.PortTypes"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.PortTypes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -178,7 +185,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Bindings"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Bindings"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -193,7 +201,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Services"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Services"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -208,7 +217,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.TargetNamespace"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.TargetNamespace"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -219,7 +229,8 @@ namespace System.Web.Services.Description
             set { targetNamespace = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Schema"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Schema"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -250,7 +261,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.ValidationWarnings"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.ValidationWarnings"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -321,7 +333,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Serializer"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Serializer"]/*' />
         /// <devdoc>
         /// Returns the serializer for processing web service calls.  The serializer is customized according
         /// to settings in config.web.
@@ -491,7 +504,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.CanRead"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.CanRead"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -517,7 +531,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write1"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write1"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -529,7 +544,8 @@ namespace System.Web.Services.Description
             Write(xmlWriter);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write2"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write2"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -540,7 +556,8 @@ namespace System.Web.Services.Description
             writer.Flush();
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write3"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Write3"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -659,7 +676,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -674,7 +692,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Import.ServiceDescription"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Import.ServiceDescription"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -718,7 +737,8 @@ namespace System.Web.Services.Description
         XmlAttribute[] anyAttribute;
         XmlSerializerNamespaces namespaces;
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Documentation"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="DocumentableItem.Documentation"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -750,7 +770,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.DocumentationElement"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="DocumentableItem.DocumentationElement"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -773,7 +794,8 @@ namespace System.Web.Services.Description
             set { this.anyAttribute = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Namespaces"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Namespaces"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -789,7 +811,8 @@ namespace System.Web.Services.Description
             set { this.namespaces = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="DocumentableItem.Extensions"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -909,7 +932,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Service.ServiceDescription"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Service.ServiceDescription"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -987,7 +1011,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageBinding.OperationBinding"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessageBinding.OperationBinding"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1074,7 +1099,8 @@ namespace System.Web.Services.Description
             get { return parent; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBinding.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBinding.Extensions"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1166,7 +1192,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Binding.ServiceDescription"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Binding.ServiceDescription"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1236,7 +1263,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessage.Operation"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessage.Operation"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1266,7 +1294,8 @@ namespace System.Web.Services.Description
     {
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1291,7 +1320,8 @@ namespace System.Web.Services.Description
     {
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1316,7 +1346,8 @@ namespace System.Web.Services.Description
     {
         ServiceDescriptionFormatExtensionCollection extensions;
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1350,7 +1381,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1374,7 +1406,8 @@ namespace System.Web.Services.Description
             get { return parent; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Operation.ParameterOrderString"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="Operation.ParameterOrderString"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1536,7 +1569,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1551,7 +1585,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortType.ServiceDescription"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortType.ServiceDescription"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1592,7 +1627,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1607,7 +1643,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Message.ServiceDescription"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="Message.ServiceDescription"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1686,7 +1723,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescription.Extensions"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1785,14 +1823,17 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection"]/*' />
+    /// <include file='doc\ServiceDescription.uex'
+    // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public sealed class ServiceDescriptionFormatExtensionCollection
         : ServiceDescriptionBaseCollection
     {
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.ServiceDescriptionFormatExtensionCollection"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.ServiceDescriptionFormatExtensionCollection"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1801,7 +1842,8 @@ namespace System.Web.Services.Description
 
         ArrayList handledElements;
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1811,7 +1853,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1820,7 +1863,8 @@ namespace System.Web.Services.Description
             return List.Add(extension);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1829,7 +1873,8 @@ namespace System.Web.Services.Description
             List.Insert(index, extension);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1838,7 +1883,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(extension);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1847,7 +1893,8 @@ namespace System.Web.Services.Description
             return List.Contains(extension);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1856,7 +1903,8 @@ namespace System.Web.Services.Description
             List.Remove(extension);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1865,7 +1913,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Find"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Find"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1883,7 +1932,8 @@ namespace System.Web.Services.Description
             return null;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.FindAll"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.FindAll"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1902,7 +1952,8 @@ namespace System.Web.Services.Description
             return (object[])list.ToArray(type);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Find1"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.Find1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1920,7 +1971,8 @@ namespace System.Web.Services.Description
             return null;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.FindAll1"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.FindAll1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1947,7 +1999,8 @@ namespace System.Web.Services.Description
                 handledElements.Add(element);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IsHandled"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IsHandled"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1959,7 +2012,8 @@ namespace System.Web.Services.Description
                 return ((ServiceDescriptionFormatExtension)item).Handled;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IsRequired"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.IsRequired"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -1993,7 +2047,8 @@ namespace System.Web.Services.Description
             return XmlConvert.ToBoolean(requiredAttr.Value);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2003,7 +2058,8 @@ namespace System.Web.Services.Description
                 ((ServiceDescriptionFormatExtension)value).SetParent(parent);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.OnValidate"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtensionCollection.OnValidate"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2020,7 +2076,8 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtension"]/*' />
+    /// <include file='doc\ServiceDescription.uex'
+    // path='docs/doc[@for="ServiceDescriptionFormatExtension"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -2035,7 +2092,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtension.Parent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtension.Parent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2044,7 +2102,8 @@ namespace System.Web.Services.Description
             get { return parent; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtension.Required"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtension.Required"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2055,7 +2114,8 @@ namespace System.Web.Services.Description
             set { required = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionFormatExtension.Handled"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionFormatExtension.Handled"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2085,26 +2145,30 @@ namespace System.Web.Services.Description
         /// </devdoc>
         OneWay,
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.Notification"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.Notification"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         Notification,
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.RequestResponse"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFlow.RequestResponse"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         RequestResponse,
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFlow.SolicitResponse"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFlow.SolicitResponse"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         SolicitResponse,
     }
 
-    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection"]/*' />
+    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -2113,7 +2177,8 @@ namespace System.Web.Services.Description
         internal OperationMessageCollection(Operation operation)
             : base(operation) { }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2123,7 +2188,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2132,7 +2198,8 @@ namespace System.Web.Services.Description
             return List.Add(operationMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2141,7 +2208,8 @@ namespace System.Web.Services.Description
             List.Insert(index, operationMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2150,7 +2218,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(operationMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2159,7 +2228,8 @@ namespace System.Web.Services.Description
             return List.Contains(operationMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2168,7 +2238,8 @@ namespace System.Web.Services.Description
             List.Remove(operationMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2177,7 +2248,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Input"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Input"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2197,7 +2269,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Output"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Output"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2217,7 +2290,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.Flow"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.Flow"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2254,7 +2328,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2263,7 +2338,8 @@ namespace System.Web.Services.Description
             ((OperationMessage)value).SetParent((Operation)parent);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.OnInsert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.OnInsert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2277,7 +2353,8 @@ namespace System.Web.Services.Description
             base.OnInsert(index, value);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.OnSet"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.OnSet"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2290,7 +2367,8 @@ namespace System.Web.Services.Description
             base.OnSet(index, oldValue, newValue);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationMessageCollection.OnValidate"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationMessageCollection.OnValidate"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2351,7 +2429,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(import);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.Contains"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2378,7 +2457,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ImportCollection.SetParent"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2425,7 +2505,8 @@ namespace System.Web.Services.Description
             List.Insert(index, message);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.IndexOf"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2434,7 +2515,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(message);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.Contains"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2479,7 +2561,8 @@ namespace System.Web.Services.Description
             return ((Message)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessageCollection.SetParent"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2618,7 +2701,8 @@ namespace System.Web.Services.Description
             return List.Add(portType);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Insert"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2627,7 +2711,8 @@ namespace System.Web.Services.Description
             List.Insert(index, portType);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.IndexOf"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2636,7 +2721,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(portType);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Contains"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2645,7 +2731,8 @@ namespace System.Web.Services.Description
             return List.Contains(portType);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.Remove"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2654,7 +2741,8 @@ namespace System.Web.Services.Description
             List.Remove(portType);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.CopyTo"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2672,7 +2760,8 @@ namespace System.Web.Services.Description
             get { return (PortType)Table[name]; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.GetKey"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.GetKey"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2681,7 +2770,8 @@ namespace System.Web.Services.Description
             return ((PortType)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="PortTypeCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="PortTypeCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2728,7 +2818,8 @@ namespace System.Web.Services.Description
             List.Insert(index, binding);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.IndexOf"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2737,7 +2828,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(binding);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.Contains"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2782,7 +2874,8 @@ namespace System.Web.Services.Description
             return ((Binding)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="BindingCollection.SetParent"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2829,7 +2922,8 @@ namespace System.Web.Services.Description
             List.Insert(index, service);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.IndexOf"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2838,7 +2932,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(service);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.Contains"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2883,7 +2978,8 @@ namespace System.Web.Services.Description
             return ((Service)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceCollection.SetParent"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2902,7 +2998,8 @@ namespace System.Web.Services.Description
         internal MessagePartCollection(Message message)
             : base(message) { }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2912,7 +3009,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Add"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2921,7 +3019,8 @@ namespace System.Web.Services.Description
             return List.Add(messagePart);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2930,7 +3029,8 @@ namespace System.Web.Services.Description
             List.Insert(index, messagePart);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2939,7 +3039,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(messagePart);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2948,7 +3049,8 @@ namespace System.Web.Services.Description
             return List.Contains(messagePart);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2957,7 +3059,8 @@ namespace System.Web.Services.Description
             List.Remove(messagePart);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2966,7 +3069,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this1"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.this1"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2975,7 +3079,8 @@ namespace System.Web.Services.Description
             get { return (MessagePart)Table[name]; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.GetKey"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2984,7 +3089,8 @@ namespace System.Web.Services.Description
             return ((MessagePart)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="MessagePartCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="MessagePartCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -2994,7 +3100,8 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection"]/*' />
+    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -3003,7 +3110,8 @@ namespace System.Web.Services.Description
         internal OperationBindingCollection(Binding binding)
             : base(binding) { }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3013,7 +3121,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3022,7 +3131,8 @@ namespace System.Web.Services.Description
             return List.Add(bindingOperation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3031,7 +3141,8 @@ namespace System.Web.Services.Description
             List.Insert(index, bindingOperation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3040,7 +3151,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(bindingOperation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3049,7 +3161,8 @@ namespace System.Web.Services.Description
             return List.Contains(bindingOperation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3058,7 +3171,8 @@ namespace System.Web.Services.Description
             List.Remove(bindingOperation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3067,7 +3181,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationBindingCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationBindingCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3086,7 +3201,8 @@ namespace System.Web.Services.Description
         internal FaultBindingCollection(OperationBinding operationBinding)
             : base(operationBinding) { }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.this"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3096,7 +3212,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Add"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3105,7 +3222,8 @@ namespace System.Web.Services.Description
             return List.Add(bindingOperationFault);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3114,7 +3232,8 @@ namespace System.Web.Services.Description
             List.Insert(index, bindingOperationFault);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3123,7 +3242,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(bindingOperationFault);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3132,7 +3252,8 @@ namespace System.Web.Services.Description
             return List.Contains(bindingOperationFault);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3141,7 +3262,8 @@ namespace System.Web.Services.Description
             List.Remove(bindingOperationFault);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3150,7 +3272,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.this1"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3159,7 +3282,8 @@ namespace System.Web.Services.Description
             get { return (FaultBinding)Table[name]; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.GetKey"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3168,7 +3292,8 @@ namespace System.Web.Services.Description
             return ((FaultBinding)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="FaultBindingCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="FaultBindingCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3206,7 +3331,8 @@ namespace System.Web.Services.Description
             return List.Add(operation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Insert"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3215,7 +3341,8 @@ namespace System.Web.Services.Description
             List.Insert(index, operation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.IndexOf"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3224,7 +3351,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(operation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3233,7 +3361,8 @@ namespace System.Web.Services.Description
             return List.Contains(operation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.Remove"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3242,7 +3371,8 @@ namespace System.Web.Services.Description
             List.Remove(operation);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.CopyTo"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3251,7 +3381,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3270,7 +3401,8 @@ namespace System.Web.Services.Description
         internal OperationFaultCollection(Operation operation)
             : base(operation) { }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.this"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.this"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3280,7 +3412,8 @@ namespace System.Web.Services.Description
             set { List[index] = value; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Add"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3289,7 +3422,8 @@ namespace System.Web.Services.Description
             return List.Add(operationFaultMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Insert"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.Insert"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3298,7 +3432,8 @@ namespace System.Web.Services.Description
             List.Insert(index, operationFaultMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.IndexOf"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.IndexOf"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3307,7 +3442,8 @@ namespace System.Web.Services.Description
             return List.IndexOf(operationFaultMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Contains"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.Contains"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3316,7 +3452,8 @@ namespace System.Web.Services.Description
             return List.Contains(operationFaultMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.Remove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.Remove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3325,7 +3462,8 @@ namespace System.Web.Services.Description
             List.Remove(operationFaultMessage);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.CopyTo"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.CopyTo"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3334,7 +3472,8 @@ namespace System.Web.Services.Description
             List.CopyTo(array, index);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.this1"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.this1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3343,7 +3482,8 @@ namespace System.Web.Services.Description
             get { return (OperationFault)Table[name]; }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.GetKey"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3352,7 +3492,8 @@ namespace System.Web.Services.Description
             return ((OperationFault)value).Name;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="OperationFaultCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="OperationFaultCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3362,7 +3503,8 @@ namespace System.Web.Services.Description
         }
     }
 
-    /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection"]/*' />
+    /// <include file='doc\ServiceDescription.uex'
+    // path='docs/doc[@for="ServiceDescriptionBaseCollection"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -3376,7 +3518,8 @@ namespace System.Web.Services.Description
             this.parent = parent;
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.Table"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.Table"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3390,7 +3533,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.GetKey"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.GetKey"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3399,7 +3543,8 @@ namespace System.Web.Services.Description
             return null; // returning null means there is no key
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.SetParent"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.SetParent"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3408,7 +3553,8 @@ namespace System.Web.Services.Description
             // default is that the item has no parent
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.OnInsertComplete"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.OnInsertComplete"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3417,7 +3563,8 @@ namespace System.Web.Services.Description
             AddValue(value);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.OnRemove"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.OnRemove"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3426,7 +3573,8 @@ namespace System.Web.Services.Description
             RemoveValue(value);
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.OnClear"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.OnClear"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -3438,7 +3586,8 @@ namespace System.Web.Services.Description
             }
         }
 
-        /// <include file='doc\ServiceDescription.uex' path='docs/doc[@for="ServiceDescriptionBaseCollection.OnSet"]/*' />
+        /// <include file='doc\ServiceDescription.uex'
+        // path='docs/doc[@for="ServiceDescriptionBaseCollection.OnSet"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

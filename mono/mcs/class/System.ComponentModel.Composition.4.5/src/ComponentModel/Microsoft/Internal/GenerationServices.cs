@@ -110,7 +110,8 @@ namespace Microsoft.Internal
             }
 
             //
-            // Generate IL depending on the valueType - this is messier than it should ever be, but sadly necessary
+            // Generate IL depending on the valueType - this is messier than it should ever be, but sadly
+            // necessary
             //
             if (valueType == GenerationServices.StringType)
             {
@@ -136,9 +137,11 @@ namespace Microsoft.Internal
                 || (valueType == GenerationServices.Int32Type)
             )
             {
-                // NOTE : Everything that is 32 bit or less uses ldc.i4. We need to pass int32, even if the actual types is shorter - this is IL memory model
+                // NOTE : Everything that is 32 bit or less uses ldc.i4. We need to pass int32, even if the actual
+                // types is shorter - this is IL memory model
                 // direct casting to (int) won't work, because the value is boxed, thus we need to use Convert.
-                // Sadly, this will not work for all cases - namely large uint32 - because they can't semantically fit into 32 signed bits
+                // Sadly, this will not work for all cases - namely large uint32 - because they can't semantically
+                // fit into 32 signed bits
                 // We have a special case for that next
                 ilGenerator.LoadInt(
                     (int)Convert.ChangeType(rawValue, typeof(int), CultureInfo.InvariantCulture)
@@ -146,8 +149,10 @@ namespace Microsoft.Internal
             }
             else if (valueType == GenerationServices.UInt32Type)
             {
-                // NOTE : This one is a bit tricky. Ldc.I4 takes an Int32 as an argument, although it really treats it as a 32bit number
-                // That said, some UInt32 values are larger that Int32.MaxValue, so the Convert call above will fail, which is why
+                // NOTE : This one is a bit tricky. Ldc.I4 takes an Int32 as an argument, although it really treats
+                // it as a 32bit number
+                // That said, some UInt32 values are larger that Int32.MaxValue, so the Convert call above will
+                // fail, which is why
                 // we need to treat this case individually and cast to uint, and then - unchecked - to int.
                 ilGenerator.LoadInt(unchecked((int)((uint)rawValue)));
             }
@@ -157,8 +162,10 @@ namespace Microsoft.Internal
             }
             else if (valueType == GenerationServices.UInt64Type)
             {
-                // NOTE : This one is a bit tricky. Ldc.I8 takes an Int64 as an argument, although it really treats it as a 64bit number
-                // That said, some UInt64 values are larger that Int64.MaxValue, so the direct case we use above (or Convert, for that matter)will fail, which is why
+                // NOTE : This one is a bit tricky. Ldc.I8 takes an Int64 as an argument, although it really treats
+                // it as a 64bit number
+                // That said, some UInt64 values are larger that Int64.MaxValue, so the direct case we use above (or
+                // Convert, for that matter)will fail, which is why
                 // we need to treat this case individually and cast to ulong, and then - unchecked - to long.
                 ilGenerator.LoadLong(unchecked((long)((ulong)rawValue)));
             }
@@ -206,7 +213,8 @@ namespace Microsoft.Internal
             ilGenerator.Emit(OpCodes.Callvirt, DictionaryAdd);
         }
 
-        /// Generates the code that adds an object from a local variable to a dictionary also stored in a local
+        /// Generates the code that adds an object from a local variable to a dictionary also stored in a
+        // local
         /// <param name="ilGenerator"></param>
         /// <param name="dictionary"></param>
         /// <param name="key"></param>

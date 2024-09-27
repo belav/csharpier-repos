@@ -28,7 +28,8 @@ namespace System.IdentityModel.Selectors
 
     //
     // Summary:
-    //  The InfoCard remoted version of a SymmetricAlgorithm.  Allows limited access to a symmetric key owned by
+    //  The InfoCard remoted version of a SymmetricAlgorithm.  Allows limited access to a symmetric key
+    // owned by
     //  the infocard service.
     //
     internal class InfoCardSymmetricAlgorithm : SymmetricAlgorithm, IDisposable

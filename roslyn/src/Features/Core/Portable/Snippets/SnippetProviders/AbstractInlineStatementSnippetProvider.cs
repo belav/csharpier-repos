@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
         /// <summary>
         /// Generate statement node
         /// </summary>
-        /// <param name="inlineExpression">Right-hand side of a member access expression. <see langword="null"/> if snippet is executed in normal statement context</param>
+        /// <param name="inlineExpression">Right-hand side of a member access expression. <see
+        // langword="null"/> if snippet is executed in normal statement context</param>
         protected abstract SyntaxNode GenerateStatement(
             SyntaxGenerator generator,
             SyntaxContext syntaxContext,

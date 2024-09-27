@@ -24,7 +24,8 @@ namespace System.Web.Services.Discovery
     {
         private DiscoveryClientProtocol clientProtocol;
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.ClientProtocol"]/*' />
+        /// <include file='doc\DiscoveryReference.uex'
+        // path='docs/doc[@for="DiscoveryReference.ClientProtocol"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -35,7 +36,8 @@ namespace System.Web.Services.Discovery
             set { clientProtocol = value; }
         }
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.DefaultFilename"]/*' />
+        /// <include file='doc\DiscoveryReference.uex'
+        // path='docs/doc[@for="DiscoveryReference.DefaultFilename"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -45,13 +47,15 @@ namespace System.Web.Services.Discovery
             get { return FilenameFromUrl(Url); }
         }
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.WriteDocument"]/*' />
+        /// <include file='doc\DiscoveryReference.uex'
+        // path='docs/doc[@for="DiscoveryReference.WriteDocument"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public abstract void WriteDocument(object document, Stream stream);
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.ReadDocument"]/*' />
+        /// <include file='doc\DiscoveryReference.uex'
+        // path='docs/doc[@for="DiscoveryReference.ReadDocument"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -66,7 +70,8 @@ namespace System.Web.Services.Discovery
 
         internal virtual void LoadExternals(Hashtable loadedExternals) { }
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.FilenameFromUrl"]/*' />
+        /// <include file='doc\DiscoveryReference.uex'
+        // path='docs/doc[@for="DiscoveryReference.FilenameFromUrl"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -120,7 +125,8 @@ namespace System.Web.Services.Discovery
             return Path.GetFileName(name);
         }
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.Resolve"]/*' />
+        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.Resolve"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -184,7 +190,8 @@ namespace System.Web.Services.Discovery
             }
         }
 
-        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.Resolve1"]/*' />
+        /// <include file='doc\DiscoveryReference.uex' path='docs/doc[@for="DiscoveryReference.Resolve1"]/*'
+        // />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

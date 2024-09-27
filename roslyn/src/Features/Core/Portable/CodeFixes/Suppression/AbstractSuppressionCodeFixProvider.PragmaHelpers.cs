@@ -86,8 +86,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 out SyntaxTrivia triviaAtIndex
             )
             {
-                // Start token: Insert the #pragma disable directive just **before** the first end of line trivia prior to diagnostic location.
-                // End token: Insert the #pragma disable directive just **after** the first end of line trivia after diagnostic location.
+                // Start token: Insert the #pragma disable directive just **before** the first end of line trivia
+                // prior to diagnostic location.
+                // End token: Insert the #pragma disable directive just **after** the first end of line trivia after
+                // diagnostic location.
 
                 int getNextIndex(int cur) => isStartToken ? cur - 1 : cur + 1;
                 bool shouldConsiderTrivia(SyntaxTrivia trivia) =>
@@ -289,8 +291,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
                 ref SuppressionTargetInfo suppressionTargetInfo
             )
             {
-                // For pragma suppression fixes, we need to normalize the leading trivia on start token to account for
-                // the trailing trivia on its previous token (and similarly normalize trailing trivia for end token).
+                // For pragma suppression fixes, we need to normalize the leading trivia on start token to account
+                // for
+                // the trailing trivia on its previous token (and similarly normalize trailing trivia for end
+                // token).
 
                 var startToken = suppressionTargetInfo.StartToken;
                 var endToken = suppressionTargetInfo.EndToken;

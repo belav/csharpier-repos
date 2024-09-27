@@ -21,7 +21,8 @@ namespace System.Web.UI.WebControls
         private OrderedDictionary _values;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewDeleteEventArgs'/>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.DetailsViewDeleteEventArgs'/>
         /// class.</para>
         /// </devdoc>
         public DetailsViewDeleteEventArgs(int rowIndex)
@@ -36,7 +37,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Gets a keyed list to populate with parameters that identify the row to delete.  This property is read-only.</para>
+        /// <para>Gets a keyed list to populate with parameters that identify the row to delete.  This
+        // property is read-only.</para>
         /// </devdoc>
         public IOrderedDictionary Keys
         {

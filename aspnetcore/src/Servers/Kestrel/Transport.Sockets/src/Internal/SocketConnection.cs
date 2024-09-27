@@ -104,7 +104,8 @@ internal sealed partial class SocketConnection : TransportConnection
         Output.CancelPendingRead();
     }
 
-    // Only called after connection middleware is complete which means the ConnectionClosed token has fired.
+    // Only called after connection middleware is complete which means the ConnectionClosed token has
+    // fired.
     public override async ValueTask DisposeAsync()
     {
         _originalTransport.Input.Complete();
@@ -204,8 +205,10 @@ internal sealed partial class SocketConnection : TransportConnection
 
                 bool IsNormalCompletion(SocketOperationResult result)
                 {
-                    // There's still a small chance that both DoReceive() and DoSend() can log the same connection reset.
-                    // Both logs will have the same ConnectionId. I don't think it's worthwhile to lock just to avoid this.
+                    // There's still a small chance that both DoReceive() and DoSend() can log the same connection
+                    // reset.
+                    // Both logs will have the same ConnectionId. I don't think it's worthwhile to lock just to avoid
+                    // this.
                     // When _shutdownReason is set, error is ignored, so it does not need to be initialized.
                     if (_shutdownReason is not null)
                     {
@@ -388,7 +391,8 @@ internal sealed partial class SocketConnection : TransportConnection
             // Without this, the RequestsCanBeAbortedMidRead test will sometimes fail when
             // a BadHttpRequestException is thrown instead of a TaskCanceledException.
             //
-            // The shutdownReason argument should only be null if the output was completed gracefully, so no one should ever
+            // The shutdownReason argument should only be null if the output was completed gracefully, so no one
+            // should ever
             // ever observe this ConnectionAbortedException except for connection middleware attempting
             // to half close the connection which is currently unsupported. The message is always logged though.
             _shutdownReason =

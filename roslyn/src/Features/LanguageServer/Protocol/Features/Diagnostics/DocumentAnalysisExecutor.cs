@@ -22,7 +22,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
     /// <summary>
-    /// Executes analyzers on a document for computing local syntax/semantic/additional file diagnostics for a specific <see cref="DocumentAnalysisScope"/>.
+    /// Executes analyzers on a document for computing local syntax/semantic/additional file diagnostics
+    // for a specific <see cref="DocumentAnalysisScope"/>.
     /// </summary>
     internal sealed partial class DocumentAnalysisExecutor
     {
@@ -80,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             );
 
         /// <summary>
-        /// Return all local diagnostics (syntax, semantic) that belong to given document for the given analyzer by calculating them.
+        /// Return all local diagnostics (syntax, semantic) that belong to given document for the given
+        // analyzer by calculating them.
         /// </summary>
         public async Task<IEnumerable<DiagnosticData>> ComputeDiagnosticsAsync(
             DiagnosticAnalyzer analyzer,
@@ -119,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
             if (analyzer == GeneratorDiagnosticsPlaceholderAnalyzer.Instance)
             {
-                // We will count generator diagnostics as semantic diagnostics; some filtering to either syntax/semantic is necessary or else we'll report diagnostics twice.
+                // We will count generator diagnostics as semantic diagnostics; some filtering to either
+                // syntax/semantic is necessary or else we'll report diagnostics twice.
                 if (kind == AnalysisKind.Semantic)
                 {
                     var generatorDiagnostics = await GetSourceGeneratorDiagnosticsAsync(
@@ -231,8 +234,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     .GetValueTextAsync(cancellationToken)
                     .ConfigureAwait(false);
 
-                // TODO: Unclear if using the unmapped span here is correct.  It does feel somewhat appropriate as the
-                // caller should be asking about diagnostics in an actual document, and not where they were remapped to.
+                // TODO: Unclear if using the unmapped span here is correct.  It does feel somewhat appropriate as
+                // the
+                // caller should be asking about diagnostics in an actual document, and not where they were remapped
+                // to.
                 diagnostics = diagnostics.WhereAsArray(d =>
                     d.DocumentId is null
                     || span.Value.IntersectsWith(
@@ -340,8 +345,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
             //     This is critical for better analyzer execution performance.
-            //  2. Ensure that the compiler analyzer is treated specially and does not block on diagnostic computation
-            //     for rest of the analyzers. This is needed to ensure faster refresh for compiler diagnostics while typing.
+            //  2. Ensure that the compiler analyzer is treated specially and does not block on diagnostic
+            // computation
+            //     for rest of the analyzers. This is needed to ensure faster refresh for compiler diagnostics
+            // while typing.
 
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
             RoslynDebug.Assert(_compilationBasedAnalyzersInAnalysisScope.Contains(analyzer));
@@ -395,9 +402,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         {
             // PERF:
             //  1. Compute diagnostics for all analyzers with a single invocation into CompilationWithAnalyzers.
-            //     This is critical for better analyzer execution performance through re-use of bound node cache.
-            //  2. Ensure that the compiler analyzer is treated specially and does not block on diagnostic computation
-            //     for rest of the analyzers. This is needed to ensure faster refresh for compiler diagnostics while typing.
+            //     This is critical for better analyzer execution performance through re-use of bound node
+            // cache.
+            //  2. Ensure that the compiler analyzer is treated specially and does not block on diagnostic
+            // computation
+            //     for rest of the analyzers. This is needed to ensure faster refresh for compiler diagnostics
+            // while typing.
 
             RoslynDebug.Assert(_compilationWithAnalyzers != null);
 

@@ -1,7 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// From https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Private.CoreLib/src/System/Text/TranscodingStream.cs
+// From
+//
+//
+//
+//
+//
+// https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Private.CoreLib/src/System/Text/TranscodingStream.cs
 
 using System.Buffers;
 using System.Diagnostics;
@@ -41,17 +47,17 @@ namespace System.Text
         private readonly byte[] _singleByteBuffer = new byte[1];
 
         /*
-         * Fields used for writing bytes [this] -> chars -> bytes [inner]
-         * Lazily initialized the first time we need to write
-         */
+        * Fields used for writing bytes [this] -> chars -> bytes [inner]
+        * Lazily initialized the first time we need to write
+        */
 
         private Encoder? _innerEncoder;
         private Decoder? _thisDecoder;
 
         /*
-         * Fields used for reading bytes [inner] -> chars -> bytes [this]
-         * Lazily initialized the first time we need to read
-         */
+        * Fields used for reading bytes [inner] -> chars -> bytes [this]
+        * Lazily initialized the first time we need to read
+        */
 
         private Encoder? _thisEncoder;
         private Decoder? _innerDecoder;
@@ -75,9 +81,9 @@ namespace System.Text
         }
 
         /*
-         * Most CanXyz methods delegate to the inner stream, returning false
-         * if this instance has been disposed. CanSeek is always false.
-         */
+        * Most CanXyz methods delegate to the inner stream, returning false
+        * if this instance has been disposed. CanSeek is always false.
+        */
 
         public override bool CanRead => _innerStream?.CanRead ?? false;
 
@@ -906,7 +912,13 @@ namespace System.Text
             Write(_singleByteBuffer, offset: 0, count: 1);
         }
 
-        // From https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Private.CoreLib/src/System/IO/Stream.cs
+        // From
+        //
+        //
+        //
+        //
+        //
+        // https://github.com/dotnet/runtime/blob/88868b7a781f4e5b9037b8721f30440207a7aa42/src/libraries/System.Private.CoreLib/src/System/IO/Stream.cs
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static void ValidateBufferArguments(byte[] buffer, int offset, int count)

@@ -81,8 +81,10 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Converts an instantiation into its canonical form. Returns the canonical instantiation. The '<paramref name="changed"/>'
-        /// parameter indicates whether the returned canonical instantiation is different from the specific instantiation
+        /// Converts an instantiation into its canonical form. Returns the canonical instantiation. The
+        // '<paramref name="changed"/>'
+        /// parameter indicates whether the returned canonical instantiation is different from the specific
+        // instantiation
         /// passed as the input.
         /// </summary>
         protected internal virtual Instantiation ConvertInstantiationToCanonForm(
@@ -95,7 +97,8 @@ namespace Internal.TypeSystem
         }
 
         /// <summary>
-        /// Converts a constituent of a constructed type to it's canonical form. Note this method is different
+        /// Converts a constituent of a constructed type to it's canonical form. Note this method is
+        // different
         /// from <see cref="TypeDesc.ConvertToCanonForm(CanonicalFormKind)"/>.
         /// </summary>
         protected internal virtual TypeDesc ConvertToCanon(

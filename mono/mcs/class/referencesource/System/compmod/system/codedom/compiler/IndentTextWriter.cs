@@ -32,7 +32,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.IndentedTextWriter'/> using the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.IndentedTextWriter'/>
+        // using the specified
         ///       text writer and default tab string.
         ///    </para>
         /// </devdoc>
@@ -41,7 +42,8 @@ namespace System.CodeDom.Compiler
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.IndentedTextWriter'/> using the specified
+        ///       Initializes a new instance of <see cref='System.CodeDom.Compiler.IndentedTextWriter'/>
+        // using the specified
         ///       text writer and tab string.
         ///    </para>
         /// </devdoc>

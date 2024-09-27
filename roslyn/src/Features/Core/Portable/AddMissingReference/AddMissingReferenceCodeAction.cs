@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
         public override string Title { get; } = title;
 
         /// <summary>
-        /// This code action only works by adding references.  As such, it requires a non document change (and is
+        /// This code action only works by adding references.  As such, it requires a non document change
+        // (and is
         /// thus restricted in which hosts it can run).
         /// </summary>
         public override ImmutableArray<string> Tags => RequiresNonDocumentChangeTags;
@@ -115,7 +116,8 @@ namespace Microsoft.CodeAnalysis.AddMissingReference
             // If we have a project reference to add, then add it
             if (_projectReferenceToAdd != null)
             {
-                // note: no need to post process since we are just adding a project reference and not making any code changes.
+                // note: no need to post process since we are just adding a project reference and not making any
+                // code changes.
                 return Task.FromResult(
                     ImmutableArray.Create<CodeActionOperation>(
                         new ApplyChangesOperation(

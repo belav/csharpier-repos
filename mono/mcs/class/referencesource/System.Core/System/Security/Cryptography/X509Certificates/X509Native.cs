@@ -189,7 +189,8 @@ namespace System.Security.Cryptography.X509Certificates
             return UnsafeNativeMethods.CertDuplicateCertificateContext(context);
         }
 
-        // Gets a SafeHandle for the X509 certificate. The caller owns the returned handle and should dispose of it. It
+        // Gets a SafeHandle for the X509 certificate. The caller owns the returned handle and should
+        // dispose of it. It
         // can be used independently of the lifetime of the original X509Certificate.
         [SecuritySafeCritical]
         internal static SafeCertContextHandle GetCertificateContext(X509Certificate certificate)
@@ -204,7 +205,8 @@ namespace System.Security.Cryptography.X509Certificates
     }
 
     /// <summary>
-    ///     Native interop layer for X509 certificate and Authenticode functions. Native definitions can be
+    ///     Native interop layer for X509 certificate and Authenticode functions. Native definitions can
+    // be
     ///     found in wincrypt.h or msaxlapi.h
     /// </summary>
     internal static partial class X509Native

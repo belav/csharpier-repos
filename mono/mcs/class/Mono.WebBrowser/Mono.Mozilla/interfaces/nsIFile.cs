@@ -41,13 +41,13 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int append(
-            /*AString*/HandleRef node
+/*AString*/HandleRef node
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int appendNative(
-            /*ACString*/HandleRef node
+/*ACString*/HandleRef node
         );
 
         [PreserveSigAttribute]
@@ -86,42 +86,42 @@ namespace Mono.Mozilla
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int copyTo(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*AString*/HandleRef newName
+/*AString*/HandleRef newName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int CopyToNative(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*ACString*/HandleRef newName
+/*ACString*/HandleRef newName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int copyToFollowingLinks(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*AString*/HandleRef newName
+/*AString*/HandleRef newName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int copyToFollowingLinksNative(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*ACString*/HandleRef newName
+/*ACString*/HandleRef newName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int moveTo(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*AString*/HandleRef newName
+/*AString*/HandleRef newName
         );
 
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int moveToNative(
             [MarshalAs(UnmanagedType.Interface)] nsIFile newParentDir,
-            /*ACString*/HandleRef newName
+/*ACString*/HandleRef newName
         );
 
         [PreserveSigAttribute]

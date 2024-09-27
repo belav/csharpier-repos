@@ -56,8 +56,10 @@ namespace System.ComponentModel.Composition.AttributedModel
         {
             Assumes.NotNull(attributedPart);
 
-            // If given an instance then we want to pass the default composition options because we treat it as a shared part
-            // TODO: ICompositionElement Give this def an origin indicating that it was added directly to the ComposablePartExportProvider.
+            // If given an instance then we want to pass the default composition options because we treat it as
+            // a shared part
+            // TODO: ICompositionElement Give this def an origin indicating that it was added directly to the
+            // ComposablePartExportProvider.
 
             ReflectionComposablePartDefinition definition =
                 AttributedModelDiscovery.CreatePartDefinition(
@@ -79,8 +81,10 @@ namespace System.ComponentModel.Composition.AttributedModel
             Assumes.NotNull(attributedPart);
             Assumes.NotNull(reflectionContext);
 
-            // If given an instance then we want to pass the default composition options because we treat it as a shared part
-            // TODO: ICompositionElement Give this def an origin indicating that it was added directly to the ComposablePartExportProvider.
+            // If given an instance then we want to pass the default composition options because we treat it as
+            // a shared part
+            // TODO: ICompositionElement Give this def an origin indicating that it was added directly to the
+            // ComposablePartExportProvider.
 
             var mappedType = reflectionContext.MapType(
                 IntrospectionExtensions.GetTypeInfo(attributedPart.GetType())

@@ -31,7 +31,8 @@ namespace System.Data.Mapping.Update.Internal
     /// <item>Group changes by C-Space extent</item>
     /// <item>For each affected S-Space table, perform propagation (get changes in S-Space terms)</item>
     /// <item>Merge S-Space inserts and deletes into updates where appropriate</item>
-    /// <item>Produce S-Space commands implementating the modifications (insert, delete and update SQL statements)</item>
+    /// <item>Produce S-Space commands implementating the modifications (insert, delete and update SQL
+    // statements)</item>
     /// </list>
     /// </summary>
     internal partial class UpdateTranslator
@@ -43,7 +44,8 @@ namespace System.Data.Mapping.Update.Internal
         /// <param name="stateManager">Entity state manager containing changes to be processed.</param>
         /// <param name="metadataWorkspace">Metadata workspace.</param>
         /// <param name="connection">Map connection</param>
-        /// <param name="commandTimeout">Timeout for update commands; null means 'use provider default'</param>
+        /// <param name="commandTimeout">Timeout for update commands; null means 'use provider
+        // default'</param>
         private UpdateTranslator(
             IEntityStateManager stateManager,
             MetadataWorkspace metadataWorkspace,
@@ -346,7 +348,8 @@ namespace System.Data.Mapping.Update.Internal
 
                     if (null != principalKey)
                     {
-                        // find the right principal key... (first, existing entities; then, added entities; finally, just the key)
+                        // find the right principal key... (first, existing entities; then, added entities; finally, just
+                        // the key)
                         IEntityStateEntry existingPrincipal;
                         EntityKey tempKey;
                         if (
@@ -615,7 +618,8 @@ namespace System.Data.Mapping.Update.Internal
             return source.GetStateEntries(this);
         }
 
-        // effects: Given a list of pairs describing the contexts for server generated values and their actual
+        // effects: Given a list of pairs describing the contexts for server generated values and their
+        // actual
         // values, backpropagates to the relevant state entries
         private void BackPropagateServerGen(
             List<KeyValuePair<PropagatorResult, object>> generatedValues
@@ -963,7 +967,8 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Returns error when it is not possible to order update commands. Argument is the 'remainder', or commands
+        /// Returns error when it is not possible to order update commands. Argument is the 'remainder', or
+        // commands
         /// that could not be ordered due to a cycle.
         /// </summary>
         private UpdateException DependencyOrderingError(IEnumerable<UpdateCommand> remainder)
@@ -1040,7 +1045,8 @@ namespace System.Data.Mapping.Update.Internal
         }
 
         /// <summary>
-        /// Determines whether the given exception requires additional context from the update pipeline (in other
+        /// Determines whether the given exception requires additional context from the update pipeline (in
+        // other
         /// words, whether the exception should be wrapped in an UpdateException).
         /// </summary>
         /// <param name="e">Exception to test.</param>
@@ -1063,7 +1069,8 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         private void PullModifiedEntriesFromStateManager()
         {
-            // do a first pass over added entries to register 'by value' entity key targets that may be resolved as
+            // do a first pass over added entries to register 'by value' entity key targets that may be resolved
+            // as
             // via a foreign key
             foreach (
                 IEntityStateEntry addedEntry in m_stateManager.GetEntityStateEntries(
@@ -1273,7 +1280,8 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         private void AddValidAncillaryKey(EntityKey key, Set<EntityKey> keySet)
         {
-            // Note: an entity is ancillary iff. it is unchanged (otherwise it is tracked as a "standard" changed entity)
+            // Note: an entity is ancillary iff. it is unchanged (otherwise it is tracked as a "standard"
+            // changed entity)
             IEntityStateEntry endEntry;
             if (
                 m_stateManager.TryGetEntityStateEntry(key, out endEntry)
@@ -1433,11 +1441,16 @@ namespace System.Data.Mapping.Update.Internal
     /// Enumeration of possible operators.
     /// </summary>
     /// <remarks>
-    /// The values are used to determine the order of operations (in the absence of any strong dependencies).
-    /// The chosen order is based on the observation that hidden dependencies (e.g. due to temporary keys in
-    /// the state manager or unknown FKs) favor deletes before inserts and updates before deletes. For instance,
-    /// a deleted entity may have the same real key value as an inserted entity. Similarly, a self-reference
-    /// may require a new dependent row to be updated before the prinpical row is inserted. Obviously, the actual
+    /// The values are used to determine the order of operations (in the absence of any strong
+    // dependencies).
+    /// The chosen order is based on the observation that hidden dependencies (e.g. due to temporary
+    // keys in
+    /// the state manager or unknown FKs) favor deletes before inserts and updates before deletes. For
+    // instance,
+    /// a deleted entity may have the same real key value as an inserted entity. Similarly, a
+    // self-reference
+    /// may require a new dependent row to be updated before the prinpical row is inserted. Obviously,
+    // the actual
     /// constraints are required to make reliable decisions so this ordering is merely a heuristic.
     /// </remarks>
     internal enum ModificationOperator : byte

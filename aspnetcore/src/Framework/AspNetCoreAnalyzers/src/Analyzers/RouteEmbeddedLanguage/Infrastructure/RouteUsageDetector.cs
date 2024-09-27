@@ -24,7 +24,8 @@ internal enum RouteUsageType
     Component,
 }
 
-// RouteParameterName can be different from parameter name using FromRouteAttribute. e.g. [FromRoute(Name = "custom_name")]
+// RouteParameterName can be different from parameter name using FromRouteAttribute. e.g.
+// [FromRoute(Name = "custom_name")]
 internal record struct ParameterSymbol(
     string RouteParameterName,
     ISymbol Symbol,
@@ -303,7 +304,8 @@ internal static class RouteUsageDetector
             return null;
         }
 
-        // Multiple overloads could be resolved, e.g. MapGet(string, RequestDelegate) and MapGet(string, Delegate)
+        // Multiple overloads could be resolved, e.g. MapGet(string, RequestDelegate) and MapGet(string,
+        // Delegate)
         // Check each overload result to see whether it matches and return the first valid result.
         var symbols = GetBestOrAllSymbols(
             semanticModel.GetSymbolInfo(argumentList.Parent, cancellationToken)
@@ -341,7 +343,8 @@ internal static class RouteUsageDetector
             return null;
         }
 
-        // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension method.
+        // IEndpointRouteBuilder may be removed from symbol because the method is called as an extension
+        // method.
         // ReducedFrom includes the original IEndpointRouteBuilder parameter.
         if (
             !(method.ReducedFrom ?? method).Parameters.Any(a =>
@@ -362,7 +365,8 @@ internal static class RouteUsageDetector
             return null;
         }
 
-        // Method has a delegate parameter. Could be Delegate or something that inherits from it, e.g. RequestDelegate.
+        // Method has a delegate parameter. Could be Delegate or something that inherits from it, e.g.
+        // RequestDelegate.
         var delegateSymbol = semanticModel.Compilation.GetSpecialType(SpecialType.System_Delegate);
         var delegateParameter = method.Parameters.FirstOrDefault(p =>
             delegateSymbol.IsAssignableFrom(p.Type)

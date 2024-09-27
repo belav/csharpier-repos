@@ -76,7 +76,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Constructs a new instance of <see cref="Expression"/>.
         /// </summary>
-        /// <param name="nodeType">The <see ctype="ExpressionType"/> of the <see cref="Expression"/>.</param>
+        /// <param name="nodeType">The <see ctype="ExpressionType"/> of the <see
+        // cref="Expression"/>.</param>
         /// <param name="type">The <see cref="Type"/> of the <see cref="Expression"/>.</param>
         [Obsolete(
             "This constructor has been deprecated. Use a different constructor that does not take ExpressionType. Then override NodeType and Type properties to provide the values that would be specified to this constructor."
@@ -161,11 +162,13 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Reduces the node and then calls the <see cref="ExpressionVisitor.Visit(Expression)"/> method passing the reduced expression.
+        /// Reduces the node and then calls the <see cref="ExpressionVisitor.Visit(Expression)"/> method
+        // passing the reduced expression.
         /// Throws an exception if the node isn't reducible.
         /// </summary>
         /// <param name="visitor">An instance of <see cref="ExpressionVisitor"/>.</param>
-        /// <returns>The expression being visited, or an expression which should replace it in the tree.</returns>
+        /// <returns>The expression being visited, or an expression which should replace it in the
+        // tree.</returns>
         /// <remarks>
         /// Override this method to provide logic to walk the node's children.
         /// A typical implementation will call visitor.Visit on each of its
@@ -216,7 +219,8 @@ namespace System.Linq.Expressions
             Expression newNode = Reduce();
 
             // 1. Reduction must return a new, non-null node
-            // 2. Reduction must return a new node whose result type can be assigned to the type of the original node
+            // 2. Reduction must return a new node whose result type can be assigned to the type of the original
+            // node
             if (newNode == null || newNode == this)
                 throw Error.MustReduceToDifferent();
             if (!TypeUtils.AreReferenceAssignable(Type, newNode.Type))
@@ -254,8 +258,10 @@ namespace System.Linq.Expressions
         /// <returns>A <see cref="string"/> representation of the Expression.</returns>
         private string DebugView
         {
-            // Note that this property is often accessed using reflection. As such it will have more dependencies than one
-            // might surmise from its being internal, and removing it requires greater caution than with other internal methods.
+            // Note that this property is often accessed using reflection. As such it will have more
+            // dependencies than one
+            // might surmise from its being internal, and removing it requires greater caution than with other
+            // internal methods.
             get
             {
                 using (
@@ -320,7 +326,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -343,7 +350,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arguments);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -366,7 +374,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arg0);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -391,7 +400,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -418,7 +428,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -447,7 +458,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arg0, arg1, arg2, arg3);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
         /// <param name="returnType">The result type of the dynamic expression.</param>
@@ -470,7 +482,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.Dynamic(binder, returnType, arguments);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
@@ -490,7 +503,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.MakeDynamic(delegateType, binder, arguments);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and one argument.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" /> and one argument.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
@@ -510,7 +524,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and two arguments.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" /> and two arguments.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
@@ -532,7 +547,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and three arguments.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" /> and three arguments.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
@@ -556,7 +572,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" /> and four arguments.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" /> and four arguments.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>
@@ -582,7 +599,8 @@ namespace System.Linq.Expressions
         ) => DynamicExpression.MakeDynamic(delegateType, binder, arg0, arg1, arg2, arg3);
 
         /// <summary>
-        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the provided <see cref="CallSiteBinder" />.
+        /// Creates a <see cref="DynamicExpression" /> that represents a dynamic operation bound by the
+        // provided <see cref="CallSiteBinder" />.
         /// </summary>
         /// <param name="delegateType">The type of the delegate used by the <see cref="CallSite" />.</param>
         /// <param name="binder">The runtime binder for the dynamic operation.</param>

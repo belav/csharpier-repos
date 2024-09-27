@@ -768,7 +768,8 @@ public class ComplexObjectModelBinderTest
 
         var bindingContext = CreateContext(GetMetadataForType(model.GetType()), model);
 
-        // Attempt to set non-Nullable property to null. BindRequiredAttribute should not be relevant in this
+        // Attempt to set non-Nullable property to null. BindRequiredAttribute should not be relevant in
+        // this
         // case because the property did have a result.
         var property = GetMetadataForProperty(model.GetType(), nameof(ModelWithBindRequired.Age));
         var propertyBinder = new TestModelBinderProvider(

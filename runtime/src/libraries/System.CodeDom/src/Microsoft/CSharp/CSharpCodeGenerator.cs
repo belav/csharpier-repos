@@ -1624,7 +1624,8 @@ namespace Microsoft.CSharp
             else
             {
                 Output.Write(d.ToString("R", CultureInfo.InvariantCulture));
-                // always mark a double as being a double in case we have no decimal portion (e.g write 1D instead of 1 which is an int)
+                // always mark a double as being a double in case we have no decimal portion (e.g write 1D instead
+                // of 1 which is an int)
                 Output.Write('D');
             }
         }
@@ -2976,7 +2977,8 @@ namespace Microsoft.CSharp
                     sb.Append(", ");
                 }
 
-                // it's possible that we call GetTypeArgumentsOutput with an empty typeArguments collection.  This is the case
+                // it's possible that we call GetTypeArgumentsOutput with an empty typeArguments collection.  This
+                // is the case
                 // for open types, so we want to just output the brackets and commas.
                 if (i < typeArguments.Count)
                     sb.Append(GetTypeOutput(typeArguments[i]));

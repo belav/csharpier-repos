@@ -82,7 +82,8 @@ public class ControllerModel : ICommonModel, IFilterModel, IApiExplorerModel
     /// </summary>
     /// <remarks>
     /// <see cref="ControllerModel.ApiExplorer"/> allows configuration of settings for ApiExplorer
-    /// which apply to all actions in the controller unless overridden by <see cref="ActionModel.ApiExplorer"/>.
+    /// which apply to all actions in the controller unless overridden by <see
+    // cref="ActionModel.ApiExplorer"/>.
     ///
     /// Settings applied by <see cref="ControllerModel.ApiExplorer"/> override settings from
     /// <see cref="ApplicationModel.ApiExplorer"/>.

@@ -13,7 +13,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.BraceMatching
 {
     /// <summary>
-    /// Brace matcher that analyzes string literals (for C#/VB) and then dispatches out to embedded brace matchers for
+    /// Brace matcher that analyzes string literals (for C#/VB) and then dispatches out to embedded
+    // brace matchers for
     /// particular embedded languages (like JSON/Regex).
     /// </summary>
     internal abstract class AbstractEmbeddedLanguageBraceMatcher

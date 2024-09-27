@@ -470,7 +470,8 @@ namespace BoundTreeGenerator
                     }
                     else
                     {
-                        // Base call has kind, syntax, and hasErrors. No merging of hasErrors because derived class already did the merge.
+                        // Base call has kind, syntax, and hasErrors. No merging of hasErrors because derived class already
+                        // did the merge.
                         Write("kind, syntax, ");
                         foreach (Field baseField in AllSpecifiableFields(BaseType(node)))
                             Write(
@@ -562,7 +563,8 @@ namespace BoundTreeGenerator
                     }
                     else
                     {
-                        // Base call has kind, syntax, and hasErrors. No merging of hasErrors because derived class already did the merge.
+                        // Base call has kind, syntax, and hasErrors. No merging of hasErrors because derived class already
+                        // did the merge.
                         Write("kind, syntax, ");
                         foreach (Field baseField in AllSpecifiableFields(BaseType(node)))
                             Write(
@@ -614,7 +616,8 @@ namespace BoundTreeGenerator
             }
         }
 
-        // This constructor should only be created if no node or list fields, since it just calls base class constructor
+        // This constructor should only be created if no node or list fields, since it just calls base class
+        // constructor
         // without merging hasErrors.
         private void WriteConstructorWithoutHasErrors(TreeType node, bool isPublic)
         {
@@ -970,7 +973,8 @@ namespace BoundTreeGenerator
                     }
                     else if (field.Override)
                     {
-                        // We emit a suppression here because the bound nodes use a pattern which is safe, but can't be tracked.
+                        // We emit a suppression here because the bound nodes use a pattern which is safe, but can't be
+                        // tracked.
                         var suppression = FieldNullHandling(node, field.Name)
                             is (NullHandling.Allow or NullHandling.Always)
                             ? ""

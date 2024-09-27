@@ -210,7 +210,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="writer">XmlWriter to write the token to.</param>
         /// <param name="token">SecurityToken to be written.</param>
-        /// <exception cref="InvalidOperationException">The given token is not a UsernameSecurityToken.</exception>
+        /// <exception cref="InvalidOperationException">The given token is not a
+        // UsernameSecurityToken.</exception>
         /// <exception cref="ArgumentNullException">The parameter 'writer' or 'token' is null.</exception>
         public override void WriteToken(XmlWriter writer, SecurityToken token)
         {

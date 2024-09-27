@@ -1546,9 +1546,12 @@ public partial class ResultsTests
         var extensions = new Dictionary<string, object>() { { "testExtension", "test value" } };
 
         // Act
-        // Note: Results.ValidationProblem returns ProblemHttpResult instead of ValidationProblem by design as
-        //       as ValidationProblem doesn't allow setting a custom status code so that it can accurately report
-        //       a single status code in endpoint metadata via its implementation of IEndpointMetadataProvider
+        // Note: Results.ValidationProblem returns ProblemHttpResult instead of ValidationProblem by design
+        // as
+        //       as ValidationProblem doesn't allow setting a custom status code so that it can accurately
+        // report
+        //       a single status code in endpoint metadata via its implementation of
+        // IEndpointMetadataProvider
         var result =
             Results.ValidationProblem(errors, detail, instance, statusCode, title, type, extensions)
             as ProblemHttpResult;
@@ -1835,7 +1838,8 @@ public partial class ResultsTests
                 .Select(m => m.Name)
         );
 
-        // Ensure every static method on Results type is covered by at least the default case for its parameters
+        // Ensure every static method on Results type is covered by at least the default case for its
+        // parameters
         Assert.All(actualMethods, name => Assert.Single(testedMethods, name));
     }
 

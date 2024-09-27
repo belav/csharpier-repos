@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Collections.Generic;
@@ -99,7 +100,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
 
         public virtual IEnumerable<string> GetDefines()
         {
-            // There are a few tests related to native pdbs where the assertions are different between windows and non-windows
+            // There are a few tests related to native pdbs where the assertions are different between windows
+            // and non-windows
             // To enable test cases to define different expected behavior we set this special define
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
                 yield return "WIN32";
@@ -169,8 +171,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             if (Directory.Exists(candidatePath))
                 return candidatePath;
 
-            // There's no rule that runtime version must match the reference pack version exactly. So in this case use the major.minor only
-            // and find the highest available patch version (since the runtime should also be the highest available patch version in that range)
+            // There's no rule that runtime version must match the reference pack version exactly. So in this
+            // case use the major.minor only
+            // and find the highest available patch version (since the runtime should also be the highest
+            // available patch version in that range)
             string ncaVersionWithoutPatch = ncaVersion.Substring(0, ncaVersion.LastIndexOf('.'));
             candidatePath = null;
             foreach (
@@ -257,7 +261,8 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 }
                 else
                 {
-                    // Drop any relative path information.  Sandboxing will have taken care of copying the reference to the directory
+                    // Drop any relative path information.  Sandboxing will have taken care of copying the reference to
+                    // the directory
                     yield return workingDirectory.Combine(Path.GetFileName(fileName));
                 }
             }

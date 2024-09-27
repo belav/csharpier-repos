@@ -715,7 +715,8 @@ namespace System.Security.Cryptography.Tests
 
         private static unsafe Span<byte> GetOversizedSpan()
         {
-            // This creates an very large span over some address space. The memory in this span should never be read
+            // This creates an very large span over some address space. The memory in this span should never be
+            // read
             // or written to; it should only be used for length checking of the span for argument validation.
             return new Span<byte>((void*)0, 0x20000000);
         }

@@ -48,7 +48,8 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Given a virtual method decl, return its VTable slot if the method is used on its containing type.
+        /// Given a virtual method decl, return its VTable slot if the method is used on its containing
+        // type.
         /// Return -1 if the virtual method is not used.
         /// </summary>
         public static int GetVirtualMethodSlot(
@@ -60,10 +61,13 @@ namespace ILCompiler
         {
             if (method.CanMethodBeInSealedVTable())
             {
-                // If the method is a sealed newslot method, it will be put in the sealed vtable instead of the type's vtable. In this
-                // case, the slot index return should be the index in the sealed vtable, plus the total number of vtable slots.
+                // If the method is a sealed newslot method, it will be put in the sealed vtable instead of the
+                // type's vtable. In this
+                // case, the slot index return should be the index in the sealed vtable, plus the total number of
+                // vtable slots.
 
-                // First, make sure we are not attempting to resolve the slot of a sealed vtable method on a special array type, which
+                // First, make sure we are not attempting to resolve the slot of a sealed vtable method on a special
+                // array type, which
                 // does not get any sealed vtable entries
                 Debug.Assert(!implType.IsArrayTypeWithoutGenericInterfaces());
 
@@ -176,23 +180,33 @@ namespace ILCompiler
                 templateBaseType = templateBaseType.ConvertToCanonForm(CanonicalFormKind.Specific);
 
                 //
-                // In the universal canonical types case, we could have base types in the hierarchy that are partial universal canonical types.
-                // The presence of these types could cause incorrect vtable layouts, so we need to fully canonicalize them and walk the
+                // In the universal canonical types case, we could have base types in the hierarchy that are partial
+                // universal canonical types.
+                // The presence of these types could cause incorrect vtable layouts, so we need to fully
+                // canonicalize them and walk the
                 // hierarchy of the template type of the original input type to detect these cases.
                 //
                 // Exmaple: we begin with Derived<__UniversalCanon> and walk the template hierarchy:
                 //
-                //    class Derived<T> : Middle<T, MyStruct> { }    // -> Template is Derived<__UniversalCanon> and needs a dictionary slot
-                //                                                  // -> Basetype tempalte is Middle<__UniversalCanon, MyStruct>. It's a partial
-                //                                                        Universal canonical type, so we need to fully canonicalize it.
+                //    class Derived<T> : Middle<T, MyStruct> { }    // -> Template is Derived<__UniversalCanon> and
+                // needs a dictionary slot
+                //                                                  // -> Basetype tempalte is
+                // Middle<__UniversalCanon, MyStruct>. It's a partial
+                //                                                        Universal canonical type, so we need to
+                // fully canonicalize it.
                 //
-                //    class Middle<T, U> : Base<U> { }              // -> Template is Middle<__UniversalCanon, __UniversalCanon> and needs a dictionary slot
-                //                                                  // -> Basetype template is Base<__UniversalCanon>
+                //    class Middle<T, U> : Base<U> { }              // -> Template is Middle<__UniversalCanon,
+                // __UniversalCanon> and needs a dictionary slot
+                //                                                  // -> Basetype template is
+                // Base<__UniversalCanon>
                 //
-                //    class Base<T> { }                             // -> Template is Base<__UniversalCanon> and needs a dictionary slot.
+                //    class Base<T> { }                             // -> Template is Base<__UniversalCanon> and
+                // needs a dictionary slot.
                 //
-                // If we had not fully canonicalized the Middle class template, we would have ended up with Base<MyStruct>, which does not need
-                // a dictionary slot, meaning we would have created a vtable layout that the runtime does not expect.
+                // If we had not fully canonicalized the Middle class template, we would have ended up with
+                // Base<MyStruct>, which does not need
+                // a dictionary slot, meaning we would have created a vtable layout that the runtime does not
+                // expect.
                 //
 
                 // For types that have a generic dictionary, the introduced virtual method slots are
@@ -237,7 +251,8 @@ namespace ILCompiler
         public static bool HasGenericDictionarySlot(this TypeDesc type)
         {
             // Dictionary slots on generic interfaces are necessary to support static methods on interfaces
-            // The reason behind making this unconditional is simplicity, and keeping method slot indices for methods on IFoo<int>
+            // The reason behind making this unconditional is simplicity, and keeping method slot indices for
+            // methods on IFoo<int>
             // and IFoo<string> identical. That won't change.
             if (type.IsInterface)
                 return type.HasInstantiation;

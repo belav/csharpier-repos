@@ -20,7 +20,8 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
     public static class WindowsRuntimeMetadata
     {
-        // Wrapper for Win8 API RoResolveNamespace with default Windows SDK path as installed .winmd files in %WINDIR%\system32\WinMetadata.
+        // Wrapper for Win8 API RoResolveNamespace with default Windows SDK path as installed .winmd files
+        // in %WINDIR%\system32\WinMetadata.
         [System.Security.SecurityCritical]
         public static IEnumerable<string> ResolveNamespace(
             string namespaceName,

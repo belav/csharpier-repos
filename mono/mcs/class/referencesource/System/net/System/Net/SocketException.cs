@@ -36,7 +36,8 @@ namespace System.Net.Sockets
 #else
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the default error code.
+        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with
+        // the default error code.
         ///    </para>
         /// </devdoc>
         public SocketException()
@@ -56,7 +57,8 @@ namespace System.Net.Sockets
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code.
+        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with
+        // the specified error code.
         ///    </para>
         /// </devdoc>
         public SocketException(int errorCode)
@@ -75,7 +77,8 @@ namespace System.Net.Sockets
 
         /// <devdoc>
         ///    <para>
-        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with the specified error code as SocketError.
+        ///       Creates a new instance of the <see cref='System.Net.Sockets.SocketException'/> class with
+        // the specified error code as SocketError.
         ///    </para>
         /// </devdoc>
         internal SocketException(SocketError socketError)

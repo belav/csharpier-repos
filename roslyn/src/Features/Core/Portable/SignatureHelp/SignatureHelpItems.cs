@@ -26,8 +26,10 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
         public TextSpan ApplicableSpan { get; }
 
         /// <summary>
-        /// Returns the specified argument index that the provided position is at in the current document.  This
-        /// index may be greater than the number of arguments in the selected <see cref="SignatureHelpItem"/>.
+        /// Returns the specified argument index that the provided position is at in the current document.
+        // This
+        /// index may be greater than the number of arguments in the selected <see
+        // cref="SignatureHelpItem"/>.
         /// </summary>
         public int ArgumentIndex { get; }
 
@@ -87,7 +89,8 @@ namespace Microsoft.CodeAnalysis.SignatureHelp
             var distinctItems = items.Distinct().ToList();
             if (selectedItem.HasValue && items.Count != distinctItems.Count)
             {
-                // `selectedItem` index has already been determined to be valid, it now needs to be adjusted to point
+                // `selectedItem` index has already been determined to be valid, it now needs to be adjusted to
+                // point
                 // to the equivalent item in the reduced list to account for duplicates being removed
                 // E.g.,
                 //   items = {A, A, B, B, C, D}

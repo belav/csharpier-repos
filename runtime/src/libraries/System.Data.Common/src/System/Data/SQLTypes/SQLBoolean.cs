@@ -61,7 +61,8 @@ namespace System.Data.SqlTypes
 
         // property: Value
         /// <summary>
-        /// Gets or sets the <see cref='SqlBoolean'/> to be <see langword='true'/> or <see langword='false'/>.
+        /// Gets or sets the <see cref='SqlBoolean'/> to be <see langword='true'/> or <see
+        // langword='false'/>.
         /// </summary>
         public bool Value
         {
@@ -465,9 +466,11 @@ namespace System.Data.SqlTypes
         public override bool Equals([NotNullWhen(true)] object? value) =>
             value is SqlBoolean other && Equals(other);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public bool Equals(SqlBoolean other) =>
             other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 
@@ -518,13 +521,15 @@ namespace System.Data.SqlTypes
         public static readonly SqlBoolean True = new SqlBoolean(true);
 
         /// <summary>
-        /// Represents a false value that can be assigned to the <see cref='Value'/> property of an instance of
+        /// Represents a false value that can be assigned to the <see cref='Value'/> property of an instance
+        // of
         /// the <see cref='SqlBoolean'/> class.
         /// </summary>
         public static readonly SqlBoolean False = new SqlBoolean(false);
 
         /// <summary>
-        /// Represents a null value that can be assigned to the <see cref='Value'/> property of an instance of
+        /// Represents a null value that can be assigned to the <see cref='Value'/> property of an instance
+        // of
         /// the <see cref='SqlBoolean'/> class.
         /// </summary>
         public static readonly SqlBoolean Null = new SqlBoolean(0, true);

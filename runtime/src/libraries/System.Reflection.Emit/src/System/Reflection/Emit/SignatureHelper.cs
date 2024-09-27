@@ -8,7 +8,8 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace System.Reflection.Emit
 {
-    // TODO: Only support simple signatures. More complex signatures (generics, array, byref, pointers etc) will be added.
+    // TODO: Only support simple signatures. More complex signatures (generics, array, byref, pointers
+    // etc) will be added.
     internal static class MetadataSignatureHelper
     {
         internal static BlobBuilder LocalSignatureEncoder(

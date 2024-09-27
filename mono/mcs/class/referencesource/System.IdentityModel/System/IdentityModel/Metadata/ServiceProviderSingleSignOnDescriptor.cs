@@ -23,7 +23,8 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Constructs an SPSSO descriptor with the input <paramref name="collection"/>
         /// </summary>
-        /// <param name="collection">A <see cref="IndexedProtocolEndpointDictionary"/> object for this instance.</param>
+        /// <param name="collection">A <see cref="IndexedProtocolEndpointDictionary"/> object for this
+        // instance.</param>
         public ServiceProviderSingleSignOnDescriptor(IndexedProtocolEndpointDictionary collection)
         {
             _assertionConsumerServices = collection;

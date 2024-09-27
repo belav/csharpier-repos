@@ -33,7 +33,8 @@ namespace System.IdentityModel
         /// <summary>
         /// Creates a new instance of <see cref="RsaSignatureCookieTransform"/>.
         /// </summary>
-        /// <param name="key">The provided key will be used as the signing and verification key by default.</param>
+        /// <param name="key">The provided key will be used as the signing and verification key by
+        // default.</param>
         /// <exception cref="ArgumentNullException">When the key is null.</exception>
         public RsaSignatureCookieTransform(RSA key)
         {
@@ -66,7 +67,8 @@ namespace System.IdentityModel
         /// Gets or sets the name of the hash algorithm to use.
         /// </summary>
         /// <remarks>
-        /// SHA256 is the default algorithm. This may require a minimum platform of Windows Server 2003 and .NET 3.5 SP1.
+        /// SHA256 is the default algorithm. This may require a minimum platform of Windows Server 2003 and
+        // .NET 3.5 SP1.
         /// If SHA256 is not supported, set HashName to "SHA1".
         /// </remarks>
         public string HashName
@@ -90,7 +92,8 @@ namespace System.IdentityModel
 
         /// <summary>
         /// Creates a new instance of <see cref="RsaSignatureCookieTransform"/>.
-        /// The instance created by this constructor is not usable until the signing and verification keys are set.
+        /// The instance created by this constructor is not usable until the signing and verification keys
+        // are set.
         /// </summary>
         internal RsaSignatureCookieTransform() { }
 
@@ -130,7 +133,8 @@ namespace System.IdentityModel
         /// <exception cref="ArgumentException">The argument 'encoded' contains zero bytes.</exception>
         /// <exception cref="FormatException">The data is in the wrong format.</exception>
         /// <exception cref="CryptographicException">The signature is invalid.</exception>
-        /// <exception cref="NotSupportedException">The platform does not support the requested algorithm.</exception>
+        /// <exception cref="NotSupportedException">The platform does not support the requested
+        // algorithm.</exception>
         /// <exception cref="InvalidOperationException">There are no verification keys.</exception>
         public override byte[] Decode(byte[] encoded)
         {
@@ -243,8 +247,10 @@ namespace System.IdentityModel
         /// <exception cref="ArgumentNullException">The argument 'value' is null.</exception>
         /// <exception cref="ArgumentException">The argument 'value' contains zero bytes.</exception>
         /// <exception cref="InvalidOperationException">The SigningKey is null.</exception>
-        /// <exception cref="NotSupportedException">The platform does not support the requested algorithm.</exception>
-        /// <exception cref="InvalidOperationException">The SigningKey is null, is not an RSACryptoServiceProvider, or does not contain a private key.</exception>
+        /// <exception cref="NotSupportedException">The platform does not support the requested
+        // algorithm.</exception>
+        /// <exception cref="InvalidOperationException">The SigningKey is null, is not an
+        // RSACryptoServiceProvider, or does not contain a private key.</exception>
         /// <remarks>The SigningKey must include the private key in order to sign.</remarks>
         public override byte[] Encode(byte[] value)
         {
@@ -331,7 +337,8 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// The default RSACryptoServiceProvider does not support signatures for SHA256. If this is desired, it's necessary to construct a new one.
+        /// The default RSACryptoServiceProvider does not support signatures for SHA256. If this is desired,
+        // it's necessary to construct a new one.
         /// </summary>
         AsymmetricSignatureFormatter GetSignatureFormatter(RSA rsa)
         {

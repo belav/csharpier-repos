@@ -160,7 +160,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
         public override object? GetExportedValue(ExportDefinition definition)
         {
             RequiresRunning();
-            // given the implementation of the ImportEngine, this iwll be called under a lock if the part is still being composed
+            // given the implementation of the ImportEngine, this iwll be called under a lock if the part is
+            // still being composed
             // This is only called outside of the lock when the part is fully composed
             // based on that we only protect:
             // _exportsCache - and thus all calls to GetExportingMemberFromDefinition
@@ -475,7 +476,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 !import.IsPrerequisite
             );
 
-            // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
+            // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative
+            // composition
             UseImportedValues(members, SetExportedValueForImport, false);
         }
 
@@ -485,7 +487,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 import.IsPrerequisite
             );
 
-            // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative composition
+            // NOTE: Dev10 484204 The validation is turned off for post imports because of it broke declarative
+            // composition
             UseImportedValues(members, SetExportedValueForImport, false);
         }
 

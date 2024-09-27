@@ -164,7 +164,8 @@ namespace System.IO.Pipelines.Tests
         [Fact]
         public async Task WriteNothingThenWriteToNewSegment()
         {
-            // Regression test: write nothing to force a segment to be created, then do a large write that's larger than the currently empty segment to force another new segment
+            // Regression test: write nothing to force a segment to be created, then do a large write that's
+            // larger than the currently empty segment to force another new segment
             // Verify that no 0 length segments are returned from the Reader.
             PipeWriter buffer = Pipe.Writer;
             Memory<byte> memory = buffer.GetMemory();

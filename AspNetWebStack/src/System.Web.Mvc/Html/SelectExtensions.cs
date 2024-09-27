@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Generic;
@@ -382,9 +383,12 @@ namespace System.Web.Mvc.Html
             );
         }
 
-        // Unable to constrain TEnum.  Cannot include IComparable, IConvertible, IFormattable because Nullable<T> does
-        // not implement those interfaces (and Int32 does).  Enum alone is not compatible with expression restrictions
-        // because that requires a cast from all enum types.  And the struct generic constraint disallows passing a
+        // Unable to constrain TEnum.  Cannot include IComparable, IConvertible, IFormattable because
+        // Nullable<T> does
+        // not implement those interfaces (and Int32 does).  Enum alone is not compatible with expression
+        // restrictions
+        // because that requires a cast from all enum types.  And the struct generic constraint disallows
+        // passing a
         // Nullable<T> expression.
         [SuppressMessage(
             "Microsoft.Design",
@@ -446,7 +450,8 @@ namespace System.Web.Mvc.Html
                 );
             }
 
-            // Run through same processing as SelectInternal() to determine selected value and ensure it is included
+            // Run through same processing as SelectInternal() to determine selected value and ensure it is
+            // included
             // in the select list.
             string expressionName = ExpressionHelper.GetExpressionText(expression);
             string expressionFullName =

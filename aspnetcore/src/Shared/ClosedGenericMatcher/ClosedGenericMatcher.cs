@@ -16,14 +16,17 @@ namespace Microsoft.Extensions.Internal;
 internal static class ClosedGenericMatcher
 {
     /// <summary>
-    /// Determine whether <paramref name="queryType"/> is or implements a closed generic <see cref="Type"/>
+    /// Determine whether <paramref name="queryType"/> is or implements a closed generic <see
+    // cref="Type"/>
     /// created from <paramref name="interfaceType"/>.
     /// </summary>
     /// <param name="queryType">The <see cref="Type"/> of interest.</param>
-    /// <param name="interfaceType">The open generic <see cref="Type"/> to match. Usually an interface.</param>
+    /// <param name="interfaceType">The open generic <see cref="Type"/> to match. Usually an
+    // interface.</param>
     /// <returns>
     /// The closed generic <see cref="Type"/> created from <paramref name="interfaceType"/> that
-    /// <paramref name="queryType"/> is or implements. <c>null</c> if the two <see cref="Type"/>s have no such
+    /// <paramref name="queryType"/> is or implements. <c>null</c> if the two <see cref="Type"/>s have
+    // no such
     /// relationship.
     /// </returns>
     /// <remarks>

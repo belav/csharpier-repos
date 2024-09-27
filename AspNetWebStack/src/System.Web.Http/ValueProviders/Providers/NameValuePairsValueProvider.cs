@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -147,7 +148,8 @@ namespace System.Web.Http.ValueProviders.Providers
             {
                 string name = nameValuePair.Key;
                 object value;
-                // We optimize for the common case of a name being associated with exactly one value by avoiding a List
+                // We optimize for the common case of a name being associated with exactly one value by avoiding a
+                // List
                 // allocation if we can avoid it. The first time the key appears, the value gets stored as a string.
                 // Only if the key appears a second time do we allocate a List to store the values for that key.
                 if (valuesDictionary.TryGetValue(name, out value))

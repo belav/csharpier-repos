@@ -289,6 +289,7 @@ namespace System
         private static unsafe string[] SegmentCommandLine(char* cmdLine)
         {
             // Parse command line arguments using the rules documented at
+            //
             // https://learn.microsoft.com/cpp/cpp/main-function-command-line-args#parsing-c-command-line-arguments
 
             // CommandLineToArgvW API cannot be used here since

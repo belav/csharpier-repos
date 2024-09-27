@@ -12,10 +12,10 @@ using System.Runtime.Versioning;
 
 namespace System.Xml.Schema
 {
-    /*
-     * The XdrBuilder class parses the XDR Schema and
-     * builds internal validation information
-     */
+/*
+* The XdrBuilder class parses the XDR Schema and
+* builds internal validation information
+*/
     internal sealed class XdrBuilder : SchemaBuilder
     {
         private const int XdrSchema = 1;
@@ -639,7 +639,8 @@ namespace System.Xml.Schema
             }
         }
 
-        // SxS: This method processes attribute from the source document and does not expose any resources to the caller
+        // SxS: This method processes attribute from the source document and does not expose any resources
+        // to the caller
         // It is fine to suppress the SxS warning.
         internal override void ProcessAttribute(string prefix, string name, string ns, string value)
         {

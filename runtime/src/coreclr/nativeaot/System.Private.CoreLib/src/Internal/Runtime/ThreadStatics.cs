@@ -125,7 +125,8 @@ namespace Internal.Runtime
         }
 
         /// <summary>
-        /// This method allocates an object that represents a memory block for all thread static fields of the type
+        /// This method allocates an object that represents a memory block for all thread static fields of
+        // the type
         /// that corresponds to the specified TLS index.
         /// </summary>
         private static unsafe object AllocateThreadStaticStorageForType(

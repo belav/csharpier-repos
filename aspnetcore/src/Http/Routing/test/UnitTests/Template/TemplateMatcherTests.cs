@@ -694,7 +694,8 @@ public class TemplateMatcherTests
     [Fact]
     public void TryMatch_WithCatchAllCapturesDots()
     {
-        // DevDiv Bugs 189892: UrlRouting: Catch all parameter cannot capture url segments that contain the "."
+        // DevDiv Bugs 189892: UrlRouting: Catch all parameter cannot capture url segments that contain the
+        // "."
         RunTest(
             "Home/ShowPilot/{missionId}/{*name}",
             "/Home/ShowPilot/777/12345./foobar",
@@ -830,28 +831,32 @@ public class TemplateMatcherTests
     [Fact]
     public void TryMatch_DoesNotMatchOnlyLeftLiteralMatch()
     {
-        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
+        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of
+        // the requested url
         RunTest("foo", "/fooBAR", null, null);
     }
 
     [Fact]
     public void TryMatch_DoesNotMatchOnlyRightLiteralMatch()
     {
-        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
+        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of
+        // the requested url
         RunTest("foo", "/BARfoo", null, null);
     }
 
     [Fact]
     public void TryMatch_DoesNotMatchMiddleLiteralMatch()
     {
-        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
+        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of
+        // the requested url
         RunTest("foo", "/BARfooBAR", null, null);
     }
 
     [Fact]
     public void TryMatch_DoesMatchesExactLiteralMatch()
     {
-        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of the requested url
+        // DevDiv Bugs 191180: UrlRouting: Wrong template getting matched if a url segment is a substring of
+        // the requested url
         RunTest("foo", "/foo", null, new RouteValueDictionary());
     }
 

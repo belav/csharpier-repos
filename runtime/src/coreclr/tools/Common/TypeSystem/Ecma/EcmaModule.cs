@@ -255,7 +255,8 @@ namespace Internal.TypeSystem.Ecma
         }
 
         /// <summary>
-        /// Gets the managed entrypoint method of this module or null if the module has no managed entrypoint.
+        /// Gets the managed entrypoint method of this module or null if the module has no managed
+        // entrypoint.
         /// </summary>
         public MethodDesc EntryPoint
         {
@@ -644,7 +645,8 @@ namespace Internal.TypeSystem.Ecma
                             }
                             else
                             {
-                                // If the base type is generic, any signature match for methods on the base type with the generic details from
+                                // If the base type is generic, any signature match for methods on the base type with the generic
+                                // details from
                                 // the deriving type
                                 Instantiation newSubstitution = typeDescToInspect
                                     .GetTypeDefinition()

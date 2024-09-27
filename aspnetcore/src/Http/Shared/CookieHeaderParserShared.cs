@@ -15,7 +15,8 @@ internal static class CookieHeaderParserShared
         bool supportsMultipleValues
     )
     {
-        // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept: "). The caller
+        // If a parser returns an empty list, it means there was no value, but that's valid (e.g. "Accept:
+        // "). The caller
         // can ignore the value.
         if (values.Count == 0)
         {
@@ -79,7 +80,8 @@ internal static class CookieHeaderParserShared
         parsedName = null;
         parsedValue = null;
 
-        // If multiple values are supported (i.e. list of values), then accept an empty string: The header may
+        // If multiple values are supported (i.e. list of values), then accept an empty string: The header
+        // may
         // be added multiple times to the request/response message. E.g.
         //  Accept: text/xml; q=1
         //  Accept:
@@ -122,7 +124,8 @@ internal static class CookieHeaderParserShared
             out separatorFound
         );
 
-        // If we support multiple values and we've not reached the end of the string, then we must have a separator.
+        // If we support multiple values and we've not reached the end of the string, then we must have a
+        // separator.
         if (
             (separatorFound && !supportsMultipleValues)
             || (!separatorFound && (current < value.Length))
@@ -219,7 +222,8 @@ internal static class CookieHeaderParserShared
 
     // cookie-value      = *cookie-octet / ( DQUOTE* cookie-octet DQUOTE )
     // cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E
-    //                     ; US-ASCII characters excluding CTLs, whitespace DQUOTE, comma, semicolon, and backslash
+    //                     ; US-ASCII characters excluding CTLs, whitespace DQUOTE, comma, semicolon,
+    // and backslash
     internal static StringSegment GetCookieValue(StringSegment input, ref int offset)
     {
         Contract.Requires(offset >= 0);
@@ -283,7 +287,8 @@ internal static class CookieHeaderParserShared
     }
 
     // cookie-octet      = %x21 / %x23-2B / %x2D-3A / %x3C-5B / %x5D-7E
-    //                     ; US-ASCII characters excluding CTLs, whitespace DQUOTE, comma, semicolon, and backslash
+    //                     ; US-ASCII characters excluding CTLs, whitespace DQUOTE, comma, semicolon,
+    // and backslash
     private static bool IsCookieValueChar(char c)
     {
         if (c < 0x21 || c > 0x7E)

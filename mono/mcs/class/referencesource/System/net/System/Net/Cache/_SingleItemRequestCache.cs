@@ -3,14 +3,14 @@ Copyright (c) Microsoft Corporation
 
 Module Name:
 
-    _SingleItemRequestCache.cs
+_SingleItemRequestCache.cs
 
 Abstract:
-    Request Caching subsystem capable of caching one file at a time.
-    Used by, for example, auto-proxy script downloading.
+Request Caching subsystem capable of caching one file at a time.
+Used by, for example, auto-proxy script downloading.
 
 Author:
-    Justin Brown - Aug 2, 2004
+Justin Brown - Aug 2, 2004
 
 Revision History:
 
@@ -357,7 +357,8 @@ namespace System.Net.Cache
             FrozenCacheEntry chkEntry = FrozenCacheEntry.Create(_Entry);
 
             //
-            // This class does not forward metadata updates to WinInet to simplify the design and avoid interlocked ops
+            // This class does not forward metadata updates to WinInet to simplify the design and avoid
+            // interlocked ops
             //
 
             if (chkEntry == null || chkEntry.Key != key)

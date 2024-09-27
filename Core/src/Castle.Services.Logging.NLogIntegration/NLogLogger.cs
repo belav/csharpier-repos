@@ -131,7 +131,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs a trace message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Trace(Func<string> messageFactory)
         {
             if (IsTraceEnabled)
@@ -211,7 +212,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs a debug message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Debug(Func<string> messageFactory)
         {
             if (IsDebugEnabled == false)
@@ -292,7 +294,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs an error message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Error(Func<string> messageFactory)
         {
             if (IsErrorEnabled == false)
@@ -373,7 +376,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs a fatal message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Fatal(Func<string> messageFactory)
         {
             if (IsFatalEnabled == false)
@@ -454,7 +458,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs a info message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Info(Func<string> messageFactory)
         {
             if (IsInfoEnabled == false)
@@ -535,7 +540,8 @@ namespace Castle.Services.Logging.NLogIntegration
         /// <summary>
         ///   Logs a warn message.
         /// </summary>
-        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is enabled </param>
+        /// <param name="messageFactory"> Factory constructing lazily the message to log if the level is
+        // enabled </param>
         public void Warn(Func<string> messageFactory)
         {
             if (IsWarnEnabled == false)

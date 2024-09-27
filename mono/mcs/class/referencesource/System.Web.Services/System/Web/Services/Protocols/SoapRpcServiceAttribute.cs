@@ -12,7 +12,8 @@ namespace System.Web.Services.Protocols
     using System.Web.Services.Description;
     using System.Xml.Serialization;
 
-    /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute"]/*' />
+    /// <include file='doc\SoapRpcServiceAttribute.uex'
+    // path='docs/doc[@for="SoapRpcServiceAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -22,20 +23,23 @@ namespace System.Web.Services.Protocols
         SoapServiceRoutingStyle routingStyle = SoapServiceRoutingStyle.SoapAction;
         SoapBindingUse use = SoapBindingUse.Encoded;
 
-        /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute.SoapRpcServiceAttribute"]/*' />
+        /// <include file='doc\SoapRpcServiceAttribute.uex'
+        // path='docs/doc[@for="SoapRpcServiceAttribute.SoapRpcServiceAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public SoapRpcServiceAttribute() { }
 
-        /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute.RoutingStyle"]/*' />
+        /// <include file='doc\SoapRpcServiceAttribute.uex'
+        // path='docs/doc[@for="SoapRpcServiceAttribute.RoutingStyle"]/*' />
         public SoapServiceRoutingStyle RoutingStyle
         {
             get { return routingStyle; }
             set { routingStyle = value; }
         }
 
-        /// <include file='doc\SoapRpcServiceAttribute.uex' path='docs/doc[@for="SoapRpcServiceAttribute.Use"]/*' />
+        /// <include file='doc\SoapRpcServiceAttribute.uex'
+        // path='docs/doc[@for="SoapRpcServiceAttribute.Use"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

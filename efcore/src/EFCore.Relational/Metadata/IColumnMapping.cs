@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents property mapping to a column.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IColumnMapping : IColumnMappingBase
 {

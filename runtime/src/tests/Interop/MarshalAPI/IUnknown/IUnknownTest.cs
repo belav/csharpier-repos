@@ -150,7 +150,8 @@ public class IUnknownMarshalingTest
 
                 Object tmpObj = Marshal.GetObjectForIUnknown(ptr);
 
-                //compare the new object reference with the original object, they should point to the same underlying object
+                //compare the new object reference with the original object, they should point to the same
+                // underlying object
                 if (!object.ReferenceEquals(obj, tmpObj))
                     throw new Exception(
                         "GetObjectForIUnknown returned a different object. Original: "

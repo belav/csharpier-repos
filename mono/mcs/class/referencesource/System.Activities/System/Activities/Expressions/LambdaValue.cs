@@ -35,7 +35,8 @@ namespace System.Activities.Expressions
             this.UseOldFastPath = true;
         }
 
-        // this is called via reflection from Microsoft.CDF.Test.ExpressionUtilities.Activities.ActivityUtilities.ReplaceLambdaValuesInActivityTree
+        // this is called via reflection from
+        // Microsoft.CDF.Test.ExpressionUtilities.Activities.ActivityUtilities.ReplaceLambdaValuesInActivityTree
         internal Expression LambdaExpression
         {
             get { return this.lambdaValue; }

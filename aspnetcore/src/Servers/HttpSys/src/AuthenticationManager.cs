@@ -10,7 +10,8 @@ using Windows.Win32.Networking.HttpServer;
 
 namespace Microsoft.AspNetCore.Server.HttpSys;
 
-// See the native HTTP_SERVER_AUTHENTICATION_INFO structure documentation for additional information.
+// See the native HTTP_SERVER_AUTHENTICATION_INFO structure documentation for additional
+// information.
 // http://msdn.microsoft.com/en-us/library/windows/desktop/aa364638(v=vs.85).aspx
 
 /// <summary>
@@ -121,12 +122,12 @@ public sealed class AuthenticationManager
         {
             challenges.Add("NTLM");
         }
-        /*if ((_authSchemes & AuthenticationSchemes.Digest) == AuthenticationSchemes.Digest)
-        {
-            // TODO:
-            throw new NotImplementedException("Digest challenge generation has not been implemented.");
-            // challenges.Add("Digest");
-        }*/
+/*if ((_authSchemes & AuthenticationSchemes.Digest) == AuthenticationSchemes.Digest)
+{
+// TODO:
+throw new NotImplementedException("Digest challenge generation has not been implemented.");
+// challenges.Add("Digest");
+}*/
         if ((authSchemes & AuthenticationSchemes.Basic) == AuthenticationSchemes.Basic)
         {
             // TODO: Realm

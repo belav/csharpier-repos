@@ -1,7 +1,8 @@
 ﻿namespace System.Web.UI.WebControls
 {
     /// <summary>
-    /// This class tracks the values of SelectMethod parameters of ModelDataSourceView that use a custom value provider across multiple page requests.
+    /// This class tracks the values of SelectMethod parameters of ModelDataSourceView that use a custom
+    // value provider across multiple page requests.
     /// </summary>
     internal sealed class MethodParameterValue : IStateManager
     {

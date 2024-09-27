@@ -604,8 +604,10 @@ namespace MonoTests.System.Data.Utils
                     );
                     row.Add("DATE", new DateTime(2004, 8, 9, 20, 30, 15), 7);
 
-                    // The .NET Framework provides support for Oracle LOBs in the OracleClient namespace, but not in the OleDb namespace.
-                    // Since Visual MainWin does not support the OracleClient namespace, a partial support for this important feature is provided in the OleDb namespace.
+                    // The .NET Framework provides support for Oracle LOBs in the OracleClient namespace, but not in the
+                    // OleDb namespace.
+                    // Since Visual MainWin does not support the OracleClient namespace, a partial support for this
+                    // important feature is provided in the OleDb namespace.
                     // See ms-help://MS.VSCC.2003/VMW.GH.1033/ghdoc/vmwdoc_ADONET_data_access_limitations_51.htm
                     break;
                 #endregion

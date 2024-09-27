@@ -23,7 +23,8 @@ namespace Moq
     public static class It
     {
         /// <summary>
-        /// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters of type <typeparamref name="TValue"/>.
+        /// Contains matchers for <see langword="ref"/> (C#) / <see langword="ByRef"/> (VB.NET) parameters
+        // of type <typeparamref name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The parameter type.</typeparam>
         public static class Ref<TValue>
@@ -64,26 +65,32 @@ namespace Moq
                     () => It.IsAny<TValue>()
                 );
 
-                /* Unmerged change from project 'Moq(netstandard2.0)'
-                Before:
-                        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                After:
-                        static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny),
+BindingFlags.Public | BindingFlags.Static);
+After:
+static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public
+| BindingFlags.Static);
+*/
 
-                /* Unmerged change from project 'Moq(netstandard2.1)'
-                Before:
-                        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                After:
-                        static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny),
+BindingFlags.Public | BindingFlags.Static);
+After:
+static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public
+| BindingFlags.Static);
+*/
 
-                /* Unmerged change from project 'Moq(net6.0)'
-                Before:
-                        private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                After:
-                        static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public | BindingFlags.Static);
-                */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny),
+BindingFlags.Public | BindingFlags.Static);
+After:
+static readonly MethodInfo isAnyMethod = typeof(It).GetMethod(nameof(It.IsAny), BindingFlags.Public
+| BindingFlags.Static);
+*/
             }
         }
 
@@ -100,12 +107,14 @@ namespace Moq
         /// <summary>
         ///   A type matcher that matches any generic type argument.
         ///   <para>
-        ///     If the generic type parameter is constrained to <see langword="struct"/> (C#) / <see langword="Structure"/>
+        ///     If the generic type parameter is constrained to <see langword="struct"/> (C#) / <see
+        // langword="Structure"/>
         ///     (VB.NET), use <see cref="It.IsValueType"/> instead.
         ///   </para>
         ///   <para>
         ///     If the generic type parameter has more specific constraints,
-        ///     you can define your own type matcher inheriting from the type to which the type parameter is constrained.
+        ///     you can define your own type matcher inheriting from the type to which the type parameter is
+        // constrained.
         ///     See <see cref="TypeMatcherAttribute"/> and <see cref="ITypeMatcher"/>.
         ///   </para>
         /// </summary>
@@ -186,7 +195,8 @@ namespace Moq
         ///   Matches any value that satisfies the given predicate.
         ///   <para>
         ///     Use this overload when you specify a type matcher for <typeparamref name="TValue"/>.
-        ///     The <paramref name="match"/> callback you provide will then receive the actual parameter type
+        ///     The <paramref name="match"/> callback you provide will then receive the actual parameter
+        // type
         ///     as well as the invocation argument.
         ///   </para>
         /// </summary>
@@ -210,7 +220,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   Matches any value that equals the <paramref name="value"/> using the <paramref name="comparer"/>.
+        ///   Matches any value that equals the <paramref name="value"/> using the <paramref
+        // name="comparer"/>.
         ///   To use the default comparer for the specified object, specify the value inline,
         ///   i.e. <code>mock.Verify(service => service.DoWork(value))</code>.
         ///   <para>
@@ -218,7 +229,8 @@ namespace Moq
         ///   </para>
         /// </summary>
         /// <param name="value">The value to match with.</param>
-        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
+        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be
+        // compared.</param>
         /// <typeparam name="TValue">Type of the argument to check.</typeparam>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static TValue Is<TValue>(TValue value, IEqualityComparer<TValue> comparer)
@@ -294,7 +306,8 @@ namespace Moq
         ///   Matches any value that is present in the sequence specified.
         /// </summary>
         /// <param name="items">The sequence of possible values.</param>
-        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
+        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be
+        // compared.</param>
         /// <typeparam name="TValue">Type of the argument to check.</typeparam>
         public static TValue IsIn<TValue>(
             IEnumerable<TValue> items,
@@ -353,7 +366,8 @@ namespace Moq
         ///   Matches any value that is not found in the sequence specified.
         /// </summary>
         /// <param name="items">The sequence of disallowed values.</param>
-        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be compared.</param>
+        /// <param name="comparer">An <see cref="IEqualityComparer{T}"/> with which the values should be
+        // compared.</param>
         /// <typeparam name="TValue">Type of the argument to check.</typeparam>
         public static TValue IsNotIn<TValue>(
             IEnumerable<TValue> items,
@@ -440,7 +454,8 @@ namespace Moq
         }
 
         /// <summary>
-        ///   A type matcher that matches subtypes of <typeparamref name="T"/>, as well as <typeparamref name="T"/> itself.
+        ///   A type matcher that matches subtypes of <typeparamref name="T"/>, as well as <typeparamref
+        // name="T"/> itself.
         /// </summary>
         /// <typeparam name="T">The type whose subtypes should match.</typeparam>
         [TypeMatcher]

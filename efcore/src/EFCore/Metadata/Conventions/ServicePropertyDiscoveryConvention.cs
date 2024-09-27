@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     A convention that adds service properties to entity types.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for
+// more information and examples.
 /// </remarks>
 public class ServicePropertyDiscoveryConvention
     : IEntityTypeAddedConvention,
@@ -21,7 +22,8 @@ public class ServicePropertyDiscoveryConvention
     ///     Creates a new instance of <see cref="ServicePropertyDiscoveryConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="useAttributes">Whether the convention will use attributes found on the members.</param>
+    /// <param name="useAttributes">Whether the convention will use attributes found on the
+    // members.</param>
     public ServicePropertyDiscoveryConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         bool useAttributes = true
@@ -74,7 +76,8 @@ public class ServicePropertyDiscoveryConvention
     /// <summary>
     ///    Discovers properties on the given structural type.
     /// </summary>
-    /// <param name="structuralTypeBuilder">The type for which the properties will be discovered.</param>
+    /// <param name="structuralTypeBuilder">The type for which the properties will be
+    // discovered.</param>
     /// <param name="context">Additional information associated with convention execution.</param>
     protected virtual void DiscoverServiceProperties(
         IConventionTypeBaseBuilder structuralTypeBuilder,
@@ -108,7 +111,8 @@ public class ServicePropertyDiscoveryConvention
     }
 
     /// <summary>
-    ///     Returns the CLR members from the given type that should be considered when discovering properties.
+    ///     Returns the CLR members from the given type that should be considered when discovering
+    // properties.
     /// </summary>
     /// <param name="structuralType">The type for which the properties will be discovered.</param>
     /// <returns>The CLR members to be considered.</returns>

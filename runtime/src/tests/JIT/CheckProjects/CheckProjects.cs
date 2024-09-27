@@ -522,8 +522,10 @@ internal class ScanProjectFiles
     /// <summary>
     /// Determines if optimize setting needs to fix.
     /// </summary>
-    /// <param name="isOptType">Whether a optimization is specified. This is the baseline for checking.</param>
-    /// <param name="optimizeVal">The optimize value in the project file's <Optimize /> property.</param>
+    /// <param name="isOptType">Whether a optimization is specified. This is the baseline for
+    // checking.</param>
+    /// <param name="optimizeVal">The optimize value in the project file's <Optimize />
+    // property.</param>
     /// <returns>True if a fix is needed. Otherwise false.</returns>
     private static bool DetermineIfOptimizeSettingNeedsFix(bool isOptType, string optimizeVal)
     {

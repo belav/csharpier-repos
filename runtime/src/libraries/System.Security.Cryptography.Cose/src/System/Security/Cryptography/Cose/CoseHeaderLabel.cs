@@ -61,7 +61,8 @@ namespace System.Security.Cryptography.Cose
         /// Initializes a new instance of the <see cref="CoseHeaderLabel"/> struct.
         /// </summary>
         /// <param name="label">The header label as a text string.</param>
-        /// <exception cref="ArgumentNullException"><paramref name="label"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="label"/> is <see
+        // langword="null"/>.</exception>
         public CoseHeaderLabel(string label)
         {
             if (label is null)
@@ -78,7 +79,8 @@ namespace System.Security.Cryptography.Cose
         /// Returns a value indicating whether this instance is equal to the specified instance.
         /// </summary>
         /// <param name="other">The object to compare to this instance.</param>
-        /// <returns><see langword="true"/> if the value parameter equals the value of this instance; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the value parameter equals the value of this instance;
+        // otherwise, <see langword="false"/>.</returns>
         public bool Equals(CoseHeaderLabel other)
         {
             return LabelAsString == other.LabelAsString && LabelAsInt32 == other.LabelAsInt32;
@@ -88,7 +90,8 @@ namespace System.Security.Cryptography.Cose
         /// Returns a value indicating whether this instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare to this instance.</param>
-        /// <returns><see langword="true"/> if value is an instance of <see cref="CoseHeaderLabel"/> and equals the value of this instance; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if value is an instance of <see cref="CoseHeaderLabel"/> and
+        // equals the value of this instance; otherwise, <see langword="false"/>.</returns>
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj is CoseHeaderLabel otherObj && Equals(otherObj);
 
@@ -115,7 +118,8 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
-        /// <returns><see langword="true"/> if left and right represent the same label; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if left and right represent the same label; otherwise, <see
+        // langword="false"/>.</returns>
         public static bool operator ==(CoseHeaderLabel left, CoseHeaderLabel right) =>
             left.Equals(right);
 
@@ -124,7 +128,8 @@ namespace System.Security.Cryptography.Cose
         /// </summary>
         /// <param name="left">The first object to compare.</param>
         /// <param name="right">The second object to compare.</param>
-        /// <returns><see langword="true"/> if left and right do not represent the same label; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if left and right do not represent the same label; otherwise,
+        // <see langword="false"/>.</returns>
         public static bool operator !=(CoseHeaderLabel left, CoseHeaderLabel right) =>
             !left.Equals(right);
     }

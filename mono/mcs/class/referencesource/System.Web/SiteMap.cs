@@ -5,8 +5,8 @@
 //------------------------------------------------------------------------------
 
 /*
- * Copyright (c) 2002 Microsoft Corporation
- */
+* Copyright (c) 2002 Microsoft Corporation
+*/
 
 namespace System.Web
 {

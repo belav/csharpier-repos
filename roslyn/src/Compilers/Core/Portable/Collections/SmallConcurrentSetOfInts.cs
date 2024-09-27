@@ -121,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Collections
         /// <param name="slot">The slot to examine.</param>
         /// <param name="i">The new value to insert if the slot is unoccupied.</param>
         /// <param name="added">An out param indicating whether the slot was successfully updated.</param>
-        /// <returns>true if the value in the slot either now contains, or already contained <paramref name="i"/>. false otherwise.</returns>
+        /// <returns>true if the value in the slot either now contains, or already contained <paramref
+        // name="i"/>. false otherwise.</returns>
         private static bool AddHelper(ref int slot, int i, ref bool added)
         {
             Debug.Assert(!added);

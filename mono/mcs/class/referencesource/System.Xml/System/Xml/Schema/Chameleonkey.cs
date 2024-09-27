@@ -29,7 +29,8 @@ namespace System.Xml.Schema
         /// Creates a new chameleon key - an identification for a chameleon schema instance
         /// </summary>
         /// <param name="ns">The target namespace of the instance of the chameleon schema</param>
-        /// <param name="originalSchema">The original (chameleon) schema (the one without the target namespace).
+        /// <param name="originalSchema">The original (chameleon) schema (the one without the target
+        // namespace).
         ///   This is used to get the location (base uri) and to identify the schema.</param>
         public ChameleonKey(string ns, XmlSchema originalSchema)
         {
@@ -68,7 +69,8 @@ namespace System.Xml.Schema
                 // We want to compare the target NS and the schema location.
                 // If the location is empty (but only then) we also want to compare the original schema instance.
                 // As noted above the originalSchema is null if the chameleonLocation is non-empty. As a result we
-                // can simply compare the reference to the original schema always (regardless of the schemalocation).
+                // can simply compare the reference to the original schema always (regardless of the
+                // schemalocation).
                 Debug.Assert(
                     (chameleonLocation.OriginalString.Length == 0 && originalSchema != null)
                         || (chameleonLocation.OriginalString.Length != 0 && originalSchema == null)

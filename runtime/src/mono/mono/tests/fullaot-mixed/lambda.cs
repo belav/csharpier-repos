@@ -1,7 +1,7 @@
 /* This test is extracted from System.Core tests, that happens to be
- * problematic if *all* assemblies are full-aot'd, but the interpreter is still
- * used for SRE.
- */
+* problematic if *all* assemblies are full-aot'd, but the interpreter is still
+* used for SRE.
+*/
 using System;
 using System.Collections.Generic;
 using System.Linq;

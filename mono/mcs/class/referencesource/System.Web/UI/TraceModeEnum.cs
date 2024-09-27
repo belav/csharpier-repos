@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The different styles of trace output.
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* The different styles of trace output.
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {

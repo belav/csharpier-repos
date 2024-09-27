@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The context for outputting trace information in the page.
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* The context for outputting trace information in the page.
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web
 {
     using System;
@@ -33,12 +33,15 @@ namespace System.Web
     ///    <para>Use the TraceContext
     ///       class by appending trace messages to specific trace categories. For example, a
     ///       calendar class might append the message ?Calendar1-&gt;Starting
-    ///       To Render? within the Render category, and append the message ?Calendar1-&gt;Firing OnChange Event? within
-    ///       the Events category. Tracing is enabled by setting the <see topic='cpdirSystem.Web.UI.PageDirectives'/>
+    ///       To Render? within the Render category, and append the message ?Calendar1-&gt;Firing
+    // OnChange Event? within
+    ///       the Events category. Tracing is enabled by setting the <see
+    // topic='cpdirSystem.Web.UI.PageDirectives'/>
     ///       Trace attribute or the System.Web.UI.TraceContext.IsEnabled
     ///       property.</para>
     ///    <para>When tracing is enabled, In addition to showing
-    ///       user-provided trace content, the <see cref='System.Web.UI.Page'/> class not only shows user-provided trace content, it automatically includes
+    ///       user-provided trace content, the <see cref='System.Web.UI.Page'/> class not only shows
+    // user-provided trace content, it automatically includes
     ///       performance data, tree-structure information, and state management content.</para>
     /// </devdoc>
 
@@ -267,7 +270,8 @@ namespace System.Web
         }
 
         /// <devdoc>
-        ///    <para>Writes trace information to the trace log including any user defined categories,trace messages and error information. All
+        ///    <para>Writes trace information to the trace log including any user defined categories,trace
+        // messages and error information. All
         ///       warnings appear as red text. </para>
         /// </devdoc>
         public void Warn(string category, string message, Exception errorInfo)
@@ -408,9 +412,9 @@ namespace System.Web
             }
         }
 
-        /*
-         *   Add the render size to the control
-         */
+/*
+*   Add the render size to the control
+*/
         internal void AddControlSize(String controlId, int renderSize)
         {
             VerifyStart();
@@ -577,9 +581,9 @@ namespace System.Web
             _endDataCollected = true;
         }
 
-        /*
-         *   Finalize the request
-         */
+/*
+*   Finalize the request
+*/
         internal void EndRequest()
         {
             VerifyStart();
@@ -753,10 +757,10 @@ namespace System.Web
             OnTraceFinished(new TraceContextEventArgs(_traceRecords));
         }
 
-        /*  InitMaster
-         *  Initialize the _masterRequest dataset with the schema we use
-         *  to store profiling information
-         */
+/*  InitMaster
+*  Initialize the _masterRequest dataset with the schema we use
+*  to store profiling information
+*/
         private void InitMaster()
         {
             DataSet tempset = new DataSet();
@@ -865,10 +869,10 @@ namespace System.Web
             ds.Tables[table].Rows.Add(row);
         }
 
-        /*  InitRequest
-         *  Initialize the given dataset with basic
-         *  request information
-         */
+/*  InitRequest
+*  Initialize the given dataset with basic
+*  request information
+*/
         private void InitRequest()
         {
             // Master request is assumed to be initialized first

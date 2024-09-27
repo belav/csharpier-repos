@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.DocumentationComments
         public string SnippetText { get; }
 
         /// <summary>
-        /// The offset within <see cref="SnippetText"/> where the caret should be positioned after replacement
+        /// The offset within <see cref="SnippetText"/> where the caret should be positioned after
+        // replacement
         /// </summary>
         public int CaretOffset { get; }
 

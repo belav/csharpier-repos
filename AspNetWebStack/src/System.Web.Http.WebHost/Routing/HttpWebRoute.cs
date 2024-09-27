@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -23,7 +24,8 @@ namespace System.Web.Http.WebHost.Routing
     internal class HttpWebRoute : Route
     {
         /// <summary>
-        /// Key used to signify that a route URL generation request should include HTTP routes (e.g. Web API).
+        /// Key used to signify that a route URL generation request should include HTTP routes (e.g. Web
+        // API).
         /// If this key is not specified then no HTTP routes will match.
         /// </summary>
         internal const string HttpRouteKey = "httproute";
@@ -65,7 +67,8 @@ namespace System.Web.Http.WebHost.Routing
             RouteDirection routeDirection
         )
         {
-            // The base class will validate that a constraint is either a string or IRoutingConstraint inside its
+            // The base class will validate that a constraint is either a string or IRoutingConstraint inside
+            // its
             // ProcessConstraint method. We're doing the validation up front here because we also support
             // IHttpRouteConstraint and we want the error message to reflect all three valid possibilities.
             ValidateConstraint(HttpRoute.RouteTemplate, parameterName, constraint);
@@ -119,7 +122,8 @@ namespace System.Web.Http.WebHost.Routing
             catch (Exception exception)
             {
                 // Processing an exception involves async work, and this method is synchronous.
-                // Instead of waiting on the async work here, it's better to return a handler that will deal with the
+                // Instead of waiting on the async work here, it's better to return a handler that will deal with
+                // the
                 // exception asynchronously during its request processing method.
                 ExceptionDispatchInfo exceptionInfo = ExceptionDispatchInfo.Capture(exception);
                 return new RouteData(this, new HttpRouteExceptionRouteHandler(exceptionInfo));
@@ -209,8 +213,10 @@ namespace System.Web.Http.WebHost.Routing
                 return;
             }
 
-            // This validation is repeated in the call to base.ProcessConstraint, but if we do it here we can give a
-            // better error message. base.ProcessConstraint doesn't handle IHttpRouteConstraint, but this class does.
+            // This validation is repeated in the call to base.ProcessConstraint, but if we do it here we can
+            // give a
+            // better error message. base.ProcessConstraint doesn't handle IHttpRouteConstraint, but this class
+            // does.
             if (constraint is IRouteConstraint)
             {
                 return;

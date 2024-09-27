@@ -61,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             if (!ConvertToRawStringHelpers.CanConvert(characters))
                 return false;
 
-            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a gigantic
+            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a
+            // gigantic
             // three line alternative over just ""
             if (characters.IsEmpty)
                 return false;
@@ -70,7 +71,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             var canBeMultiLineWithoutLeadingWhiteSpaces = false;
             if (!canBeSingleLine)
             {
-                // Users sometimes write verbatim string literals with a extra starting newline (or indentation) purely
+                // Users sometimes write verbatim string literals with a extra starting newline (or indentation)
+                // purely
                 // for aesthetic reasons.  For example:
                 //
                 //      var v = @"
@@ -92,7 +94,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 //          FROM table_name";
                 //          """
                 //
-                // This changes the contents of the literal, but that can be fine for the domain the user is working in.
+                // This changes the contents of the literal, but that can be fine for the domain the user is working
+                // in.
                 // Offer this, but let the user know that this will change runtime semantics.
                 canBeMultiLineWithoutLeadingWhiteSpaces =
                     token.IsVerbatimStringLiteral()
@@ -100,7 +103,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     && CleanupWhitespace(characters).Length > 0;
             }
 
-            // If we have escaped quotes in the string, then this is a good option to bubble up as something to convert
+            // If we have escaped quotes in the string, then this is a good option to bubble up as something to
+            // convert
             // to a raw string.  Otherwise, still offer this refactoring, but at low priority as the user may be
             // invoking this on lots of strings that they have no interest in converting.
             var priority = AllEscapesAreQuotes(characters)
@@ -171,10 +175,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             if (token.SpanStart == tokenLine.Start)
             {
                 // Special case.  string token starting at the start of the line.  This is a common pattern used for
-                // multi-line strings that don't want any indentation and have the start/end of the string at the same
+                // multi-line strings that don't want any indentation and have the start/end of the string at the
+                // same
                 // level (like unit tests).
                 //
-                // In this case, figure out what indentation we're normally like to put this string.  Update *both* the
+                // In this case, figure out what indentation we're normally like to put this string.  Update *both*
+                // the
                 // contents *and* the starting quotes of the raw string.
                 var indenter =
                     parsedDocument.LanguageServices.GetRequiredService<IIndentationService>();
@@ -199,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             else
             {
                 // otherwise this was a string literal on a line that already contains contents.  Or it's a string
-                // literal on its own line, but indented some amount.  Figure out the indentation of the contents from
+                // literal on its own line, but indented some amount.  Figure out the indentation of the contents
+                // from
                 // this, but leave the string literal starting at whatever position it's at.
                 var indentation = token.GetPreferredIndentation(
                     parsedDocument,

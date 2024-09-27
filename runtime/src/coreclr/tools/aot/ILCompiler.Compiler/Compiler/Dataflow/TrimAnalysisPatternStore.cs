@@ -94,7 +94,8 @@ namespace ILCompiler.Dataflow
         {
             TokenAccessPatterns.TryAdd((pattern.Origin, pattern.Entity), pattern);
 
-            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin and the entity
+            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin
+            // and the entity
             // and there's only one way to "access" a generic instantiation.
         }
 
@@ -102,7 +103,8 @@ namespace ILCompiler.Dataflow
         {
             GenericInstantiations.TryAdd((pattern.Origin, pattern.Entity), pattern);
 
-            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin and the entity
+            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin
+            // and the entity
             // and there's only one way to "access" a generic instantiation.
         }
 
@@ -110,7 +112,8 @@ namespace ILCompiler.Dataflow
         {
             FieldAccessPatterns.TryAdd((pattern.Origin, pattern.Field), pattern);
 
-            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin and the entity
+            // No Merge - there's nothing to merge since this pattern is uniquely identified by both the origin
+            // and the entity
             // and there's only one way to "access" a field.
         }
 

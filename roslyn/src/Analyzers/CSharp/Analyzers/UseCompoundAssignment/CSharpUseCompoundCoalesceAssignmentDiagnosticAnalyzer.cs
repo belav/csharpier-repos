@@ -191,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             }
 
             // Don't want to offer anything if our if-statement body has any conditional directives in it.  That
-            // means there's some other code that may run under some other conditions, that we do not want to now
+            // means there's some other code that may run under some other conditions, that we do not want to
+            // now
             // run conditionally outside of the 'if' statement itself.
             if (
                 whenTrue
@@ -237,7 +238,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             )
             {
                 // Ensure that if we are using `==` that it's not an overloaded operator.  One known exception is
-                // System.String.  Even though `==` is overloaded, it has the same semantics as ReferenceEquals(null) so
+                // System.String.  Even though `==` is overloaded, it has the same semantics as
+                // ReferenceEquals(null) so
                 // it's safe to convert.
                 var symbol = semanticModel
                     .GetSymbolInfo(binaryExpression, cancellationToken)

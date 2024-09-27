@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
             ObsoleteAttributeData.Uninitialized;
 
         // CONSIDER: the parameters could be computed lazily (as in PEMethodSymbol).
-        // CONSIDER: if the parameters were computed lazily, ParameterCount could be overridden to fall back on the signature (as in PEMethodSymbol).
+        // CONSIDER: if the parameters were computed lazily, ParameterCount could be overridden to fall back
+        // on the signature (as in PEMethodSymbol).
 
         // Distinct accessibility value to represent unset.
         private const int UnsetAccessibility = -1;

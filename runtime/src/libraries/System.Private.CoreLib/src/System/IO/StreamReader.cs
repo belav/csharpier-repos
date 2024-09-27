@@ -79,8 +79,10 @@ namespace System.IO
 
         private void CheckAsyncTaskInProgress()
         {
-            // We are not locking the access to _asyncReadTask because this is not meant to guarantee thread safety.
-            // We are simply trying to deter calling any Read APIs while an async Read from the same thread is in progress.
+            // We are not locking the access to _asyncReadTask because this is not meant to guarantee thread
+            // safety.
+            // We are simply trying to deter calling any Read APIs while an async Read from the same thread is
+            // in progress.
             if (!_asyncReadTask.IsCompleted)
             {
                 ThrowAsyncIOInProgress();
@@ -972,16 +974,22 @@ namespace System.IO
         public override Task<string?> ReadLineAsync() => ReadLineAsync(default).AsTask();
 
         /// <summary>
-        /// Reads a line of characters asynchronously from the current stream and returns the data as a string.
+        /// Reads a line of characters asynchronously from the current stream and returns the data as a
+        // string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A value task that represents the asynchronous read operation. The value of the <c>TResult</c>
-        /// parameter contains the next line from the stream, or is <see langword="null" /> if all of the characters have been read.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <returns>A value task that represents the asynchronous read operation. The value of the
+        // <c>TResult</c>
+        /// parameter contains the next line from the stream, or is <see langword="null" /> if all of the
+        // characters have been read.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters in the next line is
+        // larger than <see cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The stream reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <example>
-        /// The following example shows how to read and print all lines from the file until the end of the file is reached or the operation timed out.
+        /// The following example shows how to read and print all lines from the file until the end of the
+        // file is reached or the operation timed out.
         /// <code lang="C#">
         /// using CancellationTokenSource tokenSource = new (TimeSpan.FromSeconds(1));
         /// using StreamReader reader = File.OpenText("existingfile.txt");
@@ -1121,16 +1129,21 @@ namespace System.IO
         public override Task<string> ReadToEndAsync() => ReadToEndAsync(default);
 
         /// <summary>
-        /// Reads all characters from the current position to the end of the stream asynchronously and returns them as one string.
+        /// Reads all characters from the current position to the end of the stream asynchronously and
+        // returns them as one string.
         /// </summary>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c> parameter contains
+        /// <returns>A task that represents the asynchronous read operation. The value of the <c>TResult</c>
+        // parameter contains
         /// a string with the characters from the current position to the end of the stream.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see cref="int.MaxValue"/>.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The number of characters is larger than <see
+        // cref="int.MaxValue"/>.</exception>
         /// <exception cref="ObjectDisposedException">The stream reader has been disposed.</exception>
-        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read operation.</exception>
+        /// <exception cref="InvalidOperationException">The reader is currently in use by a previous read
+        // operation.</exception>
         /// <example>
-        /// The following example shows how to read the contents of a file by using the <see cref="ReadToEndAsync(CancellationToken)"/> method.
+        /// The following example shows how to read the contents of a file by using the <see
+        // cref="ReadToEndAsync(CancellationToken)"/> method.
         /// <code lang="C#">
         /// using CancellationTokenSource tokenSource = new (TimeSpan.FromSeconds(1));
         /// using StreamReader reader = File.OpenText("existingfile.txt");

@@ -98,9 +98,12 @@ namespace System.Collections.Generic
             // This is hit when an invarant of QuickSort is violated due to a bad IComparer implementation (for
             // example, imagine an IComparer that returns 0 when items are equal but -1 all other times).
             //
-            // We could have thrown this exception on v4, but due to changes in v4.5 around how we partition arrays
-            // there are different sets of input where we would throw this exception.  In order to reduce overall risk from
-            // an app compat persective, we're changing to never throw on v4.  Instead, we'll return with a partially
+            // We could have thrown this exception on v4, but due to changes in v4.5 around how we partition
+            // arrays
+            // there are different sets of input where we would throw this exception.  In order to reduce
+            // overall risk from
+            // an app compat persective, we're changing to never throw on v4.  Instead, we'll return with a
+            // partially
             // sorted array.
             if (BinaryCompatibility.TargetsAtLeast_Desktop_V4_5)
             {
@@ -168,9 +171,12 @@ namespace System.Collections.Generic
                 }
 
 #if FEATURE_CORECLR
-                // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                // upgrade
+                // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                // aka
+                // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                // uses the new sort.
 
                 IntrospectiveSort(keys, index, length, comparer);
 #else
@@ -334,7 +340,8 @@ namespace System.Collections.Generic
                     j--;
                 } while (i <= j);
 
-                // The next iteration of the while loop is to "recursively" sort the larger half of the array and the
+                // The next iteration of the while loop is to "recursively" sort the larger half of the array and
+                // the
                 // following calls recrusively sort the smaller half.  So we subtrack one from depthLimit here so
                 // both sorts see the new value.
                 depthLimit--;
@@ -545,7 +552,8 @@ namespace System.Collections.Generic
     internal class GenericArraySortHelper<T> : IArraySortHelper<T>
         where T : IComparable<T>
     {
-        // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not execute it
+        // Do not add a constructor to this class because ArraySortHelper<T>.CreateSortHelper will not
+        // execute it
 
         #region IArraySortHelper<T> Members
 
@@ -560,7 +568,8 @@ namespace System.Collections.Generic
             try
             {
 #if FEATURE_LEGACYNETCF
-                // Pre-Apollo Windows Phone call the overload that sorts the keys, not values this achieves the same result
+                // Pre-Apollo Windows Phone call the overload that sorts the keys, not values this achieves the same
+                // result
                 if (comparer == null && CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
                     comparer = Comparer<T>.Default;
 
@@ -578,9 +587,12 @@ namespace System.Collections.Generic
 #endif
 
 #if FEATURE_CORECLR
-                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                    // upgrade
+                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                    // aka
+                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                    // uses the new sort.
 
                     IntrospectiveSort(keys, index, length);
 #else
@@ -603,9 +615,12 @@ namespace System.Collections.Generic
                 else
                 {
 #if FEATURE_CORECLR
-                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                    // upgrade
+                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                    // aka
+                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                    // uses the new sort.
 
                     ArraySortHelper<T>.IntrospectiveSort(keys, index, length, comparer);
 #else
@@ -801,7 +816,8 @@ namespace System.Collections.Generic
                     j--;
                 } while (i <= j);
 
-                // The next iteration of the while loop is to "recursively" sort the larger half of the array and the
+                // The next iteration of the while loop is to "recursively" sort the larger half of the array and
+                // the
                 // following calls recrusively sort the smaller half.  So we subtrack one from depthLimit here so
                 // both sorts see the new value.
                 depthLimit--;
@@ -1077,9 +1093,12 @@ namespace System.Collections.Generic
                 }
 
 #if FEATURE_CORECLR
-                // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                // upgrade
+                // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                // aka
+                // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                // uses the new sort.
 
                 IntrospectiveSort(keys, values, index, length, comparer);
 #else
@@ -1217,7 +1236,8 @@ namespace System.Collections.Generic
                     j--;
                 } while (i <= j);
 
-                // The next iteration of the while loop is to "recursively" sort the larger half of the array and the
+                // The next iteration of the while loop is to "recursively" sort the larger half of the array and
+                // the
                 // following calls recrusively sort the smaller half.  So we subtrack one from depthLimit here so
                 // both sorts see the new value.
                 depthLimit--;
@@ -1494,9 +1514,12 @@ namespace System.Collections.Generic
                 if (comparer == null || comparer == Comparer<TKey>.Default)
                 {
 #if FEATURE_CORECLR
-                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                    // upgrade
+                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                    // aka
+                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                    // uses the new sort.
 
                     IntrospectiveSort(keys, values, index, length);
 #else
@@ -1520,9 +1543,12 @@ namespace System.Collections.Generic
                 else
                 {
 #if FEATURE_CORECLR
-                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the upgrade
-                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort aka
-                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always uses the new sort.
+                    // Since QuickSort and IntrospectiveSort produce different sorting sequence for equal keys the
+                    // upgrade
+                    // to IntrospectiveSort was quirked. However since the phone builds always shipped with the new sort
+                    // aka
+                    // IntrospectiveSort and we would want to continue using this sort moving forward CoreCLR always
+                    // uses the new sort.
 
                     ArraySortHelper<TKey, TValue>.IntrospectiveSort(
                         keys,
@@ -1673,7 +1699,8 @@ namespace System.Collections.Generic
                     j--;
                 } while (i <= j);
 
-                // The next iteration of the while loop is to "recursively" sort the larger half of the array and the
+                // The next iteration of the while loop is to "recursively" sort the larger half of the array and
+                // the
                 // following calls recrusively sort the smaller half.  So we subtrack one from depthLimit here so
                 // both sorts see the new value.
                 depthLimit--;

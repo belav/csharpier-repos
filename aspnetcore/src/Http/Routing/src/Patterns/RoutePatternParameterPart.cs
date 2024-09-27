@@ -7,7 +7,8 @@ using System.Text;
 namespace Microsoft.AspNetCore.Routing.Patterns;
 
 /// <summary>
-/// Represents a parameter part in a route pattern. Instances of <see cref="RoutePatternParameterPart"/>
+/// Represents a parameter part in a route pattern. Instances of <see
+// cref="RoutePatternParameterPart"/>
 /// are immutable.
 /// </summary>
 [DebuggerDisplay("{DebuggerToString()}")]
@@ -34,7 +35,8 @@ internal sealed class RoutePatternParameterPart : RoutePatternPart
     )
         : base(RoutePatternPartKind.Parameter)
     {
-        // See #475 - this code should have some asserts, but it can't because of the design of RouteParameterParser.
+        // See #475 - this code should have some asserts, but it can't because of the design of
+        // RouteParameterParser.
 
         Name = parameterName;
         Default = @default;

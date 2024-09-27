@@ -471,7 +471,8 @@ namespace Microsoft.SqlServer.Server
             );
         }
 
-        // Most general constructor, should be able to intialize all SqlMetaData fields.(Used by SqlParameter)
+        // Most general constructor, should be able to intialize all SqlMetaData fields.(Used by
+        // SqlParameter)
         internal SqlMetaData(
             String name,
             SqlDbType sqlDBType,
@@ -677,7 +678,8 @@ namespace Microsoft.SqlServer.Server
 
             ValidateSortOrder(columnSortOrder, sortOrdinal);
 
-            // Check for absense of explicitly-allowed types to avoid unexpected additions when new types are added
+            // Check for absense of explicitly-allowed types to avoid unexpected additions when new types are
+            // added
             if (
                 !(
                     SqlDbType.BigInt == dbType
@@ -2237,7 +2239,8 @@ namespace Microsoft.SqlServer.Server
         // Array of default-valued metadata ordered by corresponding SqlDbType.
         internal static SqlMetaData[] sxm_rgDefaults =
         {
-            //    new SqlMetaData(name, DbType, SqlDbType, MaxLen, Prec, Scale, Locale, DatabaseName, SchemaName, isPartialLength)
+            //    new SqlMetaData(name, DbType, SqlDbType, MaxLen, Prec, Scale, Locale, DatabaseName,
+            // SchemaName, isPartialLength)
             new SqlMetaData("bigint", SqlDbType.BigInt, 8, 19, 0, 0, SqlCompareOptions.None, false), // SqlDbType.BigInt
             new SqlMetaData("binary", SqlDbType.Binary, 1, 0, 0, 0, SqlCompareOptions.None, false), // SqlDbType.Binary
             new SqlMetaData("bit", SqlDbType.Bit, 1, 1, 0, 0, SqlCompareOptions.None, false), // SqlDbType.Bit

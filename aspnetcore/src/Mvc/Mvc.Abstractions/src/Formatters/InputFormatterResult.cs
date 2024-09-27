@@ -47,7 +47,8 @@ public class InputFormatterResult
     public object? Model { get; }
 
     /// <summary>
-    /// Returns an <see cref="InputFormatterResult"/> indicating the <see cref="IInputFormatter.ReadAsync"/>
+    /// Returns an <see cref="InputFormatterResult"/> indicating the <see
+    // cref="IInputFormatter.ReadAsync"/>
     /// operation failed.
     /// </summary>
     /// <returns>
@@ -60,12 +61,15 @@ public class InputFormatterResult
     }
 
     /// <summary>
-    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating
+    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating
     /// the <see cref="IInputFormatter.ReadAsync"/> operation failed.
     /// </summary>
     /// <returns>
-    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating the
-    /// <see cref="IInputFormatter.ReadAsync"/> operation failed i.e. with <see cref="HasError"/> <c>true</c>.
+    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating the
+    /// <see cref="IInputFormatter.ReadAsync"/> operation failed i.e. with <see cref="HasError"/>
+    // <c>true</c>.
     /// </returns>
     public static Task<InputFormatterResult> FailureAsync()
     {
@@ -73,7 +77,8 @@ public class InputFormatterResult
     }
 
     /// <summary>
-    /// Returns an <see cref="InputFormatterResult"/> indicating the <see cref="IInputFormatter.ReadAsync"/>
+    /// Returns an <see cref="InputFormatterResult"/> indicating the <see
+    // cref="IInputFormatter.ReadAsync"/>
     /// operation was successful.
     /// </summary>
     /// <param name="model">The deserialized <see cref="object"/>.</param>
@@ -87,13 +92,16 @@ public class InputFormatterResult
     }
 
     /// <summary>
-    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating
+    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating
     /// the <see cref="IInputFormatter.ReadAsync"/> operation was successful.
     /// </summary>
     /// <param name="model">The deserialized <see cref="object"/>.</param>
     /// <returns>
-    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating the
-    /// <see cref="IInputFormatter.ReadAsync"/> operation succeeded i.e. with <see cref="HasError"/> <c>false</c>.
+    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating the
+    /// <see cref="IInputFormatter.ReadAsync"/> operation succeeded i.e. with <see cref="HasError"/>
+    // <c>false</c>.
     /// </returns>
     public static Task<InputFormatterResult> SuccessAsync(object? model)
     {
@@ -101,7 +109,8 @@ public class InputFormatterResult
     }
 
     /// <summary>
-    /// Returns an <see cref="InputFormatterResult"/> indicating the <see cref="IInputFormatter.ReadAsync"/>
+    /// Returns an <see cref="InputFormatterResult"/> indicating the <see
+    // cref="IInputFormatter.ReadAsync"/>
     /// operation produced no value.
     /// </summary>
     /// <returns>
@@ -114,11 +123,13 @@ public class InputFormatterResult
     }
 
     /// <summary>
-    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating
+    /// Returns a <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating
     /// the <see cref="IInputFormatter.ReadAsync"/> operation produced no value.
     /// </summary>
     /// <returns>
-    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/> indicating the
+    /// A <see cref="Task"/> that on completion provides an <see cref="InputFormatterResult"/>
+    // indicating the
     /// <see cref="IInputFormatter.ReadAsync"/> operation produced no value.
     /// </returns>
     public static Task<InputFormatterResult> NoValueAsync()

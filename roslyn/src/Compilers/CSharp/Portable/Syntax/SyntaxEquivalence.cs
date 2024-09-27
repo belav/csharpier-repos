@@ -270,7 +270,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             Func<SyntaxKind, bool>? ignoreChildNode
         )
         {
-            // Fast path for when the caller does not care about nullable directives. This can happen in some IDE refactorings.
+            // Fast path for when the caller does not care about nullable directives. This can happen in some
+            // IDE refactorings.
             if (ignoreChildNode is object && ignoreChildNode(SyntaxKind.NullableDirectiveTrivia))
             {
                 return true;

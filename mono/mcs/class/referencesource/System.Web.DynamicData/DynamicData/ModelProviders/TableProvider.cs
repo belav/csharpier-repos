@@ -86,7 +86,8 @@ namespace System.Web.DynamicData.ModelProviders
         public DataModelProvider DataModel { get; internal set; }
 
         /// <summary>
-        /// Get the value of a foreign key for a given row. By default, it just looks up a property by that name
+        /// Get the value of a foreign key for a given row. By default, it just looks up a property by that
+        // name
         /// </summary>
         public virtual object EvaluateForeignKey(object row, string foreignKeyName)
         {

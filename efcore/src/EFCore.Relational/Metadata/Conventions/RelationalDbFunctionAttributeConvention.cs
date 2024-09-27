@@ -4,12 +4,14 @@
 namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 
 /// <summary>
-///     A convention that configures model function mappings based on public static methods on the context marked with
+///     A convention that configures model function mappings based on public static methods on the
+// context marked with
 ///     <see cref="DbFunctionAttribute" />.
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> and
-///     <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
+///     <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more
+// information and examples.
 /// </remarks>
 public class RelationalDbFunctionAttributeConvention
     : IModelInitializedConvention,
@@ -19,7 +21,8 @@ public class RelationalDbFunctionAttributeConvention
     ///     Creates a new instance of <see cref="RelationalDbFunctionAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
+    /// <param name="relationalDependencies"> Parameter object containing relational dependencies for
+    // this convention.</param>
     public RelationalDbFunctionAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
         RelationalConventionSetBuilderDependencies relationalDependencies
@@ -86,7 +89,8 @@ public class RelationalDbFunctionAttributeConvention
     /// <summary>
     ///     Called when an <see cref="IConventionDbFunction" /> is added to the model.
     /// </summary>
-    /// <param name="dbFunctionBuilder">The builder for the <see cref="IConventionDbFunction" />.</param>
+    /// <param name="dbFunctionBuilder">The builder for the <see cref="IConventionDbFunction"
+    // />.</param>
     /// <param name="context">Additional information associated with convention execution.</param>
     protected virtual void ProcessDbFunctionAdded(
         IConventionDbFunctionBuilder dbFunctionBuilder,

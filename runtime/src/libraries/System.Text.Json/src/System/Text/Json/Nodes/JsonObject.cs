@@ -28,7 +28,8 @@ namespace System.Text.Json.Nodes
             : base(options) { }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains the specified <paramref name="properties"/>.
+        ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains the specified
+        // <paramref name="properties"/>.
         /// </summary>
         /// <param name="properties">The properties to be added.</param>
         /// <param name="options">Options to control the behavior.</param>
@@ -45,10 +46,12 @@ namespace System.Text.Json.Nodes
         }
 
         /// <summary>
-        ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains properties from the specified <see cref="JsonElement"/>.
+        ///   Initializes a new instance of the <see cref="JsonObject"/> class that contains properties from
+        // the specified <see cref="JsonElement"/>.
         /// </summary>
         /// <returns>
-        ///   The new instance of the <see cref="JsonObject"/> class that contains properties from the specified <see cref="JsonElement"/>.
+        ///   The new instance of the <see cref="JsonObject"/> class that contains properties from the
+        // specified <see cref="JsonElement"/>.
         /// </returns>
         /// <param name="element">The <see cref="JsonElement"/>.</param>
         /// <param name="options">Options to control the behavior.</param>
@@ -123,7 +126,8 @@ namespace System.Text.Json.Nodes
         /// <param name="propertyName">The name of the property to return.</param>
         /// <param name="jsonNode">The JSON value of the property with the specified name.</param>
         /// <returns>
-        ///   <see langword="true"/> if a property with the specified name was found; otherwise, <see langword="false"/>.
+        ///   <see langword="true"/> if a property with the specified name was found; otherwise, <see
+        // langword="false"/>.
         /// </returns>
         public bool TryGetPropertyValue(string propertyName, out JsonNode? jsonNode) =>
             ((IDictionary<string, JsonNode?>)this).TryGetValue(propertyName, out jsonNode);

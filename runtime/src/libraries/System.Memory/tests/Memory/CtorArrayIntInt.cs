@@ -6,7 +6,8 @@ using Xunit;
 namespace System.MemoryTests
 {
     //
-    // Tests for MemoryTests<T>.ctor(T[], int, int). If the test is not specific to this overload, consider putting it in CtorArray.cs instread.
+    // Tests for MemoryTests<T>.ctor(T[], int, int). If the test is not specific to this overload,
+    // consider putting it in CtorArray.cs instread.
     //
     public static partial class MemoryTests
     {
@@ -71,7 +72,8 @@ namespace System.MemoryTests
         [Fact]
         public static void CtorArrayWithStartAndLengthBothEqual()
         {
-            // Valid for start to equal the array length. This returns an empty memory that starts "just past the array."
+            // Valid for start to equal the array length. This returns an empty memory that starts "just past
+            // the array."
             int[] a = { 91, 92, 93 };
             var memory = new Memory<int>(a, 3, 0);
             memory.Validate();

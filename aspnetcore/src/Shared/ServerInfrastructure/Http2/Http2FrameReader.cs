@@ -11,17 +11,17 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
 internal static class Http2FrameReader
 {
-    /* https://tools.ietf.org/html/rfc7540#section-4.1
-        +-----------------------------------------------+
-        |                 Length (24)                   |
-        +---------------+---------------+---------------+
-        |   Type (8)    |   Flags (8)   |
-        +-+-------------+---------------+-------------------------------+
-        |R|                 Stream Identifier (31)                      |
-        +=+=============================================================+
-        |                   Frame Payload (0...)                      ...
-        +---------------------------------------------------------------+
-    */
+/* https://tools.ietf.org/html/rfc7540#section-4.1
++-----------------------------------------------+
+|                 Length (24)                   |
++---------------+---------------+---------------+
+|   Type (8)    |   Flags (8)   |
++-+-------------+---------------+-------------------------------+
+|R|                 Stream Identifier (31)                      |
++=+=============================================================+
+|                   Frame Payload (0...)                      ...
++---------------------------------------------------------------+
+*/
     public const int HeaderLength = 9;
 
     private const int TypeOffset = 3;
@@ -104,32 +104,32 @@ internal static class Http2FrameReader
         // Parse frame type specific fields
         switch (frame.Type)
         {
-            /*
-                +---------------+
-                |Pad Length? (8)|
-                +---------------+-----------------------------------------------+
-                |                            Data (*)                         ...
-                +---------------------------------------------------------------+
-                |                           Padding (*)                       ...
-                +---------------------------------------------------------------+
-            */
+/*
++---------------+
+|Pad Length? (8)|
++---------------+-----------------------------------------------+
+|                            Data (*)                         ...
++---------------------------------------------------------------+
+|                           Padding (*)                       ...
++---------------------------------------------------------------+
+*/
             case Http2FrameType.DATA: // Variable 0 or 1
                 frame.DataPadLength = frame.DataHasPadding ? extendedHeaders[0] : (byte)0;
                 break;
 
-            /* https://tools.ietf.org/html/rfc7540#section-6.2
-                +---------------+
-                |Pad Length? (8)|
-                +-+-------------+-----------------------------------------------+
-                |E|                 Stream Dependency? (31)                     |
-                +-+-------------+-----------------------------------------------+
-                |  Weight? (8)  |
-                +-+-------------+-----------------------------------------------+
-                |                   Header Block Fragment (*)                 ...
-                +---------------------------------------------------------------+
-                |                           Padding (*)                       ...
-                +---------------------------------------------------------------+
-            */
+/* https://tools.ietf.org/html/rfc7540#section-6.2
++---------------+
+|Pad Length? (8)|
++-+-------------+-----------------------------------------------+
+|E|                 Stream Dependency? (31)                     |
++-+-------------+-----------------------------------------------+
+|  Weight? (8)  |
++-+-------------+-----------------------------------------------+
+|                   Header Block Fragment (*)                 ...
++---------------------------------------------------------------+
+|                           Padding (*)                       ...
++---------------------------------------------------------------+
+*/
             case Http2FrameType.HEADERS:
                 if (frame.HeadersHasPadding)
                 {
@@ -154,49 +154,49 @@ internal static class Http2FrameReader
                 }
                 break;
 
-            /* https://tools.ietf.org/html/rfc7540#section-6.8
-                +-+-------------------------------------------------------------+
-                |R|                  Last-Stream-ID (31)                        |
-                +-+-------------------------------------------------------------+
-                |                      Error Code (32)                          |
-                +---------------------------------------------------------------+
-                |                  Additional Debug Data (*)                    |
-                +---------------------------------------------------------------+
-            */
+/* https://tools.ietf.org/html/rfc7540#section-6.8
++-+-------------------------------------------------------------+
+|R|                  Last-Stream-ID (31)                        |
++-+-------------------------------------------------------------+
+|                      Error Code (32)                          |
++---------------------------------------------------------------+
+|                  Additional Debug Data (*)                    |
++---------------------------------------------------------------+
+*/
             case Http2FrameType.GOAWAY:
                 frame.GoAwayLastStreamId = (int)Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                 frame.GoAwayErrorCode = (Http2ErrorCode)
                     BinaryPrimitives.ReadUInt32BigEndian(extendedHeaders.Slice(4));
                 break;
 
-            /* https://tools.ietf.org/html/rfc7540#section-6.3
-                +-+-------------------------------------------------------------+
-                |E|                  Stream Dependency (31)                     |
-                +-+-------------+-----------------------------------------------+
-                |   Weight (8)  |
-                +-+-------------+
-            */
+/* https://tools.ietf.org/html/rfc7540#section-6.3
++-+-------------------------------------------------------------+
+|E|                  Stream Dependency (31)                     |
++-+-------------+-----------------------------------------------+
+|   Weight (8)  |
++-+-------------+
+*/
             case Http2FrameType.PRIORITY:
                 frame.PriorityStreamDependency = (int)
                     Bitshifter.ReadUInt31BigEndian(extendedHeaders);
                 frame.PriorityWeight = extendedHeaders.Slice(4)[0];
                 break;
 
-            /* https://tools.ietf.org/html/rfc7540#section-6.4
-                +---------------------------------------------------------------+
-                |                        Error Code (32)                        |
-                +---------------------------------------------------------------+
-            */
+/* https://tools.ietf.org/html/rfc7540#section-6.4
++---------------------------------------------------------------+
+|                        Error Code (32)                        |
++---------------------------------------------------------------+
+*/
             case Http2FrameType.RST_STREAM:
                 frame.RstStreamErrorCode = (Http2ErrorCode)
                     BinaryPrimitives.ReadUInt32BigEndian(extendedHeaders);
                 break;
 
-            /* https://tools.ietf.org/html/rfc7540#section-6.9
-                +-+-------------------------------------------------------------+
-                |R|              Window Size Increment (31)                     |
-                +-+-------------------------------------------------------------+
-            */
+/* https://tools.ietf.org/html/rfc7540#section-6.9
++-+-------------------------------------------------------------+
+|R|              Window Size Increment (31)                     |
++-+-------------------------------------------------------------+
+*/
             case Http2FrameType.WINDOW_UPDATE:
                 frame.WindowUpdateSizeIncrement = (int)
                     Bitshifter.ReadUInt31BigEndian(extendedHeaders);

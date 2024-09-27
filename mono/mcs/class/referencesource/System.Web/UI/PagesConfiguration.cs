@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * Code related to the <assemblies> config section
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* Code related to the <assemblies> config section
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {

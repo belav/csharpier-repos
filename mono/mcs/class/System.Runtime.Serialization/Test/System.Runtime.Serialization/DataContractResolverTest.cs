@@ -66,7 +66,8 @@ namespace MonoTests.System.Runtime.Serialization
             using (var xw = XmlWriter.Create(sw))
                 ds.WriteObject(xw, new ResolvedClass());
 
-            // xml and xml2 are equivalent in infoset, except for prefixes and position of namespace nodes. So the difference should not matter.
+            // xml and xml2 are equivalent in infoset, except for prefixes and position of namespace nodes. So
+            // the difference should not matter.
             string xml =
                 @"<?xml version='1.0' encoding='utf-16'?><Colors xmlns:i='http://www.w3.org/2001/XMLSchema-instance' xmlns:d1p1='urn:dummy' i:type='d1p1:ResolvedClass' xmlns='http://schemas.datacontract.org/2004/07/MonoTests.System.Runtime.Serialization'><Baz xmlns='http://schemas.datacontract.org/2004/07/'>c74376f0-5517-4cb7-8a07-35026423f565</Baz></Colors>".Replace(
                     '\'',

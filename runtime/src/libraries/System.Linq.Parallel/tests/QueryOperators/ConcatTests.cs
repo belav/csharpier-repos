@@ -90,8 +90,10 @@ namespace System.Linq.Parallel.Tests
         )
         {
             // The ordering of Concat is only guaranteed when both operands are ordered,
-            // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
-            // If this test starts failing, consider revising the operators and mention the change in release notes.
+            // however the current implementation manages to perform ordering if either operand is ordered _in
+            // most cases_.
+            // If this test starts failing, consider revising the operators and mention the change in release
+            // notes.
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;
@@ -152,8 +154,10 @@ namespace System.Linq.Parallel.Tests
         )
         {
             // The ordering of Concat is only guaranteed when both operands are ordered,
-            // however the current implementation manages to perform ordering if either operand is ordered _in most cases_.
-            // If this test starts failing, consider revising the operators and mention the change in release notes.
+            // however the current implementation manages to perform ordering if either operand is ordered _in
+            // most cases_.
+            // If this test starts failing, consider revising the operators and mention the change in release
+            // notes.
             ParallelQuery<int> leftQuery = left.Item;
             ParallelQuery<int> rightQuery = right.Item;
             int seen = 0;

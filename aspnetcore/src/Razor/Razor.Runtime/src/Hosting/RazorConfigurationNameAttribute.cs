@@ -7,8 +7,10 @@ namespace Microsoft.AspNetCore.Razor.Hosting;
 /// Specifies the name of a Razor configuration as defined by the Razor SDK.
 /// </summary>
 /// <remarks>
-/// This attribute is applied to an application's entry point assembly by the Razor SDK during the build,
-/// so that the Razor configuration can be loaded at runtime based on the settings provided by the project
+/// This attribute is applied to an application's entry point assembly by the Razor SDK during the
+// build,
+/// so that the Razor configuration can be loaded at runtime based on the settings provided by the
+// project
 /// file.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]

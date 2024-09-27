@@ -68,8 +68,10 @@ internal static partial class Interop
 
         internal static unsafe string GetOidValue(IntPtr asn1ObjectPtr)
         {
-            // OBJ_obj2txt returns the number of bytes that should have been in the answer, but it does not accept
-            // a NULL buffer.  The documentation says "A buffer length of 80 should be more than enough to handle
+            // OBJ_obj2txt returns the number of bytes that should have been in the answer, but it does not
+            // accept
+            // a NULL buffer.  The documentation says "A buffer length of 80 should be more than enough to
+            // handle
             // any OID encountered in practice", so start with a buffer of size 80, and try again if required.
             const int StackCapacity = 80;
             byte* bufStack = stackalloc byte[StackCapacity];

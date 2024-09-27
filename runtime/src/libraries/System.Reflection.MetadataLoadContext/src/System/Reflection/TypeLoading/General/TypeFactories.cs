@@ -4,7 +4,8 @@
 namespace System.Reflection.TypeLoading
 {
     //
-    // These are the official entrypoints for building/retrieving the canonical instance of all constructed types.
+    // These are the official entrypoints for building/retrieving the canonical instance of all
+    // constructed types.
     //
     internal static class TypeFactories
     {

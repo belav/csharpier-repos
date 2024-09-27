@@ -7,9 +7,12 @@ internal sealed class FieldState
 {
     private readonly FieldIdentifier _fieldIdentifier;
 
-    // We track which ValidationMessageStore instances have a nonempty set of messages for this field so that
-    // we can quickly evaluate the list of messages for the field without having to query all stores. This is
-    // relevant because each validation component may define its own message store, so there might be as many
+    // We track which ValidationMessageStore instances have a nonempty set of messages for this field so
+    // that
+    // we can quickly evaluate the list of messages for the field without having to query all stores.
+    // This is
+    // relevant because each validation component may define its own message store, so there might be as
+    // many
     // stores are there are fields or UI elements.
     private HashSet<ValidationMessageStore>? _validationMessageStores;
 

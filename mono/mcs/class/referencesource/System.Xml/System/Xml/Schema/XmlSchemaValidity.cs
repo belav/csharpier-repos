@@ -13,7 +13,8 @@ namespace System.Xml.Schema
     /// </devdoc>
     public enum XmlSchemaValidity
     {
-        /// <include file='doc\XmlSchemaValidity.uex' path='docs/doc[@for="XmlSchemaValidity.NotKnown"]/*' />
+        /// <include file='doc\XmlSchemaValidity.uex' path='docs/doc[@for="XmlSchemaValidity.NotKnown"]/*'
+        // />
         NotKnown,
 
         /// <include file='doc\XmlSchemaValidity.uex' path='docs/doc[@for="XmlSchemaValidity.Valid"]/*' />

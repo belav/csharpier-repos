@@ -80,7 +80,8 @@ namespace System.Web.UI.Design.WebControls.Util
 
         /// <devdoc>
         /// This method is called when the wizard's Finish button is clicked.
-        /// It is called once for each wizard panel on the panel stack, in the order from the first panel to the last (current) panel.
+        /// It is called once for each wizard panel on the panel stack, in the order from the first panel to
+        // the last (current) panel.
         /// </devdoc>
         protected internal virtual void OnComplete() { }
 

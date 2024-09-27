@@ -52,8 +52,10 @@ namespace System.Security.Permissions
             IBuiltInPermission
     {
         // ReflectionPermissionFlag.AllFlags doesn't contain the new value RestrictedMemberAccess,
-        // but we cannot change its value now because that will break apps that have that old value baked in.
-        // We should use this const that truely contains "all" flags instead of ReflectionPermissionFlag.AllFlags.
+        // but we cannot change its value now because that will break apps that have that old value baked
+        // in.
+        // We should use this const that truely contains "all" flags instead of
+        // ReflectionPermissionFlag.AllFlags.
 #pragma warning disable 618
         internal const ReflectionPermissionFlag AllFlagsAndMore =
             ReflectionPermissionFlag.AllFlags | ReflectionPermissionFlag.RestrictedMemberAccess;

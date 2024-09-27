@@ -14,7 +14,8 @@ public static class RequestLocalizationServiceCollectionExtensions
     /// Adds services and options for the request localization middleware.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="RequestLocalizationOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="RequestLocalizationOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddRequestLocalization(
         this IServiceCollection services,
@@ -31,7 +32,8 @@ public static class RequestLocalizationServiceCollectionExtensions
     /// Adds services and options for the request localization middleware.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
-    /// <param name="configureOptions">A delegate to configure the <see cref="RequestLocalizationOptions"/>.</param>
+    /// <param name="configureOptions">A delegate to configure the <see
+    // cref="RequestLocalizationOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/>.</returns>
     public static IServiceCollection AddRequestLocalization<TService>(
         this IServiceCollection services,

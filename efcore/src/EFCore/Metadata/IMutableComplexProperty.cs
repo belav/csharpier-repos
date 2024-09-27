@@ -9,10 +9,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     <para>
 ///         This interface is used during model creation and allows the metadata to be modified.
-///         Once the model is built, <see cref="IComplexProperty" /> represents a read-only view of the same metadata.
+///         Once the model is built, <see cref="IComplexProperty" /> represents a read-only view of
+// the same metadata.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>

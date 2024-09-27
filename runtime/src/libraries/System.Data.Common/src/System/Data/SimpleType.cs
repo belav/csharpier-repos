@@ -202,11 +202,11 @@ namespace System.Data
                 return name;
         }
 
-        /*
-                internal XmlNode ToNode(XmlDocument dc) {
-                    return ToNode(dc, null, false);
-                }
-        */
+/*
+internal XmlNode ToNode(XmlDocument dc) {
+return ToNode(dc, null, false);
+}
+*/
 
         internal XmlNode ToNode(XmlDocument dc, Hashtable prefixes, bool inRemoting)
         {
@@ -330,7 +330,8 @@ namespace System.Data
         }
 
         // Assumption is otherSimpleType and current ST name and NS matches.
-        // if existing simpletype is being redefined with different facets, then it will return no-empty string defining the error
+        // if existing simpletype is being redefined with different facets, then it will return no-empty
+        // string defining the error
         internal string HasConflictingDefinition(SimpleType otherSimpleType)
         {
             if (otherSimpleType == null)

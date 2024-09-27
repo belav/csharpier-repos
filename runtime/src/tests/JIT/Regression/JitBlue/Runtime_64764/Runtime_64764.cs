@@ -157,9 +157,11 @@ set DOTNET_GCStress=0xC
 set DOTNET_AltJitName=clrjit_win_x86_x64.dll
 set DOTNET_AltJit=Method1
 
-Assert failure(PID 198288 [0x00030690], Thread: 232112 [0x38ab0]): Assertion failed 'fgReachable(begBlk, endBlk)' in 'TestClass:Method1(byref,byref,S1,byref,S1,byref):int:this' during 'Update flow graph opt pass' (IL size 270)
-    File: D:\git\dotnet-runtime\src\coreclr\jit\optimizer.cpp Line: 167
-    Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
+Assert failure(PID 198288 [0x00030690], Thread: 232112 [0x38ab0]): Assertion failed
+'fgReachable(begBlk, endBlk)' in 'TestClass:Method1(byref,byref,S1,byref,S1,byref):int:this' during
+'Update flow graph opt pass' (IL size 270)
+File: D:\git\dotnet-runtime\src\coreclr\jit\optimizer.cpp Line: 167
+Image: d:\git\dotnet-runtime\artifacts\tests\coreclr\windows.x64.Checked\tests\Core_Root\CoreRun.exe
 
 Reduced repo (x86 VM):
 

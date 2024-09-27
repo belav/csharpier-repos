@@ -15,7 +15,8 @@ namespace System.Web.DynamicData
     public class MetaForeignKeyColumn : MetaColumn, IMetaForeignKeyColumn
     {
         // Maps a foreign key name to the name that should be used in a Linq expression for filtering
-        // i.e. the foreignkey name might be surfaced through a custom type descriptor e.g. CategoryID but we might really want to use
+        // i.e. the foreignkey name might be surfaced through a custom type descriptor e.g. CategoryID but
+        // we might really want to use
         // Category.CategoryId in the expression
         private Dictionary<string, string> _foreignKeyFilterMapping;
 
@@ -151,7 +152,8 @@ namespace System.Web.DynamicData
         }
 
         /// <summary>
-        /// Override allowing for sorting by the display column of the parent table (e.g. in the Products table, the Category column
+        /// Override allowing for sorting by the display column of the parent table (e.g. in the Products
+        // table, the Category column
         /// will be sorted by the Category.Name column order)
         /// </summary>
         internal override string SortExpressionInternal
@@ -164,7 +166,7 @@ namespace System.Web.DynamicData
             }
         }
 
-        /*protected*/internal override bool ScaffoldNoCache
+/*protected*/internal override bool ScaffoldNoCache
         {
             get
             {
@@ -226,7 +228,8 @@ namespace System.Web.DynamicData
             // if the type is different to the parent table type then proceed to get the correct table
             if (foreignKeyReference != null)
             {
-                // Get the correct MetaTable based on the live object. This is used for inheritance scenarios where the type of the navigation
+                // Get the correct MetaTable based on the live object. This is used for inheritance scenarios where
+                // the type of the navigation
                 // property's parent table is some base type but the instance is pointing to a derived type.
                 Type rowType = foreignKeyReference.GetType();
                 MetaTable rowTable = Misc.GetTableFromTypeHierarchy(rowType);

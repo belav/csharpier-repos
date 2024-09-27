@@ -202,8 +202,10 @@ namespace ComWrappersTests
             GC.WaitForPendingFinalizers();
 
             // Non-globally registered ComWrappers instances do not support rehydration.
-            // A weak reference to an RCW wrapping an IWeakReference can stay alive if the RCW was created through
-            // a global ComWrappers instance. If the RCW was created through a local ComWrappers instance, the weak
+            // A weak reference to an RCW wrapping an IWeakReference can stay alive if the RCW was created
+            // through
+            // a global ComWrappers instance. If the RCW was created through a local ComWrappers instance, the
+            // weak
             // reference should be dead and stay dead once the RCW is collected.
             bool supportsRehydration = cw.Registration != WrapperRegistration.Local;
 
@@ -215,7 +217,8 @@ namespace ComWrappersTests
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            // After all native references die and the RCW is collected, the weak reference should be dead and stay dead.
+            // After all native references die and the RCW is collected, the weak reference should be dead and
+            // stay dead.
             Console.WriteLine($"    -- Validate release");
             ValidateWeakReferenceState(weakRef, expectedIsAlive: false);
 
@@ -235,7 +238,8 @@ namespace ComWrappersTests
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            // After all native references die and the RCW is collected, the weak reference should be dead and stay dead.
+            // After all native references die and the RCW is collected, the weak reference should be dead and
+            // stay dead.
             Console.WriteLine($"    -- Validate release");
             ValidateWeakReferenceState(weakRef, expectedIsAlive: false);
         }
@@ -288,7 +292,8 @@ namespace ComWrappersTests
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            // After all native references die and the RCW is collected, the weak reference should be dead and stay dead.
+            // After all native references die and the RCW is collected, the weak reference should be dead and
+            // stay dead.
             Assert.Null(weakRef.Target);
         }
 

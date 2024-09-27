@@ -466,7 +466,8 @@ public class PageInvokerProviderTest
     [Fact]
     public void GetViewStartFactories_ReturnsFactoriesForFilesThatDoNotExistInProject()
     {
-        // The factory provider might have access to _ViewStarts for files that do not exist on disk \ RazorProject.
+        // The factory provider might have access to _ViewStarts for files that do not exist on disk \
+        // RazorProject.
         // This test verifies that we query the factory provider correctly.
         // Arrange
         var descriptor = new PageActionDescriptor()

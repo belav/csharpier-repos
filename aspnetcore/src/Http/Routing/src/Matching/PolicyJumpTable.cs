@@ -13,7 +13,8 @@ public abstract class PolicyJumpTable
     /// <summary>
     /// Returns the destination for a given <paramref name="httpContext"/> in the current jump table.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     public abstract int GetDestination(HttpContext httpContext);
 
     internal virtual string DebuggerToString()

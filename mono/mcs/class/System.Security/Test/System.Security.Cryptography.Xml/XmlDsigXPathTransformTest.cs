@@ -275,7 +275,8 @@ namespace MonoTests.System.Security.Cryptography.Xml
 
         [Test]
         [Category("NotWorking")]
-        // MS.NET looks incorrect, or something incorrect in this test code; It turned out nothing to do with function here()
+        // MS.NET looks incorrect, or something incorrect in this test code; It turned out nothing to do
+        // with function here()
         public void FunctionHereObsolete()
         {
             XmlDsigXPathTransform t = new XmlDsigXPathTransform();

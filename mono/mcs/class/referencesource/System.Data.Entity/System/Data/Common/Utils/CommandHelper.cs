@@ -107,7 +107,8 @@ namespace System.Data.Common.Utils
         /// </summary>
         /// <param name="entityCommand">Entity command. Must not be null.</param>
         /// <param name="entityTransaction">Entity transaction. Must not be null.</param>
-        /// <param name="storeProviderCommand">Store provider command that is being setup. Must not be null.</param>
+        /// <param name="storeProviderCommand">Store provider command that is being setup. Must not be
+        // null.</param>
         internal static void SetStoreProviderCommandState(
             EntityCommand entityCommand,
             EntityTransaction entityTransaction,
@@ -127,11 +128,14 @@ namespace System.Data.Common.Utils
         }
 
         /// <summary>
-        /// Given an entity command, store provider command and a connection, sets all output parameter values on the entity command.
+        /// Given an entity command, store provider command and a connection, sets all output parameter
+        // values on the entity command.
         /// The connection is used to determine how to map spatial values.
         /// </summary>
-        /// <param name="entityCommand">Entity command on which to set parameter values. Must not be null.</param>
-        /// <param name="storeProviderCommand">Store provider command from which to retrieve parameter values. Must not
+        /// <param name="entityCommand">Entity command on which to set parameter values. Must not be
+        // null.</param>
+        /// <param name="storeProviderCommand">Store provider command from which to retrieve parameter
+        // values. Must not
         /// be null.</param>
         /// <param name="connection">The connection on which the command was run.  Must not be null</param>
         internal static void SetEntityParameterValues(

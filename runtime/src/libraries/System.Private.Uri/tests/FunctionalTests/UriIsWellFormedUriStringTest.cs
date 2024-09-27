@@ -433,7 +433,8 @@ namespace System.PrivateUri.Tests
                 new object[] { "http://www.contoso.com/path?\u00E4# \u00E4 ", false },
                 new object[] { "http://www.contoso.com/path?a#a?a", true },
                 new object[] { "http://www.contoso.com/\u00E4?\u00E4#u00E4?\u00E4", true },
-                // Sample in "private unsafe Check CheckCanonical(char* str, ref ushort idx, ushort end, char delim)" code comments
+                // Sample in "private unsafe Check CheckCanonical(char* str, ref ushort idx, ushort end, char
+                // delim)" code comments
                 new object[] { "http://www.contoso.com/\u00E4/ path2/ param=val", false },
                 new object[] { "http://www.contoso.com/\u00E4? param=val", false },
                 new object[] { "http://www.contoso.com/\u00E4?param=val# fragment", false },

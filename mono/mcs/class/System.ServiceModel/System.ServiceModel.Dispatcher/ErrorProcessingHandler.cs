@@ -28,7 +28,8 @@ namespace System.ServiceModel.Dispatcher
                 if (handler.HandleError(ex))
                     break;
 
-            // FIXME: remove them. FaultConverter also covers errors like EndpointNotFoundException, which this handler never covers. And checking converter twice is extraneous, so this part is just extraneous.
+            // FIXME: remove them. FaultConverter also covers errors like EndpointNotFoundException, which this
+            // handler never covers. And checking converter twice is extraneous, so this part is just extraneous.
             // FIXME: actually everything is done in OperationInvokerHandler now...
             FaultConverter fc = FaultConverter.GetDefaultFaultConverter(
                 dispatchRuntime.ChannelDispatcher.MessageVersion

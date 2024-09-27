@@ -18,11 +18,13 @@ namespace Microsoft.Extensions.Hosting
     public static class WindowsServiceLifetimeHostBuilderExtensions
     {
         /// <summary>
-        /// Sets the host lifetime to <see cref="WindowsServiceLifetime"/> and enables logging to the event log with
+        /// Sets the host lifetime to <see cref="WindowsServiceLifetime"/> and enables logging to the event
+        // log with
         /// the application name as the default source name.
         /// </summary>
         /// <remarks>
-        /// This is context aware and will only activate if it detects the process is running as a Windows Service.
+        /// This is context aware and will only activate if it detects the process is running as a Windows
+        // Service.
         /// </remarks>
         /// <param name="hostBuilder">The <see cref="IHostBuilder"/> to operate on.</param>
         /// <returns>The <paramref name="hostBuilder"/> instance for chaining.</returns>
@@ -32,7 +34,8 @@ namespace Microsoft.Extensions.Hosting
         }
 
         /// <summary>
-        /// Sets the host lifetime to <see cref="WindowsServiceLifetime"/> and enables logging to the event log with the application
+        /// Sets the host lifetime to <see cref="WindowsServiceLifetime"/> and enables logging to the event
+        // log with the application
         /// name as the default source name.
         /// </summary>
         /// <remarks>
@@ -40,7 +43,8 @@ namespace Microsoft.Extensions.Hosting
         /// as a Windows Service.
         /// </remarks>
         /// <param name="hostBuilder">The <see cref="IHostBuilder"/> to operate on.</param>
-        /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
+        /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the
+        // provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
         /// <returns>The <paramref name="hostBuilder"/> instance for chaining.</returns>
         public static IHostBuilder UseWindowsService(
             this IHostBuilder hostBuilder,
@@ -71,8 +75,10 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         /// <param name="services">
         /// The <see cref="IServiceCollection"/> used to build the <see cref="IHost"/>.
-        /// For example, <see cref="HostApplicationBuilder.Services"/> or the <see cref="IServiceCollection"/> passed to the
-        /// <see cref="IHostBuilder.ConfigureServices(Action{HostBuilderContext, IServiceCollection})"/> callback.
+        /// For example, <see cref="HostApplicationBuilder.Services"/> or the <see
+        // cref="IServiceCollection"/> passed to the
+        /// <see cref="IHostBuilder.ConfigureServices(Action{HostBuilderContext, IServiceCollection})"/>
+        // callback.
         /// </param>
         /// <returns>The <paramref name="services"/> instance for chaining.</returns>
         public static IServiceCollection AddWindowsService(this IServiceCollection services)
@@ -82,7 +88,8 @@ namespace Microsoft.Extensions.Hosting
 
         /// <summary>
         /// Configures the lifetime of the <see cref="IHost"/> built from <paramref name="services"/> to
-        /// <see cref="WindowsServiceLifetime"/> and enables logging to the event log with the application name as the default source name.
+        /// <see cref="WindowsServiceLifetime"/> and enables logging to the event log with the application
+        // name as the default source name.
         /// </summary>
         /// <remarks>
         /// This is context aware and will only activate if it detects the process is running
@@ -90,10 +97,13 @@ namespace Microsoft.Extensions.Hosting
         /// </remarks>
         /// <param name="services">
         /// The <see cref="IServiceCollection"/> used to build the <see cref="IHost"/>.
-        /// For example, <see cref="HostApplicationBuilder.Services"/> or the <see cref="IServiceCollection"/> passed to the
-        /// <see cref="IHostBuilder.ConfigureServices(Action{HostBuilderContext, IServiceCollection})"/> callback.
+        /// For example, <see cref="HostApplicationBuilder.Services"/> or the <see
+        // cref="IServiceCollection"/> passed to the
+        /// <see cref="IHostBuilder.ConfigureServices(Action{HostBuilderContext, IServiceCollection})"/>
+        // callback.
         /// </param>
-        /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
+        /// <param name="configure">An <see cref="Action{WindowsServiceLifetimeOptions}"/> to configure the
+        // provided <see cref="WindowsServiceLifetimeOptions"/>.</param>
         /// <returns>The <paramref name="services"/> instance for chaining.</returns>
         public static IServiceCollection AddWindowsService(
             this IServiceCollection services,

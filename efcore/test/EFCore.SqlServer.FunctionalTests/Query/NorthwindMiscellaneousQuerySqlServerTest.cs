@@ -1094,10 +1094,12 @@ END, [p].[ProductID]
 
     // issue #18774
     //            AssertSql(
-    //                @"SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[SupplierID], [p].[UnitPrice], [p].[UnitsInStock]
+    //                @"SELECT [p].[ProductID], [p].[Discontinued], [p].[ProductName], [p].[SupplierID],
+    // [p].[UnitPrice], [p].[UnitsInStock]
     //FROM [Products] AS [p]
     //ORDER BY CASE
-    //    WHEN (([p].[UnitsInStock] > CAST(10 AS smallint)) AND ([p].[ProductID] > 40)) OR (([p].[UnitsInStock] <= CAST(10 AS smallint)) AND ([p].[ProductID] <= 40))
+    //    WHEN (([p].[UnitsInStock] > CAST(10 AS smallint)) AND ([p].[ProductID] > 40)) OR
+    // (([p].[UnitsInStock] <= CAST(10 AS smallint)) AND ([p].[ProductID] <= 40))
     //    THEN CAST(1 AS bit) ELSE CAST(0 AS bit)
     //END, [p].[ProductID]");
     public override async Task OrderBy_any(bool async)
@@ -2988,7 +2990,8 @@ ORDER BY COALESCE([c].[Region], N'ZZ'), [c].[CustomerID]
 
     // issue #16038
     //            AssertSql(
-    //                @"SELECT [c].[CustomerID], [c].[CompanyName], COALESCE([c].[Region], N'ZZ') AS [Region]
+    //                @"SELECT [c].[CustomerID], [c].[CompanyName], COALESCE([c].[Region], N'ZZ') AS
+    // [Region]
     //FROM [Customers] AS [c]
     //ORDER BY [Region], [c].[CustomerID]");
     public override async Task OrderBy_conditional_operator(bool async)

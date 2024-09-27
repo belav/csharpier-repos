@@ -21,7 +21,8 @@ public interface IStoreStoredProcedureResultColumn : IColumnBase
     new IReadOnlyList<IStoredProcedureResultColumnMapping> PropertyMappings { get; }
 
     /// <summary>
-    ///     Gets the 0-based position of the result column in the declaring stored procedure's result set.
+    ///     Gets the 0-based position of the result column in the declaring stored procedure's result
+    // set.
     /// </summary>
     int Position { get; }
 

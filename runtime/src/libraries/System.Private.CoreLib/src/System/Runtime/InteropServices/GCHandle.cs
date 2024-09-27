@@ -171,9 +171,11 @@ namespace System.Runtime.InteropServices
         public override readonly bool Equals([NotNullWhen(true)] object? o) =>
             o is GCHandle other && Equals(other);
 
-        /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
+        /// <summary>Indicates whether the current instance is equal to another instance of the same
+        // type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
-        /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
+        /// <returns>true if the current instance is equal to the other instance; otherwise,
+        // false.</returns>
         public readonly bool Equals(GCHandle other) => _handle == other._handle;
 
         public static bool operator ==(GCHandle a, GCHandle b) => a._handle == b._handle;

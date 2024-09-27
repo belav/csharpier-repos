@@ -227,8 +227,10 @@ namespace System.Linq.Parallel
             bool preferStriping
         )
         {
-            // We just open our child operator. Do not propagate the preferStriping value, but instead explicitly
-            // set it to false. Regardless of whether the parent prefers striping or range partitioning, the output
+            // We just open our child operator. Do not propagate the preferStriping value, but instead
+            // explicitly
+            // set it to false. Regardless of whether the parent prefers striping or range partitioning, the
+            // output
             // will be hash-partitioned.
             QueryResults<TSource> childResults = Child.Open(settings, false);
             return new UnaryQueryOperatorResults(childResults, this, settings, false);
@@ -346,7 +348,8 @@ namespace System.Linq.Parallel
         }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected abstract HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>> BuildHashLookup();
@@ -377,7 +380,8 @@ namespace System.Linq.Parallel
             : base(source, keyComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected override HashLookup<Wrapper<TGroupKey>, ListChunk<TSource>> BuildHashLookup()
@@ -448,7 +452,8 @@ namespace System.Linq.Parallel
         }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected override HashLookup<Wrapper<TGroupKey>, ListChunk<TElement>> BuildHashLookup()
@@ -575,7 +580,8 @@ namespace System.Linq.Parallel
         }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected abstract HashLookup<Wrapper<TGroupKey>, GroupKeyData> BuildHashLookup();
@@ -638,7 +644,8 @@ namespace System.Linq.Parallel
             : base(source, keySelector, keyComparer, orderComparer, cancellationToken) { }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected override HashLookup<Wrapper<TGroupKey>, GroupKeyData> BuildHashLookup()
@@ -724,7 +731,8 @@ namespace System.Linq.Parallel
         }
 
         //-----------------------------------------------------------------------------------
-        // Builds the hash lookup, transforming from TSource to TElement through whatever means is appropriate.
+        // Builds the hash lookup, transforming from TSource to TElement through whatever means is
+        // appropriate.
         //
 
         protected override HashLookup<Wrapper<TGroupKey>, GroupKeyData> BuildHashLookup()

@@ -269,7 +269,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             Image image = DR.resourceManager.GetObject(resID) as Image;
 
-            //Please note that the default version of make transparent uses the color of pixel at left bottom of the image
+            //Please note that the default version of make transparent uses the color of pixel at left bottom of
+            // the image
             //as the transparent color to make the bitmap transparent. Hence we do not use it
             Bitmap bitmap = image as Bitmap;
             if (bitmap != null)

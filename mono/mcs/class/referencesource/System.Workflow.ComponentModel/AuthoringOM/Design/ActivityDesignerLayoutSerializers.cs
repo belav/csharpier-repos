@@ -25,7 +25,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.OnBeforeSerialize(serializationManager, obj);
 
-            //For root activity we will go through all the nested activities and put the namespaces at the top level
+            //For root activity we will go through all the nested activities and put the namespaces at the top
+            // level
             ActivityDesigner activityDesigner = obj as ActivityDesigner;
             XmlWriter writer =
                 serializationManager.WorkflowMarkupStack[typeof(XmlWriter)] as XmlWriter;
@@ -439,7 +440,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             base.OnAfterDeserialize(serializationManager, obj);
 
-            //The following code is needed in order to making sure that we set the modification flag correctly after deserialization
+            //The following code is needed in order to making sure that we set the modification flag correctly
+            // after deserialization
             Connector connector = obj as Connector;
             if (connector != null)
                 connector.SetConnectorModified(true);

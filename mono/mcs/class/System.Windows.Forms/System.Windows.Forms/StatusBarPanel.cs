@@ -133,10 +133,10 @@ namespace System.Windows.Forms
         {
             get
             {
-                /*
-                    MSDN says that when AutoSize = None then MinWidth is automatically
-                    set to Width, but neither v1.1 nor v2.0 behave that way.
-                */
+/*
+MSDN says that when AutoSize = None then MinWidth is automatically
+set to Width, but neither v1.1 nor v2.0 behave that way.
+*/
                 return min_width;
             }
             set

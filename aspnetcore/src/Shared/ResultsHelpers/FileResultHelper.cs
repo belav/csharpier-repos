@@ -141,7 +141,8 @@ internal static partial class FileResultHelper
         var response = httpContext.Response;
         SetLastModifiedAndEtagHeaders(response, lastModified, etag);
 
-        // Short circuit if the preconditional headers process to 304 (NotModified) or 412 (PreconditionFailed)
+        // Short circuit if the preconditional headers process to 304 (NotModified) or 412
+        // (PreconditionFailed)
         if (preconditionState == PreconditionState.NotModified)
         {
             response.StatusCode = StatusCodes.Status304NotModified;
@@ -158,9 +159,11 @@ internal static partial class FileResultHelper
 
         if (fileLength.HasValue)
         {
-            // Assuming the request is not a range request, and the response body is not empty, the Content-Length header is set to
+            // Assuming the request is not a range request, and the response body is not empty, the
+            // Content-Length header is set to
             // the length of the entire file.
-            // If the request is a valid range request, this header is overwritten with the length of the range as part of the
+            // If the request is a valid range request, this header is overwritten with the length of the range
+            // as part of the
             // range processing (see method SetContentLength).
 
             response.ContentLength = fileLength.Value;
@@ -170,7 +173,8 @@ internal static partial class FileResultHelper
             {
                 SetAcceptRangeHeader(response);
 
-                // If the request method is HEAD or GET, PreconditionState is Unspecified or ShouldProcess, and IfRange header is valid,
+                // If the request method is HEAD or GET, PreconditionState is Unspecified or ShouldProcess, and
+                // IfRange header is valid,
                 // range should be processed and Range headers should be set
                 if (
                     (HttpMethods.IsHead(request.Method) || HttpMethods.IsGet(request.Method))
@@ -376,8 +380,10 @@ internal static partial class FileResultHelper
         // Requested range is not satisfiable
         if (range == null)
         {
-            // 14.16 Content-Range - A server sending a response with status code 416 (Requested range not satisfiable)
-            // SHOULD include a Content-Range field with a byte-range-resp-spec of "*". The instance-length specifies
+            // 14.16 Content-Range - A server sending a response with status code 416 (Requested range not
+            // satisfiable)
+            // SHOULD include a Content-Range field with a byte-range-resp-spec of "*". The instance-length
+            // specifies
             // the current length of the selected resource.  e.g. */length
             response.StatusCode = StatusCodes.Status416RangeNotSatisfiable;
             httpResponseHeaders.ContentRange = new ContentRangeHeaderValue(fileLength);

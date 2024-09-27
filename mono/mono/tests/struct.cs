@@ -24,7 +24,7 @@ struct Point
     {
         if (p.x != p.y || p.y != p.z || p.z != 0)
             return 1;
-        /* should modify the local copy */
+/* should modify the local copy */
         p.x = 1;
         p.y = 2;
         p.z = 3;

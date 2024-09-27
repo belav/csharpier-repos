@@ -52,7 +52,8 @@ namespace System.Workflow.Runtime.Hosting
 
         /// <summary>
         /// Enables adding of this service from a config file.
-        /// Get the connection string from the runtime common parameter section or the particular service parameter section
+        /// Get the connection string from the runtime common parameter section or the particular service
+        // parameter section
         /// of the configuration file, and instantiate a DbResourceAllocator object.
         /// </summary>
         /// <param name="runtime"></param>

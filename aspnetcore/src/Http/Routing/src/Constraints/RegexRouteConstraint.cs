@@ -52,8 +52,10 @@ internal class RegexRouteConstraint : IRouteConstraint
     {
         ArgumentNullException.ThrowIfNull(regexPattern);
 
-        // Create regex instance lazily to avoid compiling regexes at app startup. Delay creation until Constraint is first evaluated.
-        // The regex instance is created by a delegate here to allow the regex engine to be trimmed when this constructor is trimmed.
+        // Create regex instance lazily to avoid compiling regexes at app startup. Delay creation until
+        // Constraint is first evaluated.
+        // The regex instance is created by a delegate here to allow the regex engine to be trimmed when
+        // this constructor is trimmed.
         _regexFactory = () =>
             new Regex(
                 regexPattern,
@@ -73,7 +75,8 @@ internal class RegexRouteConstraint : IRouteConstraint
             {
                 Debug.Assert(_regexFactory is not null);
 
-                // This is not thread-safe. No side effect, but multiple instances of a regex instance could be created from a burst of requests.
+                // This is not thread-safe. No side effect, but multiple instances of a regex instance could be
+                // created from a burst of requests.
                 _constraint = _regexFactory();
             }
 

@@ -337,7 +337,8 @@ namespace System.Security.Cryptography
 
                 Debug.Assert(parameters.Modulus is not null);
 
-                // Check that either all parameters are not null or all are null, if a subset were set, then the parameters are invalid.
+                // Check that either all parameters are not null or all are null, if a subset were set, then the
+                // parameters are invalid.
                 // If the parameters are all not null, verify the integrity of their lengths.
                 if (parameters.D == null)
                 {
@@ -368,7 +369,8 @@ namespace System.Security.Cryptography
                     // Half, rounded up.
                     int halfModulusLength = (parameters.Modulus.Length + 1) / 2;
 
-                    // Matching the .NET Framework RSACryptoServiceProvider behavior, as that's the .NET de facto standard
+                    // Matching the .NET Framework RSACryptoServiceProvider behavior, as that's the .NET de facto
+                    // standard
                     if (
                         parameters.D.Length != parameters.Modulus.Length
                         || parameters.P.Length != halfModulusLength

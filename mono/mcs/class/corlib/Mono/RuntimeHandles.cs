@@ -6,7 +6,8 @@
 //   Rodrigo Kumpera <kumpera@xamarin.com>
 //
 // Copyright 2016 Dot net foundation.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 //
 
 using System;

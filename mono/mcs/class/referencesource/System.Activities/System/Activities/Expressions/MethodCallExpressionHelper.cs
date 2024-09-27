@@ -36,7 +36,8 @@ namespace System.Activities.Expressions
                         parameterType.IsByRef ? parameterType.GetElementType() : parameterType,
                         "arg" + i
                     );
-                    // If variable.Type is NOT a Nullable<T>, we include the call to Convert.ChangeType on the actual parameter.
+                    // If variable.Type is NOT a Nullable<T>, we include the call to Convert.ChangeType on the actual
+                    // parameter.
                     if (
                         variable.Type.IsValueType
                         && Nullable.GetUnderlyingType(variable.Type) == null

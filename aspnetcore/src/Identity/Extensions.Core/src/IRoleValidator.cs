@@ -17,6 +17,7 @@ public interface IRoleValidator<TRole>
     /// </summary>
     /// <param name="manager">The <see cref="RoleManager{TRole}"/> managing the role store.</param>
     /// <param name="role">The role to validate.</param>
-    /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the asynchronous validation.</returns>
+    /// <returns>A <see cref="Task{TResult}"/> that represents the <see cref="IdentityResult"/> of the
+    // asynchronous validation.</returns>
     Task<IdentityResult> ValidateAsync(RoleManager<TRole> manager, TRole role);
 }

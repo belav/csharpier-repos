@@ -71,7 +71,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Override Read in order to search for strippable whitespace, to concatenate adjacent text nodes, and to
+        /// Override Read in order to search for strippable whitespace, to concatenate adjacent text nodes,
+        // and to
         /// resolve entities.
         /// </summary>
         public override bool Read()

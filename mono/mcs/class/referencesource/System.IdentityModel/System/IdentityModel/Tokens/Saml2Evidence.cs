@@ -29,7 +29,8 @@ namespace System.IdentityModel.Tokens
         public Saml2Evidence() { }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="Saml2Evidence"/> class from a <see cref="Saml2Assertion"/>.
+        /// Initializes a new instance of <see cref="Saml2Evidence"/> class from a <see
+        // cref="Saml2Assertion"/>.
         /// </summary>
         /// <param name="assertion"><see cref="Saml2Assertion"/> containing the evidence.</param>
         public Saml2Evidence(Saml2Assertion assertion)

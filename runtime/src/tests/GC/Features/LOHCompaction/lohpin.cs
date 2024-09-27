@@ -16,11 +16,11 @@ namespace LOHPin
         //Pin an object on the Large Object Heap and verify it does not move during a LOH compaction
         //Also verify that most of the large objects not pinned have moved
 
-        /* What the test does:
-         *   - create high fragmentation in the LOH
-         *   - pin some of the large objects
-         *   - compact LOH then check the address of the objects
-         * */
+/* What the test does:
+*   - create high fragmentation in the LOH
+*   - pin some of the large objects
+*   - compact LOH then check the address of the objects
+* */
 
         static int Main()
         {

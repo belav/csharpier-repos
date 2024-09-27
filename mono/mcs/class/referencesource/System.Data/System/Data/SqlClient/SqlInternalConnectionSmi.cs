@@ -41,7 +41,8 @@ namespace System.Data.SqlClient
 
                 if (null != exception)
                 {
-                    // SQLBUVSTS 225982, query for connection once to avoid race condition between GC (that may collect the connection) and the user thread
+                    // SQLBUVSTS 225982, query for connection once to avoid race condition between GC (that may collect
+                    // the connection) and the user thread
                     SqlConnection connection = _connection.Connection;
                     if (null != connection && connection.FireInfoMessageEventOnUserErrors)
                     {
@@ -250,7 +251,8 @@ namespace System.Data.SqlClient
         /// the connection when that transaction completes.
         /// </summary>
         /// <value>
-        /// True if the connection string property "TransactionBinding" is set to TransactionBindingEnum.ImplicitUnbind;
+        /// True if the connection string property "TransactionBinding" is set to
+        // TransactionBindingEnum.ImplicitUnbind;
         /// otherwise, false.
         /// </value>
         protected override bool UnbindOnTransactionCompletion
@@ -262,7 +264,8 @@ namespace System.Data.SqlClient
             }
         }
 
-        // Workaround to access context transaction without rewriting connection pool & internalconnections properly.
+        // Workaround to access context transaction without rewriting connection pool & internalconnections
+        // properly.
         // Context transactions SHOULD be considered enlisted.
         //   This works for now only because we can't unenlist from the context transaction
         // DON'T START USING THIS ANYWHERE EXCEPT IN InternalTransaction and in InternalConnectionSmi!!!
@@ -272,7 +275,8 @@ namespace System.Data.SqlClient
         {
             get
             {
-                // Workaround to access context transaction without rewriting connection pool & internalconnections properly.
+                // Workaround to access context transaction without rewriting connection pool & internalconnections
+                // properly.
                 // This SHOULD be a simple wrapper around EnlistedTransaction.
                 //   This works for now only because we can't unenlist from the context transaction
                 SysTx.Transaction tx = EnlistedTransaction;
@@ -437,7 +441,8 @@ namespace System.Data.SqlClient
                 );
             }
 
-            // VSTS 215465/15029: allow _currentTransaction to be null - it can be cleared before by server's callback
+            // VSTS 215465/15029: allow _currentTransaction to be null - it can be cleared before by server's
+            // callback
             Debug.Assert(
                 _currentTransaction == null || _currentTransaction == internalTransaction,
                 "disconnecting different transaction"

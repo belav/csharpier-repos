@@ -10,9 +10,9 @@ namespace System.Web.Configuration
     using System.Security.Permissions;
     using System.Web.Configuration;
 
-    /*
-    interface for adding item to GAC
-    */
+/*
+interface for adding item to GAC
+*/
     internal interface IGac
     {
         [DispId(0x0000000D)]

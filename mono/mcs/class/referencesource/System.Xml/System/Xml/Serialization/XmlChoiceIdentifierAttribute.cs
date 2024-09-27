@@ -11,7 +11,8 @@ namespace System.Xml.Serialization
     using System.Reflection;
     using System.Xml.Schema;
 
-    /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute"]/*' />
+    /// <include file='doc\XmlChoiceIdentifierAttribute.uex'
+    // path='docs/doc[@for="XmlChoiceIdentifierAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -27,13 +28,15 @@ namespace System.Xml.Serialization
         string name;
         MemberInfo memberInfo;
 
-        /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute.XmlChoiceIdentifierAttribute"]/*' />
+        /// <include file='doc\XmlChoiceIdentifierAttribute.uex'
+        // path='docs/doc[@for="XmlChoiceIdentifierAttribute.XmlChoiceIdentifierAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         public XmlChoiceIdentifierAttribute() { }
 
-        /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute.XmlChoiceIdentifierAttribute1"]/*' />
+        /// <include file='doc\XmlChoiceIdentifierAttribute.uex'
+        // path='docs/doc[@for="XmlChoiceIdentifierAttribute.XmlChoiceIdentifierAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -42,7 +45,8 @@ namespace System.Xml.Serialization
             this.name = name;
         }
 
-        /// <include file='doc\XmlChoiceIdentifierAttribute.uex' path='docs/doc[@for="XmlChoiceIdentifierAttribute.Name"]/*' />
+        /// <include file='doc\XmlChoiceIdentifierAttribute.uex'
+        // path='docs/doc[@for="XmlChoiceIdentifierAttribute.Name"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

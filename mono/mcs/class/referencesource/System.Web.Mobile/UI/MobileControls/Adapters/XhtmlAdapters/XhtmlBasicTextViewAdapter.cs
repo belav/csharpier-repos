@@ -16,7 +16,8 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource.XhtmlAdapters
 namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 #endif
 {
-    /// <include file='doc\XhtmlBasicTextViewAdapter.uex' path='docs/doc[@for="XhtmlTextViewAdapter"]/*' />
+    /// <include file='doc\XhtmlBasicTextViewAdapter.uex' path='docs/doc[@for="XhtmlTextViewAdapter"]/*'
+    // />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
         Level = AspNetHostingPermissionLevel.Minimal
@@ -30,13 +31,15 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
     )]
     public class XhtmlTextViewAdapter : XhtmlControlAdapter
     {
-        /// <include file='doc\XhtmlBasicTextViewAdapter.uex' path='docs/doc[@for="XhtmlTextViewAdapter.Control"]/*' />
+        /// <include file='doc\XhtmlBasicTextViewAdapter.uex'
+        // path='docs/doc[@for="XhtmlTextViewAdapter.Control"]/*' />
         protected new TextView Control
         {
             get { return base.Control as TextView; }
         }
 
-        /// <include file='doc\XhtmlBasicTextViewAdapter.uex' path='docs/doc[@for="XhtmlTextViewAdapter.Render"]/*' />
+        /// <include file='doc\XhtmlBasicTextViewAdapter.uex'
+        // path='docs/doc[@for="XhtmlTextViewAdapter.Render"]/*' />
         public override void Render(XhtmlMobileTextWriter writer)
         {
             int beginElement = Control.FirstVisibleElementIndex;
@@ -74,7 +77,8 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
             ConditionalExitStyle(writer, Style);
         }
 
-        /// <include file='doc\XhtmlBasicTextViewAdapter.uex' path='docs/doc[@for="XhtmlTextViewAdapter.RenderElement"]/*' />
+        /// <include file='doc\XhtmlBasicTextViewAdapter.uex'
+        // path='docs/doc[@for="XhtmlTextViewAdapter.RenderElement"]/*' />
         public void RenderElement(
             XhtmlMobileTextWriter writer,
             int index,

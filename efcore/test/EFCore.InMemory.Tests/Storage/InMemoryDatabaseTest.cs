@@ -131,7 +131,8 @@ public class InMemoryDatabaseTest
 
         await inMemoryDatabase.SaveChangesAsync(new[] { entityEntry });
 
-        // Because the database is being used directly the entity state must be manually changed after saving.
+        // Because the database is being used directly the entity state must be manually changed after
+        // saving.
         entityEntry.SetEntityState(EntityState.Unchanged);
 
         customer.Name = "Unikorn, The Return";

@@ -444,7 +444,8 @@ namespace System.Text.RegularExpressions.Tests
                 );
 
                 // Nonbacktracking subexpression: Actual - "[^0-9]+(?>[0-9]+)3"
-                // The last 3 causes the match to fail, since the non backtracking subexpression does not give up the last digit it matched
+                // The last 3 causes the match to fail, since the non backtracking subexpression does not give up
+                // the last digit it matched
                 // for it to be a success. For a correct match, remove the last character, '3' from the pattern
                 yield return (
                     "[^0-9]+(?>[0-9]+)3",
@@ -1934,7 +1935,8 @@ namespace System.Text.RegularExpressions.Tests
             );
 
             // Expressions containing Nothing (subexpressions that never match).
-            // (Lookarounds aren't supported by NonBacktracking, but optimizer reduces (?!) to Nothing, which is supported.)
+            // (Lookarounds aren't supported by NonBacktracking, but optimizer reduces (?!) to Nothing, which is
+            // supported.)
             yield return ("(?!)", "cat", RegexOptions.None, 0, 3, false, string.Empty);
             yield return ("(?!)|((?!))|(?!)", "cat", RegexOptions.None, 0, 3, false, string.Empty);
             yield return ("cat(?!)", "cat", RegexOptions.None, 0, 3, false, string.Empty);
@@ -3851,10 +3853,12 @@ namespace System.Text.RegularExpressions.Tests
             yield return (@"a{2}|a{3}", "aaa", RegexOptions.None, 0, 3, true, "aa");
             yield return (@"a{3}|a{2}", "aaa", RegexOptions.None, 0, 3, true, "aaa");
 
-            // Test for a bug in NonBacktracking's subsumption rule for XY subsuming X??Y, which didn't check that X is nullable
+            // Test for a bug in NonBacktracking's subsumption rule for XY subsuming X??Y, which didn't check
+            // that X is nullable
             yield return (@"XY|X??Y", "Y", RegexOptions.None, 0, 1, true, "Y");
 
-            // Tests for bugs in NonBacktracking, which didn't properly handle some combinations of loops and anchors
+            // Tests for bugs in NonBacktracking, which didn't properly handle some combinations of loops and
+            // anchors
             yield return (@"(a|\b){2}", "ac", RegexOptions.None, 0, 2, true, "a");
             yield return (@"a?(\b|c)", "ac", RegexOptions.None, 0, 2, true, "ac");
             yield return (@"(a|())*(\b|c)", "ac", RegexOptions.None, 0, 2, true, "ac");
@@ -3865,7 +3869,8 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public async Task AllEnginesProduceTheSameCaptures()
         {
-            // Some of the match test cases have captures.  For those that do, validate the captures are the same across engines.
+            // Some of the match test cases have captures.  For those that do, validate the captures are the
+            // same across engines.
             (
                 string Pattern,
                 string Input,
@@ -4382,11 +4387,16 @@ namespace System.Text.RegularExpressions.Tests
         {
             if (RegexHelpers.IsNonBacktracking(engine) || engine == RegexEngine.SourceGenerated)
             {
-                // Disabled for non-backtracking: the test relies on backtracking triggering timeout checks due to runaway backtracking.
-                // Disabled for source-generated: the default timeout can't be set before invoking Roslyn because Roslyn itself
-                // uses regexes that would then be subject to the timeout, and the default can't be set after invoking Roslyn because
-                // the regexes used by Roslyn will have baked the read default value in such that changes to it via SetData won't be
-                // observed. It's covered by the Match_InstanceMethods_DefaultTimeout_SourceGenerated_Throws test below.
+                // Disabled for non-backtracking: the test relies on backtracking triggering timeout checks due to
+                // runaway backtracking.
+                // Disabled for source-generated: the default timeout can't be set before invoking Roslyn because
+                // Roslyn itself
+                // uses regexes that would then be subject to the timeout, and the default can't be set after
+                // invoking Roslyn because
+                // the regexes used by Roslyn will have baked the read default value in such that changes to it via
+                // SetData won't be
+                // observed. It's covered by the Match_InstanceMethods_DefaultTimeout_SourceGenerated_Throws test
+                // below.
                 return;
             }
 
@@ -4525,10 +4535,12 @@ namespace System.Text.RegularExpressions.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         public void NonBacktracking_NoEndAnchorMatchAtTimeoutCheck()
         {
-            // This constant must be at least as large as the one in the implementation that sets the maximum number
+            // This constant must be at least as large as the one in the implementation that sets the maximum
+            // number
             // of innermost loop iterations between timeout checks.
             const int CharsToTriggerTimeoutCheck = 10000;
-            // Check that it is indeed large enough to trigger timeouts. If this fails the constant above needs to be larger.
+            // Check that it is indeed large enough to trigger timeouts. If this fails the constant above needs
+            // to be larger.
             Assert.Throws<RegexMatchTimeoutException>(
                 () =>
                     new Regex(
@@ -4604,7 +4616,8 @@ namespace System.Text.RegularExpressions.Tests
                 };
 
                 // Using lazy quantifiers: Actual - "(d+?)(e*?)(f??)"
-                // Interesting match from this pattern and input. If needed to go to the end of the string change the ? to + in the last lazy quantifier
+                // Interesting match from this pattern and input. If needed to go to the end of the string change
+                // the ? to + in the last lazy quantifier
                 yield return new object[]
                 {
                     engine,
@@ -4671,7 +4684,8 @@ namespace System.Text.RegularExpressions.Tests
                     },
                 };
 
-                // Using "n" Regex option. Only explicitly named groups should be captured: Actual - "([0-9]*)\\s(?<s>[a-z_A-Z]+)", "n"
+                // Using "n" Regex option. Only explicitly named groups should be captured: Actual -
+                // "([0-9]*)\\s(?<s>[a-z_A-Z]+)", "n"
                 yield return new object[]
                 {
                     engine,
@@ -6129,7 +6143,8 @@ namespace System.Text.RegularExpressions.Tests
                     },
                 };
 
-                // Case insensitive cases by using ?i and some non-ASCII characters like Kelvin sign and applying ?i over negated character classes
+                // Case insensitive cases by using ?i and some non-ASCII characters like Kelvin sign and applying ?i
+                // over negated character classes
                 yield return new object[]
                 {
                     engine,

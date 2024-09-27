@@ -13,45 +13,52 @@ using Moq.Async;
 namespace Moq
 {
     /// <summary>
-    ///   Abstract base class for default value providers that look up and delegate to value factory functions for the requested type(s).
-    ///   If a request cannot be satisfied by any registered factory, the default value gets produced by a fallback strategy.
+    ///   Abstract base class for default value providers that look up and delegate to value factory
+    // functions for the requested type(s).
+    ///   If a request cannot be satisfied by any registered factory, the default value gets produced by
+    // a fallback strategy.
     /// </summary>
     /// <remarks>
     ///   <para>
-    ///     Derived classes can register and deregister factory functions with <see cref="Register"/> and <see cref="Deregister"/>,
+    ///     Derived classes can register and deregister factory functions with <see cref="Register"/>
+    // and <see cref="Deregister"/>,
     ///     respectively.
     ///   </para>
     ///   <para>
-    ///     The fallback value generation strategy is implemented by the overridable <see cref="GetFallbackDefaultValue"/> method.
+    ///     The fallback value generation strategy is implemented by the overridable <see
+    // cref="GetFallbackDefaultValue"/> method.
     ///   </para>
     ///   <para>
-    ///     This base class sets up factory functions for task types (<see cref="Task"/>, <see cref="Task{TResult}"/>,
-    ///     and <see cref="ValueTask{TResult}"/>) that produce completed tasks containing default values.
-    ///     If this behavior is not desired, derived classes may deregister those standard factory functions via <see cref="Deregister"/>.
+    ///     This base class sets up factory functions for task types (<see cref="Task"/>, <see
+    // cref="Task{TResult}"/>,
+    ///     and <see cref="ValueTask{TResult}"/>) that produce completed tasks containing default
+    // values.
+    ///     If this behavior is not desired, derived classes may deregister those standard factory
+    // functions via <see cref="Deregister"/>.
     ///   </para>
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public abstract class LookupOrFallbackDefaultValueProvider : DefaultValueProvider
-    /* Unmerged change from project 'Moq(netstandard2.0)'
-    Before:
-            private Dictionary<object, Func<Type, Mock, object>> factories;
-    After:
-            Dictionary<object, Func<Type, Mock, object>> factories;
-    */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private Dictionary<object, Func<Type, Mock, object>> factories;
+After:
+Dictionary<object, Func<Type, Mock, object>> factories;
+*/
 
-    /* Unmerged change from project 'Moq(netstandard2.1)'
-    Before:
-            private Dictionary<object, Func<Type, Mock, object>> factories;
-    After:
-            Dictionary<object, Func<Type, Mock, object>> factories;
-    */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private Dictionary<object, Func<Type, Mock, object>> factories;
+After:
+Dictionary<object, Func<Type, Mock, object>> factories;
+*/
 
-    /* Unmerged change from project 'Moq(net6.0)'
-    Before:
-            private Dictionary<object, Func<Type, Mock, object>> factories;
-    After:
-            Dictionary<object, Func<Type, Mock, object>> factories;
-    */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private Dictionary<object, Func<Type, Mock, object>> factories;
+After:
+Dictionary<object, Func<Type, Mock, object>> factories;
+*/
     {
         Dictionary<object, Func<Type, Mock, object>> factories;
 
@@ -77,7 +84,8 @@ namespace Moq
         /// Deregisters any factory function that might currently be registered for the given type(s).
         /// Subsequent requests for values of the given type(s) will be handled by the fallback strategy.
         /// </summary>
-        /// <param name="factoryKey">The type(s) for which to remove any registered factory function.</param>
+        /// <param name="factoryKey">The type(s) for which to remove any registered factory
+        // function.</param>
         protected void Deregister(Type factoryKey)
         {
             Debug.Assert(factoryKey != null);
@@ -99,10 +107,12 @@ namespace Moq
         ///   </para>
         ///   <para>
         ///     All array types are represented by <c><see langword="typeof"/>(<see cref="Array"/>)</c>.
-        ///     Generic types are represented by their open generic type definition, e. g. <c><see langword="typeof"/>(<see cref="IEnumerable"/>&lt;&gt;)</c>.
+        ///     Generic types are represented by their open generic type definition, e. g. <c><see
+        // langword="typeof"/>(<see cref="IEnumerable"/>&lt;&gt;)</c>.
         ///   </para>
         /// </param>
-        /// <param name="factory">The factory function responsible for producing values for the given type.</param>
+        /// <param name="factory">The factory function responsible for producing values for the given
+        // type.</param>
         protected void Register(Type factoryKey, Func<Type, Mock, object> factory)
         {
             Debug.Assert(factoryKey != null);
@@ -172,11 +182,13 @@ namespace Moq
         }
 
         /// <summary>
-        /// Determines the default value for the given <paramref name="type"/> when no suitable factory is registered for it.
+        /// Determines the default value for the given <paramref name="type"/> when no suitable factory is
+        // registered for it.
         /// May be overridden in derived classes.
         /// </summary>
         /// <param name="type">The type of which to produce a value.</param>
-        /// <param name="mock">The <see cref="Moq.Mock"/> on which an unexpected invocation has occurred.</param>
+        /// <param name="mock">The <see cref="Moq.Mock"/> on which an unexpected invocation has
+        // occurred.</param>
         protected virtual object GetFallbackDefaultValue(Type type, Mock mock)
         {
             Debug.Assert(type != null);
@@ -185,26 +197,26 @@ namespace Moq
 
             return type.GetDefaultValue();
 
-            /* Unmerged change from project 'Moq(netstandard2.0)'
-            Before:
-                    private object CreateValueTupleOf(Type type, Mock mock)
-            After:
-                    object CreateValueTupleOf(Type type, Mock mock)
-            */
+/* Unmerged change from project 'Moq(netstandard2.0)'
+Before:
+private object CreateValueTupleOf(Type type, Mock mock)
+After:
+object CreateValueTupleOf(Type type, Mock mock)
+*/
 
-            /* Unmerged change from project 'Moq(netstandard2.1)'
-            Before:
-                    private object CreateValueTupleOf(Type type, Mock mock)
-            After:
-                    object CreateValueTupleOf(Type type, Mock mock)
-            */
+/* Unmerged change from project 'Moq(netstandard2.1)'
+Before:
+private object CreateValueTupleOf(Type type, Mock mock)
+After:
+object CreateValueTupleOf(Type type, Mock mock)
+*/
 
-            /* Unmerged change from project 'Moq(net6.0)'
-            Before:
-                    private object CreateValueTupleOf(Type type, Mock mock)
-            After:
-                    object CreateValueTupleOf(Type type, Mock mock)
-            */
+/* Unmerged change from project 'Moq(net6.0)'
+Before:
+private object CreateValueTupleOf(Type type, Mock mock)
+After:
+object CreateValueTupleOf(Type type, Mock mock)
+*/
         }
 
         object CreateValueTupleOf(Type type, Mock mock)

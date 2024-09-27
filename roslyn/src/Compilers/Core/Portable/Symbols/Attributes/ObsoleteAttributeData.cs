@@ -58,13 +58,15 @@ namespace Microsoft.CodeAnalysis
         public readonly ObsoleteAttributeKind Kind;
 
         /// <summary>
-        /// True if an error should be thrown for the <see cref="ObsoleteAttribute"/>. Default is false in which case
+        /// True if an error should be thrown for the <see cref="ObsoleteAttribute"/>. Default is false in
+        // which case
         /// a warning is thrown.
         /// </summary>
         public readonly bool IsError;
 
         /// <summary>
-        /// The message that will be shown when an error/warning is created for <see cref="ObsoleteAttribute"/>.
+        /// The message that will be shown when an error/warning is created for <see
+        // cref="ObsoleteAttribute"/>.
         /// </summary>
         public readonly string? Message;
 
@@ -80,14 +82,17 @@ namespace Microsoft.CodeAnalysis
         /// Expected to contain zero or one format items.
         /// </para>
         /// <para>
-        /// When specified, the obsolete diagnostic's <see cref="DiagnosticDescriptor.HelpLinkUri"/> will be produced
+        /// When specified, the obsolete diagnostic's <see cref="DiagnosticDescriptor.HelpLinkUri"/> will be
+        // produced
         /// by formatting this string using the <see cref="DiagnosticId"/> as the single argument.
         /// </para>
         ///
         /// <example>
         /// e.g. with a <see cref="DiagnosticId"/> value <c>"TEST1"</c>,
-        /// and a <see cref="UrlFormat"/> value <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/{0}/"/>,<br/>
-        /// the diagnostic will have the HelpLinkUri <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/TEST1/"/>.
+        /// and a <see cref="UrlFormat"/> value <a
+        // href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/{0}/"/>,<br/>
+        /// the diagnostic will have the HelpLinkUri <a
+        // href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/TEST1/"/>.
         /// </example>
         /// </summary>
         public readonly string? UrlFormat;

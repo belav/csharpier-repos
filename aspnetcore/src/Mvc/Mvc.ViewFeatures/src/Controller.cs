@@ -21,13 +21,16 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     private ViewDataDictionary? _viewData;
 
     /// <summary>
-    /// Gets or sets <see cref="ViewDataDictionary"/> used by <see cref="ViewResult"/> and <see cref="ViewBag"/>.
+    /// Gets or sets <see cref="ViewDataDictionary"/> used by <see cref="ViewResult"/> and <see
+    // cref="ViewBag"/>.
     /// </summary>
     /// <remarks>
-    /// By default, this property is initialized when <see cref="Controllers.IControllerActivator"/> activates
+    /// By default, this property is initialized when <see cref="Controllers.IControllerActivator"/>
+    // activates
     /// controllers.
     /// <para>
-    /// This property can be accessed after the controller has been activated, for example, in a controller action
+    /// This property can be accessed after the controller has been activated, for example, in a
+    // controller action
     /// or by overriding <see cref="OnActionExecuting(ActionExecutingContext)"/>.
     /// </para>
     /// <para>
@@ -171,7 +174,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// <summary>
     /// Creates a <see cref="PartialViewResult"/> object by specifying a <paramref name="viewName"/>.
     /// </summary>
-    /// <param name="viewName">The name or path of the partial view that is rendered to the response.</param>
+    /// <param name="viewName">The name or path of the partial view that is rendered to the
+    // response.</param>
     /// <returns>The created <see cref="PartialViewResult"/> object for the response.</returns>
     [NonAction]
     public virtual PartialViewResult PartialView(string? viewName)
@@ -195,7 +199,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// Creates a <see cref="PartialViewResult"/> object by specifying a <paramref name="viewName"/>
     /// and the <paramref name="model"/> to be rendered by the partial view.
     /// </summary>
-    /// <param name="viewName">The name or path of the partial view that is rendered to the response.</param>
+    /// <param name="viewName">The name or path of the partial view that is rendered to the
+    // response.</param>
     /// <param name="model">The model that is rendered by the partial view.</param>
     /// <returns>The created <see cref="PartialViewResult"/> object for the response.</returns>
     [NonAction]
@@ -212,7 +217,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="ViewComponentResult"/> by specifying the name of a view component to render.
+    /// Creates a <see cref="ViewComponentResult"/> by specifying the name of a view component to
+    // render.
     /// </summary>
     /// <param name="componentName">
     /// The view component name. Can be a view component
@@ -226,7 +232,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="ViewComponentResult"/> by specifying the <see cref="Type"/> of a view component to
+    /// Creates a <see cref="ViewComponentResult"/> by specifying the <see cref="Type"/> of a view
+    // component to
     /// render.
     /// </summary>
     /// <param name="componentType">The view component <see cref="Type"/>.</param>
@@ -238,15 +245,18 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="ViewComponentResult"/> by specifying the name of a view component to render.
+    /// Creates a <see cref="ViewComponentResult"/> by specifying the name of a view component to
+    // render.
     /// </summary>
     /// <param name="componentName">
     /// The view component name. Can be a view component
     /// <see cref="ViewComponents.ViewComponentDescriptor.ShortName"/> or
     /// <see cref="ViewComponents.ViewComponentDescriptor.FullName"/>.</param>
     /// <param name="arguments">
-    /// An <see cref="object"/> with properties representing arguments to be passed to the invoked view component
-    /// method. Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance
+    /// An <see cref="object"/> with properties representing arguments to be passed to the invoked view
+    // component
+    /// method. Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    // instance
     /// containing the invocation arguments.
     /// </param>
     /// <returns>The created <see cref="ViewComponentResult"/> object for the response.</returns>
@@ -263,13 +273,16 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="ViewComponentResult"/> by specifying the <see cref="Type"/> of a view component to
+    /// Creates a <see cref="ViewComponentResult"/> by specifying the <see cref="Type"/> of a view
+    // component to
     /// render.
     /// </summary>
     /// <param name="componentType">The view component <see cref="Type"/>.</param>
     /// <param name="arguments">
-    /// An <see cref="object"/> with properties representing arguments to be passed to the invoked view component
-    /// method. Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/> instance
+    /// An <see cref="object"/> with properties representing arguments to be passed to the invoked view
+    // component
+    /// method. Alternatively, an <see cref="System.Collections.Generic.IDictionary{String, Object}"/>
+    // instance
     /// containing the invocation arguments.
     /// </param>
     /// <returns>The created <see cref="ViewComponentResult"/> object for the response.</returns>
@@ -286,11 +299,13 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="JsonResult"/> object that serializes the specified <paramref name="data"/> object
+    /// Creates a <see cref="JsonResult"/> object that serializes the specified <paramref name="data"/>
+    // object
     /// to JSON.
     /// </summary>
     /// <param name="data">The object to serialize.</param>
-    /// <returns>The created <see cref="JsonResult"/> that serializes the specified <paramref name="data"/>
+    /// <returns>The created <see cref="JsonResult"/> that serializes the specified <paramref
+    // name="data"/>
     /// to JSON format for the response.</returns>
     [NonAction]
     public virtual JsonResult Json(object? data)
@@ -299,19 +314,22 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     }
 
     /// <summary>
-    /// Creates a <see cref="JsonResult"/> object that serializes the specified <paramref name="data"/> object
+    /// Creates a <see cref="JsonResult"/> object that serializes the specified <paramref name="data"/>
+    // object
     /// to JSON.
     /// </summary>
     /// <param name="data">The object to serialize.</param>
     /// <param name="serializerSettings">The serializer settings to be used by the formatter.
     /// <para>
-    /// When using <c>System.Text.Json</c>, this should be an instance of <see cref="JsonSerializerOptions" />.
+    /// When using <c>System.Text.Json</c>, this should be an instance of <see
+    // cref="JsonSerializerOptions" />.
     /// </para>
     /// <para>
     /// When using <c>Newtonsoft.Json</c>, this should be an instance of <c>JsonSerializerSettings</c>.
     /// </para>
     /// </param>
-    /// <returns>The created <see cref="JsonResult"/> that serializes the specified <paramref name="data"/>
+    /// <returns>The created <see cref="JsonResult"/> that serializes the specified <paramref
+    // name="data"/>
     /// as JSON format for the response.</returns>
     /// <remarks>Callers should cache an instance of serializer settings to avoid
     /// recreating cached data with each call.</remarks>
@@ -339,7 +357,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// Called before the action method is invoked.
     /// </summary>
     /// <param name="context">The action executing context.</param>
-    /// <param name="next">The <see cref="ActionExecutionDelegate"/> to execute. Invoke this delegate in the body
+    /// <param name="next">The <see cref="ActionExecutionDelegate"/> to execute. Invoke this delegate in
+    // the body
     /// of <see cref="OnActionExecutionAsync" /> to continue execution of the action.</param>
     /// <returns>A <see cref="Task"/> instance.</returns>
     [NonAction]
@@ -377,7 +396,8 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
     /// <summary>
     /// Releases all resources currently used by this <see cref="Controller"/> instance.
     /// </summary>
-    /// <param name="disposing"><c>true</c> if this method is being invoked by the <see cref="Dispose()"/> method,
+    /// <param name="disposing"><c>true</c> if this method is being invoked by the <see
+    // cref="Dispose()"/> method,
     /// otherwise <c>false</c>.</param>
     protected virtual void Dispose(bool disposing) { }
 }

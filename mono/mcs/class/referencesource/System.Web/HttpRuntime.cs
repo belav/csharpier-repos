@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * The ASP.NET runtime services
- *
- * Copyright (c) 1998 Microsoft Corporation
- */
+* The ASP.NET runtime services
+*
+* Copyright (c) 1998 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -303,9 +303,9 @@ namespace System.Web
         //     FirstRequestInit() is called on first HTTP request
         //
 
-        /*
-         * Context-less initialization (on app domain creation)
-         */
+/*
+* Context-less initialization (on app domain creation)
+*/
         private void Init()
         {
             try
@@ -400,9 +400,9 @@ namespace System.Web
             catch { } // ignore exceptions
         }
 
-        /*
-         * Restart the AppDomain in 10 seconds
-         */
+/*
+* Restart the AppDomain in 10 seconds
+*/
         private void StartAppDomainShutdownTimer()
         {
             if (_appDomainShutdownTimer == null && !_shutdownInProgress)
@@ -422,9 +422,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Initialization from HostingEnvironment of HTTP independent features
-         */
+/*
+* Initialization from HostingEnvironment of HTTP independent features
+*/
         private void HostingInit(
             HostingEnvironmentFlags hostingFlags,
             PolicyLevel policyLevel,
@@ -678,9 +678,9 @@ namespace System.Web
             get { return _theRuntime._appOfflineMessage; }
         }
 
-        /*
-         * Initialization on first request (context available)
-         */
+/*
+* Initialization on first request (context available)
+*/
         private void FirstRequestInit(HttpContext context)
         {
             Exception error = null;
@@ -1395,11 +1395,11 @@ namespace System.Web
             _debuggingEnabled = compConfig.Debug;
         }
 
-        /*
-         * Pre-load all the bin assemblies if we're impersonated.  This way, if user code
-         * calls Assembly.Load while impersonated, the assembly will already be loaded, and
-         * we won't fail due to lack of permissions on the codegen dir (see ASURT 114486)
-         */
+/*
+* Pre-load all the bin assemblies if we're impersonated.  This way, if user code
+* calls Assembly.Load while impersonated, the assembly will already be loaded, and
+* we won't fail due to lack of permissions on the codegen dir (see ASURT 114486)
+*/
         [PermissionSet(SecurityAction.Assert, Unrestricted = true)]
         private void PreloadAssembliesFromBin()
         {
@@ -1494,7 +1494,8 @@ namespace System.Web
             // Dev11 144842: PERF: Consider removing Max connection limit or changing the default value
             System.Net.ServicePointManager.DefaultConnectionLimit = Int32.MaxValue;
 
-            // we call InitRequestQueue later, from FirstRequestInit, and set minFreeThreads and minLocalRequestFreeThreads
+            // we call InitRequestQueue later, from FirstRequestInit, and set minFreeThreads and
+            // minLocalRequestFreeThreads
         }
 
         private void SetThreadPoolLimits()
@@ -1791,7 +1792,8 @@ namespace System.Web
             }
         }
 
-        // Gets the version of IIS (7.0, 7.5, 8.0, etc.) that is hosting this application, or null if this application isn't IIS-hosted.
+        // Gets the version of IIS (7.0, 7.5, 8.0, etc.) that is hosting this application, or null if this
+        // application isn't IIS-hosted.
         // Should also return the correct version for IIS Express.
         public static Version IISVersion
         {
@@ -1814,10 +1816,10 @@ namespace System.Web
             get { return _enablePrefetchOptimization; }
         }
 
-        /*
-         * Process one step of the integrated pipeline
-         *
-         */
+/*
+* Process one step of the integrated pipeline
+*
+*/
 
         internal static RequestNotificationStatus ProcessRequestNotification(
             IIS7WorkerRequest wr,
@@ -2007,7 +2009,8 @@ namespace System.Web
             {
                 // if we catch an exception here then
                 // i) clear cached response body bytes on the worker request
-                // ii) clear the managed headers, the IIS native headers, the mangaged httpwriter response buffers, and the native IIS response buffers
+                // ii) clear the managed headers, the IIS native headers, the mangaged httpwriter response buffers,
+                // and the native IIS response buffers
                 // iii) attempt to format the exception and write it to the response
                 wr.UnlockCachedResponseBytes();
                 context.AddError(e);
@@ -2036,7 +2039,8 @@ namespace System.Web
             // Remember that first request is done
             _theRuntime._firstRequestCompleted = true;
 
-            // need to raise OnRequestCompleted while within the ThreadContext so that things like User, CurrentCulture, etc. are available
+            // need to raise OnRequestCompleted while within the ThreadContext so that things like User,
+            // CurrentCulture, etc. are available
             context.RaiseOnRequestCompleted();
 
             context.Request.Dispose();
@@ -2082,9 +2086,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Process one request
-         */
+/*
+* Process one request
+*/
         private void ProcessRequestInternal(HttpWorkerRequest wr)
         {
             // Count active requests
@@ -2092,10 +2096,13 @@ namespace System.Web
 
             if (_disposingHttpRuntime)
             {
-                // Dev11 333176: An appdomain is unloaded before all requests are served, resulting in System.AppDomainUnloadedException during isapi completion callback
+                // Dev11 333176: An appdomain is unloaded before all requests are served, resulting in
+                // System.AppDomainUnloadedException during isapi completion callback
                 //
-                // HttpRuntim.Dispose could have already finished on a different thread when we had no active requests
-                // In this case we are about to start or already started unloading the appdomain so we will reject the request the safest way possible
+                // HttpRuntim.Dispose could have already finished on a different thread when we had no active
+                // requests
+                // In this case we are about to start or already started unloading the appdomain so we will reject
+                // the request the safest way possible
                 try
                 {
                     wr.SendStatus(503, "Server Too Busy");
@@ -2257,9 +2264,9 @@ namespace System.Web
             response.OutputStream.Write(appOfflineMessage, 0, appOfflineMessage.Length);
         }
 
-        /*
-         * Finish processing request, sync or async
-         */
+/*
+* Finish processing request, sync or async
+*/
         private void FinishRequest(HttpWorkerRequest wr, HttpContext context, Exception e)
         {
             HttpResponse response = context.Response;
@@ -2530,9 +2537,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Cleanup of all unmananged state
-         */
+/*
+* Cleanup of all unmananged state
+*/
         private void Dispose()
         {
             // get shutdown timeout from config
@@ -2555,7 +2562,8 @@ namespace System.Web
             finally
             {
                 // By this time all new requests should be directed to a newly created app domain
-                // But there might be requests that got dispatched to this old app domain but have not reached ProcessRequestInternal yet
+                // But there might be requests that got dispatched to this old app domain but have not reached
+                // ProcessRequestInternal yet
                 // Signal ProcessRequestInternal to reject them immediately without initiating async operations
                 _disposingHttpRuntime = true;
             }
@@ -2623,9 +2631,9 @@ namespace System.Web
             HealthMonitoringManager.Shutdown();
         }
 
-        /*
-         * Async completion of IIS7 pipeline (unlike OnHandlerCompletion, this may fire more than once).
-         */
+/*
+* Async completion of IIS7 pipeline (unlike OnHandlerCompletion, this may fire more than once).
+*/
         private void OnRequestNotificationCompletion(IAsyncResult ar)
         {
             try
@@ -2685,9 +2693,9 @@ namespace System.Web
             Misc.ThrowIfFailedHr(result);
         }
 
-        /*
-         * Async completion of managed pipeline (called at most one time).
-         */
+/*
+* Async completion of managed pipeline (called at most one time).
+*/
         private void OnHandlerCompletion(IAsyncResult ar)
         {
             HttpContext context = (HttpContext)ar.AsyncState;
@@ -2710,10 +2718,10 @@ namespace System.Web
             FinishRequest(context.WorkerRequest, context, context.Error);
         }
 
-        /*
-         * Notification from worker request that it is done writing from buffer
-         * so that the buffers can be recycled
-         */
+/*
+* Notification from worker request that it is done writing from buffer
+* so that the buffers can be recycled
+*/
         private void EndOfSendCallback(HttpWorkerRequest wr, Object arg)
         {
             Debug.Trace("PipelineRuntime", "HttpRuntime.EndOfSendCallback");
@@ -2722,9 +2730,9 @@ namespace System.Web
             context.Response.Dispose();
         }
 
-        /*
-         * Notification when something in the bin directory changed
-         */
+/*
+* Notification when something in the bin directory changed
+*/
         private void OnCriticalDirectoryChange(Object sender, FileChangeEvent e)
         {
             // shutdown the app domain
@@ -2765,7 +2773,8 @@ namespace System.Web
 
             if (e.Action == FileAction.Added)
             {
-                // Make sure HttpRuntime does not ignore the appdomain shutdown if a file is added (VSWhidbey 363481)
+                // Make sure HttpRuntime does not ignore the appdomain shutdown if a file is added (VSWhidbey
+                // 363481)
                 HttpRuntime.SetUserForcedShutdown();
 
                 Debug.Trace(
@@ -2777,9 +2786,10 @@ namespace System.Web
             ShutdownAppDomain(reason, message);
         }
 
-        /**
-         * Coalesce file change notifications to minimize sharing violations and AppDomain restarts (ASURT 147492)
-         */
+/**
+* Coalesce file change notifications to minimize sharing violations and AppDomain restarts (ASURT
+147492)
+*/
         internal static void CoalesceNotifications()
         {
             int waitChangeNotification = HttpRuntimeSection.DefaultWaitChangeNotification;
@@ -2832,9 +2842,9 @@ namespace System.Web
             _theRuntime._userForcedShutdown = true;
         }
 
-        /*
-         * Shutdown the current app domain
-         */
+/*
+* Shutdown the current app domain
+*/
         internal static bool ShutdownAppDomain(ApplicationShutdownReason reason, string message)
         {
             return ShutdownAppDomainWithStackTrace(
@@ -2844,10 +2854,10 @@ namespace System.Web
             );
         }
 
-        /*
-         * Shutdown the current app domain with a stack trace.  This is useful for callers that are running
-         * on a QUWI callback, and wouldn't provide a meaningful stack trace by default.
-         */
+/*
+* Shutdown the current app domain with a stack trace.  This is useful for callers that are running
+* on a QUWI callback, and wouldn't provide a meaningful stack trace by default.
+*/
         internal static bool ShutdownAppDomainWithStackTrace(
             ApplicationShutdownReason reason,
             string message,
@@ -2915,7 +2925,8 @@ namespace System.Web
             }
             catch
             {
-                // VSWhidbey 444472: if an exception is thrown, we consume it and continue executing the following code.
+                // VSWhidbey 444472: if an exception is thrown, we consume it and continue executing the following
+                // code.
             }
 
             // Update last time ShutdownAppDomain was called
@@ -2928,7 +2939,8 @@ namespace System.Web
                 return true;
             }
 
-            //WOS 1400290: CantUnloadAppDomainException in ISAPI mode, wait until HostingEnvironment.ShutdownThisAppDomainOnce completes
+            //WOS 1400290: CantUnloadAppDomainException in ISAPI mode, wait until
+            // HostingEnvironment.ShutdownThisAppDomainOnce completes
             if (HostingEnvironment.ShutdownInProgress)
             {
                 return false;
@@ -3000,9 +3012,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Notification when app-level Config changed
-         */
+/*
+* Notification when app-level Config changed
+*/
         internal static void OnConfigChange(String message)
         {
             Debug.Trace("AppDomainFactory", "Shutting down appdomain because of config change");
@@ -3044,9 +3056,9 @@ namespace System.Web
         // public static APIs
         //
 
-        /*
-         * Process one request
-         */
+/*
+* Process one request
+*/
 
         /// <devdoc>
         ///    <para><SPAN>The method that drives
@@ -3236,18 +3248,18 @@ namespace System.Web
             }
         }
 
-        /*
-         * Check that the current trust level allows access to a virtual path.  Throw if it doesn't,
-         */
+/*
+* Check that the current trust level allows access to a virtual path.  Throw if it doesn't,
+*/
         internal static void CheckVirtualFilePermission(string virtualPath)
         {
             string physicalPath = HostingEnvironment.MapPath(virtualPath);
             CheckFilePermission(physicalPath);
         }
 
-        /*
-         * Check that the current trust level allows access to a path.  Throw if it doesn't,
-         */
+/*
+* Check that the current trust level allows access to a path.  Throw if it doesn't,
+*/
         internal static void CheckFilePermission(string path)
         {
             CheckFilePermission(path, false);
@@ -3430,9 +3442,9 @@ namespace System.Web
             return Path.GetFileName(path);
         }
 
-        /*
-         * Check that the current trust level allows Unmanaged access
-         */
+/*
+* Check that the current trust level allows Unmanaged access
+*/
         internal static bool HasUnmanagedPermission()
         {
             // Make sure we have already initialized the trust level
@@ -3544,7 +3556,8 @@ namespace System.Web
 
             if (assembly.SecurityRuleSet == SecurityRuleSet.Level1)
             {
-                // Level 1 CAS uses transparency as an auditing mechanism rather than an enforcement mechanism, so we can't
+                // Level 1 CAS uses transparency as an auditing mechanism rather than an enforcement mechanism, so
+                // we can't
                 // perform a transparency check. Instead, allow the call to go through if:
                 // (a) the referenced assembly is partially trusted, hence it cannot do anything dangerous; or
                 // (b) the assembly is fully trusted and has APTCA.
@@ -3553,15 +3566,18 @@ namespace System.Web
             else
             {
                 // ** TEMPORARY **
-                // Some GACed assemblies register critical modules / handlers. We can't break these scenarios for .NET 4.5, but we should
-                // remove this APTCA check when we fix DevDiv #85358 and use only the transparency check defined below.
+                // Some GACed assemblies register critical modules / handlers. We can't break these scenarios for
+                // .NET 4.5, but we should
+                // remove this APTCA check when we fix DevDiv #85358 and use only the transparency check defined
+                // below.
                 if (HasAPTCABit(assembly))
                 {
                     return true;
                 }
                 // ** END TEMPORARY **
 
-                // Level 2 CAS uses transparency as an enforcement mechanism, so we can perform a transparency check.
+                // Level 2 CAS uses transparency as an enforcement mechanism, so we can perform a transparency
+                // check.
                 // Transparent and SafeCritical types are safe to use from partial trust code.
                 return (t.IsSecurityTransparent || t.IsSecuritySafeCritical);
             }
@@ -3677,7 +3693,8 @@ namespace System.Web
         }
 
         //
-        // Return the client script physical path, e.g. @"c:\windows\microsoft.net\framework\v2.0.50217.0\asp.netclientfiles"
+        // Return the client script physical path, e.g.
+        // @"c:\windows\microsoft.net\framework\v2.0.50217.0\asp.netclientfiles"
         //
         internal static string AspClientScriptPhysicalPathInternal
         {
@@ -3996,7 +4013,8 @@ namespace System.Web
                     0
                 );
                 //             Do not give out configuration information since we don't know what trust level we are
-                //             supposed to be running at.  If the information below is added to the error it might expose
+                //             supposed to be running at.  If the information below is added to the error it might
+                // expose
                 //             part of the config file that the users does not have permissions to see. VS261145
                 //            ,trustSection.ElementInformation.Properties["level"].Source,
                 //            trustSection.ElementInformation.Properties["level"].LineNumber);
@@ -4024,7 +4042,8 @@ namespace System.Web
                     SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level)
                 );
                 //else
-                //    throw new ConfigurationErrorsException(SR.GetString(SR.Unable_to_get_policy_file, trustSection.Level),
+                //    throw new ConfigurationErrorsException(SR.GetString(SR.Unable_to_get_policy_file,
+                // trustSection.Level),
                 //        trustSection.Filename, trustSection.LineNumber);
             }
 
@@ -4198,7 +4217,8 @@ namespace System.Web
             _trustLevel = trustSection.Level;
             if (_trustLevel != "Full")
             {
-                // if we are in partial trust, HostingEnvironment should init HttpRuntime with a non-null PolicyLevel object
+                // if we are in partial trust, HostingEnvironment should init HttpRuntime with a non-null
+                // PolicyLevel object
                 Debug.Assert(policyLevel != null);
 
                 _namedPermissionSet = policyLevel.GetNamedPermissionSet(
@@ -4215,9 +4235,9 @@ namespace System.Web
             }
         }
 
-        /*
-         * Notification when something in the code-access security policy file changed
-         */
+/*
+* Notification when something in the code-access security policy file changed
+*/
         private void OnSecurityPolicyFileChange(Object sender, FileChangeEvent e)
         {
             // shutdown the app domain
@@ -4245,7 +4265,8 @@ namespace System.Web
                 "AppDomainFactory",
                 "Shutting down appdomain because " + AppOfflineFileName + " file changed"
             );
-            // WOS 1948399: set _userForcedShutdown to avoid DelayNotificationTimeout, since first request has not completed yet in integrated mode;
+            // WOS 1948399: set _userForcedShutdown to avoid DelayNotificationTimeout, since first request has
+            // not completed yet in integrated mode;
             SetUserForcedShutdown();
             string message = FileChangesMonitor.GenerateErrorMessage(e.Action, AppOfflineFileName);
             if (message == null)
@@ -4273,10 +4294,10 @@ namespace System.Web
             throw new HttpException(SR.GetString(SR.GetGacLocaltion_failed));
         }
 
-        /*
-         * Remove from metabase all read/write/browse permission from certain subdirs
-         *
-         */
+/*
+* Remove from metabase all read/write/browse permission from certain subdirs
+*
+*/
         internal static void RestrictIISFolders(HttpContext context)
         {
             int ret;
@@ -4356,12 +4377,12 @@ namespace System.Web
         private static object s_factoryLock = new Object();
 #endif // DONTUSEFACTORYGENERATOR
 
-        /*
-         * Faster implementation of CreatePublicInstance.  It generates bits of IL
-         * on the fly to achieve the improve performance.  this should only be used
-         * in cases where the number of different types to be created is well bounded.
-         * Otherwise, we would create too much IL, which can bloat the process.
-         */
+/*
+* Faster implementation of CreatePublicInstance.  It generates bits of IL
+* on the fly to achieve the improve performance.  this should only be used
+* in cases where the number of different types to be created is well bounded.
+* Otherwise, we would create too much IL, which can bloat the process.
+*/
         internal static Object FastCreatePublicInstance(Type type)
         {
 #if DONTUSEFACTORYGENERATOR

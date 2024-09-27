@@ -176,90 +176,119 @@ namespace System
             return result < 0 ? result : result + startIndex;
         }
 
-        /*
-         * IndexOf, LastIndexOf, Contains, StartsWith, and EndsWith
-         * ========================================================
-         *
-         * Given a search string 'searchString', a target string 'value' to locate within the search string, and a comparer
-         * 'comparer', we ask the comparer to generate a set S of tuples '(startPos, endPos)' for which the below expression
-         * returns true:
-         *
-         * >> bool result = searchString.Substring(startPos, endPos - startPos).Equals(value, comparer);
-         *
-         * If the generated set S is empty (i.e., there is no combination of values 'startPos' and 'endPos' which makes the
-         * above expression evaluate to true), then we say "'searchString' does not contain 'value'", and the expression
-         * "searchString.Contains(value, comparer)" should evaluate to false. If the set S is non-empty, then we say
-         * "'searchString' contains 'value'", and the expression "searchString.Contains(value, comparer)" should
-         * evaluate to true.
-         *
-         * n.b. There may be other tuples '(startPos, endPos)' *not* present in the generated set S for which the above
-         * expression evaluates to true. We discount the existence of these values. Allowing any such values to factor
-         * into the logic below could result in splitting the search string in a manner inappropriate for the culture
-         * rules of the specified comparer. For the remainder of this discussion, when we refer to 'startPos' and
-         * 'endPos', we consider only tuples '(startPos, endPos)' as they may be present in the generated set S.
-         *
-         * Given a 'searchString', 'value', and 'comparer', the behavior of the IndexOf method is that it finds the
-         * smallest possible 'endPos' for which there exists any corresponding 'startPos' which makes the above
-         * expression evaluate to true, then it returns any 'startPos' within that subset. For example:
-         *
-         * let searchString = "<ZWJ><ZWJ>hihi" (where <ZWJ> = U+200D ZERO WIDTH JOINER, a weightless code point)
-         * let value = "hi"
-         * let comparer = a linguistic culture-invariant comparer (e.g., StringComparison.InvariantCulture)
-         * then S = { (0, 4), (1, 4), (2, 4), (4, 6) }
-         * so the expression "<ZWJ><ZWJ>hihi".IndexOf("hi", comparer) can evaluate to any of { 0, 1, 2 }.
-         *
-         * n.b. ordinal comparers (e.g., StringComparison.Ordinal and StringComparison.OrdinalIgnoreCase) do not
-         * exhibit this ambiguity, as any given 'startPos' or 'endPos' will appear at most exactly once across
-         * all entries from set S. With the above example, S = { (2, 4), (4, 6) }, so IndexOf = 2 unambiguously.
-         *
-         * There exists a relationship between IndexOf and StartsWith. If there exists in set S any entry with
-         * the tuple values (startPos = 0, endPos = <anything>), we say "'searchString' starts with 'value'", and
-         * the expression "searchString.StartsWith(value, comparer)" should evaluate to true. If there exists
-         * no such entry in set S, then we say "'searchString' does not start with 'value'", and the expression
-         * "searchString.StartsWith(value, comparer)" should evaluate to false.
-         *
-         * LastIndexOf and EndsWith have a similar relationship as IndexOf and StartsWith. The behavior of the
-         * LastIndexOf method is that it finds the largest possible 'endPos' for which there exists any corresponding
-         * 'startPos' which makes the expression evaluate to true, then it returns any 'startPos' within that
-         * subset. For example:
-         *
-         * let searchString = "hi<ZWJ><ZWJ>hi" (this is slightly modified from the earlier example)
-         * let value = "hi"
-         * let comparer = StringComparison.InvariantCulture
-         * then S = { (0, 2), (0, 3), (0, 4), (2, 6), (3, 6), (4, 6) }
-         * so the expression "hi<ZWJ><ZWJ>hi".LastIndexOf("hi", comparer) can evaluate to any of { 2, 3, 4 }.
-         *
-         * If there exists in set S any entry with the tuple values (startPos = <anything>, endPos = searchString.Length),
-         * we say "'searchString' ends with 'value'", and the expression "searchString.EndsWith(value, comparer)"
-         * should evaluate to true. If there exists no such entry in set S, then we say "'searchString' does not
-         * start with 'value'", and the expression "searchString.EndsWith(value, comparer)" should evaluate to false.
-         *
-         * There are overloads of IndexOf and LastIndexOf which take an offset and length in order to constrain the
-         * search space to a substring of the original search string.
-         *
-         * For LastIndexOf specifially, overloads which take a 'startIndex' and 'count' behave differently
-         * than their IndexOf counterparts. 'startIndex' is the index of the last char element that should
-         * be considered when performing the search. For example, if startIndex = 4, then the caller is
-         * indicating "when finding the match I want you to include the char element at index 4, but not
-         * any char elements past that point."
-         *
-         *                        idx = 0123456 ("abcdefg".Length = 7)
-         * So, if the search string is "abcdefg", startIndex = 5 and count = 3, then the search space will
-         *                                 ~~~    be the substring "def", as highlighted to the left.
-         * Essentially: "the search space should be of length 3 chars and should end *just after* the char
-         * element at index 5."
-         *
-         * Since this behavior can introduce off-by-one errors in the boundary cases, we allow startIndex = -1
-         * with a zero-length 'searchString' (treated as equivalent to startIndex = 0), and we allow
-         * startIndex = searchString.Length (treated as equivalent to startIndex = searchString.Length - 1).
-         *
-         * Note also that this behavior can introduce errors when dealing with UTF-16 surrogate pairs.
-         * If the search string is the 3 chars "[BMP][HI][LO]", startIndex = 1 and count = 2, then the
-         *                                      ~~~~~~~~~       search space wil be the substring "[BMP][ HI]".
-         * This means that the char [HI] is incorrectly seen as a standalone high surrogate, which could
-         * lead to incorrect matching behavior, or it could cause LastIndexOf to incorrectly report that
-         * a zero-weight character could appear between the [HI] and [LO] chars.
-         */
+/*
+* IndexOf, LastIndexOf, Contains, StartsWith, and EndsWith
+* ========================================================
+*
+* Given a search string 'searchString', a target string 'value' to locate within the search string,
+and a comparer
+* 'comparer', we ask the comparer to generate a set S of tuples '(startPos, endPos)' for which the
+below expression
+* returns true:
+*
+* >> bool result = searchString.Substring(startPos, endPos - startPos).Equals(value, comparer);
+*
+* If the generated set S is empty (i.e., there is no combination of values 'startPos' and 'endPos'
+which makes the
+* above expression evaluate to true), then we say "'searchString' does not contain 'value'", and the
+expression
+* "searchString.Contains(value, comparer)" should evaluate to false. If the set S is non-empty, then
+we say
+* "'searchString' contains 'value'", and the expression "searchString.Contains(value, comparer)"
+should
+* evaluate to true.
+*
+* n.b. There may be other tuples '(startPos, endPos)' *not* present in the generated set S for which
+the above
+* expression evaluates to true. We discount the existence of these values. Allowing any such values
+to factor
+* into the logic below could result in splitting the search string in a manner inappropriate for the
+culture
+* rules of the specified comparer. For the remainder of this discussion, when we refer to 'startPos'
+and
+* 'endPos', we consider only tuples '(startPos, endPos)' as they may be present in the generated set
+S.
+*
+* Given a 'searchString', 'value', and 'comparer', the behavior of the IndexOf method is that it
+finds the
+* smallest possible 'endPos' for which there exists any corresponding 'startPos' which makes the
+above
+* expression evaluate to true, then it returns any 'startPos' within that subset. For example:
+*
+* let searchString = "<ZWJ><ZWJ>hihi" (where <ZWJ> = U+200D ZERO WIDTH JOINER, a weightless code
+point)
+* let value = "hi"
+* let comparer = a linguistic culture-invariant comparer (e.g., StringComparison.InvariantCulture)
+* then S = { (0, 4), (1, 4), (2, 4), (4, 6) }
+* so the expression "<ZWJ><ZWJ>hihi".IndexOf("hi", comparer) can evaluate to any of { 0, 1, 2 }.
+*
+* n.b. ordinal comparers (e.g., StringComparison.Ordinal and StringComparison.OrdinalIgnoreCase) do
+not
+* exhibit this ambiguity, as any given 'startPos' or 'endPos' will appear at most exactly once
+across
+* all entries from set S. With the above example, S = { (2, 4), (4, 6) }, so IndexOf = 2
+unambiguously.
+*
+* There exists a relationship between IndexOf and StartsWith. If there exists in set S any entry
+with
+* the tuple values (startPos = 0, endPos = <anything>), we say "'searchString' starts with 'value'",
+and
+* the expression "searchString.StartsWith(value, comparer)" should evaluate to true. If there exists
+* no such entry in set S, then we say "'searchString' does not start with 'value'", and the
+expression
+* "searchString.StartsWith(value, comparer)" should evaluate to false.
+*
+* LastIndexOf and EndsWith have a similar relationship as IndexOf and StartsWith. The behavior of
+the
+* LastIndexOf method is that it finds the largest possible 'endPos' for which there exists any
+corresponding
+* 'startPos' which makes the expression evaluate to true, then it returns any 'startPos' within that
+* subset. For example:
+*
+* let searchString = "hi<ZWJ><ZWJ>hi" (this is slightly modified from the earlier example)
+* let value = "hi"
+* let comparer = StringComparison.InvariantCulture
+* then S = { (0, 2), (0, 3), (0, 4), (2, 6), (3, 6), (4, 6) }
+* so the expression "hi<ZWJ><ZWJ>hi".LastIndexOf("hi", comparer) can evaluate to any of { 2, 3, 4 }.
+*
+* If there exists in set S any entry with the tuple values (startPos = <anything>, endPos =
+searchString.Length),
+* we say "'searchString' ends with 'value'", and the expression "searchString.EndsWith(value,
+comparer)"
+* should evaluate to true. If there exists no such entry in set S, then we say "'searchString' does
+not
+* start with 'value'", and the expression "searchString.EndsWith(value, comparer)" should evaluate
+to false.
+*
+* There are overloads of IndexOf and LastIndexOf which take an offset and length in order to
+constrain the
+* search space to a substring of the original search string.
+*
+* For LastIndexOf specifially, overloads which take a 'startIndex' and 'count' behave differently
+* than their IndexOf counterparts. 'startIndex' is the index of the last char element that should
+* be considered when performing the search. For example, if startIndex = 4, then the caller is
+* indicating "when finding the match I want you to include the char element at index 4, but not
+* any char elements past that point."
+*
+*                        idx = 0123456 ("abcdefg".Length = 7)
+* So, if the search string is "abcdefg", startIndex = 5 and count = 3, then the search space will
+*                                 ~~~    be the substring "def", as highlighted to the left.
+* Essentially: "the search space should be of length 3 chars and should end *just after* the char
+* element at index 5."
+*
+* Since this behavior can introduce off-by-one errors in the boundary cases, we allow startIndex =
+-1
+* with a zero-length 'searchString' (treated as equivalent to startIndex = 0), and we allow
+* startIndex = searchString.Length (treated as equivalent to startIndex = searchString.Length - 1).
+*
+* Note also that this behavior can introduce errors when dealing with UTF-16 surrogate pairs.
+* If the search string is the 3 chars "[BMP][HI][LO]", startIndex = 1 and count = 2, then the
+*                                      ~~~~~~~~~       search space wil be the substring "[BMP][
+HI]".
+* This means that the char [HI] is incorrectly seen as a standalone high surrogate, which could
+* lead to incorrect matching behavior, or it could cause LastIndexOf to incorrectly report that
+* a zero-weight character could appear between the [HI] and [LO] chars.
+*/
 
         public int IndexOf(string value)
         {

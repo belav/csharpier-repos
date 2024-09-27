@@ -190,81 +190,81 @@ namespace MonoTests.System.Xml
             // any kind of Exceptions are thrown as yet.
             if (boolValue != null)
                 Assert.AreEqual(boolValue, av.ValueAsBoolean, "ValueAsBoolean");
-            /*
-            else {
-                try {
-                    boolValue = av.ValueAsBoolean;
-                    Assert.Fail ("not supported conversion to Boolean.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+boolValue = av.ValueAsBoolean;
+Assert.Fail ("not supported conversion to Boolean.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (dateValue != null)
                 Assert.AreEqual(dateValue, av.ValueAsDateTime, "ValueAsDateTime");
-            /*
-            else {
-                try {
-                    dateValue = av.ValueAsDateTime;
-                    Assert.Fail ("not supported conversion to DateTime.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+dateValue = av.ValueAsDateTime;
+Assert.Fail ("not supported conversion to DateTime.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (decimalValue != null)
                 Assert.AreEqual(decimalValue, av.ValueAsDecimal, "ValueAsDecimal");
-            /*
-            else {
-                try {
-                    decimalValue = av.ValueAsDecimal;
-                    Assert.Fail ("not supported conversion to Decimal.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+decimalValue = av.ValueAsDecimal;
+Assert.Fail ("not supported conversion to Decimal.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (doubleValue != null)
                 Assert.AreEqual(doubleValue, av.ValueAsDouble, "ValueAsDouble");
-            /*
-            else {
-                try {
-                    doubleValue = av.ValueAsDouble;
-                    Assert.Fail ("not supported conversion to Double.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+doubleValue = av.ValueAsDouble;
+Assert.Fail ("not supported conversion to Double.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (int32Value != null)
                 Assert.AreEqual(int32Value, av.ValueAsInt32, "ValueAsInt32");
-            /*
-            else {
-                try {
-                    int32Value = av.ValueAsInt32;
-                    Assert.Fail ("not supported conversion to Int32.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+int32Value = av.ValueAsInt32;
+Assert.Fail ("not supported conversion to Int32.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (int64Value != null)
                 Assert.AreEqual(int64Value, av.ValueAsInt64, "ValueAsInt64");
-            /*
-            else {
-                try {
-                    int64Value = av.ValueAsInt64;
-                    Assert.Fail ("not supported conversion to Int64.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+int64Value = av.ValueAsInt64;
+Assert.Fail ("not supported conversion to Int64.");
+} catch (InvalidCastException) {
+}
+}
+*/
             if (singleValue != null)
                 Assert.AreEqual(singleValue, av.ValueAsSingle, "ValueAsSingle");
-            /*
-            else {
-                try {
-                    singleValue = av.ValueAsSingle;
-                    Assert.Fail ("not supported conversion to Single.");
-                } catch (InvalidCastException) {
-                }
-            }
-            */
+/*
+else {
+try {
+singleValue = av.ValueAsSingle;
+Assert.Fail ("not supported conversion to Single.");
+} catch (InvalidCastException) {
+}
+}
+*/
             Assert.AreEqual(listCount, av.ValueAsList.Count, "ValueAsList.Count");
         }
 

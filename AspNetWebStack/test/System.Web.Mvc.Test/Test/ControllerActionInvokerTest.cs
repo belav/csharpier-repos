@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -162,7 +163,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FindActionDoesNotMatchMethodsDefinedOnControllerType()
         {
-            // FindActionMethod() shouldn't match methods originally defined on the Controller type, e.g. Dispose().
+            // FindActionMethod() shouldn't match methods originally defined on the Controller type, e.g.
+            // Dispose().
 
             // Arrange
             Controller controller = new BlankController();
@@ -199,7 +201,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FindActionDoesNotMatchMethodsDefinedOnObjectType()
         {
-            // FindActionMethod() shouldn't match methods originally defined on the Object type, e.g. ToString().
+            // FindActionMethod() shouldn't match methods originally defined on the Object type, e.g.
+            // ToString().
 
             // Arrange
             Controller controller = new FindMethodController();
@@ -241,7 +244,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FindActionDoesNotMatchOverriddenNonActionMethod()
         {
-            // FindActionMethod() should trace the method's inheritance chain looking for the [NonAction] attribute.
+            // FindActionMethod() should trace the method's inheritance chain looking for the [NonAction]
+            // attribute.
 
             // Arrange
             Controller controller = new DerivedFindMethodController();
@@ -376,7 +380,8 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void FindActionMatchesNewActionMethodsHidingNonActionMethods()
         {
-            // FindActionMethod() should stop looking for [NonAction] in the method's inheritance chain when it sees
+            // FindActionMethod() should stop looking for [NonAction] in the method's inheritance chain when it
+            // sees
             // that a method in a derived class hides the a method in the base class.
 
             // Arrange

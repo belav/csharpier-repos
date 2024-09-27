@@ -32,15 +32,18 @@ namespace System.ComponentModel.DataAnnotations
         public object?[] Values { get; }
 
         /// <summary>
-        ///     Determines whether a specified object is valid. (Overrides <see cref="ValidationAttribute.IsValid(object)" />)
+        ///     Determines whether a specified object is valid. (Overrides <see
+        // cref="ValidationAttribute.IsValid(object)" />)
         /// </summary>
         /// <param name="value">The object to validate.</param>
         /// <returns>
-        ///     <see langword="true" /> if none of the <see cref="Values"/> are equal to <paramref name="value"/>,
+        ///     <see langword="true" /> if none of the <see cref="Values"/> are equal to <paramref
+        // name="value"/>,
         ///     otherwise <see langword="false" />.
         /// </returns>
         /// <remarks>
-        ///     This method can return <see langword="true"/> if the <paramref name="value" /> is <see langword="null"/>,
+        ///     This method can return <see langword="true"/> if the <paramref name="value" /> is <see
+        // langword="null"/>,
         ///     provided that <see langword="null"/> is not specified in any of the <see cref="Values"/>.
         /// </remarks>
         public override bool IsValid(object? value)

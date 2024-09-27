@@ -37,7 +37,8 @@ namespace System.IdentityModel.Tokens
         /// as the key for the issued token.
         /// </summary>
         /// <param name="key">The symmetric key that are used inside the issued token.</param>
-        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
+        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying
+        // party.</param>
         /// <exception cref="ArgumentNullException">When the key is null.</exception>
         public SymmetricProofDescriptor(byte[] key, EncryptingCredentials targetWrappingCredentials)
         {
@@ -55,7 +56,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Use this constructor if you want the sts to use the given <see cref="EncryptingCredentials"/>.
         /// </summary>
-        /// <param name="targetWrappingCredentials">The <see cref="EncryptingCredentials"/> to be used.</param>
+        /// <param name="targetWrappingCredentials">The <see cref="EncryptingCredentials"/> to be
+        // used.</param>
         public SymmetricProofDescriptor(EncryptingCredentials targetWrappingCredentials)
             : this(
                 SecurityTokenServiceConfiguration.DefaultKeySizeInBitsConstant,
@@ -63,11 +65,13 @@ namespace System.IdentityModel.Tokens
             ) { }
 
         /// <summary>
-        /// Use this constructor if you want to the sts to autogenerate key using random number generator and
+        /// Use this constructor if you want to the sts to autogenerate key using random number generator
+        // and
         /// send it in the proof token as binary secret.
         /// </summary>
         /// <param name="keySizeInBits">The size of the symmetric key.</param>
-        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
+        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying
+        // party.</param>
         public SymmetricProofDescriptor(
             int keySizeInBits,
             EncryptingCredentials targetWrappingCredentials
@@ -81,9 +85,12 @@ namespace System.IdentityModel.Tokens
         /// 2. client did not send a entropy, so just use server's entropy
         /// </summary>
         /// <param name="keySizeInBits">the size of the symmetric key</param>
-        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
-        /// <param name="requestorWrappingCredentials">The key encrypting credentials for the requestor.</param>
-        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
+        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying
+        // party.</param>
+        /// <param name="requestorWrappingCredentials">The key encrypting credentials for the
+        // requestor.</param>
+        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to
+        // zero.</exception>
         public SymmetricProofDescriptor(
             int keySizeInBits,
             EncryptingCredentials targetWrappingCredentials,
@@ -103,11 +110,15 @@ namespace System.IdentityModel.Tokens
         /// 2. client did not send a entropy, so just use server's entropy
         /// </summary>
         /// <param name="keySizeInBits">the size of the symmetric key</param>
-        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying party.</param>
-        /// <param name="requestorWrappingCredentials">The key encrypting credentials for the requestor.</param>
+        /// <param name="targetWrappingCredentials">The key encrypting credentials for the relying
+        // party.</param>
+        /// <param name="requestorWrappingCredentials">The key encrypting credentials for the
+        // requestor.</param>
         /// <param name="encryptWith">The a----thm specified in the EncryptWith element of the RST.</param>
-        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
-        /// <remarks>If EncryptWith is a DES algorithm, the key is guaranteed not to be a weak DES key.</remarks>
+        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to
+        // zero.</exception>
+        /// <remarks>If EncryptWith is a DES algorithm, the key is guaranteed not to be a weak DES
+        // key.</remarks>
         public SymmetricProofDescriptor(
             int keySizeInBits,
             EncryptingCredentials targetWrappingCredentials,
@@ -138,11 +149,15 @@ namespace System.IdentityModel.Tokens
         /// Use this constructor if you want to send combined entropy.
         /// </summary>
         /// <param name="keySizeInBits">The size of the symmetric key.</param>
-        /// <param name="targetWrappingCredentials">The encrypting credentials for the relying party used to encrypt the key in the SecurityKeyIdentifier property.</param>
-        /// <param name="requestorWrappingCredentials">The encrypting credentials for the requestor used to encrypt the entropy or the proof token.</param>
+        /// <param name="targetWrappingCredentials">The encrypting credentials for the relying party used to
+        // encrypt the key in the SecurityKeyIdentifier property.</param>
+        /// <param name="requestorWrappingCredentials">The encrypting credentials for the requestor used to
+        // encrypt the entropy or the proof token.</param>
         /// <param name="sourceEntropy">The requestor's entropy.</param>
-        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
-        /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty array.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to
+        // zero.</exception>
+        /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty
+        // array.</exception>
         public SymmetricProofDescriptor(
             int keySizeInBits,
             EncryptingCredentials targetWrappingCredentials,
@@ -161,12 +176,16 @@ namespace System.IdentityModel.Tokens
         /// Use this constructor to send combined entropy.
         /// </summary>
         /// <param name="keySizeInBits">The size of the symmetric key.</param>
-        /// <param name="targetWrappingCredentials">The encrypting credentials for the relying party used to encrypt the key in the SecurityKeyIdentifier property.</param>
-        /// <param name="requestorWrappingCredentials">The encrypting credentials for the requestor used to encrypt the entropy or the proof token.</param>
+        /// <param name="targetWrappingCredentials">The encrypting credentials for the relying party used to
+        // encrypt the key in the SecurityKeyIdentifier property.</param>
+        /// <param name="requestorWrappingCredentials">The encrypting credentials for the requestor used to
+        // encrypt the entropy or the proof token.</param>
         /// <param name="sourceEntropy">The requestor's entropy.</param>
         /// <param name="encryptWith">The algorithm Uri using which to encrypt the proof key.</param>
-        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to zero.</exception>
-        /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty array.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">When keySizeInBits is less than or equal to
+        // zero.</exception>
+        /// <exception cref="ArgumentNullException">When source entorpy is null or is an empty
+        // array.</exception>
         public SymmetricProofDescriptor(
             int keySizeInBits,
             EncryptingCredentials targetWrappingCredentials,

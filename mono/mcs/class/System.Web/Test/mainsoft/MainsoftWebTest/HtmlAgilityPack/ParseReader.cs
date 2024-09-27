@@ -62,7 +62,8 @@ namespace HtmlAgilityPack
         /// Checks the length of the underlying stream.
         /// </summary>
         /// <param name="length">The required length.</param>
-        /// <returns>true if the underlying stream's length is greater than the required length, false otherwise.</returns>
+        /// <returns>true if the underlying stream's length is greater than the required length, false
+        // otherwise.</returns>
         public bool CheckLength(int length)
         {
             if (length <= 0)
@@ -113,7 +114,8 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+        /// Clears all buffers for this stream and causes any buffered data to be written to the underlying
+        // device.
         /// </summary>
         public override void Flush()
         {
@@ -196,7 +198,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Reads the next character and advances the character position by one character.
         /// </summary>
-        /// <returns>The next character represented as an Int32, or -1 if no more characters are available.</returns>
+        /// <returns>The next character represented as an Int32, or -1 if no more characters are
+        // available.</returns>
         public int Read()
         {
             int i;
@@ -295,12 +298,18 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+        /// reads a sequence of bytes from the current stream and advances the position within the stream by
+        // the number of bytes read.
         /// </summary>
-        /// <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between offset and (offset + count- 1) replaced by the bytes read from the current source.</param>
-        /// <param name="offset">The zero-based byte offset in buffer at which to begin storing the data read from the current stream.</param>
+        /// <param name="buffer">An array of bytes. When this method returns, the buffer contains the
+        // specified byte array with the values between offset and (offset + count- 1) replaced by the bytes
+        // read from the current source.</param>
+        /// <param name="offset">The zero-based byte offset in buffer at which to begin storing the data
+        // read from the current stream.</param>
         /// <param name="count">The maximum number of bytes to be read from the current stream.</param>
-        /// <returns>The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.</returns>
+        /// <returns>The total number of bytes read into the buffer. This can be less than the number of
+        // bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream
+        // has been reached.</returns>
         public override int Read(byte[] buffer, int offset, int count)
         {
             if (buffer == null)
@@ -323,11 +332,14 @@ namespace HtmlAgilityPack
         }
 
         /// <summary>
-        /// Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+        /// Writes a sequence of bytes to the current stream and advances the current position within this
+        // stream by the number of bytes written.
         /// Always throws a NotSupportedException for the ParserReader class.
         /// </summary>
-        /// <param name="buffer">An array of bytes. This method copies count bytes from buffer to the current stream.</param>
-        /// <param name="offset">The zero-based byte offset in buffer at which to begin copying bytes to the current stream.</param>
+        /// <param name="buffer">An array of bytes. This method copies count bytes from buffer to the
+        // current stream.</param>
+        /// <param name="offset">The zero-based byte offset in buffer at which to begin copying bytes to the
+        // current stream.</param>
         /// <param name="count">The number of bytes to be written to the current stream.</param>
         public override void Write(byte[] buffer, int offset, int count)
         {
@@ -338,7 +350,8 @@ namespace HtmlAgilityPack
         /// Sets the position within the current stream.
         /// </summary>
         /// <param name="offset">A byte offset relative to the origin parameter.</param>
-        /// <param name="origin">A value of type SeekOrigin indicating the reference point used to obtain the new position.</param>
+        /// <param name="origin">A value of type SeekOrigin indicating the reference point used to obtain
+        // the new position.</param>
         /// <returns>The new position within the current stream.</returns>
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -400,7 +413,8 @@ namespace HtmlAgilityPack
         /// <summary>
         /// Extracts a string out of the buffered text.
         /// </summary>
-        /// <param name="offset">The zero-based byte offset in buffered text at which to begin extracting.</param>
+        /// <param name="offset">The zero-based byte offset in buffered text at which to begin
+        // extracting.</param>
         /// <param name="length">The maximum number of bytes to be read from the buffered text.</param>
         /// <returns></returns>
         public string GetBufferedString(int offset, int length)

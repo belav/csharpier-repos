@@ -21,7 +21,8 @@ public class LinkOptions
     public bool? LowercaseQueryStrings { get; set; }
 
     /// <summary>
-    /// Gets or sets a value indicating whether a trailing slash should be appended to the generated URLs.
+    /// Gets or sets a value indicating whether a trailing slash should be appended to the generated
+    // URLs.
     /// </summary>
     public bool? AppendTrailingSlash { get; set; }
 }

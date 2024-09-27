@@ -181,7 +181,8 @@ namespace System.Collections.Generic
         /// Sets the capacity of a <see cref="Stack{T}"/> object to a specified number of entries.
         /// </summary>
         /// <param name="capacity">The new capacity.</param>
-        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than 0 or entries count.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Passed capacity is lower than 0 or entries
+        // count.</exception>
         public void TrimExcess(int capacity)
         {
             ArgumentOutOfRangeException.ThrowIfNegative(capacity);
@@ -300,7 +301,8 @@ namespace System.Collections.Generic
         /// <summary>
         /// Ensures that the capacity of this Stack is at least the specified <paramref name="capacity"/>.
         /// If the current capacity of the Stack is less than specified <paramref name="capacity"/>,
-        /// the capacity is increased by continuously twice current capacity until it is at least the specified <paramref name="capacity"/>.
+        /// the capacity is increased by continuously twice current capacity until it is at least the
+        // specified <paramref name="capacity"/>.
         /// </summary>
         /// <param name="capacity">The minimum capacity to ensure.</param>
         /// <returns>The new capacity of this stack.</returns>

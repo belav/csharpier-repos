@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Matches an attribute by metadata namespace, metadata type name. Does not load the type symbol for
+        /// Matches an attribute by metadata namespace, metadata type name. Does not load the type symbol
+        // for
         /// the attribute.
         /// </summary>
         /// <param name="namespaceName"></param>
@@ -162,7 +163,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
         }
 
         /// <summary>
-        /// Matches an attribute by metadata namespace, metadata type name and metadata signature. Does not load the
+        /// Matches an attribute by metadata namespace, metadata type name and metadata signature. Does not
+        // load the
         /// type symbol for the attribute.
         /// </summary>
         /// <param name="description">Attribute to match.</param>

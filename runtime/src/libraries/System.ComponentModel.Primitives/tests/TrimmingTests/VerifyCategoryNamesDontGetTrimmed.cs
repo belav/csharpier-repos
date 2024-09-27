@@ -7,9 +7,12 @@ using System.ComponentModel;
 namespace Test
 {
     /// <summary>
-    /// When UseSystemResourceStrings feature switch is on, we want to validate that getting the resource string of
-    /// a category attribute won't result in having "PropertyCategory" appended to the beginning of the resulting string.
-    /// This test ensures that both built-in categories as well as custom categories get the right Category when the
+    /// When UseSystemResourceStrings feature switch is on, we want to validate that getting the
+    // resource string of
+    /// a category attribute won't result in having "PropertyCategory" appended to the beginning of the
+    // resulting string.
+    /// This test ensures that both built-in categories as well as custom categories get the right
+    // Category when the
     /// feature switch is on.
     /// </summary>
     public class Program

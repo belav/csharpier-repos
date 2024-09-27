@@ -6,26 +6,26 @@ using System.Runtime.InteropServices;
 using System.Text;
 
 /*
- * Regression tests for the mono JIT.
- *
- * Each test needs to be of the form:
- *
- * static int test_<result>_<name> ();
- *
- * where <result> is an integer (the value that needs to be returned by
- * the method to make it pass.
- * <name> is a user-displayed name used to identify the test.
- *
- * The tests can be driven in two ways:
- * *) running the program directly: Main() uses reflection to find and invoke
- * 	the test methods (this is useful mostly to check that the tests are correct)
- * *) with the --regression switch of the jit (this is the preferred way since
- * 	all the tests will be run with optimizations on and off)
- *
- * The reflection logic could be moved to a .dll since we need at least another
- * regression test file written in IL code to have better control on how
- * the IL code looks.
- */
+* Regression tests for the mono JIT.
+*
+* Each test needs to be of the form:
+*
+* static int test_<result>_<name> ();
+*
+* where <result> is an integer (the value that needs to be returned by
+* the method to make it pass.
+* <name> is a user-displayed name used to identify the test.
+*
+* The tests can be driven in two ways:
+* *) running the program directly: Main() uses reflection to find and invoke
+* 	the test methods (this is useful mostly to check that the tests are correct)
+* *) with the --regression switch of the jit (this is the preferred way since
+* 	all the tests will be run with optimizations on and off)
+*
+* The reflection logic could be moved to a .dll since we need at least another
+* regression test file written in IL code to have better control on how
+* the IL code looks.
+*/
 
 #if __MOBILE__
 namespace ObjectTests
@@ -728,8 +728,8 @@ class Tests
         public long Seek(long position)
         {
             long pos = position;
-            /* interaction between the register allocator and
-             * allocating arguments to registers */
+/* interaction between the register allocator and
+* allocating arguments to registers */
             if (pos >= buf_start && pos <= buf_start + buf_length)
             {
                 buf_offset = (int)(pos - buf_start);
@@ -1077,7 +1077,7 @@ class Tests
         if (!(o is ICloneable[]))
             return 6;
 
-        /* add tests for interfaces that 'inherit' interfaces */
+/* add tests for interfaces that 'inherit' interfaces */
         return 0;
     }
 
@@ -1261,10 +1261,10 @@ class Tests
         return a + b + c + d;
     }
 
-    /*
-     * Test that evaluation of complex arguments does not overwrite the
-     * arguments already in outgoing registers.
-     */
+/*
+* Test that evaluation of complex arguments does not overwrite the
+* arguments already in outgoing registers.
+*/
     public static int test_155_regalloc()
     {
         int a = 10;
@@ -1324,7 +1324,7 @@ class Tests
 
     public static int test_0_and_cmp_static()
     {
-        /* various forms of test [mem], imm */
+/* various forms of test [mem], imm */
 
         my_flags = 0x01020304;
 
@@ -1369,12 +1369,12 @@ class Tests
     static Nullable<bool> s_nullb;
     static AStruct s_struct1;
 
-    /* test if VES uses correct sizes for value type write to static field */
+/* test if VES uses correct sizes for value type write to static field */
     public static int test_0_static_nullable_bool()
     {
         s_struct1 = new AStruct(0x1337dead);
         s_nullb = true;
-        /* make sure that the write to s_nullb didn't smash the value after it */
+/* make sure that the write to s_nullb didn't smash the value after it */
         if (s_struct1.i != 0x1337dead)
             return 2;
         return 0;
@@ -1472,7 +1472,7 @@ class Tests
         return dum_de_dum;
     }
 
-    /* from bug# 71515 */
+/* from bug# 71515 */
     static int counter = 0;
 
     static bool WriteStuff()
@@ -1659,7 +1659,7 @@ class Tests
         }
     }
 
-    /* bug #82281 */
+/* bug #82281 */
     public static int test_0_unsigned_right_shift_imm0()
     {
         uint temp = 0;
@@ -1713,7 +1713,7 @@ class Tests
         return 0;
     }
 
-    /* #346563 */
+/* #346563 */
     public static int test_0_array_access_64_bit()
     {
         int[] arr2 = new int[10];
@@ -1877,7 +1877,7 @@ class Tests
         return array[1].val;
     }
 
-    /* mcs can't compile this (#646744) */
+/* mcs can't compile this (#646744) */
 #if FALSE
 	static void InitMe (out Gamma noMercyWithTheStack) {
 		noMercyWithTheStack = new Gamma ();
@@ -1995,15 +1995,15 @@ class Tests
         return 0;
     }
 
-    /*
-     * FIXME: This fails with AOT #703317.
-     */
-    /*
-    static int test_0_multiple_cctor_calls_regress_679467 () {
-        flag = false;
-        return regress_679467_inner ();
-    }
-    */
+/*
+* FIXME: This fails with AOT #703317.
+*/
+/*
+static int test_0_multiple_cctor_calls_regress_679467 () {
+flag = false;
+return regress_679467_inner ();
+}
+*/
 
     static int test_0_char_ctor()
     {

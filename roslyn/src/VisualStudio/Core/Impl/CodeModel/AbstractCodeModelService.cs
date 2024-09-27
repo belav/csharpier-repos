@@ -233,10 +233,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         /// as immediate children. For example, a namespace would return the namespaces and types within.
         /// However, if <paramref name="recursive"/> is true, members with the namespaces and types would
         /// also be returned.</param>
-        /// <param name="logicalFields">If true, field declarations are broken into their respective declarators.
+        /// <param name="logicalFields">If true, field declarations are broken into their respective
+        // declarators.
         /// For example, the field "int x, y" would return two declarators, one for x and one for y in place
         /// of the field.</param>
-        /// <param name="onlySupportedNodes">If true, only members supported by Code Model are returned.</param>
+        /// <param name="onlySupportedNodes">If true, only members supported by Code Model are
+        // returned.</param>
         public abstract IEnumerable<SyntaxNode> GetMemberNodes(
             SyntaxNode container,
             bool includeSelf,
@@ -305,7 +307,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         /// <summary>
-        /// Do not use this method directly! Instead, go through <see cref="FileCodeModel.GetOrCreateCodeElement{T}(SyntaxNode)"/>
+        /// Do not use this method directly! Instead, go through <see
+        // cref="FileCodeModel.GetOrCreateCodeElement{T}(SyntaxNode)"/>
         /// </summary>
         public abstract EnvDTE.CodeElement CreateInternalCodeElement(
             CodeModelState state,
@@ -640,7 +643,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             // Rename symbol.
             var oldSolution = workspace.CurrentSolution;
 
-            // RenameSymbolAsync may be implemented using OOP, which has known cases for requiring the UI thread to do work. Use JTF
+            // RenameSymbolAsync may be implemented using OOP, which has known cases for requiring the UI thread
+            // to do work. Use JTF
             // to keep the rename action from deadlocking.
             var newSolution = _threadingContext.JoinableTaskFactory.Run(
                 () =>
@@ -1032,7 +1036,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         )
         {
             // Note: Some EnvDTE.vsCMAccess members aren't "bitwise-mutually-exclusive"
-            // Specifically, vsCMAccessProjectOrProtected (12) is a combination of vsCMAccessProject (4) and vsCMAccessProtected (8)
+            // Specifically, vsCMAccessProjectOrProtected (12) is a combination of vsCMAccessProject (4) and
+            // vsCMAccessProtected (8)
             // We therefore check for this first.
 
             if (
@@ -1114,7 +1119,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     position
                 );
 
-                // This could return null if there was a parse error, but given we produced the name in the first place it should be OK
+                // This could return null if there was a parse error, but given we produced the name in the first
+                // place it should be OK
                 Contract.ThrowIfNull(typeSymbol);
                 return typeSymbol;
             }
@@ -1125,7 +1131,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                     semanticModel.Compilation
                 );
 
-                // This could return null if there was a parse error, but given we produced the name in the first place it should be OK
+                // This could return null if there was a parse error, but given we produced the name in the first
+                // place it should be OK
                 Contract.ThrowIfNull(typeSymbol);
                 return typeSymbol;
             }
@@ -1239,8 +1246,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         /// <summary>
-        /// Finds the index of the first child within the container for which <paramref name="predicate"/> returns true.
-        /// Note that the result is a 1-based as that is what code model expects. Returns -1 if no match is found.
+        /// Finds the index of the first child within the container for which <paramref name="predicate"/>
+        // returns true.
+        /// Note that the result is a 1-based as that is what code model expects. Returns -1 if no match is
+        // found.
         /// </summary>
         protected abstract int GetMemberIndexInContainer(
             SyntaxNode containerNode,
@@ -1502,7 +1511,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         /// <summary>
-        /// Override to determine whether <param name="newNode"/> adds a method body to <param name="node"/>.
+        /// Override to determine whether <param name="newNode"/> adds a method body to <param
+        // name="node"/>.
         /// This is used to determine whether a blank line should be added inside the body when formatting.
         /// </summary>
         protected abstract bool AddBlankLineToMethodBody(SyntaxNode node, SyntaxNode newNode);

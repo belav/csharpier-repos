@@ -402,7 +402,8 @@ namespace TestLibrary
 
                 /// <summary>
                 /// A null-terminated string.
-                /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI function.
+                /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or
+                // ANSI function.
                 /// </summary>
                 RRF_RT_REG_SZ = 2,
             }
@@ -419,7 +420,8 @@ namespace TestLibrary
 
                 /// <summary>
                 /// A null-terminated string.
-                /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or ANSI function.
+                /// This will be either a Unicode or an ANSI string, depending on whether you use the Unicode or
+                // ANSI function.
                 /// </summary>
                 RegSz = 1,
             }

@@ -10,7 +10,8 @@ namespace System.Web.UI.WebControls
     using System.ComponentModel;
 
     /// <devdoc>
-    /// <para>Represents an individual row in the <see cref='System.Web.UI.WebControls.DetailsView'/>.</para>
+    /// <para>Represents an individual row in the <see
+    // cref='System.Web.UI.WebControls.DetailsView'/>.</para>
     /// </devdoc>
     public class DetailsViewRow : TableRow
     {
@@ -19,7 +20,8 @@ namespace System.Web.UI.WebControls
         private DataControlRowState _rowState;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewRow'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.DetailsViewRow'/>
+        // class.</para>
         /// </devdoc>
         public DetailsViewRow(
             int rowIndex,
@@ -33,7 +35,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the index of the item in the <see cref='System.Web.UI.WebControls.DetailsView'/>. This property is
+        /// <para>Indicates the index of the item in the <see
+        // cref='System.Web.UI.WebControls.DetailsView'/>. This property is
         ///    read-only.</para>
         /// </devdoc>
         public virtual int RowIndex
@@ -42,7 +45,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the type of the row in the <see cref='System.Web.UI.WebControls.DetailsView'/>.</para>
+        /// <para>Indicates the type of the row in the <see
+        // cref='System.Web.UI.WebControls.DetailsView'/>.</para>
         /// </devdoc>
         public virtual DataControlRowState RowState
         {
@@ -50,7 +54,8 @@ namespace System.Web.UI.WebControls
         }
 
         /// <devdoc>
-        /// <para>Indicates the type of the row in the <see cref='System.Web.UI.WebControls.DetailsView'/>.</para>
+        /// <para>Indicates the type of the row in the <see
+        // cref='System.Web.UI.WebControls.DetailsView'/>.</para>
         /// </devdoc>
         public virtual DataControlRowType RowType
         {

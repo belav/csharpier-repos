@@ -15,52 +15,52 @@ using NUnit.Framework;
 
 namespace MonoTests.Remoting
 {
-    /*
-        //[TestFixture]
-        public class HttpSyncCallTest : SyncCallTest
-        {
-            public override ChannelManager CreateChannelManager ()
-            {
-                return new HttpChannelManager ();
-            }
-        }
-    
-        //[TestFixture]
-        public class HttpAsyncCallTest : AsyncCallTest
-        {
-            public override ChannelManager CreateChannelManager ()
-            {
-                return new HttpChannelManager ();
-            }
-        }
-    
-        //[TestFixture]
-        public class HttpReflectionCallTest : ReflectionCallTest
-        {
-            public override ChannelManager CreateChannelManager ()
-            {
-                return new HttpChannelManager ();
-            }
-        }
-    
-        //[TestFixture]
-        public class HttpDelegateCallTest : DelegateCallTest
-        {
-            public override ChannelManager CreateChannelManager ()
-            {
-                return new HttpChannelManager ();
-            }
-        }
-        
-        //[TestFixture]
-        public class HttpBinarySyncCallTest : SyncCallTest
-        {
-            public override ChannelManager CreateChannelManager ()
-            {
-                return new HttpChannelManager ();
-            }
-        }
-    */
+/*
+//[TestFixture]
+public class HttpSyncCallTest : SyncCallTest
+{
+public override ChannelManager CreateChannelManager ()
+{
+return new HttpChannelManager ();
+}
+}
+
+//[TestFixture]
+public class HttpAsyncCallTest : AsyncCallTest
+{
+public override ChannelManager CreateChannelManager ()
+{
+return new HttpChannelManager ();
+}
+}
+
+//[TestFixture]
+public class HttpReflectionCallTest : ReflectionCallTest
+{
+public override ChannelManager CreateChannelManager ()
+{
+return new HttpChannelManager ();
+}
+}
+
+//[TestFixture]
+public class HttpDelegateCallTest : DelegateCallTest
+{
+public override ChannelManager CreateChannelManager ()
+{
+return new HttpChannelManager ();
+}
+}
+
+//[TestFixture]
+public class HttpBinarySyncCallTest : SyncCallTest
+{
+public override ChannelManager CreateChannelManager ()
+{
+return new HttpChannelManager ();
+}
+}
+*/
     [Serializable]
     public class HttpChannelManager : ChannelManager
     {

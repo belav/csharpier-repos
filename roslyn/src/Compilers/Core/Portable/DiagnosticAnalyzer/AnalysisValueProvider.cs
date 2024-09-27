@@ -15,8 +15,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         private readonly Func<TKey, TValue> _computeValue;
 
-        // This provider holds a weak reference to the key-value pairs, as AnalysisValueProvider might outlive individual compilations.
-        // CompilationAnalysisValueProvider, which wraps this provider and lives for the lifetime of specific compilation, holds a strong reference to the key-value pairs, providing an overall performance benefit.
+        // This provider holds a weak reference to the key-value pairs, as AnalysisValueProvider might
+        // outlive individual compilations.
+        // CompilationAnalysisValueProvider, which wraps this provider and lives for the lifetime of
+        // specific compilation, holds a strong reference to the key-value pairs, providing an overall
+        // performance benefit.
         private readonly ConditionalWeakTable<TKey, WrappedValue> _valueCache;
         private readonly ConditionalWeakTable<
             TKey,

@@ -73,7 +73,8 @@ namespace Microsoft.Interop.Analyzers
         )
         {
             var optionsBuilder = ImmutableDictionary.CreateBuilder<string, Option>();
-            // Only add the bool options if they are true. This simplifies our equivalence key and makes testing easier.
+            // Only add the bool options if they are true. This simplifies our equivalence key and makes testing
+            // easier.
             if (
                 diagnostic.Properties.TryGetValue(
                     AnalyzerDiagnostics.Metadata.MayRequireAdditionalWork,
@@ -181,7 +182,8 @@ namespace Microsoft.Interop.Analyzers
                 if (declarationModifiers.IsNew)
                 {
                     // If this is a shadowing method, then we remove it.
-                    // TODO: Do we want to be smarter here and try to match the number of methods to a base interface, etc.?
+                    // TODO: Do we want to be smarter here and try to match the number of methods to a base interface,
+                    // etc.?
                     editor.RemoveNode(member);
                     continue;
                 }

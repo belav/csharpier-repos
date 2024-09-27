@@ -582,7 +582,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         }
 
         /// <summary>
-        /// Make a variable for a declaration expression other than a deconstruction left-hand-side. The only
+        /// Make a variable for a declaration expression other than a deconstruction left-hand-side. The
+        // only
         /// other legal place for a declaration expression today is an out variable declaration; this method
         /// handles that and the error cases as well.
         /// </summary>
@@ -594,7 +595,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         );
 
         /// <summary>
-        /// Make a variable for a declaration expression appearing as one of the declared variables of the left-hand-side
+        /// Make a variable for a declaration expression appearing as one of the declared variables of the
+        // left-hand-side
         /// of a deconstruction assignment.
         /// </summary>
         protected abstract TFieldOrLocalSymbol MakeDeconstructionVariable(

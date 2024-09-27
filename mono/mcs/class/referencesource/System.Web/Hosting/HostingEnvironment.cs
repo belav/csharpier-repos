@@ -896,7 +896,8 @@ namespace System.Web.Hosting
             //
             HttpRuntime.SetUserForcedShutdown();
 
-            //WOS 1400290: CantUnloadAppDomainException in ISAPI mode, wait until HostingEnvironment.ShutdownThisAppDomainOnce completes
+            //WOS 1400290: CantUnloadAppDomainException in ISAPI mode, wait until
+            // HostingEnvironment.ShutdownThisAppDomainOnce completes
             _shutdownInProgress = false;
 
             HttpRuntime.ShutdownAppDomainWithStackTrace(
@@ -1242,18 +1243,18 @@ namespace System.Web.Hosting
         }
 
         /*
-         * Map a virtual path to a physical path.  i.e. the physicalPath will be returned
-         * when MapPath is called on the virtual path, bypassing the IApplicationHost
-         */
+        * Map a virtual path to a physical path.  i.e. the physicalPath will be returned
+        * when MapPath is called on the virtual path, bypassing the IApplicationHost
+        */
         private static string GetVirtualPathToFileMapping(VirtualPath virtualPath)
         {
             return CallContext.GetData(GetFixedMappingSlotName(virtualPath)) as string;
         }
 
         /*
-         * Map a virtual path to a physical path.  i.e. the physicalPath will be returned
-         * when MapPath is called on the virtual path, bypassing the IApplicationHost
-         */
+        * Map a virtual path to a physical path.  i.e. the physicalPath will be returned
+        * when MapPath is called on the virtual path, bypassing the IApplicationHost
+        */
         internal static object AddVirtualPathToFileMapping(
             VirtualPath virtualPath,
             string physicalPath
@@ -1474,7 +1475,8 @@ namespace System.Web.Hosting
 
             BackgroundWorkScheduler scheduler = Volatile.Read(ref _backgroundWorkScheduler);
 
-            // If the scheduler doesn't exist, lazily create it, but only allow one instance to ever be published to the backing field
+            // If the scheduler doesn't exist, lazily create it, but only allow one instance to ever be
+            // published to the backing field
             if (scheduler == null)
             {
                 BackgroundWorkScheduler newlyCreatedScheduler = new BackgroundWorkScheduler(
@@ -1551,7 +1553,8 @@ namespace System.Web.Hosting
 
         public static IApplicationHost ApplicationHost
         {
-            //DevDivBugs 109864: ASP.NET: path discovery issue - In low trust, it is possible to get the physical path of any virtual path on the machine
+            //DevDivBugs 109864: ASP.NET: path discovery issue - In low trust, it is possible to get the
+            // physical path of any virtual path on the machine
             [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
             get
             {
@@ -1754,8 +1757,10 @@ namespace System.Web.Hosting
             }
         }
 
-        // See comments in ApplicationManager.CreateAppDomainWithHostingEnvironment. This is the public API to access the
-        // information we determined in that method. Defaults to 'false' if our AppDomain data isn't present.
+        // See comments in ApplicationManager.CreateAppDomainWithHostingEnvironment. This is the public API
+        // to access the
+        // information we determined in that method. Defaults to 'false' if our AppDomain data isn't
+        // present.
         public static bool IsDevelopmentEnvironment
         {
             get { return (AppDomain.CurrentDomain.GetData(".devEnvironment") as bool?) == true; }
@@ -2390,13 +2395,15 @@ namespace System.Web.Hosting
                 switch (hr)
                 {
                     case HResults.S_FALSE:
-                        // Because "maxConcurrentRequestsPerCPU" is currently zero, we cannot set the value, since that would
+                        // Because "maxConcurrentRequestsPerCPU" is currently zero, we cannot set the value, since that
+                        // would
                         // enable the feature, which can only be done via configuration.
                         throw new InvalidOperationException(
                             SR.GetString(SR.Queue_limit_is_zero, "maxConcurrentRequestsPerCPU")
                         );
                     case HResults.E_INVALIDARG:
-                        // The value must be greater than zero.  A value of zero would disable the feature, but this can only be done via configuration.
+                        // The value must be greater than zero.  A value of zero would disable the feature, but this can
+                        // only be done via configuration.
                         throw new ArgumentException(SR.GetString(SR.Invalid_queue_limit));
                 }
             }
@@ -2438,7 +2445,8 @@ namespace System.Web.Hosting
                             SR.GetString(SR.Queue_limit_is_zero, "maxConcurrentThreadsPerCPU")
                         );
                     case HResults.E_INVALIDARG:
-                        // The value must be greater than zero.  A value of zero would disable the feature, but this can only be done via configuration.
+                        // The value must be greater than zero.  A value of zero would disable the feature, but this can
+                        // only be done via configuration.
                         throw new ArgumentException(SR.GetString(SR.Invalid_queue_limit));
                 }
             }

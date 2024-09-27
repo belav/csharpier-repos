@@ -32,7 +32,8 @@ namespace Mono.CSharp
         readonly CompilerSettings settings;
 
         /// <summary>
-        /// List of symbols related to reported error/warning. You have to fill it before error/warning is reported.
+        /// List of symbols related to reported error/warning. You have to fill it before error/warning is
+        // reported.
         /// </summary>
         List<string> extra_information = new List<string>();
 
@@ -551,27 +552,27 @@ namespace Mono.CSharp
             Console.WriteLine(sb.ToString());
         }
 
-        /*
-                static public string PrintCollection (ICollection collection)
-                {
-                    StringBuilder sb = new StringBuilder ();
-        
-                    sb.Append (collection.GetType ());
-                    sb.Append ("(");
-        
-                    bool first = true;
-                    foreach (object o in collection) {
-                        if (first)
-                            first = false;
-                        else
-                            sb.Append (", ");
-                        sb.Append (o);
-                    }
-        
-                    sb.Append (")");
-                    return sb.ToString ();
-                }
-        */
+/*
+static public string PrintCollection (ICollection collection)
+{
+StringBuilder sb = new StringBuilder ();
+
+sb.Append (collection.GetType ());
+sb.Append ("(");
+
+bool first = true;
+foreach (object o in collection) {
+if (first)
+first = false;
+else
+sb.Append (", ");
+sb.Append (o);
+}
+
+sb.Append (")");
+return sb.ToString ();
+}
+*/
         static string FriendlyStackTrace(StackTrace t)
         {
             StringBuilder sb = new StringBuilder();

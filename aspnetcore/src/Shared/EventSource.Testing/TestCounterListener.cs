@@ -16,7 +16,8 @@ internal sealed class TestCounterListener : EventListener
     /// <summary>
     /// Creates a new TestCounterListener.
     /// </summary>
-    /// <param name="counterNames">The names of ALL counters for the event source. You must name each counter, even if you do not intend to use it.</param>
+    /// <param name="counterNames">The names of ALL counters for the event source. You must name each
+    // counter, even if you do not intend to use it.</param>
     public TestCounterListener(string[] counterNames)
     {
         foreach (var item in counterNames)

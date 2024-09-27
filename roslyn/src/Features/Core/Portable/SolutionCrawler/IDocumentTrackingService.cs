@@ -13,13 +13,15 @@ namespace Microsoft.CodeAnalysis
         bool SupportsDocumentTracking { get; }
 
         /// <summary>
-        /// Get the <see cref="DocumentId"/> of the active document. May be null if there is no active document
+        /// Get the <see cref="DocumentId"/> of the active document. May be null if there is no active
+        // document
         /// or the active document is not in the workspace.
         /// </summary>
         DocumentId? TryGetActiveDocument();
 
         /// <summary>
-        /// Get a read only collection of the <see cref="DocumentId"/>s of all the visible documents in the workspace.
+        /// Get a read only collection of the <see cref="DocumentId"/>s of all the visible documents in the
+        // workspace.
         /// </summary>
         ImmutableArray<DocumentId> GetVisibleDocuments();
 

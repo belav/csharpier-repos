@@ -18,7 +18,8 @@ namespace System.Web.Services.Protocols
     using System.Web.UI;
     using Microsoft.Win32;
 
-    /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="WebServiceHandlerFactory"]/*' />
+    /// <include file='doc\WebServiceHandlerFactory.uex'
+    // path='docs/doc[@for="WebServiceHandlerFactory"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -27,11 +28,12 @@ namespace System.Web.Services.Protocols
     {
         /*
         static WebServiceHandlerFactory() {
-            Stream stream = new FileStream("c:\\out.txt", FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite); //(FileMode.OpenOrCreate);
-            TraceListener listener = new TextWriterTraceListener(stream);
-            Debug.AutoFlush = true;
-            Debug.Listeners.Add(listener);
-            Debug.WriteLine("--------------");
+        Stream stream = new FileStream("c:\\out.txt", FileMode.OpenOrCreate, FileAccess.Write,
+        FileShare.ReadWrite); //(FileMode.OpenOrCreate);
+        TraceListener listener = new TextWriterTraceListener(stream);
+        Debug.AutoFlush = true;
+        Debug.Listeners.Add(listener);
+        Debug.WriteLine("--------------");
         }
         */
 
@@ -57,7 +59,8 @@ namespace System.Web.Services.Protocols
         }
 #endif
 
-        /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="WebServiceHandlerFactory.GetHandler"]/*' />
+        /// <include file='doc\WebServiceHandlerFactory.uex'
+        // path='docs/doc[@for="WebServiceHandlerFactory.GetHandler"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -210,14 +213,16 @@ namespace System.Web.Services.Protocols
         }
 
         // Asserts FullTrust permission.
-        // Justification: FullTrust is used only to create the objects of type SoapServerProtocolFactory and for nothing else.
+        // Justification: FullTrust is used only to create the objects of type SoapServerProtocolFactory and
+        // for nothing else.
         [PermissionSet(SecurityAction.Assert, Name = "FullTrust")]
         private ServerProtocolFactory[] GetServerProtocolFactories()
         {
             return WebServicesSection.Current.ServerProtocolFactories;
         }
 
-        /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="WebServiceHandlerFactory.ReleaseHandler"]/*' />
+        /// <include file='doc\WebServiceHandlerFactory.uex'
+        // path='docs/doc[@for="WebServiceHandlerFactory.ReleaseHandler"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -273,7 +278,8 @@ namespace System.Web.Services.Protocols
 
     internal class NopHandler : IHttpHandler
     {
-        /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="NopHandler.IsReusable"]/*' />
+        /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="NopHandler.IsReusable"]/*'
+        // />
         /// <devdoc>
         ///      IHttpHandler.IsReusable.
         /// </devdoc>
@@ -282,7 +288,8 @@ namespace System.Web.Services.Protocols
             get { return false; }
         }
 
-        /// <include file='doc\WebServiceHandlerFactory.uex' path='docs/doc[@for="NopHandler.ProcessRequest"]/*' />
+        /// <include file='doc\WebServiceHandlerFactory.uex'
+        // path='docs/doc[@for="NopHandler.ProcessRequest"]/*' />
         /// <devdoc>
         ///      IHttpHandler.ProcessRequest.
         /// </devdoc>

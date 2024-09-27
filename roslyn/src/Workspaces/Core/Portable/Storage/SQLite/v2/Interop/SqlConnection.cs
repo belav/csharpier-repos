@@ -21,19 +21,24 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
     /// Encapsulates a connection to a sqlite database.  On construction an attempt will be made
     /// to open the DB if it exists, or create it if it does not.
     ///
-    /// Connections are considered relatively heavyweight and are pooled until the <see cref="SQLitePersistentStorage"/>
-    /// is <see cref="SQLitePersistentStorage.Dispose"/>d.  Connections can be used by different threads,
+    /// Connections are considered relatively heavyweight and are pooled until the <see
+    // cref="SQLitePersistentStorage"/>
+    /// is <see cref="SQLitePersistentStorage.Dispose"/>d.  Connections can be used by different
+    // threads,
     /// but only as long as they are used by one thread at a time.  They are not safe for concurrent
     /// use by several threads.
     ///
-    /// <see cref="SqlStatement"/>s can be created through the user of <see cref="GetResettableStatement"/>.
+    /// <see cref="SqlStatement"/>s can be created through the user of <see
+    // cref="GetResettableStatement"/>.
     /// These statements are cached for the lifetime of the connection and are only finalized
     /// (i.e. destroyed) when the connection is closed.
     /// </summary>
     internal class SqlConnection
     {
-        // Cached UTF-8 (and null terminated) versions of the common strings we need to pass to sqlite.  Used to prevent
-        // having to convert these names to/from utf16 to UTF-8 on every call.  Sqlite requires these be null terminated.
+        // Cached UTF-8 (and null terminated) versions of the common strings we need to pass to sqlite.
+        // Used to prevent
+        // having to convert these names to/from utf16 to UTF-8 on every call.  Sqlite requires these be
+        // null terminated.
 
         private static readonly byte[] s_mainNameWithTrailingZero = GetUtf8BytesWithTrailingZero(
             Database.Main.GetName()
@@ -135,26 +140,36 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 
                 // Attach (creating if necessary) a singleton in-memory write cache to this connection.
                 //
-                // From: https://www.sqlite.org/sharedcache.html Enabling shared-cache for an in-memory database allows
-                // two or more database connections in the same process to have access to the same in-memory database.
-                // An in-memory database in shared cache is automatically deleted and memory is reclaimed when the last
+                // From: https://www.sqlite.org/sharedcache.html Enabling shared-cache for an in-memory database
+                // allows
+                // two or more database connections in the same process to have access to the same in-memory
+                // database.
+                // An in-memory database in shared cache is automatically deleted and memory is reclaimed when the
+                // last
                 // connection to that database closes.
 
-                // Using `?mode=memory&cache=shared as writecache` at the end ensures all connections (to the on-disk
-                // db) see the same db (https://sqlite.org/inmemorydb.html) and the same data when reading and writing.
+                // Using `?mode=memory&cache=shared as writecache` at the end ensures all connections (to the
+                // on-disk
+                // db) see the same db (https://sqlite.org/inmemorydb.html) and the same data when reading and
+                // writing.
                 // i.e. if one connection writes data to this, another connection will see that data when reading.
                 // Without this, each connection would get their own private memory db independent of all other
                 // connections.
 
-                // Workaround https://github.com/ericsink/SQLitePCL.raw/issues/407.  On non-windows do not pass in the
-                // uri of the DB on disk we're associating this in-memory cache with.  This throws on at least OSX for
-                // reasons that aren't fully understood yet.  If more details/fixes emerge in that linked issue, we can
+                // Workaround https://github.com/ericsink/SQLitePCL.raw/issues/407.  On non-windows do not pass in
+                // the
+                // uri of the DB on disk we're associating this in-memory cache with.  This throws on at least OSX
+                // for
+                // reasons that aren't fully understood yet.  If more details/fixes emerge in that linked issue, we
+                // can
                 // ideally remove this and perform the attachment uniformly on all platforms.
 
                 // From: https://www.sqlite.org/lang_expr.html
                 //
-                // A string constant is formed by enclosing the string in single quotes ('). A single quote within the
-                // string can be encoded by putting two single quotes in a row - as in Pascal. C-style escapes using the
+                // A string constant is formed by enclosing the string in single quotes ('). A single quote within
+                // the
+                // string can be encoded by putting two single quotes in a row - as in Pascal. C-style escapes using
+                // the
                 // backslash character are not supported because they are not standard SQL.
                 var attachString = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
                     ? $"attach database '{new Uri(databasePath.Replace("'", "''")).AbsoluteUri}?mode=memory&cache=shared' as {Database.WriteCache.GetName()};"
@@ -253,8 +268,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             return exception;
         }
 
-        /// <param name="throwOnSqlException">If a <see cref="SqlException"/> that happens during excution of <paramref
-        /// name="action"/> should bubble out of this method or not.  If <see langword="false"/>, then the exception
+        /// <param name="throwOnSqlException">If a <see cref="SqlException"/> that happens during excution
+        // of <paramref
+        /// name="action"/> should bubble out of this method or not.  If <see langword="false"/>, then the
+        // exception
         /// will be returned in the result value instead</param>
         public (TResult? result, SqlException? exception) RunInTransaction<TState, TResult>(
             Func<TState, TResult> action,
@@ -287,7 +304,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
 
                 // See documentation here: https://sqlite.org/lang_transaction.html
                 //
-                // If certain kinds of errors occur within a transaction, the transaction may or may not be rolled back
+                // If certain kinds of errors occur within a transaction, the transaction may or may not be rolled
+                // back
                 // automatically.
                 //
                 // ...
@@ -298,7 +316,8 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
                 //
                 // End of sqlite documentation.
 
-                // Because of the above, we know we may be in an incomplete state, so we always do a rollback to get us
+                // Because of the above, we know we may be in an incomplete state, so we always do a rollback to get
+                // us
                 // back to a clean state.  We ignore errors here as it's know that this can fail, but will cause no
                 // harm.
                 Rollback(throwOnError: false);
@@ -310,8 +329,10 @@ namespace Microsoft.CodeAnalysis.SQLite.v2.Interop
             }
             catch (Exception)
             {
-                // Some other exception occurred outside of sqlite entirely (like a null-ref exception in our own code).
-                // Rollback (throwing if that rollback failed for some reason), then continue the exception higher up
+                // Some other exception occurred outside of sqlite entirely (like a null-ref exception in our own
+                // code).
+                // Rollback (throwing if that rollback failed for some reason), then continue the exception higher
+                // up
                 // to tear down the callers as well.
 
                 Rollback(throwOnError: true);

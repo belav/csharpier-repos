@@ -25,24 +25,38 @@ using SHUTDOWN_INITIATED_BY_TRANSPORT_DATA = Microsoft.Quic.QUIC_CONNECTION_EVEN
 namespace System.Net.Quic;
 
 /// <summary>
-/// Represents a QUIC connection, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#name-connections">RFC 9000: Connections</see> for more details.
-/// <see cref="QuicConnection" /> itself doesn't send or receive data but rather allows opening and/or accepting multiple <see cref="QuicStream" />.
+/// Represents a QUIC connection, see <see
+// href="https://www.rfc-editor.org/rfc/rfc9000.html#name-connections">RFC 9000: Connections</see>
+// for
+// more details.
+/// <see cref="QuicConnection" /> itself doesn't send or receive data but rather allows opening
+// and/or accepting multiple <see cref="QuicStream" />.
 /// </summary>
 /// <remarks>
-/// <see cref="QuicConnection" /> can either be accepted from <see cref="QuicListener.AcceptConnectionAsync(CancellationToken)" /> (inbound connection),
-/// or create with a static method <see cref="QuicConnection.ConnectAsync(System.Net.Quic.QuicClientConnectionOptions, CancellationToken)" /> (outbound connection).
+/// <see cref="QuicConnection" /> can either be accepted from <see
+// cref="QuicListener.AcceptConnectionAsync(CancellationToken)" /> (inbound connection),
+/// or create with a static method <see
+// cref="QuicConnection.ConnectAsync(System.Net.Quic.QuicClientConnectionOptions,
+// CancellationToken)"
+// /> (outbound connection).
 ///
-/// Each connection can then open outbound stream: <see cref="QuicConnection.OpenOutboundStreamAsync(QuicStreamType, CancellationToken)" />,
-/// or accept an inbound stream: <see cref="QuicConnection.AcceptInboundStreamAsync(CancellationToken)" />.
+/// Each connection can then open outbound stream: <see
+// cref="QuicConnection.OpenOutboundStreamAsync(QuicStreamType, CancellationToken)" />,
+/// or accept an inbound stream: <see
+// cref="QuicConnection.AcceptInboundStreamAsync(CancellationToken)" />.
 /// </remarks>
 public sealed partial class QuicConnection : IAsyncDisposable
 {
     /// <summary>
-    /// Returns <c>true</c> if QUIC is supported on the current machine and can be used; otherwise, <c>false</c>.
+    /// Returns <c>true</c> if QUIC is supported on the current machine and can be used; otherwise,
+    // <c>false</c>.
     /// </summary>
     /// <remarks>
-    /// The current implementation depends on <see href="https://github.com/microsoft/msquic">MsQuic</see> native library, this property checks its presence (Linux machines).
-    /// It also checks whether TLS 1.3, requirement for QUIC protocol, is available and enabled (Windows machines).
+    /// The current implementation depends on <see
+    // href="https://github.com/microsoft/msquic">MsQuic</see> native library, this property checks its
+    // presence (Linux machines).
+    /// It also checks whether TLS 1.3, requirement for QUIC protocol, is available and enabled (Windows
+    // machines).
     /// </remarks>
     public static bool IsSupported => MsQuicApi.IsQuicSupported;
 
@@ -50,7 +64,8 @@ public sealed partial class QuicConnection : IAsyncDisposable
     /// Creates a new <see cref="QuicConnection"/> and connects it to the peer.
     /// </summary>
     /// <param name="options">Options for the connection.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous
+    // operation.</param>
     /// <returns>An asynchronous task that completes with the connected connection.</returns>
     public static ValueTask<QuicConnection> ConnectAsync(
         QuicClientConnectionOptions options,
@@ -138,50 +153,61 @@ public sealed partial class QuicConnection : IAsyncDisposable
 
     /// <summary>
     /// Holds options to validate peer certificate.
-    /// Set up either in <see cref="FinishHandshakeAsync"/> for an inbound connection or in <see cref="FinishConnectAsync"/> for an outbound.
+    /// Set up either in <see cref="FinishHandshakeAsync"/> for an inbound connection or in <see
+    // cref="FinishConnectAsync"/> for an outbound.
     /// </summary>
     private SslConnectionOptions _sslConnectionOptions;
 
     /// <summary>
     /// Holds MsQuic connection configuration.
-    /// Set up either in <see cref="FinishHandshakeAsync"/> for an inbound connection or in <see cref="FinishConnectAsync"/> for an outbound.
+    /// Set up either in <see cref="FinishHandshakeAsync"/> for an inbound connection or in <see
+    // cref="FinishConnectAsync"/> for an outbound.
     /// </summary>
     private MsQuicSafeHandle? _configuration;
 
     /// <summary>
-    /// Used by <see cref="AcceptInboundStreamAsync(CancellationToken)" /> to throw in case no stream can be opened from the peer.
-    /// <c>true</c> when at least one of <see cref="QuicConnectionOptions.MaxInboundBidirectionalStreams" /> or <see cref="QuicConnectionOptions.MaxInboundUnidirectionalStreams" /> is greater than <c>0</c>.
+    /// Used by <see cref="AcceptInboundStreamAsync(CancellationToken)" /> to throw in case no stream
+    // can be opened from the peer.
+    /// <c>true</c> when at least one of <see
+    // cref="QuicConnectionOptions.MaxInboundBidirectionalStreams" /> or <see
+    // cref="QuicConnectionOptions.MaxInboundUnidirectionalStreams" /> is greater than <c>0</c>.
     /// </summary>
     private bool _canAccept;
 
     /// <summary>
-    /// From <see cref="QuicConnectionOptions.DefaultStreamErrorCode"/>, passed to newly created <see cref="QuicStream"/>.
+    /// From <see cref="QuicConnectionOptions.DefaultStreamErrorCode"/>, passed to newly created <see
+    // cref="QuicStream"/>.
     /// </summary>
     private long _defaultStreamErrorCode;
 
     /// <summary>
-    /// From <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/>, used to close connection in <see cref="DisposeAsync"/>.
+    /// From <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/>, used to close connection in <see
+    // cref="DisposeAsync"/>.
     /// </summary>
     private long _defaultCloseErrorCode;
 
     /// <summary>
-    /// Set when CONNECTED is received or inside the constructor for an inbound connection from NEW_CONNECTION data.
+    /// Set when CONNECTED is received or inside the constructor for an inbound connection from
+    // NEW_CONNECTION data.
     /// </summary>
     private IPEndPoint _remoteEndPoint = null!;
 
     /// <summary>
-    /// Set when CONNECTED is received or inside the constructor for an inbound connection from NEW_CONNECTION data.
+    /// Set when CONNECTED is received or inside the constructor for an inbound connection from
+    // NEW_CONNECTION data.
     /// </summary>
     private IPEndPoint _localEndPoint = null!;
 
     /// <summary>
-    /// Keeps track whether <see cref="RemoteCertificate"/> has been accessed so that we know whether to dispose the certificate or not.
+    /// Keeps track whether <see cref="RemoteCertificate"/> has been accessed so that we know whether to
+    // dispose the certificate or not.
     /// </summary>
     private bool _remoteCertificateExposed;
 
     /// <summary>
     /// Set when PEER_CERTIFICATE_RECEIVED is received (before CONNECTED).
-    /// For an outbound/client connection will always have the peer's (server) certificate; for an inbound/server one, only if the connection requested and the peer (client) provided one.
+    /// For an outbound/client connection will always have the peer's (server) certificate; for an
+    // inbound/server one, only if the connection requested and the peer (client) provided one.
     /// </summary>
     private X509Certificate2? _remoteCertificate;
 
@@ -193,7 +219,8 @@ public sealed partial class QuicConnection : IAsyncDisposable
 #if DEBUG
     /// <summary>
     /// Will contain TLS secret after CONNECTED event is received and store it into SSLKEYLOGFILE.
-    /// MsQuic holds the underlying pointer so this object can be disposed only after connection native handle gets closed.
+    /// MsQuic holds the underlying pointer so this object can be disposed only after connection native
+    // handle gets closed.
     /// </summary>
     private readonly MsQuicTlsSecret? _tlsSecret;
 #endif
@@ -209,14 +236,16 @@ public sealed partial class QuicConnection : IAsyncDisposable
     public IPEndPoint LocalEndPoint => _localEndPoint;
 
     /// <summary>
-    /// Gets the name of the server the client is trying to connect to. That name is used for server certificate validation. It can be a DNS name or an IP address.
+    /// Gets the name of the server the client is trying to connect to. That name is used for server
+    // certificate validation. It can be a DNS name or an IP address.
     /// </summary>
     /// <returns>The name of the server the client is trying to connect to.</returns>
     public string TargetHostName => _sslConnectionOptions.TargetHost ?? string.Empty;
 
     /// <summary>
     /// The certificate provided by the peer.
-    /// For an outbound/client connection will always have the peer's (server) certificate; for an inbound/server one, only if the connection requested and the peer (client) provided one.
+    /// For an outbound/client connection will always have the peer's (server) certificate; for an
+    // inbound/server one, only if the connection requested and the peer (client) provided one.
     /// </summary>
     public X509Certificate? RemoteCertificate
     {
@@ -335,9 +364,11 @@ public sealed partial class QuicConnection : IAsyncDisposable
             {
                 Debug.Assert(host is not null);
 
-                // Given just a ServerName to connect to, msquic would also use the first address after the resolution
+                // Given just a ServerName to connect to, msquic would also use the first address after the
+                // resolution
                 // (https://github.com/microsoft/msquic/issues/1181) and it would not return a well-known error code
-                // for resolution failures we could rely on. By doing the resolution in managed code, we can guarantee
+                // for resolution failures we could rely on. By doing the resolution in managed code, we can
+                // guarantee
                 // that a SocketException will surface to the user if the name resolution fails.
                 IPAddress[] addresses = await Dns.GetHostAddressesAsync(host, cancellationToken)
                     .ConfigureAwait(false);
@@ -462,12 +493,16 @@ public sealed partial class QuicConnection : IAsyncDisposable
 
     /// <summary>
     /// Create an outbound uni/bidirectional <see cref="QuicStream" />.
-    /// In case the connection doesn't have any available stream capacity, i.e.: the peer limits the concurrent stream count,
-    /// the operation will pend until the stream can be opened (other stream gets closed or peer increases the stream limit).
+    /// In case the connection doesn't have any available stream capacity, i.e.: the peer limits the
+    // concurrent stream count,
+    /// the operation will pend until the stream can be opened (other stream gets closed or peer
+    // increases the stream limit).
     /// </summary>
     /// <param name="type">The type of the stream, i.e. unidirectional or bidirectional.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
-    /// <returns>An asynchronous task that completes with the opened <see cref="QuicStream" />.</returns>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous
+    // operation.</param>
+    /// <returns>An asynchronous task that completes with the opened <see cref="QuicStream"
+    // />.</returns>
     public async ValueTask<QuicStream> OpenOutboundStreamAsync(
         QuicStreamType type,
         CancellationToken cancellationToken = default
@@ -503,8 +538,10 @@ public sealed partial class QuicConnection : IAsyncDisposable
     /// <summary>
     /// Accepts an inbound <see cref="QuicStream" />.
     /// </summary>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
-    /// <returns>An asynchronous task that completes with the accepted <see cref="QuicStream" />.</returns>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous
+    // operation.</param>
+    /// <returns>An asynchronous task that completes with the accepted <see cref="QuicStream"
+    // />.</returns>
     public async ValueTask<QuicStream> AcceptInboundStreamAsync(
         CancellationToken cancellationToken = default
     )
@@ -533,18 +570,27 @@ public sealed partial class QuicConnection : IAsyncDisposable
     }
 
     /// <summary>
-    /// Closes the connection with the application provided code, see <see href="https://www.rfc-editor.org/rfc/rfc9000.html#immediate-close">RFC 9000: Connection Termination</see> for more details.
+    /// Closes the connection with the application provided code, see <see
+    // href="https://www.rfc-editor.org/rfc/rfc9000.html#immediate-close">RFC 9000: Connection
+    // Termination</see> for more details.
     /// </summary>
     /// <remarks>
-    /// Connection close is not graceful in regards to its streams, i.e.: calling <see cref="CloseAsync(long, CancellationToken)"/> will immediately close all streams associated with this connection.
-    /// Make sure, that all streams have been closed and all their data consumed before calling this method;
+    /// Connection close is not graceful in regards to its streams, i.e.: calling <see
+    // cref="CloseAsync(long, CancellationToken)"/> will immediately close all streams associated with
+    // this
+    // connection.
+    /// Make sure, that all streams have been closed and all their data consumed before calling this
+    // method;
     /// otherwise, all the data that were received but not consumed yet, will be lost.
     ///
-    /// If <see cref="CloseAsync(long, CancellationToken)"/> is not called before <see cref="DisposeAsync">disposing</see> the connection,
-    /// the <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/> will be used by <see cref="DisposeAsync"/> to close the connection.
+    /// If <see cref="CloseAsync(long, CancellationToken)"/> is not called before <see
+    // cref="DisposeAsync">disposing</see> the connection,
+    /// the <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/> will be used by <see
+    // cref="DisposeAsync"/> to close the connection.
     /// </remarks>
     /// <param name="errorCode">Application provided code with the reason for closure.</param>
-    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous operation.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the asynchronous
+    // operation.</param>
     /// <returns>An asynchronous task that completes when the connection is closed.</returns>
     public ValueTask CloseAsync(long errorCode, CancellationToken cancellationToken = default)
     {
@@ -763,7 +809,8 @@ public sealed partial class QuicConnection : IAsyncDisposable
     }
 
     /// <summary>
-    /// If not closed explicitly by <see cref="CloseAsync(long, CancellationToken)" />, closes the connection with the <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/>.
+    /// If not closed explicitly by <see cref="CloseAsync(long, CancellationToken)" />, closes the
+    // connection with the <see cref="QuicConnectionOptions.DefaultCloseErrorCode"/>.
     /// And releases all resources associated with the connection.
     /// </summary>
     /// <returns>A task that represents the asynchronous dispose operation.</returns>
@@ -795,7 +842,8 @@ public sealed partial class QuicConnection : IAsyncDisposable
 
         _configuration?.Dispose();
 
-        // Dispose remote certificate only if it hasn't been accessed via getter, in which case the accessing code becomes the owner of the certificate lifetime.
+        // Dispose remote certificate only if it hasn't been accessed via getter, in which case the
+        // accessing code becomes the owner of the certificate lifetime.
         if (!_remoteCertificateExposed)
         {
             _remoteCertificate?.Dispose();

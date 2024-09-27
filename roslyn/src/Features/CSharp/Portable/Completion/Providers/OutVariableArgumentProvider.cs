@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 return Task.CompletedTask;
             }
 
-            // Since tihs provider runs after ContextVariableArgumentProvider, we know there is no suitable target in
+            // Since tihs provider runs after ContextVariableArgumentProvider, we know there is no suitable
+            // target in
             // the current context. Instead, offer to declare a new variable.
             var name = context.Parameter.Name;
             if (

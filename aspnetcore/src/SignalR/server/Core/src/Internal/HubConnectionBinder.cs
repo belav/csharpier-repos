@@ -32,7 +32,8 @@ internal sealed class HubConnectionBinder<THub> : IInvocationBinder
         {
             return type;
         }
-        // If the id isn't found then it's possible the server canceled the request for a result but the client still sent the result.
+        // If the id isn't found then it's possible the server canceled the request for a result but the
+        // client still sent the result.
         throw new InvalidOperationException($"Unknown invocation ID '{invocationId}'.");
     }
 

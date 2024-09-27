@@ -15,7 +15,8 @@ public sealed class RouteData
     /// <summary>
     /// Constructs an instance of <see cref="RouteData"/>.
     /// </summary>
-    /// <param name="pageType">The type of the page matching the route, which must implement <see cref="IComponent"/>.</param>
+    /// <param name="pageType">The type of the page matching the route, which must implement <see
+    // cref="IComponent"/>.</param>
     /// <param name="routeValues">The route parameter values extracted from the matched route.</param>
     public RouteData(
         [DynamicallyAccessedMembers(Component)] Type pageType,

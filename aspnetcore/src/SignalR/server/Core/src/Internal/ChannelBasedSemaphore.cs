@@ -6,7 +6,8 @@ using System.Threading.Channels;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-// Use a Channel instead of a SemaphoreSlim so that we can potentially save task allocations (ValueTask!)
+// Use a Channel instead of a SemaphoreSlim so that we can potentially save task allocations
+// (ValueTask!)
 // Additionally initial perf results show faster RPS when using Channel instead of SemaphoreSlim
 internal sealed class ChannelBasedSemaphore
 {
@@ -26,7 +27,8 @@ internal sealed class ChannelBasedSemaphore
         return _channel.Reader.TryRead(out _);
     }
 
-    // The int result isn't important, only reason it's exposed is because ValueTask<T> doesn't implement ValueTask so we can't cast like we could with Task<T> to Task
+    // The int result isn't important, only reason it's exposed is because ValueTask<T> doesn't
+    // implement ValueTask so we can't cast like we could with Task<T> to Task
     public ValueTask<int> WaitAsync(CancellationToken cancellationToken = default)
     {
         return _channel.Reader.ReadAsync(cancellationToken);
@@ -70,7 +72,8 @@ internal sealed class ChannelBasedSemaphore
         catch
         {
             // DefaultHubDispatcher catches and handles exceptions
-            // It does write to the connection in exception cases which also can't throw because we catch and log in HubConnectionContext
+            // It does write to the connection in exception cases which also can't throw because we catch and
+            // log in HubConnectionContext
             Debug.Assert(false);
         }
     }

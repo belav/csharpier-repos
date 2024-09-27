@@ -4,9 +4,12 @@
 using System;
 using Xunit;
 
-// This test is used to try out very large decrementing loop strides.  The strides cannot be negated if the integer
-// is too large.  For example, a stride of 0xA0000000 cannot be turned into a signed number.  For the most
-// part, other things prevent us from getting to OSR with a condition like this but it's good to have
+// This test is used to try out very large decrementing loop strides.  The strides cannot be negated
+// if the integer
+// is too large.  For example, a stride of 0xA0000000 cannot be turned into a signed number.  For
+// the most
+// part, other things prevent us from getting to OSR with a condition like this but it's good to
+// have
 // coverage for large strides.
 
 public class StrideTest

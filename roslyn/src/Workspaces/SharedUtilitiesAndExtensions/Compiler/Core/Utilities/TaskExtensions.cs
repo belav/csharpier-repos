@@ -64,7 +64,8 @@ namespace Roslyn.Utilities
             return task.Result;
         }
 
-        // NOTE(cyrusn): Once we switch over to .NET Framework 4.5 we can make our SafeContinueWith overloads
+        // NOTE(cyrusn): Once we switch over to .NET Framework 4.5 we can make our SafeContinueWith
+        // overloads
         // simply call into task.ContinueWith(..., TaskContinuationOptions.LazyCancellation, ...) as
         // that will have the semantics that we want.  From the TPL guys:
         //
@@ -455,10 +456,12 @@ namespace Roslyn.Utilities
             exception.Data["ContinuationFunction"] =
                 (methodInfo?.DeclaringType?.FullName ?? "?") + "::" + (methodInfo?.Name ?? "?");
 
-            // In case of a crash with ExecutionEngineException w/o call stack it might be possible to get the stack trace using WinDbg:
+            // In case of a crash with ExecutionEngineException w/o call stack it might be possible to get the
+            // stack trace using WinDbg:
             // > !threads // find thread with System.ExecutionEngineException
             //   ...
-            //   67   65 4760 692b5d60   1029220 Preemptive  CD9AE70C:FFFFFFFF 012ad0f8 0     MTA (Threadpool Worker) System.ExecutionEngineException 03c51108
+            //   67   65 4760 692b5d60   1029220 Preemptive  CD9AE70C:FFFFFFFF 012ad0f8 0     MTA (Threadpool
+            // Worker) System.ExecutionEngineException 03c51108
             //   ...
             // > ~67s     // switch to thread 67
             // > !dso     // dump stack objects
@@ -498,8 +501,10 @@ namespace Roslyn.Utilities
         /// Asserts the <see cref="Task"/> passed has already been completed.
         /// </summary>
         /// <remarks>
-        /// This is useful for a specific case: sometimes you might be calling an API that is "sometimes" async, and you're
-        /// calling it from a synchronous method where you know it should have completed synchronously. This is an easy
+        /// This is useful for a specific case: sometimes you might be calling an API that is "sometimes"
+        // async, and you're
+        /// calling it from a synchronous method where you know it should have completed synchronously. This
+        // is an easy
         /// way to assert that while silencing any compiler complaints.
         /// </remarks>
         public static void VerifyCompleted(this Task task)
@@ -514,8 +519,10 @@ namespace Roslyn.Utilities
         /// Asserts the <see cref="Task"/> passed has already been completed.
         /// </summary>
         /// <remarks>
-        /// This is useful for a specific case: sometimes you might be calling an API that is "sometimes" async, and you're
-        /// calling it from a synchronous method where you know it should have completed synchronously. This is an easy
+        /// This is useful for a specific case: sometimes you might be calling an API that is "sometimes"
+        // async, and you're
+        /// calling it from a synchronous method where you know it should have completed synchronously. This
+        // is an easy
         /// way to assert that while silencing any compiler complaints.
         /// </remarks>
         public static TResult VerifyCompleted<TResult>(this Task<TResult> task)

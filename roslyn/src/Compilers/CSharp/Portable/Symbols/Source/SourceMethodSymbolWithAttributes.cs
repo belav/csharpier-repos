@@ -20,7 +20,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A source method that can have attributes, including a member method, accessor, or local function.
+    /// A source method that can have attributes, including a member method, accessor, or local
+    // function.
     /// </summary>
     internal abstract class SourceMethodSymbolWithAttributes
         : SourceMethodSymbol,
@@ -121,10 +122,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             ?? ImmutableHashSet<string>.Empty;
 
         /// <summary>
-        /// Symbol to copy bound attributes from, or null if the attributes are not shared among multiple source method symbols.
+        /// Symbol to copy bound attributes from, or null if the attributes are not shared among multiple
+        // source method symbols.
         /// </summary>
         /// <remarks>
-        /// Used for example for event accessors. The "remove" method delegates attribute binding to the "add" method.
+        /// Used for example for event accessors. The "remove" method delegates attribute binding to the
+        // "add" method.
         /// The bound attribute data are then applied to both accessors.
         /// </remarks>
         protected virtual SourceMemberMethodSymbol BoundAttributesSource
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Gets the syntax list of custom attributes that declares attributes for return type of this method.
+        /// Gets the syntax list of custom attributes that declares attributes for return type of this
+        // method.
         /// </summary>
         internal virtual OneOrMany<
             SyntaxList<AttributeListSyntax>
@@ -197,7 +201,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from special early bound well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from special early bound well-known attributes applied to the symbol or
+        // null if there are no applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -218,7 +223,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no
+        // applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -235,7 +241,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns information retrieved from custom attributes on return type in source, or null if the symbol is not source symbol or there are none.
+        /// Returns information retrieved from custom attributes on return type in source, or null if the
+        // symbol is not source symbol or there are none.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -252,7 +259,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns null if there are no attributes applied on the symbol.
+        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns
+        // null if there are no attributes applied on the symbol.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -269,7 +277,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of custom attributes applied on the method return value and data decoded from well-known attributes. Returns null if there are no attributes.
+        /// Returns a bag of custom attributes applied on the method return value and data decoded from
+        // well-known attributes. Returns null if there are no attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -327,7 +336,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Called when this thread loaded the method's attributes. For method symbols with completion state.
+        /// Called when this thread loaded the method's attributes. For method symbols with completion
+        // state.
         /// </summary>
         protected abstract void NoteAttributesComplete(bool forReturnType);
 
@@ -429,8 +439,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     arguments
                         .GetOrCreateData<MethodEarlyWellKnownAttributeData>()
                         .UnmanagedCallersOnlyAttributePresent = true;
-                    // We can't actually decode this attribute yet: CallConvs is an array, and it cannot be bound yet or we could hit a cycle
-                    // in error cases. We only detect whether or not the attribute is present for use in ensuring that we create as few lazily-computed
+                    // We can't actually decode this attribute yet: CallConvs is an array, and it cannot be bound yet or
+                    // we could hit a cycle
+                    // in error cases. We only detect whether or not the attribute is present for use in ensuring that
+                    // we create as few lazily-computed
                     // diagnostics that might later get thrown away as possible when binding method calls.
                     return (null, null);
                 }
@@ -460,7 +472,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Returns data decoded from Obsolete attribute or null if there is no Obsolete attribute.
-        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been decoded yet.
+        /// This property returns ObsoleteAttributeData.Uninitialized if attribute arguments haven't been
+        // decoded yet.
         /// </summary>
         internal sealed override ObsoleteAttributeData ObsoleteAttributeData
         {
@@ -554,8 +567,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (lateData is { UnmanagedCallersOnlyAttributeData: not null })
                 {
-                    // We can't verify the symmetric case here. Error conditions (such as if a bad expression was provided to the array initializer)
-                    // can cause the attribute to be skipped during regular attribute binding. Early binding doesn't know that though, so
+                    // We can't verify the symmetric case here. Error conditions (such as if a bad expression was
+                    // provided to the array initializer)
+                    // can cause the attribute to be skipped during regular attribute binding. Early binding doesn't
+                    // know that though, so
                     // it still gets marked as present.
                     Debug.Assert(earlyData is { UnmanagedCallersOnlyAttributePresent: true });
                 }
@@ -865,7 +880,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (this.IsAccessor())
             {
-                // CS1667: Attribute '{0}' is not valid on property or event accessors. It is only valid on '{1}' declarations.
+                // CS1667: Attribute '{0}' is not valid on property or event accessors. It is only valid on '{1}'
+                // declarations.
                 AttributeUsageInfo attributeUsage =
                     attribute.AttributeClass.GetAttributeUsageInfo();
                 diagnostics.Add(
@@ -887,7 +903,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (!this.CanBeReferencedByName || this.MethodKind == MethodKind.Destructor)
             {
-                // CS0577: The Conditional attribute is not valid on '{0}' because it is a constructor, destructor, operator, lambda expression, or explicit interface implementation
+                // CS0577: The Conditional attribute is not valid on '{0}' because it is a constructor, destructor,
+                // operator, lambda expression, or explicit interface implementation
                 diagnostics.Add(ErrorCode.ERR_ConditionalOnSpecialMethod, node.Location, this);
             }
             else if (!this.ReturnsVoid)
@@ -1058,8 +1075,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             // Default value of charset is inherited from the module (only if specified).
-            // This might be different from ContainingType.DefaultMarshallingCharSet. If the charset is not specified on module
-            // ContainingType.DefaultMarshallingCharSet would be Ansi (the class is emitted with "Ansi" charset metadata flag)
+            // This might be different from ContainingType.DefaultMarshallingCharSet. If the charset is not
+            // specified on module
+            // ContainingType.DefaultMarshallingCharSet would be Ansi (the class is emitted with "Ansi" charset
+            // metadata flag)
             // while the charset in P/Invoke metadata should be "None".
             CharSet charSet =
                 this.GetEffectiveDefaultMarshallingCharSet() ?? Cci.Constants.CharSet_None;
@@ -1225,7 +1244,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 hasError = true;
             }
 
-            // If this is an UnmanagedCallersOnly method, it means that this cannot be called by managed code, including the attempt by the CLR
+            // If this is an UnmanagedCallersOnly method, it means that this cannot be called by managed code,
+            // including the attempt by the CLR
             // to run the module initializer.
             if (
                 _lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData
@@ -1266,7 +1286,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 ]
             )
             {
-                // Since the attribute does not have errors (asserted above), it should be guaranteed that we have the above arguments.
+                // Since the attribute does not have errors (asserted above), it should be guaranteed that we have
+                // the above arguments.
                 throw ExceptionUtilities.Unreachable();
             }
 
@@ -1357,7 +1378,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // we might get: '\_\Program.cs' <-- slashes not normalized
                 // we might get: '\_/Program.cs' <-- slashes don't match
                 // we might get: 'Program.cs' <-- suffix match
-                // Force normalization of all '\' to '/', but when we recommend a path in the diagnostic message, ensure it will match what we expect if the user decides to use it.
+                // Force normalization of all '\' to '/', but when we recommend a path in the diagnostic message,
+                // ensure it will match what we expect if the user decides to use it.
                 var suffixMatch = syntaxTrees.FirstOrDefault(
                     static (tree, pair) =>
                         mapPath(pair.referenceResolver, tree)
@@ -1395,7 +1417,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             SyntaxTree? matchingTree = matchingTrees[0];
-            // Internally, line and character numbers are 0-indexed, but when they appear in code or diagnostic messages, they are 1-indexed.
+            // Internally, line and character numbers are 0-indexed, but when they appear in code or diagnostic
+            // messages, they are 1-indexed.
             int lineNumberZeroBased = lineNumberOneBased - 1;
             int characterNumberZeroBased = characterNumberOneBased - 1;
 
@@ -1466,8 +1489,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         Parent: MemberAccessExpressionSyntax memberAccess
                     } rhs
                 } when memberAccess.Name == rhs:
-                    // NB: there are all sorts of places "simple names" can appear in syntax. With these checks we are trying to
-                    // minimize confusion about why the name being used is not *interceptable*, but it's done on a best-effort basis.
+                    // NB: there are all sorts of places "simple names" can appear in syntax. With these checks we are
+                    // trying to
+                    // minimize confusion about why the name being used is not *interceptable*, but it's done on a
+                    // best-effort basis.
                     diagnostics.Add(
                         ErrorCode.ERR_InterceptorNameNotInvoked,
                         attributeLocation,
@@ -1525,7 +1550,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
                     namespaceNames.Add(containingNamespace.Name);
                 // order outermost->innermost
-                // e.g. for method MyApp.Generated.Interceptors.MyInterceptor(): ["MyApp", "Generated", "Interceptors"]
+                // e.g. for method MyApp.Generated.Interceptors.MyInterceptor(): ["MyApp", "Generated",
+                // "Interceptors"]
                 namespaceNames.ReverseContents();
                 return namespaceNames;
             }
@@ -1940,8 +1966,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         )
                     )
                     {
-                        // Warn for CancellationToken parameters in async-iterators with no parameter decorated with [EnumeratorCancellation]
-                        // There could be more than one parameter that could be decorated with [EnumeratorCancellation] so we warn on the method instead
+                        // Warn for CancellationToken parameters in async-iterators with no parameter decorated with
+                        // [EnumeratorCancellation]
+                        // There could be more than one parameter that could be decorated with [EnumeratorCancellation] so
+                        // we warn on the method instead
                         diagnostics.Add(
                             ErrorCode.WRN_UndecoratedCancellationTokenParameter,
                             errorLocation,

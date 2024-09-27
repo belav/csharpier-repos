@@ -141,8 +141,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 new Span(subjectBuffer.CurrentSnapshot.Length - 1, 1)
             );
 
-            // Try to get the tags prior to TagsChanged firing.  This will force us to use the previous data we've
-            // cached to produce the new results.  We don't actually care about the tags, so we just pass an empty
+            // Try to get the tags prior to TagsChanged firing.  This will force us to use the previous data
+            // we've
+            // cached to produce the new results.  We don't actually care about the tags, so we just pass an
+            // empty
             // buffer for them to go into.
             tagComputer.AddTags(
                 new NormalizedSnapshotSpanCollection(subjectBuffer.CurrentSnapshot.GetFullSpan()),

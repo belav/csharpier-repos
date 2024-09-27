@@ -2336,7 +2336,8 @@ namespace System.Xml
                     throw new ArgumentException(
                         SR.Format(SR.XmlSpecificBindingNamespace, "xmlns", uri)
                     );
-                // The addressing namespace and the xmlNamespace are the same length, so add a quick check to try to disambiguate
+                // The addressing namespace and the xmlNamespace are the same length, so add a quick check to try to
+                // disambiguate
                 if (uri.Length == xmlNamespace.Length && uri[18] == 'X' && uri == xmlNamespace)
                     throw new ArgumentException(
                         SR.Format(SR.XmlSpecificBindingNamespace, "xml", uri)

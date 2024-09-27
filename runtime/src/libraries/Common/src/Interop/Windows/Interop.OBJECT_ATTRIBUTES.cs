@@ -7,8 +7,11 @@ using System.Runtime.InteropServices;
 internal static partial class Interop
 {
     /// <summary>
-    /// <a href="https://msdn.microsoft.com/en-us/library/windows/hardware/ff557749.aspx">OBJECT_ATTRIBUTES</a> structure.
-    /// The OBJECT_ATTRIBUTES structure specifies attributes that can be applied to objects or object handles by routines
+    /// <a
+    // href="https://msdn.microsoft.com/en-us/library/windows/hardware/ff557749.aspx">OBJECT_ATTRIBUTES</a>
+    // structure.
+    /// The OBJECT_ATTRIBUTES structure specifies attributes that can be applied to objects or object
+    // handles by routines
     /// that create objects and/or return handles to objects.
     /// </summary>
     internal unsafe struct OBJECT_ATTRIBUTES
@@ -41,7 +44,8 @@ internal static partial class Interop
         public SECURITY_QUALITY_OF_SERVICE* SecurityQualityOfService;
 
         /// <summary>
-        /// Equivalent of InitializeObjectAttributes macro with the exception that you can directly set SQOS.
+        /// Equivalent of InitializeObjectAttributes macro with the exception that you can directly set
+        // SQOS.
         /// </summary>
         public unsafe OBJECT_ATTRIBUTES(
             UNICODE_STRING* objectName,

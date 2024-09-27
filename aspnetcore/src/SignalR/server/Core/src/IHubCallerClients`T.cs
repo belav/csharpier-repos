@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.SignalR;
 
 /// <summary>
-/// An abstraction that provides access to client connections, including the one that sent the current invocation.
+/// An abstraction that provides access to client connections, including the one that sent the
+// current invocation.
 /// </summary>
 /// <typeparam name="T">The client caller type.</typeparam>
 public interface IHubCallerClients<T> : IHubClients<T>
@@ -20,7 +21,8 @@ public interface IHubCallerClients<T> : IHubClients<T>
     T Others { get; }
 
     /// <summary>
-    /// Gets a caller to all connections in the specified group, except the one which triggered the current invocation.
+    /// Gets a caller to all connections in the specified group, except the one which triggered the
+    // current invocation.
     /// </summary>
     /// <returns>A client caller.</returns>
     T OthersInGroup(string groupName);

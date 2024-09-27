@@ -310,7 +310,8 @@ int i = 0;
                 LanguageVersion = LanguageVersion.CSharp10,
                 ExpectedDiagnostics =
                 {
-                    // /0/Test0.cs(6,1): error CS8803: Top-level statements must precede namespace and type declarations.
+                    // /0/Test0.cs(6,1): error CS8803: Top-level statements must precede namespace and type
+                    // declarations.
                     DiagnosticResult.CompilerError("CS8803").WithSpan(6, 1, 6, 11),
                     // /0/Test0.cs(6,1): error CS8805: Program using top-level statements must be an executable.
                     DiagnosticResult.CompilerError("CS8805").WithSpan(6, 1, 6, 11),

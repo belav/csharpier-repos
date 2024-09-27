@@ -4,8 +4,10 @@
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// Base type for RoDefinitionType and RoConstructedGenericType. These are the two types that can declare members backed by metadata.
-    /// (Though Array types "declare" members too, those are not backed by actual metadata so there will never be a typespec that has to be resolved
+    /// Base type for RoDefinitionType and RoConstructedGenericType. These are the two types that can
+    // declare members backed by metadata.
+    /// (Though Array types "declare" members too, those are not backed by actual metadata so there will
+    // never be a typespec that has to be resolved
     /// which is what an instantiation is for in the first place.)
     /// </summary>
     internal abstract partial class RoInstantiationProviderType : RoType

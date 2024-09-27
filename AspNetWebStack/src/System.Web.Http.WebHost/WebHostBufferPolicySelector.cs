@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 using System.Web;
@@ -14,11 +15,13 @@ namespace System.Web.Http.WebHost
     public class WebHostBufferPolicySelector : IHostBufferPolicySelector
     {
         /// <summary>
-        /// Determines whether the host should buffer the entity body when processing a request with content.
+        /// Determines whether the host should buffer the entity body when processing a request with
+        // content.
         /// </summary>
         /// <param name="hostContext">The host-specific context.  In this case, it is an instance
         /// of <see cref="HttpContextBase"/>.</param>
-        /// <returns><c>true</c> if buffering should be used; otherwise a streamed request should be used.</returns>
+        /// <returns><c>true</c> if buffering should be used; otherwise a streamed request should be
+        // used.</returns>
         public virtual bool UseBufferedInputStream(object hostContext)
         {
             if (hostContext == null)
@@ -34,7 +37,8 @@ namespace System.Web.Http.WebHost
         /// </summary>
         /// <param name="response">The <see cref="HttpResponseMessage"/>response for which to determine
         /// whether host output buffering should be used for the response entity body.</param>
-        /// <returns><c>true</c> if buffering should be used; otherwise a streamed response should be used.</returns>
+        /// <returns><c>true</c> if buffering should be used; otherwise a streamed response should be
+        // used.</returns>
         public virtual bool UseBufferedOutputStream(HttpResponseMessage response)
         {
             if (response == null)

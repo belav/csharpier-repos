@@ -20,7 +20,8 @@ namespace System.Web.UI.WebControls
     public class ControlIDConverter : StringConverter
     {
         /// <devdoc>
-        ///    <para>Determines whether a given control should have its id added to the StandardValuesCollection.</para>
+        ///    <para>Determines whether a given control should have its id added to the
+        // StandardValuesCollection.</para>
         /// </devdoc>
         protected virtual bool FilterControl(Control control)
         {

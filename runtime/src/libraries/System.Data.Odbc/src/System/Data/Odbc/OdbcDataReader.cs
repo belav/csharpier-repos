@@ -651,17 +651,23 @@ namespace System.Data.Odbc
 
             // Bug SQLBUVSTS01:110664 - available cases:
             // 1. random access - always cache the value (as before the fix), to minimize regression risk
-            // 2. sequential access, fixed-size value: continue caching the value as before, again to minimize regression risk
-            // 3. sequential access, variable-length value: this scenario did not work properly before the fix. Fix
+            // 2. sequential access, fixed-size value: continue caching the value as before, again to minimize
+            // regression risk
+            // 3. sequential access, variable-length value: this scenario did not work properly before the fix.
+            // Fix
             //                                              it now by calling GetData(length = 0).
-            // 4. sequential access, cache value exists: just check the cache for DbNull (no validations done, again to minimize regressions)
+            // 4. sequential access, cache value exists: just check the cache for DbNull (no validations done,
+            // again to minimize regressions)
 
             if (!IsCommandBehavior(CommandBehavior.SequentialAccess))
                 return Convert.IsDBNull(GetValue(i)); // case 1, cache the value
 
-            // in 'ideal' Sequential access support, we do not want cache the value in order to check if it is DbNull or not.
-            // But, to minimize regressions, we will continue caching the fixed-size values (case 2), even with SequentialAccess
-            // only in case of SequentialAccess with variable length data types (case 3), we will use GetData with zero length.
+            // in 'ideal' Sequential access support, we do not want cache the value in order to check if it is
+            // DbNull or not.
+            // But, to minimize regressions, we will continue caching the fixed-size values (case 2), even with
+            // SequentialAccess
+            // only in case of SequentialAccess with variable length data types (case 3), we will use GetData
+            // with zero length.
 
             object? cachedObj = _dataCache![i];
             if (cachedObj != null)
@@ -684,7 +690,8 @@ namespace System.Data.Odbc
             {
                 // case 3 - the data has variable-length type, read zero-length data to query for null
                 // QueryFieldInfo will return false only if the object cached as DbNull
-                // QueryFieldInfo will put DbNull in cache only if the SQLGetData returns SQL_NULL_DATA, otherwise it does not change it
+                // QueryFieldInfo will put DbNull in cache only if the SQLGetData returns SQL_NULL_DATA, otherwise
+                // it does not change it
                 return !QueryFieldInfo(i, typeMap._sql_c, out _);
             }
         }
@@ -1033,7 +1040,8 @@ namespace System.Data.Odbc
                         char[] rgChars = new char[cbMaxData / 2];
 
                         // RFC 50002644: negative value cannot be used for capacity.
-                        // in case of SQL_NO_TOTAL, set the capacity to cbMaxData, StringBuilder will automatically reallocate
+                        // in case of SQL_NO_TOTAL, set the capacity to cbMaxData, StringBuilder will automatically
+                        // reallocate
                         // its internal buffer when appending more data
                         int cbBuilderInitialCapacity =
                             (lengthOrIndicator == ODBC32.SQL_NO_TOTAL)
@@ -1211,13 +1219,16 @@ namespace System.Data.Odbc
             // Possible cases:
             // 1. random access, user asks for the value first time: bring it and cache the value
             // 2. random access, user already queried the value: use the cache
-            // 3. sequential access, cache exists: user already read this value using different method (it becomes cached)
+            // 3. sequential access, cache exists: user already read this value using different method (it
+            // becomes cached)
             //                       use the cache - preserve the original behavior to minimize regression risk
-            // 4. sequential access, no cache: (fixed now) user reads the bytes/chars in sequential order (no cache)
+            // 4. sequential access, no cache: (fixed now) user reads the bytes/chars in sequential order (no
+            // cache)
 
             object? cachedObj; // The cached object (if there is one)
 
-            // Get cached object, ensure the correct type using explicit cast, to preserve same behavior as before
+            // Get cached object, ensure the correct type using explicit cast, to preserve same behavior as
+            // before
             if (isCharsBuffer)
                 cachedObj = (string?)_dataCache![i];
             else
@@ -1322,7 +1333,8 @@ namespace System.Data.Odbc
 
                 // SQLBU:532243 -- For SequentialAccess we need to read a chunk of
                 // data and not cache it.
-                // Note: If the object was previous cached (see case 3 above), the function will go thru 'if' path, to minimize
+                // Note: If the object was previous cached (see case 3 above), the function will go thru 'if' path,
+                // to minimize
                 // regressions
 
                 // the user can ask for the length of the field by passing in a null pointer for the buffer
@@ -1342,19 +1354,24 @@ namespace System.Data.Odbc
 
                         // GetChars:
                         //   in Orcas RTM: GetChars has always raised InvalidCastException.
-                        //   in Orcas SP1: GetChars returned 0 if DbNull is not cached yet and InvalidCastException if it is in cache (from case 3).
-                        //   Managed Providers team has decided to fix the GetChars behavior and raise InvalidCastException, as it was in RTM
+                        //   in Orcas SP1: GetChars returned 0 if DbNull is not cached yet and InvalidCastException if it is
+                        // in cache (from case 3).
+                        //   Managed Providers team has decided to fix the GetChars behavior and raise InvalidCastException,
+                        // as it was in RTM
                         //   Reason: returing 0 is wrong behavior since it conflicts with return value in case of empty data
 
                         // GetBytes:
                         //   In Orcas RTM: GetBytes(null buffer) returned -1 for null value if DbNull is not cached yet.
                         //   But, after calling IsDBNull, GetBytes(null) raised InvalidCastException.
                         //   In Orcas SP1: GetBytes always raises InvalidCastException for null value.
-                        //   Managed Providers team has decided to keep the behavior of RTM for this case to fix the RTM's breaking change.
-                        //   Reason: while -1 is wrong behavior, people might be already relying on it, so we should not be changing it.
+                        //   Managed Providers team has decided to keep the behavior of RTM for this case to fix the RTM's
+                        // breaking change.
+                        //   Reason: while -1 is wrong behavior, people might be already relying on it, so we should not be
+                        // changing it.
                         //   Note: this will happen only on the first call to GetBytes(with null buffer).
                         //   If IsDbNull has already been called before or for second call to query for size,
-                        //   DBNull is cached and GetBytes raises InvalidCastException in case 3 (see the cases above in this method).
+                        //   DBNull is cached and GetBytes raises InvalidCastException in case 3 (see the cases above in
+                        // this method).
 
                         if (isCharsBuffer)
                         {
@@ -1370,11 +1387,14 @@ namespace System.Data.Odbc
                         // the value is not null
 
                         // SQLBU 266054:
-                        // If cbLengthOrIndicator is SQL_NO_TOTAL (-4), this call returns -4 or -2, depending on the type (GetChars=>-2, GetBytes=>-4).
+                        // If cbLengthOrIndicator is SQL_NO_TOTAL (-4), this call returns -4 or -2, depending on the type
+                        // (GetChars=>-2, GetBytes=>-4).
                         // This is the Orcas RTM and SP1 behavior, changing this would be a breaking change.
-                        // SQL_NO_TOTAL means that the driver does not know what is the remained length of the data, so we cannot really guess the value here.
+                        // SQL_NO_TOTAL means that the driver does not know what is the remained length of the data, so we
+                        // cannot really guess the value here.
                         // Reason: while returning different negative values depending on the type seems inconsistent,
-                        // this is what we did in Orcas RTM and SP1 and user code might rely on this behavior => changing it would be a breaking change.
+                        // this is what we did in Orcas RTM and SP1 and user code might rely on this behavior => changing it
+                        // would be a breaking change.
                         if (isCharsBuffer)
                         {
                             return cbLengthOrIndicator / 2; // return length in wide characters or -2 if driver returns SQL_NO_TOTAL
@@ -1439,8 +1459,10 @@ namespace System.Data.Odbc
                     {
                         // SQLBU 266054:
                         // if the data is null, the ideal behavior here is to raise InvalidCastException. But,
-                        // * GetBytes returned 0 in Orcas RTM and SP1, continue to do so to avoid breaking change from Orcas RTM and SP1.
-                        // * GetChars raised exception in RTM, and returned 0 in SP1: we decided to revert back to the RTM's behavior and raise InvalidCast
+                        // * GetBytes returned 0 in Orcas RTM and SP1, continue to do so to avoid breaking change from Orcas
+                        // RTM and SP1.
+                        // * GetChars raised exception in RTM, and returned 0 in SP1: we decided to revert back to the RTM's
+                        // behavior and raise InvalidCast
                         if (isCharsBuffer)
                         {
                             // for GetChars, ensure data is not null
@@ -1491,12 +1513,15 @@ namespace System.Data.Odbc
             // we need length in bytes, b/c that is what SQLGetData expects
             long cbLength = (isCharsBuffer) ? checked(bytesOrCharsLength * 2) : bytesOrCharsLength;
 
-            // continue reading from the driver until we fill the user's buffer or until no more data is available
-            // the data is pumped first into the internal native buffer and after that copied into the user's one if buffer is not null
+            // continue reading from the driver until we fill the user's buffer or until no more data is
+            // available
+            // the data is pumped first into the internal native buffer and after that copied into the user's
+            // one if buffer is not null
             CNativeBuffer internalNativeBuffer = this.Buffer;
 
             // read the data in loop up to th user's length
-            // if the data size is less than requested or in case of error, the while loop will stop in the middle
+            // if the data size is less than requested or in case of error, the while loop will stop in the
+            // middle
             while (cbLength > 0)
             {
                 // max data to be read, in bytes, not including null-terminator for WCHARs
@@ -1545,7 +1570,8 @@ namespace System.Data.Odbc
                 else if (ODBC32.SQL_NO_TOTAL == cbTotal)
                 {
                     // the driver has filled the internal buffer, but the length of remained data is still unknown
-                    // we will continue looping until SQLGetData indicates the end of data or user buffer is fully filled
+                    // we will continue looping until SQLGetData indicates the end of data or user buffer is fully
+                    // filled
                     cbRead = cbReadMax;
                 }
                 else
@@ -1554,10 +1580,12 @@ namespace System.Data.Odbc
                         (cbTotal > 0),
                         "GetData returned negative value, which is not SQL_NO_TOTAL"
                     );
-                    // GetData uses SQLGetData, which StrLen_or_IndPtr (cbTotal in our case) to the current buf + remained buf (if any)
+                    // GetData uses SQLGetData, which StrLen_or_IndPtr (cbTotal in our case) to the current buf +
+                    // remained buf (if any)
                     if (cbTotal > cbReadMax)
                     {
-                        // in this case the amount of bytes/chars read will be the max requested (and more bytes can be read)
+                        // in this case the amount of bytes/chars read will be the max requested (and more bytes can be
+                        // read)
                         cbRead = cbReadMax;
                     }
                     else
@@ -1876,7 +1904,8 @@ namespace System.Data.Odbc
         }
 
         /// <summary>
-        /// This methods queries the following field information: isDbNull and remained size/indicator. No data is read from the driver.
+        /// This methods queries the following field information: isDbNull and remained size/indicator. No
+        // data is read from the driver.
         /// If the value is DbNull, this value will be cached. Refer to GetData for more details.
         /// </summary>
         /// <returns>false if value is DbNull, true otherwise</returns>
@@ -1885,7 +1914,8 @@ namespace System.Data.Odbc
             int cb = 0;
             if (sqlctype == ODBC32.SQL_C.WCHAR)
             {
-                // SQLBU 266054 - in case of WCHAR data, we need to provide buffer with a space for null terminator (two bytes)
+                // SQLBU 266054 - in case of WCHAR data, we need to provide buffer with a space for null terminator
+                // (two bytes)
                 cb = 2;
             }
             return GetData(
@@ -1905,14 +1935,16 @@ namespace System.Data.Odbc
         }
 
         /// <summary>
-        /// Note: use only this method to call SQLGetData! It caches the null value so the fact that the value is null is kept and no other calls
+        /// Note: use only this method to call SQLGetData! It caches the null value so the fact that the
+        // value is null is kept and no other calls
         /// are made after it.
         ///
         /// retrieves the data into this.Buffer.
         /// * If the data is DbNull, the value be also cached and false is returned.
         /// * if the data is not DbNull, the value is not cached and true is returned
         ///
-        /// Note: cbLengthOrIndicator can be either the length of (remained) data or SQL_NO_TOTAL (-4) when the length is not known.
+        /// Note: cbLengthOrIndicator can be either the length of (remained) data or SQL_NO_TOTAL (-4) when
+        // the length is not known.
         /// in case of SQL_NO_TOTAL, driver fills the buffer till the end.
         /// The indicator will NOT be SQL_NULL_DATA, GetData will replace it with zero and return false.
         /// </summary>
@@ -1962,10 +1994,13 @@ namespace System.Data.Odbc
 
                 case ODBC32.SQLRETURN.NO_DATA:
                     // SQLBU 266054: System.Data.Odbc: Fails with truncated error when we pass BufferLength  as 0
-                    // NO_DATA return value is success value - it means that the driver has fully consumed the current column value
+                    // NO_DATA return value is success value - it means that the driver has fully consumed the current
+                    // column value
                     // but did not move to the next column yet.
-                    // For fixed-size values, we do not expect this to happen because we fully consume the data and store it in cache after the first call.
-                    // For variable-length values (any character or binary data), SQLGetData can be called several times on the same column,
+                    // For fixed-size values, we do not expect this to happen because we fully consume the data and
+                    // store it in cache after the first call.
+                    // For variable-length values (any character or binary data), SQLGetData can be called several times
+                    // on the same column,
                     // to query for the next chunk of value, even after reaching its end!
                     // Thus, ignore NO_DATA for variable length data, but raise exception for fixed-size types
                     if (sqlctype != ODBC32.SQL_C.WCHAR && sqlctype != ODBC32.SQL_C.BINARY)
@@ -1975,7 +2010,8 @@ namespace System.Data.Odbc
 
                     if (cbActual == (IntPtr)ODBC32.SQL_NO_TOTAL)
                     {
-                        // ensure SQL_NO_TOTAL value gets replaced with zero if the driver has fully consumed the current column
+                        // ensure SQL_NO_TOTAL value gets replaced with zero if the driver has fully consumed the current
+                        // column
                         cbActual = 0;
                     }
                     break;
@@ -1991,8 +2027,10 @@ namespace System.Data.Odbc
             // test for SQL_NULL_DATA
             if (cbActual == (IntPtr)ODBC32.SQL_NULL_DATA)
             {
-                // Store the DBNull value in cache. Note that if we need to do it, because second call into the SQLGetData returns NO_DATA, which means
-                // we already consumed the value (see above) and the NULL information is lost. By storing the null in cache, we avoid second call into the driver
+                // Store the DBNull value in cache. Note that if we need to do it, because second call into the
+                // SQLGetData returns NO_DATA, which means
+                // we already consumed the value (see above) and the NULL information is lost. By storing the null
+                // in cache, we avoid second call into the driver
                 // for the same row/column.
                 _dataCache![i] = DBNull.Value;
                 // the indicator is never -1 (and it should not actually be used if the data is DBNull)
@@ -2240,7 +2278,8 @@ namespace System.Data.Odbc
 
                 // for precision and scale we take the SQL_COLUMN_ attributes.
                 // Those attributes are supported by all provider versions.
-                // for size we use the octet length. We can't use column length because there is an incompatibility with the jet driver.
+                // for size we use the octet length. We can't use column length because there is an incompatibility
+                // with the jet driver.
                 // furthermore size needs to be special cased for wchar types
                 //
                 typeMap = TypeMap.FromSqlType(
@@ -2542,7 +2581,8 @@ namespace System.Data.Odbc
             return schematable;
         }
 
-        // The default values are already defined in DbSchemaRows (see DbSchemaRows.cs) so there is no need to set any default value
+        // The default values are already defined in DbSchemaRows (see DbSchemaRows.cs) so there is no need
+        // to set any default value
         //
 
         public override DataTable? GetSchemaTable()
@@ -2801,13 +2841,14 @@ namespace System.Data.Odbc
                 }
                 else
                 {
-                    //  i've seen "DIAG [HY000] [Microsoft][ODBC SQL Server Driver]Connection is busy with results for another hstmt (0) "
+                    //  i've seen "DIAG [HY000] [Microsoft][ODBC SQL Server Driver]Connection is busy with results for
+                    // another hstmt (0) "
                     //  how did we get here? SqlServer does not allow a second handle (Keyinfostmt) anyway...
                     //
-                    /*
-                        string msg = "Unexpected failure of SQLSpecialColumns. Code = " + Command.GetDiagSqlState();
-                        Debug.Assert (false, msg);
-                    */
+/*
+string msg = "Unexpected failure of SQLSpecialColumns. Code = " + Command.GetDiagSqlState();
+Debug.Assert (false, msg);
+*/
                 }
             }
             finally

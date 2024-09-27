@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 
             if (set.Count == 1)
             {
-                // If any of the symbols are static, add the static classification and the regular symbol classification
+                // If any of the symbols are static, add the static classification and the regular symbol
+                // classification
                 if (isStatic)
                 {
                     result.Add(
@@ -176,7 +177,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 
             if (name.IsVar && IsInVarContext(name))
             {
-                // Don't do anything further to check if `var` is the contextual keyword here. We do not support code
+                // Don't do anything further to check if `var` is the contextual keyword here. We do not support
+                // code
                 // squatting on typenames that are all lowercase.
                 classifiedSpan = new ClassifiedSpan(name.Span, ClassificationTypeNames.Keyword);
                 return true;
@@ -396,9 +398,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
             SegmentedList<ClassifiedSpan> result
         )
         {
-            // Simple approach, if the user ever types one of identifiers from the list and it doesn't actually bind to anything, presume that
+            // Simple approach, if the user ever types one of identifiers from the list and it doesn't actually
+            // bind to anything, presume that
             // they intend to use it as a keyword. This works for all error
-            // cases, while not conflicting with the extremely rare case where such identifiers might actually be used to
+            // cases, while not conflicting with the extremely rare case where such identifiers might actually
+            // be used to
             // reference actual symbols with that names.
             if (
                 symbolInfo.GetAnySymbol() is null

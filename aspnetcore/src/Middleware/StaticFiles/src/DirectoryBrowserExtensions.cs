@@ -20,7 +20,8 @@ public static class DirectoryBrowserExtensions
     /// <returns></returns>
     /// <remarks>
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
-    /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
+    /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot'
+    // subfolder.
     /// </remarks>
     public static IApplicationBuilder UseDirectoryBrowser(this IApplicationBuilder app)
     {
@@ -37,7 +38,8 @@ public static class DirectoryBrowserExtensions
     /// <returns></returns>
     /// <remarks>
     /// Files are served from the path specified in <see cref="IWebHostEnvironment.WebRootPath"/>
-    /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot' subfolder.
+    /// or <see cref="IWebHostEnvironment.WebRootFileProvider"/> which defaults to the 'wwwroot'
+    // subfolder.
     /// </remarks>
     public static IApplicationBuilder UseDirectoryBrowser(
         this IApplicationBuilder app,

@@ -9,25 +9,32 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 /// <summary>
 ///     Provides a simple API for configuring a relationship where configuration began on
-///     an end of the relationship with a reference that points to an instance of another entity type.
+///     an end of the relationship with a reference that points to an instance of another entity
+// type.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
+///         Instances of this class are returned from methods when using the <see
+// cref="ModelBuilder" /> API
 ///         and it is not designed to be directly constructed in your application code.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
 public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyBuilder>
 {
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceNavigationBuilder(
@@ -44,10 +51,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public ReferenceNavigationBuilder(
@@ -65,10 +76,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder Builder
@@ -78,10 +93,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual string? ReferenceName
@@ -91,10 +110,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual MemberInfo? ReferenceMember
@@ -104,10 +127,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual IMutableEntityType RelatedEntityType
@@ -117,10 +144,14 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual IMutableEntityType DeclaringEntityType
@@ -144,7 +175,8 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     /// </remarks>
     /// <param name="collection">
     ///     The name of the collection navigation property on the other end of this relationship.
-    ///     If null or not specified, there is no navigation property on the other end of the relationship.
+    ///     If null or not specified, there is no navigation property on the other end of the
+    // relationship.
     /// </param>
     /// <returns>An object to further configure the relationship.</returns>
     public virtual ReferenceCollectionBuilder WithMany(string? collection = null) =>
@@ -155,20 +187,28 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder WithManyBuilder(string? navigationName) =>
         WithManyBuilder(MemberIdentity.Create(navigationName));
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder WithManyBuilder(MemberInfo? navigationMemberInfo) =>
@@ -240,7 +280,8 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     /// </remarks>
     /// <param name="reference">
     ///     The name of the reference navigation property on the other end of this relationship.
-    ///     If null or not specified, there is no navigation property on the other end of the relationship.
+    ///     If null or not specified, there is no navigation property on the other end of the
+    // relationship.
     /// </param>
     /// <returns>An object that can be used to configure the relationship.</returns>
     public virtual ReferenceReferenceBuilder WithOne(string? reference = null) =>
@@ -251,20 +292,28 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
         );
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder WithOneBuilder(string? navigationName) =>
         WithOneBuilder(MemberIdentity.Create(navigationName));
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     protected virtual InternalForeignKeyBuilder WithOneBuilder(MemberInfo? navigationMemberInfo) =>
@@ -402,7 +451,8 @@ public class ReferenceNavigationBuilder : IInfrastructure<IConventionForeignKeyB
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
-    /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
+    /// <returns><see langword="true" /> if the specified object is equal to the current object;
+    // otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
     public override bool Equals(object? obj) => base.Equals(obj);

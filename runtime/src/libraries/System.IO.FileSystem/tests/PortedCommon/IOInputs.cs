@@ -13,10 +13,12 @@ internal static class IOInputs
     public static bool SupportsGettingCreationTime =>
         PlatformDetection.IsWindows || PlatformDetection.IsOSXLike;
 
-    // Max path length (minus trailing \0). Unix values vary system to system; just using really long values here likely to be more than on the average system.
+    // Max path length (minus trailing \0). Unix values vary system to system; just using really long
+    // values here likely to be more than on the average system.
     public static readonly int MaxPath = OperatingSystem.IsWindows() ? 259 : 10000;
 
-    // Windows specific, this is the maximum length that can be passed using extended syntax. Does not include the trailing \0.
+    // Windows specific, this is the maximum length that can be passed using extended syntax. Does not
+    // include the trailing \0.
     public static readonly int MaxExtendedPath = short.MaxValue - 1;
 
     // Same as MaxPath on Unix
@@ -24,9 +26,11 @@ internal static class IOInputs
         ? MaxExtendedPath
         : MaxPath;
 
-    // Windows specific, this is the maximum length that can be passed to APIs taking directory names, such as Directory.CreateDirectory & Directory.Move.
+    // Windows specific, this is the maximum length that can be passed to APIs taking directory names,
+    // such as Directory.CreateDirectory & Directory.Move.
     // Does not include the trailing \0.
-    // We now do the appropriate wrapping to allow creating longer directories. Like MaxPath, this is a legacy restriction.
+    // We now do the appropriate wrapping to allow creating longer directories. Like MaxPath, this is a
+    // legacy restriction.
     public static readonly int MaxDirectory = OperatingSystem.IsWindows() ? 247 : 258;
 
     public const int MaxComponent = 255;

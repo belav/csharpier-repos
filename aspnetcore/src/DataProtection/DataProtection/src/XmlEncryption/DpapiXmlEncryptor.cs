@@ -25,9 +25,11 @@ public sealed class DpapiXmlEncryptor : IXmlEncryptor
     private readonly bool _protectToLocalMachine;
 
     /// <summary>
-    /// Creates a <see cref="DpapiXmlEncryptor"/> given a protection scope and an <see cref="IServiceProvider"/>.
+    /// Creates a <see cref="DpapiXmlEncryptor"/> given a protection scope and an <see
+    // cref="IServiceProvider"/>.
     /// </summary>
-    /// <param name="protectToLocalMachine">'true' if the data should be decipherable by anybody on the local machine,
+    /// <param name="protectToLocalMachine">'true' if the data should be decipherable by anybody on the
+    // local machine,
     /// 'false' if the data should only be decipherable by the current Windows user account.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     public DpapiXmlEncryptor(bool protectToLocalMachine, ILoggerFactory loggerFactory)

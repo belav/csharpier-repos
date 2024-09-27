@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -12,7 +13,8 @@ namespace System.Net.Http
 {
     /// <summary>
     /// An <see cref="MultipartStreamProvider"/> suited for reading MIME body parts following the
-    /// <c>multipart/related</c> media type as defined in RFC 2387 (see http://www.ietf.org/rfc/rfc2387.txt).
+    /// <c>multipart/related</c> media type as defined in RFC 2387 (see
+    // http://www.ietf.org/rfc/rfc2387.txt).
     /// </summary>
     public class MultipartRelatedStreamProvider : MultipartStreamProvider
     {
@@ -24,7 +26,8 @@ namespace System.Net.Http
         private HttpContent _parent;
 
         /// <summary>
-        /// Gets the <see cref="HttpContent"/> instance that has been marked as the <c>root</c> content in the
+        /// Gets the <see cref="HttpContent"/> instance that has been marked as the <c>root</c> content in
+        // the
         /// MIME multipart related message using the <c>start</c> parameter. If no <c>start</c> parameter is
         /// present then pick the first of the children.
         /// </summary>

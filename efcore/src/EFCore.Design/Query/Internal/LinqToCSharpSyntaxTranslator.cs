@@ -17,10 +17,14 @@ using E = System.Linq.Expressions.Expression;
 namespace Microsoft.EntityFrameworkCore.Query.Internal;
 
 /// <summary>
-///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-///     any release. You should only use it directly in your code with extreme caution and knowing that
-///     doing so can result in application failures when updating to a new Entity Framework Core release.
+///     This is an internal API that supports the Entity Framework Core infrastructure and not
+// subject to
+///     the same compatibility standards as public APIs. It may be changed or removed without notice
+// in
+///     any release. You should only use it directly in your code with extreme caution and knowing
+// that
+///     doing so can result in application failures when updating to a new Entity Framework Core
+// release.
 /// </summary>
 public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSyntaxTranslator
 {
@@ -77,10 +81,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     private readonly SyntaxGenerator _g;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public LinqToCSharpSyntaxTranslator(SyntaxGenerator syntaxGenerator)
     {
@@ -88,26 +96,38 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public IReadOnlySet<ParameterExpression> CapturedVariables => _capturedVariables.ToHashSet();
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual SyntaxNode? Result { get; set; }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual SyntaxNode TranslateStatement(
         Expression node,
@@ -115,10 +135,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     ) => TranslateCore(node, collectedNamespaces, statementContext: true);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     public virtual SyntaxNode TranslateExpression(
         Expression node,
@@ -126,10 +150,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     ) => TranslateCore(node, collectedNamespaces, statementContext: false);
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual SyntaxNode TranslateCore(
         Expression node,
@@ -174,10 +202,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [return: NotNullIfNotNull(nameof(node))]
     protected virtual SyntaxNode? Translate(Expression? node)
@@ -188,10 +220,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual T Translate<T>(Expression? node)
         where T : CSharpSyntaxNode
@@ -205,10 +241,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual ExpressionSyntax Translate(
         Expression expression,
@@ -237,10 +277,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [return: NotNullIfNotNull("node")]
     public override Expression? Visit(Expression? node)
@@ -291,10 +335,13 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         var liftedStatementLeftPosition = _liftedState.Statements.Count;
         var right = Translate<ExpressionSyntax>(binary.Right);
 
-        // If both sides were lifted, we don't need to do anything special. Same if the left side was lifted.
-        // But if the right side was lifted and the left wasn't, then in order to preserve evaluation order we need to lift the left side
+        // If both sides were lifted, we don't need to do anything special. Same if the left side was
+        // lifted.
+        // But if the right side was lifted and the left wasn't, then in order to preserve evaluation order
+        // we need to lift the left side
         // out as well, otherwise the right side gets evaluated before the left.
-        // We refrain from doing this only if the two expressions can't possibly have side effects over each other, for nicer code.
+        // We refrain from doing this only if the two expressions can't possibly have side effects over each
+        // other, for nicer code.
         if (
             _liftedState.Statements.Count > liftedStatementLeftPosition
             && liftedStatementLeftPosition == liftedStatementOrigPosition
@@ -381,7 +428,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             ExpressionSyntax translatedRight;
 
             // LINQ expression trees can directly access private members, but C# code cannot.
-            // If a private member is being set, VisitMember generated a reflection GetValue invocation for it; detect
+            // If a private member is being set, VisitMember generated a reflection GetValue invocation for it;
+            // detect
             // that here and replace it with SetValue instead.
             // TODO: Replace this with a more efficient API for .NET 8.0.
             // TODO: Private property
@@ -410,15 +458,18 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             }
             else
             {
-                // Identify assignment where the RHS supports assignment lowering (switch, conditional). If the e.g. switch expression is
-                // lifted out (because some arm contains a block), this will lower the variable to be assigned inside the resulting switch
+                // Identify assignment where the RHS supports assignment lowering (switch, conditional). If the e.g.
+                // switch expression is
+                // lifted out (because some arm contains a block), this will lower the variable to be assigned
+                // inside the resulting switch
                 // statement, rather then adding another useless temporary variable.
                 translatedRight = Translate(
                     assignment.Right,
                     lowerableAssignmentVariable: translatedLeft as IdentifierNameSyntax
                 );
 
-                // If the RHS was lifted out and the assignment lowering succeeded, Translate above returns the lowered assignment variable;
+                // If the RHS was lifted out and the assignment lowering succeeded, Translate above returns the
+                // lowered assignment variable;
                 // this would mean that we return a useless identity assignment (i = i). Instead, just return it.
                 if (translatedRight == translatedLeft)
                 {
@@ -446,7 +497,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         var parentOnLastLambdaLine = _onLastLambdaLine;
         var parentLiftedState = _liftedState;
 
-        // Expression blocks have no stack of their own, since they're lifted directly to their parent non-expression block.
+        // Expression blocks have no stack of their own, since they're lifted directly to their parent
+        // non-expression block.
         StackFrame? ownStackFrame = null;
         if (blockContext != ExpressionContext.Expression)
         {
@@ -466,7 +518,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         try
         {
-            // Go over the block's variables, assign names to any unnamed ones and uniquify. Then add them to our stack frame, unless
+            // Go over the block's variables, assign names to any unnamed ones and uniquify. Then add them to
+            // our stack frame, unless
             // this is an expression block that will get lifted.
             foreach (var parameter in block.Variables)
             {
@@ -498,8 +551,10 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 var onLastBlockLine = i == block.Expressions.Count - 1;
                 _onLastLambdaLine = parentOnLastLambdaLine && onLastBlockLine;
 
-                // Any lines before the last are evaluated in statement context (they aren't returned); the last line is evaluated in the
-                // context of the block as a whole. _context now refers to the statement's context, blockContext to the block's.
+                // Any lines before the last are evaluated in statement context (they aren't returned); the last
+                // line is evaluated in the
+                // context of the block as a whole. _context now refers to the statement's context, blockContext to
+                // the block's.
                 var statementContext = onLastBlockLine ? _context : ExpressionContext.Statement;
 
                 SyntaxNode translated;
@@ -508,8 +563,10 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     translated = Translate(expression);
                 }
 
-                // If we have a labeled statement, unwrap it and keep the label as pending. VisitLabel returns a dummy statement (since
-                // LINQ labels don't have a statement, unlike C#), so we'll skip that statement and add the label to the next real one.
+                // If we have a labeled statement, unwrap it and keep the label as pending. VisitLabel returns a
+                // dummy statement (since
+                // LINQ labels don't have a statement, unlike C#), so we'll skip that statement and add the label to
+                // the next real one.
                 if (translated is LabeledStatementSyntax labeledStatement)
                 {
                     if (pendingLabeledStatement is not null)
@@ -526,7 +583,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 // ... instead of:
                 // int x;
                 // x = <expression>;
-                // ... except for expression context (i.e. on the last line), where we just return the value if needed.
+                // ... except for expression context (i.e. on the last line), where we just return the value if
+                // needed.
                 if (
                     expression
                         is BinaryExpression
@@ -554,7 +612,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 if (statementContext == ExpressionContext.Expression)
                 {
                     // We're on the last line of a block in expression context - the block is being lifted out.
-                    // All statements before the last line (this one) have already been added to _liftedStatements, just return the last
+                    // All statements before the last line (this one) have already been added to _liftedStatements, just
+                    // return the last
                     // expression.
                     Check.DebugAssert(onLastBlockLine, "onLastBlockLine");
                     Result = translated;
@@ -565,14 +624,17 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 {
                     if (_liftedState.Statements.Count > 0)
                     {
-                        // If any expressions were lifted out of the current expression, flatten them into our own block, just before the
-                        // expression from which they were lifted. Note that we don't do this in Expression context, since our own block is
+                        // If any expressions were lifted out of the current expression, flatten them into our own block,
+                        // just before the
+                        // expression from which they were lifted. Note that we don't do this in Expression context, since
+                        // our own block is
                         // lifted out.
                         statements.AddRange(_liftedState.Statements);
                         _liftedState.Statements.Clear();
                     }
 
-                    // Same for any variables being lifted out of the block; we add them to our own stack frame so that we can do proper
+                    // Same for any variables being lifted out of the block; we add them to our own stack frame so that
+                    // we can do proper
                     // variable name uniquification etc.
                     if (_liftedState.Variables.Count > 0)
                     {
@@ -586,7 +648,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     }
                 }
 
-                // Skip useless expressions with no side effects in statement context (these can be the result of switch/conditional lifting
+                // Skip useless expressions with no side effects in statement context (these can be the result of
+                // switch/conditional lifting
                 // with assignment lowering)
                 if (
                     statementContext == ExpressionContext.Statement
@@ -606,7 +669,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                             && statementContext == ExpressionContext.ExpressionLambda =>
                         ReturnStatement(e),
 
-                    // If we're in statement context and we have an expression that can't stand alone (e.g. literal), assign it to discard
+                    // If we're in statement context and we have an expression that can't stand alone (e.g. literal),
+                    // assign it to discard
                     ExpressionSyntax e
                         when statementContext == ExpressionContext.Statement
                             && !IsExpressionValidAsStatement(e) => ExpressionStatement(
@@ -635,7 +699,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 }
             }
 
-            // If a label existed on the last line of the block, add an empty statement (since C# requires it); for expression blocks we'd
+            // If a label existed on the last line of the block, add an empty statement (since C# requires it);
+            // for expression blocks we'd
             // have to lift that, not supported for now.
             if (pendingLabeledStatement is not null)
             {
@@ -651,9 +716,11 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 }
             }
 
-            // Above we transform top-level assignments (i = 8) to var-declarations with initializers (var i = 8); those variables have
+            // Above we transform top-level assignments (i = 8) to var-declarations with initializers (var i =
+            // 8); those variables have
             // already been taken care of and removed from the list.
-            // But there may still be variables that get assigned inside nested blocks or other situations; prepare declarations for those
+            // But there may still be variables that get assigned inside nested blocks or other situations;
+            // prepare declarations for those
             // and either add them to the block, or lift them if we're an expression block.
             var unassignedVariableDeclarations = unassignedVariables.Select(v =>
                 (LocalDeclarationStatementSyntax)
@@ -676,7 +743,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 );
                 _liftedState.UnassignedVariableDeclarations.Clear();
 
-                // We're done. If the block is in an expression context, it needs to be lifted out; but not if it's in a lambda (in that
+                // We're done. If the block is in an expression context, it needs to be lifted out; but not if it's
+                // in a lambda (in that
                 // case we just added return above).
                 Result = Block(statements);
             }
@@ -695,7 +763,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             }
         }
 
-        // Returns true for expressions which have side-effects, and can therefore appear alone as a statement
+        // Returns true for expressions which have side-effects, and can therefore appear alone as a
+        // statement
         static bool IsExpressionValidAsStatement(ExpressionSyntax expression) =>
             expression.Kind() switch
             {
@@ -724,9 +793,11 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         void PreprocessLabels()
         {
-            // LINQ label targets can be unnamed, so we need to generate names for unnamed ones and maintain a target->name mapping.
+            // LINQ label targets can be unnamed, so we need to generate names for unnamed ones and maintain a
+            // target->name mapping.
             // We need to maintain this as a stack for every block which has labels.
-            // Normal blocks get their own labels stack frame, which gets popped when we leave the block. Expression labels add their
+            // Normal blocks get their own labels stack frame, which gets popped when we leave the block.
+            // Expression labels add their
             // labels to their parent's stack frame (since they get lifted).
             var stackFrame = _stack.Peek();
 
@@ -766,10 +837,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual SyntaxNode TranslateCatchBlock(CatchBlock catchBlock, bool noType = false)
     {
@@ -817,10 +892,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual CSharpSyntaxNode TranslateConditional(
         ConditionalExpression conditional,
@@ -857,7 +936,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     new List<LocalDeclarationStatementSyntax>()
                 );
 
-                // If we're in a lambda body, we try to translate as an expression if possible (i.e. no blocks in the true/false arms).
+                // If we're in a lambda body, we try to translate as an expression if possible (i.e. no blocks in
+                // the true/false arms).
                 using (ChangeContext(ExpressionContext.Expression))
                 {
                     var ifTrue = Translate(conditional.IfTrue);
@@ -873,7 +953,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                         );
                     }
 
-                    // There were no lifted expressions inside either arm - we can translate directly to a C# conditional expression
+                    // There were no lifted expressions inside either arm - we can translate directly to a C#
+                    // conditional expression
                     if (_liftedState.Statements.Count == 0)
                     {
                         _liftedState = parentLiftedState;
@@ -881,7 +962,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     }
                 }
 
-                // If we're in a lambda body and couldn't translate as a conditional expression, translate as an if/else statement with
+                // If we're in a lambda body and couldn't translate as a conditional expression, translate as an
+                // if/else statement with
                 // return. Wrap the true/false sides in blocks to have "return" added.
                 if (_context == ExpressionContext.ExpressionLambda)
                 {
@@ -902,7 +984,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     );
                 }
 
-                // We're in regular expression context, and there are lifted expressions inside one of the arms; we translate to an if/else
+                // We're in regular expression context, and there are lifted expressions inside one of the arms; we
+                // translate to an if/else
                 // statement but lowering an assignment into both sides of the condition
                 _liftedState = new LiftedState(
                     new List<StatementSyntax>(),
@@ -960,7 +1043,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     var translatedBody = Translate(body, assignmentVariable);
 
                     // Usually we add an assignment for the variable.
-                    // The exception is if the body was itself lifted out and the assignment lowering succeeded (nested conditionals) -
+                    // The exception is if the body was itself lifted out and the assignment lowering succeeded (nested
+                    // conditionals) -
                     // in this case we get back the lowered assignment variable, and don't need the assignment (i = i)
                     if (translatedBody != assignmentVariable)
                     {
@@ -1007,7 +1091,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 {
                     BlockSyntax b => b,
 
-                    // We want to specifically exempt IfStatementSyntax under the Else from being wrapped by a block, so as to get nice
+                    // We want to specifically exempt IfStatementSyntax under the Else from being wrapped by a block, so
+                    // as to get nice
                     // else if syntax
                     IfStatementSyntax i => isTrueArm ? Block(i) : i,
 
@@ -1240,9 +1325,12 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     {
         var lambda = (LambdaExpression)invocation.Expression;
 
-        // We need to inline the lambda invocation into the tree, by replacing parameters in the lambda body with the invocation arguments.
-        // However, if an argument to the invocation can have side effects (e.g. a method call), and it's referenced multiple times from
-        // the body, then that would cause multiple evaluation, which is wrong (same if the arguments are evaluated only once but in reverse
+        // We need to inline the lambda invocation into the tree, by replacing parameters in the lambda body
+        // with the invocation arguments.
+        // However, if an argument to the invocation can have side effects (e.g. a method call), and it's
+        // referenced multiple times from
+        // the body, then that would cause multiple evaluation, which is wrong (same if the arguments are
+        // evaluated only once but in reverse
         // order).
         // So we have to lift such arguments.
         var arguments = new Expression[invocation.Arguments.Count];
@@ -1278,8 +1366,10 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     /// <inheritdoc />
     protected override Expression VisitLabel(LabelExpression label)
     {
-        // C# labels apply on a statement, but in LINQ they can appear anywhere (i.e. last thing in a block).
-        // So we apply the label to a dummy null literal statement, which we'll filter out of the block in statement context anyway.
+        // C# labels apply on a statement, but in LINQ they can appear anywhere (i.e. last thing in a
+        // block).
+        // So we apply the label to a dummy null literal statement, which we'll filter out of the block in
+        // statement context anyway.
         Result = LabeledStatement(
             TranslateLabelTarget(label.Target).Identifier.Text,
             ExpressionStatement(LiteralExpression(SyntaxKind.NullLiteralExpression))
@@ -1300,22 +1390,29 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual IdentifierNameSyntax TranslateLabelTarget(LabelTarget labelTarget)
     {
-        // In LINQ expression trees, label targets can have a return type (they're expressions), which means they return the last evaluated
-        // thing if e.g. they're the last expression in a block. This would require lifting out the last evaluation before the goto/break,
+        // In LINQ expression trees, label targets can have a return type (they're expressions), which means
+        // they return the last evaluated
+        // thing if e.g. they're the last expression in a block. This would require lifting out the last
+        // evaluation before the goto/break,
         // assigning it to a temporary variable, and adding a variable evaluation after the label.
         if (labelTarget.Type != typeof(void))
         {
             throw new NotImplementedException("Non-void label target");
         }
 
-        // We did a processing pass on the block's labels, so any labels should already be found in our label stack frame
+        // We did a processing pass on the block's labels, so any labels should already be found in our
+        // label stack frame
         return IdentifierName(_stack.Peek().Labels[labelTarget]);
     }
 
@@ -1448,7 +1545,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         var body = (CSharpSyntaxNode)Translate(lambda.Body);
 
-        // If the lambda body was an expression that had lifted statements (e.g. some block in expression context), we need to create
+        // If the lambda body was an expression that had lifted statements (e.g. some block in expression
+        // context), we need to create
         // a block to contain these statements
         if (_liftedState.Statements.Count > 0)
         {
@@ -1462,7 +1560,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         }
 
         // Note that we always explicitly include the parameters' types.
-        // This is because in some cases, the parameter isn't actually used in the lambda body, and the compiler can't infer its type.
+        // This is because in some cases, the parameter isn't actually used in the lambda body, and the
+        // compiler can't infer its type.
         // However, we can't do that when the type is anonymous.
         Result = ParenthesizedLambdaExpression(
             ParameterList(
@@ -1547,7 +1646,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     {
         using var _ = ChangeContext(ExpressionContext.Expression);
 
-        // LINQ expression trees can directly access private members, but C# code cannot; render (slow) reflection code that does the same
+        // LINQ expression trees can directly access private members, but C# code cannot; render (slow)
+        // reflection code that does the same
         // thing. Note that assignment to private members is handled in VisitBinary.
         // TODO: Replace this with a more efficient UnsafeAccessor API. #29754
         switch (member)
@@ -1654,8 +1754,10 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         var arguments = TranslateMethodArguments(call.Method.GetParameters(), call.Arguments);
 
-        // For generic methods, we check whether the generic type arguments are inferrable (e.g. they all appear in the parameters), and
-        // only explicitly specify the arguments if not. Note that this isn't just for prettier code: anonymous types cannot be explicitly
+        // For generic methods, we check whether the generic type arguments are inferrable (e.g. they all
+        // appear in the parameters), and
+        // only explicitly specify the arguments if not. Note that this isn't just for prettier code:
+        // anonymous types cannot be explicitly
         // named in code.
         SimpleNameSyntax methodIdentifier;
         if (!call.Method.IsGenericMethod || GenericTypeParameterAreInferrable())
@@ -1706,7 +1808,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             ExpressionSyntax expression;
             if (call.Object is null)
             {
-                // Static method call. Recursively add MemberAccessExpressions for all declaring types (for methods on nested types)
+                // Static method call. Recursively add MemberAccessExpressions for all declaring types (for methods
+                // on nested types)
                 expression = GetMemberAccessesForAllDeclaringTypes(call.Method.DeclaringType);
 
                 ExpressionSyntax GetMemberAccessesForAllDeclaringTypes(Type type) =>
@@ -1846,9 +1949,11 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             return node;
         }
 
-        // If the type has any required properties and the constructor doesn't have [SetsRequiredMembers], we can't just generate an
+        // If the type has any required properties and the constructor doesn't have [SetsRequiredMembers],
+        // we can't just generate an
         // instantiation expression.
-        // TODO: Currently matching attributes by name since we target .NET 6.0. If/when we target .NET 7.0 and above, match the type.
+        // TODO: Currently matching attributes by name since we target .NET 6.0. If/when we target .NET 7.0
+        // and above, match the type.
         if (
             node.Type.GetCustomAttributes(inherit: true)
                 .Any(a =>
@@ -1863,8 +1968,10 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 ) != true
         )
         {
-            // If the constructor is parameterless, we generate Activator.Create<T>() which is almost as fast (<10ns difference).
-            // For constructors with parameters, we currently throw as not supported (we can pass parameters, but boxing, probably
+            // If the constructor is parameterless, we generate Activator.Create<T>() which is almost as fast
+            // (<10ns difference).
+            // For constructors with parameters, we currently throw as not supported (we can pass parameters,
+            // but boxing, probably
             // speed degradation etc.).
             if (node.Constructor.GetParameters().Length == 0)
             {
@@ -1919,7 +2026,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         }
 
         // This parameter is unknown to us - it's captured from outside the entire expression tree.
-        // Simply return its name without worrying about uniquification, since the variable needs to correspond to the outside in any
+        // Simply return its name without worrying about uniquification, since the variable needs to
+        // correspond to the outside in any
         // case (it's the callers responsibility).
         _capturedVariables.Add(parameter);
 
@@ -1949,10 +2057,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected virtual CSharpSyntaxNode TranslateSwitch(
         SwitchExpression switchNode,
@@ -1991,7 +2103,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     )
                 );
 
-                // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the switch as a series of
+                // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the
+                // switch as a series of
                 // nested ConditionalExpressions.
                 if (
                     cases.Any(c =>
@@ -2076,7 +2189,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                         )
                 );
 
-                // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the switch as a series of
+                // LINQ SwitchExpression supports non-literal labels, which C# does not support. This rewrites the
+                // switch as a series of
                 // nested ConditionalExpressions.
                 if (
                     arms.Any(a =>
@@ -2092,14 +2206,16 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     );
                 }
 
-                // If there were no lifted expressions inside any arm, we can translate directly to a C# switch expression
+                // If there were no lifted expressions inside any arm, we can translate directly to a C# switch
+                // expression
                 if (_liftedState.Statements.Count == 0)
                 {
                     _liftedState = parentLiftedState;
                     return SwitchExpression(switchValue, arms);
                 }
 
-                // There are lifted expressions inside some of the arms, we must lift the entire switch expression, rewriting it to
+                // There are lifted expressions inside some of the arms, we must lift the entire switch expression,
+                // rewriting it to
                 // a switch statement.
                 _liftedState = new LiftedState(
                     new List<StatementSyntax>(),
@@ -2188,7 +2304,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     }
 
                     // Usually we add an assignment for the variable.
-                    // The exception is if the body was itself lifted out and the assignment lowering succeeded (nested conditionals) -
+                    // The exception is if the body was itself lifted out and the assignment lowering succeeded (nested
+                    // conditionals) -
                     // in this case we get back the lowered assignment variable, and don't need the assignment (i = i)
                     if (translatedBody != assignmentVariable)
                     {
@@ -2424,7 +2541,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         foreach (var binding in memberInit.Bindings)
         {
-            // C# collection initialization syntax only works when Add is called on an IEnumerable, but LINQ supports arbitrary add
+            // C# collection initialization syntax only works when Add is called on an IEnumerable, but LINQ
+            // supports arbitrary add
             // methods. Skip these, we'll add them later outside the initializer
             if (
                 binding is MemberListBinding listBinding
@@ -2481,7 +2599,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         foreach (var initializer in listInit.Initializers)
         {
-            // C# collection initialization syntax only works when Add is called on an IEnumerable, but LINQ supports arbitrary add
+            // C# collection initialization syntax only works when Add is called on an IEnumerable, but LINQ
+            // supports arbitrary add
             // methods. Skip these, we'll add them later outside the initializer
             if (
                 !listInit.NewExpression.Type.IsAssignableTo(typeof(IEnumerable))
@@ -2510,7 +2629,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         if (incompatibleListBindings is not null)
         {
             // TODO: This requires lifting statements to *after* the instantiation - we usually lift to before.
-            // This is problematic: if such an expression is passed as an argument to a method, there's no way to faithfully translate it
+            // This is problematic: if such an expression is passed as an argument to a method, there's no way
+            // to faithfully translate it
             // while preserving evaluation order.
             throw new NotImplementedException("ListInit: incompatible ElementInit");
         }
@@ -2592,15 +2712,20 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     protected override Expression VisitExtension(Expression node)
     {
         // TODO: Remove any EF-specific code from this visitor (extend if needed)
-        // TODO: Hack mode. Visit the expression beforehand to replace EntityQueryRootExpression with context.Set<>(), or receive it in this visitor as a replacement or something.
+        // TODO: Hack mode. Visit the expression beforehand to replace EntityQueryRootExpression with
+        // context.Set<>(), or receive it in this visitor as a replacement or something.
         if (node is EntityQueryRootExpression entityQueryRoot)
         {
             // TODO: STET
@@ -2665,7 +2790,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
             if (_liftedState.Statements.Count > liftedStatementsPosition)
             {
-                // This argument contained lifted statements. In order to preserve evaluation order, we must also lift out all preceding
+                // This argument contained lifted statements. In order to preserve evaluation order, we must also
+                // lift out all preceding
                 // arguments to before this argument's lifted statements.
                 for (; lastLiftedArgumentPosition < i; lastLiftedArgumentPosition++)
                 {
@@ -2814,7 +2940,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         private bool _mayHaveSideEffects;
 
         /// <summary>
-        ///     Returns whether the two provided nodes can be re-ordered without the reversed evaluation order having any effect.
+        ///     Returns whether the two provided nodes can be re-ordered without the reversed evaluation
+        // order having any effect.
         ///     For example, two literal expressions can be safely ordered, while two invocations cannot.
         /// </summary>
         public bool CanBeReordered(SyntaxNode first, SyntaxNode second) =>
@@ -2844,7 +2971,8 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 ExpressionStatementSyntax e => MayHaveSideEffectsCore(e.Expression),
                 EmptyStatementSyntax => false,
 
-                // TODO: we can exempt most binary and unary expressions as well, e.g. i + 5, but not anything involving assignment
+                // TODO: we can exempt most binary and unary expressions as well, e.g. i + 5, but not anything
+                // involving assignment
                 _ => true,
             };
     }

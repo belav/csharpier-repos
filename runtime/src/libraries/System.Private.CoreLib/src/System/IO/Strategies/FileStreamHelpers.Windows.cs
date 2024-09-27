@@ -241,7 +241,8 @@ namespace System.IO.Strategies
         )
         {
             // For efficiency, we avoid creating a new task and associated state for each asynchronous read.
-            // Instead, we create a single reusable awaitable object that will be triggered when an await completes
+            // Instead, we create a single reusable awaitable object that will be triggered when an await
+            // completes
             // and reset before going again.
             var readAwaitable = new AsyncCopyToAwaitable(handle);
 
@@ -253,10 +254,14 @@ namespace System.IO.Strategies
             }
 
             // Get the buffer to use for the copy operation, as the base CopyToAsync does. We don't try to use
-            // _buffer here, even if it's not null, as concurrent operations are allowed, and another operation may
-            // actually be using the buffer already. Plus, it'll be rare for _buffer to be non-null, as typically
-            // CopyToAsync is used as the only operation performed on the stream, and the buffer is lazily initialized.
-            // Further, typically the CopyToAsync buffer size will be larger than that used by the FileStream, such that
+            // _buffer here, even if it's not null, as concurrent operations are allowed, and another operation
+            // may
+            // actually be using the buffer already. Plus, it'll be rare for _buffer to be non-null, as
+            // typically
+            // CopyToAsync is used as the only operation performed on the stream, and the buffer is lazily
+            // initialized.
+            // Further, typically the CopyToAsync buffer size will be larger than that used by the FileStream,
+            // such that
             // we'd likely be unable to use it anyway.  Instead, we rent the buffer from a pool.
             byte[] copyBuffer = ArrayPool<byte>.Shared.Rent(bufferSize);
 
@@ -270,8 +275,10 @@ namespace System.IO.Strategies
             try
             {
                 // Register for cancellation.  We do this once for the whole copy operation, and just try to cancel
-                // whatever read operation may currently be in progress, if there is one.  It's possible the cancellation
-                // request could come in between operations, in which case we flag that with explicit calls to ThrowIfCancellationRequested
+                // whatever read operation may currently be in progress, if there is one.  It's possible the
+                // cancellation
+                // request could come in between operations, in which case we flag that with explicit calls to
+                // ThrowIfCancellationRequested
                 // in the read/write copy loop.
                 if (cancellationToken.CanBeCanceled)
                 {
@@ -312,8 +319,10 @@ namespace System.IO.Strategies
                         int errorCode;
                         unsafe
                         {
-                            // Allocate a native overlapped for our reusable overlapped, and set position to read based on the next
-                            // desired address stored in the awaitable.  (This position may be 0, if either we're at the beginning or
+                            // Allocate a native overlapped for our reusable overlapped, and set position to read based on the
+                            // next
+                            // desired address stored in the awaitable.  (This position may be 0, if either we're at the
+                            // beginning or
                             // if the stream isn't seekable.)
                             readAwaitable._nativeOverlapped =
                                 handle.ThreadPoolBinding!.AllocateNativeOverlapped(
@@ -339,7 +348,8 @@ namespace System.IO.Strategies
                                 ) >= 0;
                         }
 
-                        // If the operation did not synchronously succeed, it either failed or initiated the asynchronous operation.
+                        // If the operation did not synchronously succeed, it either failed or initiated the asynchronous
+                        // operation.
                         if (!synchronousSuccess && errorCode != Interop.Errors.ERROR_IO_PENDING)
                         {
                             if (
@@ -362,7 +372,8 @@ namespace System.IO.Strategies
                             readAwaitable.MarkCompleted();
                         }
 
-                        // Wait for the async operation (which may or may not have already completed), then throw if it failed.
+                        // Wait for the async operation (which may or may not have already completed), then throw if it
+                        // failed.
                         await readAwaitable;
 
                         if (readAwaitable._errorCode != Interop.Errors.ERROR_SUCCESS)
@@ -445,10 +456,12 @@ namespace System.IO.Strategies
             }
         }
 
-        /// <summary>Used by AsyncWindowsFileStreamStrategy.CopyToAsync to enable awaiting the result of an overlapped I/O operation with minimal overhead.</summary>
+        /// <summary>Used by AsyncWindowsFileStreamStrategy.CopyToAsync to enable awaiting the result of an
+        // overlapped I/O operation with minimal overhead.</summary>
         private sealed unsafe class AsyncCopyToAwaitable : ICriticalNotifyCompletion
         {
-            /// <summary>Sentinel object used to indicate that the I/O operation has completed before being awaited.</summary>
+            /// <summary>Sentinel object used to indicate that the I/O operation has completed before being
+            // awaited.</summary>
             private static readonly Action s_sentinel = () => { };
 
             /// <summary>Cached delegate to IOCallback.</summary>
@@ -490,7 +503,8 @@ namespace System.IO.Strategies
                 _numBytes = 0;
             }
 
-            /// <summary>Overlapped callback: store the results, then invoke the continuation delegate.</summary>
+            /// <summary>Overlapped callback: store the results, then invoke the continuation
+            // delegate.</summary>
             internal static void IOCallback(
                 uint errorCode,
                 uint numBytes,

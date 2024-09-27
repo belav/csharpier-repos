@@ -110,11 +110,14 @@ namespace System.ComponentModel.Composition.Hosting
             }
 
             //TODO-MT: This is pretty suspect - we can easily eliminate catalogs that aren't listed as being
-            // removed.  Then again, the idea of trying to mutate the catalog on two threads at the same time is pretty
+            // removed.  Then again, the idea of trying to mutate the catalog on two threads at the same time is
+            // pretty
             // suspect to begin with.  When would that ever result in a meaningful composition?
 
-            // We are doing this outside of the lock, so it's possible that the catalog will continute propagating events from things
-            // we are about to unsubscribe from. Given the non-specificity of our event, in the worst case scenario we would simply fire
+            // We are doing this outside of the lock, so it's possible that the catalog will continute
+            // propagating events from things
+            // we are about to unsubscribe from. Given the non-specificity of our event, in the worst case
+            // scenario we would simply fire
             // unnecessary events.
 
             var removedParts = new Lazy<IEnumerable<ComposablePartDefinition>>(

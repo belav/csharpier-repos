@@ -245,7 +245,8 @@ namespace System.Linq.Parallel
                                 break;
                             }
 
-                            //This Wait() does not require cancellation support as it will wake up when all the producers into the
+                            //This Wait() does not require cancellation support as it will wake up when all the producers into
+                            // the
                             //channel have finished.  Hence, if all the producers wake up on cancellation, so will this.
                             m_consumerEvent.Wait();
                             m_channelIndex = currChannelIndex = m_consumerEvent.Value;

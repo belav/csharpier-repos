@@ -35,7 +35,8 @@ namespace System.Collections.Immutable
             internal static IEqualityComparer<HashBucket> DefaultInstance => s_defaultInstance;
 
             /// <summary>
-            /// Prevents a default instance of the <see cref="HashBucketByRefEqualityComparer"/> class from being created.
+            /// Prevents a default instance of the <see cref="HashBucketByRefEqualityComparer"/> class from
+            // being created.
             /// </summary>
             private HashBucketByRefEqualityComparer() { }
 

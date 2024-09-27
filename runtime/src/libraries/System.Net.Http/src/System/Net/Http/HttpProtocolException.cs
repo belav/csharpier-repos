@@ -10,15 +10,19 @@ namespace System.Net.Http
     /// The exception thrown when an HTTP/2 or an HTTP/3 protocol error occurs.
     /// </summary>
     /// <remarks>
-    /// When calling <see cref="HttpClient"/> or <see cref="SocketsHttpHandler"/> methods, <see cref="HttpProtocolException"/> will be the inner exception of
+    /// When calling <see cref="HttpClient"/> or <see cref="SocketsHttpHandler"/> methods, <see
+    // cref="HttpProtocolException"/> will be the inner exception of
     /// <see cref="HttpRequestException"/> if a protocol error occurs.
-    /// When calling <see cref="Stream"/> methods on the stream returned by <see cref="HttpContent.ReadAsStream()"/> or
-    /// <see cref="HttpContent.ReadAsStreamAsync(Threading.CancellationToken)"/>, <see cref="HttpProtocolException"/> can be thrown directly.
+    /// When calling <see cref="Stream"/> methods on the stream returned by <see
+    // cref="HttpContent.ReadAsStream()"/> or
+    /// <see cref="HttpContent.ReadAsStreamAsync(Threading.CancellationToken)"/>, <see
+    // cref="HttpProtocolException"/> can be thrown directly.
     /// </remarks>
     public sealed class HttpProtocolException : HttpIOException
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="HttpProtocolException"/> class with the specified error code,
+        /// Initializes a new instance of the <see cref="HttpProtocolException"/> class with the specified
+        // error code,
         /// message, and inner exception.
         /// </summary>
         /// <param name="errorCode">The HTTP/2 or HTTP/3 error code.</param>

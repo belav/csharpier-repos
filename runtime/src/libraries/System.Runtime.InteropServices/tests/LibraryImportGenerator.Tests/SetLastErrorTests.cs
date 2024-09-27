@@ -93,7 +93,8 @@ namespace LibraryImportGenerator.IntegrationTests
             int error = 100;
             Marshal.SetLastPInvokeError(error);
 
-            // Don't actually set the error in the native call. SetLastError=true should clear any existing error.
+            // Don't actually set the error in the native call. SetLastError=true should clear any existing
+            // error.
             string errorString = error.ToString();
             string ret = NativeExportsNE.SetLastError.SetError_NonBlittableSignature(
                 error,
@@ -105,7 +106,8 @@ namespace LibraryImportGenerator.IntegrationTests
 
             Marshal.SetLastPInvokeError(error);
 
-            // Don't actually set the error in the native call. SetLastError=true should clear any existing error.
+            // Don't actually set the error in the native call. SetLastError=true should clear any existing
+            // error.
             NativeExportsNE.SetLastError.SetError(error, shouldSetError: 0);
             Assert.Equal(0, Marshal.GetLastPInvokeError());
 

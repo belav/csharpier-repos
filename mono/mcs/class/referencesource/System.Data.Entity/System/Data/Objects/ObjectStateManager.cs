@@ -28,12 +28,15 @@ namespace System.Data.Objects
     /// </summary>
     public class ObjectStateManager : IEntityStateManager
     {
-        // This is the initial capacity used for lists of entries.  We use this rather than the default because
-        // perf testing showed we were almost always increasing the capacity which can be quite a slow operation.
+        // This is the initial capacity used for lists of entries.  We use this rather than the default
+        // because
+        // perf testing showed we were almost always increasing the capacity which can be quite a slow
+        // operation.
         private const int _initialListSize = 16;
 
         // dictionaries (one for each entity state) that store cache entries that represent entities
-        // these are only non-null when there is an entity in respective state, must always check for null before using
+        // these are only non-null when there is an entity in respective state, must always check for null
+        // before using
         private Dictionary<EntityKey, EntityEntry> _addedEntityStore;
         private Dictionary<EntityKey, EntityEntry> _modifiedEntityStore;
         private Dictionary<EntityKey, EntityEntry> _deletedEntityStore;
@@ -41,7 +44,8 @@ namespace System.Data.Objects
         private Dictionary<object, EntityEntry> _keylessEntityStore;
 
         // dictionaries (one for each entity state) that store cache entries that represent relationships
-        // these are only non-null when there is an relationship in respective state, must always check for null before using
+        // these are only non-null when there is an relationship in respective state, must always check for
+        // null before using
         private Dictionary<RelationshipWrapper, RelationshipEntry> _addedRelationshipStore;
         private Dictionary<RelationshipWrapper, RelationshipEntry> _deletedRelationshipStore;
         private Dictionary<RelationshipWrapper, RelationshipEntry> _unchangedRelationshipStore;
@@ -113,8 +117,10 @@ namespace System.Data.Objects
         /// Cache entity property/changing object/original value here between changing and changed events
         /// </summary>
         /// <remarks>
-        /// Only single threading is supported and changing/changed calls cannot be nested. Consecutive calls to Changing
-        /// overwrite previously cached values. Calls to Changed must have been preceded by a Changing call on the same property
+        /// Only single threading is supported and changing/changed calls cannot be nested. Consecutive
+        // calls to Changing
+        /// overwrite previously cached values. Calls to Changed must have been preceded by a Changing call
+        // on the same property
         ///
         /// a) user starts property value change with a call to
         ///    IEntityChangeTracker.EntityMemberChanging or IEntityChangeTracker.EntityComplexMemberChanging
@@ -122,7 +128,8 @@ namespace System.Data.Objects
         /// c) new property value is stored on object
         /// d) users completes the property value change with a call to
         ///    IEntityChangeTracker.EntityMemberChanged or IEntityChangeTracker.EntityComplexMemberChanged
-        /// e} The public interface methods call EntityValueChanged, which saves the cached value in the original values record
+        /// e} The public interface methods call EntityValueChanged, which saves the cached value in the
+        // original values record
         /// </remarks>
         private object _changingOldValue;
 
@@ -325,7 +332,8 @@ namespace System.Data.Objects
         /// </summary>
         /// <param name="dataObject">the object to add</param>
         /// <param name="entitySet">the entity set of the given object</param>
-        /// <param name="argumentName">Name of the argument passed to a public method, for use in exceptions.</param>
+        /// <param name="argumentName">Name of the argument passed to a public method, for use in
+        // exceptions.</param>
         /// <param name="isAdded">Indicates whether the entity is added or unchanged.</param>
         internal EntityEntry AddEntry(
             IEntityWrapper wrappedObject,
@@ -354,7 +362,8 @@ namespace System.Data.Objects
 
             // dataObject's type should match to type that can be contained by the entityset
             EdmType entityEdmType = typeMetadata.CdmMetadata.EdmType;
-            //OC Mapping will make sure that non-abstract type in O space is always mapped to a non-abstract type in C space
+            //OC Mapping will make sure that non-abstract type in O space is always mapped to a non-abstract
+            // type in C space
             Debug.Assert(
                 !entityEdmType.Abstract,
                 "non-abstract type in O space is mapped to abstract type in C space"
@@ -389,7 +398,8 @@ namespace System.Data.Objects
             if (null != (object)dataObjectEntityKey)
             {
                 entityKey = dataObjectEntityKey;
-                // These two checks verify that entityWithKey.EntityKey implemented by the user on a (I)POCO entity returns what it was given.
+                // These two checks verify that entityWithKey.EntityKey implemented by the user on a (I)POCO entity
+                // returns what it was given.
                 EntityUtil.CheckEntityKeyNull(entityKey);
                 EntityUtil.CheckEntityKeysMatch(wrappedObject, entityKey);
             }
@@ -488,7 +498,8 @@ namespace System.Data.Objects
                 // fire ColectionChanged event  only when a new entity is added to cache
                 OnObjectStateManagerChanged(CollectionChangeAction.Add, newEntry.Entity);
 
-                // When adding, we do this in AddSingleObject since we don't want to do it before the context is attached.
+                // When adding, we do this in AddSingleObject since we don't want to do it before the context is
+                // attached.
                 if (!isAdded)
                 {
                     FixupReferencesByForeignKeys(newEntry);
@@ -503,7 +514,8 @@ namespace System.Data.Objects
             bool replaceAddedRefs = false
         )
         {
-            // Perf optimization to avoid all this work if the entity doesn't participate in any FK relationships
+            // Perf optimization to avoid all this work if the entity doesn't participate in any FK
+            // relationships
             if (!((EntitySet)newEntry.EntitySet).HasForeignKeyRelationships)
             {
                 return;
@@ -612,7 +624,8 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Removes an entry to the index of foreign keys that reference entities that we don't yet know about.
+        /// Removes an entry to the index of foreign keys that reference entities that we don't yet know
+        // about.
         /// This is typically done when the entity is detached from the context.
         /// </summary>
         /// <param name="foreignKey">The foreign key found in the entry</param>
@@ -787,10 +800,14 @@ namespace System.Data.Objects
         /// </summary>
         /// <param name="keyEntry">the key entry that exists in the state manager</param>
         /// <param name="entity">the object to add</param>
-        /// <param name="shadowValues">a data record representation of the entity's values, including any values in shadow state</param>
-        /// <param name="replacingEntry">True if this promoted key entry is replacing an existing detached entry</param>
-        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for RelatedEnds</param>
-        /// <param name="argumentName">Name of the argument passed to a public method, for use in exceptions.</param>
+        /// <param name="shadowValues">a data record representation of the entity's values, including any
+        // values in shadow state</param>
+        /// <param name="replacingEntry">True if this promoted key entry is replacing an existing detached
+        // entry</param>
+        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for
+        // RelatedEnds</param>
+        /// <param name="argumentName">Name of the argument passed to a public method, for use in
+        // exceptions.</param>
         internal void PromoteKeyEntry(
             EntityEntry keyEntry,
             IEntityWrapper wrappedEntity,
@@ -931,16 +948,22 @@ namespace System.Data.Objects
 
         /// <summary>
         /// Performs non-generic collection or reference fixup between two entities
-        /// This method should only be used in scenarios where we are automatically hooking up relationships for
+        /// This method should only be used in scenarios where we are automatically hooking up relationships
+        // for
         /// the user, and not in cases where they are manually setting relationships.
         /// </summary>
-        /// <param name="mergeOption">The MergeOption to use to decide how to resolve EntityReference conflicts</param>
+        /// <param name="mergeOption">The MergeOption to use to decide how to resolve EntityReference
+        // conflicts</param>
         /// <param name="sourceEntity">The entity instance on the source side of the relationship</param>
-        /// <param name="sourceMember">The AssociationEndMember that contains the metadata for the source entity</param>
+        /// <param name="sourceMember">The AssociationEndMember that contains the metadata for the source
+        // entity</param>
         /// <param name="targetEntity">The entity instance on the source side of the relationship</param>
-        /// <param name="targetMember">The AssociationEndMember that contains the metadata for the target entity</param>
-        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for RelatedEnds</param>
-        /// <param name="relationshipAlreadyExists">Whether or not the relationship entry already exists in the cache for these entities</param>
+        /// <param name="targetMember">The AssociationEndMember that contains the metadata for the target
+        // entity</param>
+        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for
+        // RelatedEnds</param>
+        /// <param name="relationshipAlreadyExists">Whether or not the relationship entry already exists in
+        // the cache for these entities</param>
         /// <param name="inKeyEntryPromotion">Whether this method is used in key entry promotion</param>
         internal static void AddEntityToCollectionOrReference(
             MergeOption mergeOption,
@@ -953,7 +976,8 @@ namespace System.Data.Objects
             bool inKeyEntryPromotion
         )
         {
-            // Call GetRelatedEnd to retrieve the related end on the source entity that points to the target entity
+            // Call GetRelatedEnd to retrieve the related end on the source entity that points to the target
+            // entity
             RelatedEnd relatedEnd = wrappedSource.RelationshipManager.GetRelatedEndInternal(
                 sourceMember.DeclaringType.FullName,
                 targetMember.Name
@@ -981,9 +1005,11 @@ namespace System.Data.Objects
                         break;
                     case MergeOption.AppendOnly:
                         // SQLBU 551031
-                        // In key entry promotion case, detect that sourceEntity is already related to some entity in the context,
+                        // In key entry promotion case, detect that sourceEntity is already related to some entity in the
+                        // context,
                         // so it cannot be related to another entity being attached (relation 1-1).
-                        // Without this check we would throw exception from RelatedEnd.Add() but the exception message couldn't
+                        // Without this check we would throw exception from RelatedEnd.Add() but the exception message
+                        // couldn't
                         // properly describe what has happened.
                         if (
                             inKeyEntryPromotion
@@ -1011,7 +1037,8 @@ namespace System.Data.Objects
                             && currentWrappedTarget != wrappedTarget
                         )
                         {
-                            // The source entity is already related to a different target, so before we hook it up to the new target,
+                            // The source entity is already related to a different target, so before we hook it up to the new
+                            // target,
                             // disconnect the existing related ends and detach the relationship entry
                             RelationshipEntry relationshipEntry =
                                 relatedEnd.FindRelationshipEntryInObjectStateManager(
@@ -1032,7 +1059,8 @@ namespace System.Data.Objects
                                 );
                                 // If the relationship was Added prior to the above RemoveAll, it will have already been detached
                                 // If it was Unchanged, it is now Deleted and should be detached
-                                // It should never have been Deleted before now, because we just got currentTargetEntity from the related end
+                                // It should never have been Deleted before now, because we just got currentTargetEntity from the
+                                // related end
                                 if (relationshipEntry.State == EntityState.Deleted)
                                 {
                                     relationshipEntry.AcceptChanges();
@@ -1102,7 +1130,8 @@ namespace System.Data.Objects
                 mergeOption
             );
 
-            // In case the method was called from ObjectContext.AttachTo, we have to track relationships which were "promoted"
+            // In case the method was called from ObjectContext.AttachTo, we have to track relationships which
+            // were "promoted"
             // Tracked relationships are used in recovery code of AttachTo.
             if (
                 inKeyEntryPromotion
@@ -1120,7 +1149,8 @@ namespace System.Data.Objects
             }
         }
 
-        // devnote: This method should only be used in scenarios where we are automatically hooking up relationships for
+        // devnote: This method should only be used in scenarios where we are automatically hooking up
+        // relationships for
         // the user, and not in cases where they are manually setting relationships.
         private static void UpdateRelatedEnd(
             RelatedEnd relatedEnd,
@@ -1145,7 +1175,8 @@ namespace System.Data.Objects
                 }
                 // else we just want to leave IsLoaded alone, not set it to false
 
-                // In NoTracking cases, we want to enable the EntityReference.EntityKey property, so we have to set the key
+                // In NoTracking cases, we want to enable the EntityReference.EntityKey property, so we have to set
+                // the key
                 if (mergeOption == MergeOption.NoTracking)
                 {
                     EntityKey targetKey = wrappedRelatedEntity.EntityKey;
@@ -1163,18 +1194,23 @@ namespace System.Data.Objects
         /// (a) both sides of each relationship are always full entities and not stubs
         /// (b) there could be multiple entities to process at once
         /// (c) NoTracking queries are possible.
-        /// Not used for relationship span because although some of the logic is similar, the above are not true.
+        /// Not used for relationship span because although some of the logic is similar, the above are not
+        // true.
         /// </summary>
-        /// <param name="context">ObjectContext to use to look up existing relationships. Using the context here instead of ObjectStateManager because for NoTracking queries
-        /// we shouldn't even touch the state manager at all, so we don't want to access it until we know we are not using NoTracking.</param>
+        /// <param name="context">ObjectContext to use to look up existing relationships. Using the context
+        // here instead of ObjectStateManager because for NoTracking queries
+        /// we shouldn't even touch the state manager at all, so we don't want to access it until we know we
+        // are not using NoTracking.</param>
         /// <param name="mergeOption">MergeOption to use when updating existing relationships</param>
         /// <param name="associationSet">AssociationSet for the relationships</param>
         /// <param name="sourceMember">Role of sourceEntity in associationSet</param>
         /// <param name="sourceKey">EntityKey for sourceEntity</param>
         /// <param name="sourceEntity">Source entity in the relationship</param>
         /// <param name="targetMember">Role of each targetEntity in associationSet</param>
-        /// <param name="targetEntities">List of target entities to use to create relationships with sourceEntity</param>
-        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for RelatedEnds</param>
+        /// <param name="targetEntities">List of target entities to use to create relationships with
+        // sourceEntity</param>
+        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for
+        // RelatedEnds</param>
         internal static int UpdateRelationships(
             ObjectContext context,
             MergeOption mergeOption,
@@ -1224,12 +1260,15 @@ namespace System.Data.Objects
                         }
                         count++;
 
-                        // If there is an existing relationship entry, update it based on its current state and the MergeOption, otherwise add a new one
+                        // If there is an existing relationship entry, update it based on its current state and the
+                        // MergeOption, otherwise add a new one
                         EntityState newEntryState;
                         if (mergeOption == MergeOption.NoTracking)
                         {
-                            // For NoTracking, we shouldn't touch the state manager, so no need to look for existing relationships to handle, just connect the two entities.
-                            // We don't care if the relationship already exists in the state manager or not, so just pass relationshipAlreadyExists=true so it won't look for it
+                            // For NoTracking, we shouldn't touch the state manager, so no need to look for existing
+                            // relationships to handle, just connect the two entities.
+                            // We don't care if the relationship already exists in the state manager or not, so just pass
+                            // relationshipAlreadyExists=true so it won't look for it
                             AddEntityToCollectionOrReference(
                                 MergeOption.NoTracking,
                                 wrappedSource,
@@ -1265,12 +1304,18 @@ namespace System.Data.Objects
                                 {
                                     case RelationshipMultiplicity.ZeroOrOne:
                                     case RelationshipMultiplicity.One:
-                                        // The other end of the relationship might already be related to something else, in which case we need to fix it up.
-                                        // devnote1: In some cases we can let relationship span do this, but there are cases, like EntityCollection.Attach, where there is no query
-                                        //           and thus no relationship span to help us. So, for now, this is redundant because relationship span will make another pass over these
-                                        //           entities, but unless I add a flag or something to indicate when I have to do it and when I don't, this is necessary.
-                                        // devnote2: The target and source arguments are intentionally reversed in the following call, because we already know there isn't a relationship
-                                        //           between the two entities we are current processing, but we want to see if there is one between the target and another source
+                                        // The other end of the relationship might already be related to something else, in which case we
+                                        // need to fix it up.
+                                        // devnote1: In some cases we can let relationship span do this, but there are cases, like
+                                        // EntityCollection.Attach, where there is no query
+                                        //           and thus no relationship span to help us. So, for now, this is redundant because
+                                        // relationship span will make another pass over these
+                                        //           entities, but unless I add a flag or something to indicate when I have to do it and
+                                        // when I don't, this is necessary.
+                                        // devnote2: The target and source arguments are intentionally reversed in the following call,
+                                        // because we already know there isn't a relationship
+                                        //           between the two entities we are current processing, but we want to see if there is one
+                                        // between the target and another source
                                         needNewRelationship = !TryUpdateExistingRelationships(
                                             context,
                                             mergeOption,
@@ -1285,7 +1330,8 @@ namespace System.Data.Objects
                                         );
                                         break;
                                     case RelationshipMultiplicity.Many:
-                                        // we always need a new relationship with Many-To-Many, if there was no exact match between these two entities, so do nothing
+                                        // we always need a new relationship with Many-To-Many, if there was no exact match between these
+                                        // two entities, so do nothing
                                         break;
                                     default:
                                         Debug.Assert(
@@ -1341,7 +1387,8 @@ namespace System.Data.Objects
                 context.ObjectStateManager.TransactionManager.EndGraphUpdate();
             }
             return count;
-            // devnote: Don't set IsLoaded on the target related end here -- the caller can do this more efficiently than we can here in some cases.
+            // devnote: Don't set IsLoaded on the target related end here -- the caller can do this more
+            // efficiently than we can here in some cases.
         }
 
         // Checks if the target end is a collection and, if so, ensures that it is not
@@ -1370,7 +1417,8 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Removes relationships if necessary when a query determines that the source entity has no relationships on the server
+        /// Removes relationships if necessary when a query determines that the source entity has no
+        // relationships on the server
         /// </summary>
         /// <param name="context">ObjectContext that contains the client relationships</param>
         /// <param name="mergeOption">MergeOption to use when updating existing relationships</param>
@@ -1395,7 +1443,8 @@ namespace System.Data.Objects
                 _initialListSize
             );
 
-            // This entity has no related entities on the server for the given associationset and role. If it has related
+            // This entity has no related entities on the server for the given associationset and role. If it
+            // has related
             // entities on the client, we may need to update those relationships, depending on the MergeOption
             if (mergeOption == MergeOption.OverwriteChanges)
             {
@@ -1405,7 +1454,8 @@ namespace System.Data.Objects
                     )
                 )
                 {
-                    // We only care about the relationships that match the incoming associationset and role for the source entity
+                    // We only care about the relationships that match the incoming associationset and role for the
+                    // source entity
                     if (
                         relationshipEntry.IsSameAssociationSetAndRole(
                             associationSet,
@@ -1427,7 +1477,8 @@ namespace System.Data.Objects
                     )
                 )
                 {
-                    // We only care about the relationships that match the incoming associationset and role for the source entity
+                    // We only care about the relationships that match the incoming associationset and role for the
+                    // source entity
                     if (
                         relationshipEntry.IsSameAssociationSetAndRole(
                             associationSet,
@@ -1441,7 +1492,8 @@ namespace System.Data.Objects
                     }
                 }
             }
-            // else we do nothing. We never expect any other states here, and already Assert this condition at the top of the method
+            // else we do nothing. We never expect any other states here, and already Assert this condition at
+            // the top of the method
 
             foreach (RelationshipEntry deletedEntry in deletedRelationships)
             {
@@ -1450,21 +1502,27 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Tries to updates one or more existing relationships for an entity, based on a given MergeOption and a target entity.
+        /// Tries to updates one or more existing relationships for an entity, based on a given MergeOption
+        // and a target entity.
         /// </summary>
-        /// <param name="context">ObjectContext to use to look up existing relationships for sourceEntity</param>
+        /// <param name="context">ObjectContext to use to look up existing relationships for
+        // sourceEntity</param>
         /// <param name="mergeOption">MergeOption to use when updating existing relationships</param>
         /// <param name="associationSet">AssociationSet for the relationship we are looking for</param>
         /// <param name="sourceMember">AssociationEndMember for the source role of the relationship</param>
-        /// <param name="sourceKey">EntityKey for the source entity in the relationship (passed here so we don't have to look it up again)</param>
+        /// <param name="sourceKey">EntityKey for the source entity in the relationship (passed here so we
+        // don't have to look it up again)</param>
         /// <param name="sourceEntity">Source entity in the relationship</param>
         /// <param name="targetMember">AssociationEndMember for the target role of the relationship</param>
         /// <param name="targetKey">EntityKey for the target entity in the relationship</param>
-        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for RelatedEnds</param>
-        /// <param name="newEntryState">[out] EntityState to be used for in scenarios where we need to add a new relationship after this method has returned</param>
+        /// <param name="setIsLoaded">Tells whether we should allow the IsLoaded flag to be set to true for
+        // RelatedEnds</param>
+        /// <param name="newEntryState">[out] EntityState to be used for in scenarios where we need to add a
+        // new relationship after this method has returned</param>
         /// <returns>
         /// true if an existing relationship is found and updated, and no further action is needed
-        /// false if either no relationship was found, or if one was found and updated, but a new one still needs to be added
+        /// false if either no relationship was found, or if one was found and updated, but a new one still
+        // needs to be added
         /// </returns>
         internal static bool TryUpdateExistingRelationships(
             ObjectContext context,
@@ -1484,9 +1542,12 @@ namespace System.Data.Objects
                 "Existing relationships should not be updated with NoTracking"
             );
 
-            // New relationships are always added as Unchanged except in specific scenarios. If there are multiple relationships being updated, and
-            // at least one of those requests the new relationship to be Deleted, it should always be added as Deleted, even if there are other
-            // relationships being updated that don't specify a state. Adding as Unchanged is just the default unless a scenario needs it to be Deleted to
+            // New relationships are always added as Unchanged except in specific scenarios. If there are
+            // multiple relationships being updated, and
+            // at least one of those requests the new relationship to be Deleted, it should always be added as
+            // Deleted, even if there are other
+            // relationships being updated that don't specify a state. Adding as Unchanged is just the default
+            // unless a scenario needs it to be Deleted to
             // achieve a particular result.
             newEntryState = EntityState.Unchanged;
             // FK full span for tracked entities is handled entirely by FK fix up in the state manager.
@@ -1495,7 +1556,8 @@ namespace System.Data.Objects
             {
                 return true;
             }
-            // Unless we find a case below where we explicitly do not want a new relationship, we should always add one to match the server.
+            // Unless we find a case below where we explicitly do not want a new relationship, we should always
+            // add one to match the server.
             bool needNewRelationship = true;
 
             ObjectStateManager manager = context.ObjectStateManager;
@@ -1505,7 +1567,8 @@ namespace System.Data.Objects
                 RelationshipEntry relationshipEntry in manager.FindRelationshipsByKey(sourceKey)
             )
             {
-                // We only care about relationships for the same AssociationSet and where the source entity is in the same role as it is in the incoming relationship.
+                // We only care about relationships for the same AssociationSet and where the source entity is in
+                // the same role as it is in the incoming relationship.
                 if (
                     relationshipEntry.IsSameAssociationSetAndRole(
                         associationSet,
@@ -1514,7 +1577,8 @@ namespace System.Data.Objects
                     )
                 )
                 {
-                    // If the other end of this relationship matches our current target entity, this relationship entry matches the server
+                    // If the other end of this relationship matches our current target entity, this relationship entry
+                    // matches the server
                     if (
                         targetKey
                         == relationshipEntry.RelationshipWrapper.GetOtherEntityKey(sourceKey)
@@ -1529,13 +1593,18 @@ namespace System.Data.Objects
                     }
                     else
                     {
-                        // We found an existing relationship where the reference side is different on the server than what the client has.
+                        // We found an existing relationship where the reference side is different on the server than what
+                        // the client has.
 
-                        // This relationship is between the same source entity and a different target, so we may need to take steps to fix up the
+                        // This relationship is between the same source entity and a different target, so we may need to
+                        // take steps to fix up the
                         // relationship to ensure that the client state is correct based on the requested MergeOption.
-                        // The only scenario we care about here is one where the target member has zero or one multiplicity (0..1 or 1..1), because those
-                        // are the only cases where it is meaningful to say that the relationship is different on the server and the client. In scenarios
-                        // where the target member has a many (*) multiplicity, it is possible to have multiple relationships between the source key
+                        // The only scenario we care about here is one where the target member has zero or one multiplicity
+                        // (0..1 or 1..1), because those
+                        // are the only cases where it is meaningful to say that the relationship is different on the server
+                        // and the client. In scenarios
+                        // where the target member has a many (*) multiplicity, it is possible to have multiple
+                        // relationships between the source key
                         // and other entities, and we don't want to touch those here.
                         switch (targetMember.RelationshipMultiplicity)
                         {
@@ -1606,7 +1675,8 @@ namespace System.Data.Objects
                                 }
                                 break;
                             case RelationshipMultiplicity.Many:
-                                // do nothing because its okay for this source entity to have multiple different targets, so there is nothing for us to fixup
+                                // do nothing because its okay for this source entity to have multiple different targets, so there
+                                // is nothing for us to fixup
                                 break;
                             default:
                                 Debug.Assert(
@@ -1640,8 +1710,10 @@ namespace System.Data.Objects
                     // Don't need new relationship to be added to match the server, since we already have a match
                     needNewRelationship = false;
 
-                    // We have an existing relationship entry that matches exactly to the incoming relationship from the server, but
-                    // we may need to update it on the client based on the MergeOption and the state of the relationship entry.
+                    // We have an existing relationship entry that matches exactly to the incoming relationship from the
+                    // server, but
+                    // we may need to update it on the client based on the MergeOption and the state of the relationship
+                    // entry.
                     switch (mergeOption)
                     {
                         case MergeOption.AppendOnly:
@@ -1684,7 +1756,8 @@ namespace System.Data.Objects
                             if (relationshipEntry.State == EntityState.Added)
                             {
                                 // The client now matches the server, so just move the relationship to unchanged.
-                                // If we don't do this and left the state Added, we will get a concurrency exception when trying to save
+                                // If we don't do this and left the state Added, we will get a concurrency exception when trying to
+                                // save
                                 relationshipEntry.AcceptChanges();
                             }
                             // else if it's already Unchanged we don't need to do anything
@@ -1824,7 +1897,8 @@ namespace System.Data.Objects
                 EntityState.Unchanged
             );
 
-            // The property EntityKey on newEntry validates that the entry and the entity on the entry have the same key.
+            // The property EntityKey on newEntry validates that the entry and the entity on the entry have the
+            // same key.
             Debug.Assert(
                 entityKey == newEntry.EntityKey,
                 "newEntry.EntityKey should match entityKey"
@@ -1845,8 +1919,10 @@ namespace System.Data.Objects
         /// appropriately matches the given entity.
         /// </summary>
         /// <param name="entity">The entity whose key must be verified</param>
-        /// <param name="entitySetForType">The entity set corresponding to the type of the given entity.</param>
-        /// <param name="forAttach">If true, then the exception message will reflect a bad key to attach, otherwise it will reflect a general inconsistency</param>
+        /// <param name="entitySetForType">The entity set corresponding to the type of the given
+        // entity.</param>
+        /// <param name="forAttach">If true, then the exception message will reflect a bad key to attach,
+        // otherwise it will reflect a general inconsistency</param>
         private void CheckKeyMatchesEntity(
             IEntityWrapper wrappedEntity,
             EntityKey entityKey,
@@ -2130,11 +2206,13 @@ namespace System.Data.Objects
 
         //Verify that all entities in the _keylessEntityStore are also in the other dictionaries.
         //Verify that all the entries in the _keylessEntityStore don't implement IEntityWithKey.
-        //Verify that there no entries in the other dictionaries that don't implement IEntityWithKey and aren't in _keylessEntityStore
+        //Verify that there no entries in the other dictionaries that don't implement IEntityWithKey and
+        // aren't in _keylessEntityStore
         [ConditionalAttribute("DEBUG")]
         private void ValidateKeylessEntityStore()
         {
-            // Future Enhancement : Check each entry in _keylessEntityStore to make sure it has a corresponding entry in one of the other stores.
+            // Future Enhancement : Check each entry in _keylessEntityStore to make sure it has a corresponding
+            // entry in one of the other stores.
             if (null != _keylessEntityStore)
             {
                 foreach (EntityEntry entry in _keylessEntityStore.Values)
@@ -2168,7 +2246,8 @@ namespace System.Data.Objects
                 }
             }
 
-            //Check each entry in the other stores to make sure that each non-IEntityWithKey entry is also in _keylessEntityStore
+            //Check each entry in the other stores to make sure that each non-IEntityWithKey entry is also in
+            // _keylessEntityStore
             Dictionary<EntityKey, EntityEntry>[] stores =
             {
                 _unchangedEntityStore,
@@ -2214,7 +2293,8 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Find the ObjectStateEntry from _keylessEntityStore for an entity that doesn't implement IEntityWithKey.
+        /// Find the ObjectStateEntry from _keylessEntityStore for an entity that doesn't implement
+        // IEntityWithKey.
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
@@ -2649,7 +2729,8 @@ namespace System.Data.Objects
 
         /// <summary>
         /// Resets the EntityKey for this entry.  This method is called
-        /// as part of temporary key fixup and permanent key un-fixup. This method is necessary because it is the only
+        /// as part of temporary key fixup and permanent key un-fixup. This method is necessary because it
+        // is the only
         /// scenario where we allow a new value to be set on a non-null EntityKey. This
         /// is the only place where we should be setting and clearing _inRelationshipFixup.
         /// </summary>
@@ -2736,9 +2817,12 @@ namespace System.Data.Objects
         /// <remarks>
         /// Both entities must be already tracked by the ObjectContext.
         /// </remarks>
-        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source entity</param>
-        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target entity</param>
-        /// <param name="navigationProperty">The name of the navigation property on the source entity</param>
+        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source
+        // entity</param>
+        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target
+        // entity</param>
+        /// <param name="navigationProperty">The name of the navigation property on the source
+        // entity</param>
         /// <param name="relationshipState">The requested state of the relationship</param>
         /// <returns>The ObjectStateEntry for changed relationship</returns>
         public ObjectStateEntry ChangeRelationshipState(
@@ -2776,9 +2860,12 @@ namespace System.Data.Objects
         /// <remarks>
         /// Both entities must be already tracked by the ObjectContext.
         /// </remarks>
-        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source entity</param>
-        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target entity</param>
-        /// <param name="navigationPropertySelector">A LINQ expression specifying the navigation property</param>
+        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source
+        // entity</param>
+        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target
+        // entity</param>
+        /// <param name="navigationPropertySelector">A LINQ expression specifying the navigation
+        // property</param>
         /// <param name="relationshipState">The requested state of the relationship</param>
         /// <returns>The ObjectStateEntry for changed relationship</returns>
         public ObjectStateEntry ChangeRelationshipState<TEntity>(
@@ -2799,8 +2886,10 @@ namespace System.Data.Objects
                 out targetEntry
             );
 
-            // We used to throw an ArgumentException if the expression contained a Convert.  Now we remove the convert,
-            // but if we still need to throw, then we should still throw an ArgumentException to avoid a breaking change.
+            // We used to throw an ArgumentException if the expression contained a Convert.  Now we remove the
+            // convert,
+            // but if we still need to throw, then we should still throw an ArgumentException to avoid a
+            // breaking change.
             // Therefore, we keep track of whether or not we removed the convert.
             bool removedConvert;
             string navigationProperty = ObjectContext.ParsePropertySelectorExpression<TEntity>(
@@ -2827,8 +2916,10 @@ namespace System.Data.Objects
         /// <remarks>
         /// Both entities must be already tracked by the ObjectContext.
         /// </remarks>
-        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source entity</param>
-        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target entity</param>
+        /// <param name="sourceEntity">The instance of the source entity or the EntityKey of the source
+        // entity</param>
+        /// <param name="targetEntity">The instance of the target entity or the EntityKey of the target
+        // entity</param>
         /// <param name="relationshipName">The name of relationship</param>
         /// <param name="targetRoleName">The target role name of the relationship</param>
         /// <param name="relationshipState">The requested state of the relationship</param>
@@ -3208,15 +3299,19 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Given a key that represents an entity on the dependent side of a FK, this method attempts to return the key of the
-        /// entity on the principal side of the FK.  If the two entities both exist in the context, then the primary key of
-        /// the principal entity is found and returned.  If the principal entity does not exist in the context, then a key
+        /// Given a key that represents an entity on the dependent side of a FK, this method attempts to
+        // return the key of the
+        /// entity on the principal side of the FK.  If the two entities both exist in the context, then the
+        // primary key of
+        /// the principal entity is found and returned.  If the principal entity does not exist in the
+        // context, then a key
         /// for it is built up from the foreign key values contained in the dependent entity.
         /// </summary>
         /// <param name="dependentKey">The key of the dependent entity</param>
         /// <param name="principalRole">The role indicating the FK to navigate</param>
         /// <param name="principalKey">Set to the principal key or null on return</param>
-        /// <returns>True if the principal key was found or built; false if it could not be found or built</returns>
+        /// <returns>True if the principal key was found or built; false if it could not be found or
+        // built</returns>
         bool IEntityStateManager.TryGetReferenceKey(
             EntityKey dependentKey,
             AssociationEndMember principalRole,
@@ -3325,16 +3420,22 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Gets a RelationshipManager for the given entity.  For entities that implement IEntityWithRelationships,
-        /// the RelationshipManager is obtained through that interface.  For other types of entity, the RelationshipManager
-        /// that is being tracked internally is returned.  This means that a RelationshipManager for an entity that
-        /// does not implement IEntityWithRelationships can only be obtained if the entity is being tracked by the
+        /// Gets a RelationshipManager for the given entity.  For entities that implement
+        // IEntityWithRelationships,
+        /// the RelationshipManager is obtained through that interface.  For other types of entity, the
+        // RelationshipManager
+        /// that is being tracked internally is returned.  This means that a RelationshipManager for an
+        // entity that
+        /// does not implement IEntityWithRelationships can only be obtained if the entity is being tracked
+        // by the
         /// ObjectStateManager.
-        /// Note that all code generated entities that inherit from EntityObject automatically implement IEntityWithRelationships.
+        /// Note that all code generated entities that inherit from EntityObject automatically implement
+        // IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">The entity for which to return a RelationshipManager</param>
         /// <returns>The RelationshipManager</returns>
-        /// <exception cref="InvalidOperationException">The entity does not implement IEntityWithRelationships and is not tracked by this ObjectStateManager</exception>
+        /// <exception cref="InvalidOperationException">The entity does not implement
+        // IEntityWithRelationships and is not tracked by this ObjectStateManager</exception>
         public RelationshipManager GetRelationshipManager(object entity)
         {
             RelationshipManager rm;
@@ -3352,16 +3453,22 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Gets a RelationshipManager for the given entity.  For entities that implement IEntityWithRelationships,
-        /// the RelationshipManager is obtained through that interface.  For other types of entity, the RelationshipManager
-        /// that is being tracked internally is returned.  This means that a RelationshipManager for an entity that
-        /// does not implement IEntityWithRelationships can only be obtained if the entity is being tracked by the
+        /// Gets a RelationshipManager for the given entity.  For entities that implement
+        // IEntityWithRelationships,
+        /// the RelationshipManager is obtained through that interface.  For other types of entity, the
+        // RelationshipManager
+        /// that is being tracked internally is returned.  This means that a RelationshipManager for an
+        // entity that
+        /// does not implement IEntityWithRelationships can only be obtained if the entity is being tracked
+        // by the
         /// ObjectStateManager.
-        /// Note that all code generated entities that inherit from EntityObject automatically implement IEntityWithRelationships.
+        /// Note that all code generated entities that inherit from EntityObject automatically implement
+        // IEntityWithRelationships.
         /// </summary>
         /// <param name="entity">The entity for which to return a RelationshipManager</param>
         /// <param name="relationshipManager">The RelationshipManager, or null if none was found</param>
-        /// <returns>True if a RelationshipManager was found; false if The entity does not implement IEntityWithRelationships and is not tracked by this ObjectStateManager</returns>
+        /// <returns>True if a RelationshipManager was found; false if The entity does not implement
+        // IEntityWithRelationships and is not tracked by this ObjectStateManager</returns>
         public bool TryGetRelationshipManager(
             object entity,
             out RelationshipManager relationshipManager
@@ -3432,7 +3539,8 @@ namespace System.Data.Objects
             {
                 // If we're transitioning to detached, completely remove all traces of the entry.
 
-                // SQLBU 508278: Object State Manager should not allow "dangling" relationships to stay in the state manager.
+                // SQLBU 508278: Object State Manager should not allow "dangling" relationships to stay in the state
+                // manager.
                 // Remove potential dangling relationships
                 Debug.Assert((object)entry.EntityKey != null, "attached entry must have a key");
                 foreach (
@@ -3477,7 +3585,8 @@ namespace System.Data.Objects
                 ForgetEntryWithConceptualNull(entry, resetAllKeys: true);
                 if (fireEvent)
                 {
-                    // fire collectionChanged event only when an entity is being deleted (this includes deleting an added entity which becomes detached)
+                    // fire collectionChanged event only when an entity is being deleted (this includes deleting an
+                    // added entity which becomes detached)
                     OnEntityDeleted(CollectionChangeAction.Remove, entry.Entity);
                     OnObjectStateManagerChanged(CollectionChangeAction.Remove, entry.Entity);
                 }
@@ -3870,11 +3979,14 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// For every tracked entity which doesn't implement IEntityWithChangeTracker detect changes in the entity's property values
+        /// For every tracked entity which doesn't implement IEntityWithChangeTracker detect changes in the
+        // entity's property values
         /// and marks appropriate ObjectStateEntry as Modified.
-        /// For every tracked entity which doesn't implement IEntityWithRelationships detect changes in its relationships.
+        /// For every tracked entity which doesn't implement IEntityWithRelationships detect changes in its
+        // relationships.
         ///
-        /// The method is used internally by ObjectContext.SaveChanges() but can be also used if user wants to detect changes
+        /// The method is used internally by ObjectContext.SaveChanges() but can be also used if user wants
+        // to detect changes
         /// and have ObjectStateEntries in appropriate state before the SaveChanges() method is called.
         /// </summary>
         internal void DetectChanges()
@@ -3889,13 +4001,15 @@ namespace System.Data.Objects
             {
                 try
                 {
-                    // Populate Transact-ionManager.DeletedRelationshipsByGraph and TransactionManager.AddedRelationshipsByGraph
+                    // Populate Transact-ionManager.DeletedRelationshipsByGraph and
+                    // TransactionManager.AddedRelationshipsByGraph
                     this.DetectChangesInNavigationProperties(entries);
 
                     // Populate TransactionManager.ChangedForeignKeys
                     this.DetectChangesInScalarAndComplexProperties(entries);
 
-                    // Populate TransactionManager.DeletedRelationshipsByForeignKey and TransactionManager.AddedRelationshipsByForeignKey
+                    // Populate TransactionManager.DeletedRelationshipsByForeignKey and
+                    // TransactionManager.AddedRelationshipsByForeignKey
                     this.DetectChangesInForeignKeys(entries);
 
                     // Detect conflicts between changes to FK and navigation properties
@@ -4296,7 +4410,8 @@ namespace System.Data.Objects
                                             : new HashSet<IEntityWrapper>();
                                     // if the change comes only from the FK and the FK is to a deleted entity
                                     // then we do not do fixup to align to that entity so do not add those
-                                    // implementation note: we do not need to check for contains because if it's there we don't need to add it
+                                    // implementation note: we do not need to check for contains because if it's there we don't need to
+                                    // add it
                                     if (relatedEntry.State != EntityState.Deleted)
                                     {
                                         // Remove it from the list of entities to add by reference because it will be added now
@@ -4530,7 +4645,8 @@ namespace System.Data.Objects
                                     {
                                         TransactionManager.EntityBeingReparented = null;
                                     }
-                                    // stop trying to remove something, if the owner was detached or deleted because of RIC/cascade delete
+                                    // stop trying to remove something, if the owner was detached or deleted because of RIC/cascade
+                                    // delete
                                     if (
                                         entry.State == EntityState.Detached
                                         || entry.State == EntityState.Deleted
@@ -4592,7 +4708,8 @@ namespace System.Data.Objects
                                     TransactionManager.EntityBeingReparented = null;
                                 }
 
-                                // stop trying to remove something, if the owner was detached or deleted because of RIC/cascade delete
+                                // stop trying to remove something, if the owner was detached or deleted because of RIC/cascade
+                                // delete
                                 if (
                                     entry.State == EntityState.Detached
                                     || entry.State == EntityState.Deleted
@@ -4635,7 +4752,8 @@ namespace System.Data.Objects
                     HashSet<EntityKey> entityKeysOfDeletedObjects = null;
                     Dictionary<RelatedEnd, HashSet<EntityKey>> deletedRelationshipsByForeignKey;
                     Dictionary<RelatedEnd, HashSet<IEntityWrapper>> deletedRelationshipsByGraph;
-                    // There must be a foreign key and graph change on the dependent side to know if we need to preserve the FK
+                    // There must be a foreign key and graph change on the dependent side to know if we need to preserve
+                    // the FK
                     if (
                         TransactionManager.DeletedRelationshipsByForeignKey.TryGetValue(
                             relatedEntity,
@@ -4750,7 +4868,8 @@ namespace System.Data.Objects
         private void DetectChangesInNavigationProperties(IList<EntityEntry> entries)
         {
             // Detect changes in navigation properties
-            // (populates this.TransactionManager.DeletedRelationships and this.TransactionManager.AddedRelationships)
+            // (populates this.TransactionManager.DeletedRelationships and
+            // this.TransactionManager.AddedRelationships)
             foreach (var entry in entries)
             {
                 Debug.Assert(

@@ -183,7 +183,8 @@ public class IdentityBuilder
     /// Adds a token provider for the <see cref="UserType"/>.
     /// </summary>
     /// <param name="providerName">The name of the provider to add.</param>
-    /// <param name="provider">The type of the <see cref="IUserTwoFactorTokenProvider{TUser}"/> to add.</param>
+    /// <param name="provider">The type of the <see cref="IUserTwoFactorTokenProvider{TUser}"/> to
+    // add.</param>
     /// <returns>The current <see cref="IdentityBuilder"/> instance.</returns>
     [UnconditionalSuppressMessage(
         "AOT",
@@ -212,8 +213,10 @@ public class IdentityBuilder
         }
         Services.Configure<IdentityOptions>(options =>
         {
-            // Overwrite ProviderType if it exists for backcompat, but keep a reference to the old one in case it's needed
-            // by a SignInManager with a different UserType. We'll continue to just overwrite ProviderInstance until someone asks for a fix though.
+            // Overwrite ProviderType if it exists for backcompat, but keep a reference to the old one in case
+            // it's needed
+            // by a SignInManager with a different UserType. We'll continue to just overwrite ProviderInstance
+            // until someone asks for a fix though.
             if (options.Tokens.ProviderMap.TryGetValue(providerName, out var descriptor))
             {
                 descriptor.ProviderInstance = null;

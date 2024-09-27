@@ -200,7 +200,8 @@ End Class",
                 "Form1.Designer.vb",
                 HangMitigatingCancellationToken
             );
-            //  Verify that the control's property was set correctly. The following text should appear in InitializeComponent().
+            //  Verify that the control's property was set correctly. The following text should appear in
+            // InitializeComponent().
             var actualText = await TestServices.Editor.GetTextAsync(
                 HangMitigatingCancellationToken
             );

@@ -17,8 +17,10 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <typeparam name="T">The type of the parameter.</typeparam>
         /// <param name="value">The value of the argument.</param>
-        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <param name="parameterName">The name of the parameter to include in any thrown
+        // exception.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        // <c>null</c></exception>
         [DebuggerStepThrough]
         public static void NotNull<T>([NotNull] T value, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
@@ -30,13 +32,16 @@ namespace System.Collections.Immutable
         }
 
         /// <summary>
-        /// Throws an exception if the specified parameter's value is null.  It passes through the specified value back as a return value.
+        /// Throws an exception if the specified parameter's value is null.  It passes through the specified
+        // value back as a return value.
         /// </summary>
         /// <typeparam name="T">The type of the parameter.</typeparam>
         /// <param name="value">The value of the argument.</param>
-        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
+        /// <param name="parameterName">The name of the parameter to include in any thrown
+        // exception.</param>
         /// <returns>The value of the parameter.</returns>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        // <c>null</c></exception>
         [DebuggerStepThrough]
         public static T NotNullPassthrough<T>([NotNull] T value, string? parameterName)
             where T : class // ensures value-types aren't passed to a null checking method
@@ -50,8 +55,10 @@ namespace System.Collections.Immutable
         /// </summary>
         /// <typeparam name="T">The type of the parameter.</typeparam>
         /// <param name="value">The value of the argument.</param>
-        /// <param name="parameterName">The name of the parameter to include in any thrown exception.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is <c>null</c></exception>
+        /// <param name="parameterName">The name of the parameter to include in any thrown
+        // exception.</param>
+        /// <exception cref="ArgumentNullException">Thrown if <paramref name="value"/> is
+        // <c>null</c></exception>
         /// <remarks>
         /// This method exists for callers who themselves only know the type as a generic parameter which
         /// may or may not be a class, but certainly cannot be null.

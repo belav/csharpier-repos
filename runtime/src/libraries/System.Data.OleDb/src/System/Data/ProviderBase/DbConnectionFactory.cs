@@ -20,7 +20,8 @@ namespace System.Data.ProviderBase
         private const int PruningDueTime = 4 * 60 * 1000; // 4 minutes
         private const int PruningPeriod = 30 * 1000; // thirty seconds
 
-        // s_pendingOpenNonPooled is an array of tasks used to throttle creation of non-pooled connections to
+        // s_pendingOpenNonPooled is an array of tasks used to throttle creation of non-pooled connections
+        // to
         // a maximum of Environment.ProcessorCount at a time.
         private static int s_pendingOpenNonPooledNext;
         private static readonly Task<DbConnectionInternal?>[] s_pendingOpenNonPooled =
@@ -183,7 +184,8 @@ namespace System.Data.ProviderBase
             do
             {
                 poolGroup = GetConnectionPoolGroup(owningConnection)!;
-                // Doing this on the callers thread is important because it looks up the WindowsIdentity from the thread.
+                // Doing this on the callers thread is important because it looks up the WindowsIdentity from the
+                // thread.
                 connectionPool = GetConnectionPool(owningConnection, poolGroup);
                 if (null == connectionPool)
                 {
@@ -298,7 +300,8 @@ namespace System.Data.ProviderBase
                                     else
                                     {
                                         // The outer TaskCompletionSource was already completed
-                                        // Which means that we don't know if someone has messed with the outer connection in the middle of creation
+                                        // Which means that we don't know if someone has messed with the outer connection in the middle of
+                                        // creation
                                         // So the best thing to do now is to destroy the newly created connection
                                         task.Result.DoomThisConnection();
                                         task.Result.Dispose();
@@ -343,7 +346,8 @@ namespace System.Data.ProviderBase
                         else
                         {
                             // We've hit the race condition, where the pool was shut down after we got it from the group.
-                            // Yield time slice to allow shut down activities to complete and a new, running pool to be instantiated
+                            // Yield time slice to allow shut down activities to complete and a new, running pool to be
+                            // instantiated
                             //  before retrying.
                             Threading.Thread.Sleep(timeBetweenRetriesMilliseconds);
                             timeBetweenRetriesMilliseconds *= 2; // double the wait time for next iteration
@@ -379,7 +383,8 @@ namespace System.Data.ProviderBase
             // which would be bad.  To avoid this problem, we automagically
             // re-create the pool entry whenever it's disabled.
 
-            // however, don't rebuild connectionOptions if no pooling is involved - let new connections do that work
+            // however, don't rebuild connectionOptions if no pooling is involved - let new connections do that
+            // work
             if (connectionPoolGroup.IsDisabled && (null != connectionPoolGroup.PoolGroupOptions))
             {
                 // reusing existing pool option in case user originally used SetConnectionPoolOptions
@@ -440,7 +445,8 @@ namespace System.Data.ProviderBase
                     userConnectionOptions = connectionOptions;
                     string expandedConnectionString = connectionOptions.Expand();
 
-                    // if the expanded string is same instance (default implementation), the use the already created options
+                    // if the expanded string is same instance (default implementation), the use the already created
+                    // options
                     if ((object)expandedConnectionString != (object)key.ConnectionString)
                     {
                         // CONSIDER: caching the original string to reduce future parsing

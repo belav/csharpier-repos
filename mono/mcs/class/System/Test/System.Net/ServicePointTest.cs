@@ -242,18 +242,18 @@ namespace MonoTests.System.Net
 
         // Debug code not used now, but could be useful later
         /*
-            private void WriteServicePoint (string label, ServicePoint sp)
-            {
-                Console.WriteLine ("\n" + label);
-                Console.WriteLine ("Address: " + sp.Address);
-                Console.WriteLine ("ConnectionLimit: " + sp.ConnectionLimit);
-                Console.WriteLine ("ConnectionName: " + sp.ConnectionName);
-                Console.WriteLine ("CurrentConnections: " + sp.CurrentConnections);
-                Console.WriteLine ("IdleSince: " + sp.IdleSince);
-                Console.WriteLine ("MaxIdletime: " + sp.MaxIdleTime);
-                Console.WriteLine ("ProtocolVersion: " + sp.ProtocolVersion);
-                Console.WriteLine ("SupportsPipelining: " + sp.SupportsPipelining);
-            }
+        private void WriteServicePoint (string label, ServicePoint sp)
+        {
+        Console.WriteLine ("\n" + label);
+        Console.WriteLine ("Address: " + sp.Address);
+        Console.WriteLine ("ConnectionLimit: " + sp.ConnectionLimit);
+        Console.WriteLine ("ConnectionName: " + sp.ConnectionName);
+        Console.WriteLine ("CurrentConnections: " + sp.CurrentConnections);
+        Console.WriteLine ("IdleSince: " + sp.IdleSince);
+        Console.WriteLine ("MaxIdletime: " + sp.MaxIdleTime);
+        Console.WriteLine ("ProtocolVersion: " + sp.ProtocolVersion);
+        Console.WriteLine ("SupportsPipelining: " + sp.SupportsPipelining);
+        }
         */
     }
 }

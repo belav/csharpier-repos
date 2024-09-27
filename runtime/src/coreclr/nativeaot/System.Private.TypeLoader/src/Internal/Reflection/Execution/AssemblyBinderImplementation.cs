@@ -13,13 +13,17 @@ using Internal.Runtime.TypeLoader;
 
 namespace Internal.Reflection.Execution
 {
-    //=============================================================================================================================
+    
+    // //=============================================================================================================================
     // The assembly resolution policy for emulation of "classic reflection."
     //
-    // The policy is very simple: the only assemblies that can be "loaded" are those that are statically linked into the running
-    // native process. There is no support for probing for assemblies in directories, user-supplied files, GACs, NICs or any
+    // The policy is very simple: the only assemblies that can be "loaded" are those that are statically
+    // linked into the running
+    // native process. There is no support for probing for assemblies in directories, user-supplied
+    // files, GACs, NICs or any
     // other repository.
-    //=============================================================================================================================
+    
+    // //=============================================================================================================================
     public sealed partial class AssemblyBinderImplementation : AssemblyBinder
     {
         private AssemblyBinderImplementation()
@@ -256,7 +260,8 @@ namespace Internal.Reflection.Execution
 
         /// <summary>
         /// This callback gets called whenever a module gets registered. It adds the metadata reader
-        /// for the new module to the available scopes. The lock in ExecutionEnvironmentImplementation ensures
+        /// for the new module to the available scopes. The lock in ExecutionEnvironmentImplementation
+        // ensures
         /// that this function may never be called concurrently so that we can assume that two threads
         /// never update the reader and scope list at the same time.
         /// </summary>

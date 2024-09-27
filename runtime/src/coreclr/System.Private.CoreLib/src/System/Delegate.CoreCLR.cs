@@ -117,7 +117,8 @@ namespace System
             // even though the fields were not all equals the delegates may still match
             // When target carries the delegate itself the 2 targets (delegates) may be different instances
             // but the delegates are logically the same
-            // It may also happen that the method pointer was not jitted when creating one delegate and jitted in the other
+            // It may also happen that the method pointer was not jitted when creating one delegate and jitted
+            // in the other
             // if that's the case the delegates may still be equals but we need to make a more complicated check
 
             if (_methodPtrAux == IntPtr.Zero)
@@ -135,10 +136,10 @@ namespace System
                     return false; // different delegate kind
 
                 // Ignore the target as it will be the delegate instance, though it may be a different one
-                /*
-                if (_methodPtr != d._methodPtr)
-                    return false;
-                    */
+/*
+if (_methodPtr != d._methodPtr)
+return false;
+*/
 
                 if (_methodPtrAux == d._methodPtrAux)
                     return true;
@@ -164,12 +165,12 @@ namespace System
             // this is not right in the face of a method being jitted in one delegate and not in another
             // in that case the delegate is the same and Equals will return true but GetHashCode returns a
             // different hashcode which is not true.
-            /*
-            if (_methodPtrAux == IntPtr.Zero)
-                return unchecked((int)((long)this._methodPtr));
-            else
-                return unchecked((int)((long)this._methodPtrAux));
-            */
+/*
+if (_methodPtrAux == IntPtr.Zero)
+return unchecked((int)((long)this._methodPtr));
+else
+return unchecked((int)((long)this._methodPtrAux));
+*/
             if (_methodPtrAux == IntPtr.Zero)
                 return (_target != null ? RuntimeHelpers.GetHashCode(_target) * 33 : 0)
                     + GetType().GetHashCode();
@@ -483,8 +484,10 @@ namespace System
         // internal implementation details (FCALLS and utilities)
         //
 
-        // BindToMethodName is annotated as DynamicallyAccessedMemberTypes.All because it will bind to non-public methods
-        // on a base type of methodType. Using All is currently the only way ILLinker will preserve these methods.
+        // BindToMethodName is annotated as DynamicallyAccessedMemberTypes.All because it will bind to
+        // non-public methods
+        // on a base type of methodType. Using All is currently the only way ILLinker will preserve these
+        // methods.
         [MethodImpl(MethodImplOptions.InternalCall)]
         private extern bool BindToMethodName(
             object? target,
@@ -559,7 +562,8 @@ namespace System
         }
     }
 
-    // These flags effect the way BindToMethodInfo and BindToMethodName are allowed to bind a delegate to a target method. Their
+    // These flags effect the way BindToMethodInfo and BindToMethodName are allowed to bind a delegate
+    // to a target method. Their
     // values must be kept in sync with the definition in vm\comdelegate.h.
     internal enum DelegateBindingFlags
     {

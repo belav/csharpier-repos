@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,7 +15,8 @@ using System.Web.Http.ValueProviders;
 namespace System.Web.Http.ModelBinding
 {
     /// <summary>
-    /// Specify this parameter uses a model binder. This can optionally specify the specific model binder and
+    /// Specify this parameter uses a model binder. This can optionally specify the specific model
+    // binder and
     /// value providers that drive that model binder.
     /// Derived attributes may provide convenience settings for the model binder or value provider.
     /// </summary>

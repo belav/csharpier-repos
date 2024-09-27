@@ -53,38 +53,38 @@ namespace MonoTests.System.Runtime.Serialization.Json
             w = JsonReaderWriterFactory.CreateJsonWriter(ms);
         }
 
-        /*
-        [Test]
-        public void Dummy_BitFlagsGenerator ()
-        {
-            var b = new BitFlagsGenerator (2);
-            Assert.IsFalse (b.Load (0), "#a1");
-            b.Store (0, false);
-            Assert.IsFalse (b.Load (0), "#a2");
-            b.Store (0, true);
-            Assert.IsTrue (b.Load (0), "#a3");
-            Assert.IsFalse (b.Load (1), "#a4");
-            b.Store (0, false);
-            Assert.IsFalse (b.Load (0), "#a5");
-            Assert.IsFalse (b.Load (1), "#a6");
+/*
+[Test]
+public void Dummy_BitFlagsGenerator ()
+{
+var b = new BitFlagsGenerator (2);
+Assert.IsFalse (b.Load (0), "#a1");
+b.Store (0, false);
+Assert.IsFalse (b.Load (0), "#a2");
+b.Store (0, true);
+Assert.IsTrue (b.Load (0), "#a3");
+Assert.IsFalse (b.Load (1), "#a4");
+b.Store (0, false);
+Assert.IsFalse (b.Load (0), "#a5");
+Assert.IsFalse (b.Load (1), "#a6");
 
-            Assert.IsFalse (b.Load (1), "#b1");
-            b.Store (1, false);
-            Assert.IsFalse (b.Load (1), "#b2");
-            b.Store (1, true);
-            Assert.IsTrue (b.Load (1), "#b3");
-            b.Store (1, false);
-            Assert.IsFalse (b.Load (1), "#b4");
+Assert.IsFalse (b.Load (1), "#b1");
+b.Store (1, false);
+Assert.IsFalse (b.Load (1), "#b2");
+b.Store (1, true);
+Assert.IsTrue (b.Load (1), "#b3");
+b.Store (1, false);
+Assert.IsFalse (b.Load (1), "#b4");
 
-            var bytes = new byte [2];
-            Assert.IsFalse (BitFlagsGenerator.IsBitSet (bytes, 0), "#c1");
-            BitFlagsGenerator.SetBit (bytes, 0);
-            Assert.IsTrue (BitFlagsGenerator.IsBitSet (bytes, 0), "#c2");
-            Assert.IsFalse (BitFlagsGenerator.IsBitSet (bytes, 1), "#c3");
-            BitFlagsGenerator.SetBit (bytes, 0);
-            Assert.IsTrue (BitFlagsGenerator.IsBitSet (bytes, 0), "#c4");
-        }
-        */
+var bytes = new byte [2];
+Assert.IsFalse (BitFlagsGenerator.IsBitSet (bytes, 0), "#c1");
+BitFlagsGenerator.SetBit (bytes, 0);
+Assert.IsTrue (BitFlagsGenerator.IsBitSet (bytes, 0), "#c2");
+Assert.IsFalse (BitFlagsGenerator.IsBitSet (bytes, 1), "#c3");
+BitFlagsGenerator.SetBit (bytes, 0);
+Assert.IsTrue (BitFlagsGenerator.IsBitSet (bytes, 0), "#c4");
+}
+*/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]

@@ -127,7 +127,8 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type name instead
+                // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type
+                // name instead
                 //         /*<bind>*/c.Event/*</bind>*/ += (sender, args) => { };
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event")
                     .WithArguments("C.Event")
@@ -246,7 +247,8 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type name instead
+                // CS0176: Member 'C.Event' cannot be accessed with an instance reference; qualify it with a type
+                // name instead
                 //         /*<bind>*/c.Event/*</bind>*/(null, null);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event")
                     .WithArguments("C.Event")
@@ -498,12 +500,14 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(12,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(12,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         handler1 = c1.Event1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c1.Event1")
                     .WithArguments("C.Event1")
                     .WithLocation(12, 20),
-                // file.cs(13,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference; qualify it with a type name instead
+                // file.cs(13,20): error CS0176: Member 'C.Event1' cannot be accessed with an instance reference;
+                // qualify it with a type name instead
                 //         handler2 = (c1 ?? c2).Event1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).Event1")
                     .WithArguments("C.Event1")

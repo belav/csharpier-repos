@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly HashSet<Symbol> _dataFlowsOut = new HashSet<Symbol>();
 
 #if DEBUG
-        // we'd like to ensure that only variables get returned in DataFlowsOut that were assigned to inside the region.
+        // we'd like to ensure that only variables get returned in DataFlowsOut that were assigned to inside
+        // the region.
         private readonly HashSet<Symbol> _assignedInside = new HashSet<Symbol>();
 #endif
 
@@ -122,7 +123,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override void NoteWrite(Symbol variable, BoundExpression value, bool read)
         {
-            // any reachable assignment to a ref or out parameter can be visible to the caller in the face of exceptions.
+            // any reachable assignment to a ref or out parameter can be visible to the caller in the face of
+            // exceptions.
             if (this.State.Reachable && IsInside)
             {
                 var param = variable as ParameterSymbol;
@@ -253,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #endif
                 written = false;
 
-                // any reachable assignment to a ref or out parameter can be visible to the caller in the face of exceptions.
+                // any reachable assignment to a ref or out parameter can be visible to the caller in the face of
+                // exceptions.
                 if (State.Reachable)
                 {
                     ParameterSymbol param = Param(node);

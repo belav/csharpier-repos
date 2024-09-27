@@ -398,7 +398,8 @@ namespace System.Reflection
             }
         }
 
-        // Copy modified values out. This is done with ByRef, Type.Missing and parameters changed by the Binder.
+        // Copy modified values out. This is done with ByRef, Type.Missing and parameters changed by the
+        // Binder.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void CopyBack(
             object?[] dest,

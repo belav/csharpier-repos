@@ -112,7 +112,8 @@ namespace System.ServiceModel.Web
 
             if (AspNetEnvironment.Current.IsSimpleApplicationHost)
             {
-                // Cassini always reports the auth scheme as anonymous or Ntlm. Map this to Ntlm, except when forms auth
+                // Cassini always reports the auth scheme as anonymous or Ntlm. Map this to Ntlm, except when forms
+                // auth
                 // is requested
                 if (
                     supportedSchemes

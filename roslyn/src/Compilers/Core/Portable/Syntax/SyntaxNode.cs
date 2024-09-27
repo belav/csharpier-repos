@@ -18,8 +18,10 @@ namespace Microsoft.CodeAnalysis
 {
 #pragma warning disable CA1200 // Avoid using cref tags with a prefix
     /// <summary>
-    /// Represents a non-terminal node in the syntax tree. This is the language agnostic equivalent of <see
-    /// cref="T:Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode"/> and <see cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode"/>.
+    /// Represents a non-terminal node in the syntax tree. This is the language agnostic equivalent of
+    // <see
+    /// cref="T:Microsoft.CodeAnalysis.CSharp.CSharpSyntaxNode"/> and <see
+    // cref="T:Microsoft.CodeAnalysis.VisualBasic.VisualBasicSyntaxNode"/>.
     /// </summary>
 #pragma warning restore CA1200 // Avoid using cref tags with a prefix
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
@@ -314,7 +316,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns the string representation of this node, not including its leading and trailing trivia.
         /// </summary>
-        /// <returns>The string representation of this node, not including its leading and trailing trivia.</returns>
+        /// <returns>The string representation of this node, not including its leading and trailing
+        // trivia.</returns>
         /// <remarks>The length of the returned string is always the same as Span.Length</remarks>
         public override string ToString()
         {
@@ -324,7 +327,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns full string representation of this node including its leading and trailing trivia.
         /// </summary>
-        /// <returns>The full string representation of this node including its leading and trailing trivia.</returns>
+        /// <returns>The full string representation of this node including its leading and trailing
+        // trivia.</returns>
         /// <remarks>The length of the returned string is always the same as FullSpan.Length</remarks>
         public virtual string ToFullString()
         {
@@ -346,12 +350,14 @@ namespace Microsoft.CodeAnalysis
         /// Encoding of the file that the text was read from or is going to be saved to.
         /// <c>null</c> if the encoding is unspecified.
         /// If the encoding is not specified the <see cref="SourceText"/> isn't debuggable.
-        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/> shall be used as a default.
+        /// If an encoding-less <see cref="SourceText"/> is written to a file a <see cref="Encoding.UTF8"/>
+        // shall be used as a default.
         /// </param>
         /// <param name="checksumAlgorithm">
         /// Hash algorithm to use to calculate checksum of the text that's saved to PDB.
         /// </param>
-        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not supported.</exception>
+        /// <exception cref="ArgumentException"><paramref name="checksumAlgorithm"/> is not
+        // supported.</exception>
         public SourceText GetText(
             Encoding? encoding = null,
             SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
@@ -381,18 +387,27 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Returns true if these two nodes are considered "incrementally identical".  An incrementally identical node
-        /// occurs when a <see cref="SyntaxTree"/> is incrementally parsed using <see cref="SyntaxTree.WithChangedText"/>
-        /// and the incremental parser is able to take the node from the original tree and use it in its entirety in the
-        /// new tree.  In this case, the <see cref="SyntaxNode.ToFullString()"/> of each node will be the same, though
-        /// they could have different parents, and may occur at different positions in their respective trees.  If two nodes are
+        /// Returns true if these two nodes are considered "incrementally identical".  An incrementally
+        // identical node
+        /// occurs when a <see cref="SyntaxTree"/> is incrementally parsed using <see
+        // cref="SyntaxTree.WithChangedText"/>
+        /// and the incremental parser is able to take the node from the original tree and use it in its
+        // entirety in the
+        /// new tree.  In this case, the <see cref="SyntaxNode.ToFullString()"/> of each node will be the
+        // same, though
+        /// they could have different parents, and may occur at different positions in their respective
+        // trees.  If two nodes are
         /// incrementally identical, all children of each node will be incrementally identical as well.
         /// </summary>
         /// <remarks>
-        /// Incrementally identical nodes can also appear within the same syntax tree, or syntax trees that did not arise
-        /// from <see cref="SyntaxTree.WithChangedText"/>.  This can happen as the parser is allowed to construct parse
-        /// trees from shared nodes for efficiency.  In all these cases though, it will still remain true that the incrementally
-        /// identical nodes could have different parents and may occur at different positions in their respective trees.
+        /// Incrementally identical nodes can also appear within the same syntax tree, or syntax trees that
+        // did not arise
+        /// from <see cref="SyntaxTree.WithChangedText"/>.  This can happen as the parser is allowed to
+        // construct parse
+        /// trees from shared nodes for efficiency.  In all these cases though, it will still remain true
+        // that the incrementally
+        /// identical nodes could have different parents and may occur at different positions in their
+        // respective trees.
         /// </remarks>
         public bool IsIncrementallyIdenticalTo([NotNullWhen(true)] SyntaxNode? other) =>
             this.Green != null && this.Green == other?.Green;
@@ -447,7 +462,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Determines whether this node or any of its descendant nodes, tokens or trivia have any diagnostics on them.
+        /// Determines whether this node or any of its descendant nodes, tokens or trivia have any
+        // diagnostics on them.
         /// </summary>
         public bool ContainsDiagnostics
         {
@@ -460,7 +476,8 @@ namespace Microsoft.CodeAnalysis
         public bool ContainsDirectives => this.Green.ContainsDirectives;
 
         /// <summary>
-        /// Returns true if this node contains any directives (e.g. <c>#if</c>, <c>#nullable</c>, etc.) within it with a matching kind.
+        /// Returns true if this node contains any directives (e.g. <c>#if</c>, <c>#nullable</c>, etc.)
+        // within it with a matching kind.
         /// </summary>
         public bool ContainsDirective(int rawKind)
         {
@@ -477,7 +494,8 @@ namespace Microsoft.CodeAnalysis
                 {
                     var current = stack.Pop();
 
-                    // Don't bother looking further down this portion of the tree if it clearly doesn't contain directives.
+                    // Don't bother looking further down this portion of the tree if it clearly doesn't contain
+                    // directives.
                     if (current is not { ContainsDirectives: true })
                         continue;
 
@@ -697,14 +715,19 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                // SyntaxNodes always has a non-null SyntaxTree, however the tree might be rooted at a node which is not a CompilationUnit.
+                // SyntaxNodes always has a non-null SyntaxTree, however the tree might be rooted at a node which is
+                // not a CompilationUnit.
                 // These kind of nodes may be seen during binding in couple of scenarios:
-                //   (a) Compiler synthesized syntax nodes (e.g. missing nodes, qualified names for command line using directives, etc.)
+                //   (a) Compiler synthesized syntax nodes (e.g. missing nodes, qualified names for command line
+                // using directives, etc.)
                 //   (b) Speculatively binding syntax nodes through the semantic model.
                 //
-                // For scenario (a), we need to ensure that we return NoLocation for generating location agnostic compiler diagnostics.
-                // For scenario (b), at present, we do not expose the diagnostics for speculative binding, hence we can return NoLocation.
-                // In future, if we decide to support this, we will need some mechanism to distinguish between scenarios (a) and (b) here.
+                // For scenario (a), we need to ensure that we return NoLocation for generating location agnostic
+                // compiler diagnostics.
+                // For scenario (b), at present, we do not expose the diagnostics for speculative binding, hence we
+                // can return NoLocation.
+                // In future, if we decide to support this, we will need some mechanism to distinguish between
+                // scenarios (a) and (b) here.
 
                 var tree = this.SyntaxTree;
                 RoslynDebug.Assert(tree != null);
@@ -753,7 +776,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The list of child nodes and tokens of this node, where each element is a SyntaxNodeOrToken instance.
+        /// The list of child nodes and tokens of this node, where each element is a SyntaxNodeOrToken
+        // instance.
         /// </summary>
         public ChildSyntaxList ChildNodesAndTokens()
         {
@@ -893,8 +917,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets a list of descendant nodes in prefix document order.
         /// </summary>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNode> DescendantNodes(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
@@ -912,8 +938,10 @@ namespace Microsoft.CodeAnalysis
         /// Gets a list of descendant nodes in prefix document order.
         /// </summary>
         /// <param name="span">The span the node's full span must intersect.</param>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNode> DescendantNodes(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
@@ -931,8 +959,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets a list of descendant nodes (including this node) in prefix document order.
         /// </summary>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNode> DescendantNodesAndSelf(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
@@ -950,8 +980,10 @@ namespace Microsoft.CodeAnalysis
         /// Gets a list of descendant nodes (including this node) in prefix document order.
         /// </summary>
         /// <param name="span">The span the node's full span must intersect.</param>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNode> DescendantNodesAndSelf(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
@@ -969,8 +1001,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets a list of descendant nodes and tokens in prefix document order.
         /// </summary>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokens(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
@@ -988,8 +1022,10 @@ namespace Microsoft.CodeAnalysis
         /// Gets a list of the descendant nodes and tokens in prefix document order.
         /// </summary>
         /// <param name="span">The span the node's full span must intersect.</param>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokens(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
@@ -1007,8 +1043,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Gets a list of descendant nodes and tokens (including this node) in prefix document order.
         /// </summary>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokensAndSelf(
             Func<SyntaxNode, bool>? descendIntoChildren = null,
             bool descendIntoTrivia = false
@@ -1026,8 +1064,10 @@ namespace Microsoft.CodeAnalysis
         /// Gets a list of the descendant nodes and tokens (including this node) in prefix document order.
         /// </summary>
         /// <param name="span">The span the node's full span must intersect.</param>
-        /// <param name="descendIntoChildren">An optional function that determines if the search descends into the argument node's children.</param>
-        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are included in the list.</param>
+        /// <param name="descendIntoChildren">An optional function that determines if the search descends
+        // into the argument node's children.</param>
+        /// <param name="descendIntoTrivia">Determines if nodes that are part of structured trivia are
+        // included in the list.</param>
         public IEnumerable<SyntaxNodeOrToken> DescendantNodesAndTokensAndSelf(
             TextSpan span,
             Func<SyntaxNode, bool>? descendIntoChildren = null,
@@ -1044,14 +1084,17 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Finds the node with the smallest <see cref="FullSpan"/> that contains <paramref name="span"/>.
-        /// <paramref name="getInnermostNodeForTie"/> is used to determine the behavior in case of a tie (i.e. a node having the same span as its parent).
-        /// If <paramref name="getInnermostNodeForTie"/> is true, then it returns lowest descending node encompassing the given <paramref name="span"/>.
+        /// <paramref name="getInnermostNodeForTie"/> is used to determine the behavior in case of a tie
+        // (i.e. a node having the same span as its parent).
+        /// If <paramref name="getInnermostNodeForTie"/> is true, then it returns lowest descending node
+        // encompassing the given <paramref name="span"/>.
         /// Otherwise, it returns the outermost node encompassing the given <paramref name="span"/>.
         /// </summary>
         /// <devdoc>
         /// TODO: This should probably be reimplemented with <see cref="ChildThatContainsPosition"/>
         /// </devdoc>
-        /// <exception cref="ArgumentOutOfRangeException">This exception is thrown if <see cref="FullSpan"/> doesn't contain the given span.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">This exception is thrown if <see cref="FullSpan"/>
+        // doesn't contain the given span.</exception>
         public SyntaxNode FindNode(
             TextSpan span,
             bool findInsideTrivia = false,
@@ -1097,9 +1140,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
-        /// <param name="position">The character position of the token relative to the beginning of the file.</param>
+        /// <param name="position">The character position of the token relative to the beginning of the
+        // file.</param>
         /// <param name="findInsideTrivia">
-        /// True to return tokens that are part of trivia. If false finds the token whose full span (including trivia)
+        /// True to return tokens that are part of trivia. If false finds the token whose full span
+        // (including trivia)
         /// includes the position.
         /// </param>
         public SyntaxToken FindToken(int position, bool findInsideTrivia = false)
@@ -1192,7 +1237,8 @@ namespace Microsoft.CodeAnalysis
 
         #region Trivia Lookup
         /// <summary>
-        /// The list of trivia that appears before this node in the source code and are attached to a token that is a
+        /// The list of trivia that appears before this node in the source code and are attached to a token
+        // that is a
         /// descendant of this node.
         /// </summary>
         public SyntaxTriviaList GetLeadingTrivia()
@@ -1201,7 +1247,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// The list of trivia that appears after this node in the source code and are attached to a token that is a
+        /// The list of trivia that appears after this node in the source code and are attached to a token
+        // that is a
         /// descendant of this node.
         /// </summary>
         public SyntaxTriviaList GetTrailingTrivia()
@@ -1212,9 +1259,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Finds a descendant trivia of this node whose span includes the supplied position.
         /// </summary>
-        /// <param name="position">The character position of the trivia relative to the beginning of the file.</param>
+        /// <param name="position">The character position of the trivia relative to the beginning of the
+        // file.</param>
         /// <param name="findInsideTrivia">
-        /// True to return tokens that are part of trivia. If false finds the token whose full span (including trivia)
+        /// True to return tokens that are part of trivia. If false finds the token whose full span
+        // (including trivia)
         /// includes the position.
         /// </param>
         public SyntaxTrivia FindTrivia(int position, bool findInsideTrivia = false)
@@ -1523,7 +1572,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Copies all SyntaxAnnotations, if any, from this SyntaxNode instance and attaches them to a new instance based on <paramref name="node" />.
+        /// Copies all SyntaxAnnotations, if any, from this SyntaxNode instance and attaches them to a new
+        // instance based on <paramref name="node" />.
         /// </summary>
         /// <remarks>
         /// <para>
@@ -1578,7 +1628,8 @@ namespace Microsoft.CodeAnalysis
         ) => throw new SerializationDeprecationException();
 
         /// <summary>
-        /// Specialized exception subtype to make it easier to search telemetry streams for this specific case.
+        /// Specialized exception subtype to make it easier to search telemetry streams for this specific
+        // case.
         /// </summary>
         private protected sealed class SerializationDeprecationException : Exception
         {
@@ -1607,7 +1658,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
-        /// <param name="position">The character position of the token relative to the beginning of the file.</param>
+        /// <param name="position">The character position of the token relative to the beginning of the
+        // file.</param>
         /// <param name="findInsideTrivia">
         /// True to return tokens that are part of trivia.
         /// If false finds the token whose full span (including trivia) includes the position.
@@ -1683,9 +1735,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Finds a descendant token of this node whose span includes the supplied position.
         /// </summary>
-        /// <param name="position">The character position of the token relative to the beginning of the file.</param>
+        /// <param name="position">The character position of the token relative to the beginning of the
+        // file.</param>
         /// <param name="stepInto">
-        /// Applied on every structured trivia. Return false if the tokens included in the trivia should be skipped.
+        /// Applied on every structured trivia. Return false if the tokens included in the trivia should be
+        // skipped.
         /// Pass null to skip all structured trivia.
         /// </param>
         protected virtual SyntaxToken FindTokenCore(int position, Func<SyntaxTrivia, bool> stepInto)
@@ -1744,7 +1798,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Finds a descendant trivia of this node whose span includes the supplied position.
         /// </summary>
-        /// <param name="position">The character position of the trivia relative to the beginning of the file.</param>
+        /// <param name="position">The character position of the trivia relative to the beginning of the
+        // file.</param>
         /// <param name="findInsideTrivia">Whether to search inside structured trivia.</param>
         protected virtual SyntaxTrivia FindTriviaCore(int position, bool findInsideTrivia)
         {

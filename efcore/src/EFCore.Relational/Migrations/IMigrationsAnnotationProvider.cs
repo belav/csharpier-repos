@@ -4,18 +4,24 @@
 namespace Microsoft.EntityFrameworkCore.Migrations;
 
 /// <summary>
-///     A service typically implemented by database providers that gives access to annotations used by EF Core Migrations
-///     when generating removal operations for various elements of the <see cref="IRelationalModel" />. The annotations
+///     A service typically implemented by database providers that gives access to annotations used
+// by EF Core Migrations
+///     when generating removal operations for various elements of the <see cref="IRelationalModel"
+// />. The annotations
 ///     stored in the relational model are provided by <see cref="IRelationalAnnotationProvider" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-migrations">Database migrations</see> for more
+// information and examples.
 ///     </para>
 /// </remarks>
 public interface IMigrationsAnnotationProvider
@@ -77,7 +83,8 @@ public interface IMigrationsAnnotationProvider
     IEnumerable<IAnnotation> ForRemove(ITableIndex index);
 
     /// <summary>
-    ///     Gets provider-specific Migrations annotations for the given <see cref="IForeignKeyConstraint" />
+    ///     Gets provider-specific Migrations annotations for the given <see
+    // cref="IForeignKeyConstraint" />
     ///     when it is being removed.
     /// </summary>
     /// <param name="foreignKey">The foreign key.</param>

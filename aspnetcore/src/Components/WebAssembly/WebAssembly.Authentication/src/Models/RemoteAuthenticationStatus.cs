@@ -27,7 +27,8 @@ public enum RemoteAuthenticationStatus
     Failure,
 
     /// <summary>
-    /// The operation in the current navigation context has completed. This signals that the application running on the
+    /// The operation in the current navigation context has completed. This signals that the application
+    // running on the
     /// current browser context is about to be shut down and no other work is required.
     /// </summary>
     OperationCompleted,

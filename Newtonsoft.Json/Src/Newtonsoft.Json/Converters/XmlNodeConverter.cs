@@ -980,7 +980,8 @@ namespace Newtonsoft.Json.Converters
         private const string JsonNamespaceUri = "http://james.newtonking.com/projects/json";
 
         /// <summary>
-        /// Gets or sets the name of the root element to insert when deserializing to XML if the JSON structure has produced multiple root elements.
+        /// Gets or sets the name of the root element to insert when deserializing to XML if the JSON
+        // structure has produced multiple root elements.
         /// </summary>
         /// <value>The name of the deserialized root element.</value>
         public string? DeserializeRootElementName { get; set; }
@@ -989,7 +990,8 @@ namespace Newtonsoft.Json.Converters
         /// Gets or sets a value to indicate whether to write the Json.NET array attribute.
         /// This attribute helps preserve arrays when converting the written XML back to JSON.
         /// </summary>
-        /// <value><c>true</c> if the array attribute is written to the XML; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if the array attribute is written to the XML; otherwise,
+        // <c>false</c>.</value>
         public bool WriteArrayAttribute { get; set; }
 
         /// <summary>
@@ -999,9 +1001,12 @@ namespace Newtonsoft.Json.Converters
         public bool OmitRootObject { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to encode special characters when converting JSON to XML.
-        /// If <c>true</c>, special characters like ':', '@', '?', '#' and '$' in JSON property names aren't used to specify
-        /// XML namespaces, attributes or processing directives. Instead special characters are encoded and written
+        /// Gets or sets a value indicating whether to encode special characters when converting JSON to
+        // XML.
+        /// If <c>true</c>, special characters like ':', '@', '?', '#' and '$' in JSON property names aren't
+        // used to specify
+        /// XML namespaces, attributes or processing directives. Instead special characters are encoded and
+        // written
         /// as part of the XML element name.
         /// </summary>
         /// <value><c>true</c> if special characters are encoded; otherwise, <c>false</c>.</value>
@@ -2498,7 +2503,8 @@ namespace Newtonsoft.Json.Converters
         /// </summary>
         /// <param name="attributeName">Attribute name to test.</param>
         /// <param name="prefix">The attribute name prefix if it has one, otherwise an empty string.</param>
-        /// <returns><c>true</c> if attribute name is for a namespace attribute, otherwise <c>false</c>.</returns>
+        /// <returns><c>true</c> if attribute name is for a namespace attribute, otherwise
+        // <c>false</c>.</returns>
         private bool IsNamespaceAttribute(
             string attributeName,
             [NotNullWhen(true)] out string? prefix

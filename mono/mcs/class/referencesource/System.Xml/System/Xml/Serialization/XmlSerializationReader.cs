@@ -23,7 +23,8 @@ namespace System.Xml.Serialization
     using System.Xml.Schema;
     using System.Xml.Serialization.Configuration;
 
-    /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader"]/*' />
+    /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader"]/*'
+    // />
     ///<internalonly/>
     public abstract class XmlSerializationReader : XmlSerializationGeneratedCode
     {
@@ -129,7 +130,8 @@ namespace System.Xml.Serialization
         }
 #endif
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.InitIDs"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.InitIDs"]/*' />
         protected abstract void InitIDs();
 
         // this method must be called before any generated deserialization methods are called
@@ -175,26 +177,30 @@ namespace System.Xml.Serialization
             InitIDs();
         }
 
-        /// <include file='doc\XmlSerializationWriter.uex' path='docs/doc[@for="XmlSerializationWriter.DecodeName"]/*' />
+        /// <include file='doc\XmlSerializationWriter.uex'
+        // path='docs/doc[@for="XmlSerializationWriter.DecodeName"]/*' />
         protected bool DecodeName
         {
             get { return decodeName; }
             set { decodeName = value; }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.Reader"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.Reader"]/*' />
         protected XmlReader Reader
         {
             get { return r; }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReaderCount"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReaderCount"]/*' />
         protected int ReaderCount
         {
             get { return checkDeserializeAdvances ? countingReader.AdvanceCount : 0; }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.Document"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.Document"]/*' />
         protected XmlDocument Document
         {
             get
@@ -208,7 +214,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ResolveDynamicAssembly"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ResolveDynamicAssembly"]/*' />
         ///<internalonly/>
         protected static Assembly ResolveDynamicAssembly(string assemblyFullName)
         {
@@ -278,7 +285,8 @@ namespace System.Xml.Serialization
             tokenID = r.NameTable.Add("token");
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.GetXsiType"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.GetXsiType"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -556,7 +564,8 @@ namespace System.Xml.Serialization
             return result;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadTypedPrimitive"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadTypedPrimitive"]/*' />
         protected object ReadTypedPrimitive(XmlQualifiedName type)
         {
             return ReadTypedPrimitive(type, false);
@@ -746,7 +755,8 @@ namespace System.Xml.Serialization
             return value;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadTypedNull"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadTypedNull"]/*' />
         protected object ReadTypedNull(XmlQualifiedName type)
         {
             InitPrimitiveIDs();
@@ -859,7 +869,8 @@ namespace System.Xml.Serialization
             return value;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.IsXmlnsAttribute"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.IsXmlnsAttribute"]/*' />
         protected bool IsXmlnsAttribute(string name)
         {
             if (!name.StartsWith("xmlns", StringComparison.Ordinal))
@@ -869,7 +880,8 @@ namespace System.Xml.Serialization
             return name[5] == ':';
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.IsArrayTypeAttribute"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.IsArrayTypeAttribute"]/*' />
         protected void ParseWsdlArrayType(XmlAttribute attr)
         {
             if (
@@ -893,7 +905,8 @@ namespace System.Xml.Serialization
             return;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.IsReturnValue"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.IsReturnValue"]/*' />
         protected bool IsReturnValue
         {
             // value only valid for soap 1.1
@@ -901,7 +914,8 @@ namespace System.Xml.Serialization
             set { isReturnValue = value; }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadNull"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadNull"]/*' />
         protected bool ReadNull()
         {
             if (!GetNullAttr())
@@ -923,7 +937,8 @@ namespace System.Xml.Serialization
             return true;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.GetNullAttr"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.GetNullAttr"]/*' />
         protected bool GetNullAttr()
         {
             string isNull = r.GetAttribute(nilID, instanceNsID);
@@ -940,7 +955,8 @@ namespace System.Xml.Serialization
             return true;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadNullableString"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadNullableString"]/*' />
         protected string ReadNullableString()
         {
             if (ReadNull())
@@ -948,7 +964,8 @@ namespace System.Xml.Serialization
             return r.ReadElementString();
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadNullableQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadNullableQualifiedName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -959,7 +976,8 @@ namespace System.Xml.Serialization
             return ReadElementQualifiedName();
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadElementQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadElementQualifiedName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -976,7 +994,8 @@ namespace System.Xml.Serialization
             return qname;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadXmlDocument"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadXmlDocument"]/*' />
         protected XmlDocument ReadXmlDocument(bool wrapped)
         {
             XmlNode n = ReadXmlNode(wrapped);
@@ -987,7 +1006,8 @@ namespace System.Xml.Serialization
             return doc;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CollapseWhitespace"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CollapseWhitespace"]/*' />
         protected string CollapseWhitespace(string value)
         {
             if (value == null)
@@ -995,7 +1015,8 @@ namespace System.Xml.Serialization
             return value.Trim();
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadXmlNode"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadXmlNode"]/*' />
         protected XmlNode ReadXmlNode(bool wrapped)
         {
             XmlNode node = null;
@@ -1023,13 +1044,15 @@ namespace System.Xml.Serialization
             return node;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToByteArrayBase64"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToByteArrayBase64"]/*' />
         protected static byte[] ToByteArrayBase64(string value)
         {
             return XmlCustomFormatter.ToByteArrayBase64(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToByteArrayBase641"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToByteArrayBase641"]/*' />
         protected byte[] ToByteArrayBase64(bool isNull)
         {
             if (isNull)
@@ -1039,13 +1062,15 @@ namespace System.Xml.Serialization
             return ReadByteArray(true); //means use Base64
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToByteArrayHex"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToByteArrayHex"]/*' />
         protected static byte[] ToByteArrayHex(string value)
         {
             return XmlCustomFormatter.ToByteArrayHex(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToByteArrayHex1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToByteArrayHex1"]/*' />
         protected byte[] ToByteArrayHex(bool isNull)
         {
             if (isNull)
@@ -1055,7 +1080,8 @@ namespace System.Xml.Serialization
             return ReadByteArray(false); //means use BinHex
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.GetArrayLength"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.GetArrayLength"]/*' />
         protected int GetArrayLength(string name, string ns)
         {
             if (GetNullAttr())
@@ -1085,13 +1111,16 @@ namespace System.Xml.Serialization
 
         struct SoapArrayInfo
         {
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.qname;"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="XmlSerializationReader.qname;"]/*' />
             public string qname;
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.dimensions;"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="XmlSerializationReader.dimensions;"]/*' />
             public int dimensions;
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.length;"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="XmlSerializationReader.length;"]/*' />
             public int length;
             public int jaggedDimensions;
         }
@@ -1260,61 +1289,71 @@ namespace System.Xml.Serialization
             return soapArrayInfo;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToDateTime"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToDateTime"]/*' />
         protected static DateTime ToDateTime(string value)
         {
             return XmlCustomFormatter.ToDateTime(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToDate"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToDate"]/*' />
         protected static DateTime ToDate(string value)
         {
             return XmlCustomFormatter.ToDate(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToTime"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToTime"]/*' />
         protected static DateTime ToTime(string value)
         {
             return XmlCustomFormatter.ToTime(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToChar"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToChar"]/*' />
         protected static char ToChar(string value)
         {
             return XmlCustomFormatter.ToChar(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToEnum"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToEnum"]/*' />
         protected static long ToEnum(string value, Hashtable h, string typeName)
         {
             return XmlCustomFormatter.ToEnum(value, h, typeName, true);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToXmlName"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToXmlName"]/*' />
         protected static string ToXmlName(string value)
         {
             return XmlCustomFormatter.ToXmlName(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToXmlNCName"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToXmlNCName"]/*' />
         protected static string ToXmlNCName(string value)
         {
             return XmlCustomFormatter.ToXmlNCName(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToXmlNmToken"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToXmlNmToken"]/*' />
         protected static string ToXmlNmToken(string value)
         {
             return XmlCustomFormatter.ToXmlNmToken(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToXmlNmTokens"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToXmlNmTokens"]/*' />
         protected static string ToXmlNmTokens(string value)
         {
             return XmlCustomFormatter.ToXmlNmTokens(value);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ToXmlQualifiedName"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ToXmlQualifiedName"]/*' />
         protected XmlQualifiedName ToXmlQualifiedName(string value)
         {
             return ToXmlQualifiedName(value, DecodeName);
@@ -1352,14 +1391,17 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
         protected void UnknownAttribute(object o, XmlAttribute attr)
         {
             UnknownAttribute(o, attr, null);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownAttribute1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownAttribute1"]/*' />
         protected void UnknownAttribute(object o, XmlAttribute attr, string qnames)
         {
             if (events.OnUnknownAttribute != null)
@@ -1378,13 +1420,15 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownAttribute"]/*' />
         protected void UnknownElement(object o, XmlElement elem)
         {
             UnknownElement(o, elem, null);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownElement1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownElement1"]/*' />
         protected void UnknownElement(object o, XmlElement elem, string qnames)
         {
             if (events.OnUnknownElement != null)
@@ -1403,13 +1447,15 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownNode"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownNode"]/*' />
         protected void UnknownNode(object o)
         {
             UnknownNode(o, null);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnknownNode1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnknownNode1"]/*' />
         protected void UnknownNode(object o, string qnames)
         {
             if (r.NodeType == XmlNodeType.None || r.NodeType == XmlNodeType.Whitespace)
@@ -1476,7 +1522,8 @@ namespace System.Xml.Serialization
                 lineNumber = linePosition = -1;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.UnreferencedObject"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.UnreferencedObject"]/*' />
         protected void UnreferencedObject(string id, object o)
         {
             if (events.OnUnreferencedObject != null)
@@ -1507,7 +1554,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateUnknownTypeException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateUnknownTypeException"]/*' />
         protected Exception CreateUnknownTypeException(XmlQualifiedName type)
         {
             return new InvalidOperationException(
@@ -1515,13 +1563,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateReadOnlyCollectionException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateReadOnlyCollectionException"]/*' />
         protected Exception CreateReadOnlyCollectionException(string name)
         {
             return new InvalidOperationException(Res.GetString(Res.XmlReadOnlyCollection, name));
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateAbstractTypeException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateAbstractTypeException"]/*' />
         protected Exception CreateAbstractTypeException(string name, string ns)
         {
             return new InvalidOperationException(
@@ -1529,7 +1579,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateInaccessibleConstructorException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateInaccessibleConstructorException"]/*' />
         protected Exception CreateInaccessibleConstructorException(string typeName)
         {
             return new InvalidOperationException(
@@ -1537,7 +1588,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateCtorHasSecurityException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateCtorHasSecurityException"]/*' />
         protected Exception CreateCtorHasSecurityException(string typeName)
         {
             return new InvalidOperationException(
@@ -1545,13 +1597,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateUnknownNodeException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateUnknownNodeException"]/*' />
         protected Exception CreateUnknownNodeException()
         {
             return new InvalidOperationException(Res.GetString(Res.XmlUnknownNode, CurrentTag()));
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateUnknownConstantException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateUnknownConstantException"]/*' />
         protected Exception CreateUnknownConstantException(string value, Type enumType)
         {
             return new InvalidOperationException(
@@ -1559,13 +1613,15 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateInvalidCastException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateInvalidCastException"]/*' />
         protected Exception CreateInvalidCastException(Type type, object value)
         {
             return CreateInvalidCastException(type, value, null);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateInvalidCastException1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateInvalidCastException1"]/*' />
         protected Exception CreateInvalidCastException(Type type, object value, string id)
         {
             if (value == null)
@@ -1587,7 +1643,8 @@ namespace System.Xml.Serialization
                 );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateBadDerivationException"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateBadDerivationException"]/*' />
         protected Exception CreateBadDerivationException(
             string xsdDerived,
             string nsDerived,
@@ -1610,7 +1667,8 @@ namespace System.Xml.Serialization
             );
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CreateMissingIXmlSerializableType"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CreateMissingIXmlSerializableType"]/*' />
         protected Exception CreateMissingIXmlSerializableType(
             string name,
             string ns,
@@ -1626,10 +1684,12 @@ namespace System.Xml.Serialization
                     clrType
                 )
             );
-            //XmlSerializableMissingClrType= Type '{0}' from namespace '{1}' doesnot have corresponding IXmlSerializable type. Please consider adding {2} to '{3}'.
+            //XmlSerializableMissingClrType= Type '{0}' from namespace '{1}' doesnot have corresponding
+            // IXmlSerializable type. Please consider adding {2} to '{3}'.
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.EnsureArrayIndex"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.EnsureArrayIndex"]/*' />
         protected Array EnsureArrayIndex(Array a, int index, Type elementType)
         {
             if (a == null)
@@ -1641,7 +1701,8 @@ namespace System.Xml.Serialization
             return b;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ShrinkArray"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ShrinkArray"]/*' />
         protected Array ShrinkArray(Array a, int length, Type elementType, bool isNullable)
         {
             if (a == null)
@@ -1657,13 +1718,15 @@ namespace System.Xml.Serialization
             return b;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadString"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadString"]/*' />
         protected string ReadString(string value)
         {
             return ReadString(value, false);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadString1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadString1"]/*' />
         protected string ReadString(string value, bool trim)
         {
             string str = r.ReadString();
@@ -1674,13 +1737,15 @@ namespace System.Xml.Serialization
             return value + str;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadSerializable"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadSerializable"]/*' />
         protected IXmlSerializable ReadSerializable(IXmlSerializable serializable)
         {
             return ReadSerializable(serializable, false);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadSerializable"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadSerializable"]/*' />
         protected IXmlSerializable ReadSerializable(IXmlSerializable serializable, bool wrappedAny)
         {
             string name = null;
@@ -1713,7 +1778,8 @@ namespace System.Xml.Serialization
             return serializable;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReference"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReference"]/*' />
         protected bool ReadReference(out string fixupReference)
         {
             string href = soap12 ? r.GetAttribute("ref", Soap12.Encoding) : r.GetAttribute("href");
@@ -1744,7 +1810,8 @@ namespace System.Xml.Serialization
             return true;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.AddTarget"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.AddTarget"]/*' />
         protected void AddTarget(string id, object o)
         {
             if (id == null)
@@ -1763,7 +1830,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.AddFixup"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.AddFixup"]/*' />
         protected void AddFixup(Fixup fixup)
         {
             if (fixups == null)
@@ -1771,7 +1839,8 @@ namespace System.Xml.Serialization
             fixups.Add(fixup);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.AddFixup2"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.AddFixup2"]/*' />
         protected void AddFixup(CollectionFixup fixup)
         {
             if (collectionFixups == null)
@@ -1779,7 +1848,8 @@ namespace System.Xml.Serialization
             collectionFixups.Add(fixup);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.GetTarget"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.GetTarget"]/*' />
         protected object GetTarget(string id)
         {
             object target = targets != null ? targets[id] : null;
@@ -1791,7 +1861,8 @@ namespace System.Xml.Serialization
             return target;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.Referenced"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.Referenced"]/*' />
         protected void Referenced(object o)
         {
             if (o == null)
@@ -1847,7 +1918,8 @@ namespace System.Xml.Serialization
             }
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.FixupArrayRefs"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.FixupArrayRefs"]/*' />
         protected void FixupArrayRefs(object fixup)
         {
             Fixup f = (Fixup)fixup;
@@ -2100,10 +2172,12 @@ namespace System.Xml.Serialization
             return array;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.InitCallbacks"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.InitCallbacks"]/*' />
         protected abstract void InitCallbacks();
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencedElements"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencedElements"]/*' />
         protected void ReadReferencedElements()
         {
             r.MoveToContent();
@@ -2121,32 +2195,37 @@ namespace System.Xml.Serialization
             HandleUnreferencedObjects();
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencedElement"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencedElement"]/*' />
         protected object ReadReferencedElement()
         {
             return ReadReferencedElement(null, null);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencedElement1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencedElement1"]/*' />
         protected object ReadReferencedElement(string name, string ns)
         {
             string dummy;
             return ReadReferencingElement(name, ns, out dummy);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement"]/*' />
         protected object ReadReferencingElement(out string fixupReference)
         {
             return ReadReferencingElement(null, null, out fixupReference);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement1"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement1"]/*' />
         protected object ReadReferencingElement(string name, string ns, out string fixupReference)
         {
             return ReadReferencingElement(name, ns, false, out fixupReference);
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement2"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadReferencingElement2"]/*' />
         protected object ReadReferencingElement(
             string name,
             string ns,
@@ -2208,7 +2287,8 @@ namespace System.Xml.Serialization
             return o;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.AddReadCallback"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.AddReadCallback"]/*' />
         protected void AddReadCallback(
             string name,
             string ns,
@@ -2225,7 +2305,8 @@ namespace System.Xml.Serialization
             typesReverse[type] = typeName;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.ReadEndElement"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.ReadEndElement"]/*' />
         protected void ReadEndElement()
         {
             while (r.NodeType == XmlNodeType.Whitespace)
@@ -2341,7 +2422,8 @@ namespace System.Xml.Serialization
             return childNodes;
         }
 
-        /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReader.CheckReaderCount"]/*' />
+        /// <include file='doc\XmlSerializationReader.uex'
+        // path='docs/doc[@for="XmlSerializationReader.CheckReaderCount"]/*' />
         protected void CheckReaderCount(ref int whileIterations, ref int readerCount)
         {
             if (checkDeserializeAdvances)
@@ -2405,7 +2487,8 @@ namespace System.Xml.Serialization
             object collection;
             object collectionItems;
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="CollectionFixup.CollectionFixup"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="CollectionFixup.CollectionFixup"]/*' />
             public CollectionFixup(
                 object collection,
                 XmlSerializationCollectionFixupCallback callback,
@@ -2417,19 +2500,22 @@ namespace System.Xml.Serialization
                 this.collectionItems = collectionItems;
             }
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="CollectionFixup.Callback"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="CollectionFixup.Callback"]/*' />
             public XmlSerializationCollectionFixupCallback Callback
             {
                 get { return callback; }
             }
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="CollectionFixup.Collection"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="CollectionFixup.Collection"]/*' />
             public object Collection
             {
                 get { return collection; }
             }
 
-            /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="CollectionFixup.CollectionItems"]/*' />
+            /// <include file='doc\XmlSerializationReader.uex'
+            // path='docs/doc[@for="CollectionFixup.CollectionItems"]/*' />
             public object CollectionItems
             {
                 get { return collectionItems; }
@@ -2437,18 +2523,21 @@ namespace System.Xml.Serialization
         }
     }
 
-    /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationFixupCallback"]/*' />
+    /// <include file='doc\XmlSerializationReader.uex'
+    // path='docs/doc[@for="XmlSerializationFixupCallback"]/*' />
     ///<internalonly/>
     public delegate void XmlSerializationFixupCallback(object fixup);
 
-    /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationCollectionFixupCallback"]/*' />
+    /// <include file='doc\XmlSerializationReader.uex'
+    // path='docs/doc[@for="XmlSerializationCollectionFixupCallback"]/*' />
     ///<internalonly/>
     public delegate void XmlSerializationCollectionFixupCallback(
         object collection,
         object collectionItems
     );
 
-    /// <include file='doc\XmlSerializationReader.uex' path='docs/doc[@for="XmlSerializationReadCallback"]/*' />
+    /// <include file='doc\XmlSerializationReader.uex'
+    // path='docs/doc[@for="XmlSerializationReadCallback"]/*' />
     ///<internalonly/>
     public delegate object XmlSerializationReadCallback();
 
@@ -2978,7 +3067,8 @@ namespace System.Xml.Serialization
                     }
                 }
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (choiceSource == null)
                     throw new InvalidOperationException(
                         Res.GetString(
@@ -3690,7 +3780,8 @@ namespace System.Xml.Serialization
 
                 string methodName = ReferenceMapping(derived);
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         Res.GetString(Res.XmlInternalErrorMethod, derived.TypeDesc.Name)
@@ -3730,7 +3821,8 @@ namespace System.Xml.Serialization
                         Writer.WriteLine("Reader.ReadStartElement();");
                         string methodName = ReferenceMapping(mapping);
 #if DEBUG
-                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                        // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                        // as aspnet_ewp.exe
                         if (methodName == null)
                             throw new InvalidOperationException(
                                 Res.GetString(Res.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -5596,7 +5688,8 @@ namespace System.Xml.Serialization
             {
                 string methodName = ReferenceMapping(element.Mapping);
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (methodName == null)
                     throw new InvalidOperationException(
                         Res.GetString(Res.XmlInternalErrorMethod, element.Mapping.TypeDesc.Name)
@@ -5760,7 +5853,8 @@ namespace System.Xml.Serialization
                 {
                     string methodName = ReferenceMapping(mapping);
 #if DEBUG
-                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                    // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                    // as aspnet_ewp.exe
                     if (methodName == null)
                         throw new InvalidOperationException(
                             Res.GetString(Res.XmlInternalErrorMethod, mapping.TypeDesc.Name)
@@ -5854,7 +5948,8 @@ namespace System.Xml.Serialization
             if (choice != null)
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (choiceSource == null)
                     throw new InvalidOperationException(
                         Res.GetString(Res.XmlInternalErrorDetails, "need parent for the " + source)

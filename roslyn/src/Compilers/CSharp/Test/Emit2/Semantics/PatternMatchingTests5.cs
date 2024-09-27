@@ -349,17 +349,20 @@ class C
                 //         _ = new C() is { Prop1?.Prop2: {} };
                 Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1?.Prop2")
                     .WithLocation(9, 26),
-                // (10,26): error CS8503: A property subpattern requires a reference to the property or field to be matched, e.g. '{ Name: Prop1[0] }'
+                // (10,26): error CS8503: A property subpattern requires a reference to the property or field to be
+                // matched, e.g. '{ Name: Prop1[0] }'
                 //         _ = new C() is { Prop1[0]: {} };
                 Diagnostic(ErrorCode.ERR_PropertyPatternNameMissing, "Prop1[0]")
                     .WithArguments("Prop1[0]")
                     .WithLocation(10, 26),
-                // (10,26): error CS0246: The type or namespace name 'Prop1' could not be found (are you missing a using directive or an assembly reference?)
+                // (10,26): error CS0246: The type or namespace name 'Prop1' could not be found (are you missing a
+                // using directive or an assembly reference?)
                 //         _ = new C() is { Prop1[0]: {} };
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Prop1")
                     .WithArguments("Prop1")
                     .WithLocation(10, 26),
-                // (10,31): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                // (10,31): error CS0270: Array size cannot be specified in a variable declaration (try initializing
+                // with a 'new' expression)
                 //         _ = new C() is { Prop1[0]: {} };
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[0]").WithLocation(10, 31),
                 // (10,34): error CS1003: Syntax error, ',' expected
@@ -398,22 +401,26 @@ class C
                 parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
             );
             compilation.VerifyEmitDiagnostics(
-                // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default value null
+                // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
                     .WithArguments("C.Field1", "null")
                     .WithLocation(4, 7),
-                // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default value null
+                // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
                     .WithArguments("C.Field2", "null")
                     .WithLocation(4, 15),
-                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
+                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
                     .WithArguments("C.Field3", "null")
                     .WithLocation(4, 23),
-                // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default value null
+                // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
                     .WithArguments("C.Field4", "null")
@@ -440,22 +447,26 @@ class C
                 parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
             );
             compilation.VerifyEmitDiagnostics(
-                // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default value null
+                // (4,7): warning CS0649: Field 'C.Field1' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
                     .WithArguments("C.Field1", "null")
                     .WithLocation(4, 7),
-                // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default value null
+                // (4,15): warning CS0649: Field 'C.Field2' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
                     .WithArguments("C.Field2", "null")
                     .WithLocation(4, 15),
-                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
+                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
                     .WithArguments("C.Field3", "null")
                     .WithLocation(4, 23),
-                // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default value null
+                // (4,31): warning CS0649: Field 'C.Field4' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3, Field4;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
                     .WithArguments("C.Field4", "null")
@@ -645,22 +656,26 @@ struct C { public object Field3; }
 ";
             var expectedDiagnostics = new[]
             {
-                // (9,22): warning CS0649: Field 'A.Field1' is never assigned to, and will always have its default value
+                // (9,22): warning CS0649: Field 'A.Field1' is never assigned to, and will always have its default
+                // value
                 // struct A { public B? Field1; public B? Field4; }
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field1")
                     .WithArguments("A.Field1", "")
                     .WithLocation(9, 22),
-                // (9,40): warning CS0649: Field 'A.Field4' is never assigned to, and will always have its default value
+                // (9,40): warning CS0649: Field 'A.Field4' is never assigned to, and will always have its default
+                // value
                 // struct A { public B? Field1; public B? Field4; }
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field4")
                     .WithArguments("A.Field4", "")
                     .WithLocation(9, 40),
-                // (10,22): warning CS0649: Field 'B.Field2' is never assigned to, and will always have its default value
+                // (10,22): warning CS0649: Field 'B.Field2' is never assigned to, and will always have its default
+                // value
                 // struct B { public C? Field2; }
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field2")
                     .WithArguments("B.Field2", "")
                     .WithLocation(10, 22),
-                // (11,26): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
+                // (11,26): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default
+                // value null
                 // struct C { public object Field3; }
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
                     .WithArguments("C.Field3", "null")
@@ -846,12 +861,15 @@ class B
                 parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
             );
             comp.VerifyDiagnostics(
-                // (6,15): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ BProp: { BoolProp: false } }' is not covered.
+                // (6,15): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ BProp: { BoolProp: false } }' is not
+                // covered.
                 //         _ = a switch // 1
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ BProp: { BoolProp: false } }")
                     .WithLocation(6, 15),
-                // (11,15): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ BProp: { IntProp: 1 } }' is not covered.
+                // (11,15): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ BProp: { IntProp: 1 } }' is not covered.
                 //         _ = a switch // 2
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ BProp: { IntProp: 1 } }")
@@ -892,7 +910,8 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "Field2")
                     .WithArguments("C.Field2")
                     .WithLocation(4, 15),
-                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default value null
+                // (4,23): warning CS0649: Field 'C.Field3' is never assigned to, and will always have its default
+                // value null
                 //     C Field1, Field2, Field3;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
                     .WithArguments("C.Field3", "null")
@@ -1303,7 +1322,8 @@ class P
 ";
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyEmitDiagnostics(
-                // (14,14): warning CS0649: Field 'P.Y' is never assigned to, and will always have its default value null
+                // (14,14): warning CS0649: Field 'P.Y' is never assigned to, and will always have its default value
+                // null
                 //     public P Y;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y")
                     .WithArguments("P.Y", "null")
@@ -1506,7 +1526,8 @@ struct S
 ";
             var compilation = CreatePatternCompilation(source);
             compilation.VerifyEmitDiagnostics(
-                // (17,14): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value null
+                // (17,14): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value
+                // null
                 //     public C Y;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y")
                     .WithArguments("S.Y", "null")
@@ -1861,12 +1882,14 @@ class C
                 //         _ = this is (Property.Property: null, Property: null);
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "Property.Property")
                     .WithLocation(8, 22),
-                // (8,39): error CS8773: Feature 'extended property patterns' is not available in C# 9.0. Please use language version 10.0 or greater.
+                // (8,39): error CS8773: Feature 'extended property patterns' is not available in C# 9.0. Please use
+                // language version 10.0 or greater.
                 //         _ = this is (Property.Property: null, Property: null);
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, ":")
                     .WithArguments("extended property patterns", "10.0")
                     .WithLocation(8, 39),
-                // (8,47): error CS8517: The name 'Property' does not match the corresponding 'Deconstruct' parameter 'c2'.
+                // (8,47): error CS8517: The name 'Property' does not match the corresponding 'Deconstruct'
+                // parameter 'c2'.
                 //         _ = this is (Property.Property: null, Property: null);
                 Diagnostic(ErrorCode.ERR_DeconstructParameterNameMismatch, "Property")
                     .WithArguments("Property", "c2")
@@ -2186,17 +2209,20 @@ class C
                 parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
             );
             comp.VerifyEmitDiagnostics(
-                // (2,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (2,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it
+                // with a type name instead
                 // _ = new C() is { Static: null }; // 1
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
                     .WithArguments("C.Static")
                     .WithLocation(2, 18),
-                // (3,27): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (3,27): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it
+                // with a type name instead
                 // _ = new C() is { Instance.Static: null }; // 2
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
                     .WithArguments("C.Static")
                     .WithLocation(3, 27),
-                // (4,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it with a type name instead
+                // (4,18): error CS0176: Member 'C.Static' cannot be accessed with an instance reference; qualify it
+                // with a type name instead
                 // _ = new C() is { Static.Instance: null }; // 3
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "Static")
                     .WithArguments("C.Static")
@@ -2237,12 +2263,14 @@ class C
                 parseOptions: TestOptions.RegularWithExtendedPropertyPatterns
             );
             comp.VerifyEmitDiagnostics(
-                // (2,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Prop: { True: false } }' is not covered.
+                // (2,13): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ Prop: { True: false } }' is not covered.
                 // _ = new C() switch // 1
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ Prop: { True: false } }")
                     .WithLocation(2, 13),
-                // (14,13): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '{ Prop: { Prop: not null } }' is not covered.
+                // (14,13): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '{ Prop: { Prop: not null } }' is not covered.
                 // _ = new C() switch // 2
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("{ Prop: { Prop: not null } }")
@@ -2318,17 +2346,22 @@ _ = x is { Length.Error: > 0 };
 
             var comp = CreateCompilation(new[] { source, INumberBaseDefinition });
             comp.VerifyDiagnostics(
-                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         1 => 1, // 1
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
                     .WithArguments("T")
                     .WithLocation(8, 9),
-                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         > 1 => 2, // 2
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
                     .WithArguments("T")
                     .WithLocation(9, 9),
-                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
+                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length'
+                // or 'Count' property was found.
                 //         [] => 4, // 3
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("T")
@@ -2370,17 +2403,22 @@ _ = x is { Length.Error: > 0 };
 
             var comp = CreateCompilation(new[] { source, INumberBaseDefinition });
             comp.VerifyDiagnostics(
-                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         1 => 1, // 1
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
                     .WithArguments("T")
                     .WithLocation(8, 9),
-                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         > 1 => 2, // 2
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
                     .WithArguments("T")
                     .WithLocation(9, 9),
-                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
+                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length'
+                // or 'Count' property was found.
                 //         [] => 4, // 3
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("T")
@@ -2434,7 +2472,8 @@ _ = x is { Length.Error: > 0 };
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
-                // (4,34): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // (4,34): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 // void M<T>(T t) where T : struct, INumberBase<T>
                 Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<T>")
                     .WithArguments(
@@ -2443,7 +2482,8 @@ _ = x is { Length.Error: > 0 };
                         "B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
                     .WithLocation(4, 34),
-                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
+                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length'
+                // or 'Count' property was found.
                 //         [] => 4, // 3
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("T")
@@ -2497,17 +2537,22 @@ _ = x is { Length.Error: > 0 };
 
             var comp = CreateCompilation(new[] { source }, references: new[] { ref1, ref2 });
             comp.VerifyDiagnostics(
-                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (8,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         1 => 1, // 1
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
                     .WithArguments("T")
                     .WithLocation(8, 9),
-                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (9,9): error CS9060: Cannot use a numeric constant or relational pattern on 'T' because it
+                // inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc
+                // numeric type.
                 //         > 1 => 2, // 2
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
                     .WithArguments("T")
                     .WithLocation(9, 9),
-                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length' or 'Count' property was found.
+                // (11,9): error CS8985: List patterns may not be used for a value of type 'T'. No suitable 'Length'
+                // or 'Count' property was found.
                 //         [] => 4, // 3
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("T")
@@ -2581,7 +2626,8 @@ _ = x is { Length.Error: > 0 };
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
                     .WithArguments("C", "int")
                     .WithLocation(9, 5),
-                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+                // or 'Count' property was found.
                 //     [] => 4, // 4
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("C")
@@ -2661,7 +2707,8 @@ _ = x is { Length.Error: > 0 };
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
                     .WithArguments("C", "int")
                     .WithLocation(9, 5),
-                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+                // or 'Count' property was found.
                 //     [] => 4, // 4
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("C")
@@ -2681,7 +2728,8 @@ _ = x is { Length.Error: > 0 };
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
                     .WithArguments("string", "C")
                     .WithLocation(12, 5),
-                // (19,5): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+                // (19,5): error CS0433: The type 'INumberBase<T>' exists in both 'A, Version=0.0.0.0,
+                // Culture=neutral, PublicKeyToken=null' and 'B, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
                 //     INumberBase<C>
                 Diagnostic(ErrorCode.ERR_SameFullNameAggAgg, "INumberBase<C>")
                     .WithArguments(
@@ -2750,7 +2798,8 @@ _ = x is { Length.Error: > 0 };
                 Diagnostic(ErrorCode.ERR_PatternWrongType, "int")
                     .WithArguments("C", "int")
                     .WithLocation(9, 5),
-                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length' or 'Count' property was found.
+                // (10,5): error CS8985: List patterns may not be used for a value of type 'C'. No suitable 'Length'
+                // or 'Count' property was found.
                 //     [] => 4, // 4
                 Diagnostic(ErrorCode.ERR_ListPatternRequiresLength, "[]")
                     .WithArguments("C")
@@ -2883,12 +2932,16 @@ _ = x is { Length.Error: > 0 };
                 new[] { source, INumberBaseBCL, INumberBaseDefinition }
             );
             comp.VerifyDiagnostics(
-                // (5,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (5,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>'
+                // because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a
+                // specifc numeric type.
                 //     1 => 1,
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "1")
                     .WithArguments("System.Numerics.INumberBase<int>")
                     .WithLocation(5, 5),
-                // (6,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>' because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a specifc numeric type.
+                // (6,5): error CS9060: Cannot use a numeric constant or relational pattern on 'INumberBase<int>'
+                // because it inherits from or extends 'INumberBase<T>'. Consider using a type pattern to narrow to a
+                // specifc numeric type.
                 //     > 1 => 2,
                 Diagnostic(ErrorCode.ERR_CannotMatchOnINumberBase, "> 1")
                     .WithArguments("System.Numerics.INumberBase<int>")
@@ -2933,7 +2986,8 @@ _ = x is { Length.Error: > 0 };
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
                     .WithArguments("int", $"System.Numerics.INumberBase<{inputType}>")
                     .WithLocation(5, 5),
-                // (6,5): error CS8781: Relational patterns may not be used for a value of type 'System.Numerics.INumberBase<nint>'.
+                // (6,5): error CS8781: Relational patterns may not be used for a value of type
+                // 'System.Numerics.INumberBase<nint>'.
                 //     > 1 => 2,
                 Diagnostic(ErrorCode.ERR_UnsupportedTypeForRelationalPattern, "> 1")
                     .WithArguments($"System.Numerics.INumberBase<{inputType}>")
@@ -3110,7 +3164,8 @@ class N
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,25): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One)' is not covered.
+                // (12,25): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One)' is not covered.
                 //         return (e1, e2) switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(Enum.One, Enum.One)")
@@ -3150,7 +3205,9 @@ class N
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,25): warning CS8846: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One)' is not covered. However, a pattern with a 'when' clause might successfully match this value.
+                // (12,25): warning CS8846: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One)' is not covered.
+                // However, a pattern with a 'when' clause might successfully match this value.
                 //         return (e1, e2) switch
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
                     .WithArguments("(Enum.One, Enum.One)")
@@ -3190,7 +3247,9 @@ class N
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (12,28): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.One, (Enum)-1, _)' is not covered.
+                // (12,28): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.One, (Enum)-1,
+                // _)' is not covered.
                 //         return (e1, e2, o) switch
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3343,7 +3402,9 @@ class N
 
             var comp = CreateCompilation(source);
             comp.VerifyDiagnostics(
-                // (14,28): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1, not null)' is not covered.
+                // (14,28): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1,
+                // not null)' is not covered.
                 //         return (e1, e2, s) switch // 1
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3351,17 +3412,21 @@ class N
                     )
                     .WithArguments("(Enum.Zero, (Enum)-1, not null)")
                     .WithLocation(14, 28),
-                // (29,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, "A")' is not covered.
+                // (29,28): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, "A")' is not covered.
                 //         return (e1, e2, s) switch // 2
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(Enum.One, Enum.One, \"A\")")
                     .WithLocation(29, 28),
-                // (44,28): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
+                // (44,28): warning CS8655: The switch expression does not handle some null inputs (it is not
+                // exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
                 //         return (e1, e2, s) switch // 3
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                     .WithArguments("(Enum.One, Enum.One, null)")
                     .WithLocation(44, 28),
-                // (59,28): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1, not null)' is not covered.
+                // (59,28): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1,
+                // not null)' is not covered.
                 //         return (e1, e2, s) switch // 4
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3369,7 +3434,9 @@ class N
                     )
                     .WithArguments("(Enum.Zero, (Enum)-1, not null)")
                     .WithLocation(59, 28),
-                // (73,28): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1, "A")' is not covered.
+                // (73,28): warning CS8524: The switch expression does not handle some values of its input type (it
+                // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1,
+                // "A")' is not covered.
                 //         return (e1, e2, s) switch // 5
                 Diagnostic(
                         ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3377,7 +3444,8 @@ class N
                     )
                     .WithArguments("(Enum.Zero, (Enum)-1, \"A\")")
                     .WithLocation(73, 28),
-                // (87,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                // (87,28): warning CS8509: The switch expression does not handle all possible values of its input
+                // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                 //         return (e1, e2, s) switch // 6
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("(Enum.One, Enum.One, _)")
@@ -3541,42 +3609,51 @@ class N
             if (nullableEnable)
             {
                 comp.VerifyDiagnostics(
-                    // (12,21): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+                    // (12,21): warning CS8655: The switch expression does not handle some null inputs (it is not
+                    // exhaustive). For example, the pattern 'null' is not covered.
                     //         return this switch // 1
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                         .WithArguments("null")
                         .WithLocation(12, 21),
-                    // (27,21): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern 'null' is not covered.
+                    // (27,21): warning CS8655: The switch expression does not handle some null inputs (it is not
+                    // exhaustive). For example, the pattern 'null' is not covered.
                     //         return this switch // 2
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                         .WithArguments("null")
                         .WithLocation(27, 21),
-                    // (43,21): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
+                    // (43,21): warning CS8655: The switch expression does not handle some null inputs (it is not
+                    // exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
                     //         return this switch // 3
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                         .WithArguments("(Enum.One, Enum.One, null)")
                         .WithLocation(43, 21),
-                    // (60,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
+                    // (60,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
                     //         return this switch // 4
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, false)")
                         .WithLocation(60, 21),
-                    // (76,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (76,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 5
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(76, 21),
-                    // (90,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (90,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 6
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(90, 21),
-                    // (105,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (105,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 7
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(105, 21),
-                    // (121,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1, false)' is not covered.
+                    // (121,21): warning CS8524: The switch expression does not handle some values of its input type (it
+                    // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1,
+                    // false)' is not covered.
                     //         return this switch // 8
                     Diagnostic(
                             ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3589,27 +3666,33 @@ class N
             else
             {
                 comp.VerifyDiagnostics(
-                    // (60,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
+                    // (60,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
                     //         return this switch // 4
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, false)")
                         .WithLocation(60, 21),
-                    // (76,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (76,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 5
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(76, 21),
-                    // (90,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (90,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 6
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(90, 21),
-                    // (105,21): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
+                    // (105,21): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, _)' is not covered.
                     //         return this switch // 7
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, _)")
                         .WithLocation(105, 21),
-                    // (121,21): warning CS8524: The switch expression does not handle some values of its input type (it is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1, false)' is not covered.
+                    // (121,21): warning CS8524: The switch expression does not handle some values of its input type (it
+                    // is not exhaustive) involving an unnamed enum value. For example, the pattern '(Enum.Zero, (Enum)-1,
+                    // false)' is not covered.
                     //         return this switch // 8
                     Diagnostic(
                             ErrorCode.WRN_SwitchExpressionNotExhaustiveWithUnnamedEnumValue,
@@ -3681,12 +3764,14 @@ class N
             if (nullableEnable)
             {
                 comp.VerifyDiagnostics(
-                    // (12,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
+                    // (12,28): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
                     //         return (e1, e2, i) switch // 1
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, false)")
                         .WithLocation(12, 28),
-                    // (27,28): warning CS8655: The switch expression does not handle some null inputs (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
+                    // (27,28): warning CS8655: The switch expression does not handle some null inputs (it is not
+                    // exhaustive). For example, the pattern '(Enum.One, Enum.One, null)' is not covered.
                     //         return (e1, e2, i) switch // 2
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveForNull, "switch")
                         .WithArguments("(Enum.One, Enum.One, null)")
@@ -3696,7 +3781,8 @@ class N
             else
             {
                 comp.VerifyDiagnostics(
-                    // (12,28): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
+                    // (12,28): warning CS8509: The switch expression does not handle all possible values of its input
+                    // type (it is not exhaustive). For example, the pattern '(Enum.One, Enum.One, false)' is not covered.
                     //         return (e1, e2, i) switch // 1
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                         .WithArguments("(Enum.One, Enum.One, false)")

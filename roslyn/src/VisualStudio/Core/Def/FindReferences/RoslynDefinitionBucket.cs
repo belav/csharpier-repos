@@ -106,7 +106,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             /// <summary>
             /// The editor is presenting 'Text' while telling the screen reader to use the 'Name' field.
-            /// Workaround this bug by overriding the string content to provide the proper data for the screen reader.
+            /// Workaround this bug by overriding the string content to provide the proper data for the screen
+            // reader.
             /// https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1020534/
             /// </summary>
             public override bool TryCreateStringContent(out string? content)

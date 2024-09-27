@@ -1416,7 +1416,8 @@ namespace A
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/39234")]
         public async Task TestMultiTargetingProject()
         {
-            // Create two projects with same project file path and single linked document to simulate a multi-targeting project.
+            // Create two projects with same project file path and single linked document to simulate a
+            // multi-targeting project.
             var input = """
                 <Workspace>
                     <Project Language="C#" CommonReferences="true" AssemblyName="Proj1" FilePath="SharedProj.csproj">

@@ -351,7 +351,8 @@ namespace Microsoft.CodeAnalysis.ReplacePropertyWithMethods
                         readExpression
                     );
 
-                    // We know declarator isn't null due to the earlier call to IsInferredAnonymousObjectMemberDeclarator
+                    // We know declarator isn't null due to the earlier call to
+                    // IsInferredAnonymousObjectMemberDeclarator
                     _editor.ReplaceNode(declarator!, newDeclarator);
                 }
                 else if (_syntaxFacts.IsRightOfQualifiedName(_identifierName))

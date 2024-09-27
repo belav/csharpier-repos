@@ -353,7 +353,8 @@ internal sealed class ApplicationModelFactory
         // Action: 'MyApplication.CustomerController.Index' - Route Template: 'Products' - HTTP Verbs: 'PUT'
         // Action: 'MyApplication.CustomerController.Index' - Route Template: '(none)' - HTTP Verbs: 'POST'
         //
-        // Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a route,
+        // Use 'AcceptVerbsAttribute' to create a single route that allows multiple HTTP verbs and defines a
+        // route,
         // or set a route template in all attributes that constrain HTTP verbs.
 
         var type = method.ReflectedType!;

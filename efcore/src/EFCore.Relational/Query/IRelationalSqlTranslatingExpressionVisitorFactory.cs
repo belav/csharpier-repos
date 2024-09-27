@@ -18,7 +18,8 @@ public interface IRelationalSqlTranslatingExpressionVisitorFactory
     ///     Creates a new <see cref="RelationalSqlTranslatingExpressionVisitor" />.
     /// </summary>
     /// <param name="queryCompilationContext">The query compilation context to use.</param>
-    /// <param name="queryableMethodTranslatingExpressionVisitor">The visitor to use to translate subqueries.</param>
+    /// <param name="queryableMethodTranslatingExpressionVisitor">The visitor to use to translate
+    // subqueries.</param>
     /// <returns>A relational sql translating expression visitor.</returns>
     RelationalSqlTranslatingExpressionVisitor Create(
         QueryCompilationContext queryCompilationContext,

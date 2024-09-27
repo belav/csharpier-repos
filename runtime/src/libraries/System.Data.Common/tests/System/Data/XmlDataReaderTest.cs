@@ -352,7 +352,7 @@ namespace System.Data.Tests
                 return Node.OuterXml;
             }
 
-            /* IXmlSerializable overrides */
+/* IXmlSerializable overrides */
             #region WriteXml
             void IXmlSerializable.WriteXml(XmlWriter writer)
             {
@@ -421,7 +421,7 @@ namespace System.Data.Tests
             }
             #endregion
 
-            /* Private utils */
+/* Private utils */
             #region private UpgradeSchema
             private void UpgradeSchema(XmlNode xNode)
             {

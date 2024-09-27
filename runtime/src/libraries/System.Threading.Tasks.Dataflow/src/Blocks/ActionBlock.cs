@@ -18,8 +18,10 @@ using System.Threading.Tasks.Dataflow.Internal;
 
 namespace System.Threading.Tasks.Dataflow
 {
-    /// <summary>Provides a dataflow block that invokes a provided <see cref="System.Action{T}"/> delegate for every data element received.</summary>
-    /// <typeparam name="TInput">Specifies the type of data operated on by this <see cref="ActionBlock{T}"/>.</typeparam>
+    /// <summary>Provides a dataflow block that invokes a provided <see cref="System.Action{T}"/>
+    // delegate for every data element received.</summary>
+    /// <typeparam name="TInput">Specifies the type of data operated on by this <see
+    // cref="ActionBlock{T}"/>.</typeparam>
     [DebuggerDisplay("{DebuggerDisplayContent,nq}")]
     [DebuggerTypeProxy(typeof(ActionBlock<>.DebugView))]
     public sealed class ActionBlock<TInput> : ITargetBlock<TInput>, IDebuggerDisplay
@@ -30,45 +32,61 @@ namespace System.Threading.Tasks.Dataflow
         /// <summary>The core implementation of this message block when in SPSC mode.</summary>
         private readonly SpscTargetCore<TInput>? _spscTarget;
 
-        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Action{T}"/>.</summary>
+        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see
+        // cref="System.Action{T}"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in
+        // Visual Basic).</exception>
         public ActionBlock(Action<TInput> action)
             : this((Delegate)action, ExecutionDataflowBlockOptions.Default) { }
 
-        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Action{T}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
+        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see
+        // cref="System.Action{T}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="ActionBlock{T}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="ActionBlock{T}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in
+        // Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         public ActionBlock(
             Action<TInput> action,
             ExecutionDataflowBlockOptions dataflowBlockOptions
         )
             : this((Delegate)action, dataflowBlockOptions) { }
 
-        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Func{T,Task}"/>.</summary>
+        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see
+        // cref="System.Func{T,Task}"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in
+        // Visual Basic).</exception>
         public ActionBlock(Func<TInput, Task> action)
             : this((Delegate)action, ExecutionDataflowBlockOptions.Default) { }
 
-        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see cref="System.Func{T,Task}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
+        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified <see
+        // cref="System.Func{T,Task}"/> and <see cref="ExecutionDataflowBlockOptions"/>.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="ActionBlock{T}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="ActionBlock{T}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in
+        // Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         public ActionBlock(
             Func<TInput, Task> action,
             ExecutionDataflowBlockOptions dataflowBlockOptions
         )
             : this((Delegate)action, dataflowBlockOptions) { }
 
-        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified delegate and options.</summary>
+        /// <summary>Initializes the <see cref="ActionBlock{T}"/> with the specified delegate and
+        // options.</summary>
         /// <param name="action">The action to invoke with each data element received.</param>
-        /// <param name="dataflowBlockOptions">The options with which to configure this <see cref="ActionBlock{T}"/>.</param>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in Visual Basic).</exception>
-        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is null (Nothing in Visual Basic).</exception>
+        /// <param name="dataflowBlockOptions">The options with which to configure this <see
+        // cref="ActionBlock{T}"/>.</param>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="action"/> is null (Nothing in
+        // Visual Basic).</exception>
+        /// <exception cref="System.ArgumentNullException">The <paramref name="dataflowBlockOptions"/> is
+        // null (Nothing in Visual Basic).</exception>
         private ActionBlock(Delegate action, ExecutionDataflowBlockOptions dataflowBlockOptions)
         {
             if (action is null)
@@ -258,7 +276,8 @@ namespace System.Threading.Tasks.Dataflow
             Debug.Assert(_defaultTarget != null);
 
             // If the task faulted, store its errors. We must add the exception before declining
-            // and signaling completion, as the exception is part of the operation, and the completion conditions
+            // and signaling completion, as the exception is part of the operation, and the completion
+            // conditions
             // depend on this.
             if (completed.IsFaulted)
             {
@@ -277,7 +296,8 @@ namespace System.Threading.Tasks.Dataflow
             _defaultTarget.SignalOneAsyncMessageCompleted(boundingCountChange: -1);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Complete"]/*' />
         public void Complete()
         {
             if (_defaultTarget != null)
@@ -291,7 +311,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Fault"]/*' />
         void IDataflowBlock.Fault(Exception exception)
         {
             if (exception is null)
@@ -310,7 +331,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="Completion"]/*' />
         public Task Completion
         {
             get
@@ -319,18 +341,24 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Posts an item to the <see cref="System.Threading.Tasks.Dataflow.ITargetBlock{T}"/>.</summary>
+        /// <summary>Posts an item to the <see
+        // cref="System.Threading.Tasks.Dataflow.ITargetBlock{T}"/>.</summary>
         /// <param name="item">The item being offered to the target.</param>
         /// <returns>true if the item was accepted by the target block; otherwise, false.</returns>
         /// <remarks>
         /// This method will return once the target block has decided to accept or decline the item,
         /// but unless otherwise dictated by special semantics of the target block, it does not wait
-        /// for the item to actually be processed (for example, <see cref="System.Threading.Tasks.Dataflow.ActionBlock{T}"/>
-        /// will return from Post as soon as it has stored the posted item into its input queue).  From the perspective
-        /// of the block's processing, Post is asynchronous. For target blocks that support postponing offered messages,
+        /// for the item to actually be processed (for example, <see
+        // cref="System.Threading.Tasks.Dataflow.ActionBlock{T}"/>
+        /// will return from Post as soon as it has stored the posted item into its input queue).  From the
+        // perspective
+        /// of the block's processing, Post is asynchronous. For target blocks that support postponing
+        // offered messages,
         /// or for blocks that may do more processing in their Post implementation, consider using
-        /// <see cref="System.Threading.Tasks.Dataflow.DataflowBlock.SendAsync{TInput}(ITargetBlock{TInput}, TInput)">SendAsync</see>,
-        /// which will return immediately and will enable the target to postpone the posted message and later consume it
+        /// <see cref="System.Threading.Tasks.Dataflow.DataflowBlock.SendAsync{TInput}(ITargetBlock{TInput},
+        // TInput)">SendAsync</see>,
+        /// which will return immediately and will enable the target to postpone the posted message and
+        // later consume it
         /// after SendAsync returns.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -338,8 +366,10 @@ namespace System.Threading.Tasks.Dataflow
         {
             // Even though this method is available with the exact same functionality as an extension method
             // on ITargetBlock, using that extension method goes through an interface call on ITargetBlock,
-            // which for very high-throughput scenarios shows up as noticeable overhead on certain architectures.
-            // We can eliminate that call for direct ActionBlock usage by providing the same method as an instance method.
+            // which for very high-throughput scenarios shows up as noticeable overhead on certain
+            // architectures.
+            // We can eliminate that call for direct ActionBlock usage by providing the same method as an
+            // instance method.
 
             return _defaultTarget != null
                 ? _defaultTarget.OfferMessage(Common.SingleMessageHeader, item, null, false)
@@ -347,7 +377,8 @@ namespace System.Threading.Tasks.Dataflow
                 : _spscTarget!.Post(item);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="OfferMessage"]/*' />
         DataflowMessageStatus ITargetBlock<TInput>.OfferMessage(
             DataflowMessageHeader messageHeader,
             TInput messageValue,
@@ -360,7 +391,8 @@ namespace System.Threading.Tasks.Dataflow
                 : _spscTarget!.OfferMessage(messageHeader, messageValue, source, consumeToAccept);
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Targets/Member[@name="InputCount"]/*' />
         public int InputCount
         {
             get
@@ -369,7 +401,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <summary>Gets the number of messages waiting to be processed. This must only be used from the debugger.</summary>
+        /// <summary>Gets the number of messages waiting to be processed. This must only be used from the
+        // debugger.</summary>
         private int InputCountForDebugger
         {
             get
@@ -380,7 +413,8 @@ namespace System.Threading.Tasks.Dataflow
             }
         }
 
-        /// <include file='XmlDocs/CommonXmlDocComments.xml' path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
+        /// <include file='XmlDocs/CommonXmlDocComments.xml'
+        // path='CommonXmlDocComments/Blocks/Member[@name="ToString"]/*' />
         public override string ToString()
         {
             return Common.GetNameForDebugger(

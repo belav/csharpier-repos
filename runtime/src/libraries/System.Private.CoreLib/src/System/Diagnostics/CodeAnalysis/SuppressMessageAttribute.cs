@@ -4,7 +4,8 @@
 namespace System.Diagnostics.CodeAnalysis
 {
     /// <summary>
-    /// Suppresses reporting of a specific code analysis rule violation, allowing multiple suppressions on a single code artifact. Does not apply to compiler diagnostics.
+    /// Suppresses reporting of a specific code analysis rule violation, allowing multiple suppressions
+    // on a single code artifact. Does not apply to compiler diagnostics.
     /// </summary>
     [AttributeUsage(AttributeTargets.All, Inherited = false, AllowMultiple = true)]
     [Conditional("CODE_ANALYSIS")]

@@ -23,10 +23,14 @@ public class AntiforgeryOptions
         // Check the comment on CookieBuilder for more details
         IsEssential = true,
 
-        // Some browsers do not allow non-secure endpoints to set cookies with a 'secure' flag or overwrite cookies
-        // whose 'secure' flag is set (http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-alone.html).
-        // Since mixing secure and non-secure endpoints is a common scenario in applications, we are relaxing the
-        // restriction on secure policy on some cookies by setting to 'None'. Cookies related to authentication or
+        // Some browsers do not allow non-secure endpoints to set cookies with a 'secure' flag or overwrite
+        // cookies
+        // whose 'secure' flag is set
+        // (http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-alone.html).
+        // Since mixing secure and non-secure endpoints is a common scenario in applications, we are
+        // relaxing the
+        // restriction on secure policy on some cookies by setting to 'None'. Cookies related to
+        // authentication or
         // authorization use a stronger policy than 'None'.
         SecurePolicy = CookieSecurePolicy.None,
     };
@@ -41,16 +45,22 @@ public class AntiforgeryOptions
     /// </summary>
     /// <remarks>
     /// <para>
-    /// If an explicit <see cref="CookieBuilder.Name"/> is not provided, the system will automatically generate a
+    /// If an explicit <see cref="CookieBuilder.Name"/> is not provided, the system will automatically
+    // generate a
     /// unique name that begins with <see cref="DefaultCookiePrefix"/>.
     /// </para>
     /// <list type="bullet">
-    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see cref="SameSiteMode.Strict"/>.</description></item>
-    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to <c>true</c>.</description></item>
-    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to <c>true</c>. The cookie used by the antiforgery system
-    /// is part of a security system that is necessary when using cookie-based authentication. It should be
+    /// <item><description><see cref="CookieBuilder.SameSite"/> defaults to <see
+    // cref="SameSiteMode.Strict"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.HttpOnly"/> defaults to
+    // <c>true</c>.</description></item>
+    /// <item><description><see cref="CookieBuilder.IsEssential"/> defaults to <c>true</c>. The cookie
+    // used by the antiforgery system
+    /// is part of a security system that is necessary when using cookie-based authentication. It should
+    // be
     /// considered required for the application to function.</description></item>
-    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see cref="CookieSecurePolicy.None"/>.</description></item>
+    /// <item><description><see cref="CookieBuilder.SecurePolicy"/> defaults to <see
+    // cref="CookieSecurePolicy.None"/>.</description></item>
     /// </list>
     /// </remarks>
     public CookieBuilder Cookie
@@ -69,7 +79,8 @@ public class AntiforgeryOptions
     }
 
     /// <summary>
-    /// Specifies the name of the header value that is used by the antiforgery system. If <c>null</c> then
+    /// Specifies the name of the header value that is used by the antiforgery system. If <c>null</c>
+    // then
     /// antiforgery validation will only consider form data.
     /// </summary>
     public string? HeaderName { get; set; } = AntiforgeryTokenHeaderName;

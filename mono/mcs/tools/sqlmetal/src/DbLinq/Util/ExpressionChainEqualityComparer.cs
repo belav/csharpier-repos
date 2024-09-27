@@ -64,7 +64,8 @@ namespace DbLinq.Util
         /// <summary>
         /// Returns a hash code for the specified object.
         /// </summary>
-        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be returned.</param>
+        /// <param name="obj">The <see cref="T:System.Object"/> for which a hash code is to be
+        // returned.</param>
         /// <returns>A hash code for the specified object.</returns>
         public int GetHashCode(ExpressionChain obj)
         {

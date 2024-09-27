@@ -65,10 +65,13 @@ namespace System.Text.Json.Serialization.Metadata
         /// A parameterless factory is not supported for the current metadata <see cref="Kind"/>.
         /// </exception>
         /// <remarks>
-        /// If set to <see langword="null" />, any attempt to deserialize instances of the given type will result in an exception.
+        /// If set to <see langword="null" />, any attempt to deserialize instances of the given type will
+        // result in an exception.
         ///
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// types with a single default constructor or default constructors annotated with <see cref="JsonConstructorAttribute"/>
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// types with a single default constructor or default constructors annotated with <see
+        // cref="JsonConstructorAttribute"/>
         /// will be mapped to this delegate.
         /// </remarks>
         public Func<object>? CreateObject
@@ -93,8 +96,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Serialization callbacks are only supported for <see cref="JsonTypeInfoKind.Object"/> metadata.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="IJsonOnSerializing"/> implementation on the type.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see cref="IJsonOnSerializing"/>
+        // implementation on the type.
         /// </remarks>
         public Action<object>? OnSerializing
         {
@@ -125,8 +130,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Serialization callbacks are only supported for <see cref="JsonTypeInfoKind.Object"/> metadata.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="IJsonOnSerialized"/> implementation on the type.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see cref="IJsonOnSerialized"/>
+        // implementation on the type.
         /// </remarks>
         public Action<object>? OnSerialized
         {
@@ -157,8 +164,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Serialization callbacks are only supported for <see cref="JsonTypeInfoKind.Object"/> metadata.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="IJsonOnDeserializing"/> implementation on the type.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see cref="IJsonOnDeserializing"/>
+        // implementation on the type.
         /// </remarks>
         public Action<object>? OnDeserializing
         {
@@ -189,8 +198,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Serialization callbacks are only supported for <see cref="JsonTypeInfoKind.Object"/> metadata.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="IJsonOnDeserialized"/> implementation on the type.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see cref="IJsonOnDeserialized"/>
+        // implementation on the type.
         /// </remarks>
         public Action<object>? OnDeserialized
         {
@@ -217,12 +228,15 @@ namespace System.Text.Json.Serialization.Metadata
         /// Property is only applicable to metadata of kind <see cref="JsonTypeInfoKind.Object"/>.
         /// For other kinds an empty, read-only list will be returned.
         ///
-        /// The order of <see cref="JsonPropertyInfo"/> entries in the list determines the serialization order,
+        /// The order of <see cref="JsonPropertyInfo"/> entries in the list determines the serialization
+        // order,
         /// unless either of the entries specifies a non-zero <see cref="JsonPropertyInfo.Order"/> value,
         /// in which case the properties will be stable sorted by <see cref="JsonPropertyInfo.Order"/>.
         ///
-        /// It is required that added <see cref="JsonPropertyInfo"/> entries are unique up to <see cref="JsonPropertyInfo.Name"/>,
-        /// however this will only be validated on serialization, once the metadata instance gets locked for further modification.
+        /// It is required that added <see cref="JsonPropertyInfo"/> entries are unique up to <see
+        // cref="JsonPropertyInfo.Name"/>,
+        /// however this will only be validated on serialization, once the metadata instance gets locked for
+        // further modification.
         /// </remarks>
         public IList<JsonPropertyInfo> Properties => PropertyList;
 
@@ -283,7 +297,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// Gets or sets a configuration object specifying polymorphism metadata.
         /// </summary>
         /// <exception cref="ArgumentException">
-        /// <paramref name="value" /> has been associated with a different <see cref="JsonTypeInfo"/> instance.
+        /// <paramref name="value" /> has been associated with a different <see cref="JsonTypeInfo"/>
+        // instance.
         /// </exception>
         /// <exception cref="InvalidOperationException">
         /// The <see cref="JsonTypeInfo"/> instance has been locked for further modification.
@@ -293,8 +308,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Polymorphic serialization is not supported for the current metadata <see cref="Kind"/>.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the configuration of this setting will be mapped from any <see cref="JsonDerivedTypeAttribute"/> or <see cref="JsonPolymorphicAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the configuration of this setting will be mapped from any <see cref="JsonDerivedTypeAttribute"/>
+        // or <see cref="JsonPolymorphicAttribute"/> annotations.
         /// </remarks>
         public JsonPolymorphismOptions? PolymorphismOptions
         {
@@ -357,11 +374,14 @@ namespace System.Text.Json.Serialization.Metadata
         // Indicates that SerializeHandler is populated.
         internal bool HasSerializeHandler { get; private protected set; }
 
-        // Indicates that SerializeHandler is populated and is compatible with the associated contract metadata.
+        // Indicates that SerializeHandler is populated and is compatible with the associated contract
+        // metadata.
         internal bool CanUseSerializeHandler { get; private set; }
 
-        // Configure would normally have thrown why initializing properties for source gen but type had SerializeHandler
-        // so it is allowed to be used for fast-path serialization but it will throw if used for metadata-based serialization
+        // Configure would normally have thrown why initializing properties for source gen but type had
+        // SerializeHandler
+        // so it is allowed to be used for fast-path serialization but it will throw if used for
+        // metadata-based serialization
         internal bool PropertyMetadataSerializationNotSupported { get; set; }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -380,7 +400,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal Type? KeyType { get; }
 
         /// <summary>
-        /// Return the JsonTypeInfo for the element type, or null if the type is not an enumerable or dictionary.
+        /// Return the JsonTypeInfo for the element type, or null if the type is not an enumerable or
+        // dictionary.
         /// </summary>
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         internal JsonTypeInfo? ElementTypeInfo
@@ -435,7 +456,8 @@ namespace System.Text.Json.Serialization.Metadata
         private JsonTypeInfo? _keyTypeInfo;
 
         /// <summary>
-        /// Gets the <see cref="JsonSerializerOptions"/> value associated with the current <see cref="JsonTypeInfo" /> instance.
+        /// Gets the <see cref="JsonSerializerOptions"/> value associated with the current <see
+        // cref="JsonTypeInfo" /> instance.
         /// </summary>
         public JsonSerializerOptions Options { get; }
 
@@ -448,9 +470,11 @@ namespace System.Text.Json.Serialization.Metadata
         /// Gets the <see cref="JsonConverter"/> associated with the current type.
         /// </summary>
         /// <remarks>
-        /// The <see cref="JsonConverter"/> associated with the type determines the value of <see cref="Kind"/>,
+        /// The <see cref="JsonConverter"/> associated with the type determines the value of <see
+        // cref="Kind"/>,
         /// and by extension the types of metadata that are configurable in the current JSON contract.
-        /// As such, the value of the converter cannot be changed once a <see cref="JsonTypeInfo"/> instance has been created.
+        /// As such, the value of the converter cannot be changed once a <see cref="JsonTypeInfo"/> instance
+        // has been created.
         /// </remarks>
         public JsonConverter Converter { get; }
 
@@ -464,21 +488,25 @@ namespace System.Text.Json.Serialization.Metadata
         ///
         /// The value of <see cref="Kind"/> is determined exclusively by the <see cref="JsonConverter"/>
         /// resolved for the current type, and cannot be changed once resolution has happened.
-        /// User-defined custom converters (specified either via <see cref="JsonConverterAttribute"/> or <see cref="JsonSerializerOptions.Converters"/>)
+        /// User-defined custom converters (specified either via <see cref="JsonConverterAttribute"/> or
+        // <see cref="JsonSerializerOptions.Converters"/>)
         /// are metadata-agnostic and thus always resolve to <see cref="JsonTypeInfoKind.None"/>.
         /// </remarks>
         public JsonTypeInfoKind Kind { get; private set; }
 
         /// <summary>
-        /// Dummy <see cref="JsonPropertyInfo"/> instance corresponding to the declaring type of this <see cref="JsonTypeInfo"/>.
+        /// Dummy <see cref="JsonPropertyInfo"/> instance corresponding to the declaring type of this <see
+        // cref="JsonTypeInfo"/>.
         /// </summary>
         /// <remarks>
-        /// Used as convenience in cases where we want to serialize property-like values that do not define property metadata, such as:
+        /// Used as convenience in cases where we want to serialize property-like values that do not define
+        // property metadata, such as:
         /// 1. a collection element type,
         /// 2. a dictionary key or value type or,
         /// 3. the property metadata for the root-level value.
         /// For example, for a property returning <see cref="List{T}"/> where T is a string,
-        /// a JsonTypeInfo will be created with .Type=typeof(string) and .PropertyInfoForTypeInfo=JsonPropertyInfo{string}.
+        /// a JsonTypeInfo will be created with .Type=typeof(string) and
+        // .PropertyInfoForTypeInfo=JsonPropertyInfo{string}.
         /// </remarks>
         internal JsonPropertyInfo PropertyInfoForTypeInfo { get; }
 
@@ -494,8 +522,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Specified an invalid <see cref="JsonNumberHandling"/> value.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="JsonNumberHandlingAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see cref="JsonNumberHandlingAttribute"/>
+        // annotations.
         /// </remarks>
         public JsonNumberHandling? NumberHandling
         {
@@ -529,8 +559,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Specified an invalid <see cref="JsonUnmappedMemberHandling"/> value.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from any <see cref="JsonUnmappedMemberHandlingAttribute"/> annotations.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from any <see
+        // cref="JsonUnmappedMemberHandlingAttribute"/> annotations.
         /// </remarks>
         public JsonUnmappedMemberHandling? UnmappedMemberHandling
         {
@@ -565,7 +597,8 @@ namespace System.Text.Json.Serialization.Metadata
         private JsonObjectCreationHandling? _preferredPropertyObjectCreationHandling;
 
         /// <summary>
-        /// Gets or sets the preferred <see cref="JsonObjectCreationHandling"/> value for properties contained in the type.
+        /// Gets or sets the preferred <see cref="JsonObjectCreationHandling"/> value for properties
+        // contained in the type.
         /// </summary>
         /// <exception cref="InvalidOperationException">
         /// The <see cref="JsonTypeInfo"/> instance has been locked for further modification.
@@ -578,8 +611,10 @@ namespace System.Text.Json.Serialization.Metadata
         /// Specified an invalid <see cref="JsonObjectCreationHandling"/> value.
         /// </exception>
         /// <remarks>
-        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see cref="JsonSerializerContext"/>,
-        /// the value of this callback will be mapped from <see cref="JsonObjectCreationHandlingAttribute"/> annotations on types.
+        /// For contracts originating from <see cref="DefaultJsonTypeInfoResolver"/> or <see
+        // cref="JsonSerializerContext"/>,
+        /// the value of this callback will be mapped from <see cref="JsonObjectCreationHandlingAttribute"/>
+        // annotations on types.
         /// </remarks>
         public JsonObjectCreationHandling? PreferredPropertyObjectCreationHandling
         {
@@ -605,7 +640,8 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="IJsonTypeInfoResolver"/> from which this metadata instance originated.
+        /// Gets or sets the <see cref="IJsonTypeInfoResolver"/> from which this metadata instance
+        // originated.
         /// </summary>
         /// <exception cref="InvalidOperationException">
         /// The <see cref="JsonTypeInfo"/> instance has been locked for further modification.
@@ -625,8 +661,10 @@ namespace System.Text.Json.Serialization.Metadata
                 if (value is JsonSerializerContext)
                 {
                     // The source generator uses this property setter to brand the metadata instance as user-unmodified.
-                    // Even though users could call the same property setter to unset this flag, this is generally speaking fine.
-                    // This flag is only used to determine fast-path invalidation, worst case scenario this would lead to a false negative.
+                    // Even though users could call the same property setter to unset this flag, this is generally
+                    // speaking fine.
+                    // This flag is only used to determine fast-path invalidation, worst case scenario this would lead
+                    // to a false negative.
                     IsCustomized = false;
                 }
 
@@ -721,7 +759,8 @@ namespace System.Text.Json.Serialization.Metadata
             if (PolymorphismOptions != null)
             {
                 // This needs to be done before ConfigureProperties() is called
-                // JsonPropertyInfo.Configure() must have this value available in order to detect Polymoprhic + cyclic class case
+                // JsonPropertyInfo.Configure() must have this value available in order to detect Polymoprhic +
+                // cyclic class case
                 PolymorphicTypeResolver = new PolymorphicTypeResolver(
                     Options,
                     PolymorphismOptions,
@@ -910,7 +949,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// Creates a blank <see cref="JsonTypeInfo{T}"/> instance.
         /// </summary>
         /// <typeparam name="T">The type for which contract metadata is specified.</typeparam>
-        /// <param name="options">The <see cref="JsonSerializerOptions"/> instance the metadata is associated with.</param>
+        /// <param name="options">The <see cref="JsonSerializerOptions"/> instance the metadata is
+        // associated with.</param>
         /// <returns>A blank <see cref="JsonTypeInfo{T}"/> instance.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="options"/> is null.</exception>
         /// <remarks>
@@ -921,7 +961,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// will not be resolved by this method.
         ///
         /// What converter does get resolved influences the value of <see cref="Kind"/>,
-        /// which constrains the type of metadata that can be modified in the <see cref="JsonTypeInfo"/> instance.
+        /// which constrains the type of metadata that can be modified in the <see cref="JsonTypeInfo"/>
+        // instance.
         /// </remarks>
         [RequiresUnreferencedCode(MetadataFactoryRequiresUnreferencedCode)]
         [RequiresDynamicCode(MetadataFactoryRequiresUnreferencedCode)]
@@ -944,10 +985,13 @@ namespace System.Text.Json.Serialization.Metadata
         /// Creates a blank <see cref="JsonTypeInfo"/> instance.
         /// </summary>
         /// <param name="type">The type for which contract metadata is specified.</param>
-        /// <param name="options">The <see cref="JsonSerializerOptions"/> instance the metadata is associated with.</param>
+        /// <param name="options">The <see cref="JsonSerializerOptions"/> instance the metadata is
+        // associated with.</param>
         /// <returns>A blank <see cref="JsonTypeInfo"/> instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="options"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="type"/> cannot be used for serialization.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="options"/> is
+        // null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="type"/> cannot be used for
+        // serialization.</exception>
         /// <remarks>
         /// The returned <see cref="JsonTypeInfo"/> will be blank, with the exception of the
         /// <see cref="Converter"/> property which will be resolved either from
@@ -956,7 +1000,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// will not be resolved by this method.
         ///
         /// What converter does get resolved influences the value of <see cref="Kind"/>,
-        /// which constrains the type of metadata that can be modified in the <see cref="JsonTypeInfo"/> instance.
+        /// which constrains the type of metadata that can be modified in the <see cref="JsonTypeInfo"/>
+        // instance.
         /// </remarks>
         [RequiresUnreferencedCode(MetadataFactoryRequiresUnreferencedCode)]
         [RequiresDynamicCode(MetadataFactoryRequiresUnreferencedCode)]
@@ -1025,14 +1070,18 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         /// <summary>
-        /// Creates a blank <see cref="JsonPropertyInfo"/> instance for the current <see cref="JsonTypeInfo"/>.
+        /// Creates a blank <see cref="JsonPropertyInfo"/> instance for the current <see
+        // cref="JsonTypeInfo"/>.
         /// </summary>
         /// <param name="propertyType">The declared type for the property.</param>
         /// <param name="name">The property name used in JSON serialization and deserialization.</param>
         /// <returns>A blank <see cref="JsonPropertyInfo"/> instance.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="propertyType"/> or <paramref name="name"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="propertyType"/> cannot be used for serialization.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="JsonTypeInfo"/> instance has been locked for further modification.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="propertyType"/> or <paramref
+        // name="name"/> is null.</exception>
+        /// <exception cref="ArgumentException"><paramref name="propertyType"/> cannot be used for
+        // serialization.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="JsonTypeInfo"/> instance has been
+        // locked for further modification.</exception>
         [RequiresUnreferencedCode(MetadataFactoryRequiresUnreferencedCode)]
         [RequiresDynamicCode(MetadataFactoryRequiresUnreferencedCode)]
         public JsonPropertyInfo CreateJsonPropertyInfo(Type propertyType, string name)

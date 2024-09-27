@@ -238,7 +238,8 @@ public class FormatterTests
                 ).Syntax!
         );
 
-        // Validate that options are read from solution snapshot as a fallback (we have no editorconfig file, so all options should fall back):
+        // Validate that options are read from solution snapshot as a fallback (we have no editorconfig
+        // file, so all options should fall back):
 
         var updatedSolutionOptions = OptionsTestHelpers.GetOptionSetWithChangedOptions(
             workspace.CurrentSolution.Options,

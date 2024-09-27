@@ -56,8 +56,10 @@ namespace System
     }
 
     /// <summary>
-    /// The ValueTuple types (from arity 0 to 8) comprise the runtime implementation that underlies tuples in C# and struct tuples in F#.
-    /// Aside from created via language syntax, they are most easily created via the ValueTuple.Create factory methods.
+    /// The ValueTuple types (from arity 0 to 8) comprise the runtime implementation that underlies
+    // tuples in C# and struct tuples in F#.
+    /// Aside from created via language syntax, they are most easily created via the ValueTuple.Create
+    // factory methods.
     /// The System.ValueTuple types differ from the System.Tuple types in that:
     /// - they are structs rather than classes,
     /// - they are mutable rather than readonly, and
@@ -74,18 +76,22 @@ namespace System
             ITuple
     {
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple"/> instance is equal to
+        // a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if <paramref name="obj"/> is a <see cref="ValueTuple"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="obj"/> is a <see
+        // cref="ValueTuple"/>.</returns>
         public override bool Equals(object obj)
         {
             return obj is ValueTuple;
         }
 
-        /// <summary>Returns a value indicating whether this instance is equal to a specified value.</summary>
+        /// <summary>Returns a value indicating whether this instance is equal to a specified
+        // value.</summary>
         /// <param name="other">An instance to compare to this instance.</param>
-        /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise, false.</returns>
+        /// <returns>true if <paramref name="other"/> has the same value as this instance; otherwise,
+        // false.</returns>
         public bool Equals(ValueTuple other)
         {
             return true;
@@ -109,7 +115,8 @@ namespace System
             return 0;
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -262,7 +269,8 @@ namespace System
         /// <param name="item4">The value of the fourth component of the tuple.</param>
         /// <param name="item5">The value of the fifth component of the tuple.</param>
         /// <param name="item6">The value of the sixth component of the tuple.</param>
-        /// <returns>A 6-tuple (sextuple) whose value is (item1, item2, item3, item4, item5, item6).</returns>
+        /// <returns>A 6-tuple (sextuple) whose value is (item1, item2, item3, item4, item5,
+        // item6).</returns>
         public static ValueTuple<T1, T2, T3, T4, T5, T6> Create<T1, T2, T3, T4, T5, T6>(
             T1 item1,
             T2 item2,
@@ -287,7 +295,8 @@ namespace System
         /// <param name="item5">The value of the fifth component of the tuple.</param>
         /// <param name="item6">The value of the sixth component of the tuple.</param>
         /// <param name="item7">The value of the seventh component of the tuple.</param>
-        /// <returns>A 7-tuple (septuple) whose value is (item1, item2, item3, item4, item5, item6, item7).</returns>
+        /// <returns>A 7-tuple (septuple) whose value is (item1, item2, item3, item4, item5, item6,
+        // item7).</returns>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7> Create<T1, T2, T3, T4, T5, T6, T7>(
             T1 item1,
             T2 item2,
@@ -324,7 +333,8 @@ namespace System
         /// <param name="item6">The value of the sixth component of the tuple.</param>
         /// <param name="item7">The value of the seventh component of the tuple.</param>
         /// <param name="item8">The value of the eighth component of the tuple.</param>
-        /// <returns>An 8-tuple (octuple) whose value is (item1, item2, item3, item4, item5, item6, item7, item8).</returns>
+        /// <returns>An 8-tuple (octuple) whose value is (item1, item2, item3, item4, item5, item6, item7,
+        // item8).</returns>
         public static ValueTuple<T1, T2, T3, T4, T5, T6, T7, ValueTuple<T8>> Create<
             T1,
             T2,
@@ -418,16 +428,21 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1}"/> instance is
+        // equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
         ///     <item><description>It is a <see cref="ValueTuple{T1}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -440,9 +455,11 @@ namespace System
         /// instance is equal to a specified <see cref="ValueTuple{T1}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its field
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its field
         /// is equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1> other)
@@ -475,7 +492,8 @@ namespace System
             return Comparer<T1>.Default.Compare(Item1, objTuple.Item1);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -528,7 +546,8 @@ namespace System
         /// <returns>The string representation of this <see cref="ValueTuple{T1}"/> instance.</returns>
         /// <remarks>
         /// The string returned by this method takes the form <c>(Item1)</c>,
-        /// where <c>Item1</c> represents the value of <see cref="Item1"/>. If the field is <see langword="null"/>,
+        /// where <c>Item1</c> represents the value of <see cref="Item1"/>. If the field is <see
+        // langword="null"/>,
         /// it is represented as <see cref="string.Empty"/>.
         /// </remarks>
         public override string ToString()
@@ -600,17 +619,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is
+        // equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         ///
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
         ///     <item><description>It is a <see cref="ValueTuple{T1, T2}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -619,12 +643,15 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified <see cref="ValueTuple{T1, T2}"/>.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is
+        // equal to a specified <see cref="ValueTuple{T1, T2}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2> other)
@@ -634,22 +661,32 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is equal to a specified object based on a specified comparison method.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2}"/> instance is
+        // equal to a specified object based on a specified comparison method.
         /// </summary>
         /// <param name="other">The object to compare with this instance.</param>
-        /// <param name="comparer">An object that defines the method to use to evaluate whether the two objects are equal.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <param name="comparer">An object that defines the method to use to evaluate whether the two
+        // objects are equal.</param>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         ///
         /// <remarks>
         /// This member is an explicit interface member implementation. It can be used only when the
-        ///  <see cref="ValueTuple{T1, T2}"/> instance is cast to an <see cref="IStructuralEquatable"/> interface.
+        ///  <see cref="ValueTuple{T1, T2}"/> instance is cast to an <see cref="IStructuralEquatable"/>
+        // interface.
         ///
-        /// The <see cref="IEqualityComparer.Equals"/> implementation is called only if <c>other</c> is not <see langword="null"/>,
-        ///  and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see cref="ValueTuple{T1, T2}"/>
-        ///  whose components are of the same types as those of the current instance. The IStructuralEquatable.Equals(Object, IEqualityComparer) method
-        ///  first passes the <see cref="Item1"/> values of the <see cref="ValueTuple{T1, T2}"/> objects to be compared to the
-        ///  <see cref="IEqualityComparer.Equals"/> implementation. If this method call returns <see langword="true"/>, the method is
-        ///  called again and passed the <see cref="Item2"/> values of the two <see cref="ValueTuple{T1, T2}"/> instances.
+        /// The <see cref="IEqualityComparer.Equals"/> implementation is called only if <c>other</c> is not
+        // <see langword="null"/>,
+        ///  and if it can be successfully cast (in C#) or converted (in Visual Basic) to a <see
+        // cref="ValueTuple{T1, T2}"/>
+        ///  whose components are of the same types as those of the current instance. The
+        // IStructuralEquatable.Equals(Object, IEqualityComparer) method
+        ///  first passes the <see cref="Item1"/> values of the <see cref="ValueTuple{T1, T2}"/> objects to
+        // be compared to the
+        ///  <see cref="IEqualityComparer.Equals"/> implementation. If this method call returns <see
+        // langword="true"/>, the method is
+        ///  called again and passed the <see cref="Item2"/> values of the two <see cref="ValueTuple{T1,
+        // T2}"/> instances.
         /// </remarks>
         bool IStructuralEquatable.Equals(object other, IEqualityComparer comparer)
         {
@@ -674,7 +711,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -831,16 +869,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3}"/> instance
+        // is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -853,9 +897,11 @@ namespace System
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3> other)
@@ -890,7 +936,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -967,9 +1014,11 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3}"/>
+        // instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3}"/>
+        // instance.</returns>
         /// <remarks>
         /// The string returned by this method takes the form <c>(Item1, Item2, Item3)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
@@ -1071,16 +1120,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4}"/>
+        // instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -1093,9 +1148,11 @@ namespace System
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3, T4> other)
@@ -1132,7 +1189,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3, T4>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -1219,9 +1277,11 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4}"/>
+        // instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4}"/>
+        // instance.</returns>
         /// <remarks>
         /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
@@ -1342,16 +1402,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>
+        // instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -1365,9 +1431,11 @@ namespace System
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3, T4, T5> other)
@@ -1406,7 +1474,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3, T4, T5>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -1503,9 +1572,11 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>
+        // instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5}"/>
+        // instance.</returns>
         /// <remarks>
         /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
@@ -1640,16 +1711,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5,
+        // T6}"/> instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -1659,13 +1736,16 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5,
+        // T6}"/>
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3, T4, T5, T6> other)
@@ -1706,7 +1786,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3, T4, T5, T6>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -1813,11 +1894,14 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5,
+        // T6}"/> instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6}"/>
+        // instance.</returns>
         /// <remarks>
-        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6)</c>.
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5,
+        // Item6)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
         /// </remarks>
         public override string ToString()
@@ -1943,7 +2027,8 @@ namespace System
         public T7 Item7;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value type.
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value
+        // type.
         /// </summary>
         /// <param name="item1">The value of the tuple's first component.</param>
         /// <param name="item2">The value of the tuple's second component.</param>
@@ -1964,16 +2049,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7}"/> instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -1983,13 +2074,16 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7}"/>
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3, T4, T5, T6, T7> other)
@@ -2032,7 +2126,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3, T4, T5, T6, T7>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -2109,7 +2204,8 @@ namespace System
         }
 
         /// <summary>
-        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>
+        // instance.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
@@ -2149,11 +2245,14 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7}"/> instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7}"/>
+        // instance.</returns>
         /// <remarks>
-        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7)</c>.
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6,
+        // Item7)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
         /// </remarks>
         public override string ToString()
@@ -2252,47 +2351,56 @@ namespace System
         where TRest : struct
     {
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's first
+        // component.
         /// </summary>
         public T1 Item1;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's second component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's second
+        // component.
         /// </summary>
         public T2 Item2;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's third component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's third
+        // component.
         /// </summary>
         public T3 Item3;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fourth component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fourth
+        // component.
         /// </summary>
         public T4 Item4;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fifth component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's fifth
+        // component.
         /// </summary>
         public T5 Item5;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's sixth component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's sixth
+        // component.
         /// </summary>
         public T6 Item6;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's seventh component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's seventh
+        // component.
         /// </summary>
         public T7 Item7;
 
         /// <summary>
-        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's eighth component.
+        /// The current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance's eighth
+        // component.
         /// </summary>
         public TRest Rest;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> value type.
+        /// Initializes a new instance of the <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/>
+        // value type.
         /// </summary>
         /// <param name="item1">The value of the tuple's first component.</param>
         /// <param name="item2">The value of the tuple's second component.</param>
@@ -2329,16 +2437,22 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance is equal to a specified object.
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7, TRest}"/> instance is equal to a specified object.
         /// </summary>
         /// <param name="obj">The object to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified object; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified object;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the following conditions:
+        /// The <paramref name="obj"/> parameter is considered to be equal to the current instance under the
+        // following conditions:
         /// <list type="bullet">
-        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> value type.</description></item>
-        ///     <item><description>Its components are of the same types as those of the current instance.</description></item>
-        ///     <item><description>Its components are equal to those of the current instance. Equality is determined by the default object equality comparer for each component.</description></item>
+        ///     <item><description>It is a <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> value
+        // type.</description></item>
+        ///     <item><description>Its components are of the same types as those of the current
+        // instance.</description></item>
+        ///     <item><description>Its components are equal to those of the current instance. Equality is
+        // determined by the default object equality comparer for each component.</description></item>
         /// </list>
         /// </remarks>
         public override bool Equals(object obj)
@@ -2348,13 +2462,16 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/>
+        /// Returns a value that indicates whether the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7, TRest}"/>
         /// instance is equal to a specified <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/>.
         /// </summary>
         /// <param name="other">The tuple to compare with this instance.</param>
-        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple; otherwise, <see langword="false"/>.</returns>
+        /// <returns><see langword="true"/> if the current instance is equal to the specified tuple;
+        // otherwise, <see langword="false"/>.</returns>
         /// <remarks>
-        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each of its fields
+        /// The <paramref name="other"/> parameter is considered to be equal to the current instance if each
+        // of its fields
         /// are equal to that of the current instance, using the default comparer for that field's type.
         /// </remarks>
         public bool Equals(ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest> other)
@@ -2399,7 +2516,8 @@ namespace System
             return CompareTo((ValueTuple<T1, T2, T3, T4, T5, T6, T7, TRest>)other);
         }
 
-        /// <summary>Compares this instance to a specified instance and returns an indication of their relative values.</summary>
+        /// <summary>Compares this instance to a specified instance and returns an indication of their
+        // relative values.</summary>
         /// <param name="other">An instance to compare.</param>
         /// <returns>
         /// A signed number indicating the relative values of this instance and <paramref name="other"/>.
@@ -2484,7 +2602,8 @@ namespace System
         }
 
         /// <summary>
-        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance.
+        /// Returns the hash code for the current <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7,
+        // TRest}"/> instance.
         /// </summary>
         /// <returns>A 32-bit signed integer hash code.</returns>
         public override int GetHashCode()
@@ -2510,7 +2629,8 @@ namespace System
                 return rest.GetHashCode();
             }
 
-            // In this case, the rest member has less than 8 elements so we need to combine some our elements with the elements in rest
+            // In this case, the rest member has less than 8 elements so we need to combine some our elements
+            // with the elements in rest
             int k = 8 - size;
             switch (k)
             {
@@ -2605,7 +2725,8 @@ namespace System
                 return rest.GetHashCode(comparer);
             }
 
-            // In this case, the rest member has less than 8 elements so we need to combine some our elements with the elements in rest
+            // In this case, the rest member has less than 8 elements so we need to combine some our elements
+            // with the elements in rest
             int k = 8 - size;
             switch (k)
             {
@@ -2678,11 +2799,14 @@ namespace System
         }
 
         /// <summary>
-        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance.
+        /// Returns a string that represents the value of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6,
+        // T7, TRest}"/> instance.
         /// </summary>
-        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7, TRest}"/> instance.</returns>
+        /// <returns>The string representation of this <see cref="ValueTuple{T1, T2, T3, T4, T5, T6, T7,
+        // TRest}"/> instance.</returns>
         /// <remarks>
-        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6, Item7, Rest)</c>.
+        /// The string returned by this method takes the form <c>(Item1, Item2, Item3, Item4, Item5, Item6,
+        // Item7, Rest)</c>.
         /// If any field value is <see langword="null"/>, it is represented as <see cref="String.Empty"/>.
         /// </remarks>
         public override string ToString()

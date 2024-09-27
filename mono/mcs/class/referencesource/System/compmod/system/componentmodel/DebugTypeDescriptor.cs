@@ -6,12 +6,12 @@
 
 #if DEBUG
 /*
-    
-    This class exists in debug only.  It is a complete copy of the
-    V1.0 TypeDescriptor object and is used to validate that the
-    behavior of the V2.0 TypeDescriptor matches 1.0 behavior.
-    
- */
+
+This class exists in debug only.  It is a complete copy of the
+V1.0 TypeDescriptor object and is used to validate that the
+behavior of the V2.0 TypeDescriptor matches 1.0 behavior.
+
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -214,7 +214,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This creates a new event descriptor identical to an existing event descriptor.  The new event descriptor
+        ///     This creates a new event descriptor identical to an existing event descriptor.  The new
+        // event descriptor
         ///     has the specified metadata attributes merged with the existing metadata attributes.
         /// </devdoc>
         [ReflectionPermission(
@@ -248,7 +249,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This creates a new property descriptor identical to an existing property descriptor.  The new property descriptor
+        ///     This creates a new property descriptor identical to an existing property descriptor.  The
+        // new property descriptor
         ///     has the specified metadata attributes merged with the existing metadata attributes.
         /// </devdoc>
         [ReflectionPermission(
@@ -261,11 +263,14 @@ namespace System.ComponentModel
             params Attribute[] attributes
         )
         {
-            // We must do some special case work here for extended properties.  If the old property descriptor is really
+            // We must do some special case work here for extended properties.  If the old property descriptor
+            // is really
             // an extender property that is being surfaced on a component as a normal property, then we must
-            // do work here or else DebugReflectPropertyDescriptor will fail to resolve the get and set methods.  We check
+            // do work here or else DebugReflectPropertyDescriptor will fail to resolve the get and set methods.
+            // We check
             // for the necessary ExtenderProvidedPropertyAttribute and if we find it, we create an
-            // ExtendedPropertyDescriptor instead.  We only do this if the component class is the same, since the user
+            // ExtendedPropertyDescriptor instead.  We only do this if the component class is the same, since
+            // the user
             // may want to re-route the property to a different target.
             //
             if (componentType == oldPropertyDescriptor.ComponentType)
@@ -366,7 +371,8 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>
         ///       Gets the name of the class for the specified
-        ///    <paramref name="component "/>using the custom type descriptor when <paramref name="noCustomTypeDesc
+        ///    <paramref name="component "/>using the custom type descriptor when <paramref
+        // name="noCustomTypeDesc
         ///       "/>
         ///       is <see langword='false'/>.
         ///    </para>
@@ -880,7 +886,8 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>
         ///       Gets a collection of events for a
-        ///       specified <paramref name="component "/>using a specified array of <paramref name="attributes"/>
+        ///       specified <paramref name="component "/>using a specified array of <paramref
+        // name="attributes"/>
         ///       as a filter.
         ///    </para>
         /// </devdoc>
@@ -892,7 +899,8 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>
         ///       Gets a collection of events for a
-        ///       specified <paramref name="component "/>using a specified array of <paramref name="attributes
+        ///       specified <paramref name="component "/>using a specified array of <paramref
+        // name="attributes
         ///       "/>
         ///       as a filter.
         ///    </para>
@@ -1602,36 +1610,36 @@ namespace System.ComponentModel
             }
 
             /*
-               The following code has been removed to fix FXCOP violations.  The code
-               is left here incase it needs to be resurrected in the future.
-
+            The following code has been removed to fix FXCOP violations.  The code
+            is left here incase it needs to be resurrected in the future.
+            
             /// <devdoc>
             ///      Retrieves the designer for the given object, or null if there
             ///      is no designer.
             /// </devdoc>
             /// <internalonly/>
             private IDesigner GetComponentDesigner(object component) {
-                IDesigner designer = null;
-
-                if (component is IComponent) {
-                    IComponent comp = (IComponent)component;
-                    ISite site = comp.Site;
-                    if (site != null) {
-                        IDesignerHost host = (IDesignerHost)site.GetService(typeof(IDesignerHost));
-                        if (host != null) {
-                            designer = host.GetDesigner(comp);
-                        }
-                    }
-                }
-
-                return designer;
+            IDesigner designer = null;
+            
+            if (component is IComponent) {
+            IComponent comp = (IComponent)component;
+            ISite site = comp.Site;
+            if (site != null) {
+            IDesignerHost host = (IDesignerHost)site.GetService(typeof(IDesignerHost));
+            if (host != null) {
+            designer = host.GetDesigner(comp);
             }
-
+            }
+            }
+            
+            return designer;
+            }
+            
             /// <devdoc>
             ///     Retrieves the type of this kind of component.
             /// </devdoc>
             public Type GetComponentType() {
-                return componentType;
+            return componentType;
             }
             */
 
@@ -2157,8 +2165,10 @@ namespace System.ComponentModel
             }
 
             /// <devdoc>
-            ///     Retrieves the filtered set of extended properties that this specific component receives.  These
-            ///     extended properties wrap both the base extender info and the extender provider to make it appear as a
+            ///     Retrieves the filtered set of extended properties that this specific component receives.
+            // These
+            ///     extended properties wrap both the base extender info and the extender provider to make it
+            // appear as a
             ///     regular property.  The filtering is based on the given attributes.
             ///     For an extended property to satisfy a particular attribute, the attribute must be
             ///     present in the extended property's attribute list, or the attribute must match it's
@@ -2670,9 +2680,11 @@ namespace System.ComponentModel
             }
 
             /// <devdoc>
-            ///     Retrieves filtered, wrapped extended properties based on the provider and the extenderInfos for this type of provider.
+            ///     Retrieves filtered, wrapped extended properties based on the provider and the extenderInfos
+            // for this type of provider.
             ///     These are the extended properties that will be handed out to components through
-            ///     getExtendedProperties and getMergedProperties.  These are wrapped versions of what is returned
+            ///     getExtendedProperties and getMergedProperties.  These are wrapped versions of what is
+            // returned
             ///     through getExtenders. They are filtered based on the attributes. They are sorted
             ///     based on the sort property.
             /// </devdoc>
@@ -2965,7 +2977,8 @@ namespace System.ComponentModel
                         "Getting attributes from " + owner.componentType.FullName
                     );
 
-                    // Before we reflect on the type attributes, do the same for the type's interfaces, if it implements any.
+                    // Before we reflect on the type attributes, do the same for the type's interfaces, if it implements
+                    // any.
                     // We add these in reflection order.
                     //
                     Type[] interfaces = owner.componentType.GetInterfaces();
@@ -3450,52 +3463,53 @@ namespace System.ComponentModel
             }
 
             /*
-               The following code has been removed to fix FXCOP violations.  The code
-               is left here incase it needs to be resurrected in the future.
-
+            The following code has been removed to fix FXCOP violations.  The code
+            is left here incase it needs to be resurrected in the future.
+            
             // This is a private class used to contain events while we hash
             //
             private class EventHashHolder {
-                public EventInfo RealEvent;
-                public string Name;
-                public Type ReflectedType;
-                public MethodInfo AddMethod;
-                public MethodInfo RemoveMethod;
-                
-                public EventHashHolder(EventInfo evt) {
-                    RealEvent = evt;
-                    Name = evt.Name;
-                    AddMethod = evt.GetAddMethod();
-                    RemoveMethod = evt.GetRemoveMethod();
-                    if (AddMethod != null && RemoveMethod != null) {
-                        ReflectedType = evt.EventHandlerType;
-                    }
-                }
-                
-                public EventHashHolder(string name, Type reflectedType, MethodInfo addMethod, MethodInfo removeMethod) {
-                    Name = name;
-                    ReflectedType = reflectedType;
-                    AddMethod = addMethod;
-                    RemoveMethod = removeMethod;
-                }
+            public EventInfo RealEvent;
+            public string Name;
+            public Type ReflectedType;
+            public MethodInfo AddMethod;
+            public MethodInfo RemoveMethod;
+            
+            public EventHashHolder(EventInfo evt) {
+            RealEvent = evt;
+            Name = evt.Name;
+            AddMethod = evt.GetAddMethod();
+            RemoveMethod = evt.GetRemoveMethod();
+            if (AddMethod != null && RemoveMethod != null) {
+            ReflectedType = evt.EventHandlerType;
             }
-             
+            }
+            
+            public EventHashHolder(string name, Type reflectedType, MethodInfo addMethod, MethodInfo
+            removeMethod) {
+            Name = name;
+            ReflectedType = reflectedType;
+            AddMethod = addMethod;
+            RemoveMethod = removeMethod;
+            }
+            }
+            
             // This is a private class used to contain properties while we hash
             //
             private class PropertyHashHolder {
-                public string Name;
-                public Type PropertyType;
-                public MethodInfo GetMethod;
-                public MethodInfo SetMethod;
-                public PropertyInfo PropertyInfo;
-                
-                public PropertyHashHolder(PropertyInfo prop) {
-                    Name = prop.Name;
-                    PropertyType = prop.PropertyType;
-                    GetMethod = prop.GetGetMethod();
-                    SetMethod = prop.GetSetMethod();
-                    PropertyInfo = prop;
-                }
+            public string Name;
+            public Type PropertyType;
+            public MethodInfo GetMethod;
+            public MethodInfo SetMethod;
+            public PropertyInfo PropertyInfo;
+            
+            public PropertyHashHolder(PropertyInfo prop) {
+            Name = prop.Name;
+            PropertyType = prop.PropertyType;
+            GetMethod = prop.GetGetMethod();
+            SetMethod = prop.GetSetMethod();
+            PropertyInfo = prop;
+            }
             }
             */
 
@@ -3583,7 +3597,8 @@ namespace System.ComponentModel
             public static readonly MemberDescriptorComparer Instance =
                 new MemberDescriptorComparer();
 
-            // When we change the comparers to ordinal string comparison, it fails Properties1/Events1: potential breaking change
+            // When we change the comparers to ordinal string comparison, it fails Properties1/Events1:
+            // potential breaking change
             [SuppressMessage(
                 "Microsoft.Globalization",
                 "CA130:UseOrdinalStringComparison",

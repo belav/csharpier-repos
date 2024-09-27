@@ -413,11 +413,13 @@ namespace System.ServiceModel.Configuration
             UseDefaultWebProxy = e.UseDefaultWebProxy;
             DecompressionEnabled = e.DecompressionEnabled;
             // FIXME: enable this.
-            /*
-            ExtendedProtectionPolicy = new ExtendedProtectionPolicyElement () { PolicyEnforcement = e.ExtendedProtectionPolicy.PolicyEnforcement, ProtectionScenario = e.ExtendedProtectionPolicy.ProtectionScenario };
-            foreach (var sne in ExtendedProtectionPolicy.CustomServiceNames)
-                ExtendedProtectionPolicy.CustomServiceNames.Add (sne);
-            */
+/*
+ExtendedProtectionPolicy = new ExtendedProtectionPolicyElement () { PolicyEnforcement =
+e.ExtendedProtectionPolicy.PolicyEnforcement, ProtectionScenario =
+e.ExtendedProtectionPolicy.ProtectionScenario };
+foreach (var sne in ExtendedProtectionPolicy.CustomServiceNames)
+ExtendedProtectionPolicy.CustomServiceNames.Add (sne);
+*/
         }
 
         protected override TransportBindingElement CreateDefaultBindingElement()
@@ -443,11 +445,14 @@ namespace System.ServiceModel.Configuration
             UseDefaultWebProxy = b.UseDefaultWebProxy;
             DecompressionEnabled = b.DecompressionEnabled;
             // FIXME: enable this.
-            /*
-            ExtendedProtectionPolicy = new ExtendedProtectionPolicyElement () { PolicyEnforcement = b.ExtendedProtectionPolicy.PolicyEnforcement, ProtectionScenario = b.ExtendedProtectionPolicy.ProtectionScenario };
-            foreach (var sn in b.ExtendedProtectionPolicy.CustomServiceNames)
-                ExtendedProtectionPolicy.CustomServiceNames.Add (new ServiceNameElement () { Name = sn.ToString () });
-            */
+/*
+ExtendedProtectionPolicy = new ExtendedProtectionPolicyElement () { PolicyEnforcement =
+b.ExtendedProtectionPolicy.PolicyEnforcement, ProtectionScenario =
+b.ExtendedProtectionPolicy.ProtectionScenario };
+foreach (var sn in b.ExtendedProtectionPolicy.CustomServiceNames)
+ExtendedProtectionPolicy.CustomServiceNames.Add (new ServiceNameElement () { Name = sn.ToString ()
+});
+*/
         }
     }
 }

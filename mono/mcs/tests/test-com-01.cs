@@ -20,12 +20,12 @@ public class Test
 
     public static void Main()
     {
-        /* It doesn't work on Mono runtime
-        IMetaDataDispenserEx o = new IMetaDataDispenserEx();
-        if (o.GetType () != typeof (CorMetaDataDispenserExClass))
-            return 1;
-        Console.WriteLine ("OK");
-        return 0;
-        */
+/* It doesn't work on Mono runtime
+IMetaDataDispenserEx o = new IMetaDataDispenserEx();
+if (o.GetType () != typeof (CorMetaDataDispenserExClass))
+return 1;
+Console.WriteLine ("OK");
+return 0;
+*/
     }
 }

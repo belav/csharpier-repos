@@ -99,7 +99,8 @@ namespace System.IO.Pipes
             Dispose(false);
         }
 
-        // This method should exist until we add a first class way of passing handles between parent and child
+        // This method should exist until we add a first class way of passing handles between parent and
+        // child
         // processes. For now, people do it via command line arguments.
         public string GetClientHandleAsString()
         {
@@ -120,7 +121,8 @@ namespace System.IO.Pipes
         // This method is an annoying one but it has to exist at least until we make passing handles between
         // processes first class.  We need this because once the child handle is inherited, the OS considers
         // the parent and child's handles to be different.  Therefore, if a child closes its handle, our
-        // Read/Write methods won't throw because the OS will think that there is still a child handle around
+        // Read/Write methods won't throw because the OS will think that there is still a child handle
+        // around
         // that can still Write/Read to/from the other end of the pipe.
         //
         // Ideally, we would want the Process class to close this handle after it has been inherited.  See
@@ -141,7 +143,8 @@ namespace System.IO.Pipes
             try
             {
                 // We should dispose of the client handle when it was not exposed at all OR
-                // it was exposed as a string (handle finalization has been suppressed) and created inheritable (out-of-proc communication).
+                // it was exposed as a string (handle finalization has been suppressed) and created inheritable
+                // (out-of-proc communication).
                 if (
                     !_clientHandleExposed
                     || (
@@ -159,7 +162,8 @@ namespace System.IO.Pipes
             }
         }
 
-        // Anonymous pipes do not support message mode so there is no need to use the base version that P/Invokes here.
+        // Anonymous pipes do not support message mode so there is no need to use the base version that
+        // P/Invokes here.
         public override PipeTransmissionMode TransmissionMode
         {
             get { return PipeTransmissionMode.Byte; }

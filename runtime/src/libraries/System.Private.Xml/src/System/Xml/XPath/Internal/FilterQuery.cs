@@ -97,7 +97,8 @@ namespace MS.Internal.Xml.XPath
 
             if (context != null)
             {
-                // In this switch we process some special case in which we can calculate predicate faster then in generic case
+                // In this switch we process some special case in which we can calculate predicate faster then in
+                // generic case
                 switch (_cond.StaticType)
                 {
                     case XPathResultType.Number:
@@ -194,7 +195,7 @@ namespace MS.Internal.Xml.XPath
                     default:
                         return null;
                 }
-                /* Generic case */
+/* Generic case */
                 {
                     Evaluate(
                         new XPathSingletonIterator(

@@ -259,7 +259,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
                     Sources = { expected },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(10,16): error CS1643: Not all code paths return a value in lambda expression of type 'Func<Task>'
+                        // /0/Test0.cs(10,16): error CS1643: Not all code paths return a value in lambda expression of type
+                        // 'Func<Task>'
                         DiagnosticResult.CompilerError("CS1643").WithLocation(0),
                     },
                 },
@@ -304,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
                     Sources = { expected },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(10,15): error CS1643: Not all code paths return a value in lambda expression of type 'Func<Task>'
+                        // /0/Test0.cs(10,15): error CS1643: Not all code paths return a value in lambda expression of type
+                        // 'Func<Task>'
                         DiagnosticResult.CompilerError("CS1643").WithLocation(0),
                     },
                 },
@@ -349,12 +351,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
                     Sources = { expected },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(10,18): error CS0029: Cannot implicitly convert type 'int' to 'System.Threading.Tasks.Task<int>'
+                        // /0/Test0.cs(10,18): error CS0029: Cannot implicitly convert type 'int' to
+                        // 'System.Threading.Tasks.Task<int>'
                         DiagnosticResult
                             .CompilerError("CS0029")
                             .WithLocation(0)
                             .WithArguments("int", "System.Threading.Tasks.Task<int>"),
-                        // /0/Test0.cs(10,18): error CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                        // /0/Test0.cs(10,18): error CS1662: Cannot convert lambda expression to intended delegate type
+                        // because some of the return types in the block are not implicitly convertible to the delegate return
+                        // type
                         DiagnosticResult.CompilerError("CS1662").WithLocation(0),
                     },
                 },
@@ -399,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
                     Sources = { expected },
                     ExpectedDiagnostics =
                     {
-                        // /0/Test0.cs(10,13): error CS1643: Not all code paths return a value in anonymous method of type 'Func<Task>'
+                        // /0/Test0.cs(10,13): error CS1643: Not all code paths return a value in anonymous method of type
+                        // 'Func<Task>'
                         DiagnosticResult.CompilerError("CS1643").WithLocation(0),
                     },
                 },
@@ -852,7 +858,8 @@ class C
                 TestCode = source,
                 ExpectedDiagnostics =
                 {
-                    // /0/Test0.cs(5,22): error CS8410: 'object': type used in an asynchronous using statement must be implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
+                    // /0/Test0.cs(5,22): error CS8410: 'object': type used in an asynchronous using statement must be
+                    // implicitly convertible to 'System.IAsyncDisposable' or implement a suitable 'DisposeAsync' method.
                     DiagnosticResult
                         .CompilerError("CS8410")
                         .WithLocation(0)
@@ -877,7 +884,8 @@ class C
                     }
                 }
                 """,
-                // /0/Test0.cs(5,16): error CS1674: 'object': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
+                // /0/Test0.cs(5,16): error CS1674: 'object': type used in a using statement must be implicitly
+                // convertible to 'System.IDisposable'.
                 DiagnosticResult.CompilerError("CS1674").WithLocation(0).WithArguments("object"),
                 """
                 class C
@@ -910,7 +918,9 @@ class C
 
             await VerifyCS.VerifyCodeFixAsync(
                 source,
-                // /0/Test0.cs(5,33): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found (are you missing a using directive or an assembly reference?)
+                // /0/Test0.cs(5,33): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no
+                // accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found
+                // (are you missing a using directive or an assembly reference?)
                 DiagnosticResult
                     .CompilerError("CS1061")
                     .WithLocation(0)
@@ -965,7 +975,9 @@ class C
 
             await VerifyCS.VerifyCodeFixAsync(
                 source,
-                // /0/Test0.cs(5,38): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found (are you missing a using directive or an assembly reference?)
+                // /0/Test0.cs(5,38): error CS1061: 'bool' does not contain a definition for 'GetAwaiter' and no
+                // accessible extension method 'GetAwaiter' accepting a first argument of type 'bool' could be found
+                // (are you missing a using directive or an assembly reference?)
                 DiagnosticResult
                     .CompilerError("CS1061")
                     .WithLocation(0)

@@ -10,16 +10,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 namespace Microsoft.EntityFrameworkCore.Design;
 
 /// <summary>
-///     Base class to be used by database providers when implementing an <see cref="IAnnotationCodeGenerator" />
+///     Base class to be used by database providers when implementing an <see
+// cref="IAnnotationCodeGenerator" />
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This implementation returns <see langword="false" /> for all 'IsHandledByConvention' methods and
-///         <see langword="null" /> for all 'GenerateFluentApi' methods. Providers should override for the
+///         This implementation returns <see langword="false" /> for all 'IsHandledByConvention'
+// methods and
+///         <see langword="null" /> for all 'GenerateFluentApi' methods. Providers should override
+// for the
 ///         annotations that they understand.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -909,7 +913,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         false;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -924,7 +929,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -939,7 +945,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -954,7 +961,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -969,7 +977,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -982,7 +991,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -997,7 +1007,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1012,7 +1023,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1027,7 +1039,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1042,7 +1055,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1057,7 +1071,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1072,7 +1087,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1087,7 +1103,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1102,7 +1119,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1117,7 +1135,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see langword="null" />
+    ///     Returns a fluent API call for the given <paramref name="annotation" />, or <see
+    // langword="null" />
     ///     if no fluent API call exists for it.
     /// </summary>
     /// <remarks>
@@ -1132,7 +1151,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation" />,
+    ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation"
+    // />,
     ///     or <see langword="null" /> if no data annotation exists for it.
     /// </summary>
     /// <remarks>
@@ -1147,7 +1167,8 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
     ) => null;
 
     /// <summary>
-    ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation" />,
+    ///     Returns a data annotation attribute code fragment for the given <paramref name="annotation"
+    // />,
     ///     or <see langword="null" /> if no data annotation exists for it.
     /// </summary>
     /// <remarks>

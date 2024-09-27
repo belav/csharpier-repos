@@ -162,7 +162,8 @@ namespace ILCompiler.Logging
             }
 
             // Check if there's an assembly or module level suppression.
-            // Note that moduleSuppressions contains both assembly and module level suppressions all modified to target the module as the provider
+            // Note that moduleSuppressions contains both assembly and module level suppressions all modified to
+            // target the module as the provider
             if (IsSuppressedOnElement(id, module, moduleSuppressions))
                 return true;
 

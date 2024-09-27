@@ -20,8 +20,10 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
     where TMethodDeclaration : SyntaxNode
 {
     /// <summary>
-    /// Output the method symbol as a fully qualified method name, e.g. Namespace.Class.Method to match what test discovery gives us.
-    /// Generics are not applicable here - none of our supported test frameworks allow generic test classes / methods.
+    /// Output the method symbol as a fully qualified method name, e.g. Namespace.Class.Method to match
+    // what test discovery gives us.
+    /// Generics are not applicable here - none of our supported test frameworks allow generic test
+    // classes / methods.
     /// </summary>
     private static readonly SymbolDisplayFormat s_methodSymbolNoParametersDisplayFormat =
         new(
@@ -56,7 +58,8 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
             return intersectingNodes;
         }
 
-        // We might have been invoked on a test class.  Check if any of the test method parent nodes intersect with the requested text span.
+        // We might have been invoked on a test class.  Check if any of the test method parent nodes
+        // intersect with the requested text span.
         return testNodes.WhereAsArray(node => node.Parent?.Span.IntersectsWith(textSpan) == true);
     }
 
@@ -69,10 +72,12 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
     {
         var method = (TMethodDeclaration)node;
 
-        // Since discovered tests are not guarantied to run on a particular snapshot, we match optimistically based on test name.
+        // Since discovered tests are not guarantied to run on a particular snapshot, we match
+        // optimistically based on test name.
         var methodSymbol = semanticModel.GetRequiredDeclaredSymbol(method, cancellationToken);
 
-        // Do a quicker check to see if the given FQN even contains the method name before doing a full match.
+        // Do a quicker check to see if the given FQN even contains the method name before doing a full
+        // match.
         if (!fullyQualifiedTestName.Contains(methodSymbol.Name))
         {
             return false;
@@ -82,13 +87,16 @@ internal abstract class AbstractTestMethodFinder<TMethodDeclaration>(
             s_methodSymbolNoParametersDisplayFormat
         );
 
-        // Qualified test names use a '+' to separate outer classes from nested classes whereas display strings use '.'.
+        // Qualified test names use a '+' to separate outer classes from nested classes whereas display
+        // strings use '.'.
         fullyQualifiedTestName = fullyQualifiedTestName.Replace('+', '.');
 
         // The definition of fully qualified name varies depending on the test framework.
         // For example, XUnit will never include parameters in the FQN it gives to us.
-        // However NUnit will give us a FQN with the actual parameter values passed in (e.g. if there's an int parameter, it will pass in the value of the int).
-        // To avoid these problems, we compare our method FQN (without parameters) against the test framework FQN with everything past the first open paren removed.
+        // However NUnit will give us a FQN with the actual parameter values passed in (e.g. if there's an
+        // int parameter, it will pass in the value of the int).
+        // To avoid these problems, we compare our method FQN (without parameters) against the test
+        // framework FQN with everything past the first open paren removed.
         var indexOfOpenParen = fullyQualifiedTestName.IndexOf('(');
         if (indexOfOpenParen != -1)
         {

@@ -57,11 +57,11 @@ namespace System.Diagnostics
         {
             public IntPtr process_handle;
 
-            /* If thread_handle is ever needed for
-             * something, take out the CloseHandle() in
-             * the Start_internal icall in
-             * mono/metadata/process.c
-             */
+/* If thread_handle is ever needed for
+* something, take out the CloseHandle() in
+* the Start_internal icall in
+* mono/metadata/process.c
+*/
             public int pid; // Contains -GetLastError () on failure.
             public string[] envVariables;
             public string UserName;
@@ -74,7 +74,7 @@ namespace System.Diagnostics
 
         static ProcessModule current_main_module;
 
-        /* Private constructor called from other methods */
+/* Private constructor called from other methods */
         private Process(SafeProcessHandle handle, int id)
         {
             SetProcessHandle(handle);
@@ -103,7 +103,7 @@ namespace System.Diagnostics
         {
             get
             {
-                /* Optimize Process.GetCurrentProcess ().MainModule */
+/* Optimize Process.GetCurrentProcess ().MainModule */
                 if (processId == NativeMethods.GetCurrentProcessId())
                 {
                     if (current_main_module == null)
@@ -149,9 +149,9 @@ namespace System.Diagnostics
             }
         }
 
-        /* Returns the list of process modules.  The main module is
-         * element 0.
-         */
+/* Returns the list of process modules.  The main module is
+* element 0.
+*/
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern ProcessModule[] GetModules_icall(IntPtr handle);
 
@@ -194,7 +194,7 @@ namespace System.Diagnostics
             }
         }
 
-        /* data type is from the MonoProcessData enum in mono-proclib.h in the runtime */
+/* data type is from the MonoProcessData enum in mono-proclib.h in the runtime */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern long GetProcessData(int pid, int data_type, out int error);
 
@@ -380,14 +380,14 @@ namespace System.Diagnostics
 
                         process_name = ProcessName_internal(handle);
 
-                        /* If process_name is _still_ null, assume the process has exited or is inaccessible */
+/* If process_name is _still_ null, assume the process has exited or is inaccessible */
                         if (process_name == null)
                             throw new InvalidOperationException(
                                 "Process has exited or is inaccessible, so the requested information is not available."
                             );
 
-                        /* Strip the suffix (if it exists) simplistically instead of removing
-                         * any trailing \.???, so we dont get stupid results on sane systems */
+/* Strip the suffix (if it exists) simplistically instead of removing
+* any trailing \.???, so we dont get stupid results on sane systems */
                         if (
                             process_name.EndsWith(".exe")
                             || process_name.EndsWith(".bat")
@@ -584,7 +584,8 @@ namespace System.Diagnostics
             if (proc == IntPtr.Zero)
                 throw new ArgumentException("Can't find process with ID " + processId.ToString());
 
-            /* The handle returned by GetProcess_internal is owned by its caller, so we must pass true to SafeProcessHandle */
+/* The handle returned by GetProcess_internal is owned by its caller, so we must pass true to
+SafeProcessHandle */
             return (new Process(new SafeProcessHandle(proc, true), processId));
         }
 
@@ -614,7 +615,7 @@ namespace System.Diagnostics
                 }
                 catch (SystemException)
                 {
-                    /* The process might exit between GetProcesses_internal and GetProcessById */
+/* The process might exit between GetProcesses_internal and GetProcessById */
                 }
             }
 
@@ -648,11 +649,11 @@ namespace System.Diagnostics
                 }
                 catch (SystemException)
                 {
-                    /* The process might exit
-                     * between
-                     * GetProcesses_internal and
-                     * GetProcessById
-                     */
+/* The process might exit
+* between
+* GetProcesses_internal and
+* GetProcessById
+*/
                 }
             }
 
@@ -762,7 +763,8 @@ namespace System.Diagnostics
             // read: used         read: closed
             // write: closed      write: used
             //
-            // It can still be tricky for predefined descriptiors http://unixwiz.net/techtips/remap-pipe-fds.html
+            // It can still be tricky for predefined descriptiors
+            // http://unixwiz.net/techtips/remap-pipe-fds.html
             //
             if (!MonoIO.CreatePipe(out read, out write, out error))
                 throw MonoIO.GetException(error);

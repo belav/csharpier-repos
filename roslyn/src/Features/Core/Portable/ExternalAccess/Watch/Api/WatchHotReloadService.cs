@@ -90,7 +90,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         /// <summary>
         /// Starts the watcher.
         /// </summary>
-        /// <param name="solution">Solution that represents sources that match the built binaries on disk.</param>
+        /// <param name="solution">Solution that represents sources that match the built binaries on
+        // disk.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         public async Task StartSessionAsync(Solution solution, CancellationToken cancellationToken)
         {
@@ -110,13 +111,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Watch.Api
         }
 
         /// <summary>
-        /// Emits updates for all projects that differ between the given <paramref name="solution"/> snapshot and the one given to the previous successful call or
-        /// the one passed to <see cref="StartSessionAsync(Solution, CancellationToken)"/> for the first invocation.
+        /// Emits updates for all projects that differ between the given <paramref name="solution"/>
+        // snapshot and the one given to the previous successful call or
+        /// the one passed to <see cref="StartSessionAsync(Solution, CancellationToken)"/> for the first
+        // invocation.
         /// </summary>
         /// <param name="solution">Solution snapshot.</param>
         /// <param name="cancellationToken">Cancellation token.</param>
         /// <returns>
-        /// Updates (one for each changed project) and Rude Edit diagnostics. Does not include syntax or semantic diagnostics.
+        /// Updates (one for each changed project) and Rude Edit diagnostics. Does not include syntax or
+        // semantic diagnostics.
         /// </returns>
         public async Task<(
             ImmutableArray<Update> updates,

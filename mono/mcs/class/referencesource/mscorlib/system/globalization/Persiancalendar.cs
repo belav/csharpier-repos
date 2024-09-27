@@ -13,17 +13,20 @@ namespace System.Globalization
     //  Notes about PersianCalendar
     //
     ////////////////////////////////////////////////////////////////////////////
-    // Modern Persian calendar is a solar observation based calendar. Each new year begins on the day when the vernal equinox occurs before noon.
-    // The epoch is the date of the vernal equinox prior to the epoch of the Islamic calendar (Microsoft 19, 622 Julian or Microsoft 22, 622 Gregorian)
+    // Modern Persian calendar is a solar observation based calendar. Each new year begins on the day
+    // when the vernal equinox occurs before noon.
+    // The epoch is the date of the vernal equinox prior to the epoch of the Islamic calendar (Microsoft
+    // 19, 622 Julian or Microsoft 22, 622 Gregorian)
 
-    // There is no Persian year 0. Ordinary years have 365 days. Leap years have 366 days with the last month (Esfand) gaining the extra day.
-    /*
-     **  Calendar support range:
-     **      Calendar    Minimum     Maximum
-     **      ==========  ==========  ==========
-     **      Gregorian   0622/03/22   9999/12/31
-     **      Persian     0001/01/01   9378/10/13
-     */
+    // There is no Persian year 0. Ordinary years have 365 days. Leap years have 366 days with the last
+    // month (Esfand) gaining the extra day.
+/*
+**  Calendar support range:
+**      Calendar    Minimum     Maximum
+**      ==========  ==========  ==========
+**      Gregorian   0622/03/22   9999/12/31
+**      Persian     0001/01/01   9378/10/13
+*/
 
     [Serializable]
     public class PersianCalendar : Calendar
@@ -66,21 +69,22 @@ namespace System.Globalization
         internal static DateTime minDate = new DateTime(622, 3, 22);
         internal static DateTime maxDate = DateTime.MaxValue;
 
-        /*=================================GetDefaultInstance==========================
-        **Action: Internal method to provide a default intance of PersianCalendar.  Used by NLS+ implementation
-        **       and other calendars.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
-        /*
-        internal static Calendar GetDefaultInstance() {
-            if (m_defaultInstance == null) {
-                m_defaultInstance = new PersianCalendar();
-            }
-            return (m_defaultInstance);
-        }
-        */
+/*=================================GetDefaultInstance==========================
+**Action: Internal method to provide a default intance of PersianCalendar.  Used by NLS+
+implementation
+**       and other calendars.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
+/*
+internal static Calendar GetDefaultInstance() {
+if (m_defaultInstance == null) {
+m_defaultInstance = new PersianCalendar();
+}
+return (m_defaultInstance);
+}
+*/
 
 
 
@@ -117,13 +121,13 @@ namespace System.Globalization
             get { return (CAL_PERSIAN); }
         }
 
-        /*=================================GetAbsoluteDatePersian==========================
-        **Action: Gets the Absolute date for the given Persian date.  The absolute date means
-        **       the number of days from January 1st, 1 A.D.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ============================================================================*/
+/*=================================GetAbsoluteDatePersian==========================
+**Action: Gets the Absolute date for the given Persian date.  The absolute date means
+**       the number of days from January 1st, 1 A.D.
+**Returns:
+**Arguments:
+**Exceptions:
+============================================================================*/
 
         long GetAbsoluteDatePersian(int year, int month, int day)
         {
@@ -234,13 +238,13 @@ namespace System.Globalization
             return DaysToMonth[month];
         }
 
-        /*=================================GetDatePart==========================
-        **Action: Returns a given date part of this <i>DateTime</i>. This method is used
-        **       to compute the year, day-of-year, month, or day part.
-        **Returns:
-        **Arguments:
-        **Exceptions:  ArgumentException if part is incorrect.
-        ============================================================================*/
+/*=================================GetDatePart==========================
+**Action: Returns a given date part of this <i>DateTime</i>. This method is used
+**       to compute the year, day-of-year, month, or day part.
+**Returns:
+**Arguments:
+**Exceptions:  ArgumentException if part is incorrect.
+============================================================================*/
 
         internal int GetDatePart(long ticks, int part)
         {
@@ -571,7 +575,8 @@ namespace System.Globalization
                 == 366;
         }
 
-        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is invalid.
+        // Returns the date and time converted to a DateTime value.  Throws an exception if the n-tuple is
+        // invalid.
         //
 
 

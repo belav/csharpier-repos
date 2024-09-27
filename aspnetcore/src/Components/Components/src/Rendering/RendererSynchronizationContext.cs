@@ -207,7 +207,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
     }
 
     /// <summary>
-    /// Queues a work item that invokes the <paramref name="callback"/> with this instance as the current synchronization context.
+    /// Queues a work item that invokes the <paramref name="callback"/> with this instance as the
+    // current synchronization context.
     /// The work item will only run once <paramref name="antecedent"/> has completed.
     /// </summary>
     private async Task PostAsync<TState>(Task antecedent, Action<TState> callback, TState state)
@@ -229,7 +230,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
     /// <summary>Workhorse for the InvokeAsync methods.</summary>
     /// <remarks>
     /// Similar to Post, but it can run the work item synchronously if the context is not busy.
-    /// This is the main code path used by components, we want to be able to run async work but only dispatch
+    /// This is the main code path used by components, we want to be able to run async work but only
+    // dispatch
     /// if necessary.
     /// </remarks>
     private void SendIfQuiescedOrElsePost<TState>(Action<TState> callback, TState state)
@@ -252,7 +254,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
     }
 
     /// <summary>
-    /// Sets the current synchronization context to this instance, invokes the <paramref name="callback"/>,
+    /// Sets the current synchronization context to this instance, invokes the <paramref
+    // name="callback"/>,
     /// resets the synchronization context, and sets marks the builder as completed.
     /// </summary>
     private void InvokeWithThisAsCurrentSyncCtxThenSetResult<TState>(
@@ -274,7 +277,8 @@ internal sealed class RendererSynchronizationContext : SynchronizationContext
         }
     }
 
-    /// <summary>Invokes <see cref="UnhandledException"/> with the supplied exception instance.</summary>
+    /// <summary>Invokes <see cref="UnhandledException"/> with the supplied exception
+    // instance.</summary>
     private void DispatchException(Exception ex) =>
         UnhandledException?.Invoke(this, new UnhandledExceptionEventArgs(ex, isTerminating: false));
 }

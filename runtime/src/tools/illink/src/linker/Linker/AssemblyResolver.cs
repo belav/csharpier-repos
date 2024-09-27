@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 //
 // AssemblyResolver.cs
@@ -75,7 +76,8 @@ namespace Mono.Linker
         /// <summary>
         /// We need to track unresolved assemblies separately when probing vs not probing.
         ///
-        /// This prevents a TryResolve call that fails to resolve an assembly from silencing a later Resolve call that fails to resolve the same
+        /// This prevents a TryResolve call that fails to resolve an assembly from silencing a later Resolve
+        // call that fails to resolve the same
         /// assembly when SkipUnresolved is false.
         /// </summary>
         /// <param name="probing"></param>

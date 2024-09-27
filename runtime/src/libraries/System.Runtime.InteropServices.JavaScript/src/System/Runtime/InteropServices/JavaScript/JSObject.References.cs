@@ -29,7 +29,8 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
 #if FEATURE_WASM_THREADS
-        // the JavaScript object could only exist on the single web worker and can't migrate to other workers
+        // the JavaScript object could only exist on the single web worker and can't migrate to other
+        // workers
         internal int OwnerThreadId;
 #endif
 #if !DISABLE_LEGACY_JS_INTEROP
@@ -68,7 +69,8 @@ namespace System.Runtime.InteropServices.JavaScript
 
         // Note that we could not use SafeHandle.DangerousAddRef() and DangerousRelease()
         // because we could get to zero InFlightCounter multiple times across lifetime of the JSObject
-        // we only want JSObject to be disposed (from GC finalizer) once there is no in-flight reference and also no natural C# reference
+        // we only want JSObject to be disposed (from GC finalizer) once there is no in-flight reference and
+        // also no natural C# reference
         internal void ReleaseInFlight()
         {
             lock (this)
@@ -166,7 +168,8 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         /// <summary>
-        /// Releases any resources used by the proxy and discards the reference to its target JavaScript object.
+        /// Releases any resources used by the proxy and discards the reference to its target JavaScript
+        // object.
         /// </summary>
         public void Dispose()
         {

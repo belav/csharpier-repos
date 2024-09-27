@@ -56,7 +56,8 @@ namespace Microsoft.CodeAnalysis.ConvertToInterpolatedString
 
             var literalExpression = token.GetRequiredParent();
 
-            // Check the string literal for errors.  This will ensure that we do not try to fixup an incomplete string.
+            // Check the string literal for errors.  This will ensure that we do not try to fixup an incomplete
+            // string.
             if (literalExpression.GetDiagnostics().Any(d => d.Severity == DiagnosticSeverity.Error))
                 return;
 

@@ -18,7 +18,8 @@ namespace System.Web.Security.AntiXss
         /// Gets an appropriately-sized StringBuilder for the output of an encoding routine.
         /// </summary>
         /// <param name="inputLength">The length (in characters) of the input string.</param>
-        /// <param name="worstCaseOutputCharsPerInputChar">The worst-case ratio of output characters per input character.</param>
+        /// <param name="worstCaseOutputCharsPerInputChar">The worst-case ratio of output characters per
+        // input character.</param>
         /// <returns>A StringBuilder appropriately-sized to hold the output string.</returns>
         internal static StringBuilder GetOutputStringBuilder(
             int inputLength,

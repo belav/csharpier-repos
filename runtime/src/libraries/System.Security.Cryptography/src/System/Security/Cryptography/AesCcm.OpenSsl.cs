@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
         {
             // OpenSSL does not allow setting nonce length after setting the key
             // we need to store it as bytes instead
-            // Pin the array on the POH so that the GC doesn't move it around to allow zeroing to be more effective.
+            // Pin the array on the POH so that the GC doesn't move it around to allow zeroing to be more
+            // effective.
             _key = GC.AllocateArray<byte>(key.Length, pinned: true);
             key.CopyTo(_key);
         }
@@ -179,7 +180,9 @@ namespace System.Security.Cryptography
                     throw new CryptographicException();
                 }
 
-                // The OpenSSL documentation says not to call EvpCipherFinalEx for CCM decryption, and calling it will report failure.
+                // The OpenSSL documentation says not to call EvpCipherFinalEx for CCM decryption, and calling it
+                // will report failure.
+                //
                 // https://wiki.openssl.org/index.php/EVP_Authenticated_Encryption_and_Decryption#Authenticated_Decryption_using_CCM_mode
             }
         }

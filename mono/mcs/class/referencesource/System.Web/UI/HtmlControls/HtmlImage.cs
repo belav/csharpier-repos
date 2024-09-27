@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * HtmlImage.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* HtmlImage.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI.HtmlControls
 {
@@ -31,19 +31,20 @@ namespace System.Web.UI.HtmlControls
     [ControlBuilderAttribute(typeof(HtmlEmptyTagControlBuilder))]
     public class HtmlImage : HtmlControl
     {
-        /*
-         *  Creates an intrinsic Html IMG control.
-         */
+/*
+*  Creates an intrinsic Html IMG control.
+*/
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlImage'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlImage'/>
+        // class.</para>
         /// </devdoc>
         public HtmlImage()
             : base("img") { }
 
-        /*
-         * Alt property
-         */
+/*
+* Alt property
+*/
 
         /// <devdoc>
         ///    <para>
@@ -79,9 +80,9 @@ namespace System.Web.UI.HtmlControls
             }
         }
 
-        /*
-         * Align property
-         */
+/*
+* Align property
+*/
 
         /// <devdoc>
         ///    <para>Gets or sets the alignment of the image with
@@ -102,9 +103,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["align"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Border property, size of border in pixels.
-         */
+/*
+* Border property, size of border in pixels.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -126,9 +127,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["border"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * Height property
-         */
+/*
+* Height property
+*/
 
         /// <devdoc>
         ///    <para>
@@ -153,9 +154,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["height"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * Src property.
-         */
+/*
+* Src property.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -180,9 +181,9 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["src"] = MapStringAttributeToString(value); }
         }
 
-        /*
-         * Width property
-         */
+/*
+* Width property
+*/
 
         /// <devdoc>
         ///    <para>
@@ -206,10 +207,10 @@ namespace System.Web.UI.HtmlControls
             set { Attributes["width"] = MapIntegerAttributeToString(value); }
         }
 
-        /*
-         * Override to render unique name attribute.
-         * The name attribute is owned by the framework.
-         */
+/*
+* Override to render unique name attribute.
+* The name attribute is owned by the framework.
+*/
 
         /// <internalonly/>
         /// <devdoc>

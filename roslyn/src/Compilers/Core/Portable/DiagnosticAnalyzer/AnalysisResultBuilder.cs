@@ -216,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <param name="analyzers">Analyzers to be filtered.</param>
         /// <param name="filterScope">Optional scope for filtering.</param>
         /// <returns>
-        /// Analyzers which have not fully executed on the given <paramref name="filterScope"/>, if non-null,
+        /// Analyzers which have not fully executed on the given <paramref name="filterScope"/>, if
+        // non-null,
         /// or the entire compilation, if <paramref name="filterScope"/> is null.
         /// </returns>
         public ImmutableArray<DiagnosticAnalyzer> GetPendingAnalyzers(

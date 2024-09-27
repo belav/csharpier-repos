@@ -2666,7 +2666,8 @@ public static partial class DataContractSerializerTests
         // DO NOT USE TimeZoneInfo.Local.BaseUtcOffset !
         var offsetMinutes = (int)
             TimeZoneInfo.Local.GetUtcOffset(new DateTime(2013, 1, 2)).TotalMinutes;
-        // Adding offsetMinutes to ModifiedTime property so the DateTime component in serialized strings are time-zone independent
+        // Adding offsetMinutes to ModifiedTime property so the DateTime component in serialized strings are
+        // time-zone independent
         value = new TypeWithDateTimeOffsetTypeProperty()
         {
             ModifiedTime = new DateTimeOffset(
@@ -3040,9 +3041,9 @@ public static partial class DataContractSerializerTests
         Assert.Equal("Bar Summary", deserializedValue.Articles[0].Title);
     }
 
-    /*
-     * Begin tests of the InvalidDataContract generated for illegal types
-     */
+/*
+* Begin tests of the InvalidDataContract generated for illegal types
+*/
 
     [Fact]
     public static void DCS_InvalidDataContract_Write_And_Read_Empty_Collection_Of_Invalid_Type_Succeeds()
@@ -3078,9 +3079,9 @@ public static partial class DataContractSerializerTests
         });
     }
 
-    /*
-     * End tests of the InvalidDataContract generated for illegal types
-     */
+/*
+* End tests of the InvalidDataContract generated for illegal types
+*/
 
     [Fact]
     public static void DCS_DerivedTypeWithBaseTypeWithDataMember()
@@ -4523,8 +4524,10 @@ public static partial class DataContractSerializerTests
     }
 
     /// <summary>
-    /// Roundtrips a Datacontract type  which contains Primitive types assigned to member of type object.
-    /// Resolver is plugged in and resolves the primitive types. Verify resolver called during ser and deser
+    /// Roundtrips a Datacontract type  which contains Primitive types assigned to member of type
+    // object.
+    /// Resolver is plugged in and resolves the primitive types. Verify resolver called during ser and
+    // deser
     /// </summary>
     private static void DCS_BasicRoundTripResolvePrimitiveTypes(string baseline)
     {
@@ -4551,8 +4554,10 @@ public static partial class DataContractSerializerTests
     }
 
     /// <summary>
-    /// Roundtrips a Datacontract type  which contains Primitive types assigned to member of type object.
-    /// Resolver is plugged in and resolves the primitive types. Verify resolver called during ser and deser
+    /// Roundtrips a Datacontract type  which contains Primitive types assigned to member of type
+    // object.
+    /// Resolver is plugged in and resolves the primitive types. Verify resolver called during ser and
+    // deser
     /// </summary>
     [Fact]
     [ActiveIssue(

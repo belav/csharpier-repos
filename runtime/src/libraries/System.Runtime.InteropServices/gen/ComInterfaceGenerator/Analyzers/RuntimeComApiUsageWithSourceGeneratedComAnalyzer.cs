@@ -343,7 +343,8 @@ namespace Microsoft.Interop.Analyzers
                                     )
                                 )
                                 {
-                                    // The returned value from Marshal.GetObjectForIUnknown will always be a built-in COM object, which can't be cast to a source-generated COM type,
+                                    // The returned value from Marshal.GetObjectForIUnknown will always be a built-in COM object, which
+                                    // can't be cast to a source-generated COM type,
                                     // even with the interop feature enabled.
                                     context.ReportDiagnostic(
                                         Diagnostic.Create(
@@ -400,7 +401,8 @@ namespace Microsoft.Interop.Analyzers
 
                         if (location is null)
                         {
-                            // If we couldn't find the type argument in source, then it was inferred. Don't emit a warning for the inferred type argument.
+                            // If we couldn't find the type argument in source, then it was inferred. Don't emit a warning for
+                            // the inferred type argument.
                             // We'll emit a warning for the argument that was passed in instead.
                             return null;
                         }

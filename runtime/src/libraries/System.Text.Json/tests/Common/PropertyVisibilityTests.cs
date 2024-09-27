@@ -305,7 +305,8 @@ namespace System.Text.Json.Serialization.Tests
 
             Assert.Equal(@"{}", json);
 
-            // Newtonsoft.Json has the following output because non-public properties are included when [JsonProperty] is placed on them.
+            // Newtonsoft.Json has the following output because non-public properties are included when
+            // [JsonProperty] is placed on them.
             // {"MyString":"ConflictingValue"}
 
             // Deserialize
@@ -1992,7 +1993,8 @@ namespace System.Text.Json.Serialization.Tests
 
         public struct ClassWithOverrideReversed
         {
-            // Same as ClassWithOverride except the order of the properties is different, which should cause different reflection order.
+            // Same as ClassWithOverride except the order of the properties is different, which should cause
+            // different reflection order.
             [JsonPropertyName("EnumValue")]
             public string EnumString
             {
@@ -2377,7 +2379,8 @@ namespace System.Text.Json.Serialization.Tests
             Assert.NotNull(obj.Class);
             Assert.Equal(18, obj.Class.MyInt16);
 
-            // Dictionary is deserialized as JsonIgnoreCondition.WhenWritingDefault only applies to deserialization.
+            // Dictionary is deserialized as JsonIgnoreCondition.WhenWritingDefault only applies to
+            // deserialization.
             Assert.Null(obj.Dictionary);
 
             obj = new ClassUsingIgnoreWhenWritingDefaultAttribute();
@@ -2423,7 +2426,8 @@ namespace System.Text.Json.Serialization.Tests
 
             json = await Serializer.SerializeWrapper(obj, options);
 
-            // Class is not included in json because it was null, Dictionary is included regardless of being null.
+            // Class is not included in json because it was null, Dictionary is included regardless of being
+            // null.
             Assert.Equal(@"{""Dictionary"":null}", json);
         }
 
@@ -2679,7 +2683,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public async Task IgnoreCondition_WhenWritingDefault_DoesNotApplyToDeserialization()
         {
-            // Baseline - null values are ignored on deserialization when using IgnoreNullValues (for compat with initial support).
+            // Baseline - null values are ignored on deserialization when using IgnoreNullValues (for compat
+            // with initial support).
             string json = @"{""MyString"":null,""MyInt"":0,""MyPoint"":{""X"":0,""Y"":0}}";
 
             var options = new JsonSerializerOptions { IgnoreNullValues = true };
@@ -3476,7 +3481,8 @@ namespace System.Text.Json.Serialization.Tests
             string janePayload = @"{""Name"":""Jane Doe""}";
 
 #if !BUILDING_SOURCE_GENERATOR_TESTS
-            // Without [JsonIgnore], serializer throws exceptions due to runtime-reflection-based property metadata inspection.
+            // Without [JsonIgnore], serializer throws exceptions due to runtime-reflection-based property
+            // metadata inspection.
             await Assert.ThrowsAsync<InvalidOperationException>(
                 async () => await Serializer.SerializeWrapper(new TypeWith_RefStringProp())
             );

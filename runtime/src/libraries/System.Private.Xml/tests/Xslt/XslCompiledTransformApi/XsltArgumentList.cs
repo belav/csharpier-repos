@@ -12,9 +12,9 @@ using Xunit.Abstractions;
 
 namespace System.Xml.XslCompiledTransformApiTests
 {
-    /***********************************************************/
-    /*               XsltArgumentList.GetParam                 */
-    /***********************************************************/
+/***********************************************************/
+/*               XsltArgumentList.GetParam                 */
+/***********************************************************/
 
     //[TestCase(Name = "XsltArgumentList - GetParam", Desc = "Get Param Test Cases")]
     [ConditionalClass(
@@ -617,7 +617,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
 
         //DCR : 298350 - XsltArgumentList no longer reports the same type on the GetParam methods
-        //[Variation(id = 20, Desc = "Add Parameter other than XSLT Data Type and verify the type, expected same as added", Pri = 0)]
+        //[Variation(id = 20, Desc = "Add Parameter other than XSLT Data Type and verify the type, expected
+        // same as added", Pri = 0)]
         [Fact]
         public void GetParam20()
         {
@@ -638,11 +639,12 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*      XsltArgumentList.GetExtensionObject                */
-    /***********************************************************/
+/***********************************************************/
+/*      XsltArgumentList.GetExtensionObject                */
+/***********************************************************/
 
-    //[TestCase(Name = "XsltArgumentList - GetExtensionObject", Desc = "XsltArgumentList.GetExtensionObject")]
+    //[TestCase(Name = "XsltArgumentList - GetExtensionObject", Desc =
+    // "XsltArgumentList.GetExtensionObject")]
     public class CArgGetExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
@@ -1141,9 +1143,9 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*               XsltArgumentList.AddParam                 */
-    /***********************************************************/
+/***********************************************************/
+/*               XsltArgumentList.AddParam                 */
+/***********************************************************/
 
     //[TestCase(Name = "XsltArgumentList - AddParam : Reader, Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltArgumentList - AddParam : Reader, Stream", Desc = "READER,STREAM")]
@@ -1156,7 +1158,8 @@ namespace System.Xml.XslCompiledTransformApiTests
     //[TestCase(Name = "XsltArgumentList - AddParam : Navigator, Reader", Desc = "NAVIGATOR,READER")]
     //[TestCase(Name = "XsltArgumentList - AddParam : Navigator, Stream", Desc = "NAVIGATOR,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddParam : Navigator, Writer", Desc = "NAVIGATOR,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddParam : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddParam : Navigator, TextWriter", Desc =
+    // "NAVIGATOR,TEXTWRITER")]
     public class CArgAddParam : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
@@ -1649,7 +1652,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             Assert.Fail();
         }
 
-        //[Variation("Object with same name, different namespace System.Xml.Tests", Param = "AddParam12.txt")]
+        //[Variation("Object with same name, different namespace System.Xml.Tests", Param =
+        // "AddParam12.txt")]
         [InlineData(
             "AddParam12.txt",
             XslInputType.URI,
@@ -1761,7 +1765,8 @@ namespace System.Xml.XslCompiledTransformApiTests
                 Assert.Fail();
         }
 
-        //[Variation("Object with same namespace System.Xml.Tests, different name", Param = "AddParam13.txt")]
+        //[Variation("Object with same namespace System.Xml.Tests, different name", Param =
+        // "AddParam13.txt")]
         [InlineData(
             "AddParam13.txt",
             XslInputType.URI,
@@ -2667,21 +2672,25 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***************************************************************/
-    /*               XsltArgumentList.AddParam Misc Tests          */
-    /*Bug 268515 - Global param value is overridden by local value */
-    /***************************************************************/
+/***************************************************************/
+/*               XsltArgumentList.AddParam Misc Tests          */
+/*Bug 268515 - Global param value is overridden by local value */
+/***************************************************************/
 
     //Testcases with Reader outputs are skipped because they don't write to an output file
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, Stream", Desc = "READER,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, Writer", Desc = "READER,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, TextWriter", Desc = "READER,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Reader, TextWriter", Desc =
+    // "READER,TEXTWRITER")]
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : URI, Writer", Desc = "URI,WRITER")]
     //[TestCase(Name = "XsltArgumentList - AddParam Misc : URI, TextWriter", Desc = "URI,TEXTWRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, Stream", Desc = "NAVIGATOR,STREAM")]
-    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, Writer", Desc = "NAVIGATOR,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, Stream", Desc =
+    // "NAVIGATOR,STREAM")]
+    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, Writer", Desc =
+    // "NAVIGATOR,WRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddParam Misc : Navigator, TextWriter", Desc =
+    // "NAVIGATOR,TEXTWRITER")]
     public class CArgAddParamMisc : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
@@ -2695,7 +2704,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         //All the below variations, there is no parameter sent and default global value is set
 
         //global param is xsl:param local param is xsl:param
-        //[Variation(id = 1, Pri = 2, Desc = "No param sent, global param used, local param exists with a default value", Params = new object[] { "AddParameterA1.xsl", "default local" })]
+        //[Variation(id = 1, Pri = 2, Desc = "No param sent, global param used, local param exists with a
+        // default value", Params = new object[] { "AddParameterA1.xsl", "default local" })]
         [InlineData(
             "AddParameterA1.xsl",
             "default local",
@@ -2768,7 +2778,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 2, Pri = 2, Desc = "No param sent, global param used, local param exists with no default value", Params = new object[] { "AddParameterA2.xsl", "" })]
+        //[Variation(id = 2, Pri = 2, Desc = "No param sent, global param used, local param exists with no
+        // default value", Params = new object[] { "AddParameterA2.xsl", "" })]
         [InlineData(
             "AddParameterA2.xsl",
             "",
@@ -2841,7 +2852,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 3, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist but reference to param exists", Params = new object[] { "AddParameterA3.xsl", "default global" })]
+        //[Variation(id = 3, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist
+        // but reference to param exists", Params = new object[] { "AddParameterA3.xsl", "default global" })]
         [InlineData(
             "AddParameterA3.xsl",
             "default global",
@@ -2914,7 +2926,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 4, Pri = 2, Desc = "No param sent, global param used, local param exists with a default value and with-param sends a value", Params = new object[] { "AddParameterA4.xsl", "with-param" })]
+        //[Variation(id = 4, Pri = 2, Desc = "No param sent, global param used, local param exists with a
+        // default value and with-param sends a value", Params = new object[] { "AddParameterA4.xsl",
+        // "with-param" })]
         [InlineData(
             "AddParameterA4.xsl",
             "with-param",
@@ -2987,7 +3001,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 5, Pri = 2, Desc = "No param sent, global param used, local param exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterA5.xsl", "" })]
+        //[Variation(id = 5, Pri = 2, Desc = "No param sent, global param used, local param exists with no
+        // default value and with-param doesn't send a value", Params = new object[] { "AddParameterA5.xsl", ""
+        // })]
         [InlineData(
             "AddParameterA5.xsl",
             "",
@@ -3060,7 +3076,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 6, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterA6.xsl", "default global" })]
+        //[Variation(id = 6, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends a value", Params = new object[] { "AddParameterA6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterA6.xsl",
             "default global",
@@ -3133,7 +3151,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 7, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterA7.xsl", "default global" })]
+        //[Variation(id = 7, Pri = 2, Desc = "No param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends no value", Params = new object[] { "AddParameterA7.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterA7.xsl",
             "default global",
@@ -3207,7 +3227,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:variable local param is xsl:param
-        //[Variation(id = 8, Pri = 2, Desc = "No param sent, global variable used, local param exists with a default value", Params = new object[] { "AddParameterDA1.xsl", "default local" })]
+        //[Variation(id = 8, Pri = 2, Desc = "No param sent, global variable used, local param exists with a
+        // default value", Params = new object[] { "AddParameterDA1.xsl", "default local" })]
         [InlineData(
             "AddParameterDA1.xsl",
             "default local",
@@ -3280,7 +3301,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 9, Pri = 2, Desc = "No param sent, global variable used, local param exists with no default value", Params = new object[] { "AddParameterDA2.xsl", "" })]
+        //[Variation(id = 9, Pri = 2, Desc = "No param sent, global variable used, local param exists with
+        // no default value", Params = new object[] { "AddParameterDA2.xsl", "" })]
         [InlineData(
             "AddParameterDA2.xsl",
             "",
@@ -3353,7 +3375,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 10, Pri = 2, Desc = "No param sent, global variable used, local param doesn't exist but reference to param exists", Params = new object[] { "AddParameterDA3.xsl", "default global" })]
+        //[Variation(id = 10, Pri = 2, Desc = "No param sent, global variable used, local param doesn't
+        // exist but reference to param exists", Params = new object[] { "AddParameterDA3.xsl", "default
+        // global" })]
         [InlineData(
             "AddParameterDA3.xsl",
             "default global",
@@ -3426,7 +3450,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 11, Pri = 2, Desc = "No param sent, global variable used, local param exists with a default value and with-param sends a value", Params = new object[] { "AddParameterDA4.xsl", "with-param" })]
+        //[Variation(id = 11, Pri = 2, Desc = "No param sent, global variable used, local param exists with
+        // a default value and with-param sends a value", Params = new object[] { "AddParameterDA4.xsl",
+        // "with-param" })]
         [InlineData(
             "AddParameterDA4.xsl",
             "with-param",
@@ -3499,7 +3525,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 12, Pri = 2, Desc = "No param sent, global variable used, local param exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterDA5.xsl", "" })]
+        //[Variation(id = 12, Pri = 2, Desc = "No param sent, global variable used, local param exists with
+        // no default value and with-param doesn't send a value", Params = new object[] {
+        // "AddParameterDA5.xsl", "" })]
         [InlineData(
             "AddParameterDA5.xsl",
             "",
@@ -3572,7 +3600,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 13, Pri = 2, Desc = "No param sent, global variable used, local param doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterDA6.xsl", "default global" })]
+        //[Variation(id = 13, Pri = 2, Desc = "No param sent, global variable used, local param doesn't
+        // exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterDA6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterDA6.xsl",
             "default global",
@@ -3645,7 +3675,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 14, Pri = 2, Desc = "No param sent, global variable used, local param doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterDA7.xsl", "default global" })]
+        //[Variation(id = 14, Pri = 2, Desc = "No param sent, global variable used, local param doesn't
+        // exist, reference to param, with-param sends no value", Params = new object[] {
+        // "AddParameterDA7.xsl", "default global" })]
         [InlineData(
             "AddParameterDA7.xsl",
             "default global",
@@ -3719,7 +3751,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:param local param is xsl:variable
-        //[Variation(id = 15, Pri = 2, Desc = "No param sent, global param used, local variable exists with a default value", Params = new object[] { "AddParameterEA1.xsl", "default local" })]
+        //[Variation(id = 15, Pri = 2, Desc = "No param sent, global param used, local variable exists with
+        // a default value", Params = new object[] { "AddParameterEA1.xsl", "default local" })]
         [InlineData(
             "AddParameterEA1.xsl",
             "default local",
@@ -3792,7 +3825,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 16, Pri = 2, Desc = "No param sent, global param used, local variable exists with no default value", Params = new object[] { "AddParameterEA2.xsl", "" })]
+        //[Variation(id = 16, Pri = 2, Desc = "No param sent, global param used, local variable exists with
+        // no default value", Params = new object[] { "AddParameterEA2.xsl", "" })]
         [InlineData(
             "AddParameterEA2.xsl",
             "",
@@ -3865,7 +3899,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 17, Pri = 2, Desc = "No param sent, global param used, local variable doesn't exist but reference to param exists", Params = new object[] { "AddParameterEA3.xsl", "default global" })]
+        //[Variation(id = 17, Pri = 2, Desc = "No param sent, global param used, local variable doesn't
+        // exist but reference to param exists", Params = new object[] { "AddParameterEA3.xsl", "default
+        // global" })]
         [InlineData(
             "AddParameterEA3.xsl",
             "default global",
@@ -3938,7 +3974,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 18, Pri = 2, Desc = "No param sent, global param used, local variable exists with a default value and with-param sends a value", Params = new object[] { "AddParameterEA4.xsl", "default local" })]
+        //[Variation(id = 18, Pri = 2, Desc = "No param sent, global param used, local variable exists with
+        // a default value and with-param sends a value", Params = new object[] { "AddParameterEA4.xsl",
+        // "default local" })]
         [InlineData(
             "AddParameterEA4.xsl",
             "default local",
@@ -4011,7 +4049,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 19, Pri = 2, Desc = "No param sent, global param used, local variable exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterEA5.xsl", "" })]
+        //[Variation(id = 19, Pri = 2, Desc = "No param sent, global param used, local variable exists with
+        // no default value and with-param doesn't send a value", Params = new object[] {
+        // "AddParameterEA5.xsl", "" })]
         [InlineData(
             "AddParameterEA5.xsl",
             "",
@@ -4084,7 +4124,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 20, Pri = 2, Desc = "No param sent, global param used, local variable doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterEA6.xsl", "default global" })]
+        //[Variation(id = 20, Pri = 2, Desc = "No param sent, global param used, local variable doesn't
+        // exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterEA6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterEA6.xsl",
             "default global",
@@ -4157,7 +4199,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 21, Pri = 2, Desc = "No param sent, global param used, local variable doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterEA7.xsl", "default global" })]
+        //[Variation(id = 21, Pri = 2, Desc = "No param sent, global param used, local variable doesn't
+        // exist, reference to param, with-param sends no value", Params = new object[] {
+        // "AddParameterEA7.xsl", "default global" })]
         [InlineData(
             "AddParameterEA7.xsl",
             "default global",
@@ -4231,7 +4275,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:variable local param is xsl:variable
-        //[Variation(id = 22, Pri = 2, Desc = "No param sent, global variable used, local variable exists with a default value", Params = new object[] { "AddParameterFA1.xsl", "default local" })]
+        //[Variation(id = 22, Pri = 2, Desc = "No param sent, global variable used, local variable exists
+        // with a default value", Params = new object[] { "AddParameterFA1.xsl", "default local" })]
         [InlineData(
             "AddParameterFA1.xsl",
             "default local",
@@ -4304,7 +4349,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 23, Pri = 2, Desc = "No param sent, global variable used, local variable exists with no default value", Params = new object[] { "AddParameterFA2.xsl", "" })]
+        //[Variation(id = 23, Pri = 2, Desc = "No param sent, global variable used, local variable exists
+        // with no default value", Params = new object[] { "AddParameterFA2.xsl", "" })]
         [InlineData(
             "AddParameterFA2.xsl",
             "",
@@ -4377,7 +4423,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 24, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't exist but reference to param exists", Params = new object[] { "AddParameterFA3.xsl", "default global" })]
+        //[Variation(id = 24, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't
+        // exist but reference to param exists", Params = new object[] { "AddParameterFA3.xsl", "default
+        // global" })]
         [InlineData(
             "AddParameterFA3.xsl",
             "default global",
@@ -4450,7 +4498,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 25, Pri = 2, Desc = "No param sent, global variable used, local variable exists with a default value and with-param sends a value", Params = new object[] { "AddParameterFA4.xsl", "default local" })]
+        //[Variation(id = 25, Pri = 2, Desc = "No param sent, global variable used, local variable exists
+        // with a default value and with-param sends a value", Params = new object[] { "AddParameterFA4.xsl",
+        // "default local" })]
         [InlineData(
             "AddParameterFA4.xsl",
             "default local",
@@ -4523,7 +4573,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 26, Pri = 2, Desc = "No param sent, global variable used, local variable exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterFA5.xsl", "" })]
+        //[Variation(id = 26, Pri = 2, Desc = "No param sent, global variable used, local variable exists
+        // with no default value and with-param doesn't send a value", Params = new object[] {
+        // "AddParameterFA5.xsl", "" })]
         [InlineData(
             "AddParameterFA5.xsl",
             "",
@@ -4596,7 +4648,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 27, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterFA6.xsl", "default global" })]
+        //[Variation(id = 27, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't
+        // exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterFA6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterFA6.xsl",
             "default global",
@@ -4669,7 +4723,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 28, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterFA7.xsl", "default global" })]
+        //[Variation(id = 28, Pri = 2, Desc = "No param sent, global variable used, local variable doesn't
+        // exist, reference to param, with-param sends no value", Params = new object[] {
+        // "AddParameterFA7.xsl", "default global" })]
         [InlineData(
             "AddParameterFA7.xsl",
             "default global",
@@ -4771,7 +4827,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         //All the below variations, param is sent from client code
 
         //global param is xsl:param local param is xsl:param
-        //[Variation(id = 29, Pri = 2, Desc = "Param sent, global param used, local param exists with a default value", Params = new object[] { "AddParameterB1.xsl", "default local" })]
+        //[Variation(id = 29, Pri = 2, Desc = "Param sent, global param used, local param exists with a
+        // default value", Params = new object[] { "AddParameterB1.xsl", "default local" })]
         [InlineData(
             "AddParameterB1.xsl",
             "default local",
@@ -4844,7 +4901,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 30, Pri = 2, Desc = "Param sent, global param used, local param exists with no default value", Params = new object[] { "AddParameterB2.xsl", "" })]
+        //[Variation(id = 30, Pri = 2, Desc = "Param sent, global param used, local param exists with no
+        // default value", Params = new object[] { "AddParameterB2.xsl", "" })]
         [InlineData(
             "AddParameterB2.xsl",
             "",
@@ -4917,7 +4975,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 31, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist but reference to param exists", Params = new object[] { "AddParameterB3.xsl", "outside param" })]
+        //[Variation(id = 31, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist but
+        // reference to param exists", Params = new object[] { "AddParameterB3.xsl", "outside param" })]
         [InlineData(
             "AddParameterB3.xsl",
             "outside param",
@@ -4990,7 +5049,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 32, Pri = 2, Desc = "Param sent, global param used, local param exists with a default value and with-param sends a value", Params = new object[] { "AddParameterB4.xsl", "with-param" })]
+        //[Variation(id = 32, Pri = 2, Desc = "Param sent, global param used, local param exists with a
+        // default value and with-param sends a value", Params = new object[] { "AddParameterB4.xsl",
+        // "with-param" })]
         [InlineData(
             "AddParameterB4.xsl",
             "with-param",
@@ -5063,7 +5124,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 33, Pri = 2, Desc = "Param sent, global param used, local param exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterB5.xsl", "" })]
+        //[Variation(id = 33, Pri = 2, Desc = "Param sent, global param used, local param exists with no
+        // default value and with-param doesn't send a value", Params = new object[] { "AddParameterB5.xsl", ""
+        // })]
         [InlineData(
             "AddParameterB5.xsl",
             "",
@@ -5136,7 +5199,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 34, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterB6.xsl", "outside param" })]
+        //[Variation(id = 34, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends a value", Params = new object[] { "AddParameterB6.xsl",
+        // "outside param" })]
         [InlineData(
             "AddParameterB6.xsl",
             "outside param",
@@ -5209,7 +5274,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 35, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterB7.xsl", "outside param" })]
+        //[Variation(id = 35, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends no value", Params = new object[] { "AddParameterB7.xsl",
+        // "outside param" })]
         [InlineData(
             "AddParameterB7.xsl",
             "outside param",
@@ -5283,7 +5350,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:variable local param is xsl:param
-        //[Variation(id = 36, Pri = 2, Desc = "Param sent, global variable used, local param exists with a default value", Params = new object[] { "AddParameterDB1.xsl", "default local" })]
+        //[Variation(id = 36, Pri = 2, Desc = "Param sent, global variable used, local param exists with a
+        // default value", Params = new object[] { "AddParameterDB1.xsl", "default local" })]
         [InlineData(
             "AddParameterDB1.xsl",
             "default local",
@@ -5356,7 +5424,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 37, Pri = 2, Desc = "Param sent, global variable used, local param exists with no default value", Params = new object[] { "AddParameterDB2.xsl", "" })]
+        //[Variation(id = 37, Pri = 2, Desc = "Param sent, global variable used, local param exists with no
+        // default value", Params = new object[] { "AddParameterDB2.xsl", "" })]
         [InlineData(
             "AddParameterDB2.xsl",
             "",
@@ -5429,7 +5498,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 38, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist but reference to param exists", Params = new object[] { "AddParameterDB3.xsl", "default global" })]
+        //[Variation(id = 38, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist
+        // but reference to param exists", Params = new object[] { "AddParameterDB3.xsl", "default global" })]
         [InlineData(
             "AddParameterDB3.xsl",
             "default global",
@@ -5502,7 +5572,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 39, Pri = 2, Desc = "Param sent, global variable used, local param exists with a default value and with-param sends a value", Params = new object[] { "AddParameterDB4.xsl", "with-param" })]
+        //[Variation(id = 39, Pri = 2, Desc = "Param sent, global variable used, local param exists with a
+        // default value and with-param sends a value", Params = new object[] { "AddParameterDB4.xsl",
+        // "with-param" })]
         [InlineData(
             "AddParameterDB4.xsl",
             "with-param",
@@ -5575,7 +5647,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 40, Pri = 2, Desc = "Param sent, global variable used, local param exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterDB5.xsl", "" })]
+        //[Variation(id = 40, Pri = 2, Desc = "Param sent, global variable used, local param exists with no
+        // default value and with-param doesn't send a value", Params = new object[] { "AddParameterDB5.xsl",
+        // "" })]
         [InlineData(
             "AddParameterDB5.xsl",
             "",
@@ -5648,7 +5722,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 41, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterDB6.xsl", "default global" })]
+        //[Variation(id = 41, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist,
+        // reference to param, with-param sends a value", Params = new object[] { "AddParameterDB6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterDB6.xsl",
             "default global",
@@ -5721,7 +5797,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 42, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterDB7.xsl", "default global" })]
+        //[Variation(id = 42, Pri = 2, Desc = "Param sent, global variable used, local param doesn't exist,
+        // reference to param, with-param sends no value", Params = new object[] { "AddParameterDB7.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterDB7.xsl",
             "default global",
@@ -5795,7 +5873,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:param local param is xsl:variable
-        //[Variation(id = 43, Pri = 2, Desc = "Param sent, global param used, local variable exists with a default value", Params = new object[] { "AddParameterEB1.xsl", "default local" })]
+        //[Variation(id = 43, Pri = 2, Desc = "Param sent, global param used, local variable exists with a
+        // default value", Params = new object[] { "AddParameterEB1.xsl", "default local" })]
         [InlineData(
             "AddParameterEB1.xsl",
             "default local",
@@ -5868,7 +5947,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 44, Pri = 2, Desc = "Param sent, global param used, local variable exists with no default value", Params = new object[] { "AddParameterEB2.xsl", "" })]
+        //[Variation(id = 44, Pri = 2, Desc = "Param sent, global param used, local variable exists with no
+        // default value", Params = new object[] { "AddParameterEB2.xsl", "" })]
         [InlineData(
             "AddParameterEB2.xsl",
             "",
@@ -5941,7 +6021,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 45, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist but reference to param exists", Params = new object[] { "AddParameterEB3.xsl", "outside param" })]
+        //[Variation(id = 45, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist
+        // but reference to param exists", Params = new object[] { "AddParameterEB3.xsl", "outside param" })]
         [InlineData(
             "AddParameterEB3.xsl",
             "outside param",
@@ -6014,7 +6095,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 46, Pri = 2, Desc = "Param sent, global param used, local variable exists with a default value and with-param sends a value", Params = new object[] { "AddParameterEB4.xsl", "default local" })]
+        //[Variation(id = 46, Pri = 2, Desc = "Param sent, global param used, local variable exists with a
+        // default value and with-param sends a value", Params = new object[] { "AddParameterEB4.xsl", "default
+        // local" })]
         [InlineData(
             "AddParameterEB4.xsl",
             "default local",
@@ -6087,7 +6170,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 47, Pri = 2, Desc = "Param sent, global param used, local variable exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterEB5.xsl", "" })]
+        //[Variation(id = 47, Pri = 2, Desc = "Param sent, global param used, local variable exists with no
+        // default value and with-param doesn't send a value", Params = new object[] { "AddParameterEB5.xsl",
+        // "" })]
         [InlineData(
             "AddParameterEB5.xsl",
             "",
@@ -6160,7 +6245,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 48, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterEB6.xsl", "outside param" })]
+        //[Variation(id = 48, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist,
+        // reference to param, with-param sends a value", Params = new object[] { "AddParameterEB6.xsl",
+        // "outside param" })]
         [InlineData(
             "AddParameterEB6.xsl",
             "outside param",
@@ -6233,7 +6320,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 49, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterEB7.xsl", "outside param" })]
+        //[Variation(id = 49, Pri = 2, Desc = "Param sent, global param used, local variable doesn't exist,
+        // reference to param, with-param sends no value", Params = new object[] { "AddParameterEB7.xsl",
+        // "outside param" })]
         [InlineData(
             "AddParameterEB7.xsl",
             "outside param",
@@ -6307,7 +6396,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType.XPathDocument
         )]
         //global param is xsl:variable local param is xsl:variable
-        //[Variation(id = 50, Pri = 2, Desc = "Param sent, global variable used, local variable exists with a default value", Params = new object[] { "AddParameterFB1.xsl", "default local" })]
+        //[Variation(id = 50, Pri = 2, Desc = "Param sent, global variable used, local variable exists with
+        // a default value", Params = new object[] { "AddParameterFB1.xsl", "default local" })]
         [InlineData(
             "AddParameterFB1.xsl",
             "default local",
@@ -6380,7 +6470,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 51, Pri = 2, Desc = "Param sent, global variable used, local variable exists with no default value", Params = new object[] { "AddParameterFB2.xsl", "" })]
+        //[Variation(id = 51, Pri = 2, Desc = "Param sent, global variable used, local variable exists with
+        // no default value", Params = new object[] { "AddParameterFB2.xsl", "" })]
         [InlineData(
             "AddParameterFB2.xsl",
             "",
@@ -6453,7 +6544,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 52, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't exist but reference to param exists", Params = new object[] { "AddParameterFB3.xsl", "default global" })]
+        //[Variation(id = 52, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't
+        // exist but reference to param exists", Params = new object[] { "AddParameterFB3.xsl", "default
+        // global" })]
         [InlineData(
             "AddParameterFB3.xsl",
             "default global",
@@ -6526,7 +6619,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 53, Pri = 2, Desc = "Param sent, global variable used, local variable exists with a default value and with-param sends a value", Params = new object[] { "AddParameterFB4.xsl", "default local" })]
+        //[Variation(id = 53, Pri = 2, Desc = "Param sent, global variable used, local variable exists with
+        // a default value and with-param sends a value", Params = new object[] { "AddParameterFB4.xsl",
+        // "default local" })]
         [InlineData(
             "AddParameterFB4.xsl",
             "default local",
@@ -6599,7 +6694,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 54, Pri = 2, Desc = "Param sent, global variable used, local variable exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterFB5.xsl", "" })]
+        //[Variation(id = 54, Pri = 2, Desc = "Param sent, global variable used, local variable exists with
+        // no default value and with-param doesn't send a value", Params = new object[] {
+        // "AddParameterFB5.xsl", "" })]
         [InlineData(
             "AddParameterFB5.xsl",
             "",
@@ -6672,7 +6769,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 55, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterFB6.xsl", "default global" })]
+        //[Variation(id = 55, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't
+        // exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterFB6.xsl",
+        // "default global" })]
         [InlineData(
             "AddParameterFB6.xsl",
             "default global",
@@ -6745,7 +6844,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 56, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterFB7.xsl", "default global" })]
+        //[Variation(id = 56, Pri = 2, Desc = "Param sent, global variable used, local variable doesn't
+        // exist, reference to param, with-param sends no value", Params = new object[] {
+        // "AddParameterFB7.xsl", "default global" })]
         [InlineData(
             "AddParameterFB7.xsl",
             "default global",
@@ -6848,7 +6949,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         //All the below variations, empty param is sent from client code
         //global param is xsl:param local param is xsl:param
-        //[Variation(id = 57, Pri = 2, Desc = "Param sent, global param used, local param exists with a default value", Params = new object[] { "AddParameterB1.xsl", "default local" })]
+        //[Variation(id = 57, Pri = 2, Desc = "Param sent, global param used, local param exists with a
+        // default value", Params = new object[] { "AddParameterB1.xsl", "default local" })]
         [InlineData(
             "AddParameterB1.xsl",
             "default local",
@@ -6921,7 +7023,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 58, Pri = 2, Desc = "Param sent, global param used, local param exists with no default value", Params = new object[] { "AddParameterB2.xsl", "" })]
+        //[Variation(id = 58, Pri = 2, Desc = "Param sent, global param used, local param exists with no
+        // default value", Params = new object[] { "AddParameterB2.xsl", "" })]
         [InlineData(
             "AddParameterB2.xsl",
             "",
@@ -6994,7 +7097,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 59, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist but reference to param exists", Params = new object[] { "AddParameterB3.xsl", "" })]
+        //[Variation(id = 59, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist but
+        // reference to param exists", Params = new object[] { "AddParameterB3.xsl", "" })]
         [InlineData(
             "AddParameterB3.xsl",
             "",
@@ -7067,7 +7171,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 60, Pri = 2, Desc = "Param sent, global param used, local param exists with a default value and with-param sends a value", Params = new object[] { "AddParameterB4.xsl", "with-param" })]
+        //[Variation(id = 60, Pri = 2, Desc = "Param sent, global param used, local param exists with a
+        // default value and with-param sends a value", Params = new object[] { "AddParameterB4.xsl",
+        // "with-param" })]
         [InlineData(
             "AddParameterB4.xsl",
             "with-param",
@@ -7140,7 +7246,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 61, Pri = 2, Desc = "Param sent, global param used, local param exists with no default value and with-param doesn't send a value", Params = new object[] { "AddParameterB5.xsl", "" })]
+        //[Variation(id = 61, Pri = 2, Desc = "Param sent, global param used, local param exists with no
+        // default value and with-param doesn't send a value", Params = new object[] { "AddParameterB5.xsl", ""
+        // })]
         [InlineData(
             "AddParameterB5.xsl",
             "",
@@ -7213,7 +7321,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 62, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist, reference to param, with-param sends a value", Params = new object[] { "AddParameterB6.xsl", "" })]
+        //[Variation(id = 62, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends a value", Params = new object[] { "AddParameterB6.xsl", "" })]
         [InlineData(
             "AddParameterB6.xsl",
             "",
@@ -7286,7 +7395,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 63, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist, reference to param, with-param sends no value", Params = new object[] { "AddParameterB7.xsl", "" })]
+        //[Variation(id = 63, Pri = 2, Desc = "Param sent, global param used, local param doesn't exist,
+        // reference to param, with-param sends no value", Params = new object[] { "AddParameterB7.xsl", "" })]
         [InlineData(
             "AddParameterB7.xsl",
             "",
@@ -7388,22 +7498,31 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*          XsltArgumentList.AddExtensionObject            */
-    /***********************************************************/
+/***********************************************************/
+/*          XsltArgumentList.AddExtensionObject            */
+/***********************************************************/
 
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader , Reader", Desc = "READER,READER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Stream", Desc = "READER,STREAM")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Writer", Desc = "READER,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, TextWriter", Desc = "READER,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader , Reader", Desc =
+    // "READER,READER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Stream", Desc =
+    // "READER,STREAM")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, Writer", Desc =
+    // "READER,WRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Reader, TextWriter", Desc =
+    // "READER,TEXTWRITER")]
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : URI, Reader", Desc = "URI,READER")]
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltArgumentList - AddExtensionObject : URI, Writer", Desc = "URI,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : URI, TextWriter", Desc = "URI,TEXTWRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Reader", Desc = "NAVIGATOR,READER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Stream", Desc = "NAVIGATOR,STREAM")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Writer", Desc = "NAVIGATOR,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : URI, TextWriter", Desc =
+    // "URI,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Reader", Desc =
+    // "NAVIGATOR,READER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Stream", Desc =
+    // "NAVIGATOR,STREAM")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, Writer", Desc =
+    // "NAVIGATOR,WRITER")]
+    //[TestCase(Name = "XsltArgumentList - AddExtensionObject : Navigator, TextWriter", Desc =
+    // "NAVIGATOR,TEXTWRITER")]
     public class CArgAddExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
@@ -9071,7 +9190,7 @@ namespace System.Xml.XslCompiledTransformApiTests
             )
             {
                 if (outputType == OutputType.Writer)
-                    /* writer output is slighlty different which causes a mismatch so we won't compare */
+/* writer output is slighlty different which causes a mismatch so we won't compare */
                     return;
                 VerifyResult(Baseline, _strOutFile);
                 return;
@@ -9277,7 +9396,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             Assert.Fail();
         }
 
-        //[Variation(id = 33, Desc = "Calling extension object from select in xsl:apply-templates", Params = new object[] { "apply-templates.xsl", "apply-templates.txt" })]
+        //[Variation(id = 33, Desc = "Calling extension object from select in xsl:apply-templates", Params =
+        // new object[] { "apply-templates.xsl", "apply-templates.txt" })]
         [InlineData(
             "apply-templates.xsl",
             "apply-templates.txt",
@@ -9350,7 +9470,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 34, Desc = "Calling extension object from select in xsl:for-each", Params = new object[] { "for-each.xsl", "for-each.txt" })]
+        //[Variation(id = 34, Desc = "Calling extension object from select in xsl:for-each", Params = new
+        // object[] { "for-each.xsl", "for-each.txt" })]
         [InlineData(
             "for-each.xsl",
             "for-each.txt",
@@ -9423,7 +9544,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 35, Desc = "Calling extension object from select in xsl:copy-of", Params = new object[] { "copy-of.xsl", "copy-of.txt" })]
+        //[Variation(id = 35, Desc = "Calling extension object from select in xsl:copy-of", Params = new
+        // object[] { "copy-of.xsl", "copy-of.txt" })]
         [InlineData(
             "copy-of.xsl",
             "copy-of.txt",
@@ -9496,7 +9618,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 37, Desc = "Calling extension object from select in xsl:variable", Params = new object[] { "variable.xsl", "variable.txt" })]
+        //[Variation(id = 37, Desc = "Calling extension object from select in xsl:variable", Params = new
+        // object[] { "variable.xsl", "variable.txt" })]
         [InlineData(
             "variable.xsl",
             "variable.txt",
@@ -9569,7 +9692,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 38, Desc = "Calling extension object from select in xsl:param", Params = new object[] { "param.xsl", "param.txt" })]
+        //[Variation(id = 38, Desc = "Calling extension object from select in xsl:param", Params = new
+        // object[] { "param.xsl", "param.txt" })]
         [InlineData(
             "param.xsl",
             "param.txt",
@@ -9642,7 +9766,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 39, Desc = "Calling extension object from select in xsl:with-param", Params = new object[] { "with-param.xsl", "with-param.txt" })]
+        //[Variation(id = 39, Desc = "Calling extension object from select in xsl:with-param", Params = new
+        // object[] { "with-param.xsl", "with-param.txt" })]
         [InlineData(
             "with-param.xsl",
             "with-param.txt",
@@ -9715,7 +9840,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 40, Desc = "Calling extension object from select in xsl:value-of", Params = new object[] { "value-of.xsl", "value-of.txt" })]
+        //[Variation(id = 40, Desc = "Calling extension object from select in xsl:value-of", Params = new
+        // object[] { "value-of.xsl", "value-of.txt" })]
         [InlineData(
             "value-of.xsl",
             "value-of.txt",
@@ -9788,7 +9914,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 36, Desc = "Calling extension object from select in xsl:sort", Params = new object[] { "sort.xsl", "sort.txt" })]
+        //[Variation(id = 36, Desc = "Calling extension object from select in xsl:sort", Params = new
+        // object[] { "sort.xsl", "sort.txt" })]
         [InlineData(
             "sort.xsl",
             "sort.txt",
@@ -9890,7 +10017,8 @@ namespace System.Xml.XslCompiledTransformApiTests
                 Assert.Fail();
         }
 
-        //[Variation(id = 41, Desc = "Calling extension function from select in xsl:variable and variable is used for incrementing an integer", Params = new object[] { "variable2.xsl", "variable2.txt" })]
+        //[Variation(id = 41, Desc = "Calling extension function from select in xsl:variable and variable is
+        // used for incrementing an integer", Params = new object[] { "variable2.xsl", "variable2.txt" })]
         [InlineData(
             "variable2.xsl",
             "variable2.txt",
@@ -9963,7 +10091,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 42, Desc = "Calling extension function from select in xsl:variable but variable is never used", Params = new object[] { "variable3.xsl", "variable3.txt" })]
+        //[Variation(id = 42, Desc = "Calling extension function from select in xsl:variable but variable is
+        // never used", Params = new object[] { "variable3.xsl", "variable3.txt" })]
         [InlineData(
             "variable3.xsl",
             "variable3.txt",
@@ -10036,7 +10165,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 43, Desc = "Calling extension function from select in global xsl:variable but variable is never used", Params = new object[] { "variable4.xsl", "variable4.txt" })]
+        //[Variation(id = 43, Desc = "Calling extension function from select in global xsl:variable but
+        // variable is never used", Params = new object[] { "variable4.xsl", "variable4.txt" })]
         [InlineData(
             "variable4.xsl",
             "variable4.txt",
@@ -10109,7 +10239,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 44, Desc = "Calling extension function from select in xsl:param and parameter is used for incrementing an integer", Params = new object[] { "param2.xsl", "param2.txt" })]
+        //[Variation(id = 44, Desc = "Calling extension function from select in xsl:param and parameter is
+        // used for incrementing an integer", Params = new object[] { "param2.xsl", "param2.txt" })]
         [InlineData(
             "param2.xsl",
             "param2.txt",
@@ -10182,7 +10313,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 45, Desc = "Calling extension function from select in xsl:param but parameter is never used", Params = new object[] { "param3.xsl", "param3.txt" })]
+        //[Variation(id = 45, Desc = "Calling extension function from select in xsl:param but parameter is
+        // never used", Params = new object[] { "param3.xsl", "param3.txt" })]
         [InlineData(
             "param3.xsl",
             "param3.txt",
@@ -10255,7 +10387,8 @@ namespace System.Xml.XslCompiledTransformApiTests
             OutputType.TextWriter,
             NavType.XPathDocument
         )]
-        //[Variation(id = 46, Desc = "Calling extension function from select in global xsl:param but parameter is never used", Params = new object[] { "param4.xsl", "param4.txt" })]
+        //[Variation(id = 46, Desc = "Calling extension function from select in global xsl:param but
+        // parameter is never used", Params = new object[] { "param4.xsl", "param4.txt" })]
         [InlineData(
             "param4.xsl",
             "param4.txt",
@@ -10338,11 +10471,11 @@ namespace System.Xml.XslCompiledTransformApiTests
             NavType navType
         )
         {
-            /*
-             * In these variations, the XSLT calls the extension function Increment from XSLT.
-             * In some cases, the variable is never used in the XSLT (Bug 357711)
-             * Verify by calling an extenfion function like increment and check the state of the variable
-            */
+/*
+* In these variations, the XSLT calls the extension function Increment from XSLT.
+* In some cases, the variable is never used in the XSLT (Bug 357711)
+* Verify by calling an extenfion function like increment and check the state of the variable
+*/
             ExObj obj = new ExObj(0, _output);
             m_xsltArg = new XsltArgumentList();
             string xslFile = param0.ToString();
@@ -10394,14 +10527,15 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*            XsltArgumentList.RemoveParam                 */
-    /***********************************************************/
+/***********************************************************/
+/*            XsltArgumentList.RemoveParam                 */
+/***********************************************************/
 
     //[TestCase(Name = "XsltArgumentList - RemoveParam : Reader , Reader", Desc = "READER,READER")]
     //[TestCase(Name = "XsltArgumentList - RemoveParam : URI, Stream", Desc = "URI,STREAM")]
     //[TestCase(Name = "XsltArgumentList - RemoveParam : Navigator, Writer", Desc = "NAVIGATOR,WRITER")]
-    //[TestCase(Name = "XsltArgumentList - RemoveParam : Navigator, TextWriter", Desc = "NAVIGATOR,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - RemoveParam : Navigator, TextWriter", Desc =
+    // "NAVIGATOR,TEXTWRITER")]
     public class CArgRemoveParam : XsltApiTestCaseBase2
     {
         private string _baseline = string.Empty;
@@ -11354,14 +11488,17 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*        XslCompiledTransform.RemoveExtensionObject               */
-    /***********************************************************/
+/***********************************************************/
+/*        XslCompiledTransform.RemoveExtensionObject               */
+/***********************************************************/
 
-    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, Stream", Desc = "READER,STREAM")]
-    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, TextWriter", Desc = "READER,TEXTWRITER")]
+    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, Stream", Desc =
+    // "READER,STREAM")]
+    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Reader, TextWriter", Desc =
+    // "READER,TEXTWRITER")]
     //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : URI, Reader", Desc = "URI,READER")]
-    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Navigator, Stream", Desc = "NAVIGATOR,STREAM")]
+    //[TestCase(Name = "XsltArgumentList - RemoveExtensionObject : Navigator, Stream", Desc =
+    // "NAVIGATOR,STREAM")]
     public class CArgRemoveExtObj : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
@@ -11865,9 +12002,9 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    /***********************************************************/
-    /*        XslCompiledTransform.Clear                               */
-    /***********************************************************/
+/***********************************************************/
+/*        XslCompiledTransform.Clear                               */
+/***********************************************************/
 
     //[TestCase(Name = "XsltArgumentList - Clear", Desc = "XsltArgumentList.Clear")]
     public class CArgClear : XsltApiTestCaseBase2
@@ -12273,25 +12410,40 @@ namespace System.Xml.XslCompiledTransformApiTests
             SerializeMessage(OutFile, e.Message);
         }
 
-        //[Variation(id = 1, Desc = "OnQueryEvent Exists - xsl:message with terminate='no'", Priority = 0, Params = new object[] { "Message1.xsl", "no", "yes", "Message1.txt" })]
+        //[Variation(id = 1, Desc = "OnQueryEvent Exists - xsl:message with terminate='no'", Priority = 0,
+        // Params = new object[] { "Message1.xsl", "no", "yes", "Message1.txt" })]
         [InlineData("Message1.xsl", "no", "yes", "Message1.txt")]
-        //[Variation(id = 2, Desc = "OnQueryEvent doesn't exist - xsl:message with terminate='no'", Priority = 2, Params = new object[] { "Message2.xsl", "no", "no", "Message2.txt" })]
+        //[Variation(id = 2, Desc = "OnQueryEvent doesn't exist - xsl:message with terminate='no'", Priority
+        // = 2, Params = new object[] { "Message2.xsl", "no", "no", "Message2.txt" })]
         [InlineData("Message2.xsl", "no", "no", "Message2.txt")]
-        //[Variation(id = 3, Desc = "OnQueryEvent Exists - xsl:message with terminate='yes'", Priority = 0, Params = new object[] { "Message3.xsl", "yes", "yes", "Message3.txt" })]
+        //[Variation(id = 3, Desc = "OnQueryEvent Exists - xsl:message with terminate='yes'", Priority = 0,
+        // Params = new object[] { "Message3.xsl", "yes", "yes", "Message3.txt" })]
         [InlineData("Message3.xsl", "yes", "yes", "Message3.txt")]
-        //[Variation(id = 4, Desc = "OnQueryEvent doesn't exist - xsl:message with terminate='yes'", Priority = 2, Params = new object[] { "Message4.xsl", "yes", "no", "Message4.txt" })]
+        //[Variation(id = 4, Desc = "OnQueryEvent doesn't exist - xsl:message with terminate='yes'",
+        // Priority = 2, Params = new object[] { "Message4.xsl", "yes", "no", "Message4.txt" })]
         [InlineData("Message4.xsl", "yes", "no", "Message4.txt")]
-        //[Variation(id = 5, Desc = "OnQueryEvent Exists - xsl:message with XML Content and terminate='no'", Priority = 1, Params = new object[] { "Message5.xsl", "no", "yes", "Message5.txt" })]
+        //[Variation(id = 5, Desc = "OnQueryEvent Exists - xsl:message with XML Content and terminate='no'",
+        // Priority = 1, Params = new object[] { "Message5.xsl", "no", "yes", "Message5.txt" })]
         [InlineData("Message5.xsl", "no", "yes", "Message5.txt")]
-        //[Variation(id = 6, Desc = "OnQueryEvent doesn't exist - xsl:message with XML Content and  terminate='no'", Priority = 2, Params = new object[] { "Message6.xsl", "no", "no", "Message6.txt" })]
+        //[Variation(id = 6, Desc = "OnQueryEvent doesn't exist - xsl:message with XML Content and
+        // terminate='no'", Priority = 2, Params = new object[] { "Message6.xsl", "no", "no", "Message6.txt"
+        // })]
         [InlineData("Message6.xsl", "no", "no", "Message6.txt")]
-        //[Variation(id = 7, Desc = "OnQueryEvent Exists - xsl:message with XML Content and  terminate='yes'", Priority = 1, Params = new object[] { "Message7.xsl", "yes", "yes", "Message7.txt" })]
+        //[Variation(id = 7, Desc = "OnQueryEvent Exists - xsl:message with XML Content and
+        // terminate='yes'", Priority = 1, Params = new object[] { "Message7.xsl", "yes", "yes", "Message7.txt"
+        // })]
         [InlineData("Message7.xsl", "yes", "yes", "Message7.txt")]
-        //[Variation(id = 8, Desc = "OnQueryEvent doesn't exist - xsl:message with XML Content and  terminate='yes'", Priority = 2, Params = new object[] { "Message8.xsl", "yes", "no", "Message8.txt" })]
+        //[Variation(id = 8, Desc = "OnQueryEvent doesn't exist - xsl:message with XML Content and
+        // terminate='yes'", Priority = 2, Params = new object[] { "Message8.xsl", "yes", "no", "Message8.txt"
+        // })]
         [InlineData("Message8.xsl", "yes", "no", "Message8.txt")]
-        //[Variation(id = 9, Desc = "OnQueryEvent Exists - xsl:message with template content and  terminate='no'", Priority = 1, Params = new object[] { "Message9.xsl", "no", "yes", "Message9.txt" })]
+        //[Variation(id = 9, Desc = "OnQueryEvent Exists - xsl:message with template content and
+        // terminate='no'", Priority = 1, Params = new object[] { "Message9.xsl", "no", "yes", "Message9.txt"
+        // })]
         [InlineData("Message9.xsl", "no", "yes", "Message9.txt")]
-        //[Variation(id = 10, Desc = "OnQueryEvent Exists - xsl:message with template content and  terminate='yes'", Priority = 1, Params = new object[] { "Message10.xsl", "yes", "yes", "Message10.txt" })]
+        //[Variation(id = 10, Desc = "OnQueryEvent Exists - xsl:message with template content and
+        // terminate='yes'", Priority = 1, Params = new object[] { "Message10.xsl", "yes", "yes",
+        // "Message10.txt" })]
         [InlineData("Message10.xsl", "yes", "yes", "Message10.txt")]
         [Theory]
         public void EventsTests(object param0, object param1, object param2, object param3)
@@ -12372,7 +12524,8 @@ namespace System.Xml.XslCompiledTransformApiTests
         }
     }
 
-    //[TestCase(Name = "XPathNodeIterator Tests", Desc = "XPathNodeIterator Tests using XsltArgumentList")]
+    //[TestCase(Name = "XPathNodeIterator Tests", Desc = "XPathNodeIterator Tests using
+    // XsltArgumentList")]
     public class XPathNodeIteratorTests : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;

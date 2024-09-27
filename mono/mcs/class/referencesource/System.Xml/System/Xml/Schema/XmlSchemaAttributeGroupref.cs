@@ -10,7 +10,8 @@ namespace System.Xml.Schema
     using System.Collections;
     using System.Xml.Serialization;
 
-    /// <include file='doc\XmlSchemaAttributeGroupRef.uex' path='docs/doc[@for="XmlSchemaAttributeGroupRef"]/*' />
+    /// <include file='doc\XmlSchemaAttributeGroupRef.uex'
+    // path='docs/doc[@for="XmlSchemaAttributeGroupRef"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
@@ -18,7 +19,8 @@ namespace System.Xml.Schema
     {
         XmlQualifiedName refName = XmlQualifiedName.Empty;
 
-        /// <include file='doc\XmlSchemaAttributeGroupRef.uex' path='docs/doc[@for="XmlSchemaAttributeGroupRef.RefName"]/*' />
+        /// <include file='doc\XmlSchemaAttributeGroupRef.uex'
+        // path='docs/doc[@for="XmlSchemaAttributeGroupRef.RefName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

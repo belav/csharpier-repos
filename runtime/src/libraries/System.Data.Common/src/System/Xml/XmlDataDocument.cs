@@ -40,11 +40,13 @@ namespace System.Xml
         private bool _optimizeStorage; // false if we should only have foilated regions.
         private ElementState _autoFoliationState; // When XmlBoundElement will foliate because of member functions, this will contain the foliation mode: usually this is
 
-        // ElementState.StrongFoliation, however when foliation occurs due to DataDocumentNavigator operations (InsertNode for example),
+        // ElementState.StrongFoliation, however when foliation occurs due to DataDocumentNavigator
+        // operations (InsertNode for example),
         // it is usually ElementState.WeakFoliation
         private bool _fAssociateDataRow; // if true, CreateElement will create and associate data rows w/ the newly created XmlBoundElement.
 
-        // If false, then CreateElement will just create the XmlBoundElement nodes. This is usefull for Loading case,
+        // If false, then CreateElement will just create the XmlBoundElement nodes. This is usefull for
+        // Loading case,
         // when CreateElement is called by DOM.
         private object _foliationLock;
         internal const string XSI_NIL = "xsi:nil";
@@ -91,13 +93,18 @@ namespace System.Xml
         }
 
         // This function attaches the DataSet to XmlDataDocument
-        // We also register a special listener (OnDataRowCreatedSpecial) to DataSet, so we know when we should setup all regular listeners (OnDataRowCreated, OnColumnChanging, etc).
+        // We also register a special listener (OnDataRowCreatedSpecial) to DataSet, so we know when we
+        // should setup all regular listeners (OnDataRowCreated, OnColumnChanging, etc).
         // We need to do this because of the following scenario:
         //  - XmlDataDocument doc = new XmlDataDocument();
-        //  - DataSet ds = doc.DataSet;     // doc.DataSet creates a data-set, however does not sets-up the regular listeners.
-        //  - ds.ReadXmlSchema();           // since there are regular listeners in doc that track ds schema changes, doc does not know about the new tables/columns/etc
-        //  - ds.ReadXmlData();             // ds is now filled, however doc has no content (since there were no listeners for the new created DataRow's)
-        // We can set-up listeners and track each change in schema, but it is more perf-friendly to do it laizily, all at once, when the first DataRow is created
+        //  - DataSet ds = doc.DataSet;     // doc.DataSet creates a data-set, however does not sets-up the
+        // regular listeners.
+        //  - ds.ReadXmlSchema();           // since there are regular listeners in doc that track ds schema
+        // changes, doc does not know about the new tables/columns/etc
+        //  - ds.ReadXmlData();             // ds is now filled, however doc has no content (since there
+        // were no listeners for the new created DataRow's)
+        // We can set-up listeners and track each change in schema, but it is more perf-friendly to do it
+        // laizily, all at once, when the first DataRow is created
         // (we rely on the fact that DataRowCreated is a DataSet wide event, rather than a DataTable event)
         [MemberNotNull(nameof(_dataSet))]
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
@@ -114,8 +121,10 @@ namespace System.Xml
             BindSpecialListeners();
         }
 
-        // after loading, all detached DataRows are synchronized with the xml tree and inserted to their tables
-        // or after setting the innerxml, synchronize the rows and if created new and detached, will be inserted.
+        // after loading, all detached DataRows are synchronized with the xml tree and inserted to their
+        // tables
+        // or after setting the innerxml, synchronize the rows and if created new and detached, will be
+        // inserted.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal void SyncRows(DataRow? parentRow, XmlNode node, bool fAddRowsToTable)
         {
@@ -169,7 +178,8 @@ namespace System.Xml
                     // get all field values.
                     SynchronizeRowFromRowElement(be);
 
-                    // defoliation will not be done on the node which is not RowElement, in case of node is externally being used
+                    // defoliation will not be done on the node which is not RowElement, in case of node is externally
+                    // being used
                     if (node == be)
                     {
                         // defoliate if possible
@@ -219,7 +229,8 @@ namespace System.Xml
             _ignoreDataSetEvents = true;
             _ignoreXmlEvents = true;
 
-            // Do the mapping. This could be a successive mapping in case of this scenario: xd = XmlDataDocument( emptyDataSet ); xd.Load( "file.xml" );
+            // Do the mapping. This could be a successive mapping in case of this scenario: xd =
+            // XmlDataDocument( emptyDataSet ); xd.Load( "file.xml" );
             _mapper.SetupMapping(this, _dataSet);
 
             if (DocumentElement != null)
@@ -244,7 +255,8 @@ namespace System.Xml
             e.Row = r;
         }
 
-        // Binds special listeners to catch the 1st data-row created. When the 1st DataRow is created, XmlDataDocument will automatically bind all regular listeners.
+        // Binds special listeners to catch the 1st data-row created. When the 1st DataRow is created,
+        // XmlDataDocument will automatically bind all regular listeners.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void BindSpecialListeners()
         {
@@ -363,10 +375,13 @@ namespace System.Xml
         )
         {
             // There are three states for the document:
-            //  - special listeners ON, no permananent listeners: this is when the data doc was created w/o any dataset, and the 1st time a new row/element
+            //  - special listeners ON, no permananent listeners: this is when the data doc was created w/o any
+            // dataset, and the 1st time a new row/element
             //    is created we should subscribe the permenent listeners.
-            //  - special listeners OFF, permanent listeners ON: this is when the data doc is loaded (from dataset or XML file) and synchronization takes place.
-            //  - special listeners OFF, permanent listeners OFF: this is then the data doc is LOADING (from dataset or XML file) - the synchronization is done by code,
+            //  - special listeners OFF, permanent listeners ON: this is when the data doc is loaded (from
+            // dataset or XML file) and synchronization takes place.
+            //  - special listeners OFF, permanent listeners OFF: this is then the data doc is LOADING (from
+            // dataset or XML file) - the synchronization is done by code,
             //    not based on listening to events.
 #if DEBUG
             // Cannot have both special and permananent listeners ON
@@ -380,16 +395,19 @@ namespace System.Xml
 
             if (!_fAssociateDataRow)
             {
-                // Loading state: create just the XmlBoundElement: the LoadTreeFromDataSet/LoadDataSetFromTree will take care of synchronization
+                // Loading state: create just the XmlBoundElement: the LoadTreeFromDataSet/LoadDataSetFromTree will
+                // take care of synchronization
                 return new XmlBoundElement(prefix, localName, namespaceURI, this);
             }
 
-            // This is the 1st time an element is being created on an empty XmlDataDocument - unbind special listeners, bind permanent ones and then go on w/
+            // This is the 1st time an element is being created on an empty XmlDataDocument - unbind special
+            // listeners, bind permanent ones and then go on w/
             // creation of this element
             EnsurePopulatedMode();
             Debug.Assert(_fDataRowCreatedSpecial == false);
 
-            // Loaded state: create a DataRow, this in turn will create and associate the XmlBoundElement, which we will return.
+            // Loaded state: create a DataRow, this in turn will create and associate the XmlBoundElement, which
+            // we will return.
             DataTable dt = _mapper.SearchMatchingTableSchema(localName, namespaceURI);
             if (dt != null)
             {
@@ -538,10 +556,13 @@ namespace System.Xml
             return docElem;
         }
 
-        // This function ensures that the special listeners are un-subscribed, the permanent listeners are subscribed and
+        // This function ensures that the special listeners are un-subscribed, the permanent listeners are
+        // subscribed and
         // CreateElement will attach DataRows to newly created XmlBoundElement.
-        // It should be called when we have special listeners hooked and we need to change from the special-listeners mode to the
-        // populated/permanenet mode where all listeners are correctly hooked up and the mapper is correctly set-up.
+        // It should be called when we have special listeners hooked and we need to change from the
+        // special-listeners mode to the
+        // populated/permanenet mode where all listeners are correctly hooked up and the mapper is correctly
+        // set-up.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void EnsurePopulatedMode()
         {
@@ -553,7 +574,8 @@ namespace System.Xml
             if (_fDataRowCreatedSpecial)
             {
                 UnBindSpecialListeners();
-                // If a special listener was ON, we should not have had an already set-up mapper or permanent listeners subscribed
+                // If a special listener was ON, we should not have had an already set-up mapper or permanent
+                // listeners subscribed
                 Debug.Assert(!_mapper.IsMapped());
                 Debug.Assert(!_fBoundToDocument);
                 Debug.Assert(!_fBoundToDataSet);
@@ -563,7 +585,8 @@ namespace System.Xml
 
                 // CreateElement should now create associate DataRows w/ new XmlBoundElement nodes
                 // We should do this ONLY if we switch from special listeners to permanent listeners. The reason is
-                // that DataDocumentNavigator wants to put XmlDataDocument in a batch mode, where CreateElement will just
+                // that DataDocumentNavigator wants to put XmlDataDocument in a batch mode, where CreateElement will
+                // just
                 // create a XmlBoundElement (see DataDocumentNavigator.CloneTree)
                 _fAssociateDataRow = true;
             }
@@ -572,13 +595,15 @@ namespace System.Xml
             Debug.Assert(_mapper.IsMapped());
             Debug.Assert(_fBoundToDataSet && _fBoundToDocument);
 #if DEBUG
-            // In case we EnsurePopulatedMode was called on an already populated mode, we should NOT change fAssociateDataRow
+            // In case we EnsurePopulatedMode was called on an already populated mode, we should NOT change
+            // fAssociateDataRow
             if (fDataRowCreatedSpecialOld == false)
                 Debug.Assert(fAssociateDataRowOld == _fAssociateDataRow);
 #endif
         }
 
-        // Move regions that are marked in ROM as nested children of row/rowElement as last children in XML fragment
+        // Move regions that are marked in ROM as nested children of row/rowElement as last children in XML
+        // fragment
         private void FixNestedChildren(DataRow row, XmlElement rowElement)
         {
             foreach (DataRelation dr in GetNestedChildRelations(row))
@@ -586,7 +611,8 @@ namespace System.Xml
                 foreach (DataRow r in row.GetChildRows(dr))
                 {
                     XmlElement? childElem = r.Element;
-                    // childElem can be null when we create XML from DataSet (XmlDataDocument( DataSet ) is called) and we insert rowElem of the parentRow before
+                    // childElem can be null when we create XML from DataSet (XmlDataDocument( DataSet ) is called) and
+                    // we insert rowElem of the parentRow before
                     // we insert the rowElem of children rows.
                     if (childElem != null)
                     {
@@ -599,7 +625,8 @@ namespace System.Xml
                             rowElement.AppendChild(childElem);
                         }
 #if DEBUG
-                        // We should not have changed the connected/disconnected state of the node (since the row state did not change)
+                        // We should not have changed the connected/disconnected state of the node (since the row state did
+                        // not change)
                         Debug.Assert(fIsChildConnected == IsConnected(childElem));
                         Debug.Assert(
                             IsRowLive(r) ? IsConnected(childElem) : !IsConnected(childElem)
@@ -610,7 +637,8 @@ namespace System.Xml
             }
         }
 
-        // This function accepts node params that are not row-elements. In this case, calling this function is a no-op
+        // This function accepts node params that are not row-elements. In this case, calling this function
+        // is a no-op
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal void Foliate(XmlBoundElement node, ElementState newState)
         {
@@ -618,7 +646,8 @@ namespace System.Xml
                 newState == ElementState.WeakFoliation || newState == ElementState.StrongFoliation
             );
 #if DEBUG
-            // If we want to strong foliate one of the non-row-elem in a region, then the region MUST be strong-foliated (or there must be no region)
+            // If we want to strong foliate one of the non-row-elem in a region, then the region MUST be
+            // strong-foliated (or there must be no region)
             // Do this only when we are not loading
             if (IsFoliationEnabled)
             {
@@ -888,7 +917,8 @@ namespace System.Xml
         {
 #if DEBUG
             {
-                // Make sure there is at most only one text column, and the text column (if present) is the one reported by row.Table.XmlText
+                // Make sure there is at most only one text column, and the text column (if present) is the one
+                // reported by row.Table.XmlText
                 DataColumnCollection columns = row.Table.Columns;
                 int cCols = columns.Count;
                 int cTextCols = 0;
@@ -978,7 +1008,8 @@ namespace System.Xml
                 }
                 catch (Exception e) when (Data.Common.ADP.IsCatchableExceptionType(e))
                 {
-                    // This can happens only when some threads are creating navigators (thus modifying this.pointers) while other threads are in the foreach loop.
+                    // This can happens only when some threads are creating navigators (thus modifying this.pointers)
+                    // while other threads are in the foreach loop.
                 }
             }
             //should never get to this point due to while (true) loop
@@ -1018,8 +1049,10 @@ namespace System.Xml
         }
 
         // This creates a tree and synchronize ROM w/ the created tree.
-        // It requires the populated mode to be on - in case we are not in populated mode, it will make the XmlDataDocument be in populated mode.
-        // It takes advantage of the fAssociateDataRow flag for populated mode, which allows creation of XmlBoundElement w/o associating DataRow objects.
+        // It requires the populated mode to be on - in case we are not in populated mode, it will make the
+        // XmlDataDocument be in populated mode.
+        // It takes advantage of the fAssociateDataRow flag for populated mode, which allows creation of
+        // XmlBoundElement w/o associating DataRow objects.
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         internal XmlNode CloneTree(DataPointer other)
         {
@@ -1030,7 +1063,8 @@ namespace System.Xml
             bool oldFoliationEnabled = IsFoliationEnabled;
             bool oldAssociateDataRow = _fAssociateDataRow;
 
-            // Caller should ensure that the EnforceConstraints == false. See 60486 for more info about why this was changed from DataSet.EnforceConstraints = false to an assert.
+            // Caller should ensure that the EnforceConstraints == false. See 60486 for more info about why this
+            // was changed from DataSet.EnforceConstraints = false to an assert.
             Debug.Assert(DataSet.EnforceConstraints == false);
             XmlNode newNode;
 
@@ -1165,7 +1199,8 @@ namespace System.Xml
                 XmlNodeType.Whitespace => CreateWhitespace(dp.Value),
                 XmlNodeType.SignificantWhitespace => CreateSignificantWhitespace(dp.Value),
 
-                //for the nodes that don't have values, but might have children -- only clone the node and leave the children untouched
+                //for the nodes that don't have values, but might have children -- only clone the node and leave the
+                // children untouched
                 XmlNodeType.Element => CreateElement(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.Attribute => CreateAttribute(dp.Prefix, dp.LocalName, dp.NamespaceURI),
                 XmlNodeType.EntityReference => CreateEntityReference(dp.Name),
@@ -1259,7 +1294,8 @@ namespace System.Xml
             {
                 _ignoreXmlEvents = true;
 
-                // Unhook the DataRowCreatedSpecial listener, since we no longer base on the first created DataRow to do the Bind
+                // Unhook the DataRowCreatedSpecial listener, since we no longer base on the first created DataRow
+                // to do the Bind
                 if (_fDataRowCreatedSpecial)
                     UnBindSpecialListeners();
 
@@ -1322,12 +1358,16 @@ namespace System.Xml
             _fAssociateDataRow = false;
 
             DataTable[] orderedTables = OrderTables(ds);
-            // problem is after we add support for Namespace  for DataTable, when inferring we do not guarantee that table would be
-            // in the same sequence that they were in XML because of namespace, some would be on different schema, so since they
-            // won't be in the same sequence as in XML, we may end up with having a child table, before its parent (which is not doable
+            // problem is after we add support for Namespace  for DataTable, when inferring we do not guarantee
+            // that table would be
+            // in the same sequence that they were in XML because of namespace, some would be on different
+            // schema, so since they
+            // won't be in the same sequence as in XML, we may end up with having a child table, before its
+            // parent (which is not doable
             // with XML; and this happend because they are in different namespace)
             // this kind of problems are known and please see comment in "OnNestedParentChange"
-            // so to fix it in general, we try to iterate over ordered tables instead of going over all tables in DataTableCollection with their own sequence
+            // so to fix it in general, we try to iterate over ordered tables instead of going over all tables
+            // in DataTableCollection with their own sequence
 
             try
             {
@@ -1443,7 +1483,8 @@ namespace System.Xml
         {
             Debug.Assert(row.Element == null);
             DataTable table = row.Table;
-            // We shoould NOT call CreateElement here, since CreateElement will create and attach a new DataRow to the element
+            // We shoould NOT call CreateElement here, since CreateElement will create and attach a new DataRow
+            // to the element
             XmlBoundElement rowElement = new XmlBoundElement(
                 string.Empty,
                 table.EncodedTableName,
@@ -1518,7 +1559,8 @@ namespace System.Xml
                 if (!IsFoliated(rowElement))
                 {
 #if DEBUG
-                    // If the new value is null, we should be already foliated if there is a DataPointer that points to the column
+                    // If the new value is null, we should be already foliated if there is a DataPointer that points to
+                    // the column
                     // (see OnRowChanging, case DataRowAction.Change)
                     if (Convert.IsDBNull(row[col, DataRowVersion.Current]))
                     {
@@ -1539,7 +1581,8 @@ namespace System.Xml
                         }
                         catch (Exception e) when (Data.Common.ADP.IsCatchableExceptionType(e))
                         {
-                            // We may get an exception if we are in foreach and a new pointer has been added to this.pointers. When this happens, we will skip this check and ignore the exceptions
+                            // We may get an exception if we are in foreach and a new pointer has been added to this.pointers.
+                            // When this happens, we will skip this check and ignore the exceptions
                         }
                     }
 #endif
@@ -1737,7 +1780,8 @@ namespace System.Xml
             Debug.Assert(row != null);
             Debug.Assert(rowElement != null);
 
-            // If user has cascading relationships, then columnChangeList will contains the changed columns only for the last row being cascaded
+            // If user has cascading relationships, then columnChangeList will contains the changed columns only
+            // for the last row being cascaded
             // but there will be multiple ROM events
             if (_columnChangeList.Count > 0)
             {
@@ -1763,9 +1807,11 @@ namespace System.Xml
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void OnDeleteRow(XmlBoundElement rowElement)
         {
-            // IgnoreXmlEvents s/b on since we are manipulating the XML tree and we not want this to reflect in ROM view.
+            // IgnoreXmlEvents s/b on since we are manipulating the XML tree and we not want this to reflect in
+            // ROM view.
             Debug.Assert(_ignoreXmlEvents);
-            // Special case when rowElem is document element: we create a new docElem, move the current one as a child of
+            // Special case when rowElem is document element: we create a new docElem, move the current one as a
+            // child of
             // the new created docElem, then process as if the docElem is not a rowElem
             if (rowElement == DocumentElement)
                 DemoteDocumentElement();
@@ -1779,7 +1825,8 @@ namespace System.Xml
         {
             // Note that this function is being called even if ignoreDataSetEvents == true.
 
-            // Foliate, so we can be able to preserve the nodes even if the DataRow has no longer values for the crtRecord.
+            // Foliate, so we can be able to preserve the nodes even if the DataRow has no longer values for the
+            // crtRecord.
             if (IsFoliated(rowElement))
                 return;
 
@@ -1817,7 +1864,8 @@ namespace System.Xml
                 }
                 catch (Exception e) when (Data.Common.ADP.IsCatchableExceptionType(e))
                 {
-                    // This can happens only when some threads are creating navigators (thus modifying this.pointers) while other threads are in the foreach loop.
+                    // This can happens only when some threads are creating navigators (thus modifying this.pointers)
+                    // while other threads are in the foreach loop.
                     // Solution is to re-try OnFoliated.
                 }
             }
@@ -1844,7 +1892,8 @@ namespace System.Xml
         )
         {
             Debug.Assert(child.Element == childElement && childElement.Row == child);
-            // This function is (and s/b) called as a result of ROM changes, therefore XML changes done here should not be sync-ed to ROM
+            // This function is (and s/b) called as a result of ROM changes, therefore XML changes done here
+            // should not be sync-ed to ROM
             Debug.Assert(_ignoreXmlEvents);
 #if DEBUG
             // In order to check that this move does not change the connected/disconnected state of the node
@@ -1866,7 +1915,8 @@ namespace System.Xml
                 }
                 else
                 {
-                    // no parent? Maybe the parentRow is during changing or childCol is the ID is set to null ( detached from the parent row ).
+                    // no parent? Maybe the parentRow is during changing or childCol is the ID is set to null ( detached
+                    // from the parent row ).
                     DataRelation? relation = GetNestedParentRelation(child!);
                     if (childCol == null || relation == null || Convert.IsDBNull(child[childCol]))
                     {
@@ -1887,14 +1937,18 @@ namespace System.Xml
                         {
                             EnsureNonRowDocumentElement().AppendChild(childElement);
                         }
-                        //else do nothing because its original parentRowInRelation will be changed so that this row will still be its child
+                        //else do nothing because its original parentRowInRelation will be changed so that this row will
+                        // still be its child
                     }
                 }
             }
 #if DEBUG
-            // We should not have changed the connected/disconnected state of the node (since the row state did not change) -- IOW if the original childElem was in dis-connected
-            // state and corresponded to a detached/deleted row, by adding it to the main tree we become inconsistent (since we have now a deleted/detached row in the main tree)
-            // Same goes when we remove a node from connected tree to make it a child of a row-node corresponding to a non-live row.
+            // We should not have changed the connected/disconnected state of the node (since the row state did
+            // not change) -- IOW if the original childElem was in dis-connected
+            // state and corresponded to a detached/deleted row, by adding it to the main tree we become
+            // inconsistent (since we have now a deleted/detached row in the main tree)
+            // Same goes when we remove a node from connected tree to make it a child of a row-node
+            // corresponding to a non-live row.
             Debug.Assert(fChildElementConnected == IsConnected(childElement));
             Debug.Assert(IsRowLive(child) ? IsConnected(childElement) : !IsConnected(childElement));
 #endif
@@ -1969,7 +2023,8 @@ namespace System.Xml
                 XmlNode? oldParent = args.OldParent;
                 XmlNode? newParent = args.NewParent;
 
-                // The code bellow assumes a move operation is fired by DOM in 2 steps: a Remvoe followed by an Insert - this is the 2nd part, the Insert.
+                // The code bellow assumes a move operation is fired by DOM in 2 steps: a Remvoe followed by an
+                // Insert - this is the 2nd part, the Insert.
                 Debug.Assert(oldParent == null);
                 if (IsConnected(newParent))
                 {
@@ -2166,7 +2221,8 @@ namespace System.Xml
                     case DataRowAction.Commit:
                         if (row.RowState == DataRowState.Detached)
                         {
-                            //by now, all the descendent of the element that is not of this region should have been promoted already
+                            //by now, all the descendent of the element that is not of this region should have been promoted
+                            // already
                             rowElement.RemoveAll();
                         }
                         break;
@@ -2268,7 +2324,8 @@ namespace System.Xml
                             {
                                 object proposedValue = row[c, DataRowVersion.Proposed];
                                 object currentValue = row[c, DataRowVersion.Current];
-                                // Foliate if proposedValue is DBNull; this way the DataPointer objects will point to a disconnected fragment after
+                                // Foliate if proposedValue is DBNull; this way the DataPointer objects will point to a disconnected
+                                // fragment after
                                 // the DBNull value is being set
                                 if (
                                     Convert.IsDBNull(proposedValue)
@@ -2325,10 +2382,13 @@ namespace System.Xml
             CollectionChangeEventArgs args
         )
         {
-            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
-            // args.Element is one of either the column (for Add and Remove actions or null, if the entire colection of columns is changing)
+            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or
+            // CollectionChangeAction.Refresh
+            // args.Element is one of either the column (for Add and Remove actions or null, if the entire
+            // colection of columns is changing)
 
-            // Disallow changing the columns collection (since we are subscribed only in populated mode, we allow changes in any state but non-populated mode)
+            // Disallow changing the columns collection (since we are subscribed only in populated mode, we
+            // allow changes in any state but non-populated mode)
             throw new InvalidOperationException(SR.DataDom_TableColumnsChange);
         }
 
@@ -2337,10 +2397,12 @@ namespace System.Xml
             CollectionChangeEventArgs args
         )
         {
-            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
+            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or
+            // CollectionChangeAction.Refresh
             // args.Element is a table
 
-            // Disallow changing the tables collection (since we are subscribed only in populated mode, we allow changes in any state but non-populated mode)
+            // Disallow changing the tables collection (since we are subscribed only in populated mode, we allow
+            // changes in any state but non-populated mode)
             throw new InvalidOperationException(SR.DataDom_DataSetTablesChange);
         }
 
@@ -2349,10 +2411,12 @@ namespace System.Xml
             CollectionChangeEventArgs args
         )
         {
-            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or CollectionChangeAction.Refresh
+            // args.Action is one of CollectionChangeAction.Add, CollectionChangeAction.Remove or
+            // CollectionChangeAction.Refresh
             // args.Element is a DataRelation
 
-            // Disallow changing the tables collection if there is data loaded and there are nested relationship that are added/refreshed
+            // Disallow changing the tables collection if there is data loaded and there are nested relationship
+            // that are added/refreshed
             DataRelation? rel = (DataRelation?)(args.Element);
             if (rel != null && rel.Nested)
                 throw new InvalidOperationException(SR.DataDom_DataSetNestedRelationsChange);
@@ -2928,7 +2992,8 @@ namespace System.Xml
                 {
                     ArrayList rowElemList = new ArrayList();
                     OnNonRowElementInsertedInFragment(be, rowElemList);
-                    // Set nested parent for the 1st level subregions (they should already be associated w/ Deleted or Detached rows)
+                    // Set nested parent for the 1st level subregions (they should already be associated w/ Deleted or
+                    // Detached rows)
                     while (rowElemList.Count > 0)
                     {
                         Debug.Assert(rowElemList[0] != null && rowElemList[0] is XmlBoundElement);
@@ -3046,7 +3111,8 @@ namespace System.Xml
                     break;
 
                 case DataRowState.Deleted:
-                    // Nothing to do: moving a region associated w/ a deleted row to another disconnected tree is a NO-OP.
+                    // Nothing to do: moving a region associated w/ a deleted row to another disconnected tree is a
+                    // NO-OP.
                     break;
 
                 case DataRowState.Unchanged:
@@ -3079,7 +3145,8 @@ namespace System.Xml
         {
             // non-row-elem is being inserted
             DataRow? row = rowElement.Row;
-            // Region should already have an associated data row (otherwise how was the original row-elem inserted ?)
+            // Region should already have an associated data row (otherwise how was the original row-elem
+            // inserted ?)
             Debug.Assert(row != null);
             SynchronizeRowFromRowElement(rowElement);
             if (rowElemList != null)
@@ -3090,7 +3157,8 @@ namespace System.Xml
             }
         }
 
-        // A non-row-elem was inserted into disconnected tree (fragment) from oldParent==null state (i.e. was disconnected)
+        // A non-row-elem was inserted into disconnected tree (fragment) from oldParent==null state (i.e.
+        // was disconnected)
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         private void OnNonRowElementInsertedInFragment(
             XmlBoundElement rowElement,
@@ -3099,7 +3167,8 @@ namespace System.Xml
         {
             // non-row-elem is being inserted
             DataRow? row = rowElement.Row;
-            // Region should already have an associated data row (otherwise how was the original row-elem inserted ?)
+            // Region should already have an associated data row (otherwise how was the original row-elem
+            // inserted ?)
             Debug.Assert(row != null);
             // Since oldParent == null, the only 2 row states should have been Detached or Deleted
             Debug.Assert(
@@ -3164,25 +3233,25 @@ namespace System.Xml
 
         /*
         internal static bool IsWhiteSpace(char ch) {
-            switch ( ch ) {
-                case '\u0009' :
-                case '\u000a' :
-                case '\u000d' :
-                case '\u0020' :
-                    return true;
-                default :
-                    return false;
-            }
+        switch ( ch ) {
+        case '\u0009' :
+        case '\u000a' :
+        case '\u000d' :
+        case '\u0020' :
+        return true;
+        default :
+        return false;
         }
-
+        }
+        
         internal static bool IsOnlyWhitespace( string str ) {
-            if (str != null) {
-                for (int index = 0; index < str.Length; index ++) {
-                    if (! IsWhiteSpace(str[index]))
-                        return false;
-                }
-            }
-            return true;
+        if (str != null) {
+        for (int index = 0; index < str.Length; index ++) {
+        if (! IsWhiteSpace(str[index]))
+        return false;
+        }
+        }
+        return true;
         }
         */
         [UnconditionalSuppressMessage(
@@ -3278,18 +3347,24 @@ namespace System.Xml
 
         public override XmlNodeList GetElementsByTagName(string name)
         {
-            // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be created,
-            // so the System.Xml iterator will throw if this happens during iteration. To avoid this, foliate everything
-            // before iteration, so iteration will not cause foliation (and as a result of this, creation of new nodes).
+            // Retrieving nodes from the returned nodelist may cause foliation which causes new nodes to be
+            // created,
+            // so the System.Xml iterator will throw if this happens during iteration. To avoid this, foliate
+            // everything
+            // before iteration, so iteration will not cause foliation (and as a result of this, creation of new
+            // nodes).
             XmlNodeList tempNodeList = base.GetElementsByTagName(name);
 
             _ = tempNodeList.Count;
             return tempNodeList;
         }
 
-        //  after adding Namespace support foir datatable, DataSet does not guarantee that infered tabels would be in the same sequence as they rae in XML, because
-        //  of Namespace. if a table is in different namespace than its children and DataSet, that table would efinetely be added to DataSet after its children. Its By Design
-        // so in order to maintain backward compatibility, we reorder the copy of the datatable collection and use it
+        //  after adding Namespace support foir datatable, DataSet does not guarantee that infered tabels
+        // would be in the same sequence as they rae in XML, because
+        //  of Namespace. if a table is in different namespace than its children and DataSet, that table
+        // would efinetely be added to DataSet after its children. Its By Design
+        // so in order to maintain backward compatibility, we reorder the copy of the datatable collection
+        // and use it
         private DataTable[] OrderTables(DataSet? ds)
         {
             DataTable[]? retValue = null;

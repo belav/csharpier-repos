@@ -174,7 +174,8 @@ namespace System.DirectoryServices.Tests
         [ConditionalFact(nameof(IsActiveDirectoryServer))]
         public void TestSchemaFilter()
         {
-            // using (ActiveDirectorySchemaClass schema = ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user"))
+            // using (ActiveDirectorySchemaClass schema =
+            // ActiveDirectorySchemaClass.FindByName(ActiveDirectoryContext, "user"))
             using (
                 ActiveDirectorySchema schema = ActiveDirectorySchema.GetSchema(
                     ActiveDirectoryContext

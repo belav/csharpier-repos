@@ -50,8 +50,10 @@ public class FileBufferingReadStream : Stream
     /// </summary>
     /// <param name="inner">The wrapping <see cref="Stream" />.</param>
     /// <param name="memoryThreshold">The maximum size to buffer in memory.</param>
-    /// <param name="bufferLimit">The maximum size that will be buffered before this <see cref="Stream"/> throws.</param>
-    /// <param name="tempFileDirectoryAccessor">Provides the temporary directory to which files are buffered to.</param>
+    /// <param name="bufferLimit">The maximum size that will be buffered before this <see
+    // cref="Stream"/> throws.</param>
+    /// <param name="tempFileDirectoryAccessor">Provides the temporary directory to which files are
+    // buffered to.</param>
     public FileBufferingReadStream(
         Stream inner,
         int memoryThreshold,
@@ -71,8 +73,10 @@ public class FileBufferingReadStream : Stream
     /// </summary>
     /// <param name="inner">The wrapping <see cref="Stream" />.</param>
     /// <param name="memoryThreshold">The maximum size to buffer in memory.</param>
-    /// <param name="bufferLimit">The maximum size that will be buffered before this <see cref="Stream"/> throws.</param>
-    /// <param name="tempFileDirectoryAccessor">Provides the temporary directory to which files are buffered to.</param>
+    /// <param name="bufferLimit">The maximum size that will be buffered before this <see
+    // cref="Stream"/> throws.</param>
+    /// <param name="tempFileDirectoryAccessor">Provides the temporary directory to which files are
+    // buffered to.</param>
     /// <param name="bytePool">The <see cref="ArrayPool{T}"/> to use.</param>
     public FileBufferingReadStream(
         Stream inner,
@@ -108,7 +112,8 @@ public class FileBufferingReadStream : Stream
     /// </summary>
     /// <param name="inner">The wrapping <see cref="Stream" />.</param>
     /// <param name="memoryThreshold">The maximum size to buffer in memory.</param>
-    /// <param name="bufferLimit">The maximum size that will be buffered before this <see cref="Stream"/> throws.</param>
+    /// <param name="bufferLimit">The maximum size that will be buffered before this <see
+    // cref="Stream"/> throws.</param>
     /// <param name="tempFileDirectory">The temporary directory to which files are buffered to.</param>
     public FileBufferingReadStream(
         Stream inner,
@@ -123,7 +128,8 @@ public class FileBufferingReadStream : Stream
     /// </summary>
     /// <param name="inner">The wrapping <see cref="Stream" />.</param>
     /// <param name="memoryThreshold">The maximum size to buffer in memory.</param>
-    /// <param name="bufferLimit">The maximum size that will be buffered before this <see cref="Stream"/> throws.</param>
+    /// <param name="bufferLimit">The maximum size that will be buffered before this <see
+    // cref="Stream"/> throws.</param>
     /// <param name="tempFileDirectory">The temporary directory to which files are buffered to.</param>
     /// <param name="bytePool">The <see cref="ArrayPool{T}"/> to use.</param>
     public FileBufferingReadStream(
@@ -254,7 +260,8 @@ public class FileBufferingReadStream : Stream
             "ASPNETCORE_" + Guid.NewGuid().ToString() + ".tmp"
         );
 
-        // Create a temp file with the correct Unix file mode before moving it to the assigned _tempFileName in the _tempFileDirectory.
+        // Create a temp file with the correct Unix file mode before moving it to the assigned _tempFileName
+        // in the _tempFileDirectory.
         if (!RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
         {
             var tempTempFileName = Path.GetTempFileName();
@@ -478,9 +485,11 @@ public class FileBufferingReadStream : Stream
         CancellationToken cancellationToken
     )
     {
-        // Set a minimum buffer size of 4K since the base Stream implementation has weird behavior when the stream is
+        // Set a minimum buffer size of 4K since the base Stream implementation has weird behavior when the
+        // stream is
         // seekable *and* the length is 0 (it passes in a buffer size of 1).
-        // See https://github.com/dotnet/runtime/blob/222415c56c9ea73530444768c0e68413eb374f5d/src/libraries/System.Private.CoreLib/src/System/IO/Stream.cs#L164-L184
+        // See
+        // https://github.com/dotnet/runtime/blob/222415c56c9ea73530444768c0e68413eb374f5d/src/libraries/System.Private.CoreLib/src/System/IO/Stream.cs#L164-L184
         bufferSize = Math.Max(4096, bufferSize);
 
         // If we're completed buffered then copy from the underlying source

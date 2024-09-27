@@ -116,7 +116,7 @@ class Driver
             Console.WriteLine("StaticConstructor2.StaticConstructor2 (1)");
             Driver.mre1.Set();
             throw new StaticConstructor2Exception();
-            /* Unreachable */
+/* Unreachable */
             Driver.mre2.Set();
             Console.WriteLine("StaticConstructor2.StaticConstructor2 (2)");
         }
@@ -165,7 +165,7 @@ class Driver
 
         if (Driver.mre2.WaitOne(500))
         {
-            /* We shouldn't reach Driver.mre.Set () in StaticConstructor2.cctor */
+/* We shouldn't reach Driver.mre.Set () in StaticConstructor2.cctor */
             Environment.Exit(4);
         }
 
@@ -176,7 +176,7 @@ class Driver
         {
             IsStaticConstructor2Viable();
             Console.WriteLine("StaticConstructor2 is viable");
-            /* A regular exception escaping the .cctor makes the type not usable */
+/* A regular exception escaping the .cctor makes the type not usable */
             Environment.Exit(5);
         }
         catch (TypeInitializationException e)
@@ -192,7 +192,7 @@ class Driver
             Console.WriteLine("StaticConstructor3.StaticConstructor3 (1)");
             Driver.mre1.Set();
             Thread.CurrentThread.Abort();
-            /* Unreachable */
+/* Unreachable */
             Driver.mre2.Set();
             Console.WriteLine("StaticConstructor3.StaticConstructor3 (2)");
             Environment.Exit(6);
@@ -224,7 +224,7 @@ class Driver
             {
                 StaticConstructor3.Init();
                 Console.WriteLine("cctor3 didn't throw?!?!");
-                /* StaticConstructor3 self aborted */
+/* StaticConstructor3 self aborted */
                 Environment.Exit(7);
             }
             catch (ThreadAbortException e)
@@ -253,7 +253,7 @@ class Driver
         {
             IsStaticConstructor3Viable();
             Console.WriteLine("StaticConstructor3 is viable");
-            /* A regular exception escaping the .cctor makes the type not usable */
+/* A regular exception escaping the .cctor makes the type not usable */
             Environment.Exit(9);
         }
         catch (TypeInitializationException e)

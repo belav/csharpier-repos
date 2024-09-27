@@ -161,7 +161,8 @@ namespace System.Security.Cryptography
             d = _H[3];
             e = _H[4];
 
-            // This function was unrolled because it seems to be doubling our performance with current compiler/VM.
+            // This function was unrolled because it seems to be doubling our performance with current
+            // compiler/VM.
             // Possibly roll up if this changes.
 
             // ---- Round 1 --------

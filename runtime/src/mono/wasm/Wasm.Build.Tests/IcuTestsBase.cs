@@ -27,7 +27,8 @@ public abstract class IcuTestsBase : TestMainJsTestBase
         public static string Slovak = "nedeľa";
     }
 
-    // custom file contains only locales "cy-GB", "is-IS", "bs-BA", "lb-LU" and fallback locale: "en-US":
+    // custom file contains only locales "cy-GB", "is-IS", "bs-BA", "lb-LU" and fallback locale:
+    // "en-US":
     public static string CustomIcuPath = Path.Combine(
         BuildEnvironment.TestAssetsPath,
         "icudt_custom.dat"
@@ -139,7 +140,8 @@ public abstract class IcuTestsBase : TestMainJsTestBase
         bool dotnetWasmFromRuntimePack = !(buildArgs.AOT || buildArgs.Config == "Release");
 
         buildArgs = buildArgs with { ProjectName = projectName };
-        // by default, we remove resource strings from an app. ICU tests are checking exception messages contents -> resource string keys are not enough
+        // by default, we remove resource strings from an app. ICU tests are checking exception messages
+        // contents -> resource string keys are not enough
         string extraProperties =
             $"<WasmIcuDataFileName>{shardName}</WasmIcuDataFileName><UseSystemResourceKeys>false</UseSystemResourceKeys>";
         if (onlyPredefinedCultures)

@@ -99,7 +99,7 @@ namespace Novell.Directory.Ldap.Rfc2251
         /// </summary>
         /// <param name="origRequest">Asn1Object of existing request
         /// </param>
-        /* package */
+/* package */
         public RfcExtendedRequest(Asn1Object[] origRequest)
             : base(origRequest, origRequest.Length)
         {

@@ -10,11 +10,11 @@ namespace System.Web.Util
     using System.Threading;
 
     /*
-     * ResourcePool provides a place to store expensive resources,
-     * such as network connections, that you want to dispose of when
-     * they are underused. A resource pool can be configured to timeout
-     * resources at a given interval, and to have a max limit of resources.
-     */
+    * ResourcePool provides a place to store expensive resources,
+    * such as network connections, that you want to dispose of when
+    * they are underused. A resource pool can be configured to timeout
+    * resources at a given interval, and to have a max limit of resources.
+    */
     class ResourcePool : IDisposable
     {
         ArrayList _resources; // the resources

@@ -56,7 +56,8 @@ IVariableDeclaratorOperation (Symbol: dynamic d1) (OperationKind.VariableDeclara
         }
 
         /// <summary>
-        /// This test documents the fact that there is no IConversionExpression between two objects of the same type.
+        /// This test documents the fact that there is no IConversionExpression between two objects of the
+        // same type.
         /// </summary>
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
@@ -151,7 +152,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         int /*<bind>*/i1 = f1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f1")
                     .WithArguments("float", "int")
@@ -204,8 +206,10 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
                 expectedDiagnostics,
                 additionalOperationTreeVerifier: (operation, compilation, syntax) =>
                 {
-                    // This scenario, where the syntax has IsMissing set, is special cased. We remove the conversion, and leave
-                    // just an IInvalidOperation with null type. First assert that our assumptions are true, then test the actual
+                    // This scenario, where the syntax has IsMissing set, is special cased. We remove the conversion,
+                    // and leave
+                    // just an IInvalidOperation with null type. First assert that our assumptions are true, then test
+                    // the actual
                     // result
                     var initializerSyntax = ((VariableDeclaratorSyntax)syntax).Initializer.Value;
                     var typeInfo = compilation
@@ -300,7 +304,8 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'int' to 'Program.Enum1'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'int' to 'Program.Enum1'. An explicit conversion exists
+                // (are you missing a cast?)
                 //         Enum1 /*<bind>*/e1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int", "Enum1")
@@ -344,7 +349,8 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (5,30): error CS0266: Cannot implicitly convert type 'int' to 'Enum1'. An explicit conversion exists (are you missing a cast?)
+                // (5,30): error CS0266: Cannot implicitly convert type 'int' to 'Enum1'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         Enum1 /*<bind>*/e1 = 1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "1")
                     .WithArguments("int", "Enum1")
@@ -725,7 +731,8 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
         }
 
         /// <summary>
-        /// This test documents the fact that <c>default(T)</c> is already T, and does not introduce a conversion
+        /// This test documents the fact that <c>default(T)</c> is already T, and does not introduce a
+        // conversion
         /// </summary>
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
@@ -904,7 +911,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i2) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'int?' to 'int'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         int /*<bind>*/i2 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int?", "int")
@@ -1164,7 +1172,8 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,41): error CS1526: A new expression requires an argument list or (), [], or {} after type
+                // file.cs(8,41): error CS1526: A new expression requires an argument list or (), [], or {} after
+                // type
                 //         C1 /*<bind>*/c1 = new/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadNewExpr, ";").WithLocation(8, 41),
             };
@@ -1255,7 +1264,8 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'C1' to 'I1'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'C1' to 'I1'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         I1 /*<bind>*/i1 = new C1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new C1()")
                     .WithArguments("C1", "I1")
@@ -1400,7 +1410,8 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'I2' to 'I1'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'I2' to 'I1'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         I1 /*<bind>*/i1 = i2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i2")
                     .WithArguments("I2", "I1")
@@ -1718,7 +1729,8 @@ IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'object' to 'System.Array'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'object' to 'System.Array'. An explicit conversion exists
+                // (are you missing a cast?)
                 //         Array /*<bind>*/a1 = new object()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
                     .WithArguments("object", "System.Array")
@@ -1804,7 +1816,8 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.In
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'object' to 'System.Collections.Generic.IList<int>'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'object' to 'System.Collections.Generic.IList<int>'. An
+                // explicit conversion exists (are you missing a cast?)
                 //         IList<int> /*<bind>*/a1 = new object()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
                     .WithArguments("object", "System.Collections.Generic.IList<int>")
@@ -2097,7 +2110,8 @@ IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'C2<C4>' to 'I1<C3>'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'C2<C4>' to 'I1<C3>'. An explicit conversion exists (are
+                // you missing a cast?)
                 //         I1<C3> /*<bind>*/c1 = c2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
                     .WithArguments("C2<C4>", "I1<C3>")
@@ -2206,7 +2220,8 @@ IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarat
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'C2<C3>' to 'I1<C4>'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'C2<C3>' to 'I1<C4>'. An explicit conversion exists (are
+                // you missing a cast?)
                 //         I1<C4> /*<bind>*/c1 = c2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
                     .WithArguments("C2<C3>", "I1<C4>")
@@ -2425,7 +2440,8 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'T' to 'I1'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'T' to 'I1'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         I1 /*<bind>*/i1 = new T()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new T()")
                     .WithArguments("T", "I1")
@@ -2608,7 +2624,8 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0403: Cannot convert null to type parameter 'T' because it could be a non-nullable value type. Consider using 'default(T)' instead.
+                // CS0403: Cannot convert null to type parameter 'T' because it could be a non-nullable value type.
+                // Consider using 'default(T)' instead.
                 //         T /*<bind>*/t = null/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_TypeVarCantBeNull, "null")
                     .WithArguments("T")
@@ -3235,7 +3252,8 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'int' to 'sbyte'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'int' to 'sbyte'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int", "sbyte")
@@ -3614,7 +3632,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32* i1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'void*' to 'int*'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'void*' to 'int*'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         int* /*<bind>*/i1 = v1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "v1")
                     .WithArguments("void*", "int*")
@@ -3658,7 +3677,8 @@ IVariableDeclaratorOperation (Symbol: System.Void* v1) (OperationKind.VariableDe
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'int' to 'void*'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'int' to 'void*'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         void* /*<bind>*/v1 = 0/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "0")
                     .WithArguments("int", "void*")
@@ -3754,14 +3774,16 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "num")
                     .WithArguments("int", "bool")
                     .WithLocation(9, 60),
-                // CS1662: Cannot convert lambda expression to intended delegate type because some of the return types in the block are not implicitly convertible to the delegate return type
+                // CS1662: Cannot convert lambda expression to intended delegate type because some of the return
+                // types in the block are not implicitly convertible to the delegate return type
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num => num/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "num")
                     .WithArguments("lambda expression")
                     .WithLocation(9, 60),
             };
 
-            // Due to https://github.com/dotnet/roslyn/issues/20291, we cannot verify that the types of the ioperation tree and the semantic model
+            // Due to https://github.com/dotnet/roslyn/issues/20291, we cannot verify that the types of the
+            // ioperation tree and the semantic model
             // match, as they do not actually match.
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
                 source,
@@ -3880,7 +3902,8 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         /*<bind>*/return f;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f")
                     .WithArguments("float", "int")
@@ -4275,7 +4298,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // (6,27): error CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // (6,27): error CS0266: Cannot implicitly convert type 'float' to 'int'. An explicit conversion
+                // exists (are you missing a cast?)
                 //         int /*<bind>*/i = (float)1.0/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(float)1.0")
                     .WithArguments("float", "int")
@@ -4507,7 +4531,8 @@ enum E2 : byte
 }
 ";
 
-            // Note: The lack of a constant value for the conversion is expected here, it matches the semantic model.
+            // Note: The lack of a constant value for the conversion is expected here, it matches the semantic
+            // model.
             // Because the enum value is larger than the destination enum, the conversion is bad
             string expectedOperationTree =
                 @"
@@ -5584,7 +5609,8 @@ IVariableDeclaratorOperation (Symbol: System.Int32? e1) (OperationKind.VariableD
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // CS0266: Cannot implicitly convert type 'E1?' to 'int?'. An explicit conversion exists (are you missing a cast?)
+                // CS0266: Cannot implicitly convert type 'E1?' to 'int?'. An explicit conversion exists (are you
+                // missing a cast?)
                 //         int? /*<bind>*/e1 = (E1?)e/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E1?)e")
                     .WithArguments("E1?", "int?")
@@ -6442,14 +6468,17 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
             public Func<SyntaxNode, SyntaxNode> SyntaxSelector { get; set; }
 
             /// <summary>
-            /// Verifies that the given operation has the type information that the semantic model has for the given
+            /// Verifies that the given operation has the type information that the semantic model has for the
+            // given
             /// syntax node. A selector is used to walk the operation tree and syntax tree for the final
             /// nodes to compare type info for.
             ///
             /// <see cref="SyntaxSelector"/> is used to select the syntax node to test.
             /// <see cref="OperationSelector"/> is used to select the IConversion node to test.
-            /// <see cref="ConversionChildSelector"/> is used to select what child node of the IConversion to compare original types to.
-            /// this is useful for multiple conversion scenarios where we end up with multiple IConversion nodes in the tree.
+            /// <see cref="ConversionChildSelector"/> is used to select what child node of the IConversion to
+            // compare original types to.
+            /// this is useful for multiple conversion scenarios where we end up with multiple IConversion nodes
+            // in the tree.
             /// </summary>
             public void Verify(
                 IOperation variableDeclaration,

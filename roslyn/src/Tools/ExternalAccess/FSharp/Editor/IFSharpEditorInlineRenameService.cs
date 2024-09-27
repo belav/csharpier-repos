@@ -86,7 +86,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
         bool HasOverloads { get; }
 
         /// <summary>
-        /// Whether the Rename Overloads option should be forced to true. Used if rename is invoked from within a nameof expression.
+        /// Whether the Rename Overloads option should be forced to true. Used if rename is invoked from
+        // within a nameof expression.
         /// </summary>
         bool ForceRenameOverloads { get; }
 
@@ -144,7 +145,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
 
         /// <summary>
         /// Called before the rename is applied to the specified documents in the workspace.  Return
-        /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be canceled.
+        /// <see langword="true"/> if rename should proceed, or <see langword="false"/> if it should be
+        // canceled.
         /// </summary>
         bool TryOnBeforeGlobalSymbolRenamed(
             Workspace workspace,

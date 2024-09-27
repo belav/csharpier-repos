@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Linq;
@@ -85,7 +86,8 @@ namespace System.Web.Http.Controllers
 
         private static FilterScope SelectLastOverrideScope<T>(List<FilterInfo> overrideFilters)
         {
-            // A filter type (such as action filter) can be overridden, which means every filter of that type at an
+            // A filter type (such as action filter) can be overridden, which means every filter of that type at
+            // an
             // earlier scope must be ignored. Determine the scope of the last override filter (if any). Only
             // filters at this scope or later will be processed.
 

@@ -4,7 +4,7 @@ using System.Reflection;
 
 class Driver
 {
-    /*Test that GC handles interning failure correctly*/
+/*Test that GC handles interning failure correctly*/
     static void DumpStuff()
     {
         Console.WriteLine("CWL under OOM - should not print {0}", 99);

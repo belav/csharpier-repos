@@ -11,18 +11,23 @@ namespace System.Net.Mail
     using System.Net.Mime;
 
     // RFC 2822 Section 3.2.5 - Quoted strings
-    // When a string of characters does not conform to an atom string (Section 3.2.4), it must be enclosed in double
-    // quotes.  This allows for white spaces, quoted/escaped characters, etc.  ("Say hello. \"hello!\" ")
+    // When a string of characters does not conform to an atom string (Section 3.2.4), it must be
+    // enclosed in double
+    // quotes.  This allows for white spaces, quoted/escaped characters, etc.  ("Say hello. \"hello!\"
+    // ")
     //
-    // For robustness, we allow the bounding double quotes to be omitted when we have another clear delineator such as
-    // a comma: (abc@x.com, billy bob bob@bob.com), where the display name 'billy bob' should have been quoted.
+    // For robustness, we allow the bounding double quotes to be omitted when we have another clear
+    // delineator such as
+    // a comma: (abc@x.com, billy bob bob@bob.com), where the display name 'billy bob' should have been
+    // quoted.
     //
     // Quoted strings are allowed as MailAddress components local-part and display-name.
     // e.g. "display name" <"user name"@domain>
     internal static class QuotedStringFormatReader
     {
         //
-        // This method reads a standard quoted string. Departing from the RFC, Unicode is permitted for display-name.
+        // This method reads a standard quoted string. Departing from the RFC, Unicode is permitted for
+        // display-name.
         //
         // Preconditions:
         //  - Index must be within the bounds of the data string.
@@ -106,7 +111,8 @@ namespace System.Net.Mail
         //   e.g. In (my name username@domain), starting at index=5 (e) returns index=-1.
         //
         // A FormatException will be thrown if:
-        // - A non-escaped character is encountered that is not valid in a quoted string.  This includes double quotes.
+        // - A non-escaped character is encountered that is not valid in a quoted string.  This includes
+        // double quotes.
         // - A Unicode character is encountered and Unicode has not been allowed.
         //
         internal static int ReadReverseUnQuoted(
@@ -157,8 +163,10 @@ namespace System.Net.Mail
             return index;
         }
 
-        // Checks for Unicode characters and characters not allowed in quoted-strings. A quoted string may contain
-        // non-whitespace control characters as well as all remaining ASCII chars except backslash and double quote.
+        // Checks for Unicode characters and characters not allowed in quoted-strings. A quoted string may
+        // contain
+        // non-whitespace control characters as well as all remaining ASCII chars except backslash and
+        // double quote.
         private static bool IsValidQtext(bool allowUnicode, char ch)
         {
             if (ch > MailBnfHelper.Ascii7bitMaxValue)

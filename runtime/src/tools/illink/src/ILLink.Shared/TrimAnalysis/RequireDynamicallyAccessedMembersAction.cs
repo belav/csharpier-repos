@@ -1,5 +1,6 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -32,7 +33,8 @@ namespace ILLink.Shared.TrimAnalysis
                     && genericParam.GenericParameter.HasDefaultConstructorConstraint()
                 )
                 {
-                    // We allow a new() constraint on a generic parameter to satisfy DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+                    // We allow a new() constraint on a generic parameter to satisfy
+                    // DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
                 }
                 else if (
                     uniqueValue
@@ -87,7 +89,8 @@ namespace ILLink.Shared.TrimAnalysis
                         )
                     )
                     {
-                        // Intentionally ignore - it's not wrong for code to call Type.GetType on non-existing name, the code might expect null/exception back.
+                        // Intentionally ignore - it's not wrong for code to call Type.GetType on non-existing name, the
+                        // code might expect null/exception back.
                     }
                     else
                     {

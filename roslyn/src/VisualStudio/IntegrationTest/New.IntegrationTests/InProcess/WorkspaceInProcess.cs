@@ -267,7 +267,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 );
 
                 // Calling DefaultNavigateToSearchHost.IsFullyLoadedAsync starts the fire-and-forget asynchronous
-                // operation to populate the remote host. The call to WaitAllAsync below will wait for that operation to
+                // operation to populate the remote host. The call to WaitAllAsync below will wait for that
+                // operation to
                 // complete.
                 await searchHost.IsFullyLoadedAsync(cancellationToken);
             }
@@ -290,7 +291,8 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
         }
 
         /// <summary>
-        /// This event listener is an adapter to expose asynchronous file save operations to Roslyn via its standard
+        /// This event listener is an adapter to expose asynchronous file save operations to Roslyn via its
+        // standard
         /// workspace event waiters.
         /// </summary>
         private sealed class RunningDocumentTableEventListener

@@ -17,9 +17,12 @@ namespace System.Text.Unicode
         internal const int MaxBytesPerScalar = 4;
 
         /// <summary>
-        /// Returns the byte index in <paramref name="utf8Data"/> where the first invalid UTF-8 sequence begins,
-        /// or -1 if the buffer contains no invalid sequences. Also outs the <paramref name="isAscii"/> parameter
-        /// stating whether all data observed (up to the first invalid sequence or the end of the buffer, whichever
+        /// Returns the byte index in <paramref name="utf8Data"/> where the first invalid UTF-8 sequence
+        // begins,
+        /// or -1 if the buffer contains no invalid sequences. Also outs the <paramref name="isAscii"/>
+        // parameter
+        /// stating whether all data observed (up to the first invalid sequence or the end of the buffer,
+        // whichever
         /// comes first) is ASCII.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -76,7 +79,8 @@ namespace System.Text.Unicode
             // the 0x80 bit of each byte of 'upperIndicator' will be set iff the word has value > 'Z'
             uint upperIndicator = value + 0x8080_8080u - 0x5B5B_5B5Bu;
 
-            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'A' and <= 'Z'
+            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'A' and <=
+            // 'Z'
             uint combinedIndicator = (lowerIndicator ^ upperIndicator);
 
             // the 0x20 bit of each byte of 'mask' will be set iff the word has value >= 'A' and <= 'Z'
@@ -106,7 +110,8 @@ namespace System.Text.Unicode
             // the 0x80 bit of each byte of 'upperIndicator' will be set iff the word has value > 'z'
             uint upperIndicator = value + 0x8080_8080u - 0x7B7B_7B7Bu;
 
-            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <= 'z'
+            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <=
+            // 'z'
             uint combinedIndicator = (lowerIndicator ^ upperIndicator);
 
             // the 0x20 bit of each byte of 'mask' will be set iff the word has value >= 'a' and <= 'z'
@@ -135,7 +140,8 @@ namespace System.Text.Unicode
             // the 0x80 bit of each byte of 'upperIndicator' will be set iff the word has value > 'z'
             ulong upperIndicator = value + 0x8080_8080_8080_8080ul - 0x7B7B_7B7B_7B7B_7B7Bul;
 
-            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <= 'z'
+            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <=
+            // 'z'
             ulong combinedIndicator = (lowerIndicator ^ upperIndicator);
 
             // the 0x20 bit of each byte of 'mask' will be set iff the word has value >= 'a' and <= 'z'
@@ -164,7 +170,8 @@ namespace System.Text.Unicode
             // the 0x80 bit of each byte of 'upperIndicator' will be set iff the word has value > 'Z'
             ulong upperIndicator = value + 0x8080_8080_8080_8080ul - 0x5B5B_5B5B_5B5B_5B5Bul;
 
-            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <= 'z'
+            // the 0x80 bit of each byte of 'combinedIndicator' will be set iff the word has value >= 'a' and <=
+            // 'z'
             ulong combinedIndicator = (lowerIndicator ^ upperIndicator);
 
             // the 0x20 bit of each byte of 'mask' will be set iff the word has value >= 'a' and <= 'z'
@@ -293,7 +300,8 @@ namespace System.Text.Unicode
             Vector128<sbyte> lowIndicator1 = Vector128.Create((sbyte)(0x80 - 'A')) + vec1.AsSByte();
             Vector128<sbyte> lowIndicator2 = Vector128.Create((sbyte)(0x80 - 'A')) + vec2.AsSByte();
 
-            // the 0x80 bit of each word of 'combinedIndicator' will be set iff the word has value >= 'A' and <= 'Z'
+            // the 0x80 bit of each word of 'combinedIndicator' will be set iff the word has value >= 'A' and <=
+            // 'Z'
             Vector128<sbyte> combIndicator1 = Vector128.LessThan(
                 Vector128.Create(unchecked((sbyte)(('Z' - 'A') - 0x80))),
                 lowIndicator1

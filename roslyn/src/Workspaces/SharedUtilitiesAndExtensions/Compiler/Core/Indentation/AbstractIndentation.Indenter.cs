@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Indentation
                 if (indentStyle == FormattingOptions2.IndentStyle.None)
                     return null;
 
-                // If the user has explicitly set 'block' indentation, or they're in an inactive preprocessor region,
+                // If the user has explicitly set 'block' indentation, or they're in an inactive preprocessor
+                // region,
                 // then just do simple block indentation.
                 if (
                     indentStyle == FormattingOptions2.IndentStyle.Block
@@ -97,7 +98,8 @@ namespace Microsoft.CodeAnalysis.Indentation
 
             private readonly IndentationResult? GetDesiredSmartIndentation()
             {
-                // For smart indent, we generally will be computing from either the previous token in the code, or in a
+                // For smart indent, we generally will be computing from either the previous token in the code, or
+                // in a
                 // few special cases, the previous trivia.
                 var token = TryGetPrecedingVisibleToken();
 

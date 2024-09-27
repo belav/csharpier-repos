@@ -25,10 +25,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlFormAdapter class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlFormAdapter class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,
@@ -216,7 +216,8 @@ namespace System.Web.UI.MobileControls.Adapters
         // Return true if actually wrote any head elements.  If called with
         // null, this returns whether head elements would be written if called
         // with a real writer.
-        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderExtraHeadElements"]/*' />
+        /// <include file='doc\HtmlFormAdapter.uex'
+        // path='docs/doc[@for="HtmlFormAdapter.RenderExtraHeadElements"]/*' />
         protected virtual bool RenderExtraHeadElements(HtmlMobileTextWriter writer)
         {
             bool result = false;
@@ -279,7 +280,8 @@ namespace System.Web.UI.MobileControls.Adapters
             return result;
         }
 
-        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderBodyTag"]/*' />
+        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderBodyTag"]/*'
+        // />
         protected virtual void RenderBodyTag(HtmlMobileTextWriter writer, IDictionary attributes)
         {
             writer.WriteBeginTag("body");
@@ -290,7 +292,8 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.WriteLine(">");
         }
 
-        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.ShouldRenderFormTag"]/*' />
+        /// <include file='doc\HtmlFormAdapter.uex'
+        // path='docs/doc[@for="HtmlFormAdapter.ShouldRenderFormTag"]/*' />
         protected virtual bool ShouldRenderFormTag()
         {
             return true;
@@ -298,7 +301,8 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private bool _renderPager = true;
 
-        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.DisablePager"]/*' />
+        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.DisablePager"]/*'
+        // />
         protected internal void DisablePager()
         {
             _renderPager = false;
@@ -349,7 +353,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderPagerTag"]/*' />
+        /// <include file='doc\HtmlFormAdapter.uex' path='docs/doc[@for="HtmlFormAdapter.RenderPagerTag"]/*'
+        // />
         protected internal virtual void RenderPagerTag(
             HtmlMobileTextWriter writer,
             int pageToNavigate,

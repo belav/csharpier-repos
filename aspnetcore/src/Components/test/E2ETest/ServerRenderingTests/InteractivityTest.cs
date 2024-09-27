@@ -75,7 +75,8 @@ public class InteractivityTest
     {
         Navigate($"{ServerPathBase}/not-explicitly-referenced-in-wasm-code");
 
-        // The element with id success is only rendered when webassembly has successfully loaded the component.
+        // The element with id success is only rendered when webassembly has successfully loaded the
+        // component.
         Browser.Exists(By.Id("success"));
     }
 
@@ -216,7 +217,8 @@ public class InteractivityTest
             // One component
             new[] { AddServerPrerenderedId },
             new[] { AddWebAssemblyPrerenderedId },
-            // Multiple components, mixing all combinations of Server/WebAssembly and prerendered/non-prerendered
+            // Multiple components, mixing all combinations of Server/WebAssembly and
+            // prerendered/non-prerendered
             new[]
             {
                 AddServerPrerenderedId,

@@ -27,7 +27,8 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             catch (AggregateException)
             {
                 // This is how we "skip" tests that fail on BuildServiceProvider (broken object graphs).
-                // We care mainly about exercising the non-throwing code path so we fallback to the default BuildServiceProvider
+                // We care mainly about exercising the non-throwing code path so we fallback to the default
+                // BuildServiceProvider
                 return collection.BuildServiceProvider();
             }
         }

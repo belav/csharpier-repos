@@ -4,16 +4,19 @@
 namespace Microsoft.EntityFrameworkCore.Diagnostics;
 
 /// <summary>
-///     Event IDs for relational events that correspond to messages logged to an <see cref="ILogger" />
+///     Event IDs for relational events that correspond to messages logged to an <see cref="ILogger"
+// />
 ///     and events sent to a <see cref="DiagnosticSource" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure the
+///         These IDs are also used with <see cref="WarningsConfigurationBuilder" /> to configure
+// the
 ///         behavior of warnings.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and diagnostics</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-diagnostics">Logging, events, and
+// diagnostics</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public static class RelationalEventId
@@ -127,7 +130,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionOpening = MakeConnectionId(Id.ConnectionOpening);
@@ -140,7 +144,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionOpened = MakeConnectionId(Id.ConnectionOpened);
@@ -153,7 +158,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionClosing = MakeConnectionId(Id.ConnectionClosing);
@@ -166,13 +172,15 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionClosed = MakeConnectionId(Id.ConnectionClosed);
 
     /// <summary>
-    ///     A database connection is going to be disposed. This event is only triggered when Entity Framework is responsible for
+    ///     A database connection is going to be disposed. This event is only triggered when Entity
+    // Framework is responsible for
     ///     disposing the connection.
     /// </summary>
     /// <remarks>
@@ -180,13 +188,15 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionDisposing = MakeConnectionId(Id.ConnectionDisposing);
 
     /// <summary>
-    ///     A database connection has been disposed. This event is only triggered when Entity Framework is responsible for
+    ///     A database connection has been disposed. This event is only triggered when Entity Framework
+    // is responsible for
     ///     disposing the connection.
     /// </summary>
     /// <remarks>
@@ -194,7 +204,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionDisposed = MakeConnectionId(Id.ConnectionDisposed);
@@ -207,7 +218,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionErrorEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionError = MakeConnectionId(Id.ConnectionError);
@@ -220,7 +232,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionCreatingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionCreatingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionCreating = MakeConnectionId(Id.ConnectionCreating);
@@ -233,7 +246,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Connection" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionCreatedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionCreatedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ConnectionCreated = MakeConnectionId(Id.ConnectionCreated);
@@ -250,7 +264,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandCanceled = MakeCommandId(Id.CommandCanceled);
@@ -263,7 +278,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandCorrelatedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandCorrelatedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandCreating = MakeCommandId(Id.CommandCreating);
@@ -276,7 +292,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandCreated = MakeCommandId(Id.CommandCreated);
@@ -289,7 +306,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandInitialized = MakeCommandId(Id.CommandInitialized);
@@ -302,7 +320,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandExecuting = MakeCommandId(Id.CommandExecuting);
@@ -315,7 +334,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandExecutedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandExecuted = MakeCommandId(Id.CommandExecuted);
@@ -328,7 +348,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="CommandErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="CommandErrorEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CommandError = MakeCommandId(Id.CommandError);
@@ -346,7 +367,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionStarted = MakeTransactionId(Id.TransactionStarted);
@@ -359,7 +381,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionStartingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionStartingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionStarting = MakeTransactionId(Id.TransactionStarting);
@@ -372,7 +395,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionUsed = MakeTransactionId(Id.TransactionUsed);
@@ -385,7 +409,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionCommitting = MakeTransactionId(
@@ -400,7 +425,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionCommitted = MakeTransactionId(
@@ -415,7 +441,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionRollingBack = MakeTransactionId(
@@ -430,7 +457,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionRolledBack = MakeTransactionId(
@@ -445,7 +473,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CreatingTransactionSavepoint = MakeTransactionId(
@@ -460,7 +489,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId CreatedTransactionSavepoint = MakeTransactionId(
@@ -475,7 +505,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId RollingBackToTransactionSavepoint = MakeTransactionId(
@@ -490,7 +521,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId RolledBackToTransactionSavepoint = MakeTransactionId(
@@ -505,7 +537,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ReleasingTransactionSavepoint = MakeTransactionId(
@@ -520,7 +553,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEndEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ReleasedTransactionSavepoint = MakeTransactionId(
@@ -535,7 +569,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionDisposed = MakeTransactionId(Id.TransactionDisposed);
@@ -548,20 +583,23 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionErrorEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TransactionError = MakeTransactionId(Id.TransactionError);
 
     /// <summary>
-    ///     An application may have expected an ambient transaction to be used when it was actually ignored.
+    ///     An application may have expected an ambient transaction to be used when it was actually
+    // ignored.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ConnectionEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId AmbientTransactionWarning = MakeTransactionId(
@@ -576,7 +614,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId AmbientTransactionEnlisted = MakeTransactionId(
@@ -591,7 +630,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Transaction" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TransactionEnlistedEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExplicitTransactionEnlisted = MakeTransactionId(
@@ -606,7 +646,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="DataReaderDisposingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="DataReaderDisposingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId DataReaderDisposing = MakeCommandId(Id.DataReaderDisposing);
@@ -619,7 +660,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Database.Command" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="DataReaderClosingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="DataReaderClosingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId DataReaderClosing = MakeCommandId(Id.DataReaderClosing);
@@ -636,7 +678,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigratorConnectionEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigratorConnectionEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrateUsingConnection = MakeMigrationsId(
@@ -651,7 +694,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationReverting = MakeMigrationsId(Id.MigrationReverting);
@@ -664,7 +708,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationApplying = MakeMigrationsId(Id.MigrationApplying);
@@ -677,7 +722,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationGeneratingDownScript = MakeMigrationsId(
@@ -692,7 +738,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationScriptingEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationGeneratingUpScript = MakeMigrationsId(
@@ -707,7 +754,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigratorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigratorEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationsNotApplied = MakeMigrationsId(Id.MigrationsNotApplied);
@@ -720,7 +768,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationAssemblyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationAssemblyEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationsNotFound = MakeMigrationsId(Id.MigrationsNotFound);
@@ -733,7 +782,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationTypeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationTypeEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId MigrationAttributeMissingWarning = MakeMigrationsId(
@@ -748,7 +798,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MigrationColumnOperationEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MigrationColumnOperationEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ColumnOrderIgnoredWarning = MakeMigrationsId(
@@ -767,7 +818,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Query" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="TwoSqlExpressionsEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="TwoSqlExpressionsEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId QueryPossibleUnintendedUseOfEqualsWarning = MakeQueryId(
@@ -775,7 +827,8 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     A query is loading multiple related collections without configuring a <see cref="QuerySplittingBehavior" />.
+    ///     A query is loading multiple related collections without configuring a <see
+    // cref="QuerySplittingBehavior" />.
     /// </summary>
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Query" /> category.
@@ -792,7 +845,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Query" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId NonQueryOperationFailed = MakeQueryId(
@@ -807,7 +861,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Query" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecuteDeleteFailed = MakeQueryId(Id.ExecuteDeleteFailed);
@@ -820,7 +875,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Query" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="DbContextTypeErrorEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ExecuteUpdateFailed = MakeQueryId(Id.ExecuteUpdateFailed);
@@ -837,7 +893,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ModelValidationKeyDefaultValueWarning = MakeValidationId(
@@ -852,7 +909,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId BoolWithDefaultWarning = MakeValidationId(
@@ -867,7 +925,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="IndexEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="IndexEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId AllIndexPropertiesNotToMappedToAnyTable = MakeValidationId(
@@ -875,14 +934,16 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     An index specifies properties some of which are mapped and some of which are not mapped to a column in a table.
+    ///     An index specifies properties some of which are mapped and some of which are not mapped to a
+    // column in a table.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="IndexWithPropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="IndexWithPropertyEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId IndexPropertiesBothMappedAndNotMappedToTable = MakeValidationId(
@@ -897,7 +958,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="IndexWithPropertiesEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="IndexWithPropertiesEventData" /> payload when used with a
+    // <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId IndexPropertiesMappedToNonOverlappingTables = MakeValidationId(
@@ -912,7 +974,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="KeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="KeyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId KeyPropertiesNotMappedToTable = MakeValidationId(
@@ -920,14 +983,16 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     An entity type is mapped to the stored procedure with a concurrency token not mapped to any original value parameter.
+    ///     An entity type is mapped to the stored procedure with a concurrency token not mapped to any
+    // original value parameter.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="StoredProcedurePropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="StoredProcedurePropertyEventData" /> payload when used
+    // with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId StoredProcedureConcurrencyTokenNotMapped = MakeValidationId(
@@ -942,7 +1007,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="EntityTypeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="EntityTypeEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TriggerOnNonRootTphEntity = MakeValidationId(
@@ -957,7 +1023,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ForeignKeyPropertiesMappedToUnrelatedTables = MakeValidationId(
@@ -972,7 +1039,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ForeignKeyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId ForeignKeyTpcPrincipalWarning = MakeValidationId(
@@ -987,7 +1055,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="PropertyEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId TpcStoreGeneratedIdentityWarning = MakeValidationId(
@@ -995,14 +1064,16 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     The entity does not have any property with a non-default value to identify whether the entity exists.
+    ///     The entity does not have any property with a non-default value to identify whether the
+    // entity exists.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="EntityTypeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="EntityTypeEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId OptionalDependentWithoutIdentifyingPropertyWarning =
@@ -1016,7 +1087,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Model.Validation" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="ColumnsEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="ColumnsEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId DuplicateColumnOrders = MakeValidationId(
@@ -1036,7 +1108,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Update" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="BatchEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="BatchEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId BatchReadyForExecution = MakeUpdateId(Id.BatchReadyForExecution);
@@ -1050,7 +1123,8 @@ public static class RelationalEventId
     ///         This event is in the <see cref="DbLoggerCategory.Update" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="MinBatchSizeEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="MinBatchSizeEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId BatchSmallerThanMinBatchSize = MakeUpdateId(
@@ -1058,7 +1132,8 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     An error occurred while the batch executor was rolling back the transaction to a savepoint, after an exception occurred.
+    ///     An error occurred while the batch executor was rolling back the transaction to a savepoint,
+    // after an exception occurred.
     /// </summary>
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Update" /> category.
@@ -1078,14 +1153,16 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     The entity does not have any property with a non-default value to identify whether the entity exists.
+    ///     The entity does not have any property with a non-default value to identify whether the
+    // entity exists.
     /// </summary>
     /// <remarks>
     ///     <para>
     ///         This event is in the <see cref="DbLoggerCategory.Update" /> category.
     ///     </para>
     ///     <para>
-    ///         This event uses the <see cref="UpdateEntryEventData" /> payload when used with a <see cref="DiagnosticSource" />.
+    ///         This event uses the <see cref="UpdateEntryEventData" /> payload when used with a <see
+    // cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
     public static readonly EventId OptionalDependentWithAllNullPropertiesWarning = MakeUpdateId(
@@ -1093,8 +1170,10 @@ public static class RelationalEventId
     );
 
     /// <summary>
-    ///     An unexpected trailing result set was found when reading the results of a SaveChanges operation; this may indicate that a stored
-    ///     procedure returned a result set without being configured for it in the EF model. Check your stored procedure definitions.
+    ///     An unexpected trailing result set was found when reading the results of a SaveChanges
+    // operation; this may indicate that a stored
+    ///     procedure returned a result set without being configured for it in the EF model. Check your
+    // stored procedure definitions.
     /// </summary>
     /// <remarks>
     ///     <para>

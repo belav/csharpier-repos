@@ -5,10 +5,11 @@
 //------------------------------------------------------------------------------
 
 /*
- * Assists in converting an HTTP Handler written using the Task Asynchronous Pattern to an IHttpAsyncHandler.
- *
- * Copyright (c) 2010 Microsoft Corporation
- */
+* Assists in converting an HTTP Handler written using the Task Asynchronous Pattern to an
+IHttpAsyncHandler.
+*
+* Copyright (c) 2010 Microsoft Corporation
+*/
 
 namespace System.Web
 {
@@ -30,7 +31,8 @@ namespace System.Web
         [EditorBrowsable(EditorBrowsableState.Never)]
         public virtual void ProcessRequest(HttpContext context)
         {
-            // Default implementation is that this isn't synchronously callable - can be overridden by developer.
+            // Default implementation is that this isn't synchronously callable - can be overridden by
+            // developer.
             string errorMessage = SR.GetString(
                 SR.HttpTaskAsyncHandler_CannotExecuteSynchronously,
                 GetType()

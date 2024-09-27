@@ -33,7 +33,8 @@ internal sealed class DescriptorRegistry
         var added = _fileDescriptors.Add(fileDescriptor);
 
         // If a descriptor is already added then all its types and dependencies are already be present.
-        // In this case, exit immediately. This guards against the possibility of cyclical dependencies between files.
+        // In this case, exit immediately. This guards against the possibility of cyclical dependencies
+        // between files.
         if (!added)
         {
             return;

@@ -469,9 +469,9 @@ namespace System.Runtime.Remoting
         }
     }
 
-    /***************************************************************
-     * Internal classes used by RemotingConfiguration.Configure () *
-     ***************************************************************/
+/***************************************************************
+* Internal classes used by RemotingConfiguration.Configure () *
+***************************************************************/
 
     internal class ConfigHandler : SmallXmlParser.IContentHandler
     {
@@ -934,12 +934,12 @@ namespace System.Runtime.Remoting
         }
     }
 
-    /*******************************************************************
-     * Internal data structures used by ConfigHandler, to store             *
-     * machine.config's remoting related data.                         *
-     * If having them implemented this way, makes configuration too    *
-     * slow, we can use string arrays.                                 *
-     *******************************************************************/
+/*******************************************************************
+* Internal data structures used by ConfigHandler, to store             *
+* machine.config's remoting related data.                         *
+* If having them implemented this way, makes configuration too    *
+* slow, we can use string arrays.                                 *
+*******************************************************************/
 
     internal class ChannelData
     {

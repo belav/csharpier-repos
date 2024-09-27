@@ -4,7 +4,8 @@
 namespace Microsoft.AspNetCore.Http.Features;
 
 /// <summary>
-/// Provides access to tags added to the metrics HTTP request counter. This feature isn't set if the counter isn't enabled.
+/// Provides access to tags added to the metrics HTTP request counter. This feature isn't set if the
+// counter isn't enabled.
 /// </summary>
 public interface IHttpMetricsTagsFeature
 {

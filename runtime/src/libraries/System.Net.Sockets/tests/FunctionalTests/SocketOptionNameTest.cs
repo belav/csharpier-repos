@@ -136,9 +136,12 @@ namespace System.Net.Sockets.Tests
         public async Task MulticastInterface_Set_Loopback_Succeeds()
         {
             // On Windows, we can apparently assume interface 1 is "loopback." On other platforms, this is not a
-            // valid assumption. We could maybe use NetworkInterface.LoopbackInterfaceIndex to get the index, but
-            // this would introduce a dependency on System.Net.NetworkInformation, which depends on System.Net.Sockets,
-            // which is what we're testing here....  So for now, we'll just assume "loopback == 1" and run this on
+            // valid assumption. We could maybe use NetworkInterface.LoopbackInterfaceIndex to get the index,
+            // but
+            // this would introduce a dependency on System.Net.NetworkInformation, which depends on
+            // System.Net.Sockets,
+            // which is what we're testing here....  So for now, we'll just assume "loopback == 1" and run this
+            // on
             // Windows only.
             await MulticastInterface_Set_Helper(1);
         }
@@ -228,7 +231,8 @@ namespace System.Net.Sockets.Tests
         {
             if (PlatformDetection.IsRedHatFamily7)
             {
-                // RH7 seems to have issues with multicast in Azure. Same code and setup can pass when executed outside of Azure.
+                // RH7 seems to have issues with multicast in Azure. Same code and setup can pass when executed
+                // outside of Azure.
                 throw new SkipTestException("IPv6 multicast environment not available");
             }
 
@@ -247,7 +251,8 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
+                // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is
+                // actually set.
 
                 int ttl = (int)
                     socket.GetSocketOption(
@@ -285,7 +290,8 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is actually set.
+                // This should not throw. We currently do not have good mechanism how to verify that the TTL/Hops is
+                // actually set.
 
                 int ttl = (int)
                     socket.GetSocketOption(
@@ -332,9 +338,12 @@ namespace System.Net.Sockets.Tests
         public async Task MulticastInterface_Set_IPv6_Loopback_Succeeds()
         {
             // On Windows, we can apparently assume interface 1 is "loopback." On other platforms, this is not a
-            // valid assumption. We could maybe use NetworkInterface.LoopbackInterfaceIndex to get the index, but
-            // this would introduce a dependency on System.Net.NetworkInformation, which depends on System.Net.Sockets,
-            // which is what we're testing here....  So for now, we'll just assume "loopback == 1" and run this on
+            // valid assumption. We could maybe use NetworkInterface.LoopbackInterfaceIndex to get the index,
+            // but
+            // this would introduce a dependency on System.Net.NetworkInformation, which depends on
+            // System.Net.Sockets,
+            // which is what we're testing here....  So for now, we'll just assume "loopback == 1" and run this
+            // on
             // Windows only.
             await MulticastInterface_Set_IPv6_Helper(1);
         }
@@ -479,7 +488,8 @@ namespace System.Net.Sockets.Tests
                 }
                 else
                 {
-                    // The Unix implementation matches the getsockopt and MSDN docs and clears the error code as part of retrieval.
+                    // The Unix implementation matches the getsockopt and MSDN docs and clears the error code as part of
+                    // retrieval.
                     Assert.Equal(
                         (int)SocketError.Success,
                         (int)

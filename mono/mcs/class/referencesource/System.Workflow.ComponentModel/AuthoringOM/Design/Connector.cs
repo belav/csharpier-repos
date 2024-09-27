@@ -1281,7 +1281,8 @@ namespace System.Workflow.ComponentModel.Design
                 return;
             }
 
-            //STEP1: First we delete all the midsegmentpoints except the one which is being edited for simplicity
+            //STEP1: First we delete all the midsegmentpoints except the one which is being edited for
+            // simplicity
             RemoveEditPoints(EditPoint.EditPointTypes.MidSegmentEditPoint);
 
             //STEP2: Update points as per the type of edit point
@@ -1499,7 +1500,8 @@ namespace System.Workflow.ComponentModel.Design
                                 ? Orientation.Horizontal
                                 : Orientation.Vertical;
 
-                        //If the orientation is horizontal then we need to move the points vertically else we need to move the points horizontally
+                        //If the orientation is horizontal then we need to move the points vertically else we need to move
+                        // the points horizontally
                         if (orientation == Orientation.Horizontal)
                         {
                             previous.Location = new Point(previous.Location.X, newPoint.Y);
@@ -1733,7 +1735,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            //Step2: We should make sure that the active edit point is always retained but those points which are coincidental are always removed
+            //Step2: We should make sure that the active edit point is always retained but those points which
+            // are coincidental are always removed
             for (int i = 1; i < this.editPoints.Count - 1; i++)
             {
                 EditPoint current = this.editPoints[i];
@@ -1758,7 +1761,8 @@ namespace System.Workflow.ComponentModel.Design
                 }
             }
 
-            //Step3: Go thorugh each segment and ensure that there all the segments are either vertical or horizontal
+            //Step3: Go thorugh each segment and ensure that there all the segments are either vertical or
+            // horizontal
             for (int i = 0; i < this.editPoints.Count - 1; i++)
             {
                 EditPoint current = this.editPoints[i];
@@ -2882,7 +2886,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 //the new escape point should
                 //1) lay on the given escape line (except the bounding points since they belong to covers)
-                //2) not lay on any of the already tested escape segments - all points belonging to them are already worthless
+                //2) not lay on any of the already tested escape segments - all points belonging to them are already
+                // worthless
                 ConnectorSegment newEscapeLine = new ConnectorSegment(Z, escapePoint);
                 if (
                     !coverSet.EscapeLineHasBeenUsed(newEscapeLine, escapePoint)
@@ -3049,7 +3054,8 @@ namespace System.Workflow.ComponentModel.Design
                 while (Le.Count > i)
                     Le.RemoveAt(i);
 
-                //continue with the points lying on the line perpendecular to the previous one and passing through the
+                //continue with the points lying on the line perpendecular to the previous one and passing through
+                // the
                 //found point
                 k = k.PeprendecularThroughPoint(pi);
             }
@@ -3192,7 +3198,8 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                //if there was an intersection, run the same segment again to see if there are other intersecting segments
+                //if there was an intersection, run the same segment again to see if there are other intersecting
+                // segments
                 if (!intersected)
                     currentSegment++;
             }
@@ -3278,8 +3285,10 @@ namespace System.Workflow.ComponentModel.Design
                 get { return this.orientation; }
             }
 
-            //"segment l covers a point p, if the perpendicular from p to the line of which l is a segment intersects l"
-            //since a) we only have horizotal or vertical segments and b) some segments will be unbound, we have to store and use orientation
+            //"segment l covers a point p, if the perpendicular from p to the line of which l is a segment
+            // intersects l"
+            //since a) we only have horizotal or vertical segments and b) some segments will be unbound, we have
+            // to store and use orientation
             //flag to do analyzis
             public bool Covers(Point p)
             {
@@ -3639,7 +3648,8 @@ namespace System.Workflow.ComponentModel.Design
             //    return covers;
             //}
 
-            //get the cover on the given side (closest cover to the given side) for the point out of all stored segments
+            //get the cover on the given side (closest cover to the given side) for the point out of all stored
+            // segments
             public ConnectorSegment GetCover(Point p, DesignerEdges side)
             {
                 ConnectorSegment cover = null;
@@ -3683,7 +3693,8 @@ namespace System.Workflow.ComponentModel.Design
                 return cover;
             }
 
-            //get the cover on the given side (closest cover to the given side) for the point out of all stored segments
+            //get the cover on the given side (closest cover to the given side) for the point out of all stored
+            // segments
             public List<ConnectorSegment> GetCovers(Point p, DesignerEdges side)
             {
                 List<ConnectorSegment> covers = new List<ConnectorSegment>();
@@ -3728,7 +3739,8 @@ namespace System.Workflow.ComponentModel.Design
                 if (originalCover.Covers(escape))
                     return false;
 
-                //it should not also be covered by any member of other segments between the original cover and the original point
+                //it should not also be covered by any member of other segments between the original cover and the
+                // original point
                 List<ConnectorSegment> newCovers = this.GetCovers(escape, side);
                 for (int i = 0; i < newCovers.Count; i++)
                 {

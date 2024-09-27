@@ -226,7 +226,8 @@ namespace System.IO.MemoryMappedFiles
         }
 
         /// <summary>
-        /// This converts a MemoryMappedFileRights to its corresponding native FILE_MAP_XXX value to be used when
+        /// This converts a MemoryMappedFileRights to its corresponding native FILE_MAP_XXX value to be used
+        // when
         /// creating new views.
         /// </summary>
         private static int GetFileMapAccess(MemoryMappedFileRights rights)
@@ -235,7 +236,8 @@ namespace System.IO.MemoryMappedFiles
         }
 
         /// <summary>
-        /// This converts a MemoryMappedFileAccess to its corresponding native FILE_MAP_XXX value to be used when
+        /// This converts a MemoryMappedFileAccess to its corresponding native FILE_MAP_XXX value to be used
+        // when
         /// creating new views.
         /// </summary>
         internal static int GetFileMapAccess(MemoryMappedFileAccess access)
@@ -263,8 +265,10 @@ namespace System.IO.MemoryMappedFiles
         }
 
         /// <summary>
-        /// This converts a MemoryMappedFileAccess to it's corresponding native PAGE_XXX value to be used by the
-        /// factory methods that construct a new memory mapped file object. MemoryMappedFileAccess.Write is not
+        /// This converts a MemoryMappedFileAccess to it's corresponding native PAGE_XXX value to be used by
+        // the
+        /// factory methods that construct a new memory mapped file object. MemoryMappedFileAccess.Write is
+        // not
         /// valid here since there is no corresponding PAGE_XXX value.
         /// </summary>
         internal static int GetPageAccess(MemoryMappedFileAccess access)
@@ -320,8 +324,10 @@ namespace System.IO.MemoryMappedFiles
         }
 
         /// <summary>
-        /// Helper method used to extract the native binary security descriptor from the MemoryMappedFileSecurity
-        /// type. If pinningHandle is not null, caller must free it AFTER the call to CreateFile has returned.
+        /// Helper method used to extract the native binary security descriptor from the
+        // MemoryMappedFileSecurity
+        /// type. If pinningHandle is not null, caller must free it AFTER the call to CreateFile has
+        // returned.
         /// </summary>
         private static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
             HandleInheritability inheritability

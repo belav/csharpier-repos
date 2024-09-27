@@ -84,16 +84,19 @@ namespace System.Text.Json.Serialization
         }
 
         /// <summary>
-        /// The default run time options for the context. Its values are defined at design-time via <see cref="JsonSourceGenerationOptionsAttribute"/>.
+        /// The default run time options for the context. Its values are defined at design-time via <see
+        // cref="JsonSourceGenerationOptionsAttribute"/>.
         /// </summary>
         protected abstract JsonSerializerOptions? GeneratedSerializerOptions { get; }
 
         /// <summary>
-        /// Creates an instance of <see cref="JsonSerializerContext"/> and binds it with the indicated <see cref="JsonSerializerOptions"/>.
+        /// Creates an instance of <see cref="JsonSerializerContext"/> and binds it with the indicated <see
+        // cref="JsonSerializerOptions"/>.
         /// </summary>
         /// <param name="options">The run time provided options for the context instance.</param>
         /// <remarks>
-        /// If no instance options are passed, then no options are set until the context is bound using <see cref="JsonSerializerOptions.AddContext{TContext}"/>,
+        /// If no instance options are passed, then no options are set until the context is bound using <see
+        // cref="JsonSerializerOptions.AddContext{TContext}"/>,
         /// or until <see cref="Options"/> is called, where a new options instance is created and bound.
         /// </remarks>
         protected JsonSerializerContext(JsonSerializerOptions? options)
@@ -109,7 +112,8 @@ namespace System.Text.Json.Serialization
         /// Returns a <see cref="JsonTypeInfo"/> instance representing the given type.
         /// </summary>
         /// <param name="type">The type to fetch metadata about.</param>
-        /// <returns>The metadata for the specified type, or <see langword="null" /> if the context has no metadata for the type.</returns>
+        /// <returns>The metadata for the specified type, or <see langword="null" /> if the context has no
+        // metadata for the type.</returns>
         public abstract JsonTypeInfo? GetTypeInfo(Type type);
 
         JsonTypeInfo? IJsonTypeInfoResolver.GetTypeInfo(Type type, JsonSerializerOptions options)

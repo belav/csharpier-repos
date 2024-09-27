@@ -18,78 +18,88 @@ namespace System.Web.Configuration
     using System.Web.Security; // for CookieProtection Enum
     using System.Xml;
 
-    /*         <!-- Configuration for roleManager:
-                enabled="[true|false]"                            Feature is enabled?
-                cacheRolesInCookie="[true|false]"                 Cache roles in cookie?
-                cookieName=".ASPXROLES"                           Cookie Name
-                createPersistentCookie="[true|false]"             Creates a persistent cookie or session cookie?
-                cookieTimeout="30"                                Cookie Timeout
-                cookiePath="/"                                    Cookie Path
-                cookieRequireSSL="[true|false]"                   Set Secure bit in Cookie
-                cookieSlidingExpiration="[true|false]"          Reissue expiring cookies?
-                cookieProtection="[None|Validation|Encryption|All]"    How to protect cookies from being read/tampered
-                defaultProvider="string"                          Name of provider to use by default
-                domain="[domain]"                                 Enables output of the "domain" cookie attribute set to the specified value
-                maxCachedResults="int"                            Maximum number of roles to cache in cookie
-               Child nodes:
-                <providers>              Providers (class must inherit from RoleProvider)
+/*         <!-- Configuration for roleManager:
+enabled="[true|false]"                            Feature is enabled?
+cacheRolesInCookie="[true|false]"                 Cache roles in cookie?
+cookieName=".ASPXROLES"                           Cookie Name
+createPersistentCookie="[true|false]"             Creates a persistent cookie or session cookie?
+cookieTimeout="30"                                Cookie Timeout
+cookiePath="/"                                    Cookie Path
+cookieRequireSSL="[true|false]"                   Set Secure bit in Cookie
+cookieSlidingExpiration="[true|false]"          Reissue expiring cookies?
+cookieProtection="[None|Validation|Encryption|All]"    How to protect cookies from being
+read/tampered
+defaultProvider="string"                          Name of provider to use by default
+domain="[domain]"                                 Enables output of the "domain" cookie attribute
+set to the specified value
+maxCachedResults="int"                            Maximum number of roles to cache in cookie
+Child nodes:
+<providers>              Providers (class must inherit from RoleProvider)
 
-                    <add                 Add a provider
-                        name="string"    Name to identify this provider instance by
-                        type="string"   Class that implements RoleProvider
-                        provider-specific-configuration />
+<add                 Add a provider
+name="string"    Name to identify this provider instance by
+type="string"   Class that implements RoleProvider
+provider-specific-configuration />
 
-                    <remove              Remove a provider
-                        name="string" /> Name of provider to remove
-                    <clear/>             Remove all providers
-                </providers>
-
-
-                <providers> type="TypeName"                        Class that inherits from System.Web.Security.RoleProvider
-                    providerSpecificConfig                        Config for the provider
+<remove              Remove a provider
+name="string" /> Name of provider to remove
+<clear/>             Remove all providers
+</providers>
 
 
-           Configuration for SqlRoleProvider and AccessRoleProvider:
-                   connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where the connection string for the provider is specified
-                   description="string"           Description of what the provider does
-                   commandTimeout="int"           Command timeout value for SQL command
-
-           Configuration for AuthorizationStoreProvider:
-                   connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where the connection string for the provider is specified
-                   description="string"           Description of what the provider does
-                   cacheRefreshInterval="int"     The number of minutes between forced refreshes of the cached policy store data
-
-           Configuration for WindowsTokenRoleProvider:
-                 description="string"           Description of what the provider does
-        -->
+<providers> type="TypeName"                        Class that inherits from
+System.Web.Security.RoleProvider
+providerSpecificConfig                        Config for the provider
 
 
-        <roleManager
-                enabled="false" cacheRolesInCookie="false" cookieName=".ASPXROLES" cookieTimeout="30"
-                cookiePath="/" cookieRequireSSL="false" cookieSlidingExpiration="true" createPersistentCookie="false"
-                cookieProtection="All" defaultProvider="AspNetSqlRoleProvider" domain=""  >
-           <providers>
-               <add  name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
-                     connectionStringName="LocalSqlServer"
-                     applicationName="/"
-                     description="Stores and retrieves roles data from the local Microsoft SQL Server database" />
+Configuration for SqlRoleProvider and AccessRoleProvider:
+connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where
+the connection string for the provider is specified
+description="string"           Description of what the provider does
+commandTimeout="int"           Command timeout value for SQL command
 
-               <add name="AspNetWindowsTokenRoleProvider"
-                    type="System.Web.Security.WindowsTokenRoleProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
-                    description="Retrieves roles data from the Windows authenticated token for the request" />
+Configuration for AuthorizationStoreProvider:
+connectionStringName="string"  Name corresponding to the entry in <connectionStrings> section where
+the connection string for the provider is specified
+description="string"           Description of what the provider does
+cacheRefreshInterval="int"     The number of minutes between forced refreshes of the cached policy
+store data
+
+Configuration for WindowsTokenRoleProvider:
+description="string"           Description of what the provider does
+-->
 
 
-                <add name="AspNetAuthorizationStoreRoleProvider"
-                    type="System.Web.Security.AuthorizationRoleProvider, System.Web, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
-                    connectionStringName="AuthorizationStore"
-                    cacheRefreshInterval="60"
-                    applicationName="MyApplication"
-                    scopeName="MyScope"
-                    description="Stores and retrieves roles data from the authorization store" />
-           </providers>
+<roleManager
+enabled="false" cacheRolesInCookie="false" cookieName=".ASPXROLES" cookieTimeout="30"
+cookiePath="/" cookieRequireSSL="false" cookieSlidingExpiration="true"
+createPersistentCookie="false"
+cookieProtection="All" defaultProvider="AspNetSqlRoleProvider" domain=""  >
+<providers>
+<add  name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider, System.Web,
+Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
+connectionStringName="LocalSqlServer"
+applicationName="/"
+description="Stores and retrieves roles data from the local Microsoft SQL Server database" />
 
-        </roleManager>
- */
+<add name="AspNetWindowsTokenRoleProvider"
+type="System.Web.Security.WindowsTokenRoleProvider, System.Web, Version=%ASSEMBLY_VERSION%,
+Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
+description="Retrieves roles data from the Windows authenticated token for the request" />
+
+
+<add name="AspNetAuthorizationStoreRoleProvider"
+type="System.Web.Security.AuthorizationRoleProvider, System.Web, Version=%ASSEMBLY_VERSION%,
+Culture=neutral, PublicKeyToken=%MICROSOFT_PUBLICKEY%"
+connectionStringName="AuthorizationStore"
+cacheRefreshInterval="60"
+applicationName="MyApplication"
+scopeName="MyScope"
+description="Stores and retrieves roles data from the authorization store" />
+</providers>
+
+</roleManager>
+*/
     public sealed class RoleManagerSection : ConfigurationSection
     {
         private static ConfigurationPropertyCollection _properties;

@@ -70,7 +70,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// Determines the kind of signature, which can be <see cref="SignatureKind.Method"/> or <see cref="SignatureKind.LocalVariables"/>
+        /// Determines the kind of signature, which can be <see cref="SignatureKind.Method"/> or <see
+        // cref="SignatureKind.LocalVariables"/>
         /// </summary>
         /// <exception cref="BadImageFormatException">The signature is invalid.</exception>
         public StandaloneSignatureKind GetKind()

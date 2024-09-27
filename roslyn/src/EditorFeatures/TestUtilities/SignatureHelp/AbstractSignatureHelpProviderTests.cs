@@ -40,14 +40,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
             _fixtureHelper.GetOrCreateFixture();
 
         /// <summary>
-        /// Verifies that sighelp comes up at the indicated location in markup ($$), with the indicated span [| ... |].
+        /// Verifies that sighelp comes up at the indicated location in markup ($$), with the indicated span
+        // [| ... |].
         /// </summary>
         /// <param name="markup">Input markup with $$ denoting the cursor position, and [| ... |]
         /// denoting the expected sighelp span</param>
-        /// <param name="expectedOrderedItemsOrNull">The exact expected sighelp items list. If null, this part of the test is ignored.</param>
-        /// <param name="usePreviousCharAsTrigger">If true, uses the last character before $$ to trigger sighelp.
+        /// <param name="expectedOrderedItemsOrNull">The exact expected sighelp items list. If null, this
+        // part of the test is ignored.</param>
+        /// <param name="usePreviousCharAsTrigger">If true, uses the last character before $$ to trigger
+        // sighelp.
         /// If false, invokes sighelp explicitly at the cursor location.</param>
-        /// <param name="sourceCodeKind">The sourcecodekind to run this test on. If null, runs on both regular and script sources.</param>
+        /// <param name="sourceCodeKind">The sourcecodekind to run this test on. If null, runs on both
+        // regular and script sources.</param>
         protected virtual async Task TestAsync(
             string markup,
             IEnumerable<SignatureHelpTestItem> expectedOrderedItemsOrNull = null,
@@ -412,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
                 );
             }
 
-            // Always get and realise the classified spans, even if no expected spans are passed in, to at least validate that
+            // Always get and realise the classified spans, even if no expected spans are passed in, to at least
+            // validate that
             // exceptions aren't thrown
             var classifiedSpans = actualSignatureHelpItem
                 .DocumentationFactory(CancellationToken.None)

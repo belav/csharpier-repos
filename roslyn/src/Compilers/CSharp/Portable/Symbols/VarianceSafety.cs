@@ -15,8 +15,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// This class groups together all of the functionality needed to check for error CS1961, ERR_UnexpectedVariance.
-    /// Its functionality is accessible through the NamedTypeSymbol extension method CheckInterfaceVarianceSafety and
+    /// This class groups together all of the functionality needed to check for error CS1961,
+    // ERR_UnexpectedVariance.
+    /// Its functionality is accessible through the NamedTypeSymbol extension method
+    // CheckInterfaceVarianceSafety and
     /// the MethodSymbol extension method CheckMethodVarianceSafety (for checking delegate Invoke).
     /// </summary>
     internal static class VarianceSafety
@@ -430,11 +432,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// 3) T is an interface, class, struct, enum, or delegate type <![CDATA[S<A_1, ..., A_k>]]> constructed
+        /// 3) T is an interface, class, struct, enum, or delegate type <![CDATA[S<A_1, ..., A_k>]]>
+        // constructed
         /// from a generic type <![CDATA[S<X_1, ..., X_k>]]> where for at least one A_i one
         /// of the following holds:
         ///     a) X_i is covariant or invariant and A_i is output-unsafe [input-unsafe]
-        ///     b) X_i is contravariant or invariant and A_i is input-unsafe [output-unsafe] (note: spec has "input-safe", but it's a typo)
+        ///     b) X_i is contravariant or invariant and A_i is input-unsafe [output-unsafe] (note: spec has
+        // "input-safe", but it's a typo)
         /// </summary>
         /// <remarks>
         /// Slight rewrite to make it more idiomatic for C#:
@@ -568,8 +572,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // in "C<T>[]", but that is better than returning the location of T within "I<in T>".
             var location = locationProvider(locationArg) ?? unsafeTypeParameter.GetFirstLocation();
 
-            // CONSIDER: instead of using the same error code for all variance errors, we could use different codes for "requires input-safe",
-            // "requires output-safe", and "requires input-safe and output-safe".  This would make the error codes much easier to document and
+            // CONSIDER: instead of using the same error code for all variance errors, we could use different
+            // codes for "requires input-safe",
+            // "requires output-safe", and "requires input-safe and output-safe".  This would make the error
+            // codes much easier to document and
             // much more actionable.
             // UNDONE: related location for use is much more useful
             if (

@@ -124,7 +124,8 @@ namespace Microsoft.CodeAnalysis.NewLines.MultipleBlankLines
                 // we have two or more newlines.  We have three cases to handle:
                 //
                 // 1. We're at the start of the token's trivia.  Collapse this down to 1 blank line.
-                // 2. We follow structured trivia (i.e. pp-directive or doc comment).  These already end with a newline,
+                // 2. We follow structured trivia (i.e. pp-directive or doc comment).  These already end with a
+                // newline,
                 //    so we only need to add one newline to get a blank line.
                 // 3. We follow something else.  We only want to collapse if we have 3 or more newlines.
 

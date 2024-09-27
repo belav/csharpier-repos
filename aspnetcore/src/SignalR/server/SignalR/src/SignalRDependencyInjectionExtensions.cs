@@ -41,7 +41,8 @@ public static class SignalRDependencyInjectionExtensions
     /// Adds SignalR services to the specified <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the SignalR services.</returns>
+    /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the
+    // SignalR services.</returns>
     [RequiresUnreferencedCode(
         "SignalR does not currently support trimming or native AOT.",
         Url = "https://aka.ms/aspnet/trimming"
@@ -65,8 +66,10 @@ public static class SignalRDependencyInjectionExtensions
     /// Adds SignalR services to the specified <see cref="IServiceCollection" />.
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
-    /// <param name="configure">An <see cref="Action{HubOptions}"/> to configure the provided <see cref="HubOptions"/>.</param>
-    /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the SignalR services.</returns>
+    /// <param name="configure">An <see cref="Action{HubOptions}"/> to configure the provided <see
+    // cref="HubOptions"/>.</param>
+    /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the
+    // SignalR services.</returns>
     [RequiresUnreferencedCode(
         "SignalR does not currently support trimming or native AOT.",
         Url = "https://aka.ms/aspnet/trimming"

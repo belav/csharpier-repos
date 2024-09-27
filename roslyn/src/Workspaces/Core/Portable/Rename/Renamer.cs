@@ -93,7 +93,8 @@ namespace Microsoft.CodeAnalysis.Rename
             }
             else
             {
-                // This is a public entry-point.  So if rename failed to resolve conflicts, we report that back to caller as
+                // This is a public entry-point.  So if rename failed to resolve conflicts, we report that back to
+                // caller as
                 // an exception.
                 throw new ArgumentException(resolution.ErrorMessage);
             }
@@ -116,26 +117,33 @@ namespace Microsoft.CodeAnalysis.Rename
             );
 
         /// <summary>
-        /// Call to perform a rename of document or change in document folders. Returns additional code changes related to the document
+        /// Call to perform a rename of document or change in document folders. Returns additional code
+        // changes related to the document
         /// being modified, such as renaming symbols in the file.
         ///
-        /// Each change is added as a <see cref="RenameDocumentAction"/> in the returned <see cref="RenameDocumentActionSet.ApplicableActions" />.
+        /// Each change is added as a <see cref="RenameDocumentAction"/> in the returned <see
+        // cref="RenameDocumentActionSet.ApplicableActions" />.
         ///
-        /// Each action may individually encounter errors that prevent it from behaving correctly. Those are reported in <see cref="RenameDocumentAction.GetErrors(System.Globalization.CultureInfo?)"/>.
+        /// Each action may individually encounter errors that prevent it from behaving correctly. Those are
+        // reported in <see cref="RenameDocumentAction.GetErrors(System.Globalization.CultureInfo?)"/>.
         ///
         /// <para />
         ///
         /// Current supported actions that may be returned:
         /// <list>
         ///  <item>Rename symbol action that will rename the type to match the document name.</item>
-        ///  <item>Sync namespace action that will sync the namespace(s) of the document to match the document folders. </item>
+        ///  <item>Sync namespace action that will sync the namespace(s) of the document to match the
+        // document folders. </item>
         /// </list>
         ///
         /// </summary>
         /// <param name="document">The document to be modified</param>
-        /// <param name="newDocumentName">The new name for the document. Pass null or the same name to keep unchanged.</param>
-        /// <param name="options">Options used to configure rename of a type contained in the document that matches the document's name.</param>
-        /// <param name="newDocumentFolders">The new set of folders for the <see cref="TextDocument.Folders"/> property</param>
+        /// <param name="newDocumentName">The new name for the document. Pass null or the same name to keep
+        // unchanged.</param>
+        /// <param name="options">Options used to configure rename of a type contained in the document that
+        // matches the document's name.</param>
+        /// <param name="newDocumentFolders">The new set of folders for the <see
+        // cref="TextDocument.Folders"/> property</param>
         public static Task<RenameDocumentActionSet> RenameDocumentAsync(
             Document document,
             DocumentRenameOptions options,
@@ -281,7 +289,8 @@ namespace Microsoft.CodeAnalysis.Rename
                                 .Value.RehydrateAsync(solution, cancellationToken)
                                 .ConfigureAwait(false);
 
-                        // TODO: do not fall back to in-proc if client is available (https://github.com/dotnet/roslyn/issues/47557)
+                        // TODO: do not fall back to in-proc if client is available
+                        // (https://github.com/dotnet/roslyn/issues/47557)
                     }
                 }
             }
@@ -314,8 +323,10 @@ namespace Microsoft.CodeAnalysis.Rename
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            // Since we know we're in the oop process, we know we won't need to make more OOP calls.  Since this is the
-            // rename entry-point that does the entire rename, we can directly use the heavyweight RenameLocations type,
+            // Since we know we're in the oop process, we know we won't need to make more OOP calls.  Since this
+            // is the
+            // rename entry-point that does the entire rename, we can directly use the heavyweight
+            // RenameLocations type,
             // without having to go through any intermediary LightweightTypes.
             var renameLocations = await SymbolicRenameLocations
                 .FindLocationsInCurrentProcessAsync(

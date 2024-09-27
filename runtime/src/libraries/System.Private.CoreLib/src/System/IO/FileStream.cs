@@ -201,29 +201,52 @@ namespace System.IO
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="FileStream" /> class with the specified path, creation mode, read/write and sharing permission, the access other FileStreams can have to the same file, the buffer size,  additional file options and the allocation size.
+        /// Initializes a new instance of the <see cref="FileStream" /> class with the specified path,
+        // creation mode, read/write and sharing permission, the access other FileStreams can have to the same
+        // file, the buffer size,  additional file options and the allocation size.
         /// </summary>
-        /// <param name="path">A relative or absolute path for the file that the current <see cref="FileStream" /> instance will encapsulate.</param>
-        /// <param name="options">An object that describes optional <see cref="FileStream" /> parameters to use.</param>
-        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> or <paramref name="options" /> is <see langword="null" />.</exception>
-        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is an empty string (""), contains only white space, or contains one or more invalid characters.
+        /// <param name="path">A relative or absolute path for the file that the current <see
+        // cref="FileStream" /> instance will encapsulate.</param>
+        /// <param name="options">An object that describes optional <see cref="FileStream" /> parameters to
+        // use.</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="path" /> or <paramref
+        // name="options" /> is <see langword="null" />.</exception>
+        /// <exception cref="T:System.ArgumentException"><paramref name="path" /> is an empty string (""),
+        // contains only white space, or contains one or more invalid characters.
         /// -or-
-        /// <paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in an NTFS environment.</exception>
-        /// <exception cref="T:System.NotSupportedException"><paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in a non-NTFS environment.</exception>
-        /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found, such as when <see cref="FileStreamOptions.Mode" /> is <see langword="FileMode.Truncate" /> or <see langword="FileMode.Open" />, and the file specified by <paramref name="path" /> does not exist. The file must already exist in these modes.</exception>
-        /// <exception cref="T:System.IO.IOException">An I/O error, such as specifying <see langword="FileMode.CreateNew" /> when the file specified by <paramref name="path" /> already exists, occurred.
+        /// <paramref name="path" /> refers to a non-file device, such as <c>CON:</c>, <c>COM1:</c>,
+        // <c>LPT1:</c>, etc. in an NTFS environment.</exception>
+        /// <exception cref="T:System.NotSupportedException"><paramref name="path" /> refers to a non-file
+        // device, such as <c>CON:</c>, <c>COM1:</c>, <c>LPT1:</c>, etc. in a non-NTFS environment.</exception>
+        /// <exception cref="T:System.IO.FileNotFoundException">The file cannot be found, such as when <see
+        // cref="FileStreamOptions.Mode" /> is <see langword="FileMode.Truncate" /> or <see
+        // langword="FileMode.Open" />, and the file specified by <paramref name="path" /> does not exist. The
+        // file must already exist in these modes.</exception>
+        /// <exception cref="T:System.IO.IOException">An I/O error, such as specifying <see
+        // langword="FileMode.CreateNew" /> when the file specified by <paramref name="path" /> already exists,
+        // occurred.
         ///  -or-
         ///  The stream has been closed.
         ///  -or-
-        ///  The disk was full (when <see cref="FileStreamOptions.PreallocationSize" /> was provided and <paramref name="path" /> was pointing to a regular file).
+        ///  The disk was full (when <see cref="FileStreamOptions.PreallocationSize" /> was provided and
+        // <paramref name="path" /> was pointing to a regular file).
         ///  -or-
-        ///  The file was too large (when <see cref="FileStreamOptions.PreallocationSize" /> was provided and <paramref name="path" /> was pointing to a regular file).</exception>
-        /// <exception cref="T:System.Security.SecurityException">The caller does not have the required permission.</exception>
-        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid, such as being on an unmapped drive.</exception>
-        /// <exception cref="T:System.UnauthorizedAccessException">The <see cref="FileStreamOptions.Access" /> requested is not permitted by the operating system for the specified <paramref name="path" />, such as when <see cref="FileStreamOptions.Access" />  is <see cref="FileAccess.Write" /> or <see cref="FileAccess.ReadWrite" /> and the file or directory is set for read-only access.
+        ///  The file was too large (when <see cref="FileStreamOptions.PreallocationSize" /> was provided
+        // and <paramref name="path" /> was pointing to a regular file).</exception>
+        /// <exception cref="T:System.Security.SecurityException">The caller does not have the required
+        // permission.</exception>
+        /// <exception cref="T:System.IO.DirectoryNotFoundException">The specified path is invalid, such as
+        // being on an unmapped drive.</exception>
+        /// <exception cref="T:System.UnauthorizedAccessException">The <see cref="FileStreamOptions.Access"
+        // /> requested is not permitted by the operating system for the specified <paramref name="path" />,
+        // such as when <see cref="FileStreamOptions.Access" />  is <see cref="FileAccess.Write" /> or <see
+        // cref="FileAccess.ReadWrite" /> and the file or directory is set for read-only access.
         ///  -or-
-        /// <see cref="F:System.IO.FileOptions.Encrypted" /> is specified for <see cref="FileStreamOptions.Options" /> , but file encryption is not supported on the current platform.</exception>
-        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed the system-defined maximum length. </exception>
+        /// <see cref="F:System.IO.FileOptions.Encrypted" /> is specified for <see
+        // cref="FileStreamOptions.Options" /> , but file encryption is not supported on the current
+        // platform.</exception>
+        /// <exception cref="T:System.IO.PathTooLongException">The specified path, file name, or both exceed
+        // the system-defined maximum length. </exception>
         public FileStream(string path, FileStreamOptions options)
         {
             ArgumentException.ThrowIfNullOrEmpty(path);
@@ -561,7 +584,8 @@ namespace System.IO
         /// <summary>Gets the path that was passed to the constructor.</summary>
         public virtual string Name => _strategy.Name;
 
-        /// <summary>Gets a value indicating whether the stream was opened for I/O to be performed synchronously or asynchronously.</summary>
+        /// <summary>Gets a value indicating whether the stream was opened for I/O to be performed
+        // synchronously or asynchronously.</summary>
         public virtual bool IsAsync => _strategy.IsAsync;
 
         /// <summary>Gets the length of the stream in bytes.</summary>

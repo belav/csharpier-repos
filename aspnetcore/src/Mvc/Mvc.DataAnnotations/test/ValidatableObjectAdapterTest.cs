@@ -12,8 +12,10 @@ public class ValidatableObjectAdapterTest
     private static readonly ModelMetadataProvider _metadataProvider =
         TestModelMetadataProvider.CreateDefaultProvider();
 
-    // Inspired by DataAnnotationsModelValidatorTest.Validate_SetsMemberName_AsExpectedData but using a type that
-    // implements IValidatableObject. Values are metadata, expected DisplayName, and expected MemberName.
+    // Inspired by DataAnnotationsModelValidatorTest.Validate_SetsMemberName_AsExpectedData but using a
+    // type that
+    // implements IValidatableObject. Values are metadata, expected DisplayName, and expected
+    // MemberName.
     public static TheoryData<ModelMetadata, string, string> Validate_PassesExpectedNamesData
     {
         get

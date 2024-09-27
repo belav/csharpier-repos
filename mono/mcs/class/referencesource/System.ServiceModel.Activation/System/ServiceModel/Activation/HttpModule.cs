@@ -66,7 +66,8 @@ namespace System.ServiceModel.Activation
 
             ServiceHostingEnvironment.ServiceType serviceType =
                 ServiceHostingEnvironment.GetServiceType(extension);
-            // do extension check first so that we do not need to do it in aspnetrouting/configurationbasedactivation
+            // do extension check first so that we do not need to do it in
+            // aspnetrouting/configurationbasedactivation
             if (serviceType == ServiceHostingEnvironment.ServiceType.Unknown)
             {
                 return;

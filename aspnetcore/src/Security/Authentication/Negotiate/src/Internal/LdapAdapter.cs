@@ -171,7 +171,8 @@ internal static partial class LdapAdapter
 
                     if (processedGroups.Contains(nestedGroupDN))
                     {
-                        // We need to keep track of already processed groups because circular references are possible with AD groups
+                        // We need to keep track of already processed groups because circular references are possible with
+                        // AD groups
                         return;
                     }
 

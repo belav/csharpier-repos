@@ -138,7 +138,8 @@ namespace ComInterfaceGenerator.Unit.Tests
         [Fact]
         public async Task Array_DoesNotReportDiagnostic()
         {
-            // The default behavior in ComImport for arrays is to marshal as a SAFEARRAY. We don't support SAFEARRAY's, so we don't want to offer a fix here.
+            // The default behavior in ComImport for arrays is to marshal as a SAFEARRAY. We don't support
+            // SAFEARRAY's, so we don't want to offer a fix here.
             string source = """
                 using System.Runtime.InteropServices;
 
@@ -157,7 +158,8 @@ namespace ComInterfaceGenerator.Unit.Tests
         [Fact]
         public async Task Delegate_DoesNotReportDiagnostic()
         {
-            // The default behavior in ComImport for delegates is to marshal as a COM object with an undefined interface. We don't support that interface, so we don't offer a fix here.
+            // The default behavior in ComImport for delegates is to marshal as a COM object with an undefined
+            // interface. We don't support that interface, so we don't offer a fix here.
             string source = """
                 using System;
                 using System.Runtime.InteropServices;
@@ -177,7 +179,8 @@ namespace ComInterfaceGenerator.Unit.Tests
         [Fact]
         public async Task Object_DoesNotReportDiagnostic()
         {
-            // The default behavior in ComImport for Object is to marshal as a VARIANT. We don't support VARIANTs, so we don't offer a fix here.
+            // The default behavior in ComImport for Object is to marshal as a VARIANT. We don't support
+            // VARIANTs, so we don't offer a fix here.
             string source = """
                 using System.Runtime.InteropServices;
 
@@ -196,7 +199,8 @@ namespace ComInterfaceGenerator.Unit.Tests
         [Fact]
         public async Task SystemArray_DoesNotReportDiagnostic()
         {
-            // The default behavior in ComImport for System.Array is to marshal as a COM interface. We don't support that interface, so we don't offer a fix here.
+            // The default behavior in ComImport for System.Array is to marshal as a COM interface. We don't
+            // support that interface, so we don't offer a fix here.
             string source = """
                 using System;
                 using System.Runtime.InteropServices;

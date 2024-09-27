@@ -27,7 +27,8 @@ namespace System.Reflection
         }
 
         //
-        // Parses a type name. The type name may be optionally postpended with a "," followed by a legal assembly name.
+        // Parses a type name. The type name may be optionally postpended with a "," followed by a legal
+        // assembly name.
         //
         private Type? Parse()
         {
@@ -129,7 +130,8 @@ namespace System.Reflection
             if (namedType is null)
                 return null;
 
-            // Because "[" is used both for generic arguments and array indexes, we must peek two characters deep.
+            // Because "[" is used both for generic arguments and array indexes, we must peek two characters
+            // deep.
             if (
                 !(
                     Peek is TokenType.OpenSqBracket
@@ -201,8 +203,10 @@ namespace System.Reflection
                 return new NamespaceTypeName(fullName);
             }
 
-            // Compat: Ignore leading '.' for type names without namespace. .NET Framework historically ignored leading '.' here. It is likely
-            // that code out there depends on this behavior. For example, type names formed by concatenating namespace and name, without checking for
+            // Compat: Ignore leading '.' for type names without namespace. .NET Framework historically ignored
+            // leading '.' here. It is likely
+            // that code out there depends on this behavior. For example, type names formed by concatenating
+            // namespace and name, without checking for
             // empty namespace (bug), are going to have superfluous leading '.'.
             // This behavior means that types that start with '.' are not round-trippable via type name.
             static string ApplyLeadingDotCompatQuirk(string typeName)
@@ -222,7 +226,8 @@ namespace System.Reflection
         }
 
         //
-        // Parse a generic argument. In particular, generic arguments can take the special form [<typename>,<assemblyname>].
+        // Parse a generic argument. In particular, generic arguments can take the special form
+        // [<typename>,<assemblyname>].
         //
         private TypeName? ParseGenericTypeArgument()
         {
@@ -337,7 +342,8 @@ namespace System.Reflection
 
                     if (!NeedsEscapingInTypeName(c))
                     {
-                        // If we got here, a backslash was used to escape a character that is not legal to escape inside a type name.
+                        // If we got here, a backslash was used to escape a character that is not legal to escape inside a
+                        // type name.
                         ParseError();
                         return null;
                     }
@@ -358,7 +364,8 @@ namespace System.Reflection
         }
 
         //
-        // Lex the next segment as the assembly name at the end of an assembly-qualified type name. (Do not use for
+        // Lex the next segment as the assembly name at the end of an assembly-qualified type name. (Do not
+        // use for
         // assembly names embedded inside generic type arguments.)
         //
         private string? GetNextAssemblyName()
@@ -396,7 +403,8 @@ namespace System.Reflection
                     break;
                 src++;
 
-                // Backslash can be used to escape a ']' - any other backslash character is left alone (along with the backslash)
+                // Backslash can be used to escape a ']' - any other backslash character is left alone (along with
+                // the backslash)
                 // for the AssemblyName parser to handle.
                 if (c == '\\' && (src < _input.Length) && _input[src] == ']')
                 {
@@ -419,7 +427,8 @@ namespace System.Reflection
 
         private bool StartAssemblyName()
         {
-            // Compat: Treat invalid starting token of assembly name as type name parsing error instead of assembly name parsing error. This only affects
+            // Compat: Treat invalid starting token of assembly name as type name parsing error instead of
+            // assembly name parsing error. This only affects
             // exception returned by the parser.
             if (Peek is TokenType.End or TokenType.Comma)
             {
@@ -430,7 +439,8 @@ namespace System.Reflection
         }
 
         //
-        // Classify a character as a TokenType. (Fortunately, all tokens in type name strings other than identifiers are single-character tokens.)
+        // Classify a character as a TokenType. (Fortunately, all tokens in type name strings other than
+        // identifiers are single-character tokens.)
         //
         private static TokenType CharToToken(char c)
         {
@@ -448,14 +458,18 @@ namespace System.Reflection
         }
 
         //
-        // The type name parser has a strange attitude towards whitespace. It throws away whitespace between punctuation tokens and whitespace
-        // preceding identifiers or assembly names (and this cannot be escaped away). But whitespace between the end of an identifier
+        // The type name parser has a strange attitude towards whitespace. It throws away whitespace between
+        // punctuation tokens and whitespace
+        // preceding identifiers or assembly names (and this cannot be escaped away). But whitespace between
+        // the end of an identifier
         // and the punctuation that ends it is *not* ignored.
         //
         // In other words, GetType("   Foo") searches for "Foo" but GetType("Foo   ") searches for "Foo   ".
         //
-        // Whitespace between the end of an assembly name and the punction mark that ends it is also not ignored by this parser,
-        // but this is irrelevant since the assembly name is then turned over to AssemblyName for parsing, which *does* ignore trailing whitespace.
+        // Whitespace between the end of an assembly name and the punction mark that ends it is also not
+        // ignored by this parser,
+        // but this is irrelevant since the assembly name is then turned over to AssemblyName for parsing,
+        // which *does* ignore trailing whitespace.
         //
         private void SkipWhiteSpace()
         {
@@ -476,15 +490,19 @@ namespace System.Reflection
         }
 
         //
-        // The TypeName class is the base class for a family of types that represent the nodes in a parse tree for
+        // The TypeName class is the base class for a family of types that represent the nodes in a parse
+        // tree for
         // assembly-qualified type names.
         //
         private abstract class TypeName
         {
             /// <summary>
-            /// Helper for the Type.GetType() family of APIs. "containingAssemblyIsAny" is the assembly to search for (as determined
-            /// by a qualifying assembly string in the original type string passed to Type.GetType(). If null, it means the type stream
-            /// didn't specify an assembly name. How to respond to that is up to the type resolver delegate in getTypeOptions - this class
+            /// Helper for the Type.GetType() family of APIs. "containingAssemblyIsAny" is the assembly to
+            // search for (as determined
+            /// by a qualifying assembly string in the original type string passed to Type.GetType(). If null,
+            // it means the type stream
+            /// didn't specify an assembly name. How to respond to that is up to the type resolver delegate in
+            // getTypeOptions - this class
             /// is just a middleman.
             /// </summary>
             public abstract Type? ResolveType(
@@ -517,7 +535,8 @@ namespace System.Reflection
         }
 
         //
-        // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName for
+        // Non-nested named type. The full name is the namespace-qualified name. For example, the FullName
+        // for
         // System.Collections.Generic.IList<> is "System.Collections.Generic.IList`1".
         //
         private sealed partial class NamespaceTypeName : TypeName

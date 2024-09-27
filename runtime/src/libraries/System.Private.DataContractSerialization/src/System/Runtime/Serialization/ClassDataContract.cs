@@ -331,7 +331,8 @@ namespace System.Runtime.Serialization.DataContracts
         /// <SecurityNote>
         /// RequiresReview - callers may need to depend on isNonAttributedType for a security decision
         ///            isNonAttributedType must be calculated correctly
-        ///            IsNonAttributedTypeValidForSerialization is used as part of the isNonAttributedType calculation and
+        ///            IsNonAttributedTypeValidForSerialization is used as part of the isNonAttributedType
+        // calculation and
         ///            is therefore marked SRR
         /// Safe - does not let caller influence isNonAttributedType calculation; no harm in leaking value
         /// </SecurityNote>
@@ -707,12 +708,14 @@ namespace System.Runtime.Serialization.DataContracts
             private bool _isMethodChecked;
 
             /// <SecurityNote>
-            /// in serialization/deserialization we base the decision whether to Demand SerializationFormatter permission on this value and isNonAttributedType
+            /// in serialization/deserialization we base the decision whether to Demand SerializationFormatter
+            // permission on this value and isNonAttributedType
             /// </SecurityNote>
             private bool _isNonAttributedType;
 
             /// <SecurityNote>
-            /// in serialization/deserialization we base the decision whether to Demand SerializationFormatter permission on this value and hasDataContract
+            /// in serialization/deserialization we base the decision whether to Demand SerializationFormatter
+            // permission on this value and hasDataContract
             /// </SecurityNote>
             private bool _hasDataContract;
             private readonly bool _hasExtensionData;
@@ -1157,7 +1160,8 @@ namespace System.Runtime.Serialization.DataContracts
                                     continue;
                             }
 
-                            //skip ExtensionData member of type ExtensionDataObject if IExtensibleDataObject is implemented in non-attributed type
+                            //skip ExtensionData member of type ExtensionDataObject if IExtensibleDataObject is implemented in
+                            // non-attributed type
                             if (
                                 _hasExtensionData
                                 && memberContract.MemberType == Globals.TypeOfExtensionDataObject
@@ -1227,7 +1231,8 @@ namespace System.Runtime.Serialization.DataContracts
                 bool skipIfReadOnlyContract
             )
             {
-                //OK to call IsCollection here since the use of surrogated collection types is not supported in get-only scenarios
+                //OK to call IsCollection here since the use of surrogated collection types is not supported in
+                // get-only scenarios
                 if (
                     CollectionDataContract.IsCollection(
                         memberContract.MemberType,
@@ -1323,9 +1328,11 @@ namespace System.Runtime.Serialization.DataContracts
             }
 
             /// <SecurityNote>
-            /// RequiresReview - marked SRR because callers may need to depend on isNonAttributedType for a security decision
+            /// RequiresReview - marked SRR because callers may need to depend on isNonAttributedType for a
+            // security decision
             ///            isNonAttributedType must be calculated correctly
-            ///            SetIsNonAttributedType should not be called before GetXmlNameAndSetHasDataContract since it
+            ///            SetIsNonAttributedType should not be called before GetXmlNameAndSetHasDataContract
+            // since it
             ///            is dependent on the correct calculation of hasDataContract
             /// Safe - does not let caller influence isNonAttributedType calculation; no harm in leaking value
             /// </SecurityNote>
@@ -1789,9 +1796,12 @@ namespace System.Runtime.Serialization.DataContracts
                     xmlName = XmlName;
                     genericParams = paramContracts;
 
-                    // This type-binding ('boundType') stuff is new. We did not do this in NetFx. We used to use default contract constructors and let the
-                    // underlying type get filled in later. But default constructors for DataContracts runs afoul of requiring an underlying type. Our web of nullable
-                    // notations make it hard to get around. But it also allows us to feel good about using .UnderlyingType from matching parameter contracts.
+                    // This type-binding ('boundType') stuff is new. We did not do this in NetFx. We used to use default
+                    // contract constructors and let the
+                    // underlying type get filled in later. But default constructors for DataContracts runs afoul of
+                    // requiring an underlying type. Our web of nullable
+                    // notations make it hard to get around. But it also allows us to feel good about using
+                    // .UnderlyingType from matching parameter contracts.
                     Type[] underlyingParamTypes = new Type[paramContracts.Length];
                     for (int i = 0; i < paramContracts.Length; i++)
                         underlyingParamTypes[i] = paramContracts[i].UnderlyingType;

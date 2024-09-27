@@ -49,7 +49,8 @@ namespace Internal.Runtime
             else
                 flags = (uint)EETypeKind.CanonicalEEType;
 
-            // 5 bits near the top of flags are used to convey enum underlying type, primitive type, or mark the type as being System.Array
+            // 5 bits near the top of flags are used to convey enum underlying type, primitive type, or mark the
+            // type as being System.Array
             EETypeElementType elementType = ComputeEETypeElementType(type);
             flags |= ((uint)elementType << (byte)EETypeFlags.ElementTypeShift);
 
@@ -178,10 +179,13 @@ namespace Internal.Runtime
             return false;
         }
 
-        // These masks and paddings have been chosen so that the ValueTypePadding field can always fit in a byte of data
-        // if the alignment is 8 bytes or less. If the alignment is higher then there may be a need for more bits to hold
+        // These masks and paddings have been chosen so that the ValueTypePadding field can always fit in a
+        // byte of data
+        // if the alignment is 8 bytes or less. If the alignment is higher then there may be a need for more
+        // bits to hold
         // the rest of the padding data.
-        // If paddings of greater than 7 bytes are necessary, then the high bits of the field represent that padding
+        // If paddings of greater than 7 bytes are necessary, then the high bits of the field represent that
+        // padding
         private const uint ValueTypePaddingLowMask = 0x7;
 #pragma warning disable CA1823 // Avoid unused private fields
         private const uint ValueTypePaddingHighMask = 0xFFFFFF00;
@@ -219,7 +223,8 @@ namespace Internal.Runtime
 
             Debug.Assert(ValueTypePaddingMax >= padding);
 
-            // Our alignment values here are adjusted by one to allow for a default of 0 (which represents pointer alignment)
+            // Our alignment values here are adjusted by one to allow for a default of 0 (which represents
+            // pointer alignment)
             alignmentLog2++;
 
             uint paddingLowBits = padding & ValueTypePaddingLowMask;

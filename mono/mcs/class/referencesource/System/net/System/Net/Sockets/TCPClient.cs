@@ -12,8 +12,10 @@ namespace System.Net.Sockets
     using System.Threading.Tasks;
 
     /// <devdoc>
-    /// <para>The <see cref='System.Net.Sockets.TcpClient'/> class provide TCP services at a higher level
-    ///    of abstraction than the <see cref='System.Net.Sockets.Socket'/> class. <see cref='System.Net.Sockets.TcpClient'/>
+    /// <para>The <see cref='System.Net.Sockets.TcpClient'/> class provide TCP services at a higher
+    // level
+    ///    of abstraction than the <see cref='System.Net.Sockets.Socket'/> class. <see
+    // cref='System.Net.Sockets.TcpClient'/>
     ///    is used to create a Client connection to a remote host.</para>
     /// </devdoc>
     public class TcpClient : IDisposable
@@ -105,7 +107,8 @@ namespace System.Net.Sockets
 
         // bind and connect
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Net.Sockets.TcpClient'/> class and connects to the
+        /// <para>Initializes a new instance of the <see cref='System.Net.Sockets.TcpClient'/> class and
+        // connects to the
         ///    specified port on the specified host.</para>
         /// </devdoc>
         public TcpClient(string hostname, int port)

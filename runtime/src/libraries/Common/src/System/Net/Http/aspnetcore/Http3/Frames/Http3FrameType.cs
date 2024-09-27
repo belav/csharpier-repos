@@ -7,9 +7,12 @@ namespace System.Net.Http
     /// HTTP3 frame types.
     /// </summary>
     /// <remarks>
-    /// For frames that existed in HTTP/2, but either no longer exist or were delegated to QUIC, 7.2.8 states:
-    ///     "Frame types that were used in HTTP/2 where there is no corresponding HTTP/3 frame have also been
-    ///     reserved (Section 11.2.1). These frame types MUST NOT be sent, and their receipt MUST be treated
+    /// For frames that existed in HTTP/2, but either no longer exist or were delegated to QUIC, 7.2.8
+    // states:
+    ///     "Frame types that were used in HTTP/2 where there is no corresponding HTTP/3 frame have also
+    // been
+    ///     reserved (Section 11.2.1). These frame types MUST NOT be sent, and their receipt MUST be
+    // treated
     ///     as a connection error of type H3_FRAME_UNEXPECTED."
     /// </remarks>
     internal enum Http3FrameType : long

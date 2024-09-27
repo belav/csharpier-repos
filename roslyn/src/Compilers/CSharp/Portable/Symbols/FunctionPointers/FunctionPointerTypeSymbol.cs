@@ -33,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// Creates a function pointer from individual parts. This method should only be used when diagnostics are not needed. This is
+        /// Creates a function pointer from individual parts. This method should only be used when
+        // diagnostics are not needed. This is
         /// intended for use in test code.
         /// </summary>
         public static FunctionPointerTypeSymbol CreateFromPartsForTests(
@@ -60,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
 
         /// <summary>
-        /// Creates a function pointer from individual parts. This method should only be used when diagnostics are not needed.
+        /// Creates a function pointer from individual parts. This method should only be used when
+        // diagnostics are not needed.
         /// </summary>
         public static FunctionPointerTypeSymbol CreateFromParts(
             CallingConvention callingConvention,

@@ -9,13 +9,15 @@ namespace System.Web.Services.Discovery
     using System;
     using System.Security.Permissions;
 
-    /// <include file='doc\XmlSchemaSearchPattern.uex' path='docs/doc[@for="XmlSchemaSearchPattern"]/*' />
+    /// <include file='doc\XmlSchemaSearchPattern.uex' path='docs/doc[@for="XmlSchemaSearchPattern"]/*'
+    // />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     public sealed class XmlSchemaSearchPattern : DiscoverySearchPattern
     {
-        /// <include file='doc\XmlSchemaSearchPattern.uex' path='docs/doc[@for="XmlSchemaSearchPattern.Pattern"]/*' />
+        /// <include file='doc\XmlSchemaSearchPattern.uex'
+        // path='docs/doc[@for="XmlSchemaSearchPattern.Pattern"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -24,7 +26,8 @@ namespace System.Web.Services.Discovery
             get { return "*.xsd"; }
         }
 
-        /// <include file='doc\XmlSchemaSearchPattern.uex' path='docs/doc[@for="XmlSchemaSearchPattern.GetDiscoveryReference"]/*' />
+        /// <include file='doc\XmlSchemaSearchPattern.uex'
+        // path='docs/doc[@for="XmlSchemaSearchPattern.GetDiscoveryReference"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>

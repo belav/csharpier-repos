@@ -175,7 +175,8 @@ namespace Microsoft.DotNet.Build.Tasks
 
             if (isUnix)
             {
-                // Remove parentheses and quotes from echo command before wrapping it in quotes to avoid errors on Linux.
+                // Remove parentheses and quotes from echo command before wrapping it in quotes to avoid errors on
+                // Linux.
                 sanitizedRunCommand =
                     "\""
                     + sanitizedRunCommand.Replace("\"", "").Replace("(", "").Replace(")", "")

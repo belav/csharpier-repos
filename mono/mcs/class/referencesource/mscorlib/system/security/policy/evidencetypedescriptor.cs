@@ -13,8 +13,10 @@ using System.Runtime.Serialization;
 namespace System.Security.Policy
 {
     /// <summary>
-    ///     Descriptor stored in the Evidence collection to detail the information we have about a type of
-    ///     evidence. This descriptor also stores any evidence that's been generated of the specific type.
+    ///     Descriptor stored in the Evidence collection to detail the information we have about a type
+    // of
+    ///     evidence. This descriptor also stores any evidence that's been generated of the specific
+    // type.
     /// </summary>
     [Serializable]
     internal sealed class EvidenceTypeDescriptor
@@ -91,7 +93,8 @@ namespace System.Security.Policy
         }
 
         /// <summary>
-        ///     Has the HostSecurityManager has told us that it can potentially generate evidence of this type
+        ///     Has the HostSecurityManager has told us that it can potentially generate evidence of this
+        // type
         /// </summary>
         public bool HostCanGenerate
         {

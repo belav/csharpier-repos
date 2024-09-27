@@ -49,11 +49,14 @@ internal sealed class RootComponentTypeCache
 
         if (assembly == null)
         {
-            // It might be that the assembly is not loaded yet, this can happen if the root component is defined in a
-            // different assembly than the app and there is no reference from the app assembly to any type in the class
+            // It might be that the assembly is not loaded yet, this can happen if the root component is defined
+            // in a
+            // different assembly than the app and there is no reference from the app assembly to any type in
+            // the class
             // library that has been used yet.
             // In this case, try and load the assembly and look up the type again.
-            // We only need to do this in the browser because its a different process, in the server the assembly will already
+            // We only need to do this in the browser because its a different process, in the server the
+            // assembly will already
             // be loaded.
             if (OperatingSystem.IsBrowser())
             {

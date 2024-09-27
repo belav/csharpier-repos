@@ -15,9 +15,11 @@ public class RouteTokenTransformerConvention : IActionModelConvention
     private readonly IOutboundParameterTransformer _parameterTransformer;
 
     /// <summary>
-    /// Creates a new instance of <see cref="RouteTokenTransformerConvention"/> with the specified <see cref="IOutboundParameterTransformer"/>.
+    /// Creates a new instance of <see cref="RouteTokenTransformerConvention"/> with the specified <see
+    // cref="IOutboundParameterTransformer"/>.
     /// </summary>
-    /// <param name="parameterTransformer">The <see cref="IOutboundParameterTransformer"/> to use with attribute routing token replacement.</param>
+    /// <param name="parameterTransformer">The <see cref="IOutboundParameterTransformer"/> to use with
+    // attribute routing token replacement.</param>
     public RouteTokenTransformerConvention(IOutboundParameterTransformer parameterTransformer)
     {
         ArgumentNullException.ThrowIfNull(parameterTransformer);

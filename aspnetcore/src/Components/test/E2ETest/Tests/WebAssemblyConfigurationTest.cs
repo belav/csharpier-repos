@@ -44,7 +44,8 @@ public class WebAssemblyConfigurationTest
             // Verify values overriden by an environment specific 'appsettings.$(Environment).json are read
             Assert.Equal("Prod key2-value", _appElement.FindElement(By.Id("key2")).Text);
 
-            // Lastly for sanity, make sure values specified in an environment specific 'appsettings.$(Environment).json are read
+            // Lastly for sanity, make sure values specified in an environment specific
+            // 'appsettings.$(Environment).json are read
             Assert.Equal("Prod key3-value", _appElement.FindElement(By.Id("key3")).Text);
         }
         else
@@ -52,7 +53,8 @@ public class WebAssemblyConfigurationTest
             // Verify values overriden by an environment specific 'appsettings.$(Environment).json are read
             Assert.Equal("Development key2-value", _appElement.FindElement(By.Id("key2")).Text);
 
-            // Lastly for sanity, make sure values specified in an environment specific 'appsettings.$(Environment).json are read
+            // Lastly for sanity, make sure values specified in an environment specific
+            // 'appsettings.$(Environment).json are read
             Assert.Equal("Development key3-value", _appElement.FindElement(By.Id("key3")).Text);
         }
     }

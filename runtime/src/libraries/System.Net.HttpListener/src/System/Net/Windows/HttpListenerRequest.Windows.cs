@@ -130,8 +130,10 @@ namespace System.Net
 
         internal HttpListenerContext HttpListenerContext => _httpContext;
 
-        // Note: RequestBuffer may get moved in memory. If you dereference a pointer from inside the RequestBuffer,
-        // you must use 'OriginalBlobAddress' below to adjust the location of the pointer to match the location of
+        // Note: RequestBuffer may get moved in memory. If you dereference a pointer from inside the
+        // RequestBuffer,
+        // you must use 'OriginalBlobAddress' below to adjust the location of the pointer to match the
+        // location of
         // RequestBuffer.
         internal IntPtr RequestBuffer
         {
@@ -151,7 +153,8 @@ namespace System.Net
             }
         }
 
-        // Use this to save the blob from dispose if this object was never used (never given to a user) and is about to be
+        // Use this to save the blob from dispose if this object was never used (never given to a user) and
+        // is about to be
         // disposed.
         internal void DetachBlob(RequestContextBase memoryBlob)
         {

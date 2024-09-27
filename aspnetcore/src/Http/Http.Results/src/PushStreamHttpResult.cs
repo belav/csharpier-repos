@@ -17,7 +17,8 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with
-    /// the provided <paramref name="streamWriterCallback"/> and the provided <paramref name="contentType"/>.
+    /// the provided <paramref name="streamWriterCallback"/> and the provided <paramref
+    // name="contentType"/>.
     /// </summary>
     /// <param name="streamWriterCallback">The stream writer callback.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
@@ -26,7 +27,8 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
 
     /// <summary>
     /// Creates a new <see cref="PushStreamHttpResult"/> instance with
-    /// the provided <paramref name="streamWriterCallback"/>, the provided <paramref name="contentType"/>
+    /// the provided <paramref name="streamWriterCallback"/>, the provided <paramref
+    // name="contentType"/>
     /// and the provided <paramref name="fileDownloadName"/>.
     /// </summary>
     /// <param name="streamWriterCallback">The stream writer callback.</param>
@@ -46,8 +48,10 @@ public sealed class PushStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="streamWriterCallback">The stream writer callback.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests processing.</param>
-    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last modified.</param>
+    /// <param name="enableRangeProcessing">Set to <c>true</c> to enable range requests
+    // processing.</param>
+    /// <param name="lastModified">The <see cref="DateTimeOffset"/> of when the file was last
+    // modified.</param>
     /// <param name="entityTag">The <see cref="EntityTagHeaderValue"/> associated with the file.</param>
     internal PushStreamHttpResult(
         Func<Stream, Task> streamWriterCallback,

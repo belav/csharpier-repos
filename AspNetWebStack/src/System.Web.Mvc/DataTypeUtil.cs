@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -42,7 +43,8 @@ namespace System.Web.Mvc
             }
 
             // GetDataTypeName is virtual, so this is only safe if they haven't derived from DataTypeAttribute.
-            // However, if they derive from DataTypeAttribute, they can help their own perf by overriding GetDataTypeName
+            // However, if they derive from DataTypeAttribute, they can help their own perf by overriding
+            // GetDataTypeName
             // and returning an appropriate string without invoking the ToString() on the enum.
             if (isDataType(attribute))
             {
@@ -52,7 +54,8 @@ namespace System.Web.Mvc
                 {
                     // Unknown types fallback to a dictionary lookup.
                     // Code running on .NET 4.5 will not enter this code for statically known data types.
-                    // Versions of .NET greater than 4.5 will enter this code for any new data types added to those frameworks
+                    // Versions of .NET greater than 4.5 will enter this code for any new data types added to those
+                    // frameworks
                     _dataTypeToName.Value.TryGetValue(attribute.DataType, out name);
                 }
 

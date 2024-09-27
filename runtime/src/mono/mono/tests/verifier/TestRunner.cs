@@ -53,10 +53,10 @@ public class TestRunner : MarshalByRefObject
         int count = 0;
         foreach (String test in tests)
         {
-            /*
-             * Run each bunch of tests in a new appdomain, then unload it to
-             * avoid too many open files exceptions.
-             */
+/*
+* Run each bunch of tests in a new appdomain, then unload it to
+* avoid too many open files exceptions.
+*/
             if ((count % 500) == 0)
             {
                 if (domain != null)

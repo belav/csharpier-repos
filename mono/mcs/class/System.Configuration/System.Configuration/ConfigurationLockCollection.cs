@@ -74,8 +74,8 @@ namespace System.Configuration
                     valid_name_hash.Add(prop.Name, true);
                 }
 
-                /* add the add/remove/clear names of the
-                 * default collection if there is one */
+/* add the add/remove/clear names of the
+* default collection if there is one */
                 if (!isAttribute)
                 {
                     ConfigurationElementCollection c = element.GetDefaultCollection();
@@ -140,10 +140,10 @@ namespace System.Configuration
             {
                 if ((string)names[i] == name)
                 {
-                    /* this test used to switch off whether the collection was 'Exclude' or not
-                     * (the LockAll*Except collections), but that doesn't seem to be the crux of
-                     * it.  maybe this returns true if the element/attribute is locked in a parent
-                     * element's lock collections? */
+/* this test used to switch off whether the collection was 'Exclude' or not
+* (the LockAll*Except collections), but that doesn't seem to be the crux of
+* it.  maybe this returns true if the element/attribute is locked in a parent
+* element's lock collections? */
                     return false;
                 }
             }

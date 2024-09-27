@@ -9,8 +9,10 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions;
 
 /// <param name="lowPriorityAnalyzers">
-/// Set of de-prioritized analyzers that were moved down from 'Normal' to 'Low' priority bucket. Note that this set is
-/// owned by the <see cref="SuggestedActionsSourceProvider.SuggestedActionsSource"/> and shared across priority buckets.
+/// Set of de-prioritized analyzers that were moved down from 'Normal' to 'Low' priority bucket.
+// Note that this set is
+/// owned by the <see cref="SuggestedActionsSourceProvider.SuggestedActionsSource"/> and shared
+// across priority buckets.
 /// </param>
 internal sealed class SuggestedActionPriorityProvider(
     CodeActionRequestPriority priority,

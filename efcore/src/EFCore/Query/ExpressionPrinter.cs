@@ -12,13 +12,16 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         A class to create a printable string representation of expression.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers
+// and extensions</see>
+///     and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see>
+// for more information and examples.
 /// </remarks>
 public class ExpressionPrinter : ExpressionVisitor
 {
@@ -137,7 +140,8 @@ public class ExpressionPrinter : ExpressionVisitor
     ///     Creates a printable string representation of the given expression.
     /// </summary>
     /// <param name="expression">The expression to print.</param>
-    /// <param name="characterLimit">An optional limit to the number of characters included. Additional output will be truncated.</param>
+    /// <param name="characterLimit">An optional limit to the number of characters included. Additional
+    // output will be truncated.</param>
     /// <returns>The printable representation.</returns>
     public virtual string PrintExpression(Expression expression, int? characterLimit = null) =>
         PrintCore(expression, characterLimit);
@@ -195,7 +199,8 @@ public class ExpressionPrinter : ExpressionVisitor
     ///     Visit given readonly collection of expression for printing.
     /// </summary>
     /// <param name="items">A collection of items to print.</param>
-    /// <param name="joinAction">A join action to use when joining printout of individual item in the collection.</param>
+    /// <param name="joinAction">A join action to use when joining printout of individual item in the
+    // collection.</param>
     public virtual void VisitCollection<T>(
         IReadOnlyCollection<T> items,
         Action<ExpressionPrinter>? joinAction = null
@@ -593,7 +598,8 @@ public class ExpressionPrinter : ExpressionVisitor
 
         foreach (var parameter in lambdaExpression.Parameters)
         {
-            // however we don't remove nameless parameters so that they are unique globally, not just within the scope
+            // however we don't remove nameless parameters so that they are unique globally, not just within the
+            // scope
             _parametersInScope.Remove(parameter);
         }
 

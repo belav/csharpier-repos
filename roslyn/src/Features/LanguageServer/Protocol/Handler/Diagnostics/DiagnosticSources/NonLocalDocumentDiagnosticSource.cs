@@ -25,8 +25,10 @@ internal sealed class NonLocalDocumentDiagnosticSource(
         CancellationToken cancellationToken
     )
     {
-        // We call GetDiagnosticsForIdsAsync as we want to ensure we get the full set of non-local diagnostics for this document
-        // including those reported as a compilation end diagnostic.  These are not included in document pull (uses GetDiagnosticsForSpan) due to cost.
+        // We call GetDiagnosticsForIdsAsync as we want to ensure we get the full set of non-local
+        // diagnostics for this document
+        // including those reported as a compilation end diagnostic.  These are not included in document
+        // pull (uses GetDiagnosticsForSpan) due to cost.
         return await diagnosticAnalyzerService
             .GetDiagnosticsForIdsAsync(
                 Document.Project.Solution,

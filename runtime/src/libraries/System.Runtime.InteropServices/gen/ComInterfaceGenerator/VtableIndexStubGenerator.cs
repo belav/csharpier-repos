@@ -127,7 +127,8 @@ namespace Microsoft.Interop
                 "ManagedToNativeStubs.g.cs"
             );
 
-            // Filter the list of all stubs to only the stubs that requested unmanaged-to-managed stub generation.
+            // Filter the list of all stubs to only the stubs that requested unmanaged-to-managed stub
+            // generation.
             IncrementalValuesProvider<IncrementalMethodStubGenerationContext> nativeToManagedStubContexts =
                 generateStubInformation.Where(data =>
                     data.VtableIndexData.Direction
@@ -153,7 +154,8 @@ namespace Microsoft.Interop
                 "NativeToManagedStubs.g.cs"
             );
 
-            // Generate the native interface metadata for each interface that contains a method with the [VirtualMethodIndex] attribute.
+            // Generate the native interface metadata for each interface that contains a method with the
+            // [VirtualMethodIndex] attribute.
             IncrementalValuesProvider<MemberDeclarationSyntax> generateNativeInterface =
                 generateStubInformation
                     .Select(static (context, ct) => context.ContainingSyntaxContext)
@@ -166,8 +168,10 @@ namespace Microsoft.Interop
                 "NativeInterfaces.g.cs"
             );
 
-            // Generate a method named PopulateUnmanagedVirtualMethodTable on the native interface implementation
-            // that fills in a span with the addresses of the unmanaged-to-managed stub functions at their correct
+            // Generate a method named PopulateUnmanagedVirtualMethodTable on the native interface
+            // implementation
+            // that fills in a span with the addresses of the unmanaged-to-managed stub functions at their
+            // correct
             // indices.
             IncrementalValuesProvider<MemberDeclarationSyntax> populateVTable =
                 nativeToManagedStubContexts
@@ -386,7 +390,8 @@ namespace Microsoft.Interop
                     );
                 }
 
-                // User specified something other than StringMarshalling.Custom while specifying StringMarshallingCustomType
+                // User specified something other than StringMarshalling.Custom while specifying
+                // StringMarshallingCustomType
                 if (
                     virtualMethodIndexData.StringMarshalling != StringMarshalling.Custom
                     && virtualMethodIndexData.StringMarshallingCustomType is not null
@@ -529,7 +534,8 @@ namespace Microsoft.Interop
                     return NoMarshallingInfo.Instance;
                 }
 
-                // User specified something other than ExceptionMarshalling.Custom while specifying ExceptionMarshallingCustomType
+                // User specified something other than ExceptionMarshalling.Custom while specifying
+                // ExceptionMarshallingCustomType
                 if (
                     virtualMethodIndexData.ExceptionMarshalling != ExceptionMarshalling.Custom
                     && virtualMethodIndexData.ExceptionMarshallingCustomType is not null
@@ -559,7 +565,8 @@ namespace Microsoft.Interop
                         diagnostics
                     );
             }
-            // This should not be reached in normal usage, but a developer can cast any int to the ExceptionMarshalling enum, so we should handle this case without crashing the generator.
+            // This should not be reached in normal usage, but a developer can cast any int to the
+            // ExceptionMarshalling enum, so we should handle this case without crashing the generator.
             diagnostics.ReportInvalidExceptionMarshallingConfiguration(
                 virtualMethodIndexAttr,
                 symbol.Name,

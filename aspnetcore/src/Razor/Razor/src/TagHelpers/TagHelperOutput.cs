@@ -34,7 +34,8 @@ public class TagHelperOutput : IHtmlContentContainer
     /// <param name="tagName">The HTML element's tag name.</param>
     /// <param name="attributes">The HTML attributes.</param>
     /// <param name="getChildContentAsync">
-    /// A delegate used to execute children asynchronously with the given <see cref="HtmlEncoder"/> in scope and
+    /// A delegate used to execute children asynchronously with the given <see cref="HtmlEncoder"/> in
+    // scope and
     /// return their rendered content.
     /// </param>
     public TagHelperOutput(
@@ -96,7 +97,8 @@ public class TagHelperOutput : IHtmlContentContainer
     /// <summary>
     /// Get or set the HTML element's main content.
     /// </summary>
-    /// <remarks>Value occurs in the <see cref="ITagHelper"/>'s final output after <see cref="PreContent"/> and
+    /// <remarks>Value occurs in the <see cref="ITagHelper"/>'s final output after <see
+    // cref="PreContent"/> and
     /// before <see cref="PostContent"/></remarks>
     public TagHelperContent Content
     {
@@ -168,8 +170,10 @@ public class TagHelperOutput : IHtmlContentContainer
     /// The HTML element's attributes.
     /// </summary>
     /// <remarks>
-    /// MVC will HTML encode <see cref="string"/> values when generating the start tag. It will not HTML encode
-    /// a <c>Microsoft.AspNetCore.Mvc.Rendering.HtmlString</c> instance. MVC converts most other types to a
+    /// MVC will HTML encode <see cref="string"/> values when generating the start tag. It will not HTML
+    // encode
+    /// a <c>Microsoft.AspNetCore.Mvc.Rendering.HtmlString</c> instance. MVC converts most other types
+    // to a
     /// <see cref="string"/>, then HTML encodes the result.
     /// </remarks>
     public TagHelperAttributeList Attributes { get; }
@@ -198,8 +202,10 @@ public class TagHelperOutput : IHtmlContentContainer
     /// Changes <see cref="TagHelperOutput"/> to generate nothing.
     /// </summary>
     /// <remarks>
-    /// Sets <see cref="TagName"/> to <c>null</c>, and clears <see cref="PreElement"/>, <see cref="PreContent"/>,
-    /// <see cref="Content"/>, <see cref="PostContent"/>, and <see cref="PostElement"/> to suppress output.
+    /// Sets <see cref="TagName"/> to <c>null</c>, and clears <see cref="PreElement"/>, <see
+    // cref="PreContent"/>,
+    /// <see cref="Content"/>, <see cref="PostContent"/>, and <see cref="PostElement"/> to suppress
+    // output.
     /// </remarks>
     public void SuppressOutput()
     {
@@ -217,7 +223,8 @@ public class TagHelperOutput : IHtmlContentContainer
     /// </summary>
     /// <returns>A <see cref="Task"/> that on completion returns content rendered by children.</returns>
     /// <remarks>
-    /// This method is memoized. Multiple calls will not cause children to re-execute with the page's original
+    /// This method is memoized. Multiple calls will not cause children to re-execute with the page's
+    // original
     /// <see cref="HtmlEncoder"/>.
     /// </remarks>
     public Task<TagHelperContent> GetChildContentAsync()
@@ -239,16 +246,19 @@ public class TagHelperOutput : IHtmlContentContainer
     }
 
     /// <summary>
-    /// Executes children asynchronously with the given <paramref name="encoder"/> in scope and returns their
+    /// Executes children asynchronously with the given <paramref name="encoder"/> in scope and returns
+    // their
     /// rendered content.
     /// </summary>
     /// <param name="encoder">
-    /// The <see cref="HtmlEncoder"/> to use when the page handles non-<see cref="IHtmlContent"/> C# expressions.
+    /// The <see cref="HtmlEncoder"/> to use when the page handles non-<see cref="IHtmlContent"/> C#
+    // expressions.
     /// If <c>null</c>, executes children with the page's current <see cref="HtmlEncoder"/>.
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns content rendered by children.</returns>
     /// <remarks>
-    /// This method is memoized. Multiple calls with the same <see cref="HtmlEncoder"/> instance will not cause
+    /// This method is memoized. Multiple calls with the same <see cref="HtmlEncoder"/> instance will
+    // not cause
     /// children to re-execute with that encoder in scope.
     /// </remarks>
     public Task<TagHelperContent> GetChildContentAsync(HtmlEncoder encoder)
@@ -257,15 +267,18 @@ public class TagHelperOutput : IHtmlContentContainer
     }
 
     /// <summary>
-    /// Executes children asynchronously with the given <paramref name="encoder"/> in scope and returns their
+    /// Executes children asynchronously with the given <paramref name="encoder"/> in scope and returns
+    // their
     /// rendered content.
     /// </summary>
     /// <param name="useCachedResult">
-    /// If <c>true</c>, multiple calls with the same <see cref="HtmlEncoder"/> will not cause children to
+    /// If <c>true</c>, multiple calls with the same <see cref="HtmlEncoder"/> will not cause children
+    // to
     /// re-execute; returns cached content.
     /// </param>
     /// <param name="encoder">
-    /// The <see cref="HtmlEncoder"/> to use when the page handles non-<see cref="IHtmlContent"/> C# expressions.
+    /// The <see cref="HtmlEncoder"/> to use when the page handles non-<see cref="IHtmlContent"/> C#
+    // expressions.
     /// If <c>null</c>, executes children with the page's current <see cref="HtmlEncoder"/>.
     /// </param>
     /// <returns>A <see cref="Task"/> that on completion returns content rendered by children.</returns>

@@ -62,7 +62,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             );
             Debug.Assert(rewrittenBody != null);
 
-            // The sequence point behavior exhibited here is different from that of the native compiler.  In the native
+            // The sequence point behavior exhibited here is different from that of the native compiler.  In the
+            // native
             // compiler, if you have something like
             //
             // for([|int i = 0, j = 0|]; ; [|i++, j++|])
@@ -214,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
             }
 
-            // We need to enter inner_scope-block from the top, that is where an instance of a display class will be created
+            // We need to enter inner_scope-block from the top, that is where an instance of a display class
+            // will be created
             // if any local is captured within a lambda.
 
             // for (initializer; condition; increment)

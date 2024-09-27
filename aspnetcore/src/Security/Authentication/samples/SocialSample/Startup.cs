@@ -19,7 +19,8 @@ using Microsoft.Extensions.Options;
 
 namespace SocialSample;
 
-/* Note all servers must use the same address and port because these are pre-registered with the various providers. */
+/* Note all servers must use the same address and port because these are pre-registered with the
+various providers. */
 public class Startup
 {
     public Startup(IConfiguration config)
@@ -78,7 +79,9 @@ public class Startup
             {
                 o.ConsumerKey = Configuration["twitter:consumerkey"];
                 o.ConsumerSecret = Configuration["twitter:consumersecret"];
+                //
                 // http://stackoverflow.com/questions/22627083/can-we-get-email-id-from-twitter-oauth-api/32852370#32852370
+                //
                 // http://stackoverflow.com/questions/36330675/get-users-email-from-twitter-api-for-external-login-authentication-asp-net-mvc?lq=1
                 o.RetrieveUserDetails = true;
                 o.SaveTokens = true;
@@ -89,11 +92,12 @@ public class Startup
                 );
                 o.Events = new TwitterEvents() { OnRemoteFailure = HandleOnRemoteFailure };
             })
-            /* Azure AD app model v2 has restrictions that prevent the use of plain HTTP for redirect URLs.
-               Therefore, to authenticate through microsoft accounts, try out the sample using the following URL:
-               https://localhost:44318/
-            */
-            // You must first create an app with Microsoft Account and add its ID and Secret to your user-secrets.
+/* Azure AD app model v2 has restrictions that prevent the use of plain HTTP for redirect URLs.
+Therefore, to authenticate through microsoft accounts, try out the sample using the following URL:
+https://localhost:44318/
+*/
+            // You must first create an app with Microsoft Account and add its ID and Secret to your
+            // user-secrets.
             // https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-app-registration/
             // https://apps.dev.microsoft.com/
             .AddMicrosoftAccount(o =>
@@ -180,6 +184,7 @@ public class Startup
                 }
             )
             // https://demo.identityserver.io/
+            //
             // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
             .AddOAuth(
                 "IdentityServer",
@@ -272,7 +277,8 @@ public class Startup
         await context.Response.WriteAsync("<a href=\"/\">Home</a>");
         await context.Response.WriteAsync("</body></html>");
 
-        // context.Response.Redirect("/error?FailureMessage=" + UrlEncoder.Default.Encode(context.Failure.Message));
+        // context.Response.Redirect("/error?FailureMessage=" +
+        // UrlEncoder.Default.Encode(context.Failure.Message));
 
         context.HandleResponse();
     }
@@ -293,7 +299,8 @@ public class Startup
                     var authType = context.Request.Query["authscheme"];
                     if (!string.IsNullOrEmpty(authType))
                     {
-                        // By default the client will be redirect back to the URL that issued the challenge (/login?authtype=foo),
+                        // By default the client will be redirect back to the URL that issued the challenge
+                        // (/login?authtype=foo),
                         // send them to the home page instead (/).
                         await context.ChallengeAsync(
                             authType,
@@ -340,7 +347,8 @@ public class Startup
                     var user = userResult.Principal;
                     var authProperties = userResult.Properties;
 
-                    // This is what [Authorize(ActiveAuthenticationSchemes = MicrosoftAccountDefaults.AuthenticationScheme)] calls
+                    // This is what [Authorize(ActiveAuthenticationSchemes =
+                    // MicrosoftAccountDefaults.AuthenticationScheme)] calls
                     // var user = await context.AuthenticateAsync(MicrosoftAccountDefaults.AuthenticationScheme);
 
                     // Deny anonymous request beyond this point.
@@ -354,7 +362,8 @@ public class Startup
                         // The cookie middleware will handle this and redirect to /login
                         await context.ChallengeAsync();
 
-                        // This is what [Authorize(ActiveAuthenticationSchemes = MicrosoftAccountDefaults.AuthenticationScheme)] calls
+                        // This is what [Authorize(ActiveAuthenticationSchemes =
+                        // MicrosoftAccountDefaults.AuthenticationScheme)] calls
                         // await context.ChallengeAsync(MicrosoftAccountDefaults.AuthenticationScheme);
 
                         return;
@@ -536,7 +545,8 @@ public class Startup
             // This is what [Authorize] calls
             // var user = await context.AuthenticateAsync();
 
-            // This is what [Authorize(ActiveAuthenticationSchemes = MicrosoftAccountDefaults.AuthenticationScheme)] calls
+            // This is what [Authorize(ActiveAuthenticationSchemes =
+            // MicrosoftAccountDefaults.AuthenticationScheme)] calls
             // var user = await context.AuthenticateAsync(MicrosoftAccountDefaults.AuthenticationScheme);
 
             // Deny anonymous request beyond this point.
@@ -546,7 +556,8 @@ public class Startup
                 // The cookie middleware will handle this and redirect to /login
                 await context.ChallengeAsync();
 
-                // This is what [Authorize(ActiveAuthenticationSchemes = MicrosoftAccountDefaults.AuthenticationScheme)] calls
+                // This is what [Authorize(ActiveAuthenticationSchemes =
+                // MicrosoftAccountDefaults.AuthenticationScheme)] calls
                 // await context.ChallengeAsync(MicrosoftAccountDefaults.AuthenticationScheme);
 
                 return;

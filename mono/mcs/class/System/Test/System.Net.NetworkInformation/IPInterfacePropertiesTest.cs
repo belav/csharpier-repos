@@ -1,5 +1,6 @@
 //
-// IPInterfacePropertiesTest.cs - NUnit Test Cases for System.Net.NetworkInformation.IPInterfaceProperties
+// IPInterfacePropertiesTest.cs - NUnit Test Cases for
+// System.Net.NetworkInformation.IPInterfaceProperties
 //
 // Authors:
 //   Ben Woods (woodsb02@gmail.com)
@@ -98,8 +99,10 @@ namespace MonoTests.System.Net.NetworkInformation
             int numGatewayAddresses = 0;
             NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
 
-            // On Android (possibly on other systems too) it is possible that no gateway address is available and its lack is NOT an error
-            // Here is a sample of /proc/net/route from Nexus 9 running Android 5.1.1 (IPInterfaceProperties parses that file on Linux)
+            // On Android (possibly on other systems too) it is possible that no gateway address is available
+            // and its lack is NOT an error
+            // Here is a sample of /proc/net/route from Nexus 9 running Android 5.1.1 (IPInterfaceProperties
+            // parses that file on Linux)
             //
             //  Iface	Destination	Gateway 	Flags	RefCnt	Use	Metric	Mask		MTU	Window	IRTT
             //  wlan0	0001A8C0	00000000	0001	0	0	0	00FFFFFF	0	0	0
@@ -116,8 +119,10 @@ namespace MonoTests.System.Net.NetworkInformation
             //  wlan0	0001A8C0	00000000	0001	0	0	203	00FFFFFF	0	0	0
             //  wlan0	0101A8C0	00000000	0005	0	0	0	FFFFFFFF	0	0	0
             //
-            // Obviously, this test fails on the first device and succeeds on the second. For this reason the test is modified to succeed
-            // in case of devices like the first one since it's not a real failure but a shortcoming of the .NET API
+            // Obviously, this test fails on the first device and succeeds on the second. For this reason the
+            // test is modified to succeed
+            // in case of devices like the first one since it's not a real failure but a shortcoming of the .NET
+            // API
             //
             foreach (NetworkInterface adapter in adapters)
             {
@@ -155,7 +160,8 @@ namespace MonoTests.System.Net.NetworkInformation
 #if WASM
         [ExpectedException(typeof(PlatformNotSupportedException))]
 #endif
-        // The code works as expected when part of a regular app. It fails when executed from within an NUnit test
+        // The code works as expected when part of a regular app. It fails when executed from within an
+        // NUnit test
         // Might be a problem with the test suite. To investigate.
         [Category("AndroidNotWorking")]
         public void AtLeastOneDnsAddress()

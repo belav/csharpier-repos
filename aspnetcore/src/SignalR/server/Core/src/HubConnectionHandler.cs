@@ -38,11 +38,14 @@ public class HubConnectionHandler<THub> : ConnectionHandler
     /// Initializes a new instance of the <see cref="HubConnectionHandler{THub}"/> class.
     /// </summary>
     /// <param name="lifetimeManager">The hub lifetime manager.</param>
-    /// <param name="protocolResolver">The protocol resolver used to resolve the protocols between client and server.</param>
+    /// <param name="protocolResolver">The protocol resolver used to resolve the protocols between
+    // client and server.</param>
     /// <param name="globalHubOptions">The global options used to initialize hubs.</param>
-    /// <param name="hubOptions">Hub specific options used to initialize hubs. These options override the global options.</param>
+    /// <param name="hubOptions">Hub specific options used to initialize hubs. These options override
+    // the global options.</param>
     /// <param name="loggerFactory">The logger factory.</param>
-    /// <param name="userIdProvider">The user ID provider used to get the user ID from a hub connection.</param>
+    /// <param name="userIdProvider">The user ID provider used to get the user ID from a hub
+    // connection.</param>
     /// <param name="serviceScopeFactory">The service scope factory.</param>
     /// <remarks>This class is typically created via dependency injection.</remarks>
     public HubConnectionHandler(
@@ -110,8 +113,10 @@ public class HubConnectionHandler<THub> : ConnectionHandler
     /// <inheritdoc />
     public override async Task OnConnectedAsync(ConnectionContext connection)
     {
-        // We check to see if HubOptions<THub> are set because those take precedence over global hub options.
-        // Then set the keepAlive and handshakeTimeout values to the defaults in HubOptionsSetup when they were explicitly set to null.
+        // We check to see if HubOptions<THub> are set because those take precedence over global hub
+        // options.
+        // Then set the keepAlive and handshakeTimeout values to the defaults in HubOptionsSetup when they
+        // were explicitly set to null.
 
         var supportedProtocols =
             _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
@@ -234,7 +239,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
             exception = null;
             if (connection.CloseMessage.Error is not null)
             {
-                // A bit odd for the client to send an error along with a graceful close, but just in case we should surface it in OnDisconnectedAsync
+                // A bit odd for the client to send an error along with a graceful close, but just in case we should
+                // surface it in OnDisconnectedAsync
                 disconnectException = new HubException(connection.CloseMessage.Error);
             }
         }
@@ -248,7 +254,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
         // Ensure the connection is aborted before firing disconnect
         await connection.AbortAsync();
 
-        // If a client result is requested in OnDisconnectedAsync we want to avoid the SemaphoreFullException and get the better connection disconnected IOException
+        // If a client result is requested in OnDisconnectedAsync we want to avoid the
+        // SemaphoreFullException and get the better connection disconnected IOException
         _ = connection.ActiveInvocationLimit.TryAcquire();
 
         try
@@ -323,7 +330,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
                         while (protocol.TryParseMessage(ref buffer, binder, out var message))
                         {
                             connection.StopClientTimeout();
-                            // This lets us know the timeout has stopped and we need to re-enable it after dispatching the message
+                            // This lets us know the timeout has stopped and we need to re-enable it after dispatching the
+                            // message
                             messageReceived = true;
                             await _dispatcher.DispatchMessageAsync(connection, message);
                         }
@@ -352,7 +360,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
                             if (protocol.TryParseMessage(ref segment, binder, out var message))
                             {
                                 connection.StopClientTimeout();
-                                // This lets us know the timeout has stopped and we need to re-enable it after dispatching the message
+                                // This lets us know the timeout has stopped and we need to re-enable it after dispatching the
+                                // message
                                 messageReceived = true;
                                 await _dispatcher.DispatchMessageAsync(connection, message);
                             }
@@ -393,7 +402,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler
             finally
             {
                 // The buffer was sliced up to where it was consumed, so we can just advance to the start.
-                // We mark examined as buffer.End so that if we didn't receive a full frame, we'll wait for more data
+                // We mark examined as buffer.End so that if we didn't receive a full frame, we'll wait for more
+                // data
                 // before yielding the read again.
                 input.AdvanceTo(buffer.Start, buffer.End);
             }

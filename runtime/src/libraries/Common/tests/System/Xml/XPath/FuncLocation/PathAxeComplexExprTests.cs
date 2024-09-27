@@ -51,7 +51,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Expression combines descendant, attribute axes
-        /// /descendant::node() | /descendant::node()/attribute::node() | /descendant::node()/attribute::node()/descendant::node(Utils.NavigatorKind kind)
+        /// /descendant::node() | /descendant::node()/attribute::node() |
+        // /descendant::node()/attribute::node()/descendant::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -2195,7 +2196,9 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Combines several axes, altering between forward and reverse axes
-        /// /child::bookstore/descendant::magazine/following-sibling::book/child::title/child::text()/ancestor::*/preceding-sibling::magazine/preceding::book/attribute::*/following::node(Utils.NavigatorKind kind)
+        ///
+        // /child::bookstore/descendant::magazine/following-sibling::book/child::title/child::text()/ancestor::*/preceding-sibling::magazine/preceding::book/attribute::*/following::node(Utils.NavigatorKind
+        // kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -4332,7 +4335,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// Try to select all elements that have a child. This expression should result in the same node set as the expression //*[*]
+        /// Try to select all elements that have a child. This expression should result in the same node set
+        // as the expression //*[*]
         /// /child::bookstore/descendant-or-self::*/parent::*
         /// </summary>
         [Theory]
@@ -7211,7 +7215,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// Select nodes that have no following nodes (root node, document node and last node of the document)
+        /// Select nodes that have no following nodes (root node, document node and last node of the
+        // document)
         /// descendant-or-self::*/ancestor::* [count(following::node()) = 0]
         /// </summary>
         [Theory]
@@ -7559,7 +7564,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// native gives wrong result for this one
-        /// /descendant-or-self::* [position()>=1]/ancestor-or-self::* [position()<=5]/descendant::* [position()=1 or position()=2 or position>3]/ancestor::*
+        /// /descendant-or-self::* [position()>=1]/ancestor-or-self::* [position()<=5]/descendant::*
+        // [position()=1 or position()=2 or position>3]/ancestor::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -8120,7 +8126,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Complex predicate
-        /// /self::node()/child::* [last()][count(child::book)=7][child::book/following-sibling::magazine/following-sibling::book/following::magazine/preceding::book]
+        /// /self::node()/child::*
+        // [last()][count(child::book)=7][child::book/following-sibling::magazine/following-sibling::book/following::magazine/preceding::book]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -8400,7 +8407,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// /descendant::* [position()>=1]/ancestor-or-self::* [position()<=5]/descendant::* [position()=1 or position()=2 or position>3]/ancestor::*
+        /// /descendant::* [position()>=1]/ancestor-or-self::* [position()<=5]/descendant::* [position()=1
+        // or position()=2 or position>3]/ancestor::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -8795,7 +8803,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// /descendant-or-self::* [position()>=1]/ancestor::* [position()<=5]/descendant::* [position()=1 or position()=2 or position>3]/ancestor::*
+        /// /descendant-or-self::* [position()>=1]/ancestor::* [position()<=5]/descendant::* [position()=1
+        // or position()=2 or position>3]/ancestor::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -9190,7 +9199,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// /descendant-or-self::node() [position()>=1]/ancestor::node()[position() <=5]/descendant::node() [position()=1 or position()=2 or position()>3]/ancestor::*
+        /// /descendant-or-self::node() [position()>=1]/ancestor::node()[position() <=5]/descendant::node()
+        // [position()=1 or position()=2 or position()>3]/ancestor::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -11400,7 +11410,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Checks for other axes with the same direction.
-        /// /following::* [position()>=1]/preceding::*[position() <=5]/following::* [position()=1 or position()=2 or position()>3]/preceding::*
+        /// /following::* [position()>=1]/preceding::*[position() <=5]/following::* [position()=1 or
+        // position()=2 or position()>3]/preceding::*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -11421,7 +11432,9 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Regression for 63067
-        /// following::* | preceding::* | self::* | following-sibling::* | preceding-sibling::* | attribute::* | following::text() | following::comment() | ancestor::* | ancestor-or-self::text() | parent::node() | descendant::text() | descendant::* | child::publication
+        /// following::* | preceding::* | self::* | following-sibling::* | preceding-sibling::* |
+        // attribute::* | following::text() | following::comment() | ancestor::* | ancestor-or-self::text() |
+        // parent::node() | descendant::text() | descendant::* | child::publication
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -15049,7 +15062,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Regression for 63067
-        /// /descendant::node() | /descendant::node()/attribute::node() | /descendant::node()/attribute::node()/descendant::node(Utils.NavigatorKind kind)
+        /// /descendant::node() | /descendant::node()/attribute::node() |
+        // /descendant::node()/attribute::node()/descendant::node(Utils.NavigatorKind kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -17193,7 +17207,9 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Regression for 63067
-        /// (child::node | //node()[count(following::node()[count(child::text())&gt;0])&gt;1])|preceding::node()[count(descendant-or-self::*) &gt; 5]
+        /// (child::node |
+        // //node()[count(following::node()[count(child::text())&gt;0])&gt;1])|preceding::node()[count(descendant-or-self::*)
+        // &gt; 5]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -18933,7 +18949,9 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Regression for 63067
-        /// (child::node | //node()[count(following::node()[count(child::text())&gt;0])&gt;1])|preceding::node()[count(descendant-or-self::*) &gt; 5]| //node()/@*
+        /// (child::node |
+        // //node()[count(following::node()[count(child::text())&gt;0])&gt;1])|preceding::node()[count(descendant-or-self::*)
+        // &gt; 5]| //node()/@*
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21040,7 +21058,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// descendant::*[last()-count(descendant-or-self::*[count(child::node()()[string-length(string())&gt;25])])]
+        ///
+        // descendant::*[last()-count(descendant-or-self::*[count(child::node()()[string-length(string())&gt;25])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21072,7 +21091,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// descendant-or-self::*[last()-count(descendant-or-self::*[count(child::node()()[string-length(string())&gt;25])])]
+        ///
+        // descendant-or-self::*[last()-count(descendant-or-self::*[count(child::node()()[string-length(string())&gt;25])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21104,7 +21124,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// descendant::*[last()-count(descendant::*[count(child::node()()[string-length(string())&gt;25])])]
+        ///
+        // descendant::*[last()-count(descendant::*[count(child::node()()[string-length(string())&gt;25])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21147,7 +21168,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// descendant::*[last()-count(descendant::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
+        ///
+        // descendant::*[last()-count(descendant::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21190,7 +21212,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// following::*[last()-count(following::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
+        ///
+        // following::*[last()-count(following::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21229,7 +21252,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// preceding::*[last()-count(preceding::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
+        ///
+        // preceding::*[last()-count(preceding::*[count(child::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21267,7 +21291,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// preceding::*[last()-count(preceding::*[count(descendant::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
+        ///
+        // preceding::*[last()-count(preceding::*[count(descendant::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21305,7 +21330,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
         }
 
         /// <summary>
-        /// preceding::*[last()-count(preceding::*[count(following::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
+        ///
+        // preceding::*[last()-count(preceding::*[count(following::node()[string-length(string())&gt;25][string-length(string())&lt;40])])]
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21458,7 +21484,9 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Complex expression involving namespace axis
-        /// NS65: document/descendant::node/following::node()/ancestor::node()/child::node()/namespace::node(Utils.NavigatorKind kind)
+        /// NS65:
+        // document/descendant::node/following::node()/ancestor::node()/child::node()/namespace::node(Utils.NavigatorKind
+        // kind)
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]
@@ -21509,7 +21537,8 @@ namespace XPathTests.FunctionalTests.Location.Paths.Axes
 
         /// <summary>
         /// Complex expression involving namespace axis
-        /// NS67: //namespace::p1|//namespace::p2|//namespace::p3|//namespace::p4|//namespace::p4|//namespace::p5
+        /// NS67:
+        // //namespace::p1|//namespace::p2|//namespace::p3|//namespace::p4|//namespace::p4|//namespace::p5
         /// </summary>
         [Theory]
         [InlineData(Utils.NavigatorKind.XmlDocument)]

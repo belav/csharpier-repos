@@ -117,9 +117,12 @@ namespace ILCompiler
                 byte[] hash;
                 lock (this)
                 {
-                    // Use SHA256 hash here to provide a high degree of uniqueness to symbol names without requiring them to be long
-                    // This hash function provides an exceedingly high likelihood that no two strings will be given equal symbol names
-                    // This is not considered used for security purpose; however collisions would be highly unfortunate as they will cause compilation
+                    // Use SHA256 hash here to provide a high degree of uniqueness to symbol names without requiring
+                    // them to be long
+                    // This hash function provides an exceedingly high likelihood that no two strings will be given
+                    // equal symbol names
+                    // This is not considered used for security purpose; however collisions would be highly unfortunate
+                    // as they will cause compilation
                     // failure.
                     hash = SHA256.HashData(GetBytesFromString(literal));
                 }
@@ -141,7 +144,8 @@ namespace ILCompiler
         /// </summary>
         /// <param name="origName">Name to check for uniqueness.</param>
         /// <param name="set">Set of names already used.</param>
-        /// <returns>A name based on <param name="origName"/> that is not part of <param name="set"/>.</returns>
+        /// <returns>A name based on <param name="origName"/> that is not part of <param
+        // name="set"/>.</returns>
         private static string DisambiguateName(string origName, HashSet<string> set)
         {
             int iter = 0;

@@ -9,7 +9,8 @@ namespace System.Web.Services.Description
     {
         string location;
 
-        /// <include file='doc\HttpFormatExtensions.uex' path='docs/doc[@for="HttpAddressBinding.Location"]/*' />
+        /// <include file='doc\HttpFormatExtensions.uex'
+        // path='docs/doc[@for="HttpAddressBinding.Location"]/*' />
         [XmlAttribute("location")]
         public string Location
         {
@@ -43,7 +44,8 @@ namespace System.Web.Services.Description
     {
         string location;
 
-        /// <include file='doc\HttpFormatExtensions.uex' path='docs/doc[@for="HttpOperationBinding.Location"]/*' />
+        /// <include file='doc\HttpFormatExtensions.uex'
+        // path='docs/doc[@for="HttpOperationBinding.Location"]/*' />
         [XmlAttribute("location")]
         public string Location
         {
@@ -56,7 +58,8 @@ namespace System.Web.Services.Description
     [XmlFormatExtension("urlEncoded", HttpBinding.Namespace, typeof(InputBinding))]
     public sealed class HttpUrlEncodedBinding : ServiceDescriptionFormatExtension { }
 
-    /// <include file='doc\HttpFormatExtensions.uex' path='docs/doc[@for="HttpUrlReplacementBinding"]/*' />
+    /// <include file='doc\HttpFormatExtensions.uex' path='docs/doc[@for="HttpUrlReplacementBinding"]/*'
+    // />
     [XmlFormatExtension("urlReplacement", HttpBinding.Namespace, typeof(InputBinding))]
     public sealed class HttpUrlReplacementBinding : ServiceDescriptionFormatExtension { }
 }

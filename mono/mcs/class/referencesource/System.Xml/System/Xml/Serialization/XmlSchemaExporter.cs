@@ -32,7 +32,8 @@ namespace System.Xml.Serialization
         bool needToExportRoot;
         TypeScope scope;
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.XmlSchemaExporter"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.XmlSchemaExporter"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -41,7 +42,8 @@ namespace System.Xml.Serialization
             this.schemas = schemas;
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportTypeMapping"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportTypeMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -53,7 +55,8 @@ namespace System.Xml.Serialization
             ExportRootIfNecessary(xmlTypeMapping.Scope);
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportTypeMapping1"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportTypeMapping1"]/*' />
         public XmlQualifiedName ExportTypeMapping(XmlMembersMapping xmlMembersMapping)
         {
             xmlMembersMapping.CheckShallow();
@@ -87,7 +90,8 @@ namespace System.Xml.Serialization
             return null;
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportMembersMapping"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportMembersMapping"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -96,7 +100,8 @@ namespace System.Xml.Serialization
             ExportMembersMapping(xmlMembersMapping, true);
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportMembersMapping1"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportMembersMapping1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -185,7 +190,8 @@ namespace System.Xml.Serialization
             return false;
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportAnyType"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportAnyType"]/*' />
         public string ExportAnyType(string ns)
         {
             string name = "any";
@@ -218,7 +224,8 @@ namespace System.Xml.Serialization
             return name;
         }
 
-        /// <include file='doc\XmlSchemaExporter.uex' path='docs/doc[@for="XmlSchemaExporter.ExportAnyType1"]/*' />
+        /// <include file='doc\XmlSchemaExporter.uex'
+        // path='docs/doc[@for="XmlSchemaExporter.ExportAnyType1"]/*' />
         public string ExportAnyType(XmlMembersMapping members)
         {
             if (members.Count == 1 && members[0].Any && members[0].ElementName.Length == 0)
@@ -232,7 +239,8 @@ namespace System.Xml.Serialization
                         : member.Mapping.TypeDesc.IsMixed;
 
                 if (isMixed && member.Mapping.TypeDesc.IsMixed)
-                    // special case of the single top-level XmlNode --> map it to node array to match the "mixed" any type for backward compatibility
+                    // special case of the single top-level XmlNode --> map it to node array to match the "mixed" any
+                    // type for backward compatibility
                     isUnbounded = true;
 
                 // generate type name, make sure that it is backward compatible
@@ -1070,7 +1078,8 @@ namespace System.Xml.Serialization
                 EnumMapping em = (EnumMapping)mapping;
 
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (value.GetType() != typeof(string))
                     throw new InvalidOperationException(
                         Res.GetString(
@@ -1120,7 +1129,8 @@ namespace System.Xml.Serialization
             if (!pm.TypeDesc.HasCustomFormatter)
             {
 #if DEBUG
-                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such as aspnet_ewp.exe
+                // use exception in the place of Debug.Assert to avoid throwing asserts from a server process such
+                // as aspnet_ewp.exe
                 if (pm.TypeDesc.Type == null)
                 {
                     throw new InvalidOperationException(

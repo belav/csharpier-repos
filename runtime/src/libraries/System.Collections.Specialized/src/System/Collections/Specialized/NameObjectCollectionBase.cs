@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * Ordered String/Object collection of name/value pairs with support for null key
- *
- * This class is intended to be used as a base class
- *
- */
+* Ordered String/Object collection of name/value pairs with support for null key
+*
+* This class is intended to be used as a base class
+*
+*/
 
 #pragma warning disable 618 // obsolete types, namely IHashCodeProvider
 
@@ -18,8 +18,10 @@ using System.Runtime.Serialization;
 namespace System.Collections.Specialized
 {
     /// <devdoc>
-    /// <para>Provides the <see langword='abstract '/>base class for a sorted collection of associated <see cref='string' qualify='true'/> keys
-    ///    and <see cref='object' qualify='true'/> values that can be accessed either with the hash code of
+    /// <para>Provides the <see langword='abstract '/>base class for a sorted collection of associated
+    // <see cref='string' qualify='true'/> keys
+    ///    and <see cref='object' qualify='true'/> values that can be accessed either with the hash code
+    // of
     ///    the key or with the index.</para>
     /// </devdoc>
     public abstract class NameObjectCollectionBase
@@ -39,7 +41,8 @@ namespace System.Collections.Specialized
             CultureInfo.InvariantCulture.CompareInfo.GetStringComparer(CompareOptions.IgnoreCase);
 
         /// <devdoc>
-        /// <para> Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance with the default initial capacity and using the default case-insensitive hash
+        /// <para> Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>
+        // instance with the default initial capacity and using the default case-insensitive hash
         ///    code provider and the default case-insensitive comparer.</para>
         /// </devdoc>
         protected NameObjectCollectionBase()
@@ -80,7 +83,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance with the specified
+        /// <para>Creates an empty <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>
+        // instance with the specified
         ///    initial capacity and using the default case-insensitive hash code provider
         ///    and the default case-insensitive comparer.</para>
         /// </devdoc>
@@ -156,7 +160,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Gets or sets a value indicating whether the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance is read-only.</para>
+        /// <para>Gets or sets a value indicating whether the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance is read-only.</para>
         /// </devdoc>
         protected bool IsReadOnly
         {
@@ -165,7 +170,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Gets a value indicating whether the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance contains entries whose
+        /// <para>Gets a value indicating whether the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance contains entries whose
         ///    keys are not <see langword='null'/>.</para>
         /// </devdoc>
         protected bool BaseHasKeys()
@@ -272,7 +278,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Removes all entries from the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
+        /// <para>Removes all entries from the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
         /// </devdoc>
         protected void BaseClear()
         {
@@ -297,7 +304,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Sets the value of the first entry with the specified key in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>
+        /// <para>Sets the value of the first entry with the specified key in the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/>
         /// instance, if found; otherwise, adds an entry with the specified key and value
         /// into the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>
         /// instance.</para>
@@ -363,7 +371,8 @@ namespace System.Collections.Specialized
         //
 
         /// <devdoc>
-        /// <para>Returns an enumerator that can iterate through the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>.</para>
+        /// <para>Returns an enumerator that can iterate through the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/>.</para>
         /// </devdoc>
         public virtual IEnumerator GetEnumerator()
         {
@@ -371,7 +380,8 @@ namespace System.Collections.Specialized
         }
 
         /// <devdoc>
-        /// <para>Gets the number of key-and-value pairs in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
+        /// <para>Gets the number of key-and-value pairs in the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
         /// </devdoc>
         public virtual int Count
         {
@@ -441,7 +451,8 @@ namespace System.Collections.Specialized
 
         /// <devdoc>
         ///    <para>Returns an array of the specified type containing
-        ///       all the values in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
+        ///       all the values in the <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
         /// </devdoc>
         [UnconditionalSuppressMessage(
             "AotAnalysis",
@@ -468,8 +479,10 @@ namespace System.Collections.Specialized
         //
 
         /// <devdoc>
-        /// <para>Returns a <see cref='System.Collections.Specialized.NameObjectCollectionBase.KeysCollection'/> instance containing
-        ///    all the keys in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/> instance.</para>
+        /// <para>Returns a <see
+        // cref='System.Collections.Specialized.NameObjectCollectionBase.KeysCollection'/> instance containing
+        ///    all the keys in the <see cref='System.Collections.Specialized.NameObjectCollectionBase'/>
+        // instance.</para>
         /// </devdoc>
         public virtual KeysCollection Keys => _keys ??= new KeysCollection(this);
 
@@ -551,7 +564,8 @@ namespace System.Collections.Specialized
         //
 
         /// <devdoc>
-        /// <para>Represents a collection of the <see cref='string' qualify='true'/> keys of a collection.</para>
+        /// <para>Represents a collection of the <see cref='string' qualify='true'/> keys of a
+        // collection.</para>
         /// </devdoc>
         public class KeysCollection : ICollection
         {
@@ -592,7 +606,8 @@ namespace System.Collections.Specialized
             }
 
             /// <devdoc>
-            /// <para>Gets the number of keys in the <see cref='System.Collections.Specialized.NameObjectCollectionBase.KeysCollection'/>.</para>
+            /// <para>Gets the number of keys in the <see
+            // cref='System.Collections.Specialized.NameObjectCollectionBase.KeysCollection'/>.</para>
             /// </devdoc>
             public int Count
             {

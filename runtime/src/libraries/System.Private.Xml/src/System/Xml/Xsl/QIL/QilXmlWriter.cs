@@ -13,7 +13,8 @@ using System.Xml;
 namespace System.Xml.Xsl.Qil
 {
     /// <summary>
-    /// If an annotation implements this interface, then QilXmlWriter will call ToString() on the annotation
+    /// If an annotation implements this interface, then QilXmlWriter will call ToString() on the
+    // annotation
     /// and serialize the result (if non-empty).
     /// </summary>
     internal interface IQilAnnotation
@@ -26,7 +27,8 @@ namespace System.Xml.Xsl.Qil
     /// </summary>
     /// <remarks>
     /// <para>The QilXmlWriter Visits every node in the tree, printing out an XML representation of
-    /// each node.  Several formatting options are available, including whether or not to include annotations
+    /// each node.  Several formatting options are available, including whether or not to include
+    // annotations
     /// and type information.  When full information is printed out, the graph can be reloaded from
     /// its serialized form using QilXmlReader.</para>
     /// <para>The XML format essentially uses one XML element for each node in the QIL graph.
@@ -212,7 +214,8 @@ namespace System.Xml.Xsl.Qil
         }
 
         /// <summary>
-        /// Scan through the external parameters, global variables, and function list for forward references.
+        /// Scan through the external parameters, global variables, and function list for forward
+        // references.
         /// </summary>
         protected override QilNode VisitQilExpression(QilExpression qil)
         {
@@ -243,7 +246,8 @@ namespace System.Xml.Xsl.Qil
         }
 
         /// <summary>
-        /// Serialize literal types using either "S" or "G" formatting, depending on the option which has been set.
+        /// Serialize literal types using either "S" or "G" formatting, depending on the option which has
+        // been set.
         /// </summary>
         protected override QilNode VisitLiteralType(QilLiteral value)
         {
@@ -370,7 +374,8 @@ namespace System.Xml.Xsl.Qil
             }
         }
 
-        //=================================== Helper class: NameGenerator =========================================
+        //=================================== Helper class: NameGenerator
+        // =========================================
 
         private sealed class NameGenerator
         {

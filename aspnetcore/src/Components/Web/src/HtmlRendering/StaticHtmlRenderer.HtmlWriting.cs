@@ -45,7 +45,8 @@ public partial class StaticHtmlRenderer
     /// <summary>
     /// Renders the specified component as HTML to the output.
     /// </summary>
-    /// <param name="componentId">The ID of the component whose current HTML state is to be rendered.</param>
+    /// <param name="componentId">The ID of the component whose current HTML state is to be
+    // rendered.</param>
     /// <param name="output">The output destination.</param>
     protected internal virtual void WriteComponentHtml(int componentId, TextWriter output)
     {
@@ -61,7 +62,8 @@ public partial class StaticHtmlRenderer
     /// Renders the specified component frame as HTML to the output.
     /// </summary>
     /// <param name="output">The output destination.</param>
-    /// <param name="componentFrame">The <see cref="RenderTreeFrame"/> representing the component to be rendered.</param>
+    /// <param name="componentFrame">The <see cref="RenderTreeFrame"/> representing the component to be
+    // rendered.</param>
     protected virtual void RenderChildComponent(
         TextWriter output,
         ref RenderTreeFrame componentFrame
@@ -166,8 +168,10 @@ public partial class StaticHtmlRenderer
             out var capturedValueAttribute
         );
 
-        // When we see an <option> as a descendant of a <select>, and the option's "value" attribute matches the
-        // "value" attribute on the <select>, then we auto-add the "selected" attribute to that option. This is
+        // When we see an <option> as a descendant of a <select>, and the option's "value" attribute matches
+        // the
+        // "value" attribute on the <select>, then we auto-add the "selected" attribute to that option. This
+        // is
         // a way of converting Blazor's select binding feature to regular static HTML.
         if (
             _closestSelectValueAsString != null
@@ -199,7 +203,8 @@ public partial class StaticHtmlRenderer
 
             if (isTextArea && !string.IsNullOrEmpty(capturedValueAttribute))
             {
-                // Textarea is a special type of form field where the value is given as text content instead of a 'value' attribute
+                // Textarea is a special type of form field where the value is given as text content instead of a
+                // 'value' attribute
                 // So, if we captured a value attribute, use that instead of any child content
                 _htmlEncoder.Encode(output, capturedValueAttribute);
                 afterElement = position + frame.ElementSubtreeLength; // Skip descendants

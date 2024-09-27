@@ -4,7 +4,8 @@
 namespace Microsoft.Win32
 {
     /// <devdoc>
-    /// <para>Represents the method that will handle the <see cref='Microsoft.Win32.SystemEvents.SessionSwitch'/> event.</para>
+    /// <para>Represents the method that will handle the <see
+    // cref='Microsoft.Win32.SystemEvents.SessionSwitch'/> event.</para>
     /// </devdoc>
     public delegate void SessionSwitchEventHandler(object sender, SessionSwitchEventArgs e);
 }

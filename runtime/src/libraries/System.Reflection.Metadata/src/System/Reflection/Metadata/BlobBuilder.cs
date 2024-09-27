@@ -16,7 +16,8 @@ namespace System.Reflection.Metadata
         // The implementation is akin to StringBuilder.
         // The differences:
         // - BlobBuilder allows efficient sequential write of the built content to a stream.
-        // - BlobBuilder allows for chunk allocation customization. A custom allocator can use pooling strategy, for example.
+        // - BlobBuilder allows for chunk allocation customization. A custom allocator can use pooling
+        // strategy, for example.
 
         internal const int DefaultChunkSize = 256;
 
@@ -29,13 +30,15 @@ namespace System.Reflection.Metadata
         //     ^_______________|
         //
         // In this case the content represented is a sequence (1,2,3,4).
-        // This structure optimizes for append write operations and sequential enumeration from the start of the chain.
+        // This structure optimizes for append write operations and sequential enumeration from the start of
+        // the chain.
         // Data can only be written to the head node. Other nodes are "frozen".
         private BlobBuilder _nextOrPrevious;
         private BlobBuilder FirstChunk => _nextOrPrevious._nextOrPrevious;
 
         // The sum of lengths of all preceding chunks (not including the current chunk),
-        // or a difference between original buffer length of a builder that was linked as a suffix to another builder,
+        // or a difference between original buffer length of a builder that was linked as a suffix to
+        // another builder,
         // and the current length of the buffer (not that the buffers are swapped when suffix linking).
         private int _previousLengthOrFrozenSuffixLengthDelta;
 
@@ -177,7 +180,8 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Returns a sequence of all blobs that represent the content of the builder.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public Blobs GetBlobs()
         {
             if (!IsHead)
@@ -191,7 +195,8 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Compares the current content of this writer with another one.
         /// </summary>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public bool ContentEquals(BlobBuilder other)
         {
             if (!IsHead)
@@ -265,14 +270,17 @@ namespace System.Reflection.Metadata
             return leftContinues == rightContinues;
         }
 
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public byte[] ToArray()
         {
             return ToArray(0, Count);
         }
 
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public byte[] ToArray(int start, int byteCount)
         {
             BlobUtilities.ValidateRange(Count, start, byteCount, nameof(byteCount));
@@ -315,14 +323,17 @@ namespace System.Reflection.Metadata
             return result;
         }
 
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public ImmutableArray<byte> ToImmutableArray()
         {
             return ToImmutableArray(0, Count);
         }
 
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the buffer content.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public ImmutableArray<byte> ToImmutableArray(int start, int byteCount)
         {
             byte[]? array = ToArray(start, byteCount);
@@ -343,7 +354,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="destination"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public void WriteContentTo(Stream destination)
         {
             if (destination is null)
@@ -357,8 +369,10 @@ namespace System.Reflection.Metadata
             }
         }
 
-        /// <exception cref="ArgumentNullException"><paramref name="destination"/> is default(<see cref="BlobWriter"/>).</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="destination"/> is default(<see
+        // cref="BlobWriter"/>).</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public void WriteContentTo(ref BlobWriter destination)
         {
             if (destination.IsDefault)
@@ -373,7 +387,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="destination"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Content is not available, the builder has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Content is not available, the builder has been
+        // linked with another one.</exception>
         public void WriteContentTo(BlobBuilder destination)
         {
             if (destination is null)
@@ -388,7 +403,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="prefix"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void LinkPrefix(BlobBuilder prefix)
         {
             if (prefix is null)
@@ -451,7 +467,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="suffix"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void LinkSuffix(BlobBuilder suffix)
         {
             if (suffix is null)
@@ -486,7 +503,8 @@ namespace System.Reflection.Metadata
 
             PreviousLength += suffix.Length + suffixPreviousLength;
 
-            // Update the _previousLength of the suffix so that suffix.Count = suffix._previousLength + suffix.Length doesn't change.
+            // Update the _previousLength of the suffix so that suffix.Count = suffix._previousLength +
+            // suffix.Length doesn't change.
             // Note that the resulting previous length might be negative.
             // The value is not used, other than for calculating the value of Count property.
             suffix._previousLengthOrFrozenSuffixLengthDelta =
@@ -560,7 +578,8 @@ namespace System.Reflection.Metadata
 
             if (_length == 0)
             {
-                // If the first write into an empty buffer needs more space than the buffer provides, swap the buffers.
+                // If the first write into an empty buffer needs more space than the buffer provides, swap the
+                // buffers.
                 newChunk._buffer = _buffer;
                 _buffer = newBuffer;
             }
@@ -597,8 +616,10 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Reserves a contiguous block of bytes.
         /// </summary>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public Blob ReserveBytes(int byteCount)
         {
             if (byteCount < 0)
@@ -629,14 +650,18 @@ namespace System.Reflection.Metadata
 
         private int ReserveBytesPrimitive(int byteCount)
         {
-            // If the primitive doesn't fit to the current chuck we'll allocate a new chunk that is at least MinChunkSize.
-            // That chunk has to fit the primitive otherwise we might keep allocating new chunks and never end up with one that fits.
+            // If the primitive doesn't fit to the current chuck we'll allocate a new chunk that is at least
+            // MinChunkSize.
+            // That chunk has to fit the primitive otherwise we might keep allocating new chunks and never end
+            // up with one that fits.
             Debug.Assert(byteCount <= MinChunkSize);
             return ReserveBytesImpl(byteCount);
         }
 
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBytes(byte value, int byteCount)
         {
             if (byteCount < 0)
@@ -665,8 +690,10 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public unsafe void WriteBytes(byte* buffer, int byteCount)
         {
             if (buffer is null)
@@ -706,8 +733,10 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="source"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is negative.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="byteCount"/> is
+        // negative.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         /// <returns>Bytes successfully written from the <paramref name="source" />.</returns>
         public int TryWriteBytes(Stream source, int byteCount)
         {
@@ -754,7 +783,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBytes(ImmutableArray<byte> buffer)
         {
             if (buffer.IsDefault)
@@ -766,8 +796,11 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the <paramref
+        // name="buffer"/>.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBytes(ImmutableArray<byte> buffer, int start, int byteCount)
         {
             if (buffer.IsDefault)
@@ -781,7 +814,8 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBytes(byte[] buffer)
         {
             if (buffer is null)
@@ -793,8 +827,11 @@ namespace System.Reflection.Metadata
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="buffer"/> is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and <paramref name="byteCount"/> falls outside of the bounds of the <paramref name="buffer"/>.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Range specified by <paramref name="start"/> and
+        // <paramref name="byteCount"/> falls outside of the bounds of the <paramref
+        // name="buffer"/>.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBytes(byte[] buffer, int start, int byteCount)
         {
             if (buffer is null)
@@ -817,132 +854,152 @@ namespace System.Reflection.Metadata
             WriteBytesUnchecked(buffer);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void PadTo(int position)
         {
             WriteBytes(0, position - Count);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void Align(int alignment)
         {
             int position = Count;
             WriteBytes(0, BitArithmetic.Align(position, alignment) - position);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteBoolean(bool value)
         {
             WriteByte((byte)(value ? 1 : 0));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteByte(byte value)
         {
             int start = ReserveBytesPrimitive(sizeof(byte));
             _buffer.WriteByte(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteSByte(sbyte value)
         {
             WriteByte(unchecked((byte)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteDouble(double value)
         {
             int start = ReserveBytesPrimitive(sizeof(double));
             _buffer.WriteDouble(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteSingle(float value)
         {
             int start = ReserveBytesPrimitive(sizeof(float));
             _buffer.WriteSingle(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteInt16(short value)
         {
             WriteUInt16(unchecked((ushort)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUInt16(ushort value)
         {
             int start = ReserveBytesPrimitive(sizeof(ushort));
             _buffer.WriteUInt16(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteInt16BE(short value)
         {
             WriteUInt16BE(unchecked((ushort)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUInt16BE(ushort value)
         {
             int start = ReserveBytesPrimitive(sizeof(ushort));
             _buffer.WriteUInt16BE(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteInt32BE(int value)
         {
             WriteUInt32BE(unchecked((uint)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUInt32BE(uint value)
         {
             int start = ReserveBytesPrimitive(sizeof(uint));
             _buffer.WriteUInt32BE(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteInt32(int value)
         {
             WriteUInt32(unchecked((uint)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUInt32(uint value)
         {
             int start = ReserveBytesPrimitive(sizeof(uint));
             _buffer.WriteUInt32(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteInt64(long value)
         {
             WriteUInt64(unchecked((ulong)value));
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUInt64(ulong value)
         {
             int start = ReserveBytesPrimitive(sizeof(ulong));
             _buffer.WriteUInt64(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteDecimal(decimal value)
         {
             int start = ReserveBytesPrimitive(BlobUtilities.SizeOfSerializedDecimal);
             _buffer.WriteDecimal(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteGuid(Guid value)
         {
             int start = ReserveBytesPrimitive(BlobUtilities.SizeOfGuid);
             _buffer.WriteGuid(start, value);
         }
 
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteDateTime(DateTime value)
         {
             WriteInt64(value.Ticks);
@@ -952,8 +1009,10 @@ namespace System.Reflection.Metadata
         /// Writes a reference to a heap (heap offset) or a table (row number).
         /// </summary>
         /// <param name="reference">Heap offset or table row number.</param>
-        /// <param name="isSmall">True to encode the reference as 16-bit integer, false to encode as 32-bit integer.</param>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <param name="isSmall">True to encode the reference as 16-bit integer, false to encode as 32-bit
+        // integer.</param>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteReference(int reference, bool isSmall)
         {
             // This code is a very hot path, hence we don't check if the reference actually fits 2B.
@@ -973,7 +1032,8 @@ namespace System.Reflection.Metadata
         /// Writes UTF-16 (little-endian) encoded string at the current position.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUTF16(char[] value)
         {
             if (value is null)
@@ -993,7 +1053,8 @@ namespace System.Reflection.Metadata
         /// Writes UTF-16 (little-endian) encoded string at the current position.
         /// </summary>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUTF16(string value)
         {
             if (value is null)
@@ -1036,7 +1097,8 @@ namespace System.Reflection.Metadata
         /// The string is UTF-8 encoded and prefixed by the its size in bytes.
         /// Null string is represented as a single byte 0xFF.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteSerializedString(string? value)
         {
             if (value == null)
@@ -1054,11 +1116,15 @@ namespace System.Reflection.Metadata
         /// <remarks>
         /// The string is UTF-16 encoded and prefixed by the its size in bytes.
         ///
-        /// This final byte holds the value 1 if and only if any UTF-16 character within the string has any bit set in its top byte,
-        /// or its low byte is any of the following: 0x01-0x08, 0x0E-0x1F, 0x27, 0x2D, 0x7F. Otherwise, it holds 0.
-        /// The 1 signifies Unicode characters that require handling beyond that normally provided for 8-bit encoding sets.
+        /// This final byte holds the value 1 if and only if any UTF-16 character within the string has any
+        // bit set in its top byte,
+        /// or its low byte is any of the following: 0x01-0x08, 0x0E-0x1F, 0x27, 0x2D, 0x7F. Otherwise, it
+        // holds 0.
+        /// The 1 signifies Unicode characters that require handling beyond that normally provided for 8-bit
+        // encoding sets.
         /// </remarks>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUserString(string value)
         {
             if (value is null)
@@ -1079,7 +1145,8 @@ namespace System.Reflection.Metadata
         /// True to encode unpaired surrogates as specified, otherwise replace them with U+FFFD character.
         /// </param>
         /// <exception cref="ArgumentNullException"><paramref name="value"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteUTF8(string value, bool allowUnpairedSurrogates = true)
         {
             if (value is null)
@@ -1156,27 +1223,36 @@ namespace System.Reflection.Metadata
         }
 
         /// <summary>
-        /// Implements compressed signed integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and signatures.
+        /// Implements compressed signed integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and
+        // signatures.
         /// </summary>
         /// <remarks>
-        /// If the value lies between -64 (0xFFFFFFC0) and 63 (0x3F), inclusive, encode as a one-byte integer:
+        /// If the value lies between -64 (0xFFFFFFC0) and 63 (0x3F), inclusive, encode as a one-byte
+        // integer:
         /// bit 7 clear, value bits 5 through 0 held in bits 6 through 1, sign bit (value bit 31) in bit 0.
         ///
-        /// If the value lies between -8192 (0xFFFFE000) and 8191 (0x1FFF), inclusive, encode as a two-byte integer:
-        /// 15 set, bit 14 clear, value bits 12 through 0 held in bits 13 through 1, sign bit(value bit 31) in bit 0.
+        /// If the value lies between -8192 (0xFFFFE000) and 8191 (0x1FFF), inclusive, encode as a two-byte
+        // integer:
+        /// 15 set, bit 14 clear, value bits 12 through 0 held in bits 13 through 1, sign bit(value bit 31)
+        // in bit 0.
         ///
-        /// If the value lies between -268435456 (0xF000000) and 268435455 (0x0FFFFFFF), inclusive, encode as a four-byte integer:
-        /// 31 set, 30 set, bit 29 clear, value bits 27 through 0 held in bits 28 through 1, sign bit(value bit 31) in bit 0.
+        /// If the value lies between -268435456 (0xF000000) and 268435455 (0x0FFFFFFF), inclusive, encode
+        // as a four-byte integer:
+        /// 31 set, 30 set, bit 29 clear, value bits 27 through 0 held in bits 28 through 1, sign bit(value
+        // bit 31) in bit 0.
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a compressed signed integer.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a
+        // compressed signed integer.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteCompressedSignedInteger(int value)
         {
             BlobWriterImpl.WriteCompressedSignedInteger(this, value);
         }
 
         /// <summary>
-        /// Implements compressed unsigned integer encoding as defined by ECMA-335-II chapter 23.2: Blobs and signatures.
+        /// Implements compressed unsigned integer encoding as defined by ECMA-335-II chapter 23.2: Blobs
+        // and signatures.
         /// </summary>
         /// <remarks>
         /// If the value lies between 0 (0x00) and 127 (0x7F), inclusive,
@@ -1185,10 +1261,13 @@ namespace System.Reflection.Metadata
         /// If the value lies between 28 (0x80) and 214 - 1 (0x3FFF), inclusive,
         /// encode as a 2-byte integer with bit 15 set, bit 14 clear (value held in bits 13 through 0).
         ///
-        /// Otherwise, encode as a 4-byte integer, with bit 31 set, bit 30 set, bit 29 clear (value held in bits 28 through 0).
+        /// Otherwise, encode as a 4-byte integer, with bit 31 set, bit 30 set, bit 29 clear (value held in
+        // bits 28 through 0).
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a compressed unsigned integer.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentOutOfRangeException"><paramref name="value"/> can't be represented as a
+        // compressed unsigned integer.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteCompressedInteger(int value)
         {
             BlobWriterImpl.WriteCompressedInteger(this, unchecked((uint)value));
@@ -1197,8 +1276,10 @@ namespace System.Reflection.Metadata
         /// <summary>
         /// Writes a constant value (see ECMA-335 Partition II section 22.9) at the current position.
         /// </summary>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is not of a constant type.</exception>
-        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with another one.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is not of a constant
+        // type.</exception>
+        /// <exception cref="InvalidOperationException">Builder is not writable, it has been linked with
+        // another one.</exception>
         public void WriteConstant(object? value)
         {
             BlobWriterImpl.WriteConstant(this, value);

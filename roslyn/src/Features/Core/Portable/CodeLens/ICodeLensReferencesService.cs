@@ -18,9 +18,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
         );
 
         /// <summary>
-        /// Given a document and syntax node, returns the number of locations where the located node is referenced.
+        /// Given a document and syntax node, returns the number of locations where the located node is
+        // referenced.
         /// <para>
-        ///     Optionally, the service supports capping the reference count to a value specified by <paramref name="maxSearchResults"/>
+        ///     Optionally, the service supports capping the reference count to a value specified by
+        // <paramref name="maxSearchResults"/>
         ///     if <paramref name="maxSearchResults"/> is greater than 0.
         /// </para>
         /// </summary>
@@ -33,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         );
 
         /// <summary>
-        /// Given a document and syntax node, returns a collection of locations where the located node is referenced.
+        /// Given a document and syntax node, returns a collection of locations where the located node is
+        // referenced.
         /// </summary>
         Task<ImmutableArray<ReferenceLocationDescriptor>?> FindReferenceLocationsAsync(
             Solution solution,
@@ -43,7 +46,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         );
 
         /// <summary>
-        /// Given a document and syntax node, returns a collection of locations of methods that refer to the located node.
+        /// Given a document and syntax node, returns a collection of locations of methods that refer to the
+        // located node.
         /// </summary>
         Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(
             Solution solution,
@@ -53,7 +57,8 @@ namespace Microsoft.CodeAnalysis.CodeLens
         );
 
         /// <summary>
-        /// Given a document and syntax node, returns the fully qualified name of the located node's declaration.
+        /// Given a document and syntax node, returns the fully qualified name of the located node's
+        // declaration.
         /// </summary>
         Task<string?> GetFullyQualifiedNameAsync(
             Solution solution,

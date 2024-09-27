@@ -16,7 +16,8 @@ internal static partial class Interop
         internal struct BCRYPT_OAEP_PADDING_INFO
         {
             /// <summary>
-            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the padding.
+            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the
+            // padding.
             /// </summary>
             internal IntPtr pszAlgId;
 
@@ -35,7 +36,8 @@ internal static partial class Interop
         internal struct BCRYPT_PKCS1_PADDING_INFO
         {
             /// <summary>
-            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the padding.
+            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the
+            // padding.
             /// </summary>
             internal IntPtr pszAlgId;
         }
@@ -44,7 +46,8 @@ internal static partial class Interop
         internal struct BCRYPT_PSS_PADDING_INFO
         {
             /// <summary>
-            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the padding.
+            ///     Null-terminated Unicode string that identifies the hashing algorithm used to create the
+            // padding.
             /// </summary>
             internal IntPtr pszAlgId;
 

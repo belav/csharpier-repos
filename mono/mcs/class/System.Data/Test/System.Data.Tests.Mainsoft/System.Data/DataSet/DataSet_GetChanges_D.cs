@@ -167,7 +167,8 @@ namespace tests.system_data_dll.System_Data
             //		{
             //			BeginCase("GetChanges Detached");
             //			dr = ds.GetChanges(DataRowState.Detached).Tables[0].Rows[0];
-            //			object[] tmp = new object[] {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original]};
+            //			object[] tmp = new object[]
+            // {dr[0,DataRowVersion.Original],dr[1,DataRowVersion.Original],dr[2,DataRowVersion.Original]};
             //			Compare(tmp,arrDetached);
             //		}
             //		catch(Exception ex)	{exp = ex;}

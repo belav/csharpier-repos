@@ -27,13 +27,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
     using ProjectErrorMap = ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>>;
 
     /// <summary>
-    /// Diagnostic source for warnings and errors reported from explicit build command invocations in Visual Studio.
+    /// Diagnostic source for warnings and errors reported from explicit build command invocations in
+    // Visual Studio.
     /// VS workspaces calls into us when a build is invoked or completed in Visual Studio.
-    /// <see cref="ProjectExternalErrorReporter"/> calls into us to clear reported diagnostics or to report new diagnostics during the build.
-    /// For each of these callbacks, we create/capture the current <see cref="GetBuildInProgressState()"/> and
-    /// schedule updating/processing this state on a serialized <see cref="_taskQueue"/> in the background.
-    /// The processing phase de-dupes the diagnostics reported from build and intellisense to ensure that the error list does not contain duplicate diagnostics.
-    /// It raises events about diagnostic updates, which eventually trigger the "Build + Intellisense" and "Build only" error list diagnostic
+    /// <see cref="ProjectExternalErrorReporter"/> calls into us to clear reported diagnostics or to
+    // report new diagnostics during the build.
+    /// For each of these callbacks, we create/capture the current <see
+    // cref="GetBuildInProgressState()"/> and
+    /// schedule updating/processing this state on a serialized <see cref="_taskQueue"/> in the
+    // background.
+    /// The processing phase de-dupes the diagnostics reported from build and intellisense to ensure
+    // that the error list does not contain duplicate diagnostics.
+    /// It raises events about diagnostic updates, which eventually trigger the "Build + Intellisense"
+    // and "Build only" error list diagnostic
     /// sources to update the reported diagnostics.
     /// </summary>
     internal sealed class ExternalErrorDiagnosticUpdateSource : IDiagnosticUpdateSource, IDisposable
@@ -54,7 +60,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         /// <summary>
         /// Task queue to serialize all the post-build and post error list refresh tasks.
         /// Error list refresh requires build/live diagnostics de-duping to complete, which happens during
-        /// <see cref="SyncBuildErrorsAndReportOnBuildCompletedAsync(DiagnosticAnalyzerService, InProgressState)"/>.
+        /// <see cref="SyncBuildErrorsAndReportOnBuildCompletedAsync(DiagnosticAnalyzerService,
+        // InProgressState)"/>.
         /// Computationally expensive tasks such as writing build errors into persistent storage,
         /// invoking background analysis on open files/solution after build completes, etc.
         /// are added to this task queue to help ensure faster error list refresh.
@@ -123,20 +130,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             _diagnosticService.AnalyzerInfoCache;
 
         /// <summary>
-        /// Event generated from the serialized <see cref="_taskQueue"/> whenever the build progress in Visual Studio changes.
+        /// Event generated from the serialized <see cref="_taskQueue"/> whenever the build progress in
+        // Visual Studio changes.
         /// Events are guaranteed to be generated in a serial fashion, but may be invoked on any thread.
         /// </summary>
         public event EventHandler<BuildProgress>? BuildProgressChanged;
 
         /// <summary>
-        /// Event generated from the serialized <see cref="_taskQueue"/> whenever build-only diagnostics are reported during a build in Visual Studio.
-        /// These diagnostics are not supported from intellisense and only get refreshed during actual build.
+        /// Event generated from the serialized <see cref="_taskQueue"/> whenever build-only diagnostics are
+        // reported during a build in Visual Studio.
+        /// These diagnostics are not supported from intellisense and only get refreshed during actual
+        // build.
         /// </summary>
         public event EventHandler<ImmutableArray<DiagnosticsUpdatedArgs>>? DiagnosticsUpdated;
 
         /// <summary>
-        /// Event generated from the serialized <see cref="_taskQueue"/> whenever build-only diagnostics are cleared during a build in Visual Studio.
-        /// These diagnostics are not supported from intellisense and only get refreshed during actual build.
+        /// Event generated from the serialized <see cref="_taskQueue"/> whenever build-only diagnostics are
+        // cleared during a build in Visual Studio.
+        /// These diagnostics are not supported from intellisense and only get refreshed during actual
+        // build.
         /// </summary>
         public event EventHandler DiagnosticsCleared
         {
@@ -165,9 +177,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         public ImmutableArray<DiagnosticData> GetBuildErrors() => _lastBuiltResult;
 
         /// <summary>
-        /// Returns true if the given <paramref name="id"/> represents an analyzer diagnostic ID that could be reported
+        /// Returns true if the given <paramref name="id"/> represents an analyzer diagnostic ID that could
+        // be reported
         /// for the given <paramref name="projectId"/> during the current build in progress.
-        /// This API is only intended to be invoked from <see cref="ProjectExternalErrorReporter"/> while a build is in progress.
+        /// This API is only intended to be invoked from <see cref="ProjectExternalErrorReporter"/> while a
+        // build is in progress.
         /// </summary>
         public bool IsSupportedDiagnosticId(ProjectId projectId, string id) =>
             GetBuildInProgressState()?.IsSupportedDiagnosticId(projectId, id) ?? false;
@@ -204,9 +218,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     {
                         // We are going to clear the diagnostics for the current project.
                         // Additionally, we clear errors for all projects that transitively depend on this project.
-                        // Otherwise, fixing errors in core projects in dependency chain will leave back stale diagnostics in dependent projects.
+                        // Otherwise, fixing errors in core projects in dependency chain will leave back stale diagnostics
+                        // in dependent projects.
 
-                        // First check if we already cleared the diagnostics for this project when processing a referenced project.
+                        // First check if we already cleared the diagnostics for this project when processing a referenced
+                        // project.
                         // If so, we don't need to clear diagnostics for it again.
                         if (state.WereProjectErrorsCleared(projectId))
                         {
@@ -431,9 +447,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                         }
 
                         // Explicitly start solution crawler if it didn't start yet. since solution crawler is lazy,
-                        // user might have built solution before workspace fires its first event yet (which is when solution crawler is initialized)
-                        // here we give initializeLazily: false so that solution crawler is fully initialized when we do de-dup live and build errors,
-                        // otherwise, we will think none of error we have here belong to live errors since diagnostic service is not initialized yet.
+                        // user might have built solution before workspace fires its first event yet (which is when solution
+                        // crawler is initialized)
+                        // here we give initializeLazily: false so that solution crawler is fully initialized when we do
+                        // de-dup live and build errors,
+                        // otherwise, we will think none of error we have here belong to live errors since diagnostic
+                        // service is not initialized yet.
                         if (
                             _diagnosticService.GlobalOptions.GetOption(
                                 SolutionCrawlerRegistrationService.EnableSolutionCrawler
@@ -448,7 +467,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                             );
                         }
 
-                        // Mark the status as updated to refresh error list before we invoke 'SyncBuildErrorsAndReportAsync', which can take some time to complete.
+                        // Mark the status as updated to refresh error list before we invoke
+                        // 'SyncBuildErrorsAndReportAsync', which can take some time to complete.
                         OnBuildProgressChanged(inProgressState, BuildProgress.Updated);
 
                         // We are about to update live analyzer data using one from build.
@@ -477,7 +497,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
         /// <summary>
         /// Core method that de-dupes live and build diagnostics at the completion of build.
-        /// It raises diagnostic update events for both the Build-only diagnostics and Build + Intellisense diagnostics
+        /// It raises diagnostic update events for both the Build-only diagnostics and Build + Intellisense
+        // diagnostics
         /// in the error list.
         /// </summary>
         private ValueTask SyncBuildErrorsAndReportOnBuildCompletedAsync(
@@ -662,11 +683,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         }
 
         /// <summary>
-        /// This method is invoked from all <see cref="M:AddNewErrors"/> overloads before it adds the new errors to the in progress state.
-        /// It checks if build reported errors for a different project then the previous callback to report errors.
+        /// This method is invoked from all <see cref="M:AddNewErrors"/> overloads before it adds the new
+        // errors to the in progress state.
+        /// It checks if build reported errors for a different project then the previous callback to report
+        // errors.
         /// This provides a good checkpoint to de-dupe build and live errors for lastProjectId and
         /// raise diagnostic updated events for that project.
-        /// This ensures that error list keeps getting refreshed while a build is in progress, as opposed to doing all the work
+        /// This ensures that error list keeps getting refreshed while a build is in progress, as opposed to
+        // doing all the work
         /// and a single refresh when the build completes.
         /// </summary>
         private ValueTask ReportPreviousProjectErrorsIfRequiredAsync(
@@ -746,8 +770,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             {
                 if (_stateDoNotAccessDirectly == null)
                 {
-                    // We take current snapshot of solution when the state is first created. and through out this code, we use this snapshot.
-                    // Since we have no idea what actual snapshot of solution the out of proc build has picked up, it doesn't remove the race we can have
+                    // We take current snapshot of solution when the state is first created. and through out this code,
+                    // we use this snapshot.
+                    // Since we have no idea what actual snapshot of solution the out of proc build has picked up, it
+                    // doesn't remove the race we can have
                     // between build and diagnostic service, but this at least make us to consistent inside of our code.
                     _stateDoNotAccessDirectly = new InProgressState(
                         this,
@@ -876,7 +902,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             private readonly ExternalErrorDiagnosticUpdateSource _owner;
 
             /// <summary>
-            /// Map from project ID to all the possible analyzer diagnostic IDs that can be reported in the project.
+            /// Map from project ID to all the possible analyzer diagnostic IDs that can be reported in the
+            // project.
             /// </summary>
             /// <remarks>
             /// This map may be accessed concurrently, so needs to ensure thread safety by using locks.
@@ -885,8 +912,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 new();
 
             /// <summary>
-            /// Map from project ID to all the possible intellisense analyzer diagnostic IDs that can be reported in the project.
-            /// A diagnostic is considered to be an intellise analyzer diagnostic if is reported from a non-compilation end action in an analyzer,
+            /// Map from project ID to all the possible intellisense analyzer diagnostic IDs that can be
+            // reported in the project.
+            /// A diagnostic is considered to be an intellise analyzer diagnostic if is reported from a
+            // non-compilation end action in an analyzer,
             /// i.e. we do not require to analyze the entire compilation to compute these diagnostics.
             /// Compilation end diagnostics are considered build-only diagnostics.
             /// </summary>
@@ -896,29 +925,37 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             private readonly Dictionary<ProjectId, ImmutableHashSet<string>> _liveDiagnosticIdMap =
                 new();
 
-            // Fields that are used only from APIs invoked from serialized task queue, hence don't need to be thread safe.
+            // Fields that are used only from APIs invoked from serialized task queue, hence don't need to be
+            // thread safe.
             #region Serialized fields
 
             /// <summary>
-            /// Map from project ID to a dictionary of reported project level diagnostics to an integral counter.
-            /// Project level diagnostics are diagnostics that have no document location, i.e. reported with <see cref="Location.None"/>.
-            /// Integral counter value for each diagnostic is used to order the reported diagnostics in error list
+            /// Map from project ID to a dictionary of reported project level diagnostics to an integral
+            // counter.
+            /// Project level diagnostics are diagnostics that have no document location, i.e. reported with
+            // <see cref="Location.None"/>.
+            /// Integral counter value for each diagnostic is used to order the reported diagnostics in error
+            // list
             /// based on the order in which they were reported during build.
             /// </summary>
             private readonly Dictionary<ProjectId, Dictionary<DiagnosticData, int>> _projectMap =
                 new();
 
             /// <summary>
-            /// Map from document ID to a dictionary of reported document level diagnostics to an integral counter.
-            /// Project level diagnostics are diagnostics that have a valid document location, i.e. reported with a location within a syntax tree.
-            /// Integral counter value for each diagnostic is used to order the reported diagnostics in error list
+            /// Map from document ID to a dictionary of reported document level diagnostics to an integral
+            // counter.
+            /// Project level diagnostics are diagnostics that have a valid document location, i.e. reported
+            // with a location within a syntax tree.
+            /// Integral counter value for each diagnostic is used to order the reported diagnostics in error
+            // list
             /// based on the order in which they were reported during build.
             /// </summary>
             private readonly Dictionary<DocumentId, Dictionary<DiagnosticData, int>> _documentMap =
                 new();
 
             /// <summary>
-            /// Set of projects for which we have already cleared the build and intellisense diagnostics in the error list.
+            /// Set of projects for which we have already cleared the build and intellisense diagnostics in the
+            // error list.
             /// </summary>
             private readonly HashSet<ProjectId> _projectsWithErrorsCleared = new();
 
@@ -934,12 +971,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
             private readonly HashSet<ProjectId> _projectsWithErrors = new();
 
             /// <summary>
-            /// Last project for which build reported an error through one of the <see cref="M:AddError"/> methods.
+            /// Last project for which build reported an error through one of the <see cref="M:AddError"/>
+            // methods.
             /// </summary>
             private ProjectId? _lastProjectWithReportedErrors;
 
             /// <summary>
-            /// Counter to help order the diagnostics in error list based on the order in which they were reported during build.
+            /// Counter to help order the diagnostics in error list based on the order in which they were
+            // reported during build.
             /// </summary>
             private int _incrementDoNotAccessDirectly;
 
@@ -1123,8 +1162,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
             private bool IsLive(Project project, DiagnosticData diagnosticData)
             {
-                // REVIEW: current design is that we special case compiler analyzer case and we accept only document level
-                //         diagnostic as live. otherwise, we let them be build errors. we changed compiler analyzer accordingly as well
+                // REVIEW: current design is that we special case compiler analyzer case and we accept only document
+                // level
+                //         diagnostic as live. otherwise, we let them be build errors. we changed compiler analyzer
+                // accordingly as well
                 //         so that it doesn't report project level diagnostic as live errors.
                 if (
                     !IsDocumentLevelDiagnostic(diagnosticData)
@@ -1135,9 +1176,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                     return false;
                 }
 
-                // Compiler diagnostics reported on additional documents indicate mapped diagnostics, such as compiler diagnostics
-                // in razor files which are actually reported on generated source files but mapped to razor files during build.
-                // These are not reported on additional files during live analysis, and can be considered to be build-only diagnostics.
+                // Compiler diagnostics reported on additional documents indicate mapped diagnostics, such as
+                // compiler diagnostics
+                // in razor files which are actually reported on generated source files but mapped to razor files
+                // during build.
+                // These are not reported on additional files during live analysis, and can be considered to be
+                // build-only diagnostics.
                 if (
                     IsAdditionalDocumentDiagnostic(project, diagnosticData)
                     && diagnosticData.CustomTags.Contains(WellKnownDiagnosticTags.Compiler)
@@ -1362,7 +1406,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 }
 
                 // TODO: unclear why we are comparing the original paths, and not the normalized paths.   This may
-                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right span
+                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right
+                // span
                 // to be considering.
                 return (item1.DocumentId != null)
                     ? item1.DocumentId == item2.DocumentId
@@ -1372,7 +1417,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
 
             public int GetHashCode(DiagnosticData obj)
             {
-                // TODO: unclear on why we're hashing the start of the data location, whereas .Equals above checks the
+                // TODO: unclear on why we're hashing the start of the data location, whereas .Equals above checks
+                // the
                 // full span.
                 var result = Hash.Combine(
                     obj.Id,
@@ -1392,7 +1438,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
                 );
 
                 // TODO: unclear why we are hashing the original path, and not the normalized path.   This may
-                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right span
+                // indicate a bug. If it is correct behavior, this should be documented as to why this is the right
+                // span
                 // to be considering.
                 return obj.DocumentId != null
                     ? Hash.Combine(obj.DocumentId, result)

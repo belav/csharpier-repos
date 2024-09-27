@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
     /// <summary>
-    /// Base class for <see cref="QuickInfoService"/>'s that delegate to <see cref="QuickInfoProvider"/>'s.
+    /// Base class for <see cref="QuickInfoService"/>'s that delegate to <see
+    // cref="QuickInfoProvider"/>'s.
     /// </summary>
     internal abstract class QuickInfoServiceWithProviders : QuickInfoService
     {

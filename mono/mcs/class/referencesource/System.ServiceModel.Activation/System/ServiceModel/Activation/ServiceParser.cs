@@ -138,7 +138,8 @@ namespace System.ServiceModel.Activation
         }
 
         /// <summary>
-        /// Parsing the content of the service file and retrieve the serviceAttributeValue attribute for ComPlus.
+        /// Parsing the content of the service file and retrieve the serviceAttributeValue attribute for
+        // ComPlus.
         /// </summary>
         /// <param name="serviceText">The content of the service file.</param>
         /// <returns>The "serviceAttributeValue" attribute of the Service directive. </returns>
@@ -268,7 +269,8 @@ namespace System.ServiceModel.Activation
         }
 
         /// <summary>
-        /// This method returns the custom string that is to be passed to ServiceHostingEnvironment from BuildManager.
+        /// This method returns the custom string that is to be passed to ServiceHostingEnvironment from
+        // BuildManager.
         /// </summary>
         /// <param name="compiledAssembly">The full name of the built assembly for inline code.</param>
         internal string CreateParseString(Assembly compiledAssembly)
@@ -290,9 +292,11 @@ namespace System.ServiceModel.Activation
                 // CSDMain #192135
                 // Minimize code change by doing 2 passes to have assembly containing type at the top of the list.
                 // As a result, this assembly will get loaded first in ServiceHostFactory.CreateServiceHost.
-                // In the multi-targetting scenario this prevents the runtime from trying to load a newer CLR assembly
+                // In the multi-targetting scenario this prevents the runtime from trying to load a newer CLR
+                // assembly
                 // and failing.  In the happy case, duplicate assembly references may occur (no effect on runtime).
-                // Note that if the service type is contained in a framework assembly, this does not fix the problem.
+                // Note that if the service type is contained in a framework assembly, this does not fix the
+                // problem.
                 // Future improvement is to write fully qualified type name and let CLR handle load/search.
                 if (!string.IsNullOrEmpty(serviceAttributeValue))
                 {

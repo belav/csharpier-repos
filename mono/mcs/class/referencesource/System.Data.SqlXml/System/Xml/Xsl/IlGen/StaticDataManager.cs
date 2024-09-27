@@ -16,7 +16,8 @@ using System.Xml.Xsl.Runtime;
 namespace System.Xml.Xsl.IlGen
 {
     /// <summary>
-    /// This internal class maintains a list of unique values.  Each unique value is assigned a unique ID, which can
+    /// This internal class maintains a list of unique values.  Each unique value is assigned a unique
+    // ID, which can
     /// be used to quickly access the value, since it corresponds to the value's position in the list.
     /// </summary>
     internal class UniqueList<T>
@@ -25,7 +26,8 @@ namespace System.Xml.Xsl.IlGen
         private List<T> list = new List<T>();
 
         /// <summary>
-        /// If "value" is already in the list, do not add it.  Return the unique ID of the value in the list.
+        /// If "value" is already in the list, do not add it.  Return the unique ID of the value in the
+        // list.
         /// </summary>
         public int Add(T value)
         {
@@ -93,7 +95,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Add a name filter to the list of unique filters that are used by this query.  Return the index of
+        /// Add a name filter to the list of unique filters that are used by this query.  Return the index
+        // of
         /// the unique filter in the list.
         /// </summary>
         public int DeclareNameFilter(string locName, string nsUri)
@@ -105,7 +108,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Return an array of all name filters, where each name filter is represented as a pair of integer offsets (localName, namespaceUri)
+        /// Return an array of all name filters, where each name filter is represented as a pair of integer
+        // offsets (localName, namespaceUri)
         /// into the Names array (null if no name filters).
         /// </summary>
         public Int32Pair[] NameFilters
@@ -114,7 +118,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Add a list of QilExpression NamespaceDeclarations to an array of strings (prefix followed by namespace URI).
+        /// Add a list of QilExpression NamespaceDeclarations to an array of strings (prefix followed by
+        // namespace URI).
         /// Return index of the prefix mappings within this array.
         /// </summary>
         public int DeclarePrefixMappings(IList<QilNode> list)
@@ -145,7 +150,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Return an array of all prefix mappings that are used by the query to compute names (null if no mappings).
+        /// Return an array of all prefix mappings that are used by the query to compute names (null if no
+        // mappings).
         /// </summary>
         public StringPair[][] PrefixMappingsList
         {
@@ -226,7 +232,8 @@ namespace System.Xml.Xsl.IlGen
         }
 
         /// <summary>
-        /// Add "collation" to the list of unique collations that are used by this query.  Return the index of
+        /// Add "collation" to the list of unique collations that are used by this query.  Return the index
+        // of
         /// the unique collation in the list.
         /// </summary>
         public int DeclareCollation(string collation)

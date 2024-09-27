@@ -193,7 +193,8 @@ namespace System.Globalization
         // CultureInfo updates this
         internal bool m_isReadOnly = false;
 
-        // This flag gives hints about if formatting/parsing should perform special code path for things like
+        // This flag gives hints about if formatting/parsing should perform special code path for things
+        // like
         // genitive form or leap year month names.
         [OptionalField(VersionAdded = 2)]
         internal DateTimeFormatFlags formatFlags = DateTimeFormatFlags.NotInitialized;
@@ -510,7 +511,8 @@ namespace System.Globalization
             InitializeOverridableProperties(m_cultureData, calendar.ID);
 
             //
-            //  turn off read only state till we finish initializing all fields and then store read only state after we are done.
+            //  turn off read only state till we finish initializing all fields and then store read only state
+            // after we are done.
             //
             bool isReadOnly = m_isReadOnly;
             m_isReadOnly = false;
@@ -547,8 +549,10 @@ namespace System.Globalization
                 s_calendarNativeNames = new Hashtable();
 #endif // FEATURE_CORECLR
 
-            // Important to initialize these fields otherwise we may run into exception when deserializing on Whidbey
-            // because Whidbey try to initialize some of these fields using calendar data which could be null values
+            // Important to initialize these fields otherwise we may run into exception when deserializing on
+            // Whidbey
+            // because Whidbey try to initialize some of these fields using calendar data which could be null
+            // values
             // and then we get exceptions.  So we call the accessors to force the caches to get loaded.
             Object o;
             o = this.LongTimePattern;
@@ -724,7 +728,8 @@ namespace System.Globalization
 
                 //
                 // Because the culture is agile object which can be attached to a thread and then thread can travel
-                // to another app domain then we prevent attaching any customized object to culture that we cannot contol.
+                // to another app domain then we prevent attaching any customized object to culture that we cannot
+                // contol.
                 //
                 CultureInfo.CheckDomainSafetyObject(value, this);
 
@@ -768,7 +773,8 @@ namespace System.Globalization
                             shortDatePattern = null;
                             yearMonthPattern = null;
 
-                            // These properies are not in the OS data, but they are dependent on the values like shortDatePattern.
+                            // These properies are not in the OS data, but they are dependent on the values like
+                            // shortDatePattern.
                             fullDateTimePattern = null; // Long date + long time
                             generalShortTimePattern = null; // short date + short time
                             generalLongTimePattern = null; // short date + long time
@@ -823,13 +829,13 @@ namespace System.Globalization
             }
         }
 
-        /*=================================GetEra==========================
-        **Action: Get the era value by parsing the name of the era.
-        **Returns: The era value for the specified era name.
-        **      -1 if the name of the era is not valid or not supported.
-        **Arguments: eraName    the name of the era.
-        **Exceptions: None.
-        ============================================================================*/
+/*=================================GetEra==========================
+**Action: Get the era value by parsing the name of the era.
+**Returns: The era value for the specified era name.
+**      -1 if the name of the era is not valid or not supported.
+**Arguments: eraName    the name of the era.
+**Exceptions: None.
+============================================================================*/
 
 
         public int GetEra(String eraName)
@@ -923,14 +929,14 @@ namespace System.Globalization
             }
         }
 
-        /*=================================GetEraName==========================
-        **Action: Get the name of the era for the specified era value.
-        **Returns: The name of the specified era.
-        **Arguments:
-        **      era the era value.
-        **Exceptions:
-        **      ArguementException if the era valie is invalid.
-        ============================================================================*/
+/*=================================GetEraName==========================
+**Action: Get the name of the era for the specified era value.
+**Returns: The name of the specified era.
+**Arguments:
+**      era the era value.
+**Exceptions:
+**      ArguementException if the era valie is invalid.
+============================================================================*/
 
         // Era names are 1 indexed
         public String GetEraName(int era)
@@ -1006,7 +1012,8 @@ namespace System.Globalization
             }
         }
 
-        // Note that cultureData derives this from the short date format (unless someone's set this previously)
+        // Note that cultureData derives this from the short date format (unless someone's set this
+        // previously)
         // Note that this property is quite undesirable.
         public String DateSeparator
         {
@@ -1421,12 +1428,12 @@ namespace System.Globalization
             get { return (sortableDateTimePattern); }
         }
 
-        /*=================================GeneralShortTimePattern=====================
-        **Property: Return the pattern for 'g' general format: shortDate + short time
-        **Note: This is used by DateTimeFormat.cs to get the pattern for 'g'
-        **      We put this internal property here so that we can avoid doing the
-        **      concatation every time somebody asks for the general format.
-        ==============================================================================*/
+/*=================================GeneralShortTimePattern=====================
+**Property: Return the pattern for 'g' general format: shortDate + short time
+**Note: This is used by DateTimeFormat.cs to get the pattern for 'g'
+**      We put this internal property here so that we can avoid doing the
+**      concatation every time somebody asks for the general format.
+==============================================================================*/
 
         internal String GeneralShortTimePattern
         {
@@ -1440,12 +1447,12 @@ namespace System.Globalization
             }
         }
 
-        /*=================================GeneralLongTimePattern=====================
-        **Property: Return the pattern for 'g' general format: shortDate + Long time
-        **Note: This is used by DateTimeFormat.cs to get the pattern for 'g'
-        **      We put this internal property here so that we can avoid doing the
-        **      concatation every time somebody asks for the general format.
-        ==============================================================================*/
+/*=================================GeneralLongTimePattern=====================
+**Property: Return the pattern for 'g' general format: shortDate + Long time
+**Note: This is used by DateTimeFormat.cs to get the pattern for 'g'
+**      We put this internal property here so that we can avoid doing the
+**      concatation every time somebody asks for the general format.
+==============================================================================*/
 
         internal String GeneralLongTimePattern
         {
@@ -1459,19 +1466,21 @@ namespace System.Globalization
             }
         }
 
-        /*=================================DateTimeOffsetPattern==========================
-        **Property: Return the default pattern DateTimeOffset : shortDate + long time + time zone offset
-        **Note: This is used by DateTimeFormat.cs to get the pattern for short Date + long time +  time zone offset
-        **      We put this internal property here so that we can avoid doing the
-        **      concatation every time somebody uses this form
-        ==============================================================================*/
+/*=================================DateTimeOffsetPattern==========================
+**Property: Return the default pattern DateTimeOffset : shortDate + long time + time zone offset
+**Note: This is used by DateTimeFormat.cs to get the pattern for short Date + long time +  time zone
+offset
+**      We put this internal property here so that we can avoid doing the
+**      concatation every time somebody uses this form
+==============================================================================*/
 
-        /*=================================DateTimeOffsetPattern==========================
-        **Property: Return the default pattern DateTimeOffset : shortDate + long time + time zone offset
-        **Note: This is used by DateTimeFormat.cs to get the pattern for short Date + long time +  time zone offset
-        **      We put this internal property here so that we can avoid doing the
-        **      concatation every time somebody uses this form
-        ==============================================================================*/
+/*=================================DateTimeOffsetPattern==========================
+**Property: Return the default pattern DateTimeOffset : shortDate + long time + time zone offset
+**Note: This is used by DateTimeFormat.cs to get the pattern for short Date + long time +  time zone
+offset
+**      We put this internal property here so that we can avoid doing the
+**      concatation every time somebody uses this form
+==============================================================================*/
 
         internal String DateTimeOffsetPattern
         {
@@ -1481,7 +1490,8 @@ namespace System.Globalization
                 {
                     dateTimeOffsetPattern = ShortDatePattern + " " + LongTimePattern;
 
-                    /* LongTimePattern might contain a "z" as part of the format string in which case we don't want to append a time zone offset */
+/* LongTimePattern might contain a "z" as part of the format string in which case we don't want to
+append a time zone offset */
 
                     bool foundZ = false;
                     bool inQuote = false;
@@ -1491,15 +1501,15 @@ namespace System.Globalization
                         switch (LongTimePattern[i])
                         {
                             case 'z':
-                                /* if we aren't in a quote, we've found a z */
+/* if we aren't in a quote, we've found a z */
                                 foundZ = !inQuote;
-                                /* we'll fall out of the loop now because the test includes !foundZ */
+/* we'll fall out of the loop now because the test includes !foundZ */
                                 break;
                             case '\'':
                             case '\"':
                                 if (inQuote && (quote == LongTimePattern[i]))
                                 {
-                                    /* we were in a quote and found a matching exit quote, so we are outside a quote now */
+/* we were in a quote and found a matching exit quote, so we are outside a quote now */
                                     inQuote = false;
                                 }
                                 else if (!inQuote)
@@ -1509,7 +1519,7 @@ namespace System.Globalization
                                 }
                                 else
                                 {
-                                    /* we were in a quote and saw the other type of quote character, so we are still in a quote */
+/* we were in a quote and saw the other type of quote character, so we are still in a quote */
                                 }
                                 break;
                             case '%':
@@ -1530,7 +1540,8 @@ namespace System.Globalization
             }
         }
 
-        // Note that cultureData derives this from the long time format (unless someone's set this previously)
+        // Note that cultureData derives this from the long time format (unless someone's set this
+        // previously)
         // Note that this property is quite undesirable.
         //
         public String TimeSeparator
@@ -1617,7 +1628,8 @@ namespace System.Globalization
         }
 
         //
-        // Check if a string array contains a null value, and throw ArgumentNullException with parameter name "value"
+        // Check if a string array contains a null value, and throw ArgumentNullException with parameter
+        // name "value"
         //
         static private void CheckNullValue(String[] values, int length)
         {
@@ -1893,7 +1905,8 @@ namespace System.Globalization
         //  internalGetLeapYearMonthNames
         //
         //  Actions: Retrieve the month names used in a leap year.
-        //      If this culture does not have different month names in a leap year, the normal month name is returned.
+        //      If this culture does not have different month names in a leap year, the normal month name is
+        // returned.
         //  Agruments: None. (can use abbreviated later if needed)
         //
         internal String[] internalGetLeapYearMonthNames( /*bool abbreviated*/
@@ -2200,7 +2213,8 @@ namespace System.Globalization
             get { return GetMergedPatterns(this.UnclonedLongTimePatterns, this.LongTimePattern); }
         }
 
-        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a writable cache copy.
+        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a
+        // writable cache copy.
         // This won't include default, call AllYearMonthPatterns
         private String[] UnclonedYearMonthPatterns
         {
@@ -2223,7 +2237,8 @@ namespace System.Globalization
             }
         }
 
-        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a writable cache copy.
+        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a
+        // writable cache copy.
         // This won't include default, call AllShortDatePatterns
         private String[] UnclonedShortDatePatterns
         {
@@ -2246,7 +2261,8 @@ namespace System.Globalization
             }
         }
 
-        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a writable cache copy.
+        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a
+        // writable cache copy.
         // This won't include default, call AllLongDatePatterns
         private String[] UnclonedLongDatePatterns
         {
@@ -2269,7 +2285,8 @@ namespace System.Globalization
             }
         }
 
-        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a writable cache copy.
+        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a
+        // writable cache copy.
         // This won't include default, call AllShortTimePatterns
         private String[] UnclonedShortTimePatterns
         {
@@ -2288,7 +2305,8 @@ namespace System.Globalization
             }
         }
 
-        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a writable cache copy.
+        // NOTE: Clone this string array if you want to return it to user.  Otherwise, you are returning a
+        // writable cache copy.
         // This won't include default, call AllLongTimePatterns
         private String[] UnclonedLongTimePatterns
         {
@@ -2335,10 +2353,13 @@ namespace System.Globalization
         }
 
         // Return the native name for the calendar in DTFI.Calendar.  The native name is referred to
-        // the culture used to create the DTFI.  E.g. in the following example, the native language is Japanese.
-        // DateTimeFormatInfo dtfi = new CultureInfo("ja-JP", false).DateTimeFormat.Calendar = new JapaneseCalendar();
+        // the culture used to create the DTFI.  E.g. in the following example, the native language is
+        // Japanese.
+        // DateTimeFormatInfo dtfi = new CultureInfo("ja-JP", false).DateTimeFormat.Calendar = new
+        // JapaneseCalendar();
         // String nativeName = dtfi.NativeCalendarName; // Get the Japanese name for the Japanese calendar.
-        // DateTimeFormatInfo dtfi = new CultureInfo("ja-JP", false).DateTimeFormat.Calendar = new GregorianCalendar(GregorianCalendarTypes.Localized);
+        // DateTimeFormatInfo dtfi = new CultureInfo("ja-JP", false).DateTimeFormat.Calendar = new
+        // GregorianCalendar(GregorianCalendarTypes.Localized);
         // String nativeName = dtfi.NativeCalendarName; // Get the Japanese name for the Gregorian calendar.
         [System.Runtime.InteropServices.ComVisible(false)]
         public String NativeCalendarName
@@ -2347,8 +2368,10 @@ namespace System.Globalization
         }
 
         //
-        // Used by custom cultures and others to set the list of available formats. Note that none of them are
-        // explicitly used unless someone calls GetAllDateTimePatterns and subsequently uses one of the items
+        // Used by custom cultures and others to set the list of available formats. Note that none of them
+        // are
+        // explicitly used unless someone calls GetAllDateTimePatterns and subsequently uses one of the
+        // items
         // from the list.
         //
         // Most of the format characters that can be used in GetAllDateTimePatterns are
@@ -2556,7 +2579,8 @@ namespace System.Globalization
             {
                 if (m_compareInfo == null)
                 {
-                    // We use the regular GetCompareInfo here to make sure the created CompareInfo object is stored in the
+                    // We use the regular GetCompareInfo here to make sure the created CompareInfo object is stored in
+                    // the
                     // CompareInfo cache. otherwise we would just create CompareInfo using m_cultureData.
                     m_compareInfo = CompareInfo.GetCompareInfo(m_cultureData.SCOMPAREINFO);
                 }
@@ -2619,7 +2643,8 @@ namespace System.Globalization
 
         //
         // Actions: Return the internal flag used in formatting and parsing.
-        //  The flag can be used to indicate things like if genitive forms is used in this DTFi, or if leap year gets different month names.
+        //  The flag can be used to indicate things like if genitive forms is used in this DTFi, or if leap
+        // year gets different month names.
         //
         internal DateTimeFormatFlags FormatFlags
         {
@@ -2661,7 +2686,7 @@ namespace System.Globalization
             {
                 switch (calendar.ID)
                 {
-                    /*  */
+/*  */
                     // If is y/yy, do not get (year % 100). "y" will print
                     // year without leading zero.  "yy" will print year with two-digit in leading zero.
                     // If pattern is yyy/yyyy/..., print year value with two-digit in leading zero.
@@ -2677,7 +2702,8 @@ namespace System.Globalization
             }
         }
 
-        // Returns whether the YearMonthAdjustment function has any fix-up work to do for this culture/calendar.
+        // Returns whether the YearMonthAdjustment function has any fix-up work to do for this
+        // culture/calendar.
         internal Boolean HasYearMonthAdjustment
         {
             get { return ((FormatFlags & DateTimeFormatFlags.UseHebrewRule) != 0); }
@@ -2694,7 +2720,8 @@ namespace System.Globalization
             {
                 // Special rules to fix up the Hebrew year/month
 
-                // When formatting, we only format up to the hundred digit of the Hebrew year, although Hebrew year is now over 5000.
+                // When formatting, we only format up to the hundred digit of the Hebrew year, although Hebrew year
+                // is now over 5000.
                 // E.g. if the year is 5763, we only format as 763.
                 if (year < 1000)
                 {
@@ -2710,8 +2737,10 @@ namespace System.Globalization
                     return false;
                 }
 
-                // To handle leap months, the set of month names in the symbol table does not always correspond to the numbers.
-                // For non-leap years, month 7 (Adar Bet) is not present, so we need to make using this month invalid and
+                // To handle leap months, the set of month names in the symbol table does not always correspond to
+                // the numbers.
+                // For non-leap years, month 7 (Adar Bet) is not present, so we need to make using this month
+                // invalid and
                 // shuffle the other months down.
                 if (parsedMonthName)
                 {
@@ -2732,7 +2761,8 @@ namespace System.Globalization
         }
 
         //
-        // DateTimeFormatInfo tokenizer.  This is used by DateTime.Parse() to break input string into tokens.
+        // DateTimeFormatInfo tokenizer.  This is used by DateTime.Parse() to break input string into
+        // tokens.
         //
         [NonSerialized]
         TokenHashValue[] m_dtfiTokenHash;
@@ -2797,13 +2827,13 @@ namespace System.Globalization
             return (temp);
         }
 
-        /*
-        
-        
-        
-        
-        
-         */
+/*
+
+
+
+
+
+*/
         internal static DateTimeFormatInfo GetTaiwanCalendarDTFI()
         {
             DateTimeFormatInfo temp = s_zhtwDTFI;
@@ -2842,9 +2872,12 @@ namespace System.Globalization
                 if (KoreanHourSuff != sep && CJKHourSuff != sep && ChineseHourSuff != sep)
                 {
                     //
-                    // On the Macintosh, the default TimeSeparator is identical to the KoreanHourSuff, CJKHourSuff, or ChineseHourSuff for some cultures like
-                    // ja-JP and ko-KR.  In these cases having the same symbol inserted into the hash table with multiple TokenTypes causes undesirable
-                    // DateTime.Parse behavior.  For instance, the DateTimeFormatInfo.Tokenize() method might return SEP_DateOrOffset for KoreanHourSuff
+                    // On the Macintosh, the default TimeSeparator is identical to the KoreanHourSuff, CJKHourSuff, or
+                    // ChineseHourSuff for some cultures like
+                    // ja-JP and ko-KR.  In these cases having the same symbol inserted into the hash table with
+                    // multiple TokenTypes causes undesirable
+                    // DateTime.Parse behavior.  For instance, the DateTimeFormatInfo.Tokenize() method might return
+                    // SEP_DateOrOffset for KoreanHourSuff
                     // instead of SEP_HourSuff.
                     //
                     InsertHash(temp, this.TimeSeparator, TokenType.SEP_Time, 0);
@@ -2895,7 +2928,8 @@ namespace System.Globalization
 
                 if (LanguageName.Equals("ky"))
                 {
-                    // For some cultures, the date separator works more like a comma, being allowed before or after any date part
+                    // For some cultures, the date separator works more like a comma, being allowed before or after any
+                    // date part
                     InsertHash(temp, dateSeparatorOrTimeZoneOffset, TokenType.IgnorableSymbol, 0);
                 }
                 else
@@ -2914,9 +2948,12 @@ namespace System.Globalization
                 // Ensure the formatflags is initialized.
                 DateTimeFormatFlags flag = FormatFlags;
 
-                // For some cultures, the date separator works more like a comma, being allowed before or after any date part.
-                // In these cultures, we do not use normal date separator since we disallow date separator after a date terminal state.
-                // This is determined in DateTimeFormatInfoScanner.  Use this flag to determine if we should treat date separator as ignorable symbol.
+                // For some cultures, the date separator works more like a comma, being allowed before or after any
+                // date part.
+                // In these cultures, we do not use normal date separator since we disallow date separator after a
+                // date terminal state.
+                // This is determined in DateTimeFormatInfoScanner.  Use this flag to determine if we should treat
+                // date separator as ignorable symbol.
                 bool useDateSepAsIgnorableSymbol = false;
 
                 String monthPostfix = null;
@@ -3025,7 +3062,8 @@ namespace System.Globalization
                     }
                     if (this.Calendar.GetType() != typeof(JapaneseCalendar))
                     {
-                        // Special case for Japanese.  If this is a Japanese DTFI, and the calendar is not Japanese calendar,
+                        // Special case for Japanese.  If this is a Japanese DTFI, and the calendar is not Japanese
+                        // calendar,
                         // we will check Japanese Era name as well when the calendar is Gregorian.
                         DateTimeFormatInfo jaDtfi = GetJapaneseCalendarDTFI();
                         for (int i = 1; i <= jaDtfi.Calendar.Eras.Length; i++)
@@ -3263,7 +3301,8 @@ namespace System.Globalization
                     // Not found.
                     break;
                 }
-                // Check this value has the right category (regular token or separator token) that we are looking for.
+                // Check this value has the right category (regular token or separator token) that we are looking
+                // for.
                 if (
                     ((int)value.tokenType & (int)TokenMask) > 0
                     && value.tokenString.Length <= remaining
@@ -3283,7 +3322,8 @@ namespace System.Globalization
                     {
                         if (isLetter)
                         {
-                            // If this token starts with a letter, make sure that we won't allow partial match.  So you can't tokenize "MarchWed" separately.
+                            // If this token starts with a letter, make sure that we won't allow partial match.  So you can't
+                            // tokenize "MarchWed" separately.
                             int nextCharIndex;
                             if ((nextCharIndex = str.Index + value.tokenString.Length) < str.len)
                             {
@@ -3388,7 +3428,8 @@ namespace System.Globalization
             }
             TokenHashValue value;
             int i = 0;
-            // If there is whitespace characters in the beginning and end of the string, trim them since whitespaces are skipped by
+            // If there is whitespace characters in the beginning and end of the string, trim them since
+            // whitespaces are skipped by
             // DateTime.Parse().
             if (Char.IsWhiteSpace(str[0]) || Char.IsWhiteSpace(str[str.Length - 1]))
             {
@@ -3414,7 +3455,8 @@ namespace System.Globalization
                     // Collision happens. Find another slot.
                     if (str.Length >= value.tokenString.Length)
                     {
-                        // If there are two tokens with the same prefix, we have to make sure that the longer token should be at the front of
+                        // If there are two tokens with the same prefix, we have to make sure that the longer token should
+                        // be at the front of
                         // the shorter ones.
                         if (
                             String.Compare(
@@ -3448,21 +3490,26 @@ namespace System.Globalization
                             {
                                 // Same token.  If they have different types (regular token vs separator token).  Add them.
                                 // If we have the same regular token or separator token in the hash already, do NOT update the hash.
-                                // Therefore, the order of inserting token is significant here regarding what tokenType will be kept in the hash.
+                                // Therefore, the order of inserting token is significant here regarding what tokenType will be kept
+                                // in the hash.
 
 
                                 //
-                                // Check the current value of RegularToken (stored in the lower 8-bit of tokenType) , and insert the tokenType into the hash ONLY when we don't have a RegularToken yet.
-                                // Also check the current value of SeparatorToken (stored in the upper 8-bit of token), and insert the tokenType into the hash ONLY when we don't have the SeparatorToken yet.
+                                // Check the current value of RegularToken (stored in the lower 8-bit of tokenType) , and insert the
+                                // tokenType into the hash ONLY when we don't have a RegularToken yet.
+                                // Also check the current value of SeparatorToken (stored in the upper 8-bit of token), and insert
+                                // the tokenType into the hash ONLY when we don't have the SeparatorToken yet.
                                 //
 
                                 int nTokenType = (int)tokenType;
                                 int nCurrentTokenTypeInHash = (int)value.tokenType;
 
                                 // The idea behind this check is:
-                                // - if the app is targetting 4.5.1 or above OR the compat flag is set, use the correct behavior by default.
+                                // - if the app is targetting 4.5.1 or above OR the compat flag is set, use the correct behavior by
+                                // default.
                                 // - if the app is targetting 4.5 or below AND the compat switch is set, use the correct behavior
-                                // - if the app is targetting 4.5 or below AND the compat switch is NOT set, use the incorrect behavior
+                                // - if the app is targetting 4.5 or below AND the compat switch is NOT set, use the incorrect
+                                // behavior
                                 if (
                                     preferExistingTokens
                                     || BinaryCompatibility.TargetsAtLeast_Desktop_V4_5_1
@@ -3492,8 +3539,10 @@ namespace System.Globalization
                                 }
                                 else
                                 {
-                                    // The following logic is incorrect and causes updates to happen depending on the bitwise relationship between the existing token type and the
-                                    // the stored token type.  It was this way in .NET 4 RTM.  The behavior above is correct and will be adopted going forward.
+                                    // The following logic is incorrect and causes updates to happen depending on the bitwise
+                                    // relationship between the existing token type and the
+                                    // the stored token type.  It was this way in .NET 4 RTM.  The behavior above is correct and will be
+                                    // adopted going forward.
 
                                     if (
                                         (
@@ -3522,7 +3571,8 @@ namespace System.Globalization
                         }
                     }
                 }
-                //// Console.WriteLine("  COLLISION. Old Key: {0}, New Key: {1}", hashTable[hashcode].tokenString, str);
+                //// Console.WriteLine("  COLLISION. Old Key: {0}, New Key: {1}", hashTable[hashcode].tokenString,
+                // str);
                 i++;
                 hashcode += hashProbe;
                 if (hashcode >= TOKEN_HASH_SIZE)

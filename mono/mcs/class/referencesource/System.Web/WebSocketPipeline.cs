@@ -129,7 +129,8 @@ namespace System.Web
                 // slim down the HttpContext as much as possible to allow the GC to reclaim memory
                 _httpContext.CompleteTransitionToWebSocket();
 
-                // always install a new SynchronizationContext, even if the user is running in legacy SynchronizationContext mode
+                // always install a new SynchronizationContext, even if the user is running in legacy
+                // SynchronizationContext mode
                 AspNetSynchronizationContext syncContext = new AspNetSynchronizationContext(this);
                 _httpContext.SyncContext = syncContext;
 
@@ -142,8 +143,10 @@ namespace System.Web
                     // bump up the total count (the currently-executing count is recorded separately)
                     PerfCounters.IncrementCounter(AppPerfCounter.REQUESTS_TOTAL_WEBSOCKETS);
 
-                    // Release the reference to the user delegate (which might just be a simple initialization routine) so that
-                    // the GC can claim it. The only thing that needs to remain alive is the Task itself, which we're referencing.
+                    // Release the reference to the user delegate (which might just be a simple initialization routine)
+                    // so that
+                    // the GC can claim it. The only thing that needs to remain alive is the Task itself, which we're
+                    // referencing.
                     Task task = null;
                     syncContext.Send(
                         _ =>
@@ -216,7 +219,8 @@ namespace System.Web
         {
             get
             {
-                // if processing is finished, this ISyncContext is no longer logically associated with an HttpContext, so return null
+                // if processing is finished, this ISyncContext is no longer logically associated with an
+                // HttpContext, so return null
                 return (_isProcessingComplete) ? null : _httpContext;
             }
         }

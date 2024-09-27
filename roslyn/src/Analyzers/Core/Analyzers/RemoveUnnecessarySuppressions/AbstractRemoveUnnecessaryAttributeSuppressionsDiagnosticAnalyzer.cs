@@ -172,7 +172,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                     return;
                 }
 
-                // We want to flag valid target which uses legacy format to update to Roslyn based DocCommentId format.
+                // We want to flag valid target which uses legacy format to update to Roslyn based DocCommentId
+                // format.
                 if (resolvedSymbols.Length > 0 && !targetHasDocCommentIdFormat)
                 {
                     RoslynDebug.Assert(!string.IsNullOrEmpty(targetSymbolString));
@@ -188,7 +189,8 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessarySuppressions
                         if (!string.IsNullOrEmpty(docCommentId))
                         {
                             // Suppression target has an optional "~" prefix to distinguish it from legacy FxCop suppressions.
-                            // IDE suppression code fixes emit this prefix, so we we also add this prefix to new suppression target string.
+                            // IDE suppression code fixes emit this prefix, so we we also add this prefix to new suppression
+                            // target string.
                             properties = properties.Add(DocCommentIdKey, "~" + docCommentId);
                         }
                     }

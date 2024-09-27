@@ -5,9 +5,9 @@
 //------------------------------------------------------------------------------
 
 /*
- * Implementation of VirtualPathProvider based on the metabase and the standard
- * file system.  This is what ASP.NET uses by default.
- */
+* Implementation of VirtualPathProvider based on the metabase and the standard
+* file system.  This is what ASP.NET uses by default.
+*/
 
 namespace System.Web.Hosting
 {
@@ -342,7 +342,8 @@ namespace System.Web.Hosting
 
                 if (_requestedEntryType != RequestedEntryType.Files)
                 {
-                    // For MetabaseServerConfig, get the subdirs that are not in the application, and add them to the exclude list.
+                    // For MetabaseServerConfig, get the subdirs that are not in the application, and add them to the
+                    // exclude list.
                     if (_serverConfig2 == null)
                     {
                         string[] virtualSubdirsNotInApp = serverConfig.GetVirtualSubdirs(

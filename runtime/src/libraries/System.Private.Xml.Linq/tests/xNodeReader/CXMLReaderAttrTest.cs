@@ -662,7 +662,8 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("This[Name, NamespaceURI] Verify not the same as MoveToAttribute(Name, null)", Priority = 0)]
+                //[Variation("This[Name, NamespaceURI] Verify not the same as MoveToAttribute(Name, null)", Priority
+                // = 0)]
                 public void ThisWithName10()
                 {
                     string strName;
@@ -1130,7 +1131,8 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("GetAttribute(Name, namespace) Verify not the same as MoveToAttribute(Name, namespace)")]
+                //[Variation("GetAttribute(Name, namespace) Verify not the same as MoveToAttribute(Name,
+                // namespace)")]
                 public void GetAttributeWithName12()
                 {
                     string strName;

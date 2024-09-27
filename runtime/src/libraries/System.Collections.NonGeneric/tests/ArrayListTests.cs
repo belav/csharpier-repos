@@ -219,7 +219,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void Adapter_EnumeratorsModifiedAdapter()
         {
-            // Test to see if enumerators are correctly getting invalidated with list modified through listAdapter
+            // Test to see if enumerators are correctly getting invalidated with list modified through
+            // listAdapter
             ArrayList arrList = Helpers.CreateStringArrayList(10);
             IEnumerator enumeratorBasic = arrList.GetEnumerator();
             ArrayList adapter = ArrayList.Adapter(arrList);
@@ -473,7 +474,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void BinarySearch_Basic_NotFoundReturnsNextElementIndex()
         {
-            // The zero-based index of the value in the sorted ArrayList, if value is found; otherwise, a negative number,
+            // The zero-based index of the value in the sorted ArrayList, if value is found; otherwise, a
+            // negative number,
             // which is the bitwise complement of the index of the next element.
             ArrayList arrList1 = Helpers.CreateIntArrayList(100);
             Helpers.PerformActionOnAllArrayListWrappers(
@@ -1208,7 +1210,8 @@ namespace System.Collections.Tests
         [Fact]
         public static void GetEnumerator_Basic_DerivedArrayList()
         {
-            // The enumerator for a derived (subclassed) ArrayList is different to a normal ArrayList as it does not run an optimized MoveNext() function
+            // The enumerator for a derived (subclassed) ArrayList is different to a normal ArrayList as it does
+            // not run an optimized MoveNext() function
             var arrList = new DerivedArrayList(Helpers.CreateIntArrayList(10));
             IEnumerator enumerator = arrList.GetEnumerator();
             for (int i = 0; i < 2; i++)
@@ -3451,7 +3454,8 @@ namespace System.Collections.Tests
 
             for (int i = 0; i < s_synchronizedTestData.Length; i++)
             {
-                // To test that we only use the right threads the right number of times  keep track with the hashtable
+                // To test that we only use the right threads the right number of times  keep track with the
+                // hashtable
                 // how many times we use this thread
                 try
                 {

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
@@ -18,7 +19,8 @@ namespace System.Net.Http
     public static class HttpClientExtensions
     {
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -45,7 +47,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -79,7 +82,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -100,7 +104,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -128,7 +133,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -155,7 +161,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -189,7 +196,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -210,7 +218,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a POST request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -238,10 +247,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -265,10 +276,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -300,16 +313,19 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
         [SuppressMessage(
@@ -336,7 +352,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -344,7 +361,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -373,7 +391,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -381,7 +400,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -421,10 +441,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -442,10 +464,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -471,16 +495,19 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PostAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
         public static Task<HttpResponseMessage> PostAsync<T>(
@@ -501,7 +528,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -509,7 +537,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -532,7 +561,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a POST request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -540,7 +570,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -569,7 +600,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -596,7 +628,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -630,7 +663,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -651,7 +685,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as JSON.
         /// </summary>
         /// <remarks>
@@ -679,7 +714,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -706,7 +742,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -740,7 +777,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -761,7 +799,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref name="value"/> serialized
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with the given <paramref
+        // name="value"/> serialized
         /// as XML.
         /// </summary>
         /// <remarks>
@@ -789,10 +828,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -816,10 +857,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -851,16 +894,19 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
         [SuppressMessage(
@@ -881,7 +927,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -889,7 +936,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -918,7 +966,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -926,7 +975,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -966,10 +1016,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -987,10 +1039,12 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
@@ -1016,16 +1070,19 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
-        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string, CancellationToken)"/>
+        /// <seealso cref="PutAsync{T}(HttpClient, string, T, MediaTypeFormatter, string,
+        // CancellationToken)"/>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
         /// <param name="client">The client used to make the request.</param>
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
         public static Task<HttpResponseMessage> PutAsync<T>(
@@ -1040,7 +1097,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -1048,7 +1106,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>
@@ -1071,7 +1130,8 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref name="value"/>
+        /// Sends a PUT request as an asynchronous operation to the specified Uri with <paramref
+        // name="value"/>
         /// serialized using the given <paramref name="formatter"/>.
         /// </summary>
         /// <typeparam name="T">The type of <paramref name="value"/>.</typeparam>
@@ -1079,7 +1139,8 @@ namespace System.Net.Http
         /// <param name="requestUri">The Uri the request is sent to.</param>
         /// <param name="value">The value that will be placed in the request's entity body.</param>
         /// <param name="formatter">The formatter used to serialize the <paramref name="value"/>.</param>
-        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header. Can be <c>null</c> in which case the
+        /// <param name="mediaType">The authoritative value of the request's content's Content-Type header.
+        // Can be <c>null</c> in which case the
         /// <paramref name="formatter">formatter's</paramref> default content type will be used.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>A task object representing the asynchronous operation.</returns>

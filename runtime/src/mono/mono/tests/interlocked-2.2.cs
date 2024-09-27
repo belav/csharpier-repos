@@ -15,7 +15,7 @@ public class InterlockTest
 
         InterlockTest it = new InterlockTest();
 
-        /* int */
+/* int */
         it.test = 2;
         int c = Interlocked.Add(ref it.test, 1);
         if (c != 3)
@@ -31,7 +31,7 @@ public class InterlockTest
         if (b != 2)
             return 4;
 
-        /* long */
+/* long */
         it.ltest = 2;
         long lc = Interlocked.Add(ref it.ltest, 1);
         if (lc != 3)
@@ -58,7 +58,7 @@ public class InterlockTest
         if (la != 2)
             return 11;
 
-        /* Generics */
+/* Generics */
         InterlockTest o1 = new InterlockTest();
         InterlockTest o2 = new InterlockTest();
         InterlockTest o = o1;
@@ -75,7 +75,7 @@ public class InterlockTest
         if (o != o2)
             return 15;
 
-        /* long increment/decrement */
+/* long increment/decrement */
         la = 0x12345678;
         lb = Interlocked.Increment(ref la);
         if (la != 0x12345679)

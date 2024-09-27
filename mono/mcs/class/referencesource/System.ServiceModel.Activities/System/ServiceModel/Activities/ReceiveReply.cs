@@ -60,7 +60,8 @@ namespace System.ServiceModel.Activities
         [DefaultValue(null)]
         public ReceiveContent Content { get; set; }
 
-        // Internally, we should always use InternalContent since this property may have default content that we added
+        // Internally, we should always use InternalContent since this property may have default content
+        // that we added
         internal ReceiveContent InternalContent
         {
             get { return this.Content ?? ReceiveContent.DefaultReceiveContent; }
@@ -96,7 +97,8 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                // Need to validate Send.ServiceContractName and Send.OperationName here so that we can proceed with contract inference
+                // Need to validate Send.ServiceContractName and Send.OperationName here so that we can proceed with
+                // contract inference
                 if (this.Request.ServiceContractName == null)
                 {
                     string errorOperationName =
@@ -209,7 +211,8 @@ namespace System.ServiceModel.Activities
                     this.responseFormatter.FaultFormatter = new FaultFormatter(faultTypes);
                 }
 
-                // Add CorrelationQuery to the Send->ReplyCorrelation, we validate that the same query is not added multiple times
+                // Add CorrelationQuery to the Send->ReplyCorrelation, we validate that the same query is not added
+                // multiple times
                 if (this.correlationInitializers != null && this.correlationInitializers.Count > 0)
                 {
                     Collection<CorrelationQuery> internalCorrelationQueryCollection =

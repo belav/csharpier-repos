@@ -22,15 +22,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             //
             // Complex methods include:
             // - Method declared in the document which includes using alias directive
-            // - Generic method where the receiver type is a type-paramter (e.g. List<T> would be considered simple, not complex)
+            // - Generic method where the receiver type is a type-paramter (e.g. List<T> would be considered
+            // simple, not complex)
             // - If the receiver type name is Pointer type (i.e. name of the type for the first parameter)
             //
             // The rest of methods are considered simple.
 
             /// <summary>
-            /// Name of the extension method's receiver type to the index of its DeclaredSymbolInfo in `_declarationInfo`.
+            /// Name of the extension method's receiver type to the index of its DeclaredSymbolInfo in
+            // `_declarationInfo`.
             ///
-            /// For simple types, the receiver type name is it's metadata name. All predefined types are converted to its metadata form.
+            /// For simple types, the receiver type name is it's metadata name. All predefined types are
+            // converted to its metadata form.
             /// e.g. int => Int32. For generic types, type parameters are ignored.
             ///
             /// For complex types, the receiver type name is "".

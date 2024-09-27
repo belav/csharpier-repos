@@ -33,7 +33,8 @@ namespace System
 
             public abstract void NextBytes(Span<byte> buffer);
 
-            // NextUInt32/64 algorithms based on https://arxiv.org/pdf/1805.10941.pdf and https://github.com/lemire/fastrange.
+            // NextUInt32/64 algorithms based on https://arxiv.org/pdf/1805.10941.pdf and
+            // https://github.com/lemire/fastrange.
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static uint NextUInt32(uint maxValue, XoshiroImpl xoshiro)

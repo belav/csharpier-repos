@@ -21,10 +21,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * HtmlListAdapter provides the html device functionality for List controls.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * HtmlListAdapter provides the html device functionality for List controls.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
     /// <include file='doc\HtmlListAdapter.uex' path='docs/doc[@for="HtmlListAdapter"]/*' />
     [AspNetHostingPermission(
         SecurityAction.LinkDemand,

@@ -197,7 +197,8 @@ namespace PartialCompactionTest
             DeleteSpaces();
         }
 
-        //want to create fragmentation in Gen2; when objects in the "spaces" list get in gen2, clear the list.
+        //want to create fragmentation in Gen2; when objects in the "spaces" list get in gen2, clear the
+        // list.
         public static void DeleteSpaces()
         {
             if (regionList.Count == 0)

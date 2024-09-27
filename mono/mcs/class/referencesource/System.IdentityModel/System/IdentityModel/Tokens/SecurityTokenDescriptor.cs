@@ -63,7 +63,8 @@ namespace System.IdentityModel.Tokens
         /// Sets the appropriate things, such as requested security token, inside the RSTR
         /// based on what is inside this token descriptor instance.
         /// </summary>
-        /// <param name="response">The RSTR object that this security token descriptor needs to modify.</param>
+        /// <param name="response">The RSTR object that this security token descriptor needs to
+        // modify.</param>
         /// <exception cref="ArgumentNullException">When response is null.</exception>
         public virtual void ApplyTo(RSTR response)
         {
@@ -104,7 +105,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets the address for the <see cref="RequestSecurityTokenResponse"/> ReplyToAddress property.
+        /// Gets or sets the address for the <see cref="RequestSecurityTokenResponse"/> ReplyToAddress
+        // property.
         /// </summary>
         public string ReplyToAddress
         {
@@ -237,7 +239,8 @@ namespace System.IdentityModel.Tokens
         /// to the claim collection of the <see cref="SecurityTokenDescriptor"/>
         /// </summary>
         /// <param name="authType">Specifies the authentication type</param>
-        /// <param name="time">Specifies the authentication instant in UTC. If the input is not in UTC, it is converted to UTC.</param>
+        /// <param name="time">Specifies the authentication instant in UTC. If the input is not in UTC, it
+        // is converted to UTC.</param>
         public void AddAuthenticationClaims(string authType, DateTime time)
         {
             this.Subject.AddClaim(

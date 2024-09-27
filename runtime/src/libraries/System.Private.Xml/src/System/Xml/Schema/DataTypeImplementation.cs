@@ -172,8 +172,10 @@ namespace System.Xml.Schema
         }
 
         /// <summary>
-        /// Begin the creation of an XmlSchemaSimpleType object that will be used to represent a static built-in type.
-        /// Once StartBuiltinType has been called for all built-in types, FinishBuiltinType should be called in order
+        /// Begin the creation of an XmlSchemaSimpleType object that will be used to represent a static
+        // built-in type.
+        /// Once StartBuiltinType has been called for all built-in types, FinishBuiltinType should be called
+        // in order
         /// to create links between the types.
         /// </summary>
         internal static XmlSchemaSimpleType StartBuiltinType(
@@ -1636,7 +1638,8 @@ namespace System.Xml.Schema
 
         internal override int Compare(object value1, object value2)
         {
-            //Changed StringComparison.CurrentCulture to StringComparison.Ordinal to handle zero-weight code points like the cyrillic E
+            //Changed StringComparison.CurrentCulture to StringComparison.Ordinal to handle zero-weight code
+            // points like the cyrillic E
             return string.Compare(value1.ToString(), value2.ToString(), StringComparison.Ordinal);
         }
 
@@ -1689,27 +1692,27 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="string" id="string">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality" value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-                    source="http://www.w3.org/TR/xmlschema-2/#string"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="preserve" id="string.preserve"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="string" id="string">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality" value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#string"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="preserve" id="string.preserve"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_string : Datatype_anySimpleType
     {
@@ -1779,24 +1782,24 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="boolean" id="boolean">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality" value="finite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#boolean"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse" fixed="true"
-            id="boolean.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="boolean" id="boolean">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality" value="finite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#boolean"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse" fixed="true"
+    id="boolean.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_boolean : Datatype_anySimpleType
     {
@@ -1869,29 +1872,29 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="float" id="float">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="total"/>
-            <hfp:hasProperty name="bounded" value="true"/>
-            <hfp:hasProperty name="cardinality" value="finite"/>
-            <hfp:hasProperty name="numeric" value="true"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#float"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse" fixed="true"
-            id="float.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="float" id="float">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="total"/>
+    <hfp:hasProperty name="bounded" value="true"/>
+    <hfp:hasProperty name="cardinality" value="finite"/>
+    <hfp:hasProperty name="numeric" value="true"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#float"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse" fixed="true"
+    id="float.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_float : Datatype_anySimpleType
     {
@@ -1978,29 +1981,29 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="double" id="double">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="total"/>
-            <hfp:hasProperty name="bounded" value="true"/>
-            <hfp:hasProperty name="cardinality" value="finite"/>
-            <hfp:hasProperty name="numeric" value="true"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#double"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="double.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="double" id="double">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="total"/>
+    <hfp:hasProperty name="bounded" value="true"/>
+    <hfp:hasProperty name="cardinality" value="finite"/>
+    <hfp:hasProperty name="numeric" value="true"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#double"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="double.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_double : Datatype_anySimpleType
     {
@@ -2086,32 +2089,32 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="decimal" id="decimal">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="totalDigits"/>
-            <hfp:hasFacet name="fractionDigits"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="total"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="true"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#decimal"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="decimal.whiteSpace"/>
-        </xs:restriction>
-       </xs:simpleType>
+    <xs:simpleType name="decimal" id="decimal">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="totalDigits"/>
+    <hfp:hasFacet name="fractionDigits"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="total"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="true"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#decimal"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="decimal.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_decimal : Datatype_anySimpleType
     {
@@ -2203,30 +2206,30 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="duration" id="duration">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#duration"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="duration.whiteSpace"/>
-        </xs:restriction>
-       </xs:simpleType>
+    <xs:simpleType name="duration" id="duration">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#duration"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="duration.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_duration : Datatype_anySimpleType
     {
@@ -2558,30 +2561,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="dateTime" id="dateTime">
-       <xs:annotation>
-        <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#dateTime"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="dateTime.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="dateTime" id="dateTime">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#dateTime"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="dateTime.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_dateTime : Datatype_dateTimeBase
     {
@@ -2602,30 +2605,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="time" id="time">
-        <xs:annotation>
-        <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#time"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="time.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="time" id="time">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#time"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="time.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_time : Datatype_dateTimeBase
     {
@@ -2639,30 +2642,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="date" id="date">
-       <xs:annotation>
-        <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#date"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="date.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="date" id="date">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#date"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="date.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_date : Datatype_dateTimeBase
     {
@@ -2676,30 +2679,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="gYearMonth" id="gYearMonth">
-       <xs:annotation>
-        <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#gYearMonth"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="gYearMonth.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="gYearMonth" id="gYearMonth">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#gYearMonth"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="gYearMonth.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_yearMonth : Datatype_dateTimeBase
     {
@@ -2713,30 +2716,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="gYear" id="gYear">
-        <xs:annotation>
-        <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#gYear"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="gYear.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="gYear" id="gYear">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#gYear"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="gYear.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_year : Datatype_dateTimeBase
     {
@@ -2750,30 +2753,30 @@ namespace System.Xml.Schema
     }
 
     /*
-     <xs:simpleType name="gMonthDay" id="gMonthDay">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-           <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#gMonthDay"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-             <xs:whiteSpace value="collapse" fixed="true"
-                    id="gMonthDay.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="gMonthDay" id="gMonthDay">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#gMonthDay"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse" fixed="true"
+    id="gMonthDay.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_monthDay : Datatype_dateTimeBase
     {
@@ -2787,30 +2790,30 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="gDay" id="gDay">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#gDay"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-             <xs:whiteSpace value="collapse"  fixed="true"
-                    id="gDay.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="gDay" id="gDay">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#gDay"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="gDay.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_day : Datatype_dateTimeBase
     {
@@ -2824,30 +2827,30 @@ namespace System.Xml.Schema
     }
 
     /*
-     <xs:simpleType name="gMonth" id="gMonth">
-        <xs:annotation>
-      <xs:appinfo>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasFacet name="maxInclusive"/>
-            <hfp:hasFacet name="maxExclusive"/>
-            <hfp:hasFacet name="minInclusive"/>
-            <hfp:hasFacet name="minExclusive"/>
-            <hfp:hasProperty name="ordered" value="partial"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#gMonth"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-             <xs:whiteSpace value="collapse"  fixed="true"
-                    id="gMonth.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="gMonth" id="gMonth">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasFacet name="maxInclusive"/>
+    <hfp:hasFacet name="maxExclusive"/>
+    <hfp:hasFacet name="minInclusive"/>
+    <hfp:hasFacet name="minExclusive"/>
+    <hfp:hasProperty name="ordered" value="partial"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#gMonth"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="gMonth.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_month : Datatype_dateTimeBase
     {
@@ -2861,29 +2864,29 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="hexBinary" id="hexBinary">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#binary"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse" fixed="true"
-            id="hexBinary.whiteSpace"/>
-        </xs:restriction>
-       </xs:simpleType>
+    <xs:simpleType name="hexBinary" id="hexBinary">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#binary"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse" fixed="true"
+    id="hexBinary.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_hexBinary : Datatype_anySimpleType
     {
@@ -2980,29 +2983,29 @@ namespace System.Xml.Schema
     }
 
     /*
-     <xs:simpleType name="base64Binary" id="base64Binary">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-                    source="http://www.w3.org/TR/xmlschema-2/#base64Binary"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse" fixed="true"
-            id="base64Binary.whiteSpace"/>
-        </xs:restriction>
-       </xs:simpleType>
+    <xs:simpleType name="base64Binary" id="base64Binary">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#base64Binary"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse" fixed="true"
+    id="base64Binary.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_base64Binary : Datatype_anySimpleType
     {
@@ -3099,29 +3102,29 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="anyURI" id="anyURI">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#anyURI"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="anyURI.whiteSpace"/>
-        </xs:restriction>
-       </xs:simpleType>
+    <xs:simpleType name="anyURI" id="anyURI">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#anyURI"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="anyURI.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_anyURI : Datatype_anySimpleType
     {
@@ -3217,29 +3220,29 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="QName" id="QName">
-        <xs:annotation>
-            <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#QName"/>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="QName.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="QName" id="QName">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#QName"/>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="QName.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_QName : Datatype_anySimpleType
     {
@@ -3342,16 +3345,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="normalizedString" id="normalizedString">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#normalizedString"/>
-        </xs:annotation>
-        <xs:restriction base="xs:string">
-          <xs:whiteSpace value="replace"
-            id="normalizedString.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="normalizedString" id="normalizedString">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#normalizedString"/>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+    <xs:whiteSpace value="replace"
+    id="normalizedString.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_normalizedString : Datatype_string
     {
@@ -3390,15 +3393,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="token" id="token">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#token"/>
-        </xs:annotation>
-        <xs:restriction base="xs:normalizedString">
-          <xs:whiteSpace value="collapse" id="token.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="token" id="token">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#token"/>
+    </xs:annotation>
+    <xs:restriction base="xs:normalizedString">
+    <xs:whiteSpace value="collapse" id="token.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_token : Datatype_normalizedString
     {
@@ -3421,25 +3424,25 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="language" id="language">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#language"/>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-          <xs:pattern
-            value="([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{1,8})*"
-                    id="language.pattern">
-            <xs:annotation>
-              <xs:documentation
-                    source="http://www.w3.org/TR/REC-xml#NT-LanguageID">
-                pattern specifies the content of section 2.12 of XML 1.0e2
-                and RFC 1766
-              </xs:documentation>
-            </xs:annotation>
-          </xs:pattern>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="language" id="language">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#language"/>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+    <xs:pattern
+    value="([a-zA-Z]{2}|[iI]-[a-zA-Z]+|[xX]-[a-zA-Z]{1,8})(-[a-zA-Z]{1,8})*"
+    id="language.pattern">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/REC-xml#NT-LanguageID">
+    pattern specifies the content of section 2.12 of XML 1.0e2
+    and RFC 1766
+    </xs:documentation>
+    </xs:annotation>
+    </xs:pattern>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_language : Datatype_token
     {
@@ -3450,22 +3453,22 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="NMTOKEN" id="NMTOKEN">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#NMTOKEN"/>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-          <xs:pattern value="\c+" id="NMTOKEN.pattern">
-            <xs:annotation>
-              <xs:documentation
-                    source="http://www.w3.org/TR/REC-xml#NT-Nmtoken">
-                pattern matches production 7 from the XML spec
-              </xs:documentation>
-            </xs:annotation>
-          </xs:pattern>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="NMTOKEN" id="NMTOKEN">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#NMTOKEN"/>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+    <xs:pattern value="\c+" id="NMTOKEN.pattern">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/REC-xml#NT-Nmtoken">
+    pattern matches production 7 from the XML spec
+    </xs:documentation>
+    </xs:annotation>
+    </xs:pattern>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_NMTOKEN : Datatype_token
     {
@@ -3481,22 +3484,22 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="Name" id="Name">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#Name"/>
-        </xs:annotation>
-        <xs:restriction base="xs:token">
-          <xs:pattern value="\i\c*" id="Name.pattern">
-            <xs:annotation>
-              <xs:documentation
-                            source="http://www.w3.org/TR/REC-xml#NT-Name">
-                pattern matches production 5 from the XML spec
-              </xs:documentation>
-            </xs:annotation>
-          </xs:pattern>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="Name" id="Name">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#Name"/>
+    </xs:annotation>
+    <xs:restriction base="xs:token">
+    <xs:pattern value="\i\c*" id="Name.pattern">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/REC-xml#NT-Name">
+    pattern matches production 5 from the XML spec
+    </xs:documentation>
+    </xs:annotation>
+    </xs:pattern>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_Name : Datatype_token
     {
@@ -3507,22 +3510,22 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="NCName" id="NCName">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#NCName"/>
-        </xs:annotation>
-        <xs:restriction base="xs:Name">
-          <xs:pattern value="[\i-[:]][\c-[:]]*" id="NCName.pattern">
-            <xs:annotation>
-              <xs:documentation
-                    source="http://www.w3.org/TR/REC-xml-names/#NT-NCName">
-                pattern matches production 4 from the Namespaces in XML spec
-              </xs:documentation>
-            </xs:annotation>
-          </xs:pattern>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="NCName" id="NCName">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#NCName"/>
+    </xs:annotation>
+    <xs:restriction base="xs:Name">
+    <xs:pattern value="[\i-[:]][\c-[:]]*" id="NCName.pattern">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/REC-xml-names/#NT-NCName">
+    pattern matches production 4 from the Namespaces in XML spec
+    </xs:documentation>
+    </xs:annotation>
+    </xs:pattern>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_NCName : Datatype_Name
     {
@@ -3561,13 +3564,13 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="ID" id="ID">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#ID"/>
-        </xs:annotation>
-        <xs:restriction base="xs:NCName"/>
-       </xs:simpleType>
+    <xs:simpleType name="ID" id="ID">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#ID"/>
+    </xs:annotation>
+    <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
     */
     internal sealed class Datatype_ID : Datatype_NCName
     {
@@ -3583,13 +3586,13 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="IDREF" id="IDREF">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#IDREF"/>
-        </xs:annotation>
-        <xs:restriction base="xs:NCName"/>
-       </xs:simpleType>
+    <xs:simpleType name="IDREF" id="IDREF">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#IDREF"/>
+    </xs:annotation>
+    <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
     */
     internal sealed class Datatype_IDREF : Datatype_NCName
     {
@@ -3605,13 +3608,13 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="ENTITY" id="ENTITY">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#ENTITY"/>
-        </xs:annotation>
-        <xs:restriction base="xs:NCName"/>
-       </xs:simpleType>
+    <xs:simpleType name="ENTITY" id="ENTITY">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#ENTITY"/>
+    </xs:annotation>
+    <xs:restriction base="xs:NCName"/>
+    </xs:simpleType>
     */
     internal sealed class Datatype_ENTITY : Datatype_NCName
     {
@@ -3627,35 +3630,35 @@ namespace System.Xml.Schema
     }
 
     /*
-       <xs:simpleType name="NOTATION" id="NOTATION">
-        <xs:annotation>
-            <xs:appinfo>
-            <hfp:hasFacet name="length"/>
-            <hfp:hasFacet name="minLength"/>
-            <hfp:hasFacet name="maxLength"/>
-            <hfp:hasFacet name="pattern"/>
-            <hfp:hasFacet name="enumeration"/>
-            <hfp:hasFacet name="whiteSpace"/>
-            <hfp:hasProperty name="ordered" value="false"/>
-            <hfp:hasProperty name="bounded" value="false"/>
-            <hfp:hasProperty name="cardinality"
-                    value="countably infinite"/>
-            <hfp:hasProperty name="numeric" value="false"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#NOTATION"/>
-          <xs:documentation>
-            NOTATION cannot be used directly in a schema; rather a type
-            must be derived from it by specifying at least one enumeration
-            facet whose value is the name of a NOTATION declared in the
-            schema.
-          </xs:documentation>
-        </xs:annotation>
-        <xs:restriction base="xs:anySimpleType">
-          <xs:whiteSpace value="collapse"  fixed="true"
-            id="NOTATION.whiteSpace"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="NOTATION" id="NOTATION">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasFacet name="length"/>
+    <hfp:hasFacet name="minLength"/>
+    <hfp:hasFacet name="maxLength"/>
+    <hfp:hasFacet name="pattern"/>
+    <hfp:hasFacet name="enumeration"/>
+    <hfp:hasFacet name="whiteSpace"/>
+    <hfp:hasProperty name="ordered" value="false"/>
+    <hfp:hasProperty name="bounded" value="false"/>
+    <hfp:hasProperty name="cardinality"
+    value="countably infinite"/>
+    <hfp:hasProperty name="numeric" value="false"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#NOTATION"/>
+    <xs:documentation>
+    NOTATION cannot be used directly in a schema; rather a type
+    must be derived from it by specifying at least one enumeration
+    facet whose value is the name of a NOTATION declared in the
+    schema.
+    </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:anySimpleType">
+    <xs:whiteSpace value="collapse"  fixed="true"
+    id="NOTATION.whiteSpace"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_NOTATION : Datatype_anySimpleType
     {
@@ -3761,8 +3764,10 @@ namespace System.Xml.Schema
             XmlSchemaObject caller
         )
         {
-            // Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used in a schema.
-            // Furthermore, the value of all enumeration facets must match the name of a notation declared in the current schema.                    //
+            // Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used
+            // in a schema.
+            // Furthermore, the value of all enumeration facets must match the name of a notation declared in
+            // the current schema.                    //
             for (Datatype_NOTATION? dt = this; dt != null; dt = (Datatype_NOTATION?)dt.Base)
             {
                 if (
@@ -3787,15 +3792,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="integer" id="integer">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#integer"/>
-        </xs:annotation>
-        <xs:restriction base="xs:decimal">
-          <xs:fractionDigits value="0" fixed="true" id="integer.fractionDigits"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="integer" id="integer">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#integer"/>
+    </xs:annotation>
+    <xs:restriction base="xs:decimal">
+    <xs:fractionDigits value="0" fixed="true" id="integer.fractionDigits"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_integer : Datatype_decimal
     {
@@ -3838,15 +3843,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="nonPositiveInteger" id="nonPositiveInteger">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#negativeInteger"/>
-        </xs:annotation>
-        <xs:restriction base="xs:nonPositiveInteger">
-          <xs:maxInclusive value="-1" id="negativeInteger.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="nonPositiveInteger" id="nonPositiveInteger">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#negativeInteger"/>
+    </xs:annotation>
+    <xs:restriction base="xs:nonPositiveInteger">
+    <xs:maxInclusive value="-1" id="negativeInteger.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_nonPositiveInteger : Datatype_integer
     {
@@ -3875,15 +3880,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="negativeInteger" id="negativeInteger">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#negativeInteger"/>
-        </xs:annotation>
-        <xs:restriction base="xs:nonPositiveInteger">
-          <xs:maxInclusive value="-1" id="negativeInteger.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="negativeInteger" id="negativeInteger">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#negativeInteger"/>
+    </xs:annotation>
+    <xs:restriction base="xs:nonPositiveInteger">
+    <xs:maxInclusive value="-1" id="negativeInteger.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_negativeInteger : Datatype_nonPositiveInteger
     {
@@ -3904,20 +3909,20 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="long" id="long">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasProperty name="bounded" value="true"/>
-            <hfp:hasProperty name="cardinality" value="finite"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#long"/>
-        </xs:annotation>
-        <xs:restriction base="xs:integer">
-          <xs:minInclusive value="-9223372036854775808" id="long.minInclusive"/>
-          <xs:maxInclusive value="9223372036854775807" id="long.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="long" id="long">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasProperty name="bounded" value="true"/>
+    <hfp:hasProperty name="cardinality" value="finite"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#long"/>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+    <xs:minInclusive value="-9223372036854775808" id="long.minInclusive"/>
+    <xs:maxInclusive value="9223372036854775807" id="long.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_long : Datatype_integer
     {
@@ -3991,16 +3996,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="int" id="int">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#int"/>
-        </xs:annotation>
-        <xs:restriction base="xs:long">
-          <xs:minInclusive value="-2147483648" id="int.minInclusive"/>
-          <xs:maxInclusive value="2147483647" id="int.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="int" id="int">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#int"/>
+    </xs:annotation>
+    <xs:restriction base="xs:long">
+    <xs:minInclusive value="-2147483648" id="int.minInclusive"/>
+    <xs:maxInclusive value="2147483647" id="int.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_int : Datatype_long
     {
@@ -4066,16 +4071,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="short" id="short">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#short"/>
-        </xs:annotation>
-        <xs:restriction base="xs:int">
-          <xs:minInclusive value="-32768" id="short.minInclusive"/>
-          <xs:maxInclusive value="32767" id="short.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="short" id="short">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#short"/>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+    <xs:minInclusive value="-32768" id="short.minInclusive"/>
+    <xs:maxInclusive value="32767" id="short.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_short : Datatype_int
     {
@@ -4141,16 +4146,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="byte" id="byte">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#byte"/>
-        </xs:annotation>
-        <xs:restriction base="xs:short">
-          <xs:minInclusive value="-128" id="byte.minInclusive"/>
-          <xs:maxInclusive value="127" id="byte.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="byte" id="byte">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#byte"/>
+    </xs:annotation>
+    <xs:restriction base="xs:short">
+    <xs:minInclusive value="-128" id="byte.minInclusive"/>
+    <xs:maxInclusive value="127" id="byte.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_byte : Datatype_short
     {
@@ -4216,15 +4221,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="nonNegativeInteger" id="nonNegativeInteger">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#nonNegativeInteger"/>
-        </xs:annotation>
-        <xs:restriction base="xs:integer">
-          <xs:minInclusive value="0" id="nonNegativeInteger.minInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="nonNegativeInteger" id="nonNegativeInteger">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#nonNegativeInteger"/>
+    </xs:annotation>
+    <xs:restriction base="xs:integer">
+    <xs:minInclusive value="0" id="nonNegativeInteger.minInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_nonNegativeInteger : Datatype_integer
     {
@@ -4253,20 +4258,20 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="unsignedLong" id="unsignedLong">
-        <xs:annotation>
-          <xs:appinfo>
-            <hfp:hasProperty name="bounded" value="true"/>
-            <hfp:hasProperty name="cardinality" value="finite"/>
-          </xs:appinfo>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#unsignedLong"/>
-        </xs:annotation>
-        <xs:restriction base="xs:nonNegativeInteger">
-          <xs:maxInclusive value="18446744073709551615"
-            id="unsignedLong.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="unsignedLong" id="unsignedLong">
+    <xs:annotation>
+    <xs:appinfo>
+    <hfp:hasProperty name="bounded" value="true"/>
+    <hfp:hasProperty name="cardinality" value="finite"/>
+    </xs:appinfo>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#unsignedLong"/>
+    </xs:annotation>
+    <xs:restriction base="xs:nonNegativeInteger">
+    <xs:maxInclusive value="18446744073709551615"
+    id="unsignedLong.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_unsignedLong : Datatype_nonNegativeInteger
     {
@@ -4332,16 +4337,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="unsignedInt" id="unsignedInt">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#unsignedInt"/>
-        </xs:annotation>
-        <xs:restriction base="xs:unsignedLong">
-          <xs:maxInclusive value="4294967295"
-            id="unsignedInt.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="unsignedInt" id="unsignedInt">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#unsignedInt"/>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedLong">
+    <xs:maxInclusive value="4294967295"
+    id="unsignedInt.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_unsignedInt : Datatype_unsignedLong
     {
@@ -4407,16 +4412,16 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="unsignedShort" id="unsignedShort">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#unsignedShort"/>
-        </xs:annotation>
-        <xs:restriction base="xs:unsignedInt">
-          <xs:maxInclusive value="65535"
-            id="unsignedShort.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="unsignedShort" id="unsignedShort">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#unsignedShort"/>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedInt">
+    <xs:maxInclusive value="65535"
+    id="unsignedShort.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal class Datatype_unsignedShort : Datatype_unsignedInt
     {
@@ -4482,15 +4487,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="unsignedByte" id="unsignedBtype">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#unsignedByte"/>
-        </xs:annotation>
-        <xs:restriction base="xs:unsignedShort">
-          <xs:maxInclusive value="255" id="unsignedByte.maxInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="unsignedByte" id="unsignedBtype">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#unsignedByte"/>
+    </xs:annotation>
+    <xs:restriction base="xs:unsignedShort">
+    <xs:maxInclusive value="255" id="unsignedByte.maxInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_unsignedByte : Datatype_unsignedShort
     {
@@ -4556,15 +4561,15 @@ namespace System.Xml.Schema
     }
 
     /*
-      <xs:simpleType name="positiveInteger" id="positiveInteger">
-        <xs:annotation>
-          <xs:documentation
-            source="http://www.w3.org/TR/xmlschema-2/#positiveInteger"/>
-        </xs:annotation>
-        <xs:restriction base="xs:nonNegativeInteger">
-          <xs:minInclusive value="1" id="positiveInteger.minInclusive"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="positiveInteger" id="positiveInteger">
+    <xs:annotation>
+    <xs:documentation
+    source="http://www.w3.org/TR/xmlschema-2/#positiveInteger"/>
+    </xs:annotation>
+    <xs:restriction base="xs:nonNegativeInteger">
+    <xs:minInclusive value="1" id="positiveInteger.minInclusive"/>
+    </xs:restriction>
+    </xs:simpleType>
     */
     internal sealed class Datatype_positiveInteger : Datatype_nonNegativeInteger
     {
@@ -4585,7 +4590,7 @@ namespace System.Xml.Schema
     }
 
     /*
-        XDR
+    XDR
     */
     internal sealed class Datatype_doubleXdr : Datatype_double
     {

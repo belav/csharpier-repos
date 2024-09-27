@@ -22,7 +22,8 @@ public class Http2Limits
     private TimeSpan _keepAlivePingTimeout = TimeSpan.FromSeconds(20);
 
     /// <summary>
-    /// Limits the number of concurrent request streams per HTTP/2 connection. Excess streams will be refused.
+    /// Limits the number of concurrent request streams per HTTP/2 connection. Excess streams will be
+    // refused.
     /// <para>
     /// Value must be greater than 0, defaults to 100 streams.
     /// </para>
@@ -46,7 +47,8 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Limits the size of the header compression tables, in octets, the HPACK encoder and decoder on the server can use.
+    /// Limits the size of the header compression tables, in octets, the HPACK encoder and decoder on
+    // the server can use.
     /// <para>
     /// Value must be greater than or equal to 0, defaults to 4096 octets (4 KiB).
     /// </para>
@@ -70,7 +72,8 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Indicates the size of the largest frame payload that is allowed to be received, in octets. The size must be between 2^14 and 2^24-1.
+    /// Indicates the size of the largest frame payload that is allowed to be received, in octets. The
+    // size must be between 2^14 and 2^24-1.
     /// <para>
     /// Value must be between 2^14 and 2^24, defaults to 2^14 octets (16 KiB).
     /// </para>
@@ -100,7 +103,9 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Indicates the size of the maximum allowed size of a request header field sequence, in octets. This limit applies to both name and value sequences in their compressed and uncompressed representations.
+    /// Indicates the size of the maximum allowed size of a request header field sequence, in octets.
+    // This limit applies to both name and value sequences in their compressed and uncompressed
+    // representations.
     /// <para>
     /// Value must be greater than 0, defaults to 2^14 octets (16 KiB).
     /// </para>
@@ -124,8 +129,10 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Indicates how much request body data, in bytes, the server is willing to receive and buffer at a time aggregated across all
-    /// requests (streams) per connection. Note requests are also limited by <see cref="InitialStreamWindowSize"/>
+    /// Indicates how much request body data, in bytes, the server is willing to receive and buffer at a
+    // time aggregated across all
+    /// requests (streams) per connection. Note requests are also limited by <see
+    // cref="InitialStreamWindowSize"/>
     /// <para>
     /// Value must be greater than or equal to 64 KiB and less than 2 GiB, defaults to 1 MiB.
     /// </para>
@@ -155,8 +162,10 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Indicates how much request body data, in bytes, the server is willing to receive and buffer at a time per stream.
-    /// Note connections are also limited by <see cref="InitialConnectionWindowSize"/>. There must be space in both the stream
+    /// Indicates how much request body data, in bytes, the server is willing to receive and buffer at a
+    // time per stream.
+    /// Note connections are also limited by <see cref="InitialConnectionWindowSize"/>. There must be
+    // space in both the stream
     /// window and connection window for a client to upload request body data.
     /// <para>
     /// Value must be greater than or equal to 64 KiB and less than 2 GiB, defaults to 768 KiB.
@@ -187,8 +196,10 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Gets or sets the keep alive ping delay. The server will send a keep alive ping to the client if it
-    /// doesn't receive any frames on a connection for this period of time. This property is used together with
+    /// Gets or sets the keep alive ping delay. The server will send a keep alive ping to the client if
+    // it
+    /// doesn't receive any frames on a connection for this period of time. This property is used
+    // together with
     /// <see cref="KeepAlivePingTimeout"/> to close broken connections.
     /// <para>
     /// Delay value must be greater than or equal to 1 second. Set to <see cref="TimeSpan.MaxValue"/> to
@@ -201,7 +212,8 @@ public class Http2Limits
         get => _keepAlivePingDelay;
         set
         {
-            // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
+            // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal
+            // to clock resolution.
             if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
             {
                 throw new ArgumentOutOfRangeException(
@@ -215,8 +227,10 @@ public class Http2Limits
     }
 
     /// <summary>
-    /// Gets or sets the keep alive ping timeout. Keep alive pings are sent when a period of inactivity exceeds
-    /// the configured <see cref="KeepAlivePingDelay"/> value. The server will close the connection if it
+    /// Gets or sets the keep alive ping timeout. Keep alive pings are sent when a period of inactivity
+    // exceeds
+    /// the configured <see cref="KeepAlivePingDelay"/> value. The server will close the connection if
+    // it
     /// doesn't receive any frames within the timeout.
     /// <para>
     /// Timeout must be greater than or equal to 1 second. Set to <see cref="TimeSpan.MaxValue"/> to
@@ -229,7 +243,8 @@ public class Http2Limits
         get => _keepAlivePingTimeout;
         set
         {
-            // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal to clock resolution.
+            // Keep alive uses Kestrel's system clock which has a 1 second resolution. Time is greater or equal
+            // to clock resolution.
             if (value < Heartbeat.Interval && value != Timeout.InfiniteTimeSpan)
             {
                 throw new ArgumentOutOfRangeException(

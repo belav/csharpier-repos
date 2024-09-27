@@ -60,7 +60,8 @@ namespace System.Data.Common
                 _adjustedParameterNameMaxLength = GetAdjustedParameterNameMaxLength();
 
                 // Generate the baseparameter names and remove conflicting names
-                // No names will be generated for any name that is rejected due to invalid prefix, regex violation or
+                // No names will be generated for any name that is rejected due to invalid prefix, regex violation
+                // or
                 // name conflict after mutation.
                 // All null values will be replaced with generic parameter names
                 //
@@ -1580,8 +1581,8 @@ namespace System.Data.Common
             {
                 p = command.CreateParameter();
                 /*if (null == p) {
-                    //
-*/
+                //
+                */
             }
             Debug.Assert(null != p, "null CreateParameter");
             return p;
@@ -1653,8 +1654,8 @@ namespace System.Data.Common
                 DbCommand select = GetSelectCommand();
                 command = select.Connection.CreateCommand();
                 /*if (null == command) {
-                    //
-*/
+                //
+                */
 
                 // the following properties are only initialized when the object is created
                 // all other properites are reinitialized on every row
@@ -1802,8 +1803,10 @@ namespace System.Data.Common
 
         private void RowUpdatingHandlerBuilder(RowUpdatingEventArgs rowUpdatingEvent)
         {
-            // MDAC 58710 - unable to tell Update method that Event opened connection and Update needs to close when done
-            // HackFix - the Update method will close the connection if command was null and returned command.Connection is same as SelectCommand.Connection
+            // MDAC 58710 - unable to tell Update method that Event opened connection and Update needs to close
+            // when done
+            // HackFix - the Update method will close the connection if command was null and returned
+            // command.Connection is same as SelectCommand.Connection
             DataRow datarow = rowUpdatingEvent.Row;
             BuildCache(false, datarow, false);
 

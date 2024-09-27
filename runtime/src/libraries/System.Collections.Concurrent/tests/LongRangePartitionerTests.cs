@@ -13,6 +13,7 @@
 // elements. ToArray / toList will result in an OOM
 //
 // Taken from dev11 branch:
+//
 // \qa\clr\testsrc\pfx\Functional\Common\Partitioner\YetiTests\RangePartitioner\LongRangePartitionerTests.cs
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
@@ -136,7 +137,8 @@ namespace System.Collections.Concurrent.Tests
             long to = from + count;
             var partitioner = Partitioner.Create(from, to);
 
-            //var elements = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRoll());
+            //var elements = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator =>
+            // enumerator.UnRoll());
             IList<long> elements = new List<long>();
             foreach (var partition in partitioner.GetPartitions(dop))
             {
@@ -149,7 +151,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetOrderablePartitions Element mismatch"
             );
 
-            //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRollIndices()).ToArray();
+            //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator =>
+            // enumerator.UnRollIndices()).ToArray();
             IList<long> keys = new List<long>();
             foreach (var partition in partitioner.GetOrderablePartitions(dop))
             {
@@ -247,7 +250,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetPartitions element mismatch"
             );
 
-            //var rangeSizes = partitioner.GetPartitions(dop).SelectMany(enumerator => enumerator.GetRangeSize()).ToArray();
+            //var rangeSizes = partitioner.GetPartitions(dop).SelectMany(enumerator =>
+            // enumerator.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
             foreach (var partition in partitioner.GetPartitions(dop))
             {
@@ -292,7 +296,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetDynamicPartitions Element mismatch"
             );
 
-            //var rangeSizes = partitioner.GetDynamicPartitions().Select(tuple => tuple.GetRangeSize()).ToArray();
+            //var rangeSizes = partitioner.GetDynamicPartitions().Select(tuple =>
+            // tuple.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
             foreach (var partition in partitioner.GetDynamicPartitions())
             {
@@ -326,7 +331,8 @@ namespace System.Collections.Concurrent.Tests
             long to = from + count;
             var partitioner = Partitioner.Create(from, to, desiredRangeSize);
 
-            //var elements = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRoll());
+            //var elements = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator =>
+            // enumerator.UnRoll());
             IList<long> elements = new List<long>();
             foreach (var partition in partitioner.GetOrderablePartitions(dop))
             {
@@ -338,7 +344,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetOrderablePartitions Element mismatch"
             );
 
-            //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.UnRollIndices()).ToArray();
+            //var keys = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator =>
+            // enumerator.UnRollIndices()).ToArray();
             IList<long> keys = new List<long>();
             foreach (var partition in partitioner.GetOrderablePartitions(dop))
             {
@@ -352,7 +359,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetOrderablePartitions key mismatch"
             );
 
-            //var rangeSizes = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator => enumerator.GetRangeSize()).ToArray();
+            //var rangeSizes = partitioner.GetOrderablePartitions(dop).SelectMany(enumerator =>
+            // enumerator.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
             foreach (var partition in partitioner.GetOrderablePartitions(dop))
             {
@@ -413,7 +421,8 @@ namespace System.Collections.Concurrent.Tests
                 "GetOrderableDynamicPartitions key mismatch"
             );
 
-            //var rangeSizes = partitioner.GetOrderableDynamicPartitions().Select(tuple => tuple.GetRangeSize()).ToArray();
+            //var rangeSizes = partitioner.GetOrderableDynamicPartitions().Select(tuple =>
+            // tuple.GetRangeSize()).ToArray();
             IList<long> rangeSizes = new List<long>();
             foreach (var partition in partitioner.GetOrderableDynamicPartitions())
             {
@@ -432,7 +441,8 @@ namespace System.Collections.Concurrent.Tests
         /// <returns></returns>
         private static void ValidateRangeSize(long desiredRangeSize, IList<long> rangeSizes)
         {
-            //var rangesWithDifferentRangeSize = rangeSizes.Take(rangeSizes.Length - 1).Where(r => r != desiredRangeSize).ToArray();
+            //var rangesWithDifferentRangeSize = rangeSizes.Take(rangeSizes.Length - 1).Where(r => r !=
+            // desiredRangeSize).ToArray();
             IList<long> rangesWithDifferentRangeSize = new List<long>();
             // ensuring that every range, size from the last one is the same.
             int numToTake = rangeSizes.Count - 1;

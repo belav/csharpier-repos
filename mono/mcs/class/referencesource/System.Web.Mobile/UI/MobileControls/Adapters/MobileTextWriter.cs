@@ -21,11 +21,11 @@ namespace System.Web.UI.MobileControls.Adapters
 
 {
     /*
-     * MobileTextWriter class. All device-specific mobile text writers
-     * inherit from this class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+    * MobileTextWriter class. All device-specific mobile text writers
+    * inherit from this class.
+    *
+    * Copyright (c) 2000 Microsoft Corporation
+    */
 
     /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter"]/*' />
     [AspNetHostingPermission(
@@ -51,7 +51,8 @@ namespace System.Web.UI.MobileControls.Adapters
             get { return _device; }
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.MobileTextWriter"]/*' />
+        /// <include file='doc\MobileTextWriter.uex'
+        // path='docs/doc[@for="MobileTextWriter.MobileTextWriter"]/*' />
         public MobileTextWriter(TextWriter writer, MobileCapabilities device)
             : base(writer)
         {
@@ -59,28 +60,35 @@ namespace System.Web.UI.MobileControls.Adapters
             _device = device;
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterLayout"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterLayout"]/*'
+        // />
         public virtual void EnterLayout(Style style) { }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout"]/*'
+        // />
         public virtual void ExitLayout(Style style, bool breakAfter) { }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout1"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitLayout1"]/*'
+        // />
         public virtual void ExitLayout(Style style)
         {
             ExitLayout(style, false);
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterFormat"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterFormat"]/*'
+        // />
         public virtual void EnterFormat(Style style) { }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat"]/*'
+        // />
         public virtual void ExitFormat(Style style) { }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat1"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.ExitFormat1"]/*'
+        // />
         public virtual void ExitFormat(Style style, bool breakAfter) { }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterStyle"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EnterStyle"]/*'
+        // />
         public void EnterStyle(Style style)
         {
             EnterLayout(style);
@@ -100,13 +108,15 @@ namespace System.Web.UI.MobileControls.Adapters
         //  of another writer that does.
         /////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.SupportsMultiPart"]/*' />
+        /// <include file='doc\MobileTextWriter.uex'
+        // path='docs/doc[@for="MobileTextWriter.SupportsMultiPart"]/*' />
         public override bool SupportsMultiPart
         {
             get { return _multiPartWriter != null && _multiPartWriter.SupportsMultiPart; }
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.BeginResponse"]/*' />
+        /// <include file='doc\MobileTextWriter.uex'
+        // path='docs/doc[@for="MobileTextWriter.BeginResponse"]/*' />
         public override void BeginResponse()
         {
             if (_multiPartWriter != null)
@@ -115,7 +125,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EndResponse"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.EndResponse"]/*'
+        // />
         public override void EndResponse()
         {
             if (_multiPartWriter != null)
@@ -154,7 +165,8 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.AddResource"]/*' />
+        /// <include file='doc\MobileTextWriter.uex' path='docs/doc[@for="MobileTextWriter.AddResource"]/*'
+        // />
         public override void AddResource(String url, String contentType)
         {
             if (_multiPartWriter != null)

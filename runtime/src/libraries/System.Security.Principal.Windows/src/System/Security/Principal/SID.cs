@@ -77,16 +77,20 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID for a dial-up account.</summary>
         DialupSid = 8,
 
-        /// <summary>Indicates a SID for a network account. This SID is added to the process of a token when it logs on across a network.</summary>
+        /// <summary>Indicates a SID for a network account. This SID is added to the process of a token when
+        // it logs on across a network.</summary>
         NetworkSid = 9,
 
-        /// <summary>Indicates a SID for a batch process. This SID is added to the process of a token when it logs on as a batch job.</summary>
+        /// <summary>Indicates a SID for a batch process. This SID is added to the process of a token when
+        // it logs on as a batch job.</summary>
         BatchSid = 10,
 
-        /// <summary>Indicates a SID for an interactive account. This SID is added to the process of a token when it logs on interactively.</summary>
+        /// <summary>Indicates a SID for an interactive account. This SID is added to the process of a token
+        // when it logs on interactively.</summary>
         InteractiveSid = 11,
 
-        /// <summary>Indicates a SID for a service. This SID is added to the process of a token when it logs on as a service.</summary>
+        /// <summary>Indicates a SID for a service. This SID is added to the process of a token when it logs
+        // on as a service.</summary>
         ServiceSid = 12,
 
         /// <summary>Indicates a SID for the anonymous account.</summary>
@@ -203,22 +207,31 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID that matches the RAS and IAS server account.</summary>
         AccountRasAndIasServersSid = 50,
 
-        /// <summary>Indicates a SID present when the Microsoft NTLM authentication package authenticated the client.</summary>
+        /// <summary>Indicates a SID present when the Microsoft NTLM authentication package authenticated
+        // the client.</summary>
         NtlmAuthenticationSid = 51,
 
-        /// <summary>Indicates a SID present when the Microsoft Digest authentication package authenticated the client.</summary>
+        /// <summary>Indicates a SID present when the Microsoft Digest authentication package authenticated
+        // the client.</summary>
         DigestAuthenticationSid = 52,
 
-        /// <summary>Indicates a SID present when the Secure Channel (SSL/TLS) authentication package authenticated the client.</summary>
+        /// <summary>Indicates a SID present when the Secure Channel (SSL/TLS) authentication package
+        // authenticated the client.</summary>
         SChannelAuthenticationSid = 53,
 
-        /// <summary>Indicates a SID present when the user authenticated from within the forest or across a trust that does not have the selective authentication option enabled. If this SID is present, then <see cref="OtherOrganizationSid"/> cannot be present.</summary>
+        /// <summary>Indicates a SID present when the user authenticated from within the forest or across a
+        // trust that does not have the selective authentication option enabled. If this SID is present, then
+        // <see cref="OtherOrganizationSid"/> cannot be present.</summary>
         ThisOrganizationSid = 54,
 
-        /// <summary>Indicates a SID present when the user authenticated across a forest with the selective authentication option enabled. If this SID is present, then <see cref="ThisOrganizationSid"/> cannot be present.</summary>
+        /// <summary>Indicates a SID present when the user authenticated across a forest with the selective
+        // authentication option enabled. If this SID is present, then <see cref="ThisOrganizationSid"/> cannot
+        // be present.</summary>
         OtherOrganizationSid = 55,
 
-        /// <summary>Indicates a SID that allows a user to create incoming forest trusts. It is added to the token of users who are a member of the Incoming Forest Trust Builders built-in group in the root domain of the forest.</summary>
+        /// <summary>Indicates a SID that allows a user to create incoming forest trusts. It is added to the
+        // token of users who are a member of the Incoming Forest Trust Builders built-in group in the root
+        // domain of the forest.</summary>
         BuiltinIncomingForestTrustBuildersSid = 56,
 
         /// <summary>Indicates a SID that matches the performance monitor user group.</summary>
@@ -230,7 +243,8 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID that matches the Windows Authorization Access group.</summary>
         BuiltinAuthorizationAccessSid = 59,
 
-        /// <summary>Indicates a SID is present in a server that can issue terminal server licenses.</summary>
+        /// <summary>Indicates a SID is present in a server that can issue terminal server
+        // licenses.</summary>
         WinBuiltinTerminalServerLicenseServersSid = 60,
 
         [Obsolete(
@@ -248,7 +262,8 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID that matches the Internet user group.</summary>
         WinIUserSid = 63,
 
-        /// <summary>Indicates a SID that allows a user to use cryptographic operations. It is added to the token of users who are a member of the CryptoOperators built-in group. </summary>
+        /// <summary>Indicates a SID that allows a user to use cryptographic operations. It is added to the
+        // token of users who are a member of the CryptoOperators built-in group. </summary>
         WinBuiltinCryptoOperatorsSid = 64,
 
         /// <summary>Indicates a SID that matches an untrusted label.</summary>
@@ -290,7 +305,8 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID that matches a read-only enterprise domain controller.</summary>
         WinNewEnterpriseReadonlyControllersSid = 77,
 
-        /// <summary>Indicates a SID that matches the built-in DCOM certification services access group.</summary>
+        /// <summary>Indicates a SID that matches the built-in DCOM certification services access
+        // group.</summary>
         WinBuiltinCertSvcDComAccessGroup = 78,
 
         /// <summary>Indicates a SID that matches the medium plus integrity label.</summary>
@@ -317,7 +333,8 @@ namespace System.Security.Principal
         /// <summary>Indicates a SID of Internet client and server capability for app containers.</summary>
         WinCapabilityInternetClientServerSid = 86,
 
-        /// <summary>Indicates a SID of private network client and server capability for app containers.</summary>
+        /// <summary>Indicates a SID of private network client and server capability for app
+        // containers.</summary>
         WinCapabilityPrivateNetworkClientServerSid = 87,
 
         /// <summary>Indicates a SID for pictures library capability for app containers.</summary>
@@ -340,7 +357,8 @@ namespace System.Security.Principal
 
         /// <summary>Indicates a SID for removable storage capability for app containers.</summary>
         WinCapabilityRemovableStorageSid = 94,
-        // Note: Adding additional values require changes everywhere where the value above is used as the maximum defined WellKnownSidType value.
+        // Note: Adding additional values require changes everywhere where the value above is used as the
+        // maximum defined WellKnownSidType value.
         // E.g. System.Security.Principal.SecurityIdentifier constructor
     }
 
@@ -727,8 +745,10 @@ namespace System.Security.Principal
                 }
 
                 //
-                // if domainSid is passed in as S-1-5-21-3-4-5-6,  the above api will return S-1-5-21-3-4-5 as the domainSid
-                // Since these do not match S-1-5-21-3-4-5-6 is not a valid domainSid (wrong number of subauthorities)
+                // if domainSid is passed in as S-1-5-21-3-4-5-6,  the above api will return S-1-5-21-3-4-5 as the
+                // domainSid
+                // Since these do not match S-1-5-21-3-4-5-6 is not a valid domainSid (wrong number of
+                // subauthorities)
                 //
                 if (resultDomainSid != domainSid)
                 {
@@ -852,7 +872,8 @@ namespace System.Security.Principal
                 // length of buffer calculation
                 // prefix = "S-1-".Length: 4;
                 // authority: ulong.MaxValue.ToString("D") : 20;
-                // subauth = MaxSubAuthorities * ( uint.MaxValue.ToString("D").Length + '-'.Length ): 15 * (10+1): 165;
+                // subauth = MaxSubAuthorities * ( uint.MaxValue.ToString("D").Length + '-'.Length ): 15 * (10+1):
+                // 165;
                 // max possible length = 4 + 20 + 165: 189
                 Span<char> result = stackalloc char[189];
                 result[0] = 'S';

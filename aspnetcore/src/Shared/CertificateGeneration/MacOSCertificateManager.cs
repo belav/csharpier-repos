@@ -201,7 +201,8 @@ internal sealed class MacOSCertificateManager : CertificateManager
                 )
                 {
                     RedirectStandardOutput = true,
-                    // Do this to avoid showing output to the console when the cert is not trusted. It is trivial to export
+                    // Do this to avoid showing output to the console when the cert is not trusted. It is trivial to
+                    // export
                     // the cert and replicate the command to see details.
                     RedirectStandardError = true,
                 }
@@ -364,7 +365,8 @@ internal sealed class MacOSCertificateManager : CertificateManager
         return hashes.Any(h => string.Equals(h, certificate.Thumbprint, StringComparison.Ordinal));
     }
 
-    // We don't have a good way of checking on the underlying implementation if it is exportable, so just return true.
+    // We don't have a good way of checking on the underlying implementation if it is exportable, so
+    // just return true.
     protected override bool IsExportable(X509Certificate2 c) => true;
 
     protected override X509Certificate2 SaveCertificateCore(

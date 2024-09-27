@@ -157,9 +157,9 @@ namespace System
         }
 
         /*
-         * Create an instance using the name of type and the assembly where it exists. This allows
-         * types to be created remotely without having to load the type locally.
-         */
+        * Create an instance using the name of type and the assembly where it exists. This allows
+        * types to be created remotely without having to load the type locally.
+        */
 
         [System.Security.SecuritySafeCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
@@ -246,22 +246,27 @@ namespace System
         {
             RuntimeType rt = typeof(T) as RuntimeType;
 
-            // This is a hack to maintain compatibility with V2. Without this we would throw a NotSupportedException for void[].
+            // This is a hack to maintain compatibility with V2. Without this we would throw a
+            // NotSupportedException for void[].
             // Array, Ref, and Pointer types don't have default constructors.
             if (rt.HasElementType)
                 throw new MissingMethodException(Environment.GetResourceString("Arg_NoDefCTor"));
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
 
-            // Skip the CreateInstanceCheckThis call to avoid perf cost and to maintain compatibility with V2 (throwing the same exceptions).
+            // Skip the CreateInstanceCheckThis call to avoid perf cost and to maintain compatibility with V2
+            // (throwing the same exceptions).
 #if FEATURE_CORECLR
-            // In SL2/3 CreateInstance<T> doesn't do any security checks. This would mean that Assembly B can create instances of an internal
+            // In SL2/3 CreateInstance<T> doesn't do any security checks. This would mean that Assembly B can
+            // create instances of an internal
             // type in Assembly A upon A's request:
             //      TypeInAssemblyA.DoWork() { AssemblyB.Create<InternalTypeInAssemblyA>();}
             //      TypeInAssemblyB.Create<T>() {return new T();}
-            // This violates type safety but we saw multiple user apps that have put a dependency on it. So for compatability we allow this if
+            // This violates type safety but we saw multiple user apps that have put a dependency on it. So for
+            // compatability we allow this if
             // the SL app was built against SL2/3.
-            // Note that in SL2/3 it is possible for app code to instantiate public transparent types with public critical default constructors.
+            // Note that in SL2/3 it is possible for app code to instantiate public transparent types with
+            // public critical default constructors.
             // Fortunately we don't have such types in out platform assemblies.
             if (
                 CompatibilitySwitches.IsAppEarlierThanSilverlight4

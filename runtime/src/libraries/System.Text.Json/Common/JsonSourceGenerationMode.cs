@@ -10,9 +10,12 @@ namespace System.Text.Json.Serialization
     public enum JsonSourceGenerationMode
     {
         /// <summary>
-        /// When specified on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/>, indicates that both type-metadata initialization logic
-        /// and optimized serialization logic should be generated for all types. When specified on <see cref="JsonSerializableAttribute.GenerationMode"/>,
-        /// indicates that the setting on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/> should be used.
+        /// When specified on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/>, indicates
+        // that both type-metadata initialization logic
+        /// and optimized serialization logic should be generated for all types. When specified on <see
+        // cref="JsonSerializableAttribute.GenerationMode"/>,
+        /// indicates that the setting on <see cref="JsonSourceGenerationOptionsAttribute.GenerationMode"/>
+        // should be used.
         /// </summary>
         Default = 0,
 

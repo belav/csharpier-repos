@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             CheckOneDouble("1.3694713649464322631e-11", 0x3DAE1D703BB5749Dul);
             CheckOneDouble("9.3170532238714134438e+16", 0x4374B021AFD9F651ul);
 
-            //// https://connect.microsoft.com/VisualStudio/feedback/details/914964/double-round-trip-conversion-via-a-string-is-not-safe
+            ////
+            // https://connect.microsoft.com/VisualStudio/feedback/details/914964/double-round-trip-conversion-via-a-string-is-not-safe
             CheckOneDouble("0.84551240822557006", 0x3FEB0E7009B61CE0ul);
 
             // This value has a non-terminating binary fraction.  It has a 0 at bit 54
@@ -49,7 +50,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             CheckOneDouble("0.6822871999174000000", 0x3FE5D54BF743FD1Bul);
             CheckOneDouble("0.6822871999174000001", 0x3FE5D54BF743FD1Bul);
 
-            // A handful of selected values for which double.Parse has been observed to produce an incorrect result
+            // A handful of selected values for which double.Parse has been observed to produce an incorrect
+            // result
             CheckOneDouble("88.7448699245e+188", 0x675fde6aee647ed2ul);
             CheckOneDouble("02.0500496671303857e-88", 0x2dba19a3cf32cd7ful);
             CheckOneDouble("1.15362842193e193", 0x68043a6fcda86331ul);
@@ -81,7 +83,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             CheckOneDouble("78.638509299e141", 0x5d99cb8c0a72cd05ul);
             CheckOneDouble("30.096884930e-42", 0x3784f976b4d47d63ul);
 
-            //// values from http://www.icir.org/vern/papers/testbase-report.pdf table 1 (less than half ULP - round down)
+            //// values from http://www.icir.org/vern/papers/testbase-report.pdf table 1 (less than half ULP -
+            // round down)
             CheckOneDouble("69e+267", 0x77C0B7CB60C994DAul);
             CheckOneDouble("999e-026", 0x3B282782AFE1869Eul);
             CheckOneDouble("7861e-034", 0x39AFE3544145E9D8ul);
@@ -104,7 +107,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             CheckOneDouble("836168422905420598437e-234", 0x13B20403A628A9CAul);
             CheckOneDouble("4891559871276714924261e+222", 0x7286ECAF7694A3C7ul);
 
-            //// values from http://www.icir.org/vern/papers/testbase-report.pdf table 2 (greater than half ULP - round up)
+            //// values from http://www.icir.org/vern/papers/testbase-report.pdf table 2 (greater than half ULP
+            // - round up)
             CheckOneDouble("85e-037", 0x38A698CCDC60015Aul);
             CheckOneDouble("623e+100", 0x554640A62F3A83DFul);
             CheckOneDouble("3571e+263", 0x77462644C61D41AAul);
@@ -141,7 +145,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         /// <summary>
-        /// Test round tripping for some specific floating-point values constructed to test the edge cases of conversion implementations.
+        /// Test round tripping for some specific floating-point values constructed to test the edge cases
+        // of conversion implementations.
         /// </summary>
         [Fact]
         public static void TestSpecificDoubles()

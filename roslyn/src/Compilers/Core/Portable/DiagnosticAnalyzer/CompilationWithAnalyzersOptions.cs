@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public bool LogAnalyzerExecutionTime => _logAnalyzerExecutionTime;
 
         /// <summary>
-        /// Flag indicating whether analyzer diagnostics with <see cref="Diagnostic.IsSuppressed"/> should be reported.
+        /// Flag indicating whether analyzer diagnostics with <see cref="Diagnostic.IsSuppressed"/> should
+        // be reported.
         /// </summary>
         public bool ReportSuppressedDiagnostics => _reportSuppressedDiagnostics;
 
@@ -54,8 +55,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="options">Options that are passed to analyzers.</param>
         /// <param name="onAnalyzerException">Action to invoke if an analyzer throws an exception.</param>
-        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently on multiple threads.</param>
-        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be logged.</param>
+        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently
+        // on multiple threads.</param>
+        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be
+        // logged.</param>
         public CompilationWithAnalyzersOptions(
             AnalyzerOptions options,
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,
@@ -75,9 +78,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="options">Options that are passed to analyzers.</param>
         /// <param name="onAnalyzerException">Action to invoke if an analyzer throws an exception.</param>
-        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently on multiple threads.</param>
-        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be logged.</param>
-        /// <param name="reportSuppressedDiagnostics">Flag indicating whether analyzer diagnostics with <see cref="Diagnostic.IsSuppressed"/> should be reported.</param>
+        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently
+        // on multiple threads.</param>
+        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be
+        // logged.</param>
+        /// <param name="reportSuppressedDiagnostics">Flag indicating whether analyzer diagnostics with <see
+        // cref="Diagnostic.IsSuppressed"/> should be reported.</param>
         public CompilationWithAnalyzersOptions(
             AnalyzerOptions options,
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,
@@ -99,10 +105,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// </summary>
         /// <param name="options">Options that are passed to analyzers.</param>
         /// <param name="onAnalyzerException">Action to invoke if an analyzer throws an exception.</param>
-        /// <param name="analyzerExceptionFilter">Action to invoke if an analyzer throws an exception as an exception filter.</param>
-        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently on multiple threads.</param>
-        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be logged.</param>
-        /// <param name="reportSuppressedDiagnostics">Flag indicating whether analyzer diagnostics with <see cref="Diagnostic.IsSuppressed"/> should be reported.</param>
+        /// <param name="analyzerExceptionFilter">Action to invoke if an analyzer throws an exception as an
+        // exception filter.</param>
+        /// <param name="concurrentAnalysis">Flag indicating whether analysis can be performed concurrently
+        // on multiple threads.</param>
+        /// <param name="logAnalyzerExecutionTime">Flag indicating whether analyzer execution time should be
+        // logged.</param>
+        /// <param name="reportSuppressedDiagnostics">Flag indicating whether analyzer diagnostics with <see
+        // cref="Diagnostic.IsSuppressed"/> should be reported.</param>
         public CompilationWithAnalyzersOptions(
             AnalyzerOptions? options,
             Action<Exception, DiagnosticAnalyzer, Diagnostic>? onAnalyzerException,

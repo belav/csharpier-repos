@@ -1,9 +1,9 @@
 ﻿/********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -98,7 +98,8 @@ namespace Mono.Data.Sqlite
         /// Converts a string to a UTF-8 encoded byte array sized to include a null-terminating character.
         /// </summary>
         /// <param name="sourceText">The string to convert to UTF-8</param>
-        /// <returns>A byte array containing the converted string plus an extra 0 terminating byte at the end of the array.</returns>
+        /// <returns>A byte array containing the converted string plus an extra 0 terminating byte at the
+        // end of the array.</returns>
         public static byte[] ToUTF8(string sourceText)
         {
             Byte[] byteArray;
@@ -115,11 +116,13 @@ namespace Mono.Data.Sqlite
         /// Convert a DateTime to a UTF-8 encoded, zero-terminated byte array.
         /// </summary>
         /// <remarks>
-        /// This function is a convenience function, which first calls ToString() on the DateTime, and then calls ToUTF8() with the
+        /// This function is a convenience function, which first calls ToString() on the DateTime, and then
+        // calls ToUTF8() with the
         /// string result.
         /// </remarks>
         /// <param name="dateTimeValue">The DateTime to convert.</param>
-        /// <returns>The UTF-8 encoded string, including a 0 terminating byte at the end of the array.</returns>
+        /// <returns>The UTF-8 encoded string, including a 0 terminating byte at the end of the
+        // array.</returns>
         public byte[] ToUTF8(DateTime dateTimeValue)
         {
             return ToUTF8(ToString(dateTimeValue));
@@ -165,7 +168,8 @@ namespace Mono.Data.Sqlite
 
         #region DateTime Conversion Functions
         /// <summary>
-        /// Converts a string into a DateTime, using the current DateTimeFormat specified for the connection when it was opened.
+        /// Converts a string into a DateTime, using the current DateTimeFormat specified for the connection
+        // when it was opened.
         /// </summary>
         /// <remarks>
         /// Acceptable ISO8601 DateTime formats are:
@@ -178,7 +182,8 @@ namespace Mono.Data.Sqlite
         ///   HH:mm:ss
         ///   THHmmss
         /// </remarks>
-        /// <param name="dateText">The string containing either a Tick value, a JulianDay double, or an ISO8601-format string</param>
+        /// <param name="dateText">The string containing either a Tick value, a JulianDay double, or an
+        // ISO8601-format string</param>
         /// <returns>A DateTime value</returns>
         public DateTime ToDateTime(string dateText)
         {
@@ -223,10 +228,12 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Converts a DateTime to a string value, using the current DateTimeFormat specified for the connection when it was opened.
+        /// Converts a DateTime to a string value, using the current DateTimeFormat specified for the
+        // connection when it was opened.
         /// </summary>
         /// <param name="dateValue">The DateTime value to convert</param>
-        /// <returns>Either a string consisting of the tick count for DateTimeFormat.Ticks, a JulianDay double, or a date/time in ISO8601 format.</returns>
+        /// <returns>Either a string consisting of the tick count for DateTimeFormat.Ticks, a JulianDay
+        // double, or a date/time in ISO8601 format.</returns>
         public string ToString(DateTime dateValue)
         {
             switch (_datetimeFormat)
@@ -248,7 +255,8 @@ namespace Mono.Data.Sqlite
         /// Internal function to convert a UTF-8 encoded IntPtr of the specified length to a DateTime.
         /// </summary>
         /// <remarks>
-        /// This is a convenience function, which first calls ToString() on the IntPtr to convert it to a string, then calls
+        /// This is a convenience function, which first calls ToString() on the IntPtr to convert it to a
+        // string, then calls
         /// ToDateTime() on the string to return a DateTime.
         /// </remarks>
         /// <param name="ptr">A pointer to the UTF-8 encoded string</param>
@@ -265,11 +273,14 @@ namespace Mono.Data.Sqlite
         /// Smart method of splitting a string.  Skips quoted elements, removes the quotes.
         /// </summary>
         /// <remarks>
-        /// This split function works somewhat like the String.Split() function in that it breaks apart a string into
+        /// This split function works somewhat like the String.Split() function in that it breaks apart a
+        // string into
         /// pieces and returns the pieces as an array.  The primary differences are:
         /// <list type="bullet">
-        /// <item><description>Only one character can be provided as a separator character</description></item>
-        /// <item><description>Quoted text inside the string is skipped over when searching for the separator, and the quotes are removed.</description></item>
+        /// <item><description>Only one character can be provided as a separator
+        // character</description></item>
+        /// <item><description>Quoted text inside the string is skipped over when searching for the
+        // separator, and the quotes are removed.</description></item>
         /// </list>
         /// Thus, if splitting the following string looking for a comma:<br/>
         /// One,Two, "Three, Four", Five<br/>
@@ -355,7 +366,8 @@ namespace Mono.Data.Sqlite
         /// <param name="source">A string representing true or false</param>
         /// <returns></returns>
         /// <remarks>
-        /// "yes", "no", "y", "n", "0", "1", "on", "off" as well as Boolean.FalseString and Boolean.TrueString will all be
+        /// "yes", "no", "y", "n", "0", "1", "on", "off" as well as Boolean.FalseString and
+        // Boolean.TrueString will all be
         /// converted to a proper boolean value.
         /// </remarks>
         public static bool ToBoolean(string source)
@@ -642,7 +654,8 @@ namespace Mono.Data.Sqlite
         };
 
         /// <summary>
-        /// For a given type, return the closest-match SQLite TypeAffinity, which only understands a very limited subset of types.
+        /// For a given type, return the closest-match SQLite TypeAffinity, which only understands a very
+        // limited subset of types.
         /// </summary>
         /// <param name="typ">The type to evaluate</param>
         /// <returns>The SQLite type affinity for that type.</returns>
@@ -710,15 +723,20 @@ namespace Mono.Data.Sqlite
                     return _typeNames[n].dataType;
             }
 
-            /* http://www.sqlite.org/datatype3.html
-             * 2.1 Determination Of Column Affinity
-             * The affinity of a column is determined by the declared type of the column, according to the following rules in the order shown:
-             *   1. If the declared type contains the string "INT" then it is assigned INTEGER affinity.
-             *   2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then that column has TEXT affinity. Notice that the type VARCHAR contains the string "CHAR" and is thus assigned TEXT affinity.
-             *   3. If the declared type for a column contains the string "BLOB" or if no type is specified then the column has affinity NONE.
-             *   4. If the declared type for a column contains any of the strings "REAL", "FLOA", or "DOUB" then the column has REAL affinity.
-             *   5. Otherwise, the affinity is NUMERIC.
-             */
+/* http://www.sqlite.org/datatype3.html
+* 2.1 Determination Of Column Affinity
+* The affinity of a column is determined by the declared type of the column, according to the
+following rules in the order shown:
+*   1. If the declared type contains the string "INT" then it is assigned INTEGER affinity.
+*   2. If the declared type of the column contains any of the strings "CHAR", "CLOB", or "TEXT" then
+that column has TEXT affinity. Notice that the type VARCHAR contains the string "CHAR" and is thus
+assigned TEXT affinity.
+*   3. If the declared type for a column contains the string "BLOB" or if no type is specified then
+the column has affinity NONE.
+*   4. If the declared type for a column contains any of the strings "REAL", "FLOA", or "DOUB" then
+the column has REAL affinity.
+*   5. Otherwise, the affinity is NUMERIC.
+*/
 
             if (Name.IndexOf("INT", StringComparison.OrdinalIgnoreCase) >= 0)
             {
@@ -806,7 +824,8 @@ namespace Mono.Data.Sqlite
     }
 
     /// <summary>
-    /// SQLite has very limited types, and is inherently text-based.  The first 5 types below represent the sum of all types SQLite
+    /// SQLite has very limited types, and is inherently text-based.  The first 5 types below represent
+    // the sum of all types SQLite
     /// understands.  The DateTime extension to the spec is for internal use only.
     /// </summary>
     public enum TypeAffinity
@@ -853,16 +872,21 @@ namespace Mono.Data.Sqlite
     }
 
     /// <summary>
-    /// This implementation of SQLite for ADO.NET can process date/time fields in databases in only one of three formats.  Ticks, ISO8601
+    /// This implementation of SQLite for ADO.NET can process date/time fields in databases in only one
+    // of three formats.  Ticks, ISO8601
     /// and JulianDay.
     /// </summary>
     /// <remarks>
-    /// ISO8601 is more compatible, readable, fully-processable, but less accurate as it doesn't provide time down to fractions of a second.
-    /// JulianDay is the numeric format the SQLite uses internally and is arguably the most compatible with 3rd party tools.  It is
+    /// ISO8601 is more compatible, readable, fully-processable, but less accurate as it doesn't provide
+    // time down to fractions of a second.
+    /// JulianDay is the numeric format the SQLite uses internally and is arguably the most compatible
+    // with 3rd party tools.  It is
     /// not readable as text without post-processing.
-    /// Ticks less compatible with 3rd party tools that query the database, and renders the DateTime field unreadable as text without post-processing.
+    /// Ticks less compatible with 3rd party tools that query the database, and renders the DateTime
+    // field unreadable as text without post-processing.
     ///
-    /// The preferred order of choosing a datetime format is JulianDay, ISO8601, and then Ticks.  Ticks is mainly present for legacy
+    /// The preferred order of choosing a datetime format is JulianDay, ISO8601, and then Ticks.  Ticks
+    // is mainly present for legacy
     /// code support.
     /// </remarks>
     public enum SQLiteDateFormats
@@ -894,10 +918,13 @@ namespace Mono.Data.Sqlite
     /// <remarks>
     /// By default SQLite will create and delete the journal file when needed during a transaction.
     /// However, for some computers running certain filesystem monitoring tools, the rapid
-    /// creation and deletion of the journal file can cause those programs to fail, or to interfere with SQLite.
+    /// creation and deletion of the journal file can cause those programs to fail, or to interfere with
+    // SQLite.
     ///
-    /// If a program or virus scanner is interfering with SQLite's journal file, you may receive errors like "unable to open database file"
-    /// when starting a transaction.  If this is happening, you may want to change the default journal mode to Persist.
+    /// If a program or virus scanner is interfering with SQLite's journal file, you may receive errors
+    // like "unable to open database file"
+    /// when starting a transaction.  If this is happening, you may want to change the default journal
+    // mode to Persist.
     /// </remarks>
     public enum SQLiteJournalModeEnum
     {
@@ -907,13 +934,16 @@ namespace Mono.Data.Sqlite
         Delete = 0,
 
         /// <summary>
-        /// When this is set, SQLite will keep the journal file even after a transaction has completed.  It's contents will be erased,
-        /// and the journal re-used as often as needed.  If it is deleted, it will be recreated the next time it is needed.
+        /// When this is set, SQLite will keep the journal file even after a transaction has completed.
+        // It's contents will be erased,
+        /// and the journal re-used as often as needed.  If it is deleted, it will be recreated the next
+        // time it is needed.
         /// </summary>
         Persist = 1,
 
         /// <summary>
-        /// This option disables the rollback journal entirely.  Interrupted transactions or a program crash can cause database
+        /// This option disables the rollback journal entirely.  Interrupted transactions or a program crash
+        // can cause database
         /// corruption in this mode!
         /// </summary>
         Off = 2,

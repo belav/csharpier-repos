@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// These types are required for Desktop to Core serialization as they are not covered by GenFacades because they are marked as internal.
+// These types are required for Desktop to Core serialization as they are not covered by GenFacades
+// because they are marked as internal.
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Collections.Generic.GenericComparer<>)
 )]
@@ -20,7 +21,8 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Collections.Generic.ObjectEqualityComparer<>)
 )]
-// This is required for back-compatibility with .NET Core 2.0 as we exposed the NonRandomizedStringEqualityComparer inside the serialization blob
+// This is required for back-compatibility with .NET Core 2.0 as we exposed the
+// NonRandomizedStringEqualityComparer inside the serialization blob
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Collections.Generic.NonRandomizedStringEqualityComparer)
 )]
@@ -39,7 +41,8 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Diagnostics.Contracts.ContractException)
 )]
-// This is required for back-compatibility with legacy Xamarin which had Stack<T> and Queue<T> in mscorlib and also added a few NS2.1 types that didn't exist in .NET Framework
+// This is required for back-compatibility with legacy Xamarin which had Stack<T> and Queue<T> in
+// mscorlib and also added a few NS2.1 types that didn't exist in .NET Framework
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.HashCode))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.IAsyncDisposable))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Index))]
@@ -253,7 +256,8 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Threading.Tasks.Sources.ValueTaskSourceStatus)
 )]
-// These types are required for back-compatibility with .NET Framework and previous versions of .NETCoreApp. -->
+// These types are required for back-compatibility with .NET Framework and previous versions of
+// .NETCoreApp. -->
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(
     typeof(System.Reflection.Emit.PEFileKinds)
 )]

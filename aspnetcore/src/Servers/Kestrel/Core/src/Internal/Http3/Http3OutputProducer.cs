@@ -347,7 +347,8 @@ internal sealed class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         {
             ThrowIfSuffixSent();
 
-            // This length check is important because we don't want to set _startedWritingDataFrames unless a data
+            // This length check is important because we don't want to set _startedWritingDataFrames unless a
+            // data
             // frame will actually be written causing the headers to be flushed.
             if (_streamCompleted || data.Length == 0)
             {
@@ -375,7 +376,8 @@ internal sealed class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         {
             ThrowIfSuffixSent();
 
-            // This length check is important because we don't want to set _startedWritingDataFrames unless a data
+            // This length check is important because we don't want to set _startedWritingDataFrames unless a
+            // data
             // frame will actually be written causing the headers to be flushed.
             if (_streamCompleted || data.Length == 0)
             {
@@ -397,8 +399,10 @@ internal sealed class Http3OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         bool appCompleted
     )
     {
-        // appCompleted flag is not used here. The write FIN is sent via the transport and not via the frame.
-        // Headers are written to buffer and flushed with a FIN when Http3FrameWriter.CompleteAsync is called
+        // appCompleted flag is not used here. The write FIN is sent via the transport and not via the
+        // frame.
+        // Headers are written to buffer and flushed with a FIN when Http3FrameWriter.CompleteAsync is
+        // called
         // in ProcessDataWrites.
 
         lock (_dataWriterLock)

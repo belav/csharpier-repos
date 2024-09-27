@@ -196,8 +196,8 @@ namespace System.Runtime.Serialization
         {
             //Check if there are any dup class names. Then we need to include as part of
             //typeName to prefix the Field names in SerializationFieldInfo
-            /*out*/parentTypes = null;
-            /*out*/parentTypeCount = 0;
+/*out*/parentTypes = null;
+/*out*/parentTypeCount = 0;
             bool unique = true;
             RuntimeType objectType = (RuntimeType)typeof(object);
             for (RuntimeType t1 = parentType; t1 != objectType; t1 = (RuntimeType)t1.BaseType)
@@ -542,7 +542,8 @@ namespace System.Runtime.Serialization
         }
 
         // Extracts the data from obj.  members is the array of members which we wish to
-        // extract (must be FieldInfos or PropertyInfos).  For each supplied member, extract the matching value and
+        // extract (must be FieldInfos or PropertyInfos).  For each supplied member, extract the matching
+        // value and
         // return it in a Object[] of the same size.
         //
         [System.Security.SecurityCritical] // auto-generated_required

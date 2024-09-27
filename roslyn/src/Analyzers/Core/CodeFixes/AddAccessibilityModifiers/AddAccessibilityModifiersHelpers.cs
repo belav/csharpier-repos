@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             {
                 var generator = editor.Generator;
 
-                // If there was accessibility on the member, then remove it.  If there was no accessibility, then add
+                // If there was accessibility on the member, then remove it.  If there was no accessibility, then
+                // add
                 // the preferred accessibility for this member.
                 return generator.GetAccessibility(declaration) == Accessibility.NotApplicable
                     ? generator.WithAccessibility(declaration, preferredAccessibility)
@@ -53,7 +54,8 @@ namespace Microsoft.CodeAnalysis.AddAccessibilityModifiers
             if (symbol.GetOverriddenMember() is { DeclaredAccessibility: var accessibility })
                 return accessibility;
 
-            // Default abstract members to be protected, and virtual members to be public.  They can't be private as
+            // Default abstract members to be protected, and virtual members to be public.  They can't be
+            // private as
             // that's not legal.  And these are reasonable default values for them.
             if (symbol is IMethodSymbol or IPropertySymbol or IEventSymbol)
             {

@@ -79,7 +79,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                 .ShouldHaveResolvedFrameworkOrFailToFind(MicrosoftNETCoreApp, resolvedFramework);
         }
 
-        // Verifies that rollForward settings behave as expected when starting from 2.1.0 which doesn't exist
+        // Verifies that rollForward settings behave as expected when starting from 2.1.0 which doesn't
+        // exist
         // to other available 2.1.* versions. So roll forward on patch version.
         [Theory] // rollForward                               applyPatches resolvedFramework
         [InlineData(Constants.RollForwardSetting.Disable, null, ResolvedFramework.NotFound)]

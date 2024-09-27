@@ -55,7 +55,8 @@ namespace DbLinq.Vendor
         /// Returns a member name for a given column.
         /// </summary>
         /// <param name="column">Column name</param>
-        /// <param name="table">The table to look for (parameter may be ignored depending on implementation)</param>
+        /// <param name="table">The table to look for (parameter may be ignored depending on
+        // implementation)</param>
         /// <param name="schema">An optional schema (or null)</param>
         /// <returns>Member name or null if no alias found</returns>
         string GetColumnMemberAlias(string column, string table, string schema);
@@ -65,7 +66,8 @@ namespace DbLinq.Vendor
         /// Please note that DbLinq may not handle correctly the forced type
         /// </summary>
         /// <param name="column">Column name</param>
-        /// <param name="table">The table to look for (parameter may be ignored depending on implementation)</param>
+        /// <param name="table">The table to look for (parameter may be ignored depending on
+        // implementation)</param>
         /// <param name="schema">An optional schema (or null)</param>
         /// <returns>Member type or null if no alias found</returns>
         string GetColumnForcedType(string column, string table, string schema);
@@ -74,7 +76,8 @@ namespace DbLinq.Vendor
         /// Returns whether the given column is generated
         /// </summary>
         /// <param name="column">Column name</param>
-        /// <param name="table">The table to look for (parameter may be ignored depending on implementation)</param>
+        /// <param name="table">The table to look for (parameter may be ignored depending on
+        // implementation)</param>
         /// <param name="schema">An optional schema (or null)</param>
         /// <returns>Member type or null if no alias found</returns>
         bool? GetColumnGenerated(string column, string table, string schema);
@@ -83,7 +86,8 @@ namespace DbLinq.Vendor
         /// Returns whether the given column is generated
         /// </summary>
         /// <param name="column">Column name</param>
-        /// <param name="table">The table to look for (parameter may be ignored depending on implementation)</param>
+        /// <param name="table">The table to look for (parameter may be ignored depending on
+        // implementation)</param>
         /// <param name="schema">An optional schema (or null)</param>
         /// <returns>Member type or null if no alias found</returns>
         DbLinq.Schema.Dbml.AutoSync? GetColumnAutoSync(string column, string table, string schema);

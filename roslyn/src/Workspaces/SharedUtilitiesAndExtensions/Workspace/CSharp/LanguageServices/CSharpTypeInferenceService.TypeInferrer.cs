@@ -747,7 +747,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // 1. Overload resolution (see DevDiv 611477) in certain extension method cases
                 //    can result in GetSymbolInfo returning nothing.
-                // 2. when trying to infer the type of the first argument, it's possible that nothing corresponding to
+                // 2. when trying to infer the type of the first argument, it's possible that nothing corresponding
+                // to
                 //    the argument is typed and there exists an overload takes 0 argument as a viable match.
                 // In one of these cases, get the method group info, which is what signature help already does.
                 if (
@@ -764,7 +765,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     methods = methods.Concat(memberGroupMethods).Distinct().ToList();
                 }
 
-                // Special case: if this is an argument in Enum.HasFlag, infer the Enum type that we're invoking into,
+                // Special case: if this is an argument in Enum.HasFlag, infer the Enum type that we're invoking
+                // into,
                 // as otherwise we infer "Enum" which isn't useful
                 if (methods.Any(IsEnumHasFlag))
                 {
@@ -1648,8 +1650,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     if (symbol.IsErrorType())
                     {
-                        // We could be smart and infer this as an ErrorType?, but in the #nullable disable case we don't know if this is intended to be
-                        // a struct (where the question mark is legal) or a class (where it isn't). We'll thus avoid sticking question marks in this case.
+                        // We could be smart and infer this as an ErrorType?, but in the #nullable disable case we don't
+                        // know if this is intended to be
+                        // a struct (where the question mark is legal) or a class (where it isn't). We'll thus avoid
+                        // sticking question marks in this case.
                         // https://github.com/dotnet/roslyn/issues/37852 tracks fixing this is a much fancier way.
                         return symbol;
                     }
@@ -2220,7 +2224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             elementTypesBuilder.Add(patternType.InferredType);
                         }
 
-                        // Pass the nullable annotations explicitly to work around https://github.com/dotnet/roslyn/issues/40105
+                        // Pass the nullable annotations explicitly to work around
+                        // https://github.com/dotnet/roslyn/issues/40105
                         var elementTypes = elementTypesBuilder.ToImmutableAndFree();
                         var type = Compilation.CreateTupleTypeSymbol(
                             elementTypes,
@@ -2775,8 +2780,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 var memberType = memberSymbol.GetMemberType();
 
-                // We don't care what the type is, as long as it has 1 type argument. This will work for IEnumerable, IEnumerator,
-                // IAsyncEnumerable, IAsyncEnumerator and it's also good for error recovery in case there is a missing using.
+                // We don't care what the type is, as long as it has 1 type argument. This will work for
+                // IEnumerable, IEnumerator,
+                // IAsyncEnumerable, IAsyncEnumerator and it's also good for error recovery in case there is a
+                // missing using.
                 return
                     memberType is INamedTypeSymbol namedType && namedType.TypeArguments.Length == 1
                     ? SpecializedCollections.SingletonEnumerable(
@@ -3197,7 +3204,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return null;
                 }
 
-                // Pass the nullable annotations explicitly to work around https://github.com/dotnet/roslyn/issues/40105
+                // Pass the nullable annotations explicitly to work around
+                // https://github.com/dotnet/roslyn/issues/40105
                 return Compilation.CreateTupleTypeSymbol(
                     elementTypes,
                     elementNames,

@@ -14,17 +14,20 @@ public enum ClientCertificateMode
     NoCertificate,
 
     /// <summary>
-    /// A client certificate will be requested; however, authentication will not fail if a certificate is not provided by the client.
+    /// A client certificate will be requested; however, authentication will not fail if a certificate
+    // is not provided by the client.
     /// </summary>
     AllowCertificate,
 
     /// <summary>
-    /// A client certificate will be requested, and the client must provide a valid certificate for authentication to succeed.
+    /// A client certificate will be requested, and the client must provide a valid certificate for
+    // authentication to succeed.
     /// </summary>
     RequireCertificate,
 
     /// <summary>
-    /// A client certificate is not required and will not be requested from clients at the start of the connection.
+    /// A client certificate is not required and will not be requested from clients at the start of the
+    // connection.
     /// It may be requested by the application later.
     /// </summary>
     DelayCertificate,

@@ -7,7 +7,8 @@ namespace System.Net.Security
 {
     //
     // Implements delayed SSPI handle release:
-    // finalizable objects though the handles are kept alive until being pushed out by the newly incoming ones.
+    // finalizable objects though the handles are kept alive until being pushed out by the newly
+    // incoming ones.
     //
     internal static class SSPIHandleCache
     {

@@ -18,9 +18,12 @@ using System.Xml.XPath;
 namespace System.Xml.Xsl.Runtime
 {
     /// <summary>
-    /// RtfNavigators store Xslt result-tree-fragments.  At runtime, the Xslt library tests to see if a Navigator
-    /// is an RtfNavigator in order to enforce certain restrictions, such as prohibiting querying into Rtfs.
-    /// Furthermore, Rtfs must store extra serialization information required in order to properly implement the
+    /// RtfNavigators store Xslt result-tree-fragments.  At runtime, the Xslt library tests to see if a
+    // Navigator
+    /// is an RtfNavigator in order to enforce certain restrictions, such as prohibiting querying into
+    // Rtfs.
+    /// Furthermore, Rtfs must store extra serialization information required in order to properly
+    // implement the
     /// Xslt disable-output-escaping flag.
     /// </summary>
     internal abstract class RtfNavigator : XPathNavigator
@@ -101,7 +104,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position the navigator on the first attribute of the current node and return true.  If no attributes
+        /// Position the navigator on the first attribute of the current node and return true.  If no
+        // attributes
         /// can be found, return false.
         /// </summary>
         public override bool MoveToFirstAttribute()
@@ -110,7 +114,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// If positioned on an attribute, move to its next sibling attribute.  If no attributes can be found,
+        /// If positioned on an attribute, move to its next sibling attribute.  If no attributes can be
+        // found,
         /// return false.
         /// </summary>
         public override bool MoveToNextAttribute()
@@ -128,7 +133,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Position the navigator on the next namespace within the specified scope.  If no matching namespace
+        /// Position the navigator on the next namespace within the specified scope.  If no matching
+        // namespace
         /// can be found, return false.
         /// </summary>
         public override bool MoveToNextNamespace(XPathNamespaceScope namespaceScope)
@@ -147,7 +153,8 @@ namespace System.Xml.Xsl.Runtime
 
         /// <summary>
         /// If the current node is an attribute or namespace (not content), return false.  Otherwise,
-        /// move to the previous (sibling) content node.  Return false if there are no previous content nodes.
+        /// move to the previous (sibling) content node.  Return false if there are no previous content
+        // nodes.
         /// </summary>
         public override bool MoveToPrevious()
         {
@@ -181,7 +188,8 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Returns true if this navigator is positioned to the same node as the "other" navigator.  Returns false
+        /// Returns true if this navigator is positioned to the same node as the "other" navigator.  Returns
+        // false
         /// if not, or if the "other" navigator is not the same type as this navigator.
         /// </summary>
         public override bool IsSamePosition(XPathNavigator other)
@@ -297,7 +305,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// This RtfNavigator specializes the case of a root node having a single text node child.  This is a very common
+    /// This RtfNavigator specializes the case of a root node having a single text node child.  This is
+    // a very common
     /// case, such as in <xsl:variable name="foo">bar</xsl:variable>.
     /// </summary>
     internal sealed class RtfTextNavigator : RtfNavigator
@@ -404,7 +413,8 @@ namespace System.Xml.Xsl.Runtime
     }
 
     /// <summary>
-    /// This class creates a document on the first call to GetNavigator(), and returns a Navigator from it.  On
+    /// This class creates a document on the first call to GetNavigator(), and returns a Navigator from
+    // it.  On
     /// subsequent calls, Navigators from the same document are returned (no new document is created).
     /// </summary>
     internal sealed class NavigatorConstructor
@@ -412,8 +422,10 @@ namespace System.Xml.Xsl.Runtime
         object cache;
 
         /// <summary>
-        /// Create a document from the cache of events.  If a document has already been created previously, return it.
-        /// This method is thread-safe, and is always guaranteed to return the exact same document, no matter how many
+        /// Create a document from the cache of events.  If a document has already been created previously,
+        // return it.
+        /// This method is thread-safe, and is always guaranteed to return the exact same document, no
+        // matter how many
         /// threads have called it concurrently.
         /// </summary>
         public XPathNavigator GetNavigator(XmlEventCache events, XmlNameTable nameTable)
@@ -442,8 +454,10 @@ namespace System.Xml.Xsl.Runtime
         }
 
         /// <summary>
-        /// Create a document containing a root node and a single text node child with "text" as its text value.
-        /// This method is thread-safe, and is always guaranteed to return the exact same document, no matter how many
+        /// Create a document containing a root node and a single text node child with "text" as its text
+        // value.
+        /// This method is thread-safe, and is always guaranteed to return the exact same document, no
+        // matter how many
         /// threads have called it concurrently.
         /// </summary>
         public XPathNavigator GetNavigator(string text, string baseUri, XmlNameTable nameTable)

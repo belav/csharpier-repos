@@ -46,7 +46,8 @@ namespace Microsoft.VSDesigner.WCFModel
 #endif
     {
         /// <summary>
-        /// Given an assembly which is supported in the target framework, loads all the exported type in it that are also supported in the target framework.
+        /// Given an assembly which is supported in the target framework, loads all the exported type in it
+        // that are also supported in the target framework.
         /// </summary>
         IEnumerable<Type> LoadExportedTypes(Assembly assembly);
     }

@@ -57,7 +57,8 @@ namespace System
         public static void ReadFromOpenStandardInput()
         {
             // The implementation in StdInReader uses a StringBuilder for caching. We want this builder to use
-            // multiple chunks. So the expectedLine is longer than 16 characters (StringBuilder.DefaultCapacity).
+            // multiple chunks. So the expectedLine is longer than 16 characters
+            // (StringBuilder.DefaultCapacity).
             string expectedLine = $"This is a test for ReadFromOpenStandardInput.";
             Assert.True(expectedLine.Length > new StringBuilder().Capacity);
             Console.WriteLine($"Please type the sentence (without the quotes): \"{expectedLine}\"");

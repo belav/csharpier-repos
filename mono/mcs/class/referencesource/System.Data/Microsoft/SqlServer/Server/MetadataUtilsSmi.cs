@@ -97,7 +97,8 @@ namespace Microsoft.SqlServer.Server
             ht.Add(typeof(System.DBNull), ExtendedClrTypeCode.DBNull);
             ht.Add(typeof(System.Decimal), ExtendedClrTypeCode.Decimal);
             ht.Add(typeof(System.Double), ExtendedClrTypeCode.Double);
-            // lookup code will have to special-case null-ref anyway, so don't bother adding ExtendedTypeCode.Empty to the table
+            // lookup code will have to special-case null-ref anyway, so don't bother adding
+            // ExtendedTypeCode.Empty to the table
             ht.Add(typeof(System.Int16), ExtendedClrTypeCode.Int16);
             ht.Add(typeof(System.Int32), ExtendedClrTypeCode.Int32);
             ht.Add(typeof(System.Int64), ExtendedClrTypeCode.Int64);
@@ -171,15 +172,23 @@ namespace Microsoft.SqlServer.Server
         }
 
         // If we know we're only going to use this object to assign to a specific SqlDbType back end object,
-        //  we can save some processing time by only checking for the few valid types that can be assigned to the dbType.
-        //  This assumes a switch statement over SqlDbType is faster than getting the ClrTypeCode and iterating over a
+        //  we can save some processing time by only checking for the few valid types that can be assigned
+        // to the dbType.
+        //  This assumes a switch statement over SqlDbType is faster than getting the ClrTypeCode and
+        // iterating over a
         //  series of if statements, or using a hash table.
-        // NOTE: the form of these checks is taking advantage of a feature of the JIT compiler that is supposed to
-        //      optimize checks of the form '(xxx.GetType() == typeof( YYY ))'.  The JIT team claimed at one point that
-        //      this doesn't even instantiate a Type instance, thus was the fastest method for individual comparisions.
-        //      Given that there's a known SqlDbType, thus a minimal number of comparisions, it's likely this is faster
-        //      than the other approaches considered (both GetType().GetTypeCode() switch and hash table using Type keys
-        //      must instantiate a Type object.  The typecode switch also degenerates into a large if-then-else for
+        // NOTE: the form of these checks is taking advantage of a feature of the JIT compiler that is
+        // supposed to
+        //      optimize checks of the form '(xxx.GetType() == typeof( YYY ))'.  The JIT team claimed at one
+        // point that
+        //      this doesn't even instantiate a Type instance, thus was the fastest method for individual
+        // comparisions.
+        //      Given that there's a known SqlDbType, thus a minimal number of comparisions, it's likely
+        // this is faster
+        //      than the other approaches considered (both GetType().GetTypeCode() switch and hash table
+        // using Type keys
+        //      must instantiate a Type object.  The typecode switch also degenerates into a large
+        // if-then-else for
         //      all but the primitive clr types.
         internal static ExtendedClrTypeCode DetermineExtendedTypeCodeForUseWithSqlDbType(
             SqlDbType dbType,
@@ -485,7 +494,8 @@ namespace Microsoft.SqlServer.Server
         // Inference rules changed for Katmai-or-later-only cases.  Only features that are guaranteed to be
         //  running against Katmai and don't have backward compat issues should call this code path.
         //      example: TVP's are a new Katmai feature (no back compat issues) so can infer DATETIME2
-        //          when mapping System.DateTime from DateTable or DbDataReader.  DATETIME2 is better because
+        //          when mapping System.DateTime from DateTable or DbDataReader.  DATETIME2 is better
+        // because
         //          of greater range that can handle all DateTime values.
         static internal SqlDbType InferSqlDbTypeFromType_Katmai(Type type)
         {
@@ -838,7 +848,8 @@ namespace Microsoft.SqlServer.Server
         }
 
         // Map SmiMetaData from a schema table.
-        //  DEVNOTE: since we're using SchemaTable, we can assume that we aren't directly using a SqlDataReader
+        //  DEVNOTE: since we're using SchemaTable, we can assume that we aren't directly using a
+        // SqlDataReader
         //      so we don't support the Sql-specific stuff, like collation
         static internal SmiExtendedMetaData SmiMetaDataFromSchemaTableRow(DataRow schemaRow)
         {
@@ -860,7 +871,8 @@ namespace Microsoft.SqlServer.Server
             SqlDbType colDbType = InferSqlDbTypeFromType_Katmai(colType);
             if (InvalidSqlDbType == colDbType)
             {
-                // Unknown through standard mapping, use VarBinary for columns that are Object typed, otherwise error
+                // Unknown through standard mapping, use VarBinary for columns that are Object typed, otherwise
+                // error
                 if (typeof(object) == colType)
                 {
                     colDbType = SqlDbType.VarBinary;

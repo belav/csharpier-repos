@@ -9,7 +9,8 @@
     using System.Web.Util;
 
     /// <summary>
-    /// Validates whether a password field meets the current Membership Provider's password requirements.
+    /// Validates whether a password field meets the current Membership Provider's password
+    // requirements.
     /// </summary>
     [AttributeUsage(
         AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
@@ -57,7 +58,8 @@
 
         /// <summary>
         /// Minimum required non-alpha numeric characters this attribute uses for validation.
-        /// If not explicitly set, defaults to <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>.
+        /// If not explicitly set, defaults to <see
+        // cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>.
         /// </summary>
         public int MinRequiredNonAlphanumericCharacters
         {
@@ -72,7 +74,8 @@
 
         /// <summary>
         /// Regular expression string representing the password strength this attribute uses for validation.
-        /// If not explicitly set, defaults to <see cref="Membership.Provider.PasswordStrengthRegularExpression"/>.
+        /// If not explicitly set, defaults to <see
+        // cref="Membership.Provider.PasswordStrengthRegularExpression"/>.
         /// </summary>
         public string PasswordStrengthRegularExpression
         {
@@ -85,7 +88,8 @@
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see cref="MinPasswordLengthError"/>,
+        /// Gets or sets the <see cref="System.Type"/> that contains the resources for <see
+        // cref="MinPasswordLengthError"/>,
         /// <see cref="MinNonAlphanumericCharactersError"/>, and <see cref="PasswordStrengthError"/>.
         /// </summary>
         public Type ResourceType
@@ -110,7 +114,8 @@
         /// <remarks>
         /// The property contains either the literal, non-localized string or the resource key
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
-        /// error message displayed when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
+        /// error message displayed when the provided password is shorter than <see
+        // cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// </remarks>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -130,12 +135,14 @@
         }
 
         /// <summary>
-        /// Gets or sets the MinNonAlphanumericCharactersError attribute property, which may be a resource key string.
+        /// Gets or sets the MinNonAlphanumericCharactersError attribute property, which may be a resource
+        // key string.
         /// </summary>
         /// <remarks>
         /// The property contains either the literal, non-localized string or the resource key
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
-        /// error message displayed when the provided password contains less number of non-alphanumeric characters than
+        /// error message displayed when the provided password contains less number of non-alphanumeric
+        // characters than
         /// <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>
         /// </remarks>
         [SuppressMessage(
@@ -161,7 +168,8 @@
         /// <remarks>
         /// The property contains either the literal, non-localized string or the resource key
         /// to be used in conjunction with <see cref="ResourceType"/> to configure the localized
-        /// error message displayed when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
+        /// error message displayed when the provided password is shorter than <see
+        // cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// </remarks>
         [SuppressMessage(
             "Microsoft.Naming",
@@ -189,7 +197,8 @@
         /// Overrider of <see cref="ValidationAttribute.IsValid(object,validationContext)"/>.
         /// </summary>
         /// <remarks>
-        /// Checks if the given value meets the password requirements such as minimum length, minimum number of non-alpha numeric characters
+        /// Checks if the given value meets the password requirements such as minimum length, minimum number
+        // of non-alpha numeric characters
         /// and password strength regular expression set in current <see cref="Membership.Provider"/>
         /// </remarks>
         /// <param name="value">The value to validate.</param>
@@ -284,10 +293,13 @@
 
         #region Private Methods
         /// <summary>
-        /// Gets the error message string shown when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
+        /// Gets the error message string shown when the provided password is shorter than <see
+        // cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// <para>
-        /// This can be either a literal, non-localized string provided to <see cref="MinPasswordLengthError"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="MinPasswordLengthError"/>
+        /// This can be either a literal, non-localized string provided to <see
+        // cref="MinPasswordLengthError"/> or the
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="MinPasswordLengthError"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -299,12 +311,15 @@
         /// represents a resource key within that resource type, then the localized value will be returned.
         /// </para>
         /// <para>
-        /// When <see cref="MinPasswordLengthError"/> has not been specified, a default error message will be returned.
+        /// When <see cref="MinPasswordLengthError"/> has not been specified, a default error message will
+        // be returned.
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="MinPasswordLengthError"/> property,
-        /// but a public static property with a name matching the <see cref="MinPasswordLengthError"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see
+        // cref="MinPasswordLengthError"/> property,
+        /// but a public static property with a name matching the <see cref="MinPasswordLengthError"/> value
+        // couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(
@@ -319,11 +334,14 @@
         }
 
         /// <summary>
-        /// Gets the error message string shown when the provided password contains less number of non-alphanumeric characters than
+        /// Gets the error message string shown when the provided password contains less number of
+        // non-alphanumeric characters than
         /// <see cref="Membership.Provider.MinRequiredNonAlphanumericCharacters"/>
         /// <para>
-        /// This can be either a literal, non-localized string provided to <see cref="MinNonAlphanumericCharactersError"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="MinNonAlphanumericCharactersError"/>
+        /// This can be either a literal, non-localized string provided to <see
+        // cref="MinNonAlphanumericCharactersError"/> or the
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="MinNonAlphanumericCharactersError"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -331,16 +349,20 @@
         /// When <see cref="ResourceType"/> has not been specified, the value of
         /// <see cref="MinNonAlphanumericCharactersError"/> will be returned.
         /// <para>
-        /// When <see cref="ResourceType"/> has been specified and <see cref="MinNonAlphanumericCharactersError"/>
+        /// When <see cref="ResourceType"/> has been specified and <see
+        // cref="MinNonAlphanumericCharactersError"/>
         /// represents a resource key within that resource type, then the localized value will be returned.
         /// </para>
         /// <para>
-        /// When <see cref="MinNonAlphanumericCharactersError"/> has not been specified, a default error message will be returned.
+        /// When <see cref="MinNonAlphanumericCharactersError"/> has not been specified, a default error
+        // message will be returned.
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="MinNonAlphanumericCharactersError"/> property,
-        /// but a public static property with a name matching the <see cref="MinNonAlphanumericCharactersError"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see
+        // cref="MinNonAlphanumericCharactersError"/> property,
+        /// but a public static property with a name matching the <see
+        // cref="MinNonAlphanumericCharactersError"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(
@@ -357,10 +379,13 @@
         }
 
         /// <summary>
-        /// Gets the error message string shown when the provided password is shorter than <see cref="Membership.Provider.MinRequiredPasswordLength"/>.
+        /// Gets the error message string shown when the provided password is shorter than <see
+        // cref="Membership.Provider.MinRequiredPasswordLength"/>.
         /// <para>
-        /// This can be either a literal, non-localized string provided to <see cref="PasswordStrengthError"/> or the
-        /// localized string found when <see cref="ResourceType"/> has been specified and <see cref="PasswordStrengthError"/>
+        /// This can be either a literal, non-localized string provided to <see
+        // cref="PasswordStrengthError"/> or the
+        /// localized string found when <see cref="ResourceType"/> has been specified and <see
+        // cref="PasswordStrengthError"/>
         /// represents a resource key within that resource type.
         /// </para>
         /// </summary>
@@ -372,12 +397,15 @@
         /// represents a resource key within that resource type, then the localized value will be returned.
         /// </para>
         /// <para>
-        /// When <see cref="PasswordStrengthError"/> has not been specified, a default error message will be returned.
+        /// When <see cref="PasswordStrengthError"/> has not been specified, a default error message will be
+        // returned.
         /// </para>
         /// </returns>
         /// <exception cref="System.InvalidOperationException">
-        /// After setting both the <see cref="ResourceType"/> property and the <see cref="PasswordStrengthError"/> property,
-        /// but a public static property with a name matching the <see cref="PasswordStrengthError"/> value couldn't be found
+        /// After setting both the <see cref="ResourceType"/> property and the <see
+        // cref="PasswordStrengthError"/> property,
+        /// but a public static property with a name matching the <see cref="PasswordStrengthError"/> value
+        // couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
         [SuppressMessage(

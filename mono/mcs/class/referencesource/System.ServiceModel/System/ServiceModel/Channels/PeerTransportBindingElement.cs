@@ -349,7 +349,8 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>(context);
         }
 
-        // Return the resolver member (if set) or create one from the resolver binding element in the context
+        // Return the resolver member (if set) or create one from the resolver binding element in the
+        // context
         PeerResolver GetResolver(BindingContext context)
         {
             if (this.resolverSet)
@@ -374,7 +375,8 @@ namespace System.ServiceModel.Channels
                 return customResolverElements[0].CreatePeerResolver();
             }
 
-            // If resolver binding element is included in the context, use it to create the resolver. elementToBeClonedwise,
+            // If resolver binding element is included in the context, use it to create the resolver.
+            // elementToBeClonedwise,
             // if default resolver is available, use it.
             Collection<PeerResolverBindingElement> resolverBindingElements =
                 context.BindingParameters.FindAll<PeerResolverBindingElement>();

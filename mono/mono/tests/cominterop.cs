@@ -824,7 +824,7 @@ public class Tests
             if (mono_test_marshal_retval_ccw_itest(test, true) != 0)
                 return 203;
 
-            /* Passing NULL to an out parameter will crash. */
+/* Passing NULL to an out parameter will crash. */
             if (mono_test_marshal_retval_ccw_itest(test_pres_sig, false) != 0)
                 return 204;
 
@@ -857,7 +857,7 @@ public class Tests
 
             if (isWindows)
             {
-                /* out */
+/* out */
                 Array array;
                 if (
                     (mono_test_marshal_safearray_out_1dim_vt_bstr_empty(out array) != 0)
@@ -933,7 +933,7 @@ public class Tests
                     }
                 }
 
-                /* in */
+/* in */
 
                 array = new object[] { };
                 if (mono_test_marshal_safearray_in_byval_1dim_empty(array) != 0)
@@ -995,7 +995,7 @@ public class Tests
                 if ((string)array.GetValue(new int[] { 0, 0, 0 }) != "111")
                     return 80;
 
-                /* in, out, byref */
+/* in, out, byref */
 
                 array = new object[] { };
                 if (
@@ -1045,7 +1045,7 @@ public class Tests
                 if (Convert.ToInt32(array.GetValue(0)) != -1)
                     return 86;
 
-                /* in, out, byval */
+/* in, out, byval */
 
                 array = new object[] { 1 };
                 if (
@@ -1085,7 +1085,7 @@ public class Tests
                 if (Convert.ToString(array.GetValue(new int[] { 0, 1, 0 })) != "ABCDEFG")
                     return 92;
 
-                /* Multiple safearray parameters with various types and options */
+/* Multiple safearray parameters with various types and options */
 
                 Array array1 = new object[] { 1 };
                 Array array2 = new object[,]

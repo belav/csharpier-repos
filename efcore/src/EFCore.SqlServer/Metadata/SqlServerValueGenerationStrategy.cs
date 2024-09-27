@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// </summary>
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see>, and
-///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL databases with EF Core</see>
+///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and Azure SQL
+// databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
 public enum SqlServerValueGenerationStrategy
@@ -31,7 +32,8 @@ public enum SqlServerValueGenerationStrategy
     SequenceHiLo,
 
     /// <summary>
-    ///     A pattern that uses a normal SQL Server <c>Identity</c> column in the same way as EF6 and earlier.
+    ///     A pattern that uses a normal SQL Server <c>Identity</c> column in the same way as EF6 and
+    // earlier.
     /// </summary>
     IdentityColumn,
 

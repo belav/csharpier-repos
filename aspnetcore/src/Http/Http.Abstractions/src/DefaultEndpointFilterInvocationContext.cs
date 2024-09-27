@@ -10,9 +10,11 @@ namespace Microsoft.AspNetCore.Http;
 public sealed class DefaultEndpointFilterInvocationContext : EndpointFilterInvocationContext
 {
     /// <summary>
-    /// Creates a new instance of the <see cref="DefaultEndpointFilterInvocationContext"/> for a given request.
+    /// Creates a new instance of the <see cref="DefaultEndpointFilterInvocationContext"/> for a given
+    // request.
     /// </summary>
-    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current request.</param>
+    /// <param name="httpContext">The <see cref="HttpContext"/> associated with the current
+    // request.</param>
     /// <param name="arguments">A list of parameters provided in the current request.</param>
     public DefaultEndpointFilterInvocationContext(
         HttpContext httpContext,

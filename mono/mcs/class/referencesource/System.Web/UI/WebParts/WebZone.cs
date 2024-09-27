@@ -17,7 +17,8 @@ namespace System.Web.UI.WebControls.WebParts
     using System.Web.Util;
 
     /// <devdoc>
-    /// Base class for all zone classes in the WebPart framework.  Contains properties used to control the UI
+    /// Base class for all zone classes in the WebPart framework.  Contains properties used to control
+    // the UI
     /// which is common to all zone classes.
     /// </devdoc>
     [

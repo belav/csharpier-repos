@@ -180,7 +180,7 @@ namespace Toshok.Web.Security
 
                     return Convert.ToBase64String(EncryptPassword(buf));
                 default:
-                    /* not reached.. */
+/* not reached.. */
                     return null;
             }
         }
@@ -198,7 +198,7 @@ namespace Toshok.Web.Security
                         DecryptPassword(Convert.FromBase64String(password))
                     );
                 default:
-                    /* not reached.. */
+/* not reached.. */
                     return null;
             }
         }
@@ -500,7 +500,7 @@ UPDATE m
             if (pwdAnswer != null)
                 pwdAnswer = pwdAnswer.Trim();
 
-            /* some initial validation */
+/* some initial validation */
             if (
                 username == null
                 || username.Length == 0
@@ -543,8 +543,8 @@ UPDATE m
                 return null;
             }
 
-            /* encode our password/answer using the
-             * "passwordFormat" configuration option */
+/* encode our password/answer using the
+* "passwordFormat" configuration option */
             string passwordSalt = "";
 
             RandomNumberGenerator rng = RandomNumberGenerator.Create();
@@ -556,8 +556,8 @@ UPDATE m
             if (RequiresQuestionAndAnswer)
                 pwdAnswer = EncodePassword(pwdAnswer, PasswordFormat, passwordSalt);
 
-            /* make sure the hashed/encrypted password and
-             * answer are still under 128 characters. */
+/* make sure the hashed/encrypted password and
+* answer are still under 128 characters. */
             if (password.Length > 128)
             {
                 status = MembershipCreateStatus.InvalidPassword;
@@ -585,8 +585,8 @@ UPDATE m
                 Guid applicationId;
                 Guid userId;
 
-                /* get the application id since it seems that inside transactions we
-                   can't insert using subqueries.. */
+/* get the application id since it seems that inside transactions we
+can't insert using subqueries.. */
 
                 commandText =
                     @"
@@ -606,8 +606,8 @@ SELECT ApplicationId
                 applicationId = reader.GetGuid(0);
                 reader.Close();
 
-                /* check for unique username, email and
-                 * provider user key, if applicable */
+/* check for unique username, email and
+* provider user key, if applicable */
 
                 commandText =
                     @"
@@ -684,7 +684,7 @@ SELECT COUNT(*)
                     }
                 }
 
-                /* first into the Users table */
+/* first into the Users table */
                 commandText =
                     @"
 INSERT into dbo.aspnet_Users (ApplicationId, UserId, UserName, LoweredUserName, LastActivityDate)
@@ -706,7 +706,7 @@ VALUES (@ApplicationId, NEWID(), @UserName, LOWER(@UserName), GETDATE())
                     return null;
                 }
 
-                /* then get the newly created userid */
+/* then get the newly created userid */
 
                 commandText =
                     @"
@@ -726,7 +726,7 @@ SELECT UserId
                 userId = reader.GetGuid(0);
                 reader.Close();
 
-                /* then insert into the Membership table */
+/* then insert into the Membership table */
                 commandText = String.Format(
                     @"
 INSERT into dbo.aspnet_Membership
@@ -790,13 +790,13 @@ VALUES (@ApplicationId,
 
             if (deleteAllRelatedData)
             {
-                /* delete everything from the
-                 * following features as well:
-                 *
-                 * Roles
-                 * Profile
-                 * WebParts Personalization
-                 */
+/* delete everything from the
+* following features as well:
+*
+* Roles
+* Profile
+* WebParts Personalization
+*/
             }
 
             DbTransaction trans = connection.BeginTransaction();
@@ -808,7 +808,7 @@ VALUES (@ApplicationId,
 
             try
             {
-                /* delete from the Membership table */
+/* delete from the Membership table */
                 commandText =
                     @"
 DELETE dbo.aspnet_Membership
@@ -830,7 +830,7 @@ DELETE dbo.aspnet_Membership
                 if (1 != command.ExecuteNonQuery())
                     throw new ProviderException("failed to delete from Membership table");
 
-                /* delete from the User table */
+/* delete from the User table */
                 commandText =
                     @"
 DELETE dbo.aspnet_Users
@@ -1128,12 +1128,12 @@ SELECT COUNT (*)
                     )
                 )
                 {
-                    /* if the validation succeeds:
+/* if the validation succeeds:
 
-                       set LastLoginDate to DateTime.Now
-                       set FailedPasswordAnswerAttemptCount to 0
-                       set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
-                    */
+set LastLoginDate to DateTime.Now
+set FailedPasswordAnswerAttemptCount to 0
+set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
+*/
 
                     string commandText =
                         @"
@@ -1433,7 +1433,7 @@ SELECT u.UserName
             );
             OnValidatingPassword(args);
 
-            /* if we're canceled.. */
+/* if we're canceled.. */
             if (args.Cancel)
             {
                 if (args.FailureInformation == null)
@@ -1484,7 +1484,7 @@ SELECT u.UserName
 
             userIsOnlineTimeWindow = section.UserIsOnlineTimeWindow;
 
-            /* we can't support password retrieval with hashed passwords */
+/* we can't support password retrieval with hashed passwords */
             if (passwordFormat == MembershipPasswordFormat.Hashed && enablePasswordRetrieval)
                 throw new ProviderException(
                     "password retrieval cannot be used with hashed passwords"
@@ -1549,7 +1549,7 @@ SELECT u.UserName
 
                     EmitValidatingPassword(username, newPassword, false);
 
-                    /* otherwise update the user's password in the db */
+/* otherwise update the user's password in the db */
 
                     db_password = EncodePassword(newPassword, db_passwordFormat, db_salt);
 
@@ -1703,11 +1703,11 @@ UPDATE dbo.aspnet_Users
         {
             MembershipUser user = GetUser(username, false);
 
-            /* if the user is locked out, return false immediately */
+/* if the user is locked out, return false immediately */
             if (user.IsLockedOut)
                 return false;
 
-            /* if the user is not yet approved, return false */
+/* if the user is not yet approved, return false */
             if (!user.IsApproved)
                 return false;
 
@@ -1736,13 +1736,13 @@ UPDATE dbo.aspnet_Users
                 {
                     DateTime now = DateTime.Now.ToUniversalTime();
 
-                    /* if the validation succeeds:
-                       set LastLoginDate to DateTime.Now
-                       set FailedPasswordAttemptCount to 0
-                       set FailedPasswordAttemptWindow to DefaultDateTime
-                       set FailedPasswordAnswerAttemptCount to 0
-                       set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
-                    */
+/* if the validation succeeds:
+set LastLoginDate to DateTime.Now
+set FailedPasswordAttemptCount to 0
+set FailedPasswordAttemptWindow to DefaultDateTime
+set FailedPasswordAnswerAttemptCount to 0
+set FailedPasswordAnswerAttemptWindowStart to DefaultDateTime
+*/
 
                     commandText =
                         @"
@@ -1850,14 +1850,14 @@ UPDATE dbo.aspnet_Membership
         {
             DateTime now = DateTime.Now;
 
-            /* if validation fails:
-               if (FailedPasswordAttemptWindowStart - DateTime.Now < PasswordAttemptWindow)
-                 increment FailedPasswordAttemptCount
-               FailedPasswordAttemptWindowStart = DateTime.Now
-               if (FailedPasswordAttemptCount > MaxInvalidPasswordAttempts)
-                 set IsLockedOut = true.
-                 set LastLockoutDate = DateTime.Now
-            */
+/* if validation fails:
+if (FailedPasswordAttemptWindowStart - DateTime.Now < PasswordAttemptWindow)
+increment FailedPasswordAttemptCount
+FailedPasswordAttemptWindowStart = DateTime.Now
+if (FailedPasswordAttemptCount > MaxInvalidPasswordAttempts)
+set IsLockedOut = true.
+set LastLockoutDate = DateTime.Now
+*/
 
             string commandText = String.Format(
                 @"
@@ -1898,7 +1898,7 @@ SELECT m.{0}, m.{1}
 
             if (db_FailedCount > MaxInvalidPasswordAttempts)
             {
-                /* lock the user out */
+/* lock the user out */
                 commandText =
                     @"
 UPDATE dbo.aspnet_Membership
@@ -1922,7 +1922,7 @@ UPDATE dbo.aspnet_Membership
             }
             else
             {
-                /* just store back the updated window start and count */
+/* just store back the updated window start and count */
                 commandText = String.Format(
                     @"
 UPDATE dbo.aspnet_Membership
@@ -1988,7 +1988,7 @@ SELECT m.Password, m.PasswordFormat, m.PasswordSalt
             salt = reader.GetString(2);
             reader.Close();
 
-            /* do the actual validation */
+/* do the actual validation */
             password = EncodePassword(password, passwordFormat, salt);
 
             bool valid = (password == db_password);
@@ -2039,7 +2039,7 @@ SELECT m.PasswordAnswer, m.PasswordFormat, m.PasswordSalt
             salt = reader.GetString(2);
             reader.Close();
 
-            /* do the actual password answer check */
+/* do the actual password answer check */
             answer = EncodePassword(answer, passwordFormat, salt);
 
             if (answer.Length > 128)

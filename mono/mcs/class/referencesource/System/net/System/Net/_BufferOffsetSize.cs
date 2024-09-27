@@ -57,14 +57,14 @@ namespace System.Net
         /*
         // Consider removing.
         internal BufferOffsetSize(byte[] buffer, int offset, bool copyBuffer)
-            : this(buffer, offset, buffer.Length - offset, copyBuffer) {
+        : this(buffer, offset, buffer.Length - offset, copyBuffer) {
         }
         */
 
         /*
         // Consider removing.
         internal BufferOffsetSize(int size, byte[] buffer, bool copyBuffer)
-            : this(buffer, 0, size, copyBuffer) {
+        : this(buffer, 0, size, copyBuffer) {
         }
         */
 

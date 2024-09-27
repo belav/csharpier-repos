@@ -15,7 +15,8 @@ namespace System.Xml
     using System.Text.RegularExpressions;
     using System.Xml.Schema;
 
-    // ExceptionType enum is used inside XmlConvert to specify which type of exception should be thrown at some of the verification and exception creating methods
+    // ExceptionType enum is used inside XmlConvert to specify which type of exception should be thrown
+    // at some of the verification and exception creating methods
     internal enum ExceptionType
     {
         ArgumentException,
@@ -639,7 +640,8 @@ namespace System.Xml
             return content;
         }
 
-        // Verification method for XML public ID characters as defined in XML spec production [13] PubidChar.
+        // Verification method for XML public ID characters as defined in XML spec production [13]
+        // PubidChar.
         // Throws XmlException if invalid character is found, otherwise returns the input string.
         public static string VerifyPublicId(string publicId)
         {
@@ -684,11 +686,13 @@ namespace System.Xml
         //
         // Verification methods for single characters and surrogates
         //
-        // In cases where the direct call into XmlCharType would not get automatically inlined (because of the use of byte* field),
+        // In cases where the direct call into XmlCharType would not get automatically inlined (because of
+        // the use of byte* field),
         // direct access to the XmlCharType.charProperties is used instead (= manual inlining).
         //
 
-        // Start name character types - as defined in Namespaces XML 1.0 spec (second edition) production [6] NCNameStartChar
+        // Start name character types - as defined in Namespaces XML 1.0 spec (second edition) production
+        // [6] NCNameStartChar
         //                              combined with the production [4] NameStartChar of XML 1.0 spec
         public static unsafe bool IsStartNCNameChar(char ch)
         {
@@ -706,7 +710,8 @@ namespace System.Xml
         }
 #endif
 
-        // Name character types - as defined in Namespaces XML 1.0 spec (second edition) production [6] NCNameStartChar
+        // Name character types - as defined in Namespaces XML 1.0 spec (second edition) production [6]
+        // NCNameStartChar
         //                        combined with the production [4] NameChar of XML 1.0 spec
         public static unsafe bool IsNCNameChar(char ch)
         {
@@ -759,7 +764,8 @@ namespace System.Xml
         //
         // String representation of Base types in XML (xsd) sometimes differ from
         // one common language runtime offer and for all types it has to be locale independent.
-        // o -- means that XmlConvert pass through to common language runtime converter with InvariantInfo FormatInfo
+        // o -- means that XmlConvert pass through to common language runtime converter with InvariantInfo
+        // FormatInfo
         // x -- means we doing something special to make a convertion.
         //
         // From:  To: Bol Chr SBy Byt I16 U16 I32 U32 I64 U64 Sgl Dbl Dec Dat Tim Str uid
@@ -1658,7 +1664,8 @@ namespace System.Xml
         {
             if (s_allDateTimeFormats == null)
             {
-                // no locking; the array is immutable so it's not a problem that it may get initialized more than once
+                // no locking; the array is immutable so it's not a problem that it may get initialized more than
+                // once
                 s_allDateTimeFormats = new string[]
                 {
                     "yyyy-MM-ddTHH:mm:ss.FFFFFFFzzzzzz", //dateTime

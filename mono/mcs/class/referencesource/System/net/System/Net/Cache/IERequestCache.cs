@@ -40,42 +40,47 @@ namespace Microsoft.Win32
             (double)int.MaxValue
         );
 
-        //        private  static readonly RequestCachePermission s_ReadPermission      = new RequestCachePermission(RequestCacheActions.CacheRead);
-        //        private  static readonly RequestCachePermission s_ReadWritePermission = new RequestCachePermission(RequestCacheActions.CacheReadWrite);
+        //        private  static readonly RequestCachePermission s_ReadPermission      = new
+        // RequestCachePermission(RequestCacheActions.CacheRead);
+        //        private  static readonly RequestCachePermission s_ReadWritePermission = new
+        // RequestCachePermission(RequestCacheActions.CacheReadWrite);
 
-        /// <summary> A public constructor that demands CacheReadWrite flag for RequestCachePermission  </summary>
+        /// <summary> A public constructor that demands CacheReadWrite flag for RequestCachePermission
+        // </summary>
         internal WinInetCache(bool isPrivateCache, bool canWrite, bool async)
             : base(isPrivateCache, canWrite)
         {
-            /***********
-            if (canWrite) {
-                s_ReadWritePermission.Demand();
-            }
-            else
-            {
-                s_ReadPermission.Demand();
-            }
-            ***********/
+/***********
+if (canWrite) {
+s_ReadWritePermission.Demand();
+}
+else
+{
+s_ReadPermission.Demand();
+}
+***********/
 
-            // Per VsWhidbey#88276 it was decided to not enforce any cache metadata limits for WinInet cache provider.
+            // Per VsWhidbey#88276 it was decided to not enforce any cache metadata limits for WinInet cache
+            // provider.
             //  (Microsoft 7/17 made this a const to avoid threading issues)
             //_MaximumResponseHeadersLength = Int32.MaxValue;
             this.async = async;
 
-            /********
-            if (_MaximumResponseHeadersLength == 0) {
-                NetConfiguration config = (NetConfiguration)System.Configuration.ConfigurationManager.GetSection("system.net/settings");
-                if (config != null) {
-                    if (config.maximumResponseHeadersLength < 0 && config.maximumResponseHeadersLength != -1) {
-                        throw new ArgumentOutOfRangeException(SR.GetString(SR.net_toosmall));
-                    }
-                    _MaximumResponseHeadersLength = config.maximumResponseHeadersLength * 1024;
-                }
-                else {
-                    _MaximumResponseHeadersLength = 64 * 1024;
-                }
-            }
-            ********/
+/********
+if (_MaximumResponseHeadersLength == 0) {
+NetConfiguration config =
+(NetConfiguration)System.Configuration.ConfigurationManager.GetSection("system.net/settings");
+if (config != null) {
+if (config.maximumResponseHeadersLength < 0 && config.maximumResponseHeadersLength != -1) {
+throw new ArgumentOutOfRangeException(SR.GetString(SR.net_toosmall));
+}
+_MaximumResponseHeadersLength = config.maximumResponseHeadersLength * 1024;
+}
+else {
+_MaximumResponseHeadersLength = 64 * 1024;
+}
+}
+********/
         }
 
         /// <summary>
@@ -391,7 +396,8 @@ namespace Microsoft.Win32
 
         //
         // Once the entry is unlocked it must not be updated
-        // There is a design flaw in current RequestCache contract, it should allow detection of already replaced entry when updating one.
+        // There is a design flaw in current RequestCache contract, it should allow detection of already
+        // replaced entry when updating one.
         //
         internal override void UnlockEntry(Stream stream)
         {
@@ -407,7 +413,8 @@ namespace Microsoft.Win32
                     )
                 );
 
-            // could be wrapped by some other stream, that's ok because the entry is unlocked on stream.Close anyway
+            // could be wrapped by some other stream, that's ok because the entry is unlocked on stream.Close
+            // anyway
             if (readStream == null)
                 return;
             readStream.UnlockEntry();
@@ -462,7 +469,8 @@ namespace Microsoft.Win32
                                 for (i = 0; i < length; ++i)
                                 {
                                     // WinInet specific block!!
-                                    // The point here is that wininet scans for ~U: throughly with no regard to \r\n so we mimic the same behavior
+                                    // The point here is that wininet scans for ~U: throughly with no regard to \r\n so we mimic the
+                                    // same behavior
                                     if (i == start && i + 2 < length)
                                     {
                                         if (
@@ -1109,7 +1117,8 @@ namespace Microsoft.Win32
 
             //
             // The stream will remain valid but after that call the entry can be replaced.
-            // If the entry has been replaced then the physical file that this stream points to may be deleted on stream.Close()
+            // If the entry has been replaced then the physical file that this stream points to may be deleted
+            // on stream.Close()
             //
             internal void UnlockEntry()
             {
@@ -1262,7 +1271,8 @@ namespace Microsoft.Win32
                                             m_Key
                                         )
                                     );
-                                // note, the handle may have been closed earlier if CacheProtocol knew that cache metadata update will not happen.
+                                // note, the handle may have been closed earlier if CacheProtocol knew that cache metadata update
+                                // will not happen.
                                 m_Handle.Close();
                             }
                         }
@@ -1605,10 +1615,12 @@ namespace Microsoft.Win32
                     if (cacheCommitAction == TriState.Unspecified)
                     {
                         // WinInet will not report this entry back we set this flag
-                        //                    m_Entry.Info.EntryType |= _WinInetCache.EntryType.Sparse;  // does not work for now
+                        //                    m_Entry.Info.EntryType |= _WinInetCache.EntryType.Sparse;  // does not work
+                        // for now
 
                         // HACK: WinInet does not support SPARSE_ENTRY bit
-                        // We want to add c_SPARSE_ENTRY_HACK into the systemmetadata i.e. to the second block of strings separated by an empty line (\r\n).
+                        // We want to add c_SPARSE_ENTRY_HACK into the systemmetadata i.e. to the second block of strings
+                        // separated by an empty line (\r\n).
                         if (
                             m_Entry.MetaInfo == null
                             || m_Entry.MetaInfo.Length == 0

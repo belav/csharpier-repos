@@ -53,7 +53,8 @@ namespace Castle.Services.Logging.NLogIntegration
         ///   Pushes the specified text on current thread NDC.
         /// </summary>
         /// <param name = "message">The message to be pushed.</param>
-        /// <returns>An instance of the object that implements IDisposable that returns the stack to the previous level when IDisposable.Dispose() is called. To be used with C# using() statement.</returns>
+        /// <returns>An instance of the object that implements IDisposable that returns the stack to the
+        // previous level when IDisposable.Dispose() is called. To be used with C# using() statement.</returns>
         public IDisposable Push(string message)
         {
             return NestedDiagnosticsContext.Push(message);

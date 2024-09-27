@@ -7,24 +7,29 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Threading
 {
-    /// <summary>Represents ambient data that is local to a given asynchronous control flow, such as an asynchronous method.</summary>
+    /// <summary>Represents ambient data that is local to a given asynchronous control flow, such as an
+    // asynchronous method.</summary>
     /// <typeparam name="T">The type of the ambient data.</typeparam>
     public sealed class AsyncLocal<T> : IAsyncLocal
     {
         private readonly Action<AsyncLocalValueChangedArgs<T>>? _valueChangedHandler;
 
-        /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that does not receive change notifications.</summary>
+        /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that does not receive change
+        // notifications.</summary>
         public AsyncLocal() { }
 
-        /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that receives change notifications.</summary>
-        /// <param name="valueChangedHandler">The delegate that is called whenever the current value changes on any thread.</param>
+        /// <summary>Instantiates an <see cref="AsyncLocal{T}"/> instance that receives change
+        // notifications.</summary>
+        /// <param name="valueChangedHandler">The delegate that is called whenever the current value changes
+        // on any thread.</param>
         public AsyncLocal(Action<AsyncLocalValueChangedArgs<T>>? valueChangedHandler)
         {
             _valueChangedHandler = valueChangedHandler;
         }
 
         /// <summary>Gets or sets the value of the ambient data.</summary>
-        /// <value>The value of the ambient data. If no value has been set, the returned value is default(T).</value>
+        /// <value>The value of the ambient data. If no value has been set, the returned value is
+        // default(T).</value>
         [MaybeNull]
         public T Value
         {
@@ -56,13 +61,15 @@ namespace System.Threading
         }
     }
 
-    /// <summary>Interface to allow non-generic code in ExecutionContext to call into the generic <see cref="AsyncLocal{T}"/> type.</summary>
+    /// <summary>Interface to allow non-generic code in ExecutionContext to call into the generic <see
+    // cref="AsyncLocal{T}"/> type.</summary>
     internal interface IAsyncLocal
     {
         void OnValueChanged(object? previousValue, object? currentValue, bool contextChanged);
     }
 
-    /// <summary>The class that provides data change information to <see cref="AsyncLocal{T}"/> instances that register for change notifications.</summary>
+    /// <summary>The class that provides data change information to <see cref="AsyncLocal{T}"/>
+    // instances that register for change notifications.</summary>
     /// <typeparam name="T">The type of the data.</typeparam>
     public readonly struct AsyncLocalValueChangedArgs<T>
     {
@@ -72,8 +79,10 @@ namespace System.Threading
         /// <summary>Gets the data's current value.</summary>
         public T? CurrentValue { get; }
 
-        /// <summary>Returns a value that indicates whether the value changes because of a change of execution context.</summary>
-        /// <value>true if the value changed because of a change of execution context; otherwise, false.</value>
+        /// <summary>Returns a value that indicates whether the value changes because of a change of
+        // execution context.</summary>
+        /// <value>true if the value changed because of a change of execution context; otherwise,
+        // false.</value>
         public bool ThreadContextChanged { get; }
 
         internal AsyncLocalValueChangedArgs(T? previousValue, T? currentValue, bool contextChanged)
@@ -117,7 +126,8 @@ namespace System.Threading
             bool treatNullValueAsNonexistent
         )
         {
-            // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
+            // If the value isn't null or a null value may not be treated as nonexistent, then create a new
+            // one-element map
             // to store the key/value pair.  Otherwise, use the empty map.
             return value is not null || !treatNullValueAsNonexistent
                 ? new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value))
@@ -133,7 +143,8 @@ namespace System.Threading
                 bool treatNullValueAsNonexistent
             )
             {
-                // If the value isn't null or a null value may not be treated as nonexistent, then create a new one-element map
+                // If the value isn't null or a null value may not be treated as nonexistent, then create a new
+                // one-element map
                 // to store the key/value pair.  Otherwise, use the empty map.
                 return value is not null || !treatNullValueAsNonexistent
                     ? new OneElementAsyncLocalValueMap(KeyValuePair.Create(key, value))
@@ -165,7 +176,8 @@ namespace System.Threading
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
-                    // If the key matches one already contained in this map, then create a new one-element map with the updated
+                    // If the key matches one already contained in this map, then create a new one-element map with the
+                    // updated
                     // value, otherwise create a two-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
                     return ReferenceEquals(key, _item0.Key)
@@ -174,7 +186,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    // If the key exists in this map, remove it by downgrading to an empty map.  Otherwise, there's nothing to
+                    // If the key exists in this map, remove it by downgrading to an empty map.  Otherwise, there's
+                    // nothing to
                     // add or remove, so just return this map.
                     return ReferenceEquals(key, _item0.Key) ? Empty : this;
                 }
@@ -218,7 +231,8 @@ namespace System.Threading
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
-                    // If the key matches one already contained in this map, then create a new two-element map with the updated
+                    // If the key matches one already contained in this map, then create a new two-element map with the
+                    // updated
                     // value, otherwise create a three-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
                     return ReferenceEquals(key, _item0.Key)
@@ -229,7 +243,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    // If the key exists in this map, remove it by downgrading to a one-element map without the key.  Otherwise,
+                    // If the key exists in this map, remove it by downgrading to a one-element map without the key.
+                    // Otherwise,
                     // there's nothing to add or remove, so just return this map.
                     return ReferenceEquals(key, _item0.Key)
                             ? new OneElementAsyncLocalValueMap(_item1)
@@ -285,7 +300,8 @@ namespace System.Threading
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
-                    // If the key matches one already contained in this map, then create a new three-element map with the updated
+                    // If the key matches one already contained in this map, then create a new three-element map with
+                    // the updated
                     // value, otherwise create a three-element map with the additional key/value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
                     return ReferenceEquals(key, _item0.Key)
@@ -298,7 +314,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    // If the key exists in this map, remove it by downgrading to a one-element map without the key.  Otherwise,
+                    // If the key exists in this map, remove it by downgrading to a one-element map without the key.
+                    // Otherwise,
                     // there's nothing to add or remove, so just return this map.
                     return ReferenceEquals(key, _item0.Key)
                             ? new TwoElementAsyncLocalValueMap(_item1, _item2)
@@ -364,7 +381,8 @@ namespace System.Threading
             {
                 if (value is not null || !treatNullValueAsNonexistent)
                 {
-                    // If the key matches one already contained in this map, then create a new four-element map with the updated value.
+                    // If the key matches one already contained in this map, then create a new four-element map with the
+                    // updated value.
                     KeyValuePair<IAsyncLocal, object?> newItem = KeyValuePair.Create(key, value);
                     return ReferenceEquals(key, _item0.Key)
                             ? new FourElementAsyncLocalValueMap(newItem, _item1, _item2, _item3)
@@ -380,7 +398,8 @@ namespace System.Threading
                 }
                 else
                 {
-                    // If the key exists in this map, remove it by downgrading to a two-element map without the key.  Otherwise,
+                    // If the key exists in this map, remove it by downgrading to a two-element map without the key.
+                    // Otherwise,
                     // there's nothing to add or remove, so just return this map.
                     return ReferenceEquals(key, _item0.Key)
                             ? new ThreeElementAsyncLocalValueMap(_item1, _item2, _item3)
@@ -450,7 +469,8 @@ namespace System.Threading
                         // The key is in the map.
                         if (value is not null || !treatNullValueAsNonexistent)
                         {
-                            // Create a new map of the same size that has all of the same pairs, with this new key/value pair overwriting the old.
+                            // Create a new map of the same size that has all of the same pairs, with this new key/value pair
+                            // overwriting the old.
                             KeyValuePair<IAsyncLocal, object?>[] newValues = _keyValues
                                 .AsSpan()
                                 .ToArray();
@@ -590,7 +610,8 @@ namespace System.Threading
                     return map;
                 }
 
-                // Otherwise, the value is null and a null value may be treated as nonexistent. We can downgrade to a smaller
+                // Otherwise, the value is null and a null value may be treated as nonexistent. We can downgrade to
+                // a smaller
                 // map rather than storing null.
 
                 // If the key is contained in this map, we're going to create a new map that's one pair smaller.
@@ -630,7 +651,8 @@ namespace System.Threading
                     }
                 }
 
-                // We were storing null and a null value may be treated as nonexistent, but the key wasn't in the map, so
+                // We were storing null and a null value may be treated as nonexistent, but the key wasn't in the
+                // map, so
                 // there's nothing to change.  Just return this instance.
                 return this;
             }

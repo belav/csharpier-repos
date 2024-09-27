@@ -125,7 +125,8 @@ public class DataProtectionProviderTests
                 .CreateProtector("purpose");
             Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
-            // Step 3: validate that there's now a single key in the directory and that it's protected with DPAPI
+            // Step 3: validate that there's now a single key in the directory and that it's protected with
+            // DPAPI
             var allFiles = directory.GetFiles();
             Assert.Single(allFiles);
             Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
@@ -192,7 +193,8 @@ public class DataProtectionProviderTests
                         .CreateProtector("purpose");
                     Assert.Equal("payload", unprotector.Unprotect(data));
 
-                    // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+                    // Step 3: validate that there's now a single key in the directory and that it's is protected using
+                    // the certificate
                     var allFiles = directory.GetFiles();
                     Assert.Single(allFiles);
                     Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
@@ -297,7 +299,8 @@ public class DataProtectionProviderTests
                 .CreateProtector("purpose");
             Assert.Equal("payload", protector.Unprotect(protector.Protect("payload")));
 
-            // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+            // Step 3: validate that there's now a single key in the directory and that it's is protected using
+            // the certificate
             var allFiles = directory.GetFiles();
             Assert.Single(allFiles);
             Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);
@@ -379,7 +382,8 @@ public class DataProtectionProviderTests
 
             var data = protector.Protect("payload");
 
-            // Step 3: validate that there's now a single key in the directory and that it's is protected using the certificate
+            // Step 3: validate that there's now a single key in the directory and that it's is protected using
+            // the certificate
             var allFiles = directory.GetFiles();
             Assert.Single(allFiles);
             Assert.StartsWith("key-", allFiles[0].Name, StringComparison.OrdinalIgnoreCase);

@@ -22,7 +22,8 @@ namespace System.Data.Common
         internal static Task<T> CreatedTaskWithCancellation<T>() =>
             Task.FromCanceled<T>(new CancellationToken(true));
 
-        // this method accepts BID format as an argument, this attribute allows FXCopBid rule to validate calls to it
+        // this method accepts BID format as an argument, this attribute allows FXCopBid rule to validate
+        // calls to it
         static partial void TraceException(string trace, Exception e)
         {
             Debug.Assert(e != null, "TraceException: null Exception");

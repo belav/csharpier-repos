@@ -11,8 +11,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// An <see cref="IValueProvider"/> adapter for data stored in an <see cref="IFormFileCollection"/>.
 /// </summary>
 /// <remarks>
-/// Unlike most <see cref="IValueProvider"/> instances, <see cref="FormFileValueProvider"/> does not provide any values, but
-/// specifically responds to <see cref="ContainsPrefix(string)"/> queries. This allows the model binding system to
+/// Unlike most <see cref="IValueProvider"/> instances, <see cref="FormFileValueProvider"/> does not
+// provide any values, but
+/// specifically responds to <see cref="ContainsPrefix(string)"/> queries. This allows the model
+// binding system to
 /// recurse in to deeply nested object graphs with only values for form files.
 /// </remarks>
 public sealed class FormFileValueProvider : IValueProvider

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * CustomAuthenticationEventHandler class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* CustomAuthenticationEventHandler class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.Profile
 {
     using System.Security.Principal;

@@ -23,16 +23,26 @@ namespace CoreXml.Test.XLinq
                 private string _xml =
                     "<?xml version='1.0'?>\t<A><?PI?><!--comment1--><B xmlns='x' xmlns:p='nsp'>some_text<C/><?PIX click?><D xmlns='y'/><!--comm2--><p:E/></B></A>";
 
-                //[Variation(Priority = 1, Desc = "Open on node type: XElement (root)", Params = new object[] { XmlNodeType.Element, 0, new string[] { "A", "", "" }, 15 })]
-                //[Variation(Priority = 0, Desc = "Open on node type: XElement (in the mIddle)", Params = new object[] { XmlNodeType.Element, 1, new string[] { "B", "", "x" }, 11 })]
-                //[Variation(Priority = 0, Desc = "Open on node type: XElement (leaf I.)", Params = new object[] { XmlNodeType.Element, 3, new string[] { "D", "", "y" }, 2 })]
-                //[Variation(Priority = 1, Desc = "Open on node type: XElement (leaf II.)", Params = new object[] { XmlNodeType.Element, 4, new string[] { "E", "p", "nsp" }, 1 })]
-                //[Variation(Priority = 2, Desc = "Open on node type: PI (root level)", Params = new object[] { XmlNodeType.ProcessingInstruction, 0, new string[] { "PI", "" }, 1 })]
-                //[Variation(Priority = 2, Desc = "Open on node type: PI", Params = new object[] { XmlNodeType.ProcessingInstruction, 1, new string[] { "PIX", "click" }, 1 })]
-                //[Variation(Priority = 2, Desc = "Open on node type: Comment (root level)", Params = new object[] { XmlNodeType.Comment, 0, new string[] { "comment1" }, 1 })]
-                //[Variation(Priority = 2, Desc = "Open on node type: Comment", Params = new object[] { XmlNodeType.Comment, 1, new string[] { "comm2" }, 1 })]
-                //[Variation(Priority = 0, Desc = "Open on node type: Text (root level)", Params = new object[] { XmlNodeType.Text, 0, new string[] { "\t" }, 1 })]
-                //[Variation(Priority = 1, Desc = "Open on node type: Text", Params = new object[] { XmlNodeType.Text, 1, new string[] { "some_text" }, 1 })]
+                //[Variation(Priority = 1, Desc = "Open on node type: XElement (root)", Params = new object[] {
+                // XmlNodeType.Element, 0, new string[] { "A", "", "" }, 15 })]
+                //[Variation(Priority = 0, Desc = "Open on node type: XElement (in the mIddle)", Params = new
+                // object[] { XmlNodeType.Element, 1, new string[] { "B", "", "x" }, 11 })]
+                //[Variation(Priority = 0, Desc = "Open on node type: XElement (leaf I.)", Params = new object[] {
+                // XmlNodeType.Element, 3, new string[] { "D", "", "y" }, 2 })]
+                //[Variation(Priority = 1, Desc = "Open on node type: XElement (leaf II.)", Params = new object[] {
+                // XmlNodeType.Element, 4, new string[] { "E", "p", "nsp" }, 1 })]
+                //[Variation(Priority = 2, Desc = "Open on node type: PI (root level)", Params = new object[] {
+                // XmlNodeType.ProcessingInstruction, 0, new string[] { "PI", "" }, 1 })]
+                //[Variation(Priority = 2, Desc = "Open on node type: PI", Params = new object[] {
+                // XmlNodeType.ProcessingInstruction, 1, new string[] { "PIX", "click" }, 1 })]
+                //[Variation(Priority = 2, Desc = "Open on node type: Comment (root level)", Params = new object[] {
+                // XmlNodeType.Comment, 0, new string[] { "comment1" }, 1 })]
+                //[Variation(Priority = 2, Desc = "Open on node type: Comment", Params = new object[] {
+                // XmlNodeType.Comment, 1, new string[] { "comm2" }, 1 })]
+                //[Variation(Priority = 0, Desc = "Open on node type: Text (root level)", Params = new object[] {
+                // XmlNodeType.Text, 0, new string[] { "\t" }, 1 })]
+                //[Variation(Priority = 1, Desc = "Open on node type: Text", Params = new object[] {
+                // XmlNodeType.Text, 1, new string[] { "some_text" }, 1 })]
                 public void OpenOnNodeType()
                 {
                     XmlNodeType nodeType = (XmlNodeType)Variation.Params[0];
@@ -109,10 +119,14 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation(Desc = "Namespaces - root element", Params = new object[] { XmlNodeType.Element, 0, new string[] { "", "" } })]
-                //[Variation(Desc = "Namespaces - element", Params = new object[] { XmlNodeType.Element, 1, new string[] { "", "x" }, new string[] { "p", "nsp" } })]
-                //[Variation(Desc = "Namespaces - Comment", Params = new object[] { XmlNodeType.Comment, 1, new string[] { "", "x" }, new string[] { "p", "nsp" } })]
-                //[Variation(Desc = "Namespaces - element, def. ns redef", Params = new object[] { XmlNodeType.Element, 3, new string[] { "", "y" }, new string[] { "p", "nsp" } })]
+                //[Variation(Desc = "Namespaces - root element", Params = new object[] { XmlNodeType.Element, 0, new
+                // string[] { "", "" } })]
+                //[Variation(Desc = "Namespaces - element", Params = new object[] { XmlNodeType.Element, 1, new
+                // string[] { "", "x" }, new string[] { "p", "nsp" } })]
+                //[Variation(Desc = "Namespaces - Comment", Params = new object[] { XmlNodeType.Comment, 1, new
+                // string[] { "", "x" }, new string[] { "p", "nsp" } })]
+                //[Variation(Desc = "Namespaces - element, def. ns redef", Params = new object[] {
+                // XmlNodeType.Element, 3, new string[] { "", "y" }, new string[] { "p", "nsp" } })]
                 public void Namespaces()
                 {
                     XmlNodeType nodeType = (XmlNodeType)Variation.Params[0];

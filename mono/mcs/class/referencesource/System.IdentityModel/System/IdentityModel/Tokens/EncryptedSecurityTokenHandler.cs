@@ -112,11 +112,19 @@ namespace System.IdentityModel.Tokens
         /// <param name="reader">The reader from which to read the token.</param>
         /// <returns>An instance of <see cref="SecurityToken"/>.</returns>
         /// <exception cref="ArgumentNullException">Input parameter 'reader' is null.</exception>
-        /// <exception cref="InvalidOperationException">One of the properties 'Configuration' or 'Configuration.ServiceTokenResolver' is null. This property is required for obtaining keys for decryption.</exception>
-        /// <exception cref="SecurityTokenException">A <see cref="SecurityKeyIdentifier"/> is not found inside the xml pointed to by the reader.</exception>
-        /// <exception cref="EncryptedTokenDecryptionFailedException">The <see cref="SecurityKeyIdentifier"/> found inside the xml cannot be resolved by Configuration.ServiceTokenResolver to a <see cref="SecurityKey"/>.</exception>
-        /// <exception cref="SecurityTokenException">The <see cref="SecurityKeyIdentifier"/> is not a <see cref="SymmetricSecurityKey"/>.</exception>
-        /// <exception cref="InvalidOperationException">The ContainingCollection (<see cref="SecurityTokenHandlerCollection"/>) is unable to find a  <see cref="SecurityTokenHandler"/> that is able to read the decrypted xml and return a <see cref="SecurityToken"/>.</exception>
+        /// <exception cref="InvalidOperationException">One of the properties 'Configuration' or
+        // 'Configuration.ServiceTokenResolver' is null. This property is required for obtaining keys for
+        // decryption.</exception>
+        /// <exception cref="SecurityTokenException">A <see cref="SecurityKeyIdentifier"/> is not found
+        // inside the xml pointed to by the reader.</exception>
+        /// <exception cref="EncryptedTokenDecryptionFailedException">The <see
+        // cref="SecurityKeyIdentifier"/> found inside the xml cannot be resolved by
+        // Configuration.ServiceTokenResolver to a <see cref="SecurityKey"/>.</exception>
+        /// <exception cref="SecurityTokenException">The <see cref="SecurityKeyIdentifier"/> is not a <see
+        // cref="SymmetricSecurityKey"/>.</exception>
+        /// <exception cref="InvalidOperationException">The ContainingCollection (<see
+        // cref="SecurityTokenHandlerCollection"/>) is unable to find a  <see cref="SecurityTokenHandler"/>
+        // that is able to read the decrypted xml and return a <see cref="SecurityToken"/>.</exception>
         public override SecurityToken ReadToken(XmlReader reader)
         {
             if (null == reader)
@@ -262,10 +270,12 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads an EncryptedKeyIdentifierClause from a XML stream.
         /// </summary>
-        /// <param name="reader">An XML reader positioned at an EncryptedKey element as defined in 'http://www.w3.org/TR/2002/REC-xmlenc-core-20021210' .</param>
+        /// <param name="reader">An XML reader positioned at an EncryptedKey element as defined in
+        // 'http://www.w3.org/TR/2002/REC-xmlenc-core-20021210' .</param>
         /// <returns>SecurityKeyIdentifierClause instance of type EncryptedKeyIdentifierClause.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is null.</exception>
-        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned at an EncryptedKey element.</exception>
+        /// <exception cref="InvalidOperationException">If the <paramref name="reader"/> is not positioned
+        // at an EncryptedKey element.</exception>
         public override SecurityKeyIdentifierClause ReadKeyIdentifierClause(XmlReader reader)
         {
             if (reader == null)
@@ -314,7 +324,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// By default returns an array with a single null string as there isn't any specific TokenType identifier that is
+        /// By default returns an array with a single null string as there isn't any specific TokenType
+        // identifier that is
         /// associated with a <see cref="EncryptedSecurityToken"/>.
         /// </summary>
         public override string[] GetTokenTypeIdentifiers()
@@ -326,14 +337,19 @@ namespace System.IdentityModel.Tokens
         /// Writes a <see cref="EncryptedSecurityToken"/> using the xmlWriter.
         /// </summary>
         /// <param name="writer">The XmlWriter to which the encrypted token is written.</param>
-        /// <param name="token">The <see cref="SecurityToken"/> which must be an instance of <see cref="EncryptedSecurityToken"/>.</param>
+        /// <param name="token">The <see cref="SecurityToken"/> which must be an instance of <see
+        // cref="EncryptedSecurityToken"/>.</param>
         /// <exception cref="ArgumentNullException">The input prameter 'writer' is null.</exception>
         /// <exception cref="ArgumentNullException">The input prameter 'token' is null.</exception>
-        /// <exception cref="ArgumentException">The <see cref="SecurityToken"/> is not an instance of <see cref="EncryptedSecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">The property 'Configuration' is null. This property is required for obtaining keys for encryption.</exception>
-        /// <exception cref="InvalidOperationException">The ContaingCollection was unable to find a <see cref="SecurityTokenHandler"/> that is able to write
+        /// <exception cref="ArgumentException">The <see cref="SecurityToken"/> is not an instance of <see
+        // cref="EncryptedSecurityToken"/>.</exception>
+        /// <exception cref="InvalidOperationException">The property 'Configuration' is null. This property
+        // is required for obtaining keys for encryption.</exception>
+        /// <exception cref="InvalidOperationException">The ContaingCollection was unable to find a <see
+        // cref="SecurityTokenHandler"/> that is able to write
         /// the <see cref="SecurityToken"/> returned by 'EncryptedSecurityToken.Token'.</exception>
-        /// <exception cref="SecurityTokenException">The property 'EncryptinCredentials.SecurityKey is not a <see cref="SymmetricSecurityKey"/></exception>
+        /// <exception cref="SecurityTokenException">The property 'EncryptinCredentials.SecurityKey is not a
+        // <see cref="SymmetricSecurityKey"/></exception>
         public override void WriteToken(XmlWriter writer, SecurityToken token)
         {
             if (null == writer)

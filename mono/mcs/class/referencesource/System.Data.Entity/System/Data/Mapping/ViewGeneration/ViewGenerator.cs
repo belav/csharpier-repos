@@ -271,7 +271,8 @@ namespace System.Data.Mapping.ViewGeneration
             }
 
             // Fix enumerable domains - currently it is only applicable to boolean type. Note that it is
-            // not applicable to enumerated types since we allow any value of the underlying type of the enum type.
+            // not applicable to enumerated types since we allow any value of the underlying type of the enum
+            // type.
             queryDomainMap.ReduceEnumerableDomainToEnumeratedValues(ViewTarget.QueryView, config);
             updateDomainMap.ReduceEnumerableDomainToEnumeratedValues(ViewTarget.UpdateView, config);
         }
@@ -492,7 +493,8 @@ namespace System.Data.Mapping.ViewGeneration
             QueryRewriter queryRewriter;
             if (!m_queryRewriterCache.TryGetValue(extent, out queryRewriter))
             {
-                // collect the cells that belong to this extent (just a few of them since we segment the mapping first)
+                // collect the cells that belong to this extent (just a few of them since we segment the mapping
+                // first)
                 var cellsForExtent = m_cellGroup.Where(c =>
                     c.GetLeftQuery(viewTarget).Extent == extent
                 );

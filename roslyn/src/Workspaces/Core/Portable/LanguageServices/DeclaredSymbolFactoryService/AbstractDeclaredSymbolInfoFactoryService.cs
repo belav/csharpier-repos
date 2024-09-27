@@ -121,9 +121,12 @@ namespace Microsoft.CodeAnalysis.LanguageService
         );
 
         /// <summary>
-        /// Get the name of the target type of specified extension method declaration. The node provided must be an
-        /// extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()` on `node` should return a
-        /// `DeclaredSymbolInfo` of kind `ExtensionMethod`. If the return value is null, then it means this is a
+        /// Get the name of the target type of specified extension method declaration. The node provided
+        // must be an
+        /// extension method declaration,  i.e. calling `TryGetDeclaredSymbolInfo()` on `node` should return
+        // a
+        /// `DeclaredSymbolInfo` of kind `ExtensionMethod`. If the return value is null, then it means this
+        // is a
         /// "complex" method (as described at <see cref="TopLevelSyntaxTreeIndex.ExtensionMethodInfo"/>).
         /// </summary>
         protected abstract string GetReceiverTypeName(TMethodDeclarationSyntax node);
@@ -366,7 +369,8 @@ namespace Microsoft.CodeAnalysis.LanguageService
             }
             else
             {
-                // For anything that isn't a namespace/type/enum (generally a member), try to add the information about that
+                // For anything that isn't a namespace/type/enum (generally a member), try to add the information
+                // about that
                 var count = declaredSymbolInfos.Count;
                 AddMemberDeclarationInfos(
                     container,

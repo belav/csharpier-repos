@@ -614,14 +614,14 @@ namespace MonoTests.System.Windows.Forms
             Assert.AreEqual(true, eventhandled, "#A10");
         }
 
-        /**
-         ** This next test is in response to a bug report
-         ** which pointed out that the idle events were being
-         ** sent to every thread rather than just the thread
-         ** they were assigned on.
-         **
-         ** Report: https://bugzilla.novell.com/show_bug.cgi?id=321541
-         **/
+/**
+** This next test is in response to a bug report
+** which pointed out that the idle events were being
+** sent to every thread rather than just the thread
+** they were assigned on.
+**
+** Report: https://bugzilla.novell.com/show_bug.cgi?id=321541
+**/
         private static Form form1_OneIdlePerThread = null;
         private static Form form2_OneIdlePerThread = null;
         private static int count1_OIPT = 0;
@@ -672,7 +672,7 @@ namespace MonoTests.System.Windows.Forms
             Thread t = Thread.CurrentThread;
             count1_OIPT++;
             Application.Idle -= new EventHandler(TestIdlePerThread);
-            /* Give thread2 time to finish before we close */
+/* Give thread2 time to finish before we close */
             Thread.Sleep(100);
             if (form1_OneIdlePerThread != null)
                 form1_OneIdlePerThread.Close();

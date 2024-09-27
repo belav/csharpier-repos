@@ -19,19 +19,19 @@ public class Startup
             {
                 if (OperatingSystem.IsLinux())
                 {
-                    /*
-                    options.EnableLdap("DOMAIN.net");
+/*
+options.EnableLdap("DOMAIN.net");
 
-                    options.EnableLdap(settings =>
-                    {
-                        // Mandatory settings
-                        settings.Domain = "DOMAIN.com";
-                        // Optional settings
-                        settings.MachineAccountName = "machineName";
-                        settings.MachineAccountPassword = "PassW0rd";
-                        settings.IgnoreNestedGroups = true;
-                    });
-                    */
+options.EnableLdap(settings =>
+{
+// Mandatory settings
+settings.Domain = "DOMAIN.com";
+// Optional settings
+settings.MachineAccountName = "machineName";
+settings.MachineAccountPassword = "PassW0rd";
+settings.IgnoreNestedGroups = true;
+});
+*/
                 }
 
                 options.Events = new NegotiateEvents()

@@ -385,7 +385,8 @@ namespace System.Security
         }
 
         //
-        // Utility methods to construct the permission set objects from the well known XML and any permission
+        // Utility methods to construct the permission set objects from the well known XML and any
+        // permission
         // set extensions if necessary
         //
 

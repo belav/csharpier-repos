@@ -223,7 +223,8 @@ namespace System.Diagnostics
                         return false;
                     }
 
-                    // This method is re-entrant during initialization, since calls to OnValueChanged() in subclasses could end up having InitializeWithStatus()
+                    // This method is re-entrant during initialization, since calls to OnValueChanged() in subclasses
+                    // could end up having InitializeWithStatus()
                     // called again, we don't want to get caught in an infinite loop.
                     _initializing = true;
 

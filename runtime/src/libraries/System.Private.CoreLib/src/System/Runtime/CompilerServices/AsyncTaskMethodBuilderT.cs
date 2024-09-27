@@ -37,7 +37,8 @@ namespace System.Runtime.CompilerServices
 
         /// <summary>Associates the builder with the state machine it represents.</summary>
         /// <param name="stateMachine">The heap-allocated state machine object.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="stateMachine"/> argument was null (<see langword="Nothing" /> in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stateMachine"/> argument was null
+        // (<see langword="Nothing" /> in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The builder is incorrectly initialized.</exception>
         public void SetStateMachine(IAsyncStateMachine stateMachine) =>
             AsyncMethodBuilderCore.SetStateMachine(stateMachine, m_task);
@@ -154,7 +155,8 @@ namespace System.Runtime.CompilerServices
                     // wrapped in the ValueTask, and as such we protect against errant exceptions that may emerge.
                     // We don't want such exceptions propagating back into the async method, which can't handle
                     // exceptions well at that location in the state machine, especially if the exception may occur
-                    // after the ValueTaskAwaiter already successfully hooked up the callback, in which case it's possible
+                    // after the ValueTaskAwaiter already successfully hooked up the callback, in which case it's
+                    // possible
                     // two different flows of execution could end up happening in the same async method call.
                     Threading.Tasks.Task.ThrowAsync(e, targetContext: null);
                 }
@@ -275,7 +277,8 @@ namespace System.Runtime.CompilerServices
         }
 
 #if !NATIVEAOT
-        // Avoid forcing the JIT to build DebugFinalizableAsyncStateMachineBox<TStateMachine> unless it's actually needed.
+        // Avoid forcing the JIT to build DebugFinalizableAsyncStateMachineBox<TStateMachine> unless it's
+        // actually needed.
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static AsyncStateMachineBox<TStateMachine> CreateDebugFinalizableAsyncStateMachineBox<TStateMachine>()
             where TStateMachine : IAsyncStateMachine =>
@@ -313,11 +316,13 @@ namespace System.Runtime.CompilerServices
                 IAsyncStateMachineBox
             where TStateMachine : IAsyncStateMachine
         {
-            /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box type.</summary>
+            /// <summary>Delegate used to invoke on an ExecutionContext when passed an instance of this box
+            // type.</summary>
             private static readonly ContextCallback s_callback = ExecutionContextCallback;
 
             // Used to initialize s_callback above. We don't use a lambda for this on purpose: a lambda would
-            // introduce a new generic type behind the scenes that comes with a hefty size penalty in AOT builds.
+            // introduce a new generic type behind the scenes that comes with a hefty size penalty in AOT
+            // builds.
             private static void ExecutionContextCallback(object? s)
             {
                 Debug.Assert(s is AsyncStateMachineBox<TStateMachine>);
@@ -330,7 +335,8 @@ namespace System.Runtime.CompilerServices
 
             public AsyncStateMachineBox()
             {
-                // The async state machine uses the base Task's state object field to store the captured execution context.
+                // The async state machine uses the base Task's state object field to store the captured execution
+                // context.
                 // Ensure that state object isn't published out for others to see.
                 Debug.Assert(
                     (m_stateFlags & (int)InternalTaskOptions.PromiseTask) != 0,
@@ -348,9 +354,12 @@ namespace System.Runtime.CompilerServices
             {
                 get
                 {
-                    // Ideally we just use the type of the TStateMachine as the "method" name.  However, in certain use in the
-                    // debugger, TStateMachine might actually be a weakly-typed IAsyncStateMachine, in which case we can ToString
-                    // the state machine instance.  But in debug builds the state machine type could also be a class, in which case
+                    // Ideally we just use the type of the TStateMachine as the "method" name.  However, in certain use
+                    // in the
+                    // debugger, TStateMachine might actually be a weakly-typed IAsyncStateMachine, in which case we can
+                    // ToString
+                    // the state machine instance.  But in debug builds the state machine type could also be a class, in
+                    // which case
                     // the field could be null, so worst case we just fall back to using "IAsyncStateMachine".
                     string stateMachineName =
                         typeof(TStateMachine) != typeof(IAsyncStateMachine)
@@ -367,11 +376,15 @@ namespace System.Runtime.CompilerServices
             /// <summary>A delegate to the <see cref="MoveNext()"/> method.</summary>
             public Action MoveNextAction => (Action)(m_action ??= new Action(MoveNext));
 
-            /// <summary>Captured ExecutionContext with which to invoke <see cref="MoveNextAction"/>; may be null.</summary>
+            /// <summary>Captured ExecutionContext with which to invoke <see cref="MoveNextAction"/>; may be
+            // null.</summary>
             /// <remarks>
-            /// This uses the base Task.m_stateObject field to store the context, as that field is otherwise unused for state machine boxes.
-            /// This *must* not be set to anything other than null or an ExecutionContext, or it will result in a type safety hole.
-            /// We also don't want this ExecutionContext exposed out to consumers of the Task via Task.AsyncState, so
+            /// This uses the base Task.m_stateObject field to store the context, as that field is otherwise
+            // unused for state machine boxes.
+            /// This *must* not be set to anything other than null or an ExecutionContext, or it will result in
+            // a type safety hole.
+            /// We also don't want this ExecutionContext exposed out to consumers of the Task via
+            // Task.AsyncState, so
             /// the ctor sets the HiddenState option to prevent this from leaking out.
             /// </remarks>
             public ref ExecutionContext? Context
@@ -445,7 +458,8 @@ namespace System.Runtime.CompilerServices
             {
                 Debug.Assert(IsCompleted);
 
-                // This logic may be invoked multiple times on the same instance and needs to be robust against that.
+                // This logic may be invoked multiple times on the same instance and needs to be robust against
+                // that.
 
                 // If async debugging is enabled, remove the task from tracking.
                 if (s_asyncDebuggingEnabled)
@@ -470,12 +484,14 @@ namespace System.Runtime.CompilerServices
 #endif
             }
 
-            /// <summary>Gets the state machine as a boxed object.  This should only be used for debugging purposes.</summary>
+            /// <summary>Gets the state machine as a boxed object.  This should only be used for debugging
+            // purposes.</summary>
             IAsyncStateMachine IAsyncStateMachineBox.GetStateMachineObject() => StateMachine!; // likely boxes, only use for debugging
         }
 
         /// <summary>Gets the <see cref="Task{TResult}"/> for this builder.</summary>
-        /// <returns>The <see cref="Task{TResult}"/> representing the builder's asynchronous operation.</returns>
+        /// <returns>The <see cref="Task{TResult}"/> representing the builder's asynchronous
+        // operation.</returns>
         public Task<TResult> Task
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -483,8 +499,10 @@ namespace System.Runtime.CompilerServices
         }
 
         /// <summary>
-        /// Initializes the task, which must not yet be initialized.  Used only when the Task is being forced into
-        /// existence when no state machine is needed, e.g. when the builder is being synchronously completed with
+        /// Initializes the task, which must not yet be initialized.  Used only when the Task is being
+        // forced into
+        /// existence when no state machine is needed, e.g. when the builder is being synchronously
+        // completed with
         /// an exception, when the builder is being used out of the context of an async method, etc.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -555,7 +573,8 @@ namespace System.Runtime.CompilerServices
         /// <see cref="TaskStatus">Faulted</see> state with the specified exception.
         /// </summary>
         /// <param name="exception">The <see cref="Exception"/> to use to fault the task.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="exception"/> argument is null (<see langword="Nothing" /> in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="exception"/> argument is null (<see
+        // langword="Nothing" /> in Visual Basic).</exception>
         /// <exception cref="InvalidOperationException">The task has already completed.</exception>
         public void SetException(Exception exception) => SetException(exception, ref m_task);
 
@@ -574,7 +593,8 @@ namespace System.Runtime.CompilerServices
                 ? task.TrySetCanceled(oce.CancellationToken, oce)
                 : task.TrySetException(exception);
 
-            // Unlike with TaskCompletionSource, we do not need to spin here until _taskAndStateMachine is completed,
+            // Unlike with TaskCompletionSource, we do not need to spin here until _taskAndStateMachine is
+            // completed,
             // since AsyncTaskMethodBuilder.SetException should not be immediately followed by any code
             // that depends on the task having completely completed.  Moreover, with correct usage,
             // SetResult or SetException should only be called once, so the Try* methods should always
@@ -629,7 +649,8 @@ namespace System.Runtime.CompilerServices
         /// <remarks>
         /// This property lazily instantiates the ID in a non-thread-safe manner.
         /// It must only be used by the debugger and tracing purposes, and only in a single-threaded manner
-        /// when no other threads are in the middle of accessing this or other members that lazily initialize the task.
+        /// when no other threads are in the middle of accessing this or other members that lazily
+        // initialize the task.
         /// </remarks>
         internal object ObjectIdForDebugger => m_task ??= CreateWeaklyTypedStateMachineBox();
     }

@@ -105,14 +105,14 @@ namespace System.Windows.Forms
 
             if (enumerable is string)
             {
-                /* special case this.. seems to be the only one .net special cases? */
+/* special case this.. seems to be the only one .net special cases? */
                 l = new BindingList<char>();
             }
             else
             {
-                /* try to figure out the type based on
-                 * the first element, if there is
-                 * one */
+/* try to figure out the type based on
+* the first element, if there is
+* one */
                 object first = null;
                 if (e.MoveNext())
                 {
@@ -395,7 +395,7 @@ namespace System.Windows.Forms
             get { return datamember; }
             set
             {
-                /* we don't allow null DataMembers */
+/* we don't allow null DataMembers */
                 if (value == null)
                     value = String.Empty;
 
@@ -1130,7 +1130,7 @@ namespace System.Windows.Forms
             currency_manager.SuspendBinding();
         }
 
-        /* explicit interface implementations */
+/* explicit interface implementations */
 
         void ICancelAddNew.CancelNew(int position)
         {

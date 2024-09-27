@@ -9,10 +9,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     <para>
 ///         This interface is used during model creation and allows the metadata to be modified.
-///         Once the model is built, <see cref="INavigation" /> represents a read-only view of the same metadata.
+///         Once the model is built, <see cref="INavigation" /> represents a read-only view of the
+// same metadata.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and
+///         See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and
 ///         examples.
 ///     </para>
 /// </remarks>
@@ -58,7 +60,8 @@ public interface IMutableNavigation : IReadOnlyNavigation, IMutableNavigationBas
     ///     Sets the inverse navigation.
     /// </summary>
     /// <param name="inverseName">
-    ///     The name of the inverse navigation property. Passing <see langword="null" /> will result in there being
+    ///     The name of the inverse navigation property. Passing <see langword="null" /> will result in
+    // there being
     ///     no inverse navigation property defined.
     /// </param>
     /// <returns>The inverse navigation.</returns>

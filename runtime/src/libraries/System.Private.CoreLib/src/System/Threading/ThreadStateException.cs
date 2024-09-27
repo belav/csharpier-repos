@@ -8,7 +8,8 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     /// <summary>
-    /// The exception that is thrown when a <see cref="Thread" /> is in an invalid <see cref="Thread.ThreadState" /> for the method call.
+    /// The exception that is thrown when a <see cref="Thread" /> is in an invalid <see
+    // cref="Thread.ThreadState" /> for the method call.
     /// </summary>
     [Serializable]
     [TypeForwardedFrom(

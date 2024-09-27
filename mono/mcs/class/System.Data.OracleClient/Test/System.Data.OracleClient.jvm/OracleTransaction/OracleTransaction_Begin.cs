@@ -61,11 +61,11 @@ namespace MonoTests.System.Data.OracleClient
             );
             con.Open();
 
-            /*********************************************************
-             * OLEDB Provider for SQL Server does not allow nested transactions
-             * http://support.microsoft.com/kb/177138/EN-US/
-             * http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q316872&
-            */
+/*********************************************************
+* OLEDB Provider for SQL Server does not allow nested transactions
+* http://support.microsoft.com/kb/177138/EN-US/
+* http://support.microsoft.com/default.aspx?scid=KB;EN-US;Q316872&
+*/
             if (
                 (ConnectedDataProvider.GetDbType(con) == DataBaseServer.SQLServer)
                 || (ConnectedDataProvider.GetDbType(con) == DataBaseServer.Oracle)

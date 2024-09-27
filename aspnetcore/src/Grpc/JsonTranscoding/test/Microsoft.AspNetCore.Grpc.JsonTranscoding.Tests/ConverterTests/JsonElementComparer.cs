@@ -38,8 +38,10 @@ public class JsonElementComparer : IEqualityComparer<JsonElement>
                 return true;
 
             // Compare the raw values of numbers, and the text of strings.
-            // Note this means that 0.0 will differ from 0.00 -- which may be correct as deserializing either to `decimal` will result in subtly different results.
-            // Newtonsoft's JValue.Compare(JTokenType valueType, object? objA, object? objB) has logic for detecting "equivalent" values,
+            // Note this means that 0.0 will differ from 0.00 -- which may be correct as deserializing either to
+            // `decimal` will result in subtly different results.
+            // Newtonsoft's JValue.Compare(JTokenType valueType, object? objA, object? objB) has logic for
+            // detecting "equivalent" values,
             // you may want to examine it to see if anything there is required here.
             // https://github.com/JamesNK/Newtonsoft.Json/blob/master/Src/Newtonsoft.Json/Linq/JValue.cs#L246
             case JsonValueKind.Number:

@@ -200,7 +200,8 @@ namespace System.IO.Tests
             string curDir = Directory.GetCurrentDirectory();
             if (PathFeatures.IsUsingLegacyPathNormalization())
             {
-                // Legacy path Path.GetFullePath() ignores . when there is less or more that two, when there is .. in the path it returns one directory up.
+                // Legacy path Path.GetFullePath() ignores . when there is less or more that two, when there is ..
+                // in the path it returns one directory up.
                 Assert.Equal(
                     Path.GetFullPath(curDir + Path.DirectorySeparatorChar),
                     Path.GetFullPath(
@@ -400,7 +401,8 @@ namespace System.IO.Tests
                     string shortName = sb.ToString();
 
                     // Make sure the shortened name expands back to the original one
-                    // Sometimes shortening or GetFullPath is changing the casing of "temp" on some test machines: normalize both sides
+                    // Sometimes shortening or GetFullPath is changing the casing of "temp" on some test machines:
+                    // normalize both sides
                     tempFilePath = tempFilePath.Replace(
                         @"\\temp\\",
                         @"\TEMP\",

@@ -8,7 +8,8 @@
 ** Class: AccessViolationException
 **
 **
-** Purpose: Exception class representing an AV that was deemed unsafe and may have corrupted the application.
+** Purpose: Exception class representing an AV that was deemed unsafe and may have corrupted the
+application.
 **
 **
 =============================================================================*/

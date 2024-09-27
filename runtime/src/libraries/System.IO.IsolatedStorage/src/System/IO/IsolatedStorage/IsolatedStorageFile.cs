@@ -132,7 +132,8 @@ namespace System.IO.IsolatedStorage
                 // which tries to remove any partial directories created in case of failure.
                 // However providing that behavior required we could not reply on FileSystem APIs in general
                 // and had to keep tabs on what all directories needed to be created and at what point we failed
-                // and back-track from there. It is unclear how many apps would depend on this behavior and if required
+                // and back-track from there. It is unclear how many apps would depend on this behavior and if
+                // required
                 // we could add the behavior as a bug-fix later.
                 throw GetIsolatedStorageException(SR.IsolatedStorage_CreateDirectory, e);
             }
@@ -169,8 +170,10 @@ namespace System.IO.IsolatedStorage
 
             try
             {
-                // FileSystem APIs return the complete path of the matching files however Iso store only provided the FileName
-                // and hid the IsoStore root. Hence we find all the matching files from the fileSystem and simply return the fileNames.
+                // FileSystem APIs return the complete path of the matching files however Iso store only provided
+                // the FileName
+                // and hid the IsoStore root. Hence we find all the matching files from the fileSystem and simply
+                // return the fileNames.
                 return Directory
                     .EnumerateFiles(RootDirectory, searchPattern)
                     .Select(f => Path.GetFileName(f))
@@ -196,8 +199,10 @@ namespace System.IO.IsolatedStorage
 
             try
             {
-                // FileSystem APIs return the complete path of the matching directories however Iso store only provided the directory name
-                // and hid the IsoStore root. Hence we find all the matching directories from the fileSystem and simply return their names.
+                // FileSystem APIs return the complete path of the matching directories however Iso store only
+                // provided the directory name
+                // and hid the IsoStore root. Hence we find all the matching directories from the fileSystem and
+                // simply return their names.
                 return Directory
                     .EnumerateDirectories(RootDirectory, searchPattern)
                     .Select(m => m.Substring(Path.GetDirectoryName(m)!.Length + 1))
@@ -209,7 +214,8 @@ namespace System.IO.IsolatedStorage
             }
         }
 
-        // When constructing an IsolatedStorageFileStream we pass the partial path- it will call back for the full path
+        // When constructing an IsolatedStorageFileStream we pass the partial path- it will call back for
+        // the full path
 
         public IsolatedStorageFileStream OpenFile(string path, FileMode mode)
         {
@@ -393,11 +399,14 @@ namespace System.IO.IsolatedStorage
             // Not currently supported: https://github.com/dotnet/runtime/issues/18209
 
             // Implementing this would require serializing/deserializing identity objects which is particularly
-            // complicated given the normal identity objects used by .NET Framework aren't available on .NET Core.
+            // complicated given the normal identity objects used by .NET Framework aren't available on .NET
+            // Core.
             //
             // Starting expectation is that a given store's location would be identical between implementations
-            // (say, for a particular StrongName). You could iterate any store opened at least once by the .NET Framework
-            // at run time as it would create the needed identity file. You wouldn't be able to iterate if it was only
+            // (say, for a particular StrongName). You could iterate any store opened at least once by the .NET
+            // Framework
+            // at run time as it would create the needed identity file. You wouldn't be able to iterate if it
+            // was only
             // ever opened by .NET Core, as the needed file isn't there yet.
             return new IsolatedStorageFileEnumerator();
         }
@@ -515,17 +524,23 @@ namespace System.IO.IsolatedStorage
 
         // Notes on the GetStore methods:
         //
-        // The System.Security types that .NET Framework would be getting aren't available. We could potentially map the two
-        // we implicitly support (StrongName and Url) to AssemblyName and Uri. We could also consider accepting those two
+        // The System.Security types that .NET Framework would be getting aren't available. We could
+        // potentially map the two
+        // we implicitly support (StrongName and Url) to AssemblyName and Uri. We could also consider
+        // accepting those two
         // types.
         //
-        // For the methods that take actual evidence objects we would have to do the same mapping and implement the
-        // hashing required if it wasn't the two types we know. The hash is a two part hash of {typehash}.{instancehash}.
+        // For the methods that take actual evidence objects we would have to do the same mapping and
+        // implement the
+        // hashing required if it wasn't the two types we know. The hash is a two part hash of
+        // {typehash}.{instancehash}.
         // The hashing logic is basically this:
         //
         //  - if not a "known type" the type hash is from a BinaryFormatter serialized object.GetType()
-        //  - if the identity object is INomalizeForIsolatedStorage, use .Normalize() result for hashing identity, otherwise the object itself
-        //  - again, use BinaryFormatter to serialize the selected identity object for getting the instance hash
+        //  - if the identity object is INomalizeForIsolatedStorage, use .Normalize() result for hashing
+        // identity, otherwise the object itself
+        //  - again, use BinaryFormatter to serialize the selected identity object for getting the instance
+        // hash
         //
         // Hashing for the streams created is done in Helper.GetStrongHashSuitableForObjectName()
         //
@@ -583,7 +598,8 @@ namespace System.IO.IsolatedStorage
 
             int i;
 
-            // Chop off directory separator characters at the start of the string because they counfuse Path.Combine.
+            // Chop off directory separator characters at the start of the string because they counfuse
+            // Path.Combine.
             for (i = 0; i < partialPath.Length; i++)
             {
                 if (
@@ -635,10 +651,13 @@ namespace System.IO.IsolatedStorage
         public override void Remove()
         {
             // Deletes the current IsoFile's directory and the identity folder if possible.
-            // (e.g. @"C:\Users\jerem\AppData\Local\IsolatedStorage\10v31ho4.bo2\eeolfu22.f2w\Url.qgeirsoc3cznuklvq5xlalurh1m0unxl\AssemFiles\")
+            // (e.g.
+            // @"C:\Users\jerem\AppData\Local\IsolatedStorage\10v31ho4.bo2\eeolfu22.f2w\Url.qgeirsoc3cznuklvq5xlalurh1m0unxl\AssemFiles\")
 
-            // This matches .NET Framework logic. We want to try and clean as well as possible without being more aggressive with the identity folders.
-            // (e.g. Url.qgeirsoc3cznuklvq5xlalurh1m0unxl, etc.) We don't want to inadvertently yank folders for a different scope under the same
+            // This matches .NET Framework logic. We want to try and clean as well as possible without being
+            // more aggressive with the identity folders.
+            // (e.g. Url.qgeirsoc3cznuklvq5xlalurh1m0unxl, etc.) We don't want to inadvertently yank folders for
+            // a different scope under the same
             // identity (at least no more so than NetFX).
 
             try
@@ -668,6 +687,7 @@ namespace System.IO.IsolatedStorage
             }
 
             // Domain paths are doubly nested
+            //
             // @"C:\Users\jerem\AppData\Local\IsolatedStorage\10v31ho4.bo2\eeolfu22.f2w\Url.qgeirsoc3cznuklvq5xlalurh1m0unxl\Url.qgeirsoc3cznuklvq5xlalurh1m0unxl\Files\"
             if (Helper.IsDomain(Scope))
             {

@@ -551,7 +551,8 @@ namespace System.Net.Sockets
             _currentSocket = socket;
 
             // Capture execution context if needed (it is unless explicitly disabled).
-            // If Telemetry is enabled, make sure to capture the context if we're making a Connect or Accept call to preserve the activity
+            // If Telemetry is enabled, make sure to capture the context if we're making a Connect or Accept
+            // call to preserve the activity
             if (
                 _flowExecutionContext
                 || (
@@ -637,7 +638,8 @@ namespace System.Net.Sockets
         {
             SetResults(socketError, bytesTransferred, flags);
 
-            // This will be null if we're doing a static ConnectAsync to a DnsEndPoint with AddressFamily.Unspecified;
+            // This will be null if we're doing a static ConnectAsync to a DnsEndPoint with
+            // AddressFamily.Unspecified;
             // the attempt socket will be closed anyways, so not updating the state is OK.
             // If we're doing a static ConnectAsync to an IPEndPoint, we need to dispose
             // of the socket, as we manufactured it and the caller has no opportunity to do so.
@@ -688,7 +690,8 @@ namespace System.Net.Sockets
         /// <summary>Performs an asynchronous connect involving a DNS lookup.</summary>
         /// <param name="endPoint">The DNS end point to which to connect.</param>
         /// <param name="socketType">The SocketType to use to construct new sockets, if necessary.</param>
-        /// <param name="protocolType">The ProtocolType to use to construct new sockets, if necessary.</param>
+        /// <param name="protocolType">The ProtocolType to use to construct new sockets, if
+        // necessary.</param>
         /// <returns>true if the operation is pending; otherwise, false if it's already completed.</returns>
         internal bool DnsConnectAsync(
             DnsEndPoint endPoint,
@@ -704,22 +707,28 @@ namespace System.Net.Sockets
 
             CancellationToken cancellationToken = _multipleConnectCancellation?.Token ?? default;
 
-            // In .NET 5 and earlier, the APM implementation allowed for synchronous exceptions from this to propagate
-            // synchronously.  This call is made here rather than in the Core async method below to preserve that behavior.
+            // In .NET 5 and earlier, the APM implementation allowed for synchronous exceptions from this to
+            // propagate
+            // synchronously.  This call is made here rather than in the Core async method below to preserve
+            // that behavior.
             Task<IPAddress[]> addressesTask = Dns.GetHostAddressesAsync(
                 endPoint.Host,
                 endPoint.AddressFamily,
                 cancellationToken
             );
 
-            // Initialize the internal event args instance.  It needs to be initialized with `this` instance's buffer
+            // Initialize the internal event args instance.  It needs to be initialized with `this` instance's
+            // buffer
             // so that it may be used as part of receives during a connect.
-            // TODO https://github.com/dotnet/runtime/issues/30252#issuecomment-511231055: Try to avoid this extra level of SAEA.
+            // TODO https://github.com/dotnet/runtime/issues/30252#issuecomment-511231055: Try to avoid this
+            // extra level of SAEA.
             var internalArgs = new MultiConnectSocketAsyncEventArgs();
             internalArgs.CopyBufferFrom(this);
 
-            // Delegate to the actual implementation.  The returned Task is unused and ignored, as the whole body is surrounded
-            // by a try/catch.  Thus we ignore the result.  We avoid an "async void" method so as to skip the implicit SynchronizationContext
+            // Delegate to the actual implementation.  The returned Task is unused and ignored, as the whole
+            // body is surrounded
+            // by a try/catch.  Thus we ignore the result.  We avoid an "async void" method so as to skip the
+            // implicit SynchronizationContext
             // interactions async void methods entail.
             _ = Core(
                 internalArgs,
@@ -750,7 +759,8 @@ namespace System.Net.Sockets
                 Exception? caughtException = null;
                 try
                 {
-                    // Try each address in turn.  We store the last error received, such that if we fail to connect to all addresses,
+                    // Try each address in turn.  We store the last error received, such that if we fail to connect to
+                    // all addresses,
                     // we can use the last error to represent the entire operation.
                     SocketError lastError = SocketError.NoData;
                     foreach (IPAddress address in await addressesTask.ConfigureAwait(false))
@@ -769,8 +779,10 @@ namespace System.Net.Sockets
                         }
                         else
                         {
-                            // If this SocketAsyncEventArgs doesn't have a socket, then we need to create a temporary one, which we do
-                            // based on this address' address family (and then reuse for subsequent addresses for the same family).
+                            // If this SocketAsyncEventArgs doesn't have a socket, then we need to create a temporary one, which
+                            // we do
+                            // based on this address' address family (and then reuse for subsequent addresses for the same
+                            // family).
                             if (address.AddressFamily == AddressFamily.InterNetworkV6)
                             {
                                 attemptSocket = tempSocketIPv6 ??= (
@@ -808,9 +820,12 @@ namespace System.Net.Sockets
                             }
                         }
 
-                        // Reset the socket if necessary to support another connect.  This is necessary on Unix in particular where
-                        // the same socket handle can't be used for another connect, so we swap in a new handle under the covers if
-                        // possible.  We do this not just for the 2nd+ address but also for the first in case the Socket was already
+                        // Reset the socket if necessary to support another connect.  This is necessary on Unix in
+                        // particular where
+                        // the same socket handle can't be used for another connect, so we swap in a new handle under the
+                        // covers if
+                        // possible.  We do this not just for the 2nd+ address but also for the first in case the Socket was
+                        // already
                         // used for a connection attempt outside of this call.
                         attemptSocket.ReplaceHandleIfNecessaryAfterFailedConnect();
 
@@ -882,7 +897,8 @@ namespace System.Net.Sockets
                     }
                     if (_currentSocket != null)
                     {
-                        // If the caller-provided socket was a temporary and isn't connected now, or if the failed with an abortive exception,
+                        // If the caller-provided socket was a temporary and isn't connected now, or if the failed with an
+                        // abortive exception,
                         // dispose of the socket.
                         if (
                             (!_userSocket && !_currentSocket.Connected)
@@ -929,10 +945,14 @@ namespace System.Net.Sockets
                     // If the caller is treating this operation as pending, own the completion.
                     if (!internalArgs.ReachedCoordinationPointFirst())
                     {
-                        // Regardless of _flowExecutionContext, context will have been flown through this async method, as that's part
-                        // of what async methods do.  As such, we're already on whatever ExecutionContext is the right one to invoke
-                        // the completion callback.  This method may have even mutated the ExecutionContext, in which case for telemetry
-                        // we need those mutations to be surfaced as part of this callback, so that logging performed here sees those
+                        // Regardless of _flowExecutionContext, context will have been flown through this async method, as
+                        // that's part
+                        // of what async methods do.  As such, we're already on whatever ExecutionContext is the right one
+                        // to invoke
+                        // the completion callback.  This method may have even mutated the ExecutionContext, in which case
+                        // for telemetry
+                        // we need those mutations to be surfaced as part of this callback, so that logging performed here
+                        // sees those
                         // mutations (e.g. to the current Activity).
                         OnCompleted(this);
                     }

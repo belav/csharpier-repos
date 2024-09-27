@@ -194,9 +194,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.CodeStyle
         }
 
         /// <summary>
-        /// Having duplicates in enums like this means that calling Enum.ToString() will potentially be unstable.
-        /// See https://github.com/dotnet/roslyn/issues/44714 for an example where were previously bitten by this;
-        /// we should avoid doing this in the future. If this test fails, update <see cref="SymbolSpecification.ModifierKind"/>
+        /// Having duplicates in enums like this means that calling Enum.ToString() will potentially be
+        // unstable.
+        /// See https://github.com/dotnet/roslyn/issues/44714 for an example where were previously bitten by
+        // this;
+        /// we should avoid doing this in the future. If this test fails, update <see
+        // cref="SymbolSpecification.ModifierKind"/>
         /// to ensure the existing naming styles continue to serialize as they originally did.
         /// </summary>
         [Theory]

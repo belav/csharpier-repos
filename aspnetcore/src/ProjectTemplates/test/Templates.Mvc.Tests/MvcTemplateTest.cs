@@ -113,8 +113,10 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetPublishAsync();
 
-        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses Config = Release
-        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by calling build
+        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses
+        // Config = Release
+        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by
+        // calling build
         // later, while the opposite is not true.
 
         await project.RunDotNetBuildAsync();
@@ -236,8 +238,10 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetPublishAsync();
 
-        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses Config = Release
-        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by calling build
+        // Run dotnet build after publish. The reason is that one uses Config = Debug and the other uses
+        // Config = Release
+        // The output from publish will go into bin/Release/netcoreappX.Y/publish and won't be affected by
+        // calling build
         // later, while the opposite is not true.
 
         await project.RunDotNetBuildAsync();
@@ -526,14 +530,16 @@ public class MvcTemplateTest : LoggedTest
 
         await project.RunDotNetNewAsync("mvc", auth: auth, args: args);
 
-        // Identity Web auth requires https and thus ignores the --no-https option if passed so there should never be an 'http' profile
+        // Identity Web auth requires https and thus ignores the --no-https option if passed so there should
+        // never be an 'http' profile
         var expectedLaunchProfileNames = new[] { "https", "IIS Express" };
         await project.VerifyLaunchSettings(expectedLaunchProfileNames);
 
         // Verify building in debug works
         await project.RunDotNetBuildAsync();
 
-        // Publish builds in "release" configuration. Running publish should ensure we can compile in release and that we can publish without issues.
+        // Publish builds in "release" configuration. Running publish should ensure we can compile in
+        // release and that we can publish without issues.
         await project.RunDotNetPublishAsync();
 
         return project;

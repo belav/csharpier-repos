@@ -79,7 +79,8 @@ namespace System.IO.Tests.Enumeration
                 ? CreateSelfReferencingSymbolicLink()
                 : CreateDirectoryContainingSelfReferencingSymbolicLink();
 
-            // Unix doesn't have a problem when it steps in a self-referencing link through the directory recursion.
+            // Unix doesn't have a problem when it steps in a self-referencing link through the directory
+            // recursion.
             if ((!recurse || !OperatingSystem.IsWindows()) && !linkAsRoot)
             {
                 testDirectory.EnumerateFileSystemInfos("*", options).Count();
@@ -127,7 +128,8 @@ namespace System.IO.Tests.Enumeration
                 ? CreateSelfReferencingSymbolicLink()
                 : CreateDirectoryContainingSelfReferencingSymbolicLink();
 
-            // Unix doesn't have a problem when it steps in a self-referencing link through the directory recursion.
+            // Unix doesn't have a problem when it steps in a self-referencing link through the directory
+            // recursion.
             if ((!recurse || !OperatingSystem.IsWindows()) && !linkAsRoot)
             {
                 Directory.EnumerateFileSystemEntries(testDirectory.FullName, "*", options).Count();

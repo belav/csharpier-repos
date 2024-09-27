@@ -9,8 +9,10 @@ namespace System
     public static partial class PlatformDetection
     {
         //
-        // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in the type initializer
-        // means that one exception anywhere means all tests using PlatformDetection fail. If you feel a value is worth latching,
+        // Do not use the " { get; } = <expression> " pattern here. Having all the initialization happen in
+        // the type initializer
+        // means that one exception anywhere means all tests using PlatformDetection fail. If you feel a
+        // value is worth latching,
         // do it in a way that failures don't cascade.
         //
 
@@ -202,7 +204,8 @@ namespace System
             {
                 result.Id = "FreeBSD";
                 // example:
-                // FreeBSD 11.0-RELEASE-p1 FreeBSD 11.0-RELEASE-p1 #0 r306420: Thu Sep 29 01:43:23 UTC 2016     root@releng2.nyi.freebsd.org:/usr/obj/usr/src/sys/GENERIC
+                // FreeBSD 11.0-RELEASE-p1 FreeBSD 11.0-RELEASE-p1 #0 r306420: Thu Sep 29 01:43:23 UTC 2016
+                // root@releng2.nyi.freebsd.org:/usr/obj/usr/src/sys/GENERIC
                 // What we want is major release as minor releases should be compatible.
                 result.VersionId = ToVersion(
                     RuntimeInformation.OSDescription.Split()[1].Split('.')[0]
@@ -285,10 +288,14 @@ namespace System
         /// Get whether the OS platform matches the given Linux distro and optional version.
         /// </summary>
         /// <param name="distroId">The distribution id.</param>
-        /// <param name="major">The distro major version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="minor">The distro minor version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="build">The distro build version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="revision">The distro revision version. If omitted, this portion of the version is not included in the comparison.</param>
+        /// <param name="major">The distro major version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="minor">The distro minor version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="build">The distro build version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="revision">The distro revision version. If omitted, this portion of the version is
+        // not included in the comparison.</param>
         /// <returns>Whether the OS platform matches the given Linux distro and optional version.</returns>
         private static bool IsDistroAndVersion(
             string distroId,
@@ -308,14 +315,20 @@ namespace System
         }
 
         /// <summary>
-        /// Get whether the OS platform matches the given Linux distro and optional version is same or higher.
+        /// Get whether the OS platform matches the given Linux distro and optional version is same or
+        // higher.
         /// </summary>
         /// <param name="distroId">The distribution id.</param>
-        /// <param name="major">The distro major version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="minor">The distro minor version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="build">The distro build version. If omitted, this portion of the version is not included in the comparison.</param>
-        /// <param name="revision">The distro revision version.  If omitted, this portion of the version is not included in the comparison.</param>
-        /// <returns>Whether the OS platform matches the given Linux distro and optional version is same or higher.</returns>
+        /// <param name="major">The distro major version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="minor">The distro minor version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="build">The distro build version. If omitted, this portion of the version is not
+        // included in the comparison.</param>
+        /// <param name="revision">The distro revision version.  If omitted, this portion of the version is
+        // not included in the comparison.</param>
+        /// <returns>Whether the OS platform matches the given Linux distro and optional version is same or
+        // higher.</returns>
         private static bool IsDistroAndVersionOrHigher(
             string distroId,
             int major = -1,

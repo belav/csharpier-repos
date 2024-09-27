@@ -123,7 +123,8 @@ internal static class RenderTreeDiffBuilder
                 if (oldKey != null || newKey != null)
                 {
                     #region "Get diff action by matching on key"
-                    // Regardless of whether these two keys match, since you are using keys, we want to validate at this point that there are no clashes
+                    // Regardless of whether these two keys match, since you are using keys, we want to validate at this
+                    // point that there are no clashes
                     // so ensure we've built the dictionary that will be used for lookups if any don't match
                     keyedItemInfos ??= BuildKeyToInfoLookup(
                         diffContext,
@@ -639,7 +640,8 @@ internal static class RenderTreeDiffBuilder
         ref var oldFrame = ref oldTree[oldFrameIndex];
         ref var newFrame = ref newTree[newFrameIndex];
 
-        // This can't happen for sequence-matched frames from .razor components, but it can happen if you write your
+        // This can't happen for sequence-matched frames from .razor components, but it can happen if you
+        // write your
         // builder logic manually or if two dissimilar frames matched by key. Treat as completely unrelated.
         var newFrameType = newFrame.FrameTypeField;
         if (oldFrame.FrameTypeField != newFrameType)
@@ -651,7 +653,8 @@ internal static class RenderTreeDiffBuilder
 
         // We can assume that the old and new frames are of the same type, because they correspond
         // to the same sequence number (and if not, the behaviour is undefined).
-        // TODO: Consider supporting dissimilar types at same sequence for custom IComponent implementations.
+        // TODO: Consider supporting dissimilar types at same sequence for custom IComponent
+        // implementations.
         //       It should only be a matter of calling RemoveOldFrame+InsertNewFrame
         switch (newFrameType)
         {
@@ -838,7 +841,8 @@ internal static class RenderTreeDiffBuilder
 
             case RenderTreeFrameType.NamedEvent:
             {
-                // We don't have a use case for the event types changing, so we don't even check that. We assume for a given sequence number
+                // We don't have a use case for the event types changing, so we don't even check that. We assume for
+                // a given sequence number
                 // the event type is always a constant. What can change is the frame index and the assigned name.
                 if (
                     oldFrameIndex != newFrameIndex

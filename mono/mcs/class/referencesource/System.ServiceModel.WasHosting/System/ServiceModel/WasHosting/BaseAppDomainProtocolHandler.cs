@@ -84,8 +84,12 @@ namespace System.ServiceModel.WasHosting
 
             Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() calling OnStart()");
 #if DEBUG
-            // Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() waiting for you to attach the debugger to " + Process.GetCurrentProcess().ProcessName + " Pid: " + Process.GetCurrentProcess().Id);
-            // for (int sleepCount = 0; sleepCount < 30 && !Debugger.IsAttached && !ListenerUnsafeNativeMethods.IsDebuggerPresent(); sleepCount++) { Thread.Sleep(500); } Debugger.Break();
+            // Debug.Print("BaseAppDomainProtocolHandler.StartListenerChannel() waiting for you to attach the
+            // debugger to " + Process.GetCurrentProcess().ProcessName + " Pid: " +
+            // Process.GetCurrentProcess().Id);
+            // for (int sleepCount = 0; sleepCount < 30 && !Debugger.IsAttached &&
+            // !ListenerUnsafeNativeMethods.IsDebuggerPresent(); sleepCount++) { Thread.Sleep(500); }
+            // Debugger.Break();
 #endif
             try
             {

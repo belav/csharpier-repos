@@ -583,7 +583,8 @@ namespace System.Windows.Forms
                     typeof(uint),
                     2
                 );
-                //GetCanonicalFormatEtcMethod = CreateFuncPtrInterface(assembly_builder, "GetCanonicalFormatEtc", typeof(uint), 3);
+                //GetCanonicalFormatEtcMethod = CreateFuncPtrInterface(assembly_builder, "GetCanonicalFormatEtc",
+                // typeof(uint), 3);
                 //SetDataMethod = CreateFuncPtrInterface(assembly_builder, "SetData", typeof(uint), 4);
                 //EnumFormatEtcMethod = CreateFuncPtrInterface(assembly_builder, "EnumFormatEtc", typeof(uint), 3);
                 //DAdviseMethod = CreateFuncPtrInterface(assembly_builder, "DAdvise", typeof(uint), 5);
@@ -1372,7 +1373,8 @@ namespace System.Windows.Forms
             ref IntPtr pdwEffect
         );
 
-        //[DllImport ("shell32.dll", EntryPoint="DragAcceptFiles", CallingConvention=CallingConvention.StdCall)]
+        //[DllImport ("shell32.dll", EntryPoint="DragAcceptFiles",
+        // CallingConvention=CallingConvention.StdCall)]
         //private extern static int Win32DragAcceptFiles(IntPtr Window, bool fAccept);
 
         [DllImport(

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * AttributeCollection.cs
- *
- * Copyright (c) 2000 Microsoft Corporation
- */
+* AttributeCollection.cs
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
 namespace System.Web.UI
 {
@@ -20,9 +20,9 @@ namespace System.Web.UI
     using System.Web.UI;
     using System.Web.Util;
 
-    /*
-     * The AttributeCollection represents Attributes on an Html control.
-     */
+/*
+* The AttributeCollection represents Attributes on an Html control.
+*/
 
     /// <devdoc>
     ///    <para>
@@ -35,9 +35,9 @@ namespace System.Web.UI
         private StateBag _bag;
         private CssStyleCollection _styleColl;
 
-        /*
-         *      Constructs an AttributeCollection given a StateBag.
-         */
+/*
+*      Constructs an AttributeCollection given a StateBag.
+*/
 
         /// <devdoc>
         /// </devdoc>
@@ -46,9 +46,9 @@ namespace System.Web.UI
             _bag = bag;
         }
 
-        /*
-         * Automatically adds new keys.
-         */
+/*
+* Automatically adds new keys.
+*/
 
         /// <devdoc>
         ///    <para>
@@ -67,9 +67,9 @@ namespace System.Web.UI
             set { Add(key, value); }
         }
 
-        /*
-         * Returns a collection of keys.
-         */
+/*
+* Returns a collection of keys.
+*/
 
         /// <devdoc>
         ///    <para>

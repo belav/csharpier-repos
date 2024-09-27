@@ -116,9 +116,9 @@ namespace System.Reflection
     }
 
     /*
-     * Note: most of this class needs to be duplicated for the contructor, since
-     * the .NET reflection class hierarchy is so broken.
-     */
+    * Note: most of this class needs to be duplicated for the contructor, since
+    * the .NET reflection class hierarchy is so broken.
+    */
     [Serializable()]
     [StructLayout(LayoutKind.Sequential)]
     class RuntimeMethodInfo : MethodInfo, ISerializable
@@ -149,8 +149,10 @@ namespace System.Reflection
             // Serialization uses ToString to resolve MethodInfo overloads.
             StringBuilder sbName = new StringBuilder(Name);
 
-            // serialization == true: use unambiguous (except for assembly name) type names to distinguish between overloads.
-            // serialization == false: use basic format to maintain backward compatibility of MethodInfo.ToString().
+            // serialization == true: use unambiguous (except for assembly name) type names to distinguish
+            // between overloads.
+            // serialization == false: use basic format to maintain backward compatibility of
+            // MethodInfo.ToString().
             TypeNameFormatFlags format = serialization
                 ? TypeNameFormatFlags.FormatSerialization
                 : TypeNameFormatFlags.FormatBasic;
@@ -330,11 +332,11 @@ namespace System.Reflection
         }
 
         /*
-         * InternalInvoke() receives the parameters correctly converted by the
-         * binder to match the types of the method signature.
-         * The exc argument is used to capture exceptions thrown by the icall.
-         * Exceptions thrown by the called method propagate normally.
-         */
+        * InternalInvoke() receives the parameters correctly converted by the
+        * binder to match the types of the method signature.
+        * The exc argument is used to capture exceptions thrown by the icall.
+        * Exceptions thrown by the called method propagate normally.
+        */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern Object InternalInvoke(Object obj, Object[] parameters, out Exception exc);
 
@@ -871,9 +873,9 @@ namespace System.Reflection
         }
 
         /*
-         * InternalInvoke() receives the parameters correctly converted by the binder
-         * to match the types of the method signature.
-         */
+        * InternalInvoke() receives the parameters correctly converted by the binder
+        * to match the types of the method signature.
+        */
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern Object InternalInvoke(Object obj, Object[] parameters, out Exception exc);
 

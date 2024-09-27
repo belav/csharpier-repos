@@ -13,7 +13,9 @@ namespace System.Runtime.CompilerServices
 {
     internal static partial class ClassConstructorRunner
     {
-        //==============================================================================================================
+        //
+        //
+        // //==============================================================================================================
         // Ensures the class constructor for the given type has run.
         //
         // Called by the runtime when it finds a class whose static class constructor has probably not run
@@ -23,11 +25,15 @@ namespace System.Runtime.CompilerServices
         // The contents are thus fixed (do not require pinning) and the address can be used as a unique
         // identifier for the context.
         //
-        // This guarantee is violated in one specific case: where a class constructor cycle would cause a deadlock. If
+        // This guarantee is violated in one specific case: where a class constructor cycle would cause a
+        // deadlock. If
         // so, per ECMA specs, this method returns without guaranteeing that the .cctor has run.
         //
         // No attempt is made to detect or break deadlocks due to other synchronization mechanisms.
-        //==============================================================================================================
+
+        //
+        //
+        // //==============================================================================================================
 
         private static unsafe object CheckStaticClassConstructionReturnGCStaticBase(
             StaticClassConstructionContext* context,
@@ -72,7 +78,8 @@ namespace System.Runtime.CompilerServices
                 CurrentManagedThreadId
             );
 
-            // If we were called from MRT, this check is redundant but harmless. This is in case someone within classlib
+            // If we were called from MRT, this check is redundant but harmless. This is in case someone within
+            // classlib
             // (cough, Reflection) needs to call this explicitly.
             if (pfnCctor == 0)
             {
@@ -176,11 +183,16 @@ namespace System.Runtime.CompilerServices
             );
         }
 
-        //=========================================================================================================
+        //
+        //
+        // //=========================================================================================================
         // Return value:
         //   true   - lock acquired.
         //   false  - deadlock detected. Lock not acquired.
-        //=========================================================================================================
+
+        //
+        //
+        // //=========================================================================================================
         private static unsafe bool DeadlockAwareAcquire(
             CctorHandle cctor,
             StaticClassConstructionContext* pContext
@@ -200,18 +212,23 @@ namespace System.Runtime.CompilerServices
             if (lck.TryEnter(waitIntervalInMS))
                 return true;
 
-            // We couldn't acquire the lock. See if this .cctor is involved in a cross-thread deadlock.  If so, break
-            // the deadlock by breaking the guarantee - we'll skip running the .cctor and let the caller take his chances.
+            // We couldn't acquire the lock. See if this .cctor is involved in a cross-thread deadlock.  If so,
+            // break
+            // the deadlock by breaking the guarantee - we'll skip running the .cctor and let the caller take
+            // his chances.
             int currentManagedThreadId = CurrentManagedThreadId;
             int unmarkCookie = -1;
             try
             {
                 // We'll spin in a forever-loop of checking for a deadlock state, then waiting a short time, then
-                // checking for a deadlock state again, and so on. This is because the BlockedRecord info has a built-in
-                // lag time - threads don't report themselves as blocking until they've been blocked for a non-trivial
+                // checking for a deadlock state again, and so on. This is because the BlockedRecord info has a
+                // built-in
+                // lag time - threads don't report themselves as blocking until they've been blocked for a
+                // non-trivial
                 // amount of time.
                 //
-                // If the threads are deadlocked for any reason other a class constructor cycling, this loop will never
+                // If the threads are deadlocked for any reason other a class constructor cycling, this loop will
+                // never
                 // terminate - this is by design. If the user code inside the class constructors were to
                 // deadlock themselves, then that's a bug in user code.
                 for (; ; )
@@ -313,11 +330,18 @@ namespace System.Runtime.CompilerServices
             }
         }
 
-        //==============================================================================================================
-        // These structs are allocated on demand whenever the runtime tries to run a class constructor. Once the
-        // the class constructor has been successfully initialized, we reclaim this structure. The structure is long-
+        //
+        //
+        // //==============================================================================================================
+        // These structs are allocated on demand whenever the runtime tries to run a class constructor. Once
+        // the
+        // the class constructor has been successfully initialized, we reclaim this structure. The structure
+        // is long-
         // lived only if the class constructor threw an exception.
-        //==============================================================================================================
+
+        //
+        //
+        // //==============================================================================================================
         private unsafe struct Cctor
         {
             public Lock Lock;
@@ -326,9 +350,15 @@ namespace System.Runtime.CompilerServices
             private int _refCount;
             private StaticClassConstructionContext* _pContext;
 
-            //==========================================================================================================
-            // Gets the Cctor entry associated with a specific class constructor context (creating it if necessary.)
-            //==========================================================================================================
+            //
+            //
+            // //==========================================================================================================
+            // Gets the Cctor entry associated with a specific class constructor context (creating it if
+            // necessary.)
+
+            //
+            //
+            // //==========================================================================================================
             public static CctorHandle GetCctor(StaticClassConstructionContext* pContext)
             {
 #if DEBUG
@@ -470,20 +500,28 @@ namespace System.Runtime.CompilerServices
             private int _index;
         }
 
-        //==============================================================================================================
+        //
+        //
+        // //==============================================================================================================
         // Keeps track of threads that are blocked on a cctor lock (alas, we don't have ThreadLocals here in
         // System.Private.CoreLib so we have to use a side table.)
         //
         // This is used for cross-thread deadlock detection.
         //
-        // - Data is only entered here if a thread has been blocked past a certain timeout (otherwise, it's certainly
+        // - Data is only entered here if a thread has been blocked past a certain timeout (otherwise, it's
+        // certainly
         //   not participating of a deadlock.)
         // - Reads and writes to _blockingRecord are guarded by _cctorGlobalLock.
-        // - BlockingRecords for individual threads are created on demand. Since this is a rare event, we won't attempt
+        // - BlockingRecords for individual threads are created on demand. Since this is a rare event, we
+        // won't attempt
         //   to recycle them directly (however,
-        //   ManagedThreadId's are themselves recycled pretty quickly - and threads that inherit the managed id also
+        //   ManagedThreadId's are themselves recycled pretty quickly - and threads that inherit the managed
+        // id also
         //   inherit the BlockingRecord.)
-        //==============================================================================================================
+
+        //
+        //
+        // //==============================================================================================================
         private struct BlockingRecord
         {
             public int ManagedThreadId; // ManagedThreadId of the blocked thread
@@ -555,11 +593,14 @@ namespace System.Runtime.CompilerServices
 
         private static Lock s_cctorGlobalLock;
 
-        // These three  statics are used by ClassConstructorRunner.Cctor but moved out to avoid an unnecessary
+        // These three  statics are used by ClassConstructorRunner.Cctor but moved out to avoid an
+        // unnecessary
         // extra class constructor call.
         //
-        // Because Cctor's are mutable structs, we have to give our callers raw references to the underlying arrays
-        // for this collection to be usable.  This also means once we place a Cctor in an array, we can't grow or
+        // Because Cctor's are mutable structs, we have to give our callers raw references to the underlying
+        // arrays
+        // for this collection to be usable.  This also means once we place a Cctor in an array, we can't
+        // grow or
         // reallocate the array.
         private static Cctor[][] s_cctorArrays;
         private static int s_cctorArraysCount;
@@ -579,7 +620,8 @@ namespace System.Runtime.CompilerServices
             int threadId
         )
         {
-            // We cannot utilize any of the typical number formatting code because it triggers globalization code to run
+            // We cannot utilize any of the typical number formatting code because it triggers globalization
+            // code to run
             // and this cctor code is layered below globalization.
 #if DEBUG
             Debug.WriteLine(format, ToHexString((IntPtr)pContext), ToHexString(threadId));
@@ -593,14 +635,16 @@ namespace System.Runtime.CompilerServices
             int threadId
         )
         {
-            // We cannot utilize any of the typical number formatting code because it triggers globalization code to run
+            // We cannot utilize any of the typical number formatting code because it triggers globalization
+            // code to run
             // and this cctor code is layered below globalization.
 #if DEBUG
             Debug.WriteLine(format, ToHexString((IntPtr)pContext), ToHexString(threadId));
 #endif
         }
 
-        // We cannot utilize any of the typical number formatting code because it triggers globalization code to run
+        // We cannot utilize any of the typical number formatting code because it triggers globalization
+        // code to run
         // and this cctor code is layered below globalization.
 #if DEBUG
         private static string ToHexString(int num)

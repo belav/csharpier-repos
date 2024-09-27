@@ -8,7 +8,8 @@ using Xunit.Sdk;
 
 namespace Wasm.Build.Tests
 {
-    // taken from https://github.com/dotnet/arcade/blob/main/src/Common/Microsoft.Arcade.Common/CommandResult.cs
+    // taken from
+    // https://github.com/dotnet/arcade/blob/main/src/Common/Microsoft.Arcade.Common/CommandResult.cs
     public struct CommandResult
     {
         public static readonly CommandResult Empty = new CommandResult();

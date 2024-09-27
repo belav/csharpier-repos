@@ -28,7 +28,8 @@ namespace ILCompiler.Dataflow
                 return false;
 
             // State machines are generated into types with names like <OwnerMethodName>d__0
-            // Or if its nested in a local function the name will look like <<OwnerMethodName>g__Local>d and so on
+            // Or if its nested in a local function the name will look like <<OwnerMethodName>g__Local>d and so
+            // on
             int i = typeName.LastIndexOf('>');
             if (i == -1)
                 return false;
@@ -70,8 +71,10 @@ namespace ILCompiler.Dataflow
             return methodName.Length > i + 1 && methodName[i + 1] == 'b';
         }
 
-        // Local functions have generated names like "<UserMethod>g__LocalFunction|0_1" where "UserMethod" is the name
-        // of the original user code that contains the lambda method declaration, and "LocalFunction" is the name of
+        // Local functions have generated names like "<UserMethod>g__LocalFunction|0_1" where "UserMethod"
+        // is the name
+        // of the original user code that contains the lambda method declaration, and "LocalFunction" is the
+        // name of
         // the local function.
         internal static bool IsLocalFunction(string methodName)
         {

@@ -23,12 +23,15 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
     ///
     /// Conflict markers come in two flavors, diff3 and diff formats.
     ///
-    /// diff3 has a start marker, followed by a first middle markers and a second middle marker, and terminate with an end marker.
-    ///   The disabled text between the first and second middle markers is the baseline for the three-way diff.
+    /// diff3 has a start marker, followed by a first middle markers and a second middle marker, and
+    // terminate with an end marker.
+    ///   The disabled text between the first and second middle markers is the baseline for the
+    // three-way diff.
     ///   The fixer always discards this baseline text.
     ///
     /// diff has a start marker, followed by a middle marker, and terminates with an end marker.
-    ///   We treat the middle marker as both the first and second middle markers (degenerate case with no baseline).
+    ///   We treat the middle marker as both the first and second middle markers (degenerate case with
+    // no baseline).
     /// </summary>
     internal abstract partial class AbstractResolveConflictMarkerCodeFixProvider : CodeFixProvider
     {
@@ -57,12 +60,18 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
         public override ImmutableArray<string> FixableDiagnosticIds { get; }
 
         /// <summary>
-        /// 'Fix merge conflict markers' gets special privileges.  A core user scenario around them is that a user does
-        /// a source control merge, gets conflicts, and then wants to open and edit them in the IDE very quickly.
-        /// Forcing their fixes to be gated behind the set of normal fixes (which also involves semantic analysis) just
-        /// slows the user down.  As we can compute this syntactically, and the user is almost certainly trying to fix
-        /// them if they bring up the lightbulb on a <c>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</c> line, it should run ahead of
-        /// normal fix providers else so the user can quickly fix the conflict and move onto the next conflict.
+        /// 'Fix merge conflict markers' gets special privileges.  A core user scenario around them is that
+        // a user does
+        /// a source control merge, gets conflicts, and then wants to open and edit them in the IDE very
+        // quickly.
+        /// Forcing their fixes to be gated behind the set of normal fixes (which also involves semantic
+        // analysis) just
+        /// slows the user down.  As we can compute this syntactically, and the user is almost certainly
+        // trying to fix
+        /// them if they bring up the lightbulb on a <c>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</c> line, it should run
+        // ahead of
+        /// normal fix providers else so the user can quickly fix the conflict and move onto the next
+        // conflict.
         /// </summary>
         protected override CodeActionRequestPriority ComputeRequestPriority() =>
             CodeActionRequestPriority.High;
@@ -139,18 +148,21 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             if (position == firstMiddleLine.Start)
             {
                 // We were on the ||||||| line.
-                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would
+                // have already reported the issue there).
                 if (startTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
                     return false;
             }
             else if (position == secondMiddleLine.Start)
             {
                 // We were on the ======= line.
-                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would
+                // have already reported the issue there).
                 if (startTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
                     return false;
 
-                // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would
+                // have already reported the issue there).
                 if (
                     firstMiddleLine != secondMiddleLine
                     && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
@@ -160,18 +172,21 @@ namespace Microsoft.CodeAnalysis.ConflictMarkerResolution
             else if (position == endLine.Start)
             {
                 // We were on the >>>>>>> line.
-                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the <<<<<<< line  (since we would
+                // have already reported the issue there).
                 if (startTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
                     return false;
 
-                // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the ||||||| line  (since we would
+                // have already reported the issue there).
                 if (
                     firstMiddleLine != secondMiddleLine
                     && firstMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia
                 )
                     return false;
 
-                // We don't want to report here if there was conflict trivia on the ======= line  (since we would have already reported the issue there).
+                // We don't want to report here if there was conflict trivia on the ======= line  (since we would
+                // have already reported the issue there).
                 if (secondMiddleTrivia.RawKind == _syntaxKinds.ConflictMarkerTrivia)
                     return false;
             }

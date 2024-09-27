@@ -1,34 +1,34 @@
 /* PostgresTest.cs - based on the postgres-test.c in libgda
- *
- * Copyright (C) 2002 Gonzalo Paniagua Javier
- * Copyright (C) 2002 Daniel Morgan
- *
- * ORIGINAL AUTHOR:
- *	Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
- * PORTING FROM C TO C# AUTHOR:
- *	Daniel Morgan <danmorg@sc.rr.com>
- *
- * Permission was given from the original author, Gonzalo Paniagua Javier,
- * to port and include his original work in Mono.
- *
- * The original work falls under the LGPL, but the port to C# falls
- * under the X11 license.
- *
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of the
- * License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Library General Public License for more details.
- *
- * You should have received a copy of the GNU General Public
- * License along with this program; see the file COPYING.  If not,
- * write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
- * Boston, MA 02111-1307, USA.
- */
+*
+* Copyright (C) 2002 Gonzalo Paniagua Javier
+* Copyright (C) 2002 Daniel Morgan
+*
+* ORIGINAL AUTHOR:
+*	Gonzalo Paniagua Javier <gonzalo@gnome-db.org>
+* PORTING FROM C TO C# AUTHOR:
+*	Daniel Morgan <danmorg@sc.rr.com>
+*
+* Permission was given from the original author, Gonzalo Paniagua Javier,
+* to port and include his original work in Mono.
+*
+* The original work falls under the LGPL, but the port to C# falls
+* under the X11 license.
+*
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License as
+* published by the Free Software Foundation; either version 2 of the
+* License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* Library General Public License for more details.
+*
+* You should have received a copy of the GNU General Public
+* License along with this program; see the file COPYING.  If not,
+* write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+* Boston, MA 02111-1307, USA.
+*/
 
 using System;
 using System.Data;
@@ -153,11 +153,11 @@ namespace Test.Mono.Data.PostgreSqlClient
             // FIXME: System.Data classes need to handle NULLs
             //        this would be done by System.DBNull ?
             // FIXME: System.Data needs to handle more data types
-            /*
-            selectCommand.CommandText =
-                "select * " +
-                "from mono_postgres_test";
-            */
+/*
+selectCommand.CommandText =
+"select * " +
+"from mono_postgres_test";
+*/
 
             selectCommand.CommandText =
                 "select "
@@ -397,7 +397,7 @@ namespace Test.Mono.Data.PostgreSqlClient
             }
         }
 
-        /* Postgres provider tests */
+/* Postgres provider tests */
         static void DoPostgresTest(IDbConnection cnc)
         {
             IDataReader reader;
@@ -405,7 +405,7 @@ namespace Test.Mono.Data.PostgreSqlClient
 
             Console.WriteLine("\tPostgres provider specific tests...\n");
 
-            /* Drops the gda_postgres_test table. */
+/* Drops the gda_postgres_test table. */
             Console.WriteLine("\t\tDrop table: ");
             try
             {
@@ -419,27 +419,27 @@ namespace Test.Mono.Data.PostgreSqlClient
 
             try
             {
-                /* Creates a table with all supported data types */
+/* Creates a table with all supported data types */
                 Console.WriteLine("\t\tCreate table with all supported types: ");
                 CreateTable(cnc);
                 Console.WriteLine("OK");
 
-                /* Inserts values */
+/* Inserts values */
                 Console.WriteLine("\t\tInsert values for all known types: ");
                 InsertData(cnc);
                 Console.WriteLine("OK");
 
-                /* Update values */
+/* Update values */
                 Console.WriteLine("\t\tUpdate values: ");
                 UpdateData(cnc);
                 Console.WriteLine("OK");
 
-                /* Inserts values */
+/* Inserts values */
                 Console.WriteLine("\t\tInsert values for all known types: ");
                 InsertData(cnc);
                 Console.WriteLine("OK");
 
-                /* Select aggregates */
+/* Select aggregates */
                 SelectAggregate(cnc, "count(*)");
                 // FIXME: still having a problem with avg()
                 //        because it returns a decimal.
@@ -451,21 +451,21 @@ namespace Test.Mono.Data.PostgreSqlClient
                 SelectAggregate(cnc, "max(int4_value)");
                 SelectAggregate(cnc, "sum(int4_value)");
 
-                /* Select values */
+/* Select values */
                 Console.WriteLine("\t\tSelect values from the database: ");
                 reader = SelectData(cnc);
                 ReadData(reader);
 
-                /* SQL Command via ExecuteReader/SqlDataReader */
-                /* Command is not INSERT, UPDATE, or DELETE */
+/* SQL Command via ExecuteReader/SqlDataReader */
+/* Command is not INSERT, UPDATE, or DELETE */
                 Console.WriteLine(
                     "\t\tCall ExecuteReader with a SQL Command. (Not INSERT,UPDATE,DELETE)."
                 );
                 reader = SelectDataUsingCommand(cnc);
                 ReadData(reader);
 
-                /* SQL Command via ExecuteReader/SqlDataReader */
-                /* Command is INSERT, UPDATE, or DELETE */
+/* SQL Command via ExecuteReader/SqlDataReader */
+/* Command is INSERT, UPDATE, or DELETE */
                 Console.WriteLine(
                     "\t\tCall ExecuteReader with a SQL Command. (Is INSERT,UPDATE,DELETE)."
                 );
@@ -481,7 +481,7 @@ namespace Test.Mono.Data.PostgreSqlClient
                     "Database Server Version: " + ((PgSqlConnection)cnc).ServerVersion
                 );
 
-                /* Clean up */
+/* Clean up */
                 Console.WriteLine("Clean up...");
                 Console.WriteLine("\t\tDrop table...");
                 DropTable(cnc);

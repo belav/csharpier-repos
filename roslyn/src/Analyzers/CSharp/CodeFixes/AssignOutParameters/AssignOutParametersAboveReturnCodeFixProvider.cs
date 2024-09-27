@@ -82,7 +82,8 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
             )
             {
                 // Expression-bodied local functions report CS0177 on the method name instead of the expression.
-                // Reassign exprOrStatement so the code fix implementation works as it does for other expression-bodied
+                // Reassign exprOrStatement so the code fix implementation works as it does for other
+                // expression-bodied
                 // members.
                 exprOrStatement = localFunctionExpressionBody.Expression;
             }

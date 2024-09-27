@@ -14,7 +14,8 @@ namespace System.Text.Json.Serialization
         // any netstandard2.0 consumers don't need to reference System.Collections.Immutable.
         // So instead, implement a "weak reference" by using strings to check for Immutable types.
 
-        // Don't use DynamicDependency attributes to the Immutable Collection types so they can be trimmed in applications that don't use Immutable Collections.
+        // Don't use DynamicDependency attributes to the Immutable Collection types so they can be trimmed
+        // in applications that don't use Immutable Collections.
         internal const string ImmutableConvertersUnreferencedCodeMessage =
             "System.Collections.Immutable converters use Reflection to find and create Immutable Collection types, which requires unreferenced code.";
 
@@ -131,8 +132,10 @@ namespace System.Text.Json.Serialization
             return false;
         }
 
-        // This method takes an unannotated string which makes trimming reflection analysis lose track of the type we are
-        // looking for. This indirection allows the removal of the type if it is not used in the calling application.
+        // This method takes an unannotated string which makes trimming reflection analysis lose track of
+        // the type we are
+        // looking for. This indirection allows the removal of the type if it is not used in the calling
+        // application.
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",
             "IL2057:TypeGetType",

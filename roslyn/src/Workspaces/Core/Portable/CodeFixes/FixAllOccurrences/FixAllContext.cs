@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         public Project Project => State.Project;
 
         /// <summary>
-        /// Document within which fix all occurrences was triggered, null if the <see cref="FixAllContext"/> is scoped to a project.
+        /// Document within which fix all occurrences was triggered, null if the <see cref="FixAllContext"/>
+        // is scoped to a project.
         /// </summary>
         public Document? Document => State.Document;
 
@@ -52,13 +53,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Diagnostic Ids to fix.
-        /// Note that <see cref="GetDocumentDiagnosticsAsync(Document)"/>, <see cref="GetProjectDiagnosticsAsync(Project)"/> and <see cref="GetAllDiagnosticsAsync(Project)"/> methods
+        /// Note that <see cref="GetDocumentDiagnosticsAsync(Document)"/>, <see
+        // cref="GetProjectDiagnosticsAsync(Project)"/> and <see cref="GetAllDiagnosticsAsync(Project)"/>
+        // methods
         /// return only diagnostics whose IDs are contained in this set of Ids.
         /// </summary>
         public ImmutableHashSet<string> DiagnosticIds => State.DiagnosticIds;
 
         /// <summary>
-        /// The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/> participating in this fix all.
+        /// The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/>
+        // participating in this fix all.
         /// </summary>
         public string? CodeActionEquivalenceKey => State.CodeActionEquivalenceKey;
 
@@ -100,12 +104,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// </para>
         /// </summary>
         /// <param name="document">Document within which fix all occurrences was triggered.</param>
-        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered this fix all.</param>
+        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered
+        // this fix all.</param>
         /// <param name="scope"><see cref="FixAllScope"/> to fix all occurrences.</param>
-        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/> participating in this fix all.</param>
+        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value
+        // expected of a <see cref="CodeAction"/> participating in this fix all.</param>
         /// <param name="diagnosticIds">Diagnostic Ids to fix.</param>
         /// <param name="fixAllDiagnosticProvider">
-        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see cref="FixAllContext"/>.
+        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see
+        // cref="FixAllContext"/>.
         /// </param>
         /// <param name="cancellationToken">Cancellation token for fix all computation.</param>
         public FixAllContext(
@@ -143,17 +150,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Creates a new <see cref="FixAllContext"/> with an associated <paramref name="diagnosticSpan"/>.
         /// Use this overload when applying fix all to a diagnostic with a source location and
         /// using <see cref="FixAllScope.ContainingMember"/> or <see cref="FixAllScope.ContainingType"/>
-        /// for the <paramref name="scope"/>.  When using other fix all scopes, <paramref name="diagnosticSpan"/>
+        /// for the <paramref name="scope"/>.  When using other fix all scopes, <paramref
+        // name="diagnosticSpan"/>
         /// is not required and other constructor which does not take a diagnostic span can be used instead.
         /// </summary>
         /// <param name="document">Document within which fix all occurrences was triggered.</param>
-        /// <param name="diagnosticSpan">Span for the diagnostic for which fix all occurrences was triggered.</param>
-        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered this fix all.</param>
+        /// <param name="diagnosticSpan">Span for the diagnostic for which fix all occurrences was
+        // triggered.</param>
+        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered
+        // this fix all.</param>
         /// <param name="scope"><see cref="FixAllScope"/> to fix all occurrences.</param>
-        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/> participating in this fix all.</param>
+        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value
+        // expected of a <see cref="CodeAction"/> participating in this fix all.</param>
         /// <param name="diagnosticIds">Diagnostic Ids to fix.</param>
         /// <param name="fixAllDiagnosticProvider">
-        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see cref="FixAllContext"/>.
+        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see
+        // cref="FixAllContext"/>.
         /// </param>
         /// <param name="cancellationToken">Cancellation token for fix all computation.</param>
         public FixAllContext(
@@ -186,15 +198,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Creates a new <see cref="FixAllContext"/>.
-        /// Use this overload when applying fix all to a diagnostic with no source location, i.e. <see cref="Location.None"/>.
+        /// Use this overload when applying fix all to a diagnostic with no source location, i.e. <see
+        // cref="Location.None"/>.
         /// </summary>
         /// <param name="project">Project within which fix all occurrences was triggered.</param>
-        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered this fix all.</param>
+        /// <param name="codeFixProvider">Underlying <see cref="CodeFixes.CodeFixProvider"/> which triggered
+        // this fix all.</param>
         /// <param name="scope"><see cref="FixAllScope"/> to fix all occurrences.</param>
-        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value expected of a <see cref="CodeAction"/> participating in this fix all.</param>
+        /// <param name="codeActionEquivalenceKey">The <see cref="CodeAction.EquivalenceKey"/> value
+        // expected of a <see cref="CodeAction"/> participating in this fix all.</param>
         /// <param name="diagnosticIds">Diagnostic Ids to fix.</param>
         /// <param name="fixAllDiagnosticProvider">
-        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see cref="FixAllContext"/>.
+        /// <see cref="DiagnosticProvider"/> to fetch document/project diagnostics to fix in a <see
+        // cref="FixAllContext"/>.
         /// </param>
         /// <param name="cancellationToken">Cancellation token for fix all computation.</param>
         public FixAllContext(
@@ -299,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         }
 
         /// <summary>
-        /// Gets all the diagnostics in the given <paramref name="filterSpan"/> for the given <paramref name="document"/> filtered by <see cref="DiagnosticIds"/>.
+        /// Gets all the diagnostics in the given <paramref name="filterSpan"/> for the given <paramref
+        // name="document"/> filtered by <see cref="DiagnosticIds"/>.
         /// </summary>
         internal async Task<ImmutableArray<Diagnostic>> GetDocumentSpanDiagnosticsAsync(
             Document document,
@@ -336,7 +353,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         }
 
         /// <summary>
-        /// Gets all the project-level diagnostics, i.e. diagnostics with no source location, in the given project filtered by <see cref="DiagnosticIds"/>.
+        /// Gets all the project-level diagnostics, i.e. diagnostics with no source location, in the given
+        // project filtered by <see cref="DiagnosticIds"/>.
         /// </summary>
         public Task<ImmutableArray<Diagnostic>> GetProjectDiagnosticsAsync(Project project)
         {
@@ -350,7 +368,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Gets all the diagnostics in the given project filtered by <see cref="DiagnosticIds"/>.
-        /// This includes both document-level diagnostics for all documents in the given project and project-level diagnostics, i.e. diagnostics with no source location, in the given project.
+        /// This includes both document-level diagnostics for all documents in the given project and
+        // project-level diagnostics, i.e. diagnostics with no source location, in the given project.
         /// </summary>
         public Task<ImmutableArray<Diagnostic>> GetAllDiagnosticsAsync(Project project)
         {
@@ -364,8 +383,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// Gets all the project diagnostics in the given project filtered by <see cref="DiagnosticIds"/>.
-        /// If <paramref name="includeAllDocumentDiagnostics"/> is false, then returns only project-level diagnostics which have no source location.
-        /// Otherwise, returns all diagnostics in the project, including the document diagnostics for all documents in the given project.
+        /// If <paramref name="includeAllDocumentDiagnostics"/> is false, then returns only project-level
+        // diagnostics which have no source location.
+        /// Otherwise, returns all diagnostics in the project, including the document diagnostics for all
+        // documents in the given project.
         /// </summary>
         private async Task<ImmutableArray<Diagnostic>> GetProjectDiagnosticsAsync(
             Project project,

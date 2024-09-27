@@ -57,7 +57,8 @@ namespace System.Xml.Xsl.XsltOld
             _name = PrecalculateAvt(ref _nameAvt);
             _nsUri = PrecalculateAvt(ref _nsAvt);
 
-            // if both name and ns are not AVT we can calculate qname at compile time and will not need namespace manager anymore
+            // if both name and ns are not AVT we can calculate qname at compile time and will not need
+            // namespace manager anymore
             if (_nameAvt == null && _nsAvt == null)
             {
                 if (_name != "xmlns")

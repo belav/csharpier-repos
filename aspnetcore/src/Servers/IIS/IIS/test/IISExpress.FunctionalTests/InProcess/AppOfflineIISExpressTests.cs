@@ -35,7 +35,8 @@ public class AppOfflineIISExpressTests : IISFunctionalTestBase
                 // in process application is starting, application start takes at least 400ms
                 // so we back off for 100ms to allow request to reach request handler
                 // Test itself is racy and can result in two scenarios
-                //    1. ANCM detects app_offline before it starts the request - if AssertAppOffline succeeds we've hit it
+                //    1. ANCM detects app_offline before it starts the request - if AssertAppOffline succeeds we've
+                // hit it
                 //    2. Intended scenario where app starts and then shuts down
                 // In first case we remove app_offline and try again
                 await Task.Delay(RetryDelay);
@@ -52,7 +53,8 @@ public class AppOfflineIISExpressTests : IISFunctionalTestBase
                 }
                 catch
                 {
-                    // For IISExpress, we need to catch the exception because IISExpress will not restart a process if it crashed.
+                    // For IISExpress, we need to catch the exception because IISExpress will not restart a process if
+                    // it crashed.
                     // RemoveAppOffline will fail due to a bad request exception as the server is down.
                     Assert.Contains(
                         TestSink.Writes,

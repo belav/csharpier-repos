@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace System.Formats.Tar
 {
-    // Stream that allows wrapping a super stream and specify the lower and upper limits that can be read from it.
+    // Stream that allows wrapping a super stream and specify the lower and upper limits that can be
+    // read from it.
     // It is meant to be used when the super stream is seekable.
     // Does not support writing.
     internal sealed class SeekableSubReadStream : SubReadStream

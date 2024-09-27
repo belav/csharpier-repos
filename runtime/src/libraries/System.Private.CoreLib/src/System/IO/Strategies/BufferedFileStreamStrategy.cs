@@ -10,7 +10,8 @@ using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.Strategies
 {
-    // this type exists so we can avoid duplicating the buffering logic in every FileStreamStrategy implementation
+    // this type exists so we can avoid duplicating the buffering logic in every FileStreamStrategy
+    // implementation
     internal sealed class BufferedFileStreamStrategy : FileStreamStrategy
     {
         private readonly FileStreamStrategy _strategy;
@@ -21,7 +22,8 @@ namespace System.IO.Strategies
         private int _readPos;
         private int _readLen;
 
-        // The last successful Task returned from ReadAsync (perf optimization for successive reads of the same size)
+        // The last successful Task returned from ReadAsync (perf optimization for successive reads of the
+        // same size)
         private CachedCompletedInt32Task _lastSyncCompletedReadTask;
 
         internal BufferedFileStreamStrategy(FileStreamStrategy strategy, int bufferSize)
@@ -185,7 +187,8 @@ namespace System.IO.Strategies
                 if (!_strategy.CanSeek || (destination.Length >= _bufferSize))
                 {
                     // For async file stream strategies the call to Read(Span) is translated to Stream.Read(Span),
-                    // which rents an array from the pool, copies the data, and then calls Read(Array). This is expensive!
+                    // which rents an array from the pool, copies the data, and then calls Read(Array). This is
+                    // expensive!
                     // To avoid that (and code duplication), the Read(Array) method passes ArraySegment to this method
                     // which allows for calling Strategy.Read(Array) instead of Strategy.Read(Span).
                     n =
@@ -352,7 +355,8 @@ namespace System.IO.Strategies
                 {
                     if (_readLen == _readPos && buffer.Length >= _bufferSize)
                     {
-                        // invalidate the buffered data, otherwise certain Seek operation followed by a ReadAsync could try to re-use data from _buffer
+                        // invalidate the buffered data, otherwise certain Seek operation followed by a ReadAsync could try
+                        // to re-use data from _buffer
                         _readPos = _readLen = 0;
                         // hot path #1: the read buffer is empty and buffering would not be beneficial
                         // To find out why we are bypassing cache here, please see WriteAsync comments.
@@ -597,7 +601,8 @@ namespace System.IO.Strategies
                 );
 
                 // For async file stream strategies the call to Write(Span) is translated to Stream.Write(Span),
-                // which rents an array from the pool, copies the data, and then calls Write(Array). This is expensive!
+                // which rents an array from the pool, copies the data, and then calls Write(Array). This is
+                // expensive!
                 // To avoid that (and code duplication), the Write(Array) method passes ArraySegment to this method
                 // which allows for calling Strategy.Write(Array) instead of Strategy.Write(Span).
                 if (arraySegment.Array != null)
@@ -690,7 +695,8 @@ namespace System.IO.Strategies
 
             if (!_strategy.CanSeek)
             {
-                // avoid async buffering with pipes, as doing so can lead to deadlocks (see comments in ReadFromPipeAsync)
+                // avoid async buffering with pipes, as doing so can lead to deadlocks (see comments in
+                // ReadFromPipeAsync)
                 return WriteToNonSeekableAsync(buffer, cancellationToken);
             }
 
@@ -884,9 +890,11 @@ namespace System.IO.Strategies
             }
             else if (_readLen > 0)
             {
-                // If the underlying strategy is not seekable AND we have something in the read buffer, then FlushRead would throw.
+                // If the underlying strategy is not seekable AND we have something in the read buffer, then
+                // FlushRead would throw.
                 // We can either throw away the buffer resulting in data loss (!) or ignore the Flush.
-                // We cannot throw because it would be a breaking change. We opt into ignoring the Flush in that situation.
+                // We cannot throw because it would be a breaking change. We opt into ignoring the Flush in that
+                // situation.
                 if (_strategy.CanSeek)
                 {
                     FlushRead();
@@ -895,7 +903,8 @@ namespace System.IO.Strategies
 
             // We still need to tell the underlying strategy to flush. It's NOP for !flushToDisk or !CanWrite.
             _strategy.Flush(flushToDisk);
-            // If the Stream was seekable, then we should have called FlushRead which resets _readPos & _readLen.
+            // If the Stream was seekable, then we should have called FlushRead which resets _readPos &
+            // _readLen.
             Debug.Assert(
                 _writePos == 0 && (!_strategy.CanSeek || (_readPos == 0 && _readLen == 0))
             );
@@ -935,15 +944,18 @@ namespace System.IO.Strategies
 
                 if (_readPos < _readLen)
                 {
-                    // If the underlying strategy is not seekable AND we have something in the read buffer, then FlushRead would throw.
-                    // We can either throw away the buffer resulting in date loss (!) or ignore the Flush. (We cannot throw because it
+                    // If the underlying strategy is not seekable AND we have something in the read buffer, then
+                    // FlushRead would throw.
+                    // We can either throw away the buffer resulting in date loss (!) or ignore the Flush. (We cannot
+                    // throw because it
                     // would be a breaking change.) We opt into ignoring the Flush in that situation.
                     if (_strategy.CanSeek)
                     {
                         FlushRead(); // not async; it uses Seek, but there's no SeekAsync
                     }
 
-                    // If the Strategy was seekable, then we should have called FlushRead which resets _readPos & _readLen.
+                    // If the Strategy was seekable, then we should have called FlushRead which resets _readPos &
+                    // _readLen.
                     Debug.Assert(
                         _writePos == 0 && (!_strategy.CanSeek || (_readPos == 0 && _readLen == 0))
                     );
@@ -1072,7 +1084,8 @@ namespace System.IO.Strategies
             // The buffer is either empty or we have a buffered read.
             if (_readLen - _readPos > 0 && origin == SeekOrigin.Current)
             {
-                // If we have bytes in the read buffer, adjust the seek offset to account for the resulting difference
+                // If we have bytes in the read buffer, adjust the seek offset to account for the resulting
+                // difference
                 // between this stream's position and the underlying stream's position.
                 offset -= (_readLen - _readPos);
             }
@@ -1082,17 +1095,21 @@ namespace System.IO.Strategies
 
             long newPos = _strategy.Seek(offset, origin);
 
-            // If the seek destination is still within the data currently in the buffer, we want to keep the buffer data and continue using it.
-            // Otherwise we will throw away the buffer. This can only happen on read, as we flushed write data above.
+            // If the seek destination is still within the data currently in the buffer, we want to keep the
+            // buffer data and continue using it.
+            // Otherwise we will throw away the buffer. This can only happen on read, as we flushed write data
+            // above.
 
             // The offset of the new/updated seek pointer within _buffer:
             long readPos = (newPos - (oldPos - _readPos));
 
-            // If the offset of the updated seek pointer in the buffer is still legal, then we can keep using the buffer:
+            // If the offset of the updated seek pointer in the buffer is still legal, then we can keep using
+            // the buffer:
             if (0 <= readPos && readPos < _readLen)
             {
                 _readPos = (int)readPos;
-                // Adjust the seek pointer of the underlying stream to reflect the amount of useful bytes in the read buffer:
+                // Adjust the seek pointer of the underlying stream to reflect the amount of useful bytes in the
+                // read buffer:
                 _strategy.Seek(_readLen - _readPos, SeekOrigin.Current);
             }
             else
@@ -1200,7 +1217,8 @@ namespace System.IO.Strategies
             }
         }
 
-        // TODO https://github.com/dotnet/roslyn/issues/47896: should be local function in EnsureBufferAllocated above.
+        // TODO https://github.com/dotnet/roslyn/issues/47896: should be local function in
+        // EnsureBufferAllocated above.
         [MemberNotNull(nameof(_buffer))]
         [MethodImpl(MethodImplOptions.NoInlining)]
         private void AllocateBuffer()

@@ -5,10 +5,10 @@
 //------------------------------------------------------------------------------
 
 /*
- * DefaultAuthenticationEventArgs class
- *
- * Copyright (c) 1999 Microsoft Corporation
- */
+* DefaultAuthenticationEventArgs class
+*
+* Copyright (c) 1999 Microsoft Corporation
+*/
 namespace System.Web.Security
 {
     using System.Security.Permissions;

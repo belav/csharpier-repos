@@ -26,8 +26,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void TryParse_SetOfValidValueStrings_ParsedCorrectly()
         {
-            // Note that there is no difference between setting "SupportMultipleValues" to true or false: The parser
-            // is only able to parse one authentication information per string. Setting "SupportMultipleValues" just
+            // Note that there is no difference between setting "SupportMultipleValues" to true or false: The
+            // parser
+            // is only able to parse one authentication information per string. Setting "SupportMultipleValues"
+            // just
             // tells the caller (HttpHeaders) that parsing multiple strings is allowed.
             CheckValidParsedValue("X NTLM ", 1, new AuthenticationHeaderValue("NTLM"), 7, true);
             CheckValidParsedValue("X NTLM ", 1, new AuthenticationHeaderValue("NTLM"), 7, false);

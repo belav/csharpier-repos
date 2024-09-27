@@ -79,7 +79,8 @@ namespace System.IO.Pipes.Tests
             VerifyPipeSecurity(expectedSecurity, actualSecurity);
         }
 
-        // We do not allow using PipeOptions.CurrentUserOnly and passing a PipeSecurity object at the same time,
+        // We do not allow using PipeOptions.CurrentUserOnly and passing a PipeSecurity object at the same
+        // time,
         // because the Create method will force the usage of a custom PipeSecurity instance assigned to the
         // current user with full control allowed
         [Fact]
@@ -248,15 +249,21 @@ namespace System.IO.Pipes.Tests
         [InlineData(PipeAccessRights.WriteAttributes)]
         public void Create_InvalidAdditionalAccessRights(PipeAccessRights additionalAccessRights)
         {
-            // GetBasicPipeSecurity returns an object created with PipeAccessRights.ReadWrite as default. This enum is formed by:
+            // GetBasicPipeSecurity returns an object created with PipeAccessRights.ReadWrite as default. This
+            // enum is formed by:
             //     - PipeAccessRights.Read: This enum is formed by:
-            //         - PipeAccessRights.ReadData | PipeAccessRights.ReadExtendedAttributes | PipeAccessRights.ReadAttributes | PipeAccessRights.ReadPermissions
+            //         - PipeAccessRights.ReadData | PipeAccessRights.ReadExtendedAttributes |
+            // PipeAccessRights.ReadAttributes | PipeAccessRights.ReadPermissions
             //     - PipeAccessRights.Write: This enum is formed by:
-            //         - PipeAccessRights.WriteData | PipeAccessRights.WriteExtendedAttributes | PipeAccessRights.WriteAttributes
+            //         - PipeAccessRights.WriteData | PipeAccessRights.WriteExtendedAttributes |
+            // PipeAccessRights.WriteAttributes
 
-            // additionalAccessRights gets bitwise merged with the 'dwOpenMode' parameter we pass to CreateNamedPipeW.
-            // This parameter can acquire any of the values described here: https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createnamedpipea
-            // It's particularly important to mention that two of the accepted values collide with the value of two PipeAccessRights enum values:
+            // additionalAccessRights gets bitwise merged with the 'dwOpenMode' parameter we pass to
+            // CreateNamedPipeW.
+            // This parameter can acquire any of the values described here:
+            // https://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-createnamedpipea
+            // It's particularly important to mention that two of the accepted values collide with the value of
+            // two PipeAccessRights enum values:
             // - ReadData (0x1): Same value as PIPE_ACCESS_INBOUND
             // - WriteData (0x2): Same value as PIPE_ACCESS_OUTBOUND
 
@@ -275,7 +282,8 @@ namespace System.IO.Pipes.Tests
         )
         {
             // Exception message: "The parameter is incorrect."
-            // Neither CreateNewInstance (0x4) nor Delete (0x10000) collide with any of the dwOpenMode values that get into the bitwise combination:
+            // Neither CreateNewInstance (0x4) nor Delete (0x10000) collide with any of the dwOpenMode values
+            // that get into the bitwise combination:
             // PipeOptions, PipeDirection, Interop.Kernel32.FileOperations.FILE_FLAG_FIRST_PIPE_INSTANCE
             // But Windows does not accept them anyway
             Assert.Throws<IOException>(() =>

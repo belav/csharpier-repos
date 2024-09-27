@@ -10,17 +10,20 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.DataProtection;
 
 /// <summary>
-/// Contains factory methods for creating an <see cref="IDataProtectionProvider"/> where keys are stored
+/// Contains factory methods for creating an <see cref="IDataProtectionProvider"/> where keys are
+// stored
 /// at a particular location on the file system.
 /// </summary>
-/// <remarks>Use these methods when not using dependency injection to provide the service to the application.</remarks>
+/// <remarks>Use these methods when not using dependency injection to provide the service to the
+// application.</remarks>
 public static class DataProtectionProvider
 {
     /// <summary>
     /// Creates a <see cref="DataProtectionProvider"/> that store keys in a location based on
     /// the platform and operating system.
     /// </summary>
-    /// <param name="applicationName">An identifier that uniquely discriminates this application from all other
+    /// <param name="applicationName">An identifier that uniquely discriminates this application from
+    // all other
     /// applications on the machine.</param>
     public static IDataProtectionProvider Create(string applicationName)
     {
@@ -39,7 +42,8 @@ public static class DataProtectionProvider
     /// <summary>
     /// Creates an <see cref="DataProtectionProvider"/> given a location at which to store keys.
     /// </summary>
-    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This may
+    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This
+    // may
     /// represent a directory on a local disk or a UNC share.</param>
     public static IDataProtectionProvider Create(DirectoryInfo keyDirectory)
     {
@@ -52,9 +56,11 @@ public static class DataProtectionProvider
     /// Creates an <see cref="DataProtectionProvider"/> given a location at which to store keys and an
     /// optional configuration callback.
     /// </summary>
-    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This may
+    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This
+    // may
     /// represent a directory on a local disk or a UNC share.</param>
-    /// <param name="setupAction">An optional callback which provides further configuration of the data protection
+    /// <param name="setupAction">An optional callback which provides further configuration of the data
+    // protection
     /// system. See <see cref="IDataProtectionBuilder"/> for more information.</param>
     public static IDataProtectionProvider Create(
         DirectoryInfo keyDirectory,
@@ -69,9 +75,11 @@ public static class DataProtectionProvider
 
     /// <summary>
     /// Creates a <see cref="DataProtectionProvider"/> that store keys in a location based on
-    /// the platform and operating system and uses the given <see cref="X509Certificate2"/> to encrypt the keys.
+    /// the platform and operating system and uses the given <see cref="X509Certificate2"/> to encrypt
+    // the keys.
     /// </summary>
-    /// <param name="applicationName">An identifier that uniquely discriminates this application from all other
+    /// <param name="applicationName">An identifier that uniquely discriminates this application from
+    // all other
     /// applications on the machine.</param>
     /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
     public static IDataProtectionProvider Create(
@@ -96,7 +104,8 @@ public static class DataProtectionProvider
     /// Creates an <see cref="DataProtectionProvider"/> given a location at which to store keys
     /// and a <see cref="X509Certificate2"/> used to encrypt the keys.
     /// </summary>
-    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This may
+    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This
+    // may
     /// represent a directory on a local disk or a UNC share.</param>
     /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
     public static IDataProtectionProvider Create(
@@ -114,9 +123,11 @@ public static class DataProtectionProvider
     /// Creates an <see cref="DataProtectionProvider"/> given a location at which to store keys, an
     /// optional configuration callback and a <see cref="X509Certificate2"/> used to encrypt the keys.
     /// </summary>
-    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This may
+    /// <param name="keyDirectory">The <see cref="DirectoryInfo"/> in which keys should be stored. This
+    // may
     /// represent a directory on a local disk or a UNC share.</param>
-    /// <param name="setupAction">An optional callback which provides further configuration of the data protection
+    /// <param name="setupAction">An optional callback which provides further configuration of the data
+    // protection
     /// system. See <see cref="IDataProtectionBuilder"/> for more information.</param>
     /// <param name="certificate">The <see cref="X509Certificate2"/> to be used for encryption.</param>
     public static IDataProtectionProvider Create(

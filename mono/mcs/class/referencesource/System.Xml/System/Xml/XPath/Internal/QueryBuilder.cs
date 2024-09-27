@@ -19,7 +19,8 @@ namespace MS.Internal.Xml.XPath
     {
         // Note: Up->Doun, Down->Up:
         //       For operators order is normal: 1 + 2 --> Operator+(1, 2)
-        //       For pathes order is reversed: a/b -> ChildQuery_B(input: ChildQuery_A(input: ContextQuery()))
+        //       For pathes order is reversed: a/b -> ChildQuery_B(input: ChildQuery_A(input:
+        // ContextQuery()))
         // Input flags. We pass them Up->Down.
         // Using them upper query set states wich controls how inner query will be built.
         enum Flags
@@ -295,13 +296,18 @@ namespace MS.Internal.Xml.XPath
                 flags |= Flags.PosFilter;
             }
 
-            // We don't want DescendantOverDescendant pattern to be recognized here (in case descendent::foo[expr]/descendant::bar)
+            // We don't want DescendantOverDescendant pattern to be recognized here (in case
+            // descendent::foo[expr]/descendant::bar)
             // So we clean this flag here:
             flags &= ~Flags.SmartDesc;
-            // ToDo: Instead it would be nice to wrap descendent::foo[expr] into special query that will flatten it -- i.e.
-            //       remove all nodes that are descendant of other nodes. This is very easy becuase for sorted nodesets all children
-            //       follow its parent. One step caching. This can be easyly done by rightmost DescendantQuery itsef.
-            //       Interesting note! Can we garatee that DescendantOverDescendant returns flat nodeset? This defenetely true if it's input is flat.
+            // ToDo: Instead it would be nice to wrap descendent::foo[expr] into special query that will flatten
+            // it -- i.e.
+            //       remove all nodes that are descendant of other nodes. This is very easy becuase for sorted
+            // nodesets all children
+            //       follow its parent. One step caching. This can be easyly done by rightmost DescendantQuery
+            // itsef.
+            //       Interesting note! Can we garatee that DescendantOverDescendant returns flat nodeset? This
+            // defenetely true if it's input is flat.
 
             Query qyInput = ProcessNode(root.Input, flags | Flags.Filter, out props);
 
@@ -317,7 +323,7 @@ namespace MS.Internal.Xml.XPath
                 props |= Props.PosFilter;
             }
 
-            /*merging predicates*/{
+/*merging predicates*/{
                 FilterQuery qyFilter = qyInput as FilterQuery;
                 if (
                     qyFilter != null

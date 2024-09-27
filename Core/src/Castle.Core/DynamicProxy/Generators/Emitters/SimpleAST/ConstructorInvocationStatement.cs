@@ -59,7 +59,8 @@ namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
             if (type.ContainsGenericParameters)
             {
                 type = type.GetGenericTypeDefinition();
-                // need to get generic type definition, otherwise the GetConstructor method might throw NotSupportedException
+                // need to get generic type definition, otherwise the GetConstructor method might throw
+                // NotSupportedException
             }
 
             var flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;

@@ -149,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp.NewLines.EmbeddedStatementPlacement
                     block,
                     (current, _) =>
                     {
-                        // If the block's open { is not already on a new line, add an elastic marker so it will be placed there.
+                        // If the block's open { is not already on a new line, add an elastic marker so it will be placed
+                        // there.
                         var currentBlock = (BlockSyntax)current;
                         if (
                             !EmbeddedStatementPlacementDiagnosticAnalyzer.ContainsEndOfLineBetween(

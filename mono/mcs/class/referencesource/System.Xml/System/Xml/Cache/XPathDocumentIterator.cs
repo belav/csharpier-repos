@@ -125,7 +125,8 @@ namespace MS.Internal.Xml.Cache
         private XPathNodeType typ;
 
         /// <summary>
-        /// Create an iterator that ranges over all content children of "parent" having the specified XPathNodeType.
+        /// Create an iterator that ranges over all content children of "parent" having the specified
+        // XPathNodeType.
         /// </summary>
         public XPathDocumentKindChildIterator(XPathDocumentNavigator parent, XPathNodeType typ)
             : base(parent)
@@ -182,7 +183,8 @@ namespace MS.Internal.Xml.Cache
         private bool matchSelf;
 
         /// <summary>
-        /// Create an iterator that ranges over all element descendants of "root" having the specified QName.
+        /// Create an iterator that ranges over all element descendants of "root" having the specified
+        // QName.
         /// </summary>
         public XPathDocumentElementDescendantIterator(
             XPathDocumentNavigator root,
@@ -261,7 +263,8 @@ namespace MS.Internal.Xml.Cache
         private bool matchSelf;
 
         /// <summary>
-        /// Create an iterator that ranges over all content descendants of "root" having the specified XPathNodeType.
+        /// Create an iterator that ranges over all content descendants of "root" having the specified
+        // XPathNodeType.
         /// </summary>
         public XPathDocumentKindDescendantIterator(
             XPathDocumentNavigator root,

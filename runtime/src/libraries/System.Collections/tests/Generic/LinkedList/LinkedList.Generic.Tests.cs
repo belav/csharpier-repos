@@ -209,7 +209,8 @@ namespace System.Collections.Tests
             int iterations = 0;
             int expectedCount = expectedItems.Length;
 
-            //[] Verify non deterministic behavior of current every time it is called before a call to MoveNext() has been made
+            //[] Verify non deterministic behavior of current every time it is called before a call to
+            // MoveNext() has been made
             for (int i = 0; i < 3; i++)
             {
                 try
@@ -255,7 +256,8 @@ namespace System.Collections.Tests
                 Assert.False(enumerator.MoveNext()); //"Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations"
             }
 
-            //[] Verify non deterministic behavior of current every time it is called after the enumerator is positioned after the last item
+            //[] Verify non deterministic behavior of current every time it is called after the enumerator is
+            // positioned after the last item
             for (int i = 0; i < 3; i++)
             {
                 try
@@ -277,7 +279,8 @@ namespace System.Collections.Tests
             int iterations = 0;
             int expectedCount = expectedItems.Length;
 
-            //[] Verify non deterministic behavior of current every time it is called before a call to MoveNext() has been made
+            //[] Verify non deterministic behavior of current every time it is called before a call to
+            // MoveNext() has been made
             for (int i = 0; i < 3; i++)
             {
                 try
@@ -356,7 +359,8 @@ namespace System.Collections.Tests
                 Assert.False(enumerator.MoveNext()); //"Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations"
             }
 
-            //[] Verify non deterministic behavior of current every time it is called after the enumerator is positioned after the last item
+            //[] Verify non deterministic behavior of current every time it is called after the enumerator is
+            // positioned after the last item
             for (int i = 0; i < 3; i++)
             {
                 try

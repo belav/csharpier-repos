@@ -101,8 +101,10 @@ namespace Internal.JitInterface
             ,
         }
 
-        // Get the CFI data in the same shape as clang/LLVM generated one. This improves the compatibility with libunwind and other unwind solutions
-        // - Combine in one single block for the whole prolog instead of one CFI block per assembler instruction
+        // Get the CFI data in the same shape as clang/LLVM generated one. This improves the compatibility
+        // with libunwind and other unwind solutions
+        // - Combine in one single block for the whole prolog instead of one CFI block per assembler
+        // instruction
         // - Store CFA definition first
         // - Store all used registers in ascending order
         private static byte[] CompressARM64CFI(byte[] blobData)
@@ -475,7 +477,8 @@ namespace Internal.JitInterface
                 }
                 else if (directMethod != null)
                 {
-                    // We resolved on a canonical form of the valuetype. Now find the method on the runtime determined form.
+                    // We resolved on a canonical form of the valuetype. Now find the method on the runtime determined
+                    // form.
                     Debug.Assert(directMethod.OwningType.IsValueType);
                     Debug.Assert(!forceRuntimeLookup);
 
@@ -516,7 +519,8 @@ namespace Internal.JitInterface
                 }
             }
 
-            // We better come up with the same method that getCallInfo came up with, with the only difference being
+            // We better come up with the same method that getCallInfo came up with, with the only difference
+            // being
             // that our targetMethod is RuntimeDetermined.
             Debug.Assert(
                 expectedTargetMethod.GetCanonMethodTarget(CanonicalFormKind.Specific)
@@ -1429,8 +1433,10 @@ namespace Internal.JitInterface
                     );
                 if (directMethod == null && constrainedType.IsEnum)
                 {
-                    // Constrained calls to methods on enum methods resolve to System.Enum's methods. System.Enum is a reference
-                    // type though, so we would fail to resolve and box. We have a special path for those to avoid boxing.
+                    // Constrained calls to methods on enum methods resolve to System.Enum's methods. System.Enum is a
+                    // reference
+                    // type though, so we would fail to resolve and box. We have a special path for those to avoid
+                    // boxing.
                     directMethod = _compilation.TypeSystemContext.TryResolveConstrainedEnumMethod(
                         constrainedType,
                         method
@@ -1503,7 +1509,8 @@ namespace Internal.JitInterface
                     && exactType == MethodBeingCompiled.OwningType
                     &&
                     // But don't allow inlining into generic methods since the generic context won't be the same.
-                    // The scanner won't be able to predict such inlinig. See https://github.com/dotnet/runtimelab/pull/489
+                    // The scanner won't be able to predict such inlinig. See
+                    // https://github.com/dotnet/runtimelab/pull/489
                     !MethodBeingCompiled.HasInstantiation
                 )
                 {
@@ -1924,13 +1931,16 @@ namespace Internal.JitInterface
                 }
 
                 // If this is a non-interface call, we actually don't need a runtime lookup to find the target.
-                // We don't even need to keep track of the runtime-determined method being called because the system ensures
-                // that if e.g. Foo<__Canon>.GetHashCode is needed and we're generating a dictionary for Foo<string>,
+                // We don't even need to keep track of the runtime-determined method being called because the system
+                // ensures
+                // that if e.g. Foo<__Canon>.GetHashCode is needed and we're generating a dictionary for
+                // Foo<string>,
                 // Foo<string>.GetHashCode is needed too.
                 if (pResult->exactContextNeedsRuntimeLookup && targetMethod.OwningType.IsInterface)
                 {
                     // We need JitInterface changes to fully support this.
-                    // If this is LDVIRTFTN of an interface method that is part of a verifiable delegate creation sequence,
+                    // If this is LDVIRTFTN of an interface method that is part of a verifiable delegate creation
+                    // sequence,
                     // RyuJIT is not going to use this value.
                     Debug.Assert(helperId == ReadyToRunHelperId.ResolveVirtualFunction);
                     pResult->exactContextNeedsRuntimeLookup = false;
@@ -1956,7 +1966,8 @@ namespace Internal.JitInterface
                     );
                 }
 
-                // The current NativeAOT ReadyToRun helpers do not handle null thisptr - ask the JIT to emit explicit null checks
+                // The current NativeAOT ReadyToRun helpers do not handle null thisptr - ask the JIT to emit
+                // explicit null checks
                 // TODO: Optimize this
                 pResult->nullInstanceCheck = true;
             }
@@ -1965,7 +1976,8 @@ namespace Internal.JitInterface
 
             pResult->accessAllowed = CorInfoIsAccessAllowedResult.CORINFO_ACCESS_ALLOWED;
 
-            // We're pretty much done at this point.  Let's grab the rest of the information that the jit is going to
+            // We're pretty much done at this point.  Let's grab the rest of the information that the jit is
+            // going to
             // need.
             pResult->classFlags = getClassAttribsInternal(targetMethod.OwningType);
 
@@ -2340,7 +2352,8 @@ namespace Internal.JitInterface
                 return true;
 
             // We could have given back the PInvoke stub IL to the JIT and let it inline it, without
-            // checking whether there is any stub required. Save the JIT from doing the inlining by checking upfront.
+            // checking whether there is any stub required. Save the JIT from doing the inlining by checking
+            // upfront.
             return IsPInvokeStubRequired(method);
         }
 
@@ -2775,7 +2788,8 @@ namespace Internal.JitInterface
                 }
                 else if (!owningType.HasStaticConstructor)
                 {
-                    // (Effectively) read only field but no static constructor to set it: the value is default-initialized.
+                    // (Effectively) read only field but no static constructor to set it: the value is
+                    // default-initialized.
                     int size = field.FieldType.GetElementSize().AsInt;
                     if (size >= bufferSize && valueOffset <= size - bufferSize)
                     {

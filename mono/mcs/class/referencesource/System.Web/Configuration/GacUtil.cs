@@ -10,9 +10,9 @@ namespace System.Web.Configuration
     using System.Security.Permissions;
     using System.Web.Configuration;
 
-    /*
-    class for installing ASP.BrowserCapabilitiesFactory into gac
-    */
+/*
+class for installing ASP.BrowserCapabilitiesFactory into gac
+*/
     internal sealed class GacUtil : IGac
     {
         [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]

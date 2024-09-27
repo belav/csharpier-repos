@@ -21,7 +21,8 @@ namespace System.Web.UI.WebControls
         /// <para>
         /// Sets the abbreviated text for a header cell. The abbreviated text
         /// is rendered with the HTML ABBR attribute. The ABBR attribute is important
-        /// for screen readers since it allows them to read a shortened version of a header for each cell in the table.
+        /// for screen readers since it allows them to read a shortened version of a header for each cell in
+        // the table.
         /// </para>
         /// </devdoc>
         public virtual string AbbreviatedText
@@ -36,7 +37,8 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// <para>
-        /// Represents the cells that the header applies to. Renders the HTML scope attribute. Possible values are from the TableHeaderScope enumeration: Column and Row.
+        /// Represents the cells that the header applies to. Renders the HTML scope attribute. Possible
+        // values are from the TableHeaderScope enumeration: Column and Row.
         /// </para>
         /// </devdoc>
         public virtual TableHeaderScope Scope

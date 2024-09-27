@@ -41,8 +41,10 @@ namespace BasicEventSourceTests
         private static StringWriter _log = null;
 
         /// <summary>
-        /// Runs a series of tests 'tests' using the listener (either an ETWListener or an EventListenerListener) on
-        /// an EventSource 'source' passing it the filter parameters=options (by default source turn on completely
+        /// Runs a series of tests 'tests' using the listener (either an ETWListener or an
+        // EventListenerListener) on
+        /// an EventSource 'source' passing it the filter parameters=options (by default source turn on
+        // completely
         ///
         /// Note that this routine calls Dispose on the listener, so it can't be used after that.
         /// </summary>
@@ -208,7 +210,8 @@ namespace BasicEventSourceTests
     ///     name,
     ///     the code to generate an event to test (EventGenerator)
     ///     the code to validate that the event is correct (EventValidator)
-    ///     OR the code to validate that the List of events is (EventListValidator) (when the output is not a single event)
+    ///     OR the code to validate that the List of events is (EventListValidator) (when the output is
+    // not a single event)
     /// </summary>
     public class SubTest : IEquatable<SubTest>
     {

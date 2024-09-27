@@ -165,7 +165,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected virtual void Dispose(bool disposing) { }
 
         /// <summary>
@@ -183,7 +184,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -195,7 +197,8 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
@@ -207,13 +210,17 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see
+        // cref="T:System.Object"/>.</param>
         /// <returns>
-        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see
+        // cref="T:System.Object"/>; otherwise, false.
         /// </returns>
-        /// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.</exception>
+        /// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is
+        // null.</exception>
         /// <remarks>For internal use.</remarks>
         internal virtual bool EqualsInternal(object obj)
         {
@@ -221,13 +228,17 @@ namespace System.Web.UI.DataVisualization.Charting
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>.
+        /// Determines whether the specified <see cref="T:System.Object"/> is equal to the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
-        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see cref="T:System.Object"/>.</param>
+        /// <param name="obj">The <see cref="T:System.Object"/> to compare with the current <see
+        // cref="T:System.Object"/>.</param>
         /// <returns>
-        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see cref="T:System.Object"/>; otherwise, false.
+        /// true if the specified <see cref="T:System.Object"/> is equal to the current <see
+        // cref="T:System.Object"/>; otherwise, false.
         /// </returns>
-        /// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is null.</exception>
+        /// <exception cref="T:System.NullReferenceException">The <paramref name="obj"/> parameter is
+        // null.</exception>
         [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase")]
         public override bool Equals(object obj)
         {
@@ -250,7 +261,10 @@ namespace System.Web.UI.DataVisualization.Charting
     }
 
     /// <summary>
-    /// ChartNamedElement is a base class for most chart elements. Series, ChartAreas, Legends and other chart elements have a Name and reuse the unique name generation and validation logic provided by the ChartNamedElementCollection.
+    /// ChartNamedElement is a base class for most chart elements. Series, ChartAreas, Legends and other
+    // chart elements have a Name and reuse the unique name generation and validation logic provided by
+    // the
+    // ChartNamedElementCollection.
     /// </summary>
 #if ASPPERM_35
     [AspNetHostingPermission(
@@ -351,7 +365,8 @@ namespace System.Web.UI.DataVisualization.Charting
         #region Methods
 
         /// <summary>
-        /// Returns a <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.
+        /// Returns a <see cref="T:System.String"/> that represents the current <see
+        // cref="T:System.Object"/>.
         /// </summary>
         /// <returns>
         /// A <see cref="T:System.String"/> that represents the current <see cref="T:System.Object"/>.

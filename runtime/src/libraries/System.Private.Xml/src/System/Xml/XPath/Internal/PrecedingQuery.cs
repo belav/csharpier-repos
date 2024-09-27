@@ -12,11 +12,14 @@ namespace MS.Internal.Xml.XPath
     // Preceding of a sequence of nodes will be preceding of last node in DocOrder in that sequence.
     // Because qyInput is in DO last input is last node in DO. -- "last"
     // If last node is attribute or namespace move last to it element.
-    // Push this last node and all its ancestors into the ancestorStk. The root node will be the top-most element on the stack.
+    // Push this last node and all its ancestors into the ancestorStk. The root node will be the
+    // top-most element on the stack.
     // Create descendent iterator from the root. -- "workIterator"
-    // Advancing workIterator we meet all nodes from the ancestorStk in stack order. Nodes in ancestorStk do no belong to the
+    // Advancing workIterator we meet all nodes from the ancestorStk in stack order. Nodes in
+    // ancestorStk do no belong to the
     // the 'preceding' axis and must be ignored.
-    // Last node in ancestorStk is a sentinel node; when we pop it from ancestorStk, we should stop iterations.
+    // Last node in ancestorStk is a sentinel node; when we pop it from ancestorStk, we should stop
+    // iterations.
 
     internal sealed class PrecedingQuery : BaseAxisQuery
     {

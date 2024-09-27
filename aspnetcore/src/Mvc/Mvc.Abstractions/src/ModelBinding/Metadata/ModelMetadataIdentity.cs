@@ -162,7 +162,8 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
     }
 
     /// <summary>
-    /// Gets the name of the current instance if it represents a parameter or property, or <c>null</c> if
+    /// Gets the name of the current instance if it represents a parameter or property, or <c>null</c>
+    // if
     /// the current instance represents a type.
     /// </summary>
     public string? Name { get; }

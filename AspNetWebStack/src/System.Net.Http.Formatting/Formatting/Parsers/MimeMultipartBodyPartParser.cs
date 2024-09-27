@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,8 +12,10 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// Complete MIME multipart parser that combines <see cref="MimeMultipartParser"/> for parsing the MIME message into individual body parts
-    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each body part into a MIME header and a MIME body. The caller of the parser is returned
+    /// Complete MIME multipart parser that combines <see cref="MimeMultipartParser"/> for parsing the
+    // MIME message into individual body parts
+    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each body part into a MIME
+    // header and a MIME body. The caller of the parser is returned
     /// the resulting MIME bodies which can then be written to some output.
     /// </summary>
     internal class MimeMultipartBodyPartParser : IDisposable
@@ -39,8 +42,10 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMultipartBodyPartParser"/> class.
         /// </summary>
-        /// <param name="content">An existing <see cref="HttpContent"/> instance to use for the object's content.</param>
-        /// <param name="streamProvider">A stream provider providing output streams for where to write body parts as they are parsed.</param>
+        /// <param name="content">An existing <see cref="HttpContent"/> instance to use for the object's
+        // content.</param>
+        /// <param name="streamProvider">A stream provider providing output streams for where to write body
+        // parts as they are parsed.</param>
         public MimeMultipartBodyPartParser(
             HttpContent content,
             MultipartStreamProvider streamProvider
@@ -50,10 +55,13 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMultipartBodyPartParser"/> class.
         /// </summary>
-        /// <param name="content">An existing <see cref="HttpContent"/> instance to use for the object's content.</param>
-        /// <param name="streamProvider">A stream provider providing output streams for where to write body parts as they are parsed.</param>
+        /// <param name="content">An existing <see cref="HttpContent"/> instance to use for the object's
+        // content.</param>
+        /// <param name="streamProvider">A stream provider providing output streams for where to write body
+        // parts as they are parsed.</param>
         /// <param name="maxMessageSize">The max length of the entire MIME multipart message.</param>
-        /// <param name="maxBodyPartHeaderSize">The max length of the MIME header within each MIME body part.</param>
+        /// <param name="maxBodyPartHeaderSize">The max length of the MIME header within each MIME body
+        // part.</param>
         public MimeMultipartBodyPartParser(
             HttpContent content,
             MultipartStreamProvider streamProvider,
@@ -101,7 +109,8 @@ namespace System.Net.Http.Formatting.Parsers
         }
 
         /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged
+        // resources.
         /// </summary>
         public void Dispose()
         {
@@ -110,7 +119,8 @@ namespace System.Net.Http.Formatting.Parsers
         }
 
         /// <summary>
-        /// Parses the data provided and generates parsed MIME body part bodies in the form of <see cref="ArraySegment{T}"/> which are ready to
+        /// Parses the data provided and generates parsed MIME body part bodies in the form of <see
+        // cref="ArraySegment{T}"/> which are ready to
         /// write to the output stream.
         /// </summary>
         /// <param name="data">The data to parse</param>
@@ -244,7 +254,8 @@ namespace System.Net.Http.Formatting.Parsers
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
         /// </summary>
-        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.</param>
+        /// <param name="disposing"><c>true</c> to release both managed and unmanaged resources;
+        // <c>false</c> to release only unmanaged resources.</param>
         protected void Dispose(bool disposing)
         {
             if (disposing)

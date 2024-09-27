@@ -16,12 +16,16 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.MSBuild.Rpc;
 
 /// <summary>
-/// Implements the client side of the RPC channel used to communicate with the build host, which is using <see cref="RpcServer"/>.
+/// Implements the client side of the RPC channel used to communicate with the build host, which is
+// using <see cref="RpcServer"/>.
 /// </summary>
 /// <remarks>
-/// The RPC system implemented here is pretty close to something like JSON-RPC; however since we need the Build Host to be usable in Source Build
-/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable in Source Build. Thus existing solutions like StreamJsonRpc
-/// are out. If at some point there is a standard RPC mechanism exposed in .NET or Source Build, we should delete this and use that instead.
+/// The RPC system implemented here is pretty close to something like JSON-RPC; however since we
+// need the Build Host to be usable in Source Build
+/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable
+// in Source Build. Thus existing solutions like StreamJsonRpc
+/// are out. If at some point there is a standard RPC mechanism exposed in .NET or Source Build, we
+// should delete this and use that instead.
 /// </remarks>
 internal sealed class RpcClient
 {
@@ -123,7 +127,8 @@ internal sealed class RpcClient
         CancellationToken cancellationToken
     )
     {
-        // We'll ignore the return value of InvokeCoreAsync in this case, since it'll just be filled in with null
+        // We'll ignore the return value of InvokeCoreAsync in this case, since it'll just be filled in with
+        // null
         return InvokeCoreAsync(
             targetObject,
             methodName,
@@ -185,7 +190,8 @@ internal sealed class RpcClient
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        // Loop until we successfully have a new index for this; practically we don't expect this to ever collide, since that'd mean we'd have
+        // Loop until we successfully have a new index for this; practically we don't expect this to ever
+        // collide, since that'd mean we'd have
         // billions of requests outstanding, but...
         do
         {

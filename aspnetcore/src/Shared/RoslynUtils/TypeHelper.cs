@@ -41,8 +41,10 @@ internal static class TypeHelper
     }
 
     /// <summary>
-    /// Parses generated local function name out of a generated method name. This code is a stop-gap and exists to address the issues with extracting
-    /// original method names from generated local functions. See https://github.com/dotnet/roslyn/issues/55651 for more info.
+    /// Parses generated local function name out of a generated method name. This code is a stop-gap and
+    // exists to address the issues with extracting
+    /// original method names from generated local functions. See
+    // https://github.com/dotnet/roslyn/issues/55651 for more info.
     /// </summary>
     private static bool TryParseLocalFunctionName(
         string generatedName,
@@ -63,7 +65,8 @@ internal static class TypeHelper
     }
 
     /// <summary>
-    /// Tries to get non-compiler-generated name of function. This parses generated local function names out of a generated method name if possible.
+    /// Tries to get non-compiler-generated name of function. This parses generated local function names
+    // out of a generated method name if possible.
     /// </summary>
     internal static bool TryGetNonCompilerGeneratedMethodName(
         MethodInfo method,

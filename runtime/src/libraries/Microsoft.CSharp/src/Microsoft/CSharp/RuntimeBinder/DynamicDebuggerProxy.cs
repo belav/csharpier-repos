@@ -268,11 +268,13 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <summary>
         /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a method.
         /// </summary>
-        /// <param name="methodArgs">Array that contains method arguments. The first element is an object on which method should be called.</param>
+        /// <param name="methodArgs">Array that contains method arguments. The first element is an object on
+        // which method should be called.</param>
         /// <param name="argTypes">Type of each argument in methodArgs.</param>
         /// <param name="argFlags">Flags describing each argument.</param>
         /// <param name="methodName">Name of a method to invoke.</param>
-        /// <param name="accessibilityContext">Type that determines context in which method should be called.</param>
+        /// <param name="accessibilityContext">Type that determines context in which method should be
+        // called.</param>
         /// <param name="typeArguments">Generic type arguments if there are any.</param>
         /// <returns>Result of method invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -321,13 +323,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         /// <summary>
-        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property getter
+        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property
+        // getter
         /// with no arguments.
         /// </summary>
         /// <typeparam name="T">Type of object on which property is defined.</typeparam>
         /// <param name="obj">Object on which property is defined.</param>
         /// <param name="propName">Name of a property to invoke.</param>
-        /// <param name="accessibilityContext">Type that determines context in which method should be called.</param>
+        /// <param name="accessibilityContext">Type that determines context in which method should be
+        // called.</param>
         /// <param name="isResultIndexed">Determines if COM binder should return a callable object.</param>
         /// <returns>Result of property invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -338,9 +342,11 @@ namespace Microsoft.CSharp.RuntimeBinder
             bool isResultIndexed
         )
         {
-            // In most cases it's ok to use CSharpArgumentInfoFlags.None since target of property call is dynamic.
+            // In most cases it's ok to use CSharpArgumentInfoFlags.None since target of property call is
+            // dynamic.
             // The only possible case when target is not dynamic but we still treat is as dynamic access is when
-            // one of arguments is dynamic. This is only possible for indexed properties since we call this method and
+            // one of arguments is dynamic. This is only possible for indexed properties since we call this
+            // method and
             // TryGetMemberValueVarArgs afterwards.
 
             CSharpGetMemberBinder binder = new CSharpGetMemberBinder(
@@ -358,14 +364,17 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         /// <summary>
-        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property/indexer getter.
+        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a
+        // property/indexer getter.
         /// </summary>
         /// <param name="propArgs">Array that contains property arguments. The first element is an object on
-        /// which indexer should be called or call to TryGetMemberValue that selects the right property in case of
+        /// which indexer should be called or call to TryGetMemberValue that selects the right property in
+        // case of
         /// indexed properties.</param>
         /// <param name="argTypes">Type of each argument in propArgs.</param>
         /// <param name="argFlags">Flags describing each argument.</param>
-        /// <param name="accessibilityContext">Type that determines context in which method should be called.</param>
+        /// <param name="accessibilityContext">Type that determines context in which method should be
+        // called.</param>
         /// <returns>Result of property invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public static object TryGetMemberValueVarArgs(
@@ -392,7 +401,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         /// <summary>
-        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property setter
+        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property
+        // setter
         /// with no arguments.
         /// </summary>
         /// <typeparam name="TObject">Type of object on which property is defined.</typeparam>
@@ -401,7 +411,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         /// <param name="propName">Name of a property to invoke.</param>
         /// <param name="value">Value property needs to be set to.</param>
         /// <param name="valueFlags"></param>
-        /// <param name="accessibilityContext">Type that determines context in which method should be called.</param>
+        /// <param name="accessibilityContext">Type that determines context in which method should be
+        // called.</param>
         /// <returns>Result of property invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public static object TrySetMemberValue<TObject, TValue>(
@@ -431,14 +442,17 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         /// <summary>
-        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a property/indexer setter.
+        /// DynamicOperatorRewriter in EE generates call to this method to dynamically invoke a
+        // property/indexer setter.
         /// </summary>
         /// <param name="propArgs">Array that contains property arguments. The first element is an object on
-        /// which indexer should be called or call to TrySetMemberValue that selects the right property in case of
+        /// which indexer should be called or call to TrySetMemberValue that selects the right property in
+        // case of
         /// indexed properties. The last argument is value that property should be set to.</param>
         /// <param name="argTypes">Type of each argument in propArgs.</param>
         /// <param name="argFlags">Flags describing each argument.</param>
-        /// <param name="accessibilityContext">Type that determines context in which method should be called.</param>
+        /// <param name="accessibilityContext">Type that determines context in which method should be
+        // called.</param>
         /// <returns>Result of property invocation.</returns>
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
         public static object TrySetMemberValueVarArgs(
@@ -472,7 +486,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         //Called when we don't know if the member is a property or a method
         internal static object TryGetMemberValue(object obj, string name, bool ignoreException)
         {
-            // if you want to ignore case for VB, this is how you set it .. make it a member and add a ctor to init it
+            // if you want to ignore case for VB, this is how you set it .. make it a member and add a ctor to
+            // init it
             bool ignoreCase = false;
             object value = null;
 

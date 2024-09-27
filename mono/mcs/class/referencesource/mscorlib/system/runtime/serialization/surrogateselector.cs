@@ -126,7 +126,8 @@ namespace System.Runtime.Serialization
             }
 
             //
-            // Check for a cycle that would lead back to this.  We find the end of the list that we're being asked to
+            // Check for a cycle that would lead back to this.  We find the end of the list that we're being
+            // asked to
             // insert for use later.
             //
             tempCurr = selector.GetNextSelector();

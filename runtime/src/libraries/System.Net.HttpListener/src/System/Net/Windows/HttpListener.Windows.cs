@@ -27,13 +27,16 @@ namespace System.Net
         // FileCompletionNotificationModes.SkipCompletionPortOnSuccess flag.
         // This bug was only hit when the buffer passed into HttpReceiveClientCertificate
         // (1500 bytes initially) is tool small for the certificate.
-        // Due to this bug in downlevel operating systems the FileCompletionNotificationModes.SkipCompletionPortOnSuccess
+        // Due to this bug in downlevel operating systems the
+        // FileCompletionNotificationModes.SkipCompletionPortOnSuccess
         // flag is only used on Win8 and later.
         internal static readonly bool SkipIOCPCallbackOnSuccess =
             Environment.OSVersion.Version >= new Version(6, 2);
 
-        // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous header names
-        // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time to under
+        // Mitigate potential DOS attacks by limiting the number of unknown headers we accept.  Numerous
+        // header names
+        // with hash collisions will cause the server to consume excess CPU.  1000 headers limits CPU time
+        // to under
         // 0.5 seconds per request.  Respond with a 400 Bad Request.
         private const int UnknownHeaderLimit = 1000;
 
@@ -336,7 +339,8 @@ namespace System.Net
         {
             Debug.Assert(Monitor.IsEntered(_internalLock));
 
-            // Set the association between request queue and url group. After this, requests for registered urls will
+            // Set the association between request queue and url group. After this, requests for registered urls
+            // will
             // get delivered to this request queue.
             Interop.HttpApi.HTTP_BINDING_INFO info = default;
             info.Flags = Interop.HttpApi.HTTP_FLAGS.HTTP_PROPERTY_FLAG_PRESENT;
@@ -357,7 +361,8 @@ namespace System.Net
             );
 
             //
-            // Break the association between request queue and url group. After this, requests for registered urls
+            // Break the association between request queue and url group. After this, requests for registered
+            // urls
             // will get 503s.
             // Note that this method may be called multiple times (Stop() and then Abort()). This
             // is fine since http.sys allows to set HttpServerBindingProperty multiple times for valid
@@ -559,7 +564,8 @@ namespace System.Net
                 memoryBlob = new SyncRequestContext((int)size);
                 HttpListenerSession? session = _currentSession;
 
-                // Because there is no synchronization, the listener can be stopped or closed while the method is executing,
+                // Because there is no synchronization, the listener can be stopped or closed while the method is
+                // executing,
                 // resulting in a null session
                 if (session == null)
                 {
@@ -626,7 +632,8 @@ namespace System.Net
 
                     if (stoleBlob)
                     {
-                        // The request has been handed to the user, which means this code can't reuse the blob.  Reset it here.
+                        // The request has been handed to the user, which means this code can't reuse the blob.  Reset it
+                        // here.
                         memoryBlob = null;
                         stoleBlob = false;
                     }
@@ -697,7 +704,8 @@ namespace System.Net
 
                 HttpListenerSession? session = _currentSession;
 
-                // Because there is no synchronization, the listener can be stopped or closed while the method is executing,
+                // Because there is no synchronization, the listener can be stopped or closed while the method is
+                // executing,
                 // resulting in a null session
                 if (session == null)
                 {
@@ -861,7 +869,8 @@ namespace System.Net
                     disconnectResult = null;
                 }
 
-                // Pick out the old context now.  By default, it'll be removed in the finally, unless context is set somewhere.
+                // Pick out the old context now.  By default, it'll be removed in the finally, unless context is set
+                // somewhere.
                 if (disconnectResult != null)
                 {
                     sessionContext = disconnectResult.Session;
@@ -905,7 +914,8 @@ namespace System.Net
                 }
                 else
                 {
-                    // We didn't give the request to the user yet, so we haven't lost control of the unmanaged blob and can
+                    // We didn't give the request to the user yet, so we haven't lost control of the unmanaged blob and
+                    // can
                     // continue to reuse the buffer.
                     stoleBlob = false;
                 }
@@ -999,7 +1009,8 @@ namespace System.Net
                     }
                 }
 
-                // httpError holds the error we will return if an Authorization header is present but can't be authenticated
+                // httpError holds the error we will return if an Authorization header is present but can't be
+                // authenticated
                 HttpStatusCode httpError = HttpStatusCode.InternalServerError;
                 bool error = false;
 
@@ -1320,7 +1331,8 @@ namespace System.Net
                 ArrayList? challenges = null;
                 if (httpContext == null)
                 {
-                    // If we already have a challenge, just use it.  Otherwise put a challenge for each acceptable scheme.
+                    // If we already have a challenge, just use it.  Otherwise put a challenge for each acceptable
+                    // scheme.
                     if (challenge != null)
                     {
                         AddChallenge(ref challenges, challenge);
@@ -1353,7 +1365,8 @@ namespace System.Net
                 // Update Session if necessary.
                 if (keepSessionContext)
                 {
-                    // Check if we need to call WaitForDisconnect, because if we do and it fails, we want to send a 500 instead.
+                    // Check if we need to call WaitForDisconnect, because if we do and it fails, we want to send a 500
+                    // instead.
                     if (disconnectResult == null)
                     {
                         RegisterForDisconnectNotification(
@@ -1457,8 +1470,10 @@ namespace System.Net
             }
         }
 
-        // Using the configured Auth schemes, populate the auth challenge headers. This is for scenarios where
-        // Anonymous access is allowed for some resources, but the server later determines that authorization
+        // Using the configured Auth schemes, populate the auth challenge headers. This is for scenarios
+        // where
+        // Anonymous access is allowed for some resources, but the server later determines that
+        // authorization
         // is required for this request.
         internal void SetAuthenticationHeaders(HttpListenerContext context)
         {
@@ -1659,7 +1674,8 @@ namespace System.Net
                     || statusCode == Interop.HttpApi.ERROR_IO_PENDING
                 )
                 {
-                    // Need to make sure it's going to get returned before adding it to the hash.  That way it'll be handled
+                    // Need to make sure it's going to get returned before adding it to the hash.  That way it'll be
+                    // handled
                     // correctly in HandleAuthentication's finally.
                     disconnectResult = result;
                     session.Listener.DisconnectResults[connectionId] = disconnectResult;

@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAttributeArgument'/> using the specified value.
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAttributeArgument'/> using the
+        // specified value.
         ///    </para>
         /// </devdoc>
         public CodeAttributeArgument(CodeExpression value)
@@ -44,7 +45,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAttributeArgument'/> using the specified name and
+        ///       Initializes a new instance of <see cref='System.CodeDom.CodeAttributeArgument'/> using the
+        // specified name and
         ///       value.
         ///    </para>
         /// </devdoc>

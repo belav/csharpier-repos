@@ -12,7 +12,8 @@ namespace System.Net.Security
         /// <remarks>Maps to GSS_S_COMPLETE status in GSSAPI.</remarks>
         Completed = 0,
 
-        /// <summary>Operation completed successfully but more tokens are to be exchanged with the other party.</summary>
+        /// <summary>Operation completed successfully but more tokens are to be exchanged with the other
+        // party.</summary>
         /// <remarks>Maps to GSS_S_CONTINUE_NEEDED status in GSSAPI.</remarks>
         ContinueNeeded,
 
@@ -48,7 +49,8 @@ namespace System.Net.Security
         /// <remarks>Maps to GSS_S_DEFECTIVE_TOKEN status in GSSAPI.</remarks>
         InvalidToken,
 
-        /// <summary>The supplied credentials were not valid for context acceptance, or the credential handle did not reference any credentials.</summary>
+        /// <summary>The supplied credentials were not valid for context acceptance, or the credential
+        // handle did not reference any credentials.</summary>
         /// <remarks>Maps to GSS_S_NO_CRED status in GSSAPI.</remarks>
         UnknownCredentials,
 
@@ -56,11 +58,14 @@ namespace System.Net.Security
         /// <remarks>Maps to GSS_S_BAD_QOP status in GSSAPI.</remarks>
         QopNotSupported,
 
-        /// <summary>Authentication token was identfied as duplicate, old, or out of expected sequence.</summary>
-        /// <remarks>Maps to GSS_S_DUPLICATE_TOKEN, GSS_S_OLD_TOKEN, GSS_S_UNSEQ_TOKEN, and GSS_S_GAP_TOKEN status bits in GSSAPI when failure was indicated.</remarks>
+        /// <summary>Authentication token was identfied as duplicate, old, or out of expected
+        // sequence.</summary>
+        /// <remarks>Maps to GSS_S_DUPLICATE_TOKEN, GSS_S_OLD_TOKEN, GSS_S_UNSEQ_TOKEN, and GSS_S_GAP_TOKEN
+        // status bits in GSSAPI when failure was indicated.</remarks>
         OutOfSequence,
 
-        /// <status>Validation of RequiredProtectionLevel against negotiated protection level failed.</status>
+        /// <status>Validation of RequiredProtectionLevel against negotiated protection level
+        // failed.</status>
         SecurityQosFailed,
 
         /// <status>Validation of the target name failed</status>

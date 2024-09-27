@@ -73,7 +73,8 @@ namespace System
         public void Close() => CloseValue('}');
 
         /// <summary>
-        /// Write the exception information with fallbacks if the info doesn't fit in the fixed size triage buffer.
+        /// Write the exception information with fallbacks if the info doesn't fit in the fixed size triage
+        // buffer.
         /// </summary>
         /// <param name="exception">exception object</param>
         public void WriteException(Exception exception)
@@ -153,13 +154,15 @@ namespace System
         }
 
         /// <summary>
-        /// Adds the exception info to the JSON buffer under the "exception" key. If the exception can not fit in
+        /// Adds the exception info to the JSON buffer under the "exception" key. If the exception can not
+        // fit in
         /// the triage buffer the allocations are backed out.
         /// </summary>
         /// <param name="key">the UTF8 name of the block</param>
         /// <param name="exception">exception build triage block from</param>
         /// <param name="maxMessageSize">limits the size of the exception message strings</param>
-        /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage buffer</param>
+        /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage
+        // buffer</param>
         /// <param name="maxMethodNameSize">limits the size of the stack frame method name strings</param>
         /// <returns>true - success, false - out of triage buffer space</returns>
         private bool WriteExceptionWithFallback(
@@ -193,7 +196,8 @@ namespace System
         /// <param name="key">the UTF8 name of the block</param>
         /// <param name="exception">exception build triage block from</param>
         /// <param name="maxMessageSize">limits the size of the exception message strings</param>
-        /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage buffer</param>
+        /// <param name="maxNumberStackFrames">limits the number of stack frames written to the triage
+        // buffer</param>
         /// <param name="maxMethodNameSize">limits the size of the stack frame method name strings</param>
         /// <returns>true - success, false - out of triage buffer space</returns>
         private bool WriteExceptionHelper(
@@ -216,7 +220,8 @@ namespace System
             if (!WriteStringValue("message"u8, exception.Message, maxMessageSize))
                 return false;
 
-            // Exception type names are not truncated because the full name is important to bucketing and usually not that long
+            // Exception type names are not truncated because the full name is important to bucketing and
+            // usually not that long
             if (!WriteStringValue("type"u8, exception.GetType().ToString()))
                 return false;
 

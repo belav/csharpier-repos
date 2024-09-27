@@ -26,7 +26,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 keyHandle1.Dispose();
                 keyHandle2.Dispose();
 
-                // Make sure that disposing the spawned off handles didn't dispose the original. Set and get a custom property to ensure
+                // Make sure that disposing the spawned off handles didn't dispose the original. Set and get a
+                // custom property to ensure
                 // the original is still in good condition.
                 string propertyName = "Are you alive";
                 bool hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);

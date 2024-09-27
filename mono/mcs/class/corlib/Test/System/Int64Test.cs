@@ -92,7 +92,8 @@ namespace MonoTests.System
         private const string sval1Test1 = "  -1,234,567   ";
         private const string sval1Test2 = "  -1234567   ";
 
-        //private const string sval1Test3 = "  -12345,,,,67   "; // interesting: this case works on SDK Beta2, but the specification says nothing about this case
+        //private const string sval1Test3 = "  -12345,,,,67   "; // interesting: this case works on SDK
+        // Beta2, but the specification says nothing about this case
         private const string sval1Test4 = "  -12345 67   ";
         private string sval1Test5 =
             "  -" + NumberFormatInfo.InvariantInfo.CurrencySymbol + "1,234,567.00 ";

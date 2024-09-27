@@ -12,7 +12,8 @@ namespace System.ComponentModel.DataAnnotations.Schema
         /// <summary>
         ///     Initializes a new instance of the <see cref="DatabaseGeneratedAttribute" /> class.
         /// </summary>
-        /// <param name="databaseGeneratedOption">The pattern used to generate values for the property in the database.</param>
+        /// <param name="databaseGeneratedOption">The pattern used to generate values for the property in
+        // the database.</param>
         public DatabaseGeneratedAttribute(DatabaseGeneratedOption databaseGeneratedOption)
         {
             if (!(Enum.IsDefined(typeof(DatabaseGeneratedOption), databaseGeneratedOption)))

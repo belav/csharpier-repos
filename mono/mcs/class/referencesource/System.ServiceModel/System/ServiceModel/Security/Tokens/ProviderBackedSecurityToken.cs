@@ -16,7 +16,8 @@ namespace System.ServiceModel.Security.Tokens
     /// <summary>
     /// The ProviderBackedSecurityToken was added for the ChannelBindingToken work for Win7.
     /// It is used to delay the resolution of a token until it is needed.
-    /// For the CBT, this delay is necessary as the CBT is not available until SecurityAppliedMessage.OnWriteMessage is called.
+    /// For the CBT, this delay is necessary as the CBT is not available until
+    // SecurityAppliedMessage.OnWriteMessage is called.
     /// The CBT binds a token to the
     /// </summary>
     internal class ProviderBackedSecurityToken : SecurityToken
@@ -33,7 +34,8 @@ namespace System.ServiceModel.Security.Tokens
         /// <summary>
         /// Constructor to create an instance of this class.
         /// </summary>
-        /// <param name="securityToken">SecurityToken that represents the SecurityTokenElement element.</param>
+        /// <param name="securityToken">SecurityToken that represents the SecurityTokenElement
+        // element.</param>
         public ProviderBackedSecurityToken(SecurityTokenProvider tokenProvider, TimeSpan timeout)
         {
             _lock = new object();

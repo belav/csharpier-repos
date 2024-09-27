@@ -52,7 +52,8 @@ namespace Microsoft.CodeAnalysis
             // TextDocumentState, and so we populate all the fields from the inputs. We will always create
             // a new AsyncLazy to compute the checksum though, and that's because there's no practical way for
             // the newly created TextDocumentState to have the same checksum as a previous TextDocumentState:
-            // if we're creating a new state, it's because something changed, and we'll have to create a new checksum.
+            // if we're creating a new state, it's because something changed, and we'll have to create a new
+            // checksum.
             _lazyChecksums = AsyncLazy.Create(ComputeChecksumsAsync);
         }
 

@@ -43,7 +43,8 @@ namespace System.Net.Http
         private HeaderState _headerState;
         private int _headerBudgetRemaining;
 
-        /// <summary>Reusable array used to get the values for each header being written to the wire.</summary>
+        /// <summary>Reusable array used to get the values for each header being written to the
+        // wire.</summary>
         private string[] _headerValues = Array.Empty<string>();
 
         /// <summary>Any trailing headers.</summary>
@@ -136,12 +137,14 @@ namespace System.Net.Http
 
         public async Task<HttpResponseMessage> SendAsync(CancellationToken cancellationToken)
         {
-            // If true, dispose the stream upon return. Will be set to false if we're duplex or returning content.
+            // If true, dispose the stream upon return. Will be set to false if we're duplex or returning
+            // content.
             bool disposeSelf = true;
 
             bool duplex = _request.Content != null && _request.Content.AllowDuplex;
 
-            // Link the input token with _requestBodyCancellationSource, so cancellation will trigger on GoAway() or Abort().
+            // Link the input token with _requestBodyCancellationSource, so cancellation will trigger on
+            // GoAway() or Abort().
             CancellationTokenRegistration linkedTokenRegistration =
                 cancellationToken.UnsafeRegister(
                     cts => ((CancellationTokenSource)cts!).Cancel(),
@@ -166,8 +169,10 @@ namespace System.Net.Http
                     // If we don't have content, or we are doing Expect 100 Continue, then we can't rely on
                     // this and must send our headers immediately.
 
-                    // End the stream writing if there's no content to send, do it as part of the write so that the FIN flag isn't send in an empty QUIC frame.
-                    // Note that there's no need to call Shutdown separately since the FIN flag in the last write is the same thing.
+                    // End the stream writing if there's no content to send, do it as part of the write so that the FIN
+                    // flag isn't send in an empty QUIC frame.
+                    // Note that there's no need to call Shutdown separately since the FIN flag in the last write is the
+                    // same thing.
                     await FlushSendBufferAsync(
                             endStream: _request.Content == null,
                             _requestBodyCancellationSource.Token
@@ -232,8 +237,10 @@ namespace System.Net.Http
                 // Set our content stream.
                 var responseContent = (HttpConnectionResponseContent)_response.Content;
 
-                // If we have received Content-Length: 0 and have completed sending content (which may not be the case if duplex),
-                // we can close our Http3RequestStream immediately and return a singleton empty content stream. Otherwise, we
+                // If we have received Content-Length: 0 and have completed sending content (which may not be the
+                // case if duplex),
+                // we can close our Http3RequestStream immediately and return a singleton empty content stream.
+                // Otherwise, we
                 // need to return a Http3ReadStream which will be responsible for disposing the Http3RequestStream.
                 bool useEmptyResponseContent =
                     responseContent.Headers.ContentLength == 0 && sendContentObserved;
@@ -261,7 +268,8 @@ namespace System.Net.Http
                     );
                 }
 
-                // To avoid a circular reference (stream->response->content->stream), null out the stream's response.
+                // To avoid a circular reference (stream->response->content->stream), null out the stream's
+                // response.
                 HttpResponseMessage response = _response;
                 _response = null;
 
@@ -494,7 +502,8 @@ namespace System.Net.Http
                 if (HttpTelemetry.Log.IsEnabled())
                     HttpTelemetry.Log.RequestContentStart();
 
-                // If we have a Content-Length, keep track of it so we don't over-send and so we can send in a single DATA frame.
+                // If we have a Content-Length, keep track of it so we don't over-send and so we can send in a
+                // single DATA frame.
                 _requestContentLengthRemaining = content.Headers.ContentLength ?? -1;
 
                 long bytesWritten;
@@ -516,12 +525,14 @@ namespace System.Net.Http
                     );
                 }
 
-                // Set to 0 to recognize that the whole request body has been sent and therefore there's no need to abort write side in case of a premature disposal.
+                // Set to 0 to recognize that the whole request body has been sent and therefore there's no need to
+                // abort write side in case of a premature disposal.
                 _requestContentLengthRemaining = 0;
 
                 if (_sendBuffer.ActiveLength != 0)
                 {
-                    // Our initial send buffer, which has our headers, is normally sent out on the first write to the Http3WriteStream.
+                    // Our initial send buffer, which has our headers, is normally sent out on the first write to the
+                    // Http3WriteStream.
                     // If we get here, it means the content didn't actually do any writing. Send out the headers now.
                     // Also send the FIN flag, since this is the last write. No need to call Shutdown separately.
                     await FlushSendBufferAsync(endStream: true, cancellationToken)
@@ -555,7 +566,8 @@ namespace System.Net.Http
             long remaining = _requestContentLengthRemaining;
             if (remaining != -1)
             {
-                // This HttpContent had a precomputed length, and a DATA frame was written as part of the headers. We can write directly without framing.
+                // This HttpContent had a precomputed length, and a DATA frame was written as part of the headers.
+                // We can write directly without framing.
 
                 if (buffer.Length > _requestContentLengthRemaining)
                 {
@@ -567,7 +579,8 @@ namespace System.Net.Http
 
                 if (!_singleDataFrameWritten)
                 {
-                    // Note we may not have sent headers yet; if so, _sendBuffer.ActiveLength will be > 0, and we will write them in a single write.
+                    // Note we may not have sent headers yet; if so, _sendBuffer.ActiveLength will be > 0, and we will
+                    // write them in a single write.
 
                     // Because we have a Content-Length, we can write it in a single DATA frame.
                     BufferFrameEnvelope(Http3FrameType.Data, remaining);
@@ -589,8 +602,10 @@ namespace System.Net.Http
             }
             else
             {
-                // Variable-length content: write both a DATA frame and buffer. (and headers, which will still be in _sendBuffer if this is the first content write)
-                // It's up to the HttpContent to give us sufficiently large writes to avoid excessively small DATA frames.
+                // Variable-length content: write both a DATA frame and buffer. (and headers, which will still be in
+                // _sendBuffer if this is the first content write)
+                // It's up to the HttpContent to give us sufficiently large writes to avoid excessively small DATA
+                // frames.
                 BufferFrameEnvelope(Http3FrameType.Data, buffer.Length);
 
                 await _stream
@@ -685,7 +700,8 @@ namespace System.Net.Http
                 HttpTelemetry.Log.RequestHeadersStart(_connection.Id);
 
             // Reserve space for the header frame envelope.
-            // The envelope needs to be written after headers are serialized, as we need to know the payload length first.
+            // The envelope needs to be written after headers are serialized, as we need to know the payload
+            // length first.
             const int PreHeadersReserveSpace = Http3Frame.MaximumEncodedFrameEnvelopeLength;
 
             // This should be the first write to our buffer. The trick of reserving space won't otherwise work.
@@ -725,7 +741,8 @@ namespace System.Net.Http
                 BufferLiteralHeaderWithStaticNameReference(H3StaticTable.PathSlash, pathAndQuery);
             }
 
-            // The only way to reach H3 is to upgrade via an Alt-Svc header, so we can encode Alt-Used for every connection.
+            // The only way to reach H3 is to upgrade via an Alt-Svc header, so we can encode Alt-Used for every
+            // connection.
             BufferBytes(_connection.AltUsedEncodedHeaderBytes);
 
             int headerListSize = 4 * HeaderField.RfcOverhead; // Scheme, Method, Authority, Path
@@ -792,7 +809,8 @@ namespace System.Net.Http
             // The headerListSize is an approximation of the total header length.
             // This is acceptable as long as the value is always >= the actual length.
             // We must avoid ever sending more than the server allowed.
-            // This approach must be revisted if we ever support the dynamic table or compression when sending requests.
+            // This approach must be revisted if we ever support the dynamic table or compression when sending
+            // requests.
             headerListSize += headersLength;
 
             uint maxHeaderListSize = _connection.MaxHeaderListSize;
@@ -1125,7 +1143,8 @@ namespace System.Net.Http
             CancellationToken cancellationToken
         )
         {
-            // TODO: this header budget is sent as SETTINGS_MAX_HEADER_LIST_SIZE, so it should not use frame payload but rather 32 bytes + uncompressed size per entry.
+            // TODO: this header budget is sent as SETTINGS_MAX_HEADER_LIST_SIZE, so it should not use frame
+            // payload but rather 32 bytes + uncompressed size per entry.
             // https://tools.ietf.org/html/draft-ietf-quic-http-24#section-4.1.1
             if (headersLength > _headerBudgetRemaining)
             {
@@ -1179,7 +1198,8 @@ namespace System.Net.Http
                 headersLength -= processLength;
             }
 
-            // Reset decoder state. Require because one decoder instance is reused to decode headers and trailers.
+            // Reset decoder state. Require because one decoder instance is reused to decode headers and
+            // trailers.
             _headerDecoder.Reset();
         }
 
@@ -1241,7 +1261,8 @@ namespace System.Net.Http
         /// <param name="descriptor">A descriptor for either a known header or unknown header.</param>
         /// <param name="staticValue">The static indexed value, if any.</param>
         /// <param name="literalValue">The literal ASCII value, if any.</param>
-        /// <remarks>One of <paramref name="staticValue"/> or <paramref name="literalValue"/> will be set.</remarks>
+        /// <remarks>One of <paramref name="staticValue"/> or <paramref name="literalValue"/> will be
+        // set.</remarks>
         private void OnHeader(
             int? staticIndex,
             HeaderDescriptor descriptor,
@@ -1288,7 +1309,8 @@ namespace System.Net.Http
                         H3StaticTable.Status421 => 421,
                         H3StaticTable.Status425 => 425,
                         H3StaticTable.Status500 => 500,
-                        // We should never get here, at least while we only use static table. But we can still parse staticValue.
+                        // We should never get here, at least while we only use static table. But we can still parse
+                        // staticValue.
                         _ => ParseStatusCode(staticIndex, staticValue),
                     };
 
@@ -1453,7 +1475,8 @@ namespace System.Net.Http
 
         private int ReadResponseContent(HttpResponseMessage response, Span<byte> buffer)
         {
-            // Response headers should be done reading by the time this is called. _response is nulled out as part of this.
+            // Response headers should be done reading by the time this is called. _response is nulled out as
+            // part of this.
             // Verify that this is being called in correct order.
             Debug.Assert(_response == null);
 
@@ -1463,7 +1486,8 @@ namespace System.Net.Http
 
                 do
                 {
-                    // Sync over async here -- QUIC implementation does it per-I/O already; this is at least more coarse-grained.
+                    // Sync over async here -- QUIC implementation does it per-I/O already; this is at least more
+                    // coarse-grained.
                     if (
                         _responseDataPayloadRemaining <= 0
                         && !ReadNextDataFrameAsync(response, CancellationToken.None)
@@ -1494,7 +1518,8 @@ namespace System.Net.Http
                         _recvBuffer.Discard(copyLen);
                         buffer = buffer.Slice(copyLen);
 
-                        // Stop, if we've reached the end of a data frame and start of the next data frame is not buffered yet
+                        // Stop, if we've reached the end of a data frame and start of the next data frame is not buffered
+                        // yet
                         // Waiting for the next data frame may cause a hang, e.g. in echo scenario
                         // TODO: this is inefficient if data is already available in transport
                         if (_responseDataPayloadRemaining == 0 && _recvBuffer.ActiveLength == 0)
@@ -1545,7 +1570,8 @@ namespace System.Net.Http
             CancellationToken cancellationToken
         )
         {
-            // Response headers should be done reading by the time this is called. _response is nulled out as part of this.
+            // Response headers should be done reading by the time this is called. _response is nulled out as
+            // part of this.
             // Verify that this is being called in correct order.
             Debug.Assert(_response == null);
 
@@ -1583,7 +1609,8 @@ namespace System.Net.Http
                         _recvBuffer.Discard(copyLen);
                         buffer = buffer.Slice(copyLen);
 
-                        // Stop, if we've reached the end of a data frame and start of the next data frame is not buffered yet
+                        // Stop, if we've reached the end of a data frame and start of the next data frame is not buffered
+                        // yet
                         // Waiting for the next data frame may cause a hang, e.g. in echo scenario
                         // TODO: this is inefficient if data is already available in transport
                         if (_responseDataPayloadRemaining == 0 && _recvBuffer.ActiveLength == 0)
@@ -1748,7 +1775,8 @@ namespace System.Net.Http
             }
         }
 
-        // TODO: it may be possible for Http3RequestStream to implement Stream directly and avoid this allocation.
+        // TODO: it may be possible for Http3RequestStream to implement Stream directly and avoid this
+        // allocation.
         private sealed class Http3ReadStream : HttpBaseStream
         {
             private Http3RequestStream? _stream;
@@ -1847,7 +1875,8 @@ namespace System.Net.Http
             }
         }
 
-        // TODO: it may be possible for Http3RequestStream to implement Stream directly and avoid this allocation.
+        // TODO: it may be possible for Http3RequestStream to implement Stream directly and avoid this
+        // allocation.
         private sealed class Http3WriteStream : HttpBaseStream
         {
             private Http3RequestStream? _stream;

@@ -153,7 +153,8 @@ namespace System.Runtime.Caching
 
                 // If this entry has an update sentinel, the sliding expiration is actually associated
                 // with that sentinel, not with this entry. We need to update the sentinel's sliding expiration to
-                // keep the sentinel from expiring, which in turn would force a removal of this entry from the cache.
+                // keep the sentinel from expiring, which in turn would force a removal of this entry from the
+                // cache.
                 entry.UpdateSlidingExpForUpdateSentinel();
 
                 if (updatePerfCounters && _perfCounters != null && _countersSupported)

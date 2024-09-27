@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/Common/tests/System/Collections/ICollection.NonGeneric.Tests.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -52,23 +54,28 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         /// <summary>
         /// Used for the ICollection_NonGeneric_CopyTo_ArrayOfEnumType test where we try to call CopyTo
-        /// on an Array of Enum values. Some implementations special-case for this and throw an ArgumentException,
+        /// on an Array of Enum values. Some implementations special-case for this and throw an
+        // ArgumentException,
         /// while others just throw an InvalidCastExcepton.
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
             typeof(InvalidCastException);
 
         /// <summary>
-        /// Used for the ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType test where we try to call CopyTo
-        /// on an Array of different reference values. Some implementations special-case for this and throw an ArgumentException,
+        /// Used for the ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType test where we try to
+        // call CopyTo
+        /// on an Array of different reference values. Some implementations special-case for this and throw
+        // an ArgumentException,
         /// while others just throw an InvalidCastExcepton or an ArrayTypeMismatchException.
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
             typeof(ArgumentException);
 
         /// <summary>
-        /// Used for the ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType test where we try to call CopyTo
-        /// on an Array of different value values. Some implementations special-case for this and throw an ArgumentException,
+        /// Used for the ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType test where we try to call
+        // CopyTo
+        /// on an Array of different value values. Some implementations special-case for this and throw an
+        // ArgumentException,
         /// while others just throw an InvalidCastExcepton.
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
@@ -96,14 +103,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected virtual bool ICollection_NonGeneric_HasNullSyncRoot => false;
 
         /// <summary>
-        /// Used for the ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsArgumentException tests. Some
+        /// Used for the ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsArgumentException
+        // tests. Some
         /// implementations throw a different exception type (e.g. ArgumentOutOfRangeException).
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowType =>
             typeof(ArgumentException);
 
         /// <summary>
-        /// Used for the ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowsException test. Some implementations
+        /// Used for the ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowsException test. Some
+        // implementations
         /// throw a different exception type (e.g. RankException by ImmutableArray)
         /// </summary>
         protected virtual Type ICollection_NonGeneric_CopyTo_TwoDimensionArray_ThrowType =>

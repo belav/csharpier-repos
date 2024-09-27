@@ -18,7 +18,8 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
-    /// A <see cref="MissingAssemblySymbol"/> is a special kind of <see cref="AssemblySymbol"/> that represents
+    /// A <see cref="MissingAssemblySymbol"/> is a special kind of <see cref="AssemblySymbol"/> that
+    // represents
     /// an assembly that couldn't be found.
     /// </summary>
     internal class MissingAssemblySymbol : AssemblySymbol

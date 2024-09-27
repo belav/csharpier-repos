@@ -542,7 +542,8 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGen
         /// Emits receiver in a form that allows member accesses ( O or &amp; ).
         /// For verifier-reference types it is the actual reference.
         /// For the value types it is an address of the receiver.
-        /// For generic types it is either a boxed receiver or the address of the receiver with readonly intent.
+        /// For generic types it is either a boxed receiver or the address of the receiver with readonly
+        // intent.
         ///
         /// addressKind - kind of address that is needed in case if receiver is not a reference type.
         ///

@@ -19,8 +19,10 @@ public class HttpMethodOverrideMiddleware
     /// <summary>
     /// Create a new <see cref="HttpMethodOverrideMiddleware"/>.
     /// </summary>
-    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
-    /// <param name="options">The <see cref="HttpMethodOverrideOptions"/> for configuring the middleware.</param>
+    /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the
+    // pipeline.</param>
+    /// <param name="options">The <see cref="HttpMethodOverrideOptions"/> for configuring the
+    // middleware.</param>
     public HttpMethodOverrideMiddleware(
         RequestDelegate next,
         IOptions<HttpMethodOverrideOptions> options

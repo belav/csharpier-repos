@@ -21,9 +21,11 @@ namespace System.Data.Mapping.Update.Internal
     internal partial class UpdateTranslator
     {
         /// <summary>
-        /// Class validating relationship cardinality constraints. Only reasons about constraints that can be inferred
+        /// Class validating relationship cardinality constraints. Only reasons about constraints that can
+        // be inferred
         /// by examining change requests from the store.
-        /// (no attempt is made to ensure consistency of the store subsequently, since this would require pulling in all
+        /// (no attempt is made to ensure consistency of the store subsequently, since this would require
+        // pulling in all
         /// values from the store).
         /// </summary>
         private class RelationshipConstraintValidator
@@ -193,7 +195,8 @@ namespace System.Data.Mapping.Update.Internal
             /// Add a relationship to be tracked by the validator.
             /// </summary>
             /// <param name="associationSet">Relationship set to which the given record belongs.</param>
-            /// <param name="record">Relationship record. Must conform to the type of the relationship set.</param>
+            /// <param name="record">Relationship record. Must conform to the type of the relationship
+            // set.</param>
             /// <param name="stateEntry">State entry for the relationship being tracked</param>
             internal void RegisterAssociation(
                 AssociationSet associationSet,
@@ -390,7 +393,8 @@ namespace System.Data.Mapping.Update.Internal
 
             /// <summary>
             /// Determines the net change in relationship count.
-            /// For instance, if the directional relationship is added 2 times and deleted 3, the return value is -1.
+            /// For instance, if the directional relationship is added 2 times and deleted 3, the return value
+            // is -1.
             /// </summary>
             private int GetDirectionalRelationshipCountDelta(
                 DirectionalRelationship expectedRelationship

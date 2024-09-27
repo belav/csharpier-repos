@@ -79,8 +79,10 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         //  Note:
-        //      Creating a catalog does not cause change notifications to propagate, For some reason the DeploymentCatalog did, but that is a bug.
-        //      InnerCatalog is delay evaluated, from data supplied at construction time and so does not propagate change notifications
+        //      Creating a catalog does not cause change notifications to propagate, For some reason the
+        // DeploymentCatalog did, but that is a bug.
+        //      InnerCatalog is delay evaluated, from data supplied at construction time and so does not
+        // propagate change notifications
         private AggregateCatalog InnerCatalog
         {
             get
@@ -157,7 +159,8 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         /// <summary>
-        ///     Returns the export definitions that match the constraint defined by the specified definition.
+        ///     Returns the export definitions that match the constraint defined by the specified
+        // definition.
         /// </summary>
         /// <param name="definition">
         ///     The <see cref="ImportDefinition"/> that defines the conditions of the
@@ -216,7 +219,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns a string representation of the directory catalog.
         /// </summary>
         /// <returns>
-        ///     A <see cref="String"/> containing the string representation of the <see cref="DirectoryCatalog"/>.
+        ///     A <see cref="String"/> containing the string representation of the <see
+        // cref="DirectoryCatalog"/>.
         /// </returns>
         public override string ToString()
         {
@@ -227,7 +231,8 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Gets the display name of the ApplicationCatalog.
         /// </summary>
         /// <value>
-        ///     A <see cref="String"/> containing a human-readable display name of the <see cref="ApplicationCatalog"/>.
+        ///     A <see cref="String"/> containing a human-readable display name of the <see
+        // cref="ApplicationCatalog"/>.
         /// </value>
         [SuppressMessage("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         string ICompositionElement.DisplayName

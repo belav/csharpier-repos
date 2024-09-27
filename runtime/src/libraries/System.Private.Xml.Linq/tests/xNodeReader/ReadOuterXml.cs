@@ -206,7 +206,8 @@ namespace CoreXml.Test.XLinq
                     TestOuterOnAttribute(s_NEMP2, "val", "abc");
                 }
 
-                //[Variation("ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities", Priority = 0)]
+                //[Variation("ReadOuterXml on attribute with entities, EntityHandling = ExpandEntities", Priority =
+                // 0)]
                 private void ReadOuterXml15()
                 {
                     XmlReader DataReader = GetReader();

@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
 
         /// <summary>
         /// This is the diagnostic that will show up in the preview pane header when a particular fix
-        /// is selected in the light bulb menu. We also group all fixes with the same <see cref="PrimaryDiagnostic"/>
+        /// is selected in the light bulb menu. We also group all fixes with the same <see
+        // cref="PrimaryDiagnostic"/>
         /// together (into a single SuggestedActionSet) in the light bulb menu.
         /// </summary>
         /// <remarks>
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Implementation-wise the <see cref="PrimaryDiagnostic"/> is always the first diagnostic that
         /// the <see cref="CodeFixProvider"/> supplied when registering the fix (<see
         /// cref="CodeFixContext.RegisterCodeFix(CodeAction, IEnumerable{Diagnostic})"/>). This could change
-        /// in the future, if we decide to change the UI to depict the true mapping between fixes and diagnostics
+        /// in the future, if we decide to change the UI to depict the true mapping between fixes and
+        // diagnostics
         /// or if we decide to use some other heuristic to determine the <see cref="PrimaryDiagnostic"/>.
         /// </remarks>
         internal Diagnostic PrimaryDiagnostic => Diagnostics[0];

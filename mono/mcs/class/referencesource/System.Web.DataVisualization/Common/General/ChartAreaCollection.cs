@@ -95,7 +95,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Updates the ChartArea alignment references to another chart areas.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="Charting.NameReferenceChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="Charting.NameReferenceChangedEventArgs"/> instance containing the
+        // event data.</param>
         internal void ChartAreaNameReferenceChanged(object sender, NameReferenceChangedEventArgs e)
         {
             foreach (ChartArea chartArea in this)

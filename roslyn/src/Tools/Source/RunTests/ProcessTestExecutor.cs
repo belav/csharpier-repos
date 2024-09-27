@@ -41,18 +41,24 @@ namespace RunTests
             var blameOption = "CollectHangDump";
             if (!options.CollectDumps)
             {
-                // The 'CollectDumps' option uses operating system features to collect dumps when a process crashes. We
-                // only enable the test executor blame feature in remaining cases, as the latter relies on ProcDump and
+                // The 'CollectDumps' option uses operating system features to collect dumps when a process crashes.
+                // We
+                // only enable the test executor blame feature in remaining cases, as the latter relies on ProcDump
+                // and
                 // interferes with automatic crash dump collection on Windows.
                 blameOption = "CollectDump;CollectHangDump";
             }
 
-            // The 25 minute timeout in integration tests accounts for the fact that VSIX deployment and/or experimental hive reset and
-            // configuration can take significant time (seems to vary from ~10 seconds to ~15 minutes), and the blame
-            // functionality cannot separate this configuration overhead from the first test which will eventually run.
+            // The 25 minute timeout in integration tests accounts for the fact that VSIX deployment and/or
+            // experimental hive reset and
+            // configuration can take significant time (seems to vary from ~10 seconds to ~15 minutes), and the
+            // blame
+            // functionality cannot separate this configuration overhead from the first test which will
+            // eventually run.
             // https://github.com/dotnet/roslyn/issues/59851
             //
-            // Helix timeout is 15 minutes as helix jobs fully timeout in 30minutes.  So in order to capture dumps we need the timeout
+            // Helix timeout is 15 minutes as helix jobs fully timeout in 30minutes.  So in order to capture
+            // dumps we need the timeout
             // to be 2x shorter than the expected test run time (15min) in case only the last test hangs.
             var timeout = options.UseHelix ? "15minutes" : "25minutes";
             fileContentsBuilder.AppendLine(
@@ -191,8 +197,10 @@ namespace RunTests
                 if (xunitProcessResult.ExitCode != 0)
                 {
                     // On occasion we get a non-0 output but no actual data in the result file.  The could happen
-                    // if xunit manages to crash when running a unit test (a stack overflow could cause this, for instance).
-                    // To avoid losing information, write the process output to the console.  In addition, delete the results
+                    // if xunit manages to crash when running a unit test (a stack overflow could cause this, for
+                    // instance).
+                    // To avoid losing information, write the process output to the console.  In addition, delete the
+                    // results
                     // file to avoid issues with any tool attempting to interpret the (potentially malformed) text.
                     var resultData = string.Empty;
                     try

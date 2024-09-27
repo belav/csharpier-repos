@@ -22,7 +22,8 @@ namespace System.IdentityModel.Metadata
             : this(null, null) { }
 
         /// <summary>
-        /// Constructs an endpoint with the specified <paramref name="binding"/> and <paramref name="location"/>.
+        /// Constructs an endpoint with the specified <paramref name="binding"/> and <paramref
+        // name="location"/>.
         /// </summary>
         /// <param name="binding">The URI representing the binding for this instance.</param>
         /// <param name="location">The URI representing the location for this instance.</param>

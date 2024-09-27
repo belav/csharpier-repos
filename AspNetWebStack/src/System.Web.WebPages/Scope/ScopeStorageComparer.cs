@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -9,7 +10,8 @@ namespace System.Web.WebPages.Scope
     /// <summary>
     /// Custom comparer for the context dictionaries
     /// The comparer treats strings as a special case, performing case insesitive comparison.
-    /// This guaratees that we remain consistent throughout the chain of contexts since PageData dictionary
+    /// This guaratees that we remain consistent throughout the chain of contexts since PageData
+    // dictionary
     /// behaves in this manner.
     /// </summary>
     internal class ScopeStorageComparer : IEqualityComparer<object>

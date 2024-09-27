@@ -171,7 +171,8 @@ public class ConcurrentPipeWriterTests
 
             await mockPipeWriter.FlushTcs.Task.DefaultTimeout();
 
-            // Even though we only called flush on the ConcurrentPipeWriter twice, the inner PipeWriter was flushed three times.
+            // Even though we only called flush on the ConcurrentPipeWriter twice, the inner PipeWriter was
+            // flushed three times.
             Assert.Equal(3, mockPipeWriter.GetMemoryCallCount);
             Assert.Equal(3, mockPipeWriter.AdvanceCallCount);
             Assert.Equal(3, mockPipeWriter.FlushCallCount);
@@ -239,7 +240,8 @@ public class ConcurrentPipeWriterTests
                 Assert.Equal(1, mockPipeWriter.FlushCallCount);
                 Assert.False(flushTask0.IsCompleted);
 
-                // Only GetMemory() is called but not Advance() is not called yet when the first inner flush complets.
+                // Only GetMemory() is called but not Advance() is not called yet when the first inner flush
+                // complets.
                 memory = concurrentPipeWriter.GetMemory();
             }
 
@@ -262,8 +264,10 @@ public class ConcurrentPipeWriterTests
                 flushTask1 = concurrentPipeWriter.FlushAsync();
             }
 
-            // Now that we flushed the ConcurrentPipeWriter again, the GetMemory() and Advance() calls are replayed.
-            // Make sure that MockPipeWriter.PinnedBlockMemoryPoolBlockSize matches PinnedBlockMemoryPool._blockSize or else
+            // Now that we flushed the ConcurrentPipeWriter again, the GetMemory() and Advance() calls are
+            // replayed.
+            // Make sure that MockPipeWriter.PinnedBlockMemoryPoolBlockSize matches
+            // PinnedBlockMemoryPool._blockSize or else
             // it might take more or less calls to the inner PipeWriter's GetMemory method to copy all the data.
             Assert.Equal(3, mockPipeWriter.GetMemoryCallCount);
             Assert.Equal(3, mockPipeWriter.AdvanceCallCount);
@@ -274,7 +278,8 @@ public class ConcurrentPipeWriterTests
 
             await flushTask1.DefaultTimeout();
 
-            // Even though we only called flush on the ConcurrentPipeWriter twice, the inner PipeWriter was flushed three times.
+            // Even though we only called flush on the ConcurrentPipeWriter twice, the inner PipeWriter was
+            // flushed three times.
             Assert.Equal(3, mockPipeWriter.GetMemoryCallCount);
             Assert.Equal(3, mockPipeWriter.AdvanceCallCount);
             Assert.Equal(2, mockPipeWriter.FlushCallCount);
@@ -331,7 +336,8 @@ public class ConcurrentPipeWriterTests
                 Assert.Equal(1, mockPipeWriter.FlushCallCount);
                 Assert.False(flushTask0.IsCompleted);
 
-                // Only GetMemory() is called but not Advance() is not called yet when the first inner flush completes.
+                // Only GetMemory() is called but not Advance() is not called yet when the first inner flush
+                // completes.
                 memory = concurrentPipeWriter.GetMemory();
             }
 
@@ -360,7 +366,8 @@ public class ConcurrentPipeWriterTests
             await completeTask.DefaultTimeout();
 
             // Now that we completed the ConcurrentPipeWriter, the GetMemory() and Advance() calls are replayed.
-            // Make sure that MockPipeWriter.PinnedBlockMemoryPoolBlockSize matches PinnedBlockMemoryPool._blockSize or else
+            // Make sure that MockPipeWriter.PinnedBlockMemoryPoolBlockSize matches
+            // PinnedBlockMemoryPool._blockSize or else
             // it might take more or less calls to the inner PipeWriter's GetMemory method to copy all the data.
             Assert.Equal(3, mockPipeWriter.GetMemoryCallCount);
             Assert.Equal(3, mockPipeWriter.AdvanceCallCount);

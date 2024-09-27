@@ -32,7 +32,7 @@ namespace System.Runtime.CompilerServices
         AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Field,
         AllowMultiple = true
     )]
-    /*public*/sealed class PreserveDependencyAttribute : Attribute
+/*public*/sealed class PreserveDependencyAttribute : Attribute
     {
         public PreserveDependencyAttribute(string memberSignature) { }
 

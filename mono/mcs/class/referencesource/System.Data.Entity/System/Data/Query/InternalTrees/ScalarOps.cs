@@ -756,7 +756,8 @@ namespace System.Data.Query.InternalTrees
     /// <summary>
     /// An internal cast operation. (Softly) Convert a type instance into an instance of another type
     ///
-    /// This Op is intended to capture "promotion" semantics. (ie) int16 promotes to an int32; Customer promotes to Person
+    /// This Op is intended to capture "promotion" semantics. (ie) int16 promotes to an int32; Customer
+    // promotes to Person
     /// etc. This Op is intended to shield the PlanCompiler from having to reason about
     /// the promotion semantics; and is intended to make the query tree very
     /// explicit
@@ -1243,7 +1244,8 @@ namespace System.Data.Query.InternalTrees
 
         #region public APIs
         /// <summary>
-        /// True if the entity constructor is scoped to a particular entity set or null (scoped as "unscoped").
+        /// True if the entity constructor is scoped to a particular entity set or null (scoped as
+        // "unscoped").
         /// False if the scope is not yet known. Scope is determined in PreProcessor.
         /// </summary>
         internal bool Scoped
@@ -1370,7 +1372,8 @@ namespace System.Data.Query.InternalTrees
     }
 
     /// <summary>
-    /// Polymorphic new instance creation (takes all properties of all types in the hierarchy + discriminator)
+    /// Polymorphic new instance creation (takes all properties of all types in the hierarchy +
+    // discriminator)
     /// </summary>
     internal sealed class DiscriminatedNewEntityOp : NewEntityBaseOp
     {

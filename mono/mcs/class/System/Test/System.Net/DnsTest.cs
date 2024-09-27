@@ -635,18 +635,18 @@ namespace MonoTests.System.Net
         /* This isn't used anymore, but could be useful for debugging
         static void printIPHostEntry(IPHostEntry h)
         {
-            Console.WriteLine("----------------------------------------------------");
-            Console.WriteLine("Host name:");
-            Console.WriteLine(h.HostName);
-            Console.WriteLine("IP addresses:");
-            IPAddress[] list = h.AddressList;
-            for(int i = 0; i < list.Length; ++i)
-                Console.WriteLine(list[i]);
-            Console.WriteLine("Aliases:");
-            string[] aliases = h.Aliases;
-            for(int i = 0; i < aliases.Length; ++i)
-                Console.WriteLine(aliases[i]);
-            Console.WriteLine("----------------------------------------------------");
+        Console.WriteLine("----------------------------------------------------");
+        Console.WriteLine("Host name:");
+        Console.WriteLine(h.HostName);
+        Console.WriteLine("IP addresses:");
+        IPAddress[] list = h.AddressList;
+        for(int i = 0; i < list.Length; ++i)
+        Console.WriteLine(list[i]);
+        Console.WriteLine("Aliases:");
+        string[] aliases = h.Aliases;
+        for(int i = 0; i < aliases.Length; ++i)
+        Console.WriteLine(aliases[i]);
+        Console.WriteLine("----------------------------------------------------");
         }
         */
     }

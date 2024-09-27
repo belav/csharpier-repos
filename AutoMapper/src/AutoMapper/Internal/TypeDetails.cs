@@ -222,7 +222,8 @@ public class TypeDetails
 
     private MemberInfo[] BuildReadAccessors()
     {
-        // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter this to one of those properties
+        // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter
+        // this to one of those properties
         IEnumerable<MemberInfo> members = GetProperties(PropertyReadable)
             .GroupBy(x => x.Name) // group properties of the same name together
             .Select(x => x.First());
@@ -235,7 +236,8 @@ public class TypeDetails
 
     private MemberInfo[] BuildWriteAccessors()
     {
-        // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter this to one of those properties
+        // Multiple types may define the same property (e.g. the class and multiple interfaces) - filter
+        // this to one of those properties
         IEnumerable<MemberInfo> members = GetProperties(PropertyWritable)
             .GroupBy(x => x.Name) // group properties of the same name together
             .Select(x => x.FirstOrDefault(y => y.CanWrite && y.CanRead) ?? x.First()); // favor the first property that can both read & write - otherwise pick the first one

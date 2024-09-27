@@ -19,7 +19,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">XML reader over the RSTR</param>
         /// <param name="context">Current Serialization context.</param>
         /// <returns>RequestSecurityTokenResponse object if the deserialization was successful</returns>
-        /// <exception cref="ArgumentNullException">The given reader or context parameter is null</exception>
+        /// <exception cref="ArgumentNullException">The given reader or context parameter is
+        // null</exception>
         /// <exception cref="WSTrustSerializationException">There was an error parsing the RSTR</exception>
         public override RequestSecurityTokenResponse ReadXml(
             XmlReader reader,
@@ -48,10 +49,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// Override of the base class that Reads a specific child element inside the RSTR.
         /// </summary>
         /// <param name="reader">Reader pointing at an element to read inside the RSTR.</param>
-        /// <param name="rstr">The RequestSecurityTokenResponse element that is being populated from the reader.</param>
+        /// <param name="rstr">The RequestSecurityTokenResponse element that is being populated from the
+        // reader.</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is null.</exception>
-        /// <exception cref="WSTrustSerializationException">Unable to deserialize the current parameter.</exception>
+        /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is
+        // null.</exception>
+        /// <exception cref="WSTrustSerializationException">Unable to deserialize the current
+        // parameter.</exception>
         public override void ReadXmlElement(
             XmlReader reader,
             RequestSecurityTokenResponse rstr,
@@ -87,7 +91,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="rstr">The response instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is null.</exception>
+        /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is
+        // null.</exception>
         public override void WriteKnownResponseElement(
             RequestSecurityTokenResponse rstr,
             XmlWriter writer,
@@ -124,7 +129,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="response">RequestSecurityTokenRespone object to be serialized</param>
         /// <param name="writer">XML writer to serialize into</param>
         /// <param name="context">Current Serialization context.</param>
-        /// <exception cref="ArgumentNullException">The response or writer or context parameter is null.</exception>
+        /// <exception cref="ArgumentNullException">The response or writer or context parameter is
+        // null.</exception>
         public override void WriteXml(
             RequestSecurityTokenResponse response,
             XmlWriter writer,
@@ -203,7 +209,8 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 
         /// <summary>
-        /// Checks if the given reader is positioned at a RequestSecurityTokenResponse element with namespace
+        /// Checks if the given reader is positioned at a RequestSecurityTokenResponse element with
+        // namespace
         /// 'http://schemas.xmlsoap.org/ws/2005/02/trust'
         /// </summary>
         /// <param name="reader">The reader to read from</param>

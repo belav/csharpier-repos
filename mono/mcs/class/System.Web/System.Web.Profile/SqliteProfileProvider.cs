@@ -559,7 +559,8 @@ namespace System.Web.Profile
         }
 
         /// <summary>
-        /// Updates the LastActivityDate and LastUpdatedDate values when profile properties are accessed by the
+        /// Updates the LastActivityDate and LastUpdatedDate values when profile properties are accessed by
+        // the
         /// GetPropertyValues and SetPropertyValues methods.
         /// Passing true as the activityOnly parameter will update only the LastActivityDate.
         /// </summary>

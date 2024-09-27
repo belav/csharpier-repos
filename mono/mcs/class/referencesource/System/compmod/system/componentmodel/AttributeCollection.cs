@@ -7,8 +7,9 @@
 using System.Diagnostics.CodeAnalysis;
 
 /*
- This class has the HostProtectionAttribute. The purpose of this attribute is to enforce host-specific programming model guidelines, not security behavior.
- Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
+This class has the HostProtectionAttribute. The purpose of this attribute is to enforce
+host-specific programming model guidelines, not security behavior.
+Suppress FxCop message - BUT REVISIT IF ADDING NEW SECURITY ATTRIBUTES.
 */
 [assembly: SuppressMessage(
     "Microsoft.Security",

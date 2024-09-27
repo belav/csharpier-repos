@@ -1940,7 +1940,8 @@ public class Http3RequestTests : LoggedTest
 
             // TODO https://github.com/dotnet/runtime/issues/56944
             //Logger.LogInformation("Sending request after GOAWAY.");
-            //var response2 = await client.SendAsync(CreateHttp3Request(HttpMethod.Get, $"https://127.0.0.1:{port}/2"), CancellationToken.None);
+            //var response2 = await client.SendAsync(CreateHttp3Request(HttpMethod.Get,
+            // $"https://127.0.0.1:{port}/2"), CancellationToken.None);
             //response2.EnsureSuccessStatusCode();
 
             // Allow request to finish so connection shutdown can happen.
@@ -2186,11 +2187,13 @@ public class Http3RequestTests : LoggedTest
             protocol: protocol,
             configureKestrel: kestrel =>
             {
-                // Disable the min rate limit to ensure a shutdown timeout aborts an ongoing read and not the rate limit.
+                // Disable the min rate limit to ensure a shutdown timeout aborts an ongoing read and not the rate
+                // limit.
                 // This could also be fixed by sending more data from the client.
                 kestrel.Limits.MinRequestBodyDataRate = null;
 
-                // This would normally be done automatically for us if the "configureKestrel" callback we're in was left null.
+                // This would normally be done automatically for us if the "configureKestrel" callback we're in was
+                // left null.
                 kestrel.Listen(
                     IPAddress.Loopback,
                     0,

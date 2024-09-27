@@ -258,15 +258,15 @@ namespace System.Data.OleDb
             }
         }
 
-        /*public OleDbCommand CreateCommand() {
-            OleDbCommand cmd = Connection.CreateCommand();
-            cmd.Transaction = this;
-            return cmd;
-        }
+/*public OleDbCommand CreateCommand() {
+OleDbCommand cmd = Connection.CreateCommand();
+cmd.Transaction = this;
+return cmd;
+}
 
-        IDbCommand IDbTransaction.CreateCommand() {
-            return CreateCommand();
-        }*/
+IDbCommand IDbTransaction.CreateCommand() {
+return CreateCommand();
+}*/
 
         protected override void Dispose(bool disposing)
         {
@@ -311,7 +311,7 @@ namespace System.Data.OleDb
             RollbackInternal(true); // no recover if this throws an exception
         }
 
-        /*protected virtual*/
+/*protected virtual*/
         internal OleDbHResult RollbackInternal(bool exceptionHandling)
         {
             OleDbHResult hr = 0;

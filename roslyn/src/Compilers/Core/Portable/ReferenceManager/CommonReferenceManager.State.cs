@@ -96,7 +96,8 @@ namespace Microsoft.CodeAnalysis
         private ThreeState _lazyHasCircularReference;
 
         /// <summary>
-        /// A map from a metadata reference to an index to <see cref="_lazyReferencedAssemblies"/> array. Do not access
+        /// A map from a metadata reference to an index to <see cref="_lazyReferencedAssemblies"/> array. Do
+        // not access
         /// directly, use <see cref="_lazyReferencedAssembliesMap"/> property instead.
         /// </summary>
         private Dictionary<MetadataReference, int>? _lazyReferencedAssembliesMap;
@@ -112,8 +113,10 @@ namespace Microsoft.CodeAnalysis
         private Dictionary<MetadataReference, int>? _lazyReferencedModuleIndexMap;
 
         /// <summary>
-        /// Maps (containing syntax tree file name, reference string) of #r directive to a resolved metadata reference.
-        /// If multiple #r's in the same tree use the same value as a reference the resolved metadata reference is the same as well.
+        /// Maps (containing syntax tree file name, reference string) of #r directive to a resolved metadata
+        // reference.
+        /// If multiple #r's in the same tree use the same value as a reference the resolved metadata
+        // reference is the same as well.
         /// </summary>
         private IDictionary<(string, string), MetadataReference>? _lazyReferenceDirectiveMap;
 
@@ -122,8 +125,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// The references are in the order they appear in syntax trees. This order is currently preserved
-        /// as syntax trees are added or removed, but we might decide to share reference manager between compilations
-        /// with different order of #r's. It doesn't seem this would be an issue since all #r's within the compilation
+        /// as syntax trees are added or removed, but we might decide to share reference manager between
+        // compilations
+        /// with different order of #r's. It doesn't seem this would be an issue since all #r's within the
+        // compilation
         /// have the same "priority" with respect to each other.
         /// </remarks>
         private ImmutableArray<MetadataReference> _lazyDirectiveReferences;
@@ -132,12 +137,18 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Stores the results of implicit reference resolutions.
-        /// If <see cref="MetadataReferenceResolver.ResolveMissingAssemblies"/> is true the reference manager attempts to resolve assembly identities,
-        /// that do not match any explicit metadata references passed to the compilation (or specified via #r directive).
-        /// For each such assembly identity <see cref="MetadataReferenceResolver.ResolveMissingAssembly(MetadataReference, AssemblyIdentity)"/> is called
+        /// If <see cref="MetadataReferenceResolver.ResolveMissingAssemblies"/> is true the reference
+        // manager attempts to resolve assembly identities,
+        /// that do not match any explicit metadata references passed to the compilation (or specified via
+        // #r directive).
+        /// For each such assembly identity <see
+        // cref="MetadataReferenceResolver.ResolveMissingAssembly(MetadataReference, AssemblyIdentity)"/> is
+        // called
         /// and its result is captured in this map.
-        /// The map also stores failures - the reference is null if the assembly of the given identity is not found by the resolver.
-        /// This is important to maintain consistency, especially across multiple submissions (e.g. the reference is not found during compilation of the first submission
+        /// The map also stores failures - the reference is null if the assembly of the given identity is
+        // not found by the resolver.
+        /// This is important to maintain consistency, especially across multiple submissions (e.g. the
+        // reference is not found during compilation of the first submission
         /// but then it is available when the second submission is compiled).
         /// </summary>
         private ImmutableDictionary<
@@ -159,25 +170,31 @@ namespace Microsoft.CodeAnalysis
         /// COR library symbol, or null if the compilation itself is the COR library.
         /// </summary>
         /// <remarks>
-        /// If the compilation being built is the COR library we don't want to store its source assembly symbol
-        /// here since we wouldn't be able to share the state among subsequent compilations that are derived from it
+        /// If the compilation being built is the COR library we don't want to store its source assembly
+        // symbol
+        /// here since we wouldn't be able to share the state among subsequent compilations that are derived
+        // from it
         /// (each of them has its own source assembly symbol).
         /// </remarks>
         private TAssemblySymbol? _lazyCorLibraryOpt;
 
         /// <summary>
-        /// Standalone modules referenced by the compilation (doesn't include the manifest module of the compilation).
+        /// Standalone modules referenced by the compilation (doesn't include the manifest module of the
+        // compilation).
         /// </summary>
         /// <remarks>
-        /// <see cref="_lazyReferencedModules"/>[i] corresponds to <see cref="_lazyReferencedModulesReferences"/>[i].
+        /// <see cref="_lazyReferencedModules"/>[i] corresponds to <see
+        // cref="_lazyReferencedModulesReferences"/>[i].
         /// </remarks>
         private ImmutableArray<PEModule> _lazyReferencedModules;
 
         /// <summary>
-        /// References of standalone modules referenced by the compilation (doesn't include the manifest module of the compilation).
+        /// References of standalone modules referenced by the compilation (doesn't include the manifest
+        // module of the compilation).
         /// </summary>
         /// <remarks>
-        /// <see cref="_lazyReferencedModules"/>[i] corresponds to <see cref="_lazyReferencedModulesReferences"/>[i].
+        /// <see cref="_lazyReferencedModules"/>[i] corresponds to <see
+        // cref="_lazyReferencedModulesReferences"/>[i].
         /// </remarks>
         private ImmutableArray<ModuleReferences<TAssemblySymbol>> _lazyReferencedModulesReferences;
 
@@ -190,12 +207,14 @@ namespace Microsoft.CodeAnalysis
         /// Aliases used by assemblies referenced directly by the source module of the compilation.
         /// </summary>
         /// <remarks>
-        /// Aliases <see cref="_lazyAliasesOfReferencedAssemblies"/>[i] are of an assembly <see cref="_lazyReferencedAssemblies"/>[i].
+        /// Aliases <see cref="_lazyAliasesOfReferencedAssemblies"/>[i] are of an assembly <see
+        // cref="_lazyReferencedAssemblies"/>[i].
         /// </remarks>
         private ImmutableArray<ImmutableArray<string>> _lazyAliasesOfReferencedAssemblies;
 
         /// <summary>
-        /// A map capturing <see cref="MetadataReference"/>s that were "merged" to a single referenced assembly
+        /// A map capturing <see cref="MetadataReference"/>s that were "merged" to a single referenced
+        // assembly
         /// associated with a key in the map.
         /// The keys are a subset of keys from <see cref="_lazyReferencedAssembliesMap"/>.
         /// </summary>
@@ -371,7 +390,8 @@ namespace Microsoft.CodeAnalysis
         #endregion
 
         /// <summary>
-        /// Call only while holding <see cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
+        /// Call only while holding <see
+        // cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
         /// </summary>
         [Conditional("DEBUG")]
         internal void AssertUnbound()
@@ -433,7 +453,8 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Call only while holding <see cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
+        /// Call only while holding <see
+        // cref="CommonReferenceManager.SymbolCacheAndReferenceManagerStateGuard"/>.
         /// </summary>
         internal void InitializeNoLock(
             Dictionary<MetadataReference, int> referencedAssembliesMap,
@@ -489,8 +510,10 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Global namespaces of assembly references that have been superseded by an assembly reference with a higher version are
-        /// hidden behind <see cref="s_supersededAlias"/> to avoid ambiguity when they are accessed from source.
+        /// Global namespaces of assembly references that have been superseded by an assembly reference with
+        // a higher version are
+        /// hidden behind <see cref="s_supersededAlias"/> to avoid ambiguity when they are accessed from
+        // source.
         /// All existing aliases of a superseded assembly are discarded.
         /// </summary>
         private static readonly ImmutableArray<string> s_supersededAlias = ImmutableArray.Create(
@@ -595,13 +618,17 @@ namespace Microsoft.CodeAnalysis
         }
 
         /// <summary>
-        /// Calculates map from the identities of specified symbols to the corresponding identities in the original EnC baseline metadata.
-        /// The map only includes an entry for identities that differ, i.e. for symbols representing assembly references of the current compilation that have different identities
-        /// than the corresponding identity in baseline metadata AssemblyRef table. The key comparer of the map ignores build and revision parts of the version number,
+        /// Calculates map from the identities of specified symbols to the corresponding identities in the
+        // original EnC baseline metadata.
+        /// The map only includes an entry for identities that differ, i.e. for symbols representing
+        // assembly references of the current compilation that have different identities
+        /// than the corresponding identity in baseline metadata AssemblyRef table. The key comparer of the
+        // map ignores build and revision parts of the version number,
         /// since these might change if the original version included wildcard.
         /// </summary>
         /// <param name="symbols">Assembly symbols for references of the current compilation.</param>
-        /// <param name="originalIdentities">Identities in the baseline. <paramref name="originalIdentities"/>[i] corresponds to <paramref name="symbols"/>[i].</param>
+        /// <param name="originalIdentities">Identities in the baseline. <paramref
+        // name="originalIdentities"/>[i] corresponds to <paramref name="symbols"/>[i].</param>
         internal static ImmutableDictionary<
             AssemblyIdentity,
             AssemblyIdentity
@@ -634,7 +661,8 @@ namespace Microsoft.CodeAnalysis
 
                     if (lazyBuilder.ContainsKey(sourceIdentity))
                     {
-                        // The compilation references multiple assemblies whose versions only differ in auto-generated build and/or revision numbers.
+                        // The compilation references multiple assemblies whose versions only differ in auto-generated build
+                        // and/or revision numbers.
                         throw new NotSupportedException(
                             CodeAnalysisResources.CompilationReferencesAssembliesWithDifferentAutoGeneratedVersion
                         );
@@ -666,7 +694,8 @@ namespace Microsoft.CodeAnalysis
                 return false;
             }
 
-            // build and revision parts can differ only if the corresponding source versions were auto-generated:
+            // build and revision parts can differ only if the corresponding source versions were
+            // auto-generated:
             var versionPattern = candidateSymbol.AssemblyVersionPattern;
             Debug.Assert(
                 versionPattern is null
@@ -692,12 +721,16 @@ namespace Microsoft.CodeAnalysis
 
         // #r references are recursive, their aliases should be merged into all their dependencies.
         //
-        // For example, if a compilation has a reference to LibA with alias A and the user #r's LibB with alias B,
-        // which references LibA, LibA should be available under both aliases A and B. B is usually "global",
-        // which means LibA namespaces should become available to the compilation without any qualification when #r LibB
+        // For example, if a compilation has a reference to LibA with alias A and the user #r's LibB with
+        // alias B,
+        // which references LibA, LibA should be available under both aliases A and B. B is usually
+        // "global",
+        // which means LibA namespaces should become available to the compilation without any qualification
+        // when #r LibB
         // is encountered.
         //
-        // Pairs: (assembly index -- index into bindingResult array; index of the #r reference in referenceMap array).
+        // Pairs: (assembly index -- index into bindingResult array; index of the #r reference in
+        // referenceMap array).
         private static void PropagateRecursiveAliases(
             BoundInputAssembly[] bindingResult,
             ImmutableArray<ResolvedReference> referenceMap,

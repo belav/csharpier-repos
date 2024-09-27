@@ -7,27 +7,30 @@
 /*++
 Abstract:
 
-    This file contains a set of predefined parseres that a user can derive from
-    See also GenericUriParser.cs file for more user choices
-    
-    Note these parsers are for user to derive from hence they are nor "simple" nor "built-in"
+This file contains a set of predefined parseres that a user can derive from
+See also GenericUriParser.cs file for more user choices
+
+Note these parsers are for user to derive from hence they are nor "simple" nor "built-in"
 
 Author:
-    Alexei Vopilov    Jul 26 2004
+Alexei Vopilov    Jul 26 2004
 
 Revision History:
 --*/
 
 //
-// ATTN: The below types must be compile-time registered with UriParser.CheckSetIsSimpleFlag() method
+// ATTN: The below types must be compile-time registered with UriParser.CheckSetIsSimpleFlag()
+// method
 //       to avoid calling into the user code if there is no one.
 //
 namespace System
 {
     //
     //  The HTTP Uri syntax description
-    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath | MayHaveQuery | MayHaveFragment |
-    //  | PathIsRooted | ConvertPathSlashes | CompressPath | CanonicalizeAsFilePath | UnEscapeDotsAndSlashes
+    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath |
+    // MayHaveQuery | MayHaveFragment |
+    //  | PathIsRooted | ConvertPathSlashes | CompressPath | CanonicalizeAsFilePath |
+    // UnEscapeDotsAndSlashes
     //
     public class HttpStyleUriParser : UriParser
     {
@@ -37,7 +40,8 @@ namespace System
 
     //
     //  The FTP Uri syntax description
-    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath | MayHaveFragment | PathIsRooted
+    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath |
+    // MayHaveFragment | PathIsRooted
     //  ConvertPathSlashes | CompressPath | CanonicalizeAsFilePath
     //
     public class FtpStyleUriParser : UriParser
@@ -48,8 +52,10 @@ namespace System
 
     //
     //  The FILE Uri syntax description
-    //  MustHaveAuthority | AllowEmptyHost| AllowAnInternetHost | MayHavePath | MayHaveFragment | PathIsRooted
-    //  | FileLikeUri | AllowDOSPath | ConvertPathSlashes | CompressPath | CanonicalizeAsFilePath | UnEscapeDotsAndSlashes
+    //  MustHaveAuthority | AllowEmptyHost| AllowAnInternetHost | MayHavePath | MayHaveFragment |
+    // PathIsRooted
+    //  | FileLikeUri | AllowDOSPath | ConvertPathSlashes | CompressPath | CanonicalizeAsFilePath |
+    // UnEscapeDotsAndSlashes
     //
     public class FileStyleUriParser : UriParser
     {
@@ -69,7 +75,8 @@ namespace System
 
     //
     //  The GOPHER Uri syntax description
-    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath | MayHaveFragment | PathIsRooted
+    //  MustHaveAuthority | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath |
+    // MayHaveFragment | PathIsRooted
     //
     public class GopherStyleUriParser : UriParser
     {
@@ -79,7 +86,8 @@ namespace System
 
     //
     //  The LDAP Uri syntax description
-    //  MustHaveAuthority | AllowEmptyHost | AllowAnInternetHost | MayHaveUserInfo | MayHavePort | MayHavePath | MayHaveQuery | MayHaveFragment | PathIsRooted
+    //  MustHaveAuthority | AllowEmptyHost | AllowAnInternetHost | MayHaveUserInfo | MayHavePort |
+    // MayHavePath | MayHaveQuery | MayHaveFragment | PathIsRooted
     //
     public class LdapStyleUriParser : UriParser
     {

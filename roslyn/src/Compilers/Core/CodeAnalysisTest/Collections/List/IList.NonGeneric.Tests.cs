@@ -3,9 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 // NOTE: This code is derived from an implementation originally in dotnet/runtime:
+//
 // https://github.com/dotnet/runtime/blob/v5.0.2/src/libraries/Common/tests/System/Collections/IList.NonGeneric.Tests.cs
 //
-// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating changes made to the
+// See the commentary in https://github.com/dotnet/roslyn/pull/50156 for notes on incorporating
+// changes made to the
 // reference implementation.
 
 using System;
@@ -83,12 +85,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected virtual bool IList_NonGeneric_RemoveNonExistent_Throws => false;
 
         /// <summary>
-        /// When calling Current of the enumerator after the end of the list and list is extended by new items.
+        /// When calling Current of the enumerator after the end of the list and list is extended by new
+        // items.
         /// Tests are included to cover two behavioral scenarios:
         ///   - Throwing an InvalidOperationException
         ///   - Returning an undefined value.
         ///
-        /// If this property is set to true, the tests ensure that the exception is thrown. The default value is
+        /// If this property is set to true, the tests ensure that the exception is thrown. The default
+        // value is
         /// the same as Enumerator_Current_UndefinedOperation_Throws.
         /// </summary>
         protected virtual bool IList_CurrentAfterAdd_Throws =>

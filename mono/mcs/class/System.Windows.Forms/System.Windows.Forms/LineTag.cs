@@ -337,7 +337,8 @@ namespace System.Windows.Forms
         #endregion
 
         #region Public Methods
-        ///<summary>Break a tag into two with identical attributes; pos is 1-based; returns tag starting at &gt;pos&lt; or null if end-of-line</summary>
+        ///<summary>Break a tag into two with identical attributes; pos is 1-based; returns tag starting at
+        // &gt;pos&lt; or null if end-of-line</summary>
         public LineTag Break(int pos)
         {
             LineTag new_tag;
@@ -563,7 +564,8 @@ namespace System.Windows.Forms
             return false;
         }
 
-        /// <summary>Finds the tag that describes the character at position 'pos' (0 based) on 'line'</summary>
+        /// <summary>Finds the tag that describes the character at position 'pos' (0 based) on
+        // 'line'</summary>
         public static LineTag FindTag(Line line, int pos)
         {
             LineTag tag = line.tags;
@@ -921,7 +923,8 @@ namespace System.Windows.Forms
                 tag.CharOffset = char_offset;
             if ((FormatSpecified.Visibility & specified) == FormatSpecified.Visibility)
                 tag.Visible = visible;
-            // Console.WriteLine ("setting format:   {0}  {1}   new color {2}", color.Color, specified, tag.color.Color);
+            // Console.WriteLine ("setting format:   {0}  {1}   new color {2}", color.Color, specified,
+            // tag.color.Color);
         }
 
         public virtual SizeF SizeOfPosition(Graphics dc, int pos)

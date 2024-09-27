@@ -1,17 +1,17 @@
 /* ****************************************************************************
- *
- * Copyright (c) Microsoft Corporation.
- *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
- * copy of the license can be found in the License.html file at the root of this distribution. If
- * you cannot locate the  Apache License, Version 2.0, please send an email to
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
- * by the terms of the Apache License, Version 2.0.
- *
- * You must not remove this notice, or any other, from this software.
- *
- *
- * ***************************************************************************/
+*
+* Copyright (c) Microsoft Corporation.
+*
+* This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+* copy of the license can be found in the License.html file at the root of this distribution. If
+* you cannot locate the  Apache License, Version 2.0, please send an email to
+* dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
+* by the terms of the Apache License, Version 2.0.
+*
+* You must not remove this notice, or any other, from this software.
+*
+*
+* ***************************************************************************/
 
 #if CLR2
 namespace Microsoft.Scripting.Ast
@@ -82,12 +82,14 @@ namespace System.Linq.Expressions
         Constant,
 
         /// <summary>
-        /// A node that represents a cast or conversion operation. If the operation is a numeric conversion, it overflows silently if the converted value does not fit the target type.
+        /// A node that represents a cast or conversion operation. If the operation is a numeric conversion,
+        // it overflows silently if the converted value does not fit the target type.
         /// </summary>
         Convert,
 
         /// <summary>
-        /// A node that represents a cast or conversion operation. If the operation is a numeric conversion, an exception is thrown if the converted value does not fit the target type.
+        /// A node that represents a cast or conversion operation. If the operation is a numeric conversion,
+        // an exception is thrown if the converted value does not fit the target type.
         /// </summary>
         ConvertChecked,
 
@@ -117,7 +119,8 @@ namespace System.Linq.Expressions
         GreaterThanOrEqual,
 
         /// <summary>
-        /// A node that represents applying a delegate or lambda expression to a list of argument expressions.
+        /// A node that represents applying a delegate or lambda expression to a list of argument
+        // expressions.
         /// </summary>
         Invoke,
 
@@ -142,7 +145,8 @@ namespace System.Linq.Expressions
         LessThanOrEqual,
 
         /// <summary>
-        /// A node that represents creating a new IEnumerable object and initializing it from a list of elements.
+        /// A node that represents creating a new IEnumerable object and initializing it from a list of
+        // elements.
         /// </summary>
         ListInit,
 
@@ -177,7 +181,9 @@ namespace System.Linq.Expressions
         Negate,
 
         /// <summary>
-        /// A node that represents a unary plus operation. The result of a predefined unary plus operation is simply the value of the operand, but user-defined implementations may have non-trivial results.
+        /// A node that represents a unary plus operation. The result of a predefined unary plus operation
+        // is simply the value of the operand, but user-defined implementations may have non-trivial
+        // results.
         /// </summary>
         UnaryPlus,
 
@@ -192,7 +198,8 @@ namespace System.Linq.Expressions
         New,
 
         /// <summary>
-        /// A node that represents creating a new one-dimensional array and initializing it from a list of elements.
+        /// A node that represents creating a new one-dimensional array and initializing it from a list of
+        // elements.
         /// </summary>
         NewArrayInit,
 
@@ -222,7 +229,8 @@ namespace System.Linq.Expressions
         OrElse,
 
         /// <summary>
-        /// A node that represents a reference to a parameter or variable defined in the context of the expression.
+        /// A node that represents a reference to a parameter or variable defined in the context of the
+        // expression.
         /// </summary>
         Parameter,
 
@@ -232,7 +240,8 @@ namespace System.Linq.Expressions
         Power,
 
         /// <summary>
-        /// A node that represents an expression that has a constant value of type Expression. A Quote node can contain references to parameters defined in the context of the expression it represents.
+        /// A node that represents an expression that has a constant value of type Expression. A Quote node
+        // can contain references to parameters defined in the context of the expression it represents.
         /// </summary>
         Quote,
 
@@ -252,7 +261,8 @@ namespace System.Linq.Expressions
         SubtractChecked,
 
         /// <summary>
-        /// A node that represents an explicit reference or boxing conversion where null reference (Nothing in Visual Basic) is supplied if the conversion fails.
+        /// A node that represents an explicit reference or boxing conversion where null reference (Nothing
+        // in Visual Basic) is supplied if the conversion fails.
         /// </summary>
         TypeAs,
 

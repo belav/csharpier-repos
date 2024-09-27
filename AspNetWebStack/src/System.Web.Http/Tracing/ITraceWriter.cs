@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Net.Http;
 
@@ -35,7 +36,8 @@ namespace System.Web.Http.Tracing
         /// <param name="category">The logical category for the trace.  Users may define their own.</param>
         /// <param name="level">The <see cref="TraceLevel"/> at which to write this trace.</param>
         /// <param name="traceAction">The action to invoke if tracing is enabled.  The caller is expected
-        /// to fill in any or all of the values of the given <see cref="TraceRecord"/> in this action.</param>
+        /// to fill in any or all of the values of the given <see cref="TraceRecord"/> in this
+        // action.</param>
         void Trace(
             HttpRequestMessage request,
             string category,

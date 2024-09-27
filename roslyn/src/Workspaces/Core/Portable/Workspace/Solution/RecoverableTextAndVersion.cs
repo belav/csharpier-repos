@@ -20,14 +20,16 @@ namespace Microsoft.CodeAnalysis
         SolutionServices services
     ) : ITextAndVersionSource
     {
-        // Starts as ITextAndVersionSource and is replaced with RecoverableText when the TextAndVersion value is requested.
+        // Starts as ITextAndVersionSource and is replaced with RecoverableText when the TextAndVersion
+        // value is requested.
         // At that point the initial source is no longer referenced and can be garbage collected.
         private object _initialSourceOrRecoverableText = initialSource;
 
         public bool CanReloadText { get; } = initialSource.CanReloadText;
 
         /// <returns>
-        /// True if the <paramref name="source"/> is available, false if <paramref name="text"/> is returned.
+        /// True if the <paramref name="source"/> is available, false if <paramref name="text"/> is
+        // returned.
         /// </returns>
         private bool TryGetInitialSourceOrRecoverableText(
             [NotNullWhen(true)] out ITextAndVersionSource? source,

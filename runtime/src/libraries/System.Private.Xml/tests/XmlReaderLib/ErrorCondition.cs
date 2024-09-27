@@ -1080,8 +1080,10 @@ namespace System.Xml.Tests
         //[Variation("XmlReader.GetAttribute(String.Empty, String.Empty)",  Param = 4)]
         //[Variation("XmlReader.MoveToAttribute(String.Empty)",  Param = 5)]
         //[Variation("XmlReader.MoveToAttribute(String.Empty, String.Empty)",  Param = 6)]
-        //[Variation("XmlReader.ReadElementContentAs(String.Empty, String.Empty, String.Empty, String.Empty)",  Param = 9)]
-        //[Variation("XmlReader.ReadElementContentAs(String.Empty, String.Empty, 'a', String.Empty)",  Param = 10)]
+        //[Variation("XmlReader.ReadElementContentAs(String.Empty, String.Empty, String.Empty,
+        // String.Empty)",  Param = 9)]
+        //[Variation("XmlReader.ReadElementContentAs(String.Empty, String.Empty, 'a', String.Empty)",  Param
+        // = 10)]
         //[Variation("XmlReader.ReadElementContentAsBoolean(String.Empty, String.Empty)",  Param = 13)]
         //[Variation("XmlReader.ReadElementContentAsBoolean('a', String.Empty)",  Param = 14)]
         //[Variation("XmlReader.ReadElementContentAsDateTime(String.Empty, String.Empty)",  Param = 15)]

@@ -4,15 +4,20 @@ using System.Runtime.InteropServices;
 using System.Web;
 using ApplicationPreStartMethods.Tests;
 
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PublicStaticMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PublicInstanceMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PublicStaticMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PublicInstanceMethod")]
 [assembly: PreApplicationStartMethod(
     typeof(ApplicationPreStartMethods.Tests.PreStartMethods),
     "InternalInstanceMethod"
 )]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "InternalStaticMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PrivateInstanceMethod")]
-//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods), "PrivateStaticMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "InternalStaticMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PrivateInstanceMethod")]
+//[assembly: PreApplicationStartMethod (typeof (ApplicationPreStartMethods.Tests.PreStartMethods),
+// "PrivateStaticMethod")]
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information

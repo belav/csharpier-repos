@@ -25,13 +25,15 @@ namespace OLEDB.Test.ModuleCore
             CError.Write(ch.ToString());
         }
 
-        //Overloads - We also implement "string" since its much more efficient and TextWriter will call this instead
+        //Overloads - We also implement "string" since its much more efficient and TextWriter will call this
+        // instead
         public override void Write(string strText)
         {
             CError.Write(strText);
         }
 
-        //Overloads - We also implement "string" since its much more efficient and TextWriter will call this instead
+        //Overloads - We also implement "string" since its much more efficient and TextWriter will call this
+        // instead
         public override void Write(char[] ch)
         {
             //Note: This is a workaround the TextWriter::Write(char[]) that incorrectly

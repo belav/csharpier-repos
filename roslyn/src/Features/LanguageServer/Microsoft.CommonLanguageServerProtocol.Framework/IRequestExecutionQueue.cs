@@ -11,7 +11,8 @@ namespace Microsoft.CommonLanguageServerProtocol.Framework;
 /// <summary>
 /// Queues requests to be executed in the proper order.
 /// </summary>
-/// <typeparam name="TRequestContext">The type of the RequestContext to be used by the handler.</typeparam>
+/// <typeparam name="TRequestContext">The type of the RequestContext to be used by the
+// handler.</typeparam>
 public interface IRequestExecutionQueue<TRequestContext> : IAsyncDisposable
 {
     /// <summary>

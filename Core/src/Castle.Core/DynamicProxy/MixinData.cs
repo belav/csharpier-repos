@@ -34,7 +34,8 @@ namespace Castle.DynamicProxy
         ///   - Sort them by full name
         ///   - Return them by position
         ///
-        /// The idea is to have reproducible behavior for the case that mixins are registered in different orders.
+        /// The idea is to have reproducible behavior for the case that mixins are registered in different
+        // orders.
         /// This method is here because it is required
         /// </summary>
         public MixinData(IEnumerable<object> mixinInstances)
@@ -154,7 +155,8 @@ namespace Castle.DynamicProxy
             return mixinPositions.ContainsKey(mixinInterfaceType);
         }
 
-        // For two MixinData objects being regarded equal, only the sorted mixin types are considered, not the actual instances.
+        // For two MixinData objects being regarded equal, only the sorted mixin types are considered, not
+        // the actual instances.
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(this, obj))
@@ -200,7 +202,8 @@ namespace Castle.DynamicProxy
             return true;
         }
 
-        // For two MixinData objects being regarded equal, only the mixin types are considered, not the actual instances.
+        // For two MixinData objects being regarded equal, only the mixin types are considered, not the
+        // actual instances.
         public override int GetHashCode()
         {
             var hashCode = 0;

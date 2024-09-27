@@ -7,7 +7,8 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace System.Reflection
 {
-    // This file defines an internal class used to throw exceptions. The main purpose is to reduce code size.
+    // This file defines an internal class used to throw exceptions. The main purpose is to reduce code
+    // size.
     // Also it improves the likelihood that callers will be inlined.
     internal static class Throw
     {

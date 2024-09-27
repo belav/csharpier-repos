@@ -20,7 +20,8 @@ internal interface IWorkspaceProjectFactoryService
 
     /// <summary>
     /// Returns the list of properties that are understood by the language service and can be passed to
-    /// <see cref="IWorkspaceProject.SetBuildSystemPropertiesAsync(IReadOnlyDictionary{string, string}, CancellationToken)"/> and to
+    /// <see cref="IWorkspaceProject.SetBuildSystemPropertiesAsync(IReadOnlyDictionary{string, string},
+    // CancellationToken)"/> and to
     /// <see cref="WorkspaceProjectCreationInfo.BuildSystemProperties"/>.
     /// </summary>
     Task<IReadOnlyCollection<string>> GetSupportedBuildSystemPropertiesAsync(

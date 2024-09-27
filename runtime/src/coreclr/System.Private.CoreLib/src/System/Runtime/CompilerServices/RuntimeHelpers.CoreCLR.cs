@@ -187,13 +187,15 @@ namespace System.Runtime.CompilerServices
 
         // This method ensures that there is sufficient stack to execute the average Framework function.
         // If there is not enough stack, then it throws System.InsufficientExecutionStackException.
-        // Note: this method is not part of the CER support, and is not to be confused with ProbeForSufficientStack.
+        // Note: this method is not part of the CER support, and is not to be confused with
+        // ProbeForSufficientStack.
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern void EnsureSufficientExecutionStack();
 
         // This method ensures that there is sufficient stack to execute the average Framework function.
         // If there is not enough stack, then it return false.
-        // Note: this method is not part of the CER support, and is not to be confused with ProbeForSufficientStack.
+        // Note: this method is not part of the CER support, and is not to be confused with
+        // ProbeForSufficientStack.
         [MethodImpl(MethodImplOptions.InternalCall)]
         public static extern bool TryEnsureSufficientExecutionStack();
 
@@ -242,7 +244,8 @@ namespace System.Runtime.CompilerServices
             throw new InvalidOperationException();
         }
 
-        /// <returns>true if given type is bitwise equatable (memcmp can be used for equality checking)</returns>
+        /// <returns>true if given type is bitwise equatable (memcmp can be used for equality
+        // checking)</returns>
         /// <remarks>
         /// Only use the result of this for Equals() comparison, not for CompareTo() comparison.
         /// </remarks>
@@ -326,7 +329,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Boxes a given value using an input <see cref="MethodTable"/> to determine its type.
         /// </summary>
-        /// <param name="methodTable">The <see cref="MethodTable"/> pointer to use to create the boxed instance.</param>
+        /// <param name="methodTable">The <see cref="MethodTable"/> pointer to use to create the boxed
+        // instance.</param>
         /// <param name="data">A reference to the data to box.</param>
         /// <returns>A boxed instance of the value at <paramref name="data"/>.</returns>
         /// <remarks>This method includes proper handling for nullable value types as well.</remarks>
@@ -336,7 +340,8 @@ namespace System.Runtime.CompilerServices
         // Given an object reference, returns its MethodTable*.
         //
         // WARNING: The caller has to ensure that MethodTable* does not get unloaded. The most robust way
-        // to achieve this is by using GC.KeepAlive on the object that the MethodTable* was fetched from, e.g.:
+        // to achieve this is by using GC.KeepAlive on the object that the MethodTable* was fetched from,
+        // e.g.:
         //
         // MethodTable* pMT = GetMethodTable(o);
         //
@@ -659,7 +664,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Gets a <see cref="TypeHandle"/> for the element type of the current type.
         /// </summary>
-        /// <remarks>This method should only be called when the current <see cref="MethodTable"/> instance represents an array or string type.</remarks>
+        /// <remarks>This method should only be called when the current <see cref="MethodTable"/> instance
+        // represents an array or string type.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public TypeHandle GetArrayElementTypeHandle()
         {
@@ -673,7 +679,8 @@ namespace System.Runtime.CompilerServices
     }
 
     /// <summary>
-    /// A type handle, which can wrap either a pointer to a <c>TypeDesc</c> or to a <see cref="MethodTable"/>.
+    /// A type handle, which can wrap either a pointer to a <c>TypeDesc</c> or to a <see
+    // cref="MethodTable"/>.
     /// </summary>
     internal unsafe struct TypeHandle
     {
@@ -708,7 +715,8 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Gets the <see cref="MethodTable"/> pointer wrapped by the current instance.
         /// </summary>
-        /// <remarks>This is only safe to call if <see cref="IsTypeDesc"/> returned <see langword="false"/>.</remarks>
+        /// <remarks>This is only safe to call if <see cref="IsTypeDesc"/> returned <see
+        // langword="false"/>.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MethodTable* AsMethodTable()
         {

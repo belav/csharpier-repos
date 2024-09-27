@@ -85,10 +85,14 @@ namespace System.Data.Common
                 if (!ADP.IsEmpty(assemblyQualifiedName))
                 {
                     // FXCop is concerned about the following line call to Get Type,
-                    // If this code is deemed safe during our security review we should add this warning to our exclusion list.
+                    // If this code is deemed safe during our security review we should add this warning to our
+                    // exclusion list.
                     // FXCop Message, pertaining to the call to GetType.
                     //
-                    // Secure late-binding methods,System.Data.dll!System.Data.Common.DbProviderFactories.GetFactory(System.Data.DataRow):System.Data.Common.DbProviderFactory,
+                    // Secure late-binding
+                    //
+                    //
+                    // methods,System.Data.dll!System.Data.Common.DbProviderFactories.GetFactory(System.Data.DataRow):System.Data.Common.DbProviderFactory,
                     Type providerType = Type.GetType(assemblyQualifiedName);
                     if (null != providerType)
                     {
@@ -145,16 +149,27 @@ namespace System.Data.Common
             return dataTable;
         }
 
-        // VSTFDevDiv # 624213: System.Data.Common.DbProviderFactories.GetFactoryClasses() still gets OracleClient provider in ClientSku environment.
+        // VSTFDevDiv # 624213: System.Data.Common.DbProviderFactories.GetFactoryClasses() still gets
+        // OracleClient provider in ClientSku environment.
         static private DataTable IncludeFrameworkFactoryClasses(DataTable configDataTable)
         {
             DataTable dataTable = DbProviderFactoriesConfigurationHandler.CreateProviderDataTable();
 
             // NOTES: Adding the following Framework DbProviderFactories
-            //  <add name="Odbc Data Provider" invariant="System.Data.Odbc" description=".Net Framework Data Provider for Odbc" type="System.Data.Odbc.OdbcFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
-            //  <add name="OleDb Data Provider" invariant="System.Data.OleDb" description=".Net Framework Data Provider for OleDb" type="System.Data.OleDb.OleDbFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
-            //  <add name="OracleClient Data Provider" invariant="System.Data.OracleClient" description=".Net Framework Data Provider for Oracle" type="System.Data.OracleClient.OracleClientFactory, System.Data.OracleClient, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
-            //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data, Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
+            //  <add name="Odbc Data Provider" invariant="System.Data.Odbc" description=".Net Framework Data
+            // Provider for Odbc" type="System.Data.Odbc.OdbcFactory, System.Data, Version=%ASSEMBLY_VERSION%,
+            // Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
+            //  <add name="OleDb Data Provider" invariant="System.Data.OleDb" description=".Net Framework Data
+            // Provider for OleDb" type="System.Data.OleDb.OleDbFactory, System.Data,
+            // Version=%ASSEMBLY_VERSION%,
+            // Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
+            //  <add name="OracleClient Data Provider" invariant="System.Data.OracleClient" description=".Net
+            // Framework Data Provider for Oracle" type="System.Data.OracleClient.OracleClientFactory,
+            // System.Data.OracleClient, Version=%ASSEMBLY_VERSION%, Culture=neutral,
+            // PublicKeyToken=%ECMA_PUBLICKEY%"/>
+            //  <add name="SqlClient Data Provider" invariant="System.Data.SqlClient" description=".Net
+            // Framework Data Provider for SqlServer" type="System.Data.SqlClient.SqlClientFactory, System.Data,
+            // Version=%ASSEMBLY_VERSION%, Culture=neutral, PublicKeyToken=%ECMA_PUBLICKEY%"/>
             Type sysDataType = typeof(System.Data.SqlClient.SqlClientFactory);
             string asmQualName = sysDataType
                 .AssemblyQualifiedName.ToString()
@@ -203,7 +218,8 @@ namespace System.Data.Common
                         );
                         if (providerType != null)
                         {
-                            // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException exception;
+                            // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException
+                            // exception;
                             System.Reflection.FieldInfo providerInstance = providerType.GetField(
                                 Instance,
                                 System.Reflection.BindingFlags.DeclaredOnly
@@ -275,7 +291,8 @@ namespace System.Data.Common
                         );
                         if (providerType != null)
                         {
-                            // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException exception;
+                            // NOTES: Try and create a instance; If it fails, it will throw a System.NullReferenceException
+                            // exception;
                             System.Reflection.FieldInfo providerInstance = providerType.GetField(
                                 Instance,
                                 System.Reflection.BindingFlags.DeclaredOnly
@@ -315,7 +332,8 @@ namespace System.Data.Common
                 }
                 catch (System.Data.ConstraintException)
                 {
-                    // NOTES: Ignore item; Already exist in the configTable, hence the ConstraintException; Move to the next item;
+                    // NOTES: Ignore item; Already exist in the configTable, hence the ConstraintException; Move to the
+                    // next item;
                 }
             }
 
@@ -395,7 +413,8 @@ namespace System.Data.Common
                 nameof(factoryTypeAssemblyQualifiedName)
             );
 
-            // this method performs a deferred registration: the type name specified is checked when the factory is requested for the first time.
+            // this method performs a deferred registration: the type name specified is checked when the factory
+            // is requested for the first time.
             _registeredFactories[providerInvariantName] = new ProviderRegistration(
                 factoryTypeAssemblyQualifiedName,
                 null
@@ -471,8 +490,10 @@ namespace System.Data.Common
             internal string FactoryTypeAssemblyQualifiedName { get; }
 
             /// <summary>
-            /// The cached instance of the type in <see cref="FactoryTypeAssemblyQualifiedName"/>. If null, this registation is seen as a deferred registration
-            /// and <see cref="FactoryTypeAssemblyQualifiedName"/> is checked the first time when this registration is requested through GetFactory().
+            /// The cached instance of the type in <see cref="FactoryTypeAssemblyQualifiedName"/>. If null, this
+            // registation is seen as a deferred registration
+            /// and <see cref="FactoryTypeAssemblyQualifiedName"/> is checked the first time when this
+            // registration is requested through GetFactory().
             /// </summary>
             internal DbProviderFactory FactoryInstance { get; }
         }

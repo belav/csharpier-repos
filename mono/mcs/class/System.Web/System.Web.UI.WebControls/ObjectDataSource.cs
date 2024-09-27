@@ -137,11 +137,11 @@ namespace System.Web.UI.WebControls
             remove { DefaultView.ObjectDisposing -= value; }
         }
 
-        /*		public event ObjectDataSourceResolvingMethodEventHandler ResolvingMethod {
-                add { DefaultView.ResolvingMethod += value; }
-                remove { DefaultView.ResolvingMethod -= value; }
-                }
-        */
+/*		public event ObjectDataSourceResolvingMethodEventHandler ResolvingMethod {
+add { DefaultView.ResolvingMethod += value; }
+remove { DefaultView.ResolvingMethod -= value; }
+}
+*/
         public event ObjectDataSourceStatusEventHandler Selected
         {
             add { DefaultView.Selected += value; }

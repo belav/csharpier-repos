@@ -72,7 +72,8 @@ namespace System.Runtime.InteropServices
             return Interop.Kernel32.GetProcAddress(handle, symbolName);
         }
 
-        // Preserving good error info from DllImport-driven LoadLibrary is tricky because we keep loading from different places
+        // Preserving good error info from DllImport-driven LoadLibrary is tricky because we keep loading
+        // from different places
         // if earlier loads fail and those later loads obliterate error codes.
         //
         // This tracker object will keep track of the error code in accordance to priority:

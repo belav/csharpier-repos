@@ -409,7 +409,8 @@ namespace System.Workflow.Activities.Rules
             if (computedType.Assembly == thisType.Assembly)
                 flags |= BindingFlags.NonPublic;
 
-            // Initialize the list with the computed type's members (no need for interfaces or extension methods)
+            // Initialize the list with the computed type's members (no need for interfaces or extension
+            // methods)
             List<MemberInfo> members = new List<MemberInfo>(computedType.GetMembers(flags));
 
             // Filter out the duplicates & special names.
@@ -1473,7 +1474,8 @@ namespace System.Workflow.Activities.Rules
         //                              --> 6:{ +  - }
         //                              --> 7:{ *  /  %  MOD }
         //
-        // This method is still recursive descent, but parses each precedence group by using the operator precedence
+        // This method is still recursive descent, but parses each precedence group by using the operator
+        // precedence
         // tables defined in this class.
         private CodeExpression ParseBinaryExpression(
             ParserContext parserContext,
@@ -1954,7 +1956,8 @@ namespace System.Workflow.Activities.Rules
         {
             Type thisType = Validator.ThisType;
 
-            // Resolve the field or property relative to the type of "this".  This will find all static & non-static
+            // Resolve the field or property relative to the type of "this".  This will find all static &
+            // non-static
             // fields and properties.
             MemberInfo member = Validator.ResolveFieldOrProperty(thisType, name);
             if (member == null)

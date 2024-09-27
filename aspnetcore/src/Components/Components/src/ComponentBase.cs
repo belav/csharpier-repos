@@ -44,7 +44,8 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// <summary>
     /// Renders the component to the supplied <see cref="RenderTreeBuilder"/>.
     /// </summary>
-    /// <param name="builder">A <see cref="RenderTreeBuilder"/> that will receive the render output.</param>
+    /// <param name="builder">A <see cref="RenderTreeBuilder"/> that will receive the render
+    // output.</param>
     protected virtual void BuildRenderTree(RenderTreeBuilder builder)
     {
         // Developers can either override this method in derived classes, or can use Razor
@@ -118,7 +119,8 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
 
     /// <summary>
     /// Method invoked after each time the component has rendered interactively and the UI has finished
-    /// updating (for example, after elements have been added to the browser DOM). Any <see cref="ElementReference" />
+    /// updating (for example, after elements have been added to the browser DOM). Any <see
+    // cref="ElementReference" />
     /// fields will be populated by the time this runs.
     ///
     /// This method is not invoked during prerendering or server-side rendering, because those processes
@@ -129,22 +131,27 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// on this component instance; otherwise <c>false</c>.
     /// </param>
     /// <remarks>
-    /// The <see cref="OnAfterRender(bool)"/> and <see cref="OnAfterRenderAsync(bool)"/> lifecycle methods
+    /// The <see cref="OnAfterRender(bool)"/> and <see cref="OnAfterRenderAsync(bool)"/> lifecycle
+    // methods
     /// are useful for performing interop, or interacting with values received from <c>@ref</c>.
-    /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only performed
+    /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only
+    // performed
     /// once.
     /// </remarks>
     protected virtual void OnAfterRender(bool firstRender) { }
 
     /// <summary>
-    /// Method invoked after each time the component has been rendered interactively and the UI has finished
-    /// updating (for example, after elements have been added to the browser DOM). Any <see cref="ElementReference" />
+    /// Method invoked after each time the component has been rendered interactively and the UI has
+    // finished
+    /// updating (for example, after elements have been added to the browser DOM). Any <see
+    // cref="ElementReference" />
     /// fields will be populated by the time this runs.
     ///
     /// This method is not invoked during prerendering or server-side rendering, because those processes
     /// are not attached to any live browser DOM and are already complete before the DOM is updated.
     ///
-    /// Note that the component does not automatically re-render after the completion of any returned <see cref="Task"/>,
+    /// Note that the component does not automatically re-render after the completion of any returned
+    // <see cref="Task"/>,
     /// because that would cause an infinite render loop.
     /// </summary>
     /// <param name="firstRender">
@@ -153,9 +160,11 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// </param>
     /// <returns>A <see cref="Task"/> representing any asynchronous operation.</returns>
     /// <remarks>
-    /// The <see cref="OnAfterRender(bool)"/> and <see cref="OnAfterRenderAsync(bool)"/> lifecycle methods
+    /// The <see cref="OnAfterRender(bool)"/> and <see cref="OnAfterRenderAsync(bool)"/> lifecycle
+    // methods
     /// are useful for performing interop, or interacting with values received from <c>@ref</c>.
-    /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only performed
+    /// Use the <paramref name="firstRender"/> parameter to ensure that initialization work is only
+    // performed
     /// once.
     /// </remarks>
     protected virtual Task OnAfterRenderAsync(bool firstRender) => Task.CompletedTask;
@@ -176,15 +185,20 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
         _renderHandle.Dispatcher.InvokeAsync(workItem);
 
     /// <summary>
-    /// Treats the supplied <paramref name="exception"/> as being thrown by this component. This will cause the
-    /// enclosing ErrorBoundary to transition into a failed state. If there is no enclosing ErrorBoundary,
+    /// Treats the supplied <paramref name="exception"/> as being thrown by this component. This will
+    // cause the
+    /// enclosing ErrorBoundary to transition into a failed state. If there is no enclosing
+    // ErrorBoundary,
     /// it will be regarded as an exception from the enclosing renderer.
     ///
-    /// This is useful if an exception occurs outside the component lifecycle methods, but you wish to treat it
+    /// This is useful if an exception occurs outside the component lifecycle methods, but you wish to
+    // treat it
     /// the same as an exception from a component lifecycle method.
     /// </summary>
-    /// <param name="exception">The <see cref="Exception"/> that will be dispatched to the renderer.</param>
-    /// <returns>A <see cref="Task"/> that will be completed when the exception has finished dispatching.</returns>
+    /// <param name="exception">The <see cref="Exception"/> that will be dispatched to the
+    // renderer.</param>
+    /// <returns>A <see cref="Task"/> that will be completed when the exception has finished
+    // dispatching.</returns>
     protected Task DispatchExceptionAsync(Exception exception) =>
         _renderHandle.DispatchExceptionAsync(exception);
 
@@ -207,16 +221,22 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
     /// Sets parameters supplied by the component's parent in the render tree.
     /// </summary>
     /// <param name="parameters">The parameters.</param>
-    /// <returns>A <see cref="Task"/> that completes when the component has finished updating and rendering itself.</returns>
+    /// <returns>A <see cref="Task"/> that completes when the component has finished updating and
+    // rendering itself.</returns>
     /// <remarks>
     /// <para>
-    /// Parameters are passed when <see cref="SetParametersAsync(ParameterView)"/> is called. It is not required that
-    /// the caller supply a parameter value for all of the parameters that are logically understood by the component.
+    /// Parameters are passed when <see cref="SetParametersAsync(ParameterView)"/> is called. It is not
+    // required that
+    /// the caller supply a parameter value for all of the parameters that are logically understood by
+    // the component.
     /// </para>
     /// <para>
-    /// The default implementation of <see cref="SetParametersAsync(ParameterView)"/> will set the value of each property
-    /// decorated with <see cref="ParameterAttribute" /> or <see cref="CascadingParameterAttribute" /> that has
-    /// a corresponding value in the <see cref="ParameterView" />. Parameters that do not have a corresponding value
+    /// The default implementation of <see cref="SetParametersAsync(ParameterView)"/> will set the value
+    // of each property
+    /// decorated with <see cref="ParameterAttribute" /> or <see cref="CascadingParameterAttribute" />
+    // that has
+    /// a corresponding value in the <see cref="ParameterView" />. Parameters that do not have a
+    // corresponding value
     /// will be unchanged.
     /// </para>
     /// </remarks>
@@ -256,9 +276,12 @@ public abstract class ComponentBase : IComponent, IHandleEvent, IHandleAfterRend
             catch // avoiding exception filters for AOT runtime support
             {
                 // Ignore exceptions from task cancellations.
-                // Awaiting a canceled task may produce either an OperationCanceledException (if produced as a consequence of
-                // CancellationToken.ThrowIfCancellationRequested()) or a TaskCanceledException (produced as a consequence of awaiting Task.FromCanceled).
-                // It's much easier to check the state of the Task (i.e. Task.IsCanceled) rather than catch two distinct exceptions.
+                // Awaiting a canceled task may produce either an OperationCanceledException (if produced as a
+                // consequence of
+                // CancellationToken.ThrowIfCancellationRequested()) or a TaskCanceledException (produced as a
+                // consequence of awaiting Task.FromCanceled).
+                // It's much easier to check the state of the Task (i.e. Task.IsCanceled) rather than catch two
+                // distinct exceptions.
                 if (!task.IsCanceled)
                 {
                     throw;

@@ -310,7 +310,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         /// <summary>
-        /// Tests that when a certificate chain has a root certification which is not trusted by the trust provider,
+        /// Tests that when a certificate chain has a root certification which is not trusted by the trust
+        // provider,
         /// Build returns false and a ChainStatus returns UntrustedRoot.
         /// Android does not support the detailed status in this test. It always validates time
         /// and trusted root. It will fail to build any chain if those are not valid.
@@ -353,7 +354,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Theory]
-        // Tests that the chain fails when a system trust certificate is added to the custom root trust, but its root isn't.
+        // Tests that the chain fails when a system trust certificate is added to the custom root trust, but
+        // its root isn't.
         [InlineData(true)]
         // Tests that the chain fails when no certificates are added to the custom root trust.
         [InlineData(false)]
@@ -866,7 +868,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         )]
         public static void BuildChain_MicrosoftDotCom_WithRootCertInUserAndSystemRootCertStores()
         {
-            // Verifies that when the same root cert is placed in both a user and machine root certificate store,
+            // Verifies that when the same root cert is placed in both a user and machine root certificate
+            // store,
             // any certs chain building to that root cert will build correctly
             //
             // We use a copy of the microsoft.com SSL certs and root certs to validate that the chain can build
@@ -880,7 +883,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes)
             )
             {
-                // Check that microsoft.com's root certificate IS installed in the machine root store as a sanity step
+                // Check that microsoft.com's root certificate IS installed in the machine root store as a sanity
+                // step
                 using (
                     var machineRootStore = new X509Store(StoreName.Root, StoreLocation.LocalMachine)
                 )
@@ -907,12 +911,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     );
                 }
 
-                // Concievably at this point there could still be something wrong and we still don't chain build correctly - if that's
-                // the case, then there's likely something wrong with the machine. Validating that happy path is out of scope
+                // Concievably at this point there could still be something wrong and we still don't chain build
+                // correctly - if that's
+                // the case, then there's likely something wrong with the machine. Validating that happy path is out
+                // of scope
                 // of this particular test.
 
-                // Check that microsoft.com's root certificate is NOT installed on in the user cert store as a sanity step
-                // We won't try to install the microsoft.com root cert into the user root store if it's already there
+                // Check that microsoft.com's root certificate is NOT installed on in the user cert store as a
+                // sanity step
+                // We won't try to install the microsoft.com root cert into the user root store if it's already
+                // there
                 using (var userRootStore = new X509Store(StoreName.Root, StoreLocation.CurrentUser))
                 {
                     userRootStore.Open(OpenFlags.ReadOnly);

@@ -254,7 +254,8 @@ public class SharedFxTests
         );
     }
 
-    // ASP.NET Core shared Fx assemblies should reference only ASP.NET Core assemblies with Revsion == 0.
+    // ASP.NET Core shared Fx assemblies should reference only ASP.NET Core assemblies with Revsion ==
+    // 0.
     [Fact]
     public void SharedFrameworkAssemblyReferencesHaveExpectedAssemblyVersions()
     {

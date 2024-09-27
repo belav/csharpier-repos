@@ -103,7 +103,8 @@ namespace System.Web.Services.Discovery
                     //  secondarySearchPatterns = new DiscoverySearchPattern[searchPattern.Length];
                     //
                     //  for (int i = 0; i < searchPattern.Length; i++) {
-                    //      secondarySearchPatterns[i] = (DiscoverySearchPattern) Activator.CreateInstance(searchPattern[i]);
+                    //      secondarySearchPatterns[i] = (DiscoverySearchPattern)
+                    // Activator.CreateInstance(searchPattern[i]);
                     //  }
 
                     secondarySearchPatterns = new DiscoverySearchPattern[]
@@ -118,7 +119,8 @@ namespace System.Web.Services.Discovery
         }
 
         // -------------------------------------------------------------------------------
-        // Invokes searching by patterns in current dir. If needed, initiates further search in subdirectories.
+        // Invokes searching by patterns in current dir. If needed, initiates further search in
+        // subdirectories.
         protected void ScanDirectory(string directory)
         {
             if (CompModSwitches.DynamicDiscoverySearcher.TraceVerbose)
@@ -235,7 +237,8 @@ namespace System.Web.Services.Discovery
 
         // ------------  abstract methods  -----------------
 
-        /// <include file='doc\DynamicDiscoSearcher.uex' path='docs/doc[@for="DynamicDiscoSearcher.Search"]/*' />
+        /// <include file='doc\DynamicDiscoSearcher.uex'
+        // path='docs/doc[@for="DynamicDiscoSearcher.Search"]/*' />
         /// <devdoc>
         /// Main function. Searches dir recursively for primary (.vsdisco) and seconary (.asmx) files.
         /// </devdoc>

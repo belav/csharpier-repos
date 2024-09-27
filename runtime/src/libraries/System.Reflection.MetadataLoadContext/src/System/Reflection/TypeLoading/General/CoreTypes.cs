@@ -4,7 +4,8 @@
 namespace System.Reflection.TypeLoading
 {
     /// <summary>
-    /// A convenience class that holds the palette of core types that were successfully loaded (or the reason they were not.)
+    /// A convenience class that holds the palette of core types that were successfully loaded (or the
+    // reason they were not.)
     /// </summary>
     internal sealed class CoreTypes
     {
@@ -46,7 +47,8 @@ namespace System.Reflection.TypeLoading
         }
 
         /// <summary>
-        /// Returns null if the specific core type did not exist or could not be loaded. Call GetException(coreType) to get detailed info.
+        /// Returns null if the specific core type did not exist or could not be loaded. Call
+        // GetException(coreType) to get detailed info.
         /// </summary>
         public RoType? this[CoreType coreType] => _coreTypes[(int)coreType];
 

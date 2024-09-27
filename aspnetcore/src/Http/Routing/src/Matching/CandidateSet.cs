@@ -21,11 +21,13 @@ public sealed class CandidateSet
 
     /// <summary>
     /// <para>
-    /// Initializes a new instances of the <see cref="CandidateSet"/> class with the provided <paramref name="endpoints"/>,
+    /// Initializes a new instances of the <see cref="CandidateSet"/> class with the provided <paramref
+    // name="endpoints"/>,
     /// <paramref name="values"/>, and <paramref name="scores"/>.
     /// </para>
     /// <para>
-    /// The constructor is provided to enable unit tests of implementations of <see cref="EndpointSelector"/>
+    /// The constructor is provided to enable unit tests of implementations of <see
+    // cref="EndpointSelector"/>
     /// and <see cref="IEndpointSelectorPolicy"/>.
     /// </para>
     /// </summary>
@@ -157,11 +159,13 @@ public sealed class CandidateSet
     /// <param name="index">The candidate index.</param>
     /// <param name="endpoint">
     /// The <see cref="Endpoint"/> to replace the original <see cref="Endpoint"/> at
-    /// the <paramref name="index"/>. If <paramref name="endpoint"/> is <c>null</c>. the candidate will be marked
+    /// the <paramref name="index"/>. If <paramref name="endpoint"/> is <c>null</c>. the candidate will
+    // be marked
     /// as invalid.
     /// </param>
     /// <param name="values">
-    /// The <see cref="RouteValueDictionary"/> to replace the original <see cref="RouteValueDictionary"/> at
+    /// The <see cref="RouteValueDictionary"/> to replace the original <see
+    // cref="RouteValueDictionary"/> at
     /// the <paramref name="index"/>.
     /// </param>
     public void ReplaceEndpoint(int index, Endpoint? endpoint, RouteValueDictionary? values)
@@ -172,7 +176,8 @@ public sealed class CandidateSet
             ThrowIndexArgumentOutOfRangeException();
         }
 
-        // CandidateState allows a null-valued endpoint. However a validate candidate should never have a null endpoint
+        // CandidateState allows a null-valued endpoint. However a validate candidate should never have a
+        // null endpoint
         // We'll make lives easier for matcher policies by declaring it as non-null.
         Candidates[index] = new CandidateState(endpoint!, values, Candidates[index].Score);
 
@@ -189,7 +194,8 @@ public sealed class CandidateSet
     /// <param name="index">The candidate index.</param>
     /// <param name="endpoints">
     /// The list of endpoints <see cref="Endpoint"/> to replace the original <see cref="Endpoint"/> at
-    /// the <paramref name="index"/>. If <paramref name="endpoints"/> is empty, the candidate will be marked
+    /// the <paramref name="index"/>. If <paramref name="endpoints"/> is empty, the candidate will be
+    // marked
     /// as invalid.
     /// </param>
     /// <param name="comparer">
@@ -202,7 +208,8 @@ public sealed class CandidateSet
     /// <see cref="IEndpointSelectorPolicy"/> implementations to disambiguate further.
     /// </para>
     /// <para>
-    /// The endpoint being replace should have a unique score value. The score is the combination of route
+    /// The endpoint being replace should have a unique score value. The score is the combination of
+    // route
     /// patter precedence, order, and policy metadata evaluation. A dynamic endpoint will not function
     /// correctly if other endpoints exist with the same score.
     /// </para>
@@ -247,7 +254,8 @@ public sealed class CandidateSet
                 var score = GetOriginalScore(index);
                 var values = Candidates[index].Values;
 
-                // Adding candidates requires expanding the array and computing new score values for the new candidates.
+                // Adding candidates requires expanding the array and computing new score values for the new
+                // candidates.
                 var original = Candidates;
                 var candidates = new CandidateState[original.Length - 1 + endpoints.Count];
                 Candidates = candidates;
@@ -323,7 +331,8 @@ public sealed class CandidateSet
         }
     }
 
-    // Returns the *positive* score value. Score is used to track valid/invalid which can cause it to be negative.
+    // Returns the *positive* score value. Score is used to track valid/invalid which can cause it to be
+    // negative.
     //
     // This is the original score and used to determine if there are ambiguities.
     private int GetOriginalScore(int index)

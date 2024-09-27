@@ -189,7 +189,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
             await workspace.ChangeSolutionAsync(solution);
 
             // Important: We must wait for workspace creation operations to finish.
-            // Otherwise we could have a race where workspace change events triggered by creation are changing the state
+            // Otherwise we could have a race where workspace change events triggered by creation are changing
+            // the state
             // created by the initial test steps. This can interfere with the expected test state.
             var operations =
                 workspace.ExportProvider.GetExportedValue<AsynchronousOperationListenerProvider>();

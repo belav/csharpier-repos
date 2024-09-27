@@ -47,7 +47,8 @@ namespace DbLinq.Util
         /// <param name="sql">SQL string</param>
         /// <param name="dbParameterName">Optional parameter name (null to ignore), like ':db'</param>
         /// <param name="db">Optional parameter value</param>
-        /// <param name="readDelegate">Function called for each row, returning an instance created for row data</param>
+        /// <param name="readDelegate">Function called for each row, returning an instance created for row
+        // data</param>
         /// <returns></returns>
         public static List<T> Find<T>(
             IDbConnection conn,
@@ -88,7 +89,8 @@ namespace DbLinq.Util
         /// <typeparam name="T">Row type</typeparam>
         /// <param name="conn">Connection to database</param>
         /// <param name="sql">SQL string</param>
-        /// <param name="readDelegate">Function called for each row, returning an instance created for row data</param>
+        /// <param name="readDelegate">Function called for each row, returning an instance created for row
+        // data</param>
         /// <returns></returns>
         public static List<T> Find<T>(
             IDbConnection conn,

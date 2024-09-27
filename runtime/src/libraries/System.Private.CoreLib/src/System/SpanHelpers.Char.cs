@@ -48,7 +48,8 @@ namespace System
             while (remainingSearchSpaceLength > 0)
             {
                 // Do a quick search for the first element of "value".
-                // Using the non-packed variant as the input is short and would not benefit from the packed implementation.
+                // Using the non-packed variant as the input is short and would not benefit from the packed
+                // implementation.
                 int relativeIndex = NonPackedIndexOfChar(
                     ref Unsafe.Add(ref searchSpace, offset),
                     valueHead,
@@ -80,8 +81,10 @@ namespace System
             }
             return -1;
 
-            // Based on http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd "Algorithm 1: Generic SIMD" by Wojciech Mula
-            // Some details about the implementation can also be found in https://github.com/dotnet/runtime/pull/63285
+            // Based on http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd "Algorithm 1: Generic
+            // SIMD" by Wojciech Mula
+            // Some details about the implementation can also be found in
+            // https://github.com/dotnet/runtime/pull/63285
             SEARCH_TWO_CHARS:
             if (
                 Vector512.IsHardwareAccelerated
@@ -396,8 +399,10 @@ namespace System
             }
             return -1;
 
-            // Based on http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd "Algorithm 1: Generic SIMD" by Wojciech Mula
-            // Some details about the implementation can also be found in https://github.com/dotnet/runtime/pull/63285
+            // Based on http://0x80.pl/articles/simd-strfind.html#algorithm-1-generic-simd "Algorithm 1: Generic
+            // SIMD" by Wojciech Mula
+            // Some details about the implementation can also be found in
+            // https://github.com/dotnet/runtime/pull/63285
             SEARCH_TWO_CHARS:
             if (
                 Vector512.IsHardwareAccelerated
@@ -684,8 +689,10 @@ namespace System
             return lengthDelta;
         }
 
-        // IndexOfNullCharacter processes memory in aligned chunks, and thus it won't crash even if it accesses memory beyond the null terminator.
-        // This behavior is an implementation detail of the runtime and callers outside System.Private.CoreLib must not depend on it.
+        // IndexOfNullCharacter processes memory in aligned chunks, and thus it won't crash even if it
+        // accesses memory beyond the null terminator.
+        // This behavior is an implementation detail of the runtime and callers outside
+        // System.Private.CoreLib must not depend on it.
         public static unsafe int IndexOfNullCharacter(char* searchSpace)
         {
             const char value = '\0';
@@ -734,8 +741,10 @@ namespace System
                 lengthToExamine--;
             }
 
-            // We get past SequentialScan only if IsHardwareAccelerated is true. However, we still have the redundant check to allow
-            // the JIT to see that the code is unreachable and eliminate it when the platform does not have hardware accelerated.
+            // We get past SequentialScan only if IsHardwareAccelerated is true. However, we still have the
+            // redundant check to allow
+            // the JIT to see that the code is unreachable and eliminate it when the platform does not have
+            // hardware accelerated.
             if (Vector512.IsHardwareAccelerated)
             {
                 if (offset < length)
@@ -746,15 +755,20 @@ namespace System
                         != 0
                     )
                     {
-                        // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for searches
+                        // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for
+                        // searches
                         // with no upper bound e.g. String.wcslen. Start with a check on Vector128 to align to Vector256,
                         // before moving to processing Vector256.
 
                         // This ensures we do not fault across memory pages
-                        // while searching for an end of string. Specifically that this assumes that the length is either correct
-                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page boundary into an
-                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is not found,
-                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return -1 rather
+                        // while searching for an end of string. Specifically that this assumes that the length is either
+                        // correct
+                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page
+                        // boundary into an
+                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is
+                        // not found,
+                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return
+                        // -1 rather
                         // than ever causing an AV.
                         Vector128<ushort> search = *(Vector128<ushort>*)(
                             searchSpace + (nuint)offset
@@ -784,15 +798,20 @@ namespace System
                         != 0
                     )
                     {
-                        // Not currently aligned to Vector512 (is aligned to Vector256); this can cause a problem for searches
+                        // Not currently aligned to Vector512 (is aligned to Vector256); this can cause a problem for
+                        // searches
                         // with no upper bound e.g. String.wcslen. Start with a check on Vector256 to align to Vector512,
                         // before moving to processing Vector256.
 
                         // This ensures we do not fault across memory pages
-                        // while searching for an end of string. Specifically that this assumes that the length is either correct
-                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page boundary into an
-                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is not found,
-                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return -1 rather
+                        // while searching for an end of string. Specifically that this assumes that the length is either
+                        // correct
+                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page
+                        // boundary into an
+                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is
+                        // not found,
+                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return
+                        // -1 rather
                         // than ever causing an AV.
                         Vector256<ushort> search = *(Vector256<ushort>*)(
                             searchSpace + (nuint)offset
@@ -841,7 +860,8 @@ namespace System
                                 continue;
                             }
 
-                            // Note that ExtractMostSignificantBits has converted the equal vector elements into a set of bit flags,
+                            // Note that ExtractMostSignificantBits has converted the equal vector elements into a set of bit
+                            // flags,
                             // So the bit position in 'matches' corresponds to the element offset.
                             //
                             // Find bitflag offset of first match and add to current offset,
@@ -932,15 +952,20 @@ namespace System
                         != 0
                     )
                     {
-                        // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for searches
+                        // Not currently aligned to Vector256 (is aligned to Vector128); this can cause a problem for
+                        // searches
                         // with no upper bound e.g. String.wcslen. Start with a check on Vector128 to align to Vector256,
                         // before moving to processing Vector256.
 
                         // This ensures we do not fault across memory pages
-                        // while searching for an end of string. Specifically that this assumes that the length is either correct
-                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page boundary into an
-                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is not found,
-                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return -1 rather
+                        // while searching for an end of string. Specifically that this assumes that the length is either
+                        // correct
+                        // or that the data is pinned otherwise it may cause an AccessViolation from crossing a page
+                        // boundary into an
+                        // unowned page. If the search is unbounded (e.g. null terminator in wcslen) and the search value is
+                        // not found,
+                        // again this will likely cause an AccessViolation. However, correctly bounded searches will return
+                        // -1 rather
                         // than ever causing an AV.
                         Vector128<ushort> search = *(Vector128<ushort>*)(
                             searchSpace + (nuint)offset

@@ -11,7 +11,8 @@ namespace System.Text.Json
     public static partial class JsonSerializer
     {
         /// <summary>
-        /// Parses the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.
+        /// Parses the UTF-8 encoded text representing a single JSON value into a <typeparamref
+        // name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
         /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
@@ -38,7 +39,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the UTF-8 encoded text representing a single JSON value into a <paramref name="returnType"/>.
+        /// Parses the UTF-8 encoded text representing a single JSON value into a <paramref
+        // name="returnType"/>.
         /// </summary>
         /// <returns>A <paramref name="returnType"/> representation of the JSON value.</returns>
         /// <param name="utf8Json">JSON text to parse.</param>
@@ -74,7 +76,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the UTF-8 encoded text representing a single JSON value into a <typeparamref name="TValue"/>.
+        /// Parses the UTF-8 encoded text representing a single JSON value into a <typeparamref
+        // name="TValue"/>.
         /// </summary>
         /// <typeparam name="TValue">The type to deserialize the JSON value into.</typeparam>
         /// <returns>A <typeparamref name="TValue"/> representation of the JSON value.</returns>
@@ -100,7 +103,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the UTF-8 encoded text representing a single JSON value into an instance specified by the <paramref name="jsonTypeInfo"/>.
+        /// Parses the UTF-8 encoded text representing a single JSON value into an instance specified by the
+        // <paramref name="jsonTypeInfo"/>.
         /// </summary>
         /// <returns>A <paramref name="jsonTypeInfo"/> representation of the JSON value.</returns>
         /// <param name="utf8Json">JSON text to parse.</param>
@@ -121,7 +125,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the UTF-8 encoded text representing a single JSON value into a <paramref name="returnType"/>.
+        /// Parses the UTF-8 encoded text representing a single JSON value into a <paramref
+        // name="returnType"/>.
         /// </summary>
         /// <returns>A <paramref name="returnType"/> representation of the JSON value.</returns>
         /// <param name="utf8Json">JSON text to parse.</param>
@@ -140,7 +145,8 @@ namespace System.Text.Json
         /// for <paramref name="returnType"/> or its serializable members.
         /// </exception>
         /// <exception cref="InvalidOperationException">
-        /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method on the provided <paramref name="context"/>
+        /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method on the provided <paramref
+        // name="context"/>
         /// did not return a compatible <see cref="JsonTypeInfo"/> for <paramref name="returnType"/>.
         /// </exception>
         public static object? Deserialize(

@@ -398,7 +398,8 @@ namespace System.Net
 
         // ToString()  -
         // Routine Description:
-        //     Generates a string representation of the headers, that is ready to be sent except for it being in string format:
+        //     Generates a string representation of the headers, that is ready to be sent except for it
+        // being in string format:
         //     the format looks like:
         //
         //     Header-Name: Header-Value\r\n

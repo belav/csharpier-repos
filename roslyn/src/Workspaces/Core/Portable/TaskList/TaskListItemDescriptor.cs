@@ -46,6 +46,7 @@ namespace Microsoft.CodeAnalysis.TaskList
                 )
                 {
                     // From:
+                    //
                     // https://devdiv.visualstudio.com/DevDiv/_git/VS?path=/src/env/ErrorList/Pkg/Shims/TaskListOptions.cs&version=GBmain&line=133&lineEnd=134&lineStartColumn=1&lineEndColumn=98&lineStyle=plain&_a=contents
 #if false
                     // I've no idea why the strange conversion (legacy mapping from __VSERRORCATEGORY?).

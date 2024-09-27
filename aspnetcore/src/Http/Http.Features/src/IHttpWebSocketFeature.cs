@@ -16,7 +16,8 @@ public interface IHttpWebSocketFeature
     bool IsWebSocketRequest { get; }
 
     /// <summary>
-    /// Attempts to upgrade the request to a <see cref="WebSocket"/>. Check <see cref="IsWebSocketRequest"/>
+    /// Attempts to upgrade the request to a <see cref="WebSocket"/>. Check <see
+    // cref="IsWebSocketRequest"/>
     /// before invoking this.
     /// </summary>
     /// <param name="context">The <see cref="WebSocketAcceptContext"/>.</param>

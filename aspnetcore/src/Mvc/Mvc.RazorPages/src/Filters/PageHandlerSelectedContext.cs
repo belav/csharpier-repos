@@ -16,7 +16,8 @@ public class PageHandlerSelectedContext : FilterContext
     /// <summary>
     /// Creates a new instance of <see cref="PageHandlerExecutedContext"/>.
     /// </summary>
-    /// <param name="pageContext">The <see cref="PageContext"/> associated with the current request.</param>
+    /// <param name="pageContext">The <see cref="PageContext"/> associated with the current
+    // request.</param>
     /// <param name="filters">The set of filters associated with the page.</param>
     /// <param name="handlerInstance">The handler instance associated with the page.</param>
     public PageHandlerSelectedContext(

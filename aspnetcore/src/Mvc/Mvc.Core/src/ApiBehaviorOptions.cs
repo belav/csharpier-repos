@@ -10,7 +10,8 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Microsoft.AspNetCore.Mvc;
 
 /// <summary>
-/// Options used to configure behavior for types annotated with <see cref="ApiControllerAttribute"/>.
+/// Options used to configure behavior for types annotated with <see
+// cref="ApiControllerAttribute"/>.
 /// </summary>
 public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
 {
@@ -19,7 +20,8 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     private Func<ActionContext, IActionResult> _invalidModelStateResponseFactory = default!;
 
     /// <summary>
-    /// Delegate invoked on actions annotated with <see cref="ApiControllerAttribute"/> to convert invalid
+    /// Delegate invoked on actions annotated with <see cref="ApiControllerAttribute"/> to convert
+    // invalid
     /// <see cref="ModelStateDictionary"/> into an <see cref="IActionResult"/>
     /// </summary>
     public Func<ActionContext, IActionResult> InvalidModelStateResponseFactory
@@ -31,21 +33,29 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     }
 
     /// <summary>
-    /// Gets or sets a value that determines if the filter that returns an <see cref="BadRequestObjectResult"/> when
-    /// <see cref="ActionContext.ModelState"/> is invalid is suppressed. <seealso cref="InvalidModelStateResponseFactory"/>.
+    /// Gets or sets a value that determines if the filter that returns an <see
+    // cref="BadRequestObjectResult"/> when
+    /// <see cref="ActionContext.ModelState"/> is invalid is suppressed. <seealso
+    // cref="InvalidModelStateResponseFactory"/>.
     /// </summary>
     public bool SuppressModelStateInvalidFilter { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines if model binding sources are inferred for action parameters on controllers annotated
+    /// Gets or sets a value that determines if model binding sources are inferred for action parameters
+    // on controllers annotated
     /// with <see cref="ApiControllerAttribute"/> is suppressed.
     /// <para>
     /// When enabled, the following sources are inferred:
-    /// Parameters that appear as route values, are assumed to be bound from the path (<see cref="BindingSource.Path"/>).
-    /// Parameters of type <see cref="IFormFile"/> and <see cref="IFormFileCollection"/> are assumed to be bound from form.
-    /// Parameters that are complex (<see cref="ModelMetadata.IsComplexType"/>) and are registered in the DI Container (<see cref="IServiceCollection"/>) are assumed to be bound from the services <see cref="BindingSource.Services"/>, unless this
+    /// Parameters that appear as route values, are assumed to be bound from the path (<see
+    // cref="BindingSource.Path"/>).
+    /// Parameters of type <see cref="IFormFile"/> and <see cref="IFormFileCollection"/> are assumed to
+    // be bound from form.
+    /// Parameters that are complex (<see cref="ModelMetadata.IsComplexType"/>) and are registered in
+    // the DI Container (<see cref="IServiceCollection"/>) are assumed to be bound from the services <see
+    // cref="BindingSource.Services"/>, unless this
     /// option is explicitly disabled <see cref="DisableImplicitFromServicesParameters"/>.
-    /// Parameters that are complex (<see cref="ModelMetadata.IsComplexType"/>) are assumed to be bound from the body (<see cref="BindingSource.Body"/>).
+    /// Parameters that are complex (<see cref="ModelMetadata.IsComplexType"/>) are assumed to be bound
+    // from the body (<see cref="BindingSource.Body"/>).
     /// All other parameters are assumed to be bound from the query.
     /// </para>
     /// </summary>
@@ -53,12 +63,14 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
 
     /// <summary>
     /// Gets or sets a value that determines if parameters are inferred to be from services.
-    /// This property is only applicable when <see cref="SuppressInferBindingSourcesForParameters" /> is <see langword="false" />.
+    /// This property is only applicable when <see cref="SuppressInferBindingSourcesForParameters" /> is
+    // <see langword="false" />.
     /// </summary>
     public bool DisableImplicitFromServicesParameters { get; set; }
 
     /// <summary>
-    /// Gets or sets a value that determines if an <c>multipart/form-data</c> consumes action constraint is added to parameters
+    /// Gets or sets a value that determines if an <c>multipart/form-data</c> consumes action constraint
+    // is added to parameters
     /// that are bound from form data.
     /// </summary>
     public bool SuppressConsumesConstraintForFormFileParameters { get; set; }
@@ -71,11 +83,13 @@ public class ApiBehaviorOptions : IEnumerable<ICompatibilitySwitch>
     /// <see cref="IClientErrorActionResult"/>. Otherwise, the filter is suppressed.
     /// </para>
     /// <para>
-    /// By default, <see cref="ClientErrorMapping"/> is used to map <see cref="IClientErrorActionResult"/> to a
+    /// By default, <see cref="ClientErrorMapping"/> is used to map <see
+    // cref="IClientErrorActionResult"/> to a
     /// <see cref="ProblemDetails"/> instance (returned as the value for <see cref="ObjectResult"/>).
     /// </para>
     /// <para>
-    /// To customize the output of the filter (for e.g. to return a different error type), register a custom
+    /// To customize the output of the filter (for e.g. to return a different error type), register a
+    // custom
     /// implementation of <see cref="IClientErrorFactory"/> in the service collection.
     /// </para>
     /// </summary>

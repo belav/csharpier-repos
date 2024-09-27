@@ -24,7 +24,8 @@ public abstract class DbConnectionHealthCheck : IHealthCheck
     // is responding. It is important to choose a query that will return quickly or you risk
     // overloading the database.
     //
-    // In most cases this is not necessary, but if you find it necessary, choose a simple query such as 'SELECT 1'.
+    // In most cases this is not necessary, but if you find it necessary, choose a simple query such as
+    // 'SELECT 1'.
     protected string TestQuery { get; }
 
     protected abstract DbConnection CreateConnection(string connectionString);

@@ -19,7 +19,8 @@ public partial class HubConnectionExtensions
     /// </summary>
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task{TResult}"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -41,7 +42,8 @@ public partial class HubConnectionExtensions
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="arg1">The first argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -65,7 +67,8 @@ public partial class HubConnectionExtensions
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -91,7 +94,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg1">The first argument.</param>
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -123,7 +127,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg2">The second argument.</param>
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -157,7 +162,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg3">The third argument.</param>
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -193,7 +199,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg4">The fourth argument.</param>
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -231,7 +238,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg5">The fifth argument.</param>
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -271,7 +279,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg6">The sixth argument.</param>
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -313,7 +322,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg7">The seventh argument.</param>
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -357,7 +367,8 @@ public partial class HubConnectionExtensions
     /// <param name="arg8">The eighth argument.</param>
     /// <param name="arg9">The ninth argument.</param>
     /// <param name="arg10">The tenth argument.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     [SuppressMessage(
         "ApiDesign",
@@ -393,7 +404,8 @@ public partial class HubConnectionExtensions
     /// <param name="hubConnection">The hub connection.</param>
     /// <param name="methodName">The name of the server method to invoke.</param>
     /// <param name="args">The arguments used to invoke the server method.</param>
-    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None" />.</param>
+    /// <param name="cancellationToken">The token to monitor for cancellation requests. The default
+    // value is <see cref="CancellationToken.None" />.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous invoke.</returns>
     public static Task InvokeCoreAsync(
         this HubConnection hubConnection,

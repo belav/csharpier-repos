@@ -97,8 +97,8 @@ namespace MonoTests.System.Configuration
         }
     }
 
-    /* a basic settings class.  just two settings, one application
-     * scoped, one user scoped */
+/* a basic settings class.  just two settings, one application
+* scoped, one user scoped */
     class TestSettings1 : ApplicationSettingsBase
     {
         public TestSettings1()
@@ -121,8 +121,8 @@ namespace MonoTests.System.Configuration
         }
     }
 
-    /* an error according to msdn2 docs.  both ApplicationScoped
-     * and UserScoped attributes on the same property */
+/* an error according to msdn2 docs.  both ApplicationScoped
+* and UserScoped attributes on the same property */
     class TestSettings2 : ApplicationSettingsBase
     {
         public TestSettings2()
@@ -138,7 +138,7 @@ namespace MonoTests.System.Configuration
         }
     }
 
-    /* a custom provider for our setting */
+/* a custom provider for our setting */
     class TestSettings3 : ApplicationSettingsBase
     {
         public TestSettings3()
@@ -220,9 +220,9 @@ namespace MonoTests.System.Configuration
         {
             TestSettings1 settings = new TestSettings1();
 
-            /* since we didn't specify a provider for any
-             * of them, they should all use the
-             * LocalFileSettingsProvider */
+/* since we didn't specify a provider for any
+* of them, they should all use the
+* LocalFileSettingsProvider */
             foreach (SettingsProperty prop in settings.Properties)
             {
                 Assert.AreEqual(typeof(LocalFileSettingsProvider), prop.Provider.GetType(), "A1");
@@ -347,7 +347,7 @@ namespace MonoTests.System.Configuration
             );
             TestSettings2 settings = new TestSettings2();
 
-            /* should throw ConfigurationException */
+/* should throw ConfigurationException */
             IEnumerator props = settings.Properties.GetEnumerator();
         }
 

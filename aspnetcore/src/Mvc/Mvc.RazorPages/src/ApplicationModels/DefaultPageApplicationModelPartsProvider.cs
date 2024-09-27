@@ -105,8 +105,10 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
 
         var propertyAttributes = property.GetCustomAttributes(inherit: true);
 
-        // BindingInfo for properties can be either specified by decorating the property with binding-specific attributes.
-        // ModelMetadata also adds information from the property's type and any configured IBindingMetadataProvider.
+        // BindingInfo for properties can be either specified by decorating the property with
+        // binding-specific attributes.
+        // ModelMetadata also adds information from the property's type and any configured
+        // IBindingMetadataProvider.
         var propertyMetadata = _modelMetadataProvider.GetMetadataForProperty(
             property.DeclaringType!,
             property.Name
@@ -115,8 +117,10 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
 
         if (bindingInfo == null)
         {
-            // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the property.
-            // This allows a user to enable model binding on properties by decorating the controller type with BindPropertiesAttribute.
+            // Look for BindPropertiesAttribute on the handler type if no BindingInfo was inferred for the
+            // property.
+            // This allows a user to enable model binding on properties by decorating the controller type with
+            // BindPropertiesAttribute.
             var declaringType = property.DeclaringType!;
             var bindPropertiesAttribute = declaringType.GetCustomAttribute<BindPropertiesAttribute>(
                 inherit: true
@@ -143,7 +147,8 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
     /// Determines if the specified <paramref name="methodInfo"/> is a handler.
     /// </summary>
     /// <param name="methodInfo">The <see cref="MethodInfo"/>.</param>
-    /// <returns><c>true</c> if the <paramref name="methodInfo"/> is a handler. Otherwise <c>false</c>.</returns>
+    /// <returns><c>true</c> if the <paramref name="methodInfo"/> is a handler. Otherwise
+    // <c>false</c>.</returns>
     /// <remarks>
     /// Override this method to provide custom logic to determine which methods are considered handlers.
     /// </remarks>

@@ -13,13 +13,18 @@ namespace System.Xml.Xsl
     /// <summary>
     /// XmlQualifiedName extends XmlQualifiedName to support wildcards and adds nametest functionality
     /// Following are the examples:
-    ///     {A}:B     XmlQualifiedNameTest.New("B", "A")        Match QName with namespace A        and local name B
+    ///     {A}:B     XmlQualifiedNameTest.New("B", "A")        Match QName with namespace A        and
+    // local name B
     ///     *         XmlQualifiedNameTest.New(null, null)      Match any QName
-    ///     {A}:*     XmlQualifiedNameTest.New(null, "A")       Match QName with namespace A        and any local name
+    ///     {A}:*     XmlQualifiedNameTest.New(null, "A")       Match QName with namespace A        and
+    // any local name
     ///               XmlQualifiedNameTest.New("A", false)
-    ///     *:B       XmlQualifiedNameTest.New("B", null)       Match QName with any namespace      and local name B
-    ///     ~{A}:*    XmlQualifiedNameTest.New("B", "A")        Match QName with namespace not A    and any local name
-    ///     {~A}:B    only as a result of the intersection      Match QName with namespace not A    and local name B
+    ///     *:B       XmlQualifiedNameTest.New("B", null)       Match QName with any namespace      and
+    // local name B
+    ///     ~{A}:*    XmlQualifiedNameTest.New("B", "A")        Match QName with namespace not A    and
+    // any local name
+    ///     {~A}:B    only as a result of the intersection      Match QName with namespace not A    and
+    // local name B
     /// </summary>
     internal sealed class XmlQualifiedNameTest : XmlQualifiedName
     {

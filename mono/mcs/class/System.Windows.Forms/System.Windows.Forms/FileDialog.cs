@@ -4545,7 +4545,8 @@ namespace System.Windows.Forms
 
                     new_recent_item_node.AppendChild(new_child);
 
-                    // now search the nodes in grand_parent_node for another instance of the new uri and if found remove it
+                    // now search the nodes in grand_parent_node for another instance of the new uri and if found remove
+                    // it
                     // so that the new node is the first one
                     foreach (XmlNode n in grand_parent_node.ChildNodes)
                     {

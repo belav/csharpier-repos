@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Server;
 
 internal sealed class ContentEncodingNegotiator
 {
-    // List of encodings by preference order with their associated extension so that we can easily handle "*".
+    // List of encodings by preference order with their associated extension so that we can easily
+    // handle "*".
     private static readonly StringSegment[] _preferredEncodings = new StringSegment[]
     {
         "br",

@@ -231,7 +231,8 @@ namespace System.IO.Pipelines
         {
             None = 0,
 
-            // Marks that if logical operation (backpressure/waiting for data) is completed. Set in Complete reset in Reset
+            // Marks that if logical operation (backpressure/waiting for data) is completed. Set in Complete
+            // reset in Reset
             Completed = 1,
 
             // Marks that operation is running. Set in *Async reset in  ObserveCancellation (GetResult)

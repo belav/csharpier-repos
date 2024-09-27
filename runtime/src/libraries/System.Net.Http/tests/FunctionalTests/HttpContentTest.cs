@@ -111,7 +111,8 @@ namespace System.Net.Http.Functional.Tests
             var content = new MockContent(MockOptions.ReturnNullInCopyToAsync);
             var m = new MemoryStream();
 
-            // The HttpContent derived class (MockContent in our case) must return a Task object when WriteToAsync()
+            // The HttpContent derived class (MockContent in our case) must return a Task object when
+            // WriteToAsync()
             // is called. If not, HttpContent will throw.
             Assert.Throws<InvalidOperationException>(() =>
             {
@@ -130,7 +131,8 @@ namespace System.Net.Http.Functional.Tests
             var destination = new MemoryStream();
             await content.CopyToAsync(destination);
 
-            // Our MockContent should not be called for the CopyTo() operation since the buffered stream should be
+            // Our MockContent should not be called for the CopyTo() operation since the buffered stream should
+            // be
             // used.
             Assert.Equal(1, content.SerializeToStreamAsyncCount);
             Assert.Equal(data.Length, destination.Length);
@@ -319,9 +321,11 @@ namespace System.Net.Http.Functional.Tests
             Stream after = await content.ReadAsStreamAsync(readStreamAsync);
             Assert.Equal(1, content.CreateContentReadStreamCount);
 
-            // Note that ContentReadStream returns always the same stream. If the user gets the stream, buffers content,
+            // Note that ContentReadStream returns always the same stream. If the user gets the stream, buffers
+            // content,
             // and gets the stream again, the same instance is returned. Returning a different instance could be
-            // confusing, even though there shouldn't be any real world scenario for retrieving the read stream both
+            // confusing, even though there shouldn't be any real world scenario for retrieving the read stream
+            // both
             // before and after buffering content.
             Assert.Equal(before, after);
         }
@@ -544,8 +548,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var content = new MockContent();
 
-            // This is not really typical usage of the type, but let's make sure we consider also this case: The user
-            // keeps a reference to the Headers property before disposing the content. Then after disposing, the user
+            // This is not really typical usage of the type, but let's make sure we consider also this case: The
+            // user
+            // keeps a reference to the Headers property before disposing the content. Then after disposing, the
+            // user
             // accesses the ContentLength property.
             var headers = content.Headers;
             content.Dispose();
@@ -694,9 +700,12 @@ namespace System.Net.Http.Functional.Tests
                 content.LoadIntoBufferAsync();
             });
 
-            // Note that we don't throw when users access the Headers property. This is useful e.g. to be able to
-            // read the headers of a content, even though the content is already disposed. Note that the .NET guidelines
-            // only require members to throw ObjectDisposedException for members "that cannot be used after the object
+            // Note that we don't throw when users access the Headers property. This is useful e.g. to be able
+            // to
+            // read the headers of a content, even though the content is already disposed. Note that the .NET
+            // guidelines
+            // only require members to throw ObjectDisposedException for members "that cannot be used after the
+            // object
             // has been disposed of".
             _output.WriteLine(content.Headers.ToString());
         }

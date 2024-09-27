@@ -10,13 +10,16 @@ namespace System.Security.Cryptography
     public sealed partial class ECDiffieHellmanOpenSsl : ECDiffieHellman
     {
         /// <summary>
-        /// Create an ECDiffieHellmanOpenSsl from an <see cref="SafeEvpPKeyHandle"/> whose value is an existing
+        /// Create an ECDiffieHellmanOpenSsl from an <see cref="SafeEvpPKeyHandle"/> whose value is an
+        // existing
         /// OpenSSL <c>EVP_PKEY*</c> wrapping an <c>EC_KEY*</c>
         /// </summary>
         /// <param name="pkeyHandle">A SafeHandle for an OpenSSL <c>EVP_PKEY*</c></param>
         /// <exception cref="ArgumentNullException"><paramref name="pkeyHandle"/> is <c>null</c></exception>
-        /// <exception cref="ArgumentException"><paramref name="pkeyHandle"/> <see cref="SafeHandle.IsInvalid" /></exception>
-        /// <exception cref="CryptographicException"><paramref name="pkeyHandle"/> is not a valid enveloped <c>EC_KEY*</c></exception>
+        /// <exception cref="ArgumentException"><paramref name="pkeyHandle"/> <see
+        // cref="SafeHandle.IsInvalid" /></exception>
+        /// <exception cref="CryptographicException"><paramref name="pkeyHandle"/> is not a valid enveloped
+        // <c>EC_KEY*</c></exception>
         [UnsupportedOSPlatform("android")]
         [UnsupportedOSPlatform("browser")]
         [UnsupportedOSPlatform("ios")]

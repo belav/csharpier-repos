@@ -34,7 +34,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[1]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1]").WithLocation(6, 27),
             };
@@ -69,7 +70,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[1]
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[1]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[1]").WithLocation(8, 27),
             };
@@ -105,7 +107,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(9,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(9,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
                     .WithLocation(9, 27),
@@ -141,7 +144,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
                     .WithLocation(8, 27),
@@ -180,7 +184,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
                     .WithLocation(8, 27),
@@ -219,7 +224,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc  ...
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[(int)dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[(int)dimension]")
                     .WithLocation(8, 27),
@@ -254,7 +260,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[] { 42 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 42 }")
                     .WithLocation(6, 27),
@@ -289,7 +296,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[1] { 42 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1] { 42 }")
                     .WithLocation(6, 27),
@@ -402,7 +410,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc  ...
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc M[] { new M() }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[] { new M() }")
                     .WithLocation(8, 27),
@@ -442,7 +451,8 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc[] { 
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc[] { new M() }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { new M() }")
                     .WithLocation(8, 27),
@@ -566,7 +576,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(7,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(7,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var b = /*<bind>*/stackalloc[] { 2, a, default }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { 2, a, default }")
                     .WithLocation(7, 27),
@@ -635,7 +646,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[] { 1 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 1 }")
                     .WithLocation(6, 27),
@@ -672,12 +684,14 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,42): error CS0266: Cannot implicitly convert type 'object' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // file.cs(6,42): error CS0266: Cannot implicitly convert type 'object' to 'int'. An explicit
+                // conversion exists (are you missing a cast?)
                 //         var a = /*<bind>*/stackalloc int[b]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b")
                     .WithArguments("object", "int")
                     .WithLocation(6, 42),
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[b]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[b]").WithLocation(6, 27),
             };
@@ -715,7 +729,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[M()]").WithLocation(6, 27),
             };
@@ -756,7 +771,8 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[(int)M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[(int)M()]")
                     .WithLocation(6, 27),
@@ -796,7 +812,8 @@ class C
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,42): error CS0120: An object reference is required for the non-static field, method, or property 'C.M()'
+                // file.cs(6,42): error CS0120: An object reference is required for the non-static field, method, or
+                // property 'C.M()'
                 //         var a = /*<bind>*/stackalloc int[M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "M")
                     .WithArguments("C.M()")
@@ -877,12 +894,14 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
 ";
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // file.cs(6,42): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit conversion exists (are you missing a cast?)
+                // file.cs(6,42): error CS0266: Cannot implicitly convert type 'double' to 'int'. An explicit
+                // conversion exists (are you missing a cast?)
                 //         var a = /*<bind>*/stackalloc int[0.0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "0.0")
                     .WithArguments("double", "int")
                     .WithLocation(6, 42),
-                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
+                // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe
+                // context
                 //         var a = /*<bind>*/stackalloc int[0.0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[0.0]").WithLocation(6, 27),
             };

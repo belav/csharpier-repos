@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.SignalR;
 
 internal static class ReflectionHelper
 {
-    // mustBeDirectType - Hub methods must use the base 'stream' type and not be a derived class that just implements the 'stream' type
+    // mustBeDirectType - Hub methods must use the base 'stream' type and not be a derived class that
+    // just implements the 'stream' type
     // and 'stream' types from the client are allowed to inherit from accepted 'stream' types
     public static bool IsStreamingType(Type type, bool mustBeDirectType = false)
     {

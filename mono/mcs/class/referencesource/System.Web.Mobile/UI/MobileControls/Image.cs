@@ -19,11 +19,11 @@ using System.Web.UI.HtmlControls;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile Image class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile Image class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\Image.uex' path='docs/doc[@for="Image"]/*' />
     [
         DefaultProperty("ImageUrl"),

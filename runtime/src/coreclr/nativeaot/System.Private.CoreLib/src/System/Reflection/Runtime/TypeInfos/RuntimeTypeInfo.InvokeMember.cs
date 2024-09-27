@@ -122,7 +122,8 @@ namespace System.Reflection.Runtime.TypeInfos
 
             if (name.Length == 0 || name.Equals(@"[DISPID=0]"))
             {
-                // in InvokeMember we always pretend there is a default member if none is provided and we make it ToString
+                // in InvokeMember we always pretend there is a default member if none is provided and we make it
+                // ToString
                 name = GetDefaultMemberName() ?? "ToString";
             }
             #endregion

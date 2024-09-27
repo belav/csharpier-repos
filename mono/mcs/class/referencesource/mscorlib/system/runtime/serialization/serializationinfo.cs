@@ -38,7 +38,8 @@ namespace System.Runtime.Serialization
         private const string s_mscorlibFileName = s_mscorlibAssemblySimpleName + ".dll";
 
         // Even though we have a dictionary, we're still keeping all the arrays around for back-compat.
-        // Otherwise we may run into potentially breaking behaviors like GetEnumerator() not returning entries in the same order they were added.
+        // Otherwise we may run into potentially breaking behaviors like GetEnumerator() not returning
+        // entries in the same order they were added.
         internal String[] m_members;
         internal Object[] m_data;
         internal Type[] m_types;
@@ -167,7 +168,8 @@ namespace System.Runtime.Serialization
 
         private static bool Compare(byte[] a, byte[] b)
         {
-            // if either or both assemblies do not have public key token, we should demand, hence, returning false will force a demand
+            // if either or both assemblies do not have public key token, we should demand, hence, returning
+            // false will force a demand
             if (a == null || b == null || a.Length == 0 || b.Length == 0 || a.Length != b.Length)
             {
                 return false;

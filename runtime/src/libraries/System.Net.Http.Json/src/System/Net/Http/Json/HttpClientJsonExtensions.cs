@@ -126,11 +126,13 @@ namespace System.Net.Http.Json
                 linkedCTS.CancelAfter(timeout);
             }
 
-            // We call SendAsync outside of the async Core method to propagate exception even without awaiting the returned task.
+            // We call SendAsync outside of the async Core method to propagate exception even without awaiting
+            // the returned task.
             Task<HttpResponseMessage> responseTask;
             try
             {
-                // Intentionally using cancellationToken instead of the linked one here as HttpClient will enforce the Timeout on its own for this part
+                // Intentionally using cancellationToken instead of the linked one here as HttpClient will enforce
+                // the Timeout on its own for this part
                 responseTask = getMethod(client, requestUri, cancellationToken);
             }
             catch
@@ -240,7 +242,8 @@ namespace System.Net.Http.Json
                 cancellationToken
             );
 
-            // If ResponseHeadersRead wasn't used, HttpClient will have already buffered the whole response upfront.
+            // If ResponseHeadersRead wasn't used, HttpClient will have already buffered the whole response
+            // upfront.
             // No need to check the limit again.
             return usingResponseHeadersRead ? GetLengthLimitReadStreamAsync(client, task) : task;
         }

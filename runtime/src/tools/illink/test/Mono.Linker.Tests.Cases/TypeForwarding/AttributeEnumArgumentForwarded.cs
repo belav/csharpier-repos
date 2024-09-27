@@ -14,7 +14,8 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding
         new[] { "Dependencies/AttributeWithEnumArgument.cs" },
         references: new[] { "Forwarder.dll" }
     )]
-    // After compiling the test case we then replace the reference impl with implementation + type forwarder
+    // After compiling the test case we then replace the reference impl with implementation + type
+    // forwarder
     [SetupCompileAfter("Implementation.dll", new[] { "Dependencies/MyEnum.cs" })]
     [SetupCompileAfter(
         "Forwarder.dll",

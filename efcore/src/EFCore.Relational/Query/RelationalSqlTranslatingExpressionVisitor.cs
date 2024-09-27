@@ -13,7 +13,8 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         A class that translates expressions to corresponding SQL representation.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
@@ -85,11 +86,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     private bool _throwForNotTranslatedEfProperty;
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="RelationalSqlTranslatingExpressionVisitor" /> class.
+    ///     Creates a new instance of the <see cref="RelationalSqlTranslatingExpressionVisitor" />
+    // class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this class.</param>
     /// <param name="queryCompilationContext">The query compilation context object to use.</param>
-    /// <param name="queryableMethodTranslatingExpressionVisitor">A parent queryable method translating expression visitor to translate subquery.</param>
+    /// <param name="queryableMethodTranslatingExpressionVisitor">A parent queryable method translating
+    // expression visitor to translate subquery.</param>
     public RelationalSqlTranslatingExpressionVisitor(
         RelationalSqlTranslatingExpressionVisitorDependencies dependencies,
         QueryCompilationContext queryCompilationContext,
@@ -135,7 +138,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     /// </summary>
     /// <param name="expression">An expression to translate.</param>
     /// <param name="applyDefaultTypeMapping">
-    ///     Whether to apply the default type mapping on the top-most element if it has none. Defaults to <see langword="true" />.
+    ///     Whether to apply the default type mapping on the top-most element if it has none. Defaults
+    // to <see langword="true" />.
     /// </param>
     /// <returns>A SQL translation of the given expression.</returns>
     public virtual SqlExpression? Translate(
@@ -149,10 +153,14 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual Expression? TranslateProjection(
@@ -164,7 +172,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
         return TranslateInternal(expression, applyDefaultTypeMapping) switch
         {
-            // This is the case of a structural type getting projected out via Select (possibly also an owned entity one day, if we stop
+            // This is the case of a structural type getting projected out via Select (possibly also an owned
+            // entity one day, if we stop
             // expanding them in pre-visitation)
             StructuralTypeReferenceExpression
             {
@@ -896,8 +905,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
                 return scalarSubqueryExpression;
 
-            // We have e.g. an array parameter inside a Where clause; this is represented as a QueryableParameterQueryRootExpression so
-            // that we can translate queryable operators over it (query root in subquery context), but in normal SQL translation context
+            // We have e.g. an array parameter inside a Where clause; this is represented as a
+            // QueryableParameterQueryRootExpression so
+            // that we can translate queryable operators over it (query root in subquery context), but in normal
+            // SQL translation context
             // we just unwrap the query root expression to get the parameter out.
             case ParameterQueryRootExpression queryableParameterQueryRootExpression:
                 return Visit(queryableParameterQueryRootExpression.ParameterExpression);
@@ -955,10 +966,14 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             : QueryCompilationContext.NotTranslatedExpression;
 
     /// <summary>
-    ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
-    ///     the same compatibility standards as public APIs. It may be changed or removed without notice in
-    ///     any release. You should only use it directly in your code with extreme caution and knowing that
-    ///     doing so can result in application failures when updating to a new Entity Framework Core release.
+    ///     This is an internal API that supports the Entity Framework Core infrastructure and not
+    // subject to
+    ///     the same compatibility standards as public APIs. It may be changed or removed without notice
+    // in
+    ///     any release. You should only use it directly in your code with extreme caution and knowing
+    // that
+    ///     doing so can result in application failures when updating to a new Entity Framework Core
+    // release.
     /// </summary>
     [EntityFrameworkInternal]
     public virtual bool TryTranslatePropertyAccess(
@@ -1170,7 +1185,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             }
         }
         // Translate EF.Functions.Greatest/Least.
-        // These are here rather than in a MethodTranslator since the parameter is an array, and that's not supported in regular
+        // These are here rather than in a MethodTranslator since the parameter is an array, and that's not
+        // supported in regular
         // translation.
         else if (
             method.DeclaringType == typeof(RelationalDbFunctionsExtensions)
@@ -1754,7 +1770,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                     elseResult: null
                 );
 
-                // We don't do above processing for subquery entity since it comes from after subquery which has been
+                // We don't do above processing for subquery entity since it comes from after subquery which has
+                // been
                 // single result so either it is regular entity or a collection which always have their own table.
             }
 
@@ -2385,7 +2402,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
 
                         var allNonPrincipalSharedNonPkProperties =
                             nullComparedEntityType.GetNonPrincipalSharedNonPkProperties(table);
-                        // We don't need condition for nullable property if there exist at least one required property which is non shared.
+                        // We don't need condition for nullable property if there exist at least one required property which
+                        // is non shared.
                         if (
                             allNonPrincipalSharedNonPkProperties.Count != 0
                             && allNonPrincipalSharedNonPkProperties.All(p => p.IsNullable)
@@ -2527,7 +2545,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
         {
             if (IsNullSqlConstantExpression(left) || IsNullSqlConstantExpression(right))
             {
-                // TODO: when we support optional complex types - or projecting required complex types via optional navigations - we'll
+                // TODO: when we support optional complex types - or projecting required complex types via optional
+                // navigations - we'll
                 // be able to translate this.
                 throw new InvalidOperationException(
                     RelationalStrings.CannotCompareComplexTypeToNull
@@ -2543,7 +2562,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 "We checked that at least one side is a complex type before calling this function"
             );
 
-            // If a complex type is the result of a subquery, then comparing its columns would mean duplicating the subquery, which would
+            // If a complex type is the result of a subquery, then comparing its columns would mean duplicating
+            // the subquery, which would
             // be potentially very inefficient.
             // TODO: Enable this by extracting the subquery out to a common table expressions (WITH)
             if (leftReference is { Subquery: not null } || rightReference is { Subquery: not null })
@@ -2555,7 +2575,8 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 );
             }
 
-            // Generate an expression that compares each property on the left to the same property on the right; this needs to recursively
+            // Generate an expression that compares each property on the left to the same property on the right;
+            // this needs to recursively
             // include all properties in nested complex types.
             Expression? comparisons = null;
             GenerateComparisons(complexType, left, right);
@@ -2731,8 +2752,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                 )
                     is MemberAssignment memberAssignment => memberAssignment.Expression,
 
-            // For non-constant/parameter complex property accesses, BindComplexProperty is called instead of this method
-            // TODO: possibly refactor, folding this method into BindComplexProperty to have it handle the constant/parameter cases as well
+            // For non-constant/parameter complex property accesses, BindComplexProperty is called instead of
+            // this method
+            // TODO: possibly refactor, folding this method into BindComplexProperty to have it handle the
+            // constant/parameter cases as well
             // (but consider the non-complex property case as well)
             _ => throw new UnreachableException(),
         };

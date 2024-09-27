@@ -59,7 +59,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             // The await expression will be lowered to code that involves the use of side-effects
             // such as jumps and labels, which we can only emit with an empty stack, so we require
             // that the await expression itself is produced only when the stack is empty.
-            // Therefore it is represented by a BoundSpillSequence.  The resulting nodes will be "spilled" to move
+            // Therefore it is represented by a BoundSpillSequence.  The resulting nodes will be "spilled" to
+            // move
             // such statements to the top level (i.e. into the enclosing statement list).  Here we ensure
             // that the await result itself is stored into a temp at the statement level, as that is
             // the form handled by async lowering.

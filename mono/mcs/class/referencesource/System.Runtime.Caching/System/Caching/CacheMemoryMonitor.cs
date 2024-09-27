@@ -203,7 +203,8 @@ namespace System.Runtime.Caching
 
             long cacheSize = _cacheSizeSamples[_idx];
 
-            // use _memoryLimit as an upper bound so that pressure is a percentage (between 0 and 100, inclusive).
+            // use _memoryLimit as an upper bound so that pressure is a percentage (between 0 and 100,
+            // inclusive).
             if (cacheSize > _memoryLimit)
             {
                 cacheSize = _memoryLimit;

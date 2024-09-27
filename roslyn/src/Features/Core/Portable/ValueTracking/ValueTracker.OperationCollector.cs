@@ -203,8 +203,10 @@ namespace Microsoft.CodeAnalysis.ValueTracking
                     || IsContainedIn<IAssignmentOperation>(operation)
                 )
                 {
-                    // If the reference is part of a return operation or assignment operation we want to track where the values come from
-                    // since they contribute to the "output" of the method/assignment and are relavent for value tracking.
+                    // If the reference is part of a return operation or assignment operation we want to track where the
+                    // values come from
+                    // since they contribute to the "output" of the method/assignment and are relavent for value
+                    // tracking.
                     return AddReferenceAsync(operation, cancellationToken);
                 }
 

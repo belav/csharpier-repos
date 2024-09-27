@@ -119,7 +119,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpClientHandler handler = CreateHttpClientHandler();
                     SetResponseDrainTimeout(handler, Timeout.InfiniteTimeSpan);
 
-                    // Set MaxConnectionsPerServer to 1.  This will ensure we will wait for the previous request to drain (or fail to)
+                    // Set MaxConnectionsPerServer to 1.  This will ensure we will wait for the previous request to
+                    // drain (or fail to)
                     handler.MaxConnectionsPerServer = 1;
 
                     using (HttpClient client = CreateHttpClient(handler))
@@ -190,7 +191,8 @@ namespace System.Net.Http.Functional.Tests
             return;
         }
 
-        // Similar to above, these are semi-extreme cases where the response should never drain for any handler.
+        // Similar to above, these are semi-extreme cases where the response should never drain for any
+        // handler.
 
         [OuterLoop]
         [Theory]
@@ -212,7 +214,8 @@ namespace System.Net.Http.Functional.Tests
                     HttpClientHandler handler = CreateHttpClientHandler();
                     SetResponseDrainTimeout(handler, Timeout.InfiniteTimeSpan);
 
-                    // Set MaxConnectionsPerServer to 1.  This will ensure we will wait for the previous request to drain (or fail to)
+                    // Set MaxConnectionsPerServer to 1.  This will ensure we will wait for the previous request to
+                    // drain (or fail to)
                     handler.MaxConnectionsPerServer = 1;
 
                     using (HttpClient client = CreateHttpClient(handler))

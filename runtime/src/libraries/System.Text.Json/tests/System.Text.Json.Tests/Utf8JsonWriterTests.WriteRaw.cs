@@ -383,7 +383,8 @@ namespace System.Text.Json.Tests
         /// <summary>
         /// This test is constrained to run on Windows and MacOSX because it causes
         /// problems on Linux due to the way deferred memory allocation works. On Linux, the allocation can
-        /// succeed even if there is not enough memory but then the test may get killed by the OOM killer at the
+        /// succeed even if there is not enough memory but then the test may get killed by the OOM killer at
+        // the
         /// time the memory is accessed which triggers the full memory allocation.
         /// Also see <see cref="WriteLargeJsonToStreamWithoutFlushing"/>
         /// </summary>
@@ -398,7 +399,8 @@ namespace System.Text.Json.Tests
                 var largeArray = new char[150_000_000];
                 largeArray.AsSpan().Fill('a');
 
-                // Text size chosen so that after several doublings of the underlying buffer we reach ~2 GB (but don't go over)
+                // Text size chosen so that after several doublings of the underlying buffer we reach ~2 GB (but
+                // don't go over)
                 JsonEncodedText text1 = JsonEncodedText.Encode(largeArray.AsSpan(0, 7_500));
                 JsonEncodedText text2 = JsonEncodedText.Encode(largeArray.AsSpan(0, 5_000));
                 JsonEncodedText text3 = JsonEncodedText.Encode(largeArray.AsSpan(0, 150_000_000));
@@ -682,7 +684,8 @@ namespace System.Text.Json.Tests
             TestSequenceSegment? startSegment = null;
             TestSequenceSegment? endSegment = null;
 
-            // Construct ReadOnlySequence<byte> with length as 'len' which is greater than or equal to int.MaxValue
+            // Construct ReadOnlySequence<byte> with length as 'len' which is greater than or equal to
+            // int.MaxValue
             do
             {
                 if (startSegment is null) // First segment

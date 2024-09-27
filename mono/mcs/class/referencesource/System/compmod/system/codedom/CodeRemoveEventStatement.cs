@@ -34,7 +34,8 @@ namespace System.CodeDom
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.CodeDom.CodeRemoveEventStatement'/> class using the specified arguments.
+        ///       Initializes a new instance of the <see cref='System.CodeDom.CodeRemoveEventStatement'/>
+        // class using the specified arguments.
         ///    </para>
         /// </devdoc>
         public CodeRemoveEventStatement(

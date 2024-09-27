@@ -21,7 +21,8 @@ namespace System.Buffers.Binary
     public static partial class BinaryPrimitives
     {
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="sbyte" /> value, which effectively does nothing for an <see cref="sbyte" />.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="sbyte"
+        // /> value, which effectively does nothing for an <see cref="sbyte" />.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The passed-in value, unmodified.</returns>
@@ -31,7 +32,8 @@ namespace System.Buffers.Binary
         public static sbyte ReverseEndianness(sbyte value) => value;
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="short" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="short"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -41,7 +43,8 @@ namespace System.Buffers.Binary
             (short)ReverseEndianness((ushort)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="int" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="int" />
+        // value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -50,7 +53,8 @@ namespace System.Buffers.Binary
         public static int ReverseEndianness(int value) => (int)ReverseEndianness((uint)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="long" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="long" />
+        // value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -59,7 +63,8 @@ namespace System.Buffers.Binary
         public static long ReverseEndianness(long value) => (long)ReverseEndianness((ulong)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="nint" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="nint" />
+        // value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -67,7 +72,8 @@ namespace System.Buffers.Binary
         public static nint ReverseEndianness(nint value) => (nint)ReverseEndianness((nint_t)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="Int128" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="Int128"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -78,7 +84,8 @@ namespace System.Buffers.Binary
         }
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="byte" /> value, which effectively does nothing for an <see cref="byte" />.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="byte" />
+        // value, which effectively does nothing for an <see cref="byte" />.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The passed-in value, unmodified.</returns>
@@ -87,7 +94,8 @@ namespace System.Buffers.Binary
         public static byte ReverseEndianness(byte value) => value;
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ushort" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ushort"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -107,7 +115,8 @@ namespace System.Buffers.Binary
         }
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="char" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="char" />
+        // value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -116,7 +125,8 @@ namespace System.Buffers.Binary
             (char)ReverseEndianness((ushort)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="uint" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="uint" />
+        // value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -150,7 +160,8 @@ namespace System.Buffers.Binary
         }
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ulong" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="ulong"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -167,7 +178,8 @@ namespace System.Buffers.Binary
         }
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="nuint" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="nuint"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -177,7 +189,8 @@ namespace System.Buffers.Binary
             (nuint)ReverseEndianness((nuint_t)value);
 
         /// <summary>
-        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="UInt128" /> value.
+        /// Reverses a primitive value by performing an endianness swap of the specified <see cref="UInt128"
+        // /> value.
         /// </summary>
         /// <param name="value">The value to reverse.</param>
         /// <returns>The reversed value.</returns>
@@ -188,11 +201,16 @@ namespace System.Buffers.Binary
             return new UInt128(ReverseEndianness(value.Lower), ReverseEndianness(value.Upper));
         }
 
-        /// <summary>Copies every primitive value from <paramref name="source"/> to <paramref name="destination"/>, reversing each primitive by performing an endianness swap as part of writing each.</summary>
+        /// <summary>Copies every primitive value from <paramref name="source"/> to <paramref
+        // name="destination"/>, reversing each primitive by performing an endianness swap as part of
+        // writing
+        // each.</summary>
         /// <param name="source">The source span to copy.</param>
         /// <param name="destination">The destination to which the source elements should be copied.</param>
-        /// <remarks>The source and destination spans may overlap. The same span may be passed as both the source and the destination in order to reverse each element's endianness in place.</remarks>
-        /// <exception cref="ArgumentException">The <paramref name="destination"/>'s length is smaller than that of the <paramref name="source"/>.</exception>
+        /// <remarks>The source and destination spans may overlap. The same span may be passed as both the
+        // source and the destination in order to reverse each element's endianness in place.</remarks>
+        /// <exception cref="ArgumentException">The <paramref name="destination"/>'s length is smaller than
+        // that of the <paramref name="source"/>.</exception>
         [CLSCompliant(false)]
         public static void ReverseEndianness(
             ReadOnlySpan<ushort> source,
@@ -447,9 +465,12 @@ namespace System.Buffers.Binary
             }
             else
             {
-                // There's overlap between the source and the destination, and the source starts before the destination.
-                // That means if we were to iterate from beginning to end, reading from the source and writing to the
-                // destination, we'd overwrite source elements not yet read.  To avoid that, we iterate from end to beginning.
+                // There's overlap between the source and the destination, and the source starts before the
+                // destination.
+                // That means if we were to iterate from beginning to end, reading from the source and writing to
+                // the
+                // destination, we'd overwrite source elements not yet read.  To avoid that, we iterate from end to
+                // beginning.
 
                 int i = source.Length;
 

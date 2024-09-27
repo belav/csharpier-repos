@@ -8,7 +8,8 @@ namespace Microsoft.CodeAnalysis
 {
     /// <summary>
     /// Provides information about statements which transfer control in and out of a region. This
-    /// information is returned from a call to <see cref="SemanticModel.AnalyzeControlFlow(SyntaxNode)" />.
+    /// information is returned from a call to <see cref="SemanticModel.AnalyzeControlFlow(SyntaxNode)"
+    // />.
     /// </summary>
     public abstract class ControlFlowAnalysis
     {
@@ -38,7 +39,8 @@ namespace Microsoft.CodeAnalysis
         public abstract ImmutableArray<SyntaxNode> ReturnStatements { get; }
 
         /// <summary>
-        /// Returns true if and only if analysis was successful.  Analysis can fail if the region does not properly span a single expression,
+        /// Returns true if and only if analysis was successful.  Analysis can fail if the region does not
+        // properly span a single expression,
         /// a single statement, or a contiguous series of statements within the enclosing block.
         /// </summary>
         public abstract bool Succeeded { get; }

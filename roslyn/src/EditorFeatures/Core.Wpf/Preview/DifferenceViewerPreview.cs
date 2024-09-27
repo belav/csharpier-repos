@@ -164,8 +164,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         }
 
         /// <summary>
-        /// Preprocess input (keyboard) messages in order to translate them to editor commands if they map. Since we are in a modal dialog
-        /// we need to tell the shell to allow pre-translate during a modal loop as well as instructing it to use the editor keyboard scope
+        /// Preprocess input (keyboard) messages in order to translate them to editor commands if they map.
+        // Since we are in a modal dialog
+        /// we need to tell the shell to allow pre-translate during a modal loop as well as instructing it
+        // to use the editor keyboard scope
         /// even though, as far as the shell knows, there is no editor active.
         /// </summary>
         private void FilterThreadMessage(ref System.Windows.Interop.MSG msg, ref bool handled)
@@ -181,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     message = (uint)msg.message,
                 };
 
-                // Ask the shell to do the command mapping for us and without firing off the command. We need to check if this command is one of the
+                // Ask the shell to do the command mapping for us and without firing off the command. We need to
+                // check if this command is one of the
                 // supported commands first before actually firing the command.
                 if (
                     ErrorHandler.Succeeded(
@@ -235,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
         /// </summary>
         /// <param name="cmdGuid">The command set guid for the command</param>
         /// <param name="cmdId">The command id</param>
-        /// <returns>true for the supported commands that are copy, selection, navigation. False otherwise</returns>
+        /// <returns>true for the supported commands that are copy, selection, navigation. False
+        // otherwise</returns>
         private static bool IsCommandAllowed(Guid cmdGuid, uint cmdId)
         {
             if (cmdGuid == VsMenus.guidStandardCommandSet2K)

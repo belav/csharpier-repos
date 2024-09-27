@@ -719,9 +719,11 @@ namespace System.Security.Cryptography.Tests
             return GetInvalidSizes(AesGcm.TagByteSizes);
         }
 
+        //
         // https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Algorithm-Validation-Program/documents/mac/gcmtestvectors.zip
         private const string NistGcmTestVectors = "NIST GCM Test Vectors";
 
+        //
         // http://web.archive.org/web/20170811123217/http://csrc.nist.gov/groups/ST/toolkit//BCM/documents/proposedmodes/gcm/gcm-revised-spec.pdf
         private const string NistGcmSpecTestCases = "NIST GCM Spec test cases";
 
@@ -962,7 +964,8 @@ namespace System.Security.Cryptography.Tests
             // cases 17, 18 have not supported nonce size
         };
 
-        // [ CaseId; Key.Length; Nonce.Length; Plaintext.Length; AssociatedData.Length; Tag.Length ] is unique
+        // [ CaseId; Key.Length; Nonce.Length; Plaintext.Length; AssociatedData.Length; Tag.Length ] is
+        // unique
         private static readonly AEADTest[] s_nistGcmTestVectorsSelectedCases = new AEADTest[]
         {
             // key length = 128

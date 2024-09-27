@@ -12,7 +12,8 @@ using Internal.TypeSystem;
 namespace ILCompiler.DependencyAnalysis
 {
     /// <summary>
-    /// Node that performs dataflow analysis to find dynamic dependencies (e.g. reflection use) of the given method.
+    /// Node that performs dataflow analysis to find dynamic dependencies (e.g. reflection use) of the
+    // given method.
     /// </summary>
     public class DataflowAnalyzedMethodNode : DependencyNodeCore<NodeFactory>
     {

@@ -147,7 +147,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis.SymbolUsageAnalysis
                     // of the assignment, as there might be expressions on the left that are evaluated first.
                     // We don't want to mark the symbol read while processing the left of assignment
                     // as there can be references on the right, which reads the prior value.
-                    // Instead we mark this as a pending write, which will be processed when we finish visiting the assignment.
+                    // Instead we mark this as a pending write, which will be processed when we finish visiting the
+                    // assignment.
                     isWrittenTo = false;
                 }
 

@@ -46,7 +46,8 @@ namespace ILCompiler
         public abstract bool PresenceOfEETypeImpliesAllMethodsOnType(TypeDesc type);
 
         /// <summary>
-        /// If true, the type will not be linked into the same module as the current compilation and therefore
+        /// If true, the type will not be linked into the same module as the current compilation and
+        // therefore
         /// accessed through the target platform's import mechanism (ie, Import Address Table on Windows)
         /// </summary>
         public abstract bool ShouldReferenceThroughImportTable(TypeDesc type);

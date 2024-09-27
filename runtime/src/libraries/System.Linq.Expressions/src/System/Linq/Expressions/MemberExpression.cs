@@ -51,7 +51,8 @@ namespace System.Linq.Expressions
         }
 
         /// <summary>
-        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see cref="Expression"/>.)
+        /// Returns the node type of this <see cref="Expression"/>. (Inherited from <see
+        // cref="Expression"/>.)
         /// </summary>
         /// <returns>The <see cref="ExpressionType"/> that represents this expression.</returns>
         public sealed override ExpressionType NodeType => ExpressionType.MemberAccess;
@@ -76,7 +77,8 @@ namespace System.Linq.Expressions
         /// return this expression.
         /// </summary>
         /// <param name="expression">The <see cref="Expression"/> property of the result.</param>
-        /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+        /// <returns>This expression if no children changed, or an expression with the updated
+        // children.</returns>
         public MemberExpression Update(Expression? expression)
         {
             if (expression == Expression)
@@ -124,7 +126,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a field.
         /// </summary>
-        /// <param name="expression">The containing object of the field.  This can be null for static fields.</param>
+        /// <param name="expression">The containing object of the field.  This can be null for static
+        // fields.</param>
         /// <param name="field">The field to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         public static MemberExpression Field(Expression? expression, FieldInfo field)
@@ -156,7 +159,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a field.
         /// </summary>
-        /// <param name="expression">The containing object of the field.  This can be null for static fields.</param>
+        /// <param name="expression">The containing object of the field.  This can be null for static
+        // fields.</param>
         /// <param name="fieldName">The field to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
@@ -191,7 +195,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a field.
         /// </summary>
-        /// <param name="expression">The containing object of the field.  This can be null for static fields.</param>
+        /// <param name="expression">The containing object of the field.  This can be null for static
+        // fields.</param>
         /// <param name="type">The <see cref="Type"/> containing the field.</param>
         /// <param name="fieldName">The field to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
@@ -241,7 +246,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property.
         /// </summary>
-        /// <param name="expression">The containing object of the property.  This can be null for static properties.</param>
+        /// <param name="expression">The containing object of the property.  This can be null for static
+        // properties.</param>
         /// <param name="propertyName">The property to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
@@ -279,7 +285,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property.
         /// </summary>
-        /// <param name="expression">The containing object of the property.  This can be null for static properties.</param>
+        /// <param name="expression">The containing object of the property.  This can be null for static
+        // properties.</param>
         /// <param name="type">The <see cref="Type"/> containing the property.</param>
         /// <param name="propertyName">The property to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
@@ -323,7 +330,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property.
         /// </summary>
-        /// <param name="expression">The containing object of the property.  This can be null for static properties.</param>
+        /// <param name="expression">The containing object of the property.  This can be null for static
+        // properties.</param>
         /// <param name="property">The property to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         public static MemberExpression Property(Expression? expression, PropertyInfo property)
@@ -378,7 +386,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property.
         /// </summary>
-        /// <param name="expression">The containing object of the property.  This can be null for static properties.</param>
+        /// <param name="expression">The containing object of the property.  This can be null for static
+        // properties.</param>
         /// <param name="propertyAccessor">An accessor method of the property to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         [RequiresUnreferencedCode(PropertyFromAccessorRequiresUnreferencedCode)]
@@ -445,7 +454,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property or field.
         /// </summary>
-        /// <param name="expression">The containing object of the member.  This can be null for static members.</param>
+        /// <param name="expression">The containing object of the member.  This can be null for static
+        // members.</param>
         /// <param name="propertyOrFieldName">The member to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         [RequiresUnreferencedCode(ExpressionRequiresUnreferencedCode)]
@@ -503,7 +513,8 @@ namespace System.Linq.Expressions
         /// <summary>
         /// Creates a <see cref="MemberExpression"/> accessing a property or field.
         /// </summary>
-        /// <param name="expression">The containing object of the member.  This can be null for static members.</param>
+        /// <param name="expression">The containing object of the member.  This can be null for static
+        // members.</param>
         /// <param name="member">The member to be accessed.</param>
         /// <returns>The created <see cref="MemberExpression"/>.</returns>
         public static MemberExpression MakeMemberAccess(Expression? expression, MemberInfo member)

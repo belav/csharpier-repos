@@ -15,7 +15,8 @@ namespace System.Diagnostics
         {
             if (!s_registered)
             {
-                // Registering callbacks more than once is fine, but avoid the overhead common cases without taking a lock.
+                // Registering callbacks more than once is fine, but avoid the overhead common cases without taking
+                // a lock.
                 Trace.Refreshing += RefreshingConfiguration;
                 Switch.Initializing += InitializingSwitch;
                 TraceSource.Initializing += InitializingTraceSource;
@@ -36,7 +37,8 @@ namespace System.Diagnostics
         {
             TraceSource traceSource = e.TraceSource;
 
-            // Ported from https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceSource.cs,176
+            // Ported from
+            // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceSource.cs,176
             SourceElementsCollection sources = DiagnosticsConfiguration.Sources;
 
             if (sources != null)
@@ -165,7 +167,9 @@ namespace System.Diagnostics
 
         private static void ConfigureTraceSettings()
         {
-            // Ported from https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceInternal.cs,06360b4de5e221c2, https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceInternal.cs,37
+            // Ported from
+            // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceInternal.cs,06360b4de5e221c2,
+            // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/TraceInternal.cs,37
 
             TraceSection traceSection = DiagnosticsConfiguration.SystemDiagnosticsSection?.Trace;
 
@@ -195,7 +199,8 @@ namespace System.Diagnostics
         {
             Switch sw = e.Switch;
 
-            // Ported from https://referencesource.microsoft.com/#System/compmod/system/diagnostics/Switch.cs,173
+            // Ported from
+            // https://referencesource.microsoft.com/#System/compmod/system/diagnostics/Switch.cs,173
             SwitchElementsCollection switchSettings = DiagnosticsConfiguration.SwitchSettings;
             if (switchSettings != null)
             {

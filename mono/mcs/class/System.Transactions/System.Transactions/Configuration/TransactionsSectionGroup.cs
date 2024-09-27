@@ -16,6 +16,7 @@ using System.Text;
 
 namespace System.Transactions.Configuration
 {
+    //
     // http://msdn.microsoft.com/en-us/library/system.transactions.configuration.transactionssectiongroup.aspx
     public class TransactionsSectionGroup : ConfigurationSectionGroup
     {

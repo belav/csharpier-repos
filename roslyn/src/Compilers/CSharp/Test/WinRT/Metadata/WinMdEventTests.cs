@@ -3109,7 +3109,9 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                     TestOptions.CreateTestOptions(kind, OptimizationLevel.Debug)
                 );
                 comp.VerifyDiagnostics(
-                    // (40,41): error CS1991: 'OverrideAndImplIncorrectly.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'OverrideAndImplIncorrectly.WinRT' is a regular .NET event.
+                    // (40,41): error CS1991: 'OverrideAndImplIncorrectly.WinRT' cannot implement 'Interface.WinRT'
+                    // because 'Interface.WinRT' is a Windows Runtime event and 'OverrideAndImplIncorrectly.WinRT' is a
+                    // regular .NET event.
                     //     public override event System.Action WinRT
                     Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT")
                         .WithArguments(
@@ -3118,7 +3120,9 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                             "Interface.WinRT",
                             "OverrideAndImplIncorrectly.WinRT"
                         ),
-                    // (34,41): error CS1991: 'OverrideAndImplIncorrectly.Normal' cannot implement 'Interface.Normal' because 'OverrideAndImplIncorrectly.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
+                    // (34,41): error CS1991: 'OverrideAndImplIncorrectly.Normal' cannot implement 'Interface.Normal'
+                    // because 'OverrideAndImplIncorrectly.Normal' is a Windows Runtime event and 'Interface.Normal' is a
+                    // regular .NET event.
                     //     public override event System.Action Normal
                     Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal")
                         .WithArguments(
@@ -3291,7 +3295,8 @@ class C : IWinRT, INormal
 
                 var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }));
                 comp.VerifyDiagnostics(
-                    // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event and 'INormal.E' is a regular .NET event.
+                    // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event
+                    // and 'INormal.E' is a regular .NET event.
                     //     public event System.Action E
                     Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E")
                         .WithArguments("C.E", "INormal.E", "C.E", "INormal.E")
@@ -3321,7 +3326,8 @@ class C : INormal, IWinRT
 
                 var comp = CreateEmptyCompilation(source, WinRtRefs.Concat(new[] { ilRef }));
                 comp.VerifyDiagnostics(
-                    // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event and 'INormal.E' is a regular .NET event.
+                    // (4,32): error CS1991: 'C.E' cannot implement 'INormal.E' because 'C.E' is a Windows Runtime event
+                    // and 'INormal.E' is a regular .NET event.
                     //     public event System.Action E
                     Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "E")
                         .WithArguments("C.E", "INormal.E", "C.E", "INormal.E")
@@ -3353,7 +3359,9 @@ class Derived : ReversedBase, Interface
                 WinRtRefs.Concat(new[] { interfaceILRef, baseILRef })
             );
             comp.VerifyDiagnostics(
-                // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'ReversedBase.WinRT' is a regular .NET event.
+                // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.WinRT' cannot implement
+                // 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'ReversedBase.WinRT' is a
+                // regular .NET event.
                 Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular)
                     .WithArguments(
                         "ReversedBase.WinRT",
@@ -3361,7 +3369,9 @@ class Derived : ReversedBase, Interface
                         "Interface.WinRT",
                         "ReversedBase.WinRT"
                     ),
-                // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.Normal' cannot implement 'Interface.Normal' because 'ReversedBase.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
+                // 53b0a0ee-4ca7-4106-89d3-972416f701c6.dll: error CS1991: 'ReversedBase.Normal' cannot implement
+                // 'Interface.Normal' because 'ReversedBase.Normal' is a Windows Runtime event and 'Interface.Normal'
+                // is a regular .NET event.
                 Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular)
                     .WithArguments(
                         "ReversedBase.Normal",
@@ -3402,7 +3412,8 @@ class Derived : ReversedBase, Interface
             );
             // BREAK: dev11 doesn't catch these conflicts.
             comp.VerifyDiagnostics(
-                // (10,41): error CS1991: 'Derived.WinRT' cannot implement 'Interface.WinRT' because 'Interface.WinRT' is a Windows Runtime event and 'Derived.WinRT' is a regular .NET event.
+                // (10,41): error CS1991: 'Derived.WinRT' cannot implement 'Interface.WinRT' because
+                // 'Interface.WinRT' is a Windows Runtime event and 'Derived.WinRT' is a regular .NET event.
                 //     public override event System.Action WinRT
                 Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "WinRT")
                     .WithArguments(
@@ -3411,7 +3422,8 @@ class Derived : ReversedBase, Interface
                         "Interface.WinRT",
                         "Derived.WinRT"
                     ),
-                // (4,41): error CS1991: 'Derived.Normal' cannot implement 'Interface.Normal' because 'Derived.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
+                // (4,41): error CS1991: 'Derived.Normal' cannot implement 'Interface.Normal' because
+                // 'Derived.Normal' is a Windows Runtime event and 'Interface.Normal' is a regular .NET event.
                 //     public override event System.Action Normal
                 Diagnostic(ErrorCode.ERR_MixingWinRTEventWithRegular, "Normal")
                     .WithArguments(
@@ -3501,20 +3513,24 @@ class C
             var comp = CreateCompilationWithMscorlib40(source, options: TestOptions.ReleaseWinMD);
             comp.VerifyDiagnostics(
                 // Add accessor signature:
-                // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
+                // (4,25): error CS0518: Predefined type
+                // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
                 //     event System.Action E;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
                     .WithArguments(
                         "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"
                     ),
-                // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
+                // (4,25): error CS0518: Predefined type
+                // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken' is not defined or imported
                 //     event System.Action E;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
                     .WithArguments(
                         "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken"
                     ),
                 // Backing field type:
-                // (4,25): error CS0518: Predefined type 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1' is not defined or imported
+                // (4,25): error CS0518: Predefined type
+                // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1' is not defined or
+                // imported
                 //     event System.Action E;
                 Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "E")
                     .WithArguments(
@@ -3620,21 +3636,24 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 ";
             CreateCompilationWithMscorlib40(source, options: TestOptions.ReleaseWinMD)
                 .VerifyEmitDiagnostics(
-                    // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.AddEventHandler'
+                    // (4,32): error CS0656: Missing compiler required member
+                    // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.AddEventHandler'
                     //     public event System.Action E;
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                         .WithArguments(
                             "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1",
                             "AddEventHandler"
                         ),
-                    // (4,32): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.RemoveEventHandler'
+                    // (4,32): error CS0656: Missing compiler required member
+                    // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1.RemoveEventHandler'
                     //     public event System.Action E;
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                         .WithArguments(
                             "System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable`1",
                             "RemoveEventHandler"
                         ),
-                    // (8,9): error CS0656: Missing compiler required member 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>.get_InvocationList'
+                    // (8,9): error CS0656: Missing compiler required member
+                    // 'System.Runtime.InteropServices.WindowsRuntime.EventRegistrationTokenTable<T>.get_InvocationList'
                     //         E();
                     Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "E")
                         .WithArguments(

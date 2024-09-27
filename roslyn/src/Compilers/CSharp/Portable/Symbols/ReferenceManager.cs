@@ -111,10 +111,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             /// <summary>
-            /// Checks if the properties of <paramref name="duplicateReference"/> are compatible with properties of <paramref name="primaryReference"/>.
+            /// Checks if the properties of <paramref name="duplicateReference"/> are compatible with properties
+            // of <paramref name="primaryReference"/>.
             /// Reports inconsistencies to the given diagnostic bag.
             /// </summary>
-            /// <returns>True if the properties are compatible and hence merged, false if the duplicate reference should not merge it's properties with primary reference.</returns>
+            /// <returns>True if the properties are compatible and hence merged, false if the duplicate
+            // reference should not merge it's properties with primary reference.</returns>
             protected override bool CheckPropertiesConsistency(
                 MetadataReference primaryReference,
                 MetadataReference duplicateReference,
@@ -222,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // 2) all results calculated by the second thread will be thrown away since the first thread
                 //    already acquired SymbolCacheAndReferenceManagerStateGuard that is needed to publish the data.
 
-                // The given compilation is the first compilation that shares this manager and its symbols are requested.
+                // The given compilation is the first compilation that shares this manager and its symbols are
+                // requested.
                 // Perform full reference resolution and binding.
                 if (!IsBound && CreateAndSetSourceAssemblyFullBind(compilation))
                 {
@@ -240,7 +243,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // We encountered a circular reference while binding the previous compilation.
                     // This compilation can't share bound references with other compilations. Create a new manager.
 
-                    // NOTE: The CreateSourceAssemblyFullBind is going to replace compilation's reference manager with newManager.
+                    // NOTE: The CreateSourceAssemblyFullBind is going to replace compilation's reference manager with
+                    // newManager.
 
                     var newManager = new ReferenceManager(
                         this.SimpleAssemblyName,
@@ -264,20 +268,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Creates a <see cref="PEAssemblySymbol"/> from specified metadata.
             /// </summary>
             /// <remarks>
-            /// Used by EnC to create symbols for emit baseline. The PE symbols are used by <see cref="CSharpSymbolMatcher"/>.
+            /// Used by EnC to create symbols for emit baseline. The PE symbols are used by <see
+            // cref="CSharpSymbolMatcher"/>.
             ///
-            /// The assembly references listed in the metadata AssemblyRef table are matched to the resolved references
-            /// stored on this <see cref="ReferenceManager"/>. We assume that the dependencies of the baseline metadata are
-            /// the same as the dependencies of the current compilation. This is not exactly true when the dependencies use
-            /// time-based versioning pattern, e.g. AssemblyVersion("1.0.*"). In that case we assume only the version
+            /// The assembly references listed in the metadata AssemblyRef table are matched to the resolved
+            // references
+            /// stored on this <see cref="ReferenceManager"/>. We assume that the dependencies of the baseline
+            // metadata are
+            /// the same as the dependencies of the current compilation. This is not exactly true when the
+            // dependencies use
+            /// time-based versioning pattern, e.g. AssemblyVersion("1.0.*"). In that case we assume only the
+            // version
             /// changed and nothing else.
             ///
-            /// Each AssemblyRef is matched against the assembly identities using an exact equality comparison modulo version.
-            /// AssemblyRef with lower version in metadata is matched to a PE assembly symbol with the higher version
-            /// (provided that the assembly name, culture, PKT and flags are the same) if there is no symbol with the exactly matching version.
-            /// If there are multiple symbols with higher versions selects the one with the minimal version among them.
+            /// Each AssemblyRef is matched against the assembly identities using an exact equality comparison
+            // modulo version.
+            /// AssemblyRef with lower version in metadata is matched to a PE assembly symbol with the higher
+            // version
+            /// (provided that the assembly name, culture, PKT and flags are the same) if there is no symbol
+            // with the exactly matching version.
+            /// If there are multiple symbols with higher versions selects the one with the minimal version
+            // among them.
             ///
-            /// Matching to a higher version is necessary to support EnC for projects whose P2P dependencies use time-based versioning pattern.
+            /// Matching to a higher version is necessary to support EnC for projects whose P2P dependencies use
+            // time-based versioning pattern.
             /// The versions of the dependent projects seen from the IDE will be higher than
             /// the one written in the metadata at the time their respective baselines are built.
             ///
@@ -286,9 +300,12 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <param name="metadata"></param>
             /// <param name="importOptions"></param>
             /// <param name="assemblyReferenceIdentityMap">
-            /// A map of the PE assembly symbol identities to the identities of the original metadata AssemblyRefs.
-            /// This map will be used in emit when serializing AssemblyRef table of the delta. For the delta to be compatible with
-            /// the original metadata we need to map the identities of the PE assembly symbols back to the original AssemblyRefs (if different).
+            /// A map of the PE assembly symbol identities to the identities of the original metadata
+            // AssemblyRefs.
+            /// This map will be used in emit when serializing AssemblyRef table of the delta. For the delta to
+            // be compatible with
+            /// the original metadata we need to map the identities of the PE assembly symbols back to the
+            // original AssemblyRefs (if different).
             /// In other words, we pretend that the versions of the dependencies haven't changed.
             /// </param>
             public PEAssemblySymbol CreatePEAssemblyForAssemblyMetadata(
@@ -302,7 +319,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AssertBound();
 
-                // If the compilation has a reference from metadata to source assembly we can't share the referenced PE symbols.
+                // If the compilation has a reference from metadata to source assembly we can't share the referenced
+                // PE symbols.
                 Debug.Assert(!HasCircularReference);
 
                 var referencedAssembliesByIdentity = new AssemblyIdentityMap<AssemblySymbol>();
@@ -379,7 +397,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AssertBound();
 
-                // If the compilation has a reference from metadata to source assembly we can't share the referenced PE symbols.
+                // If the compilation has a reference from metadata to source assembly we can't share the referenced
+                // PE symbols.
                 Debug.Assert(!HasCircularReference);
 
                 string moduleName = compilation.MakeSourceModuleName();
@@ -436,7 +455,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            // Returns false if another compilation sharing this manager finished binding earlier and we should reuse its results.
+            // Returns false if another compilation sharing this manager finished binding earlier and we should
+            // reuse its results.
             private bool CreateAndSetSourceAssemblyFullBind(CSharpCompilation compilation)
             {
                 var resolutionDiagnostics = DiagnosticBag.GetInstance();
@@ -482,8 +502,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray<ResolvedReference> implicitlyResolvedReferenceMap;
                     ImmutableArray<AssemblyData> allAssemblyData;
 
-                    // Avoid resolving previously resolved missing references. If we call to the resolver again we would create new assembly symbols for them,
-                    // which would not match the previously created ones. As a result we would get duplicate PE types and conversion errors.
+                    // Avoid resolving previously resolved missing references. If we call to the resolver again we would
+                    // create new assembly symbols for them,
+                    // which would not match the previously created ones. As a result we would get duplicate PE types
+                    // and conversion errors.
                     var implicitReferenceResolutions =
                         compilation
                             .ScriptCompilationInfo?.PreviousScriptCompilation?.GetBoundReferenceManager()
@@ -624,7 +646,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 if (IsBound)
                                 {
-                                    // Another thread has finished constructing AssemblySymbol for another compilation that shares this manager.
+                                    // Another thread has finished constructing AssemblySymbol for another compilation that shares this
+                                    // manager.
                                     // Drop the results and reuse the symbols that were created for the other compilation.
                                     return false;
                                 }

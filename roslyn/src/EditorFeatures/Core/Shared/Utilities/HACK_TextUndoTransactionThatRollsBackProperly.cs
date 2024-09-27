@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
     /// An implementation of <see cref="ITextUndoTransaction" /> that wraps another
     /// <see cref="ITextUndoTransaction" />. Some undo implementations (notably the VS implementation)
     /// violate the specified contract for Cancel(), which states that cancelling an active transaction
-    /// should undo the primitives that we already added. This works around that problem; calling Cancel()
+    /// should undo the primitives that we already added. This works around that problem; calling
+    // Cancel()
     /// on this forwards the cancellation to the inner transaction, and if it failed to roll back we
     /// do it ourselves.
     /// </summary>

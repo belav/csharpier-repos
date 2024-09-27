@@ -248,7 +248,8 @@ namespace System.Security.Cryptography.Xml.Tests
         }
 
         [Fact]
-        // MS.NET looks incorrect, or something incorrect in this test code; It turned out nothing to do with function here()
+        // MS.NET looks incorrect, or something incorrect in this test code; It turned out nothing to do
+        // with function here()
         public void FunctionHereObsolete()
         {
             XmlDsigXPathTransform t = new XmlDsigXPathTransform();

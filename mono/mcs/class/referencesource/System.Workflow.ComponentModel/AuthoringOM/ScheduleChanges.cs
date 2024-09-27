@@ -301,7 +301,8 @@ namespace System.Workflow.ComponentModel
                                 );
 
                             // Ask the parent context activity whether or not this child activity can be added or removed.
-                            // The call to TraverseDottedPathFromRoot here should return the parent context activity for this change action.
+                            // The call to TraverseDottedPathFromRoot here should return the parent context activity for this
+                            // change action.
                             if (
                                 contextActivity.TraverseDottedPathFromRoot(
                                     ((ActivityChangeAction)changeAction).OwnerActivityDottedPath
@@ -1201,7 +1202,8 @@ namespace System.Workflow.ComponentModel
                 base.GetProperties(serializationManager, obj)
             );
 
-            //Collect the internal properties, we do this so that activity change action apis don't need to expose unnecessary setters
+            //Collect the internal properties, we do this so that activity change action apis don't need to
+            // expose unnecessary setters
             foreach (
                 PropertyInfo property in obj.GetType()
                     .GetProperties(

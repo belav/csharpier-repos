@@ -111,7 +111,8 @@ public class Startup
             // This is what [Authorize] calls
             // var user = await context.AuthenticateAsync();
 
-            // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
+            // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)]
+            // calls
             // var user = await context.AuthenticateAsync(WsFederationDefaults.AuthenticationScheme);
 
             // Not authenticated
@@ -120,7 +121,8 @@ public class Startup
                 // This is what [Authorize] calls
                 await context.ChallengeAsync();
 
-                // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
+                // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)]
+                // calls
                 // await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
 
                 return;

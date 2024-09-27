@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
-// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+// Licensed under the MIT license. See LICENSE file in the project root for full license
+// information.
 
 using System.Collections.Generic;
 using System.CommandLine.Completions;
@@ -59,7 +60,8 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// When set to true, this option will be applied to its immediate parent command or commands and recursively to their subcommands.
+        /// When set to true, this option will be applied to its immediate parent command or commands and
+        // recursively to their subcommands.
         /// </summary>
         public bool Recursive { get; set; }
 
@@ -77,10 +79,12 @@ namespace System.CommandLine
             Argument.CompletionSources;
 
         /// <summary>
-        /// Gets a value that indicates whether multiple argument tokens are allowed for each option identifier token.
+        /// Gets a value that indicates whether multiple argument tokens are allowed for each option
+        // identifier token.
         /// </summary>
         /// <example>
-        /// If set to <see langword="true"/>, the following command line is valid for passing multiple arguments:
+        /// If set to <see langword="true"/>, the following command line is valid for passing multiple
+        // arguments:
         /// <code>
         /// > --opt 1 2 3
         /// </code>
@@ -97,13 +101,15 @@ namespace System.CommandLine
         /// <summary>
         /// Indicates whether the option is required when its parent command is invoked.
         /// </summary>
-        /// <remarks>When an option is required and its parent command is invoked without it, an error results.</remarks>
+        /// <remarks>When an option is required and its parent command is invoked without it, an error
+        // results.</remarks>
         public bool Required { get; set; }
 
         /// <summary>
         /// Gets the unique set of strings that can be used on the command line to specify the Option.
         /// </summary>
-        /// <remarks>The collection does not contain the <see cref="CliSymbol.Name"/> of the Option.</remarks>
+        /// <remarks>The collection does not contain the <see cref="CliSymbol.Name"/> of the
+        // Option.</remarks>
         public ICollection<string> Aliases => _aliases ??= new();
 
         /// <summary>

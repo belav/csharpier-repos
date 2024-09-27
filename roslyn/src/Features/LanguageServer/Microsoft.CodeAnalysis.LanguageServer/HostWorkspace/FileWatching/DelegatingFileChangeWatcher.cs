@@ -13,11 +13,14 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace.FileWatching;
 
 /// <summary>
-/// A MEF export for <see cref="IFileChangeWatcher" />. This checks if we're able to create an <see cref="LspFileChangeWatcher" /> if the client supports
-/// file watching. If we do, we create that and delegate to it. Otherwise we use a <see cref="SimpleFileChangeWatcher" />.
+/// A MEF export for <see cref="IFileChangeWatcher" />. This checks if we're able to create an <see
+// cref="LspFileChangeWatcher" /> if the client supports
+/// file watching. If we do, we create that and delegate to it. Otherwise we use a <see
+// cref="SimpleFileChangeWatcher" />.
 /// </summary>
 /// <remarks>
-/// LSP clients don't always support file watching; this allows us to be flexible and use it when we can, but fall back to something else if we can't.
+/// LSP clients don't always support file watching; this allows us to be flexible and use it when we
+// can, but fall back to something else if we can't.
 /// </remarks>
 [Export(typeof(IFileChangeWatcher)), Shared]
 internal sealed class DelegatingFileChangeWatcher : IFileChangeWatcher

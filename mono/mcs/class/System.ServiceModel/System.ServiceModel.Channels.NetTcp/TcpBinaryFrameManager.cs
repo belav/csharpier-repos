@@ -335,10 +335,12 @@ namespace System.ServiceModel.Channels.NetTcp
                     // it is already disconnected
                     return null;
                 }
-                // FIXME: .NET never results in -1, so there may be implementation mismatch in Socket (but might be in other places)
+                // FIXME: .NET never results in -1, so there may be implementation mismatch in Socket (but might be
+                // in other places)
                 if (packetType == -1)
                     return null;
-                // FIXME: The client should wait for EndRecord, but if we try to send it, the socket blocks and becomes unable to work anymore.
+                // FIXME: The client should wait for EndRecord, but if we try to send it, the socket blocks and
+                // becomes unable to work anymore.
                 if (packetType == EndRecord)
                     return null;
                 if (packetType != SizedEnvelopeRecord)
@@ -358,7 +360,8 @@ namespace System.ServiceModel.Channels.NetTcp
                 byte[] buffer = ReadSizedChunk();
                 var ms = new MemoryStream(buffer, 0, buffer.Length);
 
-                // FIXME: turned out that it could be either in-band dictionary ([MC-NBFSE]), or a mere xml body ([MC-NBFS]).
+                // FIXME: turned out that it could be either in-band dictionary ([MC-NBFSE]), or a mere xml body
+                // ([MC-NBFS]).
                 bool inBandDic = false;
                 XmlBinaryReaderSession session = null;
                 switch (EncodingRecord)

@@ -115,7 +115,8 @@ namespace System.Security.Cryptography
         }
 
         /// <summary>
-        ///  Exports the key and explicit curve parameters used by the ECC object into an <see cref="ECParameters"/> object.
+        ///  Exports the key and explicit curve parameters used by the ECC object into an <see
+        // cref="ECParameters"/> object.
         /// </summary>
         /// <exception cref="CryptographicException">
         ///  if there was an issue obtaining the curve values.

@@ -16,7 +16,8 @@ namespace System.Web.Util
     [SecurityPermission(SecurityAction.LinkDemand, UnmanagedCode = true)]
     internal static class ReflectionUtil
     {
-        // Resets an object to its "default" state, e.g. where each instance field is given the value default(TField).
+        // Resets an object to its "default" state, e.g. where each instance field is given the value
+        // default(TField).
         public static void Reset<T>(T obj)
             where T : class
         {
@@ -50,7 +51,8 @@ namespace System.Web.Util
                     }
 
                     // obj.field = default(TField);
-                    // Opcodes.Initobj can be used for both value and reference types; see ECMA 335, Partition III, Sec. 4.5 "initobj"
+                    // Opcodes.Initobj can be used for both value and reference types; see ECMA 335, Partition III, Sec.
+                    // 4.5 "initobj"
                     // (ref: http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-335.pdf)
                     ilGen.Emit(OpCodes.Ldarg_0);
                     ilGen.Emit(OpCodes.Ldflda, fieldInfo);

@@ -54,13 +54,14 @@ namespace MonoTests.System.ServiceModel.Description
     [TestFixture]
     public class WebScriptEnablingBehaviorTest
     {
-        /*
-        ServiceEndpoint CreateEndpoint ()
-        {
-            return new ServiceEndpoint (ContractDescription.GetContract (typeof (IMyService)), new WebHttpBinding (),
-                            new EndpointAddress ("http://localhost:37564"));
-        }
-        */
+/*
+ServiceEndpoint CreateEndpoint ()
+{
+return new ServiceEndpoint (ContractDescription.GetContract (typeof (IMyService)), new
+WebHttpBinding (),
+new EndpointAddress ("http://localhost:37564"));
+}
+*/
 
         [Test]
         public void ScriptGenerator()

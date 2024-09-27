@@ -420,7 +420,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             INamedTypeSymbol containingType = symbol.ContainingType;
 
-            // this method is only called for members and they should have a containingType or a containing symbol should be a TypeSymbol.
+            // this method is only called for members and they should have a containingType or a containing
+            // symbol should be a TypeSymbol.
             Debug.Assert(
                 (object)containingType != null || (symbol.ContainingSymbol is ITypeSymbol)
             );

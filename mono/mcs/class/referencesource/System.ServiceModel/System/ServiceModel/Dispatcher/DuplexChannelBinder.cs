@@ -244,7 +244,8 @@ namespace System.ServiceModel.Dispatcher
             }
 
             // Remove requests from the correlator since the channel might be either faulting or aborting,
-            // We are not going to get a reply for these requests. If they are not removed from the correlator, this will cause a leak.
+            // We are not going to get a reply for these requests. If they are not removed from the correlator,
+            // this will cause a leak.
             // This operation does not have to be under the lock
             if (hadRequests)
             {
@@ -644,8 +645,10 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            // Remove requests from the correlator since the channel might be either faulting, aborting or closing
-            // We are not going to get a reply for these timed out requests. If they are not removed from the correlator, this will cause a leak.
+            // Remove requests from the correlator since the channel might be either faulting, aborting or
+            // closing
+            // We are not going to get a reply for these timed out requests. If they are not removed from the
+            // correlator, this will cause a leak.
             // This operation does not have to be under the lock
             if (array != null && array.Length > 0)
             {
@@ -1015,7 +1018,8 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.timedOut)
                         {
-                            // this needs to be saved in a list since we need to remove these from the correlator table when the channel aborts or closes
+                            // this needs to be saved in a list since we need to remove these from the correlator table when the
+                            // channel aborts or closes
                             this.parent.AddToTimedOutRequestList(this);
                         }
                         this.parent.RequestCompleting(this);
@@ -1102,7 +1106,8 @@ namespace System.ServiceModel.Dispatcher
                         this.reply = reply;
                         this.gotReply = true;
                         done = !wasDone && this.IsDone;
-                        // we got reply on the channel after the request timed out, let's delete it from the pending timed out requests
+                        // we got reply on the channel after the request timed out, let's delete it from the pending timed
+                        // out requests
                         // we don't neeed to hold on to it since it is now  removed from the correlator table
                         if (wasDone && this.timedOut)
                         {

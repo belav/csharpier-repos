@@ -29,7 +29,8 @@ public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Sta
 
         static void ConfigureRuntimeCompilationOptions(MvcRazorRuntimeCompilationOptions options)
         {
-            // Workaround for incorrectly generated deps file. The build output has all of the binaries required to compile. We'll grab these and
+            // Workaround for incorrectly generated deps file. The build output has all of the binaries required
+            // to compile. We'll grab these and
             // add it to the list of assemblies runtime compilation uses.
             foreach (var path in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
             {
@@ -80,7 +81,8 @@ public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Sta
     [Fact]
     public async Task RzcViewsArePreferredToRuntimeViews()
     {
-        // Verifies that when two views have the same paths, the one compiled using rzc is preferred to the one from Precompilation.
+        // Verifies that when two views have the same paths, the one compiled using rzc is preferred to the
+        // one from Precompilation.
         // Act
         var response = await Client.GetAsync("http://localhost/Common/View");
         var responseBody = await response.Content.ReadAsStringAsync();

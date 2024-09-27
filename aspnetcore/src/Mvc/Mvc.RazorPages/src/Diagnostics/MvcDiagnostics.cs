@@ -625,7 +625,8 @@ public sealed class AfterPageFilterOnPageHandlerSelectionEventData : EventData
 }
 
 /// <summary>
-/// An <see cref="EventData"/> that occurs before <see cref="IPageFilter.OnPageHandlerSelected(PageHandlerSelectedContext)"/>.
+/// An <see cref="EventData"/> that occurs before <see
+// cref="IPageFilter.OnPageHandlerSelected(PageHandlerSelectedContext)"/>.
 /// </summary>
 public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
 {
@@ -684,7 +685,8 @@ public sealed class BeforePageFilterOnPageHandlerSelectedEventData : EventData
 }
 
 /// <summary>
-/// An <see cref="EventData"/> that occurs after <see cref="IPageFilter.OnPageHandlerSelected(PageHandlerSelectedContext)"/>.
+/// An <see cref="EventData"/> that occurs after <see
+// cref="IPageFilter.OnPageHandlerSelected(PageHandlerSelectedContext)"/>.
 /// </summary>
 public sealed class AfterPageFilterOnPageHandlerSelectedEventData : EventData
 {

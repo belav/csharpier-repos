@@ -10,7 +10,8 @@ namespace System.Formats.Asn1
         /// <summary>
         ///   Begin writing a Set-Of with a specified tag.
         /// </summary>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 17).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 17).</param>
         /// <returns>
         ///   A disposable value which will automatically call <see cref="PopSetOf"/>.
         /// </returns>
@@ -37,7 +38,8 @@ namespace System.Formats.Asn1
         ///   Indicate that the open Set-Of with the specified tag is closed,
         ///   returning the writer to the parent context.
         /// </summary>
-        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal 17).</param>
+        /// <param name="tag">The tag to write, or <see langword="null"/> for the default tag (Universal
+        // 17).</param>
         /// <remarks>
         ///   In <see cref="AsnEncodingRules.CER"/> and <see cref="AsnEncodingRules.DER"/> modes
         ///   the writer will sort the Set-Of elements when the tag is closed.

@@ -113,7 +113,8 @@ class C
                 // (28,12): error CS0122: 'C.N1.N4' is inaccessible due to its protection level
                 //         N1.N4.n4_pub = 1;
                 Diagnostic(ErrorCode.ERR_BadAccess, "N4").WithArguments("C.N1.N4"),
-                // (37,30): warning CS0649: Field 'C.N1.n1_pro' is never assigned to, and will always have its default value 0
+                // (37,30): warning CS0649: Field 'C.N1.n1_pro' is never assigned to, and will always have its
+                // default value 0
                 //         static protected int n1_pro;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n1_pro")
                     .WithArguments("C.N1.n1_pro", "0"),
@@ -121,7 +122,8 @@ class C
                 //         static private int n1_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "n1_priv")
                     .WithArguments("C.N1.n1_priv"),
-                // (45,34): warning CS0649: Field 'C.N1.N2.n2_pro' is never assigned to, and will always have its default value 0
+                // (45,34): warning CS0649: Field 'C.N1.N2.n2_pro' is never assigned to, and will always have its
+                // default value 0
                 //             static protected int n2_pro;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n2_pro")
                     .WithArguments("C.N1.N2.n2_pro", "0"),
@@ -129,11 +131,13 @@ class C
                 //             static private int n2_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "n2_priv")
                     .WithArguments("C.N1.N2.n2_priv"),
-                // (52,31): warning CS0649: Field 'C.N1.N3.n3_pub' is never assigned to, and will always have its default value 0
+                // (52,31): warning CS0649: Field 'C.N1.N3.n3_pub' is never assigned to, and will always have its
+                // default value 0
                 //             static public int n3_pub;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n3_pub")
                     .WithArguments("C.N1.N3.n3_pub", "0"),
-                // (57,31): warning CS0649: Field 'C.N1.N4.n4_pub' is never assigned to, and will always have its default value 0
+                // (57,31): warning CS0649: Field 'C.N1.N4.n4_pub' is never assigned to, and will always have its
+                // default value 0
                 //             static public int n4_pub;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n4_pub")
                     .WithArguments("C.N1.N4.n4_pub", "0"),
@@ -338,7 +342,8 @@ class E: D
                 // (74,9): error CS0122: 'C.N4' is inaccessible due to its protection level
                 //         N4.n4_pub = 1;
                 Diagnostic(ErrorCode.ERR_BadAccess, "N4").WithArguments("C.N4"),
-                // (14,30): warning CS0649: Field 'C.N3.n3_pro' is never assigned to, and will always have its default value 0
+                // (14,30): warning CS0649: Field 'C.N3.n3_pro' is never assigned to, and will always have its
+                // default value 0
                 //         static protected int n3_pro;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n3_pro")
                     .WithArguments("C.N3.n3_pro", "0"),
@@ -346,7 +351,8 @@ class E: D
                 //         static private int n3_priv;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "n3_priv")
                     .WithArguments("C.N3.n3_priv"),
-                // (21,27): warning CS0649: Field 'C.N4.n4_pub' is never assigned to, and will always have its default value 0
+                // (21,27): warning CS0649: Field 'C.N4.n4_pub' is never assigned to, and will always have its
+                // default value 0
                 //         static public int n4_pub;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "n4_pub")
                     .WithArguments("C.N4.n4_pub", "0"),
@@ -405,7 +411,8 @@ public class E : B.N
             );
 
             c.VerifyDiagnostics(
-                // (19,27): error CS1540: Cannot access protected member 'A.iField' via a qualifier of type 'D'; the qualifier must be of type 'B.N.NN' (or derived from it)
+                // (19,27): error CS1540: Cannot access protected member 'A.iField' via a qualifier of type 'D'; the
+                // qualifier must be of type 'B.N.NN' (or derived from it)
                 //                 int q = d.iField;
                 Diagnostic(ErrorCode.ERR_BadProtectedAccess, "iField")
                     .WithArguments("A.iField", "D", "B.N.NN")
@@ -460,7 +467,8 @@ class B
             );
 
             c.VerifyDiagnostics(
-                // (8,11): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than class 'B.C'
+                // (8,11): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than
+                // class 'B.C'
                 //     class C : X<C.D.E>
                 Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C")
                     .WithArguments("B.C", "X<B.C.D.E>")
@@ -635,7 +643,8 @@ class B
             );
 
             c.VerifyDiagnostics(
-                // (8,11): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than class 'B.C'
+                // (8,11): error CS0060: Inconsistent accessibility: base type 'X<B.C.D.E>' is less accessible than
+                // class 'B.C'
                 //     class C : X<C.D.E>
                 Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C")
                     .WithArguments("B.C", "X<B.C.D.E>")
@@ -1303,7 +1312,8 @@ public class A
             );
 
             assembly2Compilation.VerifyDiagnostics(
-                // (7,35): error CS0122: 'InstancePropertyContainer.PropIntProProSet' is inaccessible due to its protection level
+                // (7,35): error CS0122: 'InstancePropertyContainer.PropIntProProSet' is inaccessible due to its
+                // protection level
                 //         InstancePropertyContainer.PropIntProProSet = 12;
                 Diagnostic(ErrorCode.ERR_BadAccess, "PropIntProProSet")
                     .WithArguments("InstancePropertyContainer.PropIntProProSet")
@@ -1392,11 +1402,13 @@ internal abstract class B3 : A
                 Diagnostic(ErrorCode.ERR_BadAccess, "P").WithArguments("A.P").WithLocation(8, 16),
                 // (9,12): error CS0122: 'A.P' is inaccessible due to its protection level
                 Diagnostic(ErrorCode.ERR_BadAccess, "P").WithArguments("A.P").WithLocation(9, 12),
-                // (13,9): error CS0272: The property or indexer 'B2.P' cannot be used in this context because the set accessor is inaccessible
+                // (13,9): error CS0272: The property or indexer 'B2.P' cannot be used in this context because the
+                // set accessor is inaccessible
                 Diagnostic(ErrorCode.ERR_InaccessibleSetter, "b2.P")
                     .WithArguments("B2.P")
                     .WithLocation(13, 9),
-                // (14,13): error CS0271: The property or indexer 'B3.P' cannot be used in this context because the get accessor is inaccessible
+                // (14,13): error CS0271: The property or indexer 'B3.P' cannot be used in this context because the
+                // get accessor is inaccessible
                 Diagnostic(ErrorCode.ERR_InaccessibleGetter, "b3.P")
                     .WithArguments("B3.P")
                     .WithLocation(14, 13)
@@ -1691,7 +1703,8 @@ abstract class Class1
 }";
             CompileAndVerify(text)
                 .VerifyDiagnostics(
-                    // (4,21): warning CS0414: The field 'Class1._AssignedButNotReadField' is assigned but its value is never used
+                    // (4,21): warning CS0414: The field 'Class1._AssignedButNotReadField' is assigned but its value is
+                    // never used
                     //         private int _AssignedButNotReadField;
                     Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "_AssignedButNotReadField")
                         .WithArguments("Class1._AssignedButNotReadField")
@@ -1715,7 +1728,8 @@ internal abstract class Class1
 }";
             CompileAndVerify(text)
                 .VerifyDiagnostics(
-                    // (4,18): warning CS0649: Field 'Class1._UnAssignedField1' is never assigned to, and will always have its default value 0
+                    // (4,18): warning CS0649: Field 'Class1._UnAssignedField1' is never assigned to, and will always
+                    // have its default value 0
                     //     internal int _UnAssignedField;
                     Diagnostic(ErrorCode.WRN_UnassignedInternalField, "_UnAssignedField1")
                         .WithArguments("Class1._UnAssignedField1", "0")

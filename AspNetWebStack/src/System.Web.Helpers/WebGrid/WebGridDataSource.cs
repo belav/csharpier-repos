@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -75,7 +76,8 @@ namespace System.Web.Helpers
             catch (ArgumentException)
             {
                 // The OrderBy method uses a generic comparer which fails when the collection contains 2 or more
-                // items that cannot be compared (e.g. DBNulls, mixed types such as strings and ints et al) with the exception
+                // items that cannot be compared (e.g. DBNulls, mixed types such as strings and ints et al) with the
+                // exception
                 // System.ArgumentException: At least one object must implement IComparable.
                 // Silently fail if this exception occurs and declare that the two items are equivalent
                 rowData = Page(_values.AsQueryable(), pageIndex);
@@ -116,7 +118,8 @@ namespace System.Web.Helpers
                 // IDynamicMetaObjectProvider properties are only available through a runtime binder, so we
                 // must build a custom LINQ expression for getting the dynamic property value.
                 // Lambda: o => o.Property (where Property is obtained by runtime binder)
-                // NOTE: lambda must not use internals otherwise this will fail in partial trust when Helpers assembly is in GAC
+                // NOTE: lambda must not use internals otherwise this will fail in partial trust when Helpers
+                // assembly is in GAC
                 var binder = Binder.GetMember(
                     CSharpBinderFlags.None,
                     sort.SortColumn,

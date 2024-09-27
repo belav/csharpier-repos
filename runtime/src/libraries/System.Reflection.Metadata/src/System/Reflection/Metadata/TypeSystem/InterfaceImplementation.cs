@@ -31,7 +31,8 @@ namespace System.Reflection.Metadata
 
         /// <summary>
         /// The interface that is implemented
-        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/>, or <see cref="TypeSpecificationHandle"/>
+        /// <see cref="TypeDefinitionHandle"/>, <see cref="TypeReferenceHandle"/>, or <see
+        // cref="TypeSpecificationHandle"/>
         /// </summary>
         public EntityHandle Interface
         {

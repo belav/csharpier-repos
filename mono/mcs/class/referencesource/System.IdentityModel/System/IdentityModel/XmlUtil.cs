@@ -16,7 +16,8 @@ namespace System.IdentityModel
     using System.Xml;
     using System.Xml.Schema;
 
-    // Merged System.IdentityModel.XmlUtil with Microsoft.IdentityModel.XmlUtil by porting methods from the Microsoft.IdentityModel.XmlUtil to this.
+    // Merged System.IdentityModel.XmlUtil with Microsoft.IdentityModel.XmlUtil by porting methods from
+    // the Microsoft.IdentityModel.XmlUtil to this.
     static class XmlUtil
     {
         public const string XmlNs = "http://www.w3.org/XML/1998/namespace";
@@ -36,7 +37,8 @@ namespace System.IdentityModel
         //    }
 
         //    if (xmlLang == null)
-        //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.XmlLangAttributeMissing)));
+        //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+        // XmlException(SR.GetString(SR.XmlLangAttributeMissing)));
 
         //    return xmlLang;
         //}
@@ -113,13 +115,15 @@ namespace System.IdentityModel
         //    else
         //    {
         //        if (index == qname.Length - 1)
-        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidXmlQualifiedName, qname)));
+        //            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+        // XmlException(SR.GetString(SR.InvalidXmlQualifiedName, qname)));
         //        prefix = TrimStart(qname.Substring(0, index));
         //        localName = TrimEnd(qname.Substring(index + 1));
         //    }
         //    ns = reader.LookupNamespace(prefix);
         //    if (ns == null)
-        //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnboundPrefixInQName, qname)));
+        //        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new
+        // XmlException(SR.GetString(SR.UnboundPrefixInQName, qname)));
         //}
 
 

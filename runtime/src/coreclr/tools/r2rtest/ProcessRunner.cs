@@ -102,7 +102,8 @@ public class ProcessRunner : IDisposable
     private readonly Stopwatch _stopwatch;
 
     /// <summary>
-    /// This is actually a boolean flag but we're using int to let us use CPU-native interlocked exchange.
+    /// This is actually a boolean flag but we're using int to let us use CPU-native interlocked
+    // exchange.
     /// </summary>
     private int _state;
 

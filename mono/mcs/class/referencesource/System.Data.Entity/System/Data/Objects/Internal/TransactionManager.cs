@@ -53,7 +53,8 @@ namespace System.Data.Objects.Internal
             set { _originalMergeOption = value; }
         }
 
-        // Dictionary used to recovery after exception in ObjectContext.AttachTo() and ObjectContext.AddObject()
+        // Dictionary used to recovery after exception in ObjectContext.AttachTo() and
+        // ObjectContext.AddObject()
         internal HashSet<IEntityWrapper> ProcessedEntities { get; private set; }
 
         // Used in Add/Attach/DetectChanges
@@ -151,7 +152,8 @@ namespace System.Data.Objects.Internal
             this.AlignedEntityReferences = new HashSet<EntityReference>();
             this.PromotedRelationships = new Dictionary<RelatedEnd, IList<IEntityWrapper>>();
 
-            // BeginAddTracking can be called in the middle of DetectChanges.  In this case the following flags and dictionaries should not be changed here.
+            // BeginAddTracking can be called in the middle of DetectChanges.  In this case the following flags
+            // and dictionaries should not be changed here.
             if (!this.IsDetectChanges)
             {
                 this.TrackProcessedEntities = true;
@@ -214,7 +216,8 @@ namespace System.Data.Objects.Internal
             this.OriginalMergeOption = null;
         }
 
-        // This method should be called only when there is entity in OSM which doesn't implement IEntityWithRelationships
+        // This method should be called only when there is entity in OSM which doesn't implement
+        // IEntityWithRelationships
         internal bool BeginDetectChanges()
         {
             if (this.IsDetectChanges)

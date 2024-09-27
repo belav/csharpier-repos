@@ -201,7 +201,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             CancellationToken cancellationToken
         )
         {
-            // The lack of a lock here is acceptable, since each of the functions lock, and GetContextProject/GetContextDocument
+            // The lack of a lock here is acceptable, since each of the functions lock, and
+            // GetContextProject/GetContextDocument
             // never change for the same input.
             return AddNodeAsync(
                 symbol,
@@ -279,7 +280,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                         node[CodeNodeProperties.SourceLocation] = sourceLocation.Value;
                 }
 
-                // Keep track of this as a node we have added. Note this is a HashSet, so if the node was already added
+                // Keep track of this as a node we have added. Note this is a HashSet, so if the node was already
+                // added
                 // we won't double-count.
                 _createdNodes.Add(node);
 
@@ -496,7 +498,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     var typeSymbol = (INamedTypeSymbol)symbol;
                     if (typeSymbol.IsGenericType)
                     {
-                        // Symbol.name does not contain type params for generic types, so we populate them here for some requiring cases like VS properties panel.
+                        // Symbol.name does not contain type params for generic types, so we populate them here for some
+                        // requiring cases like VS properties panel.
                         node.Label = (string)
                             node[RoslynGraphProperties.FormattedLabelWithoutContainingSymbol];
 
@@ -580,8 +583,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     break;
             }
 
-            // When a node is dragged and dropped from SE to CodeMap, its label could be reset during copying to clipboard.
-            // So, we try to keep its label that we computed above in a common label property, which CodeMap can access later.
+            // When a node is dragged and dropped from SE to CodeMap, its label could be reset during copying to
+            // clipboard.
+            // So, we try to keep its label that we computed above in a common label property, which CodeMap can
+            // access later.
             node[
                 Microsoft
                     .VisualStudio
@@ -976,18 +981,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
             if (category == null)
                 return null;
 
-            // Get or make a node for this symbol's containing document that will act as the parent node in the UI.
+            // Get or make a node for this symbol's containing document that will act as the parent node in the
+            // UI.
             var documentNode = this.TryAddNodeForDocument(document, cancellationToken);
             if (documentNode == null)
                 return null;
 
-            // For purposes of keying this node, just use the display text we will show.  In practice, outside of error
-            // scenarios this will be unique and suitable as an ID (esp. as these names are joined with their parent
+            // For purposes of keying this node, just use the display text we will show.  In practice, outside
+            // of error
+            // scenarios this will be unique and suitable as an ID (esp. as these names are joined with their
+            // parent
             // document name to form the full ID).
             var label = result.NavigableItem.DisplayTaggedParts.JoinText();
             var id = documentNode.Id.Add(GraphNodeId.GetLiteral(label));
 
-            // If we already have a node that matches this (say there are multiple identical sibling symbols in an error
+            // If we already have a node that matches this (say there are multiple identical sibling symbols in
+            // an error
             // situation).  We just ignore the second match.
             var existing = _graph.Nodes.Get(id);
             if (existing != null)

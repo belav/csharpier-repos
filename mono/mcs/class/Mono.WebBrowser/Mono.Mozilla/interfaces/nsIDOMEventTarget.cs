@@ -41,7 +41,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int addEventListener(
-            /*DOMString*/HandleRef type,
+/*DOMString*/HandleRef type,
             [MarshalAs(UnmanagedType.Interface)] nsIDOMEventListener listener,
             bool useCapture
         );
@@ -49,7 +49,7 @@ namespace Mono.Mozilla
         [PreserveSigAttribute]
         [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
         int removeEventListener(
-            /*DOMString*/HandleRef type,
+/*DOMString*/HandleRef type,
             [MarshalAs(UnmanagedType.Interface)] nsIDOMEventListener listener,
             bool useCapture
         );

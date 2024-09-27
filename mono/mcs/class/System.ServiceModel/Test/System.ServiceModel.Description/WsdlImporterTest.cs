@@ -81,9 +81,9 @@ namespace MonoTests.System.ServiceModel.Description
             //list.Add (mw);
             list.Add(new DataContractSerializerMessageContractImporter());
 
-            /*list.Add (new MessageEncodingBindingElementImporter ());
-            list.Add (new TransportBindingElementImporter ());
-            list.Add (new StandardBindingImporter ());*/
+/*list.Add (new MessageEncodingBindingElementImporter ());
+list.Add (new TransportBindingElementImporter ());
+list.Add (new StandardBindingImporter ());*/
 
             wi = new WsdlImporter(ms, null, list);
         }
@@ -193,7 +193,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.IsNotNull(wi.WsdlImportExtensions, "#CN12");
             Assert.AreEqual(0, wi.WsdlImportExtensions.Count, "#CN13");
 
-            /* FIXME: Not all importers are implemented yet */
+/* FIXME: Not all importers are implemented yet */
             CheckDefaultPolicyImportExtensions(wi.PolicyImportExtensions);
         }
 
@@ -210,7 +210,7 @@ namespace MonoTests.System.ServiceModel.Description
             Assert.IsNotNull(wi.PolicyImportExtensions, "#CN18");
             Assert.AreEqual(0, wi.PolicyImportExtensions.Count, "#CN19");
 
-            /* FIXME: Not all importers are implemented yet */
+/* FIXME: Not all importers are implemented yet */
             CheckDefaultWsdlImportExtensions(wi.WsdlImportExtensions);
         }
 
@@ -219,7 +219,7 @@ namespace MonoTests.System.ServiceModel.Description
         public void CtorNullTest4()
         {
             WsdlImporter wi = new WsdlImporter(new MetadataSet(), null, null);
-            /* FIXME: Not all importers are implemented yet */
+/* FIXME: Not all importers are implemented yet */
             CheckDefaultPolicyImportExtensions(wi.PolicyImportExtensions);
             CheckDefaultWsdlImportExtensions(wi.WsdlImportExtensions);
         }
@@ -559,14 +559,14 @@ namespace MonoTests.System.ServiceModel.Description
             xtr.Read();
             ms = MetadataSet.ReadFrom(xtr);
 
-            /*MyWsdlImportExtension mw = new MyWsdlImportExtension ();
-            List<IWsdlImportExtension> list = new List<IWsdlImportExtension> ();
-            list.Add (mw);
-            list.Add (new DataContractSerializerMessageContractImporter ());
+/*MyWsdlImportExtension mw = new MyWsdlImportExtension ();
+List<IWsdlImportExtension> list = new List<IWsdlImportExtension> ();
+list.Add (mw);
+list.Add (new DataContractSerializerMessageContractImporter ());
 
-            /*list.Add (new MessageEncodingBindingElementImporter ());
-            list.Add (new TransportBindingElementImporter ());
-            list.Add (new StandardBindingImporter ());*/
+/*list.Add (new MessageEncodingBindingElementImporter ());
+list.Add (new TransportBindingElementImporter ());
+list.Add (new StandardBindingImporter ());*/
 
             wi = new WsdlImporter(ms, null, list);
         }

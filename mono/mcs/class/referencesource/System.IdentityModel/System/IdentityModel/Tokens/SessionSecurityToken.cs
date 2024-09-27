@@ -92,7 +92,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Create session security token from principal and bootstrap token.
         /// </summary>
-        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the bootstrap token.</param>
+        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the
+        // bootstrap token.</param>
         /// <param name="context">Session specific context string</param>
         public SessionSecurityToken(ClaimsPrincipal claimsPrincipal, string context)
             : this(
@@ -108,7 +109,8 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Create session security token from principal and bootstrap token.
         /// </summary>
-        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the bootstrap token.</param>
+        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the
+        // bootstrap token.</param>
         /// <param name="context">Session specific context string</param>
         /// <param name="validFrom">DateTime specifying the time the token becomes valid.</param>
         /// <param name="validTo">DateTime specifying the time the token becomes invalid.</param>
@@ -131,9 +133,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Create session security token from principal and bootstrap token.
         /// </summary>
-        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the bootstrap token.</param>
+        /// <param name="claimsPrincipal">The <see cref="ClaimsPrincipal"/> that generated from the
+        // bootstrap token.</param>
         /// <param name="context">Session specific context string</param>
-        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a unscoped token.</param>
+        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a
+        // unscoped token.</param>
         /// <param name="validFrom">DateTime specifying the time the token becomes valid.</param>
         /// <param name="validTo">DateTime specifying the time the token becomes invalid.</param>
         public SessionSecurityToken(
@@ -156,13 +160,18 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionSecurityToken"/> class.
         /// </summary>
-        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this session.</param>
-        /// <param name="contextId">Optional context identifier associated with this token.  If null a new identifier will be generated.</param>
+        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this
+        // session.</param>
+        /// <param name="contextId">Optional context identifier associated with this token.  If null a new
+        // identifier will be generated.</param>
         /// <param name="context">Optional context information associated with the session.</param>
-        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a unscoped token.</param>
-        /// <param name="lifetime">The lifetime of the session token.  ValidFrom will be set to DateTime.UtcNow, ValidTo will be set to ValidFrom + lifetime.</param>
+        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a
+        // unscoped token.</param>
+        /// <param name="lifetime">The lifetime of the session token.  ValidFrom will be set to
+        // DateTime.UtcNow, ValidTo will be set to ValidFrom + lifetime.</param>
         /// <param name="key">Optional symmetric session key.</param>
-        /// <exception cref="InvalidOperationException">The value of lifetime &lt;= TimeSpan.Zero."</exception>
+        /// <exception cref="InvalidOperationException">The value of lifetime &lt;=
+        // TimeSpan.Zero."</exception>
         public SessionSecurityToken(
             ClaimsPrincipal claimsPrincipal,
             SysUniqueId contextId,
@@ -177,14 +186,19 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionSecurityToken"/> class.
         /// </summary>
-        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this session.</param>
-        /// <param name="contextId">Optional context identifier associated with this token.  If null a new identifier will be generated.</param>
+        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this
+        // session.</param>
+        /// <param name="contextId">Optional context identifier associated with this token.  If null a new
+        // identifier will be generated.</param>
         /// <param name="context">Optional context information associated with the session.</param>
-        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a unscoped token.</param>
+        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a
+        // unscoped token.</param>
         /// <param name="validFrom">DateTime specifying the time the token becomes valid.</param>
-        /// <param name="lifetime">The lifetime of the session token.  ValidTo will be set to ValidFrom + lifetime.</param>
+        /// <param name="lifetime">The lifetime of the session token.  ValidTo will be set to ValidFrom +
+        // lifetime.</param>
         /// <param name="key">Optional symmetric session key.</param>
-        /// <exception cref="InvalidOperationException">The value of lifetime &lt;= TimeSpan.Zero."</exception>
+        /// <exception cref="InvalidOperationException">The value of lifetime &lt;=
+        // TimeSpan.Zero."</exception>
         public SessionSecurityToken(
             ClaimsPrincipal claimsPrincipal,
             SysUniqueId contextId,
@@ -207,19 +221,24 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes a new instance of the <see cref="SessionSecurityToken"/> class.
         /// </summary>
-        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this session.</param>
+        /// <param name="claimsPrincipal"><see cref="ClaimsPrincipal"/> associated with this
+        // session.</param>
         /// <param name="contextId">Context Identifier that identifies the session</param>
         /// <param name="context">Optional context information associated with the session.</param>
-        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a unscoped token.</param>
+        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a
+        // unscoped token.</param>
         /// <param name="validFrom">DateTime specifying the time the token becomes valid.</param>
         /// <param name="validTo">DateTime specifying the time the token becomes invalid.</param>
         /// <param name="key">Optional symmetric session key.</param>
-        /// <exception cref="ArgumentNullException">The input parameter 'claimsPrincipal' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input parameter 'claimsPrincipal' is
+        // null.</exception>
         /// <exception cref="ArgumentNullException">The input parameter 'contextId' is null.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">validFrom is greater than or equal to validTo.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">validFrom is greater than or equal to
+        // validTo.</exception>
         /// <exception cref="ArgumentOutOfRangeException">validTo is less than current time.</exception>
         /// <remarks>
-        /// If no key is supplied, a 128bit key is generated. KeyEffectiveTime is set to validFrom, KeyExpirationTime is set to validTo.
+        /// If no key is supplied, a 128bit key is generated. KeyEffectiveTime is set to validFrom,
+        // KeyExpirationTime is set to validTo.
         /// A key generation identifier is created.
         /// </remarks>
         public SessionSecurityToken(
@@ -248,13 +267,15 @@ namespace System.IdentityModel.Tokens
             ) { }
 
         /// <summary>
-        /// Core ctor with all parameters in their most primitive form.  This constructor is used in deserialization and
+        /// Core ctor with all parameters in their most primitive form.  This constructor is used in
+        // deserialization and
         /// when generating a wrapper SessionSecurityToken from a SecurityContextSecurityToken.
         /// </summary>
         /// <param name="contextId">Context identifier</param>
         /// <param name="id">Token identifier</param>
         /// <param name="context">Session context data</param>
-        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a unscoped token.</param>
+        /// <param name="endpointId">The endpoint to which this token is bound. String.Empty would create a
+        // unscoped token.</param>
         /// <param name="key">Key material</param>
         /// <param name="validFrom">Start time</param>
         /// <param name="validTo">End time</param>
@@ -263,7 +284,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="keyExpirationTime">Key end time</param>
         /// <param name="authorizationPolicies">Authorization policies</param>
         /// <param name="securityContextSecurityTokenWrapperSecureConversationVersion">The version of
-        /// WS-SecureConversation used to generate this SCT.  This should be null if the token is not an SCT wrapper.</param>
+        /// WS-SecureConversation used to generate this SCT.  This should be null if the token is not an SCT
+        // wrapper.</param>
         internal SessionSecurityToken(
             ClaimsPrincipal claimsPrincipal,
             SysUniqueId contextId,
@@ -778,7 +800,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets the authorization policies associated with the session. Only has meaning if this is wrapping an SCT
+        /// Gets the authorization policies associated with the session. Only has meaning if this is
+        // wrapping an SCT
         /// token.
         /// </summary>
         internal SctAuthorizationPolicy SctAuthorizationPolicy
@@ -994,9 +1017,11 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads a ClaimsPrincipal from a XmlDictionaryReader.
         /// </summary>
-        /// <param name="dictionaryReader">XmlDictionaryReader positioned at dictionary.ClaimsPrincipal.</param>
+        /// <param name="dictionaryReader">XmlDictionaryReader positioned at
+        // dictionary.ClaimsPrincipal.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader' or 'dictionary' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader' or 'dictionary' is
+        // null.</exception>
         /// <returns>ClaimsPrincipal</returns>
         ClaimsPrincipal ReadPrincipal(
             XmlDictionaryReader dictionaryReader,
@@ -1030,7 +1055,8 @@ namespace System.IdentityModel.Tokens
                 dictionaryReader.ReadEndElement();
             }
 
-            // If we find a WindowsIdentity in the identities we just read, we should be creating a WindowsPrincipal using it
+            // If we find a WindowsIdentity in the identities we just read, we should be creating a
+            // WindowsPrincipal using it
             WindowsIdentity wi = null;
             foreach (ClaimsIdentity identity in identities)
             {
@@ -1042,7 +1068,8 @@ namespace System.IdentityModel.Tokens
                 }
             }
 
-            // If we did create a WindowsPrincipal we can remove the associated WindowsIdentity from the identities collection
+            // If we did create a WindowsPrincipal we can remove the associated WindowsIdentity from the
+            // identities collection
             // so that we dont add it twice in the subsequent step
             if (principal != null)
             {
@@ -1069,7 +1096,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryReader">XmlDictionaryReader positioned at dictionary.Identities</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="identities">A collection of <see cref="ClaimsIdentity"/> to populate.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader', 'dictionary' or 'identities' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader', 'dictionary' or
+        // 'identities' is null.</exception>
         /// <remarks>Reads 'n' identies and adds them to identies.</remarks>
         void ReadIdentities(
             XmlDictionaryReader dictionaryReader,
@@ -1114,8 +1142,10 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         /// <param name="dictionaryReader">XmlDictionaryReader positioned at dictionary.Identity.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader' or 'dictionary' is null.</exception>
-        /// <exception cref="SecurityTokenException">The dictionaryReader is not positioned a SessionDictionary.Identity.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader' or 'dictionary' is
+        // null.</exception>
+        /// <exception cref="SecurityTokenException">The dictionaryReader is not positioned a
+        // SessionDictionary.Identity.</exception>
         /// <returns>ClaimsIdentity</returns>
         ClaimsIdentity ReadIdentity(
             XmlDictionaryReader dictionaryReader,
@@ -1179,10 +1209,13 @@ namespace System.IdentityModel.Tokens
             }
             else
             {
-                // The WindowsIdentity(string, string) c'tor does not set the Auth type. Hence we use that c'tor to get a intPtr and
+                // The WindowsIdentity(string, string) c'tor does not set the Auth type. Hence we use that c'tor to
+                // get a intPtr and
                 // call the other c'tor that actually sets the authType passed in.
-                // DevDiv 279196 tracks the issue and in WindowsIdentity c'tor. Its too late to fix it in 4.5 cycle as we are in Beta and would not be
-                // able to complete the analysis of the change for the current release. This should be investigated in 5.0
+                // DevDiv 279196 tracks the issue and in WindowsIdentity c'tor. Its too late to fix it in 4.5 cycle
+                // as we are in Beta and would not be
+                // able to complete the analysis of the change for the current release. This should be investigated
+                // in 5.0
                 WindowsIdentity winId = new WindowsIdentity(GetUpn(logonName));
                 identity = new WindowsIdentity(winId.Token, authenticationType);
             }
@@ -1240,8 +1273,10 @@ namespace System.IdentityModel.Tokens
         /// Returns a User Principal Name from a windows logon name.
         /// </summary>
         /// <param name="windowsLogonName">Name to translate into the UPN</param>
-        /// <exception cref="ArgumentNullException">The input argument 'windowsLogonName' is null or empty.</exception>
-        /// <exception cref="InvalidOperationException">If 'windowsLogonName' is not of the form domain\\user or user@domain.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'windowsLogonName' is null or
+        // empty.</exception>
+        /// <exception cref="InvalidOperationException">If 'windowsLogonName' is not of the form
+        // domain\\user or user@domain.</exception>
         /// <returns>A User Principal Name of the form 'user@domain'</returns>
         string GetUpn(string windowsLogonName)
         {
@@ -1368,7 +1403,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryReader">XmlDictionaryReader positioned at dictionary.Claim.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="claims">ClaimCollection to add the claims to.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader',  'dictionary' or 'claims' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader',  'dictionary' or
+        // 'claims' is null.</exception>
         /// <remarks>Reads 'n' claims and adds them to claims.</remarks>
         void ReadClaims(
             XmlDictionaryReader dictionaryReader,
@@ -1427,12 +1463,16 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Reads ClaimProperties from a XmlDictionaryReader and adds them to a Dictionary.
         /// </summary>
-        /// <param name="dictionaryReader">XmlDictionaryReader positioned at the element dictionary.ClaimProperties </param>
+        /// <param name="dictionaryReader">XmlDictionaryReader positioned at the element
+        // dictionary.ClaimProperties </param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="properties">Dictionary to add properties to.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader',  'dictionary' or 'properties' is null.</exception>
-        /// <exception cref="SecurityTokenException">Is thrown if the 'name' of a property is null or an empty string.</exception>
-        /// <exception cref="SecurityTokenException">Is thrown if the 'value' of a property is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryReader',  'dictionary' or
+        // 'properties' is null.</exception>
+        /// <exception cref="SecurityTokenException">Is thrown if the 'name' of a property is null or an
+        // empty string.</exception>
+        /// <exception cref="SecurityTokenException">Is thrown if the 'value' of a property is
+        // null.</exception>
         /// <remarks>Reads 'n' properties.</remarks>
         void ReadClaimProperties(
             XmlDictionaryReader dictionaryReader,
@@ -1504,7 +1544,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryWriter">XmlDictionaryWriter to write to.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="principal">ClaimsPrincipal to write.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or 'principal' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or
+        // 'principal' is null.</exception>
         void WritePrincipal(
             XmlDictionaryWriter dictionaryWriter,
             SessionDictionary dictionary,
@@ -1545,7 +1586,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryWriter">XmlDictionaryWriter to write to.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="identities">The collection of ClaimsIdentity to write.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or 'identities' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or
+        // 'identities' is null.</exception>
         void WriteIdentities(
             XmlDictionaryWriter dictionaryWriter,
             SessionDictionary dictionary,
@@ -1586,7 +1628,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryWriter">XmlDictionaryWriter to write to.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="identity">ClaimsIdentiy to write.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or 'identity' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or
+        // 'identity' is null.</exception>
         void WriteIdentity(
             XmlDictionaryWriter dictionaryWriter,
             SessionDictionary dictionary,
@@ -1752,8 +1795,10 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryWriter">XmlDictionaryWriter to write to.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="claims">ClaimCollection to write.</param>
-        /// <param name="outboundClaimsFilter">Filter to apply when writing claims. If parameter is not null and filter returns true, claim will not be written.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or 'claims' is null.</exception>
+        /// <param name="outboundClaimsFilter">Filter to apply when writing claims. If parameter is not null
+        // and filter returns true, claim will not be written.</param>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or
+        // 'claims' is null.</exception>
         void WriteClaims(
             XmlDictionaryWriter dictionaryWriter,
             SessionDictionary dictionary,
@@ -1850,7 +1895,8 @@ namespace System.IdentityModel.Tokens
         /// <param name="dictionaryWriter">XmlDictionaryWriter to write to.</param>
         /// <param name="dictionary">SessionDictionary to provide dictionary strings.</param>
         /// <param name="properties">ClaimProperties to write.</param>
-        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or 'properties' is null.</exception>
+        /// <exception cref="ArgumentNullException">The input argument 'dictionaryWriter', 'dictionary' or
+        // 'properties' is null.</exception>
         void WriteClaimProperties(
             XmlDictionaryWriter dictionaryWriter,
             SessionDictionary dictionary,
@@ -1916,7 +1962,8 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Serializes the given <see cref="System.IdentityModel.Claims.Claim"/> to the given XmlDictionaryWriter.
+        /// Serializes the given <see cref="System.IdentityModel.Claims.Claim"/> to the given
+        // XmlDictionaryWriter.
         /// </summary>
         /// <param name="claim">The claim to be serialized.</param>
         /// <param name="writer">The XmlDictionaryWriter to which to serialize the claim.</param>

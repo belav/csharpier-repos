@@ -16,7 +16,8 @@ namespace System.Web.UI.WebControls
 
     /// <devdoc>
     ///    <para>Displays a summary of all validation errors of
-    ///       a page in a list, bulletted list, or single paragraph format. The errors can be displayed inline
+    ///       a page in a list, bulletted list, or single paragraph format. The errors can be displayed
+    // inline
     ///       and/or in a popup message box.</para>
     /// </devdoc>
     [Designer(
@@ -30,7 +31,8 @@ namespace System.Web.UI.WebControls
         private bool wasForeColorSet = false;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ValidationSummary'/> class.</para>
+        /// <para>Initializes a new instance of the <see
+        // cref='System.Web.UI.WebControls.ValidationSummary'/> class.</para>
         /// </devdoc>
         public ValidationSummary()
             : base(HtmlTextWriterTag.Div)
@@ -412,7 +414,8 @@ namespace System.Web.UI.WebControls
                 const string arrayName = "Page_ValidationSummaries";
                 string element = "document.getElementById(\"" + ClientID + "\")";
 
-                // Cannot use the overloads of Register* that take a Control, since these methods only work with AJAX 3.5,
+                // Cannot use the overloads of Register* that take a Control, since these methods only work with
+                // AJAX 3.5,
                 // and we need to support Validators in AJAX 1.0 (Windows OS Bugs 2015831).
                 if (!Page.IsPartialRenderingSupported)
                 {
@@ -424,8 +427,10 @@ namespace System.Web.UI.WebControls
 
                     // Register a dispose script to make sure we clean up the page if we get destroyed
                     // during an async postback.
-                    // We should technically use the ScriptManager.RegisterDispose() method here, but the original implementation
-                    // of Validators in AJAX 1.0 manually attached a dispose expando.  We added this code back in the product
+                    // We should technically use the ScriptManager.RegisterDispose() method here, but the original
+                    // implementation
+                    // of Validators in AJAX 1.0 manually attached a dispose expando.  We added this code back in the
+                    // product
                     // late in the Orcas cycle, and we didn't want to take the risk of using RegisterDispose() instead.
                     // (Windows OS Bugs 2015831)
                     ValidatorCompatibilityHelper.RegisterStartupScript(

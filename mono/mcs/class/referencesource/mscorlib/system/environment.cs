@@ -306,12 +306,12 @@ namespace System
 
         private static volatile OperatingSystem m_os; // Cached OperatingSystem value
 
-        /*==================================TickCount===================================
-        **Action: Gets the number of ticks since the system was started.
-        **Returns: The number of ticks since the system was started.
-        **Arguments: None
-        **Exceptions: None
-        ==============================================================================*/
+/*==================================TickCount===================================
+**Action: Gets the number of ticks since the system was started.
+**Returns: The number of ticks since the system was started.
+**Arguments: None
+**Exceptions: None
+==============================================================================*/
         public static extern int TickCount
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -429,13 +429,13 @@ namespace System
         private static extern void GetCommandLine(StringHandleOnStack retString);
 #endif // !FEATURE_CORECLR
 
-        /*===============================CurrentDirectory===============================
-        **Action:  Provides a getter and setter for the current directory.  The original
-        **         current directory is the one from which the process was started.
-        **Returns: The current directory (from the getter).  Void from the setter.
-        **Arguments: The current directory to which to switch to the setter.
-        **Exceptions:
-        ==============================================================================*/
+/*===============================CurrentDirectory===============================
+**Action:  Provides a getter and setter for the current directory.  The original
+**         current directory is the one from which the process was started.
+**Returns: The current directory (from the getter).  Void from the setter.
+**Arguments: The current directory to which to switch to the setter.
+**Exceptions:
+==============================================================================*/
         public static String CurrentDirectory
         {
             [ResourceExposure(ResourceScope.Machine)]
@@ -678,12 +678,12 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern String nativeGetEnvironmentVariable(String variable);
 #endif //!FEATURE_CORECLR
-        /*============================GetEnvironmentVariable============================
-        **Action:
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ==============================================================================*/
+/*============================GetEnvironmentVariable============================
+**Action:
+**Returns:
+**Arguments:
+**Exceptions:
+==============================================================================*/
         [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
@@ -798,12 +798,12 @@ namespace System
         }
 #endif
 
-        /*===========================GetEnvironmentVariables============================
-        **Action: Returns an IDictionary containing all enviroment variables and their values.
-        **Returns: An IDictionary containing all environment variables and their values.
-        **Arguments: None.
-        **Exceptions: None.
-        ==============================================================================*/
+/*===========================GetEnvironmentVariables============================
+**Action: Returns an IDictionary containing all enviroment variables and their values.
+**Returns: An IDictionary containing all environment variables and their values.
+**Arguments: None.
+**Exceptions: None.
+==============================================================================*/
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         private static unsafe char[] GetEnvironmentCharArray()
@@ -1226,12 +1226,12 @@ namespace System
         }
 #endif
 
-        /*===============================GetLogicalDrives===============================
-        **Action: Retrieves the names of the logical drives on this machine in the  form "C:\".
-        **Arguments:   None.
-        **Exceptions:  IOException.
-        **Permissions: SystemInfo Permission.
-        ==============================================================================*/
+/*===============================GetLogicalDrives===============================
+**Action: Retrieves the names of the logical drives on this machine in the  form "C:\".
+**Arguments:   None.
+**Exceptions:  IOException.
+**Permissions: SystemInfo Permission.
+==============================================================================*/
         [System.Security.SecuritySafeCritical] // auto-generated
         public static String[] GetLogicalDrives()
         {
@@ -1264,13 +1264,13 @@ namespace System
             return result;
         }
 
-        /*===================================NewLine====================================
-        **Action: A property which returns the appropriate newline string for the given
-        **        platform.
-        **Returns: \r\n on Win32.
-        **Arguments: None.
-        **Exceptions: None.
-        ==============================================================================*/
+/*===================================NewLine====================================
+**Action: A property which returns the appropriate newline string for the given
+**        platform.
+**Returns: \r\n on Win32.
+**Arguments: None.
+**Exceptions: None.
+==============================================================================*/
         public static String NewLine
         {
             get
@@ -1280,31 +1280,34 @@ namespace System
             }
         }
 
-        /*===================================Version====================================
-        **Action: Returns the COM+ version struct, describing the build number.
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ==============================================================================*/
+/*===================================Version====================================
+**Action: Returns the COM+ version struct, describing the build number.
+**Returns:
+**Arguments:
+**Exceptions:
+==============================================================================*/
         public static Version Version
         {
             get
             {
 
-                // Previously this represented the File version of mscorlib.dll.  Many other libraries in the framework and outside took dependencies on the first three parts of this version
-                // remaining constant throughout 4.x.  From 4.0 to 4.5.2 this was fine since the file version only incremented the last part.Starting with 4.6 we switched to a file versioning
-                // scheme that matched the product version.  In order to preserve compatibility with existing libraries, this needs to be hard-coded.
+                // Previously this represented the File version of mscorlib.dll.  Many other libraries in the
+                // framework and outside took dependencies on the first three parts of this version
+                // remaining constant throughout 4.x.  From 4.0 to 4.5.2 this was fine since the file version only
+                // incremented the last part.Starting with 4.6 we switched to a file versioning
+                // scheme that matched the product version.  In order to preserve compatibility with existing
+                // libraries, this needs to be hard-coded.
 
                 return new Version(4, 0, 30319, 42000);
             }
         }
 
-        /*==================================WorkingSet==================================
-        **Action:
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ==============================================================================*/
+/*==================================WorkingSet==================================
+**Action:
+**Returns:
+**Arguments:
+**Exceptions:
+==============================================================================*/
         [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode), SuppressUnmanagedCodeSecurity]
@@ -1320,12 +1323,12 @@ namespace System
             }
         }
 
-        /*==================================OSVersion===================================
-        **Action:
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ==============================================================================*/
+/*==================================OSVersion===================================
+**Action:
+**Returns:
+**Arguments:
+**Exceptions:
+==============================================================================*/
         public static OperatingSystem OSVersion
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1453,12 +1456,12 @@ namespace System
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool GetVersionEx(Microsoft.Win32.Win32Native.OSVERSIONINFOEX osVer);
 
-        /*==================================StackTrace==================================
-        **Action:
-        **Returns:
-        **Arguments:
-        **Exceptions:
-        ==============================================================================*/
+/*==================================StackTrace==================================
+**Action:
+**Returns:
+**Arguments:
+**Exceptions:
+==============================================================================*/
         public static String StackTrace
         {
             [System.Security.SecuritySafeCritical] // auto-generated
@@ -1917,13 +1920,15 @@ namespace System
             ApplicationData = Win32Native.CSIDL_APPDATA,
 
             //
-            //      Represents the file system directory that serves as a common repository for application-specific data that
+            //      Represents the file system directory that serves as a common repository for
+            // application-specific data that
             //       is used by all users.
             //
             CommonApplicationData = Win32Native.CSIDL_COMMON_APPDATA,
 
             //
-            //     Represents the file system directory that serves as a common repository for application specific data that
+            //     Represents the file system directory that serves as a common repository for application
+            // specific data that
             //       is used by the current, non-roaming user.
             //
             LocalApplicationData = Win32Native.CSIDL_LOCAL_APPDATA,
@@ -1982,7 +1987,8 @@ namespace System
             StartMenu = Win32Native.CSIDL_STARTMENU,
 
             //
-            //     Represents the file system directory that corresponds to the user's Startup program group. The system
+            //     Represents the file system directory that corresponds to the user's Startup program group.
+            // The system
             //       starts these programs whenever any user logs on to Windows NT, or
             //       starts Windows 95 or Windows 98.
             //

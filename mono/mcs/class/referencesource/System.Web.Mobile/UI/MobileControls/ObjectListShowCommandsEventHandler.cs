@@ -5,19 +5,20 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 using System;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Object List show commands event handler - type definition.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Object List show commands event handler - type definition.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
 
-    /// <include file='doc\ObjectListShowCommandsEventHandler.uex' path='docs/doc[@for="ObjectListShowCommandsEventHandler"]/*' />
+    /// <include file='doc\ObjectListShowCommandsEventHandler.uex'
+    // path='docs/doc[@for="ObjectListShowCommandsEventHandler"]/*' />
     [Obsolete(
         "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
     )]

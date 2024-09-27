@@ -98,7 +98,8 @@ internal sealed class HttpConnection : ITimeoutHandler
                 var connectionLifetimeNotificationFeature =
                     _context.ConnectionFeatures.Get<IConnectionLifetimeNotificationFeature>();
 
-                // These features should never be null in Kestrel itself, if this middleware is ever refactored to run outside of kestrel,
+                // These features should never be null in Kestrel itself, if this middleware is ever refactored to
+                // run outside of kestrel,
                 // we'll need to handle these missing.
                 Debug.Assert(
                     connectionHeartbeatFeature != null,
@@ -307,7 +308,8 @@ internal sealed class HttpConnection : ITimeoutHandler
 
     public void OnTimeout(TimeoutReason reason)
     {
-        // In the cases that don't log directly here, we expect the setter of the timeout to also be the input
+        // In the cases that don't log directly here, we expect the setter of the timeout to also be the
+        // input
         // reader, so when the read is canceled or aborted, the reader should write the appropriate log.
         switch (reason)
         {

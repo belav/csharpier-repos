@@ -171,9 +171,11 @@ namespace System.Web.UI
             writer.Write(LengthEncodeDelimiter);
             writer.Write(id);
             writer.Write(LengthEncodeDelimiter);
-            // DevDiv 75383: We used to escape null characters from the content, but this had a non trivial hit on perf
+            // DevDiv 75383: We used to escape null characters from the content, but this had a non trivial hit
+            // on perf
             // They were escaped because XMLHttpRequest in IE truncates content after a null character.
-            // However, when HTML contains a null character, subsequent content is truncated anyway, so the value of escaping nulls
+            // However, when HTML contains a null character, subsequent content is truncated anyway, so the
+            // value of escaping nulls
             // in the first place is not clear and it was decided it is not worth the perf hit.
             writer.Write(content);
             writer.Write(LengthEncodeDelimiter);
@@ -831,7 +833,8 @@ namespace System.Web.UI
         }
 
         // Only call this method when these condictions are met:
-        // if (!((IControl)_owner).DesignMode && !_owner.IsInAsyncPostBack && _owner.SupportsPartialRendering
+        // if (!((IControl)_owner).DesignMode && !_owner.IsInAsyncPostBack &&
+        // _owner.SupportsPartialRendering
         //     && (_owner.MicrosoftAjaxMode != MicrosoftAjaxMode.Disabled))
         internal void Render(HtmlTextWriter writer)
         {
@@ -891,7 +894,8 @@ namespace System.Web.UI
                 {
                     // beginning of possible direct Response.Writes
                     oldWriter = page.Response.SwitchWriter(TextWriter.Null);
-                    // if we cant switch the writer for some reason we need to know not to switch it back again in the finally block
+                    // if we cant switch the writer for some reason we need to know not to switch it back again in the
+                    // finally block
                     // writerSwitched will be false
                     writerSwitched = true;
 

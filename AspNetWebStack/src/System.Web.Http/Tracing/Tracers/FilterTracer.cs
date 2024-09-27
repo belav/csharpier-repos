@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
@@ -82,7 +83,8 @@ namespace System.Web.Http.Tracing.Tracers
                 filters.Add(new ActionFilterTracer(actionFilter, traceWriter));
             }
 
-            // Do not add an IAuthorizationFilter tracer if we already added an AuthorizationFilterAttribute tracer
+            // Do not add an IAuthorizationFilter tracer if we already added an AuthorizationFilterAttribute
+            // tracer
             IAuthorizationFilter authorizationFilter = filter as IAuthorizationFilter;
             if (authorizationFilter != null && !addedAuthorizationAttributeTracer)
             {

@@ -56,11 +56,15 @@ namespace System.IdentityModel.Tokens
         /// Validates a <see cref="KerberosReceiverSecurityToken"/>.
         /// </summary>
         /// <param name="token">The <see cref="KerberosReceiverSecurityToken"/> to validate.</param>
-        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the identities contained in the token.</returns>
+        /// <returns>A <see cref="ReadOnlyCollection{T}"/> of <see cref="ClaimsIdentity"/> representing the
+        // identities contained in the token.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'token' is null.</exception>
-        /// <exception cref="ArgumentException">The token is not assignable from <see cref="KerberosReceiverSecurityToken"/>.</exception>
-        /// <exception cref="InvalidOperationException">Configuration <see cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="WindowsIdentity"/> of the <see cref="KerberosReceiverSecurityToken"/>is null.</exception>
+        /// <exception cref="ArgumentException">The token is not assignable from <see
+        // cref="KerberosReceiverSecurityToken"/>.</exception>
+        /// <exception cref="InvalidOperationException">Configuration <see
+        // cref="SecurityTokenHandlerConfiguration"/>is null.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="WindowsIdentity"/> of the <see
+        // cref="KerberosReceiverSecurityToken"/>is null.</exception>
         public override ReadOnlyCollection<ClaimsIdentity> ValidateToken(SecurityToken token)
         {
             if (token == null)
@@ -89,7 +93,8 @@ namespace System.IdentityModel.Tokens
                     throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4026));
                 }
 
-                // KerberosReceiveSecurityToken is disposable, best to make a copy as Dispose() nulls out the WindowsIdentity. The AuthenticationType was set when the kerbToken was created.
+                // KerberosReceiveSecurityToken is disposable, best to make a copy as Dispose() nulls out the
+                // WindowsIdentity. The AuthenticationType was set when the kerbToken was created.
                 WindowsIdentity wi = new WindowsIdentity(
                     kerbToken.WindowsIdentity.Token,
                     kerbToken.WindowsIdentity.AuthenticationType

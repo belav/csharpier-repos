@@ -45,7 +45,8 @@ namespace System.Buffers.Text
         /// <remarks>
         /// [ 80 ] is an invalid UTF-8 sequence (code unit cannot appear at start of sequence).
         /// [ FE ] is an invalid UTF-8 sequence (sequence is never well-formed anywhere in UTF-8 string).
-        /// [ C2 ] is an invalid UTF-8 sequence if it is followed by [ 20 ] (sequence improperly terminated).
+        /// [ C2 ] is an invalid UTF-8 sequence if it is followed by [ 20 ] (sequence improperly
+        // terminated).
         /// [ ED A0 ] is an invalid UTF-8 sequence (sequence is never well-formed anywhere in UTF-8 string).
         /// [ DE00 ] is an invalid UTF-16 sequence (code unit cannot appear at start of sequence).
         /// </remarks>

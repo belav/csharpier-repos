@@ -40,16 +40,16 @@ namespace Novell.Directory.Ldap
     /// </summary>
     /// <seealso cref="LdapConnection.SendRequest">
     /// </seealso>
-    /*
-     *       ModifyRequest ::= [APPLICATION 6] SEQUENCE {
-     *               object          LdapDN,
-     *               modification    SEQUENCE OF SEQUENCE {
-     *                       operation       ENUMERATED {
-     *                                               add     (0),
-     *                                               delete  (1),
-     *                                               replace (2) },
-     *                       modification    AttributeTypeAndValues } }
-     */
+/*
+*       ModifyRequest ::= [APPLICATION 6] SEQUENCE {
+*               object          LdapDN,
+*               modification    SEQUENCE OF SEQUENCE {
+*                       operation       ENUMERATED {
+*                                               add     (0),
+*                                               delete  (1),
+*                                               replace (2) },
+*                       modification    AttributeTypeAndValues } }
+*/
     public class LdapModifyRequest : LdapMessage
     {
         /// <summary> Returns of the dn of the entry to modify in the directory

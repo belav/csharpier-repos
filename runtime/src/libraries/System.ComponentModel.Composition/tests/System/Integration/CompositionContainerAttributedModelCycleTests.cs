@@ -13,9 +13,12 @@ namespace Tests.Integration
 {
     public class CompositionContainerAttributedModelCycleTests
     {
-        // There are nine possible scenarios that cause a part to have a dependency on another part, some of which
-        // are legal and some not. For example, below, is not legal for a part, A, to have a prerequisite dependency
-        // on a part, B, which has also has a prerequisite dependency on A. In contrast, however, it is legal for
+        // There are nine possible scenarios that cause a part to have a dependency on another part, some of
+        // which
+        // are legal and some not. For example, below, is not legal for a part, A, to have a prerequisite
+        // dependency
+        // on a part, B, which has also has a prerequisite dependency on A. In contrast, however, it is
+        // legal for
         // part A and B to have a non-prerequisite (Post) dependency on each other.
         //
         // ------------------------------

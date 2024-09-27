@@ -26,7 +26,8 @@ public interface IResponseCookies
     /// <summary>
     /// Add elements of specified collection as cookies.
     /// </summary>
-    /// <param name="keyValuePairs">Key value pair collections whose elements will be added as cookies.</param>
+    /// <param name="keyValuePairs">Key value pair collections whose elements will be added as
+    // cookies.</param>
     /// <param name="options"><see cref="CookieOptions"/> included in new cookie settings.</param>
     void Append(ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs, CookieOptions options)
     {
@@ -48,7 +49,8 @@ public interface IResponseCookies
     /// <param name="key">Name of the cookie to expire.</param>
     /// <param name="options">
     /// <see cref="CookieOptions"/> used to discriminate the particular cookie to expire. The
-    /// <see cref="CookieOptions.Domain"/> and <see cref="CookieOptions.Path"/> values are especially important.
+    /// <see cref="CookieOptions.Domain"/> and <see cref="CookieOptions.Path"/> values are especially
+    // important.
     /// </param>
     void Delete(string key, CookieOptions options);
 }

@@ -131,7 +131,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         newTree.AddContent(1, "Existing");
         newTree.CloseElement();
 
-        // Without the key, it would change the text "Existing" to "Inserted", then insert a new "Existing" below it
+        // Without the key, it would change the text "Existing" to "Inserted", then insert a new "Existing"
+        // below it
         // With the key, it just inserts a new "Inserted" at the top
 
         // Act
@@ -168,7 +169,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
         newTree.AddContent(1, "Second");
         newTree.CloseElement();
 
-        // Without the key, it changes the text content of "First" to "Second", then deletes the other "Second"
+        // Without the key, it changes the text content of "First" to "Second", then deletes the other
+        // "Second"
         // With the key, it just deletes "First"
 
         // Act
@@ -2672,7 +2674,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
             newTree.AddAttribute(1, $"myattribute_{i}", "value");
         }
 
-        // ... then the new tree gets one more attribute that crosses the builder size boundary, forcing buffer expansion
+        // ... then the new tree gets one more attribute that crosses the builder size boundary, forcing
+        // buffer expansion
         newTree.AddAttribute(1, $"myattribute_final", "value");
 
         // Act
@@ -2707,7 +2710,8 @@ public class RenderTreeDiffBuilderTest : IDisposable
             newTree.AddAttribute(1, $"myattribute_{i}", "value");
         }
 
-        // ... then the old tree gets one more attribute that crosses the builder size boundary, forcing buffer expansion
+        // ... then the old tree gets one more attribute that crosses the builder size boundary, forcing
+        // buffer expansion
         oldTree.AddAttribute(1, $"myattribute_final", "value");
 
         // Act

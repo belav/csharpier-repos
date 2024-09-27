@@ -61,7 +61,7 @@ namespace System.ServiceModel.Channels
             set { this.compressionFormat = value; }
         }
 
-        /* public */
+/* public */
         BinaryVersion BinaryVersion
         {
             get { return binaryVersion; }
@@ -211,7 +211,8 @@ namespace System.ServiceModel.Channels
             {
                 // We are guaranteed that a transport exists when building a binding;
                 // Allow the regular flow/checks to happen rather than throw here
-                // (InternalBuildChannelListener will call into the BindingContext. Validation happens there and it will throw)
+                // (InternalBuildChannelListener will call into the BindingContext. Validation happens there and it
+                // will throw)
                 this.maxReceivedMessageSize = transport.MaxReceivedMessageSize;
             }
         }

@@ -48,7 +48,8 @@ public class Startup
             }
         );
 
-        // Low level anonymous method inline middleware, named Diagnostics.Middleware.Analysis.Startup+<>c by default
+        // Low level anonymous method inline middleware, named Diagnostics.Middleware.Analysis.Startup+<>c
+        // by default
         app.Use(next =>
         {
             return context =>

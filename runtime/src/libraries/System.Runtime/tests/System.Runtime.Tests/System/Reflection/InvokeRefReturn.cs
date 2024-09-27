@@ -96,7 +96,8 @@ namespace System.Reflection.Tests
             }
             catch (NotSupportedException)
             {
-                // We expect a NotSupportedException from the Invoke call. Methods returning byref-like types by reference
+                // We expect a NotSupportedException from the Invoke call. Methods returning byref-like types by
+                // reference
                 // are not reflection invokable.
             }
         }

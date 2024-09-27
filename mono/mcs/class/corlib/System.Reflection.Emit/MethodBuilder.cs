@@ -265,25 +265,25 @@ namespace System.Reflection.Emit
             get { throw new NotImplementedException(); }
         }
 
-        /* Used by mcs */
+/* Used by mcs */
         internal bool BestFitMapping
         {
             set { extra_flags = (uint)((extra_flags & ~0x30) | (uint)(value ? 0x10 : 0x20)); }
         }
 
-        /* Used by mcs */
+/* Used by mcs */
         internal bool ThrowOnUnmappableChar
         {
             set { extra_flags = (uint)((extra_flags & ~0x3000) | (uint)(value ? 0x1000 : 0x2000)); }
         }
 
-        /* Used by mcs */
+/* Used by mcs */
         internal bool ExactSpelling
         {
             set { extra_flags = (uint)((extra_flags & ~0x01) | (uint)(value ? 0x01 : 0x00)); }
         }
 
-        /* Used by mcs */
+/* Used by mcs */
         internal bool SetLastError
         {
             set { extra_flags = (uint)((extra_flags & ~0x40) | (uint)(value ? 0x40 : 0x00)); }
@@ -397,11 +397,11 @@ namespace System.Reflection.Emit
 
         public override object[] GetCustomAttributes(bool inherit)
         {
-            /*
-             * On MS.NET, this always returns not_supported, but we can't do this
-             * since there would be no way to obtain custom attributes of
-             * dynamically created ctors.
-             */
+/*
+* On MS.NET, this always returns not_supported, but we can't do this
+* since there would be no way to obtain custom attributes of
+* dynamically created ctors.
+*/
             if (type.is_created)
                 return MonoCustomAttrs.GetCustomAttributes(this, inherit);
             else
@@ -566,16 +566,16 @@ namespace System.Reflection.Emit
                         CustomAttributeBuilder.decode_cattr(customBuilder);
                     bool preserveSig = true;
 
-                    /*
-                     * It would be easier to construct a DllImportAttribute from
-                     * the custom attribute builder, but the DllImportAttribute
-                     * does not contain all the information required here, ie.
-                     * - some parameters, like BestFitMapping has three values
-                     *   ("on", "off", "missing"), but DllImportAttribute only
-                     *   contains two (on/off).
-                     * - PreserveSig is true by default, while it is false by
-                     *   default in DllImportAttribute.
-                     */
+/*
+* It would be easier to construct a DllImportAttribute from
+* the custom attribute builder, but the DllImportAttribute
+* does not contain all the information required here, ie.
+* - some parameters, like BestFitMapping has three values
+*   ("on", "off", "missing"), but DllImportAttribute only
+*   contains two (on/off).
+* - PreserveSig is true by default, while it is false by
+*   default in DllImportAttribute.
+*/
 
                     pi_dll = (string)attr.ctorArgs[0];
                     if (pi_dll == null || pi_dll.Length == 0)
@@ -671,7 +671,7 @@ namespace System.Reflection.Emit
 
             if (permissions != null)
             {
-                /* Check duplicate actions */
+/* Check duplicate actions */
                 foreach (RefEmitPermissionSet set in permissions)
                     if (set.action == action)
                         throw new InvalidOperationException(

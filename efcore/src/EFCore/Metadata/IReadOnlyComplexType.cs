@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 ///     Represents the type of a complex property of a structural type.
 /// </summary>
 /// <remarks>
-///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
+///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and
+// relationships</see> for more information and examples.
 /// </remarks>
 public interface IReadOnlyComplexType : IReadOnlyTypeBase
 {
@@ -20,11 +21,13 @@ public interface IReadOnlyComplexType : IReadOnlyTypeBase
     IReadOnlyComplexProperty ComplexProperty { get; }
 
     /// <summary>
-    ///     Gets a value indicating whether given type is one of the containing types for this complex type.
+    ///     Gets a value indicating whether given type is one of the containing types for this complex
+    // type.
     /// </summary>
     /// <param name="type">Type to search for in declaration path.</param>
     /// <returns>
-    ///     <see langword="true" /> if <paramref name="type" /> is one of the containing types for this complex type,
+    ///     <see langword="true" /> if <paramref name="type" /> is one of the containing types for this
+    // complex type,
     ///     otherwise <see langword="false" />.
     /// </returns>
     bool IsContainedBy(Type type)

@@ -151,8 +151,10 @@ namespace System.Reflection.Tests
                 Assert.True(gp.IsGenericMethodParameter());
 
                 MethodInfo declaringMethod = (MethodInfo)gp.DeclaringMethod;
-                // The DeclaringMethod isn't necessarily the same as there is only one Type object for a generic parameter and it's shared between
-                // all MethodInfo's with different ReflectedTypes and different generic instantiations of the declaring type.
+                // The DeclaringMethod isn't necessarily the same as there is only one Type object for a generic
+                // parameter and it's shared between
+                // all MethodInfo's with different ReflectedTypes and different generic instantiations of the
+                // declaring type.
                 Assert.Equal(m.MetadataToken, declaringMethod.MetadataToken);
                 Assert.Equal(declaringMethod.DeclaringType, gp.DeclaringType);
                 Assert.False(declaringMethod.DeclaringType.IsConstructedGenericType);

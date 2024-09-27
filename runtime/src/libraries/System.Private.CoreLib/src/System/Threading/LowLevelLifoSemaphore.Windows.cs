@@ -10,9 +10,12 @@ namespace System.Threading
     /// A LIFO semaphore implemented using Win32 IO Completion Ports.
     /// </summary>
     /// <remarks>
-    /// IO Completion ports release waiting threads in LIFO order, so we can use them to create a LIFO semaphore.
-    /// See https://msdn.microsoft.com/en-us/library/windows/desktop/aa365198(v=vs.85).aspx under How I/O Completion Ports Work.
-    /// From the docs "Threads that block their execution on an I/O completion port are released in last-in-first-out (LIFO) order."
+    /// IO Completion ports release waiting threads in LIFO order, so we can use them to create a LIFO
+    // semaphore.
+    /// See https://msdn.microsoft.com/en-us/library/windows/desktop/aa365198(v=vs.85).aspx under How
+    // I/O Completion Ports Work.
+    /// From the docs "Threads that block their execution on an I/O completion port are released in
+    // last-in-first-out (LIFO) order."
     /// </remarks>
     internal sealed partial class LowLevelLifoSemaphore : IDisposable
     {

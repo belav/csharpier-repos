@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// Tracks synthesized fields that are needed in a submission being compiled.
     /// </summary>
     /// <remarks>
-    /// For every other submission referenced by this submission we add a field, so that we can access members of the target submission.
+    /// For every other submission referenced by this submission we add a field, so that we can access
+    // members of the target submission.
     /// A field is also needed for the host object, if provided.
     /// </remarks>
     internal class SynthesizedSubmissionFields

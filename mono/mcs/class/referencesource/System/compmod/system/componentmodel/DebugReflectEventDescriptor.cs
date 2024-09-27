@@ -7,12 +7,12 @@
 #if DEBUG
 
 /*
-    
-    This class exists in debug only.  It is a complete copy of the
-    V1.0 TypeDescriptor object and is used to validate that the
-    behavior of the V2.0 TypeDescriptor matches 1.0 behavior.
-    
- */
+
+This class exists in debug only.  It is a complete copy of the
+V1.0 TypeDescriptor object and is used to validate that the
+behavior of the V2.0 TypeDescriptor matches 1.0 behavior.
+
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -130,7 +130,8 @@ namespace System.ComponentModel
         }
 
         /// <devdoc>
-        ///     This constructor takes an existing DebugReflectEventDescriptor and modifies it by merging in the
+        ///     This constructor takes an existing DebugReflectEventDescriptor and modifies it by merging in
+        // the
         ///     passed-in attributes.
         /// </devdoc>
         public DebugReflectEventDescriptor(
@@ -588,94 +589,106 @@ namespace System.ComponentModel
             }
         }
 
-        /*
-            The following code has been removed to fix FXCOP violations.  The code
-            is left here incase it needs to be resurrected in the future.
+/*
+The following code has been removed to fix FXCOP violations.  The code
+is left here incase it needs to be resurrected in the future.
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with one attribute.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type, MethodInfo addMethod, MethodInfo removeMethod) : this(componentClass, name, type, (Attribute[]) null) {
-            this.addMethod = addMethod;
-            this.removeMethod = removeMethod;
-            this.filledMethods = true;
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with one attribute.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type, MethodInfo
+addMethod, MethodInfo removeMethod) : this(componentClass, name, type, (Attribute[]) null) {
+this.addMethod = addMethod;
+this.removeMethod = removeMethod;
+this.filledMethods = true;
+}
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with one attribute.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type) : this(componentClass, name, type, (Attribute[]) null) {
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with one attribute.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type) :
+this(componentClass, name, type, (Attribute[]) null) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with two attributes.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
-                                      Attribute a1) : this(componentClass, name, type, new Attribute[] {a1}) {
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with two attributes.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
+Attribute a1) : this(componentClass, name, type, new Attribute[] {a1}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with two attributes.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
-                                      Attribute a1, Attribute a2) : this(componentClass, name, type, new Attribute[] {a1, a2}) {
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with two attributes.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
+Attribute a1, Attribute a2) : this(componentClass, name, type, new Attribute[] {a1, a2}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with three attributes.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
-                                      Attribute a1, Attribute a2, Attribute a3) : this(componentClass, name, type, new Attribute[] {a1, a2, a3}) {
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with three
+attributes.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
+Attribute a1, Attribute a2, Attribute a3) : this(componentClass, name, type, new Attribute[] {a1,
+a2, a3}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut main constructor for an DebugReflectEventDescriptor with four attributes.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
-                                      Attribute a1, Attribute a2,
-                                      Attribute a3, Attribute a4) : this(componentClass, name, type, new Attribute[] {a1, a2, a3, a4}) {
-        }
+/// <devdoc>
+///     This is a shortcut main constructor for an DebugReflectEventDescriptor with four attributes.
+/// </devdoc>
+public DebugReflectEventDescriptor(Type componentClass, string name, Type type,
+Attribute a1, Attribute a2,
+Attribute a3, Attribute a4) : this(componentClass, name, type, new Attribute[] {a1, a2, a3, a4}) {
+}
 
-        /// <devdoc>
-        ///     This constructor takes an existing DebugReflectEventDescriptor and modifies it by merging in the
-        ///     passed-in attributes.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute[] attributes)
-        : this(oldReflectEventDescriptor.ComponentType, oldReflectEventDescriptor, attributes) {
-        }
+/// <devdoc>
+///     This constructor takes an existing DebugReflectEventDescriptor and modifies it by merging in
+the
+///     passed-in attributes.
+/// </devdoc>
+public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute[]
+attributes)
+: this(oldReflectEventDescriptor.ComponentType, oldReflectEventDescriptor, attributes) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and one attribute to
-        ///     merge in.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1) : this(oldReflectEventDescriptor, new Attribute[] { a1}) {
-        }
+/// <devdoc>
+///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and one
+attribute to
+///     merge in.
+/// </devdoc>
+public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1) :
+this(oldReflectEventDescriptor, new Attribute[] { a1}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and two attributes to
-        ///     merge in.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
-                                      Attribute a2) : this(oldReflectEventDescriptor, new Attribute[] { a1,a2}) {
-        }
+/// <devdoc>
+///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and two
+attributes to
+///     merge in.
+/// </devdoc>
+public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
+Attribute a2) : this(oldReflectEventDescriptor, new Attribute[] { a1,a2}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and three attributes to
-        ///     merge in.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
-                                      Attribute a2, Attribute a3) : this(oldReflectEventDescriptor, new Attribute[] { a1,a2,a3}) {
-        }
+/// <devdoc>
+///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and three
+attributes to
+///     merge in.
+/// </devdoc>
+public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
+Attribute a2, Attribute a3) : this(oldReflectEventDescriptor, new Attribute[] { a1,a2,a3}) {
+}
 
-        /// <devdoc>
-        ///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and four attributes to
-        ///     merge in.
-        /// </devdoc>
-        public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
-                                      Attribute a2, Attribute a3, Attribute a4) : this(oldReflectEventDescriptor, new Attribute[] { a1,a2,a3,a4}) {
-        }
+/// <devdoc>
+///     This is a shortcut constructor that takes an existing DebugReflectEventDescriptor and four
+attributes to
+///     merge in.
+/// </devdoc>
+public DebugReflectEventDescriptor(EventDescriptor oldReflectEventDescriptor, Attribute a1,
+Attribute a2, Attribute a3, Attribute a4) : this(oldReflectEventDescriptor, new Attribute[] {
+a1,a2,a3,a4}) {
+}
 
-        */
+*/
     }
 }
 #endif

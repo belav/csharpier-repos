@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         void BuildProject([MarshalAs(UnmanagedType.IUnknown)] object progress);
 
         /// <summary>
-        /// This function is unused and unimplemented. It is just a placeholder in the vtable for this public interface.
+        /// This function is unused and unimplemented. It is just a placeholder in the vtable for this
+        // public interface.
         /// </summary>
         /// <remarks>See http://psph/devdiv~bugs/114172. </remarks>
         [PreserveSig]
@@ -52,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         int OnResourceFileRemoved([MarshalAs(UnmanagedType.LPWStr)] string filename);
 
         // NOTICE: OnImportAdded is superseded by OnImportAddedEx.
-        // The function has not been removed due to the hard-dependency on this particular signature in Venus'
+        // The function has not been removed due to the hard-dependency on this particular signature in
+        // Venus'
         // templates
         [PreserveSig]
         int OnImportAdded(
@@ -76,7 +78,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         void OnActiveConfigurationChanged([MarshalAs(UnmanagedType.LPWStr)] string configName);
 
         /// <summary>
-        /// Called when the project is fully loaded -- used to signal the background parsing thread to begin processing
+        /// Called when the project is fully loaded -- used to signal the background parsing thread to begin
+        // processing
         /// project files.
         /// </summary>
         void OnProjectLoadCompletion();
@@ -148,14 +151,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
         );
 
         /// <summary>
-        /// Called when references (imports) are added. If the reference is a project-reference, project specifies the
-        /// project uniquely. Otherwise it is NULL. On removal, it is up to the callee to know whether the file
+        /// Called when references (imports) are added. If the reference is a project-reference, project
+        // specifies the
+        /// project uniquely. Otherwise it is NULL. On removal, it is up to the callee to know whether the
+        // file
         /// specified as a project reference.
         /// </summary>
         /// <param name="filename">The filename to add a reference to.</param>
-        /// <param name="project">If the reference being added is a project reference, then this is a non-null string
+        /// <param name="project">If the reference being added is a project reference, then this is a
+        // non-null string
         /// that defines this uniquely.</param>
-        /// <param name="optionID">A CompilerOption enumeration indicating whether the reference is a regular reference
+        /// <param name="optionID">A CompilerOption enumeration indicating whether the reference is a
+        // regular reference
         /// (OPTID_IMPORTS) or the one that needs to be embedded into the target assembly
         /// (OPTID_IMPORTSUSINGNOPIA).</param>
         [PreserveSig]

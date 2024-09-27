@@ -1043,7 +1043,8 @@ namespace System.ServiceModel.Channels
                 object state
             )
             {
-                //readerWriterLock is taken inside of async result and check for "closed" stte occurs within that lock
+                //readerWriterLock is taken inside of async result and check for "closed" stte occurs within that
+                // lock
                 return new ValidateUriRouteAsyncResult(this, uri, address, port, callback, state);
             }
 

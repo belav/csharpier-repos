@@ -9,7 +9,8 @@ using Xunit;
 namespace System.Security.Cryptography.X509Certificates.Tests
 {
     /// <summary>
-    /// Tests that apply to the filesystem/cache portions of the X509 infrastructure on Unix implementations.
+    /// Tests that apply to the filesystem/cache portions of the X509 infrastructure on Unix
+    // implementations.
     /// </summary>
     [Collection("X509Filesystem")]
     public static class X509FilesystemTests

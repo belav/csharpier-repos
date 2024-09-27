@@ -18,8 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem.BrokeredService
     {
         private readonly IWorkspaceProjectContextFactory _workspaceProjectContextFactory;
 
-        // For the sake of the in-proc implementation here, we're going to build this atop IWorkspaceProjectContext so semantics are preserved
-        // for a few edge cases. Once the project system has moved onto this directly, we can flatten the implementations out.
+        // For the sake of the in-proc implementation here, we're going to build this atop
+        // IWorkspaceProjectContext so semantics are preserved
+        // for a few edge cases. Once the project system has moved onto this directly, we can flatten the
+        // implementations out.
         public WorkspaceProjectFactoryService(
             IWorkspaceProjectContextFactory workspaceProjectContextFactory
         )

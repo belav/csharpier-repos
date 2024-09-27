@@ -150,7 +150,8 @@ class A {
         }
 
         /// <summary>
-        /// This test demonstrates the correctness of <see cref="SymbolCompletionState.HasAtMostOneBitSet"/>.
+        /// This test demonstrates the correctness of <see
+        // cref="SymbolCompletionState.HasAtMostOneBitSet"/>.
         /// </summary>
         [Fact]
         public void TestHasAtMostOneBitSet()
@@ -163,7 +164,8 @@ class A {
         }
 
         /// <summary>
-        /// This is the simple implementation of the sbyte version of <see cref="SymbolCompletionState.HasAtMostOneBitSet"/>.
+        /// This is the simple implementation of the sbyte version of <see
+        // cref="SymbolCompletionState.HasAtMostOneBitSet"/>.
         /// Hopefully, it is obviously correct.
         /// </summary>
         private static bool HasAtMostOneBitSetSafe(sbyte bits)

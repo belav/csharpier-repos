@@ -102,19 +102,19 @@ namespace Novell.Directory.Ldap.Utilclass
         private const int HEX_RDN_VALUE = 6;
         private const int UNQUOTED_RDN_VALUE = 7;
 
-        /* State transition table:  Parsing starts in state 1.
-        
-        State   COMMA   DIGIT   "Oid."  ALPHA   EQUAL   QUOTE   SHARP   HEX
-        --------------------------------------------------------------------
-        1       Err     3       3       2       Err     Err     Err     Err
-        2       Err     Err     Err     2       4       Err     Err     Err
-        3       Err     3       Err     Err     4       Err     Err     Err
-        4       Err     7       Err     7       Err     5       6       7
-        5       1       5       Err     5       Err     1       Err     7
-        6       1       6       Err     Err     Err     Err     Err     6
-        7       1       7       Err     7       Err     Err     Err     7
-        
-        */
+/* State transition table:  Parsing starts in state 1.
+
+State   COMMA   DIGIT   "Oid."  ALPHA   EQUAL   QUOTE   SHARP   HEX
+--------------------------------------------------------------------
+1       Err     3       3       2       Err     Err     Err     Err
+2       Err     Err     Err     2       4       Err     Err     Err
+3       Err     3       Err     Err     4       Err     Err     Err
+4       Err     7       Err     7       Err     5       6       7
+5       1       5       Err     5       Err     1       Err     7
+6       1       6       Err     Err     Err     Err     Err     6
+7       1       7       Err     7       Err     Err     Err     7
+
+*/
 
 
         private System.Collections.ArrayList rdnList;
@@ -139,7 +139,7 @@ namespace Novell.Directory.Ldap.Utilclass
         public DN(System.String dnString)
         {
             InitBlock();
-            /* the empty string is a valid DN */
+/* the empty string is a valid DN */
             if (dnString.Length == 0)
                 return;
 

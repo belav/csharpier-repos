@@ -68,7 +68,8 @@ namespace System.Xml.Xsl.XsltOld
 
         private static readonly Hashtable s_table = CreatePropsTable();
 
-        //        private static HtmlElementProps  s_otherElements = Create(false, false, false, false, false, false, false);
+        //        private static HtmlElementProps  s_otherElements = Create(false, false, false, false,
+        // false, false, false);
 
         public static HtmlElementProps? GetProps(string name)
         {

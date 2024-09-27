@@ -47,13 +47,17 @@ namespace System.Data.Objects
         }
 
         /// <summary>
-        /// Includes the specified span path in the specified span instance and returns the updated span instance.
-        /// If <paramref name="spanToIncludeIn"/> is null, a new span instance is constructed and returned that contains
+        /// Includes the specified span path in the specified span instance and returns the updated span
+        // instance.
+        /// If <paramref name="spanToIncludeIn"/> is null, a new span instance is constructed and returned
+        // that contains
         /// the specified include path.
         /// </summary>
-        /// <param name="spanToIncludeIn">The span instance to which the include path should be added. May be null</param>
+        /// <param name="spanToIncludeIn">The span instance to which the include path should be added. May
+        // be null</param>
         /// <param name="pathToInclude">The include path to add</param>
-        /// <returns>A non-null span instance that contains the specified include path in addition to any paths ut already contained</returns>
+        /// <returns>A non-null span instance that contains the specified include path in addition to any
+        // paths ut already contained</returns>
         internal static Span IncludeIn(Span spanToIncludeIn, string pathToInclude)
         {
             if (null == spanToIncludeIn)
@@ -69,14 +73,19 @@ namespace System.Data.Objects
         /// Returns a span instance that is the union of the two specified span instances.
         /// If <paramref name="span1"/> and <paramref name="span2"/> are both <c>null</c>,
         /// then <c>null</c> is returned.
-        /// If <paramref name="span1"/> or <paramref name="span2"/> is null, but the remaining argument is non-null,
+        /// If <paramref name="span1"/> or <paramref name="span2"/> is null, but the remaining argument is
+        // non-null,
         /// then the non-null argument is returned.
-        /// If neither <paramref name="span1"/> nor <paramref name="span2"/> are null, a new span instance is returned
+        /// If neither <paramref name="span1"/> nor <paramref name="span2"/> are null, a new span instance
+        // is returned
         /// that contains the merged span paths from both.
         /// </summary>
-        /// <param name="span1">The first span instance from which to include span paths; may be <c>null</c></param>
-        /// <param name="span2">The second span instance from which to include span paths; may be <c>null</c></param>
-        /// <returns>A span instance representing the union of the two arguments; may be <c>null</c> if both arguments are null</returns>
+        /// <param name="span1">The first span instance from which to include span paths; may be
+        // <c>null</c></param>
+        /// <param name="span2">The second span instance from which to include span paths; may be
+        // <c>null</c></param>
+        /// <returns>A span instance representing the union of the two arguments; may be <c>null</c> if both
+        // arguments are null</returns>
         internal static Span CopyUnion(Span span1, Span span2)
         {
             if (null == span1)

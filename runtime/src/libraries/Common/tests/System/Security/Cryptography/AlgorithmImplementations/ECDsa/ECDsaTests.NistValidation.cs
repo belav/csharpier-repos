@@ -9,7 +9,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
 {
     public abstract partial class ECDsaTests : ECDsaTestsBase
     {
-        // These test cases are from http://csrc.nist.gov/groups/STM/cavp/digital-signatures.html#test-vectors
+        // These test cases are from
+        // http://csrc.nist.gov/groups/STM/cavp/digital-signatures.html#test-vectors
         // FIPS 186-4 ECDSA test vectors
         // 186-3ecdsatestvectors.zip
         // SigGen.txt
@@ -291,7 +292,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsSha3))]
         public void ValidateNistP256Sha3_256()
         {
-            // From https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P256_SHA3-256.pdf
+            // From
+            // https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P256_SHA3-256.pdf
             byte[] msg = "4578616d706c65206f66204543445341207769746820502d323536".HexToByteArray();
 
             ECParameters parameters = new ECParameters
@@ -328,7 +330,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsSha3))]
         public void ValidateNistP384Sha3_384()
         {
-            // From https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P384_SHA3-384.pdf
+            // From
+            // https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P384_SHA3-384.pdf
             byte[] msg = "4578616d706c65206f66204543445341207769746820502d333834".HexToByteArray();
 
             ECParameters parameters = new ECParameters
@@ -373,7 +376,8 @@ namespace System.Security.Cryptography.EcDsa.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsSha3))]
         public void ValidateNistP521Sha3_512()
         {
-            // From https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P521_SHA3-512.pdf
+            // From
+            // https://csrc.nist.gov/CSRC/media/Projects/Cryptographic-Standards-and-Guidelines/documents/examples/P521_SHA3-512.pdf
             byte[] msg = "4578616d706c65206f66204543445341207769746820502d353231".HexToByteArray();
 
             ECParameters parameters = new ECParameters

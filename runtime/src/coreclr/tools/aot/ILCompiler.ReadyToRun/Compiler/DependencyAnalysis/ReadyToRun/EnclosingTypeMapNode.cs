@@ -20,7 +20,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             : base(module)
         {
             _metadata = module.MetadataReader;
-            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types defined within
+            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types
+            // defined within
             if (!IsSupported(_metadata))
                 throw new InternalCompilerErrorException(
                     $"EnclosingTypeMap made for assembly with more than 0x{(uint)ReadyToRunEnclosingTypeMap.MaxTypeCount:x} types"
@@ -29,8 +30,10 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public static bool IsSupported(MetadataReader metadata)
         {
-            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types defined within
-            // and really shouldn't be generated for tiny assemblies, as the map provides very little to no value
+            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types
+            // defined within
+            // and really shouldn't be generated for tiny assemblies, as the map provides very little to no
+            // value
             // in those situations
             int typeDefinitionCount = metadata.TypeDefinitions.Count;
 
@@ -58,7 +61,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);
 
-            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types defined within
+            // This map is only valid for assemblies with <= ReadyToRunEnclosingTypeMap.MaxTypeCount types
+            // defined within
             Debug.Assert(
                 _metadata.TypeDefinitions.Count <= (int)ReadyToRunEnclosingTypeMap.MaxTypeCount
             );

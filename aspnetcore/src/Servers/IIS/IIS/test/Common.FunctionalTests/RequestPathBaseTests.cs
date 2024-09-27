@@ -88,9 +88,11 @@ public class RequestPathBaseTests : FixtureLoggedTest
         @"/Sub//App/PathAndPathBase",
         "/path1//path2"
     )]
-    // The results should be "/Sub//App/PathAndPathBase", "//path1//path2", but Http.Sys collapses the "//" before the "../"
+    // The results should be "/Sub//App/PathAndPathBase", "//path1//path2", but Http.Sys collapses the
+    // "//" before the "../"
     // and we don't have a good way of emulating that.
-    // [InlineData(@"/Sub/call//../App/PathAndPathBase//path1//path2", @"", "/Sub/call/App/PathAndPathBase//path1//path2")]
+    // [InlineData(@"/Sub/call//../App/PathAndPathBase//path1//path2", @"",
+    // "/Sub/call/App/PathAndPathBase//path1//path2")]
     [InlineData(
         @"/Sub/call/.%2e/App/PathAndPathBase//path1//path2",
         @"/Sub/App/PathAndPathBase",

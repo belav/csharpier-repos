@@ -15,12 +15,15 @@ namespace System.ServiceModel.Dispatcher
         String,
     }
 
-    // Value is like Variant. Since a Value is only temporary storage, we use memory to avoid typecasting type
+    // Value is like Variant. Since a Value is only temporary storage, we use memory to avoid
+    // typecasting type
     // casting, which in C# is expensive. Value contains storage for every possible XPath data type.
-    // We avoid data copying by being smart about how we pass Value around - values are either accessed via
+    // We avoid data copying by being smart about how we pass Value around - values are either accessed
+    // via
     // method calls, or the value object itself is passed by ref
     //
-    // The filter engine never deals with a single value per se. We only work with Sets of Values. A single value
+    // The filter engine never deals with a single value per se. We only work with Sets of Values. A
+    // single value
     // is a ValueSet of size 1
     //
     internal struct Value

@@ -7,7 +7,8 @@ namespace System.Net.Mime
 {
     internal interface IByteEncoder
     {
-        // This method does not account for codepoint boundaries. If encoding a string, consider using EncodeString
+        // This method does not account for codepoint boundaries. If encoding a string, consider using
+        // EncodeString
         int EncodeBytes(
             byte[] buffer,
             int offset,

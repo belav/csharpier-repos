@@ -34,7 +34,8 @@ namespace System.Data.Metadata.Edm
             : base(name, namespaceName, dataSpace)
         {
             //---- name of the 'schema'
-            //---- this is used by the SQL Gen utility and update pipeline to support generation of the correct function name in the store
+            //---- this is used by the SQL Gen utility and update pipeline to support generation of the correct
+            // function name in the store
             _schemaName = payload.Schema;
             _fullName = this.NamespaceName + "." + this.Name;
 
@@ -214,7 +215,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Returns true if this is a C-space function and it has an eSQL body defined as DefiningExpression.
+        /// Returns true if this is a C-space function and it has an eSQL body defined as
+        // DefiningExpression.
         /// </summary>
         internal bool HasUserDefinedBody
         {
@@ -227,7 +229,8 @@ namespace System.Data.Metadata.Edm
 
         /// <summary>
         /// For function imports, optionally indicates the entity set to which the result is bound.
-        /// If the function import has multiple result sets, returns the entity set to which the first result is bound
+        /// If the function import has multiple result sets, returns the entity set to which the first
+        // result is bound
         /// </summary>
         [MetadataProperty(BuiltInTypeKind.EntitySet, false)]
         internal EntitySet EntitySet
@@ -238,7 +241,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// For function imports, indicates the entity sets to which the return parameters are bound.
         /// The number of elements in the collection matches the number of return parameters.
-        /// A null element in the collection indicates that the corresponding are not bound to an entity set.
+        /// A null element in the collection indicates that the corresponding are not bound to an entity
+        // set.
         /// </summary>
         [MetadataProperty(BuiltInTypeKind.EntitySet, true)]
         internal ReadOnlyMetadataCollection<EntitySet> EntitySets
@@ -385,7 +389,8 @@ namespace System.Data.Metadata.Edm
         }
 
         /// <summary>
-        /// Builds identity based on the functionName and parameter types. All parameters are assumed to be <see cref="ParameterMode.In"/>.
+        /// Builds identity based on the functionName and parameter types. All parameters are assumed to be
+        // <see cref="ParameterMode.In"/>.
         /// Returns string in the form of "functionName (param1, param2, ... paramN)".
         /// </summary>
         internal static string BuildIdentity(

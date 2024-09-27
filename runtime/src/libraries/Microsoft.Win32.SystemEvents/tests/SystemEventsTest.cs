@@ -28,7 +28,8 @@ namespace Microsoft.Win32.SystemEventsTests
             {
                 if (PlatformDetection.IsNetFramework)
                 {
-                    // .NET Framework has a bug where it will allow EnsureSystemEvents to proceed without actually creating the HWND
+                    // .NET Framework has a bug where it will allow EnsureSystemEvents to proceed without actually
+                    // creating the HWND
                     WaitForSystemEventsWindow();
                 }
 
@@ -71,8 +72,10 @@ namespace Microsoft.Win32.SystemEventsTests
             var windowReadyEvent = windowReadyField.GetValue(null) as ManualResetEvent;
             if (windowReadyEvent != null)
             {
-                // on an STA thread the HWND is created in the same thread synchronously when attaching to an event handler
-                // if we're on an MTA thread, a new thread is created to handle events and that thread creates the window, wait for it to complete.
+                // on an STA thread the HWND is created in the same thread synchronously when attaching to an event
+                // handler
+                // if we're on an MTA thread, a new thread is created to handle events and that thread creates the
+                // window, wait for it to complete.
                 Assert.True(windowReadyEvent.WaitOne(PostMessageWait));
             }
         }

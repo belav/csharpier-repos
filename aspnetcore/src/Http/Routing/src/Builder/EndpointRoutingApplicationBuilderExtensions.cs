@@ -18,21 +18,27 @@ public static class EndpointRoutingApplicationBuilderExtensions
     private const string UseRoutingKey = "__UseRouting";
 
     /// <summary>
-    /// Adds a <see cref="EndpointRoutingMiddleware"/> middleware to the specified <see cref="IApplicationBuilder"/>.
+    /// Adds a <see cref="EndpointRoutingMiddleware"/> middleware to the specified <see
+    // cref="IApplicationBuilder"/>.
     /// </summary>
     /// <param name="builder">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
     /// <remarks>
     /// <para>
     /// A call to <see cref="UseRouting(IApplicationBuilder)"/> must be followed by a call to
-    /// <see cref="UseEndpoints(IApplicationBuilder, Action{IEndpointRouteBuilder})"/> for the same <see cref="IApplicationBuilder"/>
+    /// <see cref="UseEndpoints(IApplicationBuilder, Action{IEndpointRouteBuilder})"/> for the same <see
+    // cref="IApplicationBuilder"/>
     /// instance.
     /// </para>
     /// <para>
-    /// The <see cref="EndpointRoutingMiddleware"/> defines a point in the middleware pipeline where routing decisions are
-    /// made, and an <see cref="Endpoint"/> is associated with the <see cref="HttpContext"/>. The <see cref="EndpointMiddleware"/>
-    /// defines a point in the middleware pipeline where the current <see cref="Endpoint"/> is executed. Middleware between
-    /// the <see cref="EndpointRoutingMiddleware"/> and <see cref="EndpointMiddleware"/> may observe or change the
+    /// The <see cref="EndpointRoutingMiddleware"/> defines a point in the middleware pipeline where
+    // routing decisions are
+    /// made, and an <see cref="Endpoint"/> is associated with the <see cref="HttpContext"/>. The <see
+    // cref="EndpointMiddleware"/>
+    /// defines a point in the middleware pipeline where the current <see cref="Endpoint"/> is executed.
+    // Middleware between
+    /// the <see cref="EndpointRoutingMiddleware"/> and <see cref="EndpointMiddleware"/> may observe or
+    // change the
     /// <see cref="Endpoint"/> associated with the <see cref="HttpContext"/>.
     /// </para>
     /// </remarks>
@@ -55,7 +61,8 @@ public static class EndpointRoutingApplicationBuilderExtensions
             builder.Properties[EndpointRouteBuilder] = endpointRouteBuilder;
         }
 
-        // Add UseRouting function to properties so that middleware that can't reference UseRouting directly can call UseRouting via this property
+        // Add UseRouting function to properties so that middleware that can't reference UseRouting directly
+        // can call UseRouting via this property
         // This is part of the global endpoint route builder concept
         builder.Properties.TryAdd(UseRoutingKey, (object)UseRouting);
 
@@ -63,25 +70,34 @@ public static class EndpointRoutingApplicationBuilderExtensions
     }
 
     /// <summary>
-    /// Adds a <see cref="EndpointMiddleware"/> middleware to the specified <see cref="IApplicationBuilder"/>
-    /// with the <see cref="EndpointDataSource"/> instances built from configured <see cref="IEndpointRouteBuilder"/>.
-    /// The <see cref="EndpointMiddleware"/> will execute the <see cref="Endpoint"/> associated with the current
+    /// Adds a <see cref="EndpointMiddleware"/> middleware to the specified <see
+    // cref="IApplicationBuilder"/>
+    /// with the <see cref="EndpointDataSource"/> instances built from configured <see
+    // cref="IEndpointRouteBuilder"/>.
+    /// The <see cref="EndpointMiddleware"/> will execute the <see cref="Endpoint"/> associated with the
+    // current
     /// request.
     /// </summary>
     /// <param name="builder">The <see cref="IApplicationBuilder"/> to add the middleware to.</param>
-    /// <param name="configure">An <see cref="Action{IEndpointRouteBuilder}"/> to configure the provided <see cref="IEndpointRouteBuilder"/>.</param>
+    /// <param name="configure">An <see cref="Action{IEndpointRouteBuilder}"/> to configure the provided
+    // <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
     /// <remarks>
     /// <para>
-    /// A call to <see cref="UseEndpoints(IApplicationBuilder, Action{IEndpointRouteBuilder})"/> must be preceded by a call to
+    /// A call to <see cref="UseEndpoints(IApplicationBuilder, Action{IEndpointRouteBuilder})"/> must be
+    // preceded by a call to
     /// <see cref="UseRouting(IApplicationBuilder)"/> for the same <see cref="IApplicationBuilder"/>
     /// instance.
     /// </para>
     /// <para>
-    /// The <see cref="EndpointRoutingMiddleware"/> defines a point in the middleware pipeline where routing decisions are
-    /// made, and an <see cref="Endpoint"/> is associated with the <see cref="HttpContext"/>. The <see cref="EndpointMiddleware"/>
-    /// defines a point in the middleware pipeline where the current <see cref="Endpoint"/> is executed. Middleware between
-    /// the <see cref="EndpointRoutingMiddleware"/> and <see cref="EndpointMiddleware"/> may observe or change the
+    /// The <see cref="EndpointRoutingMiddleware"/> defines a point in the middleware pipeline where
+    // routing decisions are
+    /// made, and an <see cref="Endpoint"/> is associated with the <see cref="HttpContext"/>. The <see
+    // cref="EndpointMiddleware"/>
+    /// defines a point in the middleware pipeline where the current <see cref="Endpoint"/> is executed.
+    // Middleware between
+    /// the <see cref="EndpointRoutingMiddleware"/> and <see cref="EndpointMiddleware"/> may observe or
+    // change the
     /// <see cref="Endpoint"/> associated with the <see cref="HttpContext"/>.
     /// </para>
     /// </remarks>
@@ -149,7 +165,8 @@ public static class EndpointRoutingApplicationBuilderExtensions
 
         endpointRouteBuilder = (IEndpointRouteBuilder)obj!;
 
-        // This check handles the case where Map or something else that forks the pipeline is called between the two
+        // This check handles the case where Map or something else that forks the pipeline is called between
+        // the two
         // routing middleware.
         if (
             endpointRouteBuilder is DefaultEndpointRouteBuilder defaultRouteBuilder

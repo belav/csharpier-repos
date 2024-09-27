@@ -13,22 +13,27 @@ namespace Microsoft.EntityFrameworkCore.Query;
 ///         A class that compiles the shaper expression for given shaped query expression.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 /// <remarks>
 ///     <para>
 ///         Materializer is a code which creates entity instance from the given property values.
-///         It takes into account constructor bindings, fields, property access mode configured in the model when creating the instance.
+///         It takes into account constructor bindings, fields, property access mode configured in
+// the model when creating the instance.
 ///     </para>
 ///     <para>
-///         Shaper is a code which generate result for the query from given scalar values based on the structure of projection.
+///         Shaper is a code which generate result for the query from given scalar values based on
+// the structure of projection.
 ///         A shaper can contain zero or more materializers inside it.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
-///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries work</see> for more information and examples.
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
+///         and <see href="https://aka.ms/efcore-docs-how-query-works">How EF Core queries
+// work</see> for more information and examples.
 ///     </para>
 /// </remarks>
 public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
@@ -201,7 +206,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
     protected abstract Expression VisitShapedQuery(ShapedQueryExpression shapedQueryExpression);
 
     /// <summary>
-    ///     Inject entity materializers in given shaper expression. <see cref="StructuralTypeShaperExpression" /> is replaced with materializer
+    ///     Inject entity materializers in given shaper expression. <see
+    // cref="StructuralTypeShaperExpression" /> is replaced with materializer
     ///     expression for given entity.
     /// </summary>
     /// <param name="expression">The expression to inject entity materializers.</param>
@@ -214,7 +220,8 @@ public abstract class ShapedQueryCompilingExpressionVisitor : ExpressionVisitor
     }
 
     /// <summary>
-    ///     Verifies that the given shaper expression does not contain client side constant which could cause memory leak.
+    ///     Verifies that the given shaper expression does not contain client side constant which could
+    // cause memory leak.
     /// </summary>
     /// <param name="expression">An expression to verify.</param>
     protected virtual void VerifyNoClientConstant(Expression expression) =>

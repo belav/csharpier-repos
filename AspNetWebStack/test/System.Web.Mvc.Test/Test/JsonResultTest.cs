@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Text;
 using Microsoft.TestCommon;
@@ -136,7 +137,8 @@ namespace System.Web.Mvc.Test
                 .Returns("POST")
                 .Verifiable();
 
-            // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...), this
+            // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...),
+            // this
             // one does not. Explicitly ensure Response property is not null.
             var response = new Mock<HttpResponseBase>(MockBehavior.Strict);
             response.SetupSet(r => r.ContentType = contentType).Verifiable();
@@ -233,7 +235,8 @@ namespace System.Web.Mvc.Test
             );
             mockControllerContext.SetupGet(c => c.HttpContext.Request.HttpMethod).Returns("POST");
 
-            // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...), this
+            // Though most other tests run fine with SetupSet(c => c.HttpContext.Response.ContentType = ...),
+            // this
             // one does not. Explicitly ensure Response property is not null.
             var response = new Mock<HttpResponseBase>(MockBehavior.Strict);
             response.SetupSet(r => r.ContentType = "application/json");

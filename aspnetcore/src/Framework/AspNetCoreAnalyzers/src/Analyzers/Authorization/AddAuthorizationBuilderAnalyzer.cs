@@ -100,7 +100,8 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
             )
         )
         {
-            // Ensure that the child operations of the configuration action passed to AddAuthorization are all related to AuthorizationOptions.
+            // Ensure that the child operations of the configuration action passed to AddAuthorization are all
+            // related to AuthorizationOptions.
             var allOperationsInvolveAuthorizationOptions = configureBlockOperation
                 .ChildOperations.Where(operation =>
                     operation is not IReturnOperation { IsImplicit: true }
@@ -110,7 +111,8 @@ public sealed class AddAuthorizationBuilderAnalyzer : DiagnosticAnalyzer
                 );
 
             return allOperationsInvolveAuthorizationOptions
-                // Ensure that the configuration action passed to AddAuthorization does not use any AuthorizationOptions-specific APIs.
+                // Ensure that the configuration action passed to AddAuthorization does not use any
+                // AuthorizationOptions-specific APIs.
                 && IsConfigureActionCompatibleWithAuthorizationBuilder(
                     configureBlockOperation,
                     authorizationOptionsTypes

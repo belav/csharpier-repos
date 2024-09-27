@@ -31,8 +31,10 @@ namespace System
         //   float/double/nint/nuint enums. There was a conscious decision made to not fix the whole stack
         //   to work well for them because the right behavior is often unclear, and it is hard to test and
         //   very low value because such enums cannot be expressed in C# and are very rarely encountered.
-        // - To avoid significant code bloat for public generic APIs, we avoid making the whole implementation
-        //   generic on the enum type (TEnum) all the way through the implementation.  Instead, at the public
+        // - To avoid significant code bloat for public generic APIs, we avoid making the whole
+        // implementation
+        //   generic on the enum type (TEnum) all the way through the implementation.  Instead, at the
+        // public
         //   entry point we look up the underlying type for that enum, and use that underlying type as the
         //   generic for the rest of that call tree (TUnderlying).  That type is important for controlling
         //   how the parsing and formatting APIs behave, in particular when parsing and formatting an enum
@@ -49,11 +51,14 @@ namespace System
         /// <summary>Character used to separate flag enum values when formatted in a list.</summary>
         private const char EnumSeparatorChar = ',';
 
-        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the specified value.</summary>
+        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the
+        // specified value.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
-        /// <param name="value">The value of a particular enumerated constant in terms of its underlying type.</param>
+        /// <param name="value">The value of a particular enumerated constant in terms of its underlying
+        // type.</param>
         /// <returns>
-        /// A string containing the name of the enumerated constant in <typeparamref name="TEnum"/> whose value is <paramref name="value"/>,
+        /// A string containing the name of the enumerated constant in <typeparamref name="TEnum"/> whose
+        // value is <paramref name="value"/>,
         /// or <see langword="null"/> if no such constant is found.
         /// </returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -84,16 +89,21 @@ namespace System
             throw CreateUnknownEnumTypeException();
         }
 
-        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the specified value.</summary>
+        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the
+        // specified value.</summary>
         /// <param name="enumType">An enumeration type.</param>
-        /// <param name="value">The value of a particular enumerated constant in terms of its underlying type.</param>
+        /// <param name="value">The value of a particular enumerated constant in terms of its underlying
+        // type.</param>
         /// <returns>
-        /// A string containing the name of the enumerated constant in <paramref name="enumType"/> whose value is <paramref name="value"/>,
+        /// A string containing the name of the enumerated constant in <paramref name="enumType"/> whose
+        // value is <paramref name="value"/>,
         /// or <see langword="null"/> if no such constant is found.
         /// </returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> or <paramref name="value"/>
+        // is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="enumType"/> is not an <see cref="Enum"/>, or <paramref name="value"/> is neither of type <paramref name="enumType"/>
+        /// <paramref name="enumType"/> is not an <see cref="Enum"/>, or <paramref name="value"/> is neither
+        // of type <paramref name="enumType"/>
         /// nor does it have the same underlying type as <paramref name="enumType"/>.
         /// </exception>
         public static string? GetName(Type enumType, object value)
@@ -102,11 +112,14 @@ namespace System
             return enumType.GetEnumName(value);
         }
 
-        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the specified value.</summary>
+        /// <summary>Retrieves the name of the constant in the specified enumeration type that has the
+        // specified value.</summary>
         /// <param name="enumType">An enumeration type.</param>
-        /// <param name="uint64Value">The value of a particular enumerated constant in terms of its underlying type, cast to a <see cref="ulong"/>.</param>
+        /// <param name="uint64Value">The value of a particular enumerated constant in terms of its
+        // underlying type, cast to a <see cref="ulong"/>.</param>
         /// <returns>
-        /// A string containing the name of the enumerated constant in <paramref name="enumType"/> whose value is <paramref name="uint64Value"/>,
+        /// A string containing the name of the enumerated constant in <paramref name="enumType"/> whose
+        // value is <paramref name="uint64Value"/>,
         /// or <see langword="null"/> if no such constant is found.
         /// </returns>
         internal static string? GetName(RuntimeType enumType, ulong uint64Value)
@@ -185,8 +198,11 @@ namespace System
         private static string? GetName<TStorage>(EnumInfo<TStorage> enumInfo, TStorage value)
             where TStorage : struct, INumber<TStorage> => GetNameInlined(enumInfo, value);
 
-        /// <summary>Look up the name for the specified underlying value using the cached <see cref="EnumInfo{TStorage}"/> for the associated enum.</summary>
-        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as the underlying type for the enum or its unsigned counterpart if the underlying type is a signed integer.</typeparam>
+        /// <summary>Look up the name for the specified underlying value using the cached <see
+        // cref="EnumInfo{TStorage}"/> for the associated enum.</summary>
+        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as the
+        // underlying type for the enum or its unsigned counterpart if the underlying type is a signed
+        // integer.</typeparam>
         /// <param name="enumInfo">The cached <see cref="EnumInfo{TStorage}"/> for the enum type.</param>
         /// <param name="value">The underlying value for which we're searching.</param>
         /// <returns>The name of the value if found; otherwise, <see langword="null"/>.</returns>
@@ -203,7 +219,8 @@ namespace System
             {
                 if (Unsafe.SizeOf<TStorage>() <= sizeof(uint))
                 {
-                    // Special-case types types that are <= sizeof(int), as we can then eliminate a bounds check on the array.
+                    // Special-case types types that are <= sizeof(int), as we can then eliminate a bounds check on the
+                    // array.
                     uint uint32Value = uint.CreateTruncating(value);
                     if (uint32Value < (uint)names.Length)
                     {
@@ -234,7 +251,8 @@ namespace System
             return null;
         }
 
-        /// <summary>Retrieves an array of the names of the constants in a specified enumeration type.</summary>
+        /// <summary>Retrieves an array of the names of the constants in a specified enumeration
+        // type.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
         /// <returns>A string array of the names of the constants in <typeparamref name="TEnum"/>.</returns>
         public static string[] GetNames<TEnum>()
@@ -275,14 +293,16 @@ namespace System
         /// <param name="enumType">An enumeration type.</param>
         /// <returns>A string array of the names of the constants in <paramref name="enumType"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
         public static string[] GetNames(Type enumType)
         {
             ArgumentNullException.ThrowIfNull(enumType);
             return enumType.GetEnumNames();
         }
 
-        /// <summary>Gets the cached names array for the specified enum type, without making a copy.</summary>
+        /// <summary>Gets the cached names array for the specified enum type, without making a
+        // copy.</summary>
         /// <remarks>The returned array should not be exposed outside of this assembly.</remarks>
         internal static string[] GetNamesNoCopy(RuntimeType enumType)
         {
@@ -313,16 +333,19 @@ namespace System
         /// <param name="enumType">The enumeration whose underlying type will be retrieved.</param>
         /// <returns>The underlying type of <paramref name="enumType"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
         public static Type GetUnderlyingType(Type enumType)
         {
             ArgumentNullException.ThrowIfNull(enumType);
             return enumType.GetEnumUnderlyingType();
         }
 
-        /// <summary>Retrieves an array of the values of the constants in a specified enumeration type.</summary>
+        /// <summary>Retrieves an array of the values of the constants in a specified enumeration
+        // type.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
-        /// <returns>An array that contains the values of the constants in <typeparamref name="TEnum"/>.</returns>
+        /// <returns>An array that contains the values of the constants in <typeparamref
+        // name="TEnum"/>.</returns>
         public static TEnum[] GetValues<TEnum>()
             where TEnum : struct, Enum
         {
@@ -334,11 +357,14 @@ namespace System
 
         /// <summary>Retrieves an array of the values of the constants in a specified enumeration.</summary>
         /// <param name="enumType">An enumeration type.</param>
-        /// <returns>An array that contains the values of the constants in <paramref name="enumType"/>.</returns>
+        /// <returns>An array that contains the values of the constants in <paramref
+        // name="enumType"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
         /// <exception cref="InvalidOperationException">
-        /// The method is invoked by reflection in a reflection-only context, or <paramref name="enumType"/> is a type from an assembly loaded in a reflection-only context.
+        /// The method is invoked by reflection in a reflection-only context, or <paramref name="enumType"/>
+        // is a type from an assembly loaded in a reflection-only context.
         /// </exception>
         [RequiresDynamicCode(
             "It might not be possible to create an array of the enum type at runtime. Use the GetValues<TEnum> overload or the GetValuesAsUnderlyingType method instead."
@@ -349,32 +375,44 @@ namespace System
             return enumType.GetEnumValues();
         }
 
-        /// <summary>Retrieves an array of the values of the underlying type constants in a specified enumeration type.</summary>
+        /// <summary>Retrieves an array of the values of the underlying type constants in a specified
+        // enumeration type.</summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
         /// <remarks>
-        /// You can use this method to get enumeration values when it's hard to create an array of the enumeration type.
-        /// For example, you might use this method for the <see cref="T:System.Reflection.MetadataLoadContext" /> enumeration or on a platform where run-time code generation is not available.
+        /// You can use this method to get enumeration values when it's hard to create an array of the
+        // enumeration type.
+        /// For example, you might use this method for the <see
+        // cref="T:System.Reflection.MetadataLoadContext" /> enumeration or on a platform where run-time
+        // code
+        // generation is not available.
         /// </remarks>
-        /// <returns>An array that contains the values of the underlying type constants in <typeparamref name="TEnum" />.</returns>
+        /// <returns>An array that contains the values of the underlying type constants in <typeparamref
+        // name="TEnum" />.</returns>
         public static Array GetValuesAsUnderlyingType<TEnum>()
             where TEnum : struct, Enum => typeof(TEnum).GetEnumValuesAsUnderlyingType();
 
-        /// <summary>Retrieves an array of the values of the underlying type constants in a specified enumeration.</summary>
+        /// <summary>Retrieves an array of the values of the underlying type constants in a specified
+        // enumeration.</summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <remarks>
-        /// You can use this method to get enumeration values when it's hard to create an array of the enumeration type.
-        /// For example, you might use this method for the MetadataLoadContext enumeration or on a platform where run-time code generation is not available.
+        /// You can use this method to get enumeration values when it's hard to create an array of the
+        // enumeration type.
+        /// For example, you might use this method for the MetadataLoadContext enumeration or on a platform
+        // where run-time code generation is not available.
         /// </remarks>
-        /// <returns>An array that contains the values of the underlying type constants in  <paramref name="enumType" />.</returns>
+        /// <returns>An array that contains the values of the underlying type constants in  <paramref
+        // name="enumType" />.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="enumType" /> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType" /> is not an enumeration type.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType" /> is not an enumeration
+        // type.</exception>
         public static Array GetValuesAsUnderlyingType(Type enumType)
         {
             ArgumentNullException.ThrowIfNull(enumType);
             return enumType.GetEnumValuesAsUnderlyingType();
         }
 
-        /// <summary>Retrieves an array of the values of the underlying type constants in a specified enumeration type.</summary>
+        /// <summary>Retrieves an array of the values of the underlying type constants in a specified
+        // enumeration type.</summary>
         internal static Array GetValuesAsUnderlyingType(RuntimeType enumType)
         {
             Debug.Assert(enumType.IsActualEnum);
@@ -413,7 +451,8 @@ namespace System
             };
         }
 
-        /// <summary>Retrieves the cached array of the values of the underlying type constants in a specified enumeration.</summary>
+        /// <summary>Retrieves the cached array of the values of the underlying type constants in a
+        // specified enumeration.</summary>
         /// <remarks>
         /// The returned array should not be exposed outside of this assembly.
         /// It also may be using the corresponding unsigned type if the actual underlying type was signed.
@@ -484,8 +523,10 @@ namespace System
 
         /// <summary>Determines whether one or more bit fields are set in the current instance.</summary>
         /// <param name="flag">An enumeration value.</param>
-        /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set in the current instance; otherwise, <see langword="false"/>.</returns>
-        /// <exception cref="ArgumentException"><paramref name="flag"/> is a different type than the current instance.</exception>
+        /// <returns><see langword="true"/> if the bit field or bit fields that are set in flag are also set
+        // in the current instance; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentException"><paramref name="flag"/> is a different type than the current
+        // instance.</exception>
         [Intrinsic]
         public bool HasFlag(Enum flag)
         {
@@ -557,10 +598,12 @@ namespace System
             }
         }
 
-        /// <summary>Returns a <see cref="bool"/> telling whether a given integral value exists in a specified enumeration.</summary>
+        /// <summary>Returns a <see cref="bool"/> telling whether a given integral value exists in a
+        // specified enumeration.</summary>
         /// <typeparam name="TEnum">The type of the enumeration.</typeparam>
         /// <param name="value">The value in <typeparamref name="TEnum"/>.</param>
-        /// <returns><see langword="true"/> if a given integral value exists in a specified enumeration; <see langword="false"/>, otherwise.</returns>
+        /// <returns><see langword="true"/> if a given integral value exists in a specified enumeration;
+        // <see langword="false"/>, otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe bool IsDefined<TEnum>(TEnum value)
             where TEnum : struct, Enum
@@ -608,15 +651,20 @@ namespace System
             return FindDefinedIndex(values, value) >= 0;
         }
 
-        /// <summary>Returns a <see cref="bool"/> telling whether a given integral value, or its name as a string, exists in a specified enumeration.</summary>
+        /// <summary>Returns a <see cref="bool"/> telling whether a given integral value, or its name as a
+        // string, exists in a specified enumeration.</summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <param name="value">The value or name of a constant in <paramref name="enumType"/>.</param>
-        /// <returns><see langword="true"/> if a constant in <paramref name="enumType"/> has a value equal to value; otherwise, <see langword="false"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> or <paramref name="value"/> is <see langword="null"/>.</exception>
+        /// <returns><see langword="true"/> if a constant in <paramref name="enumType"/> has a value equal
+        // to value; otherwise, <see langword="false"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> or <paramref name="value"/>
+        // is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="enumType"/> is not an <see cref="Enum"/>,
-        /// or the type of <paramref name="value"/> is an enumeration but it is not an enumeration of type <paramref name="enumType"/>,
-        /// or the type of <paramref name="value"/> is not an underlying type of <paramref name="enumType"/>.
+        /// or the type of <paramref name="value"/> is an enumeration but it is not an enumeration of type
+        // <paramref name="enumType"/>,
+        /// or the type of <paramref name="value"/> is not an underlying type of <paramref
+        // name="enumType"/>.
         /// </exception>
         public static bool IsDefined(Type enumType, object value)
         {
@@ -638,43 +686,65 @@ namespace System
                 : SpanHelpers.BinarySearch(span, value);
         }
 
-        /// <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the string representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <param name="value">A string containing the name or value to convert.</param>
-        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only contains white space.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named constants defined for the enumeration.</exception>
-        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the underlying type of <paramref name="enumType"/></exception>
+        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented
+        // by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only
+        // contains white space.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named
+        // constants defined for the enumeration.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the
+        // underlying type of <paramref name="enumType"/></exception>
         public static object Parse(Type enumType, string value) =>
             Parse(enumType, value, ignoreCase: false);
 
-        /// <summary>Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the span of chars representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <param name="value">A span containing the name or value to convert.</param>
-        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only contains white space.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named constants defined for the enumeration.</exception>
-        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the underlying type of <paramref name="enumType"/></exception>
+        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented
+        // by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only
+        // contains white space.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named
+        // constants defined for the enumeration.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the
+        // underlying type of <paramref name="enumType"/></exception>
         public static object Parse(Type enumType, ReadOnlySpan<char> value) =>
             Parse(enumType, value, ignoreCase: false);
 
         /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the string representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <param name="value">A string containing the name or value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only contains white space.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named constants defined for the enumeration.</exception>
-        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the underlying type of <paramref name="enumType"/></exception>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // regard case.</param>
+        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented
+        // by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only
+        // contains white space.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named
+        // constants defined for the enumeration.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the
+        // underlying type of <paramref name="enumType"/></exception>
         public static object Parse(Type enumType, string value, bool ignoreCase)
         {
             if (value is null)
@@ -694,18 +764,26 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the span of chars representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <param name="enumType">An enumeration type.</param>
         /// <param name="value">A span containing the name or value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see cref="Enum"/>.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only contains white space.</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named constants defined for the enumeration.</exception>
-        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the underlying type of <paramref name="enumType"/></exception>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // regard case.</param>
+        /// <returns>An <see cref="object"/> of type <paramref name="enumType"/> whose value is represented
+        // by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="enumType"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="enumType"/> is not an <see
+        // cref="Enum"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is either an empty string or only
+        // contains white space.</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> is a name, but not one of the named
+        // constants defined for the enumeration.</exception>
+        /// <exception cref="OverflowException"><paramref name="value"/> is outside the range of the
+        // underlying type of <paramref name="enumType"/></exception>
         public static object Parse(Type enumType, ReadOnlySpan<char> value, bool ignoreCase)
         {
             bool success = TryParse(
@@ -719,36 +797,53 @@ namespace System
             return result;
         }
 
-        /// <summary>Converts the string representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.</summary>
+        /// <summary>Converts the string representation of the name or numeric value of one or more
+        // enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated
+        // object.</summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
         /// <param name="value">A string containing the name or value to convert.</param>
-        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
+        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value
+        // is represented by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/>
+        // type</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration
+        // information</exception>
         public static TEnum Parse<TEnum>(string value)
             where TEnum : struct => Parse<TEnum>(value, ignoreCase: false);
 
-        /// <summary>Converts the span of chars representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.</summary>
+        /// <summary>Converts the span of chars representation of the name or numeric value of one or more
+        // enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated
+        // object.</summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
         /// <param name="value">A span containing the name or value to convert.</param>
-        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
+        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value
+        // is represented by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/>
+        // type</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration
+        // information</exception>
         public static TEnum Parse<TEnum>(ReadOnlySpan<char> value)
             where TEnum : struct => Parse<TEnum>(value, ignoreCase: false);
 
         /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.
+        /// Converts the string representation of the name or numeric value of one or more enumerated
+        // constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
         /// <param name="value">A string containing the name or value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see langword="null"/>.</exception>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // regard case.</param>
+        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value
+        // is represented by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentNullException"><paramref name="value"/> is <see
+        // langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/>
+        // type</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration
+        // information</exception>
         public static TEnum Parse<TEnum>(string value, bool ignoreCase)
             where TEnum : struct
         {
@@ -768,15 +863,20 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span of chars representation of the name or numeric value of one or more enumerated constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.
+        /// Converts the span of chars representation of the name or numeric value of one or more enumerated
+        // constants specified by <typeparamref name="TEnum"/> to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <typeparam name="TEnum">An enumeration type.</typeparam>
         /// <param name="value">A span containing the name or value to convert.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to regard case.</param>
-        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value is represented by <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/> type</exception>
-        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration information</exception>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // regard case.</param>
+        /// <returns><typeparamref name="TEnum"/> An object of type <typeparamref name="TEnum"/> whose value
+        // is represented by <paramref name="value"/>.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an <see cref="Enum"/>
+        // type</exception>
+        /// <exception cref="ArgumentException"><paramref name="value"/> does not contain enumeration
+        // information</exception>
         public static TEnum Parse<TEnum>(ReadOnlySpan<char> value, bool ignoreCase)
             where TEnum : struct
         {
@@ -785,22 +885,30 @@ namespace System
             return result;
         }
 
-        /// <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the string representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <param name="enumType">The enum type to use for parsing.</param>
-        /// <param name="value">The string representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
+        /// <param name="value">The string representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
         public static bool TryParse(
             Type enumType,
             string? value,
             [NotNullWhen(true)] out object? result
         ) => TryParse(enumType, value, ignoreCase: false, out result);
 
-        /// <summary>Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the span of chars representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <param name="enumType">The enum type to use for parsing.</param>
-        /// <param name="value">The span representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
+        /// <param name="value">The span representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
         public static bool TryParse(
             Type enumType,
             ReadOnlySpan<char> value,
@@ -808,14 +916,20 @@ namespace System
         ) => TryParse(enumType, value, ignoreCase: false, out result);
 
         /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the string representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <param name="enumType">The enum type to use for parsing.</param>
-        /// <param name="value">The string representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to read <paramref name="enumType"/> in case insensitive mode; <see langword="false"/> to read <paramref name="enumType"/> in case sensitive mode.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
+        /// <param name="value">The string representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to read <paramref name="enumType"/> in case
+        // insensitive mode; <see langword="false"/> to read <paramref name="enumType"/> in case sensitive
+        // mode.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
         public static bool TryParse(
             Type enumType,
             string? value,
@@ -839,14 +953,20 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the span of chars representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-insensitive.
         /// </summary>
         /// <param name="enumType">The enum type to use for parsing.</param>
-        /// <param name="value">The span representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to read <paramref name="enumType"/> in case insensitive mode; <see langword="false"/> to read <paramref name="enumType"/> in case sensitive mode.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
+        /// <param name="value">The span representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to read <paramref name="enumType"/> in case
+        // insensitive mode; <see langword="false"/> to read <paramref name="enumType"/> in case sensitive
+        // mode.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
         public static bool TryParse(
             Type enumType,
             ReadOnlySpan<char> value,
@@ -1062,35 +1182,51 @@ namespace System
             }
         }
 
-        /// <summary>Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the string representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <typeparam name="TEnum"></typeparam>
-        /// <param name="value">The string representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration type</exception>
+        /// <param name="value">The string representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration
+        // type</exception>
         public static bool TryParse<TEnum>([NotNullWhen(true)] string? value, out TEnum result)
             where TEnum : struct => TryParse(value, ignoreCase: false, out result);
 
-        /// <summary>Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.</summary>
+        /// <summary>Converts the span of chars representation of the name or numeric value of one or more
+        // enumerated constants to an equivalent enumerated object.</summary>
         /// <typeparam name="TEnum"></typeparam>
-        /// <param name="value">The span of chars representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration type</exception>
+        /// <param name="value">The span of chars representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration
+        // type</exception>
         public static bool TryParse<TEnum>(ReadOnlySpan<char> value, out TEnum result)
             where TEnum : struct =>
             TryParse(value, ignoreCase: false, throwOnFailure: false, out result);
 
         /// <summary>
-        /// Converts the string representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the string representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-sensitive.
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
-        /// <param name="value">The string representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration type</exception>
+        /// <param name="value">The string representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // consider case.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration
+        // type</exception>
         public static bool TryParse<TEnum>(
             [NotNullWhen(true)] string? value,
             bool ignoreCase,
@@ -1108,15 +1244,21 @@ namespace System
         }
 
         /// <summary>
-        /// Converts the span of chars representation of the name or numeric value of one or more enumerated constants to an equivalent enumerated object.
+        /// Converts the span of chars representation of the name or numeric value of one or more enumerated
+        // constants to an equivalent enumerated object.
         /// A parameter specifies whether the operation is case-sensitive.
         /// </summary>
         /// <typeparam name="TEnum"></typeparam>
-        /// <param name="value">The span representation of the name or numeric value of one or more enumerated constants.</param>
-        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to consider case.</param>
-        /// <param name="result">When this method returns <see langword="true"/>, an object containing an enumeration constant representing the parsed value.</param>
-        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/> otherwise.</returns>
-        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration type</exception>
+        /// <param name="value">The span representation of the name or numeric value of one or more
+        // enumerated constants.</param>
+        /// <param name="ignoreCase"><see langword="true"/> to ignore case; <see langword="false"/> to
+        // consider case.</param>
+        /// <param name="result">When this method returns <see langword="true"/>, an object containing an
+        // enumeration constant representing the parsed value.</param>
+        /// <returns><see langword="true"/> if the conversion succeeded; <see langword="false"/>
+        // otherwise.</returns>
+        /// <exception cref="ArgumentException"><typeparamref name="TEnum"/> is not an enumeration
+        // type</exception>
         public static bool TryParse<TEnum>(
             ReadOnlySpan<char> value,
             bool ignoreCase,
@@ -1255,7 +1397,8 @@ namespace System
             throw CreateUnknownEnumTypeException();
         }
 
-        /// <summary>Core implementation for all {Try}Parse methods, both generic and non-generic, parsing either by value or by name.</summary>
+        /// <summary>Core implementation for all {Try}Parse methods, both generic and non-generic, parsing
+        // either by value or by name.</summary>
         private static unsafe bool TryParseByValueOrName<TUnderlying, TStorage>(
             RuntimeType enumType,
             ReadOnlySpan<char> value,
@@ -1437,7 +1580,8 @@ namespace System
             return false;
         }
 
-        /// <summary>Handles just the name parsing portion of <see cref="TryParseRareTypeByValueOrName"/>.</summary>
+        /// <summary>Handles just the name parsing portion of <see
+        // cref="TryParseRareTypeByValueOrName"/>.</summary>
         private static bool TryParseByName<TStorage>(
             RuntimeType enumType,
             ReadOnlySpan<char> value,
@@ -1534,7 +1678,8 @@ namespace System
         }
 
         /// <summary>
-        /// Silently convert the <paramref name="value"/> to a <see cref="ulong"/> from the other base types for enum without
+        /// Silently convert the <paramref name="value"/> to a <see cref="ulong"/> from the other base types
+        // for enum without
         /// throwing an exception (other than for an unknown enum type).
         /// </summary>
         /// <remarks>This is needed since the Convert functions do overflow checks.</remarks>
@@ -1673,8 +1818,10 @@ namespace System
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            // CONTRACT with the runtime: GetHashCode of enum types is implemented as GetHashCode of the underlying type.
-            // The runtime can bypass calls to Enum::GetHashCode and call the underlying type's GetHashCode directly
+            // CONTRACT with the runtime: GetHashCode of enum types is implemented as GetHashCode of the
+            // underlying type.
+            // The runtime can bypass calls to Enum::GetHashCode and call the underlying type's GetHashCode
+            // directly
             // to avoid boxing the enum.
             ref byte data = ref this.GetRawData();
             return InternalGetCorElementType() switch
@@ -1837,11 +1984,15 @@ namespace System
 #endif
         }
 
-        /// <summary>Converts the value of this instance to its equivalent string representation using the specified format.</summary>
+        /// <summary>Converts the value of this instance to its equivalent string representation using the
+        // specified format.</summary>
         /// <param name="format">A format string.</param>
-        /// <returns>The string representation of the value of this instance as specified by <paramref name="format"/>.</returns>
-        /// <exception cref="FormatException"><paramref name="format"/> contains an invalid specification.</exception>
-        /// <exception cref="InvalidOperationException"><paramref name="format"/> equals "X" or "x", but the enumeration type is unknown.</exception>
+        /// <returns>The string representation of the value of this instance as specified by <paramref
+        // name="format"/>.</returns>
+        /// <exception cref="FormatException"><paramref name="format"/> contains an invalid
+        // specification.</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="format"/> equals "X" or "x", but the
+        // enumeration type is unknown.</exception>
         public string ToString([StringSyntax(StringSyntaxAttribute.EnumFormat)] string? format)
         {
             if (string.IsNullOrEmpty(format))
@@ -1968,9 +2119,13 @@ namespace System
                 IBitwiseOperators<TStorage, TStorage, TStorage> =>
             ToStringInlined<TUnderlying, TStorage>(enumType, ref rawData);
 
-        /// <summary>Converts the value of an enum to its equivalent string representation using the default format.</summary>
+        /// <summary>Converts the value of an enum to its equivalent string representation using the default
+        // format.</summary>
         /// <typeparam name="TUnderlying">The underlying type for this enum.</typeparam>
-        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as <typeparamref name="TUnderlying"/> or its unsigned counterpart if <typeparamref name="TUnderlying"/> is a signed integer.</typeparam>
+        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as
+        // <typeparamref name="TUnderlying"/> or its unsigned counterpart if <typeparamref
+        // name="TUnderlying"/>
+        // is a signed integer.</typeparam>
         /// <param name="enumType">The enum type.</param>
         /// <param name="rawData">A reference to the enum's value.</param>
         /// <returns>The string representation of the value of this instance.</returns>
@@ -2014,13 +2169,18 @@ namespace System
                 IMinMaxValue<TStorage> =>
             ToStringInlined<TUnderlying, TStorage>(enumType, format, ref rawData);
 
-        /// <summary>Converts the value of an enum to its equivalent string representation using the default format.</summary>
+        /// <summary>Converts the value of an enum to its equivalent string representation using the default
+        // format.</summary>
         /// <typeparam name="TUnderlying">The underlying type for this enum.</typeparam>
-        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as <typeparamref name="TUnderlying"/> or its unsigned counterpart if <typeparamref name="TUnderlying"/> is a signed integer.</typeparam>
+        /// <typeparam name="TStorage">The type stored in the EnumInfo.  This will either be the same as
+        // <typeparamref name="TUnderlying"/> or its unsigned counterpart if <typeparamref
+        // name="TUnderlying"/>
+        // is a signed integer.</typeparam>
         /// <param name="enumType">The enum type.</param>
         /// <param name="format">A format string.</param>
         /// <param name="rawData">A reference to the enum's value.</param>
-        /// <returns>The string representation of the value of this instance as specified by <paramref name="format"/>.</returns>
+        /// <returns>The string representation of the value of this instance as specified by <paramref
+        // name="format"/>.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // used for most important types at most important call sites
         private static string ToStringInlined<TUnderlying, TStorage>(
             RuntimeType enumType,
@@ -2078,7 +2238,8 @@ namespace System
             return result;
         }
 
-        /// <summary>Formats the data for the underlying value as hex into a new, fixed-length string.</summary>
+        /// <summary>Formats the data for the underlying value as hex into a new, fixed-length
+        // string.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static unsafe string FormatNumberAsHex<TStorage>(ref byte data)
             where TStorage : struct
@@ -2102,7 +2263,8 @@ namespace System
             }
         }
 
-        /// <summary>Tries to format the data for the underlying value as hex into the destination span.</summary>
+        /// <summary>Tries to format the data for the underlying value as hex into the destination
+        // span.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static bool TryFormatNumberAsHex<TStorage>(
             ref byte data,
@@ -2172,17 +2334,24 @@ namespace System
             return false;
         }
 
-        /// <summary>Converts the specified value of a specified enumerated type to its equivalent string representation according to the specified format.</summary>
+        /// <summary>Converts the specified value of a specified enumerated type to its equivalent string
+        // representation according to the specified format.</summary>
         /// <param name="enumType">The enumeration type of the value to convert.</param>
         /// <param name="value">The value to convert.</param>
         /// <param name="format">The output format to use.</param>
         /// <returns>A string representation of <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="enumType"/>, <paramref name="value"/>, or <paramref name="format"/> parameter is null.</exception>
-        /// <exception cref="ArgumentException">The <paramref name="enumType"/> parameter is not an <see cref="Enum"/> type.</exception>
-        /// <exception cref="ArgumentException">The <paramref name="value"/> is from an enumeration that differs in type from <paramref name="enumType"/>.</exception>
-        /// <exception cref="ArgumentException">The type of <paramref name="value"/> is not an underlying type of <paramref name="enumType"/>.</exception>
-        /// <exception cref="FormatException"><paramref name="format"/> contains an invalid value.</exception>
-        /// <exception cref="InvalidOperationException"><paramref name="format"/> equals "X" or "x", but the enumeration type is unknown.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="enumType"/>, <paramref
+        // name="value"/>, or <paramref name="format"/> parameter is null.</exception>
+        /// <exception cref="ArgumentException">The <paramref name="enumType"/> parameter is not an <see
+        // cref="Enum"/> type.</exception>
+        /// <exception cref="ArgumentException">The <paramref name="value"/> is from an enumeration that
+        // differs in type from <paramref name="enumType"/>.</exception>
+        /// <exception cref="ArgumentException">The type of <paramref name="value"/> is not an underlying
+        // type of <paramref name="enumType"/>.</exception>
+        /// <exception cref="FormatException"><paramref name="format"/> contains an invalid
+        // value.</exception>
+        /// <exception cref="InvalidOperationException"><paramref name="format"/> equals "X" or "x", but the
+        // enumeration type is unknown.</exception>
         public static string Format(
             Type enumType,
             object value,
@@ -2204,7 +2373,8 @@ namespace System
                     );
 
                 // If the format isn't empty, just delegate to ToString(format). The length check is necessary
-                // here for compat, as Enum.Format prohibits a null or empty format whereas ToString(string) allows it.
+                // here for compat, as Enum.Format prohibits a null or empty format whereas ToString(string) allows
+                // it.
                 if (format.Length == 1)
                     return ((Enum)value).ToString(format);
             }
@@ -2305,11 +2475,15 @@ namespace System
         }
 
         /// <summary>Tries to format the value of the enum into the provided span of characters.</summary>
-        /// <param name="destination">The span in which to write this instance's value formatted as a span of characters.</param>
-        /// <param name="charsWritten">When this method returns, contains the number of characters that were written in destination.</param>
+        /// <param name="destination">The span in which to write this instance's value formatted as a span
+        // of characters.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters that were
+        // written in destination.</param>
         /// <param name="format">The format specifier.</param>
-        /// <param name="provider">An optional object that supplies culture-specific formatting information for destination. This is ignored.</param>
-        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/>.</returns>
+        /// <param name="provider">An optional object that supplies culture-specific formatting information
+        // for destination. This is ignored.</param>
+        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see
+        // langword="false"/>.</returns>
         bool ISpanFormattable.TryFormat(
             Span<char> destination,
             out int charsWritten,
@@ -2510,13 +2684,20 @@ namespace System
             }
         }
 
-        /// <summary>Tries to format the value of the enumerated type instance into the provided span of characters.</summary>
+        /// <summary>Tries to format the value of the enumerated type instance into the provided span of
+        // characters.</summary>
         /// <typeparam name="TEnum"></typeparam>
         /// <param name="value"></param>
-        /// <param name="destination">The span into which to write the instance's value formatted as a span of characters.</param>
-        /// <param name="charsWritten">When this method returns, contains the number of characters that were written in <paramref name="destination"/>.</param>
-        /// <param name="format">A span containing the character that represents the standard format string that defines the acceptable format of destination. This may be empty, or "g", "d", "f", or "x".</param>
-        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see langword="false"/> if the destination span wasn't large enough to contain the formatted value.</returns>
+        /// <param name="destination">The span into which to write the instance's value formatted as a span
+        // of characters.</param>
+        /// <param name="charsWritten">When this method returns, contains the number of characters that were
+        // written in <paramref name="destination"/>.</param>
+        /// <param name="format">A span containing the character that represents the standard format string
+        // that defines the acceptable format of destination. This may be empty, or "g", "d", "f", or
+        // "x".</param>
+        /// <returns><see langword="true"/> if the formatting was successful; otherwise, <see
+        // langword="false"/> if the destination span wasn't large enough to contain the formatted
+        // value.</returns>
         /// <exception cref="FormatException">The format parameter contains an invalid value.</exception>
         public static unsafe bool TryFormat<TEnum>(
             TEnum value,
@@ -2529,10 +2710,14 @@ namespace System
             RuntimeType rt = (RuntimeType)typeof(TEnum);
             Type underlyingType = typeof(TEnum).GetEnumUnderlyingType();
 
-            // If the format is empty, which is the most common case, delegate to the default implementation that doesn't take a format.
-            // That implementation is more optimized. Doing this check here means in the common case where TryFormat is inlined and no format
-            // is provided, this whole call can become just a call to the default method.  Even if it's not inlined, this check would still otherwise
-            // be necessary for semantics inside of TryFormatPrimitiveNonDefault, so we can just do it here instead.
+            // If the format is empty, which is the most common case, delegate to the default implementation
+            // that doesn't take a format.
+            // That implementation is more optimized. Doing this check here means in the common case where
+            // TryFormat is inlined and no format
+            // is provided, this whole call can become just a call to the default method.  Even if it's not
+            // inlined, this check would still otherwise
+            // be necessary for semantics inside of TryFormatPrimitiveNonDefault, so we can just do it here
+            // instead.
             if (format.IsEmpty)
             {
                 if (underlyingType == typeof(int))
@@ -2742,11 +2927,15 @@ namespace System
             throw CreateUnknownEnumTypeException();
         }
 
-        /// <summary>Tries to format the value of the enumerated type instance into the provided span of characters.</summary>
+        /// <summary>Tries to format the value of the enumerated type instance into the provided span of
+        // characters.</summary>
         /// <remarks>
-        /// This is same as the implementation for <see cref="TryFormat"/>. It is separated out as <see cref="TryFormat"/> has constrains on the TEnum,
-        /// and we internally want to use this method in cases where we dynamically validate a generic T is an enum rather than T implementing
-        /// those constraints. It's a manual copy/paste right now to avoid pressure on the JIT's inlining mechanisms.
+        /// This is same as the implementation for <see cref="TryFormat"/>. It is separated out as <see
+        // cref="TryFormat"/> has constrains on the TEnum,
+        /// and we internally want to use this method in cases where we dynamically validate a generic T is
+        // an enum rather than T implementing
+        /// those constraints. It's a manual copy/paste right now to avoid pressure on the JIT's inlining
+        // mechanisms.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // format is most frequently a constant, and we want it exposed to the implementation; this should be inlined automatically, anyway
         internal static unsafe bool TryFormatUnconstrained<TEnum>(
@@ -2762,10 +2951,14 @@ namespace System
             RuntimeType rt = (RuntimeType)typeof(TEnum);
             Type underlyingType = typeof(TEnum).GetEnumUnderlyingType();
 
-            // If the format is empty, which is the most common case, delegate to the default implementation that doesn't take a format.
-            // That implementation is more optimized. Doing this check here means in the common case where TryFormat is inlined and no format
-            // is provided, this whole call can become just a call to the default method.  Even if it's not inlined, this check would still otherwise
-            // be necessary for semantics inside of TryFormatPrimitiveNonDefault, so we can just do it here instead.
+            // If the format is empty, which is the most common case, delegate to the default implementation
+            // that doesn't take a format.
+            // That implementation is more optimized. Doing this check here means in the common case where
+            // TryFormat is inlined and no format
+            // is provided, this whole call can become just a call to the default method.  Even if it's not
+            // inlined, this check would still otherwise
+            // be necessary for semantics inside of TryFormatPrimitiveNonDefault, so we can just do it here
+            // instead.
             if (format.IsEmpty)
             {
                 if (underlyingType == typeof(int))
@@ -2975,7 +3168,8 @@ namespace System
             throw CreateUnknownEnumTypeException();
         }
 
-        /// <summary>Core implementation for  <see cref="TryFormat"/> when no format specifier was provided.</summary>
+        /// <summary>Core implementation for  <see cref="TryFormat"/> when no format specifier was
+        // provided.</summary>
         private static bool TryFormatPrimitiveDefault<TUnderlying, TStorage>(
             RuntimeType enumType,
             TUnderlying value,
@@ -3032,7 +3226,8 @@ namespace System
             return value.TryFormat(destination, out charsWritten, format: default, provider: null);
         }
 
-        /// <summary>Core implementation for  <see cref="TryFormat"/> when a format specifier was provided.</summary>
+        /// <summary>Core implementation for  <see cref="TryFormat"/> when a format specifier was
+        // provided.</summary>
         private static bool TryFormatPrimitiveNonDefault<TUnderlying, TStorage>(
             RuntimeType enumType,
             TUnderlying value,
@@ -3101,8 +3296,10 @@ namespace System
             throw CreateInvalidFormatSpecifierException();
         }
 
-        /// <summary>Tries to create a string representation of an enum as either a single constant name or multiple delimited constant names.</summary>
-        /// <returns>The formatted string if the value could be fully represented by enum constants, or else null.</returns>
+        /// <summary>Tries to create a string representation of an enum as either a single constant name or
+        // multiple delimited constant names.</summary>
+        /// <returns>The formatted string if the value could be fully represented by enum constants, or else
+        // null.</returns>
         private static string? FormatFlagNames<TStorage>(
             EnumInfo<TStorage> enumInfo,
             TStorage resultValue
@@ -3158,10 +3355,13 @@ namespace System
             return result;
         }
 
-        /// <summary>Tries to format into a span a representation of an enum as either a single constant name or multiple delimited constant names.</summary>
+        /// <summary>Tries to format into a span a representation of an enum as either a single constant
+        // name or multiple delimited constant names.</summary>
         /// <returns>
-        /// true if the value could be fully represented by enum constants and if the formatted value could fit into the destination span; otherwise, false.
-        /// If false, <paramref name="isDestinationTooSmall"/> is used to disambiguate the reason for the failure.
+        /// true if the value could be fully represented by enum constants and if the formatted value could
+        // fit into the destination span; otherwise, false.
+        /// If false, <paramref name="isDestinationTooSmall"/> is used to disambiguate the reason for the
+        // failure.
         /// </returns>
         private static bool TryFormatFlagNames<TStorage>(
             EnumInfo<TStorage> enumInfo,
@@ -3234,7 +3434,8 @@ namespace System
         }
 
         /// <summary>
-        /// Calculates how many characters will be in a formatted value, where there are <paramref name="foundItemsCount"/>
+        /// Calculates how many characters will be in a formatted value, where there are <paramref
+        // name="foundItemsCount"/>
         /// names whose lengths all sum to <paramref name="resultLength"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // used twice, once from string-based and once from span-based code path
@@ -3253,7 +3454,8 @@ namespace System
             return checked(resultLength + allSeparatorsLength);
         }
 
-        /// <summary>Tries to find the single named constant for the specified value, or else the index where we left off searching after not finding it.</summary>
+        /// <summary>Tries to find the single named constant for the specified value, or else the index
+        // where we left off searching after not finding it.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // used twice, once from string-based and once from span-based code path
         private static string? GetSingleFlagsEnumNameForValue<TStorage>(
             TStorage resultValue,
@@ -3294,7 +3496,8 @@ namespace System
             return null;
         }
 
-        /// <summary>Tries to compute the indices of all named constants that or together to equal the specified value.</summary>
+        /// <summary>Tries to compute the indices of all named constants that or together to equal the
+        // specified value.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // used twice, once from string-based and once from span-based code path
         private static bool TryFindFlagsNames<TStorage>(
             TStorage resultValue,
@@ -3350,7 +3553,8 @@ namespace System
         }
 
         /// <summary>Concatenates the names of the found items into the destination span.</summary>
-        /// <remarks>The destination must have already been verified long enough to store the resulting data.</remarks>
+        /// <remarks>The destination must have already been verified long enough to store the resulting
+        // data.</remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)] // used twice, once from string-based and once from span-based code path
         private static void WriteMultipleFoundFlagsNames(
             string[] names,

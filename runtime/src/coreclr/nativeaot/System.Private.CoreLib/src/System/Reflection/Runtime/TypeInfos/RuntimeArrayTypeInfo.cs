@@ -58,7 +58,8 @@ namespace System.Reflection.Runtime.TypeInfos
 
                 {
                     //
-                    // Expose a constructor that takes n Int32's (one for each dimension) and constructs a zero lower-bounded array. For example,
+                    // Expose a constructor that takes n Int32's (one for each dimension) and constructs a zero
+                    // lower-bounded array. For example,
                     //
                     //   String[,]
                     //
@@ -94,7 +95,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 if (!multiDim)
                 {
                     //
-                    // Jagged arrays also expose constructors that take multiple indices and construct a jagged matrix. For example,
+                    // Jagged arrays also expose constructors that take multiple indices and construct a jagged matrix.
+                    // For example,
                     //
                     //   String[][][][]
                     //
@@ -136,7 +138,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 if (multiDim)
                 {
                     //
-                    // Expose a constructor that takes n*2 Int32's (two for each dimension) and constructs a arbitrarily lower-bounded array. For example,
+                    // Expose a constructor that takes n*2 Int32's (two for each dimension) and constructs a arbitrarily
+                    // lower-bounded array. For example,
                     //
                     //   String[,]
                     //
@@ -252,7 +255,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null, which causes BaseType to return null.
+        // Returns the base type as a typeDef, Ref, or Spec. Default behavior is to QTypeDefRefOrSpec.Null,
+        // which causes BaseType to return null.
         //
         internal sealed override QTypeDefRefOrSpec TypeRefDefOrSpecForBaseType
         {
@@ -260,7 +264,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces will take care of the transitive closure and
+        // Returns the *directly implemented* interfaces as typedefs, specs or refs. ImplementedInterfaces
+        // will take care of the transitive closure and
         // insertion of the TypeContext.
         //
         internal sealed override QTypeDefRefOrSpec[] TypeRefDefOrSpecsForDirectlyImplementedInterfaces
@@ -275,7 +280,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Returns the generic parameter substitutions to use when enumerating declared members, base class and implemented interfaces.
+        // Returns the generic parameter substitutions to use when enumerating declared members, base class
+        // and implemented interfaces.
         //
         internal sealed override TypeContext TypeContext
         {
@@ -302,7 +308,8 @@ namespace System.Reflection.Runtime.TypeInfos
         }
 
         //
-        // Arrays don't have a true typedef behind them but for the purpose of reporting base classes and interfaces, we can create a pretender.
+        // Arrays don't have a true typedef behind them but for the purpose of reporting base classes and
+        // interfaces, we can create a pretender.
         //
         private static RuntimeTypeInfo TypeDefInfoProjectionForArrays
         {

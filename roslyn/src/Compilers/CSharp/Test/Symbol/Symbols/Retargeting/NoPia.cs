@@ -1828,22 +1828,26 @@ public class C
 
             var expectedDiagnostics = new[]
             {
-                // (8,12): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (8,12): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public (int, int) TestTuple()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "(int, int)")
                     .WithArguments("(T1, T2)")
                     .WithLocation(8, 12),
-                // (4,19): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (4,19): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public System.ValueTuple<string, string> TestValueTuple()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "ValueTuple<string, string>")
                     .WithArguments("(T1, T2)")
                     .WithLocation(4, 19),
-                // (14,16): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (14,16): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //         return (1, 2);
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "(1, 2)")
                     .WithArguments("(T1, T2)")
                     .WithLocation(14, 16),
-                // (19,31): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (19,31): error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //         var resultingTuple = ((x, y) = new C());
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "(x, y)")
                     .WithArguments("(T1, T2)")
@@ -1916,11 +1920,13 @@ public interface ITest2 : ITest1 { }
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider
+                // setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("(T1, T2)")
                     .WithLocation(1, 1),
-                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting
+                // the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
                     .WithLocation(1, 1),
@@ -1991,11 +1997,13 @@ public interface ITest2 : ITest1 { }
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider
+                // setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("(T1, T2)")
                     .WithLocation(1, 1),
-                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting
+                // the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
                     .WithLocation(1, 1),
@@ -2057,7 +2065,8 @@ public interface ITest2 : ITest1 { }
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting
+                // the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
                     .WithLocation(1, 1),
@@ -2130,11 +2139,13 @@ public interface ITest2
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider
+                // setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("(T1, T2)")
                     .WithLocation(1, 1),
-                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting
+                // the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
                     .WithLocation(1, 1),
@@ -2225,11 +2236,13 @@ public class C
 
             var expectedDiagnostics = new DiagnosticDescription[]
             {
-                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type '(T1, T2)' cannot be embedded because it has a generic argument. Consider
+                // setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("(T1, T2)")
                     .WithLocation(1, 1),
-                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting
+                // the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
                     .WithLocation(1, 1),
@@ -2309,22 +2322,26 @@ namespace System
                 }
             );
             comp1.VerifyDiagnostics(
-                // (8,13): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (8,13): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public (Generic<int>, Generic<int>) Test2()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<int>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(8, 13),
-                // (8,27): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (8,27): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public (Generic<int>, Generic<int>) Test2()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<int>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(8, 27),
-                // (4,30): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (4,30): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public System.ValueTuple<Generic<string>, Generic<string>> Test1()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<string>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(4, 30),
-                // (4,47): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (4,47): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public System.ValueTuple<Generic<string>, Generic<string>> Test1()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<string>")
                     .WithArguments("Generic<T1>")
@@ -2342,22 +2359,26 @@ namespace System
                 }
             );
             comp2.VerifyDiagnostics(
-                // (8,13): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (8,13): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public (Generic<int>, Generic<int>) Test2()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<int>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(8, 13),
-                // (8,27): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (8,27): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public (Generic<int>, Generic<int>) Test2()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<int>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(8, 27),
-                // (4,30): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (4,30): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public System.ValueTuple<Generic<string>, Generic<string>> Test1()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<string>")
                     .WithArguments("Generic<T1>")
                     .WithLocation(4, 30),
-                // (4,47): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
+                // (4,47): error CS1768: Type 'Generic<T1>' cannot be embedded because it has a generic argument.
+                // Consider setting the 'Embed Interop Types' property to false.
                 //     public System.ValueTuple<Generic<string>, Generic<string>> Test1()
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Generic<string>")
                     .WithArguments("Generic<T1>")

@@ -41,14 +41,16 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        /// <param name="providers">The providers to use in producing <see cref="ILogger"/> instances.</param>
+        /// <param name="providers">The providers to use in producing <see cref="ILogger"/>
+        // instances.</param>
         public LoggerFactory(IEnumerable<ILoggerProvider> providers)
             : this(providers, new StaticFilterOptionsMonitor(new LoggerFilterOptions())) { }
 
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        /// <param name="providers">The providers to use in producing <see cref="ILogger"/> instances.</param>
+        /// <param name="providers">The providers to use in producing <see cref="ILogger"/>
+        // instances.</param>
         /// <param name="filterOptions">The filter options to use.</param>
         public LoggerFactory(
             IEnumerable<ILoggerProvider> providers,
@@ -59,7 +61,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        /// <param name="providers">The providers to use in producing <see cref="ILogger"/> instances.</param>
+        /// <param name="providers">The providers to use in producing <see cref="ILogger"/>
+        // instances.</param>
         /// <param name="filterOption">The filter option to use.</param>
         public LoggerFactory(
             IEnumerable<ILoggerProvider> providers,
@@ -70,7 +73,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        /// <param name="providers">The providers to use in producing <see cref="ILogger"/> instances.</param>
+        /// <param name="providers">The providers to use in producing <see cref="ILogger"/>
+        // instances.</param>
         /// <param name="filterOption">The filter option to use.</param>
         /// <param name="options">The <see cref="LoggerFactoryOptions"/>.</param>
         public LoggerFactory(
@@ -83,7 +87,8 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerFactory"/> instance.
         /// </summary>
-        /// <param name="providers">The providers to use in producing <see cref="ILogger"/> instances.</param>
+        /// <param name="providers">The providers to use in producing <see cref="ILogger"/>
+        // instances.</param>
         /// <param name="filterOption">The filter option to use.</param>
         /// <param name="options">The <see cref="LoggerFactoryOptions"/>.</param>
         /// <param name="scopeProvider">The <see cref="IExternalScopeProvider"/>.</param>
@@ -132,7 +137,8 @@ namespace Microsoft.Extensions.Logging
         }
 
         /// <summary>
-        /// Creates new instance of <see cref="ILoggerFactory"/> configured using provided <paramref name="configure"/> delegate.
+        /// Creates new instance of <see cref="ILoggerFactory"/> configured using provided <paramref
+        // name="configure"/> delegate.
         /// </summary>
         /// <param name="configure">A delegate to configure the <see cref="ILoggingBuilder"/>.</param>
         /// <returns>The <see cref="ILoggerFactory"/> that was created.</returns>

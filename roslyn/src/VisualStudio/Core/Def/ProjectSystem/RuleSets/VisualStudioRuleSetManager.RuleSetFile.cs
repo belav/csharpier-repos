@@ -172,7 +172,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                     _removedFromRuleSetManager = true;
                 }
 
-                // Call outside of lock to avoid general surprises; we skip this with the return above inside the lock.
+                // Call outside of lock to avoid general surprises; we skip this with the return above inside the
+                // lock.
                 _ruleSetManager.StopTrackingRuleSetFile(this);
             }
 
@@ -198,8 +199,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
             private void IncludeUpdateCore()
             {
-                // It's critical that RemoveFromRuleSetManagerAndDisconnectFileTrackers() is called first prior to raising the event
-                // -- this way any callers who call the RuleSetManager asking for the new file are guaranteed to get the new snapshot first.
+                // It's critical that RemoveFromRuleSetManagerAndDisconnectFileTrackers() is called first prior to
+                // raising the event
+                // -- this way any callers who call the RuleSetManager asking for the new file are guaranteed to get
+                // the new snapshot first.
                 // idempotent.
                 RemoveFromRuleSetManagerAndDisconnectFileTrackers();
                 UpdatedOnDisk?.Invoke(this, EventArgs.Empty);

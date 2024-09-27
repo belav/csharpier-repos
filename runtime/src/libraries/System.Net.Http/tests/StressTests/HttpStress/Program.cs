@@ -22,7 +22,8 @@ using Microsoft.Quic;
 namespace HttpStress
 {
     /// <summary>
-    /// Simple HttpClient stress app that launches Kestrel in-proc and runs many concurrent requests of varying types against it.
+    /// Simple HttpClient stress app that launches Kestrel in-proc and runs many concurrent requests of
+    // varying types against it.
     /// </summary>
     public static class Program
     {
@@ -419,8 +420,10 @@ namespace HttpStress
             {
                 unsafe
                 {
-                    // If the system gets overloaded, MsQuic has a tendency to drop incoming connections, see https://github.com/dotnet/runtime/issues/55979.
-                    // So in case we're running H/3 stress test, we're using the same hack as for System.Net.Quic tests, which increases the time limit for pending operations in MsQuic thread pool.
+                    // If the system gets overloaded, MsQuic has a tendency to drop incoming connections, see
+                    // https://github.com/dotnet/runtime/issues/55979.
+                    // So in case we're running H/3 stress test, we're using the same hack as for System.Net.Quic tests,
+                    // which increases the time limit for pending operations in MsQuic thread pool.
                     object msQuicApiInstance = msQuicApiType
                         .GetProperty("Api", BindingFlags.NonPublic | BindingFlags.Static)!
                         .GetGetMethod(true)!

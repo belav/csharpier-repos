@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// until all of these types are accounted for.
     /// </summary>
     /// <remarks>
-    /// PEParameterSymbol reserves all completion part bits and uses them to track the completion state and
+    /// PEParameterSymbol reserves all completion part bits and uses them to track the completion state
+    // and
     /// presence of well known attributes.
     /// </remarks>
     [Flags]

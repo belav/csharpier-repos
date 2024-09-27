@@ -52,9 +52,11 @@ namespace System.Data
 
         // rows
         /// <summary>
-        /// Monotonically increasing number representing the order <see cref="DataRow"/> have been added to <see cref="DataRowCollection"/>.
+        /// Monotonically increasing number representing the order <see cref="DataRow"/> have been added to
+        // <see cref="DataRowCollection"/>.
         /// </summary>
-        /// <remarks>This limits <see cref="DataRowCollection.Add(DataRow)"/> to <see cref="Int32.MaxValue"/> operations.</remarks>
+        /// <remarks>This limits <see cref="DataRowCollection.Add(DataRow)"/> to <see
+        // cref="Int32.MaxValue"/> operations.</remarks>
         internal long nextRowID;
         internal readonly DataRowCollection rowCollection;
 
@@ -188,7 +190,8 @@ namespace System.Data
         );
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no arguments.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Data.DataTable'/> class with no
+        // arguments.</para>
         /// </devdoc>
         public DataTable()
         {
@@ -207,7 +210,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Intitalizes a new instance of the <see cref='System.Data.DataTable'/> class with the specified table
+        /// <para>Intitalizes a new instance of the <see cref='System.Data.DataTable'/> class with the
+        // specified table
         ///    name.</para>
         /// </devdoc>
         public DataTable(string tableName)
@@ -680,10 +684,13 @@ namespace System.Data
         }
 
         /*
-                Serialize constraints availabe on the table - note this function is marked internal because it is called by the DataSet deserializer.
-                ***Schema for Serializing ArrayList of Constraints***
-                Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
-                Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
+        Serialize constraints availabe on the table - note this function is marked internal because it is
+        called by the DataSet deserializer.
+        ***Schema for Serializing ArrayList of Constraints***
+        Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
+        Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex,
+        parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule,
+        DeleteRule]->[extendedProperties]
         */
         internal void SerializeConstraints(
             SerializationInfo info,
@@ -772,10 +779,12 @@ namespace System.Data
         }
 
         /*
-                Deserialize the constraints on the table.
-                ***Schema for Serializing ArrayList of Constraints***
-                Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
-                Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex, parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule, DeleteRule]->[extendedProperties]
+        Deserialize the constraints on the table.
+        ***Schema for Serializing ArrayList of Constraints***
+        Unique Constraint - ["U"]->[constraintName]->[columnIndexes]->[IsPrimaryKey]->[extendedProperties]
+        Foriegn Key Constraint - ["F"]->[constraintName]->[parentTableIndex,
+        parentcolumnIndexes]->[childTableIndex, childColumnIndexes]->[AcceptRejectRule, UpdateRule,
+        DeleteRule]->[extendedProperties]
         */
         internal void DeserializeConstraints(
             SerializationInfo info,
@@ -868,7 +877,8 @@ namespace System.Data
             }
         }
 
-        //        Serialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
+        //        Serialize the expressions on the table - Marked internal so that DataSet deserializer can
+        // call into this
         internal void SerializeExpressionColumns(
             SerializationInfo info,
             StreamingContext context,
@@ -890,7 +900,8 @@ namespace System.Data
             }
         }
 
-        //        Deserialize the expressions on the table - Marked internal so that DataSet deserializer can call into this
+        //        Deserialize the expressions on the table - Marked internal so that DataSet deserializer
+        // can call into this
         internal void DeserializeExpressionColumns(
             SerializationInfo info,
             StreamingContext context,
@@ -928,7 +939,8 @@ namespace System.Data
             int modifiedRowCount = 0;
             int editRowCount = 0;
 
-            //Compute row states and assign the bits accordingly - 00[Unchanged], 01[Added], 10[Modifed], 11[Deleted]
+            //Compute row states and assign the bits accordingly - 00[Unchanged], 01[Added], 10[Modifed],
+            // 11[Deleted]
             BitArray rowStates = new BitArray(rowCount * 3, false); //All bit flags are set to false on initialization of the BitArray.
             for (int i = 0; i < rowCount; i++)
             {
@@ -1174,7 +1186,8 @@ namespace System.Data
             }
         }
 
-        //        Get the error on the row and columns - Marked internal so that DataSet deserializer can call into this
+        //        Get the error on the row and columns - Marked internal so that DataSet deserializer can
+        // call into this
         internal void GetRowAndColumnErrors(int rowIndex, Hashtable rowErrors, Hashtable colErrors)
         {
             Debug.Assert(Rows.Count > rowIndex);
@@ -1238,8 +1251,10 @@ namespace System.Data
         {
             get
             {
-                //The following assert is valid except when calling DataSet.set_CaseSensitive which Validates constraints and failing here
-                //Debug.Assert(_caseSensitiveUserSet || (null == dataSet) || (dataSet.CaseSensitive == _caseSensitive), "CaseSensitive mismatch");
+                //The following assert is valid except when calling DataSet.set_CaseSensitive which Validates
+                // constraints and failing here
+                //Debug.Assert(_caseSensitiveUserSet || (null == dataSet) || (dataSet.CaseSensitive ==
+                // _caseSensitive), "CaseSensitive mismatch");
                 return _caseSensitive;
             }
             set
@@ -1410,7 +1425,8 @@ namespace System.Data
         {
             get
             {
-                // Is this correct? if ((top[i].nestedParentRelation!= null) && (top[i].nestedParentRelation.ParentTable == top[i]))
+                // Is this correct? if ((top[i].nestedParentRelation!= null) &&
+                // (top[i].nestedParentRelation.ParentTable == top[i]))
                 foreach (DataRelation rel in ParentRelations)
                 {
                     if (rel.Nested && rel.ParentTable == this)
@@ -1423,10 +1439,10 @@ namespace System.Data
         }
 
         /*        internal bool SelfNestedWithOneRelation {
-                    get {
-                        return (this.ParentRelations.Count == 1 && (this.ParentRelations[0].ParentTable == this));
-                    }
-                }
+        get {
+        return (this.ParentRelations.Count == 1 && (this.ParentRelations[0].ParentTable == this));
+        }
+        }
         */
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)] // don't have debugger view expand this
@@ -1476,7 +1492,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Gets the collection of child relations for this <see cref='System.Data.DataTable'/>.</para>
+        /// <para>Gets the collection of child relations for this <see
+        // cref='System.Data.DataTable'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -1609,7 +1626,8 @@ namespace System.Data
                         view = new DataView(this, true);
                         view.SetIndex2("", DataViewRowState.CurrentRows, null, true);
                     }
-                    // avoid HostProtectionAttribute(Synchronization=true) by not calling virtual methods from inside a lock
+                    // avoid HostProtectionAttribute(Synchronization=true) by not calling virtual methods from inside a
+                    // lock
                     view = Interlocked.CompareExchange<DataView>(ref defaultView, view, null);
                     if (null == view)
                     {
@@ -1733,6 +1751,8 @@ namespace System.Data
             get
             {
                 // used for Formating/Parsing
+                //
+                //
                 // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpref/html/frlrfsystemglobalizationcultureinfoclassisneutralculturetopic.asp
                 if (null == _formatProvider)
                 {
@@ -1887,7 +1907,8 @@ namespace System.Data
             //   by the property grid to show the Locale property in bold or not
             //   by the code dom for persisting the Locale property or not
 
-            // we always want the locale persisted if set by user or different the current thread if standalone table
+            // we always want the locale persisted if set by user or different the current thread if standalone
+            // table
             // but that logic should by performed by the serializion code
             return _cultureUserSet;
         }
@@ -1930,7 +1951,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Gets the collection of parent relations for this <see cref='System.Data.DataTable'/>.</para>
+        /// <para>Gets the collection of parent relations for this <see
+        // cref='System.Data.DataTable'/>.</para>
         /// </devdoc>
         [
             Browsable(false),
@@ -2147,7 +2169,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Indicates whether the <see cref='System.Data.DataTable.PrimaryKey'/> property should be persisted.
+        ///       Indicates whether the <see cref='System.Data.DataTable.PrimaryKey'/> property should be
+        // persisted.
         ///    </para>
         /// </devdoc>
         private bool ShouldSerializePrimaryKey()
@@ -2487,7 +2510,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>
-        ///       Indicates whether the <see cref='System.Data.DataTable.Namespace'/> property should be persisted.
+        ///       Indicates whether the <see cref='System.Data.DataTable.Namespace'/> property should be
+        // persisted.
         ///    </para>
         /// </devdoc>
         private bool ShouldSerializeNamespace()
@@ -2698,7 +2722,8 @@ namespace System.Data
             {
                 // SQLBU 500789: Record Manager corruption during Merge when target row in edit state
                 // the newRecord would be freed and overwrite tempRecord (which became the newRecord)
-                // this would leave the DataRow referencing a freed record and leaking memory for the now lost record
+                // this would leave the DataRow referencing a freed record and leaking memory for the now lost
+                // record
                 int proposedRecord = targetRow.tempRecord; // by saving off the tempRecord, EndEdit won't free newRecord
                 targetRow.tempRecord = -1;
                 try
@@ -2841,7 +2866,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Commits all the changes made to this table since the last time <see cref='System.Data.DataTable.AcceptChanges'/> was called.</para>
+        /// <para>Commits all the changes made to this table since the last time <see
+        // cref='System.Data.DataTable.AcceptChanges'/> was called.</para>
         /// </devdoc>
         public void AcceptChanges()
         {
@@ -2876,7 +2902,8 @@ namespace System.Data
             }
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         protected virtual DataTable CreateInstance()
         {
@@ -2960,8 +2987,10 @@ namespace System.Data
 
         private DataTable CloneTo(DataTable clone, DataSet cloneDS, bool skipExpressionColumns)
         {
-            // we do clone datatables while we do readxmlschema, so we do not want to clone columnexpressions if we call this from ReadXmlSchema
-            // it will cause exception to be thrown in cae expression refers to a table that is not in hirerachy or not created yet
+            // we do clone datatables while we do readxmlschema, so we do not want to clone columnexpressions if
+            // we call this from ReadXmlSchema
+            // it will cause exception to be thrown in cae expression refers to a table that is not in hirerachy
+            // or not created yet
             Debug.Assert(
                 clone != null,
                 "The table passed in has to be newly created empty DataTable."
@@ -2997,7 +3026,8 @@ namespace System.Data
                 clone.Columns.Add(clmns[i].Clone());
             }
 
-            // add all expressions if Clone is invoked only on DataTable otherwise DataSet.Clone will assign expressions after creating all relationships.
+            // add all expressions if Clone is invoked only on DataTable otherwise DataSet.Clone will assign
+            // expressions after creating all relationships.
             if (!skipExpressionColumns && cloneDS == null)
             {
                 for (int i = 0; i < clmns.Count; i++)
@@ -4236,7 +4266,8 @@ namespace System.Data
             return typeof(DataRow);
         }
 
-        // Prevent inlining so that reflection calls are not moved to caller that may be in a different assembly that may have a different grant set.
+        // Prevent inlining so that reflection calls are not moved to caller that may be in a different
+        // assembly that may have a different grant set.
         [MethodImpl(MethodImplOptions.NoInlining)]
         protected internal DataRow[] NewRowArray(int size)
         {
@@ -4306,7 +4337,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Notifies the <see cref='System.Data.DataTable'/> that a <see cref='System.Data.DataColumn'/> is
+        /// <para>Notifies the <see cref='System.Data.DataTable'/> that a <see
+        // cref='System.Data.DataColumn'/> is
         ///    being removed.</para>
         /// </devdoc>
         protected virtual void OnRemoveColumn(DataColumn column) { }
@@ -4553,7 +4585,8 @@ namespace System.Data
         }
 
         // for each index in liveindexes invok RecordChanged
-        // oldIndex and newIndex keeps  position of record before delete and after insert in each index in order
+        // oldIndex and newIndex keeps  position of record before delete and after insert in each index in
+        // order
         // LiveIndexes[n-m] will have its information in oldIndex[n-m] and  newIndex[n-m]
         internal void RecordChanged(int[] oldIndex, int[] newIndex)
         {
@@ -4648,10 +4681,12 @@ namespace System.Data
             {
                 RestoreShadowIndexes();
             }
-            // System.Data.XML.Store.Store.OnROMChanged(record1, oldState1, newState1, record2, oldState2, newState2);
+            // System.Data.XML.Store.Store.OnROMChanged(record1, oldState1, newState1, record2, oldState2,
+            // newState2);
         }
 
-        // RemoveRecordFromIndexes removes the given record (using row and version) from all indexes and it  stores and returns the position of deleted
+        // RemoveRecordFromIndexes removes the given record (using row and version) from all indexes and it
+        // stores and returns the position of deleted
         // record from each index
         // IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
         internal int[] RemoveRecordFromIndexes(DataRow row, DataRowVersion version)
@@ -4688,7 +4723,8 @@ namespace System.Data
             return positionIndexes;
         }
 
-        // InsertRecordToIndexes inserts the given record (using row and version) to all indexes and it  stores and returns the position of inserted
+        // InsertRecordToIndexes inserts the given record (using row and version) to all indexes and it
+        // stores and returns the position of inserted
         // record to each index
         // IT SHOULD NOT CAUSE ANY EVENT TO BE FIRED
         internal int[] InsertRecordToIndexes(DataRow row, DataRowVersion version)
@@ -4752,7 +4788,8 @@ namespace System.Data
                     }
                     if (dc.dependentColumns != null)
                     {
-                        //BugBug - passing in null for cachedRows.  This means expression columns as keys does not work when key changes.
+                        //BugBug - passing in null for cachedRows.  This means expression columns as keys does not work when
+                        // key changes.
                         dc.Table.EvaluateDependentExpressions(
                             dc.dependentColumns,
                             dr,
@@ -4767,7 +4804,8 @@ namespace System.Data
 
         /// <devdoc>
         ///    <para>Rolls back all changes that have been made to the table
-        ///       since it was loaded, or the last time <see cref='System.Data.DataTable.AcceptChanges'/> was called.</para>
+        ///       since it was loaded, or the last time <see cref='System.Data.DataTable.AcceptChanges'/>
+        // was called.</para>
         /// </devdoc>
         public void RejectChanges()
         {
@@ -5078,7 +5116,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter criteria in order of
+        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter
+        // criteria in order of
         ///    primary key (or lacking one, order of addition.)</para>
         /// </devdoc>
         public DataRow[] Select(string filterExpression)
@@ -5097,7 +5136,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter criteria, in the the
+        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter
+        // criteria, in the the
         ///    specified sort order.</para>
         /// </devdoc>
         public DataRow[] Select(string filterExpression, string sort)
@@ -5117,7 +5157,8 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter in the order of the
+        /// <para>Returns an array of all <see cref='System.Data.DataRow'/> objects that match the filter in
+        // the order of the
         ///    sort, that match the specified state.</para>
         /// </devdoc>
         public DataRow[] Select(string filterExpression, string sort, DataViewRowState recordStates)
@@ -5178,8 +5219,10 @@ namespace System.Data
             // 2) Check constraints for non-expression columns
             // 3) Raise RowChanging/RowDeleting with temp record
             // 4) set the new record in storage
-            // 5) Update indexes with recordStateChanges - this will fire ListChanged & PropertyChanged events on associated views
-            // 6) Evaluate all Expressions (exceptions are deferred)- this will fire ListChanged & PropertyChanged events on associated views
+            // 5) Update indexes with recordStateChanges - this will fire ListChanged & PropertyChanged events
+            // on associated views
+            // 6) Evaluate all Expressions (exceptions are deferred)- this will fire ListChanged &
+            // PropertyChanged events on associated views
             // 7) Raise RowChanged/ RowDeleted
             // 8) Check constraints for expression columns
 
@@ -5229,7 +5272,8 @@ namespace System.Data
 
             int currentRecord = row.newRecord;
 
-            // if we're deleting, then the oldRecord value will change, so need to track that if it's distinct from the newRecord.
+            // if we're deleting, then the oldRecord value will change, so need to track that if it's distinct
+            // from the newRecord.
             int secondRecord = (
                 proposedRecord != -1
                     ? proposedRecord
@@ -5276,7 +5320,8 @@ namespace System.Data
             }
 
             // Dev10 Bug 688779: DataRowView.PropertyChanged are not raised on RejectChanges
-            // if the newRecord is changing, the propertychanged event should be allowed to triggered for ListChangedType.Changed or .Moved
+            // if the newRecord is changing, the propertychanged event should be allowed to triggered for
+            // ListChangedType.Changed or .Moved
             // unless the specific condition is known that no data has changed, like DataRow.SetModified()
             if (
                 !suppressEnsurePropertyChanged
@@ -5287,7 +5332,8 @@ namespace System.Data
             ) // explictly not fixing parts of Dev10 Bug 697909: when mixing current and original records in RowStateFilter
             {
                 // DataRow will believe multiple edits occured and
-                // DataView.ListChanged event w/ ListChangedType.ItemChanged will raise DataRowView.PropertyChanged event and
+                // DataView.ListChanged event w/ ListChangedType.ItemChanged will raise DataRowView.PropertyChanged
+                // event and
                 // PropertyChangedEventArgs.PropertyName will now be empty string so
                 // WPF will refresh the entire row
                 row.LastChangedColumn = null;
@@ -5526,7 +5572,9 @@ namespace System.Data
         }
 
         /// <devdoc>
-        /// <para>Returns the <see cref='System.Data.DataTable.TableName'/> and <see cref='System.Data.DataTable.DisplayExpression'/>, if there is one as a concatenated string.</para>
+        /// <para>Returns the <see cref='System.Data.DataTable.TableName'/> and <see
+        // cref='System.Data.DataTable.DisplayExpression'/>, if there is one as a concatenated
+        // string.</para>
         /// </devdoc>
         public override string ToString()
         {
@@ -7854,33 +7902,36 @@ namespace System.Data
         /**************************************************************************
         The V2.0 (no V1.0 or V1.1) WSDL for Untyped DataTable being returned as a result (no parameters)
         <s:element name="anyUserSpecifiedMethodName">
-            <!--  This is where parameters go -->
-            <s:complexType />
+        <!--  This is where parameters go -->
+        <s:complexType />
         </s:element>
         <s:element name="anyUserSpecifiedMethodName"+"Response">
-            <s:complexType>
-                <s:sequence>
-                    <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
-                        <s:complexType>
-                            <s:sequence>
-                                <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
-                                <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
-                            </s:sequence>
-                        </s:complexType>
-                    </s:element>
-                </s:sequence>
-            </s:complexType>
+        <s:complexType>
+        <s:sequence>
+        <s:element minOccurs="0" maxOccurs="1" name="anyUserSpecifiedMethodName"+"Result">
+        <s:complexType>
+        <s:sequence>
+        <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema"
+        processContents="lax" />
+        <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+        </s:sequence>
+        </s:complexType>
         </s:element>
-
+        </s:sequence>
+        </s:complexType>
+        </s:element>
+        
         Typed DataTable is not supported in WSDL (SQLBU 444636)
-
+        
         either fails because xsd generates its typed DataTable with an internal parameterless ctor
         
-        or System.NullReferenceException: Object reference not set to an instance of an object.   (if namespace of StronglyTyped DataTable is not set)
-           at System.Data.XmlTreeGen.FindTargetNamespace(DataTable table)
-
-        or System.InvalidOperationException: Schema Id is missing. The schema returned from WebServiceDataSetServer.Service+StudentsDataTable.GetSchema() must have an Id.
-           at System.Xml.Serialization.SerializableMapping.RetrieveSerializableSchema()
+        or System.NullReferenceException: Object reference not set to an instance of an object.   (if
+        namespace of StronglyTyped DataTable is not set)
+        at System.Data.XmlTreeGen.FindTargetNamespace(DataTable table)
+        
+        or System.InvalidOperationException: Schema Id is missing. The schema returned from
+        WebServiceDataSetServer.Service+StudentsDataTable.GetSchema() must have an Id.
+        at System.Xml.Serialization.SerializableMapping.RetrieveSerializableSchema()
         *****************************************************************************/
         public static XmlSchemaComplexType GetDataTableSchema(XmlSchemaSet schemaSet)
         {
@@ -7955,24 +8006,25 @@ namespace System.Data
         }
 
         /*
-                [
-                DefaultValue(false),
-                ResCategoryAttribute(Res.DataCategory_Data),
-                ResDescriptionAttribute(Res.DataTableSerializeHierarchy)
-                ]
-                public bool SerializeHierarchy {
-                    get {
-                        return this.serializeHierarchy;
-                    }
-                    set {
-                        this.serializeHierarchy = value;
-                    }
-                }
+        [
+        DefaultValue(false),
+        ResCategoryAttribute(Res.DataCategory_Data),
+        ResDescriptionAttribute(Res.DataTableSerializeHierarchy)
+        ]
+        public bool SerializeHierarchy {
+        get {
+        return this.serializeHierarchy;
+        }
+        set {
+        this.serializeHierarchy = value;
+        }
+        }
         */
 
         // RowDiffIdUsageSection & DSRowDiffIdUsageSection Usage:
         //
-        //        DataTable.[DS]RowDiffIdUsageSection rowDiffIdUsage = new DataTable.[DS]RowDiffIdUsageSection();
+        //        DataTable.[DS]RowDiffIdUsageSection rowDiffIdUsage = new
+        // DataTable.[DS]RowDiffIdUsageSection();
         //        try {
         //            rowDiffIdUsage.Prepare(DataTable or DataSet, depending on type);
         //
@@ -7983,16 +8035,21 @@ namespace System.Data
         //            rowDiffIdUsage.Cleanup();
         //        }
         //
-        // Nested calls are allowed on different tables. For example, user can register to row change events and trigger
-        // ReadXml on different table/ds). But, if user code will try to call ReadXml on table that is already in the scope,
+        // Nested calls are allowed on different tables. For example, user can register to row change events
+        // and trigger
+        // ReadXml on different table/ds). But, if user code will try to call ReadXml on table that is
+        // already in the scope,
         // this code will assert since nested calls on same table are unsupported.
         internal struct RowDiffIdUsageSection
         {
 #if DEBUG
-            // This list contains tables currently used in diffgram processing, not including new tables that might be added later during.
-            // if diffgram processing is not started, this value must be null. when it starts, relevant method should call Prepare.
+            // This list contains tables currently used in diffgram processing, not including new tables that
+            // might be added later during.
+            // if diffgram processing is not started, this value must be null. when it starts, relevant method
+            // should call Prepare.
             // Notes:
-            // * in case of ReadXml on empty DataSet, this list can be initialized as empty (so empty list != null).
+            // * in case of ReadXml on empty DataSet, this list can be initialized as empty (so empty list !=
+            // null).
             // * only one scope is allowed on single thread, either for datatable or dataset
             // * assert is triggered if same table is added to this list twice
             //
@@ -8051,7 +8108,8 @@ namespace System.Data
             {
 #if DEBUG
                 // this code asserts scope was created, but it does not assert that the table was included in it
-                // note that in case of DataSet, new tables might be added to the list in which case they won't appear in s_usedTables.
+                // note that in case of DataSet, new tables might be added to the list in which case they won't
+                // appear in s_usedTables.
                 Debug.Assert(s_usedTables != null, message);
 #endif //DEBUG
             }
@@ -8127,7 +8185,8 @@ namespace System.Data
         {
             get
             {
-                // assert scope has been created either with RowDiffIdUsageSection.Prepare or DSRowDiffIdUsageSection.Prepare
+                // assert scope has been created either with RowDiffIdUsageSection.Prepare or
+                // DSRowDiffIdUsageSection.Prepare
                 RowDiffIdUsageSection.Assert(
                     "missing call to RowDiffIdUsageSection.Prepare or DSRowDiffIdUsageSection.Prepare"
                 );
@@ -8302,8 +8361,10 @@ namespace System.Data
                             }
                         }
                         // VSTFDEVDIV911434: Order is important here - we need to update proposed before current
-                        // Oherwise rows that are in edit state will get ListChanged/PropertyChanged event before default value is changed
-                        // It is also the reason why we are not doping it in the single loop: EvaluateDependentExpression can update the
+                        // Oherwise rows that are in edit state will get ListChanged/PropertyChanged event before default
+                        // value is changed
+                        // It is also the reason why we are not doping it in the single loop: EvaluateDependentExpression
+                        // can update the
                         // whole table, if it happens, current for all but first row is updated before proposed value
                         for (int j = 0; j < Rows.Count; j++)
                         {
@@ -8457,7 +8518,8 @@ namespace System.Data
                     DataColumn dc = columns[i];
                     if (dc.DataExpression != null && dc.DataExpression.HasLocalAggregate())
                     {
-                        // if column expression references a local Table aggregate we need to recalc it for the each row in the local table
+                        // if column expression references a local Table aggregate we need to recalc it for the each row in
+                        // the local table
                         DataRowVersion expressionVersion =
                             (version == DataRowVersion.Proposed) ? DataRowVersion.Default : version;
                         bool isConst = dc.DataExpression.IsTableAggregate(); //is expression constant for entire table?

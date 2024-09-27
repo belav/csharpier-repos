@@ -15,8 +15,10 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 
 /// <summary>
-///     Captures synchronous and asynchronous database related exceptions from the pipeline that may be resolved using Entity Framework
-///     migrations. When these exceptions occur an HTML response with details of possible actions to resolve the issue is generated.
+///     Captures synchronous and asynchronous database related exceptions from the pipeline that may
+// be resolved using Entity Framework
+///     migrations. When these exceptions occur an HTML response with details of possible actions to
+// resolve the issue is generated.
 /// </summary>
 [RequiresDynamicCode("DbContext migrations operations are not supported with NativeAOT")]
 public class DatabaseErrorPageMiddleware
@@ -45,12 +47,15 @@ public class DatabaseErrorPageMiddleware
     /// <summary>
     ///     Initializes a new instance of the <see cref="DatabaseErrorPageMiddleware" /> class
     /// </summary>
-    /// <param name="next">Delegate to execute the next piece of middleware in the request pipeline.</param>
+    /// <param name="next">Delegate to execute the next piece of middleware in the request
+    // pipeline.</param>
     /// <param name="loggerFactory">
-    ///     The <see cref="ILoggerFactory" /> for the application. This middleware both produces logging messages and
+    ///     The <see cref="ILoggerFactory" /> for the application. This middleware both produces logging
+    // messages and
     ///     consumes them to detect database related exception.
     /// </param>
-    /// <param name="options">The options to control what information is displayed on the error page.</param>
+    /// <param name="options">The options to control what information is displayed on the error
+    // page.</param>
     [Obsolete(
         "This is obsolete and will be removed in a future version. Use DatabaseDeveloperPageExceptionFilter instead, see documentation at https://aka.ms/DatabaseDeveloperPageExceptionFilter."
     )]

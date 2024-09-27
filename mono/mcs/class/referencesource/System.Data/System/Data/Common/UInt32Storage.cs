@@ -206,7 +206,8 @@ namespace System.Data.Common
                 return -1;
             }
             return valueNo1.CompareTo((UInt32)value);
-            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to UInt32.CompareTo(UInt32)
+            //return(valueNo1 < valueNo2 ? -1 : (valueNo1 > valueNo2 ? 1 : 0)); // similar to
+            // UInt32.CompareTo(UInt32)
         }
 
         public override object ConvertValue(object value)

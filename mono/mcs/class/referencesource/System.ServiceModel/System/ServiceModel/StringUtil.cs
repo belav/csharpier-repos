@@ -10,7 +10,8 @@ namespace System.ServiceModel
         static StringUtil()
         {
             // StringComparer.InvariantCultureIgnoreCase.GetHashCode is a stable hash between 32 and 64 bits.
-            // Test the result of this GetHashCode against a known test vector to see if randomized hashing is enabled.
+            // Test the result of this GetHashCode against a known test vector to see if randomized hashing is
+            // enabled.
             randomizedStringHashingEnabled =
                 StringComparer.InvariantCultureIgnoreCase.GetHashCode(
                     "The quick brown fox jumps over the lazy dog."

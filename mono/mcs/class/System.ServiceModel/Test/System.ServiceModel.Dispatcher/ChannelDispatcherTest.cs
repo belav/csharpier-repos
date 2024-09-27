@@ -231,9 +231,12 @@ namespace MonoTests.System.ServiceModel.Dispatcher
         [Category("NotWorking")]
         // Validating duplicate listen URI causes this regression.
         // Since it is niche, I rather fixed ServiceHostBase to introduce validation.
-        // It is probably because this code doesn't use ServiceEndpoint to build IChannelListener i.e. built without Binding.
-        // We can add an extra field to ChannelDispatcher to indicate that it is from ServiceEndpoint (i.e. with Binding),
-        // but it makes little sense especially for checking duplicate listen URIs. Duplicate listen URIs should be rejected anyways.
+        // It is probably because this code doesn't use ServiceEndpoint to build IChannelListener i.e. built
+        // without Binding.
+        // We can add an extra field to ChannelDispatcher to indicate that it is from ServiceEndpoint (i.e.
+        // with Binding),
+        // but it makes little sense especially for checking duplicate listen URIs. Duplicate listen URIs
+        // should be rejected anyways.
         public void EndpointDispatcherAddTest8()
         {
             var uri = new Uri("http://localhost:" + NetworkHelpers.FindFreePort());
@@ -265,12 +268,12 @@ namespace MonoTests.System.ServiceModel.Dispatcher
                 Assert.IsNull(ed.DispatchRuntime.InstanceProvider, "#4");
                 Assert.IsNotNull(ed.DispatchRuntime.InstanceContextProvider, "#5"); // it was set after ServiceHost.Open().
                 Assert.IsNull(ed.DispatchRuntime.SingletonInstanceContext, "#6");
-                /*
-                var l = new HttpListener ();
-                l.Prefixes.Add (uri.ToString ());
-                l.Start ();
-                l.Stop ();
-                */
+/*
+var l = new HttpListener ();
+l.Prefixes.Add (uri.ToString ());
+l.Start ();
+l.Stop ();
+*/
             }
             finally
             {
@@ -279,7 +282,8 @@ namespace MonoTests.System.ServiceModel.Dispatcher
             }
         }
 
-        // FIXME: this test itself indeed passes, but some weird conflict that blocks correspoding port happens between this and somewhere (probably above)
+        // FIXME: this test itself indeed passes, but some weird conflict that blocks correspoding port
+        // happens between this and somewhere (probably above)
         //		[Test]
         public void EndpointDispatcherAddTest9() // test singleton service
         {

@@ -15,37 +15,54 @@ namespace System.Net.Sockets
     public partial class SocketAsyncEventArgs : EventArgs, IDisposable
     {
         /// <summary>
-        /// Value used to indicate whether the thread starting an async operation or invoking the callback owns completion and cleanup,
-        /// and potentially a packed result when ownership is transferred from the overlapped callback to the initial thread.
+        /// Value used to indicate whether the thread starting an async operation or invoking the callback
+        // owns completion and cleanup,
+        /// and potentially a packed result when ownership is transferred from the overlapped callback to
+        // the initial thread.
         /// </summary>
         /// <remarks>
-        /// An async operation may complete asynchronously so quickly that the overlapped callback may be invoked even while the thread
-        /// launching the operation is still in the process of launching it, including setting up state that's only configured after
-        /// the Winsock call has been made, e.g. registering with a cancellation token.  In order to ensure that cleanup and announcement
-        /// of completion happen only once all work related to launching the operation has quiesced, the launcher and the callback
-        /// coordinate via this flag.  It's initially set to 0.  When either the launcher completes its work or the callback is invoked,
-        /// they each try to transition the flag to non-0, and if successful, the other entity owns completion and cleanup; if unsuccessful,
-        /// they themselves own cleanup and completion.  For cases where the operation frequently completes asynchronously but quickly,
-        /// e.g. accepts with an already pending connection, this also helps to turn what would otherwise be treated as asynchronous completion
-        /// into a synchronous completion, which can help with performance for the caller, e.g. an async method awaiting the operation simply
-        /// continues its execution synchronously rather than needing to hook up a continuation and go through the async completion path.
-        /// If the overlapped callback succeeds in transferring ownership, the value is a combination of the error code (bottom 32-bits) and
-        /// the number of bytes transferred (bits 33-63); the top bit is also set just in case both the error code and number of bytes
+        /// An async operation may complete asynchronously so quickly that the overlapped callback may be
+        // invoked even while the thread
+        /// launching the operation is still in the process of launching it, including setting up state
+        // that's only configured after
+        /// the Winsock call has been made, e.g. registering with a cancellation token.  In order to ensure
+        // that cleanup and announcement
+        /// of completion happen only once all work related to launching the operation has quiesced, the
+        // launcher and the callback
+        /// coordinate via this flag.  It's initially set to 0.  When either the launcher completes its work
+        // or the callback is invoked,
+        /// they each try to transition the flag to non-0, and if successful, the other entity owns
+        // completion and cleanup; if unsuccessful,
+        /// they themselves own cleanup and completion.  For cases where the operation frequently completes
+        // asynchronously but quickly,
+        /// e.g. accepts with an already pending connection, this also helps to turn what would otherwise be
+        // treated as asynchronous completion
+        /// into a synchronous completion, which can help with performance for the caller, e.g. an async
+        // method awaiting the operation simply
+        /// continues its execution synchronously rather than needing to hook up a continuation and go
+        // through the async completion path.
+        /// If the overlapped callback succeeds in transferring ownership, the value is a combination of the
+        // error code (bottom 32-bits) and
+        /// the number of bytes transferred (bits 33-63); the top bit is also set just in case both the
+        // error code and number of bytes
         /// transferred are 0.
         /// </remarks>
         private ulong _asyncCompletionOwnership;
 
         /// <summary>Pinned handle for a single buffer.</summary>
         /// <remarks>
-        /// This should only be set in <see cref="ProcessIOCPResult"/> when <see cref="_asyncCompletionOwnership"/> is also being
-        /// set to non-0, and then cleaned up in <see cref="CompleteCore"/>.  If it's set and <see cref="_asyncCompletionOwnership"/>
+        /// This should only be set in <see cref="ProcessIOCPResult"/> when <see
+        // cref="_asyncCompletionOwnership"/> is also being
+        /// set to non-0, and then cleaned up in <see cref="CompleteCore"/>.  If it's set and <see
+        // cref="_asyncCompletionOwnership"/>
         /// remains 0, it may not get cleaned up correctly.
         /// </remarks>
         private MemoryHandle _singleBufferHandle;
 
         // BufferList property variables.
         // Note that these arrays are allocated and then grown as necessary, but never shrunk.
-        // Thus the actual in-use length is defined by _bufferListInternal.Count, not the length of these arrays.
+        // Thus the actual in-use length is defined by _bufferListInternal.Count, not the length of these
+        // arrays.
         private WSABuffer[]? _wsaBufferArrayPinned;
         private MemoryHandle[]? _multipleBufferMemoryHandles;
 
@@ -67,8 +84,10 @@ namespace System.Net.Sockets
 
         /// <summary>Registration with a cancellation token for an asynchronous operation.</summary>
         /// <remarks>
-        /// This should only be set in <see cref="ProcessIOCPResult"/> when <see cref="_asyncCompletionOwnership"/> is also being
-        /// set to non-0, and then cleaned up in <see cref="CompleteCore"/>.  If it's set and <see cref="_asyncCompletionOwnership"/>
+        /// This should only be set in <see cref="ProcessIOCPResult"/> when <see
+        // cref="_asyncCompletionOwnership"/> is also being
+        /// set to non-0, and then cleaned up in <see cref="CompleteCore"/>.  If it's set and <see
+        // cref="_asyncCompletionOwnership"/>
         /// remains 0, it may not get cleaned up correctly.
         /// </remarks>
         private CancellationTokenRegistration _registrationToCancelPendingIO;
@@ -148,26 +167,33 @@ namespace System.Net.Sockets
             _strongThisRef.Value = this;
         }
 
-        /// <summary>Gets the result of an IOCP operation and determines how it should be handled (synchronously or asynchronously).</summary>
-        /// <param name="success">true if the IOCP operation indicated synchronous success; otherwise, false.</param>
-        /// <param name="overlapped">The overlapped that was used for this operation. Will be freed if the operation result will be handled synchronously.</param>
-        /// <returns>The SocketError for the operation. This will be SocketError.IOPending if the operation will be handled asynchronously.</returns>
+        /// <summary>Gets the result of an IOCP operation and determines how it should be handled
+        // (synchronously or asynchronously).</summary>
+        /// <param name="success">true if the IOCP operation indicated synchronous success; otherwise,
+        // false.</param>
+        /// <param name="overlapped">The overlapped that was used for this operation. Will be freed if the
+        // operation result will be handled synchronously.</param>
+        /// <returns>The SocketError for the operation. This will be SocketError.IOPending if the operation
+        // will be handled asynchronously.</returns>
         private unsafe SocketError GetIOCPResult(bool success, ref NativeOverlapped* overlapped)
         {
-            // Note: We need to dispose of the overlapped iff the operation result will be handled synchronously.
+            // Note: We need to dispose of the overlapped iff the operation result will be handled
+            // synchronously.
 
             if (success)
             {
                 // Synchronous success.
                 if (_currentSocket!.SafeHandle.SkipCompletionPortOnSuccess)
                 {
-                    // The socket handle is configured to skip completion on success, so we can handle the result synchronously.
+                    // The socket handle is configured to skip completion on success, so we can handle the result
+                    // synchronously.
                     FreeNativeOverlapped(ref overlapped);
                     return SocketError.Success;
                 }
 
                 // Completed synchronously, but the handle wasn't marked as skip completion port on success,
-                // so we still need to behave as if the IO was pending and wait for the completion to come through on the IOCP.
+                // so we still need to behave as if the IO was pending and wait for the completion to come through
+                // on the IOCP.
                 return SocketError.IOPending;
             }
             else
@@ -188,12 +214,17 @@ namespace System.Net.Sockets
             }
         }
 
-        /// <summary>Handles the result of an IOCP operation for which we have deferred async processing logic (buffer pinning or cancellation).</summary>
-        /// <param name="success">true if the IOCP operation indicated synchronous success; otherwise, false.</param>
-        /// <param name="bytesTransferred">The number of bytes transferred, if the operation completed synchronously and successfully.</param>
-        /// <param name="overlapped">The overlapped that was used for this operation. Will be freed if the operation result will be handled synchronously.</param>
+        /// <summary>Handles the result of an IOCP operation for which we have deferred async processing
+        // logic (buffer pinning or cancellation).</summary>
+        /// <param name="success">true if the IOCP operation indicated synchronous success; otherwise,
+        // false.</param>
+        /// <param name="bytesTransferred">The number of bytes transferred, if the operation completed
+        // synchronously and successfully.</param>
+        /// <param name="overlapped">The overlapped that was used for this operation. Will be freed if the
+        // operation result will be handled synchronously.</param>
         /// <param name="bufferToPin">The buffer to pin. May be Memory.Empty if no buffer should be pinned.
-        ///     Note this buffer (if not empty) should already be pinned locally using `fixed` prior to the OS async call and until after this method returns.</param>
+        ///     Note this buffer (if not empty) should already be pinned locally using `fixed` prior to the
+        // OS async call and until after this method returns.</param>
         /// <param name="cancellationToken">The cancellation token to use to cancel the operation.</param>
         /// <returns>The result status of the operation.</returns>
         private unsafe SocketError ProcessIOCPResult(
@@ -209,7 +240,8 @@ namespace System.Net.Sockets
 
             if (socketError == SocketError.IOPending)
             {
-                // Perform any required setup of the asynchronous operation.  Everything set up here needs to be undone in CompleteCore.CleanupIOCPResult.
+                // Perform any required setup of the asynchronous operation.  Everything set up here needs to be
+                // undone in CompleteCore.CleanupIOCPResult.
                 if (cancellationToken.CanBeCanceled)
                 {
                     Debug.Assert(_pendingOverlappedForCancellation == null);
@@ -264,9 +296,12 @@ namespace System.Net.Sockets
                     return SocketError.IOPending;
                 }
 
-                // The callback was already invoked and transferred ownership to us, so now behave as if the operation completed synchronously.
-                // Since the success/bytesTransferred arguments passed into this method are stale, we need to retrieve the actual status info
-                // from the overlapped directly.  It's also now our responsibility to clean up as GetIOCPResult would have, so free the overlapped.
+                // The callback was already invoked and transferred ownership to us, so now behave as if the
+                // operation completed synchronously.
+                // Since the success/bytesTransferred arguments passed into this method are stale, we need to
+                // retrieve the actual status info
+                // from the overlapped directly.  It's also now our responsibility to clean up as GetIOCPResult
+                // would have, so free the overlapped.
                 Debug.Assert(
                     (packedResult & 0x8000000000000000) != 0,
                     "Top bit should have been set"
@@ -285,7 +320,8 @@ namespace System.Net.Sockets
                 FreeNativeOverlapped(ref overlapped);
             }
 
-            // The operation completed, either synchronously and the callback won't be invoked, or asynchronously
+            // The operation completed, either synchronously and the callback won't be invoked, or
+            // asynchronously
             // but so fast the callback has already executed and left clean up to us.
             FinishOperationSync(socketError, bytesTransferred, socketFlags);
             return socketError;
@@ -525,7 +561,8 @@ namespace System.Net.Sockets
             // WSARecvFrom uses a WSABuffer array describing buffers in which to
             // receive data and from which to send data respectively. Single and multiple buffers
             // are handled differently so as to optimize performance for the more common single buffer case.
-            // WSARecvFrom also uses a sockaddr buffer in which to store the address from which the data was received.
+            // WSARecvFrom also uses a sockaddr buffer in which to store the address from which the data was
+            // received.
             // The sockaddr is allocated from NativeMemory and reused multiple time when possible.
             AllocateSocketAddressBuffer();
 
@@ -716,7 +753,8 @@ namespace System.Net.Sockets
             }
 
             // Fill in WSAMessageBuffer, run WSARecvMsg and process the IOCP result.
-            // Logic is in a separate method so we can share code between the (pinned) single buffer and the multi-buffer case
+            // Logic is in a separate method so we can share code between the (pinned) single buffer and the
+            // multi-buffer case
             SocketError Core()
             {
                 // Fill in WSAMessageBuffer.
@@ -1299,8 +1337,10 @@ namespace System.Net.Sockets
                     }
                     else if (spe.FileStream != null)
                     {
-                        // This element is a file stream. SendPacketsElement throws if the FileStream is not opened asynchronously;
-                        // Synchronously opened FileStream can't be used concurrently (e.g. multiple SendPacketsElements with the same
+                        // This element is a file stream. SendPacketsElement throws if the FileStream is not opened
+                        // asynchronously;
+                        // Synchronously opened FileStream can't be used concurrently (e.g. multiple SendPacketsElements
+                        // with the same
                         // FileStream).
                         sendPacketsDescriptorPinned[descriptorIndex].fileHandle =
                             spe.FileStream.SafeFileHandle.DangerousGetHandle();
@@ -1465,12 +1505,15 @@ namespace System.Net.Sockets
 
             if (_asyncCompletionOwnership != 0)
             {
-                // If the state isn't 0, then the operation didn't complete synchronously, in which case there's state to cleanup.
+                // If the state isn't 0, then the operation didn't complete synchronously, in which case there's
+                // state to cleanup.
                 CleanupIOCPResult();
             }
 
-            // Separate out to help inline the CompleteCore fast path, as CompleteCore is used with all operations.
-            // We want to optimize for the case where the async operation actually completes synchronously, without
+            // Separate out to help inline the CompleteCore fast path, as CompleteCore is used with all
+            // operations.
+            // We want to optimize for the case where the async operation actually completes synchronously,
+            // without
             // having registered any state yet, in particular for sends and receives.
             void CleanupIOCPResult()
             {
@@ -1549,9 +1592,12 @@ namespace System.Net.Sockets
             Debug.Assert(saeaBox.Value != null);
             SocketAsyncEventArgs saea = saeaBox.Value;
 
-            // We need to coordinate with the launching thread, just in case it hasn't yet finished setting up the operation.
-            // We typically expect the launching thread to have already completed setup, in which case _asyncCompletionOwnership
-            // will be 1, so we do a fast non-synchronized check to see if it's still 0, and only if it is do we proceed to
+            // We need to coordinate with the launching thread, just in case it hasn't yet finished setting up
+            // the operation.
+            // We typically expect the launching thread to have already completed setup, in which case
+            // _asyncCompletionOwnership
+            // will be 1, so we do a fast non-synchronized check to see if it's still 0, and only if it is do we
+            // proceed to
             // pack the results for use with an interlocked coordination with that thread.
             if (saea._asyncCompletionOwnership == 0)
             {
@@ -1568,7 +1614,8 @@ namespace System.Net.Sockets
 
                 if (Interlocked.Exchange(ref saea._asyncCompletionOwnership, packedResult) == 0)
                 {
-                    // The operation completed asynchronously so quickly that the thread launching the operation still hasn't finished setting
+                    // The operation completed asynchronously so quickly that the thread launching the operation still
+                    // hasn't finished setting
                     // up the state for the operation.  Leave all cleanup and completion logic to that thread.
                     return;
                 }
@@ -1625,7 +1672,8 @@ namespace System.Net.Sockets
                     }
                     catch
                     {
-                        // _currentSocket may have been disposed after the Disposed check above, in which case the P/Invoke may throw.
+                        // _currentSocket may have been disposed after the Disposed check above, in which case the P/Invoke
+                        // may throw.
                         socketError = SocketError.OperationAborted;
                     }
                 }

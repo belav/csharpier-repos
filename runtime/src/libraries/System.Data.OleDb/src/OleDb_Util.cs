@@ -334,7 +334,8 @@ namespace System.Data.OleDb
             Exception? inner
         )
         {
-            //return new OleDbException(SR.Format(SR.OleDb_ProviderUnavailable, provider), (int)OleDbHResult.CO_E_CLASSSTRING, inner);
+            //return new OleDbException(SR.Format(SR.OleDb_ProviderUnavailable, provider),
+            // (int)OleDbHResult.CO_E_CLASSSTRING, inner);
             return ADP.DataAdapter(SR.Format(SR.OleDb_ProviderUnavailable, provider), inner);
         }
 
@@ -712,7 +713,8 @@ namespace System.Data.OleDb
         internal const int DBPROPVAL_SQL_ESCAPECLAUSES = 0x00000100;
 
         // OLE DB providers never return pGuid-style bindings.
-        // They are provided as a convenient shortcut for consumers supplying bindings all covered by the same GUID (for example, when creating bindings to access data).
+        // They are provided as a convenient shortcut for consumers supplying bindings all covered by the
+        // same GUID (for example, when creating bindings to access data).
         internal const int DBKIND_GUID_NAME = 0;
         internal const int DBKIND_GUID_PROPID = 1;
         internal const int DBKIND_NAME = 2;
@@ -1071,7 +1073,8 @@ namespace System.Data.OleDb
             "CLSID\\{2206CDB2-19C1-11D1-89E0-00C04FD7A829}\\InprocServer32";
         internal const string OLEDB_SERVICES = "OLEDB_SERVICES";
 
-        // used by OleDbConnection to eliminate post-open detection of 'Microsoft OLE DB Provider for ODBC Drivers'
+        // used by OleDbConnection to eliminate post-open detection of 'Microsoft OLE DB Provider for ODBC
+        // Drivers'
         internal const string DefaultDescription_MSDASQL =
             "microsoft ole db provider for odbc drivers";
         internal const string MSDASQL = "msdasql";

@@ -7,7 +7,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order1.or
 {
     // <Area>variance</Area>
     // <Title> Order of Basic covariance on interfaces</Title>
-    // <Description> basic coavariance on interfaces with many parameters. Order does not matter</Description>
+    // <Description> basic coavariance on interfaces with many parameters. Order does not
+    // matter</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
@@ -146,7 +147,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order3.or
 {
     // <Area>variance</Area>
     // <Title> Order of Basic covariance on delegates</Title>
-    // <Description> basic coavariance on delegates with many parameters. Order does not matter</Description>
+    // <Description> basic coavariance on delegates with many parameters. Order does not
+    // matter</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
@@ -200,7 +202,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.order4.or
 {
     // <Area>variance</Area>
     // <Title> Order of Basic covariance on delegates</Title>
-    // <Description> basic coavariance on delegates with many parameters. only one type param is variant</Description>
+    // <Description> basic coavariance on delegates with many parameters. only one type param is
+    // variant</Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>
@@ -304,7 +307,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.Variance.decl.partial01
 {
     // <Area>variance</Area>
     // <Title> Basic covariance on delegate types </Title>
-    // <Description> Having a covariant delegate and assigning it to a bigger type in a partial public class </Description>
+    // <Description> Having a covariant delegate and assigning it to a bigger type in a partial public
+    // class </Description>
     // <RelatedBugs></RelatedBugs>
     // <Expects status=success> </Expects>
     // <Code>

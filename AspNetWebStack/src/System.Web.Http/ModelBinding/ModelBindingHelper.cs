@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections;
 using System.Collections.Concurrent;
@@ -52,7 +53,8 @@ namespace System.Web.Http.ModelBinding
             }
         }
 
-        // Concatenate model keys, if suffix is an indexer, concat strings; otherwise insert a period between the two
+        // Concatenate model keys, if suffix is an indexer, concat strings; otherwise insert a period
+        // between the two
         internal static string ConcatenateKeys(string prefix, string suffix)
         {
             Contract.Assert(!String.IsNullOrEmpty(prefix));

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -470,7 +471,8 @@ namespace System.Web.Http.ModelBinding
                         RequestUri = new Uri(
                             "http://localhost?custid=5&first=renamedFirstName&last=renamedLastName"
                         ),
-                        // notice the query string names match the prefixes in GetFromNamed() and not the actual parameter names
+                        // notice the query string names match the prefixes in GetFromNamed() and not the actual parameter
+                        // names
                     }
                 ),
                 new ReflectedHttpActionDescriptor()

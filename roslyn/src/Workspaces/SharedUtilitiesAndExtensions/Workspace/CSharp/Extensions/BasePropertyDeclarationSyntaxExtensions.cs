@@ -10,7 +10,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
     internal static class BasePropertyDeclarationSyntaxExtensions
     {
         /// <summary>
-        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see cref="IndexerDeclarationSyntax"/>.
+        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see
+        // cref="IndexerDeclarationSyntax"/>.
         /// </summary>
         public static SyntaxToken TryGetSemicolonToken(this BasePropertyDeclarationSyntax? node)
         {
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         /// <summary>
-        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see cref="IndexerDeclarationSyntax"/>.
+        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see
+        // cref="IndexerDeclarationSyntax"/>.
         /// </summary>
         [return: NotNullIfNotNull(nameof(node))]
         public static BasePropertyDeclarationSyntax? TryWithSemicolonToken(
@@ -52,7 +54,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         }
 
         /// <summary>
-        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see cref="IndexerDeclarationSyntax"/>.
+        /// Available if <paramref name="node"/> is <see cref="PropertyDeclarationSyntax"/> or <see
+        // cref="IndexerDeclarationSyntax"/>.
         /// </summary>
         [return: NotNullIfNotNull(nameof(node))]
         public static BasePropertyDeclarationSyntax? TryWithExpressionBody(

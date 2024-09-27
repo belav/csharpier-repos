@@ -10,14 +10,17 @@ namespace Microsoft.Extensions.Internal
     internal static class ChangeCallbackRegistrar
     {
         /// <summary>
-        /// Registers for a callback that will be invoked when the entry has changed. <see cref="Primitives.IChangeToken.HasChanged"/>
+        /// Registers for a callback that will be invoked when the entry has changed. <see
+        // cref="Primitives.IChangeToken.HasChanged"/>
         /// MUST be set before the callback is invoked.
         /// </summary>
         /// <param name="callback">The callback to invoke.</param>
         /// <param name="state">State to be passed into the callback.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to invoke the callback with.</param>
-        /// <param name="onFailure">The action to execute when an <see cref="ObjectDisposedException"/> is thrown. Should be used to set the IChangeToken's ActiveChangeCallbacks property to false.</param>
-        /// <param name="onFailureState">The state to be passed into the <paramref name="onFailure"/> action.</param>
+        /// <param name="onFailure">The action to execute when an <see cref="ObjectDisposedException"/> is
+        // thrown. Should be used to set the IChangeToken's ActiveChangeCallbacks property to false.</param>
+        /// <param name="onFailureState">The state to be passed into the <paramref name="onFailure"/>
+        // action.</param>
         /// <returns>The <see cref="CancellationToken"/> registration.</returns>
         internal static IDisposable UnsafeRegisterChangeCallback<T>(
             Action<object?> callback,
@@ -37,7 +40,8 @@ namespace Microsoft.Extensions.Internal
                 onFailure(onFailureState);
             }
 #else
-            // Don't capture the current ExecutionContext and its AsyncLocals onto the token registration causing them to live forever
+            // Don't capture the current ExecutionContext and its AsyncLocals onto the token registration
+            // causing them to live forever
             bool restoreFlow = false;
             if (!ExecutionContext.IsFlowSuppressed())
             {

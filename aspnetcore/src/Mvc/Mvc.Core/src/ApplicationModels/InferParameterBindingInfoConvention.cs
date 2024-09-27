@@ -11,15 +11,21 @@ using Resources = Microsoft.AspNetCore.Mvc.Core.Resources;
 namespace Microsoft.AspNetCore.Mvc.ApplicationModels;
 
 /// <summary>
-/// An <see cref="IActionModelConvention"/> that infers <see cref="BindingInfo.BindingSource"/> for parameters.
+/// An <see cref="IActionModelConvention"/> that infers <see cref="BindingInfo.BindingSource"/> for
+// parameters.
 /// </summary>
 /// <remarks>
-/// The goal of this convention is to make intuitive and easy to document <see cref="BindingSource"/> inferences. The rules are:
+/// The goal of this convention is to make intuitive and easy to document <see
+// cref="BindingSource"/> inferences. The rules are:
 /// <list type="number">
-/// <item>A previously specified <see cref="BindingInfo.BindingSource" /> is never overwritten.</item>
-/// <item>A complex type parameter (<see cref="ModelMetadata.IsComplexType"/>), registered in the DI container, is assigned <see cref="BindingSource.Services"/>.</item>
-/// <item>A complex type parameter (<see cref="ModelMetadata.IsComplexType"/>), not registered in the DI container, is assigned <see cref="BindingSource.Body"/>.</item>
-/// <item>Parameter with a name that appears as a route value in ANY route template is assigned <see cref="BindingSource.Path"/>.</item>
+/// <item>A previously specified <see cref="BindingInfo.BindingSource" /> is never
+// overwritten.</item>
+/// <item>A complex type parameter (<see cref="ModelMetadata.IsComplexType"/>), registered in the DI
+// container, is assigned <see cref="BindingSource.Services"/>.</item>
+/// <item>A complex type parameter (<see cref="ModelMetadata.IsComplexType"/>), not registered in
+// the DI container, is assigned <see cref="BindingSource.Body"/>.</item>
+/// <item>Parameter with a name that appears as a route value in ANY route template is assigned <see
+// cref="BindingSource.Path"/>.</item>
 /// <item>All other parameters are <see cref="BindingSource.Query"/>.</item>
 /// </list>
 /// </remarks>
@@ -42,7 +48,8 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     /// Initializes a new instance of <see cref="InferParameterBindingInfoConvention"/>.
     /// </summary>
     /// <param name="modelMetadataProvider">The model metadata provider.</param>
-    /// <param name="serviceProviderIsService">The service to determine if the a type is available from the <see cref="IServiceProvider"/>.</param>
+    /// <param name="serviceProviderIsService">The service to determine if the a type is available from
+    // the <see cref="IServiceProvider"/>.</param>
     public InferParameterBindingInfoConvention(
         IModelMetadataProvider modelMetadataProvider,
         IServiceProviderIsService serviceProviderIsService

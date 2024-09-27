@@ -17,7 +17,8 @@ namespace System.DirectoryServices.AccountManagement
         Changed,
     }
 
-    // These are the default options used when a user does not specify a context option to connect to the store.
+    // These are the default options used when a user does not specify a context option to connect to
+    // the store.
     internal static class DefaultContextOptions
     {
         internal static ContextOptions MachineDefaultContextOption = ContextOptions.Negotiate;
@@ -110,15 +111,19 @@ namespace System.DirectoryServices.AccountManagement
         internal const string PwdInfoAllowReversiblePasswordEncryption =
             "AuthenticablePrincipal.PasswordInfo.AllowReversiblePasswordEncryption";
 
-        // these two are not publicly exposed properties, but are used internally to track ResetPassword/ExpirePasswordNow
-        // operations against unpersisted principals, so that they can be performed once the principal has been Saved
-        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression approved. Not a password.")]
+        // these two are not publicly exposed properties, but are used internally to track
+        // ResetPassword/ExpirePasswordNow
+        // operations against unpersisted principals, so that they can be performed once the principal has
+        // been Saved
+        // [SuppressMessage("Microsoft.Security", "CS002:SecretInNextLine", Justification="Suppression
+        // approved. Not a password.")]
         internal const string PwdInfoPassword = "AuthenticablePrincipal.PasswordInfo.Password";
         internal const string PwdInfoExpireImmediately =
             "AuthenticablePrincipal.PasswordInfo.ExpireImmediately";
     }
 
-    // Given an internal property name (from PropertyNames), returns the external form of the name for use in error-reporting
+    // Given an internal property name (from PropertyNames), returns the external form of the name for
+    // use in error-reporting
     internal static class PropertyNamesExternal
     {
         private static readonly int s_acctInfoPrefixLength = PropertyNames.AcctInfoPrefix.Length;

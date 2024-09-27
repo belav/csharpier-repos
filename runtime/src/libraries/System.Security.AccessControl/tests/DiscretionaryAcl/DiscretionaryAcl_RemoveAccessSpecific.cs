@@ -337,7 +337,8 @@ namespace System.Security.AccessControl.Tests
             inheritanceFlags = 3;
             propagationFlags = 3;
             rawAcl = new RawAcl(0, 1);
-            //15 = AceFlags.ObjectInherit |AceFlags.ContainerInherit | AceFlags.NoPropagateInherit | AceFlags.InheritOnly
+            //15 = AceFlags.ObjectInherit |AceFlags.ContainerInherit | AceFlags.NoPropagateInherit |
+            // AceFlags.InheritOnly
             gAce = new CommonAce(
                 (AceFlags)15,
                 AceQualifier.AccessAllowed,
@@ -446,7 +447,8 @@ namespace System.Security.AccessControl.Tests
                 );
             });
 
-            //Case 7, Remove Specific Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
+            //Case 7, Remove Specific Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the
+            // DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
 
             Assert.Throws<ArgumentOutOfRangeException>(() =>

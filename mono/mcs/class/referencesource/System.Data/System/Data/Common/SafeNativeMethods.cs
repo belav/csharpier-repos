@@ -69,6 +69,7 @@ namespace System.Data.Common
             return actualPtr;
         }
 
+        //
         // http://msdn.microsoft.com/library/default.asp?url=/library/en-us/sysinfo/base/getcomputernameex.asp
         [DllImport(
             ExternDll.Kernel32,
@@ -135,7 +136,8 @@ namespace System.Data.Common
 
         // only using this to clear existing error info with null
         [DllImport(ExternDll.Oleaut32, CharSet = CharSet.Unicode, PreserveSig = false)]
-        // TLS values are preserved between threads, need to check that we use this API to clear the error state only.
+        // TLS values are preserved between threads, need to check that we use this API to clear the error
+        // state only.
         [ResourceExposure(ResourceScope.Process)]
         private static extern void SetErrorInfo(Int32 dwReserved, IntPtr pIErrorInfo);
 

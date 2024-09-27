@@ -16,11 +16,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.MetadataReferences
     public class FusionAssemblyIdentityTests
     {
         /// <summary>
-        /// Converts <see cref="FusionAssemblyIdentity.IAssemblyName"/> to <see cref="AssemblyName"/> with possibly
+        /// Converts <see cref="FusionAssemblyIdentity.IAssemblyName"/> to <see cref="AssemblyName"/> with
+        // possibly
         /// missing name components.
         /// </summary>
         /// <returns>
-        /// An <see cref="AssemblyName"/> whose fields are be null if not present in <paramref name="nameObject"/>.
+        /// An <see cref="AssemblyName"/> whose fields are be null if not present in <paramref
+        // name="nameObject"/>.
         /// </returns>
         internal static AssemblyName ToAssemblyName(FusionAssemblyIdentity.IAssemblyName nameObject)
         {

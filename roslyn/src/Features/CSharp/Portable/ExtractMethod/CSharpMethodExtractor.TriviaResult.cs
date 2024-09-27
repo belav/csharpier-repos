@@ -116,13 +116,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SyntaxNode method
             )
             {
-                // Resolve trivia at the edge of the selection. simple case is easy to deal with, but complex cases where
-                // elastic trivia and user trivia are mixed (hybrid case) and we want to preserve some part of user coding style
+                // Resolve trivia at the edge of the selection. simple case is easy to deal with, but complex cases
+                // where
+                // elastic trivia and user trivia are mixed (hybrid case) and we want to preserve some part of user
+                // coding style
                 // but not others can be dealt with here.
 
                 var (body, expressionBody, semicolonToken) = GetResolverElements(method);
 
-                // method has no statement in them. so basically two trivia list now pointing to same thing. "{" and "}"
+                // method has no statement in them. so basically two trivia list now pointing to same thing. "{" and
+                // "}"
                 if (body != null)
                 {
                     if (

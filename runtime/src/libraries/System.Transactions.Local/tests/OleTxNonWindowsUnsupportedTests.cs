@@ -49,7 +49,8 @@ public class OleTxNonWindowsUnsupportedTests
         tx.EnlistPromotableSinglePhase(promotableEnlistment2);
         Assert.False(promotableEnlistment2.InitializedCalled);
 
-        // Now enlist a durable enlistment, this will cause the escalation to a distributed transaction and fail on non-Windows.
+        // Now enlist a durable enlistment, this will cause the escalation to a distributed transaction and
+        // fail on non-Windows.
         var durableEnlistment = new TestEnlistment(Phase1Vote.Prepared, EnlistmentOutcome.Aborted);
         Assert.Throws<PlatformNotSupportedException>(
             () => tx.EnlistDurable(Guid.NewGuid(), durableEnlistment, EnlistmentOptions.None)

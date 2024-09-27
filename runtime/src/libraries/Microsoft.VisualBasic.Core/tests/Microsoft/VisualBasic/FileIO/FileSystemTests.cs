@@ -593,7 +593,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         }
 
         // Not tested:
-        //   public System.Collections.ObjectModel.ReadOnlyCollection<System.IO.DriveInfo> Drives { get { throw null; } }
+        //   public System.Collections.ObjectModel.ReadOnlyCollection<System.IO.DriveInfo> Drives { get {
+        // throw null; } }
 
         [Fact]
         public void FileExists_File()
@@ -606,8 +607,11 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         }
 
         // Not tested:
-        //   public System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(string directory, string containsText, bool ignoreCase, FileIO.SearchOption searchType) { throw null; }
-        //   public System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(string directory, string containsText, bool ignoreCase, FileIO.SearchOption searchType, params string[] fileWildcards) { throw null; }
+        //   public System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(string directory,
+        // string containsText, bool ignoreCase, FileIO.SearchOption searchType) { throw null; }
+        //   public System.Collections.ObjectModel.ReadOnlyCollection<string> FindInFiles(string directory,
+        // string containsText, bool ignoreCase, FileIO.SearchOption searchType, params string[] fileWildcards)
+        // { throw null; }
 
         [Fact]
         public void GetDirectories_Directory()
@@ -1276,13 +1280,18 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         }
 
         // Not tested:
-        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file) { throw null; }
-        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file, params int[] fieldWidths) { throw null; }
-        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file, params string[] delimiters) { throw null; }
+        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file) { throw
+        // null; }
+        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file, params
+        // int[] fieldWidths) { throw null; }
+        //   public Microsoft.VisualBasic.FileIO.TextFieldParser OpenTextFieldParser(string file, params
+        // string[] delimiters) { throw null; }
         //   public System.IO.StreamReader OpenTextFileReader(string file) { throw null; }
-        //   public System.IO.StreamReader OpenTextFileReader(string file, System.Text.Encoding encoding) { throw null; }
+        //   public System.IO.StreamReader OpenTextFileReader(string file, System.Text.Encoding encoding) {
+        // throw null; }
         //   public System.IO.StreamWriter OpenTextFileWriter(string file, bool append) { throw null; }
-        //   public System.IO.StreamWriter OpenTextFileWriter(string file, bool append, System.Text.Encoding encoding) { throw null; }
+        //   public System.IO.StreamWriter OpenTextFileWriter(string file, bool append, System.Text.Encoding
+        // encoding) { throw null; }
         //   public byte[] ReadAllBytes(string file) { throw null; }
         //   public string ReadAllText(string file) { throw null; }
         //   public string ReadAllText(string file, System.Text.Encoding encoding) { throw null; }
@@ -1290,7 +1299,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [Fact]
         public void RenameDirectory_Directory_NewName()
         {
-            // <exception cref="IO.FileNotFoundException">If directory does not point to an existing directory.</exception>
+            // <exception cref="IO.FileNotFoundException">If directory does not point to an existing
+            // directory.</exception>
             Assert.Throws<System.IO.DirectoryNotFoundException>(
                 () =>
                     FileIO.FileSystem.RenameDirectory(
@@ -1314,7 +1324,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             var NewFDirectoryPath = System.IO.Path.Combine(TestDirectory, "NewFDirectory");
             Assert.True(System.IO.Directory.Exists(NewFDirectoryPath));
             Assert.False(System.IO.Directory.Exists(OrigDirectoryWithPath));
-            // <exception cref="IO.IOException">If directory points to a root directory or if there's an existing directory or an existing file with the same name.</exception>
+            // <exception cref="IO.IOException">If directory points to a root directory or if there's an
+            // existing directory or an existing file with the same name.</exception>
             System.IO.Directory.CreateDirectory(OrigDirectoryWithPath);
             Assert.Throws<System.IO.IOException>(
                 () => FileIO.FileSystem.RenameDirectory(NewFDirectoryPath, "OriginalDirectory")
@@ -1324,7 +1335,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         [Fact]
         public void RenameFile_File_NewName()
         {
-            // <exception cref="IO.FileNotFoundException">If file does not point to an existing file.</exception>
+            // <exception cref="IO.FileNotFoundException">If file does not point to an existing
+            // file.</exception>
             Assert.Throws<System.IO.FileNotFoundException>(
                 () =>
                     FileIO.FileSystem.RenameFile(
@@ -1346,7 +1358,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
             var NewFileWithPath = System.IO.Path.Combine(TestDirectory, "NewFile");
             Assert.True(System.IO.File.Exists(NewFileWithPath));
             Assert.False(System.IO.File.Exists(OrigFileWithPath));
-            // <exception cref="IO.IOException">If there's an existing directory or an existing file with the same name.</exception>
+            // <exception cref="IO.IOException">If there's an existing directory or an existing file with the
+            // same name.</exception>
             Assert.Throws<System.IO.IOException>(
                 () => FileIO.FileSystem.RenameFile(NewFileWithPath, "NewFile")
             );
@@ -1361,7 +1374,8 @@ namespace Microsoft.VisualBasic.FileIO.Tests
         // Not tested:
         //   public void WriteAllBytes(string file, byte[] data, bool append) { }
         //   public void WriteAllText(string file, string text, bool append) { }
-        //   public void WriteAllText(string file, string text, bool append, System.Text.Encoding encoding) { }
+        //   public void WriteAllText(string file, string text, bool append, System.Text.Encoding encoding)
+        // { }
 
         private string CreateTestFile(
             string TestData,

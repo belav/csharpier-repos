@@ -10,19 +10,22 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///         An expression that represents a function call in a SQL tree.
 ///     </para>
 ///     <para>
-///         This type is typically used by database providers (and other extensions). It is generally
+///         This type is typically used by database providers (and other extensions). It is
+// generally
 ///         not used in application code.
 ///     </para>
 /// </summary>
 public class SqlFunctionExpression : SqlExpression
 {
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a built-in niladic function.
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // built-in niladic function.
     /// </summary>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         string functionName,
         bool nullable,
@@ -41,13 +44,15 @@ public class SqlFunctionExpression : SqlExpression
         ) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function.
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // niladic function.
     /// </summary>
     /// <param name="schema">The schema in which the function is defined.</param>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         string schema,
         string functionName,
@@ -67,15 +72,18 @@ public class SqlFunctionExpression : SqlExpression
         ) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a niladic function which is invoked on an
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // niladic function which is invoked on an
     ///     instance.
     /// </summary>
     /// <param name="instance">An expression on which the function is defined.</param>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
-    /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to result.</param>
+    /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to
+    // result.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         SqlExpression instance,
         string functionName,
@@ -120,14 +128,17 @@ public class SqlFunctionExpression : SqlExpression
         ) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a built-in function.
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // built-in function.
     /// </summary>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="arguments">The arguments of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
-    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual
+    // arguments propagate null to result.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         string functionName,
         IEnumerable<SqlExpression> arguments,
@@ -150,15 +161,18 @@ public class SqlFunctionExpression : SqlExpression
         ) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function.
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // function.
     /// </summary>
     /// <param name="schema">The schema in which the function is defined.</param>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="arguments">The arguments of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
-    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual
+    // arguments propagate null to result.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         string? schema,
         string functionName,
@@ -182,16 +196,20 @@ public class SqlFunctionExpression : SqlExpression
         ) { }
 
     /// <summary>
-    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a function which is invoked on an instance.
+    ///     Creates a new instance of the <see cref="SqlFunctionExpression" /> class which represents a
+    // function which is invoked on an instance.
     /// </summary>
     /// <param name="instance">An expression on which the function is applied.</param>
     /// <param name="functionName">The name of the function.</param>
     /// <param name="arguments">The arguments of the function.</param>
     /// <param name="nullable">A bool value indicating whether this function can return null.</param>
-    /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to result.</param>
-    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual arguments propagate null to result.</param>
+    /// <param name="instancePropagatesNullability">A value indicating if instance propagates null to
+    // result.</param>
+    /// <param name="argumentsPropagateNullability">A list of bool values indicating whether individual
+    // arguments propagate null to result.</param>
     /// <param name="type">The <see cref="Type" /> of the expression.</param>
-    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
+    /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the
+    // expression.</param>
     public SqlFunctionExpression(
         SqlExpression instance,
         string functionName,
@@ -369,12 +387,14 @@ public class SqlFunctionExpression : SqlExpression
         );
 
     /// <summary>
-    ///     Creates a new expression that is like this one, but using the supplied children. If all of the children are the same, it will
+    ///     Creates a new expression that is like this one, but using the supplied children. If all of
+    // the children are the same, it will
     ///     return this expression.
     /// </summary>
     /// <param name="instance">The <see cref="Instance" /> property of the result.</param>
     /// <param name="arguments">The <see cref="Arguments" /> property of the result.</param>
-    /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
+    /// <returns>This expression if no children changed, or an expression with the updated
+    // children.</returns>
     public virtual SqlFunctionExpression Update(
         SqlExpression? instance,
         IReadOnlyList<SqlExpression>? arguments

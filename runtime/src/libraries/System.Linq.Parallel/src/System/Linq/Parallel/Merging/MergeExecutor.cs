@@ -93,7 +93,8 @@ namespace System.Linq.Parallel
                     }
                     else
                     {
-                        // When DOP=1, the default merge simply returns the single producer enumerator to the consumer. This way, ordering
+                        // When DOP=1, the default merge simply returns the single producer enumerator to the consumer. This
+                        // way, ordering
                         // does not add any extra overhead, and no producer task needs to be scheduled.
                         mergeExecutor._mergeHelper = new DefaultMergeHelper<TInputOutput, TKey>(
                             partitions,

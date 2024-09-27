@@ -152,7 +152,8 @@ namespace System.ServiceModel.Channels
 
         const int addrByteCount = 16;
 
-        // if the addr is v4-mapped-v6, 10th and 11th byte contain 0xFF. the last 4 bytes contain the ipv4 address
+        // if the addr is v4-mapped-v6, 10th and 11th byte contain 0xFF. the last 4 bytes contain the ipv4
+        // address
         const int v4MapIndex = 10;
         const int v4Index = v4MapIndex + 2;
 

@@ -10,7 +10,8 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Microsoft.CodeAnalysis.CSharp.ConvertTypeOfToNameOf
 {
     /// <summary>
-    /// Finds code like typeof(someType).Name and determines whether it can be changed to nameof(someType), if yes then it offers a diagnostic
+    /// Finds code like typeof(someType).Name and determines whether it can be changed to
+    // nameof(someType), if yes then it offers a diagnostic
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal sealed class CSharpConvertTypeOfToNameOfDiagnosticAnalyzer

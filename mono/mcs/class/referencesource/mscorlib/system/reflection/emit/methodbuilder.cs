@@ -199,7 +199,8 @@ namespace System.Reflection.Emit
             {
                 if ((type.Attributes & TypeAttributes.Interface) == TypeAttributes.Interface)
                 {
-                    // methods on interface have to be abstract + virtual except special name methods such as type initializer
+                    // methods on interface have to be abstract + virtual except special name methods such as type
+                    // initializer
                     if (
                         (attributes & (MethodAttributes.Abstract | MethodAttributes.Virtual))
                             != (MethodAttributes.Abstract | MethodAttributes.Virtual)
@@ -230,7 +231,8 @@ namespace System.Reflection.Emit
 
             //            m_signature = SignatureHelper.GetMethodSigHelper(mod, callingConvention,
             //                returnType, returnTypeRequiredCustomModifiers, returnTypeOptionalCustomModifiers,
-            //                parameterTypes, parameterTypeRequiredCustomModifiers, parameterTypeOptionalCustomModifiers);
+            //                parameterTypes, parameterTypeRequiredCustomModifiers,
+            // parameterTypeOptionalCustomModifiers);
 
             m_iAttributes = attributes;
             m_bIsGlobalMethod = bIsGlobalMethod;
@@ -526,7 +528,8 @@ namespace System.Reflection.Emit
             }
             else
             {
-                // this is the case when client provide an array of IL byte stream rather than going through ILGenerator.
+                // this is the case when client provide an array of IL byte stream rather than going through
+                // ILGenerator.
                 return m_maxStack;
             }
         }
@@ -1202,7 +1205,8 @@ namespace System.Reflection.Emit
                 newHandlers = ToArray(exceptionHandlers);
                 CheckExceptionHandlerRanges(newHandlers, newIL.Length);
 
-                // Note: Fixup entries for type tokens stored in ExceptionHandlers are added by the method body emitter.
+                // Note: Fixup entries for type tokens stored in ExceptionHandlers are added by the method body
+                // emitter.
             }
 
             if (tokenFixups != null)
@@ -1212,7 +1216,8 @@ namespace System.Reflection.Emit
 
                 for (int i = 0; i < newTokenFixups.Length; i++)
                 {
-                    // Check that fixups are within the range of this method's IL, otherwise some random memory might get "fixed up".
+                    // Check that fixups are within the range of this method's IL, otherwise some random memory might
+                    // get "fixed up".
                     if (newTokenFixups[i] < 0 || newTokenFixups[i] > maxTokenOffset)
                     {
                         throw new ArgumentOutOfRangeException(
@@ -1255,7 +1260,8 @@ namespace System.Reflection.Emit
         )
         {
             // Basic checks that the handler ranges are within the method body (ranges are end-exclusive).
-            // Doesn't verify that the ranges are otherwise correct - it is very well possible to emit invalid IL.
+            // Doesn't verify that the ranges are otherwise correct - it is very well possible to emit invalid
+            // IL.
             for (int i = 0; i < exceptionHandlers.Length; i++)
             {
                 var handler = exceptionHandlers[i];
@@ -1272,7 +1278,8 @@ namespace System.Reflection.Emit
                 }
 
                 // Type token might be 0 if the ExceptionHandler was created via a default constructor.
-                // Other tokens migth also be invalid. We only check nil tokens as the implementation (SectEH_Emit in corhlpr.cpp) requires it,
+                // Other tokens migth also be invalid. We only check nil tokens as the implementation (SectEH_Emit
+                // in corhlpr.cpp) requires it,
                 // and we can't check for valid tokens until the module is baked.
                 if (
                     handler.Kind == ExceptionHandlingClauseOptions.Clause
@@ -1301,7 +1308,8 @@ namespace System.Reflection.Emit
             ThrowIfGeneric();
 
             // Note that when user calls this function, there are a few information that client is
-            // not able to supply: local signature, exception handlers, max stack size, a list of Token fixup, a list of RVA fixup
+            // not able to supply: local signature, exception handlers, max stack size, a list of Token fixup, a
+            // list of RVA fixup
 
             if (m_bIsBaked)
             {
@@ -1398,7 +1406,8 @@ namespace System.Reflection.Emit
 
         public bool InitLocals
         {
-            // Property is set to true if user wishes to have zero initialized stack frame for this method. Default to false.
+            // Property is set to true if user wishes to have zero initialized stack frame for this method.
+            // Default to false.
             get
             {
                 ThrowIfGeneric();
@@ -1743,11 +1752,15 @@ namespace System.Reflection.Emit
         /// </summary>
         /// <param name="tryOffset">The offset of the first instruction protected by this handler.</param>
         /// <param name="tryLength">The number of bytes protected by this handler.</param>
-        /// <param name="filterOffset">The filter code begins at the specified offset and ends at the first instruction of the handler block. Specify 0 if not applicable (this is not a filter handler).</param>
+        /// <param name="filterOffset">The filter code begins at the specified offset and ends at the first
+        // instruction of the handler block. Specify 0 if not applicable (this is not a filter
+        // handler).</param>
         /// <param name="handlerOffset">The offset of the first instruction of this handler.</param>
         /// <param name="handlerLength">The number of bytes of the handler.</param>
-        /// <param name="kind">The kind of handler, the handler might be a catch handler, filter handler, fault handler, or finally handler.</param>
-        /// <param name="exceptionTypeToken">The token of the exception type handled by this handler. Specify 0 if not applicable (this is finally handler).</param>
+        /// <param name="kind">The kind of handler, the handler might be a catch handler, filter handler,
+        // fault handler, or finally handler.</param>
+        /// <param name="exceptionTypeToken">The token of the exception type handled by this handler.
+        // Specify 0 if not applicable (this is finally handler).</param>
         /// <exception cref="ArgumentOutOfRangeException">
         /// Some of the instruction offset is negative,
         /// the end offset of specified range is less than its start offset,
@@ -1827,7 +1840,8 @@ namespace System.Reflection.Emit
                 );
             }
 
-            // Other tokens migth also be invalid. We only check nil tokens as the implementation (SectEH_Emit in corhlpr.cpp) requires it,
+            // Other tokens migth also be invalid. We only check nil tokens as the implementation (SectEH_Emit
+            // in corhlpr.cpp) requires it,
             // and we can't check for valid tokens until the module is baked.
             if (
                 kind == ExceptionHandlingClauseOptions.Clause

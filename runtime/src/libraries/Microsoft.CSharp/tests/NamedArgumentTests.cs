@@ -75,7 +75,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
                 .Message;
 
-            // All but the (string, int) method should have been excluded from consideration, leaving the binder to
+            // All but the (string, int) method should have been excluded from consideration, leaving the binder
+            // to
             // complain about it not matching types.
             Assert.Contains(
                 "'Microsoft.CSharp.RuntimeBinder.Tests.NamedArgumentTests.TypeWithMethods.DoStuff(string, int)'",
@@ -307,7 +308,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void OverrideChangesName()
         {
-            // Static compilation behavior is to use the name of the type of the variable the object is accessed through.
+            // Static compilation behavior is to use the name of the type of the variable the object is accessed
+            // through.
             // Dynamic behavior matches that when the argument is UseCompileTimeType
             // Otherwise it depends on the actual type of the object.
 
@@ -621,7 +623,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         [Fact]
         public void TestSimpleDelegate()
         {
-            // This test differs from its static equivalent considerably, as some event-related matters aren't as directly
+            // This test differs from its static equivalent considerably, as some event-related matters aren't
+            // as directly
             // applicable. We can use it for checking both direct and deferred delegate invocation.
 
             Helpers.OverrideConsoleAndRun(console =>
@@ -899,7 +902,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 )
                 .Message;
 
-            // Named argument 'first' specifies a parameter for which a positional argument has already been given
+            // Named argument 'first' specifies a parameter for which a positional argument has already been
+            // given
             Assert.Contains("'first'", message);
         }
 

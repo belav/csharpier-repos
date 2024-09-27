@@ -31,12 +31,14 @@ namespace Newtonsoft.Json.Linq
     public enum DuplicatePropertyNameHandling
     {
         /// <summary>
-        /// Replace the existing value when there is a duplicate property. The value of the last property in the JSON object will be used.
+        /// Replace the existing value when there is a duplicate property. The value of the last property in
+        // the JSON object will be used.
         /// </summary>
         Replace = 0,
 
         /// <summary>
-        /// Ignore the new value when there is a duplicate property. The value of the first property in the JSON object will be used.
+        /// Ignore the new value when there is a duplicate property. The value of the first property in the
+        // JSON object will be used.
         /// </summary>
         Ignore = 1,
 

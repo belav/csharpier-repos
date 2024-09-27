@@ -1437,6 +1437,8 @@ namespace System.Web.UI
             //
             // An example of where it is needed is at
             //
+            //
+            //
             // http://quickstarts.asp.net/QuickStartv20/aspnet/samples/masterpages/masterpages_cs/pages/default.aspx
             //
             MasterPage master = null;
@@ -2351,7 +2353,9 @@ namespace System.Web.UI
         //
         //  http://odetocode.com/blogs/scott/archive/2006/03/21/3153.aspx
         //
-        //  http://www.alexthissen.nl/blogs/main/archive/2005/12/13/event-validation-of-controls-in-asp-net-2-0.aspx
+        //
+        //
+        // http://www.alexthissen.nl/blogs/main/archive/2005/12/13/event-validation-of-controls-in-asp-net-2-0.aspx
         //
         // It also seems that it's the control's responsibility to call this method or
         // validation won't take place. Also, the SupportsEventValidation attribute must be

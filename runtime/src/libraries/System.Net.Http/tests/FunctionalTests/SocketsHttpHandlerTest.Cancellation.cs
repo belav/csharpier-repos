@@ -180,7 +180,8 @@ namespace System.Net.Http.Functional.Tests
                         var socketsHandler = GetUnderlyingSocketsHttpHandler(handler);
                         socketsHandler.ConnectCallback = async (context, token) =>
                         {
-                            // Note we force serialization of connection creation by waiting on tcsFirstConnectionInitiated below,
+                            // Note we force serialization of connection creation by waiting on tcsFirstConnectionInitiated
+                            // below,
                             // so we don't need to worry about concurrent access to connectCount.
                             bool isFirstConnection = connectCount == 0;
                             connectCount++;
@@ -223,7 +224,8 @@ namespace System.Net.Http.Functional.Tests
                             cts.Token
                         );
 
-                        // Wait for the connection attempt to be initiated before we send the second request, to avoid races in connection creation
+                        // Wait for the connection attempt to be initiated before we send the second request, to avoid races
+                        // in connection creation
                         await tcsFirstConnectionInitiated.Task;
                         Task<HttpResponseMessage> t2 = client.SendAsync(
                             new HttpRequestMessage(HttpMethod.Get, uri)

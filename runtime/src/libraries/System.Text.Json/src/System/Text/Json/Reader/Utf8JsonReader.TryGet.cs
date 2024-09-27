@@ -12,17 +12,20 @@ namespace System.Text.Json
     public ref partial struct Utf8JsonReader
     {
         /// <summary>
-        /// Parses the current JSON token value from the source, unescaped, and transcoded as a <see cref="string"/>.
+        /// Parses the current JSON token value from the source, unescaped, and transcoded as a <see
+        // cref="string"/>.
         /// </summary>
         /// <remarks>
-        /// Returns <see langword="null" /> when <see cref="TokenType"/> is <see cref="JsonTokenType.Null"/>.
+        /// Returns <see langword="null" /> when <see cref="TokenType"/> is <see
+        // cref="JsonTokenType.Null"/>.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to get the value of the JSON token that is not a string
         /// (i.e. other than <see cref="JsonTokenType.String"/>, <see cref="JsonTokenType.PropertyName"/> or
         /// <see cref="JsonTokenType.Null"/>).
         /// <seealso cref="TokenType" />
-        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16 surrogates.
+        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16
+        // surrogates.
         /// </exception>
         public string? GetString()
         {
@@ -48,24 +51,29 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Copies the current JSON token value from the source, unescaped as a UTF-8 string to the destination buffer.
+        /// Copies the current JSON token value from the source, unescaped as a UTF-8 string to the
+        // destination buffer.
         /// </summary>
         /// <param name="utf8Destination">A buffer to write the unescaped UTF-8 bytes into.</param>
         /// <returns>The number of bytes written to <paramref name="utf8Destination"/>.</returns>
         /// <remarks>
         /// Unlike <see cref="GetString"/>, this method does not support <see cref="JsonTokenType.Null"/>.
         ///
-        /// This method will throw <see cref="ArgumentException"/> if the destination buffer is too small to hold the unescaped value.
-        /// An appropriately sized buffer can be determined by consulting the length of either <see cref="ValueSpan"/> or <see cref="ValueSequence"/>,
+        /// This method will throw <see cref="ArgumentException"/> if the destination buffer is too small to
+        // hold the unescaped value.
+        /// An appropriately sized buffer can be determined by consulting the length of either <see
+        // cref="ValueSpan"/> or <see cref="ValueSequence"/>,
         /// since the unescaped result is always less than or equal to the length of the encoded strings.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to get the value of the JSON token that is not a string
         /// (i.e. other than <see cref="JsonTokenType.String"/> or <see cref="JsonTokenType.PropertyName"/>.
         /// <seealso cref="TokenType" />
-        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16 surrogates.
+        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16
+        // surrogates.
         /// </exception>
-        /// <exception cref="ArgumentException">The destination buffer is too small to hold the unescaped value.</exception>
+        /// <exception cref="ArgumentException">The destination buffer is too small to hold the unescaped
+        // value.</exception>
         public readonly int CopyString(Span<byte> utf8Destination)
         {
             if (_tokenType is not (JsonTokenType.String or JsonTokenType.PropertyName))
@@ -120,24 +128,29 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Copies the current JSON token value from the source, unescaped, and transcoded as a UTF-16 char buffer.
+        /// Copies the current JSON token value from the source, unescaped, and transcoded as a UTF-16 char
+        // buffer.
         /// </summary>
         /// <param name="destination">A buffer to write the transcoded UTF-16 characters into.</param>
         /// <returns>The number of characters written to <paramref name="destination"/>.</returns>
         /// <remarks>
         /// Unlike <see cref="GetString"/>, this method does not support <see cref="JsonTokenType.Null"/>.
         ///
-        /// This method will throw <see cref="ArgumentException"/> if the destination buffer is too small to hold the unescaped value.
-        /// An appropriately sized buffer can be determined by consulting the length of either <see cref="ValueSpan"/> or <see cref="ValueSequence"/>,
+        /// This method will throw <see cref="ArgumentException"/> if the destination buffer is too small to
+        // hold the unescaped value.
+        /// An appropriately sized buffer can be determined by consulting the length of either <see
+        // cref="ValueSpan"/> or <see cref="ValueSequence"/>,
         /// since the unescaped result is always less than or equal to the length of the encoded strings.
         /// </remarks>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to get the value of the JSON token that is not a string
         /// (i.e. other than <see cref="JsonTokenType.String"/> or <see cref="JsonTokenType.PropertyName"/>.
         /// <seealso cref="TokenType" />
-        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16 surrogates.
+        /// It will also throw when the JSON string contains invalid UTF-8 bytes, or invalid UTF-16
+        // surrogates.
         /// </exception>
-        /// <exception cref="ArgumentException">The destination buffer is too small to hold the unescaped value.</exception>
+        /// <exception cref="ArgumentException">The destination buffer is too small to hold the unescaped
+        // value.</exception>
         public readonly int CopyString(Span<char> destination)
         {
             if (_tokenType is not (JsonTokenType.String or JsonTokenType.PropertyName))
@@ -252,7 +265,8 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the current JSON token value from the source as a comment, transcoded as a <see cref="string"/>.
+        /// Parses the current JSON token value from the source as a comment, transcoded as a <see
+        // cref="string"/>.
         /// </summary>
         /// <exception cref="InvalidOperationException">
         /// Thrown if trying to get the value of the JSON token that is not a comment.
@@ -270,10 +284,12 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="bool"/>.
-        /// Returns <see langword="true"/> if the TokenType is JsonTokenType.True and <see langword="false"/> if the TokenType is JsonTokenType.False.
+        /// Returns <see langword="true"/> if the TokenType is JsonTokenType.True and <see
+        // langword="false"/> if the TokenType is JsonTokenType.False.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a boolean (i.e. <see cref="JsonTokenType.True"/> or <see cref="JsonTokenType.False"/>).
+        /// Thrown if trying to get the value of a JSON token that is not a boolean (i.e. <see
+        // cref="JsonTokenType.True"/> or <see cref="JsonTokenType.False"/>).
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool GetBoolean()
@@ -295,14 +311,17 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the current JSON token value from the source and decodes the Base64 encoded JSON string as bytes.
+        /// Parses the current JSON token value from the source and decodes the Base64 encoded JSON string
+        // as bytes.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// The JSON string contains data outside of the expected Base64 range, or if it contains invalid/more than two padding characters,
+        /// The JSON string contains data outside of the expected Base64 range, or if it contains
+        // invalid/more than two padding characters,
         /// or is incomplete (i.e. the JSON string length is not a multiple of 4).
         /// </exception>
         public byte[] GetBytesFromBase64()
@@ -316,17 +335,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="byte"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="byte"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="byte"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="byte.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="byte.MinValue"/> or greater
         /// than <see cref="byte.MaxValue"/>.
         /// </exception>
         public byte GetByte()
@@ -350,17 +373,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as an <see cref="sbyte"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to an <see cref="sbyte"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to an <see
+        // cref="sbyte"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="sbyte.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="sbyte.MinValue"/> or greater
         /// than <see cref="sbyte.MaxValue"/>.
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -385,17 +412,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="short"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="short"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="short"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="short.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="short.MinValue"/> or greater
         /// than <see cref="short.MaxValue"/>.
         /// </exception>
         public short GetInt16()
@@ -419,17 +450,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as an <see cref="int"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to an <see cref="int"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to an <see
+        // cref="int"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="int.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="int.MinValue"/> or greater
         /// than <see cref="int.MaxValue"/>.
         /// </exception>
         public int GetInt32()
@@ -453,17 +488,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="long"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="long"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="long"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="long.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="long.MinValue"/> or greater
         /// than <see cref="long.MaxValue"/>.
         /// </exception>
         public long GetInt64()
@@ -487,17 +526,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="ushort"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="ushort"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="ushort"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="ushort.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="ushort.MinValue"/> or greater
         /// than <see cref="ushort.MaxValue"/>.
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -522,17 +565,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="uint"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="uint"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="uint"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="uint.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="uint.MinValue"/> or greater
         /// than <see cref="uint.MaxValue"/>.
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -557,17 +604,21 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="ulong"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="ulong"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="ulong"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains a decimal or
-        /// is written in scientific notation) or, it represents a number less than <see cref="ulong.MinValue"/> or greater
+        /// Thrown if the JSON token value is either of incorrect numeric format (for example if it contains
+        // a decimal or
+        /// is written in scientific notation) or, it represents a number less than <see
+        // cref="ulong.MinValue"/> or greater
         /// than <see cref="ulong.MaxValue"/>.
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -592,16 +643,19 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="float"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="float"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="float"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// On any framework that is not .NET Core 3.0 or higher, thrown if the JSON token value represents a number less than <see cref="float.MinValue"/> or greater
+        /// On any framework that is not .NET Core 3.0 or higher, thrown if the JSON token value represents
+        // a number less than <see cref="float.MinValue"/> or greater
         /// than <see cref="float.MaxValue"/>.
         /// </exception>
         public float GetSingle()
@@ -623,7 +677,8 @@ namespace System.Text.Json
             }
 
             // NETCOREAPP implementation of the TryParse method above permits case-insensitive variants of the
-            // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
+            // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK
+            // implementation.
             // The following logic reconciles the two implementations to enforce consistent behavior.
             if (
                 !(
@@ -653,16 +708,19 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="double"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="double"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="double"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// On any framework that is not .NET Core 3.0 or higher, thrown if the JSON token value represents a number less than <see cref="double.MinValue"/> or greater
+        /// On any framework that is not .NET Core 3.0 or higher, thrown if the JSON token value represents
+        // a number less than <see cref="double.MinValue"/> or greater
         /// than <see cref="double.MaxValue"/>.
         /// </exception>
         public double GetDouble()
@@ -684,7 +742,8 @@ namespace System.Text.Json
             }
 
             // NETCOREAPP implementation of the TryParse method above permits case-insensitive variants of the
-            // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK implementation.
+            // float constants "NaN", "Infinity", "-Infinity". This differs from the NETFRAMEWORK
+            // implementation.
             // The following logic reconciles the two implementations to enforce consistent behavior.
             if (
                 !(
@@ -714,16 +773,19 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="decimal"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="decimal"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="decimal"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value represents a number less than <see cref="decimal.MinValue"/> or greater
+        /// Thrown if the JSON token value represents a number less than <see cref="decimal.MinValue"/> or
+        // greater
         /// than <see cref="decimal.MaxValue"/>.
         /// </exception>
         public decimal GetDecimal()
@@ -747,16 +809,19 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="DateTime"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="DateTime"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="DateTime"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is of an unsupported format. Only a subset of ISO 8601 formats are supported.
+        /// Thrown if the JSON token value is of an unsupported format. Only a subset of ISO 8601 formats
+        // are supported.
         /// </exception>
         public DateTime GetDateTime()
         {
@@ -780,16 +845,19 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="DateTimeOffset"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="DateTimeOffset"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="DateTimeOffset"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
-        /// Thrown if the JSON token value is of an unsupported format. Only a subset of ISO 8601 formats are supported.
+        /// Thrown if the JSON token value is of an unsupported format. Only a subset of ISO 8601 formats
+        // are supported.
         /// </exception>
         public DateTimeOffset GetDateTimeOffset()
         {
@@ -813,12 +881,14 @@ namespace System.Text.Json
 
         /// <summary>
         /// Parses the current JSON token value from the source as a <see cref="Guid"/>.
-        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see cref="Guid"/>
+        /// Returns the value if the entire UTF-8 encoded token value can be successfully parsed to a <see
+        // cref="Guid"/>
         /// value.
         /// Throws exceptions otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         /// <exception cref="FormatException">
@@ -845,13 +915,16 @@ namespace System.Text.Json
         }
 
         /// <summary>
-        /// Parses the current JSON token value from the source and decodes the Base64 encoded JSON string as bytes.
-        /// Returns <see langword="true"/> if the entire token value is encoded as valid Base64 text and can be successfully
+        /// Parses the current JSON token value from the source and decodes the Base64 encoded JSON string
+        // as bytes.
+        /// Returns <see langword="true"/> if the entire token value is encoded as valid Base64 text and can
+        // be successfully
         /// decoded to bytes.
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetBytesFromBase64([NotNullWhen(true)] out byte[]? value)
@@ -879,7 +952,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetByte(out byte value)
@@ -916,7 +990,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -954,7 +1029,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetInt16(out short value)
@@ -991,7 +1067,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetInt32(out int value)
@@ -1028,7 +1105,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetInt64(out long value)
@@ -1065,7 +1143,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -1103,7 +1182,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -1141,7 +1221,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         [System.CLSCompliantAttribute(false)]
@@ -1179,7 +1260,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetSingle(out float value)
@@ -1211,7 +1293,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetDouble(out double value)
@@ -1243,7 +1326,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.Number"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.Number"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetDecimal(out decimal value)
@@ -1280,7 +1364,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetDateTime(out DateTime value)
@@ -1358,7 +1443,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetDateTimeOffset(out DateTimeOffset value)
@@ -1437,7 +1523,8 @@ namespace System.Text.Json
         /// Returns <see langword="false"/> otherwise.
         /// </summary>
         /// <exception cref="InvalidOperationException">
-        /// Thrown if trying to get the value of a JSON token that is not a <see cref="JsonTokenType.String"/>.
+        /// Thrown if trying to get the value of a JSON token that is not a <see
+        // cref="JsonTokenType.String"/>.
         /// <seealso cref="TokenType" />
         /// </exception>
         public bool TryGetGuid(out Guid value)

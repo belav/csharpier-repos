@@ -19,8 +19,10 @@ namespace System
     // included in this file which are specific to the packed implementation.
     internal static partial class PackedSpanHelpers
     {
-        // We only do this optimization if we have support for X86 intrinsics (Sse2) as the packing is noticeably cheaper compared to ARM (AdvSimd).
-        // While the impact on the worst-case (match at the start) is minimal on X86, it's prohibitively large on ARM.
+        // We only do this optimization if we have support for X86 intrinsics (Sse2) as the packing is
+        // noticeably cheaper compared to ARM (AdvSimd).
+        // While the impact on the worst-case (match at the start) is minimal on X86, it's prohibitively
+        // large on ARM.
         public static bool PackedIndexOfIsSupported => Sse2.IsSupported;
 
         // Not all values can benefit from packing the searchSpace. See comments in PackSources below.
@@ -197,7 +199,8 @@ namespace System
                         // Process the input in chunks of 64 characters (2 * Vector512<short>).
                         // If the input length is a multiple of 64, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector512<short>.Count)
@@ -265,7 +268,8 @@ namespace System
                         // Process the input in chunks of 32 characters (2 * Vector256<short>).
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector256<short>.Count)
@@ -330,10 +334,12 @@ namespace System
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibConditionParsing // A negated IsSupported condition isn't parseable by the intrinsics analyzer, but in this case, it is only used in combination
                     // with the check above of Avx2.IsSupported && length > Vector256<short>.Count which makes the logic
-                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check is to assist the JIT in
+                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check
+                    // is to assist the JIT in
                     // not generating dead code.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // This is paired with the check above, and since these if statements are contained in 1 function, the code
-                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call to IsSupported
+                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call
+                    // to IsSupported
                     // This logic MUST NOT be extracted to a helper function
                     if (!Avx2.IsSupported && length > 2 * Vector128<short>.Count)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -342,7 +348,8 @@ namespace System
                         // Process the input in chunks of 16 characters (2 * Vector128<short>).
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector128<short>.Count)
@@ -461,7 +468,8 @@ namespace System
                         // Process the input in chunks of 64 characters (2 * Vector512<short>).
                         // If the input length is a multiple of 64, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector512<short>.Count)
@@ -538,7 +546,8 @@ namespace System
                         // Process the input in chunks of 32 characters (2 * Vector256<short>).
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector256<short>.Count)
@@ -614,10 +623,12 @@ namespace System
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibConditionParsing // A negated IsSupported condition isn't parseable by the intrinsics analyzer, but in this case, it is only used in combination
                     // with the check above of Avx2.IsSupported && length > Vector256<short>.Count which makes the logic
-                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check is to assist the JIT in
+                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check
+                    // is to assist the JIT in
                     // not generating dead code.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // This is paired with the check above, and since these if statements are contained in 1 function, the code
-                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call to IsSupported
+                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call
+                    // to IsSupported
                     // This logic MUST NOT be extracted to a helper function
                     if (!Avx2.IsSupported && length > 2 * Vector128<short>.Count)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -626,7 +637,8 @@ namespace System
                         // Process the input in chunks of 16 characters (2 * Vector128<short>).
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector128<short>.Count)
@@ -768,7 +780,8 @@ namespace System
                         // Process the input in chunks of 64 characters (2 * Vector512<short>).
                         // If the input length is a multiple of 64, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector512<short>.Count)
@@ -854,7 +867,8 @@ namespace System
                         // Process the input in chunks of 32 characters (2 * Vector256<short>).
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector256<short>.Count)
@@ -935,10 +949,12 @@ namespace System
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibConditionParsing // A negated IsSupported condition isn't parseable by the intrinsics analyzer, but in this case, it is only used in combination
                     // with the check above of Avx2.IsSupported && length > Vector256<short>.Count which makes the logic
-                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check is to assist the JIT in
+                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check
+                    // is to assist the JIT in
                     // not generating dead code.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // This is paired with the check above, and since these if statements are contained in 1 function, the code
-                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call to IsSupported
+                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call
+                    // to IsSupported
                     // This logic MUST NOT be extracted to a helper function
                     if (!Avx2.IsSupported && length > 2 * Vector128<short>.Count)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -947,7 +963,8 @@ namespace System
                         // Process the input in chunks of 16 characters (2 * Vector128<short>).
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector128<short>.Count)
@@ -1117,7 +1134,8 @@ namespace System
                         // Process the input in chunks of 64 characters (2 * Vector512<short>).
                         // If the input length is a multiple of 64, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector512<short>.Count)
@@ -1206,7 +1224,8 @@ namespace System
                         // Process the input in chunks of 32 characters (2 * Vector256<short>).
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector256<short>.Count)
@@ -1290,10 +1309,12 @@ namespace System
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibConditionParsing // A negated IsSupported condition isn't parseable by the intrinsics analyzer, but in this case, it is only used in combination
                     // with the check above of Avx2.IsSupported && length > Vector256<short>.Count which makes the logic
-                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check is to assist the JIT in
+                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check
+                    // is to assist the JIT in
                     // not generating dead code.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // This is paired with the check above, and since these if statements are contained in 1 function, the code
-                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call to IsSupported
+                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call
+                    // to IsSupported
                     // This logic MUST NOT be extracted to a helper function
                     if (!Avx2.IsSupported && length > 2 * Vector128<short>.Count)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -1302,7 +1323,8 @@ namespace System
                         // Process the input in chunks of 16 characters (2 * Vector128<short>).
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector128<short>.Count)
@@ -1429,7 +1451,8 @@ namespace System
                         // Process the input in chunks of 64 characters (2 * Vector512<short>).
                         // If the input length is a multiple of 64, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector512<short>.Count)
@@ -1508,7 +1531,8 @@ namespace System
                         // Process the input in chunks of 32 characters (2 * Vector256<short>).
                         // If the input length is a multiple of 32, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector256<short>.Count)
@@ -1591,10 +1615,12 @@ namespace System
 
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibConditionParsing // A negated IsSupported condition isn't parseable by the intrinsics analyzer, but in this case, it is only used in combination
                     // with the check above of Avx2.IsSupported && length > Vector256<short>.Count which makes the logic
-                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check is to assist the JIT in
+                    // in this if statement dead code when Avx2.IsSupported. Presumably this negated IsSupported check
+                    // is to assist the JIT in
                     // not generating dead code.
 #pragma warning disable IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough // This is paired with the check above, and since these if statements are contained in 1 function, the code
-                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call to IsSupported
+                    // may take a dependence on the JIT compiler producing a consistent value for the result of a call
+                    // to IsSupported
                     // This logic MUST NOT be extracted to a helper function
                     if (!Avx2.IsSupported && length > 2 * Vector128<short>.Count)
 #pragma warning restore IntrinsicsInSystemPrivateCoreLibAttributeNotSpecificEnough
@@ -1603,7 +1629,8 @@ namespace System
                         // Process the input in chunks of 16 characters (2 * Vector128<short>).
                         // If the input length is a multiple of 16, don't consume the last 16 characters in this loop.
                         // Let the fallback below handle it instead. This is why the condition is
-                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of "!IsAddressGreaterThan".
+                        // ">" instead of ">=" above, and why "IsAddressLessThan" is used instead of
+                        // "!IsAddressGreaterThan".
                         ref short twoVectorsAwayFromEnd = ref Unsafe.Add(
                             ref searchSpace,
                             length - (2 * Vector128<short>.Count)
@@ -1692,7 +1719,8 @@ namespace System
         )
         {
             Debug.Assert(Avx512BW.IsSupported);
-            // Pack two vectors of characters into bytes. While the type is Vector256<short>, these are really UInt16 characters.
+            // Pack two vectors of characters into bytes. While the type is Vector256<short>, these are really
+            // UInt16 characters.
             // X86: Downcast every character using saturation.
             // - Values <= 32767 result in min(value, 255).
             // - Values  > 32767 result in 0. Because of this we can't accept needles that contain 0.
@@ -1707,7 +1735,8 @@ namespace System
         )
         {
             Debug.Assert(Avx2.IsSupported);
-            // Pack two vectors of characters into bytes. While the type is Vector256<short>, these are really UInt16 characters.
+            // Pack two vectors of characters into bytes. While the type is Vector256<short>, these are really
+            // UInt16 characters.
             // X86: Downcast every character using saturation.
             // - Values <= 32767 result in min(value, 255).
             // - Values  > 32767 result in 0. Because of this we can't accept needles that contain 0.
@@ -1722,7 +1751,8 @@ namespace System
         )
         {
             Debug.Assert(Sse2.IsSupported);
-            // Pack two vectors of characters into bytes. While the type is Vector128<short>, these are really UInt16 characters.
+            // Pack two vectors of characters into bytes. While the type is Vector128<short>, these are really
+            // UInt16 characters.
             // X86: Downcast every character using saturation.
             // - Values <= 32767 result in min(value, 255).
             // - Values  > 32767 result in 0. Because of this we can't accept needles that contain 0.

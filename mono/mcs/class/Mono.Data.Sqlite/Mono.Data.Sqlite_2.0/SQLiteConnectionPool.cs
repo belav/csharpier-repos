@@ -1,9 +1,9 @@
 /********************************************************
- * ADO.NET 2.0 Data Provider for SQLite Version 3.X
- * Written by Robert Simpson (robert@blackcastlesoft.com)
- *
- * Released to the public domain, use at your own risk!
- ********************************************************/
+* ADO.NET 2.0 Data Provider for SQLite Version 3.X
+* Written by Robert Simpson (robert@blackcastlesoft.com)
+*
+* Released to the public domain, use at your own risk!
+********************************************************/
 
 namespace Mono.Data.Sqlite
 {
@@ -13,7 +13,8 @@ namespace Mono.Data.Sqlite
     internal static class SqliteConnectionPool
     {
         /// <summary>
-        /// Keeps track of connections made on a specified file.  The PoolVersion dictates whether old objects get
+        /// Keeps track of connections made on a specified file.  The PoolVersion dictates whether old
+        // objects get
         /// returned to the pool or discarded when no longer in use.
         /// </summary>
         internal class Pool
@@ -47,7 +48,8 @@ namespace Mono.Data.Sqlite
         /// <param name="fileName">The filename for a desired connection</param>
         /// <param name="maxPoolSize">The maximum size the connection pool for the filename can be</param>
         /// <param name="version">The pool version the returned connection will belong to</param>
-        /// <returns>Returns NULL if no connections were available.  Even if none are, the poolversion will still be a valid pool version</returns>
+        /// <returns>Returns NULL if no connections were available.  Even if none are, the poolversion will
+        // still be a valid pool version</returns>
         internal static SqliteConnectionHandle Remove(
             string fileName,
             int maxPoolSize,
@@ -62,7 +64,8 @@ namespace Mono.Data.Sqlite
                 version = _poolVersion;
 
                 // If we didn't find a pool for this file, create one even though it will be empty.
-                // We have to do this here because otherwise calling ClearPool() on the file will not work for active connections
+                // We have to do this here because otherwise calling ClearPool() on the file will not work for
+                // active connections
                 // that have never seen the pool yet.
                 if (_connections.TryGetValue(fileName, out queue) == false)
                 {
@@ -93,7 +96,8 @@ namespace Mono.Data.Sqlite
         }
 
         /// <summary>
-        /// Clears out all pooled connections and rev's up the default pool version to force all old active objects
+        /// Clears out all pooled connections and rev's up the default pool version to force all old active
+        // objects
         /// not in the pool to get discarded rather than returned to their pools.
         /// </summary>
         internal static void ClearAllPools()
@@ -116,17 +120,21 @@ namespace Mono.Data.Sqlite
                     if (_poolVersion <= pair.Value.PoolVersion)
                         _poolVersion = pair.Value.PoolVersion + 1;
                 }
-                // All pools are cleared and we have a new highest version number to force all old version active items to get discarded
+                // All pools are cleared and we have a new highest version number to force all old version active
+                // items to get discarded
                 // instead of going back to the queue when they are closed.
-                // We can get away with this because we're pumped up the _poolVersion out of range of all active connections, so they
+                // We can get away with this because we're pumped up the _poolVersion out of range of all active
+                // connections, so they
                 // will all get discarded when they try to put themselves back in their pool.
                 _connections.Clear();
             }
         }
 
         /// <summary>
-        /// Clear a given pool for a given filename.  Discards anything in the pool for the given file, and revs the pool
-        /// version so current active objects on the old version of the pool will get discarded rather than be returned to the pool.
+        /// Clear a given pool for a given filename.  Discards anything in the pool for the given file, and
+        // revs the pool
+        /// version so current active objects on the old version of the pool will get discarded rather than
+        // be returned to the pool.
         /// </summary>
         /// <param name="fileName">The filename of the pool to clear</param>
         internal static void ClearPool(string fileName)
@@ -157,13 +165,15 @@ namespace Mono.Data.Sqlite
         /// <param name="hdl">The connection handle to pool</param>
         /// <param name="version">The pool version the handle was created under</param>
         /// <remarks>
-        /// If the version numbers don't match between the connection and the pool, then the handle is discarded.
+        /// If the version numbers don't match between the connection and the pool, then the handle is
+        // discarded.
         /// </remarks>
         internal static void Add(string fileName, SqliteConnectionHandle hdl, int version)
         {
             lock (_connections)
             {
-                // If the queue doesn't exist in the pool, then it must've been cleared sometime after the connection was created.
+                // If the queue doesn't exist in the pool, then it must've been cleared sometime after the
+                // connection was created.
                 Pool queue;
                 if (
                     _connections.TryGetValue(fileName, out queue) == true

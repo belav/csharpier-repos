@@ -25,9 +25,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <param name="block">the method's body</param>
         /// <param name="compilationState">The state of compilation of the enclosing type</param>
         /// <param name="diagnostics">the receiver of the reported diagnostics</param>
-        /// <param name="hasTrailingExpression">indicates whether this Script had a trailing expression</param>
-        /// <param name="originalBodyNested">the original method body is the last statement in the block</param>
-        /// <returns>the rewritten block for the method (with a return statement possibly inserted)</returns>
+        /// <param name="hasTrailingExpression">indicates whether this Script had a trailing
+        // expression</param>
+        /// <param name="originalBodyNested">the original method body is the last statement in the
+        // block</param>
+        /// <returns>the rewritten block for the method (with a return statement possibly
+        // inserted)</returns>
         public static BoundBlock Rewrite(
             MethodSymbol method,
             BoundBlock block,
@@ -69,7 +72,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         Debug.Assert(!implicitlyInitializedFields.IsEmpty);
 
-                        // It's not expected to have implicitly initialized fields when a constructor initializer is present, except in error scenarios.
+                        // It's not expected to have implicitly initialized fields when a constructor initializer is
+                        // present, except in error scenarios.
                         Debug.Assert(
                             method
                                 is not SourceMemberMethodSymbol
@@ -114,7 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // will be reported by the lambda binder.
                 Debug.Assert(method.MethodKind != MethodKind.AnonymousFunction);
 
-                // Add implicit "return default(T)" if this is a submission that does not have a trailing expression.
+                // Add implicit "return default(T)" if this is a submission that does not have a trailing
+                // expression.
                 var submissionResultType = (
                     method as SynthesizedInteractiveInitializerMethod
                 )?.ResultType;
@@ -212,7 +217,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 implicitlyInitializedFields.Length
             );
 
-            // Inline arrays of length > 1 must be initialized completely, simply initializing the element field is not sufficient.
+            // Inline arrays of length > 1 must be initialized completely, simply initializing the element field
+            // is not sufficient.
             // For arrays of length == 1, initializing the element field is sufficient.
             if (
                 containingType.HasInlineArrayAttribute(out int length)

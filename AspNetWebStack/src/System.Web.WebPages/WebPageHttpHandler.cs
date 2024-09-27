@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -85,7 +86,8 @@ namespace System.Web.WebPages
             IVirtualPathFactory virtualPathFactory
         )
         {
-            // We will try to create a WebPage from our factory. If this fails, we assume that the virtual path maps to an IHttpHandler.
+            // We will try to create a WebPage from our factory. If this fails, we assume that the virtual path
+            // maps to an IHttpHandler.
             // Instantiate the page from the virtual path
             WebPage page = virtualPathFactory.CreateInstance<WebPage>(virtualPath);
 
@@ -121,7 +123,8 @@ namespace System.Web.WebPages
         private static string GetVersionString()
         {
             // DevDiv 216459:
-            // This code originally used Assembly.GetName(), but that requires FileIOPermission, which isn't granted in
+            // This code originally used Assembly.GetName(), but that requires FileIOPermission, which isn't
+            // granted in
             // medium trust. However, Assembly.FullName *is* accessible in medium trust.
             return new AssemblyName(typeof(WebPageHttpHandler).Assembly.FullName).Version.ToString(
                 2
@@ -146,7 +149,8 @@ namespace System.Web.WebPages
             if (context.SourceFiles.Any())
             {
                 var files = String.Join("|", context.SourceFiles);
-                // Since the characters in the value are files that may include characters outside of the ASCII set, header encoding as specified in RFC2047.
+                // Since the characters in the value are files that may include characters outside of the ASCII set,
+                // header encoding as specified in RFC2047.
                 // =?<charset>?<encoding>?...?=
                 // In the following case, UTF8 is used with base64 encoding
                 var encodedText =
@@ -204,7 +208,8 @@ namespace System.Web.WebPages
 
         public static void RegisterExtension(string extension)
         {
-            // Note: we don't lock or check for duplicates because we only expect this method to be called during PreAppStart
+            // Note: we don't lock or check for duplicates because we only expect this method to be called
+            // during PreAppStart
             // Long lived data with few writes and many reads, so reallocate the array each time.
             _supportedExtensions = _supportedExtensions.AppendAndReallocate(extension);
         }

@@ -39,7 +39,8 @@ namespace System.ComponentModel
         /// of the specified type.
         /// </summary>
         public PropertyTabAttribute(
-            // Using PublicParameterlessConstructor to preserve the type. See https://github.com/mono/linker/issues/1878
+            // Using PublicParameterlessConstructor to preserve the type. See
+            // https://github.com/mono/linker/issues/1878
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
@@ -69,7 +70,8 @@ namespace System.ComponentModel
         /// of the specified type.
         /// </summary>
         public PropertyTabAttribute(
-            // Using PublicParameterlessConstructor to preserve the type. See https://github.com/mono/linker/issues/1878
+            // Using PublicParameterlessConstructor to preserve the type. See
+            // https://github.com/mono/linker/issues/1878
             [DynamicallyAccessedMembers(
                 DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
             )]
@@ -159,7 +161,8 @@ namespace System.ComponentModel
         protected string[]? TabClassNames => (string[]?)_tabClassNames?.Clone();
 
         /// <summary>
-        /// Gets the scopes of tabs for this System.ComponentModel.Design.PropertyTabAttribute, from System.ComponentModel.Design.PropertyTabScope.
+        /// Gets the scopes of tabs for this System.ComponentModel.Design.PropertyTabAttribute, from
+        // System.ComponentModel.Design.PropertyTabScope.
         /// </summary>
         public PropertyTabScope[] TabScopes { get; private set; }
 

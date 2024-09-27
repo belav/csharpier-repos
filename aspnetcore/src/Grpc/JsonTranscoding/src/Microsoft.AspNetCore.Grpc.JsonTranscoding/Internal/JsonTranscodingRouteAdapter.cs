@@ -26,16 +26,20 @@ namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal;
 /// For example, consider a multi-segment parameter route:
 /// <list type="bullet">
 /// <item><description>Before: /v1/{book.name=shelves/*/books/*}</description></item>
-/// <item><description>After: /v1/shelves/{__Complex_book.name_2}/books/{__Complex_book.name_4}</description></item>
+/// <item><description>After:
+// /v1/shelves/{__Complex_book.name_2}/books/{__Complex_book.name_4}</description></item>
 /// </list>
 /// </para>
 ///
-/// It is rewritten so that any * or ** segments become ASP.NET Core route parameters. These parameter
+/// It is rewritten so that any * or ** segments become ASP.NET Core route parameters. These
+// parameter
 /// names are never used by the user, and instead they're reconstructed into the final value by the
 /// adapter and then added to the HttpRequest.RouteValues collection.
 /// <list type="bullet">
-/// <item><description>Request URL: /v1/shelves/example-shelf/books/example-book</description></item>
-/// <item><description>Route parameter: book.name = shelves/example-self/books/example-book</description></item>
+/// <item><description>Request URL:
+// /v1/shelves/example-shelf/books/example-book</description></item>
+/// <item><description>Route parameter: book.name =
+// shelves/example-self/books/example-book</description></item>
 /// </list>
 /// </summary>
 internal sealed class JsonTranscodingRouteAdapter
@@ -170,8 +174,10 @@ internal sealed class JsonTranscodingRouteAdapter
                         );
 
                         // Catch-all route parameter is always the last parameter. The original HTTP pattern could specify a
-                        // literal suffix after the catch-all, e.g. /{param=**}/suffix. Because ASP.NET Core routing provides
-                        // the entire remainder of the URL in the route value, we must trim the suffix from that route value.
+                        // literal suffix after the catch-all, e.g. /{param=**}/suffix. Because ASP.NET Core routing
+                        // provides
+                        // the entire remainder of the URL in the route value, we must trim the suffix from that route
+                        // value.
                         if (!string.IsNullOrEmpty(catchAllSuffix))
                         {
                             finalValue = finalValue[..^catchAllSuffix.Length];

@@ -144,8 +144,10 @@ namespace Microsoft.CodeAnalysis.Debugging
         /// Requires Microsoft.DiaSymReader.Native.{platform}.dll to be available for reading Windows PDB.
         /// </remarks>
         /// <exception cref="ArgumentNullException"><paramref name="stream"/> is null.</exception>
-        /// <exception cref="ArgumentException"><paramref name="stream"/> does not support read and seek operations.</exception>
-        /// <exception cref="Exception">Error reading debug information from <paramref name="stream"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="stream"/> does not support read and seek
+        // operations.</exception>
+        /// <exception cref="Exception">Error reading debug information from <paramref
+        // name="stream"/>.</exception>
         public static DebugInformationReaderProvider CreateFromStream(Stream stream)
         {
             if (stream == null)
@@ -194,10 +196,12 @@ namespace Microsoft.CodeAnalysis.Debugging
         }
 
         /// <summary>
-        /// Creates <see cref="DebugInformationReaderProvider"/> from a Portable PDB metadata reader provider.
+        /// Creates <see cref="DebugInformationReaderProvider"/> from a Portable PDB metadata reader
+        // provider.
         /// </summary>
         /// <returns>
-        /// Provider instance, which takes ownership of the <paramref name="metadataProvider"/> until disposed.
+        /// Provider instance, which takes ownership of the <paramref name="metadataProvider"/> until
+        // disposed.
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="metadataProvider"/> is null.</exception>
         public static DebugInformationReaderProvider CreateFromMetadataReader(

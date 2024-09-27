@@ -32,7 +32,8 @@ namespace System.Diagnostics
         internal DictionaryWrapper? _environmentVariables;
 
         /// <devdoc>
-        ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>
+        ///     Default constructor.  At least the <see
+        // cref='System.Diagnostics.ProcessStartInfo.FileName'/>
         ///     property must be set before starting the process.
         /// </devdoc>
         public ProcessStartInfo() { }

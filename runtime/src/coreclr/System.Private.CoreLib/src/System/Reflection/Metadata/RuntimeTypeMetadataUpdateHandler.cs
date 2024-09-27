@@ -8,7 +8,8 @@ using System.Reflection.Metadata;
 
 namespace System.Reflection.Metadata
 {
-    /// <summary>Metadata update handler used to clear a Type's reflection cache in response to a metadata update notification.</summary>
+    /// <summary>Metadata update handler used to clear a Type's reflection cache in response to a
+    // metadata update notification.</summary>
     internal static class RuntimeTypeMetadataUpdateHandler
     {
         /// <summary>Clear type caches in response to an update notification.</summary>
@@ -24,7 +25,8 @@ namespace System.Reflection.Metadata
             {
                 // TODO: This should ideally be in a QCall in the runtime.  As written here:
                 // - This materializes all types in the app, creating RuntimeTypes for them.
-                // - This force loads all assembly dependencies, which might not work well for packages that may depend on resolve events firing at the right moment.
+                // - This force loads all assembly dependencies, which might not work well for packages that may
+                // depend on resolve events firing at the right moment.
                 // - This does not cover instantiated generic types.
 
                 // Clear the caches on all loaded types.
@@ -53,7 +55,8 @@ namespace System.Reflection.Metadata
             }
         }
 
-        /// <summary>When clearing all types, determines whether we should skip types from the specified assembly.</summary>
+        /// <summary>When clearing all types, determines whether we should skip types from the specified
+        // assembly.</summary>
         private static bool SkipAssembly(Assembly assembly) =>
             // Ideally we'd skip all of the core libraries, which can't be edited.
             // But we can easily skip corelib.
@@ -62,9 +65,11 @@ namespace System.Reflection.Metadata
         /// <summary>Clears the cache on the specified type.</summary>
         private static void ClearCache(Type type) => (type as RuntimeType)?.ClearCache();
 
-        /// <summary>Determines whether we need to clear the caches on all types or just the ones specified.</summary>
+        /// <summary>Determines whether we need to clear the caches on all types or just the ones
+        // specified.</summary>
         /// <param name="types">The types to examine.</param>
-        /// <returns>true if we need to clear all types; false if we can clear just the ones specified.</returns>
+        /// <returns>true if we need to clear all types; false if we can clear just the ones
+        // specified.</returns>
         private static bool RequiresClearingAllTypes([NotNullWhen(false)] Type[]? types)
         {
             // If we were handed null, assume we need to clear everything.

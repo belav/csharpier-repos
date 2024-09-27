@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 namespace System.ComponentModel
 {
     using System;
@@ -25,7 +25,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.RefreshEventArgs'/> class with
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.RefreshEventArgs'/>
+        // class with
         ///       the component that has
         ///       changed.
         ///    </para>
@@ -38,7 +39,8 @@ namespace System.ComponentModel
 
         /// <devdoc>
         ///    <para>
-        ///       Initializes a new instance of the <see cref='System.ComponentModel.RefreshEventArgs'/> class with
+        ///       Initializes a new instance of the <see cref='System.ComponentModel.RefreshEventArgs'/>
+        // class with
         ///       the type
         ///       of component that has changed.
         ///    </para>

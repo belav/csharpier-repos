@@ -302,7 +302,8 @@ namespace System.Net.Http.Functional.Tests
                     };
                 var lastTask = client.SendAsync(last);
 
-                // Wait for all requests to finish. Whether the last request was pending is checked on the server side.
+                // Wait for all requests to finish. Whether the last request was pending is checked on the server
+                // side.
                 var responses = await Task.WhenAll(tasks);
                 foreach (var response in responses)
                 {
@@ -405,7 +406,8 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task ServerClosesStream_ThrowsHttpProtocolException()
         {
-            // normally, the server should not use this code when resetting the stream, but we should still check if we behave sanely...
+            // normally, the server should not use this code when resetting the stream, but we should still
+            // check if we behave sanely...
             const long GeneralProtocolError = 0x101;
 
             using Http3LoopbackServer server = CreateHttp3LoopbackServer();
@@ -603,7 +605,8 @@ namespace System.Net.Http.Functional.Tests
                     var count = await stream.ReadAsync(buffer);
                 }
 
-                // We haven't finished reading the whole respose, but we're disposing it, which should turn into an exception on the server-side.
+                // We haven't finished reading the whole respose, but we're disposing it, which should turn into an
+                // exception on the server-side.
                 response.Dispose();
                 await serverTask;
             });
@@ -724,7 +727,8 @@ namespace System.Net.Http.Functional.Tests
                 );
                 var stream = await response.Content.ReadAsStreamAsync();
 
-                // We haven't finished sending the whole request, but we're disposing the response, which should turn into an exception on the server-side.
+                // We haven't finished sending the whole request, but we're disposing the response, which should
+                // turn into an exception on the server-side.
                 response.Dispose();
                 await serverTask;
             });
@@ -953,11 +957,14 @@ namespace System.Net.Http.Functional.Tests
             HttpVersionPolicy policy
         )
         {
-            // Create the handler manually without passing in useVersion = Http3 to avoid using VersionHttpClientHandler,
-            // because it overrides VersionPolicy on each request with RequestVersionExact (bypassing Alt-Svc code path completely).
+            // Create the handler manually without passing in useVersion = Http3 to avoid using
+            // VersionHttpClientHandler,
+            // because it overrides VersionPolicy on each request with RequestVersionExact (bypassing Alt-Svc
+            // code path completely).
             using HttpClient client = CreateHttpClient(CreateHttpClientHandler(useVersion: null));
 
-            // First request uses HTTP/1 or HTTP/2 and receives an Alt-Svc either by header or (with HTTP/2) by frame.
+            // First request uses HTTP/1 or HTTP/2 and receives an Alt-Svc either by header or (with HTTP/2) by
+            // frame.
 
             using (
                 HttpRequestMessage requestA = new HttpRequestMessage
@@ -1058,8 +1065,10 @@ namespace System.Net.Http.Functional.Tests
 
                 await clientDone.WaitAsync();
 
-                // It is possible that PEER_RECEIVE_ABORTED event will arrive with a significant delay after peer calls AbortReceive
-                // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
+                // It is possible that PEER_RECEIVE_ABORTED event will arrive with a significant delay after peer
+                // calls AbortReceive
+                // In that case even with synchronization via semaphores, first writes after peer aborting may
+                // "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
                 var ex = await AssertThrowsQuicExceptionAsync(
@@ -1157,8 +1166,10 @@ namespace System.Net.Http.Functional.Tests
 
                 await clientDone.WaitAsync();
 
-                // It is possible that PEER_RECEIVE_ABORTED event will arrive with a significant delay after peer calls AbortReceive
-                // In that case even with synchronization via semaphores, first writes after peer aborting may "succeed" (get SEND_COMPLETE event)
+                // It is possible that PEER_RECEIVE_ABORTED event will arrive with a significant delay after peer
+                // calls AbortReceive
+                // In that case even with synchronization via semaphores, first writes after peer aborting may
+                // "succeed" (get SEND_COMPLETE event)
                 // We are asserting that PEER_RECEIVE_ABORTED would still arrive eventually
 
                 QuicException ex = await AssertThrowsQuicExceptionAsync(
@@ -1932,7 +1943,8 @@ namespace System.Net.Http.Functional.Tests
                 // Send headers
                 await requestStream.FlushAsync();
 
-                // wait for the server to abort the request, which should cancel the token provided to the HttpContent
+                // wait for the server to abort the request, which should cancel the token provided to the
+                // HttpContent
                 TaskCompletionSource waitTcs = new TaskCompletionSource(
                     TaskCreationOptions.RunContinuationsAsynchronously
                 );
@@ -2060,7 +2072,8 @@ namespace System.Net.Http.Functional.Tests
                         connection.OutboundControlStream.Abort(
                             Http3LoopbackConnection.H3_INTERNAL_ERROR
                         );
-                        // This sends RESET_FRAME which might cause complete discard of any data including stream type, leading to client ignoring the stream.
+                        // This sends RESET_FRAME which might cause complete discard of any data including stream type,
+                        // leading to client ignoring the stream.
                         // Attempt to establish the control stream again then.
                         if (await semaphore.WaitAsync(100))
                         {
@@ -2173,7 +2186,8 @@ namespace System.Net.Http.Functional.Tests
 
         /// <summary>
         /// These are public interop test servers for various QUIC and HTTP/3 implementations,
-        /// taken from https://github.com/quicwg/base-drafts/wiki/Implementations and https://bagder.github.io/HTTP3-test/.
+        /// taken from https://github.com/quicwg/base-drafts/wiki/Implementations and
+        // https://bagder.github.io/HTTP3-test/.
         /// </summary>
         public static TheoryData<string> InteropUris() =>
             new TheoryData<string>
@@ -2190,7 +2204,8 @@ namespace System.Net.Http.Functional.Tests
 
         /// <summary>
         /// These are public interop test servers for various QUIC and HTTP/3 implementations,
-        /// taken from https://github.com/quicwg/base-drafts/wiki/Implementations and https://bagder.github.io/HTTP3-test/.
+        /// taken from https://github.com/quicwg/base-drafts/wiki/Implementations and
+        // https://bagder.github.io/HTTP3-test/.
         /// </summary>
         public static TheoryData<string> InteropUrisWithContent() =>
             new TheoryData<string>

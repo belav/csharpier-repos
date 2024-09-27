@@ -30,13 +30,13 @@ using System.Security.Permissions;
 
 namespace System.Security.Policy
 {
-    /* NOTES
-     *
-     * [1]	Some permissions classes are defined _outside_ mscorlib.dll.
-     * 	In this case we're using SecurityElement to construct the
-     * 	permissions manually.
-     *
-     */
+/* NOTES
+*
+* [1]	Some permissions classes are defined _outside_ mscorlib.dll.
+* 	In this case we're using SecurityElement to construct the
+* 	permissions manually.
+*
+*/
 
     internal static class DefaultPolicies
     {
@@ -99,8 +99,10 @@ namespace System.Security.Policy
         private const string SqlClientPermissionClass =
             "System.Data.SqlClient.SqlClientPermission, " + Consts.AssemblySystem_Data;
 
-        //		private const string DataProtectionPermissionClass = "System.Security.Permissions.DataProtectionPermission, " + Consts.AssemblySystem_Security;
-        //		private const string StorePermissionClass = "System.Security.Permissions.StorePermission, " + Consts.AssemblySystem_Security;
+        //		private const string DataProtectionPermissionClass =
+        // "System.Security.Permissions.DataProtectionPermission, " + Consts.AssemblySystem_Security;
+        //		private const string StorePermissionClass = "System.Security.Permissions.StorePermission, " +
+        // Consts.AssemblySystem_Security;
 
         private static Version _fxVersion;
         private static byte[] _ecmaKey = new byte[16]
@@ -587,8 +589,10 @@ namespace System.Security.Policy
             nps.AddPermission(
                 PermissionBuilder.Create(SqlClientPermissionClass, PermissionState.Unrestricted)
             );
-            //			nps.AddPermission (PermissionBuilder.Create (DataProtectionPermissionClass, PermissionState.Unrestricted));
-            //			nps.AddPermission (PermissionBuilder.Create (StorePermissionClass, PermissionState.Unrestricted));
+            //			nps.AddPermission (PermissionBuilder.Create (DataProtectionPermissionClass,
+            // PermissionState.Unrestricted));
+            //			nps.AddPermission (PermissionBuilder.Create (StorePermissionClass,
+            // PermissionState.Unrestricted));
             return nps;
         }
 

@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,8 +19,10 @@ namespace System.Web.WebPages
 {
     /// <summary>
     /// Wraps the caching and instantiation of paths of the BuildManager.
-    /// In case of precompiled non-updateable sites, the only way to verify if a file exists is to call BuildManager.GetObjectFactory. However this method is less performant than
-    /// VirtualPathProvider.FileExists which is used for all other scenarios. In this class, we optimize for the first scenario by storing the results of GetObjectFactory for a
+    /// In case of precompiled non-updateable sites, the only way to verify if a file exists is to call
+    // BuildManager.GetObjectFactory. However this method is less performant than
+    /// VirtualPathProvider.FileExists which is used for all other scenarios. In this class, we optimize
+    // for the first scenario by storing the results of GetObjectFactory for a
     /// long duration.
     /// </summary>
     internal sealed class BuildManagerWrapper : IVirtualPathFactory
@@ -67,8 +70,10 @@ namespace System.Web.WebPages
 
         /// <summary>
         /// Determines if a page exists in the website.
-        /// This method switches between a long duration cache or a short duration FileExistenceCache depending on whether the site is precompiled.
-        /// This is an optimization because BuildManager.GetObjectFactory is comparably slower than performing VirtualPathFactory.Exists
+        /// This method switches between a long duration cache or a short duration FileExistenceCache
+        // depending on whether the site is precompiled.
+        /// This is an optimization because BuildManager.GetObjectFactory is comparably slower than
+        // performing VirtualPathFactory.Exists
         /// </summary>
         public bool Exists(string virtualPath)
         {
@@ -82,7 +87,8 @@ namespace System.Web.WebPages
         internal bool IsNonUpdatablePrecompiledApp()
         {
             VirtualPathProvider vpp = _vppFunc();
-            // VirtualPathProvider currently null in some test scenarios e.g. PreApplicationStartCodeTest.StartTest
+            // VirtualPathProvider currently null in some test scenarios e.g.
+            // PreApplicationStartCodeTest.StartTest
             if (vpp == null)
             {
                 return false;
@@ -96,7 +102,8 @@ namespace System.Web.WebPages
         /// (b) The PreCompiledApp.config says that the app is not Updatable.
         /// </summary>
         /// <remarks>
-        /// This code is based on System.Web.DynamicData.Misc.IsNonUpdatablePrecompiledAppNoCache (DynamicData)
+        /// This code is based on System.Web.DynamicData.Misc.IsNonUpdatablePrecompiledAppNoCache
+        // (DynamicData)
         /// </remarks>
         [SuppressMessage(
             "Microsoft.Design",
@@ -188,7 +195,8 @@ namespace System.Web.WebPages
 
         /// <summary>
         /// Determines if an ObjectFactory exists for the virtualPath.
-        /// The BuildManager complains if we pass in extensions that aren't registered for compilation. So we ensure that the virtual path is not
+        /// The BuildManager complains if we pass in extensions that aren't registered for compilation. So
+        // we ensure that the virtual path is not
         /// extensionless and that it is one of the extension
         /// </summary>
         private IWebObjectFactory GetObjectFactory(string virtualPath)
@@ -212,7 +220,8 @@ namespace System.Web.WebPages
             {
                 var buildManagerResult = (BuildManagerResult)
                     HttpRuntime.Cache.Get(GetKeyFromVirtualPath(virtualPath));
-                // The cache could have evicted our results. In this case, we'll simply fall through to CreateInstanceFromVirtualPath
+                // The cache could have evicted our results. In this case, we'll simply fall through to
+                // CreateInstanceFromVirtualPath
                 if (buildManagerResult != null)
                 {
                     Debug.Assert(

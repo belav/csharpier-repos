@@ -307,7 +307,8 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         /// <summary>
-        /// Walks the type hierarchy above the current type for any types that use polymorphic configuration.
+        /// Walks the type hierarchy above the current type for any types that use polymorphic
+        // configuration.
         /// </summary>
         [UnconditionalSuppressMessage(
             "ReflectionAnalysis",

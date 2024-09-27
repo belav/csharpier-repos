@@ -29,7 +29,8 @@ internal static class HandshakeHelpers
     public static string CreateResponseKey(string requestKey)
     {
         // "The value of this header field is constructed by concatenating /key/, defined above in step 4
-        // in Section 4.2.2, with the string "258EAFA5- E914-47DA-95CA-C5AB0DC85B11", taking the SHA-1 hash of
+        // in Section 4.2.2, with the string "258EAFA5- E914-47DA-95CA-C5AB0DC85B11", taking the SHA-1 hash
+        // of
         // this concatenated value to obtain a 20-byte value and base64-encoding"
         // https://tools.ietf.org/html/rfc6455#section-4.2.2
 

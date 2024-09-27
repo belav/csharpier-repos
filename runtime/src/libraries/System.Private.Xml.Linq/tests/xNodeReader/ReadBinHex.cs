@@ -479,7 +479,8 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("WS:WireCompat:hex binary fails to send/return data after 1787 bytes going Whidbey to Everett")]
+                //[Variation("WS:WireCompat:hex binary fails to send/return data after 1787 bytes going Whidbey to
+                // Everett")]
                 public void TestTextReadBinHex_24()
                 {
                     string filename = Path.Combine(
@@ -952,7 +953,8 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-                //[Variation("WS:WireCompat:hex binary fails to send/return data after 1787 bytes going Whidbey to Everett")]
+                //[Variation("WS:WireCompat:hex binary fails to send/return data after 1787 bytes going Whidbey to
+                // Everett")]
                 public void TestTextReadBinHex_24()
                 {
                     string filename = Path.Combine(

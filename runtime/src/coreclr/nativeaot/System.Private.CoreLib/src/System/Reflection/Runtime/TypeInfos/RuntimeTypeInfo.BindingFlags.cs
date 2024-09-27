@@ -33,7 +33,8 @@ namespace System.Reflection.Runtime.TypeInfos
                     candidates.Add(candidate);
             }
 
-            // For perf and desktop compat, fast-path these specific checks before calling on the binder to break ties.
+            // For perf and desktop compat, fast-path these specific checks before calling on the binder to
+            // break ties.
             if (candidates.Count == 0)
                 return null;
 
@@ -80,10 +81,12 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             Debug.Assert(name != null);
 
-            // GetMethodImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to null.
+            // GetMethodImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to
+            // null.
             if (types == null)
             {
-                // Group #1: This group of api accept only a name and BindingFlags. The other parameters are hard-wired by the non-virtual api entrypoints.
+                // Group #1: This group of api accept only a name and BindingFlags. The other parameters are
+                // hard-wired by the non-virtual api entrypoints.
                 Debug.Assert(genericParameterCount == GenericParameterCountAny);
                 Debug.Assert(binder == null);
                 Debug.Assert(callConvention == CallingConventions.Any);
@@ -115,7 +118,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 if (candidates.Count == 0)
                     return null;
 
-                // For perf and desktop compat, fast-path these specific checks before calling on the binder to break ties.
+                // For perf and desktop compat, fast-path these specific checks before calling on the binder to
+                // break ties.
                 if (types.Length == 0 && candidates.Count == 1)
                     return candidates[0];
 
@@ -146,10 +150,12 @@ namespace System.Reflection.Runtime.TypeInfos
         {
             Debug.Assert(name != null);
 
-            // GetPropertyImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to null.
+            // GetPropertyImpl() is a funnel for two groups of api. We can distinguish by comparing "types" to
+            // null.
             if (types == null && returnType == null)
             {
-                // Group #1: This group of api accept only a name and BindingFlags. The other parameters are hard-wired by the non-virtual api entrypoints.
+                // Group #1: This group of api accept only a name and BindingFlags. The other parameters are
+                // hard-wired by the non-virtual api entrypoints.
                 Debug.Assert(binder == null);
                 Debug.Assert(modifiers == null);
                 return Query<PropertyInfo>(PropertyPolicies.Instance, name, bindingAttr)
@@ -157,7 +163,8 @@ namespace System.Reflection.Runtime.TypeInfos
             }
             else
             {
-                // Group #2: This group of api takes a set of parameter types, a return type (both cannot be null) and an optional binder.
+                // Group #2: This group of api takes a set of parameter types, a return type (both cannot be null)
+                // and an optional binder.
                 QueryResult<PropertyInfo> queryResult = Query<PropertyInfo>(
                     PropertyPolicies.Instance,
                     name,
@@ -175,7 +182,8 @@ namespace System.Reflection.Runtime.TypeInfos
                 if (candidates.Count == 0)
                     return null;
 
-                // For perf and desktop compat, fast-path these specific checks before calling on the binder to break ties.
+                // For perf and desktop compat, fast-path these specific checks before calling on the binder to
+                // break ties.
                 if (types == null || types.Length == 0)
                 {
                     // no arguments
@@ -194,7 +202,8 @@ namespace System.Reflection.Runtime.TypeInfos
                     {
                         if (returnType is null)
                         {
-                            // if we are here we have no args or property type to select over and we have more than one property with that name
+                            // if we are here we have no args or property type to select over and we have more than one property
+                            // with that name
                             throw ThrowHelper.GetAmbiguousMatchException(firstCandidate);
                         }
                     }

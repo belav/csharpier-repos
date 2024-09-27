@@ -203,9 +203,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
         public abstract AbstractTableEntriesSource<TItem> CreateTableEntriesSource(object data);
 
         /// <summary>
-        /// Get unique ID for given data that will be used to find data whose items needed to be merged together.
+        /// Get unique ID for given data that will be used to find data whose items needed to be merged
+        // together.
         ///
-        /// for example, for linked files, data that belong to same physical file will be gathered and items that belong to
+        /// for example, for linked files, data that belong to same physical file will be gathered and items
+        // that belong to
         /// those data will be de-duplicated.
         /// </summary>
         protected abstract object GetOrUpdateAggregationKey(TData data);

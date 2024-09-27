@@ -444,7 +444,8 @@ namespace System.Workflow.ComponentModel.Compiler
                             }
                         }
                     }
-                    //this line was throwing for the delay sign case. besides, copying PathToAssembly should do the same...
+                    //this line was throwing for the delay sign case. besides, copying PathToAssembly should do the
+                    // same...
                     if (
                         !results.Errors.HasErrors
                         && !parameters.GenerateCodeCompileUnitOnly
@@ -1149,7 +1150,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 uint nameLength,
                 [Out] out uint actualLength
             );
-            /*....*/
+/*....*/
         }
 
         [
@@ -1172,7 +1173,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 [Out] out uint hashValueSize,
                 [Out] out uint assemblyRefFlags
             );
-            /*....*/
+/*....*/
         }
 
         private static MetadataTokenType TokenTypeFromToken(uint token)

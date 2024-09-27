@@ -34,7 +34,8 @@ public static class EditContextDataAnnotationsExtensions
     /// Enables DataAnnotations validation support for the <see cref="EditContext"/>.
     /// </summary>
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
-    /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from the <see cref="EditContext"/>.</returns>
+    /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from
+    // the <see cref="EditContext"/>.</returns>
     [Obsolete(
         "This API is obsolete and may be removed in future versions. Use the overload that accepts an IServiceProvider instead."
     )]
@@ -47,8 +48,10 @@ public static class EditContextDataAnnotationsExtensions
     /// Enables DataAnnotations validation support for the <see cref="EditContext"/>.
     /// </summary>
     /// <param name="editContext">The <see cref="EditContext"/>.</param>
-    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to be used in the <see cref="ValidationContext"/>.</param>
-    /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from the <see cref="EditContext"/>.</returns>
+    /// <param name="serviceProvider">The <see cref="IServiceProvider"/> to be used in the <see
+    // cref="ValidationContext"/>.</param>
+    /// <returns>A disposable object whose disposal will remove DataAnnotations validation support from
+    // the <see cref="EditContext"/>.</returns>
     public static IDisposable EnableDataAnnotationsValidation(
         this EditContext editContext,
         IServiceProvider serviceProvider

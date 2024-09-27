@@ -144,7 +144,8 @@ namespace ILCompiler
             // the reachable blocks. We use substitutions to tell us what's unreachable. We consider conditional
             // branches "interesting" and whenever we see one, we seek backwards in the IL instruction stream
             // to find the instruction that feeds it. We make sure we don't cross the basic block boundary while
-            // doing that. If the conditional instruction is fed by known values (either through the substitutions
+            // doing that. If the conditional instruction is fed by known values (either through the
+            // substitutions
             // or because it's an IL constant), we simulate the result of the comparison and only mark
             // the taken branch. We also mark any associated EH regions.
             //
@@ -620,7 +621,8 @@ namespace ILCompiler
             )
             {
                 // We're going to inject new string tokens. Start where the last token of the module left off.
-                // We don't need this token to be globally unique because all token resolution happens in the context
+                // We don't need this token to be globally unique because all token resolution happens in the
+                // context
                 // of a MethodIL and we're making a new one here. It just has to be unique to the MethodIL.
                 int tokenRid = ecmaMethodIL.Module.MetadataReader.GetHeapSize(HeapIndex.UserString);
 

@@ -149,8 +149,8 @@ namespace MonoTests.System.Transactions
         }
 
         /* We support only 1 durable with 2PC
-         * On .net, this becomes a distributed transaction
-         */
+        * On .net, this becomes a distributed transaction
+        */
         [Test]
         [Category("NotWorking")]
         public void Vol0_Dur1_2PC()
@@ -158,8 +158,8 @@ namespace MonoTests.System.Transactions
             IntResourceManager irm = new IntResourceManager(1);
 
             /* Durable resource enlisted with a IEnlistedNotification
-             * object
-             */
+            * object
+            */
             irm.Type = ResourceManagerType.Durable;
 
             using (TransactionScope scope = new TransactionScope())
@@ -176,8 +176,8 @@ namespace MonoTests.System.Transactions
             IntResourceManager irm = new IntResourceManager(1);
 
             /* Durable resource enlisted with a IEnlistedNotification
-             * object
-             */
+            * object
+            */
             irm.Type = ResourceManagerType.Durable;
             irm.FailSPC = true;
             irm.UseSingle = true;
@@ -233,8 +233,8 @@ namespace MonoTests.System.Transactions
         }
 
         /* >1vol + 1 durable
-         * Durable fails SPC
-         */
+        * Durable fails SPC
+        */
         [Test]
         public void Vol2_Dur1_Fail1()
         {
@@ -251,7 +251,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[0] does Abort on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -278,8 +278,8 @@ namespace MonoTests.System.Transactions
         }
 
         /* >1vol + 1 durable
-         * durable doesn't complete SPC
-         */
+        * durable doesn't complete SPC
+        */
         [Test]
         [Ignore("Correct this test, it should throw TimeOutException or something")]
         public void Vol2_Dur1_Fail2()
@@ -298,7 +298,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
             try
             {
                 using (
@@ -354,7 +354,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
             try
             {
                 using (
@@ -392,8 +392,8 @@ namespace MonoTests.System.Transactions
         }
 
         /* >1vol + 1 durable
-         * Volatile fails Prepare
-         */
+        * Volatile fails Prepare
+        */
         [Test]
         public void Vol2_Dur1_Fail3()
         {
@@ -410,7 +410,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -428,9 +428,9 @@ namespace MonoTests.System.Transactions
                 irm[0].Check(0, 0, 0, 1, 0, 0, 0, "irm [0]");
 
                 /* irm [1] & [2] get prepare,
-                 * [2] -> ForceRollback,
-                 * [1] & [3] get rollback,
-                 * [0](durable) gets rollback */
+                * [2] -> ForceRollback,
+                * [1] & [3] get rollback,
+                * [0](durable) gets rollback */
                 irm[1].Check(0, 1, 0, 1, 0, 0, 0, "irm [1]");
                 irm[2].Check(0, 1, 0, 0, 0, 0, 0, "irm [2]");
                 irm[3].Check(0, 0, 0, 1, 0, 0, 0, "irm [3]");
@@ -456,7 +456,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
             try
             {
                 using (TransactionScope scope = new TransactionScope())
@@ -504,7 +504,7 @@ namespace MonoTests.System.Transactions
                 irm[i].UseSingle = true;
 
             /* Durable RM irm[2] does on SPC, so
-             * all volatile RMs get Rollback */
+            * all volatile RMs get Rollback */
 
             using (TransactionScope scope = new TransactionScope())
             {
@@ -623,9 +623,9 @@ namespace MonoTests.System.Transactions
 
         #region Others
         /* >1vol
-         * > 1 durable, On .net this becomes a distributed transaction
-         * We don't support this in mono yet.
-         */
+        * > 1 durable, On .net this becomes a distributed transaction
+        * We don't support this in mono yet.
+        */
         [Test]
         [Category("NotWorking")]
         public void Vol0_Dur2()
@@ -903,7 +903,8 @@ namespace MonoTests.System.Transactions
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             InstanceOf(typeof(NotSupportedException), ex, "Invalid exception thrown");
 #else
             // Mono wrapps the exception into a TransactionAbortedException.
@@ -958,7 +959,8 @@ namespace MonoTests.System.Transactions
             // MS.NET wont call TransactionCompleted event in this particular case.
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.That(ex, InstanceOf(typeof(NotSupportedException)), "Invalid exception thrown");
         }
 
@@ -1157,7 +1159,8 @@ namespace MonoTests.System.Transactions
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.AreEqual(
                 rm1.ThrowThisException,
                 ex,
@@ -1218,7 +1221,8 @@ namespace MonoTests.System.Transactions
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.AreEqual(
                 rm1.ThrowThisException,
                 ex,
@@ -1279,7 +1283,8 @@ namespace MonoTests.System.Transactions
             // MS.NET wont call TransactionCompleted event in this particular case.
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.AreEqual(
                 rm1.ThrowThisException,
                 ex,
@@ -1446,7 +1451,8 @@ namespace MonoTests.System.Transactions
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.AreEqual(
                 rm2.ThrowThisException,
                 ex,
@@ -1518,7 +1524,8 @@ namespace MonoTests.System.Transactions
             Assert.IsFalse(called, "TransactionCompleted event handler _was_ called!?!?!");
             Assert.IsNotNull(ex, "Exception not thrown");
 #if MS_EXCEPTIONS_BEHAVIOR
-            // MS.NET will relay the exception thrown by RM instead of wrapping it on a TransactionAbortedException.
+            // MS.NET will relay the exception thrown by RM instead of wrapping it on a
+            // TransactionAbortedException.
             Assert.AreEqual(
                 rm1.ThrowThisException,
                 ex,

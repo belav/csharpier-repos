@@ -235,15 +235,15 @@ namespace Commons.Xml.Relaxng
             assembledStart = null; // no use anymore
 
             // 4.19 (a) remove non-reachable defines
-            /*
-                        compiledStart.MarkReachableDefs ();
-                        ArrayList tmp = new ArrayList ();
-                        foreach (DictionaryEntry entry in this.assembledDefs)
-                            if (!reachableDefines.ContainsKey (entry.Key))
-                                tmp.Add (entry.Key);
-                        foreach (string key in tmp)
-                            assembledDefs.Remove (key);
-            */
+/*
+compiledStart.MarkReachableDefs ();
+ArrayList tmp = new ArrayList ();
+foreach (DictionaryEntry entry in this.assembledDefs)
+if (!reachableDefines.ContainsKey (entry.Key))
+tmp.Add (entry.Key);
+foreach (string key in tmp)
+assembledDefs.Remove (key);
+*/
             // 4.19 (b) check illegal recursion
             CheckRecursion(compiledStart, 0);
             // here we collected element-replaced definitions
@@ -351,7 +351,7 @@ namespace Commons.Xml.Relaxng
                     if (checkRecursionDepth == -1)
                     {
                         checkedDefs[p] = depth;
-                        /*test*/if (refPattern.PatternType != RelaxngPatternType.Element)
+/*test*/if (refPattern.PatternType != RelaxngPatternType.Element)
                             CheckRecursion(refPattern, depth);
                         checkedDefs[p] = -2;
                     }

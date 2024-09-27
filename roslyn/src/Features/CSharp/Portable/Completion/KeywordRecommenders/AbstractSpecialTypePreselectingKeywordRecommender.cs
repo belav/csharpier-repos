@@ -29,8 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             CancellationToken cancellationToken
         );
 
-        // When the keyword is the inferred type in this context, we should treat it like its corresponding type symbol
-        // in terms of MatchPripority, so the selection can be determined by how well it matches the filter text instead,
+        // When the keyword is the inferred type in this context, we should treat it like its corresponding
+        // type symbol
+        // in terms of MatchPripority, so the selection can be determined by how well it matches the filter
+        // text instead,
         // e.g. selecting "string" over "String" when user typed "str".
         protected override int PreselectMatchPriority => SymbolMatchPriority.PreferType;
 

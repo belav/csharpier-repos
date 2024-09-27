@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 /// </summary>
 /// <remarks>
 /// The <see cref="DefaultClientModelValidatorProvider"/> provides validators from
-/// <see cref="IClientModelValidator"/> instances in <see cref="ModelBinding.ModelMetadata.ValidatorMetadata"/>.
+/// <see cref="IClientModelValidator"/> instances in <see
+// cref="ModelBinding.ModelMetadata.ValidatorMetadata"/>.
 /// </remarks>
 internal sealed class DefaultClientModelValidatorProvider : IClientModelValidatorProvider
 {

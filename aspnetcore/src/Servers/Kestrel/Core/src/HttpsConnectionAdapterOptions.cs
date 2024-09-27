@@ -29,10 +29,12 @@ public class HttpsConnectionAdapterOptions
 
     /// <summary>
     /// <para>
-    /// Specifies the server certificate information presented when an https connection is initiated. This is ignored if ServerCertificateSelector is set.
+    /// Specifies the server certificate information presented when an https connection is initiated.
+    // This is ignored if ServerCertificateSelector is set.
     /// </para>
     /// <para>
-    /// If the server certificate has an Extended Key Usage extension, the usages must include Server Authentication (OID 1.3.6.1.5.5.7.3.1).
+    /// If the server certificate has an Extended Key Usage extension, the usages must include Server
+    // Authentication (OID 1.3.6.1.5.5.7.3.1).
     /// </para>
     /// </summary>
     public X509Certificate2? ServerCertificate { get; set; }
@@ -46,11 +48,14 @@ public class HttpsConnectionAdapterOptions
 
     /// <summary>
     /// <para>
-    /// A callback that will be invoked to dynamically select a server certificate. This is higher priority than ServerCertificate.
-    /// If SNI is not available then the name parameter will be null. The <see cref="ConnectionContext"/> will be null for HTTP/3 connections.
+    /// A callback that will be invoked to dynamically select a server certificate. This is higher
+    // priority than ServerCertificate.
+    /// If SNI is not available then the name parameter will be null. The <see
+    // cref="ConnectionContext"/> will be null for HTTP/3 connections.
     /// </para>
     /// <para>
-    /// If the server certificate has an Extended Key Usage extension, the usages must include Server Authentication (OID 1.3.6.1.5.5.7.3.1).
+    /// If the server certificate has an Extended Key Usage extension, the usages must include Server
+    // Authentication (OID 1.3.6.1.5.5.7.3.1).
     /// </para>
     /// </summary>
     public Func<
@@ -66,12 +71,14 @@ public class HttpsConnectionAdapterOptions
         ServerCertificate is not null || ServerCertificateSelector is not null;
 
     /// <summary>
-    /// Specifies the client certificate requirements for a HTTPS connection. Defaults to <see cref="ClientCertificateMode.NoCertificate"/>.
+    /// Specifies the client certificate requirements for a HTTPS connection. Defaults to <see
+    // cref="ClientCertificateMode.NoCertificate"/>.
     /// </summary>
     public ClientCertificateMode ClientCertificateMode { get; set; }
 
     /// <summary>
-    /// Specifies a callback for additional client certificate validation that will be invoked during authentication. This will be ignored
+    /// Specifies a callback for additional client certificate validation that will be invoked during
+    // authentication. This will be ignored
     /// if <see cref="AllowAnyClientCertificate"/> is called after this callback is set.
     /// </summary>
     public Func<
@@ -82,8 +89,10 @@ public class HttpsConnectionAdapterOptions
     >? ClientCertificateValidation { get; set; }
 
     /// <summary>
-    /// Specifies allowable SSL protocols. Defaults to <see cref="SslProtocols.None" /> which allows the operating system to choose the best protocol to use,
-    /// and to block protocols that are not secure. Unless your app has a specific reason not to, you should use this default.
+    /// Specifies allowable SSL protocols. Defaults to <see cref="SslProtocols.None" /> which allows the
+    // operating system to choose the best protocol to use,
+    /// and to block protocols that are not secure. Unless your app has a specific reason not to, you
+    // should use this default.
     /// </summary>
     public SslProtocols SslProtocols { get; set; }
 
@@ -93,7 +102,8 @@ public class HttpsConnectionAdapterOptions
     public bool CheckCertificateRevocation { get; set; }
 
     /// <summary>
-    /// Overrides the current <see cref="ClientCertificateValidation"/> callback and allows any client certificate.
+    /// Overrides the current <see cref="ClientCertificateValidation"/> callback and allows any client
+    // certificate.
     /// </summary>
     public void AllowAnyClientCertificate()
     {
@@ -101,7 +111,8 @@ public class HttpsConnectionAdapterOptions
     }
 
     /// <summary>
-    /// Provides direct configuration of the <see cref="SslServerAuthenticationOptions"/> on a per-connection basis.
+    /// Provides direct configuration of the <see cref="SslServerAuthenticationOptions"/> on a
+    // per-connection basis.
     /// This is called after all of the other settings have already been applied.
     /// </summary>
     public Action<ConnectionContext, SslServerAuthenticationOptions>? OnAuthenticate { get; set; }

@@ -344,7 +344,8 @@ internal class F : A
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (16,22): error CS0060: Inconsistent accessibility: base type 'A.B.C.X' is less accessible than class 'F.D.E'
+                // (16,22): error CS0060: Inconsistent accessibility: base type 'A.B.C.X' is less accessible than
+                // class 'F.D.E'
                 //         public class E : C.X { }
                 Diagnostic(ErrorCode.ERR_BadVisBaseClass, "E").WithArguments("F.D.E", "A.B.C.X")
             );
@@ -373,7 +374,8 @@ public partial class C1
 ";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (10,15): error CS0060: Inconsistent accessibility: base type 'NV' is less accessible than class 'C1'
+                // (10,15): error CS0060: Inconsistent accessibility: base type 'NV' is less accessible than class
+                // 'C1'
                 // partial class C1 : NV
                 Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C1")
                     .WithArguments("C1", "NV")
@@ -409,7 +411,8 @@ public partial class C1
                 Diagnostic(ErrorCode.ERR_StaticBaseClass, "C1")
                     .WithArguments("NV", "C1")
                     .WithLocation(10, 15),
-                // (10,15): error CS0060: Inconsistent accessibility: base type 'NV' is less accessible than class 'C1'
+                // (10,15): error CS0060: Inconsistent accessibility: base type 'NV' is less accessible than class
+                // 'C1'
                 // partial class C1 : NV
                 Diagnostic(ErrorCode.ERR_BadVisBaseClass, "C1")
                     .WithArguments("C1", "NV")
@@ -456,17 +459,20 @@ partial interface IBar : IBaz, IBaz
                 Diagnostic(ErrorCode.ERR_DuplicateInterfaceInBaseList, "IBaz")
                     .WithArguments("IBaz")
                     .WithLocation(25, 32),
-                // (21,19): error CS0061: Inconsistent accessibility: base interface 'IGoo' is less accessible than interface 'IBar'
+                // (21,19): error CS0061: Inconsistent accessibility: base interface 'IGoo' is less accessible than
+                // interface 'IBar'
                 // partial interface IBar : IGoo, IBam
                 Diagnostic(ErrorCode.ERR_BadVisBaseInterface, "IBar")
                     .WithArguments("IBar", "IGoo")
                     .WithLocation(21, 19),
-                // (21,19): error CS0061: Inconsistent accessibility: base interface 'IBam' is less accessible than interface 'IBar'
+                // (21,19): error CS0061: Inconsistent accessibility: base interface 'IBam' is less accessible than
+                // interface 'IBar'
                 // partial interface IBar : IGoo, IBam
                 Diagnostic(ErrorCode.ERR_BadVisBaseInterface, "IBar")
                     .WithArguments("IBar", "IBam")
                     .WithLocation(21, 19),
-                // (25,19): error CS0061: Inconsistent accessibility: base interface 'IBaz' is less accessible than interface 'IBar'
+                // (25,19): error CS0061: Inconsistent accessibility: base interface 'IBaz' is less accessible than
+                // interface 'IBar'
                 // partial interface IBar : IBaz, IBaz
                 Diagnostic(ErrorCode.ERR_BadVisBaseInterface, "IBar")
                     .WithArguments("IBar", "IBaz")
@@ -1783,7 +1789,8 @@ class C : PublicClass.ProtectedInternalClass
                 assemblyName: "Two"
             );
             compilation2.VerifyDiagnostics(
-                // (2,23): error CS0122: 'PublicClass.ProtectedInternalClass' is inaccessible due to its protection level
+                // (2,23): error CS0122: 'PublicClass.ProtectedInternalClass' is inaccessible due to its protection
+                // level
                 // class C : PublicClass.ProtectedInternalClass
                 Diagnostic(ErrorCode.ERR_BadAccess, "ProtectedInternalClass")
                     .WithArguments("PublicClass.ProtectedInternalClass")
@@ -1842,7 +1849,8 @@ class C : PublicClass.ProtectedAndInternalClass
 ";
             CreateCompilationWithILAndMscorlib40(csharp, il, appendDefaultHeader: false)
                 .VerifyDiagnostics(
-                    // (2,23): error CS0122: 'PublicClass.ProtectedAndInternalClass' is inaccessible due to its protection level
+                    // (2,23): error CS0122: 'PublicClass.ProtectedAndInternalClass' is inaccessible due to its
+                    // protection level
                     // class C : PublicClass.ProtectedAndInternalClass
                     Diagnostic(ErrorCode.ERR_BadAccess, "ProtectedAndInternalClass")
                         .WithArguments("PublicClass.ProtectedAndInternalClass")
@@ -2151,17 +2159,20 @@ class D
 }";
             var compilation = CreateCompilation(source);
             compilation.VerifyDiagnostics(
-                // (4,14): error CS0246: The type or namespace name 'C' could not be found (are you missing a using directive or an assembly reference?)
+                // (4,14): error CS0246: The type or namespace name 'C' could not be found (are you missing a using
+                // directive or an assembly reference?)
                 // class A<T> : C
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "C")
                     .WithArguments("C")
                     .WithLocation(4, 14),
-                // (1,7): error CS0138: A 'using namespace' directive can only be applied to namespaces; 'A<int>.B' is a type not a namespace. Consider a 'using static' directive instead
+                // (1,7): error CS0138: A 'using namespace' directive can only be applied to namespaces; 'A<int>.B'
+                // is a type not a namespace. Consider a 'using static' directive instead
                 // using A<int>.B;
                 Diagnostic(ErrorCode.ERR_BadUsingNamespace, "A<int>.B")
                     .WithArguments("A<int>.B")
                     .WithLocation(1, 7),
-                // (2,7): error CS0138: A 'using namespace' directive can only be applied to namespaces; 'D' is a type not a namespace. Consider a 'using static' directive instead
+                // (2,7): error CS0138: A 'using namespace' directive can only be applied to namespaces; 'D' is a
+                // type not a namespace. Consider a 'using static' directive instead
                 // using D;
                 Diagnostic(ErrorCode.ERR_BadUsingNamespace, "D")
                     .WithArguments("D")
@@ -2286,7 +2297,9 @@ namespace CrashTest
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,14): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'Crash<T>'. There is no implicit reference conversion from 'object' to 'CrashTest.Crash<object>.AbstractClass'.
+                // (2,14): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'Crash<T>'. There is no implicit reference conversion from 'object' to
+                // 'CrashTest.Crash<object>.AbstractClass'.
                 // using static CrashTest.Crash<object>;
                 Diagnostic(
                         ErrorCode.ERR_GenericConstraintNotSatisfiedRefType,
@@ -2299,7 +2312,9 @@ namespace CrashTest
                         "object"
                     )
                     .WithLocation(2, 14),
-                // (6,11): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'Crash<T>'. There is no implicit reference conversion from 'object' to 'CrashTest.Crash<object>.AbstractClass'.
+                // (6,11): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'Crash<T>'. There is no implicit reference conversion from 'object' to
+                // 'CrashTest.Crash<object>.AbstractClass'.
                 //     class Class2 : AbstractClass
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Class2")
                     .WithArguments(
@@ -2309,7 +2324,9 @@ namespace CrashTest
                         "object"
                     )
                     .WithLocation(6, 11),
-                // (21,23): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type or method 'Crash<T>'. There is no implicit reference conversion from 'object' to 'CrashTest.Crash<object>.AbstractClass'.
+                // (21,23): error CS0311: The type 'object' cannot be used as type parameter 'T' in the generic type
+                // or method 'Crash<T>'. There is no implicit reference conversion from 'object' to
+                // 'CrashTest.Crash<object>.AbstractClass'.
                 //         AbstractClass Test()
                 Diagnostic(ErrorCode.ERR_GenericConstraintNotSatisfiedRefType, "Test")
                     .WithArguments(
@@ -2423,12 +2440,14 @@ namespace CrashTest
 }";
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics(
-                // (2,7): error CS0138: A 'using namespace' directive can only be applied to namespaces; 'Crash<Class2>' is a type not a namespace. Consider a 'using static' directive instead
+                // (2,7): error CS0138: A 'using namespace' directive can only be applied to namespaces;
+                // 'Crash<Class2>' is a type not a namespace. Consider a 'using static' directive instead
                 // using CrashTest.Crash<CrashTest.Class2>;
                 Diagnostic(ErrorCode.ERR_BadUsingNamespace, "CrashTest.Crash<CrashTest.Class2>")
                     .WithArguments("CrashTest.Crash<CrashTest.Class2>")
                     .WithLocation(2, 7),
-                // (6,20): error CS0246: The type or namespace name 'AbstractClass' could not be found (are you missing a using directive or an assembly reference?)
+                // (6,20): error CS0246: The type or namespace name 'AbstractClass' could not be found (are you
+                // missing a using directive or an assembly reference?)
                 //     class Class2 : AbstractClass
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "AbstractClass")
                     .WithArguments("AbstractClass")
@@ -2542,7 +2561,8 @@ class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "F")
                     .WithArguments("Base.D*")
                     .WithLocation(13, 11),
-                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.D')
+                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.D')
                 //     class F : A<D*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "F")
                     .WithArguments("Base.D")
@@ -2552,7 +2572,8 @@ class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "E")
                     .WithArguments("Base.C*")
                     .WithLocation(12, 11),
-                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.C')
+                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.C')
                 //     class E : A<C*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "E")
                     .WithArguments("Base.C")
@@ -2598,7 +2619,8 @@ unsafe class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "F")
                     .WithArguments("Base.D*")
                     .WithLocation(13, 11),
-                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.D')
+                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.D')
                 //     class F : A<D*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "F")
                     .WithArguments("Base.D")
@@ -2608,7 +2630,8 @@ unsafe class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "E")
                     .WithArguments("Base.C*")
                     .WithLocation(12, 11),
-                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.C')
+                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.C')
                 //     class E : A<C*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "E")
                     .WithArguments("Base.C")
@@ -2631,7 +2654,8 @@ unsafe class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "F")
                     .WithArguments("Base.D*")
                     .WithLocation(13, 11),
-                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.D')
+                // (13,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.D')
                 //     class F : A<D*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "F")
                     .WithArguments("Base.D")
@@ -2641,7 +2665,8 @@ unsafe class Derived : Base
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "E")
                     .WithArguments("Base.C*")
                     .WithLocation(12, 11),
-                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Base.C')
+                // (12,11): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a
+                // managed type ('Base.C')
                 //     class E : A<C*>.B { }
                 Diagnostic(ErrorCode.WRN_ManagedAddr, "E")
                     .WithArguments("Base.C")

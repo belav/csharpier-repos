@@ -99,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // public delegate void D([Optional, DefaultParameterValue(1)]int a, int b = 2);
                 //
                 // Dev11 emits the first parameter as option with default value and the second as regular parameter.
-                // The syntactic default value is suppressed since additional synthesized parameters are added at the end of the signature.
+                // The syntactic default value is suppressed since additional synthesized parameters are added at
+                // the end of the signature.
 
                 return DefaultSyntaxValue ?? DefaultValueFromAttributes;
             }
@@ -349,7 +350,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var binder = WithTypeParametersBinderOpt;
 
             // If binder is null, then get it from the compilation. Otherwise use the provided binder.
-            // Don't always get it from the compilation because we might be in a speculative context (local function parameter),
+            // Don't always get it from the compilation because we might be in a speculative context (local
+            // function parameter),
             // in which case the declaring compilation is the wrong one.
             if (binder == null)
             {
@@ -421,7 +423,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // This method *must not* depend on attributes on the parameter symbol.
-        // Otherwise we will have cycles when binding usage of attributes whose constructors have optional parameters
+        // Otherwise we will have cycles when binding usage of attributes whose constructors have optional
+        // parameters
         private ConstantValue MakeDefaultExpression(
             BindingDiagnosticBag diagnostics,
             out Binder? binder,
@@ -481,7 +484,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // If we have something like M(double? x = 1) then the expression we'll get is (double?)1, which
             // does not have a constant value. The constant value we want is (double)1.
-            // The default literal conversion is an exception: (double)default would give the wrong value for M(double? x = default).
+            // The default literal conversion is an exception: (double)default would give the wrong value for
+            // M(double? x = default).
             if (
                 convertedExpression.ConstantValueOpt == null
                 && convertedExpression.Kind == BoundKind.Conversion
@@ -556,7 +560,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Symbol to copy bound attributes from, or null if the attributes are not shared among multiple source parameter symbols.
+        /// Symbol to copy bound attributes from, or null if the attributes are not shared among multiple
+        // source parameter symbols.
         /// </summary>
         /// <remarks>
         /// Used for parameters of partial implementation. We bind the attributes only on the definition
@@ -640,7 +645,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from well-known attributes applied to the symbol or null if there are no
+        // applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -657,7 +663,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns data decoded from special early bound well-known attributes applied to the symbol or null if there are no applied attributes.
+        /// Returns data decoded from special early bound well-known attributes applied to the symbol or
+        // null if there are no applied attributes.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -678,7 +685,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns null if there are no attributes applied on the symbol.
+        /// Returns a bag of applied custom attributes and data decoded from well-known attributes. Returns
+        // null if there are no attributes applied on the symbol.
         /// </summary>
         /// <remarks>
         /// Forces binding and decoding of attributes.
@@ -738,8 +746,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             Debug.Assert(!attributeType.IsErrorType());
 
-            // NOTE: OptionalAttribute is decoded specially before any of the other attributes and stored in the parameter
-            // symbol (rather than in the EarlyWellKnownAttributeData) because it is needed during overload resolution.
+            // NOTE: OptionalAttribute is decoded specially before any of the other attributes and stored in the
+            // parameter
+            // symbol (rather than in the EarlyWellKnownAttributeData) because it is needed during overload
+            // resolution.
             if (
                 CSharpAttributeData.IsTargetEarlyAttribute(
                     attributeType,
@@ -1020,7 +1030,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (HasDefaultArgumentSyntax)
                 {
-                    // error CS1745: Cannot specify default parameter value in conjunction with DefaultParameterAttribute or OptionalAttribute
+                    // error CS1745: Cannot specify default parameter value in conjunction with
+                    // DefaultParameterAttribute or OptionalAttribute
                     diagnostics.Add(
                         ErrorCode.ERR_DefaultValueUsedWithAttributes,
                         arguments.AttributeSyntaxOpt.Name.Location
@@ -1237,7 +1248,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     && this.CSharpSyntaxNode.Default is null
                 )
                 {
-                    // A default value is specified for 'ref readonly' parameter '{0}', but 'ref readonly' should be used only for references. Consider declaring the parameter as 'in'.
+                    // A default value is specified for 'ref readonly' parameter '{0}', but 'ref readonly' should be
+                    // used only for references. Consider declaring the parameter as 'in'.
                     diagnostics.Add(
                         ErrorCode.WRN_RefReadonlyParameterDefaultValue,
                         syntax,
@@ -1314,7 +1326,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (HasDefaultArgumentSyntax)
             {
-                // error CS1745: Cannot specify default parameter value in conjunction with DefaultParameterAttribute or OptionalAttribute
+                // error CS1745: Cannot specify default parameter value in conjunction with
+                // DefaultParameterAttribute or OptionalAttribute
                 if (diagnose)
                 {
                     diagnosticsOpt.Add(
@@ -1325,12 +1338,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return ConstantValue.Bad;
             }
 
-            // BREAK: In dev10, DefaultParameterValueAttribute could not be applied to System.Type or array parameters.
-            // When this was attempted, dev10 produced CS1909, ERR_DefaultValueBadParamType.  Roslyn takes a different
-            // approach: instead of looking at the parameter type, we look at the argument type.  There's nothing wrong
-            // with providing a default value for a System.Type or array parameter, as long as the default parameter
-            // is not a System.Type or an array (i.e. null is fine).  Since we are no longer interested in the type of
-            // the parameter, all occurrences of CS1909 have been replaced with CS1910, ERR_DefaultValueBadValueType,
+            // BREAK: In dev10, DefaultParameterValueAttribute could not be applied to System.Type or array
+            // parameters.
+            // When this was attempted, dev10 produced CS1909, ERR_DefaultValueBadParamType.  Roslyn takes a
+            // different
+            // approach: instead of looking at the parameter type, we look at the argument type.  There's
+            // nothing wrong
+            // with providing a default value for a System.Type or array parameter, as long as the default
+            // parameter
+            // is not a System.Type or an array (i.e. null is fine).  Since we are no longer interested in the
+            // type of
+            // the parameter, all occurrences of CS1909 have been replaced with CS1910,
+            // ERR_DefaultValueBadValueType,
             // to indicate that the argument type, rather than the parameter type, is the source of the problem.
 
             Debug.Assert(attribute.CommonConstructorArguments.Length == 1);
@@ -1359,7 +1378,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                        // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the
+                        // parameter type
                         if (diagnose)
                         {
                             diagnosticsOpt.Add(
@@ -1395,7 +1415,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     .Kind.IsImplicitConversion()
             )
             {
-                // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the parameter type
+                // error CS1908: The type of the argument to the DefaultParameterValue attribute must match the
+                // parameter type
                 if (diagnose)
                 {
                     diagnosticsOpt.Add(ErrorCode.ERR_DefaultValueTypeMustMatch, node.Name.Location);
@@ -1419,8 +1440,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// Is the attribute syntax appearing on a parameter of a partial method implementation part?
-        /// Since attributes are merged between the parts of a partial, we need to look at the syntax where the
-        /// attribute appeared in the source to see if it corresponds to a partial method implementation part.
+        /// Since attributes are merged between the parts of a partial, we need to look at the syntax where
+        // the
+        /// attribute appeared in the source to see if it corresponds to a partial method implementation
+        // part.
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
@@ -1463,7 +1486,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (!IsValidCallerInfoContext(node))
             {
-                // CS4024: The CallerLineNumberAttribute applied to parameter '{0}' will have no effect because it applies to a
+                // CS4024: The CallerLineNumberAttribute applied to parameter '{0}' will have no effect because it
+                // applies to a
                 //         member that is used in contexts that do not allow optional arguments
                 diagnostics.Add(
                     ErrorCode.WRN_CallerLineNumberParamForUnconsumedLocation,
@@ -1478,7 +1502,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                // CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
+                // CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions
+                // from type '{0}' to type '{1}'
                 TypeSymbol intType = compilation.GetSpecialType(SpecialType.System_Int32);
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForCallerLineNumberParam,
@@ -1514,7 +1539,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (!IsValidCallerInfoContext(node))
             {
-                // CS4025: The CallerFilePathAttribute applied to parameter '{0}' will have no effect because it applies to a
+                // CS4025: The CallerFilePathAttribute applied to parameter '{0}' will have no effect because it
+                // applies to a
                 //         member that is used in contexts that do not allow optional arguments
                 diagnostics.Add(
                     ErrorCode.WRN_CallerFilePathParamForUnconsumedLocation,
@@ -1529,7 +1555,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                // CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
+                // CS4018: CallerFilePathAttribute cannot be applied because there are no standard conversions from
+                // type '{0}' to type '{1}'
                 TypeSymbol stringType = compilation.GetSpecialType(SpecialType.System_String);
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForCallerFilePathParam,
@@ -1550,7 +1577,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerLineNumber)
             {
-                // CS7082: The CallerFilePathAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerLineNumberAttribute.
+                // CS7082: The CallerFilePathAttribute applied to parameter '{0}' will have no effect. It is
+                // overridden by the CallerLineNumberAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerLineNumberPreferredOverCallerFilePath,
                     node.Name.Location,
@@ -1574,7 +1602,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (!IsValidCallerInfoContext(node))
             {
-                // CS4026: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect because it applies to a
+                // CS4026: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect because it
+                // applies to a
                 //         member that is used in contexts that do not allow optional arguments
                 diagnostics.Add(
                     ErrorCode.WRN_CallerMemberNameParamForUnconsumedLocation,
@@ -1589,7 +1618,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                // CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
+                // CS4019: CallerMemberNameAttribute cannot be applied because there are no standard conversions
+                // from type '{0}' to type '{1}'
                 TypeSymbol stringType = compilation.GetSpecialType(SpecialType.System_String);
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForCallerMemberNameParam,
@@ -1610,7 +1640,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerLineNumber)
             {
-                // CS7081: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerLineNumberAttribute.
+                // CS7081: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect. It is
+                // overridden by the CallerLineNumberAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerLineNumberPreferredOverCallerMemberName,
                     node.Name.Location,
@@ -1619,7 +1650,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerFilePath)
             {
-                // CS7080: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerFilePathAttribute.
+                // CS7080: The CallerMemberNameAttribute applied to parameter '{0}' will have no effect. It is
+                // overridden by the CallerFilePathAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerFilePathPreferredOverCallerMemberName,
                     node.Name.Location,
@@ -1636,7 +1668,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             BindingDiagnosticBag diagnostics
         )
         {
-            // We intentionally don't report an error for earlier language versions here. The attribute already existed
+            // We intentionally don't report an error for earlier language versions here. The attribute already
+            // existed
             // before the feature was developed. The error is only reported when the binder supplies a value
             // based on the attribute.
             CSharpCompilation compilation = this.DeclaringCompilation;
@@ -1647,7 +1680,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (!IsValidCallerInfoContext(node))
             {
-                // CS8966: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect because it applies to a
+                // CS8966: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect
+                // because it applies to a
                 //         member that is used in contexts that do not allow optional arguments
                 diagnostics.Add(
                     ErrorCode.WRN_CallerArgumentExpressionParamForUnconsumedLocation,
@@ -1662,7 +1696,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 )
             )
             {
-                // CS8959: CallerArgumentExpressionAttribute cannot be applied because there are no standard conversions from type '{0}' to type '{1}'
+                // CS8959: CallerArgumentExpressionAttribute cannot be applied because there are no standard
+                // conversions from type '{0}' to type '{1}'
                 TypeSymbol stringType = compilation.GetSpecialType(SpecialType.System_String);
                 diagnostics.Add(
                     ErrorCode.ERR_NoConversionForCallerArgumentExpressionParam,
@@ -1675,7 +1710,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 // Unconsumed location checks happen first, so we require a default value.
 
-                // CS8964: The CallerArgumentExpressionAttribute may only be applied to parameters with default values
+                // CS8964: The CallerArgumentExpressionAttribute may only be applied to parameters with default
+                // values
                 diagnostics.Add(
                     ErrorCode.ERR_BadCallerArgumentExpressionParamWithoutDefaultValue,
                     node.Name.Location
@@ -1683,7 +1719,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerLineNumber)
             {
-                // CS8960: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerLineNumberAttribute.
+                // CS8960: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It
+                // is overridden by the CallerLineNumberAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerLineNumberPreferredOverCallerArgumentExpression,
                     node.Name.Location,
@@ -1692,7 +1729,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerFilePath)
             {
-                // CS8961: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerFilePathAttribute.
+                // CS8961: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It
+                // is overridden by the CallerFilePathAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerFilePathPreferredOverCallerArgumentExpression,
                     node.Name.Location,
@@ -1701,7 +1739,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (IsCallerMemberName)
             {
-                // CS8962: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It is overridden by the CallerMemberNameAttribute.
+                // CS8962: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It
+                // is overridden by the CallerMemberNameAttribute.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerMemberNamePreferredOverCallerArgumentExpression,
                     node.Name.Location,
@@ -1714,7 +1753,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     == -1
             )
             {
-                // CS8963: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It is applied with an invalid parameter name.
+                // CS8963: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect. It
+                // is applied with an invalid parameter name.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerArgumentExpressionAttributeHasInvalidParameterName,
                     node.Name.Location,
@@ -1726,7 +1766,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 == Ordinal
             )
             {
-                // CS8965: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect because it's self-referential.
+                // CS8965: The CallerArgumentExpressionAttribute applied to parameter '{0}' will have no effect
+                // because it's self-referential.
                 diagnostics.Add(
                     ErrorCode.WRN_CallerArgumentExpressionAttributeSelfReferential,
                     node.Name.Location,
@@ -1851,7 +1892,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (constructorArgument.IsNull)
                 {
                     setInterpolatedStringHandlerAttributeError(ref arguments);
-                    // null is not a valid parameter name. To get access to the receiver of an instance method, use the empty string as the parameter name.
+                    // null is not a valid parameter name. To get access to the receiver of an instance method, use the
+                    // empty string as the parameter name.
                     diagnostics.Add(
                         ErrorCode.ERR_NullInvalidInterpolatedStringHandlerArgumentName,
                         arguments.AttributeSyntaxOpt!.Location
@@ -1913,7 +1955,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 Debug.Assert(arguments.AttributeSyntaxOpt is not null);
                 if (constant.IsNull)
                 {
-                    // null is not a valid parameter name. To get access to the receiver of an instance method, use the empty string as the parameter name.
+                    // null is not a valid parameter name. To get access to the receiver of an instance method, use the
+                    // empty string as the parameter name.
                     diagnostics.Add(
                         ErrorCode.ERR_NullInvalidInterpolatedStringHandlerArgumentName,
                         arguments.AttributeSyntaxOpt.Location
@@ -1974,7 +2017,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if ((object)parameter == this)
                 {
-                    // InterpolatedStringHandlerArgumentAttribute arguments cannot refer to the parameter the attribute is used on.
+                    // InterpolatedStringHandlerArgumentAttribute arguments cannot refer to the parameter the attribute
+                    // is used on.
                     diagnostics.Add(
                         ErrorCode.ERR_CannotUseSelfAsInterpolatedStringHandlerArgument,
                         arguments.AttributeSyntaxOpt.Location
@@ -1984,8 +2028,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (parameter.Ordinal > Ordinal)
                 {
-                    // Parameter '{0}' occurs after '{1}' in the parameter list, but is used as an argument for interpolated string handler conversions.
-                    // This will require the caller to reorder parameters with named arguments at the call site. Consider putting the interpolated
+                    // Parameter '{0}' occurs after '{1}' in the parameter list, but is used as an argument for
+                    // interpolated string handler conversions.
+                    // This will require the caller to reorder parameters with named arguments at the call site.
+                    // Consider putting the interpolated
                     // string handler parameter after all arguments involved.
                     diagnostics.Add(
                         ErrorCode.WRN_ParameterOccursAfterInterpolatedStringHandlerParameter,
@@ -2037,7 +2083,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     case RefKind.Ref:
                         if (data.HasOutAttribute && !data.HasInAttribute)
                         {
-                            // error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying the In attribute.
+                            // error CS0662: Cannot specify the Out attribute on a ref parameter without also specifying the In
+                            // attribute.
                             diagnostics.Add(
                                 ErrorCode.ERR_OutAttrOnRefParam,
                                 this.GetFirstLocation()
@@ -2095,7 +2142,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// True if the parameter is marked by <see cref="System.Runtime.InteropServices.OptionalAttribute"/>.
+        /// True if the parameter is marked by <see
+        // cref="System.Runtime.InteropServices.OptionalAttribute"/>.
         /// </summary>
         internal sealed override bool HasOptionalAttribute
         {
@@ -2116,7 +2164,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                     else
                     {
-                        // lazyHasOptionalAttribute is decoded early, hence we cannot reach here when binding attributes for this symbol.
+                        // lazyHasOptionalAttribute is decoded early, hence we cannot reach here when binding attributes for
+                        // this symbol.
                         // So it is fine to force complete attributes here.
 
                         var attributes = GetAttributes();
@@ -2139,8 +2188,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 // NOTE: IsMetadataOptional property can be invoked during overload resolution.
-                // NOTE: Optional attribute is decoded very early in attribute binding phase, see method EarlyDecodeOptionalAttribute
-                // NOTE: If you update the below check to look for any more attributes, make sure that they are decoded early.
+                // NOTE: Optional attribute is decoded very early in attribute binding phase, see method
+                // EarlyDecodeOptionalAttribute
+                // NOTE: If you update the below check to look for any more attributes, make sure that they are
+                // decoded early.
                 return HasDefaultArgumentSyntax || HasOptionalAttribute;
             }
         }

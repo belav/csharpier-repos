@@ -18,16 +18,19 @@ namespace System.Data.SqlClient
 
     /// <summary>
     /// Provides implementation similar to certificate store provider.
-    /// A CEK encrypted with certificate store provider should be decryptable by this provider and vice versa.
+    /// A CEK encrypted with certificate store provider should be decryptable by this provider and vice
+    // versa.
     ///
     /// Envolope Format for the encrypted column encryption key
     ///           version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
     /// version: A single byte indicating the format version.
     /// keyPathLength: Length of the keyPath.
     /// ciphertextLength: ciphertext length
-    /// keyPath: keyPath used to encrypt the column encryption key. This is only used for troubleshooting purposes and is not verified during decryption.
+    /// keyPath: keyPath used to encrypt the column encryption key. This is only used for
+    // troubleshooting purposes and is not verified during decryption.
     /// ciphertext: Encrypted column encryption key
-    /// signature: Signature of the entire byte array. Signature is validated before decrypting the column encryption key.
+    /// signature: Signature of the entire byte array. Signature is validated before decrypting the
+    // column encryption key.
     /// </summary>
     public class SqlColumnEncryptionCspProvider : SqlColumnEncryptionKeyStoreProvider
     {
@@ -37,7 +40,8 @@ namespace System.Data.SqlClient
         public const string ProviderName = @"MSSQL_CSP_PROVIDER";
 
         /// <summary>
-        /// RSA_OAEP is the only algorithm supported for encrypting/decrypting column encryption keys using this provider.
+        /// RSA_OAEP is the only algorithm supported for encrypting/decrypting column encryption keys using
+        // this provider.
         /// For now, we are keeping all the providers in sync.
         /// </summary>
         private const string RSAEncryptionAlgorithmWithOAEP = @"RSA_OAEP";
@@ -95,7 +99,8 @@ namespace System.Data.SqlClient
             // Format is
             //           version + keyPathLength + ciphertextLength + keyPath + ciphervtext +  signature
             //
-            // keyPath is present in the encrypted column encryption key for identifying the original source of the asymmetric key pair and
+            // keyPath is present in the encrypted column encryption key for identifying the original source of
+            // the asymmetric key pair and
             // we will not validate it against the data contained in the CMK metadata (masterKeyPath).
 
             // Validate the version byte
@@ -291,7 +296,8 @@ namespace System.Data.SqlClient
             );
 
             // Construct the encrypted column encryption key
-            // EncryptedColumnEncryptionKey = version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
+            // EncryptedColumnEncryptionKey = version + keyPathLength + ciphertextLength + keyPath + ciphertext
+            // +  signature
             int encryptedColumnEncryptionKeyLength =
                 version.Length
                 + cipherTextLength.Length
@@ -435,7 +441,8 @@ namespace System.Data.SqlClient
         /// <param name="masterKeyPath">CSP key url.</param>
         /// <param name="encryptionAlgorithm">Encryption Algorithm.</param>
         /// <param name="encryptedColumnEncryptionKey">Encrypted Column Encryption Key.</param>
-        /// <returns>Returns the decrypted plaintext Column Encryption Key or throws an exception if there are any errors.</returns>
+        /// <returns>Returns the decrypted plaintext Column Encryption Key or throws an exception if there
+        // are any errors.</returns>
         private byte[] RSADecrypt(
             RSACryptoServiceProvider rscp,
             byte[] encryptedColumnEncryptionKey
@@ -496,7 +503,8 @@ namespace System.Data.SqlClient
         }
 
         /// <summary>
-        /// Creates a RSACryptoServiceProvider from the given key path which contains both CSP name and key name
+        /// Creates a RSACryptoServiceProvider from the given key path which contains both CSP name and key
+        // name
         /// </summary>
         /// <param name="keyPath">key path in the format of [CAPI provider name]\[key name]</param>
         /// <param name="isSystemOp">Indicates if ADO.NET calls or the customer calls the API</param>

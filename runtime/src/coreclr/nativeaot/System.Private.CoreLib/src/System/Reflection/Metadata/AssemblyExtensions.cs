@@ -8,12 +8,16 @@ namespace System.Reflection.Metadata
 {
     public static class AssemblyExtensions
     {
-        // Retrieves the metadata section of the assembly, for use with System.Reflection.Metadata.MetadataReader.
-        //   - Returns false upon failure. Metadata might not be available for some assemblies, such as AssemblyBuilder, .NET
+        // Retrieves the metadata section of the assembly, for use with
+        // System.Reflection.Metadata.MetadataReader.
+        //   - Returns false upon failure. Metadata might not be available for some assemblies, such as
+        // AssemblyBuilder, .NET
         //     native images, etc.
         //   - Callers should not write to the metadata blob
-        //   - The metadata blob pointer will remain valid as long as the AssemblyLoadContext with which the assembly is
-        //     associated, is alive. The caller is responsible for keeping the assembly object alive while accessing the
+        //   - The metadata blob pointer will remain valid as long as the AssemblyLoadContext with which the
+        // assembly is
+        //     associated, is alive. The caller is responsible for keeping the assembly object alive while
+        // accessing the
         //     metadata blob.
         [CLSCompliant(false)] // out byte* blob
         public static unsafe bool TryGetRawMetadata(

@@ -69,8 +69,10 @@ namespace System
         //
         //    Assert.Throws<E>( () => new Span() );
         //
-        // generates a hidden box of the Span as the return value of the lambda. This makes the IL illegal and unloadable on
-        // runtimes that enforce the actual Span rules (never mind that we expect never to reach the box instruction...)
+        // generates a hidden box of the Span as the return value of the lambda. This makes the IL illegal
+        // and unloadable on
+        // runtimes that enforce the actual Span rules (never mind that we expect never to reach the box
+        // instruction...)
         //
         // The workaround is to code it like this:
         //
@@ -142,8 +144,10 @@ namespace System
         //
         //    Assert.Throws<E>( () => new Span() );
         //
-        // generates a hidden box of the Span as the return value of the lambda. This makes the IL illegal and unloadable on
-        // runtimes that enforce the actual Span rules (never mind that we expect never to reach the box instruction...)
+        // generates a hidden box of the Span as the return value of the lambda. This makes the IL illegal
+        // and unloadable on
+        // runtimes that enforce the actual Span rules (never mind that we expect never to reach the box
+        // instruction...)
         //
         // The workaround is to code it like this:
         //
@@ -357,7 +361,8 @@ namespace System
         public static void DoNotIgnore<T>(T value, int consumed) { }
 
         //
-        // { text, start, length } triplets. A "-1" in start or length means "test the overload that doesn't have that parameter."
+        // { text, start, length } triplets. A "-1" in start or length means "test the overload that doesn't
+        // have that parameter."
         //
         public static IEnumerable<object[]> StringSliceTestData
         {
@@ -424,7 +429,8 @@ namespace System
             }
         }
 
-        /// <summary>Creates a <see cref="Memory{T}"/> with the specified values in its backing field.</summary>
+        /// <summary>Creates a <see cref="Memory{T}"/> with the specified values in its backing
+        // field.</summary>
         public static Memory<T> DangerousCreateMemory<T>(object obj, int offset, int length)
         {
             Memory<T> mem = default;
@@ -443,7 +449,8 @@ namespace System
             return (Memory<T>)boxedMemory;
         }
 
-        /// <summary>Creates a <see cref="ReadOnlyMemory{T}"/> with the specified values in its backing field.</summary>
+        /// <summary>Creates a <see cref="ReadOnlyMemory{T}"/> with the specified values in its backing
+        // field.</summary>
         public static ReadOnlyMemory<T> DangerousCreateReadOnlyMemory<T>(
             object obj,
             int offset,

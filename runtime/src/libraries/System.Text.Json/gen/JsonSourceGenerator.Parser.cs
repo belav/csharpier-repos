@@ -74,7 +74,8 @@ namespace System.Text.Json.SourceGeneration
 
                 if (location is null || !_knownSymbols.Compilation.ContainsLocation(location))
                 {
-                    // If location is null or is a location outside of the current compilation, fall back to the location of the context class.
+                    // If location is null or is a location outside of the current compilation, fall back to the
+                    // location of the context class.
                     location = _contextClassLocation;
                 }
 
@@ -778,7 +779,8 @@ namespace System.Text.Json.SourceGeneration
                 if (!_generatedContextAndTypeNames.Add((contextType.Name, typeInfoPropertyName)))
                 {
                     // The context name/property name combination will result in a conflict in generated types.
-                    // Workaround for https://github.com/dotnet/roslyn/issues/54185 by keeping track of the file names we've used.
+                    // Workaround for https://github.com/dotnet/roslyn/issues/54185 by keeping track of the file names
+                    // we've used.
                     ReportDiagnostic(
                         DiagnosticDescriptors.DuplicateTypeName,
                         typeToGenerate.AttributeLocation ?? _contextClassLocation,
@@ -1564,7 +1566,8 @@ namespace System.Text.Json.SourceGeneration
                 )
                 {
                     // Skip the member if either of the two conditions hold
-                    // 1. Member has no accessible getters or setters (but is not marked with JsonIncludeAttribute since we need to throw a runtime exception) OR
+                    // 1. Member has no accessible getters or setters (but is not marked with JsonIncludeAttribute since
+                    // we need to throw a runtime exception) OR
                     // 2. The member type is not accessible within the generated context.
                     return null;
                 }
@@ -1909,7 +1912,8 @@ namespace System.Text.Json.SourceGeneration
                 List<PropertyInitializerGenerationSpec>? propertyInitializers = null;
                 int paramCount = constructorParameters?.Length ?? 0;
 
-                // Determine potential init-only or required properties that need to be part of the constructor delegate signature.
+                // Determine potential init-only or required properties that need to be part of the constructor
+                // delegate signature.
                 foreach (PropertyGenerationSpec property in properties)
                 {
                     if (!property.CanUseSetter)

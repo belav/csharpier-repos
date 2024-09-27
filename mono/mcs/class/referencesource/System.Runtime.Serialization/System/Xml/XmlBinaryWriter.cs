@@ -4,7 +4,8 @@
 
 
 // Uncomment to turn on logging of non-dictionary strings written to binary writers.
-// This can help identify element/attribute name/ns that could be written as XmlDictionaryStrings to get better compactness and performance.
+// This can help identify element/attribute name/ns that could be written as XmlDictionaryStrings to
+// get better compactness and performance.
 // #define LOG_NON_DICTIONARY_WRITES
 
 namespace System.Xml
@@ -1295,7 +1296,8 @@ namespace System.Xml
             {
                 if (reader.CanReadBinaryContent)
                 {
-                    // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when converting text
+                    // Its best to read in buffers that are a multiple of 3 so we don't break base64 boundaries when
+                    // converting text
                     if (bytes == null)
                     {
                         bytes = new byte[384];

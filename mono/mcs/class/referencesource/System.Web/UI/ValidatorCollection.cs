@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 /*
- */
+*/
 
 namespace System.Web.UI
 {
@@ -22,7 +22,8 @@ namespace System.Web.UI
         private ArrayList data;
 
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.UI.ValidatorCollection'/> class.</para>
+        /// <para>Initializes a new instance of the <see cref='System.Web.UI.ValidatorCollection'/>
+        // class.</para>
         /// </devdoc>
         public ValidatorCollection()
         {
@@ -99,7 +100,8 @@ namespace System.Web.UI
         }
 
         /// <devdoc>
-        /// <para>Indicates whether the <see cref='System.Web.UI.ValidatorCollection'/> is read-only. This property is
+        /// <para>Indicates whether the <see cref='System.Web.UI.ValidatorCollection'/> is read-only. This
+        // property is
         ///    read-only.</para>
         /// </devdoc>
         public bool IsReadOnly

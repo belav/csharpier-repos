@@ -196,7 +196,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   The password required to access the certificate data.
         /// </param>
         /// <param name="keyStorageFlags">
-        ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
+        ///   A bitwise combination of the enumeration values that control where and how to import the
+        // certificate.
         /// </param>
         public void Import(
             ReadOnlySpan<byte> rawData,
@@ -217,7 +218,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   The password required to access the certificate data.
         /// </param>
         /// <param name="keyStorageFlags">
-        ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
+        ///   A bitwise combination of the enumeration values that control where and how to import the
+        // certificate.
         /// </param>
         public void Import(
             ReadOnlySpan<byte> rawData,
@@ -299,7 +301,8 @@ namespace System.Security.Cryptography.X509Certificates
         ///   The password required to access the certificate data.
         /// </param>
         /// <param name="keyStorageFlags">
-        ///   A bitwise combination of the enumeration values that control where and how to import the certificate.
+        ///   A bitwise combination of the enumeration values that control where and how to import the
+        // certificate.
         /// </param>
         public void Import(
             string fileName,
@@ -519,12 +522,15 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         /// <summary>
-        /// Attempts to export the X.509 public certificates as a PKCS7 certificate collection, encoded as PEM.
+        /// Attempts to export the X.509 public certificates as a PKCS7 certificate collection, encoded as
+        // PEM.
         /// </summary>
         /// <param name="destination">The buffer to receive the PEM encoded PKCS7 collection.</param>
-        /// <param name="charsWritten">When this method returns, the total number of characters written to <paramref name="destination" />.</param>
+        /// <param name="charsWritten">When this method returns, the total number of characters written to
+        // <paramref name="destination" />.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> was large enough to receive PEM encoded PKCS7
+        ///   <see langword="true"/> if <paramref name="destination"/> was large enough to receive PEM
+        // encoded PKCS7
         ///   certificate collection; otherwise, <see langword="false" />.
         /// </returns>
         /// <exception cref="CryptographicException">
@@ -601,9 +607,11 @@ namespace System.Security.Cryptography.X509Certificates
         /// Attempts to export the public X.509 certificates, encoded as PEM.
         /// </summary>
         /// <param name="destination">The buffer to receive the PEM encoded certificates.</param>
-        /// <param name="charsWritten">When this method returns, the total number of characters written to <paramref name="destination" />.</param>
+        /// <param name="charsWritten">When this method returns, the total number of characters written to
+        // <paramref name="destination" />.</param>
         /// <returns>
-        ///   <see langword="true"/> if <paramref name="destination"/> was large enough to receive the encoded PEMs;
+        ///   <see langword="true"/> if <paramref name="destination"/> was large enough to receive the
+        // encoded PEMs;
         ///   otherwise, <see langword="false" />.
         /// </returns>
         /// <exception cref="CryptographicException">

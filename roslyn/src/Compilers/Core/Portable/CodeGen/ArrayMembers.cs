@@ -19,32 +19,48 @@ using EmitContext = Microsoft.CodeAnalysis.Emit.EmitContext;
 //=========================
 //
 //  14.2 Arrays  (From partition II) -
-//The class that the VES creates for arrays contains several methods whose implementation is supplied by the
+//The class that the VES creates for arrays contains several methods whose implementation is
+// supplied by the
 //VES:
 //
-//* A constructor that takes a sequence of int32 arguments, one for each dimension of the array, that specify
-//the number of elements in each dimension beginning with the first dimension. A lower bound of zero is
+//* A constructor that takes a sequence of int32 arguments, one for each dimension of the array,
+// that specify
+//the number of elements in each dimension beginning with the first dimension. A lower bound of zero
+// is
 //assumed.
 //
-//* A constructor that takes twice as many int32 arguments as there are dimensions of the array. These
-//arguments occur in pairs—one pair per dimension—with the first argument of each pair specifying the
-//lower bound for that dimension, and the second argument specifying the total number of elements in that
-//dimension. Note that vectors are not created with this constructor, since a zero lower bound is assumed for
+//* A constructor that takes twice as many int32 arguments as there are dimensions of the array.
+// These
+//arguments occur in pairs—one pair per dimension—with the first argument of each pair specifying
+// the
+//lower bound for that dimension, and the second argument specifying the total number of elements in
+// that
+//dimension. Note that vectors are not created with this constructor, since a zero lower bound is
+// assumed for
 //vectors.
 //
-//* A Get method that takes a sequence of int32 arguments, one for each dimension of the array, and returns
-//a value whose type is the element type of the array. This method is used to access a specific element of the
-//array where the arguments specify the index into each dimension, beginning with the first, of the element
+//* A Get method that takes a sequence of int32 arguments, one for each dimension of the array, and
+// returns
+//a value whose type is the element type of the array. This method is used to access a specific
+// element of the
+//array where the arguments specify the index into each dimension, beginning with the first, of the
+// element
 //to be returned.
 //
-//* A Set method that takes a sequence of int32 arguments, one for each dimension of the array, followed by
-//a value whose type is the element type of the array. The return type of Set is void. This method is used to
-//set a specific element of the array where the arguments specify the index into each dimension, beginning
-//with the first, of the element to be set and the final argument specifies the value to be stored into the target
+//* A Set method that takes a sequence of int32 arguments, one for each dimension of the array,
+// followed by
+//a value whose type is the element type of the array. The return type of Set is void. This method
+// is used to
+//set a specific element of the array where the arguments specify the index into each dimension,
+// beginning
+//with the first, of the element to be set and the final argument specifies the value to be stored
+// into the target
 //element.
 //
-//* An Address method that takes a sequence of int32 arguments, one for each dimension of the array, and
-//has a return type that is a managed pointer to the array's element type. This method is used to return a
+//* An Address method that takes a sequence of int32 arguments, one for each dimension of the array,
+// and
+//has a return type that is a managed pointer to the array's element type. This method is used to
+// return a
 //managed pointer to a specific element of the array where the arguments specify the index into each
 //dimension, beginning with the first, of the element whose address is to be returned.
 
@@ -375,13 +391,15 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public sealed override bool Equals(object? obj)
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
 
         public sealed override int GetHashCode()
         {
-            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare and hash them should be used.
+            // It is not supported to rely on default equality of these Cci objects, an explicit way to compare
+            // and hash them should be used.
             throw Roslyn.Utilities.ExceptionUtilities.Unreachable();
         }
     }

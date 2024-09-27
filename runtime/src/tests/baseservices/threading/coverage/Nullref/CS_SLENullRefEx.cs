@@ -116,11 +116,13 @@ public class mytest
         }
 
         // try {
-        // 	sle.GetObjectData(new SerializationInfo(1.GetType(),new FormatterConverter()),new StreamingContext(StreamingContextStates.All));
+        // 	sle.GetObjectData(new SerializationInfo(1.GetType(),new FormatterConverter()),new
+        // StreamingContext(StreamingContextStates.All));
         // 	rValue = 11;
         // }
         // catch (NullReferenceException) {
-        // 	Console.WriteLine("Caught NullReferenceException   (sle.ObjectData(SerializationInfo,StreamingContext))");
+        // 	Console.WriteLine("Caught NullReferenceException
+        // (sle.ObjectData(SerializationInfo,StreamingContext))");
         // }
 
         try

@@ -55,7 +55,8 @@ namespace System.Security.AccessControl.Tests
                 null
             );
             rawAcl.InsertAce(0, gAce);
-            //gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(owner2), false, null);
+            //gAce = new CommonAce(AceFlags.FailedAccess, AceQualifier.SystemAudit, 1, new
+            // SecurityIdentifier(owner2), false, null);
             gAce = new CommonAce(
                 AceFlags.FailedAccess,
                 AceQualifier.SystemAudit,

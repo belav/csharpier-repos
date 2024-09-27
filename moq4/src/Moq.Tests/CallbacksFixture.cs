@@ -832,12 +832,12 @@ namespace Moq.Tests
         public class Base { }
 
         public class Derived : Base
-        /* Unmerged change from project 'Moq.Tests(net6.0)'
-        Before:
-                private void TraceMe(Base b)
-        After:
-                void TraceMe(Base b)
-        */
+/* Unmerged change from project 'Moq.Tests(net6.0)'
+Before:
+private void TraceMe(Base b)
+After:
+void TraceMe(Base b)
+*/
         { }
 
         void TraceMe(Base b) { }

@@ -9,15 +9,19 @@ using System.IO;
 namespace System.Xml
 {
     /// <summary>
-    /// This writer wraps an XmlWriter that was not build using the XmlRawWriter architecture (such as XmlTextWriter or a custom XmlWriter)
-    /// for use in the XslCompilerTransform. Depending on the Xsl stylesheet output settings (which gets transferred to this writer via the
-    /// internal properties of XmlWriterSettings) this writer will inserts additional lexical information into the resulting Xml 1.0 document:
+    /// This writer wraps an XmlWriter that was not build using the XmlRawWriter architecture (such as
+    // XmlTextWriter or a custom XmlWriter)
+    /// for use in the XslCompilerTransform. Depending on the Xsl stylesheet output settings (which gets
+    // transferred to this writer via the
+    /// internal properties of XmlWriterSettings) this writer will inserts additional lexical
+    // information into the resulting Xml 1.0 document:
     ///
     ///   1. CData sections
     ///   2. DocType declaration
     ///   3. Standalone attribute
     ///
-    /// It also calls WriteStateDocument if standalone="yes" and/or a DocType declaration is written out in order to enforce document conformance
+    /// It also calls WriteStateDocument if standalone="yes" and/or a DocType declaration is written out
+    // in order to enforce document conformance
     /// checking.
     /// </summary>
     internal sealed class QueryOutputWriterV1 : XmlWriter
@@ -43,7 +47,8 @@ namespace System.Xml
             {
                 bool documentConformance = false;
 
-                // Xml output method shouldn't output doc-type-decl if system ID is not defined (even if public ID is)
+                // Xml output method shouldn't output doc-type-decl if system ID is not defined (even if public ID
+                // is)
                 // Only check for well-formed document if output method is xml
                 if (_systemId != null)
                 {

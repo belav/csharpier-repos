@@ -97,7 +97,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         /// Create a context for evaluating expressions within a method scope.
         /// </summary>
         /// <param name="metadataBlocks">Module metadata</param>
-        /// <param name="symReader"><see cref="ISymUnmanagedReader"/> for PDB associated with <paramref name="moduleVersionId"/></param>
+        /// <param name="symReader"><see cref="ISymUnmanagedReader"/> for PDB associated with <paramref
+        // name="moduleVersionId"/></param>
         /// <param name="moduleVersionId">Module containing method</param>
         /// <param name="methodToken">Method metadata token</param>
         /// <param name="methodVersion">Method version.</param>
@@ -136,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         /// Create a context for evaluating expressions within a method scope.
         /// </summary>
         /// <param name="compilation">Compilation.</param>
-        /// <param name="symReader"><see cref="ISymUnmanagedReader"/> for PDB associated with <paramref name="moduleVersionId"/></param>
+        /// <param name="symReader"><see cref="ISymUnmanagedReader"/> for PDB associated with <paramref
+        // name="moduleVersionId"/></param>
         /// <param name="moduleVersionId">Module containing method</param>
         /// <param name="methodToken">Method metadata token</param>
         /// <param name="methodVersion">Method version.</param>

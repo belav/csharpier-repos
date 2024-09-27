@@ -288,8 +288,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
                                 // this is a best effort algorithm with some shortcomings.
                                 //
-                                // the most obvious issue is if there is a new work item (without a solution change - but very unlikely)
-                                // for a opened document we already processed, the work item will be treated as a regular one rather than higher priority one
+                                // the most obvious issue is if there is a new work item (without a solution change - but very
+                                // unlikely)
+                                // for a opened document we already processed, the work item will be treated as a regular one rather
+                                // than higher priority one
                                 // (opened document)
                                 // see whether we have work item for the document
                                 if (
@@ -358,10 +360,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                         // that doesn't have effects of the solution changes.
                         //
                         // solution crawler must remove the work item from the queue first and then pick up the soluton,
-                        // so that the queue gets new work item if there is any solution changes after the work item is removed
+                        // so that the queue gets new work item if there is any solution changes after the work item is
+                        // removed
                         // from the queue
                         //
-                        // using later version of solution is always fine since, as long as there is new work item in the queue,
+                        // using later version of solution is always fine since, as long as there is new work item in the
+                        // queue,
                         // solution crawler will eventually call the last workitem with the lastest solution
                         // making everything to catch up
                         var solution = Processor._registration.GetSolutionToAnalyze();
@@ -704,9 +708,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
                                 return;
                             }
 
-                            // this log things like how many time we analyzed active files, how many times other files are analyzed,
+                            // this log things like how many time we analyzed active files, how many times other files are
+                            // analyzed,
                             // avg time to analyze files, how many solution snapshot got analyzed and etc.
-                            // all accumultation is done in VS side and we only send statistics to VS telemetry otherwise, it is too much
+                            // all accumultation is done in VS side and we only send statistics to VS telemetry otherwise, it is
+                            // too much
                             // data to send
                             UnitTestingSolutionCrawlerLogger.LogIncrementalAnalyzerProcessorStatistics(
                                 Processor._registration.CorrelationId,

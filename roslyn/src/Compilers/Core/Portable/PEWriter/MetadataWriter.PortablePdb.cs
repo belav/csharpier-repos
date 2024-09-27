@@ -26,7 +26,8 @@ namespace Microsoft.Cci
     internal partial class MetadataWriter
     {
         /// <summary>
-        /// Import scopes are associated with binders (in C#) and thus multiple instances might be created for a single set of imports.
+        /// Import scopes are associated with binders (in C#) and thus multiple instances might be created
+        // for a single set of imports.
         /// We consider scopes with the same parent and the same imports the same.
         /// Internal for testing.
         /// </summary>
@@ -106,7 +107,8 @@ namespace Microsoft.Cci
                         : default;
 
                 // Unlike native PDB we don't emit an empty root scope.
-                // scopes are already ordered by StartOffset ascending then by EndOffset descending (the longest scope first).
+                // scopes are already ordered by StartOffset ascending then by EndOffset descending (the longest
+                // scope first).
 
                 if (bodyOpt.LocalScopes.Length == 0)
                 {
@@ -194,8 +196,10 @@ namespace Microsoft.Cci
             }
 
             // Emit EnC info for all methods even if they do not have sequence points.
-            // The information facilitates reusing lambdas and closures. The reuse is important for runtimes that can't add new members (e.g. Mono).
-            // EnC delta doesn't need this information - we use information recorded by previous generation emit.
+            // The information facilitates reusing lambdas and closures. The reuse is important for runtimes
+            // that can't add new members (e.g. Mono).
+            // EnC delta doesn't need this information - we use information recorded by previous generation
+            // emit.
             if (Context.Module.CommonCompilation.Options.EnableEditAndContinue && IsFullMetadata)
             {
                 SerializeEncMethodDebugInformation(bodyOpt, methodHandle);
@@ -285,13 +289,15 @@ namespace Microsoft.Cci
         {
             if (value == null)
             {
-                // The encoding of Type for the nullref value for FieldInit is ELEMENT_TYPE_CLASS with a Value of a zero.
+                // The encoding of Type for the nullref value for FieldInit is ELEMENT_TYPE_CLASS with a Value of a
+                // zero.
                 return (SignatureTypeCode)SignatureTypeKind.Class;
             }
 
             Debug.Assert(!value.GetType().GetTypeInfo().IsEnum);
 
-            // Perf: Note that JIT optimizes each expression val.GetType() == typeof(T) to a single register comparison.
+            // Perf: Note that JIT optimizes each expression val.GetType() == typeof(T) to a single register
+            // comparison.
             // Also the checks are sorted by commonality of the checked types.
 
             if (value.GetType() == typeof(int))

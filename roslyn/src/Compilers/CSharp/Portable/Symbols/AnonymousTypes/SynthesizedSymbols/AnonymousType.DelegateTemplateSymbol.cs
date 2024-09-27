@@ -53,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 NameAndIndex = new NameAndIndex(name, index: 0);
 
                 var constructor = new SynthesizedDelegateConstructor(this, objectType, intPtrType);
-                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke() and EndInvoke().
+                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke()
+                // and EndInvoke().
                 var invokeMethod = createInvokeMethod(this, refKinds, voidReturnTypeOpt);
                 _members = CreateMembers(constructor, invokeMethod);
 
@@ -84,7 +85,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
                     }
 
-                    // if we are given Void type the method returns Void, otherwise its return type is the last type parameter of the delegate:
+                    // if we are given Void type the method returns Void, otherwise its return type is the last type
+                    // parameter of the delegate:
                     var returnType = TypeWithAnnotations.Create(
                         voidReturnTypeOpt ?? typeParams[parameterCount]
                     );
@@ -166,7 +168,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     manager.System_Object,
                     manager.System_IntPtr
                 );
-                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke() and EndInvoke().
+                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke()
+                // and EndInvoke().
                 var invokeMethod = createInvokeMethod(this, typeDescr.Fields);
                 _members = CreateMembers(constructor, invokeMethod);
 
@@ -212,7 +215,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         );
                     }
 
-                    // if we are given Void type the method returns Void, otherwise its return type is the last type parameter of the delegate
+                    // if we are given Void type the method returns Void, otherwise its return type is the last type
+                    // parameter of the delegate
                     var returnType = TypeWithAnnotations.Create(
                         returnsVoid ? returnParameter.Type : typeParams[parameterCount]
                     );
@@ -277,7 +281,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     manager.System_Object,
                     manager.System_IntPtr
                 );
-                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke() and EndInvoke().
+                // https://github.com/dotnet/roslyn/issues/56808: Synthesized delegates should include BeginInvoke()
+                // and EndInvoke().
                 var invokeMethod = createInvokeMethod(this, typeDescr.Fields, typeMap);
                 _members = CreateMembers(constructor, invokeMethod);
 

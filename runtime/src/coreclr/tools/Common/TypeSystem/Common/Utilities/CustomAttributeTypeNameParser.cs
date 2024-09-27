@@ -13,7 +13,8 @@ namespace Internal.TypeSystem
     public static class CustomAttributeTypeNameParser
     {
         /// <summary>
-        /// Parses the string '<paramref name="name"/>' and returns the type corresponding to the parsed type name.
+        /// Parses the string '<paramref name="name"/>' and returns the type corresponding to the parsed
+        // type name.
         /// The type name string should be in the 'SerString' format as defined by the ECMA-335 standard.
         /// This is the inverse of what <see cref="CustomAttributeTypeNameFormatter"/> does.
         /// </summary>

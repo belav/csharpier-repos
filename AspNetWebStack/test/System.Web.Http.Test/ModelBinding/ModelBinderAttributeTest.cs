@@ -1,5 +1,6 @@
 ﻿// Copyright (c) .NET Foundation. All rights reserved.
-// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
+// Licensed under the Apache License, Version 2.0. See License.txt in the project root for license
+// information.
 
 using System.Collections.Generic;
 using System.Web.Http.Controllers;
@@ -108,7 +109,8 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             config.Services.Replace(typeof(ModelBinderProvider), new CustomModelBinderProvider());
 
-            // binder = null, so pulls default from config. But attribute still has value by specifying the value providers.
+            // binder = null, so pulls default from config. But attribute still has value by specifying the
+            // value providers.
             ModelBinderAttribute attr = new ValueProviderAttribute(
                 typeof(CustomValueProviderFactory)
             );

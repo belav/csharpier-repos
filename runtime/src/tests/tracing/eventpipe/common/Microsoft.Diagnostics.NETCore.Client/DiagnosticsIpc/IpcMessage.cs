@@ -37,7 +37,8 @@ namespace Microsoft.Diagnostics.NETCore.Client
         GenerateCoreDump = 1,
 
         /// <summary>
-        /// Starts an EventPipe session that writes events to a file when the session is stopped or the application exits.
+        /// Starts an EventPipe session that writes events to a file when the session is stopped or the
+        // application exits.
         /// </summary>
         StartEventPipeTracing = 1024,
 

@@ -22,7 +22,8 @@ internal class CSharpTestMethodFinder(
 {
     protected override bool DescendIntoChildren(SyntaxNode node)
     {
-        // We only need to look in type declarations for test methods (and therefore namespaces to find types).
+        // We only need to look in type declarations for test methods (and therefore namespaces to find
+        // types).
         return node is BaseNamespaceDeclarationSyntax or TypeDeclarationSyntax;
     }
 

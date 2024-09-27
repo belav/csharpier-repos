@@ -25,12 +25,12 @@ using System.Web.Util;
 
 namespace System.Web.UI.MobileControls
 {
-    /*
-     * Mobile control base class.
-     * All core controls and extension controls extend from this class.
-     *
-     * Copyright (c) 2000 Microsoft Corporation
-     */
+/*
+* Mobile control base class.
+* All core controls and extension controls extend from this class.
+*
+* Copyright (c) 2000 Microsoft Corporation
+*/
     /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl"]/*' />
     [
         ControlBuilderAttribute(typeof(MobileControlBuilder)),
@@ -182,7 +182,8 @@ namespace System.Web.UI.MobileControls
             throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.ResolveFormReference"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.ResolveFormReference"]/*' />
         public Form ResolveFormReference(String formID)
         {
             Form form = ResolveFormReferenceNoThrow(formID);
@@ -293,10 +294,12 @@ namespace System.Web.UI.MobileControls
             return t;
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.EnsureTemplatedUI"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.EnsureTemplatedUI"]/*'
+        // />
         public virtual void EnsureTemplatedUI() { }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CreateTemplatedUI"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CreateTemplatedUI"]/*'
+        // />
         protected virtual void CreateTemplatedUI(bool doDataBind)
         {
             // It is possible for a rogue control to call this even though
@@ -309,7 +312,8 @@ namespace System.Web.UI.MobileControls
             Adapter.CreateTemplatedUI(doDataBind);
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CreateDefaultTemplatedUI"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.CreateDefaultTemplatedUI"]/*' />
         public virtual void CreateDefaultTemplatedUI(bool doDataBind)
         {
             // Create nothing by default.
@@ -444,7 +448,8 @@ namespace System.Web.UI.MobileControls
         //  CONTROL OVERRIDES
         /////////////////////////////////////////////////////////////////////////
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.AddParsedSubObject"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.AddParsedSubObject"]/*'
+        // />
         protected override void AddParsedSubObject(Object obj)
         {
             if (obj is DeviceSpecific)
@@ -506,7 +511,8 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.IsFormSubmitControl"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.IsFormSubmitControl"]/*' />
         protected virtual bool IsFormSubmitControl()
         {
             return false;
@@ -679,10 +685,12 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.LoadPrivateViewState"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.LoadPrivateViewState"]/*' />
         protected virtual void LoadPrivateViewState(Object state) { }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.SavePrivateViewState"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.SavePrivateViewState"]/*' />
         protected virtual Object SavePrivateViewState()
         {
             return null;
@@ -694,7 +702,8 @@ namespace System.Web.UI.MobileControls
 
         private StateBag _customAttributes;
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CustomAttributes"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.CustomAttributes"]/*'
+        // />
         [
             Browsable(false),
             Bindable(false),
@@ -716,14 +725,16 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.IAttributeAccessor.GetAttribute"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.IAttributeAccessor.GetAttribute"]/*' />
         /// <internalonly/>
         protected String GetAttribute(String name)
         {
             return (_customAttributes != null) ? (String)_customAttributes[name] : null;
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.IAttributeAccessor.SetAttribute"]/*' />
+        /// <include file='doc\MobileControl.uex'
+        // path='docs/doc[@for="MobileControl.IAttributeAccessor.SetAttribute"]/*' />
         /// <internalonly/>
         protected void SetAttribute(String name, String value)
         {
@@ -1271,13 +1282,15 @@ namespace System.Web.UI.MobileControls
             set { _enablePagination = value; }
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateChildren"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateChildren"]/*'
+        // />
         protected virtual bool PaginateChildren
         {
             get { return true; }
         }
 
-        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateRecursive"]/*' />
+        /// <include file='doc\MobileControl.uex' path='docs/doc[@for="MobileControl.PaginateRecursive"]/*'
+        // />
         public virtual void PaginateRecursive(ControlPager pager)
         {
             if (!EnablePagination)

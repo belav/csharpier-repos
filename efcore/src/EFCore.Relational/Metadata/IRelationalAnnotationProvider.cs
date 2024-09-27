@@ -5,16 +5,21 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 
 /// <summary>
 ///     A service typically implemented by database providers that gives access to annotations
-///     used by relational EF Core components on various elements of the <see cref="IRelationalModel" />.
+///     used by relational EF Core components on various elements of the <see
+// cref="IRelationalModel" />.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single instance
-///         is used by many <see cref="DbContext" /> instances. The implementation must be thread-safe.
-///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped" />.
+///         The service lifetime is <see cref="ServiceLifetime.Singleton" />. This means a single
+// instance
+///         is used by many <see cref="DbContext" /> instances. The implementation must be
+// thread-safe.
+///         This service cannot depend on services registered as <see cref="ServiceLifetime.Scoped"
+// />.
 ///     </para>
 ///     <para>
-///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
+///         See <see href="https://aka.ms/efcore-docs-providers">Implementation of database
+// providers and extensions</see>
 ///         for more information and examples.
 ///     </para>
 /// </remarks>
@@ -109,7 +114,8 @@ public interface IRelationalAnnotationProvider
     IEnumerable<IAnnotation> For(IStoreStoredProcedure storedProcedure, bool designTime);
 
     /// <summary>
-    ///     Gets provider-specific annotations for the given <see cref="IStoreStoredProcedureParameter" />.
+    ///     Gets provider-specific annotations for the given <see cref="IStoreStoredProcedureParameter"
+    // />.
     /// </summary>
     /// <param name="parameter">The parameter.</param>
     /// <returns>The annotations.</returns>
@@ -117,7 +123,8 @@ public interface IRelationalAnnotationProvider
     IEnumerable<IAnnotation> For(IStoreStoredProcedureParameter parameter, bool designTime);
 
     /// <summary>
-    ///     Gets provider-specific annotations for the given <see cref="IStoreStoredProcedureResultColumn" />.
+    ///     Gets provider-specific annotations for the given <see
+    // cref="IStoreStoredProcedureResultColumn" />.
     /// </summary>
     /// <param name="column">The result column.</param>
     /// <returns>The annotations.</returns>

@@ -4,7 +4,8 @@
 
 using Xunit;
 
-// Basically, the problem is FP relative stack reporting + GC pointer passed on the stack. GC offsets
+// Basically, the problem is FP relative stack reporting + GC pointer passed on the stack. GC
+// offsets
 // are normally reported relative to PSP which is valid during prolog. When there is EH we report
 // stack offsets relative to FP. This is causing problems. This is likely due to the fact that we
 // haven't yet set up the frame pointer register.
